@@ -1,0 +1,12 @@
+{"id":"C27929","town":"bar0-town-occupied-rand-3","sev":"LOW","kind":"LACKS","why":"burial 'beyond the gate'; DEFENCE walls none, so no gate stands","other":""}
+{"id":"C27995","town":"bar0-town-occupied-rand-3","sev":"LOW","kind":"LACKS","why":"'different districts' in a town of 385; Parish churches (2-5) cannot span districts","other":""}
+{"id":"C28248","town":"bar0-town-occupied-rand-3","sev":"MED","kind":"PAIR","why":"says Merchant Guilds make the decisions that matter; page elsewhere says Merchant Council carries out what Occupation Authority decides","other":"C28204"}
+{"id":"C28247","town":"bar0-town-occupied-rand-3","sev":"LOW","kind":"STATE","why":"Merchant Council (27) is 'close' to Merchant Guilds (44) and Occupation Authority (29)? Only the latter is near; gap to Guilds is 17","other":""}
+{"id":"C28268","town":"bar0-town-occupied-rand-3","sev":"LOW","kind":"PAIR","why":"fines 'cannot be enforced', yet INCOME has Court Fees & Fines at 17% of the town's money","other":""}
+{"id":"C28277","town":"bar0-town-occupied-rand-3","sev":"LOW","kind":"PAIR","why":"'thieves are scarce' against Foundations 'Criminal opportunity Elevated' and fencing/hired muscle offered","other":"C27816"}
+{"id":"C28756","town":"bar0-town-occupied-rand-4","sev":"MED","kind":"STATE","why":"'War has taken the iron', armies buying first: no war or iron-supply event in CRISIS, QUARRELS, TENSIONS or PAST (occupation only; iron mines exhausted)","other":""}
+{"id":"C28761","town":"bar0-town-occupied-rand-4","sev":"LOW","kind":"STATE","why":"apothecary 'well stocked'; LAND gaps say medicinal herbs cannot be finished (foraging areas depleted, Herbalism impaired)","other":""}
+{"id":"C28934","town":"bar0-town-occupied-rand-4","sev":"LOW","kind":"LACKS","why":"'different districts' in a town of 681 with Parish churches (2-5); no districts in a town this size","other":""}
+{"id":"C29235","town":"bar0-town-occupied-rand-4","sev":"LOW","kind":"STATE","why":"Religious Authorities (24) called close enough to both powers above; Occupation Authority stands at 47, 23 ahead","other":""}
+{"id":"C29265","town":"bar0-town-occupied-rand-4","sev":"LOW","kind":"PAIR","why":"'thieves are scarce' against Foundations 'Criminal opportunity Elevated' and fencing, hired muscle and fighting pits offered","other":"C28705"}
+{"id":"DONE","lines":2030,"blocks":2,"flags":11}
