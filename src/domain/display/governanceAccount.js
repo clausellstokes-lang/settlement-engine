@@ -116,16 +116,10 @@ export function legitimacyCausesOf(breakdown, adverse, safetyLabel = null) {
       : CAUSE_WORDS[/** @type {keyof typeof CAUSE_WORDS} */ (field)][adverse ? 'adverse' : 'favourable']));
 }
 
-/**
- * Whether a power's name reads as plural ("Religious Authorities", "Noble Houses"): its head noun, the
- * last word of its prose form (powerSentenceName: "Third Bloc (Neutrals)" reads "The Neutrals"), ends in a single s ("Guild", "Gentry", "Circle" do not).
- * @param {string} name @returns {boolean}
- */
-export function pluralPowerName(name) {
-  const words = (text(name) ? powerSentenceName(text(name)) : '').split(/[\s/]+/).filter(Boolean);
-  const head = (words[words.length - 1] || '').replace(/[^A-Za-z']/g, '');
-  return /[^s']s$/i.test(head);
-}
+// TAIL-TIES-7 (ruling T25 (b)): `pluralPowerName` moved verbatim to the pure leaf `./pluralPowerName.js` (so
+// `dossier/faithReading.js` reaches no `factsOf` through this file); re-exported here for every caller of this path.
+import { pluralPowerName } from './pluralPowerName.js';
+export { pluralPowerName };
 
 /** @param {string} named the name as prose carries it @returns {string} */
 const possessive = (named) => (/s$/i.test(named) ? `${named}'` : `${named}'s`);

@@ -104,7 +104,9 @@ const EXEMPT = Object.freeze({
   'src/domain/worldPulse/supplyKernel.js': [2, 'a logic read (`resolveConsumingInstitution`, `countProducingChains`: the resource\'s good id)'],
   'src/domain/worldPulse/stressorGates.js': [1, 'a power\'s name in the conspiracy line: the walker\'s `c` in a file that touches chains, not a chain'],
   'src/domain/chainYield.js': [1, 'a logic read (`chainYieldRefused`: the resource\'s depletion)'],
-  'src/domain/display/defenseDisplay.js': [1, 'defence capability rows (`caps`), the walker\'s `c` in a file that touches chains, not a chain'],
+  // ⭐ defenseDisplay.js's exempt row is DELETED (TAIL-TIES-10, the chair's ruling T29 (3)): the running criminal chains moved
+  // verbatim to the crime fact's leaf (facts/criminalStructureKey.js, T28), so the display no longer touches chains and the walker
+  // no longer reads it; the leaf's chain read is no chain's name or source (this walker does not enrol it).
   'src/generators/computeActiveChains.js': [6, 'the record\'s writer: it sets the catalogue\'s strings the chair\'s ruling keeps'],
   'src/generators/economy/economicState.js': [1, 'a logic read (`allowsGeneratedContent(label)`)'],
   'src/generators/economy/viability.js': [4, 'a logic read (the resource against the analysis\'s resource names)'],

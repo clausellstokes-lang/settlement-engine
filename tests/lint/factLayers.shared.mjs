@@ -304,7 +304,9 @@ export const FAMILIES = Object.freeze({
   bank: { words: String.raw`\bbank\b|\bbanking|\bmoneylend|\bexchequer`, homes: ['src/domain/facts/institutions.js'] },
   healer: { words: String.raw`\bhealer|\bhospital|\binfirmar|\bphysician|\bapothecar`, homes: ['src/domain/facts/institutions.js', 'src/domain/defense/defenseFacts.js'] },
   guild: { words: String.raw`(?<!thieves['’]? )\bguild(?:hall|s)?\b`, homes: ['src/domain/facts/guild.js'] },
-  crime: { words: String.raw`\bthie(?:f|ves)|\bgang|\bcriminal|\bsmuggl|\bsyndicate|\bracket|\bunderworld|\bfence\b`, homes: ['src/domain/crimeSignal.js', 'src/domain/corruption.js'] },
+  // TAIL-TIES-10 (the chair's ruling T29 (2)): the crime fact's leaf is a home. It follows the tree's own register,
+  // `src/domain/facts/factLayers.js :: LEAVES`, whose crime row names `domain/facts/criminalStructureKey.js`.
+  crime: { words: String.raw`\bthie(?:f|ves)|\bgang|\bcriminal|\bsmuggl|\bsyndicate|\bracket|\bunderworld|\bfence\b`, homes: ['src/domain/crimeSignal.js', 'src/domain/corruption.js', 'src/domain/facts/criminalStructureKey.js'] },
   magic: { words: String.raw`\bwizard|\bmage\b|\bmages\b|\bsorcer|\barcane|\balchemi|\bwitch|\bmagic`, homes: ['src/domain/magicReliance.js', 'src/domain/facts/magic.js'] },
   quarryMine: { words: String.raw`\bquarr|\bmine\b|\bmines\b|\bmining`, homes: ['src/domain/facts/institutions.js'] },
 });

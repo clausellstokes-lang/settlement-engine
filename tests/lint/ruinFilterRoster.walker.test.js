@@ -164,6 +164,9 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/worldPulse/magicBufferModel.js': 'loss-count scalar — `loss.institutions` is the StrikeLoss COUNT of buildings one calamity would fell (an integer supplied by the calamity producer via magicBufferApply), never a settlement roster; the leaf is pure arithmetic that sees no settlement, roster, world or name, so there is no row to ruin-filter and no provider capacity is credited',
   // ── penalty-side: counts impaired/criminal for a PENALTY, not live crediting ─────
   'src/domain/corruption.js': 'penalty-side — criminal/corruption-impairment classifier (drag, not credit)',
+  // TAIL-TIES-10 (the chair's ruling T29 (3)): the crime fact's leaf. Its roster reads moved verbatim out of display/defenseDisplay.js
+  // (T28), which this walker read as COMPLIANT file-granularly only because it imports liveInstitutions for its Legal row.
+  'src/domain/facts/criminalStructureKey.js': 'penalty-side/name-lookup — criminalStructureKeyOf classifies the CRIMINAL structure by roster names (the thieves\' guild / syndicate / smuggling / fence ladder, THIEVES_GUILD_HOUSE) and hands the roster to crimeSignalOf / rivalRingsOf; it credits no provider capacity. Moved verbatim (T28): it reads ruined rows exactly as the display did before the cut, so whether a ruined criminal house should key the structure is a behaviour question named for the owner, not this move\'s',
   // ALLEGIANCE-CAR1 (2026-11-08): the retired corruptionPass's roster read moved here with the deal (J-2), measured.
   'src/domain/people/allegiance.js': 'penalty-side — the allegiance deal reads the roster\'s CRIMINAL houses (isCriminalInstitution) for the corruption climate and organized-crime pressure (drag, not credit), as the retired corruptionPass did through corruption.js, and looks a card\'s house up by name (the handler pool, the `via` mark); it credits no provider capacity',
   'src/domain/state/deriveSystemState.js': 'penalty-side — countByStatus impaired/critical risk penalty (status-aware)',
@@ -522,7 +525,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // roster read (SW-B2's 966709f9c, A·O2: the identity line reads the institutions), COMPLIANT (liveInstitutions), measured by this file's own scan.
     // COHERENCE-POWERS (2026-11-12): 109 -> 110, src/domain/dossier/seatHolder.js :: seatHouseFaceOf's roster-name read (EXEMPT above:
     // the seat's house where a house leads is faced by the dual-hat leader), measured by this file's own scan.
-    expect(readers.length).toBe(110);
+    // TAIL-TIES-10 (2026-11-15, T29 (3)): 110 -> 111, src/domain/facts/criminalStructureKey.js :: criminalStructureKeyOf's roster-name read
+    // (EXEMPT above; moved verbatim out of defenseDisplay.js, which stays a reader), measured by this file's own scan.
+    expect(readers.length).toBe(111);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
