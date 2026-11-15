@@ -1,0 +1,5 @@
+{"id":"C51168","town":"bar0-city-wartime-rand-20","sev":"MED","kind":"PAIR","why":"Writes Merchant oligarchy and War Council as symbiotic partners; QUARRELS and tensions page give them a moderate conflict over a broken promise of support.","other":"C50116"}
+{"id":"C51278","town":"bar0-city-wartime-rand-20","sev":"LOW","kind":"PAIR","why":"Garrison and watch are 'properly equipped'; the Invasion & War line says the supply of defenders runs short and the defence is weaker.","other":"C51296"}
+{"id":"C51313","town":"bar0-city-wartime-rand-20","sev":"LOW","kind":"LACKS","why":"'Unofficial landing points' presumes water landings; trade access is road only and the smuggling line calls it overland.","other":""}
+{"id":"C51362","town":"bar0-city-wartime-rand-20","sev":"MED","kind":"PAIR","why":"Says every arrival goes through a gate and trouble gets in only where the city decides; guard line says smugglers have ways in beneath the walls.","other":"C51281"}
+{"id":"DONE","lines":2109,"blocks":1,"flags":4}
