@@ -4,6 +4,9 @@ Seat: TAIL-EXPORTS-JOURNAL (builder; the EXPORTS). Branch `lane/tail-exports-jou
 line `lane/join-2026-11-14` at **48fedbe98** (read back from origin 2026-11-14 ~23:59 UTC). Files held:
 `src/foundry/**`, `src/generators/spatialGenerator.js`, tests. Work in a scratch worktree; nothing merged; plain pushes.
 
+Successor: **TAIL-EXPORTS-JOURNAL-2** (2026-11-15), on the same branch from its tip 748417354; its one merge (E11) and
+batch 3 are below, under the predecessor's.
+
 ## The rulings worked to (the chair's, 2026-11-14; each vetoable by the owner)
 
 - **E1** The export prints what the tab prints, through the tab's own leaf; no humanize, label or gate of its own.
@@ -18,6 +21,23 @@ line `lane/join-2026-11-14` at **48fedbe98** (read back from origin 2026-11-14 ~
 - **E7** A gendered title against its holder is the record's (RECORD-MEASURE-2, class k): struck.
 - **J1** The layout line names only what stands; the cure is in the generator and moves the record (a declared move).
 - **J2** The widest rows first.
+
+The chair's rulings since (2026-11-15; each vetoable by the owner), worked to by TAIL-EXPORTS-JOURNAL-2:
+
+- **E11** The one kind of merge this seat makes: `origin/lane/join-2026-11-14` at **b6c64d36c** (the crisis leaf whole,
+  `src/domain/display/crisisStoppedRow.js` and its table `src/data/crisisDependence.js`, with the first batches of the
+  civic and economy displays and of the crisis texts), a merge commit of its own; the BEFORE re-taken at the merged tree.
+  A later tip only if the chair names it.
+- **E12** Batch 3 (E3's rows): the journal's income, chain, house and service rows under a crisis CALL THE LEAF and print
+  its mark and its head line as the tabs do; the journal keeps no wording of its own. The resource table's "full" rows
+  under a famine: the same leaf if it answers; if not, name what the table reads.
+- **E13** A second cause is coming to the same leaf (a house short of its input by the record), on the services seat's
+  branch: not waited for; the calls take whatever the leaf answers.
+- **E14** "(impaired)" beside a chain the land calls running: the chain-state leaf's seat; the headline rows: the PDF's
+  seat. Not this seat's.
+- **E7 stands**: a gendered title against its holder is TAIL-TITLES' ("the record's: class k").
+- **E19** (chair note, 01:28 UTC) The journal's "Access to …" houses under a siege (TAIL-DISPLAY-CIVIC-2's X9 rows
+  04153, 04155) are E3's shape: the leaf answers for a house by its catalogue id; call it for them too, or name the id.
 
 ## Batches
 
@@ -170,34 +190,84 @@ eslint on the touched files, `typecheck:domain:strict`, `typecheck:ratchet`: gre
 factLayers, defenceFactReaders): the same six reds as base. The 35 suites naming the journal: one red, carried
 (`houseLabelEverySurface`, rr2s-town-under_siege).
 
-## Batch 3, OWED (the successor's first): the E3 rows through the crisis leaf
+### Batch 3 — E3, E12 and E19, the crisis leaf on the journal's rows (`journalPages.js`) · TAIL-EXPORTS-JOURNAL-2 · commit fcf0febe7
 
-The chair's notes E8–E10 (2026-11-15 00:07–00:31 UTC): the leaf `src/domain/display/crisisStoppedRow.js` with its table
-`src/data/crisisDependence.js` is on the joined line, with chains and income shares at **b6c64d36c**
-(`rowStoppedBy(settlement, 'service' | 'house' | 'chain' | 'income', row)`; a chain keyed by
-`economicState.activeChains[].chainId`, an income share by `economicState.incomeSources[].source`; marks
-`crisisMarkText`, `markedDescription`, `ordinaryTimesLine`, `STOPPED_WORD`). THE ONE MERGE this seat may make:
-`origin/lane/join-2026-11-14` at b6c64d36c into this branch (a merge commit of its own; the lockfile did not move
-between 48fedbe98 and b6c64d36c, nor did `src/foundry/**` or `spatialGenerator.js`). Not made at this hand-back: it
-came as the budget closed, and the batch needs its own before run at the merged tree (that tip holds other seats'
-display batches, so sentences of the exports move) and its own after run.
+**The merge (E11)**: `7b37be3ae`, `origin/lane/join-2026-11-14` at b6c64d36c into this branch (a merge commit of its
+own; no conflict; the lockfile did not move; `npm ci` again in the scratch tree). Nothing of `src/foundry/**` or
+`spatialGenerator.js` moved with it.
 
-The cure, in `journalPages.js`, each row through the leaf as the tab calls it:
-- economicsPage's Income rows: `rowStoppedBy(settlement, 'income', s)` → print the mark before the share (how the
-  Economics tab prints it at b6c64d36c: read its call first). Rows: 11319 Grain Sales under a grain famine (false 4 of
-  194), 29234 Toll Revenue under a siege (false 5 of 115).
-- economicsPage's Supply chains: `rowStoppedBy(settlement, 'chain', activeChains[i])`.
-- institutionsPage: `stoppedRowMark(settlement, 'house', inst)` + `markedDescription`, and `ordinaryTimesLine` once at
-  the page's head (the Institutions tab's call). Row 05600 "Bakers: The town's bread." under a siege (false 1 of 10).
-- The Exploitation table's "full" rows under a famine of that food (35544 Fish 7, 35551 Grain 5, 35555 Livestock 3):
-  NOT a chain row (the table is `resourceAnalysis.exploitation`, the Resources tab's card, `validationOnPage.js ::
-  exploitationGroupsShown`). If the tab's card reads the leaf at that tip, the journal's row reads it the same way;
-  if not, it stays parked and is named for the leaf's group.
+**The BEFORE, re-taken at the merged tree (7b37be3ae)**: exports 35,830 sentences, tabs 30,043. Every E3 row of the
+worklist still prints in the towns it was read in (11319 Grain Sales 194; 29234 Toll Revenue 115; 05600 Bakers 10;
+35544 / 35551 / 35555 the Exploitation "full" rows 127 / 102 / 95): none struck "gone at the base".
+
+**Verified by the record** (the leaf itself, `rowStoppedBy`, over the 720 records of the before corpus, by a node script
+that imports the tree's leaf): the leaf marks 427 rows in 97 towns: 253 houses, 100 chains, 74 income shares (siege 182,
+outbreak 152, famine 93). Of the worklist's rows: 11319 Grain Sales under a grain famine, 4 of 194; 29234 Toll Revenue,
+10 of 115 (5 under a siege, 5 curtailed by an outbreak); E19's access houses: `access_to_parish_church` ("Access to a
+house of worship") stopped in all 10 besieged towns that hold it, `access_to_external_mill` in all 11 (both ids are in
+the leaf's table: none to name).
+
+**The cure**, each row through the leaf as the tab calls it, no wording of the journal's own:
+- Economics & Trade: an income share, by the record's `source`, takes the leaf's word after its name (`STOPPED_WORD`:
+  "(stopped)", "(curtailed)", "(scarce)"; the Institutions tab's form for a row with no description, since a share
+  prints none); a supply chain, by the record's `activeChains[i]` (its `chainId`), takes the leaf's mark before its
+  description (`markedDescription(crisisMarkText(…))`; a chain with no description prints the mark alone).
+- Institutions: a house, by the RECORD's house (`settlement.institutions[i]`: the slice keeps the display name, not the
+  catalogue id; `servicesSlice` maps the roster one to one), takes the mark before its description, as the Institutions
+  tab prints it.
+- Each page prints the leaf's head line once (`ordinaryTimesLine`, italic, after the lede) where one of its rows is marked.
+- The journal's Services page prints categories only (no service row): nothing to mark there.
+
+Guard: `tests/foundry/journalMarksCrisisRows.test.js` on births (11 RED red at the base: three income shares, two chains,
+two houses, four head lines; 5 KEEP green before and after: an untouched share under a famine and under a siege, two
+untouched houses, a calm town with no mark and no head line); a plant marking every town reds the KEEPs (not committed).
+
+**After run** (census at fcf0febe7), read whole. Exports: 35,830 → 35,933; gone 12, new 115, fewer 148, more 0. Every
+town-print lost (427) is a row the leaf marks, now printed marked (427 marked rows in the after dumps: 253 houses, 100
+chains, 74 shares, in 97 towns: exactly the record's measure). Nothing outside the journal moved; no line was silenced.
+The 12 GONE are chain rows with no description ("Spices & Dyes (impaired)" 5 …) now printed with their mark. The
+worklist's rows: **11319 194 → 190** (by exactly its 4), **29234 115 → 105** (by its 10). The inheritors: the head line
+(97 towns, in its two sentences: famine 41, siege 29, outbreak 27) and the marked twins of the lost rows ("Subsistence
+farming: Scarce in the famine." 16, "Market Taxes (curtailed): #%" 16, "Access to external mill: Stopped by the siege."
+11, "Access to a house of worship: Stopped by the siege." 10, …): each the leaf's answer for that town's record.
+**The tabs' inventory** (E6, this seat's last batch): 30,043 = 30,043; gone 0, new 0, fewer 0, more 0: no tab sentence moved.
+
+**Parked or named, the leaf not answering** (E12, E13: the calls take what the leaf answers):
+- 05600 "Bakers: The town's bread." under a siege (10 printing, 1 false by the predecessor's read): the leaf declares
+  `bakers_5_15` as living on grain only, which a siege does not stop; the row prints unmarked. NAMED for the leaf's seat
+  (TAIL-SERVICES): does a besieged town's bakehouse live on grain brought in?
+- 35544 / 35551 / 35555 "| Fish / Grain / Livestock | full | — | — |" under a famine of that food (127 / 102 / 95
+  printing; false 7, 5, 3): the leaf has no kind for a resource row. The table reads `resourceAnalysis.exploitation`
+  through `src/domain/display/validationOnPage.js :: exploitationGroupsShown` (the Resources tab's card, which prints the
+  same "Fully exploited"), keyed by `RESOURCE_CHAINS`' resource (`rawResource`: "fish", "grain", "livestock"), not by an
+  `activeChains` chain id (the leaf's 'chain' table keys "fishing", not "fish": passing the resource as a chain id would
+  read the wrong namespace). NAMED for the leaf's seat (a 'resource' kind keyed by the resource) and for the Resources
+  tab's group (DISPLAY-ECON, the card).
+- The Economics tab does not yet call the leaf for its income shares or chain cards (ServicesTab and InstitutionsTab do):
+  the journal now marks rows the Economics tab prints unmarked, by E12's order. NAMED for DISPLAY-ECON (the tab's call),
+  and for EXPORTS-PDF (the PDF's Economics chapter prints the same shares unmarked).
+
+New lines for the owner's veto (the words are the leaf's; the forms are the journal's call of them):
+
+| towns | form | read in (smallest; largest; a crisis) |
+|---|---|---|
+| 58 + 93 | the head line "The descriptions here are of ordinary times. While the siege / the outbreak / the famine lasts, a row it touches is marked." on Economics & Trade and on Institutions | r2r-thorp-38 (famine); r2s-plague_onset-thorp-2; r2s-under_siege-metropolis-3 |
+| 48 | an income share "<source> (stopped / curtailed / scarce): N%" ("Toll Revenue (curtailed): 20%", "River Tolls (stopped): 8%") | r2s-plague_onset-thorp-2; r2s-under_siege-metropolis-3; r2s-famine-town-1 |
+| 43+ | a chain "<chain> (<state>): <mark> <description>" ("Fishing & Seafood (vulnerable): Scarce in the famine.") | r2r-hamlet-16; r2s-under_siege-metropolis-3; r2s-famine-hamlet-0 |
+| 92 | a house "<house>: <mark> <description>" ("Subsistence farming: Scarce in the famine. Every household…") | r2r-thorp-38; r2s-under_siege-metropolis-3; r2s-famine-thorp-0 |
+
+Gates: eslint on the touched files, `typecheck:domain:strict`, `typecheck:ratchet`: green. `presumed-things-door.mjs
+--check`: fresh 147, stale 0 = base (exit 1 at base and here alike). The twelve-birth grid: the same two falls as base
+(r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a). The 36 suites naming the journal: one red, carried and not the
+journal's (`houseLabelEverySurface` rr2s-town-under_siege-rand-1: "page Systems/Defense" and the two PDFs).
 
 ## What is left of the worklist
 
 Every row of WORKLIST3-EXPORTS-JOURNAL and the Journal/ and layout rows of WORKLIST3-REST is cured, struck, named or
-parked above. Nothing of this seat's files is left open but the E3 rows of batch 3 above.
+parked above. After batch 3 (TAIL-EXPORTS-JOURNAL-2) nothing of this seat's files is open: the rows left (05600 Bakers;
+the three Exploitation "full" rows) wait on the leaf's answer, named above, and need no change of the journal's once the
+leaf answers (the Institutions page already calls it for every house; a 'resource' kind would be one call in
+`resourcesPage`).
 
 ## How the instruments are re-made
 
@@ -207,3 +277,8 @@ parked above. Nothing of this seat's files is left open but the E3 rows of batch
 `SURFACES` for the tabs); `inventory_diff.py before.json after.json <rows.json>`. The field diff:
 `git archive origin/lane/record-measure-2026-11-14 docs/chair/2026-11-14/probes/RECORD-MEASURE-1`,
 `CENSUS3_PROBES=<CENSUS-3> sh births-only.sh <tree> <out>`, `node fielddiff.mjs <before corpus> <after corpus> 3`.
+(TAIL-EXPORTS-JOURNAL-2) The main checkout holds this branch, so the scratch worktrees are DETACHED at its tip and push
+by explicit refspec (`git push origin HEAD:lane/tail-exports-journal-2026-11-14`). The leaf's measure over the record:
+a node script that imports the tree's `crisisStoppedRow.js` and calls `rowStoppedBy` on every record's
+`economicState.incomeSources[]`, `economicState.activeChains[]` and `institutions[]` in `corpus.ndjson.gz`. Never edit
+the tree a census is rendering from: develop in a second worktree (its `node_modules` a symlink to the first's).
