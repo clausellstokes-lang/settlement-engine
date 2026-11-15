@@ -26,7 +26,7 @@ const soak1k41 = { name: 'Storby', tier: 'metropolis', population: 30000, cultur
 describe('an inland Norse or Slavic birth prints a scope phrase (was mute)', () => {
   it('soak1k-1, a Norse hamlet inland: the inland phrase, no water', () => {
     const line = cultureScopeLine(soak1k1);
-    expect(line).toBe('Norse-inspired, built around the hall, on kin, oath and the assembly.');
+    expect(line).toBe('Norse-inspired, built on kin, oath and the assembly.'); // TAIL-CRISIS-2 batch 2 (READ-ALL 15013): no hall on the roster; re-keyed by identity
     expect(line).not.toMatch(SEA_WORDS); // anchored: the exact line is pinned on the line above
   });
   it('soak1k-52, a Slavic city inland: the inland phrase, no river', () => {
@@ -36,7 +36,7 @@ describe('an inland Norse or Slavic birth prints a scope phrase (was mute)', () 
   });
   it('the identity sentence carries it too, and the seat takes its real name', () => {
     expect(composeSettlementQuickGuide(soak1k1).identitySentence)
-      .toBe('Holm is a Norse-inspired hamlet of 40 people, built around the hall, on kin, oath and the assembly.');
+      .toBe('Holm is a Norse-inspired hamlet of 40 people, built on kin, oath and the assembly.'); // TAIL-CRISIS-2 batch 2: no hall; re-keyed
     expect(cultureScopeLine(soak1k41)).toBe('Norse-inspired, built around the Palace/government complex, on kin, oath and the assembly.');
   });
 });
@@ -45,7 +45,7 @@ describe('the waterside forms are untouched', () => {
   it('on water the sea lines print as before', () => {
     expect(cultureScopeLine({ ...soak1k1, config: { terrainType: 'coastal', tradeRouteAccess: 'road' } }))
       // STYLE-2 A·O2: the season has no record field, so the water line keeps its kin and oath
-      .toBe('Norse-inspired, built around the hall and the water, on kin, oath and the assembly.');
+      .toBe('Norse-inspired, built by the water, on kin, oath and the assembly.'); // TAIL-CRISIS-2 batch 2 (READ-ALL 15015): no hall; re-keyed
     // STYLE-2 A·O2: a riverside city with no forest is "by the river"; the forest prints only on forest ground
     expect(cultureScopeLine({ ...soak1k52, institutions: [], config: { terrainType: 'riverside', tradeRouteAccess: 'road' } }))
       .toBe('Slavic-inspired, built in timber compounds on common land, by the river.');

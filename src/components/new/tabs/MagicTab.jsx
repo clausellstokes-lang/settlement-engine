@@ -186,9 +186,9 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
                   trouble it keeps at bay, depends on their work. Lose them to war, plague or politics
                   and the gap would show at once.
                 </p>}
-              {magicFrozen && (settlement.economicState?.activeChains || []).filter(c => c.magicNote).map((c, i) => (
+              {magicFrozen && (settlement.economicState?.activeChains || []).map(c => [c, magicNoteShown(c, settlement)]).filter(([, note]) => note).map(([c, note], i) => ( /* the card's own note (magicProvisionShown.js :: magicNoteShown), one home */
                 <div key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 6, paddingLeft: 8, borderLeft: `2px solid ${BORDER}`, fontStyle: 'italic' }}>
-                  {chainPrintName(c, settlement).label}: {c.magicNote}
+                  {chainPrintName(c, settlement).label}: {note}
                 </div>
               ))}
             </div>
@@ -216,3 +216,4 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   );
 }
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
+import { magicNoteShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home

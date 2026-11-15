@@ -110,6 +110,23 @@ function foodRecordWord(settlement) {
 }
 
 /**
+ * ⭐ THE PUBLIC'S LEGITIMACY HAS ONE HOME (NOLANE-2, the chair's ruling 4, BAR-182; TAIL-DISPLAY-CIVIC, the chair's ruling
+ * X2 of 2026-11-14: "Public legitimacyAdequate" in 149 of the census's 720 towns where the Power tab prints "Tolerated").
+ * Two homes read one fact on two ladders: the causal score banded on the causal ladder, and the record's own stored label
+ * (`powerStructure.publicLegitimacy.label`, the band `rulingPower.js` writes and the Power tab prints). The row prints the
+ * record's label, in its colour, as the Food row prints the food word's one home. The causal band stays on `data-band`
+ * and orders the rows; a record without a label keeps the band word.
+ * @param {any} settlement
+ * @returns {{ word: string, tone: string | null } | null}
+ */
+function legitimacyRecordWord(settlement) {
+  const leg = settlement?.powerStructure?.publicLegitimacy;
+  const label = typeof leg?.label === 'string' ? leg.label.trim() : '';
+  if (!label) return null;
+  return { word: statusCase(label), tone: typeof leg.color === 'string' && leg.color ? leg.color : null };
+}
+
+/**
  * ⭐ UNDER A SIEGE THE TRADE ROW SAYS SO (R3-TABS, round two's #329 and #858; the chair's ruling of
  * 2026-11-13: the tab does not print a connectivity word the town's own crisis contradicts). The reading
  * (`causalState.js :: deriveTradeConnectivity`) folds a siege in as wartime pressure, so the row read
@@ -208,6 +225,7 @@ export default function SubstrateTab({ settlement }) {
         <NameColumns count={rows.length} style={{ padding: `0 ${SP.md}px` }}>
           {rows.map(row => {
             const recordRead = row.key === 'food_security' ? foodRecordWord(settlement)
+              : row.key === 'public_legitimacy' ? legitimacyRecordWord(settlement)
               : row.key === 'trade_connectivity' ? siegeCrisisWord(settlement) : null;
             return (
             <div key={row.key} data-substrate-row style={{

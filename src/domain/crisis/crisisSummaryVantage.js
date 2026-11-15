@@ -188,7 +188,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       watch: 'The creditor keeps its own people in {name}, watching where every coin goes.',
       official: 'Those who answer for {name} must answer to the creditor too, and the people know it.', // R3-CODE-C-5: no force is the kind's to promise
       local: 'People in {name} hide what little they have saved, in case the creditor\'s agents come asking.',
-      traveller: 'Passing through {name}, you meet the creditor\'s agents before you meet its own officials.',
+      traveller: 'Passing through {name}, you meet the creditor\'s agents before you meet anyone who speaks for the place.', // TAIL-CRISIS (READ-ALL 15481): no officials
     },
     tonight: {
       official: 'Every plan {name}\'s leaders make must first pass the creditor, and most of them do not.',
@@ -239,7 +239,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     defence: {
       watch: 'Agents of an outside interest move through {name} unchallenged, because nobody knows to look for them.',
       official: 'Those who answer for {name}\'s safety see no threat, and nobody has told them to look.',
-      local: 'People in {name} feel safe, and nothing they can see tells them otherwise.',
+      local: 'People in {name} do not know that outsiders have reached its decisions, and nothing they can see tells them so.', // TAIL-CRISIS (READ-ALL 15568): no claim that they feel safe
       traveller: 'A traveller who pays attention in {name} may see the same face in too many places.',
     },
     tonight: {
@@ -284,13 +284,13 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     overview: {
       local: 'With the old leader dead and no one in their place, people in {name} wait to see who comes out on top.',
-      trade: 'Nothing large is decided in {name} until the seat is filled, and each office does as it sees fit meanwhile.',
-      official: 'Each office in {name} now runs itself, and no one has the standing to make them answer.',
+      trade: 'Nothing large is decided in {name} until the seat is filled, and meanwhile everyone does as they see fit.', // TAIL-CRISIS-2 (K11): no office
+      official: 'With the seat empty, no one in {name} has the standing to make anyone answer.', // TAIL-CRISIS-2 (K11): no office
       newcomer: 'A newcomer in {name} is soon asked which claimant they favour, and the answer is remembered.',
     },
     defence: {
       watch: 'Rivals for {name}\'s empty seat are gathering followers, and it may come to blows before anyone is chosen.',
-      official: 'With no one in {name}\'s seat, nobody can give the order that calls everyone to its defence.',
+      official: 'With {name}\'s seat empty, no order to call everyone to its defence would be obeyed by all.', // TAIL-CRISIS (READ-ALL B27943): an acting steward may give it; none can make it carry
       local: 'People in {name} keep clear of the claimants\' followers, who grow louder and bolder each week.',
       traveller: 'Travellers in {name} see the claimants\' followers gathering openly, and hear talk of who will strike first.',
     },
@@ -315,42 +315,42 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       newcomer: 'Newcomers who reach {name} by road are greeted with relief that they made it at all.',
     },
     defence: {
-      watch: 'Whatever is attacking around {name}, wolves, raiders or worse, is getting bolder, and the lookouts count the days between attacks.',
+      watch: 'Whatever is attacking around {name}, wolves, raiders or worse, is getting bolder, and people count the days between attacks.', // TAIL-CRISIS (READ-ALL 28783): no lookout the kind does not keep
       official: 'Nobody in {name} can watch every road and every field at once, and the attackers seem to know it.', // R3-CODE-C-5: no keepers of its safety
       local: 'Families in {name} bring their animals in at dusk and bar their doors, and nobody works the far fields alone.',
       traveller: 'The roads to {name} are dangerous: travellers move in groups and by daylight, and some never arrive.',
     },
     tonight: {
       official: 'Those who answer for {name}\'s safety spend more on it every season, and still the attacks come.',
-      watch: 'The attacks around {name} follow a pattern, and the lookouts are beginning to see it.',
+      watch: 'The attacks around {name} follow a pattern, and people are beginning to see it.', // TAIL-CRISIS (READ-ALL 20063): no lookout
       newcomer: 'Anyone new to {name} who knows how to fight or track will be asked to help before they have unpacked.',
-      trade: 'Every cart that fails to reach {name} is food or goods it goes without, and the shortfall grows each week.',
+      trade: 'Every week the attacks go on, {name} goes without more of what it needs, and the shortfall grows.', // TAIL-CRISIS (READ-ALL 07290): no cart where nothing is brought in
     },
   }),
   insurgency: pools({
     cover: {
-      traveller: '{name} looks calm, but its offices are half empty and orders go unanswered; one of its strongest powers has turned against those in charge.',
+      traveller: '{name} looks calm, but orders go unanswered; some of its people have turned against those in charge.', // TAIL-CRISIS K3: no office, no second power the kind does not guarantee
       newcomer: 'Newcomers to {name} are asked, quietly, whether they come on the government\'s business.',
-      trade: 'In {name} taxes are disputed and some offices no longer send their revenue on, and those who trade are unsure whom they owe.', // R3-CODE-C-5: no merchant
+      trade: 'In {name} taxes are disputed and some revenue is no longer sent on, and those who trade are unsure whom they owe.', // R3-CODE-C-5: no merchant; TAIL-CRISIS: no office
       watch: 'Nobody in {name} fights in the open; those watching are counting who still obeys the government and who has stopped.',
     },
     overview: {
-      local: 'People in {name} are choosing between the government and the power that defies it, and many have stopped doing what the government asks.',
-      trade: 'Taxes in {name} are disputed, some offices keep the revenue they once sent on, and the government runs on habit.',
+      local: 'People in {name} are choosing between the government and those who defy it, and many have stopped doing what the government asks.', // TAIL-CRISIS K3: no second power
+      trade: 'Taxes in {name} are disputed, some revenue once sent on is kept back, and the government runs on habit.', // TAIL-CRISIS: no office
       official: 'Those in charge of {name} still give orders, but fewer of them are carried out each week.',
       newcomer: 'A newcomer in {name} soon learns that the government\'s word counts for less than it seems.',
     },
     defence: {
-      watch: 'There is no fighting in {name}; the danger is quieter, officials who will not act and orders that go nowhere.', // R3-CODE-C-5: no streets
+      watch: 'There is no fighting in {name}; the danger is quieter, orders that go unheeded and dues that go unpaid.', // R3-CODE-C-5: no streets; TAIL-CRISIS (READ-ALL 22640): no officials
       official: 'Those who answer for {name} cannot be sure whose side their own people are on.', // R3-CODE-C-5: no force
-      local: 'In {name} people keep out of the quarrel between the government and the power that defies it, and away from anyone asking questions.',
-      traveller: 'Passing through {name}, you would see nothing amiss unless you asked who is really in charge.',
+      local: 'In {name} people keep out of the quarrel between the government and those who defy it, and away from anyone asking questions.', // TAIL-CRISIS (READ-ALL 11471): no second power
+      traveller: 'Passing through {name}, you would not see the quarrel over who is really in charge unless you asked.', // TAIL-CRISIS (READ-ALL B14649): beside a famine something is amiss to see
     },
     tonight: {
-      official: 'Those in charge of {name} know one of its strongest powers is defying them, and cannot say so openly without making it stronger.',
-      watch: 'The power defying {name}\'s government grows quietly, and those watching it cannot act in the open.',
+      official: 'Those in charge of {name} know some of its people are defying them, and cannot say so openly without making the defiance stronger.', // TAIL-CRISIS (READ-ALL 22983): no second power
+      watch: 'The defiance of {name}\'s government grows quietly, and those watching it cannot act in the open.', // TAIL-CRISIS (READ-ALL 21315): no second power
       newcomer: 'Those in charge of {name} need something done that cannot be official, and someone new is whom they would ask.',
-      trade: 'Some of {name}\'s offices no longer send their revenue on, and the government runs on less each season.',
+      trade: 'Some of what {name} owes the government no longer reaches it, and the government runs on less each season.', // TAIL-CRISIS (READ-ALL 18222): no office
     },
   }),
   religious_conversion: pools({
