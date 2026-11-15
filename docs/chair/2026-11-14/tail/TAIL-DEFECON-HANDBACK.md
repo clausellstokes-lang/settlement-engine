@@ -76,6 +76,15 @@ worklist's count: none was struck "gone at the base".
   near line 587, "garrison contracts and armed escort" (8 towns): read where it prints (a garrison or an escort?), cure
   if false; (2) row 28528 (waterborne freight under a siege: false in 1 of the 3 towns that print it). With a batch of
   that file, after the fish rows.
+- (D23, 2026-11-15) A CLASS MEASURED, not this seat's to move: prose written before its facts are final (true when
+  drawn, false because the record moved afterwards; about a hundred rows of the whole read): such a row is NAMED with
+  that reason.
+- (D24, 01:28) `src/data/resourceData.js`'s "Defended Pass" (named by TAIL-DISPLAY-CIVIC-2; its hand-back's second
+  seat's "rows named" on `lane/tail-display-civic-2026-11-14`): verify by the record (a pass, a fort or a toll house where
+  the label prints?) and take it with this group's `resourceData.js` batch.
+- (02:03, to every seat) the account's weekly usage warning is on: push every batch the moment it holds, with this
+  file's WHAT IS LEFT current; hand back at the mark; one line to the chair at a hand-back, a stop or a question only;
+  WIDEST FIRST (a row printing in fewer than five towns waits behind every wider row of these files).
 - And BRIEF-TAIL's laws (silence is true; a mute state takes a twin; no draw moved; siege/famine; agreement; one home;
   no new vocabulary word; no `src/pdf/` or `src/foundry/`; every new line listed for the veto).
 
@@ -203,7 +212,90 @@ files naming the touched files: 15 red, the same 15 red at the base (CARRIED: r3
 worldFactRederive, coherenceAgreeCures (its gate tally), observedShapeReaders.walker, proseWiringCensus.walker,
 writerReach.walker).
 
+## Batch 3 · the lines of `incomeLineSiblings.js` and their neighbours (TAIL-DEFECON-3) · commit (this batch)
+
+Seat TAIL-DEFECON-3. The pilgrim gate (D14, D21) was pushed by TAIL-DEFECON-2 at **5f67f382d** after this seat had read
+the tip as 8dc6ad497; this seat measured it again on its own census, got the same field diff (income 26, arrival 14,
+the siege note 3, nothing else), dropped its duplicate commit and built on 5f67f382d. Arrival reads that differ from
+5f67f382d's: r2r-village-19's "small shrine set into a wall" is judged TRUE here (a wall niche, not a house of
+pilgrimage); r2r-village-3's "Carts of grain rattle toward the mills while the ovens send the smell of bread …" is FALSE
+in part (one grain mill, no baker); r2s-slave_revolt-city-2's "the sound of the workings never quite stops" is a
+CANDIDATE under the revolt. All are named for the history seat below.
+
+Before run: the census at the gate (5f67f382d's behaviour; 29,897 tab sentences, 35,785 PDF and journal). Measure =
+towns where the record makes the line false, of the towns that print it (`corpus.ndjson.gz`).
+
+| row | sentence (short) | prints | false | cure |
+|---|---|---|---|---|
+| B07361 B07357 B07355 B07356 B07359, X9 10219 06426 06427 (D5's #77) | the fish lines ("Fish is sold here, fresh or preserved." / "Catch landed here …" / "Catch landed and sold …; salt fish …") | 92 / 28 / 38 | 8 under a famine whose failed source is fish; 28 where every fishery near the place is depleted (19 of them buy salted fish in) | `trueIncomeDesc`: silent under the fish famine; where the fishery is fished out, **"The fishery here is fished out; the fish sold now is salted and bought in."** if salted fish is bought (first ten imports), else silent (D5: silence ruled true) |
+| 18655, X9 15745 | "Local quarry provides dressed stone to regional builders …" | 39 | 2 (they sell no stone; they buy cut stone) | twin **"Stone is quarried here for the place's own building."** where no stone is exported |
+| 07231, X9 29522 | "Transit duties, warehouse fees, and re-export premiums …" (Entrepôt Trade) | 78 | 20 (villages: no warehouse, toll, customs or caravan house) | the literal moves to `incomeLineSiblings.js` (`ENTREPOT_LINE`, tradeGoods.js imports it); twin **"Goods passing through the crossroads, and what their traders spend while they stop."** |
+| 11808, X9 22711 | "Revenue from international trade …" under a siege | 15 | 1 | `International Commerce` joins `SIEGE_CLOSED_SOURCES` (label and share alone) |
+| 10700 (D2) | "Highly diversified — multiple major revenue streams" beside "two or three trades" | 236 | 196 (the income mix's leader holds 20–49%: the page's own "two or three sources between them") | ONE HOME: `deriveEconomicComplexity` reads `incomeMixPoolKey` (economyStateProse.js); "Highly" only on a broad spread, else the ladder's existing rung "Diversified — broad institutional economic base" (no new vocabulary word) |
+| 20893 (D8, the CONDITION only) | the iron hooks ("The iron carts are three weeks late …", the merchants, the toll, the war line) | 39 / 30 / 23 / 12 | 6 / 2 / 4 / 2 (the import list holds no iron) | the hook's condition adds `importHeld(facts, /\b(?:iron|metal)/i)`; the three PEACE_IRON_HOOKS literals untouched |
+| 04271, B04151, B10921 | "Banks stand here, but the city does little trade." / "Its banks find little business to do." | 3 | 3 (17–19 exports, 9–10 imports) | the warning stands only where the export list is short (fewer than four) |
+| 30890 | "Add craft guilds: smiths, weavers, tanners, etc." | 1 | 1 (Blacksmiths and a Tanner stand) | the advice names only the crafts the roster lacks ("Add craft guilds: weavers, etc.") |
+| 16403, X9 11882 (`cascadePass.js`) | "Regulates port and airship traffic, assigns berths …" | 14 | 14 (added only off the water: road, crossroads, isolated) | **"Regulates airship traffic, assigns mooring berths, collects anchorage fees."** (no draw moved: `rng.chance` untouched) |
+
+STRUCK (true by the record): **11871** "Local ore feeds the smithy directly." (79): a live iron deposit and a smith
+stand in all 79. **B11289** "Metal is smelted or worked here." (61): a forge house stands in all 61. **D22 (1)** "Military
+services — garrison contracts and armed escort" (5 on the tabs): a barracks and military strength ≥ 60 in every
+printing town. **B27712** (`isolationGenerator.js`, 2) "… not enough without the wizard": the wizard keeps the magical
+TRANSIT; what it carries counts as "brought in", not as food "by magic" (that figure is conjured food).
+
+Guard: `tests/generators/tailDefeconBatch3Lines.test.js` (15 GONE pairs red at the base, 8 KEEP pairs green before and
+after; a plant (the quarry line always takes its twin) reds the quarry KEEP, not committed). Registers re-keyed BY IDENTITY in this
+commit: the widened walker register's entrepôt row moves from `tradeGoods.js` to `incomeLineSiblings.js` (the same
+literal and hash); the harbour row takes its new literal and hash; the two craft-advice rows (the literal no longer
+stands) are removed as stale. Walker 147 fresh, the base's.
+
+AFTER RUN (census at the batch's tree; `inventory_diff.py` against the gate's run): tabs 29,897 -> 29,901 (gone 11, new
+15, fewer 26, more 10, moved 3: the deity card's render flake); exports 35,785 -> 35,792. EVERY ROW FEWER BY EXACTLY ITS
+MEASURE OR GONE: the fish "sold here" 92 -> 66 (26), "landed and sold" 38 -> 34 (4), "landed here" 28 -> 22 (6); the quarry
+39 -> 37; the entrepôt 75 -> 56 on the tabs (19: the twentieth is a siege town, already label-only), 29522 75 -> 56;
+international commerce 15 -> 14; 10700 236 -> 40; the iron hooks 39 -> 33, 27 -> 25, 23 -> 19, 11 -> 9; the banks and the
+craft advice GONE; 16403 and 11882 14 -> 0. EVERY OTHER LINE THAT LOST TOWNS: the headings and counts the hooks feed
+("Strategic Resource" 104 -> 90, "Outlook" 258 -> 245, "Warnings (#)" 56 -> 53, the summary's "N plot hooks available"),
+and the economy prose the complexity label keys ("… a spread of trades …" -> "… a broad base of trades …", the rung's own
+prose, 6 lines). THE INHERITORS read where they print: "Diversified — broad institutional economic base" (200;
+r2r-city-0, r2s-wartime-city-1, r2r-metropolis-8) and its prose "… gets by on a broad base of trades …" (84), "lives on
+a broad base of trades …" (12+7+7+4), "Traffic on <N>'s road is steady, and a broad base of trades …" (8+3+3+1): true
+beside "two or three sources between them" (many trades, none dominant), and one home now. The fish twin (19; r2r-city-14,
+r2r-city-35), the label alone (12+5; r2r-city-44 famine), the quarry twin (2), the entrepôt twin (19; r2r-town-23,
+r2r-village-9), the harbour line (14), International Commerce alone (r2s-under_siege-metropolis-1), "Add craft guilds:
+weavers, etc." (r2s-politically_fractured-city-2): true. Where an iron hook left the hooks panel, five `history` hooks
+now show in the freed place (the record unmoved: they were drawn before): named below.
+
+THE DECLARED MOVE (`corpus.ndjson.gz`, the gate's run and this batch's, field diff by family on the 720): ONLY
+`economicState.economicComplexity` 196 towns; `economicState.incomeSources` 57 (descs only: fish 36, entrepôt 20,
+quarry 2, international 1, with overlaps); `economicViability.plotHooks` 14 and its `summary` 13 (the hook count);
+`economicViability.warnings` 4 and `metrics.warningCount` 3 (the banks 3, the craft advice 1); `institutions` 14 (the
+harbour master's desc). No draw moved.
+
+GATES: strict-domain 0; type ratchet 167/167; eslint on the touched files 0; presumed-things walker 147 fresh = base
+(identical rows, after the re-keys above); the grid 0 rises (the same 2 falls, r2r-city-0 P7a and
+r2s-insurgency-metropolis-0 P7a, named stale low); the 110 test files naming the touched files: 7 files red, the same
+13 tests red at the base (CARRIED: famineStoresOneRounding, worldFactRederive, coherenceAgreeCures (the gate rows),
+generationForkCensus, urbanBandInstitutions, proseNumerics, proseWiringCensus.walker). Two reds of this batch were cured
+before the push: `vendorPdfLazy.test.js` (importing `incomeMixPoolKey` pulled the economy prose desk into the first-paint
+graph: the cut is now `prosperity.js :: INCOME_LEADER_FROM`, the desk's `LEADER_FROM` mirrored, and the batch's guard
+pins the two readings to agree at eight leader shares; a leaf both read is owed: `economyStateProse.js` is not this
+group's file); `coherenceAgreeCures.test.js` "… no hook says war took their iron" RE-KEYED BY IDENTITY (an iron hook prints
+exactly where the import list holds iron; agree-village-28 buys none).
+
 ## The veto list (every new or changed line, with towns it was read in)
+
+Batch 3 (TAIL-DEFECON-3; towns from the after census: the smallest and the largest it reaches, a crisis among them):
+
+- (200) "Diversified — broad institutional economic base" (the ladder's existing rung, where the income mix's leader holds 20–49%; the veto's alternative needs a new rung word, the chair's) — r2s-wartime-city-1 (city 2054, wartime); r2r-metropolis-8 (metropolis 344689, succession_void); r2r-city-0 (city)
+- (19) "The fishery here is fished out; the fish sold now is salted and bought in." — r2r-town-3 (town 1168, insurgency); r2s-religious_conversion-metropolis-1 (metropolis 42064, religious_conversion); r2r-city-14 (city)
+- (19) "Goods passing through the crossroads, and what their traders spend while they stop." — r2r-village-9 (village 95, succession_void); r2s-insurgency-town-2 (town 2081, insurgency)
+- (14) "Regulates airship traffic, assigns mooring berths, collects anchorage fees." — r2s-occupied-metropolis-0 (metropolis 28723, occupied); r2s-mass_migration-metropolis-3 (metropolis 248369, mass_migration)
+- (2) "Stone is quarried here for the place's own building." — r2r-hamlet-16 (hamlet 20, famine); r2s-succession_void-hamlet-0 (hamlet 99, succession_void)
+- (1) "Add craft guilds: weavers, etc." (the advice names only the absent crafts) — r2s-politically_fractured-city-2 (city 5280, politically_fractured)
+- the fish lines silent (label and share alone) under a fish famine (8) or a fished-out water with no salted fish bought (9) — r2s-famine-hamlet-0 (hamlet, famine); r2s-famine-city-0 (city, famine); r2r-hamlet-10 (hamlet)
+- International Commerce, label and share alone under a siege — r2s-under_siege-metropolis-1 (metropolis, under_siege)
+
 
 Batch 2 (TAIL-DEFECON-2; towns from the after census: the smallest and the largest it reaches, a crisis among them):
 
@@ -255,12 +347,57 @@ Batch 1:
 
 ## Rows named for other groups · registers named stale · guards owed
 
+- (batch 3, the arrival writer `src/generators/narrative/arrivalScene.js`, for the history seat; the gate's new lines)
+  FALSE: r2s-infiltrated-town-1 "Bolts of cloth and bales of wool fill the carts waiting on the road out." (no cloth or
+  wool exported); r2s-plague_onset-village-0 "Horse traders show their animals at the edge of the settlement …" (no horse
+  or pack trader); r2s-under_siege-city-1 "The smell of horses and hay comes from the stables." (no stable); r2r-village-3
+  "Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane." (one grain mill, no
+  baker). CANDIDATE: r2s-slave_revolt-city-2 "… the sound of the workings never quite stops." (under the revolt).
+  JUDGED TRUE here (5f67f382d calls it false): r2r-village-19 "… a small shrine set into a wall." (a wall niche).
+- (batch 3, `history` hooks now shown where an iron hook left the panel; the record is unmoved, their truth is the
+  history writer's) CANDIDATES: r2s-monster_pressure-hamlet-2 "The threat is being exaggerated by someone who profits
+  from wartime contracts." (no war); r2r-village-4 "The vigilantes have begun targeting innocents …" (no stress);
+  r2r-hamlet-30 "Those in power are paying people to speak for them at the gatherings …". Plausible: r2r-hamlet-35 "A
+  would-be heir …", r2s-politically_fractured-hamlet-0 "A relic claimed by both sides …" (both politically fractured).
+- (batch 3) D22 (2), row 28528 "Waterborne freight services (cargo, pilotage)" under a siege (r2s-under_siege-metropolis-3):
+  the label is the chain's `exportLabel` (`computeActiveChains.js`: TAIL-DEFECON-C's), and it is one member of a CLASS:
+  every export under a siege (that town prints seven: legal services, military contracts, cultural tourism, planar
+  trade …). NAMED for TAIL-DEFECON-C and the chair: a siege filter on the export list is a cure of the exports' writer.
+- (batch 3) B11285 "Coal is dug here and sold on …" under the row name "Iron & Metalwork" (2: r2r-town-39,
+  r2s-wartime-hamlet-0: coal dug and exported, no forge): the LINE is true, the ROW'S NAME is false; a twin name is a
+  declared move with `treasury.js`'s map (not this group's): PARKED with its measure, 2 of 2.
+- (batch 3, `viability.js`, seen, not cured) the summary's "has 1 operational dependency that require active management.
+  1 plot hooks available." (agreement), every town with one: widest-first, for the next batch of `viability.js`.
+
 - (batch 2) the arrival scene's pilgrim lines ("Pilgrims in travel-stained cloaks queue patiently for their turn at the
   holy places", "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing") print
   where no house of pilgrimage stands (14 of the 26 towns of #15707): `src/generators/narrative/arrivalScene.js` reads the
   Pilgrim Trade income row; NAMED for its group, with the chair's ruling on #15707.
 
 - The page-census grid's register: two falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) — stale low, NAMED, not re-taken (re-derived at the close).
+
+## What is left (TAIL-DEFECON-3, after batch 3, 2026-11-15)
+
+Pushed: batch 3 (this file's section above), on the pilgrim gate 5f67f382d. THE NEXT BEFORE RUN: batch 3's after run
+(`/tmp/dc3/after3`, outside every tree; it does not survive the container): re-run `census3.sh` at the branch tip.
+
+Left, widest first, by file (measures from the census at the gate):
+1. `incomeLineSiblings.js` · the alchemy line 03703, X9 03932 (83): "A thriving alchemical trade … draws customers from
+   surrounding settlements": candidates 13 Poor or Struggling, 4 occupied, 3 plague onset (no siege: that twin stands).
+   The prosperity label is computed AFTER `trueIncomeDesc` runs (economicState.js ~823), so a prosperity gate needs a
+   reorder (a move): measure it, or gate on the crises alone.
+2. `resourceData.js` (X9 and D24): the fish chains' goods under a fish famine (22820 11, 10282 10, 22836 9, 22837 8,
+   22847 3, 10284 3, 22821 2, 22838 1, 09012 1); B14842 "Pilgrim hospitality" (77); 24992 the Brickmaker with no clay
+   (23); 14622 the oasis exports where nothing is exported (16); 16293 (1); D24 "Defended Pass". These are DATA rows:
+   the false print is a READER's (the chain display, the export list) that does not ask the famine or the roster.
+   Find each reader first; a reader outside this group is NAMED.
+3. `foodBalance.js`: B05887 "Crisis Cutting the Food Supply" under a plague with no failed source (106); B00188 the
+   grain importer under a siege (60; `siegeCutsImports` already twins it: check what still prints); B27952 the slave
+   revolt's idle fields where the food word is Secure (24); 23808 (1).
+4. `resourceGenerator.js`: 15458 "exports semi-finished goods" (152, D3): check its writer first (D17: if the gap logic,
+   name it for TAIL-DEFECON-R); B29907 (2).
+5. `viability.js`: the summary's agreement (above).
+6. Struck in batch 3: 11871, B11289, D22 (1), B27712. Named: 28528 (TAIL-DEFECON-C), B11285 (parked).
 
 ## What is left (TAIL-DEFECON-2, HANDED BACK by time after batch 2, 2026-11-15 ~01:15 UTC)
 

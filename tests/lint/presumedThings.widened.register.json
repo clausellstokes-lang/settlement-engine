@@ -25948,6 +25948,12 @@
     "family",
     "Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
     "782b0b74db43359b"
+   ],
+   [
+    "house: warehouse",
+    "family",
+    "Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
+    "2fe6cfe7568bb02a"
    ]
   ],
   "src/generators/economy/outlookHookSiblings.js": [
@@ -26002,14 +26008,6 @@
     "93978d70b7ac900d"
    ]
   ],
-  "src/generators/economy/tradeGoods.js": [
-   [
-    "house: warehouse",
-    "family",
-    "Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
-    "2fe6cfe7568bb02a"
-   ]
-  ],
   "src/generators/economy/viability.js": [
    [
     "quarters",
@@ -26028,18 +26026,6 @@
     "family",
     "Craft guilds operate on imported materials: sustained by strong ",
     "ac13dc3b9d7bc1dc"
-   ],
-   [
-    "house: tanner",
-    "family",
-    "Add craft guilds: smiths, weavers, tanners, etc.",
-    "9dba5fbacb8b44ef"
-   ],
-   [
-    "smith",
-    "family",
-    "Add craft guilds: smiths, weavers, tanners, etc.",
-    "9dba5fbacb8b44ef"
    ],
    [
     "house: alchemist",
@@ -27932,8 +27918,8 @@
    [
     "openTrade",
     "family",
-    "Regulates port and airship traffic, assigns berths, collects anchorage fees.",
-    "21a20608d98861af"
+    "Regulates airship traffic, assigns mooring berths, collects anchorage fees.",
+    "8d9a49b239b68238"
    ],
    [
     "house: airship docking",
