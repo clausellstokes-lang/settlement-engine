@@ -58,6 +58,7 @@ import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import {
   SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS,
@@ -161,8 +162,8 @@ function houseOfServiceRow(settlement, row) {
   if (!name) return null;
   let houses = settlement && typeof settlement === 'object' ? HOUSES_BY_NAME.get(settlement) : undefined;
   if (!houses && settlement && typeof settlement === 'object') {
-    const list = /** @type {{ institutions?: unknown }} */ (settlement).institutions;
-    houses = new Map((Array.isArray(list) ? list : []).filter((i) => i && typeof i.name === 'string').map((i) => [i.name, i]));
+    // the LIVE roster (a ruined house is read by its name from the catalogue, as a bare row is): the ruin-filter law
+    houses = new Map(liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)).filter((i) => i && typeof i.name === 'string').map((i) => [i.name, i]));
     HOUSES_BY_NAME.set(settlement, houses);
   }
   return houses?.get(name) ?? { name };

@@ -1,7 +1,7 @@
 # BAR2-SERVICES · hand-back (kept current after every batch)
 
 Seat: BAR2-SERVICES (REVIEW-BAR-2, the Services tab's rows and the marks a row carries). Started from the joined line
-`lane/join-2026-11-14` at **f8042b61a** (its tip as read). Branch `lane/bar2-services-2026-11-15`, worked in a scratch
+`lane/join-2026-11-14` at **f8042b61a** (its tip as read); merged it at **dcb069bff** on the chair's word (16:21 UTC). Branch `lane/bar2-services-2026-11-15`, worked in a scratch
 worktree. Census before: CENSUS-3 at f8042b61a on the 720; after: the same command at each batch's tip.
 
 ## The rulings worked to (the chair's, 2026-11-15; each vetoable by the owner)
@@ -204,14 +204,22 @@ GATES (batch 2): strict-domain 0 · type ratchet OK (167, ceiling 167) · eslint
   roster label ("Backs Merchant Guilds · Military/Guard", 242 towns): it is to call `powerSentenceName`
   (`src/domain/display/powerSentenceName.js`), as the tab now does.
 
-## THE BOOKS MY CURES MOVE (F2)
+## THE BOOKS MY CURES MOVE (F2), at the merged tip (lane/join-2026-11-14 at dcb069bff merged: 72236fb6c)
 
-| test | arm | old | new | door |
-|---|---|---|---|---|
-| `tests/property/generatorGoldenMaster.test.js` | every config byte-identical | 525 hashes | 216 of 525 configurations move (thorp 60, city 72, metropolis 84), ONE family: `availableServices` | `UPDATE_GOLDEN=1` through the close's door (the shift record) |
+Run alone, each to a file, through `sh scripts/gate-tail.sh`, after the merge:
+(a) the 60 test files that name a file I touched: 790 passed, 5 skipped, 0 red;
+(b) the 17 law suites: 14 green; three red, classed:
 
-The base itself drifts 525 of 525 from the stored manifest (the close's bookkeeping, carried). Hashes taken at base and at
-tip by my script (`golden.mjs`, the golden's own corpus and key).
+| test | arm | class | old | new | door |
+|---|---|---|---|---|---|
+| `tests/lint/ruinFilterRoster.walker.test.js` | every `.institutions` reader is COMPLIANT or EXEMPT; the scan's reader count | A LAW, MY REGRESSION (batch 1's house lookup read the raw roster) | 111 readers | 112 | CURED at my tip: the lookup reads `liveInstitutions` (`institutionRoster.js`); both arms green |
+| `tests/property/generatorGoldenMaster.test.js` | every config byte-identical | STORED FIGURE moved by my declared move | 525 hashes (the line tip matches the stored manifest exactly) | 216 of 525 move (thorp 60, city 72, metropolis 84), ONE family: `availableServices` | `UPDATE_GOLDEN=1` through the close's door (a shift record) |
+| `tests/generators/pipelinePinnedMode.test.js` | A1, A2, A5 (the golden sample unmoved by the pin seam) | STORED FIGURE (reads the same manifest) | 0 rows moved | 17 of its sample rows moved, by my `availableServices` move alone | the golden manifest's door, as above (no figure of its own) |
+| `tests/generators/generationForkCensus.test.js` | A1 (STOP-3, the golden rows under the instrument) | STORED FIGURE (reads the same manifest) | 0 rows moved | 12 rows moved, the same | the golden manifest's door, as above |
+
+All four green at the line's tip (dcb069bff, run there: 25 of 25 for the last three). Nothing re-taken. The owner's six (the
+cartography calibration, the description manifest, the lighting witness) I did not touch. Batch 2 moves no record: the 216
+are batch 1's three reworded descriptions (the luxury quarter's row, Family decisions, the fish market's household twin).
 
 ## Left of my worklist
 
