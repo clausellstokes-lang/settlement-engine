@@ -8,7 +8,7 @@ clean). Every run went to a file in the seat's scratch tree, outside the main ch
 |---|---|---|---|
 | — | merge of the joined line at 29b9795e4 | e36318ac5 | merged; each red re-run alone there |
 | 1 | `tests/components/houseLabelEverySurface.test.jsx` (1) | 90a50ee3 | BANKED: the allowance struck; two earning commits named |
-| 2 | `tests/domain/display/gapLineHousesByKind.test.js` (1 test, 7 of 7 towns) | — | STOPPED: no town of the configuration holds the anchor (0 of 720, 0 of 2,880) |
+| 2 | `tests/domain/display/gapLineHousesByKind.test.js` (1 test, 7 of 7 towns) | b5643c3e | RE-SHAPED to the invariant (the chair's H23); 7 pins retired by name |
 | 3 | `tests/lint/styleLaw.walker.test.js` (the houses' three `rather-than`) | 1b049c44 | CURED: three lines reworded, the claim kept, the guard computed |
 | 4 | `tests/domain/r3c10FoodLinesTrue.test.js` arm (a) (2) | b45f1047 | RE-KEYED BY IDENTITY: the rewording is true where it prints; the pin read the old word |
 
@@ -24,17 +24,23 @@ each probe in an archive of the point. There were two earnings:
   that branch never cured.
 - Proof: the file alone 1 failed / 5 -> 5 / 5; eslint 0; `typecheck:ratchet` 0; no source changed.
 
-## 2 · gapLineHousesByKind: STOPPED (one line to the chair)
-The red arm's anchor is "the gap row (`resourceAnalysis.gaps`, the rows without an `institution`) names a house its roster
-holds by family". I searched every birth of the configuration for it: **0 of the 720, and 0 of 2,880 at four times the
-scale**. The gap rows no longer name a house the roster holds by kind (the missing list is read by kind upstream, as
-r3c10's arm (d) records of `resourceGenerator.js :: evaluateInstitutionChain`). So the half-way line's claim cannot be
-anchored in any census town. "Use as many as do" is zero here, and an arm of zero towns would delete the case. That is not
-this seat's to do, so the item stops. Nothing changed. The writer (`resourceChains.js :: processingInstitutions`) is
-untouched. The other six tests of the file are green.
-For the chair: either (i) re-key the arm to the new home of the claim (the gap row itself names no house held by kind, in
-the same seven towns, anchored on a gap row that names a missing house), or (ii) anchor in another birth shape (the app's
-rw3 shape was not searched: the brief named the 720's configuration). Either one rules on what the test claims.
+## 2 · gapLineHousesByKind: RE-SHAPED TO THE INVARIANT, ruling H23 (b5643c3e)
+- I first stopped this item. The red arm's anchor (a gap row naming a house the roster holds by family) holds in **0 of
+  the 720 and 0 of 2,880**, because the gap rows are read by kind upstream (`resourceGenerator.js ::
+  evaluateInstitutionChain`, the family of fcf4cae69). The chair ruled (H23) that this is the cure holding.
+- The arm, over the same seven towns, every town run: no gap row (`resourceAnalysis.gaps[].missing`) and no half-way line
+  names as missing a house the live roster holds by family (`familyOfInstitution`) or by ladder (`institutionLadderEvicts`,
+  either way). It is anchored on a computed read: 13 missing-house names across the towns' gap rows, and one half-way line
+  (r2r-town-49's hides line).
+- **RETIRED BY NAME, FOR THE OWNER'S VETO LIST:** the seven per-town pins "the gap row names a house its roster holds by
+  family": r2r-town-31, r2r-town-39, r2r-town-49, r2r-city-27, r2r-city-32, r2r-city-55, r2s-insurgency-city-2. They are
+  named in the test's header with the cause.
+- The unit arm on made records stands untouched, and so does the writer (`resourceChains.js :: processingInstitutions`).
+- RED FIRST: in a scratch tree I undid the generator's by-kind match (`resourceGenerator.js:544`, exact name only). The arm
+  then fails on 6 of 7 towns (five name 'Tannery', r2s-insurgency-city-2 names 'Apothecary'); at this tip it passes. The
+  half-way-line half was not mutated on its own: it reads the page writer, which the file's unit arms guard.
+- Proof: the file 1 failed / 7 -> 7 / 7; eslint 0; `typecheck:ratchet` 0. The negative-anchor and seed-loop walkers fail
+  at the merged base and here, naming the same files (not this one).
 
 ## 3 · the houses' `rather-than`: CURED (1b049c44)
 - `institutionalCatalog.js` (the Village elder's catalogue desc): "…guides village decisions, by standing rather than by
@@ -64,6 +70,6 @@ rw3 shape was not searched: the brief named the 720's configuration). Either one
 - Arm (d) is untouched. Proof: the file 2 failed / 7 -> 7 / 7; the files that name it 12 / 12; eslint 0; `typecheck:ratchet` 0.
 
 ## LEFT
-- Item 2: stopped, for the chair's ruling (above).
+- Item 2's seven retired pins: for the owner's veto list (above).
 - Seen, not this seat's: in the 100 files around item 3, `institutionProseDeclared` (the services' ledger),
   `urbanBandInstitutions` (2) and `generatorGoldenMaster` are red at the merged tip, the same before and after this seat.
