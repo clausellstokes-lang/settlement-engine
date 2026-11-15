@@ -116,7 +116,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
   // and white-screen the whole tab — in the live generate flow this section is
   // rendered without an error boundary around it. Filter to entries we can
   // safely .toLowerCase() before the .some/.find matching below.
-  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainAsShown(c, town)); /* W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js) */ const stoppedByCrisis = new Set(chains.filter((c, i) => c.status === 'impaired' && chainCrisisStateShown({ ...chainsAsRead[i], status: 'running' }, town) === 'impaired')); // TAIL-DISPLAY-ECON-2 (05779, 05780): a card the crisis stops (a famine's failed ground, a siege's stopped trade: chainStateShown.js) contributes nothing now
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainAsShown(c, town)); /* W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js) */ const crisisMarks = flowCrisisMarks(town, chainsAsRead, chains); // TAIL-DISPLAY-ECON-4 (X25.1): a card's mark and its income line read the crisis leaf (crisisStoppedRow.js), the journal's one voice
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
@@ -216,7 +216,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
                 <p style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{facts.upstreamNote}</p>
               )}
 
-              {/* Impairment detail */}
+              {crisisMarks.chain.get(chain) && <div data-testid="flow-crisis-mark" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2,fontStyle:'italic',marginTop:4,lineHeight:1.4}}>{crisisMarks.chain.get(chain)}</div>}{/* Impairment detail */}
               {needLine && (
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
                   {needLine}
@@ -241,7 +241,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
               )}
 
               {/* Income contribution */}
-              {incomeEntry && !stoppedByCrisis.has(chain) && (
+              {incomeEntry && !crisisMarks.incomeStopped(incomeEntry) && (
                 <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:4}}>
                   Contributes to <strong>{incomeEntry.source}</strong> - {incomeEntry.percentage}% of income
                 </div>
@@ -406,11 +406,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <EconomicsGlance eco={eco} settlement={s} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
         headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung} />
 
-      {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
+      {econOrdinaryTimesLine(s, eco)&&<p data-testid="economics-ordinary-times" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5}}>{econOrdinaryTimesLine(s, eco)}</p>}{/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:5}}>
           {eco.incomeSources.map((src,i)=>{
-            const isCrim = src.isCriminal;
+            const isCrim = src.isCriminal; const shownDesc = incomeDescShown(s, src); // TAIL-DISPLAY-ECON-4 (X25.1): the share's mark, the Services tab's form (economicsCrisisMarks.js)
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             // ⛔ AUTHORED TEXT IS NEVER CLAMPED ON THE DOSSIER (owner, ODQ §934.23). The
             // 2026-09-18 car cured the PHONE, where a prose floor inside a clamp showed the
@@ -439,7 +439,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               </div>
               <div style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,lineHeight:1.45}}>
                 {isCrim&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>Criminal</span>}
-                <strong style={{fontWeight:700,color:isCrim?'#4a1a4a':'#1c1409'}}>{src.source}</strong>{src.desc?` ${src.desc}`:''}
+                <strong style={{fontWeight:700,color:isCrim?'#4a1a4a':'#1c1409'}}>{src.source}</strong>{shownDesc?` ${shownDesc}`:''}
               </div>
             </div>
             );
@@ -838,7 +838,7 @@ function NeedsNotMet({ needs, mobile }) {
  * the carrier, the food record) and the Institutions tab's impaired houses (`tabHelpers.js :: computeChainSets`); the
  * record is not touched. At the end of the file, so no line-keyed row above moves.
  */
-import { chainAsShown, chainCrisisStateShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
+import { chainAsShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
 import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
 import { computeChainSets } from '../tabHelpers.js';
 /** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
@@ -878,4 +878,4 @@ function flowHeaderCount(chains, services, impairedHouses) {
   return { active, impaired, words };
 }
 
-import { factsOf } from '../../../domain/facts/factsOf.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does
+import { factsOf } from '../../../domain/facts/factsOf.js'; import { flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
