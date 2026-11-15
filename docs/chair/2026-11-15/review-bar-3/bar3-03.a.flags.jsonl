@@ -1,0 +1,5 @@
+{"id":"C5102","town":"bar0-city-under_siege+famine-rand-8","sev":"MED","kind":"PAIR","why":"Chroniclers' exchange services (archive, claim grading against every road) print unmarked and on offer, while the house row says Stopped by the siege","other":"C4779"}
+{"id":"C5598","town":"bar0-city-under_siege+famine-rand-8","sev":"MED","kind":"PAIR","why":"Says the decisions that matter are made by The Guard; the page elsewhere says the Council controls rationing and gates and the Guard is only about as strong, bargained with","other":"C4409"}
+{"id":"C5844","town":"bar0-city-under_siege+famine-rand-8","sev":"MED","kind":"BROKEN","why":"slash-joined roster label 'Military/Guard' used as one power's name beside a verb ('decisions made by Military/Guard')","other":""}
+{"id":"C5758","town":"bar0-city-under_siege+famine-rand-8","sev":"LOW","kind":"STATE","why":"Yi Sato, first of Military/Guard, wants to learn if Enlai Yoon (second of Military/Guard) meets 'anyone from The Guard': incoherent, Enlai is of the Guard himself","other":"C6401"}
+{"id":"DONE","lines":2067,"blocks":1,"flags":4}
