@@ -109,10 +109,25 @@ clause reads 0/20. The card (`src/data/sampleSettlements.js`) is untouched. esli
 (167 ≤ 167). `tests/lint/proseDrawnAnchors.walker.test.js` (it names the file) is red before and after with the
 identical set of six other files (not this one, not this seat's). What a town prints: unchanged (0 of the 720).
 
-## Red 3, red 5
+## Red 5 — `crisisBlindDossierProse`, the set-aside table: GREEN (ruling K31, vetoable by the owner)
 
-Not yet reached (red 3 waits for the chair's word; red 5's test file is MOVING on `lane/tail-crisis-2026-11-14`,
-as the rule expects until `325de515` is on the line).
+Opened when the joined line held the crisis branch's `573c92b6d` (merged here at `0b1248dbf`, after the chair's SWEPT
+`f714fb6a5`). At that tip 1 failed / 5: the mute arm, five cells, each a pool's `threat` family (read under a siege):
+DS-POW-6 duty evasion, DS-GEN-13 ENTREPOT, DS-ECO-10 POSTURE: vulnerable, DS-DEF-2 Beasts: settled, nothing organized,
+DS-ECO-12 INCOME WEIGHT: the religious houses. The approved shape: `SET_ASIDE_CELLS`, keyed by POOL AND FAMILY, each
+with its declaring commit; a listed cell must be mute (the arm reds if it speaks); every other family of that pool is
+still held to the law (it must speak); a listed cell the walk no longer reaches reds as stale. DS-STR-1's whole-pool
+exemption (ratified by construction) stays in `SET_ASIDE`. The declarations: `f8e7326ce`, `32ab37da`, `c21abdd5`,
+`35acb7794` (the four in ba4cc210b); the fifth, DS-ECO-12, is CITED, not accidental: `13c6618e0` declares the no-house
+lines v3, v4 off a siege, and the house lines v1, v2 read the compound `sacredHouse` the synthesised place cannot
+hold, while they still draw under a real siege where a house stands (`w5-village-under_siege-3` draws v1, v2, this
+seat's census of red 1). After: 5/5. Red-first: with `no crisis: under_siege` struck from DS-POW-6 v1 the arm reds
+("DS-POW-6 :: operation role duty evasion :: threat (declared mute by f8e7326ce …)"); restored. eslint clean;
+`typecheck:ratchet` OK. What a town prints: unchanged.
+
+## Red 3
+
+Waits for the chair's "THE DISPLAY'S BRANCH IS ON THE LINE AT <tip>".
 
 ## The sixth (DS-GEN-13 "a market, no guild", `tests/lint/factLayers.walker.test.js`): NAMED
 
