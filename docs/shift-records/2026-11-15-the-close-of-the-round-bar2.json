@@ -1,0 +1,40 @@
+{
+  "_doc": "THE CLOSE OF THE ROUND BAR2: ONE signed record for this round's close and for it only (a later seat reads it as history, never as a grant; the close of the tail round keeps its own record, untouched). It signs the re-take, at the joined line's tree 1011a8a91 (lane/join-2026-11-14), of the reference surfaces the round's five builder branches moved (corpus, services, places, people, labels; landed at JOIN-13 points 2 to 6) and of the three surfaces left pending at the last close (the town-map calibration corpus, the dossier prose manifest, the preset lighting witness), each through its own door, one commit a family. THE FAMILY CHECK (BAR2-CLOSE-DOORS-2, before any write): every one of the 525 golden configurations born at 74ded1800 (the tree the stored corpus was last taken at: it reproduces all 525 stored hashes) and at 1011a8a91, hashed whole and by leaf path: 418 of 525 move (thorp 73, hamlet 29, village 43, town 105, city 84, metropolis 84), every moved leaf a text field of a family the five hand-backs declare: availableServices 216 (equipment[].desc 156, legal[].desc 60; services), institutions[].desc 237, settlementReason[] 153, culturalIdentity.foodways 84, economicState.foodSecurity.foodRecord.foodwaysLine 84, arrivalScene 10 (places), relationships[].description 239, relationships[].tension 68, relationships[].proseVariant 1, powerStructure.factions[].desc 168, npcs[].structuralPosition 9, npcs[].activeConstraint 9, prominentRelationship.phrasing 4 and .tension 4 (people), economicState.incomeSources[].desc 29 and powerStructure.factions (labels); no array length and no non-text leaf moved. THE ESPIONAGE FENCE (the chair's ruling EF1, vetoable): every other arm of the fence green at 1011a8a91 (20 of 21); scripts/audit/refence.mjs at 74ded1800 reproduces the committed d4f94b04... (the spelling proven); at 1011a8a91 267 of 360 rows move, every moved leaf page text traced by git log -S to a cure commit of the five branches (people 7f040c7e1, 8026d2c46; places 0d36c3820; services 41ef3a9b4; labels c4cc22e46, c1f9889ae), no length or non-text leaf moved; the espionage subsystem stays dormant. Each surface's predictedRows is MEASURED before its write, through the door itself with a scratch record (PREDICTION_MISS, nothing written). A VETO of any change on the veto list reverts that change and re-records these surfaces again through this door under a new record.",
+  "ownerWords": "Yes refresh the reference",
+  "ownerDate": "2026-11-15",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01ACmDYZrFEVXyZEUg1NDxxC) on 2026-11-15 at 20:27:16 UTC, verbatim \"Yes refresh the reference\", answering the chair's ask of 17:56 UTC (repeated 19:03 UTC) for the words \"Yes, refresh the reference files.\": for the three reference files left pending at the last close and this round's refresh of the reference corpus at the joined tree",
+  "cause": "THE ROUND BAR2'S DECLARED CURES, BY LANDING (first-parent on lane/join-2026-11-14 since 74ded1800): e13aeb702 (JOIN-13 point 3, lane/bar2-services-2026-11-15 at 869151573: a service row carries its house's mark; availableServices); 65cea6643 (point 4, lane/bar2-places-2026-11-15 at 534c29fac: the houses', origin, foodways and arrival rows read the town; institutions, settlementReason, culturalIdentity, economicState, arrivalScene, the war's pressure line); cb2573de4 (point 5, lane/bar2-people-2026-11-15 at 070f254d9: the powers and the ties say what the record holds; relationships, powerStructure.factions, npcs' structuralPosition and activeConstraint and their dealings and secrets, the prominent tie, conflicts' hooks); ef40f6330 (point 6, lane/bar2-labels-2026-11-15 at 26263ff0e: the income, safety and defenders' pay lines read the record; economicState.incomeSources, economicState.safetyProfile, powerStructure.factions); e2ad4a5a2 (point 2, lane/bar2-corpus-2026-11-15: the dossier's composed leaves, no birth moved). AND, FOR THE THREE SURFACES LEFT PENDING AT THE LAST CLOSE (TAIL-CLOSE-DOORS-4, 'THE OWNER'S DOOR: WAITING'), the tail round's declared moves as the close of the tail round's record names them, with this round's.",
+  "seat": "BAR2-CLOSE-DOORS-2 under the chair session_01ACmDYZrFEVXyZEUg1NDxxC, at the joined line's 1011a8a91 (branch lane/bar2-close-doors-2-2026-11-15)",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "settlement-hash"
+    }
+  ]
+}

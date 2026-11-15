@@ -18,6 +18,15 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-15 — THE CLOSE OF THE ROUND BAR2, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-15 20:27:16 UTC:
+ *   "Yes refresh the reference"; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json; seat BAR2-CLOSE-DOORS-2, vetoable).
+ *   418 of 525 rows (thorp 73, hamlet 29, village 43, town 105, city 84, metropolis 84) against the stored corpus's tree 74ded1800 (which reproduces
+ *   all 525). THE CAUSE: the round's five builder branches' declared cures, landed on lane/join-2026-11-14 at JOIN-13 points 3 to 6 (services
+ *   e13aeb702, places 65cea6643, people cb2573de4, labels ef40f6330). FIELD-DIFFED by leaf path, text leaves only: availableServices 216, institutions[].desc 237,
+ *   settlementReason[] 153, culturalIdentity.foodways and economicState...foodwaysLine 84, arrivalScene 10, relationships[] description 239 / tension 68 /
+ *   proseVariant 1, powerStructure.factions[].desc 168, npcs[] structuralPosition and activeConstraint 9, prominentRelationship 4, economicState.incomeSources[].desc 29;
+ *   no array length, no non-text leaf. Written at 1011a8a91. e74b9398.. -> 9fab7487..
+ *
  * 2026-11-13 — STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json; the chair signs under the owner's delegation, vetoable).
  *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 46's post-state. THE CAUSE, ONE (first-parent step 22cc9ef7d): the COHERENCE-AGREE merge (lane/coherence-agree-2026-11-11 at 69b53decd; one fact, one answer: the town's own drawn record overrides a terrain or institution table, and a fact has one reader). LAW 2's SECOND CASE (the lane cut from 3575cf061): measured at the merge, the draft's '525 of 525' exactly. FIELD-DIFFED: resourceAnalysis and config's rolled resources, simulationTrace, economicState, economicViability, defenseProfile, culturalIdentity, the re-dealt holders' institutions, npcs, relationships, services, quarters, powers, conflicts, stress casts, history and arrival scene, activeConditions, the pressure line, and the derived coherence receipt, isolation support and structural violations; every family the draft declares.

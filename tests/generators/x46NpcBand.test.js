@@ -217,6 +217,13 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 60 of 60 moved by the round's declared generation moves (the golden master
   // re-recorded 525 of 525 under the same record: a face for every seat of power and the casts drawn after it). Re-captured at the golden's tree
   // 8c11f73ea by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-15 (the close of the round BAR2, BAR2-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:27:16 UTC, in the
+  // chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json): 58 of 60 moved (x46-dark-thorp-005 and
+  // x46-dark-city-007 among them, the labels branch's two) by the round's five builder branches' declared text cures; the stored sixty
+  // reproduce at 74ded1800 (60 of 60). FIELD-DIFFED by leaf path, text leaves only: settlementReason, tie descriptions and tensions,
+  // the people's positions, constraints, dealings and secrets, service rows, faction and house descriptions, the foodways lines, the
+  // arrival scene, the slavic social texture and its culturalNotes mirror (534c29fac, BAR2-PLACES-2), the prominent tie, the pressure
+  // and safety lines. Re-captured at the joined line's 1011a8a91 by this file's own loop (an untracked probe), twice and equal.
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
