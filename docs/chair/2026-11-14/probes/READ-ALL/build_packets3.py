@@ -107,6 +107,11 @@ def header(seed,s):
     L.append('DEFENCE: walls: %s · garrison: %s · militia: %s · watch: %s · hired: %s · charter: %s · magic: %s' % (dn('walls'),dn('garrison'),dn('militia'),dn('watch'),dn('mercenary'),dn('charter'),dn('magicDef')))
     L.append('HOUSES (%d, the whole list): %s' % (len(inst),'; '.join(str(i) for i in inst)))
     L.append('TRADE: exports: %s · imports: %s · made here: %s' % (', '.join(map(str,es.get('primaryExports') or [])) or 'none',', '.join(map(str,es.get('primaryImports') or [])) or 'none',', '.join(map(str,es.get('localProduction') or [])) or 'none'))
+    # ADDED 2026-11-15 01:56 UTC: the town's income sources (economicState.incomeSources). READ-ALL-4 flagged "money made outside the law"
+    # in 119 towns and "back rooms and after dark" in 18 as naming a crime the header lacks: every one of those towns holds a criminal income
+    # source in the record (measure4.py): the header's limit, the chair's own, a third time.
+    inc=', '.join('%s %s%%'%(x.get('source'),x.get('percentage') if x.get('percentage') is not None else x.get('share')) for x in (es.get('incomeSources') or []) if isinstance(x,dict)) or 'none'
+    L.append('INCOME (the sources of the town\'s money, by the record): %s' % inc)
     L.append('FOUNDING: by %s · reason: %s' % (g(hi,'founding','foundedBy'),g(hi,'founding','reason')))
     fsec=es.get('foodSecurity') or {}; fr=fsec.get('foodRecord') or {}
     L.append('FOOD: the word the page prints %s · band %s · grown %s%% · brought in %s%% · by magic %s%% · gap %s%% · surplus %s%% · stores %s months (granary %s) · failed source %s · famine cut %s%%' % (page_food(HDR_OUT[0],seed) or fsec.get('label'),fr.get('band'),fr.get('grownPct'),fr.get('normalImportPct'),fr.get('magicPct'),fr.get('gapPct'),fr.get('surplusPct'),fr.get('storageMonths'),fr.get('hasGranary'),fr.get('failedSource'),fr.get('famineCutPct')))

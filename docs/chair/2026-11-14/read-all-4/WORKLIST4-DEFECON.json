@@ -1,0 +1,146 @@
+[
+{
+"id": "01020",
+"sev": "MED",
+"n": 46,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Defense",
+"fold": "The garrison and city watch maintain standard patrol coverage.",
+"text": "The garrison and city watch maintain standard patrol coverage.",
+"why": "standard patrol coverage under siege (stability Critical, safety Desperate Active Siege); tag reaches siege towns; routine patrols not so",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 999,
+"fn": "STANDARD_PATROL"
+}
+},
+{
+"id": "01018",
+"sev": "MED",
+"n": 35,
+"town": "r2r-city-44",
+"section": "Systems/Defense",
+"fold": "The garrison and city watch are well paid, well equipped and patrol properly.",
+"text": "The garrison and city watch are well paid, well equipped and patrol properly.",
+"why": "well paid, well equipped, patrol properly; defence Defensible, legitimacy 0, hunger eroding order, monsters on roads, famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyLineTruth.js",
+"line": 76,
+"fn": "patrolTruth"
+}
+},
+{
+"id": "01022",
+"sev": "MED",
+"n": 25,
+"town": "r2s-famine-city-0",
+"section": "Systems/Defense",
+"fold": "The garrison and city watch walk the usual rounds.",
+"text": "The garrison and city watch walk the usual rounds.",
+"why": "watch and garrison walk the usual rounds; stability Desperate (hunger eroding order); tag reaches occupations where officers do not rule freely",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 1001,
+"fn": "STANDARD_PATROL"
+}
+},
+{
+"id": "00442",
+"sev": "MED",
+"n": 18,
+"town": "r2r-thorp-54",
+"section": "Systems/Economics",
+"fold": "Goods change hands here in back rooms and after dark, and nobody accounts for them.",
+"text": "Goods change hands here in back rooms and after dark, and nobody accounts for them.",
+"why": "back-room dark trade; HOUSES has no fence or black market, LAND no Black market chain; isolated, exports and imports none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 709,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "01272",
+"sev": "MED",
+"n": 15,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Defense",
+"fold": "Whatever the army's buyers will take is sold to them dear, and not all of it is as sound as it is said to be.",
+"text": "Whatever the army's buyers will take is sold to them dear, and not all of it is as sound as it is said to be.",
+"why": "goods sold dear to army's buyers; trade access isolated, exports none, imports none, undefended, famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 642,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "00345",
+"sev": "MED",
+"n": 15,
+"town": "r2s-wartime-thorp-2",
+"section": "Systems/Defense",
+"fold": "Deserters passing through need food and discretion, and some here give both.",
+"text": "Deserters passing through need food and discretion, and some here give both.",
+"why": "gives deserters food; famine deficit 72%, stores 0.1 months, no line offers food in famine; isolated thorp",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 644,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "00606",
+"sev": "MED",
+"n": 8,
+"town": "r2s-mass_migration-thorp-3",
+"section": "Systems/Defense",
+"fold": "Lodging and a way onward, sold quietly to newcomers who were told to move on.",
+"text": "Lodging and a way onward, sold quietly to newcomers who were told to move on.",
+"why": "'Lodging ... sold quietly'; HOUSES has no inn or lodging house, thorp of 7",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 654,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "01026",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-9",
+"section": "Systems/Defense",
+"fold": "The garrison and town watch keep what rounds they can while the supplies they need are cut off.",
+"text": "The garrison and town watch keep what rounds they can while the supplies they need are cut off.",
+"why": "says supplies the forces need are cut off; CRISIS none, safety Very Safe, Well-Defended, imports cover 846",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 377,
+"fn": "generateSafetyProfile"
+}
+}
+]
