@@ -25,7 +25,7 @@ describe('the seven canonical v0 rows declare through the tag slot (CENSUS-3f un
     for (const [block, pool, marks] of [
       ['DS-ECO-3', 'SHORTAGE × trade-dependent', ['market']],
       ['DS-ECO-3', 'SURPLUS × trade-dependent', ['market']],
-      ['DS-ECO-6', 'TIER: significant off-book activity (≥15)', ['guild']],
+      ['DS-ECO-6', 'TIER: significant off-book activity (≥15)', ['guild', 'no crisis: under_siege']], // TAIL-CORPUS-ECO-3 batch 5 (2026-11-15): + `no crisis: under_siege` (C13: duties and guild fees undersold where nothing comes in)
     ]) {
       const row = canonical(block, pool);
       expect(row.vid, `${block} ${pool}`).toBe(0);

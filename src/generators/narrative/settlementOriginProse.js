@@ -48,6 +48,11 @@
  * within an arm the variants state the same fact in different voices, which is
  * what keeps the rung safe for the AI grounding payload.
  *
+ * TAIL-NARRATIVE-2 B3 (the chair's ruling (N6)): THE RUNG IS WHERE, NOT WHY. `settlementReason` is drawn BEFORE the
+ * founding reason (`steps/generateNarratives.js`) and cannot read it, so no row claims a cause of founding ("founded
+ * for", "because", "exists because", "on the reasoning that"); a shortfall with nothing brought in "must make do",
+ * never "gets by"; a channel is turned to, never said to meet or close the gap.
+ *
  * ── THE DM-EDIT BOUNDARY ────────────────────────────────────────────────────
  * `settlementReason` is DM-editable (src/domain/userEdits.js:91,
  * display/stateProse/dmFieldProjection.js:53). Selection happens HERE, on the
@@ -89,10 +94,10 @@ export const GROUND_PHRASE = Object.freeze({
 export const ORIGIN_POOLS = Object.freeze({
   road: Object.freeze([
     'Established along a road route. Trade flows in, goods flow out, people pass through.',
-    'The road was here first. The settlement grew along its verge, and most of what it owns arrived on somebody else\'s cart.',
+    'The road was here first. The settlement grew along its verge, and for generations its news came on somebody else\'s cart.',
     'Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.',
     'A road settlement: it makes its living from other people\'s journeys, in stabling and meals and small repairs.',
-    'Sited on a route already worn deep before anyone built here, on the reasoning that a road a century old will not be abandoned in one.',
+    'Sited on a route already worn deep before anyone built here; a road a century old will not be abandoned in one.',
   ]),
 
   crossroads: Object.freeze([
@@ -100,15 +105,15 @@ export const ORIGIN_POOLS = Object.freeze({
     'Built at a major crossroads, and trade comes in on every road.',
     'Built where two busy roads cross, and laid out around the crossing.',
     'A crossroads settlement: every road brings it trade, and any of them can bring it trouble.',
-    'Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.',
-    'It exists because travellers had to stop somewhere, and the roads decided that somewhere was here.',
+    'Built at a junction, and the oldest logic there is applies: whoever holds the meeting of roads holds what moves along them.',
+    'It stands where the roads meet, on ground travellers stopped at long before anyone built here.',
   ]),
 
   river: Object.freeze([
     'Built along the river: water access shapes every economic decision.',
     'Founded on the bank, where the current does the hauling; every trade here is priced against what the water carries for nothing.',
     'A river settlement. The channel sets the calendar: what floods, what freezes, and what can be moved between the two.',
-    'Sited at the water\'s edge because the river was the only road worth having, and it has been the argument for staying ever since.',
+    'Sited at the water\'s edge, where the river was the only road worth having, and it has been the argument for staying ever since.',
     'Established along the river for drinking, for milling, and for moving what the fields produce. All three still hold.',
   ]),
 
@@ -141,8 +146,8 @@ export const ORIGIN_POOLS = Object.freeze({
   'port.coastal': Object.freeze([
     'A coastal seaport whose existence is inseparable from the sea.',
     'A seaport. The tide sets the working day, and the harbour is the only asset that finally matters.',
-    'Founded on the coast for the shelter of its anchorage. The sea gives the settlement its living and sets the terms of it.',
-    'A coastal settlement built to face the water. Most of what it eats, sells, and fears arrives the same way.',
+    'Built on the coast around the shelter of its anchorage, and the sea has set the terms of its living ever since.',
+    'A coastal settlement built to face the water; most of its trade has always gone by sea.',
     'A seaport that lives by its ships: what they carry off matters more here than anything the land behind it grows.',
   ]),
 
@@ -157,18 +162,21 @@ export const ORIGIN_POOLS = Object.freeze({
   // beside a page that calls the place a port), and none names one as standing: each row states the
   // terrain and that the place was founded to trade by water, nothing else (no present traffic, which a
   // siege would make false; no "port", which the vocabulary reads as the docks house).
+  // TAIL-NARRATIVE-2 B3 (the chair's ruling (N6); READ-ALL 22375, B11462): THE ORIGIN LINE SAYS WHERE, NOT WHY. The founding
+  // cause is the History's (`history.founding.reason`, a fishers' camp or a naval base as often as a trading port), so no
+  // row here says what the founders meant: each states the terrain and that the place's trade has gone by water (the route).
   ground: Object.freeze([
-    `Built ${GROUND_TOKEN}, by people who meant to trade by water.`,
-    `The first families built ${GROUND_TOKEN}, to trade by water.`,
-    `It stands ${GROUND_TOKEN}; it was founded to trade by water.`,
-    `Founded ${GROUND_TOKEN}, for trade by water.`,
-    `It was built ${GROUND_TOKEN} by people who lived by trade on the water.`,
+    `Built ${GROUND_TOKEN}; its trade has always gone by water.`,
+    `The first families built ${GROUND_TOKEN}, and its trade has gone by water ever since.`,
+    `It stands ${GROUND_TOKEN}, and its trade has always gone by water.`,
+    `Founded ${GROUND_TOKEN}, it has always traded by water.`,
+    `It was built ${GROUND_TOKEN}, and what it trades has always gone by water.`,
   ]),
 
   'isolated.sustained': Object.freeze([
     'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.',
     'Isolated from major trade routes. What the settlement needs, it makes; what it cannot make, it learns to do without.',
-    'Set apart from the trade roads. The distance is why it was founded and why it has stayed small and whole.',
+    'Set apart from the trade roads. The distance has kept it small and whole.',
     'Isolated by the lie of the land. The place feeds itself, and it cannot grow past what its own fields give.',
     'Off the trade routes entirely. Nothing arrives that was not sent for, and little is sent for.',
   ]),
@@ -177,21 +185,21 @@ export const ORIGIN_POOLS = Object.freeze({
   // page says "No food comes into X by trade") names no channel; it says what the record holds, what the
   // town has in store and what it produces itself, in the words of `holdingsOf`. A new arm: index 0 is its own.
   'isolated.unsupplied': Object.freeze([
-    `Isolated from major trade routes. The settlement cannot fully feed itself, and no food comes in from outside: it gets by on ${HOLDS_TOKEN}.`,
-    `Isolated from major trade routes, and short of what it eats. Nothing is brought in to close the gap; it gets by on ${HOLDS_TOKEN}.`,
-    `Set apart from the trade roads, on ground that does not quite feed it. No food reaches it from outside, and it gets by on ${HOLDS_TOKEN}.`,
-    `Isolated, and running a shortfall it cannot farm its way out of. Nothing comes in from outside; it gets by on ${HOLDS_TOKEN}.`,
-    `Off the trade routes and under-fed by its own land. Nothing is brought in, and every season it gets by on ${HOLDS_TOKEN}.`,
+    `Isolated from major trade routes. The settlement cannot fully feed itself, and no food comes in from outside: it must make do with ${HOLDS_TOKEN}.`,
+    `Isolated from major trade routes, and short of what it eats. Nothing is brought in to close the gap; it must make do with ${HOLDS_TOKEN}.`,
+    `Set apart from the trade roads, on ground that does not fully feed it. No food reaches it from outside, and it must make do with ${HOLDS_TOKEN}.`,
+    `Isolated, and running a shortfall it cannot farm its way out of. Nothing comes in from outside; it must make do with ${HOLDS_TOKEN}.`,
+    `Off the trade routes and under-fed by its own land. Nothing is brought in, and every season it must make do with ${HOLDS_TOKEN}.`,
   ]),
 
   // #215 (round two; the chair's ruling): an isolated shortfall UNDER A SIEGE in force names no channel of
   // trade as open; it says what the record holds (`holdingsOf`). A new arm: index 0 is its own.
   'isolated.besieged': Object.freeze([
-    `Isolated from major trade routes, and now under siege. The settlement cannot fully feed itself, and nothing comes in by road: it gets by on ${HOLDS_TOKEN}.`,
-    `Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it gets by on ${HOLDS_TOKEN}.`,
-    `Set apart from the trade roads, on ground that does not quite feed it, and now cut off by a siege. It gets by on ${HOLDS_TOKEN}.`,
-    `Isolated, and running a shortfall it cannot farm its way out of. The siege has closed the roads; it gets by on ${HOLDS_TOKEN}.`,
-    `Off the trade routes and under-fed by its own land, and now besieged: nothing comes in by road, and it gets by on ${HOLDS_TOKEN}.`,
+    `Isolated from major trade routes, and now under siege. The settlement cannot fully feed itself, and nothing comes in by road: it must make do with ${HOLDS_TOKEN}.`,
+    `Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it must make do with ${HOLDS_TOKEN}.`,
+    `Set apart from the trade roads, on ground that does not fully feed it, and now cut off by a siege. It must make do with ${HOLDS_TOKEN}.`,
+    `Isolated, and running a shortfall it cannot farm its way out of. The siege has closed the roads; it must make do with ${HOLDS_TOKEN}.`,
+    `Off the trade routes and under-fed by its own land, and now besieged: nothing comes in by road, and it must make do with ${HOLDS_TOKEN}.`,
   ]),
 
   'isolated.deficit': Object.freeze([
@@ -203,11 +211,11 @@ export const ORIGIN_POOLS = Object.freeze({
     // em-dash is the close the list's end needs — the same device index 0 uses
     // on both sides of its own splice. Any future variant that continues AFTER
     // the token must close it the same way; a bare comma cannot.
-    `Isolated from major trade routes, and short of what it eats. The gap is closed through ${CHANNELS_TOKEN} — at a price the settlement feels.`,
-    `Set apart from the trade roads, on ground that does not quite feed it. What is missing comes in through ${CHANNELS_TOKEN} — when it comes at all.`,
+    `Isolated from major trade routes, and short of what it eats. To close the gap it turns to ${CHANNELS_TOKEN} — at a price the settlement feels.`,
+    `Set apart from the trade roads, on ground that does not fully feed it. What is missing comes in through ${CHANNELS_TOKEN} — when it comes at all.`,
     // R2-CODE-A-4 (#7): the list is the record's own and may hold one channel; the close reads for one or many.
     `Isolated, and running a shortfall it cannot farm its way out of. Survival here rests on ${CHANNELS_TOKEN} — none of it certain.`,
-    `Off the trade routes and under-fed by its own land. The shortfall is met through ${CHANNELS_TOKEN}, and every season the terms are bargained again.`,
+    `Off the trade routes and under-fed by its own land. For what it lacks it looks to ${CHANNELS_TOKEN}. Every season the terms are bargained again.`,
   ]),
 });
 
@@ -224,9 +232,9 @@ export const ORIGIN_POOLS = Object.freeze({
 const CHANNEL_OF_PATH = Object.freeze([
   ['magical_transit', () => 'carriage by magic'],
   ['hinterland', () => 'carts from the country around it'],
-  ['seasonal_access', (path) => ((path.evidence || []).some((e) => /caravan|pack train/i.test(String(e)))
-    ? 'the caravans that still come'
-    : 'the tracks in a good season')],
+  // TAIL-NARRATIVE-2 B3 (18781): a caravan house on the seasonal path's evidence is not caravans that come (a page beside it
+  // says "No camels reach the caravanserai"); the seasonal path is named as the tracks in a good season, whatever stands.
+  ['seasonal_access', () => 'the tracks in a good season'],
   ['patronage', () => 'the favour of a patron'],
 ]);
 

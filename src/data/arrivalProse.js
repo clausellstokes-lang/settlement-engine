@@ -23,7 +23,7 @@
  * ruling R-C) — `{ text, needs?, excludes?, crisis? }` in the atoms of `domain/facts/factVocabulary.js`. Consumers
  * read it through `domain/facts/textOf.js` until CENSUS-1c's wiring draws it through `drawDeclared`.
  * @typedef {((n: string) => string) | { text: (n: string) => string, needs?: ReadonlyArray<string>,
- *   excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string>, colour?: boolean }} ArrivalLine
+ *   excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string>, colour?: boolean, twinOf?: string }} ArrivalLine
  */
 /**
  * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF: "flags now, pins at the compose"). The ledger's
@@ -86,7 +86,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     trade: ['baked goods', 'milled flour', 'flour', 'bread', 'grain surplus'],
     lines: [
       { text: () => 'The smell of fresh bread meets you on the road in.', colour: true }, // R-AO (CENSUS-2f): read; presumes nothing
-      { text: () => 'Someone has been baking since before dawn, and the air still carries it.', colour: true },
+      { text: () => 'Someone has been baking since before dawn, and the air still carries it.', excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4, Y6; READ-ALL 18339): no bread baked where the food failed; a line a crisis can make false is not colour, so it leaves the colour mark and declares
       { text: () => 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill'] },
       { text: () => 'The warm smell of an oven reaches you before the first doorway does.', colour: true },
     ],
@@ -133,14 +133,14 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'] },
       { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market'] }, // W2-FIX-DATA: a price is shouted at a market (c05)
       { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'] },
-      { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'] },
+      { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02382): no fresh catch under a siege or where the food failed
     ],
     dominant: [
       // CENSUS-2f, R-AP amended: the dominant pool is picked by the exports' fish trade, which guarantees the trade and no
       // catch; the racks of catch and the gutting declare `fish`, the gulls' water `navigable`, both where both.
       { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish'] },
       { text: (n) => `Half of ${n} seems to be gutting, salting or selling fish.`, needs: ['fish'] },
-      { text: () => 'Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.', needs: ['navigable'] },
+      { text: () => 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 04287): "stacked for the carts" printed under a siege, when no cart leaves; reworded to name no carts, so no condition and no new line in the pool (VETOABLE wording, the owner's)
     ] },
   { key: 'cloth',
     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],
@@ -153,7 +153,8 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: (n) => `The clatter of looms follows you through ${n}, from one shutter to the next.`, crisis: ['any'] },
-      { text: () => 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', excludes: ['crisis: under_siege', 'route: isolated'], crisis: ['any'] }, // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no road out where no route reaches (1 of 22)
+      { text: () => 'Bolts of cloth and bales of wool are stacked high in the workshops, more than the place can wear.', twinOf: 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', needs: ['route: isolated'], crisis: ['any'] }, // TAIL-HISTORY-3 (Y14): its twin where no route reaches; a twin keeps the slot and spends no redraw (arrivalScene.js :: drawAdmitted), so no later beat moves (VETOABLE wording)
       { text: () => 'Bolts of cloth hang drying in long bright strips across every yard.', crisis: ['any'] },
     ] },
   { key: 'livestock',
@@ -264,7 +265,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: () => 'Spice and drying herbs scent every lane, and the stalls are piled with them.', needs: ['market'] },
-      { text: () => 'Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.', colour: true }, // R-AO (CENSUS-2f)
+      { text: () => 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.', colour: true }, // R-AO (CENSUS-2f); TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no carts where no route reaches (2 of 12): reworded, the colour mark kept
       { text: () => 'Every other doorway seems to sell a remedy for something.', colour: true },
     ] },
   { key: 'arcane', arcane: true,
@@ -292,10 +293,10 @@ export const ARRIVAL_SENSES = Object.freeze([
  */
 export const ARRIVAL_PEOPLE = Object.freeze({
   germanic: [
-    () => 'An apprentice hurries past on an errand, a master\'s mark stitched on his sleeve.',
+    () => 'An errand-runner hurries past, a household\'s mark stitched on his sleeve.', // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no master's mark where no smith and no guild stands (13 of 23 towns)
     () => 'Two neighbours argue over a boundary stone, each quoting what their grandfathers agreed.',
     () => 'A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.',
-    { text: () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.', needs: ['market'] },
+    { text: () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.', needs: ['market'], excludes: ['crisis: under_siege'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02866 HIGH): no fair is drawn under a siege
   ],
   latin: [
     { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a crowd and a patron's clients (c09 at 33)
@@ -310,7 +311,8 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'An old judge listens to two neighbours by a gate and says nothing until both are finished.', crisis: ['any'] },
   ],
   arabic: [
-    () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.',
+    { text: () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.', excludes: ['crisis: under_siege', 'route: isolated'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02414): no goods come by road under a siege; TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): nor to a place no route reaches (3 of 13)
+    { text: () => 'A broker sits in the shade, matching buyers to whatever the neighbours have to spare.', twinOf: 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.', needs: ['route: isolated'], excludes: ['crisis: under_siege'] }, // TAIL-HISTORY-3 (Y14): its twin where no route reaches; a twin keeps the slot and spends no redraw (arrivalScene.js :: drawAdmitted), so no later beat moves (VETOABLE wording)
     { text: () => 'Travellers are offered water before anyone asks their business.', excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: no traveller reaches a besieged gate (c12)
     () => 'Two partners go over their accounts in a courtyard with a mediator sitting between them.',
     { text: () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): the same
@@ -328,25 +330,27 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'A work party heads out together, singing, with tools on their shoulders.', crisis: ['any'] },
   ],
   east_asian: [
-    () => 'A clerk records every cartload that passes in a careful ledger.',
+    { text: () => 'A clerk records every cartload that passes in a careful ledger.', excludes: ['crisis: under_siege', 'route: isolated'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02470): no cartload passes under a siege; TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): nor where no route reaches (1 of 20)
+    { text: () => 'A clerk records every sack and basket that comes in from the fields in a careful ledger.', twinOf: 'A clerk records every cartload that passes in a careful ledger.', needs: ['route: isolated'], excludes: ['crisis: under_siege'] }, // TAIL-HISTORY-3 (Y14): its twin where no route reaches; a twin keeps the slot and spends no redraw (arrivalScene.js :: drawAdmitted), so no later beat moves (VETOABLE wording)
     () => 'An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else.',
     { text: () => 'Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): a merchant bargains where a market stands
     { text: () => 'Each lane seems to keep to its own trade, and each trade to its own lane.', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item F (ww-541): lanes of trades are a town's (a hamlet of 31 has a handful of houses)
   ],
   mesoamerican: [
-    () => 'Porters bent under loaded frames file past, and someone counts them in.',
+    { text: () => 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 15806): nothing is carried in under a siege
     () => 'The neighbours turn out together to sweep and mend their own street.',
     () => 'Festival banners hang above the doors, faded from one year and waiting for the next.',
     { text: () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.', needs: ['market'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #2): rows to each trade are a market's (a thorp of twelve printed it)
   ],
   south_asian: [
-    () => 'A moneylender sits at a low table with a queue of familiar faces waiting.',
+    { text: () => 'A moneylender sits at a low table with a queue of familiar faces waiting.', needs: ['tier: ≥ village'] }, // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): a lender with a queue, where the place is large enough for one (12 of 23 towns were a thorp or a hamlet)
+    { text: () => 'An old woman sits at a low table by her door, and the neighbours stop to settle what they owe her.', twinOf: 'A moneylender sits at a low table with a queue of familiar faces waiting.', needs: ['tier: ≤ hamlet'] }, // TAIL-HISTORY-3 (Y14): its twin in a thorp or a hamlet; a twin keeps the slot and spends no redraw (arrivalScene.js :: drawAdmitted) (VETOABLE wording)
     () => 'People draw water in an order nobody needs to explain.',
-    () => 'Food is being handed out to anyone who asks, and the line is patient.',
+    { text: () => 'Food is being handed out to anyone who asks, and the line is patient.', excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 09279 HIGH): no food offered where the food failed
     { text: () => 'Each lane of stalls has someone who speaks for it, and they are all speaking at once.', needs: ['market'] },
   ],
   steppe: [
-    { text: () => 'Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+    { text: () => 'Herders show their animals at the edge of the settlement, where herders and townsfolk meet.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no horse trade where no horse is kept (13 of 21 towns)
     { text: () => 'Felt tents stand beside the houses, and their owners seem at home in either.', crisis: ['any'] },
     { text: () => 'A caravan broker shouts terms to a line of laden animals and the people leading them.', crisis: ['any'] },
     { text: () => 'Guests are greeted with a cup before a word of business is spoken.', crisis: ['any'] },

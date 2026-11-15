@@ -169,7 +169,7 @@ const ROWS = [
     P("transactional", "Quiet and exact. Arrows lie in bundles of twelve on every surface.",
       "Sells by the dozen and the bow; a custom piece takes a month and a deposit."),
     P("welcoming", "Outdoors in their manner, sun-browned, with a hunter's easy talk.",
-      "Talks about the woods, the game and the best places to hunt; easy to fall into talk with."),
+      "Talks about the woods, the game and where the hunting has been best; easy to fall into talk with."),
   ]],
   ["the master carpenter", 363, [
     S("Built a roof with green timber to save the cost, and the beams have started to split",
@@ -189,13 +189,13 @@ const ROWS = [
   ["the potter", 359, [
     S("Sells glazed ware with lead in the glaze, cheaper to make and bad for anyone who eats from it often",
       "The families who use those pots every day would have reason to blame every ache on the potter"),
-    S("Has been digging clay from land that belongs to someone else and paying nothing for it",
+    S("Has dug clay from land that belongs to someone else, whenever there was clay to be had, and paid nothing for it",
       "The landowner would want years of clay paid for, and the pit would be closed"),
     S("Sold a set of plates as old work worth far more than they were, and the buyer has started to ask questions",
       "A forger's name follows a potter for life, and the buyer is someone with friends"),
   ], [
     P("welcoming", "Clay to the wrists and a calm, steady way of speaking that matches the turn of the wheel.",
-      "Talks while working; shows how a pot is thrown and lets visitors try."),
+      "Talks while working when there is clay to be had; shows how a pot is thrown and lets visitors try."),
     P("transactional", "Practical and unhurried. Shelves of pots behind them, every price chalked on the board.",
       "Sells what is on the shelves at the chalked price; orders take a firing to fill."),
     P("cautious", "Watches visitors near the shelves as if they might break something.",
@@ -219,13 +219,13 @@ const ROWS = [
   ["the brickmaker", 345, [
     S("Fires bricks short to save fuel, and the walls built with them crumble in a few hard winters",
       "Every wall that crumbles will be measured against the brickmaker's stamp"),
-    S("Has been taking children to tread the clay for a few coppers a day, and one of them was hurt badly",
+    S("Has taken children to tread the clay for a few coppers a day, when there was clay to tread, and one of them was hurt badly",
       "The child's family took the money to keep quiet, and the money has run out"),
     S("Owes so much to a lender that the yard and everything in it already belongs to someone else on paper",
       "The day the debt is called, the yard closes and every worker is out"),
   ], [
     P("transactional", "Red dust in every line of the face and hands. Talks in thousands of bricks and cartloads.",
-      "Sells by the thousand and the cart; quick to quote and slow to deliver."),
+      "Sells by the thousand and the cart when there is clay to be had; quick to quote and slow to deliver."),
     P("dismissive", "Too busy at the kilns to be pleasant. The smoke is always in their eyes.",
       "Wants to know how many bricks and when; anything else can wait."),
     P("welcoming", "Hearty and loud, with a builder's habit of describing everything by how it would stand.",
@@ -264,7 +264,7 @@ const ROWS = [
   ["the brewer", 333, [
     S("Thins the ale with water after it is sold by the barrel and charges the taverns for full strength",
       "Every tavern that bought those barrels would stop buying, and some would want their money back"),
-    S("Buys grain that was meant for bread in the lean months, at a price the bakers cannot match",
+    S("Buys up grain that was meant for bread in the lean months, at a price no household can match",
       "In a hard winter, people go hungry while the brewery's vats stay full, and someone will notice"),
     S("Keeps a still in the back that makes a spirit no one has been licensed to sell",
       "The still would be seized, and so would the brewery, with a fine to match"),
@@ -579,8 +579,8 @@ const ROWS = [
   ["the castellan", 257, [
     S("Has been selling stores from the citadel's armoury and writing them off as rusted and broken",
       "In a siege, the stores would come up short, and the books would show where the weapons went"),
-    S("Has let the walls go unrepaired and pocketed the money that was granted for the work",
-      "The first serious attack would find the weak places, and everyone would know who left them weak"),
+    S("Pocketed the money that was granted for the wall repairs, and buried the survey that said where they were needed",
+      "If the survey is found, everyone will know where the wall money went and who signed for it"),
     S("Ran from a fight years ago and let another officer take the blame, and was promoted for it",
       "The officer who took the blame has come back, and has not forgotten"),
   ], [
@@ -677,7 +677,7 @@ const ROWS = [
     P("cautious", "Black with soot to the elbows, eyes red from the smoke. Says little to people from outside the woods.",
       "Answers questions about the woods; asks who sent you."),
     P("transactional", "Practical and plain. Talks in sacks and loads.",
-      "Sells charcoal by the sack to anyone who can carry it away."),
+      "Sells charcoal by the sack, when there is timber to be had, to anyone who can carry it away."),
     P("welcoming", "Glad of company in the woods, with a pot always on the fire.",
       "Offers food and talk; knows every path and everyone who walks them."),
   ]],
@@ -855,7 +855,7 @@ const ROWS = [
       "The families of the dead were told it could not be foreseen; one of the foremen knows better"),
   ], [
     P("transactional", "Stone dust on everything, a hard handshake and a voice used to shouting over picks.",
-      "Sells stone by the block and the cart; wants half paid before cutting begins."),
+      "Sells stone by the block and the cart, from what the quarry still gives; wants half paid before cutting begins."),
     P("dismissive", "Busy and blunt. Visitors are a danger near the face.",
       "Keeps you at the gate and gives a price."),
     P("cautious", "Watches the quarry face and the workers more than the visitor.",
@@ -917,7 +917,7 @@ const ROWS = [
     P("dismissive", "Smells of the pits and keeps visitors at a distance.",
       "Names the price for a hide and wants you gone."),
     P("transactional", "Strong-armed, stained to the elbows and blunt.",
-      "Sells leather to anyone; cash only."),
+      "Sells leather to anyone when there are hides to be had; cash only."),
     P("cautious", "Watches who comes to the yard and why. Asks your business before you can ask theirs.",
       "Says nothing about where the hides come from."),
   ]],
@@ -1014,7 +1014,7 @@ const ROWS = [
   ["the mine captain", 160, [
     S("Has been sending miners into a gallery they know is unsafe, because the ore there is the richest",
       "When the gallery falls, the families of the dead will want the captain, and the miners will tell them why"),
-    S("Has been keeping back ore from the tally and selling it to a smelter elsewhere",
+    S("Has kept back from the tally what ore the workings still give, and sold it to a smelter elsewhere",
       "The mine's owners count the ore twice a year, and the counts have started not to match"),
     S("Covered up a cave-in that killed three men by sealing the gallery and reporting them as run off",
       "One of the men's brothers works in the mine, and has been asking to reopen the gallery"),
@@ -1612,17 +1612,17 @@ const ROWS = [
       "Asks what you are sending and where; writes it down."),
   ]],
   ["the dairy farmer", 43, [
-    S("Waters the milk before it goes to market and has done so for years",
+    S("Has watered the milk for years, whenever there was milk to sell",
       "The buyers would want years of short milk paid back, and would never buy again"),
-    S("Has been grazing the herd on a neighbour's land at night",
+    S("Has grazed the herd on a neighbour's land at night, whenever there was a herd to graze",
       "The neighbour has found the tracks and is asking who"),
     S("Sold butter from a sick cow and a child fell ill",
       "The child's family suspects the butter, and the farmer knows they are right"),
   ], [
     P("welcoming", "Red-cheeked and cheerful, smelling of the byre, with a jug of milk ready.",
-      "Offers a cup and talk of the herd and the weather."),
+      "Offers a cup and talk of the weather and the price of milk."),
     P("transactional", "Practical and busy. Sells by the jug and the pat.",
-      "Sells milk, butter and cheese at the posted price."),
+      "Sells milk, butter and cheese at the posted price, when the cows are giving."),
     P("cautious", "Watchful of strangers near the herd.",
       "Polite enough; keeps you away from the byre."),
   ]],
@@ -1650,7 +1650,7 @@ const ROWS = [
       "The people looking for them would come to the lodge first"),
   ], [
     P("welcoming", "Weathered and easy, with a bow over one shoulder and dogs at the heel.",
-      "Talks about the woods, the game and the best places to hunt."),
+      "Talks about the woods, the game and where the hunting has been best."),
     P("cautious", "Watchful of strangers in the woods. Studies your boots and your gear.",
       "Asks what you are hunting and where before saying anything."),
     P("transactional", "Practical and short. Sells game and hires out guides.",
@@ -2287,6 +2287,16 @@ export const TITLE_PRESENTATIONS = Object.freeze(Object.fromEntries(ROWS.map(([t
  * of the fact vocabulary (`crisis: <kinds>`), refused while any of those kinds is in force. The coaching inn's welcoming
  * line (coaches in and out; food, a bed, a fresh team, news of the road) is not dealt under a siege, which cuts every
  * road, or a famine, under rationing; its transactional line (departures; places on the coach) not under a siege.
+ * A LINE NEEDS WHAT IT OFFERS (TAIL-POWERS batch 1; the chair's ruling P2 of 2026-11-14, READ-ALL worklist POWERS): a meal,
+ * bread or a meal of fish offered as usual is not dealt under a famine (the innkeeper, the master baker, the boat-headman);
+ * a traveller's room and the gossip of the road, the boats, the best places to hunt, the next games, the riders that leave,
+ * grain or ore sold out of town not under a siege, which shuts road, gate and water; the next games not under a plague; the
+ * master of the hunt's game "sold in the market" needs a market (`market`). The brewer's grain secret names no bakers.
+ * A LINE CLAIMS THE TRADE, NOT PRESENT WORK ON AN INPUT THE RECORD MAY DENY (TAIL-POWERS-B-2; the chair's P9/P12, vetoable
+ * by the owner): where a house's input (clay, timber, hides, stone, ore, the herd, the hunting) is missing or worked out in
+ * some towns that hold it, its line takes the hedge ("when there is clay to be had"), text only, no draw moved; a gap in
+ * 90% or more of them is the record's (the vintner's grapes) and is named, not reworded. (P18) The castellan's secret says
+ * what he did and hid (the wall money, the buried survey), not what the walls look like.
  * @type {Readonly<{ secret: Readonly<Record<string, Readonly<{ needs?: readonly string[], excludes?: readonly string[], topic?: string | readonly string[] }>>>, presentation: Readonly<Record<string, Readonly<{ needs?: readonly string[], excludes?: readonly string[], topic?: string | readonly string[] }>>> }>}
  */
 /** The two governed topics a line of persons bought, sold or held needs admitted (slavery AND trafficking). */
@@ -2301,6 +2311,10 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Buys fighters who were taken against their will, and keeps them in chains between bouts': Object.freeze({ topic: PERSONS_HELD }),
     'Buys fighters who were taken against their will and keeps them locked up between bouts': Object.freeze({ topic: PERSONS_HELD }),
     'Has kept an apprentice on for years past the indenture by holding back the papers that would free them': Object.freeze({ topic: PERSONS_HELD }),
+    // TAIL-POWERS batch 1 (P2): a trade out of town is not dealt under a siege; the game "sold in the market" needs one
+    'Has been selling grain from the stores to merchants in another market and writing it down as spoiled': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Has kept back from the tally what ore the workings still give, and sold it to a smelter elsewhere': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Has been hunting on land that belongs to someone else and selling the game in the market': Object.freeze({ needs: Object.freeze(['market']) }),
   }),
   presentation: Object.freeze({
     'Cheerful in the cold and the stink of the market. Knows every regular by name and by order.': Object.freeze({ needs: Object.freeze(['navigable']) }),
@@ -2310,5 +2324,17 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Thick-necked and scarred, with the eye of someone who buys and sells people.': Object.freeze({ topic: PERSONS_HELD }),
     'Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
     'Efficient and loud. Calls out departures and prices in the same breath.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    // TAIL-POWERS batch 1 (P2): a meal, bread or fish offered as usual is not dealt under a famine; a room, the road, the
+    // boats, the hunting, the games and the riders not under a siege; the games not under a plague
+    'Apron, rolled sleeves and a ready greeting. They have already guessed which room you will want.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
+    'Pleasant in the way of someone who has seen every kind of trouble come through the door.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
+    'Warm in every sense: flour on the arms, the smell of bread, a cheerful greeting before dawn.': Object.freeze({ excludes: Object.freeze(['crisis: famine']) }),
+    'Up since the middle of the night and quick about everything. The queue moves fast.': Object.freeze({ excludes: Object.freeze(['crisis: famine']) }),
+    'Weathered and steady, with hands like rope and an eye always on the sky.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
+    "Outdoors in their manner, sun-browned, with a hunter's easy talk.": Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Weathered and easy, with a bow over one shoulder and dogs at the heel.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Loud and showy, proud of the school and its champions.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: plague_onset']) }),
+    'Precise and busy, with a scale for letters and a ledger of every rider.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Friendly and gossipy, with news of every road the riders take.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
   }),
 });

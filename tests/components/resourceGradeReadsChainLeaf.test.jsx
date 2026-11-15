@@ -97,13 +97,13 @@ describe('the grade cards read the chain leaf through the sentence\'s own readin
       economicState: { activeChains: chains, primaryExports: [] }, resourceAnalysis: { exploitation, gaps: [] } });
     const TIMBER = { rawResource: 'timber', exportValue: 'medium', intermediateGoods: ['lumber', 'planks'], processingInstitutions: ['Sawmill'] };
     const stages = (/** @type {any} */ t) => Object.fromEntries(Object.entries(exploitationGroupsShown(t)).map(([k, v]) => [k, v.map((x) => x.card.rawResource)]));
-    expect(stages(town([chain('running')], { unexploited: [TIMBER] }))).toEqual({ unexploited: [], partial: ['timber'], full: [] });
-    expect(stages(town([chain('impaired')], { unexploited: [TIMBER] })), 'an idle chain: unexploited as filed').toEqual({ unexploited: ['timber'], partial: [], full: [] });
-    expect(stages(town([], { fullyExploited: [TIMBER] })), 'the model silent: the filing stands').toEqual({ unexploited: [], partial: [], full: ['timber'] });
+    expect(stages(town([chain('running')], { unexploited: [TIMBER] }))).toEqual({ unexploited: [], partial: ['timber'], full: [], failed: [] });
+    expect(stages(town([chain('impaired')], { unexploited: [TIMBER] })), 'an idle chain: unexploited as filed').toEqual({ unexploited: ['timber'], partial: [], full: [], failed: [] });
+    expect(stages(town([], { fullyExploited: [TIMBER] })), 'the model silent: the filing stands').toEqual({ unexploited: [], partial: [], full: ['timber'], failed: [] });
     // RE-KEYED BY IDENTITY (P1-a, the chair's ruling after P1): modelled, idle, filed Partial, and no house of the leaf's
     // WORKED_BY_HOUSE list at the good: the record bears the leaf out, so the card reads Unexploited (was: stands).
     expect(stages(town([chain('running', false)], { partiallyExploited: [TIMBER] })), 'modelled, idle, filed Partial, no such house: Unexploited')
-      .toEqual({ unexploited: ['timber'], partial: [], full: [] });
+      .toEqual({ unexploited: ['timber'], partial: [], full: [], failed: [] });
     const { container, unmount } = render(<ResourcesTab settlement={town([chain('running')], { unexploited: [TIMBER] })} narrativeNote={null} />);
     expect(container.textContent).toMatch(/Partial/);
     expect(container.textContent).not.toMatch(/Unexploited/); // anchored: toMatch(/Partial/) on this render, the card's own badge

@@ -40,7 +40,7 @@ import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { dealGoals } from './people/goals.js';
 import { pickVariant } from '../kernel/proseHash.js';
-import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
+import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
 import { resolvePrimaryStress } from './stressPriority.js';
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
@@ -418,9 +418,9 @@ export const genArrivalDetail = (
   // canonical index-0 note, byte-identical to the old behaviour.
   // STRESS_NOTES (now variant pools, canonical-at-zero) lives in src/data/narrativeData.js.
 
-  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village, drawnReason = pick(reasonPool), foundedBy = admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState); return { // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one; R2-CODE-A-13: the two picks in their order
+  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village, drawnReason = pick(reasonPool), admittedReason = admittedRow(reasonPool, drawnReason, FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER), foundedBy = founderForOrigin(founders, admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState), admittedReason, foundingState); return { // FB (ruling N17): the founder resolves draw-free to one the Origin row agrees with, before FA moves the row // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one; R2-CODE-A-13: the two picks in their order
     age: null, // filled in by historyGenerator
-    reason: oneFounderRow(reasonPool, admittedRow(reasonPool, drawnReason, FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER), foundedBy, FOUNDING_REASON_ADMITS, foundingState), // R2-CODE-A-9: a refused row resolves onto no second founder; R2-CODE-A-13 (ruling (4)): a founder row stands only beside its own founder
+    reason: oneFounderRow(reasonPool, admittedReason, foundedBy, FOUNDING_REASON_ADMITS, foundingState), // R2-CODE-A-9: a refused row resolves onto no second founder; R2-CODE-A-13 (ruling (4)): a founder row stands only beside its own founder
     foundedBy,
     initialChallenge: pick(
       CHALLENGES_BY_ROUTE[challengeRoute] || CHALLENGES_BY_ROUTE.road,
@@ -528,7 +528,7 @@ const genPressureDetail = settlement => {
     // WIRING-W0 (R-W7 e): the migration direction the record declares; the mass_migration pressure
     // lines read it (narrativeText.js), never a score of their own.
     migrationDirection: migrationDirectionOfStress(stress),
-    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, powerCount: factions.length, hasBakery: hasInst('baker'), hasWorkshop: (institutions || []).some(i => i?.category === 'Crafts' && !/^access to\b/i.test(String(i?.name || ''))), hasCourt: defense.hasCourthouse, // R2-CODE-A-7 (record 422): a courthouse on the roster, by catalog id (the label-join freeze), for the line that names the courts // R2-CODE-A-6: a house of craft on the roster (an "Access to" row is not one: record 375) // R2-CODE-A-3: the powers the record holds (#48); the bakers the roster holds (the increment's ww-28) // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
+    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, powerCount: factions.length, hasBakery: hasInst('baker'), hasWorkshop: (institutions || []).some(i => i?.category === 'Crafts' && !/^access to\b/i.test(String(i?.name || ''))), hasCourt: defense.hasCourthouse, hasWarehouse: (institutions || []).some((i) => ['warehouse_district', 'merchant_warehouses'].includes(i?.catalogId)), hasCivicHall: (institutions || []).some((i) => ['town_hall', 'city_hall', 'courthouse', 'multiple_courthouses', 'multiple_court_buildings'].includes(i?.catalogId)), hasForce: factsOf(settlement).guardPresence === true, millExports: (economicState?.primaryExports || []).some((x) => /\bflour\b|\bmeal\b|\bmilled\b/i.test(String(x))), /* TAIL-NARRATIVE (READ-ALL 20366, 01333, 11487, 00708): the warehouse and the civic hall (by catalog id: the label-join freeze), a force to send (factsOf's guardPresence), a mill whose goods are sold */ // R2-CODE-A-7 (record 422): a courthouse on the roster, by catalog id (the label-join freeze), for the line that names the courts // R2-CODE-A-6: a house of craft on the roster (an "Access to" row is not one: record 375) // R2-CODE-A-3: the powers the record holds (#48); the bakers the roster holds (the increment's ww-28) // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
     // compound: the economic/military/criminal effectiveness triplet the
     // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on
     // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without

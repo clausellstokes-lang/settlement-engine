@@ -39,12 +39,12 @@ describe('the famine pool: a common store, a failed source, the powers counted',
 
   it('two powers: the two, over what food is left', () => {
     expect(textOf(PRESSURE_SENTENCES.famine({ ...base, powerCount: 2, foodRecord: { hasGranary: false, failedSource: 'game' } })[1]))
-      .toMatch(/^Since the hunt failed, .+ its two powers are fighting over what food is left\.$/); // a pattern (proseDrawnAnchors)
+      .toMatch(/^Since the hunt failed, .+ its two powers are each watching who holds what food is left\.$/); // a pattern (proseDrawnAnchors)
   });
 
   it('three powers, a failed grain harvest, a granary: the original line', () => {
     expect(textOf(PRESSURE_SENTENCES.famine({ ...base, powerCount: 3, foodRecord: { hasGranary: true, failedSource: 'grain' } })[1]))
-      .toMatch(/^Since the harvest failed, .+ at least three powers are fighting over the stores\.$/); // a pattern, not the literal sentence (proseDrawnAnchors)
+      .toMatch(/^Since the harvest failed, .+ its strongest powers are each watching who holds the stores\.$/); // TAIL-NARRATIVE (B17142): re-keyed by identity, the same row reworded; a pattern, not the literal sentence (proseDrawnAnchors)
   });
 });
 

@@ -40,7 +40,8 @@ const SIX = Object.freeze([
 ]);
 
 /** A minted lord: a power's own face under the lord's title, literals. @param {any} c */
-const isMintedLord = (c) => c?.institution?.kind === 'power' && c?.title === 'the lord';
+// RE-KEYED BY IDENTITY (TAIL-TITLES K-C): a woman lord's title and role read "the lady"; the face she holds is her `institution.title`
+const isMintedLord = (c) => c?.institution?.kind === 'power' && (c?.institution?.title ?? c?.title) === 'the lord';
 /** The card as the enrichment first meets it (its structural fields not yet written). @param {any} c */
 const bare = (c) => { const { structuralPosition, activeConstraint, settlementCondition, structuralRank, ...rest } = c; void structuralPosition; void activeConstraint; void settlementCondition; void structuralRank; return rest; };
 

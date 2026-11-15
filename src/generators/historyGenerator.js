@@ -1107,7 +1107,12 @@ function tensionByMemory(tmpl, timeline) {
   // 80: the page's Ancient boundary (HistoryTab.jsx :: recencyLabel, up to 80 years is "Last century"), the
   // same line generateEventNarrative draws for the hooks of living memory
   const words = !own ? byMemory.unanchored : Number(own.yearsAgo) > 80 ? byMemory.dated : null;
-  return words ? { ...tension, ...words } : tension;
+  if (!words) return tension;
+  // TAIL-HISTORY Y13: the memory words replace the TEMPLATE's own description only; a description the selection wrote
+  // for this town (the scarcity's lead and its top issue, the record's own evidence in the present) is kept
+  const { description, ...rest } = words;
+  const ownWords = HISTORICAL_EVENTS_DATA.find((e) => e.type === tension.type)?.description;
+  return { ...tension, ...rest, ...(description && tension.description === ownWords ? { description } : {}) };
 }
 
 // ─── COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): a current tension is not its past event, word for word ──

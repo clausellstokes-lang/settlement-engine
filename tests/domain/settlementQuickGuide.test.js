@@ -438,9 +438,9 @@ describe('composeSettlementQuickGuide', () => {
     expect(governmentSeatName({})).toBeNull();
     expect(cultureScopeLine({ ...norse, institutions: [{ name: 'Town hall' }] }))
       .toBe('Norse-inspired, built around the Town hall and the water, on assembly and what the season allows.');
-    // no seat building: the authored phrase stands as written (anchored on the line above)
+    // no seat building: no hall stands, so the phrase names none (TAIL-CRISIS-2 batch 2, READ-ALL 15015; re-keyed by identity)
     expect(cultureScopeLine({ ...norse, institutions: [{ name: 'Town council' }] }))
-      .toBe('Norse-inspired, built around the hall and the water, on assembly and what the season allows.');
+      .toBe('Norse-inspired, built by the water, on assembly and what the season allows.');
     // the identity sentence names the seat the same way
     expect(composeSettlementQuickGuide({
       name: 'Testholm', tier: 'town', population: 1200, culturalIdentity: { key: 'norse', label: 'Norse-inspired' },

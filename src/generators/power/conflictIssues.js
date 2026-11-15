@@ -129,7 +129,7 @@ export const BASE_ISSUES = Object.freeze(/** @type {Array<Omit<ConflictIssue, 'i
     'Someone wants the common measures tested by a person neither side has paid.',
   ] },
   { issue: 'Prices set on everyday goods', stakes: 'Livelihoods', flag: null, cast: [['economy']], hooks: [
-    'Bread went up twice this month, and a baker says he was told to raise it.',
+    'Bread went up twice this month, and one of the sellers says they were told to raise it.',
     'A sellers\' agreement on prices has been written down, and a copy of it would ruin whoever signed it.',
   ] },
   { issue: 'Who may take on apprentices', stakes: "The trades' future", flag: null, cast: [['economy']], hooks: [

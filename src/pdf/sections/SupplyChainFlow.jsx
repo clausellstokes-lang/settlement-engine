@@ -89,7 +89,11 @@ function ChainRow({ chain, instNames, primaryExports, town }) { const shown = ch
     const oid = exactGoodId(o);
     return {
       label: o,
-      isExport: isExportable && (
+      // TAIL-EXPORTS-PDF-2: with the town, the list is the tab's printed Exports and an output is on it by its own name
+      // (exportedAsPrinted, below). The first-word read badged "Milled lumber" off "Milled flour", and the good id is a
+      // family ("timber", "fuel", "clay", "leather"): it badged "Milled lumber" off "Shipbuilding timber" and "Peat fuel"
+      // off "Coal". Without the town, the record's list as before.
+      isExport: isExportable && (town ? exportedAsPrinted(o, exportsPrintedOf(town)) : (
         (oid != null && exportIds.has(oid)) ||
         (primaryExports || []).some((ex) => {
           // ex may be a bare string OR the {good/name/label} object shape —
@@ -98,7 +102,7 @@ function ChainRow({ chain, instNames, primaryExports, town }) { const shown = ch
           return e.includes(String(o).toLowerCase().split(' ')[0]) ||
             String(o).toLowerCase().includes(e.split(' ')[0]);
         })
-      ),
+      )),
     };
   });
 
@@ -169,6 +173,12 @@ function ChainRow({ chain, instNames, primaryExports, town }) { const shown = ch
           </>
         ) : null}
       </View>
+
+      {/* TAIL-EXPORTS-PDF-2 (rulings E3/E17): a chain that lives on what a crisis stops takes the tabs' one leaf's mark
+          (domain/display/crisisStoppedRow.js); the words are the leaf's. */}
+      {((mark) => (mark ? (
+        <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second, fontStyle: 'italic', marginTop: 2 }}>{mark}</Text>
+      ) : null))(town ? markOnPage(town, 'chain', chain) : null)}
 
       {/* R2-CODE-B-SIDE item 1: the generator's upstream note leaves the row, as it leaves the screen's card
           (SupplyChainsPanel.jsx :: chainFlowFacts): no read the row holds makes it true. */}
@@ -283,4 +293,34 @@ export default SupplyChainFlow;
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { chainStateOnPage } from '../lib/chainStateOnPage.js';
-import { chainOutputsShown } from '../../domain/display/tradeListDisplay.js';
+import { chainOutputsShown, tradeListsAsPrinted, tradeMarkOf } from '../../domain/display/tradeListDisplay.js';
+import { markOnPage } from '../lib/crisisMarksOnPage.js';
+
+/** The tab's printed Exports of a record, read once a record. @type {WeakMap<object, ReadonlyArray<string>>} */
+const PRINTED_EXPORTS = new WeakMap();
+
+/**
+ * TAIL-EXPORTS-PDF-2 (ruling E1): the goods the tab's Exports print (tradeListDisplay.js :: tradeListsAsPrinted), none
+ * where a siege stops trade.
+ * @param {object} town
+ * @returns {ReadonlyArray<string>}
+ */
+function exportsPrintedOf(town) {
+  let list = PRINTED_EXPORTS.get(town);
+  if (!list) {
+    const lists = tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (town));
+    list = lists.tradeStopped ? [] : lists.exports;
+    PRINTED_EXPORTS.set(town, list);
+  }
+  return list;
+}
+
+/**
+ * Is this output on the printed Exports, by its own name (the list's item without its trade mark)?
+ * @param {unknown} output @param {ReadonlyArray<unknown>} printed
+ * @returns {boolean}
+ */
+function exportedAsPrinted(output, printed) {
+  const name = String(output ?? '').trim().toLowerCase();
+  return !!name && (printed || []).some((ex) => tradeMarkOf(goodText(ex)).label.trim().toLowerCase() === name);
+}

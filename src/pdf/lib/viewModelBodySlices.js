@@ -26,6 +26,8 @@ import { institutionDisplayName } from '../../domain/display/institutionDisplayN
 import { resourceGapLines, exploitationGroupsShown, housesStillNeeded } from '../../domain/display/validationOnPage.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
 import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js';
+import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // TAIL-EXPORTS-PDF batch 1
+import { tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // TAIL-EXPORTS-PDF batch 1
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
@@ -35,6 +37,7 @@ export const exploitName = (c) =>
 // UPKEEP-14 (the bar's carried HIGH, the chair's ruling (j)): a chain prints under the name its record holds, through the
 // leaf every print site of a chain's name reads; the import sits beside its one reader.
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
+import { pageSaysEntrepot } from '../../domain/display/entrepotShown.js';
 
 export function economicsSlice(active) {
   const s = active || {};
@@ -81,7 +84,7 @@ export function economicsSlice(active) {
     localProduction:    ec.localProduction || [],
     tradeDependencies:  ec.tradeDependencies || [],
     necessityImports:   !!ec.necessityImports,
-    isEntrepot:         !!ec.isEntrepot,
+    isEntrepot:         pageSaysEntrepot(ec.activeChains), // TAIL-EXPORTS-PDF-3 (ruling E21): the tag where a chain on the page is an entrepôt, as the Economics tab's flows say it
     safetyHooks:        sp?.plotHooks || [],
     // pdf-6: the COMPLEMENT of the Viability filter — only the dependency/
     // resource-chain/opportunity/food issues belong on the Economics chapter, so
@@ -95,12 +98,23 @@ export function economicsSlice(active) {
       suggestedFixes: iss?.suggestedFixes || [],
     })),
     viabilityHooks:     v?.plotHooks || [],
-    foodBalance: {
-      ...foodCore(v),
-      agricultureModifier: v?.metrics?.foodBalance?.agricultureModifier ?? null,
-      stressModifier: v?.metrics?.foodBalance?.stressModifier ?? null,
-      summary: v?.foodSecurity?.summary || v?.metrics?.foodBalance?.summary || null,
-    },
+    // TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's food row (foodCarrier.js :: foodBlockShown) for every reader of the
+    // slice (the chapter's headline, the journal's lede), not the viability view's: "imports make up some of the gap"
+    // under a siege whose tab row brings nothing in.
+    // (the residual's share keeps the canon's 0 where no gap is left: parityContract.js SHARED_FIELDS, food.deficitPct)
+    foodBalance: (() => {
+      const shown = foodBlockShown(s, {
+        ...foodCore(v),
+        agricultureModifier: v?.metrics?.foodBalance?.agricultureModifier ?? null,
+        stressModifier: v?.metrics?.foodBalance?.stressModifier ?? null,
+        summary: v?.foodSecurity?.summary || v?.metrics?.foodBalance?.summary || null,
+      });
+      return shown ? { ...shown, deficitPct: shown.deficitPct ?? 0 } : shown;
+    })(),
+    // TAIL-EXPORTS-PDF batch 1 (ruling E1): the exports as the tab prints them, and whether a siege stops trade
+    // (tradeListDisplay.js :: tradeListsAsPrinted), for the headline that names what the place sells.
+    exportsShown:       tradeListsAsPrinted(s).exports,
+    tradeStopped:       tradeListsAsPrinted(s).tradeStopped,
     criticalImports:    ra?.imports?.critical || [],
     chains,
     customChains,
