@@ -226,7 +226,9 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
   it('A5 · a cross-entry total is atomic: incomeSources comes from R1 as one value', () => {
     const subjects = withIncome();
     // 2026-10-30, checked against the service re-map (ODQ §934.101): 61 at f39d5ae2^ and at f39d5ae2, unmoved.
-    expect(subjects.length, 'the rows whose income shares have two entries to re-cut').toBe(61);
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 61 -> 50, the measured value of this arm's own
+    // run at the golden's tree 8c11f73ea: the round's declared economy moves (the income shares re-cut from the town's own record) leave 11 rows one entry.
+    expect(subjects.length, 'the rows whose income shares have two entries to re-cut').toBe(50);
 
     const notWhole = [];
     const survived = [];

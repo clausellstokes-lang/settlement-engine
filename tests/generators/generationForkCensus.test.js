@@ -197,7 +197,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // taken in the same act as the golden re-record).
 // -> f4fc47a0 STYLE-2-MERGE record 47, the COHERENCE-AGREE merge (one fact, one answer: the control row's resource roll, economy and
 // defence read off its own record; taken in the same act as the golden re-record).
-const GOLDEN_CONTROL_HASH = 'f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662';
+// -> 7ae63229 the close of the tail round, 2026-11-15 (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's
+// chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json: the round's declared moves re-deal the control row,
+// a face for every seat of power and the cast drawn after it; the golden re-recorded 525 of 525 at dec4ec241, this row its control).
+const GOLDEN_CONTROL_HASH = '7ae632298ed95e73deedbced63bf64ae9662cf45f61b8d8bfa02e7b2fcc5ee6b';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -242,8 +245,14 @@ const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
 // draw is the label-keyed fork `food.cropFortune`, so the probe row mints it twice, both by fork: the second call draws
 // the same crop fortune BY DESIGN (no stream moves). Measured by A5: repeatedSeeds = cropFortune x2 [fork|fork] ;
 // power-structure x4. The power-structure quartet is unmoved.
+// 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record
+// docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): cropFortune x2 -> x3 [fork|fork|fork], measured by A5's own print at
+// the golden's tree 8c11f73ea (total=141 direct=4 viaFork=137): the cause by `git log -S cropFortune`, 7ac689418 "the food record's
+// magic share is the share of the pounds published" (lane/tail-record, landed at JOIN-11 point 8, 4e7c96d56): the food record is
+// re-derived once more, by the same label-keyed fork, so it draws the same crop fortune (no stream moves; the register's
+// economyReconcilePass|economicState row reads 'varies' with it). The power-structure quartet is unmoved.
 const STORES_SEED = `${CENSUS_ROW._seed}::generateEconomy::food.cropFortune`;
-const STORES_VIAS = ['fork', 'fork'];
+const STORES_VIAS = ['fork', 'fork', 'fork'];
 // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
 // registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
 // 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
@@ -532,7 +541,13 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // channel is the record's: `dmLayer :: pinsFrom` structuredClones `source[key]` out of the
     // record, and `rederive` is the only caller a DM edit reaches. So the reproduction is
     // asserted on a RECORD-built bag, through `rederive`, with a no-op root override.
-    const record = unpinnedContext.settlement;
+    // RE-KEYED 2026-11-15, THE CHAIR'S RULING FC1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's
+    // list; PM1's reading in pipelinePinnedMode): the record the reproduction claim is made on is the PRODUCT ENTRY's
+    // (`generateSettlementPipeline`), final-record passes included (keepOneDominant; TAIL-POWERS-B-2 batch 4's draw-free
+    // `withConflictRelations`, c1263e61c, merged at d700bda44), not the raw runner's `unpinnedContext.settlement`. The draw
+    // controls above keep their raw runner and their ctx-built bag.
+    const pinRowConfig = Object.fromEntries(Object.entries(PIN_ROW).filter(([key]) => key !== '_seed'));
+    const record = generateSettlementPipeline(pinRowConfig, null, { seed: PIN_ROW._seed, customContent: {} });
     const engine = { run: generateSettlementPipeline, getStepMeta };
     const declarations = { declarationsFor, isEditableCard };
     const npc0 = (record.npcs || [])[0] || {};
@@ -541,7 +556,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     };
     const { pins: recordPins } = pinsFrom(record, layer, declarations, engine);
     for (const key of CHOOSER_KEYS) expect(recordPins[key], `record pin ${key}`).toBeDefined();
-    const pinRowConfig = Object.fromEntries(Object.entries(PIN_ROW).filter(([key]) => key !== '_seed'));
     const rederived = rederive(record, pinRowConfig, layer, engine, declarations);
     expect(JSON.stringify(rederived.record), 'the record-built bag reproduces the record through rederive')
       .toBe(JSON.stringify(record));
@@ -594,7 +608,13 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // people-allegiance::npc_power_landed_gentry (its allegiance), people-ties::npc_power_landed_gentry (its tie),
     // people-goals::npc_power_landed_gentry (its goals). Total 139, direct 4, via fork 135, foreign 0. The control hash
     // (C1) moves with the generator master's re-record through the signed door at the join, not on this lane.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(139);
+    // 2026-11-15, THE CHAIR'S RULING FC2 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list): 139 -> 141,
+    // each new mint named by identity (the row's mints listed at fce41f2b7, 134, and at the tree, 141, and diffed: the five
+    // npc_power_landed_gentry mints above, and ONE label more): golden-master-v3::generateEconomy::food.cropFortune [fork] 1 -> 3:
+    // the stores' second call after prosperity (05ec9b601, lane/coherence-upkeep, landed at JOIN-1·9 33b12cbef; its census re-key
+    // aa5a30899) and the food record's magic share (7ac689418, lane/tail-record, landed at JOIN-11 point 8 4e7c96d56): the same
+    // label-keyed fork each time, drawing the same crop fortune (no stream moves). No other label moved.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(141);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
@@ -682,7 +702,11 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     failOnDifference(differences, emitTier1Literal(fresh.rows));
     // LANDING-8 (2026-11-06, ODQ §934.105): 7 -> 11. The crisis cast writes copy-on-write (lane D, 8befe5a0d), so the four
     // `stress` rows' FINAL comparand reads 'varies' (same 9 / transformed 54), measured by this arm's fresh execution.
-    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(11);
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat;
+    // record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 11 -> 13, measured by this arm's fresh execution at
+    // the golden's tree 8c11f73ea: generateEconomy|economicState and economyReconcilePass|economicState read 'varies' (same 52 /
+    // transformed 11), the round's declared economy move (the economy read off the town's own record); disagreeing holds at 13.
+    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(13);
     // 2026-10-01, the urban band (ODQ §934.86): 18 -> 16 (measured). The institution rebuild moved the producedOnRecord
     // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
     // LANDING-8 (2026-11-06, ODQ §934.105): 17 -> 13, the same cause (8befe5a0d): the four `stress` rows' two comparands

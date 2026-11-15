@@ -447,7 +447,25 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //            (39) +518
 //   The sum closes exactly at the final tip's worker bundle. The largest: SW-10 HOOKS +25,794 (the hook pools), SW-7 POWER-SIDE
 //   +4,823, SW-B5 FRAMES +2,298, URBAN-FIX +1,440; SW-6 CRISIS-SURFACES -5,697. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 2008268;
+// 2,008,268 -> 2,303,278 (2026-11-15, TAIL-CLOSE-WORKER-1, THE CLOSE OF THE TAIL ROUND; the W0-CLOSE idiom, the chair's ruling WB1
+// under the owner's delegation, ODQ §934.105 — the ceiling re-recorded ONCE at the close's tree at the measured figure, the bytes
+// attributed BY MERGE STAGE (not by every point), NO buy-back tonight (a later tidy may buy bytes back); VETOABLE BY THE OWNER):
+// A RISE OF 295,010 B. MEASURED by a fresh `npm run build` of each stage's tree in a scratch worktree, read by this file's own arm;
+// the base 7dc7757fa (the last re-record) reads 2,008,268 (the ceiling, exactly). By stage (the first-parent commit closing each
+// merge seat of lane/join-2026-11-14):
+//   STYLE-2-MERGE points 42-49 976db5b19 +70,863 (COHERENCE-QUARREL/-PRESUME/-POWERS/-AGREE, VISIBLE-BUGS, POOL-GUARD,
+//   W2-A-LEAVES, W2-B-DECLARE, the instrument lane) · JOIN-1 216eeb41f +135,871 (r2-code-a/-b, r3-code-c, r3-tabs, w2-write,
+//   w2-c-leaves, w2-fix-data, powers-follow-up, coherence-upkeep, agree-follow-up) · JOIN-2 7d12b40cb -11 · JOIN-3 b6a5f97ab 0 ·
+//   JOIN-4 e5b421802 +11,682 · JOIN-5 48fedbe98 +4,209 · JOIN-6 eb054d53f +17,402 (the tail wave's first points) · JOIN-7
+//   72c37436d +52,053 · JOIN-8 1b5db4a77 +20,957 · JOIN-9 ae50369d4 -16,679 · JOIN-10 dc4bae117 +30 · JOIN-11 ffdd541a0 -2,210 ·
+//   JOIN-12 f8042b61a +641 · the doors' close 73090ee9e +202 (the repeated secret's cure). The sum closes exactly: 2,008,268
+//   + 70,863 + 135,871 - 11 + 0 + 11,682 + 4,209 + 17,402 + 52,053 + 20,957 - 16,679 + 30 - 2,210 + 641 + 202 = 2,303,278, the
+//   close's worker bundle. The largest stages' candidates BY THE DIFF'S SOURCE SIZE, NOT BY A BUILD: JOIN-1 (institutionDescVariants,
+//   tradeListDisplay, dossierStateProse defense/general, historyData); STYLE-2-MERGE 42-49 (facts/registeredWords, pageCensusFindings,
+//   power/conflictIssues, generationCoherence, facts/factLayers); JOIN-7 (historyData, computeActiveChains, crisisStoppedRow,
+//   crisisDependence, defenseDisplay). The table: docs/chair/2026-11-15/close/TAIL-CLOSE-WORKER-1-HANDBACK.md. Recorded AT the
+//   measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2303278;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -773,7 +791,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-07, MERGE-R2, ODQ §934.105). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling WB1, 2026-11-15, the close of the tail round, ODQ §934.105). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

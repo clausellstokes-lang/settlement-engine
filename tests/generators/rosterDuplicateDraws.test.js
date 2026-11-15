@@ -55,7 +55,11 @@ describe('REVIEW-INTAKE-4 — no roster carries one secret or one goal twice', (
     // card), 826 -> 853 at 9bcda8ff6 (the chair's rulings (1) and (2): an occupation seats its occupier and a
     // fractured realm shows two powers, at every size: 27 one-card births, soak1k-37, -48, -108 and 24 more, now
     // carry two cards or more). No birth went the other way. 853 at the lane's tip.
-    expect(rosters).toBe(853);
+    // RE-MEASURED 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the
+    // chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 853 -> 889, measured by this file's
+    // own 1,000 births at the golden's tree 8c11f73ea: the round gives a face to every seat of power that had none, so 36 more
+    // births carry two cards or more.
+    expect(rosters).toBe(889);
   });
 
   it('no roster repeats a secret', () => {

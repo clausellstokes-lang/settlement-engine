@@ -13,7 +13,9 @@ Law: the chair's ruling PT1 of 2026-11-15 (vetoable by the owner).
 > - **the landing town's market line (row 26)** is cured in the engine (`worldPulse/candidateEvents.js`, `heraldDeeds.js`), but the frozen landing fixture still carries the old line until the doors' seat re-emits it. Rows 25 and 26 re-measure FALSE in the fixture as it stands at `f76fe38fd`, and stay close-false.
 > - **the practitioners' line (row 23)** is not cured tonight (the chair: its fix waits for the next round) and stays close-false.
 >
-> **Final counts: 75 true, 53 unprinted, 25 false. The walker reads 43 of 43, and the door's `--check` exits 0.**
+> **THE LAST PASS (the chair's last word: the doors' final seat at `752d74a15`, merged).** The re-emitted landing fixture no longer carries the market line (row 26). Its row went stale and left by `--shrink`: **cured**. The new line, "its traders have little to sell", uses no registered word, so it is no row. The war line (row 25) re-measures FALSE against Cnocby and stays close-false; the mill line stays true (`remeasure-landing-at-752d74a15.json`).
+>
+> **Final counts: 75 true, 53 unprinted, 24 false (152 rows). The walker reads 43 of 43, and the door's `--check` exits 0.**
 
 - At the joined line's tip (`c090179c1`) the walker was red in four of its 43 tests: 149 fresh source lines, 7 stale rows, 10 stale arm-2 rows, and 1 fresh strip. Later landings brought 4 more fresh lines (1 from TAIL-CLOSE-SRC-3, 3 from TAIL-CLOSE-DOORS-1's re-emitted landing fixture) and 2 more stale rows.
 - **I measured every one of the 153 lines on 1,080 generated towns** (the walker's 360 and the page census's 720), plus the landing page's own fixture town. For each line I checked where it prints and whether the town lacks the thing it names, by the vocabulary's own readers. Then I banked each line under one of three new reasons:
@@ -29,7 +31,7 @@ Law: the chair's ruling PT1 of 2026-11-15 (vetoable by the owner).
 
 | rows | as a reader would read it | why |
 |---|---|---|
-| **25, 26** (landing fixture) | **FALSE TO A READER, on the landing page** | the frozen landing town Cnocby (seed `lf-033`) has no market and is not at war by the vocabulary's readers, yet the page says "its market stalls stand half empty" and gives "Wartime pressure disrupts trade flows" as the reason on its trade chip. The fixture is re-emitted from the engine, so the cure is the engine's line, not the fixture |
+| **25, 26** (landing fixture) | **FALSE TO A READER, on the landing page** (26, the market, CURED by the doors' re-emit at `752d74a15`; 25, the war, stands) | the frozen landing town Cnocby (seed `lf-033`) has no market and is not at war by the vocabulary's readers, yet the page says "its market stalls stand half empty" and gives "Wartime pressure disrupts trade flows" as the reason on its trade chip. The fixture is re-emitted from the engine, so the cure is the engine's line, not the fixture |
 | **23** practitioner (`claimStanding.js`) | **false to a reader** | "Magical practitioners are consulted but not formally empowered" printed as a power's description in 20 towns (of 245) where no one works magic |
 | **22** smith (`narrativeText.js`) | **false to a reader — CURED at the FINAL PASS** (row now close-true) | "keeps the forges of {town} running day and night" in 1 town (presume-town-25) with no smithy and no smith among its people |
 | **5, 9** alehouse | **false to a reader (mildly)** | a brewery "supplies alehouses and households" in 8 villages with no alehouse |
@@ -153,6 +155,7 @@ The close found three more reader gaps that the next round should rule on:
 - **At the join `b855354d2`** (JOIN-12 points 1–2: TAIL-CLOSE-SWEEP-B, TAIL-CLOSE-SRC-5) merged in: no fresh or stale row; door `--check` exit 0; **the walker 43 of 43**.
 - **At the join `e172d6d62`** (JOIN-12 point 3: TAIL-CLOSE-SWEEP-C, no `src` change) merged in: door `--check` exit 0; **the walker 43 of 43**.
 - **FINAL PASS at `f76fe38fd`** merged in: the door read no fresh or stale row. I re-measured the 26 false rows (`remeasure-false-at-f76fe38fd.json`, `--landing lf-033`): the forges line is now TRUE, and its reason moved close-false → close-true in its own commit. The other 25 stay false. Door `--check` exit 0; **the walker 43 of 43**.
+- **The last pass, at the doors' `752d74a15`** (the re-emitted landing fixture): 1 stale row (the market line, cured) removed by `--shrink`; no fresh row; the landing rows re-measured (war false, mill true). Door `--check` exit 0; **the walker 43 of 43**.
 - **After my branch landed (JOIN-11 point 2) and the join moved to `061db1367`** (TAIL-CLOSE-SRC-3 landed): a fast-forward. The door's `--check` read 1 fresh and 1 stale.
   - **Stale:** `priorityHelpers.js` `house: criminal faction`, a line SRC-3 reworded. Removed by `--shrink` in its own commit.
   - **Fresh:** `src/domain/facts/magic.js` `house: academy`, the literal `'academy of magic'`. It is a house-name entry of `ARCANE_GUILD_HOUSES`, which SRC-3 moved verbatim from `economy/economicState.js` (`e28552112`), so in `magic.js` it is the round's (B).
