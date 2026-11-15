@@ -486,7 +486,9 @@
     {
       "id": "mil_crim_suppression.desc#4",
       "text": "{A} wants {B} in a cell and has said so before the council. {B} has answered by paying two of {A}'s informants.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -571,7 +573,9 @@
     {
       "id": "mil_crim_suppression.tension#6",
       "text": "{B} has hired an advocate to sue {A} over the last raid. The case comes before the council this season.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -711,7 +715,8 @@
       "id": "econ_mil_contract.tension#6",
       "text": "The council wants {B}'s company under the watch's command. {A} loses the contract's whole value if it agrees.",
       "needs": [
-        "watch"
+        "watch",
+        "ruling body"
       ],
       "excludes": [
         "ruler: lord",
@@ -1214,7 +1219,8 @@
       "id": "gov_econ_dependence.desc#6",
       "text": "{B} lends and {A} spends. The council's decisions are made in {A}'s chamber and approved in {B}'s counting-house.",
       "needs": [
-        "institution: bank"
+        "institution: bank",
+        "ruling body"
       ],
       "excludes": [
         "ruler: lord",
@@ -1250,7 +1256,9 @@
     {
       "id": "gov_econ_dependence.tension#2",
       "text": "One camp on the council wants the debt repudiated outright. {A} has stopped disagreeing in public.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -1261,7 +1269,9 @@
     {
       "id": "gov_econ_dependence.tension#3",
       "text": "{B} has asked for a seat on the council as a condition of the next loan. {A} has three weeks to answer.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -1272,7 +1282,9 @@
     {
       "id": "gov_econ_dependence.tension#4",
       "text": "{A} has proposed a new tax to clear the debt. {B}'s friends on the council will vote against it.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -1359,7 +1371,8 @@
       "text": "{A} wants the watch under civil command; {B} wants the council out of the barracks. They meet monthly and settle nothing.",
       "needs": [
         "watch",
-        "garrison"
+        "garrison",
+        "ruling body"
       ],
       "excludes": [
         "ruler: lord",
@@ -1421,7 +1434,9 @@
     {
       "id": "gov_mil_friction.tension#4",
       "text": "{B} arrested a councillor's son without {A}'s warrant. {A} has demanded his release by tomorrow.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -1432,7 +1447,9 @@
     {
       "id": "gov_mil_friction.tension#5",
       "text": "{A} has asked the capital to replace {B}. {B} has asked the capital to dissolve {A}'s council.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -1581,7 +1598,9 @@
     {
       "id": "peer_rivalry.tension#6",
       "text": "{A} and {B} will both present proposals at the next council session. Only one will be accepted.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -1904,7 +1923,10 @@
     {
       "id": "wary_alliance.desc#3",
       "text": "{A} and {B} share a council bloc and a list of enemies. They do not share their plans.",
-      "needs": [],
+      "needs": [
+        "shared power",
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -2059,7 +2081,9 @@
     {
       "id": "genuine_respect.desc#5",
       "text": "{B} once told the council that {A} was right and {B} was wrong. {A} has not forgotten it.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -2134,7 +2158,9 @@
     {
       "id": "genuine_respect.tension#6",
       "text": "The council has asked {A} and {B} to audit each other's accounts. Both agreed, and neither is comfortable.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"
@@ -2256,7 +2282,7 @@
     },
     {
       "id": "old_debt.tension#4",
-      "text": "{A} has started repaying the debt in coin. {B} wants it repaid in favours.",
+      "text": "{A} has offered to clear what is left of the debt in one payment. {B} would rather be repaid in favours.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2537,7 +2563,9 @@
     {
       "id": "bitter_history.tension#5",
       "text": "{A} and {B} have been placed on the same council committee. The first meeting is next week.",
-      "needs": [],
+      "needs": [
+        "ruling body"
+      ],
       "excludes": [
         "ruler: lord",
         "ruler: occupier"

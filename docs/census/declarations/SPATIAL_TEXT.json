@@ -838,6 +838,21 @@
           ]
         },
         {
+          "lineId": "LAYOUT_BY_TIER.metropolis.desert.noCitadel",
+          "text": "Great desert metropolis of white stone: the souk by the wells, caravansaries ringing the walls",
+          "needs": [
+            "terrain: desert",
+            "walls",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
           "lineId": "LAYOUT_BY_TIER.metropolis.mountain",
           "text": "Mountain capital in a high valley: tiered city climbing from the river floor to the fortress crown",
           "needs": [
@@ -956,10 +971,37 @@
           ]
         },
         {
+          "lineId": "LAYOUT_BY_TIER.city.desert.noCitadel",
+          "text": "Walled desert city of pale stone, caravanserai outside the east gate",
+          "needs": [
+            "terrain: desert",
+            "walls",
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
           "lineId": "LAYOUT_BY_TIER.city.mountain",
           "text": "Mountain city of terraced districts, the citadel at the summit, lower town in the valley",
           "needs": [
             "terrain: mountain"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.city.mountain.noCitadel",
+          "text": "Mountain city of terraced districts, lower town in the valley",
+          "needs": [
+            "terrain: mountain",
+            "population: > middling"
           ],
           "excludes": [],
           "crisis": null,
@@ -1008,6 +1050,19 @@
         {
           "lineId": "openTownLayouts.coastal",
           "text": "Port town climbing from the harbour, warehouses and chandlers at the waterfront",
+          "needs": [
+            "terrain: coastal",
+            "coast",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "openTownLayouts.coastal.neither",
+          "text": "Port town climbing from the harbour",
           "needs": [
             "terrain: coastal",
             "coast",
@@ -1129,6 +1184,19 @@
           "stop": []
         },
         {
+          "lineId": "townLayouts.coastal.neither",
+          "text": "Walled port town climbing from the harbour",
+          "needs": [
+            "terrain: coastal",
+            "coast",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
           "lineId": "townLayouts.riverside",
           "text": "Walled town straddling the river, a fortified bridge at its commercial heart",
           "needs": [
@@ -1179,6 +1247,18 @@
           "stop": [
             "keep (ruler: lord not guaranteed)"
           ]
+        },
+        {
+          "lineId": "townLayouts.hills.noCitadel",
+          "text": "Hill town of stone houses climbing above the market quarter",
+          "needs": [
+            "terrain: hills",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
         },
         {
           "lineId": "townLayouts.desert",
@@ -1339,6 +1419,18 @@
           "stop": []
         },
         {
+          "lineId": "villageLayouts.hills.walled.palisade",
+          "text": "Walled village on a south-facing slope, paths converging at the stone cross",
+          "needs": [
+            "terrain: hills",
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
           "lineId": "villageLayouts.hills",
           "text": "Stone-built village on a south-facing slope, paths converging at the stone cross",
           "needs": [
@@ -1390,6 +1482,20 @@
           "stop": []
         },
         {
+          "lineId": "villageLayouts.mountain.open.sacred",
+          "text": "Close-built stone houses below the ${sacred}",
+          "needs": [
+            "terrain: mountain",
+            "institution: temple"
+          ],
+          "excludes": [
+            "gate"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
           "lineId": "villageLayouts.mountain.shrine",
           "text": "Close-built stone houses below a wayside shrine, a single defended gate",
           "needs": [
@@ -1403,6 +1509,20 @@
           "stop": []
         },
         {
+          "lineId": "villageLayouts.mountain.open.wayside",
+          "text": "Close-built stone houses below a wayside shrine",
+          "needs": [
+            "terrain: mountain",
+            "institution: temple"
+          ],
+          "excludes": [
+            "gate"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
           "lineId": "villageLayouts.mountain",
           "text": "Close-built stone houses below the ridge, a single defended gate",
           "needs": [
@@ -1410,6 +1530,19 @@
             "gate"
           ],
           "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.mountain.open",
+          "text": "Close-built stone houses below the ridge",
+          "needs": [
+            "terrain: mountain"
+          ],
+          "excludes": [
+            "gate"
+          ],
           "crisis": null,
           "colour": false,
           "stop": []

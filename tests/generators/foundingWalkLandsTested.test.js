@@ -101,7 +101,7 @@ describe('the Origin walk lands only on a row whose own test holds', () => {
       ['rr3x-town-mass_migration-crossroads-0', /rich farmland granted/], // R2-CODE-A-13 (ruling (4)): re-keyed by identity, the farmland row beside its own founder (a noble granted lands); the metropolis's founder is an imperial decree
       ['rr3x-metropolis-succession_void-river-2', /ferry crossing that became the first bridge/],
       ['rr3x-metropolis-religious_conversion-isolated-0', /^grew from a logging camp$/],
-      ['rr3x-metropolis-plague_onset-crossroads-0', /herders gathered/],
+      ['r2r-thorp-37', /herders gathered/], // TAIL-NARRATIVE FA (ruling (N3)): re-keyed by identity, the herders row beside a founder who can be herders (a pair of siblings); the metropolis's founder (the slow accretion of three settlements) cannot
       ['rr3x-metropolis-religious_conversion-road-0', /grain storage depot/],
     ], ([seed, kept]) => {
       const s = born(/** @type {string} */ (seed));

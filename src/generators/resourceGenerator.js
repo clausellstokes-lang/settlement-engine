@@ -509,6 +509,16 @@ const supplyOfInput = (rawResource, institutions, evidence = {}) => {
   return 'missing';
 };
 
+// Does another of this house's chains feed it? Worked here (fully or partly exploited), or its input held locally or
+// bought in. M-S, read by evaluateInstitutionChain's lacks-access row.
+const reachedByAnotherInput = (chain, institution, institutions, exploitation, evidence) => (
+  Object.values(RESOURCE_CHAINS || {}).some((other) => other !== chain
+    && other.processingInstitutions?.includes(institution.name)
+    && (exploitation.fullyExploited?.some((c) => c.rawResource === other.rawResource)
+      || exploitation.partiallyExploited?.some((c) => c.rawResource === other.rawResource)
+      || supplyOfInput(other.rawResource, institutions, evidence) !== 'missing'))
+);
+
 // ─── evaluateInstitutionChain ─────────────────────────────────────────────────
 // Identify gaps: missing processing links and institutions lacking their inputs.
 
@@ -552,6 +562,12 @@ const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => 
       if (alreadyInGaps) return;
       const kind = supplyOfInput(chain.rawResource, institutions, evidence);
       if (kind === 'local') return; // the place holds the input: an inactive chain is not a gap
+      // TAIL-DEFECON-R M-S (the chair's ruling of 2026-11-15, vetoable by the owner): A HOUSE IS SHORT ONLY IF NONE OF ITS
+      // INPUTS REACHES IT. The Smelter works three chains (iron ore, copper ore, gold/silver ore); judged chain by chain,
+      // every smelter "lacked copper" (238 of 238 census towns) while it smelted iron. An input reaches the house where its
+      // chain is worked here or the record holds it locally or by import (supplyOfInput). Only the `missing` row goes: a
+      // house that runs on imported ore still says so ("Smelter runs on imported iron ore" is the record's import list).
+      if (kind === 'missing' && reachedByAnotherInput(chain, institution, institutions, exploitation, evidence)) return;
       const name = institutionDisplayName(institution.name);
       gaps.push({
         chain:       chain.rawResource,

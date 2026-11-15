@@ -13,7 +13,6 @@
 
 import { buildThreatAssessment, disasterReadinessScore, healerSubject } from './threatAssessment.js';
 import { HELD_STORES_WORDS, defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
-import { numberWord } from './numberWords.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
@@ -156,6 +155,10 @@ export function criminalOpNote(name) {
     return 'Professional killers for hire. That there is work for them says how politics is done here.';
   if (n.includes('fence'))
     return 'Buys stolen goods and sells them on as honest stock; without the fence, theft would not pay.';
+  // TAIL-DEFECON-D (READ-ALL #B02441, 132 towns): the safety profile lists a Red light district as an operation; the house
+  // is the town's pleasure quarter (Entertainment), not a criminal hold, and the note says what the house is.
+  if (n.includes('red light'))
+    return 'A quarter given over to pleasure: a trade that runs at the edge of the law.';
   return 'A criminal operation with a hold on part of the place or its trade.';
 }
 
@@ -225,7 +228,7 @@ export function deriveCriminalStructure(settlement) {
   // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
   const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
     : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
-  return key ? ringNoteUnderStreetFighting(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r) : null;
+  return key ? ringNoteUnderStreetFighting(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r) : null; // TAIL-DEFECON-D: no ring the record names
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
@@ -416,7 +419,7 @@ export function deriveSupportingCapabilities(settlement) {
         // W2-C-LEAVES-12, the chair's ruling (H): NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET ("Major monasteries (5-10)."):
         // the healer is named by its display label, its count band struck (`healerLabel`)
         : facts.hasHealer ? `${healerLabel(facts.healerName)}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
-          : clergyHere(r) ? 'Clerical care. Basic wound and disease management.' : 'No healer is kept here; the sick are tended by their own families.',
+          : clergyHere(r) ? 'Clerical care. Basic wound and disease management.' : sickTendedByOne(r) ? 'No healer\'s house stands here; the sick are tended by one of the place\'s own.' : 'No healer is kept here; the sick are tended by their own families.', // TAIL-DEFECON-D (#B13779)
     },
     // ⛔ THE LOGISTICS & SUPPLY ROW IS GONE FROM THE DEFENSE SURFACES (the owner's word,
     // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
@@ -588,20 +591,17 @@ export const FOOD_STORES_DOOR = Object.freeze({
 
 const TIER_NOUNS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 
-/** A length of time in plain words, never a decimal; the words contain the figure they stand for (UPKEEP-8, the chair's
- * ruling of 2026-11-13 on #34 #43 #75 #86: three days is "a few days", never "a few weeks"). Under seven weeks it is said in
- * days or weeks.
- * @param {number} months @returns {string} */
-function monthsInWords(months) {
-  const days = Math.round((months * 365) / 12);
-  const weeks = Math.round((months * 52) / 12);
-  if (days <= 2) return 'a day or two';
-  if (days <= 10) return 'a few days';
-  if (days <= 17) return 'a week or two';
-  if (days <= 31) return 'a few weeks';
-  if (weeks <= 6) return 'about a month';
+// ⛔ TAIL-DEFECON-D (the chair's D2, ONE HOME FOR ONE FACT; READ-ALL #09264 #09257, 70 towns): `monthsInWords` LIVED HERE and
+// said the stores' span in words of its own (1.5 months "about two months") beside the Economy tab's stores row, which says
+// the same months through `tonightSheet.js :: storesSpanWords` ("about a month and a half"): one fact, two spans. The food
+// endurance line now reads that one writer (imported at the end of the file), for the full-ration span and the half-ration one.
+// The half-ration span is the stores' months twice over (UPKEEP-8), said by the same writer.
+// From a year up the stores row's writer says the months as a figure; the line keeps its year words there ("about a year",
+// "more than a year", "more than two years"), which every such figure bears.
+/** @param {number} months @returns {string} */
+function spanInWords(months) {
   const whole = Math.round(months);
-  if (whole < 12) return `about ${numberWord(whole)} months`;
+  if (whole < 12) return storesSpanWords(months);
   if (whole === 12) return 'about a year';
   return whole < 24 ? 'more than a year' : 'more than two years';
 }
@@ -648,14 +648,14 @@ export function foodEnduranceLine(settlement) {
   } else {
     const half = end.halfRationMonths === null
       ? `; on half rations the harvest alone ${would ? 'would be' : 'is'} enough`
-      : `, ${monthsInWords(2 * end.storedMonths)} on half`;
+      : `, ${spanInWords(2 * end.storedMonths)} on half`; // TAIL-DEFECON-D (D2): the stores row's one span writer
     const them = end.hasGranary ? 'it' : 'them';
     const stretched = end.keptShare > 0 && end.halfRationMonths !== null
       ? `, and what is still harvested ${would ? 'would stretch' : 'stretches'} ${them} further` : '';
     before = `${lead}; `;
     door = end.hasGranary ? 'the granary' : 'household stores';
     const carries = end.storesHeld || would ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
-    after = ` ${carries} the ${noun} for ${monthsInWords(end.storedMonths)} at full rations${half}${stretched}${held}.`;
+    after = ` ${carries} the ${noun} for ${spanInWords(end.storedMonths)} at full rations${half}${stretched}${held}.`;
   }
   return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
 }
@@ -706,7 +706,7 @@ function withRingVantage(row, settlement) {
   const drawn = ORGANIZED_RING_NOTES[hashKey(`${seed}::defenseDisplay:organizedRing`) % ORGANIZED_RING_NOTES.length];
   const [kept] = filterDeclared([drawn], { facts: () => factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (/** @type {unknown} */ (settlement))),
     poolId: 'defenseDisplay:ORGANIZED_RING_NOTES', surface: 'defense', drawKind: 'H' });
-  const note = kept === undefined ? row.note : lineText(kept);
+  const note = kept === undefined || (drawn === ORGANIZED_RING_NOTES[1] && streetsNotQuiet(settlement)) ? row.note : lineText(kept); // TAIL-DEFECON-D (#B11428)
   return note === row.note ? row : Object.freeze({ ...row, note });
 }
 
@@ -889,4 +889,63 @@ import { institutionDisplayName } from './institutionDisplayName.js';
  */
 function healerLabel(name) {
   return String(institutionDisplayName(name) || name || '').replace(/\s*\(\d+\s*[-\u2013]\s*\d+\)/g, '').replace(/\s+/g, ' ').trim();
+}
+
+// ─── TAIL-DEFECON-D (D2): THE STORES' SPAN HAS ONE WRITER (at the end of the file, so no line above moves) ───
+import { storesSpanWords } from '../summary/tonightSheet.js';
+
+// ─── TAIL-DEFECON-D: THE ONE-RING NOTE NEEDS A RING THE RECORD NAMES (at the end of the file) ───
+/**
+ * The safety label's own word for a place whose streets are not quiet (`safetyProfile.js`: "<strain> — <condition>"). The
+ * second vantage of the ring's note says the ring "keeps the streets quiet": beside one of these it is false (READ-ALL
+ * #B11428, 48 towns: "Dangerous — Plague Unrest", "Desperate — Active Siege", "Unsafe"), and the table's own note prints.
+ */
+const UNQUIET_SAFETY = Object.freeze(['Dangerous', 'Desperate', 'Unsafe', 'Critical', 'Volatile']);
+/** @param {DefenseDisplaySettlement} settlement @returns {boolean} */
+function streetsNotQuiet(settlement) {
+  const label = /** @type {{ safetyLabel?: unknown } | undefined} */ (settlement?.economicState?.safetyProfile)?.safetyLabel;
+  return typeof label === 'string' && UNQUIET_SAFETY.includes(label.split(/\s\u2014\s/)[0].trim());
+}
+
+/**
+ * THE ORGANISED STRUCTURE WITH NO RING ON THE RECORD (TAIL-DEFECON-D, 2026-11-15; READ-ALL #B00162 #B11531 #18046: "One
+ * criminal ring decides what crime is allowed here" where no criminal power sits on the roster and no thieves' guild
+ * stands). The name ladder makes the structure ORGANIZED from a "Front businesses" or an "Underground city" house alone;
+ * every vantage of the note then names ONE RING that the record does not hold. Where no criminal seat (`crimeSignalOf`'s
+ * factions) and no thieves' guild house stand, the note says what those houses show and no more: the key, the label and
+ * the colours stand (every reader of `key` unmoved); no roll is added.
+ */
+const NO_SEAT_RING_NOTE = Object.freeze({
+  front: 'Crime here is run as a business: its money passes through shops that look honest, and whoever runs it keeps out of sight.',
+  under: 'Crime here runs through a second economy underground, and whoever runs it keeps out of sight.',
+});
+/**
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function ringWithoutSeat(row, settlement) {
+  if (row.key !== 'organized') return row;
+  const houses = (settlement?.institutions || []).map((i) => String(i?.name ?? ''));
+  if (houses.some((n) => THIEVES_GUILD_HOUSE.test(n))) return row;
+  if (crimeSignalOf({ seats: settlement?.powerStructure?.factions, estate: [] }).factions.length) return row;
+  const front = houses.some((n) => /front business/i.test(n));
+  if (!front && !houses.some((n) => /underground city/i.test(n))) return row;
+  return Object.freeze({ ...row, note: front ? NO_SEAT_RING_NOTE.front : NO_SEAT_RING_NOTE.under });
+}
+
+// ─── TAIL-DEFECON-D: THE SICK ARE NOT TENDED "BY THEIR OWN FAMILIES" BESIDE ONE WHO TENDS THEM (at the end of the file) ───
+/** A person's role that is the tending of the sick (a plague's crisis cast: "Tends the sick"; a healer, a physician …). */
+const TENDS_THE_SICK = /\b(?:tends the sick|healer|physician|midwife|herbalist|apothecary|surgeon)\b/i;
+/**
+ * WHETHER ONE OF THE PLACE'S OWN TENDS THE SICK (TAIL-DEFECON-D, 2026-11-15; READ-ALL #B13779: "No healer is kept here; the
+ * sick are tended by their own families." where the People tab names a person who "Tends the sick": 7 of the census's 720,
+ * every one a plague's crisis cast in a thorp or a hamlet). The roster's people are read by their role, as the People tab
+ * prints it; where one tends the sick, the note says so and no more (no house is named: none stands).
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {boolean}
+ */
+function sickTendedByOne(settlement) {
+  const people = /** @type {{ npcs?: unknown }} */ (/** @type {unknown} */ (settlement))?.npcs;
+  return (Array.isArray(people) ? people : []).some((p) => TENDS_THE_SICK.test(String(/** @type {{ role?: unknown } | null} */ (p)?.role ?? '')));
 }

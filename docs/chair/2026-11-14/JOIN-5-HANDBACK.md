@@ -23,6 +23,10 @@ The changes (copied from the brief):
 
 THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 - **16:16 UTC:** the lanes are stopping; the next wave is cut from the joined line. After the brief's order, THE SECOND POINTS at each seat's FINAL tip: "LAND: lane/w2-fix-data-2026-11-13 at 78dd629bd". Final as merged: w2-c-leaves 5f95bf473; the exports' three (b6f3266f8, a6dc3d16d, 34d1880ae), join-surfaces f9d40e3de, join-nolane-2 1b78763ae. Still to come by 16:50: the corpus, its side branch, r2-code-a, r2-code-b. AFTER THE LAST POINT: the build, the grid and the corpus door's check once more, and ONE message with the landed tip.
+- **16:27 UTC:** "LAND: lane/r2-code-b-2026-11-13 at d7e9a40e7" (M12, M11, M4; M4 a declared generator move in 56 towns: landed as it is) and "LAND: lane/w2-write-side-13-2026-11-14 at a2d7d78f3" (then (g) again).
+- **16:29 UTC:** "LAND: lane/w2-write-2026-11-13 at 1ff581fd6" (then (g) after it and the side branch).
+- **16:33 UTC:** "LAND: lane/r2-code-a-2026-11-13 at 9ac157cc9", the last; every lane at its final tip; JOIN-3 told to push nothing more here.
+- **23:02 UTC:** CONTINUE after the usage window (ran out ~16:36, after P2); the three points left, then (g), the build, the grid, ONE message.
 
 ## 2. The landings
 
@@ -42,6 +46,9 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 11 | join-nolane-2-2026-11-14 | 1b78763ae (16:28; final) | — (base 9618e0319) | 6d4b9cfa1 | none | — |
 | P1 | w2-fix-data-2026-11-13 | 78dd629bd (16:31; equal to the lane's tip) | e6e1893f4 (merge 2) | 3b873a03a | none | — |
 | P2 | r2-code-b-2026-11-13 | d7e9a40e7 (16:36; equal to the lane's tip) | 2d418c67f (merge 6) | e6233009b | none | — |
+| P3 | w2-write-2026-11-13 | 1ff581fd6 (23:01; equal to the lane's tip) | 9b08e5b69 (merge 3) | 460c108ad | none | clean-both: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js  |
+| P4 | w2-write-side-13-2026-11-14 | a2d7d78f3 (23:05; equal to the lane's tip) | f2bf55f1e (merge 4) | 0d5ab1539 | none | clean-both: docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js docs/content/RECEIPT_POOLS_DOSSIER_STATE.md tests/domain/corpusCureGuards.test.js  |
+| P5 | r2-code-a-2026-11-13 | 9ac157cc9 (23:08; equal to the lane's tip) | e5064e855 (merge 1) | cf3a0352b | none | — |
 
 ## 3. Every code resolution
 
@@ -73,7 +80,7 @@ Pins (joined side kept inside the hunk): `tests/lint/proseWiringCensus.walker.te
 Merged clean though both sides moved them (for the close to re-derive or measure by its door): `tests/lint/presumedThings.register.json` (3, 6); `tests/lint/presumedThings.widened.register.json` (5, 6); `tests/generators/generationForkCensus.test.js` (4, the mint bound A1); `src/data/dossierStateProse/defense.generated.js` (6, generated); `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (6); the pins of merge 6's four tests (§3). `docs/content/prose-shift-register.json` moved by w2-write alone (6): taken from the lane. `tests/lint/.tuning-register.json` moved by upkeep-monotone alone (P2): taken from the lane. `src/domain/summary/tonightSheet.js` (P1, clean-both with item 4). The goldens the rebuild's declared moves shift (P2): `tests/property/generatorGoldenMaster.test.js`, `tests/property/espionageDormancyFence.test.js` (red and named by that lane), with its re-keyed pins (its `UPKEEP-MONOTONE-BUILD.md` step 3); the edge bundles are stale against every src change since JOIN-3's rebuild (128ab68c7): rebuilt once at the close.
 
 
-**[J5] additions:**
+**[J5] additions** (also: P3 and P4 merged clean though both sides moved `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and `tests/domain/corpusCureGuards.test.js`; P2's M4 a declared generator move in 56 towns, its goldens and pins for the close; the edge bundles stale against every src change since their last rebuild; the lighting census for every new test title of these merges, last):
 
 | file | lanes whose side was not taken (JOIN-5 merge #) |
 |---|---|
@@ -82,16 +89,22 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `tests/lint/.lighting-census-baseline.json` | w2-fix-data (2): its re-take for one new test title (6f86693a5, the R3C-REVOLTNOTE guard) yielded inside the lane's own merge of the joined line (81df6fb80) |
 
 
-## 5. Item 2 at the landed tip
+## 5. Item 2 at the landed tip f663a2699 (each run to a file in /home/user/j5out, read by its tail through `scripts/gate-tail.sh`)
 
-Not yet run.
+- (g) the corpus door's `--check`: **exit 0** (after merge 4, merge 5, P4, and at the tip: 69 state blocks / 2951 variants; nothing re-taken, nothing rebuilt at any point).
+- `npm run build`: **exit 0**.
+- The twelve-birth grid (`node scripts/census/page-census.mjs --grid`): **exit 0, 2 falls**: `r2r-city-0 P7a`, `r2s-insurgency-metropolis-0 P7a` (a banked grid row that no longer fires; the count is the chair's).
+- The 34 test files naming `src/foundry/journalPages.js` (the one file with a resolved conflict): 32 passed, **2 red, both NAMED, not cures of this seat's**: `tests/components/houseLabelEverySurface.test.jsx` (one of the 12 reds JOIN-4 §5a named at the joined tree, red with and without its change); `tests/lint/chainPrintSites.walker.test.js` F1 'the roots are every top-level directory of code' (expected [] received ['dist']: the `dist/` this seat's own build wrote one step before, in the same tree; an instrument's artefact).
 
 ## 6. Stops
 
-None so far.
+None: no lane aborted; no hunk needed a choice.
 
 ## 7. Hazards
 
+- JOIN-3 pushed docs to this branch between JOIN-5's pushes (098527467 and six merges of the joined line, 16:04 to 16:22, all under `docs/chair/2026-11-14/`): a push was rejected at merge 10 (cannot lock ref); merged by law (f) (92af66e3c) and pushed again; `push.sh` since merges such commits only when every file is under that folder and none is JOIN-5's, else the tripwire stops it. The chair told JOIN-3 at 16:33 to push nothing more.
+- The usage window ran out at ~16:36 after P2; nothing was lost (P2 was pushed); resumed at 23:01, the worktree intact.
+- Run the build AFTER the tests, or in another tree: `dist/` reds `chainPrintSites.walker` F1.
 - `npm ci` wrote `core.hookspath=.husky/_` and `rerere.enabled=true` into the shared config (expected, as JOIN-4 saw).
 
 ## 8. How the instruments are re-made
@@ -100,4 +113,4 @@ A worktree at origin's tip (`git worktree add /home/user/j5wt -b join5 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-Merges 2 to 11 in the brief's order, (g) after merge 4, item 2, the item-3 message, the chair's points.
+Nothing of the brief or of the chair's points: the eleven merges in the brief's order (no stop), (g) at every point it was due (exit 0 each time, nothing rebuilt), the five second points, item 2 at f663a2699. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the two reds of §5 named; the grid's two P7a falls read; JOIN-4's FOR THE JOIN (`src/pdf/lib/viewModel.js` Overview call) still standing.

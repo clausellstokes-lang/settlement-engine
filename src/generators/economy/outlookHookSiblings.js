@@ -90,7 +90,10 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
     // not a twin: drawDeclared tries one twin, then the admitted members; this one is reached only when both refuse.
     // The famine line where no merchant can come: the same famine, no merchant in it. Its text stands in the member
     // that declares it (R3-CODE-C-6: the presumed-things walker credits a declaration only around its literal).
-    Object.freeze({ text: 'The settlement is starving, and its hungriest are turning to banditry.', needs: Object.freeze(['food: ≤ deficit']) }),
+    // TAIL-CRISIS (READ-ALL 21965): banditry wants someone on the roads to rob; under a siege nothing comes in by road, so a
+    // besieged famine reads the fourth member, the same famine with no road in it.
+    Object.freeze({ text: 'The settlement is starving, and its hungriest are turning to banditry.', needs: Object.freeze(['food: ≤ deficit']), excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: 'The settlement is starving, and its hungriest steal what food they can find.', needs: Object.freeze(['food: ≤ deficit', 'crisis: under_siege']) }),
   ]),
 });
 /** The famine line where no merchant can come (the starving set's third member, read from where it is declared). */

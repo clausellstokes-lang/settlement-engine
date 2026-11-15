@@ -25,7 +25,7 @@ import { compareCodepoint } from '../domain/deterministicSort.js';
 // with a bare `import "./engine-*.js"` — an engine <-> resource-chains chunk cycle (bootSmoke.test.js).
 // Same binding, same function: no generation change.
 import { goodsHeldByFoodRecord, ownFoodGoodsHeldByFoodRecord } from '../domain/foodSurplus.js';
-import {catalogIdForName} from '../data/institutionalCatalog.js';
+import {catalogIdForName, isFabricInstitution} from '../data/institutionalCatalog.js';
 import { ALL_CATALOG_NAMES, institutionMatchesKeyword } from '../domain/institutions/institutionCategory.js';
 
 export { institutionMatchesKeyword };
@@ -346,10 +346,12 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       );
       const externalMillOnly = supportsExternalMill && hasExternalMill && !hasLocalMill;
       const effectiveExportable = externalMillOnly ? false : chain.exportable;
+      // TAIL-DEFECON-C (WORKLIST3 rows 15738, 11365, 31448): the note claims no more than every town that prints it
+      // bears. It named a LORD where an elder council governs a thorp of nine, said "food security is maintained" in a
+      // famine, a deficit and a siege, and said there would be "no flour at all" beside the land's own flour on the
+      // made list. What every such town bears: its grain is ground elsewhere, and the toll there takes the surplus.
       const externalMillNote = externalMillOnly
-        ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
-          'Local food security is maintained but surplus flour cannot be exported: ' +
-          'the mill toll takes any surplus. Without the lord\'s mill, there would be no flour at all.'
+        ? 'Grain is carried out of the settlement to be ground, and the toll taken there leaves no surplus flour to sell on.'
         : null;
       // An output a chain ties to one processor (`outputsRequiringProcessor`) is printed only
       // where that processor matched: the arena's spectacles need the arena (A-05).
@@ -625,6 +627,30 @@ const RESOURCE_EXTRACTION_GATES = {
   //          glass_sand, desert_salt, alpine_pasture, hot_springs_mineral
 };
 
+// TAIL-DEFECON-C (C1-A, the chair's rulings D6 and D7, 2026-11-14): the houses that WORK a land's good, for the MADE
+// list only. The made list asks the export's own extraction gate above, widened (D7: "THE SMITH'S IRON STAYS") by the
+// houses that work the good where no one digs it: a smith or a metalworker works bought iron into metalwork; a
+// jeweller works gems. Every other gated resource's gate already names the houses that work its good (the sawmill,
+// woodcutter and carpenter for timber; the fishers and the fish market for the catch; the mill for the mill site).
+// The export gate itself is not widened: the export list does not move.
+const MADE_HERE_WORKING_HOUSES = {
+  'iron_deposits':     [...RESOURCE_EXTRACTION_GATES.iron_deposits, 'smith', 'metalworker'],
+  'precious_metals':   [...RESOURCE_EXTRACTION_GATES.precious_metals, 'jewel'],
+  'gemstone_deposits': [...RESOURCE_EXTRACTION_GATES.gemstone_deposits, 'jewel'],
+};
+// The same widening for a chain's outputs (CHAIN_OUTPUT_INST_GATES below, the export's own output gate): the made
+// list reads 'tannery' as any tanner ("Tanners", "Tanner (established)") and 'blacksmith' as any smith.
+const MADE_HERE_KEYWORD_WIDENING = {
+  'tannery':    ['tannery', 'tanner'],
+  'blacksmith': ['blacksmith', 'smith'],
+};
+// Two outputs a house works without digging or tanning (the D7 reading): a cobbler works bought leather into boots; a
+// jeweller or a metalworker works bought gold and silver. (Raw gemstones stay the mine's; milled lumber the sawmill's.)
+const MADE_HERE_OUTPUT_HOUSES = {
+  'Boots and shoes': ['tannery', 'tanner', 'cobbler'],
+  'Precious metals': ['mine', 'smelter', 'jewel', 'metalworker'],
+};
+
 // Institution gates for chain-derived output goods.
 // Even if a chain is active, some of its outputs are byproducts that require
 // a specific additional institution to actually produce and export.
@@ -884,7 +910,34 @@ export function deriveLocalProductionFromChains(
   activeChains,
   nearbyResources,
   depletedResources = [],
+  institutions = null,
 ) {
+  // TAIL-DEFECON-C (C1-A, D6/D7): A GOOD IS MADE WHERE A HOUSE THAT DIGS IT OR WORKS IT STANDS. What the land provides
+  // is made here only where a house of THIS town works it (MADE_HERE_WORKING_HOUSES, else the export's own
+  // RESOURCE_EXTRACTION_GATES), and a chain makes its outputs here only where a house of THIS town processes it: the
+  // fabric of the place ("Access to parish church", "Access to external mill", the dwellings, the water) is the walk
+  // to another town's house, not a house (`institutionalCatalog.js :: isFabricInstitution`). A caller that passes no
+  // roster (the world pulse's resource re-derivation) keeps the land's reading.
+  const housed = Array.isArray(institutions)
+    ? institutions.filter(i => i && !isFabricInstitution(i))
+    : null;
+  const landWorkedHere = (key) => {
+    if (!housed) return true;
+    const kws = MADE_HERE_WORKING_HOUSES[key] || RESOURCE_EXTRACTION_GATES[key];
+    return !kws || kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
+  };
+  const chainHeldHere = (chain) => !housed
+    || (chain.processingInstitutions || []).some(p => housed.some(i => institutionMatchesProcessor(i, p)));
+  // A chain's processors are wider than its outputs' makers (the river-milling chain runs on a grain Mill and names
+  // "Milled lumber"; the stone chain runs on a Brickmaker and names "Quarried stone"): an output the export gates by a
+  // house is made here only where that house stands (CHAIN_OUTPUT_INST_GATES, widened as above).
+  const outputMadeHere = (good) => {
+    const gate = housed && CHAIN_OUTPUT_INST_GATES[good];
+    if (!gate) return true;
+    const kws = MADE_HERE_OUTPUT_HOUSES[good]
+      || (Array.isArray(gate) ? gate : [gate]).flatMap(kw => MADE_HERE_KEYWORD_WIDENING[kw] || [kw]);
+    return kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
+  };
   const local = new Set();
   const depleted = new Set(
     depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
@@ -897,6 +950,7 @@ export function deriveLocalProductionFromChains(
   nearbyResources.forEach(rk => {
     const key = resourceKeyForLabel(rk) || rk;
     if (depleted.has(key)) return;
+    if (!landWorkedHere(key)) return; // C1-A: no house here digs or works it
     const rd = RESOURCE_DATA[key];
     if (rd?.commodities) rd.commodities.forEach(c => {
       const good = c.replace(/_/g, ' ');
@@ -912,11 +966,24 @@ export function deriveLocalProductionFromChains(
       c.activatedByResource
       && !chainYieldRefused(c)
       && c.resourceInputAvailable !== false
+      && chainHeldHere(c) // C1-A: a house of this town processes it
     ))
-    .forEach(chain => chain.outputs.slice(0, 2).forEach(o => local.add(o)));
+    .forEach(chain => chain.outputs.slice(0, 2).filter(outputMadeHere).forEach(o => local.add(o)));
 
-  return [...local];
+  // TAIL-DEFECON-C (C2-A, the chair's ruling D6, 2026-11-14): a category key is not a good.
+  return [...local].filter(good => !isCategoryNotGood(good));
 }
+
+// TAIL-DEFECON-C (C2-A, the chair's ruling D6): the made list names GOODS. Four of these are the resource data's
+// category keys (`trade_access`, `maritime_access`, `luxury`, `water`: what the land affords, not a thing made) and
+// three are chain outputs that are revenues or a position (`Toll income`, `Market taxes`, `Strategic control`). A
+// declared list of seven (RECORD-MEASURE-1 row c2: 302 towns printed one of them under "Produced locally"); the
+// resource card and the chain card keep them, this list alone drops them.
+const CATEGORY_KEYS_NOT_GOODS = new Set([
+  'trade access', 'maritime access', 'toll income', 'market taxes', 'luxury', 'strategic control', 'water',
+]);
+/** @param {unknown} good */
+const isCategoryNotGood = (good) => CATEGORY_KEYS_NOT_GOODS.has(String(good).trim().toLowerCase());
 
 // ── Institutional Services ────────────────────────────────────────────────────
 // Tertiary economy — services generated by institutions without a production chain.
@@ -940,7 +1007,10 @@ const INSTITUTIONAL_SERVICE_MAP = [
     output:'Higher education', exportLabel:'Educational services (degrees, training)',
     incomeLabel:'Education & Scholarship', exportable:true, color:'#1a3a7a' },
   // Military / Mercenary — requires substantial military infrastructure (city+)
+  // TAIL-DEFECON-C (row 03905, the chair's ruling D1): a garrison or a city watch is not for hire; the service
+  // stands only where a company that hires out its swords stands too (`requiresAny`).
   { patterns:['mercenary quarter','multiple garrison','professional city watch'],
+    requiresAny:['mercenary quarter','free company hall','hireling hall','hired blades'],
     output:'Armed escort & mercenary hire', exportLabel:'Military contract services',
     incomeLabel:'Military Contracts', exportable:true, color:'#8b1a1a' },
   // Arcane
@@ -996,6 +1066,7 @@ export function deriveInstitutionalServices(institutions = []) {
       .filter(i => def.patterns.some(p => institutionMatchesKeyword(i, p)))
       .map(i => (i.name || '').toLowerCase());
     if (matched.length === 0) return;
+    if (def.requiresAny && !institutions.some(i => def.requiresAny.some(p => institutionMatchesKeyword(i, p)))) return;
     if (usedLabels.has(def.incomeLabel)) return;
     usedLabels.add(def.incomeLabel);
     const maritime = def.waterborne === true && matched.some(name => (

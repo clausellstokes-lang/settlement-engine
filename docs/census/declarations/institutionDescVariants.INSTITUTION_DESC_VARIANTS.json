@@ -123,7 +123,7 @@
     },
     {
       "id": "thorp|Economy|Fishing community#1",
-      "text": "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+      "text": "The nets, the traps, the drying racks, worked by the fishing households whenever fish can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -263,7 +263,7 @@
     },
     {
       "id": "thorp|Government|Lord's reeve#0",
-      "text": "A distant lord's man, set here to watch the settlement and remit what it owes. His writ is legitimate; his welcome is not.",
+      "text": "A distant lord's officer, set here to watch the settlement and remit what it owes. The writ is legitimate; the welcome is not.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -271,7 +271,7 @@
     },
     {
       "id": "thorp|Government|Lord's reeve#1",
-      "text": "Placed by a lord who never visits, he holds official charge of the settlement. The paperwork backs him. The neighbours do not.",
+      "text": "Placed by a lord who never visits, this officer holds official charge of the settlement. The paperwork backs the office. The neighbours do not.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -441,7 +441,7 @@
     },
     {
       "id": "hamlet|Economy|Shepherd#0",
-      "text": "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. He is a mainstay of the cloth trade.",
+      "text": "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. Wool is what the flocks are chiefly kept for.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -450,7 +450,7 @@
     },
     {
       "id": "hamlet|Economy|Shepherd#1",
-      "text": "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. The textile trade leans on him.",
+      "text": "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. Wool is the first of what the flocks yield.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -459,7 +459,7 @@
     },
     {
       "id": "hamlet|Economy|Dairy farmer#0",
-      "text": "Runs cattle or goats for their milk, butter, and cheese. The one dependable fat and protein when the grain runs short. The work is seasonal, and heaviest in summer.",
+      "text": "Milk, butter, and cheese from cattle or goats, when there are beasts to run. The work is seasonal, and heaviest in summer.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -468,7 +468,7 @@
     },
     {
       "id": "hamlet|Economy|Dairy farmer#1",
-      "text": "Keeps a herd of cattle or goats for milk, butter, and cheese. In a bad grain year it is the only fat and protein to be had. Seasonal work, cresting in the summer months.",
+      "text": "A dairy for milk, butter, and cheese, from a herd of cattle or goats where one can be kept. Seasonal work, cresting in the summer months.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -503,7 +503,7 @@
     },
     {
       "id": "hamlet|Economy|Charcoal burner#1",
-      "text": "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.",
+      "text": "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.",
       "needs": [
         "terrain: forest"
       ],
@@ -513,7 +513,7 @@
     },
     {
       "id": "hamlet|Economy|Peat cutter#0",
-      "text": "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what he sells is winter warmth.",
+      "text": "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what it sells is winter warmth.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -563,7 +563,7 @@
     },
     {
       "id": "hamlet|Economy|Salt works#0",
-      "text": "Boils or dries naturally saline brine, yielding the raw salt that preserves food. It works only where salt flats, springs, or other workable deposits provide a local supply.",
+      "text": "Boils or dries saline brine when brine can be had, yielding the raw salt that preserves food. It works best where workable brine lies close by.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -572,7 +572,7 @@
     },
     {
       "id": "hamlet|Economy|Salt works#1",
-      "text": "Evaporates brine to leave salt behind: the raw mineral used to preserve nearly everything. The works can operate only where a strong local brine source supports it.",
+      "text": "Evaporates brine, when brine can be had, to leave salt behind: the raw mineral used to preserve nearly everything. A strong brine source close by serves it best.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -850,7 +850,7 @@
     },
     {
       "id": "hamlet|Government|Lord's steward#0",
-      "text": "A lord's man runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
+      "text": "A lord's agent runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -858,7 +858,7 @@
     },
     {
       "id": "hamlet|Government|Lord's steward#1",
-      "text": "Acting for the lord, he administers the land, takes in rent, and imposes the noble's will.",
+      "text": "The office acts for the lord: it administers the land, takes in rent, and imposes the noble's will.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1066,7 +1066,7 @@
     },
     {
       "id": "village|Economy|Fishmonger#0",
-      "text": "Buys the catch, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
+      "text": "Buys whatever catch can be had, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1074,7 +1074,7 @@
     },
     {
       "id": "village|Economy|Fishmonger#1",
-      "text": "Deals in fish: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
+      "text": "Deals in fish, when fish can be had: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1102,7 +1102,7 @@
     },
     {
       "id": "village|Economy|Dairy farmer#0",
-      "text": "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.",
+      "text": "Milk, butter, and soft cheese from cattle or goats, when there are beasts to run. What isn't used is sold on.",
       "needs": [
         "market"
       ],
@@ -1112,7 +1112,7 @@
     },
     {
       "id": "village|Economy|Dairy farmer#1",
-      "text": "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settlement's protein and fat. The surplus is sold at the weekly market.",
+      "text": "A herd of cattle or goats, where one can be kept, for milk, butter, and soft cheese. Any surplus is sold on.",
       "needs": [
         "market"
       ],
@@ -1210,7 +1210,7 @@
     },
     {
       "id": "village|Economy|Salt works#0",
-      "text": "Evaporation pans and brine-works turn the local saline source into salt, and no household does without it.",
+      "text": "Evaporation pans and brine-works for making salt whenever brine can be had, and no household does without salt.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1218,7 +1218,7 @@
     },
     {
       "id": "village|Economy|Salt works#1",
-      "text": "Salt is won from local brine in broad evaporation pans. It is a necessity in every home.",
+      "text": "Broad evaporation pans, where salt is won from brine whenever brine can be had. Salt is a necessity in every home.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1274,7 +1274,7 @@
     },
     {
       "id": "village|Economy|Ale house#0",
-      "text": "Run from the home. The brewing and selling of ale is women's work.",
+      "text": "Run from the home. Ale is brewed and sold under the same roof.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1282,7 +1282,7 @@
     },
     {
       "id": "village|Economy|Ale house#1",
-      "text": "A household trade. Women brew the ale and sell it.",
+      "text": "A household trade. The ale is brewed at home and sold there.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1415,7 +1415,7 @@
     },
     {
       "id": "village|Crafts|Mill#0",
-      "text": "A water- or wind-driven mill holding the sole right to grind. The miller tends to be the richest man in the village, and the least loved.",
+      "text": "Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1439,7 +1439,7 @@
     },
     {
       "id": "village|Crafts|Blacksmith#1",
-      "text": "Works metal full-time. Tools and horseshoes depend on him.",
+      "text": "Works metal full-time. Tools and horseshoes depend on this work.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1447,7 +1447,7 @@
     },
     {
       "id": "village|Crafts|Carpenter#0",
-      "text": "Houses, carts, and furniture, all his work.",
+      "text": "Houses, carts, and furniture, all of it made here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1487,7 +1487,7 @@
     },
     {
       "id": "village|Crafts|Cooper#1",
-      "text": "Casks for storage and carriage, all his making.",
+      "text": "Casks for storage and carriage, all made here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1527,7 +1527,7 @@
     },
     {
       "id": "village|Crafts|Sawmill#0",
-      "text": "A saw driven by water or ox, cutting raw logs into planks and beams. It lifts what building and furniture-making the village can do.",
+      "text": "A saw driven by water or ox, for cutting raw logs into planks and beams whenever logs can be had, for building and furniture-making.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1535,7 +1535,7 @@
     },
     {
       "id": "village|Crafts|Sawmill#1",
-      "text": "Powered by water or ox, the saw reduces logs to planks and beams, widening the settlement's output of building timber and furniture.",
+      "text": "Powered by water or ox, the saw reduces logs to planks and beams whenever logs reach it, for building timber and furniture.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1565,7 +1565,7 @@
     },
     {
       "id": "village|Crafts|Tannery#0",
-      "text": "Turns hides to leather with oak bark. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
+      "text": "Turns hides to leather with oak bark, when hides can be had. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
       "needs": [
         "river"
       ],
@@ -1575,7 +1575,7 @@
     },
     {
       "id": "village|Crafts|Tannery#1",
-      "text": "Hides become leather here, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
+      "text": "Hides become leather here whenever they can be had, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
       "needs": [
         "river"
       ],
@@ -1617,7 +1617,7 @@
     },
     {
       "id": "village|Crafts|Potter#0",
-      "text": "Throws pottery at the wheel for the household (plates, jugs, vessels for storage) and fires it in a small kiln.",
+      "text": "Pottery for the household (plates, jugs, vessels for storage), thrown at the wheel and fired in a small kiln whenever there is clay to throw.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1625,7 +1625,7 @@
     },
     {
       "id": "village|Crafts|Potter#1",
-      "text": "Domestic ware thrown on the wheel: plates, jugs, and storage jars, all fired in a modest kiln.",
+      "text": "A wheel and a modest kiln for domestic ware: plates, jugs, and storage jars, as far as the clay to hand allows.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1633,7 +1633,7 @@
     },
     {
       "id": "village|Crafts|Brickmaker#0",
-      "text": "Shapes and fires clay into bricks for building. With them, structures can be made to last. Clay deposits and fuel are needed.",
+      "text": "Shapes and fires clay into bricks for building, when there is clay to shape. With them, structures can be made to last. Clay and fuel are needed.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1641,7 +1641,7 @@
     },
     {
       "id": "village|Crafts|Brickmaker#1",
-      "text": "Clay is moulded and fired into building brick here, which allows sturdier, more lasting construction. The work depends on clay beds and fuel.",
+      "text": "Moulds and a kiln for building brick, fired whenever clay reaches them; brick allows sturdier, more lasting construction. The work depends on clay and fuel.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1706,7 +1706,7 @@
     },
     {
       "id": "village|Crafts|Woodcarver#1",
-      "text": "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. For the church he shapes sacred images and reliquaries.",
+      "text": "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. Sacred images and reliquaries are carved here too.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1715,7 +1715,7 @@
     },
     {
       "id": "village|Crafts|Village scribe#0",
-      "text": "One of the few here who can read and write. He copies letters, sets down plain contracts, and reads out documents for those who cannot. Usually the priest's helper or a layman schooled at a monastery.",
+      "text": "One of the few here who can read and write: letters copied, plain contracts set down, documents read out for those who cannot. Usually schooled at a monastery, or by whoever here could teach.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1731,7 +1731,7 @@
     },
     {
       "id": "village|Crafts|Cartographer's workshop#0",
-      "text": "A mapmaker who draws and sells his work: road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
+      "text": "A mapmaker's workshop, drawing and selling road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1865,7 +1865,7 @@
     },
     {
       "id": "village|Government|Village reeve#0",
-      "text": "Chosen from among the peasants, he arranges the work owed, settles quarrels, and stands for the village before any outside power.",
+      "text": "Chosen from among the peasants to arrange the work owed, settle quarrels, and stand for the village before any outside power.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1873,7 +1873,7 @@
     },
     {
       "id": "village|Government|Village reeve#1",
-      "text": "A peasant elected by his own. He parcels out the labour dues, mediates disputes, and speaks for the village to those above it.",
+      "text": "A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2027,7 +2027,7 @@
     },
     {
       "id": "village|Criminal|Fence (word of mouth)#0",
-      "text": "The one to see when stolen goods need moving without noise. He works from behind a legitimate trade.",
+      "text": "The one to see when stolen goods need moving without noise. The dealing is done from behind a legitimate trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2059,7 +2059,7 @@
     },
     {
       "id": "village|Entertainment|Village musician#0",
-      "text": "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in his songs keeping the local history alive.",
+      "text": "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in song keeping the local history alive.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2067,7 +2067,7 @@
     },
     {
       "id": "village|Entertainment|Village musician#1",
-      "text": "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through his songs the settlement's history is remembered.",
+      "text": "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through those songs the settlement's history is remembered.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2119,7 +2119,7 @@
     },
     {
       "id": "town|Economy|Mine#0",
-      "text": "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
+      "text": "A mine of shafts and adits, with winding gear and ore carts at the head, worked whenever ore can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2127,7 +2127,7 @@
     },
     {
       "id": "town|Economy|Mine#1",
-      "text": "A shaft driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
+      "text": "A shaft driven into the deposits, with winding gear and ore carts at the pithead, worked whenever ore can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2135,7 +2135,7 @@
     },
     {
       "id": "town|Economy|Stone quarry#0",
-      "text": "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
+      "text": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2143,7 +2143,7 @@
     },
     {
       "id": "town|Economy|Stone quarry#1",
-      "text": "Yards for dressing stone stand beside the quarry face. Building stone from here has gone to every part of the region.",
+      "text": "Yards for dressing stone stand beside the quarry face, at work whenever good stone can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2629,7 +2629,7 @@
     },
     {
       "id": "town|Crafts|Blacksmiths (3-10)#0",
-      "text": "Several smiths, each to his specialty.",
+      "text": "Several ironworkers, each to a specialty.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2645,7 +2645,7 @@
     },
     {
       "id": "town|Crafts|Jeweller#0",
-      "text": "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. He works to commission, values stones, and now and then buys from customers who keep quiet about provenance.",
+      "text": "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. The work is to commission; stones are valued, and now and then bought from customers who keep quiet about provenance.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2653,7 +2653,7 @@
     },
     {
       "id": "town|Crafts|Jeweller#1",
-      "text": "Rings, necklaces, seals, and finery, worked from gold and gemstone. He takes orders, appraises stones, and is not above the occasional purchase from a discreet seller.",
+      "text": "Rings, necklaces, seals, and finery, worked from gold and gemstone. Orders are taken, stones appraised, and the occasional purchase from a discreet seller is not refused.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2744,7 +2744,7 @@
     },
     {
       "id": "town|Crafts|Vintner#0",
-      "text": "Makes and ages wine, whether from grapes grown near or must brought in. He sells by the barrel to taverns and by the bottle to the rich. Where no vine grows, he imports and blends instead.",
+      "text": "A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2753,7 +2753,7 @@
     },
     {
       "id": "town|Crafts|Vintner#1",
-      "text": "Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses. In a region without vines, the vintner turns importer and blender.",
+      "text": "Wine pressed and matured from local fruit or imported must, when either comes to the cellar, and sold in bulk or direct to wealthy houses.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2914,7 +2914,7 @@
     },
     {
       "id": "town|Crafts|Glassblower#0",
-      "text": "Glass worked on a small scale: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.",
+      "text": "Glass worked on a small scale, whenever sand reaches the furnace: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2922,7 +2922,7 @@
     },
     {
       "id": "town|Crafts|Glassblower#1",
-      "text": "A modest glassworks making bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
+      "text": "A modest glassworks for bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3028,10 +3028,8 @@
     },
     {
       "id": "town|Religious|Parish burial grounds#0",
-      "text": "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's register of who lies where is the town's longest unbroken record.",
-      "needs": [
-        "gate"
-      ],
+      "text": "A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -4670,7 +4668,7 @@
     },
     {
       "id": "city|Defense|Garrison#0",
-      "text": "Professional soldiers, kept by noble or crown.",
+      "text": "A professional force, kept under arms for pay.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4678,7 +4676,7 @@
     },
     {
       "id": "city|Defense|Garrison#1",
-      "text": "A standing body of soldiers, in noble or royal pay.",
+      "text": "A standing force, paid to bear arms.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5357,7 +5355,7 @@
     },
     {
       "id": "metropolis|Defense|Massive walls and fortifications#0",
-      "text": "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.",
+      "text": "Walls within walls: an outer line and an inner line, with gatehouses at every stage.",
       "needs": [
         "garrison"
       ],
@@ -5367,7 +5365,7 @@
     },
     {
       "id": "metropolis|Defense|Massive walls and fortifications#1",
-      "text": "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.",
+      "text": "A defence built in layers, an outer wall and an inner wall, with gatehouses throughout.",
       "needs": [
         "garrison"
       ],
