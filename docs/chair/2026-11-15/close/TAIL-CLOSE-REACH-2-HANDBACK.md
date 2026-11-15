@@ -154,7 +154,19 @@ cure is lane/tail-close-heap-2026-11-15's, and no test configuration was changed
   FINAL PASS. Instrument one's three corpusMeta reds the predecessor named are GREEN: the re-freeze cleared them.
 - The instrument's own three test files at act 1: 120 of 120.
 
+## THE JOINED TIP MERGED (241668ccc)
+
+`lane/join-2026-11-14` at 061db1367 merged into this branch (a merge commit; clean, no conflict; it brings 16
+first-parent points, among them `vite.config.js` +22 lines, the heap seat's, untouched here). Both doors' plain arms at
+the merged tree, each to a file, 8 GB heap:
+- `node scripts/check-observed-shape-readers.mjs`: exit 0, "observed-shape readers: 2212 finding(s), exactly matching
+  the frozen inventory"; the bank 78 across 15 of 16; the unreviewed-UI cohort 49 files / 131 identities / 195 reads.
+- `node scripts/check-writer-reach.mjs`: exit 0, `WRWALKER HOLD — judged 12661 · LIT 687 · LIT-NAME 10567 · DARK 1407
+  (reviewable 389) · pending-surface debt: none` (the same figures as the predecessor's receipt).
+- So the later landings brought no new dark identity (WR1 not needed; the growth door NOT used a second time) and no
+  moved reader row (OR2 not needed again).
+
 ## WHAT IS LEFT
 
-- The receipt, then the merge of the joined line's tip and both doors' plain arms again; then the FINAL PASS on the
-  chair's word.
+- The FINAL PASS on the chair's word ("FINAL PASS at <tip>"): merge that tip, both doors' plain arms, both walkers alone
+  (the culture arm expected green once the src close seat's WR2 strike is on the line), this hand-back.
