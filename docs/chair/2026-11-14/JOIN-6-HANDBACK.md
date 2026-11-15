@@ -1,0 +1,94 @@
+# JOIN-6 — the hand-back (2026-11-15): THE FOURTH LANDING (the tail wave)
+
+Seat JOIN-6 (session `session_01ACmDYWy9t9mT4gQk6kHAhe`), brief `docs/chair/2026-11-14/briefs/BRIEF-JOIN-6.md` on `lane/chair-2026-11-08`. This file is kept current after every landing. It started from **48fedbe98**, origin's tip read back at 00:07 UTC, which is the tip the brief named. Full history was fetched (`is-shallow-repository` false). Worktree `/home/user/j6wt` (local branch `join6`), with its own `npm ci` and `rerere.enabled true`. The instruments are in `/home/user/j6out/`, outside every tree (§8). Every push is plain, by `git push origin join6:refs/heads/lane/join-2026-11-14`, after a fetch (tripwire: origin must equal the last tip this seat pushed) and a non-empty rev-list. The shared repository's refs and local config are snapshotted before and after every push.
+
+## 1. The laws worked to
+
+JOIN-5's laws (a) to (i) stand as its hand-back §1 gives them (one merge commit per branch, `--no-ff --no-commit` at the full hash read back; (b) a code conflict is read whole, BOTH CURES STAND, else a stop for that branch with `git merge --abort`; (c) a register, baseline, generated file or edge bundle in conflict keeps the joined side and is LISTED; (d) a pin both sides moved keeps the joined side inside the hunk and is LISTED; (e) verify before the commit; (f) plain pushes; (c') a corpus leaf is the product; (g) the corpus's door; (i) a lane holding a merge of the joined line merges as any other). The chair's rulings of 2026-11-15 00:05 UTC (the brief; each vetoable by the owner) change them:
+
+(a'') THE ORDER OF THE FIRST LANDING, each at the tip read back at its merge (the tip read IS the point; a branch origin does not hold yet is skipped and said so): tail-services FIRST (push, ONE LINE to the chair with the tip); then display-civic, display-econ, crisis, houses, ties, history, narrative, powers, defecon, corpus-eco, corpus-def; THEN THE CORPUS'S DOOR (g); exports-pdf, exports-journal. NOT MERGED, whoever asks: lane/coherence-veil-2026-11-11, any review branch, any `lane/read-all-…` or `lane/record-measure-…` branch, the chair's lane.
+(j) THE GROUPS DO NOT SHARE FILES: a code conflict between two tail branches is A SIGN THAT A SEAT LEFT ITS GROUP. Law (b) stands, and the file and the two seats are NAMED to the chair in that point's line. Three known meetings were ruled beforehand: (1) the vocabulary file (`ruling body` and `rival power` atoms): BOTH ADDITIONS STAND; (2) new leaf files under src/domain/display/ from seats that do not hold that directory stand (new files only); (3) `src/data/faceHonorifics.js` (now the powers seat's) and `src/domain/summary/tonightSheet.js` (now the crisis seat's): an edit there from those seats is theirs.
+(k) DECLARED MOVES: the golden master moves with them and is the owner's door. It is NOT re-taken; its red is CARRIED and listed for the close with the branch that moved it. A pin a seat re-keyed by identity in its own commit merges as code. `tests/generators/coherenceAgreeCures.test.js` was already two red at 06f36ad36: carried, listed, not this seat's.
+(c') and (g) stand as JOIN-5 worked them: the corpus's door after the two corpus merges (`node scripts/generate-dossier-state-prose.mjs --check`; a register the door needs is re-taken through its own door in its own commit; a stale leaf is rebuilt through the door in its own commit; nothing by hand).
+
+THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none yet.
+
+## 2. The landings
+
+| # | branch | tip merged (read at the merge, UTC) | merge base | merge commit | conflicts | listed for the close |
+|---|---|---|---|---|---|---|
+| 1 | tail-services-2026-11-14 | 4035c33a5 (00:08) | bcad1a358 | 7a9a2fffc | none | — (6 files, all the lane's: the leaf `crisisStoppedRow.js`, the table `crisisDependence.js`; told to the chair at 00:11) |
+
+## 3. Every code resolution
+
+None yet.
+
+## 4. THE LIST FOR THE CLOSE
+
+JOIN-5's §4 is carried forward WHOLE below (it itself carries JOIN-4's §4 and its own [J5] additions); JOIN-6's additions follow it, marked **[J6]**.
+
+---
+
+JOIN-4's §4 carried forward WHOLE below; JOIN-5's additions marked **[J5]**.
+
+
+| file | lanes whose side was not taken (merge #) |
+|---|---|
+| `tests/lint/.lighting-census-baseline.json` | r3-code-c (1), r3-tabs (2), r2-code-a (3), powers (4), w2-fix-data (5), upkeep-monotone (P2) |
+| `docs/content/wiring-census.json` | r3-tabs (2), w2-write (6) |
+| `scripts/.writer-reach-baseline.json` | r2-code-a (3) (a door: banked once at the close, record 440) |
+| `supabase/functions/_shared/engineBundle.js`, `engineBundle.meta.json` | r2-code-a (3) |
+| `tests/lint/.tuning-inventory.json` | r2-code-a (3), upkeep-monotone (P2) |
+| `scripts/census/page-census.register.json` | powers (4) |
+| `scripts/census/pool-dominance.register.json` | w2-fix-data (5) |
+| `tests/lint/presumedThings.register.json` | w2-fix-data (5) (and clean-both at 3, 6) |
+| `scripts/.prose-byte-baseline.json` | w2-write (6) |
+
+Pins (joined side kept inside the hunk): `tests/lint/proseWiringCensus.walker.test.js` `draft.docblockReports.length`: joined 43, r3-tabs 42 (merge 2; the lane's only change in the file).
+
+Merged clean though both sides moved them (for the close to re-derive or measure by its door): `tests/lint/presumedThings.register.json` (3, 6); `tests/lint/presumedThings.widened.register.json` (5, 6); `tests/generators/generationForkCensus.test.js` (4, the mint bound A1); `src/data/dossierStateProse/defense.generated.js` (6, generated); `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (6); the pins of merge 6's four tests (§3). `docs/content/prose-shift-register.json` moved by w2-write alone (6): taken from the lane. `tests/lint/.tuning-register.json` moved by upkeep-monotone alone (P2): taken from the lane. `src/domain/summary/tonightSheet.js` (P1, clean-both with item 4). The goldens the rebuild's declared moves shift (P2): `tests/property/generatorGoldenMaster.test.js`, `tests/property/espionageDormancyFence.test.js` (red and named by that lane), with its re-keyed pins (its `UPKEEP-MONOTONE-BUILD.md` step 3); the edge bundles are stale against every src change since JOIN-3's rebuild (128ab68c7): rebuilt once at the close.
+
+
+**[J5] additions** (also: P3 and P4 merged clean though both sides moved `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and `tests/domain/corpusCureGuards.test.js`; P2's M4 a declared generator move in 56 towns, its goldens and pins for the close; the edge bundles stale against every src change since their last rebuild; the lighting census for every new test title of these merges, last):
+
+| file | lanes whose side was not taken (JOIN-5 merge #) |
+|---|---|
+| merged clean though both sides moved (4) | `RECEIPT_POOLS_DOSSIER_STATE.md`, `corpusCureGuards.test.js`, `proseComposed.walker.test.js`, `proseWiringCensus.walker.test.js` (pins, §3) |
+| lane-only registers taken from the lane | `wiring-census.json` (w2-write 3, e28e1305f), `presumedThings.widened.register.json` (3, b159401a1); leaves `defense.generated.js` (3), `general.generated.js` (4): (g) exit 0 at merge 4 |
+| `tests/lint/.lighting-census-baseline.json` | w2-fix-data (2): its re-take for one new test title (6f86693a5, the R3C-REVOLTNOTE guard) yielded inside the lane's own merge of the joined line (81df6fb80) |
+
+
+---
+
+**[J6] additions:**
+
+| file / test | branch (JOIN-6 merge #) | why |
+|---|---|---|
+| `tests/generators/coherenceAgreeCures.test.js` (the gate tally) | — (red ×2 at the joined line's 06f36ad36 already) | carried by ruling (k), unbanked, not this seat's |
+
+## 5. Item 2 at the landed tip
+
+Not yet run.
+
+## 6. Stops
+
+None yet.
+
+## 7. Hazards
+
+- `npm ci` wrote `core.hookspath=.husky/_` and `rerere.enabled=true` into the shared config, as JOIN-4 and JOIN-5 saw. Expected; nothing else in the config moved at any push.
+- Run the build AFTER the tests, or in another tree: `dist/` reds `chainPrintSites.walker` F1 (JOIN-5 §7).
+
+## 8. How the instruments are re-made
+
+A worktree at origin's tip (`git worktree add /home/user/j6wt -b join6 <tip>`, `npm ci`, `git config rerere.enabled true`). Each script is in `/home/user/j6out/`:
+- `merge.sh <n> <branch>` fetches full depth, reads the tip into `tip.<n>` with the minute, records the pre-merge HEAD, runs `git merge --no-ff --no-commit <full hash>` and lists the unmerged paths.
+- A register in conflict: `git checkout --ours`, then `git add`.
+- `verify.sh <hash>` checks law (e): each file the branch moved since the merge base that the joined side had not moved equals the branch's blob in the index; any staged change to a file the branch did not move is a mismatch; the both-moved files are named.
+- `commit.sh <abs msg file>` checks that the tree before the hook equals the commit's tree.
+- `push.sh` runs fetch, the tripwire against `lastpushed`, the non-empty rev-list, the plain push, and compares refs and config.
+- The remerge patches: `docs/chair/2026-11-14/probes/JOIN-6/NN-<branch>.remerge.patch`, made by `git show --remerge-diff <merge> -- . ':!docs'` (excluding each listed register, baseline and bundle).
+
+## 9. WHAT IS LEFT
+
+The order from display-civic on; (g) after the two corpus merges; item 2; the one message; further points on the chair's messages.
