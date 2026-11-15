@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "b7134504e696dca10093941a438c6dcc7f3e41f1",
+ "frozenAtSha": "a70b683fda09bd6c12bf0c6169b795b75aa545f5",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "0f7925efe8d65721bd3e0ec43bf37678852de35aa68a65dbf5143aaa13a3b710",
  "detectorDigest": "9d463ee49e4cee4c73edfbb833f160bf202a33e110bff0f2f726a945fb6d3e76",
- "verdictDigest": "6a96bf0f2e8b5451e5b9eb183e7729aad156e3e50c7ca9abc5ffd4ddd530c287",
+ "verdictDigest": "851be254fe8b6595aa3d595f0ca99f4dcbf2ed3bd54160588539fa37ea51d163",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,37 +73,37 @@
  ],
  "closureSizes": {
   "web-display": 793,
-  "web-transitive": 1029,
-  "dossier-pdf": 561,
-  "campaign-pdf": 159,
-  "world-book": 174,
-  "foundry": 457,
+  "web-transitive": 1030,
+  "dossier-pdf": 562,
+  "campaign-pdf": 160,
+  "world-book": 175,
+  "foundry": 458,
   "json-export": 12,
   "news": 29
  },
  "population": {
   "judged": 12661,
-  "lit": 691,
-  "litName": 10563,
-  "dark": 1407,
+  "lit": 693,
+  "litName": 10562,
+  "dark": 1406,
   "thinKeys": 16743,
   "thinShapes": 1197,
   "knownShapes": 544
  },
  "scanStats": {
-  "files": 1823,
-  "sites": 43459,
-  "propRead": 41198,
+  "files": 1824,
+  "sites": 43530,
+  "propRead": 41269,
   "elemRead": 0,
   "destructure": 2242,
   "inOp": 19,
-  "rGrades": 7244,
-  "nGrades": 1827133,
-  "resolvedReceivers": 8153
+  "rGrades": 7285,
+  "nGrades": 1829695,
+  "resolvedReceivers": 8194
  },
  "registerDigest": "66919206e4d932964430d33786b44f7d6de17566cc52e83fc5ee83647e2cfbf5",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 389,
+ "reviewableDarkCount": 388,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -2088,12 +2088,6 @@
   {
    "identity": "importNote on foodSecurity",
    "key": "importNote",
-   "shape": "foodSecurity",
-   "rows": 476
-  },
-  {
-   "identity": "importPct on foodSecurity",
-   "key": "importPct",
    "shape": "foodSecurity",
    "rows": 476
   },
@@ -9250,7 +9244,7 @@
   "captureState on factionRelationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=N world-book=R",
   "direction on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "dmNote on factionRelationships": "dossier-pdf=R web-display=R",
-  "narrative on factionRelationships": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "narrative on factionRelationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "pair on factionRelationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "ratio on factionRelationships": "dossier-pdf=N foundry=N web-transitive=N",
   "type on factionRelationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=R news=N web-display=R web-transitive=N world-book=R",
@@ -9388,7 +9382,7 @@
   "importCoverage on foodSecurity": "dossier-pdf=R foundry=R web-display=R",
   "importDependency on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "importNote on foodSecurity": "",
-  "importPct on foodSecurity": "",
+  "importPct on foodSecurity": "web-display=R",
   "isDeficit on foodSecurity": "",
   "isPressured on foodSecurity": "",
   "isSecure on foodSecurity": "",
