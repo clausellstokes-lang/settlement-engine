@@ -45,16 +45,19 @@ const denied = (/** @type {any} */ t, /** @type {string} */ house) => (house ===
   : !(t.economicState?.incomeSources || []).some((/** @type {any} */ s) => /timber/i.test(String(s.source))));
 
 /** [seed, house, the old words (must not print), the rewording's words (print instead)] */
+// BAR2-CLOSE-SWEEP-B (2026-11-15): BAR2-PLACES batch 1 (0d36c3820, PL4; its hand-back's row C0434) reworded the three Merchant
+// guilds (15-40) lines again to claim no power where no merchant power stands; the nine MG rows read those words, the old
+// politics words still out.
 const RED = [
-  ['r2r-city-6', MG, 'Powerful political force.', "A power in the city's trade."],
-  ['r2r-city-42', MG, 'Powerful political force.', "A power in the city's trade."],
-  ['r2r-city-48', MG, 'Powerful political force.', "A power in the city's trade."],
-  ['r2r-city-2', MG, 'in politics', "A force to be reckoned with in the city's trade."],
-  ['r2r-city-27', MG, 'in politics', "A force to be reckoned with in the city's trade."],
-  ['r2s-under_siege-city-1', MG, 'in politics', "A force to be reckoned with in the city's trade."],
-  ['r2r-city-15', MG, 'Politically', 'In trade, a power in their own right.'],
-  ['r2r-city-44', MG, 'Politically', 'In trade, a power in their own right.'],
-  ['r2r-city-54', MG, 'Politically', 'In trade, a power in their own right.'],
+  ['r2r-city-6', MG, 'Powerful political force.', "They handle much of the city's trade."],
+  ['r2r-city-42', MG, 'Powerful political force.', "They handle much of the city's trade."],
+  ['r2r-city-48', MG, 'Powerful political force.', "They handle much of the city's trade."],
+  ['r2r-city-2', MG, 'in politics', "Much of the city's trade is in their hands."],
+  ['r2r-city-27', MG, 'in politics', "Much of the city's trade is in their hands."],
+  ['r2s-under_siege-city-1', MG, 'in politics', "Much of the city's trade is in their hands."],
+  ['r2r-city-15', MG, 'Politically', "Between them they handle much of the city's trade."],
+  ['r2r-city-44', MG, 'Politically', "Between them they handle much of the city's trade."],
+  ['r2r-city-54', MG, 'Politically', "Between them they handle much of the city's trade."],
   ['r2r-village-3', WC, 'keep the place alive', "are the camp's whole living"],
   ['r2r-village-20', WC, 'keep the place alive', "are the camp's whole living"],
   ['r2s-occupied-village-1', WC, 'keep the place alive', "are the camp's whole living"],

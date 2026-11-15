@@ -80,7 +80,9 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
 
   test('ww-1157 (HIGH): no forge making for a war in a famine city with no war (rww-city-famine-1)', () => {
     const town = bornInc('rww-city-famine-1');
-    expectAbsentWithAnchor(arrivalText(town), 'making something meant for a war', 'blades being made', 'rww-city-famine-1 arrival');
+    // BAR2-CLOSE-SWEEP-B (2026-11-15): BAR2-PLACES batch 2 (166bb4160, C3297) gave "blades being made" `iron at hand`; this famine
+    // city has none, so the same slot draws its declared twin, the anchor sibling now.
+    expectAbsentWithAnchor(arrivalText(town), 'making something meant for a war', 'stand cold: there is no iron left to make blades from', 'rww-city-famine-1 arrival');
   }, 60_000);
 
   test('ww-494 (HIGH): the fair\'s trading under a siege says no merchant can reach it (rww-town-under_siege-1)', () => {

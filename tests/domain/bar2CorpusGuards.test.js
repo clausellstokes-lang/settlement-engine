@@ -32,11 +32,13 @@ const DECLARED = [
   { batch: 1, seed: 'r2s-under_siege-town-0', pool: 'DS-SUP-3::ONE EXPECTED CATEGORY MISSING', vid: 2, instead: 1, why: 'a siege: "everything a traveller expects is here" with the gates shut (C2273)' },
   { batch: 1, seed: 'r2r-village-24', pool: 'DS-ECO-10::POSTURE: established', vid: 5, instead: 8, why: 'a famine: "buyers from outside come for more than one thing" beside "No significant exports" (C33095)' },
 ];
+/** the KEEP row's member in its own live words, read through tests/helpers/drawnProse.js, so a rewrite moves the title with it */
+const ECO10_ESTABLISHED_V5 = variantByVid({ leaf: 'economy', blockId: 'DS-ECO-10', poolKey: 'POSTURE: established', vid: 5, slots: { settlement: '{settlement}' } });
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */
 const KEEP = [
   { batch: 1, seed: 'r2r-town-0', pool: 'DS-GEN-13::MARKET-OPEN', vid: 2, why: 'a market town with no war: it sells to the road' },
   { batch: 1, seed: 'r2r-town-0', pool: 'DS-SUP-3::ONE EXPECTED CATEGORY MISSING', vid: 2, why: 'no siege: a traveller finds all but one' },
-  { batch: 1, seed: 'r2r-town-0', pool: 'DS-ECO-10::POSTURE: established', vid: 5, why: 'no famine, no siege, no plague: buyers come for more than one thing' },
+  { batch: 1, seed: 'r2r-town-0', pool: 'DS-ECO-10::POSTURE: established', vid: 5, why: `no famine, no siege, no plague: "${ECO10_ESTABLISHED_V5}"` },
 ];
 /**
  * The REWORDED rows name the member by its STABLE id (`vid`) and the OLD claim (`gone`) that must be out of its words; the

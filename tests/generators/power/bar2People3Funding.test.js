@@ -12,6 +12,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shapes (r2r-, r2s-) @param {string} seed */
@@ -44,7 +46,7 @@ describe('BAR2-PEOPLE-3 · "underfunded" only where the funding gate is under 1 
   for (const seed of ROWS) {
     it(`${seed}: the gate reads 1; not "${UNDERFUNDED}": its twin "${TWIN}" prints`, () => {
       expect(towns[seed].gate).toBe(1);
-      expect(towns[seed].stability).not.toContain('underfunded');
+      expectAbsentWithAnchor(towns[seed].stability, 'underfunded', TWIN, `${seed}: the twin prints, not the underfunded line`);
       expect(towns[seed].stability.startsWith(TWIN)).toBe(true);
     });
   }
@@ -55,8 +57,10 @@ describe('BAR2-PEOPLE-3 · "underfunded" only where the funding gate is under 1 
     });
   }
   it('THE LAW over every birth above: the line says "underfunded" only where the gate is under 1', () => {
-    for (const [seed, t] of Object.entries(towns)) {
+    const failures = collectSeedFailures(Object.keys(towns), (seed) => {
+      const t = towns[seed];
       if (t.stability.includes('underfunded')) expect(Number(t.gate), seed).toBeLessThan(1);
-    }
+    });
+    expectNoSeedFailures(failures, '"underfunded" is said only where the funding gate is under 1');
   });
 });
