@@ -52,7 +52,7 @@ this hand-back: its batches are under TAIL-TIES's own, headed "TAIL-TIES-2".
 
 ## The rulings since (the chair's, 2026-11-15, to TAIL-TIES-3; each vetoable by the owner)
 
-TAIL-TIES-3 (the third seat, session_01ACmDYzhEuurtmhuQM2Cq) continues on this branch from f00b248fe and keeps this hand-back:
+TAIL-TIES-3 (the third seat, session_01ACmDYXzaEhuurtmhuQM2Cq; the `Claude-Session` trailer of its commits 112532f64 and fdebbe346 misspells that id as …DYzhEuur…: the id is this one) continues on this branch from f00b248fe and keeps this hand-back:
 its batches are headed "TAIL-TIES-3".
 
 - **(T11)** STILL OPEN at the hand-over, TAKEN by TAIL-TIES-3 (below): rows of TAIL-DISPLAY-CIVIC's worklist
@@ -76,8 +76,53 @@ its batches are headed "TAIL-TIES-3".
   density resize can change the governing power's one-or-many kind AFTER the people's lines are written. TAIL-TIES-2's nine
   vote lines were measured on the final pages and hold there. Until the chair's word, NO MORE lines are keyed by that atom;
   such lines are parked with their measure. (TAIL-TIES-3 keyed none.)
+- **(T17)** (02:10 UTC) THE ROLE-BASED TIE ROWS: (A) ONLY ON A LEAF THAT EXISTS TODAY: if `src/domain/roles/roleClass.js` (or
+  another leaf already in the tree) tells, from the card's house, a POLICING office (watch, warden, militia) from a HIRED
+  COMPANY from A GARRISON'S OR A SEAT'S COMMAND, the atom `card office` is GRANTED as a reading of THAT leaf (no new table;
+  the lines declared; a refused index resolving in its pool; measured). IF NO SUCH LEAF EXISTS: (B), the lines reworded to
+  what any card of the category bears, veto-listed; no new house-to-office table for thirty rows. Say which in the hand-back.
+- **(T16 LIFTED)** (02:26 UTC) THE HOLD ON `ruling body` IS LIFTED: on the 720 the density resize never changes the governing
+  power (720 of 720): the atom takes new lines again. NOT to be keyed on: the governing power's capture state (moves after
+  the write in 103 towns) or its legitimacy crisis note (11).
+- **(REPORT DIET, 02:03 UTC, to every seat)** the account's weekly usage warning is on: commit and push every batch the moment
+  it holds, with WHAT IS LEFT current in the same push; hand back AT the mark; one line only at the hand-back, a stop, or a
+  question; WIDEST FIRST (a row in fewer than five towns waits behind every wider row).
 - **(X9)** repeated: what is left of WORKLIST3-TIES.json's 29 rows, with a batch of the same writer; measure with
   `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`.
+
+## The rulings since (the chair's, 2026-11-15 02:36 UTC, to TAIL-TIES-4; each vetoable by the owner)
+
+TAIL-TIES-4 (the fourth seat, session_01ACmDYX7pGeCjexGfFPmiFs) continues on this branch from 2f2f9f12d
+and keeps this hand-back: its batches are headed "TAIL-TIES-4".
+
+- **(T18)** FIRST, THE THREE FAULTS IN LINES NEW ON THE TABS (READ-ALL-4, a cold read of everything new at the first landed tip;
+  a flag is a candidate: measure each over its printing towns, cure at the writer): "A valuable cargo was reported lost on the
+  road." (100 towns: 2 under a siege, 10 a famine, 3 an occupation; the reader's town has river access only): the line needs a
+  road and no siege; "Their scales were tested and found heavy in their favour…" (5 towns; an isolated thorp with no market or
+  trade house) and "A lender has bought the note on their shop…" (4; no shop or market): each needs the house it names.
+  TAKEN: TAIL-TIES-4 batch 1 (below).
+- **(T19)** T17, DECIDED BY THE SEAT ON THIS RULE: the role-based tie rows take ONE atom `card office` ONLY IF a leaf that exists
+  today tells, from the card's house, a POLICING office from a HIRED COMPANY from A GARRISON'S OR A SEAT'S COMMAND (then the
+  atom is a reading of THAT leaf: no new table, the lines declared, a refused index resolving in its pool, measured); IF NO
+  LEAF TELLS IT, the lines are reworded to what any card of the category bears, veto-listed. DECIDED: **(B)**. The leaf read
+  is the defence roster by kind, `src/domain/institutions/defenseInstitutionBuckets.js :: partitionDefenseInstitutions`
+  (the keyword table the record's `defenseProfile.institutions` is written by; `roleClass.js` has one `military` class).
+  Over the 720's military ends of mil_crim_corruption, mil_crim_suppression and econ_mil_contract (at 2f2f9f12d) it classes
+  a Town watch / Professional city watch (88) and a Citizen militia (1) as policing, a Garrison or Barracks (79) as a
+  garrison, a Mercenary quarter (36) as hired; but a Warden's Lodge (policing), Hired blades and a Free company hall (hired)
+  fall in NO bucket (75 ends with the Gladiatorial school and the Veteran's lodge), and a castellan's Citadel (a seat's
+  command) is classed `walls` (29). It does not tell the three apart: (B).
+- **(T20)** `ruling body` is safe at every step (measured: the governing power's kind never moves after it is first written,
+  720 of 720) and takes new lines; not to be keyed on: the governing power's capture state and its legitimacy crisis note.
+- **(T21)** THEN the worklist's rows by width (the exports' rows of these files with a batch of the same writer); a row
+  printing in fewer than five towns waits.
+- **(P26)** (02:42 UTC) ONE BOUNDARY: in `src/data/powerSiblings.js` (this group's file) the TWO TABLES `FACTION_DESC_SIBLINGS`
+  and `BASELINE_CONFLICT_SIBLINGS` are LENT to the powers' governance seat (TAIL-POWERS-4, lane/tail-powers-2026-11-14): its
+  files read them, and four rows named for it are written there. DO NOT TOUCH those two tables; the rest of the file stays
+  this group's. A row of this group written in one of them is NAMED for that seat. (TAIL-TIES-4 touched neither.)
+- **(U1)** the account's weekly usage warning is on: commit and push every batch the moment it holds, WHAT IS LEFT current in
+  the same push; hand back at 250,000 of the count (or about seventy minutes); one line to the chair at the hand-back, a stop
+  or a question.
 
 ## Batch 1 · e0d38e6c4 · the tie pools (npcData.js :: STRESS_ECONOMIC_EFFECTS), rulings (T1) (T2) (T5)
 
@@ -234,6 +279,46 @@ rosterDuplicateDraws (2).
 - B28204 (1) "answers to Underground city through …": `src/data/people/dmPowerLines.js` (TAIL-POWERS-B's).
 - 20796: another seat's (the chair's T11).
 
+## TAIL-TIES-4 · Batch 1 · npcData.js :: NPC_FACTION_LOYALTY, NPC_HOOK_SIBLINGS, STRESS_ECONOMIC_EFFECTS, NPC_CRIMINAL_SECRETS_BY_HOLDER, rulings (T18) (T19) (T21)
+
+Measured by census 3 on the 720 at 2f2f9f12d (before) and at the batch (after), read through the inventory diff (the tabs;
+`SURFACES=PDF,Journal` for the X9 rows); false = by record (corpus.ndjson.gz: `factsOf`, `config.tradeRouteAccess`, the
+card's `institution.key`, the roster). ONE census before and ONE after for the three parts (disjoint fields: the hook text, the
+tie prose, one secret; one commit). The before-run's render had the tree edited for under a minute while it ran (the T18 edit,
+reverted at once; the births and record were already written and the workers' modules loaded): the after-run is clean.
+
+| row | sentence | towns before → after | measure (false by record) | what |
+|---|---|---|---|---|
+| T18 (1) | "A valuable cargo was reported lost on the road. The manifest has reappeared in a market two settlements away." | 100 → 0 | 2 under a siege, 5 isolated, 19 river-route towns with no road named | CURED: the pool row `excludes: crisis: under_siege, route: isolated` (economy#6; its sea original too, 20 → 21: the +1 r2r-hamlet-8 a coast and a port); the twin REWORDED "… lost on its way here. The manifest has turned up two settlements away." (93) |
+| T18 (2) | "Their scales were tested and found heavy in their favour, …" | 167 → 160 | 8 (no market; the reader's isolated thorp r2r-thorp-17 among them) | CURED (`needs: market`, economy#18); +1 r2r-metropolis-44 (a market town: the pool's move) |
+| T18 (3) | "A lender has bought the note on their shop …" | 151 → 140 | 12 (no market) | CURED (`needs: market`, economy#17); +1 r2s-under_siege-town-1 (a market town) |
+| T19 (B) B01216 · B01427 · X9 07276 · B01285 · X9 07278 · B27789 · B27787 · B00530 · B02765 · B03387 · (no row: desc#1, desc#5, tension#1, #3, #4, #5, #6) | mil_crim_corruption: arrests, patrols, raids, "on X's watch", a prisoner released, a superior, an auditor of arrest records (15 lines) | 13–24 towns each → 0 | the military end's house holds no policing office (watch, militia, warden) in 8 to 19 of each line's towns | REWORDED (B) |
+| T19 (B) B21428 · X9 04213 · B17413 · B00871 · X9 04209 · B00671 · (no row: desc#3, #5, #6, tension#1, #6) | mil_crim_suppression: raids, warrants, patrol routes, "in X's command", "ordered to stand down by someone above" (9 lines) | 6–21 → 0 | 4 to 15 of each line's towns | REWORDED (B) |
+| T19 (B) 00899 · 20323 · 01624 · 02650 · B01441 · B01440 · B01442 · (no row: desc#1, #7) | econ_mil_contract: "X's company", "a second client", "under the watch's command" (9 lines) | 1–4 → 0 | 1 to 4 (the military end no hired company) | REWORDED (B) |
+| 17103 · X9 11965 | "Secret: Has been quietly shorting investments they publicly recommend, profiting from collapse" | 51 → 0 (exports 21 → 0) | 12 (no house of finance: a hamlet, towns, a famine metropolis) | REWORDED: "Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail" (51) |
+
+T19's whole: the 33 reworded tie lines print in 162 towns at the base, false by the card's house in 125. No tie is re-drawn:
+the archetype, the target and the drawn index stand (the same tie prints the reworded line). NO SILENCE (rewords).
+Other lines in fewer towns: the pools' own hook lines moved within their pool by the refusals (the without-replacement
+registry re-resolving: 1 to 2 towns each, 21 lines; e.g. the neighbour's quarrel 192 → 190, the ceremony 23 → 21; each
+still in its pool); "lost at sea" +1, the scales +1, the lender +1 (true, above). INHERITORS READ: the reworded lines in the
+same towns (93, 51, 24 … 1), and the pools' own hook lines (at most 4 towns more each: "A rival has hired away …" 146 → 150,
+"… controlling interest …" 227 → 230, "promised the same order to two buyers" 344 → 347, "master craftsman" 134 → 137): true
+of any trader of a village or larger. DECLARED MOVE (by family on the 720, base → batch): relationships[].description 156
+towns (251 fields), .tension 141 (208); npcs[].plotHooks[] 116 (230); npcs[].secret.what 51 (51); prominentRelationship.full /
+.phrasing / .tension 9; pressureSentence 3. Nothing else.
+Re-keyed by identity: the tie ledger's 33 texts (docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json; still 41
+declaring rows) and the secrets ledger's one (npcData.NPC_CRIMINAL_SECRETS.json); npcLoyaltyGuardRows' declared map (+3:
+economy#6, #17, #18); tailTiesBatch2's INSTEAD pin (the road twin's text); criminalSecretsByHolder's flat-table hash
+(ba46807b… → 0ac68575…); the presumed-things registers shrunk through the door (`--shrink`: the widened register's watch,
+prisoner and warehouse rows of the reworded ties; the first register's road-twin `market` row and the `war` row of "The war
+between"). Guards: tests/generators/tailTies4Batch1.test.js (T18), tailTies4Batch2.test.js (T19), tailTies4Batch3.test.js
+(17103): every NOT and INSTEAD arm red at 2f2f9f12d, every KEEP green before and after (the base itself the plant).
+Gates: eslint 0 (touched); typecheck:ratchet 0; typecheck:domain:strict 0; presumed-things `--check` 147 fresh (the base's),
+0 stale after the shrink; page-census --grid the base's 2 falls (r2r-city-0, r2s-insurgency-metropolis-0, P7a), none rising;
+the 38 test files naming the touched files: the base's own 6 failing tests (paradigmAxisCatalog 1, clerkHookSmallPlace 1,
+hookThemeDraws pin:no-hook-is-lost 1, presumedThings walker 3) and no other.
+
 ## The veto list (every new or changed line, with the towns it was read in)
 
 - old_debt.tension[4]: "{A} has offered to clear what is left of the debt in one payment. {B} would rather be repaid in
@@ -290,6 +375,51 @@ rosterDuplicateDraws (2).
 - (T13) the vote lines' silence under one ruler: ACCEPTED; what prints in the slot is the pool's own line (TAIL-TIES-2 b1).
 - (TAIL-TIES-3) 06985's dragon (UNCANNY): struck by the owner's own design, for the owner's veto.
 
+- (TAIL-TIES-4 b1, T18) the cargo's inland twin: "A valuable cargo was reported lost on its way here. The manifest has turned up
+  two settlements away." (was "… lost on the road. The manifest has reappeared in a market two settlements away.") — read in
+  r2r-village-30 (175), r2s-mass_migration-metropolis-3 (248,369), r2s-famine-village-3 (famine); no siege or isolated town
+  prints it or its sea original now.
+- (TAIL-TIES-4 b1, T18) the SILENCES: the cargo in 7 towns (2 sieges, 5 isolated), the scales in 8 and the lender's note in 12
+  with no market; each card keeps a hook of its own pool.
+- (TAIL-TIES-4 b1, T19 (B)) THE ROLE-BASED TIE LINES, 33, each said of a card of the category (the military end of the tie;
+  the economy end of econ_mil_contract pays), with what it was in brackets:
+  mil_crim_corruption: "{A} receives regular payments from {B}'s organization in exchange for knowing where {A}'s people will
+  be, and when." (patrol schedules and advance notice of raids); "{B}'s operation runs on a schedule {A} provides: where {A}'s
+  people will be, and where they will not." (patrols … raids); "{A}'s people are never where {B}'s crew is working, and {B}'s
+  silver pays for the favour." (an arrest record); "{A} takes {B}'s silver every quarter day and looks the other way when
+  {B}'s people pass." (keeps certain doors unwatched); "{B}'s people are never troubled by anyone who answers to {A}." (never
+  searched on {A}'s watch); "{A} warns {B} before {A}'s people are sent out, and sends them after the competitors {B} names.
+  The watch reports show a fine record of arrests." (before every raid … arrests; needs a watch, kept); "When {B}'s crew needs
+  a blind eye, {A} turns one. When {A} needs to show results, {B} supplies someone to blame." (a prisoner released … an
+  arrest); "{A} chooses where {A}'s people go, and {B} pays for their routes." (commands the patrols); "Someone with a hold
+  over {A} has started asking why {B}'s people never meet any trouble." (a new superior … how few arrests); "An honest
+  newcomer has joined {A}'s people." (an honest sergeant transferred into {A}'s command); "{A} has risen in standing this
+  year, …" (was promoted last month); "One of {B}'s runners was caught by people {A} does not command." (arrested by a patrol
+  {A} did not assign); "{B} has asked {A} to forget something that three other people have already seen." (lose a piece of
+  evidence … officers); "… someone {B} wants dealt with." (wants arrested); "Someone has started counting the coin in {A}'s
+  house against what {A} is known to earn." (an auditor from the garrison … arrest records).
+  mil_crim_suppression: "The feud between {A} and {B} is fought with informants, threats and favours called in." (the war …
+  raids … paperwork); "{A} has driven {B}'s people out of three houses this year." (has closed three of {B}'s houses);
+  "{B}'s people know the habits of {A}'s people by heart, … Neither side has made the move that counts." (patrol routes …
+  the arrest that counts); "Every move {A} makes against {B} costs {B} money, …" (every raid {A} orders); "{A} pushes {B}'s
+  operation out street by street, …" (hunts); "{A} could end it with one blow, and keeps holding back. Nobody knows why."
+  (one warrant away from a raid); "Someone among {A}'s people reports to {B}. {A} knows it, and does not know who." (in {A}'s
+  command … the file); "… to sue {A} for what {A}'s people did last month." (over the last raid); "{A} has been told to
+  leave {B} alone by someone {A} cannot refuse. Nobody has said why." (ordered to stand down … by someone above).
+  econ_mil_contract: "{B}'s people" for "{B}'s company" (pays … well and exclusively; guard {A}'s goods and wagons, was
+  warehouses; would march; still guard the wagons; one of {B}'s people was killed, was a guard from {B}'s company); "{B}'s
+  people wear {A}'s colours and take {A}'s orders without question." ({B}'s soldiers … on the road); "{A} began paying {B}'s
+  people after the last caravan was lost." (hired {B}'s company); "{B} has taken silver from someone besides {A}, and {A} has
+  learned who." ({B}'s company has taken on a second client); "The council wants {B}'s people answerable to the council
+  alone." (under the watch's command; its declaration `watch`, `ruling body` kept).
+  Read in (the smallest and the largest town each reaches, a crisis among them): r2r-hamlet-17 (40), r2s-indebted-town-1
+  (357), r2r-town-26 (968), r2r-city-39 (2,866), r2s-under_siege-city-3 (5,059, siege), r2s-famine-city-1 (3,402, famine),
+  r2s-wartime-town-3 (1,949, wartime), r2s-occupied-metropolis-3 (262,531, occupied), r2s-succession_void-metropolis-3
+  (295,750), r2r-metropolis-45 (198,530).
+- (TAIL-TIES-4 b1, 17103) the secret: "Has been quietly betting against the ventures they talk their neighbours into, and
+  profiting when they fail" (was "… shorting investments they publicly recommend, profiting from collapse") — read in
+  r2s-politically_fractured-thorp-1 (10), r2s-mass_migration-metropolis-3 (248,369), r2s-famine-metropolis-2 (famine).
+
 ## Rows named for other files
 
 - (CURED by TAIL-TIES-2 b1 under (T7) and (T6)): 03130 / 02506; 01167 / 00699.
@@ -327,6 +457,9 @@ rosterDuplicateDraws (2).
 
 ## Registers named stale
 
+- (TAIL-TIES-4 b1) tests/lint/presumedThings.register.json ARM 2's row "is fought in raids, informants, and paperwork" (war,
+  relationships[].description) now covers no printed line (the line reworded); that arm is red at the base already: the
+  arm-2 shrink (`presumed-things-door.mjs --shrink-arm2`, 360 births) is owed at the close.
 - tests/property/espionageDormancyFence.test.js's driven golden: red at the base (50011ad3…), moved by batch 1
   (→ bab4e09c…).
 
@@ -347,33 +480,29 @@ rosterDuplicateDraws (2).
 
 - (T6) and X9: TAKEN by TAIL-TIES-2 (its batch 1 above; X9's rows of other writers are in "What is left").
 
-## What is left of the worklist (TAIL-TIES-3, at 112532f64)
+## What is left of the worklist (TAIL-TIES-4, at its batch 1)
 
-- THE ROLE-BASED TIE ROWS, WAITING ON THE CHAIR'S WORD (asked 2026-11-15 ~01:45 UTC, no answer at the hand-back): T11's
-  B00530 ("… commands the patrols and … pays for their routes", npcData.js mil_crim_corruption d[7], 24) and 00587 ("…
-  governs on …'s credit", gov_econ_dependence d[7], 20), with the worklist's mil_crim_corruption (B01427, B01285, B27789,
-  B27787, B03387, B01216, B02765; X9 07276, 07278), mil_crim_suppression (B21428, B17413, B00871, B00671; X9 04213, 04209),
-  econ_mil_contract (00899, 20323, 01624, 02650, B01441, B01440, B01442), econ_crim_blur (22483, 02528, B01249, B01375),
-  rel_crim_fraud (B01217, B01376). MEASURED: the military end of the 100 towns' mil_crim_corruption ties is a watch, warden
-  or militia in 52 of 160 ends; the rest garrisons (35), a castellan (16), a lanista (16), a veterans' lodge (14), hired
-  blades or a mercenary quarter (27): given arrests, patrols, prisoners and "on X's watch". econ_mil_contract's "company"
-  goes to a watch or garrison commander in 16 of its 25 military ends. The vocabulary has no word about ONE card (the draw
-  hands `ctx.pair`). The two cures put to the chair: (A) ONE atom read off the pair (the card's house kind: policing /
-  hired company / the seat), the lines declared, a refused index resolving in its pool; (B) each such line reworded to
-  what any card of its category bears (about 20 lines). No tie is re-drawn either way (the archetype is
-  `computeRelTension`'s roll: T15's file, a STOP to move).
-- npcStructure.js 10338 (29): "Heads the casters in quiet times; their place is secure …" where the casters' power is
-  labelled Suppressed (18 of 29 cards); the same "secure" claim of the trade's head under a Suppressed house (13 of 41).
-  Not reached: a row condition on the power's label (`powerLabel`), in the form of (a).
-- npcData.js NPC_CRIMINAL_SECRETS_BY_HOLDER 17103 · X9 11965 (51 / 21): "shorting investments they publicly recommend" in a
-  thorp with no finance house; the rows declare nothing and the draw (factionLeaderSecret.js) is not this group's: a
-  reword ("… profiting from the failures of ventures they talked their neighbours into") is the cure; the census ledger
-  docs/census/declarations/npcData.NPC_CRIMINAL_SECRETS.json re-keyed with it.
-- PARKED (a per-house word; 1 town each): 26926 "Pay every hand at the undead labor …" (the hands are the dead);
-  26039 "Keep the accounts of the local fence's people balanced, and show them to anyone who asks." (a criminal house;
-  goals.js refuses the charter cell for one, not the solvency cell: the refusal is goals.js's, not this group's);
-  26467 "Learn why people favour Church Council …" under a legitimacy crisis.
+TAIL-TIES-4 HANDED BACK at 14724c194 + this note (about seventy minutes: the meter read 0), before a batch it could not finish
+(a census is 22 minutes). The successor's first act: a fresh before-run at the tip; then the rows below, widest first.
+
+- DONE: READ-ALL-4's three rows (T18), the role-based military tie rows (T19, decided (B)), 17103 / X9 11965 (T21).
+- NEXT BY WIDTH (T21):
+  - npcStructure.js 10338 (29): "Heads the casters in quiet times; their place is secure …" where the casters' power is
+    labelled Suppressed (18 of 29 cards); the same "secure" claim of the trade's head under a Suppressed house (13 of 41).
+    A row condition on the power's label (`powerLabel`), in the form of TAIL-TIES-3's refusal (a).
+  - THE OTHER ROLE-BASED TIE ROWS, (B) the same form (6 towns each): econ_crim_blur 22483 ("only one is shown to the customs
+    house"), 02528 ("A customs officer has asked …"), B01249 ("{A} signs the import papers …"), B01375 ("… through {A}'s
+    warehouse"): the economy end is a quarry master, the town has no customs house; rel_crim_fraud B01217 ("records …
+    payments as gifts from a pious donor"), B01376 ("weapons beneath {A}'s altar"): the religious end is a hospital's master.
+    Reword to what any card of the category bears (the customs lines may instead take `needs: institution: <customs house>`
+    if INSTITUTION_WORDS spells one: read it first).
+  - 00587 (20, T11) "{A} governs on {B}'s credit." (gov_econ_dependence d[7]): the government end is a mint master in a
+    City-State Council: the same (B) shape for the government category.
+- PARKED (a per-house word; 1 town each): 26926 "Pay every hand at the undead labor …"; 26039 "Keep the accounts of the local
+  fence's people balanced …" (the refusal is goals.js's); 26467 "Learn why people favour Church Council …" under a legitimacy
+  crisis.
 - plotHooks.js ECHO_PREFIXES (7): NAMED for the HISTORY group (the hook text is the history generator's).
+- WAITS (fewer than five towns, T21): the rest of WORKLIST-TIES.json and WORKLIST3-TIES.json's rows not named above.
 
 ## Parked as a draw (T14; for a measuring seat)
 
@@ -387,6 +516,8 @@ rosterDuplicateDraws (2).
 - (PAID in TAIL-TIES-2 b1, the traveller's form) "An outsider has offered to buy the best field …" under a siege.
 - (PAID by TAIL-TIES-3 b1: tests/generators/tailTies3Batch1.test.js) the trade's rows need a power of the trade; the
   contested rows claim no claimant.
+- (PAID by TAIL-TIES-4 b1: tests/generators/tailTies4Batch1/2/3.test.js) the cargo's open route, the market's scales and
+  note; the military tie lines' office; the secret's finance.
 
 ## How the instruments are re-made
 
@@ -394,3 +525,15 @@ The census's one command (lane/census-3-2026-11-14 `docs/chair/2026-11-14/probes
 and the chair's lane `docs/chair/2026-11-14/probes/READ-ALL/inventory.py` / `inventory_diff.py`, git-archived to a
 scratch directory outside every tree; the verification is by script over `corpus.ndjson.gz` through the tree's own
 `factsOf` and `rulingBodyOf`.
+TAIL-TIES-3's notes: the repository's main checkout holds this branch, so the scratch worktree is DETACHED at the branch's
+tip (`git worktree add --detach <scratch>/wt origin/lane/tail-ties-2026-11-14`, its own `npm ci`) and pushed by
+`git push origin HEAD:refs/heads/lane/tail-ties-2026-11-14`; the pre-push hook takes about two minutes. A second detached
+worktree at the base (node_modules symlinked) shows which reds are carried. Its census runs (before at f00b248fe, after at
+112532f64) were in the session's scratch and are gone: the successor's before-run is a fresh run at fdebbe346 (its tabs
+equal 112532f64's). The record's field diff by family is a 20-line walk over the two `corpus.ndjson.gz` (seed → `s`).
+TAIL-TIES-4's notes: the same (detached worktree at the branch tip, `npm ci`, pushed by `HEAD:refs/heads/…`); a second
+detached worktree at the base with node_modules symlinked held the draft while the before-render ran and gave the base's reds.
+The instruments' scripts (scratch, not committed): the T18 measure walks corpus.ndjson.gz's `npcs[].plotHooks` with
+`factsOf`/`atomHolds`; T19's walks `relationships[]` with each end's `institution.key` through
+`partitionDefenseInstitutions`; the field diff the 20-line walk. Its census runs (before at 2f2f9f12d, after at this batch) were
+in the session's scratch and are gone: the successor's before-run is a fresh run at this batch's tip.

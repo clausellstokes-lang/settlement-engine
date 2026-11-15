@@ -315,7 +315,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#0",
-      "text": "{A} receives regular payments from {B}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.",
+      "text": "{A} receives regular payments from {B}'s organization in exchange for knowing where {A}'s people will be, and when. Both maintain professional courtesy in public.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -323,7 +323,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#1",
-      "text": "{B}'s operation runs on a schedule {A} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.",
+      "text": "{B}'s operation runs on a schedule {A} provides: where {A}'s people will be, and where they will not. In public the two exchange formal nods.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -331,7 +331,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#2",
-      "text": "{A}'s arrest record looks good because {B} chooses which crimes get solved, and {B}'s silver pays for the favour.",
+      "text": "{A}'s people are never where {B}'s crew is working, and {B}'s silver pays for the favour.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -339,7 +339,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#3",
-      "text": "{A} takes {B}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.",
+      "text": "{A} takes {B}'s silver every quarter day and looks the other way when {B}'s people pass. Each treats the other as a reliable colleague.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -347,7 +347,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#4",
-      "text": "{B}'s people are never searched on {A}'s watch. The arrangement is three years old and has never been put in writing.",
+      "text": "{B}'s people are never troubled by anyone who answers to {A}. The arrangement is three years old and has never been put in writing.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -355,7 +355,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#5",
-      "text": "{A} warns {B} before every raid and arrests the competitors {B} names. The watch reports show a fine record of arrests.",
+      "text": "{A} warns {B} before {A}'s people are sent out, and sends them after the competitors {B} names. The watch reports show a fine record of arrests.",
       "needs": [
         "watch"
       ],
@@ -365,7 +365,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#6",
-      "text": "When {B}'s crew needs a prisoner released, {A} signs the order. When {A} needs an arrest, {B} supplies the culprit.",
+      "text": "When {B}'s crew needs a blind eye, {A} turns one. When {A} needs to show results, {B} supplies someone to blame.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -373,7 +373,7 @@
     },
     {
       "id": "mil_crim_corruption.desc#7",
-      "text": "{A} commands the patrols and {B} pays for their routes. The streets {B} uses are the quietest in the settlement.",
+      "text": "{A} chooses where {A}'s people go, and {B} pays for their routes. The streets {B} uses are the quietest in the settlement.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -381,7 +381,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#0",
-      "text": "A new superior has started asking {A} awkward questions about how few arrests are made. {A} or {B} will have to act before the other does.",
+      "text": "Someone with a hold over {A} has started asking why {B}'s people never meet any trouble. {A} or {B} will have to act before the other does.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -389,7 +389,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#1",
-      "text": "An honest sergeant has been transferred into {A}'s command. Both parties consider this a problem.",
+      "text": "An honest newcomer has joined {A}'s people. Both parties consider this a problem.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -405,7 +405,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#3",
-      "text": "{A} was promoted last month, and {B} expects the price of silence to stay the same. {A} does not.",
+      "text": "{A} has risen in standing this year, and {B} expects the price of silence to stay the same. {A} does not.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -413,7 +413,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#4",
-      "text": "One of {B}'s runners was arrested by a patrol {A} did not assign. The runner knows both their names.",
+      "text": "One of {B}'s runners was caught by people {A} does not command. The runner knows both their names.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -421,7 +421,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#5",
-      "text": "{B} has asked {A} to lose a piece of evidence that three other officers have already seen.",
+      "text": "{B} has asked {A} to forget something that three other people have already seen.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -429,7 +429,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#6",
-      "text": "{A}'s quarter-day payment from {B} arrived with a name attached: someone {B} wants arrested.",
+      "text": "{A}'s quarter-day payment from {B} arrived with a name attached: someone {B} wants dealt with.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -437,7 +437,7 @@
     },
     {
       "id": "mil_crim_corruption.tension#7",
-      "text": "An auditor from the garrison is counting {A}'s arrest records against the coin in {A}'s house. {B} is watching the count.",
+      "text": "Someone has started counting the coin in {A}'s house against what {A} is known to earn. {B} is watching the count.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -469,7 +469,7 @@
     },
     {
       "id": "mil_crim_suppression.desc#2",
-      "text": "The war between {A} and {B} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.",
+      "text": "The feud between {A} and {B} is fought with informants, threats and favours called in. Neither side counts it as winnable; neither will stop.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -477,7 +477,7 @@
     },
     {
       "id": "mil_crim_suppression.desc#3",
-      "text": "{A} has closed three of {B}'s houses this year. {B} has opened four.",
+      "text": "{A} has driven {B}'s people out of three houses this year. {B} has opened four.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -498,7 +498,7 @@
     },
     {
       "id": "mil_crim_suppression.desc#5",
-      "text": "{B}'s people know {A}'s patrol routes by heart, and {A}'s people know which taverns {B} uses. Neither side has made the arrest that counts.",
+      "text": "{B}'s people know the habits of {A}'s people by heart, and {A}'s people know which taverns {B} uses. Neither side has made the move that counts.",
       "needs": [
         "institution: tavern"
       ],
@@ -508,7 +508,7 @@
     },
     {
       "id": "mil_crim_suppression.desc#6",
-      "text": "{A} and {B} are open enemies. Every raid {A} orders costs {B} money, and every month {B} survives costs {A} standing.",
+      "text": "{A} and {B} are open enemies. Every move {A} makes against {B} costs {B} money, and every month {B} survives costs {A} standing.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -516,7 +516,7 @@
     },
     {
       "id": "mil_crim_suppression.desc#7",
-      "text": "{A} hunts {B}'s operation street by street, and {B} moves it one street ahead. The chase has lasted two winters.",
+      "text": "{A} pushes {B}'s operation out street by street, and {B} moves it one street ahead. The chase has lasted two winters.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -532,7 +532,7 @@
     },
     {
       "id": "mil_crim_suppression.tension#1",
-      "text": "{A} is one warrant away from a raid that would end it. The warrant keeps not being signed.",
+      "text": "{A} could end it with one blow, and keeps holding back. Nobody knows why.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -540,7 +540,7 @@
     },
     {
       "id": "mil_crim_suppression.tension#2",
-      "text": "Someone in {A}'s command reports to {B}. The file says so; it does not say who.",
+      "text": "Someone among {A}'s people reports to {B}. {A} knows it, and does not know who.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -572,7 +572,7 @@
     },
     {
       "id": "mil_crim_suppression.tension#6",
-      "text": "{B} has hired an advocate to sue {A} over the last raid. The case comes before the council this season.",
+      "text": "{B} has hired an advocate to sue {A} for what {A}'s people did last month. The case comes before the council this season.",
       "needs": [
         "ruling body"
       ],
@@ -585,7 +585,7 @@
     },
     {
       "id": "mil_crim_suppression.tension#7",
-      "text": "{A} has been ordered to stand down against {B} by someone above {A}. The order did not say why.",
+      "text": "{A} has been told to leave {B} alone by someone {A} cannot refuse. Nobody has said why.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -609,7 +609,7 @@
     },
     {
       "id": "econ_mil_contract.desc#1",
-      "text": "{A} pays {B}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.",
+      "text": "{A} pays {B}'s people well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -625,7 +625,7 @@
     },
     {
       "id": "econ_mil_contract.desc#3",
-      "text": "{B}'s company guards {A}'s warehouses and wagons for a fixed fee each season. {A} pays on time and asks for nothing in writing.",
+      "text": "{B}'s people guard {A}'s goods and wagons for a fixed fee each season. {A} pays on time and asks for nothing in writing.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -641,7 +641,7 @@
     },
     {
       "id": "econ_mil_contract.desc#5",
-      "text": "{B}'s soldiers wear {A}'s colours on the road and take {A}'s orders without question. No magistrate has a say over them.",
+      "text": "{B}'s people wear {A}'s colours and take {A}'s orders without question. No magistrate has a say over them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -649,7 +649,7 @@
     },
     {
       "id": "econ_mil_contract.desc#6",
-      "text": "{A} hired {B}'s company after the last caravan was lost. No caravan has been lost since, and {B}'s fee has doubled.",
+      "text": "{A} began paying {B}'s people after the last caravan was lost. No caravan has been lost since, and {B}'s fee has doubled.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -657,7 +657,7 @@
     },
     {
       "id": "econ_mil_contract.desc#7",
-      "text": "{B} answers to {A}'s purse before any other authority. Everyone in the settlement knows which way {B}'s company would march.",
+      "text": "{B} answers to {A}'s purse before any other authority. Everyone in the settlement knows which way {B}'s people would march.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -689,7 +689,7 @@
     },
     {
       "id": "econ_mil_contract.tension#3",
-      "text": "{A} has cut {B}'s fee by a fifth. {B}'s company still guards the wagons, but more slowly.",
+      "text": "{A} has cut {B}'s fee by a fifth. {B}'s people still guard the wagons, but more slowly.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -697,7 +697,7 @@
     },
     {
       "id": "econ_mil_contract.tension#4",
-      "text": "{B}'s company has taken on a second client, and {A} has learned the client's name.",
+      "text": "{B} has taken silver from someone besides {A}, and {A} has learned who.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -705,7 +705,7 @@
     },
     {
       "id": "econ_mil_contract.tension#5",
-      "text": "A guard from {B}'s company was killed protecting {A}'s cargo. {B} wants compensation the contract does not mention.",
+      "text": "One of {B}'s people was killed protecting {A}'s cargo. {B} wants compensation the contract does not mention.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -713,7 +713,7 @@
     },
     {
       "id": "econ_mil_contract.tension#6",
-      "text": "The council wants {B}'s company under the watch's command. {A} loses the contract's whole value if it agrees.",
+      "text": "The council wants {B}'s people answerable to the council alone. {A} loses the contract's whole value if it agrees.",
       "needs": [
         "watch",
         "ruling body"
