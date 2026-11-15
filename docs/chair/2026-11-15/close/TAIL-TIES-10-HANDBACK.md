@@ -113,6 +113,39 @@ expected to read 28 rises and 19 falls, with no row naming `criminalStructureKey
   `6e0c045288704cd716d782684cbb900b6f38a2c02d2d260b80249c893b58d75f`, 720 rows, 0 errors. That is BYTE-IDENTICAL to TAIL-TIES-9's, and the
   join's own tip `d5d1208ee` reads the same. The later commits touch no `src/` file. The receipt line gives the births at the final tip.
 
+## The second merge, and the proofs again at the final tree
+
+Before (2b), `git fetch` showed that the join had moved to `dc4bae117`. It carried JOIN-10 points 17 and 18: TAIL-CLOSE-POOLS-3, and T26's first-paint trim of
+16 riders in `vite.config.js`. It was merged as a merge commit (`3d86b706`), clean. It did not touch the readers register. (2b) after it touches
+only `tests/lint/factLayers.register.json`, so `3d86b706`'s `src/`, build and births ARE the final tip's. Everything was run again there:
+
+- **Type check:** `typecheck:ratchet` 0, `typecheck:domain:strict` 0.
+- **Build, plain and flagged:** both exit 0. Boot smoke: plain PASS (602/602), FLAGGED PASS (600/600).
+- **Guards:** green for `engineCoreLazyEdge` 3/3 (plain and flagged), `layerBoundaries` 8/8, `bootSmoke` 11/11, `cultureProfilesLazy` 5/5,
+  `engineChunkLazy` 19/19 and `sourceCitationIntegrity` 18/18. `factLayers.walker` LEAVES is green. READERS is the market pair plus the line's
+  own rows. `vendorPdfLazy` has the owner's 4 budget arms.
+- **THE FIRST PAINT AGAINST THE JOINED LINE'S OWN TIP** (`dc4bae117` built alone in the second scratch tree), like for like:
+
+  | | the join `dc4bae117` | the final tree |
+  |---|---:|---:|
+  | raw | 1,130,147 | 1,130,147 |
+  | gzip | 359,998 | 360,038 |
+  | Brotli | 302,173 | 302,189 |
+  | engine chunk | 867,375 | 867,375 |
+
+  - Per eager chunk the raw bytes are identical: `content-identity`, `data`, `kernel`, `vendor-icons` and `vendor-react` are identical even
+    after hash normalisation.
+  - `engine-core` (265,802) and `index` (489,079) are equal in size and differ only by the minifier's names. The cut adds nothing to the
+    first paint.
+- **The 155 named test files:** 1,652 tests, 13 red in 6 files. All 6 are named above as the line's own or environmental:
+  `generationWorkerLazy`, `defenceFactReaders`, `presumedThings`, `proseWiringCensus`, the `dist` root of `chainPrintSites`, and the market pair of
+  `factLayers.walker`. `r3c10FoodLinesTrue` is green at this tip, because the join's TAIL-CLOSE-POOLS-3 re-keyed it. `ruinFilterRoster` and the
+  stale exemption of `chainPrintSites` are green, which proves the cures.
+- **The 720 births:** `533ac4a0aa447e5d609850764505310e879c10ea050eb2d2132ea2b594bb154d`, 720 rows, 0 errors. That is BYTE-IDENTICAL to the joined
+  line's own tip `dc4bae117`, run beside it. The difference from `6e0c0452…d75f` is the join's alone (points 17–18 changed
+  `src/data/institutionDescVariants.js` and `institutionalCatalog.js`). Nothing of this lane moves a birth.
+- **The door before (2b):** 29 rises, 20 falls. The market pair is the only row naming `criminalStructureKey.js`.
+
 ## Named, not mine
 - The four court-bench reads of the facts in `defenseDisplay.js` (the src close seat's).
 - Every budget (above).
