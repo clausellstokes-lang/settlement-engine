@@ -1,0 +1,15 @@
+{"id":"C6001","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"speaks of a campaign advancing; CRISIS is none, no siege or campaign exists in this calm town","other":""}
+{"id":"C6322","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"title 'Frontman' for Maryam ibn Tufayl, who is female in PEOPLE","other":""}
+{"id":"C6365","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"'Lord Marshal' title for Arwa al-Kindi, who is female (f) in PEOPLE","other":""}
+{"id":"C6543","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"'Mother' title for Adnan al-Dimashqi, who is male (m) in PEOPLE","other":""}
+{"id":"C6922","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"PAIR","why":"bread is no worry; the page prints Food Security Pressured, grown 44% of need, 53% imported","other":"C6015"}
+{"id":"C6977","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"prints 25,101 lbs/day imported and short 1,204; header FOOD ledger says imports cover 24,897 and the gap is 3% (about 1,408)","other":"C6979"}
+{"id":"C7293","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"PAIR","why":"calls the city watch 'well-funded'; the defence page says garrison and watch are resource-constrained, inadequate equipment, irregular pay","other":"C7309"}
+{"id":"C7312","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"PAIR","why":"'Everyone comes and goes by the gates'; the Underground network moves goods and people beneath the walls without touching a street","other":"C6564"}
+{"id":"C7315","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"'re-judged as the campaign advances'; CRISIS is none, no campaign exists (same fault as C6001)","other":"C6001"}
+{"id":"C7341","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"LACKS","why":"'unofficial landing points'; trade access is road only and HOUSES has no docks or port","other":""}
+{"id":"C7391","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"PAIR","why":"'Everyone entering is counted at the gate'; underground passage and smuggling move people and goods beneath the walls unseen","other":"C6564"}
+{"id":"C7479","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"male title 'Qaid' for Tamara al-Karimi, who is female (f) in PEOPLE","other":""}
+{"id":"C7506","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"male title 'Emir' for Vidha al-Rashidi, who is female (f) and 'the lady' in PEOPLE","other":""}
+{"id":"C7216","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"'in a thin economy'; STATE says Prosperous, Economic Resilience Strong, diversified economic base with nine income sources","other":"C6003"}
+{"id":"DONE","lines":2375,"blocks":1,"flags":14}
