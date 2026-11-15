@@ -13,6 +13,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { defenceOf } from '../../src/domain/facts/defence.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** @param {string} seed */
 function birth(seed) {
@@ -49,7 +50,8 @@ describe('the safety profile names only a force that stands (item 3)', () => {
     const d = defenceOf({ institutions: s.institutions });
     expect(d.garrison || d.watch || d.militia, 'anchored: no force stands').toBe(false);
     expect(s.economicState.safetyProfile.safetyLabel, 'anchored: the Safe line').toBe('Safe');
-    expect(s.economicState.safetyProfile.safetyDesc).not.toContain('Local enforcement is present');
-    for (const t of corpus) expect(t.economicState.safetyProfile.safetyDesc, t.name).not.toContain('Local enforcement is present');
+    expectAbsentWithAnchor(s.economicState.safetyProfile.safetyDesc, 'Local enforcement is present', 'Neighbours notice trouble and deal with it themselves', 'the Safe line says who keeps order');
+    expect(corpus.map((t) => t.economicState.safetyProfile.safetyDesc).join('\n'), 'the corpus prints the Safe line').toContain('Crime exists but is well-managed');
+    for (const t of corpus) expect(t.economicState.safetyProfile.safetyDesc, t.name).not.toContain('Local enforcement is present'); // anchored: the line above proves the corpus prints the Safe line, the branch this negative reads
   });
 });

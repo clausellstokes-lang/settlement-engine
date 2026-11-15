@@ -65,6 +65,8 @@ const text = (seed, where) => {
 };
 
 const SUPPLIED = /A row marked short is what its house makes when supplied\./;
+/** A line each surface prints on every town (its section heading; the journal's overview list), read off the renders. */
+const SURFACE_HEAD = { economics: '\nEconomics & Trade\n', institutions: '\nInstitutions\n', services: '\nServices\n', overview: '\nOverview\n', journal: '- **Tier:** ' };
 // [id, seed, surface, must NOT print, what prints instead (one or more; null: the slot is silent by design)]
 const NOT = [
   // E22: the leaf's second cause: a house short of its input (the Resources tab's "No timber reaches the charcoal burner.")
@@ -96,6 +98,8 @@ describe('TAIL-EXPORTS-PDF-3 batch 3: the leaf\'s second cause, ENTREPÔT by the
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
   test.each(NOT)('%s %s (%s): not printed', (_id, seed, where, not, instead) => {
     const out = text(seed, where);
+    expect(out, `${where}: the surface renders`).toContain(SURFACE_HEAD[where]);
+    // anchored: the line above proves this surface rendered its own heading on the text this pattern scans
     expect(out).not.toMatch(not);
     for (const re of instead ? [instead].flat() : []) expect(out).toMatch(re);
   }, 120000);
@@ -106,6 +110,9 @@ describe('TAIL-EXPORTS-PDF-3 batch 3: the leaf\'s second cause, ENTREPÔT by the
     expect(text(seed, where)).toMatch(keep);
   }, 120000);
   test.each(UNSHORT)('unshort %s (%s): no short mark', (seed, where) => {
-    expect(text(seed, where)).not.toMatch(/Short of |\((?:[a-z]+, )?short\)|A row marked short/);
+    const out = text(seed, where);
+    expect(out, `${where}: the surface renders`).toContain(SURFACE_HEAD[where]);
+    // anchored: the line above proves this surface rendered its own heading on the text this pattern scans
+    expect(out).not.toMatch(/Short of |\((?:[a-z]+, )?short\)|A row marked short/);
   }, 120000);
 });

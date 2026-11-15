@@ -26,6 +26,7 @@ import { madeListTerrainAllowsRaw } from '../../src/generators/computeActiveChai
 import { terrainAllowsResource } from '../../src/generators/resourceGenerator.js';
 import { TERRAIN_DATA } from '../../src/data/geographyData.js';
 import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -93,7 +94,7 @@ const KEEP_B = [
 describe('D30 (b): a gathered or herded good is listed only where the record\'s exploitation works it', () => {
   test.each(GONE_B)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
     const list = madeIn(seed);
-    expect(list).not.toContain(gone);
+    expectAbsentWithAnchor(list, gone, still, `${seed}: the unworked raw, beside a good the town makes`);
     expect(list).toContain(still);
   });
   test.each(EMPTIED_B)('%s lists no "%s", and nothing else (silent by design)', (seed, gone) => {
@@ -119,7 +120,7 @@ test('D30 (b): the made list\'s terrain check is the exploitation record\'s own,
 describe('D30 (a): a made good is listed only where a house of the whole table makes or works it', () => {
   test.each(GONE_A)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
     const list = madeIn(seed);
-    expect(list).not.toContain(gone);
+    expectAbsentWithAnchor(list, gone, still, `${seed}: the unmade good, beside a good the town makes`);
     expect(list).toContain(still);
   });
   test.each(KEEP_A)('%s still lists "%s" (its %s stands)', (seed, good, house) => {

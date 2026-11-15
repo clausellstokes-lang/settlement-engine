@@ -14,6 +14,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -43,7 +44,7 @@ describe('D34: the catalogue bundles no good a resource does not give', () => {
     ['river_fish', 'salt', 'fish'],
     ['precious_metals', 'gems', 'luxury'],
   ])('%s gives no "%s" (it still gives "%s")', (key, gone, still) => {
-    expect(commoditiesOf(key)).not.toContain(gone);
+    expectAbsentWithAnchor(commoditiesOf(key), gone, still, `${key}: the good it does not give, beside one it gives`);
     expect(commoditiesOf(key)).toContain(still);
   });
   test.each([['hot_springs'], ['hot_springs_mineral']])('%s gives no medicinal herbs (it gives no commodity: its goods are its trade goods)', (key) => {
@@ -75,7 +76,7 @@ const KEEP = [
 describe('D34: the made list holds no bundled good the land does not give', () => {
   test.each(GONE)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
     const list = madeIn(seed);
-    expect(list).not.toContain(gone);
+    expectAbsentWithAnchor(list, gone, still, `${seed}: the bundled good, beside a good the town makes`);
     expect(list).toContain(still);
   });
   test.each(KEEP)('%s still lists "%s"', (seed, good) => {
@@ -104,7 +105,7 @@ describe('D34: the coast\'s salt is made only where a salt works stands', () => 
   });
   test.each(GONE_COAST)('%s lists no "salt"; it still makes "%s"', (seed, still) => {
     const list = madeIn(seed);
-    expect(list).not.toContain('salt');
+    expectAbsentWithAnchor(list, 'salt', still, `${seed}: no salt without a salt works, beside a good the town makes`);
     expect(list).toContain(still);
   });
   test.each(KEEP_COAST)('%s still lists "salt" (its Salt works stands on the fishing grounds)', (seed) => {
