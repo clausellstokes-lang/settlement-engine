@@ -284,8 +284,8 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     overview: {
       local: 'With the old leader dead and no one in their place, people in {name} wait to see who comes out on top.',
-      trade: 'Nothing large is decided in {name} until the seat is filled, and each office does as it sees fit meanwhile.',
-      official: 'Each office in {name} now runs itself, and no one has the standing to make them answer.',
+      trade: 'Nothing large is decided in {name} until the seat is filled, and meanwhile everyone does as they see fit.', // TAIL-CRISIS-2 (K11): no office
+      official: 'With the seat empty, no one in {name} has the standing to make anyone answer.', // TAIL-CRISIS-2 (K11): no office
       newcomer: 'A newcomer in {name} is soon asked which claimant they favour, and the answer is remembered.',
     },
     defence: {
