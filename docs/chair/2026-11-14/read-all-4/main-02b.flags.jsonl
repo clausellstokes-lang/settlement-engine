@@ -1,0 +1,11 @@
+{"id":"01020","town":"r2s-under_siege-city-3","sev":"MED","kind":"TAG","why":"standard patrol coverage under siege (stability Critical, safety Desperate Active Siege); tag reaches siege towns; routine patrols not so","other":""}
+{"id":"00441","town":"r2s-under_siege-city-0","sev":"MED","kind":"STATE","why":"goods change hands unrecorded, duty optional; HOUSES has Customs house, Harbour master's office, Chroniclers' exchange; no Black market or criminal faction; also under siege","other":""}
+{"id":"00248","town":"r2s-famine-city-0","sev":"MED","kind":"TAG","why":"cargo lost on the road; trade access river only, and tag reaches sieges where nothing travels by road","other":""}
+{"id":"01022","town":"r2s-famine-city-0","sev":"MED","kind":"TAG","why":"watch and garrison walk the usual rounds; stability Desperate (hunger eroding order); tag reaches occupations where officers do not rule freely","other":""}
+{"id":"01018","town":"r2r-city-44","sev":"MED","kind":"STATE","why":"well paid, well equipped, patrol properly; defence Defensible, legitimacy 0, hunger eroding order, monsters on roads, famine","other":""}
+{"id":"00773","town":"r2s-occupied-city-2","sev":"LOW","kind":"STATE","why":"wine from local grapes or imported must; gaps: Vintner lacks access to grapes; no grapes or must in imports, no vineyard resource","other":""}
+{"id":"00985","town":"r2r-city-51","sev":"MED","kind":"STATE","why":"country gives too few luxury goods; LAND Luxury Goods chain running on available veins, and the town exports luxury manufactured goods and precious metals","other":""}
+{"id":"00074","town":"r2s-indebted-city-1","sev":"MED","kind":"STATE","why":"claims money to spend on buildings; CRISIS Indebted to Outside Power, stability Strained — the creditors have a say in every decision","other":""}
+{"id":"01045","town":"r2r-city-49","sev":"LOW","kind":"STATE","why":"manifest turns up in a market two settlements away; trade access isolated, no linked neighbouring markets","other":""}
+{"id":"01107","town":"r2s-occupied-city-0","sev":"LOW","kind":"STATE","why":"city's yards as busy as its workshops; HOUSES has no yards (no shipyard, caravan exchange, stable district), and town is under occupation curfew","other":""}
+{"id":"DONE","lines":1651,"blocks":47,"flags":10,"first_line":2641,"last_line":4291}
