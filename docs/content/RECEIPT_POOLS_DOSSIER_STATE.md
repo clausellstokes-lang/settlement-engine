@@ -7170,12 +7170,12 @@ compass word, no real-world place, no named analogy.*
 2. `[street]` Nobody in {settlement} has finished putting right the legacy the {calamity} left, and that legacy is {timeband_age}.
 
 **`LEGACY-RECOVERED`** {colour}
-1. `[ledger]` {settlement} came through the {calamity}, and what the town built in answer still stands; that legacy is {timeband_age}.
-2. `[street]` Much of what stands in {settlement} now was built after the {calamity}; that legacy is {timeband_age}.
+1. `[ledger]` {settlement} came through the {calamity}, and what the town built in answer still stands, a legacy that is {timeband_age}.
+2. `[street]` Much of what stands in {settlement} now was built after the {calamity}, and that legacy is {timeband_age}.
 
 **`LEGACY-SHIFTED`** {colour}
-1. `[ledger]` What {settlement} settled in the wake of the {calamity} still shapes the town, though much has changed since; that legacy is {timeband_age}.
-2. `[street]` {settlement} still keeps the shape the town took after the {calamity}, though the times have moved on; that legacy is {timeband_age}.
+1. `[ledger]` In the wake of the {calamity}, {settlement} settled into a shape that still holds, a legacy that is {timeband_age}, though much has changed since.
+2. `[street]` {settlement} still keeps the shape the town took after the {calamity}, and that shape is {timeband_age}, though the times have moved on.
 
 **`LEGACY-LINKED`** {colour}
 1. `[ledger]` What the {calamity} left behind is {timeband_age}, and that legacy still bears on how {settlement} lives.

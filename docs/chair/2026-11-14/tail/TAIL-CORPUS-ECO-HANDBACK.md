@@ -450,6 +450,18 @@ WAREHOUSES v5 took the corpus to 2954: re-taken BY MEASUREMENT (the test's own f
 form: GREEN (79/79). (iii) `tests/data/foundingWorldBones.test.js` ("Mossgate: the religious authorities hold power — 15/20"): RED AT
 48fedbe98, the joined line where this branch was cut; this branch changes no generator file: CARRIED, not this group's (the births).
 GUARD: 3 GONE rows (the old wording drawn at the tip, each red there; prints the same vid) added (136, green).
+(C22, the chair 05:07: the hedge KEPT, on the owner's veto list as a hedge form; the canonical row agrees: v0 declared, v1 the hedge.)
+(C23, the chair 05:14) A FOURTH RED: `tests/domain/r3c8ReaderLinesTrue.test.js` L01 (Dionpyrgos: "that legacy is older than all but
+the oldest alive." read with no event named): dba1a16c4 (W2-WRITE-SIDE-13 · M1, the {calamity} agreement cure) wrote four DS-GEN-16
+lines as "…the {calamity}…; that legacy is {timeband_age}.", which cuts the age claim off from the calamity it dates. CURED IN THE
+POOL (text only, the replay moved nothing; the four lines print in 352 towns, the same claims): LEGACY-RESOLVED-WELL v1 "…still
+stands, a legacy that is {timeband_age}."; v2 "…built after the {calamity}, and that legacy is {timeband_age}."; LEGACY-SHIFTED v1 "In
+the wake of the {calamity}, {settlement} settled into a shape that still holds, a legacy that is {timeband_age}, though much has
+changed since." (no verb after the slot: dba1a16c4's own guard); v2 "…after the {calamity}, and that shape is {timeband_age}, though
+the times have moved on." r3c8 8/8 GREEN; dba1a16c4's guard green. NAMED, carried: `tests/domain/heraldCausalVoice.test.js` "no band's
+predicate leans on a pronoun" is red at bf6695a6b with all six legacy molds (two unchanged here): the time band's predicate, not these
+lines' joints. Veto list: the four lines above, read in r2r-city-44 (Kallition, a siege 61 years ago), the reader's Dionpyrgos town,
+and the 352 towns' widest fold (metropolis, religious conversion).
 Doors: generator --check 0; presumed IDENTICAL; the grid 2 falls (= the tip); eslint 0; the 59 leaf-naming files + foundingWorldBones:
 the tip's 33 reds less the 3 cured, plus foundingWorldBones carried: none new.
 
