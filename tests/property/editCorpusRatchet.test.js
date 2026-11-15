@@ -682,9 +682,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     const leafReaders = {};
     for (const [id, meta] of Object.entries(CHECK_META)) for (const path of meta.paths || []) leafReaders[path] = [...(leafReaders[path] || []), id];
     expect([Object.keys(CHECK_META).length, CROSS_KEY_CHECKS.length]).toEqual([33, 7]);
-    expect(Object.entries(CHECK_META).filter(([, meta]) => (meta.paths || []).length === 2).length).toBe(19);
+    // 2026-11-15, THE CHAIR'S RULING ER1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list; each ledger imported at fce41f2b7 and at the tree, the rows diffed): 19 -> 18: V-BAND-READINESS
+    // reads a THIRD path, `defenseProfile.institutions` (its paths [readiness.label, readiness.score] -> [.., .., defenseProfile.institutions]),
+    // ffe0750d4 UPKEEP-12 H1 "the readiness label reads the roster" (lane/coherence-upkeep, landed at JOIN-4·9 0537f92f3): no path lost.
+    expect(Object.entries(CHECK_META).filter(([, meta]) => (meta.paths || []).length === 2).length).toBe(18);
     expect(Object.keys(leafReaders).length).toBe(66);
-    expect([Object.values(leafReaders).filter((ids) => ids.length > 1).length, Object.values(leafReaders).filter((ids) => ids.length === 2).length]).toEqual([13, 10]);
+    expect([Object.values(leafReaders).filter((ids) => ids.length > 1).length, Object.values(leafReaders).filter((ids) => ids.length === 2).length]).toEqual([14, 11]); // 2026-11-15, THE CHAIR'S RULING ER1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list; each ledger imported at fce41f2b7 and at the tree, the rows diffed): [13, 10] -> [14, 11]: the one new shared leaf is `defenseProfile.institutions`, read by V-BAND-READINESS and V-DEFENSE-INST (ffe0750d4, UPKEEP-12 H1, landed at JOIN-4·9 0537f92f3)
     // (d) THE TWO-SIDED `readable` LAW. EXIT 1, the DECLARED ledger: every row declares the field,
     // exactly one is true, and its ONE consumer RESOLVES that path rather than spelling it — the
     // import above is the proof, because institutionRemoval.js throws at import on any other count.
@@ -699,7 +702,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-07 (the people landing, measured by import at each lane's tree): 35 -> 41 PEOPLE-1 CAST dc655f712 (the card's
     // `institution.family`, `memberships[].power` and `secondaryAffiliation` rows, each on npcs[] and the grouping's
     // members) -> 32 PEOPLE-5B EDIT a725df7e4 (the grouping's and the shim's label rows leave), every one declaring `readable`.
-    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([32, 32]);
+    // 2026-11-15, THE CHAIR'S RULING ER1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list; each ledger imported at fce41f2b7 and at the tree, the rows diffed): [32, 32] -> [33, 33]: the one new
+    // row `defenseProfile.institutions.garrison[].catalogId` (kind catalogue, readable: false), f78522bf6 UPKEEP-9 step 7 "one path
+    // declared" (lane/coherence-upkeep, landed at JOIN-1·9 33b12cbef); it declares `readable`.
+    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([33, 33]);
     expect(INSTITUTION_NON_CASCADED.filter((row) => row.kind === 'matched-pattern' && row.readable).map((row) => row.path)).toEqual(['economicState.activeChains[].processingInstitutions[]']);
     expect(typeof institutionRemovalChanges).toBe('function');
     // EXIT 2, the UNDECLARED ledger: EM-R6's LANDED ruling is that none of its rows has a reader,
