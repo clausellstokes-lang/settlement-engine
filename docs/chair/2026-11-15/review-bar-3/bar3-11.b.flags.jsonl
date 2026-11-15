@@ -1,0 +1,7 @@
+{"id":"C21235","town":"bar0-metropolis-calm-rand-8","sev":"MED","kind":"STATE","why":"Says town lives on what comes out of the ground; INCOME is taxes, licensing, trade, finance, tolls; quarry and grain depleted, iron only 3%","other":""}
+{"id":"C21298","town":"bar0-metropolis-calm-rand-8","sev":"MED","kind":"PAIR","why":"Law & order 'Surplus' while crime is rising faster than those in charge can answer, and safety is only Moderate","other":"C21263"}
+{"id":"C22221","town":"bar0-metropolis-calm-rand-8","sev":"MED","kind":"STATE","why":"'Fish sold daily from the morning catch' carries no short mark; LAND gives River Fisheries depleted and TRADE says local river fishery exhausted, salted fish imported","other":""}
+{"id":"C22907","town":"bar0-metropolis-calm-rand-8","sev":"LOW","kind":"PAIR","why":"Says the share unseen at the gate 'is not small'; the shadow-trade line calls the shadow trade small, 11% of trade","other":"C22807"}
+{"id":"C23072","town":"bar0-metropolis-calm-rand-8","sev":"MED","kind":"PAIR","why":"Says food trades are failing and little is put by; FOOD is Secure, 60% grown, 15.5 months in a granary, and the page elsewhere says stores cover a poor harvest","other":"C22558"}
+{"id":"C23179","town":"bar0-metropolis-calm-rand-8","sev":"MED","kind":"STATE","why":"Says baked-goods output falls short and magic makes up part of it; FOOD gives by magic 0%, gap 0%, food Secure","other":""}
+{"id":"DONE","lines":3071,"blocks":1,"flags":6}
