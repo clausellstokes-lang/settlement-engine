@@ -294,10 +294,6 @@
   "src/domain/display/defenseDisplay.js": {
    "market": [
     {
-     "line": "const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
      "line": "if (n.includes('black market'))",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
@@ -459,6 +455,14 @@
    "guild": [
     {
      "line": "if (/forge|smithy|workshop|guild/.test(n)) return 'production';",
+     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
+    }
+   ]
+  },
+  "src/domain/facts/criminalStructureKey.js": {
+   "market": [
+    {
+     "line": "const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
    ]
