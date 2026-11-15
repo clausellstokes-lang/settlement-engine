@@ -564,7 +564,7 @@ Pushed: the merge 694621784; R3 7ce6db273 and its ceiling e1577f2cd; R2 9cc8c682
 ratchet, `isCriminal` on two rows' JSDoc types: fixed in the unpushed commit, behaviour unchanged). The meter read 0;
 judged by time (about seventy minutes): no third cure could carry its tests, gates and push inside it.
 
-LEFT, in this order (the rulings above stand; each patch applies clean at 9cc8c6826, `git apply --check`):
+LEFT, in this order (the rulings above stand, and R6 below: c2c goes after R2, before R1; each patch applies clean at 9cc8c6826, `git apply --check`):
 1. (R1) c1b, `defenseGenerator.js :: computeDefenseScores` (LENT). Expected 55 / 30 / 17, readiness unmoved; READ the 30
    guard lines and the 17 conditions where they print. Its comment to be put in the file's form (the patch's names the
    measure). The reds to expect: the test files naming `scores.economic` / `defenseScoreBands` (not yet run).
@@ -576,6 +576,23 @@ LEFT, in this order (the rulings above stand; each patch applies clean at 9cc8c6
    694621784 if lost). The births BEFORE: `/home/user/inst5/b0` (694621784), after R3 `b3`, after R2 `b2s`.
 5. The veto list: the five moves with their counts (R3 226 towns, R2 229; the rest when made). No sentence was written by
    R3 or R2: their moved lines are figures in existing lines (listed in their sections above).
+
+THE CHAIR'S THREE LATER MESSAGES (queued 04:40-05:06, read by this seat only after its hand-back; the next seat's):
+- (R6, 04:44 UTC; vetoable by the owner) A SIXTH CURE, after R2 and with it in the order: THE CAPTURE WITH NOTHING BEHIND
+  IT (c2c, on lane/record-measure-3-2026-11-15 at 0e7f7234, its row-2 section): where NO criminal house stands and the
+  capture is 10 or less, the record holds a capture of nothing (169 towns hold a shadow economy with no house, chain or
+  income behind it). Expected: `blackMarketCapture` 232 towns, `economicDragDesc` 104, NOTHING ELSE (else stop and say
+  it). Its own commit, a declared move; its tests run here, every inheritor read (the capture's tier readers are listed in
+  the report). The measuring seat named no pin for any patch: the tests are the builder's for all six.
+- (U2, 04:49) four red files touching this group's files, each to be classed (a regression cured; a pin a declared move
+  explains, re-keyed by identity; or one line here with the file and the commit that moved it, `git log -S`). MEASURED
+  ALONE by this seat at 694621784 and at 7849e2c32: IDENTICAL, 7 reds (editWorldFactResources 2, famineStoresOneRounding 1,
+  r3c10FoodLinesTrue 3, storesSpanFigure 1): neither R3 nor R2 moves them; NOT YET CLASSED (no `git log -S` taken).
+- (05:06) every NEW test: negatives anchored through `tests/helpers/anchoredNegatives.js`, seed loops through the totality
+  helper, no literal state-prose sentence as an anchor (`tests/helpers/drawnProse.js`); do not edit
+  `scripts/mutation-coverage-manifest.json`. OWED: `tailDefecon5RecordCures.test.js` was written before this was read:
+  its R3 GONE rows carry a bare `.not.toBe(old)` (paired with a positive `toEqual`, but not through the helper); bring it
+  to the helpers with the next cure's rows.
 
 NAMED, not this group's files (from R3): `src/domain/viabilitySummary.js:50` (its own per cent, no floor: 4 towns' record
 summary "0% … remains uncovered"; on no surface); the writer's rounding in `foodGenerator.js` (17 small towns' `deficitPct`
