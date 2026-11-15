@@ -555,9 +555,19 @@ describe('the two controls no one-audience manifest can see', () => {
     // from mixed pools at 88 fewer positions.
     // 220 -> 208 at F6 BUDGET-FLOOR (UNITS 1–4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json): the moved worlds draw
     // from mixed pools at 12 fewer positions.
-    expect(differ.length, 'positions where the two faces draw differently').toBe(208);
+    // 208 -> 0, and the pools 1 -> 0, at THE CLOSE OF THE ROUND BAR2 (ODQ §934.105 and the owner's word of 2026-11-15 20:27:16 UTC;
+    // record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2; the chair's ruling MP1, vetoable),
+    // MEASURED over the DRIFT corpus at 1011a8a91 (the chair's own probe at 52f0a1684 reproduced): player cells 36,858 and DM cells
+    // 37,072 (the player face IS composed); player cells drawn from a dm-only variant 0 (no leak); positions that differ 0;
+    // DM-only positions 214. THE CAUSE, declared cures: `DS-ECO-6 :: TIER: minor shadow activity (≥3)`'s three dm-only variants
+    // (v1-v3) were declared `no organised crime` (b760d37d3, 0aa8326fe), so under organised crime BOTH faces now read the open
+    // twin v4 (172 positions: DM v4 172, player v4 172), and without it the DM reads v1 (36) while the player's canonical line is
+    // refused by its own declarations: a DM-only position, not a differing draw. THE OLD 208 ARE THOSE 172 + 36. So the audience
+    // control of this arm now lives in the ONE-SIDED arm below (the DM-only positions, the lawful direction; the player-only list
+    // stays empty), not in differing draws; the leak check above still runs over every position on both faces.
+    expect(differ.length, 'positions where the two faces draw differently').toBe(0);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
-      'over this many of the twelve mixed pools').toBe(1);
+      'over this many of the twelve mixed pools').toBe(0);
     // ⛔ REFUSAL 3: THE ONE-SIDED POSITIONS, WITH THEIR DIRECTION (the fold's P9). The leak
     // check above runs only over positions present on BOTH faces, so a position that exists on
     // one face alone was skipped and merely printed. The two directions are not the same fact:
@@ -572,7 +582,10 @@ describe('the two controls no one-audience manifest can see', () => {
     // 194 -> 203 at MERGE-TRAIN RECORD 10 (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-10-composed-prose-manifest.json), bisected at
     // every merge point's stage: ALLEGIANCE-CAR2 +15 (the guild's push re-deals which towns' hidden facets the player filter empties), CAR3 -6, every other point 0;
     // the lawful direction still (the player-only list stays empty).
-    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(203);
+    // 203 -> 214 at THE CLOSE OF THE ROUND BAR2 (record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2;
+    // the chair's ruling MP1), measured at 1011a8a91: among them the 36 positions of `DS-ECO-6 :: TIER: minor shadow activity (≥3)` where
+    // the DM reads v1 and the player's line is refused by its own declarations (above); the lawful direction still (player-only 0).
+    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(214);
     // The paired control on the direction split itself, so it cannot go vacuous.
     const synthetic = new Map([['a', { dm: {} }], ['b', { player: {} }], ['c', { dm: {}, player: {} }]]);
     expect([...synthetic].filter(([, seat]) => seat.player && !seat.dm).map(([at]) => at),
