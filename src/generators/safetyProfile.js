@@ -320,7 +320,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const wallNote = inst.hasWalls ? ' The walls keep most trouble outside.' : '';
     const courtNote = inst.hasCourtSystem && courthouse ? ' With a working court, organised crime treads carefully.' : ''; // UPKEEP-8: a court named only where a courthouse stands
     safetyDesc = `Crime exists but is well-managed. ${lawLine} Petty theft is the primary risk; ` +
-      `organized crime has a limited foothold.${courtNote}${wallNote}`;
+      `organized crime has ${footholdWord(hasCriminalOrg || flags.inst.hasCriminalInst)}.${courtNote}${wallNote}`; // TAIL-DISPLAY-CIVIC-4 (V10): safetyLineTruth.js
   } else if (effectiveSafety >= 1.2) {
     safetyLabel = 'Moderate';
     const lawRef  = inst.hasGarrison ? 'The garrison patrols' : inst.hasWatch ? 'The watch covers'
@@ -751,7 +751,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       facts: () => factsOf({ institutions }), key: `${seed ?? ''}::safetyProfile:SMUGGLING_HOOKS`,
       poolId: 'safetyProfile:SMUGGLING_HOOKS', surface: 'plot_hooks', drawKind: 'H',
     });
-    if (drawn.line != null) plotHooks.push(String(lineText(drawn.line)));
+    if (drawn.line != null) plotHooks.push(smugglingHookUnderSiege(String(lineText(drawn.line)), hasStress('under_siege'))); // TAIL-DISPLAY-CIVIC-4 (V10)
   }
   if (stress.crusaderSynthesis) {
     plotHooks.push(said("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological."));
@@ -1104,7 +1104,7 @@ export function keptGuardLine(desc, institutions, prosperity, read = {}) {
 // ─── UPKEEP-8 (2026-11-13): the safety lines say only what the record holds (safetyLineTruth.js) ─────────────
 // At the END of the file, as the frames above, so no producer write moves.
 import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
-import { gatesSmugglersLine, GANG_HOUSES_OF, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines } from './safetyLineTruth.js';
+import { footholdWord, gatesSmugglersLine, GANG_HOUSES_OF, smugglingHookUnderSiege, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines } from './safetyLineTruth.js';
 
 /** The enforcement sentence the desperation-theft lines end on (UPKEEP-14, ruling (h)): dropped where no enforcer stands. */
 const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival crime from organised theft.';
