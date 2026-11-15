@@ -3,6 +3,7 @@
 
 import { pickVariant } from '../kernel/proseHash.js';
 import { HANDLER_TIE_LINES } from './people/handlerTieLines.js';
+import { sharesPower } from '../domain/facts/sharedPower.js';
 
 export const MANNERISMS = [
   'drums fingers on surfaces when thinking',
@@ -1653,7 +1654,21 @@ export const pairTradeKnown = (a, b) => typeof a?.category === 'string' && typeo
  * NOT MOVED: the index, its tension line and every other tie are as drawn; only the description's text takes the twin.
  * @param {any} row @param {any} a @param {any} b
  */
-const closureFor = (row, a, b) => (row && typeof row === 'object' && row.sharedTrade && typeof row.twin === 'function' && pairTradeKnown(a, b) && !pairSharesTrade(a, b) ? row.twin : closureOf(row));
+/**
+ * BAR3-PEOPLE, the chair's direction (P5) of 2026-11-15 (vetoable by the owner): A VOTE IS CAST ONLY FROM A SEAT. A line that
+ * gives a vote declares whose (`votes: 'r'`, the first card the line names; `'both'`, a vote the two cast in one body)
+ * with its `twin`, the same beat claiming no vote; where the roster gives that card no seat (no membership of a power) or
+ * the two no power in common (`sharedPower.js :: sharesPower`, the one home), the twin is written. THE DRAW IS NOT MOVED:
+ * the index, its tension line and every other tie are as drawn; only the text takes the twin. A card without memberships
+ * (a ledger's stand-in, a legacy edge) keeps the drawn line.
+ * @param {any} row @param {any} a @param {any} b @returns {boolean}
+ */
+const voteUnheld = (row, a, b) => {
+  if (!Array.isArray(a?.memberships) || !Array.isArray(b?.memberships)) return false;
+  return row.votes === 'both' ? !sharesPower(a, b) : !sharesPower(a, a);
+};
+const closureFor = (row, a, b) => (row && typeof row === 'object' && typeof row.twin === 'function'
+  && ((row.sharedTrade && pairTradeKnown(a, b) && !pairSharesTrade(a, b)) || (row.votes && voteUnheld(row, a, b))) ? row.twin : closureOf(row));
 const pairProse = (salt, variants, order = null) => Object.assign((r, s, variant, force) => {
   const [a, b] = isReversedTie(variant) ? [s, r] : [r, s]; // TAIL-TIES-2 (T6): the pair's direction, read off the stored variant
   const ends = order ? endsOf(a, b, order[0], order[1]) : [a, b];
@@ -1705,21 +1720,21 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name}'s account books look clean because ${s.name} keeps certain sales out of them. Both of them grow richer for it.`, colour: true },
       { line: (r, s) =>
         `${s.name} pays ${r.name} for a respectable name, and ${s.name}'s goods travel under it, past inspectors who never look inside.`, colour: true },
-      (r, s) =>
-        `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`,
+      { line: (r, s) =>
+        `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege
       { line: (r, s) =>
         `${s.name}'s money buys ${r.name}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.`, needs: ["market"] },
       { line: (r, s) =>
         `${r.name}'s shop front is real, the trade is real, and a third of the coin that passes through it belongs to ${s.name}.`, colour: true },
       { line: (r, s) =>
-        `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`, colour: true },
+        `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`, colour: true, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege
       { line: (r, s) =>
         `${r.name} holds the licence, ${s.name} supplies the goods, and the profit is split in a back room on the first of every month.`, colour: true },
     ], ['economy', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => `If ${r.name} is investigated, ${s.name} is implicated, and the other way round. Both know it, and neither mentions it.`, colour: true },
       { line: (r, s) => `A clerk has begun checking ${r.name}'s ledgers against each other. Neither ${r.name} nor ${s.name} has decided what to do about it.`, colour: true },
-      { line: (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`, colour: true },
+      { line: (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`, colour: true, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege
       { line: (r, s) =>
         `${s.name} wants to move a larger cargo through ${r.name}'s warehouse next month. ${r.name} has not agreed and has not refused.`, colour: true },
       (r, s) =>
@@ -2100,12 +2115,15 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} owes their place to ${r.name} and has kept others from climbing the same way. The two of them remember it differently.`, colour: true },
       { line: (r, s) => `${r.name} taught ${s.name} everything, including how to get the better of ${r.name}.`, colour: true },
       { line: (r, s) =>
-        `${r.name} took ${s.name} in as an apprentice and taught them the trade, the clients, and the names worth knowing.`, colour: true },
+        `${r.name} took ${s.name} in as an apprentice and taught them the trade, the clients, and the names worth knowing.`, colour: true, sharedTrade: true, // BAR3-PEOPLE (C22325): a trade taught is a trade shared; its twin where the pair shares none
+        twin: (r, s) => `${r.name} took ${s.name} under their wing early and taught them the customs, the clients, and the names worth knowing.` },
       { line: (r, s) =>
-        `${s.name} learned the work at ${r.name}'s side for seven years. Half of ${s.name}'s clients first came through ${r.name}'s door.`, colour: true },
+        `${s.name} learned the work at ${r.name}'s side for seven years. Half of ${s.name}'s clients first came through ${r.name}'s door.`, colour: true, sharedTrade: true, // BAR3-PEOPLE (C22325)
+        twin: (r, s) => `${s.name} spent seven years at ${r.name}'s side. Half of the people ${s.name} deals with first came through ${r.name}'s door.` },
       { line: (r, s) => `${r.name} vouched for ${s.name} when nobody else would. ${s.name}'s first post came from that word.`, colour: true },
       { line: (r, s) =>
-        `${s.name} still uses ${r.name}'s methods and ${r.name}'s ledger format. Everyone who sees ${s.name}'s work recognises the teacher.`, colour: true },
+        `${s.name} still uses ${r.name}'s methods and ${r.name}'s ledger format. Everyone who sees ${s.name}'s work recognises the teacher.`, colour: true, sharedTrade: true, // BAR3-PEOPLE (C22325)
+        twin: (r, s) => `${s.name} still keeps ${r.name}'s hours and ${r.name}'s ledger format. Everyone who deals with ${s.name} recognises the teacher.` },
       { line: (r, s) => `${r.name} named ${s.name} as successor in front of witnesses. The formal handover has not happened.`, colour: true },
     ]),
     tension: pairProse('t', [
@@ -2135,21 +2153,25 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} and ${s.name} trade favours on a strict count. Neither has ever been more than one favour ahead.`, colour: true },
       { line: (r, s) =>
-        `${r.name} controls a vote ${s.name} needs, and ${s.name} controls a supply ${r.name} needs. Their meetings are short and their bargains hold.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+        `${r.name} controls a vote ${s.name} needs, and ${s.name} controls a supply ${r.name} needs. Their meetings are short and their bargains hold.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"], votes: 'r', // BAR3-PEOPLE (P5, mutual_leverage): a vote is cast only from a seat; its twin where the roster gives none
+        twin: (r, s) => `${r.name} has the ear of people whose votes ${s.name} needs, and ${s.name} controls a supply ${r.name} needs. Their meetings are short and their bargains hold.` },
       { line: (r, s) =>
         `${r.name} and ${s.name} each have something to trade and nothing to give away. They meet in private, bargain hard, and keep every bargain.`, colour: true },
       { line: (r, s) =>
         `${s.name} needs ${r.name}'s seal on certain papers; ${r.name} needs ${s.name}'s silence about certain others. Neither has asked for more than the other could pay.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} sit on opposite sides of most questions and vote together on the few that touch their shared interests.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+        `${r.name} and ${s.name} sit on opposite sides of most questions and vote together on the few that touch their shared interests.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"], votes: 'both', // BAR3-PEOPLE (P5, C27108): a vote is cast only from a seat; its twin where the roster gives none
+        twin: (r, s) => `${r.name} and ${s.name} take opposite sides of most questions and stand together on the few that touch their shared interests.` },
     ]),
     tension: pairProse('t', [
       { line: (r, s) => `The balance between ${r.name} and ${s.name} has recently shifted. ${s.name} has noticed; ${r.name} has not, yet.`, colour: true },
       { line: (r, s) => `A document ${r.name} and ${s.name} each believed only they possessed has turned up in someone else's hands.`, colour: true },
       { line: (r, s) => `${s.name} has recently secured something that makes ${r.name}'s hold obsolete. The politeness continues, for now.`, colour: true },
-      { line: (r, s) => `${r.name} has asked ${s.name} for a second favour before repaying the first.`, colour: true },
+      // BAR3-PEOPLE (C13310): the strict count of desc[3] is broken by the asking, said so (the tie's one state)
+      { line: (r, s) => `${r.name} has asked ${s.name} for a second favour before repaying the first, which would put ${r.name} two favours ahead.`, colour: true },
       { line: (r, s) => `${s.name} has found a new source for what ${r.name} supplies. ${r.name} has not been told.`, colour: true },
-      { line: (r, s) => `The vote ${s.name} needs from ${r.name} comes up next week, and ${r.name} has named a new price.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) => `The vote ${s.name} needs from ${r.name} comes up next week, and ${r.name} has named a new price.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"], votes: 'r', // BAR3-PEOPLE (P5, mutual_leverage): a vote is cast only from a seat; its twin where the roster gives none
+        twin: (r, s) => `The favour ${s.name} needs from ${r.name} comes due next week, and ${r.name} has named a new price.` },
       { line: (r, s) =>
         `${r.name}'s secret is about to come out by other means. Once it does, ${s.name} holds nothing over ${r.name}.`, colour: true },
       { line: (r, s) => `${s.name} has written down what ${r.name} owes and left a copy with a notary.`, colour: true },
@@ -2162,7 +2184,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} and ${s.name} work together because fighting each other would cost them both more, and both of them know it.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} are allies because each has reckoned what the other would cost as an enemy. The friendship is warm and public, and it lasts only while that reckoning holds.`, colour: true },
+        `${r.name} and ${s.name} are allies because each has reckoned what the other would cost as an enemy. The friendship is courteous, and it lasts only while that reckoning holds.`, colour: true }, // BAR3-PEOPLE (C25432): no publicity claimed
       { line: (r, s) =>
         `${r.name} and ${s.name} joined against a threat that has since passed, and each is now asking what the alliance is still for.`, excludes: ['crisis: threat', 'crisis: wartime'] },
       // R2-CODE-A-14, the chair's ruling (s1): A LINE ABOUT A BLOC NEEDS THE PAIR TO SHARE A POWER (the word `shared power`)
@@ -2183,7 +2205,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} wants to bring a third member into the alliance. ${s.name} thinks the newcomer would take ${s.name}'s place.`, colour: true },
       { line: (r, s) =>
-        `${s.name} voted against ${r.name} on a small matter last week. ${r.name} is waiting to see whether it was small.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+        `${s.name} voted against ${r.name} on a small matter last week. ${r.name} is waiting to see whether it was small.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"], votes: 'both', // BAR3-PEOPLE (P5, C46504): a vote is cast only from a seat; its twin where the roster gives none
+        twin: (r, s) => `${s.name} spoke against ${r.name} on a small matter last week. ${r.name} is waiting to see whether it was small.` },
       { line: (r, s) =>
         `${r.name} and ${s.name} both want the same office, and the alliance cannot survive one of them winning it.`, colour: true },
       { line: (r, s) =>
@@ -2238,7 +2261,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} owes ${s.name} a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.`, colour: true },
       { line: (r, s) =>
-        `${s.name} kept ${r.name}'s name out of a scandal that ruined two others. ${r.name} has voted with ${s.name} ever since.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+        `${s.name} kept ${r.name}'s name out of a scandal that ruined two others. ${r.name} has voted with ${s.name} ever since.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"], votes: 'both', // BAR3-PEOPLE (P5, old_debt): a vote is cast only from a seat; its twin where the roster gives none
+        twin: (r, s) => `${s.name} kept ${r.name}'s name out of a scandal that ruined two others. ${r.name} has taken ${s.name}'s side ever since.` },
       { line: (r, s) =>
         `${s.name} nursed ${r.name} through a winter fever when no one else would come. ${r.name} still owes the debt and still knows it.`, colour: true },
       { line: (r, s) => `${r.name} borrowed ${s.name}'s good name to win a post. ${s.name} has never asked for it back.`, colour: true },
@@ -2248,13 +2272,15 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`, colour: true },
       { line: (r, s) => `Someone else has learned what favour ${r.name} owes ${s.name}, and now has a hold on ${r.name} too.`, colour: true },
       { line: (r, s) =>
-        `${s.name} has asked ${r.name} for a vote against ${r.name}'s own interests. It is the first payment ${s.name} has asked for.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+        `${s.name} has asked ${r.name} for a vote against ${r.name}'s own interests. It is the first payment ${s.name} has asked for.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"], votes: 'r', // BAR3-PEOPLE (P5, C36622): a vote is cast only from a seat; its twin where the roster gives none
+        twin: (r, s) => `${s.name} has asked ${r.name} for a favour against ${r.name}'s own interests. It is the first payment ${s.name} has asked for.` },
       // TAIL-TIES, the chair's ruling (T2): ONE STATE FOR THE PAIR — desc[4] has the coin "repaid in small amounts ever since", so its
       // tension (the one-index draw's twin beat) no longer says the repaying has only "started"
       { line: (r, s) => `${r.name} has offered to clear what is left of the debt in one payment. ${s.name} would rather be repaid in favours.`, colour: true },
       { line: (r, s) => `${s.name} has mentioned the debt aloud, at a dinner, in front of ${r.name}'s partners.`, colour: true },
       { line: (r, s) => `${r.name} has refused ${s.name} a small favour for the first time in years.`, colour: true },
-      { line: (r, s) => `${s.name} has fallen on hard times, and the debt ${r.name} owes is now the only asset ${s.name} has.`, colour: true },
+      // BAR3-PEOPLE (P1, C31676 C44190): the creditor may hold the seat (a monarch, a governor): no ruin is claimed
+      { line: (r, s) => `${s.name} has begun to count the debt ${r.name} owes among ${s.name}'s assets, and has had it written down before witnesses.`, colour: true },
     ]),
     type: 'debtor_creditor',
   },

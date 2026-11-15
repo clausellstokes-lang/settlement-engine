@@ -2318,6 +2318,9 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Has been selling grain from the stores to merchants in another market and writing it down as spoiled': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
     'Has kept back from the tally what ore the workings still give, and sold it to a smelter elsewhere': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
     'Has been hunting on land that belongs to someone else and selling the game in the market': Object.freeze({ needs: Object.freeze(['market']) }),
+    // BAR3-PEOPLE (P1, C21976): no coach leaves and no traveller's coach comes in under a siege; the inn's third secret stands
+    'Tells a band on the road which coaches carry money and when they leave': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
   }),
   presentation: Object.freeze({
     'Cheerful in the cold and the stink of the market. Knows every regular by name and by order.': Object.freeze({ needs: Object.freeze(['navigable']) }),
