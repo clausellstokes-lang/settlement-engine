@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line
+import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -355,10 +355,13 @@ const annotateMonsterThreat = (stability, monsterThreat) => {
 // POWERS-13 (the bar's HIGH row #291): a line that names a market or a court READS THE ROSTER. `hasLiveMarket` is the
 // vocabulary's one market fact (`factsOf(...).market`, the reader the sibling door below uses), never the loose
 // `hasMarketInstitution` ('guild', 'trading' and a black market all match it); `hasCourt` is the record's own court
-// system (`instFlags.inst.hasCourtSystem`, the reader `deriveBaselineStability` uses).
-const deriveInstitutionSignals = (institutionNames, magicWorks, instFlags = null) => ({
+// system (`instFlags.inst.hasCourtSystem`, the reader `deriveBaselineStability` uses). TAIL-CLOSE-SRC-2 (the
+// defence walker's court member): `hasCourt` is read from the home (`facts/defence.js :: defenceOf(...).court`) over the
+// same roster names, the answer the flag bag carried (`priorityHelpers.js :: hasCourtSystem: home.hasCourt`); measured
+// equal at every call over the 720, the births byte-identical.
+const deriveInstitutionSignals = (institutionNames, magicWorks, home = defenceOf({ institutions: (institutionNames || []).map((name) => ({ name })) })) => ({
   hasLiveMarket: Boolean(factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }).market),
-  hasCourt: Boolean(instFlags?.inst?.hasCourtSystem),
+  hasCourt: home.court,
   hasMilitaryInstitution: includesAnyInstitution(
     institutionNames,
     ['garrison', 'barracks', 'militia', 'watch', 'guard', 'mercenary'],
@@ -704,7 +707,7 @@ export const buildGovernanceLabels = ({
   );
   const stability = annotateMonsterThreat(stressStability, monsterThreat);
 
-  const institutionSignals = deriveInstitutionSignals(institutionNames, magicWorks, institutionFlags);
+  const institutionSignals = deriveInstitutionSignals(institutionNames, magicWorks);
   const hasRoyalAuthority =
     configuredGoverningFaction &&
     configuredGoverningFaction.includes('Royal Authority');
