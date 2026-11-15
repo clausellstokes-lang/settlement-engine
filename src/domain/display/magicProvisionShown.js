@@ -198,8 +198,45 @@ export function relianceReadingShown(record, reliance) {
   if (reliance.reading !== 'relied-upon' && reliance.reading !== 'integral') return reliance.reading;
   const deps = magicDependentsShown(record).length;
   if (deps === 0) return reliance.practitioners.length > 0 ? 'present' : 'none';
-  if (reliance.reading === 'integral' && deps < 2 && magicOf(/** @type {Parameters<typeof magicOf>[0]} */ (record)).level !== 'high') return 'relied-upon';
+  if (reliance.reading === 'integral' && relianceDepth(record) < 2 && magicOf(/** @type {Parameters<typeof magicOf>[0]} */ (record)).level !== 'high') return 'relied-upon';
   return reliance.reading;
+}
+
+/**
+ * HOW DEEP THE DEPENDENCE GOES (BAR3-LABELS L1, the chair's direction of 2026-11-15; vetoable by the owner): the
+ * dependents the page bears out (`magicDependentsShown`), with every made magical service (an active chain that needs
+ * magic: spellcasting, enchanting, alchemy) counted ONCE, as the town's one magic trade. "Integral" said a low- or
+ * mid-magic town could not run without magic where all that depended on magic was its own magic trade (a Wizard's tower
+ * selling spells and enchanted goods, impaired, beside a magic that is low and food made by none: the bar's
+ * metropolis-calm-rand-7; 40 of the census's 720 at 59185b62a). Two or more SEPARATE things held up by magic (the trade,
+ * the food, a chain whose magic note prints) keep "Integral"; the top band keeps it as before.
+ * @param {unknown} record the settlement record
+ * @returns {number}
+ */
+export function relianceDepth(record) {
+  const services = new Set(activeChainsOf(record).filter((c) => chainNeedsMagic(c)).map((c) => String(c.chainId ?? '')));
+  const deps = magicDependentsShown(record);
+  return deps.filter((d) => !services.has(d)).length + (deps.some((d) => services.has(d)) ? 1 : 0);
+}
+
+/**
+ * THE ROLE BAND A MAGIC ROLE ROW PRINTS (BAR3-LABELS L1, the chair's direction of 2026-11-15; vetoable by the owner). The
+ * magic profile's military and medical bands (`magicProfile.js :: deriveRoles`) are raised by the world's dial alone
+ * ("occasional" at a medium or high level) or by a healing house of any kind ("common"), and never read the defence or the
+ * healing the record holds: "Military role: occasional" printed beside "DEFENCE magic: none" in 354 of the census's 720
+ * towns, and "Medical role: common" with no healing that needs magic in 315. Where the record holds nothing of the role
+ * (`magicRoleHeld`, the one home of LB1's facts) the row prints the profile's own word for nothing, "absent"; where it
+ * holds the role, the band is the profile's. The economic row keeps X32's reader (`economicRoleBandShown`); the
+ * infrastructure row is the profile's. The record is not touched.
+ * @param {unknown} record the settlement record
+ * @param {string} role 'economic' | 'military' | 'medical' | 'infrastructure'
+ * @param {unknown} band the magic profile's band
+ * @returns {unknown} the band the row prints
+ */
+export function magicRoleBandShown(record, role, band) {
+  if (role === 'economic') return economicRoleBandShown(record, band);
+  if ((role === 'military' || role === 'medical') && band !== 'absent' && !magicRoleHeld(record, role)) return 'absent';
+  return band;
 }
 
 /**
