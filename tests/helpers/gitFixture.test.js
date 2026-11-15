@@ -484,4 +484,36 @@ describe('fixture git — the repository a hook exported is out of reach', () =>
       + ' the repository it would have written to is byte-identical').toEqual(before);
     expect(existsSync(join(fresh, '.git'))).toBe(false);
   }, 60_000);
+
+  test('the pre-push hook forgets the same variables, and does it before it starts the check', () => {
+    // The third level. `npm run check` is the hook's whole body and Vitest is only one of its
+    // steps: unset at the top of the hook, the variables never reach ANY of them.
+    const hook = readFileSync(join(SUITE_ROOT, '.husky/pre-push'), 'utf8');
+    // The file as sh reads it: a backslash-newline joins two physical lines into one.
+    const logicalLines = hook.replace(/\\\n/g, ' ').split('\n');
+    const unsetAt = logicalLines.findIndex((line) => /^\s*unset\s/.test(line));
+    const firstCommandAt = logicalLines.findIndex((line) => /^\s*npm\s/.test(line));
+    expect(logicalLines.filter((line) => /^\s*unset\s/.test(line)), '.husky/pre-push carries exactly'
+      + ' ONE `unset` statement, so there is one list to keep and one line to read').toHaveLength(1);
+    expect(firstCommandAt, 'the hook no longer starts an npm script — this arm lost its subject')
+      .toBeGreaterThan(-1);
+    expect(unsetAt, 'the hook must forget the repository BEFORE its first command: an `unset`'
+      + ' below `npm run check` protects nothing that check spawns').toBeLessThan(firstCommandAt);
+    const statement = logicalLines[unsetAt].trim();
+    expect(statement.split(/\s+/).slice(1).sort(), 'the hook and tests/helpers/gitFixture.js must'
+      + ' name the SAME variables. Change REPOSITORY_ENV and this statement together.')
+      .toEqual([...REPOSITORY_ENV].sort());
+
+    // AND EXECUTED — the hook's own bytes, under sh, in an environment that carries every one.
+    const hostile = Object.fromEntries(REPOSITORY_ENV.map((name) => [name, `/hostile/${name}`]));
+    const survivors = execFileSync('sh', ['-ec', `${statement}\nenv`], {
+      env: { ...withoutRepositoryEnv(), ...hostile, GIT_CONFIG_COUNT: '0', KEPT_BY_THE_HOOK: 'yes' },
+      encoding: 'utf8',
+    }).split('\n').map((line) => line.split('=')[0]);
+    for (const name of REPOSITORY_ENV) {
+      expectAbsentWithAnchor(survivors, name, 'KEPT_BY_THE_HOOK', `the environment after the hook's unset: ${name}`);
+    }
+    // Configuration is not a location, and the hook leaves it exactly where it found it.
+    expect(survivors).toContain('GIT_CONFIG_COUNT');
+  });
 });
