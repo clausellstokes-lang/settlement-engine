@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "7b7089fd5e5c45e1f0a5fc247a249c80aa72df0f99dcb3a83946256300ceebb5",
+      "sha256": "e74b93989e4b988e0d1d22da69e60aa34815fdaf3420379b4c16d7d1781af4d5",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat on 2026-11-15 at 06:00 UTC, recorded in the chair's records 454, 456 and 457 on lane/chair-2026-11-08 (docs/chair/2026-11-14/CHAIR-HANDOFF-FIFTH.md, section 1); the chair's ruling GD1 of 2026-11-15 names the moved families",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
