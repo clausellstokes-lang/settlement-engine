@@ -31,6 +31,10 @@
  * The runner level alone closes the leak; the fixture level holds without it, so a file run
  * by some other runner, or with the setup file unwired, is still safe.
  *
+ * A THIRD LEVEL sits outside the suite: `.husky/pre-push` unsets the same REPOSITORY_ENV
+ * before it starts the check, so no step of the check inherits them — Vitest is only one.
+ * The guard test executes the hook's own statement and holds the two lists equal.
+ *
  * ── ⛔ IT IS POINTED TWICE AND CHECKED ONCE, AND THAT REDUNDANCY WAS PAID FOR ─────────────
  * The first cut of this module told git where to run with ONE option — the spawn's `cwd`.
  * A probe that deleted that one line, to show the guard test noticing, made every "fixture"

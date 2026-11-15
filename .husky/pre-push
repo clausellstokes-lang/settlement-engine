@@ -5,7 +5,21 @@
 #
 # To skip in an emergency: git push --no-verify
 # (but only when you've already run `npm run check` locally and it passed).
-#
+
+# FIRST, forget the repository git handed this hook. Git exports the repository it is
+# working on to every hook: from a linked worktree GIT_DIR=<main>/.git/worktrees/<lane>,
+# under `git --git-dir` GIT_WORK_TREE as well. Those variables outrank the working
+# directory, so a `git init` the check runs in a temp directory re-initialises THIS
+# repository instead (measured 2026-11-15: core.bare=true, a [user] Fixture section and
+# fixture commits, all written by the test suite into the repository being pushed).
+# Unset them and "which repository" is the directory a command runs in, exactly as when
+# a person types `npm run check`. The names are REPOSITORY_ENV in
+# tests/helpers/gitFixture.js; tests/helpers/gitFixture.test.js runs this statement and
+# reds when the two lists differ. Keep it ONE statement, above the first `npm run`.
+unset GIT_DIR GIT_WORK_TREE GIT_COMMON_DIR GIT_INDEX_FILE GIT_OBJECT_DIRECTORY \
+  GIT_ALTERNATE_OBJECT_DIRECTORIES GIT_PREFIX GIT_IMPLICIT_WORK_TREE GIT_GRAFT_FILE \
+  GIT_SHALLOW_FILE GIT_REPLACE_REF_BASE GIT_NO_REPLACE_OBJECTS GIT_CONFIG
+
 # LANE BRANCHES (the owner's word, 2026-11-12). A push whose every ref is a lane
 # branch (refs/heads/lane/*) runs the three fast gates instead of the whole check:
 # the type ratchet, the strict-domain gate and the linter (about four minutes).
