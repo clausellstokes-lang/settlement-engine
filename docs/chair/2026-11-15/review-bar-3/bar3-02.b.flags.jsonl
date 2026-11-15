@@ -1,0 +1,5 @@
+{"id": "C2732", "town": "bar0-city-under_siege+famine-rand-7", "sev": "LOW", "kind": "STATE", "why": "Daily markets row unmarked: 'open every day', fresh produce, street food under siege and famine (grown 7%, 0.1 months stores); bakers and mills marked scarce", "other": "C2579"}
+{"id":"C3145","town":"bar0-city-under_siege+famine-rand-7","sev":"MED","kind":"STATE","why":"says religious houses' take is 'a large part of the city's business'; INCOME gives Church Tithes 4% and Pilgrim Trade 2% against Smuggling 60%","other":""}
+{"id":"C3555","town":"bar0-city-under_siege+famine-rand-7","sev":"LOW","kind":"STATE","why":"speaks of visitors arriving and being treated; CRISIS Under Siege: nobody is let through the besiegers' lines or gates (C3498, C3572)","other":"C3498"}
+{"id":"C4099","town":"bar0-city-under_siege+famine-rand-7","sev":"MED","kind":"STATE","why":"carts kept moving on roads under siege; CRISIS Under Siege: nothing comes in or goes out by road, and the smuggling network is stopped (C2676)","other":"C2361"}
+{"id":"DONE","lines":2153,"blocks":1,"flags":4}
