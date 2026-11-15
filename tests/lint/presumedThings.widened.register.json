@@ -16,7 +16,11 @@
   "after-base: leaves-3": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the third leaves lane)",
   "after-base: defence": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the defence lane)",
   "after-base: after-merges": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the seat after the merges (its lane, W2-A-LEAVES, landed already))",
-  "after-base: r3-code-c": "this lane's truer rewording of a line the line had banked (same file, same slot; its old row shrunk out at acee99f3a), true wherever it prints by a key or a branch no draw door reads: the crisis kind of the vantage table, the fort-and-force branch of the validator (banked BY HAND under the chair's ruling of 2026-11-14 04:05Z on R3-CODE-C-6's STOP, against the letter of section 2m, as point 49's seven; held true by tests/generators/r3cRekeyedLinesTrue.test.js; owed FOR THE JOIN: the vantage table and the validator's reasons go through a draw door, and the rows leave by --shrink)"
+  "after-base: r3-code-c": "this lane's truer rewording of a line the line had banked (same file, same slot; its old row shrunk out at acee99f3a), true wherever it prints by a key or a branch no draw door reads: the crisis kind of the vantage table, the fort-and-force branch of the validator (banked BY HAND under the chair's ruling of 2026-11-14 04:05Z on R3-CODE-C-6's STOP, against the letter of section 2m, as point 49's seven; held true by tests/generators/r3cRekeyedLinesTrue.test.js; owed FOR THE JOIN: the vantage table and the validator's reasons go through a draw door, and the rows leave by --shrink)",
+  "after-base: close-true": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: TRUE WHERE IT PRINTS on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
+  "after-base: close-unprinted": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: NEVER PRINTED on the 1,080 births measured at the close: only arm 1 lists it (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
+  "after-base: close-false": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: PRINTS IN TOWNS THAT LACK ITS THING (its count is in the table) on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed FIRST in the next round: cured by its declaration and its twin, the row leaves in the cure's commit",
+  "after-base: close-strip": "a strip site the round of 2026-11-14/15 wrote after the instrument's base: the pool passes the declared filter first and its lines are unwrapped only to be printed (not a draw); banked BY HAND under the chair's ruling PT2 of 2026-11-15, against the letter of the door's base rule, as record 405's row; owed after the release: the site reads the door's own text field and the row leaves"
  },
  "arm1": {
   "src/components/AccountPage.jsx": [
@@ -1481,6 +1485,18 @@
     "word",
     "Someone has left fresh flowers at a small shrine set into a wall.",
     "e28059453762d418"
+   ],
+   [
+    "house: fishmonger",
+    "after-base: close-unprinted",
+    "A fishmonger stands behind an empty slab, with nothing to shout a price for.",
+    "25388993ab24051b"
+   ],
+   [
+    "bank",
+    "after-base: close-unprinted",
+    "A money changer sits at his table with little to do, counting the same coins from many mints again.",
+    "1ec06ea47599f4ac"
    ]
   ],
   "src/data/bandLadders.js": [
@@ -1767,6 +1783,62 @@
     "implied",
     "Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.",
     "74b8a5786214232d"
+   ]
+  ],
+  "src/data/defenceWeights.js": [
+   [
+    "quarters",
+    "after-base: close-unprinted",
+    "a house counts by its rung on its own ladder (the catalogue's scale tiers of the same function): the least rung at `leas",
+    "dab3f8f460c43ca7"
+   ],
+   [
+    "house: alchemist",
+    "after-base: close-unprinted",
+    "a house counts by its rung on its own ladder (the catalogue's scale tiers of the same function): the least rung at `leas",
+    "dab3f8f460c43ca7"
+   ],
+   [
+    "armedForce",
+    "after-base: close-unprinted",
+    "citizens under arms: less than soldiers, good against beasts",
+    "070322a3c79ef856"
+   ],
+   [
+    "armedForce",
+    "after-base: close-unprinted",
+    "unpaid soldiers desert slowly, never at once",
+    "ab0178fed5c9b792"
+   ],
+   [
+    "house: druid",
+    "after-base: close-unprinted",
+    "today's points, with today's relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war d",
+    "d65952fd81d027b4"
+   ],
+   [
+    "market",
+    "after-base: close-unprinted",
+    "today's points, with today's relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war d",
+    "d65952fd81d027b4"
+   ],
+   [
+    "mason",
+    "after-base: close-unprinted",
+    "Masons at work on the defences",
+    "7113bb9dc677f2e7"
+   ],
+   [
+    "house: reeve",
+    "after-base: close-unprinted",
+    "Elders and reeve",
+    "0b1ee7ad902d6e15"
+   ],
+   [
+    "house: alchemist",
+    "after-base: close-unprinted",
+    "Alchemists preserving the grain",
+    "0107514e56bc0677"
    ]
   ],
   "src/data/dossierCausalProse.generated.js": [
@@ -2491,6 +2563,84 @@
     "family",
     "The town's count of its stores at {settlement} falls far short of what a place its size needs for a hard year, and its p",
     "89645c64283e1016"
+   ],
+   [
+    "occupation",
+    "after-base: close-true",
+    "{settlement}'s works were seldom tested by the settled country around it, and now they stand in the occupiers' hands.",
+    "aa1c240ac4a66e15"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "{settlement} keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long s",
+    "0354993074b09fba"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "{settlement} had money laid by before this trouble began, and its defenders are still paid from it.",
+    "23fd4ed1c58d0fc0"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "The town went into this trouble with money in hand, and its defenders are still paid on time.",
+    "6a190dc43479000b"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "{settlement}'s defenders are better off for the trades behind them, and they know it.",
+    "35f752f1ec916e32"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "Alchemy is practised at {settlement}, and some of what it makes goes to the town's defenders.",
+    "be15321593e855e8"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "Alchemical preparations made at {settlement} are among what its defenders can call on.",
+    "a2998e239900384a"
+   ],
+   [
+    "famine",
+    "after-base: close-true",
+    "With nobody at {settlement} paid to keep order, the hunger is policed by neighbours watching each other's doors.",
+    "4d85f97bd7a0b104"
+   ],
+   [
+    "war",
+    "after-base: close-unprinted",
+    "no crisis: wartime",
+    "a9efc2bafe7d0b0e"
+   ],
+   [
+    "streets",
+    "after-base: close-unprinted",
+    "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+    "27ba92837d0df93a"
+   ],
+   [
+    "famine",
+    "after-base: close-unprinted",
+    "no crisis: famine",
+    "5a38915ec8c8514b"
+   ],
+   [
+    "famine",
+    "after-base: close-unprinted",
+    "food: > famine",
+    "6217a0ad86bfc3a8"
+   ],
+   [
+    "granary",
+    "after-base: close-unprinted",
+    "no institution: granary",
+    "7a07521d8484e089"
    ]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
@@ -2721,6 +2871,18 @@
     "family",
     "The export list at {settlement} is longer than the town's own trades would explain, and the difference is what passes th",
     "46613010b6caad7a"
+   ],
+   [
+    "famineToCome",
+    "after-base: close-true",
+    "Nobody at {settlement} worries much about one poor harvest: the stores would cover it.",
+    "a2e3404ca0f4d924"
+   ],
+   [
+    "famine",
+    "after-base: close-unprinted",
+    "no crisis: famine",
+    "5a38915ec8c8514b"
    ]
   ],
   "src/data/dossierStateProse/general.generated.js": [
@@ -3101,6 +3263,18 @@
     "implied",
     "{settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to.",
     "33dd69a42fa0e359"
+   ],
+   [
+    "occupation",
+    "after-base: close-unprinted",
+    "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.",
+    "c6c53056134c456b"
+   ],
+   [
+    "occupation",
+    "after-base: close-unprinted",
+    "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.",
+    "f7aba2e3cae3483a"
    ]
   ],
   "src/data/dossierStateProse/power.generated.js": [
@@ -3181,6 +3355,18 @@
     "implied",
     "{settlement} is ruled by force. Soldiers carry out the {seat}'s orders, and no temple or priest stands between the town ",
     "353668fb473ad9c8"
+   ],
+   [
+    "war",
+    "after-base: close-unprinted",
+    "no crisis: wartime",
+    "a9efc2bafe7d0b0e"
+   ],
+   [
+    "revolt",
+    "after-base: close-unprinted",
+    "no crisis: insurgency",
+    "9f64cc5bf3b45034"
    ]
   ],
   "src/data/dossierStateProse/stressors.generated.js": [
@@ -3426,6 +3612,30 @@
     "family",
     "Each time you pass {settlement} more of its houses are shuttered, and more carts leave loaded.",
     "999a4c658d2744db"
+   ],
+   [
+    "occupation",
+    "after-base: close-unprinted",
+    "{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.",
+    "e8297d14fd6c1813"
+   ],
+   [
+    "occupation",
+    "after-base: close-unprinted",
+    "{settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.",
+    "ba9926bada6b9a34"
+   ],
+   [
+    "occupation",
+    "after-base: close-unprinted",
+    "The occupiers are quartered inside the town, and the town's business is conducted around them.",
+    "71cfd98ad4c329cd"
+   ],
+   [
+    "war",
+    "after-base: close-unprinted",
+    "{settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of",
+    "5bb944e8ab92d013"
    ]
   ],
   "src/data/dossierStateProse/warFaith.generated.js": [
@@ -3908,6 +4118,12 @@
     "implied",
     "Priests and mages in {settlement} share authority: the church blesses the mages' work, and the mages' learning serves th",
     "d11364183b413885"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "The church in {settlement} hunts heresy openly: anyone suspected of working magic against the faith is denounced from th",
+    "248f68a589794067"
    ]
   ],
   "src/data/economicData.js": [
@@ -4106,6 +4322,12 @@
     "family",
     "the thieves' guild above it; that guild's master",
     "e40564ce3486feeb"
+   ],
+   [
+    "mill",
+    "after-base: close-unprinted",
+    "Grown up around an important river ford, this town has turned its wheel through an economic rift, a great migration, a r",
+    "30df067f8f570ad2"
    ]
   ],
   "src/data/geographyData.js": [
@@ -4200,6 +4422,66 @@
     "word",
     "Someone is sabotaging both guilds to destabilize the market for a third party",
     "326f3781fe734942"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "the merchants' quarter",
+    "0b20b35cf5d9f7e9"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "the temple district",
+    "3a3da5b46e268323"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "the temple district",
+    "3a3da5b46e268323"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under contr",
+    "7130762978fa8f82"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral ",
+    "cc27d2b3e3fca458"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised f",
+    "dc29bf0a6a243a34"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a distric",
+    "4f6fa1145b7e6e27"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "Affected district retains residual magical effects",
+    "83dece505758b019"
+   ],
+   [
+    "quarters",
+    "after-base: close-false",
+    "the residential district",
+    "d21c40d805c216b2"
+   ],
+   [
+    "occupation",
+    "after-base: close-false",
+    "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled",
+    "2cd838df6f39a521"
    ]
   ],
   "src/data/historyDescVariants.js": [
@@ -5074,6 +5356,174 @@
     "word",
     "A small shrine by the road at the edge of the parish. No priest keeps it.",
     "3e0024f1f28443b3"
+   ],
+   [
+    "house: fishing",
+    "after-base: close-true",
+    "The nets, the traps, the drying racks, worked by the fishing households whenever fish can be had.",
+    "ad4d730015aef93a"
+   ],
+   [
+    "house: stone quarry",
+    "after-base: close-true",
+    "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper",
+    "18425e5e902f9f93"
+   ],
+   [
+    "resource: stone_quarry",
+    "after-base: close-true",
+    "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper",
+    "18425e5e902f9f93"
+   ],
+   [
+    "house: stone quarry",
+    "after-base: close-true",
+    "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a regio",
+    "159741114b9d0a37"
+   ],
+   [
+    "resource: stone_quarry",
+    "after-base: close-true",
+    "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a regio",
+    "159741114b9d0a37"
+   ],
+   [
+    "house: alehouse",
+    "after-base: close-true",
+    "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.",
+    "aa4c1c8765d2f77f"
+   ],
+   [
+    "house: mine",
+    "after-base: close-true",
+    "A mine of shafts and adits, with winding gear and ore carts at the head, worked whenever ore can be had.",
+    "d5ff96284cf2c8ec"
+   ],
+   [
+    "house: stone quarry",
+    "after-base: close-true",
+    "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
+    "cb3660a159774dfe"
+   ],
+   [
+    "house: druid",
+    "after-base: close-true",
+    "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold th",
+    "d7a110e6054be4fc"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold th",
+    "d7a110e6054be4fc"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below th",
+    "48bd27e576abfdeb"
+   ],
+   [
+    "house: alehouse",
+    "after-base: close-true",
+    "Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.",
+    "a9cf19bb34fbbd00"
+   ],
+   [
+    "house: alehouse",
+    "after-base: close-true",
+    "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.",
+    "736ab5d9380421e2"
+   ],
+   [
+    "famine",
+    "after-base: close-true",
+    "Communal grain storage. Buffers harvests, prevents famine.",
+    "b77abf521091f2db"
+   ],
+   [
+    "house: fishing",
+    "after-base: close-true",
+    "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river const",
+    "20db476059d1b418"
+   ],
+   [
+    "house: fishing",
+    "after-base: close-true",
+    "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow d",
+    "e93309dab034221e"
+   ],
+   [
+    "house: fishing",
+    "after-base: close-true",
+    "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. The work turns on a shallow draft",
+    "83d03ab88fd81eb6"
+   ],
+   [
+    "house: fishing",
+    "after-base: close-true",
+    "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. It takes a specialist",
+    "58a543b49791411a"
+   ],
+   [
+    "clergy",
+    "after-base: close-true",
+    "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says the words wh",
+    "3479ae839c1d669b"
+   ],
+   [
+    "clergy",
+    "after-base: close-true",
+    "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be",
+    "9a5d98d5f035bdb6"
+   ],
+   [
+    "clergy",
+    "after-base: close-true",
+    "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched in time, an",
+    "d7dfdecbc2dbc7de"
+   ],
+   [
+    "house: baker",
+    "after-base: close-unprinted",
+    "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns thro",
+    "d38b7cb1d9f5c028"
+   ],
+   [
+    "house: smelter",
+    "after-base: close-unprinted",
+    "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns thro",
+    "d38b7cb1d9f5c028"
+   ],
+   [
+    "smith",
+    "after-base: close-unprinted",
+    "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns thro",
+    "d38b7cb1d9f5c028"
+   ],
+   [
+    "smith",
+    "after-base: close-unprinted",
+    "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and",
+    "959ac324dde268f0"
+   ],
+   [
+    "resource: stone_quarry",
+    "after-base: close-false",
+    "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
+    "cb3660a159774dfe"
+   ],
+   [
+    "house: druid",
+    "after-base: close-false",
+    "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below th",
+    "48bd27e576abfdeb"
+   ],
+   [
+    "house: hired blade",
+    "after-base: close-false",
+    "Organised bands of hired blades, a few score to a few hundred strong.",
+    "058f2527f0e3fc48"
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -6028,6 +6478,12 @@
     "word",
     "Small offerings left at the shrine. Accumulated and forwarded to the temple.",
     "bdef3e5f6236edd1"
+   ],
+   [
+    "clergy",
+    "after-base: close-unprinted",
+    "Funeral rites, said by the parish priest, who comes or is sent for.",
+    "c0f3deced43ff3eb"
    ]
   ],
   "src/data/institutionalCatalog.js": [
@@ -6960,6 +7416,48 @@
     "family",
     "Airship docking (high magic)",
     "ec5f8594fb62c39f"
+   ],
+   [
+    "house: mine",
+    "after-base: close-true",
+    "A mine of shafts and adits, with its winding gear and ore carts, worked whenever ore can be had.",
+    "7c54c022f3c28fbd"
+   ],
+   [
+    "house: stone quarry",
+    "after-base: close-true",
+    "A stone quarry and its dressing yards, worked whenever good stone can be had.",
+    "5e6eade704056c99"
+   ],
+   [
+    "house: stone quarry",
+    "after-base: close-true",
+    "A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the p",
+    "3e644ef0dd5c3418"
+   ],
+   [
+    "resource: stone_quarry",
+    "after-base: close-true",
+    "A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the p",
+    "3e644ef0dd5c3418"
+   ],
+   [
+    "house: druid",
+    "after-base: close-true",
+    "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hid",
+    "58ae82300e837074"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hid",
+    "58ae82300e837074"
+   ],
+   [
+    "resource: stone_quarry",
+    "after-base: close-false",
+    "A stone quarry and its dressing yards, worked whenever good stone can be had.",
+    "5e6eade704056c99"
    ]
   ],
   "src/data/magicTraditionHouses.js": [
@@ -7108,12 +7606,6 @@
     "family",
     "'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a plac",
     "31980da3e860d89c"
-   ],
-   [
-    "house: warehouse",
-    "family",
-    " is prosperous in a way that feels wrong. The forges work past dark, the warehouses are full, the coin is moving, and al",
-    "33cd6edee138e74a"
    ],
    [
     "streets",
@@ -9188,6 +9680,12 @@
     "family",
     "Two defenders died in an area they should have been sent to protect",
     "63f9e0017e954d82"
+   ],
+   [
+    "siege",
+    "after-base: close-true",
+    "Has been skimming from the {food} reserves to pay a personal debt that predates the siege",
+    "0e6ab1db36a57be8"
    ]
   ],
   "src/data/stressTypes.js": [
@@ -19642,6 +20140,12 @@
     "family",
     "Clergy provide basic wound care: better than nothing, worse than a hospital.",
     "e21792a622ceec60"
+   ],
+   [
+    "militia",
+    "after-base: close-unprinted",
+    " and a citizen militia to hold it.",
+    "7d5ce99f3faf03cf"
    ]
   ],
   "src/domain/display/tradeFlowEconomics.js": [
@@ -19662,6 +20166,20 @@
     "family",
     "The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.",
     "c6bb92c07a034b19"
+   ]
+  ],
+  "src/domain/display/tradeListDisplay.js": [
+   [
+    "bank",
+    "after-base: close-true",
+    "international banking services",
+    "93b4989065b31dd8"
+   ],
+   [
+    "market",
+    "after-base: close-unprinted",
+    "magical item market",
+    "f6c2f8cec0187fcb"
    ]
   ],
   "src/domain/display/tradePressure.js": [
@@ -20258,6 +20776,24 @@
     "word",
     "The people keep their own quiet observances, and keep them faithfully. No single creed holds sway, and the shrines answe",
     "2f3781eab63ca8a4"
+   ],
+   [
+    "siege",
+    "after-base: close-unprinted",
+    " has no church of its own, and the siege keeps its people from the next village’s parish church.",
+    "1913bc012cd632cc"
+   ],
+   [
+    "temple",
+    "after-base: close-unprinted",
+    " has no church of its own, and the siege keeps its people from the next village’s parish church.",
+    "1913bc012cd632cc"
+   ],
+   [
+    "shrine",
+    "after-base: close-unprinted",
+    ", and the shrines answer to no named god.",
+    "4701f49f57ea8919"
    ]
   ],
   "src/domain/dossier/powerSupport.js": [
@@ -21986,6 +22522,96 @@
     "family",
     "built around the tank, in quarters by trade and kin",
     "a4fca7226a85a319"
+   ],
+   [
+    "market",
+    "after-base: close-true",
+    "tribute and market",
+    "a1e8e2c421cd8916"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    ", under the temple",
+    "b885aa710423cdab"
+   ],
+   [
+    "market",
+    "after-base: close-unprinted",
+    "built on tribute, market and waterworks",
+    "c12e7c16fda61a28"
+   ],
+   [
+    "docks",
+    "after-base: close-unprinted",
+    "built around the harbour",
+    "1f82ae414df8d5e9"
+   ],
+   [
+    "streets",
+    "after-base: close-unprinted",
+    "built around the agora, and run by",
+    "d96b1152ced7cdec"
+   ],
+   [
+    "streets",
+    "after-base: close-unprinted",
+    ", in quarters by trade and kin",
+    "ffd14e33c2e8c09a"
+   ],
+   [
+    "market",
+    "after-base: close-unprinted",
+    "built on tribute and market",
+    "65d8643284a6d901"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "built in masonry around a civic square, and run by",
+    "572bca5c0a5feef9"
+   ],
+   [
+    "docks",
+    "after-base: close-true",
+    "built around the agora and the harbour",
+    "7e2692648afeb175"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "built around the agora and the harbour",
+    "7e2692648afeb175"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "built around the agora, ",
+    "0f395a5a7ed7958b"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "built around kin districts and an assembly ground",
+    "dfd49d19123694a3"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    ", in quarters by trade,",
+    "c3105f78db3c9213"
+   ],
+   [
+    "market",
+    "after-base: close-true",
+    "tribute, and market-and-waterworks",
+    "0a7c913c886807b1"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    ", under temple and guild",
+    "9cac0021c265738c"
    ]
   ],
   "src/domain/summary/tonightSheet.js": [
@@ -25674,6 +26300,12 @@
     "family",
     "academy of magic",
     "8f8aa8b21d5ed32c"
+   ],
+   [
+    "mercenary",
+    "after-base: close-true",
+    "free company hall",
+    "2e032338502e118a"
    ]
   ],
   "src/generators/crossSettlementConflicts.js": [
@@ -25912,6 +26544,48 @@
     "family",
     "Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
     "2fe6cfe7568bb02a"
+   ],
+   [
+    "house: alchemist",
+    "after-base: close-true",
+    "Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.",
+    "876dfe3c4ebb2b12"
+   ],
+   [
+    "smith",
+    "after-base: close-true",
+    "Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.",
+    "ab7a101ef0ffa943"
+   ],
+   [
+    "house: fuller",
+    "after-base: close-true",
+    "Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.",
+    "3e37b2807cf9474a"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "Mandatory tithes plus rent income from church-owned land dominating the local economy.",
+    "c8a73f95df97e915"
+   ],
+   [
+    "market",
+    "after-base: close-true",
+    "Market day stall fees and toll collection on goods entering the market.",
+    "c79b9048611f7e71"
+   ],
+   [
+    "siege",
+    "after-base: close-unprinted",
+    "Alchemical preparations and curative potions, sold only to the people inside while the siege keeps outside customers awa",
+    "61af27c3756972d6"
+   ],
+   [
+    "mason",
+    "after-base: close-unprinted",
+    "Stone masons work imported material; the quarrying income notation reflects processing margin only.",
+    "2a5cd329ae915b0a"
    ]
   ],
   "src/generators/economy/outlookHookSiblings.js": [
@@ -25996,6 +26670,12 @@
     "family",
     "Add Hedge Wizard, Alchemist Shop, or Wizard's Tower",
     "bc05d041f9ea6c4d"
+   ],
+   [
+    "house: hedge wizard",
+    "after-base: close-true",
+    "Traveling hedge wizard",
+    "7077dab32aa4c85d"
    ]
   ],
   "src/generators/factionDynamics.js": [
@@ -26226,6 +26906,30 @@
     "family",
     "A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.",
     "c654f46293b19687"
+   ],
+   [
+    "siege",
+    "after-base: close-true",
+    "Isolated, and running a shortfall it cannot farm its way out of. The siege has closed the roads; it must make do with ",
+    "925c102ce92d3d22"
+   ],
+   [
+    "siege",
+    "after-base: close-true",
+    "Off the trade routes and under-fed by its own land, and now besieged: nothing comes in by road, and it must make do with",
+    "50f49f4f02e1567f"
+   ],
+   [
+    "siege",
+    "after-base: close-unprinted",
+    "Isolated from major trade routes, and now under siege. The settlement cannot fully feed itself, and nothing comes in by ",
+    "f7c055acd4ef435e"
+   ],
+   [
+    "siege",
+    "after-base: close-unprinted",
+    "Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it must make do with ",
+    "effe163c2bf52282"
    ]
   ],
   "src/generators/narrativeGenerator.js": [
@@ -26358,12 +27062,6 @@
     "1d039f280bee5a36"
    ],
    [
-    "practitioner",
-    "word",
-    " is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which out",
-    "fa104bd22874f27f"
-   ],
-   [
     "siege",
     "family",
     "The siege has entered its second week; ",
@@ -26402,12 +27100,6 @@
    [
     "clergy",
     "family",
-    " is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather th",
-    "cc79cf804fe5ed09"
-   ],
-   [
-    "clergy",
-    "family",
     "Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements le",
     "505b99ca29d976ec"
    ],
@@ -26416,6 +27108,78 @@
     "implied",
     " split the faith here; its house of worship survived, but the congregation never came back together",
     "88fa9f62e6b1122b"
+   ],
+   [
+    "powersCount",
+    "after-base: close-true",
+    " holds the power, and its two powers are each watching who holds ",
+    "07384650a4caf843"
+   ],
+   [
+    "walls",
+    "after-base: close-true",
+    " every morning, and the people on the walls watch each other as closely as they watch the enemy.",
+    "e9f1f8516a71c607"
+   ],
+   [
+    "starving",
+    "after-base: close-true",
+    " is two bad weeks from genuine starvation; the remaining ",
+    "88d8afcf70e3c04e"
+   ],
+   [
+    "garrison",
+    "after-base: close-true",
+    " is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is pa",
+    "477f2721e5d2d6ad"
+   ],
+   [
+    "garrison",
+    "after-base: close-unprinted",
+    " is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if ",
+    "65cf322223134a9b"
+   ],
+   [
+    "smith",
+    "after-base: close-false",
+    "Being on the right side of it keeps the forges of ",
+    "b41ab4ca684010d7"
+   ],
+   [
+    "walls",
+    "after-base: close-true",
+    "The walls of ",
+    "a7bbc93356f774bd"
+   ],
+   [
+    "granary",
+    "after-base: close-true",
+    " is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held ",
+    "51c413ce8935c971"
+   ],
+   [
+    "mill",
+    "after-base: close-true",
+    " has drawn its edges inward (fields left unworked, a mill ",
+    "8fab5ca3e25b4060"
+   ],
+   [
+    "walls",
+    "after-base: close-true",
+    " has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast ",
+    "b451dfbb1b47849f"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    " could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (",
+    "dab22a2ed49e260e"
+   ],
+   [
+    "market",
+    "after-base: close-unprinted",
+    " quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are ",
+    "1d112886fae02a95"
    ]
   ],
   "src/generators/neighbourGenerator.js": [
@@ -26518,6 +27282,62 @@
     "family",
     "Thieves Guild Master",
     "c2a8a4151447524a"
+   ]
+  ],
+  "src/generators/power/claimStanding.js": [
+   [
+    "clergy",
+    "after-base: close-true",
+    "Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage ",
+    "0b709a73d26a9ccb"
+   ],
+   [
+    "practitioner",
+    "after-base: close-true",
+    "Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly ",
+    "95f82a94acb58095"
+   ],
+   [
+    "house: smuggling",
+    "after-base: close-true",
+    "Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it can",
+    "704028fc99b7d6b5"
+   ],
+   [
+    "clergy",
+    "after-base: close-true",
+    "The local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respecte",
+    "9107f9a290c307d1"
+   ],
+   [
+    "watch",
+    "after-base: close-true",
+    "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
+    "ee08d7b2a92c842c"
+   ],
+   [
+    "watch",
+    "after-base: close-true",
+    "City watch; law enforcement and external defence, stretched between multiple responsibilities.",
+    "a4feae8fbd269116"
+   ],
+   [
+    "house: wizard's tower",
+    "after-base: close-unprinted",
+    "Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know",
+    "4d1330db1a2e96c6"
+   ],
+   [
+    "house: mages' guild",
+    "after-base: close-unprinted",
+    "Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know",
+    "4d1330db1a2e96c6"
+   ],
+   [
+    "practitioner",
+    "after-base: close-unprinted",
+    "Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabi",
+    "773b4df68d59884d"
    ]
   ],
   "src/generators/power/conflictIssues.js": [
@@ -27056,6 +27876,12 @@
     "family",
     "Free citizens, clergy, and outside agitators who have been supporting the revolt covertly: shelter, information, supplie",
     "1a88b6e5db039c00"
+   ],
+   [
+    "war",
+    "after-base: close-unprinted",
+    " Wartime has transformed this power from a civic institution into a primary power centre. Authority flows through milita",
+    "28bc9180db63875b"
    ]
   ],
   "src/generators/priorityHelpers.js": [
@@ -27516,6 +28342,66 @@
     "word",
     "There is effectively no law enforcement.",
     "5769b6a9a93c982e"
+   ],
+   [
+    "garrison",
+    "after-base: close-true",
+    "The garrison is present and responsive.",
+    "bfaf1ac389aa5b77"
+   ],
+   [
+    "watch",
+    "after-base: close-true",
+    "The watch is present and responsive.",
+    "725d20415cc2c413"
+   ],
+   [
+    "militia",
+    "after-base: close-true",
+    "The militia is present and responsive.",
+    "1f7babebc77f3dfc"
+   ],
+   [
+    "house: street gang",
+    "after-base: close-true",
+    "A street gang controls part of the place, extorting local businesses and residents. Its violence comes and goes, mostly ",
+    "30e15d57becf1306"
+   ],
+   [
+    "garrison",
+    "after-base: close-true",
+    "Hired swords back the garrison when the purse allows.",
+    "0cf783df9a059f04"
+   ],
+   [
+    "garrison",
+    "after-base: close-true",
+    "Hired swords back the garrison.",
+    "68c8744e982cf043"
+   ],
+   [
+    "house: adventurers' charter",
+    "after-base: close-true",
+    "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.",
+    "df08e024b686f344"
+   ],
+   [
+    "house: adventurers' charter",
+    "after-base: close-true",
+    "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short.",
+    "e50ea71d15039105"
+   ],
+   [
+    "mercenary",
+    "after-base: close-unprinted",
+    "A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.",
+    "2f02a9f898251b8a"
+   ],
+   [
+    "house: adventurers' charter",
+    "after-base: close-unprinted",
+    "The adventurers' charter hall coordinates emergency response to threats.",
+    "ba8f5cbfc878053d"
    ]
   ],
   "src/generators/services/serviceClassifier.js": [
@@ -28456,6 +29342,11 @@
    "src/generators/aiLayer.js",
    "[ ...(via.plotHooks || []), ...(hist.historicalEvents || []).flatMap(e => e?.plotHooks || []), ]",
    "not-a-draw"
+  ],
+  [
+   "src/generators/foodGenerator.js",
+   "filterDeclared([...rows], { facts: () => factsOf(record), poolId: `cultureProfiles:${String(key)}.fo",
+   "after-base: close-strip"
   ],
   [
    "src/generators/generationCoherence.js",
