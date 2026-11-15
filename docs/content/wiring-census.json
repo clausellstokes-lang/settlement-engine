@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1377
+    "producerIndexFiles": 1379
   },
   "totals": {
     "pools": 856,
@@ -37,8 +37,8 @@
     "syntheticTableFields": 178,
     "tiers": {
       "MISSING": 33,
-      "THIN": 614,
-      "COVERED": 242,
+      "THIN": 615,
+      "COVERED": 241,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -31869,7 +31869,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "hist.legacyAnnotations"
@@ -54014,13 +54014,14 @@
       "name": "ARRIVAL_PEOPLE",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:288-289 agreeingLine (pickRandom, one redraw on a market/catch contradiction); ",
-      "lines": 51,
+      "lines": 53,
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 28,
-        "institution: bank": 1,
+        "crisis: any": 30,
+        "crisis: under_siege": 1,
+        "institution: bank": 2,
         "institution: tavern": 1,
-        "market": 5,
+        "market": 6,
         "navigable": 1,
         "no crisis: hunger": 4,
         "no crisis: infiltrated": 1,
@@ -54028,8 +54029,8 @@
         "no crisis: plague_onset": 1,
         "no crisis: recently_betrayed": 1,
         "no crisis: threat": 1,
-        "no crisis: under_siege": 10,
-        "no route: isolated": 2,
+        "no crisis: under_siege": 12,
+        "no route: isolated": 3,
         "route: isolated": 2,
         "tier: ≤ hamlet": 1,
         "tier: ≥ town": 3,
@@ -54066,22 +54067,24 @@
       "name": "ARRIVAL_SENSES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:150-165 chooseSense (pickRandom over keys within one point of best) then :283-2",
-      "lines": 321,
+      "lines": 328,
       "declares": [],
       "lineDeclares": {
         "church": 2,
         "colour": 5,
-        "crisis: any": 41,
+        "crisis: any": 42,
+        "crisis: hunger": 6,
+        "crisis: under_siege": 1,
         "crisis: wartime, insurgency": 1,
-        "fish": 6,
+        "fish": 11,
         "institution: mill": 2,
         "institution: smith": 8,
-        "market": 8,
-        "navigable": 3,
-        "no crisis: hunger": 8,
+        "market": 10,
+        "navigable": 6,
+        "no crisis: hunger": 14,
         "no crisis: monster_pressure": 1,
         "no crisis: threat": 4,
-        "no crisis: under_siege": 12,
+        "no crisis: under_siege": 13,
         "no crisis: unrest": 1,
         "no route: isolated": 1,
         "route: isolated": 1,
@@ -54305,6 +54308,7 @@
         "navigable": 2,
         "no crisis: occupied": 1,
         "no crisis: succession_void": 2,
+        "no crisis: under_siege": 1,
         "no ruler: council": 2,
         "no ruler: elder": 2,
         "no war: peace": 2,
@@ -54312,7 +54316,7 @@
         "tier: ≥ town": 1,
         "watch": 1
       },
-      "undeclared": 65,
+      "undeclared": 64,
       "crisisScoped": false
     },
     {
@@ -54321,12 +54325,12 @@
       "name": "INSTITUTION_DESC_VARIANTS",
       "drawKind": "H",
       "drawSite": "assembleInstitutions.js:65 shipFreeDesc + :1004 kernel/proseHash.js pickVariant over [catalogDesc, ...variants]",
-      "lines": 1119,
+      "lines": 1127,
       "declares": [],
       "lineDeclares": {
         "church access": 2,
         "coast": 9,
-        "colour": 748,
+        "colour": 740,
         "crisis: famine": 1,
         "crisis: under_siege": 11,
         "garrison": 6,
@@ -54349,10 +54353,13 @@
         "no institution: docks": 6,
         "no institution: tavern": 4,
         "no navigable": 6,
+        "no rival power": 6,
         "no river": 16,
+        "no ruling body": 2,
         "no terrain: forest": 10,
         "no walls": 1,
         "river": 24,
+        "ruler: elder": 2,
         "terrain: forest": 10,
         "tier: = metropolis": 4,
         "tier: ≤ hamlet": 6,
@@ -70966,12 +70973,12 @@
       "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-GEN-16",
       "subject": "LEGACY-RECOVERED",
       "fields": [],
       "readingFunction": "legacyPoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
       "tier": "THIN",
