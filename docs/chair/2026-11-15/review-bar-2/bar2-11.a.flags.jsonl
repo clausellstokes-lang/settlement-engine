@@ -1,0 +1,7 @@
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"RECORD","why":"DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE names a blade captain of Hired blades","other":""}
+{"id":"C21222","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"STATE","why":"title 'Merchant Prince' given to Christine Wolf, who PEOPLE gives as (f)","other":""}
+{"id":"C21979","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"PAIR","why":"says stores carry it through a bad harvest and beyond; food word is Pressured and C21976 says a bad season would leave some short","other":"C21976"}
+{"id":"C22429","town":"bar0-metropolis-calm-rand-5","sev":"MED","kind":"STATE","why":"Magic tab prints Moderate; header says magic low, and C20951 prints Magical Capability Weak","other":"C20951"}
+{"id":"C22127","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"PAIR","why":"says the off-book trade does little harm; C22265 says criminal capture and corruption are systemic and C21929 says honest traders carry the tax alone","other":"C22265"}
+{"id":"C20954","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"PAIR","why":"says 'its merchant guild' (singular); HOUSES and C21372 give dozens of merchant guilds in a parliament of trade","other":"C21372"}
+{"id":"DONE","lines":2454,"blocks":1,"flags":6}
