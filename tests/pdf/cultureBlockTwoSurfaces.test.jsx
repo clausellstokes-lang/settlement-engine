@@ -30,6 +30,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** @param {string} seed */
 const birth720 = (seed) => {
@@ -66,17 +67,19 @@ const printed = (town) => {
 describe('the culture block of the PDF and the journal (EXPORTS-B24 · B2)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(['r2r-thorp-0', 'r2r-village-23'])('%s, a small place: no raw row, no generated notes; the scope line is the tab\'s', (seed) => {
-    const town = birth720(seed);
-    expect(['thorp', 'village'], 'anchored: a small place').toContain(town.tier);
-    expect(RAW.every((f) => town.culturalIdentity[f]), 'anchored: the record holds the six raw rows').toBe(true);
-    const p = printed(town);
-    expect(p.rawRows).toEqual([]);
-    expect(p.notes).toBe(null);
-    expect(p.journalNotes).toBe(null);
-    expect(cultureScopeLine(town), 'anchored: the tab prints a scope line').not.toBe('');
-    expect(p.pdf, 'the scope line is the Overview\'s').toContain(cultureScopeLine(town));
-    expect(p.pdf, 'the guard: the Foodways row still prints').toContain(foodwaysLineOf(town) || town.culturalIdentity.foodways);
+  test('every small place (r2r-thorp-0, r2r-village-23): no raw row, no generated notes; the scope line is the tab\'s', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-0', 'r2r-village-23'], (seed) => {
+      const town = birth720(seed);
+      expect(['thorp', 'village'], 'anchored: a small place').toContain(town.tier);
+      expect(RAW.every((f) => town.culturalIdentity[f]), 'anchored: the record holds the six raw rows').toBe(true);
+      const p = printed(town);
+      expect(p.rawRows).toEqual([]);
+      expect(p.notes).toBe(null);
+      expect(p.journalNotes).toBe(null);
+      expect(cultureScopeLine(town), 'anchored: the tab prints a scope line').not.toBe('');
+      expect(p.pdf, 'the scope line is the Overview\'s').toContain(cultureScopeLine(town));
+      expect(p.pdf, 'the guard: the Foodways row still prints').toContain(foodwaysLineOf(town) || town.culturalIdentity.foodways);
+    }), 'a small place prints no raw row and no generated notes, and its scope line is the tab\'s');
   }, 180000);
 
   test('r2r-town-6, a town under an Arcane Council: the lordly-court row is not printed; its admitted rows are', () => {
@@ -95,12 +98,14 @@ describe('the culture block of the PDF and the journal (EXPORTS-B24 · B2)', () 
     expect(p.journalNotes).not.toBe(null);
   }, 180000);
 
-  test.each(['r2r-thorp-0', 'r2r-town-6'])('%s: the notes the user wrote print whole, at every size', (seed) => {
-    const town = birth720(seed);
-    const own = 'The old mill-race floods every spring; the miller\'s family keeps the only boat.';
-    town.culturalNotes = own;
-    const p = printed(town);
-    expect(p.notes).toBe(own);
-    expect(p.journalNotes).toBe(`- **Cultural notes:** ${esc(own)}`);
+  test('every size (r2r-thorp-0, r2r-town-6): the notes the user wrote print whole', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-thorp-0', 'r2r-town-6'], (seed) => {
+      const town = birth720(seed);
+      const own = 'The old mill-race floods every spring; the miller\'s family keeps the only boat.';
+      town.culturalNotes = own;
+      const p = printed(town);
+      expect(p.notes).toBe(own);
+      expect(p.journalNotes).toBe(`- **Cultural notes:** ${esc(own)}`);
+    }), 'the notes the user wrote print whole, at every size');
   }, 180000);
 });

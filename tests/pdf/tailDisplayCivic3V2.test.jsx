@@ -13,6 +13,7 @@ import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -72,22 +73,30 @@ beforeAll(async () => {
 afterEach(() => cleanup());
 
 describe('V2: the food a famine failed is shown failed, on the tab and on every export', () => {
-  test.each(CURED)('%s: %s is not "Fully exploited"; it prints "Failed this year"', (seed, res, cell) => {
-    const town = BORN.get(seed);
-    const g = exploitationGroupsShown(town);
-    const placed = Object.entries(g).flatMap(([stage, group]) => group.map((x) => `${stage}|${String(x.card.rawResource)}`));
-    expectAbsentWithAnchor(placed, `full|${res}`, `failed|${res}`, 'the exploitation groups');
-    expect(g.failed.map((x) => String(x.card.rawResource))).toContain(res);
-    expect(tabText(town)).toContain(`✗ Failed this year${cell}`);
-    const { pdf, journal } = exportsOf(town);
-    expectAbsentWithAnchor(pdf, `${res}|full`, `${res}|failed`, 'the PDF chain rows');
-    expect(pdf).toContain(`${res}|failed`);
-    expectAbsentWithAnchor(journal, `| ${cell} | full |`, `| ${cell} | failed | — | — |`, 'the journal table');
-    expect(journal).toContain(`| ${cell} | failed | — | — |`);
+  test('each CURED town: its failed food is not "Fully exploited"; it prints "Failed this year" (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([seed, res, cell]) => {
+      try {
+        const town = BORN.get(seed);
+        const g = exploitationGroupsShown(town);
+        const placed = Object.entries(g).flatMap(([stage, group]) => group.map((x) => `${stage}|${String(x.card.rawResource)}`));
+        expectAbsentWithAnchor(placed, `full|${res}`, `failed|${res}`, `${seed}: the exploitation groups`);
+        expect(g.failed.map((x) => String(x.card.rawResource)), `${seed}: ${res} is in the failed group`).toContain(res);
+        expect(tabText(town), `${seed}: the tab prints "Failed this year" for ${res}`).toContain(`✗ Failed this year${cell}`);
+        const { pdf, journal } = exportsOf(town);
+        expectAbsentWithAnchor(pdf, `${res}|full`, `${res}|failed`, `${seed}: the PDF chain rows`);
+        expect(pdf, `${seed}: the PDF prints ${res} failed`).toContain(`${res}|failed`);
+        expectAbsentWithAnchor(journal, `| ${cell} | full |`, `| ${cell} | failed | — | — |`, `${seed}: the journal table`);
+        expect(journal, `${seed}: the journal prints ${cell} failed`).toContain(`| ${cell} | failed | — | — |`);
+      } finally { cleanup(); }
+    }), 'V2: every CURED town shows its failed food failed, on the tab, the PDF and the journal');
   });
-  test.each(KEPT)('%s: %s still prints full', (seed, res, cell) => {
-    const town = BORN.get(seed);
-    expect(exploitationGroupsShown(town).full.map((x) => String(x.card.rawResource))).toContain(res);
-    expect(exportsOf(town).journal).toContain(`| ${cell} | full |`);
+  test('each KEPT town: its resource still prints full (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEPT, ([seed, res, cell]) => {
+      try {
+        const town = BORN.get(seed);
+        expect(exploitationGroupsShown(town).full.map((x) => String(x.card.rawResource)), `${seed}: ${res} still prints full`).toContain(res);
+        expect(exportsOf(town).journal, `${seed}: the journal prints ${cell} full`).toContain(`| ${cell} | full |`);
+      } finally { cleanup(); }
+    }), 'V2: every KEPT town still prints its resource full');
   });
 });

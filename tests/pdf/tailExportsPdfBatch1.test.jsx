@@ -25,6 +25,7 @@ import { powerHeadline, defenseHeadline, economicsHeadline } from '../../src/pdf
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -98,13 +99,17 @@ const KEEP = [
 
 describe('TAIL-EXPORTS-PDF batch 1: the PDF prints what the tab prints', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
-  test.each(NOT)('%s %s (%s): not printed', (_id, seed, where, not, instead) => {
-    const out = text(seed, where);
-    expect(out, `${_id}: the ${where} surface prints`).toContain(SURFACE_PRINTS[where]);
-    expect(out).not.toMatch(not); // anchored: the line above asserts the same surface prints its own phrase
-    if (instead) expect(out).toMatch(instead);
+  test('every NOT row: not printed (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([_id, seed, where, not, instead]) => {
+      const out = text(/** @type {string} */ (seed), /** @type {string} */ (where));
+      expect(out, `${_id}: the ${where} surface prints`).toContain(SURFACE_PRINTS[/** @type {string} */ (where)]);
+      expect(out, `${_id} ${seed} (${where}): not printed`).not.toMatch(/** @type {RegExp} */ (not)); // anchored: the line above asserts the same surface prints its own phrase
+      if (instead) expect(out, `${_id} ${seed} (${where}): what prints instead`).toMatch(instead);
+    }), 'batch 1: no NOT row prints on its surface, and each prints what the tab prints instead');
   }, 120000);
-  test.each(KEEP)('keep %s (%s)', (seed, where, keep) => {
-    expect(text(seed, where)).toMatch(keep);
+  test('every KEEP row: still printed (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, where, keep]) => {
+      expect(text(/** @type {string} */ (seed), /** @type {string} */ (where)), `keep ${seed} (${where})`).toMatch(keep);
+    }), 'batch 1: every KEEP row still prints on its surface');
   }, 120000);
 });

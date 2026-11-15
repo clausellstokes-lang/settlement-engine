@@ -14,6 +14,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -86,16 +87,20 @@ const KEEP = [
 describe('C1-E: a good is exported only where a house that digs, makes or works it stands (D18)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(GONE)('%s does not export %s; it still exports %s', (seed, gone, still) => {
-    const out = exportsOf(seed);
-    expect(out, 'anchored: the list still exports').toContain(still);
-    expectAbsentWithAnchor(out, gone, still, seed);
+  test('GONE (every row): seed does not export the good no house works; it still exports its sibling', () => {
+    expectNoSeedFailures(collectSeedFailures(GONE, ([seed, gone, still]) => {
+      const out = exportsOf(seed);
+      expect(out, 'anchored: the list still exports').toContain(still);
+      expectAbsentWithAnchor(out, gone, still, seed);
+    }), 'GONE: no town exports a good no house of it works, and each still exports its sibling');
   }, 60000);
 
-  test.each(KEEP)('%s exports %s where %s stands', (seed, good, house) => {
-    if (house === 'the defended pass') expect(town(seed).config?.nearbyResources || [], 'anchored: the pass').toContain('defended_pass');
-    else expect(housesOf(seed), 'anchored: the house stands').toContain(house);
-    expect(exportsOf(seed)).toContain(good);
+  test('KEEP (every row): seed exports the good where its house stands', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, good, house]) => {
+      if (house === 'the defended pass') expect(town(seed).config?.nearbyResources || [], 'anchored: the pass').toContain('defended_pass');
+      else expect(housesOf(seed), 'anchored: the house stands').toContain(house);
+      expect(exportsOf(seed)).toContain(good);
+    }), 'KEEP: each town exports the good its standing house works');
   }, 60000);
 
   test('coal and peat are ungated by design: coal still leaves r2r-city-31, which works no coal', () => {
@@ -123,16 +128,20 @@ const WATER = [
 describe('D19: the docks of an air dock are not waterborne', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(AIR)('%s exports the airship freight service, not the waterborne one', (seed) => {
-    expect(housesOf(seed), 'anchored: the airship dock').toContain('Airship docking (high magic)');
-    expect(exportsOf(seed)).toContain(AIRSHIP);
-    expectAbsentWithAnchor(exportsOf(seed), WATERBORNE, AIRSHIP, seed);
+  test('AIR (every seed) exports the airship freight service, not the waterborne one', () => {
+    expectNoSeedFailures(collectSeedFailures(AIR, (seed) => {
+      expect(housesOf(seed), 'anchored: the airship dock').toContain('Airship docking (high magic)');
+      expect(exportsOf(seed)).toContain(AIRSHIP);
+      expectAbsentWithAnchor(exportsOf(seed), WATERBORNE, AIRSHIP, seed);
+    }), 'AIR: each air-dock town exports the airship service and not the waterborne one');
   }, 60000);
 
-  test.each(WATER)('%s, an airship dock beside a %s, keeps %s', (seed, house, service) => {
-    expect(housesOf(seed), 'anchored: the airship dock').toContain('Airship docking (high magic)');
-    expect(housesOf(seed), 'anchored: the water house').toContain(house);
-    expect(exportsOf(seed)).toContain(service);
-    expectAbsentWithAnchor(exportsOf(seed), AIRSHIP, service, seed);
+  test('WATER (every row): seed, an airship dock beside a water house, keeps the water\'s service', () => {
+    expectNoSeedFailures(collectSeedFailures(WATER, ([seed, house, service]) => {
+      expect(housesOf(seed), 'anchored: the airship dock').toContain('Airship docking (high magic)');
+      expect(housesOf(seed), 'anchored: the water house').toContain(house);
+      expect(exportsOf(seed)).toContain(service);
+      expectAbsentWithAnchor(exportsOf(seed), AIRSHIP, service, seed);
+    }), 'WATER: each airship dock beside a water house keeps the water\'s word');
   }, 60000);
 });

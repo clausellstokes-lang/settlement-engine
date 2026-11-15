@@ -15,6 +15,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -40,22 +41,28 @@ const commoditiesOf = (key) => /** @type {any} */ (RESOURCE_DATA)[key].commoditi
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 describe('D34: the catalogue bundles no good a resource does not give', () => {
-  test.each([
-    ['river_fish', 'salt', 'fish'],
-    ['precious_metals', 'gems', 'luxury'],
-  ])('%s gives no "%s" (it still gives "%s")', (key, gone, still) => {
-    expectAbsentWithAnchor(commoditiesOf(key), gone, still, `${key}: the good it does not give, beside one it gives`);
-    expect(commoditiesOf(key)).toContain(still);
+  test('each resource gives no bundled good; it still gives its own (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures([
+      ['river_fish', 'salt', 'fish'],
+      ['precious_metals', 'gems', 'luxury'],
+    ], ([key, gone, still]) => {
+      expectAbsentWithAnchor(commoditiesOf(key), gone, still, `${key}: the good it does not give, beside one it gives`);
+      expect(commoditiesOf(key), `${key} gives no "${gone}" (it still gives "${still}")`).toContain(still);
+    }), 'D34: a resource gives no good it does not give, and still gives its own');
   });
-  test.each([['hot_springs'], ['hot_springs_mineral']])('%s gives no medicinal herbs (it gives no commodity: its goods are its trade goods)', (key) => {
-    expect(commoditiesOf(key)).toEqual([]);
-    expect(/** @type {any} */ (RESOURCE_DATA)[key].tradeGoods.length).toBeGreaterThan(0);
+  test('each hot springs gives no medicinal herbs (it gives no commodity: its goods are its trade goods) (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures([['hot_springs'], ['hot_springs_mineral']], ([key]) => {
+      expect(commoditiesOf(key), `${key} gives no medicinal herbs (it gives no commodity)`).toEqual([]);
+      expect(/** @type {any} */ (RESOURCE_DATA)[key].tradeGoods.length, `${key}: its goods are its trade goods`).toBeGreaterThan(0);
+    }), 'D34: the hot springs give no commodity, and keep their trade goods');
   });
-  test.each([
-    ['salt_flats', 'salt'], ['desert_salt', 'salt'], ['foraging_areas', 'medicinal_herbs'], ['ancient_grove', 'medicinal_herbs'],
-    ['ancient_grove', 'honey'], ['oasis_water', 'dates'], ['date_palms', 'dates'],
-  ])('KEPT: %s still gives "%s"', (key, good) => {
-    expect(commoditiesOf(key)).toContain(good);
+  test('KEPT: each resource still gives its good (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures([
+      ['salt_flats', 'salt'], ['desert_salt', 'salt'], ['foraging_areas', 'medicinal_herbs'], ['ancient_grove', 'medicinal_herbs'],
+      ['ancient_grove', 'honey'], ['oasis_water', 'dates'], ['date_palms', 'dates'],
+    ], ([key, good]) => {
+      expect(commoditiesOf(key), `KEPT: ${key} still gives "${good}"`).toContain(good);
+    }), 'D34: every kept resource still gives its good');
   });
 });
 
@@ -74,13 +81,17 @@ const KEEP = [
 ];
 
 describe('D34: the made list holds no bundled good the land does not give', () => {
-  test.each(GONE)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
-    const list = madeIn(seed);
-    expectAbsentWithAnchor(list, gone, still, `${seed}: the bundled good, beside a good the town makes`);
-    expect(list).toContain(still);
+  test('each GONE town lists no bundled good; it still makes its own (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GONE, ([seed, gone, still]) => {
+      const list = madeIn(seed);
+      expectAbsentWithAnchor(list, gone, still, `${seed}: the bundled good, beside a good the town makes`);
+      expect(list, `${seed} lists no "${gone}"; it still makes "${still}"`).toContain(still);
+    }), 'D34: no GONE town lists the bundled good, and each still makes its own');
   });
-  test.each(KEEP)('%s still lists "%s"', (seed, good) => {
-    expect(madeIn(seed)).toContain(good);
+  test('each KEEP town still lists its good (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, good]) => {
+      expect(madeIn(seed), `${seed} still lists "${good}"`).toContain(good);
+    }), 'D34: every KEEP town still lists the good its land gives');
   });
   test('the inheritor: r2r-thorp-44, which makes no salt, imports it as a necessity', () => {
     expect(town('r2r-thorp-44').economicState.necessityImports).toContain('Salt');
@@ -103,14 +114,18 @@ describe('D34: the coast\'s salt is made only where a salt works stands', () => 
   test('the data keeps the coast\'s salt', () => {
     expect(commoditiesOf('fishing_grounds')).toEqual(['fish', 'salt']);
   });
-  test.each(GONE_COAST)('%s lists no "salt"; it still makes "%s"', (seed, still) => {
-    const list = madeIn(seed);
-    expectAbsentWithAnchor(list, 'salt', still, `${seed}: no salt without a salt works, beside a good the town makes`);
-    expect(list).toContain(still);
+  test('each coast with no salt works lists no "salt"; it still makes its own (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GONE_COAST, ([seed, still]) => {
+      const list = madeIn(seed);
+      expectAbsentWithAnchor(list, 'salt', still, `${seed}: no salt without a salt works, beside a good the town makes`);
+      expect(list, `${seed} lists no "salt"; it still makes "${still}"`).toContain(still);
+    }), 'D34: no coast without a salt works lists salt, and each still makes its own');
   });
-  test.each(KEEP_COAST)('%s still lists "salt" (its Salt works stands on the fishing grounds)', (seed) => {
-    expect(town(seed).config.nearbyResources).toContain('fishing_grounds');
-    expect(town(seed).institutions.map((/** @type {any} */ i) => String(i.name))).toContain('Salt works');
-    expect(madeIn(seed)).toContain('salt');
+  test('each coast with a Salt works still lists "salt" (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP_COAST, (seed) => {
+      expect(town(seed).config.nearbyResources, `${seed}: on the fishing grounds`).toContain('fishing_grounds');
+      expect(town(seed).institutions.map((/** @type {any} */ i) => String(i.name)), `${seed}: its Salt works stands`).toContain('Salt works');
+      expect(madeIn(seed), `${seed} still lists "salt" (its Salt works stands on the fishing grounds)`).toContain('salt');
+    }), 'D34: every coast with a Salt works still lists salt');
   });
 });
