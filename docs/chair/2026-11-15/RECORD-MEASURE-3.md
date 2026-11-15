@@ -121,11 +121,12 @@ figure that is held is one figure. What it loses: the trace of petty untaxed bar
 
 ## ROW 4, THE CHAIR'S QUESTION (the foodways text)
 
-c4a is the rounding at the source (one line, `foodGenerator.js`'s call of `deriveFoodRecord`). The foodways line
-"provided by spell or by prayer" reads the food record's `magicPct` (`foodRecord.foodwaysLine` and the culture's
-`foodways` read the record built by that call), so with c4a the 4 towns' share is 0 and the line that keys on a share
-above nothing is not drawn; c4a's field diff shows no foodways field moving at birth because none of the 4 drew it with a
-1 per cent share (measured: `culturalIdentity.foodways` absent from c4a's diff).
+c4a is the rounding at the source (one line, `foodGenerator.js`'s call of `deriveFoodRecord`). The line "provided by
+spell or by prayer" is the Economics tab's DS-ECO-9 pool **"HOW THE NEED IS MET: part of it by magic"**, keyed by
+`economyStateProse.js :: foodMeansPoolKey` on `foodRecord.magicPct > 0` alone. Of the 4 towns, **3 print it** on the tabs
+beside "Reliance on magic: None" (r2s-occupied-thorp-0, r2s-indebted-thorp-2, r2s-insurgency-thorp-2; the fourth draws
+another lens). With c4a their share is 0, so the key is not raised and the line is not drawn: the cure is at the record,
+the line moves with it.
 
 ## COSTS
 
