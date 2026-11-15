@@ -1,0 +1,13 @@
+diff --git a/src/generators/foodLand.js b/src/generators/foodLand.js
+index 7fa8464c..d34f2dfa 100644
+--- a/src/generators/foodLand.js
++++ b/src/generators/foodLand.js
+@@ -134,7 +134,7 @@ export function foodLandOf(tier, institutions, config, landRoute) {
+   const hasMarket         = hasMarketInstitution(institutions); // CENSUS-1 fact 5: the market home (a black market is not one) — MERGE-R2 (the chair's ruling 3): the catalogue's tags are the one detector
+   const _hasBakery         = hasInst('baker', 'bakery');
+   const hasDruid          = hasInst('druid', 'grove', 'elder grove', 'sacred grove'); // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
+-  const hasDivine         = hasInst('cathedral', 'monastery', 'great cathedral', 'parish church');
++  const hasDivine         = hasInst('cathedral', 'monastery', 'great cathedral', 'parish church') && (institutions || []).some((i) => /cathedral|monastery|parish church/i.test(String(i?.name || '')) && !/^access to /i.test(String(i?.name || ''))); // RECORD-MEASURE-3 candidate 4b: a church the place reaches is not one it holds
+   const hasArcane         = hasInst('mage', 'wizard', 'arcane', 'spellcasting');
+ 
+   // ── THE FOOD SOURCES (FOOD-3) — the five resource+institution pairings the balance reads,

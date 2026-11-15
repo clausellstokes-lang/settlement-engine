@@ -1,0 +1,13 @@
+diff --git a/src/generators/foodLand.js b/src/generators/foodLand.js
+index 7fa8464c..347a748b 100644
+--- a/src/generators/foodLand.js
++++ b/src/generators/foodLand.js
+@@ -145,7 +145,7 @@ export function foodLandOf(tier, institutions, config, landRoute) {
+   // resource record reads availability, with or without a farm or pastoral row. Game and fish keep
+   // their rules, and the production bonus below stays paired as it was: naming a source grows nothing.
+   const foodSources = /** @type {Array<'grain'|'livestock'|'fish'|'mill'|'game'>} */ ([
+-    ['grain', hasRes('grain_fields', 'fertile_floodplain')],
++    ['grain', hasRes('grain_fields', 'fertile_floodplain') || (institutions || []).some((i) => /farm|croft/i.test(String(i?.name || '')) && !/^access to /i.test(String(i?.name || '')))], // RECORD-MEASURE-3 candidate 6b: a farm row is worked land by its own name
+     ['livestock', hasRes('grazing_land')],
+     ['fish', fishSource],
+     ['mill', hasMill && hasRes('river_mills')],

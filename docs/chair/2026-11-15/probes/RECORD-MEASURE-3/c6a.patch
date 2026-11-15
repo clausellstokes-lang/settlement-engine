@@ -1,0 +1,13 @@
+diff --git a/src/generators/economy/economicState.js b/src/generators/economy/economicState.js
+index ca365159..b8feb249 100644
+--- a/src/generators/economy/economicState.js
++++ b/src/generators/economy/economicState.js
+@@ -860,7 +860,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+       primaryImports: primaryImports,
+       ...(earlyTradeOwnership || {}),
+       transit: transit,
+-      isEntrepot: isEntrepot,
++      isEntrepot: isEntrepot && (activeChainsList || []).some((c) => !!c && !!c.entrepot), // RECORD-MEASURE-3 candidate 6a: the flag where an entrepôt chain stands (entrepotShown.js)
+       localProduction: tradeStreams.localProduction,
+       necessityImports: necessityImports,
+       tradeAccess: tradeRoute,

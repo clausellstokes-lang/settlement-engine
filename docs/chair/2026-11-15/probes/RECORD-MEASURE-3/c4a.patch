@@ -1,0 +1,14 @@
+diff --git a/src/generators/foodGenerator.js b/src/generators/foodGenerator.js
+index 0ec822f0..e13d6060 100644
+--- a/src/generators/foodGenerator.js
++++ b/src/generators/foodGenerator.js
+@@ -388,7 +388,8 @@ export function generateFoodSecurity(tier, institutions, config, storesShare = 1
+   // ── THE FOOD RECORD (FOOD-1): derived once, here, from the numbers just published ──
+   const foodRecord = deriveFoodRecord({
+     dailyNeed: Math.round(dailyNeed), dailyProduction: Math.round(dailyProduction),
+-    importCoverage, normalImportPct: importPct, magicOffset, deficitPct, surplusPct, stressFamine, storageMonths,
++    importCoverage, normalImportPct: importPct, magicOffset: Math.round(magicOffset), deficitPct, // RECORD-MEASURE-3 candidate 4a: the share of the pounds published
++    surplusPct, stressFamine, storageMonths,
+     hasGranary: hasAnyGranary,
+     foodSources,
+     failedSource,
