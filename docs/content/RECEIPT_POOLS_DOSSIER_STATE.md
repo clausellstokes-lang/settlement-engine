@@ -826,12 +826,12 @@ the access.
 3. `[visitor · no crisis · market]` Nothing about {settlement} looks rich or poor: the {access} is busy enough, the market is open, and nobody is building or selling up.
 
 **COMBINATION C4: a low rung on a working approach**
-1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.
-2. `[street · no crisis: under_siege · no crisis: plague_onset]` Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.
+1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` {settlement} sits on its {access} and stays poor all the same.
+2. `[street · no crisis: under_siege · no crisis: plague_onset]` Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks.
 3. `[visitor · market · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s {access} is busy, and the town is poor all the same, and so are the traders at its market.
 4. `[ledger · crisis: under_siege]` With the siege closing the roads, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.
 5. `[street · crisis: under_siege]` The siege has stopped {settlement}'s trade moving at all, and the money that trade brought in has stopped with it.
-6. `[visitor · no market · no crisis: under_siege · no crisis: plague_onset]` There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.
+6. `[visitor · no market · no crisis: under_siege · no crisis: plague_onset]` There is no market at {settlement} to hold whatever its {access} brings, and the town stays poor.
 7. `[ledger · crisis: under_siege]` Since the siege began, no passing traffic brings money into {settlement}, and nothing has taken its place.
 
 **COMBINATION C5: a low rung on a narrow approach**

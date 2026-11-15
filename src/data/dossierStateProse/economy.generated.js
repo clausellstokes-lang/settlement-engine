@@ -137,7 +137,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.",
+          "text": "{settlement} sits on its {access} and stays poor all the same.",
           "slots": [
             "settlement",
             "access"
@@ -150,7 +150,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
+          "text": "Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks.",
           "slots": [
             "settlement"
           ],
@@ -199,9 +199,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.",
+          "text": "There is no market at {settlement} to hold whatever its {access} brings, and the town stays poor.",
           "slots": [
-            "settlement"
+            "settlement",
+            "access"
           ],
           "vid": 6
         },

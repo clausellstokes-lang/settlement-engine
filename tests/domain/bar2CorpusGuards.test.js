@@ -72,6 +72,9 @@ const REWORDED = [
   { batch: 1, pool: 'DS-ECO-1::COMBINATION C1: a high rung on a working approach', vid: 1, gone: /[Tt]raffic/, rows: 'C23849\'s class: the approach\'s traffic' },
   { batch: 1, pool: 'DS-ECO-1::COMBINATION C1: a high rung on a working approach', vid: 3, gone: /keeps it that way/, rows: 'C23849\'s class: the approach keeps it so' },
   { batch: 1, pool: 'DS-ECO-1::COMBINATION C1: a high rung on a working approach', vid: 4, gone: /Trade on/, rows: 'C23849\'s class: the trade on the approach' },
+  { batch: 2, pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 6, gone: /trade that passes by|goes on its way/, rows: 'r2r-thorp-43 (named by BAR2-LABELS): a port thorp with no exports, imports or transit (1 of 68)' },
+  { batch: 2, pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 1, gone: /Trade comes and goes/, rows: 'r2r-thorp-43\'s class: trade through the approach' },
+  { batch: 2, pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', vid: 2, gone: /Some trade comes past/, rows: 'r2r-thorp-43\'s class: trade past the town' },
   { batch: 1, pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', vid: 1, gone: /too little to change/, rows: 'C14631: a shadow income of a seventh or more (3 of 10)' },
 ];
 
