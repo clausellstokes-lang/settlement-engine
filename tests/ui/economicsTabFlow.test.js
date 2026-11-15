@@ -1138,10 +1138,10 @@ describe('UX consolidation — the Economics page says each fact once', () => {
       resourceAnalysis: { exploitation: { fullyExploited: [{ rawResource: 'timber' }], partiallyExploited: [], unexploited: [] } },
     };
     const text = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true })).container.textContent;
-    expect(text, 'the shadow economy section stays').toContain('Shadow Economy: 20% capture');
+    expect(text, 'the shadow economy section stays').toContain('Shadow Economy: 20% of trade unrecorded');
     expect(text, 'its operations list moved to Defense, the capture stays').toContain('Off-book');
     for (const gone of ['Economic Plot Hooks', 'The bridge toll is skimmed.', 'Resource Exploitation', 'Fully Exploited', '→ Defense tab', 'Economic operations', 'Smugglers\' Den']) {
-      expect(text, `${gone} is still on the page`).not.toContain(gone); // anchored: toContain('Shadow Economy: 20% capture') on this render
+      expect(text, `${gone} is still on the page`).not.toContain(gone); // anchored: toContain('Shadow Economy: 20% of trade unrecorded') on this render
     }
   });
 });

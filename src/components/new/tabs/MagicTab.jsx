@@ -163,7 +163,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
                   {supply.supply && <span data-testid="magic-reliance-source" style={{ fontWeight: 400 }}> · supplied by {supply.supply}</span>}
                 </div>
               )}
-              {posture.roleLines.map((line, i) => [line, Object.keys(posture.roles || {})[i]]).filter(([, role]) => roleRowShown(settlement, role, posture.roles?.[role])).map(([line], i) => (
+              {posture.roleLines.map((line, i) => [line, Object.keys(posture.roles || {})[i]]).map(([line, role]) => [role === 'economic' ? line.replace(/[a-z]+$/, String(economicRoleBandShown(settlement, posture.roles?.economic))) : line, role]).filter(([, role]) => roleRowShown(settlement, role, role === 'economic' ? economicRoleBandShown(settlement, posture.roles?.economic) : posture.roles?.[role])).map(([line], i) => ( /* X32: the economic role beside the food record's provision (magicProvisionShown.js) */
                 <div key={i} data-role-line style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
               ))}
             </div>
@@ -216,4 +216,4 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   );
 }
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
-import { magicNoteShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
+import { magicNoteShown, economicRoleBandShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
