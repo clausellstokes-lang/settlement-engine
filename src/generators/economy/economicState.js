@@ -831,6 +831,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     _foodSec,
   );
   const { prosperity, prosperityStanding } = deriveProsperityLabels(baseProsperity, standingBaseProsperity(tier, tradeRoute, institutions, config, instNames, incomeNormalized), config, institutions); // COHERENCE-UPKEEP-5 (R3): beside the printed label, the label with no crisis in force, the one draw replayed
+  // TAIL-DEFECON-4 (03703, X9 03932): a trade that 'thrives' and 'draws customers from surrounding settlements' is not
+  // said of a place whose own label is Subsistence, Struggling or Poor; it keeps the alchemist's existing plain line.
+  // The label is derived AFTER trueIncomeDesc (above), and nothing between reads a desc. No draw.
+  if (['Subsistence', 'Struggling', 'Poor'].includes(prosperity)) for (const entry of incomeNormalized) if (entry.desc === ALCHEMY_TRADE_LINE) entry.desc = ALCHEMIST_SUPPLEMENTS_LINE;
   // COHERENCE-UPKEEP (ruling 7): the guard assessment says what the place can pay for its hired force. Since
   // COHERENCE-UPKEEP-6 (the chair's ruling A) that is written AFTER the defence profile, which it reads
   // (steps/assembleSettlement.js, beside generateDefenseProfile): one home for pay on every surface.

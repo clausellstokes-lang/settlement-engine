@@ -469,7 +469,7 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
       product: chain.intermediateGoods.join(', '),
       chain:   chain.rawResource,
       value:   'medium',
-      reason:  'Partial processing - exports semi-finished goods',
+      reason:  'Partial processing - worked only to semi-finished goods', // TAIL-DEFECON-4 (15458, D3): the row is export POTENTIAL; it claims no export the trade list does not hold, and none under a siege
     });
   });
 
