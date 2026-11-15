@@ -422,3 +422,8 @@ Declared (no new words): Beasts plagued perimeter AND force v2; Economic Surviva
    line: read it first).
 3. WAITING: the council and autocrat rows (C14; 04066 autocrat v2 among them); DS-DEF-9 magicDependency (C9: B14709 04098
    11437 B10908 B03973); the Economic Survival STRONG class (above, the chair's); 44 rows in fewer than five towns (C16).
+
+## TAIL-CORPUS-DEF-3 HANDED BACK at the 250,000 line (2026-11-15 ~03:40 UTC), batch 5's tip 1e7344d2e
+Two batches landed (4: 13 rows cured, 1 struck; 5: 5 rows cured, 5 struck), 13 new or changed lines on the veto list
+(14-26). The next seat continues from "What is left (after batch 5)" above, re-taking its before census at this branch's
+tip (CENSUS-3's command with `render.census3d.jsx`, made by `mkrender.py`); `f2.mjs` and `facts.mjs` give the facts.
