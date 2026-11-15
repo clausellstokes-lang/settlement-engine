@@ -23,7 +23,7 @@
  * ruling R-C) — `{ text, needs?, excludes?, crisis? }` in the atoms of `domain/facts/factVocabulary.js`. Consumers
  * read it through `domain/facts/textOf.js` until CENSUS-1c's wiring draws it through `drawDeclared`.
  * @typedef {((n: string) => string) | { text: (n: string) => string, needs?: ReadonlyArray<string>,
- *   excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string>, colour?: boolean }} ArrivalLine
+ *   excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string>, colour?: boolean, twinOf?: string }} ArrivalLine
  */
 /**
  * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF: "flags now, pins at the compose"). The ledger's

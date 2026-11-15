@@ -1,11 +1,89 @@
 # TAIL-HISTORY · hand-back (2026-11-15)
 
-Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY-2** (batch 2), then **TAIL-HISTORY-3** (batches 3 and 4; keeping this file).
+Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY-2** (batch 2), then **TAIL-HISTORY-3** (batches 3 and 4), then **TAIL-HISTORY-4** (the first act, batch 5; keeping this file).
 Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
+**STATE (TAIL-HISTORY-4): batch 5 PUSHED; see the TAIL-HISTORY-4 part first.**
 Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the chair's lane (211 rows, read at e5b421802).
 
 **STATE (TAIL-HISTORY-3): batch 3 (Y13, every tension type) LANDED; batch 4 (Y14, the arrival pool) LANDED. HANDED BACK at the budget (2026-11-15): what is left is under WHAT IS LEFT (TAIL-HISTORY-3).** TAIL-HISTORY-2's state: **batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** (7bef72cbc). **HANDED BACK** at the budget
 (2026-11-15 01:50): what is left is listed under WHAT IS LEFT below.
+
+## TAIL-HISTORY-4 (2026-11-15): the order, the first act, batch 5, WHAT IS LEFT
+
+**STATE (TAIL-HISTORY-4): the first act done (batch 4's true after-run read: clean). Batch 5 (the exports' lasting effects) PUSHED. Handed back at the budget: what is left is under WHAT IS LEFT (TAIL-HISTORY-4) below.**
+
+### The order (ruling Y16, the chair, 2026-11-15 03:12 UTC; vetoable by the owner)
+
+- FIRST ACT: one census at the tip, batch 4's true after-run, read through its inventory diff against the base it names.
+- THEN, WIDEST FIRST: the exports' LASTING EFFECTS rows (07927 in 202 towns, 03878 in 184, 30563 in 157, a HIGH; the levy rolls in 142), each cured at its writer so that the tabs and the exports print the same true line (THE EXPORT PRINTS WHAT THE TAB PRINTS, THROUGH THE TAB'S OWN LEAF; a fault in the export's own composition of a true tab line is NAMED for the exports' files, said in one line to the chair, and the file is then lent). Then 03015 (the creditor's agent under a siege, 60). Then the worklist's rows printing in five towns or more. A row in fewer than five towns waits.
+- THE LAWS for these rows: a tension with no event of its own is told as a live quarrel (Y5, Y13); a line a crisis can make false is not colour (Y6); under a plague no line gathers a crowd (Y8); a bare declaration that makes the chooser redraw moves later beats, so use declared twins, which spend no redraw (batch 4's finding, kept).
+- `ruling body` is safe at every step (720 of 720) and takes new lines. Not to be keyed on: the governing power's capture state, its legitimacy-crisis note.
+- (U1) The weekly usage warning is on: commit and push every batch as it holds, with WHAT IS LEFT current in the same push; hand back at 250,000 (meter at 0: about seventy minutes); one line to the chair at hand-back, a stop, or a question.
+
+### The first act: batch 4's true after-run (CENSUS-3 at 1918e3d22, against 6f7786a78)
+
+- The record (births of the 720 at both): **73 towns differ, in `arrivalScene` only**. That is exactly batch 4's declared move.
+- The inventory: the 73 re-rendered at 6f7786a78 and set in place of the tip's own dumps (the other 647 records are identical).
+  - Tabs: 29,957 → 29,961. 3 gone, 7 new, 4 in fewer towns, **0 moved**. Gone: the apprentice's master's mark (23), the horse traders (21), the herbs in the carts (12). Fewer: the moneylender 23 → 11, the broker 13 → 10, the clerk 20 → 19, the cloth carts 22 → 21. New: the seven veto lines of batch 4, each in exactly its measure (23, 21, 12, 12, 3, 1, 1). The inheritors are those seven, every one.
+  - Exports: 35,882 → 35,882, no change (the arrival scene prints on the tabs only).
+  - ONE ARTEFACT, not a move: the premium deity panel ("Patron deity", 3 lines) read 715 → 719. The same 4 cities lack it when the tip itself is re-rendered by the same small-run method, so it is the census's early-render flake, not the record. It shows again below.
+
+### Batch 5: the exports' lasting effects (X9 30563, 07927, 03878, 03872-03877, 00590, 29930, 08729)
+
+**Where they print.** `history.historicalEvents[].lastingEffects` prints in the exports' history section (`HistoryFounding.jsx`) and in the tabs' event card when opened (`HistoryTab.jsx`, closed in the census's dumps). Both read the one record field; the cure is at the writer, so both print the same line. `legacyAnnotations` quotes the same field and follows it (74 towns, printed on no census page). No export composition is at fault: nothing named for the exports.
+
+**The measure** (the census's 720 at 1918e3d22, by `factsOf` + `atomHolds` on the record; the atoms read the same on the history's partial record as on the final one, 0 differences):
+
+| row | the effect | prints | false | the fact |
+|---|---|---|---|---|
+| 30563 (HIGH) | "Watch towers and muster drills maintained since the alarm" | 157 | 28 | no force of any kind (`guardPresence`) |
+| 03872-03877 | "A standing levy roster kept ready in the {tier} archive" | 142 | 34 | an archive, below a town |
+| 03878 | "A standing security office and informant network persist" | 184 | 57 | a standing office, below a town |
+| 07927 | "Denunciation records from the panic remain sealed in the archive" | 202 | 65 | an archive, below a town |
+| 00590 | "Two rival congregations still divide the settlement's faithful" | 136 | 12 | thorps |
+| 29930 | "Wage disputes settled by a standing arbitration council since founded" | 112 | 7 | a standing council, below a town |
+| 08729 | "Emergency grain reserves mandated by ordinance since the shortage" | 46 | 17 | below a village (an ordinance), or under a famine (the reserves have not held) |
+
+Struck by record: the levy roster where a town has no militia (133 of 142): a levy is what is raised where no force stands. The price ceilings (51): nothing false by the record but the size, not measured as false.
+
+**The cure** (`src/data/historyData.js :: HISTORY_DESC_SIBLINGS`, the file's form, draw-free through `sizedLastingEffects.js`): seven sibling sets, each the original with its condition and a twin true where it is refused, on the same slot. The grain set holds a second member under a famine (reached by the door's argmax, as the stone construction's third member is), because the door reads only the first twin. No new vocabulary word.
+
+**The after-run** (CENSUS-3 at the cure, 720 towns):
+- **Exports:** 35,882 → 35,887. 3 gone, 8 new, 6 in fewer towns, **0 in more, 0 moved**. Every row fell by exactly its measure: 202 → 137, 184 → 127, 157 → 129, 136 → 124, 112 → 105, 46 → 29, and the levy roll's thorp, hamlet and village forms (13, 7, 14) gone. The 8 inheritors are the twins, every one, each in exactly its measure.
+- **Tabs:** 29,961 → 29,961. The only change is the deity panel's flake (719 → 716, in r2r-thorp-0, -2 and -3, whose records did not change).
+- **THE DECLARED MOVE** (record diff by field, the 720): `history.historicalEvents[].lastingEffects` in 178 towns, `history.currentTensions[].lastingEffects` in 124 (the same template lists, resolved the same way; printed on no surface), `history.legacyAnnotations[].annotation` in 74 (it quotes the effect). 245 towns in all. Nothing else moves.
+- A silence over twenty towns? No line is silenced: every refused effect takes its twin. The replaced lines are the false ones by the measure.
+
+**The guard, red first.** `tests/data/tailHistoryBatch5.test.js`: fifteen towns (the smallest and the largest false town of each row, and the famine's town and metropolis) must not print the false words and must print the twin. Red at 1918e3d22: 15 of 15. Green at the cure. KEEP (seven towns that hold what each original names) is green at both. A planted condition (the towers' `needs` set to a metropolis) reds KEEP 1 of 7, not committed.
+
+**Gates at the cure** (gate-tail.sh):
+- typecheck:domain:strict 0; eslint on the touched files 0.
+- typecheck:ratchet 0. It was red at the tip: `arrivalProse.js` +2, batch 4's `twinOf` missing from the `ArrivalLine` typedef. Mended in this batch (the typedef only).
+- The walker equals the base (fresh 147, stale 0; red at the base too, carried).
+- Grid: 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), 0 rises, as at the base.
+- The 85 test files that name historyData, historyGenerator, sizedLastingEffects or textOf: reds carried, each red in the base tree as well: paradigmAxisCatalog, economicHistoryRecent (rw3-hamlet-calm-1), urbanBandInstitutions G5, the walker's three arms, generatorGoldenMaster. urbanBandInstitutions G3 timed out under the census's load and is green alone.
+
+**THE VETO LIST (VETOABLE wording, the owner's; read in the smallest, the largest, a crisis town):**
+- "Every household still knows where to run if the alarm is raised again" (28): r2r-thorp-32, r2s-under_siege-village-1, r2s-famine-thorp-1. Note for the owner: under a siege the alarm is not past; the line claims no road out.
+- "The heads of the families still keep count of who could be called on to fight" (34): r2r-thorp-13, r2s-wartime-village-3, r2s-famine-thorp-3.
+- "Neighbours still watch one another, and the old informers are not forgotten" (57): r2r-thorp-17, r2s-under_siege-village-1, r2s-occupied-thorp-3.
+- "The names denounced in the panic are still remembered, and not forgiven" (65): r2r-thorp-1, r2s-wartime-village-3, r2s-occupied-thorp-2.
+- "The faithful are still divided over how they ought to worship" (12): r2r-thorp-19, r2s-under_siege-thorp-0, r2s-plague_onset-thorp-2.
+- "Wage disputes are still settled by the heads of the families, as they have been since the founding" (7): r2r-hamlet-51, r2s-recently_betrayed-village-3, r2s-monster_pressure-village-2.
+- "Every household has put grain by against lean years since the shortage" (12): r2r-thorp-21, r2s-wartime-hamlet-0, r2s-under_siege-hamlet-1.
+- "Grain was put by against lean years after the shortage, and it has not been enough" (5, under a famine): r2s-succession_void-thorp-0, r2s-famine-town-0, r2s-famine-metropolis-1.
+
+### WHAT IS LEFT (TAIL-HISTORY-4's hand-back, widest first; supersedes the list below)
+
+1. **X9 03015, the creditor's agent "in town" under a siege** (60 towns, the outside debt's hook in both forms, the template's and the Y13 twin's). The siege law applies. The cure is `excludes: ['crisis: under_siege']` on the hook in both lists; the `hookTablesDeclared` pin is re-keyed by identity in the same commit. Check that the hook draw (`resolveTimelineHook`) gives way without a redraw outside the pool.
+2. **The other X9 lasting effects, by size**: the price ceilings (51), the oversight office (30), the regency council (03675, 30), the council seats split (07361, 29), the competing partial authority (22748, 28), the charters lodged with the court (22746, 25). The same form as batch 5; measure each first with `le.mjs`.
+3. **The worklist's rows in five towns or more**, as TAIL-HISTORY-3 listed them: B15078's 28 anchored "Price regulators" (a size law for the template's own factions, the chair's call); 11894 and 28512 (foodways, Y3); B19917 and 07400; the Y3 culture rows; the rest of Y4; **Y8** (no gathering under a plague or a quarantine). Y9 / Y11 (20031, 20032): `ruling body` is safe, but it is on the joined line (d817736d8), not this branch: the merge waits for a tip the chair names.
+4. **Named for other files:** as TAIL-HISTORY-3 listed (siegeCapability.js, crisisSummaryVantage.js, TraditionsTab.jsx, arrivalScene.js). New: none.
+5. **Registers named stale:** the engine bundle carries none of batches 1-5; the arrival ledgers lack batch 4's declarations. Nothing else of batch 5's.
+6. **Instruments** (re-made in a few minutes):
+   - `le.mjs <tree> <corpus> <regex> [atoms]`: every lasting effect on events (`ev`) and tensions (`tn`) matching the regex, its printing towns, and the towns where each atom fails, on the full record and on the history's partial record (`institutions`, `config`, `tier`, `powerStructure`, the stresses).
+   - `recdiff.py <corpusA> <corpusB> <seeds-out>`: the record diff by field family.
+   - The inventory diff of a record-only move: birth the base (`births.mjs`), diff the records, render only the differing towns at the base (`census3.sh … --seeds <file> --count-only`), lay those dumps over the tip's, and inventory both. The early renders of a run drop the premium deity panel in a few towns: read it as a flake.
 
 ## TAIL-HISTORY-3 (2026-11-15): the chair's rulings since (each vetoable by the owner)
 
@@ -129,7 +207,7 @@ Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the cha
 - "Bolts of cloth and bales of wool are stacked high in the workshops, more than the place can wear." r2s-politically_fractured-town-2.
 - "An old woman sits at a low table by her door, and the neighbours stop to settle what they owe her." 12 thorps and hamlets: r2r-thorp-57, r2r-hamlet-43, r2s-famine-thorp-1.
 
-## WHAT IS LEFT (TAIL-HISTORY-3's hand-back, 2026-11-15, widest first)
+## WHAT IS LEFT (TAIL-HISTORY-3's hand-back, 2026-11-15, widest first; SUPERSEDED by TAIL-HISTORY-4's list above, kept as record)
 
 1. **X9's lasting effects** (the timeline events' `lastingEffects`, PDF/HistoryFounding). The file's form is a `HISTORY_DESC_SIBLINGS` entry with its condition and a twin, or silence (`sizedLastingEffects.js`, draw-free).
    - The measure at 6f7786a78 counts towns printing each effect / towns with no watch AND no militia / towns below town. The atoms `court` and `institution: granary` read exactly the below-town count, which should be checked before keying by them.

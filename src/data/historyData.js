@@ -1874,6 +1874,44 @@ export const HISTORY_DESC_SIBLINGS = Object.freeze({
     Object.freeze({ text: "The merchant quarter and the labourers' quarter remain walled apart", needs: Object.freeze(['tier: ≥ town']) }),
     Object.freeze({ text: "The merchant families and the labouring families still keep apart", twinOf: "The merchant quarter and the labourers' quarter remain walled apart", needs: Object.freeze(['tier: ≤ village']) }),
   ]),
+  // TAIL-HISTORY-4 batch 5 (the chair's Y16, 2026-11-15; the exports' read X9 30563, 07927, 03878, 03872-03877, 00590, 29930,
+  // 08729): THE LASTING EFFECTS THAT NAME A FORCE, AN OFFICE, AN ARCHIVE OR AN ORDINANCE take the place that can hold them
+  // (measured on the census's 720 by `factsOf` + `atomHolds`; the atoms read the same at the history's write as on the
+  // final record). The watch towers and the muster drills need a force of some kind; a standing office, an archive, a
+  // standing council and a levy roster kept in an archive are a town's; two rival congregations need more than a thorp;
+  // grain reserves mandated by ordinance are a village's or larger, and under a famine they have not held (the set's
+  // second member, reached by the door's argmax as the stone construction's third is). Each takes a twin true where it
+  // is refused, on the same slot: draw-free (`generators/history/sizedLastingEffects.js`), the tabs'
+  // event card and the exports' history section print the one record field. VETOABLE wording (the owner's).
+  "Watch towers and muster drills maintained since the alarm": Object.freeze([
+    Object.freeze({ text: "Watch towers and muster drills maintained since the alarm", needs: Object.freeze(['guardPresence']) }),
+    Object.freeze({ text: "Every household still knows where to run if the alarm is raised again", twinOf: "Watch towers and muster drills maintained since the alarm", excludes: Object.freeze(['guardPresence']) }),
+  ]),
+  "A standing levy roster kept ready in the town archive": Object.freeze([
+    Object.freeze({ text: "A standing levy roster kept ready in the town archive", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "The heads of the families still keep count of who could be called on to fight", twinOf: "A standing levy roster kept ready in the town archive", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "A standing security office and informant network persist": Object.freeze([
+    Object.freeze({ text: "A standing security office and informant network persist", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Neighbours still watch one another, and the old informers are not forgotten", twinOf: "A standing security office and informant network persist", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Denunciation records from the panic remain sealed in the archive": Object.freeze([
+    Object.freeze({ text: "Denunciation records from the panic remain sealed in the archive", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "The names denounced in the panic are still remembered, and not forgiven", twinOf: "Denunciation records from the panic remain sealed in the archive", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Two rival congregations still divide the settlement's faithful": Object.freeze([
+    Object.freeze({ text: "Two rival congregations still divide the settlement's faithful", needs: Object.freeze(['tier: ≥ hamlet']) }),
+    Object.freeze({ text: "The faithful are still divided over how they ought to worship", twinOf: "Two rival congregations still divide the settlement's faithful", needs: Object.freeze(['tier: ≤ thorp']) }),
+  ]),
+  "Wage disputes settled by a standing arbitration council since founded": Object.freeze([
+    Object.freeze({ text: "Wage disputes settled by a standing arbitration council since founded", needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Wage disputes are still settled by the heads of the families, as they have been since the founding", twinOf: "Wage disputes settled by a standing arbitration council since founded", needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
+  "Emergency grain reserves mandated by ordinance since the shortage": Object.freeze([
+    Object.freeze({ text: "Emergency grain reserves mandated by ordinance since the shortage", needs: Object.freeze(['tier: ≥ village']), excludes: Object.freeze(['crisis: famine']) }),
+    Object.freeze({ text: "Grain was put by against lean years after the shortage, and it has not been enough", needs: Object.freeze(['crisis: famine']) }),
+    Object.freeze({ text: "Every household has put grain by against lean years since the shortage", twinOf: "Emergency grain reserves mandated by ordinance since the shortage", needs: Object.freeze(['tier: ≤ hamlet']), excludes: Object.freeze(['crisis: famine']) }),
+  ]),
 });
 
 /**
