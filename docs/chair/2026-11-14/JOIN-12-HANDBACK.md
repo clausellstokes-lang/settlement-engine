@@ -97,11 +97,11 @@ JOIN-11's §3 stands on its own file (`docs/chair/2026-11-14/JOIN-11-HANDBACK.md
 
 **Point 1, the files the chair named run alone** (sweep-b 4712d06e4; base dc4bae117; no conflict; no file both sides moved: `src/domain/magicAssertionText.js`, `tests/fixtures/distribution-envelopes.manifest.json`, `tests/generators/captureBirthScale.test.js`, `tests/simulation/tierInertiaEnvelope.test.js` moved by the branch alone since the base): `captureBirthScale` 8/8 (245 s); `tierInertiaEnvelope` 17/17 (50 s); `urbanBandInstitutions` 20/20 (107 s), all green at the merged tree: the record cures beneath did not move their measures out of the re-derived envelopes (`/home/user/j12out/t1.*.log`).
 
+**Point 2, the files the chair named run alone** (close-src c0c2ce70a, holding the line at 22b3cc82e through 4782f6bfd; one base, 22b3cc82e; no conflict; no file both sides moved): `layerBoundaries` 8/8 and `engineCoreLazyEdge` 3/3 (the two architecture files green: no abort); `factLayers.walker` 15/15 (THE WHOLE WALKER GREEN; JOIN-11's carried READERS red closed); `defenceFactReaders.walker` 22/22 (JOIN-11's carried defenseDisplay.js 4 closed); `ruinFilterRoster.walker` 12/12; `noLegacyFactionReaders.walker` 4/4; `informantNoThievesGuild` 6/6 (`/home/user/j12out/t2.*.log`).
+
 ## 4. THE LIST FOR THE CLOSE
 
 JOIN-11's §4 is carried forward WHOLE below (it carries JOIN-10's, JOIN-9's, JOIN-8's, JOIN-7's, JOIN-6's, JOIN-5's and JOIN-4's); JOIN-12's additions follow it, marked **[J12]**.
-
-**Point 2, the files the chair named run alone** (close-src c0c2ce70a, holding the line at 22b3cc82e through 4782f6bfd; one base, 22b3cc82e; no conflict; no file both sides moved): `layerBoundaries` 8/8 and `engineCoreLazyEdge` 3/3 (the two architecture files green: no abort); `factLayers.walker` 15/15 (THE WHOLE WALKER GREEN; JOIN-11's carried READERS red closed); `defenceFactReaders.walker` 22/22 (JOIN-11's carried defenseDisplay.js 4 closed); `ruinFilterRoster.walker` 12/12; `noLegacyFactionReaders.walker` 4/4; `informantNoThievesGuild` 6/6 (`/home/user/j12out/t2.*.log`).
 
 
 JOIN-10's §4 is carried forward WHOLE below (it carries JOIN-9's, JOIN-8's, JOIN-7's, JOIN-6's, JOIN-5's and JOIN-4's); JOIN-11's additions follow it, marked **[J11]**.
