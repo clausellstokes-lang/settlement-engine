@@ -56,6 +56,17 @@ const ARCANE_ADVISORY = 'Magical practitioners are consulted but not formally em
 /** TAIL-POWERS-B-2 (the chair's READ-ALL-4 HIGH, vetoable by the owner): where an arcane power GOVERNS, "not formally empowered" is
  * false of magic; the practitioners outside the seat take this twin, true in that state. */
 const ARCANE_ADVISORY_UNDER_ARCANE_SEAT = 'Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.';
+// TAIL-POWERS-B-3 batch 7 (P1; row 29025, 8 Suppressed cards of 36 at 4ff449a7b): a Suppressed network "controls" no illicit
+// trade; it takes this twin, which claims no control.
+const CRIMINAL_IN_SHADOWS = 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.';
+const CRIMINAL_KEEPS_OUT_OF_SIGHT = "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade.";
+// TAIL-POWERS-B-3 batch 7 (P1; row 29028, 8 of 18 at 4ff449a7b): "the nominal government ... cannot currently change it" is false
+// where the seat's own label stands above the guild's; there the line says the seat is stronger. Read on the labels alone (the
+// chair's P29: not keyed on the capture state).
+const UNDERWORLD_CLAIM = 'Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.';
+const UNDERWORLD_UNDER_STRONGER_SEAT = 'Underworld effectively controls vice and key officials; the seat is stronger, but has not moved to break its hold.';
+/** @type {Readonly<Record<string, number>>} */
+const LABEL_RANK = Object.freeze({ Suppressed: 0, Minor: 1, Significant: 2, Strong: 3, Dominant: 4 });
 const CRAFT_SECONDARY = 'The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life.';
 const CRAFT_AT_MARGINS = 'The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops.';
 /** A merchant claim's rung. @param {string} _tier @param {RungContext} ctx */
@@ -121,17 +132,19 @@ const CLAIM_RUNGS = Object.freeze([
     // Minor or Suppressed (all 111 towns printing it at bcad1a358): no rung of the arcane ladder below it claims influence
     'Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.',
   ].map((claim) => ({ claim, minor: () => ARCANE_ADVISORY, suppressed: () => ARCANE_ADVISORY })),
-  ...['Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.',
+  ...[UNDERWORLD_CLAIM,
     'Criminal organisations have captured significant influence; corruption is systemic, not exceptional.',
   ].map((claim) => ({ claim,
     minor: (/** @type {string} */ tier, /** @type {RungContext} */ ctx) => COUNCIL_SEAT.test(ctx.governing)
       ? 'Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermediaries.'
       : SMALL_TIERS.includes(tier)
         ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
-        : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.',
+        : CRIMINAL_IN_SHADOWS,
     suppressed: (/** @type {string} */ tier) => SMALL_TIERS.includes(tier)
       ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
-      : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.' })),
+      : CRIMINAL_KEEPS_OUT_OF_SIGHT })),
+  // TAIL-POWERS-B-3 batch 7 (row 29025): the ladder's own line, drawn or settled, read at Suppressed (true at Minor, so left there)
+  { claim: CRIMINAL_IN_SHADOWS, minor: () => null, suppressed: () => CRIMINAL_KEEPS_OUT_OF_SIGHT },
   { claim: 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.',
     minor: () => 'Hereditary landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them.',
     suppressed: () => 'Noble families with residual feudal claims; the formal obligations are real, but other powers set the practical agenda day to day.' },
@@ -185,13 +198,18 @@ export function settleClaimsToLabel(factions, tier, instNames = [], legitimacy =
     if (line === null) continue;
     f.desc = line + desc.slice(end);
   }
-  const arcaneSeat = factions.find((x) => x?.isGoverning)?.category === 'magic';
+  const seat = factions.find((x) => x?.isGoverning);
+  const arcaneSeat = seat?.category === 'magic';
+  const seatRank = LABEL_RANK[String(seat?.powerLabel)] ?? -1;
   const warehouse = instNames.some((n) => String(n).includes('warehouse'));
   for (const f of factions) {
     if (typeof f?.desc !== 'string') continue;
     if (!seatIsCouncil(governing)) for (const [said, twin] of SEAT_WORDS) f.desc = f.desc.replace(said, twin);
     if (!warehouse) f.desc = f.desc.replace('they set prices, control warehousing, and fund', 'they set prices and fund');
     if (arcaneSeat && !f.isGoverning) f.desc = f.desc.replace(ARCANE_ADVISORY, ARCANE_ADVISORY_UNDER_ARCANE_SEAT);
+    if (!f.isGoverning && seatRank > (LABEL_RANK[String(f.powerLabel)] ?? 99) && f.desc.startsWith(UNDERWORLD_CLAIM)) {
+      f.desc = UNDERWORLD_UNDER_STRONGER_SEAT + f.desc.slice(UNDERWORLD_CLAIM.length);
+    }
   }
 }
 

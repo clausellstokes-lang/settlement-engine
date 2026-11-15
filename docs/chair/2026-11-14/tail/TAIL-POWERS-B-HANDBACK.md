@@ -273,7 +273,7 @@ siblings, 9 towns at 9eb084705): ALREADY CURED by batch 1 (cd97721f6, P3); it wa
 tip 615947df8. Not mine and seen while checking: "The Military/Guard no longer takes its orders." (18 towns, the governance
 contest prose: dossierStateProse/warFaith.generated.js's family): for the governance seat.
 
-## Batch 6b · (this commit) · the stress factions and the bread hook claim what the record holds (P29: 6b as prepared)
+## Batch 6b · 4ff449a7b · the stress factions and the bread hook claim what the record holds (P29: 6b as prepared)
 Files: generators/power/stressFactions.js, generators/power/conflictIssues.js (text only; no draw moved). EACH REWORDING MEASURED
 BY THE RECORD over its printing towns at 4140ad9f4 before it was built (scratch tools/m6b.py):
 - 05049 / 25870 "Claims legitimate authority through different means; controls a distinct district or institution." (The
@@ -304,7 +304,37 @@ instead), 2 KEEP green; 13/13 at the cure. Gates: eslint 0 on the touched files;
 twelve-birth grid 2 falls = the base (r2r-city-0, r2s-insurgency-metropolis-0, P7a); the 16 test files naming the two files: 2
 red (pipelinePinnedChoosers A1, A6), the same 2 red at the base: CARRIED.
 
+## Batch 7 · (this commit) · a standing line reads the rival it read and the strength of its own card (P29, P1)
+Files: generators/power/factionStanding.js, generators/power/claimStanding.js (text only; no draw moved). Measured by the record
+at 4ff449a7b (scratch tools/pair.py, cardlab.py, relarc.py):
+- 20053 the faith's card "The arcane orders have more say right now, and the clergy cannot accept it." (17 towns): FALSE IN 7,
+  where the rival it read (the roster's first arcane power) is the governing Arcane Council and the Arcane Orders stand behind the
+  clergy (the Orders' own card prints 20266, "The clergy have more say", true). The line names the rival it read by its prose
+  form and number where it is not the Arcane Orders: "Arcane Council has more say right now, and the clergy cannot accept it."
+  17 -> 10, the twin 0 -> 7 (all 7 the Arcane Council).
+- 29025 "Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement." on a
+  SUPPRESSED card (8 cards in 7 towns of 28): the ladder's own Suppressed rung for a town, city or metropolis, and the line
+  itself when drawn, read at Suppressed -> "Criminal network operating in shadows; it keeps out of the law's sight and takes what
+  it can from illicit trade." 28 -> 21; the Minor cards keep the line (true at Minor).
+- 29028 "Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it
+  cannot currently change it." where the seat's own label stands above the guild's (8 cards in 5 towns of 13): read on the labels
+  alone (P29: not keyed on the capture state) -> "Underworld effectively controls vice and key officials; the seat is stronger,
+  but has not moved to break its hold." 13 -> 8. (A first wording kept "smuggling" and rose the presumed-things walker by one,
+  "house: smuggling": the word was dropped; the walker fresh 147 = the base.)
+THE INVENTORY DIFF (before 4ff449a7b -> after): gone 0, new 4, in fewer towns 3, more 0: the three lines fewer by exactly their
+measure, the twins new in exactly those towns (inheritors read: r2r-city-19, r2r-city-32, r2r-metropolis-7, r2r-city-2). The
+exports: gone 3, new 10, fewer 6 (the same lines under the power's name; The Shadow Compact's copy 2 -> 1), more 0. FIELD DIFF
+BY FAMILY (the 720): powerStructure.factions[].desc 19 towns. No other.
+GUARD tests/generators/standingReadsTheRivalItRead.test.js: 9 refused pairs red at 4ff449a7b (each names what prints instead), 3
+KEEP green; 12/12 at the cure. Gates: eslint 0; typecheck ratchet 0; domain strict 0; the walker fresh 147 = the base; the grid
+2 falls = the base (P7a); the 12 test files naming the two files 95/95.
+
 ## EVERY NEW OR CHANGED LINE (the owner's veto), with towns it was read in
+- (batch 7) "<the arcane rival> has more say right now, and the clergy cannot accept it." (7, the Arcane Council): r2r-town-1 (the
+  smallest), r2r-city-45, r2s-under_siege-city-3 (a siege) · "Criminal network operating in shadows; it keeps out of the law's
+  sight and takes what it can from illicit trade." (7): r2s-under_siege-town-0 (a siege, the smallest), r2r-city-19,
+  r2r-metropolis-25 · "Underworld effectively controls vice and key officials; the seat is stronger, but has not moved to break
+  its hold." (5): r2r-town-31 (the smallest), r2s-under_siege-town-3 (a siege), r2s-religious_conversion-metropolis-0.
 - (batch 6b) "Claims legitimate authority through different means and has a following of its own." (37): r2s-politically_fractured-
   thorp-0 (the smallest, nine souls), r2s-politically_fractured-metropolis-0 (the largest), r2r-village-25 · "Crown-appointed
   emergency body coordinating supply, conscription, and military contracting. While the war goes well, few people ask what it
@@ -371,7 +401,9 @@ None re-taken. The generator golden (tests/property/generatorGoldenMaster.test.j
 merge seat's re-record carries the three families above.
 
 ## What is left (by width), and what is next (kept by TAIL-POWERS-B-3)
-- DONE: P19 (batch 4), P9 + P12 + P18 (batch 5), the READ-ALL-4 HIGH (batch 6a), 6b as prepared (batch 6b).
+- DONE: P19 (batch 4), P9 + P12 + P18 (batch 5), the READ-ALL-4 HIGH (batch 6a), 6b as prepared (batch 6b), the standing lines
+  (batch 7). TAIL-POWERS-B-3 HANDED BACK after batch 7 by the clock (the meter read 0; about seventy minutes from 03:08 UTC).
+  The instruments' last after-run (a7, at batch 7's tree) is the next seat's before-run if re-made at the same tip.
 - MEASURED AT 4140ad9f4 BY THE RECORD (TAIL-POWERS-B-3; the rows of this seat's files printing in 5 towns or more, widest first):
   - GONE IN THEIR STATE AT THE BASE (P2, TAIL-POWERS batch 1's declarations stand): the innkeeper's 11127 (115 print, none under a
     famine or a siege) and 11047 (114), the baker's 11229 (92) and 11327 (80), the boat-headman's 11289 / X 25356 (31: none under a
@@ -384,20 +416,27 @@ merge seat's re-record carries the three families above.
     (3 under a famine): a fraud, not a volume of trade. 17122 (53) the granary's grain sold out of town (3 under a famine; the
     siege is already excluded): a secret villainy, true under a famine. B10713 (36) the games (siege and plague already
     excluded; 1 under an occupation) and B10741 (34) the letters (siege excluded): true where they print.
-  - NEXT, batch 7 (factionStanding.js, claimStanding.js): 20053 (17 print, FALSE IN 7): the faith's card says "The arcane orders
-    have more say right now" where the rival it read is the governing Arcane Council and the Arcane Orders stand behind the
-    clergy (the Orders' card says so): name the rival it read (powerSentenceName, verb by number) where it is not the Arcane
-    Orders. 29025 / X (36 print the line; 8 on a Suppressed card): "Criminal network operating in shadows; controls illicit trade"
-    is the ladder's own Suppressed rung for a city or metropolis: a Suppressed network takes a twin that claims no control.
-    29028 (18 print): "the nominal government tolerates this because it cannot currently change it" beside a seat whose label
-    stands above the guild's (8 of 18; 3 at the equilibrium rung): NOT TO BE KEYED ON THE CAPTURE STATE (P29): measure on the
-    labels alone.
+  - DONE as batch 7: 20053 (7 of 17), 29025 (7 towns), 29028 (5 towns), above.
+  - STRUCK (measured at 4ff449a7b): 16953 (26) the harbour closed to a rival's ships: every printing town holds "Docks/port
+    facilities" (6 on a road or isolated route, the record's own pairing). X 15253 (22) the best fishing waters (2 under a
+    famine): a secret of hoarding the best waters is truer under a failing catch. B00382 (13) TIE_GLOSS "are allies of
+    convenience": the tie's own archetype (Pragmatic Alliance); two people's alliance of convenience across powers at odds is
+    what the word means.
+  - NAMED for the HISTORY group: B14921 / B14924 (20) "Popular Uprising" / "Popular uprising": MIS-TRACED to factionProfile.js's
+    fears; the heading and its lines ("The common people rose against the ruling powers ...", "Former rebels / The restored
+    order ...") are src/data/historyData.js's legacy, printed on Plot Hooks and History.
+  - MEASURED, NOT BUILT (next, widest first): B00397 (20) TIE_GLOSS 'Professional Rivalry': "are rivals in the same line of
+    work" between people of different work in most printing towns (r2r-hamlet-20 the militia captain and the steward,
+    r2r-hamlet-41 the boat-headman and the charter master, r2r-hamlet-52 the quarry master and the peat-reeve): a gloss that
+    claims no work, e.g. "are rivals for standing" (20 towns, nothing silenced; settlementNarrative.js TIE_GLOSS only).
+    X 15267 (15) "Knows of a path over the hills that no one else uses" on Plains in 10 of 15 (3 hills, 1 mountain, 1 riverside):
+    no terrain atom in the title declarations' vocabulary (needs: navigable/coast/river/market): reword to claim no hills ("Knows
+    of a path that no one else uses, and guides people along it for a fee"), or ask the chair for a terrain atom.
   - NAMED for applyDensityLaw.js (the density seat): 20362 (14) "The craft guilds currently carry more weight than they do":
     every one is on The Merchant Bloc (the density law's rival of Merchant Guilds), whose label is read from the host's raw power
     (Significant at a power of 10) while the line reads its own power: true by power in all 14, false by the label in 6.
-  - LEFT, widest first: 29028 (above); 16953 (26) the harbour closed (trade access by road only); X 15253 (22) the best fishing
-    waters under a famine of fish; B14921 / B14924 (20) factionProfile "Popular Uprising" with no uprising on the past; B00397
-    (20) / B00382 (13) settlementNarrative TIE_GLOSS; X 15267 (14) "a path over the hills" on Plains; B29842 (5) stressPowerFaces;
+  - LEFT, widest first: B29842 (5) stressPowerFaces ("It has no one captain: the able-bodied householders sit on it by turns"
+    beside 05914's "Crown-appointed emergency body" on the same War Council in a hamlet: which line is false is to be read);
     B10688 (5) the maltster under a siege; 17060 (5) the game sold "in the market" (check: the needs `market` stands). Under five
     towns (waits, P29): powerStrata 10759 (4), 10748 (1, the slash label, with a powerStrata batch).
 - P26 (the chair, 01:47): the ties seat's rows 28616 (family), 23160, 03038 where the writer is claimStanding.js: NOT STARTED.
