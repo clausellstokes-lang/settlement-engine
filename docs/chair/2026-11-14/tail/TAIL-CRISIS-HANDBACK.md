@@ -1079,7 +1079,7 @@ on batch 6's veto list as written.
 
 ## Gates (at the tree against 3f45e6fa9)
 
-- eslint on the touched files: 0. typecheck:domain:strict: 0 (1113, ceiling 1113). typecheck:ratchet: run at this push, result in the next.
+- eslint on the touched files: 0. typecheck:domain:strict: 0 (1113, ceiling 1113). typecheck:ratchet: OK (exit 0).
 - The presumed-things walker `--check`: the same output at the base, after K21 and after K22 (diffed: 149 lines each; the
   base's own exit 1, carried).
 - THE TESTS THE PATCH DID NOT RUN: every test file that names stressNarrative, renderStressSummary, assembleSettlement or
@@ -1090,6 +1090,23 @@ on batch 6's veto list as written.
   seat's). The one the tree does not fail, `distribution.test.js` "cities average a higher population than towns", is a
   sampling test that failed at the base under load: no claim is made for it.
 - K22: every test file naming crisisCast, STAKE_REASONS or deriveStakes (28): 8 failing assertions at the base and the same 8 at the tree (tonightOwnGoal 1, institutionBudgetPromise 1, observedShapeReaders.walker 6: CARRIED); the batch-7 test 12 of 12.
+
+- The twelve-birth grid `page-census.mjs --grid`: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), carried.
+
+## Batch 7 measured on the page (census at 3f45e6fa9, `runs/cbase`, against 07ab77b03, `runs/cafter`; inventory_diff over the batch's rows)
+
+- **Tabs:** 30,044 → 30,047 distinct sentences; gone 1, new 4, in fewer towns 3, in more 0, moved 0. **Exports (PDF,
+  Journal):** 36,092 → 36,095; gone 2, new 5, fewer 3, more 0.
+- **The rows, by the measure before:** "Some in <N> have stopped obeying the government." (and its second sentence) 37 → 16,
+  exactly the 21 holding a rival of standing; "Revolt Leadership has no stake yet" 8 → 0 (tabs and exports, with ": it could
+  side with either camp." on the exports).
+- **Other sentences in fewer towns:** one, "it could side with either camp" 160 → 157: the three slave revolts where the
+  leadership was the only untouched power (in the other five another power still prints it). Explained: false there too.
+- **THE INHERITORS READ** (4 on the tabs, 5 on the exports, all this batch's own lines, each read in its dumps): "A strong
+  power in <N> has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits." (21 towns, each
+  holding a rival of standing by the record) and "Revolt Leadership split · it leads the revolt, and rises or falls with
+  it" (8; the exports' "Revolt Leadership split: it leads the revolt, and rises or falls with it."). No line outside the
+  batch inherits.
 
 ## Registers named stale (this seat)
 
