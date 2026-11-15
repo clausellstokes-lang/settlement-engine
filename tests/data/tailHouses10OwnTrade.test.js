@@ -17,6 +17,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -78,8 +79,7 @@ describe('TAIL-HOUSES-5 batch 10: a house claims its own trade, not a politics o
       const text = textOf(t, house);
       expect(text, `${seed} prints a ${house}`).toBeDefined();
       expect(denied(t, house), `${seed}: the record does not bear the old claim`).toBe(true);
-      expect(String(text), `${seed} ${house}`).not.toContain(old);
-      expect(String(text), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(text), old, now, `${seed} ${house}: the old words out, the cure's words in the same slot`);
     }), 'a house claims its own trade');
   }, 600_000);
 

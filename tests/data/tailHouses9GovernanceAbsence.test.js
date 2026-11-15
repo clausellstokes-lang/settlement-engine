@@ -15,6 +15,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -73,8 +74,7 @@ describe('TAIL-HOUSES-5 batch 9: a governing house claims no absence of governme
       const text = textOf(t, house);
       expect(text, `${seed} prints a ${house}`).toBeDefined();
       expect(String(t.powerStructure?.government), `${seed}: the record names a government`).not.toBe('undefined');
-      expect(String(text), `${seed} ${house}`).not.toContain(old);
-      expect(String(text), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(text), old, now, `${seed} ${house}: the old words out, the cure's words in the same slot`);
     }), 'a governing house claims no absence of government and no election');
   }, 600_000);
 

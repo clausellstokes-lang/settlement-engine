@@ -18,6 +18,7 @@
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -79,8 +80,7 @@ describe('TAIL-HOUSES-5 batch 8: the late re-read reaches a house description (H
       const text = textOf(t, house);
       expect(text, `${seed} prints a ${house}`).toBeDefined();
       expect(refusedBy(t, house), `${seed}: the settled record refuses the original`).toBe(true);
-      expect(String(text), `${seed} ${house}`).not.toContain(old);
-      expect(String(text), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(text), old, now, `${seed} ${house}: the old words out, the cure's words in the same slot`);
     }), 'a house description claims no power the settled record denies');
   }, 600_000);
 
