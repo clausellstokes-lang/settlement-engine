@@ -10,7 +10,7 @@ Every run went to a file in the seat's scratch tree (outside the main checkout, 
 | 2 | `tests/generators/hookTruthAtBirth.test.js` (2) | 3db549883 | RE-KEYED BY IDENTITY, both: two declared moves of the history's data lane |
 | — | merge of the joined line at f714fb6a5 (the chair's SWEPT) | b45905897 | merged; the reds re-run there |
 | 3 | owed by batch 6 (ed9f3b549): the presumed-things walker, the grid, its guard | bb7b3ede3 | the grid: no rise; the walker: 3 fresh rows NAMED; the guard brought to the anchoring helpers and one row re-keyed |
-| 4 | `tests/data/w2FixData6Rows.test.js` (2) | (red 4's commit) | RE-KEYED BY IDENTITY, both: two declared moves |
+| 4 | `tests/data/w2FixData6Rows.test.js` (2) | d894c0782 | RE-KEYED BY IDENTITY, both: two declared moves |
 
 ## 1 · the style walker's two historyData rises: CURED
 
