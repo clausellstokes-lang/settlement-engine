@@ -23,6 +23,12 @@
       "action": "re-record",
       "predictedRows": 1,
       "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 475,
+      "proofForm": "settlement-hash"
     }
   ]
 }

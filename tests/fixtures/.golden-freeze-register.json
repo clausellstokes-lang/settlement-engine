@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "b3097c91576f65c857d660254fc2403fdddcd2526ed59e3c993ed57a1833b47c",
-      "rows": 446,
+      "sha256": "7e56c533387aa986d3f7ecc711c524dde1091a16eb94f722980e45a648625492",
+      "rows": 475,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, re-confirmed to the new chair 2026-11-13); the ODQ draft's entries 'AN OUTSIDE CRITIQUE OF ONE GENERATED TOWN, MEASURED', 'THE CRITIQUE READ AS CLASSES' and 'THE OWNER: FIXED BEFORE THE RELEASE — THE COHERENCE WAVE' (docs/chair/2026-11-07/ODQ-934.105-DRAFT.md, 2026-11-11); the charter docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md §2; the chair's food-sources ruling of 2026-11-11 (variant S, cultivated sources)",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat on 2026-11-15 at 06:00 UTC, recorded in the chair's records 454, 456 and 457 on lane/chair-2026-11-08 (docs/chair/2026-11-14/CHAIR-HANDOFF-FIFTH.md, section 1); the chair's ruling GD1 of 2026-11-15 names the moved families",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]
