@@ -21,9 +21,10 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
-import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
+import { resourceDisplayName, RESOURCE_DISPLAY_LABELS } from '../../domain/display/resourceDisplayName.js';
 import { cap, label, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1)
 import { tradeStoppedHere } from '../../domain/display/chainStateShown.js'; // SURFACES-3 item 2 (r4): the tab's siege reader
 
 const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
@@ -37,8 +38,11 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
   const fullRows      = r.chainRows.filter(c => c.status === 'full');
   const partialRows   = r.chainRows.filter(c => c.status === 'partial');
   const unexpRows     = r.chainRows.filter(c => c.status === 'unexploited');
+  // V2 (TAIL-DISPLAY-CIVIC-3): the food a famine in force failed, as the tab prints it (validationOnPage.js :: famineFailedResourceOf)
+  const failedRows    = r.chainRows.filter(c => c.status === 'failed');
 
-  const importsCritical    = r.imports?.critical || [];
+  // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints, not the terrain's need list raw
+  const importsCritical    = settlement ? criticalImportsShown(settlement) : (r.imports?.critical || []);
   const importsRecommended = r.imports?.recommended || [];
 
   return (
@@ -146,6 +150,9 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           )}
           {unexpRows.length > 0 && (
             <ChainGroup title="Unexploited" tone="bad" rows={unexpRows} />
+          )}
+          {failedRows.length > 0 && (
+            <ChainGroup title="Failed this year" tone="bad" rows={failedRows} />
           )}
         </View>
       )}
@@ -449,7 +456,7 @@ function ResourceRow({ kicker, hint, tone, items, customNames = [] }) {
               </View>
             );
           }
-          return <Tag key={`r-${kicker}-${i}`} tone={tone}>{humanize(label(it))}</Tag>;
+          return <Tag key={`r-${kicker}-${i}`} tone={tone}>{Object.hasOwn(RESOURCE_DISPLAY_LABELS, it) ? RESOURCE_DISPLAY_LABELS[it] : humanize(label(it))}</Tag>; // TAIL-DISPLAY-CIVIC-4 (V11): the catalogue's label, as the tab prints it
         })}
       </View>
     </View>

@@ -27,6 +27,7 @@ import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, 
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { offersFoodSurplus } from '../../../domain/foodSurplus.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
+import { rulingAuthorityBandShown } from '../../../domain/display/rulingAuthorityShown.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
@@ -110,6 +111,23 @@ function foodRecordWord(settlement) {
 }
 
 /**
+ * ⭐ THE PUBLIC'S LEGITIMACY HAS ONE HOME (NOLANE-2, the chair's ruling 4, BAR-182; TAIL-DISPLAY-CIVIC, the chair's ruling
+ * X2 of 2026-11-14: "Public legitimacyAdequate" in 149 of the census's 720 towns where the Power tab prints "Tolerated").
+ * Two homes read one fact on two ladders: the causal score banded on the causal ladder, and the record's own stored label
+ * (`powerStructure.publicLegitimacy.label`, the band `rulingPower.js` writes and the Power tab prints). The row prints the
+ * record's label, in its colour, as the Food row prints the food word's one home. The causal band stays on `data-band`
+ * and orders the rows; a record without a label keeps the band word.
+ * @param {any} settlement
+ * @returns {{ word: string, tone: string | null } | null}
+ */
+function legitimacyRecordWord(settlement) {
+  const leg = settlement?.powerStructure?.publicLegitimacy;
+  const label = typeof leg?.label === 'string' ? leg.label.trim() : '';
+  if (!label) return null;
+  return { word: statusCase(label), tone: typeof leg.color === 'string' && leg.color ? leg.color : null };
+}
+
+/**
  * ⭐ UNDER A SIEGE THE TRADE ROW SAYS SO (R3-TABS, round two's #329 and #858; the chair's ruling of
  * 2026-11-13: the tab does not print a connectivity word the town's own crisis contradicts). The reading
  * (`causalState.js :: deriveTradeConnectivity`) folds a siege in as wartime pressure, so the row read
@@ -148,7 +166,10 @@ export default function SubstrateTab({ settlement }) {
         // reads "Food · Surplus", a claim on the food record. Food is graded Surplus only where
         // the record holds one (domain/foodSurplus.js :: offersFoodSurplus); otherwise Adequate.
         band: key === 'food_security' && v.band === 'surplus'
-          && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate' : v.band,
+          && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate'
+          // THE RULING AUTHORITY ROW IS NOT PRINTED ABOVE WHAT THE RECORD SAYS OF THE SAME GOVERNMENT (the chair's
+          // ruling X8, 2026-11-14): the cap is the one leaf's (domain/display/rulingAuthorityShown.js).
+          : key === 'ruling_authority' ? rulingAuthorityBandShown(settlement, v.band) : v.band,
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
       // Pressures first: worst band, then worst polarity-oriented score, then
@@ -208,6 +229,7 @@ export default function SubstrateTab({ settlement }) {
         <NameColumns count={rows.length} style={{ padding: `0 ${SP.md}px` }}>
           {rows.map(row => {
             const recordRead = row.key === 'food_security' ? foodRecordWord(settlement)
+              : row.key === 'public_legitimacy' ? legitimacyRecordWord(settlement)
               : row.key === 'trade_connectivity' ? siegeCrisisWord(settlement) : null;
             return (
             <div key={row.key} data-substrate-row style={{

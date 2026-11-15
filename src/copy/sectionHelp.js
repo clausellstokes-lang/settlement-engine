@@ -20,7 +20,7 @@
  * chapter prints the same words as its caption, so the two stay the byte-for-byte twins
  * tests/components/g5FirstSurveyPdfTwins.test.js pins.
  */
-export const SYSTEMS_HEALTH_VINTAGE = 'As judged at the first survey · Food Security is re-judged as the campaign advances.';
+export const SYSTEMS_HEALTH_VINTAGE = 'As judged at the first survey · Food Security is re-judged as your campaign goes on.';
 
 /** @type {Readonly<Record<string, string>>} */
 export const SECTION_HELP = Object.freeze({

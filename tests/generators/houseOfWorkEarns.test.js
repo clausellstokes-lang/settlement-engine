@@ -39,7 +39,9 @@ describe('#93: a small place\'s house of work earns', () => {
     for (const [seed, text] of ROWS) {
       const s = birth(seed);
       const sources = s.economicState.incomeSources.map((e) => e.source);
-      expect(sources, seed).toEqual(['Agricultural Rents', 'Local Trades']);
+      // TAIL-DEFECON-2 (D10): re-keyed by identity: the farming row is "Harvest" where no lord's steward or reeve stands
+      const lord = s.institutions.some((i) => /lord's (?:steward|reeve)/i.test(i.name));
+      expect(sources, seed).toEqual([lord ? 'Agricultural Rents' : 'Harvest', 'Local Trades']);
       expect(tradesOf(s)[0].desc, seed).toBe(text);
       const esc = (n) => String(n).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       expect(s.institutions.length, seed).toBeGreaterThan(0);

@@ -91,7 +91,7 @@ const pdfRows = (town) => {
   const rows = find(ResourcesProduction({ settlement: town, narrativeMode: false, vm, stateProse: null }), (n) => n.type === ChainRow);
   // The rows print in the chapter's group order; the slice's rows carry the resource's key, one to one by grade.
   const byGrade = (/** @type {string} */ g) => vm.resources.chainRows.filter((/** @type {any} */ c) => c.status === g);
-  const keys = [...byGrade('full'), ...byGrade('partial'), ...byGrade('unexploited')];
+  const keys = [...byGrade('full'), ...byGrade('partial'), ...byGrade('unexploited'), ...byGrade('failed')]; // V2 (TAIL-DISPLAY-CIVIC-3): the famine's failed group prints last
   return rows.map((r, i) => ({ resource: low(keys[i]?.resource), grade: keys[i]?.status, houses: r.props.processing ?? null, goods: r.props.output ?? null }));
 };
 /** The journal's Exploitation rows as printed, each beside the slice row it prints. @param {any} town */

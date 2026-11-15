@@ -44,6 +44,16 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'The church wants approval rights over market day activities. The village reeve disagrees.', needs: Object.freeze(['market']) }),
     Object.freeze({ text: 'The most devout households want a say over who may trade and when, and not everyone here agrees.', twinOf: 'The church wants approval rights over market day activities. The village reeve disagrees.', excludes: Object.freeze(['market']) }),
   ]),
+  // TAIL-POWERS-4 (B02464; 20987, 00170): a thorp holds no "families on each side", a hamlet or a village no "three
+  // estates" (the site's facts carry the tier); each twin claims what the smaller place bears.
+  'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.': Object.freeze([
+    Object.freeze({ text: 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.', needs: Object.freeze(['tier: ≥ hamlet']) }),
+    Object.freeze({ text: 'A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.', twinOf: 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.', excludes: Object.freeze(['tier: ≥ hamlet']) }),
+  ]),
+  'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.': Object.freeze([
+    Object.freeze({ text: 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'A merchant has bought land the old landholding family once held, and the family has not forgotten.', twinOf: 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.', excludes: Object.freeze(['tier: ≥ town']) }),
+  ]),
 });
 
 // CENSUS-5e unit 2 (2026-11-05; the chair's answer 1 to CENSUS-5d, R-AN / R-U): the town military
@@ -101,8 +111,11 @@ export const FACTION_DESC_SIBLINGS = Object.freeze({
  */
 export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
   'Elder Consensus': 'The elders of the hamlet decide things together, and people follow them out of respect.',
-  'Free Elder Council': 'The elders of the hamlet decide things together, and no lord stands over them.',
-  "Headman's Authority": 'A headman settles disputes and gives the orders here.',
+  // TAIL-TIES-2 (rows 20473 / 10615 / 00909 and 02676, 2026-11-15): a seat's line claims no more than every town that
+  // holds the seat bears: an occupier's governor stands over an occupied hamlet's elders and gives its orders, and a
+  // lord may live in a free hamlet (the seat is read at the power step, before the crisis: the line names neither).
+  'Free Elder Council': 'The elders of the hamlet decide things together, and none of them rules alone.',
+  "Headman's Authority": 'A headman settles disputes and speaks for the community.',
   'Priestly Guidance': 'The priest guides the community, and disputes are brought to the priest to settle.',
   'Town Mayor': "A mayor runs the town's day-to-day business.",
   'Grand Guild Council': 'The guilds of the metropolis govern together; the richer the guild, the more say it has.',

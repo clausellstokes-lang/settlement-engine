@@ -42,7 +42,7 @@ describe('COHERENCE-POWERS-8 · the head of its power is not under its leaders',
     await loadGenerationLawPayloads();
     const s = born('rr2s-metropolis-plague_onset-port-1');
     const mage = s.npcs.find((/** @type {any} */ c) => c.name === 'Bebinn MacIntyre');
-    expect(mage.structuralPosition).toBe('Heads the casters while rivals fight over the seat, and both sides want their spells.');
+    expect(mage.structuralPosition).toBe('Heads the casters while many doubt the seat\'s right, and the seat wants their spells.') // TAIL-TIES-3 (T11): the contested rows claim no rival, re-keyed by identity;
   }, 60000);
   it('fresh births: no card ranked first of its power reads an "under" row; a member below the first still may', async () => {
     await loadGenerationLawPayloads();

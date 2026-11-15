@@ -996,7 +996,7 @@
     "famine",
     "word",
     "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judg",
-    "dfa32308413b0367"
+    "bb49c513afbb2c39"
    ]
   ],
   "src/components/new/tabs/EconomicsTab.jsx": [
@@ -2427,12 +2427,6 @@
     "6e01e36d52f59908"
    ],
    [
-    "streets",
-    "family",
-    "A visitor to {settlement} would not guess at the trouble from the streets; the town is shaken but standing.",
-    "f13da00c8b78b37c"
-   ],
-   [
     "armedForce",
     "family",
     "The soldiers at {settlement} command its magic: the arcane houses answer to them, and their work goes first to the town'",
@@ -2717,12 +2711,6 @@
     "0c3f040fdd2c69b5"
    ],
    [
-    "openTrade",
-    "family",
-    "Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and b",
-    "76b4b52212951b49"
-   ],
-   [
     "house: library",
     "family",
     "DS-SUP-2: LADDER › canonical supply-chain status + the break-cause clause library · `deriveSupplyChainState(chain, settl",
@@ -2843,12 +2831,6 @@
     "implied",
     "{settlement} has no market square; trade is done at the gate, at the inn and along the road.",
     "e96d37236bc86e5e"
-   ],
-   [
-    "market",
-    "implied",
-    "No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.",
-    "b19996e009056f3f"
    ],
    [
     "occupation",
@@ -4370,12 +4352,6 @@
    [
     "quarters",
     "word",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "quarters",
-    "word",
     "The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out.",
     "cedea0d0c6e131fb"
    ],
@@ -4390,12 +4366,6 @@
     "word",
     "Several quarters, each with its house of worship.",
     "b80668f645a2a56d"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's registe",
-    "216f9d693bd5f6b6"
    ],
    [
     "religiousHouses",
@@ -4426,18 +4396,6 @@
     "implied",
     "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monst",
     "6c1f38b4f0218d67"
-   ],
-   [
-    "market",
-    "implied",
-    "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't",
-    "4c2a6a380523489f"
-   ],
-   [
-    "market",
-    "implied",
-    "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settleme",
-    "e9110cbd544757a1"
    ],
    [
     "market",
@@ -4542,18 +4500,6 @@
     "a9e0843df1c70c11"
    ],
    [
-    "garrison",
-    "implied",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "garrison",
-    "implied",
-    "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses through",
-    "ed8d7f136eec79d0"
-   ],
-   [
     "house: baker",
     "family",
     "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest a",
@@ -4564,18 +4510,6 @@
     "family",
     "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest a",
     "edd3dc19bec33f3e"
-   ],
-   [
-    "smith",
-    "family",
-    "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from",
-    "62f60824cf000b93"
-   ],
-   [
-    "resource: salt_flats",
-    "family",
-    "Boils or dries naturally saline brine, yielding the raw salt that preserves food. It works only where salt flats, spring",
-    "18f872b03e3a63dd"
    ],
    [
     "house: butcher",
@@ -4678,18 +4612,6 @@
     "family",
     "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households ",
     "ae2d15c652df60c6"
-   ],
-   [
-    "resource: river_clay",
-    "family",
-    "Shapes and fires clay into bricks for building. With them, structures can be made to last. Clay deposits and fuel are ne",
-    "1d6fc9cfe8440eb1"
-   ],
-   [
-    "clergy",
-    "family",
-    "One of the few here who can read and write. He copies letters, sets down plain contracts, and reads out documents for th",
-    "4672a79550fe53bb"
    ],
    [
     "house: druid",
@@ -4820,12 +4742,6 @@
    [
     "smith",
     "family",
-    "Several smiths, each to his specialty.",
-    "67b638b57d7487e5"
-   ],
-   [
-    "smith",
-    "family",
     "A number of smiths, work divided by trade.",
     "01f2d8a0a11ab2d5"
    ],
@@ -4852,18 +4768,6 @@
     "family",
     "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among t",
     "e1f6a11d4dbda793"
-   ],
-   [
-    "house: tavern",
-    "family",
-    "Makes and ages wine, whether from grapes grown near or must brought in. He sells by the barrel to taverns and by the bot",
-    "e1c1419658811a73"
-   ],
-   [
-    "house: tavern",
-    "family",
-    "Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses. I",
-    "6e55e7bec080acce"
    ],
    [
     "house: tannery",
@@ -5082,18 +4986,6 @@
     "affa98e8ebbca65a"
    ],
    [
-    "armedForce",
-    "family",
-    "Professional soldiers, kept by noble or crown.",
-    "4a5fddf8d0d9b74a"
-   ],
-   [
-    "armedForce",
-    "family",
-    "A standing body of soldiers, in noble or royal pay.",
-    "a752e9c9015ca7b1"
-   ],
-   [
     "house: hired blade",
     "family",
     "Organised bands of hired blades. Major forces, hundreds to thousands strong.",
@@ -5164,18 +5056,6 @@
     "family",
     "A state prison of some size, keeping its political prisoners, debtors, and convicts apart from one another.",
     "592fc9f98e3cff69"
-   ],
-   [
-    "house: citadel",
-    "family",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "house: citadel",
-    "family",
-    "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses through",
-    "ed8d7f136eec79d0"
    ],
    [
     "armedForce",
@@ -5666,12 +5546,6 @@
    [
     "quarters",
     "word",
-    "Every district has a temple. Religious observance accessible to all.",
-    "2e13c962ed3798d2"
-   ],
-   [
-    "quarters",
-    "word",
     "Know who goes where in their district. Sellable information.",
     "a918e7549a9ff25d"
    ],
@@ -5698,12 +5572,6 @@
     "word",
     "The complete range of arcane services from multiple practitioners.",
     "3387e42ac9a15e90"
-   ],
-   [
-    "temple",
-    "implied",
-    "Collects the lord's dues and the temple tithe",
-    "c6123c68a2e9f9d7"
    ],
    [
     "market",
@@ -6392,12 +6260,6 @@
     "db6b359aeeac06f5"
    ],
    [
-    "house: fishing",
-    "family",
-    "Buys, salts, and sells fish. The link between fishing and consumption. Near water: fresh. Inland: dried or salted.",
-    "e6a4bac62a543b62"
-   ],
-   [
     "house: fishmonger",
     "family",
     "the master fishmonger",
@@ -6462,12 +6324,6 @@
     "family",
     "Mine (open cast)",
     "ea6b8fe5e6f0a539"
-   ],
-   [
-    "resource: salt_flats",
-    "family",
-    "Evaporates naturally saline brine into the raw salt used for preservation. Viable only where salt flats, springs, or oth",
-    "7677329f5d3d1415"
    ],
    [
     "house: merchant guild",
@@ -6764,18 +6620,6 @@
     "ff2573e4e1329738"
    ],
    [
-    "house: tavern",
-    "family",
-    "Produces and ages wine, either from local grapes or imported must. Sells in bulk to taverns and directly to wealthy clie",
-    "e27fade705efed23"
-   ],
-   [
-    "house: vintner",
-    "family",
-    "Produces and ages wine, either from local grapes or imported must. Sells in bulk to taverns and directly to wealthy clie",
-    "e27fade705efed23"
-   ],
-   [
     "house: tanner",
     "family",
     "the master tanner",
@@ -6944,22 +6788,10 @@
     "5cb4f655d2940ace"
    ],
    [
-    "house: citadel",
-    "family",
-    "Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.",
-    "3714d8796b8b9e62"
-   ],
-   [
     "guardCaptain",
     "family",
     "the watch captain",
     "7c4fd90270cb9b1f"
-   ],
-   [
-    "armedForce",
-    "family",
-    "Professional soldiers. Noble or royal.",
-    "18ace41f70403330"
    ],
    [
     "armedForce",
@@ -7160,8 +6992,8 @@
    [
     "occupation",
     "word",
-    "'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and eve",
-    "120273b1af3cb1b5"
+    "'s notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door",
+    "0e103531bb2ad10b"
    ],
    [
     "quarters",
@@ -7178,14 +7010,14 @@
    [
     "siege",
     "word",
-    "The founders chose this place for its trade, water and good ground. Now it is under siege, and none of that matters unti",
-    "89fccab00f0ef11d"
+    "Whatever the settlement was built for, it is under siege now, and nothing else matters until the siege is broken.",
+    "d943bc164d82010e"
    ],
    [
     "occupation",
     "word",
-    "The founders assumed the settlement would always make its own decisions. Under occupation, it no longer does.",
-    "0e70e61e21695b43"
+    "The settlement always made its own decisions, or believed it did. Under occupation, it no longer does.",
+    "d376443dec338868"
    ],
    [
     "openTrade",
@@ -7334,12 +7166,6 @@
     "81a2b72bebd767e6"
    ],
    [
-    "quarters",
-    "word",
-    "Three guards have gone missing in the same district on night patrol. The report filed says they deserted.",
-    "19d006ecf6c1dc86"
-   ],
-   [
     "practitioner",
     "word",
     "Another practitioner has noticed ",
@@ -7362,12 +7188,6 @@
     "implied",
     " names. The watch reports show a fine record of arrests.",
     "8bb7c76d9397ecf2"
-   ],
-   [
-    "watch",
-    "implied",
-    "'s company under the watch's command. ",
-    "793d3ecebdce96fc"
    ],
    [
     "temple",
@@ -7478,12 +7298,6 @@
     "b872b8c74c540cd2"
    ],
    [
-    "armoury",
-    "family",
-    "Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.",
-    "85a88f342c353071"
-   ],
-   [
     "prisoner",
     "family",
     "A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.",
@@ -7494,12 +7308,6 @@
     "family",
     "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.",
     "26bc8ad220dd49e7"
-   ],
-   [
-    "guardCaptain",
-    "family",
-    "The guard captain has a file. They know because someone who works for the guard captain also works for them.",
-    "0dcd1d491e8239f2"
    ],
    [
     "house: warehouse",
@@ -7520,12 +7328,6 @@
     "3011e68fb898551a"
    ],
    [
-    "prisoner",
-    "family",
-    "'s crew needs a prisoner released, ",
-    "e7a1677f3518aa92"
-   ],
-   [
     "streets",
     "family",
     " pays for their routes. The streets ",
@@ -7542,12 +7344,6 @@
     "family",
     " has hired an advocate to sue ",
     "63685fb401dc8e0c"
-   ],
-   [
-    "house: warehouse",
-    "family",
-    "'s warehouses and wagons for a fixed fee each season. ",
-    "0938c8a2ded565c0"
    ],
    [
     "clergy",
@@ -8686,8 +8482,8 @@
    [
     "house: headman",
     "family",
-    "A headman settles disputes and gives the orders here.",
-    "7285d794a89332c7"
+    "A headman settles disputes and speaks for the community.",
+    "abd2ed1a91f19be5"
    ],
    [
     "clergy",
@@ -9252,8 +9048,8 @@
    [
     "famine",
     "word",
-    "Helped engineer the original supply disruption that triggered the famine, believing it would only last a week",
-    "c835d792041e5066"
+    "Helped cause the original shortfall that triggered the famine, believing it would only last a week",
+    "5d4570b895149c66"
    ],
    [
     "famine",
@@ -9330,8 +9126,8 @@
    [
     "revolt",
     "word",
-    "Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record t",
-    "49d03bfa7cbe9332"
+    "Named people who had nothing to do with the insurgency as its ringleaders, then falsified the reports to record them as ",
+    "a4b9c9573076e473"
    ],
    [
     "revolt",
@@ -11487,18 +11283,6 @@
    ]
   ],
   "src/domain/crisis/crisisSummaryVantage.js": [
-   [
-    "market",
-    "root",
-    "Fewer people come to market in {name} since the sickness began, and some goods have stopped arriving altogether.",
-    "84c506caacd723e2"
-   ],
-   [
-    "market",
-    "root",
-    "Travel is discouraged in {name}, fewer come to market, and the goods the carts used to bring run short.",
-    "58bc3e6cfd1063c8"
-   ],
    [
     "war",
     "root",
@@ -16722,12 +16506,6 @@
     "root",
     "Controls specific territory through violence. Extorts local businesses. Competes with the watch for street-level authori",
     "5cda302fa8ef4287"
-   ],
-   [
-    "prison",
-    "root",
-    "Court + Prison",
-    "2e5bbcad8d5be670"
    ],
    [
     "house: gambling",
@@ -26138,24 +25916,6 @@
     "family",
     "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo",
     "35e040179aa22bf4"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and pe",
-    "dff194ad0848c695"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work ",
-    "a4161c781e58da25"
-   ],
-   [
-    "smith",
-    "family",
-    "A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.",
-    "68ffa8fbf6ed6fb3"
    ]
   ],
   "src/generators/economy/incomeLineSiblings.js": [
@@ -26164,6 +25924,12 @@
     "family",
     "Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
     "782b0b74db43359b"
+   ],
+   [
+    "house: warehouse",
+    "family",
+    "Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
+    "2fe6cfe7568bb02a"
    ]
   ],
   "src/generators/economy/outlookHookSiblings.js": [
@@ -26190,24 +25956,6 @@
     "family",
     "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo",
     "35e040179aa22bf4"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and pe",
-    "dff194ad0848c695"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work ",
-    "a4161c781e58da25"
-   ],
-   [
-    "smith",
-    "family",
-    "A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.",
-    "68ffa8fbf6ed6fb3"
    ]
   ],
   "src/generators/economy/prosperity.js": [
@@ -26236,14 +25984,6 @@
     "93978d70b7ac900d"
    ]
   ],
-  "src/generators/economy/tradeGoods.js": [
-   [
-    "house: warehouse",
-    "family",
-    "Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
-    "2fe6cfe7568bb02a"
-   ]
-  ],
   "src/generators/economy/viability.js": [
    [
     "quarters",
@@ -26262,18 +26002,6 @@
     "family",
     "Craft guilds operate on imported materials: sustained by strong ",
     "ac13dc3b9d7bc1dc"
-   ],
-   [
-    "house: tanner",
-    "family",
-    "Add craft guilds: smiths, weavers, tanners, etc.",
-    "9dba5fbacb8b44ef"
-   ],
-   [
-    "smith",
-    "family",
-    "Add craft guilds: smiths, weavers, tanners, etc.",
-    "9dba5fbacb8b44ef"
    ],
    [
     "house: alchemist",
@@ -27080,12 +26808,6 @@
     "family",
     "The priest has been insisting on a say in who can marry whom and what gets planted when. Several families are unhappy.",
     "f9f3d10cc46cc7e6"
-   ],
-   [
-    "streets",
-    "family",
-    "The rebels' buildings are marked, and some streets are contested. ",
-    "75da3dc0fe431604"
    ],
    [
     "armedForce",
@@ -28154,8 +27876,8 @@
    [
     "openTrade",
     "family",
-    "Regulates port and airship traffic, assigns berths, collects anchorage fees.",
-    "21a20608d98861af"
+    "Regulates airship traffic, assigns mooring berths, collects anchorage fees.",
+    "8d9a49b239b68238"
    ],
    [
     "house: airship docking",

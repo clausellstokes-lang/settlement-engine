@@ -28,7 +28,11 @@ describe('the Crisis page, one section per active crisis', () => {
       expect(section.line).toBe(`${entry.label}.`); // W4 second seat, row 21: the kind is the heading, no classification
       expect(section.cast.map((r) => r.name)).toEqual(entry.cast.roles.map((r) => r.name));
       for (const r of section.cast) expect(r.reason.length).toBeGreaterThan(0);
-      expect(section.stakes.length).toBe(entry.cast.stakes.length);
+      // re-keyed by identity (TAIL-CRISIS-6, K25 (c)): every stake the record holds prints its row, but an untouched power's
+      // (the record's split with "it could side with either camp", where the page finds no quarrel and no seat) prints none
+      const shown = section.stakes.map((k) => k.factionId);
+      for (const k of entry.cast.stakes) if (k.reason !== 'it could side with either camp') expect(shown).toContain(k.factionId);
+      for (const id of shown) expect(entry.cast.stakes.map((k) => k.factionId)).toContain(id);
       expect(section.levers.map((l) => l.institution)).toEqual(entry.cast.levers.map((l) => l.institution));
       expect(section.seeFirst.map((f) => f.id)).toEqual(['food', 'defence'].filter((id) => section.seeFirst.some((f) => f.id === id)));
       expect(section.seeFirst.some((f) => f.id === 'defence')).toBe(true);
@@ -78,17 +82,20 @@ describe('the Crisis page, one section per active crisis', () => {
 // could side with either camp." contradicted itself on every untouched row (soak1k-4, -5, -9, -10). The page prints
 // an untouched power as having no stake yet; the record keeps its split for the waverer's rule.
 describe('the Crisis page: an untouched power is never "split"', () => {
-  it('an untouched stake prints "no stake yet", and no row says both split and untouched', () => {
+  it('an untouched stake prints no row (re-keyed by identity, TAIL-CRISIS-6 K25 (c): it printed "no stake yet"), and no row says both split and untouched', () => {
     const s = gen('crisis-page-pair', 'town', ['famine', 'under_siege']);
     for (const section of composeCrisisPage(s)) {
       for (const k of section.stakes) {
         const printed = `${k.factionId}: ${CRISIS_PAGE_COPY.stake[k.stake]}. ${k.reason}.`;
         // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
         expect(printed).not.toMatch(/split\. not touched/);
-        if (/either camp/.test(k.reason)) expect(CRISIS_PAGE_COPY.stake[k.stake]).toBe('no stake yet');
+        // TAIL-CRISIS batch 4 (K12, re-keyed by identity): the label has its verb, agreeing with the name
+        if (/either camp/.test(k.reason)) expect(['has no stake yet', 'have no stake yet']).toContain(CRISIS_PAGE_COPY.stake[k.stake]);
       }
     }
-    expect(composeCrisisPage(s).some((x) => x.stakes.some((k) => k.stake === 'untouched'))).toBe(true);
+    expect(composeCrisisPage(s).some((x) => x.stakes.some((k) => k.stake === 'untouched' || k.stake === 'untouchedMany'))).toBe(false);
+    // what prints instead: the record's stakes that are not untouched keep their rows
+    expect(composeCrisisPage(s).some((x) => x.stakes.length > 0)).toBe(true);
   });
 });
 

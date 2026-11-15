@@ -84,10 +84,19 @@ const famineFoodIsPower = (r) => {
   const what = failed !== 'grain' && typeof failed === 'string' && failed in FAILED_SOURCE_WORDS ? `the ${FAILED_SOURCE_WORDS[/** @type {keyof typeof FAILED_SOURCE_WORDS} */ (failed)]} failed` : 'the harvest failed';
   const stores = r.foodRecord?.hasGranary === true ? 'the stores' : 'what food is left';
   const n = typeof r.powerCount === 'number' ? r.powerCount : 0;
-  if (n >= 3) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and at least three powers are fighting over ${stores}.`;
-  if (n === 2) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its two powers are fighting over ${stores}.`;
+  if (n >= 3) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its strongest powers are each watching who holds ${stores}.`; // TAIL-NARRATIVE (B17142): the record counts the powers, not who fights; no number is claimed. TAIL-NARRATIVE-2 (READ-ALL-4): no fight is claimed either: the record's quarrels are not over the food
+  if (n === 2) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its two powers are each watching who holds ${stores}.`;
   return `Since ${what}, food is power in ${r.name}, and every household is watching what the others eat.`; // R2-CODE-A-10 (CENSUS-2 b/famine:plenty): "who eats well" in a thorp at a third of its need, where nobody does
 };
+
+/** TAIL-NARRATIVE (READ-ALL 00338, 01722, 01760, 01720, B01841): the number words a fractured town's powers are counted in. */
+/**
+ * TAIL-NARRATIVE (READ-ALL 00338, 01722, 01760, 01720, B01841): a fractured town's powers, counted from the record
+ * (`r.powerCount`, `powerStructure.factions`). "Three" is said only where the record holds three; elsewhere the row
+ * claims no number. A branch inside the drawn row, so no draw moves.
+ * @param {{ powerCount?: unknown }} r @returns {number}
+ */
+const powersHeld = (r) => (typeof r.powerCount === 'number' ? r.powerCount : 0);
 
 export const PRESSURE_SENTENCES = {
   under_siege: (r) => [
@@ -116,18 +125,20 @@ export const PRESSURE_SENTENCES = {
   ],
   politically_fractured: (r) => [
     `${r.name} has no effective government; ${r.topFaction || "the leading power"} controls one district and the institutions inside it, a rival controls another, and the contested space between them is where things go wrong.`,
-    `Three powers in ${r.name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.`,
-    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.`,
+    powersHeld(r) === 3 ? `Three powers in ${r.name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.` : powersHeld(r) > 3 ? `The powers of ${r.name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.` : `The powers of ${r.name} are each waiting for the other to slip, and meanwhile nothing gets mended and no quarrel gets settled.`, // TAIL-NARRATIVE (00338): the number only where the record holds it
+    powersHeld(r) === 3 ? `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.` : `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person every power here will still speak to, which makes them either the key to resolution or the next target.`, // TAIL-NARRATIVE (01722, 01760, 01720, B01841): the number only where the record holds it
     `Nothing gets decided in ${r.name}, because any decision would hand one power a win the others will not allow, and every power prefers the deadlock to losing.`,
     { text: `${r.name} has two of everything now, two watches and two courts of a kind, and people have learned which one to ask for which favour.`, needs: ['watch'] },
     `The last thing ${r.topFaction || "the leading power"} and its rivals agreed on in ${r.name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.`,
   ],
   indebted: (r) => [
     `${r.name} owes more than it can repay; the creditor's representative arrived last month, and every civic decision since has been made with one eye on what they might accept as partial satisfaction.`,
-    `${capFirst(r.topFaction) || "The dominant power"} took the loans and ${r.govFaction || "the current council"} is repaying them: a distinction that has not gone unnoticed and is not forgotten.`,
+    r.topFaction && r.govFaction && String(r.topFaction).toLowerCase() === String(r.govFaction).toLowerCase()
+      ? `${capFirst(r.topFaction)} took the loans and is now repaying them, and nobody here has forgotten whose decision the borrowing was.`
+      : `${capFirst(r.topFaction) || "The dominant power"} took the loans and ${r.govFaction || "the current council"} is repaying them: a distinction that has not gone unnoticed and is not forgotten.`, // TAIL-NARRATIVE (03831): one power in both slots is not contrasted with itself; a branch inside the drawn row
     `The debt has a clause that ${r.topNPCName ? r.topNPCName + " has read" : "almost nobody has read"} and that would change the entire conversation if it became public.`,
-    `The creditor has begun taking payment from ${r.name} in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly worse than the last.`,
-    `${r.name} still paints its civic buildings and still held its festival, all on borrowed money; everyone knows it, and nobody says it aloud.`,
+    r.hasWarehouse ? `The creditor has begun taking payment from ${r.name} in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly worse than the last.` : `The creditor has begun taking payment from ${r.name} in things other than coin (a field here, a right of way there), and each transfer is legal, documented, and slightly worse than the last.`, // TAIL-NARRATIVE (20366): a warehouse only where the roster holds one (genPressureDetail's hasWarehouse); a branch inside the drawn row
+    r.hasCivicHall ? `${r.name} still paints its civic buildings and still held its festival, all on borrowed money; everyone knows it, and nobody says it aloud.` : `${r.name} still keeps up its appearances and still held its festival, all on borrowed money; everyone knows it, and nobody says it aloud.`, // TAIL-NARRATIVE (01333): civic buildings only where a hall or courthouse stands (genPressureDetail's hasCivicHall); a branch inside the drawn row
     `The interest on ${r.name}'s debt now outpaces what the ${r.commodity || "trade"} can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arrangement that works.`,
   ],
   recently_betrayed: (r) => [
@@ -167,9 +178,9 @@ export const PRESSURE_SENTENCES = {
   },
   monster_pressure: (r) => [
     `${r.name}'s outlying farms are being hit one after another, each one near the last; whatever is out there is choosing them.`,
-    `The defences of ${r.name} were built for quieter years than these, as ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : r.milForce || "the defenders"} warned at the last muster.`,
-    "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.",
-    { text: `${r.name} has drawn its edges inward (fields left unworked, a mill standing idle) trading the ${r.commodity || "harvest"} it needs for a perimeter ${r.milForce || "the defenders"} can actually hold.`, needs: ['institution: mill'] },
+    { text: `The defences of ${r.name} were built for quieter years than these, as ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : r.milForce || "the defenders"} warned at the last muster.`, needs: ['guardPresence'] }, // TAIL-NARRATIVE (HIGH 20438, 20439): defences and a muster need a force that musters (a watch, a militia, a garrison or a hired company)
+    { text: "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.", needs: ['tier: ≥ hamlet'] }, // TAIL-NARRATIVE (00172): three farmsteads and the authorities are not a thorp's
+    { text: `${r.name} has drawn its edges inward (fields left unworked, a mill ${r.millExports ? 'kept turning for its buyers' : 'standing idle'}) giving up its outlying ground for a perimeter ${r.milForce || "the defenders"} can actually hold.`, needs: ['institution: mill'] }, // TAIL-NARRATIVE-2 (READ-ALL-4): "trading the harvest it needs" beside a 17% surplus: the line claims the ground given up, not a need // TAIL-NARRATIVE (00708): no idle mill where the trade record sells its flour (genPressureDetail's millExports); a branch inside the drawn row
     `The bounty ${r.govFaction || "the council"} posted for the creature has attracted the wrong sort of help to ${r.name}: hunters who are more dangerous than useful, and who will expect payment whether or not the thing is dead.`,
     { text: `Whatever is preying on ${r.name} has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open.`, needs: ['walls'] },
   ],
@@ -183,12 +194,16 @@ export const PRESSURE_SENTENCES = {
       (((d = r.compound) == null ? void 0 : d.militaryEffective) || 0) &&
       (((l = r.compound) == null ? void 0 : l.economyOutput) || 50) < 48
       ? [
-          `The commons of ${r.name} have stopped obeying. ${capFirst(r.govFaction) || "The governing authority"} still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.`,
+          `The commons of ${r.name} have stopped obeying. ${capFirst(r.govFaction) || "The governing authority"} still holds the buildings and the official seal, but its orders go unanswered, and whoever first offers something better will find people ready to follow.`, // TAIL-NARRATIVE (07115, 10848, 07638): no rival power presumed, no "power leader"
           { text: `The streets of ${r.name} have gone quiet, and everyone is waiting for something to break. ${capFirst(r.govFaction) || "The governing authority"} gives orders that are heard and not obeyed, and each one weakens it further.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-6 (CENSUS-2 c/streets; the chair's ruling (f)): plural streets not below the middling band
-          `In ${r.name} the rents go uncollected, the summons go unanswered, and the men ${r.govFaction || "the governing authority"} sends to enforce either turn back or turn coat. The revolt has not started because it has, in every way that matters, already happened.`,
+          r.hasForce
+            ? `In ${r.name} the rents go uncollected, the summons go unanswered, and the men ${r.govFaction || "the governing authority"} sends to enforce either turn back or turn coat. The revolt has not started because it has, in every way that matters, already happened.`
+            : `In ${r.name} the dues go unpaid and the summons go unanswered, and ${r.govFaction || "the governing authority"} has no one to send who would be obeyed. The revolt has not started because it has, in every way that matters, already happened.`, // TAIL-NARRATIVE (11487, B10954): men sent to enforce only where a force stands (genPressureDetail's hasForce); a branch inside the drawn row
         ]
       : [
-          `The challenge to ${r.govFaction || "the current authority"} in ${r.name} comes from its own officials: taxes held back, decisions left unsigned, a coalition forming. ${capFirst(r.govFaction) || "The governing power"} knows it, and cannot move against it without making it stronger.`,
+          ['thorp', 'hamlet'].includes(String(r.tier || ''))
+            ? `The challenge to ${r.govFaction || "the current authority"} in ${r.name} comes from inside: dues held back, decisions left unmade, a few households drawing together. ${capFirst(r.govFaction) || "The governing power"} knows it, and cannot move against it without making it stronger.`
+            : `The challenge to ${r.govFaction || "the current authority"} in ${r.name} comes from its own officials: taxes held back, decisions left unsigned, a coalition forming. ${capFirst(r.govFaction) || "The governing power"} knows it, and cannot move against it without making it stronger.`, // TAIL-NARRATIVE (20149): a thorp or a hamlet has no officials to hold back taxes; a branch inside the drawn row
           `The insurgency in ${r.name} wears a clerk's coat. Permits stall in the right offices, funds arrive short and late, and the people doing it can each point to a rule that excuses them. ${capFirst(r.govFaction) || "The governing power"} is being strangled by its own procedures, wielded by people who have read them more carefully than it has.`,
           `No one in ${r.name} is marching, and that is what makes it dangerous. The opposition to ${r.govFaction || "the current authority"} is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.`,
         ];
@@ -217,7 +232,7 @@ export const PRESSURE_SENTENCES = {
       : [
           { text: `${r.name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${r.govFaction || "the governing authority"} is rationing what there is between families who have lived here for generations and families who arrived last month.`, needs: ['starving'] },
           `Every season brings more households to ${r.name} and no more work. The newcomers camp where they can, and ${r.govFaction || "the governing authority"} is counting heads it has no plan for.`,
-          `The road into ${r.name} is busier than the road out, and both are watched. By ${r.govFaction || "the governing authority"}, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.`,
+          `The road into ${r.name} is busier than the road out, and both are watched. By ${r.govFaction || "the governing authority"}, which can neither turn people away nor find them all work, and by the old residents, who are keeping a private account of who arrived.`,
         ];
   })()),
   wartime: (r) => {
@@ -227,7 +242,7 @@ export const PRESSURE_SENTENCES = {
       ? [
           { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
           { text: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
-          { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison'] },
+          { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison', 'prosperity: ≥ comfortable'] }, // TAIL-NARRATIVE (01079): "prospering" needs a town the record calls comfortable or better
         ]
       : [
           `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has hollowed out the skilled workforce. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`,
@@ -253,7 +268,7 @@ export const PRESSURE_SENTENCES = {
     { text: `The revolt in ${r.name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${r.name} becomes afterwards, and who decides.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-6 (CENSUS-2 c/districts; the chair's ruling (f)): districts not below the middling band
     `${r.name} has stopped functioning as the thing it was. The labour it was built on has withdrawn itself, by force, and every calculation the settlement made about its own wealth turns out to have rested on people who are no longer willing to be a line in the ledger.`,
     `The rising in ${r.name} did not come from nowhere, though ${r.govFaction || "the governing power"} is speaking of it as though it did. Everyone who is honest knows the grievances were real, old, and ignored, which makes the question of how to end it far harder than the question of how it began.`,
-    `In ${r.name} the two sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and ${r.govFaction || "the governing power"} cannot retake it without destroying the ${r.commodity || "trade"} that made it worth holding. What comes next will be a bargain neither wanted, struck between people who no longer pretend to be anything but enemies.`,
+    `In ${r.name} the two sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and ${r.govFaction || "the governing power"} cannot retake it without destroying what made it worth holding. What comes next will be a bargain neither wanted, struck between people who no longer pretend to be anything but enemies.`,
   ],
 };
 
@@ -299,10 +314,14 @@ export const POLITICAL_FLAVOR = {
     },
     (r) =>
       `The current governing arrangements are a compromise nobody fully chose: shaped more by the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} than by any founding design`,
+    // TAIL-NARRATIVE-2 (the chair's ruling (N9), READ-ALL B00042): "Authority here has a provisional quality …" LEFT THIS
+    // POOL: it printed in 4 towns and was false in 2 (the public's legitimacy Approved), no rewording held, and the fact it
+    // needs (the legitimacy label) is not an atom for four towns; the one pick re-draws inside this pool.
+    // TAIL-NARRATIVE-2 (N9's inheritors read): "… but not whether they deserve it, and the powers are still arguing the
+    // second point" was false in all 4 towns that print it (legitimacy Approved or Endorsed in three, one power in the
+    // fourth): the line keeps its event and claims neither a contested right nor a plurality of powers.
     (r) =>
-      `Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} to be replaced by a permanent one that never comes`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} decided who holds power here, but not whether they deserve it, and the powers are still arguing the second point`,
+      `The ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} decided who holds power here, and every household still tells it the way its own side remembers it`,
     (r) =>
       `The offices here are filled and the seals are real, but people still ask in private whether the ${pickRandom2(r.filter((s) => s.type === "political"))?.name || "this event"} gave the present rulers any right to rule, and nobody in charge wants the question asked aloud`,
   ],
@@ -383,12 +402,14 @@ export const POLITICAL_FLAVOR = {
         ? `The ${s.name} is this place's defining story, and every family here still tells its own part of it`
         : `The ${s.name} is this place's defining story, and the people who lived through it are still here to tell it`;
     },
-    (r) => {
+    // TAIL-NARRATIVE (READ-ALL HIGH 00053): "nobody expects it" printed in a town under the siege it names; the row is
+    // not said while a siege or a plague is in force (the two disasters the record's events can name and its crises be).
+    { text: (r) => {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
       return s.type === "disaster" || s.type === "monster_incursion"
         ? `Every plan made here now allows for the ${s.name} happening again; nobody expects it, but nobody expected the first one either`
         : `The ${s.name} changed what people here believe can happen to them, and that has been slower to rebuild than any building`;
-    },
+    }, excludes: ['crisis: under_siege', 'crisis: plague_onset'] },
   ],
   layered_history: [
     (r) =>
@@ -435,15 +456,19 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       r.some((s) => s.type === "economic")
         ? `This place made its name in trade, not war, and the ${(r.find((s) => s.type === "economic") || r[0]).name} showed it that money lasts longer here than any military glory`
-        : "Records here are kept carefully and disputes settled by precedent; people here learned the hard way what happens otherwise", crisis: ['any'] },
+        : "Records here are kept carefully and disputes settled by precedent; people here learned the hard way what happens otherwise", needs: ['exports'], crisis: ['any'] }, // TAIL-NARRATIVE (00138): "made its name in trade" needs a town that sells something
     { text: (r) =>
       "More complicated than it looks from the road. Outsiders see a busy market; the people who live here know the stories behind it.", needs: ['market'], crisis: ['any'] },
     (r) =>
-      "Nothing has ever forced this place to change much. It has kept its options, its neighbours and its temper, and the people here count all three as achievements",
+      (r.some(isMajorEvent) // TAIL-NARRATIVE (B00101): with a major event on the record it is named, never denied; a branch inside the drawn closure
+        ? `It came through the ${majorNamesOf(r).slice(0, 2).join(' and the ')} without losing its options, its neighbours or its temper, and the people here count all three as achievements`
+        : "Nothing has ever forced this place to change much. It has kept its options, its neighbours and its temper, and the people here count all three as achievements"),
     (r) =>
       r.length >= 2
         ? "The tensions here are the domestic kind (inheritances, boundaries, precedence at the festival), and they are managed rather than resolved, passed down like the disputes they are, each generation adding a footnote and settling nothing"
-        : "Little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it",
+        : r.some(isMajorEvent) // TAIL-NARRATIVE (HIGH B00096): a major event on the record is named, never denied
+          ? `Apart from the ${r.find(isMajorEvent).name}, little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it`
+          : "Little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it",
   ],
   religious_heavy: [
     // CENSUS-2f unit 5: [0]'s persisting institution and [2]'s local clergy presume a house of worship of any kind (R-AE's
@@ -453,7 +478,7 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       `Religious history here is complicated: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left an official account and an unofficial one, and which version you know says something about who you are`, colour: true },
     { text: (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`, needs: ['sacredHouse'] },
+      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`, needs: ['church'] }, // TAIL-NARRATIVE (00014): a local clergy needs a church; a wayside shrine is a sacred house and keeps none
     { text: (r) =>
       `Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is the explanation`, colour: true },
     { text: (r) =>
@@ -469,7 +494,7 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic'] },
     { text: (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] },
+      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is still discussed here, carefully. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] }, // TAIL-NARRATIVE (00010): no practitioners are claimed; the page's own Arcane Support row may say there are none
     { text: (r) =>
       `Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why`, colour: true },
     { text: (r) =>

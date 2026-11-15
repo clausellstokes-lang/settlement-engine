@@ -52,6 +52,7 @@ import { hookPoolFor, POWER_BANDS, seatPoolFor } from './poolMap.js';
 import { powerBandOfRole } from '../npcGenerator.js';
 import { drawCardHooks, dualHatHouseOf, HOOKS_FORK_LABEL, houseKindOf, mintPowerFace, officeTitleFor, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
+import { titleForHolder } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C
 import { CLAIMANT_FACE, HOUSELESS_CRIMINAL_FACE } from '../../data/stressPowerFaces.js';
 import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
 import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
@@ -322,8 +323,8 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
       // mergeNPCLists runs on the roster's cards; crimeSignal.js :: withTownsOwnUnderworld), after the draw
       if (card.secret && typeof card.secret === 'object') card.secret = { ...card.secret, what: withTownsOwnUnderworld(card.secret.what, crime.signal, crime.faction) };
       card.id = id;
-      card.title = row.title;
-      card.role = row.title; // M-1b
+      card.title = titleForHolder(row.title, card.gender); // TAIL-TITLES K-C: the holder's form, after the draw
+      card.role = card.title; // M-1b: the role IS the title (the face stays on `institution.title`)
       // FIX-PUBLIC-VEIL: the veil bit at birth — a hidden power's mint (the stress infiltrator) or a criminal one's
       card.institution = { kind: 'power', key: name, family: null, title: row.title, veiled: isVeiledPower(f) };
       card.memberships = [];
@@ -338,7 +339,7 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
           let epithet = veiledEpithetFor(1, 2);
           for (let n = 2; taken.has(`${base} ${epithet}`.toLowerCase()); n += 1) epithet = veiledEpithetFor(n + 1, n + 2);
           card.name = `${base} ${epithet}`;
-        } else card.name = `${base} (${row.title})`;
+        } else card.name = `${base} (${card.title})`; // TAIL-TITLES K-C: the title it bears
       }
       lateMints.push(card);
       // the hook's pool from the mint's EFFECTIVE category (no title-table row is `magic`, so no swap here)

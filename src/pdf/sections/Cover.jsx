@@ -169,8 +169,15 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
     : null;
   const govName = situation.power?.governingName || null;
 
-  const topExport = situation.economy?.topExport
-    || (overview.primaryExports?.[0] ? toLabel(overview.primaryExports[0]) : null);
+  // TAIL-EXPORTS-PDF-2 (the chair's ruling E15 (1)): the cover names the first export the tab's Exports print
+  // (tradeListDisplay.js :: tradeListsAsPrinted, the economics slice's `exportsShown`), with the mark that list keeps,
+  // and none where a siege stops trade: the record's raw first export ("Salted fish (naval route only)") printed on a
+  // village under siege that sends nothing out by any road. A view model without the slice reads as before.
+  const econ = vm?.economics;
+  const topExport = Array.isArray(econ?.exportsShown)
+    ? (!econ.tradeStopped && econ.exportsShown[0] ? toLabel(econ.exportsShown[0]) : null)
+    : (situation.economy?.topExport
+      || (overview.primaryExports?.[0] ? toLabel(overview.primaryExports[0]) : null));
 
   return (
     <Page size={pageGeo.A4.size} style={sheet.coverPage}>

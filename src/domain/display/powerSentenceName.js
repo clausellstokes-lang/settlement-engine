@@ -59,6 +59,18 @@ export function powerSentenceName(name) {
 }
 
 /**
+ * A power's name in a slot the pool's own text gives an article ("the {seat}", "The {seat} at {settlement}", "the present
+ * {seat}", "the faith's party is the {faction}"): the prose form with its own leading "The" struck, so the sentence reads
+ * "the Guard", never "the The Guard" (TAIL-DISPLAY-CIVIC-3 V1, the chair's ruling of 2026-11-15; the same holds of a
+ * generated name that carries its article, "The Peerage"). A slot with no article before it takes `powerSentenceName`.
+ * @param {unknown} name @returns {string}
+ */
+export function powerNameAfterArticle(name) {
+  const said = powerSentenceName(name);
+  return said.replace(/^the\s+(?=\S)/i, '') || said;
+}
+
+/**
  * A chip or a rank line that names a power by its roster label ("first of Military/Guard"), set inside a sentence: each
  * catalogue label in PROSE_FORMS takes its prose form ("first of The Guard"). For a sentence that quotes a chip whole
  * (pdf/lib/headlines.js :: npcsHeadline); the chip itself keeps the roster's label.

@@ -308,7 +308,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const charNote   = inst.hasCharterHall ? said(" The adventurers' charter hall handles threats the watch cannot.") : ''; // F12: the watch, where it stands
     // Canonical threat vocabulary is heartland/frontier/plagued ('embattled' was never emitted).
     const threatNote = threat === 'plagued' ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : '';
-    safetyDesc = `Visitors can walk anywhere at any hour, and there is little crime; the ${lawRef} sees to that.` +
+    const seesTo = lawRef === 'local guard' ? '' : `; the ${lawRef} sees to that`; // TAIL-DEFECON (#23466): no garrison, watch or militia, no force named
+    safetyDesc = `Visitors can walk anywhere at any hour, and there is little crime${seesTo}.` +
       `${wallNote}${charNote}${threatNote}`;
   } else if (effectiveSafety >= 2) {
     safetyLabel = 'Safe';
@@ -319,7 +320,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const wallNote = inst.hasWalls ? ' The walls keep most trouble outside.' : '';
     const courtNote = inst.hasCourtSystem && courthouse ? ' With a working court, organised crime treads carefully.' : ''; // UPKEEP-8: a court named only where a courthouse stands
     safetyDesc = `Crime exists but is well-managed. ${lawLine} Petty theft is the primary risk; ` +
-      `organized crime has a limited foothold.${courtNote}${wallNote}`;
+      `organized crime has ${footholdWord(hasCriminalOrg || flags.inst.hasCriminalInst || institutions.some((i) => /gambl/i.test(String(i?.name ?? ''))))}.${courtNote}${wallNote}`; // TAIL-DISPLAY-CIVIC-4 (V10): safetyLineTruth.js
   } else if (effectiveSafety >= 1.2) {
     safetyLabel = 'Moderate';
     const lawRef  = inst.hasGarrison ? 'The garrison patrols' : inst.hasWatch ? 'The watch covers'
@@ -347,7 +348,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
                            'There is effectively no law enforcement.';
     const wallNote   = inst.hasWalls ? ' Even the walls provide limited protection. The threat is within.' : '';
     const courtNote  = inst.hasCourtSystem ? '' : ' With no court, quarrels are settled with fists and knives.';
-    safetyDesc = `Violence and theft are routine. ${lawRef} Residents protect themselves through community networks or tribute paid to whoever controls their street.${courtNote}${wallNote}`;
+    const selfHelp = tiny ? 'Residents protect themselves through their neighbours, or by paying whoever is strongest.' // TAIL-DEFECON (#16568): no streets to control in a thorp or a hamlet
+      : 'Residents protect themselves through community networks or tribute paid to whoever controls their street.';
+    safetyDesc = `Violence and theft are routine. ${lawRef} ${selfHelp}${courtNote}${wallNote}`;
   }
 
   // ── Guard effectiveness description ───────────────────────────────────────
@@ -371,16 +374,18 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
 
     // COHERENCE-AGREE-3 (F5): the gate home answers "gates"; walls with no gate take the twin that names none.
     // (A template over the force noun, so it is chosen here by the home, not keyed in the sibling table; the twin carries its declaration, COHERENCE-AGREE-4.)
+    const many = manyForce(lawRef); // TAIL-DEFECON (#20612 #20616): "the garrison and city watch" take a plural verb
     const wallNote = !inst.hasWalls ? ''
-      : inst.hasGates ? ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`
+      : inst.hasGates ? (hasStress('under_siege') ? lineText({ text: ` The gates are shut against the siege, and the ${lawRef} ${many ? 'hold' : 'holds'} them.`, needs: ['crisis: siege'] }) // TAIL-DEFECON (#07371 #07373, ruling D3)
+        : gatesSmugglersLine(lawRef, many, institutions)) // TAIL-DISPLAY-CIVIC-4 (V7): safetyLineTruth.js
         : lineText({ text: ` The walls leave few ways in, so smugglers have to get past the ${lawRef}.`, needs: ['walls'], excludes: ['gate'] });
 
     if (stress.stateCrime) {
-      guardEffectivenessDesc = `The ${lawRef} is well organised and works for the rulers' purses, not for the public; ` +
-        `it is loyal to whoever pays it.${prisonNote}`;
-    } else if (flags.militaryEffective < 30 && pri.economy < 35) {
+      guardEffectivenessDesc = (many ? `The ${lawRef} are well organised and work for the rulers' purses, not for the public; they are loyal to whoever pays them.`
+        : `The ${lawRef} is well organised and works for the rulers' purses, not for the public; it is loyal to whoever pays it.`) + prisonNote;
+    } else if (flags.militaryEffective < 30 && pri.economy < 35 && lawRef !== "adventurers' charter hall") { // TAIL-DEFECON (#18786): a charter hall is no enforcer; its own branch below
       const militiaNote = inst.hasMilitia ? ': these are volunteers with day jobs, not soldiers' : '';
-      guardEffectivenessDesc = `The ${lawRef} exists on paper. Chronically underpaid and poorly equipped${militiaNote}. ` +
+      guardEffectivenessDesc = `The ${lawRef} ${many ? 'exist' : 'exists'} on paper. Chronically underpaid and poorly equipped${militiaNote}. ` +
         `Susceptible to bribery; enforcers who can be bought by whoever has coin.${prisonNote}`;
     } else if (stress.merchantArmy) {
       const secRef = inst.hasMercenary ? 'mercenary companies' : 'private security';
@@ -402,21 +407,23 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       guardEffectivenessDesc = `The adventurers' charter hall coordinates emergency response to threats. Effective for monster incursions and major disturbances, ` +
         `less so for routine crime prevention. Not a police force.${prisonNote}`;
     } else if (flags.militaryEffective >= 65 && pri.economy >= 50) {
-      guardEffectivenessDesc = `The ${lawRef} is well paid, well equipped and patrols properly. ` +
-        `They come when called, and though some take bribes, it is not the custom.${prisonNote}${wallNote}`;
+      // TAIL-DISPLAY-CIVIC-3 V3: under a siege, an occupation or a famine, the twin (safetyLineTruth.js :: patrolTwin)
+      guardEffectivenessDesc = (patrolTwin(lawRef, patrolCrisisOf(hasStress), true) ?? `The ${lawRef} ${many ? 'are well paid, well equipped and patrol' : 'is well paid, well equipped and patrols'} properly. ` +
+        'They come when called, and though some take bribes, it is not the custom.') + `${prisonNote}${wallNote}`;
     } else if (flags.militaryEffective >= 65 && pri.economy < 40) {
-      guardEffectivenessDesc = `The ${lawRef} is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. ` +
+      guardEffectivenessDesc = `The ${lawRef} ${many ? 'are' : 'is'} disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. ` +
         `Effective in a fight; vulnerable to sustained corruption.${prisonNote}${wallNote}`;
     } else {
-      guardEffectivenessDesc = voiceOf('standardPatrol', STANDARD_PATROL(lawRef)) + // SW-B5 FRAMES: the original is index 0
-        `${prisonNote}${wallNote}`;
+      const drawn = voiceOf('standardPatrol', STANDARD_PATROL(lawRef)); // SW-B5 FRAMES: the original is index 0
+      guardEffectivenessDesc = (patrolTwin(lawRef, patrolCrisisOf(hasStress)) ?? drawn) + `${prisonNote}${wallNote}`; // TAIL-DISPLAY-CIVIC-3 V3: the draw kept, its twin
     }
   } else if (inst.hasCourtSystem) {
     guardEffectivenessDesc = (courthouse ? 'There is no watch, only a court. ' : 'There is no watch. ') + // UPKEEP-8: a court named only where a courthouse stands
       'When a quarrel turns violent, the neighbours or whoever is strongest nearby step in.';
   } else {
+    const noWatch = voiceOf('noWatchSmall', NO_WATCH_SMALL);
     guardEffectivenessDesc = ['thorp', 'hamlet', 'village'].includes(tier)
-      ? voiceOf('noWatchSmall', NO_WATCH_SMALL) // SW-B5 FRAMES: the original is index 0
+      ? (hasStress('occupied') && noWatch === NO_WATCH_SMALL[2] ? NO_WATCH_OCCUPIED : noWatch) // SW-B5 FRAMES: the original is index 0; TAIL-DEFECON (#B14103): the occupiers keep order
         /* the old families' line and its vantages: NO_WATCH_SMALL at the end of this file */
       : 'There is no watch and nobody in charge of order; people look after themselves and their own.';
   }
@@ -521,7 +528,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : ' Without prison or courts, the risk of operating is low. Arrest means a fine at worst.';
     crimeTypes.push({
       type: 'Smuggling',
-      desc: `An active ${routeType} smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules.${gateNote}${prosecuteNote}`,
+      desc: hasStress('under_siege') ? lineText({ text: 'The siege has shut the roads, so what contraband is already inside is hoarded and sold dear by those who know the patrol schedules.', needs: ['crisis: siege'] }) + prosecuteNote // TAIL-DEFECON (#B03371): under a siege nothing moves through
+        : `An active ${routeType} smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules.${gateNote}${prosecuteNote}`,
     });
   }
   if (inst.hasGangInfra && crimeTypes.length === 0) {
@@ -579,8 +587,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     if (!crimeTypes.some((c) => c.desc === DESPERATION_THEFT_DESC)) {
       addCrimeIfMissing('desperation theft', DESPERATION_THEFT_DESC);
     }
-    addCrimeIfMissing('black market food',
-      'Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.');
+    addCrimeIfMissing('black market food', tiny ? "What food is put by goes to whoever can pay the holder's price." // TAIL-DEFECON (#05801): no controls or channels in a thorp or a hamlet
+      : 'Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.');
   }
   if (hasStress('occupied')) {
     addCrimeIfMissing('resistance activity',
@@ -601,7 +609,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const insurgentDriven = (flags.criminalEffective || 0) > (flags.militaryEffective || 0);
     addCrimeIfMissing('political violence',
       insurgentDriven
-        ? said('Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.')
+        ? said(said('Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.')) // TAIL-DEFECON (#18708): its twin through its own set
         : 'Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed.');
     addCrimeIfMissing('loyalty testing',
       'Both the governing power and the insurgency pressure individuals to declare allegiance. Refusal is dangerous. False declarations are common.');
@@ -623,17 +631,21 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       'Banned or contested religious practice continuing in private homes, cellars, and outbuildings. Informal networks providing space, materials, and warning of enforcement activity.');
     addCrimeIfMissing('religious fraud',
       inst.hasChurch ? 'False conversion declarations sold or arranged for a fee. Forged certification of compliance. Priests accepting payment to record conversions that did not occur.' : 'False conversion declarations sold or arranged for a fee. Forged certification of compliance.');
-    addCrimeIfMissing('contested property',
-      "Religious buildings, land, and endowments whose ownership is legally ambiguous following the change in religious authority. Being occupied, transferred, or stripped by whoever moves fastest.");
+    if (institutions.some((i) => RELIGIOUS_HOUSE.test(String(i?.name ?? '')) && !/^access to/i.test(String(i?.name ?? '')))) { // TAIL-DEFECON (#16495): only where a religious house stands
+      addCrimeIfMissing('contested property',
+        "Religious buildings, land, and endowments whose ownership is legally ambiguous following the change in religious authority. Being occupied, transferred, or stripped by whoever moves fastest.");
+    }
     addCrimeIfMissing('informant networks',
       'Enforcement authorities paying for information about non-compliant households. Neighbour reporting on neighbour. Some reports are sincere. Many are settled scores.');
   }
   if (hasStress('wartime')) {
-    addCrimeIfMissing('war profiteering',
-      "Suppliers adulterating grain and leather sold to crown contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.");
-    addCrimeIfMissing('deserter networks',
-      'Deserters passing through require food, forged papers, and discretion. A small industry has emerged to provide all three. Officially classified as harbouring criminals.');
-    addCrimeIfMissing('conscription fraud',
+    // TAIL-DEFECON (#18752 #11777 #21987 #03039 #B27552): no crown contracts, inspectors, industry or wealthy families in a thorp or a hamlet
+    // TAIL-DISPLAY-CIVIC-3 V3: a place with no trade route sells nothing to an army's buyers (r2s-wartime-thorp-2: isolated, no
+    // exports, no imports); the deserters' food is settled against the food record at assembly (settleCrimeLinesToSignal)
+    if (config.tradeRouteAccess !== 'isolated') addCrimeIfMissing('war profiteering', tiny ? "Whatever the army's buyers will take is sold to them dear, and not all of it is as sound as it is said to be."
+      : "Suppliers adulterating grain and leather sold to crown contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.");
+    addCrimeIfMissing('deserter networks', tiny ? DESERTERS_FED_TINY : DESERTERS_FED);
+    if (!tiny) addCrimeIfMissing('conscription fraud',
       'Wealthy families paying poorer ones to send sons in their place. The practice is illegal, widespread, and poorly enforced. It concentrates the actual dying in specific households.');
   }
   if (hasStress('mass_migration')) {
@@ -641,8 +653,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       said('Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.'));
     addCrimeIfMissing('cultural friction',
       'Violent incidents between established residents and newcomers. Usually starts with an economic dispute and escalates.');
-    addCrimeIfMissing('black market passage',
-      'Forged residence documents, unofficial lodging, underground routes for those authorities have turned away. Very profitable.');
+    addCrimeIfMissing('black market passage', tiny ? 'A way onward, sold quietly to newcomers who were told to move on.' // TAIL-DISPLAY-CIVIC-3 V3: no bed is presumed (r2s-mass_migration-thorp-3: seven people, no inn or lodging house); TAIL-DEFECON (#09343): no documents or authorities in a thorp or a hamlet
+      : 'Forged residence documents, unofficial lodging, underground routes for those authorities have turned away. Very profitable.');
   }
 
   // ── Criminal institutions present (named) ─────────────────────────────────
@@ -694,10 +706,12 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const blackMarketCapture = Math.min(80, baseShadowPercent + stressShadowBonus);
 
   let economicDragDesc = null;
-  if (blackMarketCapture > 15) {
-    economicDragDesc = 'Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and the stalls that pay their fees lose custom to the ones that do not.';
+  if (blackMarketCapture > 15) { // TAIL-DEFECON (#09714, ruling D3): under a siege nothing comes in; no stalls where no market stands
+    economicDragDesc = hasStress('under_siege') ? lineText({ text: 'With the siege closed round the place, what goods are left change hands in back rooms and after dark, at whatever the holder asks.', needs: ['crisis: siege'] })
+      : !inst.hasMarket ? 'Goods change hands here in back rooms and after dark, and nobody accounts for them.'
+        : 'Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and the stalls that pay their fees lose custom to the ones that do not.';
   } else if (blackMarketCapture > 5) {
-    economicDragDesc = factsOf({ institutions }).crime === 'organized' ? 'Some goods change hands here without a licence or a duty paid.' : 'Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.'; // UPKEEP-8 (#1377): no 'little harm' beside an organised criminal power
+    economicDragDesc = tiny ? 'A little changes hands here quietly, between neighbours, and no one reckons it up.' : factsOf({ institutions }).crime === 'organized' ? 'Some goods change hands here without a licence or a duty paid.' : 'Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.'; // UPKEEP-8 (#1377): no 'little harm' beside an organised criminal power; TAIL-DEFECON (#18208 #B11404): no licence or duty in a thorp or a hamlet
   }
 
   // ── Plot hooks ────────────────────────────────────────────────────────────
@@ -719,7 +733,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push(`Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is ${crimeRef}.`);
   }
   if (stress.arcaneBlackMarket) {
-    plotHooks.push("A part from the wizard's tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay.");
+    if (inst.hasWizardTower) plotHooks.push("A part from the wizard's tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay."); // TAIL-DEFECON (#02876): silent where no tower stands
   }
   if (stress.religiousFraud) {
     plotHooks.push("A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.");
@@ -737,7 +751,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       facts: () => factsOf({ institutions }), key: `${seed ?? ''}::safetyProfile:SMUGGLING_HOOKS`,
       poolId: 'safetyProfile:SMUGGLING_HOOKS', surface: 'plot_hooks', drawKind: 'H',
     });
-    if (drawn.line != null) plotHooks.push(String(lineText(drawn.line)));
+    if (drawn.line != null) plotHooks.push(smugglingHookUnderSiege(String(lineText(drawn.line)), hasStress('under_siege'))); // TAIL-DISPLAY-CIVIC-4 (V10)
   }
   if (stress.crusaderSynthesis) {
     plotHooks.push(said("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological."));
@@ -803,6 +817,8 @@ export function settleCrimeLinesToSignal(economicState, lists) {
     const desc = lineFor[/** @type {keyof typeof lineFor} */ (String(entry?.type))];
     return desc !== undefined && entry.desc !== desc ? { ...entry, desc } : entry;
   });
+  settled = settleRosterCrimeLines(settled, lists?.seats, crimeSignalOf(lists).factions.length > 0); // TAIL-DEFECON (#15308, #14654)
+  if (hunger) settled = settleDesertersUnfed(settled); // TAIL-DISPLAY-CIVIC-3 V3: under hunger no line offers food
   if (infrastructure && settled.some((entry) => entry?.type === 'Survival crime')) {
     settled = settled.filter((entry) => !(entry?.type === 'desperation theft' && entry.desc === DESPERATION_THEFT_DESC));
   }
@@ -863,6 +879,10 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.': declaredSet(
     'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.', ['watch'],
     'Street-level confrontations between insurgent supporters and those who keep order. Officially categorised as riot and disorder.'),
+  // TAIL-DEFECON (#18708): the twin above names those who keep order, so it needs a force of any kind; its own twin names none.
+  'Street-level confrontations between insurgent supporters and those who keep order. Officially categorised as riot and disorder.': declaredSet(
+    'Street-level confrontations between insurgent supporters and those who keep order. Officially categorised as riot and disorder.', ['guardPresence'],
+    "Confrontations between the rebels' supporters and those loyal to the current authority. Officially categorised as riot and disorder."),
   'Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.': declaredSet(
     'Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.', ['watch'],
     'Theft and petty fraud by new arrivals with no local ties and no established credit. Those who keep order struggle to distinguish transients from residents.'),
@@ -977,12 +997,13 @@ function COURT_NO_PRISON(lawRef) {
 
 /** #18: the force patrols at the ordinary standard. @param {string} lawRef */
 function STANDARD_PATROL(lawRef) {
+  const many = manyForce(lawRef); // TAIL-DEFECON (#20616): two bodies, a plural verb
   return [
-    `The ${lawRef} maintains standard patrol coverage. Effective against opportunistic crime; ` +
+    `The ${lawRef} ${many ? 'maintain' : 'maintains'} standard patrol coverage. Effective against opportunistic crime; ` +
       'less effective against organized operations that can plan around patrol routes.',
-    `The ${lawRef} walks the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them.`,
-    `The ${lawRef} patrols on a regular round, so petty theft is often caught and planned crime seldom is.`,
-    `You will see the ${lawRef} on the rounds most hours of the day; it catches the careless and misses the careful.`,
+    `The ${lawRef} ${many ? 'walk' : 'walks'} the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them.`,
+    `The ${lawRef} ${many ? 'patrol' : 'patrols'} on a regular round, so petty theft is often caught and planned crime seldom is.`,
+    `You will see the ${lawRef} on the rounds most hours of the day; ${many ? 'they catch the careless and miss' : 'it catches the careless and misses'} the careful.`,
   ];
 }
 
@@ -1083,7 +1104,7 @@ export function keptGuardLine(desc, institutions, prosperity, read = {}) {
 // ─── UPKEEP-8 (2026-11-13): the safety lines say only what the record holds (safetyLineTruth.js) ─────────────
 // At the END of the file, as the frames above, so no producer write moves.
 import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
-import { GANG_HOUSES_OF, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, hungerIn, paperTruth, patrolTruth } from './safetyLineTruth.js';
+import { footholdWord, gatesSmugglersLine, GANG_HOUSES_OF, smugglingHookUnderSiege, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines } from './safetyLineTruth.js';
 
 /** The enforcement sentence the desperation-theft lines end on (UPKEEP-14, ruling (h)): dropped where no enforcer stands. */
 const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival crime from organised theft.';

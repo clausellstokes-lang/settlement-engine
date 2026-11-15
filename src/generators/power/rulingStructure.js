@@ -23,7 +23,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; import { occupiedSeatLine } from './governingStressVignettes.js'; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
@@ -222,7 +222,7 @@ export const generatePowerStructure = (
       ? (governingFaction =
           (topPriority > 65 &&
             {
-              military: "Headman's Authority",
+              military: lowerInstNames.some((n) => String(n).includes('headman')) ? "Headman's Authority" : null, // TAIL-POWERS-2 DA (P7, P8): said only where the roster holds a headman's house; with none, the size's civic seat below
               religion: 'Priestly Guidance',
               economy: 'Household Council',
               criminal: 'Elder Council',
@@ -408,7 +408,7 @@ export const generatePowerStructure = (
     },
     // R-AM (CENSUS-1g): resolved where it is CHOSEN, not inside the table (an eager `said` noted a
     // description no birth printed); `said` hands every non-key back untouched, so nothing moves.
-    govDesc = said(govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table
+    govDesc = said((govBody === 'Town Council' && governingFaction !== govBody && (govDescByFaction[governingFaction] || govDescByLabel[governingFaction])) || govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table; TAIL-POWERS-4 (03509): a town's council line only where the council governs
     priorityBonus = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
     govPower = [
       'Theocratic Council',
@@ -595,7 +595,7 @@ export const generatePowerStructure = (
           : governingFaction && governingFaction.includes('Church Council')
             ? 'Church authority is the formal source of governing legitimacy here; clergy hold both spiritual and temporal jurisdiction.'
             : religiousPower > 24
-              ? lowerInstNames.some((name) => name.includes('cathedral') || name.includes('monastery'))
+              ? lowerInstNames.some((name) => name.includes('cathedral') || name.includes('monastery')) && /ecclesiastical/i.test(String(governingFaction || '')) // TAIL-POWERS-4 (04923): "all ecclesiastical" only under the church's own seat
                 ? 'Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.'
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
               : religiousPower > 17
@@ -675,7 +675,7 @@ export const generatePowerStructure = (
       ? stressEntries.map((e) => e.type)
       : (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
-  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []);
+  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []); for (const f of factions) if (f.isGoverning) f.desc = occupiedSeatLine(f.faction, () => birthFactsOf({ institutions: nativeInstitutions, config: { ...config, stressTypes }, tier })) || f.desc; // TAIL-POWERS-2 P4: under an occupation the seat's line is its twin
   const standingForce = forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })); normalizeAndAnnotateFactions(factions, standingForce, { annotate: false }); // F1: the standing lines name the force that stands; SW-B1 (P51): annotated below, after the last power write
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {
@@ -685,7 +685,7 @@ export const generatePowerStructure = (
     factions,
     config,
     stressFlags,
-    instFlags,
+    instFlags: { ...instFlags, garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison }, // TAIL-POWERS-3 P16 (G5): the garrison, for the military word
     neighbourRelationship,
     instNames,
     priorities,
@@ -769,7 +769,7 @@ export const generatePowerStructure = (
     // type); a transfer of power (domain/rulingPower.js) keeps both in step
     // while previousGovernments records what the seat used to be.
     government: (factions.find((f) => f.isGoverning) || {}).faction || null,
-    stability,
+    stability: /^Stable(;|$)/.test(String(stability)) && publicLegitimacy?.label === 'Legitimacy Crisis' ? String(stability).replace(/^Stable/, "Tense (the seat has lost the people's trust)") : stability, // TAIL-POWERS-3 P16 (G2): no bare "Stable" beside a Legitimacy Crisis (the stability is written before the legitimacy)
     recentConflict,
     publicLegitimacy,
     factionRelationships,
