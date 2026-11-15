@@ -33,6 +33,11 @@ const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
  * whose every live house is stopped or curtailed prints "impaired" (1 card of the census's 720 at 98363cb84,
  * r2s-under_siege-village-0's tavern trade beside its curtailed inn). The partial kind is read through the leaf's own
  * `crisisOfMarkKind`, never a copy of its table.
+ * RULING SW1b (the chair, 2026-11-15 23:41 UTC; vetoable by the owner; BAR3-CLOSE-SWEEP-A): SW1 holds for EVERY crisis
+ * that marks houses, not the siege alone. A card whose every live house carries ONE crisis's mark (an outbreak's
+ * "Curtailed", a famine's "Scarce", the siege's "Stopped" or "Curtailed", each read by the leaf for that crisis alone)
+ * prints "impaired" too (14 cards in 11 towns of the census's 720 at 661f08aee). The general form is
+ * `chainCardUnderCrisis`; this function, the Economics tab's and the Resources tab's entry, is its caller.
  * @template {{ status?: unknown }} C
  * @param {object | null | undefined} town the settlement
  * @param {Record<string, unknown>} record the chain as the record holds it (`economicState.activeChains[]`)
@@ -40,14 +45,35 @@ const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
  * @returns {C}
  */
 export function chainCardUnderSiege(town, record, shown) {
-  if (!CARD_WORKING.has(String(shown?.status ?? '')) || !stoppingCrisesOf(town).includes('under_siege')) return shown;
-  if (rowStoppedBy(town, 'chain', record, ['under_siege']) === 'under_siege') return { ...shown, status: 'impaired' }; // the card's own mark
+  return chainCardUnderCrisis(town, record, shown);
+}
+
+/**
+ * THE GENERAL FORM (SW1b): under each crisis in force that marks rows (`crisisStoppedRow.js :: stoppingCrisesOf`), a
+ * card printing a working word takes "impaired" where the siege marks the chain itself (L3, the card's own mark), or
+ * where every live processing house carries that one crisis's mark: `rowStoppedBy` asked of that crisis alone, its
+ * partial kind read through `crisisOfMarkKind` (the leaf's own reading, no table copied). A card with one house the
+ * crisis leaves unmarked keeps its word; any other card is the one it was given.
+ * @template {{ status?: unknown }} C
+ * @param {object | null | undefined} town the settlement
+ * @param {Record<string, unknown>} record the chain as the record holds it (`economicState.activeChains[]`)
+ * @param {C} shown the same chain as its card prints it (`chainAsShown`)
+ * @returns {C}
+ */
+export function chainCardUnderCrisis(town, record, shown) {
+  const crises = stoppingCrisesOf(town);
+  if (!CARD_WORKING.has(String(shown?.status ?? '')) || crises.length === 0) return shown;
+  if (crises.includes('under_siege') && rowStoppedBy(town, 'chain', record, ['under_siege']) === 'under_siege') return { ...shown, status: 'impaired' }; // the card's own mark
   const houses = (Array.isArray(record?.processingInstitutions) ? /** @type {unknown[]} */ (record.processingInstitutions) : [])
     .map((h) => liveHouseOf(town, h)).filter(Boolean);
-  // SW1: a house the siege stops or curtails (its partial kind, `under_siege:curtailed`) carries the siege's mark
-  const marked = (/** @type {string | null} */ kind) => kind !== null && crisisOfMarkKind(kind) === 'under_siege';
-  const stopped = houses.length > 0 && houses.every((h) => marked(rowStoppedBy(town, 'house', /** @type {Record<string, unknown>} */ (h), ['under_siege'])));
-  return stopped ? { ...shown, status: 'impaired' } : shown;
+  if (houses.length === 0) return shown;
+  /** @param {string} crisis @param {unknown} h */
+  const marks = (crisis, h) => {
+    const kind = rowStoppedBy(town, 'house', /** @type {Record<string, unknown>} */ (h), [crisis]);
+    return kind !== null && crisisOfMarkKind(kind) === crisis; // SW1: stopped, or the crisis's partial kind
+  };
+  const marked = crises.some((crisis) => houses.every((h) => marks(crisis, h)));
+  return marked ? { ...shown, status: 'impaired' } : shown;
 }
 
 /**

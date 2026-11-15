@@ -26,23 +26,40 @@ Commits: (a) 049e5be5, (b) b6ea79f9, (c) 5dd6e180, (d) dc7e5b1a, (e) c26bb240d, 
 
 **The new word's towns (the veto list): ONE town, not three.** `r2s-under_siege-village-0`: its tavern trade now reads "Impaired" beside its "Travelers' inn", which the siege curtails. The brief expected three; the measure finds one.
 
+## SW1b (copied as given; vetoable by the owner)
+
+> RULING SW1b (the chair, 2026-11-15 23:41 UTC; vetoable): SW1 HOLDS FOR EVERY CRISIS THAT MARKS HOUSES, not the siege alone: the 14 chain cards in 11 towns that read a working word under an outbreak or a famine while every live house of the chain carries THAT crisis's mark (stopped or curtailed, by the one leaf) print "impaired" too.
+
+**The cure.** `economicsCrisisMarks.js :: chainCardUnderCrisis`, the general form, sits beside the siege's function. For each crisis in force that marks rows (`stoppingCrisesOf`), the leaf's `rowStoppedBy` is asked of that crisis alone, and its partial kind is read through `crisisOfMarkKind`. No table is copied. The siege's own chain mark (L3) is kept. `chainCardUnderSiege`, which the Economics and Resources tabs call, is now its caller, so no component changed. The leaf CAN tell one crisis's mark from another's for a house: asked of one crisis, it answers only for that crisis.
+
+**The measure** (the 720 at 661f08aee against the cure, every card compared): cards whose every live house carries one crisis's mark and that print a working word: **14 cards in 11 towns before, 0 after**. **14 of 9,586 chain cards moved, exactly those 14.** None of the 990 Resources-tab cards (`fullCardWordUnderSiege`) moved. A card with one unmarked house keeps its word: 14 such cards are in the 720 (e.g. r2s-famine-city-3 wine_spirits, its Vintner unmarked).
+
+**The guard** (`bar3LabelWords2.test.jsx`, its own form; arm "SW1b NOT"). Cured rows: r2s-plague_onset-village-3 tavern_social operational → impaired, and r2s-famine-thorp-3 forage running → impaired. KEEP rows: r2s-famine-city-3 wine_spirits entrepot, and r2s-plague_onset-city-1 tavern_social operational, each with an unmarked house. The arm is red at 661f08aee (2 of 2) and green after.
+
+**The veto list: the new word "impaired" under each crisis.**
+- Under the siege (SW1): **r2s-under_siege-village-0** (tavern_social). The only one.
+- Under an outbreak (all 5): **r2s-plague_onset-village-3** (tavern_social), **r2s-plague_onset-city-0** (warehouse_logistics, caravan_trade, crossroads_trade, camel_caravan), **r2s-plague_onset-metropolis-3** (warehouse_logistics), r2s-plague_onset-town-1 (crossroads_trade), r2s-plague_onset-city-3 (tavern_social).
+- Under a famine (all 6): **r2s-famine-thorp-3** (forage), **r2s-famine-town-0** (wine_spirits), **r2r-thorp-38** (forage), r2s-famine-town-1 (wine_spirits), r2s-succession_void-thorp-0 (forage), r2s-wartime-hamlet-3 (forage).
+
+The three named first under each crisis are the veto list asked for; the rest complete the measure.
+
 ## Stopped on / for the chair (nothing changed for these)
 
-- **Outside the siege.** The labels' leaf reads the siege alone, by L3's own scope, and this seat kept that scope. Under the outbreak or the famine, **14 chain cards in 11 towns** of the 720 print a working word while every live house carries that crisis's mark: `plague_onset` "Curtailed" (r2s-plague_onset-village-3 tavern_social; -town-1 crossroads_trade; -city-0 warehouse_logistics, caravan_trade, crossroads_trade, camel_caravan; -city-3 tavern_social; -metropolis-3 warehouse_logistics) and `famine` "Scarce" (r2r-thorp-38, r2s-famine-thorp-3, r2s-succession_void-thorp-0 and r2s-wartime-hamlet-3 forage; r2s-famine-town-0 and -town-1 wine_spirits). If SW1's "the crisis" means every crisis, reading them is a widening of L3 and the chair's to rule. Not moved here.
+- **Outside the siege (asked, then RULED: SW1b).** The labels' leaf read the siege alone, by L3's own scope, and this seat first kept that scope. Under the outbreak or the famine, **14 chain cards in 11 towns** of the 720 print a working word while every live house carries that crisis's mark: `plague_onset` "Curtailed" (r2s-plague_onset-village-3 tavern_social; -town-1 crossroads_trade; -city-0 warehouse_logistics, caravan_trade, crossroads_trade, camel_caravan; -city-3 tavern_social; -metropolis-3 warehouse_logistics) and `famine` "Scarce" (r2r-thorp-38, r2s-famine-thorp-3, r2s-succession_void-thorp-0 and r2s-wartime-hamlet-3 forage; r2s-famine-town-0 and -town-1 wine_spirits). The chair ruled SW1b at 23:41 UTC; see the SW1b section. Cured there.
 
-## The closing battery (each alone, at e93af30f2)
+## The closing battery (each alone, at the SW1b commit)
 
 Each run went through `sh scripts/gate-tail.sh` (shared tier, `--maxWorkers=2`), never a pipe.
 
 | run | result |
 |---|---|
-| (a) `bar3LabelWords2` | 5 passed (5) |
+| (a) `bar3LabelWords2` (with SW1b's arm) | 6 passed (6) |
 | (b) `bar3People2Rows` | 13 passed (13) |
 | (c) `conflictLadderReadsRoster` | 2 passed (2) |
 | (d) `sovereignNoCrown` | 2 passed (2) |
 | (e) `domainAnyCastBaseline` | 19 passed (19) |
 | (f) `bar3PlacesRows` | 11 passed (11) |
-| guards `bar3LabelWords` / `2` / `3` | 3 / 5 / 3 passed |
+| guards `bar3LabelWords` / `2` / `3` | 3 / 6 / 3 passed |
 | guards `bar3ServicesRows`, `crisisStoppedRows` | 8 / 11 passed |
 | `tests/generators/power` (the filter takes in `powerEconomyFreshness`) | 160 passed, 1 failed: `powerEconomyFreshness` A4, the golden arm allowed red until the round's door |
 | `negativeAssertionAnchor`, `seedLoopTotality`, `proseDrawnAnchors` walkers | 9 / 9 / 6 passed |
