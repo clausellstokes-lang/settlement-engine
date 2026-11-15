@@ -1,0 +1,9 @@
+{"id":"C20948","town":"bar0-metropolis-calm-rand-5","sev":"MED","kind":"STATE","why":"'Relied upon' for magic while magic is low and FOOD shows 0% made by magic; Magical Capability Weak","other":"C20951"}
+{"id":"C21420","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"STATE","why":"'Play kept honest by compelled truth' implies magic enforcement; magic is low and the gambling boss sits veiled on Thieves' Guild","other":""}
+{"id":"C22429","town":"bar0-metropolis-calm-rand-5","sev":"MED","kind":"STATE","why":"Magic tab prints 'Moderate' (availability moderate, economic/infrastructure roles common) but header says magic low; Magical Capability prints Weak","other":"C20951"}
+{"id":"C20954","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"PAIR","why":"'Its merchant guild' singular; HOUSES lists Merchant guilds (50-100+) and the Institutions row says dozens of guilds","other":"C21372"}
+{"id":"C21373","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"LACKS","why":"Hans Theis titled Lord Mayor; GOVERNMENT lists only Grand Council, PEOPLE gives his title as senior guild master","other":""}
+{"id":"C22127","town":"bar0-metropolis-calm-rand-5","sev":"LOW","kind":"PAIR","why":"'does little harm' while 15% of trade is unrecorded, the treasury sees none of smuggling money, and corruption is called systemic","other":"C21929"}
+{"id":"C23104","town":"bar0-metropolis-calm-rand-5","sev":"MED","kind":"STATE","why":"Isidor Klein sits only on The Underground (veiled), not Grand Council; placed on a council committee with Ignatz Uhl","other":""}
+{"id":"C23226","town":"bar0-metropolis-calm-rand-5","sev":"MED","kind":"PAIR","why":"'supports itself and has a little in hand' but FOOD: grows 47%, imports 52%, surplus 0%, word Pressured; stores are 13.9 months","other":"C21975"}
+{"id":"DONE","lines":2454,"blocks":1,"flags":8}
