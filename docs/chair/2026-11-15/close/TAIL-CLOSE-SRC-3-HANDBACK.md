@@ -28,7 +28,8 @@ lines**. (A line count equal to the bank's is not green: the defenceGenerator fa
 | `power/factionStanding.js` | magic | NAMED: `/arcane orders/i.test(rival.faction) ? 'The arcane orders have'` is the verb's agreement with a power's NAME, not "is there magic"; no reader answers a name's grammar: the chair's | — |
 | `power/stressFactions.js` | crime | NOT IN MY LIST (a rise the predecessor did not list): `he.faction.toLowerCase().includes('thieves')`, from d99bce57a (TAIL-POWERS-B-4 batch 8, P31). NOT REACHED | — |
 | `npcGenerator.js` (guild, crime), `settlementQuickGuide.js` (market; guild swap), `computeActiveChains.js` (mill), `foodBalance.js` (mill), `viability.js` (smith, guild; bank, magic swaps) | | NOT REACHED (budget) | — |
-| `defenseDisplay.js` (crime ×2), `people/castPowers.js` (crime) | | still (no seat moving them), NOT REACHED: left for last by the brief | — |
+| `defenseDisplay.js` (crime ×2; and the DEFENCE-FACT READERS walker's four court-bench reads, ~:883 and :905–907, d5839e51) | | NOT STARTED, by the chair's word (07:32): the crime reads leave the arm with TAIL-TIES-10's cut (T29, `facts/criminalStructureKey.js` declared a crime home); the four court-bench reads go through the defence home ONLY after the chair's "THE CUT IS ON THE LINE AT <tip>": FOR A SUCCESSOR | — |
+| `people/castPowers.js` | crime | still (no seat moving it), NOT REACHED | — |
 
 PROOF CARRIED BY EACH COMMIT: the 720 births after every commit (byte-identical but the one declared move, counted);
 the readers' probe after each; eslint on the touched files, 0; `tsconfig.full.json` 167 and `tsconfig.domain-strict.json`
