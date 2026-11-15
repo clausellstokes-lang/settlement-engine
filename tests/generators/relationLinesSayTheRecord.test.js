@@ -9,7 +9,8 @@
  * - the faith's tense row says the two do not agree, not that they "keep quarrelling" (a quarrel the record may not hold);
  * - the merchants' competitive row does not say the taxes are bargained under an occupation (the occupier orders the levy);
  * - a Suppressed noble power takes the subordinate row (P1: it neither bargains nor holds a veto);
- * - the hall's tolerance of the thieves and the guard's of them say the crisis that makes the row escalating;
+ * - the guard's tolerance of the thieves says "yet" where the row is escalating (batch 3, P13(2): the hall's truce row is
+ *   'stable', so its own line stands);
  * - the hall's equilibrium line (climate alone) claims the tolerance, not that the two "leave each other alone".
  * RED AT THE BASE (40238d3ab): every refused pair; KEEP pairs green before and after.
  */
@@ -17,7 +18,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { computeFactionRelationships, govCriminalRelation, criminalMilitaryRelation } from '../../src/generators/factionDynamics.js';
+import { computeFactionRelationships, criminalMilitaryRelation } from '../../src/generators/factionDynamics.js';
 import { CAPTURE_LINES } from '../../src/data/people/dmPowerLines.js';
 import { dmPowerViewOf } from '../../src/domain/people/patronage.js';
 
@@ -34,13 +35,11 @@ const UNIT = /** @type {Array<[string, () => string, string, string]>} */ ([
   ['the merchants under the rules: the verb agrees', () => rels([P('Elder Council', 40, true), P('Merchant Guilds', 10)]), 'Merchant Guilds works', 'Merchant Guilds work under the rules Elder Council sets, and pay for a hearing'],
   ['under an occupation no bargained taxes', () => rels([P('Elder Council', 30, true), P('Merchant Guilds', 50)], ['occupied']), 'taxes are bargained over', 'run by Merchant Guilds more than by Elder Council.'],
   ['a Suppressed noble power does not bargain', () => rels([P('Elder Council', 12, true), P('Noble Houses', 8)]), 'keep enough rights of their own', 'Noble Houses still have their titles'],
-  ['the thieves under a legitimacy crisis', () => govCriminalRelation(P('Town Council', 30, true), P("Thieves' Guild", 20), 'equilibrium', { isLegitimacyCrisis: true }).narrative, 'keeps its head down', "Thieves' Guild grows bolder each season"],
   ['the guard and the thieves when contested', () => criminalMilitaryRelation(P("Thieves' Guild", 20), P('Military/Guard', 25), 'equilibrium', { isContested: true }).narrative, 'Neither pushes the other', 'Neither has yet pushed the other hard enough'],
   ['the hall at equilibrium, the climate alone', () => CAPTURE_LINES.equilibrium[0]({ ruler: 'Guild Council', agents: [], rulerCriminal: false, underworld: "Thieves' Guild" }), 'leave each other alone', "Guild Council has not set out to stamp Thieves' Guild out"],
   // KEEP (green before and after): the same rows in the state that bears the old words
   ['KEEP: merchants competitive, no occupation', () => rels([P('Elder Council', 30, true), P('Merchant Guilds', 50)]), 'Merchant Guilds works', 'taxes are bargained over, not ordered'],
   ['KEEP: a Minor noble power bargains', () => rels([P('Elder Council', 30, true), P('Noble Houses', 20)]), 'Noble Houses hold old rights', 'keep enough rights of their own'],
-  ['KEEP: the thieves with no crisis', () => govCriminalRelation(P('Town Council', 30, true), P("Thieves' Guild", 20), 'equilibrium', LEG).narrative, 'grows bolder', 'keeps its head down'],
   ['KEEP: the guard and the thieves, not contested', () => criminalMilitaryRelation(P("Thieves' Guild", 20), P('Military/Guard', 25), 'equilibrium', LEG).narrative, 'has yet pushed', 'Neither pushes the other hard enough to start a fight.'],
 ]);
 
@@ -59,7 +58,6 @@ const BIRTHS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-hamlet-5', "the commander's agreement", 'is now about as strong as'],
   ['r2s-occupied-town-2', 'keeps order and collects the taxes', 'holds the seat and collects the taxes'],
   ['r2r-metropolis-39', 'Noble Houses live under the rule of', 'Noble Houses still have their titles'],
-  ['r2r-town-37', "Thieves' Guild keeps its head down", 'grows bolder each season'],
 ]);
 /** @type {Record<string, any>} */
 const births = {};
