@@ -1,0 +1,47 @@
+{"id":"00837","town":"r2r-thorp-58","sev":"MED","kind":"LACKS","why":"Hospitality service row; HOUSES has no inn or lodging house, a thorp of 7 under siege","other":""}
+{"id":"00993","town":"r2r-thorp-58","sev":"MED","kind":"STATE","why":"thorp 'buys in what it needs' under siege; imports cover None, nothing comes in; imports list has no luxury goods","other":""}
+{"id":"00995","town":"r2r-thorp-45","sev":"MED","kind":"STATE","why":"'buys in what it needs' under siege; STATE imports cover None, nothing comes in by road or water","other":""}
+{"id":"00667","town":"r2s-under_siege-thorp-0","sev":"MED","kind":"STATE","why":"'the thorp brings in the rest' under siege; imports cover None, nothing comes in by road or ford","other":""}
+{"id":"00997","town":"r2s-under_siege-thorp-3","sev":"MED","kind":"STATE","why":"'buys in what it needs' under siege; imports cover None; imports list has no stone","other":""}
+{"id":"00504","town":"r2s-famine-thorp-1","sev":"MED","kind":"STATE","why":"'the only one in the house the crisis hits': the famine (deficit 38%, famine cut 65%) hits the whole thorp, not one person","other":""}
+{"id":"00950","town":"r2s-famine-thorp-1","sev":"MED","kind":"STATE","why":"'its members cannot agree': PEOPLE shows one person seated on Elder Council, no quarrels listed","other":""}
+{"id":"01272","town":"r2s-wartime-thorp-2","sev":"MED","kind":"STATE","why":"goods sold dear to army's buyers; trade access isolated, exports none, imports none, undefended, famine","other":""}
+{"id":"00345","town":"r2s-wartime-thorp-2","sev":"MED","kind":"STATE","why":"gives deserters food; famine deficit 72%, stores 0.1 months, no line offers food in famine; isolated thorp","other":""}
+{"id":"00442","town":"r2r-thorp-54","sev":"MED","kind":"LACKS","why":"back-room dark trade; HOUSES has no fence or black market, LAND no Black market chain; isolated, exports and imports none","other":""}
+{"id":"00214","town":"r2r-thorp-38","sev":"MED","kind":"LACKS","why":"'the note on their shop': HOUSES has no shop or market; isolated thorp of 26 under famine","other":""}
+{"id":"01136","town":"r2r-thorp-17","sev":"MED","kind":"LACKS","why":"scales tested for a trader's fraud; HOUSES has no market or trade house, exports and imports none, isolated thorp of 11","other":""}
+{"id":"00836","town":"r2s-plague_onset-thorp-0","sev":"MED","kind":"LACKS","why":"Hospitality service row; HOUSES has no inn or lodging house in a thorp of 14","other":""}
+{"id":"01110","town":"r2s-plague_onset-thorp-2","sev":"MED","kind":"LACKS","why":"'yards' and 'workshops' busy; HOUSES has none, thorp of 9; plague so busy transit and work is not ordinary","other":""}
+{"id":"00717","town":"r2r-thorp-22","sev":"MED","kind":"PAIR","why":"quarrel not visible 'unless you asked' vs safety Dangerous — Insurgency and open confrontations in 00324","other":"00324"}
+{"id":"00897","town":"r2r-thorp-10","sev":"MED","kind":"LACKS","why":"money 'made outside the law' by someone; HOUSES has no fence, outlaw or criminal house, LAND no black market, TENSIONS no crime","other":""}
+{"id":"00368","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"STATE","why":"'cannot agree what': PEOPLE seats one person on Elder Council, no quarrels listed, thorp of 7","other":""}
+{"id":"00344","town":"r2s-mass_migration-thorp-3","sev":"LOW","kind":"STATE","why":"'the whole Elder Council must agree': PEOPLE seats only one person on it, thorp of 7","other":""}
+{"id":"00606","town":"r2s-mass_migration-thorp-3","sev":"MED","kind":"LACKS","why":"'Lodging ... sold quietly'; HOUSES has no inn or lodging house, thorp of 7","other":""}
+{"id":"00289","town":"r2s-wartime-thorp-2","sev":"LOW","kind":"STATE","why":"'the whole Elder Council' answers slowly; PEOPLE seats only one person on it, thorp of 9","other":""}
+{"id":"00010","town":"r2r-thorp-9","sev":"LOW","kind":"STATE","why":"'little has happened' but TENSIONS records a live great fire with accused setters and survivors seeking blame","other":""}
+{"id":"00676","town":"r2r-hamlet-0","sev":"MED","kind":"STATE","why":"'the hamlet brings in the rest' under siege; imports cover None, nothing comes in by road","other":""}
+{"id":"00666","town":"r2s-under_siege-hamlet-0","sev":"MED","kind":"STATE","why":"'the hamlet brings in the rest' under siege; imports cover None, nothing comes in by road","other":""}
+{"id":"00992","town":"r2s-under_siege-hamlet-2","sev":"MED","kind":"STATE","why":"'the hamlet buys in what it needs' under siege; imports cover None, nothing comes in by river","other":""}
+{"id":"00990","town":"r2s-famine-hamlet-1","sev":"MED","kind":"STATE","why":"'the hamlet buys in what it needs'; trade access isolated, imports none, brought in 0%, famine","other":""}
+{"id":"00987","town":"r2s-insurgency-hamlet-2","sev":"MED","kind":"STATE","why":"'the hamlet buys in what it needs'; trade access isolated, imports none, brought in 0%, famine","other":""}
+{"id":"01108","town":"r2s-plague_onset-hamlet-0","sev":"MED","kind":"LACKS","why":"'yards' as busy as 'workshops'; HOUSES has no yard or workshop; plague conditions, not busy ordinary work","other":""}
+{"id":"01204","town":"r2r-hamlet-34","sev":"LOW","kind":"LACKS","why":"'those who keep watch ... changed their rounds'; DEFENCE says watch: none (only a Citizen militia stands)","other":""}
+{"id":"01265","town":"r2r-hamlet-13","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences keeps Qaryahsaray from more than tolerating'","other":""}
+{"id":"00008","town":"r2r-hamlet-12","sev":"LOW","kind":"STATE","why":"'little has happened' but TENSIONS records a live plague-years quarrel (quarantine hardliners, the bereaved and the blamed)","other":""}
+{"id":"00363","town":"r2r-hamlet-41","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as one power's name beside a verb: 'Military/Guard carries them out'","other":""}
+{"id":"00964","town":"r2r-hamlet-18","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as one power's name beside a verb: 'The Military/Guard is at odds with it'","other":""}
+{"id":"00615","town":"r2r-hamlet-18","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as one power's name as a sentence subject","other":""}
+{"id":"01005","town":"r2r-village-55","sev":"MED","kind":"STATE","why":"'the village buys in what it needs' under siege; imports cover None, nothing comes in by road","other":""}
+{"id":"00665","town":"r2s-under_siege-village-1","sev":"MED","kind":"STATE","why":"'the village brings in the rest' under siege; imports cover None, nothing comes in by river","other":""}
+{"id":"00679","town":"r2s-under_siege-village-3","sev":"MED","kind":"STATE","why":"'the village brings in the rest' under siege; imports cover None, nothing comes in by river","other":""}
+{"id":"00369","town":"r2s-under_siege-village-1","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Religious Authorities tells people'","other":""}
+{"id":"00505","town":"r2s-famine-village-1","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as one power's name in a sentence: 'Emiko Guo of Military/Guard'","other":""}
+{"id":"00616","town":"r2s-famine-village-1","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as one power's name as a sentence subject","other":""}
+{"id":"00370","town":"r2s-famine-village-1","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as one power's name as a sentence subject","other":""}
+{"id":"00681","town":"r2s-famine-village-1","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used twice as one power's name beside verbs","other":""}
+{"id":"01034","town":"r2r-village-50","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as one power's name in a sentence: 'at odds with the Military/Guard'","other":""}
+{"id":"01053","town":"r2s-infiltrated-village-3","sev":"MED","kind":"STATE","why":"militia 'stretched thin', weighing a levy or mercenaries; STATE safety is Very Safe and DEFENCE shows hired none","other":""}
+{"id":"00068","town":"r2s-monster_pressure-village-3","sev":"MED","kind":"STATE","why":"'trading the harvest it needs' for a perimeter held by the able-bodied; FOOD shows surplus 17%, DEFENCE shows no walls and no militia","other":""}
+{"id":"00261","town":"r2s-insurgency-village-3","sev":"LOW","kind":"STATE","why":"'wartime contracts' threat exaggerated; CRISIS is Insurgency (Rebellion), no war recorded; PAST has a siege 46 years ago only","other":""}
+{"id":"00614","town":"r2s-slave_revolt-village-3","sev":"MED","kind":"BROKEN","why":"slash-joined label 'Military/Guard' used as one power's name as a sentence subject","other":""}
+{"id":"DONE","lines":4253,"blocks":204,"flags":46}
