@@ -67,7 +67,9 @@ describe('(b) a rival of the density law carries its own standing, never its hos
     const s = born('rw3-metropolis-under_siege-1');
     const bloc = s.powerStructure.factions.find((f) => f.faction === 'The Garrison Bloc');
     expect(bloc?.contestsNiche, 'premise: the bloc is the density law\'s rival').toBe('Military/Guard');
-    expectAbsentWithAnchor(String(bloc.desc), 'is narrow', 'keeps order reliably', 'the rival\'s own settled description');
+    // 2026-11-15 BAR2-PEOPLE-4: the anchor RE-KEYED BY ITS TEXT, the same line: batch B's declared cure (ruling PT3) made
+    // "Well-funded city watch; it keeps order reliably …" read "City watch; it answers for keeping order …" (claimStanding.js)
+    expectAbsentWithAnchor(String(bloc.desc), 'is narrow', 'answers for keeping order', 'the rival\'s own settled description');
   }, 60_000);
 });
 
