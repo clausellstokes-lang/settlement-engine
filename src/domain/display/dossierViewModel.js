@@ -27,7 +27,8 @@ import { cleanNum } from './placeholders.js';
 import { pickVariant } from '../../kernel/proseHash.js';
 import { avgScore } from './defenseScoreBands.js';
 import { deriveMagicProfile } from '../magicProfile.js';
-import { deriveMagicReliance, magicDialAbsent, magicWorksAt } from '../magicReliance.js';
+import { deriveMagicReliance, magicDialAbsent, magicWorksAt, MAGIC_RELIANCE_WORD } from '../magicReliance.js';
+import { magicDependentsShown, magicHeadlineWord, relianceReadingShown } from './magicProvisionShown.js'; // BAR2-LABELS LB1: the magic words read what the page shows magic doing
 import { formatCount } from '../formatNumber.js';
 // The export-posture derivation lives in its own dependency-free leaf so the
 // EAGER deriveSystemState.js can reach it without dragging this whole display
@@ -566,7 +567,8 @@ export function deriveMagicPosture(settlement) {
     // world keeps its sentence, because there the line IS the page.
     display: m.magicExists === false
       ? 'Magic does not function in this world'
-      : String(m.availability || '').charAt(0).toUpperCase() + String(m.availability || '').slice(1),
+      // BAR2-LABELS LB1: the headline is the record's own level (the availability prints in the envelope below it)
+      : magicHeadlineWord(settlement, m.availability),
     roleLines: Object.entries(m.roles).map(([role, band]) => `${MAGIC_ROLE_LABEL[role] || role} role: ${band}`),
   };
 }
@@ -722,13 +724,17 @@ export function magicRowsGated(settlement, rows, keyOf = (row) => /** @type {{ k
  */
 export function deriveMagicRelianceView(settlement) {
   const r = deriveMagicReliance(/** @type {import('../magicReliance.js').MagicRelianceSource} */ (/** @type {unknown} */ (settlement)));
+  // BAR2-LABELS LB1 (the chair's ruling of 2026-11-15): the reading the page prints is never above what the page shows
+  // magic doing here (`magicProvisionShown.js :: relianceReadingShown`; a chain note the card does not print is not a
+  // dependent). The record's reading is not touched.
+  const reading = relianceReadingShown(settlement, r);
   return {
-    reading: r.reading,
-    word: r.word,
+    reading,
+    word: MAGIC_RELIANCE_WORD[reading] ?? r.word,
     shown: magicRowsGated(settlement, [{ key: 'magicReliance' }]).length > 0,
     practitioners: r.practitioners,
-    dependents: r.dependents,
-    reliesOnMagic: r.reading === 'relied-upon' || r.reading === 'integral',
+    dependents: reading === r.reading ? r.dependents : magicDependentsShown(settlement),
+    reliesOnMagic: reading === 'relied-upon' || reading === 'integral',
   };
 }
 

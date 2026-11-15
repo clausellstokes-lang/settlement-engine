@@ -92,7 +92,7 @@ const TWIN = /** @type {const} */ ([
 /** [seed, tab, the true sibling that must still print] (green before and after) */
 const KEEP = /** @type {const} */ ([
   ['r2r-thorp-0', 'magic', 'Reliance on magic: None'],
-  ['r2r-village-25', 'magic', 'Reliance on magic: Relied upon'],
+  ['r2r-village-25', 'magic', 'Reliance on magic: None'], // BAR2-LABELS LB1 (2026-11-15): its one dependent a food note the card does not print (no provision): re-keyed
   ['r2s-famine-town-2', 'economics', 'Many households go short, and hunger is already here.'],
   ['r2r-town-6', 'economics', 'Law enforcement, patrol and gate control here depend on iron brought in'],
   ['r2s-famine-town-1', 'economics', 'Contributes to Entrepôt Trade - 13% of income'], // the same card: 13 -> 14 at 837cad90 (TAIL-DISPLAY-ECON-5's re-key), back to 13 on JOIN-9's points (settled at the 17e38c547 merge)

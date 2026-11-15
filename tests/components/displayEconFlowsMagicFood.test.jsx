@@ -63,7 +63,8 @@ const NOT = /** @type {const} */ ([
   ['r2r-metropolis-11', 'economics', 'Blessed stores; divine provision fills the gap', 'silent: the food record credits no provision', 'Arcane fabrication provides processed goods from alternative sources'],
   ['r2r-town-9', 'economics', 'Blessed stores; divine provision fills the gap', 'Blessed stores; divine provision eases the shortfall', 'Blessed stores; divine provision eases the shortfall'],
   ['r2s-famine-city-2', 'economics', 'Druidic cultivation supplements depleted farmland', 'Druidic cultivation supplements the depleted ground', 'Druidic cultivation supplements the depleted ground'],
-  ['r2r-village-25', 'magic', 'Blessed stores; divine provision fills the gap', 'silent: the card\'s own note, none', 'Reliance on magic: Relied upon'],
+  // BAR2-LABELS LB1 (2026-11-15): the reliance rested on this very note, which the card does not print (no provision): re-keyed to the reading the page now bears
+  ['r2r-village-25', 'magic', 'Blessed stores; divine provision fills the gap', 'silent: the card\'s own note, none', 'Reliance on magic: None'],
 ]);
 /** [seed, tab, the twin true in the state that made the old line false] (new or newly reached lines: red at the base by design) */
 const TWIN = /** @type {const} */ ([
@@ -74,7 +75,7 @@ const TWIN = /** @type {const} */ ([
 const KEEP = /** @type {const} */ ([
   ['r2r-metropolis-37', 'economics', 'Druidic cultivation supplements depleted farmland'],
   ['r2r-thorp-0', 'magic', 'Reliance on magic: None'],
-  ['r2r-village-25', 'magic', 'Reliance on magic: Relied upon'],
+  ['r2r-village-25', 'magic', 'Reliance on magic: None'], // BAR2-LABELS LB1 (2026-11-15): re-keyed, as above
 ]);
 
 afterEach(cleanup);

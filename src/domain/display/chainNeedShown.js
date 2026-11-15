@@ -92,5 +92,21 @@ export function chainNeedLine(chain, record, first = true) {
       ? `${Svcs} here run on stored ${listed(goods, 'and')}${first ? `: no trade road reaches ${name}` : ''}.`
       : `${Svcs} here depend on ${listed(goods, 'and')} brought in by magic${first ? `: no trade road reaches ${name}` : ''}.`;
   }
-  return `${Svcs} here depend on ${listed(goods, 'and')} brought in${first ? ', which a siege, a closed road or a blockade would cut off' : ''}.`;
+  // BAR2-LABELS-2 (LB6, C26982): food "brought in" only where the food record brings food in (`foodSecurity.importPct`):
+  // where it is 0, all the town eats is grown here and its grain or livestock is no need from outside.
+  const calm = foodBroughtIn(record) ? goods : goods.filter((g) => !FOOD_GOOD.test(g));
+  if (calm.length === 0) return '';
+  return `${Svcs} here depend on ${listed(calm, 'and')} brought in${first ? ', which a siege, a closed road or a blockade would cut off' : ''}.`;
+}
+
+/** The need's goods that are food (the census's 720: "grain", "livestock or game"). */
+const FOOD_GOOD = /^(?:grain|livestock|game|fish|flour|meat)\b/;
+
+/**
+ * Does the food record bring food in (BAR2-LABELS-2 LB6): `economicState.foodSecurity.importPct` above 0, or not stated.
+ * @param {unknown} record @returns {boolean}
+ */
+function foodBroughtIn(record) {
+  const pct = /** @type {{ economicState?: { foodSecurity?: { importPct?: unknown } | null } | null }} */ (record).economicState?.foodSecurity?.importPct;
+  return typeof pct !== 'number' || pct > 0;
 }

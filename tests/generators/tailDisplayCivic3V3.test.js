@@ -42,7 +42,9 @@ const CURED = [
   ['r2s-wartime-thorp-2', "Whatever the army's buyers will take", 'deserter networks: Deserters passing through need shelter and discretion, and some here give both.'],
   ['r2s-wartime-thorp-2', 'need food and discretion', 'need shelter and discretion, and some here give both.'],
   ['r2s-mass_migration-thorp-3', 'Lodging and a way onward', 'black market passage: A way onward, sold quietly to newcomers who were told to move on.'],
-  ['r2r-town-9', 'keep what rounds they can while the supplies they need are cut off', 'The garrison and town watch are well paid, well equipped and patrol properly.'],
+  // 2026-11-15 BAR2-LABELS-2 LB4 (the chair's grant LB7): the anchor re-keyed by its identity, the same slot of the same town. r2r-town-9's military
+  // gate is 0.88 (Moderate), so its guard line is the irregular-pay line now ("well paid" only at a gate of 1, safetyLineTruth.js :: payTruth).
+  ['r2r-town-9', 'keep what rounds they can while the supplies they need are cut off', 'The garrison and town watch are disciplined but resource-constrained: motivated with inadequate equipment and irregular pay.'],
 ];
 // [seed, a true sibling that must still print]
 const KEPT = [

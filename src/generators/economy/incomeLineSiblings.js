@@ -84,6 +84,8 @@ export const TITHES_RENTS_PLAIN_LINE = 'Mandatory tithes, and rents from land th
 export const TIMBER_LINE = 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.';
 export const TIMBER_MANAGED_LINE = 'Local forest provides sustainable timber revenue; managed felling keeps production consistent.';
 export const TIMBER_PLAIN_LINE = 'Local forest provides timber revenue.';
+/** BAR2-LABELS LB6: the timber line's twin where a sawmill stands and no managed woodland does (vetoable by the owner). */
+export const TIMBER_SAWN_LINE = 'Local forest provides timber revenue, and the timber is sawn here.';
 export const TIMBER_BOUGHT_LINE = 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.';
 /** The market-day line, declared on its own text (it names the market; economicState.js prints its literal, registered there). */
 const MARKET_DAY_SET = Object.freeze([Object.freeze({ text: 'Market day stall fees and toll collection on goods entering the market.', needs: Object.freeze(['market']), excludes: Object.freeze(['crisis: under_siege']) })]);
@@ -144,6 +146,7 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: TIMBER_LINE }),
     Object.freeze({ text: TIMBER_MANAGED_LINE, twinOf: TIMBER_LINE }),
     Object.freeze({ text: TIMBER_PLAIN_LINE, twinOf: TIMBER_LINE }),
+    Object.freeze({ text: TIMBER_SAWN_LINE, twinOf: TIMBER_LINE }),
   ]),
   [TIMBER_BOUGHT_LINE]: Object.freeze([Object.freeze({ text: TIMBER_BOUGHT_LINE, excludes: Object.freeze([SIEGE]) })]),
   [MARKET_DAY_LINE]: MARKET_DAY_SET,
@@ -203,7 +206,9 @@ export function trueIncomeDesc(desc, f) {
     case QUARRY_LINE: return !has(/quarr/) || f.besieged ? '' : sold(/stone|marble|granite|slate/i) ? desc : QUARRY_OWN_LINE;
     case MASONS_LINE: return has(/mason|stonecut/) && !f.besieged && bought(/stone|masonry|marble/i) ? desc : '';
     case TITHES_RENTS_LINE: return f.top ? desc : TITHES_RENTS_PLAIN_LINE;
-    case TIMBER_LINE: return has(/sawmill|lumber/) ? desc : f.managedForest ? TIMBER_MANAGED_LINE : TIMBER_PLAIN_LINE;
+    // BAR2-LABELS LB6 (C16557): "managed felling" only where the managed woodland stands (the sibling's form); a sawmill
+    // without it saws the timber and claims no sustained yield.
+    case TIMBER_LINE: return has(/sawmill|lumber/) ? (f.managedForest ? desc : TIMBER_SAWN_LINE) : f.managedForest ? TIMBER_MANAGED_LINE : TIMBER_PLAIN_LINE;
     case TIMBER_BOUGHT_LINE: case MARKET_DAY_LINE: return f.besieged ? '' : desc;
     default: return desc;
   }

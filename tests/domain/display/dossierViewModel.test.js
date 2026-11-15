@@ -118,7 +118,7 @@ describe('deriveMagicPosture (Wave 7 — MagicProfile surfaced)', () => {
     expect(m.cost).toBe('costly');
     expect(m.risk).toBeTruthy();
     // The posture WORD since the UX consolidation (T2-26): the four facets live in the envelope.
-    expect(m.display).toBe('Moderate');
+    expect(m.display).toBe('Medium'); // BAR2-LABELS LB1 (2026-11-15): the headline is the record's own level band, the availability in the envelope
   });
 
   it('emits the four role lines', () => {
