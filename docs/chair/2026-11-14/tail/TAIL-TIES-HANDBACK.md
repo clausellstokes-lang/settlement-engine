@@ -600,3 +600,15 @@ Here is what was measured, for the successor (each cure is its own commit, and t
 - `engineCoreLazyEdge`: 3 of 3 green (plain and FLAGGED graph).
 - eslint on the 3 files: 0. Births after: byte-identical (`7506bc63…7833`, 720, 0 errors).
 - The readers' tests (13 files): only reds are named-not-mine, identical at the merge tip: `tests/data/w2FixData6Rows.test.js` (3: r2r-thorp-0 'Harvest' vs 'Agricultural Rents', r2r-town-11 the Mine line, one more of W2-FIX-DATA-8) and the presumedThings walker above.
+
+**Cut 3 (CONFIRMED): the `data <-> engine-core` chunk cycle (`dmPowerLines.js:27` -> `domain/display/powerSentenceName.js`).** The leaf's body moved verbatim to `src/data/people/powerSentenceName.js` (no imports; the data layer reading a data leaf; executed `manualChunks`: `data`, the eager table chunk, by the derivation). `domain/display/powerSentenceName.js` keeps its header and re-exports all five names (`PROSE_FORMS`, `powerSentenceName`, `powerNameAfterArticle`, `withPowerSentenceNames`, `powerPossessive`), so no other caller changes; in `dmPowerLines.js` only the import path on line 27 changed.
+- eslint on the 3 files: 0. Births after: byte-identical (`7506bc63…7833`, 720, 0 errors).
+
+**THE BOOT IS GREEN at this cut** (`npm run build` and the flagged build `VITE_ENGINE_REMOTE=true … --outDir node_modules/.cache/engine-remote-dist`, both exit 0):
+- `scripts/boot-smoke.mjs`: plain `PASS` (602/602 chunks initialise, the shell mounts, 19,354 B under `#root`); FLAGGED `PASS` (599/599).
+- `tests/build/bootSmoke` (VERIFY_DIST=1, VERIFY_ENGINE_REMOTE_DIST=1), `engineChunkLazy`, `cultureProfilesLazy`, `tests/architecture/engineCoreLazyEdge`: green.
+- `node scripts/wiring-census.mjs --dry` runs to its end under plain node (exit 0). It says its committed register is STALE (46 rows, the stamped shas of three stateProse files): that is other lanes' drift. Nothing was written.
+- **NAMED, still red, not these cuts' bytes:**
+  - `vendorPdfLazy` "the engine chunk ... remains large": 857,204 against the strict ceiling 726,454. The merge tip WITHOUT the cuts builds the engine chunk at 856,952 (a fresh build of the base tree), so the cuts add 252 B and the ceiling was outgrown by the joined lanes since 11-09.
+  - `vendorPdfLazy` first-paint closure: raw 1,164,844 against the budget 1,121,260, Brotli 310,922 against 299,985, and gzip also over. The cuts SHRANK it: at the merge tip engine-core was 349,979 and data 204,325, and coherence-lazy and data-lazy rode first paint; after the cuts engine-core is 277,712, data is 174,165, and both lazy chunks are out. The remaining 43,584 B over is what the join's line added to the eight eager chunks since TAIL-TIES-5's probe. It needs a trim, or a re-record by the owner's ruling, and no pin was touched. See the attribution below.
+  - `layerBoundaries` cycle: after cut 1 the old `defenseDisplay <-> factsOf` 2-cycle reads as the SCC `defenseDisplay | governanceAccount | faithReading | factsOf` (cut 4's ground).
