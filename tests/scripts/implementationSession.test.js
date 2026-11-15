@@ -1,4 +1,3 @@
-import { execFileSync } from 'node:child_process';
 import {
   chmodSync,
   existsSync,
@@ -39,18 +38,19 @@ import {
   writeSessionHeartbeat,
   writeSessionState,
 } from '../../scripts/implementation-session.mjs';
+import { fixtureGit } from '../helpers/gitFixture.js';
 
 const MANIFEST_PATH = 'docs/implementation/PACKET_MANIFEST.json';
 const INDEX_PATH = 'docs/implementation/INDEX.md';
 const PACKET_PATH = 'docs/implementation/packets/IA-2T.md';
 const roots = [];
 
+// Every fixture git in this file goes through the shared door (tests/helpers/gitFixture.js):
+// an explicit cwd on the temp directory and an environment no git hook can reach through.
+// The scripts under test spawn git themselves, with this worker's own environment — which
+// tests/setup/gitEnvIsolation.js has already cleared of every repository variable.
 function git(root, args) {
-  return execFileSync('git', args, {
-    cwd: root,
-    encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'pipe'],
-  }).trim();
+  return fixtureGit(root, args).trim();
 }
 
 function write(root, path, value) {
