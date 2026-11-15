@@ -38,7 +38,9 @@ describe('the history hooks declare what their event does not guarantee', () => 
   // exclude an elders' council too (re-keyed by cause; still 20 rows).
   // TAIL-HISTORY batch 1 (2026-11-15, the chair's Y1, Y7; READ-ALL 22261, 02538, B02462): the external threat's two war
   // hooks ("wartime contracts", "the war party is suppressing") exclude `war: peace` (re-keyed by identity: 20 → 22 rows).
-  it('the twenty-two declaring rows carry their atoms, every atom declarable', () => {
+  // TAIL-HISTORY-5 (2026-11-15, the chair's Y17; the exports' read X9 03015): the outside debt's creditor's agent "in town"
+  // excludes `crisis: under_siege` (re-keyed by identity: 22 → 23 rows).
+  it('the twenty-three declaring rows carry their atoms, every atom declarable', () => {
     const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
     expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
       'succession_crisis: no ruler: council, no ruler: elder, no crisis: succession_void',
@@ -51,6 +53,7 @@ describe('the history hooks declare what their event does not guarantee', () => 
       'external_threat: no war: peace', // TAIL-HISTORY batch 1: "…the war party is suppressing"
       'resource_scarcity: market',
       'crime_wave: watch',
+      'outside_debt: no crisis: under_siege', // TAIL-HISTORY-5: "A creditor's agent is in town…"
       'occupation_legacy: no crisis: occupied',
       'market_crash: market',
       'plague_years: healer',

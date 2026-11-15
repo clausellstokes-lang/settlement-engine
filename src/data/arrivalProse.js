@@ -130,17 +130,23 @@ export const ARRIVAL_SENSES = Object.freeze([
     lines: [
       // CENSUS-2f, R-AP: the picker reaches `fish` by a fish market's or a fishmonger's NAME, which guarantees no
       // catch (soak1k-152), so every line here declares `fish` (the food record's source) and a refused beat redraws.
-      { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'] },
-      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market'] }, // W2-FIX-DATA: a price is shouted at a market (c05)
-      { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'] },
+      { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2) and its 04:08 note: ONE CONDITION FOR THE WHOLE FAMILY of fish-and-catch lines): no catch where the food failed or under a siege (0 of the 720 at d7921a40c; the family's measure is in the hand-back)
+      { text: () => 'Gulls quarrel over the empty fish stalls, and there is no morning catch to smell.', twinOf: "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there
+      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market'], excludes: ['crisis: hunger'] }, // W2-FIX-DATA: a price is shouted at a market (c05); TAIL-HISTORY-5 (Y17, the family's one condition): no catch to sell where the food failed or under a siege
+      { text: () => 'A fishmonger stands behind an empty slab, with nothing to shout a price for.', twinOf: 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there
+      { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2), 2026-11-15; the bar's readers at 5d1e3096b): no catch under a siege or where the food failed (5 of 11 towns)
+      { text: () => 'Nets hang drying on poles, and they have brought in little for a long while.', twinOf: 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there; a twin keeps the slot and spends no redraw
       { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02382): no fresh catch under a siege or where the food failed
     ],
     dominant: [
       // CENSUS-2f, R-AP amended: the dominant pool is picked by the exports' fish trade, which guarantees the trade and no
       // catch; the racks of catch and the gutting declare `fish`, the gulls' water `navigable`, both where both.
-      { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish'] },
-      { text: (n) => `Half of ${n} seems to be gutting, salting or selling fish.`, needs: ['fish'] },
-      { text: () => 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 04287): "stacked for the carts" printed under a siege, when no cart leaves; reworded to name no carts, so no condition and no new line in the pool (VETOABLE wording, the owner's)
+      { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2), 2026-11-15; the bar's readers at 5d1e3096b): a line a crisis can make false is not colour (Y6): no catch drying where the fish failed or under a siege (4 of 36 towns)
+      { text: () => 'The drying racks along the way in stand nearly bare, and only the smell of salt and old catch is left.', twinOf: 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there, on the same slot
+      { text: (n) => `Half of ${n} seems to be gutting, salting or selling fish.`, needs: ['fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): the same (1 of 27 towns)
+      { text: (n) => `Half of ${n} has worked fish all its life, and there is almost no fish to work.`, twinOf: 'Half of {name} seems to be gutting, salting or selling fish.', needs: ['fish', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there
+      { text: () => 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 04287): "stacked for the carts" printed under a siege, when no cart leaves; reworded to name no carts, so no condition and no new line in the pool (VETOABLE wording, the owner's); TAIL-HISTORY-5 (Y17): no stacked salt fish where the food failed or is cut off (5 of 18 towns)
+      { text: () => 'Empty salt barrels stand stacked by the water, and even the gulls have given up on them.', twinOf: 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there
     ] },
   { key: 'cloth',
     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],
@@ -152,7 +158,8 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A dyer walks past with hands stained to the wrist.',
     ],
     dominant: [
-      { text: (n) => `The clatter of looms follows you through ${n}, from one shutter to the next.`, crisis: ['any'] },
+      { text: (n) => `The clatter of looms follows you through ${n}, from one shutter to the next.`, excludes: ['crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-5 (Y17 (3)): not the whole place weaving as usual under a siege
+      { text: (n) => `Here and there a loom still clatters behind a shutter in ${n}, though no cloth has gone out in weeks.`, twinOf: 'The clatter of looms follows you through {name}, from one shutter to the next.', needs: ['crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-5 (Y17): its twin under a siege
       { text: () => 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', excludes: ['crisis: under_siege', 'route: isolated'], crisis: ['any'] }, // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no road out where no route reaches (1 of 22)
       { text: () => 'Bolts of cloth and bales of wool are stacked high in the workshops, more than the place can wear.', twinOf: 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', needs: ['route: isolated'], crisis: ['any'] }, // TAIL-HISTORY-3 (Y14): its twin where no route reaches; a twin keeps the slot and spends no redraw (arrivalScene.js :: drawAdmitted), so no later beat moves (VETOABLE wording)
       { text: () => 'Bolts of cloth hang drying in long bright strips across every yard.', crisis: ['any'] },
@@ -352,13 +359,15 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   steppe: [
     { text: () => 'Herders show their animals at the edge of the settlement, where herders and townsfolk meet.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no horse trade where no horse is kept (13 of 21 towns)
     { text: () => 'Felt tents stand beside the houses, and their owners seem at home in either.', crisis: ['any'] },
-    { text: () => 'A caravan broker shouts terms to a line of laden animals and the people leading them.', crisis: ['any'] },
+    { text: () => 'A caravan broker shouts terms to a line of laden animals and the people leading them.', needs: ['market'], excludes: ['crisis: under_siege', 'route: isolated'], crisis: ['any'] }, // TAIL-HISTORY-5 (the chair's Y17 (3), 2026-11-15; the bar's readers at 5d1e3096b): a broker shouts terms where a market stands and a road is open (6 of 16 towns had no market)
+    { text: () => 'A pair of pack animals stands in a yard, unladen, while their keeper mends a strap.', twinOf: 'A caravan broker shouts terms to a line of laden animals and the people leading them.', crisis: ['any'] }, // TAIL-HISTORY-5 (Y17): its twin where the broker is refused; it claims no trade, so it is true in every state the original refuses
     { text: () => 'Guests are greeted with a cup before a word of business is spoken.', crisis: ['any'] },
   ],
   greek: [
     { text: () => 'Two citizens argue a point of law loudly enough for a crowd to gather.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.', excludes: ['crisis: occupied'], crisis: ['any'] },
-    { text: () => 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank'], crisis: ['any'] }, // COHERENCE-PRESUME: it printed in towns with no money changer
+    { text: () => 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // COHERENCE-PRESUME: it printed in towns with no money changer; TAIL-HISTORY-5 (Y17 (3)): no exchange as usual under a siege
+    { text: () => 'A money changer sits at his table with little to do, counting the same coins from many mints again.', twinOf: 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank', 'crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-5 (Y17): its twin under a siege
     { text: () => 'A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.', needs: ['institution: tavern', 'tier: ≥ village'], crisis: ['any'] }, // W2-FIX-DATA-12 (REVIEW-R2-CODE-A, the chair's 10:57): a wine shop stands on the roster, and a thorp or hamlet has none to stand drinks in
   ],
   mixed: [
