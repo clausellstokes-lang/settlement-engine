@@ -7,7 +7,12 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **43**: schema 42's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * `BASELINE_SCHEMA` is **44**: schema 43's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * UNCHANGED, re-governed to THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd): one lawful shrink and one row recorded as uncured
+ * instrument erosion. Its full rationale lives beside `FINAL_PASS_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_CLOSE_ROUND_BASELINE_SCHEMA` is **43**: schema 42's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
  * UNCHANGED, re-governed to THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15; the
  * chair's record 456): ONE rung, the round's causes, every moved row with one — the lawful shrinks retire with
  * cause, the rows the detector lost while their reads still stand are recorded as UNCURED INSTRUMENT EROSION, and
@@ -655,7 +660,10 @@ export const RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA = 41;
  *  of 2026-11-14/15 (OR2). Never redefined, never deleted, so a schema-42 PREDECESSOR is still validated as
  *  schema 42. */
 export const RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA = 42;
-export const BASELINE_SCHEMA = 43;
+/** The RETIRED close-of-round definition — schema 44's predecessor. Never redefined, never deleted, so a schema-43
+ *  PREDECESSOR is still validated as schema 43. */
+export const RETIRED_CLOSE_ROUND_BASELINE_SCHEMA = 43;
+export const BASELINE_SCHEMA = 44;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1470,10 +1478,18 @@ export function validateSchema42Baseline(baseline) {
   );
 }
 
-/** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
- *  so the retired rungs above keep validating their own numbers while this one
- *  always names the authority. */
+/** The RETIRED authority — schema 43's tagged envelope (the close of the round), re-governed by schema 44 to the
+ *  close's final pass. Re-bound to its own LITERAL. */
 export function validateSchema43Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_CLOSE_ROUND_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The LIVE envelope validator, bound to `BASELINE_SCHEMA` (schema 44, the close's final pass). */
+export function validateSchema44Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

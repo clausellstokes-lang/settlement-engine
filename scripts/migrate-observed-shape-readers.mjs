@@ -197,7 +197,13 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 42 -> 43 (LIVE)   THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15; the
+ *   schema 43 -> 44 (LIVE)   THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd): one rung, two rows, each with its cause — the
+ *     quick guide's dead culture fallback struck at its root (WR2, d8b08402f) retires as a lawful shrink, and the
+ *     liveness predicate's `_worldPulseInactive` read, lost by the detector when SR5 (9cade66ce) passed the defence
+ *     buckets' entries to it, is RECORDED AS UNCURED INSTRUMENT EROSION; topology, tag law, roster and bank (78/52)
+ *     unchanged. Its full rationale lives beside `FINAL_PASS_TARGET_SCHEMA`.
+ *
+ *   schema 42 -> 43 (RETIRED) THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15; the
  *     chair's record 456): one rung, the round's causes, every moved row with one — the lawful shrinks retire with
  *     cause, the rows the detector lost while their reads still stand are RECORDED AS UNCURED INSTRUMENT EROSION,
  *     and the round's new reads are ADMITTED BY CAUSE with class and lane; topology, tag law, roster and bank
@@ -390,6 +396,7 @@ import {
   validateSchema40Baseline,
   validateSchema41Baseline,
   validateSchema42Baseline,
+  validateSchema43Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1834,6 +1841,21 @@ export const AGREE_TIER_SEED_TARGET_SCHEMA = 42;
  *  lands next. */
 export const CLOSE_ROUND_TARGET_SCHEMA = 43;
 
+/* ⭐⭐ THE SCHEMA 43 → 44 RUNG — THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd), made by TAIL-CLOSE-REACH-2: "a second small
+ *  rung only if the first's law requires it for the new drift". It does: one of the two moved rows is a read the
+ *  detector LOST while it still stands, and a plain shrink-only --write would bank that loss as a repair.
+ *
+ *  THE CAUSES (the executed corpus did NOT move: its meta equals the schema-43 mint's exactly):
+ *    · `culture on settlement` in src/domain/summary/settlementQuickGuide.js — class R, a LAWFUL SHRINK: the read is
+ *      gone from the file, struck at its root by TAIL-CLOSE-SRC-4 · WR2 (d8b08402f, the chair's ruling WR2);
+ *    · `_worldPulseInactive on institutions` in src/domain/institutions/institutionRoster.js — class E, UNCURED
+ *      INSTRUMENT EROSION, recorded as such: the read still stands (:40, isLiveInstitution) and the file is unchanged;
+ *      TAIL-CLOSE-SRC-5 · SR5 (b) (9cade66ce) passes the defence buckets' entries to isLiveInstitution, the
+ *      parameter now binds a second shape and the ambiguity guard drops the finding (CONFIRMED: the merged tip with
+ *      only that call undone scans the row back). Not class-(a); a cure is a detector act.
+ *  Schema 43's topology, tag law, roster and bank (78/52) UNCHANGED; the delta is the THREE bookkeeping paths. */
+export const FINAL_PASS_TARGET_SCHEMA = 44;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1920,6 +1942,7 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [PLAYED_WORLDS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
   [AGREE_TIER_SEED_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
   [CLOSE_ROUND_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [FINAL_PASS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2585,6 +2608,13 @@ export const CLOSE_ROUND_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-43 → 44 delta: the THREE bookkeeping paths (no detector source moved at the final pass). */
+export const FINAL_PASS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2667,6 +2697,8 @@ const AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY =
   'schema-41-to-42-tier-seed-v1';
 const CLOSE_ROUND_SCANNER_TRANSITION_POLICY =
   'schema-42-to-43-close-of-round-v1';
+const FINAL_PASS_SCANNER_TRANSITION_POLICY =
+  'schema-43-to-44-final-pass-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2728,6 +2760,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [PLAYED_WORLDS_TARGET_SCHEMA]: PUBLIC_PROSE_TARGET_SCHEMA,
   [AGREE_TIER_SEED_TARGET_SCHEMA]: PLAYED_WORLDS_TARGET_SCHEMA,
   [CLOSE_ROUND_TARGET_SCHEMA]: AGREE_TIER_SEED_TARGET_SCHEMA,
+  [FINAL_PASS_TARGET_SCHEMA]: CLOSE_ROUND_TARGET_SCHEMA,
 });
 
 /**
@@ -2844,6 +2877,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [PLAYED_WORLDS_TARGET_SCHEMA]: validateSchema41Baseline,
   // The schema-43 rung's own predecessor (STYLE-2-MERGE point 47, the tier seed), validated as schema 42.
   [AGREE_TIER_SEED_TARGET_SCHEMA]: validateSchema42Baseline,
+  // The schema-44 rung's own predecessor (the close of the round, OR2), validated as schema 43.
+  [CLOSE_ROUND_TARGET_SCHEMA]: validateSchema43Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -3367,6 +3402,12 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [FINAL_PASS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: FINAL_PASS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: FINAL_PASS_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
   [CLOSE_ROUND_TARGET_SCHEMA, Object.freeze({
@@ -4582,7 +4623,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CLOSE_ROUND_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : FINAL_PASS_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4599,8 +4640,9 @@ export function run(argv = process.argv.slice(2)) {
     PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA,
     TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA,
     TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA,
-    AGREE_TIER_SEED_TARGET_SCHEMA, CLOSE_ROUND_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${CLOSE_ROUND_TARGET_SCHEMA} (live close-of-round leaf),`
+    AGREE_TIER_SEED_TARGET_SCHEMA, CLOSE_ROUND_TARGET_SCHEMA, FINAL_PASS_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${FINAL_PASS_TARGET_SCHEMA} (live final-pass leaf),`
+      + ` ${CLOSE_ROUND_TARGET_SCHEMA} (retired close-of-round leaf),`
       + ` ${AGREE_TIER_SEED_TARGET_SCHEMA} (retired tier-seed leaf),`
       + ` ${PLAYED_WORLDS_TARGET_SCHEMA} (retired played-worlds leaf),`
       + ` ${PUBLIC_PROSE_TARGET_SCHEMA} (retired public-prose leaf),`

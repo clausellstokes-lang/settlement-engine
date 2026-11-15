@@ -116,11 +116,12 @@ import {
   RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
   RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
   RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
+  RETIRED_CLOSE_ROUND_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema43Baseline,
+  validateSchema44Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -304,7 +305,10 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     (the chair's ruling OR2 of 2026-11-15; the chair's record 456): one rung, the round's causes, every row
  *     with one and its class: the lawful shrinks retire with cause, the rows the detector lost while their reads
  *     still stand are recorded as UNCURED INSTRUMENT EROSION, the round's new reads are admitted by cause with
- *     class and lane; nothing declared, the bank 78/52. THE LIVE AUTHORITY.
+ *     class and lane; nothing declared, the bank 78/52 (RETIRED).
+ * 44 = schema 43's topology, tag law, roster and bank, re-governed to THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd): the quick
+ *     guide's culture fallback retires as a lawful shrink (WR2, d8b08402f); the liveness predicate's
+ *     `_worldPulseInactive` read is recorded as UNCURED INSTRUMENT EROSION (SR5, 9cade66ce); the bank 78/52. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -343,6 +347,7 @@ export {
   RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
   RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
   RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
+  RETIRED_CLOSE_ROUND_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1698,7 +1703,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema43Baseline(baseline);
+  validateSchema44Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3259,7 +3264,10 @@ export function baselineOf({
       '2026-11-14/15 (the chair\'s ruling OR2 of 2026-11-15; the chair\'s record 456): the lawful shrinks retire with',
       'cause; the rows the detector lost while their reads still stand are recorded as UNCURED INSTRUMENT EROSION, never',
       'as a repair; the round\'s new reads are admitted by cause with class and lane; nothing declared. Every moved row,',
-      'with its cause, is recorded in the rung\'s review (docs/chair/2026-11-15/).',
+      'with its cause, is recorded in the rung\'s review (docs/chair/2026-11-15/) (RETIRED).',
+      'SCHEMA 44 = schema 43\'s topology, tag law, roster and bank, re-governed to THE CLOSE\'S FINAL PASS (OR2\'s law at',
+      'f76fe38fd): `culture on settlement` retires as a lawful shrink (WR2, d8b08402f); `_worldPulseInactive on institutions`',
+      'is recorded as UNCURED INSTRUMENT EROSION (SR5, 9cade66ce), never as a repair; nothing declared.',
       'Of the sixteen declared bank entries FIFTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3270,7 +3278,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–42 are the RETIRED numeric predecessors.',
+      'Schemas 4–43 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3444,7 +3452,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema43Baseline,
+    validateBaseline: validateSchema44Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,
