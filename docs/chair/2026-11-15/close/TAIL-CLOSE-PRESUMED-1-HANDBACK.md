@@ -82,6 +82,10 @@ The close found three more reader gaps that the next round should rule on:
 - **Limit:** the measure reads the RECORD, not the rendered page. The display and summary files (`src/domain/display/*`, `src/domain/summary/settlementQuickGuide.js`, `src/domain/dossier/faithReading.js`) print on the page. Their **close-unprinted** rows (10) mean "not in the record". The page census renders them; I did not render.
 - **Limit:** a short template fragment ("The walls of ") may match a different line that shares it, so its printed and true counts are an upper bound.
 
+## RE-RUNS
+
+- After the first receipt: the joined line at `d5d1208ee` (JOIN-10 points 11–16) merged in (a merge commit). Its `src` changes touch `claimStanding.js` and `relationshipArchetypes.js` and bring no fresh row: the door's `--check` reads fresh 0 · stale 0 · first-register stale 0 · strips fresh 1, and the walker still reads 42 of 43, the same strip. The table did not need extending.
+
 ## RECEIPT
 
 `tests/lint/presumedThings.walker.test.js` alone, at this branch's tip: **42 of 43**. The one red is `ARM 3 — the strip ban > ⛔ no strip without its row`, with `src/generators/foodGenerator.js :: filterDeclared([...rows], …)` (above).
