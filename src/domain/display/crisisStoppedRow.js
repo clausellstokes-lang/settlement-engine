@@ -22,6 +22,15 @@
  * ONE HOME: the Services tab and the Institutions tab read this leaf; the PDF and the Foundry journal print the same
  * rows and are to read it too (their seat's files).
  *
+ * FOUR KINDS OF ROW (`rowStoppedBy(settlement, kind, row)`), one table, the same marks:
+ *   'service'  a service row ({ name, desc }), by its name (or, for a name of two meanings, its description)
+ *   'house'    a house, by its catalogue id (`catalogId`, else its name's)
+ *   'chain'    a supply chain's row (the chair's ruling S6), by the record's `chainId` (`economicState.activeChains[]`)
+ *   'income'   an income source's share (S6), by the record's `source` (`economicState.incomeSources[]`). A source a
+ *              siege closes keeps its share and prints no description (`economy/incomeLineSiblings.js ::
+ *              trueIncomeDesc`, SIEGE_CLOSED_SOURCES): the mark is the share's one reading of the siege. The economy's
+ *              one income twin of a crisis (the alchemy trade under a siege) is a source that lives on none of these.
+ *
  * Pure: no randomness, no clock, no write.
  */
 import { crisisOf } from '../facts/crisisKind.js';
@@ -30,7 +39,7 @@ import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import {
-  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE,
+  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE,
   TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, NONE,
 } from '../../data/crisisDependence.js';
 
@@ -128,6 +137,29 @@ export function houseDependenceOf(inst) {
 }
 
 /**
+ * What a supply chain lives on, by the record's chain id (`chainId`, else a bare `id`).
+ * @param {{ chainId?: unknown, id?: unknown }} chain
+ * @returns {ReadonlyArray<string>}
+ */
+export function chainDependenceOf(chain) {
+  const id = typeof chain?.chainId === 'string' ? chain.chainId : typeof chain?.id === 'string' ? chain.id : '';
+  return Object.prototype.hasOwnProperty.call(CHAIN_DEPENDENCE, id) ? CHAIN_DEPENDENCE[id] : NONE;
+}
+
+/**
+ * What an income source's share lives on, by the record's title (`source`).
+ * @param {{ source?: unknown }} income
+ * @returns {ReadonlyArray<string>}
+ */
+export function incomeDependenceOf(income) {
+  const source = typeof income?.source === 'string' ? income.source.trim() : '';
+  return Object.prototype.hasOwnProperty.call(INCOME_DEPENDENCE, source) ? INCOME_DEPENDENCE[source] : NONE;
+}
+
+/** Each kind of row's reader of the table. @type {Readonly<Record<string, (row: any) => ReadonlyArray<string>>>} */
+const DEPENDENCE_OF = Object.freeze({ service: serviceDependenceOf, house: houseDependenceOf, chain: chainDependenceOf, income: incomeDependenceOf });
+
+/**
  * Is this row's description the twin written for this crisis?
  * @param {string} desc @param {string} kind
  * @returns {boolean}
@@ -150,14 +182,17 @@ const isCustom = (row) => row?.custom === true || row?.source === 'custom' || ro
 /**
  * The crisis that stops this row, or null.
  * @param {object | null | undefined} settlement
- * @param {'service' | 'house'} kind
- * @param {Record<string, unknown> | null | undefined} row a service row ({ name, desc, institution }) or a house
+ * @param {'service' | 'house' | 'chain' | 'income'} kind
+ * @param {Record<string, unknown> | null | undefined} row a service row ({ name, desc, institution }), a house, a chain
+ *   (`economicState.activeChains[]`) or an income source (`economicState.incomeSources[]`)
  * @param {string[]} [crises] the active stopping crises (read from the record when absent)
  * @returns {string | null}
  */
 export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(settlement)) {
   if (!row || typeof row !== 'object' || isCustom(row) || crises.length === 0) return null;
-  const deps = kind === 'house' ? houseDependenceOf(row) : serviceDependenceOf(row);
+  const read = Object.prototype.hasOwnProperty.call(DEPENDENCE_OF, kind) ? DEPENDENCE_OF[kind] : null;
+  if (!read) return null;
+  const deps = read(row);
   if (deps.length === 0) return null;
   const desc = typeof row.desc === 'string' ? row.desc : '';
   for (const crisis of crises) {
@@ -171,7 +206,7 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
 /**
  * The mark printed before a row's description, or null.
  * @param {object | null | undefined} settlement
- * @param {'service' | 'house'} kind
+ * @param {'service' | 'house' | 'chain' | 'income'} kind
  * @param {Record<string, unknown> | null | undefined} row
  * @param {string[]} [crises]
  * @returns {string | null}

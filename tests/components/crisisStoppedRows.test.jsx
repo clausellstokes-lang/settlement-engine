@@ -10,6 +10,11 @@
  *     pair red at the joined line bcad1a358, where nothing marks a row);
  *   · a calm town, or a row that lives on nothing the crisis stops, takes a mark (the keep pairs);
  *   · the table misses a service name or a catalogue id, or names one that does not exist (the walker).
+ *   · (the chair's ruling S6, 2026-11-15) the leaf does not answer for a supply chain's row or an income source's share
+ *     from the same table, with the same marks: a census town's chain or share that lives on what its crisis stops is
+ *     unmarked (the chain births table; each pair red at de0a3d237, where the leaf answered for services and houses
+ *     only), a chain or share that lives on nothing the crisis stops, or any in a calm town, is marked (its keep
+ *     pairs), or the table misses a chain id or an income title the economy writes, or names one it does not (the walker).
  */
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -19,7 +24,11 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { institutionalCatalog, catalogIdForName } from '../../src/data/institutionalCatalog.js';
-import { SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, DEPENDENCES } from '../../src/data/crisisDependence.js';
+import { SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, DEPENDENCES } from '../../src/data/crisisDependence.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../src/data/supplyChainData.js';
+import { GOOD_SOLD_TITLES, HOUSE_OF_WORK_LABEL } from '../../src/generators/economy/incomeLineSiblings.js';
+import { CRIMINAL_INCOME_LABELS } from '../../src/domain/worldPulse/treasury.js';
+import { rowStoppedBy, stoppedRowMark } from '../../src/domain/display/crisisStoppedRow.js';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -64,6 +73,38 @@ const KEEP = [
   ['r2s-under_siege-city-1', 'services', 'Beef, pork, mutton. Slaughtered and dressed on premises or nearby.'], // lives on nothing a siege stops
 ];
 const MARKS = [SIEGE, OUTBREAK, FAMINE];
+
+/** S6: (seed, kind, the record's key: a chain's `chainId` or an income source's `source`, the mark it must take). */
+const CHAIN_INCOME_MARKED = [
+  ['r2s-under_siege-town-0', 'chain', 'crossroads_trade', SIEGE], // "Strategic Crossroads » Toll bridge + … » Transit trade profit"
+  ['r2s-under_siege-town-0', 'income', 'Toll Revenue', SIEGE], // "Toll Revenue: n%"
+  ['r2s-under_siege-town-0', 'chain', 'caravan_trade', SIEGE],
+  ['r2s-under_siege-city-1', 'income', 'Gate Tolls', SIEGE],
+  ['r2s-under_siege-city-0', 'income', 'Port Duties', SIEGE],
+  ['r2s-under_siege-city-0', 'chain', 'harbour_trade', SIEGE],
+  ['r2s-under_siege-hamlet-1', 'chain', 'pilgrimage', SIEGE],
+  ['r2s-famine-town-1', 'income', 'Grain Sales', FAMINE], // "Grain Sales: n%" under a grain famine
+  ['r2s-famine-village-0', 'chain', 'grain', FAMINE],
+  ['r2s-famine-hamlet-0', 'chain', 'fishing', FAMINE], // the famine failed the fish
+  ['r2s-famine-hamlet-0', 'income', 'Fish & Maritime Produce', FAMINE],
+  ['r2s-famine-hamlet-3', 'chain', 'livestock', FAMINE], // the famine failed the livestock
+  ['r2s-plague_onset-village-1', 'income', 'Market Taxes', OUTBREAK],
+  ['r2s-plague_onset-village-1', 'income', 'Toll Revenue', OUTBREAK],
+];
+/** S6 keep pairs: (seed, kind, key) the record holds and the leaf leaves unmarked: the town's own work, or a calm town. */
+const CHAIN_INCOME_KEEP = [
+  ['r2s-under_siege-town-0', 'income', 'Market Taxes'], // a market inside the walls still trades
+  ['r2s-under_siege-town-0', 'income', 'Iron & Metalwork'],
+  ['r2s-under_siege-town-0', 'chain', 'iron'],
+  ['r2s-famine-town-1', 'income', 'Toll Revenue'], // a famine does not close the road
+  ['r2s-famine-town-1', 'chain', 'crossroads_trade'],
+  ['r2r-town-2', 'income', 'Grain Sales'], // a calm town
+  ['r2r-town-2', 'chain', 'caravan_trade'],
+];
+/** The record's row of that key. @param {any} s @param {string} kind @param {string} key */
+const economyRow = (s, kind, key) => kind === 'chain'
+  ? (s.economicState?.activeChains || []).find((c) => c.chainId === key)
+  : (s.economicState?.incomeSources || []).find((i) => i.source === key);
 
 /** @type {Map<string, any>} */
 const towns = new Map();
@@ -130,5 +171,51 @@ describe('TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on
     const words = new Set(DEPENDENCES);
     const all = [...Object.values(SERVICE_DEPENDENCE), ...Object.values(HOUSE_DEPENDENCE), ...Object.values(SERVICE_DEPENDENCE_BY_DESC).flatMap((m) => Object.values(m))];
     expect(all.flat().filter((d) => !words.has(d)), 'a word outside the dependences').toEqual([]);
+  });
+
+  test('S6, the chain births table: a chain or an income share that lives on what its crisis stops takes the crisis\'s mark', () => {
+    const failures = [];
+    for (const [seed, kind, key, mark] of CHAIN_INCOME_MARKED) {
+      const s = town(seed);
+      const row = economyRow(s, kind, key);
+      if (!row) { failures.push(`${seed}: the record holds no ${kind} ${key}`); continue; }
+      const got = stoppedRowMark(s, /** @type {any} */ (kind), row);
+      if (got !== mark) failures.push(`${seed} ${kind} ${key}: "${got}", not "${mark}"`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('S6, the keep pairs: the town\'s own work, and every chain and share of a calm town, take no mark', () => {
+    const failures = [];
+    for (const [seed, kind, key] of CHAIN_INCOME_KEEP) {
+      const s = town(seed);
+      const row = economyRow(s, kind, key);
+      if (!row) { failures.push(`${seed}: the record holds no ${kind} ${key}`); continue; }
+      const got = rowStoppedBy(s, /** @type {any} */ (kind), row);
+      if (got !== null) failures.push(`${seed} ${kind} ${key}: marked by ${got}`);
+    }
+    const calm = town('r2r-town-2');
+    for (const c of calm.economicState?.activeChains || []) if (rowStoppedBy(calm, 'chain', c)) failures.push(`r2r-town-2 chain ${c.chainId}: marked in a calm town`);
+    for (const i of calm.economicState?.incomeSources || []) if (rowStoppedBy(calm, 'income', i)) failures.push(`r2r-town-2 income ${i.source}: marked in a calm town`);
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('S6, the walker: every chain id and every income title the economy writes is declared, and nothing else', () => {
+    const chainIds = new Set(Object.values(SUPPLY_CHAIN_NEEDS).flatMap((need) => (need.chains || []).map((c) => c.id)));
+    const chains = new Set(Object.keys(CHAIN_DEPENDENCE));
+    expect([...chainIds].filter((i) => !chains.has(i)), 'a chain with no declaration').toEqual([]);
+    expect([...chains].filter((i) => !chainIds.has(i)), 'a declaration naming no chain').toEqual([]);
+    // the titles: every quoted title in a `source:` of the economy's two writers (ternaries included), the kept rows'
+    // titles, the house-of-work label and the five criminal labels
+    const titles = new Set([...GOOD_SOLD_TITLES, HOUSE_OF_WORK_LABEL, ...CRIMINAL_INCOME_LABELS]);
+    for (const file of ['economicState.js', 'tradeGoods.js']) {
+      const src = fs.readFileSync(path.resolve(__dirname, '../../src/generators/economy', file), 'utf8');
+      for (const m of src.matchAll(/\bsource:([\s\S]*?)(?:,\s*(?:percentage|desc)\b|\n\s*\})/g)) for (const q of m[1].matchAll(/'([A-Z][^']*)'/g)) titles.add(q[1]);
+    }
+    const declared = new Set(Object.keys(INCOME_DEPENDENCE));
+    expect([...titles].filter((t) => !declared.has(t)), 'an income title with no declaration').toEqual([]);
+    expect([...declared].filter((t) => !titles.has(t)), 'a declaration naming no income title').toEqual([]);
+    const words = new Set(DEPENDENCES);
+    expect([...Object.values(CHAIN_DEPENDENCE), ...Object.values(INCOME_DEPENDENCE)].flat().filter((d) => !words.has(d)), 'a word outside the dependences').toEqual([]);
   });
 });
