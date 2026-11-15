@@ -30,7 +30,11 @@ const WATCH_ONLY = ['r2s-occupied-town-0', 'rr3-town-famine-rand-1', 'r2r-town-1
 // R3-TABS-5, the chair's ruling (h): RE-KEYED BY IDENTITY. Makropyrgos (rr3-thorp-occupied-rand-1) reads Critical on its
 // Invasion & War bar, where the citizen-militia pool's "would see off a raid" is now not drawn; the keeper is a walled
 // militia thorp whose bar does not read Critical (Weak), so the arm still asserts a real militia keeps its pool.
-const MILITIA = 'rr3-thorp-famine-rand-0';
+// TAIL-CORPUS-DEF-5, RE-KEYED BY IDENTITY: 7509b3794 (UPKEEP-13 P4, the chair's ruling (3) of 2026-11-14: a place's
+// strength in war is bounded by its people, people.milPerHead 1) took rr3-thorp-famine-rand-0 (14 people) from 36 to
+// 14, Critical, where the pool is not drawn. The nearest town of the same shape: rr3-thorp-famine-rand-7, a walled
+// militia thorp of 27 whose bar does not read Critical and which draws the citizen-militia pool.
+const MILITIA = 'rr3-thorp-famine-rand-7';
 const TOWNS = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
