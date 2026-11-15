@@ -8,6 +8,10 @@
  *
  * (C2-A) A CATEGORY KEY IS NOT A GOOD: no `trade access`, `maritime access`, `Toll income`, `Market taxes`,
  * `luxury`, `Strategic control` or `water` (302 towns at the base; 0 after; the made list alone moves).
+ * (C1-A) A GOOD IS MADE WHERE A HOUSE THAT DIGS IT OR WORKS IT STANDS: a land's commodity asks the export's extraction
+ * gate, widened (D7) by the houses that work the good (a smith's iron, a jeweller's gems); a chain counts only where a
+ * house of this town (not the walk to another's: "Access to parish church") processes it, and a gated output only where
+ * its maker stands (a cobbler's boots, a jeweller's or metalworker's precious metals are worked goods).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -18,8 +22,10 @@ const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's r2r- birth. @param {string} seed */
 const birth = (seed) => {
-  const m = /** @type {RegExpMatchArray} */ (seed.match(/^r2r-(\w+)-\d+$/));
-  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m[1] }), null, { seed, customContent: {} });
+  const s = seed.match(/^r2s-(\w+)-(\w+)-\d+$/);
+  const over = s ? { selectedStresses: [s[1]], selectedStressesRandom: false, settType: s[2] }
+    : { settType: /** @type {RegExpMatchArray} */ (seed.match(/^r2r-(\w+)-\d+$/))[1] };
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, ...over }), null, { seed, customContent: {} });
 };
 /** @type {Map<string, string[]>} */
 const made = new Map();
@@ -41,6 +47,42 @@ const C2A = [
   ['r2r-city-2', 'trade access', 'fish'],
   ['r2r-city-2', 'maritime access', 'Salted fish'],
 ];
+
+/** (seed, the good no house of the town makes, a good the town still makes) */
+const C1A = [
+  ['r2r-thorp-0', 'stone', 'medicinal herbs'],              // a quarry's land, no quarry or mason
+  ['r2r-thorp-0', 'game meat', 'medicinal herbs'],          // hunting grounds, no hunter, wildfowler, warden or furrier
+  ['r2r-thorp-1', 'iron', 'honey'],                         // iron in the ground, no mine, smelter or smith
+  ['r2r-thorp-4', 'gems', 'dates'],                         // no mine, no jeweller
+  ['r2r-thorp-6', 'Religious services', 'honey'],           // only "Access to parish church"
+  ['r2r-thorp-7', 'timber', 'wool'],                        // no sawmill, woodcutter, charcoal burner or carpenter
+  ['r2r-thorp-12', 'Baked goods', 'grain'],                 // only "Access to external mill"
+  ['r2r-hamlet-2', 'Leather goods', 'iron'],                // no tanner; THE SMITH'S IRON STAYS (D7)
+  ['r2r-hamlet-18', 'Milled lumber', 'clay'],               // no mill, no sawmill
+  ['r2r-hamlet-18', 'Hospitality for travellers', 'pottery'], // the pilgrims' chain, run by the neighbour's church
+];
+/** (seed, a worked good that stays, the house that works it) — green before and after */
+const WORKED = [
+  ['r2r-hamlet-2', 'metalwork', 'Resident smith (part-time)'],
+  ['r2r-town-0', 'Boots and shoes', "Cobbler's guild"],
+  ['r2s-recently_betrayed-town-0', 'Precious metals', 'Jeweller'],
+  ['r2s-recently_betrayed-town-0', 'gems', 'Jeweller'],
+];
+
+describe('the made list names what the town\'s own houses make (C1-A)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+
+  test.each(C1A)('%s: "%s" is not listed as made; "%s" still is', (seed, gone, keep) => {
+    const list = madeIn(seed);
+    expect(list, 'GONE').not.toContain(gone);
+    expect(list, 'KEEP').toContain(keep);
+  }, 60000);
+
+  test.each(WORKED)('%s: "%s" stays, worked by its %s', (seed, keep, house) => {
+    expect(madeIn(seed)).toContain(keep);
+    expect(birth(seed).institutions.map((/** @type {any} */ i) => i.name)).toContain(house);
+  }, 60000);
+});
 
 describe('the made list names goods (C2-A)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });

@@ -25,7 +25,7 @@ import { compareCodepoint } from '../domain/deterministicSort.js';
 // with a bare `import "./engine-*.js"` — an engine <-> resource-chains chunk cycle (bootSmoke.test.js).
 // Same binding, same function: no generation change.
 import { goodsHeldByFoodRecord, ownFoodGoodsHeldByFoodRecord } from '../domain/foodSurplus.js';
-import {catalogIdForName} from '../data/institutionalCatalog.js';
+import {catalogIdForName, isFabricInstitution} from '../data/institutionalCatalog.js';
 import { ALL_CATALOG_NAMES, institutionMatchesKeyword } from '../domain/institutions/institutionCategory.js';
 
 export { institutionMatchesKeyword };
@@ -625,6 +625,30 @@ const RESOURCE_EXTRACTION_GATES = {
   //          glass_sand, desert_salt, alpine_pasture, hot_springs_mineral
 };
 
+// TAIL-DEFECON-C (C1-A, the chair's rulings D6 and D7, 2026-11-14): the houses that WORK a land's good, for the MADE
+// list only. The made list asks the export's own extraction gate above, widened (D7: "THE SMITH'S IRON STAYS") by the
+// houses that work the good where no one digs it: a smith or a metalworker works bought iron into metalwork; a
+// jeweller works gems. Every other gated resource's gate already names the houses that work its good (the sawmill,
+// woodcutter and carpenter for timber; the fishers and the fish market for the catch; the mill for the mill site).
+// The export gate itself is not widened: the export list does not move.
+const MADE_HERE_WORKING_HOUSES = {
+  'iron_deposits':     [...RESOURCE_EXTRACTION_GATES.iron_deposits, 'smith', 'metalworker'],
+  'precious_metals':   [...RESOURCE_EXTRACTION_GATES.precious_metals, 'jewel'],
+  'gemstone_deposits': [...RESOURCE_EXTRACTION_GATES.gemstone_deposits, 'jewel'],
+};
+// The same widening for a chain's outputs (CHAIN_OUTPUT_INST_GATES below, the export's own output gate): the made
+// list reads 'tannery' as any tanner ("Tanners", "Tanner (established)") and 'blacksmith' as any smith.
+const MADE_HERE_KEYWORD_WIDENING = {
+  'tannery':    ['tannery', 'tanner'],
+  'blacksmith': ['blacksmith', 'smith'],
+};
+// Two outputs a house works without digging or tanning (the D7 reading): a cobbler works bought leather into boots; a
+// jeweller or a metalworker works bought gold and silver. (Raw gemstones stay the mine's; milled lumber the sawmill's.)
+const MADE_HERE_OUTPUT_HOUSES = {
+  'Boots and shoes': ['tannery', 'tanner', 'cobbler'],
+  'Precious metals': ['mine', 'smelter', 'jewel', 'metalworker'],
+};
+
 // Institution gates for chain-derived output goods.
 // Even if a chain is active, some of its outputs are byproducts that require
 // a specific additional institution to actually produce and export.
@@ -884,7 +908,34 @@ export function deriveLocalProductionFromChains(
   activeChains,
   nearbyResources,
   depletedResources = [],
+  institutions = null,
 ) {
+  // TAIL-DEFECON-C (C1-A, D6/D7): A GOOD IS MADE WHERE A HOUSE THAT DIGS IT OR WORKS IT STANDS. What the land provides
+  // is made here only where a house of THIS town works it (MADE_HERE_WORKING_HOUSES, else the export's own
+  // RESOURCE_EXTRACTION_GATES), and a chain makes its outputs here only where a house of THIS town processes it: the
+  // fabric of the place ("Access to parish church", "Access to external mill", the dwellings, the water) is the walk
+  // to another town's house, not a house (`institutionalCatalog.js :: isFabricInstitution`). A caller that passes no
+  // roster (the world pulse's resource re-derivation) keeps the land's reading.
+  const housed = Array.isArray(institutions)
+    ? institutions.filter(i => i && !isFabricInstitution(i))
+    : null;
+  const landWorkedHere = (key) => {
+    if (!housed) return true;
+    const kws = MADE_HERE_WORKING_HOUSES[key] || RESOURCE_EXTRACTION_GATES[key];
+    return !kws || kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
+  };
+  const chainHeldHere = (chain) => !housed
+    || (chain.processingInstitutions || []).some(p => housed.some(i => institutionMatchesProcessor(i, p)));
+  // A chain's processors are wider than its outputs' makers (the river-milling chain runs on a grain Mill and names
+  // "Milled lumber"; the stone chain runs on a Brickmaker and names "Quarried stone"): an output the export gates by a
+  // house is made here only where that house stands (CHAIN_OUTPUT_INST_GATES, widened as above).
+  const outputMadeHere = (good) => {
+    const gate = housed && CHAIN_OUTPUT_INST_GATES[good];
+    if (!gate) return true;
+    const kws = MADE_HERE_OUTPUT_HOUSES[good]
+      || (Array.isArray(gate) ? gate : [gate]).flatMap(kw => MADE_HERE_KEYWORD_WIDENING[kw] || [kw]);
+    return kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
+  };
   const local = new Set();
   const depleted = new Set(
     depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
@@ -897,6 +948,7 @@ export function deriveLocalProductionFromChains(
   nearbyResources.forEach(rk => {
     const key = resourceKeyForLabel(rk) || rk;
     if (depleted.has(key)) return;
+    if (!landWorkedHere(key)) return; // C1-A: no house here digs or works it
     const rd = RESOURCE_DATA[key];
     if (rd?.commodities) rd.commodities.forEach(c => {
       const good = c.replace(/_/g, ' ');
@@ -912,8 +964,9 @@ export function deriveLocalProductionFromChains(
       c.activatedByResource
       && !chainYieldRefused(c)
       && c.resourceInputAvailable !== false
+      && chainHeldHere(c) // C1-A: a house of this town processes it
     ))
-    .forEach(chain => chain.outputs.slice(0, 2).forEach(o => local.add(o)));
+    .forEach(chain => chain.outputs.slice(0, 2).filter(outputMadeHere).forEach(o => local.add(o)));
 
   // TAIL-DEFECON-C (C2-A, the chair's ruling D6, 2026-11-14): a category key is not a good.
   return [...local].filter(good => !isCategoryNotGood(good));
