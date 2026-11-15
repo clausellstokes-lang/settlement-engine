@@ -1,0 +1,22 @@
+diff --git a/src/generators/steps/assembleSettlement.js b/src/generators/steps/assembleSettlement.js
+index 04bb7c884..fc5499c00 100644
+--- a/src/generators/steps/assembleSettlement.js
++++ b/src/generators/steps/assembleSettlement.js
+@@ -238,7 +238,7 @@ registerStep('assembleSettlement', {
+   // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): `pressureSentence` is written BELOW, after the ties are
+   // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
+   // no other draw).
+-  settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
++  // ORDER-MEASURE-1 C3a: the arrival scene moved below, after A13
+   settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written
+ 
+   // The final-economy pass already proved that power consumed the final
+@@ -431,6 +431,8 @@ registerStep('assembleSettlement', {
+     if (npcs !== settlement.npcs) settlement.npcs = npcs;
+   }
+   if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster, after every roster writer (MERGE-CAR: after the people car's true-hook pass; the rename cascades through `memberships[].power` and a minted card's `institution.key`) (no roll); a HELD powerStructure is the DM's and is not renamed (EM-R3, LANDING-R2)
++  // ORDER-MEASURE-1 C3a: the arrival scene, on the settled record (its own 'arrival-scene' child, unchanged)
++  settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
+ 
+   // Propagate the in-pipeline causal trace onto the settlement so
+   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.

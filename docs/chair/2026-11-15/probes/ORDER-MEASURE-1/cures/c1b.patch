@@ -1,0 +1,29 @@
+diff --git a/src/generators/steps/assembleSettlement.js b/src/generators/steps/assembleSettlement.js
+index 04bb7c884..22a09ea63 100644
+--- a/src/generators/steps/assembleSettlement.js
++++ b/src/generators/steps/assembleSettlement.js
+@@ -210,6 +210,7 @@ registerStep('assembleSettlement', {
+   // (stress + stressors — same object refs) and both shapes (bare object vs
+   // array). Entries WITHOUT an own summaryRoll (custom-authored stressors that
+   // carry their own summary) are left untouched.
++  const OM_ROLLS = new Map(); // ORDER-MEASURE-1 C1b
+   const rerenderStressSummary = (container) => {
+     if (!container) return;
+     const entries = Array.isArray(container) ? container : [container];
+@@ -224,6 +225,7 @@ registerStep('assembleSettlement', {
+         const cellOpts = { facts: factsOf(settlement), poolId: 'stressTypes:STRESS_TYPE_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
+         if (typeof e.crisisHook === 'string') e.crisisHook = resolveSibling(e.crisisHook, STRESS_TYPE_SIBLINGS, cellOpts);
+         if (typeof e.viabilityNote === 'string') { const note = resolveSibling(e.viabilityNote, STRESS_TYPE_SIBLINGS, { ...cellOpts, dropRefused: true }); if (note == null) delete e.viabilityNote; else e.viabilityNote = note; }
++        OM_ROLLS.set(e, e.summaryRoll); // ORDER-MEASURE-1 C1b: the roll kept for the late re-read
+         delete e.summaryRoll;
+       }
+     }
+@@ -431,6 +433,8 @@ registerStep('assembleSettlement', {
+     if (npcs !== settlement.npcs) settlement.npcs = npcs;
+   }
+   if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster, after every roster writer (MERGE-CAR: after the people car's true-hook pass; the rename cascades through `memberships[].power` and a minted card's `institution.key`) (no roll); a HELD powerStructure is the DM's and is not renamed (EM-R3, LANDING-R2)
++  // ORDER-MEASURE-1 C1b: THE LINE RE-READ on the settled record: the same roll, the declared sets resolved against the final facts (draw-free)
++  for (const [e, roll] of OM_ROLLS) { const facts = factsOf(settlement); e.summary = renderStressSummary(e.type, settlement.name, roll, e.direction, facts); const cellOpts = { facts, poolId: 'stressTypes:STRESS_TYPE_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') }; if (typeof e.crisisHook === 'string') e.crisisHook = resolveSibling(e.crisisHook, STRESS_TYPE_SIBLINGS, cellOpts); if (typeof e.viabilityNote === 'string') { const note = resolveSibling(e.viabilityNote, STRESS_TYPE_SIBLINGS, { ...cellOpts, dropRefused: true }); if (note == null) delete e.viabilityNote; else e.viabilityNote = note; } }
+ 
+   // Propagate the in-pipeline causal trace onto the settlement so
+   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.

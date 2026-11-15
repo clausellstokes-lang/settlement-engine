@@ -1,0 +1,41 @@
+diff --git a/src/generators/steps/assembleSettlement.js b/src/generators/steps/assembleSettlement.js
+index 04bb7c884..421b5a051 100644
+--- a/src/generators/steps/assembleSettlement.js
++++ b/src/generators/steps/assembleSettlement.js
+@@ -319,6 +319,9 @@ registerStep('assembleSettlement', {
+     { seats: settlement.powerStructure?.factions, estate: settlement.institutions },
+   );
+   if (settledEconomy !== settlement.economicState) settlement.economicState = settledEconomy;
++  // ORDER-MEASURE-1 C2a: THE PROSE STEP MOVED after the last write of the roster it reads: the narratives re-run on the resized roster,
++  // on the narrative step's own stream (createPRNG(seed).fork('generateNarratives'), the stream step 20 drew on), so no other draw moves.
++  if (rosterResized) { const nr = createPRNG(ctx._seed).fork('generateNarratives'); const prevNr = setActiveRng(nr); try { const re = narrativesOf({ ...ctx, powerStructure: settlement.powerStructure, simulationTrace: [] }); settlement.history = re.history; settlement.settlementReason = re.settlementReason; settlement.resourceAnalysis = re.resourceAnalysis; settlement.economicViability = re.economicViability; } finally { clearActiveRng(prevNr); } }
+ 
+   // Coherence mutates canonical NPC/faction mechanics. Give it a dedicated
+   // stream so variable draw counts in pressure/arrival/defense presentation
+@@ -500,3 +503,4 @@ function withGuardPaidFromDefence(settlement) {
+   const pay = purseWordOfBand(economicSurvivalBandOf(settlement), standingLabelOf(es));
+   return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies }) } }; // UPKEEP-8: the guard line's two readings of the record
+ }
++import { narrativesOf } from './generateNarratives.js'; import { createPRNG } from '../../kernel/prng.js'; // ORDER-MEASURE-1 C2a
+diff --git a/src/generators/steps/generateNarratives.js b/src/generators/steps/generateNarratives.js
+index 08c15f04b..a1d3106e3 100644
+--- a/src/generators/steps/generateNarratives.js
++++ b/src/generators/steps/generateNarratives.js
+@@ -26,7 +26,10 @@ registerStep('generateNarratives', {
+   readsVersion: { economicState: 'reconciled' },
+   provides: ['settlementReason', 'resourceAnalysis', 'economicViability', 'history'],
+   phase: 'narrative',
+-}, (ctx) => {
++}, (ctx) => narrativesOf(ctx));
++
++/** ORDER-MEASURE-1 C2a: the step's body, exported so the assembly can re-run it on the settled roster */
++export function narrativesOf(ctx) {
+   const {
+     tier, population, tradeRoute, effectiveConfig,
+     institutions, economicState, powerStructure,
+@@ -140,4 +143,4 @@ registerStep('generateNarratives', {
+   }
+ 
+   return { settlementReason, resourceAnalysis, economicViability, history };
+-});
++}

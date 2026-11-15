@@ -1,0 +1,15 @@
+diff --git a/src/generators/steps/assembleSettlement.js b/src/generators/steps/assembleSettlement.js
+index 04bb7c884..127637f1d 100644
+--- a/src/generators/steps/assembleSettlement.js
++++ b/src/generators/steps/assembleSettlement.js
+@@ -238,8 +238,8 @@ registerStep('assembleSettlement', {
+   // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): `pressureSentence` is written BELOW, after the ties are
+   // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
+   // no other draw).
+-  settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
+-  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written
++  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); // ORDER-MEASURE-1 C3c: the defence settled before the arrival scene
++  settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement)); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written
+ 
+   // The final-economy pass already proved that power consumed the final
+   // prosperity/safety/food tuple. Assert that proof before applying the one

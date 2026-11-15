@@ -1,0 +1,24 @@
+diff --git a/src/generators/steps/assembleSettlement.js b/src/generators/steps/assembleSettlement.js
+index 04bb7c884..0ddbe3802 100644
+--- a/src/generators/steps/assembleSettlement.js
++++ b/src/generators/steps/assembleSettlement.js
+@@ -228,8 +228,7 @@ registerStep('assembleSettlement', {
+       }
+     }
+   };
+-  rerenderStressSummary(settlement.stress);
+-  rerenderStressSummary(settlement.stressors);
++  // ORDER-MEASURE-1 C1a: the re-render moved below, after the last write of the powers (A13)
+ 
+   // Narrative overlays. The pressure sentence and the arrival scene each draw on their own
+   // named child stream (THE VOICE PROGRAM wave 2, 2026-10-02): their pools and beats can
+@@ -431,6 +430,9 @@ registerStep('assembleSettlement', {
+     if (npcs !== settlement.npcs) settlement.npcs = npcs;
+   }
+   if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster, after every roster writer (MERGE-CAR: after the people car's true-hook pass; the rename cascades through `memberships[].power` and a minted card's `institution.key`) (no roll); a HELD powerStructure is the DM's and is not renamed (EM-R3, LANDING-R2)
++  // ORDER-MEASURE-1 C1a: the stress summary re-rendered here, on the SETTLED record (moved from after the name pin)
++  rerenderStressSummary(settlement.stress);
++  rerenderStressSummary(settlement.stressors);
+ 
+   // Propagate the in-pipeline causal trace onto the settlement so
+   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.

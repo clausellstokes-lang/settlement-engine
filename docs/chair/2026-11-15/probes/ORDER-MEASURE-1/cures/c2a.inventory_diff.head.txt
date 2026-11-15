@@ -1,0 +1,68 @@
+sentences: before 30027 after 30017 · gone 16 · new 6 · in fewer towns 6 · in more towns 19 · moved 3
+ GONE (widest):
+     28 ->    0  Military/GuardVigilantes
+     25 ->    0  Vigilantesthe criminal network
+     18 ->    0  VigilantesThieves' Guild
+      9 ->    0  <N>Popular candidate
+      4 ->    0  ReformistsSecular camp
+      3 ->    0  The garrisonVigilantes
+      1 ->    0  Household CouncilPopular candidate
+      1 ->    0  Free Elder CouncilPopular candidate
+      1 ->    0  The uprising left a legacy of trouble in <N> that has never been fully put right, and that legacy is years old.
+      1 ->    0  Headman's AuthorityPopular candidate
+      1 ->    0  Local enforcementVigilantes
+      1 ->    0  Much of what stands in <N> now was built after the flood; that legacy is a generation old.
+ IN FEWER TOWNS (largest loss):
+     29 ->   28  Nobody in <N> has finished putting right the legacy the succession crisis left, and that legacy is a generation old.
+      2 ->    1  The migration left a legacy of trouble in <N> that has never been fully put right, and that legacy is a generation old.
+    131 ->  130  A journeyman denied mastership has proof the exam was rigged
+    139 ->  138  Rival guilds fought over who may sell what, and over a say in how the place is run
+     20 ->   19  After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage.
+      2 ->    1  Nobody in <N> has finished putting right the legacy the religious conflict left, and that legacy is older than all but the oldest alive.
+ NEW (widest):
+      0 ->    5  <N>Popular candidatethe merchant class
+      0 ->    1  Household CouncilPopular candidatethe merchant class
+      0 ->    1  Free Elder CouncilPopular candidatethe merchant class
+      0 ->    1  <N> still keeps the shape the village took after the shortage, though the times have moved on; that legacy is older than anyone living.
+      0 ->    1  What <N> settled in the wake of the economic divide still shapes the city, though much has changed since; that legacy is older than anyone living.
+      0 ->    1  Military CouncilVigilantesthe criminal network
+ IN MORE TOWNS (largest gain):
+     47 ->   75  Military/GuardVigilantesthe criminal network
+      1 ->   17  The garrisonVigilantesthe criminal network
+      6 ->   22  The garrison
+     10 ->   19  Local enforcementVigilantesthe criminal network
+      1 ->    8  The watchVigilantesthe criminal network
+      3 ->    8  The militiaVigilantesthe criminal network
+     38 ->   43  Popular candidate
+      3 ->    7  the orthodox clergy
+     11 ->   15  Reformists
+     11 ->   15  Secular camp
+      1 ->    3  The watch
+      1 ->    3  <N> still keeps the shape the village took after the religious conflict, though the times have moved on; that legacy is older than all but the oldest alive.
+ THE INHERITORS (print now, and did not, in a town that lost a sentence): 28 sentences
+   + 28 towns (e.g. r2r-city-0)  Military/GuardVigilantesthe criminal network
+   + 18 towns (e.g. r2r-city-15)  Vigilantes
+   + 16 towns (e.g. r2r-city-15)  The garrison
+   + 16 towns (e.g. r2r-city-10)  The garrisonVigilantesthe criminal network
+   +  9 towns (e.g. r2r-hamlet-19)  Local enforcementVigilantesthe criminal network
+   +  7 towns (e.g. r2r-town-26)  The watchVigilantesthe criminal network
+   +  5 towns (e.g. r2r-hamlet-17)  The militiaVigilantesthe criminal network
+   +  5 towns (e.g. r2r-village-1)  Popular candidate
+   +  5 towns (e.g. r2s-succession_void-hamlet-1)  <N>Popular candidatethe merchant class
+   +  4 towns (e.g. r2r-town-4)  the orthodox clergy
+   +  4 towns (e.g. r2r-town-4)  Reformists
+   +  4 towns (e.g. r2r-town-4)  Secular camp
+   +  2 towns (e.g. r2r-village-0)  <N> still keeps the shape the village took after the religious conflict, though the times have moved on; that legacy is older than all but the oldest alive.
+   +  2 towns (e.g. r2r-town-37)  The watch
+   +  1 towns (e.g. r2r-village-55)  Scarcity of a critical good drove some to hoard it and others to gouge on the price
+   +  1 towns (e.g. r2r-town-58)  The succession crisis left a legacy of trouble in <N> that has never been fully put right, and that legacy is a generation old.
+   +  1 towns (e.g. r2s-slave_revolt-hamlet-1)  After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage.
+   +  1 towns (e.g. r2r-thorp-48)  Household CouncilPopular candidatethe merchant class
+   +  1 towns (e.g. r2r-hamlet-39)  Free Elder CouncilPopular candidatethe merchant class
+   +  1 towns (e.g. r2s-recently_betrayed-metropolis-1)  Much of what stands in <N> now was built after the siege; that legacy is a generation old.
+   +  1 towns (e.g. r2r-village-15)  <N> still keeps the shape the village took after the shortage, though the times have moved on; that legacy is older than anyone living.
+   +  1 towns (e.g. r2r-village-16)  <N> still keeps the shape the village took after the religious conflict, though the times have moved on; that legacy is older than anyone living.
+   +  1 towns (e.g. r2s-infiltrated-village-3)  What <N> settled in the wake of the religious conflict still shapes the village, though much has changed since; that legacy is older than all but the oldest alive.
+   +  1 towns (e.g. r2s-monster_pressure-town-2)  Much of what stands in <N> now was built after the siege; that legacy is older than anyone living.
+   +  1 towns (e.g. r2s-occupied-metropolis-3)  What <N> settled in the wake of the religious conflict still shapes the metropolis, though much has changed since; that legacy is older than anyone living.
+ THE WORKLIST ROWS:

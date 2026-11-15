@@ -1,0 +1,5 @@
+towns moved 131 of 720; families 4
+100	history.currentTensions
+34	history.legacyAnnotations
+2	history.historicalEvents
+1	history.eventsTimeline
