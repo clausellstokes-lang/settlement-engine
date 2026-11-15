@@ -694,16 +694,28 @@ export function storesSpanWords(months) {
 /**
  * The stores in plain words, from the one food record: the span in store and the granary.
  * The same words as the Economics tab's stores row.
- * @param {{ storageMonths?: unknown, hasGranary?: unknown, storesHeld?: unknown }} record @returns {string}
+ * TAIL-CRISIS-2 (the chair's rulings K1 and K7, READ-ALL 18671: "Stores: a granary, about five months of grain" beside a
+ * famine, or under a siege that leaves a gap): the food record is not changed (no declared move); the caller that holds
+ * the crisis hands it in, and the granary line says what the crisis is doing to the stores: under a famine (the town's
+ * crisis, or the record's own `famine` band) and under a siege that leaves part of the need unmet (`gapPct` > 0), they
+ * are being eaten into. With one argument (the Economics tab's call, another seat's file) the line prints as before.
+ * @param {{ storageMonths?: unknown, hasGranary?: unknown, storesHeld?: unknown, band?: unknown, gapPct?: unknown }} record
+ * @param {{ has?: (kind: string) => boolean } | null} [crisis] the town's crisis (`factsOf(record).crisis`), OPTIONAL
+ * @returns {string}
  */
-export function foodStoresWords(record) {
+export function foodStoresWords(record, crisis = null) {
   const months = Number(record?.storageMonths);
   if (!Number.isFinite(months) || months <= 0) return '';
   const span = storesSpanWords(months);
   // RUNG2-F13: under an active famine a granary still holding six months or more is HELD — the
   // record says so (foodRecord.storesHeld), and so does the line.
   if (record.hasGranary === true && record.storesHeld === true) return `Stores: a granary of ${span} that ${HELD_STORES_WORDS}.`;
-  if (record.hasGranary === true) return `Stores: a granary, ${span} of grain.`;
+  if (record.hasGranary === true) {
+    const eating = !crisis ? null
+      : (record.band === 'famine' || crisis.has?.('famine') === true) ? 'famine'
+        : (crisis.has?.('under_siege') === true && Number(record.gapPct) > 0) ? 'siege' : null;
+    return eating ? `Stores: a granary, ${span} of grain, and the ${eating} is eating into them.` : `Stores: a granary, ${span} of grain.`;
+  }
   return months < 1 ? `No granary; ${span} in the larder.` : `No granary; ${span} in household stores.`;
 }
 
@@ -743,7 +755,7 @@ function foodFact(source) {
   if (!record || typeof record !== 'object') return null;
   const band = foodBandOf(record);
   const bandText = band ? `${band.label}.` : '';
-  const text = [bandText, foodStoresWords(record)].filter(Boolean).join(' ');
+  const text = [bandText, foodStoresWords(record, factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).crisis)].filter(Boolean).join(' ');
   return text ? { id: 'food', label: TONIGHT_COPY.food, text, sourcePath: 'economicState.foodSecurity.foodRecord' } : null;
 }
 

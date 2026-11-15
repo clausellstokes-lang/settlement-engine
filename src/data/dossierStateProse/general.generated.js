@@ -9483,7 +9483,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} buys mostly what it makes itself, and the market is where its people trade with each other.",
+          "marks": [
+            "market"
+          ],
+          "text": "{settlement}'s market is where its own people trade with each other, more than with anyone from outside.",
           "slots": [
             "settlement"
           ],
@@ -9567,9 +9570,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
+            "no market",
             "no crisis: under_siege"
           ],
-          "text": "No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.",
+          "text": "No market or fair stands in {settlement}: what trade the town does is done house to house.",
           "slots": [
             "settlement"
           ],
@@ -9765,9 +9769,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "market"
           ],
-          "text": "No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.",
+          "text": "No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.",
           "slots": [
             "settlement"
           ],
@@ -9822,7 +9826,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: famine"
           ],
           "text": "{settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.",
           "slots": [
@@ -11037,6 +11042,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ADMINISTERED": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "{settlement} keeps its own court and its own gaol, and settles its own quarrels.",
           "slots": [
             "settlement"
@@ -11556,7 +11564,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Much of what changes hands at {settlement} came from somewhere else first.",
+          "text": "Some of what changes hands at {settlement} came from somewhere else first.",
           "slots": [
             "settlement"
           ],

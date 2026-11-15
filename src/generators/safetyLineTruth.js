@@ -8,6 +8,7 @@
  */
 import { scoreBand } from '../domain/display/defenseScoreBands.js';
 import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
+import { lineText } from '../domain/facts/drawDeclared.js';
 
 /** The census's small places (a district, a military command); TINY: streets too. */
 export const SMALL_PLACES = Object.freeze(['thorp', 'hamlet', 'village']);
@@ -43,7 +44,7 @@ export function hungerIn(economicState) {
 export const MERCHANT_ARMY_BESIDE = /^(?:The merchant guilds|Wealthy interests) keep their own (?:mercenary companies|private security) beside the /;
 
 /** "Exists on paper. Chronically underpaid" (#713, #1201): the pay read from the Economic Survival band, the force from the military band. */
-const PAPER_RE = /^The (.+?) exists on paper\. Chronically underpaid and poorly equipped(: these are volunteers with day jobs, not soldiers)?\. Susceptible to bribery; enforcers who can be bought by whoever has coin\./;
+const PAPER_RE = /^The (.+?) exists? on paper\. Chronically underpaid and poorly equipped(: these are volunteers with day jobs, not soldiers)?\. Susceptible to bribery; enforcers who can be bought by whoever has coin\./;
 
 /**
  * @param {string} text @param {unknown} prosperity the purse word (Prosperous, Moderate, Poor) @param {{ forceScore?: unknown }} read the military score
@@ -55,9 +56,10 @@ export function paperTruth(text, prosperity, read) {
   const held = ['STRONG', 'ADEQUATE'].includes(scoreBand(read.forceScore));
   const paid = ['Prosperous', 'Wealthy', 'Comfortable', 'Moderate'].includes(String(prosperity));
   if (!held && !paid) return text;
+  const many = manyForce(m[1]);
   const lead = held && paid ? `Some of the ${m[1]} take bribes from whoever has coin.`
-    : held ? `The ${m[1]} is chronically underpaid and poorly equipped${m[2] || ''}. Susceptible to bribery; enforcers who can be bought by whoever has coin.`
-      : `The ${m[1]} exists on paper${m[2] || ''}. Susceptible to bribery; enforcers who can be bought by whoever has coin.`;
+    : held ? `The ${m[1]} ${many ? 'are' : 'is'} chronically underpaid and poorly equipped${m[2] || ''}. Susceptible to bribery; enforcers who can be bought by whoever has coin.`
+      : `The ${m[1]} ${many ? 'exist' : 'exists'} on paper${m[2] || ''}. Susceptible to bribery; enforcers who can be bought by whoever has coin.`;
   return lead + text.slice(m[0].length);
 }
 
@@ -71,9 +73,49 @@ export function patrolTruth(text, read, frames) {
   const deps = /** @type {Array<{ severity?: unknown, institution?: unknown } | null>} */ (Array.isArray(read.tradeDependencies) ? read.tradeDependencies : []);
   const cut = deps.some((t) => t?.severity === 'critical' && partitionDefenseInstitutions([{ name: String(t?.institution ?? '') }]).watch.length > 0);
   if (!cut) return text;
-  const m = /^(?:The (.+?) (?:maintains standard|walks the usual|patrols on a regular|is well paid, well equipped and patrols)|You will see the (.+?) on the rounds)/.exec(text);
+  const m = /^(?:The (.+?) (?:maintains? standard|walks? the usual|patrols? on a regular|(?:is|are) well paid, well equipped and patrols?)|You will see the (.+?) on the rounds)/.exec(text);
   const law = m && (m[1] || m[2]);
   if (!law) return text;
-  const lead = [...frames(law), `The ${law} is well paid, well equipped and patrols properly. They come when called, and though some take bribes, it is not the custom.`].find((f) => text.startsWith(f));
-  return lead ? `The ${law} keeps what rounds it can while the supplies it needs are cut off.${text.slice(lead.length)}` : text;
+  const many = manyForce(law);
+  const lead = [...frames(law), `The ${law} ${many ? 'are' : 'is'} well paid, well equipped and ${many ? 'patrol' : 'patrols'} properly. They come when called, and though some take bribes, it is not the custom.`].find((f) => text.startsWith(f));
+  return lead ? `The ${law} ${many ? 'keep what rounds they can' : 'keeps what rounds it can'} while the supplies ${many ? 'they need are' : 'it needs are'} cut off.${text.slice(lead.length)}` : text;
+}
+
+/**
+ * TAIL-DEFECON (the READ-ALL worklist's #20612 #20616): a force noun that names two bodies ("garrison and city watch")
+ * takes a plural verb. The guard assessment's own noun (`safetyProfile.js`, `lawRef`): plural where it joins two.
+ * @param {string} lawRef @returns {boolean}
+ */
+export function manyForce(lawRef) {
+  return / and /.test(String(lawRef));
+}
+
+// ─── TAIL-DEFECON (2026-11-14): the READ-ALL worklist's safety rows, the safety profile's twins held here ───
+/** #B14103: the small-place no-watch line under an occupation (the occupiers keep order; no one of the place is paid to). */
+export const NO_WATCH_OCCUPIED = lineText({ text: 'No one of the place is paid to keep order; the occupiers keep their own. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.', needs: ['crisis: occupation'] });
+/** #16495: a religious house of the roster (a church "within reach" is not one: `Access to parish church`). */
+export const RELIGIOUS_HOUSE = /church|cathedral|temple|monaster|friary|shrine|abbey|chapel/i;
+/** #15308: the criminal-governance line's claim, and its twin where no criminal seat governs. */
+const VACUUM = ' has filled the power vacuum left by absent or failed civil authority. It provides a form of order and extracts a price for it.';
+const VACUUM_TWIN = " keeps its own order where the civil authority's reach fails, and extracts a price for it.";
+/** #14654: the background-crime line's lead, and its twin beside a criminal power. */
+const NO_DOMINANT = 'Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.';
+const NO_DOMINANT_TWIN = 'Petty theft, minor fraud, and opportunistic violence are persistent, driven by too many people with too little, and too few consequences for taking.';
+
+/**
+ * The crime lines that read the FINAL power roster (`safetyProfile.js :: settleCrimeLinesToSignal`, at assembly):
+ * "filled the power vacuum" only where a criminal seat governs (#15308); "no single dominant organisation" only where
+ * no criminal power stands (#14654). Draw-free; an entry that changes is copied.
+ * @template {{ type?: unknown, desc?: unknown }} C
+ * @param {C[]} entries @param {unknown} seats the roster's seats @param {boolean} powers a criminal power stands
+ * @returns {C[]}
+ */
+export function settleRosterCrimeLines(entries, seats, powers) {
+  const governs = (Array.isArray(seats) ? seats : []).some((seat) => seat?.category === 'criminal' && seat?.isGoverning === true);
+  return entries.map((entry) => {
+    const desc = typeof entry?.desc === 'string' ? entry.desc : '';
+    if (entry?.type === 'Criminal governance' && !governs && desc.endsWith(VACUUM)) return { ...entry, desc: desc.slice(0, -VACUUM.length) + VACUUM_TWIN };
+    if (entry?.type === 'Background crime' && powers && desc.startsWith(NO_DOMINANT)) return { ...entry, desc: NO_DOMINANT_TWIN + desc.slice(NO_DOMINANT.length) };
+    return entry;
+  });
 }

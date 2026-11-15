@@ -67,18 +67,52 @@ const CAUSE_ORDER = Object.freeze(['prosperity', 'safety', 'defense', 'food']);
 const ADVERSE_BANDS = new Set(['Legitimacy Crisis', 'Contested', 'Tolerated']);
 
 /**
+ * ⭐ THE SAFETY CAUSE IS NAMED BY WHAT LOWERED IT (TAIL-DISPLAY-CIVIC, READ-ALL B05826 B05840 06098 06102 B05843 06101
+ * 06043): the breakdown's safety part is `factionDynamics.js :: safetyContrib` over the record's safety label, and a crisis
+ * writes that label with its cause after a dash ("Dangerous — Monster Threat", "Tense — Mass Migration", "Suspicious —
+ * Aftermath of Betrayal"). There "crime" named a cause the town's own label does not hold ("Crime is the reason" in a
+ * migration town with no criminal power, 427 of the census's 720 towns at f663a2699), so the adverse word is "insecurity",
+ * which every such label bears, and "the curfew" under an occupation's curfew alone (a "Controlled" label docks order
+ * without consent, not danger; a curfew joined by another crisis, "+ Famine Conditions", reads "insecurity").
+ * A plain label ("Unsafe", "Dangerous") is the crime ratio's own band, and keeps "crime".
+ * @param {unknown} safetyLabel the record's `economicState.safetyProfile.safetyLabel` @returns {string}
+ */
+function adverseSafetyWord(safetyLabel) {
+  const label = text(safetyLabel);
+  if (!/\s—\s/.test(label)) return CAUSE_WORDS.safety.adverse;
+  return /curfew/i.test(label) && !label.includes('+') ? 'the curfew' : 'insecurity';
+}
+
+/**
  * The one or two causes the breakdown names for the band's direction, largest first; ties break in
  * the fixed order above, so an unrelated edit cannot reorder them.
- * @param {unknown} breakdown @param {boolean} adverse @returns {string[]}
+ * @param {unknown} breakdown @param {boolean} adverse
+ * @param {unknown} [safetyLabel] the record's safety label (a crisis-named label reads "insecurity" or "the curfew", not "crime")
+ * @returns {string[]}
  */
-export function legitimacyCausesOf(breakdown, adverse) {
+export function legitimacyCausesOf(breakdown, adverse, safetyLabel = null) {
   const b = breakdown && typeof breakdown === 'object' ? /** @type {Record<string, unknown>} */ (breakdown) : {};
   return CAUSE_ORDER
     .map((field, order) => ({ field, order, value: typeof b[field] === 'number' && Number.isFinite(b[field]) ? /** @type {number} */ (b[field]) : 0 }))
     .filter(({ value }) => (adverse ? value < 0 : value > 0))
     .sort((a, z) => Math.abs(z.value) - Math.abs(a.value) || a.order - z.order)
     .slice(0, 2)
-    .map(({ field }) => CAUSE_WORDS[/** @type {keyof typeof CAUSE_WORDS} */ (field)][adverse ? 'adverse' : 'favourable']);
+    .map(({ field }) => (field === 'safety' && adverse ? adverseSafetyWord(safetyLabel)
+      : CAUSE_WORDS[/** @type {keyof typeof CAUSE_WORDS} */ (field)][adverse ? 'adverse' : 'favourable']));
+}
+
+/**
+ * ⭐ UNDER AN OCCUPATION THE HALL DOES NOT GOVERN ALONE (TAIL-DISPLAY-CIVIC, READ-ALL 19252 19466 19516 19333 19240): the
+ * occupied stress adds the Occupation Authority to the roster (generators/power/stressFactions.js), in each of the census's
+ * 28 occupied towns at a power near or above the hall's, and the seat sentence said "The Elder Council governs Amarkota."
+ * as in a free town. Where the record holds both, the sentence says the hall governs under it. Null elsewhere.
+ * @param {GovernedRecord} s @param {string} governing @returns {string | null}
+ */
+function occupierOf(s, governing) {
+  if (!governanceStressTypesOf(s).includes('occupied')) return null;
+  const factions = Array.isArray(s.powerStructure?.factions) ? s.powerStructure.factions : [];
+  const occ = factions.find((f) => f && !f.isGoverning && text(f.faction) === 'Occupation Authority' && text(f.faction) !== governing);
+  return occ ? powerNameInProse(text(/** @type {{ faction?: unknown }} */ (occ).faction)) : null;
 }
 
 /**
@@ -213,7 +247,7 @@ const FRACTURE_BLOCS = Object.freeze([
 
 /**
  * The fields of the record the paragraph reads (the rest reach the readers it calls as the record itself).
- * @typedef {{ id?: unknown, name?: unknown, _seed?: unknown, stress?: unknown, powerStructure?: { factions?: Array<{ isGoverning?: unknown, desc?: unknown, faction?: unknown } | null>, publicLegitimacy?: { label?: unknown, breakdown?: unknown } | null, recentConflict?: unknown } }} GovernedRecord
+ * @typedef {{ id?: unknown, name?: unknown, _seed?: unknown, stress?: unknown, powerStructure?: { factions?: Array<{ isGoverning?: unknown, desc?: unknown, faction?: unknown } | null>, publicLegitimacy?: { label?: unknown, breakdown?: unknown } | null, recentConflict?: unknown }, economicState?: { safetyProfile?: { safetyLabel?: unknown } | null } | null }} GovernedRecord
  */
 
 /**
@@ -267,6 +301,8 @@ export function governanceAccountOf(settlement, opts = {}) {
   if (!governing) return null;
   const place = text(s.name) || 'this place';
   const ruler = powerNameInProse(governing);
+  const occupier = occupierOf(s, governing);
+  const under = occupier ? ` under ${occupier}` : '';
   const sentences = [];
   const seed = String(s._seed ?? s.id ?? s.name ?? '');
   /** @param {string} slot @param {number} n */
@@ -283,9 +319,9 @@ export function governanceAccountOf(settlement, opts = {}) {
     const who = role ? `${text(chain.npc.name)}, ${role},` : text(chain.npc.name);
     const whoEnd = role ? `${text(chain.npc.name)}, ${role}` : text(chain.npc.name);
     sentences.push([
-      `${place} is governed by ${ruler}. ${who} holds its seat.`,
-      `${who} holds the seat of ${ruler}. ${capFirst(ruler)} governs ${place}.`,
-      `${capFirst(ruler)} governs ${place}. Its seat is held by ${whoEnd}.`,
+      `${place} is governed by ${ruler}${under}. ${who} holds its seat.`,
+      `${who} holds the seat of ${ruler}. ${capFirst(ruler)} governs ${place}${under}.`,
+      `${capFirst(ruler)} governs ${place}${under}. Its seat is held by ${whoEnd}.`,
     ][pick('seat', 3)]);
   } else if (chain.absence?.kind === 'missing_seat') {
     // THE VACANCY IS THE FIRST FACT (the chair's condition (b), 2026-11-09): 65 of the 1,000. Then what
@@ -297,16 +333,17 @@ export function governanceAccountOf(settlement, opts = {}) {
     // (people/seatKeeper.js :: seatKeeperOf); where one keeps the seat the power is not headless, and the tab's seat row
     // already names the keeper, so the sentence is left out rather than said twice.
     if (claimants.length) sentences.push(`${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`);
-    else if (!seatKeeperOf(s)) sentences.push(`${capFirst(ruler)} governs without a head.`);
+    else if (!seatKeeperOf(s)) sentences.push(`${capFirst(ruler)} governs${under} without a head.`);
   } else {
-    sentences.push(`${place} is governed by ${ruler}. No one is named to its seat.`);
+    sentences.push(`${place} is governed by ${ruler}${under}. No one is named to its seat.`);
   }
 
   // 2. THE STANDING.
   const leg = s.powerStructure?.publicLegitimacy;
   const label = leg && typeof leg === 'object' ? text(leg.label) : '';
   if (label) {
-    const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label)), place, ruler, pick);
+    const safetyLabel = s.economicState?.safetyProfile?.safetyLabel;
+    const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label), safetyLabel), place, ruler, pick);
     if (standing) sentences.push(standing);
   }
 

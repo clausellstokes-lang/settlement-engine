@@ -367,7 +367,10 @@
           "lineId": "POLITICAL_FLAVOR.catastrophic[7].other",
           "text": "The ${event} did not just change what happened next; it changed what the settlement believed was possible, and a people's sense of the possible is the slowest thing in the world to rebuild",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "crisis: under_siege",
+            "crisis: plague_onset"
+          ],
           "crisis": null,
           "colour": true,
           "stop": []
@@ -376,7 +379,10 @@
           "lineId": "POLITICAL_FLAVOR.catastrophic[7].disasterOrMonster",
           "text": "Every plan made in this settlement now includes, unspoken, a contingency for the ${event} happening again, not because anyone expects it, but because expecting nothing was what the ${event} punished",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "crisis: under_siege",
+            "crisis: plague_onset"
+          ],
           "crisis": null,
           "colour": true,
           "stop": []
@@ -541,7 +547,9 @@
         {
           "lineId": "POLITICAL_FLAVOR.stable[5].other",
           "text": "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative",
-          "needs": [],
+          "needs": [
+            "exports"
+          ],
           "excludes": [],
           "crisis": "any",
           "colour": true,
@@ -550,7 +558,9 @@
         {
           "lineId": "POLITICAL_FLAVOR.stable[5].economic",
           "text": "A settlement that has built its identity around commerce rather than conflict. The ${event} proved that economic power endures longer than military prestige",
-          "needs": [],
+          "needs": [
+            "exports"
+          ],
           "excludes": [],
           "crisis": "any",
           "colour": true,
