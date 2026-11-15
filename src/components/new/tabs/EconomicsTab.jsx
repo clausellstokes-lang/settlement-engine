@@ -120,7 +120,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
-  const runningCount    = chains.filter(c => c.status === 'running').length; const impairedHouses = impairedHousesOf(town);
+  const runningCount    = chains.filter(c => c.status === 'running').length; const impairedHouses = impairedHousesOf(town); const flowCount = flowHeaderCount(chains, institutionalServices, impairedHouses); // X2: the header counts what the cards show
 
   const filtered = flowFilter === 'all'        ? chains
     : flowFilter === 'impaired'   ? chains.filter(c => c.status === 'impaired' || c.status === 'vulnerable')
@@ -129,7 +129,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
     :                                chains.filter(c => c.entrepot);
 
   return (
-    <Section title={`Economic Flows (${chains.length + institutionalServices.length} active${impairedCount > 0 ? ` · ${impairedCount} impaired` : ''})`}
+    <Section title={`Economic Flows${flowCount.words}`}
       collapsible defaultOpen={impairedCount > 0} accent={impairedCount > 0 ? '#8b1a1a' : undefined} help={SECTION_HELP.supplyChains}>
       {/* Filter tabs */}
       <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:10}}>
@@ -854,3 +854,24 @@ function impairedHousesOf(town) {
  * line). The record's imports are untouched; the needs line stands. At the end of the file, so no line-keyed row moves.
  */
 import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
+
+/**
+ * THE ECONOMIC FLOWS HEADER COUNTS WHAT THE CARDS UNDER IT SHOW (TAIL-DISPLAY-ECON, the chair's ruling X2, 2026-11-14; the
+ * READ-ALL row B06680, "Economic Flows (2 active · 1 impaired)" over two cards, one of them impaired). "Active" counted every
+ * card, the impaired ones and those that print no state (a house reached only through an "Access to ..." row) among them,
+ * in 460 of the census's 715 towns with flows. A card is active where it prints a working state (running, operational,
+ * entrepôt, vulnerable, magically sustained) and impaired where it prints Impaired, a service card by its own chip; a card
+ * with no state is neither. Where no card is at work, the count of the impaired stands alone; where none is either, the
+ * header is the section's name.
+ * @param {ReadonlyArray<{ status?: unknown }>} chains the chains as their cards print them (`chainAsShown`)
+ * @param {ReadonlyArray<{ institutions?: unknown }>} services `economicState.institutionalServices`
+ * @param {ReadonlySet<string>} impairedHouses the houses the Institutions tab marks impaired, lower case
+ * @returns {{ active: number, impaired: number, words: string }}
+ */
+function flowHeaderCount(chains, services, impairedHouses) {
+  const svcImpaired = services.filter((v) => serviceStateShown(/** @type {any} */ (v)?.institutions, impairedHouses) === 'impaired').length;
+  const impaired = chains.filter((c) => c.status === 'impaired').length + svcImpaired;
+  const active = chains.filter((c) => c.status !== 'impaired' && c.status !== '').length + services.length - svcImpaired;
+  const words = active > 0 ? ` (${active} active${impaired > 0 ? ` · ${impaired} impaired` : ''})` : impaired > 0 ? ` (${impaired} impaired)` : '';
+  return { active, impaired, words };
+}
