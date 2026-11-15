@@ -558,6 +558,34 @@ Batch 1:
 
 - The page-census grid's register: two falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) — stale low, NAMED, not re-taken (re-derived at the close).
 
+## TAIL-DEFECON-6 · the four red files of the food and the stores, classed (2026-11-15)
+
+Seat TAIL-DEFECON-6, from this branch's tip 887ff8eec. FIRST ACT: the joined line merged at **76a735ad** (it holds e81bf16f3):
+139f5d2b, a merge commit of its own, clean. Work tree: a detached scratch worktree with its own `npm ci`, pushed by explicit
+refspec. Each red run ALONE at 139f5d2b first: **7 reds** (famineStoresOneRounding 1, storesSpanFigure 1, r3c10FoodLinesTrue
+3, editWorldFactResources 2). f663a2699 is NOT green for any of the four (all red there too), so each bisect starts from the
+file's own last green point on the joined line's first parent, then inside the lane its merge brought.
+
+| red | turned at (first parent → in the lane) | class | after |
+|---|---|---|---|
+| famineStoresOneRounding (1) | 33b12cbe (JOIN-1 · 9, coherence-upkeep) → **05ec9b60** (COHERENCE-UPKEEP, ruling 6: the full granary keeps `boughtShare('stores', keepOf(prosperity))` of its months; declared 225 of 360, all down) | (ii) RE-KEYED: soak1k-2452 now 5.3 (open, prints five); the only other famine granary at 5.5–5.9 in soak1k-952..3952 is **soak1k-1445** (metropolis, 5.9, held) | 1 failed → 3 passed (7506b770) |
+| storesSpanFigure (1) | 33b12cbe → **05ec9b60** (the same move) | (ii) RE-KEYED: rpf-thorp-succession_void-13 now 1.2; the nearest same-shape thorp (no granary, 1.5) is **-20** | 1 failed → 3 passed (0a6493e0) |
+| r3c10FoodLinesTrue (d) (1) | 3e482b32 (JOIN-8 · 19, tail-defecon-c) → **680d16b5** (the catalogue's D34 (a): the hot springs give no herbs; `resourceAnalysis.gaps` 16 of 720) | (ii) RE-KEYED: rr3-town-famine-isolated-1 holds no partial gap now; nearest same shape **-2** (famine town, an established apothecary beside the partial herbs chain, Alchemist shop missing) | 3 failed → 2 failed (4d0b097d) |
+| r3c10FoodLinesTrue (a) (2) | red since the file's birth merge c2c12792: **825bcf24** (W2-FIX-DATA-HISTORY item B, `src/data/cultureProfiles.js`, first parent 8f222ff8, a declared data move) reworded celtic's "Herding and mixed farming …" to "Herds and field grain set a strongly seasonal food calendar." (stands only where herds AND grain feed the place) | (iii) NAMED: not the economy generators' file; the arm reads the culture by `/\bherding\b/` and its herd towns hold no grain | LEFT, red (the chair's) |
+| editWorldFactResources A2, A6 (2) | green at its re-capture 4182e976; 77e480ac (JOIN-1 · 1, r3-code-c) → **9a3239ae** (R3-CODE-C-2 #457 #1163, `resourceGenerator.js` export rows; declared 54 of 720, `resourceAnalysis` only) | NAMED, NOT RE-CAPTURED: the six PRE_CHANGE digests are whole-world hashes and row 21's `derived` is the golden master's own control row; their re-capture (the file's plant ritual) re-takes a golden, which this seat's brief forbids. Every later generator move (05ec9b60, D34, R3, R2 …) moves them again | LEFT, red (the owner's door / the chair's ruling) |
+
+OWED BY TAIL-DEFECON-5, done (82840f4a): `tailDefecon5RecordCures.test.js`'s R3 rows' bare `.not.toBe(old)` →
+`expectAbsentWithAnchor([viewShort], old, short)` (the same assertion, anchored on the tab's figure); 12 passed before and after.
+
+PROOF (each red alone before/after, above). No source file touched; no assertion changed in a re-key (the member only, the
+move named in the commit and in a comment beside the member). Files naming a touched test (`r3c9ReaderLinesTrue`,
+`houseInputReaches`): 1 failed | 11 passed before and after, the same red. eslint on the four touched files 0; the full type
+ratchet exit 0; the negative-anchor and seed-loop walkers: the base's 4 reds before and after, none naming a touched file;
+the twelve-birth grid (`page-census.mjs --grid`) exit 0, 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) at
+139f5d2b and after: no rise. No record moved (tests only): no census owed.
+
+LEFT: r3c10 (a) and editWorldFactResources A2/A6, named above. Not built (ruling U3): R6, R1, R5, R4.
+
 ## What is left (TAIL-DEFECON-5, HANDED BACK by time after R2, 2026-11-15 ~05:50 UTC)
 
 Pushed: the merge 694621784; R3 7ce6db273 and its ceiling e1577f2cd; R2 9cc8c6826 (its first push was refused by the type
