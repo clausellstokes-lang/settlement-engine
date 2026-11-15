@@ -27,6 +27,8 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 4 | tail-crisis-2026-11-14 | 9c07f7461 (00:24) | bcad1a358 | bdea399e1 | none | DECLARED MOVE (1409e3cbb): stress `summary` in 66 records, economicViability in 7 besieged famines: the golden master's red is carried (§4 [J6]); 3 pins re-keyed by identity in the lane's commit: code |
 | S2 | tail-services-2026-11-14 (the chair's LAND 00:24) | d7c032485 (00:28; equal to the chair's) | 4035c33a5 (point 1) | b6c64d36c | none | — (3 files, ruling S6: chains and income shares in the leaf's table; told to the chair 00:33) |
 | 5 | tail-houses-2026-11-14 | a2550c0ef (00:31) | bcad1a358 | 96b4015f4 | none | lane-only registers taken from the lane: `presumedThings.widened.register.json`, `docs/census/declarations/institutionDescVariants.INSTITUTION_DESC_VARIANTS.json`; DECLARED MOVE institutions[].desc: the golden carried |
+| 6 | tail-ties-2026-11-14 | b8991a936 (00:37; handed back) | f663a2699 | e7de70116 | none (code); `presumedThings.widened.register.json` merged clean, both moved | the register (clean-both with houses 5: the union of two disjoint shrinks); lane-only `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json`; the vocabulary atom `ruling body` (known meeting (1)); DECLARED MOVES e0d38e6c4 (tension, 358 towns) and 97685dc01 (plotHooks, 194 towns): goldens carried |
+| — | tail-history-2026-11-14 | SKIPPED (the chair 00:28: no src change; waits for LAND) | — | — | — | — |
 
 ## 3. Every code resolution
 
@@ -76,8 +78,10 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `tests/generators/coherenceAgreeCures.test.js` (the gate tally) | — (red ×2 at the joined line's 06f36ad36 already) | carried by ruling (k), unbanked, not this seat's |
 | `tests/property/generatorGoldenMaster.test.js` (and the goldens it pins) | tail-crisis (4) | the DECLARED MOVE of 1409e3cbb (stress/stressors `summary` in 66 records: insurgency 37, monster_pressure 17, slave_revolt 8, wartime 4; economicViability in the 7 besieged famines; no draw moved): not re-taken, the owner's door |
 | `tests/property/generatorGoldenMaster.test.js` | tail-houses (5) | the DECLARED MOVE of a2550c0ef (institutions[].desc only; the hand-back's veto list is the owner's) |
-| `tests/lint/presumedThings.widened.register.json` | tail-houses (5): lane-only, taken from the lane (10 stale rows shrunk; fresh 147 -> 145) | the close re-derives it once |
+| `tests/lint/presumedThings.widened.register.json` | tail-houses (5): lane-only, taken from the lane (10 stale rows shrunk; fresh 147 -> 145) | the close re-derives it once; ALSO MOVED BY tail-ties (6): merged clean though both sides moved it (two disjoint shrinks through its door, the union stands) |
 | `docs/census/declarations/institutionDescVariants.INSTITUTION_DESC_VARIANTS.json` | tail-houses (5): lane-only, taken from the lane | the close re-derives it once |
+| `tests/property/generatorGoldenMaster.test.js`, `tests/property/espionageDormancyFence.test.js` (its driven golden) | tail-ties (6) | the DECLARED MOVES of e0d38e6c4 (relationships[].tension, 358 towns) and 97685dc01 (npcs[].plotHooks[], 194 towns; no tie re-drawn) |
+| `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json` | tail-ties (6): lane-only, taken from the lane | the close re-derives it once |
 
 ## 5. Item 2 at the landed tip
 
