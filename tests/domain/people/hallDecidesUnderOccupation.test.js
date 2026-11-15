@@ -19,6 +19,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/dens
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { dmPowerViewOf } from '../../../src/domain/people/patronage.js';
 import { CAPTURE_LINES } from '../../../src/data/people/dmPowerLines.js';
+import { factsOf } from '../../../src/domain/facts/factsOf.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -32,12 +33,19 @@ const cfgFor = (/** @type {string} */ seed) => {
 const SELF_RULE = /make their own decisions|rules in its own name|decides? for (?:it|them)sel/;
 /** the hall's fact: the ruling three take no orders from the criminals */
 const CLEARED = /takes orders from the criminals|gives [^.]* its orders/;
-/** seed -> what the page says beside the hall line at 0ea65f574 */
+/** the none rung's first line, the one the rung prints where no syndicate stands (hallLineReadsCrime.test.js's DENIES) */
+const FIRST = /^Nobody at the head of .+ answers to a criminal house, and no criminal power here is strong enough to push it\.$/;
+/** seed -> [what the page says beside the hall line at 0ea65f574, the town's crime structure (factsOf(record).crime)] */
 const OUTSIDE = {
-  'r2s-occupied-town-1': 'occupied', // the reader's own; the smallest size the second line reaches under an occupation
-  'r2s-occupied-city-1': 'occupied',
-  'r2s-occupied-metropolis-0': 'occupied', // the largest
-  'r2s-infiltrated-metropolis-3': 'Vulnerable (decisions shaped from outside)',
+  'r2s-occupied-town-1': ['occupied', 'organized'], // the reader's own; the smallest size the second line reaches under an occupation
+  'r2s-occupied-city-1': ['occupied', 'organized'],
+  'r2s-occupied-metropolis-0': ['occupied', 'organized'], // the largest
+  // TAIL-POWERS-B-5, RE-KEYED BY IDENTITY: a DECLARED MOVE of the defence display (82e8fab6e W2-C-LEAVES-3, 0044e4f84
+  // W2-C-LEAVES-11: the roster's "Multiple criminal factions" with no criminal seat and no thieves' guild is rival rings,
+  // "semi-organized") took this town's structure from organized; it stands no criminal power (a smuggling network, an
+  // underground network, "Multiple criminal factions"), so the none rung prints its first line, true beside rival rings
+  // (POWERS-14), and the case still reads that no line under an infiltration says the hall decides for itself
+  'r2s-infiltrated-metropolis-3': ['Vulnerable (decisions shaped from outside)', 'semi-organized'],
 };
 const GUARD = ['r2r-city-0', 'r2r-town-44']; // calm syndicate towns: the line still clears the three
 
@@ -49,15 +57,18 @@ beforeAll(async () => {
 }, 240000);
 
 describe('the hall\'s none rung claims the criminals\' standing only, never that the hall decides for itself', () => {
-  for (const [seed, why] of Object.entries(OUTSIDE)) {
+  for (const [seed, [why, crime]] of Object.entries(OUTSIDE)) {
     test(`${seed} (${why}): the hall line clears the three of the criminals and does not say they decide for themselves`, () => {
       const s = births[seed];
       if (why === 'occupied') expect(s.config.stressTypes ?? [s.config.stressType], 'anchored: occupied').toContain('occupied');
       else expect(String(s.powerStructure.stability), 'anchored: the head reads it').toContain(why);
       const hall = dmPowerViewOf(s)?.hall;
       expect(hall?.rung, 'anchored: the none rung').toBe('none');
-      expect(hall.line, 'anchored: the syndicate line that names the three').toMatch(/^None of the head, the second and the third of /);
-      expect(hall.line).toMatch(CLEARED);
+      expect(factsOf(s).crime, 'anchored: the crime structure the hall line reads').toBe(crime);
+      if (crime === 'organized') {
+        expect(hall.line, 'anchored: the syndicate line that names the three').toMatch(/^None of the head, the second and the third of /);
+        expect(hall.line).toMatch(CLEARED);
+      } else expect(hall.line, 'anchored: the first line, no syndicate standing').toMatch(FIRST);
       expect(hall.line).not.toMatch(SELF_RULE);
     });
   }
