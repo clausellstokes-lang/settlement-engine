@@ -12,6 +12,8 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { faithLinesOf, faithReadingOf } from '../../src/domain/dossier/faithReading.js';
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -84,15 +86,16 @@ const KEEP = [
 describe('TAIL-CRISIS batch 1: no false crisis line where the town makes it false', () => {
   // plain loops over the rows (the sovereignty walker's park debt: no new `each` call)
   it('each FALSE pair does not print the false line, and prints its twin', () => {
-    for (const [seed, surface, wrong, instead] of FALSE) {
+    const failures = collectSeedFailures(FALSE, ([seed, surface, wrong, instead]) => {
       const text = /** @type {(s: any) => string} */ (surface)(birth(/** @type {string} */ (seed)));
-      expect(text, `${seed}: ${wrong}`).not.toContain(wrong);
-      expect(text, `${seed}: ${instead}`).toContain(instead);
-    }
+      expectAbsentWithAnchor(text, wrong, instead, String(seed));
+    });
+    expectNoSeedFailures(failures, 'a FALSE line printed, or its twin did not');
   }, 120000);
   it('each KEEP pair keeps its true line', () => {
-    for (const [seed, surface, line] of KEEP) {
+    const failures = collectSeedFailures(KEEP, ([seed, surface, line]) => {
       expect(/** @type {(s: any) => string} */ (surface)(birth(/** @type {string} */ (seed))), `${seed}: ${line}`).toContain(line);
-    }
+    });
+    expectNoSeedFailures(failures, 'a KEEP line no longer prints');
   }, 120000);
 });

@@ -34,8 +34,9 @@ describe('W2-FIX-DATA-11: the bar\'s rows in the data lane\'s files', () => {
     expectNoSeedFailures(collectSeedFailures(['r2r-town-1', 'r2r-town-9', 'r2r-town-38'], (seed) => {
       const smelter = instOf(bornCensus(seed), 'Smelter');
       expect(smelter, `${seed} holds a Smelter`).toBeDefined();
-      expect(String(smelter.desc), seed).not.toMatch(BETWEEN);
       expect(String(smelter.desc), seed).toMatch(/by the bar|in bars for whoever will buy them/);
+      // anchored: the same description is shown directly above to print its by-the-bar reword
+      expect(String(smelter.desc), seed).not.toMatch(BETWEEN);
     }), 'no mine or no smith: the smelter names neither');
     expect(String(instOf(bornCensus('r2r-town-11'), 'Smelter').desc)).toMatch(BETWEEN);
   }, 120_000);

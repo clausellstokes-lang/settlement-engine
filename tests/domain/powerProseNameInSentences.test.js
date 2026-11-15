@@ -85,7 +85,11 @@ const sentencesOf = (s) => {
 describe('the leaf: every slashed or bracketed power name has its prose form', () => {
   it('each prints its form, and no form carries a slash or a bracket', () => {
     expect(Object.keys(PROSE_FORMS || {}).sort(), 'the table names the catalogue\'s six').toEqual([...LABELS].sort());
-    for (const label of LABELS) expect(powerSentenceName(label), label).not.toMatch(/[/()[\]\d]/);
+    for (const label of LABELS) {
+      expect(powerSentenceName(label), `${label}: prints its form`).toBe(PROSE_FORMS[label]);
+      // anchored: the form asserted directly above is the subject read here
+      expect(powerSentenceName(label), label).not.toMatch(/[/()[\]\d]/);
+    }
     expect(powerSentenceName('Military/Guard')).toBe('The Guard');
     expect(powerSentenceName('Elder Council'), 'a plain name is itself').toBe('Elder Council');
     expect(powerSentenceName('The Independent Bloc')).toBe('The Independent Bloc');

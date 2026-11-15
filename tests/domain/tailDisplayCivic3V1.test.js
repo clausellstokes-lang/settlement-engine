@@ -14,6 +14,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { powerDeskRead, powerDeskReadings, governanceAccountRead, powerLadderRead } from '../../src/components/new/powerDeskRead.js';
 import { powerNameAfterArticle, powerSentenceName } from '../../src/domain/display/powerSentenceName.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -71,8 +72,8 @@ describe('V1: a power named in a sentence takes the one leaf\'s form', () => {
   });
   test.each(CURED)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
     const t = TEXT.get(seed);
-    expect(t).not.toContain(gone);
-    expect(t).toContain(instead);
+    expectAbsentWithAnchor(t, gone, instead, seed);
+    // anchored: the helper call above shows the cured sentence prints in this text
     expect(t).not.toMatch(/\bthe The\b/i);
   });
   test.each(KEPT)('%s: "%s" still prints', (seed, kept) => {

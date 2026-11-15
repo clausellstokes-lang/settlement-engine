@@ -25,6 +25,7 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -71,8 +72,7 @@ const KEEP = /** @type {const} */ ([
 describe('TAIL-DISPLAY-ECON-5 (X31): the short words read the food record\'s band', () => {
   test.each(NOT)('%s: %s does not print', (seed, gone, instead) => {
     const text = textOf(town(seed));
-    expect(text).not.toContain(gone);
-    expect(text).toContain(instead);
+    expectAbsentWithAnchor(text, gone, instead, `${seed}: band Secure takes its twin`);
   }, 60000);
   test.each(KEEP)('%s: %s still prints', (seed, kept) => {
     expect(textOf(town(seed))).toContain(kept);

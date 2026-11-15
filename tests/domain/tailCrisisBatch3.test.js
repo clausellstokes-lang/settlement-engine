@@ -6,6 +6,8 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { crisisHooksOf } from '../../src/domain/crisis/crisisHooks.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -60,13 +62,16 @@ const KEEP = [
 
 describe('TAIL-CRISIS batch 3: the cast hook says its reason of the holder', () => {
   it('no FALSE words print, and the line the record bears prints in their place', () => {
-    for (const [seed, gone, instead] of FALSE) {
+    const failures = collectSeedFailures(FALSE, ([seed, gone, instead]) => {
       const text = hooks(birth(seed));
-      expect(text, seed).not.toContain(gone);
-      expect(text, seed).toContain(instead);
-    }
+      expectAbsentWithAnchor(text, gone, instead, seed);
+    });
+    expectNoSeedFailures(failures, 'a FALSE phrase printed, or the line in its place did not');
   }, 300000);
   it('every KEEP sibling still prints', () => {
-    for (const [seed, kept] of KEEP) expect(hooks(birth(seed)), seed).toContain(kept);
+    const failures = collectSeedFailures(KEEP, ([seed, kept]) => {
+      expect(hooks(birth(seed)), seed).toContain(kept);
+    });
+    expectNoSeedFailures(failures, 'a KEEP sibling no longer prints');
   }, 300000);
 });

@@ -114,6 +114,9 @@ describe('R2-CODE-B-11 (a) · the collaborator is never the occupier (the bar\'s
     const s = born[LINKED];
     const e = entries(s).find((x) => x.type === 'occupied');
     expect(e.cast.roles.filter((/** @type {any} */ r) => r.reason.startsWith(CAST_REASONS.collaboratorLinked))).toEqual([]);
+    const famine = entries(s).find((x) => x.type === 'famine');
+    expect(famine?.cast?.roles?.some((/** @type {any} */ r) => r.role === 'exploiter'), `${LINKED}: the famine the link would read casts an exploiter`).toBe(true);
+    // anchored: the famine exploiter asserted above is the row this link would read, so the link is live and refused
     expect(e.cast.links).not.toContain('famine');
   });
 });
