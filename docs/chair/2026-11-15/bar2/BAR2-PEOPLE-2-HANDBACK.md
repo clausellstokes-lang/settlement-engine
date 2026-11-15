@@ -89,6 +89,39 @@ in `npcGenerator.js`, outside my files. NAMED for the seat that holds `npcGenera
 that branch (`biasedCat === 'economy'`, an `ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER` set, the holder's trade read as
 `pairSharesTrade` reads one card: its house family or a non-`other` category), measure 4 of 140 holders.
 
+## PP11 · GRANTED (the chair, 15:47 UTC; vetoable by the owner): NOT BUILT, OWED BY MY SUCCESSOR
+
+The row (named to this seat by the labels seat): "Tense (militarised, chronically underfunded)"
+(`governanceNarrative.js :: deriveBaselineStability`, written to `powerStructure.stability`). VERIFIED on the base
+census: it prints in 7 of the 720 and is FALSE IN 6: `defenseProfile.economicGates.military` reads 1 (funded in full) in
+r2r-town-28, r2r-city-6, r2r-city-28, r2r-metropolis-3, r2r-metropolis-53, r2s-monster_pressure-city-0; it stands in
+r2r-town-16 (0.88). It is written at the power step, before the gate exists (the gate is first written by
+`generateDefenseProfile` at `assembleSettlement.js:255`); the late re-read already runs just after it, the
+readiness-label replay at `assembleSettlement.js:271`.
+
+THE GRANT, as the chair wrote it (build it whole): (1) `assembleSettlement.js`: ONLY the replay's options object takes
+one more key ON THE SAME LINE (`{ defenseLabel: …, militaryGate: settlement.defenseProfile.economicGates?.military,
+pins }`): ADD NO LINE, MOVE NONE (its writes are cited by line; the labels branch changed the `generateDefenseProfile`
+line and two lines near the end: touch none). (2) `economyReconciliation.js :: projectPower` takes `militaryGate` beside
+`defenseLabel` and hands it into `generatePowerStructure`'s projection (`rulingStructure.js` is where
+`generatePowerStructure` lives: `projection.militaryGate` → `deriveStability`'s params beside `defenseLabel` at :698 →
+`deriveBaselineStability`), where the line takes the twin **"Tense (militarised)"** where the gate reads 1 and stands
+as it is where it is under 1 or was not handed in. Four files exactly (I read the chain: `powerGenerator.js` only
+re-exports `generatePowerStructure`). DRAW-FREE. (3) A DECLARED MOVE: its law test red first (the line says
+"underfunded" only where the gate is under 1), the field diff by family on the 720, the 525 count; the twin is a
+veto-list line.
+
+## Hand-back at the budget
+
+My count read 223,692 at 15:53 UTC (the 250,000 line is near): batch C (PP3) is pushed; batch D (the hook) is parked
+above; PP11 and THE BOOKS (F2, on the chair's merge word) are owed by whoever takes the seat. The 525 count's script is
+ready to re-make: for each `goldenCorpus()` row (`tests/helpers/goldenMasterCorpus.js`), `generateSettlementPipeline(cfg,
+null, { seed: _seed, customContent: {} })` hashed whole and by top-level field, at the merged line's tip without my
+branch and at my merged tip (plain node imports the tree's modules; no vitest needed). The law suites run so far at the
+tip, before the merge: `rosterDuplicateDraws` is red AT THE BASE TOO (2 of 3: carried from the line, not mine);
+`hookThemeDraws`, `proseComposed`, `proseEntryContradiction`, `proseWiringCensus` and `writerReach` red at the tip with
+stored-corpus and frozen-register arms (not yet classed against the base: F2's work after the merge).
+
 ## EVERY NEW OR CHANGED LINE (the owner's veto list)
 
 | line (new) | file | read in (smallest · largest · a crisis) |
@@ -107,7 +140,10 @@ that branch (`biasedCat === 'economy'`, an `ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER` se
 
 ## THE BOOKS MY CURES MOVE (F2)
 
-Held for the chair's "MERGE THE LINE AT <tip>".
+Held for the chair's "MERGE THE LINE AT <tip>"; owed (above). What is known: batch C moves `relationships[].description`,
+`prominentRelationship.phrasing`/`.full` and `pressureSentence` (341 of the 720); the declaration ledger
+(`docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json`) is unchanged (`tieProseDeclared.test.js` green: a
+stand-in card without a category keeps the drawn line).
 
 ## Guards
 
