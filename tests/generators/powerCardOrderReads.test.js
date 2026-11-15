@@ -77,9 +77,13 @@ describe('SW-B1 · P50: the government line is the seat\'s own, never the unread
     // only where the town has a house of that kind, else the next priority, else the size's civic government): the
     // religion row's thorp now stands its priest's house, so Priestly Guidance is still the seat it names; with no
     // house at all, the same thorp is an Elder Council (asserted below).
+    // RE-KEYED BY IDENTITY 2026-11-15, TAIL-POWERS-2 DA (the chair's P7, P8: the same law for the military row):
+    // "Headman's Authority" is the seat only where the thorp holds a headman's house; with none, the size's civic
+    // seat (Elder Council). The line, never the MIXED one, is asserted in both.
     for (const [tier, prio, seat, houses] of /** @type {Array<[string, Record<string, number>, string, Array<{ name: string }>]>} */ ([
       ['thorp', { priorityEconomy: 80 }, 'Household Council', []],
-      ['thorp', { priorityMilitary: 80 }, "Headman's Authority", []],
+      ['thorp', { priorityMilitary: 80 }, "Headman's Authority", [{ name: 'Village headman' }]],
+      ['thorp', { priorityMilitary: 80 }, 'Elder Council', []],
       ['thorp', { priorityReligion: 80 }, 'Priestly Guidance', [{ name: 'Priest (resident)' }]],
       ['thorp', { priorityReligion: 80 }, 'Elder Council', []],
       ['town', { priorityEconomy: 40, priorityMilitary: 40 }, 'Town Mayor', []],

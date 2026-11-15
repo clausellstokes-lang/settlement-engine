@@ -222,7 +222,7 @@ export const generatePowerStructure = (
       ? (governingFaction =
           (topPriority > 65 &&
             {
-              military: "Headman's Authority",
+              military: lowerInstNames.some((n) => String(n).includes('headman')) ? "Headman's Authority" : null, // TAIL-POWERS-2 DA (P7, P8): said only where the roster holds a headman's house; with none, the size's civic seat below
               religion: 'Priestly Guidance',
               economy: 'Household Council',
               criminal: 'Elder Council',
