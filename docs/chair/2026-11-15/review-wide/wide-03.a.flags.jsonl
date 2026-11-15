@@ -1,0 +1,5 @@
+{"id":"C04391","town":"bar0-city-under_siege+famine-rand-12","sev":"MED","kind":"STATE","why":"runner comes out of a side gate; CRISIS Under Siege: nothing goes in or out by gate, and C04387 says the gates are closed","other":"C04387"}
+{"id":"C04398","town":"bar0-city-under_siege+famine-rand-12","sev":"MED","kind":"STATE","why":"calls Eudokia Limniotes 'the Lord Warden'; PEOPLE gives her as f, 'the dean' heading the Ecclesiastical Council","other":""}
+{"id":"C04414","town":"bar0-city-under_siege+famine-rand-12","sev":"MED","kind":"STATE","why":"reliance on magic Integral; header magic low, FOOD by magic 0%, Magical Capability Weak (C04417)","other":"C04417"}
+{"id":"C05398","town":"bar0-city-under_siege+famine-rand-12","sev":"MED","kind":"LACKS","why":"names 'elected aldermen' alongside the clergy; GOVERNMENT lists no elected body or aldermen, only the Ecclesiastical Council, Religious Authorities, War Council, Order of the Watch","other":""}
+{"id":"DONE","lines":1763,"blocks":1,"flags":4}
