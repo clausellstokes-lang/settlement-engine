@@ -5,6 +5,9 @@
 
 import {SUPPLY_CHAIN_NEEDS} from '../data/goods/chains.js';
 import {RESOURCE_TO_CHAINS} from '../data/goods/chains.js';
+import {RESOURCE_CHAINS} from '../data/goods/chains.js';
+import {institutionHasAnyTag} from '../lib/entities.js';
+import {TERRAIN_DATA} from '../data/geographyData.js';
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
 import { MAGIC_TRADITION_HOUSES } from '../data/magicTraditionHouses.js'; // W2-A-LEAVES: one tradition table, read by the leaf that names magic's source
 import { chainNeedsMagic } from '../domain/magicReliance.js';
@@ -955,11 +958,43 @@ export function deriveImportsFromChains(activeChains, nearbyResources, tier, rou
 /**
  * Derive localProduction from available resource commodities + locally-run chains.
  */
+/** @param {string} raw */
+const normalizeRaw = (raw) => String(raw || '').toLowerCase().replace(/[_\s]+/g, ' ').trim();
+// D30 (b): the record's exploitation models a chain only where the terrain allows its raw. This restates
+// `resourceGenerator.js :: terrainAllowsResource` (and its synonyms) because importing it closes an import cycle
+// (resourceGenerator -> economicGenerator -> economic state -> this file; `scripts/boot-smoke.mjs` holds the graph
+// acyclic). `tests/generators/tailDefeconMadeListWhole.test.js` holds the two equal on every terrain and every raw.
+/** @type {Readonly<Record<string, string[]>>} */
+const RAW_TERRAIN_SYNONYMS = Object.freeze({
+  'copper ore':      ['copper'],
+  'gold/silver ore': ['precious_metals'],
+  'gemstones':       ['gemstone_deposits'],
+  'glass sand':      ['glass_sand'],
+  'animal hides':    ['hides'],
+});
+/** @param {ReadonlyArray<string>} allowedResources @param {string} rawResource */
+export function madeListTerrainAllowsRaw(allowedResources, rawResource) {
+  const raw = String(rawResource || '').toLowerCase();
+  const synonyms = RAW_TERRAIN_SYNONYMS[raw] || [];
+  return (allowedResources || []).some((r) => {
+    const v = String(r).toLowerCase();
+    return v.includes(raw) || synonyms.some((syn) => v.includes(syn));
+  });
+}
+// D30 (b): the resource chains by the raw they take (`rawResource`, normalized as the exploitation record's own token).
+/** @type {Map<string, Array<any>>} */
+const RAW_CHAINS = new Map();
+Object.values(RESOURCE_CHAINS).forEach((chain) => {
+  const raw = normalizeRaw(/** @type {any} */ (chain).rawResource);
+  if (raw) RAW_CHAINS.set(raw, [...(RAW_CHAINS.get(raw) || []), chain]);
+});
+
 export function deriveLocalProductionFromChains(
   activeChains,
   nearbyResources,
   depletedResources = [],
   institutions = null,
+  terrainType = null,
 ) {
   // TAIL-DEFECON-C (C1-A, D6/D7): A GOOD IS MADE WHERE A HOUSE THAT DIGS IT OR WORKS IT STANDS. What the land provides
   // is made here only where a house of THIS town works it (MADE_HERE_WORKING_HOUSES, else the export's own
@@ -991,6 +1026,29 @@ export function deriveLocalProductionFromChains(
     const kws = (Array.isArray(gate) ? gate : [gate]).flatMap(kw => MADE_HERE_KEYWORD_WIDENING[kw] || [kw]);
     return kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
   };
+  // TAIL-DEFECON-C-3 (D30 (b), the chair, 2026-11-15): A GATHERED OR HERDED GOOD IS MADE WHERE THE LAND GIVES IT AND IT
+  // IS WORKED. A land's commodity that a resource chain takes as its raw (wool, animal hides, medicinal herbs, timber,
+  // clay, …: RESOURCE_CHAINS by `rawResource`) is made here only where a house of this town works that chain, asked
+  // exactly as the record's own exploitation asks it (`resourceGenerator.js :: institutionSupportsChain`: a house
+  // carrying one of the chain's processing tags, or named among its processors; never custom content). So the made
+  // list and `resourceAnalysis.exploitation` agree: a raw the record names "unexploited" is not listed as made (D15).
+  // A commodity no chain takes (honey, dates, coal, peat, …) keeps the land's gate alone; COAL AND PEAT stay as
+  // designed (no chain takes them).
+  const nativeHouses = Array.isArray(institutions)
+    ? institutions.filter(i => i && !isMaterializedCustomContent(i))
+    : null;
+  const rawWorkedHere = (good) => {
+    if (!nativeHouses) return true;
+    const allowed = terrainType ? TERRAIN_DATA[terrainType]?.allowedResources : null;
+    // the record's own activation: a chain the terrain does not allow is not modelled there, so it is not "unexploited"
+    const chains = (RAW_CHAINS.get(normalizeRaw(good)) || [])
+      .filter(chain => !allowed || madeListTerrainAllowsRaw(allowed, chain.rawResource));
+    if (!chains.length) return true;
+    return chains.some(chain => nativeHouses.some(i => (
+      institutionHasAnyTag(i, chain.processingTags || [])
+      || (chain.processingInstitutions || []).some(name => name === i.name)
+    )));
+  };
   const local = new Set();
   const depleted = new Set(
     depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
@@ -1007,6 +1065,7 @@ export function deriveLocalProductionFromChains(
     const rd = RESOURCE_DATA[key];
     if (rd?.commodities) rd.commodities.forEach(c => {
       const good = c.replace(/_/g, ' ');
+      if (!rawWorkedHere(good)) return; // D30 (b): the record's exploitation names no house at this raw
       if (!refusedOnly.has(good.toLowerCase())) local.add(good);
     });
   });
