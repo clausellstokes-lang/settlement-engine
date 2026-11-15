@@ -89,7 +89,7 @@ export function withoutCriminalGuild(text) {
 export function withTownsOwnUnderworld(text, signal, crimeFaction = null) {
   if (typeof text !== 'string' || !new RegExp(CRIMINAL_GUILD, 'i').test(text)) return text;
   const named = [crimeFaction, ...(signal?.factions || []), ...(signal?.houses || [])];
-  if (named.some((n) => /thie|criminal guild/i.test(String(n || '')))) return text;
+  if (named.some((n) => /thie/i.test(String(n || '')) || namesCriminalGuild({ short: n }))) return text; // the criminal guild by its own reader (TAIL-CLOSE-SRC-3)
   if (!crimeFaction && !signal?.present) return withoutCriminalGuild(text);
   return /** @type {T} */ (/** @type {unknown} */ (text
     .replace(/on (?:the )?thieves['’]? guild payroll/gi, 'on the payroll of the local underworld')
