@@ -263,6 +263,8 @@ exports (`SURFACES=PDF,Journal`): 35,779 -> 35,784; gone 86, new 91 (almost all 
 
 ## What is left of this file's rows (HANDED BACK at the budget, 2026-11-15 ~01:25 UTC, by time: ~70 minutes)
 
+(UPDATED by TAIL-DEFECON-C-3, 2026-11-15: items 1 and 2 of the list below are DONE under D30, ea788e17c and
+6ce176aff: see the TAIL-DEFECON-C-3 section at the end, whose WHAT IS LEFT is the current one.)
 (UPDATED by TAIL-DEFECON-C-2: items 1 and 2 are DONE, a10a457e2 and e6700483b, and D25 at 28f86423c, above. The chair,
 02:10: no successor is seated for `computeActiveChains.js`. WHAT IS LEFT OF IT, widest first, each measured on the
 census's 720 at 28f86423c's record:
@@ -327,7 +329,7 @@ Same branch, same files. Worked to **D30** (the chair, 2026-11-15 02:31 UTC; vet
 | commit | what | record move (births-only field diff on the 720, over the commit before) |
 |---|---|---|
 | **ea788e17c** (a) | `outputMadeHere` asks GOOD_WORKING_HOUSES for every good it names | 91 towns, ONE family: `economicState.localProduction`; no gain anywhere; no made list emptied |
-| **(b)** (this commit) | a land's commodity that a resource chain takes as its raw is made only where a house works that chain, asked as the record's exploitation asks | 123 towns, ONE family: `economicState.localProduction`; 1 gain (read, true); 2 lists emptied (silent by design) |
+| **6ce176aff** (b) | a land's commodity that a resource chain takes as its raw is made only where a house works that chain, asked as the record's exploitation asks | 123 towns, ONE family: `economicState.localProduction`; 1 gain (read, true); 2 lists emptied (silent by design) |
 
 ### D30 (a)
 
@@ -385,9 +387,66 @@ Same branch, same files. Worked to **D30** (the chair, 2026-11-15 02:31 UTC; vet
   coherenceAgreeCures x2, urbanBandInstitutions G5; G3 passed this run), the sixth re-keyed above. domain-strict, the
   type ratchet, eslint: exit 0. The golden master moves again (the owner's door): not re-taken.
 
+### THE PAGE (one census before at 906ff0352, one after at 6ce176aff: (a) + (b); tabs only, `CENSUS_RENDER=render.census2.jsx`)
+
+Both `census3.sh` runs exit 0; the after corpus equals the births-only record of 6ce176aff (0 towns moved).
+- **THE D30 CENSUS, "a good made with no house or land for it", printed** (the made list only; a good of the classes'
+  MAKER table with no maker house, coal and peat left out by design, OR a raw the record's exploitation names
+  unexploited; printed where the good's string is in the tabs, `pageprint.mjs`'s way): **232 towns -> 85** (record
+  279 -> 113). The 389 of D30's text was the classes' c1 printed at 358d6afea (both sides, coal and peat in); that
+  instrument at this base: **c1 printed 323 -> 298** (record 373 -> 327; the rest is the export side and coal/peat).
+- LEFT on the made list (towns on the record / printed), each a good GOOD_WORKING_HOUSES does not name or a reading
+  the classes' regex does not share: flour/bread 37/37 (the raw "flour" of the grain land and the mill site, "Baked
+  goods"), gems 37/35 (jewelry by Specialized metalworkers: the table's row; and the bundled gems below), textiles
+  17/16 ("Processed textiles", "Finished clothing", "Fine wool cloth"), glass 7/7 (the raw "glass"), education 37/3,
+  books 2/2. Each needs a table row (which gates the export too) or the data's holder: NAMED.
+- THE INVENTORY (`inventory_diff.py`): sentences 28,898 -> 28,903; gone 27, new 32, fewer 19, more 14, moved 2. Every
+  row but one is a PILL FOLD (the made list's pills fold into one token a town: "timberBarrels and containers"), and
+  every fold that is new or wider holds only goods the town's record still lists (the record lost goods and gained
+  one, read above). The one prose row: **"Produced locally" 657 -> 655**: r2r-village-57 and
+  r2s-mass_migration-hamlet-1 printed only "timber" and "Barrels and containers" (no cooper; timber where a Carpenter
+  alone stands and the record names the timber unexploited); what their records still list (herbs, coal) the row's
+  own filter does not print, so the row is silent: SILENT AND TRUE. The two emptied thorps (r2r-thorp-0, -41) did not
+  print the row before.
+- THE INHERITORS (48 folds, each one town to fourteen): all pill folds of goods still listed: 0 false inheritors.
+
+### The chair's doubted catalogue pairs (D31, the chair's note of 02:31: NAMED, not built here)
+
+Towns whose made list holds the good, the resource nearby, no other nearby resource giving the good, and no house that
+works it (this seat's regexes: a salt works; a mine, jeweller, gem cutter or assayer; an apothecary, alchemist, herbalist
+or healer; a weaver, textile house, fuller or tailor). The economy seat's own counts used other house tests, so the
+figures differ from its; the movement is the measure. Base 906ff0352 (record = printed) -> (a) -> (a)+(b):
+| pair | base | (a) | (a)+(b) |
+|---|---|---|---|
+| fishing grounds' salt | 21 | 21 | 21 |
+| a river fishery's salt | 42 | 42 | 42 |
+| precious metals' gems | 17 | 17 | 17 |
+| hot springs' medicinal herbs | 31 | 31 | **26** |
+| river mills' processed textiles | 14 | 14 | 14 |
+WHY THE GATES DO NOT SILENCE THE SALTS AND THE GEMS: the land gate is per RESOURCE, not per commodity. One house that
+works the resource admits its whole commodity list: a Fish market, Fisher's landing, Fishing community, River ferry or
+Docks admits the river fishery's bundled salt (42); a Smelter admits precious metals' bundled gems (12 of 17 by a
+Smelter). (b) asks a chain for a raw, and no chain takes "salt", "gems" or "processed textiles" as its raw, so it
+leaves them. THE HOT SPRINGS' HERBS ARE THE CASE TO REPORT: they pass the land gate (the hot springs have no gate) on the
+doubted pair alone, and (b) silences only the 5 on forest terrain, where the record models the herb chain; 26 still
+print. No exclusion list is built here (D31): the data's holder cures the pairs.
+
 ### What is left (D30)
 
 1. (b): DONE (this commit).
-2. THE PAGE: one census before (906ff0352, tabs only: done) and one after both parts (next).
+2. THE PAGE: DONE (above): 232 -> 85 towns printing a made good with no house or worked land.
 3. NAMED, not built (D30): the chain-processor class (a Cooper's "Ale/Beer (barrel)"); the crisis export rows (09013,
-   09282); the goods the table does not name (above); coal and peat (by design).
+   09282); the goods the table does not name (flour/bread 37, textiles 16, glass 7 printed: a table row gates the
+   export too; pottery 5); coal and peat (by design).
+4. NAMED for other seats: the doubted catalogue pairs (D31, above: river-fishery salt 42, fishing-grounds salt 21,
+   hot springs' herbs 26, precious metals' gems 17, river mills' textiles 14: the data's holder); ONE LEAF for the
+   exploitation's terrain check (`resourceGenerator.js`'s seat; held equal by a test meanwhile);
+   `resourceDynamicsKernel.js:575` (the world pulse re-derives the made list with no roster and no terrain: (a)'s and
+   (b)'s gates are off there until the next birth; pass `settlement.institutions` and the terrain).
+5. REGISTERS NAMED STALE (re-derived at the close): the golden master (the owner's door); the presumed-things register
+   as at the base (fresh 148, first-register stale 2: no rise; 6ce176aff); the twelve-birth grid's 2 falls as at the
+   base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a).
+
+HANDED BACK by TAIL-DEFECON-C-3 at 2026-11-15 ~03:20 UTC, both parts of D30 built and the page measured. The
+instruments as above; this seat's ad hoc scripts (the D30 census, the pair measure, the record-vs-exploitation check) are
+node over `corpus.ndjson.gz` and the dumps, not committed.
