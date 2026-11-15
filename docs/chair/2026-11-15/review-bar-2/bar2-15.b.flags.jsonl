@@ -1,0 +1,6 @@
+{"id":"C29731","town":"bar0-town-occupied-rand-5","sev":"MED","kind":"STATE","why":"route 'worn deep before anyone built here' yet 'a century old'; town is 222 years old, grew from a logging camp, so road cannot predate it","other":""}
+{"id":"C30104","town":"bar0-town-occupied-rand-5","sev":"LOW","kind":"BROKEN","why":"doubled item: 'fine glass sand, fine glass sand' in the needed-and-not-brought-in list","other":""}
+{"id":"C30297","town":"bar0-town-occupied-rand-5","sev":"MED","kind":"PAIR","why":"says decisions that matter are made by Merchant Guilds; under occupation the Guild Council answers to the occupiers, who approve all it decides","other":"C30296"}
+{"id":"C30771","town":"bar0-village-calm-rand-3","sev":"MED","kind":"STATE","why":"route 'worn deep before anyone built here' yet 'a century old'; town is 177 years old, so the road cannot predate it","other":""}
+{"id":"C31855","town":"bar0-village-calm-rand-4","sev":"MED","kind":"STATE","why":"says what it raises covers an ordinary year; FOOD ledger: grown 85% of need, 5% deficit, and C31851 says it grows less than it eats","other":"C31851"}
+{"id":"DONE","lines":2498,"blocks":3,"flags":5}
