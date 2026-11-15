@@ -595,6 +595,13 @@ Exports (`SURFACES=PDF,Journal`): `before 36746 after 36746 · gone 0 · new 0 �
 
 `git archive` of `docs/chair/2026-11-14/probes/READ-ALL` (lane/chair-2026-11-08) and `CENSUS-3` (lane/census-3-2026-11-14) into the seat's scratch. Worktrees: `wt` (the cure, its own `npm ci`), `base` (1322e7d0a) and `after` (756ba4bda), each `node_modules` linked to `wt`'s; one census at a time (`census3.sh <tree> <out> 4`, about 22 minutes), then `inventory.py` (and `SURFACES=PDF,Journal inventory.py` for the exports) and `inventory_diff.py`. The record probes (scratch, not kept): `x30.mjs` (the capture against the income sources), `x31.mjs` (the short words against the band, through the tree's own `foodRowShown` and `carriersOf`), `x32*.mjs` (the reliance word, the role rows and the Magic view against `foodMagicShare` and `foodRecord.magicPct`).
 
+## The chair's ruling U2 (received after the hand-back): the three red files of this area, each run alone at 76450d5f8
+
+- `tests/components/displayEconRelianceFoodWords.test.jsx` (1 red): (ii) A PIN A DECLARED MOVE EXPLAINS. The KEEP pair's card still prints in r2s-famine-town-1; the record's Entrepôt share moved 13 → 14 under the economy family's declared moves on the joined line (TAIL-DEFECON-2 5f67f382d, TAIL-DEFECON-3 2ac50c55d; which of the two is not isolated). RE-KEYED BY IDENTITY to "… 14% of income"; 23 of 23 green.
+- `tests/joins/fieldManifest.test.js` (1 red at this tip, `magicRecovery`; the `magicNote` read the chair saw is green here): (iii) the cause is not in this seat's files. `src/domain/fieldManifest.js` lists `EconomicsTab.jsx` as a consumer of `activeChains[].magicRecovery`; the tab's read left with the recovery chip at **56f73d7ec** (W2-C-LEAVES-5 item 5), already on the joined line. The field keeps its reader (`supplyChainState.js`); the manifest's consumer list is stale, and the manifest is outside this group's files: for its own door.
+- `tests/joins/labelJoins.test.js` (1 red): (iii) not this seat's: `src/generators/power/claimStanding.js` gains one label-join site (`instNamesScan`), last touched by **cc834166f** (TAIL-POWERS-B batch 2) on the joined line.
+- Still red and carried (named above): `displayEconCrisisMarks` (3, the joined births moved its pins: for the next seat to re-key by identity, as this one was).
+
 ## Hand-back (TAIL-DISPLAY-ECON-5)
 
 Handed back after X30 to X32, inside the count. The branch tip is the hand-back commit after 756ba4bda. The after census (at 756ba4bda) was written to this seat's scratch, which does not outlive the container: re-make it with the commands above.
