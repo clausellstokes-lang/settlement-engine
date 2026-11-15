@@ -172,3 +172,19 @@ export function settleDesertersUnfed(entries) {
     return twin ? { ...entry, desc: twin } : entry;
   });
 }
+
+/**
+ * TAIL-DISPLAY-CIVIC-4 (V7, the chair's ruling of 2026-11-15): "Everyone comes and goes by the gates, so smugglers have to get
+ * past the garrison" is false where a house on the roster moves goods beneath the walls (a smuggling network's or a smuggling
+ * operation's tunnels and false cellars, an underground network, an underground city: 135 of the line's 250 towns on the
+ * census's 720 at 6cf555801): that town takes the twin. Walls with gates, no siege (the caller's branch).
+ * @param {string} lawRef the force noun @param {boolean} many whether it takes a plural verb
+ * @param {ReadonlyArray<{ name?: unknown } | null | undefined>} institutions the roster
+ * @returns {string}
+ */
+export function gatesSmugglersLine(lawRef, many, institutions) {
+  return (institutions || []).some((i) => BENEATH_THE_WALLS.test(String(i?.name ?? '')))
+    ? lineText({ text: ` The ${lawRef} ${many ? 'keep' : 'keeps'} the gates, but smugglers have ways in beneath the walls.`, needs: ['gate', 'walls'] })
+    : ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`;
+}
+const BENEATH_THE_WALLS = /smuggling (?:network|operation)|underground (?:network|city)/i;

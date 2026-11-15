@@ -377,7 +377,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const many = manyForce(lawRef); // TAIL-DEFECON (#20612 #20616): "the garrison and city watch" take a plural verb
     const wallNote = !inst.hasWalls ? ''
       : inst.hasGates ? (hasStress('under_siege') ? lineText({ text: ` The gates are shut against the siege, and the ${lawRef} ${many ? 'hold' : 'holds'} them.`, needs: ['crisis: siege'] }) // TAIL-DEFECON (#07371 #07373, ruling D3)
-        : ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`)
+        : gatesSmugglersLine(lawRef, many, institutions)) // TAIL-DISPLAY-CIVIC-4 (V7): safetyLineTruth.js
         : lineText({ text: ` The walls leave few ways in, so smugglers have to get past the ${lawRef}.`, needs: ['walls'], excludes: ['gate'] });
 
     if (stress.stateCrime) {
@@ -1104,7 +1104,7 @@ export function keptGuardLine(desc, institutions, prosperity, read = {}) {
 // ─── UPKEEP-8 (2026-11-13): the safety lines say only what the record holds (safetyLineTruth.js) ─────────────
 // At the END of the file, as the frames above, so no producer write moves.
 import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
-import { GANG_HOUSES_OF, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines } from './safetyLineTruth.js';
+import { gatesSmugglersLine, GANG_HOUSES_OF, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines } from './safetyLineTruth.js';
 
 /** The enforcement sentence the desperation-theft lines end on (UPKEEP-14, ruling (h)): dropped where no enforcer stands. */
 const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival crime from organised theft.';
