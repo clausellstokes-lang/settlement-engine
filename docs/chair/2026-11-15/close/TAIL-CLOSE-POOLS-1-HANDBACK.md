@@ -125,28 +125,17 @@ seat's census of red 1). After: 5/5. Red-first: with `no crisis: under_siege` st
 ("DS-POW-6 :: operation role duty evasion :: threat (declared mute by f8e7326ce …)"); restored. eslint clean;
 `typecheck:ratchet` OK. What a town prints: unchanged.
 
-## The seventh — `tests/domain/coherence/crisisBlindProse.test.js` F12 soak1k-4800: RETIRED BY NAME (owner's veto list)
+## The seventh — WITHDRAWN by the chair (the crisis seat's, `b75ca93c7`, on the line)
 
-1 of 9 red at the merged tip: "'the succession question is not a live one' in a succession void is a finding":
-`expected [] to deeply equal ['succession']`. The bisect (good `d817736d8`): first-parent `31a6f72eb` (JOIN-7 · 29, the
-merge of lane/tail-corpus-def at `cff6cd098`), inside it **`51217c0e5`** (TAIL-CORPUS-DEF-2 batch 3): DS-POW-4 Stable v1,
-v2, v3 reworded off claims no printing town bears (v1's "nobody … is asking who comes next" false in 41 of 52 census
-towns), and the commit names "crisisBlindFindings' dead patterns". A cure, not a finder regression: no line of the
-corpus is succession-blind any more (every variant of all six leaves read through the finder under a succession void:
-none), and the finder's silence on the new words is the corpus seat's ruled reading (`seatSafetyUnrest.test.js`
-pins it for v3, with the instrument's liveness shown on the retired words). THE CASE RETIRED BY NAME, IN THAT SHAPE: its
-fixture is v1's RETIRED words as soak1k-4800 printed them (planted, no corpus line's), on which the instrument still
-finds `succession`; beside it, v1 as the corpus writes it now is silent. The finder (`crisisBlindFindings.js`) is
-untouched (a re-anchoring of its patterns to the new words was tried and reverted: it reds `seatSafetyUnrest`, which
-pins the retirement). FOR THE VETO LIST: row "soak1k-4800 · DS-POW-4 Stable v1 · the succession is not live", claim
-"nobody is asking who comes next, under a succession void", why nothing can show it: `51217c0e5` reworded the line off
-the claim. After: 9/9; eslint clean; the prose-anchors walker green; the negative-anchor walker's red names other files.
+This seat's change to `tests/domain/coherence/crisisBlindProse.test.js` (`0711a6a39`) is DROPPED: at the merge of the
+line at `4e58ed8ba` the file is taken whole from the line (`git checkout 4e58ed8ba -- …`), byte-identical to it; 8/8.
 
-## Red 3
+## Red 3 — `heraldCausalVoice`: GREEN as the lines stand
 
-Waits for the chair's "THE DISPLAY'S BRANCH IS ON THE LINE AT <tip>".
+Run alone at `34f7adbeb` (this branch with the line at `4e58ed8ba`, which holds the display's close branch): 59/59.
+Nothing changed.
 
-## The sixth (DS-GEN-13 "a market, no guild", `tests/lint/factLayers.walker.test.js`): NAMED
+## The sixth (DS-GEN-13 "a market, no guild", `tests/lint/factLayers.walker.test.js`): RE-LAYERED by C30 (named first)
 
 The walker's POOLS arm reds on `DS-GEN-13::COMMERCE: a market, no guild` → "declares guild (layer 3)": the pool's
 table row is layer 3 (`factLayers.poolTable.json`), and the economy corpus's batch 7 (`4467cd7d6`, ruling C19) gave
@@ -159,10 +148,15 @@ foodSources, imports, prosperity, storesMonths (2), with warState, crisis, defen
 something else (the key already holds "no guild house"). So no allowed fact says the same thing, and no forbidden read
 is declared. THE COUNT over the 720 (the census's own plan and births, every public site drawn): the pool is read
 and prints in 42 towns: v1 4, v2 5, v3 3, v4 6 (none beside a guild power), v5 24 (every one beside a guild power).
-The other four reds of that walker (the `keep` getter, the `crime` leaf's `npcs`, the LEAVES and READERS arms) are
+C30 (the chair, vetoable by the owner): the declaration stays and the row's layer follows its reads. The pool
+table's own form for a hand placement (`"src": "placed: <reason>; was N by map:…"`, as the capture-climate rows) moves
+`DS-GEN-13::COMMERCE: a market, no guild` from 3 to 4 (`tests/lint/factLayers.poolTable.json`): it reads the guild power
+(layer 3), and nothing at or below the powers reads this state prose (the page reads it). The walker's POOLS arm: red →
+green, no DS-GEN-13 row left; the 720 births byte-identical (a test table, no source touched); no other test reads the
+table. The other four reds of that walker (the `keep` getter, the `crime` leaf's `npcs`, the LEAVES and READERS arms) are
 not this pool's and not this seat's.
 
 ## Pushes
 
-`b46b83871` red 1 batch 1 · `6a3871de1` red 2 · `7105cf317` red 4 · `9d19441bf` red 1 to green (C26, C27) · this push: the sixth named.
+`b46b83871` red 1 batch 1 · `6a3871de1` red 2 · `7105cf317` red 4 · `9d19441bf` red 1 to green (C26, C27) · `ef48b5e48` the sixth named · `85770b123` red 5 · `0711a6a39` the seventh (dropped) · `34f7adbeb` the line at 4e58ed8ba · this push: the sixth re-layered (C30).
 Each red's own proof is in its section. No golden, register or census re-taken; no source file touched.
