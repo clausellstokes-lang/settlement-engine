@@ -600,6 +600,16 @@ function renormTo100(factions) {
 }
 
 /**
+ * A POWER'S LABEL FROM ITS FINAL SHARE (TAIL-POWERS batch 2: one home for the ladder the multipliers set, so a sentence
+ * that measures a power by its strength (the chair's ruling P1) reads the same bands the card prints).
+ * @param {number} power the renormalised share @returns {'Dominant' | 'Strong' | 'Significant' | 'Minor' | 'Suppressed'}
+ */
+export function powerLabelOf(power) {
+  const p = Number(power) || 0;
+  return p >= 35 ? 'Dominant' : p >= 25 ? 'Strong' : p >= 18 ? 'Significant' : p >= 10 ? 'Minor' : 'Suppressed';
+}
+
+/**
  * Apply performance legitimacy multipliers to faction powers in place.
  * Governing faction gets govMultiplier. Criminal faction gets crimMultiplier.
  * All other factions get minor friction adjustments.
@@ -655,13 +665,7 @@ export function applyLegitimacyMultipliers(factions, publicLeg, _tier) {
 
   // Labels read the FINAL renormalised share so a faction's band matches its
   // displayed percentage.
-  factions.forEach(f => {
-    f.powerLabel = f.power >= 35 ? 'Dominant'
-                 : f.power >= 25 ? 'Strong'
-                 : f.power >= 18 ? 'Significant'
-                 : f.power >= 10 ? 'Minor'
-                 : 'Suppressed';
-  });
+  factions.forEach(f => { f.powerLabel = powerLabelOf(f.power); });
 
   // Sort by effective power descending
   factions.sort((a, b) => (b.power || 0) - (a.power || 0));

@@ -264,7 +264,7 @@ const ROWS = [
   ["the brewer", 333, [
     S("Thins the ale with water after it is sold by the barrel and charges the taverns for full strength",
       "Every tavern that bought those barrels would stop buying, and some would want their money back"),
-    S("Buys grain that was meant for bread in the lean months, at a price the bakers cannot match",
+    S("Buys up grain that was meant for bread in the lean months, at a price no household can match",
       "In a hard winter, people go hungry while the brewery's vats stay full, and someone will notice"),
     S("Keeps a still in the back that makes a spirit no one has been licensed to sell",
       "The still would be seized, and so would the brewery, with a fine to match"),
@@ -2287,6 +2287,11 @@ export const TITLE_PRESENTATIONS = Object.freeze(Object.fromEntries(ROWS.map(([t
  * of the fact vocabulary (`crisis: <kinds>`), refused while any of those kinds is in force. The coaching inn's welcoming
  * line (coaches in and out; food, a bed, a fresh team, news of the road) is not dealt under a siege, which cuts every
  * road, or a famine, under rationing; its transactional line (departures; places on the coach) not under a siege.
+ * A LINE NEEDS WHAT IT OFFERS (TAIL-POWERS batch 1; the chair's ruling P2 of 2026-11-14, READ-ALL worklist POWERS): a meal,
+ * bread or a meal of fish offered as usual is not dealt under a famine (the innkeeper, the master baker, the boat-headman);
+ * a traveller's room and the gossip of the road, the boats, the best places to hunt, the next games, the riders that leave,
+ * grain or ore sold out of town not under a siege, which shuts road, gate and water; the next games not under a plague; the
+ * master of the hunt's game "sold in the market" needs a market (`market`). The brewer's grain secret names no bakers.
  * @type {Readonly<{ secret: Readonly<Record<string, Readonly<{ needs?: readonly string[], excludes?: readonly string[], topic?: string | readonly string[] }>>>, presentation: Readonly<Record<string, Readonly<{ needs?: readonly string[], excludes?: readonly string[], topic?: string | readonly string[] }>>> }>}
  */
 /** The two governed topics a line of persons bought, sold or held needs admitted (slavery AND trafficking). */
@@ -2301,6 +2306,10 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Buys fighters who were taken against their will, and keeps them in chains between bouts': Object.freeze({ topic: PERSONS_HELD }),
     'Buys fighters who were taken against their will and keeps them locked up between bouts': Object.freeze({ topic: PERSONS_HELD }),
     'Has kept an apprentice on for years past the indenture by holding back the papers that would free them': Object.freeze({ topic: PERSONS_HELD }),
+    // TAIL-POWERS batch 1 (P2): a trade out of town is not dealt under a siege; the game "sold in the market" needs one
+    'Has been selling grain from the stores to merchants in another market and writing it down as spoiled': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Has been keeping back ore from the tally and selling it to a smelter elsewhere': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Has been hunting on land that belongs to someone else and selling the game in the market': Object.freeze({ needs: Object.freeze(['market']) }),
   }),
   presentation: Object.freeze({
     'Cheerful in the cold and the stink of the market. Knows every regular by name and by order.': Object.freeze({ needs: Object.freeze(['navigable']) }),
@@ -2310,5 +2319,17 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Thick-necked and scarred, with the eye of someone who buys and sells people.': Object.freeze({ topic: PERSONS_HELD }),
     'Brisk and cheerful, always half on the way to the yard, where coaches rattle in and out.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
     'Efficient and loud. Calls out departures and prices in the same breath.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    // TAIL-POWERS batch 1 (P2): a meal, bread or fish offered as usual is not dealt under a famine; a room, the road, the
+    // boats, the hunting, the games and the riders not under a siege; the games not under a plague
+    'Apron, rolled sleeves and a ready greeting. They have already guessed which room you will want.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
+    'Pleasant in the way of someone who has seen every kind of trouble come through the door.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
+    'Warm in every sense: flour on the arms, the smell of bread, a cheerful greeting before dawn.': Object.freeze({ excludes: Object.freeze(['crisis: famine']) }),
+    'Up since the middle of the night and quick about everything. The queue moves fast.': Object.freeze({ excludes: Object.freeze(['crisis: famine']) }),
+    'Weathered and steady, with hands like rope and an eye always on the sky.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: famine']) }),
+    "Outdoors in their manner, sun-browned, with a hunter's easy talk.": Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Weathered and easy, with a bow over one shoulder and dogs at the heel.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Loud and showy, proud of the school and its champions.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: plague_onset']) }),
+    'Precise and busy, with a scale for letters and a ledger of every rider.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Friendly and gossipy, with news of every road the riders take.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
   }),
 });
