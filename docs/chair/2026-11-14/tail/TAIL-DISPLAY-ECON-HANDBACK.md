@@ -254,3 +254,121 @@ Census before = the tip 6e36000a4 (`census3.sh`, 720 towns); census after = the 
 ## How the instruments were re-made for batch 2
 
 As above. The before census ran in a second detached worktree at the tip (its `node_modules` linked to the cured tree's), so the cured tree could be edited during the before run. NEVER edit the tree a census is rendering: the render reads the source live. The record probes of this batch (the reliance moves, the food-share bands, the gate-control and stopped-card counts, the field diff by family, X17 and X18) are node scripts over `corpus.ndjson.gz` and `dumps/` importing the tree's own leaves, kept in the seat's scratch.
+
+---
+
+# TAIL-DISPLAY-ECON-3 · the third seat's batch
+
+Seat: TAIL-DISPLAY-ECON-3 (builder), succeeding TAIL-DISPLAY-ECON-2 on the same branch, continued from its tip **ac0f7b439** (read back from origin, 2026-11-15). Scratch worktrees (detached; pushed by explicit refspec). The hand-back is this seat's to keep current.
+
+## The chair's rulings since (2026-11-15; each vetoable by the owner)
+
+- **(X19)** STRUCK: "(impaired)" under a siege is the page's own siege-aware state on every surface. The readers' "running" was the record's calm status on the chair's header. Nothing to cure.
+- **(X20)** The siege's sea exception is a state of the record (one census town). Its three lines are not in these files: two are the corpus's (reworded by its seat), and the third already says "or severely restricted": struck. Nothing here.
+- **(X21)** THE ONE KIND OF MERGE THIS SEAT MAKES: `origin/lane/join-2026-11-14` AT **eb054d53f**, a merge commit of its own. That tip holds the crisis seat's `foodStoresWords(record, crisis?)` and the Tonight sheet's call. The first cure after it is the Economics tab's call (K7's other half, row 18671's kin): it passes the crisis. ONE HOME. Then re-take the before at the merged tree and strike every row gone there.
+- **(X22)** Then: 11782 (the Magic tab's facet prints the raw key "guild_controlled"); the resource-chip rows of one shape (about 50); the one row of the exports' read (29296).
+- **(X23)** COMING: the PDF seat's two leaves under `src/domain/display/` (`shadowEconomyShown`, `criticalImportsShown`). When the chair names a tip that holds them, switching the tab to them is this seat's. Until then the tab's own composition stays as it is.
+- **(X24)** If the worklist is finished inside the count, say so and hand back early.
+
+## The merge (X21)
+
+`e1cd689e6` merges `eb054d53f` (no conflicts; lockfile unchanged, `npm ci` run).
+
+THE BEFORE RE-TAKEN at the merged tree (census3, 720 towns, 30050 sentences). Of the 175 rows (the worklist's 174 and the exports' read's 1), these 16 are gone there: 00600 04405 12736 04329 B10244 B12005 11407 09786 12888 30953 B15876 B15684 12562 00615 14219 29296. All but two were already cured or struck by the seats before. The two new ones:
+- **00615** "ships bring in about a third of the rest" under a siege: gone at the base (the corpus seat's rewording, X20). Struck.
+- **29296** (PDF cover) "Top export: Salted fish (naval route only)": gone at the base. Struck. The by-record measure, for the record: r2r-village-21 is a river town under a siege. `computeActiveChains.js` marks its exports "naval route only" by the world law (`supportsMaritime`), not by the town's own route, while the tab's own export pills (`exportsAsPrinted`) print none there. The cover read the raw `primaryExports[0]` through `dossierViewModel.js :: deriveTopExport`, which is DEFECON's file. If it returns, the cure is there (read `exportsAsPrinted`, one home).
+
+## Batch 3 · the stores sentence takes the crisis (X21); a facet key prints as words (11782); the timber note on a depleted ground (23037)
+
+Census before = the merge `e1cd689e6`; census after = the cure `53e295e5a`. Inventory diff: `sentences: before 30050 after 30053 · gone 5 · new 8 · in fewer towns 6 · in more towns 0 · moved 0`.
+
+**The cures**
+- `EconomicsTab.jsx` (line 304, in place): `foodStoresWords(eco.foodSecurity.foodRecord, s ? factsOf(s).crisis : null)`, the Tonight sheet's own call. The import is appended at the end of the file, so no line-keyed row moves.
+- `MagicTab.jsx :: Facet` (in place): a string value prints with `_` read as a space ("guild_controlled" → "guild controlled", capitalized by the span's own style). "guild_controlled" is the only facet value with an underscore on the 720.
+- `magicProvisionShown.js :: magicNoteShown` (its wording step): the step's timber note "Druidic forest management accelerates regrowth and sustainable yield" prints on a ground the record holds depleted (`resourceAnalysis.resourceConditions`) in **48 of the 49** cards that print it. There the woodland is cleared and timber is bought in, or the ground is a cut-over marsh. On such a ground it takes a twin:
+  - "Druidic forest management speeds the regrowth of the cleared woodland" (managed, coastal and mountain stands);
+  - "Druidic tending speeds the regrowth of the depleted ground" (a marsh: no forest).
+  An available ground keeps the note (r2s-under_siege-metropolis-3's bowyer). The card, the Magic tab, the PDF and the journal all read the note through this leaf.
+
+**Rows cured** (towns printing before → after; the measure = printing towns where the record makes the line false)
+
+| id | line | printing before → after | false by record before |
+|---|---|---|---|
+| (X21, K7 · 18671's kin) | Stores: a granary, about # months of grain. (Economics, where the Tonight sheet says the crisis is eating into them) | 350 → 334 | 16 (13 sieges with a gap, incl. r2r-metropolis-14; 3 famines) |
+| 11782 | Institutional control guild_controlled | 14 → 0 | 14 |
+| 23037 | Timber & Lumber: Druidic forest management accelerates regrowth and sustainable yield | 16 → 0 | 16 |
+| (kin) | Bowyer & fletcher: … · Reed & Marsh Harvest: … · Shipbuilding and Timber: … · Boatbuilding & River Transport: … | 17 → 1 · 9 → 0 · 6 → 0 · 1 → 0 | 16 · 9 · 6 · 1 |
+| (kin) | the bare note (the card and the exports) | 29 → 1 | 28 |
+
+Every row fell by exactly its measure. The one bowyer and the one bare note left are r2s-under_siege-metropolis-3, whose woodland is available, so they are true there.
+
+**Every other line that prints in fewer towns, explained**
+- "Patron deity", "Assign a patron god…", "Upgrade to premium…" 720 → 718 (r2r-thorp-0, r2r-thorp-2): the Power tab's deity panel did not render in the first town of two render workers (each is its worker's first seed). This is a render warm-up flake, and none of this batch's files renders that panel. Not a silence.
+
+**The inheritors, read where they print:**
+- the two note twins (22 + 9 towns with their chain-prefixed forms; r2r-city-57 and r2r-city-5 read: the ground is depleted and timber is imported);
+- "Institutional control guild controlled" (14);
+- in the 16 stores towns, the Tonight sheet's own words, already printed there on the Tonight sheet.
+
+All are true where they print.
+
+**THE VETO LIST: every new or changed line, with the towns it was read in**
+1. "Stores: a granary, about N of grain, and the siege is eating into them." now on the Economics tab too (the crisis seat's words, already on the Tonight sheet): r2s-under_siege-town-0 (town, smallest), r2s-under_siege-metropolis-3 (largest), r2r-metropolis-14 (a calm-seed siege). Its famine form: r2s-famine-town-0, -2, -3 (towns only).
+2. "Druidic forest management speeds the regrowth of the cleared woodland" (22 towns; chain forms Timber & Lumber 16, Bowyer & fletcher 16, Shipbuilding and Timber 6, Boatbuilding & River Transport 1): r2r-city-57 (city, smallest), r2s-wartime-metropolis-3 (largest), r2s-under_siege-city-0 (siege), r2s-famine-metropolis-0 (famine).
+3. "Druidic tending speeds the regrowth of the depleted ground" (9; Reed & Marsh Harvest): r2r-city-5 (smallest), r2s-under_siege-metropolis-3 (largest; siege), r2s-famine-metropolis-1 (famine).
+4. "Institutional control: guild controlled" (14): r2r-town-1 (town, smallest), r2s-indebted-metropolis-0 (largest), r2s-occupied-city-3 (occupation), r2s-under_siege-city-3 (siege).
+
+**The test:** `tests/components/displayEconStoresFacetTimber.test.jsx` (births of the census's own seeds).
+- Six NOT pairs, each naming what prints instead.
+- Five twins.
+- The one-home anchor: the tab prints `foodStoresWords(record, factsOf(t).crisis)`, the Tonight sheet's sentence.
+- Three KEEP pairs.
+- **12 red at the base e1cd689e6** (every NOT, every twin, the anchor), the 3 KEEP green. All 15 green on the cure. The base run is the plant.
+
+**Gates** (the cured tree):
+- strict domain: 1113 against a ceiling of 1113. Type ratchet: 167 against 167. eslint on the touched files: clean.
+- presumed-things walker `--check`: fresh 145 at the base and 145 after (no rise; its exit 1 is the base's own).
+- twelve-birth grid: exit 0, 2 falls (P7a: r2r-city-0, r2s-insurgency-metropolis-0), no rise.
+- the 78 test files naming the touched files: green but seven, each red at the base with the same failing tests, by name: CARRIED. They are `dossierPhoneFloorAllViews`, `phoneChromeFloor.census`, `observedShapeReaders.walker`, `proseNumerics`, `rawColorLiteral`, `dossierProseManifest`, `ui/defenseTabFlow`.
+
+**Registers:** none re-taken; none named stale by this batch. Both tab edits are in place and the import is at the end of the file.
+
+**Declared moves:** none. No generator or data file was touched.
+
+**Struck, each with its reason**
+- **00615, 29296**: gone at the merged base (above).
+- **The resource-chip rows, Economics "Produced locally"** (B28568 B28997 B28918 B28447 B28570 B28439 B28448 B29020 B28633 B28639 B28489 B29755 B28634 B29368 B29743 B28477 B28991 B28461 B28998): each pill stands where the record says it does. A chain of the record works a resource held **available** whose catalogue commodities name the good (`data/goods/identity.js :: RESOURCE_DATA[k].commodities`; the leaf `tradeListDisplay.js :: localProductionAsPrinted` keeps only such goods). Checked by script on 20 of the rows' towns. Examples: salt by a running river fishery (`river_fish` → fish, salt), gems by worked precious-metal veins (`precious_metals` → luxury, gems), grain by date palms (`date_palms` → grain, dates), honey by an ancient grove, herbs and peat by worked marshland. The readers' LAND header named resources, not their commodities. The display is true to the record, and THE DATA IS WHAT THE READERS DOUBTED: NAMED below.
+- **The resource-chip rows, Resources "Commodities available"** (B28930 B29119 B29184 B29205 B29175 B29167 B28285 B28274 B28405 B28606 B29208 B29206 B28935 B28273 B29367 B29109 B29151 B29230 B29171 B28283 B28182 B28581 B29168 B28183 B28521): the chips are `resourceAnalysis.availableResources`, the town's **available** resources (depleted ones are already left out, e.g. r2r-hamlet-10) and each one's catalogue commodities. "Available" claims no working (B28521 iron "not processed" is true). The same data is doubted: NAMED below.
+
+**Named for other seats** (one line each, to the chair)
+- **THE CATALOGUE'S COMMODITIES** (`src/data/goods/identity.js :: RESOURCE_DATA`, data: a declared move if changed) → the data's owner. The doubted pairs, behind about 45 chip rows of the shape: `river_fish` / `fishing_grounds` → salt; `date_palms` → grain; `precious_metals` → gems; `ancient_grove` → honey; `oasis_water` → dates; `river_mills` → processed textiles; `hot_springs` → medicinal herbs. The display reads them as the record's facts, so the cure is a row of data, not a display condition.
+- **B28788, B28789** "defended pass" chips in towns with no defence: the resource KEY `defended_pass` printed raw (`ResourcesTab.jsx`: the Abundant chip's `fmtKey` and the commodity chips' key), where the catalogue's own label is "Mountain Pass" (29 towns). The cure is in this seat's file (chips print `RESOURCE_DATA[k].label`, one home for a resource's name). But it rewords every Nearby Resources chip on the 720 ("Iron Deposits" → "Iron Ore Deposits", …), so it is put to the chair before it is made.
+- **B28006, B28222** "Wool→cloth→dyed fabric" / "cloth, dyed fabric" (39 towns) with no weaver or dyer: not reached (the Resources chain's outputs; verify against `chainOutputsShown`).
+- **23039, 18036** "✦ Magically Sustained" on the timber cards → `chainStateShown.js` / the step's `status` (already named).
+- **16353, 04474** "Arcane fabrication provides processed goods…" on a Reed & Marsh card in a mountain town and on a bowyer with no bowyer: the step's chain (`generators/chainMagicSubstitution.js`) and the record's chain list. Not a wording of this leaf.
+
+## The chair's ruling X25 (2026-11-15 01:41 UTC; vetoable by the owner), received after batch 3 was pushed: NOT DONE, THE NEXT SEAT'S FIRST BATCH
+
+- **(X25.1) ONE VOICE:** the journal now calls the crisis leaf for income shares, chains and houses (427 rows in 97 towns). The Economics tab does not, so under a siege the journal marks "Toll Revenue" and the tab does not. The leaf is already on this branch through the X21 merge: `src/domain/display/crisisStoppedRow.js` (`rowStoppedBy(settlement, 'chain' | 'income', row)`, keyed by the record's chain id or the income share's source name; `crisisMarkText`, `STOPPED_WORD`, `ordinaryTimesLine`, `stoppingCrisesOf`). THE TAB'S INCOME ROWS AND CHAIN ROWS CALL IT and print its mark as the Services tab does (`ServicesTab.jsx` line 24 and line 151 show the form; `InstitutionsTab.jsx` line 372 does the same for houses). The chair asked for it with the stores call in one batch. The stores call was already pushed as batch 3, so this is batch 4. Mind the overlap with batch 2's silence of "Contributes to X - N% of income" on a stopped card (`EconomicsTab.jsx` lines 119 and 244, `stoppedByCrisis`): one reading should decide both, the leaf's.
+- **(X25.2) NAMED, not this seat's file:** the Resources tab's exploitation rows show the failed food's resource as "full" under a famine (journal rows 35544, 35551, 35555 of `read-all-3/WORKLIST3-EXPORTS-JOURNAL.json`). That table reads `src/domain/display/validationOnPage.js :: exploitationGroupsShown` (line 465), which is not in this group's file list, so it is named to the chair (with B29895 before it).
+
+## What is left of the worklist (for the next seat), as at this batch
+
+- **X25.1** (above): first.
+- **X23**: switch the tab to `shadowEconomyShown` / `criticalImportsShown` when the chair names a tip that holds them.
+- **B28788, B28789** the resource label (above): the chair's word first.
+- **B28006, B28222** wool → cloth chips (39): verify.
+- **14551** (22) "No one here works the mineral hot springs" beside a line saying the town draws on the springs: verify against both writers.
+- **14404, B13482, 14395, 14400, 14242** "Needed, and not brought in: …": verify against `importsAsPrinted` and the roster (fish beside a fish market; spices with no spice need).
+- Named and not this seat's: **13538** (`magicProfile.js`), **11963, 29070, 22229** (`validationOnPage.js`), **B11520, 12110, 12104, 12111, 22206, 16853, B19491** (`domain/foodways.js`), **01192, 05224** (DEFECON), and the lists above.
+
+## How the instruments were re-made for batch 3
+
+As above:
+- three detached worktrees: the cure tree, the merge for the before census, and the cure commit for the after census. Each `node_modules` is linked to the cure tree's;
+- the census run on each, and `inventory.py`, `inventory_diff.py <rows>`;
+- the record probes (the chip and pill grounds, the druid note's grounds, the stores sentence with and without the crisis, 29296's route) are node scripts over `corpus.ndjson.gz` that import the tree's own leaves (`tradeListDisplay.js`, `magicProvisionShown.js`, `tonightSheet.js`, `factsOf.js`), kept in the seat's scratch.
+
+## Hand-back (TAIL-DISPLAY-ECON-3)
+
+I handed back by the clock after batch 3, about 45 minutes and a large context into the count. One more batch needs its own census and could not be finished inside 250,000. The branch tip is the hand-back commit after b570b76ea. The after census of batch 3 (at 53e295e5a) is the next seat's before only if it renders that same tree. It was written to this seat's scratch, which does not outlive the container: re-make it with the commands above.

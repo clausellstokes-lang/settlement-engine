@@ -88,5 +88,29 @@ function foodNoteAsWorded(note, chain, record) {
     const ground = /** @type {{ resourceInputKey?: unknown } | null} */ (chain)?.resourceInputKey;
     return FARMLAND.has(String(ground)) ? note : 'Druidic cultivation supplements the depleted ground';
   }
+  // TAIL-DISPLAY-ECON-3 (23037): the timber branch's note claims a "sustainable yield" on a ground the record holds
+  // depleted (48 of the 49 cards that print it: the woodland cleared and timber bought in, or a marsh cut over); there
+  // the druids speed its regrowth, and a marsh is not a forest. An available ground keeps the note.
+  if (note === 'Druidic forest management accelerates regrowth and sustainable yield') {
+    const ground = String(/** @type {{ resourceInputKey?: unknown } | null} */ (chain)?.resourceInputKey ?? '');
+    if (!groundDepleted(record, ground)) return note;
+    return WOODLAND.has(ground) ? 'Druidic forest management speeds the regrowth of the cleared woodland' : 'Druidic tending speeds the regrowth of the depleted ground';
+  }
   return note;
+}
+
+/** The timber grounds (`data/resourceData.js`: the managed, coastal and mountain stands). */
+const WOODLAND = new Set(['managed_forest', 'shipbuilding_timber', 'mountain_timber']);
+
+/**
+ * Whether the record holds a ground depleted (`resourceAnalysis.resourceConditions`, the Resources tab's own reading).
+ * @param {unknown} record @param {string} ground
+ * @returns {boolean}
+ */
+function groundDepleted(record, ground) {
+  const rows = /** @type {{ resourceAnalysis?: { resourceConditions?: unknown } | null } | null} */ (record)?.resourceAnalysis?.resourceConditions;
+  return (Array.isArray(rows) ? rows : []).some((r) => {
+    const row = /** @type {{ key?: unknown, resourceKey?: unknown, condition?: unknown } | null} */ (r);
+    return (row?.key ?? row?.resourceKey) === ground && row?.condition === 'depleted';
+  });
 }

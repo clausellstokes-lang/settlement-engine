@@ -64,7 +64,7 @@ function Facet({ label, value }) {
       gap: SP.sm, padding: `${SP.xs}px 0`, borderBottom: `1px solid ${BORDER}`,
     }}>
       <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK }}>{label}</span>
-      <span style={{ fontSize: FS.sm, fontWeight: 800, color: SLATE, textTransform: 'capitalize' }}>{value}</span>
+      <span style={{ fontSize: FS.sm, fontWeight: 800, color: SLATE, textTransform: 'capitalize' }}>{typeof value === 'string' ? value.replace(/_/g, ' ') : value /* TAIL-DISPLAY-ECON-3 (11782): a stored key prints as words, "guild_controlled" -> "guild controlled" */}</span>
     </div>
   );
 }
