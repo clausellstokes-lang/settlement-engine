@@ -1,0 +1,9 @@
+{"id":"C52131","town":"bar0-city-wartime-rand-9","sev":"MED","kind":"STATE","why":"'not a market city's traffic' but INCOME is Market Taxes 30%, Entrepôt 14%, Toll 14%; HOUSES has daily markets and market squares","other":"C52158"}
+{"id":"C52132","town":"bar0-city-wartime-rand-9","sev":"MED","kind":"STATE","why":"'lives on what comes out of the ground' but INCOME is mostly trade and tolls; Iron & Metalwork is only 5%, mining one house of 39","other":""}
+{"id":"C52372","town":"bar0-city-wartime-rand-9","sev":"LOW","kind":"STATE","why":"title 'Merchant Prince' given to Gratidia Scipio, who is f in PEOPLE","other":""}
+{"id":"C53689","town":"bar0-city-wartime-rand-9","sev":"MED","kind":"PAIR","why":"says the city keeps the shape it took after the pilgrimage; C52125 says the Interregnum is why it looks as it does, rebuilt afterwards","other":"C52125"}
+{"id":"C53735","town":"bar0-hamlet-calm-rand-10","sev":"MED","kind":"LACKS","why":"incense and 'the press of the lane' in a hamlet of 80 with no church of its own (access only) and an unattended shrine","other":""}
+{"id":"C54045","town":"bar0-hamlet-calm-rand-10","sev":"LOW","kind":"PAIR","why":"'old families keep the peace' as a standing fact, but Law & order reads Collapsed and stability is Desperate with order eroding","other":"C53800"}
+{"id":"C53812","town":"bar0-hamlet-calm-rand-10","sev":"MED","kind":"PAIR","why":"Healing capacity reads Adequate, but Medical Readiness is None and no healer is kept here; the sick are tended by families","other":"C54097"}
+{"id":"C54111","town":"bar0-hamlet-calm-rand-10","sev":"LOW","kind":"PAIR","why":"'Medical role: common' for magic, but no arcane practitioners, Reliance on magic None, no healer kept in a hamlet of 80","other":"C54092"}
+{"id":"DONE","lines":2192,"blocks":2,"flags":8}
