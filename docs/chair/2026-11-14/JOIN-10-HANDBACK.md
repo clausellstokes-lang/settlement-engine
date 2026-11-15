@@ -80,6 +80,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 4 | lane/tail-corpus-def-2026-11-14 | 922cfa66c (07:00) | f714fb6a5 | b7e861258 | none | 2 files outside docs/; declared-move commits: none (golden carried) |
 | 5 | lane/tail-crisis-2026-11-14 | b75ca93c7 (07:04) | 573c92b6d | 7a4229837 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
 | 6 | lane/tail-close-pools-2-2026-11-15 | af1e78989 (07:07) | f714fb6a5 | f2e8cb1a3 | none | 4 files outside docs/; declared-move commits: none (golden carried) |
+| 7 | lane/tail-close-pools-2-2026-11-15 | 1c9ff3933 (07:11) | af1e78989 | f1a47b790 | none | 0 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
@@ -292,4 +293,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 6 (see the table); waiting on the chair's LAND words.
+Landed through point 7 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
