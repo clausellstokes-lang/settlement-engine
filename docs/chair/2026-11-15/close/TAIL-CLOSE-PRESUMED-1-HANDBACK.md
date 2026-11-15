@@ -6,44 +6,68 @@ Law: the chair's ruling PT1 of 2026-11-15 (vetoable by the owner).
 
 ## FOR THE OWNER, IN PLAIN WORDS
 
-- At the joined line's tip (`c090179c1`) the walker was red in four of its 43 tests: 149 fresh source lines, 7 stale rows, 10 stale arm-2 rows, and 1 fresh strip.
-- **I measured every one of the 149 lines on 1,080 generated towns** (the walker's 360 and the page census's 720). For each line I checked where it prints and whether the town lacks the thing it names. Then I banked each line under one of three new reasons:
-  - **89 banked TRUE**: the line prints and its thing is there in every town where it prints;
-  - **53 banked UNPRINTED**: the line never printed in the 1,080 towns (only the source scan sees it);
-  - **7 banked FALSE**: the line prints in towns that lack its thing. **These are the first rows of the next round**, listed below.
-- The 7 stale rows and the 10 stale arm-2 rows were removed through the door's own shrink commands.
-- **The strip in `src/generators/foodGenerator.js`** was banked by hand under the chair's ruling PT2: the pool passes the door's filter before its lines are unwrapped. **The receipt is 43 of 43** (see RECEIPT).
+> **CORRECTION (2026-11-15, at the join `e047ef2b6`).** My first measure had a bug. For a line of two sentences or more it found no sentence of the line in the town, so such a line could never read as false. I fixed the script, re-measured every row I had banked, and moved **17 rows from "true" to "false"** (commit "CORRECTION"). The counts below are the corrected ones. The first report's "89 true, 7 false" was wrong.
+
+- At the joined line's tip (`c090179c1`) the walker was red in four of its 43 tests: 149 fresh source lines, 7 stale rows, 10 stale arm-2 rows, and 1 fresh strip. Later landings brought 4 more fresh lines (1 from TAIL-CLOSE-SRC-3, 3 from TAIL-CLOSE-DOORS-1's re-emitted landing fixture) and 2 more stale rows.
+- **I measured every one of the 153 lines on 1,080 generated towns** (the walker's 360 and the page census's 720), plus the landing page's own fixture town. For each line I checked where it prints and whether the town lacks the thing it names, by the vocabulary's own readers. Then I banked each line under one of three new reasons:
+  - **74 banked TRUE**: the line prints, and its thing is there in every town where it prints;
+  - **53 banked UNPRINTED**: the line never printed;
+  - **26 banked FALSE**: the line prints in towns that lack its thing. **These are the first rows of the next round**, listed below.
+- The 9 stale rows and the 10 stale arm-2 rows left through the door's own shrink. The strip in `src/generators/foodGenerator.js` was banked by hand under the chair's ruling PT2. **The walker reads 43 of 43.**
 - No line was reworded, no pool re-shaped, and no walker rule touched. The only files changed are the two registers, plus this hand-back and its probe scripts.
 
-### The seven false lines: false to a reader, or only to the instrument?
+### The 26 false lines: false to a reader, or only to the instrument?
 
-The chair asked for this first. **Of the seven, one is false as a reader would read it (row 7), and two more are questions about the town rather than the sentence (rows 3–4). The other four are false only by the instrument's reading.**
+**Six are false as a reader would read them.** Two of them are on the LANDING PAGE.
 
-| # | as a reader would read it | why |
+| rows | as a reader would read it | why |
 |---|---|---|
-| 1 occupation | **only the instrument** | a past occupation told as past ("When the occupiers left …"), in the history's past events; the word's reader asks whether an occupation is in force NOW |
-| 2 quarters | **only the instrument** (a reader would accept it) | "the residential district" of a town-tier place in the small population band; the size word reads "district" as a claim of a large place |
-| 3 stone quarry (variants) | **true as printed; a question about the town** | the line is the quarry house's own description, and the house stands. A reader who also reads the country's resources finds a quarry in a country with no stone: the roster and the resources disagree, not the sentence |
-| 4 stone quarry (catalogue) | as 3 | as 3 |
-| 5 house: druid | **only the instrument** | it describes the Elder Grove Council, which stands wherever the line prints |
-| 6 house: hired blade | **only the instrument** | it describes the Mercenary quarter, which stands wherever the line prints |
-| 7 smith (forges) | **false as a reader reads it** (1 town of 3) | "keeps the forges of {town} running day and night" in presume-town-25, which has no smithy and no smith among its people |
+| **25, 26** (landing fixture) | **FALSE TO A READER, on the landing page** | the frozen landing town Cnocby (seed `lf-033`) has no market and is not at war by the vocabulary's readers, yet the page says "its market stalls stand half empty" and gives "Wartime pressure disrupts trade flows" as the reason on its trade chip. The fixture is re-emitted from the engine, so the cure is the engine's line, not the fixture |
+| **23** practitioner (`claimStanding.js`) | **false to a reader** | "Magical practitioners are consulted but not formally empowered" printed as a power's description in 20 towns (of 245) where no one works magic |
+| **22** smith (`narrativeText.js`) | **false to a reader** | "keeps the forges of {town} running day and night" in 1 town (presume-town-25) with no smithy and no smith among its people |
+| **5, 9** alehouse | **false to a reader (mildly)** | a brewery "supplies alehouses and households" in 8 villages with no alehouse |
+| 3, 4, 6, 19, 20 stone quarry | true as printed; **a question about the town** | the quarry house's own description, and the quarry stands. But the town's country has no stone among its resources (`config.nearbyResources`): the roster and the resources disagree, not the sentence |
+| 2 occupation | only the instrument | a past occupation told as past ("When the occupiers left …"); the word's reader asks whether an occupation is in force NOW |
+| 1 quarters | only the instrument | "the residential district" of a town-tier place in the small population band |
+| 7, 8, 21 druid; 11 hired blade | only the instrument | each is the institution's own description (the Elder Grove Council, the Mercenary quarter), and that institution stands wherever the line prints; the house family's reader reads the name's stem and misses it |
+| 10 famine | only the instrument | "Buffers harvests, prevents famine": the word is named to say it is prevented (79 of 80 towns) |
+| 12–15 fishing | only the instrument | a boatbuilder makes "fishing boats" among its craft; the reader asks for a fishing house |
+| 16–18 clergy | only the instrument | a thorp's burial plot where "a priest says the words when one can be brought in time": a priest from elsewhere, said so in the line |
+| 24 smuggling | only the instrument (mostly) | "Underworld effectively controls vice, smuggling, and key officials" names smuggling as an activity; the reader asks for a smuggling house (6 towns of 13) |
 
-### The seven false lines, written out
+### The 26 false lines, written out
 
-| # | file | the thing | the line | towns against / towns printed | three towns | my read |
-|---|---|---|---|---|---|---|
-| 1 | `src/data/historyData.js` | occupation | "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled" | 36 / 36 | presume-town-3, presume-town-6, presume-town-30 | A PAST occupation, in `.history.historicalEvents[].description`. The occupation word reads "in force now", so this is the "occupation word's tense" the brief names: the walker's own gap. True on the page, false by the reader |
-| 2 | `src/data/historyData.js` | quarters (a size) | "the residential district" ("Magic broke loose over the residential district …") | 1 / 32 | r2s-succession_void-town-3 | a district in a town of the small population band: false by the size word |
-| 3 | `src/data/institutionDescVariants.js` | resource: stone quarry | "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had." | 42 / 65 | presume-town-34, presume-town-53, presume-town-57 | the quarry house's own description, printed where the quarry house stands but the town's country holds no stone-quarry resource (`config.nearbyResources`). The house stands and the resource does not: a real question for the owner (is a quarry without the resource coherent?) |
-| 4 | `src/data/institutionalCatalog.js` | resource: stone quarry | "A stone quarry and its dressing yards, worked whenever good stone can be had." | 69 / 92 | presume-town-6, presume-town-14, presume-town-35 | as 3 |
-| 5 | `src/data/institutionDescVariants.js` | house: druid | "A council of elder druids charged with their circle's standing in the town: …" | 6 / 6 | presume-town-119, presume-town-120, presume-town-127 | the description of the **Elder Grove Council**, which stands wherever this prints. The druid family's reader reads the house's name stem ("druid") and misses it: PLAUSIBLY true on the page, false by the reader |
-| 6 | `src/data/institutionDescVariants.js` | house: hired blade | "Organised bands of hired blades, a few score to a few hundred strong." | 23 / 38 | presume-city-17, presume-city-31, presume-city-47 | the description of the **Mercenary quarter**, which stands wherever this prints. The hired-blade family's stem misses it: PLAUSIBLY true on the page, false by the reader |
-| 7 | `src/generators/narrativeText.js` | smith (a role) | "Being on the right side of it keeps the forges of {town} running day and night …" | 1 / 3 | presume-town-25 | forges in a town with no smith house and no smith among its people: false by the role |
+| # | file | thing | the line | towns against / towns printed | three towns |
+|---|---|---|---|---|---|
+| 1 | `data/historyData.js` | quarters | "the residential district" | 1 / 32 | r2s-succession_void-town-3 |
+| 2 | `data/historyData.js` | occupation | "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever" | 36 / 36 | presume-town-3, presume-town-6, presume-town-30 |
+| 3 | `data/institutionDescVariants.js` | resource: stone_quarry | "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the o" | 1 / 3 | r2s-indebted-hamlet-2 |
+| 4 | `data/institutionDescVariants.js` | resource: stone_quarry | "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish ha" | 2 / 3 | r2r-village-45, r2s-insurgency-village-2 |
+| 5 | `data/institutionDescVariants.js` | house: alehouse | "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and " | 1 / 1 | presume-village-10 |
+| 6 | `data/institutionDescVariants.js` | resource: stone_quarry | "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had." | 42 / 65 | presume-town-34, presume-town-53, presume-town-57 |
+| 7 | `data/institutionDescVariants.js` | house: druid | "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the street" | 5 / 5 | presume-town-4, presume-town-58, presume-town-92 |
+| 8 | `data/institutionDescVariants.js` | house: druid | "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grov" | 6 / 6 | presume-town-119, presume-town-120, presume-town-127 |
+| 9 | `data/institutionDescVariants.js` | house: alehouse | "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and ho" | 7 / 7 | presume-village-9, presume-village-13, presume-village-26 |
+| 10 | `data/institutionDescVariants.js` | famine | "Communal grain storage. Buffers harvests, prevents famine." | 79 / 80 | presume-town-0, presume-town-1, presume-town-2 |
+| 11 | `data/institutionDescVariants.js` | house: hired blade | "Organised bands of hired blades, a few score to a few hundred strong." | 23 / 38 | presume-city-17, presume-city-31, presume-city-47 |
+| 12 | `data/institutionDescVariants.js` | house: fishing | "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of r" | 52 / 52 | presume-village-2, presume-village-41, presume-village-55 |
+| 13 | `data/institutionDescVariants.js` | house: fishing | "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge:" | 12 / 12 | presume-village-6, presume-village-38, presume-town-37 |
+| 14 | `data/institutionDescVariants.js` | house: fishing | "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. The work turns on a sha" | 7 / 7 | presume-village-31, presume-city-22, r2r-village-53 |
+| 15 | `data/institutionDescVariants.js` | house: fishing | "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. It takes a " | 7 / 7 | presume-village-25, presume-town-46, r2r-village-36 |
+| 16 | `data/institutionDescVariants.js` | clergy | "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says th" | 32 / 32 | r2r-thorp-0, r2r-thorp-3, r2r-thorp-9 |
+| 17 | `data/institutionDescVariants.js` | clergy | "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when " | 24 / 24 | r2r-thorp-2, r2r-thorp-6, r2r-thorp-27 |
+| 18 | `data/institutionDescVariants.js` | clergy | "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched i" | 42 / 42 | r2r-thorp-1, r2r-thorp-5, r2r-thorp-8 |
+| 19 | `data/institutionalCatalog.js` | resource: stone_quarry | "A stone quarry and its dressing yards, worked whenever good stone can be had." | 69 / 92 | presume-town-6, presume-town-14, presume-town-35 |
+| 20 | `data/institutionalCatalog.js` | resource: stone_quarry | "A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building s" | 2 / 4 | r2r-hamlet-23, r2r-hamlet-48 |
+| 21 | `data/institutionalCatalog.js` | house: druid | "A council of senior druids who govern their circle's relationship with the settlement around it. They may main" | 102 / 102 | presume-town-35, presume-town-60, presume-town-74 |
+| 22 | `generators/narrativeText.js` | smith | "Being on the right side of it keeps the forges of " | 1 / 3 | presume-town-25 |
+| 23 | `generators/power/claimStanding.js` | practitioner | "Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, an" | 20 / 245 | presume-city-7, presume-city-22, presume-city-27 |
+| 24 | `generators/power/claimStanding.js` | house: smuggling | "Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this beca" | 6 / 13 | presume-town-48, presume-city-92, r2r-town-8 |
+| 25 | `components/home/landingFixture.js` | war | "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows." | 2 / 2 | lf-033 (the fixture, facts as born), lf-033 (the fixture, facts after its weeks) |
+| 26 | `components/home/landingFixture.js` | market | "Caravans are passing Cnocby by, and its market stalls stand half empty." | 2 / 2 | lf-033 (the fixture, facts as born), lf-033 (the fixture, facts after its weeks) |
 
-Rows 1, 5 and 6 (and 3–4 in part) look like gaps in the readers, not in the prose. I banked them FALSE all the same, as the law says ("printed against its thing in one town or more"). The owner or the next round rules on each.
+No **declared move** was made: no false line is one that a door already draws with its twin standing, curable by one declaration.
 
-No **declared move** was made. Rows 2 and 7 print in one town each, but neither is a line that a door already draws with its twin standing, so the exception does not apply. Rows 3–6 are catalogue descriptions, and their cure is a reader's or a catalogue's question, not one declaration.
 
 ## WHAT WAS DONE (one commit each)
 
@@ -96,6 +120,7 @@ The close found three more reader gaps that the next round should rule on:
 - Births: the walker's `corpusSeeds()` / `corpusConfig`, plus the census's `censusPlan('r2')` through `configOf(row, DEFAULT_CONFIG, birthConfig)` after `loadGenerationLawPayloads()`, with the public prose composed on (`withPublicProse(town, composePublicProse(town))`), as the census births them.
 - Reading: the record is read as arm 2 reads it (`isPrinted` paths, `sentencesOf`, the naming side not read on licensed rows). A line prints where all of its static fragments (8 characters or more) stand in one printed leaf. The thing is judged in the printed sentence by the registered word's OWN `absent` reader, or by `presentForDenial` for a denial. For a house the reader is the live roster or a power by the house's stem; for a resource, `config.nearbyResources`; for a role, factsOf plus the town's people.
 - **Limit:** the measure reads the RECORD, not the rendered page. The display and summary files (`src/domain/display/*`, `src/domain/summary/settlementQuickGuide.js`, `src/domain/dossier/faithReading.js`) print on the page. Their **close-unprinted** rows (10) mean "not in the record". The page census renders them; I did not render.
+- **Fixed at `e047ef2b6`:** a sentence of the line is one that holds a fragment or is held by one. A literal of two sentences or more is a single fragment spanning them, and the first measure missed this (the CORRECTION above). The `--rows` option re-measures earlier rows; `--landing <seed>` also reads the landing fixture's own frozen strings against its own town, as born and after its weeks.
 - **Limit:** a short template fragment ("The walls of ") may match a different line that shares it, so its printed and true counts are an upper bound.
 
 ## RE-RUNS
@@ -104,12 +129,20 @@ The close found three more reader gaps that the next round should rule on:
 
 - Then the joined line at `2ff8ab7ee` (the houses' three reworded lines, in `institutionDescVariants.js` and `institutionalCatalog.js`) merged in. It brought no fresh or stale row: the door's `--check` reads **fresh 0 · stale 0 · first-register stale 0 · strips fresh 0 stale 0** (exit 0).
 
+- **The join at `e047ef2b6`** (JOIN-11 points 5–8: TAIL-CLOSE-DOORS-1's re-emitted landing fixture among them) merged in. The door read 3 fresh and 1 stale, all in `src/components/home/landingFixture.js`.
+  - **Stale:** the old war line. Removed by `--shrink`.
+  - **Fresh:** three lines. They print on none of the 1,080 births; read in the fixture against its own town (`--landing lf-033`, `measure-e047ef2b6.json`):
+    - the mill line: true;
+    - the war and market lines: **false**, banked close-false. Both stood whole at master and were gone from the fixture until the re-emit brought them back. No widening (the rule book is unchanged), so this is case (B).
+  - Here I also found and fixed the measure's sentence bug, re-measured all 150 banked rows, and moved 17 (the CORRECTION).
+
 ## RECEIPT
 
 `tests/lint/presumedThings.walker.test.js` alone, at this branch's tip after PT2 and the merge of `2ff8ab7ee`: see the last line of this section.
 
 - Before PT2, at `91efe4aba` and `0d18473a8`: 42 of 43, the strip red.
 - **After PT2 and the merge of `2ff8ab7ee`: 43 of 43** (the walker alone, exit 0).
+- **At the join `e047ef2b6`, after the CORRECTION and the landing rows: 43 of 43** (the walker alone, exit 0); door `--check` exit 0.
 - **After my branch landed (JOIN-11 point 2) and the join moved to `061db1367`** (TAIL-CLOSE-SRC-3 landed): a fast-forward. The door's `--check` read 1 fresh and 1 stale.
   - **Stale:** `priorityHelpers.js` `house: criminal faction`, a line SRC-3 reworded. Removed by `--shrink` in its own commit.
   - **Fresh:** `src/domain/facts/magic.js` `house: academy`, the literal `'academy of magic'`. It is a house-name entry of `ARCANE_GUILD_HOUSES`, which SRC-3 moved verbatim from `economy/economicState.js` (`e28552112`), so in `magic.js` it is the round's (B).
@@ -117,7 +150,7 @@ The close found three more reader gaps that the next round should rule on:
   - After it: door `--check` exit 0 (all zero), and **the walker 43 of 43** (exit 0).
 - **The join at `22b3cc82e`** (JOIN-11 points 3–4: TAIL-CLOSE-SRC-4, TAIL-TIES-10) merged in (a merge commit): no fresh or stale row. The door's `--check` exits 0 and **the walker reads 43 of 43**.
 
-## THE TABLE (every fresh row)
+## THE TABLE (every fresh row, as FIRST measured: superseded where the CORRECTION moved a row; the corrected verdicts are `probes/TAIL-CLOSE-PRESUMED-1/remeasure-150-at-e047ef2b6.json`)
 
 Case B for all 149. "Printed in" and "against in" count births out of 1,080. "Against" means: the thing is absent where a naming line prints, or present where a denying line prints.
 
