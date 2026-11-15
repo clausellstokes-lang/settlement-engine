@@ -208,6 +208,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {(pair: unknown) => boolean|undefined} [sharesPower]
+ * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse]
@@ -296,6 +297,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // about a bloc needs the pair to share a power; the draw hands the pair as `ctx.pair` (`[from, to]`).
   'shared power': dim({ shape: 'presence', home: 'sharesPower', needsContext: 'pair',
     reader: (f, _key, ctx) => (typeof f.sharesPower === 'function' && ctx && 'pair' in ctx ? f.sharesPower(ctx.pair) : undefined) }),
+  // TAIL-TIES, THE CHAIR'S RULING (T5) of 2026-11-14 ("THE WORD IS GRANTED"; vetoable by the owner): ONE atom, the
+  // town is ruled by a BODY OF MORE THAN ONE (`rulingBody.js :: rulingBodyOf`, hookTruth.js's `ruledByCouncil` rule
+  // moved to its home). A line about THE council (a session, a vote of it, "the council has asked") needs it: under a
+  // lone headman, a priest-king, a lord, a mayor or an occupier the line is refused. Unanswered with no government.
+  'ruling body': dim({ shape: 'presence', home: 'rulingBody', reader: (f) => bool(f.rulingBody) }),
   // `priest` = a senior cleric stands among the named people (`faithReadingOf(record).seniorCleric`;
   // the rulings §2, CENSUS-1c).
   priest: dim({ shape: 'presence', home: 'faith', reader: (f) => (f.faith && typeof f.faith === 'object' ? f.faith.seniorCleric != null : undefined) }),
