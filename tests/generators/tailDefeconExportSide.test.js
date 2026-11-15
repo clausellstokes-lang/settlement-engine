@@ -59,6 +59,9 @@ const GONE = [
   ['r2r-thorp-53', 'Salt for preservation', 'Salted fish'],
   ['r2r-village-5', 'Salt for preservation', 'Cargo barges'],
   ['r2s-insurgency-village-3', 'Salt for preservation', 'Water rights'],
+  // D33 (TAIL-DEFECON-C-4): a Maltster malts; it grinds no flour. What the mill site still gives it: its processed grain.
+  ['r2r-hamlet-44', 'Flour and meal', 'Processed grain'],
+  ['r2r-hamlet-44', 'Milled flour', 'Processed grain'],
 ];
 
 /** (seed, a good exported where a house that works it stands, that house) */
@@ -72,7 +75,10 @@ const KEEP = [
   ['r2r-town-10', 'Bows and crossbows', 'Bowyers & fletchers (guild)'],
   ['r2r-city-1', 'Glassware', 'Glassmakers'],
   ['r2r-hamlet-2', 'Quality tools and weapons', 'Resident smith (part-time)'],
-  ['r2r-hamlet-44', 'Flour and meal', 'Maltster'],
+  // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-4, D33): this row kept a Maltster's "Flour and meal" (the 'mill' keyword read a
+  // maltster as a mill); flour is ground by a GRAIN mill, so r2r-hamlet-44 is now a GONE row (above), and the claim moves
+  // to r2r-village-27, whose Mill grinds it.
+  ['r2r-village-27', 'Flour and meal', 'Mill'],
   ['r2s-indebted-town-1', 'Dyed cloth', 'Dyer'],
 ];
 
