@@ -37,10 +37,16 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 9 | tail-defecon-2026-11-14 | 345f13157 (00:51) | bcad1a358 | d5c419393 | none | 1 pin re-keyed in the lane: code; DECLARED MOVE 6b8a9b993 (safetyProfile, 223 towns): golden carried. Landed at 345f13157 so that ruling D9's order holds: defecon-c descends from it and carries this batch anyway |
 | 10 | tail-defecon-c-2026-11-14 | 358d6afea (00:54) | 345f13157 (point 9) | f5c5d636e | none | 2 pins re-keyed in the lane: code; DECLARED MOVES 10e1cf0ea C2-A (302 towns), 358d6afea C1-A (375 towns), economicState.localProduction: golden carried |
 | — | tail-defecon-d-2026-11-14, tail-defecon-r-2026-11-14 | SKIPPED (00:56: origin does not hold them yet) | — | — | — | — |
+| K2 | tail-crisis-2026-11-14 (the chair's LAND 00:57) | 6a3d98d4c (00:58; equal) | 9c07f7461 (point 4) | eeaa06816 | none | KNOWN MEETING (1): factVocabulary.js, factLayers.js, factsOf.js moved by both (ties 6 `ruling body`, this `rival power`), merged clean, BOTH STAND (rivalPower + rulingBody tests 14/14 on the merged tree); no record moved; told to the chair 01:00 |
+| 11 | tail-corpus-eco-2026-11-14 | 50c597eea (01:01) | 48fedbe98 | c66793f6f | none | leaves economy/general.generated.js (lane's); lane-only registers `presumedThings.register.json`, `undeclaredLines.register.json`; clean-both `presumedThings.widened.register.json` |
+| 12 | tail-corpus-def-2026-11-14 | c66510264 (01:01) | 48fedbe98 | 9eb084705 | none | leaf defense.generated.js (lane's); clean-both `RECEIPT_POOLS_DOSSIER_STATE.md` (with 11), `presumedThings.widened.register.json`; 2 walker pins moved by the lane alone: code |
+| (g) | THE CORPUS'S DOOR at 9eb084705 | `node scripts/generate-dossier-state-prose.mjs --check` | — | — | — | **exit 0**: 69 state blocks / 2951 variants; nothing re-taken, nothing rebuilt |
+| — | tail-exports-pdf-2026-11-14 | NOT LANDED (not on origin at 01:01) | — | — | — | — |
+| — | tail-exports-journal-2026-11-14 | NOT LANDED: ready at 748417354 (the chair 00:57), left for the successor at the count line | — | — | — | — |
 
 ## 3. Every code resolution
 
-None yet.
+NONE: no merge of this landing stopped on a conflict. Merged clean though both sides moved them: the three fact files at K2 (known meeting (1): both atoms stand, read in the merged files; their two tests 14/14); `presumedThings.widened.register.json` (5, 6, 11, 12: disjoint shrinks); `RECEIPT_POOLS_DOSSIER_STATE.md` (11, 12). Remerge patches: none carry a resolved hunk (the one at `probes/JOIN-6/01-tail-services.remerge.patch` shows the form).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -92,16 +98,25 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json` | tail-ties (6): lane-only, taken from the lane | the close re-derives it once |
 | `tests/property/generatorGoldenMaster.test.js` | tail-narrative (7) | the DECLARED MOVE of 9bd853fd0 (history.founding.reason in 154 towns: the founder against the Origin row; 48 towns newly print no Origin row) |
 | `docs/census/declarations/POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json` | tail-narrative (7): lane-only, taken from the lane | the close re-derives them once |
+| `tests/lint/presumedThings.widened.register.json` | houses (5), ties (6), corpus-eco (11), corpus-def (12): FOUR disjoint shrinks through its door, merged clean in turn; the union stands, the JSON parses | the close re-derives it once (`--check`) |
+| `tests/lint/presumedThings.register.json`, `tests/lint/undeclaredLines.register.json` | corpus-eco (11): lane-only, shrunk through the door, taken from the lane | the close re-derives them once |
+| `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` | corpus-eco (11), corpus-def (12): merged clean though both moved it (other sections) | measured at the close |
+| leaves `economy.generated.js`, `general.generated.js` (11), `defense.generated.js` (12) | the corpus lanes | (g) exit 0 at 9eb084705 |
+| the lighting census, the edge bundles | every merge of this landing (new test titles; src changes) | last, at the close, by their doors |
 | `tests/property/generatorGoldenMaster.test.js`, `espionageDormancyFence.test.js` (driven golden) | tail-powers (8) | the DECLARED MOVES of 12d8fd0a9 (npcs[].presentation, title lines), 21dc7fa4b (powerStructure.factions[].desc, 284 towns / 510 descriptions), d68805134 (the headman's name, 38 towns, 23 families) |
 | `tests/property/generatorGoldenMaster.test.js` | tail-defecon (9), tail-defecon-c (10) | the DECLARED MOVES of 6b8a9b993 (economicState.safetyProfile, guardEffectivenessDesc 223 towns), 10e1cf0ea C2-A (localProduction, 302 towns), 358d6afea C1-A (localProduction, 375 towns); red at the lane's base and carried: worldFactRederive A7, urbanBandInstitutions G3/G5 |
 
-## 5. Item 2 at the landed tip
+## 5. Item 2 at the landed tip 9eb084705 (each run to a file in /home/user/j6out, read by its tail through `scripts/gate-tail.sh`)
 
-Not yet run.
+- (g) the corpus door's `--check`: **exit 0** (69 state blocks / 2951 variants; nothing re-taken, nothing rebuilt).
+- The twelve-birth grid (`node scripts/census/page-census.mjs --grid`): **exit 0, 2 falls** (as at JOIN-5's f663a2699; the count is the chair's).
+- `npm run build`: **exit 0** (`dist/` removed after it: JOIN-5 §7).
+- Test files naming a file with a resolved code conflict: none (no code conflict). The two atom tests run at K2: 14/14.
+- The exports branches are not in this tip.
 
 ## 6. Stops
 
-None yet.
+None: no branch aborted; no hunk needed a choice.
 
 ## 7. Hazards
 
@@ -120,6 +135,13 @@ A worktree at origin's tip (`git worktree add /home/user/j6wt -b join6 <tip>`, `
 - `push.sh` runs fetch, the tripwire against `lastpushed`, the non-empty rev-list, the plain push, and compares refs and config.
 - The remerge patches: `docs/chair/2026-11-14/probes/JOIN-6/NN-<branch>.remerge.patch`, made by `git show --remerge-diff <merge> -- . ':!docs'` (excluding each listed register, baseline and bundle).
 
-## 9. WHAT IS LEFT
+## 9. WHAT IS LEFT (handed back at the count line, ~225,000 of 250,000; tip 9eb084705 plus this hand-back's commit)
 
-The order from display-civic on; (g) after the two corpus merges; item 2; the one message; further points on the chair's messages.
+Line by line, for the successor, by the same laws and instruments (§8; worktree `/home/user/j6wt`, local branch `join6`, `lastpushed` in `/home/user/j6out`):
+1. lane/tail-exports-journal-2026-11-14 at its tip read back (748417354 at the chair's 00:57; its successor adds a merge of the joined line at b6c64d36c: it merges as any other).
+2. lane/tail-exports-pdf-2026-11-14 when origin holds it (after the journal in the brief's order: exports-pdf, then exports-journal; the journal being ready first, the chair's to order).
+3. When origin holds commits on them: lane/tail-powers-b-2026-11-14 (past 40238d3ab), lane/tail-defecon-d-2026-11-14 (after defecon-c), lane/tail-defecon-r-2026-11-14 (shares `resourceGenerator.js` with defecon: a meeting in a hunk = both stand, tell the chair), lane/tail-titles-2026-11-15 (declared move; the golden moves).
+4. lane/tail-history-2026-11-14: only on the chair's LAND.
+5. Every further LAND the chair sends; second points expected on most branches (display-civic e633bd333 or later, houses 6826fffd0 or later, narrative, the successors on services, crisis, display-econ, defecon).
+6. After the last point: the build, the grid, (g) once more if a corpus branch moved; ONE message.
+For the close (not this seat's): every row of §4 by its door, once, on the final tree.
