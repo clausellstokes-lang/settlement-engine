@@ -1241,3 +1241,46 @@ Read for the hazard: "it holds what is left of the food stores" is the Grain Hol
 remaining food reserves"), the claim ROUND THREE item 4 refused for `gainsHolds` where the granary's face sits in another power:
 the chair ruled it (K24, "holds the grain"); it stays on this list for the owner. "the town" in `creditorAgent` is spoken in
 the place's noun on the page ("the hamlet owes").
+
+## K26: NAMED, not cured here (the three surfaces are not this group's files)
+
+The stake row's power is printed by its surface, not by the composition: the crisis tab through
+`components/new/tabs/CrisisTab.jsx` (`<EntityLink id={k.doorId} fallback={k.factionId}>`, which prints the roster entry's
+`currentName`), the PDF through `src/pdf/sections/CrisisSections.jsx:39` (`${k.factionId} …`) and the journal through
+`src/foundry/journalPages.js:185` (`**${k.factionId}**`). None is this group's, and `crisisPage.js` (LENT) cannot reach the
+printed word without them: the quarrel's names inside the reason already read the leaf (`quarrelsOf` → `powerSentenceName`).
+**The cure, one token a surface:** the PDF and the journal print `powerSentenceName(k.factionId)`; the tab passes
+`verbatim` with `fallback={powerSentenceName(k.factionId)}` (the door still opens the power; a bare chip elsewhere keeps the
+label). At the base: "Military/Guard has no stake yet" 35 (now silent by K25 c), "…is already at odds" 26, "…gains" 21,
+"…split" 24 towns (tabs; the same on the exports).
+
+## K27: PARKED with its measure (a fact the vocabulary lacks: no new word without the chair)
+
+By the record at aa78d1ec9: "What iron there is goes out in rations, and work waits on mended tools." prints in **36 towns**
+(its first sentence, "The iron carts are # weeks late…", in 39: 3 take the smith-less twin). Of the 36: 4 are famines (2 with
+grain the failed source, 1 fish, 1 livestock); iron or metals are a CRITICAL IMPORT in 35 (`resourceAnalysis.imports.critical`;
+the hook prints only where a processor needs the import and an outside supply exists: `foodBalance.js`); the supply is cut in
+**1** (an isolated route; no siege; no war: the peace hooks refuse war). **No atom of the vocabulary reads an iron shortage**
+(`factVocabulary.js` has no iron or metal word). So the rationing claim stands on nothing in 35 of 36. The cure needs either
+(i) an atom `iron short` (the chair's word: e.g. true where the iron import's channel is cut), keyed on the original, the
+slot taking a twin with no rationing ("…The iron carts are three weeks late and the carters will not say why, and work waits
+on mended tools." would be the twin's form), or (ii) the original's second sentence reworded by exception in `foodBalance.js`
+(K9's form, not this group's file) with its key here. The other two peace hooks claim a price and a toll, not a shortage of
+the metal in hand: not read as false.
+
+## Named for other seats (this seat)
+
+- **stressFactions.js's seat:** under a migration, a war and a slave revolt the crisis writes its MERCHANTS' sentence onto any
+  power whose name holds "guild" or "merchant" ("Thieves' Guild", "The Shadow Compact": "The arrival of skilled workers outside
+  guild structures is an existential concern…", 6 untouched printings on the 720 at the base): the stake table skips criminal
+  powers for that reason; the description itself is that seat's.
+
+## What is left (after this seat)
+
+- K24 and K25 done (K25 (b) measured 0). K26 NAMED for the three surfaces; K27 PARKED for a word. The after census and the
+  gates' tail are recorded below once read.
+- Unchanged from TAIL-CRISIS-5 (under five towns, or parked): K16 11705 14131 (2), X9 20882 (3), 07387 (2), 27012 (1), 13909
+  (3); the Germanic "built in timber and stone" on desert ground (4); the Tonight sheet's "Import-Dependent" under a siege (2);
+  01034 and X9 01620 28443 30535 (K8's wall); the stored cast rows; the five nextInLine rows; 20893 (DEFECON's condition);
+  HISTORY's succession-void viabilityNote (31) and the plague's market note; the Economics tab's one-argument
+  `foodStoresWords` call (K7).
