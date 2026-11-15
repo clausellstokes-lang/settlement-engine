@@ -10,20 +10,6 @@
   "births": 720
  },
  "rows": {
-  "P1a": {
-   "label": "1a the food verdict \"only just\" beside \"grows more than it eats\"",
-   "reader": "SECOND",
-   "master": 0,
-   "integration": 57,
-   "banked": 0
-  },
-  "P1b": {
-   "label": "1b \"a small margin\" beside a quarter or more bought in",
-   "reader": "SECOND",
-   "master": 64,
-   "integration": 64,
-   "banked": 0
-  },
   "P2siege": {
    "label": "2 a siege figure in the indicative outside a siege",
    "reader": "SECOND",
@@ -269,6 +255,24 @@
    "atRetirement": 288,
    "reason": "it counted every capture-pressure line beside a free hall, the true with the false: \"each season it gets easier to buy an official\" presumes no buyer, and at the stored state none 41 of the census's 585 towns hold an official who answers to a criminal house through their office, so the hall's rung cannot decide a line about officials (REVIEW-W2A F3: 92 plainly true lines and 164 not refuted were silenced with it). 288 at the base; 0 at 96d698de7 only because that tip silenced the lens. Retired by the chair's ruling of 2026-11-13; replaced by P5false.",
    "replacedBy": "P5false"
+  },
+  "P1a": {
+   "label": "1a the food verdict \"only just\" beside \"grows more than it eats\"",
+   "reader": "SECOND",
+   "master": 0,
+   "integration": 57,
+   "atRetirement": 0,
+   "reason": "no line of the corpus says \"only just\" any more (DS-ECO-9 SECURE v3 re-said by W2-WRITE-SIDE-ECO-3, e056fbfb: a claim of the stores only, its premise declared on the line). 0 banked at retirement. Retired by the chair's ruling of 2026-11-15 (V13); no row replaces it.",
+   "replacedBy": null
+  },
+  "P1b": {
+   "label": "1b \"a small margin\" beside a quarter or more bought in",
+   "reader": "SECOND",
+   "master": 64,
+   "integration": 64,
+   "atRetirement": 0,
+   "reason": "no line of the corpus says \"a small margin\" any more (DS-ECO-9 SECURE v1 re-said by W2-WRITE-SIDE-ECO-3, e056fbfb: true across the band). 0 banked at retirement. Retired by the chair's ruling of 2026-11-15 (V13); no row replaces it.",
+   "replacedBy": null
   }
  }
 }
