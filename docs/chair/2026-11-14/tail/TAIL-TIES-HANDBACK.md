@@ -767,3 +767,125 @@ claim, the towns, the office check and the other cases did not move; the generat
   r2s-recently_betrayed-hamlet-2: Anna Choniates; both `temporary: true`, `temporaryKind: 'grain'`, 0 hooks; the other
   faces of those two towns hold one hook each). The other five towns were not counted face by face.
 - The file alone: 3/3 green (was 1 red test, 2 of 7 rows). eslint 0.
+
+**T25 (a), option 2: STOPPED (a test would have to change), measured in scratch, not committed.** The ruled shape was
+built as written in a scratch tree. The derivation's body and the helpers only it reads moved verbatim to a new
+`src/domain/display/criminalStructure.js :: criminalStructureOf(settlement, facts)`, which does not import `factsOf`:
+`CRIM_STRUCTURE_DATA`, `runningCriminalChains` (re-exported by the display), the ring vantages (their list door handed
+`facts: () => facts`), `rivalRingsHere`, `oneOrganisationRules`, `ringNoteUnderStreetFighting`, `ringWithoutSeat`,
+`streetsNotQuiet` and `headedPowerAmongRivals`. The facts' `crime` getter calls it with its own facts; `defenseDisplay.js`
+keeps the one-argument `deriveCriminalStructure(s)`, which hands it `factsOf(s)`.
+- **What held:** births byte-identical (`991c330f…a9`, 720, 0 errors), `layerBoundaries` green, eslint 0 on the 3 files.
+- **What it broke.** The set is every test naming `defenseDisplay` / `deriveCriminalStructure` / `factsOf` / `crimeSignal`,
+  plus `tests/lint` and `tests/architecture`: 386 files, 4,971 tests. Against the merge tip's own run it has 7 NEW reds,
+  each needing a test or register edit:
+  - `tests/components/dossierLabelCase.test.jsx`: it reads the three structure labels out of `defenseDisplay.js`'s source.
+  - `tests/lint/chainPrintSites.walker.test.js`: "every listed reader is still there".
+  - `tests/lint/ruinFilterRoster.walker.test.js` ×2: an `.institutions` reader in the new file.
+  - `tests/lint/sourceCitationIntegrity.walker.test.js`: past-EOF citations of `defenseDisplay.js` lines.
+  - `tests/architecture/engineCoreLazyEdge.test.js` ×2: the new module's chunk edge, plain and flagged.
+  - In the factLayers walker, already red, the READERS arm gains 6 rows under the new file: the name ladder's market and
+    crime lines, banked under `defenseDisplay.js`. `scripts/fact-layers-door.mjs` has only `--shrink`, which refuses a
+    born row. There is no door for a move.
+- **Walker (i), `defenceFactReaders`:** the ×4 are the second member's (court and gate) reads at `defenseDisplay.js`
+  883, 905, 906 and 907 (`courtHoldersOf` / `courtBenchOf`), made by `d5839e51` (TAIL-DISPLAY-CIVIC-4 · V6). They are not
+  on the criminal structure's path and do not move with the cut. They are not this cut's doing.
+- **Walker (ii), `factLayers`:** the crime leaf touches `_seed, economicState, economicState.safetyProfile, institutions,
+  npcs, powerStructure, tier`, with `npcs` undeclared. It is the SAME before and after the move (CONFIRMED by the walker's
+  own `leafArm` on both trees), because `headedPowerAmongRivals` moves with the body.
+- **Told to the chair; PLAUSIBLE, not measured:**
+  - The fact reads only `.key`. The key is settled before any note helper runs, and no note helper reads the facts.
+  - So a getter that computes only the key would read no facts, no `_seed` and no `npcs`.
+  - But the name ladder's banked lines still leave `defenseDisplay.js` in that shape, so it meets the same register door
+    (and `dossierLabelCase` only if the table moves).
+
+**T26: PREPARED, NOT LANDED.** `lane/close-trim-first-paint-2026-11-15` at `e44d42aa`, cut from `02de3888` (after B; A
+did not land). It is one commit: the 16 riders as FP-G7 rows at the end of `ENGINE_SHARED_DOMAIN_EXCISIONS`. The budget
+numbers were not touched.
+
+| | before | after | change |
+|---|---:|---:|---:|
+| first paint, raw | 1,164,962 | 1,130,124 | −34,838 (still +8,864 over) |
+| first paint, gzip | 371,006 | 360,028 | −10,978 (still +2,803 over) |
+| first paint, Brotli | 310,944 | 302,231 | −8,713 (still +2,246 over) |
+| engine chunk | 860,445 | 867,416 | +6,971 |
+
+- The boot smoke PASSES plain (602/602 chunks) and FLAGGED (600/600).
+- `engineCoreLazyEdge` 3/3, `engineChunkLazy` 19/19, `cultureProfilesLazy` 5/5 and `bootSmoke` 11/11 are green.
+- `vendorPdfLazy`: only its 4 size arms are red.
+- Births byte-identical; eslint 0.
+
+**Scratch (this seat's, removable):** the trees `tt8`, `tt8a` (the ruled shape, uncommitted) and `tt8c`, the instruments
+`instr/` and the run files, all in this session's scratchpad. The baseline run's red list is `t0.fails` and the ruled
+shape's is `tA.fails`.
+
+### TAIL-TIES-8: ruling T28 (the chair, 07:12 UTC; the key-only leaf as the fact's home): STOPPED at its condition (2), nothing of A pushed
+- **The measure (CONFIRMED).** The READERS arm (`tests/lint/factLayers.shared.mjs :: readerArm`) skips a line only in a
+  family's `homes`, and those are hard-coded in that test helper's `FAMILIES` table:
+  - crime: `src/domain/crimeSignal.js` and `src/domain/corruption.js`;
+  - market: `src/domain/facts/market.js`.
+- **It never reads `factLayers.js :: LEAVES`.** So a LEAVES row there gives a declared leaf no standing in this arm.
+- **The probe.** The moved ladder was placed at `src/domain/facts/criminalStructure.js` in the scratch tree. The arm
+  counts it as 1 market row (`hasSemiOrg`) and 6 crime rows (`hasGuild`, `hasSyndicate`, `hasSemiOrg`, `hasDiffuse`, the
+  running-chain filter, …), all new rows under the new file. That is the rise T28's condition (2) names.
+- **What stands in the way.** The leaf's lines are the home's only if `FAMILIES` names the leaf as a home of crime (and of
+  market, for the `black market` word), which is an edit to a test file. Otherwise the 7 rows must move file in the
+  register, and the door has only `--shrink`. Both are the chair's or the owner's to rule.
+- **Not done:** the leaf, the `factsOf.js` getter, the `defenseDisplay.js` call and condition (3)'s doc re-addresses.
+  Condition (2) stops first.
+- **Per the ruling:** the cycle `defenseDisplay.js` <-> `factsOf.js` predates the tail (it is red at the line's base). It
+  goes on the owner's list as a named debt. The four court-bench reads (walker (i), `d5839e51`) are another seat's.
+## TAIL-TIES-9 (2026-11-15): T28 (the key-only leaf cut of the last layer cycle): STOPPED, measured; the attempt is parked on its own branch
+
+**The merge.** The joined line `lane/join-2026-11-14` at `2f8ffcaa3`, one merge commit (re-made on `21ce8da11` as `b805b1de0`), clean. All work ran in
+scratch worktrees outside the main checkout (`npm ci` once; the cut tree's `node_modules` symlinked). The births at the merge
+(RECORD-MEASURE-1 `births-only.sh` over CENSUS-3's `seeds.txt`, sha256 of the uncompressed corpus):
+`6e0c045288704cd716d782684cbb900b6f38a2c02d2d260b80249c893b58d75f`, 720 rows, 0 errors.
+
+**TAIL-TIES-8's 07:16 note above** (`21ce8da11`, written after this seat had started) found condition (2) by reading the arm,
+without building the cut. This seat BUILT the cut and measured it; condition (2) holds as it said, and a second condition stands beside it.
+
+**The cut as ruled, built.** `src/domain/facts/criminalStructureKey.js :: criminalStructureKeyOf(settlement)` holds the name
+ladder and the key decision, moved verbatim with what only the key reads (`runningCriminalChains` and its status list,
+`rivalRingsHere`, `oneOrganisationRules`, `THIEVES_GUILD_HOUSE`); its imports are `crimeSignal.js :: crimeSignalOf` and
+`corruption.js :: rivalRingsOf`. `factsOf.js`'s `crime` getter reads the leaf and no longer imports the display.
+`defenseDisplay.js :: deriveCriminalStructure(s)` calls the leaf for its key and keeps its one-argument form, the three
+labels and the vantage reads. It re-exports `runningCriminalChains`, so `generators/safetyProfile.js` did not change. The
+`crime` row of `factLayers.js :: LEAVES` names the leaf (`call: 'record'`).
+
+**What held (measured):**
+- THE KEY READS NEITHER THE FACTS NOR `npcs` (CONFIRMED, the walker's own `leafArm` on the sixteen grid births). The leaf
+  touches `economicState, economicState.safetyProfile, institutions, powerStructure`, all of them declared. It does not touch
+  `_seed`, `tier` or `npcs`. Before the cut the row touched `npcs` (undeclared) and `_seed` and `tier`.
+- `layerBoundaries` is GREEN: the cycle is gone. At the merge tip only its cycle test was red.
+- The factLayers LEAVES arm is GREEN (it was red at the merge tip): the crime row's `npcs` violation fell. The tree now reads
+  the register exactly.
+- eslint on the 4 touched files: 0.
+- The births after: byte-identical (`6e0c0452…d75f`, 720, 0 errors).
+
+**What stood in the way: two named stop conditions, either one enough.** Run files: `walk0.log` (merge tip) and `walk1.log`
+(the cut), over `factLayers.walker`, `layerBoundaries` and `engineCoreLazyEdge`.
+1. **The walker counts the declared leaf's own lines as READERS rises.** The READERS arm takes each family's homes from
+   `FAMILIES` in `tests/lint/factLayers.shared.mjs`. Crime's homes there are `src/domain/crimeSignal.js` and
+   `src/domain/corruption.js` only. The arm does not read `factLayers.js :: LEAVES`, so declaring the leaf there does not make
+   it a home.
+   - The total stays 487 (the register banks 477).
+   - 7 rows rise under `src/domain/facts/criminalStructureKey.js`: crime ×6 (`hasGuild`, `hasSyndicate`, `hasSemiOrg`,
+     `hasDiffuse`, the running-chain `.filter`, `oneOrganisationRules`'s `seats.some(… 'criminal' …)`) and market ×1
+     (`hasSemiOrg`'s `'black market'`).
+   - The same 7 fall from `defenseDisplay.js`.
+   - Making the leaf a home is an edit of the test instrument's `FAMILIES`, and no test may be edited.
+2. **`tests/architecture/engineCoreLazyEdge.test.js`: 2 NEW reds, plain and FLAGGED.** It was green at the merge tip. The
+   red row is `src/domain/facts/criminalStructureKey.js -> src/domain/crimeSignal.js [coherence-lazy]`.
+   - The leaf routes into the eager `engine-core` (beside `rulerKindLabel.js`).
+   - The crime signal's home is pinned lazy (`vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN`, line 333).
+   - So the key cannot be a leaf of pure leaves while it reads `crimeSignalOf`.
+   - Curing this is a pin edit or a move of `crimeSignal.js`: a third shape, not tried.
+
+**Not run, because the cut stopped:** `npm run build`, the boot smoke plain and flagged, `engineChunkLazy`,
+`cultureProfilesLazy`, the 155 test files that name `defenseDisplay` / `factsOf` (their list is `named.txt` in scratch), the
+type check, and the `sourceCitationIntegrity` re-addressing.
+
+**Where it is.** `lane/close-layer-cycle-attempt-2026-11-15`: the merge and the scratch cut, one commit on top. It is not on
+`lane/tail-ties-2026-11-14`, whose tip is unchanged. The cycle `defenseDisplay.js <-> factsOf.js` goes on the owner's list as
+a named debt of an earlier lane.

@@ -1702,8 +1702,8 @@
    "src": "map:static"
   },
   "DS-GEN-13::COMMERCE: a market, no guild": {
-   "layer": 3,
-   "src": "map:static"
+   "layer": 4,
+   "src": "placed: its lines read the guild power (the `guild` fact, homed in powerStructure, layer 3: 4467cd7d6 keeps a false \"no guild\" line out of the 24 towns that hold one); nothing at or below the powers reads this state prose; was 3 by map:static (the chair's C30, TAIL-CLOSE-POOLS-1)"
   },
   "DS-GEN-13::COMMERCE: a merchant guild, no bank": {
    "layer": 3,

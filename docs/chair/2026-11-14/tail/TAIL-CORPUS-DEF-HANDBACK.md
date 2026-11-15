@@ -674,3 +674,10 @@ lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
    and nobody to put on them. A determined attacker takes this town …" beside an Adequate bar; threatRowsTrueUnderBand's
    FALSE_UNDER holds "A determined attacker" false under ADEQUATE on the readiness rows (its law's births are rv2-calm and
    rv2-under_siege, so it does not read this town). For the chair to place.
+
+## TAIL-CORPUS-DEF-5 HANDED BACK (2026-11-15 ~07:23 UTC), tip 922cfa66 + this note
+Merges: fb591934 (join 7163b309), cff4998c (the chair's SWEPT f714fb6a5). Ten files lent (the seven of U2, C25's
+defenseTabFlow, C28 / C29's vocabularyPageFindings, with tailDefeconSafetyLines as touched): 131 of 131 at the
+SWEPT merge after C29. One record move (36 of 720, crimeTypes; veto line 40); every other change a pin re-keyed by
+identity or a plant moved, each shown able to red by a reverted plant. Waiting on the chair's LAND word; nothing lent
+is left. Instruments: RECORD-MEASURE-1 births-only.sh + fielddiff.mjs over CENSUS-3's seeds (git-archived out).

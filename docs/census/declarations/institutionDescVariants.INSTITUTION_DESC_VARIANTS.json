@@ -1879,7 +1879,7 @@
     },
     {
       "id": "village|Government|Village elder#0",
-      "text": "The oldest or most respected villager steers the decisions, by standing rather than office, and is heeded all the same.",
+      "text": "The oldest or most respected villager steers the decisions on standing alone, holds no office, and is heeded all the same.",
       "needs": [],
       "excludes": [],
       "crisis": [],
