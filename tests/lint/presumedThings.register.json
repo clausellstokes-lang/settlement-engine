@@ -521,9 +521,7 @@
    ["market", "after-release", "The market at ", "09a0d77ee957a22f"],
    ["market", "after-release", "was established as a market town where merchants could meet", "d1a44dd8a765360e"],
    ["mill", "after-release", "began as a riverside mill settlement", "a70845241c46c424"],
-   ["mill", "after-release", "was established by a family granted mill rights by a distant lord who never visited", "4290e18751ad1830"],
-   ["walls", "after-release", "The founders knew every name inside the walls. Now no one does: too many have arrived too fast.", "f9fa0758aa958785"],
-   ["walls", "after-release", "The founding families could name every soul inside the walls, and the settlement still assumes it can. That is how someo", "9187b0e524e0b0c8"]
+   ["mill", "after-release", "was established by a family granted mill rights by a distant lord who never visited", "4290e18751ad1830"]
   ],
   "src/data/npcData.js": [
    ["bank", "after-release", "'s counting-house in daylight. That was never part of the arrangement.", "301b25ef3e08be33"],
@@ -700,8 +698,6 @@
    ["bank", "after-release", "Banking & Finance", "654e17de61297699"],
    ["docks", "after-release", "Trade access + harbour", "cb83b131e60e6638"],
    ["mercenary", "after-release", "Armed escort & mercenary hire", "aa7d81509ad78720"],
-   ["mill", "after-release", "Grain is processed at the lord's mill under feudal monopoly (banalité). ", "2aaeb82d8032d31f"],
-   ["mill", "after-release", "the mill toll takes any surplus. Without the lord's mill, there would be no flour at all.", "26f1ab483e468e4b"],
    ["watch", "after-release", "professional city watch", "4fcdf8d8e07451d2"]
   ],
   "src/generators/crossSettlementConflicts.js": [
