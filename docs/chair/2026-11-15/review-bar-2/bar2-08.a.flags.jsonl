@@ -1,0 +1,6 @@
+{"id":"C14631","town":"bar0-hamlet-under_siege-rand-4","sev":"MED","kind":"PAIR","why":"says any hidden trade is too little to matter; INCOME has Black Market Revenue 14% and Shadow Economy 14% unrecorded","other":"C14602"}
+{"id":"C14738","town":"bar0-hamlet-under_siege-rand-4","sev":"MED","kind":"PAIR","why":"says those holding the place keep order; no watch, militia or garrison (DEFENCE none) and Law & order reads Collapsed","other":"C14486"}
+{"id":"C14951","town":"bar0-hamlet-under_siege-rand-5","sev":"MED","kind":"STATE","why":"says the river's milling use still holds; HOUSES has only Access to external mill, no mill of its own (grain taken a day away)","other":"C14950"}
+{"id":"C15234","town":"bar0-hamlet-under_siege-rand-5","sev":"MED","kind":"PAIR","why":"says those holding the place keep order; nobody is paid to keep order, DEFENCE has no watch or force, Law & order reads Collapsed","other":"C15209"}
+{"id":"C15236","town":"bar0-hamlet-under_siege-rand-5","sev":"LOW","kind":"LACKS","why":"names the streets of a hamlet of 29 people","other":""}
+{"id":"DONE","lines":1064,"blocks":2,"flags":5}
