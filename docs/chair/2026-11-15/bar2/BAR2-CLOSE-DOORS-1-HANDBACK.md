@@ -4,7 +4,7 @@ Branch `lane/bar2-close-doors-2026-11-15`, cut from **59185b62a** (the joined li
 Scratch tree: a plain clone with its own `.git` and its own `npm ci`, in this seat's scratch directory; every run to a
 file there. No page line cured, no test written, skipped or weakened.
 
-STATUS: **PART 1 IN PROGRESS.** Part 2 waits on the chair's message quoting the owner's own words (none yet).
+STATUS: **PART 1 DONE** (one law red sent to the chair, below). Part 2 waits on the chair's message quoting the owner's own words (none yet).
 
 ## MERGES (on the chair's words)
 
@@ -43,13 +43,23 @@ chainPrintSites.walker.
 | 1d | tuning inventory (8a), observed-shape readers, prose family contract, prose bytes | not run: each test GREEN at 59185b62a | — | — | — | tuningRegister 76/76, observedShapeReaders 47/47, proseFamilyContract 8/8, proseCorpusBytes 18/18 |
 | 1f-i | `exploiterMember` in the two cast-reason ledgers | one row each in the form of its sibling `exploiterPower`, after it | 2 rows | 2 rows; no test holds a count (25 readers searched) | ed0de6a21 | 25/25 readers green alone; wiring census `--check` exit 0 |
 | 1f-ii | chainPrintSites `NOT_ROOTS` | `dist`: "build output (vite emits bundles there; not source)" | red with `dist` present | before 5/6 (`expected [ 'dist' ]`), after 6/6; 6/6 without `dist` | c871f5c26 | 6/6 |
+| 1e | edge bundles | `npm run build:edge-shared` (after the sweep-a merge) | the engine bundle stale against src/ | engineBundle js + meta (sourceHash 7e46e7ee -> 5048adb0; inputs + foodBalanceBar, magicProvisionShown, ironAtHand, magicSource, presence); aiCharter, aiGrounding, aiOutputSchema js + meta; two metas restamped | dcfa6c830 | 18/18 files that read a bundle green alone (engineBundleReplay 5 + 2 skipped: its golden arms, while the golden is stale); `npm run validate:edge` exit 0 |
+| 1g | size ceilings (B3) | `npm run build`; `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js`; the same at 74ded1800 (a scratch worktree, its own npm ci: 66/66, its figures equal the old ceilings) | five ceilings red, all under +60,000 | worker 2,303,278 -> 2,312,179 (+8,901); engine chunk 867,295 -> 872,758 (+5,463); first paint raw 1,130,209 -> 1,131,667 (+1,458: engine-core +1,314, data +139, index +5), gzip 360,054 -> 360,516 (+462), Brotli 302,175 -> 302,753 (+578). Cause: the five branches as a whole; membership: foodBalanceBar.js and presence.js into the eager engine core, magicProvisionShown.js and magicSource.js (labels' `vite.config.js` line) and ironAtHand.js (sweep-a) excised | f94aedd30 | 65/66 (left: the ST-2 law, below). `npm run verify:dist` exit 1: STRICT DIST REFUSED on that one row only |
+| 8b | lighting census | row 8b's command (`LIGHTING_CENSUS_REFREEZE=BAR2-CLOSE-DOORS-1 ...`), then without | files 3607 -> 3619 | files 3607 -> 3619, parked 454 -> 460, credited 3153 -> 3159, titles 30536 -> 30557, suiteTitles 8422 -> 8428; no [POPULATION_GREW] | cce5f7e02 | 34/34 |
+| — | the three registers at the end of Part 1 | `presumed-things-door --check`; `check-writer-reach`; `check-observed-shape-readers` | exit 0 | all three exit 0 (fresh 0 · stale 0 · banked 4678; LIT 693 · DARK 1406) | — | — |
 
 ## LAW REDS SENT TO THE CHAIR
 
-None of this seat's finding (the one law red, engineCoreLazyEdge, is the sweep seat's and is cured by its merge).
+- `tests/build/vendorPdfLazy.test.js` (VERIFY_DIST) › WEAVE ST-2 › "every consumer in the tree is declared, with the right eager flag, halves and door": `R | l | none | member | src/domain/display/crisisStoppedRow.js` absent from the roster in `src/domain/goods.schema.js`; the file reads `economicState.primaryImports` by lane/bar2-services b48c9dfa4 (batch 2, ruling SV6). Sent 18:5x UTC. Not touched.
+- (engineCoreLazyEdge: the sweep seat's, cured by its merge.)
 
 ## WHAT IS LEFT, IN ORDER
 
-1. 1e the edge bundles; 1g the size ceilings (the merge word is given: both free now).
-2. 1d's lighting refreeze (row 8b), last, on a clean committed tree.
-3. Part 1's line to the chair. Part 2 on the owner's words only.
+1. The chair's seat for the ST-2 law (then `npm run verify:dist` whole again).
+2. PART 2, only on the chair's message with the owner's own words: the signed record
+   docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json; the golden master (the family check first); the
+   espionage fence's driven golden (EF1: its behavioural arms first); the three surfaces pending from the last close
+   (town-map calibration, dossier prose manifest, preset lighting witness); then every class-G pin of 1a
+   (pipelinePinnedMode, pipelinePinnedChoosers, powerEconomyFreshness, rosterFinalUnderHeldRoster,
+   nameHeldThroughAssembly, generationForkCensus, dmLayerGoldenIsolation, worldFactRederive, editWorldFactResources,
+   x46NpcBand, institutionBudgetPromise), each re-taken file's readers by `grep -rl`; the receipt; goldenFreeze.walker last.
