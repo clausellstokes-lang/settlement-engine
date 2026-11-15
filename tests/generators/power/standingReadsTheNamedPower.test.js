@@ -11,6 +11,7 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -167,7 +168,7 @@ describe('TAIL-POWERS batch 2 · the towns read: what each prints instead (birth
     expectNoSeedFailures(collectSeedFailures(Object.keys(TOWNS), (seed) => {
       const [gone, kept] = TOWNS[seed];
       const text = born(seed).powerStructure.factions.map((f) => f.desc).join(' ');
-      if (gone) expect(text, `${seed}: "${gone.slice(0, 50)}" no longer prints`).not.toContain(gone);
+      if (gone) expectAbsentWithAnchor(text, gone, kept, `${seed}: "${gone.slice(0, 50)}" no longer prints`);
       expect(text, `${seed}: "${kept.slice(0, 50)}" prints`).toContain(kept);
     }), 'every town of the batch prints the line its state admits');
   }, 600_000);

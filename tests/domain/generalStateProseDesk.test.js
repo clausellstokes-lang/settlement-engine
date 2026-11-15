@@ -1638,6 +1638,7 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     expect(craftReasonPoolKey(withheld), 'the KEY still resolves — the silence is the FILL\'s').toBe('STALLED');
     const spoken = drawCraft(withheld);
     expectSentence(spoken, 'STALLED');
+    // anchored: expectSentence on the line above proves this same render drew a real, filled STALLED sentence
     expect(spoken, 'a plural house drew a singular sentence').not.toMatch(/Glassmakers/);
     // Every fill this desk offers passes the ANNEX'S OWN shape checker, not a local twin.
     const shapes = mergedShapes();

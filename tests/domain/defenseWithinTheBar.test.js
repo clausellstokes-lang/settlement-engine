@@ -21,7 +21,12 @@ const birth = (seed) => {
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[2], selectedStresses: m[1] === 'calm' ? [] : m[1].split('+'), selectedStressesRandom: false }), null, { seed, customContent: {} });
 };
 const AGAINST = /walls and nobody|no line and no force|could not hold off a raid|would struggle to hold|all but undefended|could not survive a serious attack|nobody on it/;
-const SEEDS = ['rv2-wartime-hamlet-5', 'rv3-under_siege-village-1', 'rv2-calm-hamlet-27', 'rv2-calm-hamlet-30', 'rv2-calm-hamlet-12'];
+// TAIL-CORPUS-DEF-5, RE-KEYED BY IDENTITY: three of the red-first towns no longer read Strong on their Invasion & War
+// bar after the declared moves of the military score (07ebe8bdc COHERENCE-UPKEEP fundedGate, 94c5d408f UPKEEP-CAPACITY
+// C1, 7509b3794 UPKEEP-13 P4 people.milPerHead 1): rv2-wartime-hamlet-5 (walls, no force) 60 Adequate,
+// rv2-calm-hamlet-27 29 Weak, rv2-calm-hamlet-30 59 Adequate. Each is replaced by the nearest hamlet of its own crisis
+// whose bar reads Strong: rv2-wartime-hamlet-7 (66), rv2-calm-hamlet-20 (66), rv2-calm-hamlet-50 (68).
+const SEEDS = ['rv2-wartime-hamlet-7', 'rv3-under_siege-village-1', 'rv2-calm-hamlet-20', 'rv2-calm-hamlet-50', 'rv2-calm-hamlet-12'];
 const TOWNS = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();

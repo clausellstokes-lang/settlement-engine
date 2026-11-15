@@ -17,6 +17,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own cfgFor (r2r-<size>-<i>, r2s-<crisis>-<size>-<i>). @param {string} seed */
@@ -59,8 +60,7 @@ describe('E1: the Exploitation table names a resource as the Resources tab does'
   for (const [seed, own, tab] of NAME_RED) {
     test(`${seed}: not "${own}"; prints "${tab}"`, () => {
       const page = pages.get(seed) || '';
-      expect(page).not.toContain(own);
-      expect(page).toContain(tab);
+      expectAbsentWithAnchor(page, own, tab, seed);
     });
   }
 });

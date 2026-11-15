@@ -12,6 +12,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -27,12 +28,13 @@ const foodwaysOf = (s) => String(s.economicState?.foodSecurity?.foodRecord?.food
 
 describe('step 2(a): a culture\'s foodways line is kept only where its declaration holds', () => {
   test('GUARDS: a small place of the culture prints no "dense populations"', () => {
-    for (const seed of ['rv2-calm-thorp-14', 'rv2-famine-hamlet-16', 'rv2-calm-village-16']) {
+    const failures = collectSeedFailures(['rv2-calm-thorp-14', 'rv2-famine-hamlet-16', 'rv2-calm-village-16'], (seed) => {
       const s = birth(seed);
       expect(s.config.cultureProfileKey, seed).toBe('mesoamerican');
       expect(foodwaysOf(s).length, seed).toBeGreaterThan(0);
       expect(foodwaysOf(s), seed).not.toContain(DENSE); // anchored: the line is asserted to print on the line above
-    }
+    });
+    expectNoSeedFailures(failures, 'no small mesoamerican place prints "dense populations"');
   });
 
   test('TWIN GUARD: a town of the culture still prints it', () => {

@@ -36,13 +36,19 @@ const byFigure = (s) => [...s.powerStructure.factions].sort((a, b) => (Number(b.
 const LEVEL = 'Three powers stand almost level here, and no one leads';
 
 describe('(a) "no one leads" is refused where a leader stands clear', () => {
-  it('the table: 39/17/13/12 gives the third power its band\'s own line; 20/18/16/15 keeps the level line', () => {
+  // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-POWERS-B-4, the chair's P31 (4), a declared move): the level powers are those within
+  // five of the first AT ITS RUNG; 20/18/16/15 crosses a rung (Significant over Minor) and now takes the band's own line; the
+  // level table is 24/22/20/15 (three at Significant)
+  it('the table: 39/17/13/12 gives the third power its band\'s own line; 24/22/20/15 keeps the level line; 20/18/16/15 crosses a rung', () => {
     const clear = [{ faction: 'Ruler', power: 39, isGoverning: true }, { faction: 'B', power: 17 }, { faction: 'C', power: 13 }, { faction: 'D', power: 12 }];
     annotateFactionStanding(clear);
     expect(clear[2].desc).toBe('They are always at the table, but cannot set their own terms.');
-    const level = [{ faction: 'Ruler', power: 20, isGoverning: true }, { faction: 'B', power: 18 }, { faction: 'C', power: 16 }, { faction: 'D', power: 15 }];
+    const level = [{ faction: 'Ruler', power: 24, isGoverning: true }, { faction: 'B', power: 22 }, { faction: 'C', power: 20 }, { faction: 'D', power: 15 }];
     annotateFactionStanding(level);
     expect(level[2].desc).toContain(LEVEL);
+    const acrossRung = [{ faction: 'Ruler', power: 20, isGoverning: true }, { faction: 'B', power: 18 }, { faction: 'C', power: 16 }, { faction: 'D', power: 15 }];
+    annotateFactionStanding(acrossRung);
+    expect(acrossRung[2].desc).toBe('They are always at the table, but cannot set their own terms.');
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('every seed: no power says no one leads beside a leader clear of the second by more than five', () => {

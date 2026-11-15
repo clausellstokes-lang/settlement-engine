@@ -13,6 +13,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -53,8 +54,8 @@ const RED = [
   ['r2r-town-2', 'Weekly market', 'crown', 'Royal charter required.', 'Charter required.'],
   ['r2r-village-14', 'Weekly market', 'crown', 'Requires royal/noble charter.', 'Requires a charter.'],
   ['r2r-village-25', 'Weekly market', 'crown', 'Held under royal or noble charter.', 'Held under charter.'],
-  ["r2r-hamlet-21", "Woodcutter's camp", 'charcoal', 'wood for the charcoal kilns', 'The settlement\'s living is timber and the carting of it.'],
-  ["r2r-hamlet-12", "Woodcutter's camp", 'charcoal', 'Timber, charcoal wood', 'Timber and the hauling of it keep the place alive.'],
+  ["r2r-hamlet-21", "Woodcutter's camp", 'charcoal', 'wood for the charcoal kilns', 'The crews live by timber and the carting of it.'],
+  ["r2r-hamlet-12", "Woodcutter's camp", 'charcoal', 'Timber, charcoal wood', 'Timber and the hauling of it are the camp\'s whole living.'],
 ];
 
 /** [seed, house, the words its text still names] — true siblings: green before and after. */
@@ -86,8 +87,7 @@ describe('TAIL-HOUSES-2 batch 4: a house text claims no coast, crown or charcoal
       const inst = instOf(t, house);
       expect(inst, `${seed} holds a ${house}`).toBeDefined();
       expect(DENIED[denied](t), `${seed}: the record denies the ${house}'s old claim (${denied})`).toBe(true);
-      expect(String(inst.desc), `${seed} ${house}`).not.toContain(old);
-      expect(String(inst.desc), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(inst.desc), old, now, `${seed} ${house}`);
     }), 'a house text claims nothing the record denies');
   }, 600_000);
 

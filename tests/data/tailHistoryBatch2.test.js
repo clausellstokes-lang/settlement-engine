@@ -75,6 +75,8 @@ describe('TAIL-HISTORY batch 2 (Y5): a tension with no event of its own on the t
       expect((town.history?.historicalEvents || []).some((/** @type {any} */ e) => e.templateType === type), `${seed}: no ${type} on the timeline`).toBe(false);
       const t = tensionOf(town, type);
       expect(Boolean(t), `${seed} holds its ${type} tension (the draw is kept)`).toBe(true);
+      expect(wordsOf(t), `${key}: its words carry the live quarrel`).toMatch(WORDS[type].live);
+      // anchored: the same words are shown directly above to carry the live quarrel
       expect(wordsOf(t), key).not.toMatch(WORDS[type].aftermath);
       expect(t.description, key).toMatch(WORDS[type].live);
       expect(t.factions.length, `${key}: three parties`).toBe(3);
@@ -87,6 +89,8 @@ describe('TAIL-HISTORY batch 2 (Y5): a tension with no event of its own on the t
       const t = tensionOf(bornCensus(seed), type);
       expect(Boolean(t), `${seed} holds its ${type} tension`).toBe(true);
       expect(wordsOf(t), key).toMatch(WORDS[type].aftermath);
+      expect(t.description, `${key}: the tension prints its description`).toMatch(/^[A-Z]/);
+      // anchored: the same description is shown directly above to print (a sentence, not an empty string)
       expect(t.description, key).not.toMatch(WORDS[type].live);
     }), 'the anchored tensions keep their event');
   }, 300_000);

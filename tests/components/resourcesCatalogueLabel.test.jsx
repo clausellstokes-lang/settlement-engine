@@ -26,6 +26,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { RESOURCE_DISPLAY_LABELS } from '../../src/domain/display/resourceDisplayName.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -71,25 +73,36 @@ afterEach(cleanup);
 describe('X26: the Nearby Resources chips print the catalogue\'s own label', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(NOT)('%s prints no chip "%s"; instead: "%s"', (seed, old, label) => {
-    const chips = chipsOf(town(seed));
-    expect(chips).toContain(label);
-    expect(chips).not.toContain(old);
+  test('each NOT row prints no chip of the formatter\'s word; instead: the catalogue\'s label (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, old, label]) => {
+      try {
+        const chips = chipsOf(town(seed));
+        expectAbsentWithAnchor(chips, old, label, `${seed}: the catalogue's label, not the formatter's word`);
+      } finally { cleanup(); }
+    }), 'every NOT row: the chip prints the catalogue\'s label, not the formatter\'s word');
   }, 120000);
 
-  test.each(KEEP)('%s still prints the chip "%s"', (seed, label) => {
-    expect(chipsOf(town(seed))).toContain(label);
+  test('each KEEP row still prints its chip (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, label]) => {
+      try {
+        expect(chipsOf(town(seed)), `${seed} still prints the chip "${label}"`).toContain(label);
+      } finally { cleanup(); }
+    }), 'every KEEP row: the chip whose label is the formatter\'s own word still prints');
   }, 120000);
 
-  test.each(SEEDS)('%s: every catalogue ground prints its label (and a label the formatter already gave is kept)', (seed) => {
-    const t = town(seed);
-    const custom = new Set(t.config?.nearbyResourcesCustom || []);
-    const keys = (t.config?.nearbyResources || []).filter((/** @type {string} */ k) => !custom.has(k) && Object.hasOwn(RESOURCE_DISPLAY_LABELS, k));
-    expect(keys.length).toBeGreaterThan(0);
-    const chips = chipsOf(t);
-    for (const k of keys) {
-      expect(chips, `${seed}: ${k}`).toContain(RESOURCE_DISPLAY_LABELS[k]);
-      if (fmtKey(k) !== RESOURCE_DISPLAY_LABELS[k]) expect(chips, `${seed}: ${k}`).not.toContain(fmtKey(k));
-    }
+  test('each seed: every catalogue ground prints its label (and a label the formatter already gave is kept) (every seed)', () => {
+    expectNoSeedFailures(collectSeedFailures(SEEDS, (seed) => {
+      try {
+        const t = town(seed);
+        const custom = new Set(t.config?.nearbyResourcesCustom || []);
+        const keys = (t.config?.nearbyResources || []).filter((/** @type {string} */ k) => !custom.has(k) && Object.hasOwn(RESOURCE_DISPLAY_LABELS, k));
+        expect(keys.length, `${seed}: the town has a catalogue ground`).toBeGreaterThan(0);
+        const chips = chipsOf(t);
+        for (const k of keys) {
+          if (fmtKey(k) !== RESOURCE_DISPLAY_LABELS[k]) expectAbsentWithAnchor(chips, fmtKey(k), RESOURCE_DISPLAY_LABELS[k], `${seed}: ${k}`);
+          else expect(chips, `${seed}: ${k}`).toContain(RESOURCE_DISPLAY_LABELS[k]);
+        }
+      } finally { cleanup(); }
+    }), 'every seed: every catalogue ground prints its label');
   }, 120000);
 });

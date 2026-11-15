@@ -6,6 +6,7 @@
  * RED AT THE BASE (4b0ffb515): every refused pair; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -36,14 +37,12 @@ describe('TAIL-POWERS-B-2 batch 6a · the arcane advisory line reads the seat', 
     it(`${seed}: an Arcane Council governs; the practitioners are not called unempowered, and take the twin`, () => {
       const gov = births[seed].powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning);
       expect(gov.category).toBe('magic');
-      expect(descs(seed)).not.toContain(ADVISORY);
-      expect(descs(seed)).toContain(TWIN);
+      expectAbsentWithAnchor(descs(seed), ADVISORY, TWIN, `${seed}: the twin prints where the advisory line is refused`);
     });
   }
   for (const seed of OTHER_SEAT) {
     it(`KEEP ${seed}: beside a seat that is not arcane, the advisory line still prints`, () => {
-      expect(descs(seed)).toContain(ADVISORY);
-      expect(descs(seed)).not.toContain(TWIN);
+      expectAbsentWithAnchor(descs(seed), TWIN, ADVISORY, `${seed}: the advisory line prints and the twin does not`);
     });
   }
 });

@@ -12,7 +12,7 @@
  *
  * Pure: reads the roster, draws nothing, writes nothing.
  */
-import { liveInstitutionNames, ACCESS_ONLY } from '../facts/institutions.js';
+import { liveInstitutionNames, ACCESS_ONLY } from '../facts/liveInstitutionNames.js'; // TAIL-TIES-6 (T23): the pure leaf, no edge into the lazy facts/institutions.js
 
 const CLERGY_HOUSE_RE = /\btemple|\bchurch|\bcathedral|\bchapel|\babbey|\bmonaster|\bfriary|\bpriory/i;
 

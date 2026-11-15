@@ -604,3 +604,52 @@ The merge of d817736d8 (7ccad225e), batch 6 (C18: 9 flags, 7 cured, 1 struck, 1 
 its before census at this branch's tip (CENSUS-3's command with `render.census3d.jsx`, made by `mkrender.py`); for twins
 replay with `replay2.mjs` and NEWV=<pool key>:<vid>. A census after U2 was NOT taken: replay shows no draw of the 720
 moved by the one twin, and the rest are test edits.
+
+---
+
+# TAIL-CORPUS-DEF-5 (the fifth seat, session_01ACmDYaqwQpDn5da47f5sjx, a child of the chair session_01ACmDYZrFEVXyZEUg1NDxxC; 2026-11-15)
+
+THE BASE: lane/join-2026-11-14 at 7163b309 (holds 9d3d177a0) merged as fb591934. Each named red run ALONE there (logs
+in the seat's scratch): 10 failing tests in 7 files. No cause file differed on lane/tail-defecon-2026-11-14 or
+lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
+
+## U2's named reds (each: its commit, and what was done)
+- **defenseWatchIsNotTheLevy** (1 of 2 red): 7509b3794 (UPKEEP-13 P4, declared: people.milPerHead 1) holds
+  rr3-thorp-famine-rand-0 (14 people) to 14, Critical, where withinTheBar rightly silences the citizen-militia pool.
+  RE-KEYED (ii): the keeper is rr3-thorp-famine-rand-7 (27 people, walls + militia, draws the pool). 2/2.
+- **threatRowsTrueUnderBand** (1 of 2): 7509b3794 (declared) holds rv2-calm-hamlet-1 (34) to Weak, where "not enough
+  against an army" is true. RE-KEYED (ii): rv2-calm-hamlet-12 (88, Strong, the twin prints). 2/2.
+- **defenceTraditionReaders** (1 of 2): 42d82c775 (UPKEEP-CAPACITY C4a, declared: the walk to another's church opens no
+  tradition). No thorp or hamlet of r2r-thorp-0..29 / r2r-hamlet-0..11 holds the divine tradition now. RE-KEYED (ii):
+  the holder is r2r-village-1 (Parish church, resident Priest); r2r-thorp-1 still does not hold it. 2/2.
+- **defenseWithinTheBar** (2 of 3): 07ebe8bdc / 94c5d408f / 7509b3794 (all declared) took three hamlets off a Strong bar
+  (rv2-wartime-hamlet-5 60 Adequate, rv2-calm-hamlet-27 29 Weak, rv2-calm-hamlet-30 59 Adequate). RE-KEYED (ii): the
+  nearest Strong hamlet of each crisis: rv2-wartime-hamlet-7, rv2-calm-hamlet-20, rv2-calm-hamlet-50. 3/3.
+
+- **defensePostureAgainstItsFacts** (3 of 10): the military score's declared moves (33b12cbef, 7509b3794, 07ebe8bdc,
+  94c5d408f) took Ingili to Strong / Fortress and Muulcoba to Adequate (both still occupied, strong pool still struck:
+  kept, premise re-keyed to their facts); rv2-calm-hamlet-27 / -30 replaced by -20 / -50 (Strong over Vulnerable). No
+  town of 900 read holds a Weak or Critical bar under a Well-Defended or Fortress badge now, so the reverse arm's record
+  is a MADE one (the file's ruling (e) convention): rr3-town-calm-rand-2 (Well-Defended, readiness 57, at peace, draws
+  STRONG) with only its Invasion & War score set to 30: it draws readiness ADEQUATE. 48ad4da91 (UPKEEP-8, declared)
+  writes the guard's lowest tier by the force and the pay: the premise reads its three leads; rr3-town-insurgency-rand-2
+  (Defensible now) replaced by rr3-city-calm-rand-17. RE-KEYED (ii); plants (reverted) red both arms. 10/10.
+- **defensePostureReadsBadge** (1 of 5), C24: STRONG v5 and v6 read; each true of a besieged town at Strong readiness,
+  neither presumes an open road or peace (no corpus cure needed). RE-KEYED TO THE LAW: under a siege the pool prints v5,
+  v6 or nothing (texts through drawnProse.js), any other member red, a siege line is read (rv2-under_siege-city-5). At
+  war: rv2-wartime-city-0 Fortress now (33b12cbef), still the strong pool; its drawn line is a member the disqualifiers
+  do not strike 'at war'. Plant (reverted: v1 let under a siege, v5/v6 struck there) reds it. 5/5.
+- **defenseWordsFindings** (1 of 12): CURED (i) in src/generators/safetyProfile.js: 6b8a9b993 (TAIL-DEFECON batch 1,
+  #05801) wrote the thorp/hamlet twin "What food is put by goes to whoever can pay the holder's price." ('put by' = stored
+  food on the Defense tab, 7 of 64). Now "What food there is goes to whoever can pay the holder's price." DECLARED MOVE:
+  36 of 720 towns, one field (economicState.safetyProfile.crimeTypes); every reader read (commit body). Pin re-keyed with
+  it: tailDefeconSafetyLines #05801's 'instead'. 12/12; the 30 files naming safetyProfile.js 2 failed / 602 passed before
+  and after (editWorldFactResources, carried); grid 0 rises (2 carried falls); eslint, both type ratchets 0.
+
+### New or changed line (the owner's veto list)
+40. Economics/Defense `Safety & Crime` crime pattern 'black market food' in a thorp or hamlet under a famine or siege:
+    "What food there is goes to whoever can pay the holder's price." (36 of the 720; was "What food is put by …").
+
+## What is left (TAIL-CORPUS-DEF-5's list, current)
+1. All seven named U2 reds green at bb667e11 (76/76 with tailDefeconSafetyLines). NEXT: C25, tests/ui/defenseTabFlow.test.js
+   (83883baaa declared: re-key the fixture's premise by identity to a house the roster still files as arcane defence).

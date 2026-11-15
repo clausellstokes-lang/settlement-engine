@@ -76,8 +76,9 @@ describe("TAIL-HOUSES-4 batch 6: a Fisher's landing claims its catch only in the
       const text = landing(t);
       expect(text, `${seed} prints a ${HOUSE}`).toBeDefined();
       expect(fishSpent(t), `${seed}: the record's fisheries are spent`).toBe(true);
-      expect(String(text), seed).not.toContain(old);
       expect(String(text).toLowerCase(), seed).toContain(now); // the hedge may open its sentence
+      // anchored: the same landing text (lowercased) is shown directly above to carry the hedge
+      expect(String(text), seed).not.toContain(old);
     }), 'a spent fishery keeps no unhedged landing');
   }, 600_000);
 
