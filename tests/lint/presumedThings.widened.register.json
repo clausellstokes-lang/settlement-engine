@@ -2183,12 +2183,6 @@
    [
     "armedForce",
     "family",
-    "{settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without",
-    "f5ff1370e1e6dfb1"
-   ],
-   [
-    "armedForce",
-    "family",
     "While the trades behind {settlement}'s defence keep working, its defenders will not go short.",
     "80efc1377cbf9c25"
    ],
@@ -2197,18 +2191,6 @@
     "family",
     "The supply book for {settlement}'s defenders runs short: the trades that should feed and equip them are failing, so the ",
     "d50d6422ac7025a9"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The trades that should supply {settlement}'s defenders are struggling, and the defenders go short of food or gear.",
-    "64918da1023b1d05"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The defenders at {settlement} make do: the town's workshops cannot keep them properly fed and equipped.",
-    "cbc7d2c9188e0458"
    ],
    [
     "armedForce",
@@ -2585,18 +2567,6 @@
    [
     "armedForce",
     "after-base: close-true",
-    "{settlement} had money laid by before this trouble began, and its defenders are still paid from it.",
-    "23fd4ed1c58d0fc0"
-   ],
-   [
-    "armedForce",
-    "after-base: close-true",
-    "The town went into this trouble with money in hand, and its defenders are still paid on time.",
-    "6a190dc43479000b"
-   ],
-   [
-    "armedForce",
-    "after-base: close-true",
     "{settlement}'s defenders are better off for the trades behind them, and they know it.",
     "35f752f1ec916e32"
    ],
@@ -2703,18 +2673,6 @@
     "implied",
     "no institution: granary",
     "7a07521d8484e089"
-   ],
-   [
-    "openTrade",
-    "family",
-    "Traffic on {settlement}'s {access} is steady, and a {complexity} keeps everyone busy. Nobody here is waiting for work.",
-    "ddd473f5d70b8bc1"
-   ],
-   [
-    "openTrade",
-    "family",
-    "{settlement} lives on a {complexity} and ends each year with money to spare, and the traffic on its {access} keeps it th",
-    "3440f868ce21318d"
    ],
    [
     "openTrade",
@@ -3179,12 +3137,6 @@
     "family",
     "An outside trader at {settlement} either accepts its merchant guild's terms or sells to the guild's members at their pri",
     "c66c243234177a2e"
-   ],
-   [
-    "house: craft guild",
-    "family",
-    "A buyer at {settlement} deals with each craft guild on its own, with no merchant guild above them.",
-    "bd28048765b97895"
    ],
    [
     "house: warehouse",

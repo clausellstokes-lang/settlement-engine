@@ -18,11 +18,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMBINATION C1: a high rung on a working approach": [
         {
           "angle": "visitor",
-          "text": "Traffic on {settlement}'s {access} is steady, and a {complexity} keeps everyone busy. Nobody here is waiting for work.",
+          "text": "A {complexity} keeps everyone at {settlement} busy. Nobody here is waiting for work.",
           "slots": [
-            "settlement",
-            "access",
-            "complexity"
+            "complexity",
+            "settlement"
           ],
           "vid": 1
         },
@@ -32,11 +31,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: indebted"
           ],
-          "text": "{settlement} lives on a {complexity} and ends each year with money to spare, and the traffic on its {access} keeps it that way.",
+          "text": "{settlement} lives on a {complexity} and ends each year with money to spare.",
           "slots": [
             "settlement",
-            "complexity",
-            "access"
+            "complexity"
           ],
           "vid": 2
         },
@@ -45,10 +43,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "Nobody here talks about the price of bread. The town is well off, the {access} keeps it that way, and the talk is about what to build next.",
-          "slots": [
-            "access"
-          ],
+          "text": "Nobody here talks about the price of bread. The town is well off, and the talk is about what to build next.",
+          "slots": [],
           "vid": 3
         },
         {
@@ -56,10 +52,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: indebted"
           ],
-          "text": "Trade on {settlement}'s {access} is steady and the town earns well, but much of what it earns goes to the outside power it owes.",
+          "text": "{settlement} earns well, but much of what it earns goes to the outside power it owes.",
           "slots": [
-            "settlement",
-            "access"
+            "settlement"
           ],
           "vid": 4
         }
@@ -142,7 +137,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.",
+          "text": "{settlement} sits on its {access} and stays poor all the same.",
           "slots": [
             "settlement",
             "access"
@@ -155,7 +150,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.",
+          "text": "Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks.",
           "slots": [
             "settlement"
           ],
@@ -204,9 +199,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.",
+          "text": "There is no market at {settlement} to hold whatever its {access} brings, and the town stays poor.",
           "slots": [
-            "settlement"
+            "settlement",
+            "access"
           ],
           "vid": 6
         },
@@ -2145,7 +2141,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "no organised crime"
           ],
-          "text": "If any of {settlement}'s trade is done out of sight, it is too little to change what the town is.",
+          "text": "Some of {settlement}'s trade is done out of sight, and nobody has organised it into anything more.",
           "slots": [
             "settlement"
           ],
@@ -2765,7 +2761,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis"
           ],
-          "text": "Nothing about {settlement}'s condition asks to be remarked on. The town supports itself and has a little in hand.",
+          "text": "Nothing about {settlement}'s condition asks to be remarked on. The town pays its own way and has a little in hand.",
           "slots": [
             "settlement"
           ],
@@ -3288,7 +3284,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no hunger",
             "stores: < 12"
           ],
-          "text": "{settlement} is fed, but what it keeps put by is not deep: a run of poor harvests would reach its tables.",
+          "text": "{settlement} is fed, but what it keeps put by would not outlast a run of poor harvests.",
           "slots": [
             "settlement"
           ],
@@ -4748,6 +4744,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "angle": "local",
           "marks": [
             "no crisis: under_siege",
+            "no crisis: famine",
             "no crisis: plague_onset"
           ],
           "text": "Buyers from outside come to {settlement} for more than one thing.",
@@ -5487,7 +5484,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The people of {settlement} know what their ground is worth to others, and know they could not keep it against anyone who came for it.",
+          "text": "The people of {settlement} know what their ground is worth to others, and know that is reason enough for someone to come for it.",
           "slots": [
             "settlement"
           ],
@@ -6836,6 +6833,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "Everything a traveller expects at {settlement} is here but one.",
           "slots": [
             "settlement"

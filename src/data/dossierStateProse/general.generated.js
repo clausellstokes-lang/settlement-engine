@@ -9399,6 +9399,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege",
             "no crisis: plague_onset",
+            "no crisis: wartime",
             "crisis: any",
             "tier: ≤ town"
           ],
@@ -9413,7 +9414,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "crisis: any",
             "no crisis: under_siege",
-            "no crisis: plague_onset"
+            "no crisis: plague_onset",
+            "no crisis: wartime"
           ],
           "text": "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.",
           "slots": [
@@ -9715,7 +9717,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A buyer at {settlement} deals with each craft guild on its own, with no merchant guild above them.",
+          "text": "A buyer at {settlement} deals with each craft's own guild, with no merchant guild hall above them.",
           "slots": [
             "settlement"
           ],

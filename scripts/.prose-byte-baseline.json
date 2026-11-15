@@ -55,26 +55,26 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 266746,
-      "gzip": 35585,
+      "raw": 266732,
+      "gzip": 35556,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 185744,
-      "gzip": 25784,
+      "raw": 185528,
+      "gzip": 25711,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 298496,
-      "gzip": 38078,
+      "raw": 298564,
+      "gzip": 38092,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 131321,
-      "gzip": 18419,
+      "raw": 131329,
+      "gzip": 18424,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -635,6 +635,22 @@
       "toRaw": 147835,
       "gzipAfter": 20823,
       "reason": "+169 B raw over the committed 147666 (gzip level 9: 20815 -> 20823), measured on disk at the joined line (04149c5ef) by TAIL-CLOSE-DOORS-1. The lanes that moved its source since the figure was last committed (3949fe371; git log --first-parent --merges over the leaf and the annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md): tail-corpus-def (1): twins for a town's state (a line declared off a state and its twin beside it) and rewordings of state prose under the corpus's truth cures. The leaf stands at 57.1 per cent of its ceilingRaw (258858)."
+    },
+    {
+      "car": "BAR2-CORPUS batch 1 (2026-11-15): REVIEW-BAR-2's rows of the corpus (rewordings of state prose, marks off a town's crisis), re-keyed by the seat under the chair's ruling CP2 after the merge of the joined line at dcb069bff",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 298496,
+      "toRaw": 298564,
+      "gzipAfter": 38092,
+      "reason": "+68 B raw over the committed 298496 (gzip level 9: 38078 -> 38092), measured on disk at the merged tree (af120bdd4) by BAR2-CORPUS: batch 1 (d89e61aac) reworded state prose so each line claims no more than every printing town bears, and marked lines off a crisis. The leaf stands at 37.5 per cent of its ceilingRaw (796761)."
+    },
+    {
+      "car": "BAR2-CORPUS batch 1 (2026-11-15): REVIEW-BAR-2's rows of the corpus (rewordings of state prose, marks off a town's crisis), re-keyed by the seat under the chair's ruling CP2 after the merge of the joined line at dcb069bff",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 131321,
+      "toRaw": 131329,
+      "gzipAfter": 18424,
+      "reason": "+8 B raw over the committed 131321 (gzip level 9: 18419 -> 18424), measured on disk at the merged tree (af120bdd4) by BAR2-CORPUS: batch 1 (d89e61aac) reworded state prose so each line claims no more than every printing town bears, and marked lines off a crisis. The leaf stands at 36.8 per cent of its ceilingRaw (357097)."
     }
   ],
   "ceilingTransfersNewLeaves": [

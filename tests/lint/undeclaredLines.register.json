@@ -73,7 +73,7 @@
     "DS-ECO-12::TRADE PROFILE: no significant exports": 3,
     "DS-ECO-12::TRADE PROFILE: imports only, nothing outward": 3,
     "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports": 3,
-    "DS-SUP-3::ONE EXPECTED CATEGORY MISSING": 3,
+    "DS-SUP-3::ONE EXPECTED CATEGORY MISSING": 2,
     "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING": 3,
     "DS-SUP-3::THE HEALING GAP": 3,
     "DS-SUP-3::THE FOOD GAP": 3,
