@@ -9,7 +9,7 @@ The 720 births: the page census's banked plan (`censusPlan('r2')`), each birth's
 | # | File | At dc4bae117 alone | Turning commit | Verdict |
 |---|------|--------------------|----------------|---------|
 | 1a | `tests/generators/captureBirthScale.test.js` | red (326 < 372) | 33b12cbef (JOIN-1 · 9, the upkeep lane), inside it 82c639b44 | (ii) re-derived through the manifest: base 0.965 -> 0.815, floor 372 -> 300 (3.348 sigma) |
-| 1b | `tests/simulation/tierInertiaEnvelope.test.js` | red (45 > 43) | two steps: 33b12cbef (inside it c448bb3a0, the capacity branch's merge) and 65dc92af9 (JOIN-4 · 2, upkeep-monotone) | being traced; NOT re-derived yet |
+| 1b | `tests/simulation/tierInertiaEnvelope.test.js` | red (45 > 43) | two steps: 33b12cbef (inside it c448bb3a0, the capacity branch's merge) and 65dc92af9 (JOIN-4 · 2, upkeep-monotone) | (ii) re-derived through the manifest: base 0.225 -> 0.3475, ceiling 43 -> 59 (3.317 sigma) |
 | 2 | `tests/domain/worldFactRederive.test.js` | red (7 of 7 stride rows miss) | the golden master not re-taken since point 47 (fce41f2b7) | (iii) named: the owner's golden door |
 | 3 | `tests/generators/coherenceAgreeCures.test.js` | green | — | green already |
 | 4 | `tests/generators/urbanBandInstitutions.test.js` | red (village-3) | 343c26791 (W2-FIX-DATA-8 row 4) | (i) cured |
@@ -53,6 +53,17 @@ The town arm under matched stressors, with the test's own trial code, the test's
 65dc92af9 and at dc4bae117. The family moved with the corpus, so this is the rate moving, not the corpus's noise.
 Inside the upkeep lane: 90 at 976db5b19, 96 at 6b5a1c5a9, 121 at c448bb3a0 (the merge of
 lane/upkeep-capacity-2026-11-13 at 9354d792a into the defence lane). 82c639b44 itself moves it not at all (99 -> 97).
+Inside the capacity branch: 96 at 6e61d042a, 112 at 94c5d408f (UPKEEP-CAPACITY C1, "a house counts by its rung on its
+own ladder", a DECLARED move of the defence scores), 121 at its tip 9354d792a (a later capacity commit, not isolated).
+Inside upkeep-monotone (65dc92af9's lane): 121 at 9d48785a1, 138 at b49b871fd (UPKEEP-13 X1, the will's hold taken
+score by score, the chair's ruling (4)), 127-139 over the commits after it, 139 at its tip 0ca0bbe94.
+WHY: the drift's support vector is trade, defence and legitimacy (tierResourceDynamics.js), and every step is the
+defence rating's declared rebuild; the structural-failure branch (support <= 0.25) fires more often under the same
+held load. RE-DERIVED by the header's own rule (re-measure the 400-seed family with the instrument's trial code;
+check the test's corpus against it): base 0.225 -> 0.3475, ceiling 43 -> 59, margin 3.317 sigma; the corpus 45/120
+sits z +0.63 against the family, so the red was not the corpus's noise. The ordering still holds structurally:
+village floor 93 > town ceiling 59 > city ceiling 8. Only this arm was re-measured (the other eight hold at the tip).
+Proof: the red alone green; distributionEnvelopePower, joins/ordering, captureBirthScale green; eslint green.
 
 ## THE OWNER'S PART (plain words)
 - **Criminal cities at birth.** Since the defence rating was rebuilt (the upkeep lane, commit 82c639b44, joined
@@ -60,7 +71,18 @@ lane/upkeep-capacity-2026-11-13 at 9354d792a into the defence lane). 82c639b44 i
   and fewer of them are born with the underworld holding even: 392 of 400 -> 326 of 400. The test's floor was
   set from the old rate; it is re-derived from the new one (372 -> 300). **Yours to veto**: if fewer criminal
   cities born holding even is not what you wanted from the defence rebuild, the cure is in the defence rating, not here.
-- **Towns losing their tier under the same pressure.** Two defence-lane merges raised how often a town drops a
-  tier under the test's fixed load of five crises: 90 of 400 -> 121 -> 139 of 400. The village floor and the
-  city ceiling still hold. Being traced; not yet ruled.
+- **Towns losing their tier under the same pressure.** The defence rebuild (two merges of the upkeep lanes) raised
+  how often a town drops a tier under the test's fixed load of five crises: 90 of 400 -> 121 -> 139 of 400 (22% -> 35%).
+  A town's staying power reads its defence, and the rebuilt rating scores many towns lower. Villages still fall far
+  more often (floor 93 of 120) and cities far less (ceiling 8 of 120), so your rule "bigger places are harder to
+  topple" still holds; but the middle rung is now nearer the villages. The ceiling is re-derived 43 -> 59 (a
+  loosening, said, not silent). **Yours to veto**: if towns should hold as before, the cure is in the defence rating.
 - **The golden master** is stale against today's births (worldFactRederive's seven rows); a re-take is yours.
+
+## Left for the chair
+- The two envelopes are re-derived against the defence scores as they stand at dc4bae117; lane/tail-record-2026-11-15
+  is changing the defence scores now, so both may move again when it lands (re-measure with the same probes:
+  the cap-crim-city sweep; the tier-inertia family at CORPUS_N 400).
+- The full run of tests/generators, tests/simulation and tests/domain at dc4bae117: 24 red files; beyond this list, every
+  one is on the owner's list or another seat's (corpusEcoTailGuards: the corpus guards; defenseInvasionWithinACriticalBand:
+  the defence scores). hookTruthAtBirth and generationCertificationCorpus: green.
