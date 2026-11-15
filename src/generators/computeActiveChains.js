@@ -117,6 +117,9 @@ function gateKeywordPredicate(kw) {
     return (n) => (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill')
       && !n.includes('access to external');
   }
+  // TAIL-DEFECON-C-4 (D33): the GRAIN mill alone (a Mill, Mills (2-5)): a sawmill saws and a maltster malts; neither
+  // grinds flour. Read by GOOD_WORKING_HOUSES's flour rows only; the export gates' 'mill' above is not narrowed.
+  if (kw === 'grain mill') return (n) => (n === 'mill' || n.startsWith('mills (')) && !n.includes('access to external');
   return (n) => n.includes(kw);
 }
 function gateKeywordIdSet(kw) {
@@ -676,7 +679,16 @@ const GOOD_WORKING_HOUSES = Object.freeze({
   'Bows and crossbows':         ['bowyer'],
   'Arrows (sheaf)':             ['bowyer'],
   'Dyed cloth':                 ['dyer'],
-  'Flour and meal':             ['mill', 'baker'],
+  // TAIL-DEFECON-C-4 (D33, the chair, 2026-11-15): flour, textiles, glass and pottery, read from the catalogue's houses.
+  // Flour (and its export names, "Flour and meal", "Milled flour") is ground by a grain mill (Mill, Mills (2-5)); bread is baked by Bakers; cloth is woven or fulled
+  // (Weavers/Textile workers, Fuller); clothing is made by a Tailor or Tailor's guild; glass by a Glassblower or
+  // Glassmakers; pottery by a Potter. The raw goods of the land (the grain fields' and the mill site's "flour", the
+  // mill site's "processed textiles", the glass sand's "glass", the river clay's "pottery") are rows too: a land's
+  // commodity is made here only where a house that makes it stands.
+  'flour': ['grain mill'], 'Flour and meal': ['grain mill'], 'Milled flour': ['grain mill'], 'Baked goods': ['baker'],
+  'processed textiles': ['weaver', 'textile', 'fuller'], 'Processed textiles': ['weaver', 'textile', 'fuller'],
+  'Fine wool cloth': ['weaver', 'textile', 'fuller'], 'Finished clothing': ['tailor'],
+  'glass': ['glass'], 'Window glass': ['glass'], 'pottery': ['potter'],
   'River craft':                ['shipyard', 'boatyard'],
   'Ship construction':          ['shipyard', 'boatyard'],
   'Ocean-going vessels':        ['shipyard'],
@@ -1066,6 +1078,7 @@ export function deriveLocalProductionFromChains(
     if (rd?.commodities) rd.commodities.forEach(c => {
       const good = c.replace(/_/g, ' ');
       if (!rawWorkedHere(good)) return; // D30 (b): the record's exploitation names no house at this raw
+      if (housed && !goodWorkedHere(good, housed)) return; // D33: a house of the table makes it, or it is not made here
       if (!refusedOnly.has(good.toLowerCase())) local.add(good);
     });
   });

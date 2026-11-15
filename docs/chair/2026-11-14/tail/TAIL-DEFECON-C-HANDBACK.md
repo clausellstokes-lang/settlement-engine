@@ -463,3 +463,72 @@ print. No exclusion list is built here (D31): the data's holder cures the pairs.
 HANDED BACK by TAIL-DEFECON-C-3 at 2026-11-15 ~03:20 UTC, both parts of D30 built and the page measured. The
 instruments as above; this seat's ad hoc scripts (the D30 census, the pair measure, the record-vs-exploitation check) are
 node over `corpus.ndjson.gz` and the dumps, not committed.
+
+## TAIL-DEFECON-C-4 (the fourth seat on this file, 2026-11-15, from 65a5ecfcf): D33 and D34
+
+Same branch. Files: `computeActiveChains.js` whole; the one call in `economicState.js`; and, LENT BY RULING D32, the
+`commodities` arrays of `src/data/resourceData.js` (nothing else of that file). Tests.
+
+The rulings worked to (the chair, 2026-11-15 03:20 UTC; each vetoable by the owner), copied:
+> (D33) THE TABLE'S MISSING ROWS: flour, textiles, glass and pottery have no row in GOOD_WORKING_HOUSES, so the made
+> list still prints them where no mill, weaver or fuller, glassblower or potter stands (part of the 85 towns left). Add
+> the rows (the houses that make or work each: read them from the catalogue, do not guess), and say what leaves the
+> list, good by good.
+> (D34) THE CATALOGUE'S FALSE COMMODITIES (D31 is lifted for these four): a RIVER FISHERY does not make SALT (42 towns
+> print it); FISHING GROUNDS do not make salt without a salt works (21); PRECIOUS-METAL VEINS do not give GEMS (17); HOT
+> SPRINGS do not give MEDICINAL HERBS (26). Take the good out of that resource's `commodities` (the salt flats, a gem
+> deposit, a herb ground keep theirs). KEPT AS TRUE: an ancient grove's honey, an oasis's dates. RIVER MILLS' flour and
+> processed textiles stay in the data and are gated by D33's rows. FOR EACH OF THE FOUR, FIRST THE MEASURE (nine
+> readers of `commodities`), by family. IF A PAIR MOVES ONLY the trade lists, the made list, a chain that worked that
+> good, and what prints them: build it and push. IF IT MOVES income, prosperity, a founding, an arrival scene or a
+> stored hook in MORE THAN TEN TOWNS: ONE LINE TO THE CHAIR with the table BEFORE the push, and go on with the next
+> pair meanwhile. EVERY INHERITOR READ. THE PAGE, by one census before and one after everything. NAMED, NOT BUILT: the
+> terrain check's leaf; `resourceDynamicsKernel` line 575.
+
+| commit | what | record move (births-only field diff on the 720, over the commit before) |
+|---|---|---|
+| **D33** (this commit) | the table's flour, bread, cloth, clothing, glass and pottery rows; the land's commodity asked too | 117 towns: `localProduction` 117, `primaryExports` 21, `economicComplexity` 1; nothing else |
+
+### D33
+
+- The rows, read from the catalogue's houses (`ALL_CATALOG_NAMES`): flour ("flour", "Flour and meal", "Milled flour")
+  by a GRAIN mill (Mill, Mills (2-5): a new gate keyword `grain mill`; the export gates' `mill` keyword reads a
+  Sawmill and a Maltster as mills and is NOT narrowed); "Baked goods" by Bakers; "processed textiles" / "Processed
+  textiles" / "Fine wool cloth" by Weavers/Textile workers or a Fuller; "Finished clothing" by a Tailor or Tailor's
+  guild; "glass" / "Window glass" by Glassblower or Glassmakers; "pottery" by a Potter. Step 1 of the made list (the
+  land's commodities) now asks the table too, so the grain fields' and the mill site's raw "flour", the mill site's
+  "processed textiles", the glass sand's "glass" and the river clay's "pottery" leave where no such house stands.
+- CHANGED FROM THE PREDECESSORS' TABLE: "Flour and meal" was `['mill', 'baker']` (a Sawmill, a Maltster or Bakers
+  passed it); now the grain mill alone, one reading for one good. "Milled flour" (the tradeGoods' name for the same
+  flour) added, measured alone first: 2 towns' exports (r2r-hamlet-31, r2r-hamlet-44: a Maltster), 1 economicComplexity.
+- WHAT LEAVES THE MADE LIST, good by good (and nothing gained): Baked goods 42, flour 39, processed textiles 16,
+  Finished clothing 9, glass 7, pottery 5, Processed textiles 3, Fine wool cloth 1. EXPORTS lost: Baked goods 17,
+  Finished clothing 2, Milled flour 2, Flour and meal 1, Processed textiles 1.
+- THE INHERITORS, read: exports gained 2: "Dyed cloth" in r2s-wartime-town-0 (a Dyer stands: TRUE), "Preserved foods"
+  in r2r-village-4 (the food-processing chain by a Dairy farmer: cheese and butter: TRUE); "Processed grain" in
+  r2r-hamlet-44 (a Maltster malts grain: TRUE).
+- Guard: `tests/generators/tailDefeconMadeListTableRows.test.js` (9 GONE + 3 GONE_EXPORT rows red at 65a5ecfcf, each
+  naming what still prints; 9 KEEP + 1 KEEP_EXPORT where the house stands, green before and after). RE-KEYED BY
+  IDENTITY: `tailDefeconExportSide.test.js` KEEP "r2r-hamlet-44 exports Flour and meal where Maltster stands" -> GONE
+  rows (Flour and meal, Milled flour; it still exports Processed grain) and the KEEP claim moves to r2r-village-27's
+  Mill; `economicsGoodsPillsBorneOut.test.jsx` (rww-village-famine-1): its anchor listed "Fine wool cloth" on the record
+  (a Shepherd, no weaver or fuller); the record no longer lists it; the page claim is unchanged.
+- Gates: the 66 test files that name computeActiveChains, localProduction or resourceData + the guard: 15 red over 9
+  files, ALL CARRIED (red at 65a5ecfcf too: generatorGoldenMaster, worldFactRederive A7, coherenceAgreeCures x2,
+  urbanBandInstitutions G3/G5, vocabularyPageFindings F1 planted, editWorldFactResources A2/A6, editCorpusRatchet
+  A3/A4/A7/A8) but the two re-keyed above, green after. domain-strict, the type ratchet, eslint (the file held at 800
+  lines): exit 0. The walker `--check`: fresh 148, first-register stale 2 (as at the base). The grid: 2 falls as at
+  the base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a). The golden master moves (the owner's door): not re-taken.
+
+### What is left (TAIL-DEFECON-C-4)
+
+1. D33: DONE (this commit).
+2. D34, the four pairs, measured (over D33) before any is built: river fishery's salt 59 towns (availableResources 59,
+   localProduction 50, necessityImports 29, primaryImports 25, resourceAnalysis imports/gaps 9, transit 8); fishing
+   grounds' salt 61 (availableResources 61, localProduction 41, resourceAnalysis imports/gaps 14); precious metals' gems
+   91 (availableResources 91, localProduction 35); hot springs' herbs (both hot-springs keys) 111 (availableResources
+   111, localProduction 95, resourceChains 12, exploitation 12, gaps 7, exports 3, …). Being read field by field next.
+3. THE PAGE: the census before at 65a5ecfcf is running; the after at the close.
+4. NAMED, NOT BUILT (as the predecessor left them): ONE LEAF for the exploitation's terrain check
+   (`resourceGenerator.js`'s seat; held equal by a test meanwhile); `resourceDynamicsKernel.js:575` (the world pulse
+   re-derives the made list with no roster and no terrain: the gates are off there until the next birth).
