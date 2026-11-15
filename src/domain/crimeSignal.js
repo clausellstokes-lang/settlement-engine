@@ -128,3 +128,12 @@ export function criminalSeatGoverns(seats) {
 export function namesSmugglingHouse(name) {
   return name.toLowerCase().includes('smuggl');
 }
+
+/**
+ * Whether a power is a criminal one by its seat's mark, or a thieves' power by its name (TAIL-CLOSE-SRC-4: moved verbatim
+ * from `power/stressFactions.js`'s wartime trade line, TAIL-POWERS-B-4 P31 (6), into the crime home).
+ * @param {{ category?: unknown, faction: string }} seat a roster seat @returns {boolean}
+ */
+export function isCriminalOrThievesPower(seat) {
+  return seat.category === 'criminal' || seat.faction.toLowerCase().includes('thieves');
+}
