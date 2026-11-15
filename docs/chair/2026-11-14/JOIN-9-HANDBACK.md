@@ -63,10 +63,11 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 |---|---|---|---|---|---|---|
 | 1 | lane/tail-display-civic-2026-11-14 | ec26834d5 (05:25) | c2f053333 | a330237f0 | none | 3 files outside docs/; declared-move commits: none (golden carried) |
 | 2 | lane/tail-crisis-2026-11-14 | 0f506cd93 (05:28) | c6852f7e2 | 70d80f3e9 | none | 6 files outside docs/; declared-move commits: 6716dfceb  (golden carried) |
+| 3 | lane/tail-corpus-eco-2026-11-14 | a8ea5ef8e (05:32) | bf6695a6b | c46e61abe | **PIN** (law d): `composeStateProse.test.js` (1 hunk), `proseEntryContradiction.walker.test.js` (5), `proseMoveGrammar.walker.test.js` (1) | joined kept inside each hunk; composed measured RED, listed (§3, §4 [J9]); clean-both `RECEIPT_POOLS_DOSSIER_STATE.md`; leaves `economy.generated.js`, `general.generated.js` the lane's |
 
 ## 3. Every code resolution
 
-None yet.
+PIN CONFLICTS (law d), point 3 (corpus-eco a8ea5ef8e against the joined side, whose pins corpus-def moved): the joined side kept inside each conflicted hunk (the conflict markers resolved to HEAD's side hunk by hunk; the lane's clean hunks in the same files stand). Measured on the merged tree (`npx vitest run` of the three files, `/home/user/j9out/pin3.merged.log`) and at the line's tip before the merge in the probe worktree `/home/user/j9probe` (`pin3.pre.log`): before, 6 red in 2 files (variants 2954 vs 2953; leaves+causal 3422 vs 3421; joined 2717 vs 2716; the 2418 row did not load; the trailing pin 371 vs 375; ANCHOR 5's 'exemption on a null column'); after, 8 red in 3 files: variants **2956** vs 2953, leaves+causal **3424** vs 3421, joined **2719** vs 2716, `proseMoveGrammar` uniformSegments **571** vs 570 and CONTROL 4's second half **516** vs 515, the rest as before. Every one is a pin both corpus seats moved: re-keyed by identity at the close, by its door, once. Remerge patch `probes/JOIN-9/03-tail-corpus-eco.remerge.patch`.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -208,6 +209,8 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | file / test | branch (JOIN-9 point #) | why |
 |---|---|---|
 | golden | crisis (2) | DECLARED MOVE commits 6716dfceb  (field diffs in their bodies) |
+| `tests/domain/composeStateProse.test.js` (variants), `tests/lint/proseEntryContradiction.walker.test.js` (leaves+causal, joined, leafLines, the rows at 6162 and 2418/2419), `tests/lint/proseMoveGrammar.walker.test.js` (uniformSegments, the ratio, CONTROL 4's 515) | corpus-eco (3) against corpus-def on the joined side | PIN CONFLICTS, joined kept; composed 2956 / 3424 / 2719 / 571 / 516: RED (four of them red at the line before the merge), re-keyed by identity at the close (§3) |
+| `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` | corpus-eco (3) | merged clean though both corpus seats moved it; the corpus door (g) is stopped: checked at the close |
 
 ## 5. Item 2 at the landed tip
 
