@@ -254,7 +254,10 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'seatFacesFoldedByDualHat', reason: 'a pure READ over the record (0 or 1: the seat\'s face the dual hat folded), handed to the density law as part of the mass; it writes nothing at all.' },
   { symbol: 'standingRosterOf', reason: 'a pure READ: the roster the standing sentences were written on, copied before the resize; it returns a new array and writes nothing.' },
   { symbol: 'standingForceOf', reason: 'a pure READ of the institutions for the standing sentence\'s force word; it returns a new object and writes nothing.' },
-  { symbol: 'settleTensionsToRoster', reason: 're-names a tension\'s parties inside `history` for the final roster (copy-on-write, no draw); `history` is not a held key.' },
+  { symbol: 'settleTensionsToRoster', reason: 're-names a tension\'s parties inside `history` for the final roster (copy-on-write, no draw); `history` is not a held key.' },  // TAIL-HOUSES-5 (the chair's ruling H20): the late re-read of a house's description (`readHouseDescsLate`, the file's own
+  // function, called only where the DM holds no `institutions`: the same pin gate) speaks a late twin in the tier noun.
+  { symbol: 'speakTierNoun', reason: 'a pure map from a line and a tier noun to the line spoken in that noun (stateProseKernel.js); it writes nothing. The late re-read stores its result on `institutions[].desc` only where `institutions` is not held.' },
+  { symbol: 'tierNounFor', reason: 'a pure READ of the tier word as the tier noun (weaveBlock.js), or null; it writes nothing.' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */

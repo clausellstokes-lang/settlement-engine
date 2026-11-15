@@ -34,8 +34,12 @@ describe('the defence\'s divine and druidic traditions, read in one home', () =>
     }
   });
 
-  test('the census: r2r-thorp-0\'s defence holds the divine tradition, r2r-thorp-1\'s does not', () => {
-    const held = birthCensus('r2r-thorp-0'); const not = birthCensus('r2r-thorp-1');
+  // TAIL-CORPUS-DEF-5, RE-KEYED BY IDENTITY: 42d82c775 (UPKEEP-CAPACITY C4a, the chair's G3, declared) took the walk to
+  // another's church ("Access to parish church", a fabric row) off the traditions' names, so r2r-thorp-0, whose only
+  // church was that walk, holds no divine tradition now, and no thorp or hamlet of the census does (r2r-thorp-0..29,
+  // r2r-hamlet-0..11 read). The nearest place that holds it: r2r-village-1 (a Parish church, a resident Priest).
+  test('the census: r2r-village-1\'s defence holds the divine tradition, r2r-thorp-1\'s does not', () => {
+    const held = birthCensus('r2r-village-1'); const not = birthCensus('r2r-thorp-1');
     expect(held.defenseProfile.traditions.hasDivine, 'anchored').toBe(true);
     expect(defenceHoldsDivine(held)).toBe(true);
     expect(defenceHoldsDivine(not)).toBe(false);

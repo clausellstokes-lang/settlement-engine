@@ -17,6 +17,7 @@ import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** @param {any} l */
 const textOf = (l) => (typeof l === 'string' ? l : l.text);
@@ -34,7 +35,7 @@ describe('the famine pool: a common store, a failed source, the powers counted',
   it('one power, a failed fishing, no granary: no harvest, no count, no stores', () => {
     const line = textOf(PRESSURE_SENTENCES.famine({ ...base, powerCount: 1 })[1]);
     expect(line).toMatch(/^Since the fishing failed, food is power in X, /); // a pattern (proseDrawnAnchors)
-    expect(line).not.toMatch(/harvest|three powers|the stores/);
+    for (const refused of ['harvest', 'three powers', 'the stores']) expectAbsentWithAnchor(line, refused, 'Since the fishing failed, food is power in X, ');
   });
 
   it('two powers: the two, over what food is left', () => {
@@ -56,12 +57,12 @@ describe("the reader's two thorps, born as the app births them", () => {
   it('Sahlfort (#40): no granary, so no reserves are promised', () => {
     const s = born('rr2s-thorp-calm-rand-1', 'thorp', []);
     expect(s.economicState.foodSecurity.foodRecord.hasGranary).toBe(false);
-    expect(s.pressureSentence).not.toMatch(/reserves|stores/);
+    for (const refused of ['reserves', 'stores']) expectAbsentWithAnchor(s.pressureSentence, refused, 'food is power in Sahlfort');
   });
 
   it('Archodion (#48): one power and a failed fishing, so no harvest and no three powers', () => {
     const s = born('rr2s-thorp-famine-rand-1', 'thorp', ['famine']);
     expect(s.powerStructure.factions.length).toBe(1);
-    expect(s.pressureSentence).not.toMatch(/harvest|three powers|the stores/);
+    for (const refused of ['harvest', 'three powers', 'the stores']) expectAbsentWithAnchor(s.pressureSentence, refused, 'Since the fishing failed');
   });
 });

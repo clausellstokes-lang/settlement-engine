@@ -28,15 +28,15 @@ function characterSentence(r) {
   const insts=(r.institutions||[]).map(i=>(i.name||'').toLowerCase());
   const hasArmed=insts.some(n=>['garrison','militia','watch','guard','mercenary'].some(k=>n.includes(k)));
   const hasCrim=insts.some(n=>['thieve','criminal','underworld','black market'].some(k=>n.includes(k)));
-  const {tier,config:h={},economicState:g={},powerStructure:w={},history:p={}}=r;
+  const {tier,config:h={},economicState:g={},powerStructure:ps={},history:p={}}=r;
   const tradeKey=h.tradeRouteAccess||'road';
   const threat=h.monsterThreat||'frontier';
   const sl=g.safetyProfile?.safetyLabel||'';
   const prosperity=g.prosperity||'Moderate';
-  const stability=w.stability||'Stable';
-  const ruling=w.factions?.[0]?.faction||((['thorp','hamlet'].includes(tier)?'the household heads':['village'].includes(tier)?'the village elders':'the local council'));
+  const stability=ps.stability||'Stable';
+  const ruling=ps.factions?.[0]?.faction||((['thorp','hamlet'].includes(tier)?'the household heads':['village'].includes(tier)?'the village elders':'the local council'));
   const age=p.age;
-  const recentConflict=w.recentConflict||'';
+  const recentConflict=ps.recentConflict||'';
   const tradeDesc={port:'coastal port',river:'river settlement',crossroads:'crossroads market',road:'road-side settlement',isolated:'isolated settlement'}[tradeKey]||'settlement';
   const tierDesc={thorp:'tiny hamlet',hamlet:'small hamlet',village:'village',town:'market town',city:'city',metropolis:'metropolis'}[tier]||tier;
   const threatNote=threat==='plagued'?' The surrounding region is plagued by monster activity.':threat==='frontier'?' It sits on an active frontier.':'';
@@ -46,7 +46,7 @@ function characterSentence(r) {
 }
 
 // ── Stacked faction power bar ─────────────────────────────────────────────────
-function FactionBar({ factions, governingWords = '' }) {
+function FactionBar({ powers: factions, governingWords = '' }) { // `powers`: the ruling powers (powerStructure.factions), not the NPC grouping
   // THE PHONE CHROME FLOOR — the modifier chips and the share figure, above the
   // empty-roster early return so the hook order is stable.
   const mobile = useIsMobile();
@@ -252,7 +252,7 @@ function SummaryTab({ settlement:r }) {
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:12}}>
         <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
-        <FactionBar factions={allFactions.slice(0,5)} governingWords={governingModifierWordsOf(r)}/>
+        <FactionBar powers={allFactions.slice(0,5)} governingWords={governingModifierWordsOf(r)}/>
         {ps?.recentConflict&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch.danger,marginTop:8,lineHeight:1.4}}>{ps.recentConflict}</p>}
         {allConflicts.length>0&&<>
           <div style={{height:1,background:swatch['#C0CCE8'],margin:'10px 0'}}/>

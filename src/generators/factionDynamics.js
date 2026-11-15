@@ -344,11 +344,23 @@ export function withConflictRelations(powerStructure, conflicts) {
   const quarrelOf = (/** @type {string[]} */ pair) => high.find((c) => (c.parties[0] === pair[0] && c.parties[1] === pair[1]) || (c.parties[0] === pair[1] && c.parties[1] === pair[0])) || null;
   let moved = false;
   const factionRelationships = rows.map((row) => {
-    if (!row || !Array.isArray(row.pair) || (row.type !== 'symbiotic' && row.type !== 'dependent')) return row;
+    if (!row || !Array.isArray(row.pair)) return row;
     const quarrel = quarrelOf(row.pair);
     if (!quarrel) return row;
+    const issue = String(quarrel.issue).toLowerCase();
+    // TAIL-POWERS-B-4 (the chair's P31 (3), vetoable by the owner): the merchants' and craftsmen's vote ("vote together whenever
+    // trade is at stake") is false of a pair the conflicts hold at HIGH; it takes its twin, which names the quarrel
+    const narrative = String(row.narrative || '');
+    if (narrative === MERCHANT_CRAFT_VOTE.sibling(row.pair[0], row.pair[1]) || narrative.startsWith(`${row.pair[0]} and ${row.pair[1]} vote together against `)) {
+      moved = true;
+      return { ...row, direction: 'escalating', narrative: MERCHANT_CRAFT_VOTE.atOdds(row.pair[0], row.pair[1], issue) };
+    }
+    if (row.type !== 'symbiotic' && row.type !== 'dependent') return row;
     moved = true;
-    return { ...row, direction: 'escalating', narrative: `${row.narrative} Even so, the two are now at odds over ${String(quarrel.issue).toLowerCase()}.` };
+    // TAIL-POWERS-B-4 (P31 (5)): the seat and the faith that "props up" its rule are not said to prop each other up beside a HIGH quarrel
+    const ordained = ORDAINED_SEAT.exec(narrative);
+    if (ordained) return { ...row, direction: 'escalating', narrative: `${ordained[1]}; ${ordained[2]} ${ordained[3] === 'tells' ? 'has' : 'have'} long told people that ${ordained[4]} rule is right and ordained, but the two are now at odds over ${issue}.` };
+    return { ...row, direction: 'escalating', narrative: `${narrative} Even so, the two are now at odds over ${issue}.` };
   });
   return moved ? { ...powerStructure, factionRelationships } : powerStructure;
 }
@@ -377,7 +389,13 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
   needs: 'the landholding power it names',
   against: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ landholders) => `${merchants} and ${craft} vote together against ${landholders}, then fight over who keeps the profit.`,
   sibling: (/** @type {string} */ merchants, /** @type {string} */ craft) => `${merchants} and ${craft} vote together whenever trade is at stake, then fight over who keeps the profit.`,
+  // TAIL-POWERS-B-4 (P31 (3)): the twin where the conflicts hold the pair at HIGH (withConflictRelations)
+  atOdds: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ issue) => `${merchants} and ${craft} are at odds over ${issue}, and fight over who keeps the profit of the trade.`,
 });
+
+/** The seat-and-faith row's dependent line (computeFactionRelationships), in either of its seat forms: its parts, for the
+ * HIGH twin (withConflictRelations). */
+const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
 
 export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null) {
   const rels = [];
@@ -509,7 +527,8 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
     } else if (ratio >= 0.5) {
       type = 'dependent';
       // TAIL-POWERS-B: the seat, not an order a siege, a famine, an insurgency or an occupation denies (was "keeps order")
-      narrative = `${say(gov)} holds the seat and collects the taxes; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${powerPossessive(gov.faction)} rule is right and ordained. Each props up the other.`;
+      // TAIL-POWERS-B-4 (P31 (5)): under an occupation the occupier takes the levy; the seat is said held, and no taxes are said
+      narrative = `${say(gov)} holds the seat${stressed('occupied') ? '' : ' and collects the taxes'}; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${powerPossessive(gov.faction)} rule is right and ordained. Each props up the other.`;
     } else {
       type = 'subordinate';
       narrative = `${rel.faction} answers to ${gov.faction}. Its priests look after their flocks and have no say in the hall.`;

@@ -587,7 +587,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     if (!crimeTypes.some((c) => c.desc === DESPERATION_THEFT_DESC)) {
       addCrimeIfMissing('desperation theft', DESPERATION_THEFT_DESC);
     }
-    addCrimeIfMissing('black market food', tiny ? "What food is put by goes to whoever can pay the holder's price." // TAIL-DEFECON (#05801): no controls or channels in a thorp or a hamlet
+    addCrimeIfMissing('black market food', tiny ? "What food there is goes to whoever can pay the holder's price." // TAIL-DEFECON (#05801): no controls or channels in a thorp or a hamlet; TAIL-CORPUS-DEF-5: no stores named (the Defense tab prints none)
       : 'Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.');
   }
   if (hasStress('occupied')) {

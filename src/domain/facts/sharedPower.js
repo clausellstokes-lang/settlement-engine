@@ -20,13 +20,18 @@
  * @enforced-by tests/domain/facts/sharedPower.test.js
  */
 
-/** The powers a card belongs to. @param {Record<string, any> | null | undefined} card @returns {Set<string>} */
+/**
+ * A card as these readers read it: its id (the roster's key) and its memberships (`{ power }` each).
+ * @typedef {{ id?: unknown, memberships?: unknown }} PowerCard
+ */
+
+/** The powers a card belongs to. @param {PowerCard | null | undefined} card @returns {Set<string>} */
 const powersOf = (card) => new Set((Array.isArray(card?.memberships) ? card.memberships : [])
-  .map((/** @type {any} */ m) => String(m?.power || '')).filter(Boolean));
+  .map((/** @type {{ power?: unknown } | null | undefined} */ m) => String(m?.power || '')).filter(Boolean));
 
 /**
  * Whether two cards share a power (any membership in common).
- * @param {Record<string, any> | null | undefined} a @param {Record<string, any> | null | undefined} b
+ * @param {PowerCard | null | undefined} a @param {PowerCard | null | undefined} b
  * @returns {boolean}
  */
 export function sharesPower(a, b) {
@@ -44,13 +49,13 @@ export function sharesPower(a, b) {
  */
 export function pairSharesPower(record, pair) {
   if (!Array.isArray(pair) || pair.length !== 2) return undefined;
-  const roster = Array.isArray(record?.npcs) ? /** @type {Array<Record<string, any>>} */ (record.npcs) : null;
-  /** @param {unknown} card @returns {Record<string, any> | null} */
+  const roster = Array.isArray(record?.npcs) ? /** @type {Array<PowerCard | null | undefined>} */ (record.npcs) : null;
+  /** @param {unknown} card @returns {PowerCard | null} */
   const cardOf = (card) => {
     if (!card || typeof card !== 'object') return null;
     const id = /** @type {{ id?: unknown }} */ (card).id;
     const held = roster && id != null ? roster.find((n) => n && String(n.id) === String(id)) : null;
-    return held || /** @type {Record<string, any>} */ (card);
+    return held || /** @type {PowerCard} */ (card);
   };
   const a = cardOf(pair[0]); const b = cardOf(pair[1]);
   if (!a || !b) return undefined;

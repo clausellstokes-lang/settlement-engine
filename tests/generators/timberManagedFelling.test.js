@@ -9,6 +9,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { TIMBER_MANAGED_LINE, TIMBER_PLAIN_LINE } from '../../src/generators/economy/incomeLineSiblings.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** @param {string} seed r2r-<size>-<i> or r2s-<crisis>-<size>-<i> (the capacity reader's render5.mjs shapes) */
@@ -27,7 +28,7 @@ describe('(b) "managed felling" only where the felling is managed', () => {
       const s = born(seed);
       const names = s.institutions.map((/** @type {any} */ i) => String(i.name).toLowerCase());
       expect(s.config.nearbyResources, `${seed}: anchored, a shipbuilding stand`).toContain('shipbuilding_timber');
-      expect(s.config.nearbyResources, `${seed}: anchored, no managed forest`).not.toContain('managed_forest');
+      expectAbsentWithAnchor(s.config.nearbyResources, 'managed_forest', 'shipbuilding_timber', `${seed}: anchored, no managed forest`);
       expect(names.filter((n) => /woodcutter|lumber|sawmill/.test(n)), `${seed}: anchored, no wood house`).toEqual([]);
       expect(timber(s)?.desc, seed).toBe(TIMBER_PLAIN_LINE);
     });

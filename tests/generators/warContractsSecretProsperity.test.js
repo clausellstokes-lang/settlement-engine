@@ -37,6 +37,8 @@ describe('the war-contracts secret needs a town the war made rich', () => {
   it('a town below comfortable carries no such secret (every row)', () => {
     expectNoSeedFailures(collectSeedFailures([['rw3-city-wartime-1'], ['r2s-wartime-town-0'], ['r2s-wartime-village-1'], ['r2s-wartime-city-1']], ([seed]) => {
       const s = born(seed);
+      expect(['Struggling', 'Poor', 'Moderate'], `${seed}: below comfortable (a band of the record's ladder)`).toContain(s.economicState.prosperity);
+      // anchored: the line above shows this prosperity is a live band of the ladder, below comfortable
       expect(['Comfortable', 'Prosperous', 'Wealthy'], `${seed}: below comfortable`).not.toContain(s.economicState.prosperity);
       expect(holders(s), `${seed}: carries no such secret`).toEqual([]);
     }), 'a town below comfortable carries no such secret');

@@ -57,7 +57,7 @@ const joined = (node) => collectText(node).join(' ').replace(/\s+/g, ' ').trim()
  * The writer's own record for a town whose gap magic closes. `foodSecurity.deficitPct`
  * is the canonical band, and 0 there means the reconcile publishes deficit 0 while still
  * crediting the caster with the residual.
- * @param {{ deficitPct?: number, magicOffset?: number }} [over]
+ * @param {{ deficitPct?: number, deficit?: number, importCoverage?: number, magicOffset?: number }} [over]
  */
 function writtenRecord(over = {}) {
   const analysis = deriveFoodBalanceAnalysis(
@@ -132,7 +132,9 @@ describe('THE PRINT — the channel is named whether or not a gap survives it', 
   it('CONTROL: a town with a real deficit prints exactly what it printed before', () => {
     // deficitPct 4 leaves a residual the reader can see, so the DEFICIT column renders
     // and the magic line sits under it — the arrangement §934.20 shipped.
-    const record = writtenRecord({ deficitPct: 4 }); const fb = asViewModel(record);
+    // RE-KEYED BY IDENTITY (TAIL-DEFECON-5, ruling R3): the view reads the writer's own pounds, so the fixture's writer
+    // publishes its gap (40 lb, 4%) and the split of the 60 it covers (24 by trade, 36 by the circle), as the writer does.
+    const record = writtenRecord({ deficitPct: 4, deficit: 40, importCoverage: 24, magicOffset: 36 }); const fb = asViewModel(record);
     expect(fb.deficit, 'the control fixture has no deficit').toBeGreaterThan(0);
     const text = printed(fb, record);
     expect(text).toContain('DEFICIT');
@@ -141,7 +143,7 @@ describe('THE PRINT — the channel is named whether or not a gap survives it', 
   });
 
   it('CONTROL: with no caster credited, nothing is invented', () => {
-    const record = writtenRecord({ magicOffset: 0, deficitPct: 4 }); const fb = asViewModel(record);
+    const record = writtenRecord({ magicOffset: 0, deficitPct: 4, deficit: 40, importCoverage: 60 }); const fb = asViewModel(record);
     expect(fb.magicOffset, 'the no-magic control still credits a caster').toBeNull();
     const text = printed(fb, record);
     expect(text).toContain('DEFICIT');

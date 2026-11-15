@@ -54,8 +54,8 @@ const RED = [
   ['r2r-town-2', 'Weekly market', 'crown', 'Royal charter required.', 'Charter required.'],
   ['r2r-village-14', 'Weekly market', 'crown', 'Requires royal/noble charter.', 'Requires a charter.'],
   ['r2r-village-25', 'Weekly market', 'crown', 'Held under royal or noble charter.', 'Held under charter.'],
-  ["r2r-hamlet-21", "Woodcutter's camp", 'charcoal', 'wood for the charcoal kilns', 'The settlement\'s living is timber and the carting of it.'],
-  ["r2r-hamlet-12", "Woodcutter's camp", 'charcoal', 'Timber, charcoal wood', 'Timber and the hauling of it keep the place alive.'],
+  ["r2r-hamlet-21", "Woodcutter's camp", 'charcoal', 'wood for the charcoal kilns', 'The crews live by timber and the carting of it.'],
+  ["r2r-hamlet-12", "Woodcutter's camp", 'charcoal', 'Timber, charcoal wood', 'Timber and the hauling of it are the camp\'s whole living.'],
 ];
 
 /** [seed, house, the words its text still names] — true siblings: green before and after. */

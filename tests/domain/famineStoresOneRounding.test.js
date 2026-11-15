@@ -14,6 +14,11 @@
  * counts as a food source, and a preserved source adds its quarter month to the stores, so `-1846` reads
  * 6.8 and `-3605` 13; the same members are `soak1k-2452` (city, famine, granary, 5.6) and `soak1k-1589`
  * (12.1, held), found by scanning the soak corpus for the condition.
+ * RE-KEYED BY IDENTITY (TAIL-DEFECON-6): COHERENCE-UPKEEP's stores move (05ec9b60, the chair's ruling 6 of 2026-11-12: the
+ * full granary keeps boughtShare('stores', keepOf(prosperity)) of its months; 225 of the 360 moved, every one down) lays
+ * `soak1k-2452` by at 5.3 months, an open granary that prints five and is not held, so it no longer stands in the condition.
+ * Scanning soak1k-952 to -3952 outward from it, the only other famine granary at 5.5–5.9 months is `soak1k-1445` (a
+ * metropolis, 5.9, held): the arm's third member. -1582 (5.6) and -2962 (5.5) stand, and the control -1589 holds.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -28,7 +33,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 const born = {};
 beforeAll(async () => {
   await ensureLaws();
-  for (const i of [1582, 2452, 2962, 1589]) born[i] = birth(i).settlement;
+  for (const i of [1582, 1445, 2962, 1589]) born[i] = birth(i).settlement;
 }, 240_000);
 
 /** @param {number} storageMonths @param {boolean} stressFamine */
@@ -40,8 +45,8 @@ const recordAt = (storageMonths, stressFamine = true) => deriveFoodRecord({
   // the same records, the same held/open reading and the same rounding; the span now says "about".
 describe('rung 2D · the held granary and the stores line read one rounding', () => {
   // LANDING-R2 seat E: one parameterless test over the three seeds, every seed run and collected.
-  it('soak1k-1582, -2452, -2962: a famine granary printed as six months is held, and the page says so', () => {
-    const failures = collectSeedFailures([1582, 2452, 2962], (i) => {
+  it('soak1k-1582, -1445, -2962: a famine granary printed as six months is held, and the page says so', () => {
+    const failures = collectSeedFailures([1582, 1445, 2962], (i) => {
       const s = born[i];
       const record = s.economicState.foodSecurity.foodRecord;
       expect(record, `soak1k-${i}`).toMatchObject({ band: 'famine', hasGranary: true });

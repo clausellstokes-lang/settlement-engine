@@ -38,7 +38,12 @@ describe('POWERS-14 · the hall line reads the town\'s criminal structure', () =
     /** seed → [the crime structure read on its page, 'denies' | 'hall'] */
     const expected = /** @type {Record<string, [string, 'denies' | 'hall']>} */ ({
       // false before (read on the page): a criminal structure stands, and the line denied it
-      'r2r-city-0': ['organized', 'hall'], 'r2s-under_siege-metropolis-0': ['organized', 'hall'], 'r2r-town-44': ['organized', 'hall'],
+      'r2r-city-0': ['organized', 'hall'], 'r2r-town-44': ['organized', 'hall'],
+      // TAIL-POWERS-B-5, RE-KEYED BY IDENTITY: a DECLARED MOVE of the defence display (82e8fab6e W2-C-LEAVES-3, 0044e4f84
+      // W2-C-LEAVES-11): the roster's "Multiple criminal factions" with no criminal seat and no thieves' guild is rival
+      // rings, "semi-organized". This town stands no criminal power (an assassins' guild, a smuggling network, a black
+      // market bazaar, "Multiple criminal factions"), so its structure reads semi-organized and the first line, true there
+      'r2s-under_siege-metropolis-0': ['semi-organized', 'denies'],
       // the guard towns, the first line kept: no criminal structure; a semi-organized network ("lacks a single
       // controlling authority") and a diffuse presence ("there is no boss"), read true beside it
       'r2r-village-0': ['semi-organized', 'denies'], 'r2r-thorp-8': ['diffuse', 'denies'], 'r2r-thorp-0': ['none', 'denies'], 'r2r-thorp-4': ['none', 'denies'], 'r2r-thorp-12': ['none', 'denies'],

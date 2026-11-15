@@ -189,8 +189,11 @@ const ROWS = [
   ["the potter", 359, [
     S("Sells glazed ware with lead in the glaze, cheaper to make and bad for anyone who eats from it often",
       "The families who use those pots every day would have reason to blame every ache on the potter"),
-    S("Has dug clay from land that belongs to someone else, whenever there was clay to be had, and paid nothing for it",
-      "The landowner would want years of clay paid for, and the pit would be closed"),
+    // TAIL-POWERS-B-4 (the chair's P31 (2), vetoable by the owner): the clay secret printed where no clay reaches the potter
+    // (84 of the 85 towns at cce57ff35, the record's gap "Potter exists but lacks access to clay"); the slot keeps its draw and
+    // takes a secret true with or without clay on the land
+    S("Has been selling pots bought in from another workshop as their own throwing, at their own prices",
+      "The buyers who paid for local work would want their money back, and the workshop's name would go with it"),
     S("Sold a set of plates as old work worth far more than they were, and the buyer has started to ask questions",
       "A forger's name follows a potter for life, and the buyer is someone with friends"),
   ], [
