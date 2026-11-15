@@ -75,7 +75,7 @@ export const PERSON_HOOKS_BY_TITLE = Object.freeze({
     'A client wants to buy back a secret the client sold them, at any price.',
   ],
   'the theatre manager': [
-    'The new play mocks someone powerful by another name, and the house is full every night.',
+    'The new play mocks someone powerful by another name, and every performance sells out.', // TAIL-TIES: no nightly house under a curfew (reworded; for the owner's veto)
     'Their lead player has had an offer from another company, and a debt they will not explain.',
     'Something has been stolen from behind the stage on three opening nights running.',
     'The owner of the theatre has sold it to someone who will not give a name, and the lease ends at midsummer.',

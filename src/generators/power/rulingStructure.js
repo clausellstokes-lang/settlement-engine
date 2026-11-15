@@ -222,7 +222,7 @@ export const generatePowerStructure = (
       ? (governingFaction =
           (topPriority > 65 &&
             {
-              military: "Headman's Authority",
+              military: lowerInstNames.some((n) => String(n).includes('headman')) ? "Headman's Authority" : null, // TAIL-POWERS-2 DA (P7, P8): said only where the roster holds a headman's house; with none, the size's civic seat below
               religion: 'Priestly Guidance',
               economy: 'Household Council',
               criminal: 'Elder Council',
@@ -734,7 +734,7 @@ export const generatePowerStructure = (
 
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
-  settleClaimsToLabel(factions, tier, lowerInstNames); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
+  settleClaimsToLabel(factions, tier, lowerInstNames, publicLegitimacy); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
   annotateFactionStanding(factions, standingForce); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort
 
   const safetyRatio = safetyRatioOf(instFlags);

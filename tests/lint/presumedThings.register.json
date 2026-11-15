@@ -217,7 +217,6 @@
    ["docks", "after-release", "{settlement} has a harbour and hardly uses it: empty moorings, few dock hands, and a strange sail draws a crowd to stare", "7c8c2bd09a4761ae"],
    ["docks", "after-release", "{settlement}'s living comes off the quay; the fields behind it are a convenience the town could manage without.", "d4553900d420007d"],
    ["market", "after-release", "{faction} holds {band} of the power in {settlement}, a town goods pass through; part of what passes is smuggled, so more", "7b01e74b1bb5265f"],
-   ["market", "after-release", "{settlement} buys mostly what it makes itself, and the market is where its people trade with each other.", "a3689d106d76f455"],
    ["market", "after-release", "{settlement}'s market handles more than the town could ever use; the difference is the town's living.", "51702d5240e70fd8"],
    ["market", "after-release", "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.", "9e822479d614eae4"],
    ["market", "after-release", "{settlement}'s market serves the town itself; little passes through that was not always coming here.", "45116905c9070836"],
@@ -227,7 +226,6 @@
    ["market", "after-release", "DS-GEN-13 · Overview/Economics › The market and the roads (where the town trades, and why there) · market-class institut", "14dce4f62ffbc3fa"],
    ["market", "after-release", "Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.", "ebf918fef65f97d0"],
    ["market", "after-release", "No great road feeds {settlement}'s market; it serves the town itself, no more.", "afba51dbc0109a22"],
-   ["market", "after-release", "No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.", "6182a6c3b726a265"],
    ["market", "after-release", "Prices in {settlement} hold steady from one market to the next; the town is not living hand to mouth.", "6e4b0029752e1429"],
    ["market", "after-release", "The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.", "c608d0c0609dcc27"],
    ["prison", "after-release", "{settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.", "0efcb879d014c5c9"],
@@ -372,7 +370,6 @@
    ["mill", "after-release", "A manor mill holding the sole right to grind (the banalité).", "4498162860de8a33"],
    ["mill", "after-release", "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's bui", "912825ce24891704"],
    ["mill", "after-release", "A mill turned by water or oxen that saws planks and beams for construction and keeps a standing crew.", "1111c40401aff331"],
-   ["mill", "after-release", "A water- or wind-driven mill holding the sole right to grind. The miller tends to be the richest man in the village, and", "5eaa9faad6c17664"],
    ["mill", "after-release", "Grain goes to the manor or village mill; grinding it at home is commonly against the law.", "f97731e15fbdd945"],
    ["mill", "after-release", "Planks and beams for the building trade, sawn by water or ox power at a mill with a permanent crew.", "448e5e0d38af7f9d"],
    ["mill", "after-release", "The lord's mill, and by banalité the only one grain may lawfully be ground at.", "47a7ea9079173bf8"],
@@ -380,7 +377,6 @@
    ["prison", "after-release", "A vast state gaol where the political, the indebted, and the convicted are each held separately.", "f259870c75d460ec"],
    ["temple", "after-release", "A charity house sheltering the destitute poor, the aged, and the disabled who cannot work. Church endowment and wealthy ", "9a9e2891284f6c9c"],
    ["temple", "after-release", "Abandoned babies and young children are received here and given plain care until apprenticeship, a family placement, or ", "a48e6fc31094388c"],
-   ["temple", "after-release", "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. For the church", "2911c54cb756de90"],
    ["temple", "after-release", "Consecrated earth ringing the church.", "78d2474bdf88064c"],
    ["temple", "after-release", "Hallowed ground about the church.", "95681c7d233dd72f"],
    ["temple", "after-release", "Kept for the poor, the old, and the crippled who have no work in them, funded by church endowment and rich patrons. It f", "1b610d42924d4934"],
@@ -463,7 +459,6 @@
    ["garrison", "after-release", "Garrison forces distributed across quarters. No single barracks can secure a metropolis.", "d20803420a0527c3"],
    ["garrison", "after-release", "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies ", "e7a63c6a99211dbd"],
    ["garrison", "after-release", "Housing for guards or small garrison.", "fb898a4586d615a4"],
-   ["garrison", "after-release", "Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.", "3714d8796b8b9e62"],
    ["garrison", "after-release", "the garrison commander", "da0b66780c1fab44"],
    ["granary", "after-release", "A hamlet stores household by household; the granary is the town rung.", "c67626f463e1e008"],
    ["granary", "after-release", "A town is fed by its hinterland: the granary and the market carry farming in the town roster.", "84ed7a4eddf05d09"],
@@ -737,7 +732,7 @@
    ["garrison", "after-release", "Forced contributions and confiscations collected by the garrison, not formally a tax.", "43cb8d045f731153"],
    ["garrison", "after-release", "Military services — garrison contracts and armed escort", "ae53300ddab3011e"],
    ["garrison", "after-release", "Military services — standing army leasing, siege engineering, garrison contracts", "c7fda6847f46dc50"],
-   ["market", "after-release", "A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting brings steady c", "2c3590eeb9ead422"],
+   ["market", "after-release", "A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting bring steady co", "5531feeb0fdf3e48"],
    ["market", "after-release", "Daily market tolls, stall fees, and weights-and-measures inspections.", "4f90fa3123af427b"],
    ["market", "after-release", "Guild-run fencing, extortion and black-market trade", "1bb7184098f9240d"],
    ["market", "after-release", "Market day stall fees and toll collection on goods entering the market.", "c79b9048611f7e71"],
@@ -772,7 +767,7 @@
    ["watch", "after-release", "Add Thieves' Guild, Black Market, or City Watch", "653197f17b02acd7"]
   ],
   "src/generators/factionDynamics.js": [
-   ["temple", "after-release", " has sway. Merchants pay for churches, ", "d1a258fb4e72890c"],
+   ["temple", "after-release", " sway. Merchants pay for churches, ", "a714e70379d13152"],
    ["temple", "after-release", " want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the c", "e972b6879d8bee81"]
   ],
   "src/generators/history/historyEventStrands.js": [

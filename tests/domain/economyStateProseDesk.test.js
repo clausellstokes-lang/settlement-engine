@@ -1026,7 +1026,8 @@ describe('DESK-7 — the {complexity} band, wired from the chair\'s eleven forms
     const drawnKeys = (tier, access, complexity) => new Set(seeds
       .map((seed) => economyStateProse(
         // CENSUS-3c: C3 v3 / C5 lines declare `market`; the measured town keeps one (a market square).
-        town({ economicState: { prosperity: tier, tradeAccess: access, economicComplexity: complexity }, institutions: [{ name: 'Market square' }] }),
+        // TAIL-CORPUS-ECO-2 (2026-11-15): C5 v2 ("feeds it and no more") declares `food: ≥ secure`; the measured town is fed.
+        town({ economicState: { prosperity: tier, tradeAccess: access, economicComplexity: complexity, foodSecurity: { foodRecord: { band: 'secure' } } }, institutions: [{ name: 'Market square' }] }),
         {}, { seed, audience: AUDIENCE_DM },
       ).prosperityHeader?.sentence)
       .filter(Boolean));

@@ -237,7 +237,7 @@ const AUTHORED_HOOK_THEMES = Object.freeze(/** @type {ReadonlyArray<readonly [st
   ["They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.", 'divided_loyalty'],
   ['The same new face has turned up at three of their jobs, and they have put someone on to follow the newcomer.', 'outsider_suspicion'],
   ['The guard captain has a file. They know because someone who works for the guard captain also works for them.', 'corruption'],
-  ['Someone tried to rob one of their fronts, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.', 'looming_threat'],
+  ['Someone tried to rob them, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.', 'looming_threat'], // TAIL-TIES (T3): the pool's reworded line
   ['Two of their people have started running jobs of their own, and are telling newer hands that the old boss is finished.', 'ambition'],
   ['A debt they called in was paid by someone they have never met, and that person now wants to meet.', 'hidden_debt'],
   ['A load of theirs was taken on the road by people who knew the day, the route and the password.', 'betrayal'],
