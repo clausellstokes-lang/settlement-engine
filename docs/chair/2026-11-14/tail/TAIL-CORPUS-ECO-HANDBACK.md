@@ -1,4 +1,7 @@
-# TAIL-CORPUS-ECO · hand-back (kept current after every batch)
+# TAIL-CORPUS-ECO · hand-back (kept current after every batch) · HANDED BACK 2026-11-15 at the budget
+
+Tip: the commit carrying this file (after 29271e7bf). Rows: 148 · cured 40 · struck 20 (12 gone at the base, 3 cured at the base,
+5 true by the record) · parked 5 (C6) · named or left 83.
 
 Seat: TAIL-CORPUS-ECO, builder. Branch `lane/tail-corpus-eco-2026-11-14`, cut from the joined line `lane/join-2026-11-14`
 at **48fedbe98** (read back from origin at the start). Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-CORPUS-ECO.{md,json}`
@@ -19,6 +22,12 @@ DS-SUP sections only) and tests.
   TRUE IN THAT STATE. Land POOL BY POOL. (The seat before: "what is left" of W2-WRITE-SIDE-HANDBACK-14 read: its batch is
   landed whole; its bar rows #168 PROSPEROUS "halls", #275 entrepot, are in this worklist and taken here.)
 - (C4) CORPUS-DEF edits the same source in ITS sections: no section of DS-DEF, DS-POW, DS-FTH or DS-CND is touched.
+- (C6, the chair, 2026-11-14 23:57, on batch 1's park) INCOME WEIGHT magic: NO ATOM for "a practitioner on the rolls"; a town
+  whose income leans on magic and holds no practitioner is THE RECORD'S FAULT (measured as a class by RECORD-MEASURE-2). Reword
+  only if a wording claiming the income and not a practitioner stays good in all 54; else LEAVE THE FIVE PARKED with their
+  measure and seeds. THIS SEAT: no such wording holds (the five's own income is farm rents at 100% and the page says "nothing it
+  lives by would stop without it"; even the cities' magic income is 3-6%, so "a large part of its business" is the pool key's
+  claim, `compound.magicInfluence` ≥ 60, not the income's): LEFT PARKED, the five seeds below.
 - BRIEF-TAIL whole: a flag is a candidate, verified by the record; batches; silence is true but a silence of TRUE lines in
   more than twenty towns is told first; a state left mute takes a twin; a draw is not moved outside the row's pool; under a
   siege nothing comes in or goes out; under a famine no line offers the food that failed; no new vocabulary word; every new or
@@ -127,6 +136,23 @@ COMMIT (the next one).
 Doors: generator --check 0; presumed fresh 147 (= base); the grid 2 falls (= base); strict-domain 0, the type ratchet 0, eslint 0;
 the 58 files: the base's 38 reds, plus the presumed walker's stale-row red that the next commit cures; the guard 50 green.
 
+### THE AFTER RUN (both batches, at 29271e7bf: the census of the 720 on this tree; inventory_diff over the 40 cured rows)
+
+29,876 -> 29,883 distinct sentences; gone 100, new 107 (the reworded lines and their tier-noun folds), in fewer towns 21, in more
+towns 32, moved 0. THE 40 ROWS: 25 GONE (every reworded row, and DS-GEN-13 MARKET-NARROW v2, COMMERCE v2), 14 in FEWER towns by
+exactly their measure before (the replay's counts, every one: established v2-v6 52->51, 92->87, 79->75, 89->84, 79->75; HOW THE NEED
+v2 69->65; ADMINISTERED 44->42 and 6->5; WAREHOUSES v3 32->30, 29->28, 8->7; STRUGGLING v6 26->8, v3 9->3; DS-ECO-6 v5 20->18;
+entrepot v3 12->11, 7->6), 1 "still in the town read": 20129 COMFORTABLE v3 41 -> 40 (its measure, 1, is r2s-succession_void-
+metropolis-1; the town it was read in keeps it: its food band reads `secure` while its ledger is 3% short after imports: the band's
+cut, NOT cured here, named).
+EVERY OTHER SENTENCE IN FEWER TOWNS is a fragment of a batch line (the page splits a line at its full stop): "This is a town that
+sells." (established v2), "The <tier>'s living is the road." (entrepot v3), "The metropolis is plainly past subsistence." (COMFORTABLE
+v3). No line outside the batches was silenced.
+THE INHERITORS (139 sentences gain towns that lost one): the reworded lines in the same towns; then exactly the replay's inheritors
+(STRUGGLING v1 v2 v4 v5 v7 +4 to +7 each; established v1 "sells more than one thing beyond the <tier>" +19 over its tier folds; HOW
+THE NEED v3 +4 and v1; WAREHOUSES v1 v2 v4; ADMINISTERED v2 v3; DS-ECO-6 v4 and v0; entrepot v1 v2; COMFORTABLE v2), each read in
+batch 2's table above.
+
 ## The veto list (every new or reworded line, with the towns it was read in)
 
 Batch 1 (DS-ECO-12; read where the old line printed, the reword in its place; smallest / largest / a crisis):
@@ -166,12 +192,32 @@ Batch 2 (reworded; smallest / largest / a crisis, from the replay's draws):
 
 ## Rows struck (true by the record), with why
 
+- AT THE BASE, no longer printing where read and true where they print: 23470 (HIGH) DS-GEN-13 MARKET-OPEN v3 (71 towns, none a
+  plague or a siege: the base's `no crisis: plague_onset`); 02808 02809 WAREHOUSES v2 (27/25 towns, none a siege: the base's
+  `no crisis: under_siege`).
+- Batch 2's five: B21281, 22300, B21289 (HIGH), 22397, B03005 (each with its reason in the batch).
+
 - GONE AT THE BASE (the fold prints nowhere at 48fedbe98): 03994 B21024 B03874 B21019 21304 B14751 B19451 B14745 B14746 B03823
   B00464 B21016 (DS-GEN-16). NOTE, honestly: the same pool lines still print in their template wording (e.g. LIVING-MEMORY v2 "Ask
   about the village's present quarrels in X and before long somebody brings up the succession crisis.", 9 towns); the readers'
   reason (no present quarrel on the record) may hold there too: NOT measured here, left in "what is left".
 
 ## Rows named for other groups
+
+- `src/generators/economy/tradeGoods.js :: deriveIsEntrepot` (the bar's #275): 13 of the 48 towns printing DS-ECO-10 POSTURE
+  entrepot are ports with no transit good and no entrepot income (r2r-city-12 -13 -16 -34 -38 -52 -9, r2r-metropolis-13 -21 -48
+  -55, r2s-religious_conversion-city-2, r2s-slave_revolt-metropolis-3); v2 is reworded here, v1 ("some of what leaves the town
+  entered it as imports the same season") is the record's to cure.
+- The FOOD SOURCES rows (DS-ECO-9 one source / several, ~20 rows): the `{good}` slot and the one/several key come from the food
+  record's `foodSources` (a town named as living on its fishing or its herds whose houses are farms and a mill): the food record's
+  writer (`foodBalance.js :: deriveFoodRecord`), not the pool.
+- DS-ECO-11 RESOURCE CONDITION / EXPLOITATION unexploited (~20 rows): "nobody bothers with the river fisheries" beside a working
+  Fisher's landing; "its stone has been there to take, and nobody has found it worth the trouble" beside walls of local quarry
+  stone; a named resource the resource list lacks: the exploitation record's writer (`resourceAnalysis.exploitation`).
+- DS-GEN-18 UNWORKED v1 / BOUGHT-IN v4 (8 rows): a resource "unworked" or a good "from the carts" that the trade record lists as
+  made here: the same record class (RECORD-MEASURE-2's kin: a good made with no house that makes it, or the reverse).
+- DS-SUP-3 ONE EXPECTED CATEGORY MISSING v2 (07394, 18): the key fires where MORE than one is missing: the catalog's counter
+  (`EXPECTED_SERVICES_BY_TIER` against `availableServices`), not the line.
 
 ## Registers named stale
 
@@ -180,4 +226,31 @@ Batch 2 (reworded; smallest / largest / a crisis, from the replay's draws):
 
 ## Guards owed
 
+- None for the rows cured: every cure has its GONE row and a KEEP row in `tests/domain/corpusEcoTailGuards.test.js` (50 rows).
+
 ## What is left of the worklist
+
+83 rows, unread or unmeasured by this seat (towns printing at the base in brackets), the widest first, each still A CANDIDATE:
+- DS-ECO-9 (31 rows less those cured): IMPORT-DEPENDENT v3 00991 15068 (HIGH, 4: "is fed ... nothing is failing" in an occupied
+  village, viable false) and v1 03095 22253; PRESSURED v1 00588 (22: "grows a little less food than it needs" at half its need) and
+  v2 B21598 (23: "enough food, mostly" at a 13% gap) - a band word against the ledger's size: the band's cut, measure first;
+  FOOD SOURCES several v2 v3 20660 20530 28996 28994 (18/12/11/8: "the others carry it" / "without going hungry" at a 35-68%
+  deficit: a `food: ≥ pressured` declaration is the shape, a twin for the deficit bands owed: NOT begun); the one-source rows
+  (named above); DEFICIT v5 B14264 (3); ACTIVE FAMINE failed source v3 29012 29009 (2 each); HOW THE NEED v1 09248 (1).
+- DS-ECO-1: C3 v2 00583 (35: "gets by on a thin margin" in 20 Comfortable-or-better towns: `prosperity: ≤ moderate` + a twin for
+  the comfortable calm town with no market, which the pool would leave mute: NOT begun); C3 v1 B27928 (4); C5 v2 v3 01181 (HIGH,
+  1, a siege) 01191 01099 01186 (road and "feeds it" in isolated or starving towns); C4 v3 01572 01569 (14/5: "the market sells
+  little" beside daily markets: the market's size has no atom); C1 v1 23230 (1).
+- DS-ECO-11: STRATEGIC VALUE v4 B02776 B02771 (24/22: "A newcomer soon hears" under a siege: + `no crisis: under_siege` is the
+  shape; v5 v6 are colour and speak there: NOT begun); the exploitation / resource-condition rows (named above).
+- DS-ECO-6: significant v1 02935 (18), minor v1 02770 02771 (18/14), large v1 20456 (12): dm-only shadow lines naming "trade" and
+  "clerks" in isolated thorps with no office: a reword in batch 1's form is the shape.
+- DS-GEN-13: ENTREPOT v1 01563 B01502 (20/18: 2 plague, 1 occupied: PLAUSIBLE, not cured); merchant guild v2 12095 (6, a guild
+  power Suppressed: no atom); a bank v1 03133 (1).
+- DS-GEN-14 FOUNDED-YOUNG v2 07396 07397 (15/2: "still does the job it began with" against the founding: the founding has no atom).
+- DS-ECO-8 WEALTHY v1 B00791 (12); DS-ECO-10 POSTURE none v1 B27697 (8, an occupier's levy).
+- DS-SUP-2 UPSTREAM WEAK 18251 23280 (5/2).
+- DS-GEN-16 (the 12 gone at the base): the same pool lines print in their template wording (LIVING-MEMORY v2 in 9 towns "Ask about
+  the village's present quarrels ... the succession crisis"): the readers' reason (no present quarrel) to be measured there.
+- PARKED (C6): INCOME WEIGHT magic B12119 28731 28726 28745 21275; false in 5 of 54: r2r-town-29, r2r-village-2,
+  r2s-indebted-hamlet-0, r2s-indebted-village-0, r2s-recently_betrayed-thorp-3 (true when the record is cured).
