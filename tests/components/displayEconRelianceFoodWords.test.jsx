@@ -33,6 +33,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { foodMagicShare } from '../../src/domain/display/magicProvisionShown.js';
 import { deriveMagicReliance, foodMagicShare as relianceFoodShare } from '../../src/domain/magicReliance.js';
+import { poolMemberTexts } from '../helpers/drawnProse.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -54,10 +55,17 @@ const textOf = (t, tab) => {
   return out;
 };
 
-/** [seed, tab, the line that must NOT print, what prints instead (or the slot's silence by design)] */
+/**
+ * The defence desk's "no structural dependency on magic" pool (DS-DEF-9 :: magicDependency false), every member filled
+ * for the town's name: COMPUTED through tests/helpers/drawnProse.js (TAIL-CLOSE-TESTS-C), so a re-index, a rewording
+ * or an appended wording moves the member and the anchor together. The claim is the pair's own: beside a provision that
+ * feeds the town, no wording of that pool prints.
+ */
+const NO_DEPENDENCY = poolMemberTexts({ leaf: 'defense', blockId: 'DS-DEF-9', poolKey: 'magicDependency false', slots: { settlement: 'Amarkota' } });
+/** [seed, tab, the line (or every member of the pool) that must NOT print, what prints instead (or the slot's silence by design)] */
 const NOT = /** @type {const} */ ([
   ['r2s-occupied-thorp-1', 'magic', 'Reliance on magic: None', 'Reliance on magic: Relied upon (a third of the need by provision)'],
-  ['r2s-occupied-thorp-1', 'magic', 'Nothing structural at Amarkota depends on arcane work.', 'the desk\'s relied-upon reading'],
+  ['r2s-occupied-thorp-1', 'magic', NO_DEPENDENCY, 'the desk\'s relied-upon reading'],
   ['r2r-thorp-54', 'magic', 'Reliance on magic: None', 'Reliance on magic: Relied upon'],
   ['r2r-hamlet-16', 'economics', 'Oxteha grows about two parts in five of what it eats', 'Oxteha grows about two parts in five of what it needs'],
   ['r2r-thorp-54', 'economics', 'Magical provision makes up about a quarter of what it eats.', 'Magical provision makes up about a quarter of what it needs.'],
@@ -104,7 +112,8 @@ describe('TAIL-DISPLAY-ECON-2 batch 2: the reliance reading counts the food prov
   }, 120000);
 
   test.each(NOT)('%s (%s) does not print "%s"; instead: %s', (seed, tab, line) => {
-    expect(textOf(town(seed), tab)).not.toContain(line);
+    const text = textOf(town(seed), tab);
+    for (const member of [line].flat()) expect(text).not.toContain(member);
   }, 120000);
 
   test.each(TWIN)('%s (%s) prints the twin "%s"', (seed, tab, line) => {
