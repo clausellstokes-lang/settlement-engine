@@ -537,3 +537,37 @@ The instruments' scripts (scratch, not committed): the T18 measure walks corpus.
 `factsOf`/`atomHolds`; T19's walks `relationships[]` with each end's `institution.key` through
 `partitionDefenseInstitutions`; the field diff the 20-line walk. Its census runs (before at 2f2f9f12d, after at this batch) were
 in the session's scratch and are gone: the successor's before-run is a fresh run at this batch's tip.
+
+## TAIL-TIES-5 (2026-11-15): ruling (T22), the first-paint break
+
+**The merge.** I merged the joined line `lane/join-2026-11-14` at `bd57eb02c` as a merge commit of its own (`17d03c8f`), the only merge. All work ran in a scratch worktree with its own `npm ci`.
+
+**The cure (this lane's own edge, CONFIRMED).** The brief said `rulingBody.js` reached a generator module. The measurement says otherwise: `rulerKind.js` already imported nothing. The breach was the chunk routing:
+- `rulingBody.js` is generator-reached and unpinned, so the ESD derivation put it in EAGER `engine-core`.
+- `rulerKind.js` is pinned `coherence-lazy` (`FIRSTPAINT2_LAZY_DOMAIN`).
+- So `rulingBody.js -> rulerKind.js` was an engine-core -> coherence-lazy edge.
+
+The fix: the kind table and its predicate (`KIND_RULES`, `RULER_KINDS`, `rulerKindOfLabel`) moved verbatim to the zero-import leaf `src/domain/facts/rulerKindLabel.js`. `rulerKind.js` re-exports both and keeps `rulerKindOf`. `rulingBody.js` reads the leaf. No test, pin, budget or `vite.config.js` line was touched.
+
+Receipts:
+- `engineCoreLazyEdge`: the edge is gone; 14 bad edges became 13, and none of the 13 is this lane's.
+- The 720 births (RECORD-MEASURE-1 `births-only.sh` over CENSUS-3's `seeds.txt`) are byte-identical before and after: sha256 `68fd9687782c341b0c11035ef3d00ba2d3263742a9f84f260b68d7ee2dece65a`, 720 rows, 0 errors.
+- eslint on the 3 files: 0.
+- `rulerKind.test.js`, `rulingBody.test.js` and `factVocabulary.test.js`: green.
+
+**The boot is NOT green at this tip: 3 other causes, none in this lane's files (named, not changed):**
+1. **`src/domain/display/defenseDisplay.js:895` -> `summary/tonightSheet.js`** (`storesSpanWords`; `d98f781f` TAIL-DEFECON-D batch 1). This edge alone puts `tonightSheet`, `plotHooks`, `hookLines`, `crisisSummaryVantage`, `hookRetention`, `traditions/prose` and `humanizeEngineTokens` in eager engine-core, which accounts for 12 of the 13 remaining engineCoreLazyEdge rows. It also closes the import cycle `crisisCast | crisisHooks | defenseDisplay | plotHooks | factsOf | tonightSheet` (`layerBoundaries`). That cycle is the collection crash `undefined.face` (`crisisHooks.js:102`, `CAST_REASONS`) in `crisisCast.test.js`, `crisisCastDefenceHome.test.js`, `crisisCastEdit.test.js` and `people/dualHatReaders.test.js`. CONFIRMED by a probe that stripped the import: all four collect and pass.
+2. **`src/domain/display/threatAssessment.js:41` -> `display/clergyHouse.js`** (`a51f3628` TAIL-DISPLAY-CIVIC-2 · 2). This puts `clergyHouse.js` in engine-core, and its import of `facts/institutions.js` (coherence-lazy) is the 13th row. With causes 1 and 2 stripped (probe), engineCoreLazyEdge and vendorPdfLazy are green.
+3. **The `data <-> engine-core` chunk cycle (`bootSmoke` stage 1).** `src/data/people/dmPowerLines.js:27` -> `domain/display/powerSentenceName.js` (`bc74e40d` COHERENCE-POWERS-7 R3) closes the cycle against the long-standing engine-core -> data edges (e.g. `domain/people/hallCapture.js -> data/people/dmPowerLines.js`). bootSmoke is ALREADY RED at `ea52c0805`, the bisect's green point, with exactly this 2-chunk cycle (measured: an archive of `ea52c0805` was built and run). The bisect covered vendorPdfLazy only, and "bootSmoke is the same break" is REFUTED.
+
+Also older than this lane: `layerBoundaries` holds the 2-module cycle `defenseDisplay.js <-> factsOf.js` (`factsOf.js:37` `deriveCriminalStructure`; `defenseDisplay.js:880`, `9c0f1234` W2-C-LEAVES-9), already red at `ea52c0805`. The cure needs `defenseDisplay.js`.
+
+**`tests/lint/factLayers.walker.test.js`** is not a cycle. It is register drift from other lanes, and the cure is a register row in `factLayers.js` that each owning lane must declare:
+- the `keep` getter has no LEAVES row (`d7d7f778` COHERENCE-UPKEEP);
+- `magicSource` reads an undeclared `economicViability` (`f9b957cb` TAIL-DISPLAY-ECON · 2);
+- `crimeSignal.js` reads guild (`1022e988` COHERENCE-POWERS-7);
+- new reader lines in `contradictions.js` and the pool `DS-GEN-13::COMMERCE`.
+
+It fails the same way before and after this cure. **`tests/lint/observedShapeReaders.walker.test.js`** fails 6 rows identically before and after this cure (pre-existing).
+
+**What is left:** everything in TAIL-TIES-4's list above, plus the two bar rows: the clergy hook given to a militia captain (`hookThemes.js`, 61 towns) and the goal that runs the debt the wrong way (`goalFamilies.js`, 56). Neither was started.
