@@ -136,7 +136,10 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 
 ## 5. Item 2 at the landed tip d817736d8 (each run to a file in /home/user/j7out, read by its tail through `scripts/gate-tail.sh`)
 
-Running at the hand-back commit; filled after it.
+- (g) the corpus door's `--check`: **exit 0** (69 state blocks / 2953 variants across 6 desks, 78 causal families / 468 variants; nothing re-taken, nothing rebuilt).
+- The twelve-birth grid (`node scripts/census/page-census.mjs --grid`): **exit 0, 2 falls** (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a; two falls as at JOIN-6's 9eb084705; the count is the chair's).
+- `npm run build`: **exit 0** (run last; `dist/` removed after it).
+- The test file naming the file with a resolved conflict (a pin, merge 11): `tests/lint/proseEntryContradiction.walker.test.js` **exit 1, 28/29**: the one red is the carried pin (373 vs 375, §3, §4 [J7]). Also run at merges 12 and 14: `proseWaveGate.walker`, `composeStateProse` green; `census2dTables` 11/11.
 
 ## 6. Stops
 
@@ -164,6 +167,6 @@ A worktree at origin's tip (`git worktree add /home/user/j7wt -b join7 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. Item 2 at d817736d8 (running at this commit; §5 is filled after it), then ONE message to the chair.
+1. DONE: item 2 at d817736d8 (§5); ONE message to the chair sent.
 2. THE NEXT SWEEP (on the chair's "SWEEP" or "LAND"): at 02:01 UTC these tips were not ancestors of the line (they moved while the fifth landing ran): corpus-def cff6cd098, corpus-eco 81cd76883, crisis 0a95e14ad, defecon-c a10a457e2, display-civic c1d19f970, display-econ fcab8b63d, exports-pdf 44d3088b4, history 5ed2900cd, houses 9525e011b, powers 288be89f4, powers-b f4eab4088, services 5255ae1b0, ties f00b248fe, titles-2026-11-15 1036bf94b (new; its five lent files: a meeting in a hunk = both stand, tell the chair). Each at the tip read at its merge, in the prompt's order; (g) again after the corpus merges.
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
