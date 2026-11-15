@@ -85,6 +85,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 9 | lane/tail-close-src-2026-11-15 | 74fb74668 (07:18) | f714fb6a5 | feba6c282 | none | 10 files outside docs/; declared-move commits: none (golden carried) |
 | 10 | lane/tail-ties-2026-11-14 | 02de38883 (07:21) | ae50369d4 | 0c72335ce | none | 5 files outside docs/; declared-move commits: f65910b6e (golden carried) |
 | 11 | lane/tail-close-pools-2026-11-15 | 0711a6a39 (07:24) | 0b1248dbf | 0a30642d4 | `crisisBlindProse.test.js` (test), close-pools against crisis: the joined side whole by ruling C31, the branch's edit dropped; 8/8 green (§3) | 4 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/domain/coherence/crisisBlindProse.test.js |
+| 12 | lane/tail-close-display-2026-11-15 | bc19f7a5d (07:31) | ceeaeec84 | 029f1de88 | none | 8 files outside docs/; declared-move commits: 6cd5f374f adbe29e11 9a13dd0a4 (golden carried) |
 
 ## 3. Every code resolution
 
@@ -269,6 +270,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | ties (10) | DECLARED MOVE commits f65910b6e (field diffs in their bodies) |
 | `tests/domain/coherence/crisisBlindProse.test.js` | close-pools (11): its edit DROPPED by ruling C31, the joined (crisis) side kept whole | 8/8 green at the merged tree; the dropped hunk is in 0711a6a39 for the doors seat to read |
 | tests/domain/coherence/crisisBlindProse.test.js | close-pools (11) | merged clean though both sides moved them: the test files among them run alone at the merged tree, green ; read at the close |
+| golden | close-display (12) | DECLARED MOVE commits 6cd5f374f adbe29e11 9a13dd0a4 (field diffs in their bodies) |
 
 **[J10] every pin where the joined side was kept, by file (for the doors' seat to read each once):**
 
@@ -307,4 +309,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 11 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
+Landed through point 12 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
