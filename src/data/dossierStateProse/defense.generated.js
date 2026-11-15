@@ -557,7 +557,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "gate",
             "no crisis: under_siege",
-            "no crisis: occupied"
+            "no crisis: occupied",
+            "no crisis: monster_pressure",
+            "no crisis: wartime"
           ],
           "text": "Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
           "slots": [
@@ -1259,6 +1261,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Internal Security: court without detention": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "{settlement} has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.",
           "slots": [
             "settlement"
@@ -1267,6 +1272,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.",
           "slots": [],
           "vid": 2
@@ -1411,7 +1419,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no crisis"
+            "no crisis",
+            "food: ≥ secure"
           ],
           "text": "Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.",
           "slots": [
@@ -1508,7 +1517,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "{settlement}'s pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+          "text": "{settlement} is always short of money for its defence: whoever is called to defend it is paid late or not at all, and is slow to turn out when trouble comes.",
           "slots": [
             "settlement"
           ],
@@ -1519,7 +1528,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "The people who would have to hold {settlement} through something are already owed, and they have not forgotten it.",
+          "text": "The people who would have to hold {settlement} through something know there is no money to pay them for it.",
           "slots": [
             "settlement"
           ],
@@ -1751,7 +1760,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "{settlement}'s food trades are failing, so little food is being put by; if the town were cut off, it would have less to fall back on.",
+          "text": "{settlement}'s food trades are failing, so less food is being put by than should be; if the town were cut off, it would have less to fall back on than it ought.",
           "slots": [
             "settlement"
           ],
@@ -1762,7 +1771,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "The food trades at {settlement} are struggling to keep up, and little is being put by against the town being cut off.",
+          "text": "The food trades at {settlement} are struggling to keep up, and less is being put by against the town being cut off than ought to be.",
           "slots": [
             "settlement"
           ],
@@ -2587,7 +2596,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: threat, unrest"
           ],
-          "text": "{settlement} is a quiet town. Things are taken occasionally and the taking does not spread, because the people who would spread it are known.",
+          "text": "Crime at {settlement} stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.",
           "slots": [
             "settlement"
           ],

@@ -2824,7 +2824,7 @@ supplies the ancestry.
 
 **`Beasts & Monsters`: `plagued`, perimeter AND organized force**
 1. `[ledger · colour]` The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly.
-2. `[street · gate · no crisis: under_siege · no crisis: occupied]` Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
+2. `[street · gate · no crisis: under_siege · no crisis: occupied · no crisis: monster_pressure · no crisis: wartime]` Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
 3. `[unfolding · colour]` {settlement}'s walls and fighters face the creatures season after season.
 4. `[visitor · colour]` {settlement} keeps its wall against the creatures, and nobody walks out past it unarmed.
 
@@ -2911,8 +2911,8 @@ supplies the ancestry.
 3. `[visitor · colour]` Bring a complaint at {settlement} and it gets a hearing, not a favour.
 
 **`Internal Security`: court without detention** {colour}
-1. `[ledger]` {settlement} has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.
-2. `[street]` The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
+1. `[ledger · no crisis: under_siege]` {settlement} has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.
+2. `[street · no crisis: under_siege]` The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
 3. `[unfolding]` The fines {settlement} hands down cannot be enforced, so each unpaid fine makes the next one easier to ignore.
 
 **`Internal Security`: detention without process** {colour}
@@ -2933,7 +2933,7 @@ supplies the ancestry.
 5. `[ledger · crisis: debt]` The debt takes much of what {settlement} earns, but what is left still keeps the town's own business running.
 6. `[street · crisis: debt]` People in {settlement} complain of what the creditor takes, but the town still meets its payments.
 7. `[unfolding · crisis: debt]` {settlement} cannot pay off what it owes, but it can carry the debt, and for now it does.
-8. `[street · no crisis]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
+8. `[street · no crisis · food: ≥ secure]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
 9. `[ledger · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · prosperity: ≥ poor]` Whatever the present trouble costs {settlement}, the town is paying it from money it had put by.
 10. `[street · crisis: famine]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
 11. `[visitor · crisis: famine]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
@@ -2946,8 +2946,8 @@ supplies the ancestry.
 3. `[threshold]` {settlement} can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
 
 **`Economic Survival`: `WEAK`** {colour}
-1. `[ledger · guardPresence]` {settlement}'s pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.
-2. `[street · guardPresence]` The people who would have to hold {settlement} through something are already owed, and they have not forgotten it.
+1. `[ledger · guardPresence]` {settlement} is always short of money for its defence: whoever is called to defend it is paid late or not at all, and is slow to turn out when trouble comes.
+2. `[street · guardPresence]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
 3. `[unfolding]` {settlement} has been short of money for years, and each lean season leaves less to spend when a real crisis comes.
 4. `[ledger · no guardPresence]` {settlement} pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
 5. `[street · no guardPresence]` If {settlement} ever had to hire people to defend it, it would have to borrow the money first.
@@ -2988,8 +2988,8 @@ in about two towns in five that keep a force.
 6. `[street · crisis: under_siege · food: famine]` The siege has brought hunger to {settlement}, and what its food trades put by is rationed now.
 
 **CHAIN: food trades failing** {colour}
-1. `[ledger · no crisis: under_siege]` {settlement}'s food trades are failing, so little food is being put by; if the town were cut off, it would have less to fall back on.
-2. `[street · no crisis: under_siege]` The food trades at {settlement} are struggling to keep up, and little is being put by against the town being cut off.
+1. `[ledger · no crisis: under_siege]` {settlement}'s food trades are failing, so less food is being put by than should be; if the town were cut off, it would have less to fall back on than it ought.
+2. `[street · no crisis: under_siege]` The food trades at {settlement} are struggling to keep up, and less is being put by against the town being cut off than ought to be.
 3. `[unfolding · no crisis: under_siege]` {settlement}'s food trades are failing, and each season they fail the town has less put by to fall back on if it is cut off.
 4. `[ledger · crisis: under_siege]` {settlement} is cut off now, and its food trades were failing before the siege began, so less was put by than there should have been.
 5. `[street · crisis: under_siege]` With {settlement} cut off, people count the stores every week, and the food trades that should have filled them were failing before the siege began.
@@ -3052,7 +3052,7 @@ reading rather than a settled one.
 4. `[counterforce · watch · crisis: any]` There is money at {settlement} and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
 
 **`Safe`** {crisis-scoped}
-1. `[street · crisis: any · no crisis: threat, unrest]` {settlement} is a quiet town. Things are taken occasionally and the taking does not spread, because the people who would spread it are known.
+1. `[street · crisis: any · no crisis: threat, unrest]` Crime at {settlement} stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.
 2. `[ledger · crisis: any]` The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.
 3. `[visitor · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
 
@@ -5140,7 +5140,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 **DIRECTION: `worsening` · CRISIS: `famine`** {crisis: famine}
 1. `[local · tier: ≥ village]` The famine in {settlement} is getting worse: the rations shrink each week, and the queues for them grow longer.
 2. `[official]` Each week more people in {settlement} go hungry, and those in charge have not stopped it.
-3. `[trade]` Food costs more in {settlement} each week, and less of it comes in than the town needs.
+3. `[trade]` Food costs more in {settlement} each week, and there is less of it than the town needs.
 4. `[traveller]` In {settlement} you see thin faces at every door, and more of them each time you pass through.
 
 **DIRECTION: `stable` · CRISIS: `famine`** {crisis: famine}
@@ -5159,7 +5159,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 1. `[local]` The occupation of {settlement} has settled in, and nobody there expects it to end this year.
 2. `[traveller]` The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them.
 3. `[official]` {settlement}'s own leaders still protest the occupation, and the occupiers still ignore them; nothing has changed in months.
-4. `[trade]` Merchants in {settlement} pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+4. `[trade · market]` Merchants in {settlement} pay the occupiers the same share of every sale, season after season, and have learned to price it in.
 
 **DIRECTION: `easing` · CRISIS: `occupied`** {crisis: occupied}
 1. `[local]` The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for questioning.
@@ -5168,8 +5168,8 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 **DIRECTION: `worsening` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
 1. `[local]` The quarrel among {settlement}'s powers grows sharper each week, and neighbours who took different sides have stopped speaking.
 2. `[official]` Each power in {settlement} now blocks the others more often than it acts, and less gets decided every season.
-3. `[traveller]` Ask who governs {settlement} and you get a different answer in every street, and the answers are angrier than they were.
-4. `[watch]` Fights between {settlement}'s powers break out more often now, and each side keeps its own people close at hand.
+3. `[traveller]` Ask who governs {settlement} and you get a different answer depending on whom you ask, and the answers are angrier than they were.
+4. `[watch]` Each of {settlement}'s powers keeps its own people close at hand now, and watches the others more warily every week.
 
 **DIRECTION: `stable` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
 1. `[local]` {settlement}'s powers have settled into a stand-off: none gains ground, and none gives any.
@@ -5241,8 +5241,8 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 
 **DIRECTION: `stable` · CRISIS: `succession_void`** {crisis: succession_void}
 1. `[official]` {settlement} still has no one in charge, and no claimant is any closer to taking the seat.
-2. `[local]` Life in {settlement} goes on without a leader: the old officers do what they did before, and nobody does anything new.
-3. `[trade]` Nothing large is agreed in {settlement} until someone is in charge, so merchants deal season to season and promise nothing longer.
+2. `[local]` Life in {settlement} goes on without a leader: what was done before is still done, and nobody begins anything new.
+3. `[trade · market]` Nothing large is agreed in {settlement} until someone is in charge, so merchants deal season to season and promise nothing longer.
 4. `[newcomer]` Ask who leads {settlement} and you hear several names, each from someone who backs a different one.
 
 **DIRECTION: `easing` · CRISIS: `succession_void`** {crisis: succession_void}
@@ -5264,10 +5264,10 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 2. `[trade]` More carts reach {settlement} again as the roads grow safer.
 
 **DIRECTION: `worsening` · CRISIS: `insurgency`** {crisis: insurgency}
-1. `[official]` Each week more of {settlement}'s officials stop answering to those in charge, and their orders go unheeded.
+1. `[official]` Each week fewer people at {settlement} answer to those in charge, and more of their orders go unheeded.
 2. `[local]` More of {settlement}'s households side openly with the power that defies the government now, and stop paying it their dues.
-3. `[trade]` Fewer merchants in {settlement} pay what the government asks, and more pay its rivals instead.
-4. `[watch]` Those in charge of {settlement} trust fewer of their own officers each week, and cannot tell which have changed sides.
+3. `[trade · market]` Fewer merchants in {settlement} pay what the government asks, and more pay its rivals instead.
+4. `[watch]` Those in charge of {settlement} trust fewer of the people around them each week, and cannot tell who has changed sides.
 
 **DIRECTION: `stable` · CRISIS: `insurgency`** {crisis: insurgency}
 1. `[official]` The quarrel over who rightly governs {settlement} has stalled: neither side gives ground, and both collect what dues they can.
@@ -5282,7 +5282,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 2. `[official]` Each week both faiths in {settlement} ask more of those in charge, and every answer angers one side.
 
 **DIRECTION: `stable` · CRISIS: `religious_conversion`** {crisis: religious_conversion}
-1. `[local]` The quarrel over {settlement}'s faith has settled into habit: each household keeps the rite it has chosen, and the neighbours do not ask.
+1. `[local]` The quarrel over {settlement}'s faith is no nearer an end: each household keeps the rite it has chosen, and neither side is winning more of them.
 2. `[official]` The contest over {settlement}'s faith is neither won nor lost; both rites are kept, and neither is gaining.
 3. `[newcomer]` Newcomers to {settlement} are soon asked which rite they keep, and the answer decides who will deal with them.
 4. `[trade]` Feast days in {settlement} are kept twice over now, once by each faith, and traders have learned to keep both.
@@ -5292,7 +5292,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 2. `[official]` Fewer disputes over faith reach {settlement}'s leaders now, and the two rites keep to their own days.
 
 **DIRECTION: `worsening` · CRISIS: `slave_revolt`** {crisis: slave_revolt}
-1. `[local]` The revolt in {settlement} spreads to more work gangs each week, and less of the work gets done.
+1. `[local]` The revolt in {settlement} spreads further each week, and less of the work gets done.
 2. `[official]` Each week of the revolt costs {settlement}'s owners more labour, and those in charge still have no answer.
 3. `[watch]` More of {settlement}'s enslaved join the revolt each week, and those set to watch them are too few.
 4. `[trade]` Less of what {settlement} sells is being made, and buyers have started looking elsewhere.
