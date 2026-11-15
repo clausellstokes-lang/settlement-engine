@@ -623,7 +623,7 @@ describe('A0b — the text claims every declared field and no other', () => {
     // 268 -> 295 at MERGE-WAVE's W2 DEF merge point (2026-11-08, the chair's ruling): W1 ECO's twenty-seven new pools carrying
     // the under-claim debt above (DS-ECO-9 8, DS-GEN-13 5, DS-ECO-12 4, DS-ECO-6 4, DS-ECO-8 3, DS-ECO-11 2, DS-SUP-2 1).
     // 240 -> 247 at WIRING W3 C1-C6 (2026-11-07): the seven pools above carry the under-claim debt they owe.
-    expect(pools.size).toBeLessThanOrEqual(304); // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (240 -> 302) // W2-WRITE FTH-4 heresy without a church (2026-11-13): 302 -> 303, a pool whose new lines owe the census's under-claim debt (the line names less than the pool reads) // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 303 -> 304, a pool whose new lines owe the census's under-claim debt (the line names less than the pool reads)
+    expect(pools.size).toBeLessThanOrEqual(305); // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (240 -> 302) // W2-WRITE FTH-4 heresy without a church (2026-11-13): 302 -> 303, a pool whose new lines owe the census's under-claim debt (the line names less than the pool reads) // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 303 -> 304, a pool whose new lines owe the census's under-claim debt (the line names less than the pool reads) // TAIL-CORPUS-ECO-4 · C23 (2026-11-15, 7ab28d3ef7; the chair's ruling A0B2 at the close): 304 -> 305, DS-GEN-16 :: LEGACY-SHIFTED: its re-worded line (the age claim joined to the calamity it dates) owes the census's under-claim debt (the line names less than the pool reads: `hist.legacyAnnotations`); measured by armA0b at 9d3d177a0 (304) and at 8c11f73ea (305)
   });
 });
 
