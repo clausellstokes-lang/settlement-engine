@@ -28,6 +28,47 @@
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { declarationAdmits } from '../../domain/facts/factVocabulary.js';
 import { TERRAIN_NARRATIVE_HOOKS } from '../../data/narrativeData.js';
+import { FOUNDER_KIND } from '../../domain/facts/founder.js';
+/**
+ * A FOUNDER AND AN ORIGIN ROW THAT CANNOT BOTH BE (TAIL-NARRATIVE, the chair's ruling (N3); FA as measured by
+ * RECORD-MEASURE-1, class a: 154 of 720 towns at the joined line). The Origin rows that name WHO began the place by
+ * their KIND (a group: herders, fishers, a military post, a religious settlement, a fair's traders), each with the
+ * founder kinds (`domain/facts/founder.js :: FOUNDER_KIND`) that can be that who. `oneFounderRow` resolves a row whose
+ * agent the founder cannot be draw-free onward to a row that agrees, as it does for the rows that name a person.
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+export const ORIGIN_AGENT_KINDS = Object.freeze({
+  'began as a naval base protecting the coast': ['military', 'crown', 'noble'],
+  'was established as a defensive stronghold that attracted dependents': ['military', 'crown', 'noble'],
+  'was established as a frontier outpost that outlasted its original purpose': ['military', 'crown', 'noble'],
+  'developed at a defensible position on the road': ['military', 'crown', 'noble', 'community'],
+  'began as a toll collection point that became a permanent post': ['crown', 'noble', 'military', 'trade'],
+  'began as a customs post where trade roads crossed': ['crown', 'noble', 'military', 'trade'],
+  'began as a grain storage depot for a larger city that no longer exists': ['crown', 'noble', 'trade'],
+  'developed around a sacred grove that attracted religious settlement': ['religious', 'healer', 'community', 'family'],
+  'developed where herders gathered seasonally until the gathering became permanent': ['family', 'community'],
+  'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons': ['family', 'community'],
+  'started as a seasonal camp beside a dependable river fishery and became permanent when traders began stopping there': ['family', 'community', 'trade'],
+  'began as a mining camp that became permanent when families arrived': ['family', 'community', 'trade'],
+  'was built where two rival mining operations agreed to share infrastructure': ['trade'],
+  'grew from a logging camp': ['family', 'community', 'trade'],
+  'grew from a seasonal fair that became year-round as traders chose to winter here': ['trade', 'community'],
+  'developed from a hidden refuge community that emerged after a generation': ['community', 'religious', 'family'],
+  'began as a hunting lodge settlement for a noble who died without heirs': ['noble'],
+  'grew from a single household that others joined over decades until it became permanent': ['family'],
+  'began when a merchant realised the local sheep produced finer wool than anything available on the open market': ['trade'],
+  'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield': ['military'],
+  'grew from a fishing village into a maritime hub': ['family', 'community', 'trade'],
+});
+/**
+ * Can this founder be the Origin row's agent? A row not in `ORIGIN_AGENT_KINDS` names no agent and agrees with anyone.
+ * @param {unknown} reason the Origin row @param {unknown} foundedBy the "Founded by:" row @returns {boolean}
+ */
+export const agentAgrees = (reason, foundedBy) => {
+  const kinds = ORIGIN_AGENT_KINDS[String(reason)];
+  return !kinds || kinds.includes(/** @type {Record<string, string>} */ (FOUNDER_KIND)[String(foundedBy || '').trim()] || 'other');
+};
+
 
 /**
  * @typedef {object} FoundingState
@@ -202,13 +243,14 @@ export const FOUNDER_AGREES = /** @type {ReadonlyMap<string, ReadonlySet<string>
  * @returns {string | null}
  */
 export const oneFounderRow = (pool, reason, foundedBy, admits, state) => {
-  if (!state || reason == null || !NAMES_A_FOUNDER.has(String(reason))) return reason;
-  if (FOUNDER_AGREES.get(String(reason))?.has(String(foundedBy))) return reason;
+  const agentRefused = reason != null && !agentAgrees(reason, foundedBy); // FA (ruling N3): a group the founder cannot be
+  if (!state || reason == null || (!NAMES_A_FOUNDER.has(String(reason)) && !agentRefused)) return reason;
+  if (!agentRefused && FOUNDER_AGREES.get(String(reason))?.has(String(foundedBy))) return reason;
   const at = pool.indexOf(reason);
   for (let k = 1; k < pool.length; k++) {
     const row = pool[(at + k) % pool.length];
     const test = admits[String(row)];
-    if ((test && !test(state)) || NAMES_A_FOUNDER.has(String(row))) continue;
+    if ((test && !test(state)) || NAMES_A_FOUNDER.has(String(row)) || !agentAgrees(row, foundedBy)) continue;
     return row;
   }
   return null;
