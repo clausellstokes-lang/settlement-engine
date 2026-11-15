@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '4e2e2dfbb830302a9f7ad93c17ccd39c4eb3bca0876e692d2668ffb112635f66',
-    replay: 'a4eebdfbb85f19af94cf1a7803a53d087a1e46859d5d8d259546b7ffde1701e7',
+    derived: '08527941eada6d7d664b3ec337881a8c7f6903a88d5901d5e0ef61fb4e0cb02f',
+    replay: 'c0a716d64a84fd79ebf4e1947459eb34aaaaf6438162b56b6f02823668249dde',
   }),
   21: Object.freeze({
-    derived: 'f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662',
-    replay: '69c46ce542681449b420576c69191385f3959f939a872e1aae9dcf54a6b70687',
+    derived: '7ae632298ed95e73deedbced63bf64ae9662cf45f61b8d8bfa02e7b2fcc5ee6b',
+    replay: '5bcf025079a5ac8a9f7dc123c11c98bb8e93ca5ae13e80e212b488f77a1042cd',
   }),
   42: Object.freeze({
-    derived: '6e83fa8a8459ff8b9ffd2ea42d4edc06c02d682bd9310c083a4e8c6a3930c6dd',
-    replay: 'f40acc529b4fd137982fdba6d60b754a9fe6ed6e2429b0e8ef43c9d159d614f3',
+    derived: '44fa55fe0638e7f0f04a2fb3a6348cfd225a25ce626d51ce7b843a7fc573aa60',
+    replay: '3e41fd9eede5e48d2c9de8d1bdf6e992f32771f60026fa6c2f96b2951c823769',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -271,6 +271,13 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4...; the same removal on the line's file reproduces 12c437de4's
 // blob, sha256 62e16d59..., byte for byte; COHERENCE-AGREE rewrote the step, so 12c437de4's copy would revert the lane) planted over a COPY of the merged tree and the live step produced the SAME six digests (cmp-equal,
 // the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
+
+// ── RE-CAPTURED 2026-11-15, THE CLOSE OF THE TAIL ROUND (TAIL-CLOSE-DOORS-3), BY THE SAME PLANT ── Rows 0, 21, 42 moved by the round's
+// declared moves (docs/shift-records/2026-11-15-the-close-of-the-tail-round.json; among them the resource generator's 9a3239ae7, R3-CODE-C-2),
+// re-captured at the line's final tree (f76fe38fd, the doors at 752d74a15) with the golden master in the same commit. Re-captured: THE LANE-ERA
+// pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4..., unchanged since point 47) planted over a COPY
+// of the tree and the live step produced the SAME six digests (cmp-equal); on every row the fresh generation equals the dormant re-derivation.
+// Row 21's `derived` is the re-recorded golden's control row (7ae63229, town|germanic|plains|road|civilized).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

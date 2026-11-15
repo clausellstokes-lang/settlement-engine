@@ -286,9 +286,14 @@ describe('MG-4.1 — the mundane realm, measured across every member', () => {
  * MEASURED (seed 'mg4-acceptance-1', small/realistic_regional/highIsland). ALL FIVE AXES the
  * envelope compares, mundane vs magical, machine-checked by the last pin in MG-4.2 against
  * this very line — see THE RECORD IS CHECKED below:
- *   RECORDED-CENSUS: members 5 vs 5 · institutions 99 vs 102 · factions 12 vs 11 · services 121 vs 124 · historyEvents 17 vs 17
- * Ratios: members 1.000 · institutions 0.971 · factions 1.091 · services 0.976 ·
+ *   RECORDED-CENSUS: members 5 vs 5 · institutions 99 vs 102 · factions 12 vs 11 · services 119 vs 122 · historyEvents 16 vs 16
+ * Ratios: members 1.000 · institutions 0.971 · factions 1.091 · services 0.975 ·
  * historyEvents 1.000 — the mundane realm is at or above parity on three of five axes.
+ * ⚠️ RE-RECORDED 2026-11-15 (the close of the tail round, TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the
+ * chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json), BOTH TWINS MOVE: services 121 vs 124 ->
+ * 119 vs 122 (0.976 -> 0.975), history events 17 vs 17 -> 16 vs 16, by the round's declared services and history lanes'
+ * moves; members, institutions and factions hold; every ratio inside PENDING_BANDS. Copied from the MG-4.2 pin's own measured
+ * line at the golden's tree 8c11f73ea; this header and DESIGN_REALM_MAGIC_TOGGLE.md's MG-4 landed block moved in ONE act.
  * ⚠️ RE-RECORDED 2026-11-12 (COHERENCE-POWERS 2B, lane/coherence-powers-2026-11-11), ONE SAME-SEED SHIFT, THE MAGICAL TWIN
  * MOVES: factions 12 vs 12 → 12 vs 11 (1.000 → 1.091). At the density resize, a power of the ruler's own kind that no house
  * stands behind is folded into the ruler (power/rulerKin.js :: settleHouselessPowers); one of the magical twin's twelve is

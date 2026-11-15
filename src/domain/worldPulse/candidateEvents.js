@@ -247,10 +247,17 @@ export function supersedeLegacyRecordModeProposals(worldState, context = {}) {
 const GRANARY_BOOKS_REASON = 'The granary books show less of a shortage than the talk says.';
 
 /**
+ * The snapshot as the condition's fact reads it: a town's record by id (the shape ledgerCorroboratedPressure reads).
+ * @typedef {{ byId?: { get?: (id: string) => ({ settlement?: unknown }|undefined) } }|null|undefined} ConditionFactSnapshot
+ */
+
+/**
  * The condition's in-world fact, resolved where it is drawn (TAIL-CONTENT-CLOSE-1, 2026-11-15): a kind whose fact
  * names a thing (heraldDeeds.js :: CONDITION_FACT_SIBLINGS) is read against the town's own record in the snapshot,
  * and its twin prints where the thing is absent or the record is unanswered. Every other kind prints its `fact`.
- * @param {any} voice @param {any} pressure @param {any} snapshot
+ * @param {{ fact: (n: string) => string }} voice the kind's CONDITION_DEEDS row
+ * @param {{ kind?: string, settlementName: string, settlementId?: string|number }} pressure
+ * @param {ConditionFactSnapshot} snapshot
  * @returns {string}
  */
 function conditionFactOf(voice, pressure, snapshot) {
@@ -267,7 +274,7 @@ function conditionFactOf(voice, pressure, snapshot) {
   return text(pressure.settlementName);
 }
 
-function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null, /** @type {any} */ snapshot = null) {
+function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null, /** @type {ConditionFactSnapshot} */ snapshot = null) {
   if (!pressure || pressure.score < 0.5) return null;
   const archetypeByKind = {
     food: 'famine',
