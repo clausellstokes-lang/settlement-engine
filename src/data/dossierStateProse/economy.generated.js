@@ -3755,7 +3755,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: famine"
           ],
-          "text": "{settlement}'s own food comes from its {good} and little else, so one bad year for the {good} would cost the whole town dear.",
+          "text": "{settlement}'s own food comes first of all from its {good}, so one bad year for the {good} is felt across the whole town.",
           "slots": [
             "settlement",
             "good"
@@ -3767,7 +3767,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The food {settlement} raises for itself all goes back to the {good}, and after a poor season for the {good} there is less to go round.",
+          "text": "Of the food {settlement} raises for itself, its {good} comes first, and after a poor season for the {good} there is less to go round.",
           "slots": [
             "settlement",
             "good"
@@ -3779,7 +3779,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: famine"
           ],
-          "text": "{settlement} has little food of its own but its {good}, so a bad season for the {good} is felt at every table.",
+          "text": "{settlement} leans first on its {good} for its food, so a bad season for the {good} is felt at every table.",
           "slots": [
             "settlement",
             "good"

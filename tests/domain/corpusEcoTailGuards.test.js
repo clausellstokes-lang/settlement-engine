@@ -120,6 +120,10 @@ const GONE = [
   { seed: 'r2r-hamlet-15', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /no guild between seller and buyer/, prints: 5, why: 'a Merchant Guilds power, Dominant: "no guild between seller and buyer" (C19; v3 + `no guild`, the twin v5)' },
   { seed: 'r2r-village-0', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /without a guild's leave/, prints: 5, why: 'a guild power stands: "without a guild\'s leave" (C19; v1 + `no guild`, the twin v5)' },
   { seed: 'r2s-occupied-village-2', pool: 'DS-GEN-13::COMMERCE: a market, no guild', gone: /nobody's leave but the stall-keeper's/, prints: 5, why: 'an occupation and a guild power: "with nobody\'s leave but the stall-keeper\'s" (C19; v4 + `no guild · no crisis: occupied`, the twin v5)' },
+  // ── BATCH 8 (ruling C20: a lone food source is not "the whole" beside a farm house or a harvest income; no atom reads that gate, so the family is REWORDED to the twin's claim, "first") ──
+  { seed: 'r2r-thorp-3', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /and little else/, prints: 1, why: 'a farm house or a harvest income beside the one named source: "comes from its {good} and little else" (C20; v1 now "comes first of all from its {good}")' },
+  { seed: 'r2r-thorp-9', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /all goes back to the/, prints: 2, why: 'the same: "all goes back to the {good}" (C20; v2 now "its {good} comes first")' },
+  { seed: 'r2r-thorp-8', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /little food of its own but/, prints: 3, why: 'the same: "has little food of its own but its {good}" (C20; v3 now "leans first on its {good}")' },
 ];
 /** @type {ReadonlyArray<KeepRow>} */
 const KEEP = [
