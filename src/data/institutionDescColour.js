@@ -117,7 +117,7 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "Evaporation pans and brine-works for making salt whenever brine can be had, and no household does without salt.": COLOUR,
   "Broad evaporation pans, where salt is won from brine whenever brine can be had. Salt is a necessity in every home.": COLOUR,
   "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known best: which trails are safe and which are not.": COLOUR,
-  "Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.": COLOUR,
+  "Whenever game can be had, it sends out hunting parties over the surrounding country and brings back venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.": COLOUR,
   "Local produce and wares. Held under charter.": COLOUR,
   "A weekly sale of local goods. A charter from crown or lord is required.": COLOUR,
   "The village's one inn for the traders, pilgrims, and wayfarers who pass. Beds, a stable, and a shared table.": COLOUR,

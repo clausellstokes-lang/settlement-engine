@@ -1232,7 +1232,7 @@
     },
     {
       "id": "village|Economy|Hunter's lodge#1",
-      "text": "Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.",
+      "text": "Whenever game can be had, it sends out hunting parties over the surrounding country and brings back venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.",
       "needs": [],
       "excludes": [],
       "crisis": [],

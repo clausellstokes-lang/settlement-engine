@@ -300,7 +300,7 @@ const PAIRS = [
   ],
   [
     "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known best: which trails are safe and which are not.",
-    "Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.",
+    "Whenever game can be had, it sends out hunting parties over the surrounding country and brings back venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.",
   ],
   [
     "Local produce and wares. Held under charter.",
@@ -2271,5 +2271,16 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
   "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.": Object.freeze([
     Object.freeze({ text: "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.", excludes: Object.freeze(['rival power']) }),
     Object.freeze({ text: "A handful of rich merchant houses hold the seat of power here; a political post is, in practice, something one purchases.", twinOf: "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases." }),
+  ]),
+  // TAIL-HOUSES-5 batch 11 (the three rows left; READ-ALL B11971, B06555): the customs house's no-docks twins name "the main
+  // roads" where the town is isolated (6 of 71, 1 of 36). A twin's own twin is not read at the draw (it takes the first
+  // `twinOf` only), so the third text is resolved here, at the late re-read, on the route (draw-free; the route is final).
+  "Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials.": Object.freeze([
+    Object.freeze({ text: "Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials.", excludes: Object.freeze(['route: isolated']) }),
+    Object.freeze({ text: "Levies duties on goods entering and leaving by road. Run by royal or municipal officials.", twinOf: "Levies duties on goods entering and leaving by the main roads. Run by royal or municipal officials." }),
+  ]),
+  "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.": Object.freeze([
+    Object.freeze({ text: "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.", excludes: Object.freeze(['route: isolated']) }),
+    Object.freeze({ text: "Duties are taken here on goods passing along the road. Royal or municipal officers run it.", twinOf: "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it." }),
   ]),
 });

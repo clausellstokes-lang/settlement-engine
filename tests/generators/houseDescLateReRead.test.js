@@ -105,7 +105,7 @@ describe('TAIL-HOUSES-5 batch 8: the late re-read reaches a house description (H
   });
 
   test('the table: every key is an original with one twin, and none is a colour line', () => {
-    expect(Object.keys(DESC_LATE_SIBLINGS)).toHaveLength(6);
+    expect(Object.keys(DESC_LATE_SIBLINGS)).toHaveLength(8);
     for (const [key, set] of Object.entries(DESC_LATE_SIBLINGS)) {
       expect(set).toHaveLength(2);
       expect(set[0].text).toBe(key);
