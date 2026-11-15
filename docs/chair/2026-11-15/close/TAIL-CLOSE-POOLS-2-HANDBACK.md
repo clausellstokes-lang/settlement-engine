@@ -9,7 +9,8 @@ Every run went to a file in the seat's scratch tree (outside the main checkout, 
 | 1 | `tests/lint/styleLaw.walker.test.js` (the two historyData rises) | 935b84212 | CURED (the file stays red on three rises not this seat's) |
 | 2 | `tests/generators/hookTruthAtBirth.test.js` (2) | 3db549883 | RE-KEYED BY IDENTITY, both: two declared moves of the history's data lane |
 | — | merge of the joined line at f714fb6a5 (the chair's SWEPT) | b45905897 | merged; the reds re-run there |
-| 3 | owed by batch 6 (ed9f3b549): the presumed-things walker, the grid, its guard | (red 3's commit) | the grid: no rise; the walker: 3 fresh rows NAMED; the guard brought to the anchoring helpers and one row re-keyed |
+| 3 | owed by batch 6 (ed9f3b549): the presumed-things walker, the grid, its guard | bb7b3ede3 | the grid: no rise; the walker: 3 fresh rows NAMED; the guard brought to the anchoring helpers and one row re-keyed |
+| 4 | `tests/data/w2FixData6Rows.test.js` (2) | (red 4's commit) | RE-KEYED BY IDENTITY, both: two declared moves |
 
 ## 1 · the style walker's two historyData rises: CURED
 
@@ -73,3 +74,19 @@ lane/w2-fix-data-2026-11-13 at 166d8b789); inside that branch:
   and every first-parent point after (no broker, no twin). RE-KEYED BY IDENTITY to r2r-hamlet-41 (the broker refused, the twin on
   the slot; one of the five census towns that print the twin).
 - Proof: the file alone, before 1 failed / 3 (the MUST NOT row 10); after 3 / 3. eslint 0; `typecheck:ratchet` 0.
+
+## 4 · w2FixData6Rows (2): RE-KEYED BY IDENTITY, two declared moves
+
+The two reds at the joined tip (and at f714fb6a5): the Brewer row (ww-1416) and the chair's added row for row 4 (ww-924); the
+three-dot diff of the file is empty on every `lane/tail-*` branch (only merges of the joined line touch it): not moving.
+- The Brewer row: r2s-monster_pressure-village-1's Brewer keeps only "Ale (jug)". Its twin was green at 8f222ff87 (JOIN-1 · 5,
+  where 2a522e633 landed); the first-parent bisect turns at 33b12cbef (JOIN-1 · 9, lane/coherence-upkeep at c56fd565e); inside
+  it c19e96e23 (COHERENCE-UPKEEP: "services are kept as far as the place can pay", 439 rows removed in 175 of the 360, declared)
+  drops this Struggling village's barrel row (present at 11662262e, gone at c19e96e23). Not a regression of the services' data:
+  the row is gone, not false. No town of the 720 keeps a barrel row where no alehouse stands now; re-keyed to r2r-village-138
+  (the census plan at four times its scale; no tavern, the households twin printing), the alehouse town r2r-village-15 unmoved.
+- Row 4's added row: the five towns' top income row reads "Harvest" where the pin wanted "Agricultural Rents": TAIL-DEFECON-2
+  batch 2 (df2fa5ca9, a DECLARED MOVE of the income family, D10: the rents row's twin where no lord's man stands, 329 towns).
+  Re-keyed by identity through the treasury's own table (`INCOME_SOURCE_FORMS`: both titles `land_rents`, "the same home"); the
+  claim that no house description says its trade is the whole living is unchanged.
+- Proof: the file alone, before 2 failed / 9; after 9 / 9. eslint 0; `typecheck:ratchet` 0. No source changed.
