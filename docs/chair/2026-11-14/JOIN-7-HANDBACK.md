@@ -57,6 +57,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | 22 | tail-narrative-2026-11-14 (SWEEP) | ca827fc0f (02:37) | 9bd853fd0 (JOIN-6 7) | e6a888e1f | none | lane-only `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json`; DECLARED MOVES b6a0c074c (settlementReason 340), ca827fc0f (pressureSentence 7): golden carried |
 | — | tail-powers-2026-11-14 (SWEEP) | a207c871b (02:41) | d68805134 | — | **STOP**: code conflict, `governanceAccount.js` (§6) | aborted; the chair's ruling awaited |
 | 24 | tail-powers-b-2026-11-14 (SWEEP) | f4eab4088 (02:42) | f89c0d7c1 (6) | 6ad86c138 | none | DECLARED MOVES cddbc3274 (factions[].powerLabel), 42f7f68c2 (factionRelationships[].direction 15): golden carried |
+| 25 | tail-defecon-2026-11-14 (SWEEP) | 21e578caa (02:45; holds a merge of the line at d817736d8) | d817736d8 (14) | 1b672cbe8 | none | clean-both CODE `foodBalance.js` :: deriveSupplyRiskAnalysis (crisis 19's hook words at 851, this lane's condition at 848: both stand), `presumedThings.widened.register.json` (parses); DECLARED MOVE 2ac50c55d: golden carried |
 
 ## 3. Every code resolution
 
@@ -151,6 +152,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden; `npcData.STRESS_ECONOMIC_EFFECTS.json`; `generationForkCensus.test.js` (re-keyed in the lane) | ties (21) | DECLARED MOVES f00b248fe (relationships[].proseVariant 248, description/tension 245), 112532f64 (npcs[].structuralPosition 98) |
 | golden; `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json` | narrative (22) | DECLARED MOVES b6a0c074c (settlementReason, 340 towns), ca827fc0f (pressureSentence, 7) |
 | golden | powers-b (24) | DECLARED MOVES cddbc3274 (powerStructure.factions[].powerLabel), 42f7f68c2 (factionRelationships[].direction, 15 towns) |
+| golden; `foodBalance.js` (read at the close); `coherenceAgreeCures.test.js` | defecon (25), crisis (19) | DECLARED MOVE 2ac50c55d (economicComplexity 196, incomeSources 57, plotHooks 14 ...); foodBalance.js moved by two seats in adjacent hunks, merged clean |
 
 ## 5. Item 2 at the landed tip d817736d8 (each run to a file in /home/user/j7out, read by its tail through `scripts/gate-tail.sh`)
 
