@@ -623,11 +623,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {/* ── SHADOW ECONOMY ───────────────────────────────────────────────────── */}
       {(()=>{
         const sp = s?.economicState?.safetyProfile;
-        const bmc = sp?.blackMarketCapture || 0;
+        const bmc = shadowCaptureShown(sp) ?? 0; // TAIL-DISPLAY-ECON-5 (X30): the leaf the PDF prints through; silent where the record holds no illicit money
         const dragDesc = sp?.economicDragDesc;
         const crimChains = (s?.economicState?.activeChains||[]).filter(c=>c.needKey==='criminal_economy');
         const crimeTypes = sp?.crimeTypes || [];
-        if (!sp || bmc < 3) return null;
+        if (!sp || !bmc) return null;
 
         const sevColor = bmc>=30?'#8b1a1a':bmc>=15?'#8a3010':'#7a5010';
         const sevBg    = bmc>=30?'#fdf4f4':bmc>=15?'#fdf0e8':'#faf8e8';
@@ -660,7 +660,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             ONE speaking position reached a first-paint reader on under two percent of the
             worlds this generator builds. The scale note travels WITH it, so nothing is
             doubled and the fold's own reader loses nothing. */}
-        <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+        <Section title={`Shadow Economy: ${bmc}% of trade unrecorded`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}
@@ -762,9 +762,9 @@ const BROUGHT_BANDS = GROWN_BANDS.map(([under, w]) => [under, w === 'about half'
  * @param {boolean} [famine] a famine in force (`facts/famine.js :: famineOf`), or a siege that has stopped the trade
  * (`chainStateShown.js :: tradeStoppedHere`): the bad season is not ahead, it is here (W2-C-LEAVES item 4(a); the cold
  * list REVIEW-W2A-3 #161: "a bad season would bring real hunger" under a famine; TAIL-DISPLAY-ECON-2, row 12961: the
- * same under a siege with nothing brought in)
+ * same under a siege with nothing brought in) @param {unknown} [band] the food record's band (`foodRecord.band`): Secure takes its own twin (TAIL-DISPLAY-ECON-5, X31: "go short" beside Secure in 177 of 720)
  */
-const shortWords = (pct, famine = false) => (pct <= 0 ? 'Between them, nobody goes short.'
+const shortWords = (pct, famine = false, band = null) => (pct <= 0 ? 'Between them, nobody goes short.' : band === 'secure' ? (famine ? 'Between them, nearly every household is fed for now.' : 'Between them, nearly every household is fed, and a bad season would leave some of them short.')
   : pct <= 5 ? (famine ? 'A few households still go short, and hunger is already here.' : 'A few households still go short, and a bad season would leave more of them hungry.')
   : pct <= 15 ? (famine ? 'Some households still go short, and hunger is already here.' : 'Some households still go short, and a bad season would leave more of them hungry.')
   : pct <= 35 ? (famine ? 'Many households go short, and hunger is already here.' : 'Many households go short, and a bad season would bring real hunger.')
@@ -786,7 +786,7 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
     const over = fb.surplus / Math.max(1, fb.dailyNeed);
     return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
   }
-  const short = shortWords(fbal.deficitPct, famineOf(s).famine || tradeStoppedHere(s)); // 12961: a siege's hunger is here too
+  const short = shortWords(fbal.deficitPct, famineOf(s).famine || tradeStoppedHere(s), eco?.foodSecurity?.foodRecord?.band); // 12961: a siege's hunger is here too; X31: the record's band
   if (!(fb.importCoverage > 0) || !carriers) return `No food comes into ${name} by trade.${magic} ${short}`;
   const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
   const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
@@ -855,7 +855,7 @@ function impairedHousesOf(town) {
  * in the present; it is LEFT OUT beside the page's own siege note (the Imports header, its goods and its empty-state
  * line). The record's imports are untouched; the needs line stands. At the end of the file, so no line-keyed row moves.
  */
-import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
+import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js'; import { shadowCaptureShown } from '../../../domain/display/shadowEconomyShown.js'; // X30: the Shadow Economy block's one floor, the PDF's too
 
 /**
  * THE ECONOMIC FLOWS HEADER COUNTS WHAT THE CARDS UNDER IT SHOW (TAIL-DISPLAY-ECON, the chair's ruling X2, 2026-11-14; the

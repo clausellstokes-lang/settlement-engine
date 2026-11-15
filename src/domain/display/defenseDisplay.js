@@ -228,7 +228,7 @@ export function deriveCriminalStructure(settlement) {
   // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
   const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
     : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
-  return key ? ringNoteUnderStreetFighting(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r) : null; // TAIL-DEFECON-D: no ring the record names
+  return key ? ringNoteUnderStreetFighting(headedPowerAmongRivals(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r), r) : null; // TAIL-DEFECON-D: no ring the record names
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
@@ -329,6 +329,10 @@ export function deriveSupportingCapabilities(settlement) {
   // healer named as a healer.
   const facts = defenseFactsOf(r);
   const court = courtOnRoster(r);
+  // V6 (TAIL-DISPLAY-CIVIC-4, the chair's ruling of 2026-11-15): where no courthouse stands and a council or a town hall
+  // hears the cases, the row names what stands (the council's bench), not a court.
+  const bench = court ? courtBenchOf(r) : null;
+  const courtWord = bench ?? 'Court';
 
   const caps = [
     {
@@ -405,9 +409,9 @@ export function deriveSupportingCapabilities(settlement) {
     {
       // W2-C-LEAVES-SIDE (the chair's #575): the court is read off the live roster (`courtOnRoster`, below), not the flag.
       label: 'Legal Infrastructure',
-      status: court && f.hasPrison ? 'Court + Prison' : court ? 'Court only' : f.hasPrison ? 'Prison only' : 'None',
+      status: court && f.hasPrison ? `${courtWord} + Prison` : court ? `${courtWord} only` : f.hasPrison ? 'Prison only' : 'None',
       color: court && f.hasPrison ? '#1a3a5a' : court ? '#3a5a7a' : f.hasPrison ? '#7a5a3a' : '#9c8068', score: null,
-      note: court && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : court ? 'Courts without detention. Fines and exile only.' : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
+      note: court && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : court ? (bench ? 'Cases heard without detention. Fines and exile only.' : 'Courts without detention. Fines and exile only.') : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
     },
     {
       label: 'Medical Readiness',
@@ -864,15 +868,43 @@ const COURT_SERVICES = new Set(['Civil disputes', 'Criminal trials', 'Civil liti
  * @returns {boolean}
  */
 function courtOnRoster(settlement) {
+  return courtHoldersOf(settlement).length > 0;
+}
+
+/**
+ * THE HOUSES THAT HOLD THE TOWN'S COURT on the live roster: 'Courthouse' where a courthouse or court buildings stand,
+ * else each live house that drew a court service (its roster name).
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {string[]}
+ */
+function courtHoldersOf(settlement) {
   const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (settlement)))
     .map((i) => String(/** @type {{ name?: unknown } | null} */ (i)?.name ?? '')).filter(Boolean);
-  if (live.some((n) => COURT_HOUSE.test(n))) return true;
+  if (live.some((n) => COURT_HOUSE.test(n))) return ['Courthouse'];
   const drawn = /** @type {{ availableServices?: unknown }} */ (settlement)?.availableServices;
   const rows = drawn && typeof drawn === 'object' ? Object.values(drawn).flat() : [];
-  return rows.some((row) => {
+  /** @type {string[]} */
+  const holders = [];
+  for (const row of rows) {
     const sv = /** @type {{ name?: unknown, institution?: unknown } | null} */ (row);
-    return typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(String(sv?.institution ?? ''));
-  });
+    const inst = String(sv?.institution ?? '');
+    if (typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(inst) && !holders.includes(inst)) holders.push(inst);
+  }
+  return holders;
+}
+
+/**
+ * V6 (TAIL-DISPLAY-CIVIC-4): THE BENCH THAT HEARS THE CASES where no courthouse stands: a council's ("Council bench") or
+ * a town hall's ("Town hall bench"); null where a courthouse stands or the court's holder is another house (a city
+ * administration's courts, a city hall's appeals court: courts by their own service rows).
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {string | null}
+ */
+function courtBenchOf(settlement) {
+  const holders = courtHoldersOf(settlement);
+  if (holders.length === 0 || holders.includes('Courthouse')) return null;
+  if (holders.some((h) => !/council|town hall/i.test(h))) return null;
+  return holders.some((h) => /council/i.test(h)) ? 'Council bench' : 'Town hall bench';
 }
 
 // ─── W2-C-LEAVES-9: THE RING'S VANTAGES PASS THE LIST DOOR (at the end of the file, so no line above moves) ───
@@ -949,3 +981,29 @@ function sickTendedByOne(settlement) {
   const people = /** @type {{ npcs?: unknown }} */ (/** @type {unknown} */ (settlement))?.npcs;
   return (Array.isArray(people) ? people : []).some((p) => TENDS_THE_SICK.test(String(/** @type {{ role?: unknown } | null} */ (p)?.role ?? '')));
 }
+
+// ─── TAIL-DISPLAY-CIVIC-4 (V8): ONE HEADED POWER AMONG RIVAL GANGS (at the end of the file, so no line above moves) ───
+/**
+ * THE STRUCTURE WORD READS THE POWERS (V8, the chair's ruling of 2026-11-15: "lacks a single controlling authority" printed
+ * beside a criminal power whose first seat is a person of the roster, 26 of its 168 towns on the census's 720 at 6cf555801,
+ * each a Thieves' Guild keyed semi-organized by the roster's "Multiple criminal factions"). Where exactly one criminal power
+ * that does not govern stands, and a person of the roster holds its first seat, the note says the power answers to one head
+ * and the rival gangs contest its ground (the row's key and label stand: no single authority rules ALL crime here).
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function headedPowerAmongRivals(row, settlement) {
+  if (row.key !== 'semi-organized') return row;
+  const rings = /** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, faction?: unknown } | null | undefined>} */ (
+    settlement?.powerStructure?.factions || []).filter((f) => f?.category === 'criminal' && f?.isGoverning !== true);
+  if (rings.length !== 1) return row;
+  const name = String(rings[0]?.faction ?? '');
+  const people = /** @type {{ npcs?: unknown }} */ (/** @type {unknown} */ (settlement))?.npcs;
+  const headed = (Array.isArray(people) ? people : []).some((p) => (Array.isArray(p?.memberships) ? p.memberships : [])
+    .some((/** @type {{ power?: unknown, rank?: unknown } | null} */ m) => m?.power === name && m?.rank === 1));
+  if (!name || !headed) return row;
+  const held = /** @type {{ powerLabel?: unknown } | null | undefined} */ (rings[0])?.powerLabel === 'Suppressed' ? 'is held down, keeping what routes it can' : 'holds routes and territories';
+  return Object.freeze({ ...row, note: `The ${powerNameAfterArticle(name)} answers to one head and ${held}, but rival gangs contest its ground: no single authority rules all crime here. Less predictable than an unchallenged guild, more structured than street crime.` });
+}
+import { powerNameAfterArticle } from './powerSentenceName.js';

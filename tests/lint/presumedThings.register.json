@@ -835,7 +835,6 @@
    ["temple", "after-release", "Church land claims on guild property", "0818ce8dac545d03"]
   ],
   "src/generators/power/governanceNarrative.js": [
-   ["garrison", "after-release", "A monster incursion last season destroyed outlying farms. The garrison is stretched thin and the council cannot agree on", "664e6208092eb1e1"],
    ["garrison", "after-release", "Several households disappeared following a tax audit. The garrison commander has not been available for comment.", "bd3bae1f4216b53a"],
    ["garrison", "after-release", "the barracks guard", "d767927dc0a11533"],
    ["garrison", "after-release", "The commander-prelate has declared a heresy investigation into a rival settlement. The garrison is mobilizing.", "c569631ebc99e1ad"],
@@ -843,7 +842,6 @@
    ["market", "after-release", "at the slave market", "53b78e01928b9629"],
    ["market", "after-release", "The council has been debating market levies for three months. The merchants have stopped attending the sessions. Both si", "b32a4777cf99676a"],
    ["market", "after-release", "The guild and the district council both claim authority over the new market. Violence has settled some of the disputes; ", "60d6cc7601358a9a"],
-   ["mercenary", "after-release", "A monster incursion last season destroyed outlying farms. The garrison is stretched thin and the council cannot agree on", "664e6208092eb1e1"],
    ["mercenary", "after-release", "the mercenary company", "8a88361744c9d8e8"],
    ["mercenary", "after-release", "The mercenary company", "a8f68d1d6f0217cf"],
    ["temple", "after-release", "The church is demanding veto power over council appointments. The council has not yet refused publicly.", "67b43e3a2528f42b"],

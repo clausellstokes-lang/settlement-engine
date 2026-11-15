@@ -12,11 +12,21 @@
  * (`criminalInstitutions`), a crime pattern (`crimeTypes`), or a shadow share the tab prints. The PDF's enforcement
  * line set "those who keep order" against "the criminals" in towns with none of the three.
  *
+ * TAIL-DISPLAY-ECON-5 (the chair's ruling X30, 2026-11-15): THE BLOCK PRINTS WHERE THE RECORD HOLDS ILLICIT MONEY. The
+ * floor was 3; the record adds its criminal income share (`economicState.js`: "Black Market Revenue" and its kin,
+ * `isCriminal`) only where the capture is ABOVE 10. Measured on the census's 720 at 1322e7d0a: 476 towns printed
+ * "Shadow Economy: N% capture", and 240 of them (capture 3 to 10) held no criminal income at all (a besieged hamlet whose
+ * income is harvest alone printed "5% capture"); in every town above 10 the record holds the share. The floor is now
+ * the record's own, so the tab and the PDF (which prints through this leaf) are silent in the 240. The two figures count
+ * different things (the capture: the trade that goes unrecorded; the income row: the criminal take's share of all the
+ * town's income, normalized with the other sources), so the tab's row says "of trade unrecorded".
+ *
  * Pure: no randomness, no clock, no write.
  */
 
-/** The capture share at and above which the tab prints its Shadow Economy block. */
-export const SHADOW_CAPTURE_FLOOR = 3;
+/** The capture share at and above which the tab prints its Shadow Economy block: the record's own floor for its
+ * criminal income share (`economicState.js`: `blackMarketCapture > 10`; the capture is a whole number). */
+export const SHADOW_CAPTURE_FLOOR = 11;
 
 /**
  * The capture share as the tab prints it, or null where the tab prints no Shadow Economy block.

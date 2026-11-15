@@ -996,7 +996,7 @@
     "famine",
     "word",
     "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judg",
-    "dfa32308413b0367"
+    "bb49c513afbb2c39"
    ]
   ],
   "src/components/new/tabs/EconomicsTab.jsx": [
@@ -16508,12 +16508,6 @@
     "5cda302fa8ef4287"
    ],
    [
-    "prison",
-    "root",
-    "Court + Prison",
-    "2e5bbcad8d5be670"
-   ],
-   [
     "house: gambling",
     "family",
     "Operates unlicensed gambling. Revenue funds broader criminal network. Attracts debt spirals and desperation crime.",
@@ -26814,12 +26808,6 @@
     "family",
     "The priest has been insisting on a say in who can marry whom and what gets planted when. Several families are unhappy.",
     "f9f3d10cc46cc7e6"
-   ],
-   [
-    "streets",
-    "family",
-    "The rebels' buildings are marked, and some streets are contested. ",
-    "75da3dc0fe431604"
    ],
    [
     "armedForce",
