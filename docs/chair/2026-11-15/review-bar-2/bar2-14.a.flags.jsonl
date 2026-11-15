@@ -1,0 +1,11 @@
+{"id":"C27807","town":"bar0-town-occupied-rand-3","sev":"LOW","kind":"PAIR","why":"Defense readiness printed Critical while Defense is Vulnerable (STATE defence Vulnerable) in the same town","other":"C27755"}
+{"id":"C27929","town":"bar0-town-occupied-rand-3","sev":"MED","kind":"LACKS","why":"burials 'beyond the gate'; DEFENCE walls none, so no gate","other":""}
+{"id":"C27995","town":"bar0-town-occupied-rand-3","sev":"LOW","kind":"LACKS","why":"'different districts' in a town of 385 people","other":""}
+{"id":"C28193","town":"bar0-town-occupied-rand-3","sev":"MED","kind":"PAIR","why":"says Occupation Authority gets its way by petitions and procedure; the occupation overrules the council outright and decisions need occupiers' approval","other":"C28246"}
+{"id":"C28248","town":"bar0-town-occupied-rand-3","sev":"MED","kind":"PAIR","why":"says decisions that matter are made by Merchant Guilds; the council carries out what Occupation Authority decides","other":"C28204"}
+{"id":"C28697","town":"bar0-town-occupied-rand-4","sev":"LOW","kind":"PAIR","why":"Defense readiness printed Critical while Defense is Vulnerable (STATE defence Vulnerable) in the same town","other":"C28637"}
+{"id":"C28736","town":"bar0-town-occupied-rand-4","sev":"MED","kind":"PAIR","why":"hook is about Itzam Pech, who IS the watch captain (PEOPLE); 'the guard captain has a file... works for the guard captain' treats them as another person","other":"C28716"}
+{"id":"C28756","town":"bar0-town-occupied-rand-4","sev":"MED","kind":"STATE","why":"'War has taken the iron... sell to the armies': no war in CRISIS, QUARRELS, TENSIONS or PAST; iron is just depleted locally","other":""}
+{"id":"C28934","town":"bar0-town-occupied-rand-4","sev":"LOW","kind":"LACKS","why":"'different districts' in a town of 681 people","other":""}
+{"id":"C28995","town":"bar0-town-occupied-rand-4","sev":"LOW","kind":"PAIR","why":"'little of it stops' contradicts 'Market day is when Kabahbalam fills: the roads bring buyers' and Market Taxes at 30% of income","other":"C28644"}
+{"id":"DONE","lines":2030,"blocks":2,"flags":10}
