@@ -96,7 +96,19 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // 395/1/394/44 — applied|npc_expose ARRIVES by GREEN-TIP ae6693ccb (the pulse seats an NPC by its first-rank membership); no home
 // leaves; conservation 395 − 1 = 394. ADDRESS_TOTALS and RAW_LIVENESS are NOT moved here: the content-totality rows are the merge
 // seat's closing act.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 44 });
+// ── RE-RECORDED 2026-11-15 BY TAIL-CLOSE-SWEEP-A (ruling SW1, the chair's, under the owner's delegation; vetoable) AT THE JOINED TIP
+// dc4bae117, IN ONE ACT WITH THE NEWS-VOICE CONTRACT (the cause recorded once, at the voice contract's copy). 395/1/394/44 → 417/2/415/42. ONE CORPUS BUILD PER MERGE POINT of the joined line's
+// first parent (the throw below disabled in an untracked scratch copy only); six moves, each a generator change re-dealing the AO-0
+// year, attributed at the merge point (CONFIRMED by both sides' measurement; the in-lane first-parent walks are non-monotone because
+// the lanes merged the line mid-lane, so no single in-lane commit is claimed except the first): STYLE-2-MERGE point 43 (f922124d0,
+// COHERENCE-PRESUME; in-lane 9e4e0402a, the watch office falls to a veteran soldier) 395/1/394/44 → 395/1/394/43 (applied|npc_mobilize
+// leaves); point 46 (6aeaa4154, COHERENCE-POWERS) → 402/1/401/44; point 47 (22cc9ef7d / 460d16467, COHERENCE-AGREE) → 411/1/410/42;
+// JOIN-1 · 4 (bea2a1298, powers-follow-up at 3909655c3) → 408/1/407/41; JOIN-1 · 9 (33b12cbef, coherence-upkeep at c56fd565e) →
+// 418/2/416/42; JOIN-8 · 19 (3e482b329, tail-defecon-c at 849bd8679, a good exported only where a house works it) → 417/2/415/42
+// (applied|boom 3 → 2). HOMES ARRIVE applied|army_homecoming, applied|strategy_return_home; HOMES LEAVE applied|npc_bargain,
+// applied|npc_exploit, applied|trade_pressure, realm|realm_mass_migration. THE VOICE LAW HOLDS: no introduced summary at the tip reads
+// `can advance through`; the voice debt stays EMPTY. Conservation 417 − 2 = 415.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 417, retirements: 2, finalEntries: 415, homes: 42 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -180,7 +192,12 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 395, retirements: 
 // simulation batch; GREEN-TIP ae6693ccb seats an NPC by its first-rank membership: npc_exploit 2/2 → 1/1, npc_reform 24/24 → 25/25,
 // npc_suppress 6/6 → 5/5, both fields each, and the npc_expose pair; PULSE-SITES' prefixes 1–4: npc_verdict summary 1/3 → 2/3),
 // the RESIDUE seat's bisect; nothing after. Every row stays indicative; digest re-derived with the rows in the baseline.
-const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 623, occurrences: 790 });
+// ── RE-RECORDED 2026-11-15 BY TAIL-CLOSE-SWEEP-A at dc4bae117, the same act as CORPUS above (the six moves named at the voice
+// contract's copy): 44/2/88/0/88/623/790 → 42/2/84/0/84/659/834, two homes arriving and four leaving; every row stays indicative; the
+// digest re-derived with the rows in the baseline by this library's own functions. RAW_LIVENESS below: mechanicalOutcomes 51/26 →
+// 53/26, selectedOutcomes 165/103 → 163/111, the union 216/103 → 216/111; zero prospective in both lanes; the 26 rewrite rows and
+// their totals do not move.
+const ADDRESS_TOTALS = Object.freeze({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 659, occurrences: 834 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
@@ -222,7 +239,7 @@ const RAW_LIVENESS = Object.freeze({
     // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, e9070d614's year): mechanical 52/26 → 50/25, selected 164/97 → 165/97,
     // union 216/97 → 215/97. All indicative; the union's distinct count still equals the selected lane's (97 = 97).
     // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): mechanical 50/25 → 51/26, at point 36 (the simulation batch); nothing at point 18.
-    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 51, distinctValues: 26, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 51, indicativeDistinctValues: 26 }),
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 53, distinctValues: 26, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 53, indicativeDistinctValues: 26 }),
     // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
     // T8 recorded this lane byte-identical twice running because the corruption work never authors
     // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
@@ -234,7 +251,7 @@ const RAW_LIVENESS = Object.freeze({
     // 2026-10-01 (the urban band + the druid rulings): 154/78/96/63/58/15 → 155/75/93/59/62/16.
     // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
     // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): selected 165/97 → 165/103, at point 18 (SW-12 PULSE-LINES, 8acfc52f1); nothing after.
-    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 165, distinctValues: 103, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 165, indicativeDistinctValues: 103 }),
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 163, distinctValues: 111, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 163, indicativeDistinctValues: 111 }),
   ]),
   // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
   // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
@@ -256,7 +273,7 @@ const RAW_LIVENESS = Object.freeze({
   // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge): 216/97 → 215/97 (mechanical −2, selected +1).
   // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): 215/97 → 216/103 (selected +6 distinct at point 18; mechanical +1 occurrence at point 36);
   // the union's distinct count still equals the selected lane's (103 = 103).
-  union: Object.freeze({ headlineOccurrences: 216, distinctValues: 103, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 216, indicativeDistinctValues: 103 }),
+  union: Object.freeze({ headlineOccurrences: 216, distinctValues: 111, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 216, indicativeDistinctValues: 111 }),
 });
 // TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
 // no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus

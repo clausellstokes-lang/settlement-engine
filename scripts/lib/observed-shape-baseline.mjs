@@ -7,7 +7,14 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **42**: schema 41's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * `BASELINE_SCHEMA` is **43**: schema 42's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * UNCHANGED, re-governed to THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15; the
+ * chair's record 456): ONE rung, the round's causes, every moved row with one — the lawful shrinks retire with
+ * cause, the rows the detector lost while their reads still stand are recorded as UNCURED INSTRUMENT EROSION, and
+ * the round's new reads are admitted by cause with class and lane. Its full rationale lives beside
+ * `CLOSE_ROUND_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA` is **42**: schema 41's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
  * UNCHANGED, re-governed to THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, COHERENCE-AGREE; the chair's
  * ruling on STOP 47a, 2026-11-13): ONE rung, ONE cause — the agreement lane's generation moved the tier seed's
  * town out of the overlap, so producer 2b's seed is re-searched by its own rule (osr-tier-14 -> osr-tier-19) in the
@@ -644,7 +651,11 @@ export const RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA = 40;
  *  lane's tier seed (STOP 47a). Never redefined, never deleted, so a schema-41 PREDECESSOR is still validated
  *  as schema 41. */
 export const RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA = 41;
-export const BASELINE_SCHEMA = 42;
+/** The RETIRED tier-seed definition — schema 43's predecessor. Schema 43 re-governs it to the close of the round
+ *  of 2026-11-14/15 (OR2). Never redefined, never deleted, so a schema-42 PREDECESSOR is still validated as
+ *  schema 42. */
+export const RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA = 42;
+export const BASELINE_SCHEMA = 43;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1449,10 +1460,20 @@ export function validateSchema41Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 42's tagged envelope (the agreement lane's tier seed), re-governed by schema 43
+ *  to the close of the round of 2026-11-14/15 (OR2). Re-bound to its own LITERAL. */
+export function validateSchema42Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema42Baseline(baseline) {
+export function validateSchema43Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

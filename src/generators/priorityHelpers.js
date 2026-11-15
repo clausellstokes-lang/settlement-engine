@@ -4,7 +4,7 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './helpers.js'; import { DEFENCE_TUNING } from '../data/defenceWeights.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
+import {clamp} from './helpers.js'; import { gangHousesOf } from '../domain/crimeSignal.js'; import { DEFENCE_TUNING } from '../data/defenceWeights.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
 import {
   isMaterializedCustomContent,
   nativeSemanticNames,
@@ -101,7 +101,7 @@ const getInstitutionNames = (institutions = []) => {
     hasBlackMarket:   hasAny(names, ['black market','black market bazaar']),
     hasSmuggling:     hasAny(names, ['smuggling network','smuggling operation']),
     // UPKEEP-9 (#1082): a gang is a gang house (the two GANG_HOUSES_OF counts); a criminal front is not a gang.
-    hasGangInfra:     hasAny(names, ['street gang','multiple criminal factions']),
+    hasGangInfra:     gangHousesOf(names) > 0, // TAIL-CLOSE-SRC-3: the crime home's gang houses (`crimeSignal.js :: gangHousesOf`)
     names,
   };
 };

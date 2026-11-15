@@ -9,23 +9,14 @@
 import { scoreBand } from '../domain/display/defenseScoreBands.js';
 import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { lineText } from '../domain/facts/drawDeclared.js';
+import { CRIMINAL_GOVERNANCE_TYPE, criminalSeatGoverns, gangHousesOf } from '../domain/crimeSignal.js';
 
 /** The census's small places (a district, a military command); TINY: streets too. */
 export const SMALL_PLACES = Object.freeze(['thorp', 'hamlet', 'village']);
 export const TINY_PLACES = Object.freeze(['thorp', 'hamlet']);
 
-/**
- * How many gang houses the roster holds (the catalogue's several-gangs row counts two).
- * @param {ReadonlyArray<unknown>} institutions @returns {number}
- */
-export function GANG_HOUSES_OF(institutions) {
-  let n = 0;
-  for (const i of institutions || []) {
-    const name = String(typeof i === 'string' ? i : /** @type {{ name?: unknown }} */ (i)?.name || '').toLowerCase();
-    n += name.includes('multiple criminal') ? 2 : name.includes('street gang') ? 1 : 0;
-  }
-  return n;
-}
+/** How many gang houses the roster holds: the crime home's reader (`crimeSignal.js :: gangHousesOf`), under its old name. */
+export const GANG_HOUSES_OF = gangHousesOf;
 
 /** The survival-crime line beside a network where the record holds no hunger (#1173): the same theft, not called hunger. */
 export const THEFT_NETWORK_DESC =
@@ -142,10 +133,10 @@ const NO_DOMINANT_TWIN = 'Petty theft, minor fraud, and opportunistic violence a
  * @returns {C[]}
  */
 export function settleRosterCrimeLines(entries, seats, powers) {
-  const governs = (Array.isArray(seats) ? seats : []).some((seat) => seat?.category === 'criminal' && seat?.isGoverning === true);
+  const governs = criminalSeatGoverns(seats); // the crime home's reader (TAIL-CLOSE-SRC-3)
   return entries.map((entry) => {
     const desc = typeof entry?.desc === 'string' ? entry.desc : '';
-    if (entry?.type === 'Criminal governance' && !governs && desc.endsWith(VACUUM)) return { ...entry, desc: desc.slice(0, -VACUUM.length) + VACUUM_TWIN };
+    if (entry?.type === CRIMINAL_GOVERNANCE_TYPE && !governs && desc.endsWith(VACUUM)) return { ...entry, desc: desc.slice(0, -VACUUM.length) + VACUUM_TWIN };
     if (entry?.type === 'Background crime' && powers && desc.startsWith(NO_DOMINANT)) return { ...entry, desc: NO_DOMINANT_TWIN + desc.slice(NO_DOMINANT.length) };
     return entry;
   });

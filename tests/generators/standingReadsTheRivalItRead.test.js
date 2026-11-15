@@ -27,6 +27,8 @@ function born(seed) {
 }
 const ARC_OLD = 'The arcane orders have more say right now, and the clergy cannot accept it.';
 const ARC_NEW = 'Arcane Council has more say right now, and the clergy cannot accept it.';
+/** TAIL-CLOSE-SRC-4 (the chair's SR4, a declared move): the Arcane Orders are named as their card names them, by the one grammar reader. */
+const ARC_ORDERS = 'Arcane Orders have more say right now, and the clergy cannot accept it.';
 const CRIM_OLD = 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.';
 const CRIM_NEW = "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade.";
 const UND_OLD = 'the nominal government tolerates this because it cannot currently change it.';
@@ -45,7 +47,7 @@ const PAIRS = [
 ];
 /** KEEP: the true sibling still prints [seed, the power, words that must still print] */
 const KEEP = [
-  ['r2r-city-17', 'Religious Authorities', ARC_OLD],
+  ['r2r-city-17', 'Religious Authorities', ARC_ORDERS], // re-keyed by identity at SR4: the same sibling, the old special case's "The arcane orders have" retired
   ['r2r-city-16', "Thieves' Guild", CRIM_OLD],
   ['r2r-town-8', "Thieves' Guild", UND_OLD],
 ];

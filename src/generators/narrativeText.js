@@ -18,7 +18,7 @@
  */
 
 import { random as _rng } from "../kernel/rngContext.js";
-import { pickRandom2 } from "./helpers.js";
+import { pickRandom2 } from "./helpers.js"; /** A drawn history event of one type, by name ("this event" where none): the pool rows' own draw, in its own statement (TAIL-CLOSE-SRC-4, the chair's SR3 (a): the row keeps its declaration, the filter is read here). @param {any[]} r @param {string} type @returns {string} */ const drawnEventOfType = (r, type) => pickRandom2(r.filter((s) => s.type === type))?.name || "this event"; // one line, so no cited line moves
 import { speakTierNoun } from "../domain/display/stateProse/stateProseKernel.js";
 import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js"; import { foodStoreWord, FAILED_SOURCE_WORDS } from "./economy/foodBalance.js"; // R2-CODE-A item 1: one line, so no cited line moves
 
@@ -242,6 +242,10 @@ export const PRESSURE_SENTENCES = {
       ? [
           { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
           { text: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
+          // TAIL-CONTENT-CLOSE-1 (2026-11-15): the forges are named only where a smith stands; where no row of the pool is
+          // admitted, the same war is told without them (never drawn: narrativeGenerator.js reaches it by resolution only)
+          { text: `Being on the right side of it, ${r.name}'s ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`,
+            twinOf: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.` },
           { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison', 'prosperity: ≥ comfortable'] }, // TAIL-NARRATIVE (01079): "prospering" needs a town the record calls comfortable or better
         ]
       : [
@@ -343,7 +347,7 @@ export const POLITICAL_FLAVOR = {
   ],
   economic_heavy: [
     { text: (r) =>
-      `A settlement whose identity was built on commerce. The ${pickRandom2(r.filter((s) => s.type === "economic"))?.name || "this event"} didn't create the merchant class here, but it defined what the merchant class could become`, needs: ['market'] }, // R2-CODE-A-7 (step 1 item 2): a merchant class only where the roster holds a market
+      `A settlement whose identity was built on commerce. The ${drawnEventOfType(r, "economic")} didn't create the merchant class here, but it defined what the merchant class could become`, needs: ['market'] }, // R2-CODE-A-7 (step 1 item 2): a merchant class only where the roster holds a market
     (r) =>
       ((e) => (e?.yearsAgo > 60 ? `Economically dynamic in ways that occasionally tip into instability: the ${e.name} is long past, but nobody here has forgotten that prosperity has always been earned and can always be lost` : `Economically dynamic in ways that occasionally tip into instability: the ${e?.name || "this event"} is recent enough to remind everyone that prosperity here has always been earned and can always be lost`))(pickRandom2(r.filter((s) => s.type === "economic"))), // R2-CODE-A-2 (cold #181): the one pick, then its age (ruling B: past sixty years an event is not recent)
     (r) =>
@@ -478,7 +482,7 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       `Religious history here is complicated: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left an official account and an unofficial one, and which version you know says something about who you are`, colour: true },
     { text: (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`, needs: ['church'] }, // TAIL-NARRATIVE (00014): a local clergy needs a church; a wayside shrine is a sacred house and keeps none
+      `The ${drawnEventOfType(r, "religious")} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`, needs: ['church'] }, // TAIL-NARRATIVE (00014): a local clergy needs a church; a wayside shrine is a sacred house and keeps none
     { text: (r) =>
       `Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is the explanation`, colour: true },
     { text: (r) =>
@@ -494,7 +498,7 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic'] },
     { text: (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is still discussed here, carefully. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] }, // TAIL-NARRATIVE (00010): no practitioners are claimed; the page's own Arcane Support row may say there are none
+      `The ${drawnEventOfType(r, "magical")} is still discussed here, carefully. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] }, // TAIL-NARRATIVE (00010): no practitioners are claimed; the page's own Arcane Support row may say there are none
     { text: (r) =>
       `Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why`, colour: true },
     { text: (r) =>

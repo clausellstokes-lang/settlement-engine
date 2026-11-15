@@ -30,7 +30,7 @@ describe('the cold list\'s towns with crime and no thieves\' guild, born as the 
       const m = /** @type {RegExpMatchArray} */ (seed.match(/^rw3-(\w+)-([a-z_+]+)-\d+$/));
       const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
       const signal = crimeSignalOf({ seats: s.powerStructure?.factions, estate: s.institutions });
-      const names = [...signal.factions, ...signal.houses, ...(s.powerStructure?.factions || []).map((/** @type {any} */ f) => f.faction)];
+      const names = [...signal.powerNames, ...signal.houses, ...(s.powerStructure?.factions || []).map((/** @type {any} */ f) => f.faction)];
       expect(names.some((n) => /thie|criminal guild/i.test(String(n))), `${seed}: no power is a thieves' guild`).toBe(false);
       const secrets = (s.npcs || []).map((/** @type {any} */ n) => String(n?.secret?.what || ''));
       expect(secrets.filter((t) => /thieves['’]? guild/i.test(t)), `${seed}: no secret names a thieves' guild the town lacks`).toEqual([]);

@@ -294,35 +294,11 @@
   "src/domain/display/defenseDisplay.js": {
    "market": [
     {
-     "line": "const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
      "line": "if (n.includes('black market'))",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
    ],
    "crime": [
-    {
-     "line": ".filter((c) => c?.needKey === 'criminal_economy' && RUNNING_CHAIN_STATUS.includes(String(c?.status ?? '')));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasDiffuse = names.some((n) => n.includes('fence') || n.includes('bandit') || n.includes('outlaw'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasGuild = names.some((n) => n.includes(\"thieves' guild\") || n.includes('thieves guild'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasSyndicate = names.some((n) => n.includes('multiple criminal') || n.includes('underground city') || n.includes('front business'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
     {
      "line": "if (n.includes(\"thieves' guild\") || n.includes('thieves guild'))",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
@@ -483,6 +459,14 @@
     }
    ]
   },
+  "src/domain/facts/criminalStructureKey.js": {
+   "market": [
+    {
+     "line": "const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));",
+     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
+    }
+   ]
+  },
   "src/domain/facts/market.js": {
    "guild": [
     {
@@ -607,14 +591,6 @@
     },
     {
      "line": "return routes.includes('port');",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    }
-   ]
-  },
-  "src/domain/summary/settlementQuickGuide.js": {
-   "guild": [
-    {
-     "line": "if (roster && out.includes('run by guild and estate') && !factsOf( (source)).guild) {",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
    ]
@@ -923,52 +899,6 @@
     }
    ]
   },
-  "src/generators/defenseGenerator.js": {
-   "faith": [
-    {
-     "line": "(relPri >= 65 && hasInst('shrine','temple','friary'))",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasDivineStrong = magicOn && relPri >= 65 && hasInst('cathedral','monastery','great cathedral');",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "hasInst('cathedral','monastery','great cathedral','parish church') ||",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "|| hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    }
-   ],
-   "healer": [
-    {
-     "line": "|| hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    }
-   ],
-   "crime": [
-    {
-     "line": "const hasCrimOrg = hasInst('fence','smuggl','gang','outlaw');",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    }
-   ],
-   "magic": [
-    {
-     "line": "hasInst('wizard','mages','arcane','enchant','spellcasting','academy of magic','mages\\' district')",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "if (hasInst('wizard\\'s tower')) military += 5;",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "|| hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    }
-   ]
-  },
   "src/generators/economy/economicState.js": {
    "market": [
     {
@@ -1075,10 +1005,6 @@
    "crime": [
     {
      "line": "(inst) => inst.toLowerCase().includes('guild') || inst.toLowerCase().includes('thieves')",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "(inst) => inst.toLowerCase().includes('smuggl') || inst.toLowerCase().includes('front')",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
    ],
@@ -1270,12 +1196,6 @@
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
    ],
-   "bank": [
-    {
-     "line": "instNames.some((n) => n.includes('bank') || n.includes('money'))",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    }
-   ],
    "guild": [
     {
      "line": "(n) => n.includes('guild') || n.includes('craft') || n.includes('workshop')",
@@ -1285,24 +1205,6 @@
    "crime": [
     {
      "line": "(n) => n.includes('thieves') || n.includes('criminal') || n.includes('black market') || n.includes('smuggl')",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    }
-   ],
-   "magic": [
-    {
-     "line": "n.includes('alchemist') ||",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "n.includes('arcane') ||",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "n.includes('mage') ||",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "n.includes('wizard') ||",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     }
    ]
@@ -1778,10 +1680,6 @@
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {
-     "line": "`The ${pickRandom2(r.filter((s) => s.type === \"magical\"))?.name || \"this event\"} is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] },",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
      "line": "`The ${pickRandom2(r.filter((s) => s.type === \"magical\"))?.name || \"this event\"} is why this settlement treats arcane matters with more caution than neighbours do, not superstition, institutional memory`, colour: true },",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
@@ -2008,10 +1906,6 @@
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {
-     "line": "? lowerInstNames.some((name) => name.includes('cathedral') || name.includes('monastery'))",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
      "line": "name.includes('cathedral') ||",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
@@ -2191,10 +2085,6 @@
    "crime": [
     {
      "line": "hasCriminalInst: hasAny(names, [\"thieves' guild\",'black market','smuggling','assassins','street gang','front business','gambling den','underground city','multiple criminal']),",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "hasGangInfra: hasAny(names, ['street gang','multiple criminal factions','front business']),",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {

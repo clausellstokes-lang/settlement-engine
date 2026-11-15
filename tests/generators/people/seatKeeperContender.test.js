@@ -18,6 +18,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/dens
 import { derivePowerStrata } from '../../../src/domain/dossier/powerStrata.js';
 import { seatKeeperOf } from '../../../src/domain/people/seatKeeper.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
+import { faceOfRole, titleForHolder } from '../../../src/data/holderTitleForms.js';
 
 const DIALS = Object.freeze({
   tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
@@ -34,6 +35,11 @@ const born = (settType, seed, crisis = true, census = false) => generateSettleme
 const NOBLE_FACES = Object.freeze(['the lord', 'the steward', "the lord's appointee", 'the governor', 'the reeve', 'the monarch']);
 const NOBLE_BODIES = Object.freeze(['Noble Families', 'Noble Houses', 'Landed Gentry', 'Manor Household']);
 
+/** RE-KEYED BY IDENTITY 2026-11-15 (TAIL-CLOSE-PEOPLE-1): TAIL-TITLES K-C's DECLARED MOVE 1036bf94 prints a face in its holder's
+ *  form ("the lord" -> "the lady" for a woman; M-1b: the role is that title). The guard reads the card's FACE through the move's
+ *  own reader (faceOfRole), and only where the printed title IS that face's holder form, so a wrong word still reds.
+ *  @param {any} c */
+const faceOf = (c) => { const f = faceOfRole(c); return c && c.title === titleForHolder(f, c.gender) ? f : c?.title; };
 /** @param {any} s @param {string} power */
 const firstOf = (s, power) => (s.npcs || []).find((c) => (c.memberships || []).some((m) => m.power === power && m.rank === 1)) || null;
 
@@ -45,7 +51,7 @@ function missesOf(s, key) {
   for (const p of derivePowerStrata(s).powers.filter((x) => x.role === 'contender')) {
     const first = firstOf(s, p.name);
     if (first && first.id === keeper.id) out.push(`${key}: the keeper ${keeper.name} heads ${p.name}, which contests the seat`);
-    if (first && NOBLE_BODIES.includes(p.name) && !NOBLE_FACES.includes(first.title)) out.push(`${key}: ${p.name} is faced by ${first.title}`);
+    if (first && NOBLE_BODIES.includes(p.name) && !NOBLE_FACES.includes(faceOf(first))) out.push(`${key}: ${p.name} is faced by ${first.title}`);
   }
   return out;
 }
@@ -71,7 +77,7 @@ describe('COHERENCE-POWERS-6 item 2: the keeper of a vacant seat heads no conten
     const held = (keeper?.memberships || []).find((m) => m.power === 'Landed Gentry');
     expect(held, 'the keeper stays a member of the body his house backs').toBeTruthy();
     expect(held?.rank, 'the keeper heads no contender').not.toBe(1);
-    expect(firstOf(s, 'Landed Gentry')?.title).toBe('the lord');
+    expect(faceOf(firstOf(s, 'Landed Gentry'))).toBe('the lord');
   });
 
   it('on fresh succession births at every size', () => {

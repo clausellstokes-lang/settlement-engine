@@ -60,7 +60,9 @@ const GONE = [
   { seed: 'r2r-hamlet-34', pool: 'DS-ECO-12::INCOME MIX: one source carries the town', gone: /from a single trade/, prints: 1, why: 'no exports and no imports: "comes from a single trade" of a town whose one source is its farm rents (B13238; v1 now "a single source")' },
   { seed: 'r2r-thorp-17', pool: 'DS-ECO-12::INCOME MIX: one source carries the town', gone: /depends on one trade/, prints: 2, why: 'an isolated thorp under a famine, no trade either way: "depends on one trade" (B03337; v2 now "one source of income")' },
   { seed: 'r2r-hamlet-1', pool: 'DS-ECO-12::INCOME MIX: a criminal line is present', gone: /honest traders compete/, prints: 2, why: 'no market: "honest traders compete against it" where no market stands (18271; v2 now claims no traders)' },
-  { seed: 'r2r-city-19', pool: 'DS-ECO-12::INCOME MIX: a broad spread, no leader', gone: /brings in a real portion/, prints: 1, why: 'a leader at 19%: "none of them brings in a real portion" where one does by the corpus\'s own scale (DS-ECO-6, a real portion >= 15) (01193)' },
+  // TAIL-CLOSE-SWEEP-C (2026-11-15): RE-KEYED by identity from r2r-city-19: 9cc8c6826 (TAIL-DEFECON-5 R2, one shadow figure, a DECLARED
+  // MOVE) holds its smuggling row at the capture, 23%: its leader passed 20 and it reads "two or three sources" now. r2r-city-18 is the case: a city, a leader at 19%, v1 drawn
+  { seed: 'r2r-city-18', pool: 'DS-ECO-12::INCOME MIX: a broad spread, no leader', gone: /brings in a real portion/, prints: 1, why: 'a leader at 19%: "none of them brings in a real portion" where one does by the corpus\'s own scale (DS-ECO-6, a real portion >= 15) (01193; re-keyed from r2r-city-19, 9cc8c6826)' },
   { seed: 'r2s-famine-thorp-3', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', gone: /produces no \{good\}/, prints: 1, why: 'luxury goods listed as made here: "the country produces no luxury goods" (20338; v1 now "does not give the town enough")' },
   { seed: 'r2s-slave_revolt-city-2', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', gone: /None of the \{good\} used/, prints: 2, why: 'gems mined and luxury made here: "None of the luxury goods ... comes from the country here" (14987)' },
   { seed: 'r2s-monster_pressure-thorp-3', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', gone: /produces no \{good\}/, prints: 3, why: 'sacred wood exported: "produces no timber" (20355)' },
@@ -147,8 +149,12 @@ const GONE = [
 const KEEP = [
   // ── BATCH 1 · DS-ECO-12: the reworded line still draws in its pool's other towns (its unchanged stem, green before and after) ──
   { seed: 'r2s-wartime-village-1', pool: 'DS-ECO-12::INCOME MIX: one source carries the town', keep: 1, text: /^More than half of what \{settlement\} earns comes from a single/, why: 'a village at war, its farm rents over half its income' },
-  { seed: 'r2s-mass_migration-town-2', pool: 'DS-ECO-12::INCOME MIX: one source carries the town', keep: 2, text: /^Almost everyone's living at \{settlement\} depends on one/, why: 'the largest town v2 reaches' },
-  { seed: 'r2s-wartime-metropolis-3', pool: 'DS-ECO-12::INCOME MIX: a criminal line is present', keep: 2, text: /^Some of the money in \{settlement\} is made outside the law/, why: 'a metropolis with a criminal line under its market' },
+  // TAIL-CLOSE-SWEEP-C (2026-11-15): RE-KEYED by identity from r2s-mass_migration-town-2 (its smuggling row held at 33% by 9cc8c6826, a
+  // DECLARED MOVE: "two or three sources" now): no town or larger draws v2 on the 720 now; the largest it reaches is a village
+  { seed: 'r2s-mass_migration-village-0', pool: 'DS-ECO-12::INCOME MIX: one source carries the town', keep: 2, text: memberRe('DS-ECO-12::INCOME MIX: one source carries the town', 2), why: 'the largest town v2 reaches (a village since 9cc8c6826)' },
+  // TAIL-CLOSE-SWEEP-C (2026-11-15): RE-KEYED by identity from r2s-wartime-metropolis-3 (its syndicate row held at 21% by 9cc8c6826, a
+  // DECLARED MOVE: "the criminal line leads" now): r2r-metropolis-27, a criminal syndicate at 20%, draws v2
+  { seed: 'r2r-metropolis-27', pool: 'DS-ECO-12::INCOME MIX: a criminal line is present', keep: 2, text: memberRe('DS-ECO-12::INCOME MIX: a criminal line is present', 2), why: 'a metropolis with a criminal line under its market (re-keyed from r2s-wartime-metropolis-3, 9cc8c6826)' },
   { seed: 'r2s-famine-town-1', pool: 'DS-ECO-12::INCOME MIX: a broad spread, no leader', keep: 1, text: /^\{settlement\} lives on many/, why: 'a famine town, no source near half' },
   { seed: 'r2s-wartime-city-1', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 1, text: /^The country around \{settlement\}/, why: 'a city at war' },
   { seed: 'r2r-thorp-12', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 2, text: /^Not enough of the \{good\} .*comes from the country here/, why: 'the smallest it reaches' },

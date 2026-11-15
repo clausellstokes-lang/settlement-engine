@@ -14,7 +14,7 @@
 
 import { crisisHookFor } from '../crisis/crisisHooks.js';
 import { resolveSibling } from '../facts/drawDeclared.js';
-import { factsOf } from '../facts/factsOf.js';
+import { factsOf } from '../facts/factsOf.js'; import { guildHouseStands } from '../facts/guild.js'; // TAIL-CLOSE-SRC-4: one line
 import { atomHolds } from '../facts/factVocabulary.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
@@ -92,7 +92,7 @@ const INFLUENCE_RANK = Object.freeze({
  * @property {unknown} [tier]
  * @property {unknown} [population]
  * @property {{ key?: unknown, label?: unknown }} [culturalIdentity]
- * @property {{ label?: unknown }} [culture]
+ * (TAIL-CLOSE-SRC-4, WR2: no culture block; the cultural identity above carries the label)
  * @property {unknown} [settlementReason]
  * @property {{
  *   historicalCharacter?: unknown,
@@ -165,8 +165,8 @@ function composeIdentity(settlement) {
   const tier = cleanText(settlement.tier) || 'settlement';
   const population = finiteNumber(settlement.population);
   const cultureLabel = cleanText(
-    settlement.culturalIdentity?.label
-      || settlement.culture?.label,
+    settlement.culturalIdentity?.label, // TAIL-CLOSE-SRC-4 (WR2): the cultural identity's label is the one home; the culture's
+    // writer is the config, and no settlement record carries a culture label (the second, wrong-shape read is struck)
   );
   const cultureKey = cleanText(settlement.culturalIdentity?.key);
 
@@ -278,7 +278,7 @@ function scopeAgainstRecord(phrase, source) {
   // The tank is a water work on the roster (WATERWORKS_HOUSE, or a metropolis's water infrastructure; a village's wells
   // and springs are not one), the bazaar a market (the market fact): each is struck where the record holds none
   // (r2r-town-7: "Multiple water sources", wells and fountains, and no tank). A record with no roster is unread.
-  if (roster && out.includes('built around the tank and the bazaar')) {
+  if (roster) { // the market is the market home's (`factsOf(...).market`); a clause the phrase lacks is a no-op replace (TAIL-CLOSE-SRC-4)
     const tank = rosterHolds(source, WATERWORKS_HOUSE) || rosterHolds(source, WATER_INFRASTRUCTURE);
     const bazaar = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).market !== false;
     if (!tank || !bazaar) {
@@ -300,7 +300,7 @@ function scopeAgainstRecord(phrase, source) {
   }
   // the guild: "guild and estate" only where the roster holds a guild
   // R2-CODE-B-SIDE item 5: the guild is a HOUSE on the roster, never a power that only contends (rosterHolds below).
-  if (roster && out.includes('run by guild and estate') && !rosterHolds(source, GUILD_HOUSE)) {
+  if (roster && !guildHouseStands(/** @type {Parameters<typeof guildHouseStands>[0]} */ (source))) { // the guild home's house reading; a clause the phrase lacks is a no-op replace (TAIL-CLOSE-SRC-4)
     out = out.replace('run by guild and estate', 'run by its estates');
   }
   // earthworks: a defence fact of their own
