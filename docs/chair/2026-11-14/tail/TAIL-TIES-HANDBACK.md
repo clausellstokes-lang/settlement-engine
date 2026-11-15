@@ -52,7 +52,7 @@ this hand-back: its batches are under TAIL-TIES's own, headed "TAIL-TIES-2".
 
 ## The rulings since (the chair's, 2026-11-15, to TAIL-TIES-3; each vetoable by the owner)
 
-TAIL-TIES-3 (the third seat, session_01ACmDYzhEuurtmhuQM2Cq) continues on this branch from f00b248fe and keeps this hand-back:
+TAIL-TIES-3 (the third seat, session_01ACmDYXzaEhuurtmhuQM2Cq; the `Claude-Session` trailer of its commits 112532f64 and fdebbe346 misspells that id as …DYzhEuur…: the id is this one) continues on this branch from f00b248fe and keeps this hand-back:
 its batches are headed "TAIL-TIES-3".
 
 - **(T11)** STILL OPEN at the hand-over, TAKEN by TAIL-TIES-3 (below): rows of TAIL-DISPLAY-CIVIC's worklist
@@ -76,6 +76,17 @@ its batches are headed "TAIL-TIES-3".
   density resize can change the governing power's one-or-many kind AFTER the people's lines are written. TAIL-TIES-2's nine
   vote lines were measured on the final pages and hold there. Until the chair's word, NO MORE lines are keyed by that atom;
   such lines are parked with their measure. (TAIL-TIES-3 keyed none.)
+- **(T17)** (02:10 UTC) THE ROLE-BASED TIE ROWS: (A) ONLY ON A LEAF THAT EXISTS TODAY: if `src/domain/roles/roleClass.js` (or
+  another leaf already in the tree) tells, from the card's house, a POLICING office (watch, warden, militia) from a HIRED
+  COMPANY from A GARRISON'S OR A SEAT'S COMMAND, the atom `card office` is GRANTED as a reading of THAT leaf (no new table;
+  the lines declared; a refused index resolving in its pool; measured). IF NO SUCH LEAF EXISTS: (B), the lines reworded to
+  what any card of the category bears, veto-listed; no new house-to-office table for thirty rows. Say which in the hand-back.
+- **(T16 LIFTED)** (02:26 UTC) THE HOLD ON `ruling body` IS LIFTED: on the 720 the density resize never changes the governing
+  power (720 of 720): the atom takes new lines again. NOT to be keyed on: the governing power's capture state (moves after
+  the write in 103 towns) or its legitimacy crisis note (11).
+- **(REPORT DIET, 02:03 UTC, to every seat)** the account's weekly usage warning is on: commit and push every batch the moment
+  it holds, with WHAT IS LEFT current in the same push; hand back AT the mark; one line only at the hand-back, a stop, or a
+  question; WIDEST FIRST (a row in fewer than five towns waits behind every wider row).
 - **(X9)** repeated: what is left of WORKLIST3-TIES.json's 29 rows, with a batch of the same writer; measure with
   `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`.
 
@@ -349,7 +360,21 @@ rosterDuplicateDraws (2).
 
 ## What is left of the worklist (TAIL-TIES-3, at 112532f64)
 
-- THE ROLE-BASED TIE ROWS, WAITING ON THE CHAIR'S WORD (asked 2026-11-15 ~01:45 UTC, no answer at the hand-back): T11's
+- FIRST (the chair, 01:57 UTC: READ-ALL-4, the lines NEW on the tabs at the landed tip 9eb084705; before the rest):
+  (1) npcData.js NPC_HOOK_SIBLINGS "A valuable cargo was reported lost on the road." (100 towns; the chair measured 2 under
+  a siege, 10 under a famine, 3 under an occupation; the reader's town has river access only): the line needs a road and no
+  siege (measure the road half: the route atoms, `route: …`, in factVocabulary.js). This is batch 2's twin of 03139 (its
+  `coast` sibling): its declaration is the cure. (2) hookThemes.js AUTHORED_HOOK_THEMES "Their scales were tested and found
+  heavy in their favour, and they swear someone changed them overnight." (5 towns; an isolated thorp of 11 with no market,
+  no trade house, no exports or imports): needs `market` (or a trade house). (3) hookThemes.js "A lender has bought the note
+  on their shop and wants it settled by the end of the month." (4 towns; an isolated thorp of 26 under a famine, no shop or
+  market): needs a shop (`market`, or the card's own house) and a lender. One line to the chair when cured.
+- THE ROLE-BASED TIE ROWS under (T17), NOT YET DECIDED A OR B: `roleClass.js` does NOT tell them (one `military` class for
+  every armed role). The candidate leaf to read first: the defence facts' institution readings (`src/domain/facts/defence.js
+  :: defenceOf` reads `hasWatch / hasMilitia / hasGarrison / hasMercenary` from the town's defense facts): if an exported
+  function there classes ONE institution (the card's `institution.key`), the atom is (A) as its reading; if it only answers
+  for the town, (B).
+- THE ROLE-BASED TIE ROWS (the rows; T17 above rules the cure): T11's
   B00530 ("… commands the patrols and … pays for their routes", npcData.js mil_crim_corruption d[7], 24) and 00587 ("…
   governs on …'s credit", gov_econ_dependence d[7], 20), with the worklist's mil_crim_corruption (B01427, B01285, B27789,
   B27787, B03387, B01216, B02765; X9 07276, 07278), mil_crim_suppression (B21428, B17413, B00871, B00671; X9 04213, 04209),
@@ -394,3 +419,9 @@ The census's one command (lane/census-3-2026-11-14 `docs/chair/2026-11-14/probes
 and the chair's lane `docs/chair/2026-11-14/probes/READ-ALL/inventory.py` / `inventory_diff.py`, git-archived to a
 scratch directory outside every tree; the verification is by script over `corpus.ndjson.gz` through the tree's own
 `factsOf` and `rulingBodyOf`.
+TAIL-TIES-3's notes: the repository's main checkout holds this branch, so the scratch worktree is DETACHED at the branch's
+tip (`git worktree add --detach <scratch>/wt origin/lane/tail-ties-2026-11-14`, its own `npm ci`) and pushed by
+`git push origin HEAD:refs/heads/lane/tail-ties-2026-11-14`; the pre-push hook takes about two minutes. A second detached
+worktree at the base (node_modules symlinked) shows which reds are carried. Its census runs (before at f00b248fe, after at
+112532f64) were in the session's scratch and are gone: the successor's before-run is a fresh run at fdebbe346 (its tabs
+equal 112532f64's). The record's field diff by family is a 20-line walk over the two `corpus.ndjson.gz` (seed → `s`).
