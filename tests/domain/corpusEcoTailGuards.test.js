@@ -183,7 +183,7 @@ const KEEP = [
   { seed: 'r2r-thorp-21', pool: 'DS-ECO-1::COMBINATION C5: a low rung on a narrow approach', keep: 2, text: /feeds it and no more/, why: 'food secure, no siege' },
   { seed: 'r2r-metropolis-4', pool: 'DS-ECO-6::TIER: a large share off the books (≥30)', keep: 1, text: /^A large share of what \{settlement\} earns/, why: 'the stem' },
   { seed: 'r2r-city-17', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', keep: 1, text: /^A real portion of \{settlement\}'s trade/, why: 'the stem' },
-  { seed: 'r2r-hamlet-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', keep: 1, text: /^If any of \{settlement\}'s trade/, why: 'the stem' },
+  { seed: 'r2r-hamlet-1', pool: 'DS-ECO-6::TIER: minor shadow activity (≥3)', keep: 1, text: /^Some of \{settlement\}'s trade is done out of sight/, why: 'the stem' }, // re-keyed by identity, BAR2-CORPUS (2026-11-15): v1 reworded (C14631: "too little to change" where the shadow income is a seventh or more)
   { seed: 'r2r-city-11', pool: 'DS-ECO-11::STRATEGIC VALUE: the generator\'s assessment, framed', keep: 4, text: /A newcomer to/, why: 'no siege' },
   { seed: 'r2r-metropolis-16', pool: 'DS-ECO-8::WEALTHY', keep: 1, text: /reserves deep enough/, why: 'fifteen months of stores' },
   { seed: 'r2r-hamlet-25', pool: 'DS-ECO-10::POSTURE: none', keep: 1, text: /the town uses/, why: 'no occupation' },

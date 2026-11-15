@@ -1,6 +1,6 @@
 # BAR2-CORPUS hand-back (REVIEW-BAR-2's rows of CORPUS-DEF, CORPUS-ECO and DS-ECO-1 C1)
 
-Seat BAR2-CORPUS, 2026-11-15. Base: the joined line `lane/join-2026-11-14` at **f8042b61a** (read back from origin at the start); branch `lane/bar2-corpus-2026-11-15`. One batch (batch 1), one commit. Work in a scratch worktree; nothing merged. **The merge word ("MERGE THE LINE AT <tip>") has not come: the books (F2) and CP2's re-keys are NOT run yet** (see "The books" below: what this batch will move is named).
+Seat BAR2-CORPUS, 2026-11-15. Base: the joined line `lane/join-2026-11-14` at **f8042b61a** (read back from origin at the start); branch `lane/bar2-corpus-2026-11-15`. One batch (batch 1), one commit. Work in a scratch worktree; nothing merged. **THE MERGE (16:21 UTC, the chair's word): the joined line at dcb069bff merged into this branch as af120bdd4 (no conflict); THE BOOKS (F2) RUN ON THAT MERGED TREE: see "The books at the merged tip" below.**
 
 ## The rulings I worked to (the chair's, 2026-11-15; each vetoable by the owner)
 
@@ -101,13 +101,29 @@ Run on the cured tree and on a clean base worktree (f8042b61a), the same seven f
 
 Every other red of those seven files is red at base with the same arm (the close's). The presumed-things register (`tests/lint/presumedThings.widened.register.json`) is SHRUNK through its door (`--shrink`, shrink-only): 8 stale rows, the banked texts of lines this batch reworded (5 `armedForce`, 1 `house: craft guild`, 2 `openTrade`); `--check` fresh 0 / stale 0.
 
+## The books at the merged tip (F2, on af120bdd4; each file run alone through `sh scripts/gate-tail.sh`, to a file)
+
+86 files: every test file naming a file this seat touched (the annex, the wiring census, the four leaves, the presumed register, `dossierStateProse`) and the brief's law suites, with `tests/property/generatorGoldenMaster.test.js`. 74 green at once; 4 helpers (not test files); 8 red, classed below. **No LAW was turned red by my cures.** **0 of the 525 reference configurations move**: the golden master (re-taken by the close at dcb069bff) is green at my merged tip, and no generator reads the leaves.
+
+| test · arm | old -> new | door / form | done |
+|---|---|---|---|
+| `tests/lint/proseCorpusBytes.test.js` · RAW is EXACT | defense 266746 -> 266732, economy 185744 -> 185569 (lowered); general 298496 -> 298564, power 131321 -> 131329 (two declared rows) | `scripts/.prose-byte-baseline.json` (CP2) | re-keyed, 18/18 |
+| `tests/lint/proseMoveGrammar.walker.test.js` · CONTROL 4 (both halves) | repeated opener 138 -> 137, share 0.161 -> 0.160, x800 129 -> 128 | the file's own dated notes (CP2) | re-keyed, 54/54 |
+| `tests/lint/proseEntryContradiction.walker.test.js` · THE QUALIFY ARM | trailing-coordinate entries 371 -> 372 | the file's own dated note (CP2) | re-keyed, 29/29 |
+| `tests/domain/crisisBlindDossierProse.test.js` · calm claims floor | 17 -> 16 (a calm claim cured at the source) | the floor follows the cures (the chair's K30 (a)) | re-keyed, 5/5 |
+| `tests/domain/facts/declarationRegisters.test.js` · a count that fell is re-pinned | `DS-SUP-3::ONE EXPECTED CATEGORY MISSING` undeclared 3 -> 2 | `RETAKE_DECLARATION_REGISTERS=1` (shrink-only register) | re-pinned, 8/8 |
+| `tests/lint/observedShapeReaders.walker.test.js` · a freshly re-minted baseline has no drift | the four leaves (execution inputs) | `node scripts/check-observed-shape-readers.mjs --write` (shrink-only re-freeze) | re-frozen, 47/47 |
+| `tests/domain/corpusEcoTailGuards.test.js` · DS-ECO-6 v1 KEEP stem | `/^If any of .../` -> `/^Some of ... is done out of sight/` | re-keyed by identity beside a dated note | 136/136 |
+| `tests/property/dossierProseManifest.test.js` (3) | — | THE OWNER'S OWN DOOR (the chair's message): left exactly as it is | not mine |
+
+So the books my cures move: **7 stored figures, each re-keyed in its own form; 0 laws.**
+
 ## Gates (batch 1)
 
 `typecheck:domain:strict` 1113/1113 OK; `typecheck:ratchet` 167/167 OK; eslint on the touched files 0; presumed-things `--check` exit 0; `page-census.mjs --grid` 0 falls; `wiring-census.mjs --check` 0; `gen:dossier-prose --check` 0. The guard `tests/domain/bar2CorpusGuards.test.js`: 36/36 green at the tip, 33 red at base (its 3 KEEP rows green both sides).
 
 ## Guards owed / what is left
 
-- F2's whole-books run (the law suites list and every test naming a touched file) after the merge word, then the prose-bytes re-key beside a dated note.
 - None of my worklists' rows is left open: 26 cured (20 gone, 3 fewer by their measure, C23849 gone in its bar town), 1 struck, 2 named.
 
 ## How the instruments are re-made

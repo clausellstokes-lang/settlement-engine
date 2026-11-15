@@ -229,14 +229,14 @@
  "digests": {
   "corpusMeta": "0702d6539b5dd567e9d1bbf90e8d761a40245d24f1ecd467bf4ba6da0a5ca55b",
   "inventory": "5eab6e5d7e47c35de6f5138dc5503533671ef54f3021fa43e2ecc353b85d16c1",
-  "manifests": "5cec9353d21610dee898c9fcd6be7c9b1ee8728457102d68ea7c82965171d724",
+  "manifests": "bcc491a07290cfca96f2247b5c0c1439a36b7613ad5ce9c2211d821e6105eff4",
   "migrationReview": "72dad1675ca82451fc163233f8d67d40eecc795da32257dd735bbeae527a6de2",
   "rowTags": "a3127aa474bc89b4a9970dcd722ffd474cf0c8a23a54f66e13512a73135e28f4",
   "scanStats": "b9c4fe28a708138268768d5a703d835f43ed8f08ba1d495805a5cb3350820dd2",
   "sentinel": "2f9c0b36754e121d7fcc0058b5ce17eb97cb9ff7ab743fc11a3f249cefe9574c"
  },
  "frozen": "2026-11-15",
- "frozenAtSha": "8c85b5d66dfdf642bc166933062f3683b9dfb72d",
+ "frozenAtSha": "af120bdd4a66afedb6a37a235041dd7ed5e8ce6b",
  "identities": 1549,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2753,7 +2753,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "d3784d40893ac114a7930d9f61399b3c7525aef62e47b3e192396a756abf0535",
+   "digest": "77b036696f529cda5372b0092292fcc12e9cd0e96c3803bf951e8af596ce63c1",
    "entries": [
     {
      "mode": "100644",
@@ -7273,8 +7273,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "e7d0f3df2d048ae90f860e3e3466e5c94fafaf4f03727818a955e4df9e6e0450",
-     "size": 23993,
+     "sha256": "40b160c0705a6ecee6f05443d027f80cf7526fbf1c1f04c61b902d49413ad1f9",
+     "size": 24434,
      "type": "file"
     },
     {
@@ -7399,29 +7399,29 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "9b0992e69694439998e691ab509b3485551fe3c5a1c99d7fa9fdcd63809f95e2",
-     "size": 266746,
+     "sha256": "2a410d295e75752ee8084962f8c5170f4f45f7de476d3ceb246d2f695eb94d44",
+     "size": 266732,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/economy.generated.js",
-     "sha256": "bf1dcfc7ea8197654fc064d37c196a2433a900e7b021aa66da8a3f69be0695e3",
-     "size": 185744,
+     "sha256": "882ff102aee14ae468838ea7b1a5f0cb3887571c5acb3230b926a239bf8a7504",
+     "size": 185569,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "d57aec3eedc0738923d03c0c3e85bf5ed72085aa79100b6e7bc109d570f6b835",
-     "size": 298496,
+     "sha256": "775ed52ad4e85f68278240b9899aea833af1e9dc707691011063cd1f05da62d5",
+     "size": 298564,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "c2b959a6043beac851a40af87477c42d246a337e8e99c23b1105db1db5d04e83",
-     "size": 131321,
+     "sha256": "49d706f9d84838d6b136a9817bc93c2ddbca28731609b973767949f3f23bb793",
+     "size": 131329,
      "type": "file"
     },
     {
@@ -13783,8 +13783,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "e99a4694420b183c49511c2a88ad6690d38b1f8b1ea72507c099efdf033b579d",
-     "size": 48335,
+     "sha256": "8d9c441de8c7a72ff16eb62678695769165220573003c0bfa8c9723f284ae84c",
+     "size": 48756,
      "type": "file"
     },
     {
@@ -17458,8 +17458,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "4cb0fadc3a76f95e12c7dae5a35cb631923101b2453e5b226c6958b9ecba8fe3",
-     "size": 27941,
+     "sha256": "fbec17eda096343a64c17d0d858124eb1d4a58fa96d5b84c8ca8a81e9d7864f0",
+     "size": 27889,
      "type": "file"
     },
     {
@@ -20637,7 +20637,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f10bdc66a0c2409d2fc3d9843992d5f2f840b225b3f5acc80fb1046424db6b7c",
+   "digest": "08bbcb2daff87de6eedf725c21e20d77883c3cc21ba046f5de64fe7e28e5fb81",
    "entries": [
     {
      "mode": "100644",
@@ -25087,8 +25087,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "e7d0f3df2d048ae90f860e3e3466e5c94fafaf4f03727818a955e4df9e6e0450",
-     "size": 23993,
+     "sha256": "40b160c0705a6ecee6f05443d027f80cf7526fbf1c1f04c61b902d49413ad1f9",
+     "size": 24434,
      "type": "file"
     },
     {
@@ -31478,8 +31478,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "e99a4694420b183c49511c2a88ad6690d38b1f8b1ea72507c099efdf033b579d",
-     "size": 48335,
+     "sha256": "8d9c441de8c7a72ff16eb62678695769165220573003c0bfa8c9723f284ae84c",
+     "size": 48756,
      "type": "file"
     },
     {
@@ -35153,8 +35153,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "4cb0fadc3a76f95e12c7dae5a35cb631923101b2453e5b226c6958b9ecba8fe3",
-     "size": 27941,
+     "sha256": "fbec17eda096343a64c17d0d858124eb1d4a58fa96d5b84c8ca8a81e9d7864f0",
+     "size": 27889,
      "type": "file"
     },
     {
@@ -38325,7 +38325,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "212e8836e85d3b7cb9adf21fdd86a2b3ab13a2fcacfa94be242e16cc3da938d4",
+   "digest": "fd801ad51b69970c2491965ce7ed0b696f07fa2b03bb970402c1c94f8a251869",
    "entries": [
     {
      "mode": "100644",
@@ -42775,8 +42775,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "e7d0f3df2d048ae90f860e3e3466e5c94fafaf4f03727818a955e4df9e6e0450",
-     "size": 23993,
+     "sha256": "40b160c0705a6ecee6f05443d027f80cf7526fbf1c1f04c61b902d49413ad1f9",
+     "size": 24434,
      "type": "file"
     },
     {
@@ -42901,29 +42901,29 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "9b0992e69694439998e691ab509b3485551fe3c5a1c99d7fa9fdcd63809f95e2",
-     "size": 266746,
+     "sha256": "2a410d295e75752ee8084962f8c5170f4f45f7de476d3ceb246d2f695eb94d44",
+     "size": 266732,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/economy.generated.js",
-     "sha256": "bf1dcfc7ea8197654fc064d37c196a2433a900e7b021aa66da8a3f69be0695e3",
-     "size": 185744,
+     "sha256": "882ff102aee14ae468838ea7b1a5f0cb3887571c5acb3230b926a239bf8a7504",
+     "size": 185569,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "d57aec3eedc0738923d03c0c3e85bf5ed72085aa79100b6e7bc109d570f6b835",
-     "size": 298496,
+     "sha256": "775ed52ad4e85f68278240b9899aea833af1e9dc707691011063cd1f05da62d5",
+     "size": 298564,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/power.generated.js",
-     "sha256": "c2b959a6043beac851a40af87477c42d246a337e8e99c23b1105db1db5d04e83",
-     "size": 131321,
+     "sha256": "49d706f9d84838d6b136a9817bc93c2ddbca28731609b973767949f3f23bb793",
+     "size": 131329,
      "type": "file"
     },
     {
@@ -49285,8 +49285,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/candidateEvents.js",
-     "sha256": "e99a4694420b183c49511c2a88ad6690d38b1f8b1ea72507c099efdf033b579d",
-     "size": 48335,
+     "sha256": "8d9c441de8c7a72ff16eb62678695769165220573003c0bfa8c9723f284ae84c",
+     "size": 48756,
      "type": "file"
     },
     {
@@ -52960,8 +52960,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/stressFactions.js",
-     "sha256": "4cb0fadc3a76f95e12c7dae5a35cb631923101b2453e5b226c6958b9ecba8fe3",
-     "size": 27941,
+     "sha256": "fbec17eda096343a64c17d0d858124eb1d4a58fa96d5b84c8ca8a81e9d7864f0",
+     "size": 27889,
      "type": "file"
     },
     {
@@ -56467,10 +56467,10 @@
  },
  "scannerProvenance": {
   "detectorDigest": "95fb5bb2a67415cada23e96613c703a7ddc204a467feeb25d122bbc179ab732f",
-  "executionTreeDigest": "d3784d40893ac114a7930d9f61399b3c7525aef62e47b3e192396a756abf0535",
-  "scanTreeDigest": "f10bdc66a0c2409d2fc3d9843992d5f2f840b225b3f5acc80fb1046424db6b7c",
-  "sourceTreeDigest": "212e8836e85d3b7cb9adf21fdd86a2b3ab13a2fcacfa94be242e16cc3da938d4",
-  "unscannedInputDigest": "c908988e27573e9c32ea2e5b103a4330de4240f1de52cdf429bddb664a171ad2"
+  "executionTreeDigest": "77b036696f529cda5372b0092292fcc12e9cd0e96c3803bf951e8af596ce63c1",
+  "scanTreeDigest": "08bbcb2daff87de6eedf725c21e20d77883c3cc21ba046f5de64fe7e28e5fb81",
+  "sourceTreeDigest": "fd801ad51b69970c2491965ce7ed0b696f07fa2b03bb970402c1c94f8a251869",
+  "unscannedInputDigest": "d54244962cfb2e2f15dd2c98212e4a9676ef15011d92a4a31f49eb6f2904ec9d"
  },
  "schema": 44,
  "sentinel": {
