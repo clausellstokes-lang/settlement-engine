@@ -102,6 +102,7 @@ import {
   validateSchema41Baseline,
   validateSchema42Baseline,
   validateSchema43Baseline,
+  validateSchema44Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -141,6 +142,7 @@ import {
   PLAYED_WORLDS_TARGET_SCHEMA,
   AGREE_TIER_SEED_TARGET_SCHEMA,
   CLOSE_ROUND_TARGET_SCHEMA,
+  FINAL_PASS_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1663,7 +1665,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(declaredBankOf(PLAYED_WORLDS_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
     expect(declaredBankOf(AGREE_TIER_SEED_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
     expect(declaredBankOf(CLOSE_ROUND_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(CLOSE_ROUND_TARGET_SCHEMA));
+    expect(declaredBankOf(FINAL_PASS_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(FINAL_PASS_TARGET_SCHEMA));
     expect(declaredBankOf(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
     expect(declaredBankOf(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
@@ -1757,7 +1760,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing declared, the bank 77/51.
     // ⭐ SCHEMA 40: THE PUBLIC PROSE WRITER'S ADMISSION (SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE save-time-writer declaration, `publicProse on settlement` (the roster 14 -> 15, the bank 77/51); its one new row is admitted tagged and nothing else moves.
     // ⭐ SCHEMA 41: THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer class, played-worlds-writer, and its first declaration, `outcome on outcome` (the roster 15 -> 16, the bank 78/52); its one row is tagged and nothing else moves.
-    expect(BASELINE_SCHEMA).toBe(43); // the close-of-round rung, 2026-11-15 (the chair's ruling OR2, record 456)
+    expect(BASELINE_SCHEMA).toBe(44); // the final-pass rung, 2026-11-15 (OR2's law at f76fe38fd)
     expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
     expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
@@ -1786,7 +1789,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema43Baseline(live)).toBe(live); // the close-of-round rung (43), 2026-11-15 (the chair's ruling OR2)
+    expect(validateSchema44Baseline(live)).toBe(live); // the final-pass rung (44), 2026-11-15 (OR2's law at f76fe38fd)
+    expect(() => validateSchema43Baseline(live)).toThrow(/is not schema 43/);
     expect(() => validateSchema42Baseline(live)).toThrow(/is not schema 42/);
     expect(() => validateSchema41Baseline(live)).toThrow(/is not schema 41/);
     expect(() => validateSchema40Baseline(live)).toThrow(/is not schema 40/);
@@ -1947,7 +1951,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(43); // the close-of-round rung, 2026-11-15 (the chair's ruling OR2, record 456)
+    expect(BASELINE_SCHEMA).toBe(44); // the final-pass rung, 2026-11-15 (OR2's law at f76fe38fd)
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

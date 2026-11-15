@@ -30,6 +30,21 @@ The register now matches the code at the close, and every row that moved says wh
   saved record may still feed a fallback.
 - **No defect was found.** No read prints wrong or empty on a page. Nothing was cured, and no page line moved.
 
+**At the final pass (schema 44, and the writers' register re-stamped, the chair's ruling WR3):**
+- One more read the instrument lost, not cured: the engine's "is this house still standing?" test
+  (`institutionRoster.js`) reads a ruin stamp that the instrument stopped seeing when a tonight's fix (SR5) started
+  using the same test for the defence tab. The read is still in the code and does its job. It is recorded as
+  instrument erosion, and its cure is owed after the release with the other seven.
+- One dead fallback (the quick guide's culture label) was really removed, by the src close seat.
+- **Twenty generated facts are no longer counted as reaching the campaign PDF and the world book.** They never
+  printed there. The count came from a tangle in the code: the facts' reader imported the defence tab's display
+  file just to borrow one small key lookup, so the whole display file and seven of its helpers counted as "in"
+  those two books. The close cut that tangle (T28 and T29): the lookup moved, word for word, into its own small
+  file, and that file is still in both books' reach. All twenty facts are still shown on other surfaces (the web
+  page, the dossier PDF, Foundry). One more, a service's name, is no longer counted on the web display, and is
+  still shown on the PDFs and in Foundry. Thirteen facts gained reach: the names of the charter, the magical
+  defence, the mercenaries and the walls now reach the dossier PDF, Foundry and the web display.
+
 **Carried from the predecessor (instrument one), unchanged:** 26 facts written that no page reads were banked once by
 the chair's ruling WR1. Each is owed after the release: shown by a page line, or its writer retired, by its lane. Eight
 are engine plumbing with register rows. One register row was struck by the instrument's own verdict, but the sentence it
@@ -166,7 +181,70 @@ the merged tree, each to a file, 8 GB heap:
 - So the later landings brought no new dark identity (WR1 not needed; the growth door NOT used a second time) and no
   moved reader row (OR2 not needed again).
 
+## THE FINAL PASS (the chair's word: "FINAL PASS at f76fe38fd")
+
+`lane/join-2026-11-14` at f76fe38fd merged at d9b01004c (a merge commit, clean). Both doors' plain arms at the merged tree:
+- the writers' door: exit 0, `WRWALKER HOLD — judged 12661 · LIT 691 · LIT-NAME 10563 · DARK 1407 (reviewable 389)`;
+  DARK unchanged, four identities rose from LIT-NAME to LIT; no new dark identity (no WR1 row, the growth door NOT used).
+- the readers' door: exit 1, two STALE rows: `culture on settlement` (settlementQuickGuide.js) and `_worldPulseInactive on
+  institutions` (institutionRoster.js).
+
+**THE SECOND SMALL RUNG, schema 44, "the close's final pass"**: OR2's law requires it, because one of the two rows is
+erosion. A plain shrink-only `--write` would bank it as a repair.
+- `culture on settlement`: class R, a lawful shrink. The read is gone, struck at its root by TAIL-CLOSE-SRC-4 · WR2
+  (d8b08402f).
+- `_worldPulseInactive on institutions` (:40, `isLiveInstitution`): class E, **UNCURED INSTRUMENT EROSION**, recorded
+  as such. The read stands and the file is unchanged. TAIL-CLOSE-SRC-5 · SR5 (b) (9cade66ce) passes the defence
+  buckets' entries to `isLiveInstitution`, so its parameter binds a second shape. **CONFIRMED** by a scratch control
+  (the merged tip with only that call undone, a local commit never pushed): the row scans back.
+- Act 1 a845c2c84: the form of rung 43; the instrument's own tests 120/120; eslint clean. Act 2: scan; migrate
+  **Same 1549 · New 0 · Gone 2**; the three bookkeeping paths; no unscanned movement; the corpus unmoved; the review
+  `docs/chair/2026-11-15/osr-rung44-final-pass-review.json` (1,552 decisions; refusing builder; negative control
+  refused exit 3); bundle; `--write --migrate-schema=44`: "froze 2210 finding(s) / 1549 identit(ies) across 439
+  file(s); bank 78 / 52". No walker pin moved.
+
+**Receipts at the rung-44 tree, each walker alone:**
+- `observedShapeReaders.walker` (8 GB heap): **47 of 47**.
+- `writerReach.walker`, **UNDER THE DEFAULT HEAP** (2,096 MB, `NODE_OPTIONS` unset; the heap cure e798161fd is on the
+  line): **all 52 ran**, no out-of-memory; **51 of 52**. The culture arm is GREEN (WR2 landed). The one red is "the
+  surfaceReach grammar round-trips": `institution on availableServices is missing from the frozen surfaceReach`, frozen
+  `web-transitive=N`, measured `web-transitive=R`.
+
+**HELD FOR THE CHAIR: the writers' register re-stamp.** The door's own `--write` (cohort 1367 → 1367, nothing folded,
+nothing grown) would clear that red. It re-stamps **31 identities' reach, not one**: **13 rises** (`institution on
+availableServices` web-transitive; `name on charter`, `on magicDef`, `on mercenary`, `on walls` each to dossier-pdf, foundry and
+web-display) and **41 falls**. In the falls, **20 identities lose campaign-pdf AND world-book reach** (the campaign-pdf
+closure 166 → 159 files, world-book 181 → 174), and `name on availableServices` loses web-display:
+`inst on compound`, `desc on crimeTypes`, `economicGates on defenseProfile`, `compound on economicState`,
+`magicOffset`/`stockpile on foodSecurity`, `hasChurch`/`hasCourtSystem`/`hasGranary`/`hasHospital`/`hasNavy`/`hasPort`/`hasPrison on inst`,
+`crimeTypes`/`guardEffectivenessDesc`/`safetyDesc on safetyProfile`, `disaster on scores`,
+`structuralViolations on settlement`, `blockadeBypass`/`blockaded on stockpile`. Every one is still LIT through another
+surface. The cause of the closure cut is not measured here. A fall is not "a figure that ROSE", so the re-stamp waits on
+the chair's word. The re-stamped file is kept in the scratch tree. This hand-back is updated when the re-stamp lands.
+
+**RULED WR3 (the chair, 2026-11-15 ~11:23): "the falls are banked only with their cause shown".** Measured:
+- **(1) The files.** Each closure lost the same EIGHT files and gained ONE (`src/domain/facts/criminalStructureKey.js`),
+  net −7. All eight hung from one edge, `factsOf.js → defenseDisplay.js`. It was removed by **T28** (82dc208be, "the
+  criminal structure's key as the crime fact's leaf"). The commit's own subject says "STOPPED: not for landing"; its two
+  stop conditions were cured by **T29-1..3** (6320a6ac5, 722e9961c, 1adf270af, cb17872ed), and the lane joined the line
+  at 416be57d1 (JOIN-11 point 4, lane/close-layer-cycle-attempt-2026-11-15). That is the close's declared last layer
+  cycle. The eight files and the edge that brought each in: `display/defenseDisplay.js` ← factsOf.js (the cut edge);
+  `display/threatAssessment.js` ← defenseDisplay; `display/defenseScoreBands.js` ← defenseDisplay, threatAssessment;
+  `display/clergyHouse.js` ← threatAssessment; `display/prosperityInCrisis.js` ← threatAssessment;
+  `magicReliance.js` ← defenseDisplay; `arcaneInstitutionIdentity.js` ← magicReliance; `summary/storesSpanWords.js`
+  ← defenseDisplay (all under `src/domain/`).
+- **(2) The kind.** Every one is a domain or display helper that the campaign PDF and the world book never render
+  from. None is under `src/pdf/` or the world book's own modules. The surfaces used one function through the tangle,
+  the criminal structure's key ladder (`deriveCriminalStructure(record)?.key`), and it moved verbatim to
+  `criminalStructureKey.js`, which is still in both closures.
+- **(3) Banked.** The door's own `--write` on the clean tree: cohort 1367 → 1367, nothing folded, nothing grown. It is
+  byte-identical to the held re-stamp but for its sha. The commit message gives the cause file by file.
+
+**THE FINAL RECEIPTS** (each walker alone, to a file, at the re-stamped tree):
+- `tests/lint/writerReach.walker.test.js`, **under the default heap** (`NODE_OPTIONS` unset, 2,096 MB): **52 of 52**,
+  exit 0. All 52 ran, with no out-of-memory.
+- `tests/lint/observedShapeReaders.walker.test.js` (8 GB heap): **47 of 47**, exit 0.
+
 ## WHAT IS LEFT
 
-- The FINAL PASS on the chair's word ("FINAL PASS at <tip>"): merge that tip, both doors' plain arms, both walkers alone
-  (the culture arm expected green once the src close seat's WR2 strike is on the line), this hand-back.
+- Nothing of this seat's. The chair lands the tip.
