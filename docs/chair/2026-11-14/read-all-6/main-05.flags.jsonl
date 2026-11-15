@@ -1,0 +1,6 @@
+{"id":"00397","town":"r2s-occupied-metropolis-2","sev":"LOW","kind":"TAG","why":"tag covers occupation towns; says the governing power sets the rules freely; under occupation the town's own officers do not rule freely (Occupation Authority Minor here)","other":""}
+{"id":"00399","town":"r2s-occupied-metropolis-3","sev":"LOW","kind":"TAG","why":"tag covers occupation towns; says Grand Merchant Oligarchy sets the rules unqualified; under occupation the town's officers do not rule freely","other":""}
+{"id":"00184","town":"r2s-occupied-metropolis-0","sev":"LOW","kind":"BROKEN","why":"bare label 'Airship freight services' printed beside its twin 00185 'Airship freight services (cargo, mooring)' in the same section: one export said twice","other":"00185"}
+{"id":"00321","town":"r2s-religious_conversion-metropolis-1","sev":"MED","kind":"STATE","why":"says each needs the other as partners; QUARRELS has Grand Merchant Oligarchy vs Military/Guard high (a broken promise of support); Military/Guard is Significant, not merely carrying out orders","other":""}
+{"id":"00432","town":"r2r-metropolis-39","sev":"LOW","kind":"STATE","why":"merchant money and the hall's offices took the nobles' power; Merchant Guilds are Suppressed and stability is Fractured, no stable governing authority (Grand Council Minor)","other":""}
+{"id":"DONE","lines":666,"blocks":15,"flags":5}
