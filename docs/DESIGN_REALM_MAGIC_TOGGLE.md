@@ -495,6 +495,13 @@ register; GREEN-BASE's bisect: 5c9218f62 reads 18, 4a3d37b86 reads 17). Members 
 factions `12 vs 12` hold. The arcane census over the mundane realm is still EMPTY; every ratio stays inside
 PENDING_BANDS. Copied from the MG-4.2 pin's own measured line; this block and the test header were moved in ONE act.
 
+⚠️ **RE-RECORDED 2026-11-15 (THE CLOSE OF THE TAIL ROUND, TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the
+chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json), BOTH TWINS MOVE.** services `121 vs 124` →
+`119 vs 122` (0.976 → 0.975), history events `17 vs 17` → `16 vs 16` (1.000 held), by the round's declared services and history
+lanes' moves (the golden master re-recorded 525 of 525 under the same record). Members `5 vs 5`, institutions `99 vs 102`,
+factions `12 vs 11` hold. The arcane census over the mundane realm is still EMPTY; every ratio stays inside PENDING_BANDS.
+Copied from the MG-4.2 pin's own measured line at the golden's tree 8c11f73ea; this block and the test header were moved in ONE act.
+
 ⚠️ **RE-RECORDED 2026-11-12 (COHERENCE-POWERS 2B), ONE SAME-SEED SHIFT, THE MAGICAL TWIN MOVES.** factions `12 vs 12` →
 `12 vs 11` (1.000 → 1.091): at the density resize, a power of the ruler's own kind that no house stands behind is folded
 into the ruler (power/rulerKin.js :: settleHouselessPowers), and one of the magical twin's twelve is such a power (measured
