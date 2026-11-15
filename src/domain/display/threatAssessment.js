@@ -38,17 +38,15 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { SCORE_BAND_CUTS, economicSurvivalBandOf, scoreBand } from './defenseScoreBands.js';
 import { laidByBeforeCrisis } from './prosperityInCrisis.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
-import { liveInstitutionNames, ACCESS_ONLY } from '../facts/institutions.js';
+import { clergyHouseStands } from './clergyHouse.js';
 import { crisisOf } from '../facts/crisisKind.js';
 
 /**
- * A HOUSE WITH CLERGY STANDS (EXPORTS-B1, the chair's ruling C on EXPORTS-MEASURE-1 B1): a church, temple, cathedral, chapel,
- * abbey, monastery, friary or priory on the live roster. A wayside shrine alone keeps no clergy, and "Access to parish church"
- * is a neighbour's house: the economy compound's `hasChurch` counts both, so the clergy line reads this, not it.
+ * A HOUSE WITH CLERGY STANDS (EXPORTS-B1, the chair's ruling C on EXPORTS-MEASURE-1 B1): its one home is
+ * `clergyHouse.js` (TAIL-DISPLAY-CIVIC-2 moved it there, verbatim, for the governing power's faith chip to read too).
+ * The economy compound's `hasChurch` counts a shrine and a neighbour's church, so the clergy line reads this, not it.
  */
-const CLERGY_HOUSE_RE = /\btemple|\bchurch|\bcathedral|\bchapel|\babbey|\bmonaster|\bfriary|\bpriory/i;
-/** @param {{ institutions?: unknown } | null | undefined} r @returns {boolean} */
-const clergyStand = (r) => liveInstitutionNames(r).some((n) => !ACCESS_ONLY.test(n) && CLERGY_HOUSE_RE.test(n));
+const clergyStand = clergyHouseStands;
 
 /**
  * A FORCE STANDS (UPKEEP-8, F3, the chair's ruling (a)): a garrison, a militia (a household levy is one), a watch or a

@@ -14,7 +14,8 @@
  *     (the magic homes: `facts/magic.js :: magicOf`, `magicReliance.js :: practisingInstitutions`);
  *   - force (military-dominated, defended, arms-backed): a watch, garrison, militia or hired company stands
  *     (`factsOf(...).guardPresence`);
- *   - faith (theocratic-aligned, church-guided): a sacred house stands (`factsOf(...).sacredHouse`) and the faith's
+ *   - faith (theocratic-aligned, church-guided): a house with clergy of the town's own stands (`clergyHouse.js`; a wayside
+ *     shrine alone, the sacred-house fact's lowest rung, keeps no church to guide: TAIL-DISPLAY-CIVIC-2, X14) and the faith's
  *     power does not answer to the seat (no `subordinate` relationship from the ruling power to a religious one);
  *   - commerce (commerce-driven, merchant-led): a live market or a guild stands (`factsOf(...).market`, `.guild`);
  *   - crime (corruption-riddled, compromised): the HALL is in criminal hands, read from the hall's own rung (the stored
@@ -32,6 +33,7 @@ import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { factsOf } from '../facts/factsOf.js';
 import { magicOf } from '../facts/magic.js';
 import { practisingInstitutions } from '../magicReliance.js';
+import { clergyHouseStands } from './clergyHouse.js';
 
 /** @typedef {'arcane'|'force'|'faith'|'commerce'|'crime'} ModifierFamily */
 
@@ -79,7 +81,7 @@ export function modifierBorneOut(settlement, family, rulerName) {
   const facts = factsOf(settlement);
   if (family === 'arcane') return magicOf(settlement).functions === true && practisingInstitutions(settlement).length > 0;
   if (family === 'force') return Boolean(facts.guardPresence);
-  if (family === 'faith') return Boolean(facts.sacredHouse) && !faithAnswersToSeat(settlement, rulerName);
+  if (family === 'faith') return clergyHouseStands(settlement) && !faithAnswersToSeat(settlement, rulerName);
   if (family === 'commerce') return Boolean(facts.market) || Boolean(facts.guild);
   if (family === 'crime') return HALL_IN_CRIMINAL_HANDS.has(String(settlement?.powerStructure?.criminalCaptureState || 'none'));
   return false;
