@@ -1,0 +1,101 @@
+generatePower:powerStructure: 115 rows located, n=1676; showing 20
+
+#B02464 n57 r2s-infiltrated-thorp-3 [powerStructure.recentConflict] src/generators/power/governanceNarrative.js
+  WHY: a grazing and water dispute between families 'on each side'; QUARRELS none; thorp of 6, no grazing resource
+  TXT: A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one anoth
+  MOVE: P-The Independent Bloc·other·Strong | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#B02757 n6 r2r-hamlet-51 [powerStructure.recentConflict] src/generators/power/governanceNarrative.js
+  WHY: incursion last season destroyed outlying farms; STATE safety is Safe, food surplus 15%, PAST records no monster incursion
+  TXT: A monster incursion last season destroyed outlying farms.
+  MOVE: P-Merchant Guilds·economy·Strong; Military/Guard·military·Minor; Manor Household·noble·Suppressed | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#B13657 n2 r2r-town-46 [powerStructure.recentConflict] src/generators/power/governanceNarrative.js
+  WHY: 'Neither side will back down'; QUARRELS: none and stability Stable, legitimacy Approved
+  TXT: Neither side will back down and Merchant Council is avoiding the question.
+  MOVE: P-Craft Guilds·economy·Minor; Thieves' Guild·criminal·Suppressed; Military/Guard·military·Suppressed | Tm-[]+['Parchment and wax tablets', 'Quality wool cloth'] | defence built later: Defensible  ENDP: Merchant Council·economy·Dominant, Merchant Guilds·economy·Strong, Religious Authorities·religious·Minor
+
+#00339 n37 r2s-under_siege-metropolis-3 [powerStructure.factions[].desc] src/generators/power/factionStanding.js
+  WHY: three powers level; GOVERNMENT has two Significant, rest Minor or Suppressed
+  TXT: Three powers stand almost level here, and no one leads; every council vote has to be bargained for.
+  MOVE: P-Craft Guilds·economy·Suppressed | P+The Merchant Bloc·economy | H+Fighting pits | Tm-['Alchemical reagents, rare minerals, and imported inks', 'Cordage, tar, timber fittings, and bulk vessel supplies', 'Incense, ritual oil, sacred texts, and vestment cloth (bulk)']+[] | defence built later: Fortre  ENDP: Grand Merchant Senate·economy·Significant, War Council·military·Significant, Religious Authorities·religious·Minor, Arcane Orders·magic·Mino
+
+#02676 n71 r2s-occupied-hamlet-1 [powerStructure.factions[].desc] src/data/powerSiblings.js
+  WHY: headman 'gives the orders here' under Occupation; the Occupation Authority stands equal and stability Suppressed
+  TXT: A headman settles disputes and gives the orders here.
+  MOVE: P-Religious Authorities·religious·Strong; Grain Holders·economy·Significant; Resistance Network·military·Suppressed | defence built later: Undefended  ENDP: Occupation Authority·military·Significant, Headman's Authority·government·Significant
+
+#04940 n1 r2r-city-31 [powerStructure.factionRelationships[].narrative] src/generators/factionDynamics.js
+  WHY: says the council keeps order; 22499 says the watch is too thinly spread to maintain order, 06079 crime outrunning it
+  TXT: City Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.
+  MOVE: P-Noble Families·noble·Suppressed; Military/Guard·military·Suppressed | P+The Trade Compact·economy | H+Wizard's tower | Tx-['Books and manuscripts', 'Herbal remedies', 'Potions and elixirs', 'Refined iron ingots']+['Magical identification', 'Magical item market', 'Spellcasting (minor)', 'Weapon enc  ENDP: City Council·government·Dominant, Religious Authorities·religious·Significant, Merchant Guilds·economy·Minor, Craft Guilds·economy·Minor, Ar
+
+#06303 n3 r2s-occupied-village-2 [powerStructure.factionRelationships[].narrative] src/generators/factionDynamics.js
+  WHY: says taxes are bargained, not ordered; CRISIS is occupation with vassal extraction, every export taxed by occupation
+  TXT: Day-to-day trade here is run by Merchant Guilds more than by Household Council, and taxes are bargained over, not ordered.
+  MOVE: P-Craft Guilds·economy·Minor; Resistance Network·military·Suppressed; Religious Authorities·religious·Suppressed; Military/Guard·military·Suppressed | Tm-[]+['Bronze fittings and tools'] | defence built later: Vulnerable  ENDP: Merchant Guilds·economy·Strong, Occupation Authority·military·Significant, Household Council·government·Significant
+
+#09870 n4 r2s-under_siege-metropolis-2 [powerStructure.factionRelationships[].narrative] src/generators/factionDynamics.js
+  WHY: says the Consortium keeps order and collects taxes; 13629 says Military/Guard no longer takes its orders, stability Critical
+  TXT: Grand Guild Consortium keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.
+  MOVE: P-Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | P+The Order of the Watch·military; The Highborn Circle·noble | Tm-['Advanced weapons and armour (bulk contract)', 'Alchemical reagents, rare minerals, and imported inks', 'Incense, ritual oil, sacred texts, and vestment cloth (b  ENDP: Military/Guard·military·Dominant, Grand Guild Consortium·economy·Minor, War Council·military·Minor, Arcane Orders·magic·Minor, Religious Aut
+
+#11810 n11 r2r-hamlet-47 [powerStructure.factions[].desc] src/generators/power/rulingStructure.js
+  WHY: 'International merchant houses controlling port licences'; tag reaches hamlets of 90 with no port authority
+  TXT: International merchant houses controlling port licences and import flows; their political leverage is structural, not merely finan
+  MOVE: P-Military/Guard·military·Suppressed | defence built later: Vulnerable  ENDP: Headman's Authority·government·Dominant, Merchant Guilds·economy·Dominant
+
+#13330 n3 r2s-slave_revolt-city-3 [powerStructure.factionRelationships[].narrative] src/generators/factionDynamics.js
+  WHY: Merchant Guilds quietly works under council rules; block rates their tension High and GOVERNMENT has Merchant Guilds Suppressed
+  TXT: Merchant Guilds works under the rules Merchant Guild Council sets, and pays for a hearing in the hall when it wants something.
+  MOVE: P-Thieves' Guild·criminal·Suppressed; Noble Families·noble·Suppressed; Craft Guilds·economy·Suppressed; Abolitionist Network·other·Suppressed | P+The Commercial Circle·economy | H-Hireling hall | H+Bardic college; Major hospital; Multiple adventurers' guilds | Tx-[]+['Cultural tourism revenue'] | Tm  ENDP: Religious Authorities·religious·Strong, Merchant Guild Council·economy·Minor, Military/Guard·military·Minor, Revolt Leadership·other·Minor, 
+
+#13602 n1 r2s-wartime-city-2 [powerStructure.factionRelationships[].narrative] src/generators/factionDynamics.js
+  WHY: says Military/Guard about as strong as the council; GOVERNMENT gives Military/Guard Significant, Corrupt City Council Minor
+  TXT: Military/Guard is now about as strong as Corrupt City Council.
+  MOVE: P-Peace Movement·other·Suppressed; Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | P+The Shield Compact·military; The Highborn Circle·noble | Tm-['Alchemical reagents, rare minerals, and imported inks', 'Incense, ritual oil, sacred texts, and vestment cloth (bulk)']+[] | defenc  ENDP: Religious Authorities·religious·Significant, Military/Guard·military·Significant, Corrupt City Council·criminal·Minor, War Council·military·
+
+#14787 n1 r2r-metropolis-2 [powerStructure.factionRelationships[].narrative] src/generators/factionDynamics.js
+  WHY: says Noble Houses keep rights enough to bargain, not obey; GOVERNMENT lists Noble Houses Suppressed
+  TXT: Noble Houses live under the rule of High Theocratic Council but keep enough rights of their own (land, courts, levies) to bargain,
+  MOVE: P-Third Bloc (Neutrals)·other·Suppressed; Craft Guilds·economy·Suppressed | P+The Tower Alliance·magic; The Peerage·noble | Tm-['Advanced weapons and armour (bulk contract)', 'Alchemical reagents, rare minerals, inks, and binding materials (bulk)', 'Coal and fuel (local seams exhausted)', 'Incense,   ENDP: Religious Authorities·religious·Significant, High Theocratic Council·religious·Minor, The Independent Bloc·other·Minor, Merchant Guilds·econ
+
+#16602 n2 r2r-metropolis-16 [powerStructure.stability] src/generators/power/governanceNarrative.js
+  WHY: prints 'militant theocracy'; GOVERNMENT is a Democratic assembly, Religious Authorities only Minor
+  TXT: Rigid (militant theocracy); monsters on the roads
+  MOVE: P-Noble Houses·noble·Suppressed; Arcane Orders·magic·Suppressed | P+The Trade Compact·economy; The Faithful Assembly·religious | H+Citadel | Tm-['Coal and fuel (local seams exhausted)', 'Cordage, canvas, and vessel-maintenance supplies', 'Game and hides (local hunting grounds exhausted)', 'Herbs and  ENDP: Democratic assembly·government·Strong, Military/Guard·military·Significant, Merchant Guilds·economy·Minor, Religious Authorities·religious·M
+
+#18554 n13 r2s-famine-metropolis-1 [powerStructure.factions[].desc] src/generators/power/claimStanding.js
+  WHY: 'the council knows it'; GOVERNMENT is a Ducal Governorship and lists no council
+  TXT: Standing army with genuine political weight; command appointments are patronage, and the council knows it.
+  MOVE: P-Craft Guilds·economy·Suppressed; Grain Holders·economy·Suppressed | P+The Mages' Compact·magic; The Trade Compact·economy | Tm-['Advanced weapons and armour (bulk contract)', 'Alchemical reagents, rare minerals, and imported inks', 'Incense, ritual oil, sacred texts, and vestment cloth (bulk)']+[]  ENDP: Noble Houses·noble·Significant, Military/Guard·military·Significant, Ducal Governorship·government·Minor, Merchant Guilds·economy·Minor, Arc
+
+#20473 n27 r2s-occupied-hamlet-2 [powerStructure.factions[].desc] src/data/powerSiblings.js
+  WHY: 'no lord stands over them' under Occupation: a Dominant Occupation Authority does
+  TXT: The elders of the hamlet decide things together, and no lord stands over them.
+  MOVE: P-Resistance Network·military·Minor | defence built later: Vulnerable  ENDP: Free Elder Council·government·Dominant, Occupation Authority·military·Dominant
+
+#21057 n1 r2r-town-16 [powerStructure.recentConflict] src/generators/power/governanceNarrative.js
+  WHY: commanders push for authority over civilian courts; HOUSES has no courthouse
+  TXT: The military commanders are pushing for expanded authority over civilian courts, and Church Council is losing ground.
+  MOVE: P-Religious Authorities·religious·Significant; Landed Gentry·noble·Minor; Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | Tm-[]+['Calligraphy tools and inks', 'Incense and frankincense'] | defence built later: Well-Defended  ENDP: Church Council·religious·Strong, Military/Guard·military·Significant
+
+#21065 n1 r2r-city-34 [powerStructure.recentConflict] src/generators/power/governanceNarrative.js
+  WHY: says military commanders gain on courts and the oligarchy loses ground; oligarchy is Dominant and GOVERNMENT lists no Military/Guard power
+  TXT: The military commanders are pushing for expanded authority over civilian courts, and Merchant oligarchy is losing ground.
+  MOVE: P-Merchant Guilds·economy·Suppressed; Military/Guard·military·Suppressed | P+The Mages' Compact·magic; The Landed Bloc·noble | H+Bardic college | Tx-[]+['Cultural tourism revenue'] | Tm-[]+['Silk, fine dyes, and imported cloth'] | defence built later: Well-Defended  ENDP: Merchant oligarchy·economy·Dominant, Religious Authorities·religious·Minor, Noble Families·noble·Minor, Arcane Orders·magic·Suppressed, Thie
+
+#21564 n2 r2r-hamlet-55 [powerStructure.recentConflict] src/generators/power/governanceNarrative.js
+  WHY: priest and 'church court'; HOUSES has only Access to parish church, no church or court
+  TXT: The priest has summoned someone before the church court.
+  MOVE: P-Manor Household·noble·Minor | defence built later: Lightly Defended  ENDP: Free Elder Council·government·Dominant, Military/Guard·military·Strong
+
+#22803 n53 r2r-village-58 [powerStructure.factions[].desc] src/generators/power/factionStanding.js
+  WHY: power working in the council's shadow; Grain Holders are Dominant, level with the Household Council
+  TXT: They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.
+  MOVE: P-Religious Authorities·religious·Significant | Tm-[]+['Precious stones and gems'] | defence built later: Undefended  ENDP: Household Council·government·Dominant, Grain Holders·economy·Dominant
+
+#25630 n1 r2s-indebted-metropolis-2 [powerStructure.factions[].desc] src/generators/power/stressFactions.js
+  WHY: calls The Common Interest the creditor's resident agent; PEOPLE gives that role to Creditor's Representative, the Common Interest has a commoners' tri
+  TXT: The Common Interest: Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions.
+  MOVE: P-Noble Houses·noble·Suppressed; Military/Guard·military·Suppressed | P+The Common Interest·other; The Merchant Bloc·economy | Tm-['Alchemical reagents and scribal supplies', 'Incense, ritual oil, sacred texts, and vestment cloth (bulk)', 'Luxury textiles and exotic goods', 'Precious metals (local g  ENDP: Grand Council·government·Strong, Merchant Guilds·economy·Significant, Craft Guilds·economy·Minor, Creditor's Representative·other·Minor, Arc

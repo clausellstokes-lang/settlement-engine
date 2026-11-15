@@ -1,0 +1,101 @@
+generateNarratives:history.,settlementReason,resourceAnalysis,economicViability: 288 rows located, n=7728; showing 20
+
+#B03437 n6 r2s-monster_pressure-thorp-3 [history.historicalEvents[].plotHooks[]] src/domain/coherence/hookTruth.js
+  WHY: a 'war party'; only Elder Council listed, QUARRELS none, thorp of 10
+  TXT: An old story from that time: a diplomatic channel exists that the war party is suppressing
+  MOVE: P-Military/Guard·military·Strong; Monster Hunters / Adventurers·military·Significant | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#B02619 n54 r2r-thorp-51 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: a key witness to a corruption scandal; no such person on PEOPLE, crisis is a betrayal
+  TXT: A key witness can be found, but won't speak without protection
+  MOVE: P-The Inquiry·other·Strong | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#B20649 n32 r2s-plague_onset-thorp-2 [history.historicalEvents[].plotHooks[]] src/data/historyData.js
+  WHY: presumes a reformist leader; GOVERNMENT lists only Elder Council and PEOPLE has two others
+  TXT: The reformist leader is being blackmailed into silence
+  MOVE: P-Quarantine Council·government·Dominant | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#B21347 n18 r2r-thorp-20 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: tyrant/regime history; PAST lists only Succession Crisis (minor) and Migration, no tyranny
+  TXT: The tyrant's private records survived, and they implicate respectable families in the worst of it
+  MOVE: defence built later: Lightly Defended  ENDP: Household Council·government·Dominant
+
+#B03008 n12 r2s-famine-metropolis-2 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: hook about a flood barrier left to rot; PAST records no flood or disaster except the Siege
+  TXT: A structure meant to hold back the water had been quietly left to rot, and someone knew
+  MOVE: P-Military/Guard·military·Suppressed; Noble Houses·noble·Suppressed | P+The Arcane Circle·magic; The Shadow Compact·criminal | defence built later: Well-Defended  ENDP: City-State Council·government·Strong, Religious Authorities·religious·Significant, Grain Holders·economy·Minor, Arcane Orders·magic·Minor, T
+
+#B03507 n7 r2s-occupied-city-0 [history.historicalEvents[].description] src/data/historyData.js
+  WHY: names a temple district; HOUSES has no temple district (Parish churches only); PAST records The Wild Magic as minor, 65 years ago, not effects never f
+  TXT: An uncontrolled surge of magic left its mark on the temple district and on the people who were there, and the effects have never f
+  MOVE: P-Merchant Guilds·economy·Minor; Noble Families·noble·Minor; Resistance Network·military·Minor; Religious Authorities·religious·Suppressed; Craft Guilds·economy·Suppressed; Military/Guard·military·Suppressed | P+The Tower Alliance·magic; The Shield Compact·military | defence built later: Well-Defend  ENDP: Occupation Authority·military·Strong, Arcane Orders·magic·Minor, Military City Council·military·Minor, The Tower Alliance·magic·Minor, The S
+
+#B19499 n4 r2r-thorp-9 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: fire and rebuilding; PAST records only The Uprising, no fire
+  TXT: The fire spared exactly the houses one power wanted cleared, and nobody believes it was chance.
+  MOVE: defence built later: Vulnerable  ENDP: Household Council·government·Dominant
+
+#B02525 n1 r2r-hamlet-21 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: forged document introduced 'as evidence' presumes a court or tribunal; HOUSES has none and PAST/QUARRELS record no land dispute
+  TXT: A forged document is about to be introduced as evidence; someone knows it's fake.
+  MOVE: P-Religious Authorities·religious·Dominant; Military/Guard·military·Suppressed | defence built later: Vulnerable  ENDP: Free Elder Council·government·Dominant
+
+#B02646 n1 r2s-indebted-town-0 [history.historicalEvents[].plotHooks[]] src/domain/dossier/plotHooks.js
+  WHY: names 'the reform movement'; GOVERNMENT lists no Reform Movement power
+  TXT: A letter found this year tells it this way: a merchant is funding both the reform movement and the suppression of it
+  MOVE: P-Merchant Guilds·economy·Minor; Craft Guilds·economy·Suppressed | defence built later: Defensible  ENDP: Military Council·military·Dominant, Military/Guard·military·Significant, Creditor's Representative·other·Minor, Landed Gentry·noble·Minor
+
+#02538 n108 r2r-hamlet-16 [history.historicalEvents[].plotHooks[]] src/data/historyData.js
+  WHY: a war party suppressing diplomacy; CRISIS is Famine only, GOVERNMENT has no war party
+  TXT: A diplomatic channel exists that the war party is suppressing
+  MOVE: P-Grain Holders·economy·Dominant; Military/Guard·military·Significant; Manor Household·noble·Minor | defence built later: Vulnerable  ENDP: Elder Council·government·Strong
+
+#03260 n48 r2s-plague_onset-village-1 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: hook about a corruption witness needing protection; no corruption scandal in PAST or QUARRELS
+  TXT: A key witness can be found, but won't speak without protection (Corruption Scandal)
+  MOVE: P-Quarantine Council·government·Minor; Craft Guilds·economy·Suppressed; Merchant Guilds·economy·Suppressed; Military/Guard·military·Suppressed | defence built later: Vulnerable  ENDP: Religious Authorities·religious·Dominant, Elder Council·government·Significant
+
+#03878 n184 r2s-succession_void-thorp-0 [history.historicalEvents[].lastingEffects[]] src/data/historyData.js
+  WHY: a standing security office and informant network persist; thorp of 8, watch none, HOUSES has no such office
+  TXT: A standing security office and informant network persist
+  MOVE: P-Grain Holders·economy·Strong; The Highborn Circle·noble·Significant; The Peerage·noble·Significant; Military/Guard·military·Minor | defence built later: Vulnerable  ENDP: Household Council·government·Significant
+
+#09381 n27 r2s-famine-city-2 [history.founding.foundedBy] src/domain/facts/founder.js
+  WHY: founded by a military command building fortifications vs origin: founded when foresters found rich woodland
+  TXT: Founded by:a military command that built fortifications and found civilians followed
+  MOVE: P-Craft Guilds·economy·Suppressed; Military/Guard·military·Suppressed | P+The Tower Alliance·magic; The Merchant Bloc·economy | defence built later: Fortress  ENDP: Merchant oligarchy·economy·Significant, Religious Authorities·religious·Minor, Merchant Guilds·economy·Minor, Thieves' Guild·criminal·Minor,
+
+#15081 n6 r2s-wartime-thorp-2 [settlementReason[]] src/generators/narrative/settlementOriginProse.js
+  WHY: 'gets by on what it produces': famine with deficit 72%
+  TXT: Nothing comes in from outside; it gets by on what it produces itself.
+  MOVE: P-War Council·military·Significant; Military/Guard·military·Significant; Grain Holders·economy·Significant; Peace Movement·other·Suppressed | defence built later: Undefended  ENDP: Headman's Authority·government·Strong
+
+#18323 n182 r2s-succession_void-thorp-1 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: competing supply route destroyed; trade access isolated, imports none
+  TXT: Someone destroyed the competing supply route
+  MOVE: P-Grain Holders·economy·Strong; The Highborn Circle·noble·Strong; The Peerage·noble·Significant | defence built later: Vulnerable  ENDP: Elder Council·government·Significant
+
+#21602 n19 r2s-under_siege-village-0 [history.currentTensions[].description] src/data/historyData.js
+  WHY: a sickness moved through for three seasons; PAST lists no plague
+  TXT: Plague Years: A sickness moved through the settlement for three seasons, thinning families and testing every institution to its li
+  MOVE: P-War Council·military·Minor; Military/Guard·military·Minor; Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | defence built later: Vulnerable  ENDP: Household Council·government·Strong, Religious Authorities·religious·Strong
+
+#22080 n22 r2s-monster_pressure-hamlet-2 [economicViability.plotHooks[].hook] src/generators/economy/outlookHookSiblings.js
+  WHY: 'The smiths' plural; HOUSES has only one Resident smith (part-time)
+  TXT: The smiths blame whoever set it, and the tools still need mending.
+  MOVE: P-Religious Authorities·religious·Strong; Military/Guard·military·Strong; Monster Hunters / Adventurers·military·Minor | defence built later: Vulnerable  ENDP: Elder Council·government·Strong
+
+#22746 n25 r2s-under_siege-village-3 [history.historicalEvents[].lastingEffects[]] src/data/historyData.js
+  WHY: charters lodged with 'the court'; HOUSES (16, whole list) has no court; village of 123
+  TXT: Rival charters over the land are both still lodged with the court
+  MOVE: P-War Council·military·Significant; Religious Authorities·religious·Significant | defence built later: Vulnerable  ENDP: Elder Council·government·Strong, Military/Guard·military·Strong
+
+#26599 n47 r2s-under_siege-village-0 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: departed leader's sealed successor document; no leader's death in PAST, Household Council governs
+  TXT: The departed leader left a sealed document designating a successor, and someone wants it destroyed before it's read (Leadership Va
+  MOVE: P-War Council·military·Minor; Military/Guard·military·Minor; Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | defence built later: Vulnerable  ENDP: Household Council·government·Strong, Religious Authorities·religious·Strong
+
+#28364 n47 r2s-under_siege-village-0 [history.currentTensions[].plotHooks[]] src/data/historyData.js
+  WHY: vacuum kept by an outside power; GOVERNMENT shows standing Household Council, Active Siege; no vacuum in PAST
+  TXT: The vacuum is being maintained deliberately by an outside power that benefits from the instability (Leadership Vacuum)
+  MOVE: P-War Council·military·Minor; Military/Guard·military·Minor; Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | defence built later: Vulnerable  ENDP: Household Council·government·Strong, Religious Authorities·religious·Strong

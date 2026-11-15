@@ -1,0 +1,101 @@
+generatePopulation:npcs: 66 rows located, n=4917; showing 20
+
+#B10797 n93 r2s-famine-city-1 [npcs[].presentation.behaviour] src/data/people/titleSecretsPresentations.js
+  WHY: potter shows visitors how a pot is thrown; LAND gaps say the Potter lacks access to clay
+  TXT: How they deal Talks while working; shows how a pot is thrown and lets visitors try.
+  MOVE: P-Arcane Orders·magic·Minor; Craft Guilds·economy·Minor; Military/Guard·military·Suppressed | P+The Commercial Circle·economy | defence built later: Well-Defended  ENDP: Merchant Guild Council·economy·Significant, Thieves' Guild·criminal·Significant, Merchant Guilds·economy·Minor, Grain Holders·economy·Minor,
+
+#B16083 n85 r2s-famine-town-1 [npcs[].secret.what] src/data/people/titleSecretsPresentations.js
+  WHY: secret has the potter digging clay now; LAND gap and 13747 say no clay reaches the potter
+  TXT: Secret: Has been digging clay from land that belongs to someone else and paying nothing for it
+  MOVE: P-Landed Gentry·noble·Minor; Grain Holders·economy·Minor; Craft Guilds·economy·Suppressed | defence built later: Well-Defended  ENDP: Religious Authorities·religious·Strong, Merchant oligarchy·economy·Significant, Merchant Guilds·economy·Minor, Military/Guard·military·Minor
+
+#B10758 n56 r2s-famine-metropolis-1 [npcs[].presentation.behaviour] src/data/people/titleSecretsPresentations.js
+  WHY: vintner talks of common and rare wines; GAPS: Vintner lacks access to grapes, and grapes are needed and not brought in
+  TXT: How they deal Talks about the common wines freely; the rare ones are for buyers they know.
+  MOVE: P-Craft Guilds·economy·Suppressed; Grain Holders·economy·Suppressed | P+The Mages' Compact·magic; The Trade Compact·economy | defence built later: Fortress  ENDP: Noble Houses·noble·Significant, Military/Guard·military·Significant, Ducal Governorship·government·Minor, Merchant Guilds·economy·Minor, Arc
+
+#B10676 n40 r2s-occupied-metropolis-1 [npcs[].presentation.behaviour] src/data/people/titleSecretsPresentations.js
+  WHY: charcoal sold by the sack; LAND gaps: Charcoal burner lacks access to mountain_timber, and 13831 says no timber reaches it
+  TXT: How they deal Sells charcoal by the sack to anyone who can carry it away.
+  MOVE: P-Merchant Guilds·economy·Suppressed | P+The Garrison Bloc·military | defence built later: Well-Defended  ENDP: Religious Authorities·religious·Strong, Occupation Authority·military·Significant, Grand Military Council·military·Minor, Noble Houses·noble
+
+#B10584 n16 r2s-under_siege-hamlet-3 [npcs[].presentation.behaviour] src/data/people/titleSecretsPresentations.js
+  WHY: dairy farmer's herd: LAND gap says Dairy farmer lacks access to livestock
+  TXT: How they deal Offers a cup and talk of the herd and the weather.
+  MOVE: P-Military/Guard·military·Minor; Merchant Guilds·economy·Suppressed | defence built later: Undefended  ENDP: Elder Council·government·Dominant, War Council·military·Strong
+
+#B16648 n9 r2s-indebted-hamlet-2 [npcs[].secret.what] src/data/people/titleSecretsPresentations.js
+  WHY: waters the milk before market; LAND gap says Dairy farmer lacks access to livestock, and HOUSES has no market
+  TXT: Secret: Waters the milk before it goes to market and has done so for years
+  MOVE: P-Creditor's Representative·other·Dominant | defence built later: Undefended  ENDP: Free Elder Council·government·Dominant
+
+#B10688 n5 r2s-under_siege-hamlet-1 [npcs[].presentation.behaviour] src/data/people/titleSecretsPresentations.js
+  WHY: maltster 'sells malt to anyone who pays': under siege nobody arrives; FOOD Deficit, no grain to malt
+  TXT: How they deal Sells malt to anyone who pays; brewers get a better price.
+  MOVE: P-War Council·military·Strong; Military/Guard·military·Minor | defence built later: Vulnerable  ENDP: Headman's Authority·government·Dominant
+
+#B17377 n160 r2s-succession_void-thorp-1 [npcs[].plotHooks[]] src/domain/hookThemes.js
+  WHY: 'Someone else is sending them'; imports none, isolated, famine with no inbound goods
+  TXT: Someone else is sending them.
+  MOVE: P-Grain Holders·economy·Strong; The Highborn Circle·noble·Strong; The Peerage·noble·Significant | defence built later: Vulnerable  ENDP: Elder Council·government·Significant
+
+#B16645 n28 r2s-mass_migration-hamlet-3 [npcs[].secret.what] src/data/npcData.js
+  WHY: informant whose report triggered a purge; PAST records only an Occupation 5 years ago, no purge
+  TXT: Secret: Was the informant whose report triggered a purge that destroyed innocent lives
+  MOVE: P-Manor Household·noble·Strong; Newcomers' Settlement·other·Minor | defence built later: Vulnerable  ENDP: Military/Guard·military·Dominant, Feudal Stewardship·government·Strong
+
+#03004 n219 r2s-under_siege-town-1 [npcs[].plotHooks[]] src/data/npcData.js
+  WHY: a cousin has arrived to stay unannounced; Active Siege, no one comes in
+  TXT: A cousin has arrived to stay without warning, and spends every day watching one particular house. (Sheng Ito)
+  MOVE: P-Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | defence built later: Vulnerable  ENDP: Religious Authorities·religious·Dominant, War Council·military·Significant, Guild Council·economy·Significant
+
+#03950 n236 r2s-under_siege-town-1 [npcs[].plotHooks[]] src/data/npcData.js
+  WHY: a traveller passed through and left by morning; Active Siege, nothing comes in or goes out
+  TXT: A traveller passed through asking which nights their door is left unbarred, and was gone by morning. (Chae Deng)
+  MOVE: P-Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | defence built later: Vulnerable  ENDP: Religious Authorities·religious·Dominant, War Council·military·Significant, Guild Council·economy·Significant
+
+#11047 n121 r2s-famine-city-0 [npcs[].presentation.behaviour] src/data/people/titleSecretsPresentations.js
+  WHY: gives a room and a meal; CRISIS famine, food deficit 15%
+  TXT: How they deal Gives a room and a meal, and keeps an eye on who you sit with and how long you stay.
+  MOVE: P-Grain Holders·economy·Minor; Merchant Guilds·economy·Suppressed; Religious Authorities·religious·Suppressed; Craft Guilds·economy·Suppressed; Arcane Orders·magic·Suppressed | P+The Shield Compact·military; The Landed Bloc·noble | defence built later: Well-Defended  ENDP: Noble Families·noble·Significant, Royal Authority·government·Significant, Military/Guard·military·Significant, The Shield Compact·military·S
+
+#11202 n60 r2s-succession_void-town-2 [npcs[].presentation.behaviour] src/data/people/titleSecretsPresentations.js
+  WHY: vintner sells wine by cask and bottle; 14362 says grapes are needed and not brought in, TRADE makes no wine
+  TXT: How they deal Sells by the cask and the bottle; the better years cost much more.
+  MOVE: P-Religious Authorities·religious·Dominant; Military/Guard·military·Suppressed; Merchant Guilds·economy·Suppressed | defence built later: Vulnerable  ENDP: The Highborn Circle·noble·Significant, The Peerage·noble·Minor, Church Council·religious·Minor
+
+#11315 n89 r2s-under_siege-town-3 [npcs[].presentation.behaviour] src/data/people/titleSecretsPresentations.js
+  WHY: talks of the best places to hunt; the other says hunting grounds are worked out, TRADE imports game; no hunter on HOUSES
+  TXT: How they deal Talks about the woods, the game and the best places to hunt; easy to fall into talk with.
+  MOVE: P-Craft Guilds·economy·Suppressed | defence built later: Vulnerable  ENDP: War Council·military·Strong, Guild Council·economy·Strong, Thieves' Guild·criminal·Significant, Religious Authorities·religious·Minor, Merch
+
+#16953 n26 r2s-occupied-metropolis-0 [npcs[].secret.what] src/data/people/titleSecretsPresentations.js
+  WHY: Closed the harbour to ships; trade access is road only, no harbour route
+  TXT: Secret: Closed the harbour to a rival's ships for a week on a false report of sickness, for a fee
+  MOVE: P-Noble Houses·noble·Suppressed | P+The Arcane Circle·magic | defence built later: Fortress  ENDP: Grand Guild Consortium·economy·Significant, Occupation Authority·military·Significant, Arcane Orders·magic·Minor, Merchant Guilds·economy·Mi
+
+#17190 n61 r2s-plague_onset-city-0 [npcs[].secret.what] src/data/people/titleSecretsPresentations.js
+  WHY: walls left unrepaired, money pocketed; another line says fresh repairs show on the walls and gates
+  TXT: Secret: Has let the walls go unrepaired and pocketed the money that was granted for the work
+  MOVE: P-Arcane Orders·magic·Suppressed; Noble Families·noble·Suppressed | P+The Merchant Bloc·economy | defence built later: Well-Defended  ENDP: Religious Authorities·religious·Strong, City-State Council·government·Strong, Merchant Guilds·economy·Minor, Military/Guard·military·Suppres
+
+#20646 n160 r2s-under_siege-town-0 [npcs[].plotHooks[]] src/domain/hookThemes.js
+  WHY: 'the goods are still arriving'; Under Siege, imports cover None, nothing comes in
+  TXT: The goods are still arriving.
+  MOVE: P-Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed | defence built later: Lightly Defended  ENDP: Town Council·government·Strong, Religious Authorities·religious·Strong, War Council·military·Significant, Thieves' Guild·criminal·Suppressed
+
+#22560 n189 r2r-thorp-58 [npcs[].plotHooks[]] src/domain/hookThemes.js
+  WHY: best customer, a year's takings and 'their street' in a thorp of 7 with no market
+  TXT: Their best customer owes them a year's takings and has started avoiding their street.
+  MOVE: P-War Council·military·Dominant | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#22767 n147 r2r-hamlet-34 [npcs[].plotHooks[]] src/domain/hookThemes.js
+  WHY: a crime the guard is investigating; DEFENCE has no garrison or watch, only a citizen militia
+  TXT: They know who committed a crime the guard is currently investigating.
+  MOVE: P-The Inquiry·other·Dominant | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#27350 n20 r2s-occupied-metropolis-0 [npcs[].plotHooks[]] src/data/personHooksByTitle.js
+  WHY: play's house 'full every night'; safety is Controlled, Occupation Curfew
+  TXT: The new play mocks someone powerful by another name, and the house is full every night. (Eleni Glabas)
+  MOVE: P-Noble Houses·noble·Suppressed | P+The Arcane Circle·magic | defence built later: Fortress  ENDP: Grand Guild Consortium·economy·Significant, Occupation Authority·military·Significant, Arcane Orders·magic·Minor, Merchant Guilds·economy·Mi

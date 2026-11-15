@@ -1,0 +1,101 @@
+generateEconomy:economicState: 113 rows located, n=5296; showing 20
+
+#B11404 n206 r2s-wartime-thorp-2 [economicState.safetyProfile.economicDragDesc] src/generators/safetyProfile.js
+  WHY: continues unlicensed-dealing claim; no fence or black market exists here (HOUSES, LAND chains)
+  TXT: It is noticed, and so far it does little harm.
+  MOVE: P+Headman's Authority·government | defence built later: Undefended  ENDP: Headman's Authority·government·Strong
+
+#B07361 n47 r2s-famine-city-0 [economicState.incomeSources[].desc] src/generators/economy/incomeLineSiblings.js
+  WHY: says fish is sold here fresh or preserved; FOOD gives fish as the failed source of the famine
+  TXT: Fish & Preserved Produce Fish is sold here, fresh or preserved.
+  MOVE: P+Noble Families·noble; Royal Authority·government; Military/Guard·military; The Shield Compact·military; The Landed Bloc·noble | H+Bardic college | Tx-[]+['Cultural tourism revenue'] | Tm-['Alchemical reagents and scribal supplies', 'Cordage, canvas, and vessel-maintenance supplies']+[] | chains mo  ENDP: Noble Families·noble·Significant, Royal Authority·government·Significant, Military/Guard·military·Significant, The Shield Compact·military·S
+
+#B03295 n3 r2s-wartime-town-2 [economicState.safetyProfile.crimeTypes[].desc] src/generators/safetyProfile.js
+  WHY: describes an underground market of illegal practitioners; HOUSES has no such house and GOVERNMENT lists no criminal power
+  TXT: Alchemists and other magical practitioners who operate outside legal channels supply a sophisticated underground market for forbid
+  MOVE: P+Feudal Appointee·noble; Military/Guard·military; Landed Gentry·noble; War Council·military | Tm-[]+['Dried rice and provisions', 'War elephants and fodder'] | defence built later: Vulnerable  ENDP: Feudal Appointee·noble·Significant, Military/Guard·military·Minor, Landed Gentry·noble·Minor, War Council·military·Minor
+
+#B10244 n21 r2r-metropolis-14 [economicState.activeChains[].magicNote] src/domain/display/magicProvisionShown.js
+  WHY: 'divine provision fills the gap': FOOD by magic 0%, deficit 83%, and Horse & Animal Trade is vulnerable, not magically sustained
+  TXT: Horse & Animal Trade: Blessed stores; divine provision fills the gap
+  MOVE: P+High Theocratic Council·religious; Religious Authorities·religious; Military/Guard·military; War Council·military; Arcane Orders·magic; Noble Houses·noble; Craft Guilds·economy; The Holy Compact·religious | Tm-['Advanced weapons and armour (bulk contract)', 'Alchemical reagents and scribal supplie  ENDP: High Theocratic Council·religious·Strong, Religious Authorities·religious·Strong, Military/Guard·military·Minor, War Council·military·Minor,
+
+#B05118 n6 r2r-town-6 [economicState.activeChains[].magicNote] src/domain/facts/magicSource.js
+  WHY: claims conjured game supplements the fish; FOOD says by magic 0%
+  TXT: Conjured game produces fish; minor supplement
+  MOVE: P+Arcane Council·magic; Merchant Guilds·economy; Craft Guilds·economy; Military/Guard·military | Tm-[]+['Quality iron tools and fittings', 'Rune-worthy bone and antler'] | defence built later: Well-Defended  ENDP: Arcane Council·magic·Dominant, Merchant Guilds·economy·Significant, Craft Guilds·economy·Minor, Military/Guard·military·Suppressed
+
+#B15684 n2 r2s-monster_pressure-city-3 [economicState.activeChains[].magicNote] src/domain/facts/magicSource.js
+  WHY: says conjured fish supplement River Fishing; FOOD shows by magic 0% and the chain is vulnerable on a depleted fishery, not magically sustained
+  TXT: River Fishing: Conjured game produces fish; minor supplement
+  MOVE: P+Merchant City Council·economy; Military/Guard·military; Merchant Guilds·economy; Craft Guilds·economy; Arcane Orders·magic; Religious Authorities·religious; The Commercial Circle·economy | H+Bardic college; Veteran's lodge | Tx-[]+['Cultural tourism revenue'] | Tm-['Advanced weapons and armour (bu  ENDP: Merchant City Council·economy·Significant, Military/Guard·military·Significant, Merchant Guilds·economy·Minor, Craft Guilds·economy·Suppress
+
+#B21162 n6 r2s-plague_onset-thorp-2 [economicState.foodSecurity.foodRecord.foodwaysLine] src/domain/foodways.js
+  WHY: fish from the local waters; LAND gives River Fisheries as depleted
+  TXT: The table is porridge and bread of the local grain, with fish from the local waters beside it.
+  MOVE: P+Elder Council·government | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#02882 n83 r2s-under_siege-city-3 [economicState.incomeSources[].desc] src/generators/economy/economicState.js
+  WHY: a busy market for spell services; LAND gives Spellcasting Services impaired, and Active Siege
+  TXT: A busy market for spell services.
+  MOVE: P+Arcane Council·magic; Religious Authorities·religious; Arcane Orders·magic; War Council·military; The Martial Alliance·military | H+Almshouse | Tm-['Alchemical reagents and scribal supplies']+[] | chains moved | defence built later: Fortress  ENDP: Arcane Council·magic·Strong, Religious Authorities·religious·Significant, Arcane Orders·magic·Minor, War Council·military·Minor, The Martial
+
+#03932 n83 r2s-occupied-city-3 [economicState.incomeSources[].desc] src/generators/economy/incomeLineSiblings.js
+  WHY: calls the alchemical trade thriving and drawing outside customers; prosperity is Poor, under Occupation Curfew
+  TXT: A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.
+  MOVE: P+Arcane Council·magic; Occupation Authority·military; Arcane Orders·magic; Resistance Network·military; The Order of the Watch·military | H+Multiple adventurers' guilds; Veteran's lodge | chains moved | defence built later: Fortress  ENDP: Arcane Council·magic·Strong, Occupation Authority·military·Significant, Arcane Orders·magic·Minor, Resistance Network·military·Minor, The Or
+
+#05801 n75 r2s-succession_void-thorp-1 [economicState.safetyProfile.crimeTypes[].desc] src/generators/safetyProfile.js
+  WHY: grain, salt, preserved meat traded through unofficial channels; isolated, imports none, population 11
+  TXT: Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.
+  MOVE: P+Elder Council·government | defence built later: Vulnerable  ENDP: Elder Council·government·Significant
+
+#06427 n28 r2s-famine-hamlet-2 [economicState.incomeSources[].desc] src/generators/economy/incomeLineSiblings.js
+  WHY: catch landed and sold fresh or preserved; famine's failed source is fish, TRADE exports none
+  TXT: Catch landed here and sold fresh or preserved.
+  MOVE: P+Feudal Stewardship·government | defence built later: Undefended  ENDP: Feudal Stewardship·government·Significant
+
+#08786 n49 r2s-plague_onset-city-3 [economicState.incomeSources[].desc] src/generators/economy/economicState.js
+  WHY: entry and exit tolls from merchants and travellers as usual; plague conditions, Dangerous safety, travel not as usual
+  TXT: Entry and exit tolls collected at the city gates from merchants and travellers.
+  MOVE: P+Religious Authorities·religious; Corrupt City Council·criminal; Thieves' Guild·criminal; The Devout Circle·religious; The Hidden Hand·criminal | H+Major hospital; Multiple adventurers' guilds | Tm-['Incense, ritual oil, and vestment materials']+['Copal resin incense', 'Incense, ritual oil, sacred   ENDP: Religious Authorities·religious·Strong, Corrupt City Council·criminal·Significant, Thieves' Guild·criminal·Minor, The Devout Circle·religiou
+
+#10219 n92 r2s-famine-city-0 [economicState.incomeSources[].desc] src/generators/economy/incomeLineSiblings.js
+  WHY: fish is sold here fresh or preserved; famine's failed source is fish, Fishing & Seafood chain vulnerable
+  TXT: Fish is sold here, fresh or preserved.
+  MOVE: P+Noble Families·noble; Royal Authority·government; Military/Guard·military; The Shield Compact·military; The Landed Bloc·noble | H+Bardic college | Tx-[]+['Cultural tourism revenue'] | Tm-['Alchemical reagents and scribal supplies', 'Cordage, canvas, and vessel-maintenance supplies']+[] | chains mo  ENDP: Noble Families·noble·Significant, Royal Authority·government·Significant, Military/Guard·military·Significant, The Shield Compact·military·S
+
+#11777 n33 r2s-wartime-thorp-2 [economicState.safetyProfile.crimeTypes[].desc] src/generators/safetyProfile.js
+  WHY: 'Inspectors' in an isolated thorp of 9 with no office but a household elder
+  TXT: Inspectors are overworked or bribed.
+  MOVE: P+Headman's Authority·government | defence built later: Undefended  ENDP: Headman's Authority·government·Strong
+
+#15308 n4 r2r-village-53 [economicState.safetyProfile.crimeTypes[].desc] src/generators/safetyProfile.js
+  WHY: organized crime fills the power vacuum; GOVERNMENT lists no criminal power (Merchant Guilds, Independent Bloc, Elder Council only)
+  TXT: Organized crime has filled the power vacuum left by absent or failed civil authority.
+  MOVE: P+Merchant Guilds·economy; The Independent Bloc·other; Elder Council·government | Tm-[]+['Quality paper and ink'] | defence built later: Undefended  ENDP: Merchant Guilds·economy·Significant, The Independent Bloc·other·Minor, Elder Council·government·Suppressed
+
+#16495 n28 r2s-religious_conversion-thorp-2 [economicState.safetyProfile.crimeTypes[].desc] src/generators/safetyProfile.js
+  WHY: 'Religious buildings, land, and endowments' contested; HOUSES has no church or shrine, only Access to parish church
+  TXT: Religious buildings, land, and endowments whose ownership is legally ambiguous following the change in religious authority.
+  MOVE: P+Elder Council·government | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#18655 n39 r2r-hamlet-16 [economicState.incomeSources[].desc] src/generators/economy/incomeLineSiblings.js
+  WHY: quarry supplies dressed stone to regional builders; TRADE exports no stone, imports cut stone, and 29076 says the work stops half-way
+  TXT: Stone Quarrying Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.
+  MOVE: P+Elder Council·government | defence built later: Vulnerable  ENDP: Elder Council·government·Strong
+
+#20992 n4 r2s-under_siege-metropolis-3 [economicState.safetyProfile.guardEffectivenessDesc] src/generators/safetyProfile.js
+  WHY: merchant guilds keep private security beside garrison; Merchant Guilds Suppressed
+  TXT: The merchant guilds keep their own private security beside the garrison and city watch: real protection exists, but only for those
+  MOVE: P+Grand Merchant Senate·economy; War Council·military; Religious Authorities·religious; Arcane Orders·magic; Military/Guard·military; Thieves' Guild·criminal; Merchant Guilds·economy; The Merchant Bloc·economy | H+Fighting pits | Tm-['Alchemical reagents, rare minerals, and imported inks', 'Cordage,  ENDP: Grand Merchant Senate·economy·Significant, War Council·military·Significant, Religious Authorities·religious·Minor, Arcane Orders·magic·Mino
+
+#22176 n3 r2r-thorp-45 [economicState.foodSecurity.foodRecord.foodwaysLine] src/domain/foodways.js
+  WHY: a laden table of cheese, smoked meat and salt fish while deficit is 68% and imports cover None
+  TXT: The table is cheese and smoked meat from the grazing herds, with salted fish beside it.
+  MOVE: P+Household Council·government | defence built later: Vulnerable  ENDP: Household Council·government·Dominant
+
+#28512 n60 r2s-wartime-thorp-2 [economicState.foodSecurity.foodRecord.foodwaysLine] src/data/cultureProfiles.js
+  WHY: caravan-borne staples; trade access isolated, imports none, forest terrain
+  TXT: Water access and preservation skill determine the balance between local produce and caravan-borne staples.
+  MOVE: P+Headman's Authority·government | defence built later: Undefended  ENDP: Headman's Authority·government·Strong

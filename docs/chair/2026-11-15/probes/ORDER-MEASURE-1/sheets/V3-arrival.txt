@@ -1,0 +1,101 @@
+A2-arrival:arrivalScene: 69 rows located, n=800; showing 20
+
+#B15314 n36 r2s-famine-hamlet-0 [arrivalScene] src/data/arrivalProse.js
+  WHY: racks of drying fish and catch everywhere; FOOD failed source is fish and the town is in Active Famine
+  TXT: Racks of drying fish line the way in, and the smell of salt and catch is everywhere.
+  MOVE: P-Grain Holders·economy·Dominant | defence built later: Undefended  ENDP: Elder Council·government·Dominant
+
+#B21055 n7 r2r-village-42 [arrivalScene] src/data/arrivalProse.js
+  WHY: smell of sawn timber and sawdust everywhere; LAND gaps say the Sawmill lacks access to timber and mountain timber
+  TXT: The smell of sawn timber is everywhere in Rossholme, and so is the sawdust.
+  MOVE: P-Religious Authorities·religious·Dominant; Third Bloc (Neutrals)·other·Significant | defence built later: Vulnerable  ENDP: The Independent Bloc·other·Significant, Priestly Guidance·religious·Minor
+
+#B04630 n2 r2r-hamlet-9 [arrivalScene] src/data/arrivalProse.js
+  WHY: charcoal smoke lingers; LAND gap says the charcoal burner lacks access to mountain timber and 13441 says it is not brought in
+  TXT: Charcoal smoke lingers in the lane, thick and sweetish.
+  MOVE: P-Military/Guard·military·Strong; Monster Hunters / Adventurers·military·Significant | defence built later: Undefended  ENDP: Elder Council·government·Dominant
+
+#B01036 n2 r2s-famine-town-2 [arrivalScene] src/data/narrativeData.js
+  WHY: calls the town orderly; stability reads Desperate, hunger eroding order, legitimacy crisis, safety Dangerous
+  TXT: Vatanserai is orderly in the way that a settlement is orderly when order is being enforced.
+  MOVE: P-Merchant Guilds·economy·Minor; Craft Guilds·economy·Minor; Military/Guard·military·Suppressed | defence built later: Vulnerable  ENDP: Town Mayor·other·Strong, Thieves' Guild·criminal·Significant, Grain Holders·economy·Minor
+
+#00160 n20 r2s-insurgency-hamlet-0 [arrivalScene] src/data/arrivalProse.js
+  WHY: point of law argued before a crowd; hamlet of 35 with no court
+  TXT: Two citizens argue a point of law loudly enough for a crowd to gather.
+  MOVE: P-Grain Holders·economy·Strong; People's Council·government·Strong | defence built later: Undefended  ENDP: Headman's Authority·government·Dominant
+
+#01041 n2 r2s-famine-town-1 [arrivalScene] src/data/arrivalProse.js
+  WHY: horses shod, sold, hired and fed at every hour; HOUSES has no smith, stable or horse market
+  TXT: Hongcheng is loud with horses: shod, sold, hired and fed at every hour.
+  MOVE: P-Landed Gentry·noble·Minor; Grain Holders·economy·Minor; Craft Guilds·economy·Suppressed | defence built later: Well-Defended  ENDP: Religious Authorities·religious·Strong, Merchant oligarchy·economy·Significant, Merchant Guilds·economy·Minor, Military/Guard·military·Minor
+
+#01529 n6 r2s-slave_revolt-thorp-0 [arrivalScene] src/data/narrativeData.js
+  WHY: 'field gangs work without overseers'; tag reaches th, here a thorp of 28 with Dwellings (1-8)
+  TXT: Mönkhkher's field gangs work without overseers today, or the overseers have dressed like the gangs.
+  MOVE: P-Revolt Leadership·other·Strong; Military/Guard·military·Strong; Abolitionist Network·other·Minor | defence built later: Lightly Defended  ENDP: Feudal Stewardship·government·Strong
+
+#02425 n16 r2s-plague_onset-village-0 [arrivalScene] src/data/arrivalProse.js
+  WHY: Caravan broker shouting terms to laden animals; safety Quarantined under Plague, and the village has no market
+  TXT: A caravan broker shouts terms to a line of laden animals and the people leading them.
+  MOVE: P-Military/Guard·military·Minor; Quarantine Council·government·Minor; Manor Household·noble·Suppressed | defence built later: Vulnerable  ENDP: Religious Authorities·religious·Dominant, Elder Council·government·Significant
+
+#02866 n9 r2s-under_siege-hamlet-3 [arrivalScene] src/data/arrivalProse.js
+  WHY: a notice of the next fair; under siege nothing comes in by road and the market cannot draw a fair
+  TXT: A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.
+  MOVE: P-Military/Guard·military·Minor; Merchant Guilds·economy·Suppressed | defence built later: Undefended  ENDP: Elder Council·government·Dominant, War Council·military·Strong
+
+#03498 n22 r2r-hamlet-0 [arrivalScene] src/data/arrivalProse.js
+  WHY: an apprentice with a master's mark; HOUSES of 22-person hamlet has no craft workshop or master of any trade
+  TXT: An apprentice hurries past on an errand, a master's mark stitched on his sleeve.
+  MOVE: P-War Council·military·Strong; Military/Guard·military·Significant; Manor Household·noble·Suppressed | defence built later: Undefended  ENDP: Feudal Stewardship·government·Dominant
+
+#04287 n18 r2r-thorp-58 [arrivalScene] src/data/arrivalProse.js
+  WHY: salt fish stacked for the carts: exports none, under siege nothing leaves by road
+  TXT: Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.
+  MOVE: P-War Council·military·Dominant | defence built later: Vulnerable  ENDP: Elder Council·government·Dominant
+
+#07323 n17 r2s-occupied-village-3 [arrivalScene] src/data/arrivalProse.js
+  WHY: 'every other doorway sells a remedy' in a village of 134 with one apothecary
+  TXT: Every other doorway seems to sell a remedy for something.
+  MOVE: P-Religious Authorities·religious·Significant; Resistance Network·military·Minor | defence built later: Undefended  ENDP: Occupation Authority·military·Dominant, Elder Council·government·Significant
+
+#10784 n21 r2s-plague_onset-village-1 [arrivalScene] src/data/arrivalProse.js
+  WHY: Horse traders show animals where herders and townsfolk meet; under Plague people do not gather
+  TXT: Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.
+  MOVE: P-Quarantine Council·government·Minor; Craft Guilds·economy·Suppressed; Merchant Guilds·economy·Suppressed; Military/Guard·military·Suppressed | defence built later: Vulnerable  ENDP: Religious Authorities·religious·Dominant, Elder Council·government·Significant
+
+#15281 n5 r2r-hamlet-32 [arrivalScene] src/data/arrivalProse.js
+  WHY: endless line of ore and stone carts; hamlet of 63 has one open-cast mine and no quarry
+  TXT: Ore carts and stone carts grind along the road in a line that never seems to end.
+  MOVE: defence built later: Vulnerable  ENDP: Household Council·government·Dominant, Creditor's Representative·other·Strong
+
+#15723 n16 r2s-plague_onset-village-1 [arrivalScene] src/data/arrivalProse.js
+  WHY: pilgrims queue at holy places under plague; tag is all P towns, and HOUSES has only a parish church
+  TXT: Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.
+  MOVE: P-Quarantine Council·government·Minor; Craft Guilds·economy·Suppressed; Merchant Guilds·economy·Suppressed; Military/Guard·military·Suppressed | defence built later: Vulnerable  ENDP: Religious Authorities·religious·Dominant, Elder Council·government·Significant
+
+#16785 n7 r2s-plague_onset-town-3 [arrivalScene] src/data/arrivalProse.js
+  WHY: Flour stacked to be carted out; town runs a 7% food deficit under Plague, travel not as usual
+  TXT: Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.
+  MOVE: P-Quarantine Council·government·Minor; Arcane Orders·magic·Minor; Landed Gentry·noble·Suppressed; Craft Guilds·economy·Suppressed; Merchant Guilds·economy·Suppressed | defence built later: Vulnerable  ENDP: Arcane Council·magic·Significant, Religious Authorities·religious·Minor, Military/Guard·military·Minor
+
+#18534 n2 r2s-slave_revolt-village-0 [arrivalScene] src/data/arrivalProse.js
+  WHY: stallholders calling over a noisy market under a Slave Revolt, safety Critical; 21709 says market operations disrupted
+  TXT: Stallholders call their wares over the noise of the market.
+  MOVE: P-Merchant Guilds·economy·Minor; Revolt Leadership·other·Minor; Craft Guilds·economy·Suppressed; Military/Guard·military·Suppressed; Abolitionist Network·other·Suppressed | defence built later: Lightly Defended  ENDP: Religious Authorities·religious·Significant, Thieves' Guild·criminal·Minor, Elected Reeve·other·Minor
+
+#20320 n3 r2s-politically_fractured-hamlet-0 [arrivalScene] src/data/narrativeData.js
+  WHY: council hall and 'two taverns at opposite ends of town'; hamlet has one Alehouse, no hall, a headman not a council
+  TXT: The council hall of Zelenoichi is dark; the business of governing has moved to two different taverns at opposite ends of town.
+  MOVE: P-Religious Authorities·religious·Strong; Military/Guard·military·Significant; Third Bloc (Neutrals)·other·Minor; Manor Household·noble·Minor | defence built later: Vulnerable  ENDP: The Independent Bloc·other·Significant, Headman's Authority·government·Suppressed
+
+#21611 n7 r2s-mass_migration-hamlet-1 [arrivalScene] src/data/arrivalProse.js
+  WHY: saws rasping 'from yard to yard'; hamlet of 60 has one part-time carpenter, no sawmill or woodcutter
+  TXT: The rasp of the saws carries from yard to yard all through the day.
+  MOVE: P-Military/Guard·military·Dominant; Manor Household·noble·Minor; Newcomers' Settlement·other·Minor | defence built later: Vulnerable  ENDP: Headman's Authority·government·Strong
+
+#22067 n3 r2s-slave_revolt-town-2 [arrivalScene] src/data/narrativeData.js
+  WHY: names a slave market with an auction platform at the town's heart; HOUSES has no slave market
+  TXT: The slave market at its heart (you can see the empty auction platform from the gate) stands deserted, ringed by guards.
+  MOVE: P-Thieves' Guild·criminal·Minor; Merchant Guilds·economy·Suppressed; Craft Guilds·economy·Suppressed; Abolitionist Network·other·Suppressed | defence built later: Well-Defended  ENDP: Religious Authorities·religious·Significant, Revolt Leadership·other·Minor, Corrupt Council·criminal·Minor, Military/Guard·military·Minor

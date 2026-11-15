@@ -1,0 +1,101 @@
+assembleInstitutions:institutions: 184 rows located, n=5206; showing 20
+
+#B13260 n105 r2s-famine-town-3 [institutions[].desc] src/data/institutionalCatalog.js
+  WHY: brickmaker moulds and fires bricks; gaps say Brickmaker exists but lacks access to clay
+  TXT: Moulds and fires clay bricks for construction.
+  MOVE: P+Arcane Council·magic; Thieves' Guild·criminal; Religious Authorities·religious | H+Underground network | Tx-[]+['Alchemical reagents', 'Alchemical trade (potions, reagents)', 'Candles and wax', 'Coal', 'Herbal remedies', 'Medicinal herbs', 'Potions and elixirs', 'Wild honey'] | Tm-[]+['Bulk grain   ENDP: Arcane Council·magic·Significant, Thieves' Guild·criminal·Significant, Religious Authorities·religious·Minor
+
+#B12199 n64 r2s-under_siege-city-2 [institutions[].desc] src/data/institutionDescVariants.js
+  WHY: says vintner makes and ages wine; gap: Vintner exists but lacks access to grapes, and 13775 says no grapes reach the vintner
+  TXT: Makes and ages wine, whether from grapes grown near or must brought in.
+  MOVE: P+Noble Governorship·government; Military/Guard·military; War Council·military; Religious Authorities·religious; The Faithful Assembly·religious; The Garrison Bloc·military | H-Almshouse; Assay office | H+Black market; Midwife; Printing house; Tailor's guild | Tx-[]+['Alchemical trade (potions, reag  ENDP: Noble Governorship·government·Strong, Military/Guard·military·Significant, War Council·military·Significant, Religious Authorities·religious
+
+#B08883 n49 r2r-town-54 [institutions[].desc] src/data/institutionDescVariants.js
+  WHY: "he" shapes sacred images; the woodcarver Oghul Fergana is (f) in PEOPLE
+  TXT: For the church he shapes sacred images and reliquaries.
+  MOVE: P+Feudal Appointee·noble; Religious Authorities·religious; Merchant Guilds·economy; Landed Gentry·noble; Craft Guilds·economy | H+Annual fair; Butchers (3-8); Fish market; Potter | Tx-[]+['Bows and crossbows', 'Charcoal', 'Date export', 'Date harvest', 'Desert grain', 'Financial services (letters of  ENDP: Feudal Appointee·noble·Strong, Religious Authorities·religious·Strong, Merchant Guilds·economy·Minor, Landed Gentry·noble·Minor, Craft Guild
+
+#B11885 n39 r2s-famine-metropolis-3 [institutions[].desc] src/data/institutionalCatalog.js
+  WHY: names a citadel ring; DEFENCE gives only Massive walls and fortifications and HOUSES has no Citadel
+  TXT: Layered wall systems: outer wall, inner wall, citadel ring.
+  MOVE: P+Religious Authorities·religious; Royal Authority·government; Grain Holders·economy; Thieves' Guild·criminal; Noble Houses·noble; The Highborn Circle·noble | H-Almshouse; Fighting pits; Foundling home; Hireling hall; Rookery | H+Caravan masters' exchange; Harbour master's office; Post relay station  ENDP: Religious Authorities·religious·Strong, Royal Authority·government·Significant, Grain Holders·economy·Minor, Thieves' Guild·criminal·Minor, 
+
+#B11640 n31 r2s-under_siege-metropolis-0 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: relay horses kept for fast message riders as ongoing; tag has S: under siege roads are closed, nothing travels
+  TXT: Keeps relay horses at the coaching inn for fast message riders.
+  MOVE: P+Military/Guard·military; High Theocratic Council·religious; Religious Authorities·religious; War Council·military; Noble Houses·noble; Arcane Orders·magic; Craft Guilds·economy; The Arcane Circle·magic | H-Almshouse; Assay office; Foundling home; Hired blades; Hireling hall; Listening post; Printi  ENDP: Military/Guard·military·Significant, High Theocratic Council·religious·Significant, Religious Authorities·religious·Significant, War Council
+
+#B02898 n15 r2s-under_siege-hamlet-1 [institutions[].desc] src/data/institutionDescVariants.js
+  WHY: catch landed and cured: LAND has no fishing resource and TRADE makes no fish
+  TXT: A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.
+  MOVE: P+Headman's Authority·government | Tm-[]+['Grain', 'Incense and votive candles', 'Iron (weapons)', 'Salt'] | Tn-[]+['Grain', 'Iron (weapons)', 'Salt'] | chains moved | defence built later: Vulnerable  ENDP: Headman's Authority·government·Dominant
+
+#B02719 n7 r2r-village-24 [institutions[].desc] src/data/institutionDescVariants.js
+  WHY: mapmaker 'his work'; PEOPLE gives the cartographer as Qiong Liang (f)
+  TXT: A mapmaker who draws and sells his work: road maps of the region, property surveys, and rough sketches of the wilds pieced from tr
+  MOVE: P+Elder Council·government; Grain Holders·economy | H+Ale house; Wildfowler | Tx-[]+['Ritual components', 'Sacred wood'] | Tm-[]+['Fine porcelain and lacquerware', 'Grain', 'Incense and votive candles', 'Replacement arms and basic equipment', 'Route maps and intelligence', 'Salt'] | Tn-[]+['Grain',   ENDP: Elder Council·government·Dominant, Grain Holders·economy·Dominant
+
+#B15022 n6 r2s-wartime-village-3 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: says the saw widens the settlement's building timber and furniture output; LAND gaps say the Sawmill lacks access to mountain timber
+  TXT: Powered by water or ox, the saw reduces logs to planks and beams, widening the settlement's output of building timber and furnitur
+  MOVE: P+Elder Council·government; Religious Authorities·religious | H+Maltster; Stable master | Tx-[]+['Advanced weapons and armor', 'Iron ore', 'Milled flour', 'Quality tools and weapons', 'Ritual components', 'Sacred wood', 'Weapons and armour'] | Tm-[]+['Incense and votive candles', 'Salt', 'Silver orn  ENDP: Elder Council·government·Strong, Religious Authorities·religious·Strong
+
+#B15828 n3 r2s-under_siege-hamlet-1 [institutions[].desc] src/data/institutionDescVariants.js
+  WHY: runs cattle or goats for milk: LAND gap says Dairy farmer lacks access to livestock
+  TXT: Runs cattle or goats for their milk, butter, and cheese.
+  MOVE: P+Headman's Authority·government | Tm-[]+['Grain', 'Incense and votive candles', 'Iron (weapons)', 'Salt'] | Tn-[]+['Grain', 'Iron (weapons)', 'Salt'] | chains moved | defence built later: Vulnerable  ENDP: Headman's Authority·government·Dominant
+
+#B22002 n1 r2r-village-14 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: 'his songs' for the village musician; PEOPLE gives the musician Borgny Eriksson as (f)
+  TXT: Through his songs the settlement's history is remembered.
+  MOVE: P+Elder Council·government; Merchant Guilds·economy; Military/Guard·military | H+Fuller; River boatyard | Tx-[]+['Freshwater catch', 'Healing waters (bottled)', 'Pilgrim hospitality', 'River fish', 'Salted fish', 'Smoked seafood'] | Tm-[]+['Cordage, canvas, and vessel-maintenance supplies', 'Incense  ENDP: Elder Council·government·Significant, Merchant Guilds·economy·Significant, Military/Guard·military·Significant
+
+#02668 n14 r2s-occupied-metropolis-3 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: Merchant houses 'monopolise power'; the town is Under Occupation with an Occupation Authority, stability Suppressed
+  TXT: A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.
+  MOVE: P+Grand Merchant Oligarchy·economy; Occupation Authority·military; Religious Authorities·religious; Arcane Orders·magic; Merchant Guilds·economy; Craft Guilds·economy; The Garrison Bloc·military | H-Alchemist quarter; Almshouse; Assay office; Caravan masters' exchange; Contract killer; Fighting pits  ENDP: Grand Merchant Oligarchy·economy·Strong, Occupation Authority·military·Minor, Religious Authorities·religious·Minor, Arcane Orders·magic·Min
+
+#03077 n12 r2s-occupied-metropolis-0 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: Names the crown; GOVERNMENT is a Grand Guild Consortium with an Occupation Authority, no monarch
+  TXT: A station costs as much as a merchant house, so only the crown and the great guilds keep them.
+  MOVE: P+Grand Guild Consortium·economy; Occupation Authority·military; Arcane Orders·magic; Merchant Guilds·economy; Craft Guilds·economy; Resistance Network·military; Military/Guard·military; The Arcane Circle·magic | H-Alchemist quarter; Contract killer; Foundling home; Printing house; Wizard's tower |   ENDP: Grand Guild Consortium·economy·Significant, Occupation Authority·military·Significant, Arcane Orders·magic·Minor, Merchant Guilds·economy·Mi
+
+#04705 n8 r2s-plague_onset-town-0 [institutions[].desc] src/data/institutionDescVariants.js
+  WHY: annual fair brings merchants from across the region; tag has P, under plague people do not gather or travel as usual
+  TXT: Annual fair: Merchants from across the region, and luxuries to be had.
+  MOVE: P+Military/Guard·military; Military Council·military; Landed Gentry·noble | H+Cooper; Gates (if walled); Merchant guilds (3-8); Warden's Lodge | Tx-[]+['Cavalry mounts', 'Draft horses', 'Flour and meal', 'Furs and pelts', 'Game meat', 'Guild-manufactured goods', 'Hunting trophies', 'Livestock', 'Mil  ENDP: Military/Guard·military·Strong, Military Council·military·Significant, Landed Gentry·noble·Minor
+
+#07216 n18 r2s-under_siege-town-3 [institutions[].desc] src/data/institutionDescVariants.js
+  WHY: resupplies the caravans and their guards; under siege no caravan comes or goes by road
+  TXT: Enough to resupply the caravans and outfit their guards.
+  MOVE: P+War Council·military; Guild Council·economy; Thieves' Guild·criminal; Religious Authorities·religious; Merchant Guilds·economy | H+Ropemaker | Tx-[]+['Financial services (letters of credit)', 'Quality tools and weapons'] | Tm-[]+['Bronze fittings and tools', 'Chariot fittings and iron', 'Game and   ENDP: War Council·military·Strong, Guild Council·economy·Strong, Thieves' Guild·criminal·Significant, Religious Authorities·religious·Minor, Merch
+
+#11211 n5 r2s-occupied-town-3 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: says the Glassblower makes bottles, panes and goblets; LAND gaps say Glassblower exists but lacks access to glass sand
+  TXT: Glassblower: A modest glassworks making bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace ope
+  MOVE: P+Corrupt Council·criminal; Occupation Authority·military; Religious Authorities·religious; Merchant Guilds·economy; Craft Guilds·economy | H+Butchers (3-8); Courthouse; River boatyard; Small hospital | Tx-[]+['Financial services (letters of credit)', 'Freshwater catch (taxed by occupation)', 'Heali  ENDP: Corrupt Council·criminal·Significant, Occupation Authority·military·Significant, Religious Authorities·religious·Significant, Merchant Guild
+
+#14229 n84 r2s-under_siege-city-1 [institutions[].desc] src/data/institutionalCatalog.js
+  WHY: inn districts catering to travelers and visitors; false in tagged towns under siege (S), occupation or plague, where no one arrives
+  TXT: Inns and taverns (district): Multiple inn districts catering to merchants, travelers, and long-term visitors.
+  MOVE: P+Military/Guard·military; Ecclesiastical Council·religious; The Martial Alliance·military | H+Beast trainers; Hireling hall; Mercenary quarter | Tx-[]+['Financial services (letters of credit)', 'Legal services (contracts, notarial)', 'Military contract services'] | Tm-[]+['Advanced weapons and armo  ENDP: Military/Guard·military·Strong, Ecclesiastical Council·religious·Significant, The Martial Alliance·military·Strong
+
+#16266 n42 r2s-plague_onset-town-0 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: square given over to market days and fairs; plague quarantine (safety Quarantined) stops gatherings
+  TXT: Market square: A broad open square given over to market days and fairs.
+  MOVE: P+Military/Guard·military; Military Council·military; Landed Gentry·noble | H+Cooper; Gates (if walled); Merchant guilds (3-8); Warden's Lodge | Tx-[]+['Cavalry mounts', 'Draft horses', 'Flour and meal', 'Furs and pelts', 'Game meat', 'Guild-manufactured goods', 'Hunting trophies', 'Livestock', 'Mil  ENDP: Military/Guard·military·Strong, Military Council·military·Significant, Landed Gentry·noble·Minor
+
+#18556 n43 r2s-plague_onset-city-3 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: markets open every day as usual under plague, safety Dangerous - Plague Unrest
+  TXT: Standing markets in more than one quarter, open every day.
+  MOVE: P+Religious Authorities·religious; Corrupt City Council·criminal; Thieves' Guild·criminal; The Devout Circle·religious; The Hidden Hand·criminal | H+Bakers (5-15); Brickmaker; Dyer; Elder Grove Council; Glassmakers; Major hospital; Merchant guilds (15-40); Multiple adventurers' guilds; Tailor's guil  ENDP: Religious Authorities·religious·Strong, Corrupt City Council·criminal·Significant, Thieves' Guild·criminal·Minor, The Devout Circle·religiou
+
+#21726 n74 r2s-occupied-town-0 [institutions[].desc] src/data/institutionDescColour.js
+  WHY: says the Potter throws and fires pottery; LAND gaps say Potter exists but lacks access to clay
+  TXT: Potter: Throws pottery at the wheel for the household (plates, jugs, vessels for storage) and fires it in a small kiln.
+  MOVE: P+Occupation Authority·military; Town Council·government; Resistance Network·military; Merchant Guilds·economy | H+Bowyers & fletchers (guild); Cobbler's guild; Merchant guilds (3-8) | Tx-[]+['Legal services (contracts, notarial)', 'Peat fuel (taxed by occupation)', 'Reeds and thatch (taxed by occup  ENDP: Occupation Authority·military·Strong, Town Council·government·Significant, Resistance Network·military·Minor, Merchant Guilds·economy·Minor
+
+#28580 n9 r2s-politically_fractured-town-0 [institutions[].desc] src/data/institutionalCatalog.js
+  WHY: says merchant families hold exclusive civic power; Merchant oligarchy is only Minor, Thieves' Guild Significant, stability Fractured
+  TXT: Wealthy merchant families hold exclusive civic power; political office is effectively purchased.
+  MOVE: P+Merchant Guilds·economy; Thieves' Guild·criminal; The Independent Bloc·other; Merchant oligarchy·economy | H+Beast trainers; Dyer; Potter; Salt works | Tx-[]+['Freshwater catch', 'Ritual components', 'River fish', 'Sacred wood', 'Salted fish', 'Smoked seafood'] | Tm-[]+['Grain (a little, beside it  ENDP: Merchant Guilds·economy·Significant, Thieves' Guild·criminal·Significant, The Independent Bloc·other·Minor, Merchant oligarchy·economy·Minor

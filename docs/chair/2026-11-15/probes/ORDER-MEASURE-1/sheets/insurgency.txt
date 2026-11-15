@@ -1,0 +1,9 @@
+('Significant+', 'none at write') 6
+('Significant+', 'rival at write') 31
+('Significant+', 'rival at write, none at end') 10
+('Significant+', 'towns') 37
+('Strong+', 'none at write') 9
+('Strong+', 'rival at write') 28
+('Strong+', 'rival at write, none at end') 11
+('Strong+', 'towns') 37
+lost: ['r2r-thorp-22', 'r2r-thorp-29', 'r2r-thorp-52', 'r2r-city-33', 'r2s-insurgency-thorp-0', 'r2s-insurgency-thorp-1', 'r2s-insurgency-thorp-2', 'r2s-insurgency-hamlet-0', 'r2s-insurgency-hamlet-1', 'r2s-insurgency-hamlet-2', 'r2s-insurgency-hamlet-3']

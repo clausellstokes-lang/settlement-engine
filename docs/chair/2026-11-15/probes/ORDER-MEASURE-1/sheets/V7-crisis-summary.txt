@@ -1,0 +1,46 @@
+A1-stress-summary:stress: 9 rows located, n=268; showing 9
+
+#B21815 n44 r2s-occupied-thorp-1 [stress[].crisisHook] src/data/stressTypes.js
+  WHY: a hidden holder will sell food; FOOD shows 0.1 months in store, no granary, no imports, 0% surplus: no stock to sell during famine
+  TXT: They will sell it, but their price is not money.
+  MOVE: P-Religious Authorities·religious·Strong; Grain Holders·economy·Significant; Resistance Network·military·Suppressed | defence built later: Vulnerable  ENDP: Occupation Authority·military·Significant, Elder Council·government·Significant
+
+#B17409 n25 r2s-occupied-thorp-1 [stress[].crisisHook] src/data/stressTypes.js
+  WHY: someone has food put by enough to matter; FOOD stores 0.1 months, no granary, nothing imported, famine; no one holds a surplus
+  TXT: Someone here still has food put by, enough to matter.
+  MOVE: P-Religious Authorities·religious·Strong; Grain Holders·economy·Significant; Resistance Network·military·Suppressed | defence built later: Vulnerable  ENDP: Occupation Authority·military·Significant, Elder Council·government·Significant
+
+#01034 n4 r2s-wartime-village-0 [stress.summary] src/generators/stressNarrative.js
+  WHY: says the town does well out of the war; 07287 says it is losing people and resources by attrition; prosperity only Moderate
+  TXT: Abercross is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right frien
+  MOVE: P-War Council·military·Minor; Craft Guilds·economy·Minor; Religious Authorities·religious·Minor; Military/Guard·military·Suppressed; Manor Household·noble·Suppressed; Peace Movement·other·Suppressed | defence built later: Vulnerable  ENDP: Feudal Stewardship·government·Significant, Merchant Guilds·economy·Significant
+
+#03091 n37 r2s-insurgency-hamlet-0 [stress[].summary] src/generators/stressNarrative.js
+  WHY: a strong power stopped obeying the government; GOVERNMENT lists only Headman's Authority
+  TXT: A strong power in Dioneia has stopped obeying the government.
+  MOVE: P-Grain Holders·economy·Strong; People's Council·government·Strong | defence built later: Undefended  ENDP: Headman's Authority·government·Dominant
+
+#12078 n34 r2s-monster_pressure-thorp-1 [stress.summary] src/generators/stressNarrative.js
+  WHY: 'its defences were built for quieter times'; DEFENCE is none on every line and 01147 says it kept no defence
+  TXT: Its defences were built for quieter times.
+  MOVE: P-Military/Guard·military·Strong; Monster Hunters / Adventurers·military·Significant | defence built later: Vulnerable  ENDP: Household Council·government·Dominant
+
+#12113 n37 r2s-insurgency-hamlet-0 [stress[].summary] src/generators/stressNarrative.js
+  WHY: that power's people stall and taxes unpaid; no second power exists in GOVERNMENT
+  TXT: Its people stall, its taxes go unpaid, and it waits.
+  MOVE: P-Grain Holders·economy·Strong; People's Council·government·Strong | defence built later: Undefended  ENDP: Headman's Authority·government·Dominant
+
+#18434 n34 r2s-monster_pressure-thorp-1 [stress.summary] src/generators/stressNarrative.js
+  WHY: 'caravans go missing'; tag reaches th, and this thorp of 18 imports none on river access
+  TXT: Something in the country around Llanbeck has grown bolder: caravans go missing, and a farmstead was lost to fire last week.
+  MOVE: P-Military/Guard·military·Strong; Monster Hunters / Adventurers·military·Significant | defence built later: Vulnerable  ENDP: Household Council·government·Dominant
+
+#20648 n29 r2s-wartime-thorp-2 [stress[].summary] src/generators/stressNarrative.js
+  WHY: families thriving on contracts: isolated thorp of 9 that sells nothing outward
+  TXT: The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.
+  MOVE: P-War Council·military·Significant; Military/Guard·military·Significant; Grain Holders·economy·Significant; Peace Movement·other·Suppressed | defence built later: Undefended  ENDP: Headman's Authority·government·Strong
+
+#28958 n24 r2s-slave_revolt-thorp-2 [stress.summary] src/generators/stressNarrative.js
+  WHY: 'Whole work gangs have downed tools'; tag reaches th, here a thorp of 21 with Dwellings (1-8)
+  TXT: Whole work gangs have downed tools and will not take them up again.
+  MOVE: P-Revolt Leadership·other·Dominant; Abolitionist Network·other·Significant | defence built later: Lightly Defended  ENDP: Elder Council·government·Strong

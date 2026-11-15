@@ -1,0 +1,108 @@
+diff --git a/src/generators/steps/assembleSettlement.js b/src/generators/steps/assembleSettlement.js
+index 04bb7c884..7c09370a9 100644
+--- a/src/generators/steps/assembleSettlement.js
++++ b/src/generators/steps/assembleSettlement.js
+@@ -200,6 +200,7 @@ registerStep('assembleSettlement', {
+   // wave 2 the pressure sentence and the arrival scene no longer read that stream, but the
+   // mint still runs so the shared stream stays where any later reader expects it.
+   settlement.name = chooseOrPin(pins, 'name', () => settlementName);
++  globalThis.__OM_SNAP?.('A0-literal', settlement); // ORDER-MEASURE-1 probe
+ 
+   // F8: re-render each stress entry's summary with the real settlement name.
+   // resolveStress baked a PROVISIONAL empty-name summary (leading-space prose
+@@ -230,6 +231,7 @@ registerStep('assembleSettlement', {
+   };
+   rerenderStressSummary(settlement.stress);
+   rerenderStressSummary(settlement.stressors);
++  globalThis.__OM_SNAP?.('A1-stress-summary', settlement); // ORDER-MEASURE-1 probe
+ 
+   // Narrative overlays. The pressure sentence and the arrival scene each draw on their own
+   // named child stream (THE VOICE PROGRAM wave 2, 2026-10-02): their pools and beats can
+@@ -239,7 +241,9 @@ registerStep('assembleSettlement', {
+   // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
+   // no other draw).
+   settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
++  globalThis.__OM_SNAP?.('A2-arrival', settlement); // ORDER-MEASURE-1 probe
+   settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written
++  globalThis.__OM_SNAP?.('A3-defence', settlement); // ORDER-MEASURE-1 probe
+ 
+   // The final-economy pass already proved that power consumed the final
+   // prosperity/safety/food tuple. Assert that proof before applying the one
+@@ -270,6 +274,7 @@ registerStep('assembleSettlement', {
+     tier,
+     { pins },
+   );
++  globalThis.__OM_SNAP?.('A4-reconcile', settlement); // ORDER-MEASURE-1 probe
+ 
+   // ── ODQ §810 SEAM 1b: size the political roster to the tier's faction band.
+   //
+@@ -306,6 +311,7 @@ registerStep('assembleSettlement', {
+   if (rosterResized) {
+     settlement.powerStructure = resized.powerStructure;
+   }
++  globalThis.__OM_SNAP?.('A5-resize', settlement); // ORDER-MEASURE-1 probe
+ 
+   // ── THE CRIME LINES READ THE FINAL CRIME SIGNAL (lane RUNG1B-F4 unit 4, 2026-11-04). The safety
+   // profile was written at the economy step, before the power roster existed; this is the first
+@@ -319,6 +325,7 @@ registerStep('assembleSettlement', {
+     { seats: settlement.powerStructure?.factions, estate: settlement.institutions },
+   );
+   if (settledEconomy !== settlement.economicState) settlement.economicState = settledEconomy;
++  globalThis.__OM_SNAP?.('A6-crime-lines', settlement); // ORDER-MEASURE-1 probe
+ 
+   // Coherence mutates canonical NPC/faction mechanics. Give it a dedicated
+   // stream so variable draw counts in pressure/arrival/defense presentation
+@@ -333,6 +340,7 @@ registerStep('assembleSettlement', {
+   // ALLEGIANCE-CAR1 (2026-11-08): the hidden allegiances' receipts, left by the coherence seam, recorded on the
+   // run's deterministic clock under the step label `people-allegiance` (domain/edit/tracePartition.js).
+   for (const receipt of takeAllegianceReceipts(settlement)) recordTrace(ctx, /** @type {any} */ (receipt));
++  globalThis.__OM_SNAP?.('A7-coherence', settlement); // ORDER-MEASURE-1 probe
+   // Rung 1 N1: faction power totals 100 on every path, the held-roster one included (whose
+   // coherence tail skips the dispersal that conserves it). By reference for v1 and for a
+   // roster already at 100; no draw. A HELD powerStructure is the DM's and is not rewritten.
+@@ -349,6 +357,7 @@ registerStep('assembleSettlement', {
+       settlement.history = settleTensionsToRoster(settlement.history, settlement.powerStructure, standingRoster);
+     }
+   }
++  globalThis.__OM_SNAP?.('A8-conserve-settle', settlement); // ORDER-MEASURE-1 probe
+ 
+   // Faction-to-NPC coupling. Walks every faction; for each archetype
+   // (temple, watch, merchant, thieves, noble, arcane) ensures the
+@@ -386,9 +395,11 @@ registerStep('assembleSettlement', {
+       ];
+     }
+   }
++  globalThis.__OM_SNAP?.('A9-structural-npcs', settlement); // ORDER-MEASURE-1 probe
+ 
+   // The pressure line, on its own 'pressure-sentence' child, now that the ties exist (PEOPLE-4 TIES).
+   settlement.pressureSentence = inAssemblySubstream(rng, 'pressure-sentence', () => generatePressureSentence(settlement));
++  globalThis.__OM_SNAP?.('A10-pressure', settlement); // ORDER-MEASURE-1 probe
+ 
+   // ── GS-2 ONE FACTION SET (chair ruling on G-SEAMS S2, ODQ §934.101). The power factions are
+   // the factions. `factions` groups the FINAL roster by each NPC's power affiliation and mints
+@@ -409,6 +420,7 @@ registerStep('assembleSettlement', {
+   if (settlement.powerStructure) {
+     settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts };
+   }
++  globalThis.__OM_SNAP?.('A11-conflicts', settlement); // ORDER-MEASURE-1 probe
+ 
+   // ── A HOOK FALSE ON ITS OWN RECORD IS NOT STORED (lane RUNG1-TRUTH unit A, 2026-11-04;
+   // docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 11). Every hook writer has drawn by now and the
+@@ -430,7 +442,9 @@ registerStep('assembleSettlement', {
+     const npcs = truePersonHooks(settlement, resolveGenerationWorldLaw(ctx.generationContext, ctx.effectiveConfig || {}).portKind);
+     if (npcs !== settlement.npcs) settlement.npcs = npcs;
+   }
++  globalThis.__OM_SNAP?.('A12-true-hooks', settlement); // ORDER-MEASURE-1 probe
+   if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster, after every roster writer (MERGE-CAR: after the people car's true-hook pass; the rename cascades through `memberships[].power` and a minted card's `institution.key`) (no roll); a HELD powerStructure is the DM's and is not renamed (EM-R3, LANDING-R2)
++  globalThis.__OM_SNAP?.('A13-labels-close', settlement); // ORDER-MEASURE-1 probe
+ 
+   // Propagate the in-pipeline causal trace onto the settlement so
+   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
+@@ -457,6 +471,7 @@ registerStep('assembleSettlement', {
+       generationRepairs: ctx.generationRepairs,
+     },
+   );
++  globalThis.__OM_SNAP?.('A14-receipt', settlement); // ORDER-MEASURE-1 probe
+ 
+   // Deterministic id: normalizeSettlement uses `_seed` to mint a stable
+   // settlement id (idFromSeed). Without _seed on the object at the
