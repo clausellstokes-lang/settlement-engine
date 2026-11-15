@@ -1,0 +1,14 @@
+{"id":"01289","town":"r2s-religious_conversion-village-3","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard' used as one power's name in a sentence ('also first in Military/Guard')","other":""}
+{"id":"00926","town":"r2r-village-45","sev":"MED","kind":"STATE","why":"calls it built for pastoral half-moving life; Coastal port founded as trading port, makes salt and river craft, no herds in LAND or TRADE","other":""}
+{"id":"00824","town":"r2s-under_siege-town-3","sev":"LOW","kind":"PAIR","why":"Gate control printed as stopped, while the Defense line says the gates are shut and the town watch holds them","other":"01031"}
+{"id":"01001","town":"r2s-under_siege-town-0","sev":"MED","kind":"TAG","why":"says the town buys in what it needs; under a siege (tag S) nothing comes in by road, gate or water","other":""}
+{"id":"00211","town":"r2s-under_siege-town-0","sev":"MED","kind":"STATE","why":"describes ordinary trade, duties and undercutting merchants under a siege where services and trade are printed stopped","other":""}
+{"id":"00678","town":"r2s-occupied-town-2","sev":"MED","kind":"LACKS","why":"presumes timber-using work and timber imports; HOUSES has no timber house, gaps none, imports list no timber","other":""}
+{"id":"01004","town":"r2s-recently_betrayed-town-3","sev":"MED","kind":"LACKS","why":"says the town buys in the timber it needs; TRADE imports list no timber, no house uses timber, gaps name only wool and hides","other":""}
+{"id":"00607","town":"r2r-town-1","sev":"MED","kind":"STATE","why":"says magical practitioners are only consulted, not empowered; GOVERNMENT is an Arcane Council (Strong) with Arcane Orders also a power","other":""}
+{"id":"01128","town":"r2r-town-1","sev":"MED","kind":"STATE","why":"calls magicians' influence merely advisory and resented; the governing power is the Arcane Council (Strong), Arcane Orders a power","other":"00607"}
+{"id":"01003","town":"r2r-town-10","sev":"MED","kind":"LACKS","why":"says the town buys in the stone it needs; TRADE imports list no stone, HOUSES has no stone-using house, LAND has no stone","other":""}
+{"id":"00673","town":"r2r-town-43","sev":"LOW","kind":"LACKS","why":"presumes stone used and brought in; TRADE imports list no stone and no HOUSES entry works stone","other":""}
+{"id":"01025","town":"r2r-town-19","sev":"LOW","kind":"STATE","why":"says garrison and watch exist only on paper; DEFENCE lists Barracks garrison and Town watch, defence word Lightly Defended","other":""}
+{"id":"01026","town":"r2r-town-9","sev":"MED","kind":"STATE","why":"says supplies the forces need are cut off; CRISIS none, safety Very Safe, Well-Defended, imports cover 846","other":""}
+{"id":"STOPPED","at_line":2641}
