@@ -1460,3 +1460,40 @@ and the four walkers: the same 10 red at base and tree. **Vetoable by the owner:
 - The eighth: the test seat re-keys `tailCrisisIronHooks`' two hamlets (r2r-town-20, r2r-town-1 the nearest).
 - The style walker's three lines (TAIL-HISTORY, TAIL-NARRATIVE); `displayEconCrisisMarks` (display-econ's, D10 and D14).
 - K27 parked (the chair's word for an `iron short` atom); TAIL-CRISIS-6's under-five list unchanged.
+
+# TAIL-CRISIS-8 · the eighth seat (2026-11-15)
+
+Seat TAIL-CRISIS-8, successor of TAIL-CRISIS-7, on the same branch from its tip **325de5153** (read back from origin;
+nothing later there). Scratch worktrees outside the main checkout: `wt` (the work, its own `npm ci`; package files
+identical across the merge), `bis` (the bisects and the base runs, `node_modules` linked). FIRST ACT: the joined line
+merged at **f714fb6a5** (one merge commit, 188e0dd3a, no conflict). Every run alone through `gate-tail.sh`, to a file.
+
+## The one red that stopped the landing: `journalMarksCrisisRows` (3 failed of 16 -> 16/16)
+
+Bisected by the town's printed shares over the joined line's first parents from 74688857c (this branch's last join),
+then inside the landing lane: all three rows turned at **26c3dc45** (JOIN-9 · 14, lane/tail-defecon at ad5720386),
+inside at **9cc8c6821** (TAIL-DEFECON-5 R2, "one shadow figure": the criminal income row held at the capture in both
+normalisers; a DECLARED MOVE of `economicState.incomeSources` in 229 towns; good at e1577f2cd). Not a crisis file. Each
+RE-KEYED BY IDENTITY (the same towns, rows and marks; the figure the merged tree prints, read by the test itself):
+
+| town | row | was | now |
+|---|---|---|---|
+| r2s-famine-town-1 | RED "Grain Sales" / "Grain Sales (scarce)" | 5% | 4% |
+| r2s-under_siege-town-3 | RED "Gate Tolls" / "Gate Tolls (stopped)" | 8% | 7% |
+| r2s-under_siege-town-3 | KEEP "Property Rents" | 8% | 7% |
+
+(r2s-under_siege-town-3's Shadow Economy row prints 39%; r2s-famine-town-1's KEEP "Toll Revenue: 15%" holds unmoved.)
+The anchored negative (`expectAbsentWithAnchor`) holds with each: the unmarked line absent, the marked line present.
+
+## The files TAIL-CRISIS-7 touched, each alone at the merged tree
+
+`crisisBlindWidened` 10/10, `facts/composeBareCrisis` 2/2, `crisisStoppedRows` 11/11, `tonightOwnGoal` 7/7,
+`tailCrisisK26` 1/1: green, nothing moved. `crisisBlindDossierProse` 1 failed of 5: the mute arm only, the same five
+pools TAIL-CRISIS-7 named (arrived at ba4cc210b; DS-POW-6, DS-GEN-13, DS-ECO-10, DS-ECO-12, DS-DEF-2, each `:: threat`);
+the blind arm (with its floor) green. The set-aside table left as it is (another close seat's).
+
+## The proof
+
+- eslint on the touched file 0. The twelve-birth grid `page-census.mjs --grid`: 2 falls at base (f714fb6a5) and tree
+  alike (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a): no rise.
+- HANDED BACK after the push (nothing more tonight, by the brief).
