@@ -1,0 +1,6 @@
+{"id":"C29627","town":"bar0-city-wartime-rand-11","sev":"LOW","kind":"STATE","why":"'Relied upon' beside Food (C29714) though FOOD by magic 0% and magic low/rare, capability Weak; may be the alchemist role only","other":"C29714"}
+{"id":"C30646","town":"bar0-city-wartime-rand-11","sev":"MED","kind":"STATE","why":"lists salt as a commodity available here; LAND gives Salt Flats depleted and TRADE imports salt (local salt flats exhausted)","other":"C30633"}
+{"id":"C30870","town":"bar0-city-wartime-rand-11","sev":"MED","kind":"PAIR","why":"'the answer is one ring' (one syndicate) but HOUSES has Multiple criminal factions and Rival gangs 'several gangs at odds'","other":"C29986"}
+{"id":"C30428","town":"bar0-city-wartime-rand-11","sev":"MED","kind":"STATE","why":"religious houses 'a large part of the city's business'; INCOME gives Church Tithes only 6%, fifth of eleven sources","other":""}
+{"id":"C30841","town":"bar0-city-wartime-rand-11","sev":"MED","kind":"PAIR","why":"'nowhere to hold the guilty' (also C30860, C30935) vs Commander's secret of a prisoner who died 'in the cells'","other":"C31052"}
+{"id":"DONE","lines":2184,"blocks":1,"flags":5}
