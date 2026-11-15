@@ -308,3 +308,53 @@ docs/chair/2026-11-14/probes/RECORD-MEASURE-1`. A scratch worktree per tree (one
 <tree> <out> 4` (~25 min), `inventory.py <out> x.json`, `inventory_diff.py before.json after.json <rows.json>`.
 The inheritor and verification scripts are ad hoc python over `corpus.ndjson.gz` (lost/gained goods by town against
 the roster's names), not committed.
+
+## TAIL-DEFECON-C-3 (the third seat on this file, 2026-11-15, from 906ff0352): D30, THE MADE LIST, FINISHED
+
+Same branch, same files. Worked to **D30** (the chair, 2026-11-15 02:31 UTC; vetoable by the owner), copied here:
+> THE MADE LIST, FINISHED. After C1-A the page still prints, in 389 of the 720 towns, a good "produced locally" that no
+> house of the town makes or works (barrels 44, flour 37, …) or that is gathered or herded with no gate at all (herbs 46,
+> hides 33, wool 29, timber 29, clay 5). THE LAW, in two parts, each ITS OWN COMMIT, A DECLARED MOVE, MEASURED BEFORE IT
+> IS BUILT: (a) A MADE GOOD is on the made list only where a house that makes or works it stands: the list is read by THE
+> WHOLE TABLE (GOOD_WORKING_HOUSES), not by C1-A's narrower gate. (b) A GATHERED OR HERDED GOOD (herbs, hides, wool,
+> timber, clay and their kind) is on the made list only where THE LAND GIVES IT AND IT IS WORKED: the record's own
+> exploitation of its resource (D15's two records made to agree), not a house. COAL AND PEAT stay as designed. The
+> chain-processor class (a cooper's beer) and the crisis export rows of one town each are NAMED, not built. For each
+> part, first the measure (births-only, field diff by family): if it moves only the made list and what prints it, build
+> and push; if it moves income, exports beyond the list, a founding or an arrival in more than ten towns, one line to the
+> chair with the table before the push. Every inheritor read. The page by one census before and one after both parts.
+
+| commit | what | record move (births-only field diff on the 720, over the commit before) |
+|---|---|---|
+| **(a)** (this commit) | `outputMadeHere` asks GOOD_WORKING_HOUSES for every good it names | 91 towns, ONE family: `economicState.localProduction`; no gain anywhere; no made list emptied |
+
+### D30 (a)
+
+- Lost (and nothing gained): Barrels and containers 44, Bows and crossbows 17, Arrows (sheaf) 17, Dyed cloth 15,
+  Hospitality for travellers 11, Quality tools and weapons 8, Advanced weapons and armor 8, River craft 4, Ship
+  construction 2, Ocean-going vessels 2, River barges 1.
+- READ, by the houses of a near name in each losing town (all true: none makes the good): barrels: no house 30, a
+  Brewer or Brewery 9, a Vintner 4 (a brewer fills casks, a cooper makes them); bows/arrows: none 15, a Hunter's lodge
+  2; dyed cloth: Weavers/Tailor's guild 9, a Tailor 3, Weavers 1, a Tailor's guild 2 (no dyer); hospitality: none 7, a
+  divine Healer 2, a Hunter's lodge 1, a Wayside shrine 1; arms: no smith or metalworker in all 8; boats and ships: a
+  River ferry 2, a Barge and river transport company with Docks 2 (no shipyard or boatyard).
+- Not covered by the table (it names none of them, so (a) does not touch them; NAMED, a table row would gate the
+  exports too): the raw "flour" and "Baked goods" (the classes' flour 37), "Processed textiles", "Finished clothing",
+  "Fine wool cloth" (textiles 16), the raw "glass" (glass 7).
+- Guard: `tests/generators/tailDefeconMadeListWhole.test.js` (13 GONE rows red at 906ff0352, each naming a good the town
+  still makes; 3 KEEP rows, the good where its Cooper, Bowyer, Dyer stands, green before and after). RE-KEYED BY
+  IDENTITY: `economicsGoodsPillsBorneOut.test.jsx` "no barrels by a thatcher …" (rww-village-famine-1): its anchor
+  listed the barrels on the record; the record no longer lists them (no cooper), and the page claim is unchanged.
+- Gates: the 48 focused files (803 tests): 7 red, 6 CARRIED at the base (generatorGoldenMaster, worldFactRederive A7,
+  coherenceAgreeCures x2, urbanBandInstitutions G3/G5), the seventh re-keyed above. domain-strict, the type ratchet,
+  eslint: exit 0. The golden master moves (the owner's door): not re-taken.
+
+### What is left (D30)
+
+1. **(b) THE GATHERED AND HERDED GOODS**: next, measured in a scratch tree before its build. The record's exploitation
+   lists a chain only where the TERRAIN allows its raw (`resourceGenerator.js :: evaluateEconomicActivity`): a rule that
+   asks only "is a house at the chain" moves 398 towns (herbs 302: all but the 46 forest towns are herbs the record
+   never calls unexploited). The cure must ask the record's own activation (the terrain), narrowing to D15's 123.
+2. THE PAGE: one census before (906ff0352, tabs only) and one after both parts.
+3. NAMED, not built (D30): the chain-processor class (a Cooper's "Ale/Beer (barrel)"); the crisis export rows (09013,
+   09282); the goods the table does not name (above); coal and peat (by design).

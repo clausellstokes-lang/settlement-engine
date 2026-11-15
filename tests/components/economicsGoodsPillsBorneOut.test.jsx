@@ -65,7 +65,10 @@ describe('the goods pills print only where the record bears them out (item 2)', 
 
   test('no guild goods without a guild, no barrels by a thatcher, no cloth by a shepherd (rww-village-famine-1)', () => {
     const town = birthApp('rww-village-famine-1');
-    expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['Guild-manufactured goods', 'Barrels and containers', 'Fine wool cloth']));
+    expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['Guild-manufactured goods', 'Fine wool cloth']));
+    // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-3, D30 (a)): the record itself no longer lists barrels where no cooper stands
+    // (the whole table, GOOD_WORKING_HOUSES); the page claim below is unchanged.
+    expect(town.economicState.localProduction, 'D30 (a): no cooper, no barrels on the record').not.toContain('Barrels and containers');
     const local = pillsUnder(town, 'Produced locally');
     // the list prints (re-keyed by W2-C-LEAVES-12: its anchor was "Preserved foods", which a Shepherd and Common grazing land
     // made by the default read; ruling (3), a good no house of its maker row makes is not printed, takes it off)

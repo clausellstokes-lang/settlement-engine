@@ -978,13 +978,17 @@ export function deriveLocalProductionFromChains(
   const chainHeldHere = (chain) => !housed
     || (chain.processingInstitutions || []).some(p => housed.some(i => institutionMatchesProcessor(i, p)));
   // A chain's processors are wider than its outputs' makers (the river-milling chain runs on a grain Mill and names
-  // "Milled lumber"; the stone chain runs on a Brickmaker and names "Quarried stone"): an output the export gates by a
-  // house is made here only where that house stands (CHAIN_OUTPUT_INST_GATES, widened as above).
+  // "Milled lumber"; the stone chain runs on a Brickmaker and names "Quarried stone"; the brewing chain runs on a
+  // Cooper and names "Barrels and containers" beside a Dyer's "Dyed cloth"): an output is made here only where a house
+  // that makes or works it stands. TAIL-DEFECON-C-3 (D30 (a), the chair, 2026-11-15): THE WHOLE TABLE
+  // (GOOD_WORKING_HOUSES, the one the export steps read) is asked for every good it names; a good it does not name
+  // keeps the export's output gate (CHAIN_OUTPUT_INST_GATES, widened as above), else no gate.
   const outputMadeHere = (good) => {
-    const gate = housed && CHAIN_OUTPUT_INST_GATES[good];
+    if (!housed) return true;
+    if (GOOD_WORKING_HOUSES[good]) return goodWorkedHere(good, housed);
+    const gate = CHAIN_OUTPUT_INST_GATES[good];
     if (!gate) return true;
-    const kws = GOOD_WORKING_HOUSES[good]
-      || (Array.isArray(gate) ? gate : [gate]).flatMap(kw => MADE_HERE_KEYWORD_WIDENING[kw] || [kw]);
+    const kws = (Array.isArray(gate) ? gate : [gate]).flatMap(kw => MADE_HERE_KEYWORD_WIDENING[kw] || [kw]);
     return kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
   };
   const local = new Set();
