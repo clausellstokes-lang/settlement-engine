@@ -24,6 +24,7 @@ import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { cap, label, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1)
 import { tradeStoppedHere } from '../../domain/display/chainStateShown.js'; // SURFACES-3 item 2 (r4): the tab's siege reader
 
 const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
@@ -38,7 +39,8 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
   const partialRows   = r.chainRows.filter(c => c.status === 'partial');
   const unexpRows     = r.chainRows.filter(c => c.status === 'unexploited');
 
-  const importsCritical    = r.imports?.critical || [];
+  // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints, not the terrain's need list raw
+  const importsCritical    = settlement ? criticalImportsShown(settlement) : (r.imports?.critical || []);
   const importsRecommended = r.imports?.recommended || [];
 
   return (

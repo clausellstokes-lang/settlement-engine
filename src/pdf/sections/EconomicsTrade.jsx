@@ -205,18 +205,20 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
       )}
 
       {/* Critical trade dependencies */}
-      {(e.tradeDependencies?.length > 0 || e.criticalImports?.length > 0) && (
+      {/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the terrain's critical goods the tab prints (criticalImportsShown), never
+          the need list raw ("luxury goods" in a thorp of seven, 420 of 720). */}
+      {(() => { const criticalShown = criticalImportsShown(settlement); return (e.tradeDependencies?.length > 0 || criticalShown.length > 0) && (
         <View style={{ marginBottom: space.sm }}>
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             CRITICAL DEPENDENCIES
           </Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
-            {[...(e.tradeDependencies || []), ...(e.criticalImports || [])].map((d, i) => (
+            {[...(e.tradeDependencies || []), ...criticalShown].map((d, i) => (
               <Tag key={`dep-${i}`} tone="bad">{label(d)}</Tag>
             ))}
           </View>
         </View>
-      )}
+      ); })()}
 
       {hasFoodData(e.foodBalance) && (
         <>
@@ -341,15 +343,18 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           T2-9 PDF parity: the same exploitation lists were printed in both chapters). */}
 
       {/* ── Shadow economy ─────────────────────────────────────── */}
-      {(e.shadowEconomy.captureRate != null || e.shadowEconomy.crimeTypes?.length > 0) && (
+      {/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the capture line prints where the tab's Shadow Economy block does, at the
+          tab's floor (shadowCaptureShown), with the tab's figure ("Black market capture: 0% of economy" printed in all 720
+          towns); the crime patterns and the criminal chains, true where the record holds them, print as before. */}
+      {(shadowCaptureShown(settlement?.economicState?.safetyProfile) != null || e.shadowEconomy.crimeTypes?.length > 0 || e.shadowEconomy.criminalChains?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             SHADOW ECONOMY
           </Text>
-          {e.shadowEconomy.captureRate != null && (
+          {shadowCaptureShown(settlement?.economicState?.safetyProfile) != null && (
             <Text style={{ ...type.body, fontSize: pt['9'], color: palette.bad, marginBottom: 3 }}>
-              Black market capture: <Text style={{ fontWeight: 700 }}>{smart(e.shadowEconomy.captureRate)}%</Text> of economy
+              Black market capture: <Text style={{ fontWeight: 700 }}>{smart(shadowCaptureShown(settlement?.economicState?.safetyProfile))}%</Text> of economy
             </Text>
           )}
           {e.shadowEconomy.crimeTypes?.length > 0 && (
@@ -596,3 +601,5 @@ function crisisYieldWords(mod) {
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
+import { shadowCaptureShown } from '../../domain/display/shadowEconomyShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's floor
+import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints
