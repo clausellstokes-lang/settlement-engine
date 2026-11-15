@@ -2711,12 +2711,6 @@
     "0c3f040fdd2c69b5"
    ],
    [
-    "openTrade",
-    "family",
-    "Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and b",
-    "76b4b52212951b49"
-   ],
-   [
     "house: library",
     "family",
     "DS-SUP-2: LADDER › canonical supply-chain status + the break-cause clause library · `deriveSupplyChainState(chain, settl",
@@ -4358,12 +4352,6 @@
    [
     "quarters",
     "word",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "quarters",
-    "word",
     "The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out.",
     "cedea0d0c6e131fb"
    ],
@@ -4378,12 +4366,6 @@
     "word",
     "Several quarters, each with its house of worship.",
     "b80668f645a2a56d"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's registe",
-    "216f9d693bd5f6b6"
    ],
    [
     "religiousHouses",
@@ -4518,18 +4500,6 @@
     "a9e0843df1c70c11"
    ],
    [
-    "garrison",
-    "implied",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "garrison",
-    "implied",
-    "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses through",
-    "ed8d7f136eec79d0"
-   ],
-   [
     "house: baker",
     "family",
     "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest a",
@@ -4540,12 +4510,6 @@
     "family",
     "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest a",
     "edd3dc19bec33f3e"
-   ],
-   [
-    "smith",
-    "family",
-    "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from",
-    "62f60824cf000b93"
    ],
    [
     "house: butcher",
@@ -4648,12 +4612,6 @@
     "family",
     "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households ",
     "ae2d15c652df60c6"
-   ],
-   [
-    "clergy",
-    "family",
-    "One of the few here who can read and write. He copies letters, sets down plain contracts, and reads out documents for th",
-    "4672a79550fe53bb"
    ],
    [
     "house: druid",
@@ -4780,12 +4738,6 @@
     "family",
     "Tests the purity of precious metals brought in. Infrastructure without which banking and minting cannot work. It charges",
     "7ef90e40540b7e55"
-   ],
-   [
-    "smith",
-    "family",
-    "Several smiths, each to his specialty.",
-    "67b638b57d7487e5"
    ],
    [
     "smith",
@@ -5034,18 +4986,6 @@
     "affa98e8ebbca65a"
    ],
    [
-    "armedForce",
-    "family",
-    "Professional soldiers, kept by noble or crown.",
-    "4a5fddf8d0d9b74a"
-   ],
-   [
-    "armedForce",
-    "family",
-    "A standing body of soldiers, in noble or royal pay.",
-    "a752e9c9015ca7b1"
-   ],
-   [
     "house: hired blade",
     "family",
     "Organised bands of hired blades. Major forces, hundreds to thousands strong.",
@@ -5116,18 +5056,6 @@
     "family",
     "A state prison of some size, keeping its political prisoners, debtors, and convicts apart from one another.",
     "592fc9f98e3cff69"
-   ],
-   [
-    "house: citadel",
-    "family",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "house: citadel",
-    "family",
-    "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses through",
-    "ed8d7f136eec79d0"
    ],
    [
     "armedForce",
@@ -6872,22 +6800,10 @@
     "5cb4f655d2940ace"
    ],
    [
-    "house: citadel",
-    "family",
-    "Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.",
-    "3714d8796b8b9e62"
-   ],
-   [
     "guardCaptain",
     "family",
     "the watch captain",
     "7c4fd90270cb9b1f"
-   ],
-   [
-    "armedForce",
-    "family",
-    "Professional soldiers. Noble or royal.",
-    "18ace41f70403330"
    ],
    [
     "armedForce",
@@ -26794,14 +26710,14 @@
    [
     "powersCount",
     "word",
-    "Three powers stand almost level here, and no one leads; every council vote has to be bargained for.",
-    "c89396c036b0aeda"
+    "Three powers stand almost level here, and no one leads; every ",
+    "632f1a6fe6e2cb93"
    ],
    [
     "almostLevel",
     "word",
-    "Three powers stand almost level here, and no one leads; every council vote has to be bargained for.",
-    "c89396c036b0aeda"
+    "Three powers stand almost level here, and no one leads; every ",
+    "632f1a6fe6e2cb93"
    ],
    [
     "house: craft guild",

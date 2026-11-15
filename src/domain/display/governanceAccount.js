@@ -213,6 +213,11 @@ export function estrangedPowersOf(settlement, governing) {
     // dmPowerLines.js); it has not broken with the hall, so the account names it neither as refusing the hall's orders
     // nor as a cost to them ("It can no longer make its orders hold alone"). 30 of the reader's 1,722 accounts.
     if (rel.type === 'competitive' && rel.captureState === 'adversarial') continue;
+    // TAIL-DISPLAY-CIVIC (READ-ALL 19954, 18 of the census's 720 towns at f663a2699): the criminal row at the truce rung
+    // (`captureState: 'equilibrium'`) is the hall leaving the underworld alone, and its own narrative says so ("Guild Council
+    // leaves Thieves' Guild alone because stamping it out would cost more than it saves", factionDynamics.js), as does the
+    // tab's DM line ("... leave each other alone", dmPowerLines.js). It is not named as at odds with the hall.
+    if (rel.type === 'tense' && rel.captureState === 'equilibrium') continue;
     const tie = rel.type === 'corrupted' ? (rel.captureState === 'capture' ? 'capture' : 'corrupted')
       : rel.type === 'competitive' ? 'competitive'
         : rel.type === 'tense' ? 'tense' : null;

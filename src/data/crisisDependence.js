@@ -14,6 +14,14 @@
  *   gatherings  people gathering in numbers: performances, spectacles, fairs, market days, the great rites
  *   food: grain | food: livestock | food: fish | food: game
  *               the food a famine can fail (the food record's `failedSource`; a failed mill is the grain's)
+ *   beyond the gates
+ *               (S8) work done outside the walls by the town's own people (burial in grounds beyond every gate, hunting
+ *               parties over the country): a siege stops it; an outbreak does not (it curtails travel, not this)
+ *   input       (the chair's ruling S5, 2026-11-15) the house's own raw input: a row that is what the house MAKES from
+ *               what reaches it (the vintner's wine from grapes, the potter's pots from clay, the dairy's milk from
+ *               livestock). No crisis stops it; the leaf's second cause reads it: where the page says no input reaches
+ *               the row's house (`validationOnPage.js :: resourceGapLines`, "No grapes reach the vintner."), the row
+ *               is marked short of it
  *
  * EVERY KEY IS DECLARED: every service name of `institutionServices.js :: INSTITUTION_SERVICES` and of the informal rows
  * `servicesGenerator.js` writes, and every catalogue id of `institutionalCatalog.js` (the walker,
@@ -34,10 +42,26 @@ export const GRAIN = 'food: grain';
 export const LIVESTOCK = 'food: livestock';
 export const FISH = 'food: fish';
 export const GAME = 'food: game';
+export const INPUT = 'input';
+export const GATES = 'beyond the gates';
 /** @type {ReadonlyArray<string>} */
 export const NONE = Object.freeze([]);
 /** Every dependence word, in the order above. @type {ReadonlyArray<string>} */
-export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME]);
+export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES]);
+
+/**
+ * THE GAPS THE RECORD HOLDS EVERYWHERE (the chair's ruling S7, 2026-11-15; vetoable by the owner): a house whose input the
+ * record says does not reach it in 90% or more of the towns that hold it is the record's fault, not a state of the town,
+ * and the leaf's second cause does not mark it. Measured on the census 720 at d7c032485 (towns holding the house · towns
+ * whose page says no input reaches it); the record's measuring seat holds this class. The houses under the line, marked:
+ * Dairy farmer 42 · 36, Tannery 10 · 7, Potter 269 · 172, Brickmaker 228 · 132, Fishmonger 11 · 4, Sawmill 23 · 7,
+ * Salt works 94 · 25, Charcoal burner 153 · 30, Alchemist shop 17 · 2, Apothecary 19 · 2, Smelter 238 · 3, Bakers 262 · 0.
+ * @type {Readonly<Record<string, string>>} house name -> its two counts
+ */
+export const INPUT_GAP_HELD_EVERYWHERE = Object.freeze({
+  "Vintner": "184 of 184",
+  "Glassblower": "13 of 13",
+});
 
 /** Service name -> what its rows live on. @type {Readonly<Record<string, ReadonlyArray<string>>>} */
 export const SERVICE_DEPENDENCE = Object.freeze({
@@ -50,7 +74,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Advanced scribing": NONE,
   "Aerial deterrence": NONE,
   "Aerial reconnaissance": NONE,
-  "Aged wine": NONE,
+  "Aged wine": Object.freeze([INPUT]),
   "Airship berths": NONE,
   "Alchemical components": NONE,
   "Alchemical ingredients": NONE,
@@ -59,7 +83,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Ale (barrel)": Object.freeze([GRAIN]),
   "Ale (jug)": Object.freeze([GRAIN]),
   "Ale production": Object.freeze([GRAIN]),
-  "Alloy production": NONE,
+  "Alloy production": Object.freeze([INPUT]),
   "Alms": NONE,
   "Animal spectacles": Object.freeze([GATHERINGS]),
   "Animal training": NONE,
@@ -100,7 +124,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Basic repairs": NONE,
   "Basic smithing": NONE,
   "Basic wound care": NONE,
-  "Batch baking": Object.freeze([GRAIN]),
+  "Batch baking": Object.freeze([GRAIN, INPUT]),
   "Bathing": NONE,
   "Beast acquisition": NONE,
   "Beeswax": NONE,
@@ -133,7 +157,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Burglary services": NONE,
   "Burial": NONE,
   "Burial of the poor": NONE,
-  "Butter": Object.freeze([LIVESTOCK]),
+  "Butter": Object.freeze([LIVESTOCK, INPUT]),
   "Buyer introductions": NONE,
   "Bylaws and ordinances": NONE,
   "Caravan assembly": Object.freeze([TRAVELLERS, GOODS]),
@@ -150,9 +174,9 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Cask repair": NONE,
   "Central register": NONE,
   "Certification": NONE,
-  "Charcoal supply": NONE,
+  "Charcoal supply": Object.freeze([INPUT]),
   "Charitable giving": NONE,
-  "Cheese": Object.freeze([LIVESTOCK]),
+  "Cheese": Object.freeze([LIVESTOCK, INPUT]),
   "Child care": NONE,
   "Citizen registration": NONE,
   "Citywide religious infrastructure": NONE,
@@ -192,7 +216,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Component identification": NONE,
   "Component sourcing": NONE,
   "Composition commission": NONE,
-  "Compound medicines": NONE,
+  "Compound medicines": Object.freeze([INPUT]),
   "Confession": NONE,
   "Consignment sales": NONE,
   "Construction work": NONE,
@@ -218,7 +242,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Costume and prop hire": NONE,
   "Court access": NONE,
   "Courts and adjudication": NONE,
-  "Cream": NONE,
+  "Cream": Object.freeze([INPUT]),
   "Credit letters": Object.freeze([GOODS]),
   "Crime reporting": NONE,
   "Crime response": NONE,
@@ -227,7 +251,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Criminal protection": NONE,
   "Criminal trials": NONE,
   "Crossing fee": Object.freeze([TRAVELLERS, GOODS]),
-  "Cured goods": NONE,
+  "Cured goods": Object.freeze([INPUT]),
   "Curfew enforcement": NONE,
   "Currency exchange": NONE,
   "Curse removal": NONE,
@@ -236,14 +260,14 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Custom commission": NONE,
   "Custom commissions": NONE,
   "Custom containers": NONE,
-  "Custom dimensioning": NONE,
+  "Custom dimensioning": Object.freeze([INPUT]),
   "Custom dyeing": NONE,
   "Custom enchanting": NONE,
   "Custom footwear": NONE,
   "Custom garments": NONE,
-  "Custom glasswork": NONE,
+  "Custom glasswork": Object.freeze([INPUT]),
   "Custom orders": NONE,
-  "Custom pottery": NONE,
+  "Custom pottery": Object.freeze([INPUT]),
   "Custom printing": NONE,
   "Custom weaving": NONE,
   "Customs brokerage": Object.freeze([GOODS]),
@@ -281,7 +305,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Domestic staff": NONE,
   "Donation accepted": NONE,
   "Draconic consultation": NONE,
-  "Drainage pipe": NONE,
+  "Drainage pipe": Object.freeze([INPUT]),
   "Dream walking": NONE,
   "Drink service": NONE,
   "Driver hire": NONE,
@@ -323,7 +347,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Exotic goods": Object.freeze([GOODS, GATHERINGS]),
   "Exotic imports": Object.freeze([GOODS]),
   "Experimental commissions": NONE,
-  "Experimental compounds": NONE,
+  "Experimental compounds": Object.freeze([INPUT]),
   "Expert consultation": NONE,
   "Extortion (structured)": NONE,
   "Extraplanar relations": NONE,
@@ -343,7 +367,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Fine metalwork": NONE,
   "Fine payment": NONE,
   "Fire suppression": NONE,
-  "Fired brick": NONE,
+  "Fired brick": Object.freeze([INPUT]),
   "Fish oil": NONE,
   "Food and drink (all grades)": NONE,
   "Forbidden components": NONE,
@@ -352,11 +376,11 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Fortune telling": NONE,
   "Freight haulage": Object.freeze([GOODS]),
   "Freight insurance": NONE,
-  "Fresh bread": Object.freeze([GRAIN]),
-  "Fresh fish": Object.freeze([FISH]),
+  "Fresh bread": Object.freeze([GRAIN, INPUT]),
+  "Fresh fish": Object.freeze([FISH, INPUT]),
   "Fresh fish retail": Object.freeze([FISH]),
   "Fresh meat": Object.freeze([LIVESTOCK]),
-  "Fresh milk": Object.freeze([LIVESTOCK]),
+  "Fresh milk": Object.freeze([LIVESTOCK, INPUT]),
   "Fresh produce": NONE,
   "Front company formation": NONE,
   "Full accommodation": NONE,
@@ -382,7 +406,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Gladiator hire": NONE,
   "Gladiator training": NONE,
   "Gladiatorial combat": Object.freeze([GATHERINGS]),
-  "Glass vessels": NONE,
+  "Glass vessels": Object.freeze([INPUT]),
   "Glassware": NONE,
   "Goods movement": Object.freeze([GOODS]),
   "Goods purchase": NONE,
@@ -417,11 +441,11 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Heavy labour": NONE,
   "Hedge medicine": NONE,
   "Herbal medicines": NONE,
-  "Herbal remedies": NONE,
+  "Herbal remedies": Object.freeze([INPUT]),
   "Herbalism and healing": NONE,
   "Hidden quarter access": NONE,
   "Hidden storage": NONE,
-  "Hide processing": NONE,
+  "Hide processing": Object.freeze([INPUT]),
   "Hide sourcing": NONE,
   "Hideout rental": NONE,
   "High religious ceremony": Object.freeze([GATHERINGS]),
@@ -472,7 +496,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Investment": NONE,
   "Investment brokering": NONE,
   "Investment pooling": NONE,
-  "Iron refining": NONE,
+  "Iron refining": Object.freeze([INPUT]),
   "Item appraisal": NONE,
   "Item identification": NONE,
   "Jewellery appraisal": NONE,
@@ -524,7 +548,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Low-level enforcement": NONE,
   "Lucid dream experiences": NONE,
   "Lucky charms": NONE,
-  "Lumber milling": NONE,
+  "Lumber milling": Object.freeze([INPUT]),
   "Magic item appraisal": NONE,
   "Magic item repair": NONE,
   "Magic item sales": NONE,
@@ -630,7 +654,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Passenger boarding": Object.freeze([TRAVELLERS]),
   "Passenger transport": Object.freeze([TRAVELLERS]),
   "Passenger vessel": Object.freeze([TRAVELLERS]),
-  "Pastries": NONE,
+  "Pastries": Object.freeze([INPUT]),
   "Pasturage": Object.freeze([TRAVELLERS]),
   "Patrol service": NONE,
   "Patron sponsorship": NONE,
@@ -662,10 +686,10 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Poor relief": NONE,
   "Portal access": NONE,
   "Porterage": NONE,
-  "Potion brewing": NONE,
+  "Potion brewing": Object.freeze([INPUT]),
   "Potion production": NONE,
   "Potions and elixirs": NONE,
-  "Pottery and ceramics": NONE,
+  "Pottery and ceramics": Object.freeze([INPUT]),
   "Precision metalwork": NONE,
   "Preserved fish": Object.freeze([FISH]),
   "Price discovery": NONE,
@@ -711,7 +735,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Raw extraction": NONE,
   "Raw ore extraction": NONE,
   "Raw pelts (bulk)": NONE,
-  "Rawhide": NONE,
+  "Rawhide": Object.freeze([INPUT]),
   "Record filing": NONE,
   "Record keeping": NONE,
   "Record of custom": NONE,
@@ -745,7 +769,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Road intelligence": Object.freeze([GOODS]),
   "Road register": NONE,
   "Roof inspection": NONE,
-  "Roof tiles": NONE,
+  "Roof tiles": Object.freeze([INPUT]),
   "Rope": NONE,
   "Rope (standard)": NONE,
   "Rope repair": NONE,
@@ -765,8 +789,8 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Safe houses": NONE,
   "Safe passage": NONE,
   "Safekeeping": NONE,
-  "Salt production": NONE,
-  "Salted fish": Object.freeze([FISH]),
+  "Salt production": Object.freeze([INPUT]),
+  "Salted fish": Object.freeze([FISH, INPUT]),
   "Salting and preservation": Object.freeze([LIVESTOCK]),
   "Sanctuary": NONE,
   "Sausage and charcuterie": Object.freeze([LIVESTOCK]),
@@ -795,7 +819,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Small cargo": Object.freeze([GOODS]),
   "Small loans": NONE,
   "Smoke and flash powder": NONE,
-  "Smoked fish": Object.freeze([FISH]),
+  "Smoked fish": Object.freeze([FISH, INPUT]),
   "Smuggling investigation": NONE,
   "Soap": NONE,
   "Social gathering": NONE,
@@ -833,11 +857,11 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Surgical procedures": NONE,
   "Surplus sale": Object.freeze([GRAIN]),
   "Survey expeditions": Object.freeze([TRAVELLERS]),
-  "Table wine": NONE,
+  "Table wine": Object.freeze([INPUT]),
   "Tack and equipment": NONE,
   "Tailoring (bespoke)": NONE,
   "Tallow candles": NONE,
-  "Tanned leather": NONE,
+  "Tanned leather": Object.freeze([INPUT]),
   "Tax collection": NONE,
   "Tax payment": NONE,
   "Taxation and tolls": NONE,
@@ -905,9 +929,9 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Wild game sales": Object.freeze([GAME]),
   "Wilderness guidance": NONE,
   "Wilderness scouting": NONE,
-  "Window glass": NONE,
+  "Window glass": Object.freeze([INPUT]),
   "Wine appraisal": NONE,
-  "Wine wholesale": NONE,
+  "Wine wholesale": Object.freeze([INPUT]),
   "Witness removal": NONE,
   "Wood management": NONE,
   "Wool shearing": NONE,
@@ -926,6 +950,22 @@ export const SERVICE_DEPENDENCE_BY_DESC = Object.freeze({
 });
 
 /** House catalogue id (`catalogIdForName`) -> what the house lives on. @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+/*
+ * THE CHAIR'S RULING S8 (2026-11-15; vetoable by the owner): houses TAIL-HOUSES-2 found printing a crisis-false row with no
+ * declaration, each verified against its row and the mark it would take ("Stopped by the siege." of the whole house).
+ * ADDED (marked "// S8"): fish_market goods (salt and dried fish carted in), cemetery_network beyond the gates (grounds
+ * beyond every gate), chroniclers_exchange travellers (reports by road), hunter_s_lodge beyond the gates (parties out
+ * over the country), cartographer_s_workshop travellers (the travellers who stop there), carriers_guild travellers (carriers on the
+ * road; an outbreak curtails it), periodic_market and daily_markets gatherings (an outbreak; a market inside the walls
+ * still trades under a siege), stone_quarry goods (the quarry beyond the walls, its stone sent out: field work and trade
+ * stop under a siege).
+ * NOT ADDED, the house's work goes on inside the walls and "stopped" of it would be false (its one clause of outside trade
+ * is a text matter for the HOUSES seat): apothecary_district (imported medicines are one focus of three), brewery
+ * (brews for the town's own taverns; the regional clause), bowyers_fletchers_guild (the watch and the garrison buy more
+ * under a siege, not less), great_cathedral (the cathedral is not stopped; its pilgrims are), burial_ground ("the burial
+ * does not" wait: only the passing priest is cut off), shipyard (builds from timber in its yard), maltster (malts stored
+ * grain); and, by the record, multiple_market_squares and city_granaries (markets and stores within the walls).
+ */
 export const HOUSE_DEPENDENCE = Object.freeze({
   "academy_of_magic": NONE,
   "access_to_external_mill": Object.freeze([TRAVELLERS]),
@@ -934,19 +974,19 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "adventurers_charter_hall": NONE,
   "airship_docking_high_magic": NONE,
   "alchemist_quarter": NONE,
-  "alchemist_shop": NONE,
+  "alchemist_shop": Object.freeze([INPUT]),
   "ale_house": NONE,
   "alehouse": NONE,
   "almshouse": NONE,
   "annual_fair": Object.freeze([TRAVELLERS, GOODS, GATHERINGS]),
-  "apothecary": NONE,
+  "apothecary": Object.freeze([INPUT]),
   "apothecary_district": NONE,
   "apothecary_established": NONE,
   "aqueduct_or_water_system": NONE,
   "assassins_guild": NONE,
   "assay_office": NONE,
   "auction_house": NONE,
-  "bakers_5_15": Object.freeze([GRAIN]),
+  "bakers_5_15": Object.freeze([GRAIN, INPUT]),
   "bandit_affiliate": NONE,
   "banking_district": NONE,
   "banking_houses": NONE,
@@ -963,7 +1003,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "bowyers_fletchers_guild": NONE,
   "brewer": Object.freeze([GRAIN]),
   "brewery": Object.freeze([GRAIN]),
-  "brickmaker": NONE,
+  "brickmaker": Object.freeze([INPUT]),
   "brothel": NONE,
   "brothel_red_light_district": NONE,
   "burial_ground": NONE,
@@ -975,16 +1015,16 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "carpenter": NONE,
   "carpenter_part_time": NONE,
   "carpenters_5_15": NONE,
-  "carriers_guild": Object.freeze([GOODS]),
+  "carriers_guild": Object.freeze([TRAVELLERS, GOODS]), // S8
   "carriers_hiring_hall": NONE,
   "cartographer_s_guild": NONE,
-  "cartographer_s_workshop": NONE,
+  "cartographer_s_workshop": Object.freeze([TRAVELLERS]), // S8
   "cathedral_10_000_only": NONE,
-  "cemetery_network": NONE,
+  "cemetery_network": Object.freeze([GATES]), // S8
   "chandler": NONE,
-  "charcoal_burner": NONE,
+  "charcoal_burner": Object.freeze([INPUT]),
   "charlatan_fortune_tellers": NONE,
-  "chroniclers_exchange": NONE,
+  "chroniclers_exchange": Object.freeze([TRAVELLERS]), // S8
   "citadel": NONE,
   "citizen_militia": NONE,
   "city_administration": NONE,
@@ -1005,8 +1045,8 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "craft_guilds_30_80": NONE,
   "craft_guilds_5_15": NONE,
   "customs_house": Object.freeze([GOODS]),
-  "daily_markets": NONE,
-  "dairy_farmer": Object.freeze([LIVESTOCK]),
+  "daily_markets": Object.freeze([GATHERINGS]), // S8
+  "dairy_farmer": Object.freeze([LIVESTOCK, INPUT]),
   "democratic_assembly": NONE,
   "district_markets_5_10": NONE,
   "docks_port_facilities": Object.freeze([GOODS]),
@@ -1023,10 +1063,10 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "farmland": Object.freeze([GRAIN]),
   "fence_word_of_mouth": NONE,
   "fighting_pits": NONE,
-  "fish_market": Object.freeze([FISH]),
+  "fish_market": Object.freeze([GOODS, FISH]), // S8
   "fisher_s_landing": Object.freeze([FISH]),
   "fishing_community": Object.freeze([FISH]),
-  "fishmonger": Object.freeze([FISH]),
+  "fishmonger": Object.freeze([FISH, INPUT]),
   "foundling_home": NONE,
   "free_company_hall": NONE,
   "front_businesses": NONE,
@@ -1038,7 +1078,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "garrison": NONE,
   "gates_if_walled": NONE,
   "gladiatorial_school": NONE,
-  "glassblower": NONE,
+  "glassblower": Object.freeze([INPUT]),
   "glassmakers": NONE,
   "golem_workforce": NONE,
   "graveyard": NONE,
@@ -1059,7 +1099,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "housing_500_4000_households": NONE,
   "housing_75_650_households": NONE,
   "human_trafficking_network": NONE,
-  "hunter_s_lodge": Object.freeze([GAME]),
+  "hunter_s_lodge": Object.freeze([GATES, GAME]), // S8
   "informal_elder_consensus": NONE,
   "inn_multiple": Object.freeze([TRAVELLERS]),
   "inns_and_taverns_district": Object.freeze([TRAVELLERS]),
@@ -1122,11 +1162,11 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "parish_churches_50_100": NONE,
   "pawnbroker": NONE,
   "peat_cutter": NONE,
-  "periodic_market": NONE,
+  "periodic_market": Object.freeze([GATHERINGS]), // S8
   "planar_embassy": NONE,
   "planar_traders": NONE,
   "post_relay_station": Object.freeze([TRAVELLERS]),
-  "potter": NONE,
+  "potter": Object.freeze([INPUT]),
   "priest_resident": NONE,
   "printing_house": NONE,
   "professional_city_watch": NONE,
@@ -1139,8 +1179,8 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "ropemaker": NONE,
   "royal_seat": NONE,
   "sage_s_quarter": NONE,
-  "salt_works": NONE,
-  "sawmill": NONE,
+  "salt_works": Object.freeze([INPUT]),
+  "sawmill": Object.freeze([INPUT]),
   "sawmill_commercial": NONE,
   "scroll_scribe": NONE,
   "sewage_system": NONE,
@@ -1151,7 +1191,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "slave_market_district": NONE,
   "small_hospital": NONE,
   "small_prison_stocks": NONE,
-  "smelter": NONE,
+  "smelter": Object.freeze([INPUT]),
   "smuggling_network": Object.freeze([GOODS]),
   "smuggling_operation": Object.freeze([GOODS]),
   "smuggling_waypoint": Object.freeze([GOODS]),
@@ -1160,14 +1200,14 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "stable_master": NONE,
   "stable_yard": Object.freeze([TRAVELLERS]),
   "state_granary_complex": NONE,
-  "stone_quarry": NONE,
+  "stone_quarry": Object.freeze([GOODS]), // S8
   "street_gang": NONE,
   "subsistence_farming": Object.freeze([GRAIN]),
   "tailor": NONE,
   "tailor_s_guild": NONE,
   "tanner_established": NONE,
   "tanners": NONE,
-  "tannery": NONE,
+  "tannery": Object.freeze([INPUT]),
   "taverns_5_20": NONE,
   "teleportation_circle": NONE,
   "thatcher": NONE,
@@ -1194,7 +1234,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "village_reeve": NONE,
   "village_scribe": NONE,
   "village_watch": NONE,
-  "vintner": NONE,
+  "vintner": Object.freeze([INPUT]),
   "warden_s_lodge": NONE,
   "warehouse_district": NONE,
   "water_source": NONE,

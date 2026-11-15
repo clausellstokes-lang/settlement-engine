@@ -28,12 +28,18 @@ const DECLARED = [
   { batch: 1, seed: 'r2r-city-19', pool: 'DS-DEF-5::walls PRESENT', vid: 2, instead: 3, why: 'a port: "every arrival goes through a gate" where ships land (row 01111)' },
   { batch: 1, seed: 'r2r-town-37', pool: 'DS-DEF-5::walls PRESENT', vid: 2, instead: 3, why: 'a port: "every arrival goes through a gate" with the sea approaches open (row 01113)' },
   { batch: 1, seed: 'r2s-indebted-village-3', pool: 'DS-DEF-8::override active, viability intact', vid: 2, instead: 3, why: 'nobody under arms: "the defence makes do with what is left over" (row B11985)' },
+  { batch: 2, seed: 'r2s-famine-village-3', pool: 'DS-DEF-12::CAPACITY: ample', vid: 3, instead: 4, why: 'a famine: "more than enough to get through a hard year" (row 23220)' },
+  { batch: 2, seed: 'r2s-under_siege-town-2', pool: 'DS-DEF-12::CAPACITY: ample', vid: 3, instead: 4, why: 'a siege with a food deficit: "more than enough to get through a hard year" (row 23219)' },
+  { batch: 2, seed: 'r2s-succession_void-town-0', pool: 'DS-POW-5::autocrat', vid: 1, instead: 5, why: 'a succession void: "one person decides … and decides quickly" (row 00333)' },
+  { batch: 2, seed: 'r2s-politically_fractured-town-2', pool: 'DS-POW-5::autocrat', vid: 1, instead: 5, why: 'a fractured town with no stable governing authority: "one person decides" (row 00333\'s class)' },
 ];
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */
 const KEEP = [
   { batch: 1, seed: 'r2r-hamlet-1', pool: 'DS-DEF-5::walls ABSENT', vid: 2, why: 'no wall, no siege, no occupation: anyone walks in' },
   { batch: 1, seed: 'r2r-city-0', pool: 'DS-DEF-5::walls PRESENT', vid: 2, why: 'a walled road town with a gate and a watch: every arrival is at a gate' },
   { batch: 1, seed: 'r2r-city-10', pool: 'DS-DEF-8::override active, viability intact', vid: 2, why: 'a town with defenders: the defence makes do' },
+  { batch: 2, seed: 'r2r-town-54', pool: 'DS-DEF-12::CAPACITY: ample', vid: 3, why: 'an isolated town with ample paths and a secure food record: more than enough for a hard year' },
+  { batch: 2, seed: 'r2r-town-17', pool: 'DS-POW-5::autocrat', vid: 1, why: 'a Feudal Appointee at peace, its seat settled: one person decides' },
 ];
 /** @type {ReadonlyArray<{batch: number, pool: string, vid: number, gone: RegExp, now: string, rows: string}>} */
 const REWORDED = [

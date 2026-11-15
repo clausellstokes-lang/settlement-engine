@@ -346,10 +346,12 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       );
       const externalMillOnly = supportsExternalMill && hasExternalMill && !hasLocalMill;
       const effectiveExportable = externalMillOnly ? false : chain.exportable;
+      // TAIL-DEFECON-C (WORKLIST3 rows 15738, 11365, 31448): the note claims no more than every town that prints it
+      // bears. It named a LORD where an elder council governs a thorp of nine, said "food security is maintained" in a
+      // famine, a deficit and a siege, and said there would be "no flour at all" beside the land's own flour on the
+      // made list. What every such town bears: its grain is ground elsewhere, and the toll there takes the surplus.
       const externalMillNote = externalMillOnly
-        ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
-          'Local food security is maintained but surplus flour cannot be exported: ' +
-          'the mill toll takes any surplus. Without the lord\'s mill, there would be no flour at all.'
+        ? 'Grain is carried out of the settlement to be ground, and the toll taken there leaves no surplus flour to sell on.'
         : null;
       // An output a chain ties to one processor (`outputsRequiringProcessor`) is printed only
       // where that processor matched: the arena's spectacles need the arena (A-05).
@@ -1005,7 +1007,10 @@ const INSTITUTIONAL_SERVICE_MAP = [
     output:'Higher education', exportLabel:'Educational services (degrees, training)',
     incomeLabel:'Education & Scholarship', exportable:true, color:'#1a3a7a' },
   // Military / Mercenary — requires substantial military infrastructure (city+)
+  // TAIL-DEFECON-C (row 03905, the chair's ruling D1): a garrison or a city watch is not for hire; the service
+  // stands only where a company that hires out its swords stands too (`requiresAny`).
   { patterns:['mercenary quarter','multiple garrison','professional city watch'],
+    requiresAny:['mercenary quarter','free company hall','hireling hall','hired blades'],
     output:'Armed escort & mercenary hire', exportLabel:'Military contract services',
     incomeLabel:'Military Contracts', exportable:true, color:'#8b1a1a' },
   // Arcane
@@ -1061,6 +1066,7 @@ export function deriveInstitutionalServices(institutions = []) {
       .filter(i => def.patterns.some(p => institutionMatchesKeyword(i, p)))
       .map(i => (i.name || '').toLowerCase());
     if (matched.length === 0) return;
+    if (def.requiresAny && !institutions.some(i => def.requiresAny.some(p => institutionMatchesKeyword(i, p)))) return;
     if (usedLabels.has(def.incomeLabel)) return;
     usedLabels.add(def.incomeLabel);
     const maritime = def.waterborne === true && matched.some(name => (

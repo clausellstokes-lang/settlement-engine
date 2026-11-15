@@ -493,7 +493,8 @@ describe('Agriculture: what the land offers, where the town farms it', () => {
   test('r2r-village-35 and r2r-hamlet-44 live on tenant farming and offer Agriculture; r2r-town-26 farms its grain', () => {
     expectNoSeedFailures(collectSeedFailures(['r2r-village-35', 'r2r-hamlet-44', 'r2r-town-26'], (seed) => {
       const s = born(seed);
-      const rents = s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents');
+      // TAIL-DEFECON-2 (D10): re-keyed by identity: the farming row is "Harvest" where no lord's steward or reeve stands
+      const rents = s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents' || e.source === 'Harvest');
       const grain = (s.economicState.foodSecurity.activeChains || []).includes('Grain & agriculture');
       expect(rents || grain, `${seed}: anchored, the record farms`).toBe(true);
       expect(s.resourceAnalysis.economicStrengths, seed).toContain('Agriculture');

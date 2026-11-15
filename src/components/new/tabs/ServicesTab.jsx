@@ -21,7 +21,7 @@ import { edged } from '../../../design/edgedBox.js';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_RULED, FLUSH_STACK } from '../../../design/flush.js';
-import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine } from '../../../domain/display/crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, markedDescription, ordinaryTimesLine } from '../../../domain/display/crisisStoppedRow.js';
 
 /**
  * ⛔ DS-SUP-3'S POSITION, BOUND ONCE AND SPELLED ONCE.
@@ -148,12 +148,15 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   // the crisis stops is MARKED before its description (which stays the description of ordinary times), and the tab
   // says so once at its head. The one leaf decides (domain/display/crisisStoppedRow.js); a calm town marks nothing.
   const crises = stoppingCrisesOf(settlement);
+  // TAIL-SERVICES-2 (ruling S5, 2026-11-15): the same leaf's second cause: a row its house makes from an input the page
+  // says never reaches that house is marked short of it, and the head says once what such a row is.
   const stoppedBy = new Map(allServices.map((s) => [s.svc, typeof s.svc === 'object' ? rowStoppedBy(settlement, 'service', s.svc, crises) : null]));
+  const shortBy = new Map(allServices.map((s) => [s.svc, typeof s.svc === 'object' ? rowShortOf(settlement, 'service', s.svc) : null]));
   const shown = (svc) => {
-    const crisis = stoppedBy.get(svc);
-    return crisis ? { ...svc, desc: markedDescription(crisisMarkText(settlement, crisis), svc.desc) } : svc;
+    if (!stoppedBy.get(svc) && !shortBy.get(svc)) return svc;
+    return { ...svc, desc: markedDescription(rowMarkText(settlement, 'service', svc, crises), svc.desc) };
   };
-  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values()].filter(Boolean));
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values()].filter(Boolean), [...shortBy.values()].some(Boolean));
   const query = search.trim().toLowerCase();
   const searchResults = query ? allServices.filter(s => s.text.includes(query)) : null;
   const missing = (J0[tier] || []).filter(k => !services?.[k]?.length);

@@ -48,12 +48,18 @@ export const READINESS_BANDS = Object.freeze([
  * "Undefended" says no walls, no garrison and no watch on every surface that reads it, so a town whose
  * roster HOLDS walls or a force (`held`: the defence home's `defenceHeldOf`) is never labelled so: its
  * lowest band is the one above. The score is not moved; only the word it is read by.
- * @param {number} readiness @param {boolean} [held] the roster holds walls or a force
+ * AND ITS MIRROR (TAIL-DEFECON-D, the chair's D20 of 2026-11-15; RECORD-MEASURE-2 class f, measured and granted): a
+ * roster that holds NO walls and no force (`held === false`, read by the producer from the roster) reads AT MOST
+ * Vulnerable: "Lightly Defended" with every defence line empty (24 of the census's 720) is a word the record does not
+ * bear. Where `held` is not given the band is the ladder's alone, as before (`defenseStateProse.js :: posturePoolKey`
+ * bands the bare score, and its pool is one for Lightly Defended and Vulnerable). The score is not moved.
+ * @param {number} readiness @param {boolean} [held] the roster holds walls or a force (omitted: the ladder alone)
  * @returns {typeof READINESS_BANDS[number]}
  */
-export function readinessBandOf(readiness, held = false) {
-  const floor = held ? READINESS_BANDS.length - 2 : READINESS_BANDS.length - 1;
-  for (let i = 0; i < floor; i += 1) if (readiness >= READINESS_BANDS[i].min) return READINESS_BANDS[i];
+export function readinessBandOf(readiness, held) {
+  const floor = held === true ? READINESS_BANDS.length - 2 : READINESS_BANDS.length - 1;
+  const top = held === false ? READINESS_BANDS.length - 2 : 0;
+  for (let i = top; i < floor; i += 1) if (readiness >= READINESS_BANDS[i].min) return READINESS_BANDS[i];
   return READINESS_BANDS[floor];
 }
 

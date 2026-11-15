@@ -42,6 +42,40 @@ worklist's count: none was struck "gone at the base".
 - (D8, 00:05) PEACE_IRON_HOOKS' three literals in `foodBalance.js` (~854–856) are TAIL-CRISIS-2's, by exception: NOT
   EDITED here (this seat never touched them). Still this group's: the iron carts hook's CONDITION (row 20893, 39 towns,
   false where the town imports no iron).
+- (D9, 2026-11-15 00:15) THE GROUP IS SPLIT IN THREE SEATS BY FILE. TAIL-DEFECON-2 (this branch):
+  `economy/economicState.js` (but the one call of `deriveLocalProductionFromChains` near line 739), `incomeLineSiblings.js`,
+  `prosperity.js`, `tradeGoods.js`, `viability.js`, `foodBalance.js` (but the three PEACE_IRON_HOOKS literals, D8; the
+  iron carts hook's CONDITION, row 20893, is ours), `resourceGenerator.js`, `src/data/resourceData.js`,
+  `isolationGenerator.js`, `steps/cascadePass.js`. TAIL-DEFECON-C (lane/tail-defecon-c-2026-11-14): `computeActiveChains.js`
+  and D6/D7. TAIL-DEFECON-D (lane/tail-defecon-d-2026-11-14): `defenseDisplay.js`, `dossierViewModel.js`,
+  `safetyProfile.js`, `safetyLineTruth.js`.
+- (D10, 00:15) "Agricultural Rents … from tenant farmers" where no landlord stands (320 of 360): THE NAME IS FALSE THERE AS
+  WELL AS THE TEXT (the PDF and the journal print the name alone). Cured AT THE SOURCE as a DECLARED MOVE: where the town
+  stands no lord's steward or reeve and no feudal or manor power, the source takes a twin NAME that claims no rent and a
+  twin text that names no tenant (the plainest word the generator already uses for a farming place's own yield; both
+  listed for the veto); the readers keep working (`incomeLineSiblings.js`, `resourceGenerator.js`; ONE line by exception
+  in `src/domain/worldPulse/treasury.js`'s map, the new name the same `land_rents` home). The field diff by family in the
+  commit: the source's name and text in those towns and nothing else.
+- (X9, restated 00:15) the exports' rows of these files with a batch of the same writer, measured with
+  `SURFACES=PDF,Journal python3 inventory.py`; check that read's rows against the record first (no seats in its header,
+  no `history.currentTensions`).
+- (D14, 2026-11-15 00:39) THE PILGRIM GATE (#15707, X9 20913): (a) GRANTED, the arrival re-draw accepted as a DECLARED
+  MOVE: Pilgrim Trade leaves the income rows of the 26 towns that stand no shrine, cathedral, monastery or abbey; the
+  field diff by family on the 720, in the commit, shows the income row in those 26 and the arrival scene in the 14 AND
+  NOTHING ELSE (anything else: stop again); every new arrival line in the 14 READ against its town's record and listed in
+  the commit body with its town, a false one NAMED for the history seat (the arrival writer's group), not cured here. Its
+  own commit, apart from the batch; X9 20913 with it.
+- (D17, 00:43) `src/generators/resourceGenerator.js` is SHARED: its GAP LOGIC (whether an input reaches a house; the gaps
+  and priority notes it writes) is TAIL-DEFECON-R's (lane/tail-defecon-r-2026-11-14). This seat keeps ONLY the income
+  label's key near line 46 (D10's reader, done in batch 2) and row 15458 if its writer is not the gap logic; if 15458 or
+  the file's other row IS the gap logic, it is named for that seat.
+- (D21, 01:12) The three siege notes are ACCEPTED into D14's move: its terms read the income row in the 26, the arrival
+  scene in the 14, the note "Settlement is under active siege. Trade income above reflects pre-siege operations…" in those
+  3, AND NOTHING ELSE. The gate is committed as its own commit, the fourteen arrival scenes' new lines read and listed.
+- (D22, 01:13) Two rows named for `economicState.js` by TAIL-DEFECON-C (at e44627128): (1) the mercenary hire's inheritor
+  near line 587, "garrison contracts and armed escort" (8 towns): read where it prints (a garrison or an escort?), cure
+  if false; (2) row 28528 (waterborne freight under a siege: false in 1 of the 3 towns that print it). With a batch of
+  that file, after the fish rows.
 - And BRIEF-TAIL's laws (silence is true; a mute state takes a twin; no draw moved; siege/famine; agreement; one home;
   no new vocabulary word; no `src/pdf/` or `src/foundry/`; every new line listed for the veto).
 
@@ -111,9 +145,79 @@ editWorldFactResources, defenseTabFlow, generatorGoldenMaster, espionageDormancy
 30 tests red); the fifteenth, `safetyLinesSayTheRecord.test.js` #459, a pin the plural cure moves, RE-KEYED BY IDENTITY in
 this commit (the twin regex takes the plural; the cured regex takes both verb forms).
 
+## Batch 2 · the income rows of `generateEconomicState` (TAIL-DEFECON-2) · commit (this batch)
+
+Seat TAIL-DEFECON-2, from this branch's tip 345f13157 (read back from origin, 2026-11-15 00:15 UTC). Before run: the
+census at 345f13157 (29,887 tab sentences, the predecessor's after run to the sentence; 35,781 on the PDF and journal).
+Measure = towns where the record makes the row false, of the towns that print it (`corpus.ndjson.gz` of the base).
+
+| row | sentence (short) | prints | false | cure |
+|---|---|---|---|---|
+| 03348 (D10), X9 21442 | "Agricultural Rents · Payments in kind or coin from tenant farmers" | 360 | 324 (no lord's steward or reeve, no feudal, manor or noble power); 5 more stand only a noble power (the Highborn Circle, a Manor Household) and no house | AT THE SOURCE, the house the generator can see (the economy runs before the powers are drawn): where no "Lord's steward" or "Lord's reeve" stands, the source is **"Harvest"** and its line **"What the households grow and raise on their holdings; the main living at this scale."** (329 towns: the 324, and the 5 noble-power towns, where the twin is still true: it claims no landlord and denies none). A "Village reeve" is elected from the peasantry: not a landlord. Readers kept: `houseOfWorkLine` and Grain Sales' gate (`hasIncomeSource('harvest')` beside `'agricultural'`, so no row is unlocked), `resourceGenerator.js` (Agriculture's support), `treasury.js :: INCOME_SOURCE_FORMS` ('Harvest' -> land_rents, the one line by exception) |
+| 11426 | "… and contract-grade enchanting brings steady coin" | 83 | 83 (a four-item subject) | "bring"; the line's banked first-register row re-keyed BY IDENTITY (`tests/lint/presumedThings.register.json`, the same file, the new hash) |
+| B17543, X9 02882 | "A busy market for spell services" under a siege | 83 | 5 | `Spellcasting Services` joins `SIEGE_CLOSED_SOURCES`: under a siege the row prints its label and share alone (6 towns: the 5, and r2r-metropolis-14, whose lower line "Adventurers and merchants both pay well …" is false under a siege too). A siege twin ("sold only to the people inside …", the alchemy twin's form) was written and WITHDRAWN: an undeclared siege line, a walker rise |
+| 00386, X9 20913 (siege) | "Offerings, … from visiting pilgrims" under a siege | 7 (record) | 7 | `Pilgrim Trade` joins `SIEGE_CLOSED_SOURCES` (label and share alone) |
+| 16644 | "River Tolls · Tolls on river traffic …" under a siege | 48 | 1 | `River Tolls` joins `SIEGE_CLOSED_SOURCES` |
+| 17619 | "Security Contracts · … a privatised protection tax on trade" | 13 | 1 (under a siege; "Merchant Guilds Suppressed" is a strength, not an absence: struck there) | `Security Contracts` joins `SIEGE_CLOSED_SOURCES` |
+| B05884 | "Smuggling Network Revenue" where no smuggling house stands | 78 | 22 (a "Front Businesses" house named it) | `hasSmuggling` reads 'smuggl' only: the 22 take the plain label (Black Market Revenue 11, Shadow Economy (untaxed) 11; a front business is a criminal house, so "the criminals who run them" stays true there) |
+| 06146, 06148, X9 29696 | "… but it goes to the criminals who run them" | 65 / 34 / 99 | 48 / 13 (no criminal house and no criminal power); 10 more stand a criminal power and no house | where `safetyProfile.criminalInstitutions` is empty: **"… bring money in here, but none of it reaches the treasury."** (71 towns: the 61 and the 10, where it is still true) |
+
+PARKED (a STOP, told to the chair 2026-11-15 ~01:00): **15707, X9 20913 (no house)**: Pilgrim Trade where no shrine,
+cathedral, monastery or abbey stands: 26 of 87 (13 "Graveyard, Parish church", 11 "Parish churches (2-5)", 2 "Parish
+churches (10-30)"). The gate (`hasInst('shrine', 'cathedral', 'monaster', 'abbey', 'relic')`) was measured and withdrawn:
+`arrivalScene` reads the row, and 14 of the 26 re-draw their arrival scene (the false pilgrim line goes, but the hash pick
+moves unrelated lines: bells, the well, a notary's clerk): a draw moved outside the row's pool. Awaiting the chair's
+ruling: accept the re-draw as a declared move, or leave the row and name the arrival writer's pilgrim line for its group.
+
+STRUCK (true by the record): **X9 13189** "Import and export taxes, anchorage fees, and customs inspection on all cargo"
+(55): the row stands only on docks, a harbour master or a shipyard, whose office inspects cargo; a plague does not stop
+customs. **X9 08786** "Entry and exit tolls collected at the city gates …" (49): a plague or a dangerous road does not
+lift a toll; under a siege the row is already silent.
+
+Guard: `tests/generators/tailDefeconIncomeRows.test.js` (10 GONE pairs red at 345f13157, 7 KEEP pairs green before and
+after; a plant (the lord's-man condition never met) reds the rents KEEP pair, not committed). Pins re-keyed BY IDENTITY:
+`houseOfWorkEarns.test.js` (the first row is "Harvest" where no lord's man stands, else "Agricultural Rents"),
+`coherenceAgreeCures.test.js` (the farming row is either name), the walker's first-register row of the spell line.
+
+AFTER RUN (the census at the batch's tree; the 26 parked towns re-born with the gate withdrawn and merged; their
+arrival scenes equal the base's): tabs 29,887 -> 29,894 (gone 1, new 8, fewer 9, more 1, moved 5); exports 35,781 ->
+35,785. Every row FEWER by exactly its measure or GONE: 03348 360 -> 31 (the 329); 11426 83 -> 0; B17543 83 -> 78;
+15707 83 -> 78 (its 5 sieges on the tabs; the gate parked); 00386 4 -> 2; 16644 48 -> 47; 17619 13 -> 12; B05884 78 -> 56;
+06146 65 -> 24 (-52, +11 the renamed smuggling towns with a criminal house); 06148 34 -> 26 (-19, +11); X9 21442 360 -> 31,
+29696 99 -> 50, 20913 87 -> 80, 02882 83 -> 78; 13189 and 08786 unchanged. EVERY OTHER LINE THAT LOST TOWNS: r2r-metropolis-14's
+lower spell line (91 -> 90, false under its siege). MOVED: three lines of the deity card ("Patron deity", "Assign a patron
+god …", "Upgrade to premium …", 718 -> 718), a render flake on a worker's first town (r2r-thorp-0 before, r2r-village-9
+after), not this batch. THE INHERITORS read where they print: r2r-hamlet-1 (Harvest; "none of it reaches the treasury"),
+r2s-under_siege-thorp-2 (Harvest under a siege: no sale claimed), r2r-city-13 ("Black Market Revenue … the criminals who
+run them": its Front Businesses stand), r2r-town-12 (Shadow Economy, the same), r2r-metropolis-14 (Pilgrim Trade and
+Spellcasting Services, label alone): each true there.
+
+THE DECLARED MOVE (`corpus.ndjson.gz` before and after, field diff by family on the 720): ONLY
+`economicState.incomeSources`: `source` 351 towns (Harvest 329; the smuggling label 22), `desc` 455 towns (by row: the rents
+329, "bring" 78, the treasury twin 71, the smuggling line 22, the siege silences 15); no percentage and no weight moved (a renamed criminal row
+sorts among equal shares by its new name in 7 towns, the same rows reordered). No draw moved.
+
+GATES: strict-domain 0; type ratchet 0 (167, ceiling 167); eslint on the touched files 0; presumed-things walker 147
+fresh at the base, 147 with the batch, identical rows; the grid 0 rises (the same 2 falls, named below); the 42 test
+files naming the touched files: 15 red, the same 15 red at the base (CARRIED: r3c10FoodLinesTrue, r3c9ReaderLinesTrue,
+worldFactRederive, coherenceAgreeCures (its gate tally), observedShapeReaders.walker, proseWiringCensus.walker,
+writerReach.walker).
+
 ## The veto list (every new or changed line, with towns it was read in)
 
-Batch 1 (towns from the after census: the smallest and largest it reaches, a crisis among them):
+Batch 2 (TAIL-DEFECON-2; towns from the after census: the smallest and the largest it reaches, a crisis among them):
+
+- (329) source **"Harvest"** (the rents row's twin name; the veto's alternative: "Farm Yield") with **"What the households grow and raise on their holdings; the main living at this scale."** — r2r-thorp-36 (thorp 5); r2s-recently_betrayed-village-2 (village 394, recently_betrayed); r2s-under_siege-thorp-2 (thorp 6, under_siege)
+- (78) "A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting bring steady coin." (was "brings") — r2r-town-6 (town 1614); r2s-succession_void-metropolis-3 (metropolis 295750, succession_void); r2r-city-51 (city 2414, politically_fractured)
+- (71) "Untaxed trade, fencing and theft bring money in here, but none of it reaches the treasury." — r2s-plague_onset-thorp-2 (thorp 9, plague_onset); r2s-famine-city-0 (city 2909, famine); r2r-hamlet-1 (hamlet)
+- (22) the smuggling label's plain names where a front business, not a smuggling house, stands ("Black Market Revenue", "Shadow Economy (untaxed)", with their "Untaxed trade, fencing and theft …" line) — r2r-town-11; r2r-city-13; r2s-under_siege-city-2 (under_siege)
+- (7) Pilgrim Trade, label and share alone under a siege — r2s-under_siege-village-0 (village 281); r2r-metropolis-14 (metropolis 271164); both under_siege
+- (6) Spellcasting Services, label and share alone under a siege — r2s-under_siege-city-3 (city 5059); r2r-metropolis-14 (metropolis 271164); both under_siege
+- (1) River Tolls and (1) Security Contracts, label and share alone under a siege — r2s-under_siege-metropolis-3 (metropolis 46730, under_siege)
+
+Batch 1:
+
+(towns from the after census: the smallest and largest it reaches, a crisis among them)
 
 - (70) "A little changes hands here quietly, between neighbours, and no # reckons it up." — r2s-infiltrated-thorp-3 (thorp 6, infiltrated); r2r-hamlet-24 (hamlet 100, famine); r2r-hamlet-16 (hamlet 20, famine)
 - (46) "The garrison and city watch maintain standard patrol coverage." — r2s-recently_betrayed-city-0 (city 2407, recently_betrayed); r2r-metropolis-10 (metropolis 159896); r2s-occupied-city-1 (city 10359, occupied)
@@ -151,7 +255,54 @@ Batch 1 (towns from the after census: the smallest and largest it reaches, a cri
 
 ## Rows named for other groups · registers named stale · guards owed
 
+- (batch 2) the arrival scene's pilgrim lines ("Pilgrims in travel-stained cloaks queue patiently for their turn at the
+  holy places", "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing") print
+  where no house of pilgrimage stands (14 of the 26 towns of #15707): `src/generators/narrative/arrivalScene.js` reads the
+  Pilgrim Trade income row; NAMED for its group, with the chair's ruling on #15707.
+
 - The page-census grid's register: two falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) — stale low, NAMED, not re-taken (re-derived at the close).
+
+## What is left (TAIL-DEFECON-2, HANDED BACK by time after batch 2, 2026-11-15 ~01:15 UTC)
+
+The seat handed back by time (about 62 minutes; the brief's 250,000 in about eighty) before a batch it could not finish.
+
+THE PILGRIM GATE (D14, D21): DONE, its own commit (the one after the batch-2 hand-back). Measured: tabs 29,894 -> 29,897;
+15707 78 -> 56 on the tabs (the 22 that print it whole; the siege label alone 5 -> 2; r2r-town-34 prints it folded as
+"<N> Trade": the 26), X9 20913 80 -> 57; field diff (the batch-2 tree with and without the gate, on the 720): ONLY
+incomeSources in the 26, arrivalScene in the 14, coherenceNotes in the 3. THE ARRIVAL INHERITORS, READ (NAMED for the
+history seat, `src/generators/narrative/arrivalScene.js`, the false ones; not cured here): FALSE in r2r-village-19 "Someone has
+left fresh flowers at a small shrine set into a wall." (no shrine stands); r2s-under_siege-city-1 "The smell of horses and
+hay comes from the stables." (no stable stands, and a siege); r2s-infiltrated-town-1 "Bolts of cloth and bales of wool
+fill the carts waiting on the road out." (no weaver; neither cloth nor wool is exported); r2s-plague_onset-village-0
+"Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet." (no horse trader
+stands; only common grazing). TRUE: the other 10 towns' new lines (grain and mills, flour, looms, ovens and bakers, malt
+and an ale house, a market, a mine's spoil heaps, a moneylender among banking houses, a church bell).
+
+(The gate as measured before D21, for the record:) A SECOND STOP sent to the chair at ~01:10. The gate is one condition on
+the Pilgrim Trade push in `economicState.js :: generateEconomicState` (the line `if (ecoInstFlags.religionInfluence > 68
+&& (tradeRoute === 'crossroads' || tradeRoute === 'road')) {` takes `&& hasInst('shrine', 'cathedral', 'monaster',
+'abbey', 'relic')`, the words in a frozen array beside the income lines). Its census, measured at the batch-2 tree: the
+field diff on the 720 shows `economicState.incomeSources` in the 26 (the row leaves; the rest re-shared), `arrivalScene` in
+the 14 AND `coherenceNotes` in 3 siege towns (r2s-under_siege-village-0, -town-1, -city-1): `narrativeGenerator.js:597`
+(not this group's) writes "Settlement is under active siege. Trade income above reflects pre-siege operations. Current
+effective trade is likely zero or severely restricted." wherever, under a siege, an income source's name contains
+"trade"; there Pilgrim Trade was the only one, so the note leaves the page (2 prints each). D14 says anything else is a
+stop: the chair's ruling on the 3 notes is awaited. The 14 arrival towns and what they lose and gain (to be READ, per
+D14, when the gate is committed): r2r-village-3, r2r-village-9, r2r-village-19, r2r-town-16, r2r-town-24,
+r2s-under_siege-city-1, r2s-infiltrated-village-2, r2s-infiltrated-town-1, r2s-plague_onset-village-0,
+r2s-plague_onset-village-1, r2s-monster_pressure-town-0, r2s-slave_revolt-city-2, r2s-wartime-village-1,
+r2s-wartime-village-2 (the guard's GONE pairs for it: r2r-village-3 and r2r-village-9 lose "Pilgrim Trade", Church Tithes
+prints; KEEP r2r-village-13, a cathedral town).
+
+THEN: batch 2's other rows are DONE. By D9 the rows of
+`computeActiveChains.js` (03905, 28528; D6/D7) and of `defenseDisplay.js`, `dossierViewModel.js` are the other two seats'.
+NEXT, in this seat's order: `incomeLineSiblings.js` with the fish rows (B07361 B07357 B07355, this writer's B07356
+B07359; X9 10219 06426 06427; D5: the fish row of UPKEEP-HANDBACK's "WHAT IS LEFT"), the alchemy line (03703, X9 03932),
+the ore and metal lines (11871, B11289, B11285), the quarry line (18655, X9 15745); then `prosperity.js` (10700 D2),
+`tradeGoods.js` (2), `resourceGenerator.js` (2: 15458 D3), `resourceData.js` (1), `foodBalance.js` (3, and D8's iron
+carts CONDITION, row 20893), `viability.js` (4), `cascadePass.js` (1), `isolationGenerator.js` (1); and X9's rows of
+these files. THE NEXT BEFORE RUN: this batch's after run (`/tmp/dc2/afterF`, outside every tree; it does not survive the
+container): re-run `census3.sh` at the branch tip.
 
 ## What is left of the worklist (HANDED BACK at the budget, 2026-11-15 00:10 UTC, after batch 1)
 

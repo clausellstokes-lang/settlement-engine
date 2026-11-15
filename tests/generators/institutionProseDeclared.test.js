@@ -24,16 +24,17 @@ const declares = (/** @type {any} */ r) => r.needs.length > 0 || r.excludes.leng
 const shape = (/** @type {any} */ d) => ({ needs: [...d.needs], excludes: [...d.excludes], crisis: [...d.crisis] });
 
 /** R-Q: the town gate is settled after the description draw (the cascade adds it). */
-const WAITING_ON_ORDER = ['town|Religious|Parish burial grounds#0', 'town|Defense|Town watch#0', 'town|Defense|Town watch#1'];
+const WAITING_ON_ORDER = ['town|Defense|Town watch#0', 'town|Defense|Town watch#1'];
 
 describe('the institution descriptions declare by text (CENSUS-4c unit 5)', () => {
   const rows = ledger('institutionDescVariants.INSTITUTION_DESC_VARIANTS').rows.filter(declares);
-  it('the column is the ledger\'s declaring rows less the three waiting on order', () => {
+  it('the column is the ledger\'s declaring rows less the two waiting on order', () => {
     // COHERENCE-PRESUME (2026-11-11): the town bowyers' line #0 reworded to presume no militia, so it declares nothing (65 → 64, 62 → 61)
     // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): eleven variant texts read false now declare what makes them false (alehouse, port, bank, famine, metropolis, navigable water) and carry a twin in DESC_VARIANT_SIBLINGS (64 → 75, 61 → 72)
     // W2-FIX-DATA-3 (2026-11-13, REVIEW-W2-FIX-DATA F4): the Elder Grove Council's two variants no longer say "the city"; they speak the corpus's "town", which the draw speaks in the place's own noun, so their `tier: ≥ city` declaration went with the word (75 → 73, 72 → 70)
     // W2-FIX-DATA-8 (2026-11-14, HANDBACK-6 section 8 row 3, ww-1415): the village brewer's two variants name the alehouses it supplies and need one on the roster, each with its twin in DESC_VARIANT_SIBLINGS (73 → 75, 70 → 72)
-    expect(rows).toHaveLength(75);
+    // TAIL-HOUSES-2 batch 3 (2026-11-15): the town Parish burial grounds #0 names no gate ("burial out beyond the houses"), true with a gate or without, so it declares nothing and no longer waits on order (75 -> 74; 72 unchanged)
+    expect(rows).toHaveLength(74);
     const cols = /** @type {Record<string, any>} */ (D.DESC_VARIANT_DECLARATIONS);
     const want = rows.filter((/** @type {any} */ r) => !WAITING_ON_ORDER.includes(r.id));
     expect(Object.keys(cols)).toHaveLength(72);

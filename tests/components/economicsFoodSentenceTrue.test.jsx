@@ -54,7 +54,7 @@ describe('the food sentence is true of the figures and the town (item 3)', () =>
       const town = birthApp(seed); const fb = fbOf(town);
       expect(Math.round((100 * fb.dailyProduction) / fb.dailyNeed), `${seed} anchored`).toBeGreaterThanOrEqual(40);
       const t = foodSentence(town);
-      expect(t, seed).toContain('grows about two parts in five of what it eats');
+      expect(t, seed).toContain('grows about two parts in five of what it needs');
       expect(t, seed).not.toContain('about a third'); // anchored: the line above finds the sentence's share
     }), 'a seed\'s sentence misstates its share');
   }, 60000);
@@ -64,7 +64,7 @@ describe('the food sentence is true of the figures and the town (item 3)', () =>
     expect(fb.magicFoodOffset, 'anchored').toBeGreaterThan(2 * fb.dailyProduction);
     const t = foodSentence(town);
     expect(t).not.toContain('a little more'); // anchored: the next line finds the sentence's provision clause
-    expect(t).toMatch(/provision makes up about a third of what it eats/);
+    expect(t).toMatch(/provision makes up about a third of what it needs/);
   }, 60000);
 
   test('(b) no ships where no wharf stands (rr2s-hamlet-plague_onset-rand-1 #218); a port with docks keeps them (fr4-town-famine-1)', () => {
