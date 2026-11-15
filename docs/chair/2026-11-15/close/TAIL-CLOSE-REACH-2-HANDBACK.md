@@ -30,6 +30,21 @@ The register now matches the code at the close, and every row that moved says wh
   saved record may still feed a fallback.
 - **No defect was found.** No read prints wrong or empty on a page. Nothing was cured, and no page line moved.
 
+**At the final pass (schema 44, and the writers' register re-stamped, the chair's ruling WR3):**
+- One more read the instrument lost, not cured: the engine's "is this house still standing?" test
+  (`institutionRoster.js`) reads a ruin stamp that the instrument stopped seeing when a tonight's fix (SR5) started
+  using the same test for the defence tab. The read is still in the code and does its job. It is recorded as
+  instrument erosion, and its cure is owed after the release with the other seven.
+- One dead fallback (the quick guide's culture label) was really removed, by the src close seat.
+- **Twenty generated facts are no longer counted as reaching the campaign PDF and the world book.** They never
+  printed there. The count came from a tangle in the code: the facts' reader imported the defence tab's display
+  file just to borrow one small key lookup, so the whole display file and seven of its helpers counted as "in"
+  those two books. The close cut that tangle (T28 and T29): the lookup moved, word for word, into its own small
+  file, and that file is still in both books' reach. All twenty facts are still shown on other surfaces (the web
+  page, the dossier PDF, Foundry). One more, a service's name, is no longer counted on the web display, and is
+  still shown on the PDFs and in Foundry. Thirteen facts gained reach: the names of the charter, the magical
+  defence, the mercenaries and the walls now reach the dossier PDF, Foundry and the web display.
+
 **Carried from the predecessor (instrument one), unchanged:** 26 facts written that no page reads were banked once by
 the chair's ruling WR1. Each is owed after the release: shown by a page line, or its writer retired, by its lane. Eight
 are engine plumbing with register rows. One register row was struck by the instrument's own verdict, but the sentence it
@@ -207,7 +222,29 @@ closure 166 → 159 files, world-book 181 → 174), and `name on availableServic
 surface. The cause of the closure cut is not measured here. A fall is not "a figure that ROSE", so the re-stamp waits on
 the chair's word. The re-stamped file is kept in the scratch tree. This hand-back is updated when the re-stamp lands.
 
+**RULED WR3 (the chair, 2026-11-15 ~11:23): "the falls are banked only with their cause shown".** Measured:
+- **(1) The files.** Each closure lost the same EIGHT files and gained ONE (`src/domain/facts/criminalStructureKey.js`),
+  net −7. All eight hung from one edge, `factsOf.js → defenseDisplay.js`. It was removed by **T28** (82dc208be, "the
+  criminal structure's key as the crime fact's leaf"). The commit's own subject says "STOPPED: not for landing"; its two
+  stop conditions were cured by **T29-1..3** (6320a6ac5, 722e9961c, 1adf270af, cb17872ed), and the lane joined the line
+  at 416be57d1 (JOIN-11 point 4, lane/close-layer-cycle-attempt-2026-11-15). That is the close's declared last layer
+  cycle. The eight files and the edge that brought each in: `display/defenseDisplay.js` ← factsOf.js (the cut edge);
+  `display/threatAssessment.js` ← defenseDisplay; `display/defenseScoreBands.js` ← defenseDisplay, threatAssessment;
+  `display/clergyHouse.js` ← threatAssessment; `display/prosperityInCrisis.js` ← threatAssessment;
+  `magicReliance.js` ← defenseDisplay; `arcaneInstitutionIdentity.js` ← magicReliance; `summary/storesSpanWords.js`
+  ← defenseDisplay (all under `src/domain/`).
+- **(2) The kind.** Every one is a domain or display helper that the campaign PDF and the world book never render
+  from. None is under `src/pdf/` or the world book's own modules. The surfaces used one function through the tangle,
+  the criminal structure's key ladder (`deriveCriminalStructure(record)?.key`), and it moved verbatim to
+  `criminalStructureKey.js`, which is still in both closures.
+- **(3) Banked.** The door's own `--write` on the clean tree: cohort 1367 → 1367, nothing folded, nothing grown. It is
+  byte-identical to the held re-stamp but for its sha. The commit message gives the cause file by file.
+
+**THE FINAL RECEIPTS** (each walker alone, to a file, at the re-stamped tree):
+- `tests/lint/writerReach.walker.test.js`, **under the default heap** (`NODE_OPTIONS` unset, 2,096 MB): **52 of 52**,
+  exit 0. All 52 ran, with no out-of-memory.
+- `tests/lint/observedShapeReaders.walker.test.js` (8 GB heap): **47 of 47**, exit 0.
+
 ## WHAT IS LEFT
 
-- The chair's word on the reach falls. Then the writers' `--write` on a clean tree (or not), the writers' walker alone
-  again (52 of 52), and the last line.
+- Nothing of this seat's. The chair lands the tip.
