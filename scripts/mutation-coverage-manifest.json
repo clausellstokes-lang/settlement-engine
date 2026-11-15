@@ -4006,6 +4006,158 @@
     "tests/generators/arrivalHarbourDocks.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by R2-CODE-A item 4 (cold list REVIEW-W2A-3, HIGH #1), commit def678c3. It pins data/narrativeData.js :: ARRIVAL_SCENES.port drawn through narrative/arrivalScene.js :: drawAdmitted: every port row naming a harbour, quays or masts declares needs 'docks', exactly two shore rows need only 'coast', and rw3-thorp-calm-1, a shore with no docks born as the app births it, opens on the shore and never a harbour. The commit records it red at the cure's parent and green at the cure (2 of 2 red at the base, cold #1). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/churchLineNoOffice.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A item 5 (cold list REVIEW-W2A-3, HIGH #36), commit 60124ad2. It pins src/data/powerSiblings.js :: BASELINE_CONFLICT_SIBLINGS: every twin of the baseline conflict table is free of church, reeve and village (the chair's ruling P3: no office the site's roster names cannot verify), and the cold list's thorp rw3-thorp-calm-2, born as the app births it, prints the devout households in place of a church and a reeve. The commit records it red 2 of 2 at the base and green at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/importerHookNoTrade.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A item 6 (HIGH #333, MEDIUM #859), commit db71b52a. It pins the importer plot hook of src/generators/economy/foodBalance.js, which now reads the siege (config.stressTypes) and the balance's importChannel: a siege a magic channel still feeds and a traded deficit keep the importer, a siege with no channel tells the hoard instead, and the cold list's besieged towns print no importer while no food comes in by trade. The commit records it 3 of 5 red at the base and 6 of 6 green at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/informantNoThievesGuild.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A item 7 (HIGH #128 #720, MEDIUM #311), commit 0e11e87a. It pins npcGenerator.js :: mergeNPCLists, the roster's sanitiser: in the cold list's towns with crime and no thieves' guild no secret names a thieves' guild, the informant reads the local underworld or a powerful outside interest; its header adds the later R2-CODE-A-7 arms (merchants only beside a market, guard r2s-plague_onset-village-0, r2s-under_siege-village-0). The commit records it red at the base on rw3-metropolis-under_siege-1 (#311) and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/arrivalSiegeGatesShut.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-10 (the bar's HIGH #35), commit ebae362a. It pins narrativeData.js :: STRESS_DESCS.under_siege, the arrival's crisis vignette: no line of the siege pool says the gates stand open or that people and carts come in by road (two twins in the slots of [1] and [2]), the reader's town bar0-city-under_siege+famine-rand-1 and the towns that drew either line open on shut gates, and guard towns keep their own lines. The commit records the pool arm and the collected arm (9 of 9 towns) red at 1869ac9b2 and green at the cure, the guard towns green at both. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/arrivalSiegeNoMarketHeard.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-12, ruling (1) on the reader's L46, commit 04a7582e. It pins narrativeData.js :: STRESS_DESCS.under_siege[2]: no line of the siege pool hears a market trading (the clause is now 'a murmur from the square'), the row stays declared for a town or larger, the towns that drew it (e.g. rr3-town-under_siege+famine-rand-1, r2s-under_siege-town-3) hear no market, and guard towns with no market square keep their row. The commit records an executed inverse edit (the base text put back reds both arms, 2 of 3; restored byte for byte). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/foundingWalkLandsTested.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-12, ruling (2) (the reader's MEDIUM (c), the bar's #300), commit 21dab386. It pins src/generators/narrative/foundingRowAdmits.js :: admittedRow, the Origin walk: W1 every row a walk can land on carries its own test or is true of its pool by identity; W2 the 8 collected towns print no false Origin row (farmland without crop, ferry-to-bridge without a bridge); W3 guard metropolises keep each cured row where true. The commit records an executed inverse edit (the base file reds W1 and W2, 8 of 8; restored byte for byte). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/arrivalConversionBurialCount.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-12, ruling (3) (the reader's MEDIUM (a)), commit ad28cdaa. It pins narrativeData.js :: STRESS_DESCS.religious_conversion: a count word reads the roster, so no line of the conversion pool counts burial houses or names a gravedigger, the twin 'buried in two rows now' is in the pool, and the 3 collected towns (among them r2r-village-5, Karakabad) bury their dead in two rows and count no houses. The commit records an executed inverse edit (the previous text reds both arms; restored byte for byte). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/foundingOneFounder.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-13, ruling (4) (one founder on a page), commit cb9d4842. It pins src/generators/narrative/foundingRowAdmits.js :: FOUNDER_AGREES and oneFounderRow, reached from narrativeGenerator.js :: genArrivalDetail: O1 the agreement table's rows and founders, O2 the draw-free resolution to a founder-free admitted row or silence, O3 seven collected towns (a siege, a famine, the bar's #159 town) print one founder, O4 three guard towns keep an agreeing row. The commit records executed inverse edits (agreement off reds O2 and O3; never agreeing reds O2 and O4; a bogus key reds O1). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tieDrawUnprinted.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-14 (GS-1's without-replacement held through the resolution), commit 024d87e9. It pins power/relationshipArchetypes.js :: createTieProseDraw: in the head of the cycle no tie index prints twice while an admitted unprinted index remains (a lord's bare village, twelve pairs), every printed index is admitted, and KEEP: a place that admits every line prints exactly the old cycle. The commit records the collected arm red at the base (econ_crim_blur, mil_crim_corruption, econ_mil_contract, rel_mil_crusader, ...) and green at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/blocLineSharedPower.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-14, ruling (s1), commit 21032205. It pins npcData.js :: STRESS_ECONOMIC_EFFECTS.wary_alliance.desc[3] ('share a council bloc') with needs: shared power, through relationshipArchetypes.js :: createTieProseDraw: B1 the draw refuses it for a pair sharing no power; B2 the collected towns (r2r-village-31, rr3-village-under_siege-rand-4, rr3-town-occupied-rand-0, rr3-metropolis-calm-rand-0 and others) print it only for a sharing pair; B3 guard towns r2r-town-1, rr3-town-under_siege-port-0, rr3-hamlet-famine-port-0 keep it. The commit records executed inverse edits, not committed (the need dropped reds B1, B2; the reader always false reds B1, B3). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/arrivalIndebtedDistrictTwin.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-14, ruling (s2) on the reader's L05, commit 6a9daf0f. It pins narrativeData.js :: STRESS_DESCS.indebted[3] (the merchant district, now needing market) and its twin indebted[6] ('The best-kept street'), resolved by arrivalScene.js :: drawAdmitted: D1 the five collected towns (r2r-village-47 among them) print the twin, no district, and the rest of the scene beat for beat; D2 rr3-town-indebted-rand-0 and rr3x-village-indebted-mountain_pass-1 (a market) still print the district. The commit records executed inverse edits, not committed (the old row back reds D1; the redraw's clean set without the twin reds D1). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/foodCrisisHeadingReadsRecord.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-2 (cold list medium #1068), commit d5b50b4f. It pins foodBalance.js :: deriveFoodBalanceAnalysis's food-supply crisis heading and priority line, which now read the balance's published gap: rw3-town-occupied-1 (occupiers, no gap) reads more mouths to feed with the shortfall made up, and across eight corpus towns the heading and line agree with the gap, what is grown and the crisis's kind. The commit records it red first 9 of 9 and green 9 of 9 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/harvestHookFamineHere.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-2 (cold list medium #152), commit 1d72106d. It pins foodBalance.js :: deriveFoodBalanceAnalysis's import-dependent hook: a famine with food still coming in tells the failure here and the import (three famine towns with a channel), nothing coming in tells the food already here and no import (three with none), and r2r-village-50, food coming in and no famine, keeps the original line. The commit records it red first 6 of 7 and green 7 of 7 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/economicHistoryRecent.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-2 (cold list medium #181), commit d0ff7e7e. It pins src/generators/narrativeText.js :: POLITICAL_FLAVOR.economic_heavy [1] and [5], the two lines that call their drawn event recent: within sixty years unchanged, older than sixty neither calls it recent and each still names it, and the cold list's rw3-hamlet-calm-1 does not call its 88-year-old Economic Divide recent. The commit records it red first 2 of 3 (an 88-year-old event; rw3-hamlet-calm-1) and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/clerkHookSmallPlace.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-2 (cold list medium #6), commit 2bdb29c4. It pins the government pool of NPC_FACTION_LOYALTY drawn by npcGenerator.js :: drawLoyalty: the five office-with-staff lines declare tier: >= village (and the district line population: >= middling), no one in a thorp or hamlet (rw3-thorp-calm-1 and six corpus thorps and hamlets) has an office with staff, and villages below the middling band buy no district property. The commit records it red first 10 of 10 and green 10 of 10 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/soldierHookCivilianHolder.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-2 (cold list medium #676 #678 #968 #969), commit dca86dfe. It pins npcGenerator.js :: generatePlotHook's after-draw refusal and npcData.js :: MILITARY_HOOKS_TRUE_OF_ANY_HOLDER: the two named military lines are the only ones true of any holder, no holder outside the military in the cold list's crisis towns (rw3-city-wartime-1, rw3-town-under_siege-1) carries a soldier's hook, and rw3-city-wartime-1's military holders keep theirs. The commit records it red first at the base 3 of 4 and green 4 of 4 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/warContractsSecretProsperity.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-2 (cold list medium #723), commit 78d255b6. It pins the wartime war-contracts secret of stressInstitutionEffects.js (STRESS_INSTITUTION_EFFECTS.wartime), drawn by npcGenerator.js :: generateCrimeLevel through drawDeclared: the row declares prosperity: >= comfortable, a town below comfortable (rw3-city-wartime-1 and three corpus towns) carries no such secret, and r2s-wartime-city-0, a comfortable town, keeps it. The commit records it red first 5 of 6 and green 6 of 6 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/stableHistoryMajorCount.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-2 (cold list medium #817), commit 3973660e. It pins src/generators/narrativeText.js :: majorNamesOf and the three POLITICAL_FLAVOR.stable lines that name a major event: one major event as before, two or more named first-two with none denied, the dating line with exactly two claims no quieter rest, and the cold list's rw3-village-insurgency-1 names no single major event as the only one. The commit records it red first at the base 4 of 5 and green 5 of 5 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/plagueFoodNoteSource.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-3 (round three HIGH #1312, MED #203), commit 0d3972d8. It pins foodBalance.js :: deriveFoodBalanceAnalysis's plague branch, now plagueFoodNote(foodRecord.foodSources): in the reader's two fishing towns under an outbreak, rr2s-metropolis-plague_onset-port-1 and rr2s-hamlet-plague_onset-rand-1, born as the app births them, the note names the boats, not the fields, and calls no onset a plague. The commit records it red first 2 of 2 and green 2 of 2 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/famineFrameStore.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-3 (round three HIGH #48, MED #40 and #4), commit 910082d4. It pins narrativeText.js :: PRESSURE_SENTENCES.famine, drawn by narrativeGenerator.js :: generatePressureSentence: the two reserves rows need a granary, row [1] names the failed source and counts the record's powers (one power, two, three with a granary), and the reader's thorps Sahlfort (#40, no reserves promised) and Archodion (#48, no harvest, no three powers). The commit records it red first 5 of 6 and green 6 of 6 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/pressureCommodityNoun.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-3 (round three HIGH #601), commit 48e03492. It pins narrativeGenerator.js :: genPressureDetail, which now hands the commodity scan's label or nothing: with no commodity the war levy is of the food the record keeps (foodBalance.js :: foodStoreWord), and the reader's indebted port Qal'atqala (rr2s-town-indebted-port-1) names no first word of an export in its debt line. The commit records it red first 2 of 2 and green 2 of 2 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/stressSecretNoCommodity.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-3 (round three HIGH #651 #327), commit 5841c15b. It pins the crisis secrets drawn by npcGenerator.js :: generateCrimeLevel: no secret or stakes carries the {commodity} slot, Qal'atqala (rr2s-town-indebted-port-1, #651) names no first word in the debt's contract, and the monster village rr2s-village-monster_pressure-rand-1 (#327) names none in the work that disturbed the nest. The commit records it red first 3 of 3 and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/religiousHookLayHolder.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-3 (round three MED #518-#524, #1322-#1334), commit f4c0f647. It pins npcGenerator.js :: generatePlotHook's after-draw refusal into the holder's own pool (ownPoolHook) and npcData.js :: RELIGIOUS_HOOKS_TRUE_OF_ANY_HOLDER: the two named religious lines are the only ones true of anyone, and in the reader's two outbreak towns (rr2s-town-plague_onset-rand-1, rr2s-metropolis-plague_onset-port-1) no holder outside the religious pool carries a priest's hook. The commit records it red first 3 of 3 and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/pressureRosterReads.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-3 (the increment's HIGH ww-28 ww-1070 ww-1225), commit a23da617. It pins narrativeText.js :: PRESSURE_SENTENCES with genPressureDetail's hasBakery: the bakers only where a bakery stands (Ulfset, rww-hamlet-famine-1, prints none), and the siege's terms are the governing power's to decide, so the siege line in rww-metropolis-under_siege-1 and rww-village-under_siege-1 names no card. The commit records it red first 5 of 5 (Ulfset; the two siege towns) and green 5 of 5 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/founderHamletNoMill.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-3 (the increment's HIGH ww-53), commit 6c6eba0b. It pins narrativeGenerator.js :: genArrivalDetail's founder pick, FOUNDERS_BY_TIER.hamlet[1], picked with no roster in reach: in the reader's famine hamlet Ulfset (rww-hamlet-famine-1), born as the app births it, the founder is no garbled miller who found customers before they found customers, but a household that settled first. The commit records it red first 1 of 1 and green at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/arrivalCrisisRoster.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-3 (the increment's HIGH ww-58 ww-540 ww-920), commit e84d040b. It pins narrativeData.js :: STRESS_DESCS rows drawn by arrivalScene.js :: drawAdmitted (the mason's yard now needing a sacred house, the stopped building tier >= town, the merchant district population >= middling): the reader's three towns rww-village-religious_conversion-1, rww-hamlet-succession_void-1 and rww-village-indebted-1 name nothing their roster or size lacks. The commit records it red first 3 of 3 and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/stressNotesAnySize.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (CENSUS-2 writers in this lane's files), commit 837f07cc. It pins src/data/narrativeData.js :: STRESS_NOTES, the founding's crisis note drawn by pickVariant with no condition: no mass_migration note names streets, no wartime note names a market, and the fixed town rww-hamlet-mass_migration-1's note names no streets. The commit records it red first 2 of 2 at a56ed9264 and green 2 of 2 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/arrivalVignetteSize.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (CENSUS-2 writers in this lane's files), commit 932211df. It pins narrativeData.js :: STRESS_DESCS drawn by arrivalScene.js :: drawAdmitted: the rows naming quarters, shops, streets or districts (religious_conversion[2] and [3], famine[0], slave_revolt[3]) need the middling band, and the fixed towns r2s-religious_conversion-thorp-1 and r2s-slave_revolt-hamlet-3 print no quarters, streets or districts. The commit records it red first 3 of 3 at 837f07cca and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/arrivalSceneRoster.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (CENSUS-2 writers in this lane's files), commit dbb578f2. It pins narrativeData.js :: ARRIVAL_SCENES drawn by arrivalScene.js :: drawAdmitted: ordinary[4]'s daily merchant needs a market and river[2]'s jetty needs institution: docks, and the line the roster refuses does not print in the fixed towns r2r-hamlet-22 (no merchant) and r2r-town-20 (no jetty). The commit records it red first 3 of 3 at 932211dfb and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/originGroundNoDenial.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (round three #237), commit 7d012f97. It pins src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS.ground, the arm a port route takes with no docks house: no row denies the docks and none names them as standing, and the reader's town rr2s-village-calm-port-1, born as the app births it, states the shore and denies nothing. The commit records it red first 2 of 2 at caad6db0e and green 2 of 2 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/originChannelsRead.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (round three #7; the increment's ww-3 and ww-29), commit 96d48e8f. It pins settlementOriginProse.js :: supportChannelsOf and the isolated.unsupplied arm: one phrase per path of the isolation receipt that carries food in, what the record holds, no channel named where nothing comes in (rr2s-thorp-calm-rand-1, rww-thorp-calm-1, rww-hamlet-famine-1), and rww-village-famine-1 naming only the receipt's own channels. The commit records it red first 6 of 6 at facb0dbd7 and green 6 of 6 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/originSiegeHolds.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (round two #215; the increment's ww-475), commit caad6db0. It pins narrativeGenerator.js :: generateSettlementReason and settlementOriginProse.js :: ORIGIN_POOLS' isolated.besieged arm: a besieged metropolis and city name no trade as open now, the fixed towns rww-town-under_siege-1 and rpf-town-under_siege+famine-13 name no channel open but what the record holds, and rww-metropolis-under_siege-1 says its tier line of ordinary times. The commit records it red first 4 of 4 at 96d48e8fd and green 4 of 4 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/originRowsRefused.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (the increment's HIGH ww-1227 with round three #154), commit facb0dbd. It pins settlementOriginProse.js :: ORIGIN_ROW_ADMITS over ORIGIN_POOLS: under a siege no road or crossroads row of present traffic, a living from journeys only beside an inn or tavern and never of a city, a silent state keeps every row, and the fixed towns rww-village-under_siege-1 and rr2s-hamlet-under_siege-rand-1 do not print the refused row. The commit records it red first 4 of 5 at d10b53448 and green 5 of 5 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/plagueFishInland.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (the independent reader's A15, REVIEW-R3-STAGES finding 2), commit 8892f314. It pins foodBalance.js :: plagueFoodNote reading tradeRouteSemantics.js :: waterAccessKind: a river town fishes and no sea is named (fixed towns rww-thorp-plague_onset-1, rww-thorp-plague_onset+famine-207), and the coastal rww-hamlet-plague_onset+famine-202 keeps its boats at sea. The commit records it red first 2 of 3 at b9190922f (the coastal arm green at both) and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/famineHookMarket.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-4 (the independent reader's A26, REVIEW-R3-STAGES finding 1), commit a56ed926. It pins foodBalance.js :: deriveFoodBalanceAnalysis's import plot hook reading facts/market.js :: hasMarketInstitution: with no market no merchants watch (fixed towns rr2s-thorp-famine-rand-1 and rww-village-famine-1 read 'whoever brings the food in'), and where a market stands the merchants still watch. The commit records it red first 2 of 4 at 8892f314f (the two market towns green at both) and green 4 of 4 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/foundingRowsRead.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-5 (#488 #594 #845 ww-890 ww-915; #571/#916), commit 299e79cc. It pins narrativeGenerator.js :: genArrivalDetail through the new leaf narrative/foundingRowAdmits.js: A1 every admit names a row its pool holds, A2 the readers' towns lose the false Origin row and the miller founder, A3 guard towns (r2r-thorp-59, r2r-hamlet-4, r2r-thorp-8, r2r-thorp-29, r2r-hamlet-6) refuse only what they must, A4 no roster keeps the drawn row; A5 was added by R2-CODE-A-9. The commit records it red 10 of 16 with the leaf present and genArrivalDetail as it was, and green 16 of 16 after. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/rosterUnderworldNoName.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-5 (the roster's informant), commit 05e5d24b. It pins npcGenerator.js :: mergeNPCLists, the roster's sanitiser, in crimeSignal.js :: withTownsOwnUnderworld's words: A1 a named criminal power and no guild reads the local underworld, never the power's name; A2 a thieves' guild house keeps the line and no crime reads a powerful outside interest; A3 the reader's town r2r-town-26 (a fence) and the guild town r2r-town-35. The commit records it red 1 of 3 at 299e79cca (A1) and green 3 of 3 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/pressureRowsRead.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-6 (CENSUS-2's writers), commit 52e99133. It pins narrativeText.js :: PRESSURE_SENTENCES drawn by generatePressureSentence: the wartime workshop only beside a house of craft (hasWorkshop), succession_void[5]'s merchants needing a market, the streets and districts rows the middling band, and guard towns r2s-wartime-thorp-3, r2s-succession_void-thorp-2, r2s-insurgency-thorp-0, r2s-slave_revolt-hamlet-3; its header adds later R2-CODE-A-7 arms (courts, the merchant class). The commit records it red 6 of 10 at ff71e26c2 and green 10 of 10 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
     }
   },
   "meta": {
