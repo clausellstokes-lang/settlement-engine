@@ -1140,6 +1140,8 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'The ailing ruler wants a final errand completed before naming a successor', excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-544): no living ruler while the seat stands empty; W2-FIX-DATA-HISTORY item G (pf-160): an elders' council has no one ruler to name a successor
       { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] }, // CENSUS-3d unit 6; W2-FIX-DATA-5 (ww-545's sibling): the same; W2-FIX-DATA-HISTORY item G: the twin carries its sibling's conditions
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Who will lead next is the quarrel of the day, and the would-be successors are each gathering support' } },
     severity: ['minor', 'major'],
   },
   {
@@ -1170,6 +1172,8 @@ export const HISTORICAL_EVENTS_DATA = [
       'The reformist leader is being blackmailed into silence',
       'Someone is staging miracles for one side, and whoever is paying for them has not been named',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Different faiths or interpretations compete for influence and converts' } },
     severity: ['minor', 'major'],
   },
   {
@@ -1185,6 +1189,10 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, // W2-FIX-DATA: no mastership without a guild (c10)
       { text: 'Someone is sabotaging both guilds to destabilize the market for a third party', needs: ['market'] }, // CENSUS-3d unit 6
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run',
+        factions: ['Guild members', 'Those who would trade outside the guild', 'Non-guild workers'],
+        plotHooks: [{ text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, { text: 'Someone is sabotaging both sides to destabilize the market for a third party', needs: ['market'] }] } },
     severity: ['minor', 'major'],
   },
   {
@@ -1200,6 +1208,8 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'A diplomatic channel exists that the war party is suppressing', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
       'The threat has an agent already inside the settlement',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'News of approaching danger divides the community on how to respond' } },
     severity: ['major', 'catastrophic'],
   },
   {
@@ -1215,6 +1225,9 @@ export const HISTORICAL_EVENTS_DATA = [
       'The scarcity was engineered. Someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'A critical resource is running short, and some are hoarding it while others cannot pay the prices asked',
+        factions: ['Those hoarding what they can', 'Those who cannot pay the prices', 'Those who would fix a fair price'] } },
     severity: ['minor', 'major'],
   },
   {
@@ -1230,6 +1243,10 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'A guard captain is on the payroll of the criminal network', needs: ['watch'] }, // CENSUS-3d unit 6; W2-FIX-DATA: a captain of the guard needs a watch, not a household levy (c04)
       'The vigilantes have begun targeting innocents based on bad information',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands',
+        factions: ['Official guards', 'Those who would take the law into their own hands', 'Criminal organisations'],
+        plotHooks: ['The crime wave is coordinated. Someone is directing it to create a pretext', { text: 'A guard captain is on the payroll of the criminal network', needs: ['watch'] }, 'Those who would take the law into their own hands have picked out a culprit on bad information'] } },
     severity: ['minor', 'major'],
   },
   {
@@ -1245,6 +1262,8 @@ export const HISTORICAL_EVENTS_DATA = [
       'An anti-magic agitator is secretly using magic themselves',
       'Something was sealed away using magic years ago and the seal is weakening',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Debate over the role and regulation of magic divides the community' } },
     severity: ['minor', 'major'],
   },
   {
@@ -1294,6 +1313,9 @@ export const HISTORICAL_EVENTS_DATA = [
       "A creditor's agent is in town conducting a quiet assessment before enforcement",
       'The debt could be voided, if someone can prove it was obtained through fraud',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'The settlement owes a heavy debt to an outside power, and the power is preparing to collect',
+        factions: ['Those who took the loans', 'Those who will bear the cost', 'Those who profited and want no questions asked'] } },
     severity: ['major'],
   },
   {
@@ -1338,6 +1360,8 @@ export const HISTORICAL_EVENTS_DATA = [
       'An innocent person has been identified as a spy and is about to be executed',
       "The agents' handler is someone the town trusts, and the players have already met them",
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Rumours (some true) of enemy agents within the settlement are stirring suspicion and denunciations' } },
     severity: ['major'],
   },
   {
@@ -1378,6 +1402,8 @@ export const HISTORICAL_EVENTS_DATA = [
       "A series of 'accidents' targeting newcomers is being attributed to chance",
       'An old family is deliberately inflaming tensions to drive out a newcomer who knows something',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'A recently arrived group and the established population are locked in sustained, low-level conflict' } },
     severity: ['minor', 'major'],
   },
   {
@@ -1398,6 +1424,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'One claimant has manufactured evidence of a mandate they actually lack',
       'The vacuum is being maintained deliberately by an outside power that benefits from the instability',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'No one holds a firm grip on the leadership, and those who would take it are each too weak to win it',
+        factions: ['Rival claimants, none strong enough to win', 'Pragmatists who want stability', 'Those who prefer things unsettled'],
+        plotHooks: ['A sealed document naming who should lead has turned up, and someone wants it destroyed before it is read', 'One claimant has manufactured evidence of a mandate they actually lack', 'The vacuum is being maintained deliberately by an outside power that benefits from the instability'] } },
     severity: ['major', 'catastrophic'],
   },
   // ── generators-domain-6: additional timeline templates ─────────────────────
@@ -1612,6 +1642,8 @@ export const HISTORICAL_EVENTS_DATA = [
       'Those in power are paying people to speak for them at the gatherings, because no one will do it for free',
       'A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim' } },
     severity: ['major', 'catastrophic'],
   },
   {
@@ -1643,6 +1675,9 @@ export const HISTORICAL_EVENTS_DATA = [
       'A contract clause that could end the dispute has been deliberately misfiled',
       'The partner settlement is applying pressure through a debt no one here wants to acknowledge',
     ],
+    // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'A dispute over the terms of trade with a partner settlement is souring, and it touches every merchant and every purse in the place',
+        factions: ['Merchants who trade with the partner', 'Those who want new partners', 'Authorities caught between them'] } },
     severity: ['minor', 'major'],
   },
 ]

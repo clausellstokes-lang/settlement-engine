@@ -1,11 +1,78 @@
 # TAIL-HISTORY · hand-back (2026-11-15)
 
-Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY-2** (its successor, keeping this file).
+Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY-2** (batch 2), then **TAIL-HISTORY-3** (batches 3 and 4; keeping this file).
 Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
 Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the chair's lane (211 rows, read at e5b421802).
 
-**STATE (TAIL-HISTORY-2): batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** (7bef72cbc). **HANDED BACK** at the budget
+**STATE (TAIL-HISTORY-3): batch 3 (Y13, every tension type) LANDED; batch 4 (Y14, the arrival pool) see below.** TAIL-HISTORY-2's state: **batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** (7bef72cbc). **HANDED BACK** at the budget
 (2026-11-15 01:50): what is left is listed under WHAT IS LEFT below.
+
+## TAIL-HISTORY-3 (2026-11-15): the chair's rulings since (each vetoable by the owner)
+
+- **(Y13) Y5 WIDENED: THE LIVE-QUARREL FORM IS THE LAW FOR EVERY TENSION TYPE.** Wherever a tension's text narrates an event of its own that the timeline does not hold, it takes the unanchored twin: present tense; no date, no remembering, no aftermath; its parties the parties of a present quarrel THAT THE TOWN'S SIZE CAN HOLD; under the type's label unchanged; the twin on the same slot, the draw kept. Each type measured first; a type false in no town is left alone.
+- **(Y14) THE ARRIVAL POOL** (`src/data/arrivalProse.js`): its measure is owed: each line that names a house, a trade or a good, the towns that print it, the towns where the thing does not stand. Cure by the file's form (a declaration, or a twin without the noun; the slot keeps its draw; a draw moved outside the cured line's own pool is a stop). The chooser `src/generators/narrative/arrivalScene.js` is NOT this group's (the narrative seat's): a cure that needs it is named.
+- **(Y15)** The traditions' "Last held" line under a plague is written by a tab component and a PDF section, not this group's files: named for a display seat by the chair. Nothing here.
+- **(Y8 stands)** Under a plague or a quarantine no line gathers a crowd as in ordinary times.
+- **(Y11 stands)** The atoms `ruling body` and `rival power` are on the joined line, not this branch; a measuring seat is counting whether the density resize can change the governing power's kind after the history is written (`rival power` is known unsafe for the history). Until the chair's word, NO line is keyed by either; such rows are parked with their measure.
+- **(X9)** The exports' read (`read-all-3/WORKLIST3-HISTORY.json`): what is left after Y5, checked against the tip; measured with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`.
+
+## Batch 3: Y13, every tension type (TAIL-HISTORY-3, 2026-11-15)
+
+**Base:** 5ed2900cd (the branch's tip, read back from origin). CENSUS-3 there: tabs 29,936 sentences, exports 35,850 (equal to TAIL-HISTORY-2's after-run).
+
+**The measure, by type** (the census's 720; a tension with no `templateType` of its own on `historicalEvents`; its words told as a past event):
+
+| type | tensions | with no own event | the false words (past tense) | verdict |
+|---|---|---|---|---|
+| crime_wave | 181 | 181 | "overwhelmed the authorities; vigilantes began to form"; the party "Vigilantes"; the hook "The vigilantes have begun targeting innocents" | twin (description, factions, hooks) |
+| resource_scarcity | 165 | 137 | "A critical resource became scarce, causing hoarding…" (30 of the 137: the other 107 carry the selection's own present-tense lead); "Price regulators" in a thorp (B15078) | twin (description where the template's own, factions) |
+| guild_conflict | 128 | 107 | "Rival guilds fought…"; "Established guilds", "Upstart guilds"; "sabotaging both guilds" | twin (description, factions, hooks) |
+| legitimacy_crisis | 104 | 104 | "was openly and widely questioned, and no one could agree…" | twin (description) |
+| outside_debt | 60 | 51 | "The settlement owed … that was preparing to collect"; "Those who profited and escaped" | twin (description, factions) |
+| external_threat | 89 | 49 | "News of approaching danger divided the community" | twin (description) |
+| leadership_vacuum | 47 | 42 | "The last strong leader died or left"; "The departed leader left a sealed document"; "Multiple weak claimants" | twin (description, factions, hooks) |
+| succession_crisis | 52 | 27 | "The ruler of the time was aging or ill, and potential heirs jockeyed" | twin (description) |
+| magical_controversy | 23 | 14 | "…divided the community" | twin (description) |
+| trade_dispute | 12 | 12 | "…soured into something that touched every merchant and every purse in town"; "Merchants tied to the old partner" | twin (description, factions) |
+| population_friction | 18 | 7 | "…fell into sustained, low-level conflict" | twin (description) |
+| religious_tension | 15 | 7 | "…competed for influence and converts" | twin (description) |
+| infiltration_fear | 16 | 4 | "…caused suspicion and denunciations" | twin (description) |
+| corruption_scandal | 48 | 45 | none: "Evidence … has surfaced but powerful figures resist investigation" is the live scandal; its investigator and witness are its own figures (struck by TAIL-HISTORY: B02619 …) | LEFT ALONE |
+| demographic_pressure, generational_divide, disputed_land, economic_disparity | 32, 22, 19, 16 | 32, 22, 16, 7 | none: present tense, no event narrated | LEFT ALONE |
+| occupation_legacy | 22 | 0 | (its unanchored twin since URBAN-FIX D-1b) | — |
+
+**The cure.**
+- `src/data/historyData.js`: the thirteen types take `byMemory.unanchored` (present tense; only the writers that narrate the past are twinned, the rest of the template stands). Every faction twin keeps the substitution keys (`Official guards`, `Criminal organisations`), so the record's own force and crime names still print.
+- `src/generators/historyGenerator.js :: tensionByMemory`: the memory words replace the TEMPLATE's own description only. A description the selection wrote for the town (the scarcity's lead and its top issue: "The levy has taken workers from the fields…") is the record's own evidence, in the present, and is kept. No draw: the selection is untouched.
+- Declarations kept inside the twins: the guard captain (`watch`), the guild master's records and the journeyman (`guild`), the sabotage (`market`). The presumed-things walker is unchanged (fresh 147, stale 0, as at the base).
+
+**The measure after** (CENSUS-3 at the cure, 720 towns):
+- **Tabs:** 29,936 → 29,957. 21 gone, 42 new, 21 in fewer towns, **0 in more towns, 0 moved**. Every sentence in fewer towns is a Y13 tension's past words; what prints of them still is a timeline event (their own event, dated): e.g. "News of approaching danger divided…" 168 → 119, "The ruler of the time was aging…" 159 → 132, "Price regulators" 165 → 28 (the 28 are anchored).
+- **Exports** (`SURFACES=PDF,Journal`): 35,850 → 35,882. 50 gone, 82 new, 32 in fewer towns, 0 in more, 0 moved. The same words in their exports' forms ("Crime Wave: …", "Parties: … vs Vigilantes vs …").
+- **The 42 inheritors are the twins' own lines, every one** (and the crime factions' joined forms with the record's force names).
+- **The worklist rows:** B02465, B12687, B21358 (trade dispute, the vigilantes) GONE; B15078 165 → 28, B19428 57 → 15, B13350 47 → 5 fewer. X9: 07439, 28368, 16960, 29792, 21343, 16801, 11518, 21283 GONE; 15462 46 → 4, 24336 128 → 21, 09529 78 → 29, 21091 58 → 7, 26599 47 → 5, 15945 20 → 6, 14168 11 → 7 fewer. 12740, 21680, 31195, 02985 and 26384 were gone at the base.
+- **THE DECLARED MOVE** (record diff by field, the 720): `history.currentTensions[].description` 635 cells in 492 towns, `.factions[]` 1,004 cells in 427 towns, `.plotHooks[]` 330 cells in 287 towns; `history.siegeNarrative` in 42 towns (the copy of the first tension's description, `siegeCapability.js`, not this group's: it prints on none of the 720 pages). Nothing else moves.
+
+**The guard, red first.** `tests/data/tailHistoryBatch3.test.js`: the twenty-six (the smallest and the largest census town of each type) red at 5ed2900cd (26 of 26), green at the cure. KEEP: the scarcity's own lead (r2r-thorp-16, the levy) and ten towns whose own event is on the timeline: green before and after.
+
+**THE VETO LIST (VETOABLE wording, the owner's; read in the smallest, the largest, a crisis town):**
+- crime_wave (181; r2r-thorp-16, r2r-metropolis-8, r2s-famine-thorp-2): "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"; the party "Those who would take the law into their own hands" (between the record's force and its crime names); the hook "Those who would take the law into their own hands have picked out a culprit on bad information".
+- resource_scarcity (137; r2s-under_siege-thorp-2, r2s-occupied-metropolis-3): "A critical resource is running short, and some are hoarding it while others cannot pay the prices asked" (30; r2r-thorp-59, r2r-metropolis-6, r2s-wartime-thorp-2); the parties "Those hoarding what they can", "Those who cannot pay the prices", "Those who would fix a fair price".
+- guild_conflict (107; r2r-town-43, r2s-occupied-metropolis-3, r2s-famine-town-2): "Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run"; "Guild members", "Those who would trade outside the guild", "Non-guild workers"; the hook "Someone is sabotaging both sides to destabilize the market for a third party".
+- legitimacy_crisis (104; r2s-insurgency-thorp-2, r2s-slave_revolt-metropolis-2, r2s-under_siege-village-2): "The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim".
+- outside_debt (51; r2s-indebted-thorp-2, r2s-indebted-metropolis-1, r2s-under_siege-thorp-1): "The settlement owes a heavy debt to an outside power, and the power is preparing to collect"; "Those who took the loans", "Those who will bear the cost", "Those who profited and want no questions asked".
+- external_threat (49; r2r-thorp-10, r2s-occupied-metropolis-3, r2s-wartime-thorp-0): "News of approaching danger divides the community on how to respond".
+- leadership_vacuum (42; r2s-politically_fractured-thorp-0, -metropolis-2, r2s-occupied-hamlet-3): "No one holds a firm grip on the leadership, and those who would take it are each too weak to win it"; "Rival claimants, none strong enough to win", "Pragmatists who want stability", "Those who prefer things unsettled"; the hook "A sealed document naming who should lead has turned up, and someone wants it destroyed before it is read".
+- succession_crisis (27; r2s-succession_void-thorp-3, r2r-metropolis-6, r2s-famine-metropolis-1): "Who will lead next is the quarrel of the day, and the would-be successors are each gathering support".
+- magical_controversy (14; r2r-thorp-0, r2r-city-16, r2s-occupied-town-3): "Debate over the role and regulation of magic divides the community".
+- trade_dispute (12; r2r-village-11, r2r-metropolis-13, r2s-occupied-metropolis-0): "A dispute over the terms of trade with a partner settlement is souring, and it touches every merchant and every purse in the place"; "Merchants who trade with the partner".
+- population_friction (7; r2r-thorp-42, r2s-plague_onset-city-1): "A recently arrived group and the established population are locked in sustained, low-level conflict".
+- religious_tension (7; r2s-infiltrated-thorp-3, r2r-city-24): "Different faiths or interpretations compete for influence and converts".
+- infiltration_fear (4; r2r-thorp-12, r2s-under_siege-city-1, r2s-famine-village-2): "Rumours (some true) of enemy agents within the settlement are stirring suspicion and denunciations".
+
+**Read with a note (not false by the record; for the chair):** the leadership vacuum's twin under an occupation (r2s-occupied-hamlet-3) claims no more than the words it replaced ("no one has yet consolidated their position"). The outside debt's hook "A creditor's agent is in town…" still prints under a siege (X9 03015, 60 towns: the template's own hook, both forms): the siege law's cure is a declaration on that hook (it moves the `hookTablesDeclared` pin), LEFT for the next batch.
+
+**Gates at the cure** (gate-tail.sh): typecheck:domain:strict 0, typecheck:ratchet 0, eslint on the touched files 0. The presumed-things walker equals the base (fresh 147, stale 0; it exits red at the base too, carried). Grid: 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), 0 rises, as at the base. The 31 test files that name historyData.js or historyGenerator.js: one red carried (urbanBandInstitutions G5, red at the base too); one red of the batch, re-keyed BY CAUSE: `tensionTemplateDeclaration.test.js` "no draw moved" strips `history.siegeNarrative` with the tensions (soak1k-2: the narrative copies the first tension's description), then green.
 
 ## The chair's rulings since (2026-11-15 00:30 UTC; each vetoable by the owner)
 
