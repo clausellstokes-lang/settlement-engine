@@ -408,7 +408,7 @@ export const generatePowerStructure = (
     },
     // R-AM (CENSUS-1g): resolved where it is CHOSEN, not inside the table (an eager `said` noted a
     // description no birth printed); `said` hands every non-key back untouched, so nothing moves.
-    govDesc = said(govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table
+    govDesc = said((govBody === 'Town Council' && governingFaction !== govBody && (govDescByFaction[governingFaction] || govDescByLabel[governingFaction])) || govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table; TAIL-POWERS-4 (03509): a town's council line only where the council governs
     priorityBonus = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
     govPower = [
       'Theocratic Council',
@@ -595,7 +595,7 @@ export const generatePowerStructure = (
           : governingFaction && governingFaction.includes('Church Council')
             ? 'Church authority is the formal source of governing legitimacy here; clergy hold both spiritual and temporal jurisdiction.'
             : religiousPower > 24
-              ? lowerInstNames.some((name) => name.includes('cathedral') || name.includes('monastery'))
+              ? lowerInstNames.some((name) => name.includes('cathedral') || name.includes('monastery')) && /ecclesiastical/i.test(String(governingFaction || '')) // TAIL-POWERS-4 (04923): "all ecclesiastical" only under the church's own seat
                 ? 'Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.'
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
               : religiousPower > 17
