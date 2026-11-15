@@ -1,6 +1,6 @@
 # TAIL-CORPUS-ECO · hand-back (kept current after every batch) · TAIL-CORPUS-ECO-2 (the successor) keeps it from batch 3
 
-Tip: the commit carrying this file. Rows: 148 · cured 64 (40 by TAIL-CORPUS-ECO, 24 by batch 3) · struck 24 (20 + 4) · parked 5
+Tip: the commit carrying this file. HANDED BACK by TAIL-CORPUS-ECO-2 2026-11-15 at the budget. Rows: 148 · cured 64 (40 by TAIL-CORPUS-ECO, 24 by batch 3) · struck 24 (20 + 4) · parked 5
 (C6) · named for the record 3 (batch 3) · left 52 (the predecessor's 83 less batch 3's 31).
 
 Seat: TAIL-CORPUS-ECO, builder. Branch `lane/tail-corpus-eco-2026-11-14`, cut from the joined line `lane/join-2026-11-14`
@@ -237,6 +237,18 @@ Doors: generator --check 0; the grid 2 falls (= base); strict-domain 0, the type
 test files naming the leaves: the base's 40 reds exactly (carried from the joined line), plus the presumed walker's stale-row red
 the next commit cures; the guard 83 green.
 
+### THE AFTER RUN of batch 3 (at bb4c95eb8: the census of the 720 on a snapshot worktree; inventory_diff over its 24 rows)
+
+29,883 -> 29,889 distinct sentences; gone 28, new 34, in fewer towns 18, in more towns 14, moved 0. THE 24 ROWS: 15 GONE (every
+reworded row), 9 in FEWER towns by exactly the replay's measure, spread over their tier folds (STRATEGIC v4 24->21 and 22->21 of the
+8; C5 v2 16->4 of the 14; WEALTHY v1 12->8; FOOD SOURCES several v2 18->17, 12->11, v3 11->9, 8->7; POSTURE none v1 8->7). THE
+OTHER SENTENCES IN FEWER TOWNS read (the widest twelve of the eighteen): every one a batch line or a fragment the page splits off
+one ("There is no trade out.", "Whatever surplus there is stays, ...", "{N} sells nothing outward.": POSTURE none v1 v3); no line
+outside the batch was seen silenced (the six narrowest were not read: named). THE INHERITORS (48 sentences): the reworded lines in
+the same towns, then exactly the replay's inheritors (C5 v3 +9, v1 +5; POSTURE none v2 +6; WEALTHY v3 +4; STRATEGIC v1 v3 v5 v6;
+FOOD SOURCES several v1), each read in batch 3's table. Batch 4 (C12, text only, no draw moved) has no after run of its own:
+measured by the record (1 town each) and by its guard; the next seat's before run reads it.
+
 ### Batch 4 · the chair's ruling C12 (DS-ECO-1 C4 v4, DS-ECO-9 IMPORT-DEPENDENT v5) · REWORDED, no draw moved
 
 | line | old | new | prints | false by the record |
@@ -350,6 +362,14 @@ Batch 4 (C12; read where they print: smallest / largest / the sea exception):
 - None for the rows cured: every cure has its GONE row and a KEEP row in `tests/domain/corpusEcoTailGuards.test.js` (50 rows).
 
 ## What is left of the worklist
+
+THE NEXT SEAT'S ORDER (the 52 left, widest first, as read by TAIL-CORPUS-ECO-2): the FOOD SOURCES one-source rows (20541 38,
+21004 00743 01591 01600 01599 01603 01601 20750 22386 22387 B00718, several v1 12082 12087 B11498) are the food record's
+`foodSources` against its own houses and trade list (named below; no pool cure found); DS-GEN-13 ENTREPOT v1 01563 B01502 (20/18,
+the bar's #275, `deriveIsEntrepot`); DS-SUP-3 07394 (18, the catalog's counter); DS-GEN-14 FOUNDED-YOUNG v2 07396 07397 (15/2:
+v1 makes the same claim, "still lives by its first reason": reword both or neither); the DS-ECO-11 exploitation and
+resource-condition rows and DS-GEN-18 UNWORKED/BOUGHT-IN (the record's, named below); DS-GEN-13 merchant guild v2 12095, bank v1
+03133; DS-SUP-2 18251 23280. The census, the replay and `q.mjs` re-make as above; a base before run is ~21 minutes.
 
 BATCH 3 (TAIL-CORPUS-ECO-2) took 31 of the 83 below: cured 00583 01572 01569 01191 01181 01186 20456 02935 02770 02771 B02776
 B02771 B00791 B27697 00588 00991 15068 03095 22253 20660 20530 28996 28994 09248; struck B27928 01099 B21598 29012; named for the
