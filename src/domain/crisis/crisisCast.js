@@ -247,6 +247,25 @@ export const STAKE_REASONS = Object.freeze({
   holdsFood: 'it holds what is left of the food stores',
   chargedWithSickness: 'it holds the emergency powers against the sickness',
   leadsInquiry: 'it leads the inquiry into the betrayal',
+  // TAIL-CRISIS-6 (K25 (a)): K24's law carried to every party a crisis raises, and every power a crisis writes into
+  claimsToGovern: 'it claims the right to govern by other means',
+  courted: 'both sides are courting it, for a price',
+  creditorAgent: 'it speaks for the creditor the town owes',
+  holdsDebt: "its houses hold the crown's debt",
+  infiltrator: 'it is the outside interest with its own people placed here',
+  claimsSuccession: 'it presses its own claim to the succession',
+  leadsChallenge: 'it leads the challenge to the government',
+  speaksForNewcomers: 'it speaks for the newcomers',
+  aidsRevolt: 'it has been aiding the revolt in secret',
+  guildsThreatened: 'newcomers working outside the guilds threaten its hold on the trades',
+  claimantsNeedIt: 'every claimant needs its backing',
+  warNeedsIt: 'the call-up and the grieving have made it indispensable',
+  warDivides: 'contracts have made some of it rich while others have lost their trade routes',
+  revoltCutsLabour: 'the revolt has cut into its labour and its trade',
+  warCostsIt: 'trade disruption and requisitions are costing it',
+  someHoldDebt: "some of its houses hold the crown's debt",
+  termsWithOccupier: 'some of its families have made private terms with the new authority',
+  pressedToJudge: 'both sides press it to call the revolt just or sacrilegious',
 });
 
 /**
@@ -267,18 +286,49 @@ export const RAISED_TO_LEAD = Object.freeze({ slave_revolt: 'Revolt Leadership' 
  * roster's own literal (tests/domain/tailCrisisBatch8.test.js pins each to stressFactions.js), under that one kind only.
  * Where no earlier rule gives such a power a stake it keeps the waverer's `split` (K22's form: no cast role moves), and its
  * reason says what the record holds, never "it could side with either camp".
- * @type {ReadonlyArray<readonly [kind: string, descOpening: string, reason: keyof typeof STAKE_REASONS]>}
+ * K25 (a) (TAIL-CRISIS-6, the chair's ruling of 2026-11-15, vetoable by the owner): the same law for every party a crisis
+ * raises (`opens`: the description opens with the crisis's literal) and every standing power the crisis writes into (`adds`:
+ * the crisis appended its sentence to the power's description: "The arrival of skilled workers outside guild structures…").
+ * Each `text` is the shortest stretch of the crisis's literal that is the crisis's alone (the presumed-things walker reads a
+ * literal here as a line: a match key names no war, market, clergy, succession or occupation of its own).
+ * An `adds` row never speaks for a criminal power: stressFactions.js writes its merchants' sentences onto any name holding
+ * "guild" ("Thieves' Guild"), and that slip is its seat's (named in the hand-back), not a stake. Nor for the governing power,
+ * which answers for the crisis (K12: the page's `stakeShown`, "must answer for it · it governs here").
  */
-export const RAISED_BY_CRISIS = Object.freeze([
-  Object.freeze(/** @type {const} */ (['famine', 'Whoever controls the remaining food reserves', 'holdsFood'])),
-  Object.freeze(/** @type {const} */ (['plague_onset', 'Healers, clerics, and pragmatists with emergency health powers.', 'chargedWithSickness'])),
-  Object.freeze(/** @type {const} */ (['recently_betrayed', 'Informal coalition demanding answers', 'leadsInquiry'])),
-]);
+export const RAISED_BY_CRISIS = /** @type {ReadonlyArray<readonly [kind: string, text: string, reason: keyof typeof STAKE_REASONS, how: 'opens' | 'adds']>} */ (Object.freeze(/** @type {Array<[string, string, keyof typeof STAKE_REASONS, 'opens' | 'adds']>} */ ([
+  ['famine', 'Whoever controls the remaining food reserves', 'holdsFood', 'opens'],
+  ['plague_onset', 'Healers, ', 'chargedWithSickness', 'opens'],
+  ['recently_betrayed', 'Informal coalition demanding answers', 'leadsInquiry', 'opens'],
+  ['politically_fractured', 'Claims legitimate authority through different means', 'claimsToGovern', 'opens'],
+  ['politically_fractured', 'Would support stability, if a price can be agreed.', 'courted', 'opens'],
+  ['indebted', 'Resident agent of the external creditor', 'creditorAgent', 'opens'],
+  ['indebted', "A coalition of noble houses that hold the crown's debt.", 'holdsDebt', 'opens'],
+  ['infiltrated', 'An external interest with its own people placed inside the settlement.', 'infiltrator', 'opens'],
+  ['succession_void', 'Hereditary or institutional claim; has legal arguments', 'claimsSuccession', 'opens'],
+  ['succession_void', 'Popular support; questionable legitimacy; moving fast.', 'claimsSuccession', 'opens'],
+  ['succession_void', 'A noble house with a plausible hereditary claim', 'claimsSuccession', 'opens'],
+  ['succession_void', 'A rival noble house backed by popular sentiment', 'claimsSuccession', 'opens'],
+  ['insurgency', 'A group of the well-off who have concluded the current governing arrangement is no longer viable.', 'leadsChallenge', 'opens'],
+  ['insurgency', "Organised common-population movement challenging the governing authority's legitimacy.", 'leadsChallenge', 'opens'],
+  ['mass_migration', 'The incoming population has begun self-organising.', 'speaksForNewcomers', 'opens'],
+  ['slave_revolt', 'Free citizens, ', 'aidsRevolt', 'opens'],
+  ['slave_revolt', 'Organised leadership of the enslaved population', 'leadsRevolt', 'opens'],
+  ['mass_migration', 'The arrival of skilled workers outside guild structures', 'guildsThreatened', 'adds'],
+  ['succession_void', 'latent noble power into active leverage.', 'claimantsNeedIt', 'adds'],
+  ['wartime', 'The pastoral burden of', 'warNeedsIt', 'adds'],
+  ['wartime', 'War contracts have made the well-connected wealthy.', 'warDivides', 'adds'],
+  ['wartime', 'Trade disruption and requisition are hurting the bottom line.', 'warCostsIt', 'adds'],
+  ['slave_revolt', 'The revolt has disrupted labour supply', 'revoltCutsLabour', 'adds'],
+  ['slave_revolt', 'Under pressure from both sides to publicly declare the revolt either just or sacrilegious.', 'pressedToJudge', 'adds'],
+  ['indebted', 'Several of these houses hold crown debt', 'someHoldDebt', 'adds'],
+  ['occupied', 'several noble families have made private accommodations with the new authority', 'termsWithOccupier', 'adds'],
+]).map((row) => Object.freeze(row))));
 
-/** The stake reason the crisis's own record gives a power it raised, or null. @param {string} kind @param {{ desc?: unknown }} f @returns {string | null} */
-function raisedReasonOf(kind, f) {
-  const desc = typeof f?.desc === 'string' ? f.desc : '';
-  const row = RAISED_BY_CRISIS.find(([k, opening]) => k === kind && desc.startsWith(opening));
+/** The stake reason the crisis's own record gives a power it raised or wrote into, or null. @param {string} kind @param {CastFaction} f @param {boolean} isGov @returns {string | null} */
+function raisedReasonOf(kind, f, isGov) {
+  const desc = typeof (/** @type {{ desc?: unknown }} */ (f)).desc === 'string' ? String((/** @type {{ desc?: unknown }} */ (f)).desc) : '';
+  const row = RAISED_BY_CRISIS.find(([k, text, , how]) => k === kind
+    && (how === 'opens' ? desc.startsWith(text) : desc.includes(text) && !isGov && factionArchetype(f) !== A.CRIMINAL));
   return row ? STAKE_REASONS[row[2]] : null;
 }
 
@@ -591,7 +641,7 @@ export function deriveStakes(s, kind) {
     else if (gains) stake = { factionId: name, stake: 'gains', reason: gains };
     else if (loses) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.loses };
     else if (losesSeat) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.losesSeat };
-    else stake = { factionId: name, stake: 'split', reason: /** @type {Record<string, string>} */ (RAISED_TO_LEAD)[kind] === name ? STAKE_REASONS.leadsRevolt : (raisedReasonOf(kind, /** @type {{ desc?: unknown }} */ (f)) || STAKE_REASONS.untouched) };
+    else stake = { factionId: name, stake: 'split', reason: /** @type {Record<string, string>} */ (RAISED_TO_LEAD)[kind] === name ? STAKE_REASONS.leadsRevolt : (raisedReasonOf(kind, f, isGov) || STAKE_REASONS.untouched) };
     return stake;
   });
 }

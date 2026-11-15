@@ -274,8 +274,31 @@ const ROW_TRADES = Object.freeze({ ...RESOURCE_ROW_TRADES, 'Fish & Maritime Prod
 export const GOOD_SOLD_TITLES = Object.freeze([...new Set(Object.values(RESOURCE_ROW_TRADES).flatMap((t) => t.goods.map((g) => g.source)).filter((t) => t !== null))]);
 
 /**
+ * ONE SHADOW FIGURE (TAIL-DEFECON-5, ruling R2; RECORD-MEASURE-3 row 2b, c2a). The income rows' shares, written in place
+ * from their weights. A criminal row is pushed with the Shadow Economy section's capture as its weight ("so normalized %
+ * matches"); normalised with the rest, twice (here and in `keepRowsThePageBearsOut`), it matched in 8 towns of 236 ("33%
+ * capture" above a criminal row of 19%). So a criminal row is HELD at `held` (the capture) and the lawful rows share what
+ * is left in their own proportions; the residue of rounding goes to the largest lawful row. With no criminal row (or no
+ * lawful weight beside it) every row's share is its weight's, and the residue goes to the largest row.
+ * @param {Array<{ weight: number, percentage: number, isCriminal?: boolean }>} rows @param {number} held
+ * @returns {void}
+ */
+export function shareIncomeRows(rows, held) {
+  const lawful = rows.filter((e) => !e.isCriminal);
+  const lawfulWeight = lawful.reduce((sum, e) => sum + e.weight, 0);
+  const holds = lawful.length < rows.length && lawfulWeight > 0;
+  const total = rows.reduce((sum, e) => sum + e.weight, 0) || 1;
+  for (const e of rows) {
+    e.percentage = !holds ? Math.round((e.weight / total) * 100) : e.isCriminal ? held : Math.round((e.weight / lawfulWeight) * (100 - held));
+  }
+  const sum = rows.reduce((s, e) => s + e.percentage, 0);
+  const pool = holds ? lawful : rows;
+  if (pool.length && sum !== 100) { let bi = 0; pool.forEach((e, i) => { if (e.percentage > pool[bi].percentage) bi = i; }); pool[bi].percentage += 100 - sum; }
+}
+
+/**
  * The income rows the page bears out, re-shared, IN PLACE (the economy's normalised list; before its sort). Pure; no draw.
- * @param {Array<{ source: string, percentage: number, weight: number, desc?: string }>} rows the normalised income rows
+ * @param {Array<{ source: string, percentage: number, weight: number, desc?: string, isCriminal?: boolean }>} rows the normalised income rows
  * @param {{ roster: ReadonlyArray<string>, ground: ReadonlyArray<string>, exports: ReadonlyArray<unknown> }} f the roster's
  *   names lower-cased; the town's live (not depleted) resources; the final export list
  * @returns {void}
@@ -289,10 +312,7 @@ export function keepRowsThePageBearsOut(rows, f) {
   const unhoused = (/** @type {{ source: string }} */ e) => { const t = ROW_TRADES[e.source]; return !!t && !rosterHas(t.house); };
   const kept = rows.filter((e) => !unhoused(e) || goodSold(e) !== null);
   if (kept.length !== rows.length) {
-    const total = kept.reduce((sum, e) => sum + e.weight, 0) || 1;
-    for (const e of kept) e.percentage = Math.round((e.weight / total) * 100);
-    const sum = kept.reduce((s, e) => s + e.percentage, 0);
-    if (kept.length && sum !== 100) { let bi = 0; kept.forEach((e, i) => { if (e.percentage > kept[bi].percentage) bi = i; }); kept[bi].percentage += 100 - sum; }
+    shareIncomeRows(kept, kept.find((e) => e.isCriminal)?.percentage ?? 0); // R2: the criminal row keeps the capture
     rows.length = 0; rows.push(...kept);
   }
   for (const e of rows) {

@@ -23,6 +23,8 @@ import { liveInstitutionNames } from '../../src/domain/facts/institutions.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
   nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -88,14 +90,15 @@ describe('the threat assessment speaks of clergy and defenders only where they s
   afterEach(cleanup);
 
   test('no clergy line where the only sacred row is a neighbour\'s church: a thorp, a siege hamlet, a famine thorp', () => {
-    for (const seed of ['r2r-thorp-0', 'r2r-hamlet-0', 'r2s-famine-thorp-0']) {
+    const failures = collectSeedFailures(['r2r-thorp-0', 'r2r-hamlet-0', 'r2s-famine-thorp-0'], (seed) => {
       const { town, tab, pdf } = surfaces(seed);
       expect(liveInstitutionNames(town), `${seed} anchored: access to a neighbour's church`).toContain('Access to parish church');
       expect(tab['Disasters & Famine'], `${seed} tab`).toContain('Nobody here treats the sick');
       expect(pdf['Disasters & Famine'], `${seed} pdf`).toContain('Nobody here treats the sick');
-      expect(tab['Disasters & Famine'], `${seed} tab`).not.toContain(CLERGY);
-      expect(pdf['Disasters & Famine'], `${seed} pdf`).not.toContain(CLERGY);
-    }
+      expectAbsentWithAnchor(tab['Disasters & Famine'], CLERGY, 'Nobody here treats the sick', `${seed} tab`);
+      expectAbsentWithAnchor(pdf['Disasters & Famine'], CLERGY, 'Nobody here treats the sick', `${seed} pdf`);
+    });
+    expectNoSeedFailures(failures, 'no clergy line where the only sacred row is a neighbour\'s church, on the tab and the PDF');
     const famine = surfaces('r2s-famine-thorp-0');
     expect(famine.pdf['Disasters & Famine'], 'the famine is still named first').toContain('In famine.');
   }, 240000);
@@ -108,14 +111,16 @@ describe('the threat assessment speaks of clergy and defenders only where they s
   }, 120000);
 
   test('no defenders paid late where no force stands: the twin prints (r2r-thorp-0, r2r-thorp-14)', () => {
-    for (const seed of ['r2r-thorp-0', 'r2r-thorp-14']) {
+    const failures = collectSeedFailures(['r2r-thorp-0', 'r2r-thorp-14'], (seed) => {
       const { town, tab, pdf } = surfaces(seed);
       expect(forceStands(town), `${seed} anchored: no force stands`).toBe(false);
       for (const [side, rows] of [['tab', tab], ['pdf', pdf]]) {
         expect(rows['Economic Survival'], `${seed} ${side}`).toContain(TWIN);
-        expect(rows['Economic Survival'], `${seed} ${side}`).not.toMatch(/defenders|defend the place/);
+        // the alternation's two literals, one by one (exactly equivalent)
+        for (const w of ['defenders', 'defend the place']) expectAbsentWithAnchor(rows['Economic Survival'], w, TWIN, `${seed} ${side}`);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'no defenders paid late where no force stands, and the twin prints, on the tab and the PDF');
   }, 180000);
 
   test('the guard: where a force stands, the defenders paid late keep their line (r2r-thorp-1)', () => {

@@ -201,6 +201,9 @@ function quarrelsOf(s, name) {
   return out;
 }
 
+/** The shown stakes of a power the crisis has not touched: printed as no row (K25 (c)). */
+const UNTOUCHED_SHOWN = new Set(['untouched', 'untouchedMany']);
+
 /** @param {string[]} names @returns {string} "A", "A and B", "A, B and C" */
 const andList = (names) => (names.length < 2 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`);
 
@@ -272,9 +275,13 @@ export function composeCrisisPage(settlement) {
       })),
       absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) })),
       edited,
-      stakes: (entry.cast?.stakes || []).map((k) => {
+      // TAIL-CRISIS-6 (the chair's ruling K25 (c), 2026-11-15, vetoable by the owner): a power the crisis has truly not
+      // touched (no stake of its own, no quarrel the record names, not the governing power) takes NO ROW: "has no stake yet"
+      // claims a future nobody knows, and silence is true. Its record keeps its `split` for the waverer's rule.
+      stakes: (entry.cast?.stakes || []).flatMap((k) => {
         const shown = stakeShown(s, govName, k);
-        return { factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: shown.stake, reason: speak(shown.reason) };
+        if (UNTOUCHED_SHOWN.has(shown.stake)) return [];
+        return [{ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: shown.stake, reason: speak(shown.reason) }];
       }),
       levers: (entry.cast?.levers || []).map((l) => ({
         institution: l.institution,

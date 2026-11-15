@@ -18,6 +18,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shape @param {string} seed */
@@ -57,7 +58,7 @@ beforeAll(async () => {
 describe('TAIL-POWERS-B-3 batch 6b · the stress factions and the bread hook claim what the record holds', () => {
   for (const [seed, refused, instead] of PAIRS) {
     it(`${seed}: "${refused}" does not print; "${instead}" prints instead`, () => {
-      expect(text[seed]).not.toContain(refused);
+      expectAbsentWithAnchor(text[seed], refused, instead, seed);
       expect(text[seed]).toContain(instead);
     });
   }

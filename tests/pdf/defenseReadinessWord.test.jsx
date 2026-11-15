@@ -5,6 +5,7 @@
  * scores' own figures out of 100 stay (a rating's own figure is not machinery).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -38,12 +39,13 @@ beforeAll(async () => {
 
 describe('the PDF readiness strip prints the rating, not its working (W4)', () => {
   test('RED-FIRST: no "Score avg" row, and the readiness word prints', () => {
-    for (const { seed, s, leaves } of rows) {
+    const failures = collectSeedFailures(rows, ({ seed, s, leaves }) => {
       expect(leaves.includes('Score avg'), `${seed}: the average of the five scores`).toBe(false);
       // anchored: the strip is rendered, with the rating's own word
       expect(leaves.includes('Readiness'), `${seed}: the strip`).toBe(true);
       expect(leaves.includes(statusCase(s.defenseProfile.readiness.label)), `${seed}: the rating's word`).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'every birth: no "Score avg" row, and the readiness word prints');
   });
 });
 
@@ -52,11 +54,12 @@ describe('the PDF readiness strip prints the rating, not its working (W4)', () =
 describe('the PDF forces carry no provenance badge (item 3)', () => {
   test('RED-FIRST: no "REQ" or "FORCED" on the forces, while a required house is on the roster', () => {
     let required = 0;
-    for (const { seed, s, leaves } of rows) {
+    const failures = collectSeedFailures(rows, ({ seed, s, leaves }) => {
       const sources = Object.values(buildViewModel({ settlement: s }).defense.armedForces || {}).flat().map((f) => f?.source);
       if (sources.some((x) => x && x !== 'generated')) required += 1;
       expect(leaves.includes('REQ') || leaves.includes('FORCED'), `${seed}: a provenance badge`).toBe(false);
-    }
+    });
+    expectNoSeedFailures(failures, 'every birth: no "REQ" or "FORCED" badge on the forces');
     expect(required, 'anchored: a force with a provenance stands').toBeGreaterThan(0);
   });
 });

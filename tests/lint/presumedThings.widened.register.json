@@ -996,7 +996,7 @@
     "famine",
     "word",
     "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judg",
-    "dfa32308413b0367"
+    "bb49c513afbb2c39"
    ]
   ],
   "src/components/new/tabs/EconomicsTab.jsx": [
@@ -4626,18 +4626,6 @@
     "ac63d9974a6fe965"
    ],
    [
-    "house: reeve",
-    "family",
-    "In the want of any formal power, the oldest or most respected villager steers the decisions. Less official than a reeve,",
-    "6b49e3934fbeca44"
-   ],
-   [
-    "house: reeve",
-    "family",
-    "Where no formal authority exists, the eldest or best-regarded resident guides what the village decides. Short of a reeve",
-    "54ff2742e508069e"
-   ],
-   [
     "armedForce",
     "family",
     "A drinking hall for old soldiers and mercenaries put out to pasture. It offers rough security, the odd brawl, and now an",
@@ -6752,12 +6740,6 @@
     "081906da924c5839"
    ],
    [
-    "house: reeve",
-    "family",
-    "The oldest or most respected resident guides village decisions in the absence of formal authority. Less official than a ",
-    "18580d9ee4fa24ed"
-   ],
-   [
     "streets",
     "family",
     "Official announcer who reads proclamations, market prices, and news at fixed times in the market square. Employed by the",
@@ -7016,8 +6998,8 @@
    [
     "occupation",
     "word",
-    "The founders assumed the settlement would always make its own decisions. Under occupation, it no longer does.",
-    "0e70e61e21695b43"
+    "The settlement always made its own decisions, or believed it did. Under occupation, it no longer does.",
+    "d376443dec338868"
    ],
    [
     "openTrade",
@@ -16506,12 +16488,6 @@
     "root",
     "Controls specific territory through violence. Extorts local businesses. Competes with the watch for street-level authori",
     "5cda302fa8ef4287"
-   ],
-   [
-    "prison",
-    "root",
-    "Court + Prison",
-    "2e5bbcad8d5be670"
    ],
    [
     "house: gambling",

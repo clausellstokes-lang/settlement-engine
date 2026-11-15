@@ -16,6 +16,7 @@ import { generateSettlementPipeline } from '../../../src/generators/generateSett
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { governanceAccountOf } from '../../../src/domain/display/governanceAccount.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shape @param {string} seed */
@@ -39,7 +40,7 @@ describe('TAIL-POWERS-3 · batch 1: the account names a power by its prose form;
   for (const [seed, [was, now]] of Object.entries(ACCOUNT)) {
     it(`${seed}: the account prints "${now}", not "${was}"`, () => {
       const account = governanceAccountOf(born(seed))?.text || '';
-      expect(account, seed).not.toContain(was);
+      expectAbsentWithAnchor(account, was, now, seed);
       expect(account, seed).toContain(now);
     }, 120_000);
   }

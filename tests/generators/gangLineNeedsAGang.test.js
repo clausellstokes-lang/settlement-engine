@@ -10,6 +10,7 @@
  * a Street gang beside Front businesses): the line still prints. Red at 33acecd6d.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -35,20 +36,22 @@ describe('#1082: the gang flag reads the gang houses', () => {
   });
 
   test('GUARDS: Front businesses and no gang house, so no street-gang line (three of the six towns)', () => {
-    for (const seed of ['rv2-under_siege-city-10', 'rv2-under_siege-city-31', 'rv2-succession_void-city-12']) {
+    const failures = collectSeedFailures(['rv2-under_siege-city-10', 'rv2-under_siege-city-31', 'rv2-succession_void-city-12'], (seed) => {
       const s = birth(seed);
       const names = (s.institutions || []).map((i) => String(i.name));
       expect(names, seed).toContain('Front businesses');
       expect(names.some((n) => /street gang|multiple criminal/i.test(n)), seed).toBe(false);
       expect(gangLines(s), seed).toEqual([]);
-    }
+    });
+    expectNoSeedFailures(failures, 'GUARDS: every Front-businesses town with no gang house prints no street-gang line');
   });
 
   test('TWIN GUARDS: a Street gang stands, so the line prints', () => {
-    for (const seed of ['rv2-calm-town-0', 'rv2-calm-town-30']) {
+    const failures = collectSeedFailures(['rv2-calm-town-0', 'rv2-calm-town-30'], (seed) => {
       const s = birth(seed);
       expect((s.institutions || []).some((i) => /street gang/i.test(String(i.name))), seed).toBe(true);
       expect(gangLines(s).length, seed).toBe(1);
-    }
+    });
+    expectNoSeedFailures(failures, 'TWIN GUARDS: every town with a Street gang prints the line once');
   });
 });

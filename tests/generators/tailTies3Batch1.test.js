@@ -13,6 +13,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 
@@ -32,18 +34,21 @@ describe('TAIL-TIES-3 batch 1', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('NOT (a): no "smaller house behind the leading one" where the town holds no house of the trade; the card claims no position', () => {
+    // the rows as substrings (each was a plain-literal regex: exactly equivalent); the anchor is the seat-holder's own
+    // structural row, which the same writer (`npcStructure.js :: reg`) prints on the same cards
     const NOT = [
-      ['r2r-hamlet-57', /Runs a smaller house behind the leading one in quiet times/, /Growing into the leading house/],
-      ['r2r-hamlet-9', /Runs a smaller house behind the leading one in the trade while the seat fails/, /disorder that lets the house get ahead/],
-      ['r2r-hamlet-2', /bigger houses take more of the trade/, /big houses leave alone/],
+      ['r2r-hamlet-57', 'Runs a smaller house behind the leading one in quiet times', 'Growing into the leading house'],
+      ['r2r-hamlet-9', 'Runs a smaller house behind the leading one in the trade while the seat fails', 'disorder that lets the house get ahead'],
+      ['r2r-hamlet-2', 'bigger houses take more of the trade', 'big houses leave alone'],
     ];
-    for (const [seed, position, constraint] of NOT) {
+    const failures = collectSeedFailures(NOT, ([seed, position, constraint]) => {
       const s = town(/** @type {string} */ (seed));
       const printed = (s.npcs || []).map((/** @type {any} */ n) => `${n.structuralPosition ?? ''} ${n.activeConstraint ?? ''}`).join(' | ');
-      expect(printed, seed).not.toMatch(position);
-      expect(printed, seed).not.toMatch(constraint);
+      expectAbsentWithAnchor(printed, position, 'Holds the seat', seed);
+      expectAbsentWithAnchor(printed, constraint, 'Holds the seat', seed);
       expect((s.powerStructure?.factions || []).some((/** @type {any} */ f) => f.category === 'economy'), seed).toBe(false);
-    }
+    });
+    expectNoSeedFailures(failures, 'no trade-house row and no trade power where the town holds no house of the trade');
     // what prints instead: the card keeps its own goal and no structural position (the refusal's rule)
     const stableKeeper = (town('r2r-hamlet-57').npcs || []).find((/** @type {any} */ n) => n.title === 'the stable keeper');
     expect(stableKeeper.structuralPosition).toBeUndefined();
@@ -57,11 +62,13 @@ describe('TAIL-TIES-3 batch 1', () => {
   });
 
   it('NOT (b): no rival claimant on a contested seat; each row says what the condition holds', () => {
-    const NOT = /a rival claims it|rivals fight over the seat|both sides in the fight for the seat|claimant/;
-    for (const seed of ['r2s-plague_onset-thorp-3', 'r2r-village-48', 'r2r-hamlet-32', 'r2r-town-35']) {
+    // the alternation's literals, one by one (exactly equivalent); the anchor is the contested rows' own words
+    const NOT = ['a rival claims it', 'rivals fight over the seat', 'both sides in the fight for the seat', 'claimant'];
+    const failures = collectSeedFailures(['r2s-plague_onset-thorp-3', 'r2r-village-48', 'r2r-hamlet-32', 'r2r-town-35'], (seed) => {
       const printed = (town(seed).npcs || []).map((/** @type {any} */ n) => `${n.structuralPosition ?? ''} ${n.activeConstraint ?? ''} ${n.goal?.short ?? ''}`).join(' | ');
-      expect(printed, seed).not.toMatch(NOT);
-    }
+      for (const word of NOT) expectAbsentWithAnchor(printed, word, 'many doubt', seed);
+    });
+    expectNoSeedFailures(failures, 'no contested seat names a rival claimant');
     expect(card('r2r-village-48', 'Santosh Dubey').structuralPosition).toBe("Leads the faith while many doubt the seat's right, and the seat wants its blessing.");
     expect(card('r2r-town-35', 'Roxane Angelos').structuralPosition).toBe("Heads the crew while many doubt the seat's right and those who keep order look elsewhere.");
   });

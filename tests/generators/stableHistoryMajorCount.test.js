@@ -12,6 +12,7 @@ import { textOf } from '../../src/domain/facts/textOf.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ONE = [{ name: 'Crash', severity: 'major', type: 'economic' }, { name: 'Fair', severity: 'minor', type: 'economic' }];
 const TWO = [{ name: 'Crash', severity: 'major', type: 'economic' }, { name: 'Siege', severity: 'catastrophic', type: 'military' }];
@@ -30,7 +31,8 @@ describe('the stable lines that name a major event read how many there are', () 
     for (const [_n, events] of [['two', TWO], ['three', THREE]]) {
       for (const line of LINES.slice(0, 2)) {
         const t = line(events);
-        expect(t, `${_n} major events: no line names one and denies the rest`).not.toMatch(DENIES);
+        expect(t, `${_n} major events: the line names the first two`).toContain('Crash and the Siege');
+        expect(t, `${_n} major events: no line names one and denies the rest`).not.toMatch(DENIES); // anchored: the line above asserts the same line names the first two majors
         expect(t, `${_n} major events: names the Crash`).toMatch(/Crash/);
         expect(t, `${_n} major events: names the Siege`).toMatch(/Siege/);
       }
@@ -38,8 +40,9 @@ describe('the stable lines that name a major event read how many there are', () 
   });
   it('two major events and nothing else: the dating line names both and claims no quieter rest', () => {
     const t = LINES[2](TWO);
-    expect(t).not.toMatch(DENIES);
-    expect(t).not.toMatch(/quieter/);
+    expect(t, 'the dating line names both majors').toContain('Crash and the Siege');
+    expect(t).not.toMatch(DENIES); // anchored: the line above asserts the same line names both majors
+    expectAbsentWithAnchor(t, 'quieter', 'Crash and the Siege');
     expect(t).toMatch(/Crash/);
     expect(t).toMatch(/Siege/);
   });
@@ -52,6 +55,7 @@ describe('the cold list\'s town, born as the app births it', () => {
     const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'village', selectedStressesRandom: false, selectedStresses: ['insurgency'], _randomizePriorities: true }), null, { seed, customContent: {} }));
     const majors = (s.history.historicalEvents || []).filter((/** @type {any} */ e) => e.severity === 'major' || e.severity === 'catastrophic');
     expect(majors.length).toBeGreaterThan(1);
-    expect(s.history.historicalCharacter).not.toMatch(DENIES);
+    expect(s.history.historicalCharacter, 'the character names its first two majors').toContain('Migration and the Occupation');
+    expect(s.history.historicalCharacter).not.toMatch(DENIES); // anchored: the line above asserts the character names two majors
   });
 });

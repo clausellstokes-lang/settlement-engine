@@ -9,6 +9,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // The census's 720 configuration (SECOND-WAVE-CENSUS births.mjs): every random dial on.
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -22,6 +23,8 @@ function censusBirth(seed) {
 const incomeText = (s) => (s.economicState?.incomeSources ?? []).map((e) => `${e.source} :: ${e.desc ?? ''}`).join('\n');
 
 const SILENT = null;
+/** For a SILENT pair, the row whose slot is silent: it still stands on the town's page (read off the birth). */
+const SILENT_ROW = { '16644': 'River Tolls :: ', '17619': 'Security Contracts :: ' };
 /** [row, seed, the text that must NOT print, what prints instead (SILENT: the slot is silent by design)] */
 const GONE = [
   ['03348', 'r2r-thorp-0', 'Agricultural Rents', 'Harvest :: What the households grow and raise on their holdings; the main living at this scale.'],
@@ -58,8 +61,8 @@ beforeAll(async () => {
 describe('TAIL-DEFECON-2 batch 2: an income row says only what the record holds', () => {
   for (const [row, seed, gone, instead] of GONE) {
     test(`#${row} ${seed}: not "${gone}"; ${instead === SILENT ? 'silent by design' : `"${instead}"`}`, () => {
-      expect(towns[seed]).not.toContain(gone);
-      if (instead !== SILENT) expect(towns[seed]).toContain(instead);
+      const anchor = instead === SILENT ? SILENT_ROW[row] : instead;
+      expectAbsentWithAnchor(towns[seed], gone, anchor, `#${row} ${seed}: gone beside ${instead === SILENT ? 'its silent row' : 'what prints instead'}`);
     });
   }
   for (const [row, seed, kept] of KEEP) {

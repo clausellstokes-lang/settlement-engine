@@ -15,6 +15,7 @@ import {
   resolveCultureProfileKey,
 } from '../../src/domain/cultureProfiles.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIMENSIONS = [
   'builtForm',
@@ -71,22 +72,24 @@ describe('canonical culture profiles', () => {
 });
 
 describe('pipeline cultural identity', () => {
-  it.each(CULTURE_PROFILE_KEYS)('%s emits its structured local identity', (culture) => {
-    const settlement = generateSettlementPipeline(
-      {
-        settType: 'town',
-        culture,
-        terrainOverride: 'plains',
-        tradeRouteAccess: 'road',
-      },
-      null,
-      { seed: `culture-profile-${culture}`, customContent: {} },
-    );
-    expect(settlement.config.culture).toBe(culture);
-    expect(settlement.culturalIdentity.key).toBe(culture);
-    expect(settlement.culturalNotes).toContain(settlement.culturalIdentity.socialTexture);
-    for (const dimension of DIMENSIONS) {
-      expect(settlement.culturalIdentity[dimension], dimension).toBeTruthy();
-    }
+  it('every culture emits its structured local identity (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CULTURE_PROFILE_KEYS, (culture) => {
+      const settlement = generateSettlementPipeline(
+        {
+          settType: 'town',
+          culture,
+          terrainOverride: 'plains',
+          tradeRouteAccess: 'road',
+        },
+        null,
+        { seed: `culture-profile-${culture}`, customContent: {} },
+      );
+      expect(settlement.config.culture, `${culture} config.culture`).toBe(culture);
+      expect(settlement.culturalIdentity.key, `${culture} culturalIdentity.key`).toBe(culture);
+      expect(settlement.culturalNotes, `${culture} culturalNotes`).toContain(settlement.culturalIdentity.socialTexture);
+      for (const dimension of DIMENSIONS) {
+        expect(settlement.culturalIdentity[dimension], `${culture} ${dimension}`).toBeTruthy();
+      }
+    }), 'every selectable culture emits its structured local identity');
   });
 });

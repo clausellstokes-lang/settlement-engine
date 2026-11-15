@@ -15,6 +15,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { cultureScopeLine } from '../../src/domain/summary/settlementQuickGuide.js';
 import { crisisHookFor } from '../../src/domain/crisis/crisisHooks.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -86,16 +88,17 @@ const KEEP = [
 
 describe('TAIL-CRISIS batch 6: the group\'s own new lines say only what the record holds', () => {
   it('no FALSE words print, and what every printing town bears prints in their place', () => {
-    for (const [seed, surface, gone, instead] of FALSE) {
+    const failures = collectSeedFailures(FALSE, ([seed, surface, gone, instead]) => {
       const text = /** @type {(s: any) => string} */ (surface)(birth(/** @type {string} */ (seed)));
-      expect(text, /** @type {string} */ (seed)).not.toContain(gone);
-      expect(text, /** @type {string} */ (seed)).toContain(instead);
-    }
+      expectAbsentWithAnchor(text, gone, instead, String(seed));
+    });
+    expectNoSeedFailures(failures, 'a FALSE phrase printed, or what the town bears did not');
   }, 300000);
 
   it('the true siblings still print', () => {
-    for (const [seed, surface, kept] of KEEP) {
+    const failures = collectSeedFailures(KEEP, ([seed, surface, kept]) => {
       expect(/** @type {(s: any) => string} */ (surface)(birth(/** @type {string} */ (seed))), /** @type {string} */ (seed)).toContain(kept);
-    }
+    });
+    expectNoSeedFailures(failures, 'a true sibling no longer prints');
   }, 300000);
 });

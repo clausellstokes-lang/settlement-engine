@@ -17,6 +17,7 @@ import { readinessBandOf } from '../../src/data/bandLadders.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
 import { defenseWallOf, defenceHeldOf } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 import { DEFENCE_TUNING, DEFENCE_WEIGHT_REASONS, DEFENCE_WORDS } from '../../src/data/defenceWeights.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -322,7 +323,7 @@ describe('the martial will is not paid on the hired branch either (W3)', () => {
   }, 300000);
 
   test('RED-FIRST: where only a hired body stands, the will at the standing pay equals the will at full pay', () => {
-    for (const [seed, s] of hiredOnly) {
+    const failures = collectSeedFailures(hiredOnly, ([seed, s]) => {
       const keep = keepOfRecord(s.economicState);
       const atPay = defencePartsOf(s, keep);
       const ids = new Set(atPay.map((p) => p.id));
@@ -334,7 +335,8 @@ describe('the martial will is not paid on the hired branch either (W3)', () => {
       const full = defencePartsOf(s, { bought: 1, funded: 1 }).find((p) => p.id === 'will');
       expect(will?.held === undefined && full?.held === undefined && !will?.crisis && !full?.crisis, `${seed}: no hold, no crisis`).toBe(true);
       expect(will?.full, `${seed}: the will at its standing pay`).toBe(full?.full);
-    }
+    });
+    expectNoSeedFailures(failures, 'on every hired-only birth the will at the standing pay equals the will at full pay');
   });
 });
 

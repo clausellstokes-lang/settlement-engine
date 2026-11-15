@@ -11,6 +11,7 @@
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render } from '@testing-library/react';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -25,6 +26,7 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -69,12 +71,19 @@ const KEEP = /** @type {const} */ ([
 ]);
 
 describe('TAIL-DISPLAY-ECON-5 (X31): the short words read the food record\'s band', () => {
-  test.each(NOT)('%s: %s does not print', (seed, gone, instead) => {
-    const text = textOf(town(seed));
-    expect(text).not.toContain(gone);
-    expect(text).toContain(instead);
+  test('every NOT row: its seed does not print its line (every row runs; each failure names its seed and line)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, gone, instead]) => {
+      try {
+        const text = textOf(town(seed));
+        expectAbsentWithAnchor(text, gone, instead, `${seed}: band Secure takes its twin`);
+      } finally { cleanup(); }
+    }), 'every NOT row: the go-short words do not print beside band Secure, and the twin prints');
   }, 60000);
-  test.each(KEEP)('%s: %s still prints', (seed, kept) => {
-    expect(textOf(town(seed))).toContain(kept);
+  test('every KEEP row: its seed still prints its line (every row runs; each failure names its seed and line)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, kept]) => {
+      try {
+        expect(textOf(town(seed)), `${seed}: ${kept} still prints`).toContain(kept);
+      } finally { cleanup(); }
+    }), 'every KEEP row: the line still prints');
   }, 60000);
 });

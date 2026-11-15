@@ -330,6 +330,9 @@ export const FOUNDER_PURPOSE = Object.freeze({
   'religious authorities who wanted a centre for their regional operations': 'religious',
   'a small religious community whose members drifted into secular life over two generations': 'religious',
   'a military command that built fortifications and found civilians followed': 'military',
+  // TAIL-NARRATIVE-5 (N18 (5)): a place that grew from three merged settlements was not founded at a stroke: it stands
+  // beside an Origin row that grew ("began as", "grew", "developed"), never beside one that was founded or established
+  'the slow accretion of three smaller settlements that eventually merged under a single administration': 'accretion',
 });
 /** @type {Readonly<Record<string, readonly string[]>>} the founder purposes each purpose-stating Origin row admits */
 export const ORIGIN_PURPOSE_ADMITS = Object.freeze({
@@ -341,7 +344,12 @@ export const ORIGIN_PURPOSE_ADMITS = Object.freeze({
   'was established as a market town where merchants could meet': [],
   'was established as a market metropolis where merchants could meet': [],
   'was established as a waystation for travelers': ['religious', 'military'],
-  'began as a riverside mill settlement': ['refuge', 'religious'],
+  'began as a riverside mill settlement': ['refuge', 'religious', 'accretion'],
+  // TAIL-NARRATIVE-5 (N18 (5)): the rows founded or established at a stroke that no purpose above refuses: they refuse
+  // the accretion alone (the rows keyed above with no 'accretion' refuse it already)
+  'was founded where the river became navigable for laden vessels': ['refuge', 'religious', 'military'],
+  'was established as a defensive stronghold that attracted dependents': ['refuge', 'religious', 'military'],
+  'was established as a frontier outpost that outlasted its original purpose': ['refuge', 'religious', 'military'],
 });
 /**
  * Can this founder have the purpose this Origin row states? A row or a founder not keyed above agrees with any.

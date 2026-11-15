@@ -14,8 +14,10 @@ import { createPRNG } from '../../src/kernel/prng.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
-const RECENT = /is recent enough/;
+/** The phrase a line calling its event recent prints (a plain substring: the former `/is recent enough/`). */
+const RECENT = 'is recent enough';
 /** @param {number} yearsAgo */
 const ev = (yearsAgo) => [{ name: 'Economic Divide', type: 'economic', severity: 'major', yearsAgo }];
 const LINES = [1, 5].map((i) => textOf(POLITICAL_FLAVOR.economic_heavy[i]));
@@ -30,7 +32,7 @@ describe('the economic lines that call their event recent read its age', () => {
   it('older than sixty years: neither line calls it recent, and each still names it', () => {
     for (const line of LINES) {
       const t = run(line, ev(88));
-      expect(t).not.toMatch(RECENT);
+      expectAbsentWithAnchor(t, RECENT, 'Economic Divide', 'the line names its event, and not as recent');
       expect(t).toMatch(/Economic Divide/);
     }
   });
@@ -41,9 +43,13 @@ describe('the cold list\'s town, born as the app births it', () => {
   it('rw3-hamlet-calm-1 (#181): an 88-year-old event is not called recent', () => {
     const seed = 'rw3-hamlet-calm-1';
     const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'hamlet', selectedStressesRandom: false, selectedStresses: [], _randomizePriorities: true }), null, { seed, customContent: {} }));
-    const divide = (s.history.historicalEvents || []).find((/** @type {any} */ e) => /Economic Divide/.test(e.name));
-    expect(divide?.yearsAgo).toBeGreaterThan(60);
-    expect(s.history.historicalCharacter).toMatch(/Economic Divide/);
-    expect(s.history.historicalCharacter).not.toMatch(RECENT);
+    // re-keyed by identity (TAIL-NARRATIVE-5, the chair's U2): the town's 88-year economic event was "the Economic Divide"
+    // when this was written; the joined line's history now names it "the Shortage" (same type, same age): the pin reads the
+    // economic event the line names, not a literal name
+    const character = String(s.history.historicalCharacter);
+    const named = (s.history.historicalEvents || []).find((/** @type {any} */ e) => e.type === 'economic' && character.includes(String(e.name).replace(/^The /, '')));
+    expect(named?.yearsAgo, character).toBeGreaterThan(60);
+    expect(character).toMatch(/^Economically dynamic/);
+    expectAbsentWithAnchor(character, RECENT, 'Economically dynamic', '#181: the character opens on its economic line, and does not call its event recent');
   });
 });

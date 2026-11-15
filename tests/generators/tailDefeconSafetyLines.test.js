@@ -6,6 +6,7 @@
  * design. Each KEEP pair is a town where the original is true, and still prints it.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -45,7 +46,8 @@ const GONE = [
   ['B14103', 'r2s-occupied-thorp-1', NOBODY_PAID, 'No one of the place is paid to keep order; the occupiers keep their own.'],
   ['02876', 'r2s-wartime-town-2', "A part from the wizard's tower", SILENT],
   ['B03371', 'r2s-under_siege-metropolis-2', 'smuggling operation moves contraband through the settlement', 'The siege has shut the roads, so what contraband is already inside is hoarded and sold dear'],
-  ['05801', 'r2s-under_siege-thorp-2', 'Controlled goods (grain, salt, preserved meat)', "What food is put by goes to whoever can pay the holder's price."],
+  // TAIL-CORPUS-DEF-5: the twin re-keyed to its cure's words (no stored food on the Defense tab: defenseWordsFindings)
+  ['05801', 'r2s-under_siege-thorp-2', 'Controlled goods (grain, salt, preserved meat)', "What food there is goes to whoever can pay the holder's price."],
   ['18708', 'r2s-insurgency-thorp-2', 'insurgent supporters and those who keep order', "Confrontations between the rebels' supporters and those loyal to the current authority."],
   ['16495', 'r2s-religious_conversion-thorp-0', 'Religious buildings, land, and endowments', SILENT],
   ['18752', 'r2s-wartime-thorp-3', 'Suppliers adulterating grain and leather sold to crown contracts', 'Deserters passing through need food and discretion, and some here give both.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: an isolated thorp sells nothing to an army's buyers
@@ -58,6 +60,12 @@ const GONE = [
   ['15308', 'r2r-village-53', 'has filled the power vacuum', "keeps its own order where the civil authority's reach fails, and extracts a price for it."],
   ['14654', 'r2s-plague_onset-village-3', 'No single dominant organisation', 'Petty theft, minor fraud, and opportunistic violence are persistent, driven by too many people with too little'],
 ];
+/** The liveness anchor of each SILENT pair: a sibling crime line the same profile really prints. */
+const LIVE = {
+  'r2s-wartime-town-2': 'Alchemists and other magical practitioners who operate outside legal channels',
+  'r2s-religious_conversion-thorp-0': 'False conversion declarations sold or arranged for a fee',
+  'r2s-wartime-thorp-3': 'Deserters passing through need food and discretion',
+};
 /** [row, seed, a true sibling that must still print] */
 const KEEP = [
   ['23466', 'r2r-hamlet-11', 'and there is little crime; the '],
@@ -88,7 +96,7 @@ beforeAll(async () => {
 describe('TAIL-DEFECON batch 1: the safety lines say only what the record holds', () => {
   for (const [row, seed, gone, instead] of GONE) {
     test(`#${row} ${seed}: not "${gone}"; ${instead === SILENT ? 'silent by design' : `"${instead}"`}`, () => {
-      expect(towns[seed]).not.toContain(gone);
+      expectAbsentWithAnchor(towns[seed], gone, instead === SILENT ? LIVE[seed] : instead, `#${row} ${seed}`);
       if (instead !== SILENT) expect(towns[seed]).toContain(instead);
     });
   }

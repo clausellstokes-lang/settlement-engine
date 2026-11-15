@@ -10,6 +10,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The reader's births (`births.mjs :: cfgFor`), verbatim. @param {string} seed @returns {any} */
@@ -35,13 +36,15 @@ describe('TAIL-TIES-4 batch 3: a secret claims no investments the town has no ho
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('NOT: the old line is gone; INSTEAD: the same card holds the reworded row', () => {
-    for (const [seed, why] of NOT) {
+    const failures = collectSeedFailures(NOT, ([seed, why]) => {
       expect(secrets(seed).filter((t) => t.includes(OLD)), `${seed} (${why})`).toEqual([]);
       expect(secrets(seed).some((t) => t.includes(NOW)), `${seed}: instead`).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'the old line is gone and the same card holds the reworded row');
   });
 
   it('KEEP: the row\'s stakes still print beside it', () => {
-    for (const [seed] of NOT) expect(secrets(seed).some((t) => t.includes('Civil fraud liability')), seed).toBe(true);
+    const failures = collectSeedFailures(NOT, ([seed]) => { expect(secrets(seed).some((t) => t.includes('Civil fraud liability')), seed).toBe(true); });
+    expectNoSeedFailures(failures, 'the row\'s stakes still print beside it');
   });
 });
