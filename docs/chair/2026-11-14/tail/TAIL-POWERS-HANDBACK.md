@@ -359,6 +359,31 @@ r2s-insurgency-metropolis-0 P7a): no rise.
 - The after-count of batch 1's census was killed for memory (exit 137) while two grid runs shared the machine; its
   corpus and dumps were complete and are what the inventory reads; the count (patterns) was not re-run.
 
+## The chair's notes reaching this seat after its batches (read 02:33 UTC; each vetoable by the owner), and their state
+- (P23) TAIL-DISPLAY-CIVIC-2's row for governanceNarrative.js: X9 24578 "Stability: Rigid (militant theocracy); monsters
+  on the roads" (2 towns, the journal): P16's G3 member: 2 -> 0 in the exports (after1.x.json). STRUCK, cured by 0eaea0870.
+- (P25) the ties seat's rows named for these files: 23160 (37: "Town watch; it enforces ordinances ... and reports to the
+  council." under a Feudal Appointee), 03038 (4), 22409 (2: "The village reeve disagrees." in a hamlet), B19180 (2: "The
+  church wants approval rights ..." with only "Access to parish church"). By script their WRITER is
+   (FACTION_DESC_SIBLINGS, BASELINE_CONFLICT_SIBLINGS), the sibling tables rulingStructure.js
+  and governanceNarrative.js read, not these files: the successor cures them at the selector in this seat's files
+  (a condition or a twin) or the chair rules powerSiblings.js into the group. NOT VERIFIED. 
+  is the ties seat's (T6): not touched.
+- READ-ALL-4 FAULTS IN NEW LINES (1) governanceAccount.js "The Military/Guard is at odds with it." / "The hall is at odds
+  with the Military/Guard and the Religious Authorities.": CURED by 0b1b41459 (0 towns after; "The The" prints nowhere:
+  powerNameInProse strips the leaf's "The" and sets its own article). (2) deriveBaselineConflict's monster rung "The
+  <force> is stretched thin and <seat> cannot agree on whether to raise a levy or hire mercenaries." (config monsterThreat
+  ): MEASURED at a5a9e4372: 11 towns print it; safety Very Safe 1 (r2s-infiltrated-village-3), Safe 5 (r2r-hamlet-6,
+  -26, -51, r2r-village-7 ...), Moderate 5; 10 hire no company (the line debates hiring, it does not claim one). The false
+  core is "stretched thin" beside a Safe or Very Safe label (6 towns): NEXT for the successor, with B02757 (the same rung's
+  "A monster incursion last season destroyed outlying farms", 11, every one plagued, no event in PAST). NOT CURED.
+- P21's HOLD IS LIFTED (the chair, 02:26 UTC): the density resize never changes the governing power (720 of 720), so
+   takes new lines (the joined line at d817736d8 holds it: the one merge allowed). Not to be keyed on: the
+  seat's capture state (moves after the write in 103 towns), its legitimacy crisis note (11). The one-member council's
+  plural lines are the successor's to key; "Elder Council is being asked to do something about it and cannot agree what"
+  is the record's class, named: leave it.
+- The report diet (the chair, 02:03 UTC): no line per batch; one line at the hand-back, a stop, or a question.
+
 ## What is left of this seat's files (by width; towns PRINTING at a5a9e4372, the tabs; NOT verified unless said)
 - rulingStructure.js (799 of 799 lines, P20): 21207 49 (the elders "out of respect" line: P4's legitimacy half was
   cured by the first seat; what prints is the calm remainder, verify), 07269 45, 23333 34, 04923 32, 03509 31, 02622 18,
