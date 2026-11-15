@@ -663,6 +663,10 @@ lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
 
 ## What is left (TAIL-CORPUS-DEF-5's list, current)
 1. All seven named U2 reds, C25's defenseTabFlow and C28's vocabularyPageFindings green. Nothing lent to this seat is left.
+   AT THE SWEPT MERGE (f714fb6a5, merge cff4998c): the ten files 130 of 131. The one red is NOT this seat's:
+   vocabularyPageFindings "a famine written as a risk to come" (expected ['famineToCome'], got []): its plant is DS-ECO-9
+   'FOOD SOURCES: one source' v1, which a8ea5ef8 (TAIL-CORPUS-ECO-4 batch 8, C20) rewrote from a risk to come ("would
+   cost the whole town dear") to a present one ("is felt across the whole town"). The same shape as C28: for the chair.
 2. Seen, not chased (not lent): rv2-wartime-hamlet-5 (walls, no force, 60 Adequate) prints the Invasion line "has walls
    and nobody to put on them. A determined attacker takes this town …" beside an Adequate bar; threatRowsTrueUnderBand's
    FALSE_UNDER holds "A determined attacker" false under ADEQUATE on the readiness rows (its law's births are rv2-calm and
