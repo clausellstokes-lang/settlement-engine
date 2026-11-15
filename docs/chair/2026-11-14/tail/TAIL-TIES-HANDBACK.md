@@ -571,3 +571,9 @@ Also older than this lane: `layerBoundaries` holds the 2-module cycle `defenseDi
 It fails the same way before and after this cure. **`tests/lint/observedShapeReaders.walker.test.js`** fails 6 rows identically before and after this cure (pre-existing).
 
 **What is left:** everything in TAIL-TIES-4's list above, plus the two bar rows: the clergy hook given to a militia captain (`hookThemes.js`, 61 towns) and the goal that runs the debt the wrong way (`goalFamilies.js`, 56). Neither was started.
+
+### TAIL-TIES-5, after the chair's two notes (05:06 and 05:07 UTC)
+- **The `.face` crashes have been given to the CRISIS seat (TAIL-CRISIS-6).** I sent it the cause (cause 1 above, CONFIRMED) and edited no crisis file.
+- **`tests/generators/clerkHookSmallPlace.test.js`** (2 of 7: r2s-recently_betrayed-hamlet-2, r2r-thorp-17; a face is left with no hook). It is red at this tip AND at the pre-join tip `7622238f6`, measured on an archive. So it is the ties' own, from TAIL-TIES-4's batch or earlier, and NOT the join. Not cured: the count ran out. Successor: bisect `2f2f9f12..7622238f6` (TAIL-TIES-4 batch 1 `14724c19`, rulings T18/T19/T21) first.
+- **`tests/generators/tailTiesBatch1.test.js`** (r2r-village-50: "under one ruler no tie names the council"). It is green at `7622238f6` and red at this tip, so the JOIN brought the cause: another lane's change moves that town's government or its tie draw. Not bisected. Successor: `git bisect --first-parent 7622238f6..17d03c8f4` with this file alone. If a declared move explains it, re-key BY IDENTITY and name the move; never weaken the pin.
+- **For any new test** (the chair, 05:06): negatives go through `tests/helpers/anchoredNegatives.js` and seed loops through the totality helper. No literal state-prose anchor (`tests/helpers/drawnProse.js`). Never edit `scripts/mutation-coverage-manifest.json`.
