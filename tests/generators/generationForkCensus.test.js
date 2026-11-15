@@ -608,7 +608,13 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // people-allegiance::npc_power_landed_gentry (its allegiance), people-ties::npc_power_landed_gentry (its tie),
     // people-goals::npc_power_landed_gentry (its goals). Total 139, direct 4, via fork 135, foreign 0. The control hash
     // (C1) moves with the generator master's re-record through the signed door at the join, not on this lane.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(139);
+    // 2026-11-15, THE CHAIR'S RULING FC2 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list): 139 -> 141,
+    // each new mint named by identity (the row's mints listed at fce41f2b7, 134, and at the tree, 141, and diffed: the five
+    // npc_power_landed_gentry mints above, and ONE label more): golden-master-v3::generateEconomy::food.cropFortune [fork] 1 -> 3:
+    // the stores' second call after prosperity (05ec9b601, lane/coherence-upkeep, landed at JOIN-1·9 33b12cbef; its census re-key
+    // aa5a30899) and the food record's magic share (7ac689418, lane/tail-record, landed at JOIN-11 point 8 4e7c96d56): the same
+    // label-keyed fork each time, drawing the same crop fortune (no stream moves). No other label moved.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(141);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
