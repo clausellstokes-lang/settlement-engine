@@ -19,7 +19,6 @@ import NameColumns from '../../primitives/NameColumns.jsx';
 import { magicDeskRead } from '../magicDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { FLUSH } from '../../../design/flush.js';
-import { defenceHoldsArcane, economyShowsMagic } from '../../../domain/facts/magic.js';
 
 /**
  * WHETHER A ROLE ROW CAN PRINT (W2-C-LEAVES-SIDE item 7, 2026-11-13; the cut's #1086 "Economic role: absent" beside an
@@ -33,9 +32,10 @@ import { defenceHoldsArcane, economyShowsMagic } from '../../../domain/facts/mag
  */
 function roleRowShown(settlement, role, band) {
   if (band !== 'absent') return true;
-  if (role === 'economic') return !economyShowsMagic(settlement);
-  if (role === 'military') return !defenceHoldsArcane(settlement);
-  return true;
+  // BAR2-LABELS LB1 (the chair's ruling of 2026-11-15): "absent" only where the record holds nothing of the role
+  // (`magicProvisionShown.js :: magicRoleHeld`: the economy's words, a made magical service, a printed chain note or food
+  // made by magic; a house of magic among the defences; a healing chain or note; arcane stone-shaping).
+  return !magicRoleHeld(settlement, role);
 }
 
 /**
@@ -216,4 +216,4 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   );
 }
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
-import { magicNoteShown, economicRoleBandShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
+import { magicNoteShown, economicRoleBandShown, magicRoleHeld } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home

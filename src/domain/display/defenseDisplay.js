@@ -17,6 +17,7 @@ import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 import { magicPractitioners } from '../magicReliance.js';
+import { magicServiceMade } from './magicProvisionShown.js';
 import { crimeSignalOf, criminalSeatsNotGoverning } from '../crimeSignal.js';
 import { criminalStructureKeyOf, ringHousesOf, runningCriminalChains } from '../facts/criminalStructureKey.js';
 
@@ -244,6 +245,10 @@ export function patternDeniesOrganisation(pattern) {
   return typeof desc === 'string' && PATTERN_DENIES_ORGANISATION.test(desc);
 }
 
+/** The Arcane Support row's note where no practitioner stands, and its twin where a magical service is made (BAR2-LABELS C1229). */
+export const ARCANE_NONE = 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.';
+export const ARCANE_NONE_WITH_SERVICE = 'No arcane practitioner stands with the defence. Wards, detection and counterspell are beyond its defenders.';
+
 /**
  * Supporting-capabilities cards (economic backing, arcane support, legal, medical,
  * logistics, and naval when coastal). Computed from defense scores + institution
@@ -357,7 +362,9 @@ export function deriveSupportingCapabilities(settlement) {
       // what is missing (arcane practitioners) and what follows from that specifically.
       note: arcane
         ? `${practitioners.slice(0, 2).join(', ')}. Detection, wards, counterspell.`
-        : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
+        // BAR2-LABELS (C1229, LB1's one home): where a magical service is made here (`magicServiceMade`), someone works
+        // magic, so the row says only what the defence lacks.
+        : magicServiceMade(r) ? ARCANE_NONE_WITH_SERVICE : ARCANE_NONE,
     },
     {
       // W2-C-LEAVES-SIDE (the chair's #575): the court is read off the live roster (`courtOnRoster`, below), not the flag.

@@ -12,9 +12,9 @@
  *
  * Pure: no randomness, no clock, no write.
  */
-import { defenceHoldsArcane, defenceHoldsDivine, defenceHoldsDruidic } from '../facts/magic.js';
+import { defenceHoldsArcane, defenceHoldsDivine, defenceHoldsDruidic, economyShowsMagic, magicOf } from '../facts/magic.js';
 import { MAGIC_NOTE_TRADITION } from '../facts/magicSource.js';
-import { foodMagicShare } from '../magicReliance.js';
+import { chainNeedsMagic, foodMagicShare, FOOD_SUPPLY_DEPENDENT } from '../magicReliance.js';
 
 /**
  * Whether the town holds the tradition a provision is of.
@@ -130,4 +130,107 @@ function groundDepleted(record, ground) {
  */
 export function economicRoleBandShown(record, band) {
   return (band === 'absent' || band === 'occasional') && foodMagicShare(record) > 0 ? 'common' : band;
+}
+
+// ── WHAT MAGIC DOES HERE, AS THE PAGE SHOWS IT (BAR2-LABELS LB1, the chair's ruling of 2026-11-15; vetoable by the owner) ──
+// THE ONE HOME OF THE MAGIC WORDS' FACTS. Every magic word the page prints reads what the record shows magic DOES here:
+// the share of the food magic makes (`foodMagicShare`), a house of magic among the defences (`defenceHoldsArcane`, the
+// defence's own `institutions.magicDef`), a made magical service (an active chain that needs magic, `chainNeedsMagic`),
+// and a chain card's magic note where the card prints it (`magicNoteShown`, above: a note of a tradition the town does
+// not hold is not printed, so it is not counted). Measured on the census's 720 at f8042b61a (the hand-back's truth table).
+
+/** @param {unknown} record @returns {Array<Record<string, unknown>>} */
+function activeChainsOf(record) {
+  const chains = /** @type {{ economicState?: { activeChains?: unknown } | null } | null} */ (record)?.economicState?.activeChains;
+  return Array.isArray(chains) ? chains.filter((c) => c && typeof c === 'object') : [];
+}
+
+/** A made magical service: an active chain the generator's own gate says needs magic. @param {unknown} record @returns {boolean} */
+export function magicServiceMade(record) {
+  return activeChainsOf(record).some((c) => chainNeedsMagic(c));
+}
+
+/** A house of magic among the defences: the defence's tradition, or its magic list. @param {unknown} record @returns {boolean} */
+export function magicAmongDefences(record) {
+  const listed = /** @type {{ defenseProfile?: { institutions?: { magicDef?: unknown } | null } | null } | null} */ (record)?.defenseProfile?.institutions?.magicDef;
+  return defenceHoldsArcane(record) || (Array.isArray(listed) && listed.length > 0);
+}
+
+/** The notes that claim a medical provision, and those that claim built work (every other note claims food or goods). */
+const MEDICAL_NOTES = new Set(['Divine healing supplements mundane medicine', 'Alchemical remedies supplement treatment']);
+const WORKS_NOTES = new Set(['Arcane fabrication and stone-shaping partially offset depleted extraction']);
+
+/** The chain notes the page prints (`magicNoteShown` non-empty). @param {unknown} record @returns {string[]} the record's notes */
+function notesShown(record) {
+  return activeChainsOf(record).filter((c) => { const shown = magicNoteShown(c, record); return typeof shown === 'string' && shown !== ''; })
+    .map((c) => String(c.magicNote));
+}
+
+/**
+ * THE DEPENDENTS THE PAGE BEARS OUT: the reliance reading's census (`magicReliance.js :: magicDependents`) read through
+ * what the page shows: an active chain that needs magic, a chain whose magic note prints, and the food supply where
+ * magic makes part of it. A note the card does not print (a tradition the town does not hold) is not a dependent here.
+ * @param {unknown} record the settlement record
+ * @returns {string[]} chain labels, then the food supply
+ */
+export function magicDependentsShown(record) {
+  const chains = activeChainsOf(record).filter((c) => {
+    if (chainNeedsMagic(c)) return true;
+    const shown = magicNoteShown(c, record);
+    return typeof shown === 'string' && shown !== '';
+  }).map((c) => String(c.label ?? c.chainId ?? 'a supply chain'));
+  return [...chains, ...(foodMagicShare(record) > 0 ? [FOOD_SUPPLY_DEPENDENT] : [])];
+}
+
+/**
+ * THE RELIANCE READING THE PAGE PRINTS: the one reading (`magicReliance.js :: deriveMagicReliance`) never above what the
+ * page shows magic doing (`magicDependentsShown`), by the reading's own rule: a dependent makes it relied upon, two
+ * (or the top band) with a practitioner make it integral; with none, practitioners alone make it present. Never raises.
+ * @param {unknown} record the settlement record
+ * @param {{ reading: string, practitioners: readonly unknown[] }} reliance the one reading
+ * @returns {string} the reading
+ */
+export function relianceReadingShown(record, reliance) {
+  if (reliance.reading !== 'relied-upon' && reliance.reading !== 'integral') return reliance.reading;
+  const deps = magicDependentsShown(record).length;
+  if (deps === 0) return reliance.practitioners.length > 0 ? 'present' : 'none';
+  if (reliance.reading === 'integral' && deps < 2 && magicOf(/** @type {Parameters<typeof magicOf>[0]} */ (record)).level !== 'high') return 'relied-upon';
+  return reliance.reading;
+}
+
+/**
+ * WHETHER THE RECORD HOLDS ANYTHING OF A MAGIC ROLE (a role row prints "absent" only where it holds nothing of it):
+ *   economic: the economy's own words (`economyShowsMagic`), a made magical service, a chain note the page prints, or
+ *     food made by magic; military: a house of magic among the defences; medical: an active healing chain that needs
+ *     magic, or a healing note the page prints; infrastructure: a note of arcane stone-shaping the page prints.
+ * @param {unknown} record the settlement record
+ * @param {string} role 'economic' | 'military' | 'medical' | 'infrastructure'
+ * @returns {boolean}
+ */
+export function magicRoleHeld(record, role) {
+  const notes = notesShown(record);
+  if (role === 'economic') return economyShowsMagic(record) || magicServiceMade(record) || notes.length > 0 || foodMagicShare(record) > 0;
+  if (role === 'military') return magicAmongDefences(record);
+  if (role === 'medical') return activeChainsOf(record).some((c) => chainNeedsMagic(c) && /heal/i.test(String(c.label ?? c.chainId ?? '')))
+    || notes.some((n) => MEDICAL_NOTES.has(n));
+  if (role === 'infrastructure') return notes.some((n) => WORKS_NOTES.has(n));
+  return false;
+}
+
+/** The ledger's band words, as the Magic tab's headline prints the record's own level. */
+const LEVEL_WORD = Object.freeze({ low: 'Low', medium: 'Medium', high: 'High' });
+
+/**
+ * THE MAGIC TAB'S HEADLINE WORD (LB1): the record's own level (`facts/magic.js :: magicOf`, the ledger's band), not the
+ * envelope's availability (which the envelope prints one line below, raised a step by an arcane house or lowered by
+ * want of coin). A record with no level band (none, or no dial) keeps the availability word.
+ * @param {unknown} record the settlement record
+ * @param {unknown} availability the envelope's availability band
+ * @returns {string}
+ */
+export function magicHeadlineWord(record, availability) {
+  const level = magicOf(/** @type {Parameters<typeof magicOf>[0]} */ (record)).level;
+  if (Object.hasOwn(LEVEL_WORD, level)) return LEVEL_WORD[/** @type {'low'|'medium'|'high'} */ (level)];
+  const a = String(availability || '');
+  return a.charAt(0).toUpperCase() + a.slice(1);
 }
