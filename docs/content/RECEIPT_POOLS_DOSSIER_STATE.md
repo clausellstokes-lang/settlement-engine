@@ -2910,8 +2910,8 @@ supplies the ancestry.
 3. `[visitor · colour]` Bring a complaint at {settlement} and it gets a hearing, not a favour.
 
 **`Internal Security`: court without detention** {colour}
-1. `[ledger]` {settlement} has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.
-2. `[street]` The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
+1. `[ledger · no crisis: under_siege]` {settlement} has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.
+2. `[street · no crisis: under_siege]` The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
 3. `[unfolding]` The fines {settlement} hands down cannot be enforced, so each unpaid fine makes the next one easier to ignore.
 
 **`Internal Security`: detention without process** {colour}
@@ -3051,7 +3051,7 @@ reading rather than a settled one.
 4. `[counterforce · watch · crisis: any]` There is money at {settlement} and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
 
 **`Safe`** {crisis-scoped}
-1. `[street · crisis: any · no crisis: threat, unrest]` {settlement} is a quiet town. Things are taken occasionally and the taking does not spread, because the people who would spread it are known.
+1. `[street · crisis: any · no crisis: threat, unrest]` Crime at {settlement} stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.
 2. `[ledger · crisis: any]` The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.
 3. `[visitor · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
 
@@ -5139,7 +5139,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 **DIRECTION: `worsening` · CRISIS: `famine`** {crisis: famine}
 1. `[local · tier: ≥ village]` The famine in {settlement} is getting worse: the rations shrink each week, and the queues for them grow longer.
 2. `[official]` Each week more people in {settlement} go hungry, and those in charge have not stopped it.
-3. `[trade]` Food costs more in {settlement} each week, and less of it comes in than the town needs.
+3. `[trade]` Food costs more in {settlement} each week, and there is less of it than the town needs.
 4. `[traveller]` In {settlement} you see thin faces at every door, and more of them each time you pass through.
 
 **DIRECTION: `stable` · CRISIS: `famine`** {crisis: famine}
@@ -5158,7 +5158,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 1. `[local]` The occupation of {settlement} has settled in, and nobody there expects it to end this year.
 2. `[traveller]` The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them.
 3. `[official]` {settlement}'s own leaders still protest the occupation, and the occupiers still ignore them; nothing has changed in months.
-4. `[trade]` Merchants in {settlement} pay the occupiers the same share of every sale, season after season, and have learned to price it in.
+4. `[trade · market]` Merchants in {settlement} pay the occupiers the same share of every sale, season after season, and have learned to price it in.
 
 **DIRECTION: `easing` · CRISIS: `occupied`** {crisis: occupied}
 1. `[local]` The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for questioning.
@@ -5167,8 +5167,8 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 **DIRECTION: `worsening` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
 1. `[local]` The quarrel among {settlement}'s powers grows sharper each week, and neighbours who took different sides have stopped speaking.
 2. `[official]` Each power in {settlement} now blocks the others more often than it acts, and less gets decided every season.
-3. `[traveller]` Ask who governs {settlement} and you get a different answer in every street, and the answers are angrier than they were.
-4. `[watch]` Fights between {settlement}'s powers break out more often now, and each side keeps its own people close at hand.
+3. `[traveller]` Ask who governs {settlement} and you get a different answer depending on whom you ask, and the answers are angrier than they were.
+4. `[watch]` Each of {settlement}'s powers keeps its own people close at hand now, and watches the others more warily every week.
 
 **DIRECTION: `stable` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
 1. `[local]` {settlement}'s powers have settled into a stand-off: none gains ground, and none gives any.
@@ -5240,8 +5240,8 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 
 **DIRECTION: `stable` · CRISIS: `succession_void`** {crisis: succession_void}
 1. `[official]` {settlement} still has no one in charge, and no claimant is any closer to taking the seat.
-2. `[local]` Life in {settlement} goes on without a leader: the old officers do what they did before, and nobody does anything new.
-3. `[trade]` Nothing large is agreed in {settlement} until someone is in charge, so merchants deal season to season and promise nothing longer.
+2. `[local]` Life in {settlement} goes on without a leader: what was done before is still done, and nobody begins anything new.
+3. `[trade · market]` Nothing large is agreed in {settlement} until someone is in charge, so merchants deal season to season and promise nothing longer.
 4. `[newcomer]` Ask who leads {settlement} and you hear several names, each from someone who backs a different one.
 
 **DIRECTION: `easing` · CRISIS: `succession_void`** {crisis: succession_void}
@@ -5263,10 +5263,10 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 2. `[trade]` More carts reach {settlement} again as the roads grow safer.
 
 **DIRECTION: `worsening` · CRISIS: `insurgency`** {crisis: insurgency}
-1. `[official]` Each week more of {settlement}'s officials stop answering to those in charge, and their orders go unheeded.
+1. `[official]` Each week fewer people at {settlement} answer to those in charge, and more of their orders go unheeded.
 2. `[local]` More of {settlement}'s households side openly with the power that defies the government now, and stop paying it their dues.
-3. `[trade]` Fewer merchants in {settlement} pay what the government asks, and more pay its rivals instead.
-4. `[watch]` Those in charge of {settlement} trust fewer of their own officers each week, and cannot tell which have changed sides.
+3. `[trade · market]` Fewer merchants in {settlement} pay what the government asks, and more pay its rivals instead.
+4. `[watch]` Those in charge of {settlement} trust fewer of the people around them each week, and cannot tell who has changed sides.
 
 **DIRECTION: `stable` · CRISIS: `insurgency`** {crisis: insurgency}
 1. `[official]` The quarrel over who rightly governs {settlement} has stalled: neither side gives ground, and both collect what dues they can.
@@ -5281,7 +5281,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 2. `[official]` Each week both faiths in {settlement} ask more of those in charge, and every answer angers one side.
 
 **DIRECTION: `stable` · CRISIS: `religious_conversion`** {crisis: religious_conversion}
-1. `[local]` The quarrel over {settlement}'s faith has settled into habit: each household keeps the rite it has chosen, and the neighbours do not ask.
+1. `[local]` The quarrel over {settlement}'s faith is no nearer an end: each household keeps the rite it has chosen, and neither side is winning more of them.
 2. `[official]` The contest over {settlement}'s faith is neither won nor lost; both rites are kept, and neither is gaining.
 3. `[newcomer]` Newcomers to {settlement} are soon asked which rite they keep, and the answer decides who will deal with them.
 4. `[trade]` Feast days in {settlement} are kept twice over now, once by each faith, and traders have learned to keep both.
@@ -5291,7 +5291,7 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 2. `[official]` Fewer disputes over faith reach {settlement}'s leaders now, and the two rites keep to their own days.
 
 **DIRECTION: `worsening` · CRISIS: `slave_revolt`** {crisis: slave_revolt}
-1. `[local]` The revolt in {settlement} spreads to more work gangs each week, and less of the work gets done.
+1. `[local]` The revolt in {settlement} spreads further each week, and less of the work gets done.
 2. `[official]` Each week of the revolt costs {settlement}'s owners more labour, and those in charge still have no answer.
 3. `[watch]` More of {settlement}'s enslaved join the revolt each week, and those set to watch them are too few.
 4. `[trade]` Less of what {settlement} sells is being made, and buyers have started looking elsewhere.

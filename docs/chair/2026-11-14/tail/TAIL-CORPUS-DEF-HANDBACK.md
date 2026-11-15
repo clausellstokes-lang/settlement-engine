@@ -274,3 +274,121 @@ Declared (no new words): Contested v4 `no crisis: under_siege`; Critical v3 `no 
 - DS-POW-5 council v4 ("its members cannot agree") where the cast seats one person (17 of 47): the chair names it a class
   of the RECORD; the line is left.
 
+
+---
+
+# TAIL-CORPUS-DEF-3 (the third seat, session_01ACmDYZ7SGaT7upxMDiRtAD, a child of the chair session_01ACmDYZrFEVXyZEUg1NDxxC; 2026-11-15)
+
+Continues on the same branch from **cff6cd098** (read back from origin). Scratch worktree, its own `npm ci`. The base
+census at cff6cd098 (CENSUS-3's command with `render.census3d.jsx`): 720 towns, 29,864 distinct sentences on the tabs.
+Replay probe 54,144 matches, 0 misses. The 67 named test files (59 test files run): 33 reds at the base, carried.
+INSTRUMENT ADDED: `f2.mjs <tree> <records> <out.json>` (tier, population, `market`, imports/exports counts, the crisis,
+the powers and their relationships/conflicts counts, legitimacy, conditions) beside `facts.mjs`.
+
+## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable by the owner)
+- (C14) THE COUNCIL ROWS WAIT A LITTLE LONGER: the atom `ruling body` takes NO NEW LINE until the chair says so (a measuring
+  seat is answering whether the density resize changes the governing power's one-or-many kind after the lines are
+  written). No merge for them now; when the word comes, the tip to merge is named with it. THE ONE-MEMBER COUNCIL ("its
+  members cannot agree" where the cast seats one person: 17 of 47 towns) is a class of the RECORD, named for its next
+  measure: those lines are left.
+- (C15) THE SLASH LABEL in these pools' sentences is cured at the slot's filler (`src/domain/display/stateProse/
+  powerStateProse.js`, the four call sites named above): GIVEN TO THE CIVIC DISPLAY'S SEAT; no pool is reworded round it.
+- (C16) THE ORDER: B00937, 26310, DS-CND-1; then the rows printing in FIVE TOWNS OR MORE, widest first; a row in fewer
+  than five towns waits.
+- (U1) the weekly usage warning: commit and push every batch the moment it holds, with WHAT IS LEFT current; hand back at
+  250,000; one line to the chair at the hand-back, a stop, or a question only.
+
+## Batch 4 — B00937, 26310 and DS-CND-1 (C16's first three)
+
+| row(s) | pool · line | false in (by the record) | cure | towns before → after (inventory) |
+|---|---|---|---|---|
+| B00937 (C10) | DS-DEF-3 Safe v1 "{settlement} is a quiet town." | 6 of 10 (a `plagued` or `frontier` monster threat: hamlet-18/-51/-6, town-20, city-53, metropolis-43) | REWORDED (the line is about crime; no tier noun) | 10→0 (+ the four tier folds) |
+| 26310 (X9) | DS-DEF-2 court without detention v1 "money and exile"; v2 "the purse or the road" | 4 (sieges: city-1, city-3, town-1; town-0 for v2) | DECLARED `no crisis: under_siege` on v1, v2 (v3 "the fines cannot be enforced" inherits) | tabs 58→55, 26→25; PDF+Journal 18→16, 32→31, 26→25 |
+| 07715 | DS-CND-1 worsening·insurgency v3 "Fewer merchants … pay its rivals" | 4 of 11 (no market) | DECLARED `market` | 11→7 |
+| 13414 | DS-CND-1 stable·occupied v4 "Merchants … pay the occupiers the same share of every sale" | 6 of 9 (no market) | DECLARED `market` | 9→3 |
+| 15102 | DS-CND-1 stable·succession_void v3 "merchants deal season to season" | 5 of 6 (no market) | DECLARED `market` | 6→1 |
+| 06991 | worsening·insurgency v1 "more of X's officials stop answering" | 3 of 8 (a thorp or hamlet: no officials) | REWORDED | 8→0 |
+| 22986 | worsening·insurgency v4 "trust fewer of their own officers" | 6 of 9 (thorps and hamlets of one power) | REWORDED | 9→0 |
+| 04039 | worsening·fractured v3 "a different answer in every street" | 1 of 9 (a thorp of 15) | REWORDED | 9→0 |
+| B07294 | worsening·fractured v4 "Fights between X's powers break out" | 4 of 13 (no relationship and no conflict on the record) | REWORDED (no fight claimed) | 13→0 |
+| 21712 | worsening·slave_revolt v1 "spreads to more work gangs" | 1 of 5 (a thorp of 15) | REWORDED | 5→0 |
+| 21580 | stable·religious_conversion v1 "settled into habit … the neighbours do not ask" | 5 (a Tense town whose page calls the quarrel escalating: the line claimed calm, the status is only "stable") | REWORDED | 5→0 |
+| 09250 (+ its tiers) | worsening·famine v3 "less of it comes in" | 3 of 11 (imports none: thorp-17, thorp-54, hamlet-1) | REWORDED | 11→0 |
+| (inheritor) | stable·succession_void v2 "the old officers do what they did before" | v3's inheritors: thorps and villages with no officers | REWORDED | 1→0 (the new words in 4) |
+
+STRUCK: **B20559** (worsening·fractured v1 "The quarrel among X's powers grows sharper"): TRUE by the crisis: a
+`politically_fractured` crisis IS the powers' quarrel; the empty relationships/conflicts list beside it in 3 of 7 towns is
+the record disagreeing with itself (NAMED, a class of the record).
+MEASURED BY REPLAY: court without detention v1→v3 3, v2→v3 1 (the four sieges); insurgency worsening v3→v4 2, v3→v2 2;
+occupied stable v4→v2 3, v4→v1 2, v4→v3 1; succession stable v3→v2 3, v3→v1 2 (all the no-market towns). NO OTHER POOL MOVED.
+INVENTORY DIFF (cff6cd098 → batch 4, one census each): 29,864 → 29,860; 17 gone, 13 new; the rows: 7 GONE, 2 fewer by
+exactly their measure (07715, 13414) and 15102, 26310 by exactly theirs. The only other lines in fewer towns: the patron-deity
+card's three lines in ONE town (r2r-thorp-2, 717→716): not a sentence of these pools, no draw of that town moved by
+replay: a render flake of the card, named. INHERITORS read where they print: the new words (below); court v3 in the four
+sieges ("the fines cannot be enforced": TRUE); insurgency v2 in two no-market towns, v4 (new words) in two; occupied
+stable v2 in three thorps/hamlets, v1 and v3; succession stable v1 and v2 (new words): TRUE, but see the name below.
+GUARD: tailCorpusDefGuards +5 DECLARED (each with its `instead`), +4 KEEP, +9 REWORDED: 14 red at the base, the 4 keeps
+green; 47 green after.
+PIN re-keyed by identity: `proseMoveGrammar.walker` CONTROL 4 uniform segments 569→570, share 0.665→0.666, second half
+514→515 (Safe v1 is one sentence now, so the Safe pool is uniform).
+GATES: generator 0 / `--check` 0; strict 0; type ratchet 0; eslint 0 on the touched files; presumed-things fresh 147
+stale 0 (exit 1, as the base); grid 2 falls (r2r-city-0, r2s-insurgency-metropolis-0 P7a, as the base); the named files:
+33 reds at the base, the same 33 after (the two new were the pin, re-keyed).
+NAMED (not cured): DS-CND-1 stable·occupied v2 "The occupiers in X's streets …" now prints in 11 towns, 5 of them thorps
+or hamlets (2 thorps and a hamlet at the base, unflagged by the readers): a rewording to drop "streets" is a NEW line to
+the presumed-things walker (it presumes the occupation; the register is shrink-only), a stop: left at the base's words.
+
+### New or changed lines (the owner's veto list; towns read: smallest · largest · a siege/famine/occupation)
+14. DS-DEF-3 Safe v1: "Crime at {settlement} stays small: things are taken occasionally and the taking does not spread,
+    because the people who would spread it are known." — 10: r2r-hamlet-18 · r2r-metropolis-22 (the pool admits no
+    threat or unrest crisis).
+15. DS-CND-1 worsening·famine v3: "Food costs more in {settlement} each week, and there is less of it than the town
+    needs." — 11: r2r-thorp-17 (a famine, the smallest) · r2s-famine-city-3.
+16. worsening·fractured v3: "Ask who governs {settlement} and you get a different answer depending on whom you ask, and
+    the answers are angrier than they were." — 9: r2s-politically_fractured-thorp-3 · r2r-metropolis-2.
+17. worsening·fractured v4: "Each of {settlement}'s powers keeps its own people close at hand now, and watches the
+    others more warily every week." — 13: r2s-politically_fractured-thorp-2 · r2s-politically_fractured-metropolis-2.
+18. worsening·insurgency v1: "Each week fewer people at {settlement} answer to those in charge, and more of their orders
+    go unheeded." — 8: r2r-thorp-22 · r2s-insurgency-city-1.
+19. worsening·insurgency v4: "Those in charge of {settlement} trust fewer of the people around them each week, and
+    cannot tell who has changed sides." — 11: r2s-insurgency-thorp-2 · r2r-city-33 · r2s-insurgency-hamlet-0 (a famine too).
+20. stable·religious_conversion v1: "The quarrel over {settlement}'s faith is no nearer an end: each household keeps the
+    rite it has chosen, and neither side is winning more of them." — 5: r2s-religious_conversion-village-0 ·
+    r2s-religious_conversion-metropolis-1.
+21. worsening·slave_revolt v1: "The revolt in {settlement} spreads further each week, and less of the work gets done." —
+    5: r2s-slave_revolt-thorp-1 · r2s-slave_revolt-metropolis-2.
+22. stable·succession_void v2: "Life in {settlement} goes on without a leader: what was done before is still done, and
+    nobody begins anything new." — 4: r2s-succession_void-thorp-3 · r2s-succession_void-town-3.
+Declared (no new words): DS-DEF-2 court without detention v1, v2 `no crisis: under_siege`; DS-CND-1 insurgency
+worsening v3, occupied stable v4, succession stable v3 `market`.
+
+## Verified for batch 5 (DS-DEF-2, the widest rows by C16), not yet cured
+- STRUCK, true by the record: **B01461** (CHAIN defence supplied v2, 32 towns: `defenseProfile.chainModifiers.military > 0`
+  in all 32; the chains' "vulnerable" is a fragility, not a failure); **20442 20443** (CHAIN defence short v3, 14 + 14:
+  `chainModifiers.military < 0` in all; the reader read the prosperity and a bowyer, not the chain); **23535** (walls with
+  citizen militia v1, 18: walls on the record in all 18; "inadequate against anybody who arrives professionally" is the
+  Vulnerable the reader saw).
+- TO CURE: **01607** (Economic Survival WEAK v1 "paid late … people owed wages", 15: 13 of 15 keep only an unpaid militia
+  or levy: reword v1, v2 to claim no wages owed); **01541 B19529** (CHAIN food trades failing v1, v2 "little food is being
+  put by", 17 + 9: stores of 6 to 15 months in every printing town: reword to claim the shortfall, not the stock);
+  **B06130** (Beasts plagued perimeter AND force v2 "not an emergency arrangement", 8: 2 under a monster_pressure or a
+  wartime crisis: declare `no crisis: monster_pressure · no crisis: wartime`); **14935** (STRONG v8 "Nobody … lies awake
+  over a lean year", 15: 2 with a food deficit, `pressured`: declare `food: ≥ secure`).
+- NAMED, a class with two homes: **20245 21035 22321** (STRONG v12 "went into this trouble with money in hand", 43 towns,
+  12 Poor or Struggling) and its sibling v3 (41, 15): the Economic Survival score (`defenseGenerator.js`, `W.floors.sup`)
+  against the prosperity ladder. v1 floors at `prosperity: ≥ moderate`, v9 at `≥ poor` (earlier seats); flooring v3 and
+  v12 leaves a Struggling town in a crisis MUTE, and no twin is true without knowing what the score counts: the chair's.
+
+## What is left (after batch 4; THE CURRENT LIST)
+1. Batch 5 as verified above (DS-DEF-2: 01607, 01541, B19529, B06130, 14935 to cure; B01461, 20442, 20443, 23535 to strike).
+2. Then by C16 (five towns or more, widest first), at cff6cd098's census: 03383 DS-DEF-5 ARCANE alchemists v1 (17);
+   28625 DS-DEF-1 readiness STRONG v2 (15); 23021 DS-DEF-11 WALLED-QUIET v1 (14); 20059 DS-DEF-3 COMPOUND succession v3
+   (13); 00779 DS-DEF-11 UNWALLED-SMALL v5 (12); B00729 DS-DEF-3 COMPOUND migration v1 (12); B20295 DS-DEF-6 port only v2
+   (11); B14096 / 00985 DS-DEF-8 QUARANTINE v2 / v1 (11, 9); 23379 DS-DEF-8 RELIGIOUS UPHEAVAL v3 (10); 14024 DS-DEF-8
+   COMMAND SPLIT v1 (10); 02617 / 20576 DS-DEF-5 free company v1 / v2 (9, 9); 06123 / B05859 DS-POW-6 capture RECOVERING
+   (9, 6); B21649 DS-DEF-4 organized v4 (9); 20485 DS-FTH-4 heresy hunted v5 (8); 22361 DS-POW-5 merchantArmy v1 (7);
+   11931 DS-DEF-5 militia PRESENT v3 (7); 15476 DS-DEF-3 COMPOUND plague v2 (6); 28629 DS-DEF-12 CAPACITY enough v2 (5);
+   B19173 DS-FTH-4 crusaderSynthesis v1 (5); 00714 DS-POW-6 criminal revenue v1 (19: a PAIR with another writer's famine
+   line: read it first).
+3. WAITING: the council and autocrat rows (C14; 04066 autocrat v2 among them); DS-DEF-9 magicDependency (C9: B14709 04098
+   11437 B10908 B03973); the Economic Survival STRONG class (above, the chair's); 44 rows in fewer than five towns (C16).

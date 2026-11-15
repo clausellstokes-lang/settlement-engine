@@ -1259,6 +1259,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Internal Security: court without detention": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "{settlement} has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile, and both of them fall unevenly.",
           "slots": [
             "settlement"
@@ -1267,6 +1270,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.",
           "slots": [],
           "vid": 2
@@ -2587,7 +2593,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: threat, unrest"
           ],
-          "text": "{settlement} is a quiet town. Things are taken occasionally and the taking does not spread, because the people who would spread it are known.",
+          "text": "Crime at {settlement} stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.",
           "slots": [
             "settlement"
           ],
