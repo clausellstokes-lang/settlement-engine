@@ -94,6 +94,23 @@ Re-recorded (ruling SW1): the five pin values, and a `note` on each of the three
 After: the contract 79 of 79; `node scripts/generate-dossier-state-prose.mjs --check` exit 0 ("2959 variants").
 No `src/` line touched; nothing a town prints moves in this commit (the twins already printed at the tip).
 
+## The chair's second list (items 9-13), run alone at 22d527656 (this branch merged with the line at ae6f0adc8)
+
+| # | file | at the merged tip | class |
+|---|---|---|---|
+| 9 | `tests/lint/sourceCitationIntegrity.walker.test.js` | green already | — |
+| 10 | `tests/lint/noLegacyFactionReaders.walker.test.js` | red, 1: `src/domain/crimeSignal.js:85 factions` | (iii) named |
+| 11 | `tests/lint/seedLoopTotality.walker.test.js`, `tests/lint/negativeAssertionAnchor.walker.test.js` | green already | — |
+| 12 | `tests/lint/recordRegisterTotality.walker.test.js` | green already | — |
+| 13 | `tests/lint/styleLaw.walker.test.js` | green already | — |
+
+**10, named, not cured here.** The flagged read is `crimeHasThievesGuild`'s `signal?.factions` in
+`src/domain/crimeSignal.js`, born at 112ac8cfe (TAIL-CLOSE-SRC-4 · A, "npcGenerator's thieves'-guild test reads
+the crime home", 2026-11-15 08:03). It reads the CRIME SIGNAL's own `factions` property (the criminal factions'
+names, `crimeSignalOf`), not the NPC grouping `settlement.factions` the walker retires, but the walker cannot tell
+the two apart by shape. The cure belongs in that seat's own lines (rename the signal's property, or a reviewed
+row in the walker's core, which is not this seat's door to widen); the src seat is live, so it is left to it.
+
 ## Not reached (stopped at the seat's time budget)
 
 - The brief's "also yours": every other file under `tests/lint/` and `tests/joins/` outside the other seats' list was
