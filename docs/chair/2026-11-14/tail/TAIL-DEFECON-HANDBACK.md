@@ -398,7 +398,7 @@ THE RULINGS (the chair's, 2026-11-15 04:40 UTC, on the third measure's report; e
 | cure | commit | field diff (births, 720) | the report's? |
 |---|---|---|---|
 | R3 c3a | 7ce6db273 (+ e1577f2cd: under the module ceiling, byte-identical) | 226 towns, 7 families: `economicViability.metrics.foodBalance` 226, `.summary` 23, `.issues` 22, `.dependencies` 15, `.plotHooks` 10, `history.currentTensions` 9, `history.siegeNarrative` 1; `viable` and the stores unmoved | YES, family for family |
-| R2 c2a | (this commit) | 229 towns, 2 families: `economicState.incomeSources` 229, `economicState.economicComplexity` 35; prosperity unmoved | YES |
+| R2 c2a | 9cc8c6826 | 229 towns, 2 families: `economicState.incomeSources` 229, `economicState.economicComplexity` 35; prosperity unmoved | YES |
 
 ### R3 · one food ledger (c3a, and one rule more)
 
@@ -558,11 +558,36 @@ Batch 1:
 
 - The page-census grid's register: two falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) — stale low, NAMED, not re-taken (re-derived at the close).
 
-## What is left (TAIL-DEFECON-5, 2026-11-15)
+## What is left (TAIL-DEFECON-5, HANDED BACK by time after R2, 2026-11-15 ~05:50 UTC)
 
-Pushed: the merge 694621784; R3 (7ce6db273, e1577f2cd); R2. LEFT, in this order: R1 (c1b), R5 (c6a), R4 (c4a); then the census after all
-five and the inventory diff; then the hand-back's veto list. The page census BEFORE: `/home/user/inst5/cbefore` (the
-container's; re-made by `census3.sh` at 694621784).
+Pushed: the merge 694621784; R3 7ce6db273 and its ceiling e1577f2cd; R2 9cc8c6826 (its first push was refused by the type
+ratchet, `isCriminal` on two rows' JSDoc types: fixed in the unpushed commit, behaviour unchanged). The meter read 0;
+judged by time (about seventy minutes): no third cure could carry its tests, gates and push inside it.
+
+LEFT, in this order (the rulings above stand; each patch applies clean at 9cc8c6826, `git apply --check`):
+1. (R1) c1b, `defenseGenerator.js :: computeDefenseScores` (LENT). Expected 55 / 30 / 17, readiness unmoved; READ the 30
+   guard lines and the 17 conditions where they print. Its comment to be put in the file's form (the patch's names the
+   measure). The reds to expect: the test files naming `scores.economic` / `defenseScoreBands` (not yet run).
+2. (R5) c6a, `economicState.js` (one line, no line added: the module is at 885 of the 900 ceiling). Expected 41, one field.
+3. (R4) c4a, `foodGenerator.js` (LENT). Expected `foodRecord.magicPct` 22. Check `foodGenerator.js` against any size pin.
+4. THE CENSUS AFTER all five (`census3.sh` at the tip, `inventory.py`, `inventory_diff.py before.json after.json`), read
+   through the inventory diff: what each move takes off the page. THE BEFORE is taken: `/home/user/inst5/cbefore` and
+   `/home/user/inst5/before.json` (29,945 tab sentences at 694621784; the container's: re-made by `census3.sh` at
+   694621784 if lost). The births BEFORE: `/home/user/inst5/b0` (694621784), after R3 `b3`, after R2 `b2s`.
+5. The veto list: the five moves with their counts (R3 226 towns, R2 229; the rest when made). No sentence was written by
+   R3 or R2: their moved lines are figures in existing lines (listed in their sections above).
+
+NAMED, not this group's files (from R3): `src/domain/viabilitySummary.js:50` (its own per cent, no floor: 4 towns' record
+summary "0% … remains uncovered"; on no surface); the writer's rounding in `foodGenerator.js` (17 small towns' `deficitPct`
+against its pounds). TESTS: the lesson of R3's ceiling: a cure's test list must include `tests/generators/economicStructure.test.js`
+(size pins name no file).
+
+THE INSTRUMENTS (this seat's): `git archive` CENSUS-3, READ-ALL, RECORD-MEASURE-1 (births-only.sh, fielddiff.mjs, load.cjs)
+and RECORD-MEASURE-3 (the patches) into `/home/user/inst5`; `CENSUS3_PROBES=<CENSUS-3> sh births-only.sh <tree> <out>`
+(~1 min); `node fielddiff.mjs <a>/corpus.ndjson.gz <b>/corpus.ndjson.gz 3`. Ad hoc checks in `/home/user/inst5/scripts`
+(movedtext.cjs: a field's strings that left and arrived, by town; pcttab.cjs: the view against the tab's row; inv.mjs:
+the food invariants), not committed. Work tree `/home/user/wt5` (local branch `tdc5`, pushed by explicit refspec to
+`lane/tail-defecon-2026-11-14`; the main checkout holds that branch name); the census base tree `/home/user/wt5base`.
 
 ## What is left (TAIL-DEFECON-4, after batch 4, 2026-11-15)
 
