@@ -106,9 +106,10 @@ export function econOrdinaryTimesLine(town, eco) {
  */
 export function fullCardWordUnderSiege(town, card) {
   if (!town || !card || !tradeStoppedHere(town)) return null;
-  const reading = resourceWorkReading(/** @type {any} */ (town), card.rawResource);
+  const reading = resourceWorkReading(/** @type {import('./validationOnPage.js').PageRecord} */ (town), card.rawResource);
   const words = chainsWorking(town, reading.keys, reading.good)
-    .map((c) => String(chainCardUnderSiege(town, /** @type {Record<string, unknown>} */ (c), chainAsShown(/** @type {any} */ (c), /** @type {any} */ (town)))?.status ?? ''));
+    .map((c) => /** @type {Record<string, unknown>} */ (c))
+    .map((c) => String(chainCardUnderSiege(town, c, chainAsShown(c, town))?.status ?? ''));
   if (words.length === 0 || words.some((w) => CARD_STILL_WORKING.has(w) || w === '')) return null;
   return words[0];
 }
