@@ -1,0 +1,13 @@
+{"id":"00148","town":"r2s-under_siege-thorp-3","sev":"MED","kind":"STATE","why":"claims some trade done out of sight; INCOME is Harvest 100% with no black-market or shadow source, and no such chain in LAND","other":""}
+{"id":"00070","town":"r2s-succession_void-thorp-1","sev":"MED","kind":"LACKS","why":"presumes a road that brings trade; trade access is isolated, exports none, imports none","other":""}
+{"id":"00735","town":"r2s-under_siege-thorp-1","sev":"LOW","kind":"BROKEN","why":"'supplied by Access to a house of worship' prints a house label mid-sentence with capital A; the thorp has only access to a neighbour's church","other":""}
+{"id":"00712","town":"r2r-thorp-46","sev":"LOW","kind":"STATE","why":"presumes a road bringing in some goods; trade access isolated, imports none, so nothing is brought in by any road","other":""}
+{"id":"00420","town":"r2s-famine-thorp-0","sev":"MED","kind":"STATE","why":"offers the smell of the catch and drying nets under a famine whose failed source is fish; the line offers the food that failed","other":""}
+{"id":"00021","town":"r2r-thorp-40","sev":"LOW","kind":"STATE","why":"names a past quarrel between these two people; QUARRELS none, TENSIONS and PAST record no such quarrel, and Kozlov (fence) sits on no power","other":""}
+{"id":"00644","town":"r2r-thorp-19","sev":"MED","kind":"STATE","why":"says the thorp's living is the road; INCOME is Harvest 76%, Toll Revenue 24%, so the living is mostly the harvest","other":""}
+{"id":"00719","town":"r2r-thorp-39","sev":"LOW","kind":"STATE","why":"'a little left over' and 'subsistence living'; FOOD surplus 22%, exports grain surplus, Toll Revenue 24%, prosperity Moderate","other":""}
+{"id":"00001","town":"r2r-thorp-43","sev":"MED","kind":"STATE","why":"'long and steady' history bar The Migration; PAST also records a Succession Crisis 69 years ago and CRISIS is Recently Betrayed, stability Shaken","other":""}
+{"id":"00147","town":"r2r-hamlet-0","sev":"MED","kind":"STATE","why":"claims some trade done out of sight; INCOME is Agricultural Rents 76% and Toll Revenue 24% with no shadow source, and no black-market chain in LAND","other":""}
+{"id":"00038","town":"r2r-thorp-47","sev":"LOW","kind":"STATE","why":"carts bring in 'about a third of the rest'; FOOD brought in 5% of a 10% shortfall (with magic 2%, gap 3%) is half","other":""}
+{"id":"00194","town":"r2s-under_siege-hamlet-2","sev":"LOW","kind":"LACKS","why":"an old judge sits at a gate; GOVERNMENT and HOUSES list no court or judge, only the village headman who settles disputes","other":""}
+{"id":"DONE","lines":1404,"blocks":65,"flags":12}
