@@ -82,6 +82,7 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/data/factionLabelSiblings.js', name: 'FACTION_LABEL_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/institutionDescVariants.js', name: 'DESC_VARIANT_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/institutionDescVariants.js', name: 'DESC_VARIANT_DECLARATIONS', kind: 'column' },
+  { module: 'src/data/institutionDescVariants.js', name: 'DESC_LATE_SIBLINGS', kind: 'siblings' }, // TAIL-HOUSES-5 (H20): the late re-read's house descriptions (read after the powers settle)
   { module: 'src/data/institutionDescColour.js', name: 'DESC_VARIANT_COLOUR_DECLARATIONS', kind: 'column' }, // CENSUS-4h unit 4: R-AO's colour marks
   { module: 'src/data/institutionServices.js', name: 'SERVICE_DESC_SIBLINGS', kind: 'siblings' },
   // W2-FIX-DATA-6 (the chair's ruling on REVIEW-W2-FIX-DATA-34520a697 H1: a table whose rows print on a page is inside the
