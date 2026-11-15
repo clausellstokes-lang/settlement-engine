@@ -287,7 +287,9 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // RE-KEYED 2026-11-13, STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat), hookThemeDraws: the lane
     // moves the one-hook-per-card total by -9 on its base (2157 -> 2148: the re-dealt casts); composed over point 46's 2116 it
     // reads 2107, measured by this file's own corpus at the merged tree; 0 hookless still.
-    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(2107);
+    // RE-KEYED 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the round gives a face to every seat of power that had none, so the cast, and with it
+    // the one-hook-per-card total, 2107 -> 2147, measured by this file's own corpus at the golden's tree 8c11f73ea; 0 hookless still.
+    expect(total, 'the corpus NPC-hook total moved — HK-3 must never drop a hook').toBe(2147);
     expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(HOOK_DUPLICATES_AT_TIP);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
@@ -369,9 +371,11 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // the car's tip is 2157 cards, 0 hookless, 2157 hook-bearing (2159 / 16 / 2143 at lane 1), and total === npcTotal.
     // 2157 -> 2116 at STYLE-2-MERGE point 46 (the dual hat: the office face not minted where a house leads; 0 hookless still).
     // 2116 -> 2107 at STYLE-2-MERGE point 47 (the COHERENCE-AGREE re-dealt casts, -9 as on the lane's base; 0 hookless still).
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2107);
+    // 2107 -> 2149 at the close of the tail round, 2026-11-15 (TAIL-CLOSE-DOORS-4, the owner's word of 06:00 UTC: a face for every seat of power),
+    // measured by this file's own corpus at the golden's tree 8c11f73ea; the hook total above reads 2147 (the hookless arm below is the law's, not re-taken).
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(2149);
     expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(0);
-    expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2157 = the cast at the car\'s tip; 2116 at STYLE-2-MERGE point 46; 2107 at point 47)').toBe(2107);
+    expect(npcTotal - hookless, 'a hook-bearing NPC was dropped (561 at every step of the rung-1 window; 2157 = the cast at the car\'s tip; 2116 at STYLE-2-MERGE point 46; 2107 at point 47; 2147 at the close of the tail round)').toBe(2147);
     expect(total, 'one plot hook per card (PEOPLE-3): the hook total is the cast').toBe(npcTotal);
   });
 
