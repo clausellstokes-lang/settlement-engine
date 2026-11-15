@@ -397,8 +397,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // point 47 — the line f572d12b7 reads 329, the COHERENCE-AGREE lane's own tip 69b53decd 330 (green there), the merge 22cc9ef7d 332:
     // the two re-deals of the cast and the resource roll the E-rows edit interact (not attributed; not in the lane's draft).
     // mixedOutside and settledLive measured empty after.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(332);
-    expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 332 -> 327, measured
+    // by this arm's own census at the golden's tree 8c11f73ea: the round's re-drawn casts (a face for every seat of power) and economy fields.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(327);
+    expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(139); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 133 -> 139, measured by this file's own census at the golden's tree 8c11f73ea
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
     const control = mergeTree({ population: { total: 10, note: 'kept' } }, { population: { total: 5, note: 'kept' } }, { population: { total: 5, note: 'moved' } }).receipts;
@@ -438,7 +440,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // STYLE-2 records called these figures "the base's, unchanged" while the values moved): {32, 6} -> {31, 6}
     // at FIX-FOOD-ISOLATION's merge c6e8a4ad6 (501c97412 reads 32): town|germanic|forest|isolated leaves declared-only, one
     // of the twelve forest-isolated towns that lane's record says moved. Unmoved to the tip.
-    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 31, E8: 9 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): E8 6 -> 9 (the draft: A4's E8 5 -> 9 on the lane's base)
+    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 32, E8: 10 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): {31, 9} -> {32, 10}, measured by this arm's own census at the golden's tree 8c11f73ea (the round's re-drawn casts and economy fields); STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): E8 6 -> 9 (the draft: A4's E8 5 -> 9 on the lane's base)
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
@@ -453,11 +455,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // car 1 -> {28, 8} car 2 -> {14, 2} car 3 90dc22f18 -> {15, 2} car 1b-2 -> {19, 4} PINS -> {22, 4} car 3 I7 -> {18, 3}
     // F6; steps {104, 36} -> {72, 12} at the same steps; every one still EXHAUSTED; the live residue 35 -> 21, all
     // V-DEFENSE-INST. The layer channel is clean at every stage.
-    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 21, E8: 3 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as mergeLadderHeldKeys A2: E7 18 -> 21
-    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 84, E8: 12 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations, four seats each: E7 72 -> 84
-    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 21, E8: 3 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as mergeLadderHeldKeys A2: E7 18 -> 21
-    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(24); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations (E7 21 + E8 3), equal to the lane's own tip: 21 -> 24
-    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 24 }); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations (E7 21 + E8 3): 21 -> 24
+    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 22, E8: 5 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): {21, 3} -> {22, 5}, measured by this file's own census at the golden's tree 8c11f73ea, as mergeLadderHeldKeys A2; STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as mergeLadderHeldKeys A2: E7 18 -> 21
+    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 88, E8: 20 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): {84, 12} -> {88, 20}, the same escalations, four seats each; STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations, four seats each: E7 72 -> 84
+    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 22, E8: 5 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): every escalation still EXHAUSTS, {21, 3} -> {22, 5}; STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as mergeLadderHeldKeys A2: E7 18 -> 21
+    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(27); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the same escalations (E7 22 + E8 5): 24 -> 27; // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations (E7 21 + E8 3), equal to the lane's own tip: 21 -> 24
+    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 27 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): (E7 22 + E8 5): 24 -> 27; // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations (E7 21 + E8 3): 21 -> 24
   }, ARM_TIMEOUT);
 
   it('A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted', () => {
@@ -579,7 +581,9 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-13, STYLE-2-MERGE point 47 (re-keyed BY MEASUREMENT, STYLE-2-MERGE-11, the chair's ruling (3) on STOP 47d): COMPOSED at
     // point 47 — the line f572d12b7 reads [684, 257, 2168], the COHERENCE-AGREE lane's own tip 69b53decd [684, 325, 2077], the merge
     // 22cc9ef7d [682, 269, 2181]: the two re-deals interact (PLAUSIBLE per component, CONFIRMED per point). The arm's later expects run green.
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([682, 269, 2181]);
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): [682, 269, 2181] -> [695, 275, 2173],
+    // measured by this arm's own census at the golden's tree 8c11f73ea: the round's re-drawn casts and ties the E-edits reach.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([695, 275, 2173]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
@@ -600,7 +604,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; masked behind A7's first figures until they were
     // re-keyed above): 71 -> 49 at the COHERENCE-POWERS merge 6aeaa4154 (the dual hat re-deals the cast, so the role edit reaches
     // the crisis cast on fewer readings); 3575cf061 reads 71. The two dormant membership edits still reach none.
-    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([49, 0, 0]);
+    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([42, 0, 0]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 49 -> 42, measured by this file's own census at the golden's tree 8c11f73ea (the round's re-drawn casts); the two dormant membership edits still reach none
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
     // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
@@ -631,7 +635,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-13, STYLE-2-MERGE point 47 (re-keyed BY MEASUREMENT, STYLE-2-MERGE-11, under the chair's ruling (3) on STOP 47d for this
     // arm's readings, unmasked by A7's first re-key): COMPOSED at point 47 — the line f572d12b7 reads [135, 151], the COHERENCE-AGREE
     // lane's own tip 69b53decd [145, 155], the merge 22cc9ef7d [129, 149]: the two re-deals of the casts the chains ride along interact.
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([129, 149]);
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([129, 143]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): [129, 149] -> [129, 143], measured by this file's own census at the golden's tree 8c11f73ea; chains and leaves stay unequal
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {
@@ -670,10 +674,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // STYLE-2 records called these figures "the base's, unchanged" while the values moved): 21/36 -> 20/36 at
     // FIX-FOOD-ISOLATION's merge c6e8a4ad6 (501c97412 reads 21/36): legitimacy scores {25, 62} gone, {42} new; readiness
     // unmoved. Unmoved to the tip.
-    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([20, 32]); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; the draft names it for the merge seat): measured at the signed tree EQUAL to the lane's own tip 69b53decd: readiness 36 -> 32, legitimacy 20 held
+    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([26, 32]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): legitimacy 20 -> 26, readiness 32 held, measured by this arm's own census at the golden's tree 8c11f73ea (the round's re-drawn powers); STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; the draft names it for the merge seat): measured at the signed tree EQUAL to the lane's own tip 69b53decd: readiness 36 -> 32, legitimacy 20 held
     // (b) the witnessed score set of the ladders, RECORDED (charter addenda 71 and 73)
     expect([Math.min(...witnessed.legitimacy), Math.max(...witnessed.legitimacy)]).toEqual([0, 75]);
-    expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([7, 83]);
+    expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([7, 88]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the witnessed readiness ceiling 83 -> 88, measured by this file's own census at the golden's tree 8c11f73ea
     // (c) the duplicated-leaf sweep, RECORDED (charter addendum 38), over the table's own producer
     const leafReaders = {};
     for (const [id, meta] of Object.entries(CHECK_META)) for (const path of meta.paths || []) leafReaders[path] = [...(leafReaders[path] || []), id];
