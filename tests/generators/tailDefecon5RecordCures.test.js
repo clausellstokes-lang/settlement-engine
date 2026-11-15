@@ -14,6 +14,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { foodRowShown } from '../../src/domain/display/foodRowShown.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // The census's 720 configuration (SECOND-WAVE-CENSUS births.mjs): every random dial on.
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -59,7 +60,8 @@ describe('(R3) one food ledger: the viability reads the writer\'s split, and its
     test(`${seed}: the view's shortfall is ${short} lb/day (the tab's), not ${old}`, () => {
       const l = ledgers(towns[seed]);
       expect(l.tabShort).toBe(short);
-      expect(l.viewShort).not.toBe(old);
+      // the old figure is gone from the view's shortfall, anchored on the tab's figure the same view now holds (TAIL-DEFECON-6)
+      expectAbsentWithAnchor([l.viewShort], old, short, `${seed}: the view's shortfall`);
       expect([l.viewShort, l.viewPct, l.viewImport]).toEqual([l.tabShort, l.tabPct, l.writerImport]);
     });
   }
