@@ -734,7 +734,7 @@ export const generatePowerStructure = (
 
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
-  settleClaimsToLabel(factions, tier, lowerInstNames); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
+  settleClaimsToLabel(factions, tier, lowerInstNames, publicLegitimacy); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
   annotateFactionStanding(factions, standingForce); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort
 
   const safetyRatio = safetyRatioOf(instFlags);
