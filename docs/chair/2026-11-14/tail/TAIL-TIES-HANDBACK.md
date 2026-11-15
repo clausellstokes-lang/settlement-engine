@@ -116,6 +116,10 @@ and keeps this hand-back: its batches are headed "TAIL-TIES-4".
   720 of 720) and takes new lines; not to be keyed on: the governing power's capture state and its legitimacy crisis note.
 - **(T21)** THEN the worklist's rows by width (the exports' rows of these files with a batch of the same writer); a row
   printing in fewer than five towns waits.
+- **(P26)** (02:42 UTC) ONE BOUNDARY: in `src/data/powerSiblings.js` (this group's file) the TWO TABLES `FACTION_DESC_SIBLINGS`
+  and `BASELINE_CONFLICT_SIBLINGS` are LENT to the powers' governance seat (TAIL-POWERS-4, lane/tail-powers-2026-11-14): its
+  files read them, and four rows named for it are written there. DO NOT TOUCH those two tables; the rest of the file stays
+  this group's. A row of this group written in one of them is NAMED for that seat. (TAIL-TIES-4 touched neither.)
 - **(U1)** the account's weekly usage warning is on: commit and push every batch the moment it holds, WHAT IS LEFT current in
   the same push; hand back at 250,000 of the count (or about seventy minutes); one line to the chair at the hand-back, a stop
   or a question.
@@ -477,6 +481,9 @@ hookThemeDraws pin:no-hook-is-lost 1, presumedThings walker 3) and no other.
 - (T6) and X9: TAKEN by TAIL-TIES-2 (its batch 1 above; X9's rows of other writers are in "What is left").
 
 ## What is left of the worklist (TAIL-TIES-4, at its batch 1)
+
+TAIL-TIES-4 HANDED BACK at 14724c194 + this note (about seventy minutes: the meter read 0), before a batch it could not finish
+(a census is 22 minutes). The successor's first act: a fresh before-run at the tip; then the rows below, widest first.
 
 - DONE: READ-ALL-4's three rows (T18), the role-based military tie rows (T19, decided (B)), 17103 / X9 11965 (T21).
 - NEXT BY WIDTH (T21):
