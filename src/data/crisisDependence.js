@@ -1385,6 +1385,10 @@ export const INCOME_DEPENDENCE = Object.freeze({
   "Grain Sales": Object.freeze([GRAIN]),
   "Guild Fees": NONE,
   "Guild Licensing": NONE,
+  // TAIL-CRISIS-7: TAIL-DEFECON-2's D10 (df2fa5ca) re-titled the small places' rents row "Harvest" where no lord's man
+  // stands ("What the households grow and raise on their holdings"): it lives on the crops and the herds, the food a
+  // famine fails (grain, or a famine naming no source; livestock). The land's own work: a siege or an outbreak stops neither.
+  "Harvest": Object.freeze([GRAIN, LIVESTOCK]),
   "Herbalist & Apothecary": NONE,
   "International Commerce": Object.freeze([GOODS]),
   "Iron & Metalwork": NONE,

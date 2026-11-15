@@ -69,7 +69,9 @@ const MARKED = [
   ['r2s-plague_onset-city-0', 'services', 'Performers, games, and live music at multiple venues nightly.', OUTBREAK], // 15641
   ['r2s-plague_onset-city-0', 'institutions', 'Merchants from abroad. Letters of credit are honoured.', OUTBREAK],
   ['r2s-famine-hamlet-0', 'services', 'Preserved fish for travel or winter.', FAMINE], // B15064 (the famine failed the fish)
-  ['r2s-famine-hamlet-0', 'institutions', 'A crude landing hung with racks for drying and salting the catch. Near water, it is the chief source of protein.', FAMINE], // HOUSES B13370
+  // re-keyed by identity (TAIL-CRISIS-7): the same house in the same town, its description re-said in TAIL-HOUSES-4 H17's
+  // hedge where the fisheries are spent (ba3af420, landed at d5ec9c7f3): a declared rewording of the row, not of its mark
+  ['r2s-famine-hamlet-0', 'institutions', 'A crude landing hung with racks for drying and salting the catch. Near water, and whenever fish can be had, it is the chief source of protein.', FAMINE], // HOUSES B13370
   ['r2r-village-58', 'services', 'Grain sold by the sack to a household, straight from the field at harvest.', FAMINE], // 09820 (a famine naming no source failed the crops)
 ];
 /** (seed, tab, a description that must print with NO mark before it): what prints instead of a mark. */
@@ -270,11 +272,13 @@ describe('TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on
     expect([...chainIds].filter((i) => !chains.has(i)), 'a chain with no declaration').toEqual([]);
     expect([...chains].filter((i) => !chainIds.has(i)), 'a declaration naming no chain').toEqual([]);
     // the titles: every quoted title in a `source:` of the economy's two writers (ternaries included), the kept rows'
-    // titles, the house-of-work label and the five criminal labels
+    // titles, the house-of-work label and the five criminal labels. A `source:` ends at its statement's end too (TAIL-CRISIS-7):
+    // `source: entry.source,` in an options call ran on past TAIL-DEFECON-4's prosperity labels (b40f795b, landed at
+    // 131dfdbb7) and read 'Subsistence', 'Struggling' and 'Poor' as titles; bounded at `;`, no title the economy writes is lost
     const titles = new Set([...GOOD_SOLD_TITLES, HOUSE_OF_WORK_LABEL, ...CRIMINAL_INCOME_LABELS]);
     for (const file of ['economicState.js', 'tradeGoods.js']) {
       const src = fs.readFileSync(path.resolve(__dirname, '../../src/generators/economy', file), 'utf8');
-      for (const m of src.matchAll(/\bsource:([\s\S]*?)(?:,\s*(?:percentage|desc)\b|\n\s*\})/g)) for (const q of m[1].matchAll(/'([A-Z][^']*)'/g)) titles.add(q[1]);
+      for (const m of src.matchAll(/\bsource:([\s\S]*?)(?:,\s*(?:percentage|desc)\b|\n\s*\}|;)/g)) for (const q of m[1].matchAll(/'([A-Z][^']*)'/g)) titles.add(q[1]);
     }
     const declared = new Set(Object.keys(INCOME_DEPENDENCE));
     expect([...titles].filter((t) => !declared.has(t)), 'an income title with no declaration').toEqual([]);
