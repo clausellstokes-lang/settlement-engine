@@ -115,6 +115,7 @@ The close found three more reader gaps that the next round should rule on:
   - **Fresh:** `src/domain/facts/magic.js` `house: academy`, the literal `'academy of magic'`. It is a house-name entry of `ARCANE_GUILD_HOUSES`, which SRC-3 moved verbatim from `economy/economicState.js` (`e28552112`), so in `magic.js` it is the round's (B).
   - Measured by the same script (`measure-061db1367.json`): printed in 58 of 1,080 births, against in 0. The "printed" towns are towns whose prose names the house, and the house stands in each. Banked **close-true** in its own commit. Its table is the second one at the end.
   - After it: door `--check` exit 0 (all zero), and **the walker 43 of 43** (exit 0).
+- **The join at `22b3cc82e`** (JOIN-11 points 3–4: TAIL-CLOSE-SRC-4, TAIL-TIES-10) merged in (a merge commit): no fresh or stale row. The door's `--check` exits 0 and **the walker reads 43 of 43**.
 
 ## THE TABLE (every fresh row)
 
