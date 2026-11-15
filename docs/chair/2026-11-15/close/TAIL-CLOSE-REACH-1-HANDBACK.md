@@ -34,7 +34,12 @@ sentence) was struck because the instrument now calls it LIT. I measured the cau
 The function that reads the sentence (`composeMaterialTruth`) is called by **no page**. So the sentence is still unshown.
 The strike is the instrument's verdict, not a new page.
 
-**Readers with no writer (instrument two).** *(in progress; this section is completed in the next push)*
+**Readers with no writer (instrument two).** No page shows a wrong or empty value because of tonight's findings. All
+38 new reads are spare fallbacks behind a key that IS written ("the faction's name, else its `name`"), or reads whose
+writer exists where the instrument cannot see it (a data table, the store's config, a merged record). So nothing was
+cured and no page line moved. **The instrument cannot be re-frozen tonight:** seven of its banked rows were lost by the
+detector while their reads still stand in the PDF's body slices. A re-freeze would record that loss as a repair. Those
+seven are the chair's to rule (listed below).
 
 ## INSTRUMENT ONE — WRITERS WITH NO READER (`scripts/check-writer-reach.mjs`)
 
@@ -92,3 +97,53 @@ siblings the same way.
      guide's `settlement.culture?.label` (`composeIdentity`, a fallback behind `culturalIdentity.label`) is seen again.
      No page calls `composeIdentity`. The arm says "bank the win, never loosen the assertion". It is not this seat's to
      loosen, and the fix is not a one-line rename at the read. **Named to the chair.**
+
+## INSTRUMENT TWO — READERS WITH NO WRITER (`tests/lint/observedShapeReaders.walker.test.js`)
+
+Measured at c7227254. The door's gate and `--report` arms both stop first at the lawful input-drift notice (7 generated
+data paths), so the live inventory was taken through the walker's own composition (raw legacy scan → the four
+post-filters → `compare`), run from a script outside the repository: **10 files, 38 new read identities; 14 stale rows**.
+
+### (a) The 14 vanished rows
+
+| Row | Site | Way | Why |
+|---|---|---|---|
+| `display on foodBalance` | `src/foundry/journalPages.js` | lawful shrink | the read is gone from the file |
+| `_foodSecurity on config`, `_institutions on config` | `src/generators/defenseGenerator.js` | lawful shrink | the reads are gone (COHERENCE-UPKEEP-6's one crisis table) |
+| `chainName on activeChains`, `output on exploitation`, `product on exploitation` | `src/pdf/lib/viewModelBodySlices.js` | lawful shrink | the reads are gone from the file |
+| `recallTargetId on metadata` | `src/domain/worldPulse/applyWorldPulse.js:928` | lawful shrink (the guard's text says EROSION; measured otherwise) | the read still stands, but the corpus now WRITES the key on `metadata` (the `metadata` shape carries `recallTargetId`; instrument one's newly written identity). The finding cleared because the read gained a writer, not because the detector lost it |
+| `availableResources on settlement` (`s?.availableResources`, :383), `exportPotential on settlement` (:386), `terrainEffects on settlement` (:392), `shadowEconomy on settlement` (:69), `institution on exploitation` (`iss?.institution`, :96), `processing on exploitation` (`c?.processing`, :55), `name on activeChains` (`c?.name`, :35) | `src/pdf/lib/viewModelBodySlices.js` | **STOP: INSTRUMENT EROSION, not banked** | every read still stands, and the `settlement` shape still carries none of the four keys. Why the detector lost them (PLAUSIBLE, not bisected): TAIL-EXPORTS-PDF batch 1 and batch 3 (63c3f2ae, 9afdf5fa, today) now pass the same receivers into new helpers (`chainPrintName(c, s)`, `tradeListsAsPrinted(s)`, `exploitationGroupsShown(s)`, `deriveProsperityPosture(s)`). The receiver now binds more than one shape, and the legacy scan's `objects.length === 1` guard drops the finding. The instrument has no governed way to HOLD an eroded row: schema 39's precedent recorded such a loss, and that is the banking OR1 forbids. **Named to the chair.** |
+
+### (b) The 10 files' 38 new reads
+
+None prints a wrong or empty value; none is cured (no cure is the read's own line); each is named.
+
+| File | Reads | What it prints today | Class |
+|---|---|---|---|
+| `src/domain/crisis/crisisPage.js:248` | `name on factions` | the faction's name through `governing.faction` (the written key); the `|| governing.name` arm is spare and never wins | dead fallback |
+| `src/pdf/sections/Institutions.jsx:59` | `id on institutions` | the derived `entityIdFor('institution', inst)`; institutions carry no `id`, so the `inst.id ||` arm never wins | dead fallback |
+| `src/domain/display/magicProvisionShown.js:114` | `resourceKey on resourceConditions` | `row?.key` (written); the `?? row?.resourceKey` arm never wins | dead fallback |
+| `src/components/map/WorldPulseData.js:49, :69, :85` | `settlementIds on stressors` (1), `factionName on stressors` (4) | one arm each of a list of alternatives (`settlementId`, `targetSaveId`, `o.factionName || payload.factionName || …`); the written arms print | dead fallbacks |
+| `src/domain/display/newsBody.js:441` | `settlementIds on outcome` | `item.affectedSettlementIds` or the outcome's, then `targetSaveId` | dead fallback |
+| `src/domain/worldPulse/proposalAdmission.js:137` | `targetId on outcome` | one arm of a list of id candidates (`targetSaveId`, `settlementId`, `saveId` …) | dead fallback |
+| `src/domain/worldPulse/warCoalitionEvidence.js:85, :87` | `attackerId on outcome`, `targetId on outcome` | `merged` folds the outcome's `metadata`, which DOES carry both keys | writer exists, the detector binds `merged` to `outcome` |
+| `src/generators/defenseGenerator.js:187–190, :322, :370–372, :670–671` | 21 reads `on chains` / `on arcane` (`C.provisioned`, `A.monMax`, `r.chains.garrison` …) | the defence weights table (`C = W.chains`, `A = W.arcane`) and the function's own result object; both written in the same file | writer exists (a data table and a local result), name-prior misbinding, COHERENCE-UPKEEP-6 |
+| `src/generators/economy/incomeLineSiblings.js:170` | `chainId on chains`, `status on chains` | `f.chains` are the economy's active chains, whose records carry both keys (`activeChains` shape) | writer exists under another shape name |
+| `src/generators/steps/assembleInstitutions.js:1042–1043` | `selectedStresses`, `selectedStressesRandom`, `stressorEdits on config` | the config the builder's store writes; the corpus's configs never set them, so on generated worlds the forced set is the intended stresses alone | writer exists outside the corpus (the store) |
+
+The unreviewed-UI cohort's growth (129 → 131) falls among these UI-scoped reads (WorldPulseData.js, Institutions.jsx).
+No `explained-writer` declaration was made: the roster's mechanisms are a closed set and a declaration is a schema rung,
+which this seat was not chartered to mint. **Named to the chair, one line each, above.**
+
+### (c) The door, and the receipt
+
+- `--write` was **not run**: it refuses growth (38 reads), and it would bank the seven eroded rows as repairs.
+- `tests/lint/observedShapeReaders.walker.test.js` alone (8 GB heap; `/tmp/gate-tail.4580.log`): **41 of 47 green, 6 red**:
+  1. "the producers ran and the corpus is not empty": the executed corpus's counts drifted (lawful; a re-freeze absorbs it).
+  2. "SHRINK-ONLY …": `expected { violations: 10, stale: 14 } to deeply equal { violations: +0, stale: +0 }`; the table above.
+  3. "THE ERASURE GUARD …": the 14 rows above; 7 are erosion (STOP).
+  4. "THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift": `an execution INPUT drifted since the mint — lawful, and the shrink-only re-freeze absorbs it` (7 generated data paths).
+  5. "A1/A7 …": `{ reads: 2212, identities: 1551 }` against `{ reads: 2189, identities: 1530 }`.
+  6. "the UNREVIEWED-UI cohort …": `identities: 131` against `129`.
+  All six clear only with a re-freeze, and the re-freeze waits on the chair's ruling on the seven eroded rows. Instrument
+  one's three corpusMeta reds wait on the same re-freeze.
