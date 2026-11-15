@@ -189,6 +189,21 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-15, THE CLOSE OF THE ROUND BAR2, SIGNED AT THE JOINED LINE'S TREE (BAR2-CLOSE-DOORS-2) ──
+ * THE HUNDRED-AND-TWELFTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word of 2026-11-15 20:27:16 UTC in
+ * the chair's chat ("Yes refresh the reference"; ODQ §934.105; for this close only); the record is
+ * docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json. THE CHAIR'S RULING EF1 (vetoable): the move is the round's
+ * declared page text, re-taken only after every other arm of this fence read green at the tree (20 of 21). THE MOVERS, FOUND: the
+ * five builder branches of the round BAR2 landed at JOIN-13 points 2 to 6 (services e13aeb702, places 65cea6643, people cb2573de4,
+ * labels ef40f6330); FIELD-DIFFED by leaf path, text leaves only (no length, no non-text leaf): tie descriptions and tensions, the
+ * people's positions, constraints, dealings and secrets, faction descriptions, house descriptions, service rows, origin rows, the
+ * arrival scene, the prominent tie, the pressure line, the safety and guard lines, one conflict hook; each traced by git log -S to a
+ * cure of the five (7f040c7e1, 8026d2c46, 0d36c3820, 41ef3a9b4, c4cc22e46, c1f9889ae). The espionage subsystem stays dormant.
+ * On THIS corpus 267 of 360 rows (thorp 20, hamlet 28, village 42, town 57, city 60, metropolis 60) move against the close of the
+ * tail round's post-state (the tree 74ded1800, which reproduces `d4f94b04…`); 360/360 hashes stay distinct. Written at the joined
+ * line's 1011a8a91 (the golden master's commit 5fd90b42a), measured by scripts/audit/refence.mjs before the write.
+ * `d4f94b04…` -> `abbfdfec…`.
+ *
  * ── 2026-11-15, THE CLOSE OF THE TAIL ROUND, SIGNED AT THE LINE'S FINAL TREE (TAIL-CLOSE-DOORS-3) ──
  * THE HUNDRED-AND-ELEVENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word of 2026-11-15 06:00 UTC in
  * the chair's chat (ODQ §934.105; for this close only); the record is docs/shift-records/2026-11-15-the-close-of-the-tail-round.json.
@@ -1341,7 +1356,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'd4f94b0446f89df90d5d295a8cfd7d76ee6194c1704b69a29a47109095dcd284';
+const PRE_COUPLING_CORPUS_SHA = 'abbfdfec5279b91816db94e46327943153b4a339381893bc21bec37edbe7cece';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
