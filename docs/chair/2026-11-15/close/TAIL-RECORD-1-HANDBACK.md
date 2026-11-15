@@ -54,13 +54,59 @@ twelve-birth grid 2 falls at the base, 2 at the cure (the same two towns: r2r-ci
   `TAIL-RECORD-1-golden-rows.txt`, section R1). The golden is already stale at the base (all 525 drift).
 - `tests/property/espionageDormancyFence.test.js` THE DRIVEN GOLDEN (360 settlements): red at the base (`00b8e84b…`), the
   cure moves it again (`2273a3c4…`).
+- The tuning register's inventory (`tests/lint/tuningRegister.walker.test.js`, "the measured tree matches the committed
+  inventory exactly": red at the base with 4 entries): the cure adds a fifth, `src/data/constants.js#METROPOLIS_ROLL_TUNING:
+  dependents moved` (+ `src/generators/defenseGenerator.js`, which now imports `prosperityRank` from that file: the
+  ladder read from its one home, as that file's own comment requires). No value moved; a refreeze is the register's seat's.
 
 **To veto.** Revert the R1 commit: the 55 towns' Economic Survival scores, 30 guard lines and 17 towns' conditions return
 to the base figures, and the four guard rows return to the draw.
 
 ## CURE R4 · c4a · THE MAGIC SHARE IS ROUNDED AT ITS SOURCE
 
-(in progress)
+**What a reader sees change.** Four thorps under a crisis (r2s-occupied-thorp-0, r2s-occupied-thorp-2,
+r2s-indebted-thorp-2, r2s-insurgency-thorp-2) no longer hold a food record with 1 % of their food "provided by spell or by
+prayer" (the Economics tab's DS-ECO-9 "HOW THE NEED IS MET: part of it by magic") beside "Reliance on magic: None".
+
+- Before (r2s-occupied-thorp-0, a 31 lb need, 0 lb published by magic): the record's magic share 1 %, and the line drawn.
+  After: 0 %, and the line is not raised (its key reads the share).
+- Elsewhere the share is now the share of the pounds the food card prints: 18 towns move by the rounding of the pound
+  (17 by one point; one, r2s-under_siege-thorp-2, a 12 lb need with 3 lb by magic, from 28 % to 25 %, which is 3 of 12).
+
+**The rule and its home.** `src/generators/foodGenerator.js :: generateFoodSecurity`: the food record is handed
+`Math.round(magicOffset)`, the pounds this writer publishes (as the gap's share already is). Nothing else moves: the
+food band and the gap (`deficitPct`) are unchanged.
+
+**The count (the 720, the R1 tip against the cure).**
+
+| | the report's | measured |
+|---|---|---|
+| towns moved | 22 | **22** |
+| `economicState.foodSecurity.foodRecord.magicPct` | 22 (the 4 to nought, 18 by a rounding point) | **22** (the 4 to nought; 18 by the rounding, one of them by 3 points, said above) |
+| families | 1 | **1** |
+| row 4 (`row4.mjs` relNone) | 4 → 0 | **4 → 0** |
+
+The corpus born from the committed shape is byte-identical to the measured patch's (0 towns differ).
+
+**The law test.** `tests/generators/foodMagicShareOfPublishedPounds.test.js`: 20 census births (every thorp of the three
+crises the four came from, six plain thorps, two anchors whose magic is relied upon); each witness proves itself (the
+divine provision's path stands in its own land, `foodLandOf`); the negative is anchored (`expectAbsentWithAnchor` on the
+towns holding a share, the anchor a relied-upon thorp, computed); seed loops through `collectSeedFailures`. Red with the
+cure reverted (2 of 2 tests; the 4 witnesses named), green with it.
+
+**The pins re-keyed.** None: 143 test files (every file naming `foodGenerator`, every file naming one of the 22 seeds,
+every golden file), the R1 tip and the cure, JSON reports diffed: the same 12 red before and after, no failure message
+changed.
+
+**The gates.** The three fast gates exit 0 (type ratchet 167 of 167, strict domain, eslint on the touched files);
+`presumed-things-door --check` identical to the base (fresh 149); the twelve-birth grid 2 falls with both cures (the same
+two as the base); the tuning register: no entry added.
+
+**For the doors' seat.** No golden-master row moves (0 of 525: the 525 configs hold no town whose magic pounds round
+across a share). No stored count moves.
+
+**To veto.** Revert the R4 commit: the 22 towns' magic shares return to the share of the unrounded pounds, and the four
+thorps' 1 % with them.
 
 ## Red at the base (named, not this seat's)
 
@@ -70,3 +116,9 @@ to the base figures, and the four guard rows return to the draw.
 `tests/pdf/goldenViewModel.test.js` (1), `tests/property/dmLayerGoldenIsolation.test.js` (1),
 `tests/property/espionageDormancyFence.test.js` (1), `tests/property/generatorGoldenMaster.test.js` (1),
 `tests/property/heraldKnowledgeDeskGolden.test.js` (1).
+Outside R1's list and inside R4's, red at `2ff8ab7ee` too: `tests/lint/tuningRegister.walker.test.js` (3; one of them
+gains R1's entry, listed above) and `tests/domain/worldFactRederive.test.js` (1, the same message).
+
+## The tip
+
+R1 `b8a82cf4f`; R4 the commit after it. Both cures pushed to `lane/tail-record-2026-11-15`, each its own commit.
