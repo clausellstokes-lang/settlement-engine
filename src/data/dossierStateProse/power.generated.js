@@ -2060,7 +2060,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no ruler: lord"
           ],
-          "text": "Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.",
+          "text": "Decisions at {settlement} are slow because the {seat} hears everyone out before it acts, and once made they are rarely undone.",
           "slots": [
             "settlement",
             "seat"
@@ -2072,7 +2072,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no ruler: lord"
           ],
-          "text": "At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.",
+          "text": "At {settlement} the town's business goes to the {seat}, and everybody has learned how long the answer takes.",
           "slots": [
             "settlement",
             "seat"
@@ -2096,7 +2096,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no ruler: lord"
           ],
-          "text": "The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.",
+          "text": "The {seat} at {settlement} has left obvious decisions untaken, because no answer to them would satisfy everyone it must answer to.",
           "slots": [
             "seat",
             "settlement"

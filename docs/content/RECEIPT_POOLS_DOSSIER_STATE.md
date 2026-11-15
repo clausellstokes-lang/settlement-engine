@@ -2386,10 +2386,10 @@ and never an assertion that the feared thing is happening.
 4. `[visitor]` At {settlement} one audience with the {seat} gets a decision, good or bad, and there is nobody to appeal to afterwards.
 
 **`council`** {colour}
-1. `[ledger · no ruler: lord]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
-2. `[street · no ruler: lord]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
+1. `[ledger · no ruler: lord]` Decisions at {settlement} are slow because the {seat} hears everyone out before it acts, and once made they are rarely undone.
+2. `[street · no ruler: lord]` At {settlement} the town's business goes to the {seat}, and everybody has learned how long the answer takes.
 3. `[unfolding · no crisis: succession]` The {seat} at {settlement} watches the town's temper closely: what it fears is the town turning on it.
-4. `[counterforce · no ruler: lord]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
+4. `[counterforce · no ruler: lord]` The {seat} at {settlement} has left obvious decisions untaken, because no answer to them would satisfy everyone it must answer to.
 
 **`theocracy`** {colour}
 1. `[ledger]` The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.
@@ -2894,7 +2894,7 @@ supplies the ancestry.
 
 **`Invasion & War`: neither walls nor force** {crisis-scoped}
 1. `[ledger · crisis: any · no crisis: threat · no watch · no mercenary]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
-2. `[counterforce · no threat · crisis: any · no mercenary]` Nothing has come for {settlement}, and nothing about the town would stop whatever did. Its safety rests on nobody having wanted it.
+2. `[counterforce · no threat · crisis: any · no mercenary]` If anyone came for {settlement}, nothing about the town would stop them. Its safety rests on nobody wanting it enough to try.
 3. `[street · no threat · crisis: any]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
 4. `[counterforce · threat · crisis: any · no watch · no crisis: occupied · no mercenary]` {settlement} has no line and no force, and danger is close at hand.
 5. `[street · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied · no mercenary]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.
@@ -3298,7 +3298,7 @@ may not say the contract is failing unless the economic arm supplies that.
 
 **walls PRESENT**
 1. `[visitor · gate · no crisis: under_siege]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
-2. `[ledger · gate · guardPresence · no crisis: under_siege]` {settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.
+2. `[ledger · gate · guardPresence · no port · no crisis: under_siege]` {settlement} is walled, and every arrival goes through a gate and into the gate tally; trouble can only get in where the town decides.
 3. `[street · gate · no crisis: under_siege]` The town has a wall and arranges its day around the gates without noticing that it does.
 4. `[visitor · no gate · no crisis: under_siege]` {settlement} has a wall but no proper gate in it: people come and go by gaps everyone knows, and the wall slows trouble more than it stops it.
 5. `[street · no gate · no crisis: under_siege]` The wall around {settlement} turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at.
@@ -3309,7 +3309,7 @@ may not say the contract is failing unless the economic arm supplies that.
 
 **walls ABSENT** {colour}
 1. `[ledger]` {settlement} is unfortified. There is no perimeter, which means the town cannot control entry and cannot make a chokepoint of anything.
-2. `[visitor]` You can walk into {settlement} from any direction and pass nobody on the way in.
+2. `[visitor · no crisis: under_siege · no crisis: occupied]` You can walk into {settlement} from any direction and pass nobody on the way in.
 3. `[street]` The town has an edge rather than a boundary at {settlement}, and the edge is wherever the last building happens to be.
 
 **garrison PRESENT**
@@ -3356,9 +3356,9 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[street · colour]` People at {settlement} know the town's defence does not end with its weapons.
 
 **arcane defense ABSENT** {colour}
-1. `[ledger]` {settlement}'s defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.
+1. `[ledger]` {settlement} has no arcane defense: what arrives unseen here goes undetected and therefore unanswered.
 2. `[street]` {settlement} keeps no defence against anything it cannot see.
-3. `[counterforce]` Nothing unseen is known to have come at {settlement}, but the town keeps no wards or seers that would notice if it had.
+3. `[counterforce]` Anything unseen that came at {settlement} would find nothing to meet it: the town keeps no wards or seers to notice it.
 
 **THE FIXTURES (W2 DEF, 2026-11-07, construction C9; WIRING-RULINGS R-W3 for the free
 company):** each a second sentence beside its own group's line, said ONLY when that line
@@ -3698,7 +3698,7 @@ street, the unfolding).
 
 **override: SECURITY COMPROMISED**
 1. `[ledger · guardPresence]` {settlement} was betrayed recently, and its defence is being rearranged on the assumption that the enemy knows the old arrangements.
-2. `[street · guardPresence]` The guards at {settlement} have changed their rounds and will not say why, and everyone can guess.
+2. `[street · guardPresence]` Those who keep watch at {settlement} have changed their rounds and will not say why, and everyone can guess.
 3. `[unfolding · colour]` Until {settlement} has changed everything the traitor knew, its defence is weaker than it looks.
 4. `[street · no guardPresence]` {settlement} has no defenders to reorganize after the betrayal, only households that now bar their doors and keep their own counsel.
 
@@ -3763,9 +3763,9 @@ street, the unfolding).
 3. `[street]` Nobody at {settlement} argues about the defences any more. The talk now is whether there will be a place left to defend.
 
 **override active, viability intact** {colour}
-1. `[ledger]` {settlement} should come through this crisis if nothing else goes wrong, though its defence has had to change to meet it.
-2. `[street · no crisis: occupied]` Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
-3. `[visitor · no crisis: occupied]` A visitor to {settlement} would not guess at the trouble from the streets; the town is shaken but standing.
+1. `[ledger]` {settlement} should come through this crisis if nothing else goes wrong, though it has had to change its ways to meet it.
+2. `[street · guardPresence · no crisis: occupied]` Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+3. `[visitor · no crisis: occupied]` {settlement} is shaken by this trouble, but it is still standing and means to stay that way.
 
 **multiple stresses, one posture shown** {colour}
 1. `[ledger]` More than one crisis presses on {settlement} at once, and its defence has to answer all of them.
