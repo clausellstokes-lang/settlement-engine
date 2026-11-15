@@ -434,7 +434,7 @@ export const STRESS_NOTES = {
     politically_fractured: [
       'The people of the settlement no longer agree on what it is for, and nobody expects them to agree again soon.',
       'Its people work as hard as they ever did, but no longer agree on where the settlement is going.',
-      'Every faction here tells the settlement\'s story its own way, and the settlement has split along those lines.',
+      'Every power here tells the settlement\'s story its own way, and the settlement has split along those lines.', // TAIL-NARRATIVE-5 (the chair's style-law red): the retired word's word; every printing town holds two powers or more
     ],
     indebted: [
       'The first settlers built something worth having. Their descendants have borrowed against it until the settlement owes more than it owns.',

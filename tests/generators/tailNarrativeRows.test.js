@@ -295,7 +295,7 @@ describe('B5 the founding notes, the arrival lines and the secrets name only wha
   /** [id, seed, where, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, 'note'|'arrival'|'secrets', RegExp, RegExp]>} */ ([
     ['21981', 'r2s-politically_fractured-thorp-1', 'note', /agreed on its purpose/, /^The people of the settlement no longer agree on what it is for/],
-    ['03015', 'r2s-politically_fractured-thorp-3', 'note', /shared purpose held the founders/, /^Every faction here tells the settlement's story its own way/],
+    ['03015', 'r2s-politically_fractured-thorp-3', 'note', /shared purpose held the founders/, /^Every power here tells the settlement's story its own way/], // re-keyed by identity (TAIL-NARRATIVE-5: the style law's word)
     ['pf[1]', 'r2r-hamlet-45', 'note', /pulled together in one direction/, /^Its people work as hard as they ever did/],
     ['21980', 'r2s-recently_betrayed-thorp-1', 'note', /few families who trusted/, /^The settlement runs on trust between its households/],
     ['22973', 'r2r-thorp-51', 'note', /promise between a few families/, /^Life here rests on promises kept between neighbours/],
