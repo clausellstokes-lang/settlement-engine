@@ -1,0 +1,10 @@
+{"id":"C9380","town":"bar0-city-under_siege+famine-rand-14","sev":"LOW","kind":"PAIR","why":"Archive consultation row carries no stop mark though its house, Chroniclers' exchange, is 'Stopped by the siege' (C9018); Services says touched rows are marked","other":"C9018"}
+{"id":"C9507","town":"bar0-city-under_siege+famine-rand-14","sev":"LOW","kind":"STATE","why":"says gold/silver ore used to reach the city; TRADE imports list no ore, and C9513 says it was 'not brought in'","other":"C9513"}
+{"id":"C9544","town":"bar0-city-under_siege+famine-rand-14","sev":"LOW","kind":"PAIR","why":"calls arcane food 'minor supplement'; FOOD ledger gives 28% made by magic and C9522 says about a quarter of need","other":"C9522"}
+{"id":"C9505","town":"bar0-city-under_siege+famine-rand-14","sev":"LOW","kind":"PAIR","why":"'two or three trades' carry the living, against C9483 'Diversified — broad institutional economic base' and eleven income sources","other":"C9483"}
+{"id":"C9975","town":"bar0-city-under_siege+famine-rand-14","sev":"LOW","kind":"LACKS","why":"Medical Readiness 'Infirmary': HOUSES has no infirmary or hospital; C9977 itself says no beds to contain an outbreak","other":"C9977"}
+{"id":"C9153","town":"bar0-city-under_siege+famine-rand-14","sev":"LOW","kind":"LACKS","why":"prints a house 'Houses of worship'; HOUSES lists only 'Parish churches (10-30)' and 'Multiple monasteries'","other":""}
+{"id":"C10005","town":"bar0-city-under_siege+famine-rand-14","sev":"LOW","kind":"STATE","why":"says 'the crops failed'; FOOD gives failed source None, and C10008 says the siege took the fields","other":"C10008"}
+{"id":"C10009","town":"bar0-city-under_siege+famine-rand-14","sev":"MED","kind":"PAIR","why":"'stored food is all there will be'; FOOD shows 8% grown and 28% made by magic, and C9893 says what is still harvested stretches stores","other":"C9893"}
+{"id":"C10695","town":"bar0-city-under_siege+famine-rand-14","sev":"LOW","kind":"STATE","why":"Shobha Patil is the smelt master (PEOPLE); the judge is Chandra Sharma, chief magistrate, yet Patil is 'appointed to judge a case'","other":""}
+{"id":"DONE","lines":2385,"blocks":1,"flags":9}
