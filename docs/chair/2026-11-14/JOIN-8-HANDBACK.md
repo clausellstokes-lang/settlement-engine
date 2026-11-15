@@ -53,7 +53,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 12 | tail-houses-2026-11-14 | b39f5c78c (04:09; handed back) | 9525e011b (JOIN-7 20) | d5ec9c7f3 | none | clean-both `presumedThings.register.json` (parses); lane-only `INSTITUTION_DESC_VARIANTS.json`; DECLARED MOVES 57a19f800, ba3af4202, e45e08b0f: golden carried |
 | 13 | tail-narrative-2026-11-14 | 78eadedc5 (04:13) | ca827fc0f (JOIN-7 22) | 4c69c3433 | none | clean-both `presumedThings.widened.register.json` (parses); lane-only ARRIVAL_SCENES, STRESS_DESCS, STRESS_INSTITUTION_EFFECTS declarations; DECLARED MOVE 6a3692996 N13: golden carried |
 | 14 | tail-ties-2026-11-14 | 7622238f6 (04:16; at its mark) | fdebbe346 (JOIN-7 21) | 9ba7d6940 | none | clean-both the two presumed registers (parse); lane-only NPC_CRIMINAL_SECRETS, STRESS_ECONOMIC_EFFECTS declarations; DECLARED MOVE 14724c194: golden carried |
-| — | tail-powers-2026-11-14 | 01ddaba28 (04:20; holds the line's merge at d817736d8) | d817736d8 | — | **STOP**: code conflict, `governanceAccount.js` (§6) | aborted; told the chair 04:22 |
+| — | tail-powers-2026-11-14 | 01ddaba28 (04:20; holds the line's merge at d817736d8) | d817736d8 | — | **STOP**: code conflict, `governanceAccount.js` (§6) | aborted; told the chair 04:22 | (ruled P30 04:21: landed at 25)
 | 16 | tail-powers-b-2026-11-14 | 4ff449a7b (04:20) | f4eab4088 (JOIN-7 24) | d700bda44 | none | clean-both the two presumed registers (parse); DECLARED MOVES c1263e61c, 594794a67, 127b1f8ac, 4ff449a7b: golden carried |
 | 17 | tail-display-econ-2026-11-14 (re-sweep) | 1322e7d0a (04:24; its merge of the line at 5d1e3096b) | 7beec164d (2) | aa169b05e | none | — (no tree change) |
 | 18 | tail-corpus-def-2026-11-14 (re-sweep) | 7ccad225e (04:28; its merge of the line at d817736d8, C17) | 4e0936879 (7) | c095140d3 | none | — (docs only) |
@@ -63,10 +63,13 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 22 | tail-crisis-2026-11-14 (re-sweep) | c6852f7e2 (04:42) | aa78d1ec9 (8) | 5ab651d6d | none | DECLARED MOVE c6852f7e2 K24 (cast.stakes[].reason, 27 records): golden carried |
 | 23 | tail-display-econ-2026-11-14 (re-sweep) | 756ba4bda (04:45) | 1322e7d0a (17) | c875a184a | none | lane-only `.prose-numerics-baseline.json`; X30-X32 display only |
 | 24 | tail-powers-b-2026-11-14 (re-sweep) | cce57ff35 (04:48) | 4ff449a7b (16) | 5f3c2c138 | none | DECLARED MOVE dd5887961 (factions[].desc 19 towns): golden carried |
+| 25 | tail-powers-2026-11-14 (LAST, P30) | 01ddaba28 (04:52; its merge of the line at d817736d8, P28 resolved) | d817736d8 | 475506bf7 | **CODE**: `governanceAccount.js`, resolved by P30 (§3) | P30's three checks held before the push; DECLARED MOVES of the branch (P4 twin, DA, headman's name): golden carried |
 
 ## 3. Every code resolution
 
 PIN CONFLICT (law d), point 1: `tests/lint/proseEntryContradiction.walker.test.js`, THE ANTI-VACUITY GUARD's trailing-coordinate count: base (84a41a687) 375; joined 375 (corpus-def, JOIN-6/7); corpus-eco 372 (batch 6, DS-GEN-18). The joined side kept (the lane's only hunk: `--ours` on the file). Measured on the merged tree: **371** (both cures stand); red 371 vs 375, listed (§4 [J8]). The file is five red at the joined tip 72c37436d and the same five after the merge (classed in `/home/user/j8probe`). Remerge patch `probes/JOIN-8/01-tail-corpus-eco.remerge.patch`.
+
+**CODE CONFLICT, point 25** (powers against display-civic 10, resolved by the chair's ruling P30: one cure written twice): `src/domain/display/governanceAccount.js`. Commits: display-civic V1 **1f030877d**; powers **0b1b41459**. Hunk 1 (the imports and `powerNameInProse`): V1 strips the name's own "The" with the leaf's `powerNameAfterArticle`; powers wrote the same cure as `powerSentenceName(...)` and a regex strip, with a second import of `powerSentenceName`. V1's body STANDS; ONE import line (`import { powerNameAfterArticle, powerSentenceName } from './powerSentenceName.js'`), powers' duplicate dropped; powers' other new imports (`resolveDeclared`, `factsOf`, `textOf`) and `OCCUPIED_SEAT` (P4) merged clean and stand. Hunk 2 (`governanceAccountOf`, §3+4): BOTH STAND (V1's comment; P4's `lineOf` helper). P30's checks before the push: the 18 test files naming `governanceAccount` or `powerSentenceName`: 6 red, the same 6 as at the line's 5f3c2c138 (classed in `/home/user/j8probe`: engineCoreLazyEdge ×2, powerStateProseDesk ×2, r3c9ReaderLinesTrue n15, tailDisplayCivic3V1 r2r-metropolis-50); eslint on the file exit 0; over the twelve-birth grid (a scratch vitest outside the tree calling `governanceAccountOf` on `censusGrid()`), the account's sentences (`text`, `fallback`) hold no "Military/Guard", "The The" or "the The" (the one "Military/Guard" is the roster name in the `estranged` data field of r2s-succession_void-city-0). Remerge patch `probes/JOIN-8/25-tail-powers.remerge.patch`.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -192,6 +195,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | crisis (22) | DECLARED MOVE c6852f7e2 K24 (stress cast.stakes[].reason, 27 records) |
 | `tests/lint/.prose-numerics-baseline.json` | display-econ (23) | lane-only, taken from the lane: the close re-derives it once |
 | golden | powers-b (24) | DECLARED MOVE dd5887961 P29/P1 (factions[].desc 19 towns, text only) |
+| golden; `governanceAccount.js` (P30's resolution) | powers (25) | the branch's DECLARED MOVES (P4's occupied-seat twin, 28 towns; DA; the headman's name): golden carried; `tests/domain/tailDisplayCivic3V1.test.js` (r2r-metropolis-50) red at the line's 5f3c2c138 BEFORE the powers merge and after it: carried, classed for the close |
 
 ## 5. Item 2 at the landed tip
 
@@ -224,6 +228,6 @@ A worktree at origin's tip (`git worktree add /home/user/j8wt -b join8 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-6 (the finished branches), 7-14, 16 (15 the powers stop, §6); the chair's 03:40 "LAND lane/tail-powers-2026-11-14" (eb5e2ab0d or later, in the order with the moving branches) received.
+1. IN HAND: the sweep. Landed: points 1-14, 16-25 (powers at 25, last, by P30). Next: (g), item 2 at the landed tip, ONE message.
 2. lane/tail-powers-2026-11-14: waits for the chair's "LAND" (P28).
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
