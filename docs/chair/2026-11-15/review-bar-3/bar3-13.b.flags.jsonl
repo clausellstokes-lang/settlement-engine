@@ -1,0 +1,7 @@
+{"id":"C26238","town":"bar0-town-calm-rand-6","sev":"MED","kind":"PAIR","why":"says everyone enters by the gates under the guard's eye; the town's own lines say smugglers come in beneath the walls and goods never reach the gate","other":"C26220"}
+{"id":"C26241","town":"bar0-town-calm-rand-6","sev":"LOW","kind":"PAIR","why":"says little crime and enforcement far outweighs criminals; the same page records an active smuggling network with routes, territories and everyone paying a cut","other":"C26254"}
+{"id":"C26249","town":"bar0-town-calm-rand-6","sev":"LOW","kind":"LACKS","why":"'unofficial landing points' presumes a water route; the town is a mountain town with road trade access only","other":""}
+{"id":"C26240","town":"bar0-town-calm-rand-6","sev":"LOW","kind":"PAIR","why":"watch called exceptionally well-drilled; the same page says it has inadequate equipment, irregular pay and serves part-time, and is not built for outside threats","other":"C26218"}
+{"id":"C26283","town":"bar0-town-calm-rand-6","sev":"LOW","kind":"PAIR","why":"Legal Infrastructure None; the town hall offers permit applications and the Law & Governance chain lists legal services","other":"C26048"}
+{"id":"C26662","town":"bar0-town-calm-rand-6","sev":"LOW","kind":"PAIR","why":"says nothing new goes up; the brickmaker line says they know every new wall going up and who is building what","other":"C26350"}
+{"id":"DONE","lines":1280,"blocks":1,"flags":6}
