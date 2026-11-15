@@ -1,0 +1,13 @@
+{"id":"C02758","town":"bar0-city-wartime-rand-2","sev":"HIGH","kind":"STATE","why":"says Khanserai is prosperous; STATE prosperity is Poor and the page itself prints Poor (C02771)","other":"C02771"}
+{"id":"C02759","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"STATE","why":"warehouses full and coin moving as a boom; prosperity Poor, wartime, economic capacity Strained, war takes most of the money (C02841)","other":"C02841"}
+{"id":"C02766","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"says every capable pair of hands has gone to the war; the Crisis tab says conscription took a third of working-age men","other":"C02815"}
+{"id":"C02782","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"Economic Resilience Strong; prosperity Poor, wartime war takes most of the money, Foundations print Economic capacity Strained","other":"C02856"}
+{"id":"C03078","town":"bar0-city-wartime-rand-2","sev":"LOW","kind":"STATE","why":"title 'Merchant Prince' for Gantuyaa Taichiud, who PEOPLE gives as (f), the luxury merchant","other":""}
+{"id":"C03694","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"STATE","why":"prints 4,426 imported; STATE header says imports cover 4374 (deficit 10% = 1172, page prints short 1,120)","other":"C03696"}
+{"id":"C03701","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"'not hungry and has no cushion'; FOOD holds 8.5 months in a granary, and C03698 says some households go short","other":"C03699"}
+{"id":"C03818","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"STATE","why":"Shadow Economy 33% capture; INCOME gives Shadow Economy (untaxed) as 19% of the town's money","other":""}
+{"id":"C03856","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"says a crown officer came last week and those in charge already signed; Crisis hook says officer has arrived and the governing power must still decide","other":"C02843"}
+{"id":"C04063","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"says crime lacks a single controlling authority; GOVERNMENT lists Thieves' Guild as a power and PEOPLE gives it a head (Vandansüren Taichiud, rank 1)","other":"C03932"}
+{"id":"C04094","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"criminal work 'not coordinated enough to have a head', none to talk to; Thieves' Guild is a listed power with a rank 1 head (C03932)","other":"C03932"}
+{"id":"C03121","town":"bar0-city-wartime-rand-2","sev":"LOW","kind":"STATE","why":"title 'Frontman' for Namsrai Naiman, who PEOPLE gives as (f), the nominal owner","other":""}
+{"id":"DONE","lines":2271,"blocks":1,"flags":12}
