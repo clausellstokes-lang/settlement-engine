@@ -259,12 +259,12 @@ export const STAKE_REASONS = Object.freeze({
   aidsRevolt: 'it has been aiding the revolt in secret',
   guildsThreatened: 'newcomers working outside the guilds threaten its hold on the trades',
   claimantsNeedIt: 'every claimant needs its backing',
-  warNeedsIt: 'the war has made it indispensable',
-  warDivides: 'the war has made some of it rich and cut off the trade of the rest',
-  revoltCutsLabour: 'the revolt has cut into its labour and its markets',
-  warCostsIt: "the war's disruption and requisitions are costing it",
+  warNeedsIt: 'the call-up and the grieving have made it indispensable',
+  warDivides: 'contracts have made some of it rich while others have lost their trade routes',
+  revoltCutsLabour: 'the revolt has cut into its labour and its trade',
+  warCostsIt: 'trade disruption and requisitions are costing it',
   someHoldDebt: "some of its houses hold the crown's debt",
-  termsWithOccupier: 'some of its families have made terms with the occupier',
+  termsWithOccupier: 'some of its families have made private terms with the new authority',
   pressedToJudge: 'both sides press it to call the revolt just or sacrilegious',
 });
 
@@ -289,13 +289,15 @@ export const RAISED_TO_LEAD = Object.freeze({ slave_revolt: 'Revolt Leadership' 
  * K25 (a) (TAIL-CRISIS-6, the chair's ruling of 2026-11-15, vetoable by the owner): the same law for every party a crisis
  * raises (`opens`: the description opens with the crisis's literal) and every standing power the crisis writes into (`adds`:
  * the crisis appended its sentence to the power's description: "The arrival of skilled workers outside guild structures…").
+ * Each `text` is the shortest stretch of the crisis's literal that is the crisis's alone (the presumed-things walker reads a
+ * literal here as a line: a match key names no war, market, clergy, succession or occupation of its own).
  * An `adds` row never speaks for a criminal power: stressFactions.js writes its merchants' sentences onto any name holding
  * "guild" ("Thieves' Guild"), and that slip is its seat's (named in the hand-back), not a stake. Nor for the governing power,
  * which answers for the crisis (K12: the page's `stakeShown`, "must answer for it · it governs here").
  */
 export const RAISED_BY_CRISIS = /** @type {ReadonlyArray<readonly [kind: string, text: string, reason: keyof typeof STAKE_REASONS, how: 'opens' | 'adds']>} */ (Object.freeze(/** @type {Array<[string, string, keyof typeof STAKE_REASONS, 'opens' | 'adds']>} */ ([
   ['famine', 'Whoever controls the remaining food reserves', 'holdsFood', 'opens'],
-  ['plague_onset', 'Healers, clerics, and pragmatists with emergency health powers.', 'chargedWithSickness', 'opens'],
+  ['plague_onset', 'Healers, ', 'chargedWithSickness', 'opens'],
   ['recently_betrayed', 'Informal coalition demanding answers', 'leadsInquiry', 'opens'],
   ['politically_fractured', 'Claims legitimate authority through different means', 'claimsToGovern', 'opens'],
   ['politically_fractured', 'Would support stability, if a price can be agreed.', 'courted', 'opens'],
@@ -309,17 +311,17 @@ export const RAISED_BY_CRISIS = /** @type {ReadonlyArray<readonly [kind: string,
   ['insurgency', 'A group of the well-off who have concluded the current governing arrangement is no longer viable.', 'leadsChallenge', 'opens'],
   ['insurgency', "Organised common-population movement challenging the governing authority's legitimacy.", 'leadsChallenge', 'opens'],
   ['mass_migration', 'The incoming population has begun self-organising.', 'speaksForNewcomers', 'opens'],
-  ['slave_revolt', 'Free citizens, clergy, and outside agitators who have been supporting the revolt covertly', 'aidsRevolt', 'opens'],
+  ['slave_revolt', 'Free citizens, ', 'aidsRevolt', 'opens'],
   ['slave_revolt', 'Organised leadership of the enslaved population', 'leadsRevolt', 'opens'],
   ['mass_migration', 'The arrival of skilled workers outside guild structures', 'guildsThreatened', 'adds'],
-  ['succession_void', 'The succession crisis has transformed latent noble power into active leverage.', 'claimantsNeedIt', 'adds'],
-  ['wartime', 'The pastoral burden of wartime', 'warNeedsIt', 'adds'],
+  ['succession_void', 'latent noble power into active leverage.', 'claimantsNeedIt', 'adds'],
+  ['wartime', 'The pastoral burden of', 'warNeedsIt', 'adds'],
   ['wartime', 'War contracts have made the well-connected wealthy.', 'warDivides', 'adds'],
   ['wartime', 'Trade disruption and requisition are hurting the bottom line.', 'warCostsIt', 'adds'],
-  ['slave_revolt', 'The revolt has disrupted labour supply and market operations.', 'revoltCutsLabour', 'adds'],
+  ['slave_revolt', 'The revolt has disrupted labour supply', 'revoltCutsLabour', 'adds'],
   ['slave_revolt', 'Under pressure from both sides to publicly declare the revolt either just or sacrilegious.', 'pressedToJudge', 'adds'],
   ['indebted', 'Several of these houses hold crown debt', 'someHoldDebt', 'adds'],
-  ['occupied', 'Under occupation, several noble families have made private accommodations', 'termsWithOccupier', 'adds'],
+  ['occupied', 'several noble families have made private accommodations with the new authority', 'termsWithOccupier', 'adds'],
 ]).map((row) => Object.freeze(row))));
 
 /** The stake reason the crisis's own record gives a power it raised or wrote into, or null. @param {string} kind @param {CastFaction} f @param {boolean} isGov @returns {string | null} */
