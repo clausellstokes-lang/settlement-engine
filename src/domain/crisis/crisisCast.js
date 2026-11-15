@@ -243,6 +243,10 @@ export const STAKE_REASONS = Object.freeze({
   split: 'gains and loses by it at once',
   untouched: 'it could side with either camp', // SW-6 (B3 A·C4): the page's label says "no stake yet"
   leadsRevolt: 'it leads the revolt, and rises or falls with it', // TAIL-CRISIS-5 (K22): the power the revolt raised (RAISED_TO_LEAD)
+  // TAIL-CRISIS-6 (K24): the powers a crisis raises, each its stake by its own record (RAISED_BY_CRISIS)
+  holdsFood: 'it holds what is left of the food stores',
+  chargedWithSickness: 'it holds the emergency powers against the sickness',
+  leadsInquiry: 'it leads the inquiry into the betrayal',
 });
 
 /**
@@ -254,6 +258,29 @@ export const STAKE_REASONS = Object.freeze({
  * (tests/domain/tailCrisisBatch7.test.js pins it to stressFactions.js).
  */
 export const RAISED_TO_LEAD = Object.freeze({ slave_revolt: 'Revolt Leadership' });
+
+/**
+ * THE POWERS A CRISIS RAISES, AND THE STAKE EACH ONE'S OWN RECORD SAYS (TAIL-CRISIS-6, the chair's ruling K24 of 2026-11-15,
+ * vetoable by the owner: "a power the crisis itself raised has the stake its name says"). `generators/power/stressFactions.js`
+ * pushes each onto the roster under its crisis with its own description; the name can be re-drawn at the label close (the
+ * Quarantine Council prints as "The Establishment" in one town of the 720), so a row reads the DESCRIPTION's opening, the
+ * roster's own literal (tests/domain/tailCrisisBatch8.test.js pins each to stressFactions.js), under that one kind only.
+ * Where no earlier rule gives such a power a stake it keeps the waverer's `split` (K22's form: no cast role moves), and its
+ * reason says what the record holds, never "it could side with either camp".
+ * @type {ReadonlyArray<readonly [kind: string, descOpening: string, reason: keyof typeof STAKE_REASONS]>}
+ */
+export const RAISED_BY_CRISIS = Object.freeze([
+  Object.freeze(/** @type {const} */ (['famine', 'Whoever controls the remaining food reserves', 'holdsFood'])),
+  Object.freeze(/** @type {const} */ (['plague_onset', 'Healers, clerics, and pragmatists with emergency health powers.', 'chargedWithSickness'])),
+  Object.freeze(/** @type {const} */ (['recently_betrayed', 'Informal coalition demanding answers', 'leadsInquiry'])),
+]);
+
+/** The stake reason the crisis's own record gives a power it raised, or null. @param {string} kind @param {{ desc?: unknown }} f @returns {string | null} */
+function raisedReasonOf(kind, f) {
+  const desc = typeof f?.desc === 'string' ? f.desc : '';
+  const row = RAISED_BY_CRISIS.find(([k, opening]) => k === kind && desc.startsWith(opening));
+  return row ? STAKE_REASONS[row[2]] : null;
+}
 
 // ── The levers: the houses each kind turns on, and the faces that run them ─────────────────
 
@@ -564,7 +591,7 @@ export function deriveStakes(s, kind) {
     else if (gains) stake = { factionId: name, stake: 'gains', reason: gains };
     else if (loses) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.loses };
     else if (losesSeat) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.losesSeat };
-    else stake = { factionId: name, stake: 'split', reason: /** @type {Record<string, string>} */ (RAISED_TO_LEAD)[kind] === name ? STAKE_REASONS.leadsRevolt : STAKE_REASONS.untouched };
+    else stake = { factionId: name, stake: 'split', reason: /** @type {Record<string, string>} */ (RAISED_TO_LEAD)[kind] === name ? STAKE_REASONS.leadsRevolt : (raisedReasonOf(kind, /** @type {{ desc?: unknown }} */ (f)) || STAKE_REASONS.untouched) };
     return stake;
   });
 }
