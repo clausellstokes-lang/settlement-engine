@@ -92,7 +92,7 @@ const INFLUENCE_RANK = Object.freeze({
  * @property {unknown} [tier]
  * @property {unknown} [population]
  * @property {{ key?: unknown, label?: unknown }} [culturalIdentity]
- * @property {{ label?: unknown }} [culture]
+ * (TAIL-CLOSE-SRC-4, WR2: no culture block; the cultural identity above carries the label)
  * @property {unknown} [settlementReason]
  * @property {{
  *   historicalCharacter?: unknown,
@@ -165,8 +165,8 @@ function composeIdentity(settlement) {
   const tier = cleanText(settlement.tier) || 'settlement';
   const population = finiteNumber(settlement.population);
   const cultureLabel = cleanText(
-    settlement.culturalIdentity?.label
-      || settlement.culture?.label,
+    settlement.culturalIdentity?.label, // TAIL-CLOSE-SRC-4 (WR2): the cultural identity's label is the one home; the culture's
+    // writer is the config, and no settlement record carries a culture label (the second, wrong-shape read is struck)
   );
   const cultureKey = cleanText(settlement.culturalIdentity?.key);
 
