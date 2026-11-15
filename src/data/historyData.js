@@ -1416,6 +1416,14 @@ export const HISTORICAL_EVENTS_DATA = [
       'A ruined family blames a rival for engineering the panic, and wants proof',
       'The debts that survived the crash were quietly bought up by a single hidden buyer',
     ],
+    // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Talk of a coming crash in {resource} sets neighbour against neighbour: some buy as if prices can only rise, others are calling in what they are owed',
+        factions: ['Those buying as if prices can only rise', 'Creditors calling in debts', 'Those who have sold and are waiting'],
+        plotHooks: [
+          { text: 'A ledger names who has been warned to sell, and who has not', needs: ['market'] },
+          'A family on the brink of ruin blames a rival for stirring the panic, and wants proof',
+          'Someone is quietly buying up other people\'s debts, and nobody knows who',
+        ] } },
     severity: ['minor', 'major'],
   },
   {
@@ -1427,12 +1435,28 @@ export const HISTORICAL_EVENTS_DATA = [
       'A caravan master swears the collapse was arranged, and kept the correspondence to prove it',
       'An old contract still obliges a distant partner to trade here, if anyone can enforce it',
     ],
+    // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Whether the trade the settlement lives on is about to fail is the quarrel of the day: some see buyers going elsewhere, others see nothing but rumour',
+        factions: ['Traders who fear the buyers are going elsewhere', 'Workers afraid for their wages', 'Rivals who would gain if the trade moved'],
+        plotHooks: [
+          'Someone with power would rather the trade went elsewhere, and is quietly making it harder',
+          'A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it',
+          'An old contract obliges a distant partner to trade here, if anyone can enforce it',
+        ] } },
     severity: ['major'],
   },
   {
     type: 'great_fire',
     description: 'A fire that began in {location} consumed {building_type} across whole districts before it could be checked',
-    factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'], byMemory: { dated: { factions: ['Families still seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
+    factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'], byMemory: { dated: { factions: ['Families still seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'] },
+      // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+      unanchored: { description: 'Fire is the settlement\'s standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season',
+        factions: ['Those who want timber and thatch forbidden', 'Households who cannot afford to build in anything else', 'Those who say the danger is overblown'],
+        plotHooks: [
+          'Small fires keep starting at the same few houses, and nobody believes it is chance',
+          'Someone is quietly buying the houses most at risk of fire, cheaply, before any rule is made',
+          'A rule against thatch is being pressed by one household, and it would ruin exactly its rivals',
+        ] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
     plotHooks: [
       'The fire spared exactly the houses one power wanted cleared, and nobody believes it was chance',
       'A confession was extracted from a scapegoat; the real arsonist still lives in town',
@@ -1449,6 +1473,14 @@ export const HISTORICAL_EVENTS_DATA = [
       'The plague pit holds a body that matches no one on the list of the dead',
       'The quarantine was used to settle old scores, and the survivors remember exactly who',
     ],
+    // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Fear of sickness runs through the settlement, and every fever reopens the quarrel over who is shut indoors, who is kept away, and who has the right to decide',
+        factions: ['Those who would shut the sick away', 'Families who refuse to be shut in', 'Those who trust to prayer and old remedies'],
+        plotHooks: [
+          { text: 'A healer is accused of hiding a fever in a household, to spare it from being shut in', needs: ['healer'] },
+          'A family taken by fever swears it came in with a stranger, and wants the stranger found',
+          'Someone is using the fear of fever to keep a rival household shut indoors, and out of a bargain',
+        ] } },
     severity: ['major', 'catastrophic'],
   },
   {
@@ -1460,6 +1492,14 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'A structure meant to hold back the water had been quietly left to rot, and someone knew', needs: ['navigable'] }, // CENSUS-3d unit 6
       { text: 'The flood uncovered an old foundation under the mud, and someone has been digging there at night', needs: ['navigable'] }, // CENSUS-3d unit 6
     ],
+    // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Rising water is the settlement\'s standing fear, and every wet season reopens the quarrel over who must dig the ditches, who keeps the low ground, and who pays for both',
+        factions: ['Households on the low ground', 'Landowners on the high ground', 'Those who say the water will never come'],
+        plotHooks: [
+          'The ditches that carry off the water are choked, and the household bound to clear them refuses',
+          { text: 'A bank meant to hold back the water is being quietly left to rot, and someone knows why', needs: ['navigable'] },
+          'Someone is buying the low ground cheaply from frightened owners, and seems very sure the water will not come',
+        ] } },
     severity: ['major', 'catastrophic'],
   },
   {
@@ -1471,6 +1511,14 @@ export const HISTORICAL_EVENTS_DATA = [
       "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
       { text: 'A relic seized during the trial never reached the vault it was bound for', needs: ['institution: temple'] }, // CENSUS-3d unit 6
     ],
+    // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'An accusation of heresy against a prominent figure is splitting the faithful, and those in authority are being pressed to take a side',
+        factions: ['The accusers', 'The accused and their sympathizers', 'Those in authority who would exploit the rift'],
+        plotHooks: [
+          'The evidence against the accused is fabricated, and a witness is almost ready to say so',
+          'The doctrine under accusation is quietly practised by more of the leading households than would admit it',
+          'A relic held as evidence against the accused has gone missing, and each side blames the other',
+        ] } },
     severity: ['minor', 'major'],
   },
   {
@@ -1482,6 +1530,14 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'The pilgrim trade made one family rich enough to buy the office that authenticates relics', needs: ['institution: temple'] }, // CENSUS-3d unit 6
       { text: 'A rival shrine claims the relic is theirs, stolen, and has sent someone to recover it', needs: ['institution: temple'] }, // CENSUS-3d unit 6
     ],
+    // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'A claimed miracle is splitting the settlement: some would proclaim it and welcome the pilgrims it could bring, others call it a fraud that will bring nothing but strangers',
+        factions: ['Those who would proclaim the miracle', 'Residents who want no crowds of strangers', 'Sceptics who doubt the miracle'],
+        plotHooks: [
+          'The miracle can be explained mundanely, and the person who can explain it is being kept quiet',
+          { text: 'One family hopes to buy the office that would authenticate the miracle, and the profits that would follow', needs: ['institution: temple'] },
+          { text: 'A rival shrine claims the relic at the heart of the miracle is theirs, stolen, and has sent someone to recover it', needs: ['institution: temple'] },
+        ] } },
     severity: ['minor', 'major'],
   },
   {
@@ -1493,13 +1549,29 @@ export const HISTORICAL_EVENTS_DATA = [
       'The uprising was funded by an outside hand that has come back to collect on the favour',
       'A concession won in the revolt is being quietly rolled back, and the old anger is stirring again',
     ],
+    // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'The common people are pressing those in charge over {demands}, and each dispute grows louder than the last',
+        factions: ['Those pressing their demands', 'Those in charge, who will not give way', 'Those waiting to see which side wins'],
+        plotHooks: [
+          'Someone is keeping a list of who speaks loudest for the demands, and passing it to those in charge',
+          'An outside hand is quietly paying for the agitation, and will want something for it',
+          'A concession has been promised to the common people, and someone in authority means to break the promise',
+        ] } },
     severity: ['major', 'catastrophic'],
   },
   {
     type: 'tyranny',
     description: 'A single figure seized power through {method} and ruled without check for a time, and the memory still shapes who is trusted with authority',
     factions: ['Old loyalists', 'Those who suffered under the regime', 'Beneficiaries who kept their gains'],
-    byMemory: { dated: { factions: ['Loyalist families', 'Families the regime wronged', "Families who kept the regime's gains"] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
+    byMemory: { dated: { factions: ['Loyalist families', 'Families the regime wronged', "Families who kept the regime's gains"] },
+      // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+      unanchored: { description: 'Whether one person is taking more power than anyone granted is the quarrel of the day, and every new rule is read as a step toward tyranny',
+        factions: ['Those who want a strong hand', 'Those who fear a tyrant in the making', 'Those who will serve whoever wins'],
+        plotHooks: [
+          'Someone close to authority is gathering powers no one granted, and keeps the record of it locked away',
+          'A household that spoke out against the new rules has had its goods seized on a pretext, and wants them back',
+          'Someone is paying for praise of a strong hand in the street, and stands to profit if it comes',
+        ] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
     plotHooks: [
       "The tyrant's private records survived, and they implicate respectable families in the worst of it",
       'A fortune the regime confiscated was never returned, and the rightful heirs have surfaced',
@@ -1516,6 +1588,14 @@ export const HISTORICAL_EVENTS_DATA = [
       'A bloodline touched by the surge is now manifesting something the family cannot conceal',
       { text: 'The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item E (CENSUS-2 kind c): a district is a town's
     ],
+    // TAIL-HISTORY Y5 (the chair's ruling, 2026-11-15; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
+    byMemory: { unanchored: { description: 'Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone',
+        factions: ['Those touched by the flares', 'Those who fear them', 'Those who would study the flares'],
+        plotHooks: [
+          'The flares are no accident: someone is working magic they cannot control, and hiding the notes',
+          'A child touched by a flare is showing something the family cannot conceal',
+          'The flares come more often in one part of the settlement, and those in charge are pretending otherwise',
+        ] } },
     severity: ['minor', 'major'],
   },
   // ── generators-domain-1: tension templates the STRESS_TO_TENSION map targets ──

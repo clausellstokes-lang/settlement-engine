@@ -4,8 +4,8 @@ Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY
 Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
 Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the chair's lane (211 rows, read at e5b421802).
 
-**STATE (TAIL-HISTORY-2): batch 1 LANDED** in one commit on this branch (the patch, plus Y6 and Y7). Batch 2 (Y5) is
-below as it stands.
+**STATE (TAIL-HISTORY-2): batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** in the commit
+that carries this section.
 
 ## The chair's rulings since (2026-11-15 00:30 UTC; each vetoable by the owner)
 
@@ -49,6 +49,125 @@ The patch was applied unchanged at 8b90e7753, with these additions:
   - Grid: 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), 0 rises.
   - `wiringCensusDeclared.walker` (DS-DEF/ECO/GEN annex columns) is red at the base too, carried.
 - The census after this commit is batch 2's before-run (see below).
+
+## Batch 2: Y5, THE AFTERMATH SHAPE (TAIL-HISTORY-2, 2026-11-15)
+
+**The cure.** `src/data/historyData.js` gives the ten types `byMemory.unanchored`: a description, three factions and three hooks, all in present tense.
+- `historyGenerator.js :: tensionByMemory` puts these words on the tension when the timeline holds no event of its type. The selection is untouched, so the slot keeps its draw.
+- great_fire and tyranny keep their `dated` words beside the new ones.
+- Four twin hooks keep a declaration: the plague's healer (`healer`), the flood's bank (`navigable`), the crash's ledger (`market`) and the pilgrimage's office and rival shrine (`institution: temple`).
+- My first wording of the heresy relic ("the temple's keeping") and the wild-magic district ("one district") rose the presumed-things walker by 2, because the walker reads no declaration inside `byMemory`. I reworded both to need nothing: "…has gone missing, and each side blames the other" and "…in one part of the settlement, and those in charge…". The walker is back to 147, equal to the base.
+
+**The measure.** CENSUS-3 at 3da34c70b (before, which is also batch 1's true after-run) and at the batch (after). Both are 720 towns.
+- **The record:** 135 tensions in 131 towns have no own event (plague_years 16, great_fire 14, great_flood 23, popular_uprising 18, tyranny 11, wild_magic 10, trade_collapse 11, market_crash 5, heresy_trial 14, pilgrimage_surge 13). After the batch:
+  - All 135 carry their live words, on the page.
+  - None carries any of its event's words.
+- **The tabs' inventory:** 29,869 → 29,936 sentences. 20 are gone, 87 are new, 90 print in fewer towns and **0 moved**.
+  - Every sentence that prints in fewer towns is a Y5 tension's event words. The prints that remain belong to towns whose timeline holds the event.
+  - The 87 inheritors are the ten twins' lines, every one of them.
+  - **"Patron deity" (and its two card lines) 716 → 720:** these are r2r-thorp-0…3, the first town each of the four render workers draws. Their record is identical in both runs. It is a cold-start render artifact, not a change.
+- **The exports' inventory** (`SURFACES=PDF,Journal`): 35,763 → 35,850 sentences. 57 are gone, 144 are new, 133 print in fewer towns.
+  - Every new exports sentence is twin words.
+  - "N hooks to pull; most of them belong to …" changes its group in 3 towns (r2r-hamlet-2, r2r-village-17, r2s-insurgency-village-2). A twin hook declares differently from the hook it replaced, and the line is counted from the hooks that print.
+- **The worklist rows (74):**
+  - 14 are GONE and 46 print in FEWER towns, by their false towns.
+  - 14 still print in the town they were read in. These are B20744 (the trade collapse's route: its 18 remaining towns hold the event), 21280, B15917 ("Sceptics who doubt the miracle": the pilgrimage twin keeps it on purpose, because a claimed miracle has its sceptics), 03341 (HISTORY_DESC_SIBLINGS, not this shape), B22143 (the label, unchanged by Y5), 21746 and 21101 (trade collapse descriptions in towns with the event), and the seven trade_dispute rows (B02465, B12687, B21991, B04055, B19434, B02421, B20238).
+  - **trade_dispute is NOT among Y5's ten.** It is the same shape, 12 towns, and is left for the chair.
+- **X9's rows of the ten types:** 21602 19→3, 21681 16→2, 26274 15→5, 29579 9→1 and 29429 7→1. 21680 4→0 and 31195 2→0 are gone.
+- **THE DECLARED MOVE** (record diff by field on the 720):
+  - `history.currentTensions[].description`: 135 tensions in 131 towns.
+  - `.factions[]` (349 cells) and `.plotHooks[]` (327 cells, plus the list length in 18).
+  - `history.siegeNarrative` in 4 towns (r2r-thorp-28, r2r-hamlet-2, r2r-hamlet-25 and r2r-village-14). `src/generators/narrative/siegeCapability.js` copies the first tension's description after "… is still present in living memory:". It prints on none of the 720 pages. That writer is not this group's; NAMED.
+  - Nothing else moves.
+
+**The guard, red first.** `tests/data/tailHistoryBatch2.test.js`:
+- The twenty test covers the smallest and the largest census town of each type. It checks that no event words print, that the live description does, and that there are three parties. It is red at 3da34c70b (all 20) and green at the batch.
+- KEEP covers five towns whose own event is on the timeline: r2r-thorp-7, r2r-city-52, r2s-infiltrated-village-0, r2s-under_siege-city-3 and r2s-famine-village-1. Each keeps its event's words. Green before and after.
+- `tensionTemplateDeclaration.test.js` is green: born with the memory table stripped, the records are identical but for the tensions' words.
+
+**Re-keyed by identity:** `w2FixData2History.test.js`, c01-thorp-none (seed review-w2b-1). Its "the flood still prints" liveness reads the flood TENSION, which has no flood on that timeline. It now accepts the live quarrel's words too.
+
+**Gates:**
+- typecheck:domain:strict 0, typecheck:ratchet 0, eslint on the touched files 0.
+- The walker is unchanged from the base (fresh 147, stale 0).
+- Grid: 2 falls, 0 rises (the same as the base).
+- The 24 test files that name historyData.js and the 23 that name its generator: only carried reds. These are urbanBand G5 and the generator golden master, which is red at 3da34c70b too. G3 is green when run alone.
+
+**THE VETO LIST: every new line (VETOABLE wording, the owner's; the towns read are the smallest, the largest and a crisis town where one holds it)**
+- **market_crash** (5 towns; read in r2r-town-39, r2r-city-12):
+  - The description: "Talk of a coming crash in {resource} sets neighbour against neighbour: some buy as if prices can only rise, others are calling in what they are owed".
+  - The factions: "Those buying as if prices can only rise", "Creditors calling in debts" and "Those who have sold and are waiting".
+  - The hooks:
+    - "A ledger names who has been warned to sell, and who has not" (needs market)
+    - "A family on the brink of ruin blames a rival for stirring the panic, and wants proof"
+    - "Someone is quietly buying up other people's debts, and nobody knows who"
+- **trade_collapse** (11 towns; read in r2r-thorp-26, r2r-metropolis-22):
+  - The description: "Whether the trade the settlement lives on is about to fail is the quarrel of the day: some see buyers going elsewhere, others see nothing but rumour".
+  - The factions: "Traders who fear the buyers are going elsewhere", "Workers afraid for their wages" and "Rivals who would gain if the trade moved".
+  - The hooks:
+    - "Someone with power would rather the trade went elsewhere, and is quietly making it harder"
+    - "A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it"
+    - "An old contract obliges a distant partner to trade here, if anyone can enforce it"
+- **great_fire** (14 towns; read in r2r-thorp-9, r2s-infiltrated-metropolis-3, r2s-wartime-city-0):
+  - The description: "Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season".
+  - The factions: "Those who want timber and thatch forbidden", "Households who cannot afford to build in anything else" and "Those who say the danger is overblown".
+  - The hooks:
+    - "Small fires keep starting at the same few houses, and nobody believes it is chance"
+    - "Someone is quietly buying the houses most at risk of fire, cheaply, before any rule is made"
+    - "A rule against thatch is being pressed by one household, and it would ruin exactly its rivals"
+- **plague_years** (16 towns; read in r2r-thorp-4, r2s-slave_revolt-metropolis-1, r2s-wartime-village-3):
+  - The description: "Fear of sickness runs through the settlement, and every fever reopens the quarrel over who is shut indoors, who is kept away, and who has the right to decide".
+  - The factions: "Those who would shut the sick away", "Families who refuse to be shut in" and "Those who trust to prayer and old remedies".
+  - The hooks:
+    - "A healer is accused of hiding a fever in a household, to spare it from being shut in" (needs healer)
+    - "A family taken by fever swears it came in with a stranger, and wants the stranger found"
+    - "Someone is using the fear of fever to keep a rival household shut indoors, and out of a bargain"
+- **great_flood** (23 towns; read in r2r-thorp-28, r2r-metropolis-36, r2s-plague_onset-city-0):
+  - The description: "Rising water is the settlement's standing fear, and every wet season reopens the quarrel over who must dig the ditches, who keeps the low ground, and who pays for both".
+  - The factions: "Households on the low ground", "Landowners on the high ground" and "Those who say the water will never come".
+  - The hooks:
+    - "The ditches that carry off the water are choked, and the household bound to clear them refuses"
+    - "A bank meant to hold back the water is being quietly left to rot, and someone knows why" (needs navigable)
+    - "Someone is buying the low ground cheaply from frightened owners, and seems very sure the water will not come"
+- **heresy_trial** (14 towns; read in r2s-occupied-thorp-2, r2s-religious_conversion-city-2):
+  - The description: "An accusation of heresy against a prominent figure is splitting the faithful, and those in authority are being pressed to take a side".
+  - The factions: "The accusers", "The accused and their sympathizers" and "Those in authority who would exploit the rift".
+  - The hooks:
+    - "The evidence against the accused is fabricated, and a witness is almost ready to say so"
+    - "The doctrine under accusation is quietly practised by more of the leading households than would admit it"
+    - "A relic held as evidence against the accused has gone missing, and each side blames the other"
+- **pilgrimage_surge** (13 towns; read in r2r-hamlet-6, r2s-monster_pressure-metropolis-1, r2s-famine-village-3):
+  - The description: "A claimed miracle is splitting the settlement: some would proclaim it and welcome the pilgrims it could bring, others call it a fraud that will bring nothing but strangers".
+  - The factions: "Those who would proclaim the miracle", "Residents who want no crowds of strangers" and "Sceptics who doubt the miracle".
+  - The hooks:
+    - "The miracle can be explained mundanely, and the person who can explain it is being kept quiet"
+    - "One family hopes to buy the office that would authenticate the miracle, and the profits that would follow" (needs institution: temple)
+    - "A rival shrine claims the relic at the heart of the miracle is theirs, stolen, and has sent someone to recover it" (needs institution: temple)
+- **popular_uprising** (18 towns; read in r2r-thorp-31, r2r-metropolis-47, r2s-famine-town-1):
+  - The description: "The common people are pressing those in charge over {demands}, and each dispute grows louder than the last".
+  - The factions: "Those pressing their demands", "Those in charge, who will not give way" and "Those waiting to see which side wins".
+  - The hooks:
+    - "Someone is keeping a list of who speaks loudest for the demands, and passing it to those in charge"
+    - "An outside hand is quietly paying for the agitation, and will want something for it"
+    - "A concession has been promised to the common people, and someone in authority means to break the promise"
+- **tyranny** (11 towns; read in r2r-thorp-20, r2s-succession_void-metropolis-2, r2s-occupied-city-1):
+  - The description: "Whether one person is taking more power than anyone granted is the quarrel of the day, and every new rule is read as a step toward tyranny".
+  - The factions: "Those who want a strong hand", "Those who fear a tyrant in the making" and "Those who will serve whoever wins".
+  - The hooks:
+    - "Someone close to authority is gathering powers no one granted, and keeps the record of it locked away"
+    - "A household that spoke out against the new rules has had its goods seized on a pretext, and wants them back"
+    - "Someone is paying for praise of a strong hand in the street, and stands to profit if it comes"
+- **wild_magic** (10 towns; read in r2s-occupied-thorp-0, r2s-under_siege-city-1):
+  - The description: "Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone".
+  - The factions: "Those touched by the flares", "Those who fear them" and "Those who would study the flares".
+  - The hooks:
+    - "The flares are no accident: someone is working magic they cannot control, and hiding the notes"
+    - "A child touched by a flare is showing something the family cannot conceal"
+    - "The flares come more often in one part of the settlement, and those in charge are pretending otherwise"
+
+**Left by batch 2, for the chair:**
+- **trade_dispute:** the seven rows above, 12 towns.
+- The X9 exports rows show the same aftermath shape in OTHER tension types (leadership_vacuum, crime_wave, external_threat, outside debt, corruption_scandal, magical_controversy, population friction, infiltration_fear). They are told in past tense under a type with no own event. Y5 names ten types; widening it is the chair's call.
 
 ## Batch 1 as built by TAIL-HISTORY (its record, kept)
 
