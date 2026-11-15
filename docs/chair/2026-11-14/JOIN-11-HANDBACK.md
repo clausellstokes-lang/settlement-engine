@@ -85,6 +85,7 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 | 3 | lane/tail-close-src-2026-11-15 | 784906a11 (08:44; origin tip = the hash named) | 57cf8e89a | 10e7c76a8 | none; no file both sides moved | 16 files outside docs/; declared-move commit 1393aebb8 (golden carried); run alone: factLayers.walker 3 failed/15 (not risen), standingReadsTheRivalItRead 12/12, settlementQuickGuide 18/18, presumedThings.walker 41/43 (the same two as point 2) |
 | 4 | lane/close-layer-cycle-attempt-2026-11-15 | 36fe6f10c (08:51; origin tip = the hash named) | 061db1367 | 416be57d1 | none (vite.config.js and the layer register/shared merged clean); no file both sides moved | 9 files outside docs/; run alone: layerBoundaries 8/8, engineCoreLazyEdge 3/3, factLayers.walker 1 failed/15 (READERS; 3 before), chainPrintSites 6/6, ruinFilterRoster 12/12, defenceFactReaders 1 failed/22 (red alike before) |
 | 5 | lane/tail-close-doors-2026-11-15 (first pass) | 84a9f46d7 (08:56; origin tip = the hash named) | 04149c5ef | 511f9307d | none; no file both sides moved: its side whole | 20 files outside docs/ (registers, censuses, edge bundles, baselines, landingFixture.js); run alone: poolDominance 16/17, pageCensus 14/14, proseCorpusBytes 18/18, tuningRegister 75/76, engineBundleReplay 5/7 (1 red, 1 skipped) |
+| 6 | lane/tail-close-heap-2026-11-15 | e798161fd (09:12; origin tip = the hash named) | 2d8a6632a | db4e41036 | none | 1 file outside docs/ (`scripts/check-writer-reach.mjs`); nothing run alone (the chair's word) |
 
 ## 3. Every code resolution
 
@@ -97,6 +98,8 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 **Point 4, the files the chair named run alone** (the layer cut 36fe6f10c, ruling T29; base 061db1367; no conflict: `vite.config.js`, `factLayers.register.json` and `factLayers.shared.mjs` were not moved by the joined side since the base, so the branch's side stands whole): `layerBoundaries` 8/8, `engineCoreLazyEdge` 3/3 (both green: no abort); `factLayers.walker` 1 failed / 15 (3 before: the strata and LEAVES arms turned green; the READERS arm stays red until the src seat's door); `chainPrintSites` 6/6; `ruinFilterRoster` 12/12; `defenceFactReaders` 1 failed / 22, red ALIKE at the line before (ae6f0adc8, probe `/home/user/j11probe`): `src/domain/display/defenseDisplay.js` reads 4 unbanked (`/home/user/j11out/t4.*.log`).
 
 **Point 5, the doors' first pass, the files the chair named run alone (counts only)** (84a9f46d7; base 04149c5ef; no conflict; no file both sides moved): `poolDominance.walker` 16/17 (red: "no ceiling sits loose above its measure"); `pageCensus.walker` 14/14; `proseCorpusBytes` 18/18; `tuningRegister.walker` 75/76 (red: "the measured tree matches the committed inventory exactly"); `engineBundleReplay` 5 passed, 1 failed, 1 skipped (red: "the espionage fence's 360-settlement driven corpus: bundle equals in-process"). Derived at an earlier tree: stale at the merged tree, expected by the chair, not a stop (`/home/user/j11out/t5.*.log`).
+
+**Point 6, the heap** (e798161fd, taken BEFORE the reach branch on the chair's seventh word): a reach merge (76528d315) had been opened at b8435c1e2 and its walkers started under an 8 GB heap before that word was read; the runs were stopped and the merge aborted uncommitted (`git merge --abort`; nothing of it landed or was pushed), then the heap landed clean.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -333,4 +336,4 @@ A worktree at origin's tip (`git worktree add /home/user/j11wt -b join11 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed: points 1-5 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors final pass LAST OF ALL; tail-record; tail-close-reach; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
+Landed: points 1-6 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors final pass LAST OF ALL; tail-record; tail-close-reach; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
