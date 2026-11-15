@@ -149,6 +149,11 @@ For each hook I read its carrier on every printing town (`currentTensions[].plot
 - The Y3 culture rows.
 - The rest of Y4, including the plague-gathering rows. These are not a stated law, so the chair should rule on them.
 
+**Named as left, the chair's notes:**
+
+- **X9** (read at hand-back): the exports-only rows of this group, `read-all-3/WORKLIST3-HISTORY.{md,json}` (119 rows, 3 HIGH), are NOT worked. Its rows that remain are to be checked against `history.currentTensions` first.
+- **TAIL-CRISIS's insurgency note** (18222's sibling) is cured in the patch by its reword, "some households no longer pay at all": no offices, no strong power.
+
 **Parked:** 20031 and 20032 (the ailing ruler under a Feudal Appointee or Priestly Guidance). No atom says the ruler is hereditary.
 
 **Named for other files:**
