@@ -13,7 +13,7 @@ Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the cha
 - **(Y14) THE ARRIVAL POOL** (`src/data/arrivalProse.js`): its measure is owed: each line that names a house, a trade or a good, the towns that print it, the towns where the thing does not stand. Cure by the file's form (a declaration, or a twin without the noun; the slot keeps its draw; a draw moved outside the cured line's own pool is a stop). The chooser `src/generators/narrative/arrivalScene.js` is NOT this group's (the narrative seat's): a cure that needs it is named.
 - **(Y15)** The traditions' "Last held" line under a plague is written by a tab component and a PDF section, not this group's files: named for a display seat by the chair. Nothing here.
 - **(Y8 stands)** Under a plague or a quarantine no line gathers a crowd as in ordinary times.
-- **(Y11 stands)** The atoms `ruling body` and `rival power` are on the joined line, not this branch; a measuring seat is counting whether the density resize can change the governing power's kind after the history is written (`rival power` is known unsafe for the history). Until the chair's word, NO line is keyed by either; such rows are parked with their measure.
+- **(Y11, lifted for `ruling body` at 02:26 UTC: see WHAT IS LEFT 4)** The atoms `ruling body` and `rival power` are on the joined line, not this branch; a measuring seat is counting whether the density resize can change the governing power's kind after the history is written (`rival power` is known unsafe for the history). Until the chair's word, NO line is keyed by either; such rows are parked with their measure.
 - **(X9)** The exports' read (`read-all-3/WORKLIST3-HISTORY.json`): what is left after Y5, checked against the tip; measured with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`.
 
 ## Batch 3: Y13, every tension type (TAIL-HISTORY-3, 2026-11-15)
@@ -147,7 +147,7 @@ Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the cha
    - 16625 is DONE by Y13 for the unanchored towns (139 → 32). The 32 left are the timeline's guild war, past and true.
    - B15078 is cured where unanchored (165 → 28). The 28 that remain are anchored and print "Price regulators" in small places. That is a size law for the template's own factions, the chair's call.
    - 11894 and 28512 (foodways, Y3); B19917 and 07400; the Y3 culture rows; the rest of Y4; **Y8** (no gathering under a plague or a quarantine).
-4. **Y9 / Y11 (20031, 20032):** parked until the chair's word on `ruling body`.
+4. **Y9 / Y11 (20031, 20032): UNPARKED.** The chair, 2026-11-15 02:26 UTC: the hold on `ruling body` is LIFTED. The measuring seat found that the density resize never changes the governing power on the 720, so the atom is safe and takes new lines. It is on the joined line at d817736d8: merging that is the only merge a seat makes. Do NOT key on the governing power's capture state (it moves after the write in 103 towns) or on its legitimacy-crisis note (11). `rival power` stays unsafe for the history.
 5. **Named for other files:**
    - `siegeCapability.js`: its siegeNarrative copies the first tension's words, moved in 42 towns by batch 3 and printing nowhere.
    - `crisisSummaryVantage.js`, `TraditionsTab.jsx` (Y15) and `arrivalScene.js` (the chooser's own scenes; the redraw-once rule above is why a bare declaration in its pools moves later beats).
