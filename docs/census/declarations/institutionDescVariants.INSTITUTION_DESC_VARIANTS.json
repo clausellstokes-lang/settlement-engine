@@ -711,7 +711,7 @@
     },
     {
       "id": "hamlet|Crafts|Access to external mill#0",
-      "text": "A manor mill holding the sole right to grind (the banalité).",
+      "text": "The hamlet's grain is carried elsewhere to be ground.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -719,7 +719,7 @@
     },
     {
       "id": "hamlet|Crafts|Access to external mill#1",
-      "text": "The lord's mill, and by banalité the only one grain may lawfully be ground at.",
+      "text": "Nothing is ground here; the grain goes out of the hamlet for grinding.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1357,7 +1357,7 @@
     },
     {
       "id": "village|Economy|River ferry#0",
-      "text": "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Carts, beasts and walkers wait their turn on the bank.",
+      "text": "A flat-bottomed ferry over the river, the crossing rights held in one family. Carts, beasts and walkers wait their turn on the bank.",
       "needs": [
         "river"
       ],
@@ -1367,7 +1367,7 @@
     },
     {
       "id": "village|Economy|River ferry#1",
-      "text": "The river is crossed here by a flat-bottomed ferry, worked by a family that has held the right to it for generations.",
+      "text": "The river is crossed here by a flat-bottomed ferry, worked by the family that holds the right to it.",
       "needs": [
         "river"
       ],
@@ -2075,7 +2075,7 @@
     },
     {
       "id": "town|Economy|Fish market#0",
-      "text": "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.",
+      "text": "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight whenever fish can be had, each checked for rot.",
       "needs": [
         "navigable",
         "market"
@@ -2087,7 +2087,7 @@
     },
     {
       "id": "town|Economy|Fish market#1",
-      "text": "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.",
+      "text": "The market wardens keep a roofed fish market where, whenever fish can be had, fresh catch and salted barrels are weighed out and inspected before sale.",
       "needs": [
         "navigable",
         "market"
@@ -3643,7 +3643,7 @@
     },
     {
       "id": "town|Entertainment|Traveling performers#0",
-      "text": "Bards, jugglers, and acrobats, come for the fairs.",
+      "text": "Bards, jugglers, and acrobats, come for the festivals.",
       "needs": [
         "market"
       ],
@@ -3653,7 +3653,7 @@
     },
     {
       "id": "town|Entertainment|Traveling performers#1",
-      "text": "The fairs bring bards, jugglers, and acrobats through.",
+      "text": "The festivals bring bards, jugglers, and acrobats through.",
       "needs": [
         "market"
       ],

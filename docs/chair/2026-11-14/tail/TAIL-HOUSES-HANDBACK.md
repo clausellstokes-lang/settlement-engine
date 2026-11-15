@@ -417,7 +417,7 @@ Gates: eslint 0; typecheck:domain:strict 0; typecheck:ratchet OK; presumed-thing
 - **(01:00)** The citadel silence approved; its measure is in batch 3.
 - **(H10, 01:01)** `ruling body` and `rival power` stand on the joined line at eeaa06816. MERGE ONLY WHEN a governance row is keyed to one (one merge commit, the before re-taken at the merged tree). NOT MERGED: no governance row was taken in this seat's two batches.
 
-## TAIL-HOUSES-2 · what is left for the next seat
+## TAIL-HOUSES-2 · what is left for the next seat (as TAIL-HOUSES-2 left it; see TAIL-HOUSES-3's WHAT IS LEFT below)
 
 1. **THE GOVERNANCE ROWS (H7, 21 rows, the list above under "Left for the next seat")**: every one needs `ruling body` or `rival power` (the merchant guilds as "a political force"; "a loose council where nothing official exists"; "a single household head ... without ever being chosen"; "an elected council"): H10 says how: merge the joined line at eeaa06816 first (its own commit), re-take the before at the merged tree, then key each with a twin where the slot would fall mute. Add the governance rows of the H5 check here (occupation and legitimacy reasons, not the leaf's: B14388, B03373, 02668, 20701, B05076, 03077 (cured in batch 4), B02540, 03522, 16785, 14179; 03031, 00186, 14950, 14953, 03033) and X9's 29352, 29354, 15791, 16720.
 2. **H7's remaining ordinary-times rows of the first worklist** (by shape, unmeasured): B06447 "Draws on: herb gathering areas" (69) and 06832 (39) (resourceChains dependsOn vs the chain state); 20982/20983 (45/33) the fish market's carted or fresh fish vs imports and depleted fisheries; 16366 "Refined ingots" where no Smelter or Mint (40); B13188 the toll bridge "steady" where isolated (33); 12916 "Major forces (hundreds to thousands)" in a city of 2,679 (26; size words, H2); 22677/22676 salaried soldiers where none are hired (7/6); B12963 the hot-springs chain (22); B02898 the hamlet's jetty (15); 14325/14350/14282 geography mustImport lines (11/2/1); 03036 "the local alehouses" (1); 15793 "only 1 craft institution" (1); 12014 the brewery (1, banked text: see batch 4).
@@ -473,6 +473,104 @@ Gates: eslint 0; typecheck:domain:strict 0; typecheck:ratchet OK; presumed-thing
 - H5's script: each row's house by its text over the catalogue, `INSTITUTION_DESC_VARIANTS` and `DESC_VARIANT_SIBLINGS` (the journal's `House: text` prefix; a chain row by `SUPPLY_CHAIN_NEEDS` id) -> `catalogIdForName` -> the joined line's `crisisDependence.js` (copied out as a module).
 - The walker: `node scripts/presumed-things-door.mjs --check` (fresh / stale), `--shrink` after a rewording; the door banks only what stood at the widening's base, so a reworded text whose old form was BANKED must avoid the banked word.
 - Tips: H5 5a5166898; batch 3 2c10ddefe; batch 4 this file's commit. Handed back after batch 4 by time (about 75 minutes; the token count read 0).
+
+## TAIL-HOUSES-3 · the chair's rulings since (2026-11-15 02:10 UTC; each vetoable by the owner)
+
+- **(H12)** THE GOVERNANCE ROWS STAY PARKED: the atom `ruling body` takes NO NEW LINE until the chair says so (a measuring seat is answering whether the density resize changes the governing power's one-or-many kind after the lines are written). Make no merge for them now.
+- **(H13)** THE ORDER: the exports' rows first (X9: the 39 still printing on the PDF and the journal: the geography strengths are the widest); then the rows of the first worklist that print in FIVE TOWNS OR MORE; a row in fewer than five towns waits. H9 ("(powerful)") stays parked as H11 wrote it; the brewery's banked text (12014) waits for the close.
+- **(H14)** Everything NEW on the tabs at the first landed tip was read cold (READ-ALL-4): no row of these files was flagged: nothing to take.
+- **(U1)** The account's weekly usage warning: commit and push every batch the moment it holds, WHAT IS LEFT current in the same push; hand back at 250,000; one line to the chair only at the hand-back, a stop, or a question.
+
+## TAIL-HOUSES-3 · Batch 5 · X9 first (H13): a strategic line or a house text claims a navy, caravans, generations, a fair, a lord or fish the record denies
+
+Seat: TAIL-HOUSES-3, on this branch from 9525e011b (read back from origin), scratch worktree; the before run on a second clean worktree at the same tip (`wtbase`), so the tree under edit never rendered.
+
+THE SHAPES (H2/H7, ordinary times; every text-keyed copy moved with its text: the colour column, `DESC_VARIANT_SIBLINGS` and `DESC_VARIANT_DECLARATIONS` keys, the declaration ledger `docs/census/declarations/institutionDescVariants.INSTITUTION_DESC_VARIANTS.json`; NO DRAW MOVED: the same pools, hash and index):
+- (G) THE TERRAIN'S STRATEGIC LINE (`geographyData.js :: TERRAIN_DATA.strategicValue`, printed raw by the PDF and the journal): the coast's "controls sea routes and naval access" is backed by no naval force in ANY of the 113 coastal census towns (no navy, fleet or admiral house; a thorp of 7 prints it); reworded "a coastal position, within reach of the sea routes and naval access" (the rating word "High - " kept: `defenseStateProse.js :: TERRAIN_PRIZE_OF` binds it). The desert's "controls caravan routes" is false in 14 of 34 (isolated, or no caravan house or chain); reworded to the hedge "water sources are strategic, and command any caravan route that comes this way" (true where caravans come, and claims none where none do).
+- (F) THE RIVER FERRY "for generations" (the catalogue row, two variants and their three water twins): false in 10 of 119 ferry towns (`history.age` under 60: the read-in village is 42 years old); reworded to hold the right without a span ("holds the crossing rights", "held in one family", "the family that holds the right to it"). No age word in the vocabulary, so no twin: the reworded line replaced a true one in 109 towns (silence of the span only; the family's right still prints).
+- (P) TRAVELLING PERFORMERS "come for the fairs" (the town catalogue row and its two variants): false in 11 of 20 (no Annual fair or Major annual fairs); "festivals" in their place (no house claimed).
+- (M) THE HAMLET'S EXTERNAL MILL named the lord's or the manor's, by banalité (the catalogue row and two variants): false in 104 of 120 (`ruler: lord` does not hold). A sibling keyed on `ruler: lord` was not taken: the ruler kind is not settled at the description draw (`birthFactsOf` carries no `powerStructure`: an H8-shaped key). Reworded to claim no lord and no mill house ("Grain is taken out of the hamlet to be ground."); my first wording named "mill" and made 3 fresh walker hits: reworded before the commit. Silences the banalité in the 16 lord-ruled hamlets (fewer than 20).
+- (C) THE FISH MARKET'S INPUT, in the one hedge form "whenever fish can be had" (its three fresh-catch texts and their three carted twins): the catch is false in 32 of 104 (the fisheries depleted, none live); the carted salt fish in 152 of 152 (no fish source and no fish among the primary imports). Also cures H5's 16857 and 06002 (siege, "fish carted in": listed for the services seat) and B05738 at the writer.
+
+MEASURE (the record, `bydesc.mjs` over the base corpus; towns printing by the inventory): before -> after, tabs and exports (`SURFACES=PDF,Journal`):
+
+| id | list | towns before -> after | false before | sentence (before) |
+|---|---|---|---|---|
+| 12239 | X9 | 113 -> 0 (PDF) | 113 | High - controls sea routes and naval access |
+| 25084 | X9 | 113 -> 0 (journal) | 113 | Strategic value: High - controls sea routes and naval access |
+| 16377 | X9 | 34 -> 0 (PDF) | 14 | Medium - controls caravan routes, water sources are strategic |
+| 25094 | X9 | 34 -> 0 (journal) | 14 | Strategic value: Medium - controls caravan routes, ... |
+| 20982 | W1 | 45 -> 0 | 45 | The market wardens keep a roofed fish market where carted barrels of salt fish ... |
+| 20983 | W1 | 33 -> 0 | 17 | The market wardens keep a roofed fish market where fresh catch and salted barrels ... |
+| 10230 | X9 | 33 -> 0 (journal) | 17 | Fish market: (the same) |
+| 10228 | X9 | 32 -> 0 (journal) | 7 | Fish market: Covered stalls ... the morning's catch ... |
+| 16857 | H5 | 58 -> 0 | 58 | Salted, smoked and dried fish come in by cart, ... |
+| 06002 | H5 | 49 -> 0 | 49 | Covered stalls ... salt fish and dried fish carted in by the barrel ... |
+| B05738 | H5 | 32 -> 0 | 7 | Covered stalls ... the morning's catch or the week's salted barrels ... |
+| 04165 | X9 | 32 -> 0 (journal) | 26 | Access to external mill: The lord's mill, and by banalité ... |
+| 22797 | X9 | 19 -> 0 (journal) | 2 | River ferry: The river is crossed here ... for generations. |
+| 29541 | X9 | 6 -> 0 (journal) | 2 | Traveling performers: Bards, jugglers, acrobats visit during fairs. |
+| 29542 | X9 | 7 -> 0 (journal) | 6 | Traveling performers: ... come for the fairs. |
+| 29543 | X9 | 7 -> 0 (journal) | 3 | Traveling performers: The fairs bring ... |
+
+THE INVENTORY DIFF (before -> after5). Tabs: 29,856 -> 29,856, gone 17, new 17, IN FEWER TOWNS 0, in more 3 (the premium prompt's render flake, "Patron deity" / "Assign a patron god ..." / "Upgrade to premium ...", 716 -> 717, as in batches 3 and 4: nothing of this batch prints there). Exports: 35,765 -> 35,765, gone 35, new 35, in fewer 0, in more 0. All 16 rows GONE. THE INHERITORS are exactly the 17 (tabs) and 35 (exports) rewordings; read in place: r2r-hamlet-28 and r2r-thorp-59 (the coast line, no navy), r2r-thorp-46 (desert, isolated), r2r-village-56 (the ferry), r2r-town-15 (the performers), r2r-hamlet-3 (the mill), r2r-town-0 and r2r-town-3 (the fish market).
+
+TOLD TO THE CHAIR at the hand-back, not before the push (ruling U1's diet; each is a REWORDING that replaced a line true in more than twenty towns, not a silence): the ferry's span (109 towns), the fish market's hedges (72 of the catch's 104), the coast line (the 48 port towns of town size and up with docks; no naval fact backs "controls" in any).
+
+DECLARED MOVE: `institutions[].desc` and `resourceAnalysis.strategicValue` (text only; no draw moved).
+
+Guard: `tests/data/tailHouses5ExportsTerrain.test.js`: 19 RED pairs (19 of 19 red at the base, each with the record's denial asserted: no navy, isolated, `history.age` < 60, no fair, no lord, fisheries spent, no fish in), 5 KEEP pairs (green at the base and after). The RED table is its own plant: each pair reds on the old text.
+
+Gates: eslint 0 on the touched files; typecheck:domain:strict 0; typecheck:ratchet OK (167, ceiling 167); presumed-things `--check` fresh 144 (as at the base), 3 first-register stale rows (the old mill literals) removed by `--shrink`; page-census `--grid`: 0 rises (the same 2 falls, P7a); the 99 test files naming the touched files: only CARRIED reds (each red at the base): gapLineHousesByKind, urbanBandInstitutions G5, wiringCensusDeclared, generatorGoldenMaster, and coherenceAgreeCures (2: the gate tally; red at 9525e011b too).
+
+### The veto list, batch 5 (every new line; towns printing; the smallest and largest it reaches, and a crisis town)
+
+- "Nothing is ground here; the grain goes out of the hamlet for grinding." (32 towns): r2r-hamlet-0 (22), r2s-slave_revolt-hamlet-2 (98), r2s-famine-hamlet-2 (92)
+- "The hamlet's grain is carried elsewhere to be ground." (44 towns): r2r-hamlet-44 (21), r2s-succession_void-hamlet-0 (99), r2s-famine-hamlet-3 (22)
+- "Grain is taken out of the hamlet to be ground." (44 towns): r2r-hamlet-16 (20), r2r-hamlet-24 (100), r2s-occupied-hamlet-0 (20)
+- "A flat-bottomed ferry over the water, the crossing rights held in # family." (17 towns): r2r-village-53 (269), r2r-metropolis-52 (78,043), r2s-famine-town-2 (407)
+- "The water is crossed here by a flat-bottomed ferry, worked by the family that holds the right to it." (13 towns): r2r-village-41 (81), r2r-metropolis-13 (328,486)
+- "The ferryman's family holds the crossing rights, and every crossing pays the family its fare." (50 towns): r2s-under_siege-village-3 (123), r2r-metropolis-8 (344,689)
+- "The river is crossed here by a flat-bottomed ferry, worked by the family that holds the right to it." (19 towns): r2r-village-56 (117), r2s-mass_migration-metropolis-0 (44,124), r2s-occupied-town-3 (2,018)
+- "A flat-bottomed ferry over the river, the crossing rights held in # family." (20 towns): r2s-succession_void-village-2 (87), r2r-metropolis-46 (131,927), r2s-famine-village-1 (90)
+- "The market wardens keep a roofed fish market where, whenever fish can be had, carted barrels of salt fish are weighed out and inspected before sale." (45 towns): r2r-town-36 (440), r2r-metropolis-14 (271,164), r2s-under_siege-town-1 (1,339)
+- "The market wardens keep a roofed fish market where, whenever fish can be had, fresh catch and salted barrels are weighed out and inspected before sale." (33 towns): r2r-town-3 (1,168), r2r-metropolis-6 (216,641), r2s-occupied-city-2 (13,152)
+- "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot." (58 towns): r2r-town-24 (423), r2s-occupied-metropolis-3 (262,531), r2s-under_siege-town-2 (2,453)
+- "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight whenever fish can be had, each checked for rot." (32 towns): r2r-town-18 (1,095), r2r-metropolis-8 (344,689), r2s-famine-city-0 (2,909)
+- "Covered stalls under the wardens' eye, selling salt fish and dried fish carted in by the barrel whenever fish can be had, each checked for rot." (49 towns): r2s-infiltrated-town-2 (660), r2s-succession_void-metropolis-3 (295,750), r2s-famine-town-3 (737)
+- "Whenever fish can be had, the morning's catch or the week's salted barrels are sold by weight and inspected for rot." (39 towns): r2s-politically_fractured-town-0 (843), r2r-metropolis-13 (328,486), r2s-under_siege-town-0 (2,137)
+- "Bards, jugglers, and acrobats, come for the festivals." (7 towns): r2r-town-36 (440), r2s-recently_betrayed-town-1 (2,359)
+- "The festivals bring bards, jugglers, and acrobats through." (7 towns): r2r-town-21 (1,181), r2r-town-51 (2,465)
+- "Bards, jugglers, acrobats visit at festival time." (6 towns): r2s-politically_fractured-town-0 (843), r2r-town-58 (2,468)
+- "Medium - water sources are strategic, and command any caravan route that comes this way" (34 towns): r2s-infiltrated-thorp-3 (6), r2r-metropolis-12 (142,760), r2s-occupied-hamlet-1 (95)
+- "High - a coastal position, within reach of the sea routes and naval access" (113 towns): r2r-thorp-59 (7), r2r-metropolis-13 (328,486), r2s-under_siege-thorp-1 (16)
+
+### Struck by TAIL-HOUSES-3 (verified by the record; one line why)
+
+- 16376 / 25093 (67; "agricultural heartland, but exposed to raids", read under a famine): the clause is already conditioned at its writer (`resourceGenerator.js :: STRATEGIC_CLAUSES`, grain or grazing land; else "open country"); grazing land is farmland; the famine is H1's class.
+- 15808 / 25089 (54) and 15809 / 25090 (13) ("difficult to besiege", read under a siege or a weak defence): a property of the forest ground (the desk's FAVOURABLE terrain map, `defenseStateProse.js :: TERRAIN_DEFENCE_OF`, bound by `defenseStateProseDesk.test.js`); a siege under way does not make the ground easy; the defence's strength prints on its own line.
+- 06314 (3; the caravanserai "walled" where the town has no walls): the walls are the waystation's own compound's, not the town's defence.
+- B06447 (69) / 06832 (39) ("Draws on: ..." where the resource is absent): a requirement list, not a claim of presence (`registeredWords.js:801`: "NOT A CLAIM: ... 'Draws on: …'").
+- 22677 (7) / 22676 (6) (the Free company hall's "salaried men" where the defence hires none): the hall is the band's own billet "between campaigns"; its men are soldiers for hire whether or not this town has hired them.
+- 16366 (40; "Refined ingots" under Mining & Coinage with a Jeweller and no Smelter or Mint): refining precious metal to the ingot is the goldsmith's own work; the chain's processor holds.
+- B13188 (33; the toll bridge's "Modest revenue, but steady" where isolated, 3 of 33): isolation is the trade route's abstraction, not an empty bridge; the keeper takes fees from whoever crosses (the siege twin already speaks for the cut roads).
+
+### Named for other groups (not this group's files; the leaf or the writer to call)
+
+- THE PDF'S CHAIN FLOW (`src/pdf/.../SupplyChainFlow`, `EconomicsTrade.jsx`): `resource » house » outputs` printed as made where the chain's input is absent or depleted, while the tab's card reads `domain/chainYield.js` ("Normally yields"): 04687 (99), 14363 (47), 16297 (12), 06310 (10), 11352 (4), 20868 (3), 10518 (2), 11602 (2). One cure: the flow reads `chainYieldRefused` as the card does.
+- THE CHAIN STATE'S "(impaired)" against LAND's "running" (upstream / services labels): 06896 (64), 05868 (15), 10509 (5), 19204 (2), 06275 (2), 25069 (2) for the chain-state writer; 21584 (4, pilgrimage) and 08266 (1, divine healing) are H4's (parked for the owner).
+- THE MUST-IMPORT LIST printed as a CRITICAL DEPENDENCY (`resourceGenerator.js :: buildViabilityReport`, the PDF's "Critical dependencies"): "stone (for major construction)" in a thorp of 7 (32564, 76), "timber (for large vessels)" with no shipyard (32789, 58), 22250 (34), 29206 (29), 15713 (21), and the tab's "Needed, and not brought in: ..." beside an import of iron (14325, 11): the classification is by terrain, not by tier or by the imports; the texts are terrain words and true as such.
+- THE FACTION BOOST (`faction_boost` adds a Mercenary quarter with the raw catalogue text after the description draw, so its tier sibling is never read): 12916 "Major forces (hundreds to thousands)" in r2s-under_siege-city-1 (2,679), the one town where it is false.
+- THE RECORD SEAT: the Vintner's grapes (29818, 93; 29820, 9): H6, as named.
+- A stale comment only: `defenseStateProse.js:845` quotes the old coastal line in prose (not this group's file).
+
+## WHAT IS LEFT (TAIL-HOUSES-3, at batch 5's push; supersedes the TAIL-HOUSES-2 list above)
+
+1. **Batch 6 (in hand at this push, NOT DONE yet)**: the Fisher's landing's three texts take the one hedge for their catch ("whenever fish can be had"): false only where the fisheries are spent and none live (12 of 76 landings: B02898 2 of 15, its two siblings 6 of 31 and 4 of 30; the coastal hamlets with no fishing-grounds resource fish the sea: the record's food sources hold fish and no gap is named, so not false there).
+2. **PARKED (H12)**: every governance row (the TAIL-HOUSES-2 list "GOVERNANCE", the H5 occupation/legitimacy rows, X9's 16720, 16785, 29352, 29353, 29354, 14179, 15791, 06454). No merge made.
+3. **PARKED (H4)**: 15712 (60), 09319 (7), 21584, 08266.
+4. **WAITS (H13)**: H9 "(powerful)" (15 towns, H11's two cures); 12014 the brewery (banked text) for the close; every row printing in fewer than five towns (X9: 14624, 14634, 19869, 14635, 09159; W1: 03036, 15793, 14350, 14282, 12559 and the H1 table's small rows).
+5. **The X9 rows H5 answered by the leaf or sent to the services seat**: as H5 lists them (no cure here).
 
 ## Rows NOT cured (what is left, by class)
 
