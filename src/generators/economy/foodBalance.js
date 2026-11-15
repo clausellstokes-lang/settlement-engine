@@ -398,90 +398,45 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     dailyProductionFinal = foodSecurity.dailyProduction;
     dailyNeedFinal       = foodSecurity.dailyNeed;
     surplusFinal         = dailyProductionFinal - dailyNeedFinal;
-    // The writer's own gap where it publishes one. Re-deriving it from the
-    // ROUNDED production/need pair costs up to a pound, which is nothing on a
-    // city and a percentage point and a half on a thorp whose whole daily need
-    // is sixty pounds — and that pound then bit through the clamp below and
-    // split the residual percentage between the Economics tab and the Daily
-    // Life tab on 12 of the golden master's 525 configurations.
+    // The writer's own gap where it publishes one (re-derived from the ROUNDED pair it cost up to a pound: a percentage
+    // point and a half on a sixty-pound thorp, split between two tabs on 12 golden configurations).
     rawDeficitFinal      = Number.isFinite(foodSecurity.rawDeficit)
       ? Math.max(0, foodSecurity.rawDeficit)
       : Math.max(0, -surplusFinal);
-    // The lbs are reconstructed from deficitPct (rounded) + dailyNeed, the two fields every
-    // persisted record carries. The writer's own per cent is the share of its own rounded
-    // pounds (foodGenerator.js, LANDING-7 lane H), so on a small need this recovers them.
-    // Clamp into [0, rawDeficit].
-    const cDeficitPct = Number.isFinite(foodSecurity.deficitPct) ? foodSecurity.deficitPct : 0;
-    deficit = Math.max(0, Math.min(rawDeficitFinal, Math.round((cDeficitPct / 100) * dailyNeedFinal)));
-    // ⛔ ONE FIGURE, DERIVED FROM THE OTHER (LANDING-7 lane H, STOP-1, 2026-11-06). The view
-    // publishes integer pounds, so its share is the share THOSE pounds are of the need it
-    // publishes, rounded as the record invariant V-FOOD-PCT rounds it, and never the writer's
-    // percentage carried beside them. Carried, the two split on a small need: a 1% gap on a
-    // 32 lb thorp is a third of a pound, which publishes as 0 lb beside 1% (the sign broken), and
-    // a 1 lb floor under it published 1 lb beside 1% where those pounds are 3% (the share broken,
-    // on 17 golden rows). Derived, a gap that rounds to no pound reads 0%, and a positive share
-    // always has the pounds that produce it. No floor.
-    deficitPercent = Math.round(dailyNeedFinal) > 0
-      ? Math.round((deficit / Math.round(dailyNeedFinal)) * 100) : 0;
-    // WHO CARRIES THE COVERED PORTION. The writer publishes its own split
-    // (foodSecurity.importCoverage / .magicOffset, lb/day), so read it: a view
-    // that re-derives a number its writer already holds is a second source of
-    // truth, and this one was wrong twice over. Its `canImportFood` gate tested
-    // the LOCAL rawDeficit — the figure the canonical block three lines above has
-    // just SUPERSEDED — so a settlement whose local model saw a surplus while the
-    // canonical model saw a real gap was credited with zero imports and a magical
-    // offset covering the whole gap: measured at 52 of the golden master's 525
-    // configurations, each one dropping its "+ N imported" chip, its import-bar
-    // segment, its "Trade covers X% of gap" caption and its importChannel from
-    // both the Economics tab and the PDF chapter. Its rate ladder also lacked the
-    // writer's low-agri terrain boost, so even where the gate opened the split
-    // between channel and magic was off.
-    //
-    // The covered TOTAL stays anchored to deficitPct (the band's own number), so
-    // the sign law above is untouched; only its attribution is read rather than
-    // guessed. Proportions are applied to the covered total so the two channels
-    // still sum EXACTLY to rawDeficit − deficit.
-    const totalCoverage = Math.max(0, rawDeficitFinal - deficit);
     const cImport = Math.max(0, Number(foodSecurity.importCoverage) || 0);
     const cMagic  = Math.max(0, Number(foodSecurity.magicOffset) || 0);
-    const canonicalSplit = Number.isFinite(foodSecurity.importCoverage)
-      && Number.isFinite(foodSecurity.magicOffset)
-      && (cImport + cMagic) > 0;
-    // Settlements persisted before the writer published its split carry only
-    // deficitPct, so the original reconstruction stays as the arm that reads
-    // them — with the import gate now asking about the CANONICAL gap.
-    const importPortion = canonicalSplit
-      ? Math.min(totalCoverage, Math.round(totalCoverage * (cImport / (cImport + cMagic))))
-      : (importCoverageRate > 0 && rawDeficitFinal > 0
-        ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate))
-        : 0);
-    const magicResidual = Math.max(0, totalCoverage - importPortion);
-    // ONE FOOD LEDGER (TAIL-DEFECON-5, ruling R3; RECORD-MEASURE-3 row 3, c3a). Where the writer publishes its own
-    // split (imports and magic, lb/day), the view READS it, and its shortfall is what the writer's pounds leave of
-    // the need where the writer has a gap: the Economics tab's own remainder (`foodRowShown.js`). Rebuilt from the
-    // rounded `deficitPct`, a city's shortfall moved by up to a hundred pounds and a metropolis's by up to two
-    // thousand, so the viability's "cannot cover ~N lbs" and the tab's "Short: N" printed two figures (221 of the
-    // census's 720). Its per cent is the tab's too: the share its pounds give, and never 0 beside a pound short (the
-    // tab's own floor; within V-FOOD-PCT's one step), so no verdict reads "0% of daily food need remains uncovered".
-    // The reconstruction stays for a persisted record that carries no split.
-    const writerSplit = Number.isFinite(foodSecurity.importCoverage) && Number.isFinite(foodSecurity.magicOffset);
-    if (writerSplit) {
-      importCoverageFinal = Math.max(0, Math.round(cImport));
-      magicFoodOffset = Math.max(0, Math.round(cMagic));
+    const needLb = Math.round(dailyNeedFinal);
+    // ⛔ ONE FIGURE, DERIVED FROM THE OTHER (LANDING-7 lane H, STOP-1): the view's per cent is the share ITS pounds are of
+    // the need, rounded as V-FOOD-PCT rounds it, never the writer's percentage carried beside them.
+    const shareOf = (/** @type {number} */ lb) => (needLb > 0 ? Math.round((lb / needLb) * 100) : 0);
+    if (Number.isFinite(foodSecurity.importCoverage) && Number.isFinite(foodSecurity.magicOffset)) {
+      // ONE FOOD LEDGER (TAIL-DEFECON-5, ruling R3; RECORD-MEASURE-3 c3a). The writer publishes its split (imports,
+      // magic, lb/day), so the view READS it, and its shortfall is what the writer's pounds leave of the need where the
+      // writer has a gap: the Economics tab's own remainder (`foodRowShown.js`). Rebuilt from the rounded `deficitPct`
+      // and split by proportion, the viability's "cannot cover ~N lbs" and the tab's "Short: N" were two figures in 221
+      // of the census's 720 (by up to 2,011 lb on a metropolis). Its per cent is never 0 beside a pound short (the tab's
+      // own floor, within V-FOOD-PCT's one step): no verdict reads "0% of daily food need remains uncovered".
+      importCoverageFinal = Math.round(cImport);
+      magicFoodOffset = Math.round(cMagic);
       magicFoodNote = magicFoodOffset > 0 ? magicFoodNoteFor() : '';
       deficit = Number(foodSecurity.deficit) > 0
         ? Math.max(0, Math.round(dailyNeedFinal - dailyProductionFinal - importCoverageFinal - magicFoodOffset)) : 0;
-      deficitPercent = deficit > 0 && Math.round(dailyNeedFinal) > 0
-        ? Math.max(1, Math.round((deficit / Math.round(dailyNeedFinal)) * 100)) : 0;
-    } else if (magicResidual > 0 && magicOn && magicFoodRate > 0) {
-      importCoverageFinal  = importPortion;
-      magicFoodOffset      = magicResidual;
-      magicFoodNote        = magicFoodNoteFor();
+      deficitPercent = deficit > 0 ? Math.max(1, shareOf(deficit)) : 0;
     } else {
-      // No magic caster to credit: the whole covered gap is import-carried.
-      importCoverageFinal  = totalCoverage;
-      magicFoodOffset      = 0;
-      magicFoodNote        = '';
+      // A record persisted before the writer published its split carries only `deficitPct` and the need: the pounds are
+      // reconstructed from them, clamped into [0, rawDeficit], and the covered gap is import-carried unless a caster
+      // stands (the import gate asks about the CANONICAL gap, not the local model's).
+      const cDeficitPct = Number.isFinite(foodSecurity.deficitPct) ? foodSecurity.deficitPct : 0;
+      deficit = Math.max(0, Math.min(rawDeficitFinal, Math.round((cDeficitPct / 100) * dailyNeedFinal)));
+      deficitPercent = shareOf(deficit);
+      const totalCoverage = Math.max(0, rawDeficitFinal - deficit);
+      const importPortion = importCoverageRate > 0 && rawDeficitFinal > 0
+        ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate)) : 0;
+      const magicResidual = Math.max(0, totalCoverage - importPortion);
+      const magicCredited = magicResidual > 0 && magicOn && magicFoodRate > 0;
+      importCoverageFinal = magicCredited ? importPortion : totalCoverage;
+      magicFoodOffset = magicCredited ? magicResidual : 0;
+      magicFoodNote = magicCredited ? magicFoodNoteFor() : '';
     }
   }
 
