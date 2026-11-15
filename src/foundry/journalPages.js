@@ -43,6 +43,9 @@ import { foodwaysLineOf } from '../domain/foodways.js';
 import { tradePillWord } from '../domain/display/tradePillWord.js'; // SURFACES-3 item 2 (r3): the tab's pill word
 import { foodWordShown } from '../domain/display/foodWordShown.js';
 import { chainStateOnPage } from '../pdf/lib/chainStateOnPage.js'; // SURFACES-1 item 1: the tab's state in the tab's words
+// TAIL-EXPORTS-JOURNAL-2 batch 3 (the chair's rulings E3, E12): a row that lives on what a siege, an outbreak or a famine
+// stops is marked by the tabs' one leaf, and the page says once that its rows are of ordinary times.
+import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, STOPPED_WORD } from '../domain/display/crisisStoppedRow.js';
 import { cultureOnPage } from '../pdf/lib/cultureOnPage.js'; // EXPORTS-B24 · B2: the PDF's culture block's reader
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -301,20 +304,30 @@ function servicesPage(vm) {
   ) || null;
 }
 
-function institutionsPage(vm) {
+function institutionsPage(vm, settlement = vm.raw) {
   const detailed = vm.services.detailed || [];
   if (!detailed.length) return null;
+  // E12 (TAIL-EXPORTS-JOURNAL-2 batch 3): the Institutions tab's call (InstitutionsTab.jsx): each house read by the
+  // crisis leaf off the RECORD's house (the slice keeps the display name, not the catalogue id; servicesSlice maps the
+  // roster one to one), its mark before its description, the page's one head line where a house is marked.
+  const crises = stoppingCrisesOf(settlement);
+  const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const stoppedBy = new Map(detailed.map((i, idx) => [i, rowStoppedBy(settlement, 'house', roster[idx], crises)]));
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values()].filter(Boolean));
+  const descOf = (i) => (stoppedBy.get(i) ? markedDescription(crisisMarkText(settlement, stoppedBy.get(i)), i.description) : i.description);
   const byCat = new Map();
   for (const inst of detailed) {
     if (!byCat.has(inst.category)) byCat.set(inst.category, []);
     byCat.get(inst.category).push(inst);
   }
   return md(
+    lede(ordinaryLine),
+    ordinaryLine ? '' : null,
     [...byCat.entries()].map(([cat, list]) => md(
       `## ${esc(cap(humanize(cat)))}`,
       // The institution label seam (ODQ 934.13): the VTT journal is a reader surface like
       // any other, and it printed the raw catalogue key beside a PDF that did not.
-      list.map(i => `- **${esc(institutionHouseLabel(i))}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${i.description ? `: ${esc(i.description)}` : ''}`),
+      list.map(i => `- **${esc(institutionHouseLabel(i))}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${descOf(i) ? `: ${esc(descOf(i))}` : ''}`),
       '',
     )),
   );
@@ -323,9 +336,20 @@ function institutionsPage(vm) {
 function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settlement handed in (tonightPage's idiom), not read off vm.raw
   const e = vm.economics;
   const trade = tradeListsAsPrinted(settlement); // W2-C-LEAVES-7 item 8: the tab's lists (a siege that stops trade: no Imports row)
+  // E12 (TAIL-EXPORTS-JOURNAL-2 batch 3): an income share or a supply chain that lives on what the crisis stops is
+  // marked by the crisis leaf (an income share by the record's source, a chain by the record's chain id): a share,
+  // which prints no description, takes the leaf's word after its name (the Institutions tab's form for a row with no
+  // description); a chain, its mark before its description; the page's one head line where a row is marked.
+  const crises = stoppingCrisesOf(settlement);
+  const records = settlement?.economicState?.activeChains || [];
+  const incomeStopped = (e.incomeSources || []).map((s) => rowStoppedBy(settlement, 'income', s, crises));
+  const chainStopped = (e.chains || []).map((_c, i) => rowStoppedBy(settlement, 'chain', records[i], crises));
+  const ordinaryLine = ordinaryTimesLine([...incomeStopped, ...chainStopped].filter(Boolean));
   return md(
     lede(economicsHeadline(e)),
     '',
+    lede(ordinaryLine),
+    ordinaryLine ? '' : null,
     kv('Prosperity', e.prosperity),
     inCrisisRow(e.prosperityInCrisis),
     kv('Complexity', e.economicComplexity),
@@ -335,13 +359,14 @@ function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settleme
     kv('Exports', trade.exports.map(x => tradePillWord(x, 'exports')).filter(Boolean).join(', ')),
     kv('Imports', trade.imports.map(x => tradePillWord(x, 'imports')).filter(Boolean).join(', ')),
     kv('Food', foodWordShown(settlement)?.label), // SURFACES-3 item 1: the food word's one home, or no row (its own Surplus/Balanced/Deficit went)
-    (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
-      `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,
+    (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map((s, i) =>
+      `- ${esc(label(s.source) || s.source)}${incomeStopped[i] ? ` (${esc(STOPPED_WORD[incomeStopped[i]])})` : ''}: ${esc(Math.round(s.percentage))}%`)) : null,
     // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
     revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
     // W2-C-LEAVES-7 item 9: the state the tab's card prints (chainStateShown.js :: chainAsShown; none: no state written).
     (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = settlement?.economicState?.activeChains?.[i]; const st = rec ? chainStateOnPage(rec, settlement).word.toLowerCase() : c.status;
-      return `- **${esc(c.name)}**${st ? ` *(${esc(st.replace(/_/g, ' '))})*` : ''}${c.description ? `: ${esc(c.description)}` : ''}`; })) : null,
+      const desc = chainStopped[i] ? markedDescription(crisisMarkText(settlement, chainStopped[i]), c.description) : c.description;
+      return `- **${esc(c.name)}**${st ? ` *(${esc(st.replace(/_/g, ' '))})*` : ''}${desc ? `: ${esc(desc)}` : ''}`; })) : null,
   );
 }
 
@@ -544,7 +569,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   if (inc('powerStructure'))      push('Power', powerPage(vm, settlement?.institutions));
   if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
-  if (inc('institutions'))        push('Institutions', institutionsPage(vm));
+  if (inc('institutions'))        push('Institutions', institutionsPage(vm, settlement));
   if (inc('economicsTrade'))      push('Economics & Trade', economicsPage(vm, settlement));
   if (inc('resourcesProduction')) push('Resources & Production', resourcesPage(vm));
   if (inc('defenseSecurity'))     push('Defense & Security', defensePage(vm));
