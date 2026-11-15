@@ -1,0 +1,13 @@
+{"id":"C5005","town":"bar0-hamlet-calm-rand-2","sev":"MED","kind":"STATE","why":"A grazing-rights and water dispute is in none of CRISIS, QUARRELS (none), TENSIONS (succession crisis only) or PAST.","other":""}
+{"id":"C5213","town":"bar0-hamlet-calm-rand-2","sev":"MED","kind":"PAIR","why":"Says no contender stands ready to take the Council's place; TENSIONS is a succession crisis with a Popular candidate and rivals manoeuvring.","other":"C5003"}
+{"id":"C5483","town":"bar0-hamlet-under_siege-rand-2","sev":"LOW","kind":"LACKS","why":"Yue Zhu 'holds the office of the guard'; DEFENCE has garrison none, watch none, only a citizen militia; PEOPLE gives her militia captain.","other":""}
+{"id":"C5626","town":"bar0-hamlet-under_siege-rand-2","sev":"MED","kind":"PAIR","why":"Offers a bed to a traveller who asks, unmarked, under a siege where nothing comes in; the same Hospitality row is marked (stopped).","other":"C5588"}
+{"id":"C5630","town":"bar0-hamlet-under_siege-rand-2","sev":"MED","kind":"PAIR","why":"Offers grazing for a traveller's beasts for a fee, unmarked, under siege and isolation; the Pasturage row is marked (stopped).","other":"C5567"}
+{"id":"C5673","town":"bar0-hamlet-under_siege-rand-2","sev":"MED","kind":"STATE","why":"Shadow Economy 5% capture; INCOME is Harvest 100% only, and TRADE has no exports or imports.","other":""}
+{"id":"C5675","town":"bar0-hamlet-under_siege-rand-2","sev":"MED","kind":"STATE","why":"Says a little of Huapu's trade is done out of sight; TRADE has none, INCOME is Harvest 100%, and the siege stops trade.","other":""}
+{"id":"C5770","town":"bar0-hamlet-under_siege-rand-2","sev":"MED","kind":"STATE","why":"Invasion & War rated Strong; STATE defence is Vulnerable and the page rates Defense readiness Critical (C5510).","other":"C5510"}
+{"id":"C5772","town":"bar0-hamlet-under_siege-rand-2","sev":"LOW","kind":"LACKS","why":"Names the hamlet's workshops; HOUSES lists no workshop or craft house, only an external mill.","other":""}
+{"id":"C5649","town":"bar0-hamlet-under_siege-rand-2","sev":"LOW","kind":"PAIR","why":"Says short 69 lbs/day; other prints say about 68 lbs (42% of need 162); header gap is 42%.","other":"C5467"}
+{"id":"C5897","town":"bar0-hamlet-under_siege-rand-2","sev":"LOW","kind":"PAIR","why":"Yue Zhu has secured what makes Jiangli's hold obsolete; Rule and succession says nobody stands ready to lead against the Headman's Authority.","other":"C5731"}
+{"id":"C5934","town":"bar0-hamlet-under_siege-rand-2","sev":"MED","kind":"STATE","why":"Founders chose the place for its trade; trade access is isolated, exports/imports none, and the founding reason is a hidden refuge community.","other":""}
+{"id":"DONE","lines":1086,"blocks":2,"flags":12}
