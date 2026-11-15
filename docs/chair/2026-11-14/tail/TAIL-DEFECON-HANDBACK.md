@@ -99,6 +99,12 @@ worklist's count: none was struck "gone at the base".
 - (U1, 02:25) the weekly usage warning: commit and push every batch the moment it holds, WHAT IS LEFT current in the same
   push; hand back at 250,000 (or about seventy minutes by time); one line to the chair at a hand-back, a stop, D28's
   table, or a question.
+- (D31, 2026-11-15, the chair's answer to D28's table) NONE OF THE PAIRS IS MOVED NOW. The two lists are gated AT THE LISTS:
+  the export side by C1-E (the -c- branch; not in the tree merged here), the made list by D30 (TAIL-DEFECON-C-3: a made good
+  only where a house makes or works it; a gathered good only where the land gives it and it is worked). Both salts and the
+  gems are then silenced by the house gate without touching the data; the data moves only for a pair that STILL prints
+  false after those land (hot springs' herbs the likely one). The table and the judgement stand below under D28 for the
+  seat that re-measures.
 - (02:03, to every seat) the account's weekly usage warning is on: push every batch the moment it holds, with this
   file's WHAT IS LEFT current; hand back at the mark; one line to the chair at a hand-back, a stop or a question only;
   WIDEST FIRST (a row printing in fewer than five towns waits behind every wider row of these files).
@@ -328,13 +334,24 @@ THE DECLARED MOVE (`corpus.ndjson.gz` at 21e578caa and at the batch, field diff 
 `.description` 24; `economicState.incomeSources[].desc` 13. No draw moved.
 
 GATES: strict-domain 0; type ratchet 167/167; eslint on the touched files 0; presumed-things walker identical to the base
-(fresh 145 · stale 2 at the merged base: the base's, not this batch's); the 48 test files naming the touched files: the
+(fresh 145 · stale 2 at the merged base: the base's, not this batch's); the grid 0 rises (the same 2 falls, r2r-city-0 P7a and
+r2s-insurgency-metropolis-0 P7a, named stale low); the 48 test files naming the touched files: the
 base's 14 reds CARRIED (famineStoresOneRounding, r3c10FoodLinesTrue (2), worldFactRederive, coherenceAgreeCures (the gate
 tally, 2), foodDiversity, incomeLinesSayTheRecord, urbanBandInstitutions G5, labelJoins, proseWiringCensus.walker (4)),
-none new (three seen red under the census's load were timeouts; green alone). THE AFTER RUN (inventory diff): see WHAT IS
-LEFT.
+none new (three seen red under the census's load were timeouts; green alone).
 
-### D28 · the catalogue's doubted commodities (measured at 21e578caa; NONE MOVED; the table sent to the chair 02:4x)
+AFTER RUN (census at b40f795b2, `/home/user/inst4/after4`; `inventory_diff.py` against the census at 21e578caa): tabs
+30,129 -> 30,131 (gone 2, new 4, fewer 5, more 2, moved 0); PDF and journal 35,969 -> 35,969. EVERY ROW GONE OR FEWER BY
+EXACTLY ITS MEASURE: 15458 152 -> 0; B27952 24 -> 0; B05887 106 -> 68 on the tabs (the 41 mouths notes, less the 3
+occupied-and-famine towns whose famine note keeps "Cutting" truly; still in the town read, r2s-plague_onset-thorp-0, where
+it is true: struck), 181 -> 143 on the exports; 03703 / X9 03932 83 -> 70 (13); B00188 60 -> 60 (struck). EVERY OTHER LINE
+THAT LOST TOWNS: the deity card's three lines 718 -> 716 (the render flake seen in batches 2 and 3; not this batch: no
+deity field moved). THE INHERITORS read where they print: "Partial processing - worked only to semi-finished goods" (152;
+r2r-city-1, r2r-metropolis-14 under its siege); "Crisis Adding Mouths to Feed" (+38 tabs, +41 exports; r2r-city-3
+newcomers beside a gap, r2s-occupied-hamlet-0 occupiers); the revolt line (24; r2s-slave_revolt-city-0); the
+alchemist's plain line (13; r2r-city-19, Poor, an alchemist stands): each true there.
+
+### D28 · the catalogue's doubted commodities (measured at 21e578caa; NONE MOVED; the table sent to the chair ~02:47; the chair ruled D31)
 
 Towns where the good prints on the made list or the export list with no house that makes or works it and no other
 resource on the ground that yields it (regex over the roster; a candidate count, not a cure's measure):
@@ -458,19 +475,29 @@ Batch 1:
 
 ## What is left (TAIL-DEFECON-4, after batch 4, 2026-11-15)
 
-Pushed: the merge 21e578caa and batch 4 b40f795b2. THE AFTER RUN of batch 4 (`census3.sh` at b40f795b2 into
-`/home/user/inst4/after4`, outside every tree; it does not survive the container): its inventory diff is recorded in the
-next push of this file if it lands before the hand-back; else the next seat re-runs it (the before: the census at
-21e578caa).
+HANDED BACK by time (about fifty-five minutes; the seat's mark is seventy, and no batch of this group's files is left
+that is five towns wide and this group's to cure). Pushed: the merge 21e578caa, batch 4 b40f795b2 and its after run
+(above). THE NEXT BEFORE RUN: batch 4's after run (`/home/user/inst4/after4`, outside every tree; it does not survive the
+container): re-run `census3.sh` at the branch tip.
 
 Left, widest first (D27), by file:
-1. D28: every pair WAITS the chair's word (the table above). Then `resourceData.js` (X9, D24): the fish chains' goods under a
-   fish famine (22820 11, 10282 10, 22836 9, 22837 8; the rest under five, waiting); B14842 "Pilgrim hospitality" (77);
-   24992 the Brickmaker with no clay (23); 14622 the oasis exports where nothing is exported (16); D24 "Defended Pass"
-   (the key's label is "Mountain Pass"; measure where "Defended Pass" prints first). DATA rows: find each reader first;
-   a reader outside this group is NAMED.
-2. `viability.js`: the summary's agreement ("has 1 operational dependency that require …", "1 plot hooks available"),
-   every town with one.
+1. D28 / D31: no pair moves now; RE-MEASURE the table (above) after C1-E and D30 land; the data moves only for a pair still
+   false then (hot springs → medicinal herbs the likely one).
+2. NAMED, not this group's files (measured at 21e578caa):
+   - B14842 "Pilgrim hospitality" exported (83 towns; 27 stand no inn, lodging, hostel, hospice, tavern, caravanserai or
+     bath house): the reader is `computeActiveChains.js:743` (the export list from `RESOURCE_DATA[k].tradeGoods`):
+     TAIL-DEFECON-C. A data cure (dropping it from `hot_springs.tradeGoods`) would silence it in the 56 true towns: not taken.
+   - D24 "Defended Pass" (29 towns, false in 12: no fort, garrison, toll, watch, wall, militia or gate): the readers
+     humanise the KEY `defended_pass`; the data's own label is "Mountain Pass". The leaf is `RESOURCE_DATA[k].label`; the
+     printers are display files (the resource chips, "Nearby resources: …": `domain/display/tracePresentation.js` and its
+     neighbours): the display seat.
+   - 14622 the oasis line "It sends out dried dates, date wine and water rights" (16): the goods are
+     `src/data/resourceChains.js:254` `finalProducts` (not this group's file) read by the chain display: TAIL-DEFECON-C.
+   - the fish chains' goods under a fish famine (22820 11, 10282 10, 22836 9, 22837 8) and 24992 the Brickmaker with no
+     clay (23): the chain display's rows (`activeChains`' outputs, computeActiveChains.js): TAIL-DEFECON-C.
+   - the viability summary's agreement ("1 operational dependency that require …", "1 plot hooks available"): written by
+     `src/domain/viabilitySummary.js:62` (not this group's) and cut by `domain/display/viabilityFilter.js`: it prints on
+     no surface of the 720 dumps. STRUCK from this list (the record field holds it; named for that file's group).
 3. Under five, waiting: 23808 (1), 16293 (1), B29907 (2), 22847 / 10284 (3), 22821 (2), 22838 / 09012 (1).
 4. D29 OWED, for the close: ONE SHARED LEAF for the income-mix cut (`prosperity.js :: INCOME_LEADER_FROM` and
    `economyStateProse.js :: LEADER_FROM`, pinned to agree by `tailDefeconBatch3Lines.test.js`): a leaf under
