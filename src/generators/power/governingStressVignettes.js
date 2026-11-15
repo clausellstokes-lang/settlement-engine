@@ -7,6 +7,31 @@
  * ODQ §934.105: the module ceiling is cured by a split, never raised); the one edit is `export`.
  */
 import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js';
+import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
+
+import { resolveDeclared } from '../../domain/facts/drawDeclared.js';
+import { textOf } from '../../domain/facts/textOf.js';
+
+/**
+ * THE SEAT UNDER AN OCCUPATION (TAIL-POWERS-2, the chair's ruling P4 of 2026-11-14: "governs <town>" under an occupation
+ * takes a twin true in that state). Every seat's own line (rulingStructure.js :: govDescByLabel and its siblings) says
+ * the seat governs: "A duke or duchess governs the metropolis", "holds civic authority", "no lord stands over them".
+ * Under an occupation the seat stands, and the occupier's own card says "all significant decisions require approval
+ * or reversal" (stressFactions.js): the twin says exactly that of the seat. Declared on the vocabulary's crisis atom
+ * (`occupied`) and drawn through the door, so it prints only where the record's crisis is an occupation.
+ */
+const OCCUPIED_SEAT = Object.freeze([
+  Object.freeze({ text: "{seat} keeps the seat, but under the occupation nothing it decides stands without the occupiers' approval.", crisis: Object.freeze(['occupied']) }),
+]);
+/**
+ * The seat's line under an occupation, or null where the record holds none.
+ * @param {unknown} governingFactionName @param {() => any} facts the birth's facts (domain/facts/factsOf.js :: birthFactsOf)
+ * @returns {string | null}
+ */
+export const occupiedSeatLine = (governingFactionName, facts) => {
+  const { line } = resolveDeclared(OCCUPIED_SEAT, { facts, poolId: 'governingStressVignettes:OCCUPIED_SEAT', surface: 'power', drawKind: 'T' });
+  return line ? textOf(line).replace('{seat}', powerSentenceName(governingFactionName)) : null;
+};
 
 export const buildInsurgencyNarrative = (
   institutionFlags,

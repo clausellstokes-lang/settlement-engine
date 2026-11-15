@@ -23,7 +23,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; import { occupiedSeatLine } from './governingStressVignettes.js'; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
@@ -675,7 +675,7 @@ export const generatePowerStructure = (
       ? stressEntries.map((e) => e.type)
       : (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
-  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []);
+  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []); for (const f of factions) if (f.isGoverning) f.desc = occupiedSeatLine(f.faction, () => birthFactsOf({ institutions: nativeInstitutions, config: { ...config, stressTypes }, tier })) || f.desc; // TAIL-POWERS-2 P4: under an occupation the seat's line is its twin
   const standingForce = forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })); normalizeAndAnnotateFactions(factions, standingForce, { annotate: false }); // F1: the standing lines name the force that stands; SW-B1 (P51): annotated below, after the last power write
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {

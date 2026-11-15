@@ -26,6 +26,19 @@
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
 import { seatKeeperOf } from '../people/seatKeeper.js';
+import { resolveDeclared } from '../facts/drawDeclared.js';
+import { factsOf } from '../facts/factsOf.js';
+import { textOf } from '../facts/textOf.js';
+
+/** THE SEAT UNDER AN OCCUPATION (TAIL-POWERS-2, P4): the twins of the seat sentences, by draw (0-2), and of the headless
+ *  (3) and unnamed (4) seat; each declared on the vocabulary's crisis atom, so it prints only where the record is occupied. */
+const OCCUPIED_SEAT = Object.freeze([
+  { text: '{Ruler} answers to the occupiers of {place}. {who} holds its seat.', crisis: ['occupied'] },
+  { text: '{who} holds the seat of {ruler}. {Ruler} answers to the occupiers of {place}.', crisis: ['occupied'] },
+  { text: '{Ruler} answers to the occupiers of {place}. Its seat is held by {whoEnd}.', crisis: ['occupied'] },
+  { text: '{Ruler} answers to the occupiers of {place}. It has no head.', crisis: ['occupied'] },
+  { text: '{Ruler} answers to the occupiers of {place}. No one is named to its seat.', crisis: ['occupied'] },
+]);
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
@@ -277,16 +290,26 @@ export function governanceAccountOf(settlement, opts = {}) {
   // consequence stand as plain sentences in sequence under the block law. No clause joins two of them
   // (", and …", ", which governs …", ", now that …", ", earned by …", ", won over by …", "Until it is
   // filled, …"); nothing else of the paragraph changed.
-  // 1. THE SEAT.
+  // 1. THE SEAT. TAIL-POWERS-2 (the chair's ruling P4 of 2026-11-14): under an occupation the seat does not govern; it
+  // answers to the occupiers (the occupier's own card: "all significant decisions require approval or reversal",
+  // stressFactions.js). Each draw keeps its slot; its twin is declared on the crisis atom and drawn through the door.
+  const facts = () => factsOf(s);
+  /** @param {number} i @param {Record<string, string>} slots @returns {string | null} the slot's twin, where the record is occupied */
+  const underOccupation = (i, slots) => {
+    const { line } = resolveDeclared(OCCUPIED_SEAT[i], { facts, poolId: `governanceAccount:OCCUPIED_SEAT.${i}`, surface: 'power', drawKind: 'T' });
+    return line ? textOf(line).replace(/\{(\w+)\}/g, (_m, k) => slots[k] ?? '') : null;
+  };
+  const slots = { Ruler: capFirst(ruler), ruler, place };
   if (chain.npc && text(chain.npc.name)) {
     const role = text(chain.npc.role);
     const who = role ? `${text(chain.npc.name)}, ${role},` : text(chain.npc.name);
     const whoEnd = role ? `${text(chain.npc.name)}, ${role}` : text(chain.npc.name);
-    sentences.push([
+    const i = pick('seat', 3);
+    sentences.push(underOccupation(i, { ...slots, who, whoEnd }) ?? [
       `${place} is governed by ${ruler}. ${who} holds its seat.`,
       `${who} holds the seat of ${ruler}. ${capFirst(ruler)} governs ${place}.`,
       `${capFirst(ruler)} governs ${place}. Its seat is held by ${whoEnd}.`,
-    ][pick('seat', 3)]);
+    ][i]);
   } else if (chain.absence?.kind === 'missing_seat') {
     // THE VACANCY IS THE FIRST FACT (the chair's condition (b), 2026-11-09): 65 of the 1,000. Then what
     // fills the gap, from the record: the claimants it names, else the power governing without a head.
@@ -297,9 +320,9 @@ export function governanceAccountOf(settlement, opts = {}) {
     // (people/seatKeeper.js :: seatKeeperOf); where one keeps the seat the power is not headless, and the tab's seat row
     // already names the keeper, so the sentence is left out rather than said twice.
     if (claimants.length) sentences.push(`${listOf(claimants)} ${claimants.length === 1 ? 'contends' : 'contend'} for it.`);
-    else if (!seatKeeperOf(s)) sentences.push(`${capFirst(ruler)} governs without a head.`);
+    else if (!seatKeeperOf(s)) sentences.push(underOccupation(3, slots) ?? `${capFirst(ruler)} governs without a head.`);
   } else {
-    sentences.push(`${place} is governed by ${ruler}. No one is named to its seat.`);
+    sentences.push(underOccupation(4, slots) ?? `${place} is governed by ${ruler}. No one is named to its seat.`);
   }
 
   // 2. THE STANDING.
@@ -312,9 +335,13 @@ export function governanceAccountOf(settlement, opts = {}) {
 
   // 3 + 4. THE POWERS THAT HAVE BROKEN WITH IT, AND WHAT THAT COSTS THE HALL.
   const estranged = estrangedPowersOf(s, governing);
+  // TAIL-POWERS-2 (P4): the occupier never took the hall's orders, so it is not among those who "take its orders no
+  // longer"; a rival occupier is at odds with the hall (the tense line), its tie and the consequence below unchanged.
+  /** @param {{ name: string, tie: string }} e */
+  const lineOf = (e) => (e.tie === 'competitive' && e.name === 'Occupation Authority' ? 'tense' : e.tie);
   /** @param {string} tie @returns {{ names: string, plural: boolean } | null} */
   const named = (tie) => {
-    const of = estranged.filter((e) => e.tie === tie);
+    const of = estranged.filter((e) => lineOf(e) === tie);
     if (!of.length) return null;
     return { names: capFirst(listOf(of.map((e) => powerNameInProse(e.name)))), plural: of.length > 1 || pluralPowerName(of[0].name) };
   };
