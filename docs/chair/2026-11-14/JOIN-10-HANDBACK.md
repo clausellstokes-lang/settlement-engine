@@ -87,6 +87,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 11 | lane/tail-close-pools-2026-11-15 | 0711a6a39 (07:24) | 0b1248dbf | 0a30642d4 | `crisisBlindProse.test.js` (test), close-pools against crisis: the joined side whole by ruling C31, the branch's edit dropped; 8/8 green (§3) | 4 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/domain/coherence/crisisBlindProse.test.js |
 | 12 | lane/tail-close-display-2026-11-15 | bc19f7a5d (07:31) | ceeaeec84 | 029f1de88 | none | 8 files outside docs/; declared-move commits: 6cd5f374f adbe29e11 9a13dd0a4 (golden carried) |
 | 13 | lane/tail-close-pools-2026-11-15 | 1d3fef703 (07:34) | 0711a6a39 4e58ed8ba | a3378d243 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
+| 14 | lane/tail-corpus-def-2026-11-14 | c358b4832 (07:38) | 922cfa66c | 355bfc1b2 | none | 0 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
@@ -312,4 +313,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 13 (see the table); count 153,836 at 07:11 UTC after point 6; waiting on the chair's LAND words.
+Landed through point 14 (see the table); waiting on the chair's LAND words.
