@@ -17,6 +17,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 - **00:24 UTC:** "LAND: lane/tail-services-2026-11-14 at d7c032485" AS THE NEXT MERGE, then ONE LINE with the tip; then the order. Tips moved: display-civic 7148c48c5 or later (four batches), ties b8991a936 (handed back), powers 097dc8bda (handed back).
 - **00:28 UTC:** (1) lane/tail-history-2026-11-14 at 01ff8167e holds NO change under src/ (its batch 1 handed back as a patch file; its successor lands it): SKIPPED until "LAND: lane/tail-history-2026-11-14 at <hash>". (2) lane/tail-corpus-def-2026-11-14 at 4908ad69a (batch 1: a cure and a register commit through its own door) lands in the order before (g), with corpus-eco at 29271e7bf or later.
 - **00:43 UTC:** A FOURTH DEFECON BRANCH: lane/tail-defecon-r-2026-11-14 (cut from the defecon tip at 00:43: `resourceGenerator.js`'s gap logic; declared moves M-S and M-V, the golden moves; a pin may be re-keyed by identity in its commits). It shares that ONE FILE with lane/tail-defecon-2026-11-14, which may change one unrelated line near line 46. If the two meet in a hunk, both stand, and the chair is told. It lands with the other defecon branches once origin holds commits on it. Tips: display-civic e633bd333 or later (handed back, successor on it), narrative 9bd853fd0 or later, houses 6826fffd0 or later.
+- **00:57 UTC:** "LAND lane/tail-crisis-2026-11-14 at 6a3d98d4c" as a second point (the vocabulary atom `rival power` in its own commit; the quick guide's batch; no record moved). ONE LINE with the tip once both atoms (`ruling body`, ties 6; `rival power`) are on the line. New: lane/tail-titles-2026-11-15 (a declared move of titles and roles; five files across groups, hunks named to their holders; the golden moves) and defecon-r, each to land once origin holds commits on it. lane/tail-exports-journal-2026-11-14 at 748417354 is ready.
 
 ## 2. The landings
 
@@ -32,6 +33,10 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | — | tail-history-2026-11-14 | SKIPPED (the chair 00:28: no src change; waits for LAND) | — | — | — | — |
 | 7 | tail-narrative-2026-11-14 | 9bd853fd0 (00:42) | f663a2699 | 866041da5 | none | lane-only declarations `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json`; 4 pins re-keyed in the lane: code; DECLARED MOVE 9bd853fd0 (founding.reason, 154 towns): golden carried |
 | 8 | tail-powers-2026-11-14 | d68805134 (00:45; the successor's DA past the chair's 097dc8bda) | bcad1a358 | 00e8ba474 | none | 2 pins re-keyed in the lane: code; DECLARED MOVES 12d8fd0a9, 21dc7fa4b, d68805134: goldens carried |
+| — | tail-powers-b-2026-11-14 | SKIPPED (00:51: origin does not hold it yet) | — | — | — | — |
+| 9 | tail-defecon-2026-11-14 | 345f13157 (00:51) | bcad1a358 | d5c419393 | none | 1 pin re-keyed in the lane: code; DECLARED MOVE 6b8a9b993 (safetyProfile, 223 towns): golden carried. Landed at 345f13157 so that ruling D9's order holds: defecon-c descends from it and carries this batch anyway |
+| 10 | tail-defecon-c-2026-11-14 | 358d6afea (00:54) | 345f13157 (point 9) | f5c5d636e | none | 2 pins re-keyed in the lane: code; DECLARED MOVES 10e1cf0ea C2-A (302 towns), 358d6afea C1-A (375 towns), economicState.localProduction: golden carried |
+| — | tail-defecon-d-2026-11-14, tail-defecon-r-2026-11-14 | SKIPPED (00:56: origin does not hold them yet) | — | — | — | — |
 
 ## 3. Every code resolution
 
@@ -88,6 +93,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `tests/property/generatorGoldenMaster.test.js` | tail-narrative (7) | the DECLARED MOVE of 9bd853fd0 (history.founding.reason in 154 towns: the founder against the Origin row; 48 towns newly print no Origin row) |
 | `docs/census/declarations/POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json` | tail-narrative (7): lane-only, taken from the lane | the close re-derives them once |
 | `tests/property/generatorGoldenMaster.test.js`, `espionageDormancyFence.test.js` (driven golden) | tail-powers (8) | the DECLARED MOVES of 12d8fd0a9 (npcs[].presentation, title lines), 21dc7fa4b (powerStructure.factions[].desc, 284 towns / 510 descriptions), d68805134 (the headman's name, 38 towns, 23 families) |
+| `tests/property/generatorGoldenMaster.test.js` | tail-defecon (9), tail-defecon-c (10) | the DECLARED MOVES of 6b8a9b993 (economicState.safetyProfile, guardEffectivenessDesc 223 towns), 10e1cf0ea C2-A (localProduction, 302 towns), 358d6afea C1-A (localProduction, 375 towns); red at the lane's base and carried: worldFactRederive A7, urbanBandInstitutions G3/G5 |
 
 ## 5. Item 2 at the landed tip
 
