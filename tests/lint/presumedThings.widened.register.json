@@ -18,7 +18,8 @@
   "after-base: after-merges": "another lane's line, written after the instrument's base: its holder declares it when its lane joins the line (banked BY HAND at STYLE-2-MERGE point 49 under the chair's ruling on STOP 49a (ii)/(iii), record 405, against the letter of the door's base rule; holder: the seat after the merges (its lane, W2-A-LEAVES, landed already))",
   "after-base: r3-code-c": "this lane's truer rewording of a line the line had banked (same file, same slot; its old row shrunk out at acee99f3a), true wherever it prints by a key or a branch no draw door reads: the crisis kind of the vantage table, the fort-and-force branch of the validator (banked BY HAND under the chair's ruling of 2026-11-14 04:05Z on R3-CODE-C-6's STOP, against the letter of section 2m, as point 49's seven; held true by tests/generators/r3cRekeyedLinesTrue.test.js; owed FOR THE JOIN: the vantage table and the validator's reasons go through a draw door, and the rows leave by --shrink)",
   "after-base: close-true": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: TRUE WHERE IT PRINTS on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
-  "after-base: close-unprinted": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: NEVER PRINTED on the 1,080 births measured at the close: only arm 1 lists it (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink"
+  "after-base: close-unprinted": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: NEVER PRINTED on the 1,080 births measured at the close: only arm 1 lists it (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
+  "after-base: close-false": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: PRINTS IN TOWNS THAT LACK ITS THING (its count is in the table) on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed FIRST in the next round: cured by its declaration and its twin, the row leaves in the cure's commit"
  },
  "arm1": {
   "src/components/AccountPage.jsx": [
@@ -4456,6 +4457,18 @@
     "after-base: close-true",
     "Affected district retains residual magical effects",
     "83dece505758b019"
+   ],
+   [
+    "quarters",
+    "after-base: close-false",
+    "the residential district",
+    "d21c40d805c216b2"
+   ],
+   [
+    "occupation",
+    "after-base: close-false",
+    "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled",
+    "2cd838df6f39a521"
    ]
   ],
   "src/data/historyDescVariants.js": [
@@ -5480,6 +5493,24 @@
     "after-base: close-unprinted",
     "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and",
     "959ac324dde268f0"
+   ],
+   [
+    "resource: stone_quarry",
+    "after-base: close-false",
+    "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
+    "cb3660a159774dfe"
+   ],
+   [
+    "house: druid",
+    "after-base: close-false",
+    "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below th",
+    "48bd27e576abfdeb"
+   ],
+   [
+    "house: hired blade",
+    "after-base: close-false",
+    "Organised bands of hired blades, a few score to a few hundred strong.",
+    "058f2527f0e3fc48"
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -7408,6 +7439,12 @@
     "after-base: close-true",
     "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hid",
     "58ae82300e837074"
+   ],
+   [
+    "resource: stone_quarry",
+    "after-base: close-false",
+    "A stone quarry and its dressing yards, worked whenever good stone can be had.",
+    "5e6eade704056c99"
    ]
   ],
   "src/data/magicTraditionHouses.js": [
@@ -27034,6 +27071,12 @@
     "after-base: close-unprinted",
     " is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if ",
     "65cf322223134a9b"
+   ],
+   [
+    "smith",
+    "after-base: close-false",
+    "Being on the right side of it keeps the forges of ",
+    "b41ab4ca684010d7"
    ]
   ],
   "src/generators/neighbourGenerator.js": [
