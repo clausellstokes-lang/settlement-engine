@@ -170,28 +170,12 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'index selected, never the index.',
     charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:250',
   }),
-  // SW-B7b PROJECTION (2026-11-09, STYLE-RULINGS-2 B10(a)): the Economics tab's legacy `situationDesc` fallback LEFT with
-  // the economy desk's public branch (the shared page prints the owner's shipped DS-ECO-1 draw), so the key's one
-  // web-display read is gone. Its writer is its own lane's; what remains are the engine's own reads, named here.
-  Object.freeze({
-    identity: 'situationDesc on economicState',
-    key: 'situationDesc',
-    shape: 'economicState',
-    writer: 'src/generators/economy/economicState.js',
-    reason: 'engine-internal',
-    consumer: Object.freeze({
-      file: 'src/generators/generationCoherence.js',
-      symbol: 'the coherence battery, whose market and prosperity findings read the situation description',
-    }),
-    why: 'The generator\'s one-line economic situation was the public Economics lead only while the economy desk was '
-      + 'silent on a shared page. The desk now speaks there (the owner\'s player-view draw, shipped at the save), and '
-      + 'no owner view reached the line (0 of 300 towns), so the page reads DS-ECO-1 everywhere. The key stays written '
-      + 'for the engine: the coherence battery reads it, inside src/generators behind the closure STOP. The narrative '
-      + 'generator\'s church-controls read LEFT with W2-B-DECLARE item 5 (1ae138b47: the church note reads the stored '
-      + 'flag safetyProfile.flags.theocraticEconomy, not this sentence); the consumer was re-pointed by identity at '
-      + 'STYLE-2-MERGE point 49 (the chair\'s ruling on STOP 49c, record 405). Retiring the writer is its own lane\'s act.',
-    charter: 'ODQ §885.3 as lifted by STYLE-RULINGS-2 B10(a) (the chair, 2026-11-09 12:5x; SW-B7b item 6: the legacy fallbacks leave in their desks\' causes)',
-  }),
+  // TAIL-CLOSE-REACH-1 (2026-11-15, the close of the round): `situationDesc on economicState` LEFT this register by clause S
+  // (BANK THE WIN). The settlement quick guide reads the generator's situation sentence (src/domain/summary/
+  // settlementQuickGuide.js :: `cleanText(economy.situationDesc)`), and a surface closure now reaches that file (the web
+  // overview through overviewIdentity.js; the identity's frozen reach is web-transitive=R), so at the joined line the
+  // identity is LIT, not DARK, and the row (engine-internal) would be wrong about its own reason. Struck with that cause;
+  // the coherence battery's read is unchanged, and retiring the writer is still its own lane's act.
   // W2 DEF (2026-11-07, construction C3–C5, the third seat): the three §12 WRW-2 pending-surface rows —
   // `isolationSupport on settlement`, `magicDependent on isolationSupport`, `requiredCapacity on isolationSupport` —
   // LEFT this register. WIRING-RULINGS R-W1 (ODQ §934.105) ruled the finding SAID, and the new block DS-DEF-12
