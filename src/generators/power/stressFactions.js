@@ -4,9 +4,12 @@
  * existing factions and injecting the crisis-specific ones.
  */
 import { random as _rng } from '../../kernel/rngContext.js';
-import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
-import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; // CENSUS-1f: one line
-import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { isCriminalOrThievesPower } from '../../domain/crimeSignal.js'; // WIRING-W0 (R-W7 e); TAIL-CLOSE-SRC-4: one line
+import { getInstFlags } from '../helpers.js';
+import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA, FACTION_NAME_SIBLINGS } from '../../data/powerData.js';
+import { noteDeclared } from '../../domain/facts/drawDeclared.js'; // CENSUS-1f
+import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; // WIRING-W0 (R-W7 e)
+import { isCriminalOrThievesPower } from '../../domain/crimeSignal.js'; // TAIL-CLOSE-SRC-4
 
 /** A roster name compared loosely: case and a leading article set aside. */
 const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\s+/, '');
