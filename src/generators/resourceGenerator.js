@@ -43,7 +43,7 @@ export const STRENGTH_SUPPORT = Object.freeze({
   'Salt production': support(['salt_flats', 'desert_salt']),
   'Salt trade': support(['salt_flats', 'desert_salt']),
   Shipbuilding: support(['shipbuilding_timber']),
-  Agriculture: support([...GRAIN_KEYS, 'grazing_land'], [], { income: ['Agricultural Rents'], foodChains: ['Grain & agriculture'] }), // COHERENCE-AGREE-8 (T6): or the town's own record of farming
+  Agriculture: support([...GRAIN_KEYS, 'grazing_land'], [], { income: ['Agricultural Rents', 'Harvest'], foodChains: ['Grain & agriculture'] }), // COHERENCE-AGREE-8 (T6): or the town's own record of farming
   Milling: support(['river_mills']),
   'River trade': support([], ['river']),
   Brewing: support(GRAIN_KEYS),
