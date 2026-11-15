@@ -8,6 +8,13 @@ Law: the chair's ruling PT1 of 2026-11-15 (vetoable by the owner).
 
 > **CORRECTION (2026-11-15, at the join `e047ef2b6`).** My first measure had a bug. For a line of two sentences or more it found no sentence of the line in the town, so such a line could never read as false. I fixed the script, re-measured every row I had banked, and moved **17 rows from "true" to "false"** (commit "CORRECTION"). The counts below are the corrected ones. The first report's "89 true, 7 false" was wrong.
 
+> **FINAL PASS (the chair, at `f76fe38fd`).** Merged and re-measured. The chair's last landing cured two of the false lines in code, at the call:
+> - **the forges line (row 22)** now prints only where a smith stands. It re-measures TRUE (2 towns printed, 0 against), and its row moved to close-true. Its literal still declares nothing, so the row stays; it leaves when the line declares its smith.
+> - **the landing town's market line (row 26)** is cured in the engine (`worldPulse/candidateEvents.js`, `heraldDeeds.js`), but the frozen landing fixture still carries the old line until the doors' seat re-emits it. Rows 25 and 26 re-measure FALSE in the fixture as it stands at `f76fe38fd`, and stay close-false.
+> - **the practitioners' line (row 23)** is not cured tonight (the chair: its fix waits for the next round) and stays close-false.
+>
+> **Final counts: 75 true, 53 unprinted, 25 false. The walker reads 43 of 43, and the door's `--check` exits 0.**
+
 - At the joined line's tip (`c090179c1`) the walker was red in four of its 43 tests: 149 fresh source lines, 7 stale rows, 10 stale arm-2 rows, and 1 fresh strip. Later landings brought 4 more fresh lines (1 from TAIL-CLOSE-SRC-3, 3 from TAIL-CLOSE-DOORS-1's re-emitted landing fixture) and 2 more stale rows.
 - **I measured every one of the 153 lines on 1,080 generated towns** (the walker's 360 and the page census's 720), plus the landing page's own fixture town. For each line I checked where it prints and whether the town lacks the thing it names, by the vocabulary's own readers. Then I banked each line under one of three new reasons:
   - **74 banked TRUE**: the line prints, and its thing is there in every town where it prints;
@@ -24,7 +31,7 @@ Law: the chair's ruling PT1 of 2026-11-15 (vetoable by the owner).
 |---|---|---|
 | **25, 26** (landing fixture) | **FALSE TO A READER, on the landing page** | the frozen landing town Cnocby (seed `lf-033`) has no market and is not at war by the vocabulary's readers, yet the page says "its market stalls stand half empty" and gives "Wartime pressure disrupts trade flows" as the reason on its trade chip. The fixture is re-emitted from the engine, so the cure is the engine's line, not the fixture |
 | **23** practitioner (`claimStanding.js`) | **false to a reader** | "Magical practitioners are consulted but not formally empowered" printed as a power's description in 20 towns (of 245) where no one works magic |
-| **22** smith (`narrativeText.js`) | **false to a reader** | "keeps the forges of {town} running day and night" in 1 town (presume-town-25) with no smithy and no smith among its people |
+| **22** smith (`narrativeText.js`) | **false to a reader — CURED at the FINAL PASS** (row now close-true) | "keeps the forges of {town} running day and night" in 1 town (presume-town-25) with no smithy and no smith among its people |
 | **5, 9** alehouse | **false to a reader (mildly)** | a brewery "supplies alehouses and households" in 8 villages with no alehouse |
 | 3, 4, 6, 19, 20 stone quarry | true as printed; **a question about the town** | the quarry house's own description, and the quarry stands. But the town's country has no stone among its resources (`config.nearbyResources`): the roster and the resources disagree, not the sentence |
 | 2 occupation | only the instrument | a past occupation told as past ("When the occupiers left …"); the word's reader asks whether an occupation is in force NOW |
@@ -145,6 +152,7 @@ The close found three more reader gaps that the next round should rule on:
 - **At the join `e047ef2b6`, after the CORRECTION and the landing rows: 43 of 43** (the walker alone, exit 0); door `--check` exit 0.
 - **At the join `b855354d2`** (JOIN-12 points 1–2: TAIL-CLOSE-SWEEP-B, TAIL-CLOSE-SRC-5) merged in: no fresh or stale row; door `--check` exit 0; **the walker 43 of 43**.
 - **At the join `e172d6d62`** (JOIN-12 point 3: TAIL-CLOSE-SWEEP-C, no `src` change) merged in: door `--check` exit 0; **the walker 43 of 43**.
+- **FINAL PASS at `f76fe38fd`** merged in: the door read no fresh or stale row. I re-measured the 26 false rows (`remeasure-false-at-f76fe38fd.json`, `--landing lf-033`): the forges line is now TRUE, and its reason moved close-false → close-true in its own commit. The other 25 stay false. Door `--check` exit 0; **the walker 43 of 43**.
 - **After my branch landed (JOIN-11 point 2) and the join moved to `061db1367`** (TAIL-CLOSE-SRC-3 landed): a fast-forward. The door's `--check` read 1 fresh and 1 stale.
   - **Stale:** `priorityHelpers.js` `house: criminal faction`, a line SRC-3 reworded. Removed by `--shrink` in its own commit.
   - **Fresh:** `src/domain/facts/magic.js` `house: academy`, the literal `'academy of magic'`. It is a house-name entry of `ARCANE_GUILD_HOUSES`, which SRC-3 moved verbatim from `economy/economicState.js` (`e28552112`), so in `magic.js` it is the round's (B).
