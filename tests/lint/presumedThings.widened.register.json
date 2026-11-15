@@ -557,6 +557,12 @@
     "family",
     "Thieves and racketeers are working Cnocby's streets in the open.",
     "7ae8371b976305d9"
+   ],
+   [
+    "mill",
+    "after-base: close-true",
+    " · goal: get the mill through the season without borrowing.",
+    "3179007cb3ffd6f1"
    ]
   ],
   "src/components/howto/AboutManifesto.jsx": [
