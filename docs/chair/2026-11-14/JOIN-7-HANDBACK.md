@@ -23,6 +23,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 
 THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 - **The prompt (2026-11-15, the fifth landing; it replaces the brief's fixed order):** land every `lane/tail-*` branch on origin whose tip is not an ancestor of the joined line, each at the tip read back at its merge, as one point, in this order where they qualify: services; history (now landable: batch 1 committed, pins re-keyed, two lines of `stressTypesMeta.js` lent); display-civic; display-econ (a leaf moved between two files and re-exported); crisis; houses; ties; narrative; powers; powers-b; defecon; defecon-c; defecon-d; defecon-r (shares `resourceGenerator.js` with defecon, different hunks: if they meet both stand, tell the chair); titles-2026-11-15 (five files across groups, each hunk lent: `representatives.js`, `castPowers.js`, `faceHonorifics.js`, `npcStructure.js`, `faithReading.js`, and new leaves: if a hunk meets another seat's both stand, tell the chair); corpus-eco; corpus-def; THEN THE CORPUS'S DOOR (g); exports-pdf (three NEW leaf files under src/domain/display/: they stand); exports-journal. A branch may hold a merge of the joined line: it merges as any other. Declared moves: THE GOLDEN MOVES WITH THEM AND IS THE OWNER'S DOOR, carried and listed, never re-taken. NOT MERGED, whoever asks: lane/coherence-veil-2026-11-11, any review, `lane/read-all-…`, `lane/record-measure-…` or `lane/order-measure-…` branch, the chair's lane. Then item 2 at the landed tip, ONE message; then points on "LAND: <branch> at <hash>", or on "SWEEP" the same rule again.
+- **02:09 UTC, SWEEP:** the same rule again at the tip each branch reads at its merge; lane/tail-titles-2026-11-15 (K-C, a declared move of titles and roles across groups' files) LAST of the code points, every hunk that meets another branch named; push every point as it lands with this list current in the same push; ONE LINE to the chair with the landed code tip when the sweep is through; hand back at the mark.
 - **01:13 UTC (on this seat's tripwire stop, §6):** JOIN-6 has ended (handed back at c3075efcb, docs only past 9eb084705). This seat is the only writer: merge origin's c3075efcb, push the services point, go on by the sweep rule. If origin's line moves again by a hand not this seat's, stop again.
 
 ## 2. The landings
@@ -46,6 +47,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | (g) | THE CORPUS'S DOOR at 36bd2dea7 | `node scripts/generate-dossier-state-prose.mjs --check` | — | — | — | **exit 0**: 69 state blocks / 2953 variants, 78 causal families / 468 variants; nothing re-taken, nothing rebuilt |
 | 13 | tail-exports-pdf-2026-11-14 | 1ed03ef1e (01:56) | 48fedbe98 | 2f356cf5f | none | three NEW leaves under src/domain/display/ (criticalImportsShown, noForceLine, shadowEconomyShown): they stand |
 | 14 | tail-exports-journal-2026-11-14 | 0d2529c5a (01:59; holds a merge of the line at b6c64d36c) | b6c64d36c | d817736d8 | none | clean-both `census2dTables.test.js` (with history 2; 11/11 on the merged tree); lane-only `SPATIAL_TEXT.json`; DECLARED MOVE 26e9210a0 (spatialLayout.layout, 57 towns): golden carried |
+| 15 | tail-services-2026-11-14 (SWEEP) | e35851db1 (02:12) | 8df172bf0 (1) | b75b08c35 | none | clean-both `institutionProseDeclared.test.js` (4/4 merged), the two presumed registers (parse); lane-only `INSTITUTION_SERVICES.json`; DECLARED MOVE e35851db1 (availableServices, 239 births): golden carried |
 
 ## 3. Every code resolution
 
@@ -133,6 +135,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | leaves `economy.generated.js` (11), `defense.generated.js`, `power.generated.js` (12) | the corpus lanes | (g) exit 0 at 36bd2dea7 |
 | the lighting census, the edge bundles | every merge of this landing | last, at the close, by their doors |
 
+| golden; `INSTITUTION_SERVICES.json`; presumed registers | services (15) | DECLARED MOVE e35851db1 (availableServices, 239 births); the declaration lane-only; the registers clean-both: each by its door at the close |
 
 ## 5. Item 2 at the landed tip d817736d8 (each run to a file in /home/user/j7out, read by its tail through `scripts/gate-tail.sh`)
 
