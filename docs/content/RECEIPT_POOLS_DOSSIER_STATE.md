@@ -3214,8 +3214,8 @@ the leash is the state, not a fate.
 **structure `organized`**
 1. `[street · no unrest · no crisis: famine]` Crime at {settlement} has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with.
 2. `[ledger · colour]` The criminal interest at {settlement} is a hierarchy rather than a nuisance: predictable, rule-bound, and extracting steadily from the same places every season.
-3. `[visitor · no crisis: famine]` Visitors at {settlement} are not robbed; someone quietly explains how things are run here and who runs them.
-4. `[counterforce · no unrest · no crisis: famine]` There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.
+3. `[visitor · no crisis: famine]` A visitor at {settlement} soon has someone quietly explain how things are run here and who runs them.
+4. `[counterforce · no unrest · no crisis: famine]` The people who run {settlement}'s crime put down any violence that would bring the law on them: what is allowed in the town is theirs to say first, and the law's after.
 
 **structure `semi-organized`** {colour}
 1. `[ledger]` Criminal work at {settlement} is coordinated enough to hold routes and territories, though not yet tight enough to run the whole town.

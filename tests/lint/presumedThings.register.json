@@ -193,8 +193,7 @@
    ["war", "after-release", "Strangers at {settlement} are watched and questioned; the war has made everyone careful.", "02cd2a61f6dd86e0"],
    ["war", "after-release", "The war has made people at {settlement} wary of anyone they do not know, and prices and curfews are set by order.", "78fda9202d052efe"],
    ["war", "after-release", "The war's demands at {settlement} keep reaching further, into trades and households that thought themselves untouched.", "c2b035523c6f86fd"],
-   ["war", "after-release", "What {settlement} produces, stores and spares is all being decided against the war, and the deciding has reached things ", "4e0e4313de4a0d24"],
-   ["watch", "after-release", "There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's cri", "2d56d73ea40967d1"]
+   ["war", "after-release", "What {settlement} produces, stores and spares is all being decided against the war, and the deciding has reached things ", "4e0e4313de4a0d24"]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
    ["market", "after-release", "DS-ECO-10: LADDER › export posture, market scarcity, and the freshness caveat · `deriveExportPosture(settlement){status,", "1aa74650a4595043"],

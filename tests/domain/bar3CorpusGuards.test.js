@@ -82,6 +82,9 @@ const REWORDED = [
   { batch: 2, pool: 'DS-FTH-4::FLAG: crusaderSynthesis', vid: 1, gone: /act as one/, now: /the church has the garrison at its side/, rows: 'C8630: the garrison and the clergy each wish the other quieter (factionStanding)' },
   { batch: 2, pool: 'DS-DEF-2::Beasts & Monsters: frontier, force without a perimeter', vid: 3, gone: /can drive off what attacks/, now: /cannot stop what attacks from arriving/, rows: 'C37257: a watch alone under a critical monster bar' },
   { batch: 2, pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 5, gone: /none keeps a house at its market/, now: /anyone trading at its market reckons with them/, rows: 'C54259: the Merchant Guilds list the market among their houses' },
+  // BAR3-CORPUS-3 · C4: the organised-crime lines claim what the crime key bears, never a quiet street or an unrobbed visitor under a crime wave
+  { batch: 3, pool: 'DS-DEF-4::structure organized', vid: 4, gone: /very little street violence/, now: /what is allowed in the town is theirs to say first/, rows: 'C12393\'s class: organised crime under a crime-wave tension ("Crime is rising faster than those in charge can answer it")' },
+  { batch: 3, pool: 'DS-DEF-4::structure organized', vid: 3, gone: /are not robbed/, now: /soon has someone quietly explain/, rows: 'C12393\'s class: a crime wave beside "visitors are not robbed"' },
 ];
 
 /** @type {Record<string, any>} */ const CORPUS = {};

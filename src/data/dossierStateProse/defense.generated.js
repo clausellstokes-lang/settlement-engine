@@ -3842,7 +3842,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: famine"
           ],
-          "text": "Visitors at {settlement} are not robbed; someone quietly explains how things are run here and who runs them.",
+          "text": "A visitor at {settlement} soon has someone quietly explain how things are run here and who runs them.",
           "slots": [
             "settlement"
           ],
@@ -3854,7 +3854,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no unrest",
             "no crisis: famine"
           ],
-          "text": "There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.",
+          "text": "The people who run {settlement}'s crime put down any violence that would bring the law on them: what is allowed in the town is theirs to say first, and the law's after.",
           "slots": [
             "settlement"
           ],
