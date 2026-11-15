@@ -359,7 +359,7 @@ const annotateMonsterThreat = (stability, monsterThreat) => {
 // defence walker's court member): `hasCourt` is read from the home (`facts/defence.js :: defenceOf(...).court`) over the
 // same roster names, the answer the flag bag carried (`priorityHelpers.js :: hasCourtSystem: home.hasCourt`); measured
 // equal at every call over the 720, the births byte-identical.
-const deriveInstitutionSignals = (institutionNames, magicWorks, home = defenceOf({ institutions: (institutionNames || []).map((name) => ({ name })) })) => ({
+const deriveInstitutionSignals = (institutionNames, magicWorks, estate = { institutions: (institutionNames || []).map((name) => ({ name })) }, home = defenceOf(estate)) => ({
   hasLiveMarket: Boolean(factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }).market),
   hasCourt: home.court,
   hasMilitaryInstitution: includesAnyInstitution(
@@ -386,7 +386,9 @@ const deriveInstitutionSignals = (institutionNames, magicWorks, home = defenceOf
     institutionNames,
     ['church', 'cathedral', 'monastery', 'temple', 'parish', 'shrine'],
   ),
-  hasOwnChurch: (institutionNames || []).some((n) => /church|cathedral|monaster|temple/i.test(String(n)) && !/^access to/i.test(String(n))),
+  // TAIL-CLOSE-SRC-3: a church of its own is the vocabulary's `church` atom (`factsOf(...).faith.hasChurch`, the faith
+  // reading's one answer: a house of worship that is a church; a wayside shrine or an access row is not one).
+  hasOwnChurch: factsOf(estate).faith.hasChurch,
 });
 
 /**
