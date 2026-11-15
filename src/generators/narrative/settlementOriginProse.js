@@ -94,10 +94,13 @@ export const GROUND_PHRASE = Object.freeze({
 export const ORIGIN_POOLS = Object.freeze({
   road: Object.freeze([
     'Established along a road route. Trade flows in, goods flow out, people pass through.',
-    'The road was here first. The settlement grew along its verge, and for generations its news came on somebody else\'s cart.',
+    // BAR2-PLACES (the chair's ruling (PL2), 2026-11-15): the rung is drawn before the History and cannot read the town's age,
+    // so no row claims generations ("for generations" printed in a thorp twenty years old) nor gives the road an age in years.
+    'The road was here first. The settlement grew along its verge, and its news has always come on somebody else\'s cart.',
     'Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.',
-    'A road settlement: it makes its living from other people\'s journeys, in stabling and meals and small repairs.',
-    'Sited on a route already worn deep before anyone built here; a road a century old will not be abandoned in one.',
+    // BAR2-PLACES (PL2): it claims the road and the meal, not the living (the income is the economy's: a mineral town printed it)
+    'A road settlement: other people\'s journeys pass its doors, and some of them stop for a meal on the way.',
+    'Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.',
   ]),
 
   crossroads: Object.freeze([
@@ -114,7 +117,8 @@ export const ORIGIN_POOLS = Object.freeze({
     'Founded on the bank, where the current does the hauling; every trade here is priced against what the water carries for nothing.',
     'A river settlement. The channel sets the calendar: what floods, what freezes, and what can be moved between the two.',
     'Sited at the water\'s edge, where the river was the only road worth having, and it has been the argument for staying ever since.',
-    'Established along the river for drinking, for milling, and for moving what the fields produce. All three still hold.',
+    // BAR2-PLACES (PL2): no mill is claimed (the roster's, unread here: "All three still hold" beside no mill) and no cause
+    'Built on the river: it gives the place its water, and carries what the fields produce, as it always has.',
   ]),
 
   'port.generic': Object.freeze([
@@ -306,6 +310,9 @@ export const ORIGIN_ROW_ADMITS = Object.freeze({
       && !TRAVELLER_LIVING_REFUSED_TIERS.has(String(state.tier || '')),
   }),
   crossroads: Object.freeze({ 0: noSiege, 1: noSiege, 2: noSiege }),
+  // BAR2-PLACES (PL2's class; the brief's siege law): the river rows that say the water carries trade now are refused
+  // under a siege, as the road's and the crossroads' are; rows 0, 2 and 3 stay admitted, so no state is left mute.
+  river: Object.freeze({ 1: noSiege, 4: noSiege }),
 });
 
 /**

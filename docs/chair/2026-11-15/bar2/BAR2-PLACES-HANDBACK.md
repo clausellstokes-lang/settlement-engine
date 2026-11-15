@@ -1,0 +1,96 @@
+# BAR2-PLACES · hand-back (2026-11-15)
+
+Seat BAR2-PLACES (groups HOUSES, HISTORY, NARRATIVE, CRISIS of REVIEW-BAR-2). Base: the joined line `lane/join-2026-11-14` at **f8042b61a** (read back from origin at the start; not yet closed: its test bookkeeping lands on other branches). Branch: `lane/bar2-places-2026-11-15`, cut from f8042b61a. Work in a scratch worktree (detached, pushed by explicit refspec: the branch name is checked out in the repository's main checkout, which was not touched).
+
+## The rulings worked to (the chair's, 2026-11-15; each vetoable by the owner)
+
+- **(PL1)** a line that presumes a house, a size or a good the town lacks takes a declaration, or is reworded to claim no more than every printing town bears.
+- **(PL2)** the origin lines: no age in years for the road; no "generations"; the mill admitted by the houses; the road and not the living.
+- **(PL3)** the mayor's title: by M-1b a hall's head named by the hall's title is not a fault: strike; the form by the holder's sex is BAR2-SERVICES's (the Connection line).
+- **(PL4)** the size word through the tier's own leaf; the craft count by one home; the syndicate admitted by the power's standing; the merchant power by the powers; no gate presumed.
+- **(PL5)** verify, and expect to strike: the charcoal kilns, the maltster, the covert grain secret.
+- **(PL6)** ONE FACT for how the war goes for the town; the conscription line admitted by the labour fact; the famine's order and patrol admitted by the forces.
+
+## Batch 1 (one commit): the four groups' data and prose rows
+
+Measured on the census's 720 at the base (record fields and `before.json`): towns that print the old line / towns where the record makes it false.
+
+### Cured (by id)
+
+| id | writer | prints / false at base | cure |
+|---|---|---|---|
+| C29731, C30771 | settlementOriginProse.js :: ORIGIN_POOLS.road[4] | 104 / 67 (town 150+ years old under "a road a century old") | reworded: "…; a road that old is not soon abandoned." (no age in years) |
+| C24150 | ORIGIN_POOLS.road[1] | 56 / 4 (age under 60: 31, 37, 44, 51) | reworded: "…and its news has always come on somebody else's cart." |
+| C25604 | ORIGIN_POOLS.road[3] | 18 / 18 (no income from travellers in any) | reworded to claim the road and the meal: "A road settlement: other people's journeys pass its doors, and some of them stop for a meal on the way." (its admits kept: a tavern, no siege, not a city) |
+| C14951 | ORIGIN_POOLS.river[4] | 31 / 9 (no grain mill) | reworded, no mill and no cause: "Built on the river: it gives the place its water, and carries what the fields produce, as it always has." + its class: river rows 1 and 4 (the water carrying trade now) refused under a siege (`ORIGIN_ROW_ADMITS.river`), as the road's and crossroads' are; rows 0, 2, 3 admitted, so no state is mute |
+| C26954 | cultureProfiles.js :: slavic foodways | 64 / 64 (no oven house: the vocabulary names none) | "Fermentation, pickling, and drying stretch the harvest through winter." + class: arrivalProse slavic "Smoke rises from a household oven, and a neighbour stops in to share its warmth." (21). The slavic socialTexture "Shared ovens, bathhouses, wells…" (27) is LEFT: its reword is a fresh literal the presumed-things walker cannot bank (the door banks only base literals); for the chair |
+| C25910 | cultureProfiles.js :: latin foodways | 32 / 32 | "Market vendors and shared dining customs make food distribution visibly civic." (needs market, kept) |
+| C14917 | arrivalProse.js :: ARRIVAL_PEOPLE.greek | 20 | "…loudly enough for the neighbours to stop and listen." (no crowd) |
+| C23710 | ARRIVAL_TENSIONS.prosperous | 14 | "Well-fed children run errands from door to door." (no busy street) |
+| C10029 | ARRIVAL_SENSES stone.dominant | 5 | "Laden carts from the workings grind along the road in a line that never seems to end." (no ore; the siege exclusion kept) |
+| C34242 | ARRIVAL_SENSES timber.lines | 2 | "Curls of shavings and chips of bark blow across the lane." (no carpenter) |
+| C15795 | institutionDescVariants.js / institutionDescColour.js / institutionalCatalog.js :: Thieves' guild (powerful) | 45 (6 + 21 + 18) / nearly all (the guild Minor, Suppressed or not a power; Dominant in none) | all three texts claim no ruling or dominant standing: "The criminal syndicate the city has never rooted out, for fear that open gang war would be worse." / "An underworld power the city has never rooted out, the alternative being the bloodshed of rival gangs." / canonical "A criminal syndicate the city has never rooted out, for fear of the gang war that would follow." |
+| C0434 | the same three files :: Merchant guilds (15-40) | 107 (33 + 32 + 42) | no "power": "Between them they handle much of the city's trade." / "Much of the city's trade is in their hands." / canonical "They handle much of the city's trade." **A reword over 20 towns (107): told to the chair; it silences no town's slot (each prints the weaker claim).** |
+| C34394 | institutionalCatalog.js :: Smuggling waypoint | 6 / 6 (villages) | the village takes its own desc (the tier's own entry): "…The village benefits from fees paid in kind." |
+| C27929 | institutionalCatalog.js :: Parish burial grounds (town) | 41 | "Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead." (no gate; the walker's religious-houses row for this literal leaves by its shrink) |
+| C5821, C10035 | stressNarrative.js :: WARTIME_VARIANTS; narrativeText.js :: PRESSURE_SENTENCES.wartime | 33 wartime towns / 4 disagreed | ONE FACT: `stressNarrative.js :: wartimeGoesWell(stress)` reads the crisis summary's side (its coin and refusals); the Overview's pressure line takes the right-side or the loss pool by it (the compound scores only where no summary stands). No draw moves (the pressure keeps its one pick; the summary keeps its coin). |
+| C5767 | narrativeText.js :: wartime loss[0] | 7 | "Conscription has taken some of its skilled hands." (no hollowed-out workforce beside Labor Adequate) |
+
+### Struck (by id, with why)
+
+- **C13357** (charcoal kilns "whenever wood can be had"): PL5: the line states its own condition; true as written; the missing shortage mark is BAR2-SERVICES's.
+- **C13894** (maltster "It needs grain to spare before it can work at all."): PL5: states its own condition; true as written.
+- **C5063** (secret: grain through a covert route under a siege): PL5: a secret's own fiction (the route is covert).
+- **C26642, C6173, C25669** (Connection: Captain-Mayor / Lord Mayor / Mayor): PL3 and M-1b: a hall's head named by the hall's title is not a fault.
+
+### Named for other seats
+
+- **C2149** ("Lord Mayor" for a woman): the Connection line and the office title (`officeTitles.js`) are BAR2-SERVICES's: the form by the holder's sex.
+- **C2828** ("Population of 2,338 with only 1 craft institution."): the writer is `src/generators/economy/viability.js` (the tracer placed it on geographyData.js): the count should read the roster's craft houses by one home (`domain/capacityModel.js`'s craft reading); for the seat holding viability.js.
+- **C28756** ("War has taken the iron…" with no war): the declaration already refuses `war: peace` (`outlookHookSiblings.js`); it prints where the record's war state is not peace (an occupation): the fault is the war-state fact or the site (`foodBalance.js`), not this seat's file.
+- **C3297** ("…the sound of blades being made" where the siege took the iron): PARKED: no vocabulary atom says the iron is gone; the admit "a smith with iron" needs one (a word for the chair).
+
+### Parked
+
+- **C34238, C34241** (famine: "orderly … when order is being enforced", "A guard patrol passes"): 2 towns print at the base; the line needs `guardPresence` (watch ∨ garrison ∨ militia ∨ hired company); a militia that cannot patrol and a collapsed law-and-order reading need an atom the vocabulary lacks (a patrolling force; order held). For the chair.
+
+## Every new or changed line (the veto list), with three towns it is read in (smallest; largest; a crisis)
+
+| line | smallest | largest | crisis |
+|---|---|---|---|
+| road[1] "…its news has always come on somebody else's cart." | r2r-thorp-10 | r2s-mass_migration-metropolis-1 | r2s-famine-thorp-2 |
+| road[4] "…a road that old is not soon abandoned." | r2r-thorp-5 | r2s-religious_conversion-metropolis-3 | r2r-thorp-58 (siege) |
+| road[3] "…journeys pass its doors, and some of them stop for a meal on the way." | r2r-hamlet-32 | r2s-religious_conversion-town-2 | r2s-famine-village-2 |
+| river[4] "Built on the river: it gives the place its water, and carries what the fields produce, as it always has." | r2r-thorp-1 | r2s-succession_void-metropolis-0 | r2r-thorp-1 (occupied) |
+| latin foodways "Market vendors and shared dining customs…" | r2r-hamlet-11 | r2s-mass_migration-metropolis-2 | r2s-occupied-town-0 |
+| slavic foodways "Fermentation, pickling, and drying…" | r2r-thorp-10 | r2s-wartime-metropolis-1 | r2r-thorp-40 (occupied) |
+| arrival slavic "Smoke rises from a household oven, and a neighbour stops in to share its warmth." | r2r-thorp-10 | r2s-recently_betrayed-metropolis-3 | r2s-under_siege-hamlet-1 |
+| arrival greek "…for the neighbours to stop and listen." | r2s-under_siege-thorp-2 | r2s-succession_void-metropolis-1 | r2s-under_siege-thorp-2 |
+| arrival prosperous "Well-fed children run errands from door to door." | r2r-thorp-49 | r2r-metropolis-55 | (none prints it under a crisis at the base) |
+| arrival stone "Laden carts from the workings…" | r2r-hamlet-6 | r2r-city-30 | r2r-hamlet-32 (indebted) |
+| arrival timber "Curls of shavings and chips of bark blow across the lane." | r2r-thorp-41 | r2s-recently_betrayed-village-0 | r2r-thorp-41 (plague) |
+| thieves' guild ×3 (above) | r2r-metropolis-30 / -5 / -4 | r2s-slave_revolt-metropolis-3 | r2s-occupied-metropolis-0; r2s-famine-metropolis-1 |
+| merchant guilds ×3 (above) | r2r-city-1 / -2 / -0 | r2s-mass_migration-city-3 | r2s-under_siege-city-1; r2s-under_siege-city-0 |
+| smuggling (village) "…The village benefits from fees paid in kind." | r2r-village-4 | r2s-mass_migration-village-2 | r2r-village-53 (fractured) |
+| parish burial "Each congregation keeps its own burial ground, … beyond the town's edge instead." | r2r-town-9 | r2s-mass_migration-town-3 | r2s-under_siege-town-3 |
+| wartime loss "Conscription has taken some of its skilled hands." | r2r-thorp-55 | r2s-wartime-town-3 | r2r-thorp-55 (wartime) |
+
+## The guard
+
+`tests/generators/bar2PlacesRows.test.js`: 20 CURED pairs (each red at f8042b61a), 1 KEEP pair (green at both), and the war's agreement over five wartime towns (4 of 5 red at the base). Green at the tip.
+
+Re-keyed by identity beside a dated note (the same files' own form): `tailNarrativeRows.test.js` (two origin rows' replacement text), `arrivalIndebtedDistrictTwin.test.js` (the oven line's slot), `wartimeForgesSmith.test.js` (the arm's live towns: presume-town-25 now tells the loss; presume-town-655, -743, -975 measured to reach the twin), the census declaration ledgers `docs/census/declarations/{ARRIVAL_PEOPLE,ARRIVAL_SENSES,ARRIVAL_TENSIONS,CULTURE_PROFILES_DAILY,institutionDescVariants.INSTITUTION_DESC_VARIANTS}.json` (texts), `tests/lint/presumedThings.widened.register.json` (2 rows shrunk by its door: the carpenter's bench and the burial literal).
+
+Gates at the tip: strict-domain 0, type ratchet 0, eslint on the touched files 0, presumed-things `--check` fresh 0 stale 0, the twelve-birth grid 0 falls. The test files naming the touched files (191 run): 14 files red at the tip are red at the base too (carried from the line's close, classed at F2 after the merge word); the 5 tip-only reds were mine and are cured (ledger drift ×2, the walker, the forges anchor) or load (moneyChangersTownFloor timed out under the census; green alone).
+
+## The books my cures move
+
+PENDING the run of F2 after the chair's word "MERGE THE LINE AT <tip>" (the line's law suites and stored figures are red for the close's reasons until then). Expected: the golden surfaces move for every record holding a reworded line (settlementReason, institution descs, culture foodways, arrival scene, pressure sentence, stress summary).
+
+## Residual risks
+
+- The wartime summary is re-read late in assembly (`assembleSettlement.js` line ~456, after the pressure sentence at ~404): a summary that flips side at the late re-read would again disagree with the pressure line. Not this seat's file; the after-run measures it.
+
+## Instruments
+
+`git archive origin/lane/chair-2026-11-08 docs/chair/2026-11-14/probes/READ-ALL` and `origin/lane/census-3-2026-11-14 docs/chair/2026-11-14/probes/CENSUS-3` into the scratchpad; `census3.sh <wt> <out> 4`; `inventory.py <out> before.json`.

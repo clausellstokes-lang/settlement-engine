@@ -116,7 +116,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Bread grains, pulses, garden produce, oil or rendered fats, wine, and preserved fish form the staple pattern.',
-      { text: 'Public ovens, market vendors, and shared dining customs make food distribution visibly civic.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item B (CENSUS-2 kind c): the vendors are the market's (domain/foodways.js :: MARKET_WORDS), so a place with none, and the neighbourhoods a thorp lacks, never read it; was "neighborhood vendors"
+      { text: 'Market vendors and shared dining customs make food distribution visibly civic.', needs: ['market'] }, // BAR2-PLACES (the chair's ruling (PL1), 2026-11-15): no oven house is claimed (the vocabulary names none); was "Public ovens, market vendors, and ..." // W2-FIX-DATA-HISTORY item B (CENSUS-2 kind c): the vendors are the market's (domain/foodways.js :: MARKET_WORDS), so a place with none, and the neighbourhoods a thorp lacks, never read it; was "neighborhood vendors"
     ],
     sacredLife: [
       { text: 'Shrines, processions, confraternities, and formal priesthoods share the public religious calendar.', needs: ['institution: temple'] },
@@ -288,7 +288,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       { text: 'Rye, millet, cabbage, mushrooms, river fish, dairy, and preserved forest foods form the staple pattern.', needs: ['river'] },
-      'Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.',
+      'Fermentation, pickling, and drying stretch the harvest through winter.', // BAR2-PLACES (PL1): no shared oven claimed; was "..., drying, and shared ovens stretch ..."
     ],
     sacredLife: [
       { text: 'Formal temples or churches coexist with ancestor customs, seasonal festivals, springs, and household rites.', needs: ['institution: temple'] },

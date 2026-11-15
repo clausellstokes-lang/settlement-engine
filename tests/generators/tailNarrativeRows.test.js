@@ -161,7 +161,7 @@ describe('B3 the origin line says where the place stands and what the record hol
   const origin = (seed) => String(born(seed).settlementReason?.[0]);
   /** [id, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['B20939', 'r2s-plague_onset-thorp-0', /most of what it owns arrived/, /for generations its news came on somebody else's cart\.$/],
+    ['B20939', 'r2s-plague_onset-thorp-0', /most of what it owns arrived/, /its news has always come on somebody else's cart\.$/], // BAR2-PLACES (PL2, 2026-11-15): re-keyed by its text (no generations claimed),
     ['09370', 'r2s-famine-city-3', /^Founded at a junction/, /^Built at a junction, and the oldest logic there is applies/],
     ['11941', 'r2r-metropolis-14', /^It exists because travellers/, /^It stands where the roads meet, on ground travellers stopped at long before anyone built here\.$/],
     ['09398', 'r2s-famine-town-2', /for the shelter of its anchorage/, /^Built on the coast around the shelter of its anchorage, and the sea has set the terms/],
@@ -176,7 +176,7 @@ describe('B3 the origin line says where the place stands and what the record hol
     ['22014', 'r2s-famine-village-3', /The shortfall is met through/, /For what it lacks it looks to carts from the country around it or the tracks in a good season\. Every season the terms/],
     ['18781', 'r2r-town-54', /caravans that still come/, /Survival here rests on carriage by magic, the tracks in a good season, or the favour of a patron/],
     ['deficit[1]', 'r2s-mass_migration-town-2', /The gap is closed through/, /To close the gap it turns to the tracks in a good season — at a price/],
-    ['22398', 'r2s-famine-hamlet-3', /on the reasoning that/, /before anyone built here; a road a century old will not be abandoned in one\.$/],
+    ['22398', 'r2s-famine-hamlet-3', /on the reasoning that/, /before anyone built here; a road that old is not soon abandoned\.$/], // BAR2-PLACES (PL2, 2026-11-15): re-keyed by its text (no age in years),
     ['22397', 'r2s-under_siege-hamlet-2', /because the river was the only road/, /^Sited at the water's edge, where the river was the only road worth having/],
     ['22375', 'r2r-hamlet-28', /meant to trade by water/, /^Built on the shore; its trade has always gone by water\.$/],
     ['22396', 'r2r-thorp-9', /The distance is why it was founded/, /^Set apart from the trade roads\. The distance has kept it small and whole\.$/],

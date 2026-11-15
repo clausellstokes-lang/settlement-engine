@@ -41,7 +41,7 @@ import { drawTies } from './people/ties.js';
 import { dealGoals } from './people/goals.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
-import { resolvePrimaryStress } from './stressPriority.js';
+import { resolvePrimaryStress } from './stressPriority.js'; import { wartimeGoesWell } from './stressNarrative.js'; // BAR2-PLACES (PL6)
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
@@ -534,6 +534,8 @@ const genPressureDetail = settlement => {
     // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without
     // this the closures always hit their '|| default' fallback (dead compound branch).
     compound: economicState?.compound || undefined,
+    // BAR2-PLACES (PL6): how the war goes for the town is the crisis summary's (stressNarrative.js :: wartimeGoesWell)
+    warGoesWell: wartimeGoesWell(stress),
     prosperity: economicState?.prosperity || 'Moderate',
     govFaction,
     topFaction: topFaction || govFaction,

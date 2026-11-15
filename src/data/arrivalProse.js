@@ -205,7 +205,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: (n) => `${n} lives on what comes out of the ground, and the dust of it is on everything.`, crisis: ['any'] },
-      { text: () => 'Ore carts and stone carts grind along the road in a line that never seems to end.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Laden carts from the workings grind along the road in a line that never seems to end.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR2-PLACES (PL1): no ore claimed (a quarry town with no ore printed it); the workings are the key's own
       { text: () => 'Spoil heaps rise beyond the houses, and the sound of the workings never quite stops.', crisis: ['any'] },
     ] },
   { key: 'timber',
@@ -214,7 +214,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     lines: [
       () => 'The rasp of a saw and the smell of fresh-cut wood come from a workshop yard.',
       () => 'Sawn planks stand stacked to season against a wall.',
-      () => 'Curls of shavings blow across the lane from a carpenter\'s bench.',
+      () => 'Curls of shavings and chips of bark blow across the lane.', // BAR2-PLACES (PL1): no carpenter claimed (a woodcutter's camp reaches this key)
       () => 'The knock of a mallet on wood keeps time somewhere close.',
     ],
     dominant: [
@@ -331,7 +331,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Neighbours work together to mend a roof, and nobody seems to be in charge of it.', crisis: ['any'] },
   ],
   slavic: [
-    { text: () => 'Smoke rises from a shared oven, and neighbours queue to bake together.', crisis: ['any'] },
+    { text: () => 'Smoke rises from a household oven, and a neighbour stops in to share its warmth.', crisis: ['any'] }, // BAR2-PLACES (PL1's class): no shared oven claimed, and no bread (true under a famine too, so no condition is added and no draw moves); was "Smoke rises from a shared oven, and neighbours queue to bake together."
     { text: () => 'People gather at the well, and the news of the whole place passes through it.', crisis: ['any'] },
     { text: () => 'Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.', excludes: ['crisis: hunger'], crisis: ['any'] },
     { text: () => 'A work party heads out together, singing, with tools on their shoulders.', crisis: ['any'] },
@@ -364,7 +364,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Guests are greeted with a cup before a word of business is spoken.', crisis: ['any'] },
   ],
   greek: [
-    { text: () => 'Two citizens argue a point of law loudly enough for a crowd to gather.', excludes: ['crisis: occupied'], crisis: ['any'] },
+    { text: () => 'Two citizens argue a point of law loudly enough for the neighbours to stop and listen.', excludes: ['crisis: occupied'], crisis: ['any'] }, // BAR2-PLACES (PL1): no crowd (a hamlet of twenty-nine printed it)
     { text: () => 'A notice of the next assembly is chalked on a wall, and someone has corrected the spelling.', excludes: ['crisis: occupied'], crisis: ['any'] },
     { text: () => 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // COHERENCE-PRESUME: it printed in towns with no money changer; TAIL-HISTORY-5 (Y17 (3)): no exchange as usual under a siege
     { text: () => 'A money changer sits at his table with little to do, counting the same coins from many mints again.', twinOf: 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank', 'crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-5 (Y17): its twin under a siege
@@ -411,7 +411,7 @@ export const ARRIVAL_TENSIONS = Object.freeze({
   ],
   prosperous: [
     { text: () => 'Fresh paint and well-kept roofs say the place is doing well.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] },
-    { text: () => 'Well-fed children run errands through a busy street.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] },
+    { text: () => 'Well-fed children run errands from door to door.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] }, // BAR2-PLACES (PL1): no busy street (a thorp of twenty-one printed it)
     { text: () => 'Even the outbuildings have new roofs, and nobody looks hungry.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] },
     { text: () => 'A merchant shows off a new cloak, and several neighbours make a point of noticing.', crisis: ['any'] },
   ],

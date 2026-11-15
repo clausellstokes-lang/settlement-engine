@@ -424,7 +424,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.latin.foodways[1]",
-     "text": "Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+     "text": "Market vendors and shared dining customs make food distribution visibly civic.",
      "needs": [
       "market"
      ],
@@ -1494,7 +1494,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.slavic.foodways[1]",
-     "text": "Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.",
+     "text": "Fermentation, pickling, and drying stretch the harvest through winter.",
      "needs": [],
      "excludes": [],
      "colour": false,

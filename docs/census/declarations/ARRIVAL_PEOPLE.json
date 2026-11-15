@@ -307,7 +307,7 @@
       "lines": [
         {
           "lineId": "ARRIVAL_PEOPLE.slavic[0]",
-          "text": "Smoke rises from a shared oven, and neighbours queue to bake together.",
+          "text": "Smoke rises from a household oven, and a neighbour stops in to share its warmth.",
           "needs": [],
           "excludes": [],
           "crisis": "any",
@@ -581,7 +581,7 @@
       "lines": [
         {
           "lineId": "ARRIVAL_PEOPLE.greek[0]",
-          "text": "Two citizens argue a point of law loudly enough for a crowd to gather.",
+          "text": "Two citizens argue a point of law loudly enough for the neighbours to stop and listen.",
           "needs": [],
           "excludes": [
             "crisis: occupied"

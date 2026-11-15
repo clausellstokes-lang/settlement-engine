@@ -237,8 +237,10 @@ export const PRESSURE_SENTENCES = {
   })()),
   wartime: (r) => {
     var o, d;
-    return (((o = r.compound) == null ? void 0 : o.militaryEffective) || 50) >= 55 &&
-      (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45
+    // BAR2-PLACES (the chair's ruling (PL6), 2026-11-15): ONE FACT for how the war goes for the town: the crisis summary's
+    // (`r.warGoesWell`, stressNarrative.js :: wartimeGoesWell); the compound scores decide only where no summary stands.
+    return (typeof r.warGoesWell === 'boolean' ? r.warGoesWell : (((o = r.compound) == null ? void 0 : o.militaryEffective) || 50) >= 55 &&
+      (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45)
       ? [
           { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
           { text: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
@@ -249,7 +251,7 @@ export const PRESSURE_SENTENCES = {
           { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison', 'prosperity: ≥ comfortable'] }, // TAIL-NARRATIVE (01079): "prospering" needs a town the record calls comfortable or better
         ]
       : [
-          `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has hollowed out the skilled workforce. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`,
+          `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`,
           `The war reaches ${r.name} as a series of demands rather than battles: levies of men, of ${r.commodity || foodStoreWord(r.foodRecord)}, of coin, each one framed as duty and none of them refusable. ${r.name} is losing people and resources it will not get back, and the front it is bleeding for is somewhere it will never see.`,
           `Every capable pair of hands ${r.name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (${r.hasWorkshop ? "a workshop closed for want of a master" : "a trade left without its master"}, a field unsown for want of a back) while ${r.govFaction || "the governing authority"} reports the settlement loyal and does not report the rest.`, // R2-CODE-A-6 (CENSUS-2 a/workshops): a workshop only where the roster holds a house of craft (genPressureDetail's hasWorkshop); a branch inside the drawn row, so no draw moves
         ];
