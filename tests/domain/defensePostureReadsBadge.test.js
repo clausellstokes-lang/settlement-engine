@@ -24,6 +24,7 @@ import { defensePostureProse, posturePoolKey } from '../../src/domain/display/st
 import { POSTURE_LINE_DISQUALIFIERS } from '../../src/domain/display/stateProse/postureLineDisqualifiers.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { poolMemberTexts, variantByVid } from '../helpers/drawnProse.js';
 
 const POOL_OF_BADGE = {
   Fortress: 'readiness STRONG', 'Well-Defended': 'readiness STRONG', Defensible: 'readiness ADEQUATE',
@@ -71,17 +72,43 @@ describe('the posture line reads the readiness badge (L1)', () => {
       }
     }
   });
+  /**
+   * TAIL-CORPUS-DEF-5, RE-KEYED TO THE GUARD'S LAW (the chair's C24, 2026-11-15; vetoable by the owner): the law is the
+   * title, NO OPEN ROAD AND NO PEACE PRESUMED UNDER A SIEGE. 7a2774754 (W2-WRITE-3) wrote readiness STRONG v5 ("Danger
+   * has come to {settlement}, and the town meets it strongly defended.") and v6 ("People at {settlement} take the danger
+   * seriously, and they trust the town's defences to hold.") as the pool's lines for a town under a threat: each read,
+   * each true of a besieged town whose readiness is Strong, neither presumes an open road or peace. So under a siege the
+   * pool prints one of those two lines or nothing, and any other member of the pool is red.
+   * AT WAR (re-keyed by identity): rv2-wartime-city-0 reads Fortress now (72 -> 80, the defence lane's rebuild 33b12cbef,
+   * declared), still the strong pool, and draws a wartime line the corpus added (v7 v8, `crisis: wartime`); the arm
+   * asserts what its title says: the line drawn is a member of the pool that presumes no peace (no line the
+   * disqualifiers strike `at war`).
+   */
   test('under a siege the strong posture says nothing; at war it draws only its line that presumes no peace', () => {
+    const STRONG = { leaf: 'defense', blockId: 'DS-DEF-1', poolKey: 'readiness STRONG' };
+    const SIEGE_VIDS = [5, 6];
+    let spoke = 0;
     const failures = collectSeedFailures(SIEGED, (seed) => {
       const s = TOWNS[seed];
       if (posturePoolKey(s.defenseProfile.readiness.score) !== 'readiness STRONG') throw new Error(`premise: ${s.defenseProfile.readiness.label}`);
+      if (!(Array.isArray(s.stress) ? s.stress : [s.stress]).some((x) => x?.type === 'under_siege')) throw new Error('premise: not under a siege');
       const rung = defensePostureProse(s, { seed }).posture;
-      if (rung?.beside) throw new Error(`a strong line under a siege: ${rung.beside}`);
+      if (!rung?.beside) return;
+      spoke++;
+      const siegeLines = SIEGE_VIDS.map((vid) => variantByVid({ ...STRONG, vid, slots: { settlement: s.name } }));
+      if (!siegeLines.includes(rung.beside)) throw new Error(`a strong line not written for a siege, under a siege: ${rung.beside}`);
     });
     expectNoSeedFailures(failures, 'no open road or peace presumed under a siege');
+    expect(spoke, 'a siege line is read under a siege (rv2-under_siege-city-5)').toBeGreaterThan(0);
     const war = rvBirth('rv2-wartime-city-0');
-    expect(war.defenseProfile.readiness.label).toBe('Well-Defended');
-    expect(defensePostureProse(war, { seed: 'rv2-wartime-city-0' }).posture?.beside).toMatch(/reads as a defended place from the road in/);
+    expect(posturePoolKey(war.defenseProfile.readiness.score)).toBe('readiness STRONG');
+    const atWar = new Set(Object.entries(POSTURE_LINE_DISQUALIFIERS['readiness STRONG'])
+      .filter(([, d]) => [d.falseWhere].flat().includes('at war')).map(([vid]) => Number(vid)));
+    expect(atWar.size, 'the pool declares lines that presume peace').toBeGreaterThan(0);
+    const presumeNoPeace = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-1'].pools['readiness STRONG'].filter((v) => !atWar.has(v.vid))
+      .map((v) => variantByVid({ ...STRONG, vid: v.vid, slots: { settlement: war.name } }));
+    expect(poolMemberTexts({ ...STRONG, slots: { settlement: war.name } }).length).toBeGreaterThan(presumeNoPeace.length);
+    expect(presumeNoPeace).toContain(defensePostureProse(war, { seed: 'rv2-wartime-city-0' }).posture?.beside);
     const calm = TOWNS['r2r-town-6'];
     expect(calm.defenseProfile.readiness.label).toBe('Well-Defended');
     expect(defensePostureProse(calm, { seed: 'r2r-town-6' }).posture?.rung?.provenance?.poolKey).toBe('readiness STRONG');
