@@ -140,3 +140,117 @@ python3 <scratch>/inst/docs/chair/2026-11-14/probes/READ-ALL/inventory.py <out> 
 python3 <scratch>/inst/docs/chair/2026-11-14/probes/READ-ALL/inventory_diff.py before.json after.json <rows.json>
 ```
 The record probes (the header count, the food-note measure, the food row's import) are node scripts that import the tree's own leaves (`chainStateShown.js`, `magicProvisionShown.js`, `dossierViewModel.js`) over `corpus.ndjson.gz`, with the census's `load.mjs`. Each is a few lines and kept in the seat's scratch, outside every tree.
+
+---
+
+# TAIL-DISPLAY-ECON-2 · the successor's batches
+
+Seat: TAIL-DISPLAY-ECON-2 (builder), succeeding TAIL-DISPLAY-ECON on the same branch, continued from its tip **6e36000a4** (read back from origin, 2026-11-15). Work in a scratch worktree (detached at the tip; pushed by explicit refspec). The joined line has since moved to 48fedbe98; this branch merges nothing.
+
+## The chair's rulings since (2026-11-15 00:10 UTC; each vetoable by the owner)
+
+- **(X9)** The exports' read (`read-all-3/WORKLIST3-DISPLAY-ECON.md`) found one row of these files that only the PDF and the journal print (29296): taken with its writer's batch. The two EXPORTS seats hold `src/pdf/` and `src/foundry/` and call the tabs' leaves: a changed leaf signature (`foodMagicShare`, `tradeListDisplay`, `chainNeedShown`) is said to the chair in the batch line.
+- **(X10)** `src/domain/magicReliance.js` is this seat's whole. "Reliance on magic: None" beside a food record that holds a provision by magic (52 towns), and row 15124: ONE HOME FOR ONE FACT: `deriveMagicReliance` reads the food's share by magic through `foodMagicShare`; verify by the record, measure all its readers by the inventory diff, say every sentence that moves.
+- **(X11)** The stores sentence under a crisis gets an optional second argument (the crisis) from the CRISIS seat on its branch (`foodStoresWords`): the Economics tab's stores call is LEFT AS IT IS and named (below); a later seat passes the crisis in after the landing. `shortWords` and the tab's own sentences are this seat's: 12961 is cured from the crisis the tab already holds.
+- **(X12)** "of what it eats" (00600, 12888): "of what it needs" is accepted if the record's shares are of the need: the measure is said; the new words go on the veto list.
+- **(X13)** The Outlook rows 14073, 14072, 14075 are `dossierViewModel.js`'s. CORRECTED by the chair (2026-11-15): that file is the DEFECON group's, and the three rows went to TAIL-DEFECON-D. Not this seat's.
+
+## Batch 2 · the reliance reading counts the food provision (X10); the food sentence's shares are of the need (X12); a siege's hunger (12961); gate control (12560, 12562); a stopped card's income (05779, 05780)
+
+Census before = the tip 6e36000a4 (`census3.sh`, 720 towns); census after = the cured tree. Inventory diff: `sentences: before 29873 after 29886 · gone 57 · new 70 · in fewer towns 40 · in more towns 24 · moved 3`.
+
+**The cures**
+- `magicReliance.js`: `foodMagicShare` is DEFINED here now (moved whole, unchanged) and `magicDependents` counts the food supply (`FOOD_SUPPLY_DEPENDENT`, never printed) where `foodMagicShare > 0`. `display/magicProvisionShown.js` re-exports `foodMagicShare` unchanged (same name, same signature: no leaf signature changed for the EXPORTS seats); moved because the reading lives below the display leaf (magicProvisionShown → magicSource → magicReliance), so no import cycle is added.
+- `facts/magicSource.js`: the reliance line's "supplied by" names, for the food supply, the houses of the provision's tradition (the kind word its note opens on, `foodBalanceBar.js :: magicFoodChannelWord`; 'magical' names none). No town newly relying on magic is left with an unstatable (silent) reliance line: 0 of 52.
+- `EconomicsTab.jsx :: foodSentence`: "grows … of what it needs" and "… provision makes up … of what it needs" (X12). THE MEASURE: both shares are of the need by construction (`dailyProduction / dailyNeed`, `magicFoodOffset / dailyNeed`, `foodRowShown.js`'s figures). Before, the sentence printed "of what it eats" 370 times in 259 towns, and in 111 of those printings the band word was wrong for what a short town eats (the need less the shortfall). After: 0 printings of "of what it eats" from this writer.
+- `EconomicsTab.jsx :: foodSentence → shortWords(pct, famine || tradeStoppedHere(s))`: under a siege that stopped the trade, the short clause takes the famine's twin ("hunger is already here").
+- `chainNeedShown.js :: chainNeedLine`: a service with "gate" in it is named only where a gate or a wall stands (`facts/defence.js :: defenceOf`: `gate || walls`; a palisade has its gate). Same signature.
+- `EconomicsTab.jsx` (the flow card): "Contributes to X - N% of income" is not printed on a card the crisis stops (`chainCrisisStateShown` of the card read as running is `impaired`: a famine's failed ground, a siege's stopped field work or trade). Changed in place on lines 119 and 244 (no line-keyed register row moves).
+
+**Rows cured** (towns printing before → after; the measure = printing towns where the record makes the line false)
+
+| id | line | printing before → after | false by record before |
+|---|---|---|---|
+| 15124 | Nothing structural at X depends on arcane work. | 135 → 122 | 13 (foodMagicShare > 0) |
+| (X10) | Reliance on magic: None | 416 → 366 | 50 (+2 "Present" → Integral) |
+| 00600 and every fold of its sentence | X grows about … of what it eats, and carts bring in … | 75 → 0 (all such folds: 370 printings in 259 towns → 0) | 111 printings with the wrong band for what is eaten |
+| 12888 and kin | … provision makes up … of what it eats. | 9 → 0 (and the "less than a fifth" folds: 114 → 0) | 9 of 9 for this fold |
+| 12961 | Many households go short, and a bad season would bring real hunger. | 12 → 8 | 4 (the siege towns; the 8 left are calm) |
+| 12560 | Law enforcement, patrol and gate control here depend on iron brought in, which … | 58 → 35 | 23 |
+| (kin) | … gate control here depend on iron brought in. / … by magic. | 32 → 26 · 2 → 1 | 6 · 1 |
+| 12562 | … gate control here depend on iron from outside, which the siege has cut off. | 1 → 0 | 1 |
+| 05780 | Contributes to Grain Sales - N% of income | 94 → 91 | 3 (the famine failed the grain) |
+| 05779 | Contributes to Entrepôt Trade - N% of income | 70 → 69 | 1 (r2s-under_siege-town-0; its other cards in r2r-metropolis-14 still work) |
+
+33 of the 110 towns that named gate control have no gate and no wall: all 33 cured (23 + 6 + 1 + 3 by-magic/isolated forms).
+
+**Every other line that prints in fewer towns, explained**
+- DS-DEF-9's false pool ("The <size> would go on if the arcane went away…", "Whatever magic reaches X, the <size> does not rest on it…", "What the <size> makes it makes with hands and ground…"): 4 to 8 towns each, every one a town whose food record now counts its provision; false there.
+- "Contributes to Iron & Metalwork" 158 → 149, "Timber Trade" 74 → 71, "Apothecary & Alchemy" 11 → 10: siege towns whose mine, woods or herb ground the siege stopped (the card prints Impaired); false there by the siege law.
+- "Medical role: common" 244 → 243, "Economic role: common" 153 → 151, "Infrastructure role: common" 151 → 149: the reading is now Integral there (`magicProfile.js` raises a role on the one reading's integral), inherited by the same roles at "integral".
+- "Reliance on magic: Present" 15 → 13: both now Integral (a practitioner and two dependents).
+- "supplied by …" phrases that lost towns: the same towns now name the food provision's tradition houses as well (e.g. "Wizard's tower and X" → "Wizard's tower, Houses of worship and X").
+
+**The inheritors, read where they print:** "Reliance on magic: Relied upon" (+50) and its "supplied by …" (r2r-hamlet-14, r2s-occupied-thorp-1, r2r-city-38 read: each names the house of the provision's tradition); DS-DEF-9's relied-upon pool ("X relies on help beyond ordinary work…", +14; "X leans on the people who give it help…"): true, the food rests on the provision; "Reliance on magic: Integral" (+14); the "of what it needs" folds (one each for every old fold); "Law enforcement and patrol here depend on iron …" (+23); "Many households go short, and hunger is already here." (+4, sieges). All true where they print.
+
+**DECLARED MOVE (the record):** `deriveMagicReliance` is the defence generator's reading too (`defenseGenerator.js :: generateDefenseProfile`, its stored `magicDependency`). Field diff by family on the 720, before → after: **`defenseProfile` in 52 towns, and only these paths: `defenseProfile.magicDependency` and its mirror `defenseProfile.scores.magicDependency`** (false → true where the food record holds a provision). No other family moves; no draw is moved (the flag is computed after the scores and no generator reads it back; `dailyLifeLogic.js` reads it for display).
+
+**THE VETO LIST: every new or changed line, with the towns it was read in**
+1. "X grows about … of what it **needs**, and <carriers> bring in … of the rest." and "<Kind> provision makes up … of what it **needs**." (36 folds, 259 towns): r2r-thorp-32 (thorp, smallest), r2s-plague_onset-metropolis-2 (metropolis, largest), r2s-under_siege-thorp-2 (siege), r2s-famine-thorp-1 (famine), r2s-occupied-thorp-1 (occupation).
+2. "Many households go short, and hunger is already here." newly under a siege (the famine's own words): r2s-under_siege-hamlet-2 (hamlet, smallest), r2s-under_siege-metropolis-1 (largest), r2s-under_siege-city-0.
+3. "Law enforcement and patrol here depend on iron brought in, which a siege, a closed road or a blockade would cut off." (23, towns only): r2r-town-40, r2s-insurgency-town-3, r2s-famine-town-2 (famine); and its siege form "… depend on iron from outside, which the siege has cut off." (r2s-under_siege-town-1).
+4. "Reliance on magic: Relied upon · supplied by Access to a house of worship" (29): r2s-under_siege-thorp-1 (thorp, siege), r2s-recently_betrayed-hamlet-2 (hamlet, largest), r2s-occupied-thorp-1 (occupation), r2r-hamlet-14. NOTE for the veto: the house is the roster's "Access to …" row (a neighbour's church): the record's divine provision is credited through it (the food generator's own `hasDivine` reads the row).
+5. "Reliance on magic: Relied upon" / "Integral" newly beside a food provision: r2s-under_siege-thorp-1 (thorp) … r2r-city-44 (city); Integral: r2s-wartime-town-1 … r2r-metropolis-27, r2s-under_siege-town-1.
+6. Silences (no new words): "Contributes to X - N% of income" on a card the crisis stops (13 towns, 20 cards).
+
+**The test:** `tests/components/displayEconRelianceFoodWords.test.jsx` (births of the census's own seeds): eleven NOT pairs, each naming what prints instead or the slot's silence, each red at the base 6e36000a4; five twins (red at the base by design); five KEEP pairs (green before and after); the one-reader anchor (`magicProvisionShown.foodMagicShare === magicReliance.foodMagicShare`, red at the base: the reading had no such reader). All green on the cure. Re-keyed BY IDENTITY: `economicsFoodSentenceTrue.test.jsx`, `economicsTabMalformedFlows.test.jsx`, `tests/ui/economicsTabFlow.test.js` (the food sentence's "of what it eats" → "of what it needs"; the same towns, the same shares).
+
+**Gates** (the cured tree; reds carried from the base named):
+- strict domain: 1113 against a ceiling of 1113. Type ratchet: 167 against 167. eslint on the touched files: clean.
+- presumed-things walker `--check`: fresh 148 at the base and 148 after (no rise).
+- twelve-birth grid: exit 0, 2 falls (P7a: r2r-city-0, r2s-insurgency-metropolis-0), no rise.
+- the 107 test files naming the touched files: green but these ten, red at the base with the same tests: CARRIED: `dossierPhoneFloorAllViews`, `phoneChromeFloor.census`, `observedShapeReaders.walker`, `proseNumerics`, `rawColorLiteral`, `pdf/goldenViewModel`, `dossierProseManifest`, `espionageDormancyFence`, `generatorGoldenMaster` (525 configs stale at the base and after), `ui/defenseTabFlow`.
+
+**Registers:** none re-taken. `generatorGoldenMaster` is stale at the base already (525 of 525); this batch's declared move (52 towns' `magicDependency`) adds to what its re-take must bank: NAMED stale. EconomicsTab.jsx's line-keyed prose-numerics rows: every edit above line 669 was made in place (lines 119, 244); the food sentence edits are below every keyed row.
+
+**Struck, each with its reason**
+- **The "What the land offers: ✓ …" rows** (30975 30931 30978 30974 30977 30946 30945 30947 30972 30973 30928 30929 30930 B29875 B29918 B29904 30938 30976 B29880 B29879 B29902 B29878 30964 B29920 B29905): the header says what the LAND OFFERS, not what is worked; every chip (1121 on the 720) stands on a supporting resource whose condition is `available`, or on the route: **0** chips stand only on depleted resources (by script over `resourceAnalysis.resourceConditions` and `STRENGTH_SUPPORT`). The readers took "✓" for "worked". True.
+- **B12337, B04742** "… brought in by magic: no trade road reaches X": on an isolated route the dependency is non-critical only where the town holds teleportation infrastructure (`economicState.js`: "Supplied via magical trade infrastructure: teleportation imports replace road access."); the goods are not food, so the food record's 0% is not the measure. True in all 12.
+- **B14840 "Pig iron", B15067 "Preserved foods / Leather goods", B15904 "Salted fish / Smoked seafood"**: every card that prints them while impaired or on a depleted input prints them under "Normally yields" (`chainYield.js :: chainYieldRefused`; 65 of 126, 50 of 99, 2 of 2); the other cards run on an available input. The census dump prints a repeated label once, so the readers did not see it. True.
+- **14553 14550 14543 14549 14545 14547 20768 20234 20769 22241 22240 20767 22405** ("No one here works the X", "leaves its X unworked") against "TRADE made here": the readers' TRADE line is the record's raw `localProduction` (every commodity of every resource held, worked or not); the page's own "Produced locally" and "Exports" pills never name the resource such a line says is unworked (0 of 183 lines on the 720, by script). True.
+- **B17694** "Arcane fabrication and stone-shaping partially offset depleted extraction": the same note as the struck B03722 (the step sets the chain vulnerable; "partially offset" is what the record holds).
+- **B12001** "Livestock" (130): gone in the town read (r2s-famine-thorp-1); in the three livestock-failed famine towns it prints in none.
+- **B15684**: gone at the base.
+
+**Named for other seats**
+- **X11:** the Economics tab's stores call (`EconomicsTab.jsx` line 304, `foodStoresWords(eco.foodSecurity.foodRecord)`) is left as it is: a later seat passes the crisis in after the CRISIS seat's landing.
+- **00615** "ships bring in about a third of the rest" under a siege → `foodCarrier.js :: carriersOf` (not this seat's; the PDF reads it too): a port with docks keeps "ships bring" under a siege (W2-C-LEAVES-4's sea exception). The siege law says nothing comes in by water: the two rulings disagree; the chair's.
+- **29296** (X9, PDF cover) "Top export: Salted fish (naval route only)" under a siege: the same sea exception (`chainStateShown.js :: seaOpenTo`, the record's "by the naval route only"). Named with 00615 for the chair's one ruling; not cured.
+- **r2r-thorp-54** Foundations "Isolated from major trade routes, and short of what it eats. Nothing is brought in to close the gap; it gets by on what it produces itself." beside a quarter of the need by provision → `generators/narrative/settlementOriginProse.js` (HOLDS_TOKEN).
+- **Withheld notes still count:** 26 towns whose only dependents are chains with a raw food or tradition note the card withholds (`magicNoteShown`) still read "Relied upon" / print "✦ Magically Sustained" → `chainStateShown.js` / the step's `status` (already named by the predecessor).
+- **13751** "Mining & Coinage ✓ Running" with no mine or mint, **03456** "Almshouse Care ○ Operational" with no almshouse, **04478** "Bowyer & fletcher ✦ Magically Sustained" → `chainStateShown.js` / `serviceStateShown` (not this seat's leaves).
+- **B29895** "✓ Fully exploited Livestock" under a famine that failed the herds → `validationOnPage.js :: exploitationCardShown` (not this seat's).
+
+## After batch 2 · the chair's notes X17 and X18, measured (2026-11-15; nothing cured)
+
+- **(X17)** "The PDF and the journal print a chain (impaired) where the land's own line says running, in siege towns": THE LEAF IS NOT WRONG, AND THE EXPORTS READ IT. `pdf/lib/chainStateOnPage.js` and `foundry/journalPages.js` call `chainStateShown.js :: chainAsShown`, the reader the Economics tab's cards use (`chainWorking.js` holds no state). On the after-census, 172 chains print "(impaired)" in the siege towns' journals, and the tab prints Impaired for every one: 98 are impaired on the record, 71 are running (60) or entrepôt (11) on the record and impaired by the siege branch (own field work or trade stopped), and 3 are services. The "running" is the record's calm `activeChains[].status` (the readers' LAND header), the limit B10927 was struck on. The PDF's only "Running" in those towns is its legend swatch. Reported to the chair.
+- **(X18)** THE RECORD DECIDES THE SIEGE'S SEA: the chair asked for the measure before any cure. Of the 31 census siege towns, 3 are ports and 2 have docks (the record holds the sea open: r2s-under_siege-city-0, -metropolis-1). Only city-0 brings food in by sea on the record (6,439 lb/day, 24%). Its page says against it: "With the siege closing every way in, Bellaurbs has lost…", "Whatever Bellaurbs used to buy for its table, none of it has come since the siege closed the roads.", "Current effective trade is likely zero". "Stopped by the siege." prints in none of the 3. 29296's town r2r-village-21 is NOT a port on the record (no sea access, import 0), so "(naval route only)" is false there by the record. AWAITING THE CHAIR'S RULING on the count; the writers are `foodCarrier.js :: carriersOf` (00615) and the PDF cover's top export from `tradeListDisplay.js` / the record's export words (29296); the "none of it has come" lines are other seats' pools.
+
+## What is left of the worklist (for the next seat), as at f9b957cbd
+
+- **11782** "Institutional control guild_controlled" (14 towns): `MagicTab.jsx :: Facet` prints the stored key. The cure is ready and measured, but neither its census run nor its test was made: `{String(value ?? '').replace(/_/g, ' ')}` on the value span, in place (no line moves), giving "Guild controlled" through the span's own capitalize. "guild_controlled" is the only facet value with an underscore on the 720.
+- **13538** "Military role: common" with no magic on the defence (11 towns): `magicProfile.js` roles (not this seat's file unless the chair rules), via `MagicTab.jsx :: roleRowShown`.
+- **14551** (22 towns) "No one here works the mineral hot springs" beside a line saying the town draws on the springs: verify against both writers.
+- **23037, 23039, 18036** "Druidic forest management…" / "✦ Magically Sustained" timber where timber is imported because the woodland is cleared (16 towns): the note is `magicNoteShown`'s (this seat's), and the chip is `chainStateShown.js`'s.
+- **16353** "Reed & Marsh Harvest: Arcane fabrication…" in a mountain town that makes no reeds; **04474** bowyer fabrication without a bowyer: `magicNoteShown` / the step.
+- **11963** "It has worked out its river fisheries." beside a fishing community (13 towns); **29070** hide work "stops half-way" beside tanners; **22229** the missing article ("what it lacks is Smelter"): `validationOnPage.js` (not this seat's): name them.
+- **14404, B13482, 14395, 14400, 14242** "Needed, and not brought in: …": verify against `importsAsPrinted` and the roster (fish beside a fish market; spices with no spice need).
+- **B11520, 12110, 12104, 12111** "Its own food comes from its X and little else": the foodways and food-source writer (`domain/foodways.js` or the food record's sources): verify.
+- **22206, 16853, B19491** "The table rests on …" (`domain/foodways.js`): under a siege the hunters cannot leave; houses the table names are missing.
+- **01192** "lives on a surplus farm trade" (1 town); **05224** "Coin minting" with no mint (40): the income words → DEFECON (X4).
+- **The resource-chip runs** (B28xxx, B29xxx, one town each): `ResourcesTab.jsx` Nearby Resources / `resourceAnalysis.availableResources` chips naming the commodities of depleted or absent resources (salt, gems, honey, grain): a batch of one shape, about 50 rows: the chips should read the resource's condition (`resourceConditions`).
+- Named and not this seat's: see the batch-2 "Named for other seats" list.
+
+## How the instruments were re-made for batch 2
+
+As above. The before census ran in a second detached worktree at the tip (its `node_modules` linked to the cured tree's), so the cured tree could be edited during the before run. NEVER edit the tree a census is rendering: the render reads the source live. The record probes of this batch (the reliance moves, the food-share bands, the gate-control and stopped-card counts, the field diff by family, X17 and X18) are node scripts over `corpus.ndjson.gz` and `dumps/` importing the tree's own leaves, kept in the seat's scratch.

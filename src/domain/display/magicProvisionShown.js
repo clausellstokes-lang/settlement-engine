@@ -14,6 +14,7 @@
  */
 import { defenceHoldsArcane, defenceHoldsDivine, defenceHoldsDruidic } from '../facts/magic.js';
 import { MAGIC_NOTE_TRADITION } from '../facts/magicSource.js';
+import { foodMagicShare } from '../magicReliance.js';
 
 /**
  * Whether the town holds the tradition a provision is of.
@@ -62,17 +63,11 @@ const NOT_FOOD_NOTES = new Set([
 export const MAGIC_FOOD_NOTES = Object.freeze(new Set(Object.keys(MAGIC_NOTE_TRADITION).filter((note) => !NOT_FOOD_NOTES.has(note))));
 
 /**
- * THE FOOD RECORD'S MAGIC SHARE, ONE READER (X3): the share of the day's need the food record's own provision makes up
- * (`economicState.foodSecurity.magicOffset` over `.dailyNeed`, the figures the Economics tab's food row prints); 0 where
- * the record holds none. The chain cards' food notes, the Magic tab's dependence line and its chain notes read it here.
- * @param {unknown} record the settlement record
- * @returns {number}
+ * THE FOOD RECORD'S MAGIC SHARE, ONE READER (X3): `magicReliance.js :: foodMagicShare` (TAIL-DISPLAY-ECON-2, X10: the
+ * reliance reading counts the food's provision as a dependent, so the reader moved to the leaf the reading lives in and
+ * is re-exported here unchanged; the chain cards' food notes, the Magic tab's dependence line and its chain notes read it).
  */
-export function foodMagicShare(record) {
-  const fs = /** @type {{ economicState?: { foodSecurity?: { magicOffset?: unknown, dailyNeed?: unknown } | null } | null } | null} */ (record)?.economicState?.foodSecurity;
-  const magic = Number(fs?.magicOffset), need = Number(fs?.dailyNeed);
-  return Number.isFinite(magic) && magic > 0 && Number.isFinite(need) && need > 0 ? magic / need : 0;
-}
+export { foodMagicShare };
 
 
 /** The grounds a farmland is (the food record's grain ground, `chainStateShown.js :: FOOD_SOURCE_GROUND.grain`). */
