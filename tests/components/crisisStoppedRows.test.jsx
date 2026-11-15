@@ -19,6 +19,8 @@
  *     ("No grapes reach the vintner.") prints without "Short of <input>." before it, on either tab, or the tab without
  *     the line of what such a row is (the S5 births table; each pair red at d7c032485, where the leaf had one cause);
  *     a house the input reaches, or a calm town with no such gap, takes the mark (its keep pairs).
+ *   · (the chair's ruling S8, 2026-11-15) a house TAIL-HOUSES-2 found undeclared for its crisis is unmarked in a census
+ *     town under that crisis (the S8 table; each pair red at 2b3736a6d, where the house was NONE or its food only).
  */
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -94,6 +96,22 @@ const SHORT_KEEP = [
   // S7: the vintner's and the glassblower's gaps hold in every census town that holds the house: the record's fault, unmarked
   ['r2r-city-44', 'services', 'House wine by the jug or bottle.'], // 10827, left to the record's measuring seat
   ['r2s-famine-town-1', 'services', 'Bottles, flasks, and cups.'], // B04346, the same
+];
+
+/** S8: (seed, the house's catalogue id, the mark the house takes under the town's crisis). */
+const S8_HOUSES = [
+  ['r2s-under_siege-village-0', 'fish_market', SIEGE],
+  ['r2s-under_siege-metropolis-0', 'cemetery_network', SIEGE],
+  ['r2s-under_siege-city-0', 'chroniclers_exchange', SIEGE],
+  ['r2s-under_siege-hamlet-3', 'hunter_s_lodge', SIEGE],
+  ['r2s-under_siege-village-0', 'cartographer_s_workshop', SIEGE],
+  ['r2s-under_siege-metropolis-0', 'stone_quarry', SIEGE],
+  ['r2s-plague_onset-town-0', 'carriers_guild', OUTBREAK],
+  ['r2s-plague_onset-hamlet-1', 'periodic_market', OUTBREAK],
+  ['r2s-plague_onset-city-0', 'daily_markets', OUTBREAK],
+  // keep: the work beyond the gates is a siege's to stop, not an outbreak's (null: unmarked)
+  ['r2s-plague_onset-metropolis-0', 'cemetery_network', null],
+  ['r2s-plague_onset-hamlet-0', 'hunter_s_lodge', null],
 ];
 
 /** S6: (seed, kind, the record's key: a chain's `chainId` or an income source's `source`, the mark it must take). */
@@ -261,6 +279,18 @@ describe('TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on
     }
     // r2r-town-2 holds no short house; r2r-city-44's only short house is its vintner (S7): neither prints the line
     for (const [seed, tab] of [['r2r-town-2', 'services'], ['r2r-town-2', 'institutions'], ['r2r-city-44', 'services'], ['r2r-city-44', 'institutions']]) if ((await tabText(seed, tab)).includes(SUPPLIED)) failures.push(`${seed} ${tab}: the line of a row marked short, with no row short`);
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('S8, the houses added: each takes its crisis\'s mark in a census town under that crisis', () => {
+    const failures = [];
+    for (const [seed, id, mark] of S8_HOUSES) {
+      const s = town(seed);
+      const inst = (s.institutions || []).find((i) => (i.catalogId || catalogIdForName(i.name)) === id);
+      if (!inst) { failures.push(`${seed}: no ${id}`); continue; }
+      const got = stoppedRowMark(s, 'house', inst);
+      if (got !== mark) failures.push(`${seed} ${id}: "${got}", not "${mark}"`);
+    }
     expect(failures).toEqual([]);
   }, 600_000);
 });

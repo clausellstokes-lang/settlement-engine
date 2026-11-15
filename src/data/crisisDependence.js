@@ -14,6 +14,9 @@
  *   gatherings  people gathering in numbers: performances, spectacles, fairs, market days, the great rites
  *   food: grain | food: livestock | food: fish | food: game
  *               the food a famine can fail (the food record's `failedSource`; a failed mill is the grain's)
+ *   beyond the gates
+ *               (S8) work done outside the walls by the town's own people (burial in grounds beyond every gate, hunting
+ *               parties over the country): a siege stops it; an outbreak does not (it curtails travel, not this)
  *   input       (the chair's ruling S5, 2026-11-15) the house's own raw input: a row that is what the house MAKES from
  *               what reaches it (the vintner's wine from grapes, the potter's pots from clay, the dairy's milk from
  *               livestock). No crisis stops it; the leaf's second cause reads it: where the page says no input reaches
@@ -40,10 +43,11 @@ export const LIVESTOCK = 'food: livestock';
 export const FISH = 'food: fish';
 export const GAME = 'food: game';
 export const INPUT = 'input';
+export const GATES = 'beyond the gates';
 /** @type {ReadonlyArray<string>} */
 export const NONE = Object.freeze([]);
 /** Every dependence word, in the order above. @type {ReadonlyArray<string>} */
-export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT]);
+export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES]);
 
 /**
  * THE GAPS THE RECORD HOLDS EVERYWHERE (the chair's ruling S7, 2026-11-15; vetoable by the owner): a house whose input the
@@ -946,6 +950,22 @@ export const SERVICE_DEPENDENCE_BY_DESC = Object.freeze({
 });
 
 /** House catalogue id (`catalogIdForName`) -> what the house lives on. @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+/*
+ * THE CHAIR'S RULING S8 (2026-11-15; vetoable by the owner): houses TAIL-HOUSES-2 found printing a crisis-false row with no
+ * declaration, each verified against its row and the mark it would take ("Stopped by the siege." of the whole house).
+ * ADDED (marked "// S8"): fish_market goods (salt and dried fish carted in), cemetery_network beyond the gates (grounds
+ * beyond every gate), chroniclers_exchange travellers (reports by road), hunter_s_lodge beyond the gates (parties out
+ * over the country), cartographer_s_workshop travellers (the travellers who stop there), carriers_guild travellers (carriers on the
+ * road; an outbreak curtails it), periodic_market and daily_markets gatherings (an outbreak; a market inside the walls
+ * still trades under a siege), stone_quarry goods (the quarry beyond the walls, its stone sent out: field work and trade
+ * stop under a siege).
+ * NOT ADDED, the house's work goes on inside the walls and "stopped" of it would be false (its one clause of outside trade
+ * is a text matter for the HOUSES seat): apothecary_district (imported medicines are one focus of three), brewery
+ * (brews for the town's own taverns; the regional clause), bowyers_fletchers_guild (the watch and the garrison buy more
+ * under a siege, not less), great_cathedral (the cathedral is not stopped; its pilgrims are), burial_ground ("the burial
+ * does not" wait: only the passing priest is cut off), shipyard (builds from timber in its yard), maltster (malts stored
+ * grain); and, by the record, multiple_market_squares and city_granaries (markets and stores within the walls).
+ */
 export const HOUSE_DEPENDENCE = Object.freeze({
   "academy_of_magic": NONE,
   "access_to_external_mill": Object.freeze([TRAVELLERS]),
@@ -995,16 +1015,16 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "carpenter": NONE,
   "carpenter_part_time": NONE,
   "carpenters_5_15": NONE,
-  "carriers_guild": Object.freeze([GOODS]),
+  "carriers_guild": Object.freeze([TRAVELLERS, GOODS]), // S8
   "carriers_hiring_hall": NONE,
   "cartographer_s_guild": NONE,
-  "cartographer_s_workshop": NONE,
+  "cartographer_s_workshop": Object.freeze([TRAVELLERS]), // S8
   "cathedral_10_000_only": NONE,
-  "cemetery_network": NONE,
+  "cemetery_network": Object.freeze([GATES]), // S8
   "chandler": NONE,
   "charcoal_burner": Object.freeze([INPUT]),
   "charlatan_fortune_tellers": NONE,
-  "chroniclers_exchange": NONE,
+  "chroniclers_exchange": Object.freeze([TRAVELLERS]), // S8
   "citadel": NONE,
   "citizen_militia": NONE,
   "city_administration": NONE,
@@ -1025,7 +1045,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "craft_guilds_30_80": NONE,
   "craft_guilds_5_15": NONE,
   "customs_house": Object.freeze([GOODS]),
-  "daily_markets": NONE,
+  "daily_markets": Object.freeze([GATHERINGS]), // S8
   "dairy_farmer": Object.freeze([LIVESTOCK, INPUT]),
   "democratic_assembly": NONE,
   "district_markets_5_10": NONE,
@@ -1043,7 +1063,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "farmland": Object.freeze([GRAIN]),
   "fence_word_of_mouth": NONE,
   "fighting_pits": NONE,
-  "fish_market": Object.freeze([FISH]),
+  "fish_market": Object.freeze([GOODS, FISH]), // S8
   "fisher_s_landing": Object.freeze([FISH]),
   "fishing_community": Object.freeze([FISH]),
   "fishmonger": Object.freeze([FISH, INPUT]),
@@ -1079,7 +1099,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "housing_500_4000_households": NONE,
   "housing_75_650_households": NONE,
   "human_trafficking_network": NONE,
-  "hunter_s_lodge": Object.freeze([GAME]),
+  "hunter_s_lodge": Object.freeze([GATES, GAME]), // S8
   "informal_elder_consensus": NONE,
   "inn_multiple": Object.freeze([TRAVELLERS]),
   "inns_and_taverns_district": Object.freeze([TRAVELLERS]),
@@ -1142,7 +1162,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "parish_churches_50_100": NONE,
   "pawnbroker": NONE,
   "peat_cutter": NONE,
-  "periodic_market": NONE,
+  "periodic_market": Object.freeze([GATHERINGS]), // S8
   "planar_embassy": NONE,
   "planar_traders": NONE,
   "post_relay_station": Object.freeze([TRAVELLERS]),
@@ -1180,7 +1200,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "stable_master": NONE,
   "stable_yard": Object.freeze([TRAVELLERS]),
   "state_granary_complex": NONE,
-  "stone_quarry": NONE,
+  "stone_quarry": Object.freeze([GOODS]), // S8
   "street_gang": NONE,
   "subsistence_farming": Object.freeze([GRAIN]),
   "tailor": NONE,

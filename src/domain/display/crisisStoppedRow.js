@@ -10,7 +10,7 @@
  *   (ii) the tab says once, at its head, that its descriptions are of ordinary times (`ordinaryTimesLine`).
  *
  * WHAT EACH CRISIS STOPS (the record's own crisis kinds, `facts/crisisKind.js :: crisisOf`):
- *   under_siege   nothing comes in or goes out by road, gate or water: travellers and goods
+ *   under_siege   nothing comes in or goes out by road, gate or water: travellers and goods, and the work beyond the gates
  *   plague_onset  travel is discouraged and people do not gather: travellers and gatherings (curtailed, not stopped)
  *   famine        the food the famine failed (`economicState.foodSecurity.foodRecord.failedSource`; a failed mill is
  *                 the grain's, and a record naming no source failed the crops, the grain): that food grows scarce
@@ -53,7 +53,7 @@ import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import {
   SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE,
-  TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, NONE,
+  TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, NONE,
 } from '../../data/crisisDependence.js';
 
 /** The crises this leaf reads, in the order a row's mark takes them. @type {ReadonlyArray<string>} */
@@ -104,7 +104,7 @@ const FOOD_OF_FAILED_SOURCE = Object.freeze({ grain: GRAIN, mill: GRAIN, livesto
  * @returns {ReadonlyArray<string>}
  */
 function stoppedBy(kind, settlement) {
-  if (kind === 'under_siege') return [TRAVELLERS, GOODS];
+  if (kind === 'under_siege') return [TRAVELLERS, GOODS, GATES];
   if (kind === 'plague_onset') return [TRAVELLERS, GATHERINGS];
   if (kind === 'famine') {
     const failed = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { failedSource?: unknown } } } } | null | undefined} */ (settlement)
