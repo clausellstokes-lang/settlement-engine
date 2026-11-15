@@ -21,6 +21,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 |---|---|---|---|---|---|---|
 | 1 | tail-services-2026-11-14 | 4035c33a5 (00:08) | bcad1a358 | 7a9a2fffc | none | — (6 files, all the lane's: the leaf `crisisStoppedRow.js`, the table `crisisDependence.js`; told to the chair at 00:11) |
 | 2 | tail-display-civic-2026-11-14 | 812fa7e1f (00:14) | f663a2699 | 3ff14bc58 | none | — (3 files, the lane's batch 1) |
+| 3 | tail-display-econ-2026-11-14 | 6e36000a4 (00:19) | bcad1a358 | 6b1e0ccf2 | none | — (6 files, the lane's batch 1; the pin in `economicsClergyProvision.test.jsx` moved by the lane alone: code) |
 
 ## 3. Every code resolution
 
