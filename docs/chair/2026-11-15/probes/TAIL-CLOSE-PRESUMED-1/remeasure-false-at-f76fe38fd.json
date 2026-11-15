@@ -1,0 +1,1119 @@
+{
+ "measuredAt": "d0c7c0ffda96c78be2f7acb170e78df3c7b1825b",
+ "base": "origin/master",
+ "births": 1082,
+ "rows": [
+  {
+   "file": "src/data/historyData.js",
+   "thing": "quarters",
+   "text": "the residential district",
+   "hash": "d21c40d805c216b2",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the residential district"
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 32,
+   "againstN": 1,
+   "printedSeeds": [
+    "presume-city-0",
+    "presume-city-10",
+    "presume-city-15"
+   ],
+   "againstSeeds": [
+    "r2s-succession_void-town-3"
+   ],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [
+    {
+     "seed": "r2s-succession_void-town-3",
+     "path": ".history.historicalEvents[].description",
+     "sentence": "Magic broke loose over the residential district and the people who lived there, and the traces it left have lingered ever since"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "occupation",
+   "text": "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled",
+   "hash": "2cd838df6f39a521",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "when the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+   ],
+   "leaf": "crisisKind.js (occupied) · rulerKind.js (occupier)",
+   "printed": 36,
+   "againstN": 36,
+   "printedSeeds": [
+    "presume-town-3",
+    "presume-town-6",
+    "presume-town-30"
+   ],
+   "againstSeeds": [
+    "presume-town-3",
+    "presume-town-6",
+    "presume-town-30"
+   ],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-3",
+     "path": ".history.historicalEvents[].description",
+     "sentence": "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+    },
+    {
+     "seed": "presume-town-6",
+     "path": ".history.historicalEvents[].description",
+     "sentence": "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+    },
+    {
+     "seed": "presume-town-30",
+     "path": ".history.historicalEvents[].description",
+     "sentence": "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "resource: stone_quarry",
+   "text": "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper building material the place has had.",
+   "hash": "18425e5e902f9f93",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. slow going, and the only proper building material the place has had."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 3,
+   "againstN": 1,
+   "printedSeeds": [
+    "r2r-hamlet-52",
+    "r2s-indebted-hamlet-2",
+    "r2s-monster_pressure-hamlet-2"
+   ],
+   "againstSeeds": [
+    "r2s-indebted-hamlet-2"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2s-indebted-hamlet-2",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "resource: stone_quarry",
+   "text": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+   "hash": "159741114b9d0a37",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a building-stone quarry laid out in an ordered working. a village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 3,
+   "againstN": 2,
+   "printedSeeds": [
+    "r2r-village-20",
+    "r2r-village-45",
+    "r2s-insurgency-village-2"
+   ],
+   "againstSeeds": [
+    "r2r-village-45",
+    "r2s-insurgency-village-2"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-village-45",
+     "path": ".institutions[].desc",
+     "sentence": "A building-stone quarry laid out in an ordered working."
+    },
+    {
+     "seed": "r2s-insurgency-village-2",
+     "path": ".institutions[].desc",
+     "sentence": "A building-stone quarry laid out in an ordered working."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: alehouse",
+   "text": "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.",
+   "hash": "aa4c1c8765d2f77f",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "turns malted grain into ale by the barrel. only bread takes more of the grain. it supplies both alehouses and homes."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named alehouse); its atom `house: alehouse` waits for a factsOf getter",
+   "printed": 1,
+   "againstN": 1,
+   "printedSeeds": [
+    "presume-village-10"
+   ],
+   "againstSeeds": [
+    "presume-village-10"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-10",
+     "path": ".institutions[].desc",
+     "sentence": "It supplies both alehouses and homes."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "resource: stone_quarry",
+   "text": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
+   "hash": "cb3660a159774dfe",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 65,
+   "againstN": 42,
+   "printedSeeds": [
+    "presume-town-15",
+    "presume-town-34",
+    "presume-town-53"
+   ],
+   "againstSeeds": [
+    "presume-town-34",
+    "presume-town-53",
+    "presume-town-57"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-34",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+    },
+    {
+     "seed": "presume-town-53",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+    },
+    {
+     "seed": "presume-town-57",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: druid",
+   "text": "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land.",
+   "hash": "d7a110e6054be4fc",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "senior druids who govern how their circle deals with the town. they may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named druid); its atom `house: druid` waits for a factsOf getter",
+   "printed": 5,
+   "againstN": 5,
+   "printedSeeds": [
+    "presume-town-4",
+    "presume-town-58",
+    "presume-town-92"
+   ],
+   "againstSeeds": [
+    "presume-town-4",
+    "presume-town-58",
+    "presume-town-92"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-4",
+     "path": ".institutions[].desc",
+     "sentence": "Senior druids who govern how their circle deals with the town."
+    },
+    {
+     "seed": "presume-town-58",
+     "path": ".institutions[].desc",
+     "sentence": "Senior druids who govern how their circle deals with the town."
+    },
+    {
+     "seed": "presume-town-92",
+     "path": ".institutions[].desc",
+     "sentence": "Senior druids who govern how their circle deals with the town."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: druid",
+   "text": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
+   "hash": "48bd27e576abfdeb",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "a council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named druid); its atom `house: druid` waits for a factsOf getter",
+   "printed": 6,
+   "againstN": 6,
+   "printedSeeds": [
+    "presume-town-119",
+    "presume-town-120",
+    "presume-town-127"
+   ],
+   "againstSeeds": [
+    "presume-town-119",
+    "presume-town-120",
+    "presume-town-127"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-119",
+     "path": ".institutions[].desc",
+     "sentence": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in pow"
+    },
+    {
+     "seed": "presume-town-120",
+     "path": ".institutions[].desc",
+     "sentence": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in pow"
+    },
+    {
+     "seed": "presume-town-127",
+     "path": ".institutions[].desc",
+     "sentence": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in pow"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: alehouse",
+   "text": "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.",
+   "hash": "736ab5d9380421e2",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "converts malted grain to ale in quantity. the largest consumer of grain after bread. supplies alehouses and households."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named alehouse); its atom `house: alehouse` waits for a factsOf getter",
+   "printed": 7,
+   "againstN": 7,
+   "printedSeeds": [
+    "presume-village-9",
+    "presume-village-13",
+    "presume-village-26"
+   ],
+   "againstSeeds": [
+    "presume-village-9",
+    "presume-village-13",
+    "presume-village-26"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-9",
+     "path": ".institutions[].desc",
+     "sentence": "Supplies alehouses and households."
+    },
+    {
+     "seed": "presume-village-13",
+     "path": ".institutions[].desc",
+     "sentence": "Supplies alehouses and households."
+    },
+    {
+     "seed": "presume-village-26",
+     "path": ".institutions[].desc",
+     "sentence": "Supplies alehouses and households."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "famine",
+   "text": "Communal grain storage. Buffers harvests, prevents famine.",
+   "hash": "b77abf521091f2db",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "communal grain storage. buffers harvests, prevents famine."
+   ],
+   "leaf": "famine.js :: famineOf · crisisKind.js (famine)",
+   "printed": 80,
+   "againstN": 79,
+   "printedSeeds": [
+    "presume-town-0",
+    "presume-town-1",
+    "presume-town-2"
+   ],
+   "againstSeeds": [
+    "presume-town-0",
+    "presume-town-1",
+    "presume-town-2"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-0",
+     "path": ".institutions[].desc",
+     "sentence": "Buffers harvests, prevents famine."
+    },
+    {
+     "seed": "presume-town-1",
+     "path": ".institutions[].desc",
+     "sentence": "Buffers harvests, prevents famine."
+    },
+    {
+     "seed": "presume-town-2",
+     "path": ".institutions[].desc",
+     "sentence": "Buffers harvests, prevents famine."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: hired blade",
+   "text": "Organised bands of hired blades, a few score to a few hundred strong.",
+   "hash": "058f2527f0e3fc48",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "organised bands of hired blades, a few score to a few hundred strong."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named hired blade); its atom `house: hired blade` waits for a factsOf getter",
+   "printed": 38,
+   "againstN": 23,
+   "printedSeeds": [
+    "presume-city-15",
+    "presume-city-17",
+    "presume-city-31"
+   ],
+   "againstSeeds": [
+    "presume-city-17",
+    "presume-city-31",
+    "presume-city-47"
+   ],
+   "paths": [
+    ".institutions[].desc",
+    ".defenseProfile.institutions.mercenary[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-city-17",
+     "path": ".institutions[].desc",
+     "sentence": "Organised bands of hired blades, a few score to a few hundred strong."
+    },
+    {
+     "seed": "presume-city-17",
+     "path": ".defenseProfile.institutions.mercenary[].desc",
+     "sentence": "Organised bands of hired blades, a few score to a few hundred strong."
+    },
+    {
+     "seed": "presume-city-31",
+     "path": ".institutions[].desc",
+     "sentence": "Organised bands of hired blades, a few score to a few hundred strong."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.",
+   "hash": "20db476059d1b418",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 52,
+   "againstN": 52,
+   "printedSeeds": [
+    "presume-village-2",
+    "presume-village-41",
+    "presume-village-55"
+   ],
+   "againstSeeds": [
+    "presume-village-2",
+    "presume-village-41",
+    "presume-village-55"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-2",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats."
+    },
+    {
+     "seed": "presume-village-41",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats."
+    },
+    {
+     "seed": "presume-village-55",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow draft, flexible hull, replaceable parts.",
+   "hash": "e93309dab034221e",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. specialist knowledge: shallow draft, flexible hull, replaceable parts."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 12,
+   "againstN": 12,
+   "printedSeeds": [
+    "presume-village-6",
+    "presume-village-38",
+    "presume-town-37"
+   ],
+   "againstSeeds": [
+    "presume-village-6",
+    "presume-village-38",
+    "presume-town-37"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-6",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats."
+    },
+    {
+     "seed": "presume-village-38",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats."
+    },
+    {
+     "seed": "presume-town-37",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. The work turns on a shallow draft, a hull that flexes, and parts made to be replaced.",
+   "hash": "83d03ab88fd81eb6",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. the work turns on a shallow draft, a hull that flexes, and parts made to be replaced."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 7,
+   "againstN": 7,
+   "printedSeeds": [
+    "presume-village-31",
+    "presume-city-22",
+    "r2r-village-53"
+   ],
+   "againstSeeds": [
+    "presume-village-31",
+    "presume-city-22",
+    "r2r-village-53"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-31",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft."
+    },
+    {
+     "seed": "presume-city-22",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft."
+    },
+    {
+     "seed": "r2r-village-53",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.",
+   "hash": "58a543b49791411a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. it takes a specialist's hand. shallow in the draft, supple in the hull, and built so parts can be swapped out."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 7,
+   "againstN": 7,
+   "printedSeeds": [
+    "presume-village-25",
+    "presume-town-46",
+    "r2r-village-36"
+   ],
+   "againstSeeds": [
+    "presume-village-25",
+    "presume-town-46",
+    "r2r-village-36"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-25",
+     "path": ".institutions[].desc",
+     "sentence": "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft."
+    },
+    {
+     "seed": "presume-town-46",
+     "path": ".institutions[].desc",
+     "sentence": "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft."
+    },
+    {
+     "seed": "r2r-village-36",
+     "path": ".institutions[].desc",
+     "sentence": "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "clergy",
+   "text": "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them. The oldest markers have lost their names to the weather and are kept clear anyway.",
+   "hash": "3479ae839c1d669b",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a corner of the holding left out of the plough, banked with turf and marked with fieldstones. a priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them. the oldest markers have lost their names to the weather and are kept clear anyway."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 32,
+   "againstN": 32,
+   "printedSeeds": [
+    "r2r-thorp-0",
+    "r2r-thorp-3",
+    "r2r-thorp-9"
+   ],
+   "againstSeeds": [
+    "r2r-thorp-0",
+    "r2r-thorp-3",
+    "r2r-thorp-9"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-thorp-0",
+     "path": ".institutions[].desc",
+     "sentence": "A priest says the words when one can be brought in time;"
+    },
+    {
+     "seed": "r2r-thorp-3",
+     "path": ".institutions[].desc",
+     "sentence": "A priest says the words when one can be brought in time;"
+    },
+    {
+     "seed": "r2r-thorp-9",
+     "path": ".institutions[].desc",
+     "sentence": "A priest says the words when one can be brought in time;"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "clergy",
+   "text": "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.",
+   "hash": "9a5d98d5f035bdb6",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "a turf-banked corner of the holding, kept out of the plough and marked with fieldstones. a priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 24,
+   "againstN": 24,
+   "printedSeeds": [
+    "r2r-thorp-2",
+    "r2r-thorp-6",
+    "r2r-thorp-27"
+   ],
+   "againstSeeds": [
+    "r2r-thorp-2",
+    "r2r-thorp-6",
+    "r2r-thorp-27"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-thorp-2",
+     "path": ".institutions[].desc",
+     "sentence": "A priest speaks when one can be fetched in time;"
+    },
+    {
+     "seed": "r2r-thorp-6",
+     "path": ".institutions[].desc",
+     "sentence": "A priest speaks when one can be fetched in time;"
+    },
+    {
+     "seed": "r2r-thorp-27",
+     "path": ".institutions[].desc",
+     "sentence": "A priest speaks when one can be fetched in time;"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "clergy",
+   "text": "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.",
+   "hash": "d7dfdecbc2dbc7de",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "fieldstones on a low bank at the edge of the ploughland. the rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 42,
+   "againstN": 42,
+   "printedSeeds": [
+    "r2r-thorp-1",
+    "r2r-thorp-5",
+    "r2r-thorp-8"
+   ],
+   "againstSeeds": [
+    "r2r-thorp-1",
+    "r2r-thorp-5",
+    "r2r-thorp-8"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-thorp-1",
+     "path": ".institutions[].desc",
+     "sentence": "The rites wait for a priest when one can be fetched in time, and the neighbours say them when not;"
+    },
+    {
+     "seed": "r2r-thorp-5",
+     "path": ".institutions[].desc",
+     "sentence": "The rites wait for a priest when one can be fetched in time, and the neighbours say them when not;"
+    },
+    {
+     "seed": "r2r-thorp-8",
+     "path": ".institutions[].desc",
+     "sentence": "The rites wait for a priest when one can be fetched in time, and the neighbours say them when not;"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "resource: stone_quarry",
+   "text": "A stone quarry and its dressing yards, worked whenever good stone can be had.",
+   "hash": "5e6eade704056c99",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry and its dressing yards, worked whenever good stone can be had."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 92,
+   "againstN": 69,
+   "printedSeeds": [
+    "presume-town-6",
+    "presume-town-14",
+    "presume-town-35"
+   ],
+   "againstSeeds": [
+    "presume-town-6",
+    "presume-town-14",
+    "presume-town-35"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-6",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry and its dressing yards, worked whenever good stone can be had."
+    },
+    {
+     "seed": "presume-town-14",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry and its dressing yards, worked whenever good stone can be had."
+    },
+    {
+     "seed": "presume-town-35",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry and its dressing yards, worked whenever good stone can be had."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "resource: stone_quarry",
+   "text": "A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the place has had.",
+   "hash": "3e644ef0dd5c3418",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, opened by quarrymen with picks and wedges. slow work, and the only source of proper building stone the place has had."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 4,
+   "againstN": 2,
+   "printedSeeds": [
+    "r2r-hamlet-16",
+    "r2r-hamlet-23",
+    "r2r-hamlet-48"
+   ],
+   "againstSeeds": [
+    "r2r-hamlet-23",
+    "r2r-hamlet-48"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-hamlet-23",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, opened by quarrymen with picks and wedges."
+    },
+    {
+     "seed": "r2r-hamlet-48",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, opened by quarrymen with picks and wedges."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "house: druid",
+   "text": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority.",
+   "hash": "58ae82300e837074",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "a council of senior druids who govern their circle's relationship with the settlement around it. they may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named druid); its atom `house: druid` waits for a factsOf getter",
+   "printed": 102,
+   "againstN": 102,
+   "printedSeeds": [
+    "presume-town-35",
+    "presume-town-60",
+    "presume-town-74"
+   ],
+   "againstSeeds": [
+    "presume-town-35",
+    "presume-town-60",
+    "presume-town-74"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-35",
+     "path": ".institutions[].desc",
+     "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it."
+    },
+    {
+     "seed": "presume-town-60",
+     "path": ".institutions[].desc",
+     "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it."
+    },
+    {
+     "seed": "presume-town-74",
+     "path": ".institutions[].desc",
+     "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "smith",
+   "text": "Being on the right side of it keeps the forges of ",
+   "hash": "b41ab4ca684010d7",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "being on the right side of it keeps the forges of"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames (a smith or metalworker); its atom `institution: smith` reads the kind; or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 2,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2s-wartime-metropolis-0",
+    "r2s-wartime-metropolis-1"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "practitioner",
+   "text": "Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.",
+   "hash": "95f82a94acb58095",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "magical practitioners are consulted but not formally empowered. their influence is advisory, transactional, and quietly resented."
+   ],
+   "leaf": "magicReliance.js :: magicPractitioners (NEW-2, 3; its atom waits for a factsOf reader)",
+   "printed": 245,
+   "againstN": 20,
+   "printedSeeds": [
+    "presume-town-25",
+    "presume-town-37",
+    "presume-town-57"
+   ],
+   "againstSeeds": [
+    "presume-city-7",
+    "presume-city-22",
+    "presume-city-27"
+   ],
+   "paths": [
+    ".powerStructure.factions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-city-7",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Magical practitioners are consulted but not formally empowered."
+    },
+    {
+     "seed": "presume-city-22",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Magical practitioners are consulted but not formally empowered."
+    },
+    {
+     "seed": "presume-city-27",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Magical practitioners are consulted but not formally empowered."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "house: smuggling",
+   "text": "Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.",
+   "hash": "704028fc99b7d6b5",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named smuggling); its atom `house: smuggling` waits for a factsOf getter",
+   "printed": 13,
+   "againstN": 6,
+   "printedSeeds": [
+    "presume-town-48",
+    "presume-city-68",
+    "presume-city-92"
+   ],
+   "againstSeeds": [
+    "presume-town-48",
+    "presume-city-92",
+    "r2r-town-8"
+   ],
+   "paths": [
+    ".powerStructure.factions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-48",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Underworld effectively controls vice, smuggling, and key officials;"
+    },
+    {
+     "seed": "presume-city-92",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Underworld effectively controls vice, smuggling, and key officials;"
+    },
+    {
+     "seed": "r2r-town-8",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Underworld effectively controls vice, smuggling, and key officials;"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/components/home/landingFixture.js",
+   "thing": "war",
+   "text": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows.",
+   "hash": "db13c4c73cfa5ca3",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "wartime pressure disrupts trade flows. trade route strain disrupts trade flows."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 2,
+   "againstN": 2,
+   "printedSeeds": [
+    "lf-033 (the fixture, facts as born)",
+    "lf-033 (the fixture, facts after its weeks)"
+   ],
+   "againstSeeds": [
+    "lf-033 (the fixture, facts as born)",
+    "lf-033 (the fixture, facts after its weeks)"
+   ],
+   "paths": [
+    ".realm.whyTrace[].reason"
+   ],
+   "samples": [
+    {
+     "seed": "lf-033 (the fixture, facts as born)",
+     "path": ".realm.whyTrace[].reason",
+     "sentence": "Wartime pressure disrupts trade flows."
+    },
+    {
+     "seed": "lf-033 (the fixture, facts after its weeks)",
+     "path": ".realm.whyTrace[].reason",
+     "sentence": "Wartime pressure disrupts trade flows."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/components/home/landingFixture.js",
+   "thing": "market",
+   "text": "Caravans are passing Cnocby by, and its market stalls stand half empty.",
+   "hash": "724c1896440111d1",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "caravans are passing cnocby by, and its market stalls stand half empty."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 2,
+   "againstN": 2,
+   "printedSeeds": [
+    "lf-033 (the fixture, facts as born)",
+    "lf-033 (the fixture, facts after its weeks)"
+   ],
+   "againstSeeds": [
+    "lf-033 (the fixture, facts as born)",
+    "lf-033 (the fixture, facts after its weeks)"
+   ],
+   "paths": [
+    ".realm.advance[].text"
+   ],
+   "samples": [
+    {
+     "seed": "lf-033 (the fixture, facts as born)",
+     "path": ".realm.advance[].text",
+     "sentence": "Caravans are passing Cnocby by, and its market stalls stand half empty."
+    },
+    {
+     "seed": "lf-033 (the fixture, facts after its weeks)",
+     "path": ".realm.advance[].text",
+     "sentence": "Caravans are passing Cnocby by, and its market stalls stand half empty."
+    }
+   ],
+   "verdict": "close-false"
+  }
+ ]
+}
