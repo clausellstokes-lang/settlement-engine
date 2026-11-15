@@ -33,12 +33,12 @@ export const FACE_HONORIFICS = Object.freeze({
   "the head shepherd": ["Head Shepherd", "Master Shepherd"],
   "the camp foreman": [{ male: "Foreman", female: "Overseer" }, "Camp Master"], // TAIL-TITLES-2 KT1: her title "the camp overseer"
   "the eldest": ["Elder", "Eldest"],
-  "the eldest householder": ["Elder", "Goodman"],
+  "the eldest householder": ["Elder", { male: "Goodman", female: "Goodwife" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the reeve": ["Reeve"],
   "the household elder": ["Elder", "Head of the Household"],
   "the fence": ["Fence"],
   "the outlaw host": ["Captain", "Outlaw Chief"],
-  "the dairy farmer": ["Dairyman", "Dairy Farmer"],
+  "the dairy farmer": [{ male: "Dairyman", female: "Dairy Farmer" }, "Dairy Farmer"], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the collier": ["Collier", "Master Collier"],
   "the peat-reeve": ["Peat-Reeve", "Reeve"],
   "the mine captain": ["Mine Captain", "Captain", "Mine-Master"],
@@ -69,7 +69,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the carriers' master": ["Master Carrier", "Carriers' Master"],
   "the ferryman": [{ male: "Ferryman", female: "Ferry Keeper" }, "Ferry-Master"], // TAIL-TITLES-2 KT1: her title "the ferry keeper"
   "the boatwright": ["Boatwright", "Master Boatwright"],
-  "the toll-keeper": ["Toll-Keeper", "Tollman"],
+  "the toll-keeper": ["Toll-Keeper", { male: "Tollman", female: "Toll-Keeper" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the miller": ["Miller", "Master Miller"],
   "the thatcher": ["Thatcher", "Master Thatcher"],
   "the cooper": ["Cooper", "Master Cooper"],
@@ -134,7 +134,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the alchemist": ["Alchemist", "Master Alchemist"],
   "the dean": ["Dean"],
   "the abbot": [{ male: "Abbot", female: "Abbess" }, { male: "Father Abbot", female: "Mother Abbess" }],
-  "the hospitaller": ["Hospitaller", "Brother Hospitaller"],
+  "the hospitaller": ["Hospitaller", { male: "Brother Hospitaller", female: "Sister Hospitaller" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the almoner": ["Almoner"],
   "the foundling-mother": [{ male: "Keeper", female: "Mother" }, { male: "Keeper", female: "Matron" }], // TAIL-TITLES-2 KT1: his title "the foundling-keeper"
   "the grove elder": ["Elder", "Grove-Warden"],
@@ -174,7 +174,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the slave-market master": ["Slavemaster"],
   "the chronicler": ["Chronicler"],
   "the master metalworker": ["Master Metalworker"],
-  "the luxury merchant": ["Merchant", "Merchant Prince"],
+  "the luxury merchant": ["Merchant", { male: "Merchant Prince", female: "Merchant Princess" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the senior abbot": [{ male: "Lord Abbot", female: "Lady Abbess" }, { male: "Abbot", female: "Abbess" }],
   "the bishop": ["Bishop", "Lord Bishop"],
   "the hospital's master": ["Master", "Master of the Hospital"],

@@ -1669,9 +1669,9 @@ const voteUnheld = (row, a, b) => {
 };
 const closureFor = (row, a, b) => (row && typeof row === 'object' && typeof row.twin === 'function'
   && ((row.sharedTrade && pairTradeKnown(a, b) && !pairSharesTrade(a, b)) || (row.votes && voteUnheld(row, a, b))) ? row.twin : closureOf(row));
-const pairProse = (salt, variants, order = null) => Object.assign((r, s, variant, force) => {
+const pairProse = (salt, variants, order = null, debt = false) => Object.assign((r, s, variant, force) => {
   const [a, b] = isReversedTie(variant) ? [s, r] : [r, s]; // TAIL-TIES-2 (T6): the pair's direction, read off the stored variant
-  const ends = order ? endsOf(a, b, order[0], order[1]) : [a, b];
+  const drawn = order ? endsOf(a, b, order[0], order[1]) : [a, b], ends = debt && secretOwes(drawn[1], drawn[0]) && !secretOwes(drawn[0], drawn[1]) ? [drawn[1], drawn[0]] : drawn; // BAR3-PEOPLE-2 (C35097): the pair's one debt (secretOwes, at the file's end)
   return closureFor(isTieIndex(variant) ? variants[tieIndexOf(variant) % variants.length]
     : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`), ends[0], ends[1])(...ends, force || TIE_FORCE_WORDS);
 }, { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
@@ -2266,7 +2266,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} nursed ${r.name} through a winter fever when no one else would come. ${r.name} still owes the debt and still knows it.`, colour: true },
       { line: (r, s) => `${r.name} borrowed ${s.name}'s good name to win a post. ${s.name} has never asked for it back.`, colour: true },
-    ]),
+    ], null, true), // BAR3-PEOPLE-2 (C35097): debtor first; the pair's one debt
     tension: pairProse('t', [
       { line: (r, s) => `${s.name} is about to call it in.`, colour: true },
       { line: (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`, colour: true },
@@ -2281,7 +2281,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `${r.name} has refused ${s.name} a small favour for the first time in years.`, colour: true },
       // BAR3-PEOPLE (P1, C31676 C44190): the creditor may hold the seat (a monarch, a governor): no ruin is claimed
       { line: (r, s) => `${s.name} has begun to count the debt ${r.name} owes among ${s.name}'s assets, and has had it written down before witnesses.`, colour: true },
-    ]),
+    ], null, true), // BAR3-PEOPLE-2 (C35097): debtor first; the pair's one debt
     type: 'debtor_creditor',
   },
   family_complication: {
@@ -2443,3 +2443,17 @@ export const MILITARY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTI
  * @type {ReadonlySet<string>}
  */
 export const RELIGIOUS_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.religious.flatMap((l) => (typeof l === 'string' && /^They know which of the current leadership will be the next to fall from grace\.|^Their predecessor left a sealed letter to be opened at their death;/.test(l) ? [l] : []))));
+
+/**
+ * BAR3-PEOPLE-2, the chair's grant PG1 and direction P1 of 2026-11-15 (vetoable by the owner; C35097): THE PAIR HAS ONE
+ * DEBT. A card's secret that it owes the other card a debt (`npcGenerator.js :: generateCrimeLevel`, the knowledge row
+ * "Owes <name> a debt ...") is the record's word on which way the pair's debt runs. The secret is drawn before the ties
+ * (`narrativeGenerator.js :: enrichNpcCoherence`, then `drawTies`), so the tie reads it: an old-debt line (debtor first)
+ * whose second card's secret says it owes the first is written with the two exchanged. THE DRAW IS NOT MOVED: the index,
+ * the tension's index and every other tie are as drawn; only which name stands where in the text.
+ * @param {any} x @param {any} y @returns {boolean} x's own secret says x owes y
+ */
+export function secretOwes(x, y) {
+  const what = typeof x?.secret?.what === 'string' ? x.secret.what : '';
+  return typeof y?.name === 'string' && y.name !== '' && what.startsWith(`Owes ${y.name} a debt`);
+}
