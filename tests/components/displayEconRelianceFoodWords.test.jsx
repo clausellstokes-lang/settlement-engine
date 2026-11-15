@@ -34,6 +34,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { foodMagicShare } from '../../src/domain/display/magicProvisionShown.js';
 import { deriveMagicReliance, foodMagicShare as relianceFoodShare } from '../../src/domain/magicReliance.js';
+import { poolMemberTexts } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
@@ -56,11 +57,18 @@ const textOf = (t, tab) => {
   return out;
 };
 
-/** [seed, tab, the line that must NOT print, what prints instead (or the slot's silence by design), the liveness anchor:
+/**
+ * The defence desk's "no structural dependency on magic" pool (DS-DEF-9 :: magicDependency false), every member filled
+ * for the town's name: COMPUTED through tests/helpers/drawnProse.js (TAIL-CLOSE-TESTS-C), so a re-index, a rewording
+ * or an appended wording moves the member and the anchor together. The claim is the pair's own: beside a provision that
+ * feeds the town, no wording of that pool prints.
+ */
+const NO_DEPENDENCY = poolMemberTexts({ leaf: 'defense', blockId: 'DS-DEF-9', poolKey: 'magicDependency false', slots: { settlement: 'Amarkota' } });
+/** [seed, tab, the line (or every member of the pool) that must NOT print, what prints instead (or the slot's silence by design), the liveness anchor:
  *  a line the same text prints on the same path (the twin or keep where the test claims one; else a sibling card's share)] */
 const NOT = /** @type {const} */ ([
   ['r2s-occupied-thorp-1', 'magic', 'Reliance on magic: None', 'Reliance on magic: Relied upon (a third of the need by provision)', 'Reliance on magic: Relied upon'],
-  ['r2s-occupied-thorp-1', 'magic', 'Nothing structural at Amarkota depends on arcane work.', 'the desk\'s relied-upon reading', 'Reliance on magic: Relied upon'],
+  ['r2s-occupied-thorp-1', 'magic', NO_DEPENDENCY, 'the desk\'s relied-upon reading', 'Reliance on magic: Relied upon'],
   ['r2r-thorp-54', 'magic', 'Reliance on magic: None', 'Reliance on magic: Relied upon', 'Reliance on magic: Relied upon'],
   ['r2r-hamlet-16', 'economics', 'Oxteha grows about two parts in five of what it eats', 'Oxteha grows about two parts in five of what it needs', 'Oxteha grows about two parts in five of what it needs'],
   ['r2r-thorp-54', 'economics', 'Magical provision makes up about a quarter of what it eats.', 'Magical provision makes up about a quarter of what it needs.', 'Magical provision makes up about a quarter of what it needs.'],
@@ -112,7 +120,8 @@ describe('TAIL-DISPLAY-ECON-2 batch 2: the reliance reading counts the food prov
   test('each NOT row does not print its line; instead: what the row names (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(NOT, ([seed, tab, line, _instead, anchor]) => {
       try {
-        expectAbsentWithAnchor(textOf(town(seed), tab), line, anchor, `${seed} (${tab})`);
+        const text = textOf(town(seed), tab);
+        for (const member of [line].flat()) expectAbsentWithAnchor(text, member, anchor, `${seed} (${tab})`);
       } finally { cleanup(); }
     }), 'every NOT row: the tab does not print the old line');
   }, 120000);
