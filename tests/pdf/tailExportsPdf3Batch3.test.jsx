@@ -30,6 +30,7 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -96,23 +97,32 @@ const UNSHORT = [['r2s-religious_conversion-hamlet-2', 'institutions'], ['r2s-re
 
 describe('TAIL-EXPORTS-PDF-3 batch 3: the leaf\'s second cause, ENTREPÔT by the page\'s chains, the origin heading', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
-  test.each(NOT)('%s %s (%s): not printed', (_id, seed, where, not, instead) => {
-    const out = text(seed, where);
-    expect(out, `${where}: the surface renders`).toContain(SURFACE_HEAD[where]);
-    // anchored: the line above proves this surface rendered its own heading on the text this pattern scans
-    expect(out).not.toMatch(not);
-    for (const re of instead ? [instead].flat() : []) expect(out).toMatch(re);
+  test('each NOT row: not printed, and what prints instead does (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([id, seed, where, not, instead]) => {
+      const row = `${id} ${seed} (${where})`;
+      const out = text(seed, where);
+      expect(out, `${row}: ${where}: the surface renders`).toContain(SURFACE_HEAD[where]);
+      // anchored: the line above proves this surface rendered its own heading on the text this pattern scans
+      expect(out, `${row}: not printed`).not.toMatch(not);
+      for (const re of instead ? [instead].flat() : []) expect(out, `${row}: prints instead`).toMatch(re);
+    }), 'every NOT row: the surface does not print the old line');
   }, 120000);
-  test.each(NOW)('now %s (%s)', (seed, where, now) => {
-    expect(text(seed, where)).toMatch(now);
+  test('each NOW row: the line now prints (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOW, ([seed, where, now]) => {
+      expect(text(seed, where), `now ${seed} (${where})`).toMatch(now);
+    }), 'every NOW row: the line printed nowhere at the base now prints');
   }, 120000);
-  test.each(KEEP)('keep %s (%s)', (seed, where, keep) => {
-    expect(text(seed, where)).toMatch(keep);
+  test('each KEEP row: the true sibling still prints (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, where, keep]) => {
+      expect(text(seed, where), `keep ${seed} (${where})`).toMatch(keep);
+    }), 'every KEEP row: the true sibling still prints');
   }, 120000);
-  test.each(UNSHORT)('unshort %s (%s): no short mark', (seed, where) => {
-    const out = text(seed, where);
-    expect(out, `${where}: the surface renders`).toContain(SURFACE_HEAD[where]);
-    // anchored: the line above proves this surface rendered its own heading on the text this pattern scans
-    expect(out).not.toMatch(/Short of |\((?:[a-z]+, )?short\)|A row marked short/);
+  test('each UNSHORT row: no short mark (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(UNSHORT, ([seed, where]) => {
+      const out = text(seed, where);
+      expect(out, `unshort ${seed} (${where}): ${where}: the surface renders`).toContain(SURFACE_HEAD[where]);
+      // anchored: the line above proves this surface rendered its own heading on the text this pattern scans
+      expect(out, `unshort ${seed} (${where}): no short mark`).not.toMatch(/Short of |\((?:[a-z]+, )?short\)|A row marked short/);
+    }), 'every UNSHORT row: a town no house of which is short prints no short mark');
   }, 120000);
 });

@@ -28,6 +28,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -110,18 +111,24 @@ const SILENT_SLOT_ANCHOR = /^Under Siege$/m;
 
 describe('TAIL-EXPORTS-PDF-2 batch 2: the crisis leaf on the PDF\'s rows, the cover\'s export, a criminal house by its label', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
-  test.each(NOT)('%s %s (%s): not printed', (_id, seed, where, not, instead) => {
-    const out = text(seed, where);
-    expect(out).toMatch(instead ? [instead].flat()[0] : SILENT_SLOT_ANCHOR);
-    // anchored: the positive above (what prints instead, or the cover's crisis row) holds on the same text; ^$/m keep the regex
-    expect(out).not.toMatch(not);
-    for (const re of instead ? [instead].flat() : []) expect(out).toMatch(re);
+  test('every NOT row: not printed (every row runs; each failure names its id, seed and surface)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([_id, seed, where, not, instead]) => {
+      const out = text(seed, where);
+      expect(out, `${_id} ${seed} (${where}): what prints instead`).toMatch(instead ? [instead].flat()[0] : SILENT_SLOT_ANCHOR);
+      // anchored: the positive above (what prints instead, or the cover's crisis row) holds on the same text; ^$/m keep the regex
+      expect(out, `${_id} ${seed} (${where}): not printed`).not.toMatch(not);
+      for (const re of instead ? [instead].flat() : []) expect(out, `${_id} ${seed} (${where}): ${re} prints`).toMatch(re);
+    }), 'every NOT row: the false line is not printed, and what prints instead does');
   }, 120000);
-  test.each(KEEP)('keep %s (%s)', (seed, where, keep) => {
-    expect(text(seed, where)).toMatch(keep);
+  test('every KEEP row: keep (every row runs; each failure names its seed and surface)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, where, keep]) => {
+      expect(text(seed, where), `keep ${seed} (${where})`).toMatch(keep);
+    }), 'every KEEP row still prints');
   }, 120000);
-  test.each(CALM)('calm %s (%s): no mark, no head line', (seed, where) => {
-    const out = text(seed, where);
-    for (const mark of MARKS) expectAbsentWithAnchor(out, mark, CALM_ROW[where], `${seed} ${where}`);
+  test('every CALM row: no mark, no head line (every row runs; each failure names its seed and surface)', () => {
+    expectNoSeedFailures(collectSeedFailures(CALM, ([seed, where]) => {
+      const out = text(seed, where);
+      for (const mark of MARKS) expectAbsentWithAnchor(out, mark, CALM_ROW[where], `${seed} ${where}`);
+    }), 'every CALM row: a calm town marks nothing and prints no head line');
   }, 120000);
 });

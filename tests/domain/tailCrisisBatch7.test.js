@@ -10,6 +10,7 @@
 import fs from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
 import * as cast from '../../src/domain/crisis/crisisCast.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const { STAKE_REASONS } = cast;
 /** Read through the namespace, so the pairs run (and red) at a base that has no table. @type {Record<string, string>} */
@@ -48,13 +49,22 @@ const FALSE = ['r2s-slave_revolt-town-0', 'r2s-slave_revolt-town-2', 'r2s-slave_
   'r2s-slave_revolt-metropolis-0', 'r2s-slave_revolt-metropolis-1', 'r2s-slave_revolt-metropolis-2', 'r2s-slave_revolt-metropolis-3'];
 
 describe('the revolt\'s own leadership is never untouched by the revolt', () => {
-  it.each(FALSE)('%s stores "it leads the revolt", keeping the waverer\'s split (red at 3f45e6fa9: "it could side with either camp")', (seed) => {
+  /** One FALSE row. @param {string} seed */
+  const leadsTheRevolt = (seed) => {
     const k = stakeOf(birth(seed), 'Revolt Leadership');
-    expect(k?.reason).not.toBe(STAKE_REASONS.untouched);
-    expect(k).toEqual({ factionId: 'Revolt Leadership', stake: 'split', reason: 'it leads the revolt, and rises or falls with it' });
+    expect(k?.reason, `${seed}: the leadership's stored reason is not "untouched"`).not.toBe(STAKE_REASONS.untouched);
+    expect(k, `${seed} stores "it leads the revolt", keeping the waverer's split`).toEqual({ factionId: 'Revolt Leadership', stake: 'split', reason: 'it leads the revolt, and rises or falls with it' });
+  };
+  it('each FALSE seed stores "it leads the revolt", keeping the waverer\'s split (red at 3f45e6fa9: "it could side with either camp") (rows 1-4)', () => {
+    expectNoSeedFailures(collectSeedFailures(FALSE.slice(0, 4), leadsTheRevolt), 'FALSE rows 1-4: the revolt\'s own leadership stores "it leads the revolt"');
   });
-  it.each(['r2s-slave_revolt-hamlet-2', 'r2s-slave_revolt-village-2'])('%s KEEPS its earlier rule: the leadership outweighs the seat (gains)', (seed) => {
-    expect(stakeOf(birth(seed), 'Revolt Leadership')).toEqual({ factionId: 'Revolt Leadership', stake: 'gains', reason: STAKE_REASONS.gainsRival });
+  it('each FALSE seed stores "it leads the revolt", keeping the waverer\'s split (red at 3f45e6fa9: "it could side with either camp") (rows 5-8)', () => {
+    expectNoSeedFailures(collectSeedFailures(FALSE.slice(4), leadsTheRevolt), 'FALSE rows 5-8: the revolt\'s own leadership stores "it leads the revolt"');
+  });
+  it('each KEEP seed KEEPS its earlier rule: the leadership outweighs the seat (gains) (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2s-slave_revolt-hamlet-2', 'r2s-slave_revolt-village-2'], (seed) => {
+      expect(stakeOf(birth(seed), 'Revolt Leadership'), `${seed} KEEPS its earlier rule: the leadership outweighs the seat (gains)`).toEqual({ factionId: 'Revolt Leadership', stake: 'gains', reason: STAKE_REASONS.gainsRival });
+    }), 'KEEP rows: the leadership outweighs the seat');
   });
   it('KEEPS a power the revolt did not raise as untouched (r2s-slave_revolt-metropolis-0, Arcane Orders)', () => {
     expect(stakeOf(birth('r2s-slave_revolt-metropolis-0'), 'Arcane Orders')?.reason).toBe(STAKE_REASONS.untouched);

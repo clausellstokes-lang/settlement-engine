@@ -11,6 +11,7 @@
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render } from '@testing-library/react';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -69,12 +70,20 @@ const KEEP = /** @type {const} */ ([
 ]);
 
 describe('TAIL-DISPLAY-ECON-5 (X31): the short words read the food record\'s band', () => {
-  test.each(NOT)('%s: %s does not print', (seed, gone, instead) => {
-    const text = textOf(town(seed));
-    expect(text).not.toContain(gone);
-    expect(text).toContain(instead);
+  test('every NOT row: its seed does not print its line (every row runs; each failure names its seed and line)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, gone, instead]) => {
+      try {
+        const text = textOf(town(seed));
+        expect(text, `${seed}: ${gone} does not print`).not.toContain(gone);
+        expect(text, `${seed}: ${instead} prints instead`).toContain(instead);
+      } finally { cleanup(); }
+    }), 'every NOT row: the go-short words do not print beside band Secure, and the twin prints');
   }, 60000);
-  test.each(KEEP)('%s: %s still prints', (seed, kept) => {
-    expect(textOf(town(seed))).toContain(kept);
+  test('every KEEP row: its seed still prints its line (every row runs; each failure names its seed and line)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, kept]) => {
+      try {
+        expect(textOf(town(seed)), `${seed}: ${kept} still prints`).toContain(kept);
+      } finally { cleanup(); }
+    }), 'every KEEP row: the line still prints');
   }, 60000);
 });

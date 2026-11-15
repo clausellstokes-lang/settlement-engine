@@ -92,3 +92,41 @@ now pinned exactly with `toBeNull()`.
 Only the moving file is left (1 negative, at line 382 of tailNarrativeRows). It waits for the chair's "SWEPT <tip>":
 then I merge the joined line at that tip, re-measure, and cure what is left and what arrived. The other half's rows
 (paths at or before conflictRelationsTwin) are TAIL-CLOSE-TESTS-A's, and both walkers stay red on them.
+
+## Ledger 2: the lighting census's each-family PARK debt (the chair's second assignment; both halves)
+
+Walker: `tests/lint/sovereigntyLightingContract.walker.test.js`, arm "⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS".
+I measured its own sets in a THROWAWAY copy only, and nothing there is committed: its ROOT was pointed at the scratch
+tree and both sets were dumped. The census register was never refrozen or touched.
+
+| | ceiling | at 1b386d3f (before) | now |
+|---|---|---|---|
+| files parked ONLY on `each`/`for` | 108 | **137** | **107** |
+| files with an inline literal table still parked (CONTEXT_PARAM) | 50 | **53** | **49** |
+
+- **The 29 newly parked files:** none of them existed when the 108 ceiling was set (30f273b8). 28 are cured. Each
+  `test.each`/`it.each` table is now a plain parameterless `test` that runs every row through
+  `collectSeedFailures`/`expectNoSeedFailures`. The rows, expects and expected values are the same, and each row's
+  message carries what its old title named. Component rows call `cleanup()` per row, and the existing per-test
+  timeouts are kept. One table was split in two for the 20 s timeout (tailCrisisBatch7's FALSE rows, 1–4 and 5–8).
+- **Also cured, as the chair named them** (older debt inside the 108): tests/domain/cultureProfiles,
+  tests/domain/customContentAdmission.
+- **Two more loops converted:** the shared helper import would have exempted two bare seed loops in TESTS-A's half
+  (displayEconShadowFloor "ONE HOME", displayEconStoresFacetTimber "one home"), so both are converted rather than
+  hidden.
+- **Proof:** all 30 files are CREDITED by the walker's own `parkReasonsFor`. Run alone, every row that passed before
+  passes inside its plain test, and every row that was red is red still (and named). eslint is clean. Both earlier
+  walkers read the same counts over the whole corpus (negatives 59 files / 101 sites, all of them TESTS-A's half
+  plus my held file; no new site).
+- **Held back as moving:** `tests/domain/tailCrisisBatch8.test.js` (lane/tail-crisis-2026-11-14).
+- **Rows red before and after, the same rows (not findings):** displayEconCrisisMarks TWIN [r2s-famine-hamlet-0,
+  r2s-under_siege-town-1] and KEEP [r2s-famine-hamlet-0]; displayEconRelianceFoodWords KEEP [r2s-famine-town-1];
+  tailDisplayCivic3V1 CURED [r2r-metropolis-50].
+- **Finding, under src/, not mine:** `tests/domain/tailCrisisBatch7.test.js` cannot load, before and after.
+  TypeError "Cannot read properties of undefined (reading 'face')" at src/domain/crisis/crisisHooks.js:102
+  (`CAST_REASONS.face`), which looks like a circular import reached through crisisCast.js → plotHooks.js →
+  tonightSheet.js. Its rows have never run in this tree, so its conversion is checked by reading, not by a run.
+- **Overlap, for the chair:** four of these files (displayEconCrisisMarks, displayEconFlowsMagicFood,
+  displayEconRelianceFoodWords, resourcesCatalogueLabel) and magicRoleFoodProvision sit in TESTS-A's half of the
+  negative walker and still carry TESTS-A's un-anchored negatives, moved but unchanged. TESTS-A will be editing the
+  same files.

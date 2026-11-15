@@ -68,27 +68,37 @@ const DEFENDED = ['r2r-hamlet-10', 'r2s-monster_pressure-thorp-2', 'r2s-monster_
 const UNDEFENDED = ['r2r-thorp-5', 'r2s-monster_pressure-village-3'];
 
 describe('the insurgency summary: the strong line needs a rival of standing ON THE SETTLED RECORD', () => {
-  it.each(RIVAL)('%s holds a rival of standing at the end and prints the strong line (red at 3f45e6fa9: the plain line)', (seed) => {
-    const s = birth(seed);
-    expect(rivalPowerOf(s)).toBe(true);
-    expect(summaryOf(s, 'insurgency')).toBe(STRONG);
+  it('each RIVAL seed holds a rival of standing at the end and prints the strong line (red at 3f45e6fa9: the plain line) (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(RIVAL, (seed) => {
+      const s = birth(seed);
+      expect(rivalPowerOf(s), `${seed} holds a rival of standing at the end`).toBe(true);
+      expect(summaryOf(s, 'insurgency'), `${seed} prints the strong line`).toBe(STRONG);
+    }), 'every RIVAL seed holds a rival of standing at the end and prints the strong line');
   });
-  it.each(LOST_IN_RESIZE)('%s lost its rival in the resize and prints the plain line (red where the first render is stored)', (seed) => {
-    const s = birth(seed);
-    expect(rivalPowerOf(s)).toBe(false);
-    expect(summaryOf(s, 'insurgency')).toBe(PLAIN);
+  it('each LOST_IN_RESIZE seed lost its rival in the resize and prints the plain line (red where the first render is stored) (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(LOST_IN_RESIZE, (seed) => {
+      const s = birth(seed);
+      expect(rivalPowerOf(s), `${seed} lost its rival in the resize`).toBe(false);
+      expect(summaryOf(s, 'insurgency'), `${seed} prints the plain line`).toBe(PLAIN);
+    }), 'every LOST_IN_RESIZE seed lost its rival in the resize and prints the plain line');
   });
-  it.each(NEVER)('%s never held a rival of standing and prints the plain line (KEEP)', (seed) => {
-    expect(summaryOf(birth(seed), 'insurgency')).toBe(PLAIN);
+  it('each NEVER seed never held a rival of standing and prints the plain line (KEEP) (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(NEVER, (seed) => {
+      expect(summaryOf(birth(seed), 'insurgency'), `${seed} never held a rival of standing and prints the plain line`).toBe(PLAIN);
+    }), 'every NEVER seed prints the plain line');
   });
 });
 
 describe('monster_pressure: "built for quieter times" needs a defence that exists (KEEP pairs, both ways)', () => {
-  it.each(DEFENDED)('%s keeps a defence and says its defences were built for quieter times', (seed) => {
-    expect(summaryOf(birth(seed), 'monster_pressure')).toContain('Its defences were built for quieter times.');
+  it('each DEFENDED seed keeps a defence and says its defences were built for quieter times (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(DEFENDED, (seed) => {
+      expect(summaryOf(birth(seed), 'monster_pressure'), `${seed} keeps a defence and says its defences were built for quieter times`).toContain('Its defences were built for quieter times.');
+    }), 'every DEFENDED seed says its defences were built for quieter times');
   });
-  it.each(UNDEFENDED)('%s keeps none and says it has nothing to hold such things off', (seed) => {
-    expect(summaryOf(birth(seed), 'monster_pressure')).toContain('It has nothing built or kept to hold such things off.');
+  it('each UNDEFENDED seed keeps none and says it has nothing to hold such things off (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(UNDEFENDED, (seed) => {
+      expect(summaryOf(birth(seed), 'monster_pressure'), `${seed} keeps none and says it has nothing to hold such things off`).toContain('It has nothing built or kept to hold such things off.');
+    }), 'every UNDEFENDED seed says it has nothing to hold such things off');
   });
 });
 

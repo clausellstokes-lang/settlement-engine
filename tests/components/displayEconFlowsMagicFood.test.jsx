@@ -31,6 +31,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { foodMagicShare, MAGIC_FOOD_NOTES } from '../../src/domain/display/magicProvisionShown.js';
 import { MAGIC_NOTE_TRADITION } from '../../src/domain/facts/magicSource.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -88,16 +89,28 @@ describe('TAIL-DISPLAY-ECON batch 1: the flows header counts its cards; magic cl
     expect(foodMagicShare(town('r2r-thorp-0')), 'no provision: "None" stands').toBe(0);
   }, 120000);
 
-  test.each(NOT)('%s (%s) does not print "%s"; instead: %s', (seed, tab, line) => {
-    expect(textOf(town(seed), tab)).not.toContain(line);
+  test('each NOT row does not print its line; instead: what the row names (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, tab, line, instead]) => {
+      try {
+        expect(textOf(town(seed), tab), `${seed} (${tab}) does not print "${line}"; instead: ${instead}`).not.toContain(line);
+      } finally { cleanup(); }
+    }), 'every NOT row: the tab does not print the old line');
   }, 120000);
 
-  test.each(TWIN)('%s (%s) prints the twin "%s"', (seed, tab, line) => {
-    expect(textOf(town(seed), tab)).toContain(line);
+  test('each TWIN row prints the twin (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(TWIN, ([seed, tab, line]) => {
+      try {
+        expect(textOf(town(seed), tab), `${seed} (${tab}) prints the twin "${line}"`).toContain(line);
+      } finally { cleanup(); }
+    }), 'every TWIN row: the tab prints the twin');
   }, 120000);
 
-  test.each(KEEP)('%s (%s) still prints "%s"', (seed, tab, line) => {
-    expect(textOf(town(seed), tab)).toContain(line);
+  test('each KEEP row still prints its line (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, tab, line]) => {
+      try {
+        expect(textOf(town(seed), tab), `${seed} (${tab}) still prints "${line}"`).toContain(line);
+      } finally { cleanup(); }
+    }), 'every KEEP row: the tab still prints the true sibling');
   }, 120000);
 
 });
