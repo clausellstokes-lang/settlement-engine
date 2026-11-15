@@ -1132,7 +1132,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 2. `[street · dm-only · colour]` There is a cheaper way to do most things here, and most people know somebody who knows it.
 3. `[visitor · dm-only · market]` The prices in this market do not quite add up for a stranger who assumes everyone is paying the same fees. They are not.
 4. `[visitor · market]` Goods change hands at {settlement} without anyone writing them down, and the price a buyer is quoted depends on whether a duty is to be paid at all.
-5. `[ledger · market]` The duties gathered at {settlement} fall short of the trade that plainly goes on there, and nobody is pressed to make up the difference.
+5. `[ledger · market · no crisis: under_siege]` The duties gathered at {settlement} fall short of the trade that plainly goes on there, and nobody is pressed to make up the difference.
 6. `[street · colour]` Ask how to bring goods into {settlement} cheaply and somebody will tell you, with a nod toward the quieter way in.
 7. `[street · no market]` Much of what changes hands at {settlement} changes hands quietly, between people who would rather nobody counted it.
 
@@ -1224,10 +1224,10 @@ contradict** it (R-DST-C).
 **STRUGGLING** — *chronically short*
 1. `[street · colour]` {settlement} is short more often than not. Some needs are met and some are postponed, and which is which changes month to month.
 2. `[ledger · colour]` The town never quite makes ends meet. Every month something it needs waits for money that does not come.
-3. `[visitor · market]` The shortage at {settlement} shows in small things: a repair not made, a stall not restocked, a hall not heated.
+3. `[visitor · market · no crisis: hunger]` The shortage at {settlement} shows in small things: a repair not made, a stall not restocked, a hall not heated.
 4. `[local · colour]` Families in {settlement} mend what they have and put off buying anything new.
 5. `[official · colour]` Whoever keeps {settlement}'s purse pays the most pressing debt each month and lets the rest wait.
-6. `[trade · colour]` Sellers at {settlement} give credit more often than they would like, and are paid late.
+6. `[trade · market]` Sellers at {settlement} give credit more often than they would like, and are paid late.
 7. `[newcomer · colour]` A newcomer to {settlement} soon learns that most people here are owed money and owe some too.
 
 **POOR** — *getting by, no surplus* {crisis-scoped}
@@ -1245,10 +1245,10 @@ contradict** it (R-DST-C).
 **COMFORTABLE** — *reliable surplus, reserves exist*
 1. `[ledger · no crisis: indebted]` {settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.
 2. `[street · colour]` People here put things by, and can. That is the difference between this town and a poorer one.
-3. `[visitor]` The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.
+3. `[visitor · food: ≥ secure]` The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
-1. `[ledger · colour]` {settlement} has money to spend and spends it on its halls and its defences.
+1. `[ledger · colour]` {settlement} has money to spend, and spends it on the town's buildings and their upkeep.
 2. `[visitor · walls]` {settlement} is visibly well off. The halls, the walls and the roads are all better than a town this size strictly requires.
 3. `[street · colour]` There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.
 4. `[visitor · no walls]` {settlement} is visibly well off. The halls, the houses and the roads are all better than a town this size strictly requires.
@@ -1366,7 +1366,7 @@ sentence in two voices. **No named deaths.**
 
 **HOW THE NEED IS MET: much of it brought in**
 1. `[visitor · no crisis: plague_onset]` Food carts come into {settlement} most days, and they matter: a good part of what the town eats is grown elsewhere and brought in.
-2. `[ledger · no crisis: plague_onset]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
+2. `[ledger · no crisis: plague_onset · no crisis: famine]` {settlement} grows only part of what it eats; the rest comes in from the farms around it and from trade.
 3. `[street · no crisis: plague_onset]` A good part of what {settlement} eats is brought in, and everyone knows when the next load is due.
 
 **HOW THE NEED IS MET: part of it by magic**
@@ -1556,8 +1556,8 @@ note that carries it on the six wired surfaces.
 
 **POSTURE: `entrepot`**
 1. `[ledger · no crisis: under_siege]` {settlement} sells on goods it never made: some of what leaves the town entered it as imports the same season.
-2. `[visitor · no crisis: under_siege]` The trade here is in the moving of things. Very little of what leaves began here.
-3. `[street · no crisis: under_siege]` The town's living is the road. Goods come, goods go, and the town takes its part of both.
+2. `[visitor · no crisis: under_siege]` The trade here is in the moving of things, and the town's yards are as busy as its workshops.
+3. `[street · no crisis: under_siege · no crisis: plague_onset]` The town's living is the road. Goods come, goods go, and the town takes its part of both.
 4. `[ledger · crisis: under_siege]` Some of {settlement}'s trade was in other towns' goods passing through, and the siege has stopped that trade.
 5. `[visitor · crisis: under_siege]` Goods that were only passing through {settlement} are stuck there now, with the roads closed and nowhere for them to go.
 
@@ -1568,11 +1568,11 @@ note that carries it on the six wired surfaces.
 
 **POSTURE: `established`**
 1. `[ledger · no hunger]` {settlement} sells more than one thing beyond the town.
-2. `[visitor · tier: ≥ village · no crisis: under_siege · no crisis: famine]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
-3. `[street · no crisis: under_siege · no crisis: famine]` There is always something going out, and not always the same thing.
-4. `[trade · no crisis: under_siege · no crisis: famine]` The carts that leave {settlement} carry several kinds of goods, not one.
-5. `[local · no crisis: under_siege]` Buyers from outside come to {settlement} for more than one thing.
-6. `[newcomer · no crisis: under_siege · no crisis: famine]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
+2. `[visitor · tier: ≥ village · no crisis: under_siege · no crisis: famine · no crisis: plague_onset]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
+3. `[street · no crisis: under_siege · no crisis: famine · no crisis: plague_onset]` There is always something going out, and not always the same thing.
+4. `[trade · no crisis: under_siege · no crisis: famine · no crisis: plague_onset]` The carts that leave {settlement} carry several kinds of goods, not one.
+5. `[local · no crisis: under_siege · no crisis: plague_onset]` Buyers from outside come to {settlement} for more than one thing.
+6. `[newcomer · no crisis: under_siege · no crisis: famine · no crisis: plague_onset]` A merchant who comes to {settlement} for one thing usually leaves with two or three.
 7. `[ledger · crisis: under_siege]` {settlement} had several trades selling outward before the siege, and none of them can reach a buyer now.
 8. `[unfolding · crisis: famine · no crisis: under_siege]` {settlement} has more than one trade sending goods out, and the famine has made every one of them harder to keep going.
 9. `[street · crisis: famine · no crisis: under_siege]` With the famine on, every trade {settlement} sells outward is judged by one thing: what it can bring back to eat.
@@ -6896,7 +6896,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`MARKET-NARROW`** {colour · market}
 1. `[ledger]` {settlement}'s market serves the town itself; little passes through that was not always coming here.
-2. `[street]` {settlement} buys mostly what it makes itself, and the market is where its people trade with each other.
+2. `[street · market]` {settlement}'s market is where its own people trade with each other, more than with anyone from outside.
 3. `[counterforce]` No great road feeds {settlement}'s market; it serves the town itself, no more.
 
 **`ENTREPOT`** {crisis-scoped · market}
@@ -6907,7 +6907,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`NO-MARKET`** {no market}
 1. `[counterforce · gate · institution: tavern · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
 2. `[visitor · gate · institution: tavern · no crisis: under_siege]` {settlement} has no market square; trade is done at the gate, at the inn and along the road.
-3. `[street · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.
+3. `[street · no market · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done house to house.
 4. `[street · no market · crisis: under_siege]` Since the siege closed the road, almost nothing changes hands at {settlement}, which keeps no market or fair.
 5. `[ledger · no market · crisis: under_siege]` With the road shut by the siege, what little trade {settlement} did with no market of its own has stopped.
 6. `[visitor · no market · crisis: under_siege]` With the siege across the road, nobody comes in to sell at {settlement}, which has no market to come to.
@@ -6932,14 +6932,14 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`COMMERCE: a market, no guild`** *(`hasMarket`, none of the other three)*
 1. `[visitor · colour]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
-2. `[ledger · colour]` No guild runs {settlement}'s market: the town's only hold on trade is the stall fee.
+2. `[ledger · market]` No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.
 3. `[street · colour]` Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.
 4. `[threshold · no crisis: under_siege]` A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.
 
 **`WAREHOUSES`** *(`hasWarehouse`, R-W3: one clause, only when true)*
 1. `[visitor · no crisis: under_siege]` Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.
 2. `[ledger · no crisis: under_siege]` A merchant at {settlement} can store a cargo in the town's warehouses and sell it when the price suits.
-3. `[street · no crisis: under_siege]` {settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.
+3. `[street · no crisis: under_siege · no crisis: famine]` {settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.
 4. `[threshold · no crisis: under_siege]` A trader at {settlement} can rent warehouse space and leave goods there between journeys.
 5. `[ledger · crisis: under_siege]` Since the siege began, nothing new has come in to be stored at {settlement}, and nothing stored there can be sent on.
 ---
@@ -7251,7 +7251,7 @@ no compass word, no real-world place, no named analogy.*
 **PROVENANCE:** The composition mechanism: what a town keeps at all is the town explaining what it is for. Spoken strictly through the boolean composition facts, and through no count, no siting and no adjacency. `R-DST-B` is satisfied without strain, because the roster booleans are STANDING CONFIGURATION and every variant below is a structural clause; not one reaches for how the roster came to be the way it is, and there is no cause pool in this block. **Non-redundancy (`R-DST-A`):** `DS-DEF-6` reads the same booleans and reads them as defense CAPABILITY, keyed against `scores.economic/magical`, `tradeAccess` and `blockade`; this block reads them as civic CHARACTER, keyed against nothing but themselves and tier, and the two compose on different pages (`overview`/`power` against `defense`). Two blocks may read one row where they assert DIFFERENT FACTS about it, which is the case `DS-GEN-15` and `DS-GEN-16` established for the stones and the record and which this block inherits rather than re-argues.
 
 **`ADMINISTERED`** {colour}
-1. `[ledger]` {settlement} keeps its own court and its own gaol, and settles its own quarrels.
+1. `[ledger · no crisis: occupied]` {settlement} keeps its own court and its own gaol, and settles its own quarrels.
 2. `[visitor]` {settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.
 3. `[street]` In {settlement} the law keeps a building of its own, and people take their quarrels there.
 
@@ -7320,7 +7320,7 @@ no compass word, no real-world place, no named analogy.*
 6. `[newcomer · market · no crisis: under_siege · no crisis: famine]` Anyone looking for work at {settlement} finds it in carrying, weighing and selling as often as in making.
 7. `[ledger · crisis: under_siege]` {settlement} bought its {good} from outside, and since the siege nothing has come in; what is left is being made to last.
 8. `[street · crisis: under_siege]` The carts that kept {settlement}'s trades supplied have not come since the siege began.
-9. `[trade · no crisis: under_siege]` Much of what changes hands at {settlement} came from somewhere else first.
+9. `[trade · no crisis: under_siege]` Some of what changes hands at {settlement} came from somewhere else first.
 
 **`UNWORKED`** {colour}
 1. `[counterforce]` The {resource} around {settlement} goes unworked; no house takes it up.
