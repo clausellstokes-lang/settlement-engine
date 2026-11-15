@@ -82,7 +82,10 @@ describe('TAIL-TIES-2 batch 1', () => {
   it('NOT (T6): under one ruler no tie line is about a vote; the tie keeps its kind; KEEP: a ruling body\'s town still prints it', () => {
     const NOT = [
       ['r2r-village-11', 'by a single vote', 'peer_rivalry'], ['r2r-village-3', 'by a single vote', 'peer_rivalry'],
-      ['r2r-hamlet-4', 'controls a vote', 'mutual_leverage'], ['r2r-village-16', 'comes up next week, and', 'mutual_leverage'],
+      // RE-KEYED BY IDENTITY (TAIL-CLOSE-TESTS-C): r2r-hamlet-4 and r2r-village-16 left the case when the powers' declared move
+      // d6880513 ("Headman's Authority" only where the roster holds a headman's house) made both an Elder Council's town, so a
+      // ruling body stands there. The same tiers, still under one ruler, each holding a mutual_leverage tie (census r2r arm):
+      ['r2r-hamlet-3', 'controls a vote', 'mutual_leverage'], ['r2r-village-21', 'comes up next week, and', 'mutual_leverage'],
       ['r2r-hamlet-56', 'has won every vote it needed', 'wary_alliance'], ['r2r-hamlet-33', 'has voted with', 'old_debt'],
       ['r2r-hamlet-15', 'for a vote against', 'old_debt'], ['r2r-village-5', 'for a vote against', 'old_debt'],
     ];
