@@ -1,12 +1,56 @@
 # TAIL-HISTORY · hand-back (2026-11-15)
 
-Seat: TAIL-HISTORY (builder). Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
+Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY-2** (its successor, keeping this file).
+Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
 Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the chair's lane (211 rows, read at e5b421802).
 
-**STATE: batch 1 cured, measured and red-first, but NOT LANDED.** The cure reds 14 governing tests that are green at
-the base (listed below). Closing them needs pins re-keyed, two ledgers and a file outside this group, and that is more
-than my budget had left. So the batch is handed back as a patch, **`TAIL-HISTORY-batch1.patch`** beside this file
-(`git apply` at f663a2699: three data files and one new test). No src change is committed on this branch.
+**STATE (TAIL-HISTORY-2): batch 1 LANDED** in one commit on this branch (the patch, plus Y6 and Y7). Batch 2 (Y5) is
+below as it stands.
+
+## The chair's rulings since (2026-11-15 00:30 UTC; each vetoable by the owner)
+
+- **(Y5) THE AFTERMATH SHAPE** (74 rows, 711 false prints: a current tension whose own event is not on the timeline).
+  - GRANTED: the file's own form, `byMemory.unanchored`. Such a tension is told as a LIVE QUARREL: present tense; no date, no "remember", no "since the …", no aftermath, no survivors of an event. Its factions are the parties of a present quarrel, and its hooks are about what is at stake now. It stands under the type's label, unchanged (the label prints on every surface). The twin stays on the slot: THE DRAW IS KEPT.
+  - REFUSED: setting the tension aside at selection (it re-deals the slot and the stream after it).
+  - NAMED, NOT BUILT: the event added to the timeline (a measuring seat's candidate).
+  - Ten types: plague_years, great_fire, great_flood, popular_uprising, tyranny, wild_magic, trade_collapse, market_crash, heresy_trial, pilgrimage_surge. One twin a writer a type (the description, the factions, the hooks). Every line is listed for the owner's veto with the towns read.
+- **(Y6)** A line that a crisis can make false is not colour. The baking line drops its colour mark and takes its declaration. The law that a colour line declares nothing stands. The colour register follows through its own door.
+- **(Y7) The batch's governing tests**, each re-keyed BY IDENTITY in the batch's commit, none loosened:
+  - `src/data/stressTypesMeta.js` lines 69 and 79 are LENT: the same two rewords, nothing else of that file.
+  - The twenty declaring rows become twenty-two, the two war hooks named.
+  - The declarations' ledger lines are added by the ledger's documented way, or the rewords take the REWORDED arm.
+  - The arrival tables' template pin is re-keyed.
+  - The births-over-seeds suites are re-run each alone at the base and at the cure first. A red because a draw moved outside the cured row's own pool is a STOP.
+- **(Y8)** Under a plague or a quarantine no line gathers a crowd as in ordinary times (a fair, a market day, a procession, a festival, a full tavern). The siege's form applies: a twin true in that state, or the line leaves that state where its slot does not fall mute.
+- **(Y9)** 20031 and 20032 (the ailing ruler under an appointed or priestly seat): NO ATOM for heredity. A twin true under such a seat (who names the next is the question, not who inherits), keyed by what the file can already read of the government. If it can read nothing, the rows stay parked with their measure.
+- **(X9) The exports' read**: `docs/chair/2026-11-14/read-all-3/WORKLIST3-HISTORY.{md,json}` on the chair's lane (119 rows, 3 HIGH). Its header lacked `history.currentTensions`: many rows are Y5's shape, so each is checked against the record first. Measure with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`.
+- Named for others: `src/domain/crisis/crisisSummaryVantage.js` (the crisis seat's).
+
+## Batch 1: LANDED (TAIL-HISTORY-2, 2026-11-15)
+
+The patch was applied unchanged at 8b90e7753, with these additions:
+
+- **Y6:** `ARRIVAL_SENSES.bread.lines[1]` (the baking since before dawn) leaves `colour: true` and keeps `excludes: ['crisis: hunger']`.
+  - R-AO's register in `census2fColour.test.js` is re-keyed: `bread.lines` [0, 1, 3] → [0, 3].
+  - The ledger `docs/census/declarations/ARRIVAL_SENSES.json` still marks the line `colour: true`. No test reads that cell against the live line. NAMED STALE, for the ledger's re-take at the close.
+- **Y7 (by identity):**
+  - `stressTypesMeta.js` 69 and 79 carry the two rewords word for word.
+  - `hookTablesDeclared` has 20 → 22 rows, with the two `external_threat: no war: peace` rows named.
+  - `textOf` has 115 → 119 rows: the broker, the clerk, the porters and the food handed out turn from bare lines into objects.
+  - The three stressTypes rewords take the REWORDED arm of `census2dTables.test.js`, 1 → 4 cells. That arm is shared by census2e.
+- **The births-over-seeds suites, each alone (base | cure):**
+  - Green at both: foodDiversity, incomeLinesSayTheRecord, stressSummaryName, timelineVariety and simulationSpine.
+  - urbanBandInstitutions: red at both, the same one test, G5 (magic-free world_law_magic). G3 is green alone.
+  - editCorpusRatchet: red at both, the same four, A3, A4, A7 and A8. A5 is green alone.
+  - So none is the batch's. The predecessor's extra reds were load.
+- **Gates at the commit:**
+  - typecheck:domain:strict 0, typecheck:ratchet 0, eslint on the touched files 0.
+  - The presumed-things walker is unchanged from the base (fresh 147, stale 0; it exits red at the base too, carried).
+  - Grid: 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), 0 rises.
+  - `wiringCensusDeclared.walker` (DS-DEF/ECO/GEN annex columns) is red at the base too, carried.
+- The census after this commit is batch 2's before-run (see below).
+
+## Batch 1 as built by TAIL-HISTORY (its record, kept)
 
 ## The rulings worked to (the chair's, 2026-11-14; each vetoable by the owner)
 

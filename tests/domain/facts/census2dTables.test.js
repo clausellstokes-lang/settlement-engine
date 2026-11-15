@@ -238,7 +238,9 @@ import { CONDITION_ARCHETYPE_TEMPLATES, CONDITION_ARCHETYPE_SIBLINGS } from '../
 import { QUICK_GUIDE_SIBLINGS } from '../../../src/domain/summary/settlementQuickGuide.js';
 
 /** cells reworded under R-U since Phase A read them (counted by cause in their commit) */
-const REWORDED = new Set(['STRESS_TYPE_MAP.slave_revolt.viabilityNote']);
+// TAIL-HISTORY batch 1 (2026-11-15, the chair's Y2, Y7; READ-ALL 00169, 04385, 18890): the succession void's hook and note
+// and the insurgency's note claimed powers and offices a thorp lacks; reworded, no declaration (1 → 4 cells).
+const REWORDED = new Set(['STRESS_TYPE_MAP.slave_revolt.viabilityNote', 'STRESS_TYPE_MAP.succession_void.crisisHook', 'STRESS_TYPE_MAP.succession_void.viabilityNote', 'STRESS_TYPE_MAP.insurgency.viabilityNote']);
 
 /** @param {string} name @param {Record<string, any[]>} siblings @param {object|null} root the live table (null: by text alone) */
 function siblingArm(name, siblings, root) {
