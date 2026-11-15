@@ -66,6 +66,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 25 | tail-powers-2026-11-14 (LAST, P30) | 01ddaba28 (04:52; its merge of the line at d817736d8, P28 resolved) | d817736d8 | 475506bf7 | **CODE**: `governanceAccount.js`, resolved by P30 (§3) | P30's three checks held before the push; DECLARED MOVES of the branch (P4 twin, DA, headman's name): golden carried |
 | 26 | lane/tail-display-civic-2026-11-14 | c2f053333 (05:08) | 6cf555801 | 679e52b01 | none | 17 files outside docs/; declared-move commits: 089bccf98  (golden carried) |
 | 27 | lane/tail-display-econ-2026-11-14 | fbcc5712a (05:11) | 756ba4bda | ba5c1af1b | none | 1 files outside docs/; declared-move commits: fbcc5712a  (golden carried) |
+| 28 | lane/tail-narrative-2026-11-14 | 002085ed5 (05:14) | 091ef25e5 | 9d3d177a0 | none | 6 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
