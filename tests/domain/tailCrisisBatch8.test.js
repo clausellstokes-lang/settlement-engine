@@ -98,11 +98,15 @@ const FALSE = /** @type {Array<[string, string, string, string]>} */ ([
 ]);
 
 describe('a power the crisis itself raised is never stored as untouched by it', () => {
-  it.each(FALSE)('%s (%s): %s stores its own stake, keeping the waverer\'s split (red at aa78d1ec9: "it could side with either camp")', (seed, kind, power, key) => {
-    const k = stakeOf(birth(seed), kind, power);
-    expect(k?.reason).not.toBe('it could side with either camp');
-    expect(k).toEqual({ factionId: power, stake: 'split', reason: STAKE_REASONS[key] });
-  });
+  // a plain parameterless loop in place of the parked `it.each` (TAIL-CLOSE-TESTS-C): the same cases and assertions
+  for (const [seed, kind, power, key] of FALSE) {
+    it(`${seed} (${kind}): ${power} stores its own stake, keeping the waverer's split (red at aa78d1ec9: "it could side with either camp")`, () => {
+      const k = stakeOf(birth(seed), kind, power);
+      expect(k).toEqual({ factionId: power, stake: 'split', reason: STAKE_REASONS[key] });
+      // anchored: the line above pins the stored stake whole, so its reason is live
+      expect(k?.reason).not.toBe('it could side with either camp');
+    });
+  }
   it('KEEPS a power the crisis did not raise as untouched (r2s-slave_revolt-metropolis-0, Arcane Orders)', () => {
     expect(stakeOf(birth('r2s-slave_revolt-metropolis-0'), 'slave_revolt', 'Arcane Orders')?.reason).toBe('it could side with either camp');
   });
@@ -144,12 +148,18 @@ describe('a power the crisis has not touched prints no stake row', () => {
     const { composeCrisisPage } = await import('../../src/domain/crisis/crisisPage.js');
     return composeCrisisPage(birth(seed)).find((sec) => sec.type === kind)?.stakes || [];
   };
-  it.each(SILENT)('%s (%s): %s prints no row (red at aa78d1ec9: "has no stake yet"); the record keeps its split', async (seed, kind, power) => {
-    const rows = await rowsOf(seed, kind);
-    expect(rows.map((k) => k.factionId)).not.toContain(power);
-    expect(rows.some((k) => /^untouched/.test(k.stake))).toBe(false);
-    expect(stakeOf(birth(seed), kind, power)).toEqual({ factionId: power, stake: 'split', reason: 'it could side with either camp' });
-  });
+  // a plain parameterless loop in place of the parked `it.each` (TAIL-CLOSE-TESTS-C): the same cases and assertions
+  for (const [seed, kind, power] of SILENT) {
+    it(`${seed} (${kind}): ${power} prints no row (red at aa78d1ec9: "has no stake yet"); the record keeps its split`, async () => {
+      const rows = await rowsOf(seed, kind);
+      // TAIL-CLOSE-TESTS-C: the liveness anchor: the section's other rows still print (the header's KEEP), so its rows are read
+      expect(rows.length, `${seed}: the ${kind} section prints its other rows`).toBeGreaterThan(0);
+      // anchored: the line above shows the section's rows are live
+      expect(rows.map((k) => k.factionId)).not.toContain(power);
+      expect(rows.some((k) => /^untouched/.test(k.stake))).toBe(false);
+      expect(stakeOf(birth(seed), kind, power)).toEqual({ factionId: power, stake: 'split', reason: 'it could side with either camp' });
+    });
+  }
   it('KEEPS the section\'s other rows (r2s-famine-city-1: the losing seat, the gaining crime, the quarrel)', async () => {
     const rows = (await rowsOf('r2s-famine-city-1', 'famine')).map((k) => `${k.factionId} ${k.stake}`);
     expect(rows).toEqual(expect.arrayContaining(['Merchant Guild Council loses', "Thieves' Guild gains", 'The Commercial Circle atOdds']));
