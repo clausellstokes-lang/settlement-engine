@@ -15,6 +15,8 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { hookTruthFindings, storeTrueHooksOnly, withoutFalseHooks } from '../../src/domain/coherence/hookTruthRecord.js';
+import { settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { recordInvariants } from '../../src/domain/edit/recordInvariants.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
@@ -45,9 +47,14 @@ describe('the record stores only hooks true of it', () => {
   // the walls during construction, deliberately" in a thorp with no walls; the walls arm now reads
   // "inside the walls" (hookTruth.js :: WORDS.walls), so the hook is not stored and the event keeps
   // its other one. THE GUARD TOWN for the cure.
-  it('rww-thorp-calm-1: the sealed-walls hook is not stored where no walls stand, and its event keeps a hook', () => {
-    const seed = 'rww-thorp-calm-1';
-    const config = birthConfig({ ...DEFAULT_CONFIG, settType: 'thorp', selectedStressesRandom: false, selectedStresses: [], _randomizePriorities: true });
+  // RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-2, 2026-11-15): W2-FIX-DATA-5 item 3a (58376910a, ww-25) declared
+  // The Great Construction `tier: ≥ village`, so no thorp is born with it and rww-thorp-calm-1 now holds no
+  // event at all. The guard's identity is an unwalled town whose Great Construction stands: rww-village-calm-14,
+  // the smallest app-shape town that holds it (no walls; the foreman's hook kept), found by a search of
+  // rww-{hamlet,village,town,city}-calm-0..29.
+  it('rww-village-calm-14: the sealed-walls hook is not stored where no walls stand, and its event keeps a hook', () => {
+    const seed = 'rww-village-calm-14';
+    const config = birthConfig({ ...DEFAULT_CONFIG, settType: 'village', selectedStressesRandom: false, selectedStresses: [], _randomizePriorities: true });
     const settlement = generateSettlementPipeline(config, null, { seed, customContent: {} });
     const event = (settlement.history?.historicalEvents || []).find((e) => e?.name === 'The Great Construction');
     expect(event?.plotHooks?.length).toBeGreaterThan(0);
@@ -63,16 +70,28 @@ describe('the record stores only hooks true of it', () => {
     return generateSettlementPipeline(config, null, { seed, customContent: {} });
   };
   const POISONING = /poisoning the ruler slowly/;
+  const PHYSICIAN = /\bthe physician\b/i;
   it('rww-thorp-plague_onset-1 (an Elder Council): the poisoning hook is not stored, though its row excludes only `ruler: council`', () => {
     const settlement = appShape('rww-thorp-plague_onset-1');
     expect(settlement.powerStructure?.government).toBe('Elder Council');
     expect(storedTexts(settlement).filter((t) => POISONING.test(t))).toEqual([]);
     expect(hookTruthFindings(settlement)).toEqual([]);
   });
-  it('rww-city-insurgency-1 (one lord, no healer or hospital): the poisoning hook is not stored', () => {
+  // RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-2, 2026-11-15): W2-FIX-DATA (b91fcfe11, "five history lines reworded
+  // to presume nothing false") moved the succession hook's "and the physician knows" to "and someone in the
+  // household knows". No line of the history names the physician now, so this town's poisoning hook is TRUE (one
+  // lord rules, and the line presumes no healer) and is stored. The physician arm's claim, kept here: in the town
+  // with one lord and no care house, no stored hook names the physician, the poisoning hook stands beside it
+  // (the same event's hooks, the same filter), and the filter left nothing false. The arm itself is executed on
+  // its old words in tests/domain/coherence/hookTruth.test.js.
+  it('rww-city-insurgency-1 (one lord, no healer or hospital): no stored hook names the physician, and the poisoning hook, true now, is kept', () => {
     const settlement = appShape('rww-city-insurgency-1');
     expect(settlement.powerStructure?.government).toBe('Noble Governorship');
-    expect(storedTexts(settlement).filter((t) => POISONING.test(t))).toEqual([]);
+    const facts = settlementHookFacts(settlement);
+    expect(facts.rosterKnown && !facts.hasPhysician).toBe(true);
+    const kinds = storedTexts(settlement).map((t) => (PHYSICIAN.test(t) ? 'names the physician' : POISONING.test(t) ? 'the poisoning hook' : 'another hook'));
+    expectAbsentWithAnchor(kinds, 'names the physician', 'the poisoning hook', 'the physician arm at birth');
+    expect(hookTruthFindings(settlement)).toEqual([]);
   });
   it('rww-metropolis-under_siege-1 (a crown and a hospital): the poisoning hook is still stored', () => {
     const settlement = appShape('rww-metropolis-under_siege-1');
