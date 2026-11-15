@@ -11,6 +11,10 @@ Every run went to a file in the seat's scratch tree (outside the main checkout, 
 | — | merge of the joined line at f714fb6a5 (the chair's SWEPT) | b45905897 | merged; the reds re-run there |
 | 3 | owed by batch 6 (ed9f3b549): the presumed-things walker, the grid, its guard | bb7b3ede3 | the grid: no rise; the walker: 3 fresh rows NAMED; the guard brought to the anchoring helpers and one row re-keyed |
 | 4 | `tests/data/w2FixData6Rows.test.js` (2) | d894c0782 | RE-KEYED BY IDENTITY, both: two declared moves |
+| 5 | `tests/components/houseLabelEverySurface.test.jsx` (1) | — | LEFT (traced, not banked): the earning commit is neither candidate |
+| 6 | `tests/domain/display/gapLineHousesByKind.test.js` | — | LEFT: not started |
+| H22 | the houses' three `rather-than` lines (the chair's 06:26) | — | LEFT: not started |
+| 7 | `tests/domain/r3c10FoodLinesTrue.test.js` arm (a) (the chair's 06:20) | — | LEFT: not started |
 
 ## 1 · the style walker's two historyData rises: CURED
 
@@ -90,3 +94,33 @@ three-dot diff of the file is empty on every `lane/tail-*` branch (only merges o
   Re-keyed by identity through the treasury's own table (`INCOME_SOURCE_FORMS`: both titles `land_rents`, "the same home"); the
   claim that no house description says its trade is the whole living is unchanged.
 - Proof: the file alone, before 2 failed / 9; after 9 / 9. eslint 0; `typecheck:ratchet` 0. No source changed.
+
+## 5 · houseLabelEverySurface (1): LEFT, traced
+
+"allowed 1, found 0" on `page Systems/Defense`, `pdf-canon_dossier`, `pdf-draft_brief` for rr2s-town-under_siege-rand-1 (red alone at
+the tip and at f714fb6a5). The struck allowance is a WIN to bank as the test's header says (`DEFENCE_ALLOWANCE`'s row struck when
+the defence lane's cure lands), but the earning commit is NEITHER candidate: the file run alone in archives of d98f781f3 AND of its
+parent 345f13157 (the TAIL-DEFECON lane's tip that JOIN-6 · 9 merged) is already "found 0" on all three surfaces; 44d3088b4 touches
+only `src/pdf/**` and could not clear the page. The earning commit lies on the joined line between 9e3880dd1 (JOIN-1 · 8, where the
+test landed: feb3da917) and the point that brought 345f13157; 260 first-parent points to the tip, a bisect of ~9 runs of this
+one file (`-t under_siege-rand-1`, ~1 min each in an archive). Not run for time. The bank itself is one line: the seed's row
+leaves `DEFENCE_ALLOWANCE` (its three surfaces at 0), the commit naming the bisect's commit.
+
+## LEFT for the next seat (in order)
+1. Red 5's bisect and bank (above).
+2. `gapLineHousesByKind` (7 towns): re-key the anchor towns by identity through one script over the 720's gap rows; the writer
+   (`resourceChains.js :: processingInstitutions`) unchanged. Not started.
+3. H22 (the chair, 06:26: LENT): `src/data/institutionDescVariants.js:458, :2258` and `src/data/institutionalCatalog.js:1084`, the
+   struck `rather-than`: rewrite each as the style law says, the claim kept, the declaration, twin and any guard reading the old
+   words moved with it (computed anchors), the towns that print each counted. The style walker then holds only the crisis
+   table's `faction` (lands with the crisis branch). Not started.
+4. Round 3c10 arm (a) (the chair, 06:20): `tests/domain/r3c10FoodLinesTrue.test.js` (a), 2 red; the turning commit 825bcf24 in
+   `src/data/cultureProfiles.js` ("Herding…" → "Herds and field grain…", LENT): cure in the data or re-key by identity; arm (d)
+   is another seat's (ad572038), not to be touched. Not started.
+
+## Method (for the next seat)
+The 720 born without rendering: `censusPlan('r2')` + `configOf(row, DEFAULT_CONFIG, birthConfig)` +
+`generateSettlementPipeline(…, null, { seed, customContent: {} })` after `loadGenerationLawPayloads()`, four node shards, about
+a minute; a bisect probes one birth per point in a `git archive` of the point with `node_modules` symlinked (an older point may
+need `birthConfig` without `censusPlan`). Every first-parent bisect must start from a GOOD point ON the first-parent line (the
+first point that contains the cure), not from the cure's own commit.
