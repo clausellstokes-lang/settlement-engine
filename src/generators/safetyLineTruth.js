@@ -9,7 +9,7 @@
 import { scoreBand } from '../domain/display/defenseScoreBands.js';
 import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { lineText } from '../domain/facts/drawDeclared.js';
-import { criminalSeatGoverns, gangHousesOf } from '../domain/crimeSignal.js';
+import { CRIMINAL_GOVERNANCE_TYPE, criminalSeatGoverns, gangHousesOf } from '../domain/crimeSignal.js';
 
 /** The census's small places (a district, a military command); TINY: streets too. */
 export const SMALL_PLACES = Object.freeze(['thorp', 'hamlet', 'village']);
@@ -136,7 +136,7 @@ export function settleRosterCrimeLines(entries, seats, powers) {
   const governs = criminalSeatGoverns(seats); // the crime home's reader (TAIL-CLOSE-SRC-3)
   return entries.map((entry) => {
     const desc = typeof entry?.desc === 'string' ? entry.desc : '';
-    if (entry?.type === 'Criminal governance' && !governs && desc.endsWith(VACUUM)) return { ...entry, desc: desc.slice(0, -VACUUM.length) + VACUUM_TWIN };
+    if (entry?.type === CRIMINAL_GOVERNANCE_TYPE && !governs && desc.endsWith(VACUUM)) return { ...entry, desc: desc.slice(0, -VACUUM.length) + VACUUM_TWIN };
     if (entry?.type === 'Background crime' && powers && desc.startsWith(NO_DOMINANT)) return { ...entry, desc: NO_DOMINANT_TWIN + desc.slice(NO_DOMINANT.length) };
     return entry;
   });

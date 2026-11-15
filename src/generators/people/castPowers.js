@@ -60,7 +60,7 @@ import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
 import { allegianceOf, isCriminalPower, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { isSeatVacant } from '../../domain/people/seatKeeper.js';
-import { crimeSignalOf, withTownsOwnUnderworld } from '../../domain/crimeSignal.js';
+import { crimeFactionNameOf, crimeSignalOf, withTownsOwnUnderworld } from '../../domain/crimeSignal.js';
 import { coupContenders } from '../../domain/rulingPowerCoup.js';
 
 /** The keyed fork the late mints and the ranks draw under (declared in the fork census). */
@@ -300,7 +300,7 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
     };
     const mintCtx = { tier, culture, config, economicState, powerStructure: settlement?.powerStructure, institutions, hookRegistry, worldLaw };
     // the crime signal (one home) and the roster's crime faction as mergeNPCLists reads it, for the minted secrets
-    const crime = { signal: crimeSignalOf({ seats: factions, estate: institutions }), faction: factions.find((f) => f?.category === 'criminal' || /thieve|criminal|smuggl|underworld/i.test(String(f?.faction || '')))?.faction || null };
+    const crime = { signal: crimeSignalOf({ seats: factions, estate: institutions }), faction: crimeFactionNameOf(factions) }; // the crime home's reader (TAIL-CLOSE-SRC-4)
     // the pipeline's own npcConfig, as the birth seam spells it, for the hook draw's templates
     const npcConfig = {
       ...config,
