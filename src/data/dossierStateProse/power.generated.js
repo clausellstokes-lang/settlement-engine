@@ -1514,10 +1514,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "no crisis: unrest"
           ],
-          "text": "Nobody at {settlement} is in a position to take {faction}'s place; it has no rival, and nobody in the town is asking who comes next.",
+          "text": "Nobody at {settlement} is in a position to take the {seat}'s place: whatever the town thinks of the {seat}, no contender stands ready to try.",
           "slots": [
             "settlement",
-            "faction"
+            "seat"
           ],
           "vid": 1
         },
@@ -1527,10 +1527,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "no crisis: unrest"
           ],
-          "text": "The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.",
+          "text": "If anyone at {settlement} asked who might replace the {seat}, the town would have no contender to name.",
           "slots": [
-            "seat",
-            "settlement"
+            "settlement",
+            "seat"
           ],
           "vid": 2
         },
@@ -1540,10 +1540,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "no unrest"
           ],
-          "text": "People at {settlement} grumble, but nobody in the town stands ready to lead them, so {faction} is safe in the hall.",
+          "text": "People at {settlement} may grumble, but nobody in the town stands ready to lead them against the {seat}.",
           "slots": [
             "settlement",
-            "faction"
+            "seat"
           ],
           "vid": 3
         },
@@ -1577,10 +1577,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "succession settled",
             "unrest"
           ],
-          "text": "No rival stands at {settlement} to take {faction}'s place, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting across the town.",
+          "text": "In a season of fighting, having no rival at {settlement} is small comfort to the {seat}: what threatens it now is the fighting itself.",
           "slots": [
             "settlement",
-            "faction"
+            "seat"
           ],
           "vid": 6
         }
@@ -1645,6 +1645,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: under_siege"
+          ],
           "text": "Visitors to {settlement} are quietly told to stay polite to {counterpart} as well as to {faction}, and nobody says why.",
           "slots": [
             "settlement",
@@ -1657,10 +1660,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "riskLabel: Critical. The seat could fall": [
         {
           "angle": "ledger",
-          "text": "Nothing at {settlement} protects the {seat} now. {counterpart} has the strength, and the {seat} has only the office.",
+          "text": "The office no longer shields the {seat} at {settlement}: against a move by {counterpart}, holding the title will not be enough.",
           "slots": [
-            "settlement",
             "seat",
+            "settlement",
             "counterpart"
           ],
           "vid": 1
@@ -1675,6 +1678,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "no crisis: occupied"
+          ],
           "text": "Everyone at {settlement} can see {faction} could lose the hall, and {counterpart} has not yet moved to take it.",
           "slots": [
             "settlement",

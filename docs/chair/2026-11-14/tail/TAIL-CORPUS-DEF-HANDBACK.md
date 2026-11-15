@@ -183,3 +183,81 @@ the base; the 67 named files: 33 reds at the base, the same 33 after.
   title; Y makes the decisions", 22 towns across every kind of seat at the base) has no atom on this branch: PARKED for `rival
   power`.
 
+## Batch 3 — DS-POW-4 `Power › Rule and succession`: the Stable (no challengers) lines, and three declared lines
+
+The chair's C10 hands this pool rows **15073 B14249** (Critical v1, from TAIL-DISPLAY-CIVIC's read). Verified by the record
+(`powerStructure.publicLegitimacy.label`, the crisis kinds) at c66510264; the pool has no atom for legitimacy, so the
+Stable lines are REWORDED to claim no more than every printing town bears (no "nobody is asking who comes next" under a
+Legitimacy Crisis; no slot without its article: `{faction}` → "the {seat}").
+
+| row(s) | line | false in (by the record) | cure | towns before → after (inventory) |
+|---|---|---|---|---|
+| 14859 14856 14852 14857 14854 B14026 | Stable v1 "it has no rival, and nobody in the town is asking who comes next" | 41 of 52 (Legitimacy Crisis 28, Contested 13) | REWORDED | each →0 |
+| 21584 21590 21587 21595 | Stable v2 "The question of who might replace the {seat} … does not come up" | 39 of 53 (Contested 21, Crisis 18) | REWORDED | each →0 |
+| 15533 15536 15531 B14699 B14695 B14704 | Stable v3 "{faction} is safe in the hall" | 27 of 49 (Legitimacy Crisis; Desperate stability) | REWORDED | each →0 |
+| 14648 14646 14639 | Stable v6 "what threatens {faction} now is the fighting across the town" | 13 of 31 (the kingdom's war, fought elsewhere) | REWORDED | each →0 |
+| 15073 B14249 (C10) | Critical v1 "Nothing at {settlement} protects the {seat} now. {counterpart} has the strength" | the seat is the strongest power / has a symbiotic guard: the contenders model's "ungated" is the office failing, not force | REWORDED (no slot as a verb's subject) | each →0 |
+| B22476 23484 | Contested v4 "Visitors … are quietly told to stay polite" | 3 (sieges: no visitor arrives) | DECLARED `no crisis: under_siege` | 4→3, 1→0, 2→1 (exactly the 3) |
+| 07358 | Critical v3 "{counterpart} has not yet moved to take it" | 1 (an occupation: the occupier already rules) | DECLARED `no crisis: occupied` | 1→0 |
+
+MEASURED BY REPLAY: Contested v4→v1 2, v4→v2 1 (the three sieges); Critical v3→v2 1 (r2s-occupied-city-0); no other pool moved.
+INVENTORY DIFF (before c66510264 → after, one census each, tabs; the PDF+Journal inventory moves identically): 29,875 →
+29,864 sentences; the 27 rows of batches 2 and 3: 26 GONE, B22476 fewer by exactly its measure. The only other lines in
+fewer towns are the batch-2 autocrat v1 fold in the fractured town and the second siege-visitor fold: both the replayed
+towns. INHERITORS read where they print: the four reworded Stable lines (14, 13, 12, 11 … towns; thorp to metropolis);
+Contested v1/v2 in the three siege towns ("could now take the hall", "no longer sure the hall belongs to") and Critical
+v2 in the occupied city ("is waiting … could change hands within the season"): TRUE. The batch-2 twins print where
+replay put them (ample v4 in r2s-famine-village-3 and r2s-under_siege-town-2; autocrat v5 in r2s-succession_void-town-0
+and r2s-politically_fractured-town-2).
+Critical v1's words were set AFTER the census (the census showed "if Religious Authorities moves against it": the slot
+the subject of a verb it may not agree with); same vid, same draws.
+GUARD: tailCorpusDefGuards +2 DECLARED, +2 KEEP (r2r-village-23 Contested v4, r2r-city-44 Critical v3), +5 REWORDED: 7
+red at the batch-2 tip, the 2 keeps green; 29 green after. No pin moved.
+GATES: generator 0 / `--check` 0; strict 0; ratchet 0; eslint 0; presumed-things fresh 147 stale 0 (exit 1, as the
+base); grid 2 falls (as the base); the 67 named files: 33 reds at the base, 36 after the cure: the three new were
+`seatSafetyUnrest.test.js`, whose subject was Stable v3's retired claim found by the instrument's regex (`is safe in the
+hall`): RE-KEYED BY IDENTITY (v3 by vid; the instrument shown alive on the retired words and silent on the new; the pool
+shown to make the claim nowhere): the same 33 after.
+REGISTER NAMED: `src/domain/coherence/crisisBlindFindings.js` (outside this group) still carries the claim rows for the
+retired words ("is safe in the hall"): dead patterns now; its owner's group may retire or re-word them.
+
+### New or changed lines (the owner's veto list)
+9. DS-POW-4 Stable v1: "Nobody at {settlement} is in a position to take the {seat}'s place: whatever the town thinks of
+   the {seat}, no contender stands ready to try." — 52 towns: r2s-monster_pressure-thorp-1 · r2r-hamlet-0 · r2r-thorp-38 (a crisis of the three).
+10. Stable v2: "If anyone at {settlement} asked who might replace the {seat}, the town would have no contender to name."
+    — 53: r2r-thorp-31 · r2r-metropolis-7 · r2r-thorp-45.
+11. Stable v3: "People at {settlement} may grumble, but nobody in the town stands ready to lead them against the {seat}."
+    — 49: r2s-mass_migration-thorp-3 · r2s-plague_onset-village-3 · r2s-famine-thorp-2.
+12. Stable v6: "In a season of fighting, having no rival at {settlement} is small comfort to the {seat}: what threatens it
+    now is the fighting itself." — 31: r2s-insurgency-thorp-0 · r2s-slave_revolt-town-3 · r2s-wartime-thorp-2 (a famine too).
+13. Critical v1: "The office no longer shields the {seat} at {settlement}: against a move by {counterpart}, holding the
+    title will not be enough." — 7: r2s-wartime-town-2 · r2r-metropolis-50 · r2s-famine-town-1.
+Declared (no new words): Contested v4 `no crisis: under_siege`; Critical v3 `no crisis: occupied`.
+
+### Rows of DS-POW-4 verified and NOT cured (named)
+- THE CONTENDERS MODEL AGAINST THE POWER TABLE (two homes for one fact; the record's lane, `coupContenders` vs the
+  GOVERNMENT tiers): Holding **13371 19242 13139 13169**, Contested **16423 13247 13583 20174 13579 16375 20172 15175
+  13581 16424 01055 28453**, Critical **13595 14680 13596**: each line is the contenders model's own reading (weights times
+  the legitimacy multiplier), and the page's GOVERNMENT table rates the powers otherwise. Not cured by wording here.
+- THE SLASH LABELS ("Military/Guard" in a sentence: 23484 and the Holding/Contested/Critical lines): the `{counterpart}` /
+  `{faction}` slot is filled outside this group's files; route it through `powerSentenceName.js :: PROSE_FORMS` (C4) in the
+  slot's builder: NAMED for that file's group.
+- **01008 01022** ("X is governed by the Elder Council" under an occupation; the worklist traced them to DS-POW-5
+  agrarian v1): the writer is `src/domain/display/governanceAccount.js` — NAMED for its group.
+
+## What is left (after batch 3)
+1. THE COUNCIL ROWS, NOW UNBLOCKED (C11, the chair 01:01 UTC): the joined line at **eeaa06816** holds `ruling body` and
+   `rival power`. Merge origin/lane/join-2026-11-14 AT eeaa06816 (a merge commit of its own; the only merge), RE-TAKE THE
+   BEFORE at the merged tree (it holds other groups' cures and four declared moves of the record), then key: DS-POW-5
+   council v1 v2 v4 (19461 06324 04080 04089; 45 towns) `needs: ['ruling body']` with a lone-ruler twin; DS-POW-5
+   autocrat v1–v4 under a council of many (22 towns, row 00335) the excludes form with a twin under a body; row 00334
+   and the "keeps the title; Y makes the decisions" class (22 towns) by `rival power`.
+2. C10's **B00937** (DS-DEF-3 Safe v1 "{settlement} is a quiet town." beside a regional monster threat; 10 towns, all
+   r2r- arms with no active crisis): the line's "quiet" is about crime; reword it to say so, with DS-DEF-3's batch.
+3. X9's **26310** (DS-DEF-2 court without detention v1, "money and exile" under a siege; 18 towns, PDF/Journal): with
+   DS-DEF-2's batch (`no crisis: under_siege` or a siege twin; measure with `SURFACES=PDF,Journal`).
+4. By width: DS-CND-1 DIRECTION worsening/stable (11 rows, 83 towns: lines that name merchants, officials, work gangs or
+   quarrels a thorp does not have); DS-DEF-4 semi-organized v3 (16620, 60 towns); DS-DEF-2 Economic Survival STRONG/WEAK
+   and the CHAIN lines (14 rows); DS-POW-5 FLAG merchantArmy (7); DS-POW-6; DS-DEF-5/-8/-11/-3 smaller rows; DS-FTH-4.
+5. DS-DEF-9 magicDependency (13 rows, 93 towns): C9 — named with their towns; a measuring seat takes the class.
+
