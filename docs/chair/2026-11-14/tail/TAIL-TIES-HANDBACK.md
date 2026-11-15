@@ -683,7 +683,28 @@ crisisHooks, the test) are unchanged. `dossier/faithReading.js` changes its impo
   - 8,849 raw remains after that.
 - **The engine:** +132,162 over, all of it generator code. It is the owner's re-record.
 
-**C: not started at this push.**
+**C: the ties' three reds (each turn found first).**
+- **`clerkHookSmallPlace` (2 of 7): NOT the ties' (CONFIRMED), not cured, told to the chair.**
+  - It is red at `2f2f9f12` and also at the point where the test arrived, JOIN-2 `b23ae427`: the same two seeds; the face
+    was then named "Grain Steward" and is now "Rations the food". The brief's range `2f2f9f12..7622238f6` (2 commits)
+    holds no turn.
+  - The faceless person is the crisis cast's minted stand-in (`generators/steps/resolveCrisisCast.js` `mintTemporary`,
+    R2-CODE-B-9 `ef0b6208` / B-12 `3a6de5c7`). It is minted after the hook draw with `plotHooks` null, and
+    `collectPlotHooks` names it nowhere (r2r-thorp-17, famine: Ehecatl Chel; r2s-recently_betrayed-hamlet-2: Anna
+    Choniates).
+  - No pin decides a stand-in's hooks. The cure is the crisis seat's (the minted card gets its hook), or a ruling that a
+    temporary person is exempt by identity.
+- **`tailTiesBatch1` r2r-village-50: RE-KEYED BY IDENTITY, the move named.**
+  - It failed on the premise: `rulingBodyOf` was true.
+  - `git bisect --first-parent 7622238f6..17d03c8f4` is one commit (the merge). On the joined line's first parent the
+    turn is JOIN-6 · 8 `00e8ba474` (tail-powers). On that lane it is `d6880513`, TAIL-POWERS-2 DA (P7 + P8):
+    "Headman's Authority" is said only where the roster holds a headman's house. The governing power becomes "Elder
+    Council".
+  - At the tip a body rules and the audit line prints, so the pair moves from NOT to KEEP, with a comment naming the move.
+  - The test is 3/3 green; eslint 0. Nothing else in the file changed.
+- **`tailTies2Batch1` "NOT (T6)", r2r-hamlet-4 and r2r-village-16: no hole in T6's cure; a premise those two towns do not
+  meet.** The same declared move `d6880513` turns both from "Headman's Authority" (at `019409ed`) to "Elder Council" (at
+  `d6880513` and at the tip), so `rulingBodyOf` is true, rightly. The test seat re-keys; its file was not committed here.
 
 **Scratch:** `/home/user/tt7` (the worktree), `/home/user/tt7-instr` (the CENSUS-3 and RECORD-MEASURE-1 probes, archived)
 and `/home/user/tt7-measure` (B's builds and scripts). All three are this seat's own and can be removed.

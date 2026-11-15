@@ -38,12 +38,16 @@ const COUNCIL_NOT = [
   ['r2r-hamlet-38', 'at the next council session', 'peer_rivalry'], ['r2r-hamlet-47', 'at the next council session', 'peer_rivalry'],
   ['r2r-town-39', 'at the next council session', 'peer_rivalry'], ['r2r-town-40', 'at the next council session', 'peer_rivalry'],
   ['r2r-town-40', 'to audit each other\'s accounts', 'genuine_respect'], ['r2r-town-5', 'to audit each other\'s accounts', 'genuine_respect'],
-  ['r2r-village-50', 'to audit each other\'s accounts', 'genuine_respect'], ['r2s-famine-town-2', 'to audit each other\'s accounts', 'genuine_respect'],
+  ['r2s-famine-town-2', 'to audit each other\'s accounts', 'genuine_respect'],
 ];
 /** a body rules: the line still prints */
 const COUNCIL_KEEP = [
   ['r2r-town-14', 'at the next council session'], ['r2r-town-15', 'at the next council session'],
   ['r2r-city-0', 'to audit each other\'s accounts'], ['r2r-city-1', 'to audit each other\'s accounts'],
+  // RE-KEYED BY IDENTITY (TAIL-TIES-7, 2026-11-15): r2r-village-50 was a NOT pair under "Headman's Authority". The declared
+  // move d6880513 (TAIL-POWERS-2 DA, P7 + P8: "Headman's Authority" is said only where the roster holds a headman's house),
+  // brought by the join (JOIN-6 · 8, 00e8ba474), makes its governing power the "Elder Council": a body rules, and the line prints.
+  ['r2r-village-50', 'to audit each other\'s accounts'],
 ];
 const DEBT_SEEDS = ['r2r-city-0', 'r2r-city-1', 'r2r-village-21'];
 
