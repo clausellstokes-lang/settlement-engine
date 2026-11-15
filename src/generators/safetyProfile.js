@@ -817,7 +817,7 @@ export function settleCrimeLinesToSignal(economicState, lists) {
     const desc = lineFor[/** @type {keyof typeof lineFor} */ (String(entry?.type))];
     return desc !== undefined && entry.desc !== desc ? { ...entry, desc } : entry;
   });
-  settled = settleRosterCrimeLines(settled, lists?.seats, crimeSignalOf(lists).factions.length > 0); // TAIL-DEFECON (#15308, #14654)
+  settled = settleRosterCrimeLines(settled, lists?.seats, crimeSignalOf(lists).seated); // TAIL-DEFECON (#15308, #14654); TAIL-CLOSE-SRC-2: the signal's own answer, not its powers list read here
   if (hunger) settled = settleDesertersUnfed(settled); // TAIL-DISPLAY-CIVIC-3 V3: under hunger no line offers food
   if (infrastructure && settled.some((entry) => entry?.type === 'Survival crime')) {
     settled = settled.filter((entry) => !(entry?.type === 'desperation theft' && entry.desc === DESPERATION_THEFT_DESC));

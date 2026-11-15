@@ -236,10 +236,12 @@ const REJECTED_CANDIDATES = Object.freeze(['defenseProfile.institutions.magicDef
  * shows a second member set (A7 reds a named row that has its evidence again).
  * @type {Readonly<Record<string, string>>}
  */
-const REJECTED_UNTESTED = Object.freeze({
-  'defenseProfile.institutions.magicDef': 'UPKEEP-CAPACITY C6 (the chair\'s G5): the alchemist is not arcane defence, so every multi-entry list'
-    + " of the corpus is one pair (Mages' district, Academy of magic); evidence returns with a second member set",
-});
+// THE ONE ROW LEFT (TAIL-CLOSE-SRC-2, by this list's own door): `defenseProfile.institutions.magicDef`, named here at
+// UPKEEP-CAPACITY C6 (83883baaa, the chair's G5: the alchemist is not arcane defence, so every multi-entry list of the
+// corpus was one pair), has its evidence again: UPKEEP-13 (a88b5b343, the chair's ruling of 2026-11-14 10:40: the Scroll
+// scribe and the Enchanter's shop practise wards) put both in the bucket, and the corpus shows 9 member sets with 7
+// distinct baseChance sums (0.7 to 1.85): a rejected candidate that is not a total, re-measured every run.
+const REJECTED_UNTESTED = Object.freeze({});
 
 /**
  * The paired negative, over DISTINCT MEMBER SETS: for each candidate, the multi-entry lists grouped by their members'
@@ -518,7 +520,7 @@ describe('the record class register — totality over a generated record, in bot
     const samplesByPath = Object.fromEntries(REJECTED_CANDIDATES.map((path) => [path, CENSUS.collections.get(path).samples]));
     const rejectedFaults = rejectedCandidateFaults(samplesByPath, REJECTED_UNTESTED);
     expect(rejectedFaults, `a REJECTED cross-entry candidate has become a total:\n${rejectedFaults.join('\n')}`).toEqual([]);
-    expect(Object.keys(REJECTED_UNTESTED), 'the untested list is pinned at one: a second untested candidate reds').toEqual(['defenseProfile.institutions.magicDef']);
+    expect(Object.keys(REJECTED_UNTESTED), 'the untested list is shrink-only, now empty: an untested candidate reds').toEqual([]);
   });
 
   it('A7 plants: the paired negative over member sets, and the untested list, each red where it must be', () => {
@@ -538,7 +540,8 @@ describe('the record class register — totality over a generated record, in bot
     const second = rejectedCandidateFaults(real, { ...REJECTED_UNTESTED, 'defenseProfile.institutions.walls': 'plant' });
     expect(second.join('\n')).toMatch(/defenseProfile\.institutions\.walls: named untested, but the corpus shows/);
     expect(rejectedCandidateFaults(real, { ...REJECTED_UNTESTED, [PATH]: 'plant' }).join('\n')).toMatch(/not a rejected candidate/);
-    // The list removed reds, as the arm did before the ruling.
-    expect(rejectedCandidateFaults(real, {}).join('\n')).toMatch(/defenseProfile\.institutions\.magicDef: 1 member set\(s\) in the corpus/);
+    // The row that left (a88b5b343 returned its evidence) reds if it is named again.
+    expect(rejectedCandidateFaults(real, { 'defenseProfile.institutions.magicDef': 'plant' }).join('\n'))
+      .toMatch(/defenseProfile\.institutions\.magicDef: named untested, but the corpus shows \d+ member sets: it leaves the untested list/);
   });
 });
