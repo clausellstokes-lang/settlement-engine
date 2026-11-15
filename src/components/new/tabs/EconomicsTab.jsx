@@ -762,9 +762,9 @@ const BROUGHT_BANDS = GROWN_BANDS.map(([under, w]) => [under, w === 'about half'
  * @param {boolean} [famine] a famine in force (`facts/famine.js :: famineOf`), or a siege that has stopped the trade
  * (`chainStateShown.js :: tradeStoppedHere`): the bad season is not ahead, it is here (W2-C-LEAVES item 4(a); the cold
  * list REVIEW-W2A-3 #161: "a bad season would bring real hunger" under a famine; TAIL-DISPLAY-ECON-2, row 12961: the
- * same under a siege with nothing brought in)
+ * same under a siege with nothing brought in) @param {unknown} [band] the food record's band (`foodRecord.band`): Secure takes its own twin (TAIL-DISPLAY-ECON-5, X31: "go short" beside Secure in 177 of 720)
  */
-const shortWords = (pct, famine = false) => (pct <= 0 ? 'Between them, nobody goes short.'
+const shortWords = (pct, famine = false, band = null) => (pct <= 0 ? 'Between them, nobody goes short.' : band === 'secure' ? (famine ? 'Between them, nearly every household is fed for now.' : 'Between them, nearly every household is fed, and a bad season would leave some of them short.')
   : pct <= 5 ? (famine ? 'A few households still go short, and hunger is already here.' : 'A few households still go short, and a bad season would leave more of them hungry.')
   : pct <= 15 ? (famine ? 'Some households still go short, and hunger is already here.' : 'Some households still go short, and a bad season would leave more of them hungry.')
   : pct <= 35 ? (famine ? 'Many households go short, and hunger is already here.' : 'Many households go short, and a bad season would bring real hunger.')
@@ -786,7 +786,7 @@ function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
     const over = fb.surplus / Math.max(1, fb.dailyNeed);
     return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
   }
-  const short = shortWords(fbal.deficitPct, famineOf(s).famine || tradeStoppedHere(s)); // 12961: a siege's hunger is here too
+  const short = shortWords(fbal.deficitPct, famineOf(s).famine || tradeStoppedHere(s), eco?.foodSecurity?.foodRecord?.band); // 12961: a siege's hunger is here too; X31: the record's band
   if (!(fb.importCoverage > 0) || !carriers) return `No food comes into ${name} by trade.${magic} ${short}`;
   const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
   const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
