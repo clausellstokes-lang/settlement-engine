@@ -17,7 +17,8 @@ import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 import { magicPractitioners } from '../magicReliance.js';
-import { crimeSignalOf } from '../crimeSignal.js';
+import { crimeSignalOf, criminalSeatsNotGoverning } from '../crimeSignal.js';
+import { criminalStructureKeyOf, ringHousesOf, runningCriminalChains } from '../facts/criminalStructureKey.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
 // this lazy display module — NOT in data/stressTypes.js, which sits in the eager
@@ -192,59 +193,11 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
  */
 export function deriveCriminalStructure(settlement) {
   const r = settlement || {};
-  const names = (r.institutions || []).map((i) => (i?.name || '').toLowerCase());
-  const hasGuild = names.some((n) => n.includes("thieves' guild") || n.includes('thieves guild'));
-  const hasSyndicate = names.some((n) => n.includes('multiple criminal') || n.includes('underground city') || n.includes('front business'));
-  const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));
-  const hasDiffuse = names.some((n) => n.includes('fence') || n.includes('bandit') || n.includes('outlaw'));
-  // ⛔ "NOTHING ORGANIZED" IS A FINDING, SO IT IS NEVER READ BESIDE A NETWORK (lane RUNG1-TRUTH unit
-  // E2, 2026-11-04; docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 16, A-06; the chair's ruling 2). The
-  // name ladder above knows neither "Street gang" nor "Underground network" and never reads the
-  // power roster, so a town with a street gang (soak1k-759) and a place whose Thieves' Guild holds
-  // power with no premises (soak1k-393) both read null, and DS-DEF-4 printed "No criminal
-  // infrastructure has been identified". Where the ladder finds nothing, the roster's criminal
-  // faction makes the structure ORGANIZED (a guild is a hierarchy, the pool's own reading of one),
-  // and a house the estate's ONE criminal detector names (`corruption.js :: isCriminalInstitution`)
-  // makes it SEMI-ORGANIZED (routes and territories, no single authority). Only the null answer
-  // moves; no pool text changes.
-  const ladder = hasGuild || hasSyndicate ? 'organized'
-    : hasSemiOrg ? 'semi-organized'
-      : hasDiffuse ? 'diffuse'
-        : null;
-  // (Lane RUNG1B-F4 unit 3: both facts are read from the crime signal's one home, `crimeSignal.js`.)
-  const signal = crimeSignalOf({ seats: r.powerStructure?.factions, estate: r.institutions });
-  // ⛔ NOR BESIDE ITS OWN LIST (lane RUNG1B-F9 unit 3, 2026-11-04; A-06 in reverse: soak1k-28
-  // Innissike listed "Active criminal operations: Red Light District" and the Economics tab's
-  // "Slave trade · Operational", then printed "No criminal infrastructure has been identified").
-  // The block's operations list is the safety profile's `criminalInstitutions` (a label table the
-  // one detector does not share), and a criminal supply chain that runs is routes and territory.
-  // Either makes the null answer SEMI-ORGANIZED, the same reading a criminal house gets above.
-  const listed = (r.economicState?.safetyProfile?.criminalInstitutions || []).length > 0
-    || runningCriminalChains(r).length > 0;
-  // ⛔ A GANG IS A GANG (W2-A-LEAVES 5b, 2026-11-12; the second wave's ruling): the crime signal's FACTIONS outrank
-  // the name ladder. The ladder read a fence's house as "diffuse" and never asked the roster, so the Defense tab
-  // printed "Diffuse, no gang" beside a criminal power on the Power tab (2 of the census's 720). A criminal power
-  // is a hierarchy, the pool's own reading of one; the ladder answers only where no criminal power stands.
-  // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
-  const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
-    : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
+  const key = criminalStructureKeyOf(r); // TAIL-TIES-9 (T28): the key's ladder (and its reasons) lives in the crime fact's leaf
   return key ? ringNoteUnderStreetFighting(headedPowerAmongRivals(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r), r) : null; // TAIL-DEFECON-D: no ring the record names
 }
 
-/** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
-const RUNNING_CHAIN_STATUS = Object.freeze(['operational', 'running', 'entrepot']);
-
-/**
- * The criminal supply chains that run: the Economics tab's "Criminal supply chains" chips
- * (`needKey === 'criminal_economy'`) whose status is a working one.
- * @param {DefenseDisplaySettlement | null | undefined} settlement
- * @returns {Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null>}
- */
-export function runningCriminalChains(settlement) {
-  const chains = settlement?.economicState?.activeChains;
-  return (Array.isArray(chains) ? chains : [])
-    .filter((c) => c?.needKey === 'criminal_economy' && RUNNING_CHAIN_STATUS.includes(String(c?.status ?? '')));
-}
+export { runningCriminalChains } from '../facts/criminalStructureKey.js'; // TAIL-TIES-9 (T28): moved verbatim to the crime fact's leaf
 
 /**
  * DOES THE BLOCK LIST CRIME (RUNG-2 LANDING phase D, R-D2; F9's law extended)? The Defense
@@ -548,7 +501,7 @@ const dedupByName = (arr) => [...new Map((arr || []).map((m) => [m?.name, m])).v
  * @returns {ForceEntry[]}
  */
 export function arcaneDefenseOf(settlement) {
-  const magicDef = settlement?.defenseProfile?.institutions?.magicDef || [];
+  const magicDef = standingEntries(settlement?.defenseProfile?.institutions?.magicDef || [], settlement); // SR5 (b): a ruin fields nothing
   if (!magicDef.length) return magicDef;
   return magicWorksAt({ settlement: settlement || {} }) === false ? [] : magicDef;
 }
@@ -564,11 +517,13 @@ export function arcaneDefenseOf(settlement) {
  */
 export function deriveArmedForces(settlement) {
   const inst = settlement?.defenseProfile?.institutions || {};
+  /** @param {ForceEntry[] | undefined} entries */
+  const standing = (entries) => standingEntries(entries || [], settlement); // SR5 (b): a ruined house is no force the town fields
   return {
-    fortifications: inst.walls || [],
-    standing: dedupByName([...(inst.garrison || []), ...(inst.militia || []), ...(inst.watch || [])]),
-    contracted: inst.mercenary || [],
-    charter: inst.charter || [],
+    fortifications: standing(inst.walls),
+    standing: dedupByName(standing([...(inst.garrison || []), ...(inst.militia || []), ...(inst.watch || [])])),
+    contracted: standing(inst.mercenary),
+    charter: standing(inst.charter),
     arcane: arcaneDefenseOf(settlement),
   };
 }
@@ -735,43 +690,8 @@ function clergyHere(settlement) {
     || rulerKindOf(/** @type {Parameters<typeof rulerKindOf>[0]} */ (/** @type {unknown} */ (settlement))) === 'priest';
 }
 
-// ─── W2-C-LEAVES-3, round three: NO ONE RING WHERE RINGS RIVAL (at the end of the file, so no line above moves) ───
-/**
- * WHETHER MORE THAN ONE CRIMINAL RING STANDS HERE (the cold list REVIEW-R2-STAGES #1172 and #1202, HIGH, #716, #750 and
- * #813: "One criminal ring decides what crime is allowed here" beside a Thieves' Guild and The Black Circle on the Power
- * tab, and the roster's "Multiple criminal factions", which the Institutions tab prints as rival gangs disputing their
- * turf). The power roster is the home of who stands (`crimeSignal.js :: crimeSignalOf`'s seats): a criminal power that
- * GOVERNS (`isGoverning`: a council bought outright) is the captured hall, not a rival ring. Two rings or more, or the
- * roster's own "Multiple criminal factions", is no single controlling authority: the structure table's own
- * "semi-organized" row ("lacks a single controlling authority. Several gangs may be competing."), never "one ring".
- * @param {DefenseDisplaySettlement} settlement
- * @returns {boolean}
- */
-function rivalRingsHere(settlement) {
-  return rivalRingsOf(settlement?.powerStructure?.factions, settlement?.institutions) && !oneOrganisationRules(settlement);
-}
-
-/**
- * ONE ORGANISATION RULES THE TRADE (W2-C-LEAVES-11, the chair's ruling (1) of 2026-11-14 on REVIEW-W2-C-LEAVES's HIGH [1]:
- * "Semi-organized networks … lacks a single controlling authority. Several gangs may be competing" and the crime prose drawn
- * with that key, "Rival crews at {N} are fighting over who runs the streets", were false in 36 of the 289 towns of the
- * reader's 1,824 where they printed). Rival rings are said only where none of them governs or dominates and no guild is
- * named as running the trade: a criminal seat that GOVERNS (`isGoverning`) or is Dominant (`powerLabel`, the band the
- * section's own "Underworld: Shadow Senate · Dominant" prints) is the single authority (18 of the 36), and so is a thieves'
- * guild house on the roster (the operations list's "Thieves' Guild Chapter" / "Thieves' Guild (Powerful)", 18 of the 36).
- * The key is then the one organisation's, read from the same roster. Read as stored; no fact is added.
- * @param {DefenseDisplaySettlement} settlement
- * @returns {boolean}
- */
-function oneOrganisationRules(settlement) {
-  const seats = /** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, powerLabel?: unknown } | null | undefined>} */ (
-    settlement?.powerStructure?.factions || []);
-  return seats.some((f) => f?.category === 'criminal' && (f?.isGoverning === true || f?.powerLabel === 'Dominant'))
-    || (settlement?.institutions || []).some((i) => THIEVES_GUILD_HOUSE.test(String(i?.name ?? '')));
-}
-/** A thieves' guild house by its roster name ("Thieves' guild chapter", "Thieves' guild (powerful)"). */
-const THIEVES_GUILD_HOUSE = /thieves'? guild/i;
-import { rivalRingsOf } from '../corruption.js';
+// ─── W2-C-LEAVES-3, round three: NO ONE RING WHERE RINGS RIVAL: `rivalRingsHere` and `oneOrganisationRules` moved verbatim
+// to the crime fact's leaf, `facts/criminalStructureKey.js` (TAIL-TIES-9, the chair's ruling T28) ───
 
 // ─── W2-C-LEAVES-3: THE ARCANE SUPPORT ROW IS A CLAIM ABOUT THE DEFENCE (at the end of the file, so no line above moves) ───
 // The chair's ruling (record 369, G5; vetoable): "Arcane Support · Present … Detection, wards, counterspell." prints only
@@ -844,17 +764,7 @@ function navalRowStandsOn(settlement) {
 import { recordNamesAMage as arcaneNamedHere } from '../facts/magic.js';
 
 // ─── W2-C-LEAVES-SIDE (the chair's #575): THE LEGAL ROW NAMES A COURT ONLY WHERE A HOUSE HOLDS ONE (at the end of the file) ───
-import { liveInstitutions } from '../institutions/institutionRoster.js';
-
-/** A house that is a court by its name: the courthouse, the court buildings. */
-const COURT_HOUSE = /courthouse|court buildings/i;
-/**
- * The catalogue's court services (`data/institutionServices.js`): a hall, a council or an administration holds a court
- * only where the town drew one of these for it ("Dispute adjudication: hears civil pleas in the town court", "Dispute
- * arbitration … before a magistrate", "Appeals court", "Courts and adjudication", the courthouse's own rows).
- */
-const COURT_SERVICES = new Set(['Civil disputes', 'Criminal trials', 'Civil litigation', 'Criminal proceedings', 'Appeals',
-  'Dispute arbitration', 'Appeals court', 'Dispute adjudication', 'Courts and adjudication', 'Legal appeals', 'Civic law enforcement']);
+import { courtBenchOf, courtHoldersOf } from '../facts/defence.js'; // TAIL-CLOSE-SRC-4 (SR1): the court's holders and its bench, read in the defence home
 
 /**
  * WHETHER A HOUSE ON THE LIVE ROSTER HOLDS A COURT (W2-C-LEAVES-SIDE, 2026-11-13; the chair's ruling on the cut's #575:
@@ -869,42 +779,6 @@ const COURT_SERVICES = new Set(['Civil disputes', 'Criminal trials', 'Civil liti
  */
 function courtOnRoster(settlement) {
   return courtHoldersOf(settlement).length > 0;
-}
-
-/**
- * THE HOUSES THAT HOLD THE TOWN'S COURT on the live roster: 'Courthouse' where a courthouse or court buildings stand,
- * else each live house that drew a court service (its roster name).
- * @param {DefenseDisplaySettlement} settlement
- * @returns {string[]}
- */
-function courtHoldersOf(settlement) {
-  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (settlement)))
-    .map((i) => String(/** @type {{ name?: unknown } | null} */ (i)?.name ?? '')).filter(Boolean);
-  if (live.some((n) => COURT_HOUSE.test(n))) return ['Courthouse'];
-  const drawn = /** @type {{ availableServices?: unknown }} */ (settlement)?.availableServices;
-  const rows = drawn && typeof drawn === 'object' ? Object.values(drawn).flat() : [];
-  /** @type {string[]} */
-  const holders = [];
-  for (const row of rows) {
-    const sv = /** @type {{ name?: unknown, institution?: unknown } | null} */ (row);
-    const inst = String(sv?.institution ?? '');
-    if (typeof sv?.name === 'string' && COURT_SERVICES.has(sv.name) && live.includes(inst) && !holders.includes(inst)) holders.push(inst);
-  }
-  return holders;
-}
-
-/**
- * V6 (TAIL-DISPLAY-CIVIC-4): THE BENCH THAT HEARS THE CASES where no courthouse stands: a council's ("Council bench") or
- * a town hall's ("Town hall bench"); null where a courthouse stands or the court's holder is another house (a city
- * administration's courts, a city hall's appeals court: courts by their own service rows).
- * @param {DefenseDisplaySettlement} settlement
- * @returns {string | null}
- */
-function courtBenchOf(settlement) {
-  const holders = courtHoldersOf(settlement);
-  if (holders.length === 0 || holders.includes('Courthouse')) return null;
-  if (holders.some((h) => !/council|town hall/i.test(h))) return null;
-  return holders.some((h) => /council/i.test(h)) ? 'Council bench' : 'Town hall bench';
 }
 
 // ─── W2-C-LEAVES-9: THE RING'S VANTAGES PASS THE LIST DOOR (at the end of the file, so no line above moves) ───
@@ -958,12 +832,11 @@ const NO_SEAT_RING_NOTE = Object.freeze({
  */
 function ringWithoutSeat(row, settlement) {
   if (row.key !== 'organized') return row;
-  const houses = (settlement?.institutions || []).map((i) => String(i?.name ?? ''));
-  if (houses.some((n) => THIEVES_GUILD_HOUSE.test(n))) return row;
-  if (crimeSignalOf({ seats: settlement?.powerStructure?.factions, estate: [] }).factions.length) return row;
-  const front = houses.some((n) => /front business/i.test(n));
-  if (!front && !houses.some((n) => /underground city/i.test(n))) return row;
-  return Object.freeze({ ...row, note: front ? NO_SEAT_RING_NOTE.front : NO_SEAT_RING_NOTE.under });
+  const houses = ringHousesOf(settlement); // the crime fact's leaf reads the roster the key reads (TAIL-CLOSE-SRC-5, SR5 (a))
+  if (houses.guild) return row;
+  if (crimeSignalOf({ seats: settlement?.powerStructure?.factions, estate: [] }).powerNames.length) return row;
+  if (!houses.front && !houses.under) return row;
+  return Object.freeze({ ...row, note: houses.front ? NO_SEAT_RING_NOTE.front : NO_SEAT_RING_NOTE.under });
 }
 
 // ─── TAIL-DEFECON-D: THE SICK ARE NOT TENDED "BY THEIR OWN FAMILIES" BESIDE ONE WHO TENDS THEM (at the end of the file) ───
@@ -995,8 +868,8 @@ function sickTendedByOne(settlement) {
  */
 function headedPowerAmongRivals(row, settlement) {
   if (row.key !== 'semi-organized') return row;
-  const rings = /** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, faction?: unknown } | null | undefined>} */ (
-    settlement?.powerStructure?.factions || []).filter((f) => f?.category === 'criminal' && f?.isGoverning !== true);
+  const rings = criminalSeatsNotGoverning(/** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, faction?: unknown } | null | undefined>} */ (
+    settlement?.powerStructure?.factions || [])); // the crime home's reader (TAIL-CLOSE-SRC-4)
   if (rings.length !== 1) return row;
   const name = String(rings[0]?.faction ?? '');
   const people = /** @type {{ npcs?: unknown }} */ (/** @type {unknown} */ (settlement))?.npcs;
@@ -1007,3 +880,30 @@ function headedPowerAmongRivals(row, settlement) {
   return Object.freeze({ ...row, note: `The ${powerNameAfterArticle(name)} answers to one head and ${held}, but rival gangs contest its ground: no single authority rules all crime here. Less predictable than an unchallenged guild, more structured than street crime.` });
 }
 import { powerNameAfterArticle } from './powerSentenceName.js';
+
+// ─── TAIL-CLOSE-SRC-5 (SR5 (b)): A RUINED HOUSE IS NO FORCE THE TOWN FIELDS (at the end of the file, so no line above moves) ───
+/**
+ * THE BUCKETS' ENTRIES THAT STILL STAND (the chair's ruling SR5 of 2026-11-15, vetoable by the owner: a read that decides
+ * what stands in a town goes through the roster that leaves ruined houses out). `defenseProfile.institutions` is the
+ * generation-time snapshot: its entries are the roster's rows as they were born, and a ruin REPLACES its roster row
+ * (`{ ...inst, status: 'ruined', _worldPulseInactive: true }`), so the stamp never reaches the bucket. These entries are
+ * counted (the Defense tab's "N arcane", and whether any force stands at all) and listed as the town's armed forces (the
+ * PDF's defence chapter, the Foundry journal), so the read decides what stands. An entry is dropped where it is itself not
+ * live, or where the current roster holds its name only on rows that are not live (`isLiveInstitution`, the roster's one
+ * predicate). An entry whose name the roster does not hold at all (a later rename) is kept: the snapshot is not re-derived
+ * here, and a ruin is the only cause this reads. Where nothing falls, the same array is returned.
+ * @param {ForceEntry[]} entries
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {ForceEntry[]}
+ */
+function standingEntries(entries, settlement) {
+  const rows = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  /** @param {unknown} i @returns {string} */
+  const nameOf = (i) => String(/** @type {{ name?: unknown } | null} */ (i)?.name ?? '');
+  const live = new Set(liveInstitutions(settlement).map(nameOf));
+  const fallen = new Set(rows.filter((i) => !isLiveInstitution(i)).map(nameOf));
+  const kept = entries.filter((e) => (e === null || typeof e !== 'object' || isLiveInstitution(e))
+    && (live.has(nameOf(e)) || !fallen.has(nameOf(e))));
+  return kept.length === entries.length ? entries : kept;
+}
+import { isLiveInstitution, liveInstitutions } from '../institutions/institutionRoster.js';

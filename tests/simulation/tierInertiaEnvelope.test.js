@@ -414,6 +414,9 @@ describe('directive 6 / J-D6 — TIER INERTIA under an equal held stressor load'
   });
 
   it('the middle rung sits between them: the town arm stays under its derived ceiling', () => {
+    // RE-MEASURED 2026-11-15 (TAIL-CLOSE-SWEEP-B, the chair's E1): the family 90 -> 139 of 400, by the defence
+    // rating's declared rebuild (94c5d408f UPKEEP-CAPACITY C1, then b49b871fd UPKEEP-13 X1: defence is in the
+    // support vector); ceiling 43 -> 59 (alpha 1e-3, 3.317 sigma); the corpus 45/120, z +0.63. The manifest note.
     const ceiling = envelope('tierInertia.matchedPressure.town.demotionCeiling');
     expect(
       countAt('matched', 'town'),

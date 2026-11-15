@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "de7d547d2efdb563b06f0449b1812f91dd03ec91",
-  "measuredBy": "JOIN-3",
-  "date": "2026-11-14",
-  "note": "THE TRUE JOIN (lane/join-2026-11-14): nine lanes composed over the line 976db5b19; the inventory re-taken once on the clean committed joined tree, after step 7, by the book 2n step 8. No value moves.",
+  "measuredAtSha": "e6795e00bafba2df197fb65469e87a3080475e1e",
+  "measuredBy": "TAIL-CLOSE-DOORS-1",
+  "date": "2026-11-15",
+  "note": "the close: the joined line's tuning moves (TAIL-CLOSE-DOORS-1, door 8, at 04149c5ef+doors)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -131,9 +131,9 @@
     "src/data/defenceWeights.js#DEFENCE_TUNING": {
       "exported": true,
       "idiom": "literal",
-      "keys": 33,
+      "keys": 34,
       "line": 14,
-      "spanDigest": "57869cffa511464733928ec83cbe9de0a1b2afc80cd318d8fdfde5945754a85e",
+      "spanDigest": "de55771b511aa92aa0ab076ee225d8f9b7027f81c0fd6c6df5e95725b89e25f1",
       "leaves": {
         "walls.mil": 30,
         "walls.mon": 20,
@@ -141,6 +141,7 @@
         "wallKind.palisade": 0.6,
         "houseScale.least": 0.8,
         "houseScale.greatest": 1.2,
+        "people.milPerHead": 1,
         "garrison.mil": 28,
         "garrison.mon": 20,
         "garrison.int": 15,
@@ -515,7 +516,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 105,
+      "line": 104,
       "spanDigest": "42cba822df4a8ecb71503a445184626bef2ef7ad321e9814d269397056f9ec97",
       "leaves": {
         "value": 6
@@ -529,7 +530,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 108,
+      "line": 107,
       "spanDigest": "d40adbe17add3b7a21a86063de313b25e7b09f1baca71e01cb51ffebf26a3f22",
       "leaves": {
         "value": 0.5
@@ -1262,7 +1263,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 990,
+      "line": 991,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -1277,7 +1278,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 368,
+      "line": 385,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
@@ -1292,7 +1293,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 599,
+      "line": 616,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1307,7 +1308,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 601,
+      "line": 618,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1322,7 +1323,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 603,
+      "line": 620,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1337,7 +1338,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 605,
+      "line": 622,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -1544,7 +1545,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 57,
+      "line": 58,
       "spanDigest": "9acdd8bbb6d33f13f0160b4fb859db40ed62562fc613d4cd950fa2f3358584d1",
       "leaves": {
         "byRank.1": 0.15,
@@ -2560,7 +2561,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 169,
+      "line": 193,
       "spanDigest": "00c0e1f99fc53d650cd628cdac047d1e9e3d7d94218abe8ed2eed18c7a49b8ea",
       "leaves": {
         "value": 18
@@ -2575,6 +2576,7 @@
         "src/domain/coherence/crisisFactFindings.js",
         "src/domain/coherence/readerBattery.js",
         "src/domain/crisis/crisisPage.js",
+        "src/domain/display/foodWordShown.js",
         "src/domain/summary/settlementQuickGuide.js",
         "src/foundry/journalPages.js",
         "src/pdf/SettlementPDF.jsx",
@@ -8519,7 +8521,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 75,
+      "line": 76,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
@@ -8534,7 +8536,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 108,
+      "line": 109,
       "spanDigest": "a163ac8776fc0929e33ec0597e5327711e48c4ce474f669233879f93a30401d7",
       "leaves": {
         "strength": 0.6,
@@ -8551,7 +8553,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 66,
+      "line": 68,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8589,7 +8591,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 91,
+      "line": 93,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,
@@ -8701,6 +8703,7 @@
     "src/domain/display/marketPrices.js": 3,
     "src/domain/display/realmArcSummary.js": 1,
     "src/domain/display/settlementRumors.js": 3,
+    "src/domain/display/shadowEconomyShown.js": 1,
     "src/domain/display/stateProse/economyStateProse.js": 5,
     "src/domain/display/timelineTrack.js": 1,
     "src/domain/display/warStatus.js": 1,
@@ -8877,6 +8880,7 @@
     "src/domain/worldPulse/worldPulseFeedCuration.js": 1,
     "src/domain/worldPulse/worldState.js": 7,
     "src/generators/demandProfile.js": 1,
+    "src/generators/economy/prosperity.js": 1,
     "src/generators/economy/viability.js": 1,
     "src/generators/foodGenerator.js": 1,
     "src/generators/foodLand.js": 4,
@@ -9227,7 +9231,7 @@
     "src/generators/economy/neighbourEconomicBias.js": 2,
     "src/generators/economy/prosperity.js": 13,
     "src/generators/factionCorrelation.js": 4,
-    "src/generators/factionDynamics.js": 38,
+    "src/generators/factionDynamics.js": 36,
     "src/generators/foodGenerator.js": 41,
     "src/generators/foodLand.js": 7,
     "src/generators/generationCoherence.js": 1,
@@ -9265,9 +9269,9 @@
   "unclosed": [],
   "totals": {
     "tables": 280,
-    "keys": 2292,
-    "unregisteredNamed": 539,
-    "bareDecimals": 6879,
+    "keys": 2293,
+    "unregisteredNamed": 541,
+    "bareDecimals": 6877,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 187
   }

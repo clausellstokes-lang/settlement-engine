@@ -1,0 +1,6 @@
+fresh	src/components/home/landingFixture.js	war	db13c4c73cfa5ca3	"Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows."
+fresh	src/components/home/landingFixture.js	market	724c1896440111d1	"Caravans are passing Cnocby by, and its market stalls stand half empty."
+stale	src/components/home/landingFixture.js	war	cf045d918eb2fa33
+stale	src/generators/priorityHelpers.js	house: criminal faction	48aa937e63d7fe99
+fresh 4 · stale 2 · first-register stale 0 · banked 4688 · strips fresh 0 stale 0 banked 107
+exit 1

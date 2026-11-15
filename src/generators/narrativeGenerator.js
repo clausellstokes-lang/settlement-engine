@@ -847,8 +847,14 @@ export const generatePressureSentence = settlement => {
     if (Array.isArray(templates) && templates.length) {
       // F1: a line that names walls, a garrison or soldiers the record lacks is not drawn.
       // R-C (CENSUS-2d): a declared row gives back its text; the pick is over the same arrays.
-      const licensed = templates.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0), pool = licensed.length ? licensed : templates, drawn = pickRandom2(pool), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted, at = pool.indexOf(drawn);
-      const template = textOf(admitted(drawn) ? drawn : ([...pool.slice(at + 1), ...pool.slice(0, at)].find(admitted) ?? drawn)); // R2-CODE-A P1 (the chair's ruling (a)): a row's own `needs` are honoured after the one pick; a refused row resolves draw-free to the next admitted one
+      // TAIL-CONTENT-CLOSE-1 (2026-11-15): a TWIN row (`twinOf: <its original's text>`) is never drawn: it stands beside its
+      // original and is reached only where nothing in the pool is admitted (in place of keeping the refused original), so no
+      // roll moves and no town that printed a true row moves.
+      const isTwinRow = (/** @type {unknown} */ t) => !!t && typeof t === 'object' && typeof (/** @type {{twinOf?: unknown}} */ (t)).twinOf === 'string';
+      const twins = templates.filter(isTwinRow), drawable = twins.length ? templates.filter((t) => !isTwinRow(t)) : templates;
+      const licensed = drawable.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0), pool = licensed.length ? licensed : drawable, drawn = pickRandom2(pool), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted, at = pool.indexOf(drawn);
+      const twinOfDrawn = twins.find((t) => /** @type {{twinOf: string}} */ (t).twinOf === textOf(drawn) && admitted(t));
+      const template = textOf(admitted(drawn) ? drawn : ([...pool.slice(at + 1), ...pool.slice(0, at)].find(admitted) ?? twinOfDrawn ?? drawn)); // R2-CODE-A P1 (the chair's ruling (a)): a row's own `needs` are honoured after the one pick; a refused row resolves draw-free to the next admitted one
       return typeof template === 'function' ? template(detail) : template;
     }
   }

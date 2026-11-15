@@ -42,11 +42,22 @@ const namesGuild = (name) => typeof name === 'string' && GUILD_RE.test(name) && 
  * @returns {boolean}
  */
 export function guildOf(record) {
-  const roster = liveInstitutions(record)
-    .filter((/** @type {unknown} */ inst) => !ACCESS_ONLY.test(String(nativeSemanticName(inst) || '')));
-  if (roster.some(isCommerceGuild)) return true;
+  if (guildHouseStands(record)) return true;
   // MERGE-CAR: the powers alone — the NPC grouping `record.factions` is no longer built (PEOPLE-LAND M-2, the
   // shim out), and its names were the powers' own, so reading the powers reads every name it held.
   const factions = Array.isArray(record?.powerStructure?.factions) ? record.powerStructure.factions : [];
   return factions.some((/** @type {{ faction?: unknown, name?: unknown } | null | undefined} */ f) => namesGuild(f?.faction) || namesGuild(f?.name));
+}
+
+/**
+ * THE ROSTER HALF OF THE ONE READER: a live, non-criminal guild HOUSE stands on the roster (a guild that is only a
+ * contending power is not a house). `guildOf` asks it first; a reader that needs the house, never the power, asks it
+ * alone (TAIL-CLOSE-SRC-4: the quick guide's "run by guild and estate", R2-CODE-B-SIDE item 5).
+ * @param {Parameters<typeof guildOf>[0]} record a settlement record
+ * @returns {boolean}
+ */
+export function guildHouseStands(record) {
+  const roster = liveInstitutions(record)
+    .filter((/** @type {unknown} */ inst) => !ACCESS_ONLY.test(String(nativeSemanticName(inst) || '')));
+  return roster.some(isCommerceGuild);
 }

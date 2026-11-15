@@ -386,9 +386,12 @@ export function generateFoodSecurity(tier, institutions, config, storesShare = 1
                    : null;
 
   // ── THE FOOD RECORD (FOOD-1): derived once, here, from the numbers just published ──
+  // THE MAGIC SHARE IS THE SHARE OF THE POUNDS PUBLISHED (RECORD-MEASURE-3 row 4, the chair's ruling R4, candidate c4a),
+  // as the gap's is (deficitPct above): the record is handed the rounded `magicOffset` this writer publishes, so 0.4 lb
+  // of a 32 lb need, published as 0 lb, is no longer a 1 % share "provided by spell or by prayer" beside a reliance of none.
   const foodRecord = deriveFoodRecord({
     dailyNeed: Math.round(dailyNeed), dailyProduction: Math.round(dailyProduction),
-    importCoverage, normalImportPct: importPct, magicOffset, deficitPct, surplusPct, stressFamine, storageMonths,
+    importCoverage, normalImportPct: importPct, magicOffset: Math.round(magicOffset), deficitPct, surplusPct, stressFamine, storageMonths,
     hasGranary: hasAnyGranary,
     foodSources,
     failedSource,

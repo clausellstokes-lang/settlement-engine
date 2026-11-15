@@ -552,7 +552,12 @@ const BASE_DIGEST_HASH = '3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e898
 // each side, 44 moved, all strings, every one a summary whose old value held "is out to" (pulseHistory selected/consequence/
 // impactDigest summaries 12 each, proposals[].summary and .outcome.summary 4 each); no id, tick or number moved; components
 // (A) and (C) reach no line of these four records. Still no datum: the absent arm holds.
-const BASE_PULSE_HASH = '936751d9050f833ab965b24485f0e9f5ce26798a24cbe88ca5b01e8df746f033';
+// TAIL-CONTENT-CLOSE-1 (2026-11-15, cure 1: the trade fact names the market's stalls only where a market stands):
+// RE-KEYED BY IDENTITY, 936751d9... -> b93562fb..., ONE cause, TEXT ONLY. Leaf-diffed at the base bb75314d6 -> the cure over
+// this arm's four records: 28,265 leaves, 9 moved, all strings, every one the trade condition's summary for Ashford (which
+// holds no market): "…and its market stalls stand half empty." -> "…and its traders have little to sell." (pulseHistory
+// selected/consequence/impactDigest summaries 3 each); no id, tick, number or key moved. Still no datum: the absent arm holds.
+const BASE_PULSE_HASH = 'b93562fbf687ff86ac99b3ab5d89f2024473b77d1be0767690dbf176dcc5dc2f';
 
 describe('WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base', () => {
   it('ABSENT or refused datum: the golden digest hashes to the base, whatever refused shape was supplied', () => {

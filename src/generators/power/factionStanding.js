@@ -18,8 +18,8 @@ const isWeakPower = (f) => ['Minor', 'Suppressed'].includes(powerLabelOf(f.power
 // power on the roster; where that is a governing Arcane Council, the Arcane Orders may stand behind the clergy (their own card
 // says so: 7 of the 17 towns at 4ff449a7b). The line names the rival it read, by its prose form and its number.
 /** @param {{ faction: string }} rival @returns {string} */
-const arcaneAheadSaid = (rival) => /arcane orders/i.test(rival.faction) ? 'The arcane orders have'
-  : powerSentenceName(rival.faction) + (pluralPowerName(powerSentenceName(rival.faction)) ? ' have' : ' has');
+const arcaneAheadSaid = (rival) => // TAIL-CLOSE-SRC-4 (SR4): named as its card names it, by the one grammar reader, as every power is
+  powerSentenceName(rival.faction) + (pluralPowerName(powerSentenceName(rival.faction)) ? ' have' : ' has');
 
 // annotateFactionStanding — enrich faction descriptions with their position in
 // the (already normalised and sorted) power ranking (mutates in place).

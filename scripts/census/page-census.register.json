@@ -61,7 +61,7 @@
    "reader": "GLANCE",
    "master": 128,
    "integration": 127,
-   "banked": 116
+   "banked": 0
   },
   "P7b": {
    "label": "7b a harbour origin where no wharf stands",
@@ -75,7 +75,7 @@
    "reader": "CROSS",
    "master": 0,
    "integration": 220,
-   "banked": 123
+   "banked": 118
   },
   "P9": {
    "label": "9 a weak beasts grade over settled-country text",
@@ -117,7 +117,7 @@
    "reader": "SECOND",
    "master": 183,
    "integration": 167,
-   "banked": 23
+   "banked": 2
   },
   "P16three": {
    "label": "16a \"the ruling three\" over fewer",
@@ -166,7 +166,7 @@
    "reader": "SECOND",
    "master": 10,
    "integration": 11,
-   "banked": 12
+   "banked": 0
   },
   "NEW2": {
    "label": "NEW-2 magic income, and no practitioner on the rolls",
@@ -201,8 +201,7 @@
    "P18"
   ],
   "r2r-city-0": [
-   "P17",
-   "P7a"
+   "P17"
   ],
   "r2s-succession_void-city-0": [
    "P16three",
@@ -215,8 +214,7 @@
   "r2s-insurgency-metropolis-0": [
    "P16three",
    "P17",
-   "P18",
-   "P7a"
+   "P18"
   ]
  },
  "retired": {
