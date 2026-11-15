@@ -1127,14 +1127,15 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 4. `[unfolding · dm-only · guild]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
 
 **TIER: significant off-book activity (≥15)**
-0. *(canonical)* `[guild]` A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.
+0. *(canonical)* `[guild · no crisis: under_siege]` A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.
 1. `[ledger · dm-only · colour]` A real portion of {settlement}'s trade is done out of sight, enough that those who trade openly are at a disadvantage.
 2. `[street · dm-only · colour]` There is a cheaper way to do most things here, and most people know somebody who knows it.
 3. `[visitor · dm-only · market]` The prices in this market do not quite add up for a stranger who assumes everyone is paying the same fees. They are not.
-4. `[visitor · market]` Goods change hands at {settlement} without anyone writing them down, and the price a buyer is quoted depends on whether a duty is to be paid at all.
+4. `[visitor · market · no crisis: under_siege]` Goods change hands at {settlement} without anyone writing them down, and the price a buyer is quoted depends on whether a duty is to be paid at all.
 5. `[ledger · market · no crisis: under_siege]` The duties gathered at {settlement} fall short of the trade that plainly goes on there, and nobody is pressed to make up the difference.
-6. `[street · colour]` Ask how to bring goods into {settlement} cheaply and somebody will tell you, with a nod toward the quieter way in.
+6. `[street · no crisis: under_siege]` Ask how to bring goods into {settlement} cheaply and somebody will tell you, with a nod toward the quieter way in.
 7. `[street · no market]` Much of what changes hands at {settlement} changes hands quietly, between people who would rather nobody counted it.
+8. `[street · crisis: under_siege]` With the siege on, what still changes hands inside {settlement} changes hands quietly, and nobody writes any of it down.
 
 **TIER: minor shadow activity (≥3)**
 0. *(canonical)* `[no organised crime · no crisis: famine · no crisis: under_siege]` Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.
@@ -1248,7 +1249,7 @@ contradict** it (R-DST-C).
 3. `[visitor · food: ≥ secure]` The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
-1. `[ledger · colour]` {settlement} has money to spend, and spends it on the town's buildings and their upkeep.
+1. `[ledger · no crisis: indebted]` {settlement} has money to spend, and spends it on the town's buildings and their upkeep.
 2. `[visitor · walls]` {settlement} is visibly well off. The halls, the walls and the roads are all better than a town this size strictly requires.
 3. `[street · colour]` There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.
 4. `[visitor · no walls]` {settlement} is visibly well off. The halls, the houses and the roads are all better than a town this size strictly requires.
@@ -1556,7 +1557,7 @@ note that carries it on the six wired surfaces.
 
 **POSTURE: `entrepot`**
 1. `[ledger · no crisis: under_siege]` {settlement} sells on goods it never made: some of what leaves the town entered it as imports the same season.
-2. `[visitor · no crisis: under_siege]` The trade here is in the moving of things, and the town's yards are as busy as its workshops.
+2. `[visitor · tier: ≥ village · no crisis: under_siege · no crisis: occupied · no crisis: plague_onset]` The trade here is in the moving of things, and the town's yards are as busy as its workshops.
 3. `[street · no crisis: under_siege · no crisis: plague_onset]` The town's living is the road. Goods come, goods go, and the town takes its part of both.
 4. `[ledger · crisis: under_siege]` Some of {settlement}'s trade was in other towns' goods passing through, and the siege has stopped that trade.
 5. `[visitor · crisis: under_siege]` Goods that were only passing through {settlement} are stuck there now, with the roads closed and nowhere for them to go.
@@ -1826,8 +1827,8 @@ shape.
 3. `[ledger · crisis: under_siege · stores: < 6]` Since the siege closed the roads, none of the {good} that {settlement}'s work needs has reached it, and that work has stopped or soon will.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*
-1. `[ledger · colour]` The country around {settlement} does not give the town enough {good}, so the town buys in what it needs.
-2. `[street · colour]` Not enough of the {good} used at {settlement} comes from the country here; the town brings in the rest, or goes without.
+1. `[ledger · colour]` The country around {settlement} does not give the town enough {good} for what the town needs of it.
+2. `[street · colour]` Not enough of the {good} that {settlement} needs comes from the country here.
 3. `[ledger · no imports]` The country around {settlement} does not give the town enough {good}, so the town must look elsewhere for the rest.
 
 **INCOME WEIGHT: the religious houses** *(`compound.religionInfluence` high)*
@@ -6900,7 +6901,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[counterforce]` No great road feeds {settlement}'s market; it serves the town itself, no more.
 
 **`ENTREPOT`** {crisis-scoped · market}
-1. `[ledger · crisis: any · no crisis: under_siege]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
+1. `[ledger · crisis: any · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
 2. `[visitor · no crisis: under_siege · crisis: any]` Half the goods traded in {settlement} are only passing through, and the town lives off their passing.
 3. `[street · no crisis: under_siege · crisis: any]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 
@@ -6932,7 +6933,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`COMMERCE: a market, no guild`** *(`hasMarket`, none of the other three)*
 1. `[visitor · colour]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
-2. `[ledger · market]` No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.
+2. `[ledger · market · no guild]` No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.
 3. `[street · colour]` Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.
 4. `[threshold · no crisis: under_siege]` A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.
 
@@ -6953,8 +6954,8 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **PROVENANCE:** The accretion mechanism: a town is layers of decisions and the oldest decision is its reason. Spoken only through the founding record and the age field, and the age becomes a band in the desk — never a numeral in the prose (§0d). Non-redundant with `DS-GEN-9`, which renders the founding ROW and the event timeline; this block renders what the row MEANS for the town's present shape. It names no year and no date, because the engine holds a founding REASON and an AGE and no construction date of any kind.
 
 **`FOUNDED-YOUNG`** {colour}
-1. `[ledger]` {settlement} is young, and it still lives by its first reason.
-2. `[visitor]` Everything in {settlement} looks recently built, and the town still does the job it began with.
+1. `[ledger]` {settlement} is young, and the reason it was started is still in living memory.
+2. `[visitor]` Everything in {settlement} looks recently built, because most of it was.
 3. `[street]` {settlement} has not stood long enough to forget why it was started.
 
 **`FOUNDED-OLD`** {colour}
