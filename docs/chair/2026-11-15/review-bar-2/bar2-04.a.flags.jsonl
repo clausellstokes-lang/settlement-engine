@@ -1,0 +1,15 @@
+{"id":"C5821","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"PAIR","why":"says the city does well out of the war; page says prosperity was higher before the war and is Moderate while it lasts, and the Overview says it is losing","other":"C5776"}
+{"id":"C5767","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"PAIR","why":"says conscription hollowed out the skilled workforce; Foundations reads Labor capacity Adequate","other":"C5861"}
+{"id":"C5867","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"PAIR","why":"Law & order Adequate, but TENSIONS has a live crime wave rising faster than those in charge can answer","other":"C5795"}
+{"id":"C5826","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"PAIR","why":"says no power profits; the Crisis text says merchants get rich and a few grow rich on army contracts","other":"C5821"}
+{"id":"C5979","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"BROKEN","why":"slash roster label Military/Guard used as a power's name beside the verb Backs","other":""}
+{"id":"C6106","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"BROKEN","why":"slash roster label Military/Guard used as a power's name beside the verb Backs (Garrison row)","other":""}
+{"id":"C6173","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"LACKS","why":"calls Declan O'Neill Lord Mayor; GOVERNMENT lists only City Council, and PEOPLE gives his title as senior guild master, first of City Council","other":""}
+{"id":"C6520","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"BROKEN","why":"income source Grain Sales printed with no description, though every other income source carries one","other":""}
+{"id":"C6878","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"PAIR","why":"calls the watch well-funded and reliable at order; Defense says resource-constrained, inadequate equipment, irregular pay, and a crime wave outruns those in charge","other":"C6890"}
+{"id":"C6914","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"PAIR","why":"says defenders are paid on time and the city had money in hand; Defense says irregular pay, and the war takes most of the money","other":"C6890"}
+{"id":"C7002","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"PAIR","why":"says the city would go on more slowly without the arcane; header gives magic reliance none, no arcane practitioners, and 0% of food by magic","other":"C6996"}
+{"id":"C7052","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"PAIR","why":"prisoner died in the cells; the page says Balworth has nowhere to hold an offender (courts without detention)","other":"C6912"}
+{"id":"C7331","town":"bar0-city-wartime-rand-3","sev":"MED","kind":"PAIR","why":"says the guildmaster uses magic; the page says no arcane practitioners on the rolls, arcane support None, reliance none, and DEFENCE magic is none","other":"C6978"}
+{"id":"C7665","town":"bar0-city-wartime-rand-3","sev":"LOW","kind":"STATE","why":"speaks of the present occupation; PAST puts The Occupation 324 years ago and the crisis is Wartime, not an occupation","other":""}
+{"id":"DONE","lines":2000,"blocks":1,"flags":14}
