@@ -17,17 +17,20 @@ import { declarationOf, EMPTY_DECLARATION } from '../../../src/domain/facts/fact
 const sense = (key) => ARRIVAL_SENSES.find((s) => s.key === key);
 const needsOf = (line) => (typeof line === 'function' ? [] : declarationOf(line).needs ?? []);
 const isColour = (line) => Boolean(line && typeof line === 'object' && line.colour === true);
+// TAIL-HISTORY-5 (2026-11-15, the chair's Y17 (2)): the fish family's catch lines take a twin each under `crisis: hunger`;
+// the pins below are re-keyed BY IDENTITY over the originals (a twin is reached only by resolution, never drawn).
+const originals = (pool) => pool.filter((line) => !(line && typeof line === 'object' && typeof line.twinOf === 'string'));
 
 describe('R-AP amended: the fish key\'s lines declare the catch and the water they presume', () => {
   it('lines: the stalls\' catch (market, navigable, fish); the wet baskets (fish, market); the nets, the flapping basket (fish)', () => {
-    const [stalls, monger, nets, basket] = sense('fish').lines;
+    const [stalls, monger, nets, basket] = originals(sense('fish').lines);
     expect(needsOf(stalls)).toEqual(['market', 'navigable', 'fish']);
     // W2-FIX-DATA (the REVIEW-W2B cold list, c05): the fishmonger shouts a price at a market, so the wet baskets need one too
     expect(needsOf(monger)).toEqual(['fish', 'market']);
     for (const l of [nets, basket]) expect(needsOf(l)).toEqual(['fish']);
   });
   it('dominant: the racks of catch (navigable, fish); the gutting (fish); the salt barrels and their gulls (navigable)', () => {
-    const [racks, gutting, barrels] = sense('fish').dominant;
+    const [racks, gutting, barrels] = originals(sense('fish').dominant);
     expect(needsOf(racks)).toEqual(['navigable', 'fish']);
     expect(needsOf(gutting)).toEqual(['fish']);
     expect(needsOf(barrels)).toEqual(['navigable']);
