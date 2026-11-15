@@ -141,7 +141,7 @@ const bothNamedTensions = (archetype) => {
   return indices;
 };
 
-/** @type {WeakMap<object, ReadonlyArray<Readonly<{ id: number, needs: string[], excludes: string[], crisis: string[] }>>>} */
+/** @type {WeakMap<object, ReadonlyArray<Readonly<{ id: number, needs: string[], excludes: string[], crisis: string[], trust?: 'none' | 'full' }>>>} BAR2-PEOPLE (PP4): a row's trust */
 const pairPoolCache = new WeakMap();
 /**
  * An archetype's tie indices as one declared pool: index i declares what its desc row
@@ -150,6 +150,18 @@ const pairPoolCache = new WeakMap();
  * declares a crisis (CENSUS-4c's ledger), so the union is a plain union.
  * @param {any} archetype
  */
+/**
+ * BAR2-PEOPLE (PP4, the chair's ruling of 2026-11-15, vetoable by the owner): ONE HOME FOR A PAIR'S TRUST. A line that
+ * states the pair's trust declares it (`trust: 'none'` "neither trusts the other at all"; `trust: 'full'` "trust
+ * completely", "trusts <B>'s word over any written contract"); a pair's later tie of another kind is admitted only where
+ * its line agrees with what the pair's first trust line stated (Weihu: Tian Ma and Xiao Gao "cooperate efficiently and
+ * neither trusts the other at all" and "disagree often and trust completely"). Draw-free: the refused index resolves
+ * like a held one. @param {ReadonlyArray<any>} lines @param {number} i @returns {'none' | 'full' | undefined}
+ */
+const trustOfRow = (lines, i) => {
+  const row = lines.length ? lines[i % lines.length] : null;
+  return row && typeof row === 'object' && (row.trust === 'none' || row.trust === 'full') ? row.trust : undefined;
+};
 const tiePairPool = (archetype) => {
   let pool = pairPoolCache.get(archetype);
   if (!pool) {
@@ -165,6 +177,7 @@ const tiePairPool = (archetype) => {
       needs: [...field(descLines, id, 'needs'), ...field(tensionLines, id, 'needs')],
       excludes: [...field(descLines, id, 'excludes'), ...field(tensionLines, id, 'excludes')],
       crisis: [...field(descLines, id, 'crisis'), ...field(tensionLines, id, 'crisis')],
+      trust: trustOfRow(descLines, id) ?? trustOfRow(tensionLines, id),
     })));
     pairPoolCache.set(archetype, pool);
   }
@@ -203,6 +216,8 @@ export const createTieProseDraw = (force, facts = null) => {
   const draws = new Map();
   /** TAIL-TIES-2 (T6): each pair's FIRST tie of a kind, as its directed key (`npcData.js :: REVERSED_TIE`). @type {Map<string, string>} */
   const firstOfPair = new Map();
+  /** BAR2-PEOPLE (PP4): each pair's trust, as its first trust line stated it (the two ids, unordered). @type {Map<string, string>} */
+  const trustOfPair = new Map();
   return (archetype, npc, partner) => {
     const archetypeKey = archetypeKeyOf(archetype);
     let draw = draws.get(archetype);
@@ -229,15 +244,21 @@ export const createTieProseDraw = (force, facts = null) => {
     // earlier resolution already printed is refused as held and resolves the same way). Draw-free: the drawn index is
     // the cycle's as before, and a town whose draws are all admitted resolves exactly as before. Only where every
     // admitted index is printed does it resolve as it did (a repeat, never a false line).
-    const held = inHead && draw.printed.size ? new Set([...draw.printed].map(String)) : null;
+    const trustKey = [String(npc?.id ?? npc?.name ?? ''), String(partner?.id ?? partner?.name ?? '')].sort().join('\u0000');
+    const pairTrust = trustOfPair.get(trustKey);
+    const contrary = pairTrust ? pool.filter((l) => l.trust && l.trust !== pairTrust).map((l) => String(l.id)) : [];
+    const held = inHead && (draw.printed.size || contrary.length) ? new Set([...[...draw.printed].map(String), ...contrary]) : null;
     const once = held ? resolveAt({ draw: () => pool[drawnVariant], held, heldKey: (l) => String(l.id) }) : null;
     // TAIL-TIES-2 (T6's vote lines refuse more indices under one ruler): PAST THE POOL'S END the cycle runs over the lines
     // that name BOTH cards (above), so a refused overflow index resolves among THOSE first (the held set's rule: never a
     // one-name line where an admitted two-name one stands); the whole pool only where none is admitted. Draw-free.
-    const overflow = !inHead && !once ? resolveAt({ draw: () => pool[drawnVariant], held: new Set(pool.filter((l) => !named.includes(l.id)).map((l) => String(l.id))), heldKey: (l) => String(l.id) }) : null;
-    const resolved = once && once.line ? once : overflow && overflow.line ? overflow : resolveAt({ draw: (p) => p[drawnVariant] });
+    const overflow = !inHead && !once ? resolveAt({ draw: () => pool[drawnVariant], held: new Set([...pool.filter((l) => !named.includes(l.id)).map((l) => String(l.id)), ...contrary]), heldKey: (l) => String(l.id) }) : null;
+    const agreeing = contrary.length && !(once && once.line) && !(overflow && overflow.line) ? resolveAt({ draw: () => pool[drawnVariant], held: new Set(contrary), heldKey: (l) => String(l.id) }) : null;
+    const resolved = once && once.line ? once : overflow && overflow.line ? overflow : agreeing && agreeing.line ? agreeing : resolveAt({ draw: (p) => p[drawnVariant] });
     const index = resolved.line ? resolved.line.id : drawnVariant;
     draw.printed.add(index);
+    const statedTrust = resolved.line ? resolved.line.trust : undefined;
+    if (statedTrust && !trustOfPair.has(trustKey)) trustOfPair.set(trustKey, statedTrust);
     // TAIL-TIES-2, the chair's ruling (T6): a second tie of the same kind between the same two cards, drawn the other way
     // round, is written in the first tie's order (the pair's direction has one home); its index and draw are untouched.
     const from = String(npc?.id ?? npc?.name ?? '');

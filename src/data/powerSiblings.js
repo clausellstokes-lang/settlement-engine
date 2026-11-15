@@ -94,8 +94,11 @@ const declaredSet = (text, needs, twin) => Object.freeze([
 export const FACTION_DESC_SIBLINGS = Object.freeze({
   'Town watch; it enforces ordinances, manages disorder, and reports to the council.': declaredSet(
     'Town watch; it enforces ordinances, manages disorder, and reports to the council.', ['watch']),
-  'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.': declaredSet(
-    'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.', ['watch']),
+  // BAR2-PEOPLE (PP6, the chair's rulings PP6 and PT3 of 2026-11-15, vetoable by the owner): was "Well-funded city watch; it
+  // keeps order reliably ...", false in 57 of the 101 towns that printed it (a coordinated crime wave or irregular pay beside
+  // it); the power step cannot read the safety profile, so the line claims neither the funding nor the order, and keeps `watch`
+  'City watch; it answers for keeping order and is growing more sure of its own authority.': declaredSet(
+    'City watch; it answers for keeping order and is growing more sure of its own authority.', ['watch']),
   'City watch; law enforcement and external defence, stretched between multiple responsibilities.': declaredSet(
     'City watch; law enforcement and external defence, stretched between multiple responsibilities.', ['watch']),
   'A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.': declaredSet(

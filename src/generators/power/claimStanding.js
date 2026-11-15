@@ -141,7 +141,7 @@ const CLAIM_RUNGS = Object.freeze([
   // the standing army (city and metropolis): the city watch's rungs, which name a watch, so only where one stands; with
   // none, no rung is true and the claim is left
   { claim: 'Standing army with genuine political weight; command appointments are patronage, and the council knows it.',
-    minor: (_tier, ctx) => watchStands(ctx) ? 'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.' : null,
+    minor: (_tier, ctx) => watchStands(ctx) ? 'City watch; it answers for keeping order and is growing more sure of its own authority.' : null,
     suppressed: (_tier, ctx) => watchStands(ctx) ? 'City watch; law enforcement and external defence, stretched between multiple responsibilities.' : null },
   ...['Arcane institutions hold substantial political leverage here. Contracts, security, and infrastructure all depend on magical services only they provide.',
     'Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it.',

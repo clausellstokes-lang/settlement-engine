@@ -257,7 +257,7 @@ reg('military','contested',
 reg('military','stable',
   { tags: CALM_ONLY, position:  'Commands those under arms in quiet times; the work is keeping trouble from starting.',
     goal:      'Keep the drills, the patrols and the pay going, and the old hands in charge of them.',
-    constraint:'With nothing threatening, it is hard to win the coin and the say that would be needed if trouble came.' },
+    constraint:'It is hard to win the coin and the say that would be needed if worse trouble came.' }, // BAR2-PEOPLE (PP7): no 'nothing threatening' beside a constant monster threat (15 of 74 towns)
   { tags: CALM_ONLY, position:  'Leads a squad in quiet times, where the work is routine and the risks are low.',
     goal:      'Get their squad noticed for doing the dull work well, and earn a patron by it.',
     constraint:'Steady work earns no notice; getting ahead takes a crisis or a patron.' }
@@ -359,7 +359,7 @@ reg('religious','contested',
     constraint:'Following the leaders\' choice means setting aside one\'s own judgment, and paying for it whether they chose well or not.' }
 );
 reg('religious','stable',
-  { tags: CALM_ONLY, position:  'Leads the faith in quiet times, at peace with the seat beside it.',
+  { tags: CALM_ONLY, position:  'Leads the faith in quiet times, whatever it thinks of the seat beside it.', // BAR2-PEOPLE (PP7): no peace with the seat the faith may contest (20 of 75 towns)
     goal:      'Keep the faith at every naming, wedding and burial, and out of the seat\'s quarrels.',
     constraint:'With nothing pressing, it is easy to grow comfortable and hard to argue for growing.' },
   { tags: CALM_ONLY, position:  'Serves the faith under its leaders in quiet times.',

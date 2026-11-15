@@ -52,7 +52,35 @@ grid: 0 falls at the base and the tip.
 
 ## Batch B · the ties and the seats (PP7)
 
-@BATCH_B@
+The census at a snapshot of the batch (`afterB`, read against `afterA`). PP3 was in that snapshot and was TAKEN BACK OUT
+before the commit (below); the rows here are independent of it (their lines are not tie lines of the rivalry pool).
+
+| row | sentence | before → after (of the 720) | the cure |
+|---|---|---|---|
+| C6878, C9046 (PP6; rulings PP6 and PT3) | "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority." | 101 → 0 | reworded to claim neither funding nor order (false in 57 of 101: a coordinated crime wave or irregular pay beside it; the power step cannot read the safety profile): "City watch; it answers for keeping order and is growing more sure of its own authority." (0 → 101, the same towns), its `needs: watch` kept, at its three homes (rulingStructure.js, claimStanding.js, powerSiblings.js); the two tests that pin the text re-keyed by identity beside a dated note |
+| C23104 (PP7) | "<A> and <B> have been placed on the same council committee." | 92 → 0 | "…have been handed the same dispute to settle together." (70 of 95 ties name a card outside the ruling body), text only, its declarations unchanged |
+| C20059 (PP7) | "Leads the faith in quiet times, at peace with the seat beside it." | 75 → 0 | "…, whatever it thinks of the seat beside it." (20 of 75 beside a competitive or tense faith-seat relation) |
+| C25301 (PP7) | "Constraint: With nothing threatening, it is hard to win the coin…" | 74 → 0 | "It is hard to win the coin and the say that would be needed if worse trouble came." (15 of 74 beside a plagued monster threat) |
+| C13193 (PP4) | "They cooperate efficiently and neither trusts the other at all." beside "disagree often and trust completely" | the 720: 0 pairs print both (unchanged); the reader's town (Weihu: Tian Ma and Xiao Gao): gone | ONE HOME FOR A PAIR'S TRUST (relationshipArchetypes.js :: createTieProseDraw): the rows declare `trust: 'none'` / `'full'`; a pair's later tie is admitted only where its line agrees with the pair's first trust line; the refused index resolves like a held one, draw-free |
+
+The declaration ledgers (`docs/census/declarations/npcStructure.T.json`, `npcData.STRESS_ECONOMIC_EFFECTS.json`) re-address
+the three reworded rows by their text. Nothing else moved in the diff but the four reworded lines (gone and new in the
+same towns) and PP3's (taken out). Guard: `tests/generators/bar2PeopleTies.test.js` (5 pairs red at the base, 3 KEEP
+green; green at the tip). Gates: eslint, the strict-domain gate and the type ratchet green (the ratchet's three errors
+on the pool's new field typed); the walker: exactly the watch line's hit (fresh 3, stale 3: one line in three files),
+NAMED below under PT3; the grid not re-run for this batch (the hand-back's budget).
+
+**PP3 (C18001, C15449) TAKEN BACK OUT, TOLD TO THE CHAIR.** Built in the tie draw's form (rows `trade: true`, held for a
+pair that shares no house family and no category other than the catch-all `other`; the gloss by the same rule), it
+silenced far more than the measure: "Every client…" 224 → 57 towns, "trained together…" 297 → 71, "bid for the same
+contracts…" 291 → 70, and with each refused index THE TENSION LINE OF THE SAME INDEX ("A post opens at midsummer…",
+"…hired away <B>'s best assistant", "…will both present proposals at the next council session") went too: one index in
+this pool is a description and a tension together. Two questions for the chair before it is pushed: (a) does `other`
+count as a shared category (the chair's word says "the same category"; the 134 of 291 measure counts it); (b) may the
+paired tension line go with its description, or does the pool need description-only twins? Its form, to rebuild
+on the answer: `pairSharesTrade(a, b)` in relationshipArchetypes.js (the same house family, or the same category), the
+three rows' `trade: true` read into the pool beside PP4's `trust`, held in `createTieProseDraw` with PP4's contrary set,
+and the gloss's twin "are rivals, and neither gives the other ground" in settlementNarrative.js by the same rule.
 
 ## Rows struck (true by the record, with one line why)
 
@@ -90,16 +118,11 @@ grid: 0 falls at the base and the tip.
   a thieves' guildmaster), drawn through the crisis bias into the economy pool. Its declaration needs a holder's-trade
   word the vocabulary lacks (the pool's atoms are the town's): PARKED with its measure, told to the chair.
 - **C18001, C15449 (PP3)** the shared-trade tie lines: **134 of 291** "Every client X wins..." ties pair two cards of no
-  shared category or house family. The cure needs a PAIR word, `shared trade` (the twin of `shared power`): ASKED of the
-  chair (2026-11-15); parked until the word.
-- **C13193 (PP4)** "neither trusts the other at all" beside "disagree often and trust completely": the two lines print for
-  one pair in **0 of the 720** and 1 of the bar's 30 (the reader's town): measured; not cured (a cure would need the tie
-  draw to read the pair's earlier tie, `relationshipArchetypes.js :: createTieProseDraw`).
-- **C6878, C9046 (PP6)** "Well-funded city watch; it keeps order reliably...": FALSE in **57 of 101** towns (a coordinated
-  crime wave, or irregular pay, beside it). It is written at the power step, before the safety profile, so it cannot
-  declare those facts; the cure is a rewording that claims neither, and any rewording carrying "watch" is a FRESH hit of
-  the presumed-things walker, whose register is shrink-only (no line is banked to absorb a new one): a rise is a stop.
-  ASKED of the chair; parked.
+  shared category or house family. The chair granted the word (VW1); the vocabulary's law (every homed word names a
+  `factsOf` getter; `factsOf.js` is outside the grant) sent it into the tie draw's own form; built, measured, and TAKEN
+  BACK OUT for its silence (batch B, above).
+- **C13193 (PP4)**: 0 pairs of the 720 print both lines, 1 of the bar's 30 (the reader's town): CURED in batch B.
+- **C6878, C9046 (PP6)**: false in 57 of 101: CURED in batch B under the chair's PT3 (its walker hit named in the books).
 - **C25259 (PP7)** the salt works "while it runs well" (4 towns): the goal family `expansion` is chosen for a house whose
   chain the record calls running while its input is short: the record's seat (the chain's state), not the line.
 
@@ -115,7 +138,10 @@ grid: 0 falls at the base and the tip.
 | "A boat has lain at the quay since the water closed, and two collectors both demand the duty on its cargo." (siege twin) | conflictIssues.js | (reached under a siege only; printed in none of the 750 read) |
 | "It does not bargain for its way: <hall> carries out what it decides, whatever its numbers." (the occupier's standing) | factionStanding.js | r2r-thorp-27 · r2s-occupied-metropolis-0 · bar0-town-occupied-rand-3 (17 towns, all occupied) |
 
-@VETO_B@
+| "City watch; it answers for keeping order and is growing more sure of its own authority." | rulingStructure.js, claimStanding.js, powerSiblings.js | r2r-city-0 · (the metropolis cities, 101 towns, all holding a watch by its declared `needs: watch`) · r2s-under_siege-city-* |
+| "<A> and <B> have been handed the same dispute to settle together. The first meeting is next week." | npcData.js | r2r-hamlet-48 · r2r-city-0 · (92 towns) |
+| "Leads the faith in quiet times, whatever it thinks of the seat beside it." | npcStructure.js | r2r-village-13 · r2r-city-11 · (75 towns, calm only) |
+| "It is hard to win the coin and the say that would be needed if worse trouble came." | npcStructure.js | r2r-village-46 · r2r-city-0 · (74 towns, calm only) |
 
 ## Rows named for other seats
 
@@ -124,16 +150,31 @@ grid: 0 falls at the base and the tip.
 
 ## THE BOOKS MY CURES MOVE (F2)
 
-@BOOKS@
+THE BOOKS ARE NOT YET RUN: the joined line's test bookkeeping was being closed on other branches, and the chair's prompt
+holds F2 until "MERGE THE LINE AT <tip>". MY COUNT PASSED 250,000 BEFORE THAT WORD CAME: this hand-back is made now, and
+F2 is owed by whoever takes the seat. What is already known of the books:
+
+| test / register | arm | old → new | door |
+|---|---|---|---|
+| `tests/lint/presumedThings.widened.register.json` (the walker) | arm 1, `watch`, implied | the row "Well-funded city watch; …" (hash ee08d7b2a92c842c) in rulingStructure.js, claimStanding.js, powerSiblings.js → the fresh hit "City watch; it answers for keeping order and is growing more sure of its own authority." (6c12f9d5be13b96e) in the same three | the close's presumed pass (ruling PT3): true where it prints (the line keeps `needs: watch`; it claims neither funding nor order); NOT re-taken here |
+| `tests/generators/census5dGarrisonReword.test.js`, `tests/generators/power/claimRungsCommanding.test.js` | `WELL_FUNDED` | re-keyed by identity beside a dated note (the same line reworded) | the test files' own form |
+| `docs/census/declarations/*.json` (the ledgers) | three rows | re-addressed by their text | the ledgers' own form |
+| the golden surfaces (`tests/property/generatorGoldenMaster.test.js` and after) | the 525 | NOT YET COUNTED (owed): the families my cures move are `powerStructure.factions[].desc` (the occupier's standing; the watch line), `conflicts[]` hooks (siege twins), `npcs[]` presentation, secret, structuralPosition, activeConstraint text, and `relationships[]` description/tension (the committee line; PP4's held index in a pair with two trust lines) | the close's doors |
+
+Owed by F2: (a) every test file that names a touched file (122 at batch A's list: `grep -rl` over the touched basenames);
+(b) the brief's law suites; the 525 count by hashing each reference record at f8042b61a and at the tip.
 
 ## Guards owed
 
 - `tests/generators/power/bar2PeoplePowers.test.js` (batch A: 8 pairs red at the base, 3 KEEP).
-- `tests/generators/bar2PeopleTies.test.js` (batch B: 3 pairs red at the base, 2 KEEP).
+- `tests/generators/bar2PeopleTies.test.js` (batch B: 5 pairs red at the base, 3 KEEP).
+- PP3's guard is owed with its cure; PP5's class (4 holders) waits for a holder's-trade word.
 
 ## What is left of my worklists
 
-PP3 and PP6 wait on the chair's word; PP4, PP5's class, C32434 and C25259 are measured and named above.
+PP3 (built, taken out: the chair's two questions above); PP5's class (4 holders, a word); C32434 (the density law's
+seat); C25259 (the record's seat); F2, the books, whole. Hand-back made at the budget (my count read 425,932 at 14:48 UTC,
+past 250,000: the reading came only when a turn ended).
 
 ## How the instruments are re-made
 

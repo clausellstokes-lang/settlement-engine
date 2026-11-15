@@ -2101,7 +2101,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Mutual Leverage',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`, colour: true },
+        `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`, colour: true, trust: 'none' }, // BAR2-PEOPLE (PP4): the pair's trust, declared
       { line: (r, s) =>
         `${r.name} knows enough to ruin ${s.name}, and ${s.name} holds enough to finish ${r.name}, so the two of them work together very carefully.`, colour: true },
       { line: (r, s) =>
@@ -2169,11 +2169,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
     label: 'Genuine Respect',
     desc: pairProse('d', [
       { line: (r, s) =>
-        `${r.name} and ${s.name} have each watched the other do good work. They argue, but each trusts the other's judgment in their own field.`, colour: true },
+        `${r.name} and ${s.name} have each watched the other do good work. They argue, but each trusts the other's judgment in their own field.`, colour: true, trust: 'full' }, // BAR2-PEOPLE (PP4)
       { line: (r, s) =>
-        `${r.name} and ${s.name} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.`, colour: true },
+        `${r.name} and ${s.name} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.`, colour: true, trust: 'full' }, // BAR2-PEOPLE (PP4)
       { line: (r, s) =>
-        `There is no arrangement between ${r.name} and ${s.name}, only a long record of kept words; in this settlement that makes them remarkable.`, colour: true },
+        `There is no arrangement between ${r.name} and ${s.name}, only a long record of kept words; in this settlement that makes them remarkable.`, colour: true, trust: 'full' }, // BAR2-PEOPLE (PP4)
       { line: (r, s) =>
         `${r.name} sends difficult cases to ${s.name}, and ${s.name} sends them back solved. Neither has ever charged the other a fee.`, colour: true },
       { line: (r, s) =>
@@ -2181,9 +2181,9 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} once told the council that ${r.name} was right and ${s.name} was wrong. ${r.name} has not forgotten it.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
-        `${r.name} and ${s.name} consult each other before any decision that matters. The advice is honest and is always taken seriously.`, colour: true },
+        `${r.name} and ${s.name} consult each other before any decision that matters. The advice is honest and is always taken seriously.`, colour: true, trust: 'full' }, // BAR2-PEOPLE (PP4)
       { line: (r, s) =>
-        `${r.name} trusts ${s.name}'s word over any written contract. ${s.name} has never given a reason to regret it.`, colour: true },
+        `${r.name} trusts ${s.name}'s word over any written contract. ${s.name} has never given a reason to regret it.`, colour: true, trust: 'full' }, // BAR2-PEOPLE (PP4)
     ]),
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} and ${s.name} are about to be on opposite sides of an important decision.`, colour: true },
@@ -2293,7 +2293,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
       { line: (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} have been placed on the same council committee. The first meeting is next week.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+        `${r.name} and ${s.name} have been handed the same dispute to settle together. The first meeting is next week.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },  // BAR2-PEOPLE (PP7): no council seat claimed for a card that holds none (70 of 95 ties); text only, the same admission
       { line: (r, s) => `${s.name}'s child has asked to apprentice with ${r.name}. ${r.name} has not refused.`, colour: true },
       { line: (r, s) => `${r.name} has learned that ${s.name} is in debt and could be ruined by one call on a loan.`, colour: true },
     ]),
