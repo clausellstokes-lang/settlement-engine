@@ -1,0 +1,25 @@
+{"id":"C24238","town":"bar0-thorp-calm-rand-6","sev":"MED","kind":"PAIR","why":"says tensions are domestic inheritances/boundaries, managed; the record's live tension is magical controversy (C24267), legitimacy Contested","other":"C24267"}
+{"id":"C24271","town":"bar0-thorp-calm-rand-6","sev":"LOW","kind":"STATE","why":"grazing/water dispute, sides not speaking, is in none of QUARRELS (none), TENSIONS, PAST; contradicts 'managed' (C24238); LAND has no grazing","other":"C24238"}
+{"id":"C24243","town":"bar0-thorp-calm-rand-6","sev":"LOW","kind":"LACKS","why":"'older lanes' of painted fronts and garden plots: a thorp of 16 with Dwellings (1-8) has no lanes","other":""}
+{"id":"C24273","town":"bar0-thorp-calm-rand-6","sev":"LOW","kind":"STATE","why":"'its trade has always gone by water' but TRADE exports none, imports none; income Harvest 100%","other":""}
+{"id":"C24298","town":"bar0-thorp-calm-rand-6","sev":"LOW","kind":"PAIR","why":"Zoran 'owes their post to a patron' but his house is 'never chosen to anything... No office' (C24312)","other":"C24312"}
+{"id":"C24313","town":"bar0-thorp-calm-rand-6","sev":"MED","kind":"PAIR","why":"'No office, no title, no vote' but PEOPLE: Zoran Popov is first (rank 1) of Elder Council, the governing power","other":"C24312"}
+{"id":"C24448","town":"bar0-thorp-calm-rand-6","sev":"LOW","kind":"PAIR","why":"'members cannot agree', decisions left untaken, but the council shows '1 member' (C24444) and stability is Stable","other":"C24444"}
+{"id":"C24574","town":"bar0-thorp-calm-rand-6","sev":"LOW","kind":"BROKEN","why":"'How survived:' value is a fragment beginning 'though the founding was harder...' and names no way of surviving","other":""}
+{"id":"C24620","town":"bar0-thorp-calm-rand-7","sev":"MED","kind":"PAIR","why":"says tensions are slow inherited grievances and debts; the record's live tension is the great flood quarrel (C24650); legitimacy Contested, Law & order Critical","other":"C24650"}
+{"id":"C24627","town":"bar0-thorp-calm-rand-7","sev":"MED","kind":"LACKS","why":"a broker matching buyers to goods from far routes: HOUSES has no market or trader, imports none, 'No market or fair stands' (C24646)","other":"C24646"}
+{"id":"C24628","town":"bar0-thorp-calm-rand-7","sev":"LOW","kind":"PAIR","why":"'goods on offer are mostly second-hand' but no market stands in Ribatoasis and imports none","other":"C24646"}
+{"id":"C24779","town":"bar0-thorp-calm-rand-7","sev":"LOW","kind":"LACKS","why":"'caravan-borne staples': trade access is river and imports none; no caravan trade recorded","other":""}
+{"id":"C24853","town":"bar0-thorp-calm-rand-7","sev":"LOW","kind":"PAIR","why":"'members cannot agree', decisions left untaken, but the council shows '1 member' (C24849) and stability is Stable","other":"C24849"}
+{"id":"C24893","town":"bar0-thorp-calm-rand-7","sev":"MED","kind":"PAIR","why":"'books record no gang, guild or racket' but INCOME has Black Market Revenue 17%; page says fencing, theft, money made outside the law","other":"C24761"}
+{"id":"C24918","town":"bar0-thorp-calm-rand-7","sev":"LOW","kind":"PAIR","why":"magic Legality 'regulated' beside Institutional control 'unregulated'","other":"C24919"}
+{"id":"C25275","town":"bar0-thorp-calm-rand-8","sev":"LOW","kind":"STATE","why":"grazing/water dispute with sides not speaking is in none of QUARRELS (none), TENSIONS (crime wave only), PAST","other":""}
+{"id":"C25301","town":"bar0-thorp-calm-rand-8","sev":"LOW","kind":"PAIR","why":"'members cannot agree', decisions left untaken, but the council shows '1 member' (C25297)","other":"C25297"}
+{"id":"C25320","town":"bar0-thorp-calm-rand-8","sev":"MED","kind":"PAIR","why":"quarrels 'settled before they come to blows' by family heads, but page says violence routine, no law enforcement, quarrels settled with fists and knives","other":"C25343"}
+{"id":"C25344","town":"bar0-thorp-calm-rand-8","sev":"MED","kind":"PAIR","why":"'Organized criminals now outweigh the law' but the page says crime is unorganized, diffuse, each working alone, no boss","other":"C25352"}
+{"id":"C25377","town":"bar0-thorp-calm-rand-8","sev":"LOW","kind":"PAIR","why":"magic Legality 'regulated' beside Institutional control 'unregulated'","other":"C25376"}
+{"id":"C25392","town":"bar0-thorp-calm-rand-8","sev":"LOW","kind":"PAIR","why":"page itself says a handful of things about the thorp 'cannot all be true at once' (record shows exports and black market beside Harvest 100% income)","other":""}
+{"id":"C25432","town":"bar0-thorp-calm-rand-8","sev":"MED","kind":"PAIR","why":"friendship 'warm and public' but Isidor's card wants it kept quiet, and 'neither has said so aloud'","other":"C25417"}
+{"id":"C25445","town":"bar0-thorp-calm-rand-8","sev":"MED","kind":"STATE","why":"'Things are fine... not tight' but safety Dangerous, stability Tense, Legitimacy Crisis, food Pressured, Law & order Critical","other":""}
+{"id":"C25483","town":"bar0-thorp-calm-rand-8","sev":"LOW","kind":"PAIR","why":"shape kept from after the religious conflict (96y ago), but all now 'built after' the Occupation (77y ago) by different people","other":"C25029"}
+{"id":"DONE","lines":1386,"blocks":3,"flags":24}
