@@ -146,6 +146,49 @@ only `tests/lint/factLayers.register.json`, so `3d86b706`'s `src/`, build and bi
   `src/data/institutionDescVariants.js` and `institutionalCatalog.js`). Nothing of this lane moves a birth.
 - **The door before (2b):** 29 rises, 20 falls. The market pair is the only row naming `criminalStructureKey.js`.
 
+## The third merge, (2b) as the last commit, and the proofs at the FINAL TIP `cb17872e`
+
+When (2b) was first committed, `git fetch` showed that the join had moved again, to `061db1367` (JOIN-11 points 1–2: TAIL-CLOSE-SRC-3 and
+TAIL-CLOSE-PRESUMED-1). That commit was unpushed. It was dropped in the scratch tree, and the join was merged (`21de669e`, clean; it touched
+`crimeSignal.js` and the generators, NOT the readers register). Then (2b) was made again on top as `cb17872e`, alone: the register file only.
+This docs commit follows it and touches no code or register.
+
+- **The door at `cb17872e`:** 18 rises, 19 falls (19 and 20 before (2b)). NO row names `criminalStructureKey.js`, and no row my cut moved is fresh or
+  stale. The one remaining `defenseDisplay.js` crime rise is the joined line's own.
+- **The arm's count across the lane:**
+
+  | | rises | falls |
+  |---|---:|---:|
+  | the merge point `b805b1de` | 31 | 19 |
+  | after (2a) | 30 | 20 |
+  | after the `d5d1208ee` merge | 29 | 20 |
+  | after the `061db1367` merge | 19 | 20 |
+  | after (2b), FINAL | 18 | 19 |
+
+  Every step not mine is the join's.
+- **Type check:** `typecheck:ratchet` 0, `typecheck:domain:strict` 0.
+- **Build, plain and flagged:** exit 0. Boot smoke: plain PASS (602/602), FLAGGED PASS (600/600).
+- **Guards:** green for `engineCoreLazyEdge` 3/3, `layerBoundaries` 8/8, `bootSmoke` 11/11, `cultureProfilesLazy` 5/5, `engineChunkLazy` 19/19,
+  `sourceCitationIntegrity` 18/18 and `factLayers.walker` LEAVES. `factLayers.walker` READERS is red on the join's own rows only (it is red at
+  `061db1367` too). `vendorPdfLazy` has the owner's 4 budget arms.
+- **First paint, like for like against `061db1367` built alone:**
+
+  | | the join `061db1367` | the final tip |
+  |---|---:|---:|
+  | raw | 1,130,147 | 1,130,147 |
+  | gzip | 360,013 | 360,050 |
+  | Brotli | 302,220 | 302,022 |
+  | engine chunk | 866,934 | 866,934 |
+
+  Per eager chunk the raw bytes are identical. The compression figures move both ways with the minifier's names. The cut adds nothing to the first paint.
+- **The 155 named test files:** 1,652 tests, 11 red in 6 files. Each of the 6 was run again at `061db1367` and is red there IDENTICALLY:
+  `generationWorkerLazy` 1, `chainPrintSites` 1 (the `dist` root), `defenceFactReaders` 1, `presumedThings` 2, `proseWiringCensus` 5, and
+  `factLayers.walker` READERS (the join reds 3 there, mine 1). None is mine.
+- **The 720 births at the final tree:** `9ff21fee7bd6a6de7277cfd4464d59a0dc91ee2e1b9fe60a86bc2e4a682b43f3`, 720 rows, 0 errors. That is
+  BYTE-IDENTICAL to the joined line's own tip `061db1367`, run beside it. The move from `533ac4a0…` and `6e0c0452…` is the join's
+  (TAIL-CLOSE-SRC-3's generator reads, and the data of JOIN-10 points 17–18). Nothing of this lane moves a birth.
+- The scratch worktrees (`wt`, `before`) remain registered under the main checkout's `.git/worktrees`. The main checkout was not touched.
+
 ## Named, not mine
 - The four court-bench reads of the facts in `defenseDisplay.js` (the src close seat's).
 - Every budget (above).
