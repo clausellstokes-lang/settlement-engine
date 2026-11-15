@@ -53,7 +53,7 @@ const FALSE = [
   ['r2s-mass_migration-city-3', 'Democratic assembly no stake yet', 'Democratic assembly must answer for it · it governs here'], // 06464
   ['r2s-mass_migration-city-2', 'Merchant oligarchy no stake yet', 'Merchant oligarchy must answer for it · it governs here'], // 13370
   ['r2r-hamlet-32', "Creditor's Representative no stake yet", "Creditor's Representative split · it speaks for the creditor the hamlet owes"], // K12: the verb; re-keyed by identity, TAIL-CRISIS-6 (K25 (a)): the debt's own party has its stake
-  ['r2r-village-57', 'Craft Guilds no stake yet', 'Craft Guilds have no stake yet · they could side with either camp'], // K12: the verb, agreeing
+  ['r2r-village-57', 'Craft Guilds no stake yet', 'Merchant Guilds gains · a rival claim to govern gains by it'], // K12: the verb, agreeing; re-keyed by identity, TAIL-CRISIS-6 (K25 (c)): the untouched row is silent by design, the section's other rows print
   ['r2s-religious_conversion-metropolis-1', 'A small voice in the metropolis’s affairs belongs to the New Faith Community.', 'The New Faith Community is suppressed in the metropolis.'], // 03046
   ['r2r-town-21', 'A small voice in the town’s affairs belongs to the Religious Authorities.', 'The Religious Authorities are suppressed in the town.'], // 03046's shape
 ];

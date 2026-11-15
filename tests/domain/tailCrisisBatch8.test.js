@@ -124,3 +124,34 @@ describe('a power the crisis itself raised is never stored as untouched by it', 
     }
   });
 });
+
+/**
+ * K25 (c): A POWER THE CRISIS HAS TRULY NOT TOUCHED TAKES NO ROW. "<power> has no stake yet" claims a future nobody knows;
+ * silence is true (`crisisPage.js :: composeCrisisPage`, display only; the record keeps the waverer's split). Each pair a
+ * (seed, power) whose row printed "has/have no stake yet" at aa78d1ec9 (red there), and prints no row now; the section's other
+ * rows still print (KEEP). The crisis page, the PDF and the Foundry journal all read this one composition.
+ */
+describe('a power the crisis has not touched prints no stake row', () => {
+  /** @type {Array<[string, string, string]>} */
+  const SILENT = [
+    ['r2s-under_siege-town-2', 'under_siege', 'Landed Gentry'], ['r2s-under_siege-city-0', 'under_siege', 'Arcane Orders'],
+    ['r2s-under_siege-metropolis-0', 'under_siege', 'Noble Houses'], ['r2s-under_siege-metropolis-2', 'under_siege', 'The Highborn Circle'],
+    ['r2s-famine-city-0', 'famine', 'The Landed Bloc'], ['r2s-famine-city-1', 'famine', 'Merchant Guilds'],
+    ['r2s-indebted-city-1', 'indebted', 'Military/Guard'], ['r2s-indebted-city-3', 'indebted', 'Military/Guard'],
+  ];
+  /** @param {string} seed @param {string} kind */
+  const rowsOf = async (seed, kind) => {
+    const { composeCrisisPage } = await import('../../src/domain/crisis/crisisPage.js');
+    return composeCrisisPage(birth(seed)).find((sec) => sec.type === kind)?.stakes || [];
+  };
+  it.each(SILENT)('%s (%s): %s prints no row (red at aa78d1ec9: "has no stake yet"); the record keeps its split', async (seed, kind, power) => {
+    const rows = await rowsOf(seed, kind);
+    expect(rows.map((k) => k.factionId)).not.toContain(power);
+    expect(rows.some((k) => /^untouched/.test(k.stake))).toBe(false);
+    expect(stakeOf(birth(seed), kind, power)).toEqual({ factionId: power, stake: 'split', reason: 'it could side with either camp' });
+  });
+  it('KEEPS the section\'s other rows (r2s-famine-city-1: the losing seat, the gaining crime, the quarrel)', async () => {
+    const rows = (await rowsOf('r2s-famine-city-1', 'famine')).map((k) => `${k.factionId} ${k.stake}`);
+    expect(rows).toEqual(expect.arrayContaining(['Merchant Guild Council loses', "Thieves' Guild gains", 'The Commercial Circle atOdds']));
+  });
+});
