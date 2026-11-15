@@ -444,7 +444,7 @@ export function withoutShownSentences(note, shown) {
  * occupation the power the occupation sent in decides (factionDynamics.js: the hall "carries out what" it "decides"),
  * whatever the figures: the note named the strongest power ("made by Merchant Guilds" beside "The Guild Council carries
  * out what Occupation Authority decides"). Elsewhere the decider is the outranking rival, the fact the relation line reads.
- * An occupier is filed under the military category, so its name decides too (crisisCast.js :: isOccupier's rule).
+ * An occupier is filed under the military category, so its name decides too (crisisCast.js :: isOccupier's rule, less its `garrison rule` alternative: no generated name carries it, and its defence word is the defence home's to read: BAR2-PEOPLE-3, the books, defenceFactReaders).
  * @param {RulingPowerSettlement | null | undefined} settlement
  * @returns {string | null}
  */
@@ -453,7 +453,7 @@ export function deciderOf(settlement) {
   if (!governing) return null;
   const factions = /** @type {StrataFaction[]} */ (Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : []);
   const occupier = factions.find((f) => f !== governing && nameOf(f) !== nameOf(governing)
-    && (factionArchetype(f) === 'occupation' || /occupation|occupying|garrison\s+rule|imperial\s+presence|annex/i.test(nameOf(f) || '')));
+    && (factionArchetype(f) === 'occupation' || /occupation|occupying|imperial\s+presence|annex/i.test(nameOf(f) || '')));
   return occupier ? nameOf(occupier) || null : outrankingRivalOf(settlement);
 }
 
