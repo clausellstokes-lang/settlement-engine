@@ -14,73 +14,71 @@ Every run went to a file in the seat's scratch tree; nothing below is read from 
 | 4 | `tests/domain/r3c8ReaderLinesTrue.test.js` | 1 failed / 8 |
 | 5 | `tests/domain/crisisBlindDossierProse.test.js` | 2 failed / 5 |
 
-## Red 1 — the corpus's cure guards: the measurement refutes the brief for most rows
+## Red 1 — the corpus's cure guards: GREEN, 118/118 (rulings C26 and C27, vetoable by the owner)
 
 THE CENSUS. One script over the file's own births (DEFAULT_CONFIG is the 720's DIALS shape; forced crisis,
 Random off, priorities randomised; every public prose site drawn through the kernel's `drawVariant`), 1,050
 towns: the six sizes x 25 seeds (`w5-<size>-<crisis>-<n>`) under occupied, under_siege, plague_onset, calm, famine,
-indebted, monster_pressure, plus the 37 original seeds. For each row it records whether the pool is read, its
-eligible set, and the kernel's own `declarationAdmits(...).refused` for every line of the pool. A town qualifies
-for a re-key only where the pool draws, the cured line is not eligible, and the line's refusal is its cure alone
-(so the line could print but for the cure).
+indebted, monster_pressure, plus the 37 original seeds. It recorded, per row, whether the pool is read, its eligible
+set, and the kernel's `declarationAdmits(...).refused` for every line of the pool.
 
-THE FINDING. In 43 of the 57 rows, EVERY line of the pool now carries the row's own disqualifier (or needs a
-case the town cannot have), so under that case the pool is mute by declaration and no town can show the row's
-control ("another line of the pool draws"). The cure did not come undone; it became the whole pool's silence.
-Six more rows are logical contradictions of the pool's own split, and seven are states no town of the 1,050
-reaches. Only one row can be re-keyed as briefed.
+THE FINDING (batch 1, `b46b83871`). Of the 57 red rows, 43 guard pools EVERY line of which now carries the row's own
+disqualifier (the cure widened into the pool's silence under the case); 7 more are mute at their town by the pool's
+own split (the claim's sub-pool is off the case); 6 are states no town of the 1,050 draws the pool in; 1 re-keyed as
+briefed (DS-DEF-11 v3 → `w5-town-under_siege-6`, the births moved). Nothing deleted.
 
-### Re-keyed
+### C26: the declared-mute shape (50 rows)
 
-| row | was | now | move |
-| --- | --- | --- | --- |
-| DS-DEF-11 WALLED-STRAINED v3 (`no soldiers`) | w5-city-under_siege-1 (no longer reads the pool) | w5-town-under_siege-6: the pool draws v4; v3's only refusal is `no soldiers` | the births moved |
-
-Red-first: with `no soldiers` struck from v3's marks in `defense.generated.js` the row reds
-("v3 is eligible at w5-town-under_siege-6: expected [3, 4] to not include 3"); restored, green. 57 → 56 failed.
-
-### NAMED, NOT DELETED: the pool is mute under the row's case by declaration (43 rows)
+A `mute` row names the declaring commits; the row asserts that the town READS the pool and that the pool's eligible
+set there is EMPTY; it reds if the pool speaks there again. The 43 and the 7 split rows (whose split leaves the claim's
+own sub-pool mute at the town, so the shape is the split's form):
 
 | pool (rows) | case | declared mute by |
 | --- | --- | --- |
-| DS-GEN-17 GARRISONED v1, v2 | occupied | `bc81c24f8` (v1 and v2 off an occupation) |
+| DS-GEN-17 GARRISONED v1, v2 | occupied | `bc81c24f8` |
 | DS-POW-5 FLAG: merchantArmy v1, v2 | occupied | `a9a457f7a` |
-| DS-GEN-13 ENTREPOT v1 | under_siege | `32ab37da` (one of red 5's four) |
-| DS-POW-6 operation role duty evasion v1, v2, v3 | under_siege | `f8e7326ce` (red 5's four) |
-| DS-ECO-10 POSTURE: vulnerable v1, v3 | under_siege | `c21abdd5` (red 5's four) |
-| DS-DEF-2 Beasts: settled, nothing organized v6 (x2) | under_siege; occupied | `35acb7794` (red 5's four) |
-| DS-ECO-1 C4 v1, v2, v3 (city), v6 (thorp) | plague_onset | `7959b65eb`, `fc06bdd35` (v4, v5, v7 need a siege) |
-| DS-ECO-9 much of it brought in v1, v2, v3 | plague_onset | the economy desk's `c20c37b1d` family |
-| DS-DEF-2 walls AND professional garrison v1, v2, v3 | occupied | `1dfa83d89` (v4 needs a siege) |
-| DS-DEF-5 NO organized force at all v1, v2, v3 | occupied | `7f8640a48` (v4-v6 need a siege or war) |
-| DS-DEF-1 readiness ADEQUATE v1-v4 (4 rows) | occupied | `9b0af88f7` (the pool is not read under an occupation at all) |
-| DS-DEF-2 frontier, credible deterrence v4 | occupied | `1796fe3ae` (v1-v3 off a threat at hand) |
-| DS-DEF-12 CAPACITY: enough v1, v2, v3 (5 rows) | food ≥ pressured | `6cf44c66d`, `dbe696025` (v3 takes its siblings' food condition) |
-| DS-DEF-11 WALLED-STRAINED v1, v2, v5, v6, v7 (5 rows) | occupied | `440f40cfc` and W2-WRITE-7 B (v3, v4 need a siege) |
-| DS-DEF-2 neither walls nor force v4 | occupied | `4fb84c1cf` (every no-force or watch-only line) |
-| DS-DEF-2 walls with NO force v1, v4 | occupied | `ad5a8c846` (v6, v7 need a siege) |
+| DS-GEN-13 ENTREPOT v1 | under_siege | `32ab37da` |
+| DS-POW-6 operation role duty evasion v1, v2, v3 | under_siege | `f8e7326ce` |
+| DS-ECO-10 POSTURE: vulnerable v1, v3 | under_siege | `c21abdd5` |
+| DS-DEF-2 Beasts: settled, nothing organized v6 (x2) | under_siege; occupied | `35acb7794` |
+| DS-ECO-1 C4 v1, v2, v3 (city), v6 (thorp) | plague_onset | `7959b65eb`, `fc06bdd35` |
+| DS-ECO-9 much of it brought in v1, v2, v3 | plague_onset | `c20c37b1d` |
+| DS-DEF-2 walls AND professional garrison v1, v2, v3 | occupied | `1dfa83d89` |
+| DS-DEF-5 NO organized force at all v1, v2, v3 | occupied | `7f8640a48` |
+| DS-DEF-1 readiness ADEQUATE v1-v4 (4 rows, `unread`) | occupied | `9b0af88f7`, and `1ad5ca6e7` (the posture row silent) |
+| DS-DEF-2 frontier, credible deterrence v4 | occupied | `1796fe3ae` |
+| DS-DEF-12 CAPACITY: enough (5 rows) | food ≥ pressured | `6cf44c66d`, `dbe696025` |
+| DS-DEF-11 WALLED-STRAINED v1, v2, v5, v6, v7 (5 rows) | occupied | `440f40cfc`, `8c63fd2ed` |
+| DS-DEF-2 neither walls nor force v4 | occupied | `4fb84c1cf` |
+| DS-DEF-2 walls with NO force v1; v4 (re-keyed `rww-town-occupied-1` → `w5-thorp-occupied-8`, the births moved) | occupied | `ad5a8c846` |
+| SPLIT: DS-ECO-12 INCOME WEIGHT religious v3, v4 (thorp, siege) | under_siege | `3ae4b5ab1` (v1, v2 off thorps and hamlets), `13c6618e0` (v3, v4 off a siege) |
+| SPLIT: DS-ECO-12 INCOME WEIGHT religious v1, v2 (hamlets) | tier | `3ae4b5ab1`; v3, v4 speak only with no sacred house |
+| SPLIT: DS-ECO-12 CRITICAL IMPORT v3 | under_siege, deep stores | `6bca79928` |
+| SPLIT: DS-ECO-6 TIER: minor v0 (x2) | famine; under_siege | `c20c37b1d`, `0aa8326fe` (v1-v3 dm-only, v4, v5 organised crime) |
 
-### NAMED: the pool's own split contradicts the control (6 rows)
+THIS SEAT'S CALL (vetoable): DS-DEF-1's readiness pools are not READ under an occupation at all (the site is silent,
+`1ad5ca6e7`), so C26's "reads the pool" cannot hold; those four rows (`unread: true`) anchor on the town's reading of
+another DS-DEF-1 pool (each reads `terrain EXPOSED` or `strategic value HIGH`) and assert the pool does not speak.
 
-- DS-ECO-12 INCOME WEIGHT: the religious houses v3, v4 (thorp, siege) and v1, v2 (hamlets, `tier: ≥ village`):
-  v1/v2 need a sacred house and a village or larger (`3ae4b5ab1`), v3/v4 need no house and no siege. Wherever the
-  cured line could print, every sibling is refused, so the pool is empty there.
-- DS-ECO-12 CRITICAL IMPORT v3 (`stores: < 6`, siege): v1, v2 are off a siege, v3 is the siege line
-  (`6bca79928`); under a siege with deep stores the pool is empty.
-- DS-ECO-6 TIER: minor v0 (famine; siege): without organised crime only v0 is public (v1-v3 are `dm-only`, v4, v5
-  need organised crime). A `by: 'record'` form would show the claim (v1-v3 admitted by the record); that is a shape
-  change, asked of the chair, not made.
+### C27 (ii): the states no town reaches (6 rows), none retired
 
-### NAMED: the state is gone from the 1,050 (7 rows)
+- DS-ECO-11 EXPLOITATION: fullyExploited v2, v3, v4 (siege), DS-DEF-2 walls with NO force v6 (`no watch`), DS-DEF-2
+  Beasts: settled, nothing organized v6 (`no guardPresence`): a MADE RECORD, built by the file's own `by: 'record'`
+  form at the rows' own seeds: each town's real record read through the kernel's one rule, where the cure is the
+  line's ONLY refusal and a sibling of the pool is admitted (v5, v7, v1-v3 respectively).
+- DS-DEF-1 readiness CRITICAL v3 (walls): `walls` is a dimension word (read by the live draw, not by the record), so
+  the row stays a live draw, re-keyed `w5-town-famine-6` (walled, no longer reads the pool) → `w5-town-famine-4`
+  (walled, the pool draws v2, v4; v3's marks admit it, the walls dimension keeps it out): the births moved.
 
-- DS-ECO-11 EXPLOITATION: fullyExploited v2, v3, v4 (siege): the pool is not read in any of the 1,050 towns.
-- DS-DEF-1 readiness CRITICAL v3 (walls): read in 184 towns, none walled.
-- DS-DEF-2 walls with NO force v6 (`no watch`, siege): read in 21 towns, none with a watch.
-- DS-DEF-2 Beasts: settled, nothing organized v6 (`no guardPresence`, monster_pressure): read in 154, none guarded.
+### Proof
 
-A QUESTION TO THE CHAIR: for the 43 rows the corpus has made mute by declaration, the shape that guards what is
-true now is red 5's approved one: the row's town reads the pool, its eligible set is empty, and the declaring commit
-is named. No row is converted to that shape without the word.
+- Alone: 57 failed → 56 (batch 1) → 0 of 118.
+- Red-first, with a cure struck from the corpus (restored after): `GARRISONED v1` without `no crisis: occupied` reds both
+  GARRISONED mute rows ("speaks at w5-metropolis-occupied-101 ... expected [1]"); `fullyExploited v3` without its siege
+  mark reds its record row; `readiness CRITICAL v3` without `no walls` reds its row and the hamlet row beside it;
+  `WALLED-STRAINED v3` without `no soldiers` reds batch 1's row.
+- eslint clean; `typecheck:ratchet` OK (167 ≤ 167); no other test names the file; the anchor and seed-loop walkers are
+  red with other seats' files only (none of this file). What a town prints: unchanged (0 of the 720).
 
 ## Red 4 — `r3c8ReaderLinesTrue`: GREEN (the chair's word: red 4 is this seat's)
 
@@ -116,8 +114,11 @@ identical set of six other files (not this one, not this seat's). What a town pr
 Not yet reached (red 3 waits for the chair's word; red 5's test file is MOVING on `lane/tail-crisis-2026-11-14`,
 as the rule expects until `325de515` is on the line).
 
-## Proof at this push
+## The sixth (DS-GEN-13 "a market, no guild", the facts' layer walker)
 
-- `tests/domain/corpusCureGuards.test.js` alone: 57 failed before, 56 after; the re-keyed row reds with its cure undone.
-- No other test file names it. eslint on it: clean. `typecheck:ratchet`: OK, 167 ≤ 167.
-- No golden, register or census re-taken; no source file touched; what a town prints does not change (0 of the 720).
+Not yet reached at this push.
+
+## Pushes
+
+`b46b83871` red 1 batch 1 · `6a3871de1` red 2 · `7105cf317` red 4 · this push: red 1 to green (C26, C27).
+Each red's own proof is in its section. No golden, register or census re-taken; no source file touched.
