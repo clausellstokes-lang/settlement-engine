@@ -4,7 +4,7 @@ Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY
 Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
 Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the chair's lane (211 rows, read at e5b421802).
 
-**STATE (TAIL-HISTORY-3): batch 3 (Y13, every tension type) LANDED; batch 4 (Y14, the arrival pool) see below.** TAIL-HISTORY-2's state: **batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** (7bef72cbc). **HANDED BACK** at the budget
+**STATE (TAIL-HISTORY-3): batch 3 (Y13, every tension type) LANDED; batch 4 (Y14, the arrival pool) LANDED. HANDED BACK at the budget (2026-11-15): what is left is under WHAT IS LEFT (TAIL-HISTORY-3).** TAIL-HISTORY-2's state: **batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** (7bef72cbc). **HANDED BACK** at the budget
 (2026-11-15 01:50): what is left is listed under WHAT IS LEFT below.
 
 ## TAIL-HISTORY-3 (2026-11-15): the chair's rulings since (each vetoable by the owner)
@@ -73,6 +73,92 @@ Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the cha
 **Read with a note (not false by the record; for the chair):** the leadership vacuum's twin under an occupation (r2s-occupied-hamlet-3) claims no more than the words it replaced ("no one has yet consolidated their position"). The outside debt's hook "A creditor's agent is in town…" still prints under a siege (X9 03015, 60 towns: the template's own hook, both forms): the siege law's cure is a declaration on that hook (it moves the `hookTablesDeclared` pin), LEFT for the next batch.
 
 **Gates at the cure** (gate-tail.sh): typecheck:domain:strict 0, typecheck:ratchet 0, eslint on the touched files 0. The presumed-things walker equals the base (fresh 147, stale 0; it exits red at the base too, carried). Grid: 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), 0 rises, as at the base. The 31 test files that name historyData.js or historyGenerator.js: one red carried (urbanBandInstitutions G5, red at the base too); one red of the batch, re-keyed BY CAUSE: `tensionTemplateDeclaration.test.js` "no draw moved" strips `history.siegeNarrative` with the tensions (soak1k-2: the narrative copies the first tension's description), then green.
+
+## Batch 4: Y14, the arrival pool measured whole (TAIL-HISTORY-3, 2026-11-15)
+
+**The measure** (CENSUS-3 at 6f7786a78: every line of `src/data/arrivalProse.js`'s 214, rendered with the town's name and found in `arrivalScene` on the record; each line that names a house, a trade or a good read against the fact it needs, by `factsOf` + `atomHolds` over the corpus and the roster's names):
+
+| line (pool) | prints | false | the fact | cure |
+|---|---|---|---|---|
+| "A moneylender sits at a low table with a queue of familiar faces waiting." (PEOPLE.south_asian) | 23 | 12 (thorps and hamlets) | the size | `needs: ['tier: ≥ village']` + its twin |
+| "An apprentice hurries past on an errand, a master's mark stitched on his sleeve." (PEOPLE.germanic) | 23 | 13 (no smith, no guild) | a craft master | reworded, no noun |
+| "Horse traders show their animals at the edge of the settlement…" (PEOPLE.steppe) | 21 | 13 (no stable, stud, coaching house or horse chain) | horses | reworded, no noun |
+| "A broker sits in the shade, matching buyers to goods from routes you have never travelled." (PEOPLE.arabic) | 13 | 3 (`route: isolated`) | a route | `excludes` + its twin |
+| "Sacks of herbs and spices fill the carts…" (SENSES.herbs.dominant, colour) | 12 | 2 (isolated) | a road out | reworded, no carts, the colour mark kept |
+| "Bolts of cloth and bales of wool fill the carts waiting on the road out." (SENSES.cloth.dominant) | 22 | 1 (isolated) | a road out | `excludes` + its twin |
+| "A clerk records every cartload that passes in a careful ledger." (PEOPLE.east_asian) | 20 | 1 (isolated) | a route | `excludes` + its twin |
+
+**Struck, true in every printing town:**
+- The shrine set into a wall (SENSES.faith.lines[2], 8): a sacred house stands in all 8. The chair's "wall shrine" was a scene written by the chooser.
+- The pilgrims (faith.dominant 0 and 2, 18 and 17), the caravan broker (steppe 2, 16: no isolated town prints it), the wine shop (greek 3, 14: a tavern stands in all), the money changer (greek 2, 5: a bank), the mills and the grain carts (bread, 13 and 1: a mill), the market lines and the fish stalls (a market), and the seasoning planks, the flour sacks, the ore carts and the brewers' carts (no isolated town prints them).
+- "@ is loud with horses" (horses.dominant 1, 2): r2r-hamlet-57 has a stable yard, and r2s-famine-town-1 has its inns and a crossroads.
+
+**THE FIRST CURE MOVED DRAWS, and was replaced before commit.** My first form was a bare declaration, so the pool's next line would print. The after-run (CENSUS-3 on the declarations alone) showed 3 towns whose OTHER beats re-drew: r2r-thorp-9 (the poor line), r2r-hamlet-43 (the poor line) and r2s-politically_fractured-town-2 (the latin patron). It also showed 2 towns that swapped a true line inside the same pool: r2s-politically_fractured-thorp-3 and r2s-indebted-thorp-2 (water → food).
+- The cause is the chooser's redraw-once (`arrivalScene.js :: drawAdmitted`). A refused first draw spends one more draw on the scene's stream, so every later beat shifts.
+- The file's own form keeps the draw. A declared twin (`twinOf`, admitted where the original is refused) takes the slot and spends no redraw.
+- With the four twins, I birthed all 720 towns and compared the scenes with the census at 6f7786a78. 73 scenes changed, every one in exactly the cured slot. 647 are identical, and nothing else moves.
+- I did not take a second full census at the final form: the 720 births compare `arrivalScene`, the only field this pool writes. **The next seat's first census is this batch's true after-run.**
+
+**The cure** (`src/data/arrivalProse.js`; `arrivalScene.js` is untouched, the narrative seat's):
+- The 4 declarations, each with its twin.
+- The 3 rewords.
+- **THE DECLARED MOVE:** `arrivalScene` in 73 towns (75 on the declarations-only run, minus the 2 in-pool swaps the twins removed). Nothing else moves.
+- Tabs on the declarations-only run: 29,957 → 29,957 sentences. Exports: 35,882 → 35,882.
+
+**The guard, red first.** `tests/data/tailHistoryBatch4.test.js` checks 8 towns. Each must not print the false words, and must print the reword or the twin on the same slot.
+- Red at 5ed2900cd: 8 of 8. Green at the cure.
+- KEEP covers r2r-thorp-43 (the broker), r2r-thorp-47 (the clerk), r2r-town-0 (the cloth carts) and r2r-village-40 (the moneylender). These are green before and after.
+
+**Re-keyed by identity:**
+- `textOf.test.js`: the arrival tables' object rows go from 119 to 124. That is the moneylender's declaration and the four twins.
+- `arrivalIndebtedDistrictTwin.test.js` REST pin for r2r-village-47 (isolated): the herbs line's reword.
+
+**Gates:**
+- eslint on the touched files 0.
+- The walker equals the base (fresh 147, stale 0).
+- Grid: 2 falls, 0 rises (the same as the base).
+- 24 arrival test files green: census2d/2e/2f tables, declaredMoves, the batch-1 guard, the W2-FIX-DATA rows, every `tests/generators/arrival*`, narrativeArrival, terrainPoolsSeaWords and textOf.
+- The type gates run at the push (the lane's pre-push).
+
+**THE VETO LIST (VETOABLE wording, the owner's; the towns read):**
+- "An errand-runner hurries past, a household's mark stitched on his sleeve." 23 towns: r2r-thorp-4, r2r-city-56, r2s-under_siege-metropolis-0.
+- "Herders show their animals at the edge of the settlement, where herders and townsfolk meet." 21 towns: r2r-thorp-3, r2r-metropolis-47, r2s-famine-city-2.
+- "Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes." 12 towns: r2r-village-47, r2r-city-40, r2s-occupied-metropolis-1.
+- "A broker sits in the shade, matching buyers to whatever the neighbours have to spare." Where no route reaches: r2r-thorp-9, r2s-wartime-thorp-2, r2s-wartime-thorp-3.
+- "A clerk records every sack and basket that comes in from the fields in a careful ledger." r2r-thorp-48.
+- "Bolts of cloth and bales of wool are stacked high in the workshops, more than the place can wear." r2s-politically_fractured-town-2.
+- "An old woman sits at a low table by her door, and the neighbours stop to settle what they owe her." 12 thorps and hamlets: r2r-thorp-57, r2r-hamlet-43, r2s-famine-thorp-1.
+
+## WHAT IS LEFT (TAIL-HISTORY-3's hand-back, 2026-11-15, widest first)
+
+1. **X9's lasting effects** (the timeline events' `lastingEffects`, PDF/HistoryFounding). The file's form is a `HISTORY_DESC_SIBLINGS` entry with its condition and a twin, or silence (`sizedLastingEffects.js`, draw-free).
+   - The measure at 6f7786a78 counts towns printing each effect / towns with no watch AND no militia / towns below town. The atoms `court` and `institution: granary` read exactly the below-town count, which should be checked before keying by them.
+   - "Denunciation records from the panic remain sealed in the archive" (07927): 202 / 53 / 65.
+   - "A standing security office and informant network persist" (03878): 184 / 41 / 57.
+   - "Watch towers and muster drills maintained since the alarm" (30563, HIGH): 157 / 28 / 46.
+   - "A standing levy roster kept ready in the … archive" (03872-03877): 142 / 25 / 34. `militia` is absent in 133 of them.
+   - "Two rival congregations still divide…" (00590): 136.
+   - "Wage disputes settled by a standing arbitration council" (29930): 112.
+   - "Price ceilings…": 51. "Emergency grain reserves mandated by ordinance" (08729): 46.
+   - The oversight office 30, the regency council (03675) 30, the council seats split (07361) 29, the competing partial authority (22748) 28, the charters lodged with the court (22746) 25.
+   - The instrument: `le.mjs`, a 30-line node walk of `historicalEvents[].lastingEffects` with `factsOf` / `atomHolds`.
+2. **X9 03015, the creditor's agent "in town" under a siege** (60 towns, the outside debt's hook in both forms). The siege law applies, but the hook takes `excludes: ['crisis: under_siege']` only with the `hookTablesDeclared` pin re-keyed. Also the leadership vacuum's DATED form (B19917: the Interregnum 319 years ago, the vacuum still "not yet consolidated"). Y13 ruled the unanchored form only.
+3. **The worklist's other wide rows:**
+   - 16625 is DONE by Y13 for the unanchored towns (139 → 32). The 32 left are the timeline's guild war, past and true.
+   - B15078 is cured where unanchored (165 → 28). The 28 that remain are anchored and print "Price regulators" in small places. That is a size law for the template's own factions, the chair's call.
+   - 11894 and 28512 (foodways, Y3); B19917 and 07400; the Y3 culture rows; the rest of Y4; **Y8** (no gathering under a plague or a quarantine).
+4. **Y9 / Y11 (20031, 20032):** parked until the chair's word on `ruling body`.
+5. **Named for other files:**
+   - `siegeCapability.js`: its siegeNarrative copies the first tension's words, moved in 42 towns by batch 3 and printing nowhere.
+   - `crisisSummaryVantage.js`, `TraditionsTab.jsx` (Y15) and `arrivalScene.js` (the chooser's own scenes; the redraw-once rule above is why a bare declaration in its pools moves later beats).
+6. **Registers named stale** (for the close's re-take):
+   - The engine bundle carries none of batches 1-4.
+   - The arrival ledgers (`docs/census/declarations/ARRIVAL_*.json`) do not list the batch-4 declarations and twins. No test reads them against the live lines; census2d/2e are green.
+   - The batch-1 items above.
+7. **Instruments, re-made** (as above, plus):
+   - The Y13 measure: `y13measure.py` / `y13desc.py`, the tensions per type with no own `templateType`.
+   - The arrival measure: `arrlines.mjs`, each pool line rendered with a marker and matched in `arrivalScene`, then `facts.mjs` (`factsOf` + `atomHolds` per town).
+   - The 720-scene birth compare: a throwaway vitest that writes `arrivalScene` for the census seeds with the batch tests' `bornCensus`. It reproduces the census births exactly (647 of 647 unchanged scenes identical).
 
 ## The chair's rulings since (2026-11-15 00:30 UTC; each vetoable by the owner)
 
@@ -247,7 +333,7 @@ The patch was applied unchanged at 8b90e7753, with these additions:
 - **Y11:** the two new atoms (`ruling body`, `rival power`). No row of mine was keyed after Y5, so NOTHING IS MERGED. The candidates for the next seat are 20031 and 20032 (Y9), and the succession and insurgency texts if the chair wants their plurality back under `ruling body`.
 - **Y12:** the four arrival scenes (shrine, stables, carts of cloth, horse traders) are written by `src/generators/narrative/arrivalScene.js`. **It is not in this group's file list**, so it is NAMED for the chair to rule. The arrival POOLS this group holds (`src/data/arrivalProse.js`) are owed the chair's whole-pool measure: each line that names a house, a trade or a good, with the towns where the thing does not stand. NOT WORKED.
 
-## WHAT IS LEFT (TAIL-HISTORY-2's hand-back, 2026-11-15, widest first)
+## WHAT IS LEFT (TAIL-HISTORY-2's hand-back, 2026-11-15; SUPERSEDED by TAIL-HISTORY-3's list above, kept as record)
 
 1. **Y5 widened** (the chair's call): the same shape in the other tension types.
    - trade_dispute: 7 rows, 12 towns.
