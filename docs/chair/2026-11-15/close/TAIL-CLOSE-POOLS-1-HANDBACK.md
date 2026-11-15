@@ -114,11 +114,23 @@ identical set of six other files (not this one, not this seat's). What a town pr
 Not yet reached (red 3 waits for the chair's word; red 5's test file is MOVING on `lane/tail-crisis-2026-11-14`,
 as the rule expects until `325de515` is on the line).
 
-## The sixth (DS-GEN-13 "a market, no guild", the facts' layer walker)
+## The sixth (DS-GEN-13 "a market, no guild", `tests/lint/factLayers.walker.test.js`): NAMED
 
-Not yet reached at this push.
+The walker's POOLS arm reds on `DS-GEN-13::COMMERCE: a market, no guild` → "declares guild (layer 3)": the pool's
+table row is layer 3 (`factLayers.poolTable.json`), and the economy corpus's batch 7 (`4467cd7d6`, ruling C19) gave
+v1, v3, v4 `no guild` and added the twin v5 `guild`, because the lines are false beside a guild POWER (the pool's key
+reads the houses; the `guild` atom reads the powers too). The facts' law: a pool reads only facts below its own
+layer. The leaves below 3 (`src/domain/facts/factLayers.js`): commander, culture, guardPresence, hasInstitution,
+magic, market, migration, populationBand, route, sacredHouse, soldiers, terrain, tier, water (1); exports, famine,
+foodSources, imports, prosperity, storesMonths (2), with warState, crisis, defence (1). None says "a guild power stands"
+(the powers are homed at 3: guild, rivalPower, rulerKind, rulingBody), and a house test (`hasInstitution`) says
+something else (the key already holds "no guild house"). So no allowed fact says the same thing, and no forbidden read
+is declared. THE COUNT over the 720 (the census's own plan and births, every public site drawn): the pool is read
+and prints in 42 towns: v1 4, v2 5, v3 3, v4 6 (none beside a guild power), v5 24 (every one beside a guild power).
+The other four reds of that walker (the `keep` getter, the `crime` leaf's `npcs`, the LEAVES and READERS arms) are
+not this pool's and not this seat's.
 
 ## Pushes
 
-`b46b83871` red 1 batch 1 · `6a3871de1` red 2 · `7105cf317` red 4 · this push: red 1 to green (C26, C27).
+`b46b83871` red 1 batch 1 · `6a3871de1` red 2 · `7105cf317` red 4 · `9d19441bf` red 1 to green (C26, C27) · this push: the sixth named.
 Each red's own proof is in its section. No golden, register or census re-taken; no source file touched.
