@@ -23,6 +23,20 @@ const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
 /** @typedef {{ claim: string | RegExp, minor: (tier: string, ctx: RungContext) => string | null, suppressed: (tier: string, ctx: RungContext) => string | null }} ClaimRung */
 const MERCHANT_POWER = /merchant|trade|commerc|consortium|mercantile/i;
 const COUNCIL_SEAT = /council|assembly|senate|parliament|moot/i;
+/** Whether the governing power's name is a council's (one home for the seat's word: claimStanding and factionStanding read it). @param {unknown} governing */
+export const seatIsCouncil = (governing) => COUNCIL_SEAT.test(String(governing ?? ''));
+// TAIL-POWERS-B batch 2 (rows 06725, 18554, 10424 and their siblings: A COUNCIL NAMED WHERE NONE SITS): a claim that names
+// "the council" is printed under a seat that is no council (a Royal Authority, a Ducal or Noble Governorship, a Feudal
+// Stewardship, a Town Mayor: 46 cards of the census's 720 at 40238d3ab); there it names the seat as the estate's lines
+// do, "the hall". And the trade nexus's merchants "control warehousing" only where a warehouse stands (1 of the 5 there
+// held none). No draw; the label rungs above read the claims first.
+/** @type {ReadonlyArray<readonly [string, string]>} */
+const SEAT_WORDS = Object.freeze([
+  ['and fund the council.', 'and fund the hall.'],
+  ['and the council knows it.', 'and the hall knows it.'],
+  ['the council works alongside them, not over them.', 'the hall works alongside them, not over them.'],
+  ['expect council access in return.', 'expect access to the hall in return.'],
+]);
 /** The roster's merchant powers other than this one. @param {RungContext} ctx */
 const merchantsBeside = (ctx) => ctx.roster.filter((x) => x !== ctx.self && MERCHANT_POWER.test(String(x?.faction || '')));
 // POWERS-12 (REVIEW-POWERS-3 M1): a watch stands, read by the defence bucket's own words (the fact the ladder's watch
@@ -33,6 +47,28 @@ const LESSER_LANDED = 'Minor landed families with limited political reach; prese
 const LOCAL_MERCHANTS = 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.';
 // the town's leading merchant power, where no merchant power governs, is not "not yet the dominant commercial voice"
 const LEADING_LOCAL_MERCHANTS = 'Merchants with local reach; a consistent civic presence, though other powers set the course here.';
+// TAIL-POWERS batch 2 (the chair's ruling P1 of 2026-11-14: a power's standing in a sentence reads the power's own
+// strength): a Suppressed merchant power is no "consistent civic presence"; a Minor or Suppressed arcane power holds no
+// "real influence"; a Minor craft guild is no "persistent civic voice ... merchant houses must negotiate with", and a
+// Suppressed one no "reliable secondary presence". Each takes the line true at its label.
+const MERCHANTS_AT_MARGINS = 'Merchants with local reach; they trade here, but have little say in how the place is run.';
+const ARCANE_ADVISORY = 'Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.';
+/** TAIL-POWERS-B-2 (the chair's READ-ALL-4 HIGH, vetoable by the owner): where an arcane power GOVERNS, "not formally empowered" is
+ * false of magic; the practitioners outside the seat take this twin, true in that state. */
+const ARCANE_ADVISORY_UNDER_ARCANE_SEAT = 'Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.';
+// TAIL-POWERS-B-3 batch 7 (P1; row 29025, 8 Suppressed cards of 36 at 4ff449a7b): a Suppressed network "controls" no illicit
+// trade; it takes this twin, which claims no control.
+const CRIMINAL_IN_SHADOWS = 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.';
+const CRIMINAL_KEEPS_OUT_OF_SIGHT = "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade.";
+// TAIL-POWERS-B-3 batch 7 (P1; row 29028, 8 of 18 at 4ff449a7b): "the nominal government ... cannot currently change it" is false
+// where the seat's own label stands above the guild's; there the line says the seat is stronger. Read on the labels alone (the
+// chair's P29: not keyed on the capture state).
+const UNDERWORLD_CLAIM = 'Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.';
+const UNDERWORLD_UNDER_STRONGER_SEAT = 'Underworld effectively controls vice and key officials; the seat is stronger, but has not moved to break its hold.';
+/** @type {Readonly<Record<string, number>>} */
+const LABEL_RANK = Object.freeze({ Suppressed: 0, Minor: 1, Significant: 2, Strong: 3, Dominant: 4 });
+const CRAFT_SECONDARY = 'The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life.';
+const CRAFT_AT_MARGINS = 'The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops.';
 /** A merchant claim's rung. @param {string} _tier @param {RungContext} ctx */
 const merchantRung = (_tier, ctx) => !MERCHANT_POWER.test(ctx.governing)
   && merchantsBeside(ctx).every((m) => Number(m.power || 0) <= Number(ctx.self.power || 0)) ? LEADING_LOCAL_MERCHANTS : LOCAL_MERCHANTS;
@@ -44,6 +80,14 @@ const nobleMinorRung = (tier, ctx) => tier === 'town'
   : (merchantsBeside(ctx).length
     ? 'Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.'
     : LESSER_LANDED);
+/** The seat's respect lines and their twins under a legitimacy crisis (P4). @type {ReadonlyArray<readonly [string | RegExp, string]>} */
+const SEAT_UNDER_CRISIS = Object.freeze([
+  ['The oldest heads of the community decide things together; people follow them out of respect and custom, not law.',
+    'The oldest heads of the community still decide things together, but fewer and fewer people accept their word.'],
+  // the Elder Council's label line (rulingStructure.js), matched by pattern: its own wording is under that file's style baseline
+  [/^Respected elders guide the community; authority is moral and traditional [^.]*\./,
+    'Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word.'],
+]);
 /** @type {ReadonlyArray<ClaimRung>} */
 const CLAIM_RUNGS = Object.freeze([
   // the port claim is matched by its opening and replaced to its sentence's end (its tail is a phrase the style law strikes,
@@ -51,7 +95,16 @@ const CLAIM_RUNGS = Object.freeze([
   ...['International merchant houses controlling port licences and import flows;',
     'Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.',
     'Dominant commercial class; their capital and networks give them leverage even formal institutions must respect.',
-  ].map((claim) => ({ claim, minor: merchantRung, suppressed: merchantRung })),
+  ].map((claim) => ({ claim, minor: merchantRung, suppressed: () => MERCHANTS_AT_MARGINS })),
+  // TAIL-POWERS batch 2 (P1): the merchants' own lower rungs, read at Suppressed (true at Minor, so left there)
+  ...[LOCAL_MERCHANTS, LEADING_LOCAL_MERCHANTS, 'Established merchant community; fund civic works and expect council access in return.']
+    .map((claim) => ({ claim, minor: () => null, suppressed: () => MERCHANTS_AT_MARGINS })),
+  // TAIL-POWERS batch 2 (P1): the craft guilds' ladder (rulingStructure.js), read at the label; matched by pattern (the
+  // house's word is the rulingStructure.js line's own, declared there), as the church claims are
+  ...[/^Well-organised craft guilds with established trade monopolies; a persistent civic voice [^.]*\./,
+    /^Craft masters controlling production standards and apprenticeships; present in every civic dispute [^.]*\./,
+  ].map((claim) => ({ claim, minor: () => CRAFT_SECONDARY, suppressed: () => CRAFT_AT_MARGINS })),
+  { claim: /^Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life\./, minor: () => null, suppressed: () => CRAFT_AT_MARGINS },
   // the two church claims are matched by pattern (the house's word is the rulingStructure.js line's own, declared there)
   ...[/^\w+ institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical\./,
     /^\w+ holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight\./,
@@ -67,7 +120,7 @@ const CLAIM_RUNGS = Object.freeze([
   { claim: /^Major church institutions hold structural influence\. Land grants, [^.]*\./, minor: () => CLERGY_AT_MARGINS, suppressed: () => CLERGY_AT_MARGINS },
   // printed only where a merchant power governs: the merchants' rung
   { claim: 'The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.',
-    minor: merchantRung, suppressed: merchantRung },
+    minor: merchantRung, suppressed: () => MERCHANTS_AT_MARGINS },
   // the standing army (city and metropolis): the city watch's rungs, which name a watch, so only where one stands; with
   // none, no rung is true and the claim is left
   { claim: 'Standing army with genuine political weight; command appointments are patronage, and the council knows it.',
@@ -75,20 +128,23 @@ const CLAIM_RUNGS = Object.freeze([
     suppressed: (_tier, ctx) => watchStands(ctx) ? 'City watch; law enforcement and external defence, stretched between multiple responsibilities.' : null },
   ...['Arcane institutions hold substantial political leverage here. Contracts, security, and infrastructure all depend on magical services only they provide.',
     'Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it.',
-  ].map((claim) => ({ claim,
-    minor: () => 'Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.',
-    suppressed: () => 'Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.' })),
-  ...['Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.',
+    // TAIL-POWERS batch 2 (P1): "hold real influence" is the ladder's own line at a raw 11-16, which the multipliers leave
+    // Minor or Suppressed (all 111 towns printing it at bcad1a358): no rung of the arcane ladder below it claims influence
+    'Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.',
+  ].map((claim) => ({ claim, minor: () => ARCANE_ADVISORY, suppressed: () => ARCANE_ADVISORY })),
+  ...[UNDERWORLD_CLAIM,
     'Criminal organisations have captured significant influence; corruption is systemic, not exceptional.',
   ].map((claim) => ({ claim,
     minor: (/** @type {string} */ tier, /** @type {RungContext} */ ctx) => COUNCIL_SEAT.test(ctx.governing)
       ? 'Organised criminal network controls the black market and several informal revenue streams; present in council discussions through intermediaries.'
       : SMALL_TIERS.includes(tier)
         ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
-        : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.',
+        : CRIMINAL_IN_SHADOWS,
     suppressed: (/** @type {string} */ tier) => SMALL_TIERS.includes(tier)
       ? 'A local protection operation tolerated because the alternative is open conflict with people who know the terrain better.'
-      : 'Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.' })),
+      : CRIMINAL_KEEPS_OUT_OF_SIGHT })),
+  // TAIL-POWERS-B-3 batch 7 (row 29025): the ladder's own line, drawn or settled, read at Suppressed (true at Minor, so left there)
+  { claim: CRIMINAL_IN_SHADOWS, minor: () => null, suppressed: () => CRIMINAL_KEEPS_OUT_OF_SIGHT },
   { claim: 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.',
     minor: () => 'Hereditary landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them.',
     suppressed: () => 'Noble families with residual feudal claims; the formal obligations are real, but other powers set the practical agenda day to day.' },
@@ -109,10 +165,23 @@ const CLAIM_RUNGS = Object.freeze([
  * ladder's rung for that label in place of the claim; the rest of the description (a coda another writer added) is
  * kept. A rung reads the roster and the seat (RungContext); one that has no line true of the town (null) leaves the
  * description as it is. Mutates the roster in place, as the multipliers do. Pure of draws.
+ * THE SEAT UNDER A LEGITIMACY CRISIS (TAIL-POWERS batch 2; the chair's ruling P4 of 2026-11-14): the governing seat's line
+ * that says the people follow it out of respect is not printed where the record's legitimacy is in crisis (few accept its
+ * right to rule); it takes its twin, true in that state (SEAT_UNDER_CRISIS).
  * @param {Array<Record<string, any>>} factions @param {string} tier @param {string[]} [instNames] the roster's house names, lower-cased
+ * @param {{ isLegitimacyCrisis?: boolean } | null} [legitimacy] the step's public legitimacy (computePublicLegitimacy)
  */
-export function settleClaimsToLabel(factions, tier, instNames = []) {
+export function settleClaimsToLabel(factions, tier, instNames = [], legitimacy = null) {
   const governing = String(factions.find((x) => x?.isGoverning)?.faction || '');
+  if (legitimacy?.isLegitimacyCrisis === true) {
+    for (const f of factions) {
+      if (!f?.isGoverning || typeof f.desc !== 'string') continue;
+      for (const [line, twin] of SEAT_UNDER_CRISIS) {
+        const span = typeof line === 'string' ? (f.desc.startsWith(line) ? line.length : -1) : (line.exec(f.desc)?.[0].length ?? -1);
+        if (span > 0) { f.desc = twin + f.desc.slice(span); break; }
+      }
+    }
+  }
   for (const f of factions) {
     const label = f?.powerLabel;
     if (label !== 'Minor' && label !== 'Suppressed') continue;
@@ -128,6 +197,19 @@ export function settleClaimsToLabel(factions, tier, instNames = []) {
     const line = label === 'Minor' ? rung.minor(tier, ctx) : rung.suppressed(tier, ctx);
     if (line === null) continue;
     f.desc = line + desc.slice(end);
+  }
+  const seat = factions.find((x) => x?.isGoverning);
+  const arcaneSeat = seat?.category === 'magic';
+  const seatRank = LABEL_RANK[String(seat?.powerLabel)] ?? -1;
+  const warehouse = instNames.some((n) => String(n).includes('warehouse'));
+  for (const f of factions) {
+    if (typeof f?.desc !== 'string') continue;
+    if (!seatIsCouncil(governing)) for (const [said, twin] of SEAT_WORDS) f.desc = f.desc.replace(said, twin);
+    if (!warehouse) f.desc = f.desc.replace('they set prices, control warehousing, and fund', 'they set prices and fund');
+    if (arcaneSeat && !f.isGoverning) f.desc = f.desc.replace(ARCANE_ADVISORY, ARCANE_ADVISORY_UNDER_ARCANE_SEAT);
+    if (!f.isGoverning && seatRank > (LABEL_RANK[String(f.powerLabel)] ?? 99) && f.desc.startsWith(UNDERWORLD_CLAIM)) {
+      f.desc = UNDERWORLD_UNDER_STRONGER_SEAT + f.desc.slice(UNDERWORLD_CLAIM.length);
+    }
   }
 }
 

@@ -270,9 +270,12 @@ describe('an active crisis never reads as Stable (owner order 2026-09-17)', () =
 // The arcane branch now asks the GENERATION WORLD LAW first; the arm falls to its own
 // priest lines, which are belief and stand in any world.
 describe("no arcane governance line in a no-magic world (GS-4)", () => {
+  // TAIL-POWERS-3 batch 2 (re-keyed by identity): the heresy rung's church courts need a religious seat or a religious
+  // power of weight (P16's G3 atom), so the heresy town keeps one: the world-law question this pin asks is unchanged.
   const HERESY_TOWN = {
     stressFlags: { heresySuppression: true },
     instNames: ['alchemist shop', 'parish church', 'council hall'],
+    factions: [{ faction: 'Elected Reeve', isGoverning: true }, { faction: 'Religious Authorities', category: 'religious', power: 30 }],
   };
   const PRIEST_COURT = 'The priest has summoned someone before the church court. The village is divided on whether they deserved it.';
 

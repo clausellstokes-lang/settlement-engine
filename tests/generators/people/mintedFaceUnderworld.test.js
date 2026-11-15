@@ -78,7 +78,9 @@ describe('COHERENCE-POWERS-7 leftover 1 · the four minted faces of the census\'
     expect(hasGuild(s)).toBe(false);
     const faces = minted(s);
     expect(faces.filter((c) => GUILD.test(String(c.secret?.what || ''))).map((c) => `${c.title}: ${c.secret.what}`)).toEqual([]);
-    expect(faces.filter((c) => c.title === title).map((c) => c.secret?.what))
+    // RE-KEYED BY IDENTITY (TAIL-TITLES K-C): a minted face is found by the FACE it holds (`institution.title`); a woman
+    // lord's title reads "the lady" (r2r-metropolis-213's minted lord is a woman)
+    expect(faces.filter((c) => (c.institution?.title ?? c.title) === title).map((c) => c.secret?.what))
       .toContain('On the payroll of the local underworld as a silent informant');
   }), 'every minted face of the four towns reads "the local underworld", and no minted face names a guild the town lacks');
   }, 240_000);

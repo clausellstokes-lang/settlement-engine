@@ -30,12 +30,28 @@ const DECLARED = {
   'government#3': ['market'], 'government#14': ['tier: ≥ village'], 'government#17': ['tier: ≥ village'], 'government#18': ['tier: ≥ village'],
   'economy#7': ['tier: ≥ village'],
   'government#5': ['guardPresence'],
-  'military#0': ['guardPresence'], 'military#1': ['guardPresence'], 'military#3': ['guardPresence'],
+  'military#0': ['guardPresence', 'population: ≥ middling'], 'military#1': ['guardPresence', 'garrison'], 'military#3': ['guardPresence'],
   'military#5': ['guardPresence'], 'military#7': ['guardPresence'], 'military#10': ['guardPresence'],
   'religious#2': ['institution: temple'],
   'economy#3': ['market'],
-  'criminal#0': ['guardPresence'], 'criminal#6': ['guardPresence'],
+  'criminal#0': ['guardPresence'], 'criminal#6': ['guardPresence', 'watch'],
   'magic#2': ['magic'], 'magic#5': ['magic'], 'magic#6': ['magic'],
+  // TAIL-TIES, the chair's ruling (T3) of 2026-11-14 (re-keyed by identity with its cause): a traveller or a cousin comes
+  // only by open roads (no siege, no quarantine); goods arrive only by an open route; drinks are paid for at a tavern;
+  // a street is a village's or larger; the dead dispute-settler's seat stands open only under a succession crisis; the
+  // district (military#0) is the middling band's; the guard captain a watch's (criminal#6), the armoury a garrison's (military#1).
+  'economy#0': ['no crisis: under_siege', 'no route: isolated'], 'economy#2': ['no crisis: under_siege', 'no route: isolated'],
+  'economy#10': ['no crisis: under_siege', 'no route: isolated'], 'government#13': ['tier: ≥ village'], 'other#24': ['tier: ≥ village'],
+  'other#5': ['no crisis: under_siege', 'no crisis: plague_onset'], 'other#35': ['no crisis: under_siege', 'no crisis: plague_onset'],
+  'other#8': ['institution: tavern'], 'small_settlement#12': ['crisis: succession'],
+  // TAIL-TIES-2 (X9 row 28943; the chair's ruling (T3); re-keyed by identity with its cause): someone from outside the
+  // settlement is met only where the roads are open (the traveller's form).
+  'government#7': ['no crisis: under_siege', 'no crisis: plague_onset'],
+  // TAIL-TIES-2, the inheritors of (T7)'s walk (the same form): a visitor or an outsider at the gate of a besieged town
+  'small_settlement#0': ['no crisis: under_siege', 'no crisis: plague_onset'], 'small_settlement#15': ['no crisis: under_siege', 'no crisis: plague_onset'],
+  // TAIL-TIES-4, the chair's ruling (T18) of 2026-11-15 (re-keyed by identity with its cause): the cargo comes only by an open
+  // route (economy#6, with its inland twin in NPC_HOOK_SIBLINGS); the shop's note and its scales stand where a market does.
+  'economy#6': ['no crisis: under_siege', 'no route: isolated'], 'economy#17': ['market'], 'economy#18': ['market'],
 };
 
 describe('NPC_FACTION_LOYALTY declarations (CENSUS-3e)', () => {

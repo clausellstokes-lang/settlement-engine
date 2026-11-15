@@ -5,6 +5,21 @@
  */
 
 import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
+import { pluralPowerName } from '../../domain/display/governanceAccount.js';
+import { powerLabelOf } from '../factionDynamics.js';
+import { seatIsCouncil } from './claimStanding.js';
+
+// TAIL-POWERS batch 2 (the chair's ruling P1 of 2026-11-14): a standing sentence reads the strength of the power it names. A
+// craft guild the card prints as Minor or Suppressed is not "close behind, contesting every ... decision" nor "running close
+// behind ... in a sustained dispute": it takes the line its ladder already prints for a guild outpaced by the merchants.
+/** @param {{ power?: number }} f @returns {boolean} the power's label is Minor or Suppressed */
+const isWeakPower = (f) => ['Minor', 'Suppressed'].includes(powerLabelOf(f.power));
+// TAIL-POWERS-B-3 batch 7 (row 20053; P1, P3): the faith's card says "The arcane orders have more say" of the FIRST arcane
+// power on the roster; where that is a governing Arcane Council, the Arcane Orders may stand behind the clergy (their own card
+// says so: 7 of the 17 towns at 4ff449a7b). The line names the rival it read, by its prose form and its number.
+/** @param {{ faction: string }} rival @returns {string} */
+const arcaneAheadSaid = (rival) => /arcane orders/i.test(rival.faction) ? 'The arcane orders have'
+  : powerSentenceName(rival.faction) + (pluralPowerName(powerSentenceName(rival.faction)) ? ' have' : ' has');
 
 // annotateFactionStanding — enrich faction descriptions with their position in
 // the (already normalised and sorted) power ranking (mutates in place).
@@ -69,7 +84,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
               ? (standing = topTwoGap <= 5
-                  ? 'Three powers stand almost level here, and no one leads; every council vote has to be bargained for.'
+                  ? `Three powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.` // TAIL-POWERS-B: a vote only where a council sits
                   : 'They are always at the table, but cannot set their own terms.')
               : gapAbove <= 10
                 ? (standing =
@@ -95,7 +110,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
               var craftGuildNote =
                 craftGuildRival.power > power
                   ? 'The craft guilds currently carry more weight than they do, and the merchants are working to change that.'
-                  : craftGuildRival.power > power - 8
+                  : craftGuildRival.power > power - 8 && !isWeakPower(craftGuildRival)
                     ? 'The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.'
                     : 'The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.';
               standing = standing ? standing + ' ' + craftGuildNote : craftGuildNote;
@@ -107,9 +122,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             });
             if (merchantRival) {
               var merchantNote =
-                merchantRival.power > power + 8
+                merchantRival.power > power + 8 || (merchantRival.power > power && isWeakPower(faction))
                   ? 'The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.'
-                  : merchantRival.power > power
+                  : merchantRival.power > power && !isWeakPower(faction)
                     ? 'Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.'
                     : 'Ahead of the merchant guilds in current influence: an unusual position they intend to hold.';
               standing = standing ? standing + ' ' + merchantNote : merchantNote;
@@ -214,7 +229,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             if (arcaneRival) {
               var religiousArcaneNote =
                 arcaneRival.power > power
-                  ? 'The arcane orders have more say right now, and the clergy cannot accept it.'
+                  ? arcaneAheadSaid(arcaneRival) + ' more say right now, and the clergy cannot accept it.'
                   : "The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.";
               standing = standing ? standing + ' ' + religiousArcaneNote : religiousArcaneNote;
             }
@@ -240,7 +255,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             var religiousThievesNote =
               thievesRivalForReligious.power > power
                 ? 'The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.'
-                : 'They denounce the guild from the pulpit; the guild funds two charitable institutions and makes the denunciations look selective.';
+                : 'They denounce the guild from the pulpit; the guild gives openly to the poor and makes the denunciations look selective.' // TAIL-POWERS-B (22709): no charity house the town may not hold;
             standing = standing ? standing + ' ' + religiousThievesNote : religiousThievesNote;
           }
         }

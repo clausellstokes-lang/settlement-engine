@@ -35,6 +35,7 @@
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
+import { faceOfRole } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C: the rank keys the face
 
 /**
  * @typedef {'cathedral'|'parish'|'monastery'|'temple'|'chapel'|'shrine'} ChurchKind
@@ -256,7 +257,7 @@ function seniorClericOf(s) {
   for (const npc of Array.isArray(s.npcs) ? s.npcs : []) {
     const role = text(npc?.role);
     if (!role) continue;
-    const rank = CLERIC_RANKS.findIndex((re) => re.test(role));
+    const rank = CLERIC_RANKS.findIndex((re) => re.test(text(faceOfRole(npc)))); // TAIL-TITLES K-C: the face, not the holder's form
     if (rank < 0 || (best && best.rank <= rank)) continue;
     const spoken = role.split('/')[0].trim();
     const name = text(npc?.name);

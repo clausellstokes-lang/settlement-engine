@@ -110,8 +110,11 @@ export const STRESS_TYPE_MAP = {
     probability: 0.03,
     requiresTier: null,
     crisisHook:
-      "Three different powers have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
-    viabilityNote: "Big decisions wait for a new leader, and in the meantime each office does as it sees fit.",
+      // TAIL-HISTORY batch 1 (the chair's Y2; READ-ALL 00169 HIGH, 04385): "three different powers" and "each office"
+      // printed in a thorp of one power and no office; the words now claim no plurality of powers and no office (no
+      // atom counts the powers or the offices: a reword, no draw). VETOABLE wording (the owner's).
+      "The would-be successors have each approached the players for support, each believing theirs is the legitimate or best claim. Each of them is partly right.",
+    viabilityNote: "Big decisions wait for a new leader, and in the meantime the place gets by on old habit.",
     historyColour: "political",
   },
   monster_pressure: {
@@ -132,8 +135,10 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The governing power knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
+    // TAIL-HISTORY batch 1 (the chair's Y2; READ-ALL 18890): "some offices" printed in a hamlet of one headman; the
+    // households pay or refuse in every place. VETOABLE wording (the owner's).
     viabilityNote:
-      "Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.",
+      "Taxes are disputed, some households no longer pay at all, and the government runs on habit.",
     historyColour: "political",
   },
   religious_conversion: {

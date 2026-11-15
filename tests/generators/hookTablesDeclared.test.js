@@ -36,7 +36,9 @@ describe('the history hooks declare what their event does not guarantee', () => 
   // W2-FIX-DATA-HISTORY item E (2026-11-13, CENSUS-2): the plague's healer declares the healer, and the wild magic's
   // spreading district a town (re-keyed by cause: 18 → 20 rows). Item G (pf-160): the ailing and the poisoned ruler
   // exclude an elders' council too (re-keyed by cause; still 20 rows).
-  it('the twenty declaring rows carry their atoms, every atom declarable', () => {
+  // TAIL-HISTORY batch 1 (2026-11-15, the chair's Y1, Y7; READ-ALL 22261, 02538, B02462): the external threat's two war
+  // hooks ("wartime contracts", "the war party is suppressing") exclude `war: peace` (re-keyed by identity: 20 → 22 rows).
+  it('the twenty-two declaring rows carry their atoms, every atom declarable', () => {
     const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
     expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
       'succession_crisis: no ruler: council, no ruler: elder, no crisis: succession_void',
@@ -45,6 +47,8 @@ describe('the history hooks declare what their event does not guarantee', () => 
       'guild_conflict: guild',
       'guild_conflict: guild',
       'guild_conflict: market',
+      'external_threat: no war: peace', // TAIL-HISTORY batch 1: "…profits from wartime contracts"
+      'external_threat: no war: peace', // TAIL-HISTORY batch 1: "…the war party is suppressing"
       'resource_scarcity: market',
       'crime_wave: watch',
       'occupation_legacy: no crisis: occupied',

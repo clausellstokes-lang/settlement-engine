@@ -114,6 +114,19 @@ function inItsBody(cat, standing, factions) {
  * @param {{ standing: string, power?: string | null }} standing @param {Array<Record<string, any>>} factions
  * @param {readonly string[] | undefined} kinds @returns {boolean}
  */
+/**
+ * TAIL-TIES-3 (the chair's ruling (T11) of 2026-11-15, vetoable by the owner): the trade's and the old families' subordinate
+ * rows place the card's house BEHIND THE LEADING ONE of its kind ("Runs a smaller house behind the leading one", "the bigger
+ * houses take more of the trade"); where the town holds NO power of that kind (a hamlet whose only trade is a salt works, its
+ * master a member of the elders), there is no leading house and no bigger one, and the row is false: the card reads no row
+ * (the refusal's rule: it keeps its own goal and claims no position). @param {string} cat
+ * @param {Array<Record<string, any>>} factions @returns {boolean}
+ */
+function noHouseOfItsKind(cat, factions) {
+  const kinds = HOUSE_KINDS[cat];
+  return !!kinds && !factions.some((f) => kinds.includes(f.category));
+}
+
 function headsItsKind(standing, factions, kinds) {
   if (!kinds || standing.standing !== STANDING.head) return false;
   const mine = factions.find((f) => f.faction === standing.power);
@@ -183,12 +196,12 @@ reg('government','economic_stress',
     constraint:'Every office is after the same few coins; making this one needed means taking from the others.' }
 );
 reg('government','contested',
-  { position:  'Holds the seat, but a rival claims it, and the matter is not settled.',
-    goal:      'Win the doubters back before the challenger to the seat wins them first.',
-    constraint:'Every hard move wins the rival new supporters; every delay gives the rival time.' },
-  { position:  'Holds an office that hangs on a seat someone else is trying to take.',
-    goal:      'Stay off both sides of the fight for the seat until it is plain who wins.',
-    constraint:'Waiting to see who wins keeps the office safe today and earns no thanks from the winner.' }
+  { position:  'Holds the seat, but many doubt its right to it, and the doubt has not gone away.',
+    goal:      'Win the doubters back before their doubt hardens into refusal.',
+    constraint:'Every hard move gives the doubters a new reason; every delay lets the doubt grow.' },
+  { position:  'Holds an office that hangs on a seat many people doubt.',
+    goal:      'Keep their office out of the arguments over the seat until it is plain which way people lean.',
+    constraint:'Keeping quiet keeps the office safe today and earns no credit with the seat or with its doubters.' }
 );
 reg('government','stable',
   { tags: CALM_ONLY, position:  'Holds the seat, and people accept it; there is room to act, not just to hold on.',
@@ -234,11 +247,11 @@ reg('military','economic_stress',
     constraint:'If anyone sees how thin the squad has worn, they will test it.' }
 );
 reg('military','contested',
-  { position:  'Commands those under arms while rivals fight over the seat, and each side wants them.',
-    goal:      'Keep everyone under their command out of the fight for the seat until it is settled.',
-    constraint:'Keeping those under arms out of the fight takes quiet work that cannot be owned in public.' },
-  { position:  'Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.',
-    goal:      'Stop their squad splitting into two camps before the fight for the seat is over.',
+  { position:  'Commands those under arms while many doubt the seat\'s right, and both the seat and its doubters watch where they stand.',
+    goal:      'Keep everyone under their command out of the arguments over the seat until they are settled.',
+    constraint:'Keeping those under arms out of it takes quiet work that cannot be owned in public.' },
+  { position:  'Leads a squad whose members are split over whether the seat deserves obeying.',
+    goal:      'Stop their squad splitting into two camps over the seat.',
     constraint:'Some of the squad have loyalties of their own, and they do not all point the same way.' }
 );
 reg('military','stable',
@@ -286,10 +299,10 @@ reg(cat,'economic_stress',
     constraint:'The work the big houses leave alone is the work that pays least.' }
 );
 reg(cat,'contested',
-  { position:  'Heads the leading house in the trade while rivals fight over the seat; whoever wins can make or break it.',
-    goal:      'Lend to both sides of the fight for the seat, so whoever wins owes them.',
+  { position:  'Heads the leading house in the trade while many doubt the seat\'s right; whatever the seat does next can make or break it.',
+    goal:      'Lend to the seat and to its doubters alike, so whoever wins the argument owes them.',
     constraint:'Keeping friends on both sides means neither side fully trusts the house.' },
-  { position:  'Runs a smaller house that sells to both sides in the fight for the seat.',
+  { position:  'Runs a smaller house that sells to the seat\'s people and to its doubters alike.',
     goal:      'Keep selling to every power without any of them treating their goods as its own.',
     constraint:'To both sides, staying out of it looks like fear or scheming.' }
 );
@@ -338,11 +351,11 @@ reg('religious','economic_stress',
     constraint:'With less to give, there is less reason for the post to exist.' }
 );
 reg('religious','contested',
-  { position:  'Leads the faith while rivals fight over the seat, and both sides want its blessing.',
-    goal:      'Give no blessing to either claimant until it is plain which one will hold the seat.',
-    constraint:'The longer it waits to bless one side, the less the blessing will be worth.' },
-  { position:  'Serves the faith under its leaders while rivals fight over the seat.',
-    goal:      'Back whichever claimant their superiors bless, and be seen to have waited for the word.',
+  { position:  'Leads the faith while many doubt the seat\'s right, and the seat wants its blessing.',
+    goal:      'Give the seat no blessing until it is plain the people will stand behind it.',
+    constraint:'The longer it waits to bless the seat, the less the blessing will be worth.' },
+  { position:  'Serves the faith under its leaders while many doubt the seat\'s right.',
+    goal:      'Follow their superiors\' word on the seat, and be seen to have waited for it.',
     constraint:'Following the leaders\' choice means setting aside one\'s own judgment, and paying for it whether they chose well or not.' }
 );
 reg('religious','stable',
@@ -389,10 +402,10 @@ reg('criminal','economic_stress',
     constraint:'Staying worth keeping means showing a value that will last, which is hard to show in the middle of hard times.' }
 );
 reg('criminal','contested',
-  { position:  'Heads the crew while rivals fight over the seat and those who keep order look elsewhere.',
-    goal:      'Move into new rackets while the claimants to the seat are busy with each other.',
-    constraint:'Either side may turn on the crew to hurt the other, so today\'s freedom could end without warning.' },
-  { position:  'Holds a place in a crew that is pushing into new ground while the seat is fought over.',
+  { position:  'Heads the crew while many doubt the seat\'s right and those who keep order look elsewhere.',
+    goal:      'Move into new rackets while the seat is busy holding on to its own people.',
+    constraint:'The seat may turn on the crew to show it can still keep order, so today\'s freedom could end without warning.' },
+  { position:  'Holds a place in a crew that is pushing into new ground while the seat is in doubt.',
     goal:      'Grab their own share of the crew\'s new ground, so they keep it if the push fails.',
     constraint:'Ground taken in a push that fails is the first to be lost when the crew pulls back.' }
 );
@@ -440,12 +453,12 @@ reg('magic','economic_stress',
     constraint:'The spells people still buy in hard times are the humble ones that pay least.' }
 );
 reg('magic','contested',
-  { position:  'Heads the casters while rivals fight over the seat, and both sides want their spells.',
-    goal:      'Refuse every claimant who wants their spells, so whoever takes the seat cannot call them traitors.',
-    constraint:'Staying out of it means refusing both sides, and both will remember.' },
-  { position:  'Works spells under the senior casters while rivals fight over the seat.',
-    goal:      'Be useful to whoever wins the seat, and promise nothing to anyone before then.',
-    constraint:'Serving more than one side means keeping the work small enough that none of them sees a betrayal.' }
+  { position:  'Heads the casters while many doubt the seat\'s right, and the seat wants their spells.',
+    goal:      'Refuse the seat\'s calls on their spells, so no one can call them its tools.',
+    constraint:'Staying out of it means refusing the seat, and the seat will remember.' },
+  { position:  'Works spells under the senior casters while many doubt the seat\'s right.',
+    goal:      'Be useful to the seat without being seen as its creature, and promise nothing yet.',
+    constraint:'Serving the seat while it is in doubt means keeping the work small enough that no one calls it taking sides.' }
 );
 reg('magic','stable',
   { tags: CALM_ONLY, position:  'Heads the casters in quiet times; their place is secure and their spells are in demand.',
@@ -534,7 +547,7 @@ function holderHouseLineOf(npc) {
 // it. The cut is taken over the cast less those lords (each card's place among the others); a lord keeps the lines it reads
 // within the whole cast's cut, as before. Draw-free.
 /** @param {Record<string, any>} npc */
-const isMintedLord = (npc) => npc?.institution?.kind === 'power' && npc?.title === CLAIMANT_FACE.title;
+const isMintedLord = (npc) => npc?.institution?.kind === 'power' && (npc?.institution?.title ?? npc?.title) === CLAIMANT_FACE.title; // TAIL-TITLES K-C: the face, not the holder's form
 /** The enrichment cut over a cast of `n`. @param {number} n */
 const cutOf = (n) => Math.min(5, Math.max(2, Math.floor(n * 0.45)));
 
@@ -576,6 +589,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     const rank = isHolder ? 'dominant' : headsItsKind(standing, powerFactions, HOUSE_KINDS[cat] || UNDER_KINDS[cat]) ? 'dominant' : getRank(standing, powerFactions);
     // COHERENCE-POWERS-8: a card that heads its power is never "under" its own body's leaders; a lesser body's head takes no row
     if (!isHolder && UNDER_KINDS[cat] && standing.standing === STANDING.head && rank === 'subordinate') return { ...npc, structuralRank: standing.standing };
+    if (!isHolder && rank === 'subordinate' && noHouseOfItsKind(cat, powerFactions)) return { ...npc, structuralRank: standing.standing }; // TAIL-TIES-3 (T11)
     const key  = `${cat}__${condition}__${rank}`;
     const looked = T[key] ? key : T[`${cat}__stable__${rank}`] ? `${cat}__stable__${rank}` : OTHER_STABLE_DOMINANT;
     // ⭐ CENSUS-1d unit 2 (the chair's R-A ruling of 2026-11-05 02:30; Appendix B item 3, kind T):

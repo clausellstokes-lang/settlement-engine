@@ -47,7 +47,7 @@
         },
         {
           "lineId": "POLITICAL_FLAVOR.political_heavy[3]",
-          "text": "Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the ${event} to be replaced by a permanent one that never comes",
+          "text": "The ${event} decided who holds power here, and every household still tells it the way its own side remembers it",
           "needs": [],
           "excludes": [],
           "crisis": null,
@@ -56,15 +56,6 @@
         },
         {
           "lineId": "POLITICAL_FLAVOR.political_heavy[4]",
-          "text": "The factions here have long memories and short patience. The ${event} settled who held power without settling whether they should, and that second question has never closed",
-          "needs": [],
-          "excludes": [],
-          "crisis": null,
-          "colour": true,
-          "stop": []
-        },
-        {
-          "lineId": "POLITICAL_FLAVOR.political_heavy[5]",
           "text": "Governance is a performance everyone has agreed to keep up: the offices are filled, the seals are real, and beneath them the ${event} left a question of legitimacy that no one wants to reopen by answering",
           "needs": [],
           "excludes": [],
@@ -367,7 +358,10 @@
           "lineId": "POLITICAL_FLAVOR.catastrophic[7].other",
           "text": "The ${event} did not just change what happened next; it changed what the settlement believed was possible, and a people's sense of the possible is the slowest thing in the world to rebuild",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "crisis: under_siege",
+            "crisis: plague_onset"
+          ],
           "crisis": null,
           "colour": true,
           "stop": []
@@ -376,7 +370,10 @@
           "lineId": "POLITICAL_FLAVOR.catastrophic[7].disasterOrMonster",
           "text": "Every plan made in this settlement now includes, unspoken, a contingency for the ${event} happening again, not because anyone expects it, but because expecting nothing was what the ${event} punished",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "crisis: under_siege",
+            "crisis: plague_onset"
+          ],
           "crisis": null,
           "colour": true,
           "stop": []
@@ -541,7 +538,9 @@
         {
           "lineId": "POLITICAL_FLAVOR.stable[5].other",
           "text": "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative",
-          "needs": [],
+          "needs": [
+            "exports"
+          ],
           "excludes": [],
           "crisis": "any",
           "colour": true,
@@ -550,7 +549,9 @@
         {
           "lineId": "POLITICAL_FLAVOR.stable[5].economic",
           "text": "A settlement that has built its identity around commerce rather than conflict. The ${event} proved that economic power endures longer than military prestige",
-          "needs": [],
+          "needs": [
+            "exports"
+          ],
           "excludes": [],
           "crisis": "any",
           "colour": true,

@@ -244,7 +244,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   }
   if (stresses.includes('slave_revolt')) {
     productionMult *= 0.8;
-    stressNotes.push('With the enslaved workers in revolt, the outlying fields lie idle and nobody is bringing in the harvest.');
+    stressNotes.push('With the enslaved workers in revolt, the outlying fields lie idle, and less of the harvest is coming in.'); // TAIL-DEFECON-4 (B27952): the revolt takes a fifth of the harvest (productionMult 0.8), not all of it
   }
   // WIRING-W0 (R-W7 e): more mouths only where the record declares ARRIVALS (domain/migrationDirection.js).
   if (stresses.includes('mass_migration') && migrationDirectionOfConfig(config) !== 'departures') {
@@ -606,7 +606,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         // SW-B1 (STYLE-RULINGS-2 B1(b), the SURFACES audit's P73): the label read no surplus, so a town that
         // still grows more than it eats (Lundey, soak1k-1, +17) printed "Cutting the Food Supply" beside
         // "it feeds itself". The label and its note now read the surplus beside the cut.
-        title: Math.round(deficit) > 0 ? 'Crisis Cutting the Food Supply' : MOUTH_NOTES.has(note) ? 'Crisis Adding Mouths to Feed' : 'Crisis Thinning the Harvest', // R2-CODE-A-2 (cold #1068): the heading reads the gap this balance publishes (it read the local surplus, a second home), and a crisis that adds mouths thins no harvest
+        title: MOUTH_NOTES.has(note) ? 'Crisis Adding Mouths to Feed' : Math.round(deficit) > 0 ? 'Crisis Cutting the Food Supply' : 'Crisis Thinning the Harvest', // TAIL-DEFECON-4 (B05887): a crisis that adds mouths cuts no supply, gap or none; its line below still says the gap // R2-CODE-A-2 (cold #1068): the heading reads the gap this balance publishes (it read the local surplus, a second home), and a crisis that adds mouths thins no harvest
         message: note,
         description: note,
         priorityNote: Math.round(deficit) > 0
@@ -848,7 +848,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
             hook: ["Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
               'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.'][pick % 2],
           });
-        if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
+        if ((resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron')) && importHeld(facts, /\b(?:iron|metal)/i)) // TAIL-DEFECON-3 (D8, #20893): the iron hooks only where the record's import list holds iron
           hooks.push({ category: 'Strategic Resource', severity: 'medium', hook: (typeof facts === 'function' ? facts() : facts)?.warState !== 'peace' // the war line only where the record holds a war
             ? 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.'
             : ['Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are starting to complain.',

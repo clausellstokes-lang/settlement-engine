@@ -2919,7 +2919,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "trade",
-          "text": "Food costs more in {settlement} each week, and less of it comes in than the town needs.",
+          "text": "Food costs more in {settlement} each week, and there is less of it than the town needs.",
           "slots": [
             "settlement"
           ],
@@ -3015,6 +3015,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "trade",
+          "marks": [
+            "market"
+          ],
           "text": "Merchants in {settlement} pay the occupiers the same share of every sale, season after season, and have learned to price it in.",
           "slots": [
             "settlement"
@@ -3059,7 +3062,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "traveller",
-          "text": "Ask who governs {settlement} and you get a different answer in every street, and the answers are angrier than they were.",
+          "text": "Ask who governs {settlement} and you get a different answer depending on whom you ask, and the answers are angrier than they were.",
           "slots": [
             "settlement"
           ],
@@ -3067,7 +3070,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "watch",
-          "text": "Fights between {settlement}'s powers break out more often now, and each side keeps its own people close at hand.",
+          "text": "Each of {settlement}'s powers keeps its own people close at hand now, and watches the others more warily every week.",
           "slots": [
             "settlement"
           ],
@@ -3419,7 +3422,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "local",
-          "text": "Life in {settlement} goes on without a leader: the old officers do what they did before, and nobody does anything new.",
+          "text": "Life in {settlement} goes on without a leader: what was done before is still done, and nobody begins anything new.",
           "slots": [
             "settlement"
           ],
@@ -3427,6 +3430,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "trade",
+          "marks": [
+            "market"
+          ],
           "text": "Nothing large is agreed in {settlement} until someone is in charge, so merchants deal season to season and promise nothing longer.",
           "slots": [
             "settlement"
@@ -3533,7 +3539,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: worsening · CRISIS: insurgency": [
         {
           "angle": "official",
-          "text": "Each week more of {settlement}'s officials stop answering to those in charge, and their orders go unheeded.",
+          "text": "Each week fewer people at {settlement} answer to those in charge, and more of their orders go unheeded.",
           "slots": [
             "settlement"
           ],
@@ -3549,6 +3555,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "trade",
+          "marks": [
+            "market"
+          ],
           "text": "Fewer merchants in {settlement} pay what the government asks, and more pay its rivals instead.",
           "slots": [
             "settlement"
@@ -3557,7 +3566,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "watch",
-          "text": "Those in charge of {settlement} trust fewer of their own officers each week, and cannot tell which have changed sides.",
+          "text": "Those in charge of {settlement} trust fewer of the people around them each week, and cannot tell who has changed sides.",
           "slots": [
             "settlement"
           ],
@@ -3621,7 +3630,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: stable · CRISIS: religious_conversion": [
         {
           "angle": "local",
-          "text": "The quarrel over {settlement}'s faith has settled into habit: each household keeps the rite it has chosen, and the neighbours do not ask.",
+          "text": "The quarrel over {settlement}'s faith is no nearer an end: each household keeps the rite it has chosen, and neither side is winning more of them.",
           "slots": [
             "settlement"
           ],
@@ -3673,7 +3682,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: worsening · CRISIS: slave_revolt": [
         {
           "angle": "local",
-          "text": "The revolt in {settlement} spreads to more work gangs each week, and less of the work gets done.",
+          "text": "The revolt in {settlement} spreads further each week, and less of the work gets done.",
           "slots": [
             "settlement"
           ],

@@ -121,8 +121,12 @@ describe('layout templates never print an authoring alternation (ODQ §767.3(e))
   });
 
   it('the hills town commits to the keep — the castle-or-keep hedge is gone', () => {
-    const layout = generateSpatialLayout('town', inst('Market square', 'Town walls'), 'road', 'hills');
+    // J1 (2026-11-14): the keep is named where a Citadel stands (re-keyed by identity: the fixture holds one).
+    const layout = generateSpatialLayout('town', inst('Market square', 'Town walls', 'Citadel'), 'road', 'hills');
     expect(layout.layout).toBe('Stone-walled hill town, the keep visible above the market quarter');
+    // …and where none stands the line takes its twin without the keep.
+    expect(generateSpatialLayout('town', inst('Market square', 'Town walls'), 'road', 'hills').layout)
+      .toBe('Hill town of stone houses climbing above the market quarter');
   });
 
   // F1 (rung 1B): the walled lines stand only where walls do (`defenseFactsOf`); a roster with no

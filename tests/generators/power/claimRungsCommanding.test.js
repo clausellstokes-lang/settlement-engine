@@ -52,10 +52,12 @@ describe('POWERS-12 · the five commanding claims take their rung beside Minor o
     }
   });
   it('"the same people" (a merchant power governs) reads the merchants\' rung', () => {
-    for (const label of ['Minor', 'Suppressed']) {
+    // RE-KEYED BY IDENTITY (TAIL-POWERS batch 2, the chair's ruling P1): at Suppressed the merchants' rung is no "consistent
+    // civic presence" but the margins line; at Minor the local rung, as before
+    for (const [label, want] of [['Minor', LOCAL], ['Suppressed', 'Merchants with local reach; they trade here, but have little say in how the place is run.']]) {
       const f = roster('Merchant oligarchy', [['Merchant Guilds', 14, label, SAME_PEOPLE]]);
       settleClaimsToLabel(f, 'city');
-      expect(descOf(f, 'Merchant Guilds'), label).toBe(LOCAL);
+      expect(descOf(f, 'Merchant Guilds'), label).toBe(want);
     }
   });
   it('the great families and the militarised nobles read the lowest rung at Minor and at Suppressed, whatever the roster', () => {

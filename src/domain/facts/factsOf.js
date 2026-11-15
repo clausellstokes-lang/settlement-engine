@@ -21,6 +21,7 @@ import { marketOf } from './market.js';
 import { famineOf } from './famine.js';
 import { magicOf } from './magic.js';
 import { rulerKindOf } from './rulerKind.js';
+import { rulingBodyOf } from './rulingBody.js';
 import { migrationOf } from './migration.js';
 import { warStateOf } from './warState.js';
 import { hasInstitution } from './institutions.js';
@@ -79,6 +80,8 @@ export function factsOf(record, options = {}) {
     get magic() { return magicOf(record); },
     /** fact 8: elder / lord / priest / mayor / occupier / council */
     get rulerKind() { return rulerKindOf(record); },
+    /** TAIL-TIES (the chair's ruling (T5)): ruled by a body of more than one (`rulingBody.js`), or undefined with no government */
+    get rulingBody() { return rulingBodyOf(record); },
     /** fact 9: the mass migration's direction */
     get migration() { return migrationOf(record); },
     /** fact 10: front / aggressor / at war / peace */

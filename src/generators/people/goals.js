@@ -45,6 +45,7 @@ import { magicOf } from '../../domain/facts/magic.js';
 import { allegianceOf, criminalHousesOf, criminalPowersOf, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { NPC_GOAL_SIBLINGS, SIEGE_GOALS, STRESS_GOAL_OVERRIDES, stressBucketOf } from '../npcGenerator.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
+import { faceOfRole } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C: the bucket keys the face
 import { clamp, clamp01 } from '../../kernel/math.js';
 
 /** @typedef {Record<string, any>} Rec */
@@ -501,7 +502,7 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
 
   // CRISIS (a stress the record holds): today's overrides by the card's role bucket, and the siege goal
   if (ctx.stressType && STRESS_GOAL_OVERRIDES[ctx.stressType] && vantage === 'short') {
-    const bucket = stressBucketOf(str(card.role));
+    const bucket = stressBucketOf(str(faceOfRole(card))); // TAIL-TITLES K-C: the face, not the holder's form
     const o = bucket ? rec(STRESS_GOAL_OVERRIDES[ctx.stressType])[bucket] : null;
     if (o) {
       const spoken = (/** @type {string} */ l) => resolveSibling(l, NPC_GOAL_SIBLINGS, { facts: ctx.facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' });

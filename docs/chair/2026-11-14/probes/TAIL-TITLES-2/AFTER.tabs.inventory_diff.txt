@@ -1,0 +1,42 @@
+sentences: before 30111 after 30118 · gone 1 · new 8 · in fewer towns 11 · in more towns 4 · moved 0
+ GONE (widest):
+     23 ->    0  Boat-master
+ IN FEWER TOWNS (largest loss):
+    189 ->   93  Connection: Frontman <N>
+    189 ->   93  Frontman
+    119 ->   58  Connection: Ferryman <N>
+    119 ->   58  Ferryman
+     34 ->   16  Connection: Mother <N>
+     34 ->   16  Mother
+     34 ->   17  Foreman
+     16 ->    7  Connection: Foreman <N>
+      6 ->    4  Spokesman
+     63 ->   62  Headman
+      3 ->    2  Connection: Headman <N>
+ NEW (widest):
+      0 ->   96  Connection: Nominal Owner <N>
+      0 ->   96  Nominal Owner
+      0 ->   61  Connection: Ferry Keeper <N>
+      0 ->   61  Ferry Keeper
+      0 ->   18  Connection: Keeper <N>
+      0 ->   18  Keeper
+      0 ->    1  Connection: Chief <N>
+      0 ->    1  Chief
+ IN MORE TOWNS (largest gain):
+     76 ->   99  Boat-Master
+     29 ->   46  Overseer
+     29 ->   38  Connection: Overseer <N>
+     48 ->   50  Speaker
+ THE INHERITORS (print now, and did not, in a town that lost a sentence): 12 sentences
+   + 96 towns (e.g. r2r-city-0)  Connection: Nominal Owner <N>
+   + 96 towns (e.g. r2r-city-0)  Nominal Owner
+   + 61 towns (e.g. r2r-city-13)  Connection: Ferry Keeper <N>
+   + 61 towns (e.g. r2r-city-13)  Ferry Keeper
+   + 23 towns (e.g. r2r-thorp-22)  Boat-Master
+   + 18 towns (e.g. r2r-city-3)  Connection: Keeper <N>
+   + 18 towns (e.g. r2r-city-3)  Keeper
+   + 17 towns (e.g. r2r-hamlet-12)  Overseer
+   +  9 towns (e.g. r2r-hamlet-12)  Connection: Overseer <N>
+   +  2 towns (e.g. r2s-mass_migration-city-1)  Speaker
+   +  1 towns (e.g. r2s-insurgency-hamlet-0)  Connection: Chief <N>
+   +  1 towns (e.g. r2s-insurgency-hamlet-0)  Chief

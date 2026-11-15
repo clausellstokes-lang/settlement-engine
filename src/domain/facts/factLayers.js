@@ -130,6 +130,8 @@ export const LEAVES = Object.freeze({
     note: 'the stored readiness: the defence profile is layer 2 by value; born at assembly (NEW-1\'s step order)' }),
   // ── layer 3: over the powers ──
   rulerKind: home('rulerKind', 3, ['powerStructure']),
+  // TAIL-TIES (the chair's ruling (T5)): ruled by a body of more than one, read off the government's label
+  rulingBody: home('rulingBody', 3, ['powerStructure']),
   guild: home('guild', 3, ['powerStructure', 'institutions']),
   // TAIL-CRISIS-2 (the chair's ruling K6): a power not the governing one, by its own standing
   rivalPower: home('rivalPower', 3, ['powerStructure']),

@@ -35,8 +35,10 @@ function check(s) {
   const grows = fb.dailyProduction >= fb.dailyNeed;
   const notes = (s.economicViability.issues || []).filter((/** @type {any} */ i) => i?.type === 'stress_consequence' && i?.category === 'Food Supply');
   for (const i of notes) {
-    expect(i.title === 'Crisis Cutting the Food Supply', `${i.message} :: ${i.title} beside a gap of ${fb.deficit}`).toBe(gap);
-    if (MOUTHS.test(i.message)) expect(i.title).not.toBe('Crisis Thinning the Harvest');
+    // TAIL-DEFECON-4 (B05887), re-keyed BY IDENTITY: a crisis that adds mouths cuts no supply, so it is headed by the
+    // mouths it adds, gap or none; a crisis that takes from the fields is headed "Cutting" exactly where a gap stands.
+    if (MOUTHS.test(i.message)) expect(i.title, `${i.message} :: ${i.title}`).toBe('Crisis Adding Mouths to Feed');
+    else expect(i.title === 'Crisis Cutting the Food Supply', `${i.message} :: ${i.title} beside a gap of ${fb.deficit}`).toBe(gap);
     if (/what is grown still covers what is eaten/.test(i.priorityNote)) expect(grows).toBe(true);
     if (/cut the harvest/.test(i.priorityNote)) expect(MOUTHS.test(i.message)).toBe(false);
   }
