@@ -1,0 +1,7 @@
+{"id":"C36357","town":"bar0-village-famine-rand-7","sev":"MED","kind":"STATE","why":"'Most meals start from game'; FOOD ledger: grown 59%, brought in 22%, magic 8%; no game share, fish is the failed source","other":"C36353"}
+{"id":"C36418","town":"bar0-village-famine-rand-7","sev":"MED","kind":"STATE","why":"'The last harvest failed badly'; FOOD names the failed source as fish, grown still 59% of need","other":""}
+{"id":"C36552","town":"bar0-village-famine-rand-7","sev":"MED","kind":"PAIR","why":"'Religious acceptance: hostile' but the dominant Religious Authorities' church and priest supply the magic and run healing/pilgrimage chains","other":"C36555"}
+{"id":"C36557","town":"bar0-village-famine-rand-7","sev":"MED","kind":"STATE","why":"'Military role: occasional' for magic; DEFENCE has no force and magic: none, and Arcane Support is None","other":"C36538"}
+{"id":"C37257","town":"bar0-village-famine-rand-8","sev":"MED","kind":"PAIR","why":"'can drive off what attacks'; DEFENCE is only an unpaid village watch, 'not built for what arrives from outside', no specialists against creatures","other":"C37289"}
+{"id":"C37313","town":"bar0-village-famine-rand-8","sev":"MED","kind":"STATE","why":"'Military role: occasional' for magic; DEFENCE magic: none, Arcane Support None, Reliance on magic None","other":"C37294"}
+{"id":"DONE","lines":1563,"blocks":2,"flags":6}
