@@ -8,7 +8,7 @@ The 720 births: the page census's banked plan (`censusPlan('r2')`), each birth's
 
 | # | File | At dc4bae117 alone | Turning commit | Verdict |
 |---|------|--------------------|----------------|---------|
-| 1a | `tests/generators/captureBirthScale.test.js` | red (326 < 372) | 33b12cbef (JOIN-1 · 9, the upkeep lane), inside it 82c639b44 | (ii) re-derived — see below (pending in this push if not in the table's commit list) |
+| 1a | `tests/generators/captureBirthScale.test.js` | red (326 < 372) | 33b12cbef (JOIN-1 · 9, the upkeep lane), inside it 82c639b44 | (ii) re-derived through the manifest: base 0.965 -> 0.815, floor 372 -> 300 (3.348 sigma) |
 | 1b | `tests/simulation/tierInertiaEnvelope.test.js` | red (45 > 43) | two steps: 33b12cbef (inside it c448bb3a0, the capacity branch's merge) and 65dc92af9 (JOIN-4 · 2, upkeep-monotone) | being traced; NOT re-derived yet |
 | 2 | `tests/domain/worldFactRederive.test.js` | red (7 of 7 stride rows miss) | the golden master not re-taken since point 47 (fce41f2b7) | (iii) named: the owner's golden door |
 | 3 | `tests/generators/coherenceAgreeCures.test.js` | green | — | green already |
@@ -42,6 +42,10 @@ that 82c639b44 drops below equilibrium, all 30 had their defence band raised (De
 readiness score up about five points), their public legitimacy rose (58 -> 65; `computePublicLegitimacy` reads
 the defence label), and the governing faction outweighed the underworld (the capture state fell to adversarial).
 The lane declared the defence rating's rewrite (its readiness, its parts) but not this consequence for capture.
+RE-DERIVED by the test's own door (the manifest entry `capture.criminalCity.equilibrium`, re-checked by
+`tests/lint/distributionEnvelopePower.test.js`): base 0.965 (386/400) -> 0.815 (326/400), alpha 1e-3 (74
+non-events), floor 372 -> 300, margin 3.348 sigma. Proof: the red alone green; the power lint and
+`tests/joins/ordering.test.js` green; eslint green. No `src/` line moved.
 
 ### 1b. tierInertiaEnvelope — the measurement so far
 The town arm under matched stressors, with the test's own trial code, the test's first 120 seeds and the
@@ -54,7 +58,8 @@ lane/upkeep-capacity-2026-11-13 at 9354d792a into the defence lane). 82c639b44 i
 - **Criminal cities at birth.** Since the defence rating was rebuilt (the upkeep lane, commit 82c639b44, joined
   at 33b12cbef), more criminal-heavy cities are born well defended, so their people trust the government more
   and fewer of them are born with the underworld holding even: 392 of 400 -> 326 of 400. The test's floor was
-  set from the old rate.
+  set from the old rate; it is re-derived from the new one (372 -> 300). **Yours to veto**: if fewer criminal
+  cities born holding even is not what you wanted from the defence rebuild, the cure is in the defence rating, not here.
 - **Towns losing their tier under the same pressure.** Two defence-lane merges raised how often a town drops a
   tier under the test's fixed load of five crises: 90 of 400 -> 121 -> 139 of 400. The village floor and the
   city ceiling still hold. Being traced; not yet ruled.
