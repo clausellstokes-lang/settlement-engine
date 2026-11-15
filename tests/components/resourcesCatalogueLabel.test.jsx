@@ -26,6 +26,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { RESOURCE_DISPLAY_LABELS } from '../../src/domain/display/resourceDisplayName.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -73,8 +74,7 @@ describe('X26: the Nearby Resources chips print the catalogue\'s own label', () 
 
   test.each(NOT)('%s prints no chip "%s"; instead: "%s"', (seed, old, label) => {
     const chips = chipsOf(town(seed));
-    expect(chips).toContain(label);
-    expect(chips).not.toContain(old);
+    expectAbsentWithAnchor(chips, old, label, `${seed}: the catalogue's label, not the formatter's word`);
   }, 120000);
 
   test.each(KEEP)('%s still prints the chip "%s"', (seed, label) => {
@@ -88,8 +88,8 @@ describe('X26: the Nearby Resources chips print the catalogue\'s own label', () 
     expect(keys.length).toBeGreaterThan(0);
     const chips = chipsOf(t);
     for (const k of keys) {
-      expect(chips, `${seed}: ${k}`).toContain(RESOURCE_DISPLAY_LABELS[k]);
-      if (fmtKey(k) !== RESOURCE_DISPLAY_LABELS[k]) expect(chips, `${seed}: ${k}`).not.toContain(fmtKey(k));
+      if (fmtKey(k) !== RESOURCE_DISPLAY_LABELS[k]) expectAbsentWithAnchor(chips, fmtKey(k), RESOURCE_DISPLAY_LABELS[k], `${seed}: ${k}`);
+      else expect(chips, `${seed}: ${k}`).toContain(RESOURCE_DISPLAY_LABELS[k]);
     }
   }, 120000);
 });

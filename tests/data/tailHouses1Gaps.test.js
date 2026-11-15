@@ -10,6 +10,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -89,8 +90,7 @@ describe('TAIL-HOUSES batch 1: a house is not described at work on an input that
       const inst = instOf(t, house);
       expect(inst, `${seed} holds a ${house}`).toBeDefined();
       expect(missing(t, house), `${seed}: the ${house} lacks its input`).toBe(true);
-      expect(String(inst.desc), `${seed} ${house}`).not.toContain(old);
-      expect(String(inst.desc), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(inst.desc), old, now, `${seed} ${house}`);
     }), 'a house without its input is not described at work on it');
   }, 600_000);
 

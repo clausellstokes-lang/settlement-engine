@@ -60,7 +60,12 @@ describe('W2-FIX-DATA-7: the census writers in the data lane\'s files (the seven
       for (const type of ['famine', 'plague_onset', 'religious_conversion']) {
         const e = crisisOf(town, type); if (!e) continue;
         const hook = crisisHookFor(town, e);
+        expect(hook, `${seed} ${type}: the crisis prints its hook, a whole sentence`).toMatch(/\w.*\.$/);
+        // anchored: the same hook is shown directly above to print as a whole sentence
         expect(hook, `${seed} ${type}`).not.toMatch(/\bA grain merchant\b|\bThe healer who identified\b/);
+        // where the crisis holds no note, its absence is the claim (asserted for r2s-religious_conversion-thorp-0 below)
+        if ('viabilityNote' in e) expect(String(e.viabilityNote), `${seed} ${type}: the crisis prints its note, a whole sentence`).toMatch(/\w.*\.$/);
+        // anchored: the held note is shown directly above to print as a whole sentence; an absent note is asserted absent below
         expect(String(e.viabilityNote ?? ''), `${seed} ${type}`).not.toMatch(/\bmarket\b|\bfairs\b/);
       }
     }), 'no mill, no healer, no market: none is named');
@@ -86,8 +91,9 @@ describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eight
       const town = bornCensus(seed);
       expect(hasInstitution(town, 'tavern'), seed).toBe(false);
       const brewer = (town.institutions || []).find((/** @type {any} */ i) => i.name === 'Brewer');
-      expect(String(brewer.desc), seed).not.toMatch(/alehouse/i);
       expect(String(brewer.desc), seed).toMatch(/households|homes/);
+      // anchored: the same description is shown directly above to name the households it supplies
+      expect(String(brewer.desc), seed).not.toMatch(/alehouse/i);
     }), 'no tavern, inn or alehouse: the brewer supplies none');
     const kept = bornCensus('r2r-village-15');
     expect(hasInstitution(kept, 'tavern')).toBe(true);
@@ -111,8 +117,9 @@ describe('W2-FIX-DATA-8: the census writers in the data lane\'s files (the eight
       const town = bornCensus(seed);
       expect((town.institutions || []).some((/** @type {any} */ i) => /alchem/i.test(i.name)), seed).toBe(false);
       const desc = String((town.institutions || []).find((/** @type {any} */ i) => i.name === 'Apothecary').desc);
-      expect(desc, seed).not.toMatch(/alchemist/i);
       expect(desc, seed).toMatch(/fever/);
+      // anchored: the same description is shown directly above to name the fever
+      expect(desc, seed).not.toMatch(/alchemist/i);
     }), 'no alchemist: none is named');
   }, 240_000);
 
@@ -135,8 +142,9 @@ describe('W2-FIX-DATA-9: the census writers in the data lane\'s files (the ninth
     const parish = (seed) => String((bornCensus(seed).institutions || []).find((/** @type {any} */ i) => i.name === 'Parish churches (50-100+)').desc);
     expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-1', 'r2r-metropolis-3', 'r2s-under_siege-metropolis-0'], (seed) => {
       const desc = parish(seed);
-      expect(desc, seed).not.toMatch(/hundreds/i);
       expect(desc, seed).toMatch(/fifty/);
+      // anchored: the same description is shown directly above to give its figure of fifty
+      expect(desc, seed).not.toMatch(/hundreds/i);
     }), 'fifty to a hundred and more: never hundreds');
     expect(parish('r2r-metropolis-0')).toBe('Every quarter keeps its own parish, so that faith runs through every part of the city.');
   }, 240_000);
@@ -146,8 +154,9 @@ describe('W2-FIX-DATA-9: the census writers in the data lane\'s files (the ninth
     const mine = (seed, tier) => String(generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: tier }), null, { seed, customContent: {} }).institutions.find((/** @type {any} */ i) => i.name === 'Mine').desc);
     expectNoSeedFailures(collectSeedFailures(['r2r-town-11', 'r2r-town-12', 'r2r-town-45'], (seed) => {
       const desc = mine(seed, 'town');
-      expect(desc, seed).not.toMatch(/hired crews|worked|go deep|run deep/i);
       expect(desc, seed).toMatch(/shaft/);
+      // anchored: the same description is shown directly above to name its shaft
+      expect(desc, seed).not.toMatch(/hired crews|worked|go deep|run deep/i);
     }), 'no present work claimed of a mine whose deposits may be spent');
     expect(mine('r2r-village-3', 'village')).toMatch(/^Ore, coal, or stone is won from a shaft/);
   }, 240_000);

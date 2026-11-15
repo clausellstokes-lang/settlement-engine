@@ -86,6 +86,8 @@ describe('TAIL-HISTORY batch 3 (Y13): every tension type with no event of its ow
       expect(ownOnTimeline(town, type), `${seed}: no ${type} on the timeline`).toBe(false);
       const t = tensionOf(town, type);
       expect(Boolean(t), `${seed} holds its ${type} tension (the draw is kept)`).toBe(true);
+      expect(wordsOf(t), `${key}: its words carry the live quarrel`).toMatch(WORDS[type].live);
+      // anchored: the same words are shown directly above to carry the live quarrel
       expect(wordsOf(t), key).not.toMatch(WORDS[type].past);
       expect(t.description, key).toMatch(WORDS[type].live);
       expect(t.factions.length, `${key}: its parties (two where the names fold together, as at the base)`).toBeGreaterThanOrEqual(2);
@@ -105,6 +107,8 @@ describe('TAIL-HISTORY batch 3 (Y13): every tension type with no event of its ow
       const t = tensionOf(town, type);
       expect(Boolean(t), `${seed} holds its ${type} tension`).toBe(true);
       // its own words: the template's or, where its past event printed them, an authored variant (apartFromOwnEvent)
+      expect(wordsOf(t), `${key}: its words open on a printed description`).toMatch(/^\["[A-Z]/);
+      // anchored: the same words are shown directly above to open on a printed description (not null, not empty)
       expect(wordsOf(t), key).not.toMatch(WORDS[type].live);
     }), 'the anchored tensions keep their event');
   }, 600_000);

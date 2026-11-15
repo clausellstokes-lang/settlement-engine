@@ -26,6 +26,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { rowStoppedBy } from '../../src/domain/display/crisisStoppedRow.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -82,8 +83,8 @@ afterEach(cleanup);
 describe('TAIL-DISPLAY-ECON-4 batch 4: the Economics tab marks what the crisis stops, by the one leaf', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(NOT)('%s does not print the unmarked "%s"; instead: %s', (seed, line) => {
-    expect(textOf(town(seed))).not.toContain(line);
+  test.each(NOT)('%s does not print the unmarked "%s"; instead: %s', (seed, line, instead) => {
+    expectAbsentWithAnchor(textOf(town(seed)), line, instead, `${seed}: the marked row prints in the unmarked one's place`);
   }, 120000);
 
   test.each(TWIN)('%s prints "%s"', (seed, line) => {

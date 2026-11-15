@@ -8,15 +8,18 @@ cut from the joined line `lane/join-2026-11-14` at **7efc7686**.
 
 | | at 7efc7686 (before) | at this push |
 |---|---|---|
-| un-anchored negatives | 58 files / 100 sites | see batch table |
-| bare seed loops | 13 files / 23 loops | see batch table |
+| un-anchored negatives | 58 files / 100 sites | 3 files / 3 sites (the 3 held-back files only) |
+| bare seed loops | 13 files / 23 loops | 1 file / 2 loops (tailCrisisBatch4, held back) |
 
-Batch 1 (this push): tests/domain + tests/foundry + tests/generators, 25 files. After it the half stands at
-the figures in the batch table below; the other half (paths after the limit) is TAIL-CLOSE-TESTS-B's and untouched.
+Pushed in two batches; the other half (paths after the limit) is TAIL-CLOSE-TESTS-B's and untouched.
 
 | batch | files | my half after (neg / seed) |
 |---|---|---|
-| 1 | 25 (domain, foundry, generators) | 3 files / 3 sites · 1 file / 2 loops (left: components + data in batch 2, the 3 held-back files) |
+| 1 (4865cac1) | 25 (domain, foundry, generators) | 36 files / 59 sites · 4 files / 6 loops (components + data still open) |
+| 2 | 33 (components, data) | 3 files / 3 sites · 1 file / 2 loops (the 3 held-back files only) |
+
+Three more seed loops the walker did not flag (its file-wide exemption, or a header it does not read) were collected
+too: economicsChainOutputsBorneOut (2), economicsGoodsPillsBorneOut (1), w2FixData4Round (1).
 
 No walker file, allow-list, quarantine, ceiling or baseline was touched: every file in my half carried ceiling 0,
 so the cure is in the test files alone. Nothing under src/ changed.
@@ -82,13 +85,30 @@ so the cure is in the test files alone. Nothing under src/ changed.
   - w5-hamlet-occupied-104  DS-DEF-11::WALLED-STRAINED v5
   - w5-city-occupied-1  DS-DEF-2::Beasts & Monsters: frontier, credible deterrence v4
    The file's 12 rows already red at the base ("no longer reads <pool>") are unchanged.
+2. **tests/components/displayEconCrisisMarks.test.jsx**, NOT row `r2s-famine-hamlet-0 does not print the unmarked "Fish & Maritime Produce Catch landed"`:
+   `LIVENESS ANCHOR [r2s-famine-hamlet-0: the marked row prints in the unmarked one's place]: the anchor sibling is missing` (the anchor is the row's
+   own "instead" column, "Fish & Maritime Produce Scarce in the famine. Catch landed"; its own prints-row was already red at the base).
+3. **tests/components/displayEconCrisisMarks.test.jsx**, NOT row `r2s-under_siege-town-1 … "Pilgrim Trade Offerings, hospitality fees"`: the same
+   message; anchor "Pilgrim Trade Stopped by the siege. Offerings, hospitality fees" (its prints-row already red at the base).
+4. **tests/components/displayEconRelianceFoodWords.test.jsx**, NOT row `r2s-famine-town-1 (economics) does not print "Contributes to Grain Sales - 4% of income"`:
+   `LIVENESS ANCHOR [r2s-famine-town-1 (economics)]: the anchor sibling is missing`; the anchor is that town's own KEEP line "Contributes to Entrepôt
+   Trade - 13% of income" (the tab now prints 14%; its KEEP row was already red at the base).
+   In 2-4 the negative was passing over a page that no longer printed what the test says stands in the line's place.
 
 ## Pre-existing reds in touched files (unchanged, the builders' breaks)
-corpusCureGuards 12, journalMarksCrisisRows 2, journalPrintsTheTabsLeaf 1, tailDisplayCivic3V1 1, hallDecidesUnderOccupation 1.
+corpusCureGuards 12, journalMarksCrisisRows 2, journalPrintsTheTabsLeaf 1, tailDisplayCivic3V1 1, hallDecidesUnderOccupation 1,
+displayEconCrisisMarks 3, displayEconRelianceFoodWords 1, tailHouses1Gaps 1, w2FixData6Rows 3.
+
+## Proof
+Each batch: the touched files run together (vitest JSON) and compared test-by-test with the base run at 7efc7686: the same tests pass
+and fail, except findings 1-4; eslint clean on every touched file; the walkers' scan logic re-run at the tip for the counts above.
+Weakest anchors, named so a reviewer can strengthen them: tailHistoryBatch2/3 KEEP (`/^[A-Z]/` on the description: proves a printed
+sentence only; the event's own past text went red on authored variants the test's comment allows), w2FixData6 CENSUS-2a (`/\w.*\.$/`),
+conflictRelationsTwin KEEP (`/\S/` plus a kept-row count), w2FixData5 ww-473 (marker naming the length check above).
 
 ## Held back as MOVING (the builder's own unmerged change, three-dot diff; the chair's ruling 05:10Z)
 tests/domain/corpusEcoTailGuards.test.js (tail-corpus-eco), tests/domain/tailCorpusDefGuards.test.js (tail-corpus-def),
 tests/domain/tailCrisisBatch4.test.js (tail-crisis): to do after "SWEPT <tip>".
 
 ## Left
-Batch 2 (tests/components, tests/data, in progress); the three held-back files.
+The three held-back files (after "SWEPT <tip>", with a merge of the joined line at that tip and a re-measure).

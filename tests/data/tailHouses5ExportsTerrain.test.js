@@ -13,6 +13,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -97,8 +98,7 @@ describe('TAIL-HOUSES-3 batch 5: a strategic line or a house text claims no navy
       const text = textOf(t, house);
       expect(text, `${seed} prints a ${house}`).toBeDefined();
       expect(DENIED[denied](t), `${seed}: the record denies the ${house}'s old claim (${denied})`).toBe(true);
-      expect(String(text), `${seed} ${house}`).not.toContain(old);
-      expect(String(text), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(text), old, now, `${seed} ${house}`);
     }), 'a strategic line or a house text claims nothing the record denies');
   }, 600_000);
 

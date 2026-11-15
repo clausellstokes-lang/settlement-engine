@@ -24,6 +24,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { exportsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** The app's own shape, as the readers born their towns (rww-: render.rww.jsx; rr2s-: render.rr2s.jsx). @param {string} seed */
 const birthApp = (seed) => {
@@ -55,7 +57,7 @@ describe('the goods pills print only where the record bears them out (item 2)', 
     // the books no more (no scribe, printer, library, monastery, sage or wizard works them); the glass and the spices it
     // still exports, so the pills below still read the record's own list.
     expect(town.economicState.primaryExports, 'anchored: the record exports the glass and the spices').toEqual(expect.arrayContaining(['Glassware', 'Rare spices and exotic dyes']));
-    expect(town.economicState.primaryExports, 'C1-E: the record no longer exports the books').not.toContain('Books and manuscripts');
+    expectAbsentWithAnchor(town.economicState.primaryExports, 'Books and manuscripts', 'Glassware', 'C1-E: the record no longer exports the books');
     expect(roster(town).some((n) => /print|scriptor|librar|bookbind/i.test(n)), 'anchored: no house makes books').toBe(false);
     const exports = pillsUnder(town, 'Exports');
     expect(exports).toContain('Glassware');
@@ -68,15 +70,14 @@ describe('the goods pills print only where the record bears them out (item 2)', 
     expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['Guild-manufactured goods']));
     // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-4, D33): the record no longer lists "Fine wool cloth" where no weaver or fuller
     // stands (a Shepherd herds; the table's cloth row); the page claim below is unchanged.
-    expect(town.economicState.localProduction, 'D33: no weaver or fuller, no fine wool cloth on the record').not.toContain('Fine wool cloth');
+    expectAbsentWithAnchor(town.economicState.localProduction, 'Fine wool cloth', 'Guild-manufactured goods', 'D33: no weaver or fuller, no fine wool cloth on the record');
     // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-3, D30 (a)): the record itself no longer lists barrels where no cooper stands
     // (the whole table, GOOD_WORKING_HOUSES); the page claim below is unchanged.
-    expect(town.economicState.localProduction, 'D30 (a): no cooper, no barrels on the record').not.toContain('Barrels and containers');
+    expectAbsentWithAnchor(town.economicState.localProduction, 'Barrels and containers', 'Guild-manufactured goods', 'D30 (a): no cooper, no barrels on the record');
     const local = pillsUnder(town, 'Produced locally');
     // the list prints (re-keyed by W2-C-LEAVES-12: its anchor was "Preserved foods", which a Shepherd and Common grazing land
     // made by the default read; ruling (3), a good no house of its maker row makes is not printed, takes it off)
-    expect(local, 'the list prints').toContain('wool');
-    expect(local, 'preserved foods by a shepherd alone (ruling 3)').not.toContain('Preserved foods');
+    expectAbsentWithAnchor(local, 'Preserved foods', 'wool', 'preserved foods by a shepherd alone (ruling 3)');
     for (const good of ['Guild-manufactured goods', 'Barrels and containers', 'Fine wool cloth']) expect(local, good).not.toContain(good); // anchored: the line above
   }, 60000);
 
@@ -103,15 +104,15 @@ describe('the goods pills print only where the record bears them out (item 2)', 
     const bare = { ...flock(['famine']), economicState: { ...flock(['famine']).economicState, activeChains: [] } };
     expect(exportsAsPrinted(bare), 'no herd card, the grazing failed: no wool, no beasts').toEqual([]);
     // …and on the births (the reader's towns; a siege port among them, its card stopped by the siege)
-    for (const [seed, gone] of /** @type {Array<[string, string[]]>} */ ([['rr3-village-famine-rand-0', ['Raw wool', 'Livestock']],
+    expectNoSeedFailures(collectSeedFailures(/** @type {Array<[string, string[]]>} */ ([['rr3-village-famine-rand-0', ['Raw wool', 'Livestock']],
       ['rr3-hamlet-famine-rand-0', ['Raw wool', 'Livestock']], ['rr3w-village-famine-river-1', ['Raw wool', 'Livestock']],
-      ['rr3-town-under_siege-port-1', ['Magical services (naval route only)']]])) {
+      ['rr3-town-under_siege-port-1', ['Magical services (naval route only)']]]), ([seed, gone]) => {
       const born = birthApp(seed);
       expect(born.economicState.primaryExports, `${seed}: anchored, the record exports them`).toEqual(expect.arrayContaining(gone));
       const shown = exportsAsPrinted(born);
       expect(shown.length, `${seed}: anchored, the list prints`).toBeGreaterThan(0);
-      for (const g of gone) expect(shown, `${seed}: ${g} beside its own card stopped by the crisis`).not.toContain(g);
-    }
+      for (const g of gone) expectPresentThenAbsent(born.economicState.primaryExports, shown, g, `${seed}: ${g} beside its own card stopped by the crisis`);
+    }), 'a raw good beside its own card stopped by the crisis is not exported');
     expect(exportsAsPrinted(birthApp('rr3-hamlet-insurgency-rand-0')), 'guard: no famine, no siege: the wool leaves').toContain('Raw wool');
     expect(local).not.toContain('flour'); // anchored: stone was found among the same pills two lines above
   }, 240000);
