@@ -28,8 +28,10 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The settlement is surrounded. Someone in the leadership is considering terms. Someone else is considering a desperate sortie. The players arrive as this decision is being forced.",
+    // BAR3-PLACES-3 (the chair, 2026-11-15): "Field work and trade have stopped" in every siege town, where the food record still grows
+    // 14 to 43 in a hundred of the food (SIEGE_PRODUCTION_KEPT) in all 31 of the 720: trade by road, gate and water stops; a part is still produced (VETOABLE wording)
     viabilityNote:
-      "Field work and trade have stopped, and everything now turns on how long the food and water last.",
+      "Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns on how long the food and water last.",
     historyColour: "military",
   },
   famine: {

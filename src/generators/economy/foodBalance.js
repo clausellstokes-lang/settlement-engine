@@ -224,7 +224,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   if (stresses.includes('under_siege')) {
     productionMult *= SIEGE_PRODUCTION_KEPT;
     routeOverride = 'isolated';
-    stressNotes.push('The siege has cut every road in, and the outlying farms are abandoned or burned. What is already in store is all there will be until it lifts.');
+    stressNotes.push('The siege has cut every road in, and the outlying farms are abandoned or burned. What is in store, and what can still be raised close by, must last until it lifts.'); // BAR3-PLACES-3 (the chair, 2026-11-15): the store is not all there will be: SIEGE_PRODUCTION_KEPT keeps a part of the harvest (14 to 43 in a hundred grown in all 31 siege towns of the 720; VETOABLE wording)
   }
   if (stresses.includes('plague_onset')) {
     productionMult *= 0.75;

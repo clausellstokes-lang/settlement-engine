@@ -1187,12 +1187,12 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       { text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, // W2-FIX-DATA: the guild homed (facts/guild.js)
       { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, // W2-FIX-DATA: no mastership without a guild (c10)
-      { text: 'Someone is sabotaging both guilds to destabilize the market for a third party', needs: ['market'] }, // CENSUS-3d unit 6
+      { text: 'Someone is sabotaging both guilds to destabilize the market for a third party', needs: ['market', 'guild'] }, // CENSUS-3d unit 6; BAR3-PLACES-3 (C13868): "both guilds" presumes a guild, as its siblings declare (both copies; a declaration, no draw moved: the past guild war is born only where a guild stands)
     ],
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
     byMemory: { unanchored: { description: 'Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run',
         factions: ['Guild members', 'Those who would trade outside the guild', 'Non-guild workers'],
-        plotHooks: [{ text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, { text: 'Someone is sabotaging both sides to destabilize the market for a third party', needs: ['market'] }] } },
+        plotHooks: [{ text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, { text: 'Someone is sabotaging both sides to destabilize the market for a third party', needs: ['market', 'guild'] }] } },
     severity: ['minor', 'major'],
   },
   {

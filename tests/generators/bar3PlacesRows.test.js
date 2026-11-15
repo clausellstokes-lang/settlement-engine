@@ -22,6 +22,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CRISIS_SUMMARY_POOLS } from '../../src/domain/crisis/crisisSummaryVantage.js';
+import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
+import { presumptionFindings } from '../../src/domain/facts/presumptionCheck.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own configuration for its two seed families (CENSUS-3 seedcfg.mjs, r2r- and r2s-). @param {string} seed */
@@ -202,5 +204,68 @@ describe('BAR3-PLACES-2 batch 2: the origin, the war and the table read the town
     expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {
       expect(textOfRecord(seed), `${id} ${seed}`).toMatch(kept);
     }), 'the true siblings still print');
+  });
+});
+
+/**
+ * BAR3-PLACES-3 (2026-11-15; the second holder's "left", items 1 and 2), each CURED row red at 808d2bb37: C54896 the Great
+ * Harvest Compact's hook (historyGenerator.js) claims no shortage now (it printed "the current shortage" where the food
+ * record holds none: 16 of 19 on the census's 720); C13868 the guild war's sabotage hook (historyData.js, both copies)
+ * declares the guild "both guilds" presumes, so the birth's self-check re-reads it on the FINAL record. The read hamlet's
+ * guild is a faction of the power structure when its history is written and gone by the end of its birth (a late write:
+ * the declaration cannot refuse the line at the draw; the self-check now names it, and the late write is named for the chair).
+ * THE SIEGE (the chair, 21:45 UTC): its description (stressTypes.js, stressTypesMeta.js) said "Field work and trade have stopped"
+ * and the food note (foodBalance.js) that the store "is all there will be", where the food record still grows a part (14 to 43
+ * in a hundred) in all 31 siege towns of the 720: trade by road, gate and water stops; a part is still produced.
+ */
+describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+
+  const GUILD_HOOKS = 'historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict';
+  /** The birth's own ledger and its self-check's findings on the final record, for the guild war's hooks. @param {string} seed */
+  const guildHookCheck = (seed) => {
+    /** @type {any[]} */
+    const ledger = [];
+    const { result } = withPresumptionLedger(() => generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }), ledger);
+    const mine = ledger.filter((e) => e.pool === GUILD_HOOKS);
+    return { text: JSON.stringify(result), noted: mine, findings: presumptionFindings(result, mine) };
+  };
+
+  /** [row, seed, must not print, what prints instead] */
+  const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
+    ['C54896 no shortage claimed where the food record holds none (a secure hamlet)', 'r2r-hamlet-17', /the current shortage makes that clause valuable/, /first refusal on grain sales, and in a lean year that clause is worth fighting over/],
+    ['the siege: no field work stopped where a part is still grown (a besieged town)', 'r2s-under_siege-town-0', /Field work and trade have stopped/, /Trade by road, gate and water has stopped, only part of the usual food is still produced here/],
+    ['the siege: the store is not all there will be (a besieged town)', 'r2s-under_siege-town-0', /What is already in store is all there will be until it lifts/, /What is in store, and what can still be raised close by, must last until it lifts\./],
+  ]);
+  it('the flagged line no longer prints, and its slot says what the record bears (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, gone, instead]) => {
+      const text = textOfRecord(seed);
+      expect(text, `${id} ${seed}: what prints instead`).toMatch(instead);
+      expect(text, `${id} ${seed}: the flagged line`).not.toMatch(gone); // anchored: the line above asserts the slot printed
+    }), 'the flagged line no longer prints');
+  });
+
+  it("C13868: the read hamlet's sabotage hook declares the guild, and the self-check reads its absence on the final record", () => {
+    const { text, findings } = guildHookCheck('bar0-hamlet-under_siege-rand-6');
+    expect(text, 'the hook the reader met is on the record').toMatch(/Someone is sabotaging both guilds to destabilize the market for a third party/);
+    expect(findings.map((f) => f.atom), 'the guild atom fails on the final record (a late write, named)').toContain('guild');
+  });
+
+  /** [row, seed, the true sibling that must still print] */
+  const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
+    ["C54896: the compact's other hook stands", 'r2r-hamlet-17', /The original compact was signed under duress; someone wants that history exposed/],
+    ["the siege: the food note's road and farms stand", 'r2s-under_siege-thorp-0', /The siege has cut every road in, and the outlying farms are abandoned or burned\./],
+  ]);
+  it('the true siblings still print (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {
+      expect(textOfRecord(seed), `${id} ${seed}`).toMatch(kept);
+    }), 'the true siblings still print');
+  });
+
+  it("C13868 KEEP: where two guilds stand the sabotage hook (the live quarrel's copy) still prints, and its guild holds", () => {
+    const { text, noted, findings } = guildHookCheck('r2r-town-0');
+    expect(text, "the live quarrel's copy prints").toMatch(/Someone is sabotaging both sides to destabilize the market for a third party/);
+    expect(noted.some((e) => (e.atoms || []).includes('guild')), 'the hook was drawn through the ledger with its guild').toBe(true);
+    expect(findings.filter((f) => f.atom === 'guild'), 'every guild atom holds on the final record').toEqual([]);
   });
 });

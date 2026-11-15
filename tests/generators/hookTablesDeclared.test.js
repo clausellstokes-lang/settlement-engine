@@ -48,7 +48,7 @@ describe('the history hooks declare what their event does not guarantee', () => 
       'economic_disparity: tier: >= town',
       'guild_conflict: guild',
       'guild_conflict: guild',
-      'guild_conflict: market',
+      'guild_conflict: market, guild', // BAR3-PLACES-3 (2026-11-15, C13868): "both guilds" declares the guild too
       'external_threat: no war: peace', // TAIL-HISTORY batch 1: "…profits from wartime contracts"
       'external_threat: no war: peace', // TAIL-HISTORY batch 1: "…the war party is suppressing"
       'resource_scarcity: market',
@@ -78,7 +78,7 @@ describe('the history hooks declare what their event does not guarantee', () => 
       ['the ailing ruler wants a final errand', { excludes: ['ruler: council'] }],
       ['someone is poisoning the ruler slowly', { excludes: ['ruler: council'] }],
       ['a hidden ledger documenting wage theft', { needs: ['tier: >= town'] }],
-      ['someone is sabotaging both guilds', { needs: ['market'] }],
+      ['someone is sabotaging both guilds', { needs: ['market', 'guild'] }], // BAR3-PLACES-3 (2026-11-15, C13868)
       ['a store of the scarce goods', { needs: ['market'] }], // W2-FIX-DATA-HISTORY item G: the hook's words (was "a warehouse full of")
       ['a guard captain is on the payroll', { needs: ['guardPresence'] }],
       ['a ledger names who was warned', { needs: ['market'] }],

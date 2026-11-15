@@ -791,7 +791,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
         "Compact signatories' families still hold first call on the grain sales",
       ],
       plotHooks: [
-        'A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable',
+        'A clause in the compact entitles certain families to first refusal on grain sales, and in a lean year that clause is worth fighting over', // BAR3-PLACES-3 (C54896): it claimed "the current shortage" in towns whose food record holds none (16 of 19 on the 720); a lean year, never a claim of now (VETOABLE wording)
         'The original compact was signed under duress; someone wants that history exposed',
       ],
       severity: ['minor', 'major'],
