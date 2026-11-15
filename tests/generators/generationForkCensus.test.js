@@ -540,7 +540,13 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // channel is the record's: `dmLayer :: pinsFrom` structuredClones `source[key]` out of the
     // record, and `rederive` is the only caller a DM edit reaches. So the reproduction is
     // asserted on a RECORD-built bag, through `rederive`, with a no-op root override.
-    const record = unpinnedContext.settlement;
+    // RE-KEYED 2026-11-15, THE CHAIR'S RULING FC1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's
+    // list; PM1's reading in pipelinePinnedMode): the record the reproduction claim is made on is the PRODUCT ENTRY's
+    // (`generateSettlementPipeline`), final-record passes included (keepOneDominant; TAIL-POWERS-B-2 batch 4's draw-free
+    // `withConflictRelations`, c1263e61c, merged at d700bda44), not the raw runner's `unpinnedContext.settlement`. The draw
+    // controls above keep their raw runner and their ctx-built bag.
+    const pinRowConfig = Object.fromEntries(Object.entries(PIN_ROW).filter(([key]) => key !== '_seed'));
+    const record = generateSettlementPipeline(pinRowConfig, null, { seed: PIN_ROW._seed, customContent: {} });
     const engine = { run: generateSettlementPipeline, getStepMeta };
     const declarations = { declarationsFor, isEditableCard };
     const npc0 = (record.npcs || [])[0] || {};
@@ -549,7 +555,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     };
     const { pins: recordPins } = pinsFrom(record, layer, declarations, engine);
     for (const key of CHOOSER_KEYS) expect(recordPins[key], `record pin ${key}`).toBeDefined();
-    const pinRowConfig = Object.fromEntries(Object.entries(PIN_ROW).filter(([key]) => key !== '_seed'));
     const rederived = rederive(record, pinRowConfig, layer, engine, declarations);
     expect(JSON.stringify(rederived.record), 'the record-built bag reproduces the record through rederive')
       .toBe(JSON.stringify(record));
