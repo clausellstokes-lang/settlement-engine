@@ -1,0 +1,12 @@
+{"id":"C10029","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"STATE","why":"ore carts in an endless line; LAND gives iron ore deposits absent, mining chain vulnerable, iron is imported","other":""}
+{"id":"C10035","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"PAIR","why":"says on the right side, crown paying, contracts flowing; the crisis page says a war it may not win, and the war takes most money","other":"C10078"}
+{"id":"C10139","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"STATE","why":"Zoya Kovalyov is the garrison commander (War Council); nothing makes her a priest leading weekly prayers","other":""}
+{"id":"C10144","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"STATE","why":"a note on 'their shop' for the garrison commander, whose house is the Garrison; no shop in her record","other":""}
+{"id":"C10150","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"STATE","why":"goods sold under 'their mark' with customers blaming them; garrison commander has no trade or mark","other":""}
+{"id":"C10191","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"STATE","why":"a buyer prepaying a season of 'their goods'; garrison commander (Zoya) sells no goods; hook not fitted to her role","other":""}
+{"id":"C10323","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"STATE","why":"midwife (tends complaints of women) held by Radoslav Vinogradov, who PEOPLE gives as m, titled 'the midwife'","other":""}
+{"id":"C10682","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"STATE","why":"mine row shows ore cut and carted with no mark; LAND gives iron ore deposits absent and the mining chain vulnerable","other":"C10029"}
+{"id":"C10654","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"PAIR","why":"luxury quarter sells rare spices from across the world; the town's own necessity line says spices are needed and not brought in, and TRADE imports list no spices","other":"C10914"}
+{"id":"C11310","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"PAIR","why":"says fines cannot be enforced; INCOME gives Court Fees & Fines as 6% of the town's money, so fines are being collected","other":"C10876"}
+{"id":"C11391","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"STATE","why":"Magic tab says Moderate, availability moderate; TOWN header gives magic low, and the Overview calls Magical Capability Weak","other":"C10053"}
+{"id":"DONE","lines":2253,"blocks":1,"flags":11}
