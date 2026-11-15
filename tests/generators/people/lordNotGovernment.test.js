@@ -15,6 +15,7 @@ import { generateSettlementPipeline } from '../../../src/generators/generateSett
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { CLAIMANT_FACE } from '../../../src/data/stressPowerFaces.js';
+import { faceOfRole, titleForHolder } from '../../../src/data/holderTitleForms.js';
 
 const DIALS = Object.freeze({ tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
   nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' });
@@ -26,7 +27,12 @@ function born(seed) {
     : { ...DEFAULT_CONFIG, ...DIALS, settType: forced[2], selectedStresses: [forced[1]], selectedStressesRandom: false };
   return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
 }
-const minted = (/** @type {any} */ s) => s.npcs.filter((c) => c.institution?.kind === 'power' && c.title === CLAIMANT_FACE.title);
+/** RE-KEYED BY IDENTITY 2026-11-15 (TAIL-CLOSE-PEOPLE-1): TAIL-TITLES K-C's DECLARED MOVE 1036bf94 prints a face in its holder's
+ *  form ("the lord" -> "the lady" for a woman; M-1b: the role is that title). The guard reads the card's FACE through the move's
+ *  own reader (faceOfRole), and only where the printed title IS that face's holder form, so a wrong word still reds.
+ *  @param {any} c */
+const faceOf = (c) => { const f = faceOfRole(c); return c && c.title === titleForHolder(f, c.gender) ? f : c?.title; };
+const minted = (/** @type {any} */ s) => s.npcs.filter((c) => c.institution?.kind === 'power' && faceOf(c) === CLAIMANT_FACE.title);
 
 describe('COHERENCE-POWERS-7 (R1) · a minted lord holds no office and owes no governor\'s debts', () => {
   it('the row: a lord is minted in the old families\' category, never the government\'s', () => {
