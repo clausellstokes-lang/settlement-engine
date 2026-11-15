@@ -444,13 +444,73 @@ The journal seat's 427 rows in 97 towns counted houses as well; houses are the I
 
 **Signature note for the EXPORTS seats (X9):** no leaf signature changed. The new leaf `economicsCrisisMarks.js` is the tab's alone. The journal already calls `rowStoppedBy` itself.
 
-## What is left (as at batch 4)
+## X26 · a resource's name has one home: the Nearby Resources chips print the catalogue's label
 
-- **X26** (next, its own commit): the Nearby Resources chips print the catalogue's label. Made and tested (29deff376 in the seat's scratch, rebased onto this push), its census running.
-- Then rows printing in five towns or more, widest first (the chair's order): **B28006, B28222** wool → cloth chips (39): verify against `chainOutputsShown`. **14551** (22) "No one here works the mineral hot springs" beside a line saying the town draws on the springs. **14404, B13482, 14395, 14400, 14242** "Needed, and not brought in: …".
+Commit **9abfb1553** (its own commit, as ruled). Census before = batch 4's after (bb5ebff5c); census after = the X26 commit (the same code). Inventory diff: `sentences: before 30083 after 29620 · gone 657 · new 194 · in fewer towns 0 · in more towns 10 · moved 0`. **All 861 changed folds are on Systems/Resources** (the Nearby Resources chip runs, which the dump folds as one line). No sentence prints in fewer towns, so nothing is silenced.
+
+**The cure** (`ResourcesTab.jsx`, three edits in place): the Abundant, Depleted and besieged ground chips (`fmtKey`) and the resource rows among "Commodities available" print `RESOURCE_DISPLAY_LABELS[k]`. That is the seam's verbatim, census-guarded transcription of `RESOURCE_DATA[k].label` (`resourceDisplayName.js`, the display's one home for a resource's name, which keeps the PDF worker bundle free of the catalogue). A custom ground keeps its key's words, and a commodity word is unchanged.
+
+**Rows cured:** **B28788, B28789** ("defended pass" read as a defence in towns with none): 29 towns → 0. "Mountain Pass" prints there now, the catalogue's own word.
+
+**THE VETO LIST (X26): every chip reworded, old → new, with its towns** (towns printing it as a ground chip / as a commodity-row chip; the smallest … the largest; a crisis town). Every key with a different word, 23 of the catalogue's 33, in **710 of the 720 towns**:
+
+| old | new | towns | read in |
+|---|---|---|---|
+| Iron Deposits | Iron Ore Deposits | 255 / 164 | r2r-thorp-1 … r2s-mass_migration-metropolis-2 · r2s-under_siege-thorp-3 |
+| Coal Deposits | Coal or Peat Deposits | 220 / 138 | r2r-thorp-2 … r2s-mass_migration-metropolis-3 · r2s-famine-thorp-1 |
+| Foraging Areas | Wild Foraging Areas | 211 / 131 | r2r-thorp-1 … r2s-mass_migration-metropolis-2 · r2s-under_siege-thorp-0 |
+| Stone Quarry | Stone quarry (the catalogue's own case) | 209 / 0 | r2r-thorp-0 … r2s-mass_migration-metropolis-3 · r2s-under_siege-thorp-0 |
+| Grazing Land | Open Grazing Land | 196 / 120 | r2r-thorp-10 … r2s-mass_migration-metropolis-3 · r2s-famine-thorp-1 |
+| Grain Fields | Extensive Grain Fields | 178 / 129 | r2r-thorp-12 … r2s-mass_migration-metropolis-2 · r2s-under_siege-hamlet-2 |
+| Managed Forest | Managed Woodland | 148 / 94 | r2r-thorp-7 … r2s-wartime-metropolis-1 · r2s-famine-thorp-2 |
+| Precious Metals | Precious Metal Veins | 117 / 91 | r2r-thorp-4 … r2s-mass_migration-metropolis-1 · r2s-occupied-thorp-3 |
+| Crossroads Position | Strategic Crossroads | 115 / 115 | r2r-thorp-2 … r2s-mass_migration-metropolis-2 · r2s-under_siege-thorp-0 |
+| Hot Springs | Hot Springs / Healing Waters | 109 / 109 | r2r-thorp-0 … r2s-religious_conversion-metropolis-1 · r2s-under_siege-thorp-3 |
+| River Fish | River Fisheries | 87 / 59 | r2r-thorp-12 … r2s-mass_migration-metropolis-2 · r2s-under_siege-thorp-0 |
+| Shipbuilding Timber | Coastal Timber | 78 / 53 | r2s-under_siege-thorp-1 … r2s-wartime-metropolis-3 |
+| Deep Harbour | Deep Natural Harbour | 70 / 70 | r2r-thorp-43 … r2s-wartime-metropolis-3 · r2s-under_siege-thorp-1 |
+| Magical Node | Magical Ley Line Node | 66 / 45 | r2r-thorp-43 … r2s-wartime-metropolis-2 · r2s-under_siege-thorp-1 |
+| River Mills | Mill Sites | 50 / 50 | r2r-thorp-1 … r2s-mass_migration-metropolis-0 · r2s-famine-thorp-0 |
+| Alpine Pasture | Alpine Pastures | 47 / 36 | r2r-thorp-7 … r2s-insurgency-metropolis-1 · r2s-occupied-thorp-1 |
+| Hot Springs Mineral | Mineral Hot Springs | 41 / 41 | r2r-thorp-7 … r2s-insurgency-metropolis-1 · r2s-under_siege-town-2 |
+| Defended Pass | Mountain Pass | 29 / 29 | r2r-thorp-16 … r2s-insurgency-metropolis-1 · r2s-occupied-hamlet-0 |
+| Date Palms | Date Palms and Orchards | 18 / 15 | r2r-thorp-4 … r2s-succession_void-metropolis-1 · r2s-famine-city-1 |
+| Oasis Water | Oasis and Water Rights | 16 / 16 | r2r-thorp-4 … r2r-metropolis-25 · r2s-occupied-hamlet-1 |
+| River Clay | Clay Deposits | 15 / 11 | r2r-thorp-27 … r2s-mass_migration-metropolis-0 · r2s-occupied-thorp-0 |
+| Glass Sand | Fine Glass Sand | 14 / 9 | r2r-thorp-10 … r2s-religious_conversion-metropolis-0 · r2s-occupied-hamlet-1 |
+| Desert Salt | Salt Pans | 10 / 8 | r2r-hamlet-14 … r2s-religious_conversion-metropolis-0 · r2s-under_siege-town-1 |
+
+The ten keys whose formatter word was already the label (Fishing Grounds, Salt Flats, Fertile Floodplain, Hunting Grounds, Ancient Grove, Gemstone Deposits, Ancient Ruins, Marshlands, Camel Herds, Mountain Timber) keep their words. In the commodity row they now print in the label's case, where the record's lower-case key printed before ("hunting grounds" → "Hunting Grounds"; the screen's CSS already capitalized it).
+
+**THE PDF AND THE JOURNAL PRINT ANOTHER WORD (X26's question):** both print the key run through a formatter, not the catalogue's label. The PDF's Resources & Production page (`src/pdf/sections/ResourcesProduction.jsx`, the nearby chips) prints "Defended Pass". The journal's Resources page ("Nearby resources: … Defended Pass", "Depleted: Managed Forest": `src/foundry/journalPages.js :: resourcesPage`, `humanize(label(x) || x)`) does the same. The three surfaces agreed before on the formatter's word; now the tab prints the catalogue's and the two exports do not. NAMED for the EXPORTS seats: the cure is the same call, `resourceDisplayName.js :: RESOURCE_DISPLAY_LABELS[k]` for a catalogue key (the seam keeps the catalogue out of the PDF bundle). The Economics tab's card already prints "Mountain Pass" (the chain's own resource name).
+
+**The test:** `tests/components/resourcesCatalogueLabel.test.jsx` (births of the census's own seeds).
+- Four NOT pairs (Defended Pass, Iron Deposits, Crossroads Position, Hot Springs), each naming the label that prints instead.
+- Five whole-section checks (every catalogue ground prints its label, and no formatter word that differs).
+- Four KEEP (labels the formatter already gave).
+- **9 red at the base, the 4 KEEP green**; all 13 green on the cure. `resourcesNoPlentyUnderSiege.test.jsx` is still green: its anchor "Grain Fields" is inside "Extensive Grain Fields".
+
+**Gates:** with batch 4's, above (the gate tree held both commits). **Registers:** none. **Declared moves:** none.
+
+## The rows printing in five towns or more, verified (the chair's order after X26)
+
+Every row of the worklist is now cured, struck or named in this hand-back. The rows of five towns or more that were left, verified by the record over batch 4's after census:
+- **B28006, B28222** "Wool→cloth→dyed fabric" (the Partial card) / "cloth, dyed fabric" (Export Potential) (39 towns): the wool chain is filed partial where exactly one house supports it (`resourceGenerator.js :: evaluateInstitutions`). In **38 of 39** that house is "Weavers/Textile workers", whose work is cloth, so the card is true. It is false in **1**: r2r-hamlet-48, where the lone house is a Shepherd (no weaver, dyer or fulling mill). ONE TOWN: it WAITS by the chair's order (fewer than five). The cure would be the card's goods borne out by its house, as `chainOutputsShown` does for a flow card's outputs.
+- **14551** "No one here works the mineral hot springs near X." (22): STRUCK. In all 22 towns the springs are unexploited on the record: no chain, no house. The reader took the Unexploited card's "Draws on: hot spring source, knowledge of properties" (what the chain would draw on) for present work. A candidate for the chair if wanted: "Draws on:" on an Unexploited card could read "Would draw on:". A rewording, not made.
+- **14404** "Needed, and not brought in: timber, stone, metals." (17): STRUCK. In all 17 towns no raw metal arrives. Two sieges bring "Iron (weapons)", a worked good, and by W2-C-LEAVES item 4(b) a worked good meets no raw need (`tradeListDisplay.js :: needMetBy`).
+- **B13482** "Needed, and not brought in: spices." (13): STRUCK. In all 13 the line restates the record's own critical need (`resourceAnalysis.imports.critical`, "Hills terrain cannot produce this locally"), and no arrival names a spice. Note: "Luxury textiles and exotic goods" arrives in each, and whether "exotic goods" holds spices is the trade record's to say. If it should, the cure is a family word in `needMetBy`, not this line.
+
+## What is left (as at X26)
+
+- **Nothing of five towns or more.** The rows that wait (fewer than five towns), with their writers: B28006/B28222's one town (r2r-hamlet-48); **14395, 14400, 14242** (1 each: fish needed beside a fishmonger, `tradeListDisplay.js :: importsAsPrinted`); **B28459** (1) and the one-town chip runs struck as data (X28).
 - **X23**: switch the tab to `shadowEconomyShown` / `criticalImportsShown` when the chair names a tip that holds them.
+- **NAMED for the EXPORTS seats:** the PDF's and the journal's nearby-resource words (X26, above).
 - Named and not this seat's: **13538** (`magicProfile.js`), **11963, 29070, 22229, B29895, X25.2** (`validationOnPage.js`, X27: another seat's), **B11520, 12110, 12104, 12111, 22206, 16853, B19491** (`domain/foodways.js`), **01192, 05224** (DEFECON), **X28** the catalogue's commodities (data, the record's next measure), and the earlier lists.
 
-## How the instruments were re-made for batch 4
+## How the instruments were re-made for batch 4 and X26
 
 As above (`git archive` of READ-ALL and CENSUS-3 to the seat's scratch). Worktrees: `wt` (the cure, its own `npm ci`), `base` (fcab8b63d), `after` (bb5ebff5c) and `after26` (the X26 commit), each `node_modules` linked to `wt`'s. One census at a time. The record probes, kept in the seat's scratch: `leafcount.mjs` (the leaf's count over `corpus.ndjson.gz`, and batch 2's silence against the leaf's), `markcount.py` (the marks the Economics view of each dump prints), `pick.mjs`, `reskeys.mjs` (X26's old-to-new list with towns) and `labels.mjs`.
+
+## Hand-back (TAIL-DISPLAY-ECON-4)
+
+The worklist is finished inside the count (X24): batch 4 (X25.1) and X26 are pushed, and every row of five towns or more is verified. The branch tip is the hand-back commit after 9abfb1553. The after census of X26 (at 29deff376, the same code as 9abfb1553) is the next seat's before only if it renders that tree. It was written to this seat's scratch, which does not outlive the container: re-make it with the commands above.
