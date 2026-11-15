@@ -455,8 +455,8 @@ const PAIRS = [
     "A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.",
   ],
   [
-    "In the want of any formal power, the oldest or most respected villager steers the decisions. Less official than a reeve, but better than no one at all.",
-    "Where no formal authority exists, the eldest or best-regarded resident guides what the village decides. Short of a reeve in standing, yet steadier than a vacancy.",
+    "The oldest or most respected villager steers the decisions, by standing rather than office, and is heeded all the same.",
+    "The eldest or best-regarded resident guides what the village decides: an authority of regard, not of office.",
   ],
   [
     "Built of timber on stone footings.",
@@ -755,8 +755,8 @@ const PAIRS = [
     "Rule falls to the lord's appointee, whose noble warrant stands above local custom.",
   ],
   [
-    "With no formal government in place, a loose council of leading citizens runs the town. It answers to no one in particular, but it beats having no one at all.",
-    "Where nothing official exists, the town's notable men gather and govern by consensus. Less answerable than an elected body, and steadier than the void it fills.",
+    "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.",
+    "The town's notables gather and settle its common business by consensus. Less answerable than an elected body, but steady.",
   ],
   [
     "The town's leadership, whether elected or named to office.",
@@ -1063,8 +1063,8 @@ const PAIRS = [
     "A standing body of officials, clerks, and ward officers carries out the city's administration, functional whatever rules above it. What moves it is bureaucratic inertia.",
   ],
   [
-    "An elected council backed by a complete administrative staff.",
-    "A civic council put in by vote, with the full apparatus of office beneath it.",
+    "A civic council backed by a complete administrative staff.",
+    "A civic council with the full apparatus of office beneath it.",
   ],
   [
     "Effective power over the city sits with a consortium of guild masters.",

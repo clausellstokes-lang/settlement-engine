@@ -1879,7 +1879,7 @@
     },
     {
       "id": "village|Government|Village elder#0",
-      "text": "In the want of any formal power, the oldest or most respected villager steers the decisions. Less official than a reeve, but better than no one at all.",
+      "text": "The oldest or most respected villager steers the decisions, by standing rather than office, and is heeded all the same.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1888,7 +1888,7 @@
     },
     {
       "id": "village|Government|Village elder#1",
-      "text": "Where no formal authority exists, the eldest or best-regarded resident guides what the village decides. Short of a reeve in standing, yet steadier than a vacancy.",
+      "text": "The eldest or best-regarded resident guides what the village decides: an authority of regard, not of office.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3140,7 +3140,7 @@
     },
     {
       "id": "town|Government|Town council#0",
-      "text": "With no formal government in place, a loose council of leading citizens runs the town. It answers to no one in particular, but it beats having no one at all.",
+      "text": "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3149,7 +3149,7 @@
     },
     {
       "id": "town|Government|Town council#1",
-      "text": "Where nothing official exists, the town's notable men gather and govern by consensus. Less answerable than an elected body, and steadier than the void it fills.",
+      "text": "The town's notables gather and settle its common business by consensus. Less answerable than an elected body, but steady.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4438,7 +4438,7 @@
     },
     {
       "id": "city|Government|Mayor and council#0",
-      "text": "An elected council backed by a complete administrative staff.",
+      "text": "A civic council backed by a complete administrative staff.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4446,7 +4446,7 @@
     },
     {
       "id": "city|Government|Mayor and council#1",
-      "text": "A civic council put in by vote, with the full apparatus of office beneath it.",
+      "text": "A civic council with the full apparatus of office beneath it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
