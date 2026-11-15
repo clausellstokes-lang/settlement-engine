@@ -200,7 +200,6 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
   }, 180_000);
 
   it('A2 — the pin reproduces the record: a record-built bag rebuilds the settlement through rederive', () => {
-    const first = runHeadless(createPRNG(SEED));
     // ⭐ THE BAG IS BUILT FROM THE RECORD, THROUGH THE PRODUCT'S OWN CHANNEL (EM-R2 §0.S,
     // judgment 204b). The key `npcs` names TWO facts: ctx's PRE-enrichment roster and the
     // record's post-coherence roster. `dmLayer :: pinsFrom` structuredClones `source[key]` out
@@ -208,7 +207,13 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     // the fact the gate is defined on, and a ctx-built bag would assert a claim the product
     // never makes. The root override re-states the record's own value, so the bag is the
     // record's own roster and nothing else.
-    const record = first.settlement;
+    // RE-KEYED 2026-11-15, THE CHAIR'S RULING PM1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's
+    // list): the record a DM edit holds is the PRODUCT ENTRY's (`generateSettlementPipeline`, as `hashFor` spells it), final-record
+    // passes included (keepOneDominant; TAIL-POWERS-B-2 batch 4's draw-free `withConflictRelations`, c1263e61c, merged at
+    // d700bda44). The raw runner's settlement (`runHeadless`) lacks those passes: on Großholz the one difference was
+    // powerStructure.factionRelationships[1] (stable -> escalating and its twin sentence), the roster the same 28 on both sides.
+    // Through the entry the round trip is byte-identical; nothing else in the arm moves.
+    const record = generateSettlementPipeline({ ...CONFIG }, null, { seed: SEED, customContent: {} });
     const engine = { run: generateSettlementPipeline, getStepMeta };
     const declarations = { declarationsFor, isEditableCard };
     const npc0 = (record.npcs || [])[0] || {};
