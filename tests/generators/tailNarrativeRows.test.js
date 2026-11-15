@@ -272,3 +272,76 @@ describe('B4 the new lines claim no fight and no need the record lacks (TAIL-NAR
     }), 'the true siblings still print');
   });
 });
+
+/**
+ * BATCH 5 (TAIL-NARRATIVE-3, ruling (N13)) — `src/data/narrativeData.js` (STRESS_NOTES, STRESS_DESCS, ARRIVAL_SCENES) and
+ * `src/data/stressInstitutionEffects.js` (the crisis secrets): each line names only what the record holds. The founding
+ * note claimed the founders' purpose, trust or kind ("founded by people who agreed on its purpose", "a few families who
+ * trusted each other", "chosen for trade, water and good ground") beside a founder or a reason that denies it: it now
+ * speaks of the settlement and its people, never of why or by whom it was founded. The arrival lines named streets,
+ * quarters, warehouses, a crossroads or a waterfront the town lacks; the secrets named patrols, a crackdown, an archive,
+ * grain reserves, a slave market, a supply, and a family gone out of a besieged town. Every cure is a rewording inside
+ * its row (the same pool, the same slots, every keyword `getStressHistory` reads kept): no draw moved.
+ */
+const note = (/** @type {any} */ s) => String(s.history?.founding?.stressNote);
+const arrival = (/** @type {any} */ s) => JSON.stringify(s.arrivalScene ?? '');
+const secrets = (/** @type {any} */ s) => (s.npcs || []).map((/** @type {any} */ n) => `${n.secret?.what ?? ''} | ${n.secret?.stakes ?? ''}`).join(' || ');
+const READ5 = { note, arrival, secrets };
+describe('B5 the founding notes, the arrival lines and the secrets name only what the record holds (TAIL-NARRATIVE-3 batch 5)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** [id, seed, where, must not print, what prints instead] */
+  const CURED = /** @type {Array<[string, string, 'note'|'arrival'|'secrets', RegExp, RegExp]>} */ ([
+    ['21981', 'r2s-politically_fractured-thorp-1', 'note', /agreed on its purpose/, /^The people of the settlement no longer agree on what it is for/],
+    ['03015', 'r2s-politically_fractured-thorp-3', 'note', /shared purpose held the founders/, /^Every faction here tells the settlement's story its own way/],
+    ['pf[1]', 'r2r-hamlet-45', 'note', /pulled together in one direction/, /^Its people work as hard as they ever did/],
+    ['21980', 'r2s-recently_betrayed-thorp-1', 'note', /few families who trusted/, /^The settlement runs on trust between its households/],
+    ['22973', 'r2r-thorp-51', 'note', /promise between a few families/, /^Life here rests on promises kept between neighbours/],
+    ['rb[2]', 'r2s-recently_betrayed-thorp-2', 'note', /survived by trusting/, /^People here trusted each other without thinking about it/],
+    ['09482', 'r2s-slave_revolt-thorp-2', 'note', /From its first season/, /^For years this place has run on enslaved hands/],
+    ['sr[0]', 'r2s-slave_revolt-thorp-1', 'note', /was built by slaves/, /^The settlement ran on slaves/],
+    ['sr[2]', 'r2s-slave_revolt-thorp-3', 'note', /The founders built with slaves/, /^Its masters worked it with slaves/],
+    ['20558', 'r2r-thorp-32', 'note', /founders built a place to trade/, /and pays what the army thinks fair\.$/],
+    ['war[0]', 'r2r-thorp-56', 'note', /founded for trade and quiet growth/, /^The settlement grew up in quieter years/],
+    ['war[1]', 'r2r-hamlet-5', 'note', /chosen for peace/, /the bill grows every season\.$/],
+    ['22064', 'r2s-under_siege-thorp-2', 'note', /chosen for trade, water/, /^Whatever the site was chosen for matters little/],
+    ['siege[0]', 'r2r-thorp-58', 'note', /chose this place for its trade/, /^Whatever the settlement was built for, it is under siege now/],
+    ['21761', 'r2s-plague_onset-village-1', 'note', /roads and river/, /the sickness found its way here all the same\.$/],
+    ['plague[0]', 'r2r-village-50', 'note', /its roads and water/, /^The sickness came in the way everything else here comes in/],
+    ['plague[2]', 'r2s-plague_onset-thorp-1', 'note', /picked so trade could reach/, /^The sickness reached it as easily as news does/],
+    ['01626', 'r2s-occupied-thorp-1', 'arrival', /street signs/, /notices are posted in two languages now/],
+    ['18689', 'r2s-occupied-hamlet-0', 'arrival', /where the roads meet/, /stand about in the middle of/],
+    ['01080', 'r2s-wartime-village-3', 'arrival', /prosperous in a way|the warehouses are full/, /is busy in a way that feels wrong\. The forge fires burn past dark/],
+    ['00340', 'r2s-religious_conversion-village-3', 'arrival', /in different quarters/, /forming at opposite ends of the settlement/],
+    ['B21058', 'r2r-thorp-35', 'arrival', /working waterfront/, /the particular mud of a bank that people use every day/],
+    ['21748', 'r2r-thorp-14', 'arrival', /becomes a street/, /becomes part of the settlement at a point/],
+    ['01529', 'r2s-slave_revolt-thorp-0', 'arrival', /field gangs/, /field hands work without overseers today/],
+    ['17390', 'r2s-insurgency-hamlet-2', 'secrets', /Ordered a crackdown/, /Named people who had nothing to do with the insurgency as its ringleaders/],
+    ['17123', 'r2r-thorp-10', 'secrets', /patrol schedules|hit patrols/, /selling information about who travels the roads and when/],
+    ['22818', 'r2s-monster_pressure-thorp-3', 'secrets', /sent a patrol/, /They sent a party into that territory/],
+    ['17102', 'r2s-succession_void-hamlet-3', 'secrets', /archive/, /removing records that would complicate the succession/],
+    ['17522', 'r2r-thorp-17', 'secrets', /grain reserves|at peak price/, /Sold off the settlement's emergency stores/],
+    ['22572', 'r2s-under_siege-thorp-3', 'secrets', /family left last week|loading the cart/, /Their family is packed and waiting for the first gap in the lines/],
+    ['17204', 'r2r-thorp-38', 'secrets', /supply disruption/, /Helped cause the original shortfall that triggered the famine/],
+    ['17408', 'r2s-slave_revolt-village-0', 'secrets', /slave market/, /Owned a share in the slaves worked here/],
+  ]);
+  it('the flagged line no longer prints, and the slot says what the record bears (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, where, gone, instead]) => {
+      const text = READ5[where](born(seed));
+      expect(text, `${id} ${seed}: what prints instead`).toMatch(instead);
+      expect(text, `${id} ${seed}: the flagged line`).not.toMatch(gone); // anchored: the line above asserts the slot printed
+    }), 'the batch-5 lines name only what the record holds');
+  });
+  /** [seed, where, a true sibling that must still print] */
+  const KEEP = /** @type {Array<[string, 'note'|'arrival'|'secrets', RegExp]>} */ ([
+    ['r2s-under_siege-thorp-1', 'note', /^The founders built walls in case they were ever needed\. They are needed now\.$/],
+    ['r2r-village-9', 'note', /^The founding generation is gone, and nobody agrees who should lead now\.$/],
+    ['r2r-thorp-26', 'note', /^A place this size still trusts faces it knows/],
+    ['r2s-insurgency-town-0', 'secrets', /Is the insurgency's contact inside the council/],
+    ['r2s-famine-city-0', 'secrets', /Is receiving grain shipments through a covert route/],
+  ]);
+  it('the true siblings still print (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, where, kept]) => {
+      expect(READ5[where](born(seed)), seed).toMatch(kept);
+    }), 'the true siblings still print');
+  });
+});

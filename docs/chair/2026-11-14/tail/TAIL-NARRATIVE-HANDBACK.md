@@ -1,6 +1,6 @@
 # TAIL-NARRATIVE · hand-back (the group NARRATIVE: the told history, origin prose and the narrative tables)
 
-> Kept current by the successor seat TAIL-NARRATIVE-2 from 2026-11-15 (its rulings and batches: **TAIL-NARRATIVE-2** at the end of this file).
+> Kept current by the successor seats TAIL-NARRATIVE-2 and TAIL-NARRATIVE-3 from 2026-11-15 (their rulings and batches: **TAIL-NARRATIVE-2** and **TAIL-NARRATIVE-3** at the end of this file; WHAT IS LEFT is current after batch 5).
 
 Seat: TAIL-NARRATIVE, a builder seat of the 2026-11-14 integration program. Branch `lane/tail-narrative-2026-11-14`, cut from the joined line `lane/join-2026-11-14` at **f663a2699** (read back from origin at the start). Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-NARRATIVE.{md,json}` on `lane/chair-2026-11-08` (120 rows, read at e5b421802).
 
@@ -248,12 +248,86 @@ GATES: eslint 0 on the touched files; domain-strict 1113/1113; ratchet 167/167; 
 
 This seat hands back at its mark after batch 4 (the session's count read 0; judged by time). Tip: the commit that carries this section. The successor continues on this branch.
 
-## What is left (after batch 4)
+## What is left (after batch 5, TAIL-NARRATIVE-3)
 
-- FIRST (the chair): N12, `arrivalScene.js`, the chooser that names houses and goods without reading the roster (above).
-- ORIGIN_POOLS: B20992/B27626's magic share (NAMED: the call site); the exports' label (NAMED: the PDF and the journal).
-- founder.js FOUNDER_KIND (3 rows, 79 towns), `stressInstitutionEffects.js` (18 rows, 190), `narrativeData.js` (33 rows, 209), `narrativeGenerator.js :: SMALL_PLACE_TIER_LINES` B27632, and the X9 rows of those writers (00748 STRESS_DESCS.slave_revolt; 31876/13045 genArrivalDetail; 27503, 11946, 15278, 28582, 11964, 11999, 12002, 23385, 12004 STRESS_INSTITUTION_EFFECTS; 29065, 23822, 14686 POLITICAL_FLAVOR): not begun, as the predecessor left them.
-
+- NEXT (N13's order): the founder's kind, `founder.js FOUNDER_KIND` (3 rows: 09374 a dynastic decision beside a ferry crossing, 09381 a military command beside foresters, B08943 a trade house beside a hunting lodge; 28, 27 and 24 towns at the last read): RECORD-MEASURE-1's FB (`fb.patch` on `lane/record-measure-2026-11-14`, the table turned the other way) is a CANDIDATE: run the tests it did not, measure by `fielddiff.mjs`, read its inheritors.
+- THEN N12, `arrivalScene.js` (the chooser that names houses and goods without reading the roster): not begun.
+- `narrativeData.js` rows printing in fewer than five towns (they wait, N13): 20320 the council hall and two taverns (3), 22067/B01044 the slave market and "quiet" under a revolt (3), 01042 "more fortified than its size" (3), 21756 the watchtowers (2), 28485 the chandlers (2), B01036 "orderly" under a famine (2), B00999 "reasonable shape" (1), B14267 "Nothing … out of place" (1); `stressInstitutionEffects.js` 17174/17182 the export decisions (1 each).
+- SAME SHAPE, NOT FLAGGED, NAMED with batch 5: the founding notes of the pools the readers did not flag still claim a founding cause or kind the record may deny: `STRESS_NOTES.occupied` ([0] "The founders governed themselves", [1] "came here to be far from other people's rule" beside a royal or imperial decree), `famine` ([0]–[2]: the land "drew"/"fed" the founders; and "harvests" where the failed source may be the herds or the fishing), `infiltrated[0]`/`[2]` and `mass_migration[0]`/`[2]` ("the founders all knew each other" beside a decree's forced relocation or three settlements merged), `under_siege[2]` ("The founders built walls"). Measure them by `notes.mjs` (below) before curing.
+- ORIGIN_POOLS: B20992/B27626's magic share (NAMED, N14: the record's); the exports' label (NAMED, N14: the PDF's seat).
+- `narrativeGenerator.js :: SMALL_PLACE_TIER_LINES` B27632 "not much left to sell" beside five exports (1 town: waits); the X9 rows of these writers (00748 STRESS_DESCS.slave_revolt; 31876/13045 genArrivalDetail; the STRESS_INSTITUTION_EFFECTS X9 rows not cured above; 29065, 23822, 14686 POLITICAL_FLAVOR): not begun.
+- B11654, B11678 ("Kept in Deepwinter/Harvest, the first week": a festival kept under a plague, 14 + 13 towns): MISTRACED to `stressInstitutionEffects.js:113` ("since the first week" in an occupation secret); the line is the festival calendar's: NAMED for that writer's group, not this one.
+- B14330 STRESS_NOTES.succession_void[1] "Now the seat is empty, and rivals are fighting over it" beside "Acting <X> keeps the seat meanwhile" (11): STRUCK, as the predecessor struck B06988: the page's own governance line reads "The seat stands empty … Acting <X> keeps the seat meanwhile".
 ## How this seat's instruments were made
 
 As the predecessor's (above), with: `arms.py` (scratch) maps each town's `settlementReason[0]` to its (arm, row) by the pools dumped from the tree, with the food record (`economicState.foodSecurity`: dailyNeed, dailyProduction, importCoverage, magicOffset, deficitPct), the isolation receipt's paths and evidence, and the History's founding reason beside it; a change after the full after run is measured by `census3.sh <tree> <out> 2 --seeds <its towns> --count-only` and a record diff of those towns.
+
+---
+
+# TAIL-NARRATIVE-3 (the second successor seat, 2026-11-15)
+
+Seat: TAIL-NARRATIVE-3, succeeding TAIL-NARRATIVE-2 on `lane/tail-narrative-2026-11-14` from its tip **ca827fc0f** (read back from origin; the repository's main checkout was behind it and was not touched). Scratch worktrees only: the work tree on a local branch pushed by explicit refspec; a detached worktree at ca827fc0f for the before census and the reds at the base (`node_modules` linked).
+
+## The chair's rulings since (2026-11-15 02:22 UTC; each vetoable by the owner), copied
+
+- (N13) THE ORDER IS BY WIDTH, and it differs from the predecessor's: FIRST `src/data/narrativeData.js` (33 rows, 209 towns: STRESS_NOTES and STRESS_DESCS that name founders, burial grounds, temples, a merchant district, watchtowers, a waterfront) and `src/data/stressInstitutionEffects.js` (18 rows, 190 towns: secrets and crisis lines that name patrols, a crackdown, an archive, a slave market, grain reserves, exports, a festival under a plague): each line names only what the record holds (a house by the roster; a thing a crisis stops is not said to go on: Y6, Y8), by a condition, a twin or a rewording inside its row; THEN the founder's kind (three rows in 28, 27 and 24 towns: the founder row names a place or a cause the Origin row denies: the measuring seat's candidate FB, the table turned the other way, is a CANDIDATE: run the tests it did not, and read its inheritors); THEN N12's `arrivalScene.js`; a row printing in fewer than five towns waits.
+- (N14) NAMED, not this group's: the magic share (the narrative step is not passed the food record's magic offset: 6 towns) is the record's; the two headings over the origin line are with the PDF's seat.
+- (N15) `ruling body` takes NO NEW LINE until the chair says so: a row that needs it stays parked.
+- (U1) THE WEEKLY USAGE WARNING: commit and push every batch the moment it holds, with WHAT IS LEFT current in the same push; hand back at 250,000 (or about seventy minutes); one line to the chair at the hand-back, a stop or a question.
+
+## Batch 5: `narrativeData.js` (STRESS_NOTES, STRESS_DESCS, ARRIVAL_SCENES) and `stressInstitutionEffects.js` (the crisis secrets), N13 first
+
+THE RULE THE CURES FOLLOW: the founding note (`history.founding.stressNote`, a zero-draw hash pick over its stress's pool) is written beside `foundedBy` and the founding reason, and claimed the founders' agreement, trust, kind or purpose ("founded by people who agreed on its purpose", "a few families who trusted each other", "chosen for trade, water and good ground", "the roads and river that made this a good place", "From its first season this place ran on enslaved hands"): measured by script against the founder and the reason of every printing town, each row false in most of them (pf[0] 12 of 15, pf[1] 7/11, pf[2] 9/12, rb[0] 10/10, rb[1] 11/14, rb[2] 8/8, war[0] 6/10, war[1] 8/13, war[2] 4/8, siege[0] 10/19, siege[1] 7/7, plague[0] 5/10, plague[1] 6/8, plague[2] 5/10, slave_revolt[0..2] 3/13, 1/6, 2/5). Every row of those six pools that claims the founding now speaks of the settlement and its people, never of why or by whom it was founded (17 rows; `under_siege[2]` kept). The arrival lines and the secrets: each reworded to claim only what every printing town bears. EVERY CURE IS A REWORDING INSIDE ITS ROW: the same pool, the same length, the same slots, no defence word added or dropped (`licensedNotes`' filter unmoved), every keyword `npcGenerator.js :: getStressHistory` branches on kept; no declaration added.
+
+A FIRST DRAFT WAS WITHDRAWN BEFORE ANY COMMIT: it gave the crackdown, the two patrol secrets `needs: guardPresence` and the supply disruption `needs: imports`. Measured on the census's births, the refused secrets resolved by the hash argmax to rows that branch `getStressHistory` differently, and in three towns (r2s-monster_pressure-village-0, village-2, r2s-insurgency-village-2) ten OTHER NPCs' secrets and presentations re-drew: a draw moved outside the row's pool (a STOP by the law). A twin cannot be keyed on these rows (`drawDeclared`'s text-keyed twin reads a `text` field the secret rows lack, and the site's `twin` resolver is in `npcGenerator.js`, not this group's file), so the four rows were reworded instead; the census re-run from births.
+
+Census before ca827fc0f (29,885 tabs sentences; 35,782 with the exports); after at the batch's tree: tabs 29,885 -> 29,876 (gone 54, new 45, **in fewer towns 0, in more 0**); exports 35,782 -> 35,773 (gone 52, new 43, fewer 0, more 0). The inheritors are exactly the reworded lines, in the same towns.
+
+CURED (30 worklist rows, every one GONE; towns printing before -> after; the measure is the false towns before, by the record):
+- STRESS_NOTES (the founding note): 21981 politically_fractured[0] 15 -> 0 (measure 12); 03015 [2] 12 -> 0 (9); and [1] 11 -> 0 (7); 21980 recently_betrayed[0] 10 -> 0 (10); 22973 [1] 14 -> 0 (11); and [2] 8 -> 0 (8); 09482 slave_revolt[1] 6 -> 0 (1); and [0] 13 -> 0 (3), [2] 5 -> 0 (2); 20558 wartime[2] 8 -> 0 (4); and [0] 10 -> 0 (6), [1] 13 -> 0 (8); 22064 under_siege[1] 7 -> 0 (7); and [0] 19 -> 0 (10); 21761 plague_onset[1] 8 -> 0 (6); and [0] 10 -> 0 (5), [2] 10 -> 0 (5).
+- STRESS_DESCS and ARRIVAL_SCENES (the arrival): 01626 occupied "street signs … everywhere" in thorps and small villages 13 -> 0 (8 of 13 at or under a village of 134); 18689 occupied "stand where the roads meet" 8 -> 0 (7: no crossroads); 01080 / 20552 wartime "prosperous in a way that feels wrong … the forges … the warehouses are full" 7 -> 0 (4 below Comfortable; 2 with no warehouse; two villages with one smith); 00340 religious_conversion "processions … in different quarters" 5 -> 0 (1, a village of 351); B21058 ARRIVAL_SCENES.river "a working waterfront" 6 -> 0 (2: no docks and no fishers); 21748 ARRIVAL_SCENES.ordinary "becomes a street … the settlement grows around you" 17 -> 0 (6 thorps and hamlets); 01529 slave_revolt "field gangs" 6 -> 0 (3 thorps of 15 to 28).
+- STRESS_INSTITUTION_EFFECTS (the secrets): 17390 / 15280 "Ordered a crackdown that killed people" 25 / 2 -> 0 (5: no force); 17123 / 17124 "selling information about patrol schedules" 20 / 4 -> 0 (5: no force; its stakes "ambushes hit patrols"); 22818 "They sent a patrol into that territory" 20 -> 0 (5); 17102 / B09729 "removing records from the archive" (and its stakes "manages the archive") 19 / 4 -> 0 (no archive on the roster in the towns read; a hamlet of 28); 17522 "emergency grain reserves … at peak price" 16 -> 0 (4 with no store or granary on the roster; the failed source is not always grain); 22572 / B21549 "Their family left last week" under a siege 15 / 3 -> 0 (15 of 15: nothing goes out under a siege); 17204 / B09864 "the original supply disruption" 15 / 1 -> 0 (1: nothing imported); 17408 / 15409 "Owned a share of the slave market" 13 / 4 -> 0 (13 of 13: no slave market on any roster).
+
+STRUCK: B14330 (above, in WHAT IS LEFT). MISTRACED, NAMED: B11654, B11678 (above).
+
+THE LINES NEW OR REWORDED (the veto list; each read in its printing towns at the after census: the smallest and the largest it reaches; every founding note prints only under its own stress, so the siege, famine and occupation rows are read under them):
+- "…no longer agree on what it is for…" (15 towns): r2s-politically_fractured-thorp-0 (9), r2s-politically_fractured-metropolis-1 (41777)
+- "…work as hard as they ever did…" (11 towns): r2r-hamlet-4 (41), r2s-politically_fractured-metropolis-2 (160904)
+- "…tells the settlement's story its own way…" (12 towns): r2s-politically_fractured-thorp-3 (15), r2r-metropolis-39 (87995)
+- "…runs on trust between its households…" (10 towns): r2s-recently_betrayed-thorp-1 (27), r2s-recently_betrayed-city-2 (11727)
+- "…promises kept between neighbours…" (14 towns): r2r-thorp-51 (11), r2s-recently_betrayed-metropolis-1 (79438)
+- "…trusted each other without thinking…" (8 towns): r2s-recently_betrayed-thorp-2 (13), r2s-recently_betrayed-metropolis-0 (42069)
+- "…ran on slaves it never counted…" (13 towns): r2s-slave_revolt-thorp-1 (15), r2s-slave_revolt-metropolis-2 (127443)
+- "…For years this place has run on enslaved…" (6 towns): r2s-slave_revolt-thorp-2 (21), r2s-slave_revolt-city-0 (6942)
+- "…Its masters worked it with slaves…" (5 towns): r2s-slave_revolt-thorp-3 (23), r2s-slave_revolt-town-2 (2239)
+- "…grew up in quieter years…" (10 towns): r2r-thorp-55 (17), r2s-wartime-metropolis-2 (160267)
+- "…the bill grows every season…" (13 towns): r2s-wartime-thorp-0 (18), r2s-wartime-metropolis-0 (49155)
+- "…pays what the army thinks fair…" (8 towns): r2s-wartime-thorp-3 (6), r2s-wartime-city-2 (13169)
+- "…it is under siege now, and nothing else…" (19 towns): r2r-thorp-58 (7), r2s-under_siege-metropolis-3 (46730)
+- "…Whatever the site was chosen for…" (7 towns): r2s-under_siege-thorp-2 (6), r2s-under_siege-metropolis-1 (70862)
+- "…the way everything else here comes in…" (10 towns): r2s-plague_onset-thorp-2 (9), r2s-plague_onset-city-2 (11498)
+- "…found its way here all the same…" (8 towns): r2s-plague_onset-village-0 (110), r2s-plague_onset-metropolis-3 (27673)
+- "…as easily as news does…" (10 towns): r2s-plague_onset-thorp-3 (15), r2s-plague_onset-metropolis-2 (17253)
+- "…notices are posted in two languages…" (13 towns): r2s-occupied-thorp-0 (13), r2s-occupied-metropolis-0 (28723)
+- "…stand about in the middle of…" (8 towns): r2r-thorp-24 (20), r2s-occupied-village-2 (386)
+- "…busy in a way that feels wrong…" (7 towns): r2s-wartime-village-3 (213), r2s-wartime-metropolis-1 (25818)
+- "…opposite ends of the settlement…" (5 towns): r2s-religious_conversion-village-3 (351), r2s-religious_conversion-metropolis-3 (45843)
+- "…a bank that people use every day…" (6 towns): r2r-thorp-35 (20), r2r-metropolis-22 (170997)
+- "…becomes part of the settlement at a point…" (17 towns): r2r-thorp-49 (15), r2r-metropolis-12 (142760)
+- "…field hands work without overseers…" (6 towns): r2s-slave_revolt-thorp-1 (15), r2s-slave_revolt-city-2 (5009)
+- "…as its ringleaders…" (25 towns): r2r-thorp-25 (21), r2r-metropolis-51 (47372), r2s-insurgency-hamlet-2 (72)
+- "…who travels the roads and when…" (20 towns): r2r-thorp-10 (10), r2s-monster_pressure-metropolis-2 (41832)
+- "…sent a party into that territory…" (20 towns): r2s-monster_pressure-thorp-3 (10), r2s-monster_pressure-metropolis-2 (41832)
+- "…removing records that would complicate…" (19 towns): r2s-succession_void-hamlet-3 (28), r2r-metropolis-8 (344689)
+- "…emergency stores three months…" (16 towns): r2r-thorp-17 (11), r2s-famine-metropolis-0 (39834)
+- "…packed and waiting for the first gap…" (15 towns): r2s-under_siege-thorp-3 (7), r2r-metropolis-14 (271164)
+- "…original shortfall that triggered…" (15 towns): r2r-hamlet-16 (20), r2s-famine-metropolis-0 (39834)
+- "…share in the slaves worked here…" (13 towns): r2s-slave_revolt-town-1 (343), r2s-slave_revolt-metropolis-2 (127443)
+
+DECLARED MOVE (field diff by family on the 720, `fielddiff.mjs` before -> after): **`history.founding.stressNote` in 179 towns, `npcs` in 115 towns (the field `secret` only, 143 secrets, every one a cured row's own NPC: no other NPC and no other field), `arrivalScene` in 62 towns; no other family.** All prose; no draw moved.
+GUARD: `tests/generators/tailNarrativeRows.test.js` B5: 32 cured pairs red at the base (32 of 32), 5 KEEP pairs green before and after (under_siege[2]'s walls where they stand, succession_void[0], infiltrated[1], an insurgency and a famine sibling secret). A plant (politically_fractured[0] back to its old words) reds 1 of 32. LEDGERS kept by identity: `docs/census/declarations/STRESS_DESCS.json`, `ARRIVAL_SCENES.json`, `stressInstitutionEffects.STRESS_INSTITUTION_EFFECTS.json` (texts). PINS RE-KEYED BY IDENTITY: `tests/lint/presumedThings.widened.register.json`, four rows whose reworded line keeps its banked word (occupation 120273b1af3cb1b5 -> 0e103531bb2ad10b, siege 89fccab00f0ef11d -> d943bc164d82010e, famine c835d792041e5066 -> 5d4570b895149c66, revolt 49d03bfa7cbe9332 -> a4b9c9573076e473).
+GATES: eslint 0 on the touched files; typecheck:domain:strict and typecheck:ratchet exit 0; page-census --grid 2 falls (P7a, r2r-city-0 and r2s-insurgency-metropolis-0, the base's), none rising; presumed-things walker `--check` fresh 147 = the base's 147, stale 2 -> 3 (`narrativeData.js` house: warehouse 33cd6edee138e74a: the line no longer names warehouses; a register left stale, NAMED, for the close's shrink-only re-derivation); the 41 test files that name the touched files: 2 red, the same 2 (5 tests) red at the base, CARRIED: presumedThings.walker (4: its ARM 1 and ARM 2 stale-row tests and the ARM 3 strip were red at the base), generatorGoldenMaster (the golden NAMED, not re-taken).
+
+## How this seat's instruments were made
+
+As the predecessors' (above), with three record scripts (scratch): `notes.mjs <tree> <corpus> <out.json>` maps each town's `history.founding.stressNote` to its (pool, row) beside `foundedBy`, the reason, the terrain and the route; `secrets.mjs <tree> <corpus>` counts each flagged secret's printing towns and its false towns by `factsOf` and the roster; `arrival.mjs <tree> <corpus>` the same for the arrival rows (tier, population, route, prosperity, the roster's docks, fishers, warehouses and smiths). The before census ran on a detached worktree at the base while the cure was written in the work tree (two trees: no tree edited while its own render ran).
