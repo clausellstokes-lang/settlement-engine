@@ -1,0 +1,12 @@
+{"id":"C10021","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"STATE","why":"Charis Glabas is only rank 3 of Occupation Authority; Eudokia (rank 1) and Tryphon (rank 2) outrank her, so not the strongest figure","other":""}
+{"id":"C10045","town":"bar0-town-occupied-rand-2","sev":"LOW","kind":"PAIR","why":"says local collaborators include a known figure; the Crisis tab says no one is named, no local power gains","other":"C10023"}
+{"id":"C10357","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"LACKS","why":"'Hears civil pleas in the town court'; HOUSES lists no court (only Town council, Town hall, prison/stocks)","other":""}
+{"id":"C10727","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"LACKS","why":"'Legal Infrastructure: Court + Prison', 'Arrest, prosecute': HOUSES lists no court; only Town council, Town hall, Small prison/stocks","other":"C10357"}
+{"id":"C11128","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"STATE","why":"FOUNDING: a merchant consortium wanting a waypoint to own, from a mining camp; not founders fleeing other people's rule","other":"C11125"}
+{"id":"C11143","town":"bar0-town-occupied-rand-2","sev":"HIGH","kind":"PAIR","why":"'the occupiers left': CRISIS is Under Occupation now (8 years ago, still held); the occupiers have not left","other":"C9973"}
+{"id":"C11232","town":"bar0-village-calm-rand-2","sev":"MED","kind":"STATE","why":"a grazing-and-water dispute is in none of QUARRELS (none), TENSIONS (only tyranny) or PAST; the only live tension is tyranny","other":""}
+{"id":"C11266","town":"bar0-village-calm-rand-2","sev":"MED","kind":"STATE","why":"Aleidis Krause is the militia captain; the priest who leads prayers is Norbert Krause. Hook gives her his office","other":""}
+{"id":"C11435","town":"bar0-village-calm-rand-2","sev":"LOW","kind":"BROKEN","why":"the list prints 'timber' twice: 'timber, stone, luxury goods, timber, mountain timber'","other":""}
+{"id":"C11640","town":"bar0-village-calm-rand-2","sev":"LOW","kind":"PAIR","why":"'Medical role: common' for magic, but reliance on magic is None and no arcane practitioners are on the rolls; healing is clergy care","other":"C11620"}
+{"id":"C11759","town":"bar0-village-calm-rand-2","sev":"LOW","kind":"STATE","why":"Norbert Krause 'voted against' on a small matter; PEOPLE shows him on no council or power, so he holds no vote","other":""}
+{"id":"DONE","lines":1974,"blocks":2,"flags":11}
