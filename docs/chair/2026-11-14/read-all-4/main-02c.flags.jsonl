@@ -1,0 +1,11 @@
+{"id":"00273","town":"r2r-metropolis-14","sev":"MED","kind":"LACKS","why":"names 'the tank'; HOUSES has no tank or reservoir (only Advanced water infrastructure), and 'the bazaar' is not a listed house","other":""}
+{"id":"01055","town":"r2s-under_siege-metropolis-3","sev":"LOW","kind":"TAG","why":"tag reaches siege/famine/occupation; 'every performance sells out' reads as ordinary trade under Active Siege, safety Desperate","other":""}
+{"id":"00860","town":"r2s-famine-metropolis-1","sev":"MED","kind":"STATE","why":"'strongest powers fighting over the stores'; the only QUARREL is Ducal Governorship vs Merchant Guilds over a new levy, not food stores","other":""}
+{"id":"01109","town":"r2s-occupied-metropolis-1","sev":"MED","kind":"STATE","why":"'yards as busy as its workshops' under occupation (vassal extraction, trade taxed, chains vulnerable); HOUSES has no yards, boatyard or docks","other":""}
+{"id":"00921","town":"r2s-occupied-metropolis-3","sev":"MED","kind":"LACKS","why":"'built around the tank and the bazaar'; HOUSES has no tank or reservoir and its only bazaar is the Black market bazaar","other":""}
+{"id":"00920","town":"r2s-plague_onset-metropolis-1","sev":"MED","kind":"LACKS","why":"'built around the tank and the bazaar'; HOUSES has no tank or reservoir and no bazaar (only market squares, a Whisper market)","other":""}
+{"id":"00856","town":"r2r-metropolis-26","sev":"LOW","kind":"STATE","why":"'orders go unanswered': STATE/GOVERNMENT give Shadow Senate Significant, legitimacy Contested, insurgency only contests authority, Thieves' Guild corrupted; reads like a void","other":""}
+{"id":"00069","town":"r2s-monster_pressure-metropolis-0","sev":"LOW","kind":"STATE","why":"'trading the timber it needs'; LAND lists no woodland or timber resource and TRADE no timber; Charcoal burner lacks timber access","other":""}
+{"id":"00511","town":"r2s-succession_void-metropolis-1","sev":"LOW","kind":"STATE","why":"'Insecurity and hunger' but FOOD is Pressured, gap 6%, stores 14.6 months, no famine; hunger is not a stated condition","other":""}
+{"id":"00445","town":"r2r-metropolis-12","sev":"LOW","kind":"STATE","why":"'divine provision eases the shortfall'; FOOD shows by magic 0%, gap 0%, deficit 0%: no shortfall and no magic share to ease it","other":""}
+{"id":"DONE","lines":1644,"blocks":38,"flags":10,"first_line":4292,"last_line":5935}
