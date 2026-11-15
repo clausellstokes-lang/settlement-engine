@@ -2,12 +2,12 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "42dae5a46fae776296e499465519fec29b3322ec12f7b7d3fcb49c68aed79ef9",
-      "src/domain/display/stateProse/powerStateProse.js": "37ca798950bfde97c2e406ae72bab3856dcb97c22d6595b6ad12744d18568a2e",
+      "src/domain/display/stateProse/generalStateProse.js": "7ef45473ed027916d28b6abe71cde3eb83a436d999e000b4e8598644dee16a49",
+      "src/domain/display/stateProse/powerStateProse.js": "019dd2312606b1aed4b8fad2e32c4695767672cb94e2b7fae63dc84ae6ec3258",
       "src/domain/display/stateProse/economyStateProse.js": "3480fa792f166d77aa7de7129bf1fe404d1b2e1e86823d9923b119134c118fb2",
       "src/domain/display/stateProse/defenseStateProse.js": "7f1bc6432a4f63e3e93d68aa473a9361ad2594127db6fbd828e9e96452bf950b",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
-      "src/domain/display/stateProse/warFaithStateProse.js": "cd457c6496e5d84828e782f46c8a242c395c3636d62b0096469d14c3a1e1e3df",
+      "src/domain/display/stateProse/warFaithStateProse.js": "e3c17afb8e07d402d4fb8b3a342d9d2c03bc958151b3bb3e0bcbe199eaedeac9",
       "src/domain/display/stateProse/dossierMounts.js": "5032fe8e0b7d67567a054af136f13a8a54b7d7aa267b1cf4ba3fce629eb750b7"
     },
     "candidateLeaves": {
@@ -18,12 +18,12 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1361
+    "producerIndexFiles": 1377
   },
   "totals": {
     "pools": 856,
     "blocks": 69,
-    "variants": 2950,
+    "variants": 2959,
     "resolved": 492,
     "unresolved": 364,
     "resolvedWithPredicate": 321,
@@ -37,8 +37,8 @@
     "syntheticTableFields": 178,
     "tiers": {
       "MISSING": 33,
-      "THIN": 611,
-      "COVERED": 245,
+      "THIN": 614,
+      "COVERED": 242,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -719,8 +719,10 @@
       "lineDeclares": {
         "colour": 3,
         "gate": 1,
+        "no crisis: monster_pressure": 1,
         "no crisis: occupied": 1,
-        "no crisis: under_siege": 1
+        "no crisis: under_siege": 1,
+        "no crisis: wartime": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -928,7 +930,8 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 4,
-        "no crisis: threat": 1,
+        "no crisis: occupied": 1,
+        "no crisis: threat": 3,
         "threat": 1
       },
       "undeclared": 0,
@@ -1013,7 +1016,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
+      "variants": 6,
       "grammars": 2,
       "predicate": [
         {
@@ -1066,10 +1069,11 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 5,
+        "crisis: occupied": 1,
         "no crisis: occupied": 2,
         "no crisis: unrest": 1,
         "no threat": 3,
-        "threat": 2
+        "threat": 3
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -1717,7 +1721,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: under_siege": 2
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -1910,6 +1916,7 @@
         "crisis: famine": 3,
         "crisis: indebted": 3,
         "crisis: occupied": 1,
+        "food: ≥ secure": 1,
         "no crisis": 2,
         "no crisis: debt": 4,
         "no crisis: famine": 3,
@@ -1994,7 +2001,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 5,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
@@ -2717,7 +2724,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
+      "variants": 5,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -2751,8 +2758,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 4,
+        "crisis: any": 5,
+        "guardPresence": 1,
         "no crisis: threat, unrest": 2,
+        "no guardPresence": 1,
         "watch": 2
       },
       "undeclared": 0,
@@ -2769,7 +2778,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -2803,8 +2812,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 3,
-        "no crisis: threat, unrest": 2
+        "crisis: any": 4,
+        "guardPresence": 2,
+        "no crisis: threat, unrest": 2,
+        "no guardPresence": 1
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -5017,8 +5028,9 @@
         "crisis: under_siege": 3,
         "gate": 3,
         "guardPresence": 2,
-        "no crisis: under_siege": 4,
-        "no gate": 5
+        "no crisis: under_siege": 6,
+        "no gate": 5,
+        "no port": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -5077,7 +5089,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: occupied": 1,
+        "no crisis: under_siege": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -5823,7 +5838,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: under_siege": 1,
-        "no crisis: under_siege": 3
+        "no crisis: under_siege": 4
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -8458,8 +8473,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "guardPresence": 2,
+        "guardPresence": 3,
         "no guardPresence": 2
       },
       "undeclared": 0,
@@ -8652,8 +8666,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "guardPresence": 1,
+        "colour": 1,
+        "guardPresence": 2,
         "no guardPresence": 1
       },
       "undeclared": 0,
@@ -8718,8 +8732,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "guardPresence": 1,
+        "colour": 1,
+        "guardPresence": 2,
         "no guardPresence": 1
       },
       "undeclared": 0,
@@ -9043,9 +9057,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 1,
         "crisis: insurgency": 1,
-        "guardPresence": 1,
+        "guardPresence": 2,
         "no guardPresence": 1
       },
       "undeclared": 0,
@@ -9495,6 +9509,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "guardPresence": 1,
         "no crisis: occupied": 2
       },
       "undeclared": 0,
@@ -11072,7 +11087,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -11141,7 +11156,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "food: ≤ importDependent": 1,
+        "food: ≥ pressured": 3
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -11706,6 +11724,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 5,
+        "no crisis: wartime": 1,
         "no threat": 2,
         "threat": 2
       },
@@ -11798,7 +11817,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -11846,6 +11865,8 @@
       "declares": [],
       "lineDeclares": {
         "crisis: any": 1,
+        "crisis: indebted": 1,
+        "no crisis: indebted": 1,
         "no hunger": 1
       },
       "undeclared": 0,
@@ -12123,8 +12144,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "food: ≥ secure": 1,
+        "no crisis: under_siege": 1
+      },
+      "undeclared": 2,
       "crisisScoped": false
     },
     {
@@ -13976,7 +14000,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 8,
+      "variants": 9,
       "grammars": 1,
       "predicate": [
         {
@@ -14030,9 +14054,11 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3,
+        "colour": 2,
+        "crisis: under_siege": 1,
         "guild": 1,
         "market": 3,
+        "no crisis: under_siege": 4,
         "no market": 1
       },
       "undeclared": 0,
@@ -14615,8 +14641,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 6,
-        "market": 1
+        "colour": 5,
+        "market": 2,
+        "no crisis: hunger": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -14786,9 +14813,10 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
+        "food: ≥ secure": 1,
         "no crisis: indebted": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -14841,7 +14869,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 1,
+        "no crisis: indebted": 1,
         "no walls": 1,
         "walls": 1
       },
@@ -14900,7 +14929,8 @@
       "lineDeclares": {
         "crisis: any": 2,
         "gate": 1,
-        "market": 1
+        "market": 1,
+        "stores: ≥ 3": 1
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -15290,7 +15320,8 @@
         "crisis: any": 2,
         "grain": 1,
         "hunger": 1,
-        "no hunger": 1
+        "no hunger": 1,
+        "stores: < 3": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -15890,6 +15921,7 @@
       },
       "declares": [],
       "lineDeclares": {
+        "no crisis: famine": 1,
         "no crisis: plague_onset": 3
       },
       "undeclared": 0,
@@ -15983,7 +16015,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "eco.foodSecurity.foodRecord.foodSources.length",
@@ -16109,6 +16141,7 @@
       "declares": [],
       "lineDeclares": {
         "crisis: famine": 2,
+        "food: ≥ secure": 2,
         "no crisis: famine": 3
       },
       "undeclared": 0,
@@ -16699,8 +16732,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "no crisis: occupied": 2
+      },
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -16918,7 +16953,10 @@
       "declares": [],
       "lineDeclares": {
         "crisis: under_siege": 2,
-        "no crisis: under_siege": 3
+        "no crisis: occupied": 1,
+        "no crisis: plague_onset": 2,
+        "no crisis: under_siege": 3,
+        "tier: ≥ village": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -17067,7 +17105,8 @@
         "crisis: famine": 2,
         "crisis: under_siege": 1,
         "no crisis: famine": 4,
-        "no crisis: under_siege": 5,
+        "no crisis: plague_onset": 5,
+        "no crisis: under_siege": 7,
         "no hunger": 1,
         "tier: ≥ village": 1
       },
@@ -18144,7 +18183,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3
+        "colour": 2,
+        "no crisis: under_siege": 1
       },
       "undeclared": 3,
       "crisisScoped": false
@@ -18169,7 +18209,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "leading.bucket",
@@ -18452,10 +18492,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
         "crisis: under_siege": 1,
         "gate": 1,
-        "no crisis: under_siege": 2
+        "no crisis: under_siege": 4
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -18479,7 +18518,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "depletedRow",
@@ -19558,7 +19597,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "criticalRow",
@@ -30004,7 +30043,8 @@
         "crisis: any": 4,
         "crisis: plague_onset": 1,
         "crisis: under_siege": 1,
-        "no crisis: plague_onset": 2,
+        "market": 3,
+        "no crisis: plague_onset": 3,
         "no crisis: under_siege": 4,
         "tier: ≤ town": 1
       },
@@ -30078,7 +30118,9 @@
       "declares": [
         "market"
       ],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "market": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -30152,6 +30194,7 @@
       ],
       "lineDeclares": {
         "crisis: any": 3,
+        "no crisis: plague_onset": 1,
         "no crisis: under_siege": 3
       },
       "undeclared": 0,
@@ -30169,7 +30212,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 6,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -30228,7 +30271,8 @@
         "crisis: under_siege": 3,
         "gate": 2,
         "institution: tavern": 2,
-        "no crisis: under_siege": 3
+        "no crisis: under_siege": 3,
+        "no market": 4
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30304,8 +30348,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3,
-        "no crisis: under_siege": 1
+        "colour": 2,
+        "no crisis: under_siege": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30498,8 +30542,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 1,
+      "variants": 5,
+      "grammars": 2,
       "predicate": [
         {
           "field": "readings.inst.hasMarket",
@@ -30571,8 +30615,11 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 3,
-        "no crisis: under_siege": 1
+        "guild": 1,
+        "market": 2,
+        "no crisis: occupied": 1,
+        "no crisis: under_siege": 1,
+        "no guild": 4
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30588,8 +30635,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 2,
+      "variants": 5,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -30634,8 +30681,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "no crisis: under_siege": 3
+        "crisis: under_siege": 1,
+        "no crisis: famine": 1,
+        "no crisis: under_siege": 4
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -32057,7 +32105,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: occupied": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -32473,7 +32523,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 3,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
@@ -34379,14 +34429,13 @@
         "settlement"
       ],
       "slotsNamed": [
-        "faction",
         "seat",
         "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 6,
-      "grammars": 5,
+      "grammars": 3,
       "predicate": [
         {
           "field": "label (via RISK_POOL_OF in powerStateProse.js)",
@@ -34573,7 +34622,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: under_siege": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -34643,7 +34694,9 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "no crisis: occupied": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -34976,8 +35029,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 4,
-      "grammars": 3,
+      "variants": 5,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [
         "politics.blocs"
@@ -35024,7 +35077,10 @@
         "stateOrgan": true
       },
       "declares": [],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "crisis: succession": 1,
+        "no crisis: succession": 4
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -42165,7 +42221,9 @@
       "declares": [
         "crisis: occupied"
       ],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "market": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -43389,7 +43447,9 @@
       "declares": [
         "crisis: succession_void"
       ],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "market": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -43729,7 +43789,9 @@
       "declares": [
         "crisis: insurgency"
       ],
-      "lineDeclares": {},
+      "lineDeclares": {
+        "market": 1
+      },
       "undeclared": 0,
       "crisisScoped": false
     },
@@ -53952,7 +54014,7 @@
       "name": "ARRIVAL_PEOPLE",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:288-289 agreeingLine (pickRandom, one redraw on a market/catch contradiction); ",
-      "lines": 48,
+      "lines": 51,
       "declares": [],
       "lineDeclares": {
         "crisis: any": 28,
@@ -53960,17 +54022,20 @@
         "institution: tavern": 1,
         "market": 5,
         "navigable": 1,
-        "no crisis: hunger": 3,
+        "no crisis: hunger": 4,
         "no crisis: infiltrated": 1,
         "no crisis: occupied": 4,
         "no crisis: plague_onset": 1,
         "no crisis: recently_betrayed": 1,
         "no crisis: threat": 1,
-        "no crisis: under_siege": 4,
+        "no crisis: under_siege": 10,
+        "no route: isolated": 2,
+        "route: isolated": 2,
+        "tier: ≤ hamlet": 1,
         "tier: ≥ town": 3,
-        "tier: ≥ village": 1
+        "tier: ≥ village": 2
       },
-      "undeclared": 13,
+      "undeclared": 8,
       "crisisScoped": false
     },
     {
@@ -54001,23 +54066,25 @@
       "name": "ARRIVAL_SENSES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:150-165 chooseSense (pickRandom over keys within one point of best) then :283-2",
-      "lines": 320,
+      "lines": 321,
       "declares": [],
       "lineDeclares": {
         "church": 2,
-        "colour": 6,
-        "crisis: any": 40,
+        "colour": 5,
+        "crisis: any": 41,
         "crisis: wartime, insurgency": 1,
         "fish": 6,
         "institution: mill": 2,
         "institution: smith": 8,
         "market": 8,
         "navigable": 3,
-        "no crisis: hunger": 6,
+        "no crisis: hunger": 8,
         "no crisis: monster_pressure": 1,
         "no crisis: threat": 4,
         "no crisis: under_siege": 12,
         "no crisis: unrest": 1,
+        "no route: isolated": 1,
+        "route: isolated": 1,
         "sacredHouse": 3,
         "tier: ≥ town": 8
       },
@@ -54077,17 +54144,21 @@
       "name": "POLITICAL_FLAVOR",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/historyCoherence.js:44-84 stressProfileDrawn → pickRandom2(POLITICAL_FLAVOR[pattern])(subset) →",
-      "lines": 56,
+      "lines": 55,
       "declares": [],
       "lineDeclares": {
+        "church": 1,
         "colour": 13,
         "crisis: any": 5,
+        "exports": 1,
         "institution: granary": 1,
         "magic": 4,
         "market": 2,
-        "sacredHouse": 2
+        "no crisis: plague_onset": 1,
+        "no crisis: under_siege": 1,
+        "sacredHouse": 1
       },
-      "undeclared": 30,
+      "undeclared": 28,
       "crisisScoped": false
     },
     {
@@ -54125,7 +54196,7 @@
       "name": "STRESS_DESCS",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:213-227 (primary stress; filter at :224; one pickRandom at :227 on the ’arrival",
-      "lines": 103,
+      "lines": 105,
       "declares": [],
       "lineDeclares": {
         "garrison": 1,
@@ -54134,22 +54205,25 @@
         "healer": 2,
         "institution: bank": 1,
         "institution: granary": 2,
-        "institution: smith": 3,
+        "institution: smith": 4,
         "institution: tavern": 7,
         "institution: temple": 3,
-        "market": 23,
+        "market": 24,
         "migration: influx": 6,
         "militia": 2,
-        "no crisis: hunger": 6,
+        "no crisis: hunger": 7,
         "no crisis: succession": 4,
         "no crisis: threat": 5,
-        "no crisis: under_siege": 1,
+        "no crisis: under_siege": 2,
         "no crisis: unrest": 5,
-        "no war: front": 1,
-        "population: ≥ middling": 5,
+        "no market": 1,
+        "no prosperity: ≥ moderate": 1,
+        "no war: front": 2,
+        "population: ≥ middling": 6,
+        "prosperity: ≥ moderate": 1,
         "sacredHouse": 1,
         "soldiers": 2,
-        "tier: ≥ town": 1,
+        "tier: ≥ town": 2,
         "walls": 12,
         "watch": 4
       },
@@ -54174,10 +54248,10 @@
       "name": "CAST_ABSENCES",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701",
-      "lines": 13,
+      "lines": 14,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 13,
+      "undeclared": 14,
       "crisisScoped": false
     },
     {
@@ -54207,10 +54281,10 @@
       "name": "STAKE_REASONS",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701",
-      "lines": 12,
+      "lines": 34,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 12,
+      "undeclared": 34,
       "crisisScoped": false
     },
     {
@@ -54233,11 +54307,12 @@
         "no crisis: succession_void": 2,
         "no ruler: council": 2,
         "no ruler: elder": 2,
+        "no war: peace": 2,
         "tier: >= town": 1,
         "tier: ≥ town": 1,
         "watch": 1
       },
-      "undeclared": 67,
+      "undeclared": 65,
       "crisisScoped": false
     },
     {
@@ -54246,12 +54321,12 @@
       "name": "INSTITUTION_DESC_VARIANTS",
       "drawKind": "H",
       "drawSite": "assembleInstitutions.js:65 shipFreeDesc + :1004 kernel/proseHash.js pickVariant over [catalogDesc, ...variants]",
-      "lines": 1115,
+      "lines": 1119,
       "declares": [],
       "lineDeclares": {
         "church access": 2,
-        "coast": 5,
-        "colour": 752,
+        "coast": 9,
+        "colour": 748,
         "crisis: famine": 1,
         "crisis: under_siege": 11,
         "garrison": 6,
@@ -54266,6 +54341,7 @@
         "mercenary": 8,
         "navigable": 8,
         "no church access": 2,
+        "no coast": 4,
         "no crisis: famine": 1,
         "no crisis: under_siege": 11,
         "no garrison": 2,
@@ -54293,7 +54369,7 @@
       "name": "INSTITUTION_SERVICES",
       "drawKind": "R",
       "drawSite": "services/institutionServices.js:69/203 one _rng()<p roll per eligible definition (A-printed at serviceRollMaterializatio",
-      "lines": 1004,
+      "lines": 1005,
       "declares": [],
       "lineDeclares": {
         "coast": 2,
@@ -54302,7 +54378,7 @@
         "guardPresence": 1,
         "guild": 3,
         "institution: mill": 3,
-        "institution: tavern": 1,
+        "institution: tavern": 2,
         "institution: temple": 1,
         "magic": 13,
         "market": 4,
@@ -54321,7 +54397,7 @@
         "walls": 4,
         "watch": 6
       },
-      "undeclared": 927,
+      "undeclared": 926,
       "crisisScoped": false
     },
     {
@@ -54442,16 +54518,23 @@
       "lines": 175,
       "declares": [],
       "lineDeclares": {
+        "coast": 1,
+        "crisis: succession": 1,
+        "garrison": 1,
         "guardPresence": 9,
+        "institution: tavern": 1,
         "institution: temple": 1,
         "magic": 3,
-        "market": 2,
-        "navigable": 1,
-        "no navigable": 1,
-        "population: ≥ middling": 1,
-        "tier: ≥ village": 10
+        "market": 4,
+        "no coast": 1,
+        "no crisis: plague_onset": 5,
+        "no crisis: under_siege": 8,
+        "no route: isolated": 3,
+        "population: ≥ middling": 2,
+        "tier: ≥ village": 12,
+        "watch": 1
       },
-      "undeclared": 147,
+      "undeclared": 133,
       "crisisScoped": false
     },
     {
@@ -54913,7 +54996,7 @@
         "DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need",
         "DS-DEF-2 :: Beasts & Monsters: settled, nothing organized"
       ],
-      "variants": 28,
+      "variants": 29,
       "grammars": 10,
       "blocks": [
         "DS-DEF-2"
@@ -55097,7 +55180,7 @@
         "DS-ECO-9 :: FOOD SOURCES: one source"
       ],
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "blocks": [
         "DS-ECO-9"
       ]
@@ -55178,7 +55261,7 @@
         "DS-ECO-6 :: TIER: significant off-book activity (≥15)",
         "DS-ECO-6 :: TIER: minor shadow activity (≥3)"
       ],
-      "variants": 18,
+      "variants": 19,
       "grammars": 4,
       "blocks": [
         "DS-ECO-6"
@@ -55351,7 +55434,7 @@
         "DS-POW-4 :: riskLabel: Critical. The seat could fall"
       ],
       "variants": 16,
-      "grammars": 15,
+      "grammars": 13,
       "blocks": [
         "DS-POW-4"
       ]
@@ -55530,8 +55613,8 @@
       "pools": [
         "DS-GEN-13 :: COMMERCE: a market, no guild"
       ],
-      "variants": 4,
-      "grammars": 1,
+      "variants": 5,
+      "grammars": 2,
       "blocks": [
         "DS-GEN-13"
       ]
@@ -55581,7 +55664,7 @@
         "DS-DEF-2 :: Economic Survival: CRITICAL"
       ],
       "variants": 24,
-      "grammars": 6,
+      "grammars": 7,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -55857,7 +55940,7 @@
         "DS-DEF-12 :: CAPACITY: enough",
         "DS-DEF-12 :: CAPACITY: short"
       ],
-      "variants": 9,
+      "variants": 10,
       "grammars": 4,
       "blocks": [
         "DS-DEF-12"
@@ -66616,7 +66699,7 @@
         "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "BEASTS_ROW_POOL",
-      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66753,7 +66836,7 @@
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66853,7 +66936,7 @@
       "subject": "Very Safe",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -66861,7 +66944,7 @@
       "subject": "Safe",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68063,7 +68146,7 @@
         "settlement.isolationSupport.capacity"
       ],
       "readingFunction": "isolationSupportPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68141,7 +68224,7 @@
       "subject": "COMBINATION C1: a high rung on a working approach",
       "fields": [],
       "readingFunction": "prosperityHeaderPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {access, complexity, settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {access, complexity, settlement}"
     },
     {
       "tier": "COVERED",
@@ -68435,7 +68518,7 @@
         "eco.safetyProfile.blackMarketCapture"
       ],
       "readingFunction": "shadowEconomyPoolKey",
-      "count": "8 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "9 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68688,14 +68771,14 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-ECO-9",
       "subject": "FOOD SOURCES: one source",
       "fields": [
         "eco.foodSecurity.foodRecord.foodSources.length"
       ],
       "readingFunction": "foodSourcesPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "COVERED",
@@ -68993,7 +69076,7 @@
       "subject": "EXPLOITATION: unexploited, exportValue: high",
       "fields": [],
       "readingFunction": "exploitationPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {institution, resource, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {institution, resource, settlement}"
     },
     {
       "tier": "COVERED",
@@ -69024,12 +69107,12 @@
       "count": "5 variant(s) · 3 grammar(s) · slots {good, resource, settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-ECO-11",
       "subject": "RESOURCE CONDITION: worked out, recovers in time",
       "fields": [],
       "readingFunction": "resourceConditionPoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {resource, settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {resource, settlement}"
     },
     {
       "tier": "THIN",
@@ -69138,12 +69221,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-ECO-12",
       "subject": "CRITICAL IMPORT: the land cannot give it",
       "fields": [],
       "readingFunction": "criticalImportPoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {good, settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "THIN",
@@ -70671,7 +70754,7 @@
       "subject": "NO-MARKET",
       "fields": [],
       "readingFunction": "marketPoolKey",
-      "count": "6 variant(s) · 3 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -70712,7 +70795,7 @@
         "readings.inst.hasMarket"
       ],
       "readingFunction": "commercePoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -70720,7 +70803,7 @@
       "subject": "WAREHOUSES",
       "fields": [],
       "readingFunction": "warehousesPoolKey",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "5 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -70968,7 +71051,7 @@
       "subject": "STALLED",
       "fields": [],
       "readingFunction": "craftReasonPoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {institution, resource, settlement}"
+      "count": "4 variant(s) · 4 grammar(s) · slots {institution, resource, settlement}"
     },
     {
       "tier": "COVERED",
@@ -71214,7 +71297,7 @@
         "label (via RISK_POOL_OF in powerStateProse.js)"
       ],
       "readingFunction": "RISK_POOL_OF",
-      "count": "6 variant(s) · 5 grammar(s) · slots {faction, seat, settlement}"
+      "count": "6 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -71296,7 +71379,7 @@
       "subject": "autocrat",
       "fields": [],
       "readingFunction": "politicsPresencePoolKey",
-      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 4 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
