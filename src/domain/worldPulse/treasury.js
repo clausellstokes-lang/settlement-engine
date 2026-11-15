@@ -340,6 +340,7 @@ export const TAX_PROFILE = Object.freeze({
  */
 export const INCOME_SOURCE_FORMS = Object.freeze({
   'Agricultural Rents': 'land_rents',
+  'Harvest': 'land_rents', // TAIL-DEFECON-2 (D10, by exception): the rents row's twin where no lord's man stands, the same home
   'Property Rents': 'land_rents',
   'Toll Revenue': 'market_tolls',
   'Gate Tolls': 'market_tolls',

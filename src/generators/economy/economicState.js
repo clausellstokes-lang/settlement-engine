@@ -24,7 +24,7 @@ import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
 import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
-import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS, ALCHEMY_TRADE_LINE, ALCHEMIST_SUPPLEMENTS_LINE, GRAIN_BOUGHT_LINE, WOOL_LOCAL_LINE, WOOL_BOUGHT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, FISH_EXPORT_LINE, QUARRY_LINE, MASONS_LINE, TIMBER_LINE, TIMBER_BOUGHT_LINE, trueIncomeDesc, houseOfWorkLine, keepRowsThePageBearsOut } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
+import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS, ALCHEMY_TRADE_LINE, ALCHEMIST_SUPPLEMENTS_LINE, GRAIN_BOUGHT_LINE, WOOL_LOCAL_LINE, WOOL_BOUGHT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, FISH_EXPORT_LINE, QUARRY_LINE, MASONS_LINE, TIMBER_LINE, TIMBER_BOUGHT_LINE, trueIncomeDesc, houseOfWorkLine, keepRowsThePageBearsOut, OWN_HARVEST_LINE } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -67,11 +67,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     safetyProfile = generateSafetyProfile(config, tier, institutions),
     incomeBuild = [];
   ['thorp', 'hamlet', 'village'].includes(tier)
-    ? incomeBuild.push({
-        source: 'Agricultural Rents',
-        percentage: 65,
-        desc: 'Payments in kind or coin from tenant farmers; the primary revenue at this scale.',
-      })
+    ? incomeBuild.push(hasInst("lord's steward", "lord's reeve") // TAIL-DEFECON-2 (D10): rents and tenants only where a lord's man stands
+      ? { source: 'Agricultural Rents', percentage: 65, desc: 'Payments in kind or coin from tenant farmers; the primary revenue at this scale.' }
+      : { source: 'Harvest', percentage: 65, desc: OWN_HARVEST_LINE })
     : tier === 'town' &&
       !hasInst('market square', 'weekly market', 'daily market') &&
       incomeBuild.push({
@@ -295,7 +293,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         desc:
           magPri < 60
             ? 'Fees for identification, minor enchanting, and divination. Adventurers and merchants both pay well for reliable magical services.'
-            : 'A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting brings steady coin.',
+            : 'A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting bring steady coin.', // #11426: four services, "bring"
       });
     }
 
@@ -345,7 +343,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       (inst) => inst.toLowerCase().includes('black market') || inst.toLowerCase().includes('underground')
     );
     const hasSmuggling = crimInsts.some(
-      (inst) => inst.toLowerCase().includes('smuggl') || inst.toLowerCase().includes('front')
+      (inst) => inst.toLowerCase().includes('smuggl') // TAIL-DEFECON-2 (B05884): a front business is not a smuggling house
     );
     const label =
       hasGuild && hasMarket
@@ -363,7 +361,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         : hasSmuggling
           ? 'Smuggling, contraband and protection rackets'
           : 'Untaxed trade, fencing and theft'
-    } bring money in here, but it goes to the criminals who run them and the treasury sees none of it.`;
+    } bring money in here, ${crimInsts.length ? 'but it goes to the criminals who run them and the treasury sees none of it' : 'but none of it reaches the treasury'}.`; // TAIL-DEFECON-2: no criminal house, no "criminals who run them"
     incomeBuild.push({ source: label, percentage: bmc, desc, isCriminal: true });
   }
   if (incomeBuild.length === 0) {
@@ -410,7 +408,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           return exp.includes('grain') || exp.includes('cereal');
         })) &&
       !hasIncomeSource('grain') &&
-      !hasIncomeSource('agricultural')
+      !hasIncomeSource('agricultural') && !hasIncomeSource('harvest') // D10: the rents row's harvest twin reads as the rents row did
     ) {
       incomeBuild.push({
         source: 'Grain Sales',

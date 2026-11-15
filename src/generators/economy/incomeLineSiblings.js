@@ -80,8 +80,13 @@ export const TIMBER_BOUGHT_LINE = 'Timber sourced from more distant forests and 
 /** The market-day line, declared on its own text (it names the market; economicState.js prints its literal, registered there). */
 const MARKET_DAY_SET = Object.freeze([Object.freeze({ text: 'Market day stall fees and toll collection on goods entering the market.', needs: Object.freeze(['market']), excludes: Object.freeze(['crisis: under_siege']) })]);
 export const MARKET_DAY_LINE = MARKET_DAY_SET[0].text;
+// TAIL-DEFECON-2 (D10, the chair's ruling of 2026-11-15): a small place that stands no lord's steward or reeve pays no
+// rent to anyone: its row is its own harvest (the name and the line claim no rent and no tenant).
+export const OWN_HARVEST_LINE = 'What the households grow and raise on their holdings; the main living at this scale.';
 /** The sources whose every line is trade coming in or going out (road tolls, gate tolls, customs, transit): none under a siege. */
-export const SIEGE_CLOSED_SOURCES = Object.freeze(['Toll Revenue', 'Gate Tolls', 'Port Duties', 'Entrepôt Trade']);
+// TAIL-DEFECON-2: under a siege no river traffic, no pilgrim, no outside customer and no trade comes in: those rows print
+// their label and share alone.
+export const SIEGE_CLOSED_SOURCES = Object.freeze(['Toll Revenue', 'Gate Tolls', 'Port Duties', 'Entrepôt Trade', 'River Tolls', 'Pilgrim Trade', 'Security Contracts', 'Spellcasting Services']);
 
 const SIEGE = 'crisis: under_siege';
 /** The originals and their twins, keyed by the original's text (the GRAIN pattern above). '' twins are not texts. */
@@ -201,7 +206,7 @@ export const HOUSE_OF_WORK_LINES = Object.freeze([
  * @returns {{ source: string, percentage: number, desc: string } | null}
  */
 export function houseOfWorkLine(tier, incomeBuild, roster, besieged) {
-  if (!['thorp', 'hamlet', 'village'].includes(tier) || incomeBuild.length !== 1 || incomeBuild[0]?.source !== 'Agricultural Rents') return null;
+  if (!['thorp', 'hamlet', 'village'].includes(tier) || incomeBuild.length !== 1 || !['Agricultural Rents', 'Harvest'].includes(String(incomeBuild[0]?.source))) return null; // D10: the harvest twin too
   const house = roster.find((n) => HOUSE_OF_WORK_LINES.some((h) => h.re.test(n))); // the first such house on the roster
   const work = house && HOUSE_OF_WORK_LINES.find((h) => h.re.test(house));
   return work ? { source: HOUSE_OF_WORK_LABEL, percentage: 10, desc: besieged ? '' : work.text } : null;
