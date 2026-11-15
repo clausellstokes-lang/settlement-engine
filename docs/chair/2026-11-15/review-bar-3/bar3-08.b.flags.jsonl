@@ -1,0 +1,7 @@
+{"id":"C15162","town":"bar0-hamlet-under_siege-rand-8","sev":"LOW","kind":"LACKS","why":"an old judge at a gate: no court, judge or office in HOUSES/GOVERNMENT; DEFENCE walls none, so no gate","other":""}
+{"id":"C15287","town":"bar0-hamlet-under_siege-rand-8","sev":"LOW","kind":"STATE","why":"'Headman' title for Teamhair Kelly, who is (f) in PEOPLE; also printed C15437, C15443","other":""}
+{"id":"C15531","town":"bar0-hamlet-under_siege-rand-8","sev":"LOW","kind":"LACKS","why":"'Benworth's streets' in a hamlet of 98 (lanes elsewhere); streets presume more than a hamlet holds","other":""}
+{"id":"C15416","town":"bar0-hamlet-under_siege-rand-8","sev":"LOW","kind":"PAIR","why":"'A little changes hands quietly' against 'Much of what changes hands ... quietly' for the same 15% shadow economy","other":"C15417"}
+{"id":"C15699","town":"bar0-hamlet-under_siege-rand-8","sev":"MED","kind":"STATE","why":"trade the settlement 'was built upon' collapsed and drained wealth 'within years', yet the collapse is 32y ago and the town is 32 years old: no time to have been built on it","other":"C15677"}
+{"id":"C15701","town":"bar0-hamlet-under_siege-rand-8","sev":"LOW","kind":"STATE","why":"'Last century' label on an event 32 years ago","other":"C15700"}
+{"id":"DONE","lines":620,"blocks":1,"flags":6}
