@@ -5,6 +5,7 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { pickRandom2, random01 } from '../helpers.js';
+import { pairSharesTrade, pairTradeKnown } from '../../data/npcData.js'; // BAR2-PEOPLE-2 (PP3b)
 
 // STRESS_FLAVOR
 export const STRESS_FLAVOR = {
@@ -54,14 +55,27 @@ const TIE_GLOSS = Object.freeze({
   'Family Complication': 'are family, and it is not simple',
   'Unresolved History': 'share a past neither has put behind them',
 });
+// BAR2-PEOPLE-2 (PP3b, the chair's ruling of 2026-11-15, vetoable by the owner): a gloss that claims a PRESENT SHARED
+// TRADE takes its twin where the tie's two cards share none (`npcData.js :: pairSharesTrade`: one house family, or one
+// category that is not `other`), read off the town's own cards; the rumour's draw is unchanged.
+const TIE_GLOSS_NO_SHARED_TRADE = Object.freeze({
+  'Professional Rivalry': 'are rivals, and neither gives the other ground',
+});
+/** @param {any} rel @param {Map<unknown, any> | undefined} cards @returns {string} */
+const tieGlossOf = (rel, cards) => {
+  const twin = TIE_GLOSS_NO_SHARED_TRADE[rel.typeName];
+  const a = cards?.get(rel.from), b = cards?.get(rel.to);
+  if (twin && pairTradeKnown(a, b) && !pairSharesTrade(a, b)) return twin;
+  return TIE_GLOSS[rel.typeName] || 'are closely tied';
+};
 const STRESS_RUMORS = [
   (rel) => {
     var detail;
     return `${((detail = rel.description.split('—')[1]) == null ? void 0 : detail.trim()) || rel.tension}`;
   },
   (rel) => `${rel.tension}`,
-  (rel) => {
-    return `${rel.npc1Name} and ${rel.npc2Name} ${TIE_GLOSS[rel.typeName] || 'are closely tied'}. ${rel.tension}`;
+  (rel, cards) => {
+    return `${rel.npc1Name} and ${rel.npc2Name} ${tieGlossOf(rel, cards)}. ${rel.tension}`;
   },
   (rel) => rel.tension,
 ];
@@ -250,7 +264,8 @@ export const genRelNarrative = (input) => {
   scored.sort((a, b) => b.score - a.score);
   const topRel = (topScored = scored[0]) == null ? void 0 : topScored.r;
   if (!topRel) return null;
-  const phrasing = pickRandom2(STRESS_RUMORS)(topRel);
+  const cards = new Map((Array.isArray(input.npcs) ? input.npcs : []).map((n) => [n?.id, n])); // BAR2-PEOPLE-2 (PP3b): the tie's two cards
+  const phrasing = pickRandom2(STRESS_RUMORS)(topRel, cards);
   // the tie's `from` end leads (`npc1`), its `to` end follows (`npc2`)
   return {
     npc1: topRel.npc1Name,

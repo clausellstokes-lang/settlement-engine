@@ -1631,10 +1631,34 @@ export const NPC_PRESENTATION_MODES = {
 // (Appendix B site 19, `relationshipArchetypes.js :: createTieProseDraw`: CENSUS-1d's to wire).
 // ⚠ ONE index picks the desc AND the tension line: a refusal of either row refuses the pair.
 const closureOf = variant => (typeof variant === 'function' ? variant : variant.line);
+/**
+ * BAR2-PEOPLE-2 (PP3, the chair's rulings PP3a and PP3b of 2026-11-15, vetoable by the owner): TWO CARDS SHARE A TRADE
+ * where they stand for houses of one family (`institution.family`), or share a category that is not the catch-all
+ * `other` (two cards whose only common category is `other` share no trade). Pure; a card with neither shares nothing.
+ * @param {Record<string, any> | null | undefined} a @param {Record<string, any> | null | undefined} b @returns {boolean}
+ */
+export const pairSharesTrade = (a, b) => {
+  const ia = a?.institution, ib = b?.institution;
+  if (ia?.kind === 'house' && ib?.kind === 'house' && ia.family && ia.family === ib.family) return true;
+  return typeof a?.category === 'string' && a.category !== 'other' && a.category === b?.category;
+};
+/**
+ * Whether two cards both carry the facts a trade is read from (a category): a card without one (the ledger's stand-ins, a
+ * legacy edge) keeps the drawn line, as `endsOf` keeps the drawn order. @param {any} a @param {any} b @returns {boolean}
+ */
+export const pairTradeKnown = (a, b) => typeof a?.category === 'string' && typeof b?.category === 'string';
+/**
+ * BAR2-PEOPLE-2 (PP3b): A LINE THAT CLAIMS A PRESENT SHARED TRADE declares it (`sharedTrade: true`) with its `twin`, the
+ * same rivalry claiming no shared trade; where the pair shares none (`pairSharesTrade`) the twin is written. THE DRAW IS
+ * NOT MOVED: the index, its tension line and every other tie are as drawn; only the description's text takes the twin.
+ * @param {any} row @param {any} a @param {any} b
+ */
+const closureFor = (row, a, b) => (row && typeof row === 'object' && row.sharedTrade && typeof row.twin === 'function' && pairTradeKnown(a, b) && !pairSharesTrade(a, b) ? row.twin : closureOf(row));
 const pairProse = (salt, variants, order = null) => Object.assign((r, s, variant, force) => {
   const [a, b] = isReversedTie(variant) ? [s, r] : [r, s]; // TAIL-TIES-2 (T6): the pair's direction, read off the stored variant
-  return closureOf(isTieIndex(variant) ? variants[tieIndexOf(variant) % variants.length]
-    : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(...(order ? endsOf(a, b, order[0], order[1]) : [a, b]), force || TIE_FORCE_WORDS);
+  const ends = order ? endsOf(a, b, order[0], order[1]) : [a, b];
+  return closureFor(isTieIndex(variant) ? variants[tieIndexOf(variant) % variants.length]
+    : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`), ends[0], ends[1])(...ends, force || TIE_FORCE_WORDS);
 }, { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
@@ -2042,13 +2066,15 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `Every gain ${r.name} makes, ${s.name} answers within the season, and people here have learned to expect it.`, colour: true },
       { line: (r, s) =>
-        `${r.name} and ${s.name} bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.`, colour: true },
+        `${r.name} and ${s.name} bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.`, colour: true, sharedTrade: true, // BAR2-PEOPLE-2 (PP3b): a present shared trade; its twin where the pair shares none
+        twin: (r, s) => `${r.name} and ${s.name} sit at the same tables and want the same things from them. Each counts the other's wins more carefully than their own.` },
       { line: (r, s) =>
         `${r.name} and ${s.name} trained together and have competed ever since. The settlement keeps score, and so do they.`, colour: true },
       { line: (r, s) =>
         `${r.name} wants ${s.name}'s position, and ${s.name} wants ${r.name}'s reputation. They are civil in public and unforgiving in private.`, colour: true },
       { line: (r, s) =>
-        `Every client ${r.name} wins is one ${s.name} lost, and the reverse. The two keep a polite distance and an exact tally.`, colour: true },
+        `Every client ${r.name} wins is one ${s.name} lost, and the reverse. The two keep a polite distance and an exact tally.`, colour: true, sharedTrade: true, // BAR2-PEOPLE-2 (PP3b)
+        twin: (r, s) => `Every friend ${r.name} wins is one ${s.name} lost, and the reverse. The two keep a polite distance and an exact tally.` },
       { line: (r, s) =>
         `${r.name} and ${s.name} are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.`, colour: true },
     ]),
