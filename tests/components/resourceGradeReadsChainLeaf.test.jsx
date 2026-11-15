@@ -129,18 +129,14 @@ describe('the grade cards read the chain leaf through the sentence\'s own readin
     expect(cards[0].badge).toBe('Partial');
   }, 60000);
 
-  test('P1-a: the herbs a metropolis buys, its gathering grounds spent, are not "Fully exploited" and say nothing of a ground ready to work (rr2s-metropolis-calm-rand-1, #1160)', () => {
-    const town = birthApp('rr2s-metropolis-calm-rand-1');
-    expect((town.resourceAnalysis.exploitation.fullyExploited || []).map((/** @type {any} */ c) => c.rawResource), 'anchored: filed Full').toContain('medicinal herbs');
-    expect(town.economicState.primaryImports, 'anchored: herbs come in by trade').toEqual(expect.arrayContaining(['Herbs and forage (local gathering areas exhausted)']));
-    const { container, unmount } = render(<ResourcesTab settlement={town} narrativeNote={null} />);
-    const text = container.textContent || '';
-    unmount();
-    const cards = cardsOf(town).filter((c) => c.resource === resourceDisplayName('medicinal herbs'));
-    expect(cards.map((c) => c.badge)).toEqual(['Unexploited']);
-    expect(cards[0].chips, 'the body: the resource alone').toEqual([resourceDisplayName('medicinal herbs')]);
-    expect(text).not.toMatch(/Draws on: herb gathering areas/); // anchored: cards[0].chips asserted on the same town's render above
-  }, 60000);
+  // RETIRED BY NAME (TAIL-CLOSE-DISPLAY-2, red 1; the chair's ruling V16 (b), vetoable by the owner): the births arm
+  // "P1-a: the herbs a metropolis buys, its gathering grounds spent, are not 'Fully exploited' … (rr2s-metropolis-calm-rand-1,
+  // #1160)". Its shape (herbs filed Full beside a live source no chain works, the grounds spent, herbs bought) was the hot
+  // springs' herbs, which TAIL-DEFECON-C's DECLARED D34 (a) (680d16b54) took away: a scan of 270 towns (rr2s
+  // city/metropolis/town calm-rand-1..130, r2r thorp..city 0..129) holds no birth of it (rand-27 and rand-108 file herbs
+  // Full beside a live ancient grove that works them: true). The unit arm above guards the same branch: a modelled, idle
+  // chain with no house of the leaf's list reads Unexploited whether filed Partial or Full (measured: the unit's record
+  // filed Full groups as Unexploited too), and its render names no promised goods; it stays untouched.
 
   test('on the reader\'s twenty towns: no Unexploited card beside a working chain, no Partial or Full card beside "No one here works", the PDF\'s groups the tab\'s', () => {
     /** @type {string[]} */ const faults = [];

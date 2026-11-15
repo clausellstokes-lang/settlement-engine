@@ -18,3 +18,29 @@ line at fp 55, 412938baf), the version of the test file each point holds; docs-o
 | 2 | journalPrintsTheTabsLeaf.test.js (1) | fp 72, 3e482b329 (JOIN-8 · 19, lane/tail-defecon-c at 849bd8679): TAIL-DEFECON-C's DECLARED D34 (a) (680d16b54: the hot springs no herbs; "12 herb cards gone (true)"): r2r-thorp-0's herbs were its springs'. Proven alone: D34 (a)'s resourceData.js hunk reverted at the merged tree turns reds 1, 2, 4 and 5 green | RE-KEYED by identity: r2r-thorp-9, the nearest thorp (scan 0..19) whose Exploitation table names the herbs by the tab's leaf; the NOT arm kept |
 | 5 | resourceAnalysisCoupling.test.js (1) | fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): rr2s-metropolis-calm-rand-1 files no herbs, so the test's own `herbs.value` read an absent row (the TypeError is the test's, not the page's: reverting D34 (a)'s data hunk alone turns it green). No birth of the shape (a full herbs row beside a depleted herb ground) in 270 towns; no other good of the town shows the coupling (rand-10's empty reason is the "no house named" arm: it stays empty with rule (2) disabled) | RUNS ON A MADE RECORD (the chair's V16 (a), vetoable): this file's own `generateResourceAnalysis` reader, a forest town with an ancient grove and herb gathering grounds and the chain's two houses (Apothecary, Alchemist shop): grounds depleted → reason ''; KEEP: grounds live → "Complete production chain in place". Red-first: with rule (2)'s `sourceDepleted` off the arm reds. The #457 half stays on its birth. FOR THE OWNER'S VETO LIST |
 | 4 | chainWorksThroughItsTrade.test.js (1) | fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): r2r-village-38's herbs were its hot springs'. No birth of the shape (clergy chains read as working the springs' herbs) in 270 towns; r2r-village-125 (clergy at the springs beside another ground's herbs) prints its line with NOT_WORKED_THROUGH's clergy entry switched off, so it guards nothing | RETIRED BY NAME (the chair's V16 (b), vetoable): the births line "clergy r2r-village-38" only, with D34 (a) and the scan written in the test; the palisade and walls births lines and the unit arm (which reds with the clergy entry off: measured) untouched. FOR THE OWNER'S VETO LIST |
+| 1 | resourceGradeReadsChainLeaf.test.jsx (1) | fp 72, 3e482b329: D34 (a) (680d16b54, DECLARED): rr2s-metropolis-calm-rand-1 files no herbs (they were its springs'). No birth of the shape in 270 towns (rand-27, rand-108: Full beside a live grove that works them, true). Two made records in the file's own shape read Full by design (the only herb ground spent: the model is silent, the filing stands), so V16 (a) has no honest build here | RETIRED BY NAME (the chair's V16 (b), vetoable): the births test "P1-a … (rr2s-metropolis-calm-rand-1, #1160)", with D34 (a) and the scan written in the test; the unit arm guards the same branch (its record filed Full groups as Unexploited too: measured) and stays untouched. FOR THE OWNER'S VETO LIST |
+
+## Proof
+
+Each red run alone before (red, the counts above) and after (green); eslint clean on every touched test; the hook's
+type ratchet (167/167), strict-domain gate (1113/1113) and lint green on every push (red 6's push went out from a side
+worktree without the hook: the three gates were run on that exact commit, 9a13dd0a, after: all exit 0). The 13 files
+that read `docs/census/declarations/` green after red 7. No source file changed by this seat: the page and the grid
+move by nothing here.
+
+## Named, not mine
+
+- The Imports line's NEEDED list still prints "grapes" and "glass sand" where M-V (fcf4cae6) reads them as reaching by
+  route (r2r-city-30, r2s-plague_onset-town-0, r2s-politically_fractured-city-2); M-V's own commit names the import-list
+  join for the economy seat (`src/domain/display/tradeListDisplay.js :: importsAsPrinted` reads
+  `resourceAnalysis.imports.critical`).
+- `src/domain/facts/chainWorking.js` NOT_WORKED_THROUGH's clergy entry: no birth reaches it since D34 (a) (the unit arm
+  keeps it guarded).
+
+## For the owner's veto list (V16)
+
+- red 5: #1163 runs on a made record (V16 a).
+- red 4: the births line "clergy r2r-village-38" retired by name (V16 b).
+- red 1: the births test "P1-a … rr2s-metropolis-calm-rand-1, #1160" retired by name (V16 b).
+
+HANDED BACK.
