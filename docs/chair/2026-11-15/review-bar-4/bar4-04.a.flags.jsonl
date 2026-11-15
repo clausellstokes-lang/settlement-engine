@@ -1,0 +1,12 @@
+{"id":"C10098","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'its herds comes first'","other":""}
+{"id":"C10322","town":"bar0-city-wartime-rand-21","sev":"MED","kind":"LACKS","why":"names 'Crown supply carts'; GOVERNMENT lists no crown or royal power above the Military City Council","other":""}
+{"id":"C10324","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"LACKS","why":"'A crown officer' came; GOVERNMENT lists no crown or royal office","other":"C10322"}
+{"id":"C10445","town":"bar0-city-wartime-rand-21","sev":"MED","kind":"BROKEN","why":"heading says 26 institutions; card section shows every line: only 21 listed (18 held under authority plus 3 under ruling power)","other":""}
+{"id":"C10486","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"LACKS","why":"'Crown authority over the war'; GOVERNMENT lists no crown","other":"C10322"}
+{"id":"C10497","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"LACKS","why":"War Council 'Crown-appointed'; GOVERNMENT lists no crown that could appoint it","other":"C10322"}
+{"id":"C10570","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"LACKS","why":"'sold to crown contracts'; GOVERNMENT lists no crown or royal buyer","other":"C10322"}
+{"id":"C9456","town":"bar0-city-wartime-rand-21","sev":"MED","kind":"STATE","why":"'Spymaster' names a male title for Ekaparnika Joshi, who is (f) in PEOPLE","other":""}
+{"id":"C9483","town":"bar0-city-wartime-rand-21","sev":"MED","kind":"STATE","why":"'Lodgemaster' names a male title for Vijayalakshmi Balan, who is (f) in PEOPLE","other":""}
+{"id":"C9561","town":"bar0-city-wartime-rand-21","sev":"MED","kind":"STATE","why":"'Stablemaster' names a male title for Kavya Chatterjee, who is (f) in PEOPLE","other":""}
+{"id":"C12171","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"STATE","why":"calls the Succession Crisis legacy 'a generation old'; PAST dates it 49 years ago, about two generations","other":""}
+{"id":"DONE","lines":3278,"blocks":1,"flags":11}
