@@ -72,6 +72,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | — | (g) on the chair's word after point 5 | — | — | f468495d9 | — | THE WIRING CENSUS RE-TAKEN BY ITS OWN DOOR (`node scripts/wiring-census.mjs`; `--dry` first ran to its end: stale, 53 rows, the three composers' stamps), `--check` exit 0; THEN THE CORPUS'S DOOR `node scripts/generate-dossier-state-prose.mjs --check`: **exit 0** (69 blocks / 2959 variants, 78 causal families / 468 variants): no leaf stale, nothing rebuilt |
 | 6 | lane/tail-history-2026-11-14 | 45e88f9aa (05:49) | abe0327eb | 554cb0ad5 | none | 7 files outside docs/; declared-move commits: ed9f3b549  (golden carried); merged clean though both moved: tests/generators/hookTablesDeclared.test.js  |
 | 7 | lane/tail-corpus-eco-2026-11-14 | 7ab28d3ef (05:52) | a8ea5ef8e | 744edb899 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
+| 8 | lane/tail-ties-2026-11-14 | d247d8a32 (05:55) | 4ec61102f | 6587c20df | none | 6 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
