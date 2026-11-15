@@ -717,7 +717,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "People at {settlement} can drive off what attacks but cannot stop it arriving, so every season the town loses something before its fighters get there.",
+          "text": "People at {settlement} cannot stop what attacks from arriving, so every season the town loses something before its fighters get there.",
           "slots": [
             "settlement"
           ],
@@ -1529,7 +1529,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "{settlement} is always short of money for its defence: there is nothing put by to pay for a long defence, and whoever is called to make one knows it.",
+          "text": "{settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.",
           "slots": [
             "settlement"
           ],
@@ -8104,7 +8104,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "magicDependency true, with a NAMED dependent chain": [
         {
           "angle": "ledger",
-          "text": "At {settlement} the usual work no longer yields enough {good}, and part of the shortfall is made up by means beyond it.",
+          "text": "At {settlement} the usual work no longer yields enough {good}, and the trade that makes it now leans on help beyond ordinary work.",
           "slots": [
             "settlement",
             "good"
@@ -8113,7 +8113,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "If the help beyond ordinary work failed at {settlement}, its {good} would fall further short than it already does.",
+          "text": "If the help beyond ordinary work failed at {settlement}, the trade that makes its {good} would yield less than it does now.",
           "slots": [
             "settlement",
             "good"

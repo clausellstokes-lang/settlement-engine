@@ -6419,7 +6419,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
             "garrison",
             "institution: temple"
           ],
-          "text": "The church and the garrison in {settlement} act as one: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders.",
+          "text": "In {settlement} the church has the garrison at its side: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders.",
           "slots": [
             "settlement"
           ],

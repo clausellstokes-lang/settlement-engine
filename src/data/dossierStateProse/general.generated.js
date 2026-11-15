@@ -9776,7 +9776,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "market",
-            "no guild"
+            "no guild",
+            "no crisis: under_siege"
           ],
           "text": "No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.",
           "slots": [
@@ -9814,7 +9815,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "market",
             "guild"
           ],
-          "text": "The guilds are a power at {settlement} all the same, though none keeps a house at its market, and anyone trading there reckons with them.",
+          "text": "The guilds are a power at {settlement} all the same, and anyone trading at its market reckons with them.",
           "slots": [
             "settlement"
           ],

@@ -31,12 +31,15 @@ const DECLARED = [
   { batch: 1, seed: 'r2s-famine-village-0', pool: 'DS-GEN-13::MARKET-OPEN', vid: 1, instead: 4, why: 'a famine: "the roads bring buyers" (C35244)' },
   { batch: 1, seed: 'r2s-under_siege-hamlet-0', pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 1, instead: 3, why: 'a siege: "anyone can sell at the market" (C13783)' },
   { batch: 1, seed: 'r2s-occupied-town-0', pool: 'DS-GEN-13::COMMERCE: a merchant guild, no bank', vid: 2, instead: 3, why: 'an occupation: "the merchant guild sets the terms of trade" (C31881)' },
+  // BAR3-CORPUS-2 · C7's class: the stall-fee sibling under a siege (2 of its 5 printing towns besieged)
+  { batch: 2, seed: 'r2s-under_siege-village-0', pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 2, instead: 3, why: 'a siege: "the town\'s own hold on trade there is the stall fee" (C7\'s class)' },
 ];
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */
 const KEEP = [
   { batch: 1, seed: 'r2r-village-0', pool: 'DS-GEN-13::MARKET-OPEN', vid: 1, why: 'no famine, no siege, no war: market day fills' },
   { batch: 1, seed: 'r2r-town-0', pool: 'DS-GEN-13::COMMERCE: a merchant guild, no bank', vid: 2, why: 'no siege, no occupation: the guild sets the terms' },
   { batch: 1, seed: 'r2r-town-0', pool: 'DS-DEF-4::structure organized', vid: 4, why: 'organised crime, no famine: the crime keeps the streets quiet' },
+  { batch: 2, seed: 'r2r-hamlet-4', pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 2, why: 'no siege: the stall fee is the town\'s hold on its market' },
 ];
 
 /**
@@ -71,6 +74,14 @@ const REWORDED = [
   // C3: what the town lives on, read by the rung and the hall it names
   { batch: 1, pool: 'DS-ECO-8::MODERATE', vid: 2, gone: /^Things are fine/, now: /^Money at \{settlement\} is neither comfortable nor tight/, rows: 'C25445: a Dangerous, tense thorp (the rung is the purse\'s, not the town\'s)' },
   { batch: 1, pool: 'DS-ECO-12::INCOME WEIGHT: the practice of magic', vid: 2, gone: /biggest buyers and employers/, now: /^Magic is reckoned with in/, rows: 'C0943\'s class' },
+  // BAR3-CORPUS-2 · C6: the money line speaks of money only (the Defense tab's finding law reads "nothing put by" as an empty store)
+  { batch: 2, pool: 'DS-DEF-2::Economic Survival: WEAK', vid: 1, gone: /nothing put by/, now: /no money is laid by to pay for a long one/, rows: 'C6: defenseWordsFindings\' term "no food stored"' },
+  // BAR3-CORPUS-2 · the predecessor's left items: each line claims what its pool's key bears, never a figure another record denies
+  { batch: 2, pool: 'DS-DEF-9::magicDependency true, with a NAMED dependent chain', vid: 1, gone: /part of the shortfall is made up/, now: /the trade that makes it now leans on help beyond ordinary work/, rows: 'C23179 C31319: the chain leans on magic, the food record\'s magic share is 0' },
+  { batch: 2, pool: 'DS-DEF-9::magicDependency true, with a NAMED dependent chain', vid: 2, gone: /would fall further short than it already does/, now: /would yield less than it does now/, rows: 'C23179\'s class: imports close the gap' },
+  { batch: 2, pool: 'DS-FTH-4::FLAG: crusaderSynthesis', vid: 1, gone: /act as one/, now: /the church has the garrison at its side/, rows: 'C8630: the garrison and the clergy each wish the other quieter (factionStanding)' },
+  { batch: 2, pool: 'DS-DEF-2::Beasts & Monsters: frontier, force without a perimeter', vid: 3, gone: /can drive off what attacks/, now: /cannot stop what attacks from arriving/, rows: 'C37257: a watch alone under a critical monster bar' },
+  { batch: 2, pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 5, gone: /none keeps a house at its market/, now: /anyone trading at its market reckons with them/, rows: 'C54259: the Merchant Guilds list the market among their houses' },
 ];
 
 /** @type {Record<string, any>} */ const CORPUS = {};
@@ -87,7 +98,7 @@ beforeAll(async () => {
   const vocabulary = await import('../../src/domain/facts/factVocabulary.js');
   RULE.variantFactDeclaration = kernel.variantFactDeclaration;
   RULE.declarationAdmits = vocabulary.declarationAdmits;
-  for (const desk of ['defense', 'economy', 'power', 'general']) {
+  for (const desk of ['defense', 'economy', 'power', 'general', 'warFaith']) {
     const leaf = Object.values(await import(`../../src/data/dossierStateProse/${desk}.generated.js`)).find((v) => v && typeof v === 'object');
     for (const [blockId, block] of Object.entries(leaf)) { CORPUS[blockId] = block; LEAF_OF_BLOCK[blockId] = desk; }
   }
@@ -143,8 +154,9 @@ describe('BAR3-CORPUS: a reworded line claims no more than every printing town b
       const v = (CORPUS[blockId]?.pools?.[rest.join('::')] || []).find((/** @type {any} */ x) => x.vid === g.vid);
       expect(v, `${g.pool} has no v${g.vid}`).toBeTruthy();
       expect(v.text, `${g.pool} v${g.vid}: the leaf's member is the one drawnProse.js reads by its vid`).toBe(memberText(g.pool, v));
-      expect(v.text).not.toMatch(g.gone);
       expect(v.text).toMatch(g.now); // the line is reworded, not removed: it still prints where its pool is drawn
+      // anchored: v.text is the live member just matched to its new words and pinned to drawnProse.js above, so a drifted pool reds first
+      expect(v.text).not.toMatch(g.gone);
     });
   }
 });

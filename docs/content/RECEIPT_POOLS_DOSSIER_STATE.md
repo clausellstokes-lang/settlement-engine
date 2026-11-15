@@ -2848,7 +2848,7 @@ supplies the ancestry.
 **`Beasts & Monsters`: `frontier`, force without a perimeter** {colour}
 1. `[ledger]` {settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
 2. `[visitor]` You see spears at {settlement} and no wall for them to stand on, so anything that came at the town from two sides at once would get in.
-3. `[street]` People at {settlement} can drive off what attacks but cannot stop it arriving, so every season the town loses something before its fighters get there.
+3. `[street]` People at {settlement} cannot stop what attacks from arriving, so every season the town loses something before its fighters get there.
 
 **`Beasts & Monsters`: `settled`, defenses beyond the need** {crisis-scoped}
 1. `[counterforce · no threat · crisis: any]` The country around {settlement} holds very little in the way of creatures; whatever the town's works are for, it is not them.
@@ -2948,7 +2948,7 @@ supplies the ancestry.
 3. `[threshold]` {settlement} can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
 
 **`Economic Survival`: `WEAK`** {colour}
-1. `[ledger · guardPresence]` {settlement} is always short of money for its defence: there is nothing put by to pay for a long defence, and whoever is called to make one knows it.
+1. `[ledger · guardPresence]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
 2. `[street · guardPresence]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
 3. `[unfolding]` {settlement}'s defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.
 4. `[ledger · no guardPresence]` {settlement} pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
@@ -3812,8 +3812,8 @@ relied on by nothing.
 4. `[visitor]` A visitor to {settlement} soon learns how much the town leans on help beyond ordinary work, and on the people who give it.
 
 **`magicDependency` true, with a NAMED dependent chain** {colour}
-1. `[ledger]` At {settlement} the usual work no longer yields enough {good}, and part of the shortfall is made up by means beyond it.
-2. `[unfolding]` If the help beyond ordinary work failed at {settlement}, its {good} would fall further short than it already does.
+1. `[ledger]` At {settlement} the usual work no longer yields enough {good}, and the trade that makes it now leans on help beyond ordinary work.
+2. `[unfolding]` If the help beyond ordinary work failed at {settlement}, the trade that makes its {good} would yield less than it does now.
 3. `[street]` People at {settlement} know that part of the town's work now holds up only with help beyond ordinary labour.
 
 **`magicDependency` false**
@@ -6939,10 +6939,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`COMMERCE: a market, no guild`** *(`hasMarket`, none of the other three)*
 1. `[visitor · no guild · no crisis: under_siege]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
-2. `[ledger · market · no guild]` No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.
+2. `[ledger · market · no guild · no crisis: under_siege]` No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.
 3. `[street · no guild]` Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.
 4. `[threshold · no guild · no crisis: under_siege · no crisis: occupied]` A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.
-5. `[ledger · market · guild]` The guilds are a power at {settlement} all the same, though none keeps a house at its market, and anyone trading there reckons with them.
+5. `[ledger · market · guild]` The guilds are a power at {settlement} all the same, and anyone trading at its market reckons with them.
 
 **`WAREHOUSES`** *(`hasWarehouse`, R-W3: one clause, only when true)*
 1. `[visitor · no crisis: under_siege]` Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.
@@ -7369,7 +7369,7 @@ no compass word, no real-world place, no named analogy.*
 ⭐ **THE GENERATION LENS — THE CHURCH'S STANDING WITH THE TOWN'S OTHER POWERS (W4 PEOPLE, 2026-11-07; the wiring inventory's C1–C4, WAVE-RULINGS item 10: the block MOUNTED at `faith.templeGround` in the same commit).** Four pools keyed on the birth-time stress flags `safetyProfile.flags.{crusaderSynthesis, heresySuppression, heresyIntensity, religiousFraud, mageTheocracy}` (`priorityHelpers.js`), each drawn ONLY WHEN its flag is true and silent otherwise. These are GENERATION facts and hold on every settlement, deity or none, so they speak where `CONTESTED`/`ROOTED`/`ENDOWED`/`THIN` cannot (those four stay dark until the religion state and `templeWealth` reach the record). `heresyIntensity` bands the heresy pool: at or above one half the church hunts, below it the church preaches. Each flag already requires a church on the roster (and a garrison, a criminal house or a magic house as its own antecedent names), and each variant declares the house it presumes. Description position: plain lines, two vantages each (the projection's floor refuses a single-voiced pool). No variant names a creed or a god.
 
 **`FLAG: crusaderSynthesis`**
-1. `[watch · garrison · institution: temple]` The church and the garrison in {settlement} act as one: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders.
+1. `[watch · garrison · institution: temple]` In {settlement} the church has the garrison at its side: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders.
 2. `[local · garrison · institution: temple]` Soldiers in {settlement} keep the faith's feast days like crusaders, and the priests' word carries the weight of the garrison behind it.
 
 **`FLAG: heresySuppression: hunted`**
