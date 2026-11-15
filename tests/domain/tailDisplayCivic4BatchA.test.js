@@ -13,6 +13,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -60,8 +61,7 @@ beforeAll(async () => {
 describe('V5: the campaign is the table\'s campaign', () => {
   test('the Defense tab\'s caption and the vintage sentence say "your campaign goes on", never "the campaign advances"', () => {
     const tab = readFileSync(join(ROOT, 'src/components/new/tabs/DefenseTab.jsx'), 'utf8');
-    expect(tab).not.toMatch(/re-judged as the campaign advances/);
-    expect(tab).toMatch(/Disasters & Famine is re-judged as your campaign goes on/);
+    expectAbsentWithAnchor(tab, 're-judged as the campaign advances', 'Disasters & Famine is re-judged as your campaign goes on');
     expect(SYSTEMS_HEALTH_VINTAGE).toBe('As judged at the first survey · Food Security is re-judged as your campaign goes on.');
   });
 });
@@ -77,16 +77,14 @@ describe('V6: the Legal Infrastructure row names the bench that stands', () => {
   });
   test('r2r-town-16: the council\'s service row says who hears the pleas', () => {
     const svc = services(TOWN.get('r2r-town-16'));
-    expect(svc).not.toMatch(/Hears civil pleas in the town court/);
-    expect(svc).toMatch(/Dispute adjudication: Hears the town's civil pleas at the council bench/);
+    expectAbsentWithAnchor(svc, 'Hears civil pleas in the town court', "Dispute adjudication: Hears the town's civil pleas at the council bench");
   });
 });
 
 describe('V7: the gates line only where nothing moves beneath the walls', () => {
   test.each(GATES)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
     const g = String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? '');
-    expect(g).not.toContain(gone);
-    expect(g).toContain(instead);
+    expectAbsentWithAnchor(g, gone, instead);
   });
   test.each(KEPT_GATES)('%s keeps "%s"', (seed, kept) => {
     expect(String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? '')).toContain(kept);
