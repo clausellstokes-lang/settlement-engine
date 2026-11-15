@@ -1,0 +1,8 @@
+{"id":"C2355","town":"bar0-city-under_siege+famine-rand-11","sev":"MED","kind":"LACKS","why":"names a wine shop; HOUSES has no wine shop or vintner (only inns and taverns)","other":""}
+{"id":"C3178","town":"bar0-city-under_siege+famine-rand-11","sev":"MED","kind":"STATE","why":"names copper ore as an input the town's work needs; TRADE imports and LAND gaps list clay, iron, charcoal, never copper ore","other":""}
+{"id":"C3184","town":"bar0-city-under_siege+famine-rand-11","sev":"MED","kind":"STATE","why":"'Needed, and not brought in: copper ore'; no copper ore in TRADE imports, LAND resources or gaps (gaps name imported clay)","other":"C3178"}
+{"id":"C3204","town":"bar0-city-under_siege+famine-rand-11","sev":"MED","kind":"PAIR","why":"'Most meals start from salted fish' while the salt barrels stand empty, the fish market is stopped, and FOOD gives 57% by magic, 12% grown","other":"C2354"}
+{"id":"C3553","town":"bar0-city-under_siege+famine-rand-11","sev":"LOW","kind":"LACKS","why":"'alongside elected aldermen'; GOVERNMENT lists no aldermen or elected body, and PEOPLE names none","other":""}
+{"id":"C3989","town":"bar0-city-under_siege+famine-rand-11","sev":"MED","kind":"STATE","why":"grain shipments arriving by a covert route under siege; FOOD gives brought in 0% and the page says no food comes in at all","other":"C3200"}
+{"id":"C3572","town":"bar0-city-under_siege+famine-rand-11","sev":"LOW","kind":"PAIR","why":"'whether there will be a place left to defend' against the page's 'they trust the city's defences to hold' and 'people believe the city could be held'","other":"C3564"}
+{"id":"DONE","lines":2086,"blocks":1,"flags":7}
