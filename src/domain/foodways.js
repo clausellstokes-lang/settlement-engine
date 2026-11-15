@@ -30,7 +30,10 @@ const SOURCE_PHRASES = Object.freeze({
 
 /** The sentence frames, by how many sources the place has. */
 const FRAMES = Object.freeze({
-  one: Object.freeze(['Most meals start from {A}.', 'The table rests on {A}.']),
+  // BAR3-PLACES-2 (C36357's measure, 2026-11-15): a place's one source of its own is not "most meals" nor what "the table
+  // rests on" where its own food is under half (19 and 19 of the census's 720: a besieged fishing thorp at 29%, a metropolis
+  // fed 54% by magic): the frame says only that the source is the place's own food (the frame's index kept).
+  one: Object.freeze(['Its own food is {A}.', 'What it puts on the table itself is {A}.']),
   two: Object.freeze(['{A} and {B} anchor the table.', 'The table is {A}, with {B} beside it.']),
   more: Object.freeze(['{A} and {B} anchor the table; {C} fills the winter.', 'The table is {A} and {B}, and {C} carries it through the lean months.']),
 });

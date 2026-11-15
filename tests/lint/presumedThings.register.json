@@ -798,7 +798,6 @@
    ["granary", "after-release", "The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.", "b443347f937904fb"],
    ["militia", "after-release", " is why this settlement has walls where others do not, why the militia drills when other villages have forgotten how, an", "60cc62a9c7e7172c"],
    ["war", "after-release", " is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if ", "65cf322223134a9b"],
-   ["war", "after-release", " trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.", "43b91f14a98deff6"],
    ["war", "after-release", "The war reaches ", "896bf77f9e7a16d1"]
   ],
   "src/generators/neighbourGenerator.js": [

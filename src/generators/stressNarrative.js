@@ -323,7 +323,10 @@ const WARTIME_CARAVANS = 'Supply caravans pass through on army requisition. '; /
  */
 function WARTIME_VARIANTS(s, isolated = false, fedIsolated = false) {
   return [
-    { id: 'profit', text: s + " is at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich. The bill will come later." },
+    // BAR3-PLACES-2 (C36830, 2026-11-15): the profit text claims no merchants: where the war's economy is weak the merchant
+    // power's own description says requisition is "hurting the bottom line" (stressFactions.js), and the line printed beside
+    // it (r2s-wartime-village-0, bar0-city-wartime-rand-14): those with the right friends, true wherever it prints.
+    { id: 'profit', text: s + " is at war and doing well out of it: army contracts pay, prices are high, and those with the right friends are getting rich. The bill will come later." },
     // TAIL-CRISIS (READ-ALL 20648): no army contract reaches an isolated place (the same route fact as the caravans').
     { id: 'loss', text: s + " is fighting a war it may not win. Conscription has taken a third of the working-age men. " + (isolated ? '' : WARTIME_CARAVANS) + (fedIsolated ? '' : WARTIME_PRICES + ' ') + (isolated ? WARTIME_SACRIFICE_ISOLATED : "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.") },
   ];

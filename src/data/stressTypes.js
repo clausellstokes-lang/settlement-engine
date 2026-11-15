@@ -37,8 +37,11 @@ export const STRESS_TYPE_MAP = {
     colour: "#8b5a1a",
     probability: 0.027,
     requiresTier: null,
+    // BAR3-PLACES-2 (C4510, 2026-11-15): the slot's holder is the famine's lever (the master fishmonger in 11 of the census's
+    // 21 mill towns, the miller, an elder, a reeve), and where the fishery is the source that failed, "has food" was read
+    // as the failed good itself: the hook names no good, only a store laid in before the shortage (true of every holder).
     crisisHook:
-      "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+      "A grain merchant has stores laid in before the shortage, enough to matter. They will sell, but their price is not money. The players can intervene in how this plays out.",
     viabilityNote: "No one can earn a normal living while the famine lasts, and every coin goes on food.",
     historyColour: "economic",
   },

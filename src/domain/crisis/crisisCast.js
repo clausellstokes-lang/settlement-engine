@@ -221,6 +221,11 @@ export const CAST_ABSENCES = Object.freeze({
   noBase: "no house's base is hit",
   noLever: 'no house the crisis turns on stands here',
   noGains: 'no power gains',
+  // BAR3-PLACES-2 (C6485, 2026-11-15): the profiteer's empty slot says only what the cast bears: no one on the roster is
+  // cast for it. "no power gains" stood beside the war's own text ("certain families are quietly thriving on contracts";
+  // "those with the right friends are getting rich") and beside a power whose stake is that contracts made part of it
+  // rich (warDivides): the war's profit is the crisis text's, its profiteer simply unnamed. The exploiter keeps noGains.
+  noProfiteer: 'no one on the roster is named',
   occupierOnly: 'no one is named: no local power gains', // R2-CODE-B-11, row 179: the collaborator is a local
   outsideHand: 'an outside hand, unnamed',
   noSeat: 'no seat or governing house stands',
@@ -885,7 +890,7 @@ export function exploiterCandidates(s, stakes, role) {
   const headsAGainer = (n) => [...gainers].some((p) => { const top = membersOf(s, p)[0]; return !!top && key(top) === key(n); });
   /** @param {CastNpc} n */
   const reasonOf = (n) => (grade(n) === 2 && !headsAGainer(n) ? CAST_REASONS.exploiterMember : reasons[grade(n)]);
-  return { candidates: pool.map(({ n }) => npcRow(n, role, reasonOf(n))), absent: CAST_ABSENCES.noGains };
+  return { candidates: pool.map(({ n }) => npcRow(n, role, reasonOf(n))), absent: role === 'profiteer' ? CAST_ABSENCES.noProfiteer : CAST_ABSENCES.noGains };
 }
 
 /**

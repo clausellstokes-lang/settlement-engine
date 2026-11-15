@@ -134,7 +134,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.famine.crisisHook",
-          "text": "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+          "text": "A grain merchant has stores laid in before the shortage, enough to matter. They will sell, but their price is not money. The players can intervene in how this plays out.",
           "needs": [
             "institution: mill"
           ],

@@ -243,11 +243,14 @@ export const PRESSURE_SENTENCES = {
       (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45)
       ? [
           { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
-          { text: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
+          { text: `Being on the right side of it keeps the forges of ${r.name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
+          // BAR3-PLACES-2 (C34042, 2026-11-15): no trade is said to have "never paid better": the named commodity is the
+          // town's, and where it is the trade the History calls under strain (bar0-city-wartime-rand-13: the fish trade) the
+          // line was false; the war's contracts are what pays (true wherever the war goes the town's way).
           // TAIL-CONTENT-CLOSE-1 (2026-11-15): the forges are named only where a smith stands; where no row of the pool is
           // admitted, the same war is told without them (never drawn: narrativeGenerator.js reaches it by resolution only)
-          { text: `Being on the right side of it, ${r.name}'s ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`,
-            twinOf: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.` },
+          { text: `Being on the right side of it, ${r.name} lives on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.`,
+            twinOf: `Being on the right side of it keeps the forges of ${r.name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.` },
           { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison', 'prosperity: ≥ comfortable'] }, // TAIL-NARRATIVE (01079): "prospering" needs a town the record calls comfortable or better
         ]
       : [
