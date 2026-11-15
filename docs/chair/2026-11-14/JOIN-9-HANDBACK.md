@@ -70,6 +70,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 4 | lane/tail-corpus-def-2026-11-14 | b284cbe44 (05:38) | 7ccad225e | 954340b6f | none | 10 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/generators/coherenceAgreeCures.test.js  |
 | 5 | lane/tail-ties-2026-11-14 | 4ec61102f (05:41) | 837cad90f | a06cde784 | none | 6 files outside docs/; declared-move commits: none (golden carried) |
 | — | (g) on the chair's word after point 5 | — | — | f468495d9 | — | THE WIRING CENSUS RE-TAKEN BY ITS OWN DOOR (`node scripts/wiring-census.mjs`; `--dry` first ran to its end: stale, 53 rows, the three composers' stamps), `--check` exit 0; THEN THE CORPUS'S DOOR `node scripts/generate-dossier-state-prose.mjs --check`: **exit 0** (69 blocks / 2959 variants, 78 causal families / 468 variants): no leaf stale, nothing rebuilt |
+| 6 | lane/tail-history-2026-11-14 | 45e88f9aa (05:49) | abe0327eb | 554cb0ad5 | none | 7 files outside docs/; declared-move commits: ed9f3b549  (golden carried); merged clean though both moved: tests/generators/hookTablesDeclared.test.js  |
 
 ## 3. Every code resolution
 
@@ -219,6 +220,8 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` | corpus-eco (3) | merged clean though both corpus seats moved it; the corpus door (g) is stopped: checked at the close |
 | `tests/generators/coherenceAgreeCures.test.js` | corpus-def (4) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
 | `docs/content/wiring-census.json` | (g), after ties (5) | JOIN-8's row (stale; the door crashed at `crisisHooks.js:102`) is ANSWERED: the door ran under plain node after the ties point; re-taken by it in f468495d9; the corpus door's `--check` exit 0 at that tree. The close re-derives it once more on the final tree |
+| golden | history (6) | DECLARED MOVE commits ed9f3b549  (field diffs in their bodies) |
+| `tests/generators/hookTablesDeclared.test.js` | history (6) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
 
 ## 5. Item 2 at the landed tip
 
