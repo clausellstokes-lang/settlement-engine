@@ -4,8 +4,8 @@ Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY
 Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
 Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the chair's lane (211 rows, read at e5b421802).
 
-**STATE (TAIL-HISTORY-2): batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** in the commit
-that carries this section.
+**STATE (TAIL-HISTORY-2): batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** (7bef72cbc). **HANDED BACK** at the budget
+(2026-11-15 01:50): what is left is listed under WHAT IS LEFT below.
 
 ## The chair's rulings since (2026-11-15 00:30 UTC; each vetoable by the owner)
 
@@ -168,6 +168,48 @@ The patch was applied unchanged at 8b90e7753, with these additions:
 **Left by batch 2, for the chair:**
 - **trade_dispute:** the seven rows above, 12 towns.
 - The X9 exports rows show the same aftermath shape in OTHER tension types (leadership_vacuum, crime_wave, external_threat, outside debt, corruption_scandal, magical_controversy, population friction, infiltration_fear). They are told in past tense under a type with no own event. Y5 names ten types; widening it is the chair's call.
+
+## The chair's notes Y10 to Y12 (received 2026-11-15 01:43), and where they stand at hand-back
+
+- **Y10 (1): DISPLAY-CIVIC's 26 rows**, read against the after-census of batch 2:
+  - The Overview camps of Y5's types fall: B08924 "Former rebels" 20 → 2 and B14403 "Old loyalists" 13 → 2. The towns left hold the event.
+  - The label rows still print under the live quarrel. This follows Y5's ruling: the label is unchanged on every surface. They are B09553/B09557 Great Flood 25, B14868/9 Plague Years 19, B09552/6 Great Fire 18, B14848/55 Pilgrimage Surge 18, B09895/B09901 Heresy Trial 15, B27913 Wild magic 15, B22268 Tyranny 15, B22149 Trade collapse 14 and B12247 Market crash 6.
+  - The rest are OTHER tension types, outside Y5's ten: B07041 External Debt 60, B05720 Corruption scandal 48, B22144/B22175 Trade Dispute 12, and the camps 10722 "Hoarders" 165 (resource_scarcity), B15436 "Reformers" 48, B15115/B03548 "Pro-/Anti-magic" 23, B15437 "Reformists" 11 and B16654 "Secular camp" 11. They wait on the chair's widening of Y5. **A size law for camps** ("Price regulators" in a thorp of seven) belongs to those types' factions. The ten twins' factions claim no office or guild: "those in charge", "landowners", "creditors", "households".
+- **Y10 (2): B02506** ("A fire that began in the lower districts…") goes 20 → 15. The towns left print it from the timeline event's description (the HISTORY_DESC / small-place writer). NOT WORKED.
+- **Y10 (3):** the "Last held" writer is `src/components/new/tabs/TraditionsTab.jsx` (and `src/pdf/sections/Traditions.jsx`). Neither is in this group: NAMED, for the chair to rule its holder.
+- **Y11:** the two new atoms (`ruling body`, `rival power`). No row of mine was keyed after Y5, so NOTHING IS MERGED. The candidates for the next seat are 20031 and 20032 (Y9), and the succession and insurgency texts if the chair wants their plurality back under `ruling body`.
+- **Y12:** the four arrival scenes (shrine, stables, carts of cloth, horse traders) are written by `src/generators/narrative/arrivalScene.js`. **It is not in this group's file list**, so it is NAMED for the chair to rule. The arrival POOLS this group holds (`src/data/arrivalProse.js`) are owed the chair's whole-pool measure: each line that names a house, a trade or a good, with the towns where the thing does not stand. NOT WORKED.
+
+## WHAT IS LEFT (TAIL-HISTORY-2's hand-back, 2026-11-15, widest first)
+
+1. **Y5 widened** (the chair's call): the same shape in the other tension types.
+   - trade_dispute: 7 rows, 12 towns.
+   - The tabs' camps and labels above.
+   - The X9 exports rows: leadership_vacuum, crime_wave, external_threat, outside debt, corruption_scandal, magical_controversy, population friction and infiltration_fear.
+   - The form is the same: `byMemory.unanchored` with three factions and three hooks. `tensionTemplateDeclaration` guards the draw. The presumed-things walker reads no declaration inside `byMemory`, so a twin naming a house is reworded, not declared.
+2. **X9's lastingEffects rows**, 17 rows with 30563 the widest: "Watch towers and muster drills maintained since the alarm", 157 towns, HIGH. Also the archive and levy-roster family: 03872 to 03877 and 07927.
+3. The worklist's other wide rows, still unworked:
+   - B15078 "Price regulators" (165).
+   - 16625 "Rival guilds fought…" (139).
+   - 11894 and 28512 (foodways, Y3).
+   - B19917 and 07400.
+   - The Y3 culture rows.
+   - The rest of Y4.
+   - **Y8** (no gathering under a plague or a quarantine).
+4. **Y9 (20031, 20032):** a twin keyed by what the file reads of the government, or `ruling body` after a Y11 merge.
+5. **Y12:** the arrival pool measured whole by the record.
+6. **Named for other files:** `siegeCapability.js` (its siegeNarrative copies the first tension's words; it prints nowhere), `crisisSummaryVantage.js` (the crisis seat's), `TraditionsTab.jsx` and `arrivalScene.js`.
+7. **Registers named stale:**
+   - `docs/census/declarations/ARRIVAL_SENSES.json` still marks `bread.lines[1]` as colour (Y6).
+   - The ledgers do not carry the three stressTypes rewords (they are under the REWORDED arm).
+   - The engine bundle (`supabase/functions/_shared/engineBundle.js`) carries none of either batch.
+   - All are for the close's re-take.
+
+**Instruments, re-made** (as above, plus):
+- The census before and after: `census3.sh <tree> <out> 4` in two scratch worktrees (one detached at the tip, `node_modules` symlinked).
+- The record diff by field: a 20-line Python walk over the two `corpus.ndjson.gz` files.
+- The Y5 verifier: each tension of the ten types with no `templateType` of its own on `historyEvents`, checked for its event's words against `byMemory.unanchored`.
+- A note on loads: the before-run renders four towns (r2r-thorp-0…3) cold, so "Patron deity" can differ by 4. Ignore it.
 
 ## Batch 1 as built by TAIL-HISTORY (its record, kept)
 
