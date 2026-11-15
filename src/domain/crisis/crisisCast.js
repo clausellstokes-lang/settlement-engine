@@ -161,12 +161,16 @@ export const CAST_REASONS = Object.freeze({
     criminal_opportunity: 'its streets are where the crime lands',
   })),
   // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 A1, R1–R3): the fragments in the cast's own voice, no gender, no unread noun.
-  bruntLeast: 'the one with the least say in the house the crisis hits',
+  // TAIL-CRISIS-4 (K20, the chair's ruling of 2026-11-15, vetoable by the owner; a DECLARED MOVE of stored text): "the
+  // house the crisis hits" read as a household, and a famine hits the whole town. The reason says in plain words what the
+  // record holds: the person's place in a power whose stake is a loss (bruntCandidates' `losers`). The words name no
+  // power, so a rename never reaches them (factionRename.js's law for this vocabulary).
+  bruntLeast: 'the one with the least say in a power that loses by the crisis',
   // ROUND THREE, ruling (c) (the chair, 2026-11-13; the cut's #11 #13 #53 #55): "the least say" presumes a house of
   // several. In a house of ONE the person is named as its only member; a person who also holds the crisis's lever
   // (the cut's #268) is named as one of the house, never as the one with the least say.
-  bruntOnly: 'the only one in the house the crisis hits',
-  bruntMember: 'one of the house the crisis hits',
+  bruntOnly: 'the only one named here of a power that loses by the crisis',
+  bruntMember: 'one of a power that loses by the crisis',
   leverRuns: 'runs the office that decides how the crisis goes',
   leverInstitution: 'whoever runs it decides how the crisis goes, and nobody named here runs it',
   leverTemporary: 'nobody here could, so this one stepped in for the crisis',
