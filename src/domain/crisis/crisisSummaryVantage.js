@@ -98,7 +98,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       traveller: 'In {name} you see hungry children at the doors, and long queues wherever food is handed out.',
       newcomer: 'Arriving in {name}, you are asked first whether you carry food, and only then what you want.',
       trade: 'In {name} food costs more every week, and people spend every coin they have on it.',
-      watch: 'In {name} the food stores are guarded day and night, and nobody carrying a sack goes unquestioned.',
+      watch: 'In {name} whatever food is put by is watched day and night, and nobody carrying a sack goes unquestioned.', // TAIL-CRISIS batch 5 (X9 13667): no stores or guards presumed
     },
     overview: {
       local: 'Every family in {name} is eating less than it did, and those with stores put by are not sharing.',
@@ -253,12 +253,12 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     cover: {
       traveller: 'A sickness is spreading in {name}: doors are shut, and people keep their distance from one another.', // R3-CODE-C-5: no street
       newcomer: 'Anyone arriving in {name} is asked where they came from and whether they are well before anyone will take their hand.',
-      trade: 'Fewer people come to market in {name} since the sickness began, and some goods have stopped arriving altogether.',
+      trade: 'Fewer people come to {name} since the sickness began, and fewer goods come with them.', // TAIL-CRISIS batch 5 (X9 09896): no market presumed
       watch: 'In {name} some houses are marked and watched and others are not, and nobody seems to agree on the rules.',
     },
     overview: {
       local: 'The sickness in {name} is spreading, and people would rather argue over where it came from than stay indoors.',
-      trade: 'Travel is discouraged in {name}, fewer come to market, and the goods the carts used to bring run short.',
+      trade: 'Travel is discouraged in {name}, and fewer come and go than before the sickness.', // TAIL-CRISIS batch 5 (X9 29529 08228): no market, no carts presumed
       official: '{name}\'s leaders argue over where the sickness came from while it spreads.',
       newcomer: 'Newcomers in {name} are eyed as the likely source of the sickness, whatever the truth.',
     },
@@ -306,7 +306,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       traveller: 'The roads around {name} are dangerous now: carts have gone missing, and a farmstead went up in flames last week.',
       newcomer: 'Anyone who reaches {name} by road is asked what they saw on the way, and listened to closely.',
       trade: 'Fewer carts reach {name} each month, and the drivers who still come travel in company and charge more for it.',
-      watch: 'Lookouts around {name} watch the roads and the edges of the fields, and nobody lingers outside once the light goes.',
+      watch: 'People in {name} keep an eye on the roads and the edges of the fields, and nobody lingers outside once the light goes.', // TAIL-CRISIS batch 5 (X9 15776): no lookouts presumed
     },
     overview: {
       local: 'Nobody in {name} goes out after dark now, and every family has a story of something seen at the edge of the fields.',
@@ -329,10 +329,10 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   insurgency: pools({
     cover: {
-      traveller: '{name} looks calm, but orders go unanswered; some of its people have turned against those in charge.', // TAIL-CRISIS K3: no office, no second power the kind does not guarantee
+      traveller: 'In {name} orders go unanswered, and some of its people have turned against those in charge.', // TAIL-CRISIS K3: no office, no second power the kind does not guarantee; TAIL-CRISIS-4 (K18): not "looks calm" beside its own political violence
       newcomer: 'Newcomers to {name} are asked, quietly, whether they come on the government\'s business.',
       trade: 'In {name} taxes are disputed and some revenue is no longer sent on, and those who trade are unsure whom they owe.', // R3-CODE-C-5: no merchant; TAIL-CRISIS: no office
-      watch: 'Nobody in {name} fights in the open; those watching are counting who still obeys the government and who has stopped.',
+      watch: 'In {name} both the government and those who defy it press people to say which side they are on, and those watching count who has stopped obeying.', // TAIL-CRISIS-4 (K18): every insurgency's record holds its political violence and its loyalty testing
     },
     overview: {
       local: 'People in {name} are choosing between the government and those who defy it, and many have stopped doing what the government asks.', // TAIL-CRISIS K3: no second power
@@ -341,14 +341,14 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       newcomer: 'A newcomer in {name} soon learns that the government\'s word counts for less than it seems.',
     },
     defence: {
-      watch: 'There is no fighting in {name}; the danger is quieter, orders that go unheeded and dues that go unpaid.', // R3-CODE-C-5: no streets; TAIL-CRISIS (READ-ALL 22640): no officials
+      watch: 'In {name} the quarrel over who is in charge has turned to violence, and orders go unheeded and dues unpaid.', // R3-CODE-C-5: no streets; TAIL-CRISIS (READ-ALL 22640): no officials; TAIL-CRISIS-4 (K18): not "no fighting" beside the record's political violence
       official: 'Those who answer for {name} cannot be sure whose side their own people are on.', // R3-CODE-C-5: no force
       local: 'In {name} people keep out of the quarrel between the government and those who defy it, and away from anyone asking questions.', // TAIL-CRISIS (READ-ALL 11471): no second power
-      traveller: 'Passing through {name}, you would not see the quarrel over who is really in charge unless you asked.', // TAIL-CRISIS (READ-ALL B14649): beside a famine something is amiss to see
+      traveller: 'Travellers in {name} are pressed, sooner or later, to say which side they are on, and both sides take note of the answer.', // TAIL-CRISIS (READ-ALL B14649); TAIL-CRISIS-4 (K18): the quarrel is in the open (the record's political violence), and every insurgency tests loyalty
     },
     tonight: {
       official: 'Those in charge of {name} know some of its people are defying them, and cannot say so openly without making the defiance stronger.', // TAIL-CRISIS (READ-ALL 22983): no second power
-      watch: 'The defiance of {name}\'s government grows quietly, and those watching it cannot act in the open.', // TAIL-CRISIS (READ-ALL 21315): no second power
+      watch: 'The defiance of {name}\'s government grows, and those watching it count who still obeys and who has stopped.', // TAIL-CRISIS (READ-ALL 21315): no second power; TAIL-CRISIS-4 (K18): not "quietly" beside the record's political violence
       newcomer: 'Those in charge of {name} need something done that cannot be official, and someone new is whom they would ask.',
       trade: 'Some of what {name} owes the government no longer reaches it, and the government runs on less each season.', // TAIL-CRISIS (READ-ALL 18222): no office
     },
@@ -436,12 +436,12 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       cover: {
         traveller: 'Walking into {name}, you pass tents on both sides of the road: newcomers looking for a place to call home.',
         newcomer: 'The families arriving in {name} want a roof and work, and find too few of either to go round.',
-        trade: 'With so many new mouths in {name}, food is running short and there is not work for everyone who wants it.',
+        trade: 'With so many new mouths in {name}, there is not work for everyone who wants it.', // TAIL-CRISIS batch 5 (X9 31407): no shortage the food record denies
         watch: 'The newcomers\' camps in {name} grow every week, and the old households watch them uneasily.',
       },
       overview: {
         local: 'Families have been arriving all season, more than {name} has roofs or work for. They camp where they can, and the old households keep their distance.',
-        trade: 'Food in {name} is running short with so many more to feed, and there is not work enough for the newcomers.',
+        trade: '{name} has many more mouths to feed than it had, and there is not work enough for the newcomers.', // TAIL-CRISIS batch 5 (X9 10399 16309)
         official: '{name}\'s leaders are counting heads they have no plan for, and the newcomers keep coming.',
         newcomer: 'For the newcomers, {name} is a place to call home, if they can find a roof and someone who will hire them.',
       },

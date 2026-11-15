@@ -41,6 +41,7 @@ import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.j
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
+import { crisisOf } from '../facts/crisisKind.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -349,7 +350,7 @@ export function resourceWorkReading(s, rawResource) {
   return { modelled: worked || chainModelsResource(s, keys), worked, leaf, sold, keys, good: spec?.noun };
 }
 
-/** @typedef {'unexploited'|'partial'|'full'} ExploitationStage */
+/** @typedef {'unexploited'|'partial'|'full'|'failed'} ExploitationStage */
 /** @typedef {{ rawResource?: unknown, [key: string]: unknown }} ExploitationCard */
 /** @typedef {{ card: ExploitationCard, stage: ExploitationStage, filed: ExploitationStage, moved: boolean }} ExploitationShown */
 
@@ -376,12 +377,34 @@ export function resourceWorkReading(s, rawResource) {
  * @returns {ExploitationShown}
  */
 export function exploitationCardShown(s, card, filed) {
+  // V2 (TAIL-DISPLAY-CIVIC-3, the chair's ruling of 2026-11-15): the food a famine in force failed is not worked here now
+  if (filed !== 'unexploited' && famineFailedResourceOf(s) === str(card?.rawResource).toLowerCase()) return { card, stage: 'failed', filed, moved: true };
   const reading = resourceWorkReading(s, card?.rawResource);
   if (filed === 'unexploited' && reading.worked) return { card, stage: 'partial', filed, moved: true };
   // P1-a (the chair's second word): a modelled chain idle here, the leaf's house list included: the record bears the
   // leaf out, and the card reads Unexploited (an apothecary working herbs the town buys does not work its ground).
   if (filed !== 'unexploited' && reading.modelled && !reading.worked) return { card, stage: 'unexploited', filed, moved: true };
   return { card, stage: filed, filed, moved: false };
+}
+
+/** The resource a famine's failed source is (foodBalance.js :: failedSource; the mill grinds the grain). */
+const FAILED_SOURCE_RESOURCE = Object.freeze({ grain: 'grain', mill: 'grain', livestock: 'livestock', fish: 'fish' });
+
+/**
+ * THE FOOD A FAMINE IN FORCE FAILED (TAIL-DISPLAY-CIVIC-3 V2, the chair's ruling of 2026-11-15; READ-ALL B29895, the
+ * journal's 35544 35551 35555): the Resources tab's exploitation rows printed the famine's failed source "Fully
+ * exploited" ("| Fish | full |" in the journal) beside the record's own famine (15 of the census's 44 famine towns at
+ * cb4ae58f0). The record's failed source (`economicState.foodSecurity.foodRecord.failedSource`) names it; under a famine
+ * in force (`facts/crisisKind.js :: crisisOf`) its resource's card is shown in the FAILED group, the resource alone
+ * (`moved`), on every surface that reads `exploitationGroupsShown` (the tab, the dossier search, the PDF, the journal).
+ * A famine with no failed source on its record (hunting failed, or none named) moves nothing.
+ * @param {PageRecord} s @returns {string | null} the failed resource's key, else null
+ */
+export function famineFailedResourceOf(s) {
+  if (!s || typeof s !== 'object' || !crisisOf(/** @type {object} */ (s)).has('famine')) return null;
+  const failed = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { failedSource?: unknown } | null } | null } | null }} */ (s)
+    .economicState?.foodSecurity?.foodRecord?.failedSource;
+  return (typeof failed === 'string' && FAILED_SOURCE_RESOURCE[/** @type {keyof typeof FAILED_SOURCE_RESOURCE} */ (failed)]) || null;
 }
 
 /**
@@ -465,7 +488,7 @@ function proseHouseName(inst) {
 export function exploitationGroupsShown(s) {
   const ex = /** @type {{ exploitation?: Record<string, unknown> } | null | undefined} */ (s?.resourceAnalysis)?.exploitation || {};
   /** @type {Record<ExploitationStage, ExploitationShown[]>} */
-  const out = { unexploited: [], partial: [], full: [] };
+  const out = { unexploited: [], partial: [], full: [], failed: [] };
   /** @type {ReadonlyArray<[ExploitationStage, string, string]>} */
   const FILED = [['unexploited', 'unexploited', 'unexploited'], ['partial', 'partiallyExploited', 'partial'], ['full', 'fullyExploited', 'full']];
   for (const [stage, key, legacy] of FILED) {

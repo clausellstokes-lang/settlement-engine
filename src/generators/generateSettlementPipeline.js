@@ -1,3 +1,4 @@
+import { keepOneDominant, withConflictRelations } from './factionDynamics.js'; // RECORD-MEASURE-2 G1; P19
 /**
  * generateSettlementPipeline.js — Pipeline-based settlement generation.
  *
@@ -195,6 +196,9 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
     }
   }
 
+  keepOneDominant(finalCtx.settlement?.powerStructure?.factions); // RECORD-MEASURE-2 G1: on the final roster, the label only
+  // TAIL-POWERS-B-2 (P19): a pair the conflicts hold at HIGH, called symbiotic or dependent, names the quarrel (draw-free)
+  if (finalCtx.settlement?.powerStructure) finalCtx.settlement.powerStructure = withConflictRelations(finalCtx.settlement.powerStructure, finalCtx.settlement.conflicts);
   if (typeof options.onComplete === 'function') {
     try { options.onComplete(finalCtx); } catch (e) { console.warn('[pipeline] onComplete threw:', e); }
   }

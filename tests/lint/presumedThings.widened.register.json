@@ -5546,12 +5546,6 @@
    [
     "quarters",
     "word",
-    "Every district has a temple. Religious observance accessible to all.",
-    "2e13c962ed3798d2"
-   ],
-   [
-    "quarters",
-    "word",
     "Know who goes where in their district. Sellable information.",
     "a918e7549a9ff25d"
    ],
@@ -5578,12 +5572,6 @@
     "word",
     "The complete range of arcane services from multiple practitioners.",
     "3387e42ac9a15e90"
-   ],
-   [
-    "temple",
-    "implied",
-    "Collects the lord's dues and the temple tithe",
-    "c6123c68a2e9f9d7"
    ],
    [
     "market",
@@ -7004,8 +6992,8 @@
    [
     "occupation",
     "word",
-    "'s street signs have been repainted in two languages, the local one second. The new lettering is neat, official, and eve",
-    "120273b1af3cb1b5"
+    "'s notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door",
+    "0e103531bb2ad10b"
    ],
    [
     "quarters",
@@ -7022,8 +7010,8 @@
    [
     "siege",
     "word",
-    "The founders chose this place for its trade, water and good ground. Now it is under siege, and none of that matters unti",
-    "89fccab00f0ef11d"
+    "Whatever the settlement was built for, it is under siege now, and nothing else matters until the siege is broken.",
+    "d943bc164d82010e"
    ],
    [
     "occupation",
@@ -7202,12 +7190,6 @@
     "8bb7c76d9397ecf2"
    ],
    [
-    "watch",
-    "implied",
-    "'s company under the watch's command. ",
-    "793d3ecebdce96fc"
-   ],
-   [
     "temple",
     "implied",
     " demands a church trial; ",
@@ -7346,12 +7328,6 @@
     "3011e68fb898551a"
    ],
    [
-    "prisoner",
-    "family",
-    "'s crew needs a prisoner released, ",
-    "e7a1677f3518aa92"
-   ],
-   [
     "streets",
     "family",
     " pays for their routes. The streets ",
@@ -7368,12 +7344,6 @@
     "family",
     " has hired an advocate to sue ",
     "63685fb401dc8e0c"
-   ],
-   [
-    "house: warehouse",
-    "family",
-    "'s warehouses and wagons for a fixed fee each season. ",
-    "0938c8a2ded565c0"
    ],
    [
     "clergy",
@@ -8512,8 +8482,8 @@
    [
     "house: headman",
     "family",
-    "A headman settles disputes and gives the orders here.",
-    "7285d794a89332c7"
+    "A headman settles disputes and speaks for the community.",
+    "abd2ed1a91f19be5"
    ],
    [
     "clergy",
@@ -9078,8 +9048,8 @@
    [
     "famine",
     "word",
-    "Helped engineer the original supply disruption that triggered the famine, believing it would only last a week",
-    "c835d792041e5066"
+    "Helped cause the original shortfall that triggered the famine, believing it would only last a week",
+    "5d4570b895149c66"
    ],
    [
     "famine",
@@ -9156,8 +9126,8 @@
    [
     "revolt",
     "word",
-    "Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record t",
-    "49d03bfa7cbe9332"
+    "Named people who had nothing to do with the insurgency as its ringleaders, then falsified the reports to record them as ",
+    "a4b9c9573076e473"
    ],
    [
     "revolt",
@@ -11313,18 +11283,6 @@
    ]
   ],
   "src/domain/crisis/crisisSummaryVantage.js": [
-   [
-    "market",
-    "root",
-    "Fewer people come to market in {name} since the sickness began, and some goods have stopped arriving altogether.",
-    "84c506caacd723e2"
-   ],
-   [
-    "market",
-    "root",
-    "Travel is discouraged in {name}, fewer come to market, and the goods the carts used to bring run short.",
-    "58bc3e6cfd1063c8"
-   ],
    [
     "war",
     "root",
@@ -25964,24 +25922,6 @@
     "family",
     "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo",
     "35e040179aa22bf4"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and pe",
-    "dff194ad0848c695"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work ",
-    "a4161c781e58da25"
-   ],
-   [
-    "smith",
-    "family",
-    "A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.",
-    "68ffa8fbf6ed6fb3"
    ]
   ],
   "src/generators/economy/incomeLineSiblings.js": [
@@ -26022,24 +25962,6 @@
     "family",
     "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo",
     "35e040179aa22bf4"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and pe",
-    "dff194ad0848c695"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work ",
-    "a4161c781e58da25"
-   ],
-   [
-    "smith",
-    "family",
-    "A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.",
-    "68ffa8fbf6ed6fb3"
    ]
   ],
   "src/generators/economy/prosperity.js": [
@@ -26654,12 +26576,6 @@
     "21d88daa7e5571fd"
    ],
    [
-    "house: baker",
-    "family",
-    "Bread went up twice this month, and a baker says he was told to raise it.",
-    "b018973561bb8c64"
-   ],
-   [
     "streets",
     "family",
     "A merchant has found his own stolen cloth for sale two streets away.",
@@ -27134,12 +27050,6 @@
     "word",
     " Under occupation, several noble families have made private accommodations with the new authority. Others have not, and ",
     "83877da1d65dfae8"
-   ],
-   [
-    "quarters",
-    "word",
-    "Claims legitimate authority through different means; controls a distinct district or institution.",
-    "e36c05d0c1828251"
    ],
    [
     "succession",

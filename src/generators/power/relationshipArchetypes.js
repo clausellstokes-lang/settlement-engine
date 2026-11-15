@@ -5,7 +5,7 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
-import { HANDLER_TIE_ARCHETYPES, STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
+import { HANDLER_TIE_ARCHETYPES, REVERSED_TIE, STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
 import { drawDeclared } from '../../domain/facts/drawDeclared.js';
 
 export const computeRelTension = (factionA, factionB, stressFlags, instFlags) => {
@@ -195,12 +195,14 @@ const tiePairPool = (archetype) => {
  * `[npc, partner]`), so a line about the two of them (`shared power`: "share a council bloc") reads the pair.
  * @param {Readonly<{ body: string, members: string, member: string }>} [force]
  * @param {object | (() => object) | null} [facts]
- * @returns {(archetype: any, npc: {name?: string}, partner: {name?: string}) =>
+ * @returns {(archetype: any, npc: {id?: string, name?: string}, partner: {id?: string, name?: string}) =>
  *   {archetypeKey: string | undefined, proseVariant: number, description: string, tension: string}}
  */
 export const createTieProseDraw = (force, facts = null) => {
   /** @type {Map<unknown, {base: number, used: number, printed: Set<number>}>} */
   const draws = new Map();
+  /** TAIL-TIES-2 (T6): each pair's FIRST tie of a kind, as its directed key (`npcData.js :: REVERSED_TIE`). @type {Map<string, string>} */
+  const firstOfPair = new Map();
   return (archetype, npc, partner) => {
     const archetypeKey = archetypeKeyOf(archetype);
     let draw = draws.get(archetype);
@@ -229,9 +231,20 @@ export const createTieProseDraw = (force, facts = null) => {
     // admitted index is printed does it resolve as it did (a repeat, never a false line).
     const held = inHead && draw.printed.size ? new Set([...draw.printed].map(String)) : null;
     const once = held ? resolveAt({ draw: () => pool[drawnVariant], held, heldKey: (l) => String(l.id) }) : null;
-    const resolved = once && once.line ? once : resolveAt({ draw: (p) => p[drawnVariant] });
-    const proseVariant = resolved.line ? resolved.line.id : drawnVariant;
-    draw.printed.add(proseVariant);
+    // TAIL-TIES-2 (T6's vote lines refuse more indices under one ruler): PAST THE POOL'S END the cycle runs over the lines
+    // that name BOTH cards (above), so a refused overflow index resolves among THOSE first (the held set's rule: never a
+    // one-name line where an admitted two-name one stands); the whole pool only where none is admitted. Draw-free.
+    const overflow = !inHead && !once ? resolveAt({ draw: () => pool[drawnVariant], held: new Set(pool.filter((l) => !named.includes(l.id)).map((l) => String(l.id))), heldKey: (l) => String(l.id) }) : null;
+    const resolved = once && once.line ? once : overflow && overflow.line ? overflow : resolveAt({ draw: (p) => p[drawnVariant] });
+    const index = resolved.line ? resolved.line.id : drawnVariant;
+    draw.printed.add(index);
+    // TAIL-TIES-2, the chair's ruling (T6): a second tie of the same kind between the same two cards, drawn the other way
+    // round, is written in the first tie's order (the pair's direction has one home); its index and draw are untouched.
+    const from = String(npc?.id ?? npc?.name ?? ''); const to = String(partner?.id ?? partner?.name ?? '');
+    const pairKey = `${archetypeKey ?? archetype?.label}::${[from, to].sort().join('\u0000')}`;
+    if (!firstOfPair.has(pairKey)) firstOfPair.set(pairKey, `${from}>${to}`);
+    const reversed = from !== to && firstOfPair.get(pairKey) === `${to}>${from}`;
+    const proseVariant = reversed ? REVERSED_TIE + index : index;
     return {
       archetypeKey,
       proseVariant,

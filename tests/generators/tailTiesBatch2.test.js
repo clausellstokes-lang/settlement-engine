@@ -39,7 +39,7 @@ const L = {
   suppliers: 'One of their most reliable suppliers has gone dark', provenance: 'A supplier is providing goods of uncertain provenance',
   shipment: "A shipment they weren't expecting arrived", fronts: 'Someone tried to rob one of their fronts', captain: 'The guard captain has a file',
   district: 'Three guards have gone missing in the same district', armoury: 'Weapons from the armoury have been disappearing',
-  sea: 'A valuable cargo was reported lost at sea', road: 'A valuable cargo was reported lost on the road', quarrel: 'The person who settled every quarrel here has died',
+  sea: 'A valuable cargo was reported lost at sea', road: 'A valuable cargo was reported lost on its way here' /* TAIL-TIES-4 (T18), re-keyed by identity: the twin reworded */, quarrel: 'The person who settled every quarrel here has died',
   theatre: 'and the house is full every night',
 };
 /** [seed, line, the fact that makes it false there] */
@@ -78,7 +78,7 @@ describe('TAIL-TIES batch 2: a hook presumes only what the town holds (T3)', () 
     }
   });
 
-  it('INSTEAD: a cargo lost inland is lost on the road (the sea line\'s twin keeps the draw)', () => {
+  it('INSTEAD: a cargo lost inland is lost on its way here (the sea line\'s twin keeps the draw)', () => {
     for (const seed of ['r2r-city-22', 'r2r-city-35', 'r2r-city-55']) expect(hooks(seed).some((h) => h.includes(L.road)), seed).toBe(true);
   });
 

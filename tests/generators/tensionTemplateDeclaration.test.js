@@ -85,7 +85,9 @@ describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () 
     await ensureLaws();
     const strip = (s) => {
       const { history, ...rest } = s;
-      const { currentTensions, ...h } = history;
+      // RE-KEYED BY CAUSE (TAIL-HISTORY-3, the chair's Y13): the siege narrative copies the first tension's description
+      // after "… is still present in living memory:" (siegeCapability.js), so it is the tensions' words too (soak1k-2)
+      const { currentTensions, siegeNarrative: _copy, ...h } = history;
       return JSON.stringify({ ...rest, history: { ...h, tensionTypes: currentTensions.map((t) => t.type) }, generationCoherenceReceipt: null });
     };
     const seeds = [...TWELVE, ...FLAGGED];

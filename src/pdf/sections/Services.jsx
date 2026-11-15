@@ -28,6 +28,11 @@ import { institutionHouseLabel } from '../../domain/display/institutionDisplayNa
 import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
 // RS-14: the card titles read the one label map the screen and the absences callout read.
 import { serviceLabel } from '../../domain/display/servicesDisplay.js';
+// TAIL-EXPORTS-PDF-2 (rulings E3/E17): under a crisis a service or a chain that lives on what it stops is marked by the
+// tabs' one leaf (domain/display/crisisStoppedRow.js): a pill, which prints no description, takes the leaf's word after
+// its name, as the Institutions tab's doors do; a chain's card leads with the leaf's mark; the chapter says once, under
+// its band, that its rows are of ordinary times. The words are the leaf's.
+import { markedOnPage, ordinaryTimesOnPage, stoppedWordOnPage } from '../lib/crisisMarksOnPage.js';
 
 const SERVICE_CATEGORY_ORDER = [
   'lodging', 'food', 'equipment', 'magic', 'healing',
@@ -54,6 +59,10 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
     .map(k => ({ key: k, items: normalizeServiceList(s.available?.[k]) }))
     .filter(c => c.items.length > 0);
   const total = cats.reduce((n, c) => n + c.items.length, 0);
+  const ordinaryLine = ordinaryTimesOnPage(settlement, [
+    ...cats.flatMap((c) => c.items).filter((svc) => svc && typeof svc === 'object').map((svc) => /** @type {const} */ (['service', svc])),
+    ...(s.activeChains || []).map((chain) => /** @type {const} */ (['chain', chain])),
+  ]);
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -66,6 +75,9 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
 
       {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
       <StateProse stateProse={stateProse} tab="services" />
+      {ordinaryLine && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], marginBottom: space.xs }}>{ordinaryLine}</Text>
+      )}
 
       {cats.length === 0 && (
         <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
@@ -74,7 +86,7 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
       )}
 
       {/* ── 2-col grid of service categories ──────────────────── */}
-      <CategoryGrid cats={cats} />
+      <CategoryGrid cats={cats} town={settlement} />
 
       {/* ── Notable absences ──────────────────────────────────── */}
       {s.notableAbsences?.length > 0 && (
@@ -111,7 +123,7 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
   );
 }
 
-function CategoryGrid({ cats }) {
+function CategoryGrid({ cats, town }) {
   // Render in pairs so each row is two columns side-by-side.
   const rows = [];
   for (let i = 0; i < cats.length; i += 2) {
@@ -122,10 +134,10 @@ function CategoryGrid({ cats }) {
       {rows.map((pair, ri) => (
         <View key={`row-${ri}`} style={{ flexDirection: 'row', marginBottom: 5 }}>
           <View style={{ flex: 1, marginRight: 6 }}>
-            {pair[0] && <CategoryCard cat={pair[0]} />}
+            {pair[0] && <CategoryCard cat={pair[0]} town={town} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <CategoryCard cat={pair[1]} />}
+            {pair[1] && <CategoryCard cat={pair[1]} town={town} />}
           </View>
         </View>
       ))}
@@ -133,7 +145,7 @@ function CategoryGrid({ cats }) {
   );
 }
 
-function CategoryCard({ cat }) {
+function CategoryCard({ cat, town }) {
   const tone = SERVICE_CAT_TONE[cat.key] || 'gold';
   const accent = palette[tone] || palette.gold;
   return (
@@ -180,7 +192,7 @@ function CategoryCard({ cat }) {
           }
           return (
             <Pill key={`svc-${cat.key}-${i}`} tone={tone}>
-              {svcLabel(svc)}
+              {((word) => (word ? `${svcLabel(svc)} (${word})` : svcLabel(svc)))(svc && typeof svc === 'object' ? stoppedWordOnPage(town, 'service', svc) : null)}
             </Pill>
           );
         })}
@@ -235,7 +247,7 @@ function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintNa
       statusLabel={statusLabel}
       tone={tone}
       meta={meta}
-      description={flow}
+      description={markedOnPage(town, 'chain', chain, flow)}
       body={
         note ? (
           <View style={{ marginTop: 3 }}>

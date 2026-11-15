@@ -91,6 +91,15 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{prosperityInCrisisLed(e.prosperityInCrisis)}</Text>
       )}
 
+      {/* TAIL-EXPORTS-PDF-2 (rulings E3/E17): under a crisis an income share or a chain that lives on what it stops is
+          marked by the tabs' one leaf (domain/display/crisisStoppedRow.js), and the chapter says so once. */}
+      {((line) => (line ? (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], marginBottom: space.xs }}>{line}</Text>
+      ) : null))(ordinaryTimesOnPage(settlement, [
+        ...(e.incomeSources || []).map((src) => /** @type {const} */ (['income', src])),
+        ...(flag('pdfVisualChains') ? (settlement?.economicState?.activeChains || []).filter((c) => c && c.status !== 'unexploited') : []).map((c) => /** @type {const} */ (['chain', c])),
+      ]))}
+
       {/* ── Income sources ─────────────────────────────────────── */}
       {e.incomeSources?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
@@ -106,11 +115,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
                 tone={s.isCriminal ? 'bad' : 'gold'}
                 height={3}
               />
-              {s.desc && (
+              {((desc) => (desc ? (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: -2, marginLeft: 6 }}>
-                  {s.desc}
+                  {desc}
                 </Text>
-              )}
+              ) : null))(markedOnPage(settlement, 'income', s, s.desc))}
             </View>
           ))}
         </View>
@@ -603,3 +612,4 @@ import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 import { shadowCaptureShown } from '../../domain/display/shadowEconomyShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's floor
 import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints
+import { markedOnPage, ordinaryTimesOnPage } from '../lib/crisisMarksOnPage.js';

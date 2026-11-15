@@ -23,14 +23,15 @@
  */
 
 import { pickVariant } from '../kernel/proseHash.js';
+import { titleForHolder } from './holderTitleForms.js'; // TAIL-TITLES K-C: the holder's form, one leaf
 
 /** @typedef {string | { male: string, female: string }} Honorific */
 
 /** title → the pool of honorifics; the walker (tests/data/faceHonorifics.test.js) pins every face and mint title. @type {Readonly<Record<string, readonly Honorific[]>>} */
 export const FACE_HONORIFICS = Object.freeze({
-  "the boat-headman": ["Headman", "Boat-Master", "Skipper"],
+  "the boat-headman": [{ male: "Headman", female: "Boat-Master" }, "Boat-Master", "Skipper"], // TAIL-TITLES-2 KT1: one face, one word (her title "the boat-master")
   "the head shepherd": ["Head Shepherd", "Master Shepherd"],
-  "the camp foreman": ["Foreman", "Camp Master"],
+  "the camp foreman": [{ male: "Foreman", female: "Overseer" }, "Camp Master"], // TAIL-TITLES-2 KT1: her title "the camp overseer"
   "the eldest": ["Elder", "Eldest"],
   "the eldest householder": ["Elder", "Goodman"],
   "the reeve": ["Reeve"],
@@ -54,7 +55,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the smith": ["Smith", "Blacksmith"],
   "the carpenter": ["Carpenter", "Wright"],
   "the steward": ["Steward", "Seneschal"],
-  "the headman": ["Headman", "Chief"],
+  "the headman": [{ male: "Headman", female: "Chief" }, "Chief"], // TAIL-TITLES-2 KT1: her title "the chief"
   "the militia captain": ["Captain", "Captain of the Militia"],
   "the hedge wizard": ["Hedge Wizard", "Cunning-Man"],
   "the charter master": ["Chartermaster", "Master of the Charter"],
@@ -66,7 +67,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the wildfowler": ["Fowler", "Wildfowler"],
   "the waystation keeper": ["Waystation Keeper", "Host"],
   "the carriers' master": ["Master Carrier", "Carriers' Master"],
-  "the ferryman": ["Ferryman", "Ferry-Master"],
+  "the ferryman": [{ male: "Ferryman", female: "Ferry Keeper" }, "Ferry-Master"], // TAIL-TITLES-2 KT1: her title "the ferry keeper"
   "the boatwright": ["Boatwright", "Master Boatwright"],
   "the toll-keeper": ["Toll-Keeper", "Tollman"],
   "the miller": ["Miller", "Master Miller"],
@@ -135,7 +136,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the abbot": [{ male: "Abbot", female: "Abbess" }, { male: "Father Abbot", female: "Mother Abbess" }],
   "the hospitaller": ["Hospitaller", "Brother Hospitaller"],
   "the almoner": ["Almoner"],
-  "the foundling-mother": ["Mother", "Matron"],
+  "the foundling-mother": [{ male: "Keeper", female: "Mother" }, { male: "Keeper", female: "Matron" }], // TAIL-TITLES-2 KT1: his title "the foundling-keeper"
   "the grove elder": ["Elder", "Grove-Warden"],
   "the lord's appointee": ["Bailiff", "Lord's Bailiff"],
   "the first councillor": ["First Councillor", "Councillor"],
@@ -158,7 +159,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the hiring master": ["Hiring Master"],
   "the blade captain": ["Captain", "Blade-Captain"],
   "the gang boss": ["Boss"],
-  "the front man": ["Frontman"],
+  "the front man": [{ male: "Frontman", female: "Nominal Owner" }], // TAIL-TITLES-2 KT1: her title "the nominal owner"
   "the rookery boss": ["Boss"],
   "the troupe leader": ["Troupe Leader", "Troupe Master"],
   "the theatre manager": ["Theatre Manager", "Manager"],
@@ -233,7 +234,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the reformer": ["Reformer"],
   "the investigator": ["Investigator"],
   "the bloc's speaker": ["Speaker"],
-  "the newcomers' spokesman": ["Spokesman"],
+  "the newcomers' spokesman": [{ male: "Spokesman", female: "Speaker" }], // TAIL-TITLES-2 KT1: her title "the newcomers' speaker"
   "the alliance's convenor": ["Convenor"],
   "the commoners' tribune": ["Tribune"],
   "the neutrals' broker": ["Broker"],
@@ -380,6 +381,7 @@ export function honorificOfTitle(title, gender, seed, place = {}) {
  * @template T @param {T} title @param {unknown} gender @returns {T | string}
  */
 export function styledTitleOf(title, gender) {
+  { const held = titleForHolder(title, gender); if (held !== title) return held; } // TAIL-TITLES K-C: the holder's form, one leaf
   if (gender !== 'female' || typeof title !== 'string' || !title) return title;
   const t = title;
   const pool = FACE_HONORIFICS[t.trim()];

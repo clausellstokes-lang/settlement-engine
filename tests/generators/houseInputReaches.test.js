@@ -8,6 +8,12 @@
  *   smelted iron. The `missing` row is written only where no other chain of the house is worked here and no other input
  *   is held locally or bought in. A house that runs on imported ore still says so: the `imported` row stays.
  *
+ * (M-V) GRAPES AND GLASS SAND COME BY ANY ROUTE · no record yields grapes and no import list names them, so every census
+ *   vintner "exists but lacks access to grapes" (184 of 184; the page: "No grapes reach the vintner.") though the house's
+ *   own text presses must brought in; every glassblower lacked glass sand (13 of 13). The input reaches the house wherever
+ *   the town can bring goods in (`hasTradeRouteConnection`) and no siege shuts the road: no row is written. An isolated or
+ *   besieged town's row stays (UNDER A SIEGE nothing comes in), and the page's line with it.
+ *
  * The towns are born as the census bears them (CENSUS-3 seedcfg.mjs; the reader's cfgFor, as
  * tests/domain/r3c10FoodLinesTrue.test.js bears them). Each arm collects first and asserts on the collection.
  */
@@ -39,13 +45,25 @@ const SMELTER_UNFED = ['r2r-city-5', 'r2r-city-17', 'r2r-city-36', 'r2r-metropol
 /** [seed, the imported row that still prints]: a smelter that runs on bought ore says so. */
 const SMELTER_IMPORTS = [['r2s-under_siege-town-1', 'Smelter | iron ore | imported'], ['r2r-metropolis-8', 'Smelter | gold/silver ore | imported']];
 
+/** M-V NOT: a vintner on a route (the smallest, a town of 540; a famine; an occupation; the largest, 344,689), a
+ * glassblower on a route (511; a famine; 2,465). */
+const ROUTE_FED = [['r2r-town-22', 'Vintner'], ['r2r-city-44', 'Vintner'], ['r2s-occupied-city-3', 'Vintner'], ['r2r-metropolis-8', 'Vintner'],
+  ['r2r-town-55', 'Glassblower'], ['r2s-famine-town-1', 'Glassblower'], ['r2r-town-51', 'Glassblower']];
+/** M-V KEEP: an isolated vintner (6,341; 55,265), an isolated glassblower, a besieged vintner (11,745; 271,164). */
+const ROUTE_SHUT = [['r2r-city-49', 'Vintner', 'grapes'], ['r2r-metropolis-54', 'Vintner', 'grapes'], ['r2r-town-9', 'Glassblower', 'glass sand'],
+  ['r2s-under_siege-city-2', 'Vintner', 'grapes'], ['r2r-metropolis-14', 'Vintner', 'grapes']];
+
 /** @type {Array<{ seed: string, s: any }>} */ let fed = [];
+/** @type {Array<{ seed: string, s: any }>} */ let routeFed = [];
+/** @type {Array<{ seed: string, s: any }>} */ let routeShut = [];
 /** @type {Array<{ seed: string, s: any }>} */ let unfed = [];
 
 beforeAll(async () => {
   await loadGenerationLawPayloads();
   fed = SMELTER_FED.map(bear);
   unfed = SMELTER_UNFED.map(bear);
+  routeFed = ROUTE_FED.map(([seed]) => bear(seed));
+  routeShut = ROUTE_SHUT.map(([seed]) => bear(seed));
 }, 180000);
 
 describe('(M-S) a house is short only if none of its inputs reaches it', () => {
@@ -64,6 +82,21 @@ describe('(M-S) a house is short only if none of its inputs reaches it', () => {
   it('KEEP: a smelter no input reaches is short of each (iron, copper and gold/silver ore)', () => {
     const rows = unfed.flatMap(rowsOf);
     const want = SMELTER_UNFED.flatMap((seed) => ['iron ore', 'copper ore', 'gold/silver ore'].map((raw) => `${seed}: Smelter | ${raw} | missing`));
+    expect(want.filter((r) => !rows.includes(r))).toEqual([]);
+  });
+});
+
+describe('(M-V) grapes and glass sand come by any route', () => {
+  it('a vintner or glassblower in a town on a route, under no siege, is short of nothing: no row for its input', () => {
+    const seen = routeFed.filter((t, i) => t.s.institutions.some((/** @type {any} */ x) => x.name === ROUTE_FED[i][1])).map((t) => t.seed);
+    expect(seen).toEqual(ROUTE_FED.map(([seed]) => seed));
+    const rows = routeFed.flatMap(rowsOf).filter((r) => /: (Vintner|Glassblower) \|/.test(r));
+    expect(rows).toEqual([]); // silent by design: the input reaches the house; the record names no import of it
+  });
+
+  it('KEEP: where the town is isolated or besieged the input does not reach it, and the `missing` row stays', () => {
+    const rows = routeShut.flatMap(rowsOf);
+    const want = ROUTE_SHUT.map(([seed, house, raw]) => `${seed}: ${house} | ${raw} | missing`);
     expect(want.filter((r) => !rows.includes(r))).toEqual([]);
   });
 });

@@ -30,7 +30,8 @@ const TWIN = /^The best-kept street of (\S+) looks prosperous\. The rest of the 
 const REST = {
   'rr3-village-indebted-port-0': 'Half of Vysokoka seems to be gutting, salting or selling fish. Smoke rises from a shared oven, and neighbours queue to bake together.',
   'rr3x-village-indebted-mountain_pass-2': 'Bolts of cloth hang drying in long bright strips across every yard. The neighbours turn out together to sweep and mend their own street.',
-  'r2r-village-47': 'Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes. People draw water in an order nobody needs to explain.',
+  // TAIL-HISTORY-3 (the chair's Y14; re-keyed by identity): r2r-village-47 is isolated, so its herb sacks no longer fill carts (the line's reword, same slot)
+  'r2r-village-47': 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes. People draw water in an order nobody needs to explain.',
 };
 
 describe('the indebted merchant district needs a market; its slot takes a twin (s2)', () => {

@@ -522,3 +522,619 @@ python3 <scratch>/instr/docs/chair/2026-11-14/probes/READ-ALL/inventory.py <out>
 python3 <scratch>/instr/docs/chair/2026-11-14/probes/READ-ALL/inventory_diff.py before.json after.json batch.json
 ```
 The base run used a second detached worktree at bcad1a358 whose `node_modules` is a symlink to the scratch tree's.
+
+# TAIL-CRISIS-3 · the third seat's batches (2026-11-15)
+
+Seat TAIL-CRISIS-3 succeeded TAIL-CRISIS-2 on the same branch, at **6a3d98d4c** (origin's tip, read back at the start).
+Scratch worktrees: `wt` (the branch, as local branch `tc3-work`, pushed by explicit refspec), `base` (detached at
+6a3d98d4c), `after3` (detached at batch 3), `after4` (detached at K9's commit), each with `node_modules` a symlink to wt's.
+
+## The chair's rulings since (2026-11-15; each vetoable by the owner)
+
+- **(K14)** BATCH 3 FIRST: apply the patch, MEASURE it (census before and after, the inventory diff, the inheritors read), and
+  land it as the first commit, or tell the chair what the measure refuses.
+- **(K8, CHANGED)** 01034: the door has no mode that re-keys one row, so THE ROW WAITS FOR THE CLOSE (the registers are re-derived
+  once, on the final tree). The line stays as it stands (4 towns), parked with its proposed wording ("X is in a kingdom at war, and
+  some here are doing well out of it: …"). The register is not re-taken.
+- **(K9)** THE IRON HOOKS (20893, 22079, 22080, 20908): one commit, by exception: the three literals of the peacetime iron hook
+  in `foodBalance.js` (those only) with their keys in `outlookHookSiblings.js`. The iron carts' CONDITION stays DEFECON's.
+- **(K10)** `rival power` is true of the SETTLED record: no line rendered before the powers settle is keyed by it; the insurgency
+  summary stays on its fallback.
+- **(K12)** "{power} no stake yet" (B12521 89 towns; B13860 B18039 13199 06464 13370): a power that the record's quarrels or the
+  crisis's own choice names is not said to have no stake. Cure it where the stakes are read, and give the line its verb ("has no
+  stake yet"). B11070 B11113 B11121 (the person named is not of the house named).
+- **(K13)** `faithReading.js :: seniorClericOf` is TAIL-TITLES's (not edited here); `factionLine` (03046) is this seat's.
+- **(K15)** The quick guide's silences that TAIL-CRISIS-2 told (57, about 50, 34, 29, 27 towns): ACCEPTED as told. They stay on
+  the veto list with what prints instead.
+- **(X9)** The exports' read (WORKLIST3-CRISIS, 29 rows): each checked against the tip, measured with `SURFACES=PDF,Journal`.
+- **(K16)** (named by the defence display's seat) 11705 and 14131, `crisisCast.js`: "In the war, the adventurers' charter hall
+  leads the defence … with no one named to lead" where the roster names the charter master of that hall: the cast reads the
+  people of the house it names.
+- **(K17)** (on this seat's K9 stop) TAKE THE FORGE-LESS FORM: the hooks claim the price, the rationing and the mended tools and
+  name no smith, forge or iron merchant. The six banked rows that go stale leave through the door's shrink, in the same commit.
+
+## Batch 3 (K14): the cast hooks, TAIL-CRISIS-2's patch — b22761233, PUSHED; the inheritors' fix a99c01e78
+
+Applied clean at 6a3d98d4c. Red at the base: the patch's test, 8 FALSE pairs (TAIL-CRISIS-2 showed 8 of 8 in an it.each
+form); a plant (every reason through the old colon form) reds it. One pin re-keyed by identity: `tests/domain/crisisHooks.test.js`
+(the lever's colon form). Gates: eslint 0; strict 0; ratchet 167/167; walker 147 at both; crisisHooks' governing tests (12 files):
+1 red at the base (`tests/data/w2FixData6Rows.test.js`, CARRIED), the same 1 at the tree once the pin was re-keyed.
+
+**Measured** (census at 6a3d98d4c, `runs/c0`, against b22761233, `runs/c1`; tabs): 29,922 → 29,922 distinct sentences, 121
+gone, 121 new, 0 in fewer towns, 0 in more. **All 8 rows GONE**: 11595 5→0, 11549 4→0, 11671 3→0, 11569 2→0, 11668 2→0, B11049
+1→0, B11090 6→0, 20875 1→0. No record moves (the hooks are derived at display).
+
+**THE INHERITORS READ** (all 121 are the batch's own reshaped sentences, in the same towns): the predicate reasons now stand
+beside the holder ("<N> of Household Council, who holds the seat, is the one who would come to terms."), and a slashed power takes
+its prose form ("<N> of The Guard leads the defence.", 11 + 8 towns; the leaf's contract puts "The Guard" mid-sentence). ONE
+FAULT FOUND, cured in a99c01e78: the rival instigator's reason "already carries more weight than whoever holds the seat, and
+gains as the seat weakens" is the POWER's standing, and the relative clause said it of the person (19 towns for The Independent
+Bloc alone). It now reads "<N> of The Independent Bloc, whose power already carries more weight than whoever holds the seat, and
+gains as the seat weakens, is stirring it." Also seen in the inheritors, not this batch's: the brunt's garbled "…; next in line,
+the first choice already holding a role that contradicts this one" (X9 13939 13943 13999 14045 14043, below).
+
+## Batch 4 (K12; X9's stake rows; 03046) — d667b50e7
+
+Writers:
+- `domain/crisis/crisisPage.js :: stakeShown`, with the copy table `CRISIS_PAGE_COPY.stake`. These are DISPLAY only: the record's
+  stakes (`stress[].cast.stakes`, crisisCast rule 11) are untouched, and the three surfaces (CrisisTab.jsx, pdf CrisisSections.jsx,
+  foundry journalPages.js) read the copy table by key, so none of their files changed. The chair's K12 grants the one function
+  "where the stakes are read". crisisPage.js is not on this group's list, and this seat changed nothing else in it.
+- `domain/dossier/faithReading.js :: factionLine` and `religiousFactionOf` (the power's `powerLabel`). `seniorClericOf` is
+  untouched (K13).
+
+The rule: an untouched power (the record's `split` with the untouched reason) whose name the record's quarrels
+(`powerStructure.conflicts`) carry is "already at odds · in its own quarrel with <the others>". The governing power, whose choice
+the crisis's own text names ("By City-State Council, which can neither turn people away nor keep them fed"), "must answer for it
+· it governs here". Any other untouched power "has no stake yet", or "have …" for a plural name (`pluralPowerName`); with a plural
+name its reason reads "they could side with either camp". A religious power whose standing is Suppressed "is suppressed in the
+<tier>", not "A small voice in the <tier>'s affairs belongs to …".
+
+Verified by the record before the cure (`probes/stakes.mjs` over the 720, the tree's own writer): 755 untouched stake rows
+in 268 towns. 76 towns hold an untouched GOVERNING power (monster_pressure 22, plague_onset 25, mass_migration 29). 137 towns hold
+an untouched power the quarrels name. By row: B12521 89 printing, false in 60 (a quarrel); B13860 22, false in 8; B18039 7, false in
+1; 13199 2/2, 06464 2/2, 13370 1/1 (the governing power); 03046 1/1, and its shape in 18 towns (17 Religious Authorities).
+Test: `tests/domain/tailCrisisBatch4.test.js`, 10 FALSE pairs, red at the base (10 of 10 in an it.each form), and 3 KEEP pairs.
+Re-keyed by identity: `tests/domain/crisisPage.test.js` (the label) and `tests/domain/r3c9ReaderLinesTrue.test.js` (n240's
+anchor now reads the suppressed line). Governing tests (61 files): 4 failing at the base, the same 4 at the tree once the two pins
+were re-keyed (CARRIED: houseLabelEverySurface, phoneChromeFloor.census, vocabularyPageFindings, r3c9ReaderLinesTrue n15).
+
+THE SILENCE TOLD: this re-says the stake line of every untouched power, true ones included, in 268 towns, by the chair's K12
+(the verb). No true line goes silent: each row keeps a line, and the true ones keep their meaning.
+
+## Batch 5 (X9: the exports' vantage lines) — 94106a10b
+
+Writer: `domain/crisis/crisisSummaryVantage.js :: CRISIS_SUMMARY_POOLS`. The PDF's cover and overview (`pdf/lib/viewModel.js`)
+hand no facts, so each line is reworded to be true in every town that prints it; no twin and no condition. False before, by the
+record (food band, institutions):
+- 10399 / 16309: 12 printing, 11 false (Secure).
+- 31407: 5 printing, 5 false.
+- 13667: 11 printing, 8 false (no granary or no watch).
+- 09896: 9 printing, 5 false (no market).
+- 29529 / 08228: 8 printing, 2 false.
+- 15776: 9 printing, 4 false (no watch, militia or garrison).
+
+The war rows (01620 28443 30535) are parked (the door: above). Test: `tests/domain/tailCrisisBatch5.test.js`, 6 FALSE pairs, red at
+the base (6 of 6), and 1 KEEP. Governing tests (11 files): the 2 reds of r3c10FoodLinesTrue, CARRIED at the base.
+
+## K9/K17: the peacetime iron hooks — f20ce3151
+
+As K17 ruled, the forge-less form, with the eight stale rows shrunk through the door in the same commit (six of the smith
+family, the three old literals in both files; two of the market family, batch 5's). Nothing is banked. Test:
+`tests/generators/tailCrisisIronHooks.test.js`, 4 FALSE pairs, red at the base (4 of 4), and 1 KEEP. Re-keyed:
+`tests/generators/hookTablesDeclared.test.js`. Governing tests (79 files naming foodBalance or outlookHookSiblings): 9 failing at the base, and the
+same 9 at the tree (CARRIED: famineStoresOneRounding, worldFactRederive, hookTruthAtBirth ×2, urbanBandInstitutions,
+proseWiringCensus.walker ×3, generatorGoldenMaster). **DECLARED MOVE** (field diff by family, census before against after, over
+the 720 records): `economicViability`, 88 records, only its `plotHooks` (the three hooks' towns: 30 + 36 + 22). No other family
+moves, and no draw moves.
+
+## Batches 4, 5 and K9 · measured together (census at b22761233, `runs/c1`, against f20ce3151, `runs/c2`)
+
+One after-run measured four commits: batch 4, batch 5, batch 3's inheritors' fix (a99c01e78) and K9. They touch disjoint lines.
+- **Tabs:** 29,922 → 30,042 distinct sentences; 94 gone, 214 new, 4 in fewer towns, 0 in more. The tab inventory splits a stake
+  row at " · ", so its parts count apart.
+- **Exports (PDF, Journal):** 35,828 → 36,090; 193 gone, 455 new, 4 in fewer towns, 0 in more.
+- **GONE, every cured row:**
+  - tabs: B12521 89→0, B13860 22→0, B18039 7→0, 13199 2→0, 06464 2→0, 13370 1→0, 03046 1→0, 22079 36→0, 22080 22→0, 20908 27→0.
+    B11113 had already gone in batch 3.
+  - exports: 16606 89→0, 20361 41→0, 20281 22→0, 22263 9→0, 25559 7→0, 26048 3→0, 10399 12→0, 16309 12→0, 13667 11→0, 09896
+    9→0, 15776 9→0, 29529 8→0, 08228 8→0, 31407 5→0. Also 22718 8→0 by its fold: it now reads "Revolt Leadership has no stake yet",
+    which is STILL FALSE in meaning (parked above).
+- **Unchanged, as intended:** the struck rows (B03437 B03438 B03478 B03479 B15536 B15562 B11070 B11121), 20893 (DEFECON's
+  condition), and X9's parked rows.
+- **In fewer towns (4, the same on both):**
+  - "it could side with either camp" 268→160: the plural names now say "they …";
+  - "A small voice in the city's / metropolis's / town's affairs belongs to the Religious Authorities." 23→16, 33→27, 14→10:
+    the 17 towns whose Religious Authorities stand Suppressed, false there.
+- **THE INHERITORS READ:** all 214 (tabs) and 455 (exports) are this run's own lines, each read where it prints (the veto list).
+  The widest are "they could side with either camp" (125), "it governs here" (76), "Arcane Orders have no stake yet" (72) and
+  "Merchant Guilds are already at odds" (60). Every "already at odds" names the record's own quarrel partner.
+- Gates at f20ce3151:
+  - eslint on the touched files: 0;
+  - typecheck:domain:strict: 0 and the ratchet 167/167, both at batch 4's tree;
+  - the walker: 147 fresh, 0 stale;
+  - the twelve-birth grid: 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), carried.
+
+## THE VETO LIST (this seat): every new or changed line (smallest town, largest, a crisis town)
+
+| new line (fold) | towns | smallest | largest | a crisis town |
+|---|---|---|---|---|
+| <N> of <P>, who <predicate reason>, … (the cast hook's reasons said of the holder; batch 3) | 121 folds | r2r-thorp-22 | r2r-metropolis-4 | r2s-indebted-thorp-1 |
+| <N> of <P>, whose power already carries more weight than whoever holds the seat, and gains as the seat weakens, is stirring it. | 19 (The Independent Bloc) + others | r2r-hamlet-35 | — | — |
+| <N> of The Guard … (a slashed power's prose form in a hook) | 11 + 8 + 6 … | — | r2r-metropolis-4 | r2s-monster_pressure-city-0 |
+| <P> has no stake yet · it could side with either camp | 160 | r2r-hamlet-32 | r2s-wartime-metropolis-3 | r2s-infiltrated-hamlet-0 |
+| <P> have no stake yet · they could side with either camp | 125 | r2r-village-57 | r2s-wartime-metropolis-3 | r2s-famine-village-2 |
+| <P> are already at odds · in their own quarrel with <Q> | 106 | r2r-village-24 | r2s-wartime-metropolis-3 | r2s-famine-town-0 |
+| <P> must answer for it · it governs here | 76 | r2r-thorp-10 | r2s-plague_onset-metropolis-3 | r2s-mass_migration-thorp-0 |
+| <P> is already at odds · in its own quarrel with <Q> | 51 | r2s-mass_migration-hamlet-2 | r2s-slave_revolt-metropolis-3 | r2s-mass_migration-hamlet-2 |
+| The <P> is/are suppressed in the <tier>. | 18 | r2r-town-21 | r2s-wartime-metropolis-2 | r2s-monster_pressure-town-2 |
+| What iron there is goes out in rations, and work waits on mended tools. | 36 | r2r-city-27 | r2s-succession_void-metropolis-2 | r2s-succession_void-metropolis-2 |
+| Iron has doubled in price this season, and tools are being mended with scrap. | 27 | r2r-city-11 | r2s-slave_revolt-city-0 | r2s-slave_revolt-city-0 |
+| People blame whoever set it, and the tools still need mending. | 22 | r2r-city-10 | r2s-succession_void-city-1 | r2s-succession_void-city-1 |
+| Iron has doubled in price this season, and metal for tools and repairs is hard to come by. | 3 | r2r-town-49 | r2s-recently_betrayed-town-2 | r2s-recently_betrayed-town-2 |
+| <N> has many more mouths to feed than it had, and there is not work enough for the newcomers. | 12 | r2r-city-3 | r2s-mass_migration-village-2 | r2s-mass_migration-village-2 |
+| In <N> whatever food is put by is watched day and night, and nobody carrying a sack goes unquestioned. | 11 | r2r-hamlet-28 | r2s-wartime-thorp-2 | r2s-wartime-thorp-2 |
+| People in <N> keep an eye on the roads and the edges of the fields, and nobody lingers outside once the light goes. | 9 | r2r-village-41 | r2s-monster_pressure-town-3 | r2s-monster_pressure-town-3 |
+| Fewer people come to <N> since the sickness began, and fewer goods come with them. | 9 | r2r-city-19 | r2s-plague_onset-village-2 | r2s-plague_onset-village-2 |
+| Travel is discouraged in <N>, and fewer come and go than before the sickness. | 8 | r2s-plague_onset-city-2 | r2s-plague_onset-village-3 | r2s-plague_onset-city-2 |
+| With so many new mouths in <N>, there is not work for everyone who wants it. | 5 | r2r-village-28 | r2s-mass_migration-town-3 | r2s-mass_migration-town-3 |
+
+(The smallest and largest columns of the last ten rows are the first and last town by name in the inventory, not by size. The
+stake rows' columns are by size.)
+
+## Rows struck (true by the record; this seat)
+
+- **B03437 B03438 B03478 B03479** ("An old story from that time: a diplomatic channel exists that the war party is
+  suppressing" / "…the reformist leader is being blackmailed into silence"; the worklist traced them to VILLAGER_TIERS). These are
+  the hooks of the town's own historical event (`history.historicalEvents[]`, data `historyData.js`), and the event's own
+  description names the sides. Every one of the 79 war-party hooks on the 720 belongs to an `external_threat` event ("…split the
+  settlement over whether to fight, treat, or flee", "…set the community against itself over the right response"). Every one of
+  the 48 reformist hooks belongs to a `religious_tension` event ("Competing creeds vied for converts…", "Different faiths or
+  interpretations competed…"). The war party and the reformists are that event's camps, not powers of today's roster. The
+  readers' QUARRELS line showed only today's conflicts. `hookTruth.js` is not changed.
+- **B15536 B15562** ("Religious Tension" / "Religious tension", 15 towns each; traced to CONDITION_ARCHETYPE_TEMPLATES). These are
+  the label of the record's own `history.currentTensions[]` entry of type `religious_tension` (r2s-infiltrated-thorp-3: the
+  orthodox clergy, Reformists, the Secular camp), which the readers' header lacked (X9's note). `activeConditions.js` is not
+  changed. Seen, not cured: that tension names "the orthodox clergy" in a thorp with no religious house (HISTORY's writer).
+- **B11070 B11121** (K12 (2)): re-verified on the record at 6a3d98d4c, and TAIL-CRISIS-2's strike stands. Jade Ek holds a membership in the
+  Elder Council (rank 3). Anusaya Mishra holds a membership in Merchant Guilds (share 0.4, beside Military/Guard 0.6).
+- **B11113**: its person claim is true (Sorcha Tobin holds the parish church, the outbreak's lever). Its subjectless colon form
+  is cured by batch 3 ("…, who runs the office that decides how the crisis goes, holds the key to it.").
+- **X9 27937, 01755**: gone at the base (27937 went 24 → 17 on the exports, and no longer prints in the town read; 01755 → 0):
+  cured by batch 1's writers.
+
+## Rows parked or named (this seat)
+
+- **01034** (K8 as changed): parked for the close, 4 towns, as it stands; the proposed wording is in batch 1's parked list.
+- **X9 01620 28443 30535** (the wartime vantages' "army carts pass through" and "the carts going by", 9 towns each, false in an
+  isolated thorp): the literals are banked in the widened register's `war` family, so a reword is a fresh hit (149 against 147).
+  This is the K8 wall. Ready and parked: "{name} is in a kingdom at war, and the war is all anyone talks about." / "The war is far
+  from {name}, but it touches every household: the prices and the news."
+- **X9 22718** ("Revolt Leadership has no stake yet · it could side with either camp", 8 towns): the revolt's own leadership has
+  a stake in the revolt. The power is raised by the crisis itself (`generators/power/stressFactions.js`, which exports no table of
+  the powers it raises), so the page cannot tell it apart from any other untouched power. The cure is in
+  `crisisCast.js :: deriveStakes` (STORED: a declared move): a power the stress raised loses or gains by it. Not taken this session.
+- **X9 20882** ("Occupation Authority gains: the military gains in a vacuum of governance", 3) and **07387** ("Craft Guilds gains:
+  the merchants gain while the seat is endorsed", 2): `crisisCast.js :: deriveStakes`, stored. Not taken.
+- **X9 13909** ("…of Merchant Guilds is the one who would come to terms: a member of the merchants' power, with the seat itself in
+  dispute", 3): `crisisHooks.js` LINE_ROLE_CLAUSE. Not taken.
+- **X9 13939 13943 13999 14045 14043** (the brunt's "…; next in line, the first choice already holding a role that contradicts this
+  one", 1 town each): `CAST_REASONS.nextInLine` is machinery that leaks into the hook and the page. Not taken.
+- **X9 27012** ("…if it gives way, Military/Guard loses most", 1): batch 3 now prints "The Guard". The reader also says a
+  Suppressed power is not the one that loses most; that is `deriveStakes`. Not taken.
+- **K16 11705 14131** (the charter hall "leads the defence … with no one named to lead" where the roster names its charter
+  master): `crisisCast.js` (the defender rule, stored). Not taken this session.
+- **NAMED for HISTORY:** `src/data/stressTypes.js:104` and `stressTypesMeta.js:64`, the plague's viabilityNote "Fewer people come
+  to market, travel is discouraged, and some goods stop arriving.": the same market presumption as X9 09896.
+- **NAMED (seen, same writer, not a worklist row):** the crisis page's "gains" and "loses" do not agree with a plural name
+  ("Merchant Guilds gains", "Craft Guilds gains"). Batch 4 made only its own new labels agree (`untouchedMany`, `atOddsMany`);
+  the same copy table takes `gainsMany`/`losesMany` the same way. The stake rows also print a power's raw label ("Military/Guard
+  has no stake yet"): the three surfaces print `factionId`, not `powerSentenceName`.
+- **The iron war hook** (WAR_IRON_HOOK, "…and the smiths have nothing to mend tools with"): the same plural "smiths". It is
+  outside K9's three literals and stays as it is.
+
+## Registers named stale
+
+- The sovereignty walker's estate file count: four more test files from this seat (tailCrisisBatch3, tailCrisisBatch4,
+  tailCrisisBatch5, generators/tailCrisisIronHooks), on top of the earlier seats' three. Re-taken through its own door at the close.
+- The widened presumed-things register was SHRUNK through its door in f20ce3151 (eight rows, named in that commit). Nothing stale
+  is left.
+
+## What is left of the worklist (after this seat)
+
+- K16 (11705 14131), X9 22718 20882 07387 27012: `crisisCast.js`, the stored cast and stakes (a declared move each).
+- X9 13909 and the five `nextInLine` rows: `crisisHooks.js` and CAST_REASONS.
+- X9 01620 28443 30535 and 01034: parked behind the walker's door.
+- 20893: DEFECON's condition.
+- `activeConditions.js` and `hookTruth.js`: nothing left (their rows are struck above).
+
+## How this seat's instruments were made
+
+As TAIL-CRISIS-2's, with one change: the census's count and writer-tracing stages were stopped once the 720 dumps were written.
+The inventory reads only `dumps/`, and the corpus is written at births. The probes (`stakes.mjs`, `faith.mjs` in the scratch
+directory) import the tree's writers and run them over `corpus.ndjson.gz`.
+
+## THE CHAIR'S "FAULTS IN NEW LINES: FIRST" (01:56 UTC, READ-ALL-4 at landed tip 9eb084705): TAKE THESE BEFORE THE REST
+
+TAIL-CRISIS-3 handed back at its count (about 65 minutes in, judged by time) when this note arrived. Each item was measured on
+this seat's after-census (`runs/c2`, f20ce3151's src, tabs). NONE IS CURED; THE NEXT SEAT TAKES THEM FIRST:
+1. `crisisSummaryVantage.js`: "Passing through <N>, you would not see the quarrel over who is really in charge unless you asked."
+   10 towns, all of them insurgency (batch 1's reword of B14649). It is false where the page prints open confrontations beside it
+   (r2s Kaanche: safety Dangerous). The cure is a reword true under an open insurgency, or a fact-keyed twin on the tonight surface,
+   the one that hands facts.
+2. `settlementQuickGuide.js`:
+   - "built around the tank and the bazaar" (11 folds, 43 towns at f20ce3151): verify each town's houses for a tank, reservoir or
+     bazaar, and strike the clause where none stands (`scopeAgainstRule`'s form, batch 2);
+   - "built for a pastoral life half-settled and half-moving" (13 folds, 35 towns) in a coastal trading port with no herds: read
+     the food record's herd (the culture lines' herding rule, r3c10).
+3. `crisisCast.js` (CAST_REASONS.bruntOnly / bruntLeast) via `crisisHooks.js`: "…takes the worst of it: the only one in the house
+   the crisis hits" (26 towns) and "…the one with the least say in the house the crisis hits" (13). In a famine the crisis hits the
+   whole thorp, and "the house" reads as a household. Say the power ("the only one of <power> …") or cut the clause. The reasons
+   are STORED on the cast, so a change is a declared move, unless the hook re-says it at display (batch 3's castSentenceOf form).
+4. `crisisHooks.js` "<person> of Military/Guard takes…": ALREADY CURED at this branch's tip by batch 3 (holderWords reads
+   `powerSentenceName`: "of The Guard"; 0 hook sentences with "of Military/Guard" in `runs/c2`). The landed tip 9eb084705 predates
+   it. The remaining "first of Military/Guard" / "second of Military/Guard" (248 and 226 towns) are rank chips, not this group's
+   writer.
+
+# TAIL-CRISIS-4 · the fourth seat's batch (2026-11-15)
+
+Seat TAIL-CRISIS-4 succeeded TAIL-CRISIS-3 on the same branch, at **572cd48e0** (origin's tip, read back at the start).
+Scratch worktrees outside the main checkout: `wt` (the branch, as local `tc4-work`, pushed by explicit refspec), `base`
+(detached at 572cd48e0), `after6` (detached at batch 6's second commit), each with `node_modules` a symlink to wt's.
+
+## The chair's rulings since (2026-11-15 02:10 UTC; each vetoable by the owner)
+
+- **(K18) THE VANTAGE THAT HIDES A QUARREL.** "Passing through <N>, you would not see the quarrel over who is really in
+  charge unless you asked." printed in 10 insurgency towns whose safety reads Dangerous with open confrontations printed
+  beside it. The line needs a quarrel that is NOT in the open (no insurgency, no open confrontation on the record); else
+  its pool's other line.
+- **(K19) A CULTURE PHRASE NAMES ONLY WHAT STANDS** (the layout line's law, J1, carried to the quick guide): "built around
+  the tank and the bazaar" (11 folds, 43 towns) and "built for a pastoral life half-settled and half-moving" (13 folds, 35
+  towns, a coastal trading port among them). Each physical thing a scope phrase names maps to houses or resources of the
+  record (a bazaar: a market; a tank: a water work; a pastoral life: herds or pasture on the record), or the phrase takes a
+  twin that names none of them, or is silent. `scopeAgainstRecord` is where it belongs. The silence is accepted in advance
+  where the measure shows the phrase false.
+- **(K20) THE CAST'S REASON.** "…takes the worst of it: the only one in the house the crisis hits" and "…the one with the
+  least say in the house the crisis hits" (26 and 13 towns; stored cast reasons). A famine or a siege hits the whole town,
+  and "the house" reads as a household. The reason says in plain words what the record holds (whose seat on which power;
+  what the crisis does to that person's own trade), or the clause after the colon is cut. A DECLARED MOVE of stored text is
+  GRANTED (39 towns' cast reasons), its own commit, measured by the field diff (no family but the cast's reason).
+- **(U1)** The account's weekly usage warning is on: commit and push every batch the moment it holds, with WHAT IS LEFT
+  current in the same push; hand back at 250,000 of the count (about seventy minutes if the meter reads 0).
+
+## Batch 6 (K18 K19 K20): 34b8d9411 (K18, K19, display) and c97caccd9 (K20, the declared move)
+
+### Verified by the record first (probes over `runs/c0/corpus.ndjson.gz` with the base's own writers)
+
+- **K18.** All 37 insurgencies hold `crimeTypes` "political violence" (29 "Street-level confrontations between insurgent
+  supporters and the watch", 8 "Targeted intimidation and occasional violence against officials") and "loyalty testing"
+  (37 of 37: "Both the governing power and the insurgency pressure individuals to declare allegiance"). So every line of the
+  insurgency pool that hides the quarrel is false wherever it prints. The ruling's line and FOUR SIBLINGS OF THE SAME SHAPE
+  in the same pool: the defence watch "There is no fighting in <N>; the danger is quieter …" (14 towns, batch 1's 22640
+  reword), the cover watch "Nobody in <N> fights in the open …" (10, exports), the cover traveller "<N> looks calm, but …"
+  (14, exports), the tonight watch "… grows quietly, and those watching it cannot act in the open." (6). The defence and
+  cover surfaces hand no facts (DefenseTab.jsx, pdf viewModel), so each line is reworded to be true in all 37.
+- **K19, the tank.** Of the 43 towns, the market fact holds in all 43. A water work (`WATERWORKS_HOUSE`: aqueduct, cistern,
+  water system, fountain, bathhouse; or a metropolis's "Advanced water infrastructure": "multiple aqueducts, cisterns") stands
+  in 32. The 11 others hold only "Multiple water sources" ("Wells and springs throughout village"; the file's own rule: a
+  well or a spring is not a water work): r2r-village-1 -village-28 -town-7 -town-18 -town-32 -town-42 -town-49,
+  r2s-indebted-town-3, r2s-succession_void-town-0, r2s-monster_pressure-village-2, r2s-wartime-village-1. The temple the
+  phrase also names stands in all 43.
+- **K19, the pastoral life.** Of the 35 towns (every one a thorp, hamlet or village: the large tiers already take "built on
+  clan lines"), 30 hold neither herds (the vocabulary's `livestock` on the food record's sources) nor pasture
+  (`grazing_land`): among them the coastal ports r2r-hamlet-4, -hamlet-41, -village-45, -village-59, r2s-mass_migration-thorp-0
+  (fed by their fish). Five keep the line (r2r-thorp-29 and r2s-plague_onset-village-1 by their pasture, three by their herds).
+- **K20.** On the stored casts: 26 towns "only" (22 famine, 3 migration, 1 outbreak), 13 "least say", and 10 "one of the
+  house" (`bruntMember`, the lever-holder's rewrite, with the parked nextInLine tail). Each "only" holder is the one member
+  on the roster of exactly one power whose stake is a loss; each "least say" holder is the lowest-ranked member of exactly
+  one such power (12 of 13 the hook's own "of <P>"; r2r-city-19's hook names Royal Authority, the power hit is the Religious
+  Authorities). The claims hold; the fault is "the house" alone.
+
+### The cures
+
+- **K18** (`crisisSummaryVantage.js`, the insurgency pool; five lines reworded, no twin, no condition):
+  defence traveller → "Travellers in <N> are pressed, sooner or later, to say which side they are on, and both sides take
+  note of the answer." (the record's loyalty testing); defence watch → "In <N> the quarrel over who is in charge has turned to
+  violence, and orders go unheeded and dues unpaid."; cover watch → "In <N> both the government and those who defy it press
+  people to say which side they are on, and those watching count who has stopped obeying."; cover traveller → "In <N>
+  orders go unanswered, and some of its people have turned against those in charge."; tonight watch → "The defiance of
+  <N>'s government grows, and those watching it count who still obeys and who has stopped."
+- **K19** (`settlementQuickGuide.js :: scopeAgainstRecord`, display only): the tank where no water work stands is struck
+  ("built around the bazaar"); the bazaar where the market fact is false (none in the 720), and both (the phrase keeps "under
+  …"). The pastoral life where the record holds neither herds nor pasture takes the large tiers' own twin "built on clan
+  lines"; an unanswered record keeps it. `scopeAgainstRule` then says "built on clan lines, held by clan" once
+  ("built on clan lines"). The twin was already on batch 2's veto list.
+- **K20** (`crisisCast.js :: CAST_REASONS`, stored): bruntOnly "the only one named here of a power that loses by the crisis",
+  bruntLeast "the one with the least say in a power that loses by the crisis", bruntMember "one of a power that loses by the
+  crisis". The words name no power, so factionRename.js's law for this vocabulary (a fixed vocabulary that names nobody)
+  holds, and a renamed power can never leave a stale name in a stored reason. The caster's prefix rewrite (least → member)
+  keeps its shape. **bruntMember is beyond the 39 granted** (10 towns more, the same constant family and the same fault):
+  told to the chair with this hand-back; its nextInLine tail stays as parked.
+
+Test: `tests/domain/tailCrisisBatch6.test.js` (12 FALSE pairs, red at 572cd48e0 12 of 12 in an it.each form; 3 KEEP pairs,
+green at both; a plant (the tank read switched off) reds it). Re-keyed by identity in the K18/K19 commit:
+`tests/domain/tailCrisisBatch1.test.js` (r2r-thorp-52's defence watch twin) and `tests/domain/tailCrisisBatch2.test.js`
+(r2s-occupied-hamlet-0's pastoral twin).
+
+### Measured (census at 572cd48e0, `runs/c0`, against c97caccd9's src, `runs/c1`; inventory_diff over the batch's 50 folds)
+
+- **Tabs:** 30,042 → 30,044 distinct sentences; 38 gone, 40 new, 9 in fewer towns, 4 in more, 0 moved. **Exports (PDF,
+  Journal):** 36,090 → 36,092; 60 gone, 62 new, 9 fewer, 4 more.
+- **By the measure before, every row to its true remainder:** "the house the crisis hits" 49 → 0 towns (26 + 13 + 10);
+  "would not see the quarrel" 10 → 0; "There is no fighting" 14 → 0; "grows quietly" 6 → 0; "tank and the bazaar" 43 → 32
+  (the 11); "pastoral life" 35 → 5 (the 30). On the exports also "looks calm" 14 → 0 and "fights in the open" 10 → 0.
+- **Other sentences in fewer towns:** none but the batch's own folds (every one of the 9 is a tank or pastoral frame).
+  **In more towns (4):** the Steppe frames of "built on clan lines" (6→10, 8→11, 12→14, 10→11): the twin, true where no
+  herd or pasture stands.
+- **THE INHERITORS READ** (44 tabs, 66 exports; all are this batch's own lines, each read where it prints): the brunt hooks
+  ("In the famine, <N> of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.")
+  and the crisis page's "bears the brunt: <N> · …"; the five insurgency lines in all their towns; the scope twins. No line
+  outside the batch inherits.
+- **DECLARED MOVE** (field diff by family, c0 against c1, the 720 records): `stress` and `stressors`, 49 records each, only
+  `cast.roles[].reason` (40 + 9 array-form entries). No other family moves, and no draw moves.
+
+### Gates (at the tree against 572cd48e0)
+
+- eslint on the touched files: 0. typecheck:domain:strict: 0 (a first draft's `atomHolds` argument raised it by one and was
+  cast as crisisSummaryVantage.js casts it). typecheck:ratchet: OK (167, ceiling 167).
+- The presumed-things walker `--check`: 147 fresh at base and tree, the same 147 rows (diffed).
+- The governing tests (57 files naming crisisCast, crisisSummaryVantage, settlementQuickGuide, CAST_REASONS,
+  cultureScopeLine): 10 failing assertions at the base and the same 10 at the tree once the two pins were re-keyed
+  (CARRIED, not this seat's).
+- The twelve-birth grid `page-census.mjs --grid`: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), carried.
+
+## THE VETO LIST (batch 6): every new or changed line (smallest town, largest, a crisis town; tabs and exports)
+
+| new line (fold) | towns | smallest | largest | a crisis town |
+|---|---|---|---|---|
+| the only one named here of a power that loses by the crisis (the cast's reason; the hook after "takes the worst of it:") | 26 | r2r-thorp-17 | r2s-plague_onset-town-2 | r2s-famine-thorp-0 |
+| the one with the least say in a power that loses by the crisis | 13 | r2r-hamlet-16 | r2s-plague_onset-city-3 | r2s-famine-village-0 |
+| one of a power that loses by the crisis; next in line, … (the tail parked) | 10 | r2r-hamlet-10 | r2s-monster_pressure-city-2 | r2s-famine-village-1 |
+| In <N> orders go unanswered, and some of its people have turned against those in charge. (exports) | 14 | r2r-thorp-25 | r2s-insurgency-metropolis-3 | r2s-insurgency-thorp-3 |
+| In <N> the quarrel over who is in charge has turned to violence, and orders go unheeded and dues unpaid. | 14 | r2r-thorp-25 | r2s-insurgency-metropolis-3 | r2s-insurgency-thorp-3 |
+| In <N> both the government and those who defy it press people to say which side they are on, and those watching count who has stopped obeying. (exports) | 10 | r2r-thorp-22 | r2s-insurgency-metropolis-2 | r2s-insurgency-thorp-0 |
+| Travellers in <N> are pressed, sooner or later, to say which side they are on, and both sides take note of the answer. | 10 | r2r-thorp-22 | r2s-insurgency-metropolis-2 | r2s-insurgency-thorp-0 |
+| The defiance of <N>'s government grows, and those watching it count who still obeys and who has stopped. | 6 | r2s-insurgency-thorp-1 | r2r-metropolis-26 | r2s-insurgency-thorp-1 |
+| Steppe-inspired…: built on clan lines, held by clan and caravan. (five frames) | 8+4+4+2+1 | r2r-thorp-3 | r2s-slave_revolt-village-2 | r2s-under_siege-thorp-0 |
+| Steppe-inspired…: built on clan lines. (the twin, in more towns) | +4 +3 +2 +1 | r2r-thorp-21 | r2r-village-59 | r2s-mass_migration-thorp-0 |
+| Steppe-inspired: built on clan lines, held, for now, by another power. | 1 | r2s-occupied-hamlet-0 | — | r2s-occupied-hamlet-0 |
+| South-Asian-inspired…: built around the bazaar, in quarters by trade, under temple and guild. (four frames) | 2+2+1+1+1 | r2r-town-7 | r2s-succession_void-town-0 | r2s-indebted-town-3 |
+| South-Asian-inspired…: built around the bazaar, under the temple. (three frames) | 2+1+1 | r2r-village-1 | r2r-village-28 | r2s-wartime-village-1 |
+
+## Registers named stale (this seat)
+
+- The sovereignty walker's estate file count: one more test file (tests/domain/tailCrisisBatch6.test.js), on top of the
+  earlier seats' seven. Re-taken through its own door at the close.
+
+## Rows parked or named (this seat)
+
+- **bruntMember** (10 towns) went with K20, beyond the 39 granted: for the chair's veto.
+- Seen in the inheritors, style only (true): "built on clan lines, held by clan and caravan" says the clan twice (19 towns).
+
+## What is left of the worklist (after this seat)
+
+**(DONE by TAIL-CRISIS-5: cd0b1ab7b; see its part below.)** **FIRST: K21, THE LATE RE-READ (the chair's ruling of 2026-11-15 02:29 UTC, vetoable by the owner; it reached this seat at
+02:58, after batch 6 was pushed, and the count would not hold a packet of two censuses, so it is written here FIRST for the
+successor).** The ruling, copied: the late re-read, the measuring seat's recommendation, is this seat's to build.
+`git fetch origin lane/order-measure-2026-11-15`; read `docs/chair/2026-11-15/ORDER-MEASURE-1.md` sections "THE ANSWER,
+FIRST", 5 and "RECOMMENDATION, AND WHAT IT LOSES" only. The patch is
+`docs/chair/2026-11-15/probes/ORDER-MEASURE-1/cures/c1b.patch` (draw-free; BYTE-IDENTICAL on the 720 and 0 of 525 golden
+keys moved by its own measure: SHOW BOTH AGAIN before a declaration is added). `src/generators/steps/assembleSettlement.js`
+is LENT for its hunks. In the same packet, the two declarations it was made for, each with its twin:
+- the insurgency summary keyed "a rival of standing" (this group's atom `rival power`, true of the SETTLED record; the late
+  pass is what makes that so; 16 false towns to none, modelled: measure it; K10's hazard is what the late pass answers);
+- "defences built for quieter times" (a defence that exists);
+- and THE GUARD the report names: a sibling declaration whose needs read the powers resolves after the last roster write.
+A patch from a measuring seat is a candidate: run the tests it did not, read the inheritors.
+
+What this seat checked (02:59): `git apply --check` of c1b.patch at e040663dd is CLEAN (one file, +4 lines). It keeps each
+entry's `summaryRoll` in a Map before the roll is deleted, and after `resolveFactionLabelsAtClose` re-renders `e.summary`
+with the same roll and the final facts, and re-resolves `crisisHook` and `viabilityNote` through STRESS_TYPE_SIBLINGS. Two
+things to read before building on it: (1) the second resolve runs on text the first resolve already resolved: a twin that is
+not itself a key stays as the first pass left it, and a `viabilityNote` the first pass DROPPED (`dropRefused`) is gone and
+cannot be re-admitted by the settled facts; (2) the stored summary then differs from a summary rendered at :219 wherever a
+keyed line's needs change between the two passes, so every new `needs:` on the summary is a declared move (field diff:
+`stress`/`stressors` `summary` only).
+
+THEN, every row left is parked, another seat's, waits under five towns, or needs a stored move not granted:
+- **X9 22718** ("Revolt Leadership has no stake yet", 8 towns): DONE by TAIL-CRISIS-5 (K22, 07ab77b03).
+- **K16 11705 14131** (2 towns), **X9 20882** (3), **07387** (2), **27012** (1), **13909** (3): under five towns, they wait.
+- **Parked as written:** 01034 and X9 01620 28443 30535 (the walker's K8 wall); the stored cast rows; the five nextInLine rows.
+- **20893:** DEFECON's condition. The Germanic "built in timber and stone" on desert ground (4 towns): waits.
+
+## How this seat's instruments were made
+
+As TAIL-CRISIS-3's: the census with `--count-only`, its count stage stopped once the 720 dumps were written (the inventory
+reads only `dumps/`; the corpus is written at births). The probes (`probes/k1920.mjs`, `k18.mjs`, `k20.mjs`, `scope.mjs`,
+`fielddiff.py` in the scratch directory) import a tree's writers and run them over `corpus.ndjson.gz`; the field diff walks
+the two corpora by family and path.
+
+# TAIL-CRISIS-5 · the fifth seat's batches (2026-11-15)
+
+Seat TAIL-CRISIS-5, successor of TAIL-CRISIS-4, on the same branch from its tip **3f45e6fa9** (read back from origin; nothing
+later there). Work in scratch worktrees outside the main checkout: `wt` (pristine at the base, which the before census and the
+base births render from), `dev` (the work, detached, pushed with an explicit refspec), `c1b` and `k22` (variants and plants).
+
+## The chair's rulings since (2026-11-15; each vetoable by the owner)
+
+- **(K21) THE LATE RE-READ**, the measuring seat's recommendation (ORDER-MEASURE-1, cure C1b), this seat's to build, with the
+  two declarations it was made for, each with its twin: the insurgency summary keyed "a rival of standing" (the atom `rival
+  power`, true of the SETTLED record: the late pass is what makes that so; 16 false towns to none, modelled: measure it), and
+  "defences built for quieter times" (a defence that exists: measure the towns first); and THE GUARD the report names (a
+  sibling declaration whose needs read the powers resolves after the last roster write). `assembleSettlement.js` LENT for
+  its hunks. A patch from a measuring seat is a candidate: run the tests it did not; read the inheritors; read the two
+  hazards before the first edit and say how each was met.
+- **(K22) THE STORED STAKE ROW** (the exports' 22718, 8 towns, `deriveStakes`): a declared move of stored text is GRANTED,
+  its own commit, measured by the field diff (no family but the stake's text).
+- **(K23) NO VETO on K20's reach** (the same constant in `bruntMember`, 10 towns beyond the 39 granted): it stands, listed.
+- THEN: what the hand-back leaves that prints in five towns or more, widest first. The parked rows stay parked as written
+  (the banked `war` literal; the stored cast rows; nextInLine).
+- **(U1)** carried: commit and push every part the moment it holds, with WHAT IS LEFT current in the same push.
+
+## K21: the late re-read, with the insurgency's declaration and the guard
+
+### The patch shown again at the tip, before any declaration (births-only over the 720; `bytecmp.mjs`; `goldencmp.mjs`)
+
+- `c1b.patch` as received, applied at 3f45e6fa9: **byte-identical 720 of 720**; the golden corpus **0 of 525** keys moved
+  against the base (both trees hashed the same way, `generatorGoldenMaster.test.js :: hashFor`'s births).
+- This seat's form of it (below): **byte-identical 720 of 720**, golden **0 of 525**.
+
+### The two hazards, and how each was met
+
+1. **The second resolve ran on text the first resolve had already resolved** (a twin that is not itself a key stayed as the
+   first pass left it; a `viabilityNote` the first pass dropped was gone and could not come back). MET: the late pass does
+   not re-resolve the stored text. The first pass keeps, beside the roll, the CATALOGUE hook and note as `resolveStress`
+   stored them (in a Map in the assembly's closure, never on the record), and the late pass resolves THOSE ORIGINALS
+   against the settled record: a twin is re-decided from its key, and a note the first pass dropped is re-admitted where the
+   settled record admits it. One function (`readStressEntry`) is both passes. Measured: byte-identical on the 720 (no hook or
+   note decision differs between the two passes today), golden 0 of 525.
+2. **The stored summary then differs from the summary rendered at the first pass wherever a keyed line's needs change
+   between the passes, so every new `needs` on the summary is a declared move.** MET: the insurgency declaration is measured
+   as a declared move by the field diff (below): `stress` and `stressors`, `summary` only, 21 records. The window between
+   the passes (the arrival scene to the label close) is named at the late pass in the source: no writer there reads a stress
+   entry's summary, hook or note (by grep: the only readers of `stress.summary` in `src/generators` are the receipt, after
+   the late pass, and the quick guide at render); the plant measure below confirms it (keyed at the first pass, only
+   `summary` moves: nothing in the window read it).
+
+### The declarations, measured by the record first (probe `k21.mjs` over the base corpus, the tree's own `factsOf`/`atomHolds`)
+
+- **Insurgency (37 towns).** At the base every one prints the plain fallback (K10). By the SETTLED record 21 hold a rival
+  of standing and 16 do not. The plant (the strong line keyed at the first pass, no late pass) prints the strong line in
+  31 towns, **10 of them false** (r2r-thorp-22 -thorp-29 -thorp-52, r2s-insurgency-thorp-0 -1 -2, -hamlet-0 -1 -2 -3: the
+  rival lost in the resize): the K10 hazard reproduced. With the late pass: **strong in 21, every one with a rival of
+  standing; plain in 16, every one without; 0 false.** The modelled 16 → 0 holds.
+- **"Its defences were built for quieter times" (monster_pressure, 34 towns).** Declared since batch 1 in the renderer
+  (`MONSTER_DEFENCES`, every one refused → "It has nothing built or kept to hold such things off."). By the settled record:
+  17 print it, **all 17 keep a defence**; 17 take the twin, all 17 keep none; no atom unanswered. The towns were measured
+  first: the line is true wherever it prints, at the base and after; the late pass now reads it against the settled record
+  (no town moves: the defence atoms are final before the first pass).
+
+### The cures
+
+- `src/generators/steps/assembleSettlement.js` (LENT): `stressLateReads` (the roll and the catalogue hook and note, kept)
+  and `readStressEntry` (one entry rendered and resolved against the record as it stands); the first pass calls it as
+  before; THE LATE RE-READ calls it again after `resolveFactionLabelsAtClose`, before the trace copy and the receipt.
+  Draw-free; nothing new persists.
+- `src/generators/stressNarrative.js :: RENDERERS.insurgency`: a pool of two at its print site (the file's own form, as
+  famine and monster_pressure): `atomHolds('rival power', facts) === true` gives K6's strong line; anything else (refused,
+  unanswered, no facts) the plain line.
+
+### THE GUARD (`tests/generators/stressLateReRead.test.js`)
+
+(1) Source order: the late re-read stands after `reconcilePowerStructure(`, `resizePoliticalRoster({`,
+`storeTrueHooksOnly(settlement` and `resolveFactionLabelsAtClose(settlement)`, and before
+`buildGenerationCoherenceReceipt(`. (2) On births: every stored summary (not wartime, whose roll is not kept) equals its
+renderer against the town's FINAL record: a declaration added later that reads a fact settled after the first pass reds on
+any seed it moves. (3) Pairs: the strong line in 4 rival towns (red at the base: the plain line); the plain line in the 10
+towns that lose their rival in the resize (green at the base; red under the plant); KEEP: 2 towns that never held a rival,
+3 defended and 2 undefended monster towns. At the base: 5 red (the 4 strong pairs and the source order), 18 green. Under
+the plant (the declaration without the late re-read): 12 red (the 10 lost-in-resize pairs and both guards). With the cure:
+23 of 23 green. Re-keyed by identity: `tests/domain/facts/rivalPower.test.js` ("the insurgency summary … is not keyed by
+it" → "is keyed by it: the strong line with a rival of standing, the plain line without").
+
+### Declared move (field diff by family, base against the tree, the 720 records)
+
+`stress` and `stressors`, **21 records each, only `summary`** (20 bare-object entries and 1 array entry, r2r-city-33). No
+other family moves; no draw moves; golden 0 of 525.
+
+## K22: the stored stake row (22718), its own commit, a declared move
+
+- **By the record first.** The slave revolt's leadership is pushed onto the roster by the crisis
+  (`generators/power/stressFactions.js`, `faction: 'Revolt Leadership'` under slave_revolt). In 10 slave revolts it is on
+  the roster: 2 store `gains` ("already carries more weight than whoever holds the seat"), and **8 store `split` with the
+  untouched reason "it could side with either camp"**, which the page and the exports print as "has no stake yet":
+  r2s-slave_revolt-town-0 -town-2 -city-1 -city-3 -metropolis-0 -1 -2 -3. False in all 8: the revolt's own leadership is
+  never untouched by the revolt.
+- **The cure** (`crisisCast.js :: deriveStakes`, its last branch only): `RAISED_TO_LEAD` (one row: slave_revolt → the
+  roster's own literal 'Revolt Leadership'); where no earlier rule gives that power a stake, it keeps the waverer's `split`
+  and its reason is `STAKE_REASONS.leadsRevolt`, "it leads the revolt, and rises or falls with it". **The stake stays
+  `split` on purpose:** the gainers (stake `gains`) feed the instigator and the collaborator rules, and the losers (`loses`,
+  or `split` with the split reason) feed the brunt; a `split` with any other reason is in neither, and the waverer rule reads
+  every `split` as before. So no cast role moves (none of the 8 casts a member of the leadership as waverer).
+- **Declared move (field diff, base against the K22 tree, the 720):** `stress` and `stressors`, **8 records each, only
+  `cast.stakes[].reason`**. No other family moves; no draw moves.
+- **Test** `tests/domain/tailCrisisBatch7.test.js`: 8 FALSE pairs (the stored stake must be `{split, "it leads the revolt,
+  and rises or falls with it"}`), red at the base 8 of 8; KEEP: the two `gains` towns keep `gainsRival`, metropolis-0's
+  Arcane Orders keeps "it could side with either camp"; the table names the literal pushed in stressFactions.js (red at the
+  base: no table). Base 9 red, 3 green; tree 12 of 12.
+- **Seen, the same shape, NOT taken (beyond the grant; for the chair):** other powers the crisis itself raises, stored
+  untouched ("has no stake yet") in their own crisis: **Grain Holders in the famine (10 towns), Quarantine Council in
+  the plague (9), The Inquiry in the betrayal (8)**, the Abolitionist Network in the slave revolt (3), the two Noble
+  Claimants in the succession void (1 each). Each needs a ruling on WHICH stake is true (the Grain Holders' "holds what the
+  crisis makes scarce" was refused by ROUND THREE item 4 where no member faces a granary; the Quarantine Council may lose
+  by the plague it fights): the table takes a row a kind once ruled.
+
+## K23: K20's reach stands, listed
+
+`CAST_REASONS.bruntMember` ("one of a power that loses by the crisis", 10 towns beyond the 39 granted): no veto; it stands
+on batch 6's veto list as written.
+
+## THE VETO LIST (this seat): every new or changed line (smallest town, largest, a crisis town)
+
+| new line (fold) | towns | smallest | largest | a crisis town |
+|---|---|---|---|---|
+| A strong power in <N> has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits. (the insurgency summary, K6's line, now keyed by `rival power` on the settled record) | 21 | r2r-thorp-25 | r2r-metropolis-26 | r2s-insurgency-village-1 |
+| Some in <N> have stopped obeying the government. They stall, their taxes go unpaid, and they wait. (the fallback, unchanged; now in fewer towns) | 37 → 16 | r2r-thorp-22 | r2s-insurgency-metropolis-3 | r2s-insurgency-hamlet-0 |
+| Revolt Leadership split · it leads the revolt, and rises or falls with it (the stored stake; the crisis page and the exports) | 8 | r2s-slave_revolt-town-0 | r2s-slave_revolt-metropolis-3 | r2s-slave_revolt-city-1 |
+
+## Gates (at the tree against 3f45e6fa9)
+
+- eslint on the touched files: 0. typecheck:domain:strict: 0 (1113, ceiling 1113). typecheck:ratchet: OK (exit 0).
+- The presumed-things walker `--check`: the same output at the base, after K21 and after K22 (diffed: 149 lines each; the
+  base's own exit 1, carried).
+- THE TESTS THE PATCH DID NOT RUN: every test file that names stressNarrative, renderStressSummary, assembleSettlement or
+  rivalPower, with the measuring seat's targeted set (49 files at the base, 50 with the guard): **20 failing assertions in 13
+  files at the base; 19 in 12 at the tree, every one also failing at the base** (the base's: generatorGoldenMaster, the fork
+  census A1/A3e/A4/A5, nameHeldThroughAssembly, pipelinePinnedMode, stressSummaryName, proseWiringCensus.walker ×3,
+  r3c10FoodLinesTrue ×2, w2FixData6Rows, simulationSpine, worldFactRederive, espionageDormancyFence; CARRIED, not this
+  seat's). The one the tree does not fail, `distribution.test.js` "cities average a higher population than towns", is a
+  sampling test that failed at the base under load: no claim is made for it.
+- K22: every test file naming crisisCast, STAKE_REASONS or deriveStakes (28): 8 failing assertions at the base and the same 8 at the tree (tonightOwnGoal 1, institutionBudgetPromise 1, observedShapeReaders.walker 6: CARRIED); the batch-7 test 12 of 12.
+
+- The twelve-birth grid `page-census.mjs --grid`: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), carried.
+
+## Batch 7 measured on the page (census at 3f45e6fa9, `runs/cbase`, against 07ab77b03, `runs/cafter`; inventory_diff over the batch's rows)
+
+- **Tabs:** 30,044 → 30,047 distinct sentences; gone 1, new 4, in fewer towns 3, in more 0, moved 0. **Exports (PDF,
+  Journal):** 36,092 → 36,095; gone 2, new 5, fewer 3, more 0.
+- **The rows, by the measure before:** "Some in <N> have stopped obeying the government." (and its second sentence) 37 → 16,
+  exactly the 21 holding a rival of standing; "Revolt Leadership has no stake yet" 8 → 0 (tabs and exports, with ": it could
+  side with either camp." on the exports).
+- **Other sentences in fewer towns:** one, "it could side with either camp" 160 → 157: the three slave revolts where the
+  leadership was the only untouched power (in the other five another power still prints it). Explained: false there too.
+- **THE INHERITORS READ** (4 on the tabs, 5 on the exports, all this batch's own lines, each read in its dumps): "A strong
+  power in <N> has stopped obeying the government. Its people stall, its taxes go unpaid, and it waits." (21 towns, each
+  holding a rival of standing by the record) and "Revolt Leadership split · it leads the revolt, and rises or falls with
+  it" (8; the exports' "Revolt Leadership split: it leads the revolt, and rises or falls with it."). No line outside the
+  batch inherits.
+
+## Registers named stale (this seat)
+
+- The sovereignty walker's estate file count: two more test files (tests/generators/stressLateReRead.test.js,
+  tests/domain/tailCrisisBatch7.test.js). Re-taken through its own door at the close.
+- `src/domain/prose/holderTable.js` cites `assembleSettlement.js:120/139/140`: above every hunk, unaffected (re-read).
+
+## What is left of the worklist (after this seat)
+
+K21 and K22 are done. Of what the hand-back left, NOTHING of this group prints in five towns or more without a ruling it lacks:
+- **FOR THE CHAIR (the widest, 27+ towns, K22's shape beyond its grant):** the other powers a crisis itself raises,
+  stored untouched in their own crisis: Grain Holders in the famine (10), Quarantine Council in the plague (9), The Inquiry
+  in the betrayal (8); under five: the Abolitionist Network (3), the two Noble Claimants (1 each). Each needs a ruling on
+  WHICH stake is true before `RAISED_TO_LEAD`'s sibling table takes a row (a declared move of stored stakes, as K22).
+- **Under five towns, they wait:** K16 11705 14131 (2), X9 20882 (3), 07387 (2), 27012 (1), 13909 (3); the Germanic
+  "built in timber and stone" on desert ground (4); the Tonight sheet's "Import-Dependent" under a siege (2).
+- **Parked as written:** 01034 and X9 01620 28443 30535 (the banked `war` literal, K8's wall); the stored cast rows; the five
+  nextInLine rows. **20893:** DEFECON's condition.
+- **Named for other seats (unchanged):** HISTORY's succession-void viabilityNote (31 towns, 15 with no office) and the
+  plague's market note; the Economics tab's one-argument `foodStoresWords` call (K7).
+- Style only, true (seen in batch 6's inheritors): "built on clan lines, held by clan and caravan" says the clan twice (19).
+
+## How this seat's instruments were made
+
+Births only (`RECORD-MEASURE-1/births-only.sh`, the census's own births.mjs over the 720, about a minute a tree) for every
+record measure: `bytecmp.mjs` and `goldencmp.mjs` from `ORDER-MEASURE-1/cures` (git-archived from
+`lane/order-measure-2026-11-15`); a field diff by family and path (`probes/fielddiff.mjs`: array indices folded to `[]`;
+key-order-only moves counted apart); `probes/k21.mjs` (the insurgency and monster summaries against the tree's own
+`factsOf`/`atomHolds` on each record). Variant trees for the plant (the declaration without the late pass) and for this
+seat's late pass alone. The census as before (`census3.sh <tree> <out> 4 --count-only`), the before run from `wt` at the
+base, the after run from a tree detached at the K22 commit.

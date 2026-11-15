@@ -30,7 +30,7 @@ const SMALL = ['thorp', 'hamlet', 'village'];
 
 describe('the readers\' towns: the cured line does not print, its twin does', () => {
   const ROWS = [
-    ['rv2-under_siege-town-0', /maintains? standard patrol|walks? the usual rounds|patrols? on a regular round|on the rounds most hours/, /(?:keeps what rounds it can while the supplies it needs|keep what rounds they can while the supplies they need) are cut off/], // #459 (TAIL-DEFECON #20616: re-keyed by identity, a force of two takes the plural)
+    ['rv2-under_siege-town-0', /maintains? standard patrol|walks? the usual rounds|patrols? on a regular round|on the rounds most hours/, /(?:is|are) held for the defence, and few patrols can be spared from it\./], // #459 (TAIL-DEFECON #20616: re-keyed by identity, a force of two takes the plural; TAIL-DISPLAY-CIVIC-3 V3: under the siege the patrol slot prints the siege's twin)
     ['rr2s-city-calm-rand-1', /exists on paper\. Chronically underpaid/, /^Some of the garrison and city watch take bribes from whoever has coin\./], // #713
     ['rr2s-metropolis-calm-rand-1', /exists on paper\. Chronically underpaid/, /^Some of the garrison and city watch take bribes from whoever has coin\./], // #1201
     ['rr2s-city-occupied-rand-1', /largely a formality/, /keep their own mercenary companies beside the/], // #1080

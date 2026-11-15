@@ -38,6 +38,8 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
   const fullRows      = r.chainRows.filter(c => c.status === 'full');
   const partialRows   = r.chainRows.filter(c => c.status === 'partial');
   const unexpRows     = r.chainRows.filter(c => c.status === 'unexploited');
+  // V2 (TAIL-DISPLAY-CIVIC-3): the food a famine in force failed, as the tab prints it (validationOnPage.js :: famineFailedResourceOf)
+  const failedRows    = r.chainRows.filter(c => c.status === 'failed');
 
   // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints, not the terrain's need list raw
   const importsCritical    = settlement ? criticalImportsShown(settlement) : (r.imports?.critical || []);
@@ -148,6 +150,9 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           )}
           {unexpRows.length > 0 && (
             <ChainGroup title="Unexploited" tone="bad" rows={unexpRows} />
+          )}
+          {failedRows.length > 0 && (
+            <ChainGroup title="Failed this year" tone="bad" rows={failedRows} />
           )}
         </View>
       )}

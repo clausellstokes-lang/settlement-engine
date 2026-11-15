@@ -41,10 +41,10 @@ const GONE = [
   ['05801', 'r2s-under_siege-thorp-2', 'Controlled goods (grain, salt, preserved meat)', "What food is put by goes to whoever can pay the holder's price."],
   ['18708', 'r2s-insurgency-thorp-2', 'insurgent supporters and those who keep order', "Confrontations between the rebels' supporters and those loyal to the current authority."],
   ['16495', 'r2s-religious_conversion-thorp-0', 'Religious buildings, land, and endowments', SILENT],
-  ['18752', 'r2s-wartime-thorp-3', 'Suppliers adulterating grain and leather sold to crown contracts', "Whatever the army's buyers will take is sold to them dear"],
+  ['18752', 'r2s-wartime-thorp-3', 'Suppliers adulterating grain and leather sold to crown contracts', 'Deserters passing through need food and discretion, and some here give both.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: an isolated thorp sells nothing to an army's buyers
   ['03039', 'r2s-wartime-thorp-3', 'A small industry has emerged to provide all three', 'Deserters passing through need food and discretion, and some here give both.'],
   ['B27552', 'r2s-wartime-thorp-3', 'Wealthy families paying poorer ones', SILENT],
-  ['09343', 'r2s-mass_migration-thorp-3', 'Forged residence documents', 'Lodging and a way onward, sold quietly to newcomers who were told to move on.'],
+  ['09343', 'r2s-mass_migration-thorp-3', 'Forged residence documents', 'A way onward, sold quietly to newcomers who were told to move on.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: no bed presumed
   ['09714', 'r2r-village-55', 'the stalls that pay their fees', 'With the siege closed round the place, what goods are left change hands in back rooms and after dark'],
   ['09714', 'r2r-thorp-10', 'the stalls that pay their fees', 'Goods change hands here in back rooms and after dark, and nobody accounts for them.'],
   ['18208', 'r2s-infiltrated-thorp-3', 'Some goods change hands here without a licence', 'A little changes hands here quietly, between neighbours, and no one reckons it up.'],
@@ -56,7 +56,7 @@ const KEEP = [
   ['23466', 'r2r-hamlet-11', 'and there is little crime; the '],
   ['16568', 'r2r-village-10', 'whoever controls their street'],
   ['07371', 'r2s-occupied-town-2', 'Everyone comes and goes by the gates'],
-  ['20612', 'r2s-famine-town-1', 'The town watch is well paid, well equipped and patrols properly'],
+  ['20612', 'r2s-famine-town-1', 'The town watch is well paid and well equipped, but hunger is eroding the order it keeps.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: the famine's twin
   ['20616', 'r2s-recently_betrayed-town-3', 'The town watch walks the usual rounds'],
   ['18786', 'r2s-religious_conversion-town-0', 'exists on paper'],
   ['B14103', 'r2s-under_siege-thorp-2', 'Nobody here is paid to keep order'],

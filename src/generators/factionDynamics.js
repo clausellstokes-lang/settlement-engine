@@ -256,18 +256,16 @@ export function govCriminalRelation(gov, crim, crimCapture, publicLeg) {
     narrative = `${say(crim)} has bought key people in ${say(gov)}. Its own crimes go unpunished, and its rivals are the ones who get arrested.`;
   } else if (crimCapture === 'equilibrium') {
     type = 'tense';
-    // TAIL-POWERS-B: under a legitimacy crisis (the cause of the row's 'escalating') the crisis is said, not denied
-    if (publicLeg.isLegitimacyCrisis) {
-      narrative = `${say(gov)} leaves ${say(crim)} alone because stamping it out would cost more than it saves. With the hall's own authority in question, ${say(crim)} grows bolder each season.`;
-    } else {
-      narrative = `${say(gov)} leaves ${say(crim)} alone because stamping it out would cost more than it saves. ${say(crim)} keeps its head down, because it needs the hall standing to feed off it.`;
-    }
+    narrative = `${say(gov)} leaves ${say(crim)} alone because stamping it out would cost more than it saves. ${say(crim)} keeps its head down, because it needs the hall standing to feed off it.`;
   } else {
     type = 'competitive';
     narrative = `${say(gov)} is hunting ${say(crim)} in earnest but not catching all of it; ${say(crim)} pulls back and regroups, and does not go away.`;
   }
 
-  direction = publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
+  // TAIL-POWERS-B (the chair's ruling P13(2)): THE DIRECTION READS THE CAPTURE RUNG: the truce rung (equilibrium: the two
+  // tolerate each other) is 'stable' whatever the legitimacy; a crisis escalates only a rung the hall is fighting or losing.
+  direction = crimCapture === 'equilibrium' ? 'stable'
+            : publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
             : publicLeg.isEndorsed          ? 'declining'     // strong governance suppresses crime
             : 'stable';
 
@@ -328,6 +326,31 @@ export function withCaptureRelations(powerStructure, state) {
     return a.isGoverning ? govCriminalRelation(a, b, state, publicLeg) : criminalMilitaryRelation(a, b, state, publicLeg);
   });
   return { ...powerStructure, factionRelationships };
+}
+
+/**
+ * TAIL-POWERS-B-2 (the chair's P13(1)/P19, vetoable by the owner): ONE HOME FOR A PAIR'S STANDING. The relation rows are
+ * drawn before the conflicts exist, so a row can call a pair symbiotic or dependent, and 'stable', where the conflicts hold
+ * the same pair at HIGH. Called once on the final record, where both are final: such a row keeps its kind and its
+ * structural bargain (true beside a named quarrel) and takes a twin that names the quarrel, its direction escalating.
+ * Every other row is kept as it is. Draw-free; never mutates its input.
+ * @param {any} powerStructure @param {Array<{ parties?: string[], intensity?: string, issue?: string }>} conflicts
+ * @returns {any}
+ */
+export function withConflictRelations(powerStructure, conflicts) {
+  const rows = Array.isArray(powerStructure?.factionRelationships) ? powerStructure.factionRelationships : null;
+  const high = (Array.isArray(conflicts) ? conflicts : []).filter((c) => c?.intensity === 'high' && Array.isArray(c.parties) && c.parties.length === 2 && c.issue);
+  if (!rows || !high.length) return powerStructure;
+  const quarrelOf = (/** @type {string[]} */ pair) => high.find((c) => (c.parties[0] === pair[0] && c.parties[1] === pair[1]) || (c.parties[0] === pair[1] && c.parties[1] === pair[0])) || null;
+  let moved = false;
+  const factionRelationships = rows.map((row) => {
+    if (!row || !Array.isArray(row.pair) || (row.type !== 'symbiotic' && row.type !== 'dependent')) return row;
+    const quarrel = quarrelOf(row.pair);
+    if (!quarrel) return row;
+    moved = true;
+    return { ...row, direction: 'escalating', narrative: `${row.narrative} Even so, the two are now at odds over ${String(quarrel.issue).toLowerCase()}.` };
+  });
+  return moved ? { ...powerStructure, factionRelationships } : powerStructure;
 }
 
 /**
@@ -683,4 +706,16 @@ export function applyLegitimacyMultipliers(factions, publicLeg, _tier) {
 
   // Sort by effective power descending
   factions.sort((a, b) => (b.power || 0) - (a.power || 0));
+}
+
+/**
+ * RECORD-MEASURE-2 G1 (candidate): ONE DOMINANT POWER. "Dominant" is the strongest power's word alone: a second power at
+ * the Dominant share reads "Strong", and where the two strongest hold the same share neither dominates (both "Strong").
+ * Labels only; no share moves. @param {Array<{ power?: number, powerLabel?: string }>} factions
+ */
+export function keepOneDominant(factions) {
+  const ranked = [...(factions || [])].filter((f) => f?.powerLabel === 'Dominant').sort((a, b) => (b.power || 0) - (a.power || 0));
+  if (ranked.length < 2) return;
+  const tie = (ranked[0].power || 0) === (ranked[1].power || 0);
+  ranked.forEach((f, i) => { if (i > 0 || tie) f.powerLabel = 'Strong'; });
 }

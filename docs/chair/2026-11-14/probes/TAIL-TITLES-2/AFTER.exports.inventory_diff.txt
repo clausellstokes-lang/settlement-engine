@@ -1,0 +1,6 @@
+sentences: before 36006 after 36006 · gone 0 · new 0 · in fewer towns 0 · in more towns 0 · moved 0
+ GONE (widest):
+ IN FEWER TOWNS (largest loss):
+ NEW (widest):
+ IN MORE TOWNS (largest gain):
+ THE INHERITORS (print now, and did not, in a town that lost a sentence): 0 sentences

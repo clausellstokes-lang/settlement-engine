@@ -10,7 +10,7 @@
  *   · 12961: under a siege that stopped the trade, the short clause says hunger is here (the famine's twin);
  *   · 12560, 12562: a chain card's need names "gate control" only where a gate or a wall stands;
  *   · 05779, 05780: a card the crisis stopped (its record state working, its printed state impaired) claims no share of
- *     the income now.
+ *     the income now (since TAIL-DISPLAY-ECON-4, X25.1: where the crisis leaf marks the share the card names).
  * Each NOT pair is red at the batch's base (6e36000a4); each KEEP pair is green before and after.
  */
 import React from 'react';
@@ -66,7 +66,6 @@ const NOT = /** @type {const} */ ([
   ['r2s-under_siege-town-1', 'economics', 'Law enforcement, patrol and gate control here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside'],
   ['r2s-under_siege-town-0', 'economics', 'Contributes to Entrepôt Trade - 11% of income', 'silent: the siege stopped the card'],
   ['r2s-famine-town-1', 'economics', 'Contributes to Grain Sales - 4% of income', 'silent: the famine failed the grain'],
-  ['r2s-under_siege-town-1', 'economics', 'Contributes to Iron & Metalwork - 8% of income', 'silent: the siege stopped the mine\'s field work'],
 ]);
 /** [seed, tab, the twin true in the state that made the old line false] (new or newly reached lines: red at the base by design) */
 const TWIN = /** @type {const} */ ([
@@ -83,6 +82,10 @@ const KEEP = /** @type {const} */ ([
   ['r2s-famine-town-2', 'economics', 'Many households go short, and hunger is already here.'],
   ['r2r-town-6', 'economics', 'Law enforcement, patrol and gate control here depend on iron brought in'],
   ['r2s-famine-town-1', 'economics', 'Contributes to Entrepôt Trade - 13% of income'],
+  // RE-KEYED BY IDENTITY (TAIL-DISPLAY-ECON-4, the chair's ruling X25.1): batch 2's silence gave way to the crisis leaf
+  // (`crisisStoppedRow.js`), whose table holds the forge and the mine at work under a siege ("Iron & Metalwork": NONE);
+  // the Income Sources row prints the same share unmarked. The same town, the same line: it prints again.
+  ['r2s-under_siege-town-1', 'economics', 'Contributes to Iron & Metalwork - 8% of income'],
 ]);
 
 afterEach(cleanup);

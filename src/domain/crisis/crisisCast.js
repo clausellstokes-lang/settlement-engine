@@ -161,12 +161,16 @@ export const CAST_REASONS = Object.freeze({
     criminal_opportunity: 'its streets are where the crime lands',
   })),
   // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 A1, R1–R3): the fragments in the cast's own voice, no gender, no unread noun.
-  bruntLeast: 'the one with the least say in the house the crisis hits',
+  // TAIL-CRISIS-4 (K20, the chair's ruling of 2026-11-15, vetoable by the owner; a DECLARED MOVE of stored text): "the
+  // house the crisis hits" read as a household, and a famine hits the whole town. The reason says in plain words what the
+  // record holds: the person's place in a power whose stake is a loss (bruntCandidates' `losers`). The words name no
+  // power, so a rename never reaches them (factionRename.js's law for this vocabulary).
+  bruntLeast: 'the one with the least say in a power that loses by the crisis',
   // ROUND THREE, ruling (c) (the chair, 2026-11-13; the cut's #11 #13 #53 #55): "the least say" presumes a house of
   // several. In a house of ONE the person is named as its only member; a person who also holds the crisis's lever
   // (the cut's #268) is named as one of the house, never as the one with the least say.
-  bruntOnly: 'the only one in the house the crisis hits',
-  bruntMember: 'one of the house the crisis hits',
+  bruntOnly: 'the only one named here of a power that loses by the crisis',
+  bruntMember: 'one of a power that loses by the crisis',
   leverRuns: 'runs the office that decides how the crisis goes',
   leverInstitution: 'whoever runs it decides how the crisis goes, and nobody named here runs it',
   leverTemporary: 'nobody here could, so this one stepped in for the crisis',
@@ -238,7 +242,18 @@ export const STAKE_REASONS = Object.freeze({
   losesSeat: 'the seat bears the blame',
   split: 'gains and loses by it at once',
   untouched: 'it could side with either camp', // SW-6 (B3 A·C4): the page's label says "no stake yet"
+  leadsRevolt: 'it leads the revolt, and rises or falls with it', // TAIL-CRISIS-5 (K22): the power the revolt raised (RAISED_TO_LEAD)
 });
+
+/**
+ * THE POWER A CRISIS RAISES TO LEAD IT (TAIL-CRISIS-5, the chair's ruling K22 of 2026-11-15, vetoable by the owner; READ-ALL
+ * X9 22718: "Revolt Leadership has no stake yet · it could side with either camp", 8 towns). The slave revolt's own
+ * leadership is pushed onto the roster by the crisis itself (`generators/power/stressFactions.js`, under slave_revolt), so
+ * it is never untouched by it: where no other rule gives it a stake, its stake keeps the waverer's `split` (no cast role
+ * moves) and says what the record holds, that it leads the revolt. One row a kind; the name is the roster's own literal
+ * (tests/domain/tailCrisisBatch7.test.js pins it to stressFactions.js).
+ */
+export const RAISED_TO_LEAD = Object.freeze({ slave_revolt: 'Revolt Leadership' });
 
 // ── The levers: the houses each kind turns on, and the faces that run them ─────────────────
 
@@ -549,7 +564,7 @@ export function deriveStakes(s, kind) {
     else if (gains) stake = { factionId: name, stake: 'gains', reason: gains };
     else if (loses) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.loses };
     else if (losesSeat) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.losesSeat };
-    else stake = { factionId: name, stake: 'split', reason: STAKE_REASONS.untouched };
+    else stake = { factionId: name, stake: 'split', reason: /** @type {Record<string, string>} */ (RAISED_TO_LEAD)[kind] === name ? STAKE_REASONS.leadsRevolt : STAKE_REASONS.untouched };
     return stake;
   });
 }

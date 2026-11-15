@@ -41,8 +41,8 @@ export const STRESS_INSTITUTION_EFFECTS = {
       excludes: ["ruler: lord","ruler: occupier"],
     },
     {
-      secret: "Has already made personal arrangements to leave before the final assault. Their family left last week",
-      stakes: "{npc} saw them loading the cart. They don't know what {npc} understood",
+      secret: "Has already made personal arrangements to leave before the final assault. Their family is packed and waiting for the first gap in the lines",
+      stakes: "{npc} saw them packing the cart. They don't know what {npc} understood",
       needs: ["other npc"],
     },
     {
@@ -74,7 +74,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Sold the settlement's emergency grain reserves three months ago at peak price and reported them destroyed in a flood",
+        "Sold off the settlement's emergency stores three months ago and reported them destroyed in a flood",
       stakes: "The flood was real. The reserves were already gone. The paperwork is missing one date",
     },
     {
@@ -94,7 +94,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Helped engineer the original supply disruption that triggered the famine, believing it would only last a week",
+        "Helped cause the original shortfall that triggered the famine, believing it would only last a week",
       stakes: "It has lasted six. They did not anticipate this. They cannot undo it. They cannot admit it",
     },
     {
@@ -337,15 +337,15 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has been quietly removing records from the archive that would complicate the succession in ways they prefer not to see complicated",
-      stakes: "{npc} manages the archive and has noticed the gaps. They've raised it with {faction}",
+        "Has been quietly removing records that would complicate the succession in ways they prefer not to see complicated",
+      stakes: "{npc} keeps the settlement's records and has noticed the gaps. They've raised it with {faction}",
       needs: ["other npc"],
     },
   ],
   monster_pressure: [
     {
       secret:
-        "The attacks are not random. They sent a patrol into that territory three weeks ago and provoked something. No one came back. They filed a false report",
+        "The attacks are not random. They sent a party into that territory three weeks ago and provoked something. No one came back. They filed a false report",
       stakes: "The survivors' families believe their people died in an accident. They've been asking questions",
     },
     {
@@ -361,8 +361,8 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has been selling information about patrol schedules to an outside party who claims to be a monster hunter, and may not be",
-      stakes: "The last three ambushes hit patrols on days that weren't in the standard rotation",
+        "Has been selling information about who travels the roads and when to an outside party who claims to be a monster hunter, and may not be",
+      stakes: "The last three attacks fell on people travelling on days they had told almost no one about",
     },
     {
       secret:
@@ -386,8 +386,8 @@ export const STRESS_INSTITUTION_EFFECTS = {
       needs: ["tier: ≥ town"], excludes: ["ruler: lord","ruler: occupier"],
     },
     {
-      secret: "Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record them as insurgents",
-      stakes: "The families know their dead were innocent. One of them has kept everything",
+      secret: "Named people who had nothing to do with the insurgency as its ringleaders, then falsified the reports to record them as insurgents",
+      stakes: "The families know their people were innocent. One of them has kept everything",
     },
     {
       secret: "Has already negotiated their own safe passage with the insurgency's leadership in exchange for opening a gate on a night yet to be named",
@@ -522,7 +522,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "If the negotiation is discovered they hang as a traitor; if it fails the settlement burns. They have told no one",
     },
     {
-      secret: "Owned a share of the slave market and has been destroying the records of exactly whom they owned before those records can be turned against them",
+      secret: "Owned a share in the slaves worked here and has been destroying the records of exactly whom they owned before those records can be turned against them",
       stakes: "{npc} kept a copy. They have not yet decided what to do with it",
       needs: ["market","other npc"],
     },
