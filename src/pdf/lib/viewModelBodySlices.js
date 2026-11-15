@@ -37,6 +37,7 @@ export const exploitName = (c) =>
 // UPKEEP-14 (the bar's carried HIGH, the chair's ruling (j)): a chain prints under the name its record holds, through the
 // leaf every print site of a chain's name reads; the import sits beside its one reader.
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
+import { pageSaysEntrepot } from '../../domain/display/entrepotShown.js';
 
 export function economicsSlice(active) {
   const s = active || {};
@@ -83,7 +84,7 @@ export function economicsSlice(active) {
     localProduction:    ec.localProduction || [],
     tradeDependencies:  ec.tradeDependencies || [],
     necessityImports:   !!ec.necessityImports,
-    isEntrepot:         !!ec.isEntrepot,
+    isEntrepot:         pageSaysEntrepot(ec.activeChains), // TAIL-EXPORTS-PDF-3 (ruling E21): the tag where a chain on the page is an entrepôt, as the Economics tab's flows say it
     safetyHooks:        sp?.plotHooks || [],
     // pdf-6: the COMPLEMENT of the Viability filter — only the dependency/
     // resource-chain/opportunity/food issues belong on the Economics chapter, so

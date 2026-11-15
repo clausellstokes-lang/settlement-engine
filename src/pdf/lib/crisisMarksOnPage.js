@@ -8,10 +8,17 @@
  * keeps NO wording of its own: the mark ("Stopped by the siege."), the word after a name with no description
  * ("(stopped)") and the head line are the leaf's.
  *
+ * THE LEAF'S SECOND CAUSE (TAIL-EXPORTS-PDF-3, the chair's ruling E22 of 2026-11-15; vetoable by the owner): a service
+ * or a house row that is what its house makes from an input the page says never reaches that house is marked short of
+ * it ("Short of grapes."; the word "short" after a name with no description), calm town or not, and the chapter's head
+ * line says once what such a row is: the leaf's `rowShortOf`, `rowMarkText`, `SHORT_WORD`, as the Services and
+ * Institutions tabs print them. A chain or an income share takes no second cause (the leaf gives none).
+ *
  * Pure: reads the record, writes nothing.
  */
 import {
   stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, STOPPED_WORD,
+  rowShortOf, shortMarkText, SHORT_WORD,
 } from '../../domain/display/crisisStoppedRow.js';
 
 /** The active stopping crises of a record, read once a record. @type {WeakMap<object, string[]>} */
@@ -41,13 +48,25 @@ export function stoppedOnPage(settlement, kind, row) {
 }
 
 /**
- * The leaf's mark for this row ("Stopped by the siege."), or null.
+ * The input this row's house is short of by the page's own gap line, or null (the leaf's second cause: services and
+ * houses only).
+ * @param {object | null | undefined} settlement @param {'service' | 'house' | 'chain' | 'income'} kind
+ * @param {Record<string, unknown> | null | undefined} row
+ * @returns {string | null}
+ */
+export function shortOnPage(settlement, kind, row) {
+  return kind === 'service' || kind === 'house' ? rowShortOf(settlement, kind, row) : null;
+}
+
+/**
+ * The leaf's marks for this row, its crisis's then its input's ("Stopped by the siege.", "Short of grapes."), or null.
  * @param {object | null | undefined} settlement @param {'service' | 'house' | 'chain' | 'income'} kind
  * @param {Record<string, unknown> | null | undefined} row
  * @returns {string | null}
  */
 export function markOnPage(settlement, kind, row) {
-  return crisisMarkText(settlement, stoppedOnPage(settlement, kind, row));
+  const marks = [crisisMarkText(settlement, stoppedOnPage(settlement, kind, row)), shortMarkText(shortOnPage(settlement, kind, row))].filter(Boolean);
+  return marks.length ? marks.join(' ') : null;
 }
 
 /**
@@ -61,29 +80,32 @@ export function markedOnPage(settlement, kind, row, desc) {
 }
 
 /**
- * The word after a name that prints no description ("stopped"), as the Institutions tab's doors print it; null where
- * the row is not stopped or the leaf's door refuses the crisis's mark.
+ * The word after a name that prints no description ("stopped", "short", "stopped, short"), as the Institutions tab's
+ * doors print it; null where the row is neither stopped nor short, or the leaf's door refuses the crisis's mark.
  * @param {object | null | undefined} settlement @param {'service' | 'house' | 'chain' | 'income'} kind
  * @param {Record<string, unknown> | null | undefined} row
  * @returns {string | null}
  */
 export function stoppedWordOnPage(settlement, kind, row) {
   const crisis = stoppedOnPage(settlement, kind, row);
-  return crisis && crisisMarkText(settlement, crisis) ? STOPPED_WORD[crisis] || null : null;
+  const words = [crisis && crisisMarkText(settlement, crisis) ? STOPPED_WORD[crisis] || null : null, shortOnPage(settlement, kind, row) ? SHORT_WORD : null].filter(Boolean);
+  return words.length ? words.join(', ') : null;
 }
 
 /**
- * The leaf's one head line for a chapter whose rows these are, when at least one is marked; else null.
+ * The leaf's one head line for a chapter whose rows these are, when at least one is marked (by a crisis or short of its
+ * input); else null.
  * @param {object | null | undefined} settlement
  * @param {ReadonlyArray<readonly ['service' | 'house' | 'chain' | 'income', Record<string, unknown> | null | undefined]>} rows
  * @returns {string | null}
  */
 export function ordinaryTimesOnPage(settlement, rows) {
-  if (crisesOf(settlement).length === 0) return null;
   const marked = [];
+  let shortMarked = false;
   for (const [kind, row] of rows) {
     const crisis = stoppedOnPage(settlement, kind, row);
     if (crisis && crisisMarkText(settlement, crisis)) marked.push(crisis);
+    if (!shortMarked && shortOnPage(settlement, kind, row)) shortMarked = true;
   }
-  return ordinaryTimesLine(marked);
+  return ordinaryTimesLine(marked, shortMarked);
 }

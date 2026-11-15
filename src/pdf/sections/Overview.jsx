@@ -318,7 +318,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
             <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>{`Historical character: ${historyAt}.`}</Text>
           ) : null}
           {o.settlementReason ? <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 3 }}>
-            <Text style={{ color: palette.muted }}>Reason settled: </Text>
+            <Text style={{ color: palette.muted }}>Settlement Origin: </Text>{/* TAIL-EXPORTS-PDF-3 (ruling E23): the origin line says where, not why: the heading the Overview tab prints over it */}
             {o.settlementReason}
           </Text> : null}
         </View>

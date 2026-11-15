@@ -122,7 +122,7 @@ function overviewPage(vm, { historyPrinted = true } = {}) {
       `- **${esc(x.label || 'Crisis')}**: ${esc(x.summary || '')}${x.hook ? ` *Hook: ${esc(x.hook)}*` : ''}`)) : null,
     o.arrivalScene ? md('', '## Arrival', `> ${esc(o.arrivalScene)}`) : null,
     o.pressureSentence ? md('', `*${esc(o.pressureSentence)}*`) : null,
-    o.settlementReason ? md('', '## Why this place exists', esc(o.settlementReason)) : null,
+    o.settlementReason ? md('', '## Settlement Origin', esc(o.settlementReason)) /* TAIL-EXPORTS-PDF-3 (ruling E23, the heading lent): the Overview tab's heading over the same line */ : null,
     // The historical character prints once per journal: on the History page where the variant has
     // one, else here (the keep-on rule; the chair's B4 ruling (2), 2026-11-09).
     !historyPrinted && o.character ? md('', '## Character', esc(o.character)) : null,
