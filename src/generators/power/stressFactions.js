@@ -315,7 +315,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ((he.power = Math.round(he.power * 1.5)),
             (he.desc =
               (he.desc || '') +
-              (sovereign ? WARTIME_SOVEREIGN_MILITARY.text : ' Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.'))),
+              (sovereign ? WARTIME_SOVEREIGN_MILITARY.text : ' Wartime has turned this power from a civic institution into an arm of the war. Crown authority over the war flows through military channels now.'))), // BAR3-POWERS (C9941): no rank the final roster may deny ("a primary power centre" printed beside a Minor power)
             (he.faction.toLowerCase().includes('merchant') || he.faction.toLowerCase().includes('guild')) &&
               (ye
                 ? ((he.power = Math.round(he.power * 1.2)),
@@ -458,6 +458,6 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
  * declares the crisis it names. Kept at the file's end so no cited line above it moves.
  */
 const WARTIME_SOVEREIGN_MILITARY = Object.freeze({
-  text: ' Wartime has transformed this power from a civic institution into a primary power centre. Authority flows through military channels now.',
+  text: ' Wartime has turned this power from a civic institution into an arm of the war. Authority over the war flows through military channels now.', // BAR3-POWERS (C9941): no rank
   needs: Object.freeze(['crisis: wartime']),
 });

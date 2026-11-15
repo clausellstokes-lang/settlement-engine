@@ -855,7 +855,6 @@
    ["market", "after-release", " The revolt has disrupted labour supply and market operations. The power is divided between those demanding immediate su", "ccaaeac9c4b54b1a"],
    ["war", "after-release", " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispen", "caeb27e9d9b0c063"],
    ["war", "after-release", " The pastoral burden of wartime (the called-up praying before departure, families grieving) has made the institution ind", "e79e17a2fcc956e9"],
-   ["war", "after-release", " Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through ", "5862258693cdbcc2"],
    ["war", "after-release", "Crown-appointed emergency body coordinating supply, conscription, and military contracting. While the war goes well, few", "f37c733e6716f3be"]
   ],
   "src/generators/priorityHelpers.js": [

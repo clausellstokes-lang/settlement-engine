@@ -25,7 +25,7 @@ const MIXED = 'Power is distributed across multiple factions without a clear dom
 // The three standing frames that name the power above (factionStanding.js, rank 1).
 const FRAMES = [
   { re: /The gap between them and (.+?) is narrow\./, rel: 'narrow' },
-  { re: /They operate in the shadow of (.+?) but not comfortably/, rel: 'above' },
+  { re: /They operate in the shadow of (.+?), close enough to matter/, rel: 'above' }, // BAR3-POWERS (C45570, 2026-11-15): the frame re-keyed by its reworded text
   { re: /Behind (.+?) by (?:enough margin|too much)/, rel: 'above' },
 ];
 

@@ -98,7 +98,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
                 ? (standing = topFactionName
                     ? 'They operate in the shadow of ' +
                       (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
-                      ' but not comfortably: they are waiting for a chance to push back.'
+                      ', close enough to matter and too far behind to lead.' // BAR3-POWERS (C45570): no grudge the pair's relation row may deny ("symbiotic, stable")
                     : 'They are strong enough to resist those above them, but too far behind to risk an open fight.')
                 : (standing = topFactionName
                     ? 'Behind ' +

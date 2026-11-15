@@ -339,9 +339,12 @@ export function withCaptureRelations(powerStructure, state) {
  */
 export function withConflictRelations(powerStructure, conflicts) {
   const rows = Array.isArray(powerStructure?.factionRelationships) ? powerStructure.factionRelationships : null;
-  const high = (Array.isArray(conflicts) ? conflicts : []).filter((c) => c?.intensity === 'high' && Array.isArray(c.parties) && c.parties.length === 2 && c.issue);
+  // BAR3-POWERS (C21481, C51168; the chair's P3): a bargain ("each props up the other", "each needs the other") is false beside an open
+  // conflict of the same pair at ANY intensity, not only HIGH: every such row names the quarrel; only a HIGH one also turns the direction
+  const high = (Array.isArray(conflicts) ? conflicts : []).filter((c) => Boolean(c?.intensity) && Array.isArray(c.parties) && c.parties.length === 2 && c.issue);
   if (!rows || !high.length) return powerStructure;
-  const quarrelOf = (/** @type {string[]} */ pair) => high.find((c) => (c.parties[0] === pair[0] && c.parties[1] === pair[1]) || (c.parties[0] === pair[1] && c.parties[1] === pair[0])) || null;
+  const ofPair = (/** @type {any} */ c, /** @type {string[]} */ pair) => (c.parties[0] === pair[0] && c.parties[1] === pair[1]) || (c.parties[0] === pair[1] && c.parties[1] === pair[0]);
+  const quarrelOf = (/** @type {string[]} */ pair) => high.find((c) => c.intensity === 'high' && ofPair(c, pair)) || high.find((c) => ofPair(c, pair)) || null; // the gravest first
   let moved = false;
   const factionRelationships = rows.map((row) => {
     if (!row || !Array.isArray(row.pair)) return row;
@@ -353,16 +356,33 @@ export function withConflictRelations(powerStructure, conflicts) {
     const narrative = String(row.narrative || '');
     if (narrative === MERCHANT_CRAFT_VOTE.sibling(row.pair[0], row.pair[1]) || narrative.startsWith(`${row.pair[0]} and ${row.pair[1]} vote together against `)) {
       moved = true;
-      return { ...row, direction: 'escalating', narrative: MERCHANT_CRAFT_VOTE.atOdds(row.pair[0], row.pair[1], issue) };
+      return { ...row, direction: quarrel.intensity === 'high' ? 'escalating' : row.direction, narrative: MERCHANT_CRAFT_VOTE.atOdds(row.pair[0], row.pair[1], issue) };
     }
     if (row.type !== 'symbiotic' && row.type !== 'dependent') return row;
     moved = true;
     // TAIL-POWERS-B-4 (P31 (5)): the seat and the faith that "props up" its rule are not said to prop each other up beside a HIGH quarrel
     const ordained = ORDAINED_SEAT.exec(narrative);
-    if (ordained) return { ...row, direction: 'escalating', narrative: `${ordained[1]}; ${ordained[2]} ${ordained[3] === 'tells' ? 'has' : 'have'} long told people that ${ordained[4]} rule is right and ordained, but the two are now at odds over ${issue}.` };
-    return { ...row, direction: 'escalating', narrative: `${narrative} Even so, the two are now at odds over ${issue}.` };
+    const direction = quarrel.intensity === 'high' ? 'escalating' : row.direction;
+    if (ordained) return { ...row, direction, narrative: `${ordained[1]}; ${ordained[2]} ${ordained[3] === 'tells' ? 'has' : 'have'} long told people that ${ordained[4]} rule is right and ordained, but the two are now at odds over ${issue}.` };
+    return { ...row, direction, narrative: `${narrative} Even so, the two are now at odds over ${issue}.` };
   });
   return moved ? { ...powerStructure, factionRelationships } : powerStructure;
+}
+
+/**
+ * BAR3-POWERS (C27440, the chair's P3, vetoable by the owner): "The merchants have stopped attending the sessions. Both sides are
+ * now acting as if the other has already lost." (governanceNarrative.js :: deriveBaselineConflict) beside the seat's relation row
+ * with a merchant power that holds the pair settled ("subordinate", "symbiotic" or "dependent", and "stable"): the relation row is
+ * the pair's one home, so the boycott takes its twin, the same levy debate with no walk-out. Draw-free; text only.
+ * @param {unknown} recentConflict @param {ReadonlyArray<any>} relations @param {unknown} seat @returns {any}
+ */
+export function boycottReadsRelation(recentConflict, relations, seat) {
+  const BOYCOTT = 'The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.';
+  if (typeof recentConflict !== 'string' || !recentConflict.includes(BOYCOTT) || !seat) return recentConflict;
+  const settled = (Array.isArray(relations) ? relations : []).some((row) => Array.isArray(row?.pair) && row.pair.includes(seat)
+    && row.pair.some((name) => name !== seat && /merchant/i.test(String(name)))
+    && ['subordinate', 'symbiotic', 'dependent'].includes(row.type) && row.direction === 'stable');
+  return settled ? recentConflict.replace(BOYCOTT, 'The merchants have argued against every one of them, and nothing has been settled yet.') : recentConflict;
 }
 
 /**

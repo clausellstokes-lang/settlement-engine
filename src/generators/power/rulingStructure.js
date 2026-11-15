@@ -10,7 +10,7 @@ import { getInstFlags, getPriorities, getStressFlags, priorityToMultiplier } fro
 import {
   applyLegitimacyMultipliers,
   computeCriminalCaptureState,
-  computeFactionRelationships,
+  computeFactionRelationships, boycottReadsRelation, // BAR3-POWERS (C27440)
   computePublicLegitimacy,
 } from '../factionDynamics.js';
 import { inferFactionCategory } from './factionCategories.js';
@@ -346,7 +346,7 @@ export const generatePowerStructure = (
       'Military City Council':
         'Military officers hold decisive influence over civilian governance; the council ratifies what the commanders decide.',
       'Ecclesiastical Council':
-        'Senior clergy hold effective civic authority alongside elected aldermen; religious law shapes civil policy.',
+        'Senior clergy hold effective civic authority through the council; religious law shapes civil policy.', // BAR3-POWERS (C5398): no elected body the roster lacks
       'Merchant City Council': 'Wealthy merchants dominate council seats; trade interests drive policy and taxation.',
       'Corrupt City Council':
         'Nominally elected, effectively purchased; council seats are openly traded among criminal and commercial interests.',
@@ -553,7 +553,7 @@ export const generatePowerStructure = (
           : priorityToCategory(priorities.military) === 'low'
             ? ['hamlet', 'village', 'thorp'].includes(tier)
               ? 'Part-time armed volunteers with limited organisation; authority is moral rather than institutional.'
-              : 'Undermanned and underfunded; unable to enforce law consistently and aware of it.'
+              : (Array.isArray(projection.stressEntries) ? projection.stressEntries.map((e) => e?.type) : config?.stressTypes || (config?.stressType ? [config.stressType] : [])).includes('wartime') ? 'Kept small before the war, and the war has put more on it than it was built to carry.' : Number(projection.militaryGate) >= 1 ? 'Small for a place of this size; it cannot enforce the law everywhere at once, and it knows it.' : 'Undermanned and underfunded; unable to enforce law consistently and aware of it.' // BAR3-POWERS (C11669): no "undermanned" under a war (the stress entries line 672 reads), no "underfunded" where PP11's gate (on the replay) reads 1; the draw not moved
             : ['thorp', 'hamlet', 'village'].includes(tier)
               ? "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical."
               : tier === 'town'
@@ -695,7 +695,7 @@ export const generatePowerStructure = (
     stressTypes,
     stressEntries: stressEntries || [],
     fallbackStressType: stressType,
-    defenseLabel: projection.defenseLabel || null, militaryGate: projection.militaryGate ?? null, // POWERS-14 (NEW1): the record's readiness label, on the replay; PP11: its funding gate
+    failedFoodSource: economicState?.foodSecurity?.foodRecord?.failedSource ?? null, defenseLabel: projection.defenseLabel || null, militaryGate: projection.militaryGate ?? null, // POWERS-14 (NEW1): the record's readiness label, on the replay; PP11: its funding gate
   });
   // ── Public legitimacy & faction dynamics ────────────────────────────────
   // At this point defenseProfile isn't computed yet — we use a provisional
@@ -770,7 +770,7 @@ export const generatePowerStructure = (
     // while previousGovernments records what the seat used to be.
     government: (factions.find((f) => f.isGoverning) || {}).faction || null,
     stability: /^Stable(;|$)/.test(String(stability)) && publicLegitimacy?.label === 'Legitimacy Crisis' ? String(stability).replace(/^Stable/, "Tense (the seat has lost the people's trust)") : stability, // TAIL-POWERS-3 P16 (G2): no bare "Stable" beside a Legitimacy Crisis (the stability is written before the legitimacy)
-    recentConflict,
+    recentConflict: boycottReadsRelation(recentConflict, factionRelationships, governingFaction), // BAR3-POWERS (C27440): the boycott reads the pair's relation row
     publicLegitimacy,
     factionRelationships,
   };

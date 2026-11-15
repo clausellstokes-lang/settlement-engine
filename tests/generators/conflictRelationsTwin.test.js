@@ -3,7 +3,8 @@
  * A relation row called symbiotic or dependent where the conflicts hold the same pair at HIGH no longer reads 'stable'
  * with no word of the quarrel: on the final record (factionDynamics.js :: withConflictRelations, the pipeline's final-
  * roster seam) it keeps its kind and its bargain and takes a twin that names the quarrel, its direction 'escalating'.
- * A row of a pair at moderate, or of another kind (tense, subordinate), is kept as drawn.
+ * A row of another kind (tense, subordinate) is kept as drawn. BAR3-POWERS (C21481, C51168; 2026-11-15, the chair's P3): a
+ * bargain beside a conflict of the pair BELOW HIGH names the quarrel too, its direction kept (the arm below re-keyed so).
  * RED AT THE BASE (700ba76cf): every refused pair; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -68,12 +69,12 @@ describe('TAIL-POWERS-B-2 · P19: a pair at HIGH conflict is not called a stable
     });
     expectNoSeedFailures(failures, 'every row of those towns not at HIGH is kept as drawn');
   });
-  it('the seam alone: tense, subordinate and moderate rows are kept; the input is not mutated', async () => {
+  it('the seam alone: tense and subordinate rows are kept; a moderate bargain names its quarrel, its direction kept; the input is not mutated', async () => {
     const { withConflictRelations } = await import('../../src/generators/factionDynamics.js');
     const ps = { factionRelationships: [
       { pair: ['A', 'B'], type: 'symbiotic', direction: 'stable', narrative: 'A gives the orders.' },
       { pair: ['C', 'A'], type: 'tense', direction: 'stable', narrative: 'C rivals A.' }, // KEEP: not a bargain
-      { pair: ['A', 'D'], type: 'dependent', direction: 'stable', narrative: 'A needs D.' }, // KEEP: moderate only
+      { pair: ['A', 'D'], type: 'dependent', direction: 'stable', narrative: 'A needs D.' }, // moderate: named, direction kept (BAR3-POWERS)
     ] };
     const conflicts = [
       { parties: ['B', 'A'], intensity: 'high', issue: 'An unpaid debt between the two powers' },
@@ -83,7 +84,7 @@ describe('TAIL-POWERS-B-2 · P19: a pair at HIGH conflict is not called a stable
     const out = withConflictRelations(ps, conflicts);
     expect(out.factionRelationships[0]).toMatchObject({ type: 'symbiotic', direction: 'escalating', narrative: 'A gives the orders. Even so, the two are now at odds over an unpaid debt between the two powers.' });
     expect(out.factionRelationships[1]).toBe(ps.factionRelationships[1]);
-    expect(out.factionRelationships[2]).toBe(ps.factionRelationships[2]);
+    expect(out.factionRelationships[2]).toMatchObject({ type: 'dependent', direction: 'stable', narrative: 'A needs D. Even so, the two are now at odds over a loan called in early.' });
     expect(ps.factionRelationships[0].direction).toBe('stable');
     expect(withConflictRelations(ps, [])).toBe(ps);
   });

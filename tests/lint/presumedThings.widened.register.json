@@ -27536,12 +27536,6 @@
    [
     "clergy",
     "family",
-    "Senior clergy hold effective civic authority alongside elected aldermen; religious law shapes civil policy.",
-    "bf3fdd2bcb78b09f"
-   ],
-   [
-    "clergy",
-    "family",
     "Priests sit on the council, and church law and the council's law are hard to tell apart.",
     "e0703288ac745a8c"
    ],
@@ -27710,12 +27704,6 @@
     "family",
     "Free citizens, clergy, and outside agitators who have been supporting the revolt covertly: shelter, information, supplie",
     "1a88b6e5db039c00"
-   ],
-   [
-    "war",
-    "after-base: close-unprinted",
-    " Wartime has transformed this power from a civic institution into a primary power centre. Authority flows through milita",
-    "28bc9180db63875b"
    ]
   ],
   "src/generators/priorityHelpers.js": [
