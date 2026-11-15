@@ -1721,20 +1721,20 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} pays ${r.name} for a respectable name, and ${s.name}'s goods travel under it, past inspectors who never look inside.`, colour: true },
       { line: (r, s) =>
-        `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege
+        `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege (a declared line is no colour line: R-AO)
       { line: (r, s) =>
         `${s.name}'s money buys ${r.name}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.`, needs: ["market"] },
       { line: (r, s) =>
         `${r.name}'s shop front is real, the trade is real, and a third of the coin that passes through it belongs to ${s.name}.`, colour: true },
       { line: (r, s) =>
-        `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`, colour: true, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege
+        `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege (a declared line is no colour line: R-AO)
       { line: (r, s) =>
         `${r.name} holds the licence, ${s.name} supplies the goods, and the profit is split in a back room on the first of every month.`, colour: true },
     ], ['economy', 'criminal']),
     tension: pairProse('t', [
       { line: (r, s) => `If ${r.name} is investigated, ${s.name} is implicated, and the other way round. Both know it, and neither mentions it.`, colour: true },
       { line: (r, s) => `A clerk has begun checking ${r.name}'s ledgers against each other. Neither ${r.name} nor ${s.name} has decided what to do about it.`, colour: true },
-      { line: (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`, colour: true, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege
+      { line: (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`, excludes: ['crisis: under_siege'] }, // BAR3-PEOPLE (P1): nothing moves by road or through customs under a siege (a declared line is no colour line: R-AO)
       { line: (r, s) =>
         `${s.name} wants to move a larger cargo through ${r.name}'s warehouse next month. ${r.name} has not agreed and has not refused.`, colour: true },
       (r, s) =>

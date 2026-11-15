@@ -1,6 +1,6 @@
 # BAR3-PEOPLE · hand-back (groups POWERS and TIES; REVIEW-BAR-3 and the wide read)
 
-Base: the joined line at 59185b62a (read back from origin: the tip was 59185b62a). Branch `lane/bar3-people-2026-11-15`.
+Base: the joined line at 59185b62a (read back from origin: the tip was 59185b62a); 52f0a1684 merged at the chair's word (1e33478e6), the second tree since. Branch `lane/bar3-people-2026-11-15`.
 Worked in two scratch worktrees (tip; a detached 59185b62a), one `npm ci`, the base's `node_modules` a symlink.
 
 ## The directions I worked to (BRIEF-BAR3, section BAR3-PEOPLE; each measured first)
@@ -25,6 +25,15 @@ Rows (by id; ties counted on the record, towns by the inventory diff of the cens
 - A DECLARED MOVE: the record's `relationships[].description|tension` text (the twins; no index moves) and `generationCoherenceReceipt` (none once the tier-noun is cured; to be confirmed by the next census).
 - STRUCK: none of batch 1.
 
+## Batch 2 · POWERS P2 (`src/domain/dossier/powerStrata.js :: crisisNoteFor`), and the books' first reading
+
+- CURED, P2 C5598 and C7553 ("Holds the title; the decisions that matter are made by <power>."): at 59185b62a it prints in 91 of the 720; in 67 of them the record holds a relation row of the governing power and the named power that says otherwise ("tense": "the two do not agree on who decides"; "competitive": "taxes are bargained over, not ordered"; "dependent": "each props up the other"). BAR2-PEOPLE's PP2 test (`relationNamesDecider`) is widened to ANY relation row of the pair: the relation line is the pair's one home and the note claims no decider beside it (the rest of the note stands; where the claim was the whole note, the note is silent by design). Page only: no record moves.
+- THE GUARD: `tests/generators/bar3PeoplePowers.test.js` (r2r-village-1, -9, -41 refused, each asserting the note that prints instead; KEEP r2r-thorp-25, r2r-town-5): 3 of 5 red at 52f0a1684, 5 of 5 green at the tip. Eslint on the touched files 0.
+- THE AFTER CENSUS IS OWED: the container restarted at 20:05 UTC mid-render (359 of 720 dumps) and took the census and the books run with it. The measure stands on the record (67 towns by the relation rows); the inventory diff for batch 2 (and the confirmation that batch 1's two late rewordings, "the customs" and "before witnesses", leave the tier-noun battery and the presumed things where the base has them) is the successor's first act: `census3.sh <tip> <out> 4 --count-only`, `inventory.py`, `inventory_diff.py after1.json after2.json` (after1 is not kept: diff against a fresh base run at 52f0a1684).
+- THE CHAIR'S THREE CORPUS WALKERS (negativeAssertionAnchor, seedLoopTotality, proseDrawnAnchors), run alone at the tip: each red, and each red the same at 52f0a1684 for the last round's files (`bar2Places2Rows`, `bar2People3Funding`, `bar2CorpusGuards`): neither of my two test files is among their offenders.
+- THE BOOKS, PARTIAL (the restart cut the run at its 19th of 42 files; each run alone at the tip): green: every law suite reached before the cut but these four. `tests/generators/generationForkCensus.test.js` and `tests/generators/pipelinePinnedMode.test.js`: red on purpose at the base (the chair's list of golden-derived files): the base's. `tests/data/colourMarks4h.test.js`: MY REGRESSION OF A LAW, cured: the two siege-declared econ_crim_blur rows (desc#6 the carts, tension#2 the seasons) had kept `colour: true` beside `excludes`, and a colour line declares nothing else (R-AO, `factVocabulary.js :: isColourLine`): the mark is taken off both; the arm now reds only on the ledger's stored colour rows for those two ids (named below). `tests/generators/power/bar2PeoplePowers.test.js`: its KEEP pair r2r-village-28 was a line my P2 cure refuses (village-28 holds a "tense" relation row of the pair): RE-KEYED BY IDENTITY beside a dated note to the same sibling in a town with no relation row (r2r-thorp-25); 11 of 11 green. NOT RUN (owed, in this order): the rest of `runs/books.final` (the law suites from `tests/lint/proseComposed.walker` on, the tie pinning tests `tests/generators/tie*.test.js`, `tests/generators/people/*`, `tests/lint/hookThemeTotality.walker.test.js`, `tests/domain/roles/roleClass.test.js`, `tests/generators/blocLineSharedPower.test.js`), each alone at the tip and, if red, alone at 52f0a1684.
+- THE 525 REFERENCE CONFIGURATIONS: NOT COUNTED (owed). Batch 1 moves `relationships[].description|tension` text wherever a twin, a reword or a siege refusal writes; batch 2 moves no record.
+
 ## EVERY NEW OR CHANGED LINE (the owner's veto list)
 
 Every line read in the towns the census names for it (the smallest and the largest size; a siege among them where it prints there):
@@ -42,23 +51,36 @@ Every line read in the towns the census names for it (the smallest and the large
 - "... The friendship is courteous, and it lasts only while that reckoning holds." (r2r-city-0, r2r-hamlet-12; 253)
 - (declarations, no new text) the three econ_crim_blur lines and the two coaching-inn secrets refused under a siege.
 
-## THE (filled after the books are run: below) MY CURES MOVE (named; NOT re-taken)
+## THE BOOKS MY CURES MOVE (named; NOT re-taken)
 
-(filled after the books are run: below)
+| test | arm | old | new | door | batch |
+|---|---|---|---|---|---|
+| `tests/data/colourMarks4h.test.js` | "the tie prose: every colour variant is `{ line, colour: true }`" | the ledger `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json` rows `econ_crim_blur.desc#6` and `econ_crim_blur.tension#2` `colour: true` | the live rows are declared lines (`excludes: ['crisis: under_siege']`), no colour | the declarations ledger's door | 1 |
+| `tests/property/generatorGoldenMaster.test.js` and the golden-derived files | the records | (red at the base on purpose) | batch 1's tie text moves | the close's doors, the owner's word | 1 |
+
+
+## The chair's grants copied
+
+- PG1 (19:53, vetoable): `src/generators/npcGenerator.js` is mine for C35097 only (the debt's direction in a secret reads the one debt the tie states); a declared move if the record moves; its draw not moved. WIDENED (20:14) to the crisis secret's `{faction}` filler (P4, C5844 "decisions taken by Military/Guard"): the slot takes the power's sentence name from `powerSentenceName.js`. NEITHER DONE.
+- REGISTRATIONS OWED, NAMED AND NOT MADE: MANIFEST ENTRY OWED (`scripts/mutation-coverage-manifest.json`) for `tests/generators/bar3PeopleTies.test.js` (kills a removed `votes`/`sharedTrade` declaration or twin in `npcData.js :: closureFor`, a lost siege `excludes`) and `tests/generators/bar3PeoplePowers.test.js` (kills a narrowed pair test in `powerStrata.js :: relationNamesDecider`). ROSTER ROW OWED: none (no goods module imported; batch 1's one new import is `domain/facts/sharedPower.js` into `src/data/npcData.js`).
 
 ## Rows named for other seats
 
-- C35097 (old_debt d4 "<r> owes <s> a large sum" against <s>'s secret "Owes <r> a debt ..."): THE SECRET'S WRITER IS `src/generators/npcGenerator.js :: generateCrimeLevel` (CRIME_KNOWLEDGE row 3, its `otherNpc` drawn at random), not a file of mine: for its seat: the row needs the pair's debt direction (the town's ties) at that draw, or the secret's `otherNpc` refused where a tie of that pair says the debt runs the other way. Not cured.
+- P5's third clause ("No office, no title, no vote.") is `src/data/institutionDescVariants.js`'s: BAR3-PLACES's (the chair, 20:08): struck from this list.
+
+- (now mine under PG1, not done) C35097 (old_debt d4 "<r> owes <s> a large sum" against <s>'s secret "Owes <r> a debt ..."): THE SECRET'S WRITER IS `src/generators/npcGenerator.js :: generateCrimeLevel` (CRIME_KNOWLEDGE row 3, its `otherNpc` drawn at random), not a file of mine: for its seat: the row needs the pair's debt direction (the town's ties) at that draw, or the secret's `otherNpc` refused where a tie of that pair says the debt runs the other way. Not cured.
 
 ## What is left, IN ORDER (for a successor: read this and nothing else)
 
-1. (P2, MEASURED, NOT CURED) `src/domain/dossier/powerStrata.js :: crisisNoteFor` "Holds the title; the decisions that matter are made by <power>." (C5598, C7553): prints in 91 of the 720; in 67 of them the record holds a relation row of the same pair that says otherwise ("tense": "the two do not agree on who decides"; "competitive": "taxes are bargained over, not ordered"; "dependent": "each props up the other"). THE CURE (page only, no record move): generalise BAR2-PEOPLE's PP2 `relationNamesDecider` to ANY relation row of the governing power and the decider: the relation line is the pair's one home and the note is then silent (67 towns lose a false line; the fracture reading stands, no slot mute). Guard on births: r2r-village-1, -9, -41 (red), a no-relation town (KEEP).
-2. (P3) `stressFactions.js` "Wartime has transformed this power ... into a primary power centre" (C9941, 13 towns) for a Minor power; `rulingStructure.js` "Undermanned and underfunded" (C11669, 34) for a reinforced, paid garrison under war; `factionStanding.js` C14176 and C45570; `factionDynamics.js` C21481, C51168 (a bargain beside an open conflict of the same pair); `governanceNarrative.js` C27440 ("The merchants have stopped attending" beside "subordinate, stable"), C36418 ("The last harvest failed badly" where the failed source is the fish); `governanceAccount.js` C31100 (the hall bargains with an occupier). The stressFactions and rulingStructure texts are registered presumed things (rows keyed by text): a reword moves register rows (amendment 3's door).
-3. (P4, P5 rest) "Military/Guard" in a secret (`powerSentenceName.js`); `faceHonorifics.js` "Lord Mayor"/"Lord Marshal" for a woman (C7390, C47468); `rulingStructure.js` C5398 "elected aldermen" under a theocracy; `powerSiblings.js` C34874 (a grazing dispute where QUARRELS is none).
-4. THE SET-APART HOOKS (amendment 5: 3 bar rows and 14 wide rows): not read this round.
-5. C35097 (named above, for npcGenerator's seat).
+1. THE AFTER CENSUS OF BATCH 2 AND THE REST OF THE BOOKS (above, "owed"), and the 525 count, at the tip against 52f0a1684.
+2. C35097 and P4's C5844 under PG1 (`npcGenerator.js`: the secret's debt direction; the crisis secret's `{faction}` filler through `powerSentenceName.js`).
+3. (P6, from BAR3-LABELS and BAR3-SERVICES) C35020 and C33899 "Dairyman" for a woman: `src/data/faceHonorifics.js`'s personal honorifics that name a sex take the holder's form or a neutral word (as `src/data/holderTitleForms.js` gives the face's); "Dairy Farmer" is true of either sex. Measure on the 720 first. An OFFICE's title (`officeTitles.js`: Lord Mayor, Lord Marshal) is the office's (M-1b): C7390 and C47468 are STRUCK.
+4. (P7) C7806, C7914 "Flaw: corrupt" beside "Temperament: incorruptible/honest" on one card: the flaw's pool admits by the temperament; the number of draws not moved; measure the 720's pairs first.
+5. (P3) `stressFactions.js` "Wartime has transformed this power ... into a primary power centre" (C9941, 13 towns) for a Minor power; `rulingStructure.js` "Undermanned and underfunded" (C11669, 34) for a reinforced, paid garrison under war; `factionStanding.js` C14176 and C45570; `factionDynamics.js` C21481, C51168 (a bargain beside an open conflict of the same pair); `governanceNarrative.js` C27440 ("The merchants have stopped attending" beside "subordinate, stable"), C36418 ("The last harvest failed badly" where the failed source is the fish); `governanceAccount.js` C31100 (the hall bargains with an occupier). The stressFactions and rulingStructure texts are registered presumed things (rows keyed by text): a reword moves register rows (amendment 3's door).
+6. (P5 rest) `rulingStructure.js` C5398 "elected aldermen" under a theocracy; `powerSiblings.js` C34874 (a grazing dispute where QUARRELS is none).
+7. THE SET-APART HOOKS (amendment 5: 3 bar rows and 14 wide rows): not read this round.
 
 ## How the instruments are re-made
 
 - THE CENSUS: `git archive` `docs/chair/2026-11-14/probes/CENSUS-3` out of `origin/lane/census-3-2026-11-14` and `docs/chair/2026-11-14/probes/READ-ALL/{inventory,inventory_diff}.py` out of `origin/lane/chair-2026-11-08` into a scratch directory; `sh census3.sh <tree> <out> 4 --count-only` (the before at the base tree, the after at the tip tree; about 25 minutes each, two at once fit in memory but a third process is killed); `inventory.py <out> <inv.json>`; `inventory_diff.py before.json after.json <rows.json>`.
-- THE ROW MEASURE (by record, not by render): `measure1.py <corpus.ndjson.gz>` (kept in this hand-back's appendix below): per tie line, the printings and the printings the record makes false (the voter's seat: any membership; the pair's power in common; the pair's trade: one house family or one category not `other`; the siege: `stress[].type === 'under_siege'`). A tie's `r` is its `from` card unless its `proseVariant` is `REVERSED_TIE` (65536) or more.
+- THE ROW MEASURE (by record, not by render): a short script over `corpus.ndjson.gz` (scratch, not committed: re-write it from this description): per tie line, the printings and the printings the record makes false (the voter's seat: any membership; the pair's power in common; the pair's trade: one house family or one category not `other`; the siege: `stress[].type === 'under_siege'`). A tie's `r` is its `from` card unless its `proseVariant` is `REVERSED_TIE` (65536) or more.

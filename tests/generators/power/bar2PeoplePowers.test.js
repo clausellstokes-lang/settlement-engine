@@ -67,7 +67,9 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
 ]);
 /** KEEP: [town, a true sibling that must still print] */
 const KEEP = /** @type {Array<[string, string]>} */ ([
-  ['r2r-village-28', 'Holds the title; the decisions that matter are made by Religious Authorities.'], // no relation line names the decider: the note stays its home
+  // BAR3-PEOPLE (P2), 2026-11-15, re-keyed by identity: r2r-village-28 holds a relation row of the pair ("the two do not agree on
+  // who decides"), so its note now claims no decider (bar3PeoplePowers.test.js refuses it); the same sibling where NO relation row of the pair stands:
+  ['r2r-thorp-25', "Holds the title; the decisions that matter are made by People's Council."], // no relation row of the pair: the note stays its home
   ['r2r-city-41', 'Carters are waiting at the post because two sets of men each claim the right to collect the toll.'], // no siege
   ['r2r-hamlet-3', 'so they get their way through petitions and procedure instead.'], // the Guard, no occupier: the ladder's line stands
 ]);
