@@ -2823,7 +2823,7 @@ supplies the ancestry.
 
 **`Beasts & Monsters`: `plagued`, perimeter AND organized force**
 1. `[ledger · colour]` The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly.
-2. `[street · gate · no crisis: under_siege · no crisis: occupied]` Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
+2. `[street · gate · no crisis: under_siege · no crisis: occupied · no crisis: monster_pressure · no crisis: wartime]` Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
 3. `[unfolding · colour]` {settlement}'s walls and fighters face the creatures season after season.
 4. `[visitor · colour]` {settlement} keeps its wall against the creatures, and nobody walks out past it unarmed.
 
@@ -2932,7 +2932,7 @@ supplies the ancestry.
 5. `[ledger · crisis: debt]` The debt takes much of what {settlement} earns, but what is left still keeps the town's own business running.
 6. `[street · crisis: debt]` People in {settlement} complain of what the creditor takes, but the town still meets its payments.
 7. `[unfolding · crisis: debt]` {settlement} cannot pay off what it owes, but it can carry the debt, and for now it does.
-8. `[street · no crisis]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
+8. `[street · no crisis · food: ≥ secure]` Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
 9. `[ledger · crisis · no crisis: debt · no crisis: famine · no crisis: occupied · prosperity: ≥ poor]` Whatever the present trouble costs {settlement}, the town is paying it from money it had put by.
 10. `[street · crisis: famine]` Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
 11. `[visitor · crisis: famine]` Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
@@ -2945,8 +2945,8 @@ supplies the ancestry.
 3. `[threshold]` {settlement} can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
 
 **`Economic Survival`: `WEAK`** {colour}
-1. `[ledger · guardPresence]` {settlement}'s pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.
-2. `[street · guardPresence]` The people who would have to hold {settlement} through something are already owed, and they have not forgotten it.
+1. `[ledger · guardPresence]` {settlement} is always short of money for its defence: whoever is called to defend it is paid late or not at all, and is slow to turn out when trouble comes.
+2. `[street · guardPresence]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
 3. `[unfolding]` {settlement} has been short of money for years, and each lean season leaves less to spend when a real crisis comes.
 4. `[ledger · no guardPresence]` {settlement} pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
 5. `[street · no guardPresence]` If {settlement} ever had to hire people to defend it, it would have to borrow the money first.
@@ -2987,8 +2987,8 @@ in about two towns in five that keep a force.
 6. `[street · crisis: under_siege · food: famine]` The siege has brought hunger to {settlement}, and what its food trades put by is rationed now.
 
 **CHAIN: food trades failing** {colour}
-1. `[ledger · no crisis: under_siege]` {settlement}'s food trades are failing, so little food is being put by; if the town were cut off, it would have less to fall back on.
-2. `[street · no crisis: under_siege]` The food trades at {settlement} are struggling to keep up, and little is being put by against the town being cut off.
+1. `[ledger · no crisis: under_siege]` {settlement}'s food trades are failing, so less food is being put by than should be; if the town were cut off, it would have less to fall back on than it ought.
+2. `[street · no crisis: under_siege]` The food trades at {settlement} are struggling to keep up, and less is being put by against the town being cut off than ought to be.
 3. `[unfolding · no crisis: under_siege]` {settlement}'s food trades are failing, and each season they fail the town has less put by to fall back on if it is cut off.
 4. `[ledger · crisis: under_siege]` {settlement} is cut off now, and its food trades were failing before the siege began, so less was put by than there should have been.
 5. `[street · crisis: under_siege]` With {settlement} cut off, people count the stores every week, and the food trades that should have filled them were failing before the siege began.

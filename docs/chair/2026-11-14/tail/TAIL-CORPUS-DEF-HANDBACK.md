@@ -362,26 +362,56 @@ the presumed-things walker (it presumes the occupation; the register is shrink-o
 Declared (no new words): DS-DEF-2 court without detention v1, v2 `no crisis: under_siege`; DS-CND-1 insurgency
 worsening v3, occupied stable v4, succession stable v3 `market`.
 
-## Verified for batch 5 (DS-DEF-2, the widest rows by C16), not yet cured
-- STRUCK, true by the record: **B01461** (CHAIN defence supplied v2, 32 towns: `defenseProfile.chainModifiers.military > 0`
-  in all 32; the chains' "vulnerable" is a fragility, not a failure); **20442 20443** (CHAIN defence short v3, 14 + 14:
-  `chainModifiers.military < 0` in all; the reader read the prosperity and a bowyer, not the chain); **23535** (walls with
-  citizen militia v1, 18: walls on the record in all 18; "inadequate against anybody who arrives professionally" is the
-  Vulnerable the reader saw).
-- TO CURE: **01607** (Economic Survival WEAK v1 "paid late … people owed wages", 15: 13 of 15 keep only an unpaid militia
-  or levy: reword v1, v2 to claim no wages owed); **01541 B19529** (CHAIN food trades failing v1, v2 "little food is being
-  put by", 17 + 9: stores of 6 to 15 months in every printing town: reword to claim the shortfall, not the stock);
-  **B06130** (Beasts plagued perimeter AND force v2 "not an emergency arrangement", 8: 2 under a monster_pressure or a
-  wartime crisis: declare `no crisis: monster_pressure · no crisis: wartime`); **14935** (STRONG v8 "Nobody … lies awake
-  over a lean year", 15: 2 with a food deficit, `pressured`: declare `food: ≥ secure`).
-- NAMED, a class with two homes: **20245 21035 22321** (STRONG v12 "went into this trouble with money in hand", 43 towns,
-  12 Poor or Struggling) and its sibling v3 (41, 15): the Economic Survival score (`defenseGenerator.js`, `W.floors.sup`)
-  against the prosperity ladder. v1 floors at `prosperity: ≥ moderate`, v9 at `≥ poor` (earlier seats); flooring v3 and
-  v12 leaves a Struggling town in a crisis MUTE, and no twin is true without knowing what the score counts: the chair's.
+## Batch 5 — DS-DEF-2: the widest rows by C16 (commit after 51f0f553a)
 
-## What is left (after batch 4; THE CURRENT LIST)
-1. Batch 5 as verified above (DS-DEF-2: 01607, 01541, B19529, B06130, 14935 to cure; B01461, 20442, 20443, 23535 to strike).
-2. Then by C16 (five towns or more, widest first), at cff6cd098's census: 03383 DS-DEF-5 ARCANE alchemists v1 (17);
+| row(s) | pool · line | false in (by the record) | cure | towns before → after (inventory) |
+|---|---|---|---|---|
+| 01607 (+ v2) | Economic Survival WEAK v1 "pay book … people owed wages"; v2 "are already owed" | 13 of 15 (an unpaid militia or levy only: no watch, garrison or hire) | REWORDED v1, v2 (no wages owed) | 15→0, 24→0 |
+| 01541 B19529 (+ tiers) | CHAIN food trades failing v1 "so little food is being put by"; v2 "little is being put by" | every printing town holds 6 to 15 months of stores (the chain is failing; the stock is not small) | REWORDED v1, v2 (the shortfall, not the stock) | 10/4/3→0, 6/3→0 |
+| B06130 | Beasts plagued, perimeter AND force v2 "not an emergency arrangement … nobody treats any of it as unusual" | 2 of 8 (a monster crisis, a war) | DECLARED `no crisis: monster_pressure · no crisis: wartime` | 8→6 |
+| 14935 (sibling fold) | Economic Survival STRONG v8 "Nobody … lies awake over a lean year" | the town fold: 2 of 15 (`food: pressured`, deficits 6% and 8%) | DECLARED `food: ≥ secure` | town fold 15→13 |
+
+STRUCK, true by the record: **14935** itself (the metropolis fold, 15 towns, all `food: secure`; the reader's town
+r2r-metropolis-38 is `secure` with 15 months of stores: its 5% deficit is inside the band); **B01461** (CHAIN defence
+supplied v2, 32: `defenseProfile.chainModifiers.military > 0` in all 32; the chains' "vulnerable" is a fragility, not a
+failure); **20442 20443** (CHAIN defence short v3, 14 + 14: `chainModifiers.military < 0` in all; the reader read the
+prosperity and a bowyer, not the chain); **23535** (walls with citizen militia v1, 18: walls on the record in all 18;
+"inadequate against anybody who arrives professionally" is the Vulnerable the reader saw).
+MEASURED BY REPLAY (over batch 4's census): Beasts plagued v2→v4 1 (r2s-monster_pressure-city-0), v2→v1 1
+(r2s-wartime-town-0); STRONG v8→v1 2 (r2r-town-42, r2r-town-9). NO OTHER POOL MOVED.
+INVENTORY DIFF (batch 4 → batch 5): 29,860 → 29,861; 7 gone, 8 new; the rows: 3 GONE, B06130 and 14935's town fold fewer
+by exactly their measure; no other line in fewer towns. INHERITORS read where they print: the new words (below); STRONG
+v1 ("accounts have money in hand", prosperity ≥ moderate) in the two pressured towns; Beasts v4 ("keeps its wall …
+nobody walks out past it unarmed") in the monster-crisis city and v1 ("thick with creatures … both in use constantly")
+in the war town: TRUE.
+GUARD: tailCorpusDefGuards +3 DECLARED, +2 KEEP, +4 REWORDED: 7 red at batch 4's tip, the keeps green; 56 green after.
+No pin moved.
+GATES: generator 0 / `--check` 0; strict 0; ratchet 0; eslint 0; presumed-things fresh 147 stale 0 (exit 1, as the base);
+grid 2 falls (as the base); the named files: the same 33 reds.
+
+### New or changed lines (the owner's veto list)
+23. DS-DEF-2 Economic Survival WEAK v1: "{settlement} is always short of money for its defence: whoever is called to
+    defend it is paid late or not at all, and is slow to turn out when trouble comes." — 15: r2s-politically_fractured-
+    thorp-2 · r2r-town-7 · r2s-occupied-thorp-0 (an occupation).
+24. WEAK v2: "The people who would have to hold {settlement} through something know there is no money to pay them for
+    it." — 24: r2r-thorp-7 · r2s-succession_void-town-3 · r2r-thorp-27 (an occupation).
+25. CHAIN food trades failing v1: "{settlement}'s food trades are failing, so less food is being put by than should be;
+    if the town were cut off, it would have less to fall back on than it ought." — 17: r2r-town-3 · r2r-metropolis-6 ·
+    r2s-occupied-city-0 (an occupation).
+26. CHAIN food trades failing v2: "The food trades at {settlement} are struggling to keep up, and less is being put by
+    against the town being cut off than ought to be." — 9: r2s-religious_conversion-city-1 · r2s-slave_revolt-
+    metropolis-0 · r2s-famine-metropolis-2 (a famine).
+Declared (no new words): Beasts plagued perimeter AND force v2; Economic Survival STRONG v8.
+
+### Named from batch 5's verification (a class with two homes)
+- **20245 21035 22321** (STRONG v12 "went into this trouble with money in hand", 43 towns, 12 Poor or Struggling) and its
+  sibling v3 (41, 15): the Economic Survival score (`defenseGenerator.js`, `W.floors.sup`) against the prosperity ladder.
+  v1 floors at `prosperity: ≥ moderate`, v9 at `≥ poor` (earlier seats); flooring v3 and v12 leaves a Struggling town in a
+  crisis MUTE, and no twin is true without knowing what the score counts: the chair's.
+
+## What is left (after batch 5; THE CURRENT LIST)
+1. Batch 5 is landed.
+2. By C16 (five towns or more, widest first), at cff6cd098's census: 03383 DS-DEF-5 ARCANE alchemists v1 (17);
    28625 DS-DEF-1 readiness STRONG v2 (15); 23021 DS-DEF-11 WALLED-QUIET v1 (14); 20059 DS-DEF-3 COMPOUND succession v3
    (13); 00779 DS-DEF-11 UNWALLED-SMALL v5 (12); B00729 DS-DEF-3 COMPOUND migration v1 (12); B20295 DS-DEF-6 port only v2
    (11); B14096 / 00985 DS-DEF-8 QUARANTINE v2 / v1 (11, 9); 23379 DS-DEF-8 RELIGIOUS UPHEAVAL v3 (10); 14024 DS-DEF-8

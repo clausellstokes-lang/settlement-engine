@@ -39,6 +39,9 @@ const DECLARED = [
   { batch: 4, seed: 'r2s-insurgency-thorp-1', pool: 'DS-CND-1::DIRECTION: worsening · CRISIS: insurgency', vid: 3, instead: 2, why: 'no market: "fewer merchants pay what the government asks" (row 07715)' },
   { batch: 4, seed: 'r2s-occupied-hamlet-1', pool: 'DS-CND-1::DIRECTION: stable · CRISIS: occupied', vid: 4, instead: 1, why: 'no market: "merchants pay the occupiers the same share of every sale" (row 13414)' },
   { batch: 4, seed: 'r2s-succession_void-thorp-3', pool: 'DS-CND-1::DIRECTION: stable · CRISIS: succession_void', vid: 3, instead: 1, why: 'no market: "merchants deal season to season" (row 15102)' },
+  { batch: 5, seed: 'r2s-wartime-town-0', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, instead: 1, why: 'a war: "not an emergency arrangement … nobody treats any of it as unusual" (row B06130)' },
+  { batch: 5, seed: 'r2s-monster_pressure-city-0', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, instead: 4, why: 'a monster crisis: "not an emergency arrangement" (row B06130\'s class)' },
+  { batch: 5, seed: 'r2r-town-42', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 8, instead: 1, why: 'a food deficit even now (pressured): "nobody lies awake over a lean year" (row 14935)' },
 ];
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */
 const KEEP = [
@@ -53,6 +56,8 @@ const KEEP = [
   { batch: 4, seed: 'r2s-insurgency-city-0', pool: 'DS-CND-1::DIRECTION: worsening · CRISIS: insurgency', vid: 3, why: 'an insurgency in a city with a market: merchants pay the rivals' },
   { batch: 4, seed: 'r2s-occupied-city-3', pool: 'DS-CND-1::DIRECTION: stable · CRISIS: occupied', vid: 4, why: 'an occupied city with a market: merchants pay the occupiers their share' },
   { batch: 4, seed: 'r2s-succession_void-city-0', pool: 'DS-CND-1::DIRECTION: stable · CRISIS: succession_void', vid: 3, why: 'a succession void in a city with a market: merchants deal season to season' },
+  { batch: 5, seed: 'r2r-city-34', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, why: 'a plagued walled city at peace: the defence is the week\'s work' },
+  { batch: 5, seed: 'r2r-town-16', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 8, why: 'a secure food record, no crisis: a lean year would not frighten it' },
 ];
 /** @type {ReadonlyArray<{batch: number, pool: string, vid: number, gone: RegExp, now: string, rows: string}>} */
 const REWORDED = [
@@ -76,6 +81,10 @@ const REWORDED = [
   { batch: 4, pool: 'DS-CND-1::DIRECTION: stable · CRISIS: religious_conversion', vid: 1, gone: /settled into habit|neighbours do not ask/, now: 'is no nearer an end', rows: '21580: a Tense town whose faith quarrel the page calls escalating (5)' },
   { batch: 4, pool: 'DS-CND-1::DIRECTION: worsening · CRISIS: slave_revolt', vid: 1, gone: /more work gangs/, now: 'spreads further each week', rows: '21712: a thorp of 15 has no work gangs (1 of 5)' },
   { batch: 4, pool: 'DS-CND-1::DIRECTION: stable · CRISIS: succession_void', vid: 2, gone: /the old officers/, now: 'what was done before is still done', rows: 'the inheritor of v3 in a thorp or village with no officers' },
+  { batch: 5, pool: 'DS-DEF-2::Economic Survival: WEAK', vid: 1, gone: /pay book|people owed wages/, now: 'whoever is called to defend it is paid late or not at all', rows: '01607: an unpaid militia or levy is owed no wages (13 of 15)' },
+  { batch: 5, pool: 'DS-DEF-2::Economic Survival: WEAK', vid: 2, gone: /are already owed/, now: 'know there is no money to pay them for it', rows: 'v1\'s sibling: an unpaid levy is owed nothing' },
+  { batch: 5, pool: 'DS-DEF-2::CHAIN: food trades failing', vid: 1, gone: /so little food is being put by/, now: 'less food is being put by than should be', rows: '01541: stores of 6 to 15 months in every printing town' },
+  { batch: 5, pool: 'DS-DEF-2::CHAIN: food trades failing', vid: 2, gone: /little is being put by against/, now: 'less is being put by against the town being cut off than ought to be', rows: 'B19529: a granary and 15 months of stores' },
 ];
 
 /** @type {Record<string, any>} */
