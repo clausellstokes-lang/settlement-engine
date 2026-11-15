@@ -52,6 +52,7 @@ import { HISTORICAL_EVENTS_DATA, TENSIONS_THAT_NEED_THEIR_OWN_EVENT, tensionHeld
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** A reader's town re-born in the app's own shape (the seed's tier and ticked crises). */
 const born = (/** @type {string} */ seed) => {
@@ -113,10 +114,17 @@ describe('W2-FIX-DATA-HISTORY item C: the occupation\'s legacy only where the ti
   });
 
   // GUARDS: the readers' own towns with no occupation on the timeline (a thorp under a siege, ww-254; a calm city, ww-752..756)
+  /** a phrase each guard town's own current tensions print (the liveness anchor of the JSON the negative reads) */
+  const TENSION_ANCHOR = /** @type {Record<string, string>} */ ({
+    'rww-thorp-under_siege-1': 'has no dependable trade route', 'rww-city-calm-1': 'Crime is rising faster than those in charge can answer it',
+    'rww-hamlet-under_siege-1': 'has no dependable trade route',
+  });
   for (const seed of ['rww-thorp-under_siege-1', 'rww-city-calm-1', 'rww-hamlet-under_siege-1']) {
     it(`${seed}: no tension speaks of collaborators or an occupier, and the town keeps a tension`, () => {
       const s = born(seed);
       expect(s.history.historicalEvents.some((/** @type {any} */ e) => e.templateType === 'occupation_legacy'), 'no occupation on the timeline').toBe(false);
+      expect(JSON.stringify(s.history.currentTensions)).toContain(TENSION_ANCHOR[seed]);
+      // anchored: the positive above (the town's own tension phrase) holds on the same JSON; the i flag keeps the regex
       expect(JSON.stringify(s.history.currentTensions)).not.toMatch(OCCUPATION_WORDS);
       expect(s.history.currentTensions.length).toBeGreaterThan(0);
     }, 60_000);
@@ -126,7 +134,7 @@ describe('W2-FIX-DATA-HISTORY item C: the occupation\'s legacy only where the ti
     expect(factsOf(s).crisis.kinds).toContain('occupied');
     const own = s.history.historicalEvents.find((/** @type {any} */ e) => e.templateType === 'occupation_legacy');
     expect(own, 'the past Occupation on the timeline').toBeTruthy();
-    expect(historyText(s)).not.toContain('former occupier officer');
+    expectAbsentWithAnchor(historyText(s), 'former occupier officer', 'The Occupation'); // the past Occupation, whose hooks would carry the officer
   }, 60_000);
 });
 
@@ -148,7 +156,7 @@ describe('W2-FIX-DATA-HISTORY item L: the lead says what the town lives on by it
     const timber = (s.economicState.incomeSources || []).find((/** @type {any} */ r) => r.source === 'Timber Trade');
     expect(timber && timber.percentage, 'timber is a lesser source here').toBeLessThan(50);
     const text = historyText(s);
-    expect(text).not.toContain('runs mostly on the timber trade');
+    expectAbsentWithAnchor(text, 'runs mostly on the timber trade', 'the timber trade is under strain');
     expect(text).toContain('Among the trades the place lives by, the timber trade is under strain.');
   }, 60_000);
 });
@@ -168,13 +176,23 @@ describe('W2-FIX-DATA-HISTORY item D: a culture detail of a larger place does no
     }
   });
 
+  /** LARGE's literals, one by one (a plain-literal alternation: exactly equivalent) */
+  const LARGE_WORDS = LARGE.source.split('|');
+  /** seed -> [a phrase its own detail prints, a phrase its own arrival prints] (the liveness anchors) */
+  const PRINTS = /** @type {Record<string, [string, string]>} */ ({
+    'rww-thorp-under_siege-1': ['fenced garden plots', 'Nets hang drying on poles'],
+    'rww-hamlet-succession_void-1': ['planted courtyards', 'Barrels of salt fish stand stacked by the water'],
+    'rpf-thorp-occupied-13': ['deep eaves shade the open ground', 'notices are posted in two languages'],
+    'rw3-thorp-famine-1': ['a raised path and a water channel', 'Porters bent under loaded frames'],
+    'rr2s-village-calm-port-1': ['households cluster around shared wells', 'Households cluster around shared wells'],
+  });
   // GUARDS: the readers' small towns that printed a larger place's detail at the base
   for (const seed of ['rww-thorp-under_siege-1', 'rww-hamlet-succession_void-1', 'rpf-thorp-occupied-13', 'rw3-thorp-famine-1', 'rr2s-village-calm-port-1']) {
     it(`${seed}: its detail (record, PDF, arrival) names no larger place's ground, and it keeps one`, () => {
       const s = born(seed);
       expect(['thorp', 'hamlet', 'village']).toContain(s.tier);
-      expect(String(s.culturalIdentity.architecturalDetail)).not.toMatch(LARGE);
-      expect(String(s.arrivalScene)).not.toMatch(LARGE);
+      for (const w of LARGE_WORDS) expectAbsentWithAnchor(String(s.culturalIdentity.architecturalDetail), w, PRINTS[seed][0], `${seed} detail`);
+      for (const w of LARGE_WORDS) expectAbsentWithAnchor(String(s.arrivalScene), w, PRINTS[seed][1], `${seed} arrival`);
       expect(String(s.culturalIdentity.architecturalDetail).length).toBeGreaterThan(0);
     }, 60_000);
   }
@@ -183,14 +201,15 @@ describe('W2-FIX-DATA-HISTORY item D: a culture detail of a larger place does no
 describe('W2-FIX-DATA-HISTORY item B: the culture\'s foodways sentence only where the place\'s own table makes it true', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   const foodways = (/** @type {any} */ s) => String(s.economicState?.foodSecurity?.foodRecord?.foodwaysLine || '');
-  for (const [seed, words, why] of /** @type {const} */ ([
-    ['rww-thorp-calm-1', /Herding and mixed farming|Herds and field grain/, 'a thorp that eats game (ww-10)'],
-    ['rww-thorp-monster_pressure-1', /neighborhood vendors|Public ovens/, 'a thorp with no market and no neighbourhoods'],
-    ['rww-hamlet-succession_void-1', /urban food supply|waterworks/, 'a hamlet of 31'],
+  for (const [seed, words, why, anchor] of /** @type {const} */ ([
+    // [seed, the sentences' words (each was a plain-literal alternation), why, a phrase its own foodways line prints]
+    ['rww-thorp-calm-1', ['Herding and mixed farming', 'Herds and field grain'], 'a thorp that eats game (ww-10)', 'Meals follow the season'],
+    ['rww-thorp-monster_pressure-1', ['neighborhood vendors', 'Public ovens'], 'a thorp with no market and no neighbourhoods', 'cheese and smoked meat'],
+    ['rww-hamlet-succession_void-1', ['urban food supply', 'waterworks'], 'a hamlet of 31', "The table is the day's catch"],
   ])) {
     it(`${seed}: ${why} reads no such sentence, and keeps a foodways line`, () => {
       const s = born(seed);
-      expect(foodways(s)).not.toMatch(words);
+      for (const w of words) expectAbsentWithAnchor(foodways(s), w, anchor, seed);
       expect(foodways(s).length).toBeGreaterThan(0);
     }, 60_000);
   }
@@ -207,6 +226,8 @@ describe('W2-FIX-DATA-HISTORY item E: the resource events and two timeline hooks
   it('each text resolves to its twin, or is dropped, where the town makes it false', () => {
     const construction = { description: "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.", lastingEffects: ["Quarrymen's guild retains unusual civic influence"], plotHooks: [] };
     const small = sizedResourceEvent(construction, village([]));
+    expect(small.description).toContain('raised from local quarry stone');
+    // anchored: the positive above (the twin's own words) holds on the same description; the i flag keeps the regex
     expect(small.description).not.toMatch(/civic buildings|cathedral/i);
     expect(small.lastingEffects).toEqual(["The quarrymen's families retain unusual civic influence"]);
     expect(sizedResourceEvent(construction, village(['Craft guilds (5-15)', 'Parish church'], 'town'))).toEqual(construction);
@@ -228,15 +249,16 @@ describe('W2-FIX-DATA-HISTORY item E: the resource events and two timeline hooks
   });
 
   // GUARDS: the readers' towns that printed them at the base
-  for (const [seed, words] of /** @type {const} */ ([
-    ['rww-village-religious_conversion-1', /Civic buildings or a cathedral|Quarrymen's guild/], // ww-90, a village of 89
-    ['rw3-thorp-famine-1', /the guilds negotiated/],
-    ['rww-hamlet-succession_void-1', /controls extraction|original mining contract|Fortified extraction sites|affected district/],
-    ['rpf-village-occupied-13', /A healer who profited/],
+  for (const [seed, words, anchor] of /** @type {const} */ ([
+    // [seed, the words (each was a plain-literal alternation), a phrase its own history prints]
+    ['rww-village-religious_conversion-1', ['Civic buildings or a cathedral', "Quarrymen's guild"], 'its larger houses raised from local quarry stone'], // ww-90, a village of 89
+    ['rw3-thorp-famine-1', ['the guilds negotiated'], 'the major farming families agreed'],
+    ['rww-hamlet-succession_void-1', ['controls extraction', 'original mining contract', 'Fortified extraction sites', 'affected district'], 'who holds those rights to this day'],
+    ['rpf-village-occupied-13', ['A healer who profited'], 'The Occupation'],
   ])) {
     it(`${seed}: no history line names what the town lacks`, () => {
       const s = born(seed);
-      expect(historyText(s)).not.toMatch(words);
+      for (const w of words) expectAbsentWithAnchor(historyText(s), w, anchor, seed);
       expect(s.history.historicalEvents.length).toBeGreaterThan(0);
     }, 60_000);
   }
@@ -254,11 +276,11 @@ describe('W2-FIX-DATA-HISTORY item F: the arrival and the inland fish stall say 
     expect(decl(said(ARRIVAL_PEOPLE.arabic, 'A merchant swears'))).toEqual({ needs: ['market'], excludes: [] });
     const timber = ARRIVAL_SENSES.find((/** @type {any} */ s) => s.key === 'timber');
     expect(decl(said(timber.dominant, 'Stacks of seasoning planks'))).toEqual({ needs: [], excludes: ['crisis: under_siege'] });
-    expect(INLAND_DESCRIPTIONS['village|Economy|Fish market']).not.toMatch(/brought in by cart|price holds/);
+    for (const w of ['brought in by cart', 'price holds']) expectAbsentWithAnchor(INLAND_DESCRIPTIONS['village|Economy|Fish market'], w, 'salted and smoked fish');
   });
   it('rww-hamlet-succession_void-1 (ww-541): a hamlet of 31 is told of no lanes of trades', () => {
     const s = born('rww-hamlet-succession_void-1');
-    expect(String(s.arrivalScene)).not.toContain('Each lane seems to keep to its own trade');
+    expectAbsentWithAnchor(String(s.arrivalScene), 'Each lane seems to keep to its own trade', 'A clerk records every cartload that passes'); // the people line drawn in its place
     expect(String(s.arrivalScene)).toMatch(/\S/);
   }, 60_000);
 });
@@ -270,17 +292,18 @@ describe('W2-FIX-DATA-HISTORY item G: the succession, the shortage, the purge an
     for (const r of rows) expect(r.excludes).toEqual(['ruler: council', 'ruler: elder', 'crisis: succession_void']);
     expect(HISTORY_TEMPLATE_RECORD_DECLARATIONS.infiltration_fear).toEqual({ excludes: ['crisis: infiltrated'], timeline: false });
     expect(HISTORY_TEMPLATE_RECORD_DECLARATIONS.pilgrimage_surge).toEqual({ needs: ['institution: temple'], timeline: false });
-    expect(JSON.stringify(HISTORICAL_EVENTS_DATA)).not.toContain('A warehouse full of the scarce goods');
+    expectAbsentWithAnchor(JSON.stringify(HISTORICAL_EVENTS_DATA), 'A warehouse full of the scarce goods', 'A store of the scarce goods is being kept off the market on purpose');
   });
-  for (const [seed, words] of /** @type {const} */ ([
-    ['rpf-hamlet-occupied-13', /The ailing ruler wants a final errand/], // pf-160: a Household Council
-    ['rww-village-under_siege-1', /A warehouse full of the scarce goods/], // ww-1230: no warehouse
-    ['rww-metropolis-infiltrated-1', /Talk of enemy agents in the settlement|enemy agents within the settlement/], // ww-1261: nobody there knows
+  for (const [seed, words, anchor] of /** @type {const} */ ([
+    // [seed, the words (each was a plain-literal alternation), a phrase its own current tensions print]
+    ['rpf-hamlet-occupied-13', ['The ailing ruler wants a final errand'], "Rising water is the settlement's standing fear"], // pf-160: a Household Council
+    ['rww-village-under_siege-1', ['A warehouse full of the scarce goods'], 'A store of the scarce goods is being kept off the market on purpose'], // ww-1230: no warehouse
+    ['rww-metropolis-infiltrated-1', ['Talk of enemy agents in the settlement', 'enemy agents within the settlement'], 'Crime is rising faster than those in charge can answer it'], // ww-1261: nobody there knows
   ])) {
     it(`${seed}: no such line, and the town keeps a tension`, () => {
       const s = born(seed);
       // the current tensions (the infiltration's past Purge may stand on the timeline: a town may have hunted agents before)
-      expect(JSON.stringify(s.history.currentTensions)).not.toMatch(words);
+      for (const w of words) expectAbsentWithAnchor(JSON.stringify(s.history.currentTensions), w, anchor, seed);
       expect(s.history.currentTensions.length).toBeGreaterThan(0);
     }, 60_000);
   }

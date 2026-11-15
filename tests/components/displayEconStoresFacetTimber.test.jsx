@@ -91,15 +91,27 @@ describe('TAIL-DISPLAY-ECON-3 batch 3: the stores sentence takes the crisis; a f
     expectNoSeedFailures(failures, 'the tab prints the Tonight sheet\'s own stores sentence');
   }, 120000);
 
-  test.each(NOT)('%s (%s) does not print "%s"; instead: %s', (seed, tab, line, _instead, anchor) => {
-    expectAbsentWithAnchor(textOf(town(seed), tab), line, anchor, `${seed} (${tab})`);
+  test('every NOT row: its seed\'s tab does not print the line (every row runs; each failure names its seed, tab, line and what prints instead)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, tab, line, instead, anchor]) => {
+      try {
+        expectAbsentWithAnchor(textOf(town(seed), tab), line, anchor, `${seed} (${tab}) does not print "${line}"; instead: ${instead}`);
+      } finally { cleanup(); }
+    }), 'every NOT row: the false line does not print');
   }, 120000);
 
-  test.each(TWIN)('%s (%s) prints the twin "%s"', (seed, tab, line) => {
-    expect(textOf(town(seed), tab)).toContain(line);
+  test('every TWIN row: its seed\'s tab prints the twin (every row runs; each failure names its seed, tab and twin)', () => {
+    expectNoSeedFailures(collectSeedFailures(TWIN, ([seed, tab, line]) => {
+      try {
+        expect(textOf(town(seed), tab), `${seed} (${tab}) prints the twin "${line}"`).toContain(line);
+      } finally { cleanup(); }
+    }), 'every TWIN row: the twin prints');
   }, 120000);
 
-  test.each(KEEP)('%s (%s) still prints "%s"', (seed, tab, line) => {
-    expect(textOf(town(seed), tab)).toContain(line);
+  test('every KEEP row: its seed\'s tab still prints the line (every row runs; each failure names its seed, tab and line)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, tab, line]) => {
+      try {
+        expect(textOf(town(seed), tab), `${seed} (${tab}) still prints "${line}"`).toContain(line);
+      } finally { cleanup(); }
+    }), 'every KEEP row: the true sibling still prints');
   }, 120000);
 });

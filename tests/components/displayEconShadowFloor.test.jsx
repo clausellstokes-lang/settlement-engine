@@ -72,17 +72,25 @@ const KEEP = /** @type {const} */ ([
 ]);
 
 describe('TAIL-DISPLAY-ECON-5 (X30): the shadow economy prints where the record holds illicit money', () => {
-  test.each(NOT)('%s: %s does not print', (seed, gone, instead) => {
-    const text = textOf(town(seed));
-    // the liveness anchor first: the row's new words, or (a silent block) the Economic Flows section beside it, in the same text
-    if (instead === null) expect(text, 'the tab printed: its Economic Flows section stands').toContain('Economic Flows');
-    else expect(text).toMatch(instead);
-    // anchored: the positive just above reads this same text (the row's new words, or the Economic Flows section)
-    expect(text).not.toMatch(gone);
-    if (instead === null) expectAbsentWithAnchor(text, 'Off-book', 'Economic Flows', 'the block is silent: no capture chip either');
+  test('every NOT row: its seed does not print its line (every row runs; each failure names its seed and line)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, gone, instead]) => {
+      try {
+        const text = textOf(town(seed));
+        // the liveness anchor first: the row's new words, or (a silent block) the Economic Flows section beside it, in the same text
+        if (instead === null) expect(text, 'the tab printed: its Economic Flows section stands').toContain('Economic Flows');
+        else expect(text, `${seed}: ${instead} prints instead`).toMatch(instead);
+        // anchored: the positive just above reads this same text (the row's new words, or the Economic Flows section)
+        expect(text, `${seed}: ${gone} does not print`).not.toMatch(gone);
+        if (instead === null) expectAbsentWithAnchor(text, 'Off-book', 'Economic Flows', 'the block is silent: no capture chip either');
+      } finally { cleanup(); }
+    }), 'every NOT row: the line does not print, and the block is silent or prints what it counts');
   }, 60000);
-  test.each(KEEP)('%s: %s still prints', (seed, kept) => {
-    expect(textOf(town(seed))).toContain(kept);
+  test('every KEEP row: its seed still prints its line (every row runs; each failure names its seed and line)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, kept]) => {
+      try {
+        expect(textOf(town(seed)), `${seed}: ${kept} still prints`).toContain(kept);
+      } finally { cleanup(); }
+    }), 'every KEEP row: the line still prints');
   }, 60000);
   test('ONE HOME: the leaf prints a capture exactly where the record holds a criminal income share', () => {
     const failures = collectSeedFailures(['r2r-hamlet-0', 'r2r-thorp-8', 'r2r-metropolis-15', 'r2r-city-0'], (seed) => {

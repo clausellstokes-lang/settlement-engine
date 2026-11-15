@@ -14,6 +14,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/dens
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { settleClaimsToLabel } from '../../../src/generators/power/claimStanding.js';
 import { annotateFactionStanding } from '../../../src/generators/power/factionStanding.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 const ARMY = 'Standing army with genuine political weight; command appointments are patronage, and the council knows it.';
 const NEXUS = 'Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.';
@@ -84,14 +85,14 @@ describe('TAIL-POWERS-B batch 2 · a council is named only where one sits', () =
     it(what, () => {
       const text = line();
       expect(text, `prints instead: ${instead}`).toContain(instead);
-      expect(text).not.toContain(refused);
+      expectAbsentWithAnchor(text, refused, instead, `${what}: refused beside what prints instead`);
     });
   }
   for (const [seed, refused, instead] of BIRTHS) {
     it(`${seed}: not "${refused}"`, () => {
       const text = births[seed].powerStructure.factions.map((/** @type {any} */ f) => f.desc || '').join(' ');
       expect(text, `prints instead: ${instead}`).toContain(instead);
-      expect(text).not.toContain(refused);
+      expectAbsentWithAnchor(text, refused, instead, `${seed}: refused beside what prints instead`);
     });
   }
 });

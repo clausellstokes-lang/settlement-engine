@@ -35,6 +35,7 @@ import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js'
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** @param {string} seed */
 const birth720 = (seed) => {
@@ -138,7 +139,7 @@ describe('a chain\'s state is one fact on the tab, the PDF and the journal (SURF
     const md = buildJournalPages(buildViewModel({ settlement: town }), { settlement: town }).find((p) => p.name === 'Economics & Trade')?.markdown || '';
     expect(town.economicState.activeChains.some((/** @type {any} */ c) => c.status === 'entrepot'), 'anchored: an entrepôt chain').toBe(true);
     expect(md).toContain('*(entrepôt)*');
-    expect(md).not.toContain('*(entrepot)*');
+    expectAbsentWithAnchor(md, '*(entrepot)*', '*(entrepôt)*', 'the journal prints the tab word');
     expect(disagreements(town)).toEqual([]);
   }, 120000);
 

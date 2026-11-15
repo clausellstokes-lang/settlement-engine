@@ -15,6 +15,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shape @param {string} seed */
@@ -43,7 +44,7 @@ describe('TAIL-POWERS-4 · batch 1: a conflict line claims what the place bears'
   for (const [seed, [was, now]] of Object.entries(CURED)) {
     it(`${seed}: the conflict reads "${now}", not "${was}"`, () => {
       const rc = String(born(seed).powerStructure.recentConflict || '');
-      expect(rc, seed).not.toContain(was);
+      expectAbsentWithAnchor(rc, was, now, seed);
       expect(rc, seed).toContain(now);
     }, 120_000);
   }

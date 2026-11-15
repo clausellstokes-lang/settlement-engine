@@ -17,6 +17,7 @@
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -87,13 +88,17 @@ describe('the food figures are one fact on the tab and the PDF; the journal prin
   beforeAll(async () => { await loadGenerationLawPayloads(); for (const s of SEEDS) TOWNS[s] = birth(s); }, 120000);
   afterEach(cleanup);
 
-  test.each(SEEDS)('%s: the PDF block prints the tab row\'s production, need, Short, provision, and an import cover only where the row imports', (seed) => {
-    const town = TOWNS[seed]; const tab = tabRow(town); const pdf = pdfBlock(town);
-    expect(tab.t, `${seed}: the tab prints its row`).not.toBe('');
-    expect(pdf.b, `${seed}: the PDF prints its block`).not.toBe('');
-    expect({ production: pdf.production, need: pdf.need, deficit: pdf.deficit, provision: pdf.provision }, `${seed}: PDF ${pdf.b} / tab ${tab.t}`)
-      .toEqual({ production: tab.production, need: tab.need, deficit: tab.short, provision: tab.provision });
-    if (pdf.cover != null) expect(tab.imported, `${seed}: the PDF's import cover where the tab's row brings nothing in`).toBeGreaterThan(0);
+  test('every seed: the PDF block prints the tab row\'s production, need, Short, provision, and an import cover only where the row imports (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(SEEDS, (seed) => {
+      try {
+        const town = TOWNS[seed]; const tab = tabRow(town); const pdf = pdfBlock(town);
+        expect(tab.t, `${seed}: the tab prints its row`).not.toBe('');
+        expect(pdf.b, `${seed}: the PDF prints its block`).not.toBe('');
+        expect({ production: pdf.production, need: pdf.need, deficit: pdf.deficit, provision: pdf.provision }, `${seed}: PDF ${pdf.b} / tab ${tab.t}`)
+          .toEqual({ production: tab.production, need: tab.need, deficit: tab.short, provision: tab.provision });
+        if (pdf.cover != null) expect(tab.imported, `${seed}: the PDF's import cover where the tab's row brings nothing in`).toBeGreaterThan(0);
+      } finally { cleanup(); }
+    }), 'every seed: the PDF block prints the tab row\'s food figures');
   });
 
   test('the guard town keeps its import cover and its provision on the PDF', () => {
@@ -102,9 +107,13 @@ describe('the food figures are one fact on the tab and the PDF; the journal prin
     expect(pdf.provision).toBeGreaterThan(0);
   });
 
-  test.each(SEEDS)('%s: the journal\'s Economics Food row is the food word, or no row', (seed) => {
-    const town = TOWNS[seed]; const word = foodWordShown(town)?.label ?? null;
-    const row = journalFoodRow(town);
-    expect(row, seed).toBe(word ? `- **Food:** ${word}` : null);
+  test('every seed: the journal\'s Economics Food row is the food word, or no row (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(SEEDS, (seed) => {
+      try {
+        const town = TOWNS[seed]; const word = foodWordShown(town)?.label ?? null;
+        const row = journalFoodRow(town);
+        expect(row, seed).toBe(word ? `- **Food:** ${word}` : null);
+      } finally { cleanup(); }
+    }), 'every seed: the journal\'s Economics Food row is the food word, or no row');
   });
 });
