@@ -651,5 +651,15 @@ lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
     "What food there is goes to whoever can pay the holder's price." (36 of the 720; was "What food is put by …").
 
 ## What is left (TAIL-CORPUS-DEF-5's list, current)
-1. All seven named U2 reds green at bb667e11 (76/76 with tailDefeconSafetyLines). NEXT: C25, tests/ui/defenseTabFlow.test.js
-   (83883baaa declared: re-key the fixture's premise by identity to a house the roster still files as arcane defence).
+- **defenseTabFlow** (C25, 1 of 21): 83883baaa (UPKEEP-CAPACITY C6, G5, declared: the alchemist is a trade) leaves no
+  dead-magic birth with a house filed as arcane defence (nomagic-a..z; r2r-town/city/metropolis-0..19, magic off).
+  RE-KEYED (ii): STOP-2's premise is r2r-city-0 of the 720's configuration (Scroll scribe, Enchanter's shop), its own
+  record with the magic dial off; anchored on its live record, where the group prints. Plant (arcaneDefenseOf's gate
+  off) reds it. 21/21.
+
+## What is left (TAIL-CORPUS-DEF-5's list, current)
+1. All seven named U2 reds and C25's defenseTabFlow green (bb667e11 and after). Nothing lent to this seat is left.
+2. Seen, not chased (not lent): rv2-wartime-hamlet-5 (walls, no force, 60 Adequate) prints the Invasion line "has walls
+   and nobody to put on them. A determined attacker takes this town …" beside an Adequate bar; threatRowsTrueUnderBand's
+   FALSE_UNDER holds "A determined attacker" false under ADEQUATE on the readiness rows (its law's births are rv2-calm and
+   rv2-under_siege, so it does not read this town). For the chair to place.
