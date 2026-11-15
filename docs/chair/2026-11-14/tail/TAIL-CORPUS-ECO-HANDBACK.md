@@ -42,6 +42,11 @@ DS-SUP sections only) and tests.
   (C8) A CLASS BEING MEASURED, not this seat's to move: prose written before its facts are final (a line true when drawn and
   false because the record moved afterwards): a row found to be that is NAMED with that reason.
   (X9) THE EXPORTS' READ found no row of these pools that only the PDF and the journal print: nothing to take.
+  (C11, 2026-11-15 01:01) The joined line at eeaa06816 holds `ruling body` and `rival power`: merge it at THAT tip only when a
+  parked row needs one. THIS SEAT: no row of these pools is parked on either (the five parked rows are C6's): NOT MERGED.
+  (C12, 2026-11-15 01:12) THE SIEGE'S SEA EXCEPTION: the record holds the sea open to one besieged port (r2s-under_siege-city-0, food
+  by ship); DS-ECO-1 C4 v4 and DS-ECO-9 IMPORT-DEPENDENT v5 are reworded to claim what every siege bears (the roads closed, nothing
+  by road): text only, no pool moved, no atom. Taken as batch 4.
 - BRIEF-TAIL whole: a flag is a candidate, verified by the record; batches; silence is true but a silence of TRUE lines in
   more than twenty towns is told first; a state left mute takes a twin; a draw is not moved outside the row's pool; under a
   siege nothing comes in or goes out; under a famine no line offers the food that failed; no new vocabulary word; every new or
@@ -232,6 +237,17 @@ Doors: generator --check 0; the grid 2 falls (= base); strict-domain 0, the type
 test files naming the leaves: the base's 40 reds exactly (carried from the joined line), plus the presumed walker's stale-row red
 the next commit cures; the guard 83 green.
 
+### Batch 4 · the chair's ruling C12 (DS-ECO-1 C4 v4, DS-ECO-9 IMPORT-DEPENDENT v5) · REWORDED, no draw moved
+
+| line | old | new | prints | false by the record |
+|---|---|---|---|---|
+| DS-ECO-1 C4 v4 | "With the siege closing every way in, ..." | "With the siege closing the roads, {settlement} has lost what passing trade used to leave behind, and the town feels the loss." | 14 | 1 (r2s-under_siege-city-0: the sea open, food by ship) |
+| DS-ECO-9 IMPORT-DEPENDENT v5 | "... none of it has come since the siege closed the roads." | "Whatever {settlement} used to buy for its table, none of it has come by road since the siege began." | 3 | 1 (the same port) |
+
+GUARD: 2 GONE rows (r2s-under_siege-city-0, both red at the base) and 2 KEEP rows (the stems, green before and after); the guard 86
+green. Doors: generator --check 0; presumed fresh 147, stale 0; the grid 2 falls (= base); strict-domain 0, the type ratchet 0,
+eslint 0; the 70 leaf-naming files: the base's 40 reds exactly.
+
 ## The veto list (every new or reworded line, with the towns it was read in)
 
 Batch 1 (DS-ECO-12; read where the old line printed, the reword in its place; smallest / largest / a crisis):
@@ -288,6 +304,12 @@ Batch 3 (TAIL-CORPUS-ECO-2; smallest / largest / a crisis, from the before run's
   outside." — r2s-plague_onset-thorp-0, r2r-village-50, r2s-occupied-village-1 (an occupation).
 - DS-ECO-9 HOW THE NEED v1: "Food comes into {settlement} most days, and it matters: a good part of what the town eats is grown
   elsewhere and brought in." — r2s-famine-hamlet-0 (a famine), r2r-metropolis-0, r2r-village-24 (a famine).
+
+Batch 4 (C12; read where they print: smallest / largest / the sea exception):
+- DS-ECO-1 C4 v4: "With the siege closing the roads, {settlement} has lost what passing trade used to leave behind, and the town
+  feels the loss." — r2s-under_siege-thorp-1, r2s-under_siege-metropolis-2, r2s-under_siege-city-0 (the sea open).
+- DS-ECO-9 IMPORT-DEPENDENT v5: "Whatever {settlement} used to buy for its table, none of it has come by road since the siege
+  began." — r2s-under_siege-hamlet-2, r2s-under_siege-metropolis-3, r2s-under_siege-city-0 (the sea open: true, the food comes by ship).
 
 ## Rows struck (true by the record), with why
 

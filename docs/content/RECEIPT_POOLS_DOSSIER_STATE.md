@@ -828,7 +828,7 @@ the access.
 1. `[ledger · no crisis: under_siege · no crisis: plague_onset]` Trade comes and goes by {settlement}'s {access}, and the town stays poor all the same.
 2. `[street · no crisis: under_siege · no crisis: plague_onset]` Some trade comes past {settlement}, and little of it stops. The town is poor, and its people say so to anyone who asks.
 3. `[visitor · market · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s {access} is busy, but little of what passes leaves its money here, and the traders at the market are poor.
-4. `[ledger · crisis: under_siege]` With the siege closing every way in, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.
+4. `[ledger · crisis: under_siege]` With the siege closing the roads, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.
 5. `[street · crisis: under_siege]` The siege has stopped {settlement}'s trade moving at all, and the money that trade brought in has stopped with it.
 6. `[visitor · no market · no crisis: under_siege · no crisis: plague_onset]` There is no market at {settlement} to hold the trade that passes by, and the town stays poor while the trade goes on its way.
 7. `[ledger · crisis: under_siege]` Since the siege began, no passing traffic brings money into {settlement}, and nothing has taken its place.
@@ -1328,7 +1328,7 @@ sentence in two voices. **No named deaths.**
 2. `[street · grain · crisis: any · no crisis: under_siege]` The carts feed this town as much as the fields do. Everybody knows what day they come and what it means if they do not.
 3. `[threshold · no hunger]` {settlement} cannot feed itself from its own land, and everything rests on what comes in from outside.
 4. `[ledger · hunger · no crisis: under_siege]` A substantial part of what {settlement} eats is bought, and under the hunger the bought part comes short. The stores cover the gap and are drawn down to do it.
-5. `[ledger · crisis: under_siege]` Whatever {settlement} used to buy for its table, none of it has come since the siege closed the roads.
+5. `[ledger · crisis: under_siege]` Whatever {settlement} used to buy for its table, none of it has come by road since the siege began.
 6. `[street · crisis: under_siege]` The trade that fed {settlement} is shut out by the siege, and the town is finding out what it can live without.
 
 **DEFICIT**

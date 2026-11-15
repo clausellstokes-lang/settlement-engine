@@ -84,6 +84,9 @@ const GONE = [
   { seed: 'r2s-under_siege-hamlet-2', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /the others carry it/, prints: 1, why: 'a siege, 35% short: "the others carry it" (20660; v2 + `food: ≥ secure`)' },
   { seed: 'r2r-thorp-41', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /without going hungry/, prints: 1, why: 'already short: "can take a bad season ... without going hungry" (28996; v3 + `food: ≥ secure`)' },
   { seed: 'r2r-city-31', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', gone: /Food carts/, prints: 1, why: 'a river town, its food by boat: "Food carts come in most days" (09248; v1 reworded)' },
+  // ── BATCH 4 · the chair's ruling C12, the siege's sea exception: the two siege lines claim the roads, not every way in (REWORDED, the same vid) ──
+  { seed: 'r2s-under_siege-city-0', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', gone: /every way in/, prints: 4, why: 'a besieged port the sea keeps open (food by ship): "the siege closing every way in" (C12; v4 now "closing the roads")' },
+  { seed: 'r2s-under_siege-city-0', pool: 'DS-ECO-9::IMPORT-DEPENDENT', gone: /since the siege closed the roads/, prints: 5, why: 'the same port: "none of it has come since the siege closed the roads" where ships bring food (C12; v5 now "none of it has come by road")' },
 ];
 /** @type {ReadonlyArray<KeepRow>} */
 const KEEP = [
@@ -129,6 +132,9 @@ const KEEP = [
   { seed: 'r2r-village-50', pool: 'DS-ECO-9::IMPORT-DEPENDENT', keep: 3, text: /everything (about it )?rests on/, why: 'the stem' },
   { seed: 'r2r-city-14', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', keep: 3, text: /without going hungry/, why: 'food secure' },
   { seed: 'r2r-city-27', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', keep: 1, text: /a good part of what the town eats is grown elsewhere and brought in/, why: 'the stem' },
+  // ── BATCH 4 (C12) ──
+  { seed: 'r2s-under_siege-town-0', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', keep: 4, text: /has lost what passing trade used to leave behind/, why: 'the stem, old and new' },
+  { seed: 'r2s-under_siege-hamlet-2', pool: 'DS-ECO-9::IMPORT-DEPENDENT', keep: 5, text: /^Whatever \{settlement\} used to buy for its table, none of it has come/, why: 'the stem, old and new' },
 ];
 
 /** CENSUS-3 seedcfg.mjs's r2r-/r2s- arms, verbatim in shape. @param {string} seed */
