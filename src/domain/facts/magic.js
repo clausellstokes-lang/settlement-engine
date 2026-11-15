@@ -142,3 +142,18 @@ export function economyShowsMagic(record) {
       return typeof source === 'string' && MAGIC_ECONOMY.test(source);
     });
 }
+
+/**
+ * The arcane houses the economy's arcane-industry line names (UPKEEP-12 #115: the mages' guild's sentence only where a
+ * guild or an academy of magic stands). TAIL-CLOSE-SRC-3: the list moved verbatim from `economy/economicState.js ::
+ * arcaneIndustryLineOf` into the magic fact's home; a mages' guild is a house of magic, not a trade guild.
+ */
+export const ARCANE_GUILD_HOUSES = Object.freeze(["mages' guild", "mages' district", 'arcane academy', 'academy of magic', 'magical academy']);
+
+/**
+ * Whether an arcane guild house stands, asked through the caller's own roster test (the economy's `hasInst`).
+ * @param {(...names: string[]) => boolean} hasInst @returns {boolean}
+ */
+export function arcaneGuildHouseStands(hasInst) {
+  return hasInst(...ARCANE_GUILD_HOUSES);
+}
