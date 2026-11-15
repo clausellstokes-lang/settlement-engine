@@ -1,0 +1,39 @@
+STRUCK OR SET APART: 5 {'MARK ADJACENT': 3, 'STATES ITS OWN FACT': 2}
+   LOW  city-under_siege+famine-rand-6     b  | ServicesFresh produce
+   MED  hamlet-calm-rand-6                 ab | The most devout households want a say over who may trade and when, and not everyone here a
+   LOW  thorp-calm-rand-8                  a  | A dispute over grazing rights and water access has run for two seasons, and those on each 
+   LOW  city-under_siege+famine-rand-8     b  | ServicesArmed escort
+   MED  city-under_siege+famine-rand-8     b  | ServicesQuality furs
+
+THE COUNT A TOWN AFTER THE CHECK:
+  bar0-city-under_siege+famine-rand-6    HIGH  0 · MED   3 · LOW   4
+  bar0-city-under_siege+famine-rand-7    HIGH  0 · MED   3 · LOW   6
+  bar0-city-under_siege+famine-rand-8    HIGH  0 · MED   5 · LOW   4
+  bar0-city-wartime-rand-6               HIGH  0 · MED   6 · LOW   5
+  bar0-city-wartime-rand-7               HIGH  0 · MED   6 · LOW   2
+  bar0-city-wartime-rand-8               HIGH  0 · MED   2 · LOW   4
+  bar0-hamlet-calm-rand-6                HIGH  0 · MED   0 · LOW   3
+  bar0-hamlet-calm-rand-7                HIGH  0 · MED   3 · LOW   0
+  bar0-hamlet-under_siege-rand-6         HIGH  0 · MED   6 · LOW   1
+  bar0-hamlet-under_siege-rand-7         HIGH  0 · MED   4 · LOW   2
+  bar0-hamlet-under_siege-rand-8         HIGH  0 · MED   1 · LOW   7
+  bar0-metropolis-calm-rand-6            HIGH  0 · MED   3 · LOW   5
+  bar0-metropolis-calm-rand-7            HIGH  0 · MED   7 · LOW   4
+  bar0-metropolis-calm-rand-8            HIGH  0 · MED   6 · LOW   4
+  bar0-thorp-calm-rand-6                 HIGH  0 · MED   2 · LOW   6
+  bar0-thorp-calm-rand-7                 HIGH  0 · MED   3 · LOW   4
+  bar0-thorp-calm-rand-8                 HIGH  0 · MED   4 · LOW   4
+  bar0-town-calm-rand-6                  HIGH  0 · MED   1 · LOW   6
+  bar0-town-calm-rand-7                  HIGH  0 · MED   3 · LOW   1
+  bar0-town-calm-rand-8                  HIGH  0 · MED   0 · LOW   2
+  bar0-town-occupied-rand-6              HIGH  0 · MED   2 · LOW   4
+  bar0-town-occupied-rand-7              HIGH  0 · MED  13 · LOW   2
+  bar0-town-occupied-rand-8              HIGH  0 · MED   1 · LOW   7
+  bar0-village-calm-rand-6               HIGH  0 · MED   1 · LOW   1
+  bar0-village-calm-rand-7               HIGH  0 · MED   3 · LOW   5
+  bar0-village-calm-rand-8               HIGH  0 · MED   3 · LOW   6
+  bar0-village-famine-rand-6             HIGH  0 · MED   3 · LOW   5
+  bar0-village-famine-rand-7             HIGH  0 · MED   4 · LOW   1
+  bar0-village-famine-rand-8             HIGH  0 · MED   2 · LOW   1
+  IN ALL: HIGH 0 · MED 100 · LOW 106 · a town: HIGH+MED 3.3
+TWO READERS after the check (HIGH and MED): a 76 · b 81 · both 57 · union 100

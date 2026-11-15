@@ -1,0 +1,113 @@
+[
+{
+"id": "C0456",
+"sev": "LOW",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Daily markets offers 'Fresh produce' unmarked under siege and famine (no cart in weeks, grown 8%, imports none)."
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "ServicesFresh produce",
+"town": "bar0-city-under_siege+famine-rand-6",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesFresh produce",
+"n": 43,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C12419",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: devout households quarrel over trade rights is in none of TENSIONS (only disputed land), QUARRELS, PAST; no market or council over trade here",
+"b: devout households quarrel over who may trade; QUARRELS none, TENSIONS only disputed land, no market or trade house here"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "The most devout households want a say over who may trade and when, and not everyone here agrees.",
+"town": "bar0-hamlet-calm-rand-6",
+"sections": [
+"Summary/Overview"
+],
+"fold": "The most devout households want a say over who may trade and when, and not everyone here agrees.",
+"n": 27,
+"struck": "STATES ITS OWN FACT: flagged only for being on no list of the header; nothing denies it"
+},
+{
+"id": "C25275",
+"sev": "LOW",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: grazing/water dispute with sides not speaking is in none of QUARRELS (none), TENSIONS (crime wave only), PAST"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.",
+"town": "bar0-thorp-calm-rand-8",
+"sections": [
+"Systems/Power"
+],
+"fold": "A dispute over grazing rights and water access has run for # seasons, and those on each side of it no longer speak to # another.",
+"n": 0,
+"struck": "STATES ITS OWN FACT: flagged only for being on no list of the header; nothing denies it"
+},
+{
+"id": "C4777",
+"sev": "LOW",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Veteran's lodge offers armed escort, unmarked, though the siege holds the roads and nothing goes out by road"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "ServicesArmed escort",
+"town": "bar0-city-under_siege+famine-rand-8",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesArmed escort",
+"n": 91,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C4815",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Furrier's district sells 'Quality furs' unmarked; LAND has Hunting Grounds depleted and Furs & Pelts impaired by it; furs not in TRADE makes or imports; flows tab says furs trade stopped by siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "ServicesQuality furs",
+"town": "bar0-city-under_siege+famine-rand-8",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesQuality furs",
+"n": 46,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+}
+]
