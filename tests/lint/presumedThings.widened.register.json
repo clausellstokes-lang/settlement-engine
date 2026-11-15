@@ -5365,7 +5365,7 @@
    ],
    [
     "resource: stone_quarry",
-    "after-base: close-true",
+    "after-base: close-false",
     "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper",
     "18425e5e902f9f93"
    ],
@@ -5377,13 +5377,13 @@
    ],
    [
     "resource: stone_quarry",
-    "after-base: close-true",
+    "after-base: close-false",
     "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a regio",
     "159741114b9d0a37"
    ],
    [
     "house: alehouse",
-    "after-base: close-true",
+    "after-base: close-false",
     "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.",
     "aa4c1c8765d2f77f"
    ],
@@ -5401,7 +5401,7 @@
    ],
    [
     "house: druid",
-    "after-base: close-true",
+    "after-base: close-false",
     "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold th",
     "d7a110e6054be4fc"
    ],
@@ -5425,55 +5425,55 @@
    ],
    [
     "house: alehouse",
-    "after-base: close-true",
+    "after-base: close-false",
     "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.",
     "736ab5d9380421e2"
    ],
    [
     "famine",
-    "after-base: close-true",
+    "after-base: close-false",
     "Communal grain storage. Buffers harvests, prevents famine.",
     "b77abf521091f2db"
    ],
    [
     "house: fishing",
-    "after-base: close-true",
+    "after-base: close-false",
     "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river const",
     "20db476059d1b418"
    ],
    [
     "house: fishing",
-    "after-base: close-true",
+    "after-base: close-false",
     "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow d",
     "e93309dab034221e"
    ],
    [
     "house: fishing",
-    "after-base: close-true",
+    "after-base: close-false",
     "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. The work turns on a shallow draft",
     "83d03ab88fd81eb6"
    ],
    [
     "house: fishing",
-    "after-base: close-true",
+    "after-base: close-false",
     "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. It takes a specialist",
     "58a543b49791411a"
    ],
    [
     "clergy",
-    "after-base: close-true",
+    "after-base: close-false",
     "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says the words wh",
     "3479ae839c1d669b"
    ],
    [
     "clergy",
-    "after-base: close-true",
+    "after-base: close-false",
     "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be",
     "9a5d98d5f035bdb6"
    ],
    [
     "clergy",
-    "after-base: close-true",
+    "after-base: close-false",
     "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched in time, an",
     "d7dfdecbc2dbc7de"
    ],
@@ -7431,13 +7431,13 @@
    ],
    [
     "resource: stone_quarry",
-    "after-base: close-true",
+    "after-base: close-false",
     "A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the p",
     "3e644ef0dd5c3418"
    ],
    [
     "house: druid",
-    "after-base: close-true",
+    "after-base: close-false",
     "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hid",
     "58ae82300e837074"
    ],
@@ -27295,13 +27295,13 @@
    ],
    [
     "practitioner",
-    "after-base: close-true",
+    "after-base: close-false",
     "Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly ",
     "95f82a94acb58095"
    ],
    [
     "house: smuggling",
-    "after-base: close-true",
+    "after-base: close-false",
     "Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it can",
     "704028fc99b7d6b5"
    ],
