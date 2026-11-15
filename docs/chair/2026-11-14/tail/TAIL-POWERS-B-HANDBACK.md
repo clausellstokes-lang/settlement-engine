@@ -13,17 +13,21 @@ the main checkout was never staged, committed or reset.
   none of the three towns stands a criminal power or a thieves' guild; the none rung's first line prints, TRUE beside rival
   rings (POWERS-14's own reading). Not a regression: the hall reads the structure; the structure moved, declared. No src
   touched; 0 of the 720 prints move. After: 7/7, 1/1, 6/6; eslint 0; typecheck:ratchet 0; grid 2 falls = the base.
-- RED 2, labelJoins (P33/P34): CURED, HELD AS A PATCH (not committed): claimStanding.js's warehouse scan joins by the
-  catalogue's own ids (WAREHOUSE_IDS: the catalog ids of every rung of the family the catalogue tags TAG.WAREHOUSE,
-  merchant_warehouses and warehouse_district; no new atom, the label not respelled). The 720 births (CENSUS-3 births.mjs)
-  BYTE-IDENTICAL, base 4442e1d4d against the cure (sha256 c6a4940b...); both arms print in the 720 (7 towns each). labelJoins
-  3/3. The 7 test files naming claimStanding.js: 62/62 at the base; at the cure 1 red, seatNamedAsItSits' unit fixture
-  'bonded warehouse' (a name no catalogue or birth holds; the 720 hold "Warehouse district" 240, "Merchant warehouses" 35),
-  re-keyed to 'warehouse district' -> 62/62. HELD: tests/generators/power/seatNamedAsItSits.test.js is MOVING on
-  lane/tail-close-tests-b (da1aabdd3, its anchoredNegatives hunk); asked of the chair, waiting for SWEPT.
-- RED 3, captureBirthScale ("floor 372 > 326"): the first-parent bisect bfab7bdd8..4f24025c2 FINISHED: the first bad is
-  33b12cbef (JOIN-1 · 9, the merge of lane/coherence-upkeep-2026-11-12 at c56fd565e, the defence lane), last good
-  9e3880dd1. The defence lane is not the powers' files; the figures and the lane's own commit: being measured.
+- RED 2, labelJoins (P33/P34): CURED, 833566cf2. claimStanding.js's warehouse scan joins by the catalogue's own ids
+  (WAREHOUSE_IDS: the catalog ids of every rung of the family the catalogue tags TAG.WAREHOUSE, merchant_warehouses and
+  warehouse_district; no new atom, the label not respelled). The 720 births (CENSUS-3 births.mjs) BYTE-IDENTICAL, base
+  4442e1d4d against the cure (sha256 c6a4940b...); both arms print in the 720 (7 towns each): 0 prints move. labelJoins 3/3.
+  The 7 test files naming claimStanding.js: 62/62 at the base and at the cure, after seatNamedAsItSits' unit fixture
+  'bonded warehouse' (a name no catalogue or birth holds; the 720 hold "Warehouse district" 240, "Merchant warehouses" 35)
+  was re-keyed to 'warehouse district' (the chair's P35: disjoint from lane/tail-close-tests-b's hunk). eslint 0;
+  typecheck:ratchet 0; domain strict 0; grid 2 falls = the base.
+- RED 3, captureBirthScale ("floor 372 > 326"): NAMED, THE OWNER'S DOOR (the chair's ruling; nothing changed). The
+  first-parent bisect bfab7bdd8..4f24025c2 turns at 33b12cbef (JOIN-1 · 9, the merge of lane/coherence-upkeep-2026-11-12
+  at c56fd565e, the defence lane: a lane of declared moves of the record), last good 9e3880dd1. THE FIGURES (the sweep's
+  400 criminal cities at equilibrium+, born as the test bears them): 392 at 9e3880dd1, 325 at 33b12cbef, 326 at this
+  branch's merge; the registered floor 372 (capture.criminalCity.equilibrium, alpha 1e-3, 3.809 sigma). A MEASURED ENVELOPE
+  MOVED BY DECLARED MOVES: not re-taken, not the powers' files. (Measured before the chair's ruling arrived, not acted on:
+  inside the lane, 07ebe8bdc's upkeep gates take 393 -> 372 alone.)
 - RED 4, r3c9ReaderLinesTrue (Ainkarez): RE-KEYED BY IDENTITY, 5706c386b. Green at the r3-code-c lane tip da0f201e6, red at
   its landing c2c12792e; bisect 70d92ed06..b6a5f97ab on Ainkarez's hall rung names 07ebe8bdc (COHERENCE-UPKEEP, the upkeep
   gates read keepOf(prosperity), declared "86 readiness labels move"; landed by 33b12cbef): the Merchant Council 36 Dominant ->
