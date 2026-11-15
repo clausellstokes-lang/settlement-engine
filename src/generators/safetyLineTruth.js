@@ -58,6 +58,40 @@ export function paperTruth(text, prosperity, read) {
 }
 
 /**
+ * THE DEFENDERS' PAY HAS ONE HOME (BAR2-LABELS-2 LB4, the chair's ruling of 2026-11-15, vetoable by the owner): the
+ * defence generator's funded gate of the forces over the town's keep, `defenseProfile.economicGates.military` (0 to 1;
+ * 1 = fully funded; `defenseGenerator.js :: generateDefenseProfile`). The guard line's two pay claims read it, at the
+ * page's own cut (DS-DEF-11 "fall short on the watch's wages" below 1): "well paid, well equipped" only at 1, "irregular
+ * pay" only below it. Each takes its twin in the other state (the slot keeps its draw); a gate the record does not
+ * hold (no force) changes nothing. Measured on the 720 at f8042b61a: "irregular pay" false in 17 of 19, "well paid" in
+ * 1 of 42. @param {string} text @param {unknown} gate the record's military gate @returns {string}
+ */
+export function payTruth(text, gate) {
+  if (typeof gate !== 'number' || !Number.isFinite(gate)) return text;
+  const m = /^The (.+?) (?:is|are) (?:well paid, well equipped and patrols? properly\. They come when called, and though some take bribes, it is not the custom\.|well paid and well equipped, but |disciplined but resource-constrained: motivated with inadequate equipment and irregular pay\. Effective in a fight; vulnerable to sustained corruption\.)/.exec(text);
+  if (!m) return text;
+  const law = m[1];
+  const many = manyForce(law);
+  const be = many ? 'are' : 'is';
+  const rest = text.slice(m[0].length);
+  if (m[0].endsWith('irregular pay. Effective in a fight; vulnerable to sustained corruption.')) {
+    return gate >= 1 ? `${PAID_IN_FULL(law, many)}${rest}` : text;
+  }
+  if (gate >= 1) return text;
+  if (m[0].endsWith(', but ')) {
+    // the crisis twin's paid head (`patrolTwin(…, true)`): its unpaid twin in the same crisis
+    const crisis = /** @type {const} */ (['siege', 'occupied', 'famine']).find((c) => text.startsWith(String(patrolTwin(law, c, true))));
+    const paid = crisis && String(patrolTwin(law, crisis, true));
+    return crisis && paid ? String(patrolTwin(law, crisis)) + text.slice(paid.length) : text;
+  }
+  return `The ${law} ${be} disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. Effective in a fight; vulnerable to sustained corruption.${rest}`;
+}
+
+/** LB4's twin of "irregular pay" where the gate is 1 (fully funded): the same force, its pay and kit as the record holds them. */
+export const PAID_IN_FULL = (/** @type {string} */ law, /** @type {boolean} */ many) =>
+  `The ${law} ${many ? 'are' : 'is'} disciplined, paid in full and properly equipped. Effective in a fight; vulnerable to sustained corruption.`;
+
+/**
  * A patrol on its usual rounds (#459) where the watch's supply is cut off (the economy's own trade dependency,
  * severity critical: "Supply route severed. Operating at minimal capacity or shut down.").
  * @param {string} text @param {{ tradeDependencies?: unknown }} read @param {(law: string) => ReadonlyArray<string>} frames

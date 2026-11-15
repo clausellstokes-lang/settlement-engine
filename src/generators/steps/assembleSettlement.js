@@ -252,7 +252,7 @@ registerStep('assembleSettlement', {
   // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
   // no other draw).
   settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
-  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written
+  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); settlement.structuralViolations = settleFundingReasons(settlement.structuralViolations, settlement.defenseProfile?.economicGates?.military); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written; BAR2-LABELS-2 LB4 (the chair's grant LB7): the validator's funding reasons by the military gate
 
   // The final-economy pass already proved that power consumed the final
   // prosperity/safety/food tuple. Assert that proof before applying the one
@@ -508,7 +508,7 @@ registerStep('assembleSettlement', {
   return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
 });
 import { keepOfRecord } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
-import { keptGuardLine, purseWordOfBand } from '../safetyProfile.js'; import { economicSurvivalBandOf } from '../../domain/display/defenseScoreBands.js'; import { standingLabelOf } from '../../domain/facts/keep.js'; // at the END for the same reason (COHERENCE-UPKEEP-6)
+import { settleFundingReasons } from '../structuralValidator.js'; import { keptGuardLine, purseWordOfBand } from '../safetyProfile.js'; import { economicSurvivalBandOf } from '../../domain/display/defenseScoreBands.js'; import { standingLabelOf } from '../../domain/facts/keep.js'; // at the END for the same reason (COHERENCE-UPKEEP-6)
 
 /**
  * THE GUARD ASSESSMENT SAYS WHAT THE TOWN CAN PAY FROM ONE HOME (COHERENCE-UPKEEP-6, the chair's ruling A on the
@@ -522,7 +522,7 @@ function withGuardPaidFromDefence(settlement) {
   const safety = es?.safetyProfile;
   if (!safety || typeof safety.guardEffectivenessDesc !== 'string') return es;
   const pay = purseWordOfBand(economicSurvivalBandOf(settlement), standingLabelOf(es));
-  return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies }) } }; // UPKEEP-8: the guard line's two readings of the record
+  return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies, militaryGate: settlement.defenseProfile?.economicGates?.military }) } }; // UPKEEP-8: the guard line's two readings of the record
 }
 
 // ── THE LATE RE-READ OF A HOUSE'S DESCRIPTION (TAIL-HOUSES-5, the chair's ruling H20; the pass K21 built, reached to the

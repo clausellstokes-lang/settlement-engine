@@ -903,3 +903,35 @@ const PROFESSIONAL_CITY_WATCH_2 = 'professional city watch';
 const PROFESSIONAL_GUARD = 'professional guard';
 const SETTLEMENT_DEFENSE = 'Settlement Defense';
 const SETTLEMENT_REGIONAL_THREAT = 'Settlement (Regional Threat)';
+
+// ─── BAR2-LABELS-2 LB4 (the chair's ruling of 2026-11-15, vetoable by the owner): THE DEFENDERS' PAY HAS ONE HOME ───
+// The embattled region's two funding reasons above read the military dial (`resolvedMilPriority`), and this pass runs
+// before the defence profile exists. The fact of the pay is the profile's funded gate, `defenseProfile.economicGates.military`
+// (1 = fully funded; the page's own wages line, DS-DEF-11, falls below 1): read after it, a funding reason is admitted
+// only below 1, and at 1 takes its twin (the same violation, its severity kept). Measured on the 720 at f8042b61a:
+// "chronically underfunded" false in 26 of 54 (gate 1); "barely maintained" prints in none.
+/** The two funding reasons' leads (above), and the twin true at a gate of 1. */
+const UNDERFUNDED_LEADS = Object.freeze([
+  'Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.',
+  'Embattled region. Infrastructure exists on paper, but the defences are so underfunded that they are barely maintained and the defenders are few. This settlement will fall.',
+]);
+export const FUNDED_EMBATTLED = 'Embattled region. Fortification and forces are present and paid, but the pressure on them never lets up.';
+
+/**
+ * The record's violations with each funding reason read against the military gate. Draw-free; returns the input BY
+ * REFERENCE where no reason changes (a gate below 1, or none: no force).
+ * @template {{ reason?: unknown }} V
+ * @param {V[] | null | undefined} violations @param {unknown} militaryGate @returns {V[] | null | undefined}
+ */
+export function settleFundingReasons(violations, militaryGate) {
+  if (!Array.isArray(violations) || typeof militaryGate !== 'number' || !(militaryGate >= 1)) return violations;
+  let changed = false;
+  const out = violations.map((v) => {
+    const reason = typeof v?.reason === 'string' ? v.reason : '';
+    const lead = UNDERFUNDED_LEADS.find((l) => reason.startsWith(l));
+    if (!lead) return v;
+    changed = true;
+    return { ...v, reason: FUNDED_EMBATTLED + reason.slice(lead.length) };
+  });
+  return changed ? out : violations;
+}

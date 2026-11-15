@@ -1064,8 +1064,10 @@ export function purseWordOfBand(band, standing) {
   return band ? ({ STRONG: 'Prosperous', ADEQUATE: 'Moderate', WEAK: 'Poor', CRITICAL: 'Poor' })[band] ?? standing : standing;
 }
 
+/** @param {string} desc @param {Array<{ name?: string }>} institutions @param {unknown} prosperity
+ * @param {{ forceScore?: unknown, tradeDependencies?: unknown, militaryGate?: unknown }} [read] the record's readings after the defence profile (BAR2-LABELS-2 LB4: `militaryGate`, `defenseProfile.economicGates.military`) @returns {string} */
 export function keptGuardLine(desc, institutions, prosperity, read = {}) {
-  const text = patrolTruth(paperTruth(String(desc || ''), prosperity, read), read, STANDARD_PATROL); // UPKEEP-8 (#713 #1201, #459)
+  const text = payTruth(patrolTruth(paperTruth(String(desc || ''), prosperity, read), read, STANDARD_PATROL), read.militaryGate); // UPKEEP-8 (#713 #1201, #459); BAR2-LABELS-2 LB4: the pay by the record's military gate
   /** @type {Omit<import('../domain/facts/drawDeclared.js').DrawDeclaredOptions, 'draw'>} */
   const opts = {
     facts: () => factsOf({ institutions, economicState: { prosperity } }),
@@ -1105,7 +1107,7 @@ export function keptGuardLine(desc, institutions, prosperity, read = {}) {
 // ─── UPKEEP-8 (2026-11-13): the safety lines say only what the record holds (safetyLineTruth.js) ─────────────
 // At the END of the file, as the frames above, so no producer write moves.
 import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
-import { footholdWord, gatesSmugglersLine, GANG_HOUSES_OF, smugglingHookUnderSiege, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines, SIEGE_NO_FORCE_ORDER } from './safetyLineTruth.js';
+import { footholdWord, gatesSmugglersLine, GANG_HOUSES_OF, smugglingHookUnderSiege, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, payTruth, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines, SIEGE_NO_FORCE_ORDER } from './safetyLineTruth.js';
 
 /** The enforcement sentence the desperation-theft lines end on (UPKEEP-14, ruling (h)): dropped where no enforcer stands. */
 const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival crime from organised theft.';
