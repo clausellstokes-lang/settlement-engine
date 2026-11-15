@@ -95,3 +95,27 @@ export function withTownsOwnUnderworld(text, signal, crimeFaction = null) {
     .replace(/on (?:the )?thieves['’]? guild payroll/gi, 'on the payroll of the local underworld')
     .replace(new RegExp(CRIMINAL_GUILD, 'gi'), 'the local underworld')));
 }
+
+/**
+ * How many gang houses the roster holds, the catalogue's several-gangs row counting two (TAIL-CLOSE-SRC-3: moved verbatim
+ * from `generators/safetyLineTruth.js :: GANG_HOUSES_OF`, UPKEEP-8, into the crime home; the safety lines and the
+ * priority flags read it here). A roster row or a bare name.
+ * @param {ReadonlyArray<unknown> | null | undefined} institutions @returns {number}
+ */
+export function gangHousesOf(institutions) {
+  let n = 0;
+  for (const i of institutions || []) {
+    const name = String(typeof i === 'string' ? i : /** @type {{ name?: unknown }} */ (i)?.name || '').toLowerCase();
+    n += name.includes('multiple criminal') ? 2 : name.includes('street gang') ? 1 : 0;
+  }
+  return n;
+}
+
+/**
+ * Whether a criminal power governs: a seat whose category is 'criminal' (the signal's own mark) holds the governing seat
+ * (TAIL-CLOSE-SRC-3: the safety profile's criminal-governance line, `safetyLineTruth.js :: settleRosterCrimeLines`).
+ * @param {unknown} seats the roster's seats @returns {boolean}
+ */
+export function criminalSeatGoverns(seats) {
+  return (Array.isArray(seats) ? seats : []).some((seat) => seat?.category === 'criminal' && seat?.isGoverning === true);
+}
