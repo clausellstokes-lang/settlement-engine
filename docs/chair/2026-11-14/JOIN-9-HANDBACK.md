@@ -65,6 +65,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 2 | lane/tail-crisis-2026-11-14 | 0f506cd93 (05:28) | c6852f7e2 | 70d80f3e9 | none | 6 files outside docs/; declared-move commits: 6716dfceb  (golden carried) |
 | 3 | lane/tail-corpus-eco-2026-11-14 | a8ea5ef8e (05:32) | bf6695a6b | c46e61abe | **PIN** (law d): `composeStateProse.test.js` (1 hunk), `proseEntryContradiction.walker.test.js` (5), `proseMoveGrammar.walker.test.js` (1) | joined kept inside each hunk; composed measured RED, listed (§3, §4 [J9]); clean-both `RECEIPT_POOLS_DOSSIER_STATE.md`; leaves `economy.generated.js`, `general.generated.js` the lane's |
 | 4 | lane/tail-corpus-def-2026-11-14 | b284cbe44 (05:38) | 7ccad225e | 954340b6f | none | 10 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/generators/coherenceAgreeCures.test.js  |
+| 5 | lane/tail-ties-2026-11-14 | 4ec61102f (05:41) | 837cad90f | a06cde784 | none | 6 files outside docs/; declared-move commits: none (golden carried) |
 
 ## 3. Every code resolution
 
