@@ -1355,3 +1355,57 @@ read 0). None is begun; nothing was changed for them.
   literal state-prose sentence as an anchor (`tests/helpers/drawnProse.js`); never edit `scripts/mutation-coverage-manifest.json`.
   This seat's `tailCrisisBatch8.test.js` predates that note: its `not.toContain`/`not.toBe` negatives each sit beside the
   positive they are anchored to, but are not routed through `anchoredNegatives.js`: the next seat should route them.
+
+# TAIL-CRISIS-7 · the seventh seat (2026-11-15)
+
+Seat TAIL-CRISIS-7, successor of TAIL-CRISIS-6, on the same branch from its tip **0f506cd93** (read back from origin;
+fast-forward of a885da881). Scratch worktrees outside the main checkout: `tc` (the work, its own `npm ci`), `bis` (the
+bisects and the base runs, `node_modules` linked). FIRST ACT: the joined line merged at **475506bf7** (9b6544c8).
+Every red run ALONE through `gate-tail.sh` at the merged tree first. Bisects by the test file over the joined line's
+first parents, then inside the landing lane. NOTE: f663a2699 is NOT green for reds 1-3: they were already red there;
+their good point is 705577ac (11-09), and all three turned at **ba4cc210b** (JOIN-1 · 6, lane/w2-write at 6fdff4abd).
+
+## The reds
+
+| # | test | turned at | inside | verdict | commit |
+|---|---|---|---|---|---|
+| 1 | `crisisBlindDossierProse` (2) | ba4cc210b | 35acb779 (first of the lane's) | **NAMED, not this group's** (below) | none |
+| 2 | `crisisBlindWidened` 5402 (1) | ba4cc210b | 5132da377 (DS-ECO-10 v1 re-said, #309) | RE-KEYED: the claim cured at the source, both halves asserted (the file's form for a cured row) | 375a5547 |
+| 3 | `facts/composeBareCrisis` (1) | ba4cc210b | 9d0f258f3 (DS-DEF-2 STRONG v3 re-said, the 19:35 ruling) | RE-KEYED to v3's new text (same vid, `crisis` kept) | 39dd1840 |
+| 4 | `crisisStoppedRows` (2) | (a) b75b08c37 (the S6 walker landed on D10's 'Harvest'); (b) d5ec9c7f3 | (a) df2fa5ca (TAIL-DEFECON-2 D10); b40f795b (TAIL-DEFECON-4, line 838); (b) ba3af420 (TAIL-HOUSES-4 H17) | (a) CURED: `"Harvest": [GRAIN, LIVESTOCK]`; the scrape bounded at `;` (3 false titles); (b) RE-KEYED to the house's hedged description | ab49049c |
+| 5 | `journalMarksCrisisRows` (2) | d817736d (red at its own landing) | 5f67f382d (TAIL-DEFECON-2 D14, Pilgrim Trade) | RE-KEYED: Grain Sales 4 -> 5 %, Toll Revenue 14 -> 15 % (the same rows and mark) | fca2cf25 |
+| 6 | `styleLaw.walker` (crisisDependence.js:354) | 73291c8e (born with the table) | | CURED: the key read from `institutionServices.js` (a computed key); the table's exports byte-identical | fdb23220 |
+
+**Red 1, named.** Two causes, neither in a crisis file, the table or the leaf: (i) five pools MUTE under a siege on
+their own record, all arriving at ba4cc210b (lane/w2-write's state-prose leaves): DS-POW-6 `operation role duty
+evasion`, DS-GEN-13 `ENTREPOT`, DS-ECO-10 `POSTURE: vulnerable`, and two reading a compound fact the test says to set
+aside by name (DS-ECO-12 `INCOME WEIGHT: the religious houses`, `sacredHouse`; DS-DEF-2 `Beasts & Monsters: settled,
+nothing organized`, `no guardPresence`); the cure is a crisis-safe line in each leaf (the writing seat's) or the
+set-aside by ruling; (ii) the non-vacuity floor 29 (measured at the cure) falls as the writing seats cure calm claims
+at the source: 23 (by JOIN-4 · 6) -> 22 (9eb08470, corpus-def) -> 21 (38a21278, corpus-eco) -> 17 (31a6f72e,
+corpus-def). The test's text gives the floor no door, so it is not re-measured here.
+
+**THE VETO LIST (red 4, a declared move of display).** "Harvest (scarce): n%" / "Scarce in the famine." now prints in
+**22 of the 329** census towns that hold the Harvest row (smallest r2r-thorp-38, largest r2s-famine-village-0, a crisis
+town r2s-famine-thorp-1 with livestock failed): every one a famine of grain, of livestock or of no named source; no
+siege or outbreak marks it (the land's own work, the table's rule for rents).
+
+**Named for other seats.** `styleLaw.walker` stays red on three lines not this group's: historyData.js:1601 'the
+record' and :1511 'a stranger' (7bef72cb, TAIL-HISTORY batch 2), narrativeData.js:431 'faction' (6a369299,
+TAIL-NARRATIVE-3 batch 5). `displayEconCrisisMarks.test.jsx` (3, display-econ's) red at the base and the tree alike:
+its pins read 'Agricultural Rents' (now 'Harvest', D10) and 'Pilgrim Trade' (D14) where the record no longer holds them.
+
+## The proof (at the tree against the merged base 9b6544c8)
+
+- Each red alone: red before, green after (2 -> 10/10, 3 -> 2/2, 4 -> 11/11, 5 -> 16/16; 6 leaves the rise list).
+- The 37 test files naming crisisDependence, crisisStoppedRow or institutionServices: base 7 files red, tree 5, the
+  same tests (none new). The walkers the edits could reach (negativeAssertionAnchor, presumedThings, proseDrawnAnchors,
+  seedLoopTotality, styleLaw): 10 red at both, the same names.
+- eslint on the touched files 0; typecheck:domain:strict 1113 (ceiling 1113); typecheck:ratchet 167 (ceiling 167).
+- The twelve-birth grid `page-census.mjs --grid`: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a).
+- K28: the chair's 05:45 word: the merge seat runs the door; closed without a change unless "THE DOOR STILL CRASHES".
+
+## What is left (this seat)
+
+- The seventh red (`tonightOwnGoal`, after the joined line at 74688857c) and the eighth (`tailCrisisIronHooks` on
+  r2r-hamlet-35 and -30, the test seat's stronger form): next.
