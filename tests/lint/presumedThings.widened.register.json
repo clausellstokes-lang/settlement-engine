@@ -996,7 +996,7 @@
     "famine",
     "word",
     "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judg",
-    "dfa32308413b0367"
+    "bb49c513afbb2c39"
    ]
   ],
   "src/components/new/tabs/EconomicsTab.jsx": [
@@ -16506,12 +16506,6 @@
     "root",
     "Controls specific territory through violence. Extorts local businesses. Competes with the watch for street-level authori",
     "5cda302fa8ef4287"
-   ],
-   [
-    "prison",
-    "root",
-    "Court + Prison",
-    "2e5bbcad8d5be670"
    ],
    [
     "house: gambling",
