@@ -1,0 +1,19 @@
+{"id":"C33769","town":"bar0-village-calm-rand-7","sev":"MED","kind":"PAIR","why":"calls tensions domestic and managed; the town's live tension is a souring trade dispute and both power pairs are escalating","other":"C33798"}
+{"id":"C33899","town":"bar0-village-calm-rand-7","sev":"LOW","kind":"STATE","why":"title 'Dairyman' for Kyriake Gabalas, who is female in PEOPLE","other":""}
+{"id":"C34316","town":"bar0-village-calm-rand-7","sev":"LOW","kind":"PAIR","why":"says it keeps order; defence says nobody is paid to keep order, no force of any kind, and Law & order is Strained","other":"C34252"}
+{"id":"C34219","town":"bar0-village-calm-rand-7","sev":"LOW","kind":"STATE","why":"gives Sofokles 'a third share' in Merchant Guilds; PEOPLE shows him a member with no rank there (rank 3 is Kyriake Gabalas)","other":""}
+{"id":"C34444","town":"bar0-village-calm-rand-7","sev":"LOW","kind":"PAIR","why":"the card's weight is 'minor' yet the text says the steward owes the sawyer 'a great deal'","other":"C34442"}
+{"id":"C34667","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"LACKS","why":"says 'Alehouses' stock from here; HOUSES has one Travelers' inn and no alehouse in a village of 80","other":""}
+{"id":"C34873","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"BROKEN","why":"subject 'Weak defences' (plural) with singular verb 'keeps'","other":""}
+{"id":"C34969","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"LACKS","why":"'which few streets to avoid' in a village of 80 people","other":""}
+{"id":"C35020","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"STATE","why":"title 'Dairyman' for Rashida al-Basri, who is female in PEOPLE","other":""}
+{"id":"C35097","town":"bar0-village-calm-rand-8","sev":"MED","kind":"PAIR","why":"says Noura al-Hakim owes Saida al-Misri a large sum; Saida's secret says Saida owes Noura a debt, the opposite direction","other":"C35049"}
+{"id":"C35109","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"PAIR","why":"says Nasser has mentioned the debt aloud at a dinner; the same card says he has never mentioned it and Rashida mentions it to no one","other":"C35090"}
+{"id":"C35244","town":"bar0-village-famine-rand-6","sev":"MED","kind":"STATE","why":"market day 'fills' and roads bring buyers under an active famine, and Hunger has made the village quiet","other":"C35223"}
+{"id":"C35245","town":"bar0-village-famine-rand-6","sev":"LOW","kind":"STATE","why":"describes ordinary market-day selling by strangers as if the famine (failed food, rationing) did not hold","other":"C35261"}
+{"id":"C35377","town":"bar0-village-famine-rand-6","sev":"LOW","kind":"STATE","why":"title 'Brewster' (a woman brewer) for Puma Ku, who is male in PEOPLE","other":""}
+{"id":"C35382","town":"bar0-village-famine-rand-6","sev":"LOW","kind":"STATE","why":"title 'Beemaster' for Metztli Itza, who is female in PEOPLE","other":""}
+{"id":"C35404","town":"bar0-village-famine-rand-6","sev":"LOW","kind":"STATE","why":"hunter's lodge sells venison and pelts, but LAND gives Hunting grounds absent (Furs & Pelts chain entrepot only)","other":""}
+{"id":"C35876","town":"bar0-village-famine-rand-6","sev":"MED","kind":"STATE","why":"says documents prove the famine was caused by export decisions; FOOD gives the failed source as fish and the page says the fishing failed","other":"C35249"}
+{"id":"C34874","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"STATE","why":"a two-season grazing and water dispute with families not speaking; QUARRELS is none, stability Stable, and the only live tension is the great fire","other":""}
+{"id":"DONE","lines":2456,"blocks":3,"flags":18}
