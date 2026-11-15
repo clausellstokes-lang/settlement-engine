@@ -7,6 +7,7 @@
  * RED AT THE BASE (700ba76cf): every refused pair; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -50,14 +51,22 @@ describe('TAIL-POWERS-B-2 · P19: a pair at HIGH conflict is not called a stable
     });
   }
   it('KEEP: every other row of those towns is kept as drawn (no twin where the pair is not at HIGH)', () => {
-    for (const [seed] of REFUSED) {
+    const failures = collectSeedFailures(REFUSED, ([seed]) => {
       const s = births[seed];
       const highs = (s.conflicts || []).filter((/** @type {any} */ c) => c.intensity === 'high');
+      let kept = 0;
       for (const r of s.powerStructure.factionRelationships) {
         const atHigh = highs.some((/** @type {any} */ c) => same(c.parties, r.pair));
-        if (!atHigh || !['symbiotic', 'dependent'].includes(r.type)) expect(r.narrative).not.toMatch(/Even so, the two are now at odds/);
+        if (!atHigh || !['symbiotic', 'dependent'].includes(r.type)) {
+          kept += 1;
+          expect(r.narrative, `${seed}: ${r.pair} has a drawn narrative`).toMatch(/\S/);
+          // anchored: the toMatch(/\S/) above proves this same row's narrative is a live drawn string
+          expect(r.narrative).not.toMatch(/Even so, the two are now at odds/);
+        }
       }
-    }
+      expect(kept, `${seed}: the town has rows kept as drawn for this check to read`).toBeGreaterThan(0);
+    });
+    expectNoSeedFailures(failures, 'every row of those towns not at HIGH is kept as drawn');
   });
   it('the seam alone: tense, subordinate and moderate rows are kept; the input is not mutated', async () => {
     const { withConflictRelations } = await import('../../src/generators/factionDynamics.js');

@@ -12,6 +12,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { cultureScopeLine } from '../../src/domain/summary/settlementQuickGuide.js';
 import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -125,26 +127,32 @@ const STILL = [
 
 describe('TAIL-CRISIS batch 2: the stores line', () => {
   it('each line prints as the record now bears it, not as it printed before', () => {
-    for (const [seed, surface, before, now] of NOW) {
+    const failures = collectSeedFailures(NOW, ([seed, surface, before, now]) => {
       const text = /** @type {(s: any) => string} */ (surface)(birth(/** @type {string} */ (seed)));
-      expect(text, /** @type {string} */ (seed)).not.toContain(before);
-      expect(text, /** @type {string} */ (seed)).toContain(now);
-    }
+      expectAbsentWithAnchor(text, before, now, String(seed));
+    });
+    expectNoSeedFailures(failures, 'a line printed as before, or not as the record now bears it');
   }, 300000);
   it('every STILL line prints', () => {
-    for (const [seed, surface, kept] of STILL) expect(/** @type {(s: any) => string} */ (surface)(birth(/** @type {string} */ (seed))), /** @type {string} */ (seed)).toContain(kept);
+    const failures = collectSeedFailures(STILL, ([seed, surface, kept]) => {
+      expect(/** @type {(s: any) => string} */ (surface)(birth(/** @type {string} */ (seed))), /** @type {string} */ (seed)).toContain(kept);
+    });
+    expectNoSeedFailures(failures, 'a STILL line no longer prints');
   }, 300000);
 });
 
 describe('TAIL-CRISIS batch 2: the scope line names only what the town holds', () => {
   it('no FALSE clause prints, and its place is taken by the line the record bears', () => {
-    for (const [seed, gone, instead] of FALSE) {
+    const failures = collectSeedFailures(FALSE, ([seed, gone, instead]) => {
       const line = cultureScopeLine(birth(seed));
-      expect(line, seed).not.toContain(gone);
-      expect(line, seed).toContain(instead);
-    }
+      expectAbsentWithAnchor(line, gone, instead, seed);
+    });
+    expectNoSeedFailures(failures, 'a FALSE clause printed, or its place was not taken');
   }, 300000);
   it('every KEEP sibling still prints', () => {
-    for (const [seed, kept] of KEEP) expect(cultureScopeLine(birth(seed)), seed).toContain(kept);
+    const failures = collectSeedFailures(KEEP, ([seed, kept]) => {
+      expect(cultureScopeLine(birth(seed)), seed).toContain(kept);
+    });
+    expectNoSeedFailures(failures, 'a KEEP sibling no longer prints');
   }, 300000);
 });
