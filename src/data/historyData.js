@@ -1508,7 +1508,7 @@ export const HISTORICAL_EVENTS_DATA = [
         factions: ['Those who would shut the sick away', 'Families who refuse to be shut in', 'Those who trust to prayer and old remedies'],
         plotHooks: [
           { text: 'A healer is accused of hiding a fever in a household, to spare it from being shut in', needs: ['healer'] },
-          'A family taken by fever swears it came in with a stranger, and wants the stranger found',
+          'A family taken by fever swears it came in with a traveller off the road, and wants that traveller found',
           'Someone is using the fear of fever to keep a rival household shut indoors, and out of a bargain',
         ] } },
     severity: ['major', 'catastrophic'],
@@ -1598,7 +1598,7 @@ export const HISTORICAL_EVENTS_DATA = [
       unanchored: { description: 'Whether one person is taking more power than anyone granted is the quarrel of the day, and every new rule is read as a step toward tyranny',
         factions: ['Those who want a strong hand', 'Those who fear a tyrant in the making', 'Those who will serve whoever wins'],
         plotHooks: [
-          'Someone close to authority is gathering powers no one granted, and keeps the record of it locked away',
+          'Someone close to authority is gathering powers no one granted, and keeps the papers that show it locked away',
           'A household that spoke out against the new rules has had its goods seized on a pretext, and wants them back',
           'Someone is paying for praise of a strong hand in the street, and stands to profit if it comes',
         ] } }, // URBAN-FIX D-1 (historyGenerator.js :: tensionByMemory)
