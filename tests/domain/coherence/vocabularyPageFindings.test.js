@@ -120,8 +120,13 @@ describe('F1 — the generated vocabulary', () => {
   });
 
   test('planted: a famine written as a risk to come is false while a famine is in force', () => {
-    // computed, not a literal state-prose anchor (proseDrawnAnchors): DS-ECO-9 'FOOD SOURCES: one source' v1
-    const risk = { 'Systems/Economics': [variantByVid({ leaf: 'economy', blockId: 'DS-ECO-9', poolKey: 'FOOD SOURCES: one source', vid: 1, slots: { settlement: 'Ford', good: 'grain' } })] };
+    // computed, not a literal state-prose anchor (proseDrawnAnchors). TAIL-CORPUS-DEF-5 (the chair's C29), THE PLANT
+    // MOVED: it was DS-ECO-9 'FOOD SOURCES: one source' v1, which a8ea5ef8 (TAIL-CORPUS-ECO-4 batch 8, C20) rewrote from a
+    // risk to come ("would cost the whole town dear") to the present ("is felt across the whole town"). Every leaf scanned
+    // with the family's words and context: the nearest member that still speaks of a famine to come, with no mark or pool
+    // declaration that keeps it out of a famine town, is DS-DEF-12 'CAPACITY: short' v2 ("… so a bad harvest there would
+    // mean going without.").
+    const risk = { 'Systems/Defense': [variantByVid({ leaf: 'defense', blockId: 'DS-DEF-12', poolKey: 'CAPACITY: short', vid: 2, slots: { settlement: 'Ford' } })] };
     expect(vocabularyPageFindings({ ...town, stress: [{ type: 'famine' }] }, risk).map((f) => f.word)).toEqual(['famineToCome']);
     expect(vocabularyPageFindings(town, risk)).toEqual([]);
   });
