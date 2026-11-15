@@ -282,16 +282,14 @@
       "text": "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": []
     },
     {
       "id": "thorp|Government|Household elder#1",
       "text": "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": []
     },
     {
       "id": "thorp|Infrastructure|Dwellings (1-8)#0",
@@ -3195,16 +3193,14 @@
       "text": "Civic power belongs solely to the wealthy merchant families, and office is bought in all but name.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": []
     },
     {
       "id": "town|Government|Merchant oligarchy#1",
       "text": "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": []
     },
     {
       "id": "town|Government|Town crier#0",

@@ -2228,3 +2228,48 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight whenever fish can be had, each checked for rot.": Object.freeze({ needs: Object.freeze(["navigable","market"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "The market wardens keep a roofed fish market where, whenever fish can be had, fresh catch and salted barrels are weighed out and inspected before sale.": Object.freeze({ needs: Object.freeze(["navigable","market"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
 });
+
+/**
+ * THE LATE SIBLINGS (TAIL-HOUSES-5, the chair's ruling H20 of 2026-11-15; vetoable by the owner): a house's description
+ * whose claim is true or false BY THE POWERS (who governs, what standing a power has) is drawn before the powers exist
+ * (`birthFactsOf` holds no power structure), so it cannot be resolved at the draw. Each set here is keyed by the WHOLE
+ * drawn description: the original, declaring what it needs of the settled record, and its twin (`twinOf` the original),
+ * true where the original is refused. THE DRAW NEVER READS THIS TABLE (the text is drawn and resolved as before: no draw
+ * moves); THE LATE RE-READ (`steps/assembleSettlement.js :: readHouseDescsLate`, after the last roster write) resolves a
+ * stored description that is a key here against the settled record and stores the twin where the original is refused.
+ * A text keyed here is not a colour line (`institutionDescColour.js`). VETOABLE wording (the owner's).
+ *
+ * @enforced-by tests/generators/houseDescLateReRead.test.js
+ */
+export const DESC_LATE_SIBLINGS = Object.freeze({
+  // TAIL-HOUSES-5 batch 8 (H20 (ii)): the Household elder speaks for the settlement ALONE: true only under one elder ruler
+  // (a headman), never under an Elder or a Household Council (37 of the census's 37 Household elders); the twin claims
+  // the house's standing, not who governs.
+  "One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding.": Object.freeze([
+    Object.freeze({ text: "One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding.", needs: Object.freeze(['ruler: elder']), excludes: Object.freeze(['ruling body']) }),
+    Object.freeze({ text: "One household head is the person everyone goes to first when something needs deciding. No formal appointment, no title.", twinOf: "One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding." }),
+  ]),
+  "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.": Object.freeze([
+    Object.freeze({ text: "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.", needs: Object.freeze(['ruler: elder']), excludes: Object.freeze(['ruling body']) }),
+    Object.freeze({ text: "A single household head, never chosen to anything, is the door people knock on first when a thing has to be settled. No office, no title, no vote.", twinOf: "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled." }),
+  ]),
+  "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.": Object.freeze([
+    Object.freeze({ text: "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.", needs: Object.freeze(['ruler: elder']), excludes: Object.freeze(['ruling body']) }),
+    Object.freeze({ text: "One head of household is heard first on the settlement's common matters, by habit rather than appointment. Nobody named them to it.", twinOf: "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway." }),
+  ]),
+  // TAIL-HOUSES-5 batch 8 (H20 (ii)): the Merchant oligarchy holds civic power ALONE ("solely", "monopolise", "exclusive"):
+  // false where another power stands at Significant or above (`rival power`: 23 of the census's 37); the twin claims the
+  // merchants' hold on the offices, true under their own government (37 of 37), not that no other power stands.
+  "Wealthy merchant families hold exclusive civic power; political office is effectively purchased.": Object.freeze([
+    Object.freeze({ text: "Wealthy merchant families hold exclusive civic power; political office is effectively purchased.", excludes: Object.freeze(['rival power']) }),
+    Object.freeze({ text: "Wealthy merchant families hold the civic offices; political office is effectively purchased.", twinOf: "Wealthy merchant families hold exclusive civic power; political office is effectively purchased." }),
+  ]),
+  "Civic power belongs solely to the wealthy merchant families, and office is bought in all but name.": Object.freeze([
+    Object.freeze({ text: "Civic power belongs solely to the wealthy merchant families, and office is bought in all but name.", excludes: Object.freeze(['rival power']) }),
+    Object.freeze({ text: "Civic power rests with the wealthy merchant families, and office is bought in all but name.", twinOf: "Civic power belongs solely to the wealthy merchant families, and office is bought in all but name." }),
+  ]),
+  "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.": Object.freeze([
+    Object.freeze({ text: "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.", excludes: Object.freeze(['rival power']) }),
+    Object.freeze({ text: "A handful of rich merchant houses hold the seat of power here; a political post is, in practice, something one purchases.", twinOf: "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases." }),
+  ]),
+});
