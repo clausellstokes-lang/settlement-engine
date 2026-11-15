@@ -595,3 +595,8 @@ Here is what was measured, for the successor (each cure is its own commit, and t
 - The four collection files (`crisisCast`, `crisisCastDefenceHome`, `crisisCastEdit`, `people/dualHatReaders`) collect and pass: 4 files, 47 tests.
 - eslint on the 3 files: 0. Births after: byte-identical (`7506bc63…7833`, 720, 0 errors).
 - NAMED, not mine (identical received lists at the merge tip, measured on a base tree): `tests/domain/storesSpanFigure.test.js` (rpf-thorp-succession_void-13: `storageMonths` 1.2, the pin wants 1.5: a birth moved by the join) and `tests/lint/presumedThings.walker.test.js` (4 tests: 146 undeclared literals, 5 + 10 stale rows, 1 strip).
+
+**Cut 2 (CONFIRMED): `clergyHouse.js` -> `facts/institutions.js` (the 13th row).** `clergyHouse.js` (engine-core: the derivation reaches it; `threatAssessment.js` itself routes coherence-lazy) read `liveInstitutionNames` and `ACCESS_ONLY` from the coherence-lazy `institutions.js`. Both moved verbatim to `src/domain/facts/liveInstitutionNames.js`, whose only imports are the two import-free roster leaves (`content/customContentSemanticAuthority.js`, `institutions/institutionRoster.js`; executed `manualChunks`: both engine-core). `institutions.js` re-exports both names; `clergyHouse.js` changes its import line only.
+- `engineCoreLazyEdge`: 3 of 3 green (plain and FLAGGED graph).
+- eslint on the 3 files: 0. Births after: byte-identical (`7506bc63…7833`, 720, 0 errors).
+- The readers' tests (13 files): only reds are named-not-mine, identical at the merge tip: `tests/data/w2FixData6Rows.test.js` (3: r2r-thorp-0 'Harvest' vs 'Agricultural Rents', r2r-town-11 the Mine line, one more of W2-FIX-DATA-8) and the presumedThings walker above.
