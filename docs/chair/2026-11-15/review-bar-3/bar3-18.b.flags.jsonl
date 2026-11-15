@@ -1,0 +1,21 @@
+{"id":"C33769","town":"bar0-village-calm-rand-7","sev":"MED","kind":"PAIR","why":"says tensions are domestic (inheritance, boundaries); TENSIONS/QUARRELS give a trade dispute with a partner and escalating power quarrels","other":"C33798"}
+{"id":"C33841","town":"bar0-village-calm-rand-7","sev":"MED","kind":"STATE","why":"hook has Diogenes (mine captain, Merchant Guilds head) leading weekly prayers; the priest is Dionysios Exazenos","other":""}
+{"id":"C33839","town":"bar0-village-calm-rand-7","sev":"LOW","kind":"STATE","why":"hook gives Diogenes (mine captain) a shop with a note on it; his house is the Mine","other":""}
+{"id":"C34219","town":"bar0-village-calm-rand-7","sev":"LOW","kind":"STATE","why":"gives Sofokles 'a third share' in Merchant Guilds; PEOPLE shows him there as a member with no rank","other":""}
+{"id":"C33899","town":"bar0-village-calm-rand-7","sev":"MED","kind":"STATE","why":"titles Kyriake Gabalas 'Dairyman'; PEOPLE gives her as female (f)","other":""}
+{"id":"C33911","town":"bar0-village-calm-rand-7","sev":"LOW","kind":"STATE","why":"titles Eire Kamytzes 'Huntmaster'; PEOPLE gives her as female (f)","other":""}
+{"id":"C34646","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"STATE","why":"hook has Rashida (dairy farmer, Elder Council head) asked to perform a ceremony with theological objections; the priest is Noura al-Hakim","other":""}
+{"id":"C34667","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"LACKS","why":"says alehouses (plural) are stocked from the brewer; HOUSES has only one Travelers' inn and no alehouse or tavern","other":""}
+{"id":"C34873","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"BROKEN","why":"plural subject 'Weak defences' with singular verb 'keeps'","other":""}
+{"id":"C34874","town":"bar0-village-calm-rand-8","sev":"MED","kind":"STATE","why":"reports a two-season grazing and water dispute splitting families; QUARRELS is none and the only live tension is the great fire","other":""}
+{"id":"C34969","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"LACKS","why":"tells visitors to avoid 'a few streets' in a village of 80 people","other":""}
+{"id":"C34754","town":"bar0-village-calm-rand-8","sev":"LOW","kind":"PAIR","why":"priest offers divine healing magic; magic is forbidden and hostile here and the medical role of magic is absent","other":"C35004"}
+{"id":"C35020","town":"bar0-village-calm-rand-8","sev":"MED","kind":"STATE","why":"titles Rashida al-Basri 'Dairyman'; PEOPLE gives her as female (f)","other":""}
+{"id":"C35097","town":"bar0-village-calm-rand-8","sev":"MED","kind":"PAIR","why":"says Noura owes Saida a large sum; Saida's secret says Saida owes Noura a debt Noura never called in","other":"C35049"}
+{"id":"C35244","town":"bar0-village-famine-rand-6","sev":"MED","kind":"STATE","why":"market day fills with road buyers; CRISIS is Famine, food fell 65%, and the page says hunger has made the village quiet","other":"C35223"}
+{"id":"C35265","town":"bar0-village-famine-rand-6","sev":"LOW","kind":"STATE","why":"says Metztli May (miller, member of Headman's Authority, no rank) runs the office deciding the crisis; Kan Moo holds rank 1","other":""}
+{"id":"C35382","town":"bar0-village-famine-rand-6","sev":"LOW","kind":"STATE","why":"titles Metztli Itza 'Beemaster'; PEOPLE gives her as female (f)","other":""}
+{"id":"C35876","town":"bar0-village-famine-rand-6","sev":"MED","kind":"PAIR","why":"secret says famine was caused by export decisions of Headman's Authority; FOOD and the page say the fishing failed (failed source fish)","other":"C35249"}
+{"id":"C35377","town":"bar0-village-famine-rand-6","sev":"LOW","kind":"STATE","why":"titles Puma Ku 'Brewster' (a female brewer); PEOPLE gives him as male (m)","other":""}
+{"id":"C35910","town":"bar0-village-famine-rand-6","sev":"MED","kind":"PAIR","why":"secret says Rain Nah helped cause the shortfall that triggered the famine; FOOD and the page say the fishing failed (failed source fish)","other":"C35249"}
+{"id":"DONE","lines":2456,"blocks":4,"flags":20}
