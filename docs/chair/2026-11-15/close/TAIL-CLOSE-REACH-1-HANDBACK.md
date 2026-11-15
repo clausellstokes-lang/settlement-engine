@@ -53,7 +53,7 @@ The function that reads the sentence (`composeMaterialTruth`) is called by **no 
 The strike is the instrument's verdict, not a new page.
 
 **Readers with no writer (instrument two).** No page shows a wrong or empty value because of tonight's findings. All
-38 new reads are spare fallbacks behind a key that IS written ("the faction's name, else its `name`"), or reads whose
+35 new read identities (39 reads) are spare fallbacks behind a key that IS written ("the faction's name, else its `name`"), or reads whose
 writer exists where the instrument cannot see it (a data table, the store's config, a merged record). So nothing was
 cured and no page line moved. **The instrument cannot be re-frozen tonight:** seven of its banked rows were lost by the
 detector while their reads still stand in the PDF's body slices. A re-freeze would record that loss as a repair. Those
@@ -136,7 +136,7 @@ siblings the same way.
 
 Measured at c7227254. The door's gate and `--report` arms both stop first at the lawful input-drift notice (7 generated
 data paths), so the live inventory was taken through the walker's own composition (raw legacy scan → the four
-post-filters → `compare`), run from a script outside the repository: **10 files, 38 new read identities; 14 stale rows**.
+post-filters → `compare`), run from a script outside the repository: **10 files, 35 new read identities (39 reads); 14 stale rows (16 reads). Check: 2189 − 16 + 39 = 2212 reads; 1530 − 14 + 35 = 1551 identities**.
 
 ### (a) The 14 vanished rows
 
@@ -148,7 +148,7 @@ post-filters → `compare`), run from a script outside the repository: **10 file
 | `recallTargetId on metadata` | `src/domain/worldPulse/applyWorldPulse.js:928` | lawful shrink (the guard's text says EROSION; measured otherwise) | the read still stands, but the corpus now WRITES the key on `metadata` (the `metadata` shape carries `recallTargetId`; instrument one's newly written identity). The finding cleared because the read gained a writer, not because the detector lost it |
 | `availableResources on settlement` (`s?.availableResources`, :383), `exportPotential on settlement` (:386), `terrainEffects on settlement` (:392), `shadowEconomy on settlement` (:69), `institution on exploitation` (`iss?.institution`, :96), `processing on exploitation` (`c?.processing`, :55), `name on activeChains` (`c?.name`, :35) | `src/pdf/lib/viewModelBodySlices.js` | **STOP: INSTRUMENT EROSION, not banked** | every read still stands, and the `settlement` shape still carries none of the four keys. Why the detector lost them (PLAUSIBLE, not bisected): TAIL-EXPORTS-PDF batch 1 and batch 3 (63c3f2ae, 9afdf5fa, today) now pass the same receivers into new helpers (`chainPrintName(c, s)`, `tradeListsAsPrinted(s)`, `exploitationGroupsShown(s)`, `deriveProsperityPosture(s)`). The receiver now binds more than one shape, and the legacy scan's `objects.length === 1` guard drops the finding. The instrument has no governed way to HOLD an eroded row: schema 39's precedent recorded such a loss, and that is the banking OR1 forbids. **Named to the chair.** |
 
-### (b) The 10 files' 38 new reads
+### (b) The 10 files' 35 new identities (39 reads)
 
 None prints a wrong or empty value; none is cured (no cure is the read's own line); each is named.
 
@@ -171,7 +171,7 @@ which this seat was not chartered to mint. **Named to the chair, one line each, 
 
 ### (c) The door, and the receipt
 
-- `--write` was **not run**: it refuses growth (38 reads), and it would bank the seven eroded rows as repairs.
+- `--write` was **not run**: it refuses growth (35 identities, 39 reads), and it would bank the seven eroded rows as repairs.
 - `tests/lint/observedShapeReaders.walker.test.js` alone (8 GB heap; `/tmp/gate-tail.4580.log`): **41 of 47 green, 6 red**:
   1. "the producers ran and the corpus is not empty": the executed corpus's counts drifted (lawful; a re-freeze absorbs it).
   2. "SHRINK-ONLY …": `expected { violations: 10, stale: 14 } to deeply equal { violations: +0, stale: +0 }`; the table above.
@@ -188,7 +188,7 @@ This seat reached its budget before the rung. Measured so far, and the exact ste
 
 **FOR THE OWNER, in plain words.** Seven known reads in the PDF's code (`src/pdf/lib/viewModelBodySlices.js`) are reads
 the instrument can no longer see. They are still in the code and harmless today; owed: the detector taught to follow a
-helper. Thirty-eight reads ask for fields nothing writes. They are dead fallbacks behind fields that are written, and
+helper. Thirty-five reads (thirty-nine sites) ask for fields nothing writes. They are dead fallbacks behind fields that are written, and
 none prints a wrong or empty value on any page; owed: their removal after the release (not in the close: an old saved
 record may still feed a fallback).
 
@@ -224,9 +224,9 @@ next in line):
    `scripts/migrate-observed-shape-readers.mjs` exactly as 41→42 did (find `schema-41-to-42-tier-seed-v1`).
 3. ACT 2, the governed ritual on act 1's committed clean tip: (i) `node scripts/check-observed-shape-readers.mjs
    --scan-only --scan-mode=legacy-leaf --json=<ext>`; (ii) `node scripts/migrate-observed-shape-readers.mjs
-   --target-schema=43 --review-template=<ext>`. Expect Same ≈ 1,513, New 38 reads / Gone 14 (the 7 lawful shrinks, and
+   --target-schema=43 --review-template=<ext>`. Expect Same 1,516 identities, New 35 identities (39 reads), Gone 14 identities (16 reads) (the 7 lawful shrinks, and
    the 7 erosion rows, which the migrate counts as Gone and whose decisions record them as UNCURED INSTRUMENT EROSION);
-   (iii) the review JSON in `docs/chair/2026-11-15/`, one decision per row: the 38 NEW are admitted by cause with class
+   (iii) the review JSON in `docs/chair/2026-11-15/`, one decision per row: the 35 NEW are admitted by cause with class
    and lane (the table above: dead fallback (WorldPulseData, newsBody, proposalAdmission, crisisPage, Institutions.jsx,
    magicProvisionShown); writer outside the corpus (assembleInstitutions: the store's config); writer under another
    shape name (incomeLineSiblings: activeChains; warCoalitionEvidence: metadata); a data table / local result
