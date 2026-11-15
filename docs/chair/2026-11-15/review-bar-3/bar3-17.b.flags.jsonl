@@ -1,0 +1,9 @@
+{"id":"C31881","town":"bar0-town-occupied-rand-8","sev":"MED","kind":"STATE","why":"merchant guilds 'set the terms of trade' but QUARRELS has them subordinate to the Corrupt Council and trade is taxed by the occupation; also singular guild vs Merchant guilds (3-8)","other":""}
+{"id":"C32446","town":"bar0-town-occupied-rand-8","sev":"LOW","kind":"PAIR","why":"shadow economy 'does little harm', but the ruling Corrupt Council is a criminal concern and Criminal opportunity is Elevated","other":"C32528"}
+{"id":"C32590","town":"bar0-town-occupied-rand-8","sev":"LOW","kind":"STATE","why":"'Everyone comes and goes by the gates' but the town is a port with docks and a ferry; trade access port, ships bring goods","other":""}
+{"id":"C32804","town":"bar0-town-occupied-rand-8","sev":"LOW","kind":"STATE","why":"vintner bought 'the vineyard', but LAND/TRADE say grapes are needed and not brought in; the country around gives too few","other":"C32345"}
+{"id":"C33093","town":"bar0-town-occupied-rand-8","sev":"LOW","kind":"STATE","why":"The Purge is 45 years ago in PAST (town 149 years old) but labelled 'Last century'","other":""}
+{"id":"C33097","town":"bar0-town-occupied-rand-8","sev":"LOW","kind":"STATE","why":"The Siege is 81 years ago in PAST but labelled 'Ancient', same label scale as 108 and 132 years","other":""}
+{"id":"C33211","town":"bar0-village-calm-rand-6","sev":"MED","kind":"STATE","why":"hook for Eochaidh Walsh (stable keeper, head of Elder Council) gives him a church hierarchy and 'their own theology'; the priest is Uilliam Quinn","other":""}
+{"id":"C33210","town":"bar0-village-calm-rand-6","sev":"LOW","kind":"STATE","why":"hook gives Eochaidh Walsh (stable keeper) people 'under their command' and duty rosters; the militia captain is Gareth Kelly","other":""}
+{"id":"DONE","lines":1997,"blocks":2,"flags":8}
