@@ -1,0 +1,9 @@
+{"id":"C10029","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"STATE","why":"ore carts in a never-ending line; LAND gives Iron ore deposits absent, Mining & Quarrying vulnerable, iron is an import","other":""}
+{"id":"C10319","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"STATE","why":"title 'Merchant Prince' given to Slavica Ilić; PEOPLE gives her sex f, the luxury merchant","other":""}
+{"id":"C10682","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"STATE","why":"says ore is cut underground and carted out as fact; LAND gives Iron ore deposits absent, Mining & Quarrying vulnerable, iron imported","other":"C10029"}
+{"id":"C10880","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"BROKEN","why":"income source 'Grain Sales' (3%) printed with no description, though every other income source carries one","other":""}
+{"id":"C10318","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"PAIR","why":"luxury quarter sells spices (also C10654); the settlement-necessity line says spices are needed and not brought in","other":"C10914"}
+{"id":"C11095","town":"bar0-city-wartime-rand-5","sev":"LOW","kind":"STATE","why":"calls the shadow trade 'small'; INCOME has Black Market Revenue 14%, the second-largest source, and C11090 says 14% of trade unrecorded","other":"C11090"}
+{"id":"C11391","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"STATE","why":"Magic printed Moderate (availability moderate); header says magic low, and C10053 gives Magical Capability Weak","other":"C10053"}
+{"id":"C11586","town":"bar0-city-wartime-rand-5","sev":"MED","kind":"STATE","why":"mine-master 'sells ore by the cart'; LAND gives Iron ore deposits absent, Mining & Quarrying vulnerable, iron is imported","other":"C10029"}
+{"id":"DONE","lines":2253,"blocks":1,"flags":8}
