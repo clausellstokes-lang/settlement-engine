@@ -18,7 +18,9 @@ const birth = (seed) => {
 };
 const IN_CRISIS = ['rr3-town-under_siege+famine-rand-0', 'rr3-city-under_siege-rand-1', 'rr3-city-famine-rand-0'];
 const AT_PEACE = 'rr3-town-calm-rand-2';
-const SUPPLIED = /well stocked|kept supplied|will not go short|supply book for .* balances/;
+// TAIL-CORPUS-DEF-4 (U2, 2026-11-15): re-keyed by identity: DS-DEF-2 CHAIN defence supplied v1-v3 were reworded as what
+// their key reads by 30895bb67 (W2-WRITE-4 round 3); the pool and its claim are the same, the words are new
+const SUPPLIED = /counts in its defence's favour|better off for the trades behind them|do it more good than harm|will not go short/;
 const TOWNS = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
