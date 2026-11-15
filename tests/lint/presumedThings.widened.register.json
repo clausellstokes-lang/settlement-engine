@@ -19,7 +19,8 @@
   "after-base: r3-code-c": "this lane's truer rewording of a line the line had banked (same file, same slot; its old row shrunk out at acee99f3a), true wherever it prints by a key or a branch no draw door reads: the crisis kind of the vantage table, the fort-and-force branch of the validator (banked BY HAND under the chair's ruling of 2026-11-14 04:05Z on R3-CODE-C-6's STOP, against the letter of section 2m, as point 49's seven; held true by tests/generators/r3cRekeyedLinesTrue.test.js; owed FOR THE JOIN: the vantage table and the validator's reasons go through a draw door, and the rows leave by --shrink)",
   "after-base: close-true": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: TRUE WHERE IT PRINTS on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
   "after-base: close-unprinted": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: NEVER PRINTED on the 1,080 births measured at the close: only arm 1 lists it (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
-  "after-base: close-false": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: PRINTS IN TOWNS THAT LACK ITS THING (its count is in the table) on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed FIRST in the next round: cured by its declaration and its twin, the row leaves in the cure's commit"
+  "after-base: close-false": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: PRINTS IN TOWNS THAT LACK ITS THING (its count is in the table) on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed FIRST in the next round: cured by its declaration and its twin, the row leaves in the cure's commit",
+  "after-base: close-strip": "a strip site the round of 2026-11-14/15 wrote after the instrument's base: the pool passes the declared filter first and its lines are unwrapped only to be printed (not a draw); banked BY HAND under the chair's ruling PT2 of 2026-11-15, against the letter of the door's base rule, as record 405's row; owed after the release: the site reads the door's own text field and the row leaves"
  },
  "arm1": {
   "src/components/AccountPage.jsx": [
@@ -29341,6 +29342,11 @@
    "src/generators/aiLayer.js",
    "[ ...(via.plotHooks || []), ...(hist.historicalEvents || []).flatMap(e => e?.plotHooks || []), ]",
    "not-a-draw"
+  ],
+  [
+   "src/generators/foodGenerator.js",
+   "filterDeclared([...rows], { facts: () => factsOf(record), poolId: `cultureProfiles:${String(key)}.fo",
+   "after-base: close-strip"
   ],
   [
    "src/generators/generationCoherence.js",
