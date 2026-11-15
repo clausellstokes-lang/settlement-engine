@@ -1,0 +1,6 @@
+{"id":"00009","town":"r2s-wartime-town-2","sev":"MED","kind":"STATE","why":"says three powers stand level and no one leads; Feudal Appointee (Significant) governs and the other three are Minor","other":""}
+{"id":"00544","town":"r2s-famine-city-1","sev":"MED","kind":"LACKS","why":"stalls selling reagents: HOUSES has no alchemist or apothecary, and TRADE and INCOME name no reagent trade","other":""}
+{"id":"00011","town":"r2s-plague_onset-city-0","sev":"LOW","kind":"STATE","why":"half the goods traded are in transit; the town is Quarantined — Plague Conditions, with travel and trade stopped","other":""}
+{"id":"00081","town":"r2s-indebted-city-1","sev":"MED","kind":"STATE","why":"says it ends each year with money to spare; CRISIS is Indebted to Outside Power and creditors have a say in every decision","other":""}
+{"id":"00065","town":"r2r-city-2","sev":"MED","kind":"STATE","why":"Religious Authorities back Arcane Council's rule as ordained; QUARRELS has them in a high conflict over market licensing","other":""}
+{"id":"DONE","lines":2459,"blocks":75,"flags":5}
