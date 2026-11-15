@@ -197,7 +197,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // taken in the same act as the golden re-record).
 // -> f4fc47a0 STYLE-2-MERGE record 47, the COHERENCE-AGREE merge (one fact, one answer: the control row's resource roll, economy and
 // defence read off its own record; taken in the same act as the golden re-record).
-const GOLDEN_CONTROL_HASH = 'f4fc47a0ffe9036b899c2ce86a4fbb071857e321eb222599108adc3f6ccea662';
+// -> 7ae63229 the close of the tail round, 2026-11-15 (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's
+// chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json: the round's declared moves re-deal the control row,
+// a face for every seat of power and the cast drawn after it; the golden re-recorded 525 of 525 at dec4ec241, this row its control).
+const GOLDEN_CONTROL_HASH = '7ae632298ed95e73deedbced63bf64ae9662cf45f61b8d8bfa02e7b2fcc5ee6b';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -242,8 +245,13 @@ const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
 // draw is the label-keyed fork `food.cropFortune`, so the probe row mints it twice, both by fork: the second call draws
 // the same crop fortune BY DESIGN (no stream moves). Measured by A5: repeatedSeeds = cropFortune x2 [fork|fork] ;
 // power-structure x4. The power-structure quartet is unmoved.
+// 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record
+// docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): cropFortune x2 -> x3 [fork|fork|fork], measured by A5's own print at
+// the golden's tree 8c11f73ea (total=141 direct=4 viaFork=137): the round's declared economy move (the economy read off the town's own
+// record) calls the stores' writer once more, by the same label-keyed fork, so it draws the same crop fortune (no stream moves; the
+// register's economyReconcilePass|economicState row reads 'varies' with it). The power-structure quartet is unmoved.
 const STORES_SEED = `${CENSUS_ROW._seed}::generateEconomy::food.cropFortune`;
-const STORES_VIAS = ['fork', 'fork'];
+const STORES_VIAS = ['fork', 'fork', 'fork'];
 // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
 // registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
 // 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
@@ -682,7 +690,11 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     failOnDifference(differences, emitTier1Literal(fresh.rows));
     // LANDING-8 (2026-11-06, ODQ §934.105): 7 -> 11. The crisis cast writes copy-on-write (lane D, 8befe5a0d), so the four
     // `stress` rows' FINAL comparand reads 'varies' (same 9 / transformed 54), measured by this arm's fresh execution.
-    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(11);
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat;
+    // record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 11 -> 13, measured by this arm's fresh execution at
+    // the golden's tree 8c11f73ea: generateEconomy|economicState and economyReconcilePass|economicState read 'varies' (same 52 /
+    // transformed 11), the round's declared economy move (the economy read off the town's own record); disagreeing holds at 13.
+    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(13);
     // 2026-10-01, the urban band (ODQ §934.86): 18 -> 16 (measured). The institution rebuild moved the producedOnRecord
     // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
     // LANDING-8 (2026-11-06, ODQ §934.105): 17 -> 13, the same cause (8befe5a0d): the four `stress` rows' two comparands
