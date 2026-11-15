@@ -43,7 +43,7 @@ export const buildInsurgencyNarrative = (
     (institutionFlags.economyOutput || 50) < 48;
 
   if (insurgencyOutmusclesAuthority) {
-    return 'Pamphlets against those in charge pass from hand to hand, and two guild masters stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, because moving would admit there is a rising.';
+    return 'Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, because moving would admit there is a rising.';
   }
   return (
     'The trouble is inside the government, not in the streets. ' +
@@ -56,6 +56,8 @@ export const buildInsurgencyNarrative = (
   );
 };
 
+// TAIL-POWERS-4 (05663, 15434): conscription's toll and the empty seats claim no workshop and no guild (a thorp of 8 holds
+// neither): every household is short-handed; "several who were expected" stayed away.
 export const buildWartimeNarrative = (institutionFlags, governingFactionName, institutionNames = []) => {
   // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #706 #707): a town that governs itself as an independent polity (the
   // roster's City-state government: "No higher lord, no external charter") has no crown to pay, take or send an officer
@@ -71,8 +73,8 @@ export const buildWartimeNarrative = (institutionFlags, governingFactionName, in
       `${governingFactionName} must decide how much more the settlement can give to the war.`
     );
   }
-  if (sovereign) return 'Conscription has taken the workers, and the farms and workshops are short-handed. The army\'s supply carts take what they need first, and local needs come second. Prices have risen and will rise again. An army quartermaster came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.';
-  return 'Conscription has taken the workers, and the farms and workshops are short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown officer came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.';
+  if (sovereign) return 'Conscription has taken the workers, and every household is short-handed. The army\'s supply carts take what they need first, and local needs come second. Prices have risen and will rise again. An army quartermaster came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.';
+  return 'Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown officer came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.';
 };
 
 export const buildReligiousConversionNarrative = (governingFactionName) => {
