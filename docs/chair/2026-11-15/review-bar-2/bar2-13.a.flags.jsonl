@@ -1,0 +1,13 @@
+{"id":"C25594","town":"bar0-town-calm-rand-4","sev":"MED","kind":"STATE","why":"says no merchant guild above the craft guilds; GOVERNMENT lists Merchant Guilds (Suppressed) as a power and Zenobia is its rank 1","other":"C25619"}
+{"id":"C25604","town":"bar0-town-calm-rand-4","sev":"MED","kind":"STATE","why":"says it lives by travellers' stabling and meals; FOUNDING is mineral deposits, exports salts/alum/sulfur, income markets/guilds; no stable on HOUSES","other":""}
+{"id":"C25590","town":"bar0-town-calm-rand-4","sev":"LOW","kind":"PAIR","why":"Economic Resilience Adequate against Economic capacity Critical and prosperity Struggling","other":"C25614"}
+{"id":"C25638","town":"bar0-town-calm-rand-4","sev":"LOW","kind":"STATE","why":"hook under Zenobia Flavius (craft-guild master) says they lead the prayers weekly; priestly duty belongs to the dean","other":""}
+{"id":"C25910","town":"bar0-town-calm-rand-4","sev":"MED","kind":"LACKS","why":"names public ovens; none on HOUSES (no bakery or oven house)","other":""}
+{"id":"C26147","town":"bar0-town-calm-rand-4","sev":"LOW","kind":"PAIR","why":"Medical role of magic 'common' against Reliance on magic None and 'nothing depends on arcane work'; Arcane Support None","other":"C26144"}
+{"id":"C26553","town":"bar0-town-calm-rand-5","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard' used as one power's name beside 'Backs' on the charter hall row","other":""}
+{"id":"C26505","town":"bar0-town-calm-rand-5","sev":"LOW","kind":"STATE","why":"hook under Timur Kovalev (company captain) says a directive from the hierarchy contradicts their theology; he holds no priestly office","other":""}
+{"id":"C26954","town":"bar0-town-calm-rand-5","sev":"MED","kind":"LACKS","why":"names shared ovens; none on HOUSES (no bakery or oven house)","other":""}
+{"id":"C27208","town":"bar0-town-calm-rand-5","sev":"MED","kind":"PAIR","why":"says fines cannot be enforced, laws ignored; page says Very Safe, little crime, law & order Adequate, watch sees to it","other":"C27215"}
+{"id":"C27313","town":"bar0-town-calm-rand-5","sev":"LOW","kind":"STATE","why":"Filomena Bykov's card (harbour master, second of Military Council) titled Wharfinger; PEOPLE gives wharfinger to Anastasia Klimov at the Docks","other":""}
+{"id":"C27210","town":"bar0-town-calm-rand-5","sev":"MED","kind":"PAIR","why":"says money in hand and defenders kept paid; GOVERNMENT stability says chronically underfunded, and the guard assessment gives irregular pay","other":"C27195"}
+{"id":"DONE","lines":2246,"blocks":2,"flags":12}
