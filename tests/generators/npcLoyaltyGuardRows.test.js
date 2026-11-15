@@ -49,6 +49,9 @@ const DECLARED = {
   'government#7': ['no crisis: under_siege', 'no crisis: plague_onset'],
   // TAIL-TIES-2, the inheritors of (T7)'s walk (the same form): a visitor or an outsider at the gate of a besieged town
   'small_settlement#0': ['no crisis: under_siege', 'no crisis: plague_onset'], 'small_settlement#15': ['no crisis: under_siege', 'no crisis: plague_onset'],
+  // TAIL-TIES-4, the chair's ruling (T18) of 2026-11-15 (re-keyed by identity with its cause): the cargo comes only by an open
+  // route (economy#6, with its inland twin in NPC_HOOK_SIBLINGS); the shop's note and its scales stand where a market does.
+  'economy#6': ['no crisis: under_siege', 'no route: isolated'], 'economy#17': ['market'], 'economy#18': ['market'],
 };
 
 describe('NPC_FACTION_LOYALTY declarations (CENSUS-3e)', () => {
