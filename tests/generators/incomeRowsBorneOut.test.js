@@ -68,10 +68,12 @@ describe('(o) re-ruled, D: an income row is borne out by the page', () => {
   // Re-keyed BY IDENTITY (TAIL-DEFECON-C-2, D25, the chair, 2026-11-15): r2r-thorp-24 stands no salt works, so since
   // D25 it exports no salt and keeps no salt row (Agricultural Rents alone, and no Fish row). The claim is kept in a
   // town that sells its flats' salt by a Salt works with no fisher.
+  // Re-keyed BY IDENTITY (TAIL-CLOSE-DISPLAY-2, red 6): TAIL-DEFECON-2's declared move D10 (df2fa5ca) titles the rents
+  // row "Harvest" where no lord's steward or reeve stands, and r2r-thorp-24 has neither: the same row, its present title.
   it('r2r-thorp-24: no salt works, no salt sold: neither a Salt Sales row nor a Fish row', () => {
     const sources = S['r2r-thorp-24'].economicState.incomeSources.map((/** @type {any} */ e) => e.source);
-    expect(sources, 'anchored: the rents stand').toContain('Agricultural Rents');
-    expectAbsentWithAnchor(sources, 'Salt Sales', 'Agricultural Rents');
+    expect(sources, 'anchored: the harvest row (the rents row\'s D10 title) stands').toContain('Harvest');
+    expectAbsentWithAnchor(sources, 'Salt Sales', 'Harvest');
     expect(sources.filter((/** @type {string} */ t) => /^Fish & /.test(t))).toEqual([]);
   });
   it('r2s-succession_void-town-0: sea salt sold under a Fish title with no fisher is titled "Salt Sales"', () => {
