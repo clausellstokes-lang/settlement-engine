@@ -22,6 +22,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAST_REASONS } from '../../src/domain/crisis/crisisCast.js';
 import { membersByRank } from '../../src/domain/people/membership.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own configuration for its seed families (CENSUS-3 seedcfg.mjs: r2r-, r2s-, bar0-). @param {string} seed */
@@ -83,7 +84,7 @@ describe('BAR2-PLACES-2: the rows read the town', () => {
     it.each(['r2r-thorp-23', 'r2s-wartime-metropolis-1', 'r2s-under_siege-thorp-1'])('CURED %s', (seed) => {
       const s = born(seed);
       expect(s.culturalIdentity?.socialTexture).toMatch(NEW_SLAVIC);
-      expect(JSON.stringify(s)).not.toMatch(OLD_SLAVIC);
+      expectAbsentWithAnchor(JSON.stringify(s), OLD_SLAVIC.source, 'Shared water and seasonal work make private life unusually communal.', `${seed}: the old slavic texture is gone, its rewording prints`);
     });
     it('KEEP r2r-thorp-10: the pool\'s true sibling (row 0) still prints where it was drawn: the slot keeps its draw', () => {
       const s = born('r2r-thorp-10');

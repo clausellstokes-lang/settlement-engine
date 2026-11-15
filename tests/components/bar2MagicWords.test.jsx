@@ -33,6 +33,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { deriveMagicRelianceView } from '../../src/domain/display/dossierViewModel.js';
 import { ARCANE_NONE, ARCANE_NONE_WITH_SERVICE, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** @type {Map<string, any>} */ const towns = new Map();
@@ -61,10 +62,10 @@ const RELIANCE = [
   ['r2r-city-21', 'Integral', 'Relied upon'],
 ];
 const RELIANCE_KEEP = [['r2r-village-13', 'Relied upon'], ['r2r-village-12', 'Relied upon']];
-// [seed, the role row that must not print]
+// [seed, the role row that must not print, a sibling role row that still prints there (the liveness anchor)]
 const ROLES = [
-  ['r2r-village-13', 'Economic role: absent'], ['r2r-village-13', 'Medical role: absent'],
-  ['r2r-hamlet-27', 'Military role: absent'], ['r2r-town-5', 'Military role: absent'],
+  ['r2r-village-13', 'Economic role: absent', 'Infrastructure role: absent'], ['r2r-village-13', 'Medical role: absent', 'Infrastructure role: absent'],
+  ['r2r-hamlet-27', 'Military role: absent', 'Infrastructure role: common'], ['r2r-town-5', 'Military role: absent', 'Infrastructure role: common'],
 ];
 const ROLES_KEEP = [['r2r-village-3', 'Military role: absent'], ['r2r-village-16', 'Military role: absent']];
 // [seed, the headline that must not print, the level it prints]
@@ -89,7 +90,7 @@ describe('BAR2-LABELS batch 2: every magic word reads what the record shows magi
   test('NOT: a role "absent" where the record holds the role (the row is left out); KEEP: absent where it holds none', () => {
     const failures = collectSeedFailures([...new Set(ROLES.map((r) => r[0]))], (seed) => {
       const lines = magicTab(town(seed));
-      for (const [, row] of ROLES.filter((r) => r[0] === seed)) expect(lines, `${seed}: "${row}" left out (silent by design)`).not.toContain(row);
+      for (const [, row, anchor] of ROLES.filter((r) => r[0] === seed)) expectAbsentWithAnchor(lines, row, anchor, `${seed}: "${row}" left out (silent by design)`);
     });
     expectNoSeedFailures(failures, 'the role rows read the record');
     for (const [seed, row] of ROLES_KEEP) expect(magicTab(town(seed)), `${seed} keeps "${row}"`).toContain(row);
