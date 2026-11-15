@@ -105,6 +105,12 @@ UNCHANGED**; `seatWordsOnce.test.jsx` N6 green unchanged.
 A role moves with the title only where the role is the face (M-1b): a dual-hat leader's role is the office's and stays
 (46 women "the boat-master" keep the role "Elder"; 8 "the camp overseer"; 6 men "the brewster").
 
+## What is left
+
+Of class k, for this seat: nothing. K-C is built and pushed (1036bf94b); k stands at its six false hits ("the lord's
+appointee"). What remains of the class prints through files not mine (below): the honorific pools (174 towns) and the
+golden master (the owner's door). The seat is handed back.
+
 ## Named for other seats (not built here)
 
 - **The honorific pools, `src/data/faceHonorifics.js :: FACE_HONORIFICS` (the file's owner):** the Institutions tab's
