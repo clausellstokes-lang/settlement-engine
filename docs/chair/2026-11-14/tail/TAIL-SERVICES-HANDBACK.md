@@ -229,3 +229,13 @@ eslint 0 on the touched files; `typecheck:domain:strict` 1113 = ceiling; `typech
 ## Instruments (re-made as above)
 `git archive` of the chair's `READ-ALL`, `read-all`, `read-all-3` and the census lane's `CENSUS-3` into a scratch dir; `census3.sh <clean tree> before 4`, `census3.sh <cured tree> after 4`; `inventory.py` (and with `SURFACES=PDF,Journal`); `inventory_diff.py before.json after.json <batch rows>` (the rows: the ids above from WORKLIST-SERVICES.json and WORKLIST3-SERVICES.json). The S8 read: the leaf (`stoppedRowMark(s, 'house', i)`) over the corpus for the nine S8 ids, each mark looked for as `"<mark> <desc>"` in the town's dump. The field diff: a per-town deep compare of the two corpora by top-level family.
 
+
+## WHAT IS LEFT (for the next seat of this group; current at da3826342)
+1. **The X9 rows left with reasons** (listed above): each needs a ruling or another seat's cure before this group can act. An occupation is a state the leaf does not read (21361 08780 22486); the guilds' suppression is a power state (16263). The chain's depleted ground (14371 04369 22336 07626 31242) is to be re-measured after TAIL-DEFECON-R's gap cure lands (S10). 15710 the livestock auction under a siege waits on a ruling on `beyond the gates` for herds. 06293 is 1 town.
+2. **S10 at the close:** once TAIL-DEFECON-R lands, `INPUT_GAP_HELD_EVERYWHERE` (vintner, glassblower) guards nothing: re-measure the S7 counts at the close and retire the list or keep it, by the measure.
+3. **The Services tab's once-law drops a marked row's description with its mark** (r2s-under_siege-town-0, the Market square's "Weekly market": 1 town). The row prints its bare name while the Institutions door says "(stopped)". The cure would sit in ServicesTab.jsx (keep the mark when the description is withheld). Under five towns, so it waits.
+4. **Owed by other seats, named:** the exports call the leaf (the journal does; the PDF and the Economics tab are being switched by their seats). TAIL-HOUSES' "whenever <input> can be had" texts land beside the short mark: read, no fault but the salt works' noun (`validationOnPage.js :: CHAIN_INPUTS`).
+5. **Registers named stale:** `docs/content/wiring-census.json` (carried), re-derived at the close.
+
+## Handed back (2026-11-15 ~02:20Z)
+TAIL-SERVICES-3 hands back by time (the count's field read 0 in-turn; about 65 minutes of work, near the 250,000 line), with the account's weekly usage warning on. Pushed: e35851db1 (S9 read, batch 2, two X9 rewords), da3826342 (S14 and the READ-ALL-4 Hospitality answer). Scratch worktrees and census outputs live only in this session's scratchpad: not kept; re-made as "Instruments" above.
