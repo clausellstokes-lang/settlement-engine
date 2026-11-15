@@ -698,6 +698,13 @@ const GOOD_WORKING_HOUSES = Object.freeze({
   'Fine textiles':              ['weaver', 'textile', 'tailor'],
   'Camel leather':              ['tann'],
 });
+// TAIL-DEFECON-C-4 (D34, the chair, 2026-11-15): A LAND'S GOOD THAT ONLY A HOUSE WINS FROM IT. Fishing grounds give no
+// salt without a salt works (sea water is boiled or panned there); a fishery's catch does not make it. Asked by
+// resource, so the salt flats' and the desert's salt keep the land's gate alone.
+const LAND_GOOD_HOUSES = Object.freeze({ fishing_grounds: Object.freeze({ salt: ['salt'] }) });
+/** @param {string} key @param {string} good @param {ReadonlyArray<any>} housed */
+const landGoodMadeHere = (key, good, housed) => !(/** @type {any} */ (LAND_GOOD_HOUSES))[key]?.[good]
+  || (/** @type {any} */ (LAND_GOOD_HOUSES))[key][good].some((/** @type {string} */ kw) => housed.some(i => institutionMatchesGate(i, kw)));
 /**
  * A good is worked here where a house of this town that the table names for it stands (or the table names none).
  * @param {string} good @param {ReadonlyArray<any>} housed the town's houses, its fabric ("Access to …") left out
@@ -1078,7 +1085,8 @@ export function deriveLocalProductionFromChains(
     if (rd?.commodities) rd.commodities.forEach(c => {
       const good = c.replace(/_/g, ' ');
       if (!rawWorkedHere(good)) return; // D30 (b): the record's exploitation names no house at this raw
-      if (housed && !goodWorkedHere(good, housed)) return; // D33: a house of the table makes it, or it is not made here
+      // D33: a house of the table makes it, or it is not made here; D34: the coast's salt only by a salt works
+      if (housed && (!goodWorkedHere(good, housed) || !landGoodMadeHere(key, good, housed))) return;
       if (!refusedOnly.has(good.toLowerCase())) local.add(good);
     });
   });

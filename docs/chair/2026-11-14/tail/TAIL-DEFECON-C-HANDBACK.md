@@ -488,7 +488,7 @@ The rulings worked to (the chair, 2026-11-15 03:20 UTC; each vetoable by the own
 | commit | what | record move (births-only field diff on the 720, over the commit before) |
 |---|---|---|
 | **0e838bc65** D33 | the table's flour, bread, cloth, clothing, glass and pottery rows; the land's commodity asked too | 117 towns: `localProduction` 117, `primaryExports` 21, `economicComplexity` 1; nothing else |
-| **D34 (a)** (this commit) | `resourceData.js` commodities: a river fishery's salt, a precious-metal vein's gems, both hot-springs keys' herbs leave | 235 towns: `resourceAnalysis.availableResources` 235, `localProduction` 167, `necessityImports` 29, `primaryImports` 25, `resourceAnalysis.gaps` 16, `resourceChains` 12, `exploitation` 12, `resourceAnalysis.imports` 10, `transit` 8, `resourceAnalysis.exports` 3, `priorityNotes` 1; NO income, prosperity, founding, arrival or hook |
+| **680d16b54** D34 (a) | `resourceData.js` commodities: a river fishery's salt, a precious-metal vein's gems, both hot-springs keys' herbs leave | 235 towns: `resourceAnalysis.availableResources` 235, `localProduction` 167, `necessityImports` 29, `primaryImports` 25, `resourceAnalysis.gaps` 16, `resourceChains` 12, `exploitation` 12, `resourceAnalysis.imports` 10, `transit` 8, `resourceAnalysis.exports` 3, `priorityNotes` 1; NO income, prosperity, founding, arrival or hook |
 
 ### D33
 
@@ -520,6 +520,8 @@ The rulings worked to (the chair, 2026-11-15 03:20 UTC; each vetoable by the own
   A3/A4/A7/A8) but the two re-keyed above, green after. domain-strict, the type ratchet, eslint (the file held at 800
   lines): exit 0. The walker `--check`: fresh 148, first-register stale 2 (as at the base). The grid: 2 falls as at
   the base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a). The golden master moves (the owner's door): not re-taken.
+
+| **D34 (b)** (this commit) | fishing grounds' salt on the made list only where a Salt works stands (`LAND_GOOD_HOUSES`, by resource) | 25 towns: `localProduction` ONLY (salt leaves 23; 2 reorder) |
 
 ### D34 (a): the three data pairs (each measured alone over D33, then together: the union)
 
@@ -555,15 +557,42 @@ herbs, the grove's honey, the oasis's and the palms' dates.
 - Gates: the 66 focused files + both guards: 21 red over 15 files, the 13 CARRIED of D33's list and the 8 re-keyed above
   (green after). domain-strict, the type ratchet, eslint: exit 0.
 
+### D34 (b): fishing grounds' salt (A DEVIATION FROM THE RULING'S LETTER, VETOABLE)
+
+- Measured both ways over D33. THE LETTER (salt out of `fishing_grounds.commodities`): 61 towns (availableResources 61,
+  localProduction 41, resourceAnalysis imports/gaps 14), and in those 14 it tells a COASTAL Salt works it "lacks access
+  to" salt (6: r2r-hamlet-8, r2r-hamlet-53, r2r-village-51, r2s-insurgency-city-3, …) or "runs on imported" salt (8):
+  FALSE beside the ruling's own words ("do not make salt WITHOUT A SALT WORKS"). NOT BUILT. BUILT: the data keeps the
+  coast's salt and the made list asks a Salt works for it, by resource (the salt flats' and the desert's salt keep the
+  land's gate): 25 towns, ONE family, salt leaves 23 (a Fishing community, a Fisher's landing, Docks, … and no salt
+  works). No inheritor (nothing gained; 2 towns reorder). The predecessor's 21 was counted with other house tests.
+- Guard: the D34 (b) block of `tailDefeconCatalogueCommodities.test.js` (2 GONE red at 680d16b54; the data row and 3
+  KEEP towns, a Salt works on the fishing grounds, green before and after).
+- Gates (AT THE HAND-BACK, NARROWED BY TIME): the record (births-only: 25 towns, one family); every tail-defecon guard,
+  `economicsGoodsPillsBorneOut`, `resourceDynamicsApply`, `apothecaryWorksTheHerbs` (213 tests): green; eslint on the
+  touched files: clean. NOT RUN for (b): the 66-file focused set, domain-strict, the type ratchet, the walker, the grid
+  (run for D33 and D34 (a): as listed above). OWED to the next seat, first.
+
 ### What is left (TAIL-DEFECON-C-4)
 
-1. D33: DONE (0e838bc65). D34 (a): DONE (this commit).
-2. D34 (b), FISHING GROUNDS' SALT: measured, being built. Taking "salt" out of the commodities (the ruling's letter)
-   moves 61 towns and plants, in 14, a gap line on a COASTAL Salt works ("lacks access to …" 6, "runs on imported …" 8):
-   false, since the ruling's own words are "do not make salt WITHOUT A SALT WORKS". So the commodity stays and the made
-   list asks a Salt works for the coast's salt (`computeActiveChains.js`, by resource: the salt flats' keep the land's
-   gate): 25 towns, localProduction ONLY (salt leaves 23). A DEVIATION FROM THE LETTER, VETOABLE.
-3. THE PAGE: the census before at 65a5ecfcf is running; the after at the close.
+1. D33: DONE (0e838bc65). D34 (a): DONE (680d16b54). D34 (b): DONE (this commit), its full gates OWED (above).
+2. The record's four pairs after D34: river-fishery salt, precious-metal gems, hot-springs herbs leave the data (0 by
+   construction); the coast's salt only by a Salt works.
+3. THE PAGE: THE BEFORE CENSUS IS TAKEN, the after is NOT (the hand-back came at the time mark). Before, at 65a5ecfcf:
+   `census3.sh` exit 0, `CENSUS_RENDER=render.census2.jsx`, out-dir in this seat's scratch (lost with the container):
+   re-take it. OWED: one census at the tip, `inventory.py` both, `inventory_diff.py`, the D30 census "a good made with no
+   house or worked land" (85 towns at 65a5ecfcf by the predecessor's count) and each of the four pairs to none; the
+   inheritors read where they print (the salt-works gap line by a river, 9 towns; r2r-village-8's herb card, named).
 4. NAMED, NOT BUILT (as the predecessor left them): ONE LEAF for the exploitation's terrain check
    (`resourceGenerator.js`'s seat; held equal by a test meanwhile); `resourceDynamicsKernel.js:575` (the world pulse
    re-derives the made list with no roster and no terrain: the gates are off there until the next birth).
+5. NAMED, NOT BUILT (this seat): r2r-village-8's herb card Partial (`validationOnPage.js` / `resourceGenerator.js`'s
+   filing, a divine Healer); no resource's commodities name "gems" (the gem deposit's data); "Milled flour" et al. are
+   now one reading (done). Carried from the predecessor's note of 03:17, NOT BEGUN: B14842 "Pilgrim hospitality" (a
+   second key on the inn row: an EXPORT move, measure first) and the fish-famine chain rows and 24992 (item 6 above).
+6. REGISTERS NAMED STALE: the golden master (the owner's door, moved by all three commits); the walker and the grid as at
+   the base (fresh 148, first-register stale 2; 2 falls, checked at D33).
+
+HANDED BACK by TAIL-DEFECON-C-4 at 2026-11-15 ~04:25 UTC by time (~70 minutes; the meter read 0). Instruments as above;
+this seat's ad hoc scripts (goods and list diffs by family over two corpora, the herb-card grade over the 720 by
+`exploitationGroupsShown`) are node over `corpus.ndjson.gz`, not committed.

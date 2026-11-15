@@ -85,3 +85,31 @@ describe('D34: the made list holds no bundled good the land does not give', () =
     expect(town('r2r-thorp-44').economicState.necessityImports).toContain('Salt');
   });
 });
+
+/**
+ * D34, FISHING GROUNDS: they give no salt WITHOUT A SALT WORKS (the ruling's words). The commodity stays in the data (a
+ * coast's Salt works boils or pans its salt; taking it out would tell 14 coastal salt works they lack salt), and the
+ * made list asks a Salt works for the coast's salt (`computeActiveChains.js :: LAND_GOOD_HOUSES`, by resource: the salt
+ * flats' and the desert's salt keep the land's gate). 25 towns at 680d16b54, the made list alone.
+ */
+const GONE_COAST = [
+  ['r2r-thorp-22', 'fish'],   // a Fishing community, no salt works
+  ['r2r-hamlet-26', 'fish'],  // a Fisher's landing, no salt works
+];
+const KEEP_COAST = ['r2r-hamlet-8', 'r2r-hamlet-53', 'r2r-village-51']; // fishing grounds and a Salt works, no salt land
+
+describe('D34: the coast\'s salt is made only where a salt works stands', () => {
+  test('the data keeps the coast\'s salt', () => {
+    expect(commoditiesOf('fishing_grounds')).toEqual(['fish', 'salt']);
+  });
+  test.each(GONE_COAST)('%s lists no "salt"; it still makes "%s"', (seed, still) => {
+    const list = madeIn(seed);
+    expect(list).not.toContain('salt');
+    expect(list).toContain(still);
+  });
+  test.each(KEEP_COAST)('%s still lists "salt" (its Salt works stands on the fishing grounds)', (seed) => {
+    expect(town(seed).config.nearbyResources).toContain('fishing_grounds');
+    expect(town(seed).institutions.map((/** @type {any} */ i) => String(i.name))).toContain('Salt works');
+    expect(madeIn(seed)).toContain('salt');
+  });
+});
