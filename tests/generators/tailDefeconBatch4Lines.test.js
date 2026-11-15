@@ -11,6 +11,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // The census's 720 configuration (SECOND-WAVE-CENSUS births.mjs): every random dial on.
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -54,7 +55,7 @@ beforeAll(async () => {
 describe('TAIL-DEFECON-4 batch 4: the food heading, the alchemist, the revolt and the half-worked chain say only what the record holds', () => {
   for (const [row, seed, gone, instead] of GONE) {
     test(`#${row} ${seed}: not "${gone}"; "${instead}"`, () => {
-      expect(towns[seed]).not.toContain(gone);
+      expectAbsentWithAnchor(towns[seed], gone, instead, `#${row} ${seed}: gone beside what prints instead`);
       expect(towns[seed]).toContain(instead);
     });
   }

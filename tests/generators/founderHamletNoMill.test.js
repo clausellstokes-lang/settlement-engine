@@ -6,6 +6,7 @@
  * line names no house: "a household that settled first and found others following it in".
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -14,7 +15,8 @@ describe("the reader's famine hamlet, born as the app births it", () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('Ulfset (ww-53): the founder is no miller who found customers before they found customers', () => {
     const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'hamlet', selectedStressesRandom: false, selectedStresses: ['famine'], _randomizePriorities: true }), null, { seed: 'rww-hamlet-famine-1', customContent: {} }));
-    expect(s.history.founding.foundedBy).not.toMatch(/found customers before they found customers|built a mill/);
+    expectAbsentWithAnchor(s.history.founding.foundedBy, 'found customers before they found customers', 'a household that settled first', 'the founder line');
+    expectAbsentWithAnchor(s.history.founding.foundedBy, 'built a mill', 'a household that settled first', 'the founder line');
     expect(s.history.founding.foundedBy).toBe('a household that settled first and found others following it in');
   });
 });

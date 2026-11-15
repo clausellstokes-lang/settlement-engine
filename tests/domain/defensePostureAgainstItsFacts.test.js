@@ -34,20 +34,36 @@ const birth = (seed) => {
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[2], selectedStresses: m[1] === 'calm' ? [] : m[1].split('+'), selectedStressesRandom: false }), null, { seed, customContent: {} });
 };
 const types = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : []).map((x) => x?.type);
-/** Occupied with a Weak bar (Ingili, Muulcoba); occupied with a Strong bar; L2's Strong bar over a weak badge. */
-const SEEDS = ['rr3-metropolis-occupied-rand-2', 'rr3-town-occupied-rand-1', 'rr3-city-occupied-rand-0', 'rr3-metropolis-occupied-rand-0', 'rv2-calm-hamlet-27', 'rv2-calm-hamlet-30'];
+/**
+ * Occupied with a Well-Defended or Fortress badge (Ingili, Muulcoba); occupied with a Strong bar; L2's Strong bar over a
+ * weak badge. TAIL-CORPUS-DEF-5, RE-KEYED BY IDENTITY: the military score's declared moves (33b12cbef, the defence lane's
+ * rebuild merged at JOIN-1 · 9; 7509b3794, UPKEEP-13 P4, people.milPerHead 1; 07ebe8bdc; 94c5d408f) took Ingili to a
+ * Strong bar and Fortress, Muulcoba to an Adequate bar, rv2-calm-hamlet-27 to Weak and -30 to Adequate. Ingili and
+ * Muulcoba keep their identity (both still occupied, the strong pool still struck: Muulcoba at peace would draw it);
+ * the two hamlets are replaced by the nearest calm hamlets whose bar reads Strong over a Vulnerable badge.
+ */
+const SEEDS = ['rr3-metropolis-occupied-rand-2', 'rr3-town-occupied-rand-1', 'rr3-city-occupied-rand-0', 'rr3-metropolis-occupied-rand-0', 'rv2-calm-hamlet-20', 'rv2-calm-hamlet-50'];
 const KEEPS = 'rr3-city-indebted-rand-1';
-/** The reverse guard alone: Ingili's own record with its occupation lifted (Well-Defended, a Weak bar, at peace). */
-const LIFTED = 'rr3-metropolis-occupied-rand-2 with its occupation lifted';
+/**
+ * The reverse guard alone (a Well-Defended badge beside a Weak bar, at peace). It was Ingili's own record with its
+ * occupation lifted; Ingili reads a Strong bar now, and no town of 900 births read for this seat (rr3, eight crises,
+ * village to metropolis, 0..24; the occupied 0..29) holds a Weak or Critical bar under a Well-Defended or Fortress badge.
+ * So it is a MADE record, as the walls arm below is (ruling (e)): rr3-town-calm-rand-2 (Well-Defended, readiness 57, at
+ * peace, draws the strong pool) with ONLY its Invasion & War score set inside the Weak band.
+ */
+const WEAK_BAR_FROM = 'rr3-town-calm-rand-2';
+const LIFTED = 'rr3-town-calm-rand-2 with its Invasion & War bar made Weak';
+const WEAK_MILITARY = 30;
 const ARM = [...SEEDS, LIFTED];
 const TOWNS = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  for (const seed of [...SEEDS, KEEPS]) TOWNS[seed] = birth(seed);
-  TOWNS[LIFTED] = { ...TOWNS['rr3-metropolis-occupied-rand-2'], stress: [] };
+  for (const seed of [...SEEDS, KEEPS, WEAK_BAR_FROM]) TOWNS[seed] = birth(seed);
+  const from = TOWNS[WEAK_BAR_FROM];
+  TOWNS[LIFTED] = { ...from, defenseProfile: { ...from.defenseProfile, scores: { ...from.defenseProfile.scores, military: WEAK_MILITARY } } };
 }, 300000);
 
-const postureOf = (seed) => defensePostureProse(TOWNS[seed], { seed: seed === LIFTED ? 'rr3-metropolis-occupied-rand-2' : seed }).posture;
+const postureOf = (seed) => defensePostureProse(TOWNS[seed], { seed: seed === LIFTED ? WEAK_BAR_FROM : seed }).posture;
 const barOf = (seed) => scoreBand(TOWNS[seed].defenseProfile.scores.military);
 
 describe('the posture line against the facts beside it (F1, both directions of L2)', () => {
@@ -55,12 +71,12 @@ describe('the posture line against the facts beside it (F1, both directions of L
     const failures = collectSeedFailures(SEEDS, (seed) => {
       const s = TOWNS[seed]; const bar = barOf(seed); const occupied = types(s).includes('occupied');
       const want = {
-        'rr3-metropolis-occupied-rand-2': occupied && bar === 'WEAK' && s.defenseProfile.readiness.label === 'Well-Defended',
-        'rr3-town-occupied-rand-1': occupied && bar === 'WEAK' && s.defenseProfile.readiness.label === 'Well-Defended',
+        'rr3-metropolis-occupied-rand-2': occupied && bar === 'STRONG' && s.defenseProfile.readiness.label === 'Fortress',
+        'rr3-town-occupied-rand-1': occupied && bar === 'ADEQUATE' && s.defenseProfile.readiness.label === 'Well-Defended',
         'rr3-city-occupied-rand-0': occupied && bar === 'STRONG' && s.defenseProfile.readiness.label === 'Well-Defended',
         'rr3-metropolis-occupied-rand-0': occupied && bar === 'STRONG' && s.defenseProfile.readiness.label === 'Fortress',
-        'rv2-calm-hamlet-27': bar === 'STRONG',
-        'rv2-calm-hamlet-30': bar === 'STRONG',
+        'rv2-calm-hamlet-20': bar === 'STRONG',
+        'rv2-calm-hamlet-50': bar === 'STRONG',
       }[seed];
       if (!want) throw new Error(`bar ${bar}, ${types(s).join('+') || 'calm'}, ${s.defenseProfile.readiness.label}`);
     });
@@ -78,9 +94,12 @@ describe('the posture line against the facts beside it (F1, both directions of L
   // R3-TABS-5, the chair's ruling (c) of 2026-11-14 on the second reader's R1: RE-KEYED BY IDENTITY. Ingili's own
   // record (occupied, a Weak bar) pinned the ADEQUATE fallback, a false line two rows above "Keeping order … is the
   // occupiers' business now"; under an occupation the row is now silent. Its record with the occupation lifted
-  // still draws the line tip's pool beside the Weak bar, so the reverse guard keeps its own arm.
+  // still draws the line tip's pool beside the Weak bar, so the reverse guard keeps its own arm. (TAIL-CORPUS-DEF-5: the
+  // reverse guard's record is the made one above; its source town at its own Strong bar draws the strong pool.)
   test('beside a Weak bar the posture draws the line tip\'s pool; a Well-Defended town at peace keeps the strong pool', () => {
     expect(postureOf('rr3-metropolis-occupied-rand-2')?.beside ?? null).toBe(null);
+    expect([barOf(LIFTED), TOWNS[LIFTED].defenseProfile.readiness.label, types(TOWNS[LIFTED]).length]).toEqual(['WEAK', 'Well-Defended', 0]);
+    expect(postureOf(WEAK_BAR_FROM)?.rung?.provenance?.poolKey).toBe('readiness STRONG');
     expect(postureOf(LIFTED)?.rung?.provenance?.poolKey).toBe('readiness ADEQUATE');
     expect(postureOf(KEEPS)?.rung?.provenance?.poolKey).toBe('readiness STRONG');
   });
@@ -171,13 +190,19 @@ describe('a posture line that names works or a watch reads the roster (F3)', () 
  * 976db5b19, 32 at bb2bf91c5 by L1). The strong pool is not drawn at that tier, read from the fact the assessment
  * is written from. RED-FIRST at 853188dcf: the three towns below.
  */
-const ON_PAPER = ['rr3-town-insurgency-rand-2', 'rr3-city-plague_onset-rand-5', 'rr3-metropolis-calm-rand-2'];
+// TAIL-CORPUS-DEF-5, RE-KEYED BY IDENTITY: 48ad4da91 (UPKEEP-8, a DECLARED MOVE of the safety lines; #713 #1201) writes
+// the lowest tier's words after the defence profile: "Some of the <force> take bribes from whoever has coin." (the force
+// held, the pay held), "… chronically underpaid and poorly equipped …" (the force held), "… exist(s) on paper." (the pay
+// held); the tier itself (the fact the strike reads) is unchanged. rr3-town-insurgency-rand-2 reads Defensible now; the
+// nearest town of the shape (the tier, a Well-Defended badge, no siege or occupation) is rr3-city-calm-rand-17.
+const ON_PAPER = ['rr3-city-calm-rand-17', 'rr3-city-plague_onset-rand-5', 'rr3-metropolis-calm-rand-2'];
+const LOWEST_TIER = /exists? on paper|chronically underpaid and poorly equipped|take bribes from whoever has coin/;
 describe('no strong posture beside a guard that exists on paper', () => {
   beforeAll(() => { for (const seed of ON_PAPER) TOWNS[seed] = TOWNS[seed] || birth(seed); }, 300000);
   test('the strong pool is not drawn where the Guard assessment stands at its lowest tier', () => {
     const failures = collectSeedFailures(ON_PAPER, (seed) => {
       const s = TOWNS[seed];
-      if (!/exists on paper/.test(s.economicState.safetyProfile.guardEffectivenessDesc)) throw new Error('premise: the guard is not on paper');
+      if (!LOWEST_TIER.test(s.economicState.safetyProfile.guardEffectivenessDesc)) throw new Error('premise: the guard is not on paper');
       if (!['Fortress', 'Well-Defended'].includes(s.defenseProfile.readiness.label)) throw new Error(`premise: ${s.defenseProfile.readiness.label}`);
       const posture = postureOf(seed);
       if (posture?.rung?.provenance?.poolKey === 'readiness STRONG') throw new Error(`strong beside the guard on paper: ${posture.beside}`);

@@ -51,7 +51,8 @@ describe('the food card says what trade brings by the food record (item 4(a), th
     expectNoSeedFailures(collectSeedFailures(['rw3-town-under_siege-1', 'rw3-town-under_siege+famine-1'], (seed) => {
       const town = birthApp(seed);
       expect(town.economicState.foodSecurity.foodRecord.normalImportPct, `anchored: ${seed}'s record brings no food in`).toBe(0);
-      expect(town.economicViability.metrics.foodBalance.importCoverage, `anchored: ${seed}'s metric keeps a trickle`).toBeGreaterThan(0);
+      // RE-KEYED BY IDENTITY (TAIL-DEFECON-5, ruling R3): the metric kept a trickle of its own; it now reads the record's split.
+      expect(town.economicViability.metrics.foodBalance.importCoverage ?? 0, `anchored: ${seed}'s metric reads the record: nothing comes in`).toBe(0);
       const text = foodCard(town);
       expect(text, `anchored: ${seed} prints its food sentence`).toContain(`No food comes into ${town.name} by trade.`);
       expect([/\b(?:carts|ships|boats|trade) brings? in /.test(text), /\+ [\d,]+ imported/.test(text), /Trade covers/.test(text)]).toEqual([false, false, false]); // re-keyed by identity at W2-C-LEAVES-5: any carrier bringing food in (item 3 re-cut the share words)

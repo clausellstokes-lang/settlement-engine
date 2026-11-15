@@ -16,6 +16,8 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -55,12 +57,16 @@ beforeAll(async () => {
 }, 900000);
 
 describe('V3: the seven safety lines say only what their town bears', () => {
-  test.each(CURED)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
-    const t = TEXT.get(seed);
-    expect(t).not.toContain(gone);
-    expect(t).toContain(instead);
+  test('each CURED row: the old line does not print; its twin does (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([seed, gone, instead]) => {
+      const t = TEXT.get(seed);
+      expectAbsentWithAnchor(t, gone, instead, seed);
+      expect(t, `${seed}: "${gone}" does not print; "${instead}" does`).toContain(instead);
+    }), 'every CURED row: the safety line says only what its town bears');
   });
-  test.each(KEPT)('%s: "%s" still prints', (seed, kept) => {
-    expect(TEXT.get(seed)).toContain(kept);
+  test('each KEPT row: the true sibling still prints (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEPT, ([seed, kept]) => {
+      expect(TEXT.get(seed), `${seed}: "${kept}" still prints`).toContain(kept);
+    }), 'every KEPT row: the true sibling still prints');
   });
 });

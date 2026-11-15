@@ -10,6 +10,7 @@
  * is a town where the original is true, and still prints it.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -46,6 +47,18 @@ const GONE = [
   ['16403', 'r2r-metropolis-9', 'Regulates port and airship traffic', "Harbour master's office :: Regulates airship traffic, assigns mooring berths, collects anchorage fees."],
   ['10700', 'r2r-city-0', 'Highly diversified', 'Economic complexity :: Diversified — broad institutional economic base'],
 ];
+/** The liveness anchor of each SILENT pair: a sibling the same town really prints on the same path (the fish row's own
+ * label, whose line is silent; the metals import the iron hook rides on; the viability warning beside the banks'). */
+const LIVE = {
+  'r2s-famine-hamlet-0': 'Fish & Maritime Produce :: ',
+  'r2s-famine-hamlet-2': 'Fish & Maritime Produce :: ',
+  'r2s-famine-city-0': 'Fish & Preserved Produce :: ',
+  'r2r-hamlet-10': 'Fish & Maritime Produce :: ',
+  'r2r-hamlet-30': 'Imports metals',
+  'r2r-city-36': 'Imports metals',
+  'r2s-infiltrated-metropolis-3': 'Trade Dependencies',
+  'r2s-politically_fractured-city-0': 'Trade Dependencies',
+};
 /** [row, seed, a true sibling that must still print] */
 const KEEP = [
   ['B07361', 'r2r-town-15', 'Fish & Preserved Produce :: Fish is sold here, fresh or preserved.'],
@@ -67,7 +80,7 @@ beforeAll(async () => {
 describe('TAIL-DEFECON-3 batch 3: the fish, quarry and diversity lines say only what the record holds', () => {
   for (const [row, seed, gone, instead] of GONE) {
     test(`#${row} ${seed}: not "${gone}"; ${instead === SILENT ? 'silent by design' : `"${instead}"`}`, () => {
-      expect(towns[seed]).not.toContain(gone);
+      expectAbsentWithAnchor(towns[seed], gone, instead === SILENT ? LIVE[seed] : instead, `#${row} ${seed}`);
       if (instead !== SILENT) expect(towns[seed]).toContain(instead);
     });
   }

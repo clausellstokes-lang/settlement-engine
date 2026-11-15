@@ -14,6 +14,7 @@
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
@@ -124,7 +125,7 @@ describe('the food word is one fact on every surface (SURFACES-2 item 1)', () =>
     const town = birth720('r2r-city-0');
     const id = leaves(IdentityDailyLife({ settlement: town, narrativeMode: false, vm: buildViewModel({ settlement: town }), stateProse: null }));
     expect(id).toContain('Food');
-    expect(id.map((x) => x.trim())).not.toContain('Balanced');
+    expectAbsentWithAnchor(id.map((x) => x.trim()), 'Balanced', foodWordShown(town)?.label, "the Identity block's food word");
     expect(disagreements(town)).toEqual([]);
   }, 180000);
 });

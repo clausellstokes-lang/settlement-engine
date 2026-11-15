@@ -61,7 +61,9 @@ describe('the food balance row reads the food record and adds up as printed (ite
   test('the row prints the food record\'s own pounds, and they add up (#785, #1040, #1366, rww-metropolis-famine-1)', () => {
     expectNoSeedFailures(collectSeedFailures(['rr2s-city-famine-rand-1', 'rr2s-city-occupied-rand-1', 'rr2s-metropolis-plague_onset-port-1', 'rww-metropolis-famine-1'], (seed) => {
       const town = birthApp(seed); const fs = town.economicState.foodSecurity; const via = town.economicViability.metrics.foodBalance;
-      expect(via.importCoverage, `anchored: ${seed}'s two homes disagree on the import`).not.toBe(fs.importCoverage);
+      // RE-KEYED BY IDENTITY (TAIL-DEFECON-5, ruling R3, one food ledger): the anchor was the two homes disagreeing on the
+      // import; the viability's view now READS the writer's split, so the anchor is that they agree.
+      expect(via.importCoverage ?? 0, `anchored: ${seed}'s two homes read one import`).toBe(Math.round(fs.importCoverage));
       const r = rowOf(town);
       expect(r.production, `${seed}: ${r.text}`).toBe(fs.dailyProduction);
       expect(r.need, seed).toBe(fs.dailyNeed);

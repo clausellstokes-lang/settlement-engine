@@ -14,6 +14,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeAll, describe, expect, test } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -67,13 +68,17 @@ describe('V5: the campaign is the table\'s campaign', () => {
 });
 
 describe('V6: the Legal Infrastructure row names the bench that stands', () => {
-  test.each(BENCH)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
-    const row = legal(TOWN.get(seed));
-    expect(row?.status).not.toBe(gone);
-    expect(row?.status).toBe(instead);
+  test('<seed>: "<gone>" does not print; "<instead>" does (every BENCH row)', () => {
+    expectNoSeedFailures(collectSeedFailures(BENCH, ([seed, gone, instead]) => {
+      const row = legal(TOWN.get(seed));
+      expect(row?.status, `${seed}: "${gone}" does not print`).not.toBe(gone);
+      expect(row?.status, `${seed}: "${instead}" does`).toBe(instead);
+    }), 'V6: each bench row names the bench that stands, never the court');
   });
-  test.each(KEPT_STATUS)('%s keeps "%s" (a courthouse stands)', (seed, kept) => {
-    expect(legal(TOWN.get(seed))?.status).toBe(kept);
+  test('<seed> keeps "<kept>" (a courthouse stands) (every KEPT_STATUS row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEPT_STATUS, ([seed, kept]) => {
+      expect(legal(TOWN.get(seed))?.status, `${seed} keeps "${kept}" (a courthouse stands)`).toBe(kept);
+    }), 'V6: where a courthouse stands the court status still prints');
   });
   test('r2r-town-16: the council\'s service row says who hears the pleas', () => {
     const svc = services(TOWN.get('r2r-town-16'));
@@ -82,11 +87,15 @@ describe('V6: the Legal Infrastructure row names the bench that stands', () => {
 });
 
 describe('V7: the gates line only where nothing moves beneath the walls', () => {
-  test.each(GATES)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
-    const g = String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? '');
-    expectAbsentWithAnchor(g, gone, instead);
+  test('<seed>: "<gone>" does not print; "<instead>" does (every GATES row)', () => {
+    expectNoSeedFailures(collectSeedFailures(GATES, ([seed, gone, instead]) => {
+      const g = String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? '');
+      expectAbsentWithAnchor(g, gone, instead, seed);
+    }), 'V7: where a house moves goods beneath the walls the gates line takes its twin');
   });
-  test.each(KEPT_GATES)('%s keeps "%s"', (seed, kept) => {
-    expect(String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? '')).toContain(kept);
+  test('<seed> keeps "<kept>" (every KEPT_GATES row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEPT_GATES, ([seed, kept]) => {
+      expect(String(TOWN.get(seed)?.economicState?.safetyProfile?.guardEffectivenessDesc ?? ''), `${seed} keeps "${kept}"`).toContain(kept);
+    }), 'V7: where nothing moves beneath the walls the gates line still prints');
   });
 });
