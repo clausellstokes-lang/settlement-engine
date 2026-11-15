@@ -40,7 +40,7 @@ const STATUS = {
 };
 // SURFACES-1 item 1: a chain the tab's card gives no state (chainStateShown.js :: NO_STATE_SHOWN) takes the tab's neutral
 // colour (EconomicsTab.jsx :: FLOW_STATUS.operational's), never Vulnerable's.
-const NO_STATE = { color: '#6b5340', bg: '#faf8f4', border: '#e0d0b0' };
+const NO_STATE = { color: swatch['#6B5340'], bg: swatch['#FAF8F4'], border: swatch['#E0D0B0'] }; // the design swatch's exact values (import at the file's end)
 const getStatus = (s) => (s === '' ? NO_STATE : STATUS[s] || STATUS.vulnerable);
 
 const MISSING = { color: '#9c8068', bg: '#f8f5f0', border: '#c8b898' };
@@ -295,6 +295,7 @@ import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { chainStateOnPage } from '../lib/chainStateOnPage.js';
 import { chainOutputsShown, tradeListsAsPrinted, tradeMarkOf } from '../../domain/display/tradeListDisplay.js';
 import { markOnPage } from '../lib/crisisMarksOnPage.js';
+import { swatch } from '../../design/tokens.js'; // TAIL-CLOSE-SRC-1: NO_STATE's three colours, the same hex through the swatch
 
 /** The tab's printed Exports of a record, read once a record. @type {WeakMap<object, ReadonlyArray<string>>} */
 const PRINTED_EXPORTS = new WeakMap();
