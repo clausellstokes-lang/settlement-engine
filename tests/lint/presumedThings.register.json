@@ -461,7 +461,6 @@
    ["garrison", "after-release", "Garrison forces distributed across quarters. No single barracks can secure a metropolis.", "d20803420a0527c3"],
    ["garrison", "after-release", "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies ", "e7a63c6a99211dbd"],
    ["garrison", "after-release", "Housing for guards or small garrison.", "fb898a4586d615a4"],
-   ["garrison", "after-release", "Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.", "3714d8796b8b9e62"],
    ["garrison", "after-release", "the garrison commander", "da0b66780c1fab44"],
    ["granary", "after-release", "A hamlet stores household by household; the granary is the town rung.", "c67626f463e1e008"],
    ["granary", "after-release", "A town is fed by its hinterland: the granary and the market carry farming in the town roster.", "84ed7a4eddf05d09"],

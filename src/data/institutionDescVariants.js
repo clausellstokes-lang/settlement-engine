@@ -36,7 +36,7 @@ const PAIRS = [
   ],
   [
     "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
-    "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+    "The nets, the traps, the drying racks, worked by the fishing households whenever fish can be had.",
   ],
   [
     "The flock is held and worked in common, and the thorp keeps time by the grazing calendar.",
@@ -511,12 +511,12 @@ const PAIRS = [
     "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.",
   ],
   [
-    "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
-    "A shaft driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
+    "A mine of shafts and adits, with winding gear and ore carts at the head, worked whenever ore can be had.",
+    "A shaft driven into the deposits, with winding gear and ore carts at the pithead, worked whenever ore can be had.",
   ],
   [
-    "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
-    "Yards for dressing stone stand beside the quarry face. Building stone from here has gone to every part of the region.",
+    "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
+    "Yards for dressing stone stand beside the quarry face, at work whenever good stone can be had.",
   ],
   [
     "Held by royal charter. The heart of the town's trade.",
@@ -727,7 +727,7 @@ const PAIRS = [
     "The town divided among a handful of congregations.",
   ],
   [
-    "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's register of who lies where is the town's longest unbroken record.",
+    "A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record.",
     "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.",
   ],
   [
@@ -1119,8 +1119,8 @@ const PAIRS = [
     "Full-time keepers of order, about one for every hundred people in the city.",
   ],
   [
-    "Professional soldiers, kept by noble or crown.",
-    "A standing body of soldiers, in noble or royal pay.",
+    "A professional force, kept under arms for pay.",
+    "A standing force, paid to bear arms.",
   ],
   [
     "Sellsword companies under proper organisation, mustering hundreds to thousands.",
@@ -1283,8 +1283,8 @@ const PAIRS = [
     "No larger collection of knowledge exists in the region: thousands of books, a map archive, and the histories.",
   ],
   [
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.",
-    "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.",
+    "Walls within walls: an outer line and an inner line, with gatehouses at every stage.",
+    "A defence built in layers, an outer wall and an inner wall, with gatehouses throughout.",
   ],
   [
     "Garrisons spread through the quarters; no single barracks could secure a city this size.",
@@ -2135,8 +2135,9 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
  * lift a drawn text to `{ text, ...DESC_VARIANT_DECLARATIONS[text] }`, resolve after the draw.
  * Each key is held live by tests/generators/institutionProseDeclared.test.js.
  *
- * WAITING ON ORDER (R-Q, not declared): town Parish burial grounds #0 and Town watch #0/#1 presume a
- * GATE, which the cascade can add after the description draw (4 of 1,525 measured births).
+ * WAITING ON ORDER (R-Q, not declared): Town watch #0/#1 presume a
+ * GATE, which the cascade can add after the description draw (4 of 1,525 measured births). The town Parish burial
+ * grounds #0 named a gate too; it names none since TAIL-HOUSES-2 batch 3 (true with a gate or without).
  */
 export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
@@ -2196,8 +2197,8 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on.": Object.freeze({ needs: Object.freeze(["walls","gate"]) }), // metropolis|Religious|Cemetery network#0
   "Tall, crowded blocks and tenement courts, with suburbs spreading beyond the walls.": Object.freeze({ needs: Object.freeze(["walls"]) }), // metropolis|Infrastructure|Housing (3500+ households)#0
   "Multi-story blocks packed around tenement courts, and suburbs that have outgrown the walls.": Object.freeze({ needs: Object.freeze(["walls"]) }), // metropolis|Infrastructure|Housing (3500+ households)#1
-  "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#0
-  "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#1
+  "Walls within walls: an outer line and an inner line, with gatehouses at every stage.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#0
+  "A defence built in layers, an outer wall and an inner wall, with gatehouses throughout.": Object.freeze({ needs: Object.freeze(["garrison"]) }), // metropolis|Defense|Massive walls and fortifications#1
   "Turns barley into malt for the brewers. A small concern feeding the local alehouses, and one that only runs when grain is in surplus.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA-8 row 3 (ww-1415)
   "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.": Object.freeze({ needs: Object.freeze(["institution: tavern"]) }), // W2-FIX-DATA-8 row 3 (ww-1415)

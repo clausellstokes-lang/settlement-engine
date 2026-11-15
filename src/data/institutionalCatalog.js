@@ -240,7 +240,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'Peat is cut for the household hearth; towns buy fuel through the charcoal and coal trade.' },
     },
     {
-      shared: { name: 'Mine', face: 'the mine captain', desc: 'A mine of shafts and adits, with its winding gear and ore carts. Where the deposits ran deep, the mine is the reason the settlement grew.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: 'Mine', face: 'the mine captain', desc: 'A mine of shafts and adits, with its winding gear and ore carts, worked whenever ore can be had.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
         hamlet: { name: 'Mine (open cast)', baseChance: 0.2, desc: 'A shallow excavation or shaft dug to extract iron ore, coal, or stone. Employs the poorest labourers. Dangerous, dirty, and essential.' },
         village: { baseChance: 0.12, desc: 'A shaft or excavation to extract iron ore, coal, or stone. Requires capital and organisation a thorp cannot sustain, but a village near deposits can. Employs the poorest labourers.' },
@@ -250,7 +250,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Stone quarry', face: 'the quarry master', desc: 'A stone quarry with yards for dressing the stone. Much of the region\'s building stone was cut here.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: 'Stone quarry', face: 'the quarry master', desc: 'A stone quarry and its dressing yards, worked whenever good stone can be had.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
         hamlet: { baseChance: 0.18, desc: 'A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the place has had.' },
         village: { baseChance: 0.15, desc: "A quarry of building stone, laid out in ordered workings. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it." },
@@ -1237,7 +1237,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         village: { baseChance: 0.18, desc: 'Perimeter palisade or earthwork berm. Controls approach, slows attackers.' },
         town: { name: 'Town walls', baseChance: 0.5, desc: 'Stone fortifications with gates. Expensive to build and maintain.', priorityCategory: 'military' },
         city: { name: 'City walls and gates', required: true, desc: 'Masonry walls with towers. Multiple gatehouses.', tags: ['essential', 'defense', 'fortification'], priorityCategory: 'military' },
-        metropolis: { name: 'Massive walls and fortifications', required: true, desc: 'Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.', tags: ['essential', 'defense', 'fortification'], priorityCategory: 'military' },
+        metropolis: { name: 'Massive walls and fortifications', required: true, desc: 'Layered wall systems: an outer wall and an inner wall, with gatehouses along both.', tags: ['essential', 'defense', 'fortification'], priorityCategory: 'military' },
       },
     },
     // Rolled without walls in 46 of 123 towns until 2026-09-30; `requiresAny` now enforces the
@@ -1275,7 +1275,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { lawEnforcement: true, face: 'the garrison commander', tags: ['military', 'defense'], priorityCategory: 'military' },
       at: {
         town: { name: 'Barracks', baseChance: 0.3, desc: 'Housing for guards or small garrison.', tags: ['military'] },
-        city: { name: 'Garrison', required: true, desc: 'Professional soldiers. Noble or royal.' },
+        city: { name: 'Garrison', required: true, desc: 'A professional force, under arms full-time.' },
         metropolis: { name: 'Multiple garrisons', required: true, desc: 'Garrison forces distributed across quarters. No single barracks can secure a metropolis.' },
       },
     },

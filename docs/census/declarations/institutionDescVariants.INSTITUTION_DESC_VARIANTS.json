@@ -123,7 +123,7 @@
     },
     {
       "id": "thorp|Economy|Fishing community#1",
-      "text": "The nets, the traps, the drying racks: what the water gives, the fishing households take.",
+      "text": "The nets, the traps, the drying racks, worked by the fishing households whenever fish can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2119,7 +2119,7 @@
     },
     {
       "id": "town|Economy|Mine#0",
-      "text": "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
+      "text": "A mine of shafts and adits, with winding gear and ore carts at the head, worked whenever ore can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2127,7 +2127,7 @@
     },
     {
       "id": "town|Economy|Mine#1",
-      "text": "A shaft driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
+      "text": "A shaft driven into the deposits, with winding gear and ore carts at the pithead, worked whenever ore can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2135,7 +2135,7 @@
     },
     {
       "id": "town|Economy|Stone quarry#0",
-      "text": "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
+      "text": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2143,7 +2143,7 @@
     },
     {
       "id": "town|Economy|Stone quarry#1",
-      "text": "Yards for dressing stone stand beside the quarry face. Building stone from here has gone to every part of the region.",
+      "text": "Yards for dressing stone stand beside the quarry face, at work whenever good stone can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3028,10 +3028,8 @@
     },
     {
       "id": "town|Religious|Parish burial grounds#0",
-      "text": "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's register of who lies where is the town's longest unbroken record.",
-      "needs": [
-        "gate"
-      ],
+      "text": "A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -4670,7 +4668,7 @@
     },
     {
       "id": "city|Defense|Garrison#0",
-      "text": "Professional soldiers, kept by noble or crown.",
+      "text": "A professional force, kept under arms for pay.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4678,7 +4676,7 @@
     },
     {
       "id": "city|Defense|Garrison#1",
-      "text": "A standing body of soldiers, in noble or royal pay.",
+      "text": "A standing force, paid to bear arms.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5357,7 +5355,7 @@
     },
     {
       "id": "metropolis|Defense|Massive walls and fortifications#0",
-      "text": "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.",
+      "text": "Walls within walls: an outer line and an inner line, with gatehouses at every stage.",
       "needs": [
         "garrison"
       ],
@@ -5367,7 +5365,7 @@
     },
     {
       "id": "metropolis|Defense|Massive walls and fortifications#1",
-      "text": "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.",
+      "text": "A defence built in layers, an outer wall and an inner wall, with gatehouses throughout.",
       "needs": [
         "garrison"
       ],

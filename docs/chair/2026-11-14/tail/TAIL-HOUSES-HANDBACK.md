@@ -303,6 +303,63 @@ B14388 (city_administration, r2s-occupied-city-2), B03373 (city_administration, 
 
 The four terrain lines "difficult to besiege" (15808, 25089, 15809, 25090) and "controls caravan routes" (16377) are geographyData strengths, not leaf rows: left with X9. "Fresh meat: Beef, pork, mutton." and "Fresh bread: Daily bread." (named in the prompt's X9) are NOT rows of WORKLIST3-HOUSES (98 rows, none of them): another group's (the services' menu), not checked here.
 
+## TAIL-HOUSES-2 · Batch 3 · H7: a house text names a citadel, a gate, a deposit, a founding or a payer the record denies
+
+THE SHAPE (H7, ordinary times): the metropolis wall house names "the citadel ring" where no Citadel is born; the town burial ground names "the gate" where the defence has none; the Stone quarry is at work, and "half the region's building stone", where its stone quarry is depleted or stone is imported; the Mine is "the reason the settlement grew" where no founding names a mine (every printing town); the city Garrison is "in noble or royal pay" under a ruler who is no lord; the thorp's fishing community "takes what the water gives" where its river fish are depleted. 13 texts (4 catalogue rows, 9 variants) and one more (the burial ground) reworded to claim no more than every printing town bears, the input hedges in S5's one form ("whenever <input> can be had"). The citadel is approved by the chair (01:00 UTC): 36 towns print a Massive-walls text with NO Citadel (10 + 8 + 18); in the 84 others the Citadel prints its own row. The burial ground's gate was "waiting on order" (R-Q: the cascade can add the gate after the description draw; an H8-shaped row): the new text names no gate, true with one or without, so it leaves the wait (the ledger's `needs: gate` with it; `institutionProseDeclared` re-keyed 75 -> 74). Every text-keyed copy moved with its text (colour column, declaration ledger, `DESC_VARIANT_DECLARATIONS` keys); NO DRAW MOVED (same pools, same hash, same index).
+
+MEASURE (the record, `measure3.mjs` over the base corpus): false town-rows before:
+
+| id | towns | false before | sentence (before) | read by |
+|---|---|---|---|---|
+| 14069 | 55 -> 0 | 41 | Much of the region's building stone was cut here. | quarry not available or stone imported |
+| 10137 | 42 -> 0 | 18 | Ground beside each house of worship, with burial beyond the gate ... | `gate` atom false |
+| B22510 | 41 -> 0 | 8 | Walls within walls: ... and the citadel ring. | no Citadel |
+| 02534 | 40 -> 0 | 18 | A defence built in layers: ... the ring about the citadel ... | no Citadel |
+| B03000 | 39 -> 0 | 26 | A stone quarry, with yards beside it for dressing the stone. | quarry not available |
+| B11885 | 39 -> 0 | 10 | Layered wall systems: outer wall, inner wall, citadel ring. | no Citadel |
+| B00345 | 39 -> 0 | 26 | Half the region's building stone was cut here. | quarry not available or stone imported |
+| B02922 | 36 -> 0 | 15 | A shaft driven into the deposits, with winding gear and ore carts at the pithead. | a mineral deposit not available |
+| B27842 | 36 -> 0 | 36 | Where they ran deep, the settlement grew around the mine. | no founding names a mine |
+| B02989 | 32 -> 0 | 25 | A standing body of soldiers, in noble or royal pay. | `ruler: lord` false |
+| 04579 | 30 -> 0 | 25 | Building stone from here has gone to every part of the region. | (H5 listed it for the leaf: now cured at the writer) |
+| 28857 | 30 -> 0 | 30 | Where the deposits ran deep, the mine is the reason the settlement grew. | no founding names a mine |
+| B27830 | 30 -> 0 | 30 | Where the deposits ran deep, the mine is why the place grew at all. | no founding names a mine |
+| B28049 | 30 -> 0 | 25 | Yards for dressing stone stand beside the quarry face. | quarry not available |
+| B02747 | 30 -> 0 | 15 | A mine of shafts and adits, with its winding gear and ore carts. | a mineral deposit not available |
+| B20091 | 14 -> 0 | 1 | The nets, the traps, the drying racks: what the water gives ... | river fish not available |
+| X9 06139 | 42 -> 0 (journal) | 18 | Burial grounds: Ground beside each house of worship, with burial beyond the gate ... | as 10137 |
+| X9 10250 | 14 -> 0 (journal) | 1 | Fishing community: The nets, the traps ... | as B20091 |
+
+Also moved with their pool (not worklist rows, the same claim): the Garrison's catalogue line "Professional soldiers. Noble or royal." (45 towns, 36 false) and its sibling "Professional soldiers, kept by noble or crown." (43, 33 false).
+
+THE INVENTORY DIFF (before -> after3; the tabs): sentences 29,862 -> 29,853, gone 23, new 14, IN FEWER TOWNS 0, in more towns 0; the 18 worklist rows GONE. The exports (`SURFACES=PDF,Journal`): gone 37, new 28, in fewer 0, in more 0. THE INHERITORS are the 14 rewordings, plus three lines in two towns that are an instrument artifact, not this cure ("Patron deity", "Assign a patron god ...", "Upgrade to premium ..." in r2s-mass_migration-city-3 and one more): THE BEFORE RUN WAS RE-RENDERED IN PART: the census renders from the tree's own data files, and my edits began while it rendered, so the 183 dumps written after them were re-rendered on a clean worktree at the base (5a5166898, `wtbase`), whose checkout differs from `npm ci`'s in those prompt lines; the after run is one clean render. Read in place: r2r-metropolis-11 (the walls, no Citadel), r2r-town-2 (the burial ground), r2r-city-3 (the quarry, the garrison).
+
+DECLARED MOVE: family `institutions[].desc` only (no draw moved; the same index in every pool).
+
+Guard: `tests/data/tailHouses3DefenceDeposit.test.js`: 12 RED pairs (12 of 12 red at the base, each with the record's denial asserted), 6 KEEP pairs (green before and after); a plant of the old Garrison line reds 1 of 12.
+
+Gates: eslint 0 on the touched files; typecheck:domain:strict 0; typecheck:ratchet OK; presumed-things `--check` fresh 145 at the base -> 144, stale 0 after `--shrink` (10 widened rows and 1 first-register row of the old texts); my first wording made 7 fresh hits (`soldiers`, `garrison`, `districts`, `house of worship` beside banked rows of the old texts; the door banks only what stood at the widening's base): reworded before the commit, not banked. page-census `--grid`: 0 rises (the same 2 falls). The 89 test files naming the touched files: reds CARRIED (the same at the base): gapLineHousesByKind, urbanBandInstitutions G5, wiringCensusDeclared, generatorGoldenMaster, and presumedThings.walker ARM 1 / ARM 2 (4 stale arm-2 rows) / ARM 3 (red at the base too); the one pin this batch moved (institutionProseDeclared) re-keyed and green.
+
+STRUCK (H7, verified): B15417 "Refined iron ingots" and B04587 "Cast iron goods" (126 towns): the chain card's header reads the chain state (`domain/chainYield.js`, EconomicsTab.jsx:205: "Normally yields" wherever the chain is impaired or its input depleted; seen in r2r-city-53); a Vulnerable chain still runs. 02916 "A principal source of the town's trade." is the town WEEKLY MARKET's line (`town|Economy|Weekly market`), not the salt works' as read: true of a market; its crown charter is batch 4's.
+
+### The veto list, batch 3
+
+- "Layered wall systems: an outer wall and an inner wall, with gatehouses along both." (39 towns): r2r-metropolis-11 (16,770), r2s-succession_void-metropolis-3 (295,750), r2s-famine-metropolis-3 (32,388)
+- "Walls within walls: an outer line and an inner line, with gatehouses at every stage." (41 towns): r2r-metropolis-16 (15,584), r2s-occupied-metropolis-3 (262,531), r2s-famine-metropolis-2 (29,083)
+- "A defence built in layers, an outer wall and an inner wall, with gatehouses throughout." (40 towns): r2s-plague_onset-metropolis-1 (15,873), r2r-metropolis-8 (344,689), r2s-famine-metropolis-0 (39,834)
+- "A ground for each congregation, and burial out beyond the houses where a ground has filled." (42 towns): r2s-occupied-town-2 (310), r2s-under_siege-town-2 (2,453), r2s-famine-town-1 (1,336)
+- "A stone quarry and its dressing yards, worked whenever good stone can be had." (55 towns): r2s-religious_conversion-town-1 (909), r2r-metropolis-13 (328,486), r2s-famine-city-2 (13,213)
+- "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had." (39 towns): r2s-monster_pressure-town-2 (1,344), r2s-succession_void-metropolis-3 (295,750), r2s-famine-metropolis-1 (35,674)
+- "Yards for dressing stone stand beside the quarry face, at work whenever good stone can be had." (30 towns): r2s-insurgency-town-2 (2,081), r2r-metropolis-8 (344,689), r2s-famine-metropolis-0 (39,834)
+- "A mine of shafts and adits, with its winding gear and ore carts, worked whenever ore can be had." (30 towns): r2r-town-12 (1,099), r2s-succession_void-metropolis-3 (295,750), r2s-famine-metropolis-0 (39,834)
+- "A mine of shafts and adits, with winding gear and ore carts at the head, worked whenever ore can be had." (30 towns): r2s-occupied-town-0 (1,580), r2r-metropolis-6 (216,641), r2s-famine-city-2 (13,213)
+- "A shaft driven into the deposits, with winding gear and ore carts at the pithead, worked whenever ore can be had." (36 towns): r2s-infiltrated-town-2 (660), r2r-metropolis-8 (344,689), r2s-famine-metropolis-1 (35,674)
+- "The nets, the traps, the drying racks, worked by the fishing households whenever fish can be had." (14 towns): r2r-thorp-36 (5), r2s-plague_onset-thorp-1 (25), r2s-famine-thorp-0 (19)
+- "A professional force, under arms full-time." (45 towns): r2s-wartime-city-1 (2,054), r2s-plague_onset-city-1 (14,812), r2s-occupied-city-3 (4,671)
+- "A professional force, kept under arms for pay." (43 towns): r2s-recently_betrayed-city-0 (2,407), r2r-city-19 (14,810), r2s-famine-city-0 (2,909)
+- "A standing force, paid to bear arms." (32 towns): r2r-city-44 (2,408), r2s-politically_fractured-city-0 (14,572), r2s-famine-city-2 (13,213)
+
+
 ## Rows NOT cured (what is left, by class)
 
 STRUCK, gone at the base (prints in 0 census towns at bcad1a358): B17989.

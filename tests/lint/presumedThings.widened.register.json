@@ -4370,12 +4370,6 @@
    [
     "quarters",
     "word",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "quarters",
-    "word",
     "The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out.",
     "cedea0d0c6e131fb"
    ],
@@ -4390,12 +4384,6 @@
     "word",
     "Several quarters, each with its house of worship.",
     "b80668f645a2a56d"
-   ],
-   [
-    "religiousHouses",
-    "word",
-    "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's registe",
-    "216f9d693bd5f6b6"
    ],
    [
     "religiousHouses",
@@ -4528,18 +4516,6 @@
     "implied",
     "Multi-story blocks packed around tenement courts, and suburbs that have outgrown the walls.",
     "a9e0843df1c70c11"
-   ],
-   [
-    "garrison",
-    "implied",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "garrison",
-    "implied",
-    "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses through",
-    "ed8d7f136eec79d0"
    ],
    [
     "house: baker",
@@ -5028,18 +5004,6 @@
     "affa98e8ebbca65a"
    ],
    [
-    "armedForce",
-    "family",
-    "Professional soldiers, kept by noble or crown.",
-    "4a5fddf8d0d9b74a"
-   ],
-   [
-    "armedForce",
-    "family",
-    "A standing body of soldiers, in noble or royal pay.",
-    "a752e9c9015ca7b1"
-   ],
-   [
     "house: hired blade",
     "family",
     "Organised bands of hired blades. Major forces, hundreds to thousands strong.",
@@ -5110,18 +5074,6 @@
     "family",
     "A state prison of some size, keeping its political prisoners, debtors, and convicts apart from one another.",
     "592fc9f98e3cff69"
-   ],
-   [
-    "house: citadel",
-    "family",
-    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage",
-    "5cb50cab9c83ff91"
-   ],
-   [
-    "house: citadel",
-    "family",
-    "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses through",
-    "ed8d7f136eec79d0"
    ],
    [
     "armedForce",
@@ -6866,22 +6818,10 @@
     "5cb4f655d2940ace"
    ],
    [
-    "house: citadel",
-    "family",
-    "Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.",
-    "3714d8796b8b9e62"
-   ],
-   [
     "guardCaptain",
     "family",
     "the watch captain",
     "7c4fd90270cb9b1f"
-   ],
-   [
-    "armedForce",
-    "family",
-    "Professional soldiers. Noble or royal.",
-    "18ace41f70403330"
    ],
    [
     "armedForce",
