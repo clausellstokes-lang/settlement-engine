@@ -100,7 +100,10 @@ describe('TAIL-TIES-2 batch 1', () => {
       expect(ties(s).filter((t) => /\bvot(?:e|es|ed)\b|\bmajority\b/.test(tieText(t))).map(tieText), seed).toEqual([]);
     });
     expectNoSeedFailures(failures, 'under one ruler no tie line is about a vote and the tie keeps its kind');
-    const kept = collectSeedFailures([['r2r-hamlet-9', 'by a single vote'], ['r2r-hamlet-10', 'for a vote against'], ['r2r-hamlet-21', 'has won every vote it needed']], ([seed, frag]) => {
+    // 2026-11-15 BAR3-PEOPLE-2: RE-KEYED BY IDENTITY: r2r-hamlet-10's "for a vote against" is cast by a card the roster seats in no
+    // power (BAR3-PEOPLE batch 1, the chair's P5: a vote only from a seat; it takes its twin there); the same line, the same
+    // ruling-body state, from a seated voter: r2r-hamlet-42.
+    const kept = collectSeedFailures([['r2r-hamlet-9', 'by a single vote'], ['r2r-hamlet-42', 'for a vote against'], ['r2r-hamlet-21', 'has won every vote it needed']], ([seed, frag]) => {
       const s = town(seed);
       expect(rulingBodyOf(s), seed).toBe(true);
       expect(ties(s).some((t) => tieText(t).includes(frag)), `${seed}: ${frag}`).toBe(true);
