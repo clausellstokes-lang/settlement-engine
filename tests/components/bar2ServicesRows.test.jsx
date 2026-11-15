@@ -63,7 +63,8 @@ const MARKED = [
 ];
 /** SV1 keep pairs: (seed, a row its house's mark does not reach: it prints unmarked). */
 const KEEP = [
-  ['r2r-metropolis-14', "Search the archive that cross-checks one road's report against another's."], // the chroniclers' archive, under a siege
+  // (BAR3-SERVICES, 2026-11-15: the chroniclers' archive under a siege moved to bar3ServicesRows.test.jsx's MARKED, by the
+  // chair's direction S3: its house is stopped and its rows print the same mark)
   ['r2s-under_siege-city-0', 'Performers, games, and live music at multiple venues nightly.'], // the inns' own music
   ['r2r-town-54', 'Experienced route planners select roads based on threat, season, and cargo type.'], // the planners, not the camels
   ['r2s-under_siege-town-1', 'Custom maps to order. Accurate, legible, and durably produced.'], // the cartographer's bench

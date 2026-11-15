@@ -17,6 +17,13 @@
  *   beyond the gates
  *               (S8) work done outside the walls by the town's own people (burial in grounds beyond every gate, hunting
  *               parties over the country): a siege stops it; an outbreak does not (it curtails travel, not this)
+ *   field work  (BAR3-SERVICES-3, the chair's ruling SV8 of 2026-11-15; vetoable by the owner) the town's own land worked
+ *               under a siege: the fields, the herds, the hives, the woods, the pits and the pans. A siege CURTAILS it and
+ *               does not stop it, by the record's own reading of the siege: the food balance keeps a third of what the
+ *               land grows (`foodImportRates.js :: SIEGE_PRODUCTION_KEPT`; every siege town of the census's 720 keeps a
+ *               grown share of 14 to 43 in a hundred), and the chain card of every own-ground chain prints "impaired",
+ *               never stopped (`chainStateShown.js :: chainCrisisStateShown`). Its mark is the siege's partial kind,
+ *               "Curtailed by the siege." (`crisisStoppedRow.js :: CURTAILED_BY`)
  *   input       (the chair's ruling S5, 2026-11-15) the house's own raw input: a row that is what the house MAKES from
  *               what reaches it (the vintner's wine from grapes, the potter's pots from clay, the dairy's milk from
  *               livestock). No crisis stops it; the leaf's second cause reads it: where the page says no input reaches
@@ -46,10 +53,11 @@ export const FISH = 'food: fish';
 export const GAME = 'food: game';
 export const INPUT = 'input';
 export const GATES = 'beyond the gates';
+export const FIELD_WORK = 'field work';
 /** @type {ReadonlyArray<string>} */
 export const NONE = Object.freeze([]);
 /** Every dependence word, in the order above. @type {ReadonlyArray<string>} */
-export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES]);
+export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK]);
 
 /**
  * THE GAPS THE RECORD HOLDS EVERYWHERE (the chair's ruling S7, 2026-11-15; vetoable by the owner): a house whose input the
@@ -58,12 +66,13 @@ export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, 
  * whose page says no input reaches it); the record's measuring seat holds this class. The houses under the line, marked:
  * Dairy farmer 42 · 36, Tannery 10 · 7, Potter 269 · 172, Brickmaker 228 · 132, Fishmonger 11 · 4, Sawmill 23 · 7,
  * Salt works 94 · 25, Charcoal burner 153 · 30, Alchemist shop 17 · 2, Apothecary 19 · 2, Smelter 238 · 3, Bakers 262 · 0.
+ * RE-MEASURED (BAR3-SERVICES, 2026-11-15, on the census 720 at 59185b62a): the record no longer holds either gap everywhere:
+ * Vintner 184 · 11 ("No grapes reach the vintner." in 11 towns whose Table wine printed unmarked), Glassblower 13 · 1. Both
+ * are under the line now, and out of the table: the page's gap line and the row's mark agree again. The table stays, empty,
+ * for the next house the record gaps everywhere.
  * @type {Readonly<Record<string, string>>} house name -> its two counts
  */
-export const INPUT_GAP_HELD_EVERYWHERE = Object.freeze({
-  "Vintner": "184 of 184",
-  "Glassblower": "13 of 13",
-});
+export const INPUT_GAP_HELD_EVERYWHERE = Object.freeze({});
 
 /**
  * A service whose catalogue name holds the word the style law retired (TAIL-CRISIS-7, `tests/lint/styleLaw.walker.test.js`):
@@ -236,7 +245,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Contraband delivery": Object.freeze([GOODS]),
   "Contraband fencing": NONE,
   "Contraband goods": NONE,
-  "Contraband licensing": NONE,
+  "Contraband licensing": Object.freeze([GOODS]), // BAR3-SERVICES (S2): goods moving through; a siege stops it
   "Contraband purchase": NONE,
   "Contraband transport": Object.freeze([GOODS]),
   "Contract board": NONE,
@@ -304,7 +313,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Dispute arbitration": NONE,
   "Dispute mediation": NONE,
   "Dispute resolution": NONE,
-  "Dispute resolution (guild)": NONE,
+  "Dispute resolution (criminal)": NONE, // BAR3-SERVICES (S2): "(guild)" renamed; the town may have no guild
   "District security": NONE,
   "District trading": NONE,
   "Diverse programming": Object.freeze([GATHERINGS]),
@@ -1009,7 +1018,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "barge_and_river_transport_company": Object.freeze([TRAVELLERS, GOODS]),
   "barracks": NONE,
   "beast_trainers": NONE,
-  "beekeeper": NONE,
+  "beekeeper": Object.freeze([FIELD_WORK]), // SV8: its hives on the land the siege curtails
   "black_market": NONE,
   "black_market_bazaar": NONE,
   "blacksmith": NONE,
@@ -1037,7 +1046,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "cathedral_10_000_only": NONE,
   "cemetery_network": Object.freeze([GATES]), // S8
   "chandler": NONE,
-  "charcoal_burner": Object.freeze([INPUT]),
+  "charcoal_burner": Object.freeze([INPUT, FIELD_WORK]), // SV8: its kilns in the woods the siege curtails
   "charlatan_fortune_tellers": NONE,
   "chroniclers_exchange": Object.freeze([TRAVELLERS]), // S8
   "citadel": NONE,
@@ -1061,7 +1070,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "craft_guilds_5_15": NONE,
   "customs_house": Object.freeze([GOODS]),
   "daily_markets": Object.freeze([GATHERINGS]), // S8
-  "dairy_farmer": Object.freeze([LIVESTOCK, INPUT]),
+  "dairy_farmer": Object.freeze([LIVESTOCK, INPUT, FIELD_WORK]), // SV8: its herd on the grazing the siege curtails
   "democratic_assembly": NONE,
   "district_markets_5_10": NONE,
   "docks_port_facilities": Object.freeze([GOODS]),
@@ -1075,12 +1084,12 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "dyer": NONE,
   "elder_grove_council": NONE,
   "enchanter_s_shop": NONE,
-  "farmland": Object.freeze([GRAIN]),
+  "farmland": Object.freeze([GRAIN, FIELD_WORK]), // SV8: its fields, a third of their yield kept under a siege
   "fence_word_of_mouth": NONE,
   "fighting_pits": NONE,
   "fish_market": Object.freeze([GOODS, FISH, INPUT]), // S8; SV6: its catch
-  "fisher_s_landing": Object.freeze([FISH, INPUT]), // SV6: its catch
-  "fishing_community": Object.freeze([FISH, INPUT]), // SV6: its catch
+  "fisher_s_landing": Object.freeze([FISH, INPUT, GATES]), // SV6: its catch; BAR3-SERVICES (S3): its boats on the water beyond the walls
+  "fishing_community": Object.freeze([FISH, INPUT, GATES]), // SV6: its catch; BAR3-SERVICES (S3): its boats on the water beyond the walls
   "fishmonger": Object.freeze([FISH, INPUT]),
   "foundling_home": NONE,
   "free_company_hall": NONE,
@@ -1148,7 +1157,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "midwife": NONE,
   "mill": Object.freeze([GRAIN]),
   "mills_2_5": Object.freeze([GRAIN]),
-  "mine": Object.freeze([INPUT]), // SV6: its ore
+  "mine": Object.freeze([INPUT, FIELD_WORK]), // SV6: its ore; SV8: its pits, the chain impaired under a siege
   "mine_open_cast": NONE,
   "mint": NONE,
   "mint_official": NONE,
@@ -1177,7 +1186,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "parish_churches_50_100": NONE,
   "pawnbroker": NONE,
   "peat_cutter": NONE,
-  "periodic_market": Object.freeze([GATHERINGS]), // S8
+  "periodic_market": Object.freeze([GATHERINGS, TRAVELLERS]), // S8; BAR3-SERVICES (S1): its trading day is the country coming in, which a siege stops
   "planar_embassy": NONE,
   "planar_traders": NONE,
   "post_relay_station": Object.freeze([TRAVELLERS]),
@@ -1194,13 +1203,13 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "ropemaker": NONE,
   "royal_seat": NONE,
   "sage_s_quarter": NONE,
-  "salt_works": Object.freeze([INPUT]),
+  "salt_works": Object.freeze([INPUT, FIELD_WORK]), // SV8: its pans, the chain impaired under a siege
   "sawmill": Object.freeze([INPUT]),
   "sawmill_commercial": NONE,
   "scroll_scribe": NONE,
   "sewage_system": NONE,
-  "shepherd": NONE,
-  "shepherd_collective": NONE,
+  "shepherd": Object.freeze([FIELD_WORK]), // SV8: its flocks on the grazing the siege curtails
+  "shepherd_collective": Object.freeze([FIELD_WORK]), // SV8: the same flocks, held in common
   "shipyard": NONE,
   "slave_market": NONE,
   "slave_market_district": NONE,
@@ -1217,7 +1226,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "state_granary_complex": NONE,
   "stone_quarry": Object.freeze([GOODS, INPUT]), // S8; SV6: its stone
   "street_gang": NONE,
-  "subsistence_farming": Object.freeze([GRAIN]),
+  "subsistence_farming": Object.freeze([GRAIN, FIELD_WORK]), // SV8: its plots, a third of their yield kept under a siege
   "tailor": NONE,
   "tailor_s_guild": NONE,
   "tanner_established": NONE,
@@ -1262,7 +1271,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "wildfowler": NONE,
   "wizard_s_tower": NONE,
   "woodcarver": NONE,
-  "woodcutter_s_camp": NONE,
+  "woodcutter_s_camp": Object.freeze([FIELD_WORK]), // SV8: its cutting in the woods the siege curtails
   "workhouse": NONE,
 });
 
@@ -1292,14 +1301,68 @@ export const SPENT_GROUND_YIELD = Object.freeze({
 export const SPENT_GROUND_WORKERS = Object.freeze(['mine', 'stone_quarry', 'salt_works', 'fisher_s_landing', 'fishing_community', 'fish_market', 'hunter_s_lodge']);
 
 /**
+ * THE GROUNDS A FISHING HOUSE WORKS WHERE NO CHAIN NAMES IT (BAR3-SERVICES, the chair's direction S3 of 2026-11-15;
+ * vetoable by the owner). SV6 reads a house's grounds off the record's chains, and a fish market or a fishing community
+ * the chains do not name was read as on no ground: its "Fish sold daily from the morning catch." printed unmarked where the
+ * page's Depleted list holds every fishery the town has and the trade record brings salted fish in (16 towns of the 720
+ * at 59185b62a). For these houses alone, where no chain names the house, its grounds are the record's chains on the
+ * town's fisheries of the kinds named here, read by SV6's own reading (every one on the Depleted list, none kept by magic):
+ * the same mark ("Short of fish."). A town whose fisheries run no chain is not read here. Catalogue ids -> resource keys.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const GROUNDS_WORKED_OFF_CHAIN = Object.freeze({
+  fish_market: Object.freeze(['fishing_grounds', 'river_fish']),
+  fishing_community: Object.freeze(['fishing_grounds', 'river_fish']),
+  fisher_s_landing: Object.freeze(['fishing_grounds', 'river_fish']),
+});
+
+/**
+ * THE WORK BEYOND THE GATES THE RECORD HOLDS GOING ON UNDER A SIEGE (BAR3-SERVICES-3, the chair's ruling SV8b of
+ * 2026-11-15; vetoable by the owner). A house declared `beyond the gates` is stopped by a siege, UNLESS the town's own
+ * record reads that work as going on under this siege, by the fact named here for the house:
+ *   foodSource   the food record counts this source in the share the town still grows under the siege
+ *                (`foodSecurity.foodRecord.foodSources`): the hunter's lodge, where it counts game;
+ *   waterGrounds a supply chain the house works on one of these grounds (`economicState.activeChains`, the house among
+ *                its `processingInstitutions`) is on the record: its card's own state under the siege
+ *                (`chainStateShown.js :: chainCrisisStateShown`) bears it: a working state (a port's open sea,
+ *                `seaOpenTo`) leaves the house unmarked; any other ("impaired", "vulnerable") curtails it.
+ * Where the record holds it so, the house reads "Curtailed by the siege." (its work is `field work`, SV8) or unmarked;
+ * where the record cannot tell (no such source, no such chain), "Stopped by the siege." stands. Keyed by catalogue id.
+ * @type {Readonly<Record<string, Readonly<{ foodSource?: string, waterGrounds?: ReadonlyArray<string> }>>>}
+ */
+export const GATES_WORK_HELD_BY_RECORD = Object.freeze({
+  hunter_s_lodge: Object.freeze({ foodSource: 'game' }),
+  fishing_community: Object.freeze({ waterGrounds: Object.freeze(['fishing_grounds', 'river_fish']) }),
+  fisher_s_landing: Object.freeze({ waterGrounds: Object.freeze(['fishing_grounds', 'river_fish']) }),
+});
+
+/**
+ * A SIEGE TWIN THAT SAYS THE HOUSE GOES ON, THINLY, IS A ROW STILL ON OFFER (BAR3-SERVICES-3, the chair's ruling SV7b of
+ * 2026-11-15; vetoable by the owner). A service row whose description is the siege's own twin
+ * (`institutionServices.js :: SERVICE_DESC_SIBLINGS`) says in its own words what the siege did to it. Where those words
+ * say the service has stopped ("none go out", "the wagons stand idle", "none can reach it", "ground by hand at home"),
+ * the twin is no row on offer, and a house of such rows alone is "Stopped by the siege." (SV7). Where they say the
+ * service goes on, thinly, the twin IS a row on offer, and its house reads "Curtailed by the siege." by SV7's own rule.
+ * These are the siege twins that go on, by their own text (read against every siege twin of the table: the test
+ * `tests/components/bar3ServicesRows.test.jsx` fails on a text here that is no siege twin). VETOABLE (the owner's).
+ * @type {ReadonlyArray<string>}
+ */
+export const SIEGE_TWINS_ON_OFFER = Object.freeze([
+  // the coaching inn's "Lodging": the beds are let, to the few still within
+  'Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.',
+  // the daily market's "Fresh produce": what the gardens within the walls still give
+  'Whatever the kitchen gardens still give, sold early and gone by mid-morning.',
+]);
+
+/**
  * A SERVICE ROW CARRIES THE MARK ITS HOUSE CARRIES (BAR2-SERVICES, the chair's ruling SV1 of 2026-11-15; vetoable by the
  * owner). Where a house's row is stopped, curtailed or short of its input, every service row of that house that lives on
  * the same thing prints the same mark: the leaf (`crisisStoppedRow.js :: serviceRowDependence`) reads a service row as
  * living on its own line above AND on its house's line. This table is the one exception: the rows of a house that do NOT
  * live on what the house lives on, each with the dependences of its house it is free of (its own line still holds). Read
  * row by row against the 97 pairs of a house's menu that the house's line reaches and the row's own does not (the
- * quarry's "Cut stone" lives on the quarry beyond the walls; the chroniclers' archive is consulted though no road brings a
- * report). Keyed by the house's catalogue id, then the service's name. VETOABLE (the owner's).
+ * quarry's "Cut stone" lives on the quarry beyond the walls; the listening post weighs a rumour against the register it already
+ * holds). Keyed by the house's catalogue id, then the service's name. VETOABLE (the owner's).
  * @type {Readonly<Record<string, Readonly<Record<string, ReadonlyArray<string>>>>>}
  */
 export const SERVICE_FREE_OF_HOUSE = Object.freeze({
@@ -1344,7 +1407,9 @@ export const SERVICE_FREE_OF_HOUSE = Object.freeze({
   "traveling_performers": Object.freeze({ "Public performance": Object.freeze([TRAVELLERS]), "Private entertainment": Object.freeze([TRAVELLERS, GATHERINGS]), "Festival coordination": Object.freeze([TRAVELLERS]) }),
   // weighed against what the register already holds
   "listening_post": Object.freeze({ "Claim weighing": Object.freeze([TRAVELLERS]), "Traveller vouching": Object.freeze([TRAVELLERS]) }),
-  "chroniclers_exchange": Object.freeze({ "Written answer": Object.freeze([TRAVELLERS]), "Archive consultation": Object.freeze([TRAVELLERS]), "Claim grading": Object.freeze([TRAVELLERS]) }),
+  // BAR3-SERVICES (S3, 2026-11-15): the chroniclers' exchange is out of this table: its every row is the roads' reports
+  // weighed against each other, and where the siege stops the house ("Stopped by the siege.") its rows print the same mark
+  // (7 towns of the 720 at 59185b62a printed the house stopped and its archive, grading and answers on offer).
 });
 
 /*
