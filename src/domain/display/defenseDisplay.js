@@ -18,6 +18,7 @@ import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 import { magicPractitioners } from '../magicReliance.js';
 import { crimeSignalOf } from '../crimeSignal.js';
+import { criminalStructureKeyOf, runningCriminalChains, THIEVES_GUILD_HOUSE } from '../facts/criminalStructureKey.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
 // this lazy display module — NOT in data/stressTypes.js, which sits in the eager
@@ -192,59 +193,11 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
  */
 export function deriveCriminalStructure(settlement) {
   const r = settlement || {};
-  const names = (r.institutions || []).map((i) => (i?.name || '').toLowerCase());
-  const hasGuild = names.some((n) => n.includes("thieves' guild") || n.includes('thieves guild'));
-  const hasSyndicate = names.some((n) => n.includes('multiple criminal') || n.includes('underground city') || n.includes('front business'));
-  const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));
-  const hasDiffuse = names.some((n) => n.includes('fence') || n.includes('bandit') || n.includes('outlaw'));
-  // ⛔ "NOTHING ORGANIZED" IS A FINDING, SO IT IS NEVER READ BESIDE A NETWORK (lane RUNG1-TRUTH unit
-  // E2, 2026-11-04; docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 16, A-06; the chair's ruling 2). The
-  // name ladder above knows neither "Street gang" nor "Underground network" and never reads the
-  // power roster, so a town with a street gang (soak1k-759) and a place whose Thieves' Guild holds
-  // power with no premises (soak1k-393) both read null, and DS-DEF-4 printed "No criminal
-  // infrastructure has been identified". Where the ladder finds nothing, the roster's criminal
-  // faction makes the structure ORGANIZED (a guild is a hierarchy, the pool's own reading of one),
-  // and a house the estate's ONE criminal detector names (`corruption.js :: isCriminalInstitution`)
-  // makes it SEMI-ORGANIZED (routes and territories, no single authority). Only the null answer
-  // moves; no pool text changes.
-  const ladder = hasGuild || hasSyndicate ? 'organized'
-    : hasSemiOrg ? 'semi-organized'
-      : hasDiffuse ? 'diffuse'
-        : null;
-  // (Lane RUNG1B-F4 unit 3: both facts are read from the crime signal's one home, `crimeSignal.js`.)
-  const signal = crimeSignalOf({ seats: r.powerStructure?.factions, estate: r.institutions });
-  // ⛔ NOR BESIDE ITS OWN LIST (lane RUNG1B-F9 unit 3, 2026-11-04; A-06 in reverse: soak1k-28
-  // Innissike listed "Active criminal operations: Red Light District" and the Economics tab's
-  // "Slave trade · Operational", then printed "No criminal infrastructure has been identified").
-  // The block's operations list is the safety profile's `criminalInstitutions` (a label table the
-  // one detector does not share), and a criminal supply chain that runs is routes and territory.
-  // Either makes the null answer SEMI-ORGANIZED, the same reading a criminal house gets above.
-  const listed = (r.economicState?.safetyProfile?.criminalInstitutions || []).length > 0
-    || runningCriminalChains(r).length > 0;
-  // ⛔ A GANG IS A GANG (W2-A-LEAVES 5b, 2026-11-12; the second wave's ruling): the crime signal's FACTIONS outrank
-  // the name ladder. The ladder read a fence's house as "diffuse" and never asked the roster, so the Defense tab
-  // printed "Diffuse, no gang" beside a criminal power on the Power tab (2 of the census's 720). A criminal power
-  // is a hierarchy, the pool's own reading of one; the ladder answers only where no criminal power stands.
-  // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
-  const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
-    : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
+  const key = criminalStructureKeyOf(r); // TAIL-TIES-9 (T28): the key's ladder (and its reasons) lives in the crime fact's leaf
   return key ? ringNoteUnderStreetFighting(headedPowerAmongRivals(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r), r) : null; // TAIL-DEFECON-D: no ring the record names
 }
 
-/** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
-const RUNNING_CHAIN_STATUS = Object.freeze(['operational', 'running', 'entrepot']);
-
-/**
- * The criminal supply chains that run: the Economics tab's "Criminal supply chains" chips
- * (`needKey === 'criminal_economy'`) whose status is a working one.
- * @param {DefenseDisplaySettlement | null | undefined} settlement
- * @returns {Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null>}
- */
-export function runningCriminalChains(settlement) {
-  const chains = settlement?.economicState?.activeChains;
-  return (Array.isArray(chains) ? chains : [])
-    .filter((c) => c?.needKey === 'criminal_economy' && RUNNING_CHAIN_STATUS.includes(String(c?.status ?? '')));
-}
+export { runningCriminalChains } from '../facts/criminalStructureKey.js'; // TAIL-TIES-9 (T28): moved verbatim to the crime fact's leaf
 
 /**
  * DOES THE BLOCK LIST CRIME (RUNG-2 LANDING phase D, R-D2; F9's law extended)? The Defense
@@ -735,43 +688,8 @@ function clergyHere(settlement) {
     || rulerKindOf(/** @type {Parameters<typeof rulerKindOf>[0]} */ (/** @type {unknown} */ (settlement))) === 'priest';
 }
 
-// ─── W2-C-LEAVES-3, round three: NO ONE RING WHERE RINGS RIVAL (at the end of the file, so no line above moves) ───
-/**
- * WHETHER MORE THAN ONE CRIMINAL RING STANDS HERE (the cold list REVIEW-R2-STAGES #1172 and #1202, HIGH, #716, #750 and
- * #813: "One criminal ring decides what crime is allowed here" beside a Thieves' Guild and The Black Circle on the Power
- * tab, and the roster's "Multiple criminal factions", which the Institutions tab prints as rival gangs disputing their
- * turf). The power roster is the home of who stands (`crimeSignal.js :: crimeSignalOf`'s seats): a criminal power that
- * GOVERNS (`isGoverning`: a council bought outright) is the captured hall, not a rival ring. Two rings or more, or the
- * roster's own "Multiple criminal factions", is no single controlling authority: the structure table's own
- * "semi-organized" row ("lacks a single controlling authority. Several gangs may be competing."), never "one ring".
- * @param {DefenseDisplaySettlement} settlement
- * @returns {boolean}
- */
-function rivalRingsHere(settlement) {
-  return rivalRingsOf(settlement?.powerStructure?.factions, settlement?.institutions) && !oneOrganisationRules(settlement);
-}
-
-/**
- * ONE ORGANISATION RULES THE TRADE (W2-C-LEAVES-11, the chair's ruling (1) of 2026-11-14 on REVIEW-W2-C-LEAVES's HIGH [1]:
- * "Semi-organized networks … lacks a single controlling authority. Several gangs may be competing" and the crime prose drawn
- * with that key, "Rival crews at {N} are fighting over who runs the streets", were false in 36 of the 289 towns of the
- * reader's 1,824 where they printed). Rival rings are said only where none of them governs or dominates and no guild is
- * named as running the trade: a criminal seat that GOVERNS (`isGoverning`) or is Dominant (`powerLabel`, the band the
- * section's own "Underworld: Shadow Senate · Dominant" prints) is the single authority (18 of the 36), and so is a thieves'
- * guild house on the roster (the operations list's "Thieves' Guild Chapter" / "Thieves' Guild (Powerful)", 18 of the 36).
- * The key is then the one organisation's, read from the same roster. Read as stored; no fact is added.
- * @param {DefenseDisplaySettlement} settlement
- * @returns {boolean}
- */
-function oneOrganisationRules(settlement) {
-  const seats = /** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, powerLabel?: unknown } | null | undefined>} */ (
-    settlement?.powerStructure?.factions || []);
-  return seats.some((f) => f?.category === 'criminal' && (f?.isGoverning === true || f?.powerLabel === 'Dominant'))
-    || (settlement?.institutions || []).some((i) => THIEVES_GUILD_HOUSE.test(String(i?.name ?? '')));
-}
-/** A thieves' guild house by its roster name ("Thieves' guild chapter", "Thieves' guild (powerful)"). */
-const THIEVES_GUILD_HOUSE = /thieves'? guild/i;
-import { rivalRingsOf } from '../corruption.js';
+// ─── W2-C-LEAVES-3, round three: NO ONE RING WHERE RINGS RIVAL: `rivalRingsHere` and `oneOrganisationRules` moved verbatim
+// to the crime fact's leaf, `facts/criminalStructureKey.js` (TAIL-TIES-9, the chair's ruling T28) ───
 
 // ─── W2-C-LEAVES-3: THE ARCANE SUPPORT ROW IS A CLAIM ABOUT THE DEFENCE (at the end of the file, so no line above moves) ───
 // The chair's ruling (record 369, G5; vetoable): "Arcane Support · Present … Detection, wards, counterspell." prints only
