@@ -14,6 +14,10 @@ worktree. Census before: CENSUS-3 at f8042b61a on the 720; after: the same comma
 - **SV3** "Slow but broadly legitimate." (Family decisions) reworded out of the legitimacy register.
 - **SV4** "Backs Military/Guard": the Backs line takes the power's sentence name from the one leaf.
 - **SV5** "Connection: Lord Chancellor / Lord Mayor <a woman>": only the form by sex is cured, through `titleForHolder`.
+- **SV6** (the chair's message after batch 1) A house that lives on a resource which the page itself prints as depleted or
+  absent is short of it: the leaf reads the resource's printed condition as it reads a gap; the house's row and its
+  service rows carry the short mark naming the resource; a chain running at full on a depleted or absent ground is the
+  record's incoherence, NAMED; a house the record feeds by an import is not short (struck with the count).
 
 ## Batch 1 (SV1, SV2, SV3, SV4; SV5 struck)
 
@@ -36,7 +40,7 @@ THE PREMISE MEASURED, TWO PARTS OF IT WRONG ON THE RECORD (followed the record, 
 - *A depleted or absent ground* (fresh fish "from the morning catch" on depleted grounds, the mine's ore where the ore is
   absent, salt on depleted flats): NO house's row carries a mark for it, so the ruling's rule (the row carries its house's
   mark) does not reach it. The page says it on the chain's row ("Fishing grounds (depleted) » Fisher's landing + Salt works
-  + Fish market » Normally yields …") and the trade list ("Salt (local salt flats exhausted)"). PARKED, measured (see
+  + Fish market » Normally yields …") and the trade list ("Salt (local salt flats exhausted)"). PARKED at batch 1, CURED in batch 2 by the chair's ruling SV6 (see
   "Left"): C23813, C8434, C10682, C16282.
 
 THE CURE (one rule at the leaf): `serviceRowDependence(settlement, row)` — a service row lives on its own line AND on its
@@ -128,6 +132,61 @@ fresh 0, stale 0 (base the same) · the twelve-birth grid 0 falls · the 74 test
 `proseComposed.walker.test.js` two arms, `proseWiringCensus.walker.test.js` five arms: the close's books); the one arm my
 cure turned red (`institutionProseDeclared.test.js`, the ledger's text) re-keyed by text as above.
 
+## Batch 2 (SV6: the depleted ground)
+
+MEASURE FIRST (my scripts over the 720 at 41ef3a9b4; the Resources tab prints `config.nearbyResourcesDepleted` as its
+Depleted list; "absent" prints nowhere on any page of the 720): **1,882 house-towns** stand on a printed-depleted ground
+(a chain of the record the house works, `activeChains[].resourceKey`, on that list): 1,407 with the trade record's
+shortage import for that ground (`resourceSemantics.js :: resourceShortageImport`, "Iron ore (local iron mines
+exhausted)"), 475 without. Chains: impaired or vulnerable, some magically sustained; **NONE running** (part (b): 0).
+
+THE PREMISE MEASURED, ONE PART WRONG ON THE RECORD (followed the record, one line): the import feeds the houses that BUY
+what the ground yields (the smiths' iron, the bakers' grain), never the work on the ground: the mine's "Ore cut
+underground by the crews" is false on an exhausted seam whatever ore is bought in (36 such mine-towns), as the quarry's
+stone (45) and the boats' morning catch (13). So the import lifts the mark for a buyer and NOT for the seven houses that
+work the ground (`SPENT_GROUND_WORKERS`: mine, stone quarry, salt works, fisher's landing, fishing community, fish market,
+hunter's lodge). STRUCK by the import rule: the buyers fed (the 1,407 house-towns less the workers': smiths, smelters,
+weavers, tailors, dyers, fullers, cobblers, bakers, butchers, citadels … each fed by its shortage import).
+
+THE CURE (the leaf, `crisisStoppedRow.js :: housesOnSpentGround`, read into the same short map as the gap line, so one
+mark): a house that makes from what reaches it (`input`) whose EVERY own ground is on the page's Depleted list, none kept
+by magic, and none fed (a worker is never fed) is short of the ground's yield (`SPENT_GROUND_YIELD`: fish, iron ore, salt,
+stone, game, livestock, clay, coal, timber, herbs, glass sand, grain, reeds, grapes; else "its materials"); its service
+rows carry it through SV1. `input` declared on the six ground-working houses that lacked it (mine, stone quarry, fish
+market, fisher's landing, fishing community, hunter's lodge); free of it: the hunter's guide, the fish market's wholesale
+and preserved stores (fed by what is brought in).
+A house that works two grounds and has only one spent is NOT marked (the salt works on spent fishing grounds still makes
+salt): one salt works on spent flats beside live fishing grounds stays unmarked (r2s-mass_migration-village-0), the cost of
+reading the house whole.
+
+MEASURE AFTER (the cured leaf on the same records): towns with a house short 272 -> 332; new short houses: Stone quarry
+45 towns, Mine 40, Fish market 19, Fisher's landing 12, Tanners 11, Charcoal burner 8, Smelter 4, Bakers 2, Hunter's lodge
+2, Glassmakers 2, Specialized metalworkers 4, Salt works +1, Fishmonger +1, Apothecary 1, Brickmaker 1.
+Worklist rows: C10682 (the mine's ore) marked in every printing town whose seam the page prints depleted; C23813, C8434
+(the morning catch) the same; C16282 (salt on spent flats) marked where the salt works' every ground is spent.
+
+PART (b), NAMED for the record's seat: no chain runs at full on a depleted ground in the 720 (0). THE RECORD'S OWN
+INCOHERENCE that remains: **a Mine on a roster whose ground holds no ore at all** (no ore key in
+`config.nearbyResources`, no chain for the Mine): 9 towns, r2r-village-3, r2r-town-51, r2r-town-52. The page prints no
+depletion there, so (a) does not mark it; the roster's draw is the record seat's.
+
+THE GUARD: `bar2ServicesRows.test.jsx` MARKED gains 4 SV6 pairs (the mine r2r-town-45, the fish market r2r-village-11, the
+quarry r2r-city-18, the landing r2r-hamlet-10), each red at 41ef3a9b4; KEEP gains the smiths fed by the import
+(r2r-town-12), green at both; the plant (the mine struck from `SPENT_GROUND_WORKERS`) reds r2r-town-45, not committed.
+
+THE INVENTORY DIFF (after batch 1 -> after batch 2, the 720): sentences 30005 -> 30034 · gone 0 · new 29 · in fewer towns 20
+· in more 9. Every line in fewer towns is an Institutions door that now carries "(short)" ("Raw extraction" 125 -> 85,
+"Cut stone" 49 -> 38, "Hide processing", "Fresh fish retail", "Fresh fish", "Charcoal supply" 123 -> 115, "Iron
+refining", "Salt production", "Game meat", "Herbal remedies", "Fresh bread"): the marks themselves. THE INHERITORS read:
+"A row marked short is what its house makes when supplied." +46, "Short of iron ore." 42, "Short of stone." 45, "Short of
+fish." 4 -> 33, "Short of livestock." 36 -> 47, "Short of coal." 8, and the doors' "(short)".
+
+DECLARED MOVE: none. 0 of 720 records move (the leaf and its table are display data); 0 of the 525 reference
+configurations.
+
+GATES (batch 2): strict-domain 0 · type ratchet OK (167, ceiling 167) · eslint 0 · presumed-things fresh 0 stale 0 · grid
+0 falls · the 74 touched-file tests: 71 green, the same 8 arms CARRIED from f8042b61a.
+
 ## Every new or changed line (THE VETO LIST)
 
 | line | where | read in (smallest · largest · a crisis) |
@@ -136,6 +195,7 @@ cure turned red (`institutionProseDeclared.test.js`, the ledger's text) re-keyed
 | "Matters affecting multiple families go to a council of heads, who settle them slowly, by talk." | Services, head-of-household consensus | r2r-thorp-11 · r2r-thorp-17 · (prints in thorps only: no crisis town among the 30) |
 | "Bulk purchase by households and institutions." | Services, the fish market where no tavern stands | r2r-thorp-50 (its one town) |
 | "Backs The Guard" (the sentence name, the leaf's) | Institutions, the Backs line | r2r-city-0 · r2r-metropolis-14 · r2s-under_siege-city-0 |
+| "Short of fish." / "Short of iron ore." / "Short of stone." / "Short of livestock." / "Short of coal." / "Short of game." / "Short of grain." / "Short of herbs." / "Short of glass sand." / "Short of salt." (SV6, `SPENT_GROUND_YIELD`) and the doors' "(short)" | Institutions and Services, a house on a ground the page prints depleted | r2r-hamlet-10 (fish) · r2r-metropolis-14 (iron ore) · r2s-under_siege-metropolis-3 (iron ore, a siege), r2r-town-49 (grain) |
 | the house's mark on its service rows ("Stopped by the siege." / "Curtailed by the outbreak." / "Scarce in the famine." / "Short of camels."): existing marks, new rows | Services rows and Institutions doors | r2s-under_siege-hamlet-3 (hunter's lodge) · r2r-metropolis-14 (siege) · r2s-famine-city-2 (pastries), r2s-plague_onset-town-2 (register), r2r-town-54 (camels) |
 
 ## Rows named for other seats
@@ -155,18 +215,15 @@ tip by my script (`golden.mjs`, the golden's own corpus and key).
 
 ## Left of my worklist
 
-- PARKED (the ruling's premise does not hold; a new reading is needed): the depleted or absent ground. Measured on the
-  720: the fish market's "Fresh fish retail" where its one chain's input is depleted 19 towns; the mine's "Raw extraction"
-  ("Ore cut underground …") 39; the salt works where its chains' inputs are all depleted ~10. Each house's chains are read
-  through `economicState.activeChains[].resourceInputCondition`; no house row is marked for it, and the downstream chains
-  (smiths, weavers, tanners: impaired, 50+ towns each) would be marked by any wide reading, falsely where the input is
-  bought in. A cure would read the extracting house's own chain only and mark its rows "Short of <the chain's input>.":
-  a new reading for the chair.
+- CURED in batch 2 (SV6): the depleted ground. What is left: the salt works on spent flats beside live fishing grounds
+  (1 town, the house read whole); the Mine on no ore ground (9 towns, the record seat's).
+- The PDF's Backs line (named above).
 
 ## How the instruments are re-made
 
 `git archive` of `docs/chair/2026-11-14/probes/READ-ALL` (chair's lane) and `docs/chair/2026-11-14/probes/CENSUS-3`
 (census lane) to a scratch directory; `census3.sh <tree> <out> 4`; `inventory.py <out> <json>`; `inventory_diff.py
 before.json after.json WORKLIST-SERVICES.json`. My measures: `sv1measure.mjs` (rows under a marked house that lack the
-mark), `sv1short.mjs` (gap houses and their marks), `pairs.mjs` (the catalogue's house-service pairs), `famdiff.mjs` (the
+mark), `sv1short.mjs` (gap houses and their marks), `sv6b.mjs` and `sv6after.mjs` (houses on a printed-depleted ground, fed or
+not, and the short marks before and after), `pairs.mjs` (the catalogue's house-service pairs), `famdiff.mjs` (the
 record's field diff), `golden.mjs` (the 525 hashes) — each a few lines over `corpus.ndjson.gz` and the tree's own leaf.

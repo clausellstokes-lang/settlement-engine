@@ -12,6 +12,9 @@
  *     its house's mark (the KEEP table: what prints instead is the row unmarked);
  *   · (SV2, SV3) a reworded row prints its old words (each red at f8042b61a) or its new words fail to print (the REWORDED
  *     table: what prints instead is named);
+ *   · (SV6, batch 2) a house that works or makes from a ground the page prints as depleted (the Resources tab's Depleted
+ *     list), with no import feeding a buyer, prints its rows without "Short of <its yield>." (MARKED's SV6 rows, each red at
+ *     41ef3a9b4); a buyer the trade record feeds prints unmarked (KEEP);
  *   · (SV4) a house's Backs line names a power by its roster label with a slash ("Military/Guard") instead of the one
  *     leaf's sentence name ("The Guard"): red at f8042b61a.
  */
@@ -52,6 +55,11 @@ const MARKED = [
   ['r2s-plague_onset-town-2', "Read the day's register of arrivals and what each of them reported.", OUTBREAK], // the listening post's arrivals
   ['r2s-famine-metropolis-2', 'Tripe, tallow, bone, hide. Nothing wasted. By-products sold to chandlers and tanners.', FAMINE], // the butchers' livestock
   ['r2r-town-54', 'Assemble merchants with compatible routes into shared caravans for safety and economy.', 'Short of camels.'], // C31592 ("No camels reach the caravanserai.")
+  // SV6 (batch 2, the chair's ruling of 2026-11-15): a house on a ground the page prints as depleted is short of it
+  ['r2r-town-45', 'Ore cut underground by the crews and brought out by cart for sorting.', 'Short of iron ore.'], // C10682 (iron ore deposits depleted; the import feeds the smiths, not the crews)
+  ['r2r-village-11', 'Fish sold daily from the morning catch. Selection varies by season.', 'Short of fish.'], // C23813, C8434 (fishing grounds depleted)
+  ['r2r-city-18', 'Dressed stone blocks for construction. Consistency and size matter for fortifications.', 'Short of stone.'], // the quarry's face exhausted
+  ['r2r-hamlet-10', 'Catch of the day. Buy and cook same-day.', 'Short of fish.'], // the landing's grounds depleted
 ];
 /** SV1 keep pairs: (seed, a row its house's mark does not reach: it prints unmarked). */
 const KEEP = [
@@ -59,6 +67,7 @@ const KEEP = [
   ['r2s-under_siege-city-0', 'Performers, games, and live music at multiple venues nightly.'], // the inns' own music
   ['r2r-town-54', 'Experienced route planners select roads based on threat, season, and cargo type.'], // the planners, not the camels
   ['r2s-under_siege-town-1', 'Custom maps to order. Accurate, legible, and durably produced.'], // the cartographer's bench
+  ['r2r-town-12', 'Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new.'], // SV6: the smiths on a spent seam, fed by the iron ore the trade record brings in
 ];
 /** SV2, SV3: (seed, the old words that must not print, the words that print instead). */
 const REWORDED = [

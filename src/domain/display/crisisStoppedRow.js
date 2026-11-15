@@ -41,7 +41,8 @@
  * row is never marked; a calm town is read as a crisis town is (a gap is no crisis). A house whose gap the record holds in
  * nearly every town that holds it (`INPUT_GAP_HELD_EVERYWHERE`, the chair's ruling S7) is not marked: that gap is the
  * record's fault, not the town's state. One leaf, two causes: `rowMarkText`
- * gives both marks.
+ * gives both marks. THE SECOND CAUSE'S SECOND READING (SV6, 2026-11-15): a house that makes from what reaches it, on a ground
+ * the page itself prints as depleted and no import feeds, is short of it as a gapped house is (`housesOnSpentGround`).
  *
  * A SERVICE ROW CARRIES THE MARK ITS HOUSE CARRIES (BAR2-SERVICES, the chair's ruling SV1 of 2026-11-15; vetoable by the
  * owner): a service row lives on its own line AND on its house's (`serviceRowDependence`), so where the house's row is
@@ -56,9 +57,10 @@ import { crisisOf } from '../facts/crisisKind.js';
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
+import { resourceShortageImport } from '../resourceSemantics.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import {
-  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE,
+  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS,
   TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, NONE,
 } from '../../data/crisisDependence.js';
 
@@ -334,7 +336,44 @@ export function housesShortOfInput(settlement) {
     const said = lines.map((l) => SHORT_LINE.exec(String(l?.impact ?? ''))).find(Boolean);
     if (said) out.set(house, said[1]);
   }
+  // SV6: a house on a spent ground, by the page's own Depleted list (`SPENT_GROUND_YIELD`'s header)
+  for (const [house, ground] of housesOnSpentGround(settlement)) if (!out.has(house)) out.set(house, ground);
   SHORT_HOUSES.set(settlement, out);
+  return out;
+}
+
+/**
+ * THE THIRD READING (SV6): the houses whose every own ground the page prints as depleted, none kept by magic and none fed
+ * by the shortage import the trade record shows, each with what it is short of (`SPENT_GROUND_YIELD`).
+ * @param {object} settlement
+ * @returns {ReadonlyMap<string, string>} house name -> what it is short of
+ */
+function housesOnSpentGround(settlement) {
+  const s = /** @type {{ config?: { nearbyResourcesDepleted?: unknown }, economicState?: { activeChains?: unknown, primaryImports?: unknown } }} */ (settlement);
+  const spent = new Set(Array.isArray(s.config?.nearbyResourcesDepleted) ? s.config.nearbyResourcesDepleted : []);
+  /** @type {Map<string, string>} */
+  const out = new Map();
+  if (spent.size === 0) return out;
+  const imports = new Set((Array.isArray(s.economicState?.primaryImports) ? s.economicState.primaryImports : []).map(String));
+  const chains = /** @type {Array<{ resourceKey?: unknown, status?: unknown, processingInstitutions?: unknown }>} */ (Array.isArray(s.economicState?.activeChains) ? s.economicState.activeChains : []);
+  /** @type {Map<string, Array<{ resourceKey?: unknown, status?: unknown }>>} */
+  const grounds = new Map();
+  for (const c of chains) {
+    if (!c || typeof c.resourceKey !== 'string' || !c.resourceKey) continue;
+    for (const h of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) {
+      if (typeof h !== 'string') continue;
+      if (!grounds.has(h)) grounds.set(h, []);
+      /** @type {Array<{ resourceKey?: unknown, status?: unknown }>} */ (grounds.get(h)).push(c);
+    }
+  }
+  for (const [house, own] of grounds) {
+    const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
+    const allSpent = own.every((c) => spent.has(/** @type {string} */ (c.resourceKey)) && c.status !== 'magically_sustained'
+      && (works || !imports.has(String(resourceShortageImport(/** @type {string} */ (c.resourceKey)) ?? ''))));
+    if (!allSpent) continue;
+    const key = /** @type {string} */ (own[0].resourceKey);
+    out.set(house, Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, key) ? SPENT_GROUND_YIELD[key] : 'its materials');
+  }
   return out;
 }
 
