@@ -459,7 +459,7 @@
     },
     {
       "id": "hamlet|Economy|Dairy farmer#0",
-      "text": "Milk, butter, and cheese from cattle or goats, when there are beasts to run. The work is seasonal, and heaviest in summer.",
+      "text": "Milk, butter, and cheese from cattle or goats, whenever livestock can be had. The work is seasonal, and heaviest in summer.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -468,7 +468,7 @@
     },
     {
       "id": "hamlet|Economy|Dairy farmer#1",
-      "text": "A dairy for milk, butter, and cheese, from a herd of cattle or goats where one can be kept. Seasonal work, cresting in the summer months.",
+      "text": "A dairy for milk, butter, and cheese, from a herd of cattle or goats, whenever livestock can be had. Seasonal work, cresting in the summer months.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -477,7 +477,7 @@
     },
     {
       "id": "hamlet|Economy|Woodcutter's camp#0",
-      "text": "A forest-edge camp of fellers and a yard where the logs are stacked. Timber, charcoal wood, and the hauling of both keep the place alive.",
+      "text": "A forest-edge camp of fellers and a yard where the logs are stacked. Timber and the hauling of it keep the place alive.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -485,7 +485,7 @@
     },
     {
       "id": "hamlet|Economy|Woodcutter's camp#1",
-      "text": "Axe crews work the treeline and stack their cut in a yard nearby. The settlement's living is timber, wood for the charcoal kilns, and the carting of it.",
+      "text": "Axe crews work the treeline and stack their cut in a yard nearby. The settlement's living is timber and the carting of it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -563,7 +563,7 @@
     },
     {
       "id": "hamlet|Economy|Salt works#0",
-      "text": "Boils or dries saline brine when brine can be had, yielding the raw salt that preserves food. It works best where workable brine lies close by.",
+      "text": "Boils or dries saline brine whenever brine can be had, yielding the raw salt that preserves food. It works best where workable brine lies close by.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -572,7 +572,7 @@
     },
     {
       "id": "hamlet|Economy|Salt works#1",
-      "text": "Evaporates brine, when brine can be had, to leave salt behind: the raw mineral used to preserve nearly everything. A strong brine source close by serves it best.",
+      "text": "Evaporates brine, whenever brine can be had, to leave salt behind: the raw mineral used to preserve nearly everything. A strong brine source close by serves it best.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1066,7 +1066,7 @@
     },
     {
       "id": "village|Economy|Fishmonger#0",
-      "text": "Buys whatever catch can be had, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
+      "text": "Buys fish whenever fish can be had, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1074,7 +1074,7 @@
     },
     {
       "id": "village|Economy|Fishmonger#1",
-      "text": "Deals in fish, when fish can be had: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
+      "text": "Deals in fish, whenever fish can be had: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1102,7 +1102,7 @@
     },
     {
       "id": "village|Economy|Dairy farmer#0",
-      "text": "Milk, butter, and soft cheese from cattle or goats, when there are beasts to run. What isn't used is sold on.",
+      "text": "Milk, butter, and soft cheese from cattle or goats, whenever livestock can be had. What isn't used is sold on.",
       "needs": [
         "market"
       ],
@@ -1112,7 +1112,7 @@
     },
     {
       "id": "village|Economy|Dairy farmer#1",
-      "text": "A herd of cattle or goats, where one can be kept, for milk, butter, and soft cheese. Any surplus is sold on.",
+      "text": "A herd of cattle or goats, whenever livestock can be had, for milk, butter, and soft cheese. Any surplus is sold on.",
       "needs": [
         "market"
       ],
@@ -1242,7 +1242,7 @@
     },
     {
       "id": "village|Economy|Weekly market#0",
-      "text": "Local produce and wares. Held under royal or noble charter.",
+      "text": "Local produce and wares. Held under charter.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1535,7 +1535,7 @@
     },
     {
       "id": "village|Crafts|Sawmill#1",
-      "text": "Powered by water or ox, the saw reduces logs to planks and beams whenever logs reach it, for building timber and furniture.",
+      "text": "Powered by water or ox, the saw reduces logs to planks and beams whenever logs can be had, for building timber and furniture.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1565,7 +1565,7 @@
     },
     {
       "id": "village|Crafts|Tannery#0",
-      "text": "Turns hides to leather with oak bark, when hides can be had. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
+      "text": "Turns hides to leather with oak bark, whenever hides can be had. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
       "needs": [
         "river"
       ],
@@ -1575,7 +1575,7 @@
     },
     {
       "id": "village|Crafts|Tannery#1",
-      "text": "Hides become leather here whenever they can be had, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
+      "text": "Hides become leather here whenever hides can be had, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
       "needs": [
         "river"
       ],
@@ -1617,7 +1617,7 @@
     },
     {
       "id": "village|Crafts|Potter#0",
-      "text": "Pottery for the household (plates, jugs, vessels for storage), thrown at the wheel and fired in a small kiln whenever there is clay to throw.",
+      "text": "Pottery for the household (plates, jugs, vessels for storage), thrown at the wheel and fired in a small kiln whenever clay can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1625,7 +1625,7 @@
     },
     {
       "id": "village|Crafts|Potter#1",
-      "text": "A wheel and a modest kiln for domestic ware: plates, jugs, and storage jars, as far as the clay to hand allows.",
+      "text": "A wheel and a modest kiln for domestic ware: plates, jugs, and storage jars, made whenever clay can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1633,7 +1633,7 @@
     },
     {
       "id": "village|Crafts|Brickmaker#0",
-      "text": "Shapes and fires clay into bricks for building, when there is clay to shape. With them, structures can be made to last. Clay and fuel are needed.",
+      "text": "Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1641,7 +1641,7 @@
     },
     {
       "id": "village|Crafts|Brickmaker#1",
-      "text": "Moulds and a kiln for building brick, fired whenever clay reaches them; brick allows sturdier, more lasting construction. The work depends on clay and fuel.",
+      "text": "Moulds and a kiln for building brick, fired whenever clay can be had; brick allows sturdier, more lasting construction. The work depends on clay and fuel.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2151,7 +2151,7 @@
     },
     {
       "id": "town|Economy|Weekly market#0",
-      "text": "Held by royal charter. The heart of the town's trade.",
+      "text": "Held by charter. The heart of the town's trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2159,7 +2159,7 @@
     },
     {
       "id": "town|Economy|Weekly market#1",
-      "text": "Requires a charter from the crown. A principal source of the town's trade.",
+      "text": "Requires a market charter. A principal source of the town's trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4271,7 +4271,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "TAIL-HOUSES-2 batch 4: declares by its coast sibling set (DESC_VARIANT_SIBLINGS); a colour line declares nothing else"
     },
     {
       "id": "city|Crafts|Cartographer's guild#1",
@@ -4279,7 +4280,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "TAIL-HOUSES-2 batch 4: declares by its coast sibling set (DESC_VARIANT_SIBLINGS); a colour line declares nothing else"
     },
     {
       "id": "city|Crafts|Craft guilds (30-80)#0",
@@ -5633,7 +5635,7 @@
     },
     {
       "id": "metropolis|Exotic|Message network (high magic)#0",
-      "text": "A network of paired Speaking Stones. A station costs as much as a merchant house, so only the crown and the great guilds keep them.",
+      "text": "A network of paired Speaking Stones. A station costs as much as a merchant house, so only the richest powers keep them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
