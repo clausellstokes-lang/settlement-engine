@@ -68,9 +68,50 @@ The difference against the merge point is the market pair only: `defenseDisplay.
 market RISE, the `hasSemiOrg` line, which (2b) re-keys. The `leaves crime: npcs` rise and the `seats.some` rise fell. Every other row is the
 joined line's own, unchanged.
 
-**(2b) The market row re-keyed by identity.** After `git fetch` and a merge of `lane/join-2026-11-14`'s tip. See below.
+**The merge.** `git fetch` and then a merge commit of `lane/join-2026-11-14` at `d5d1208ee`, giving `161c8938`. It was clean. The join brought
+`crimeSignal.js`'s new `seated` field, which the key does not read, and two `factLayers.js` rows (`keep`, `magicSource`). It did not change the
+readers register. Door at the merged tip: 29 rises and 20 falls. Mine are the market pair alone.
 
-## Part (3): the proofs. In progress
+**(2b) The market row re-keyed by identity.** This is the LAST commit, ALONE, after the proofs below and a re-fetch of the join. The row moves from
+`readers["src/domain/display/defenseDisplay.js"].market` to `readers["src/domain/facts/criminalStructureKey.js"].market`, by path only. Its `line`
+and `reason` are unchanged, the `readers` keys stay sorted, and the JSON form is the door's own (`JSON.stringify(…, null, 1)`, round-trip
+checked). The register carries no hash or count the door computes. Its total is unchanged and `FIRST.readers` is not touched. It is
+expected to read 28 rises and 19 falls, with no row naming `criminalStructureKey.js`. The receipt line gives the figure as measured.
+
+## Part (3): the proofs (at the merged tip `161c8938`, plus the two cures below). Each run went to a file in the scratch tree
+
+- **Type check:** `typecheck:ratchet` exit 0 and `typecheck:domain:strict` exit 0 (`sh scripts/gate-tail.sh`).
+- **eslint:** 0 on every touched file: `vite.config.js`, `factLayers.shared.mjs`, the T28 four, and the two walkers below.
+- **The build, plain and flagged:** both exit 0. Boot smoke `scripts/boot-smoke.mjs`: plain PASS (602/602 chunks initialised), FLAGGED PASS
+  (599/599).
+- **Guards** (`VERIFY_DIST=1 VERIFY_ENGINE_REMOTE_DIST=1`): `engineCoreLazyEdge` 3/3, `layerBoundaries` 8/8, `bootSmoke` 11/11,
+  `cultureProfilesLazy` 5/5, `engineChunkLazy` 19/19 and `sourceCitationIntegrity.walker` 18/18 are GREEN. No citation broke, so there was
+  nothing to re-address.
+- **`factLayers.walker`:** LEAVES GREEN (it is red at the join's own tip, 3 reds there). READERS red only on the line's own rows plus the market
+  pair, which (2b) cures.
+- **`vendorPdfLazy`:** 4 reds, the budget arms, all red at the merge point too and the owner's. At the merged tip: raw 1,164,956, gzip 371,027,
+  Brotli 310,860. Brotli is now UNDER the before figure 310,890, which confirms part (1)'s +162 was renaming noise. The engine chunk is
+  860,404 (the join's).
+- **The 155 test files that name `defenseDisplay` or `factsOf`** (one grep to `named.txt`, one vitest run to `named.json`): 1,652 tests, 18 failed,
+  in 8 files. Each red file was run again at the joined line's own tip `d5d1208ee` (`eight-join.json`):
+  - NOT MINE, red identically at the join's tip (named): `presumedThings.walker` (4), `proseWiringCensus.walker` (5),
+    `defenceFactReaders.walker` (1), `r3c10FoodLinesTrue` (2), and `generationWorkerLazy` (1). The worker bundle is 2,302,081 B against the
+    ceiling 2,008,268; the join's tree read 2,304,638.
+  - ENVIRONMENTAL: `chainPrintSites` "the roots are every top-level directory of code" names `dist`, the scratch build output (as TAIL-TIES-6
+    found).
+  - `factLayers.walker` READERS: the market pair, see (2b).
+  - MINE, CURED in the part (3) commit (my call, vetoable; each is a shrink or a conscious classing, never a behaviour change):
+    - `chainPrintSites.walker` "a stale exemption". `defenseDisplay.js` no longer touches chains, because `runningCriminalChains` moved to the
+      leaf. Its EXEMPT row is DELETED with a note. The leaf is not enrolled.
+    - `ruinFilterRoster.walker` (2 reds). The leaf is a NEW `.institutions` reader. Before the cut, the same reads sat in `defenseDisplay.js`,
+      which the file-granular scan reads as COMPLIANT only because it imports `liveInstitutions` for its Legal row. Routing the key through
+      `liveInstitutions` would change the births, so the leaf is classed EXEMPT (`penalty-side/name-lookup`, beside `corruption.js`). The
+      count goes 110 -> 111, measured by the file's own scan.
+    - NAMED FOR THE OWNER: the key reads ruined rows exactly as the display did. Whether a ruined criminal house should key the structure is
+      a behaviour question, not this move's.
+- **The 720 births** (RECORD-MEASURE-1 `births-only.sh` over CENSUS-3's `seeds.txt`, sha256 of the uncompressed corpus): at the merged tip
+  `6e0c045288704cd716d782684cbb900b6f38a2c02d2d260b80249c893b58d75f`, 720 rows, 0 errors. That is BYTE-IDENTICAL to TAIL-TIES-9's, and the
+  join's own tip `d5d1208ee` reads the same. The later commits touch no `src/` file. The receipt line gives the births at the final tip.
 
 ## Named, not mine
 - The four court-bench reads of the facts in `defenseDisplay.js` (the src close seat's).
