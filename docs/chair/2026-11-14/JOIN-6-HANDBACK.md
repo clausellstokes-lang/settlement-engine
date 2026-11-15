@@ -16,6 +16,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 - **00:18 UTC:** THE POWERS GROUP IS TWO BRANCHES by file (ruling P10): lane/tail-powers-2026-11-14 (at 40238d3ab: two batches; its successor builds DA there next, a declared move, the golden moves, one pin re-keyed by identity in its commit) and lane/tail-powers-b-2026-11-14 (cut from 40238d3ab: the faction lines, the people's power lines, the title lines). The second is landed where the order has "powers", once origin holds commits past 40238d3ab on it. The chair's read of the tips at 00:18: display-civic 812fa7e1f, display-econ 6e36000a4 or later, crisis 9c07f7461, houses a2550c0ef, ties b85886808 or later, narrative b52481302, powers 40238d3ab, defecon 345f13157, corpus-eco 29271e7bf. The tip read at each merge is the point.
 - **00:24 UTC:** "LAND: lane/tail-services-2026-11-14 at d7c032485" AS THE NEXT MERGE, then ONE LINE with the tip; then the order. Tips moved: display-civic 7148c48c5 or later (four batches), ties b8991a936 (handed back), powers 097dc8bda (handed back).
 - **00:28 UTC:** (1) lane/tail-history-2026-11-14 at 01ff8167e holds NO change under src/ (its batch 1 handed back as a patch file; its successor lands it): SKIPPED until "LAND: lane/tail-history-2026-11-14 at <hash>". (2) lane/tail-corpus-def-2026-11-14 at 4908ad69a (batch 1: a cure and a register commit through its own door) lands in the order before (g), with corpus-eco at 29271e7bf or later.
+- **00:43 UTC:** A FOURTH DEFECON BRANCH: lane/tail-defecon-r-2026-11-14 (cut from the defecon tip at 00:43: `resourceGenerator.js`'s gap logic; declared moves M-S and M-V, the golden moves; a pin may be re-keyed by identity in its commits). It shares that ONE FILE with lane/tail-defecon-2026-11-14, which may change one unrelated line near line 46. If the two meet in a hunk, both stand, and the chair is told. It lands with the other defecon branches once origin holds commits on it. Tips: display-civic e633bd333 or later (handed back, successor on it), narrative 9bd853fd0 or later, houses 6826fffd0 or later.
 
 ## 2. The landings
 
@@ -30,6 +31,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 6 | tail-ties-2026-11-14 | b8991a936 (00:37; handed back) | f663a2699 | e7de70116 | none (code); `presumedThings.widened.register.json` merged clean, both moved | the register (clean-both with houses 5: the union of two disjoint shrinks); lane-only `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json`; the vocabulary atom `ruling body` (known meeting (1)); DECLARED MOVES e0d38e6c4 (tension, 358 towns) and 97685dc01 (plotHooks, 194 towns): goldens carried |
 | — | tail-history-2026-11-14 | SKIPPED (the chair 00:28: no src change; waits for LAND) | — | — | — | — |
 | 7 | tail-narrative-2026-11-14 | 9bd853fd0 (00:42) | f663a2699 | 866041da5 | none | lane-only declarations `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json`; 4 pins re-keyed in the lane: code; DECLARED MOVE 9bd853fd0 (founding.reason, 154 towns): golden carried |
+| 8 | tail-powers-2026-11-14 | d68805134 (00:45; the successor's DA past the chair's 097dc8bda) | bcad1a358 | 00e8ba474 | none | 2 pins re-keyed in the lane: code; DECLARED MOVES 12d8fd0a9, 21dc7fa4b, d68805134: goldens carried |
 
 ## 3. Every code resolution
 
@@ -85,6 +87,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json` | tail-ties (6): lane-only, taken from the lane | the close re-derives it once |
 | `tests/property/generatorGoldenMaster.test.js` | tail-narrative (7) | the DECLARED MOVE of 9bd853fd0 (history.founding.reason in 154 towns: the founder against the Origin row; 48 towns newly print no Origin row) |
 | `docs/census/declarations/POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json` | tail-narrative (7): lane-only, taken from the lane | the close re-derives them once |
+| `tests/property/generatorGoldenMaster.test.js`, `espionageDormancyFence.test.js` (driven golden) | tail-powers (8) | the DECLARED MOVES of 12d8fd0a9 (npcs[].presentation, title lines), 21dc7fa4b (powerStructure.factions[].desc, 284 towns / 510 descriptions), d68805134 (the headman's name, 38 towns, 23 families) |
 
 ## 5. Item 2 at the landed tip
 
@@ -95,6 +98,8 @@ Not yet run.
 None yet.
 
 ## 7. Hazards
+
+- From point 7 on, the count check runs after every second point (never more than 45 minutes apart), not after every push: each check costs about 4,000 tokens of context, and the budget has to cover the last landings and item 2.
 
 - `npm ci` wrote `core.hookspath=.husky/_` and `rerere.enabled=true` into the shared config, as JOIN-4 and JOIN-5 saw. Expected; nothing else in the config moved at any push.
 - Run the build AFTER the tests, or in another tree: `dist/` reds `chainPrintSites.walker` F1 (JOIN-5 §7).
