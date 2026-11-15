@@ -172,3 +172,45 @@ export function settleDesertersUnfed(entries) {
     return twin ? { ...entry, desc: twin } : entry;
   });
 }
+
+/**
+ * TAIL-DISPLAY-CIVIC-4 (V7, the chair's ruling of 2026-11-15): "Everyone comes and goes by the gates, so smugglers have to get
+ * past the garrison" is false where a house on the roster moves goods beneath the walls (a smuggling network's or a smuggling
+ * operation's tunnels and false cellars, an underground network, an underground city: 135 of the line's 250 towns on the
+ * census's 720 at 6cf555801): that town takes the twin. Walls with gates, no siege (the caller's branch).
+ * @param {string} lawRef the force noun @param {boolean} many whether it takes a plural verb
+ * @param {ReadonlyArray<{ name?: unknown } | null | undefined>} institutions the roster
+ * @returns {string}
+ */
+export function gatesSmugglersLine(lawRef, many, institutions) {
+  return (institutions || []).some((i) => BENEATH_THE_WALLS.test(String(i?.name ?? '')))
+    ? lineText({ text: ` The ${lawRef} ${many ? 'keep' : 'keeps'} the gates, but smugglers have ways in beneath the walls.`, needs: ['gate', 'walls'] })
+    : ` Everyone comes and goes by the gates, so smugglers have to get past the ${lawRef}.`;
+}
+const BENEATH_THE_WALLS = /smuggling (?:network|operation)|underground (?:network|city)/i;
+
+/**
+ * TAIL-DISPLAY-CIVIC-4 (V10, the chair's ruling of 2026-11-15): "Petty theft is the primary risk; organized crime has a limited
+ * foothold." where no criminal house stands on the roster (16 of its 33 tab towns at 6cf555801, each beside the Defense tab's "No
+ * criminal infrastructure has been identified"): no foothold.
+ * @param {boolean} criminalHouse whether a criminal house stands @returns {string}
+ */
+export function footholdWord(criminalHouse) {
+  return criminalHouse ? 'a limited foothold' : 'found no foothold';
+}
+
+/**
+ * TAIL-DISPLAY-CIVIC-4 (V10): under a siege nothing comes in by road, gate or water, so the two smuggling hooks that have a
+ * load arriving take their twins (the draw stands: the same slot, the same index; 3 of the first's 49 towns at 6cf555801).
+ * @param {string} hook the drawn hook @param {boolean} siege @returns {string}
+ */
+export function smugglingHookUnderSiege(hook, siege) {
+  return siege && Object.hasOwn(SMUGGLING_HOOK_SIEGE_TWINS, hook) ? SMUGGLING_HOOK_SIEGE_TWINS[hook] : hook;
+}
+/** @type {Readonly<Record<string, string>>} */
+const SMUGGLING_HOOK_SIEGE_TWINS = Object.freeze({
+  'The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.':
+    lineText({ text: 'The smugglers have gone quiet since the siege closed the roads, and someone wants to know what their last load was.', needs: ['crisis: siege'] }),
+  'A smuggled load went missing on the way in, and the people who paid for it are asking questions.':
+    lineText({ text: 'The last smuggled load before the siege went missing, and the people who paid for it are asking questions.', needs: ['crisis: siege'] }),
+});

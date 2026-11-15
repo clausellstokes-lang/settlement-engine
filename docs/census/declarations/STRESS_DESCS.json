@@ -1503,7 +1503,8 @@
      "lineId": "STRESS_DESCS.wartime[3]",
      "text": "{name} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.",
      "needs": [
-      "institution: smith"
+      "institution: smith",
+      "prosperity: ≥ moderate"
      ],
      "excludes": [
       "crisis: hunger",
@@ -1543,6 +1544,24 @@
      "stop": [
       "crown"
      ]
+    },
+    {
+     "lineId": "STRESS_DESCS.wartime[6]",
+     "text": "{name} is busy in a way that feels wrong for a place this poor. The forge fires burn past dark, but the coin they earn leaves with the carts, and all of it points one direction, toward a war that is not fought here but is paid for here.",
+     "needs": [
+      "institution: smith"
+     ],
+     "excludes": [
+      "prosperity: ≥ moderate",
+      "crisis: hunger",
+      "crisis: under_siege",
+      "war: front"
+     ],
+     "crisis": [
+      "wartime"
+     ],
+     "colour": false,
+     "stop": []
     }
    ]
   },

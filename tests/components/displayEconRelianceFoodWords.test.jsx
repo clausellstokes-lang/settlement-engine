@@ -81,7 +81,7 @@ const KEEP = /** @type {const} */ ([
   ['r2r-village-25', 'magic', 'Reliance on magic: Relied upon'],
   ['r2s-famine-town-2', 'economics', 'Many households go short, and hunger is already here.'],
   ['r2r-town-6', 'economics', 'Law enforcement, patrol and gate control here depend on iron brought in'],
-  ['r2s-famine-town-1', 'economics', 'Contributes to Entrepôt Trade - 13% of income'],
+  ['r2s-famine-town-1', 'economics', 'Contributes to Entrepôt Trade - 14% of income'], // re-keyed by identity (TAIL-DISPLAY-ECON-5): the same card; the record's share moved 13 -> 14 by the economy family's DECLARED MOVES on the joined line (TAIL-DEFECON-2 5f67f382d, TAIL-DEFECON-3 2ac50c55d),
   // RE-KEYED BY IDENTITY (TAIL-DISPLAY-ECON-4, the chair's ruling X25.1): batch 2's silence gave way to the crisis leaf
   // (`crisisStoppedRow.js`), whose table holds the forge and the mine at work under a siege ("Iron & Metalwork": NONE);
   // the Income Sources row prints the same share unmarked. The same town, the same line: it prints again.

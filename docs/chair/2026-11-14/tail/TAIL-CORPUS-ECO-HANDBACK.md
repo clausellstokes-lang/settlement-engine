@@ -1,9 +1,9 @@
-# TAIL-CORPUS-ECO · hand-back (kept current after every batch) · TAIL-CORPUS-ECO-3 keeps it from batch 5
+# TAIL-CORPUS-ECO · hand-back (kept current after every batch) · TAIL-CORPUS-ECO-4 keeps it from batch 7
 
-Tip: the commit carrying this file. TAIL-CORPUS-ECO-3 (the second successor) from 81cd76883: batch 5 (the chair's ruling C13: the
-faults in this group's own new lines, and three worklist rows) and batch 6 (the "unworked" lines: 23 rows) PUSHED. Rows: 148 · cured
-90 (40 + 24 + batch 5's 3: 01563 07396 07397 + batch 6's 23) · struck 25 (B01502) · parked 5 (C6) · named 5 (3 + 14837 14846) ·
-left 23 (the 52 less batch 5's 4 and batch 6's 25), every one read and named the record's below.
+Tip: the commit carrying this file. TAIL-CORPUS-ECO-4 (the third successor) from bf6695a6b: batch 6's after run TAKEN AND READ (below),
+batch 7 (ruling C19: what two reads met in these pools; and batch 6's own new line's agreement) PUSHED, its after run read; batch 8
+(C20: the lone food source; U2: the three red files of this area) PUSHED. HANDED BACK after batch 8. Worklist rows: 148 · cured 90 ·
+struck 25 · parked 5 (C6) · named 5 · left 23 (every one the record's, named below; unchanged by batch 7, which took C19's rows).
 
 Seat: TAIL-CORPUS-ECO, builder. Branch `lane/tail-corpus-eco-2026-11-14`, cut from the joined line `lane/join-2026-11-14`
 at **48fedbe98** (read back from origin at the start). Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-CORPUS-ECO.{md,json}`
@@ -58,6 +58,30 @@ DS-SUP sections only) and tests.
   customs house. STRUCK BY THE CHAIR: INCOME MIX criminal present v2 (every printing town holds a criminal income source).
   (U1) the weekly usage warning: commit and push every batch the moment it holds, this file's WHAT IS LEFT current in the same push;
   hand back at 250,000; one line to the chair at the hand-back, a stop, or a question only.
+- (C19, 2026-11-15 04:08 UTC, handed to TAIL-CORPUS-ECO-4; vetoable by the owner) WHAT TWO READS MET IN THESE POOLS (ten FRESH towns
+  read whole by two readers each; and the newest lines read against the hardest town that prints each; both at the landed tip
+  5d1e3096b, which does NOT hold batches 5 and 6: each row checked at this tip first; a flag is a candidate: measured over every town
+  of the 720 that prints it; cured at the pool by a declaration measured by replay, a twin or a rewording): DS-ECO-6 › TIER "A little
+  of <N>'s trade is done out of sight, too little to change what the <tier> is." (55) printed where the income sources hold NO illicit
+  source (the tier is the record's shadow-economy figure, MEASURED AT THE SOURCE BY ANOTHER SEAT: the cure is the line's own: an
+  illicit income source on the record, else silence; write the count); DS-ECO-1 › COMBINATION "too poor to mend its road, and the road
+  brings in too little" (9) in an isolated town with no road trade; "<N>'s river is busy, but little of what passes leaves its money
+  here" and the crossroads' twin (7, 5) where tolls are the first income; "ends each year with money to spare" (7) beside a debt to an
+  outside power; "Nobody here talks about the price of bread." (31) where the food word is Pressured; DS-ECO-10 › POSTURE "The
+  <tier>'s living is the road." (4, 3) where the harvest is three quarters of the income; DS-ECO-9 "The food <N> raises for itself all
+  goes back to the fishing" (68) where farmland stands (if one of the 23 record rows, say so and leave it); "<N> is not hungry and has
+  no cushion." beside eight months in store; DS-GEN-13 › COMMERCE "no guild between seller and buyer" (4) where a merchant guild is a
+  power; "A stranger can set up and sell ... with nobody's leave" (3) under an occupation's curfew. THEN HAND BACK: the rows under
+  five towns wait; the 23 record rows stay named.
+- (C20, 2026-11-15 04:38 UTC; vetoable) THE FISHING ROW IS THE POOL'S: the food record names ONE source in 267 towns that also hold
+  a farm row or a harvest income; curing the record is NOT granted. A lone source is "the whole" only where no farm row stands and no
+  harvest or rents income row: declare it with a twin that says the source is the first among others; the same for every line of
+  these pools that calls one food source the whole.
+- (C21, 2026-11-15 04:44 UTC; vetoable) C19's FIRST ROW WITHDRAWN: DS-ECO-6 minor v1 is cured at the source by another seat (169
+  towns to a capture of nothing); DO NOT DECLARE THE LINE. THIS SEAT: it was not declared; batch 7 pushed a TEXT-ONLY hedge (same vid,
+  prints in all 55): told to the chair in one line (05:05), the chair rules whether it stands.
+- (U2, 2026-11-15 04:49 UTC) THE REAL BREAKS of this area, each run alone at this tip: cure a regression of these pools; bring a pin
+  a declaration of this group explains to agree; else one line here with the file and the commit. Never skip or weaken a test.
 - BRIEF-TAIL whole: a flag is a candidate, verified by the record; batches; silence is true but a silence of TRUE lines in
   more than twenty towns is told first; a state left mute takes a twin; a draw is not moved outside the row's pool; under a
   siege nothing comes in or goes out; under a famine no line offers the food that failed; no new vocabulary word; every new or
@@ -88,6 +112,13 @@ DS-SUP sections only) and tests.
   (run `--count-only`: the inventory needs the dumps alone); the replay = `probes/TAIL-CORPUS-DEF/replay2.mjs` (a NEW vid eligible
   where `NEWV=<pool>:<vid>` names it and its declaration admits); `m.mjs <run> <regex> [expr over (r, F, t)]`: every town whose dump
   prints the line, with its crisis, route and the expression. ~25 minutes here at 4 workers.
+
+- TAIL-CORPUS-ECO-4 re-made them in a fresh container: `mkrender.py` (TAIL-CORPUS-DEF, the joined line) over CENSUS-3's
+  `render.census3.jsx`, then ONE edit so the draws land BESIDE the dumps (`${OUT}/${seed}.draws.json`, where `replay2.mjs` reads
+  them; mkrender writes them to `../draws`); `census3d.sh` = `census3.sh` with that render, `*.txt`-only dump counts, and the draws
+  cleared with the dumps; run `--count-only` (~17-25 minutes at 4 workers). `replay2.mjs` with ONE fix: `NEWV` split on `|`, not `,`
+  (pool keys hold commas: "COMMERCE: a market, no guild"). `q.py <run> <regex> [expr over r, F]` (this seat): every town whose dump
+  prints the line, with tier, prosperity, route, crisis, food label, income sources (and the illicit ones), capture.
 
 ## Batches
 
@@ -343,7 +374,125 @@ MEASURED BY THE RECORD over every printing town of the before run (the vid uncha
 Rows cured: 19 (09301 09302 09300 22666 22662 22667 22668 22664 22619 22669 22663 22626 03916 03918 07347 22267 20984 20909 14849);
 rows cured with BOUGHT-IN v4: 04027 04020 04025 04037 (4); NAMED: 14837 14846 (the condition record).
 GUARD: GONE rows (each red at the base: the old wording drawn) and KEEP rows (the stems) added to `corpusEcoTailGuards.test.js`.
+### TAIL-CORPUS-ECO-4 · the base, and batch 6's after run (the first act)
+
+On this branch at its tip **bf6695a6b** (read back from origin; nothing later there), a scratch worktree, merging nothing. THE CENSUS
+AT bf6695a6b (the 720, census3d): 29,874 distinct sentences; the replay's probe 54,144 single draws, 0 misses. BATCH 6'S AFTER RUN
+(its base named: 84a41a687, batch 5's after run, re-taken here at that commit: 29,872, = batch 5's figure): inventory_diff
+84a41a687 -> bf6695a6b over batch 6's 25 rows: gone 74, new 76, IN FEWER TOWNS 0, in more towns 3, moved 0. Every one of the 25 rows
+GONE (09301 17 -> 0 the widest; the four BOUGHT-IN v4 1 -> 0; 14837 14846 GONE too: the reworded condition line no longer names a
+"bother" or "other work", so the condition record's rows print in the new wording, still NAMED for that record). No line outside
+the batch was silenced. THE INHERITORS (76) are exactly the reworded lines in the same towns (BOUGHT-IN v4 "somebody will point you
+at the carts" +48 for salt alone; the exploitation lines "worth selling beyond the <tier>"; UNWORKED v1 "No house ... makes a trade
+of"), read: true where they print, BUT ONE FAULT IN BATCH 6'S OWN NEW LINE: RESOURCE CONDITION worked out v2 "The {resource} at
+{settlement} is worked out this year" makes a plural slot the subject of "is" in most of its 140 towns ("The river fisheries at X
+is worked out", "The open grazing land ... is", "The marshlands ... is"): taken in batch 7. The three "in more towns" are not these
+pools' (the patron-deity panel, 716 -> 718, in r2r-thorp-0 and r2r-thorp-1: the leaves of batch 6 changed text only; a render's
+own variance in two towns, named, not measured further).
+
+### Batch 7 · ruling C19 (what two reads met) and batch 6's agreement fault · DECLARED (by replay) and REWORDED
+
+MEASURED BY THE RECORD over every printing town at bf6695a6b and BY REPLAY (`replay2.mjs`, the two new vids by `NEWV`): two pools
+moved and NO OTHER POOL MOVED; every move lands on a line of the same pool; no state left mute (the indebted high rung takes the twin
+C1 v4, the guild-power market the twin COMMERCE v5).
+
+| row (C19) | pool · line | measure (false of printing, at this tip) | cure | replay before -> after · moves |
+|---|---|---|---|---|
+| DS-ECO-6 TIER | minor v1 "A little of {settlement}'s trade is done out of sight" | 45 of 55: no illicit income source (smuggling, black market, syndicate, shadow economy, thieves' guild) on the record | NO ATOM reads the income sources (a new word is the chair's): REWORDED to claim no more than the tier bears: "If any of {settlement}'s trade is done out of sight, it is too little to change what the town is." (silence wanted an atom; the count: 45 towns where the line now hedges) | unmoved |
+| DS-ECO-1 C5 | v3 "too poor to mend its road, and the road brings in too little" | 26 of 26 print in isolated towns (the road's trade is the claim; 15 under a famine or a siege) | REWORDED: "{settlement} is poor and hard to reach, and nobody here expects either to change." | unmoved |
+| DS-ECO-1 C4 | v3 "is busy, but little of what passes leaves its money here" (river and crossroads) | 3 of 29 with tolls or duties the first income (r2r-town-18, r2s-occupied-town-3, r2s-slave_revolt-town-2); market taxes lead in most of the rest (money the passing trade leaves) | REWORDED to claim the busy approach and the poverty only: "{settlement}'s {access} is busy, and the town is poor all the same, and so are the traders at its market." | unmoved |
+| DS-ECO-1 C1 | v2 "ends each year with money to spare" | 1 of 51 (r2s-indebted-city-1, "Indebted to Outside Power") | + `no crisis: indebted`; THE TWIN v4 `[ledger · crisis: indebted]` "Trade on {settlement}'s {access} is steady and the town earns well, but much of what it earns goes to the outside power it owes." (the record's own viability note) | v2 51 -> 50: -> v4 1 |
+| DS-ECO-1 C1 | v3 "Nobody here talks about the price of bread" | 3 of 31 print "Food Security Pressured" on the page (r2r-city-39, r2r-metropolis-38, r2r-metropolis-46) while the record's `foodSecurity.label` is Secure and the `food` atom reads `secure` (ratio 0.97-0.99): `food: ≥ secure` measured and MOVES NOTHING | NOT CURED HERE: the page's food word and the record's band disagree (one fact, two homes): NAMED below | - |
+| DS-ECO-10 entrepot | v3 "The town's living is the road." | 18 of 50 with farm rents and grain sales at half the income or more (r2r-thorp-11: 76%) | REWORDED: "Goods come and go through the town, and the town takes its part of both." (no "living" claimed, no transit: v1's record fault stays named) | unmoved |
+| DS-ECO-9 one source | v2 "all goes back to the {good}" | 68 print it (the readers' 68); 35 with harvest income at half or more | ONE OF THE 23 RECORD ROWS (the FOOD SOURCES one-source class, 20541 et al.: `foodSources` against the houses): LEFT, named | - |
+| DS-ECO-9 PRESSURED | v3 "is not hungry and has no cushion" | prints in NO town of the 720 at this tip (the readers' fresh town only) | + `stores: < 3` ("felt inside a season" claims under a season's stores; v1 v2 `crisis: any` stand in every state, none left mute) | unmoved (unreached) |
+| DS-GEN-13 COMMERCE | a market, no guild v3 "no guild between seller and buyer", v1 "without a guild's leave", v4 "with nobody's leave but the stall-keeper's" | 24 of 42 towns of the pool stand beside a guild power (Merchant Guilds Dominant in r2r-hamlet-15: the pool's key reads the houses, the `guild` atom the powers too): v3 7, v1 8, v4 9; v4 under the occupation (r2s-occupied-village-2, also guild) | v1 v3 v4 + `no guild` (v1 v3 lose `colour`), v4 + `no crisis: occupied`; THE TWIN v5 `[ledger · market · guild]` "The guilds are a power at {settlement} all the same, though none keeps a house at its market, and anyone trading there reckons with them." | v1 12 -> 4, v3 10 -> 3, v4 15 -> 6: -> v5 24 (each a guild-power town) |
+| batch 6's own | RESOURCE CONDITION worked out, recovers in time v2 "The {resource} at {settlement} is worked out this year" | the plural slot the subject of "is" in most of 140 | REWORDED: "Little is left worth taking from the {resource} at {settlement} this year, and it will be some seasons before there is more." | unmoved |
+
+Lines replaced in more than twenty towns: COMMERCE v1 v3 v4 -> v5 in 24, every one FALSE where replaced (a guild power stands): none
+TRUE silenced, so nothing was owed to the chair before the push. The minor-tier hedge prints in all 55 (true in each).
+GUARD: 9 GONE rows (each red at the tip for the right reason) and 4 KEEP rows (green before and after) added to
+`tests/domain/corpusEcoTailGuards.test.js` (133, green); RE-KEYED by identity: the two COMMERCE rows at r2r-village-11 now print v5
+(v1, their earlier inheritor, is false beside the guild power too), the entrepot v3 and DS-ECO-6 minor v1 and RESOURCE CONDITION v2
+KEEP rows' text. The tip run without the cure: 12 red (the 9 rows and the re-keyed 3), the plant.
+PINS RE-KEYED BY IDENTITY: `composeStateProse.test.js` variants 2952 -> 2954; `proseEntryContradiction.walker.test.js` rows
+3420 -> 3422, joined 2715 -> 2717 (both), the turtling anchor 2418 -> 2419 and "the same trades exempt" 6161 -> 6162 (by their text:
+C1 v4 sits above them); `proseMoveGrammar.walker.test.js` uniform segments 568 -> 569 and 0.664 -> 0.665 (entrepot v3 one sentence,
+its pool now uniform). The twin v5's first wording ("no guild hall") raised the presumed walker by two (market, guildhall): reworded
+and declared `market` before the push.
+Doors: generator --check 0; presumed --check IDENTICAL to the tip (147 fresh); the grid 2 falls (= the tip: r2r-city-0,
+r2s-insurgency-metropolis-0 P7a); strict-domain 0, the type ratchet 0, eslint 0 on the touched files; the 59 test files naming the
+leaves or the source: the tip's 33 reds exactly, none new.
+THE AFTER RUN of batch 7 (at 4467cd7d6, the census of the 720; inventory_diff over the tip's run): 29,874 -> 29,878; gone 37,
+new 41, IN FEWER TOWNS 7, in more 0. Every reworded line GONE in its old form (C5 v3 26, the minor-tier v1 folds 18/15/14…, C4 v3
+14…, the "worked out" v2 folds 19/17/14…); the seven in fewer towns are EXACTLY the replay's: COMMERCE v4 15 -> 6, v1 12 -> 4, v3
+10 -> 3, C1 v2 (the river fold) 8 -> 7, and the patron-deity panel's three lines 718 -> 716 (r2r-thorp-0, -1 flip back: the render's
+own variance, as named above). No other line silenced. THE INHERITORS (41): the reworded lines in the same towns and the two twins
+(COMMERCE v5 +24, C1 v4 +1), read where they print: true.
+
+### Batch 8 · ruling C20 (a lone food source is "the first", not "the whole") and U2 (this area's red files)
+
+C20, MEASURED over the 720 at 4467cd7d6 (the draws of DS-ECO-9 FOOD SOURCES one source): v1 112, v2 151, v3 93 drawn; beside a farm
+house on the roster (a name holding "farm" or "field") or an Agricultural Rents / Grain Sales income: v1 93, v2 120, v3 70 (283 of
+356). NO ATOM reads the roster's farm rows or the income rows (a new word is the chair's): the gate cannot be declared, so the family
+is REWORDED TO THE TWIN'S CLAIM, true in both states (the 73 lone towns too): v1 "{settlement}'s own food comes first of all from its
+{good}, so one bad year for the {good} is felt across the whole town."; v2 "Of the food {settlement} raises for itself, its {good}
+comes first, and after a poor season for the {good} there is less to go round."; v3 "{settlement} leans first on its {good} for its
+food, so a bad season for the {good} is felt at every table." No other line of these pools calls one food source the whole (searched:
+"little else", "all goes back", "of its own but", "single source", "one source": the income-mix lines name income, not food). Replay:
+no draw moved. If the chair grants a word for the gate, v1-v3 can take it and a "the whole" twin return for the lone towns.
+U2, each file alone at this tip: (i) `tests/data/canonicalRowsDeclared.test.js`: DS-ECO-6 minor v0 was declared by b760d37d3
+(W2-WRITE-SIDE-ECO-2, D #1378: off organised crime, a famine, a siege) and the test still listed it among the colour rows: the row
+moved to the declaring table with exactly its marks (the it() titles' counts four/three follow): GREEN. (ii)
+`tests/data/dossierStateProseProjection.contract.test.js` (2): the SHIFT REGISTER's five pins (variant count 2950, its per-pool
+digest, the face count 2950 and its digest, the vids digest) stood at W2-WRITE-12's 2950; this group's twins and W2-WRITE-SIDE-14's
+WAREHOUSES v5 took the corpus to 2954: re-taken BY MEASUREMENT (the test's own formulas over the leaves) in the register, in W2-WRITE-12's
+form: GREEN (79/79). (iii) `tests/data/foundingWorldBones.test.js` ("Mossgate: the religious authorities hold power — 15/20"): RED AT
+48fedbe98, the joined line where this branch was cut; this branch changes no generator file: CARRIED, not this group's (the births).
+GUARD: 3 GONE rows (the old wording drawn at the tip, each red there; prints the same vid) added (136, green).
+(C22, the chair 05:07: the hedge KEPT, on the owner's veto list as a hedge form; the canonical row agrees: v0 declared, v1 the hedge.)
+(C23, the chair 05:14) A FOURTH RED: `tests/domain/r3c8ReaderLinesTrue.test.js` L01 (Dionpyrgos: "that legacy is older than all but
+the oldest alive." read with no event named): dba1a16c4 (W2-WRITE-SIDE-13 · M1, the {calamity} agreement cure) wrote four DS-GEN-16
+lines as "…the {calamity}…; that legacy is {timeband_age}.", which cuts the age claim off from the calamity it dates. CURED IN THE
+POOL (text only, the replay moved nothing; the four lines print in 352 towns, the same claims): LEGACY-RESOLVED-WELL v1 "…still
+stands, a legacy that is {timeband_age}."; v2 "…built after the {calamity}, and that legacy is {timeband_age}."; LEGACY-SHIFTED v1 "In
+the wake of the {calamity}, {settlement} settled into a shape that still holds, a legacy that is {timeband_age}, though much has
+changed since." (no verb after the slot: dba1a16c4's own guard); v2 "…after the {calamity}, and that shape is {timeband_age}, though
+the times have moved on." r3c8 8/8 GREEN; dba1a16c4's guard green. NAMED, carried: `tests/domain/heraldCausalVoice.test.js` "no band's
+predicate leans on a pronoun" is red at bf6695a6b with all six legacy molds (two unchanged here): the time band's predicate, not these
+lines' joints. Veto list: the four lines above, read in r2r-city-44 (Kallition, a siege 61 years ago), the reader's Dionpyrgos town,
+and the 352 towns' widest fold (metropolis, religious conversion).
+Doors: generator --check 0; presumed IDENTICAL; the grid 2 falls (= the tip); eslint 0; the 59 leaf-naming files + foundingWorldBones:
+the tip's 33 reds less the 3 cured, plus foundingWorldBones carried: none new.
+
+
 ## The veto list (every new or reworded line, with the towns it was read in)
+
+Batch 8 (C20; read in the towns named, smallest / largest / a crisis):
+- DS-ECO-9 FOOD SOURCES one source v1: "{settlement}'s own food comes first of all from its {good}, so one bad year for the {good} is
+  felt across the whole town." — r2r-thorp-3 and the 112 towns that draw it (famine excluded by its declaration).
+- v2: "Of the food {settlement} raises for itself, its {good} comes first, and after a poor season for the {good} there is less to
+  go round." — r2r-thorp-9 and the 151 that draw it (colour: a famine town among them).
+- v3: "{settlement} leans first on its {good} for its food, so a bad season for the {good} is felt at every table." — r2r-thorp-8 and
+  the 93 that draw it.
+
+Batch 7 (TAIL-CORPUS-ECO-4; smallest / largest / a crisis):
+- DS-ECO-6 minor v1: "If any of {settlement}'s trade is done out of sight, it is too little to change what the town is." —
+  r2r-thorp-31, r2s-under_siege-town-1 (a siege), r2s-famine-thorp-3 (a famine).
+- DS-ECO-1 C5 v3: "{settlement} is poor and hard to reach, and nobody here expects either to change." — r2r-thorp-17 (a famine),
+  r2s-under_siege-town-2 (a siege), r2s-occupied-thorp-1 (an occupation).
+- DS-ECO-1 C4 v3: "{settlement}'s {access} is busy, and the town is poor all the same, and so are the traders at its market." —
+  r2r-hamlet-4, r2s-occupied-metropolis-1 (an occupation), r2s-famine-town-0 (a famine).
+- DS-ECO-1 C1 v4 (NEW, the twin): "Trade on {settlement}'s {access} is steady and the town earns well, but much of what it earns
+  goes to the outside power it owes." — r2s-indebted-city-1 (its one town in the 720).
+- DS-ECO-10 entrepot v3: "Goods come and go through the town, and the town takes its part of both." — r2r-thorp-11,
+  r2s-wartime-metropolis-0, r2s-occupied-village-2 (an occupation).
+- DS-GEN-13 COMMERCE a market, no guild v5 (NEW, the twin): "The guilds are a power at {settlement} all the same, though none keeps
+  a house at its market, and anyone trading there reckons with them." — r2r-hamlet-15, r2s-wartime-village-0,
+  r2s-occupied-village-2 (an occupation).
+- DS-ECO-11 RESOURCE CONDITION worked out, recovers in time v2: "Little is left worth taking from the {resource} at {settlement}
+  this year, and it will be some seasons before there is more." — r2r-thorp-16, r2s-wartime-metropolis-2,
+  r2s-under_siege-thorp-2 (a siege).
 
 Batch 1 (DS-ECO-12; read where the old line printed, the reword in its place; smallest / largest / a crisis):
 - INCOME MIX one source v1: "More than half of what {settlement} earns comes from a single source, and most households depend on
@@ -454,6 +603,16 @@ Batch 6 (TAIL-CORPUS-ECO-3; smallest / largest / a crisis, where the line printe
 
 ## Rows named for other groups
 
+- (batch 7, C19) THE PAGE'S FOOD WORD against the record's band: "Food Security Pressured" printed in r2r-city-39,
+  r2r-metropolis-38, r2r-metropolis-46 while `economicState.foodSecurity.label` is Secure and `factsOf(record).famine.band` is
+  `secure` (food ratio 0.97-0.99, imports covering the gap): DS-ECO-1 C1 v3 "Nobody here talks about the price of bread" is true by
+  the record's band and false by the page's word: one fact with two homes (the food ladder's reader against `foodSecurity.label`), the
+  food record's writer's, not the pool's.
+- (batch 7, C19) DS-ECO-9 FOOD SOURCES one source v2 "all goes back to the fishing" (68 towns, 35 with harvest income at half or
+  more): the 23 record rows' class (`foodSources`), left.
+- (batch 7, C19) DS-ECO-6 TIER minor: the tier fires on `blackMarketCapture` ≥ 3 in 45 towns whose income sources hold no illicit
+  source: the shadow-economy figure's own seat; the pool hedges (no atom reads the income sources).
+
 - `src/generators/economy/tradeGoods.js :: deriveIsEntrepot` (the bar's #275): 13 of the 48 towns printing DS-ECO-10 POSTURE
   entrepot are ports with no transit good and no entrepot income (r2r-city-12 -13 -16 -34 -38 -52 -9, r2r-metropolis-13 -21 -48
   -55, r2s-religious_conversion-city-2, r2s-slave_revolt-metropolis-3); v2 is reworded here, v1 ("some of what leaves the town
@@ -479,6 +638,16 @@ Batch 6 (TAIL-CORPUS-ECO-3; smallest / largest / a crisis, where the line printe
 - None for the rows cured: every cure has its GONE row and a KEEP row in `tests/domain/corpusEcoTailGuards.test.js` (50 rows).
 
 ## What is left of the worklist
+
+TAIL-CORPUS-ECO-4 (HANDED BACK after batch 8): C19 taken whole (its first row's hedge awaits the chair's ruling under C21), C20
+taken as a rewording (a gate word would let a "the whole" twin return), U2's three files answered (two green, one carried). The FOOD
+SOURCES one-source rows of the worklist (20541 et al.) are now CURED BY C20's rewording (no longer "the record's"); the several-source
+and the rest of the 23 stay named. LEFT: the rows under five towns (C19: they wait); batch 8's after run (text only, the replay moved
+nothing: the next seat's before run is its after run).
+(after batch 7): the worklist's 23 record rows stay NAMED as below (none moved by batch 7). C19's rows all taken
+(cured 8 lines, 1 named for the food word, 1 left as a record row). LEFT for the next read: the rows under five towns (C19: they wait);
+batch 7's after run (the census of the 720 at this tip, inventory_diff over its rows) if not recorded below.
+
 
 TAIL-CORPUS-ECO-3 (after batch 6: 23 cured, 2 named, so 23 left of these 48): 48 rows, every one read by this seat against its why. NO POOL CURE FOUND for these (the record's
 own disagreements, named below, each a row of a record writer): the FOOD SOURCES one-source and several rows (20541 38, 21004 10,

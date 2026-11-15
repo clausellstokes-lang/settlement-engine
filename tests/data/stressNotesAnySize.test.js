@@ -15,7 +15,7 @@ describe('the founding crisis notes say what is true at every size', () => {
   it('no migration note names streets; no war note names a market', () => {
     expect(STRESS_NOTES.mass_migration.filter((n) => /\bstreets?\b/.test(String(n)))).toEqual([]);
     expect(STRESS_NOTES.wartime.filter((n) => /\bmarket\b/.test(String(n)))).toEqual([]);
-    expect(STRESS_NOTES.mass_migration).toContain('The founders built for a few families who knew each other. Now newcomers crowd in, and half the faces are strangers.');
+    expect(STRESS_NOTES.mass_migration).toContain('The settlement was never built for this many. Now newcomers crowd in, and half the faces are strangers.'); // re-keyed by identity (TAIL-NARRATIVE-5, N18 (2))
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('rww-hamlet-mass_migration-1: the hamlet\'s note names no streets', () => {

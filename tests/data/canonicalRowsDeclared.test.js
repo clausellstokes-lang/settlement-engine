@@ -21,11 +21,12 @@ const canonical = (block, pool) => {
 describe('the seven canonical v0 rows declare through the tag slot (CENSUS-3f unit 3)', () => {
   // LANDING-R2 seat E: the four tables below run as plain parameterless tests, each row labelled
   // (the lighting census credits a table read inside the body, never an `each` callback).
-  it('the three declaring canonical rows: v0, with their marks', () => {
+  it('the four declaring canonical rows: v0, with their marks', () => {
     for (const [block, pool, marks] of [
       ['DS-ECO-3', 'SHORTAGE × trade-dependent', ['market']],
       ['DS-ECO-3', 'SURPLUS × trade-dependent', ['market']],
       ['DS-ECO-6', 'TIER: significant off-book activity (≥15)', ['guild', 'no crisis: under_siege']], // TAIL-CORPUS-ECO-3 batch 5 (2026-11-15): + `no crisis: under_siege` (C13: duties and guild fees undersold where nothing comes in)
+      ['DS-ECO-6', 'TIER: minor shadow activity (≥3)', ['no organised crime', 'no crisis: famine', 'no crisis: under_siege']], // TAIL-CORPUS-ECO-4 (U2, 2026-11-15): the row b760d37d3 declared (W2-WRITE-SIDE-ECO-2 D #1378: petty theft and unlicensed trade claimed under organised crime, a famine, a siege), read from the colour table into this one
     ]) {
       const row = canonical(block, pool);
       expect(row.vid, `${block} ${pool}`).toBe(0);
@@ -33,10 +34,10 @@ describe('the seven canonical v0 rows declare through the tag slot (CENSUS-3f un
     }
   });
 
-  it('the four canonical rows that presume nothing beyond their key: marked colour (R-AO, CENSUS-3g unit 3)', () => {
+  it('the three canonical rows that presume nothing beyond their key: marked colour (R-AO, CENSUS-3g unit 3)', () => {
     for (const [block, pool] of [
       ['DS-ECO-3', 'ADEQUATE'],
-      ['DS-ECO-6', 'TIER: minor shadow activity (≥3)'],
+      // DS-ECO-6 minor shadow v0 moved to the declaring table (TAIL-CORPUS-ECO-4, U2): b760d37d3 (W2-WRITE-SIDE-ECO-2) declared it off organised crime, a famine and a siege
       ['DS-ECO-7', 'TALLIES'],
       ['DS-ECO-7', 'CATALOG'],
     ]) {
