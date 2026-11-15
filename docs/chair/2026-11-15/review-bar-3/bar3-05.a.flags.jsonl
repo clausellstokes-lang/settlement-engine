@@ -1,0 +1,7 @@
+{"id":"C8717","town":"bar0-city-wartime-rand-7","sev":"MED","kind":"PAIR","why":"says Bjornnes is in a kingdom; the city-state answers to no higher lord and holds no external charter","other":"C9122"}
+{"id":"C8742","town":"bar0-city-wartime-rand-7","sev":"MED","kind":"PAIR","why":"a crown officer issues requisition orders to a sovereign city-state that answers to no higher lord","other":"C9122"}
+{"id":"C9840","town":"bar0-city-wartime-rand-7","sev":"LOW","kind":"PAIR","why":"private guards usually overrule the Council, yet Council is Significant, outweighs all rivals and gives the orders; the guilds are Minor","other":"C9836"}
+{"id":"C9941","town":"bar0-city-wartime-rand-7","sev":"MED","kind":"STATE","why":"calls Military/Guard a primary power centre; GOVERNMENT rates it Minor, below the Significant City-State Council","other":"C9942"}
+{"id":"C9952","town":"bar0-city-wartime-rand-7","sev":"MED","kind":"PAIR","why":"the crown's officers on the roads; the city-state answers to no higher lord and holds no external charter","other":"C9122"}
+{"id":"C10699","town":"bar0-city-wartime-rand-7","sev":"LOW","kind":"PAIR","why":"says the city closes every year ahead with a dependable margin; FOOD shows a 4% gap, 0% surplus, Pressured, 355 lbs/day short","other":"C9547"}
+{"id":"DONE","lines":2214,"blocks":1,"flags":6}
