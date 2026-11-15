@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8db550d49e24d80ed527104631194a4dfea8c95b",
-  "measuredBy": "TAIL-CLOSE-DOORS-4",
+  "measuredAtSha": "f94aedd30c4bf0a198cc4f39efe3e8575e493fee",
+  "measuredBy": "BAR2-CLOSE-DOORS-1",
   "date": "2026-11-15",
-  "note": "the close of the tail round, TAIL-CLOSE-DOORS-4, after part A's pins and the tuning refreeze",
-  "files": 3607,
-  "parked": 454,
-  "credited": 3153,
-  "titles": 30536,
-  "suiteTitles": 8422
+  "note": "the close of the round BAR2 (2026-11-15), at the joined tree after the sweep-a merge",
+  "files": 3619,
+  "parked": 460,
+  "credited": 3159,
+  "titles": 30557,
+  "suiteTitles": 8428
 }

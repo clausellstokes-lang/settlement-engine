@@ -48,6 +48,7 @@ const NOT_ROOTS = Object.freeze({
   'vendor': 'third-party code, not this project\'s',
   'public': 'static assets and built bundles of other packages (the map), never this source',
   'node_modules': 'dependencies',
+  'dist': 'build output (vite emits bundles there; not source)',
   '.git': 'the repository',
   '.github': 'CI configuration',
   '.husky': 'git hooks',
