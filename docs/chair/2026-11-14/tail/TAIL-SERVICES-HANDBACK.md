@@ -2,6 +2,8 @@
 
 Seat: TAIL-SERVICES (builder), branch `lane/tail-services-2026-11-14`, cut from the joined line `lane/join-2026-11-14` at **bcad1a358**. Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-SERVICES.md` / `.json` (98 rows, read at e5b421802), and the crisis rows of `WORKLIST-HOUSES` (ruling S2).
 
+> **CURRENT STATE: read the last part, "TAIL-SERVICES-3", first.** S5 below was done by TAIL-SERVICES-2 (2b3736a6d).
+
 ## FIRST FOR THE SUCCESSOR: the chair's ruling S5 (2026-11-15 00:01Z; vetoable by the owner), NOT STARTED
 
 S3's rows take NO new atom. "A chain's input reaches its house" is the record's own chain state, and the S1 leaf (`src/domain/display/crisisStoppedRow.js`) is its home: the leaf takes a SECOND CAUSE. A service's or a house's row whose house lacks its input BY THE RECORD (read what the Economics tab's chain cards read: the chain's state and its gap; `economicState.activeChains[]`, its `dependency`, and the chain-state leaves `chainStateShown.js` / `chainNeedShown.js`) is marked short of that input and framed as what the house makes when supplied, on both tabs, by the same table form (a declared dependence of a row on an input, beside the crisis dependences in `src/data/crisisDependence.js`). One leaf, two causes. TAIL-HOUSES has reworded 39 house texts to claim the trade, not present work ("whenever clay can be had"): the mark and that text print together: read three towns where both show. The rows it cures are the S3 rows parked below (B17202, 10827, 28979, B17807, 18167, B05939, B17588, 12416, B15121, B06897, B15735, 15282, 06271, B09031, B16820, B04655, B03260, B04703, B04346, B17195, 16285). Measure first: the (town, row) pairs whose house's chain the record shows short, and that no row is marked whose chain runs.
@@ -154,3 +156,73 @@ The seat's count read 296,766 after S8's push (the line is 250,000). Pushed: d7c
 
 ## Instruments (this seat's, re-made as above)
 The census before/after as the predecessor's; the measures by script over `corpus.ndjson.gz`: the S6 count (`rowStoppedBy` chain/income by crisis, calm towns), the S5/S7 count (`housesShortOfInput` per house: towns holding · short), the S8 count (house marks, the new leaf against the base's), the X9 classifier (each row's service in its read-in town, through `rowMarkText`), and the lost-line check (each lost (line, town) reprinting as the door with its word). Registers named stale: `docs/content/wiring-census.json` (carried, as before).
+
+---
+
+# TAIL-SERVICES-3 · the third seat (2026-11-15)
+
+Seat: TAIL-SERVICES-3 (builder), the same branch, continued from its tip 5255ae1b0. Two scratch worktrees detached at the tip (one clean for the before run, one for the cure), pushed `HEAD:lane/tail-services-2026-11-14`.
+
+## The chair's rulings since (2026-11-15; each vetoable by the owner)
+- **(S9)** FIRST, WHAT THE PREDECESSOR OWES, by ONE census run at the tip (also batch 2's BEFORE): S8's inventory diff (the rows the new table entries mark, each read in one town); and THE THREE-TOWN READ OF THE SHORT MARK beside the houses seat's texts on the joined line that claim a trade "whenever <input> can be had" (read, not merged): if the two together read badly or say the shortage twice, tell the chair in one line with the three rows.
+- **(S10)** THE RECORD'S GAP IS BEING CURED UNDER THE MARK by TAIL-DEFECON-R (a house is short only if NONE of its inputs reaches it; grapes and sand by any route): the vintner, the glassblower and the smelter stop being short in nearly every town. The leaf reads the record, so it follows; the list of houses "held everywhere" (`INPUT_GAP_HELD_EVERYWHERE`: the vintner, the glassblower) then guards nothing: LEFT, and named here for the close.
+- **(S11)** BATCH 2, as written out above: build it, measured.
+- **(S12)** THE EXPORTS' ROWS (X9) as classified: of the ~20 left with reasons, take those that are this group's files with a batch of the same writer.
+- **(S13)** A house or a service a later seat or the chair names as lacking for a crisis is added only after THIS SEAT verifies by the row that "stopped" of the whole house or service is true (the predecessor's seven refusals stand).
+
+## S9 · what the predecessor owed (census 720 at 5255ae1b0)
+- **S8, read on the page:** the S8 entries mark 50 house rows in 28 towns, and in every one of the 50 the page prints the mark before the house's description (by script over the tip's dumps: `"<mark> <desc>"` on the page, 50 of 50). Read in one town each: fish_market siege r2s-under_siege-village-0 (14 rows), famine r2s-famine-city-0 (3); daily_markets outbreak r2s-plague_onset-city-0 (5); stone_quarry r2s-under_siege-metropolis-0 (4); chroniclers_exchange r2s-under_siege-city-0 (7); cemetery_network r2s-under_siege-metropolis-0 (5); hunter_s_lodge r2s-under_siege-hamlet-3 (3); cartographer_s_workshop r2s-under_siege-village-0 (2) and outbreak r2s-plague_onset-village-0 (2); carriers_guild r2s-under_siege-town-0 (2) and outbreak r2s-plague_onset-town-0 (2); periodic_market r2s-plague_onset-hamlet-1 (1). No S8 before-run survived the predecessor's container: this is the read of the after-state, with the leaf's count (45 rows at 2b3736a6d's measure; 50 here, the 3 fish-market famine rows and 2 more S8 rows on the joined records).
+- **The three-town read of the short mark** (the joined line's catalogue texts taken by `git show`, beside the mark as this tip prints it in the same house): r2r-city-23 the potter: "Short of clay. A wheel and a small kiln for domestic pottery: plates, jugs, storage vessels, made whenever clay can be had."; r2r-city-1 the brickmaker: "Short of clay. Moulds and fires clay bricks for construction whenever clay can be had. Enables more permanent buildings. Requires clay and fuel."; r2r-city-22 the salt works: "Short of salt. Evaporation pans and brine-works, at work whenever a saline source can be had. Every household needs salt." JUDGED: they read together (the mark states the present want, the text the trade when supplied); the shortage is not said twice. One fault, already named by the predecessor and not this seat's: the salt works' mark names its OUTPUT (salt), its text the input (brine): the gap noun is `validationOnPage.js :: CHAIN_INPUTS`.
+
+## Batch 2 · S11 and S12 (one census each side)
+### The cure (this group's files only)
+1. `crisisDependence.js`: `Weekly rite` [TRAVELLERS, GATHERINGS]; `Rite of entry`, `Marriage ceremony`, `Confession` [TRAVELLERS] (each a row of `Access to parish church` only, verified: no other menu holds the names).
+2. `crisisDependence.js`: `SERVICE_DEPENDENCE_BY_DESC.Burial["Interment outside the gates. …"] = [GATES]` (S8's word: a siege marks it, an outbreak does not). No twin, no record moved.
+3. `institutionServices.js` Parish churches (10-30) "Full religious coverage": "Every district has a temple." -> **"Every parish served."** (the rest kept: "Religious observance accessible to all."). DEVIATION FROM THE WRITTEN WORDING, with cause: "A parish church in every district." raised the presumed-things walker by 2 (`temple` on "church", `quarters` on "district"); "A parish for every neighbourhood." by 1 (`streets`); a rise is a stop. "Every parish served." names no registered word (walker fresh 147 = base).
+4. Blacksmith "Horseshoeing": "Essential for transport and cavalry" -> "Essential for carts, carriers, and working horses". Verified: none of the 34 towns that print it holds cavalry, horse or knight in `defenseProfile`.
+5. Fish market "Wholesale trade": `needs: ["institution: tavern"]` and its twin in `SERVICE_DESC_SIBLINGS` ("Bulk purchase by households, institutions, and inland traders."), the brewer's form of 2a522e633, with its ledger row. False in 1 of 118 (r2r-thorp-50: no tavern): there the twin.
+6. Village headman "Tithe and dues": "the lord's dues and the temple tithe" -> "the lord's dues and the tithe" (5 towns; `needs: institution: temple` kept: the draw does not move).
+7. **X9 22599** Woodcarver "Religious carvings": "Crucifixes, reliquaries, saints' images." -> "Devotional figures, holy images, and reliquaries." Verified: it printed in 87 towns of 11 cultures (greek 14, steppe 10, latin 9, east_asian 8, south_asian 8, slavic 8, celtic 7, mesoamerican 6, germanic 6, norse 6, arabic 5); the crucifix and the saint are one faith's.
+8. **X9 08236** Village elder "Dispute mediation": "Arbitrates quarrels before they reach the lord's court" -> "Arbitrates quarrels before they come to judgment". Verified: none of the 19 villages that print it holds a lord's or court house or a lord among its powers (Elder Council, Household Council, Religious Authorities, Headman's Authority…).
+The ledger rows (`docs/census/declarations/institutionServices.INSTITUTION_SERVICES.json`) carry each text and the fish market's `needs`; the walker's registers shrunk through their door (`--shrink`: 2 widened rows and 1 first-register row of the old temple line, stale); `institutionProseDeclared`'s count re-keyed 60 -> 61 by this cause.
+
+### Measure: the inventory diff (before: census 720 at 5255ae1b0; after: this tree)
+**Tabs:** 30,027 -> 30,036 sentences · gone 5 · new 14 · in fewer towns 3 · more 0 · moved 0.
+- GONE: "Every district has a temple." 120 -> 0 (B06916, 10717); "Crucifixes, reliquaries, saints' images." 87 -> 0 (22599); "Essential for transport and cavalry" 34 -> 0 (07253); "…before they reach the lord's court" 19 -> 0 (08236); "…the temple tithe" 5 -> 0 (05233, 29223).
+- FEWER: "Bulk purchase by taverns…" 119 -> 118 (04603, 31188: r2r-thorp-50 takes the twin); "ServicesWeekly rite" 114 -> 110 and "ServicesBurial" 503 -> 501: Institutions-tab doors now printed as the same door with "(stopped)" in those towns. Nothing true silenced.
+- THE MARKS (S1: no description rewritten; the measure is the mark, by the page): "Stopped by the siege." before the weekly rite 0 -> 10 (r2s-under_siege thorps and hamlets 0..3, r2r-hamlet-0, r2r-thorp-58: both random sieges), before the rite of entry 0 -> 3, the marriage 0 -> 2, burial beyond the gates 0 -> 4 (r2s-under_siege-city-0..3, 11805/06145); "Curtailed by the outbreak." before the rite of entry 0 -> 2, the marriage 0 -> 1. Burial under an outbreak: 0 (keep). 17 towns in all; every one a siege or an outbreak town.
+- THE INHERITORS, read where they print: the six new lines below, and the doors "Weekly rite (stopped)" 6, "Rite of entry (stopped)" 3 / "(curtailed)" 2, "Marriage ceremony (stopped)" 2, "Burial (stopped)" 2 (+ "ServicesBurial (stopped)" 2).
+**Exports** (`SURFACES=PDF,Journal`): 35,779 -> 35,780; the X9 rows 10717 22599 08236 29223 GONE, 31188 119 -> 118; 30715 22730 06145 still print unmarked: the leaf answers them once the exports call it (their seat's).
+**A DECLARED MOVE, family `availableServices` only:** 239 births: `.equipment[].desc` 121 (34 + 87), `.healing[].desc` 120, `.legal[].desc` 24 (19 + 5), `.food[].desc` 1. No other field of any record moved; no draw moved.
+
+### The veto list (new or changed lines, read where they print: smallest · largest · a crisis)
+| line | towns | read in |
+|---|---|---|
+| "Every parish served. Religious observance accessible to all." | 120 | r2r-city-0 (cities only) · r2s-famine-city-0 · r2s-under_siege-city-1 |
+| "Devotional figures, holy images, and reliquaries." | 87 | r2r-town-20 · r2r-metropolis-13 · r2s-famine-metropolis-2 |
+| "Essential for carts, carriers, and working horses" | 34 | r2r-village-0 (villages only) · r2s-famine-village-2 |
+| "Arbitrates quarrels before they come to judgment" | 19 | r2r-village-15 (villages only) · r2s-indebted-village-1 |
+| "Collects the lord's dues and the tithe" | 5 | r2r-hamlet-29 · r2r-village-11 · r2s-indebted-village-0 |
+| "Bulk purchase by households, institutions, and inland traders." (the twin) | 1 | r2r-thorp-50 (calm; no crisis town lacks a tavern where the fish market stands) |
+| "Stopped by the siege." / "Curtailed by the outbreak." before the access house's rites and burial beyond the gates | 17 | r2s-under_siege-thorp-0 · r2s-under_siege-city-0 · r2s-plague_onset-hamlet-2 |
+
+### Red first
+`tests/components/crisisStoppedRows.test.jsx`, BATCH 2: 12 (seed, prints, must-not-print) pairs, each red at 5255ae1b0 (19 failures: every pair fails; the 7 reworded or twinned pairs both ways, the 5 marks unmarked), green here; keep pairs (an outbreak's burial beyond the gates, a calm thorp's rite, a tavern town's fish market: unmarked, unchanged) green at both. The plant: the burial's GATES declaration emptied reds its pair (not committed).
+
+### Gates
+eslint 0 on the touched files; `typecheck:domain:strict` 1113 = ceiling; `typecheck:ratchet` 167 = ceiling; the presumed-things door `--check` fresh 147 = base (exit 1 carried; 0 stale after the shrink); `--grid` 2 falls = base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a, carried). The 38 test files naming the touched files: 4 red titles at 5255ae1b0, the same 4 here (carried: upkeepVocation RED-FIRST page, proseWiringCensus ×3).
+
+## X9 · the rows left, after this batch
+- **Cured here:** 22599, 08236 (above); 10717 31188 29223 (batch 2). 30715 22730 06145: the leaf marks them; the exports' seats call it.
+- **Struck by the record:** 22996 "Rope: Hemp rope in standard lengths." (the Chandler's row: a chandler sells rope bought in; no ropemaker is presumed); 06460 "Central register: … because no congregation can any longer say where its own dead are" (the Cemetery network's own row: the cause is the city's network of grounds, not a mass death; it prints only where the network stands); 07114 "Communal labour" (the reader read the service as a house).
+- **Left, with reasons:** 21361 Pasturage (occupied, isolated: an occupation is no crisis the leaf reads; S1 names siege, outbreak and famine only); 14371 04369 22336 07626 (ore and stone: the chain's ground depleted, not a gap line; S10's cure of the record's gap may change these: re-measure after it lands); 08780 22486 (an occupation's curfew: the same); 16263 guild monopoly where the guilds are suppressed (a power state: no atom the row can declare; the chair's); 15710 Livestock auction under a siege (gatherings + livestock: a siege stops neither by the table's words; the herds beyond the walls are S8's `beyond the gates` only if the chair rules it); 31242 Wild game (marshland depleted, 4 towns: the chain's state); 06293 Caravan organization (the caravanserai's camel gap, 1 town); 23335 10649 (the exports' clip, their seat's); the chain rows 25393 09797 09798 (not this cause).
+
+## S13 · houses named since
+None named to this seat yet.
+
+## Registers named stale
+`docs/content/wiring-census.json` (proseWiringCensus, carried red at the base; the brewer's commit re-made it, this seat does not: re-derived at the close).
+
+## Instruments (re-made as above)
+`git archive` of the chair's `READ-ALL`, `read-all`, `read-all-3` and the census lane's `CENSUS-3` into a scratch dir; `census3.sh <clean tree> before 4`, `census3.sh <cured tree> after 4`; `inventory.py` (and with `SURFACES=PDF,Journal`); `inventory_diff.py before.json after.json <batch rows>` (the rows: the ids above from WORKLIST-SERVICES.json and WORKLIST3-SERVICES.json). The S8 read: the leaf (`stoppedRowMark(s, 'house', i)`) over the corpus for the nine S8 ids, each mark looked for as `"<mark> <desc>"` in the town's dump. The field diff: a per-town deep compare of the two corpora by top-level family.
+

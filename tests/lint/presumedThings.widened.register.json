@@ -5666,12 +5666,6 @@
    [
     "quarters",
     "word",
-    "Every district has a temple. Religious observance accessible to all.",
-    "2e13c962ed3798d2"
-   ],
-   [
-    "quarters",
-    "word",
     "Know who goes where in their district. Sellable information.",
     "a918e7549a9ff25d"
    ],
@@ -5698,12 +5692,6 @@
     "word",
     "The complete range of arcane services from multiple practitioners.",
     "3387e42ac9a15e90"
-   ],
-   [
-    "temple",
-    "implied",
-    "Collects the lord's dues and the temple tithe",
-    "c6123c68a2e9f9d7"
    ],
    [
     "market",

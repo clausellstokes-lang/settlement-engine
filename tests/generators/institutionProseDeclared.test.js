@@ -58,7 +58,8 @@ describe('the services declare in place (CENSUS-4c unit 5)', () => {
     // W2-FIX-DATA-5 (2026-11-13, ROUND-3-CUT-INCREMENT ww-494): the Annual fair's seasonal trading excludes a siege that cuts every road, with its twin (56 → 57)
     // W2-FIX-DATA-6 (2026-11-13, CENSUS-2 kind b): the coaching inn's lodging and horse change exclude a siege that holds the roads, each with its twin (57 → 59)
     // W2-FIX-DATA-8 (2026-11-14, ROUND-3-CUT-INCREMENT ww-1416): the brewer's barrel trade needs an alehouse on the roster, with its twin (59 → 60)
-    expect(rows.filter(declares)).toHaveLength(60);
+    // TAIL-SERVICES-3 (2026-11-15, READ-ALL 04603, X9 31188): the fish market's wholesale needs a tavern on the roster, with its twin (60 → 61)
+    expect(rows.filter(declares)).toHaveLength(61);
     for (const r of rows) {
       const [inst, svc] = r.id.split('|');
       const def = /** @type {any} */ (INSTITUTION_SERVICES)[inst][svc];

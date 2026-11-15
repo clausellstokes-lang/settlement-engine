@@ -44,11 +44,11 @@ export const INSTITUTION_SERVICES = {
   "Village headman": {
     "Dispute mediation": { on: true, p: 1.0, desc: "Judges disputes over land, livestock, and debt" },
     "Communal labour": { on: true, p: 0.9, desc: "Organises shared work: harvest, repairs, the common fields" },
-    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the temple tithe", needs: ["institution: temple"] },
+    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the tithe", needs: ["institution: temple"] }, // TAIL-SERVICES-3 (05233): the atom admits a parish church or a shrine; the line names no temple
     "Record of custom": { on: true, p: 0.7, desc: "Holds the customary law of the village" }
   },
   "Village elder": {
-    "Dispute mediation": { on: true, p: 1.0, desc: "Arbitrates quarrels before they reach the lord's court" },
+    "Dispute mediation": { on: true, p: 1.0, desc: "Arbitrates quarrels before they come to judgment" }, // TAIL-SERVICES-3 (X9 08236): no village that prints it holds a lord or a court
     [COMMUNAL_DECISIONS]: { on: true, p: 0.9, desc: "Convenes the village moot on shared matters" },
     "Marriage and inheritance": { on: true, p: 0.7, desc: "Witnesses betrothals and settles inheritance by custom" },
     "Record of custom": { on: true, p: 0.8, desc: "Remembers precedent, boundaries, and communal rights" }
@@ -142,7 +142,7 @@ export const INSTITUTION_SERVICES = {
 
   "Blacksmith": {
     "Tool repair": { on: true, p: 1.0, desc: "Fix agricultural implements and household tools" },
-    "Horseshoeing": { on: true, p: 1.0, desc: "Essential for transport and cavalry" },
+    "Horseshoeing": { on: true, p: 1.0, desc: "Essential for carts, carriers, and working horses" }, // TAIL-SERVICES-3 (07253): no town that prints it holds cavalry
     "Weapon creation": { on: true, p: 0.7, desc: "Simple arms, hunting knives, farm tools" },
     "Armour repair": { on: true, p: 0.6, desc: "Patch chainmail, straighten plate" },
     "Metalworking training": { on: true, p: 0.5, desc: "Take on apprentices" }
@@ -424,7 +424,7 @@ export const INSTITUTION_SERVICES = {
   },
     "Woodcarver": {
     "Carved goods": { on: true, p: 1.0, desc: "Spoons, bowls, handles, toys. Functional items." },
-    "Religious carvings": { on: true, p: 0.8, desc: "Crucifixes, reliquaries, saints' images." },
+    "Religious carvings": { on: true, p: 0.8, desc: "Devotional figures, holy images, and reliquaries." }, // TAIL-SERVICES-3 (X9 22599): the faith of every culture the woodcarver stands in
     "Custom carving": { on: false, p: 0.5, desc: "Decorative commissions: furniture inlays, structural details." }
   },
       "Waystation": {
@@ -950,7 +950,7 @@ export const INSTITUTION_SERVICES = {
     // A-11 (soak 1000 row 7): a morning catch only where there is water; inland the row is
     // this pool's own "Preserved fish" (the salted barrels the Fish market's catalog text names).
     "Fresh fish retail": { on: true,  p: 1.0, inlandAlternative: "Preserved fish", desc: "Fish sold daily from the morning catch. Selection varies by season." },
-    "Wholesale trade": { on: true, p: 0.8, desc: "Bulk purchase by taverns, institutions, and inland traders." },
+    "Wholesale trade": { on: true, p: 0.8, desc: "Bulk purchase by taverns, institutions, and inland traders.", needs: ["institution: tavern"] }, // TAIL-SERVICES-3 (04603): its twin where no tavern stands, SERVICE_DESC_SIBLINGS
     "Preserved fish": { on: false, p: 0.6, desc: "Smoked, dried, and salt-preserved fish for storage and inland trade." }
   },
   "Foundling home": {
@@ -1201,7 +1201,7 @@ export const INSTITUTION_SERVICES = {
     "Record keeping": { on: false, p: 0.6, desc: "Centralised or distributed congregation records for the whole settlement." }
   },
   "Parish churches (10-30)": {
-    "Full religious coverage": { on: true,  p: 1.0, desc: "Every district has a temple. Religious observance accessible to all." },
+    "Full religious coverage": { on: true,  p: 1.0, desc: "Every parish served. Religious observance accessible to all." }, // TAIL-SERVICES-3 (B06916): the house is the parish churches
     "Network coordination": { on: false, p: 0.5, desc: "The congregations coordinate on feast days and city-wide observances." }
   },
   "Parish churches (50-100+)": {
@@ -1831,6 +1831,12 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   "Bulk supply to alehouses. Priced by barrel.": Object.freeze([
     Object.freeze({ text: "Bulk supply to alehouses. Priced by barrel.", needs: Object.freeze(['institution: tavern']) }),
     Object.freeze({ text: "Ale by the barrel, for households laying in a stock. Priced by barrel.", twinOf: "Bulk supply to alehouses. Priced by barrel." }),
+  ]),
+  // TAIL-SERVICES-3 (2026-11-15; READ-ALL 04603, X9 31188): the fish market's wholesale names the taverns that buy; where none
+  // stands its twin names the households, as the brewer's barrel trade above. VETOABLE wording (the owner's).
+  "Bulk purchase by taverns, institutions, and inland traders.": Object.freeze([
+    Object.freeze({ text: "Bulk purchase by taverns, institutions, and inland traders.", needs: Object.freeze(['institution: tavern']) }),
+    Object.freeze({ text: "Bulk purchase by households, institutions, and inland traders.", twinOf: "Bulk purchase by taverns, institutions, and inland traders." }),
   ]),
   // W2-FIX-DATA-6 (2026-11-13; CENSUS-2 kind b, the coaching inn under a siege: r2r-metropolis-14, r2s-under_siege-*): no
   // traveller comes down a road the siege holds, and no coach or rider goes out. VETOABLE wording (the owner's).

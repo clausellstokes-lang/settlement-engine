@@ -217,7 +217,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Component sourcing": NONE,
   "Composition commission": NONE,
   "Compound medicines": Object.freeze([INPUT]),
-  "Confession": NONE,
+  "Confession": Object.freeze([TRAVELLERS]), // TAIL-SERVICES-3: a row of Access to parish church only: the walk to a neighbour's church
   "Consignment sales": NONE,
   "Construction work": NONE,
   "Consultation": NONE,
@@ -573,7 +573,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Market intelligence": Object.freeze([GOODS]),
   "Market monopoly enforcement": NONE,
   "Marriage and inheritance": NONE,
-  "Marriage ceremony": NONE,
+  "Marriage ceremony": Object.freeze([TRAVELLERS]), // TAIL-SERVICES-3: a row of Access to parish church only
   "Massage": NONE,
   "Masterwork items": NONE,
   "Mead": NONE,
@@ -763,7 +763,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Research facilities": NONE,
   "Restraint equipment": NONE,
   "Resurrection services": NONE,
-  "Rite of entry": NONE,
+  "Rite of entry": Object.freeze([TRAVELLERS]), // TAIL-SERVICES-3: a row of Access to parish church only
   "River crossing": Object.freeze([TRAVELLERS]),
   "River piloting": NONE,
   "Road intelligence": Object.freeze([GOODS]),
@@ -923,7 +923,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Weather forecasting": NONE,
   "Weather reading": NONE,
   "Weekly market": Object.freeze([GATHERINGS, GOODS]),
-  "Weekly rite": Object.freeze([GATHERINGS]),
+  "Weekly rite": Object.freeze([TRAVELLERS, GATHERINGS]), // TAIL-SERVICES-3: the thorp walks to another village's service
   "Wholesale purchasing": NONE,
   "Wholesale trade": Object.freeze([GOODS]),
   "Wild game sales": Object.freeze([GAME]),
@@ -946,6 +946,10 @@ export const SERVICE_DEPENDENCE = Object.freeze({
 export const SERVICE_DEPENDENCE_BY_DESC = Object.freeze({
   "General trade": Object.freeze({
     "Agricultural produce, household goods, livestock. The economic heartbeat of the week.": Object.freeze([GATHERINGS, GOODS]),
+  }),
+  // TAIL-SERVICES-3 (READ-ALL 11805, X9 06145): burial in a ground beyond the gates; a siege stops it, an outbreak does not (S8's word)
+  "Burial": Object.freeze({
+    "Interment outside the gates. The bearers and the cart are found by the ground.": Object.freeze([GATES]),
   }),
 });
 
