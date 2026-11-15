@@ -1,0 +1,8 @@
+{"id":"C6485","town":"bar0-city-wartime-rand-6","sev":"MED","kind":"PAIR","why":"says no power profits from the war, yet the crisis text says certain families are quietly thriving on contracts; Noble Families is a power","other":"C6481"}
+{"id":"C6518","town":"bar0-city-wartime-rand-6","sev":"LOW","kind":"PAIR","why":"Labor capacity Adequate beside conscription taking a third of working-age men and fields short of hands","other":"C6478"}
+{"id":"C7367","town":"bar0-city-wartime-rand-6","sev":"LOW","kind":"STATE","why":"Imports list prints \"Precious metal veins\" (a resource); TRADE imports say \"Precious metals\"; LAND has precious metal veins absent","other":""}
+{"id":"C7514","town":"bar0-city-wartime-rand-6","sev":"MED","kind":"STATE","why":"running Floodplain chain prints Grain export and Surplus food; FOOD has surplus 0%, 32% brought in, and TRADE exports list no grain","other":"C7396"}
+{"id":"C7595","town":"bar0-city-wartime-rand-6","sev":"MED","kind":"STATE","why":"Livestock printed Fully exploited drawing on grazing land; LAND gives Grazing land absent and its chains vulnerable","other":"C7586"}
+{"id":"C8076","town":"bar0-city-wartime-rand-6","sev":"LOW","kind":"STATE","why":"card of the Harbour master's office titles its holder Wharfinger; PEOPLE gives that office the harbour master (Kai Jung), wharfinger being the Docks' title (Narae Pan)","other":""}
+{"id":"C8630","town":"bar0-city-wartime-rand-6","sev":"MED","kind":"PAIR","why":"says church and garrison act as one, crusaders; the Military/Guard text says garrison and clergy each wish the other would keep quieter","other":"C7776"}
+{"id":"DONE","lines":2297,"blocks":1,"flags":7}
