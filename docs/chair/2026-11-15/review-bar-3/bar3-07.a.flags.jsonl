@@ -1,0 +1,14 @@
+{"id":"C13260","town":"bar0-hamlet-calm-rand-7","sev":"MED","kind":"PAIR","why":"Medical role: common, yet no arcane practitioners, no healer kept, reliance on magic None","other":"C13246"}
+{"id":"C13310","town":"bar0-hamlet-calm-rand-7","sev":"MED","kind":"PAIR","why":"Knud asking for a second favour before repaying the first puts him two ahead; contradicts 'neither has ever been more than one favour ahead'","other":"C13309"}
+{"id":"C13758","town":"bar0-hamlet-under_siege-rand-6","sev":"MED","kind":"PAIR","why":"A dog drives animals across the road; under siege nothing moves and livestock are penned between the houses","other":"C13757"}
+{"id":"C13759","town":"bar0-hamlet-under_siege-rand-6","sev":"MED","kind":"STATE","why":"Lanes of stalls with speakers in a hamlet of 54, all speaking at once, under a siege where field work and trade have stopped","other":"C13817"}
+{"id":"C13783","town":"bar0-hamlet-under_siege-rand-6","sev":"MED","kind":"STATE","why":"Says anyone can sell at the market as ordinary; under the siege trade has stopped and nothing comes in by road","other":"C13817"}
+{"id":"C13868","town":"bar0-hamlet-under_siege-rand-6","sev":"MED","kind":"LACKS","why":"Names both guilds being sabotaged; HOUSES lists no guild, and C13783 says no guild's leave is needed","other":"C13783"}
+{"id":"C13905","town":"bar0-hamlet-under_siege-rand-6","sev":"MED","kind":"STATE","why":"Periodic market row has no siege mark and lists price discovery and trade facilitation as working; under the siege trade has stopped","other":"C13817"}
+{"id":"C14176","town":"bar0-hamlet-under_siege-rand-6","sev":"MED","kind":"PAIR","why":"War Council (Strong, escalating, contests the seat) said too far behind to challenge openly; C14157 says the challenger could now take the hall","other":"C14157"}
+{"id":"C14652","town":"bar0-hamlet-under_siege-rand-7","sev":"MED","kind":"LACKS","why":"Says an organization decides what flows and removes rivals; GOVERNMENT lists only Elder Council, HOUSES has no criminal power, only a waypoint","other":""}
+{"id":"C14655","town":"bar0-hamlet-under_siege-rand-7","sev":"MED","kind":"LACKS","why":"A guild adjudicates conflicts with final judgment; HOUSES has no guild and GOVERNMENT lists no such power","other":""}
+{"id":"C14664","town":"bar0-hamlet-under_siege-rand-7","sev":"MED","kind":"LACKS","why":"Church forgiveness delivered by clergy; HOUSES has only Access to parish church, no church or clergy here","other":""}
+{"id":"C14930","town":"bar0-hamlet-under_siege-rand-7","sev":"MED","kind":"LACKS","why":"Corrupt clergy and fake relics under the church's cover; HOUSES has only Access to parish church, no church or clergy of its own","other":"C14664"}
+{"id":"C15119","town":"bar0-hamlet-under_siege-rand-7","sev":"LOW","kind":"STATE","why":"Compact signed 17 years ago cannot have held for a generation; PAST dates it 17 years ago","other":"C15118"}
+{"id":"DONE","lines":2380,"blocks":4,"flags":13}
