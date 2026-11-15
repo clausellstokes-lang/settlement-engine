@@ -9,4 +9,4 @@
 {"id":"C11435","town":"bar0-village-calm-rand-2","sev":"LOW","kind":"BROKEN","why":"the list prints 'timber' twice: 'timber, stone, luxury goods, timber, mountain timber'","other":""}
 {"id":"C11640","town":"bar0-village-calm-rand-2","sev":"LOW","kind":"PAIR","why":"'Medical role: common' for magic, but reliance on magic is None and no arcane practitioners are on the rolls; healing is clergy care","other":"C11620"}
 {"id":"C11759","town":"bar0-village-calm-rand-2","sev":"LOW","kind":"STATE","why":"Norbert Krause 'voted against' on a small matter; PEOPLE shows him on no council or power, so he holds no vote","other":""}
-{"id":"DONE","lines":1974,"blocks":2,"flags":11}
+{"id":"DONE","lines":1974,"blocks":2,"flags":10}
