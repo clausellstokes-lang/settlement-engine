@@ -245,3 +245,148 @@ As the predecessor's, plus: `births-only.sh` and `fielddiff.mjs` from lane/recor
 (docs/chair/2026-11-14/probes/RECORD-MEASURE-1/) for a record-only check in a minute; a node script that re-computes
 `governanceAccountOf` over a corpus and checks each town's page holds its opening (to re-verify a display cure without a render).
 NEVER edit the tree a census is reading (render and the writers' trace read it to the end): edit in a second worktree.
+
+
+---
+
+# TAIL-POWERS-3 · the third seat (session_01ACmDYaMFkHSYP5593hvxgZ), kept current after every batch
+
+Base: this branch at **288be89f4** (read back from origin; TAIL-POWERS-2's last hand-back commit). Scratch worktrees
+outside the repository; local branch `tp3-b`, pushed by explicit refspec; the main checkout untouched. BEFORE census at
+288be89f4 (`runs/before`, exit 0); each batch's AFTER is the next one's BEFORE.
+
+## The chair's rulings since (2026-11-15; each vetoable by the owner), copied
+- (P16) G2, G3 AND G5 GRANTED (RECORD-MEASURE-2's g235.patch: rulingStructure.js, governanceNarrative.js): a bare "Stable"
+  beside a Legitimacy Crisis reads "Tense (the seat has lost the people's trust)" (9 towns; `stability` only); the two
+  theocracy words need a religious seat or a religious power of weight (8 and 8); "strong military presence" needs a
+  force (3). Each moves its own label and nothing else; no new red where it was measured. ONE COMMIT, A DECLARED MOVE;
+  the new stability word on the veto list.
+- (P17) DA'S LAW FOR THE ARCANE COUNCIL: it governs in 6 towns with no arcane house: a government of a kind only where
+  a house of that kind stands, else the next priority, else the size's civic seat; its own commit, its field diff.
+- (P20) THE CEILING OF `rulingStructure.js` STANDS: a cure that adds lines there moves an equal weight out into a leaf of
+  its own (a new file beside it), in the same commit; the ceiling is not raised and nothing is banked.
+- (P21) The one-member Elder Council's plural lines (14 of DA's towns; the class 102): a line about a council of many
+  needs the atom `ruling body` (on the joined line, not this branch): when the order reaches such lines here, merge
+  origin/lane/join-2026-11-14 AT eb054d53f (the only merge), re-take BEFORE at the merged tree, then key them with a twin
+  true under one ruler. BUT WAIT for the chair's word on whether the density resize can change the governing power's
+  one-or-many kind after a line is written: until then such lines are PARKED with their measure.
+- (P22) "12720 Lightly defended" is the defence display's seat's (class f): not this seat's.
+- (X9) The exports' read (read-all-3/WORKLIST3-POWERS.json): the rows of this seat's files, with a batch of the same
+  writer; measured with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`.
+- A rule of the instrument: a census's tree is not edited until its count finishes (this seat: one detached worktree a
+  census, the edits in a third).
+
+## Batch 1 · 0b1b41459 + 0eaea0870 · the account's power names (P3); the stability word (P16)
+- 1a, 0b1b41459 (domain/display/governanceAccount.js; display only): `powerNameInProse` and `pluralPowerName` read
+  `powerSentenceName`. Page (inventory diff, tabs): every "Military/Guard" line of the account GONE (18 + 14 + 9 + 8 + 3
+  + 3 + 2 + 1 + 1 town-lines; 62 towns by the account re-computed), each inherited by its "The Guard ..." twin, town for
+  town; "The # Bloc will back whichever side meets its price." 3 -> 0, inherited by "The Neutrals will back whichever side
+  meets their price." 3 (+ 1 in a list): the leaf's name for "Third Bloc (Neutrals)" is plural, and the verb agrees.
+- 1b, 0eaea0870 (power/governanceNarrative.js, power/rulingStructure.js), A DECLARED MOVE: FIELD DIFF (the 720)
+  towns 20, families 1: `powerStructure.stability` (G2 9, G3 8, G5 3; the measuring seat's own figures). Rows (tabs):
+  16601 "Rigid (militant theocracy)" 5 -> 0, 16602 (… monsters on the roads) 2 -> 0; 15278 "Ordered (strong military
+  presence)" 13 -> 16: the 1 without a garrison gone (and 2 with the monster suffix), 4 inherited from G3 (r2r-city-18,
+  metropolis-29, -36, -37): every one of the 16 (and the 24 towns printing any "strong military presence") has a garrison
+  on the record, so the row is CURED where false and STRUCK where it prints. "Stable (theocratic governance)" 5 -> 4.
+  NEW: "Tense (the seat has lost the people's trust)" 9. "Tense — regional monster threat" +2 (G5's two monster towns).
+  P20: rulingStructure.js stays at 799 lines by wc: G2 is the return's own expression, G5 rides on the institution flags
+  the call already passes (`instFlags: { ...instFlags, garrisonStands }`); no line added, none moved, none banked.
+- Silenced elsewhere: none. "Patron deity" and its two premium lines 719 -> 717 (r2r-thorp-0, r2r-thorp-2): the first town
+  of two render workers; their records are byte-equal to the base and nothing of this batch reaches the religion panel: a
+  render race, NAMED (not a cure).
+- Guard: tests/generators/power/tailPowers3Labels.test.js (9 pairs red at the base; 4 KEEP green; a plant, garrisonStands
+  forced false, reds KEEP r2r-town-9, not committed).
+
+## P17 · STRUCK by the record (no commit)
+The 6 towns are r2r-town-1, -11, -49, r2s-famine-town-3, r2s-plague_onset-town-3, r2s-wartime-town-1. DA's law already
+governs the Arcane Council (power/rulerKin.js :: drawCouncilOfAKind: a government of a kind is drawn only where
+`hasHouseOfKind(institutions, kind)`, else the next priority, else the size's civic seat), and in each of the 6 the
+record holds an arcane house by that test, AND the seat's own holder comes from it (`npcs[].memberships`: the Arcane
+Council's rank 1): a Teleportation circle's circle-keeper (4 towns) or an Alchemist shop's alchemist (2). The measuring
+seat's name test (/mage|wizard|arcane|enchant|academy of magic|hedge wizard/) misses both houses. Whether an alchemist
+is an arcane house is the house-kind catalogue's call (people/representatives.js :: houseKindOf), not this seat's file.
+
+## Batch 2 · a5a9e4372 · a baseline conflict line about the seat's rival needs the rival (governanceNarrative.js)
+A DECLARED MOVE. `deriveBaselineConflict` (rolls nothing; written to `powerStructure.recentConflict`) takes three facts
+from `buildGovernanceLabels`: P16's G3 atom `theocraticSeat`, `seatIsReligious` (the RELIGIOUS name test on the governing
+row), `seatIsMilitary` (/military|garrison|war council/ on it); and the signals' `hasOwnChurch` (a church, cathedral,
+monastery or temple that is not "Access to …"). The crusader rung and the heresy rung need `theocraticSeat`; the
+religion rung is not said under a religious seat, and its first line needs `hasOwnChurch`; the military rung is not
+said under a military seat. Each falls to the ladder's next rung; no line is new or reworded.
+FIELD DIFF (the 720, batch 1's tree against this one): towns 29, families 2: `powerStructure.recentConflict` 29,
+`pressureSentence` 9 (its reader). Rows (tabs, inventory diff after1 -> after2): 20273 commander-prelate 7 -> 0 GONE ·
+B19612 "The garrison is mobilizing." 7 -> 0 GONE · 21564 / 22394 the church court 2 -> 0 GONE · 21066 2 -> 0, 21067 1 -> 0,
+21062 1 -> 0 GONE · 20194 church veto 24 -> 16 (11 false gone: 9 under the church's own seat, 2 with no church of their
+own; 3 inherited, each with a cathedral and a civic house under a ducal, city-state or military seat) · 20963 "The mages'
+# is very quiet" 5 -> 2 (the 2 left stand under a High Theocratic Council; their "quarter" with a Wizard's tower only is
+LEFT, measure 2). THE INHERITORS, read by record: "<seat> has been debating market levies … the merchants have stopped
+attending" +7 (a live market and a hall each); "A monster incursion last season destroyed outlying farms" +5 (each
+plagued, its stability saying the monster threat: B02757's class, not cured here); "The merchant class is outbuying noble
+landholdings" +4 (metropolises with a noble power and a live market); "The most devout households want a say …" +3 (the
+hamlets: the line's declared twin); "The military commanders … and Ducal Governorship / Democratic assembly is losing
+ground" +2 (a Significant guard beside a Strong seat). A FIRST TRY (not committed) also gated "The church wants approval
+rights over market day" on a church of its own: it pre-empted that line's declared twin in 24 towns; reverted.
+Silenced elsewhere: none ("Patron deity" and "From here you raise …" 1 town less: r2r-thorp-3, the first town of a
+render worker, its record unmoved: the render race named under batch 1).
+Guard: tests/generators/power/tailPowers3Conflict.test.js (8 pairs red at the base; 3 KEEP green).
+Pin re-keyed by identity (in the commit): tests/generators/governanceNarrative.test.js GS-4's heresy town (no roster)
+keeps its governing row and gains a religious power of 30; its world-law question is unchanged; green at base and tip.
+
+## The gates (base 288be89f4 against the tip a5a9e4372)
+eslint (touched files) 0; typecheck:domain:strict 0; typecheck:ratchet 0; the presumed-things walker --check: fresh 147,
+strips fresh 1 at the base and at the tip (no rise; none in this seat's files). The 60 test files naming the touched
+files (2 workers): the base's 18 reds in 9 files (the generator golden, the driven golden, the merge-ledger A1-A8, the
+pools' ALIVENESS, the debt and census baselines, the dry read: CARRIED, named, not this seat's), the tip's the same 18
+after the pin above. The twelve-birth grid (--grid): 2 falls at the base, the same 2 at the tip (r2r-city-0 P7a,
+r2s-insurgency-metropolis-0 P7a): no rise.
+
+## EVERY NEW OR CHANGED LINE (this seat; the owner's veto), with towns read
+- NEW: "Tense (the seat has lost the people's trust)" (P16's G2 word; `powerStructure.stability`, 9 towns, tabs and
+  exports): r2r-thorp-23 (the smallest), r2r-village-10, r2r-town-44 (the largest it reaches); every one a Legitimacy
+  Crisis; no siege, famine or occupation among the 9.
+- CHANGED (a power's prose form, P3): "The Guard no longer takes its orders." / "The Guard takes its orders no longer." /
+  "The Guard is at odds with it." / "The hall is at odds with the Guard." and their lists (62 towns): r2r-hamlet-10,
+  r2s-under_siege-town-2 (a siege), r2s-slave_revolt-metropolis-2. "The Neutrals will back whichever side meets their
+  price." (3 + 1): r2s-politically_fractured-town-3, r2r-metropolis-39, r2s-politically_fractured-metropolis-2.
+- Batch 2 adds no line: the inheritors are the ladder's existing lines (above, read).
+
+## Rows struck or named (this seat)
+- P17: STRUCK by the record (above).
+- 15278 "Ordered (strong military presence)": CURED where false (G5) and STRUCK where it prints: all 24 towns printing
+  any "strong military presence" after batch 1 hold a garrison on the record.
+- The render race (NAMED for the census's owner): the first town a render worker draws (r2r-thorp-0/-2 in one run,
+  r2r-thorp-3 in the next) sometimes prints without the premium religion panel and the troops line; records equal.
+- The after-count of batch 1's census was killed for memory (exit 137) while two grid runs shared the machine; its
+  corpus and dumps were complete and are what the inventory reads; the count (patterns) was not re-run.
+
+## What is left of this seat's files (by width; towns PRINTING at a5a9e4372, the tabs; NOT verified unless said)
+- rulingStructure.js (799 of 799 lines, P20): 21207 49 (the elders "out of respect" line: P4's legitimacy half was
+  cured by the first seat; what prints is the calm remainder, verify), 07269 45, 23333 34, 04923 32, 03509 31, 02622 18,
+  06026 17, 02606 16 / 02559 15 (true where they print: the false ones were the 28 occupied, cured), 18060 14, 16581 14,
+  03925 12, 11810 11, 17652 8, 18061 4, 13525 4, 10422 2. A cure there moves an equal weight out to a new leaf (P20) or,
+  as batch 1 did, adds no line.
+- governanceNarrative.js: 12720 80 (P22: the defence display's, not this seat's); B02464 58 (the ladder's last rung, the
+  grazing-and-water quarrel "between the families on each side": measured at the base, of 57 printing towns 7 have
+  under 15 souls and 41 hold no grazing resource in the analysis, but 39 have a herding house and every one has
+  subsistence farming: the false core is the small thorp's "families on each side"; the cure wants a size-true twin,
+  unbuilt); 21621 24 (the slave revolt's "streets" in a thorp); 20987 / 00170 20 + 20 (the merchants outbuying noble
+  estates: batch 2 added 4 true metropolises; the false ones are the hamlets); B13714 13; B02757 11 (a monster raid
+  "last season" with no event in PAST; every printing town is plagued); B00338 6 / B13657 2; 20963 2 (above); the
+  military family's "<seat> is losing ground" where the seat is Dominant and the guard Minor (21057, 21060, 21061, 21063,
+  21064, 21065, B20041: 1 each: the rung needs the guard's strength against the seat's, a reading of the final roster
+  this ladder does not have at its step).
+- governingStressVignettes.js: 05663 27, 15434 21, B21342 13, 22121 13, 15215 13, 21190 9, 20626 4.
+- governanceAccount.js: the seat-holder's styled title (B11535 15, B01698 15, B11562 8, B11564 4, B01914 3, B11541 2,
+  B01715 2, B11563 1, B01720 1: "<N>, the boat-headman and Elder, holds its seat": the honorific the seat styles on its
+  holder, not on the roster: the styled title is faceHonorifics' (B's file); the account only prints it); B11586 /
+  B11556 (P5, B's); B11589 4 / B02095 3 (the merchant master holds the City/City-State Council's seat beside a quarrel);
+  03254 2; B17765 1; the "Crime has left ... contested" rows B05801-B05822 (1 each).
+- PARKED (P21): the one-member council's plural lines, until the chair's word on the density resize.
+- The exports (X9): 24575 (= 15278) cured with it; 22578 (= 04923), 17038 (= 18060), 16925, 12246, 17039 (= 18061) left.
+
+## How this seat's instruments are re-made
+As TAIL-POWERS-2's. Plus: one detached worktree per census (the census reads its tree to the end of its count) and a
+third for edits; never more than one census and one test run at once on this machine (two grid runs beside a census
+cost a count to the memory killer). `acct.mjs` (scratch): governanceAccountOf over a corpus, a JSON line a town, to
+diff a display cure without a render. `rc.py` (scratch): a pickled index of the corpus (recentConflict, government,
+the roster's labels, the houses, stress, monster threat) and a regex query over the conflict line.
