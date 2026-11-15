@@ -1,0 +1,6 @@
+{"id":"C44722","town":"bar0-city-wartime-rand-17","sev":"LOW","kind":"LACKS","why":"Garrison offers 'Mercenary hire' service; DEFENCE says hired: none","other":""}
+{"id":"C45570","town":"bar0-city-wartime-rand-17","sev":"MED","kind":"PAIR","why":"War Council 'waiting for a chance to push back' against Merchant oligarchy; QUARRELS has them symbiotic, stable, each needing the other","other":"C45443"}
+{"id":"C45561","town":"bar0-city-wartime-rand-17","sev":"LOW","kind":"PAIR","why":"Merchant oligarchy 'hurting the bottom line' from the war; Crisis tab says merchants are getting rich and doing well out of it","other":"C44418"}
+{"id":"C46403","town":"bar0-city-wartime-rand-17","sev":"MED","kind":"LACKS","why":"Names a 'temple district'; HOUSES has no temple, only parish churches and monasteries","other":""}
+{"id":"C44363","town":"bar0-city-wartime-rand-17","sev":"LOW","kind":"PAIR","why":"Forges' hammering echoes through the city, yet iron ore is depleted and smiths 'have nothing to mend tools with'","other":"C44562"}
+{"id":"DONE","lines":2145,"blocks":1,"flags":5}
