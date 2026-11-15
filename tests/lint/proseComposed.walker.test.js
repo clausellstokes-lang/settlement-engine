@@ -561,7 +561,15 @@ describe('A0b — the text claims every declared field and no other', () => {
     // charterPending 2 -> 1. The ceiling is lowered to the measurement LESS W1 ECO's held seven (DS-GEN-13 COMMERCE: a bank 4,
     // a merchant guild, no bank 4, DS-ECO-1 C4 +1, DS-ECO-10 -1; the chair's ruling: cured at source by the W1-A0b writer, never
     // attributed): 61 - 16 = 45. The arm reads 52 > 45, RED by exactly W1's seven until W1-A0b merges.
-    const OVER_CLAIM_OWED = 0;
+    // 0 -> 1 OWED at the close of the tail round (2026-11-15, TAIL-CLOSE-PROSE-1, the chair's ruling A0B1; BASE stays 45):
+    // measured by armA0b over the shipped corpus at 9d3d177a0 (45 over-claims, 2,954 variants) and at 8c11f73ea (46, 2,959).
+    // The one new over-claim is DS-ECO-1 :: COMBINATION C1's fourth line, the indebted twin (`[ledger · crisis: indebted]`:
+    // "Trade on {settlement}'s {access} is steady and the town earns well, but much of what it earns goes to the outside
+    // power it owes."), added by TAIL-CORPUS-ECO-4 batch 7 under the chair's ruling C19 (4467cd7d62). It fills the pool's
+    // `{access}` slot as its three siblings do: all four lines of the pool carry the same finding (the pool's census row
+    // reads `rank` while its branch evaluates `access`); DS-ECO-1 C4's re-worded line is one for one. The same buy-back
+    // pays it: the census naming the slot fill as the pool's own read, or the walker telling a slot fill from a record claim.
+    const OVER_CLAIM_OWED = 1;
     const OVER_CLAIM_CEILING = OVER_CLAIM_BASE + OVER_CLAIM_OWED;
     const tally = {
       'over-claim': 0, 'under-claim': 0, 'implicit-negation': 0,
@@ -591,7 +599,7 @@ describe('A0b — the text claims every declared field and no other', () => {
     console.log(`\nA0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves`
       + `\n  variants walked      ${corpus.length}`
       + `\n  over-claims          ${tally['over-claim']}   ceiling ${OVER_CLAIM_CEILING}`
-      + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot)`
+      + ` = ${OVER_CLAIM_BASE} + ${OVER_CLAIM_OWED} OWED (427f7b112: DS-GEN-17's name slot; 2026-11-15: DS-ECO-1 C1's fourth line, the {access} slot)`
       + `\n  under-claims         ${tally['under-claim']}   ceiling ${UNDER_CLAIM_CEILING}`
       + ` = ${UNDER_CLAIM_BASE} + ${UNDER_CLAIM_OWED} OWED (R-F5 26 + the pool census 34 + DS-GEN-17 PROVISIONED v3 1 + DS-CND-1 boom v4 1 + W2 DEF DS-DEF-9 FLAG pools 8 + W2 DEF DS-DEF-4 FIXTURE pools 17 + W2 DEF DS-DEF-5 FIXTURE pools 10 + W2 DEF DS-DEF-5 ARCANE pools 79 + FIXTURE: gates v3-v4 4 + the ledger rewrite of FIXTURE: gangs v2 3 + W2 DEF DS-DEF-12 isolation support 66 + W2 DEF DS-DEF-2 CHAIN clauses 22 + W2 DEF stress-type migration pools 18 + W1 ECO's pools 142 (MERGE-WAVE) + W3 POW DS-POW-5/-6 FLAG and advisory pools 52 + W3 POW DS-POW-1 newcomer v5 2 + W4 DS-CND-1 style law 5 + W5 HIS DS-REL-2 net 3 (MERGE-WAVE): the census wave buys them back)`
       + `\n  implicit negations   ${tally['implicit-negation']}`
