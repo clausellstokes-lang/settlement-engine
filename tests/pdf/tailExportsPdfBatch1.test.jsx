@@ -76,6 +76,15 @@ const NOT = [
   ['12107', 'r2s-famine-village-1', 'powerHeadline', /Military\/Guard|pressing close behind/, /holds the seat, but more weight lies with The Guard\./],
   ['14754', 'r2r-village-21', 'economicsHeadline', /salted fish/, /grows less food than it eats/], // a siege stops trade: nothing named as going out
 ];
+// [surface, a phrase that surface really prints for every NOT row on it: the liveness anchor of the NOT row's negative]
+const SURFACE_PRINTS = /** @type {Record<string, string>} */ ({
+  economics: 'INCOME SOURCES',
+  overview: 'Food balance',
+  defense: 'GUARD ASSESSMENT',
+  powerHeadline: 'holds the seat',
+  defenseHeadline: 'no walls and no organized force.',
+  economicsHeadline: 'grows less food than it eats',
+});
 // [seed, surface, must still print]
 const KEEP = [
   ['r2r-city-0', 'economics', /Black market capture: \d+% of economy/],
@@ -91,7 +100,8 @@ describe('TAIL-EXPORTS-PDF batch 1: the PDF prints what the tab prints', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
   test.each(NOT)('%s %s (%s): not printed', (_id, seed, where, not, instead) => {
     const out = text(seed, where);
-    expect(out).not.toMatch(not);
+    expect(out, `${_id}: the ${where} surface prints`).toContain(SURFACE_PRINTS[where]);
+    expect(out).not.toMatch(not); // anchored: the line above asserts the same surface prints its own phrase
     if (instead) expect(out).toMatch(instead);
   }, 120000);
   test.each(KEEP)('keep %s (%s)', (seed, where, keep) => {

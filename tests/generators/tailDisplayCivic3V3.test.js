@@ -16,6 +16,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -57,7 +58,7 @@ beforeAll(async () => {
 describe('V3: the seven safety lines say only what their town bears', () => {
   test.each(CURED)('%s: "%s" does not print; "%s" does', (seed, gone, instead) => {
     const t = TEXT.get(seed);
-    expect(t).not.toContain(gone);
+    expectAbsentWithAnchor(t, gone, instead, seed);
     expect(t).toContain(instead);
   });
   test.each(KEPT)('%s: "%s" still prints', (seed, kept) => {

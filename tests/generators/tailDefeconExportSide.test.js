@@ -13,6 +13,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -88,7 +89,7 @@ describe('C1-E: a good is exported only where a house that digs, makes or works 
   test.each(GONE)('%s does not export %s; it still exports %s', (seed, gone, still) => {
     const out = exportsOf(seed);
     expect(out, 'anchored: the list still exports').toContain(still);
-    expect(out).not.toContain(gone);
+    expectAbsentWithAnchor(out, gone, still, seed);
   }, 60000);
 
   test.each(KEEP)('%s exports %s where %s stands', (seed, good, house) => {
@@ -125,13 +126,13 @@ describe('D19: the docks of an air dock are not waterborne', () => {
   test.each(AIR)('%s exports the airship freight service, not the waterborne one', (seed) => {
     expect(housesOf(seed), 'anchored: the airship dock').toContain('Airship docking (high magic)');
     expect(exportsOf(seed)).toContain(AIRSHIP);
-    expect(exportsOf(seed)).not.toContain(WATERBORNE);
+    expectAbsentWithAnchor(exportsOf(seed), WATERBORNE, AIRSHIP, seed);
   }, 60000);
 
   test.each(WATER)('%s, an airship dock beside a %s, keeps %s', (seed, house, service) => {
     expect(housesOf(seed), 'anchored: the airship dock').toContain('Airship docking (high magic)');
     expect(housesOf(seed), 'anchored: the water house').toContain(house);
     expect(exportsOf(seed)).toContain(service);
-    expect(exportsOf(seed)).not.toContain(AIRSHIP);
+    expectAbsentWithAnchor(exportsOf(seed), AIRSHIP, service, seed);
   }, 60000);
 });

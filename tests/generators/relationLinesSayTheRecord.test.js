@@ -21,6 +21,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { computeFactionRelationships, criminalMilitaryRelation } from '../../src/generators/factionDynamics.js';
 import { CAPTURE_LINES } from '../../src/data/people/dmPowerLines.js';
 import { dmPowerViewOf } from '../../src/domain/people/patronage.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const P = (/** @type {string} */ faction, /** @type {number} */ power, gov = false) => ({ faction, power, isGoverning: gov, category: gov ? 'government' : '' });
 const LEG = { isLegitimacyCrisis: false, isContested: false, isEndorsed: false };
@@ -71,7 +72,7 @@ describe('TAIL-POWERS-B batch 1 · the relation lines say what the record holds'
     it(what, () => {
       const text = line();
       expect(text, `prints instead: ${instead}`).toContain(instead);
-      expect(text).not.toContain(refused);
+      expectAbsentWithAnchor(text, refused, instead, what);
     });
   }
   for (const [seed, refused, instead] of BIRTHS) {
@@ -79,7 +80,7 @@ describe('TAIL-POWERS-B batch 1 · the relation lines say what the record holds'
       const s = births[seed];
       const text = [...(s.powerStructure.factionRelationships || []).map((/** @type {any} */ r) => r.narrative), dmPowerViewOf(s)?.hall?.line || ''].join(' ');
       expect(text, `prints instead: ${instead}`).toContain(instead);
-      expect(text).not.toContain(refused);
+      expectAbsentWithAnchor(text, refused, instead, seed);
     });
   }
 });
