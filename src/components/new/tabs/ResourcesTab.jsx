@@ -74,6 +74,16 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
       {!moved&&<DrawsOn deps={chain.dependsOn} mobile={mobile} />}
     </div>
   );
+  // V2 (TAIL-DISPLAY-CIVIC-3): the food a famine in force failed (validationOnPage.js :: famineFailedResourceOf), the
+  // resource alone, in the famine's own words ("The fishing failed this year", foodBalance.js): no flow and no grade of working
+  if (stage === 'failed') return (
+    <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #8a2a1a',padding:'8px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✗ Failed this year</span>
+        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
+      </div>
+    </div>
+  );
   if (stage === 'partial') return (
     <div style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
@@ -144,6 +154,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   const unexploited    = [...shown.unexploited].sort(byRes);
   const partExploited  = [...shown.partial].sort(byRes);
   const fullExploited  = [...shown.full].sort(byRes);
+  const famineFailed   = [...shown.failed].sort(byRes);
 
   // Terrain accent color
   const terrainColor = {
@@ -175,7 +186,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       </div>
 
       {/* ── CRITICAL IMPORTS (what they can't produce) ───────────────────── */}
-      {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
+      {(unexploited.length>0||partExploited.length>0||fullExploited.length>0||famineFailed.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
           {/* Unexploited — most interesting for DMs */}
@@ -186,6 +197,9 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
 
           {/* Fully exploited */}
           {fullExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="full"/>)}
+
+          {/* The food the famine failed (V2: the record's failed source) */}
+          {famineFailed.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="failed"/>)}
         </div>
       </Section>}
 
