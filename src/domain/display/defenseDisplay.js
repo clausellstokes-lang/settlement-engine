@@ -247,7 +247,7 @@ export function patternDeniesOrganisation(pattern) {
 
 /** The Arcane Support row's note where no practitioner stands, and its twin where a magical service is made (BAR2-LABELS C1229). */
 export const ARCANE_NONE = 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.';
-export const ARCANE_NONE_WITH_SERVICE = 'No arcane practitioner stands with the defence. Wards, detection and counterspell are beyond its defenders.';
+export const ARCANE_NONE_WITH_SERVICE = 'No arcane practitioner stands with the defence, so wards, detection and counterspell are beyond it.';
 
 /**
  * Supporting-capabilities cards (economic backing, arcane support, legal, medical,

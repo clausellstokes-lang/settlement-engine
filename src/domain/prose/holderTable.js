@@ -181,7 +181,7 @@ export const HOLDER_SOURCES = Object.freeze({
   localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
   isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
-  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:654', read: true }),
+  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js :: deriveDossierViewModel', read: true }), // CITED BY SYMBOL (rule 32; BAR2-LABELS-4, 2026-11-15): LB1 (96c47e43f) moved :654 to :656
   // ⭐ CITED BY SYMBOL (rule 32): REVIEW-INTAKE-3 R9 moved :500/:501/:418 down the file.
   economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
   strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),

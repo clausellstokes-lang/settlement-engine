@@ -15,6 +15,7 @@
 import { defenceHoldsArcane, defenceHoldsDivine, defenceHoldsDruidic, economyShowsMagic, magicOf } from '../facts/magic.js';
 import { MAGIC_NOTE_TRADITION } from '../facts/magicSource.js';
 import { chainNeedsMagic, foodMagicShare, FOOD_SUPPLY_DEPENDENT } from '../magicReliance.js';
+import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js'; // BAR2-LABELS-4: the standing (ruin-filtered) magic bucket
 
 /**
  * Whether the town holds the tradition a provision is of.
@@ -150,10 +151,13 @@ export function magicServiceMade(record) {
   return activeChainsOf(record).some((c) => chainNeedsMagic(c));
 }
 
-/** A house of magic among the defences: the defence's tradition, or its magic list. @param {unknown} record @returns {boolean} */
+/**
+ * A house of magic among the defences: the defence's tradition, or a magic house that still stands (BAR2-LABELS-4: the
+ * bucket read off the live roster, `standingDefenseForces`, so a ruin fields nothing; ruinFilterRoster's law).
+ * @param {unknown} record @returns {boolean}
+ */
 export function magicAmongDefences(record) {
-  const listed = /** @type {{ defenseProfile?: { institutions?: { magicDef?: unknown } | null } | null } | null} */ (record)?.defenseProfile?.institutions?.magicDef;
-  return defenceHoldsArcane(record) || (Array.isArray(listed) && listed.length > 0);
+  return defenceHoldsArcane(record) || standingDefenseForces(/** @type {{ institutions?: unknown } | null} */ (record)).magicDef.present;
 }
 
 /** The notes that claim a medical provision, and those that claim built work (every other note claims food or goods). */
