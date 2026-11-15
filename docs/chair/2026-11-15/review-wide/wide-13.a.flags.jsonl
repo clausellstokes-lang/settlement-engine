@@ -1,0 +1,4 @@
+{"id":"C27329","town":"bar0-city-wartime-rand-10","sev":"LOW","kind":"PAIR","why":"hook says the governing power must still decide whether to comply with the crown's requisition; C28424 says those in charge already signed the list","other":"C28424"}
+{"id":"C28406","town":"bar0-city-wartime-rand-10","sev":"LOW","kind":"PAIR","why":"lists salt as a commodity available from the fishing grounds; LAND gives Salt Flats depleted and TRADE imports salt (flats exhausted); C28396 says nothing more can be taken","other":"C28396"}
+{"id":"C29501","town":"bar0-city-wartime-rand-10","sev":"LOW","kind":"PAIR","why":"says the crisis has not reached the city's accounts; C28663 says the city pays for the war from money put by, C28628 says requisition hurts the bottom line","other":"C28663"}
+{"id":"DONE","lines":2422,"blocks":1,"flags":3}
