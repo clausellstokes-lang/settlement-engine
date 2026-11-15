@@ -247,9 +247,10 @@ const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
 // power-structure x4. The power-structure quartet is unmoved.
 // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record
 // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): cropFortune x2 -> x3 [fork|fork|fork], measured by A5's own print at
-// the golden's tree 8c11f73ea (total=141 direct=4 viaFork=137): the round's declared economy move (the economy read off the town's own
-// record) calls the stores' writer once more, by the same label-keyed fork, so it draws the same crop fortune (no stream moves; the
-// register's economyReconcilePass|economicState row reads 'varies' with it). The power-structure quartet is unmoved.
+// the golden's tree 8c11f73ea (total=141 direct=4 viaFork=137): the cause by `git log -S cropFortune`, 7ac689418 "the food record's
+// magic share is the share of the pounds published" (lane/tail-record, landed at JOIN-11 point 8, 4e7c96d56): the food record is
+// re-derived once more, by the same label-keyed fork, so it draws the same crop fortune (no stream moves; the register's
+// economyReconcilePass|economicState row reads 'varies' with it). The power-structure quartet is unmoved.
 const STORES_SEED = `${CENSUS_ROW._seed}::generateEconomy::food.cropFortune`;
 const STORES_VIAS = ['fork', 'fork', 'fork'];
 // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
