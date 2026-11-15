@@ -1,0 +1,15 @@
+{"id":"C23436","town":"bar0-thorp-calm-rand-3","sev":"MED","kind":"STATE","why":"says 'broadly legitimate'; GOVERNMENT legitimacy is Contested (score 39), and C23376 prints Contested","other":"C23376"}
+{"id":"C23568","town":"bar0-thorp-calm-rand-3","sev":"MED","kind":"PAIR","why":"says nobody keeps the peace; C23549 says the old families keep the peace and offenders answer to all the neighbours","other":"C23549"}
+{"id":"C23710","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"LACKS","why":"a busy street in a thorp of 21 people; no streets or crowds can be held","other":""}
+{"id":"C23707","town":"bar0-thorp-calm-rand-4","sev":"LOW","kind":"LACKS","why":"plural older lanes in a thorp of 21 people","other":""}
+{"id":"C23813","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"STATE","why":"fish sold daily from morning catch; LAND gives Fishing Grounds as depleted","other":""}
+{"id":"C23858","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"STATE","why":"table rests on salted fish; LAND gives Fishing Grounds as depleted","other":""}
+{"id":"C23820","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"STATE","why":"bulk sales to inland traders; TRADE exports none, made here none, INCOME Harvest only","other":""}
+{"id":"C23849","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"STATE","why":"port traffic keeps it prosperous; TRADE has no exports or imports and INCOME is Harvest 100%","other":""}
+{"id":"C24150","town":"bar0-thorp-calm-rand-5","sev":"MED","kind":"STATE","why":"says news came 'for generations'; the thorp is only 20 years old","other":""}
+{"id":"C24226","town":"bar0-thorp-calm-rand-5","sev":"MED","kind":"STATE","why":"says 'broadly legitimate'; GOVERNMENT legitimacy is Contested (score 39), C24160 prints Contested","other":"C24160"}
+{"id":"C24598","town":"bar0-town-calm-rand-3","sev":"MED","kind":"BROKEN","why":"'Backs Military/Guard': slash-joined roster label used as one power's name beside the verb Backs (also at C24628)","other":""}
+{"id":"C25137","town":"bar0-town-calm-rand-3","sev":"MED","kind":"PAIR","why":"says garrison and watch are well paid and well equipped; C25170 says accounts fall short on the watch's wages, C25150 says defenders cannot be kept equipped","other":"C25170"}
+{"id":"C25208","town":"bar0-town-calm-rand-3","sev":"MED","kind":"PAIR","why":"all four magic roles 'absent' while the page says magic is relied upon and Divine & Magical Healing runs on Spellcasting (minor)","other":"C25206"}
+{"id":"C23335","town":"bar0-thorp-calm-rand-3","sev":"LOW","kind":"STATE","why":"passers-by judging a craftsman's work; trade access isolated, no road, thorp of 12 with no crafts house","other":""}
+{"id":"DONE","lines":2386,"blocks":4,"flags":14}
