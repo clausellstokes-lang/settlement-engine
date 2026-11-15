@@ -177,6 +177,8 @@ const RULED = Object.freeze({
     'card — a ResourceChainCard, the partial variant of the same card.',
   'src/components/new/tabs/ResourcesTab.jsx :: fullExploited':
     'card — a ResourceChainCard, the fully-worked variant of the same card.',
+  'src/components/new/tabs/ResourcesTab.jsx :: famineFailed':
+    'card — a ResourceChainCard, the variant for the food a famine failed: the resource alone (TAIL-DISPLAY-CIVIC-3 V2).',
   // THE DM VIEW (ALLEGIANCE-CAR3, 2026-11-08; the allegiance design §9), the Power tab's DM panel:
   'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: view.answers':
     'card — a criminal power or house with its boss line and its handlers nested beneath.',

@@ -70,8 +70,11 @@ export function paperTruth(text, prosperity, read) {
  *   the guard line's patrol frames (`safetyProfile.js :: STANDARD_PATROL`) @returns {string}
  */
 export function patrolTruth(text, read, frames) {
-  const deps = /** @type {Array<{ severity?: unknown, institution?: unknown } | null>} */ (Array.isArray(read.tradeDependencies) ? read.tradeDependencies : []);
-  const cut = deps.some((t) => t?.severity === 'critical' && partitionDefenseInstitutions([{ name: String(t?.institution ?? '') }]).watch.length > 0);
+  const deps = /** @type {Array<{ severity?: unknown, institution?: unknown, impact?: unknown } | null>} */ (Array.isArray(read.tradeDependencies) ? read.tradeDependencies : []);
+  // TAIL-DISPLAY-CIVIC-3 V3: only a supply a crisis SEVERED ("Supply route severed. Operating at minimal capacity or shut
+  // down.", economicState.js); a town with no trade route runs on its stockpiles ("No trade access: running on existing
+  // stockpiles only.") and its watch walks its rounds (r2r-town-9: Very Safe, no crisis)
+  const cut = deps.some((t) => t?.severity === 'critical' && /^Supply route severed/.test(String(t?.impact ?? '')) && partitionDefenseInstitutions([{ name: String(t?.institution ?? '') }]).watch.length > 0);
   if (!cut) return text;
   const m = /^(?:The (.+?) (?:maintains? standard|walks? the usual|patrols? on a regular|(?:is|are) well paid, well equipped and patrols?)|You will see the (.+?) on the rounds)/.exec(text);
   const law = m && (m[1] || m[2]);
@@ -79,6 +82,34 @@ export function patrolTruth(text, read, frames) {
   const many = manyForce(law);
   const lead = [...frames(law), `The ${law} ${many ? 'are' : 'is'} well paid, well equipped and ${many ? 'patrol' : 'patrols'} properly. They come when called, and though some take bribes, it is not the custom.`].find((f) => text.startsWith(f));
   return lead ? `The ${law} ${many ? 'keep what rounds they can' : 'keeps what rounds it can'} while the supplies ${many ? 'they need are' : 'it needs are'} cut off.${text.slice(lead.length)}` : text;
+}
+
+/**
+ * THE PATROL A CRISIS LEAVES (TAIL-DISPLAY-CIVIC-3 V3, the chair's ruling of 2026-11-15): the ordinary patrol lines
+ * ("maintain standard patrol coverage", "walk the usual rounds", "patrol on a regular round", "on the rounds most hours";
+ * `safetyProfile.js :: STANDARD_PATROL`) and the well-paid line ("are well paid, well equipped and patrol properly. They
+ * come when called") presume no siege, an occupier who lets the watch walk, and an order hunger has not eroded. The
+ * Power tab's stability says each state in the same order (`power/governanceNarrative.js :: applyStressStability`:
+ * "Critical (under siege)", "Suppressed (under occupation …)", "Desperate — hunger is eroding order"); in it the slot
+ * keeps its draw and prints its twin, true in that state. None outside the three.
+ * @param {(type: string) => boolean} hasStress @returns {'siege' | 'occupied' | 'famine' | null}
+ */
+export function patrolCrisisOf(hasStress) {
+  return hasStress('under_siege') ? 'siege' : hasStress('occupied') ? 'occupied' : hasStress('famine') ? 'famine' : null;
+}
+
+/**
+ * @param {string} lawRef the force's noun @param {'siege' | 'occupied' | 'famine' | null} crisis
+ * @param {boolean} [paid] the well-paid line's twin (its pay and kit stand) @returns {string | null}
+ */
+export function patrolTwin(lawRef, crisis, paid = false) {
+  if (!crisis) return null;
+  const many = manyForce(lawRef);
+  const head = paid ? `The ${lawRef} ${many ? 'are' : 'is'} well paid and well equipped, but ` : `The ${lawRef} `;
+  if (crisis === 'siege') return `${head}${many ? 'are' : 'is'} held for the defence, and few patrols can be spared from it.`;
+  if (crisis === 'occupied') return lineText({ text: `${head}${many ? 'walk' : 'walks'} only the rounds the occupiers allow.`, needs: ['crisis: occupation'] });
+  return paid ? `${head}hunger is eroding the order ${many ? 'they keep' : 'it keeps'}.`
+    : `${head}still ${many ? 'walk' : 'walks'} the rounds, but hunger is eroding the order ${many ? 'they keep' : 'it keeps'}.`;
 }
 
 /**
@@ -117,5 +148,27 @@ export function settleRosterCrimeLines(entries, seats, powers) {
     if (entry?.type === 'Criminal governance' && !governs && desc.endsWith(VACUUM)) return { ...entry, desc: desc.slice(0, -VACUUM.length) + VACUUM_TWIN };
     if (entry?.type === 'Background crime' && powers && desc.startsWith(NO_DOMINANT)) return { ...entry, desc: NO_DOMINANT_TWIN + desc.slice(NO_DOMINANT.length) };
     return entry;
+  });
+}
+
+/** The deserter lines (TAIL-DEFECON's small-place line and the full one; `safetyProfile.js`, wartime). */
+export const DESERTERS_FED_TINY = 'Deserters passing through need food and discretion, and some here give both. Officially classified as harbouring criminals.';
+export const DESERTERS_FED = 'Deserters passing through require food, forged papers, and discretion. A small industry has emerged to provide all three. Officially classified as harbouring criminals.';
+/** @type {Readonly<Record<string, string>>} */
+const DESERTERS_UNFED = Object.freeze({
+  [DESERTERS_FED_TINY]: 'Deserters passing through need shelter and discretion, and some here give both. Officially classified as harbouring criminals.',
+  [DESERTERS_FED]: 'Deserters passing through require shelter, forged papers, and discretion. A small industry has emerged to provide all three. Officially classified as harbouring criminals.',
+});
+
+/**
+ * UNDER HUNGER NO LINE OFFERS FOOD (TAIL-DISPLAY-CIVIC-3 V3, the chair's law): where the record holds hunger
+ * (`hungerIn`, read at assembly by `safetyProfile.js :: settleCrimeLinesToSignal`), the deserters are given shelter, not
+ * food (a famine thorp with a tenth of a month in store, r2s-wartime-thorp-2). Draw-free; an entry that changes is copied.
+ * @template {{ type?: unknown, desc?: unknown }} C @param {C[]} entries @returns {C[]}
+ */
+export function settleDesertersUnfed(entries) {
+  return entries.map((entry) => {
+    const twin = entry?.type === 'deserter networks' ? DESERTERS_UNFED[String(entry.desc)] : undefined;
+    return twin ? { ...entry, desc: twin } : entry;
   });
 }

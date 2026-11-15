@@ -25,6 +25,7 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
+import { powerNameAfterArticle, powerSentenceName } from './powerSentenceName.js';
 import { seatKeeperOf } from '../people/seatKeeper.js';
 
 /** @param {unknown} v @returns {string} */
@@ -32,14 +33,15 @@ const text = (v) => (typeof v === 'string' ? v.trim() : '');
 
 /**
  * A power's name as a sentence carries it: a trailing parenthetical qualifier ("Merchant Guilds
- * (dominant)") is the roster's annotation, not the name; a name that opens on "The" keeps it, lowered
- * mid-sentence; every other name takes "the".
+ * (dominant)") is the roster's annotation, not the name, and a catalogue label takes its prose form
+ * (`powerSentenceName.js`); a name that opens on "The" keeps it, lowered mid-sentence; every other name takes "the".
  * @param {string} name @param {boolean} [start] @returns {string}
  */
 export function powerNameInProse(name, start = false) {
-  const bare = text(name).replace(/\s*\([^)]*\)\s*$/, '');
-  if (!bare) return '';
-  const body = /^the\s/i.test(bare) ? bare.replace(/^the\s/i, '') : bare;
+  // TAIL-DISPLAY-CIVIC-3 V1 (the chair's ruling of 2026-11-15): the name is the one leaf's prose form, its own "The"
+  // struck for the article this sentence sets ("Military/Guard" -> "the Guard", never "the Military/Guard")
+  const body = powerNameAfterArticle(text(name));
+  if (!body) return '';
   return `${start ? 'The' : 'the'} ${body}`;
 }
 
@@ -270,7 +272,7 @@ function fractureBlocsOf(s, already) {
       .map((f) => text(/** @type {{ faction?: unknown }} */ (f).faction)).filter(Boolean);
     if (!of.length) continue;
     names.push(...of);
-    lines.push(reading.line(capFirst(listOf(of.map((n) => powerNameInProse(n)))), of.length > 1 || pluralPowerName(of[0])));
+    lines.push(reading.line(capFirst(listOf(of.map((n) => powerNameInProse(n)))), of.length > 1 || pluralPowerName(powerSentenceName(of[0]))));
     if (reading.withdrawn) withdrawn = true;
   }
   return { lines, withdrawn, names };
@@ -332,7 +334,10 @@ export function governanceAccountOf(settlement, opts = {}) {
     // THE VACANCY IS THE FIRST FACT (the chair's condition (b), 2026-11-09): 65 of the 1,000. Then what
     // fills the gap, from the record: the claimants it names, else the power governing without a head.
     sentences.push(`No one holds the seat at ${place}.`);
-    const claimants = Array.isArray(chain.absence.claimants) ? chain.absence.claimants.map(text).filter(Boolean) : [];
+    // TAIL-DISPLAY-CIVIC-3 V1: a claimant power's catalogue label takes the leaf's prose form ("Noble Claimant (Senior
+    // Line)" -> "The Senior Line"), its "The" lowered after the first; a claimant's own name is left as it is
+    const claimants = (Array.isArray(chain.absence.claimants) ? chain.absence.claimants.map(text).filter(Boolean) : [])
+      .map((n, i) => { const said = powerSentenceName(n); return i > 0 ? said.replace(/^The /, 'the ') : said; });
     // R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #pf-260, rpf-city-succession_void+politically_fractured-13): "governs without
     // a head" beside the same tab's "Acting Governor Iulia Laenas keeps the seat meanwhile". The keeper has one home
     // (people/seatKeeper.js :: seatKeeperOf); where one keeps the seat the power is not headless, and the tab's seat row
@@ -354,11 +359,13 @@ export function governanceAccountOf(settlement, opts = {}) {
 
   // 3 + 4. THE POWERS THAT HAVE BROKEN WITH IT, AND WHAT THAT COSTS THE HALL.
   const estranged = estrangedPowersOf(s, governing);
+  // TAIL-DISPLAY-CIVIC-3 V1: each name's number is read off the form the sentence prints ("Third Bloc (Neutrals)" -> "The
+  // Neutrals": "their"), here and in the fracture's blocs
   /** @param {string} tie @returns {{ names: string, plural: boolean } | null} */
   const named = (tie) => {
     const of = estranged.filter((e) => e.tie === tie);
     if (!of.length) return null;
-    return { names: capFirst(listOf(of.map((e) => powerNameInProse(e.name)))), plural: of.length > 1 || pluralPowerName(of[0].name) };
+    return { names: capFirst(listOf(of.map((e) => powerNameInProse(e.name)))), plural: of.length > 1 || pluralPowerName(powerSentenceName(of[0].name)) };
   };
   const capture = named('capture');
   const corrupted = named('corrupted');
