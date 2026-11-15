@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 936,
-    "printOneLine": 665,
-    "measuredUnder30Draws": 146,
+    "pools": 948,
+    "printOneLine": 670,
+    "measuredUnder30Draws": 150,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:institutionServices:Access to external mill.Grain milling (a day away)",
@@ -18,7 +18,14 @@
         "pool": "ledger:stressNarrative:STRESS_SUMMARY_SIBLINGS",
         "top1": 0.9692,
         "top5": 1,
-        "draws": 162,
+        "draws": 324,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:institutionServices:Fish market.Wholesale trade",
+        "top1": 0.9686,
+        "top5": 1,
+        "draws": 414,
         "lines": 2
       },
       {
@@ -50,11 +57,25 @@
         "lines": 2
       },
       {
+        "pool": "ledger:npcData:NPC_HOOK_SIBLINGS",
+        "top1": 0.8772,
+        "top5": 1,
+        "draws": 407,
+        "lines": 2
+      },
+      {
         "pool": "ledger:institutionServices:Daily markets.Fresh produce",
         "top1": 0.8734,
         "top5": 1,
         "draws": 450,
         "lines": 2
+      },
+      {
+        "pool": "ledger:institutionDescVariants:city|Crafts|Cartographer's guild",
+        "top1": 0.8396,
+        "top5": 1,
+        "draws": 293,
+        "lines": 4
       },
       {
         "pool": "ledger:cultureProfiles:slavic.foodways",
@@ -69,27 +90,6 @@
         "top5": 1,
         "draws": 809,
         "lines": 3
-      },
-      {
-        "pool": "ledger:institutionServices:River boatyard.Boat repair",
-        "top1": 0.8122,
-        "top5": 1,
-        "draws": 165,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:factionLabelSiblings:FACTION_LABEL_SIBLINGS",
-        "top1": 0.8098,
-        "top5": 1,
-        "draws": 1593,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:institutionServices:Mine (open cast).Raw extraction",
-        "top1": 0.8063,
-        "top5": 1,
-        "draws": 289,
-        "lines": 2
       }
     ],
     "secondWave": [
@@ -5767,6 +5767,78 @@
       ],
       "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)",
       "lines": 11
+    },
+    "ledger:ARRIVAL_SENSES.stone.lines": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.brunt": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.instigator": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.lever": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.treater": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:governingStressVignettes:OCCUPIED_SEAT": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:DESC_LATE_SIBLINGS": {
+      "top1": 0.6364,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Crafts|Cartographer's guild": {
+      "top1": 0.8396,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Crafts|Smelter": {
+      "top1": 0.4885,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Crafts|Cartographer's guild": {
+      "top1": 0.8847,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Crafts|Smelter": {
+      "top1": 0.3427,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Crafts|Smelter": {
+      "top1": 0.591,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }
