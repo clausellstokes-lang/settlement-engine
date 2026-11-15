@@ -256,18 +256,16 @@ export function govCriminalRelation(gov, crim, crimCapture, publicLeg) {
     narrative = `${say(crim)} has bought key people in ${say(gov)}. Its own crimes go unpunished, and its rivals are the ones who get arrested.`;
   } else if (crimCapture === 'equilibrium') {
     type = 'tense';
-    // TAIL-POWERS-B: under a legitimacy crisis (the cause of the row's 'escalating') the crisis is said, not denied
-    if (publicLeg.isLegitimacyCrisis) {
-      narrative = `${say(gov)} leaves ${say(crim)} alone because stamping it out would cost more than it saves. With the hall's own authority in question, ${say(crim)} grows bolder each season.`;
-    } else {
-      narrative = `${say(gov)} leaves ${say(crim)} alone because stamping it out would cost more than it saves. ${say(crim)} keeps its head down, because it needs the hall standing to feed off it.`;
-    }
+    narrative = `${say(gov)} leaves ${say(crim)} alone because stamping it out would cost more than it saves. ${say(crim)} keeps its head down, because it needs the hall standing to feed off it.`;
   } else {
     type = 'competitive';
     narrative = `${say(gov)} is hunting ${say(crim)} in earnest but not catching all of it; ${say(crim)} pulls back and regroups, and does not go away.`;
   }
 
-  direction = publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
+  // TAIL-POWERS-B (the chair's ruling P13(2)): THE DIRECTION READS THE CAPTURE RUNG: the truce rung (equilibrium: the two
+  // tolerate each other) is 'stable' whatever the legitimacy; a crisis escalates only a rung the hall is fighting or losing.
+  direction = crimCapture === 'equilibrium' ? 'stable'
+            : publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
             : publicLeg.isEndorsed          ? 'declining'     // strong governance suppresses crime
             : 'stable';
 
