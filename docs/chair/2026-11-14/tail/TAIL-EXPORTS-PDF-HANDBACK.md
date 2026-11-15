@@ -380,3 +380,24 @@ list through a helper and writes no list; green).
   and renders one PDF section by calling its function component (the batch tests' `text()`), writing to a file
   (console output is silenced in this repo's vitest config).
 - A census run reads the tree it is given live at worker start: never edit the tree while its render runs.
+
+## The chair's answer after the hand-back (2026-11-15 02:10 UTC; vetoable by the owner), for the successor
+
+1. NO VETO on batch 2's two silences: the EXPORT badge by the tab's printed name (859 printings) and "Thieves' Guild
+   (Powerful)" 45 -> 0. Both stand.
+2. THE TIP FOR THE ELEVEN PARKED ROWS: the joined line at **d817736d8** holds the leaf's second cause ("Short of
+   <input>.", services 8df172bf0) and the journal's calls. THE SUCCESSOR'S FIRST ACT is now: merge
+   origin/lane/join-2026-11-14 AT d817736d8 (the only merge; a merge commit of its own; `npm ci` if the lockfile moved),
+   re-take the BEFORE at the merged tree, and cure the eleven (06926, 06925, 06924, 06927, 14345, 23255, 10827, 11208,
+   17048, 06946, 29819) through the leaf, as the tab does. Then widest first (ENTREPÔT 08499); a row in fewer than five
+   towns waits.
+3. **04297 "Agricultural Rents"** (REST; 360 towns read; the reader's town r2r-thorp-58, a thorp of 7 with no landlord
+   power): an INCOME SHARE of the record, `economicState.incomeSources[]`, written by
+   `src/generators/economy/economicState.js` (the `incomeBuild` seed, lines 69-81: every thorp, hamlet and village takes
+   "Agricultural Rents", 65%, "Payments in kind or coin from tenant farmers; the primary revenue at this scale."; a
+   town without a market takes it at 30%), sibling-read by `src/generators/economy/incomeLineSiblings.js` (its only-line
+   twin) and keyed to a tax form by `src/domain/worldPulse/treasury.js :: INCOME_SOURCE_FORMS` ('land_rents', the
+   reader's traced writer). The PDF (Economics & Trade, INCOME SOURCES) and the Economics tab print the record's
+   `source` and `desc` alike: neither is this group's to change. At this seat's merged tree (eb054d53f) it still
+   printed; the rename to "Harvest" where no landlord stands is the seat that holds `economicState.js` (generators:
+   a declared move of the record). The PDF needs no change of its own when it lands: it prints the record's name.
