@@ -235,7 +235,31 @@ stale 2, exit 1 at the base too); grid 2 falls as at the base. The golden master
 
 ### THE PAGE (one census before at fb341090c, one after at e6700483b)
 
-PENDING at this push (the after census was running): see the next push of this file.
+`census3.sh` both exit 0 (before at fb341090c, after at e6700483b: C1-E + D19; D25 at 28f86423c is measured on the
+record only). The tabs (`inventory.py`): sentences 29,872 -> 29,873; gone 11, new 12, fewer 19, more 24, moved 1. The
+exports (`SURFACES=PDF,Journal`): 35,779 -> 35,784; gone 86, new 91 (almost all "Exports: …" list lines).
+- LOST, each a cured good or a pill fold: Pilgrim hospitality 77 -> 56 (PDF 79 -> 56), Sea salt 43 -> 26 (48 -> 28),
+  "Waterborne freight services (cargo, pilotage)" 68 -> 57 (D19), "Top export: Sea salt" 15 -> 5, "Dyed cloth EXPORT"
+  8 -> 3, the glass-sand card's "Partial" 5 -> 0 (the glass blanks export was its only working).
+- SILENCED LINES READ: "Also earned, with no share recorded: Tolls, taken at the gate on the road traffic." 9 -> 7
+  (r2r-town-20, r2s-plague_onset-town-1: "Town walls" and no gate house, the record's own no-gate reading, so the
+  silence is true). The export-count lines ("Buyers from outside come to <N> for more than # thing" 89 -> 87; "There is
+  always something going out" 92 -> 90) follow the shorter lists.
+- THE INHERITORS (33 on the tabs, 121 on the PDF/journal), READ:
+  - "Salt for preservation" (17 tabs / 20 PDF), "Top export: Salt for preservation" 10, and "Most of what it sells is
+    salt for preservation" 9 are the salt twin that D25 (28f86423c) takes off the record after this census's tree.
+  - "Airship freight services (cargo, mooring)" 11 (D19; the veto list).
+  - "Subsistence — survival economy" 7 (the complexity label reads the exports: thorps and hamlets whose only export
+    was unworked) and "gets by on a subsistence living" 2.
+  - The glass-sand card "Unexploited / Needs: Glassblower / No # here works the glass sand near <N>." 5: true (no
+    glassblower).
+  - "Ask what this thorp sells and you get # answer" 3; "Rare spices and exotic dyes (transit)" 4 (merchant guilds'
+    entrepôt).
+  - The arrival lines: "Flour dust lies pale on the doorsteps" (r2r-city-57: Mills, Bakers), "Nets hang drying on
+    poles" (r2r-hamlet-21: a Fisher's landing), "Curls of shavings … from a carpenter's bench" (r2r-thorp-41: a
+    Woodcutter's camp, a near reading). Each house stands.
+  - Pill folds of goods still exported ("Grain surplusHealing waters (bottled)", "Healing waters (bottled)Coal").
+  - 0 false inheritors besides the salt twin, which D25 cures.
 
 ## What is left of this file's rows (HANDED BACK at the budget, 2026-11-15 ~01:25 UTC, by time: ~70 minutes)
 
