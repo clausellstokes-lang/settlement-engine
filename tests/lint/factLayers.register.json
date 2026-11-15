@@ -304,26 +304,6 @@
    ],
    "crime": [
     {
-     "line": ".filter((c) => c?.needKey === 'criminal_economy' && RUNNING_CHAIN_STATUS.includes(String(c?.status ?? '')));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasDiffuse = names.some((n) => n.includes('fence') || n.includes('bandit') || n.includes('outlaw'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasGuild = names.some((n) => n.includes(\"thieves' guild\") || n.includes('thieves guild'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
-     "line": "const hasSyndicate = names.some((n) => n.includes('multiple criminal') || n.includes('underground city') || n.includes('front business'));",
-     "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
-    },
-    {
      "line": "if (n.includes(\"thieves' guild\") || n.includes('thieves guild'))",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },

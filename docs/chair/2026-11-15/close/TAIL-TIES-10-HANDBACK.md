@@ -39,7 +39,36 @@ THE BROTLI +162 IS NAMED, NOT HIDDEN. It is the minifier's renaming, not code:
 The tests on the pinned tree: `engineCoreLazyEdge` plain AND flagged green (3/3). `engineChunkLazy` and `cultureProfilesLazy` are green
 pre-build. Their VERIFY_DIST arms are run in part (3). eslint `vite.config.js`: 0.
 
-## Part (2): the READERS arm. In progress
+## Part (2): the READERS arm
+
+**(2a) The leaf is the crime family's home.** DONE.
+- `tests/lint/factLayers.shared.mjs :: FAMILIES`: crime's homes gain `src/domain/facts/criminalStructureKey.js`. The line's comment names
+  T29 and the register row it follows (`factLayers.js :: LEAVES`, the crime row). Nothing else of that file changed.
+- The 6 crime rows that rose under the leaf fell. Five of them were banked under `defenseDisplay.js`: `hasGuild`, `hasSyndicate`,
+  `hasSemiOrg`, `hasDiffuse` and the running-chain `.filter`. The sixth, `oneOrganisationRules`'s `seats.some(… 'criminal' …)`, was an
+  UNBANKED rise of the line's own at the merge point.
+
+**MY CALL (vetoable), named.** Those five rows stayed banked under `defenseDisplay.js`, and they read nowhere there now. The walker
+holds the tree EQUAL to the register (`readerArm()` toEqual the banked lines), so they were STALE. The receipt says "no row
+your cut moved is left fresh or stale", so they are removed in the same commit.
+- They were removed by the door's own fall rule, restricted to the moved rows: a banked row the tree no longer reads in its file
+  AND whose line the arm reads in the leaf. The scratch script imports `factLayers.shared.mjs`'s `readerArm`, `readsFamily`,
+  `outsideHomeCalls` and `lineKey`. The register round-trips byte-identically before the write. The door's own `--shrink` refuses while
+  the joined line's 30 rises stand.
+- This is a pure shrink (crime 9 -> 4 for `defenseDisplay.js`). These are not the "two rows named", and the chair may veto it.
+
+The door (`node scripts/fact-layers-door.mjs`), each run to a file:
+
+| | rises | falls |
+|---|---:|---:|
+| the merge point `b805b1de` | 31 | 19 |
+| after (2a) | 30 | 20 |
+
+The difference against the merge point is the market pair only: `defenseDisplay.js` market FALL and `criminalStructureKey.js`
+market RISE, the `hasSemiOrg` line, which (2b) re-keys. The `leaves crime: npcs` rise and the `seats.some` rise fell. Every other row is the
+joined line's own, unchanged.
+
+**(2b) The market row re-keyed by identity.** After `git fetch` and a merge of `lane/join-2026-11-14`'s tip. See below.
 
 ## Part (3): the proofs. In progress
 
