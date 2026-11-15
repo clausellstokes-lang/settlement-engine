@@ -100,3 +100,46 @@ describe('B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1)', ()
     expect(/** @type {any} */ (POLITICAL_FLAVOR.stable[7])(quiet)).toMatch(/^Nothing has ever forced this place to change much/);
   });
 });
+
+/**
+ * FA — A FOUNDER AND AN ORIGIN ROW THAT CANNOT BOTH BE (the chair's ruling (N3); RECORD-MEASURE-1 class a, 154 of 720):
+ * an Origin row that names the GROUP that began the place (herders, fishers, a military post, a religious settlement, a
+ * fair's traders) stands only beside a founder of that kind (`foundingRowAdmits.js :: ORIGIN_AGENT_KINDS`); a refused
+ * row resolves draw-free onward to a row of its pool that agrees, else no Origin row (silence, the rule's own answer).
+ */
+describe('B2 the Origin row\'s group agrees with the founder (TAIL-NARRATIVE FA)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** [seed, the founder, the refused row, the row now (null: no Origin row)] */
+  const CURED = /** @type {Array<[string, RegExp, RegExp, RegExp | null]>} */ ([
+    ['r2r-thorp-2', /^a healer who stopped/, /customs post/, /rest stop for traveling caravans/],
+    ['r2r-town-9', /^merchants recognising/, /frontier outpost/, /valuable resource deposit/],
+    ['r2s-famine-town-3', /^religious authorities/, /toll collection point/, /major overland trade route/],
+    ['r2s-under_siege-village-2', /^refugees fleeing war/, /two rival mining operations/, /pass could only be crossed safely/],
+    ['r2s-occupied-hamlet-0', /^a household that settled first/, /defensive stronghold/, /mining camp that became permanent/],
+    ['r2s-monster_pressure-metropolis-3', /^the slow accretion/, /defensive stronghold/, /mining camp that became permanent/],
+    ['r2s-politically_fractured-thorp-2', /^a discharged soldier/, /herders gathered/, null],
+    ['r2r-city-36', /^a merchant coalition/, /sacred grove/, null],
+  ]);
+  it('the row the founder cannot be is gone; the slot holds an agreeing row or none (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([seed, founder, gone, now]) => {
+      const f = born(seed).history?.founding || {};
+      expect(String(f.foundedBy), `${seed}: the founder`).toMatch(founder);
+      if (now) expect(String(f.reason), `${seed}: the row now`).toMatch(now);
+      else expect(f.reason ?? null, `${seed}: no Origin row`).toBeNull();
+      expect(String(f.reason), `${seed}: the refused row`).not.toMatch(gone); // anchored: the two lines above assert the founding printed
+    }), 'the row the founder cannot be is gone');
+  });
+  const KEEP = /** @type {Array<[string, RegExp, RegExp]>} */ ([
+    ['r2r-thorp-37', /^a pair of siblings/, /herders gathered/],
+    ['r2r-town-18', /^a noble granted lands/, /naval base/],
+    ['r2r-thorp-33', /^a single extended family/, /sacred grove/],
+    ['r2r-village-50', /^escaped serfs/, /mining camp that became permanent/],
+  ]);
+  it('a group row beside a founder of its kind still prints (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, founder, kept]) => {
+      const f = born(seed).history?.founding || {};
+      expect(String(f.foundedBy), `${seed}: the founder`).toMatch(founder);
+      expect(String(f.reason), `${seed} keeps its row`).toMatch(kept);
+    }), 'a group row beside a founder of its kind still prints');
+  });
+});

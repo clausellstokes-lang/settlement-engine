@@ -64,7 +64,7 @@ THE LINES NEW OR REWORDED (the veto list; read where they print in the after cen
 - "… but its orders go unanswered, and whoever first offers something better will find people ready to follow." (r2r-thorp-25, r2r-village-29, r2s-insurgency-town-2).
 - "The challenge to <gov> in <N> comes from inside: dues held back, decisions left unmade, a few households drawing together. …" (r2s-insurgency-thorp-3).
 - "… cannot retake it without destroying what made it worth holding." (r2s-slave_revolt-thorp-1).
-- "<N> has drawn its edges inward (fields left unworked, a mill kept turning for its buyers) …" (r2s-monster_pressure-village-3).
+- "<N> has drawn its edges inward (fields left unworked, a mill kept turning for its buyers) …" (r2s-monster_pressure-village-3, r2s-monster_pressure-metropolis-0: both sell flour). CORRECTION: batch 1's after census was born before this twin took its final words (it printed "the outlying tracks closed" there); the committed tree prints "a mill kept turning for its buyers" in the same two towns (births at b52481302: `pressureSentence` differs in exactly those two), and FA's census reads it.
 - "<P> took the loans and is now repaying them, and nobody here has forgotten whose decision the borrowing was." (r2s-indebted-metropolis-0, thorp-1, city-3).
 - "Since the <source> failed, whoever holds the food in <N> holds the power, and its strongest powers are fighting over the stores." (r2s-famine-town-1).
 - "By <gov>, which can neither turn people away nor find them all work, …" (r2r-city-37, city-3, metropolis-25, r2s-mass_migration-thorp-1).
@@ -77,3 +77,79 @@ GATES: eslint 0; typecheck:domain:strict 1113/1113; typecheck:ratchet 167/167; p
 
 NAMED FOR OTHER LANES: the trade writer (exports of the good a famine failed: 18099 livestock, 18092 fish, in the same towns); `historyCoherence.js` / the events' writer (B00015); `governingStressVignettes.js` (20302).
 
+## Batch FA — `src/generators/narrative/foundingRowAdmits.js` (the chair's ruling (N3), placed first; RECORD-MEASURE-1 class a)
+
+(N3), copied: A FOUNDER AND AN ORIGIN ROW THAT CANNOT BOTH BE: 154 of 720 towns at the joined line; the Origin row names a GROUP that began the place (herders, fishers, a military post, a religious settlement, a fair's traders) and the founder is not of that kind. FA: the agent rows join `oneFounderRow` with a kind table; a row whose agent the founder cannot be resolves draw-free onward to a row that agrees. THE MEASURE: `history.founding.reason` ONLY moves, in 154 towns; the class 154 to 0; 48 towns land on no Origin row (silence accepted; listed for new rows later); any other field moving is a STOP. (N4): FA's pin re-keyed by identity; the golden NAMED, not re-taken.
+
+The patch (`docs/chair/2026-11-14/probes/RECORD-MEASURE-1/fa.patch` on `lane/record-measure-2026-11-14`) applied clean at b52481302; its names given the file's form (`ORIGIN_AGENT_KINDS`, `agentAgrees`, the import beside the file's others); the logic unchanged.
+
+THE MEASURE MET: field diff by family (births at b52481302 -> births at FA, 720): `history.founding.reason` in 154 towns, nothing else. RECORD-MEASURE-1's classes.mjs: a_founder_vs_origin 154 -> 0; every other class unchanged (b1 16, b2 12, c1 522, c2 302, c3 94, d 153, e 17, f 24, g 60, h 167, i 106, j 367, k 268). Towns with no Origin row 51 -> 99: the 48 new SILENT towns (for new rows later): r2r-city-22 r2r-city-25 r2r-city-36 r2r-city-40 r2r-city-44 r2r-hamlet-15 r2r-hamlet-26 r2r-hamlet-30 r2r-hamlet-37 r2r-metropolis-1 r2r-metropolis-20 r2r-metropolis-41 r2r-thorp-14 r2r-thorp-22 r2r-thorp-34 r2r-thorp-40 r2r-thorp-42 r2r-thorp-49 r2r-thorp-59 r2r-thorp-9 r2r-town-17 r2r-town-43 r2r-town-48 r2r-town-5 r2r-village-10 r2r-village-21 r2r-village-3 r2r-village-51 r2s-indebted-city-0 r2s-indebted-town-3 r2s-infiltrated-thorp-0 r2s-insurgency-city-0 r2s-insurgency-city-3 r2s-insurgency-thorp-0 r2s-monster_pressure-hamlet-1 r2s-monster_pressure-town-0 r2s-occupied-metropolis-0 r2s-politically_fractured-thorp-2 r2s-politically_fractured-town-3 r2s-recently_betrayed-hamlet-0 r2s-religious_conversion-city-3 r2s-slave_revolt-town-2 r2s-slave_revolt-village-1 r2s-succession_void-metropolis-0 r2s-succession_void-town-3 r2s-under_siege-city-1 r2s-wartime-town-1 r2s-wartime-village-0.
+
+THE PAGE (inventory diff, batch 1's census -> FA's census; the two mill lines in it are batch 1's correction above): 29,892 -> 29,890. Gone: "was built where two rival mining operations agreed …" (11, as measured), "a frontier outpost that outlasted …" (2). Fewer: herders 31 -> 13, defensible position on the road 18 -> 6, defensive stronghold 11 -> 2, naval base 12 -> 4, river fishery camp 14 -> 7, customs post 9 -> 4, logging camp 19 -> 14, fishing village into a maritime hub 6 -> 1, seasonal fair 6 -> 3. THE INHERITORS, read: each a row of its town's own pool whose own test holds: the pass guides +18 (every one a mountain town), the soil +15, the overland route +11, the mining camp +7, the river ford +6, the toll point +6, the harbour fish prefer +6, the agricultural market +6, the caravans' rest stop +5. Matches the chair's measured effect (N4).
+
+GUARD: `tests/generators/tailNarrativeRows.test.js` B2: 8 cured towns (a healer beside a customs post; merchants beside a frontier outpost; religious authorities beside a toll point under a famine; refugees beside two mining operations under a siege; a household beside a stronghold under an occupation; the slow accretion beside a stronghold in a metropolis; a discharged soldier beside the herders, now silent; a merchant coalition beside a sacred grove, now silent), red at the base 8 of 8; 4 KEEP towns (siblings beside the herders, a noble beside a naval base, a family beside a sacred grove, escaped serfs beside a mining camp), green before and after. PIN RE-KEYED BY IDENTITY (N4): `foundingWalkLandsTested.test.js` W3's herders guard rr3x-metropolis-plague_onset-crossroads-0 (its founder, the slow accretion of three settlements, cannot be herders) -> r2r-thorp-37 (the herders beside a pair of siblings); the guard not loosened.
+GATES: eslint 0; domain-strict 1113/1113; ratchet 167/167; grid identical; walker identical to batch 1 (fresh 147, stale 2). Tests naming the founding files (45 files): `generatorGoldenMaster` red, CARRIED (red at the base; the golden NAMED, not re-taken); `timelineVariety` timed out once under the census's load and passes alone (5/5).
+DECLARED MOVE: the founding-prose family, `history.founding.reason` in 154 towns (above); nothing else.
+
+## The exports' rows (CHAIR NOTE X9; `read-all-3/WORKLIST3-NARRATIVE`, 38 rows, 2 HIGH)
+
+Measured with `SURFACES=PDF,Journal inventory.py`, the base census -> batch 1's (35,779 -> 35,791 sentences). Batch 1's writer cures reach both HIGH rows: 20759 "Nothing has ever forced this place to change much" 7 -> 0; 08875 "nobody expects it … the Siege" 12 -> 10 (the one false town gone; the other a plague city's true line, as on the tabs). Also: 15690 "Little has happened here" 4 -> 0; 29068 "made its name in trade … Iron Dispute" 4 -> 3; 22423 "Records here are kept carefully" 26 -> 22 (silenced true, as on the tabs). LEFT, NAMED (not verified by this seat; the read's header lacked seats and `history.currentTensions`): every other row, one line each, towns before -> after batch 1:
+
+```
+08875 HIGH POLITICAL_FLAVOR 12->10 Every plan made here now allows for the Siege happening again; nobody 
+20759 HIGH POLITICAL_FLAVOR 7->0 Nothing has ever forced this place to change much.
+22398 MED ORIGIN_POOLS 104->104 Reason settled: Sited on a route already worn deep before anyone built
+22383 MED ORIGIN_POOLS 67->67 Reason settled: Founded roadside, where the day is measured in traffic
+22400 MED ORIGIN_POOLS 56->56 Reason settled: The road was here first.
+01687 MED POLITICAL_FLAVOR 38->39 The Siege is why this place looks as it does: it stood here before, bu
+22373 MED ORIGIN_POOLS 35->35 Reason settled: Built along the river: water access shapes every econo
+22397 MED ORIGIN_POOLS 34->34 Reason settled: Sited at the water's edge because the river was the on
+22379 MED ORIGIN_POOLS 27->27 Reason settled: Founded at a junction on the oldest logic there is: wh
+22374 MED ORIGIN_POOLS 26->26 Reason settled: Built at a major crossroads, and trade comes in on eve
+22423 MED POLITICAL_FLAVOR 26->22 Records here are kept carefully and disputes settled by precedent; peo
+22370 MED ORIGIN_POOLS 18->18 Reason settled: A road settlement: it makes its living from other peop
+21093 MED POLITICAL_FLAVOR 18->18 Outsiders see a busy market; the people who live here know the stories
+22388 MED ORIGIN_POOLS 16->16 Reason settled: It exists because travellers had to stop somewhere, an
+00748 MED STRESS_DESCS.slave_revolt 15->15 The Great Fire (18 years ago): Beginning in the lower districts, the b
+22387 MED ORIGIN_POOLS 14->14 Reason settled: Isolated, and running a shortfall it cannot farm its w
+22375 MED ORIGIN_POOLS 12->12 Reason settled: Built on the shore, by people who meant to trade by wa
+31876 MED genArrivalDetail 9->9 by securing an exclusive charter before competitors could react
+13045 MED genArrivalDetail 9->9 How it was overcome: by securing an exclusive charter before competito
+29065 MED POLITICAL_FLAVOR 8->8 This place made its name in trade, not war, and the Economic Divide sh
+22366 MED ORIGIN_POOLS 8->8 Reason settled: A coastal seaport whose existence is inseparable from 
+27503 MED STRESS_INSTITUTION_EFFECTS.needs 5->5 The original contract that created the debt was based on projections t
+29068 MED POLITICAL_FLAVOR 4->3 This place made its name in trade, not war, and the Iron Dispute showe
+15690 MED POLITICAL_FLAVOR 4->0 Little has happened here worth writing down, and the people here are p
+11946 MED STRESS_INSTITUTION_EFFECTS.excludes 4->4 Has been making personal side payments to the creditor's representativ
+23822 MED POLITICAL_FLAVOR 3->3 Several important events, none of them decisive.
+14686 MED POLITICAL_FLAVOR 3->3 Its character built up slowly, with no single break, and that makes it
+15278 MED STRESS_INSTITUTION_EFFECTS.excludes 3->3 Knows the debt contains a clause that transfers significant civic asse
+28582 MED STRESS_INSTITUTION_EFFECTS.excludes 2->2 Their family left last week: Huilan Chen saw them loading the cart.
+11964 MED STRESS_INSTITUTION_EFFECTS.succession_void 2->2 Has been quietly removing records from the archive that would complica
+11999 MED STRESS_INSTITUTION_EFFECTS.needs 1->1 Has documentation proving the famine was caused by export decisions ma
+22396 MED ORIGIN_POOLS 1->1 Reason settled: Set apart from the trade roads.
+12002 MED STRESS_INSTITUTION_EFFECTS.needs 1->1 Has documentation proving the famine was caused by export decisions ma
+23385 MED STRESS_INSTITUTION_EFFECTS.needs 1->1 Secret): Has documentation proving the famine was caused by export dec
+12004 MED STRESS_INSTITUTION_EFFECTS.needs 1->1 Has documentation proving the famine was caused by export decisions ma
+22393 MED ORIGIN_POOLS 1->1 Reason settled: Off the trade routes entirely.
+22394 MED ORIGIN_POOLS 1->1 Reason settled: Set apart from the trade roads, on ground that does no
+27424 MED POLITICAL_FLAVOR 1->1 The offices here are filled and the seals are real, but people still a
+```
+
+## What is left of the worklist (verified notes for the next seat)
+
+- ORIGIN_POOLS (`settlementOriginProse.js`, 20 rows, 350 towns; the exports add 15): verified by the record in this seat's scratch, not cured. STRUCK on the record: 09400 "Founded roadside" (place, not cause: a farmland grant can lie on a road; a siege is already refused), B20740 "The road was here first" (place), 23205 road[0] "Trade flows in" (index 0, the pre-widening sentence; the occupation's and the plague's records close no road; a siege is already refused), 02975 road[3] "stabling and meals" (an alehouse, the vocabulary's `tavern`, stands in all 18). TO CURE: B20939 road[1] "most of what it owns arrived on somebody else's cart" (claims too much: proposed "and most of its news arrives on somebody else's cart"); 09370 crossroads[3] and 11941 crossroads[4] claim a CAUSE of founding against the History tab's reason (settlementReason is drawn BEFORE the founding reason in `steps/generateNarratives.js`, so the row cannot read it: reword to place, and keep one crossroads row siege-safe or the pool is mute under a siege: crossroads[0..2] already refuse it); 09398/B20803 port.coastal[2] (cause; and "the sea gives its living" under a siege: noSiege); B13256 port.coastal[3] "most of what it eats … arrives the same way" (false in all 9: import cover < half of need in every one; and a siege); 15081, 15101, 22030, 14593, 11943 "it gets by on {holds}" in isolated.unsupplied / isolated.besieged / holdingsOf under a deficit of 40-72% (proposed "it must make do with"); 17926 "ground that does not quite feed it" at a 40% gap ("does not fully feed it", three arms; never isolated.deficit[0], law 2); 22014 deficit[4] "The shortfall is met" at 5% import cover; 22015, 18781 "the caravans that still come" beside "no caravans reach" (seasonal path: say "the tracks in a good season"); B20992, B27626 "carriage by magic" where the food record gives magic 0% (name it only where `foodBalance.magicFoodOffset` is at least 1% of need; the receipt's magical_transit path alone is not food carried).
+- founder.js FOUNDER_KIND (3 rows: 09374 "a dynastic decision that this crossroads" beside a ferry crossing, 09381 a military command beside foresters, B08943 a trade house beside a hunting lodge): FA did not reach them (still 28, 27, 24): the founder row names a PLACE or a cause; the next cure turns FA's table the other way for those founder rows (RECORD-MEASURE-1's FB), or reads the founder's place word.
+- `stressInstitutionEffects.js` (18 rows, 190 towns: secrets and crisis lines naming patrols, a crackdown, an archive, a slave market, grain reserves, exports, a festival under a plague) and `narrativeData.js` (33 rows, 209: STRESS_NOTES and STRESS_DESCS naming founders, burial grounds, temples, a merchant district, watchtowers, a waterfront): not begun. `narrativeGenerator.js :: SMALL_PLACE_TIER_LINES` B27632 "not much left to sell" beside five exports: not begun.
+
+## How the instruments are re-made
+
+- Census: `git fetch origin lane/census-3-2026-11-14`; `git archive` its `docs/chair/2026-11-14/probes/CENSUS-3` OUT of every tree; `sh <probes>/census3.sh <scratch worktree with node_modules> <out-dir> 4` (about 22 minutes; NEVER edit the tree while it renders: this seat lost one run that way). `inventory.py <out> x.json` (tabs) and `SURFACES=PDF,Journal inventory.py <out> x.json` (exports), from `lane/chair-2026-11-08` `docs/chair/2026-11-14/probes/READ-ALL/`; `inventory_diff.py before.json after.json rows.json`.
+- The record in a minute: RECORD-MEASURE-1's `births-only.sh` (CENSUS3_PROBES set), `fielddiff.mjs <before corpus> <after corpus> 3`, `classes.mjs <tree> <corpus> <out.json>`.
+- Verification by script: a predicate a row over each printing town's record (`factsOf`, `declarationAdmits(declarationOf(...))`), the page dumps for the page's own other lines.
+- Red at the base: a second scratch worktree at the base commit, `node_modules` linked, the new test copied in and removed after.
+
+## Registers named stale
+
+- `tests/lint/presumedThings.widened.register.json`: 2 stale rows (narrativeText.js clergy cc79cf804fe5ed09, practitioner fa104bd22874f27f), left for the close's re-derivation (shrink-only).
+- The goldens (`generatorGoldenMaster`, `espionageDormancyFence`, `worldFactRederive`, `rosterFinalUnderHeldRoster`) and `proseWiringCensus.walker`: red at the base, red here; not re-taken.
