@@ -1,0 +1,16 @@
+{"id":"C2758","town":"bar0-city-wartime-rand-2","sev":"HIGH","kind":"STATE","why":"says prosperous; STATE prosperity is Poor and C2771/C2772 say Poor while the war lasts","other":"C2771"}
+{"id":"C2759","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"warehouses full, coin moving, forges busy contradicts Poor prosperity, food deficit, and the resource-scarcity tension","other":"C2771"}
+{"id":"C2811","town":"bar0-city-wartime-rand-2","sev":"LOW","kind":"STATE","why":"gives Dolgorsüren Merv a hired 'company' guarding wagons; PEOPLE has her as watch commander, the company captain is Chimgee Ongirad","other":""}
+{"id":"C3078","town":"bar0-city-wartime-rand-2","sev":"LOW","kind":"STATE","why":"title 'Merchant Prince' for Gantuyaa Taichiud, who PEOPLE gives as f","other":""}
+{"id":"C3121","town":"bar0-city-wartime-rand-2","sev":"LOW","kind":"STATE","why":"title 'Frontman' for Namsrai Naiman, who PEOPLE gives as f","other":""}
+{"id":"C3445","town":"bar0-city-wartime-rand-2","sev":"LOW","kind":"STATE","why":"ore cut and carted out now; LAND's only mineral resource, Gemstone Deposits, is depleted and iron is imported","other":""}
+{"id":"C3694","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"STATE","why":"prints 4,426 imported and C3696 short 1,120; header says imports cover 4374 and deficit 10% (1,172 of 11,722)","other":""}
+{"id":"C3701","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"says 'no cushion' while the same page and FOOD give a granary holding about 8.5 months of stores","other":"C3699"}
+{"id":"C3818","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"STATE","why":"prints shadow economy 33% capture; INCOME gives Shadow Economy (untaxed) as 19% of the town's money","other":""}
+{"id":"C3893","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"says Thieves' Guild is hurt by trade disruption; the crisis stakes say crime gains from the disorder","other":"C2829"}
+{"id":"C4063","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"says crime lacks a single controlling authority; GOVERNMENT lists Thieves' Guild as a power and PEOPLE has Vandansüren Taichiud as its rank-1 head","other":"C3932"}
+{"id":"C4094","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"PAIR","why":"crime has 'no head, none is the one to talk to'; Thieves' Guild is a listed power led by rank-1 Vandansüren Taichiud","other":"C3932"}
+{"id":"C4318","town":"bar0-city-wartime-rand-2","sev":"MED","kind":"STATE","why":"Mine-Master Gantulga Önggirad is said to want unit cohesion as conscription pulls soldiers; PEOPLE has a mine captain, no military role or command","other":""}
+{"id":"C4545","town":"bar0-city-wartime-rand-2","sev":"LOW","kind":"STATE","why":"the carpenters' master wright is said to under-declare the settlement's stores and sell concealed grain; grain stores belong to the granaries, not carpenters","other":""}
+{"id":"C4559","town":"bar0-city-wartime-rand-2","sev":"LOW","kind":"STATE","why":"the dean of the parish churches is said to sell goods 'sold as locally produced'; PEOPLE has a dean heading Parish churches, no trade","other":""}
+{"id":"DONE","lines":2271,"blocks":1,"flags":15}
