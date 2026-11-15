@@ -78,3 +78,19 @@ export const namesGrainMill = (n) => (n === 'mill' || n.startsWith('mills (')) &
  * @param {unknown} s a food record's source key @returns {boolean}
  */
 export const isGrainFoodSource = (s) => s === 'grain' || s === 'mill';
+
+/**
+ * The crafts a roster lacks, by the viability advice's own words (TAIL-DEFECON-3 #30890: the advice names only the crafts
+ * the roster lacks). TAIL-CLOSE-SRC-4: moved verbatim from `generators/economy/viability.js`'s craft-diversity fix into
+ * the institutions home, the smith's (a name holding "smith" counts: a goldsmith works metal too).
+ * @param {ReadonlyArray<string>} names the roster's names, lower-cased @returns {string[]}
+ */
+export const craftsAbsentFrom = (names) => [['smiths', 'smith'], ['weavers', 'weav'], ['tanners', 'tann']].filter(([, w]) => !names.some((n) => n.includes(w))).map(([c]) => c);
+
+/**
+ * Whether a roster holds a bank or a house of money, by name (a moneylender among them). TAIL-CLOSE-SRC-4: moved verbatim
+ * from `generators/economy/viability.js`'s banking-without-economy warning into the institutions home, the bank's; the
+ * `bank` kind above is the narrower "a bank, a money changer or a counting house".
+ * @param {ReadonlyArray<string>} names the roster's names, lower-cased @returns {boolean}
+ */
+export const namesBankOrMoneyHouse = (names) => names.some((n) => n.includes('bank') || n.includes('money'));

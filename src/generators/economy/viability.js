@@ -24,7 +24,7 @@ import {
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { waterOf } from '../../domain/facts/water.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-1f: one line
 import { hasMarketInstitution } from '../../domain/facts/market.js';
-import { defenseTraditionNamesOf } from '../../domain/institutions/defenseInstitutionBuckets.js';
+import { defenseTraditionNamesOf } from '../../domain/institutions/defenseInstitutionBuckets.js'; import { craftsAbsentFrom, namesBankOrMoneyHouse } from '../../domain/facts/institutions.js'; import { namesAlchemistHouse } from '../../domain/facts/magic.js'; // TAIL-CLOSE-SRC-4: one line
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
 
@@ -253,7 +253,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
           ? ['Develop local resource base to reduce trade dependency']
           : [
               // TAIL-DEFECON-3 (#30890): the advice names only the crafts the roster lacks
-              `Add craft guilds${((absent) => (absent.length ? `: ${absent.join(', ')}, etc.` : ''))([['smiths', 'smith'], ['weavers', 'weav'], ['tanners', 'tann']].filter(([, w]) => !instNames.some((n) => n.includes(w))).map(([c]) => c))}`,
+              `Add craft guilds${((absent) => (absent.length ? `: ${absent.join(', ')}, etc.` : ''))(craftsAbsentFrom(instNames))}`, // the institutions home's reader (TAIL-CLOSE-SRC-4)
               'Improve trade access and economy for trade-sustained crafts',
             ],
       });
@@ -367,7 +367,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
     // scroll scribe and an academy of magic among them; its teleportation circle), and the alchemist as before:
     // the five name tests missed a Teleportation circle in 10 of 13 towns that printed the line.
     const magicHouses = defenseTraditionNamesOf(institutions);
-    const hasMagicInst = magicHouses.arcane || magicHouses.teleport || instNames.some((n) => n.includes('alchemist'));
+    const hasMagicInst = magicHouses.arcane || magicHouses.teleport || namesAlchemistHouse(instNames); // the magic home's reader (TAIL-CLOSE-SRC-4)
     if (!hasMagicInst) {
       const smallSettlement = !getTradeRouteFeatures(config?.tier || 'village');
       // UPKEEP-9 (the hedge suggestion): a small place is offered only the hedge wizard its own tier's catalogue
@@ -413,7 +413,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
   // Banking without economy
   if (
     priorityToCategory(pri.economy) === 'very_low' &&
-    instNames.some((n) => n.includes('bank') || n.includes('money')) &&
+    namesBankOrMoneyHouse(instNames) && // the institutions home's reader (TAIL-CLOSE-SRC-4)
     // TAIL-DEFECON-3 (#04271, #B04151, #B10921): "does little trade" only where the record's export list is short (fewer
     // than the four goods the complexity ladder reads as a place that trades); a city exporting seventeen goods does not
     (economicState?.primaryExports ?? []).length < 4

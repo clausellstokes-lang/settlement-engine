@@ -157,3 +157,13 @@ export const ARCANE_GUILD_HOUSES = Object.freeze(["mages' guild", "mages' distri
 export function arcaneGuildHouseStands(hasInst) {
   return hasInst(...ARCANE_GUILD_HOUSES);
 }
+
+/**
+ * Whether a roster holds an alchemist's house, by name (UPKEEP-9: the viability's "no arcane house stands" asks it beside
+ * the defence traditions' casters). TAIL-CLOSE-SRC-4: moved verbatim from `generators/economy/viability.js` into the magic
+ * fact's home.
+ * @param {ReadonlyArray<string>} names the roster's names, lower-cased @returns {boolean}
+ */
+export function namesAlchemistHouse(names) {
+  return names.some((n) => n.includes('alchemist'));
+}
