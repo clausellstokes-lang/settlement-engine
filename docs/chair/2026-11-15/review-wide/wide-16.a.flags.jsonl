@@ -1,0 +1,7 @@
+{"id": "C34042", "town": "bar0-city-wartime-rand-13", "sev": "MED", "kind": "PAIR", "why": "says the fish trade has never paid better; the Tensions section says the fish trade is under strain", "other": "C34067"}
+{"id": "C34862", "town": "bar0-city-wartime-rand-13", "sev": "LOW", "kind": "STATE", "why": "offers salt production with no short mark; LAND has Salt Flats depleted and imports list salt as local flats exhausted (TRADE also says salt made here)", "other": ""}
+{"id":"C35123","town":"bar0-city-wartime-rand-13","sev":"LOW","kind":"STATE","why":"says religious houses' take is a large part of the city's business; INCOME gives Church Tithes only 5%","other":""}
+{"id":"C34091","town":"bar0-city-wartime-rand-13","sev":"MED","kind":"PAIR","why":"says Rundplatz is in a kingdom and later a crown officer orders requisitions; the city-state is a sovereign polity answering to no higher lord","other":"C34620"}
+{"id":"C34383","town":"bar0-city-wartime-rand-13","sev":"LOW","kind":"STATE","why":"title Merchant Prince for Brunhild Jäger, who is female (f) in PEOPLE","other":""}
+{"id":"C36622","town":"bar0-city-wartime-rand-13","sev":"MED","kind":"STATE","why":"Margarete Braun asks Ottilia Berger for a vote; PEOPLE gives Ottilia no seat on any power or council","other":""}
+{"id":"DONE","lines":2800,"blocks":1,"flags":6}
