@@ -1,6 +1,6 @@
 # The owner's veto list
 
-> **Draft 4. Not yet covered:** the chair's later hand-backs still to come (the reach instruments, the doors, the layer cut, the record fixes, the two sweeps). In this draft the full list holds everything read so far (the cure and close hand-backs, the merge hand-backs, the chair's rulings, and the people, pools, source and presumed-things hand-backs the chair added). The short list's Part B and Part E entries do not yet place the newest items (from the chair's rulings, the merge hand-backs and the added hand-backs); that comes in the next draft. The completeness table has a row for every "veto" or "the owner" line read so far.
+> **Draft 4. Not yet covered:** the chair's later hand-backs still to come (the reach instruments, the doors, the layer cut, the record fixes, the two sweeps). In this draft the full list holds everything read so far (the cure and close hand-backs, the merge hand-backs, the chair's rulings, and the people, pools, source and presumed-things hand-backs the chair added). Part E of the short list came out as 30 decisions, more than the fewer than fifteen the chair expected: the same decision named in several hand-backs is one entry, but the hand-backs name many separate decisions (11 of the 30 were found in the chair's rulings, the merge hand-backs and the added hand-backs). The completeness table has a row for every "veto" or "the owner" line read so far.
 > **About the short list:** the chair asked for at most 40 entries and for an own entry for every change touching 100 or more sample towns. These two cannot both hold: many changes touch 100 or more of the 720 sample towns. So the widest (300 or more towns) have their own entry and every other change is in a family entry that names its items of 100 or more towns; Parts C and E are one line or one entry each as asked. The chair ruled that this cut stands. The short list therefore has more than 40 numbered entries.
 
 **Summary (read this first)**
@@ -219,19 +219,19 @@ Full list: items 35, 202, 217, 219, 228–230, 248, 413, 414, 443, 539, 563, 580
 
 ### Checks that were retired, reshaped, muted or re-keyed (Part B)
 
-**S30. Checks retired by name** (4 items).  
+**S30. Checks retired by name** (5 items).  
 - Item 752: Two sample-town checks (the clergy-chain line in one village and the first-page test in one metropolis) were retired by name because no sample town now has the shape they guard.  
 - Item 749: Two sample-town checks of the page findings (P1a and P1b) were retired by name because the sample lines they looked for were reworded.  
 - Item 663: One test case of the check for calm claims in a crisis (a succession-void line saying the question is not live) was retired by name because the page lines it looked for were reworded.  
 If this whole kind were vetoed: The retired checks return and go red, because the towns or lines they looked at no longer exist.  
-Full list: items 663, 749, 752, 766.
+Full list: items 650, 663, 749, 752, 766.
 
-**S31. Checks reshaped to a stronger or a different form** (16 items).  
+**S31. Checks reshaped to a stronger or a different form** (21 items).  
 - Item 670: The check that the strong posture says nothing under a siege was rewritten as a law: under a siege only the second, third or no version may print.  
 - Item 764: A check of 34 literal word fragments of reworded lines was dropped for a check that the line at that slot is the one the pool holds and carries none of the old claim.  
 - Item 757: Six checks for states no sample town reaches were rebuilt on a record the test makes itself, or re-keyed to another town; none was retired.  
 If this whole kind were vetoed: The reshaped checks go back to their old form and go red again, as the items describe.  
-Full list: items 668, 670, 680, 683, 684, 703, 704, 709, 731, 753, 756, 757, 759, 760, 764, 765.
+Full list: items 640, 643, 652, 656, 658, 668, 670, 680, 683, 684, 703, 704, 709, 731, 753, 756, 757, 759, 760, 764, 765.
 
 **S32. Checks muted for a declared shape (allowed to stay silent in a stated case)** (3 items).  
 - Item 755: Fifty checks of the cure guards now use a declared-mute shape: the town reads the pool and the pool has no line left that may speak.  
@@ -240,19 +240,19 @@ Full list: items 668, 670, 680, 683, 684, 703, 704, 709, 731, 753, 756, 757, 759
 If this whole kind were vetoed: The 50 guard checks go back to the old shape and the old red; the five cells go red again and 2 of 7 towns go red until a stand-in carries a hook.  
 Full list: items 746, 755, 758.
 
-**S33. Pins, test towns and expected words re-keyed to other towns or new wording (the same check, other examples)** (60 items).  
+**S33. Pins, test towns and expected words re-keyed to other towns or new wording (the same check, other examples)** (69 items).  
 - Item 659: Many checks that held an old sentence were re-keyed by identity to the new sentence, in the same change as each cure (batches 1 to 8).  
 - Item 669: Eleven red checks were re-pointed to other sample towns or to the new words; none was skipped, weakened or deleted.  
 - Item 678: Seven checks were re-pointed after the catalogue change (river fishery salt, vein gems and springs herbs left the data).  
 If this whole kind were vetoed: Most of these checks go back to red until their old towns or old words return.  
-Full list: items 659, 661, 662, 667, 669, 671–678, 681, 685–694, 702, 705, 707, 708, 716–728, 730, 732–735, 739–745, 747, 748, 750, 754, 761, 763, 767.
+Full list: items 641, 642, 646, 651, 653–655, 657, 659, 661, 662, 667, 669, 671–678, 681, 685–694, 702, 705, 707, 708, 711, 716–728, 730, 732–735, 739–745, 747, 748, 750, 754, 761, 763, 767.
 
-**S34. Other changes to checks (floors, counts, lists of exceptions, lists a check reads)** (22 items).  
+**S34. Other changes to checks (floors, counts, lists of exceptions, lists a check reads)** (31 items).  
 - Item 660: The floor of the check that the crisis-blind-prose test finds enough calm claims was lowered from 29 to 17 to match what is now measured.  
 - Item 639: In the list of which facts each pool may read, the pool 'a market, no guild' moves from layer 3 to layer 4 (42 of 720 sample towns read the pool).  
 - Item 700: Five saved counts of line variants (and their fingerprints) in the list of known shifts were re-set from 2950 to the new total.  
 If this whole kind were vetoed: The counts and floors go back to the old figures and the exceptions return, so the affected checks go red again; the items say nothing more.  
-Full list: items 639, 660, 664–666, 679, 682, 695–701, 706, 710, 729, 736–738, 751, 762.
+Full list: items 639, 644, 645, 647–649, 660, 664–666, 679, 682, 695–701, 706, 710, 712–715, 729, 736–738, 751, 762.
 
 ### Lists of exceptions and ceilings that grew by ruling (Part C, one line each)
 
@@ -288,18 +288,18 @@ Full list: items 639, 660, 664–666, 679, 682, 695–701, 706, 710, 729, 736–
 - **S64.** The list of known exceptions to the tuning rule grew by two names: SHADOW_CAPTURE_FLOOR = 11 and INCOME_LEADER_FROM = 20. If vetoed: The two rows leave the list and the tuning check goes red again for both names. Full list: item 797.
 - **S65.** Two ceilings were raised by the chair's ruling TU1: the unregistered names from 539 to 541, and the declared growth from 12 to 14. If vetoed: The ceilings return to 539 and 12 and the check goes red until the two names are cured. Full list: item 798.
 
-### The ten widest things known to be still wrong (Part D)
+### The ten widest things known to be still wrong (Part D; ranked by sample towns of the 720, then by other counts)
 
-- **S66.** The second read found classes the first could not see: a house written as at work whose input does not reach it; two powers written as leaving each other alone where the facts say tense or in conflict; food "by magic" where none; history lines for events the… (2,658 of about 31,000 sentences flagged by the union of two reads: high 34, medium 1,714…). Full list: item 799.
-- **S67.** The minor issues being ignored: slash labels as names, verb agreement, clumsy phrases, rounding; cosmetic export glitches; places where the page says less so as not to say false (149 towns' true houses off the PDF's tables, true culture rows off small places,… (910 sentences flagged low; 149 towns' true houses off the PDF's tables; 29 empty…). Full list: item 800.
-- **S68.** The one ladder (806 of 1,490) was left for the join. The defence lane's suite had 52 new tests in 26 files that were not classed further. (806 of 1,490 (unit not stated)). Full list: item 801.
-- **S69.** The leaves reader's carried high findings: the journal's chain name 'Chain' in every town, 'Master-crafted weapons' on a mine's card, the PDF's chain state under a siege (the claim of one chain state is refuted in 720 towns), and exports of the food a famine… (PDF chain state in 720 towns). Full list: item 802.
-- **S70.** The sample-town count of known false sentences by page: the exports (PDF and journal) are the widest false surface by far, and the tabs are near their floor. The export figures are plausible, not read. (towns of the 720 with a hit: a line that names what the town lacks, tabs 380 / PDF 635 /…). Full list: item 803.
-- **S71.** The town's own facts contradict each other in many places; a measuring seat measures the five widest classes before any cure, because those cures move the facts. (record's own incoherence flags: 452 on headers (earlier), 523 (later), then 614; measured…). Full list: item 804.
-- **S72.** Two founders on one page remain in some towns. (538 of 3,048 test towns). Full list: item 805.
-- **S73.** A page names one founder in one row and another in a second row. (538 of 3,048 test towns…). Full list: item 806.
-- **S74.** Still stale: the saved comparison of generated towns (the generator baseline test) is red at the base, and the safety strings moved by V3, V7 and V10 are not yet re-derived; to be re-derived at the close. (525 settings in the comparison; 30 + 12 towns' safety strings move for V3). Full list: item 807.
-- **S75.** Still stale: the saved comparison of 525 generated-town settings is already out of date at the base, and this batch's record move (52 towns' stored magic flag) adds to what its next re-take must bank. (525 of 525 settings in that comparison; 52 more towns' flags move). Full list: item 808.
+- **S66.** The leaves reader's carried high findings: the journal's chain name 'Chain' in every town, 'Master-crafted weapons' on a mine's card, the PDF's chain state under a siege (the claim of one chain state is refuted in 720 towns), and exports of the food a famine… (PDF chain state in 720 towns). Full list: item 802.
+- **S67.** The sample-town count of known false sentences by page: the exports (PDF and journal) are the widest false surface by far, and the tabs are near their floor. The export figures are plausible, not read. (towns of the 720 with a hit: a line that names what the town lacks, tabs 380 / PDF 635 /…). Full list: item 803.
+- **S68.** The town's own facts contradict each other in many places; a measuring seat measures the five widest classes before any cure, because those cures move the facts. (record's own incoherence flags: 452 on headers (earlier), 523 (later), then 614; measured…). Full list: item 804.
+- **S69.** The power chips on many cards do not follow the documented strength ladder (Dominant at 35 and up, Strong 25, Significant 18, Minor 10, else Suppressed); 302 cards follow neither the ladder nor the raw power. (893 cards in 495 of 720 sample towns). Full list: item 809.
+- **S70.** Three classes the readers flagged were judged by design and left as they print. (70, 167 and 367 of 720 sample towns for the three classes). Full list: item 811.
+- **S71.** The income source "Agricultural Rents" ("Payments in kind or coin from tenant farmers") still prints in thorps, hamlets and villages that have no landlord, on the PDF and the Economics tab. (360 of 720 sample towns read; example r2r-thorp-58). Full list: item 812.
+- **S72.** The Economics tab still prints 'Stores: a granary, about five months of grain.' beside a famine or siege. It calls the stores function with one argument, so it did not get the Tonight sheet's fix. It belongs to another seat. (the old line prints in 350 of 720 sample towns on the tab, 16 of them false). Full list: item 813.
+- **S73.** The mentor and successor tie (or a pact) between an occupier's governor and the local headman still prints a line that says mentor even where another kind of tie is true. (2 to 312 of 720 sample towns as folded). Full list: item 814.
+- **S74.** The first seat's list of rows left in files later given to another seat: some may now be cured there. (297 of 720 sample towns at most (governance file, 28 rows); counts per row in the rows). Full list: item 815.
+- **S75.** The widest still-false writers are all raw catalogues the exports print and the tabs do not: the old threat assessment writer, the culture profiles ("A ritual plaza at the centre…" in a thorp of fifteen), the processing houses of the Resources tables. (the PDF's Defence chapter 290 towns; the culture profiles' seven fields 100 to 222; the…). Full list: item 816.
 - **S76.** The seven sentences found printing false in some towns and left uncured under the chair's ruling PT1 (each written out in full with its towns in the full list). Full list: items 860, 881, 891, 914, 954, 1004, 1005.
 - There are 405 items in Part D in all; 395 more besides these ten, items 799–1203 of the full list (175 of them have no town count recorded).
 
@@ -311,7 +311,7 @@ Full list: items 1325, 1326, 1364, 1389–1392.
 
 **S78. Saved reference copies of whole generated towns.** Re-take the saved whole-town reference copies (and the world-fact digests and counted lists tied to them) once the program ends?  
 Status: open. If vetoed or answered no: The checks that compare against the saved copies stay red until the owner re-takes them; two world-fact checks stay red for the same reason.  
-Full list: items 1207, 1307, 1315, 1316, 1365, 1393.
+Full list: items 1207, 1285, 1286, 1307, 1315, 1316, 1349, 1354, 1365, 1393.
 
 **S79. Statistical envelopes moved by declared changes.** Accept or change the floor for criminal cities (at least 372 of 400 expected, 326 seen) and the tier-inertia ceiling (drift 45 against 43)?  
 Status: open. If vetoed or answered no: Effect not stated.  
@@ -355,7 +355,7 @@ Full list: items 1213, 1371, 1373, 1375.
 
 **S89. How crisis towns are marked.** Adopt the rule that under a crisis a row living on what the crisis stops is marked from one shared list (with one head line per tab), the PDF keeps no wording of its own, and houses join the list only after the seat verifies the row?  
 Status: open. If vetoed or answered no: Effect not stated.  
-Full list: items 1372, 1374, 1376, 1379.
+Full list: items 1259, 1372, 1374, 1376, 1379.
 
 **S90. Words for people's titles.** Keep the title law (plain neutral word, one word per face; midwife, priest and similar marked as the owner's veto) and treat a gendered title against its holder as the town data's question?  
 Status: open. If vetoed or answered no: Effect not stated.  
@@ -363,7 +363,7 @@ Full list: items 1381, 1396.
 
 **S91. New words lines may depend on (ruling body, rival power, shared power).** Keep the closed word list: 'ruling body' and 'rival power' added, 'shared power' kept, no further new word (none for 'a practitioner is on the rolls', none for heredity, none yet for a lone food source)?  
 Status: taken by the chair (open to the owner's veto). If vetoed or answered no: A veto would reopen the word for the five parked practitioner rows (ECO-89); other effects not stated.  
-Full list: items 1206, 1210, 1215, 1219, 1300, 1324, 1335, 1358, 1382.
+Full list: items 1206, 1210, 1215, 1219, 1270, 1288, 1300, 1324, 1335, 1358, 1382.
 
 **S92. Set-aside of quiet pools in the crisis-blind check.** Approve a set-aside keyed by pool and crisis family, each entry naming its declaring commit?  
 Status: open. If vetoed or answered no: Without it the check stays red on its half about quiet pools (the five pools named).  
@@ -371,17 +371,61 @@ Full list: items 1296.
 
 **S93. Rules for the checks themselves.** Keep the rules: never skip, weaken or delete a check; run each broken check alone and cure, re-key or name the outside cause; every new check computes anchors through a helper; never edit the mutation-coverage manifest?  
 Status: taken by the chair (open to the owner's veto). If vetoed or answered no: The batch's governing checks would go red (HIS-61); other effects not stated.  
-Full list: items 1295, 1303, 1304, 1329, 1330, 1338.
+Full list: items 1221, 1236, 1249, 1254, 1264, 1272, 1295, 1303, 1304, 1329, 1330, 1338.
 
 **S94. The chair's working rules, order of work and file ownership.** Do the chair's working rules stand (silence is true, a mute state gets a second version of the line, no ceiling raised, no random draw moved, no new word; widest rows first, rows in fewer than five towns wait; measure before curing) and the file-ownership…  
 Status: taken by the chair (open to the owner's veto). If vetoed or answered no: Effect not stated beyond the order of work changing; no page sentence changes by itself.  
-Full list: items 1217, 1291, 1292, 1298, 1299, 1301, 1302, 1310–1312, 1317–1323, 1327, 1331, 1341–1344, 1355–1357, 1360–1363, 1366, 1368, 1369, 1377, 1378, 1380, 1386–1388, 1395.
+Full list: items 1204, 1217, 1226, 1228–1231, 1234, 1235, 1255, 1258, 1260, 1261, 1268, 1274–1280, 1282, 1283, 1290–1292, 1298, 1299, 1301, 1302, 1310–1312, 1317–1323, 1327, 1331, 1341–1344, 1355–1357, 1360–1363, 1366, 1368, 1369, 1377, 1378, 1380, 1386–1388, 1395.
 
-**S95. Page rulings the chair made that the owner may veto (the changes themselves are in Part A).** Do the chair's rulings about what particular page sentences may say stand?  
+**S95. Acts kept for the owner's own hand.** Do merging the pull request, deploying and applying any database migration stay the owner's alone, with the chair asking at the end for the veto list, the two size budgets and the word for the pull request?  
+Status: open. If vetoed or answered no: effect not stated; the three acts stay the owner's in any case  
+Full list: items 1223, 1289.
+
+**S96. Database migrations 211 and 212.** Will the owner apply migration 211, and apply migration 212 only after a fresh security reader clears its final text?  
+Status: open. If vetoed or answered no: effect not stated  
+Full list: items 1224.
+
+**S97. The earlier account's scheduled task and the chair's check-in.** Will the owner pause or archive the earlier account's scheduled task and stopped helper sessions before 2026-11-20 09:00 UTC, and allow a recurring check-in for the chair?  
+Status: open. If vetoed or answered no: effect not stated  
+Full list: items 1212, 1225, 1227.
+
+**S98. Adding usage to reach the bar.** Will the owner add usage, since the bar needs about a second week's allowance or added usage?  
+Status: open. If vetoed or answered no: effect not stated  
+Full list: items 1281.
+
+**S99. Four granted record cures held for the next round.** Do the four granted cures (the economic rating's cap, the entrepot flag, the magic share's rounding, the capture with nothing behind it) wait for the next round?  
+Status: taken by the chair (open to the owner's veto). If vetoed or answered no: The four cures would be built now and the saved copies and checks would move again.  
+Full list: items 1284.
+
+**S100. How the work branches are joined into one line.** Do the chair's rules for joining and landing the work branches on the joined line stand (order of landing, who settles a clash, what a clash keeps, when lists are re-taken)?  
+Status: taken by the chair (open to the owner's veto). If vetoed or answered no: effect not stated, except that for the central landing ruling the older landing recipe returns  
+Full list: items 1232, 1233, 1253, 1256, 1257, 1271, 1345–1348, 1350–1353.
+
+**S101. The chair's laws for what a page line may claim.** Do the chair's general laws for page lines stand (one home for each fact, a count word reads the roster, a line does not deny its own page or the town's history, crisis and occupation silences, and the like)?  
+Status: taken by the chair (open to the owner's veto). If vetoed or answered no: effect not stated; the later cures of the lanes follow these laws  
+Full list: items 1205, 1237–1247, 1262, 1263, 1265, 1266, 1269, 1273.
+
+**S102. Principles of the defence rating.** Do the five principles of the defence rating, and the corrected ruling on the shared defence cap, stand?  
+Status: taken by the chair (open to the owner's veto). If vetoed or answered no: effect not stated  
+Full list: items 1248, 1267.
+
+**S103. What the gallery hides about people and powers.** Do the chair's rulings on the gallery's hiding rules stand (which names stay, how an impression is compared, the security calls)?  
+Status: taken by the chair (open to the owner's veto). If vetoed or answered no: effect not stated  
+Full list: items 1250–1252.
+
+**S104. A stone quarry where the country holds no stone.** May a stone quarry house stand in a town whose country holds no stone-quarry resource?  
+Status: open. If vetoed or answered no: effect not stated  
+Full list: items 1222.
+
+**S105. Commits recorded under a test's stand-in author.** What should be done about the commits a test run recorded under the author 'Fixture' with no signature?  
+Status: open. If vetoed or answered no: effect not stated  
+Full list: items 1287.
+
+**S106. Page rulings the chair made that the owner may veto (the changes themselves are in Part A).** Do the chair's rulings about what particular page sentences may say stand?  
 Status: taken by the chair (open to the owner's veto). If vetoed or answered no: Effect not stated; each ruling's page changes are listed in Part A.  
 Full list: items 1208, 1209, 1293, 1294, 1297, 1305, 1306, 1328, 1332–1334, 1336, 1337, 1339, 1340, 1359, 1383–1385.
 
-(The short list has 95 numbered entries; see the note at the top about its size.)
+(The short list has 106 numbered entries; see the note at the top about its size.)
 
 ## Part A. Changes to what a town's page says (638 items)
 
