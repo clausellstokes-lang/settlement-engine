@@ -62,6 +62,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | # | branch | tip merged (read at the merge, UTC) | merge base | merge commit | conflicts | listed for the close |
 |---|---|---|---|---|---|---|
 | 1 | lane/tail-display-civic-2026-11-14 | ec26834d5 (05:25) | c2f053333 | a330237f0 | none | 3 files outside docs/; declared-move commits: none (golden carried) |
+| 2 | lane/tail-crisis-2026-11-14 | 0f506cd93 (05:28) | c6852f7e2 | 70d80f3e9 | none | 6 files outside docs/; declared-move commits: 6716dfceb  (golden carried) |
 
 ## 3. Every code resolution
 
@@ -206,6 +207,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 
 | file / test | branch (JOIN-9 point #) | why |
 |---|---|---|
+| golden | crisis (2) | DECLARED MOVE commits 6716dfceb  (field diffs in their bodies) |
 
 ## 5. Item 2 at the landed tip
 
