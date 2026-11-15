@@ -6,7 +6,7 @@ page line cured, no test written, no test skipped or weakened. Authority: the ow
 chair's chat, as the signed record `docs/shift-records/2026-11-15-the-close-of-the-tail-round.json` carries it (commit trailer
 `Owner-Signed: §934.105`).
 
-STATUS: **IN PROGRESS** (Part A part-done; this file is current at each push).
+STATUS: **IN PROGRESS** (A, the chair's rulings, the three merges, OR3 done; C again, D again, E to come; this file is current at each push).
 
 ## PART A · THE GENERATOR PINS AND COUNTS
 
@@ -59,10 +59,42 @@ First reading: each of the 17 files run alone at 8c11f73ea (`npx vitest run <fil
   (CHECK_META two-path rows 19 -> 18; leafReaders [13, 10] -> [14, 11]; INSTITUTION_NON_CASCADED [32, 32] -> [33, 33]): not
   re-taken; sent to the chair.
 
+## THE CHAIR'S RULINGS APPLIED (each its own commit, each vetoable, on the owner's list)
+
+| ruling | file · arm | what was re-keyed | commit | receipt |
+|---|---|---|---|---|
+| PM1 | `pipelinePinnedMode` EM-P0 A2 | the round trip is claimed on the PRODUCT ENTRY's record (`generateSettlementPipeline`), final-record passes included (`withConflictRelations`, c1263e61c at d700bda44) | 3f2761d59 | 15/15 GREEN (with PM2) |
+| PM2 | `pipelinePinnedMode` EM-B2a2 A2 | by identity: the step's cast reaches the record whole; the one card beyond it is a power's minted face (`OTHER_CARD_PREFIX`, npc_power_landed_gentry) | e90236c32 | 15/15 GREEN |
+| HK1 | `hookThemeDraws` pin:no-hook-is-lost | by identity: the two temporary crisis stand-ins (npc_temp_healer, npc_temp_grain; `resolveCrisisCast`) are not cards of the cast; every other card holds its hook; `total === npcTotal - standIns` | 4e99584a1 | 13/13 GREEN |
+| FC1 | `generationForkCensus` A1 | the reproduction claim on the entry's record (checked first: it holds on PIN_ROW) | 72db657a5 | A1 then reds on a CEILING, below |
+| ER1 | `editCorpusRatchet` A8 | by identity: V-BAND-READINESS reads a third path `defenseProfile.institutions` (ffe0750d4, UPKEEP-12 H1, landed JOIN-4·9): two-path rows 19 -> 18, shared leaves [13,10] -> [14,11]; NON_CASCADED +`defenseProfile.institutions.garrison[].catalogId` (f78522bf6, UPKEEP-9 step 7, landed JOIN-1·9): [32,32] -> [33,33] | 4184bec70 | A8 GREEN |
+| OR3 | `scripts/.observed-shape-readers-baseline.json` | `node scripts/check-observed-shape-readers.mjs --write` once at the final tree: no reader row moved; the input and source stamps and scanStats only | 126b057e0 | plain exit 0; walker 47/47 |
+
+A correction to my own earlier reading (the chair's PM1): `pipelinePinnedMode`'s round trip did not fail because "a mint shifts the
+stream": the raw runner's record lacks the entry's final-record pass `withConflictRelations` (one relationship's direction and its
+sentence); the roster is the same 28 on both sides. And `generationForkCensus` A5's third `food.cropFortune` mint is 7ac689418 (the
+food record's magic share, lane/tail-record), named in its note (eb201d433).
+
+**A CEILING, NOT RAISED**: `generationForkCensus` A1 "total mints is row-dependent but bounded": 141 against `<= 139` (unmasked by
+FC1); sent to the chair.
+
+## THE MERGES (on the chair's words; no conflict)
+
+lane/tail-close-prose-2026-11-15 at 7550a26bb; lane/tail-close-secret-2026-11-15 at 4beeb0ef6 (the cure of the repeated secret);
+lane/tail-close-presumed-2026-11-15 at 8972a8564. After them: `presumed-things-door --check` exit 0 (fresh 0 · stale 0 · banked
+4689); `presumedThings.walker` 43/43; `rosterDuplicateDraws` 3/3; `generatorGoldenMaster` 3/3, `espionageDormancyFence` 21/21,
+`goldenViewModel` 4/4, `heraldKnowledgeDeskGolden` 3/3, `goldenFreeze.walker` 90/90 (no golden row moved by the cure);
+`check-writer-reach` exit 0 (unmoved); `writerReach.walker` 52/52.
+
+## THE OWNER'S DOOR: WAITING
+
+`townCartographyCalibration`, `dossierProseManifest`, `presetLightingWitness`: the owner's door, waiting on the owner's own
+explicit word (asked 13:58 and 14:08 UTC); `worldFactRederive`'s dossier pin stays (green with the old manifest).
+
 ## WHAT IS LEFT, IN ORDER
 
-Part A is DONE as far as this seat may take it (the three door surfaces refused by my harness, above). Next: B (the chair's
-messages: none received so far), C (the two refreezes on a clean tree), D (the cross-check's second reading), E (the receipt).
+The two refreezes again on the clean final tree; Part D's three readings again; Part E whole (also the prose seat's four files,
+`proseMoveGrammar.walker`, `composeStateProse`); one line with the tip.
 
 ## FOR THE OWNER, IN PLAIN WORDS
 
@@ -74,5 +106,7 @@ census of the simulated year's news and history text). They moved because the ro
 and the economy now reads off each town's own record. **Saved towns are unaffected.** Each change is on the veto list: a veto
 of any change reverts that change and refreshes these references again. NOT refreshed, and why: three stored references that
 need the signed door (the town-map calibration, the dossier text manifest, the preset lighting witness) because my session's
-safety check refused the signing act; four test laws that now fail and look like real regressions (an edit's re-derivation no
-longer reproduces a town; two people without a plot hook; two people of one town sharing a secret), left for the chair.
+safety check refused the signing act; four test laws that failed: the chair ruled three of them readings of a changed form (re-keyed by identity: an edit's
+re-derivation is checked on the product's own record; a power's minted face; a person who steps in for a crisis carries no
+personal plot hook, giving one is a content decision of a later round), and one a real regression (two people of one town
+sharing a secret), cured by another seat and merged here.
