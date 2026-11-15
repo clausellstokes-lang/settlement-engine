@@ -64,6 +64,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 1 | lane/tail-display-civic-2026-11-14 | ec26834d5 (05:25) | c2f053333 | a330237f0 | none | 3 files outside docs/; declared-move commits: none (golden carried) |
 | 2 | lane/tail-crisis-2026-11-14 | 0f506cd93 (05:28) | c6852f7e2 | 70d80f3e9 | none | 6 files outside docs/; declared-move commits: 6716dfceb  (golden carried) |
 | 3 | lane/tail-corpus-eco-2026-11-14 | a8ea5ef8e (05:32) | bf6695a6b | c46e61abe | **PIN** (law d): `composeStateProse.test.js` (1 hunk), `proseEntryContradiction.walker.test.js` (5), `proseMoveGrammar.walker.test.js` (1) | joined kept inside each hunk; composed measured RED, listed (§3, §4 [J9]); clean-both `RECEIPT_POOLS_DOSSIER_STATE.md`; leaves `economy.generated.js`, `general.generated.js` the lane's |
+| 4 | lane/tail-corpus-def-2026-11-14 | b284cbe44 (05:38) | 7ccad225e | 954340b6f | none | 10 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/generators/coherenceAgreeCures.test.js  |
 
 ## 3. Every code resolution
 
@@ -211,6 +212,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | crisis (2) | DECLARED MOVE commits 6716dfceb  (field diffs in their bodies) |
 | `tests/domain/composeStateProse.test.js` (variants), `tests/lint/proseEntryContradiction.walker.test.js` (leaves+causal, joined, leafLines, the rows at 6162 and 2418/2419), `tests/lint/proseMoveGrammar.walker.test.js` (uniformSegments, the ratio, CONTROL 4's 515) | corpus-eco (3) against corpus-def on the joined side | PIN CONFLICTS, joined kept; composed 2956 / 3424 / 2719 / 571 / 516: RED (four of them red at the line before the merge), re-keyed by identity at the close (§3) |
 | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` | corpus-eco (3) | merged clean though both corpus seats moved it; the corpus door (g) is stopped: checked at the close |
+| `tests/generators/coherenceAgreeCures.test.js` | corpus-def (4) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
 
 ## 5. Item 2 at the landed tip
 
