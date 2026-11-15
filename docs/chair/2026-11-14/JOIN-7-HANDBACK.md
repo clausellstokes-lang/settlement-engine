@@ -62,6 +62,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | 26 | tail-defecon-c-2026-11-14 (SWEEP) | ea788e17c (02:49) | fb341090c (8) | 390168d6b | none | DECLARED MOVES a10a457e2 C1-E, e6700483b D19, 28f86423c D25, ea788e17c D30(a): golden carried |
 | 27 | tail-defecon-r-2026-11-14 (SWEEP) | a515e1b54 (02:52) | 5a446d29b (10) | 4b19b7446 | none | clean-both CODE `resourceGenerator.js` (defecon's line 46, this lane's five hunks: do not meet, both stand); DECLARED MOVE fcf4cae69 M-V (gaps): golden carried |
 | 28 | tail-corpus-eco-2026-11-14 (SWEEP) | 84a41a687 (02:56) | 53d99707f (11) | 05cf5cf66 | **PINS** (law d): `composeStateProse.test.js` (1), `proseEntryContradiction.walker.test.js` (6) | joined side kept; composed 2954 / 3422 / 2717 / trailing 372, two RECEIPT_POOLS anchors moved: RED, listed; `canonicalRowsDeclared.test.js` red at the lane's tip too (the lane's, carried) |
+| 29 | tail-corpus-def-2026-11-14 (SWEEP) | cff6cd098 (03:02) | a7fa530a3 (12) | 31a6f72eb | none | clean-both `RECEIPT_POOLS_DOSSIER_STATE.md`; leaf `power.generated.js` the lane's |
 
 ## 3. Every code resolution
 
