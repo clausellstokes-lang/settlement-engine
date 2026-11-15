@@ -144,6 +144,7 @@ def header(seed,s):
             ppl.append('%s (%s), %s%s%s'%(n.get('name'),str(n.get('gender') or '?')[:1],n.get('title') or n.get('role'),(' @ '+str(ik)) if ik else '',(' [sits on: '+'; '.join(ms)+']') if ms else ''))
     L.append('PEOPLE (%d, the whole roster): %s' % (len(ppl),'; '.join(ppl)))
     return '\n'.join(wrap(x) for x in L)
+MARKP=re.compile(r'^(Stopped by [^.]*\.|Curtailed by [^.]*\.|Scarce in [^.]*\.|Short of [^.]*\.)$')
 def read_town(out,seed,s):
     ns=names_of(s); pat=re.compile('|'.join(re.escape(n) for n in ns)) if ns else None
     cur=None; rows=[]; seen=set()
@@ -151,10 +152,19 @@ def read_town(out,seed,s):
         line=line.rstrip('\n')
         if line.startswith('== '): cur=line.strip('= ').strip(); continue
         if not line or line.startswith('[STYLE]') or not cur or cur.split('/')[0] not in TABS: continue
-        for p in parts_of(line):
-            f=fold(p,pat)
-            if not f or (cur,f) in seen: continue
-            seen.add((cur,f)); rows.append((cur,f,p))
+        # MENDED 2026-11-15 03:58 UTC (the chair's own fault, found by the bar's read): the crisis leaf's mark opens a row's description
+        # ("Stopped by the siege. Rent horses for single journeys…") and the sentence splitter made it a line of its own, WHICH THE
+        # PER-SECTION DEDUPE THEN SHOWED ONCE: every later marked row of the section was shown to the readers WITHOUT its mark
+        # (nineteen flags of one town). A mark now stays joined to the part it opens and a marked showing is never deduped away.
+        parts=list(parts_of(line)); j=0
+        while j<len(parts):
+            p=parts[j]
+            if MARKP.match(p.strip()) and j+1<len(parts):
+                f=fold(parts[j+1],pat); p=p.strip()+' '+parts[j+1]; j+=2; key=(cur,'M|'+str(f))
+            else:
+                f=fold(p,pat); j+=1; key=(cur,f)
+            if not f or key in seen: continue
+            seen.add(key); rows.append((cur,f,p))
     return rows
 # ---------- the 720
 rec=load(OUT720)

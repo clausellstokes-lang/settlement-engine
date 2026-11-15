@@ -21,7 +21,7 @@ SEV = {'HIGH': 3, 'MED': 2, 'LOW': 1}
 def show(ref, path):
     r = subprocess.run(['git', '-C', REPO, 'show', '%s:%s' % (ref, path)], capture_output=True, text=True)
     return r.stdout if r.returncode == 0 else None
-flags = collections.defaultdict(dict); header = []; state = {}
+flags = collections.defaultdict(dict); header = []; state = {}; unknown = collections.Counter()
 for p in range(1, 8):
     for r in 'ab':
         name = 'bar-%02d' % p
@@ -33,12 +33,14 @@ for p in range(1, 8):
             if not line: continue
             try: f = json.loads(line)
             except Exception: continue
-            i = str(f.get('id', ''))
+            i = str(f.get('id', '')).strip()
+            m_ = re.match(r'^[Cc]0*(\d+)$', i)      # a reader wrote C02758 for C2758: the id is the number
+            if m_: i = 'C%04d' % int(m_.group(1))
             if i in ('DONE', 'STOPPED'): st = line[:120]; continue
             if i == 'HEADER': header.append({'packet': name, 'reader': r, 'town': f.get('town'), 'sev': f.get('sev'), 'why': f.get('why')}); continue
-            if i not in idx: st = st + ' · unknown id ' + i; continue
+            if i not in idx: unknown[(name, r)] += 1; continue
             flags[i][r] = f; n += 1
-        state[(name, r)] = '%d flags · %s' % (n, st)
+        state[(name, r)] = '%d flags · %s%s' % (n, st, (' · UNKNOWN IDS %d' % unknown[(name, r)]) if unknown[(name, r)] else '')
 print('READERS:')
 for k in sorted(state): print('  %s %s  %s' % (k[0], k[1], state[k]))
 rows = []; seen = set()

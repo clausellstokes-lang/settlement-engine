@@ -18,6 +18,7 @@ src = io.open(os.path.dirname(os.path.abspath(__file__)) + '/inventory.py', enco
 ns_ = {'re': re, 'collections': collections}
 exec(src[src.index('def names_of(s):'):src.index('inv=collections.defaultdict(set)')], ns_)
 names_of, fold, parts_of = ns_['names_of'], ns_['fold'], ns_['parts_of']
+MARKP = re.compile(r'^(Stopped by [^.]*\.|Curtailed by [^.]*\.|Scarce in [^.]*\.|Short of [^.]*\.)$')
 kept = collections.Counter(); newfolds = set(); gained = set()
 for l in gzip.open(OUT + '/corpus.ndjson.gz', 'rt', encoding='utf-8'):
     o = json.loads(l); seed = o['seed']; s = o['s']
@@ -30,12 +31,14 @@ for l in gzip.open(OUT + '/corpus.ndjson.gz', 'rt', encoding='utf-8'):
         if line.startswith('== '):
             cur = line; wrote_head = False; continue
         if not line or line.startswith('[STYLE]') or not cur or cur.strip('= ').strip().split('/')[0] not in TABS: continue
+        prev_mark = None
         for p in parts_of(line):
-            f = fold(p, pat)
+            if MARKP.match(p.strip()): prev_mark = p.strip(); continue      # a crisis mark is kept only with the part it opens (below)
+            f = fold(p, pat); mk = prev_mark; prev_mark = None
             if not f or seed in B.get(f, ()): continue
             if MINW and A.get(f, 0) < MINW: continue
             if not wrote_head: out.append(cur); wrote_head = True
-            out.append(p); kept[seed] += 1
+            out.append((mk + ' ' + p) if mk else p); kept[seed] += 1
             (gained if f in B else newfolds).add(f)
     io.open('%s/dumps/%s.txt' % (DEST, seed), 'w', encoding='utf-8').write('\n'.join(out) + ('\n' if out else ''))
 print('towns with something new: %d of %d · new (sentence, town) pairs %d · sentences new everywhere %d · old sentences in a new town %d' % (sum(1 for v in kept.values() if v), len(kept) or 720, sum(kept.values()), len(newfolds), len(gained)))
