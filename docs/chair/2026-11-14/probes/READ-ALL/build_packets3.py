@@ -135,7 +135,7 @@ def header(seed,s):
             inst=n.get('institution'); ik=(inst.get('key') if isinstance(inst,dict) else inst) or ''
             # FIXED 2026-11-14 23:50 UTC: a membership is {power, rank, share, veiled}; the first build read a key that does not exist, so the
             # exports' read saw NO seat on anyone and flagged every true seat claim (struck at the merge by verify3.py, by the record)
-            ms=['%s (rank %s%s)'%(m.get('power'),m.get('rank'),', veiled' if m.get('veiled') else '') for m in (n.get('memberships') or []) if isinstance(m,dict) and m.get('power')]
+            ms=['%s (%s%s)'%(m.get('power'),('rank %s'%m.get('rank')) if m.get('rank') is not None else 'a member, no rank',', veiled' if m.get('veiled') else '') for m in (n.get('memberships') or []) if isinstance(m,dict) and m.get('power')]
             ppl.append('%s (%s), %s%s%s'%(n.get('name'),str(n.get('gender') or '?')[:1],n.get('title') or n.get('role'),(' @ '+str(ik)) if ik else '',(' [sits on: '+'; '.join(ms)+']') if ms else ''))
     L.append('PEOPLE (%d, the whole roster): %s' % (len(ppl),'; '.join(ppl)))
     return '\n'.join(wrap(x) for x in L)
