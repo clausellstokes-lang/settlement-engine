@@ -61,3 +61,9 @@ Re-run at the final tree, in a plain clone with its own `npm ci`, each to a file
 8. LAST, on a clean committed tree: the tuning refreeze then the lighting refreeze, each with its ordinary re-run as the receipt (commands in rows 8a and 8b).
 
 **Still red at this pass, and why:** `tests/lint/poolDominance.walker.test.js` reads the loose Fish market ceiling until `--tighten` (PD2, yours); `tests/lint/proseWiringCensus.walker.test.js` holds three class-b pins (the owner's list, section 5 of the measure). The class-b goldens (the generator golden master, the espionage fence constant) skip loudly in `engineBundleReplay`, by design, until their signed re-record.
+
+## THE RECEIPT (each file run alone, at 47f84ce28, logs `/home/user/doors-logs/R-*.log`)
+
+GREEN: `tests/edgeFunctions/` aiCharterBundle.freshness 19/19, aiGroundingBundle.freshness 20/20, aiOutputSchemaBundle.freshness 23/23, edgeSharedBundleReproducibility 29/29; `tests/components/` pageCensus.walker 14/14, phoneChromeFloor.census 9/9, dossierPhoneFloorAllViews 2/2; `tests/lint/` proseCorpusBytes 18/18, proseNumerics 29/29, sovereigntyLightingContract.walker 34/34, tuningRegister.walker 76/76, wiringCensusDeclared.walker 9/9; `tests/build/landingFixtureFreshness` 3/3 (and earlier engineBundleReplay 5 + 2 skipped by design, engineServiceCore 1/1, engineServiceStoreParity 4/4).
+RED, named: `tests/lint/poolDominance.walker.test.js` 16/17: "no ceiling sits loose above its measure": `institutionServices:Fish market.Wholesale trade: top1 ceiling 1 sits above its measure 0.9686`: cured only by `--tighten`, the chair's door, run once at the final tree by the successor (PD2).
+Not mine and not run: writerReach, presumedThings, observedShapeReaders, factLayers (their seats).
