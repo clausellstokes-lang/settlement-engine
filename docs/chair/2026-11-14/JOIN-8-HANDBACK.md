@@ -57,6 +57,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 16 | tail-powers-b-2026-11-14 | 4ff449a7b (04:20) | f4eab4088 (JOIN-7 24) | d700bda44 | none | clean-both the two presumed registers (parse); DECLARED MOVES c1263e61c, 594794a67, 127b1f8ac, 4ff449a7b: golden carried |
 | 17 | tail-display-econ-2026-11-14 (re-sweep) | 1322e7d0a (04:24; its merge of the line at 5d1e3096b) | 7beec164d (2) | aa169b05e | none | — (no tree change) |
 | 18 | tail-corpus-def-2026-11-14 (re-sweep) | 7ccad225e (04:28; its merge of the line at d817736d8, C17) | 4e0936879 (7) | c095140d3 | none | — (docs only) |
+| 19 | tail-defecon-c-2026-11-14 (re-sweep) | 849bd8679 (04:32) | 4d6d95761 (9) | 3e482b329 | none | `resourceData.js` commodities lent (D32); DECLARED MOVES 0e838bc65 D33, 680d16b54 D34a, 849bd8679 D34b: golden carried |
 
 ## 3. Every code resolution
 
@@ -181,6 +182,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden; `presumedThings.widened.register.json`; `ARRIVAL_SCENES.json`, `STRESS_DESCS.json`, `stressInstitutionEffects.STRESS_INSTITUTION_EFFECTS.json` | narrative (13) | DECLARED MOVE 6a3692996 N13 (founding.stressNote 179 towns, npcs[].secret 115, arrivalScene 62); the widened register merged clean though both moved it; the declarations lane-only |
 | golden; the two presumed registers; `npcData.NPC_CRIMINAL_SECRETS.json`, `npcData.STRESS_ECONOMIC_EFFECTS.json` | ties (14) | DECLARED MOVE 14724c194 T18/T19/T21 (relationships[].description 156 towns, .tension 141, ...); the registers merged clean though both moved them; the declarations lane-only |
 | golden; the two presumed registers | powers-b (16) | DECLARED MOVES c1263e61c P19, 594794a67 P9/P12/P18, 127b1f8ac (arcane advisory, text), 4ff449a7b P29 (factions[].desc 45 towns); the registers merged clean though both moved them |
+| golden | defecon-c (19) | DECLARED MOVES 0e838bc65 D33 (localProduction 117 towns), 680d16b54 D34 (a) (235 towns, catalogue), 849bd8679 D34 (b) (25 towns) |
 
 ## 5. Item 2 at the landed tip
 
