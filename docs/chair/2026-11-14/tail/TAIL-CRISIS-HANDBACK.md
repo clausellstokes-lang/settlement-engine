@@ -753,3 +753,25 @@ stake rows' columns are by size.)
 As TAIL-CRISIS-2's, with one change: the census's count and writer-tracing stages were stopped once the 720 dumps were written.
 The inventory reads only `dumps/`, and the corpus is written at births. The probes (`stakes.mjs`, `faith.mjs` in the scratch
 directory) import the tree's writers and run them over `corpus.ndjson.gz`.
+
+## THE CHAIR'S "FAULTS IN NEW LINES: FIRST" (01:56 UTC, READ-ALL-4 at landed tip 9eb084705): TAKE THESE BEFORE THE REST
+
+TAIL-CRISIS-3 handed back at its count (about 65 minutes in, judged by time) when this note arrived. Each item was measured on
+this seat's after-census (`runs/c2`, f20ce3151's src, tabs). NONE IS CURED; THE NEXT SEAT TAKES THEM FIRST:
+1. `crisisSummaryVantage.js`: "Passing through <N>, you would not see the quarrel over who is really in charge unless you asked."
+   10 towns, all of them insurgency (batch 1's reword of B14649). It is false where the page prints open confrontations beside it
+   (r2s Kaanche: safety Dangerous). The cure is a reword true under an open insurgency, or a fact-keyed twin on the tonight surface,
+   the one that hands facts.
+2. `settlementQuickGuide.js`:
+   - "built around the tank and the bazaar" (11 folds, 43 towns at f20ce3151): verify each town's houses for a tank, reservoir or
+     bazaar, and strike the clause where none stands (`scopeAgainstRule`'s form, batch 2);
+   - "built for a pastoral life half-settled and half-moving" (13 folds, 35 towns) in a coastal trading port with no herds: read
+     the food record's herd (the culture lines' herding rule, r3c10).
+3. `crisisCast.js` (CAST_REASONS.bruntOnly / bruntLeast) via `crisisHooks.js`: "…takes the worst of it: the only one in the house
+   the crisis hits" (26 towns) and "…the one with the least say in the house the crisis hits" (13). In a famine the crisis hits the
+   whole thorp, and "the house" reads as a household. Say the power ("the only one of <power> …") or cut the clause. The reasons
+   are STORED on the cast, so a change is a declared move, unless the hook re-says it at display (batch 3's castSentenceOf form).
+4. `crisisHooks.js` "<person> of Military/Guard takes…": ALREADY CURED at this branch's tip by batch 3 (holderWords reads
+   `powerSentenceName`: "of The Guard"; 0 hook sentences with "of Military/Guard" in `runs/c2`). The landed tip 9eb084705 predates
+   it. The remaining "first of Military/Guard" / "second of Military/Guard" (248 and 226 towns) are rank chips, not this group's
+   writer.
