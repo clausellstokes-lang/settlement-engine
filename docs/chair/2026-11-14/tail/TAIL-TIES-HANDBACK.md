@@ -24,6 +24,32 @@ after every batch.
   THE council take `needs: ['ruling body']`. THE BARE "a vote" LINES: left under lords; under a lone headman they take a
   condition the vocabulary already holds, or are PARKED with the count: no second word.
 
+## The rulings since (the chair's, 2026-11-15, to TAIL-TIES-2; each vetoable by the owner)
+
+TAIL-TIES-2 (the seat after TAIL-TIES, session_01ACmDYZDo15ZKUoyLKyZECB) continues on this branch from b8991a936 and keeps
+this hand-back: its batches are under TAIL-TIES's own, headed "TAIL-TIES-2".
+
+- **(T6)** `src/generators/power/relationshipArchetypes.js` IS THIS GROUP'S WHOLE (no group held it): 01167 and 00699 (the
+  reversed twin as a second tie; 4 and 9 towns) are cured there, by the law kept: NO TIE IS RE-DRAWN: the slot keeps its
+  draw and the false form takes a twin or a condition. THE VOTE ROWS (00669, 01204, 22432; 6 to 7 headman towns each):
+  the atom built is their condition: a line about a vote or a council session `needs: ['ruling body']`, with a twin true
+  under one ruler where the slot would fall mute; such a line in a file outside the group is named.
+- **(T7)** THE HOOK FACTS TAKE THE CRISIS: `src/generators/people/representatives.js` (about line 395) builds the hook facts
+  with no crisis; that ONE BUILDING OF THE HOOK FACTS is this group's by exception (the lines that assemble the facts;
+  nothing else of the file: another seat's rulings rest on its title draw): pass the stress the record holds at that point.
+  NO DRAW IS MOVED: only those six towns' lines change (the field diff by family on the 720 in the commit).
+- **(T8)** 00183 ("population isn't settled at the draw") and any row whose line was true when drawn and false because the
+  record moved afterwards: NAMED with that reason: ORDER-MEASURE-1 is measuring that class (prose written before its facts
+  are final): no draw is moved for them.
+- **(T9)** NOTED AND ACCEPTED: `spareHookLineFactsWork`'s bound re-keyed 8 → 12 on a measure of 8.5 (two new roster facts
+  read, one read a fact): it stays on the veto list as a bound raised with its measure.
+- **(X9)** THE EXPORTS' READ: the rows of these files that only the PDF and the journal print
+  (docs/chair/2026-11-14/read-all-3/WORKLIST3-TIES.md / .json on the chair's lane; 29 rows, 1 HIGH): taken with a batch of
+  the same writer; measured with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`. That read's header showed NO
+  SEAT on anyone (verify by `npcs[].memberships`) and lacked `history.currentTensions`.
+- **(T10)** Two more atoms exist on other branches (`rival power`, the crisis seat's; this group's is `ruling body`): this
+  group adds none: a line that needs a fact the vocabulary lacks is PARKED with its measure.
+
 ## Batch 1 · e0d38e6c4 · the tie pools (npcData.js :: STRESS_ECONOMIC_EFFECTS), rulings (T1) (T2) (T5)
 
 Measured by census 3 on the 720 at f663a2699 (before) and at the batch (after), read through the inventory diff.
@@ -78,6 +104,49 @@ npcs[].plotHooks[] in 194 towns, nothing else. Re-keyed by identity: npcLoyaltyG
 spareHookLine work bound 8 → 12 (measured 4 → 8.5: two distinct roster facts more, still one reading per fact; told to
 the chair); the presumed-things widened register shrunk through its door (three rows cured).
 
+## TAIL-TIES-2 · Batch 1 · powerSiblings, rulings (T6) and (T7), the X9 rows of the same writers
+
+Measured by census 3 on the 720 at b8991a936 (before) and at the batch (after), read through the inventory diff (the tabs;
+and `SURFACES=PDF,Journal` for the X9 rows); false = by record (corpus.ndjson.gz, through the tree's own `rulingBodyOf`).
+
+| row | sentence | towns before → after | false before → after | what |
+|---|---|---|---|---|
+| 20473 · X9 10615 · 00909 | "The elders … decide things together, and no lord stands over them." | 27 → 0 | 2 (r2s-occupied-hamlet-2: an occupier; r2s-succession_void-hamlet-0: a lord of a noble power) → 0 | REWORDED (powerSiblings.js GOV_DESC_OF_UNNAMED_SEAT) |
+| 02676 | "A headman settles disputes and gives the orders here." | 71 → 0 | 2 (r2s-occupied-hamlet-1, -3: an occupier) → 0 | REWORDED |
+| 00669 | "… asked … for a vote against … own interests." (old_debt t[3]) | 331 → 250 | 81 (one ruler) → 0 | CURED (T6: `ruling body`) |
+| 01204 | "… lost the last contract … by a single vote …" (peer_rivalry) | 312 → 237 | 75 → 0 | CURED (T6) |
+| 22432 | "The vote … needs … comes up next week …" (mutual_leverage t[5]) | 301 → 228 | 73 → 0 | CURED (T6) |
+| 01167 · 00699 | the reversed mentor twin ("learned the work at …'s side", "teaching …'s methods as … own") | 304 / 312 (names folded) | 4 / 9 towns → 0: all 102 reversed second ties (98 towns; 21 a mentor's, 28 a debt's, 16 a rivalry's …) written in the first tie's order | CURED (T6: the order stored with the index, `npcData.js :: REVERSED_TIE`) |
+| 03130 · 02506 · X9 03950 · 03004 | the traveller, the cousin, on representative cards | 219 → 216 · 206 → 203 | 3 + 3 → 0 | CURED (T7) |
+| X9 21809 | "… joined against a threat that has since passed …" (wary_alliance d[2]; and t[1] "The threat … is gone") | 286 → 249 (exports) | 44 (a siege, an occupation, monsters or a war) → 0 | CURED (`excludes: crisis: threat, crisis: wartime`) |
+| X9 28943 | "… meeting privately with someone from outside the settlement …" | 159 → 148 (exports) | 11 (a siege or a plague) → 0 | CURED (the traveller's form) |
+
+Also declared (T6, no worklist row; each its one-ruler count → 0): "controls a vote" 310 → 239 (71), "vote together on the
+few" 311 → 239 (72), "has won every vote it needed" / "voted against … on a small matter" 273 → 212 (71), "cost the
+alliance its majority" 285 → 217 (72), "has voted with … ever since" 338 → 258 (80). THE SILENCE IS OVER TWENTY TOWNS a line
+(lords, mayors, an elected reeve and priest-kings beside the headmen): ruled by (T6), told to the chair with the push.
+Other lines in fewer towns: the refused index's other beat (one index draws the pair together: "paid … bail" 330 → 249,
+"kept … name out of a scandal" 335 → 255, "rivals for the same patron's favour" 312 → 237, …). INHERITORS READ (the pools'
+own lines, 11 to 17 towns each, true under any ruler): "both want the same office", "signed a pact after their last
+quarrel", "work together because fighting each other would cost them both more", "nursed … through a winter fever",
+"knows enough to ruin …"; the two reworded seat lines (71, 27). ONE INHERITOR FALSE, owed to the next batch: T7's walk
+now reaches "An outsider has offered to buy the best field …" (npcData.js NPC_FACTION_LOYALTY small_settlement#15) in
+r2s-under_siege-metropolis-2: an outsider under a siege: CURED IN THIS BATCH (the traveller's form), with its sibling
+"Everyone … is behaving slightly differently toward a visitor from outside." (small_settlement#0; 1 false town at the base,
+r2r-thorp-45 under a siege). THE OVERFLOW ARM (a red the batch's own test files caught: narrativeQualityCorpus's cycle
+arm): past a pool's end the tie cycle runs over the lines that name both cards; with the vote lines refused under one
+ruler, a refused overflow index resolved to a one-name line (10 ties in 7 towns at the batch's first after-run). It now
+resolves among the two-name lines first (`createTieProseDraw`, the held set's rule, draw-free): 0 at the batch's end, as
+at the base (3,642 overflow ties on the 720).
+NO TIE RE-DRAWN (the archetype, the target and the drawn index stand; 102 ties take their first tie's order).
+DECLARED MOVE (by family on the 720, base → batch): relationships[].proseVariant 248 towns, .description / .tension 245;
+powerStructure.factions[].desc 98; prominentRelationship.full / .phrasing / .tension 29; npcs[].plotHooks[] 14 (T7: 4 towns,
+r2s-under_siege-metropolis-0 / -2 / -3 and r2s-plague_onset-metropolis-3, the six false lines and the walk's held set
+after them; the outsider row: 11 towns, 2 shared; the visitor row: r2r-thorp-45); pressureSentence 7. Nothing else.
+(The overflow arm alone, first after-run → final: relationships 7 towns, plot hooks 2.)
+Re-keyed by identity: the presumed-things widened register's `house: headman` row (the reworded seat line, 7285d794 →
+abd2ed1a); `--check` stands at the base's 147 fresh, 0 stale.
+
 ## The veto list (every new or changed line, with the towns it was read in)
 
 - old_debt.tension[4]: "{A} has offered to clear what is left of the debt in one payment. {B} would rather be repaid in
@@ -91,43 +160,74 @@ the chair); the presumed-things widened register shrunk through its door (three 
   metropolis-3 (295,750), r2s-occupied-metropolis-0 (occupied, a curfew).
 - (no new line) the cargo twin "A valuable cargo was reported lost on the road. …" now prints in river towns too: read in
   r2r-village-30 (175), r2s-mass_migration-metropolis-3 (248,369), r2s-famine-village-3 (famine).
+- (TAIL-TIES-2 b1) the Free Elder Council's line: "The elders of the hamlet decide things together, and none of them
+  rules alone." (was "…, and no lord stands over them.") — read in r2s-famine-hamlet-1 (41, famine),
+  r2s-succession_void-hamlet-0 (99, a lord of a noble power beside the elders), r2s-occupied-hamlet-2 (59, occupied).
+- (TAIL-TIES-2 b1) the Headman's Authority's line: "A headman settles disputes and speaks for the community." (was "…
+  and gives the orders here.") — read in r2s-wartime-thorp-3 (6, wartime), r2s-infiltrated-village-2 (388),
+  r2s-occupied-hamlet-3 (43, occupied).
+- (TAIL-TIES-2 b1, no new line) the reversed second tie prints its kind's own line with the two cards exchanged (the
+  first tie's order): read in r2s-under_siege-thorp-3 (7, siege), r2r-metropolis-6 (216,641, succession void),
+  r2s-occupied-thorp-1 (17, occupied and famine).
+- (TAIL-TIES-2 b1) THE SILENCES OVER TWENTY TOWNS (T6): the nine vote lines refused under one ruler, 71 to 81 towns each
+  (above).
+- (T9) the work bound of `spareHookLineFactsWork` raised 8 → 12 on a measure of 8.5: a bound raised with its measure.
 
 ## Rows named for other files
 
-- 03130, 02506 (3 + 3 towns): the representative cards' hook walk (src/generators/people/representatives.js, line 395:
-  `factsOf({ institutions, tier })`) hands no crisis, so a siege or plague reads calm there. The cure: hand the place's
-  stress to that facts call. Outside my group.
-- 00183 (1 town): the population is not settled at the loyalty draw (`birthFactsOf` carries no population; the band
-  reads the tier), so a "town" of 310 reads middling there. The cure belongs to the draw's facts (npcGenerator.js).
-- 01167, 00699 (T2, who taught whom): the contradiction is a SECOND tie of the same pair, of the same archetype, in the
-  reverse direction (21 such mentor pairs on the 720; old_debt has 28: who owes whom). The second beat is drawn in
-  src/generators/power/relationshipArchetypes.js :: createTieProseDraw (or the tie draw people/ties.js), in no group:
-  the cure is there (orient the reverse tie's prose by the first tie's direction, the pair's ONE home).
+- (CURED by TAIL-TIES-2 b1 under (T7) and (T6)): 03130 / 02506; 01167 / 00699.
+- 00183 (1 town; r2s-occupied-town-2) (T8): true when drawn, false because the record moved afterwards: the population
+  is not settled at the loyalty draw (`birthFactsOf` carries no population; the band reads the tier), so a "town" of 310
+  reads middling there. ORDER-MEASURE-1 is measuring that class; no draw is moved for it.
+- (TAIL-TIES-2) 28616 · X9 17043 · 25907 · 25995 · 26057 ("Well-funded city watch; it keeps order reliably and is growing
+  more sure of its own authority.", 101 towns; 43 factions by record, under a famine, a plague, a fracture, a debt, a
+  succession void …): the line is spelled in src/generators/power/rulingStructure.js (line 562) and claimStanding.js
+  (line 74); the declared set here resolves against the roster's names alone, which hold no crisis and no standing.
+  The cure is at those sites (their facts: the stress and the watch's standing).
+- (TAIL-TIES-2) 23160 ("Town watch; … reports to the council.", 37 towns; 1 of 6 factions by record under a one-ruler
+  government): spelled in rulingStructure.js (line 560); the set's site hands no government, so `ruling body` is
+  unanswered there (a declaration would refuse it in every town). The cure: hand `powerStructure: { government }` to
+  that site's `factsOf`, then `needs: ['watch', 'ruling body']` here.
+- (TAIL-TIES-2) 03038 ("A small group of traders who come on market days …", 4 towns, all with guilds of their own:
+  3 merchant guilds, 1 craft guilds): spelled in rulingStructure.js (line 467). A twin here keyed on `guild` is refused by
+  census5bOffCensusDeclarations' well-formedness (its calm double holds every presence atom, so an original that
+  excludes one is "never lawful"): the cure is at the branch (the merchant guild's presence).
+- (TAIL-TIES-2) 22409 · B19180 ("The church wants approval rights over market day activities. The village reeve
+  disagrees.", 2 towns, both false: r2r-hamlet-59 has no church of its own, r2r-village-36 is ruled by Priestly
+  Guidance; neither has a reeve): spelled in src/generators/power/governanceNarrative.js (line 481), a branch that fires
+  only where the roster has no civic house, so its reeve is never true; the calm double holds no `church` and no
+  `ruler:` (the same well-formedness test), so the set cannot carry them. The cure is the source line's (name no reeve).
+- (TAIL-TIES-2, PARKED as a draw) X9 16470 · 16469 · 00634 · 02763 (a Mentor and Successor tie between the occupier's
+  governor and the local headman, 2 to 312 towns as folded): the archetype is drawn by `computeRelTension`'s power gap
+  (≥ 4: mentor or debt, an rng roll); every mentor line says mentor, so the true form is another archetype: a re-draw
+  of the tie (a STOP by the law). Told to the chair.
 - hookTruth.js (the CRISIS seat's) carries the one re-export edit of (T5).
 
 ## Parked (T5: no second word)
 
-- the bare vote lines under a lone headman: 00669 (7 towns), 01204 (6), 22432 (7); also mutual_leverage desc[4] / desc[7],
-  wary_alliance desc[5] / tension[5], old_debt desc[5] (5 to 11 headman towns each). The vocabulary holds no atom for
-  "some body that votes" (a guild, a chapter, a council) that would not silence the line where the council votes.
+- (CURED by TAIL-TIES-2 b1 under (T6)): the bare vote lines.
 
 ## Registers named stale
 
 - tests/property/espionageDormancyFence.test.js's driven golden: red at the base (50011ad3…), moved by batch 1
   (→ bab4e09c…).
 
-## Rulings that arrived after the work stopped (read at hand-back, not acted on: the budget)
+## Chair notes received by TAIL-TIES-2 (2026-11-15, 00:41 and 00:46 UTC)
 
-- **(T6)** (the chair, 00:07 UTC): `src/generators/power/relationshipArchetypes.js` IS THIS GROUP'S WHOLE: 01167 / 00699
-  (the reversed mentor twin as a second tie, 4 and 9 towns) are cured there, NO TIE RE-DRAWN (the slot keeps its draw;
-  the false form takes a twin or a condition). THE VOTE ROWS 00669 / 01204 / 22432 (and the other bare vote lines,
-  "Parked" below) take `needs: ['ruling body']`, with a twin true under one ruler where the slot would fall mute.
-  Both are OPEN for the next seat: the measures are above; the batch-1 guard (tests/generators/tailTiesBatch1.test.js)
-  is the form.
-- **X9** (the chair, 00:00 UTC): the exports' own rows of these files, docs/chair/2026-11-14/read-all-3/WORKLIST3-TIES.md
-  / .json on the chair's lane (29 rows, 1 HIGH: a hook's dragon demanding tribute where no dragon is on the roster):
-  NOT READ; measure with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`. `ruling body` sits apart from the
-  end of the vocabulary list (before `priest`), clear of TAIL-CRISIS's `rival power`.
+- **(T11)** rows named for this group by TAIL-DISPLAY-CIVIC (docs/chair/2026-11-14/read-all/WORKLIST-DISPLAY-CIVIC.json on
+  the chair's lane): 05688 B00530 00587 26926 B07353 B28204 20796, a person's constraint, relationship and goal lines that
+  claim an office or a house the roster does not give: those written in `src/data/npcData.js` and
+  `src/data/people/goalFamilies.js` are this group's (those in `dmPowerLines.js` are TAIL-POWERS-B's): find each row's
+  writer by script, verify by the record, take them with a batch of the same writer. NOT YET TAKEN (the budget).
+- **(T12)** TAIL-TITLES changes, on its own branch, only the two mints' call of a new leaf in
+  `src/generators/people/representatives.js` (not the hook facts near line 395, this group's by T7) and the ladder's cut
+  (`isMintedLord`) in `src/generators/npcStructure.js`: this group's edits to those files stay inside the hunks its rows
+  need; a row that is a gendered title word on a person is named for TAIL-TITLES, not cured here. (T7's edit here is two
+  hunks: the `HookPlace` typedef and the spare walk's facts and its one call.)
+
+## Rulings that arrived after the work stopped
+
+- (T6) and X9: TAKEN by TAIL-TIES-2 (its batch 1 above; X9's rows of other writers are in "What is left").
 
 ## What is left of the worklist (not reached: the budget)
 
@@ -136,15 +236,20 @@ the chair); the presumed-things widened register shrunk through its door (three 
   B00422 / B21732): each line gives a card an office the PEOPLE line does not (an arrest record to a blade captain, an
   altar to a hospital's master); the archetype's choice of pair is the writer (relationshipArchetypes.js, no group), the
   lines need a per-card word (the chair's PARKED "commands the patrols" family).
-- npcData.js NPC_CRIMINAL_SECRETS_BY_HOLDER (17103, B16645); npcStructure.js reg (8 rows); powerSiblings.js (7 rows:
-  20473 HIGH "no lord stands over them" under an occupation, 28616, 23160, 03038, 02676, 22409, B19180);
-  goalFamilies.js (12 rows); plotHooks.js TENSION_LABELS (2) and ECHO_PREFIXES (7: the hook text is the history
+- npcData.js NPC_CRIMINAL_SECRETS_BY_HOLDER (17103, B16645); npcStructure.js reg (8 rows); powerSiblings.js: DONE
+  (TAIL-TIES-2 b1: 2 cured, 5 named); goalFamilies.js (12 rows); plotHooks.js TENSION_LABELS (2) and ECHO_PREFIXES (7: the hook text is the history
   generator's, the prefix list only matches it: NAMED for the HISTORY group).
+- X9 (the exports), at b8991a936: 06985 HIGH (goalFamilies.js, a dragon's tribute, 1 town) with 11074 / 18508
+  (goalFamilies.js, 1 town each); 07276 / 07278 / 04213 / 04209 (the role-based tie rows, 17 to 24 towns); 11965 / 30553
+  (NPC_CRIMINAL_SECRETS_BY_HOLDER, 21 / 16); 28931 (the guard line, 147: batch 2 struck its tabs twin 22767, a militia
+  is a force) and 03275 (an auditor "is coming", 104: an auditor need not come by road); GONE IN THE TOWN READ at the base
+  (batch 2's cures): 28558, 03614, 28819, 27350.
 
 ## Guards owed
 
-- the representative walk's crisis (above), with its own NOT pairs (r2s-under_siege-metropolis-2,
-  r2s-plague_onset-metropolis-3).
+- (PAID by TAIL-TIES-2 b1: tests/generators/tailTies2Batch1.test.js) the representative walk's crisis.
+- THE INHERITOR OWED: "An outsider has offered to buy the best field …" under a siege (r2s-under_siege-metropolis-2),
+  reached by T7's walk: the next batch.
 
 ## How the instruments are re-made
 
