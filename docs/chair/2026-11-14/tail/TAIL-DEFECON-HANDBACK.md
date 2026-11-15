@@ -19,6 +19,29 @@ worklist's count: none was struck "gone at the base".
   changed is a STOP: tell the chair.
 - (D5) The defence lane's last seat left measured rows in these files (a fish line, the gates under a siege, the crime
   summary): a matching row reads ONLY that row of "WHAT IS LEFT" in `docs/chair/2026-11-12/UPKEEP-HANDBACK.md`.
+- (D6, 23:17 UTC) THE "MADE HERE" LIST IS NOT WHAT THE TOWN'S HOUSES MAKE (a good made or exported with no house that
+  makes it in 522 of 720 towns; a category key printed as a good in 302). The maker is this group's
+  `computeActiveChains.js :: deriveLocalProductionFromChains`. Two cures granted, patches applying at 06f36ad36
+  (`lane/record-measure-2026-11-14`, `docs/chair/2026-11-14/probes/RECORD-MEASURE-1/c1a.patch`, `c2a.patch`; report
+  `docs/chair/2026-11-14/RECORD-MEASURE-1.md`, rows c1 and c2 only): C1-A (step 1 asks the export's own
+  RESOURCE_EXTRACTION_GATES; step 2 keeps a chain only where a house of THIS town processes it, read through
+  `institutionalCatalog.js :: isFabricInstitution`, not the patch's regex) and C2-A (the seven category keys leave the made
+  list). Target: localProduction ONLY moves, 407 towns (C1-A) and 302 (C2-A); c1 522 -> 469, c2 302 -> 0; another family
+  moving is a STOP. Placed FIRST.
+- (D7, 23:41) C1-A's gate: c1a.patch reds `tests/components/economicsProducedLocally.test.jsx` (2). THE SMITH'S IRON
+  STAYS: a good is made where a house that WORKS it stands (smith, forge, smelter), not only where one digs it; widen the
+  gate so that anchor stays green UNCHANGED. The other anchor ("a thorp that walks to a neighbour's church"): if it
+  anchors a good whose maker stands on the roster (not an "Access to …" row) the gate is wrong; if a good no house makes,
+  re-key it by identity and name what prints instead. The golden (525 configs under the four cures) and
+  coherenceAgreeCures' gate tally (2 red at 06f36ad36) are NAMED, not re-taken. Check against: c2 302 -> 0; c1 printed
+  452 -> 403; c3 52 -> 12.
+- (X9, 00:00) The exports' read: `docs/chair/2026-11-14/read-all-3/WORKLIST3-DEFECON.{md,json}` on the chair's lane (43
+  rows, 1 HIGH: watch towers and muster drills where the defence holds no one, 157 towns). Take a batch writer's rows
+  there in the same batch (measure with `SURFACES=PDF,Journal python3 inventory.py`); that read's header showed no seats
+  and lacked `history.currentTensions`.
+- (D8, 00:05) PEACE_IRON_HOOKS' three literals in `foodBalance.js` (~854–856) are TAIL-CRISIS-2's, by exception: NOT
+  EDITED here (this seat never touched them). Still this group's: the iron carts hook's CONDITION (row 20893, 39 towns,
+  false where the town imports no iron).
 - And BRIEF-TAIL's laws (silence is true; a mute state takes a twin; no draw moved; siege/famine; agreement; one home;
   no new vocabulary word; no `src/pdf/` or `src/foundry/`; every new line listed for the veto).
 
@@ -130,12 +153,37 @@ Batch 1 (towns from the after census: the smallest and largest it reaches, a cri
 
 - The page-census grid's register: two falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) — stale low, NAMED, not re-taken (re-derived at the close).
 
-## What is left of the worklist
+## What is left of the worklist (HANDED BACK at the budget, 2026-11-15 00:10 UTC, after batch 1)
 
-Batch 1 took 30 rows (24 cured, 6 struck). Left: the economy writers (`economicState.js` 12, `incomeLineSiblings.js` 8,
-`computeActiveChains.js` 2, `prosperity.js` 1, `tradeGoods.js` 2, `resourceGenerator.js` 2, `resourceData.js` 1,
-`foodBalance.js` 3, `viability.js` 4, `cascadePass.js` 1, `isolationGenerator.js` 1), the display (`defenseDisplay.js`
-15, `dossierViewModel.js` 6).
+The seat handed back by time (66 minutes; the brief's 250,000 in about eighty) before a batch it could not finish.
+
+1. FIRST (D6, D7): C1-A and C2-A in `computeActiveChains.js :: deriveLocalProductionFromChains`. Not begun.
+2. Batch 2, MEASURED on the base record and ready to cure (`economicState.js :: generateEconomicState`, lines 69-368 at
+   6b8a9b993), measure = towns false of towns printing:
+   - 03348 (D1) "Agricultural Rents … from tenant farmers": 320 of 360 (thorps 112, hamlets 104, villages 104) stand no
+     landlord (no lord's steward or reeve, no feudal or manor power). The SOURCE label "Agricultural Rents" is read by
+     `src/domain/worldPulse/treasury.js` (`'Agricultural Rents': 'land_rents'`, not this group's file),
+     `incomeLineSiblings.js:204` and `resourceGenerator.js:46`: cure the DESC only (a twin naming no tenant), or the label
+     with treasury.js named for its group.
+   - 15707 Pilgrim Trade with no shrine, relic site, cathedral, abbey or monastery: 26 of 87; 00386 the same under a siege:
+     7.
+   - 11426 "Identification, augury, message sending, and contract-grade enchanting brings": a four-item subject, 83 of 83
+     (-> "bring").
+   - B17543 "A busy market for spell services" under a siege: 5 of 83. 16644 River Tolls under a siege: 1 of 48.
+   - B05884 "Smuggling Network Revenue" where no smuggling house stands (`hasSmuggling` reads 'front', so Front
+     Businesses name it): 22 of 78.
+   - 06146 / 06148 "it goes to the criminals who run them" with no criminal house or power: 48 of 65, 13 of 34.
+   - 17619 Security Contracts (13): not yet measured (Merchant Guilds Suppressed; under a siege trade is halted).
+   - The fish rows of this writer (B07356, B07359) go with the fish rows of `incomeLineSiblings.js` (B07361 B07357
+     B07355; D5: read only the fish row of UPKEEP-HANDBACK's "WHAT IS LEFT").
+3. Not begun: `incomeLineSiblings.js` (8), `computeActiveChains.js` (2: 03905 D1 mercenary hire 240, 28528 waterborne
+   freight under a siege), `prosperity.js` (10700 D2), `tradeGoods.js` (2), `resourceGenerator.js` (2: 15458 D3), 
+   `resourceData.js` (1), `foodBalance.js` (3, and D8's iron carts condition, row 20893), `viability.js` (4),
+   `cascadePass.js` (1), `isolationGenerator.js` (1), `defenseDisplay.js` (15), `dossierViewModel.js` (6); and X9's
+   43 export rows.
+
+THE NEXT SEAT'S BEFORE RUN: the census at 6b8a9b993 is this seat's after run (`/tmp/defecon/after1`, outside every
+tree; it does not survive the container): re-run `census3.sh` at the branch tip.
 
 ## How the instruments are re-made
 
