@@ -7,6 +7,10 @@ import io, re, os, sys, json, gzip, collections
 OUT, BEFORE, DEST = sys.argv[1:4]
 TABS = tuple((os.environ.get('SURFACES') or 'World,Systems,Summary,Table').split(','))
 B = {f: set(v['towns']) for f, v in json.load(io.open(BEFORE, encoding='utf-8')).items()}
+# ADDED 2026-11-15: MINW=<n> with AFTER=<the inventory of this census>: keep only a sentence that prints in n towns or more NOW (the wide new lines:
+# a new line in one town is read with its town, not here).
+MINW = int(os.environ.get('MINW') or 0)
+A = {f: len(v['towns']) for f, v in json.load(io.open(os.environ['AFTER'], encoding='utf-8')).items()} if MINW else {}
 os.makedirs(DEST + '/dumps', exist_ok=True)
 if not os.path.exists(DEST + '/corpus.ndjson.gz'): os.symlink(os.path.abspath(OUT + '/corpus.ndjson.gz'), DEST + '/corpus.ndjson.gz')
 src = io.open(os.path.dirname(os.path.abspath(__file__)) + '/inventory.py', encoding='utf-8').read()
@@ -29,6 +33,7 @@ for l in gzip.open(OUT + '/corpus.ndjson.gz', 'rt', encoding='utf-8'):
         for p in parts_of(line):
             f = fold(p, pat)
             if not f or seed in B.get(f, ()): continue
+            if MINW and A.get(f, 0) < MINW: continue
             if not wrote_head: out.append(cur); wrote_head = True
             out.append(p); kept[seed] += 1
             (gained if f in B else newfolds).add(f)
