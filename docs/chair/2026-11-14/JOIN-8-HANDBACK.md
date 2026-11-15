@@ -52,6 +52,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 12 | tail-houses-2026-11-14 | b39f5c78c (04:09; handed back) | 9525e011b (JOIN-7 20) | d5ec9c7f3 | none | clean-both `presumedThings.register.json` (parses); lane-only `INSTITUTION_DESC_VARIANTS.json`; DECLARED MOVES 57a19f800, ba3af4202, e45e08b0f: golden carried |
 | 13 | tail-narrative-2026-11-14 | 78eadedc5 (04:13) | ca827fc0f (JOIN-7 22) | 4c69c3433 | none | clean-both `presumedThings.widened.register.json` (parses); lane-only ARRIVAL_SCENES, STRESS_DESCS, STRESS_INSTITUTION_EFFECTS declarations; DECLARED MOVE 6a3692996 N13: golden carried |
 | 14 | tail-ties-2026-11-14 | 7622238f6 (04:16; at its mark) | fdebbe346 (JOIN-7 21) | 9ba7d6940 | none | clean-both the two presumed registers (parse); lane-only NPC_CRIMINAL_SECRETS, STRESS_ECONOMIC_EFFECTS declarations; DECLARED MOVE 14724c194: golden carried |
+| — | tail-powers-2026-11-14 | 01ddaba28 (04:20; holds the line's merge at d817736d8) | d817736d8 | — | **STOP**: code conflict, `governanceAccount.js` (§6) | aborted; told the chair 04:22 |
 
 ## 3. Every code resolution
 
@@ -182,7 +183,7 @@ Not yet run (after the sweep's code points).
 
 ## 6. Stops
 
-None yet.
+- **04:21 UTC, point 15 STOPPED (law b; the chair's 03:40 word: "if it still meets the line in a code hunk, stop"):** lane/tail-powers-2026-11-14 at 01ddaba28 (base d817736d8), `git merge --abort`. `src/domain/display/governanceAccount.js`: hunk 1, the imports and `powerNameInProse`: display-civic V1 (1f030877d, landed at point 10) strips the name's own "The" with `powerNameAfterArticle` from `powerSentenceName.js`; powers (P3) writes the same cure as `powerSentenceName(...)` and a regex strip, and imports `powerSentenceName` a second time: one cure written twice, keeping either is a choice. Hunk 2, `governanceAccountOf` §3+4: V1's comment lines against P4's `lineOf` helper (both stand). Told the chair 04:22. Recommendation: V1's body (on the line), P4's `lineOf`, one import line.
 
 ## 7. Hazards
 
