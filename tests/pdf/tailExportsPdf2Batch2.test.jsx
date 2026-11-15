@@ -73,7 +73,8 @@ const NOT = [
   ['25077', 'r2r-metropolis-14', 'services', /^Strategic Crossroads » Toll bridge/m, /^Stopped by the siege\. Strategic Crossroads » Toll bridge/m],
   ['25075', 'r2s-plague_onset-city-0', 'services', /^Strategic Crossroads » Coaching inn » Transit trade profit$/m, /^Curtailed by the outbreak\. Strategic Crossroads » Coaching inn/m],
   // E17: a house, a service row with its description, a pill with none, an income share; and each chapter's head line
-  ['E17/house', 'r2s-under_siege-town-2', 'institutions', /^Beds for merchants on the road\.$/m, [/^Stopped by the siege\. Beds for merchants on the road\.$/m, HEAD_SIEGE]],
+  // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on (its "Meals and drink"): the inn reads "Curtailed by the siege."
+  ['E17/house', 'r2s-under_siege-town-2', 'institutions', /^Beds for merchants on the road\.$/m, [/^Curtailed by the siege\. Beds for merchants on the road\.$/m, HEAD_SIEGE]],
   ['E17/service', 'r2s-famine-city-3', 'institutions', /^: Daily bread\./m, /^: Scarce in the famine\. Daily bread\./m],
   ['E17/pill', 'r2s-under_siege-town-2', 'services', /^Accommodation$/m, [/^Accommodation \(stopped\)$/m, HEAD_SIEGE]],
   ['E17/income', 'r2s-under_siege-town-2', 'economics', /^Magical trade conduits generate/m, [/^Stopped by the siege\. Magical trade conduits generate/m, HEAD_SIEGE]],

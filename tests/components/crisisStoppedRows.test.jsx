@@ -51,6 +51,8 @@ const bornCensus = (seed) => {
 };
 
 const SIEGE = 'Stopped by the siege.';
+/** SV7 (BAR3-SERVICES-2, 2026-11-15): a house the siege stops but for a row of its own on offer beside it. */
+const SIEGE_PARTLY = 'Curtailed by the siege.';
 const OUTBREAK = 'Curtailed by the outbreak.';
 const FAMINE = 'Scarce in the famine.';
 
@@ -59,8 +61,8 @@ const MARKED = [
   ['r2s-under_siege-city-1', 'services', 'Jewellery, fine clothing, and luxury goods from across the world.', SIEGE], // 12206; BAR2-SERVICES SV2 (2026-11-15): re-keyed by its text, it names no spice
   ['r2s-under_siege-city-1', 'services', 'Multiple gated access points. Customs checks and toll collection.', SIEGE], // 06254
   ['r2s-under_siege-city-1', 'services', 'Large-scale commercial facilitation across regional markets.', SIEGE], // 12523
-  ['r2s-under_siege-city-1', 'institutions', 'Multiple inn districts catering to merchants, travelers, and long-term visitors.', SIEGE], // HOUSES 14115
-  ['r2s-under_siege-city-1', 'institutions', 'Silks, spices, precious goods.', SIEGE],
+  ['r2s-under_siege-city-1', 'institutions', 'Multiple inn districts catering to merchants, travelers, and long-term visitors.', SIEGE_PARTLY], // HOUSES 14115; BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on
+  ['r2s-under_siege-city-1', 'institutions', 'Silks, spices, precious goods.', SIEGE_PARTLY], // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on
   ['r2s-under_siege-thorp-1', 'services', 'A bed by the hearth and a place at a shared table, for a traveller who asks.', SIEGE], // 02383
   ['r2s-under_siege-thorp-1', 'services', 'Funeral rites, said by the parish priest, who comes or is sent for.', SIEGE], // 09525
   ['r2s-under_siege-thorp-1', 'institutions', 'Services mean a walk of a few miles to the village house of worship.', SIEGE], // HOUSES 17675
@@ -103,10 +105,10 @@ const SHORT_KEEP = [
 /** S8: (seed, the house's catalogue id, the mark the house takes under the town's crisis). */
 const S8_HOUSES = [
   ['r2s-under_siege-village-0', 'fish_market', SIEGE],
-  ['r2s-under_siege-metropolis-0', 'cemetery_network', SIEGE],
+  ['r2s-under_siege-metropolis-0', 'cemetery_network', SIEGE_PARTLY], // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on
   ['r2s-under_siege-city-0', 'chroniclers_exchange', SIEGE],
   ['r2s-under_siege-hamlet-3', 'hunter_s_lodge', SIEGE],
-  ['r2s-under_siege-village-0', 'cartographer_s_workshop', SIEGE],
+  ['r2s-under_siege-village-0', 'cartographer_s_workshop', SIEGE_PARTLY], // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on
   ['r2s-under_siege-metropolis-0', 'stone_quarry', SIEGE],
   ['r2s-plague_onset-town-0', 'carriers_guild', OUTBREAK],
   ['r2s-plague_onset-hamlet-1', 'periodic_market', OUTBREAK],

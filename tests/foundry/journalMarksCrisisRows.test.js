@@ -51,7 +51,8 @@ const RED = [
   ['r2s-plague_onset-town-0', 'Economics & Trade', '- Market Taxes: 36%', '- Market Taxes (curtailed): 36%'],
   ['r2s-famine-town-1', 'Economics & Trade', '- **Grain & Bread** *(impaired)*', '- **Grain & Bread** *(impaired)*: Scarce in the famine.'],
   ['r2s-plague_onset-town-0', 'Economics & Trade', '- **Caravan & Overland Trade** *(vulnerable)*', '- **Caravan & Overland Trade** *(vulnerable)*: Curtailed by the outbreak.'],
-  ['r2s-under_siege-town-3', 'Institutions', '- **Inns**: Lodging for traveling merchants.', '- **Inns**: Stopped by the siege. Lodging for traveling merchants.'],
+  // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on (its "Meals and drink"): the inn reads "Curtailed by the siege."
+  ['r2s-under_siege-town-3', 'Institutions', '- **Inns**: Lodging for traveling merchants.', '- **Inns**: Curtailed by the siege. Lodging for traveling merchants.'],
   ['r2s-famine-town-1', 'Institutions', "- **Mills**: The town's grain is ground at a handful of sites.", "- **Mills**: Scarce in the famine. The town's grain is ground at a handful of sites."],
 ];
 /** HEAD: [seed, page, the crisis's noun]: the page's one head line prints where a row is marked. */

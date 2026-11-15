@@ -16,6 +16,14 @@
  *     waypoint (the rows reworded to what every printing town bears); the town's own clergy where it has only access to a
  *     neighbour's church (its twin) (REWORDED: what prints instead is named);
  *   · a KEEP pair (a true sibling of each cured row) stops printing unmarked or in its old words.
+ *
+ * BATCH 2 (BAR3-SERVICES-2, the chair's ruling SV7 of 2026-11-15; vetoable by the owner): A HOUSE IS "STOPPED" ONLY IF
+ * EVERY ROW OF IT IS STOPPED. It reds when (each CURTAILED pair red at 52f0a1684)
+ *   · a house the siege stops but for a row of its own on offer beside it (a row `SERVICE_FREE_OF_HOUSE` declares free)
+ *     reads "Stopped by the siege." on the Institutions tab, in the PDF's Institutions chapter or on the Journal's page,
+ *     not "Curtailed by the siege.";
+ *   · its free row stops printing on offer (no door word), or a house every row of which is stopped (its rows the siege's
+ *     own twins) stops reading "Stopped by the siege." (KEEP_STOPPED).
  */
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -23,6 +31,10 @@ import { cleanup, render } from '@testing-library/react';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
+import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { markedOnPage } from '../../src/pdf/lib/crisisMarksOnPage.js';
+import { institutionDescription } from '../../src/components/new/tabs/InstitutionsTab.jsx';
 
 window.matchMedia = window.matchMedia || vi.fn((query) => ({ media: query, matches: false, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }));
 
@@ -122,6 +134,73 @@ describe('BAR3-SERVICES batch 1: a row carries the mark its state makes true; a 
       if (!text.includes(now)) failures.push(`${seed}: does not print "${now}"`);
     }
     for (const [seed, words] of KEEP_WORDS) if (!(await servicesText(seed)).includes(words)) failures.push(`${seed}: does not print "${words}"`);
+    expect(failures).toEqual([]);
+  }, 600_000);
+});
+
+const CURTAILED = 'Curtailed by the siege.';
+/** (seed, the house's roster name, its own row that prints on offer beside it). Smallest to largest. */
+const CURTAILED_HOUSES = [
+  ['r2s-under_siege-village-0', "Travelers' inn", 'Meals'],
+  ['r2s-under_siege-village-0', "Cartographer's workshop", 'Map making'],
+  ['r2s-under_siege-town-1', 'Inn (multiple)', 'Meals and drink'],
+  ['r2s-under_siege-city-0', 'Luxury goods quarter', 'Custom commissions'],
+  ['r2r-metropolis-14', 'Inns and taverns (district)', 'Entertainment'],
+  ['r2r-metropolis-14', 'Cemetery network', 'Central register'],
+];
+/** (seed, a house every row of which the siege stops: its rows say so in the siege's own words). */
+const KEEP_STOPPED = [
+  ['r2s-under_siege-town-0', 'Annual fair'],
+  ['r2s-under_siege-town-0', "Carriers' guild"],
+];
+
+/** @param {string} seed @param {string} name */
+const houseOf = (seed, name) => (town(seed).institutions || []).find((i) => i && i.name === name);
+/** @param {string} seed */
+async function institutionsText(seed) {
+  const s = town(seed);
+  cleanup();
+  const { default: InstitutionsTab } = await import('../../src/components/new/tabs/InstitutionsTab.jsx');
+  return render(<InstitutionsTab settlement={s} />).container.textContent || '';
+}
+/** The Journal's Institutions page, as a reader sees it. @param {string} seed */
+const journalInstitutions = (seed) => {
+  const s = town(seed);
+  const page = buildJournalPages(buildViewModel({ settlement: s }), { settlement: s }).find((p) => p.name === 'Institutions');
+  return String(page?.markdown ?? '').replace(/\\([\\`*_{}[\]()#+\-.!|>~<])/g, '$1').replace(/&#39;/g, "'");
+};
+
+describe('BAR3-SERVICES-2 batch 2 (SV7): a house is "Stopped" only if every row of it is stopped', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
+
+  test('CURTAILED: the house reads "Curtailed by the siege." on the tab, the PDF and the Journal; its free row prints on offer', async () => {
+    const failures = [];
+    for (const [seed, name, row] of CURTAILED_HOUSES) {
+      const inst = houseOf(seed, name);
+      if (!inst) { failures.push(`${seed}: no ${name} on the roster`); continue; }
+      const desc = String(institutionDescription(inst) || '').trim();
+      if (!desc) { failures.push(`${seed}: ${name} has no description to mark`); continue; }
+      const tab = await institutionsText(seed);
+      if (!tab.includes(`${CURTAILED} ${desc}`)) failures.push(`${seed}: the Institutions tab does not print "${CURTAILED} ${desc}" (${name})`);
+      if (!tab.includes(row) || tab.includes(`${row} (stopped)`)) failures.push(`${seed}: ${name}'s "${row}" does not print on offer`);
+      const pdf = markedOnPage(town(seed), 'house', inst, desc);
+      if (pdf !== `${CURTAILED} ${desc}`) failures.push(`${seed}: the PDF prints "${pdf}" (${name})`);
+      const journal = journalInstitutions(seed);
+      if (!journal.includes(`${CURTAILED} ${desc}`)) failures.push(`${seed}: the Journal does not print "${CURTAILED} ${desc}" (${name})`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('KEEP_STOPPED: a house every row of which is stopped still reads "Stopped by the siege."', async () => {
+    const failures = [];
+    for (const [seed, name] of KEEP_STOPPED) {
+      const inst = houseOf(seed, name);
+      if (!inst) { failures.push(`${seed}: no ${name} on the roster`); continue; }
+      const desc = String(institutionDescription(inst) || '').trim();
+      if (!desc) { failures.push(`${seed}: ${name} has no description to mark`); continue; }
+      if (!(await institutionsText(seed)).includes(`${SIEGE} ${desc}`)) failures.push(`${seed}: ${name} does not read "${SIEGE}" on the tab`);
+      if (markedOnPage(town(seed), 'house', inst, desc) !== `${SIEGE} ${desc}`) failures.push(`${seed}: ${name} does not read "${SIEGE}" in the PDF`);
+    }
     expect(failures).toEqual([]);
   }, 600_000);
 });

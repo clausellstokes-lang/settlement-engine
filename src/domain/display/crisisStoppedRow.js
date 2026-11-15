@@ -60,6 +60,7 @@ import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
+import { serviceRowsOf } from '../dossier/entityLinks.js';
 import {
   SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN,
   TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, NONE,
@@ -80,7 +81,27 @@ const MARK_LINES = Object.freeze([
   Object.freeze({ text: 'Stopped by the siege.', needs: Object.freeze(['crisis: under_siege']), kind: 'under_siege' }),
   Object.freeze({ text: 'Curtailed by the outbreak.', needs: Object.freeze(['crisis: plague_onset']), kind: 'plague_onset' }),
   Object.freeze({ text: 'Scarce in the famine.', needs: Object.freeze(['crisis: famine']), kind: 'famine' }),
+  // SV7 (the chair's ruling, 2026-11-15; vetoable by the owner): a house the siege stops but for a row of its own that goes on
+  Object.freeze({ text: 'Curtailed by the siege.', needs: Object.freeze(['crisis: under_siege']), kind: 'under_siege:curtailed' }),
 ]);
+
+/**
+ * A HOUSE IS "STOPPED" ONLY IF EVERY ROW OF IT IS STOPPED (BAR3-SERVICES-2, the chair's ruling SV7 of 2026-11-15; vetoable
+ * by the owner). Where the siege stops a house but a row of its own prints on offer beside it (a row
+ * `crisisDependence.js :: SERVICE_FREE_OF_HOUSE` declares free of what the siege stops: the district inns' "Entertainment",
+ * the luxury quarter's "Custom commissions", the cemetery's "Central register"), the house's mark is the siege's partial
+ * kind, "Curtailed by the siege."; the rows keep their own marks. A row whose description is the siege's own twin says in
+ * its own words what the siege did to it and is not on offer in ordinary wording. The outbreak's mark already reads
+ * "Curtailed"; the famine's "Scarce" is true of a house partly scarce: neither takes a partial kind.
+ * @type {Readonly<Record<string, string>>}
+ */
+const PARTLY_STOPPED_KIND = Object.freeze({ under_siege: 'under_siege:curtailed' });
+
+/** A partial kind's crisis, a crisis's itself. @param {string} kind @returns {string} */
+export function crisisOfMarkKind(kind) {
+  const i = typeof kind === 'string' ? kind.indexOf(':') : -1;
+  return i > 0 ? kind.slice(0, i) : kind;
+}
 
 /** The marks the door admits for one record, read once a record. @type {WeakMap<object, ReadonlyArray<{ text: string, kind: string }>>} */
 const ADMITTED = new WeakMap();
@@ -102,7 +123,7 @@ export function crisisMarkText(settlement, crisis) {
 }
 
 /** The same, as one word after a service's name where no description prints (the Institutions tab's doors). VETOABLE. @type {Readonly<Record<string, string>>} */
-export const STOPPED_WORD = Object.freeze({ under_siege: 'stopped', plague_onset: 'curtailed', famine: 'scarce' });
+export const STOPPED_WORD = Object.freeze({ under_siege: 'stopped', plague_onset: 'curtailed', famine: 'scarce', 'under_siege:curtailed': 'curtailed' });
 
 /** The food a failed source names. @type {Readonly<Record<string, string>>} */
 const FOOD_OF_FAILED_SOURCE = Object.freeze({ grain: GRAIN, mill: GRAIN, livestock: LIVESTOCK, fish: FISH, game: GAME });
@@ -243,7 +264,8 @@ function isCrisisTwin(desc, kind) {
 const isCustom = (row) => row?.custom === true || row?.source === 'custom' || row?.isCustom === true;
 
 /**
- * The crisis that stops this row, or null.
+ * The crisis that stops this row, or null; for a house the siege stops but for a row of its own that goes on, the
+ * siege's partial kind (`under_siege:curtailed`, SV7), which the mark, the door word and the head line all read.
  * @param {object | null | undefined} settlement
  * @param {'service' | 'house' | 'chain' | 'income'} kind
  * @param {Record<string, unknown> | null | undefined} row a service row ({ name, desc, institution }), a house, a chain
@@ -261,9 +283,39 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
   for (const crisis of crises) {
     if (kind === 'service' && isCrisisTwin(desc, crisis)) continue;
     const stops = stoppedBy(crisis, settlement);
-    if (deps.some((d) => stops.includes(d))) return crisis;
+    if (!deps.some((d) => stops.includes(d))) continue;
+    if (kind === 'house' && Object.prototype.hasOwnProperty.call(PARTLY_STOPPED_KIND, crisis) && houseRowGoesOn(settlement, row, crisis, crises)) return PARTLY_STOPPED_KIND[crisis];
+    return crisis;
   }
   return null;
+}
+
+/** Each record's service rows by their house's roster name, read once a record. @type {WeakMap<object, ReadonlyMap<string, ReadonlyArray<Record<string, unknown>>>>} */
+const ROWS_BY_HOUSE = new WeakMap();
+
+/**
+ * Does a row of this house's own (the record's `availableServices`, joined by `institution`) print on offer under this
+ * crisis: not stopped by any crisis in force, and not the crisis's own twin (SV7)? A custom row is not read.
+ * @param {object | null | undefined} settlement @param {Record<string, unknown>} house @param {string} crisis @param {string[]} crises
+ * @returns {boolean}
+ */
+function houseRowGoesOn(settlement, house, crisis, crises) {
+  if (!settlement || typeof settlement !== 'object' || typeof house.name !== 'string' || !house.name) return false;
+  let byHouse = ROWS_BY_HOUSE.get(settlement);
+  if (!byHouse) {
+    /** @type {Map<string, Record<string, unknown>[]>} */
+    const map = new Map();
+    for (const { svc } of serviceRowsOf(/** @type {{ availableServices?: unknown }} */ (settlement).availableServices)) {
+      const name = typeof svc.institution === 'string' ? svc.institution : '';
+      if (!name) continue;
+      if (!map.has(name)) map.set(name, []);
+      /** @type {Record<string, unknown>[]} */ (map.get(name)).push(svc);
+    }
+    byHouse = map;
+    ROWS_BY_HOUSE.set(settlement, byHouse);
+  }
+  const rows = byHouse.get(house.name) || [];
+  return rows.some((svc) => !isCustom(svc) && !isCrisisTwin(typeof svc.desc === 'string' ? svc.desc : '', crisis) && rowStoppedBy(settlement, 'service', svc, crises) === null);
 }
 
 /**
@@ -299,7 +351,8 @@ export const SUPPLIED_LINE = 'A row marked short is what its house makes when su
  * @returns {string | null}
  */
 export function ordinaryTimesLine(crises, shortMarked = false) {
-  const nouns = STOPPING_CRISES.filter((k) => crises.includes(k)).map((k) => CRISIS_NOUN[k]);
+  const named = crises.map(crisisOfMarkKind);
+  const nouns = STOPPING_CRISES.filter((k) => named.includes(k)).map((k) => CRISIS_NOUN[k]);
   const supplied = shortMarked ? SUPPLIED_LINE : null;
   if (nouns.length === 0) return supplied;
   const list = nouns.length === 1 ? nouns[0] : `${nouns.slice(0, -1).join(', ')} and ${nouns[nouns.length - 1]}`;
