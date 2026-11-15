@@ -99,6 +99,15 @@ Re-keyed by identity beside a dated note (the same files' own form): `tailNarrat
 
 Gates at the tip: strict-domain 0, type ratchet 0, eslint on the touched files 0, presumed-things `--check` fresh 0 stale 0, the twelve-birth grid 0 falls. The test files naming the touched files (191 run): 14 files red at the tip are red at the base too (carried from the line's close, classed at F2 after the merge word); the 5 tip-only reds were mine and are cured (ledger drift ×2, the walker, the forges anchor) or load (moneyChangersTownFloor timed out under the census; green alone).
 
+## The after-run (batches 1 and 2 together, at 166bb4160; the census's 720 against f8042b61a)
+
+ONE after-run measured both batches: the first after-run of batch 1 alone died at 427 of 720 dumps when its shell ended (unattended `nohup`), so it was re-run once over the final tree. `inventory_diff.py before.json after.json <the four worklists' 30 rows>`, read whole: 29,967 sentences → 29,965; gone 25, new 23, in fewer towns 2, in more towns 6.
+
+- THE ROWS: 17 GONE (C27929 41→0, C15795 6→0, C34394 6→0, C0434 33→0, C26954 64→0, C25910 32→0, C14917 20→0, C23710 14→0, C10029 5→0, C34242 2→0, C29731/C30771 104→0, C24150 56→0, C14951 31→0, C25604 18→0, C5767 7→0; C25669 0→0, read in no census town); 1 FEWER (C10035 2→1: the town left prints the right side beside a profit summary: true by the one fact); 12 UNCHANGED, each by design: struck (C13357, C13894, C5063, C26642, C6173, C25669's kin), named for another seat (C2149, C2828, C28756), true where it prints (C5821 4: every one beside a right-side Overview now; C3297 7: all seven have iron at hand; C34238/C34241 2: both towns hold a garrison).
+- THE WAR, ONE FACT: of the 33 wartime towns, the Overview and the crisis summary now agree in 33 (29 loss, 4 profit); at the base 4 disagreed. The late re-read risk did not occur in the 720.
+- EVERY OTHER LINE IN FEWER TOWNS, explained: "Founded on the bank, where the current does the hauling; …" 28→27 (the river row refused under a siege, r2s-under_siege-village-3: false there; it takes "A river settlement. The channel sets the calendar …", 21→22); "<N> is at war and, for now, on the right side of it …" 2→1 (above). The wartime loss lines 7→8 and 3→4 are the two towns whose Overview now tells the loss their crisis summary tells (r2s-wartime-metropolis-1, -3).
+- THE INHERITORS (30, widest read where they print): the rewordings themselves (each in exactly the towns its old line left: 104, 64, 56, 42, 41, 33, 32, 32, 31, 21, 21, 20, 18, 18, 14, 8, 6, 6, 5, 2), the river twin (1) and the wartime loss lines (1 each). None new beyond the veto list.
+
 ## The books my cures move
 
 PENDING the run of F2 after the chair's word "MERGE THE LINE AT <tip>" (the line's law suites and stored figures are red for the close's reasons until then). Expected: the golden surfaces move for every record holding a reworded line (settlementReason, institution descs, culture foodways, arrival scene, pressure sentence, stress summary).
