@@ -651,5 +651,26 @@ lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
     "What food there is goes to whoever can pay the holder's price." (36 of the 720; was "What food is put by …").
 
 ## What is left (TAIL-CORPUS-DEF-5's list, current)
-1. All seven named U2 reds green at bb667e11 (76/76 with tailDefeconSafetyLines). NEXT: C25, tests/ui/defenseTabFlow.test.js
-   (83883baaa declared: re-key the fixture's premise by identity to a house the roster still files as arcane defence).
+- **defenseTabFlow** (C25, 1 of 21): 83883baaa (UPKEEP-CAPACITY C6, G5, declared: the alchemist is a trade) leaves no
+  dead-magic birth with a house filed as arcane defence (nomagic-a..z; r2r-town/city/metropolis-0..19, magic off).
+  RE-KEYED (ii): STOP-2's premise is r2r-city-0 of the 720's configuration (Scroll scribe, Enchanter's shop), its own
+  record with the magic dial off; anchored on its live record, where the group prints. Plant (arcaneDefenseOf's gate
+  off) reds it. 21/21.
+- **vocabularyPageFindings** (C28, 1 of 34): the plant was DS-DEF-5 ARCANE: alchemists v1 (8e70d2bed); 91592cbf1 and
+  3f5da151e reworded both lines of the pool off the house, and no state-prose line names the alchemists' house now (every
+  leaf scanned). Case (ii): the plant MOVED to the one page line that still names it, the Economics income line by its
+  constant (incomeLineSiblings.js :: ALCHEMIST_SUPPLEMENTS_LINE). Family kept, not retired. Plant reds it. 34/34.
+
+## What is left (TAIL-CORPUS-DEF-5's list, current)
+1. All seven named U2 reds, C25's defenseTabFlow and C28's vocabularyPageFindings green. Nothing lent to this seat is left.
+   AT THE SWEPT MERGE (f714fb6a5, merge cff4998c): the ten files 130 of 131. The one red is NOT this seat's:
+   vocabularyPageFindings "a famine written as a risk to come" (expected ['famineToCome'], got []): its plant is DS-ECO-9
+   'FOOD SOURCES: one source' v1, which a8ea5ef8 (TAIL-CORPUS-ECO-4 batch 8, C20) rewrote from a risk to come ("would
+   cost the whole town dear") to a present one ("is felt across the whole town"). The same shape as C28: for the chair.
+   C29 (the chair lent it): case (i): every leaf scanned with the family's words and context; the plant MOVED to DS-DEF-12
+   'CAPACITY: short' v2 ("… so a bad harvest there would mean going without.", no mark or pool declaration keeps it out of
+   a famine town), computed through variantByVid. Plant reds it. 34/34: the ten files 131 of 131.
+2. Seen, not chased (not lent): rv2-wartime-hamlet-5 (walls, no force, 60 Adequate) prints the Invasion line "has walls
+   and nobody to put on them. A determined attacker takes this town …" beside an Adequate bar; threatRowsTrueUnderBand's
+   FALSE_UNDER holds "A determined attacker" false under ADEQUATE on the readiness rows (its law's births are rv2-calm and
+   rv2-under_siege, so it does not read this town). For the chair to place.
