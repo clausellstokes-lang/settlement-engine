@@ -1,0 +1,15 @@
+{"id":"C8330","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"STATE","why":"'Reliance on magic: None' but FOOD shows 1% made by magic","other":"C8460"}
+{"id":"C8343","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"LACKS","why":"devout households' quarrel over trade is in no CRISIS/QUARRELS/TENSIONS/PAST (only the flood tension); thorp has no house of worship","other":""}
+{"id":"C8585","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"PAIR","why":"says organized crime has a limited foothold; the page says free of criminals and no criminal power here; INCOME shows no illicit money","other":"C8554"}
+{"id":"C8586","town":"bar0-thorp-calm-rand-2","sev":"LOW","kind":"PAIR","why":"says enforcement keeps crime down; DEFENCE has no watch or force and the page says neighbours deal with it themselves","other":"C8562"}
+{"id":"C8592","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"STATE","why":"'nothing has yet come against it' but PAST records The Purge, a major occupation/infiltration 205 years ago","other":""}
+{"id":"C8625","town":"bar0-thorp-calm-rand-2","sev":"MED","kind":"PAIR","why":"says nothing depends on arcane work; FOOD shows 1% made by magic and the food text says some food came by spell","other":"C8460"}
+{"id":"C8661","town":"bar0-thorp-calm-rand-2","sev":"LOW","kind":"LACKS","why":"names 'the halls'; HOUSES lists no hall, only dwellings, in a thorp of eleven","other":""}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-2","sev":"LOW","kind":"RECORD","why":"TRADE says glass and flour made here, but HOUSES has no glassblower or mill and LAND gaps say glass sand is not processed","other":""}
+{"id":"C8762","town":"bar0-town-calm-rand-2","sev":"LOW","kind":"PAIR","why":"says guilds settle quarrels among themselves; a live guild conflict and an open Church Council vs Merchant Guilds quarrel (high) are recorded","other":"C8768"}
+{"id":"C8996","town":"bar0-town-calm-rand-2","sev":"MED","kind":"STATE","why":"'no formal government in place... answers to no one'; GOVERNMENT has Church Council ruling (Dominant) with Religious Authorities, Merchant and Craft Guilds as powers","other":""}
+{"id":"C9234","town":"bar0-town-calm-rand-2","sev":"LOW","kind":"STATE","why":"says some households go short and more would in a bad season; FOOD word Secure, gap 0%, deficit 0%, 6.1 months stored","other":""}
+{"id":"C9437","town":"bar0-town-calm-rand-2","sev":"MED","kind":"PAIR","why":"says the town watch exists on paper; DEFENCE lists a working Town watch walking night rounds, with a captain, covering the main paths","other":"C9457"}
+{"id":"C9469","town":"bar0-town-calm-rand-2","sev":"MED","kind":"STATE","why":"rival crews fighting over who runs the streets is in none of CRISIS, QUARRELS, TENSIONS or PAST; page also says free of criminals","other":"C9393"}
+{"id":"C9484","town":"bar0-town-calm-rand-2","sev":"LOW","kind":"PAIR","why":"no arcane practitioners on the rolls, but magic is high, 'Relied upon', Magical Capability Strong, with alchemy exports and a magical node","other":"C8756"}
+{"id":"DONE","lines":1732,"blocks":2,"flags":14}
