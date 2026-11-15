@@ -1,0 +1,5 @@
+{"id":"C13819","town":"bar0-city-under_siege+famine-rand-16","sev":"MED","kind":"STATE","why":"mint 'significant ongoing revenue via seigniorage'; INCOME lists no coinage source and Mining & Coinage chain is impaired (precious metal veins depleted)","other":""}
+{"id":"C14995","town":"bar0-city-under_siege+famine-rand-16","sev":"MED","kind":"STATE","why":"midwife receives grain shipments by a covert route; siege cuts every road, FOOD brought in 0%, 'No food comes in by trade' (C14274)","other":"C14274"}
+{"id":"C14378","town":"bar0-city-under_siege+famine-rand-16","sev":"MED","kind":"STATE","why":"says furs originate in northern settlements and this is a mid-route town; LAND/TRADE give furs made here from its own hunting grounds (Furs & Pelts running)","other":""}
+{"id":"C13539","town":"bar0-city-under_siege+famine-rand-16","sev":"LOW","kind":"BROKEN","why":"'the city granaries ... if it gives way': plural house name takes singular pronoun/verb (repeats at C13542, C15681)","other":""}
+{"id":"DONE","lines":2439,"blocks":1,"flags":4}
