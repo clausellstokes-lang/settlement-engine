@@ -17,6 +17,12 @@
       "action": "re-record",
       "predictedRows": 1,
       "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
     }
   ]
 }
