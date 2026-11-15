@@ -191,7 +191,7 @@ const BENEATH_THE_WALLS = /smuggling (?:network|operation)|underground (?:networ
 
 /**
  * TAIL-DISPLAY-CIVIC-4 (V10, the chair's ruling of 2026-11-15): "Petty theft is the primary risk; organized crime has a limited
- * foothold." where no criminal house stands on the roster (15 of its 31 towns at 6cf555801, each beside the Defense tab's "No
+ * foothold." where no criminal house stands on the roster (16 of its 33 tab towns at 6cf555801, each beside the Defense tab's "No
  * criminal infrastructure has been identified"): no foothold.
  * @param {boolean} criminalHouse whether a criminal house stands @returns {string}
  */

@@ -40,6 +40,7 @@ const KEPT = [
   ['r2r-city-5', 'lacks a single controlling authority'], // two criminal powers
   ['r2r-town-18', 'Someone wants to know what it is before it arrives.'], // no siege
   ['r2r-town-33', 'Petty theft is the primary risk; organized crime has a limited foothold.'], // a criminal house stands
+  ['r2r-city-58', 'Petty theft is the primary risk; organized crime has a limited foothold.'], // gambling halls (the Defense tab: semi-organized)
 ];
 
 beforeAll(async () => {

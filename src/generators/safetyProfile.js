@@ -320,7 +320,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const wallNote = inst.hasWalls ? ' The walls keep most trouble outside.' : '';
     const courtNote = inst.hasCourtSystem && courthouse ? ' With a working court, organised crime treads carefully.' : ''; // UPKEEP-8: a court named only where a courthouse stands
     safetyDesc = `Crime exists but is well-managed. ${lawLine} Petty theft is the primary risk; ` +
-      `organized crime has ${footholdWord(hasCriminalOrg || flags.inst.hasCriminalInst)}.${courtNote}${wallNote}`; // TAIL-DISPLAY-CIVIC-4 (V10): safetyLineTruth.js
+      `organized crime has ${footholdWord(hasCriminalOrg || flags.inst.hasCriminalInst || institutions.some((i) => /gambl/i.test(String(i?.name ?? ''))))}.${courtNote}${wallNote}`; // TAIL-DISPLAY-CIVIC-4 (V10): safetyLineTruth.js
   } else if (effectiveSafety >= 1.2) {
     safetyLabel = 'Moderate';
     const lawRef  = inst.hasGarrison ? 'The garrison patrols' : inst.hasWatch ? 'The watch covers'
