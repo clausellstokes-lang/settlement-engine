@@ -1,0 +1,5 @@
+{"id":"C29255","town":"bar0-town-occupied-rand-6","sev":"LOW","kind":"PAIR","why":"says local collaborators include a known person; the crisis card says no one collaborates and no local power gains","other":"C29235"}
+{"id":"C29348","town":"bar0-town-occupied-rand-6","sev":"MED","kind":"LACKS","why":"brewery 'sends beer across the region'; TRADE exports list only camels, leather, wool, sacred wood, ritual components, no beer, and all are taxed by the occupation","other":""}
+{"id":"C29869","town":"bar0-town-occupied-rand-6","sev":"LOW","kind":"PAIR","why":"says the town retains no specialists, yet the Warden's Lodge (HOUSES) is a ranger station giving monster threat assessment, scouts and trackers","other":"C29392"}
+{"id":"C29876","town":"bar0-town-occupied-rand-6","sev":"LOW","kind":"PAIR","why":"Legal Infrastructure 'None' beside the operational Law & Governance chain with Town hall legal services and hearings that hand down penalties","other":"C29660"}
+{"id":"DONE","lines":1153,"blocks":1,"flags":5}
