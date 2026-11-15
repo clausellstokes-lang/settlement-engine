@@ -25,6 +25,7 @@ import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { foundationBandShown } from '../../../domain/display/foundationBandShown.js';
 import { offersFoodSurplus } from '../../../domain/foodSurplus.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
 import { rulingAuthorityBandShown } from '../../../domain/display/rulingAuthorityShown.js';
@@ -169,7 +170,10 @@ export default function SubstrateTab({ settlement }) {
           && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate'
           // THE RULING AUTHORITY ROW IS NOT PRINTED ABOVE WHAT THE RECORD SAYS OF THE SAME GOVERNMENT (the chair's
           // ruling X8, 2026-11-14): the cap is the one leaf's (domain/display/rulingAuthorityShown.js).
-          : key === 'ruling_authority' ? rulingAuthorityBandShown(settlement, v.band) : v.band,
+          : key === 'ruling_authority' ? rulingAuthorityBandShown(settlement, v.band)
+            // BAR3-LABELS L2: healing, law, criminal opportunity and labour are not printed above what the page says of them
+            // (domain/display/foundationBandShown.js: no healer kept, a crime wave, conscription)
+            : foundationBandShown(settlement, key, v.band),
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
       // Pressures first: worst band, then worst polarity-oriented score, then

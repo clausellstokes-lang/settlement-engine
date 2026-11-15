@@ -118,8 +118,9 @@ describe('F3c: the organised ring\'s note reads nothing veiled and says what is 
     expect(wrong).toEqual([]);
   });
   test('the desks read the cast and the hall for the DM only: for a player both are unknown and strike nothing', () => {
-    expect(crimeLineFactsOf(town('equilibrium', [OFFICIAL]), 'player')).toEqual({ officialsInPay: null, captureState: '' });
-    expect(crimeLineFactsOf(town('equilibrium', [OFFICIAL]), 'dm')).toEqual({ officialsInPay: 1, captureState: 'equilibrium' });
+    // BAR3-LABELS-2 item 5 (2026-11-15): the third fact, the page's corrupt officials, is veiled the same way
+    expect(crimeLineFactsOf(town('equilibrium', [OFFICIAL]), 'player')).toEqual({ officialsInPay: null, captureState: '', corruptOfficials: null });
+    expect(crimeLineFactsOf(town('equilibrium', [OFFICIAL]), 'dm')).toEqual({ officialsInPay: 1, captureState: 'equilibrium', corruptOfficials: 0 });
     expect(vidsOf('DS-DEF-4', 'capture equilibrium', crimeLineFactsOf(town('equilibrium', [OFFICIAL]), 'player'))).toEqual([1, 2, 3]);
   });
 });

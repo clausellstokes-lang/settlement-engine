@@ -41,3 +41,27 @@ export function officialsInCriminalPayOf(record) {
     })
     .map((card) => String(/** @type {{ name?: unknown }} */ (card)?.name ?? ''));
 }
+
+/** The cast categories whose people hold a public office (the hall's and the watch's). */
+const OFFICE_CATEGORIES = Object.freeze(['government', 'military']);
+
+/**
+ * AN OFFICIAL THE PAGE PRINTS AS CORRUPT (BAR3-LABELS-2 item 5, the corpus seat's routed row; REVIEW-BAR-3 C20093;
+ * vetoable by the owner): a person whose card prints "Flaw: corrupt" (`personality.flaw`) and who holds a public office:
+ * a person of the hall or the watch (`category` government or military) or a place in the ruling power. The crime
+ * desk's "its officials have little reason to sell" is false beside one, criminal pay or none.
+ * @param {{ npcs?: unknown } | null | undefined} record
+ * @returns {string[]} their names, in cast order
+ */
+export function corruptOfficialsOf(record) {
+  const npcs = Array.isArray(record?.npcs) ? /** @type {unknown[]} */ (record.npcs) : [];
+  const governing = governingFactionOf(/** @type {import('../rulingPower.js').RulingPowerSettlement} */ (/** @type {unknown} */ (record || {})));
+  const ruler = governing ? nameOf(governing) : null;
+  return npcs
+    .filter((card) => {
+      const c = /** @type {{ personality?: { flaw?: unknown } | null, category?: unknown }} */ (card);
+      if (c?.personality?.flaw !== 'corrupt') return false;
+      return OFFICE_CATEGORIES.includes(String(c.category ?? '')) || (ruler !== null && membershipsOf(card).some((m) => m.power === ruler));
+    })
+    .map((card) => String(/** @type {{ name?: unknown }} */ (card)?.name ?? ''));
+}

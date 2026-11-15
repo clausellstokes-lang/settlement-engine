@@ -731,11 +731,33 @@ export function chainOutputsShown(chain, settlement) {
   if (!chain) return outputs;
   const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
     .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
+  const spare = foodToSpareHere(settlement);
   return outputs.filter((o) => {
     const good = fold(tradeMarkOf(o).label).replace(/_/g, ' ');
+    if (!spare && (FOOD_EXPORT_OUTPUTS.has(good) || isFoodSurplusGood(good))) return false; // BAR3-LABELS-3 item 0
     return !NOT_A_GOOD_HERE.has(good) && (chainMakesHere(chain, good, settlement, roster) || chainCarriesHere(chain, good, roster));
   });
 }
+
+/**
+ * A CHAIN CARD'S FOOD-EXPORT OUTPUTS READ THE FOOD RECORD (BAR3-LABELS-3 item 0, the chair's row of 2026-11-15 21:00 UTC;
+ * C7514 C18969 C7264; vetoable by the owner). The floodplain chain's "Grain export" and "Surplus food" are a claim that
+ * the place grows more food than it eats; the grain chain's own such outputs are filtered at birth by the food-surplus
+ * rule (`foodSurplus.js :: FOOD_SURPLUS_GOODS`), whose set lacks the floodplain's two words, so the card printed them
+ * where the food record holds no surplus (8 of the 10 floodplain towns of the census's 720 at d38c247af; none under a
+ * famine). The card prints neither where the record offers no surplus (`offersFoodSurplus`) or a famine is in force
+ * (`facts/crisisKind.js :: crisisOf`); its "Agricultural produce" stands, so the card is never mute. Display only: the
+ * data file and the record are not touched.
+ */
+const FOOD_EXPORT_OUTPUTS = Object.freeze(new Set(['grain export', 'surplus food']));
+
+/** @param {unknown} settlement @returns {boolean} the food record offers a surplus and no famine stands */
+function foodToSpareHere(settlement) {
+  const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { growsMoreThanEats?: boolean, band?: string } | null } | null } | null } | null | undefined} */ (settlement);
+  return offersFoodSurplus(s?.economicState?.foodSecurity?.foodRecord) && !crisisOf(/** @type {object} */ (settlement ?? {})).has('famine');
+}
+import { offersFoodSurplus, isFoodSurplusGood } from '../foodSurplus.js';
+import { crisisOf } from '../facts/crisisKind.js';
 
 /**
  * THE TRADE LISTS AS THE PAGE PRINTS THEM, IN ONE CALL (W2-C-LEAVES-7 item 8, 2026-11-14). The Economics tab's Exports,

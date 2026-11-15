@@ -257,7 +257,7 @@ export const KEY_SITES = Object.freeze([
   }),
 ]);
 /** The leaf each crime-line fact is read from. */
-const CRIME_FACT_LEAF = Object.freeze({ 'no official in pay': 'officialsInPay', 'an official in pay': 'officialsInPay', 'no agent in the hall': 'captureClimate' });
+const CRIME_FACT_LEAF = Object.freeze({ 'no official in pay': 'officialsInPay', 'an official in pay': 'officialsInPay', 'an official who sells': 'officialsInPay' /* BAR3-LABELS-2 item 5: officialsInPay.js :: corruptOfficialsOf */, 'no agent in the hall': 'captureClimate' });
 
 /**
  * @param {Record<string, { layer: number|'W', src: string }>} poolTable

@@ -16,6 +16,8 @@ import { defenceHoldsArcane, defenceHoldsDivine, defenceHoldsDruidic, economySho
 import { MAGIC_NOTE_TRADITION } from '../facts/magicSource.js';
 import { chainNeedsMagic, foodMagicShare, FOOD_SUPPLY_DEPENDENT } from '../magicReliance.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js'; // BAR2-LABELS-4: the standing (ruin-filtered) magic bucket
+import { magicSourceOf } from '../facts/magicSource.js'; // BAR3-LABELS-2 L1c: the houses that supply the magic, one home
+import { liveInstitutions } from '../institutions/institutionRoster.js'; // L1c: the live roster the supply names its houses from
 
 /**
  * Whether the town holds the tradition a provision is of.
@@ -178,12 +180,28 @@ function notesShown(record) {
  * @returns {string[]} chain ids, then the food supply
  */
 export function magicDependentsShown(record) {
-  const chains = activeChainsOf(record).filter((c) => {
+  const chains = magicDependentChainsShown(record).map((c) => String(c.chainId ?? 'a supply chain')); // counted, never printed: the chain's id, not its name
+  return [...chains, ...(foodMagicShare(record) > 0 ? [FOOD_SUPPLY_DEPENDENT] : [])];
+}
+
+/**
+ * THE DEPENDENT CHAINS THEMSELVES (BAR3-LABELS-2 L1b, the chair's direction of 2026-11-15; vetoable by the owner): the
+ * active chains `magicDependentsShown` counts (one filter, one home), handed whole to a page that NAMES what relies on
+ * magic: the page prints each one's name through its leaf (`chainPrintName.js`, the `chainPrintSites` law), never here.
+ * @param {unknown} record the settlement record
+ * @returns {Array<Record<string, unknown>>} the active chains that need magic or whose magic note prints, in record order
+ */
+export function magicDependentChainsShown(record) {
+  return activeChainsOf(record).filter((c) => {
     if (chainNeedsMagic(c)) return true;
     const shown = magicNoteShown(c, record);
     return typeof shown === 'string' && shown !== '';
-  }).map((c) => String(c.chainId ?? 'a supply chain')); // counted, never printed: the chain's id, not its name
-  return [...chains, ...(foodMagicShare(record) > 0 ? [FOOD_SUPPLY_DEPENDENT] : [])];
+  });
+}
+
+/** Whether the food supply is among the dependents (`magicDependentsShown`'s own last entry). @param {unknown} record @returns {boolean} */
+export function foodAmongMagicDependents(record) {
+  return foodMagicShare(record) > 0;
 }
 
 /**
@@ -198,8 +216,45 @@ export function relianceReadingShown(record, reliance) {
   if (reliance.reading !== 'relied-upon' && reliance.reading !== 'integral') return reliance.reading;
   const deps = magicDependentsShown(record).length;
   if (deps === 0) return reliance.practitioners.length > 0 ? 'present' : 'none';
-  if (reliance.reading === 'integral' && deps < 2 && magicOf(/** @type {Parameters<typeof magicOf>[0]} */ (record)).level !== 'high') return 'relied-upon';
+  if (reliance.reading === 'integral' && relianceDepth(record) < 2 && magicOf(/** @type {Parameters<typeof magicOf>[0]} */ (record)).level !== 'high') return 'relied-upon';
   return reliance.reading;
+}
+
+/**
+ * HOW DEEP THE DEPENDENCE GOES (BAR3-LABELS L1, the chair's direction of 2026-11-15; vetoable by the owner): the
+ * dependents the page bears out (`magicDependentsShown`), with every made magical service (an active chain that needs
+ * magic: spellcasting, enchanting, alchemy) counted ONCE, as the town's one magic trade. "Integral" said a low- or
+ * mid-magic town could not run without magic where all that depended on magic was its own magic trade (a Wizard's tower
+ * selling spells and enchanted goods, impaired, beside a magic that is low and food made by none: the bar's
+ * metropolis-calm-rand-7; 40 of the census's 720 at 59185b62a). Two or more SEPARATE things held up by magic (the trade,
+ * the food, a chain whose magic note prints) keep "Integral"; the top band keeps it as before.
+ * @param {unknown} record the settlement record
+ * @returns {number}
+ */
+export function relianceDepth(record) {
+  const services = new Set(activeChainsOf(record).filter((c) => chainNeedsMagic(c)).map((c) => String(c.chainId ?? '')));
+  const deps = magicDependentsShown(record);
+  return deps.filter((d) => !services.has(d)).length + (deps.some((d) => services.has(d)) ? 1 : 0);
+}
+
+/**
+ * THE ROLE BAND A MAGIC ROLE ROW PRINTS (BAR3-LABELS L1, the chair's direction of 2026-11-15; vetoable by the owner). The
+ * magic profile's military and medical bands (`magicProfile.js :: deriveRoles`) are raised by the world's dial alone
+ * ("occasional" at a medium or high level) or by a healing house of any kind ("common"), and never read the defence or the
+ * healing the record holds: "Military role: occasional" printed beside "DEFENCE magic: none" in 354 of the census's 720
+ * towns, and "Medical role: common" with no healing that needs magic in 315. Where the record holds nothing of the role
+ * (`magicRoleHeld`, the one home of LB1's facts) the row prints the profile's own word for nothing, "absent"; where it
+ * holds the role, the band is the profile's. The economic row keeps X32's reader (`economicRoleBandShown`); the
+ * infrastructure row is the profile's. The record is not touched.
+ * @param {unknown} record the settlement record
+ * @param {string} role 'economic' | 'military' | 'medical' | 'infrastructure'
+ * @param {unknown} band the magic profile's band
+ * @returns {unknown} the band the row prints
+ */
+export function magicRoleBandShown(record, role, band) {
+  if (role === 'economic') return economicRoleBandShown(record, band);
+  if ((role === 'military' || role === 'medical') && band !== 'absent' && !magicRoleHeld(record, role)) return 'absent';
+  return band;
 }
 
 /**
@@ -237,4 +292,26 @@ export function magicHeadlineWord(record, availability) {
   if (Object.hasOwn(LEVEL_WORD, level)) return LEVEL_WORD[/** @type {'low'|'medium'|'high'} */ (level)];
   const a = String(availability || '');
   return a.charAt(0).toUpperCase() + a.slice(1);
+}
+
+/** The acceptance words a faith's own supply of magic qualifies (the scale's hostile end: `magicProfile.js`). */
+const ACCEPTANCE_OUTSIDE_OWN_HOUSES = Object.freeze(['hostile', 'wary']);
+
+/**
+ * THE RELIGIOUS ACCEPTANCE WORD THE MAGIC TAB PRINTS (BAR3-LABELS-2, the chair's RULING L1c of 2026-11-15 20:25 UTC;
+ * vetoable by the owner). "Religious acceptance: hostile" printed beside "supplied by House of worship": the faith's
+ * houses supply the town's magic while the faith is hostile to it. BOTH FACTS STAND (the profile's acceptance is not
+ * moved): where a house that supplies the magic (`facts/magicSource.js :: magicSourceOf`) is a religious house on the
+ * live roster and the word is hostile or wary, the word says what the hostility is toward: magic outside the faith's
+ * own houses. Every other word prints as the profile's.
+ * @param {unknown} record the settlement record
+ * @param {unknown} word the magic profile's religious acceptance
+ * @returns {unknown} the word the row prints
+ */
+export function religiousAcceptanceShown(record, word) {
+  if (typeof word !== 'string' || !ACCEPTANCE_OUTSIDE_OWN_HOUSES.includes(word)) return word;
+  const supplying = new Set(magicSourceOf(record).houses);
+  const religious = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record))
+    .some((inst) => supplying.has(String(/** @type {{ name?: unknown }} */ (inst).name ?? '')) && /** @type {{ category?: unknown }} */ (inst).category === 'Religious');
+  return religious ? `${word} outside the faith's own houses` : word;
 }

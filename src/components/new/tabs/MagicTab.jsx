@@ -64,7 +64,7 @@ function Facet({ label, value }) {
       gap: SP.sm, padding: `${SP.xs}px 0`, borderBottom: `1px solid ${BORDER}`,
     }}>
       <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK }}>{label}</span>
-      <span style={{ fontSize: FS.sm, fontWeight: 800, color: SLATE, textTransform: 'capitalize' }}>{typeof value === 'string' ? value.replace(/_/g, ' ') : value /* TAIL-DISPLAY-ECON-3 (11782): a stored key prints as words, "guild_controlled" -> "guild controlled" */}</span>
+      <span style={{ fontSize: FS.sm, fontWeight: 800, color: SLATE, textTransform: typeof value === 'string' && value.includes(' outside ') ? 'none' : 'capitalize' }}>{typeof value === 'string' ? (value.includes(' outside ') ? value.charAt(0).toUpperCase() + value.slice(1) : value.replace(/_/g, ' ')) : value /* TAIL-DISPLAY-ECON-3 (11782): a stored key prints as words, "guild_controlled" -> "guild controlled" */}</span>
     </div>
   );
 }
@@ -107,6 +107,16 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   // ROW 3 (W2-A-LEAVES, 2026-11-12, the chair's ruling): the reliance line names where the magic comes from, read
   // from the leaf (`facts/magicSource.js`); where nothing on the record supplies it, the line does not print.
   const supply = deriveMagicSupplyView(settlement);
+  // L1b (BAR3-LABELS-2, the chair's direction of 2026-11-15; vetoable by the owner): the reliance line NAMES what relies
+  // on magic, from the one leaf that counts the dependents (`magicProvisionShown.js :: magicDependentChainsShown`,
+  // `foodAmongMagicDependents`): each chain under the name it prints through its leaf (`chainPrintName`), the food
+  // supply as the Economics tab's food row names it ("by divine provision"). Only where the word says magic is relied on.
+  const relyNames = reliance.reliesOnMagic ? [...new Set([
+    ...magicDependentChainsShown(settlement).map(c => chainPrintName(c, settlement).label).filter(l => typeof l === 'string' && l !== ''),
+    ...(foodAmongMagicDependents(settlement) ? [`food (${magicFoodChannelWord(foodRowShown(settlement, false)?.fb.magicFoodNote)} provision)`] : []),
+  ])] : [];
+  const relyHead = relyNames.slice(0, -1).join(', ');
+  const relyFor = relyNames.length < 2 ? relyNames.join('') : `${relyHead} and ${relyNames[relyNames.length - 1]}`;
   // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the
   // owner's player view drew, shipped at the save (`magic`); unstamped, SILENT (magicDeskRead.js).
   const magicProse = magicDeskRead(settlement, { publicDossier, playerView });
@@ -143,7 +153,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
                 of two is a caption with orphans under it. */}
             <NameColumns count={FACET_ORDER.length} style={{ padding: `0 ${SP.md}px` }}>
               {FACET_ORDER.map(key => (
-                <Facet key={key} label={FACET_LABEL[key]} value={posture[key]} />
+                <Facet key={key} label={FACET_LABEL[key]} value={key === 'religiousAcceptance' ? religiousAcceptanceShown(settlement, posture[key]) : posture[key]} /> /* L1c: the word says what the hostility is toward (magicProvisionShown.js :: religiousAcceptanceShown) */
               ))}
             </NameColumns>
           </div>
@@ -160,10 +170,11 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               {reliance.shown && supply.statable && (
                 <div data-testid="magic-reliance" style={{ fontSize: proseFontSize(FS.sm, mobile), color: INK, fontWeight: 700, padding: `${SP.xs}px 0` }}>
                   Reliance on magic: {reliance.word}
+                  {relyFor && <span data-testid="magic-reliance-for" style={{ fontWeight: 400 }}> · for {relyFor}</span>}
                   {supply.supply && <span data-testid="magic-reliance-source" style={{ fontWeight: 400 }}> · supplied by {supply.supply}</span>}
                 </div>
               )}
-              {posture.roleLines.map((line, i) => [line, Object.keys(posture.roles || {})[i]]).map(([line, role]) => [role === 'economic' ? line.replace(/[a-z]+$/, String(economicRoleBandShown(settlement, posture.roles?.economic))) : line, role]).filter(([, role]) => roleRowShown(settlement, role, role === 'economic' ? economicRoleBandShown(settlement, posture.roles?.economic) : posture.roles?.[role])).map(([line], i) => ( /* X32: the economic role beside the food record's provision (magicProvisionShown.js) */
+              {posture.roleLines.map((line, i) => [line, Object.keys(posture.roles || {})[i]]).map(([line, role]) => [line.replace(/[a-z]+$/, String(magicRoleBandShown(settlement, role, posture.roles?.[role]))), role]).filter(([, role]) => roleRowShown(settlement, role, magicRoleBandShown(settlement, role, posture.roles?.[role]))).map(([line], i) => ( /* X32 and BAR3-LABELS L1: the band a role row prints, one reader (magicProvisionShown.js :: magicRoleBandShown) */
                 <div key={i} data-role-line style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
               ))}
             </div>
@@ -216,4 +227,6 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   );
 }
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
-import { magicNoteShown, economicRoleBandShown, magicRoleHeld } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
+import { foodAmongMagicDependents, magicDependentChainsShown, magicNoteShown, magicRoleBandShown, magicRoleHeld, religiousAcceptanceShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
+import { magicFoodChannelWord } from '../../../domain/display/foodBalanceBar.js'; // L1b: the food row's own channel word
+import { foodRowShown } from '../../../domain/display/foodRowShown.js'; // L1b: the food record as the food row prints it

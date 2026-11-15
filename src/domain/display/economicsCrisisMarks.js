@@ -12,9 +12,36 @@
  * `chainStateShown.js :: chainCrisisStateShown`) gives way to the leaf: a card leaves the line out where the leaf marks
  * the share it names (`incomeStopped`).
  *
- * Only the Economics tab calls this leaf. Pure: no randomness, no clock, no write.
+ * The Economics tab calls this leaf, and the Resources tab its `fullCardWordUnderSiege` (BAR3-LABELS-3 L3b). Pure: no
+ * randomness, no clock, no write.
  */
 import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine } from './crisisStoppedRow.js';
+import { liveHouseOf } from '../facts/presence.js'; // BAR3-LABELS-2 L3: the roster house a chain's catalogue house answers to
+
+/** The states a flow card prints as working (`chainStateShown.js`'s own set). */
+const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
+
+/**
+ * THE CARD'S WORKING WORD READS THE LEAF THE HOUSES' MARKS READ (BAR3-LABELS-2 L3, the chair's direction of 2026-11-15;
+ * the wide read's C12020; vetoable by the owner). Under a siege, a flow card whose every live processing house the
+ * Services tab marks "stopped" (`crisisStoppedRow.js :: rowStoppedBy`, the houses' one leaf), or that the same leaf
+ * marks stopped itself (the card's own mark), printed a working word ("Running" over a harbour whose harbour master and
+ * docks are stopped, the wide read's city-under_siege+famine-rand-15; "Entrepôt" for a besieged metropolis's smuggling;
+ * "Running" for a tavern trade whose taverns are shut: 4 of the census's 720 at 8b45191a5): the card prints "impaired". Any other card is the one it was given (`chainStateShown.js :: chainAsShown`).
+ * @template {{ status?: unknown }} C
+ * @param {object | null | undefined} town the settlement
+ * @param {Record<string, unknown>} record the chain as the record holds it (`economicState.activeChains[]`)
+ * @param {C} shown the same chain as its card prints it (`chainAsShown`)
+ * @returns {C}
+ */
+export function chainCardUnderSiege(town, record, shown) {
+  if (!CARD_WORKING.has(String(shown?.status ?? '')) || !stoppingCrisesOf(town).includes('under_siege')) return shown;
+  if (rowStoppedBy(town, 'chain', record, ['under_siege']) === 'under_siege') return { ...shown, status: 'impaired' }; // the card's own mark
+  const houses = (Array.isArray(record?.processingInstitutions) ? /** @type {unknown[]} */ (record.processingInstitutions) : [])
+    .map((h) => liveHouseOf(town, h)).filter(Boolean);
+  const stopped = houses.length > 0 && houses.every((h) => rowStoppedBy(town, 'house', /** @type {Record<string, unknown>} */ (h), ['under_siege']) === 'under_siege');
+  return stopped ? { ...shown, status: 'impaired' } : shown;
+}
 
 /**
  * The marks of the flow cards (keyed by the card's chain as shown) and the reading of the share a card names.
@@ -55,3 +82,32 @@ export function econOrdinaryTimesLine(town, eco) {
   const chains = (eco?.activeChains || []).map((c) => rowStoppedBy(town, 'chain', c, crises));
   return ordinaryTimesLine(/** @type {string[]} */ ([...income, ...chains].filter(Boolean)));
 }
+
+/**
+ * THE WORD A FULL EXPLOITATION CARD PRINTS UNDER A SIEGE THAT STOPS THE FIELD WORK (BAR3-LABELS-3, RULING L3b of the
+ * chair, 2026-11-15 21:20 UTC; the wide read's C7371 C7595; vetoable by the owner). The Resources tab's card printed
+ * "✓ Fully exploited" for a ground whose every chain card on the Economics tab prints "Impaired" under the siege (14 Full
+ * cards in 10 of the census's 720 at d38c247af stand under a siege that stops trade; in 7 of them every chain card on the
+ * ground prints a word that is not working). NO NEW WORD: the card takes the chain cards' own state word for the same
+ * ground (the chains that work it, `facts/chainWorking.js :: chainsWorking`, through `validationOnPage.js ::
+ * resourceWorkReading`'s keys, each as its card prints it: `chainCardUnderSiege(town, c, chainAsShown(c, town))`). Where
+ * any chain card of the ground still prints a working word (fish under an open sea, `seaOpenTo`: the sea chain works) or
+ * no chain card speaks of the ground, the card's grade stands: the function returns null.
+ * @param {object | null | undefined} town the settlement
+ * @param {{ rawResource?: unknown } | null | undefined} card the exploitation card (filed Full)
+ * @returns {string | null} the chain cards' state word ('impaired', …), else null
+ */
+export function fullCardWordUnderSiege(town, card) {
+  if (!town || !card || !tradeStoppedHere(town)) return null;
+  const reading = resourceWorkReading(/** @type {any} */ (town), card.rawResource);
+  const words = chainsWorking(town, reading.keys, reading.good)
+    .map((c) => String(chainCardUnderSiege(town, /** @type {Record<string, unknown>} */ (c), chainAsShown(/** @type {any} */ (c), /** @type {any} */ (town)))?.status ?? ''));
+  if (words.length === 0 || words.some((w) => CARD_STILL_WORKING.has(w) || w === '')) return null;
+  return words[0];
+}
+
+/** The chain words that say the chain still works its ground (`facts/chainWorking.js :: WORKING_CHAIN_STATUSES`). */
+const CARD_STILL_WORKING = new Set(WORKING_CHAIN_STATUSES);
+import { tradeStoppedHere, chainAsShown } from './chainStateShown.js';
+import { resourceWorkReading } from './validationOnPage.js';
+import { chainsWorking, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';

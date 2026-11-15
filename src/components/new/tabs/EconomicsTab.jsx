@@ -116,7 +116,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
   // and white-screen the whole tab — in the live generate flow this section is
   // rendered without an error boundary around it. Filter to entries we can
   // safely .toLowerCase() before the .some/.find matching below.
-  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainAsShown(c, town)); /* W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js) */ const crisisMarks = flowCrisisMarks(town, chainsAsRead, chains); // TAIL-DISPLAY-ECON-4 (X25.1): a card's mark and its income line read the crisis leaf (crisisStoppedRow.js), the journal's one voice
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainCardUnderSiege(town, c, chainAsShown(c, town))); /* BAR3-LABELS-2 L3: under a siege the card's word reads the houses' marks (economicsCrisisMarks.js) */ /* W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js) */ const crisisMarks = flowCrisisMarks(town, chainsAsRead, chains); // TAIL-DISPLAY-ECON-4 (X25.1): a card's mark and its income line read the crisis leaf (crisisStoppedRow.js), the journal's one voice
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
@@ -878,4 +878,4 @@ function flowHeaderCount(chains, services, impairedHouses) {
   return { active, impaired, words };
 }
 
-import { factsOf } from '../../../domain/facts/factsOf.js'; import { flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
+import { factsOf } from '../../../domain/facts/factsOf.js'; import { chainCardUnderSiege, flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
