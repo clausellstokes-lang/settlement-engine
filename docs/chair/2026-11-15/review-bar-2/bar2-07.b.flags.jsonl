@@ -1,0 +1,7 @@
+{"id":"C12586","town":"bar0-hamlet-calm-rand-3","sev":"LOW","kind":"PAIR","why":"says it would go on 'more slowly and less comfortably' without the arcane; FOOD and page say reliance on magic is none, 0% by magic","other":"C12580"}
+{"id":"C13120","town":"bar0-hamlet-calm-rand-4","sev":"LOW","kind":"PAIR","why":"says it would go on 'more slowly and less comfortably' without the arcane; reliance on magic is None, 0% by magic","other":"C13114"}
+{"id":"C13360","town":"bar0-hamlet-calm-rand-5","sev":"MED","kind":"STATE","why":"offers charcoal supply as a service with no mark; LAND gaps say the Charcoal burner lacks access to its timber input (also C13401-C13403)","other":""}
+{"id":"C13635","town":"bar0-hamlet-calm-rand-5","sev":"LOW","kind":"PAIR","why":"Medical role of magic 'common' while reliance on magic is None, no arcane practitioners, and no healer kept here","other":"C13616"}
+{"id":"C13905","town":"bar0-hamlet-under_siege-rand-3","sev":"MED","kind":"STATE","why":"Alehouse offers 'Meals and drink' (food and ale) unmarked while under siege, road cut, rations cut, food deficit 41%, 'settlement is starving'; lodging and relay are marked stopped","other":"C13887"}
+{"id":"C13957","town":"bar0-hamlet-under_siege-rand-3","sev":"LOW","kind":"PAIR","why":"Cut stone/rubble services listed unmarked, but the Stone quarry row says 'Stopped by the siege' (siege: field work and trade stopped)","other":"C13922"}
+{"id":"DONE","lines":2334,"blocks":4,"flags":6}
