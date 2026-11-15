@@ -2593,6 +2593,18 @@
     "after-base: close-unprinted",
     "no institution: granary",
     "7a07521d8484e089"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "The trades that feed and equip {settlement}'s defenders are not on a sure footing, so the defence is a little weaker tha",
+    "36c0e59cd92a1af0"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "{settlement}'s defenders are a little worse off for the trades behind them, which are not on a sure footing.",
+    "0e22c82cc1df7d84"
    ]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
@@ -2799,6 +2811,18 @@
     "after-base: close-unprinted",
     "no crisis: famine",
     "5a38915ec8c8514b"
+   ],
+   [
+    "religiousHouses",
+    "after-base: close-true",
+    "Faith carries real weight at {settlement}: what the religious houses say is heard in the town's dealings, whatever their",
+    "03d60eabae5df4e8"
+   ],
+   [
+    "religiousHouses",
+    "after-base: close-true",
+    "The religious houses at {settlement} are heard in its dealings, and a quarrel with them is one the town's traders feel.",
+    "3da3657c02b4a422"
    ]
   ],
   "src/data/dossierStateProse/general.generated.js": [
@@ -4022,6 +4046,18 @@
     "after-base: close-true",
     "The church in {settlement} hunts heresy openly: anyone suspected of working magic against the faith is denounced from th",
     "248f68a589794067"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "In {settlement} the church has the garrison at its side: soldiers keep the feast days, priests stand at the musters, and",
+    "dac7d42ed1149cee"
+   ],
+   [
+    "clergy",
+    "after-base: close-true",
+    "In {settlement} the church has the garrison at its side: soldiers keep the feast days, priests stand at the musters, and",
+    "dac7d42ed1149cee"
    ]
   ],
   "src/data/economicData.js": [
@@ -5404,6 +5440,24 @@
     "after-base: close-false",
     "Organised bands of hired blades, a few score to a few hundred strong.",
     "058f2527f0e3fc48"
+   ],
+   [
+    "house: tavern",
+    "after-base: close-true",
+    "Ale and beer brewed at commercial scale, supplying the town's taverns. It eats grain and hires hands in quantity.",
+    "c1ce11a0485ea5f8"
+   ],
+   [
+    "house: brewery",
+    "after-base: close-true",
+    "A brewery working at commercial scale. It keeps the taverns stocked, and stands among the larger buyers of grain and emp",
+    "fde64fbf2b3c22c9"
+   ],
+   [
+    "house: tavern",
+    "after-base: close-true",
+    "A brewery working at commercial scale. It keeps the taverns stocked, and stands among the larger buyers of grain and emp",
+    "fde64fbf2b3c22c9"
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -7492,6 +7546,24 @@
     "implied",
     "Two temples face each other across ",
     "411613139f212ed0"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    " is going about its business. The market is open, the streets are orderly, the gates are attended by soldiers whose armo",
+    "8c921ec44468a876"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    " is going about its business. The market is open, the streets are orderly, the gates are attended by soldiers whose armo",
+    "8c921ec44468a876"
+   ],
+   [
+    "openTrade",
+    "after-base: close-true",
+    " has been rutted deep by heavy wagons moving in one direction: toward the settlement loaded, away from it loaded differe",
+    "1d61c2d98ac9bd5e"
    ]
   ],
   "src/data/npcData.js": [
@@ -9542,6 +9614,12 @@
     "after-base: close-true",
     "Has been skimming from the {food} reserves to pay a personal debt that predates the siege",
     "0e6ab1db36a57be8"
+   ],
+   [
+    "famine",
+    "after-base: close-true",
+    "Has documentation proving the famine was made worse by decisions taken by {faction}, and has been paid to lose it",
+    "69b5f407b1942004"
    ]
   ],
   "src/data/stressTypes.js": [
@@ -9832,6 +9910,12 @@
     "family",
     "Smuggling is the entrepôt trade run in the dark. Goods that cannot be taxed or declared flow through criminal networks.",
     "4b7c6c3c4466ba9f"
+   ],
+   [
+    "resource: hunting_grounds",
+    "after-base: close-true",
+    "Furs travel from the hunting grounds through trading posts, and the settlements along the route profit from the trade.",
+    "10e6e9e9bded9d8d"
    ]
   ],
   "src/data/tradeGoodsData.js": [
@@ -11792,6 +11876,36 @@
     "after-base: r3-code-c",
     "With men called away to the war, {name} has fewer hands than before to see to its own safety.",
     "7e7367a3ed3f5004"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    "{name} is at war: army carts pass through, and the war is all anyone talks about.",
+    "3b9a3d901784721d"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    "{name} watches its roads for deserters and spies, now that the war has come.",
+    "0db6059b978a652a"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    "The war takes much of the money there is, and in {name} prices move with every piece of news from the front.",
+    "04001bb2ab90ce9a"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    "Every season the war asks {name} for more, and its leaders must weigh what they owe the war against what the place needs",
+    "4075e409c14b59f1"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    "The war makes its demands on {name}, in men, carts and supplies, and its leaders must decide how much to give.",
+    "e3f711ef372a67f7"
    ]
   ],
   "src/domain/customContentSchema.js": [
@@ -16948,6 +17062,20 @@
     "family",
     "X-21c: a criminal faction's depth (members, goals, conflicts, description)",
     "7a2dbcfebb2b8357"
+   ]
+  ],
+  "src/domain/display/governanceAccount.js": [
+   [
+    "occupation",
+    "after-base: close-true",
+    "Nothing large is settled in the hall until the occupiers have approved it.",
+    "36eb28ce3ab194b4"
+   ],
+   [
+    "occupation",
+    "after-base: close-true",
+    "Even what the occupiers leave to the hall is not settled without bargaining with ",
+    "efd49e9008896522"
    ]
   ],
   "src/domain/display/humanizeEngineTokens.js": [
@@ -26370,6 +26498,12 @@
     "family",
     "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo",
     "35e040179aa22bf4"
+   ],
+   [
+    "siege",
+    "after-base: close-true",
+    "The siege has cut every road in, and the outlying farms are abandoned or burned.",
+    "4a972986d896d6da"
    ]
   ],
   "src/generators/economy/incomeLineSiblings.js": [
@@ -27014,6 +27148,30 @@
     "after-base: close-unprinted",
     " quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are ",
     "1d112886fae02a95"
+   ],
+   [
+    "garrison",
+    "after-base: close-true",
+    " is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest i",
+    "c60de9de2dcec571"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    " is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest i",
+    "c60de9de2dcec571"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    " running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has alr",
+    "51b044e9d3b40bc2"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    " lives on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.",
+    "59dfa4427702ce76"
    ]
   ],
   "src/generators/neighbourGenerator.js": [
@@ -27640,6 +27798,18 @@
     "after-base: close-true",
     "City watch; it answers for keeping order and is growing more sure of its own authority.",
     "6c12f9d5be13b96e"
+   ],
+   [
+    "clergy",
+    "after-base: close-true",
+    "Senior clergy hold effective civic authority through the council; religious law shapes civil policy.",
+    "1e68834442d91669"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    "Kept small before the war, and the war has put more on it than it was built to carry.",
+    "bb7aa6b0321b3f42"
    ]
   ],
   "src/generators/power/settlementNarrative.js": [
@@ -27704,6 +27874,18 @@
     "family",
     "Free citizens, clergy, and outside agitators who have been supporting the revolt covertly: shelter, information, supplie",
     "1a88b6e5db039c00"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    " Wartime has turned this power from a civic institution into an arm of the war. Crown authority over the war flows throu",
+    "65b27fd2d9bb6ceb"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    " Wartime has turned this power from a civic institution into an arm of the war. Authority over the war flows through mil",
+    "e363e378baf491cc"
    ]
   ],
   "src/generators/priorityHelpers.js": [
@@ -27754,6 +27936,14 @@
     "family",
     "elder grove council",
     "3aa0ee6c9ef99e5a"
+   ]
+  ],
+  "src/generators/safetyLineTruth.js": [
+   [
+    "armedForce",
+    "after-base: close-true",
+    " The guard keeps the gates, but smugglers have ways in beneath the walls.",
+    "79d8a0b0977f7820"
    ]
   ],
   "src/generators/safetyProfile.js": [
@@ -28200,6 +28390,24 @@
     "after-base: close-unprinted",
     "The adventurers' charter hall coordinates emergency response to threats.",
     "ba8f5cbfc878053d"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt cler",
+    "f44cc86b1d3db75c"
+   ],
+   [
+    "clergy",
+    "after-base: close-true",
+    "The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt cler",
+    "f44cc86b1d3db75c"
+   ],
+   [
+    "walls",
+    "after-base: close-true",
+    " The walls leave few ways in.",
+    "47eed4442b369227"
    ]
   ],
   "src/generators/services/serviceClassifier.js": [
@@ -28612,6 +28820,12 @@
     "family",
     " has fractured. Both sides claim the legitimate succession. Both hold services. Both have a priest who will not acknowle",
     "657d0177773750c1"
+   ],
+   [
+    "war",
+    "after-base: close-true",
+    " is at war and doing well out of it: army contracts pay, prices are high, and those with the right friends are getting r",
+    "88bfb0fc310d9145"
    ]
   ],
   "src/generators/structuralValidator.js": [
