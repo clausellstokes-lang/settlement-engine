@@ -848,12 +848,12 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
             hook: ["Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
               'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.'][pick % 2],
           });
-        if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
+        if ((resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron')) && importHeld(facts, /\b(?:iron|metal)/i)) // TAIL-DEFECON-3 (D8, #20893): the iron hooks only where the record's import list holds iron
           hooks.push({ category: 'Strategic Resource', severity: 'medium', hook: (typeof facts === 'function' ? facts() : facts)?.warState !== 'peace' // the war line only where the record holds a war
             ? 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.'
-            : ['The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and people are starting to complain.',
-              'The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work waits on mended tools.',
-              'A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.'][pick % 3] });
+            : ['Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are starting to complain.',
+              'The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools.',
+              'A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending.'][pick % 3] });
       }
     });
   }

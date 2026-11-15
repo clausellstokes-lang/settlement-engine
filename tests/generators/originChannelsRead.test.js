@@ -23,7 +23,7 @@ describe('the channels are the receipt\'s own', () => {
     expect(supportChannelsOf({ paths: [{ type: 'local_foodshed' }, { type: 'seasonal_access', evidence: ['inferred:local tracks only'] }] }))
       .toBe('the tracks in a good season');
     expect(supportChannelsOf({ paths: [{ type: 'seasonal_access', evidence: ['institution:Caravanserai'] }, { type: 'patronage' }] }))
-      .toBe('the caravans that still come or the favour of a patron');
+      .toBe('the tracks in a good season or the favour of a patron'); // TAIL-NARRATIVE-2 B3 (18781): a caravan house is not caravans that come
     expect(supportChannelsOf({ paths: [{ type: 'magical_transit' }, { type: 'hinterland' }, { type: 'seasonal_access' }, { type: 'patronage' }] }))
       .toBe('carriage by magic, carts from the country around it, the tracks in a good season, or the favour of a patron');
     expect(supportChannelsOf({ paths: [{ type: 'local_foodshed' }, { type: 'reserves' }] })).toBe(null);
@@ -46,7 +46,7 @@ describe("the readers' towns, born as the app births them", () => {
       const s = born(seed);
       expect(s.config.tradeRouteAccess, `${seed}: isolated`).toBe('isolated');
       expect(s.economicState.foodSecurity.importCoverage, `${seed}: nothing comes in`).toBe(0);
-      expect(s.settlementReason[0], `${seed}: gets by on what it has`).toMatch(/gets by on what/);
+      expect(s.settlementReason[0], `${seed}: makes do with what it has`).toMatch(/must make do with what/); // TAIL-NARRATIVE-2 B3: a shortfall never "gets by"
       expect(CHANNEL_WORDS.test(s.settlementReason[0]), `${seed}: ${s.settlementReason[0]}`).toBe(false);
     }), 'nothing comes in, and no channel is named');
   });

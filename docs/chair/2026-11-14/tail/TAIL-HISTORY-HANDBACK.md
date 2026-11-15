@@ -1,0 +1,399 @@
+# TAIL-HISTORY · hand-back (2026-11-15)
+
+Seats: TAIL-HISTORY (batch 1 built, handed back as a patch), then **TAIL-HISTORY-2** (its successor, keeping this file).
+Base: the joined line `lane/join-2026-11-14` at **f663a2699**. Branch: `lane/tail-history-2026-11-14`.
+Worklist: `docs/chair/2026-11-14/read-all/WORKLIST-HISTORY.{md,json}` on the chair's lane (211 rows, read at e5b421802).
+
+**STATE (TAIL-HISTORY-2): batch 1 LANDED** (3da34c70b: the patch, plus Y6 and Y7). **Batch 2 (Y5) LANDED** (7bef72cbc). **HANDED BACK** at the budget
+(2026-11-15 01:50): what is left is listed under WHAT IS LEFT below.
+
+## The chair's rulings since (2026-11-15 00:30 UTC; each vetoable by the owner)
+
+- **(Y5) THE AFTERMATH SHAPE** (74 rows, 711 false prints: a current tension whose own event is not on the timeline).
+  - GRANTED: the file's own form, `byMemory.unanchored`. Such a tension is told as a LIVE QUARREL: present tense; no date, no "remember", no "since the …", no aftermath, no survivors of an event. Its factions are the parties of a present quarrel, and its hooks are about what is at stake now. It stands under the type's label, unchanged (the label prints on every surface). The twin stays on the slot: THE DRAW IS KEPT.
+  - REFUSED: setting the tension aside at selection (it re-deals the slot and the stream after it).
+  - NAMED, NOT BUILT: the event added to the timeline (a measuring seat's candidate).
+  - Ten types: plague_years, great_fire, great_flood, popular_uprising, tyranny, wild_magic, trade_collapse, market_crash, heresy_trial, pilgrimage_surge. One twin a writer a type (the description, the factions, the hooks). Every line is listed for the owner's veto with the towns read.
+- **(Y6)** A line that a crisis can make false is not colour. The baking line drops its colour mark and takes its declaration. The law that a colour line declares nothing stands. The colour register follows through its own door.
+- **(Y7) The batch's governing tests**, each re-keyed BY IDENTITY in the batch's commit, none loosened:
+  - `src/data/stressTypesMeta.js` lines 69 and 79 are LENT: the same two rewords, nothing else of that file.
+  - The twenty declaring rows become twenty-two, the two war hooks named.
+  - The declarations' ledger lines are added by the ledger's documented way, or the rewords take the REWORDED arm.
+  - The arrival tables' template pin is re-keyed.
+  - The births-over-seeds suites are re-run each alone at the base and at the cure first. A red because a draw moved outside the cured row's own pool is a STOP.
+- **(Y8)** Under a plague or a quarantine no line gathers a crowd as in ordinary times (a fair, a market day, a procession, a festival, a full tavern). The siege's form applies: a twin true in that state, or the line leaves that state where its slot does not fall mute.
+- **(Y9)** 20031 and 20032 (the ailing ruler under an appointed or priestly seat): NO ATOM for heredity. A twin true under such a seat (who names the next is the question, not who inherits), keyed by what the file can already read of the government. If it can read nothing, the rows stay parked with their measure.
+- **(X9) The exports' read**: `docs/chair/2026-11-14/read-all-3/WORKLIST3-HISTORY.{md,json}` on the chair's lane (119 rows, 3 HIGH). Its header lacked `history.currentTensions`: many rows are Y5's shape, so each is checked against the record first. Measure with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`.
+- Named for others: `src/domain/crisis/crisisSummaryVantage.js` (the crisis seat's).
+
+## Batch 1: LANDED (TAIL-HISTORY-2, 2026-11-15)
+
+The patch was applied unchanged at 8b90e7753, with these additions:
+
+- **Y6:** `ARRIVAL_SENSES.bread.lines[1]` (the baking since before dawn) leaves `colour: true` and keeps `excludes: ['crisis: hunger']`.
+  - R-AO's register in `census2fColour.test.js` is re-keyed: `bread.lines` [0, 1, 3] → [0, 3].
+  - The ledger `docs/census/declarations/ARRIVAL_SENSES.json` still marks the line `colour: true`. No test reads that cell against the live line. NAMED STALE, for the ledger's re-take at the close.
+- **Y7 (by identity):**
+  - `stressTypesMeta.js` 69 and 79 carry the two rewords word for word.
+  - `hookTablesDeclared` has 20 → 22 rows, with the two `external_threat: no war: peace` rows named.
+  - `textOf` has 115 → 119 rows: the broker, the clerk, the porters and the food handed out turn from bare lines into objects.
+  - The three stressTypes rewords take the REWORDED arm of `census2dTables.test.js`, 1 → 4 cells. That arm is shared by census2e.
+- **The births-over-seeds suites, each alone (base | cure):**
+  - Green at both: foodDiversity, incomeLinesSayTheRecord, stressSummaryName, timelineVariety and simulationSpine.
+  - urbanBandInstitutions: red at both, the same one test, G5 (magic-free world_law_magic). G3 is green alone.
+  - editCorpusRatchet: red at both, the same four, A3, A4, A7 and A8. A5 is green alone.
+  - So none is the batch's. The predecessor's extra reds were load.
+- **Gates at the commit:**
+  - typecheck:domain:strict 0, typecheck:ratchet 0, eslint on the touched files 0.
+  - The presumed-things walker is unchanged from the base (fresh 147, stale 0; it exits red at the base too, carried).
+  - Grid: 2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), 0 rises.
+  - `wiringCensusDeclared.walker` (DS-DEF/ECO/GEN annex columns) is red at the base too, carried.
+- The census after this commit is batch 2's before-run (see below).
+
+## Batch 2: Y5, THE AFTERMATH SHAPE (TAIL-HISTORY-2, 2026-11-15)
+
+**The cure.** `src/data/historyData.js` gives the ten types `byMemory.unanchored`: a description, three factions and three hooks, all in present tense.
+- `historyGenerator.js :: tensionByMemory` puts these words on the tension when the timeline holds no event of its type. The selection is untouched, so the slot keeps its draw.
+- great_fire and tyranny keep their `dated` words beside the new ones.
+- Four twin hooks keep a declaration: the plague's healer (`healer`), the flood's bank (`navigable`), the crash's ledger (`market`) and the pilgrimage's office and rival shrine (`institution: temple`).
+- My first wording of the heresy relic ("the temple's keeping") and the wild-magic district ("one district") rose the presumed-things walker by 2, because the walker reads no declaration inside `byMemory`. I reworded both to need nothing: "…has gone missing, and each side blames the other" and "…in one part of the settlement, and those in charge…". The walker is back to 147, equal to the base.
+
+**The measure.** CENSUS-3 at 3da34c70b (before, which is also batch 1's true after-run) and at the batch (after). Both are 720 towns.
+- **The record:** 135 tensions in 131 towns have no own event (plague_years 16, great_fire 14, great_flood 23, popular_uprising 18, tyranny 11, wild_magic 10, trade_collapse 11, market_crash 5, heresy_trial 14, pilgrimage_surge 13). After the batch:
+  - All 135 carry their live words, on the page.
+  - None carries any of its event's words.
+- **The tabs' inventory:** 29,869 → 29,936 sentences. 20 are gone, 87 are new, 90 print in fewer towns and **0 moved**.
+  - Every sentence that prints in fewer towns is a Y5 tension's event words. The prints that remain belong to towns whose timeline holds the event.
+  - The 87 inheritors are the ten twins' lines, every one of them.
+  - **"Patron deity" (and its two card lines) 716 → 720:** these are r2r-thorp-0…3, the first town each of the four render workers draws. Their record is identical in both runs. It is a cold-start render artifact, not a change.
+- **The exports' inventory** (`SURFACES=PDF,Journal`): 35,763 → 35,850 sentences. 57 are gone, 144 are new, 133 print in fewer towns.
+  - Every new exports sentence is twin words.
+  - "N hooks to pull; most of them belong to …" changes its group in 3 towns (r2r-hamlet-2, r2r-village-17, r2s-insurgency-village-2). A twin hook declares differently from the hook it replaced, and the line is counted from the hooks that print.
+- **The worklist rows (74):**
+  - 14 are GONE and 46 print in FEWER towns, by their false towns.
+  - 14 still print in the town they were read in. These are B20744 (the trade collapse's route: its 18 remaining towns hold the event), 21280, B15917 ("Sceptics who doubt the miracle": the pilgrimage twin keeps it on purpose, because a claimed miracle has its sceptics), 03341 (HISTORY_DESC_SIBLINGS, not this shape), B22143 (the label, unchanged by Y5), 21746 and 21101 (trade collapse descriptions in towns with the event), and the seven trade_dispute rows (B02465, B12687, B21991, B04055, B19434, B02421, B20238).
+  - **trade_dispute is NOT among Y5's ten.** It is the same shape, 12 towns, and is left for the chair.
+- **X9's rows of the ten types:** 21602 19→3, 21681 16→2, 26274 15→5, 29579 9→1 and 29429 7→1. 21680 4→0 and 31195 2→0 are gone.
+- **THE DECLARED MOVE** (record diff by field on the 720):
+  - `history.currentTensions[].description`: 135 tensions in 131 towns.
+  - `.factions[]` (349 cells) and `.plotHooks[]` (327 cells, plus the list length in 18).
+  - `history.siegeNarrative` in 4 towns (r2r-thorp-28, r2r-hamlet-2, r2r-hamlet-25 and r2r-village-14). `src/generators/narrative/siegeCapability.js` copies the first tension's description after "… is still present in living memory:". It prints on none of the 720 pages. That writer is not this group's; NAMED.
+  - Nothing else moves.
+
+**The guard, red first.** `tests/data/tailHistoryBatch2.test.js`:
+- The twenty test covers the smallest and the largest census town of each type. It checks that no event words print, that the live description does, and that there are three parties. It is red at 3da34c70b (all 20) and green at the batch.
+- KEEP covers five towns whose own event is on the timeline: r2r-thorp-7, r2r-city-52, r2s-infiltrated-village-0, r2s-under_siege-city-3 and r2s-famine-village-1. Each keeps its event's words. Green before and after.
+- `tensionTemplateDeclaration.test.js` is green: born with the memory table stripped, the records are identical but for the tensions' words.
+
+**Re-keyed by identity:** `w2FixData2History.test.js`, c01-thorp-none (seed review-w2b-1). Its "the flood still prints" liveness reads the flood TENSION, which has no flood on that timeline. It now accepts the live quarrel's words too.
+
+**Gates:**
+- typecheck:domain:strict 0, typecheck:ratchet 0, eslint on the touched files 0.
+- The walker is unchanged from the base (fresh 147, stale 0).
+- Grid: 2 falls, 0 rises (the same as the base).
+- The 24 test files that name historyData.js and the 23 that name its generator: only carried reds. These are urbanBand G5 and the generator golden master, which is red at 3da34c70b too. G3 is green when run alone.
+
+**THE VETO LIST: every new line (VETOABLE wording, the owner's; the towns read are the smallest, the largest and a crisis town where one holds it)**
+- **market_crash** (5 towns; read in r2r-town-39, r2r-city-12):
+  - The description: "Talk of a coming crash in {resource} sets neighbour against neighbour: some buy as if prices can only rise, others are calling in what they are owed".
+  - The factions: "Those buying as if prices can only rise", "Creditors calling in debts" and "Those who have sold and are waiting".
+  - The hooks:
+    - "A ledger names who has been warned to sell, and who has not" (needs market)
+    - "A family on the brink of ruin blames a rival for stirring the panic, and wants proof"
+    - "Someone is quietly buying up other people's debts, and nobody knows who"
+- **trade_collapse** (11 towns; read in r2r-thorp-26, r2r-metropolis-22):
+  - The description: "Whether the trade the settlement lives on is about to fail is the quarrel of the day: some see buyers going elsewhere, others see nothing but rumour".
+  - The factions: "Traders who fear the buyers are going elsewhere", "Workers afraid for their wages" and "Rivals who would gain if the trade moved".
+  - The hooks:
+    - "Someone with power would rather the trade went elsewhere, and is quietly making it harder"
+    - "A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it"
+    - "An old contract obliges a distant partner to trade here, if anyone can enforce it"
+- **great_fire** (14 towns; read in r2r-thorp-9, r2s-infiltrated-metropolis-3, r2s-wartime-city-0):
+  - The description: "Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season".
+  - The factions: "Those who want timber and thatch forbidden", "Households who cannot afford to build in anything else" and "Those who say the danger is overblown".
+  - The hooks:
+    - "Small fires keep starting at the same few houses, and nobody believes it is chance"
+    - "Someone is quietly buying the houses most at risk of fire, cheaply, before any rule is made"
+    - "A rule against thatch is being pressed by one household, and it would ruin exactly its rivals"
+- **plague_years** (16 towns; read in r2r-thorp-4, r2s-slave_revolt-metropolis-1, r2s-wartime-village-3):
+  - The description: "Fear of sickness runs through the settlement, and every fever reopens the quarrel over who is shut indoors, who is kept away, and who has the right to decide".
+  - The factions: "Those who would shut the sick away", "Families who refuse to be shut in" and "Those who trust to prayer and old remedies".
+  - The hooks:
+    - "A healer is accused of hiding a fever in a household, to spare it from being shut in" (needs healer)
+    - "A family taken by fever swears it came in with a stranger, and wants the stranger found"
+    - "Someone is using the fear of fever to keep a rival household shut indoors, and out of a bargain"
+- **great_flood** (23 towns; read in r2r-thorp-28, r2r-metropolis-36, r2s-plague_onset-city-0):
+  - The description: "Rising water is the settlement's standing fear, and every wet season reopens the quarrel over who must dig the ditches, who keeps the low ground, and who pays for both".
+  - The factions: "Households on the low ground", "Landowners on the high ground" and "Those who say the water will never come".
+  - The hooks:
+    - "The ditches that carry off the water are choked, and the household bound to clear them refuses"
+    - "A bank meant to hold back the water is being quietly left to rot, and someone knows why" (needs navigable)
+    - "Someone is buying the low ground cheaply from frightened owners, and seems very sure the water will not come"
+- **heresy_trial** (14 towns; read in r2s-occupied-thorp-2, r2s-religious_conversion-city-2):
+  - The description: "An accusation of heresy against a prominent figure is splitting the faithful, and those in authority are being pressed to take a side".
+  - The factions: "The accusers", "The accused and their sympathizers" and "Those in authority who would exploit the rift".
+  - The hooks:
+    - "The evidence against the accused is fabricated, and a witness is almost ready to say so"
+    - "The doctrine under accusation is quietly practised by more of the leading households than would admit it"
+    - "A relic held as evidence against the accused has gone missing, and each side blames the other"
+- **pilgrimage_surge** (13 towns; read in r2r-hamlet-6, r2s-monster_pressure-metropolis-1, r2s-famine-village-3):
+  - The description: "A claimed miracle is splitting the settlement: some would proclaim it and welcome the pilgrims it could bring, others call it a fraud that will bring nothing but strangers".
+  - The factions: "Those who would proclaim the miracle", "Residents who want no crowds of strangers" and "Sceptics who doubt the miracle".
+  - The hooks:
+    - "The miracle can be explained mundanely, and the person who can explain it is being kept quiet"
+    - "One family hopes to buy the office that would authenticate the miracle, and the profits that would follow" (needs institution: temple)
+    - "A rival shrine claims the relic at the heart of the miracle is theirs, stolen, and has sent someone to recover it" (needs institution: temple)
+- **popular_uprising** (18 towns; read in r2r-thorp-31, r2r-metropolis-47, r2s-famine-town-1):
+  - The description: "The common people are pressing those in charge over {demands}, and each dispute grows louder than the last".
+  - The factions: "Those pressing their demands", "Those in charge, who will not give way" and "Those waiting to see which side wins".
+  - The hooks:
+    - "Someone is keeping a list of who speaks loudest for the demands, and passing it to those in charge"
+    - "An outside hand is quietly paying for the agitation, and will want something for it"
+    - "A concession has been promised to the common people, and someone in authority means to break the promise"
+- **tyranny** (11 towns; read in r2r-thorp-20, r2s-succession_void-metropolis-2, r2s-occupied-city-1):
+  - The description: "Whether one person is taking more power than anyone granted is the quarrel of the day, and every new rule is read as a step toward tyranny".
+  - The factions: "Those who want a strong hand", "Those who fear a tyrant in the making" and "Those who will serve whoever wins".
+  - The hooks:
+    - "Someone close to authority is gathering powers no one granted, and keeps the record of it locked away"
+    - "A household that spoke out against the new rules has had its goods seized on a pretext, and wants them back"
+    - "Someone is paying for praise of a strong hand in the street, and stands to profit if it comes"
+- **wild_magic** (10 towns; read in r2s-occupied-thorp-0, r2s-under_siege-city-1):
+  - The description: "Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone".
+  - The factions: "Those touched by the flares", "Those who fear them" and "Those who would study the flares".
+  - The hooks:
+    - "The flares are no accident: someone is working magic they cannot control, and hiding the notes"
+    - "A child touched by a flare is showing something the family cannot conceal"
+    - "The flares come more often in one part of the settlement, and those in charge are pretending otherwise"
+
+**Left by batch 2, for the chair:**
+- **trade_dispute:** the seven rows above, 12 towns.
+- The X9 exports rows show the same aftermath shape in OTHER tension types (leadership_vacuum, crime_wave, external_threat, outside debt, corruption_scandal, magical_controversy, population friction, infiltration_fear). They are told in past tense under a type with no own event. Y5 names ten types; widening it is the chair's call.
+
+## The chair's notes Y10 to Y12 (received 2026-11-15 01:43), and where they stand at hand-back
+
+- **Y10 (1): DISPLAY-CIVIC's 26 rows**, read against the after-census of batch 2:
+  - The Overview camps of Y5's types fall: B08924 "Former rebels" 20 → 2 and B14403 "Old loyalists" 13 → 2. The towns left hold the event.
+  - The label rows still print under the live quarrel. This follows Y5's ruling: the label is unchanged on every surface. They are B09553/B09557 Great Flood 25, B14868/9 Plague Years 19, B09552/6 Great Fire 18, B14848/55 Pilgrimage Surge 18, B09895/B09901 Heresy Trial 15, B27913 Wild magic 15, B22268 Tyranny 15, B22149 Trade collapse 14 and B12247 Market crash 6.
+  - The rest are OTHER tension types, outside Y5's ten: B07041 External Debt 60, B05720 Corruption scandal 48, B22144/B22175 Trade Dispute 12, and the camps 10722 "Hoarders" 165 (resource_scarcity), B15436 "Reformers" 48, B15115/B03548 "Pro-/Anti-magic" 23, B15437 "Reformists" 11 and B16654 "Secular camp" 11. They wait on the chair's widening of Y5. **A size law for camps** ("Price regulators" in a thorp of seven) belongs to those types' factions. The ten twins' factions claim no office or guild: "those in charge", "landowners", "creditors", "households".
+- **Y10 (2): B02506** ("A fire that began in the lower districts…") goes 20 → 15. The towns left print it from the timeline event's description (the HISTORY_DESC / small-place writer). NOT WORKED.
+- **Y10 (3):** the "Last held" writer is `src/components/new/tabs/TraditionsTab.jsx` (and `src/pdf/sections/Traditions.jsx`). Neither is in this group: NAMED, for the chair to rule its holder.
+- **Y11:** the two new atoms (`ruling body`, `rival power`). No row of mine was keyed after Y5, so NOTHING IS MERGED. The candidates for the next seat are 20031 and 20032 (Y9), and the succession and insurgency texts if the chair wants their plurality back under `ruling body`.
+- **Y12:** the four arrival scenes (shrine, stables, carts of cloth, horse traders) are written by `src/generators/narrative/arrivalScene.js`. **It is not in this group's file list**, so it is NAMED for the chair to rule. The arrival POOLS this group holds (`src/data/arrivalProse.js`) are owed the chair's whole-pool measure: each line that names a house, a trade or a good, with the towns where the thing does not stand. NOT WORKED.
+
+## WHAT IS LEFT (TAIL-HISTORY-2's hand-back, 2026-11-15, widest first)
+
+1. **Y5 widened** (the chair's call): the same shape in the other tension types.
+   - trade_dispute: 7 rows, 12 towns.
+   - The tabs' camps and labels above.
+   - The X9 exports rows: leadership_vacuum, crime_wave, external_threat, outside debt, corruption_scandal, magical_controversy, population friction and infiltration_fear.
+   - The form is the same: `byMemory.unanchored` with three factions and three hooks. `tensionTemplateDeclaration` guards the draw. The presumed-things walker reads no declaration inside `byMemory`, so a twin naming a house is reworded, not declared.
+2. **X9's lastingEffects rows**, 17 rows with 30563 the widest: "Watch towers and muster drills maintained since the alarm", 157 towns, HIGH. Also the archive and levy-roster family: 03872 to 03877 and 07927.
+3. The worklist's other wide rows, still unworked:
+   - B15078 "Price regulators" (165).
+   - 16625 "Rival guilds fought…" (139).
+   - 11894 and 28512 (foodways, Y3).
+   - B19917 and 07400.
+   - The Y3 culture rows.
+   - The rest of Y4.
+   - **Y8** (no gathering under a plague or a quarantine).
+4. **Y9 (20031, 20032):** a twin keyed by what the file reads of the government, or `ruling body` after a Y11 merge.
+5. **Y12:** the arrival pool measured whole by the record.
+6. **Named for other files:** `siegeCapability.js` (its siegeNarrative copies the first tension's words; it prints nowhere), `crisisSummaryVantage.js` (the crisis seat's), `TraditionsTab.jsx` and `arrivalScene.js`.
+7. **Registers named stale:**
+   - `docs/census/declarations/ARRIVAL_SENSES.json` still marks `bread.lines[1]` as colour (Y6).
+   - The ledgers do not carry the three stressTypes rewords (they are under the REWORDED arm).
+   - The engine bundle (`supabase/functions/_shared/engineBundle.js`) carries none of either batch.
+   - All are for the close's re-take.
+
+**Instruments, re-made** (as above, plus):
+- The census before and after: `census3.sh <tree> <out> 4` in two scratch worktrees (one detached at the tip, `node_modules` symlinked).
+- The record diff by field: a 20-line Python walk over the two `corpus.ndjson.gz` files.
+- The Y5 verifier: each tension of the ten types with no `templateType` of its own on `historyEvents`, checked for its event's words against `byMemory.unanchored`.
+- A note on loads: the before-run renders four towns (r2r-thorp-0…3) cold, so "Patron deity" can differ by 4. Ignore it.
+
+## Batch 1 as built by TAIL-HISTORY (its record, kept)
+
+## The rulings worked to (the chair's, 2026-11-14; each vetoable by the owner)
+
+- **(Y1)** A hook or line a historical event writes is true of ITS event. It takes its condition (its event of that type, recent or present) in the form the file uses.
+- **(Y2)** The crisis texts (stressTypes.js) that need a second power or offices take a twin true of a place with one power and no office, in the same slot. NO DRAW IS MOVED.
+- **(Y3)** The culture rows (cultureProfiles.js) are each held to a declaration. `src/pdf/lib/cultureOnPage.js` is not edited.
+- **(Y4)** Arrival prose under a siege, with no market, or at a size it does not fit takes twins and declarations, as the file's last cures were made.
+- The brief's laws as written: silence is true; no draw moved; a twin where a state goes mute; under a siege nothing by road, gate or water; under a famine no food that failed.
+
+## Base measure
+
+- Census at f663a2699 (CENSUS-3, 720 towns): 29,876 distinct sentences.
+- **Gone at the base:** B14754 and B14755 (EVENT_TYPE_NAMES, "…still remember the succession crisis…"): their fold is not in `before.json`.
+- Every other row prints in exactly its worklist `n`.
+
+## Batch 1: the patch (14 rows; one census before, one after)
+
+### Measure before (false towns, by record) and after (CENSUS-3 at the patch, before the salt-fish reword below)
+
+| id | sev | line (writer) | false before | prints before → after |
+|---|---|---|---|---|
+| 00169 | HIGH | "Three different powers have approached…" (stressTypes succession_void.crisisHook) | 12 (one or two powers) | 31 → 0 (reworded) |
+| 04385 | MED | "…each office does as it sees fit" (succession_void.viabilityNote) | 15 (tier ≤ village) | 31 → 0 (reworded) |
+| 18890 | MED | "…some offices no longer send their revenue on…" (insurgency.viabilityNote) | 19 (tier ≤ village) | 37 → 0 (reworded) |
+| 22261 | MED | "…profits from wartime contracts" (historyData external_threat hook) | 74 (no war in force) | 107 → 33 |
+| 02538 | MED | "…the war party is suppressing" (same) | 79 | 108 → 29 |
+| B02462 | MED | the same, with a stop (a timeline event's hook) | 17 | 19 → 2 |
+| 09279 | HIGH | "Food is being handed out to anyone who asks…" (ARRIVAL_PEOPLE.south_asian) | 3 (siege or famine) | 24 → 21 |
+| 02866 | HIGH | "A notice of the next fair…" (ARRIVAL_PEOPLE.germanic) | 2 (siege) | 9 → 7 |
+| 15806 | MED | "Porters bent under loaded frames file past…" (mesoamerican) | 2 (siege) | 19 → 17 |
+| 02414 | MED | "A broker … goods from routes you have never travelled" (arabic) | 1 (siege) | 14 → 14 (−1 siege, +1 moved: see note) |
+| 02470 | MED | "A clerk records every cartload…" (east_asian) | 1 (siege) | 21 → 19 (−1 siege, −1 moved: see note) |
+| 02382 | MED | "A basket of fish, still flapping…" (ARRIVAL_SENSES.lines) | 3 (siege or famine) | 8 → 5 |
+| 18339 | MED | "Someone has been baking since before dawn…" (lines, colour) | 1 (famine) | 2 → 1 |
+| 04287 | MED | "Barrels of salt fish stand stacked for the carts…" (dominant) | 3 (siege) | see note: reworded after the run |
+
+**The cure in the patch:**
+
+- **Y1:** the two war hooks take `excludes: ['war: peace']`. The wartime, occupied and siege towns keep them (29 and 33).
+- **Y2:** three rewords. They claim no plurality of powers and no office. The vocabulary has no atom that counts the powers or the offices.
+- **Y4:**
+  - `excludes: ['crisis: under_siege']` on the fair, the porters, the broker and the clerk.
+  - `excludes: ['crisis: hunger']` on the food line, the fresh fish and the baking.
+  - The salt fish are reworded (see the note).
+
+**NOTE, the salt fish.** I first gave 04287 an under-siege twin as a new line in its pool. The after-run showed that this
+re-drew the fish-dominant towns. The pool's length changed, so 04287 went 18 → 25, "Half of … gutting" +8 and "Racks of
+drying fish" +4. It also moved r2r-hamlet-27 (the broker's +1) and r2r-village-41 (the clerk's extra −1). The patch
+replaces the twin with a plain reword that names no carts. It has no condition and adds no new line. **The after-run
+above predates that reword, so the next seat's first census is the true after-run of this patch.**
+
+**Explained silence: "External Threat" as a plot-hook heading, 89 → 79.** In 10 towns a past external-threat event's
+refused war hook now resolves to the tension's own remaining hook ("The threat has an agent already inside the
+settlement"). The page then prints that hook once, under the event, and the tension's group heading drops. The hook
+still prints, and no false line results. The towns are r2r-city-54, r2r-thorp-19, r2s-infiltrated-village-2,
+r2s-monster_pressure-city-0/1/2, -thorp-3, -town-0, -town-3 and r2s-plague_onset-town-0.
+
+**The inheritors I read** (the widest; I read none of them false):
+
+- The three reworded crisis texts (31, 31, 37 towns).
+- "The threat has an agent already inside the settlement" in its memory frames (17 + 14 + …).
+- In the siege and famine towns:
+  - "An apprentice hurries past…": r2s-occupied-thorp-0. It is a culture-pool sibling, but it is itself worklist row 03498 (an apprentice with no craft house).
+  - "Festival banners…" and "An elder settles a quarrel…": r2r-village-43 and r2r-village-41.
+  - "Nets hang drying…" (r2s-famine-thorp-0). This is a famine with a fish source; it is NOT verified against the failed source, so the next seat should read it.
+
+### The guard, red first
+
+`tests/data/tailHistoryBatch1.test.js` (in the patch) holds 6 tests: 4 MUST-NOT tables and 2 KEEPs.
+
+- At the base files: **3 of 3 must-not tests red**: Y1 (4 towns), Y2 (3 towns) and Y4 (11 towns). Both KEEPs were green.
+- At the cure: 5 of 5 green.
+- The sixth test (the salt fish name no carts) was added with the reword and has not been run.
+
+### Gates at the cure (gate-tail.sh)
+
+- typecheck:domain:strict 0, typecheck:ratchet 0, eslint on the touched files 0.
+- The presumed-things walker equals the base: fresh 147, stale 0. My first wording, "the would-be heirs to the empty seat", rose it by one, because "the empty seat" is the walker's succession word. The patch's wording, "The would-be successors", does not.
+- Grid: 2 falls, 0 rises.
+
+### WHY IT IS NOT LANDED: the governing tests
+
+I ran the 133 test files that name a touched file. 28 assertions are red at the cure and 14 are red at the base. Red at
+the cure and green at the base:
+
+1. `tests/data/stressTypesMeta.test.js`: the drift check. **`src/data/stressTypesMeta.js` holds the two viabilityNotes word for word** (lines 69 and 79). It is outside this group. NAMED for its holder: it takes the same two rewords (the last cure, 85322e82b, changed both).
+2. `tests/generators/hookTablesDeclared.test.js`: "the twenty declaring rows". The two war hooks make 22, so the pin is re-keyed by identity.
+3. `tests/domain/facts/census2dTables.test.js` and `census2eTables.test.js`: the declared sets stand beside their ledgers. The new declarations need their ledger lines (`docs/census/declarations/…`), or the stressTypes rewords' REWORDED arm.
+4. `tests/domain/facts/census2fColour.test.js` (R-AO: a colour line declares nothing). The baking line is `colour: true`, so it must not take `excludes`. Its cure is a reword or leaving the colour mark (this needs the chair).
+5. `tests/domain/facts/textOf.test.js`: the arrival tables' declarations are read back to a template. A pin to re-key.
+6. The births-over-seeds suites (these may follow the moved draws or the CPU load; re-run before judging):
+   - `foodDiversity`
+   - `incomeLinesSayTheRecord` ×2
+   - `stressSummaryName`
+   - `timelineVariety`
+   - `urbanBandInstitutions` G3
+   - `editCorpusRatchet` A5
+   - `simulationSpine`
+
+The 14 reds carried at the base are not mine: the edit-corpus and world-fact goldens, the pinned choosers, writer reach, the golden master, hallDecidesUnderOccupation and the W2-FIX-DATA-8 row.
+
+## Rows struck (verified by record: true of their event)
+
+For each hook I read its carrier on every printing town (`currentTensions[].plotHooks` or `historicalEvents[].plotHooks`):
+
+- **B19364 "The crime wave is coordinated." (181).** It prints only under a crime_wave tension, which stands only where the crime signal is present. A hidden hand is the hook's own new claim, and no record field denies it.
+- **18323 and 18324, "Someone destroyed the competing supply route" (182, 25).** An engineered scarcity explains the isolation the reader cited, and no field says no route ever ran.
+- **B19302, B20649 and B20650 (the reformers, the reformist leader); B17445, B17446, B02863 and B02864 ("one side", "both sides"); B21358 (the vigilantes).** The tension's own factions name these parties (corruption_scandal, religious_tension, crime_wave).
+- **B02619, B02620, B19874 and B19875 (the witness, the investigator).** These are the hook's own figures. Each prints only under its corruption scandal tension or event.
+- **B19428 and B21356 (the leadership vacuum's hooks).** They print only under a leadership_vacuum tension (already refused under a settled power) or its event, mostly under politically_fractured.
+
+## What is left (widest first) and its measure
+
+**THE AFTERMATH SHAPE (Y1): 74 rows, 711 false prints. Every one comes from a current tension whose own event is absent from the timeline.**
+
+- The types and the count of tensions with no own event:
+  - plague_years 16
+  - great_fire 14
+  - great_flood 23
+  - popular_uprising 18
+  - tyranny 11
+  - wild_magic 10
+  - trade_collapse 11
+  - market_crash 5
+  - heresy_trial 14
+  - pilgrimage_surge 13
+- The false prints span three writers: the description (the "severity" writer rows, e.g. B02938, B03370, B27509), the factions (e.g. B21987, B06235, B15297) and the hooks (e.g. B20278, B20557, B15373, B21149, B02689).
+- The rows with their towns-false/printing are in the measure at the foot of this file.
+- The file's form for the tension is `byMemory.unanchored` (`historyGenerator.js :: tensionByMemory`). It replaces the description, the factions and, if given, the plotHooks when the timeline has no own event. The twin stays on the same slot, so the draw is kept.
+- **THE CHAIR'S CALL NEEDED:**
+  - The tension's label is its type name ("Plague Years", "Great Fire") on every surface, including the PDF and the journal, which are outside this group. Twin words must stand under that label.
+  - The other route is the file's own earlier form, `TENSIONS_THAT_NEED_THEIR_OWN_EVENT`, which sets the tension aside at selection. It is a DECLARED MOVE that re-deals the slot and the stream after it.
+
+**Other wide rows, unworked:**
+
+- B15078 "Price regulators" (165): resource_scarcity factions.
+- 16625 "Rival guilds fought…" (139): it prints despite `needs: ['guild']`. The guild home's answer is to be read against the record.
+- 11894 and 28512 (culture foodways, Y3).
+- B19917 and 07400 (descriptions at a size or under a settled power).
+- The Y3 culture rows.
+- The rest of Y4, including the plague-gathering rows. These are not a stated law, so the chair should rule on them.
+
+**Named as left, the chair's notes:**
+
+- **X9** (read at hand-back): the exports-only rows of this group, `read-all-3/WORKLIST3-HISTORY.{md,json}` (119 rows, 3 HIGH), are NOT worked. Its rows that remain are to be checked against `history.currentTensions` first.
+- **TAIL-CRISIS's insurgency note** (18222's sibling) is cured in the patch by its reword, "some households no longer pay at all": no offices, no strong power.
+
+**Parked:** 20031 and 20032 (the ailing ruler under a Feudal Appointee or Priestly Guidance). No atom says the ruler is hereditary.
+
+**Named for other files:**
+
+- `src/data/stressTypesMeta.js` (69, 79): the same two notes.
+- `src/domain/crisis/crisisSummaryVantage.js` (287, 334, 353): the trade vantage lines repeat "each office does as it sees fit" and "some offices no longer send their revenue on".
+
+## New and reworded lines (the owner's veto), with towns they print in (CENSUS-3 at the patch)
+
+- "The would-be successors have each approached the players for support, each believing theirs is the legitimate or best claim. Each of them is partly right." This replaces 00169 in every succession_void town (31).
+  - Smallest: r2s-succession_void-hamlet-1.
+  - Largest: r2r-metropolis-6.
+  - It is the crisis itself.
+  - The after-run carried the earlier wording, "would-be heirs to the empty seat"; the patch's wording is the walker-clean one.
+- "Big decisions wait for a new leader, and in the meantime the place gets by on old habit." It prints in 31 towns (the same towns).
+- "Taxes are disputed, some households no longer pay at all, and the government runs on habit." It prints in 37 towns.
+  - Smallest: r2r-thorp-22.
+  - Largest: r2r-metropolis-26.
+  - Read under an insurgency.
+- "Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one." It replaces 04287 in the same 18 towns: r2r-hamlet-17, r2r-thorp-58 (a siege) and r2s-under_siege-hamlet-0. **This line is not yet census-read.**
+
+## Instruments, re-made
+
+- From the chair's lane, by `git archive`:
+  - `docs/chair/2026-11-14/probes/READ-ALL/`: `inventory.py` and `inventory_diff.py`.
+  - `docs/chair/2026-11-14/probes/CENSUS-3/` (`census3.sh <tree> <out> 4`).
+- The row verifier: a 30-line script over `corpus.ndjson.gz` and the inventory. It finds, for each row's fold, the event that carries the hook in each printing town (tension or timeline event, own event present or not, the stresses). It is easy to remake: read `history.currentTensions[].plotHooks` and `history.historicalEvents[].plotHooks` and the `templateType`.
+
+## Aftermath measure (towns false / printing)
+
+B02938(19/52) B03370(20/45) B20278(19/37) B20557(20/37) B15373(16/35) B21149(16/32) B20744(14/29) B02689(20/26)
+21280(14/25) B21987(23/25) B06235(23/25) B11823(23/25) B21354(19/24) B02944(9/22) B02414(19/21) 03341(8/20) B02313(12/20)
+B20687(19/20) B21980(19/20) B19069(16/19) B15297(16/19) B09823(16/19) 18940(13/18) B15372(14/18) B21951(14/18) B21347(11/18)
+B14575(13/18) B15917(13/18) B02537(11/17) B19260(15/16) B17430(11/16) B19008(9/15) B17828(14/15) B22143(11/14) B06236(11/14)
+B28028(11/14) B15678(11/14) B27509(9/14) B19522(10/13) B21989(11/13) B04252(11/13) B03008(10/12) B02465(3/12) B12687(3/12)
+B21991(3/12) B04055(3/12) B19434(3/12) B02421(3/12) B20238(3/12) B27511(5/11) 21746(4/10) B27508(9/10) B19420(6/7) B02600(5/6)
+B20279(4/5) B20558(4/5) B20181(5/5) B20745(3/4) B19259(4/4) B19499(4/4) 21101(1/3) 03621(3/3) B02690(3/3) B21355(3/3)
+02493(2/2) B02351(1/2) B21348(2/2) B02538(2/2) B02983(1/2) B19275(2/2) B03501(1/1) B15374(1/1) B02415(1/1) B02314(1/1)

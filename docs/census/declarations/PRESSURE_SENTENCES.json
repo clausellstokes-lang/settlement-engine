@@ -123,7 +123,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.famine[1]",
-          "text": "Since ${failed}, whoever holds the food in ${name} holds the power, and at least three powers are fighting over ${stores}.",
+          "text": "Since ${failed}, whoever holds the food in ${name} holds the power, and its strongest powers are each watching who holds ${stores}.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -829,7 +829,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.monster_pressure[3]",
-          "text": "${name} has drawn its edges inward (fields left unworked, a mill ${millExports}) trading the ${commodity} it needs for a perimeter ${milForce} can actually hold.",
+          "text": "${name} has drawn its edges inward (fields left unworked, a mill ${millExports}) giving up its outlying ground for a perimeter ${milForce} can actually hold.",
           "needs": [
             "institution: mill"
           ],

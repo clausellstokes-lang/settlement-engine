@@ -15,6 +15,12 @@
  *     unmarked (the chain births table; each pair red at de0a3d237, where the leaf answered for services and houses
  *     only), a chain or share that lives on nothing the crisis stops, or any in a calm town, is marked (its keep
  *     pairs), or the table misses a chain id or an income title the economy writes, or names one it does not (the walker).
+ *   · (the chair's ruling S5, 2026-11-15) a row its house makes from an input the page says never reaches that house
+ *     ("No grapes reach the vintner.") prints without "Short of <input>." before it, on either tab, or the tab without
+ *     the line of what such a row is (the S5 births table; each pair red at d7c032485, where the leaf had one cause);
+ *     a house the input reaches, or a calm town with no such gap, takes the mark (its keep pairs).
+ *   · (the chair's ruling S8, 2026-11-15) a house TAIL-HOUSES-2 found undeclared for its crisis is unmarked in a census
+ *     town under that crisis (the S8 table; each pair red at 2b3736a6d, where the house was NONE or its food only).
  */
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -73,6 +79,64 @@ const KEEP = [
   ['r2s-under_siege-city-1', 'services', 'Beef, pork, mutton. Slaughtered and dressed on premises or nearby.'], // lives on nothing a siege stops
 ];
 const MARKS = [SIEGE, OUTBREAK, FAMINE];
+
+const SUPPLIED = 'A row marked short is what its house makes when supplied.';
+/** S5: (seed, tab, the description, the mark that must lead it). The worklist row each answers is named. */
+const SHORT_MARKED = [
+  ['r2s-famine-hamlet-2', 'services', 'Daily milk from cattle, goats, or sheep depending on region.', 'Short of livestock.'], // 06271
+  ['r2s-famine-town-1', 'services', 'Curved and flat clay tiles.', 'Short of clay.'], // B05939
+  ['r2s-famine-town-1', 'services', 'Standard-size fired clay bricks by the cartload.', 'Short of clay.'], // B17588
+  ['r2s-occupied-city-3', 'services', 'Kiln-fired clay bricks for construction.', 'Short of clay.'], // 12416 (the potter's brick)
+];
+/** S5 keep pairs: (seed, tab, a description that prints with no "Short of" before it): the input reaches the house. */
+const SHORT_KEEP = [
+  ['r2r-town-15', 'services', 'Plates, jugs, storage crocks. Functional and cheap.'], // a potter clay reaches
+  ['r2r-town-15', 'services', 'Kiln-fired clay bricks for construction.'],
+  ['r2s-under_siege-village-3', 'services', 'Evaporation, boiling, or mining to produce raw salt.'], // B06897: the page reads its salt as bought in (no gap line)
+  // S7: the vintner's and the glassblower's gaps hold in every census town that holds the house: the record's fault, unmarked
+  ['r2r-city-44', 'services', 'House wine by the jug or bottle.'], // 10827, left to the record's measuring seat
+  ['r2s-famine-town-1', 'services', 'Bottles, flasks, and cups.'], // B04346, the same
+];
+
+/** S8: (seed, the house's catalogue id, the mark the house takes under the town's crisis). */
+const S8_HOUSES = [
+  ['r2s-under_siege-village-0', 'fish_market', SIEGE],
+  ['r2s-under_siege-metropolis-0', 'cemetery_network', SIEGE],
+  ['r2s-under_siege-city-0', 'chroniclers_exchange', SIEGE],
+  ['r2s-under_siege-hamlet-3', 'hunter_s_lodge', SIEGE],
+  ['r2s-under_siege-village-0', 'cartographer_s_workshop', SIEGE],
+  ['r2s-under_siege-metropolis-0', 'stone_quarry', SIEGE],
+  ['r2s-plague_onset-town-0', 'carriers_guild', OUTBREAK],
+  ['r2s-plague_onset-hamlet-1', 'periodic_market', OUTBREAK],
+  ['r2s-plague_onset-city-0', 'daily_markets', OUTBREAK],
+  // keep: the work beyond the gates is a siege's to stop, not an outbreak's (null: unmarked)
+  ['r2s-plague_onset-metropolis-0', 'cemetery_network', null],
+  ['r2s-plague_onset-hamlet-0', 'hunter_s_lodge', null],
+];
+
+/** BATCH 2 (the chair's ruling S11): (seed, tab, the line that must print, the line that must NOT print in its place). The
+ *  worklist row each answers is named. A mark's pair: the description prints with its mark (not bare); a reworded or twinned
+ *  row's pair: the true line prints and the false one does not. */
+const BATCH2 = [
+  ['r2s-under_siege-thorp-0', 'services', `${SIEGE} The weekly service. Attendance expected of all residents.`, null], // 30715 (the access house's rite: a walk to another village)
+  ['r2s-under_siege-thorp-1', 'services', `${SIEGE} The rite that admits a person to the faith. Required for most civil recognition.`, null], // 22730
+  ['r2s-under_siege-hamlet-0', 'services', `${SIEGE} Marriage sanctioned by the faith, legally binding.`, null],
+  ['r2s-plague_onset-hamlet-2', 'services', `${OUTBREAK} The rite that admits a person to the faith. Required for most civil recognition.`, null],
+  ['r2s-under_siege-city-0', 'services', `${SIEGE} Interment outside the gates. The bearers and the cart are found by the ground.`, null], // 11805, 06145
+  ['r2r-city-0', 'services', 'Every parish served. Religious observance accessible to all.', 'Every district has a temple.'], // B06916, 10717
+  ['r2s-under_siege-city-1', 'services', 'Every parish served. Religious observance accessible to all.', 'Every district has a temple.'],
+  ['r2r-village-0', 'services', 'Essential for carts, carriers, and working horses', 'Essential for transport and cavalry'], // 07253
+  ['r2r-thorp-50', 'services', 'Bulk purchase by households, institutions, and inland traders.', 'Bulk purchase by taverns'], // 04603, 31188 (no tavern stands)
+  ['r2r-village-11', 'services', "Collects the lord's dues and the tithe", "the temple tithe"], // 05233, 29223
+  ['r2s-under_siege-town-1', 'services', 'Devotional figures, holy images, and reliquaries.', 'Crucifixes'], // X9 22599 (an East-Asian-inspired town)
+  ['r2r-village-29', 'services', 'Arbitrates quarrels before they come to judgment', "the lord's court"], // X9 08236 (no lord, no court)
+];
+/** BATCH 2 keep pairs: (seed, tab, a line that prints unmarked and unchanged). */
+const BATCH2_KEEP = [
+  ['r2s-plague_onset-city-0', 'services', 'Interment outside the gates. The bearers and the cart are found by the ground.'], // an outbreak does not stop burial beyond the gates
+  ['r2r-thorp-0', 'services', 'The weekly service. Attendance expected of all residents.'], // a calm thorp
+  ['r2r-town-0', 'services', 'Bulk purchase by taverns, institutions, and inland traders.'], // a fish market where a tavern stands
+];
 
 /** S6: (seed, kind, the record's key: a chain's `chainId` or an income source's `source`, the mark it must take). */
 const CHAIN_INCOME_MARKED = [
@@ -218,4 +282,59 @@ describe('TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on
     const words = new Set(DEPENDENCES);
     expect([...Object.values(CHAIN_DEPENDENCE), ...Object.values(INCOME_DEPENDENCE)].flat().filter((d) => !words.has(d)), 'a word outside the dependences').toEqual([]);
   });
+
+  test('S5, the births table: a row its house makes from an input that never reaches it is marked short, and the tab says what such a row is', async () => {
+    const failures = [];
+    for (const [seed, tab, desc, mark] of SHORT_MARKED) {
+      const text = await tabText(seed, tab);
+      if (!text.includes(desc)) { failures.push(`${seed} ${tab}: the row does not print (${desc})`); continue; }
+      if (!new RegExp(`${mark.replace(/[.]/g, '\\.')} ${desc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(text)) failures.push(`${seed} ${tab}: "${desc}" prints without "${mark}"`);
+      if (!text.includes(SUPPLIED)) failures.push(`${seed} ${tab}: no line of what a row marked short is`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('S5, the keep pairs: a row whose house the input reaches prints unmarked, and a town with no such gap prints no line of it', async () => {
+    const failures = [];
+    for (const [seed, tab, desc] of SHORT_KEEP) {
+      const text = await tabText(seed, tab);
+      if (!text.includes(desc)) { failures.push(`${seed} ${tab}: the row does not print (${desc})`); continue; }
+      if (new RegExp(`Short of [^.]+\\. ${desc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(text)) failures.push(`${seed} ${tab}: "${desc}" is marked short`);
+    }
+    // r2r-town-2 holds no short house; r2r-city-44's only short house is its vintner (S7): neither prints the line
+    for (const [seed, tab] of [['r2r-town-2', 'services'], ['r2r-town-2', 'institutions'], ['r2r-city-44', 'services'], ['r2r-city-44', 'institutions']]) if ((await tabText(seed, tab)).includes(SUPPLIED)) failures.push(`${seed} ${tab}: the line of a row marked short, with no row short`);
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('S8, the houses added: each takes its crisis\'s mark in a census town under that crisis', () => {
+    const failures = [];
+    for (const [seed, id, mark] of S8_HOUSES) {
+      const s = town(seed);
+      const inst = (s.institutions || []).find((i) => (i.catalogId || catalogIdForName(i.name)) === id);
+      if (!inst) { failures.push(`${seed}: no ${id}`); continue; }
+      const got = stoppedRowMark(s, 'house', inst);
+      if (got !== mark) failures.push(`${seed} ${id}: "${got}", not "${mark}"`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('BATCH 2 (S11), the births table: the access house\'s rites and burial beyond the gates take their crisis; the temple, cavalry, tithe and taverns read true', async () => {
+    const failures = [];
+    for (const [seed, tab, prints, not] of BATCH2) {
+      const text = await tabText(seed, tab);
+      if (!text.includes(prints)) failures.push(`${seed} ${tab}: does not print "${prints}"`);
+      if (not && text.includes(not)) failures.push(`${seed} ${tab}: still prints "${not}"`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('BATCH 2 (S11), the keep pairs: an outbreak\'s burial, a calm thorp\'s rite and a tavern town\'s fish market print as before, unmarked', async () => {
+    const failures = [];
+    for (const [seed, tab, desc] of BATCH2_KEEP) {
+      const text = await tabText(seed, tab);
+      if (!text.includes(desc)) failures.push(`${seed} ${tab}: the row does not print (${desc})`);
+      for (const mark of MARKS) if (text.includes(`${mark} ${desc}`)) failures.push(`${seed} ${tab}: "${desc}" is marked "${mark}"`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
 });

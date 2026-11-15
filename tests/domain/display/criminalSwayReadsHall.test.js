@@ -28,7 +28,7 @@ const FALSE_TOWNS = {
   'r2r-thorp-8': ['none', 'Nobody at the head of'], // the reader's own: a diffuse presence, the smallest size the row reaches
   'r2r-city-3': ['none', 'None of the head, the second and the third of'], // an organized syndicate, the none rung's second line
   'r2r-metropolis-52': ['adversarial', "Thieves' Guild works against"], // the largest size
-  'r2r-town-31': ['equilibrium', 'Guild Council and'], // the climate alone: "... leave each other alone. Nobody at the head ..."
+  'r2r-town-31': ['equilibrium', 'Nobody at the head of Guild Council'], // the climate alone (TAIL-POWERS-B re-keyed by identity: "... and Guild Council has not set out to stamp ...")
 };
 /** an equilibrium hall with a lesser agent ("The third of Elder Council answers to ..."): the chip is silent, never a hidden tie's tell */
 const SILENT_TOWNS = { 'r2r-village-10': 'equilibrium' };

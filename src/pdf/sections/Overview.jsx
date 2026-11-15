@@ -186,13 +186,13 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
             <View style={{ marginBottom: 6 }}>
               <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Enforcement ratio</Text>
               <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second }}>
-                {enforcementWords(o.safetyRatio, settlement ? factsOf(settlement).guardPresence : true)}
+                {enforcementWords(o.safetyRatio, settlement ? factsOf(settlement).guardPresence : true, settlement ? criminalsStandHere(settlement?.economicState?.safetyProfile) : true)}
               </Text>
             </View>
           )}
           {o.foodBalance && (o.foodBalance.production != null || o.foodBalance.deficit != null) && (
             <View style={{ marginBottom: 6 }}>
-              <FoodBalanceBar fb={o.foodBalance} />
+              <FoodBalanceBar fb={settlement ? foodBlockShown(settlement, o.foodBalance) : o.foodBalance} />{/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's food row (foodCarrier.js), as the Economics chapter's block */}
             </View>
           )}
           {o.viabilityVerdict && (
@@ -572,12 +572,18 @@ export default Overview;
  * SW-9b-A (STYLE-2-CONTRADICTIONS §8, P9): where no force stands (`factsOf(record).guardPresence`, the
  * fact the safety lines read since SW-B6's ba0dc7cf9), the line says so in the guard assessment's own
  * words instead of setting "those who keep order" against the criminals.
- * @param {number} ratio @param {boolean} [guarded] @returns {string}
+ * @param {number} ratio @param {boolean} [guarded] @param {boolean} [criminals] @returns {string}
  */
-export function enforcementWords(ratio, guarded = true) {
+export function enforcementWords(ratio, guarded = true, criminals = true) {
   if (!guarded) return 'There is no watch.';
+  // TAIL-EXPORTS-PDF batch 1: where the record names no one working against the law (no criminal house, no crime
+  // pattern, no shadow share the tab prints: shadowEconomyShown.js :: criminalsStandHere) the line sets no one against
+  // "the criminals"; it says so in the Defense desk's own denial.
+  if (!criminals) return 'No criminal infrastructure has been identified.';
   if (!Number.isFinite(ratio)) return 'Not measured.';
   if (ratio >= 2) return 'Those who keep order clearly outmatch the criminals.';
   if (ratio >= 1) return 'Those who keep order roughly match the criminals.';
   return 'The criminals outmatch those who keep order.';
 }
+import { criminalsStandHere } from '../../domain/display/shadowEconomyShown.js'; // TAIL-EXPORTS-PDF batch 1
+import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): one home for the food row

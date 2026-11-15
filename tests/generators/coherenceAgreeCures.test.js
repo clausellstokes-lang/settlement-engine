@@ -69,9 +69,12 @@ describe('cure 4: the import list tells the food record\'s story', () => {
 describe('cure 5: the viability hooks open events and do not answer the record otherwise', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   test('agree-village-28, agree-town-0 and agree-town-3 are at peace and no hook says war took their iron', () => expectNoSeedFailures(collectSeedFailures(['agree-village-28', 'agree-town-0', 'agree-town-3'], (seed) => {
-    const hooks = (birth(seed).economicViability?.plotHooks || []).map((h) => h.hook);
+    const s = birth(seed);
+    const hooks = (s.economicViability?.plotHooks || []).map((h) => h.hook);
     expect(hooks.filter((h) => /\b(?:war|armies)\b/i.test(h))).toEqual([]);
-    expect(hooks.some((h) => /\biron\b/i.test(h))).toBe(true);
+    // TAIL-DEFECON-3 (D8, #20893), re-keyed by identity: an iron hook prints exactly where the import list holds iron
+    // (agree-village-28 buys none: its hook, the carts or the merchants, is silent by design)
+    expect(hooks.some((h) => /\biron\b/i.test(h))).toBe((s.economicState?.primaryImports || []).some((x) => /\b(?:iron|metal)/i.test(String(x))));
   }), 'no war hook in peace'));
   test('agree-village-1, agree-village-14 and agree-town-8 have a live material and no hook makes it scarce', () => expectNoSeedFailures(collectSeedFailures(['agree-village-1', 'agree-village-14', 'agree-town-8'], (seed) => {
     const s = birth(seed);
@@ -493,7 +496,8 @@ describe('Agriculture: what the land offers, where the town farms it', () => {
   test('r2r-village-35 and r2r-hamlet-44 live on tenant farming and offer Agriculture; r2r-town-26 farms its grain', () => {
     expectNoSeedFailures(collectSeedFailures(['r2r-village-35', 'r2r-hamlet-44', 'r2r-town-26'], (seed) => {
       const s = born(seed);
-      const rents = s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents');
+      // TAIL-DEFECON-2 (D10): re-keyed by identity: the farming row is "Harvest" where no lord's steward or reeve stands
+      const rents = s.economicState.incomeSources.some((e) => e.source === 'Agricultural Rents' || e.source === 'Harvest');
       const grain = (s.economicState.foodSecurity.activeChains || []).includes('Grain & agriculture');
       expect(rents || grain, `${seed}: anchored, the record farms`).toBe(true);
       expect(s.resourceAnalysis.economicStrengths, seed).toContain('Agriculture');

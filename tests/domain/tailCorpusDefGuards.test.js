@@ -28,12 +28,22 @@ const DECLARED = [
   { batch: 1, seed: 'r2r-city-19', pool: 'DS-DEF-5::walls PRESENT', vid: 2, instead: 3, why: 'a port: "every arrival goes through a gate" where ships land (row 01111)' },
   { batch: 1, seed: 'r2r-town-37', pool: 'DS-DEF-5::walls PRESENT', vid: 2, instead: 3, why: 'a port: "every arrival goes through a gate" with the sea approaches open (row 01113)' },
   { batch: 1, seed: 'r2s-indebted-village-3', pool: 'DS-DEF-8::override active, viability intact', vid: 2, instead: 3, why: 'nobody under arms: "the defence makes do with what is left over" (row B11985)' },
+  { batch: 2, seed: 'r2s-famine-village-3', pool: 'DS-DEF-12::CAPACITY: ample', vid: 3, instead: 4, why: 'a famine: "more than enough to get through a hard year" (row 23220)' },
+  { batch: 2, seed: 'r2s-under_siege-town-2', pool: 'DS-DEF-12::CAPACITY: ample', vid: 3, instead: 4, why: 'a siege with a food deficit: "more than enough to get through a hard year" (row 23219)' },
+  { batch: 2, seed: 'r2s-succession_void-town-0', pool: 'DS-POW-5::autocrat', vid: 1, instead: 5, why: 'a succession void: "one person decides … and decides quickly" (row 00333)' },
+  { batch: 2, seed: 'r2s-politically_fractured-town-2', pool: 'DS-POW-5::autocrat', vid: 1, instead: 5, why: 'a fractured town with no stable governing authority: "one person decides" (row 00333\'s class)' },
+  { batch: 3, seed: 'r2s-under_siege-village-2', pool: 'DS-POW-4::riskLabel: Contested', vid: 4, instead: 1, why: 'a siege: "visitors … are quietly told to stay polite" where no visitor arrives (row B22476)' },
+  { batch: 3, seed: 'r2s-occupied-city-0', pool: 'DS-POW-4::riskLabel: Critical. The seat could fall', vid: 3, instead: 2, why: 'an occupation: the occupier "has not yet moved to take" the hall it already rules (row 07358)' },
 ];
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */
 const KEEP = [
   { batch: 1, seed: 'r2r-hamlet-1', pool: 'DS-DEF-5::walls ABSENT', vid: 2, why: 'no wall, no siege, no occupation: anyone walks in' },
   { batch: 1, seed: 'r2r-city-0', pool: 'DS-DEF-5::walls PRESENT', vid: 2, why: 'a walled road town with a gate and a watch: every arrival is at a gate' },
   { batch: 1, seed: 'r2r-city-10', pool: 'DS-DEF-8::override active, viability intact', vid: 2, why: 'a town with defenders: the defence makes do' },
+  { batch: 2, seed: 'r2r-town-54', pool: 'DS-DEF-12::CAPACITY: ample', vid: 3, why: 'an isolated town with ample paths and a secure food record: more than enough for a hard year' },
+  { batch: 2, seed: 'r2r-town-17', pool: 'DS-POW-5::autocrat', vid: 1, why: 'a Feudal Appointee at peace, its seat settled: one person decides' },
+  { batch: 3, seed: 'r2r-village-23', pool: 'DS-POW-4::riskLabel: Contested', vid: 4, why: 'a contested seat, no siege: visitors are warned to stay polite to the challenger' },
+  { batch: 3, seed: 'r2r-city-44', pool: 'DS-POW-4::riskLabel: Critical. The seat could fall', vid: 3, why: 'an ungated seat, no occupation: the challenger has not yet moved' },
 ];
 /** @type {ReadonlyArray<{batch: number, pool: string, vid: number, gone: RegExp, now: string, rows: string}>} */
 const REWORDED = [
@@ -43,6 +53,11 @@ const REWORDED = [
   { batch: 1, pool: 'DS-DEF-8::override active, viability intact', vid: 3, gone: /would not guess at the trouble/, now: 'is shaken by this trouble', rows: '03156-03161 B03075: a plague, a war or a revolt shows in the streets' },
   { batch: 1, pool: 'DS-DEF-8::override active, viability intact', vid: 1, gone: /its defence has had to change/, now: 'change its ways', rows: 'the inheritor of v2 in a town with nobody under arms' },
   { batch: 1, pool: 'DS-DEF-8::override: SECURITY COMPROMISED', vid: 2, gone: /^The guards at/, now: 'Those who keep watch at', rows: '20690: a citizen militia keeps no guards' },
+  { batch: 3, pool: 'DS-POW-4::riskLabel: Stable (no challengers)', vid: 1, gone: /nobody in the town is asking who comes next/, now: 'no contender stands ready to try', rows: '14859 14856 14852 14857 14854 B14026: a Legitimacy Crisis or a contested legitimacy (41 of 52 towns)' },
+  { batch: 3, pool: 'DS-POW-4::riskLabel: Stable (no challengers)', vid: 2, gone: /does not come up/, now: 'the town would have no contender to name', rows: '21584 21590 21587 21595: a Legitimacy Crisis or a contested legitimacy (39 of 53)' },
+  { batch: 3, pool: 'DS-POW-4::riskLabel: Stable (no challengers)', vid: 3, gone: /is safe in the hall/, now: 'stands ready to lead them against the', rows: '15533 15536 15531 B14699 B14695 B14704: a Legitimacy Crisis, a Desperate town (27 of 49)' },
+  { batch: 3, pool: 'DS-POW-4::riskLabel: Stable (no challengers)', vid: 6, gone: /the fighting across the town/, now: 'what threatens it now is the fighting itself', rows: '14648 14646 14639: the kingdom\'s war, fought elsewhere (13 of 31)' },
+  { batch: 3, pool: 'DS-POW-4::riskLabel: Critical. The seat could fall', vid: 1, gone: /^Nothing at .* protects the/, now: 'The office no longer shields the', rows: '15073 B14249 (C10): the seat is the strongest power or has a symbiotic guard; the office is what fails it' },
 ];
 
 /** @type {Record<string, any>} */

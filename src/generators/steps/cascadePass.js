@@ -122,7 +122,7 @@ registerStep('cascadePass', {
         desc: 'Airship-era dock facilities handling both aerial and surface freight.',
         tags: ['port','trade'], priorityCategory: 'economy', baseChance: 0.75 },
       { category: 'Economy', name: "Harbour master's office",
-        desc: 'Regulates port and airship traffic, assigns berths, collects anchorage fees.',
+        desc: 'Regulates airship traffic, assigns mooring berths, collects anchorage fees.', // TAIL-DEFECON-3 (#16403, X9 11882): added only off the water (no port, no river): it regulates no port
         tags: ['law_enforcement','port'], priorityCategory: 'military', baseChance: 0.65 },
     ];
     const existingNames = new Set(

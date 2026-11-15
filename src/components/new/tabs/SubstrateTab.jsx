@@ -27,6 +27,7 @@ import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, 
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { offersFoodSurplus } from '../../../domain/foodSurplus.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
+import { rulingAuthorityBandShown } from '../../../domain/display/rulingAuthorityShown.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
@@ -165,7 +166,10 @@ export default function SubstrateTab({ settlement }) {
         // reads "Food · Surplus", a claim on the food record. Food is graded Surplus only where
         // the record holds one (domain/foodSurplus.js :: offersFoodSurplus); otherwise Adequate.
         band: key === 'food_security' && v.band === 'surplus'
-          && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate' : v.band,
+          && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate'
+          // THE RULING AUTHORITY ROW IS NOT PRINTED ABOVE WHAT THE RECORD SAYS OF THE SAME GOVERNMENT (the chair's
+          // ruling X8, 2026-11-14): the cap is the one leaf's (domain/display/rulingAuthorityShown.js).
+          : key === 'ruling_authority' ? rulingAuthorityBandShown(settlement, v.band) : v.band,
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
       // Pressures first: worst band, then worst polarity-oriented score, then

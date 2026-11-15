@@ -66,7 +66,7 @@ export const STRESS_TYPE_META = {
   succession_void: {
     label: 'Succession Void',
     historyColour: 'political',
-    viabilityNote: 'Big decisions wait for a new leader, and in the meantime each office does as it sees fit.',
+    viabilityNote: 'Big decisions wait for a new leader, and in the meantime the place gets by on old habit.', // TAIL-HISTORY batch 1 (the chair's Y2, Y7): the full map's reword, word for word
   },
   monster_pressure: {
     label: 'Beast & Raider Threat',
@@ -76,7 +76,7 @@ export const STRESS_TYPE_META = {
   insurgency: {
     label: 'Insurgency',
     historyColour: 'political',
-    viabilityNote: 'Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.',
+    viabilityNote: 'Taxes are disputed, some households no longer pay at all, and the government runs on habit.', // TAIL-HISTORY batch 1 (the chair's Y2, Y7): the full map's reword, word for word
   },
   religious_conversion: {
     label: 'Religious Conversion',

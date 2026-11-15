@@ -9506,7 +9506,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "crisis: any",
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: plague_onset"
           ],
           "text": "{settlement}'s market handles more than the town could ever use; the difference is the town's living.",
           "slots": [
@@ -9769,7 +9770,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "market"
+            "market",
+            "no guild"
           ],
           "text": "No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.",
           "slots": [
@@ -10059,7 +10061,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "FOUNDED-YOUNG": [
         {
           "angle": "ledger",
-          "text": "{settlement} is young, and it still lives by its first reason.",
+          "text": "{settlement} is young, and the reason it was started is still in living memory.",
           "slots": [
             "settlement"
           ],
@@ -10067,7 +10069,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Everything in {settlement} looks recently built, and the town still does the job it began with.",
+          "text": "Everything in {settlement} looks recently built, because most of it was.",
           "slots": [
             "settlement"
           ],

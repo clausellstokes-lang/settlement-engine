@@ -59,7 +59,7 @@ describe('npcStructure registry goal lookup (CENSUS-1e unit 1)', () => {
 
   it('(c) an entry with no tags is admitted under a crisis (silence is neutral)', () => {
     const { result } = enrich({ stress: [{ type: 'under_siege' }], powerStructure: { publicLegitimacy: { isContested: true } } });
-    expect(result[0].goal.short).toBe('Win the doubters back before the challenger to the seat wins them first.');
+    expect(result[0].goal.short).toBe('Win the doubters back before their doubt hardens into refusal.') // TAIL-TIES-3 (T11): the contested rows claim no rival, re-keyed by identity;
     expect(result[0].settlementCondition).toBe('contested');
   });
 });

@@ -83,7 +83,8 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const fed = town({ economicState: { foodSecurity: { label: 'Secure' } } });
     const entry = { type: 'famine', cast: cast([npcRow('lever', 'n1', 'Mara Vell', CAST_REASONS.leverRuns)]) };
     const [hook] = crisisHooksOf(fed, entry);
-    expect(hook.text).toBe('In the crisis, Mara Vell of Millers’ Guild holds the key to it: runs the office that decides how the crisis goes.');
+    // TAIL-CRISIS batch 3 (re-keyed by identity): a predicate reason is said of the holder, never after a colon
+    expect(hook.text).toBe('In the crisis, Mara Vell of Millers’ Guild, who runs the office that decides how the crisis goes, holds the key to it.');
     expect(hookTruthViolations(hook.text, settlementHookFacts(fed))).toEqual([]);
   });
 

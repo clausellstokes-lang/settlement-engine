@@ -1,3 +1,4 @@
+import { keepOneDominant } from './factionDynamics.js'; // RECORD-MEASURE-2 G1
 /**
  * generateSettlementPipeline.js — Pipeline-based settlement generation.
  *
@@ -195,6 +196,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
     }
   }
 
+  keepOneDominant(finalCtx.settlement?.powerStructure?.factions); // RECORD-MEASURE-2 G1: on the final roster, the label only
   if (typeof options.onComplete === 'function') {
     try { options.onComplete(finalCtx); } catch (e) { console.warn('[pipeline] onComplete threw:', e); }
   }
