@@ -369,3 +369,7 @@ NOT YET VERIFIED BY THE RECORD row by row (the budget went to the two batches): 
 
 - Batch 1: a2550c0ef (pushed). Batch 2: this file's commit (the tip of `lane/tail-houses-2026-11-14`).
 - Handed back at the end of batch 2 by time (the session's token count read 0, so judged by the clock: about seventy minutes of work).
+
+## The chair's note on batch 1 (00:01 UTC, read after the hand-back)
+
+"batch 1's rewording stands (true in every town that prints it; nothing silenced; no draw moved)". S5: the SERVICES seat's leaf will MARK a house's row "short of <input>" where the record says the input does not reach it, printing beside these texts; "keep each hedge short and in one form ("whenever clay can be had"), and do not write the shortage itself into a text". OWED (not done here): batch 1's hedges take several forms ("whenever clay can be had", "when there is clay to shape", "as far as the clay to hand allows", "in any year that either reaches the cellar", "when there are beasts to run", "where one can be kept"): the next seat brings them to the one form "whenever <input> can be had", a text-only re-key by the same script (no draw moved). No text of either batch writes the shortage itself.
