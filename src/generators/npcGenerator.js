@@ -29,11 +29,11 @@ import { TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; import { foodStoreWord } from './economy/foodBalance.js'; // F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2 / R2-CODE-A item 1: one line, so no cited line moves
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; import { foodStoreWord } from './economy/foodBalance.js'; import { powerSentenceName } from '../data/people/powerSentenceName.js'; // BAR3-PEOPLE-2 (C5844): the {faction} slot's power name from the one leaf; F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2 / R2-CODE-A item 1: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
-  NPC_PERSONALITY_TRAITS,
+  NPC_PERSONALITY_TRAITS, temperamentAdmitting,
   NPC_AGE_DATA,
   NPC_PLOT_HOOKS,
   NPC_BUILDS,
@@ -341,7 +341,7 @@ export const generateReligionType = (reg) => {
     flaw = null;
   }
 
-  return { dominant, flaw, modifier, tell, speech };
+  return { dominant: temperamentAdmitting(dominant, flaw), flaw, modifier, tell, speech }; // BAR3-PEOPLE-2 (P7a, C7806 C7914): the temperament yields to the flaw; no draw
 };
 
 // generateNPCAppearance
@@ -617,10 +617,10 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []).filter(e => !e.direction || e.direction === (summary.migrationDirection || 'arrivals')), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
     const otherNpc = otherNpcOf({ npcs: allNpcs }, npcIndex); // CENSUS-1 fact 14: the other-NPC home's selection — MERGE-R2: read before the draw, so the held key reads the text the figure would carry
-    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type, ...(type === 'mass_migration' && summary.migrationDirection ? { direction: summary.migrationDirection } : {}) })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', held, heldKey: (e) => fillSentenceSlots(e.secret, { faction: topFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }) }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record // MERGE-R2: REVIEW-INTAKE-4's held refusal; W0's direction on the partial record's migration entry
+    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type, ...(type === 'mass_migration' && summary.migrationDirection ? { direction: summary.migrationDirection } : {}) })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', held, heldKey: (e) => fillSentenceSlots(e.secret, { faction: powerSentenceName(topFaction), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }) }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record // MERGE-R2: REVIEW-INTAKE-4's held refusal; W0's direction on the partial record's migration entry
     if (effect) return {
-      what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased; R2-CODE-A item 1: {food} is the town's own (foodBalance.js :: foodStoreWord)
-      stakes: fillSentenceSlots(effect.stakes, { faction: govFaction, commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }),
+      what: fillSentenceSlots(effect.secret, { faction: powerSentenceName(topFaction), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased; R2-CODE-A item 1: {food} is the town's own (foodBalance.js :: foodStoreWord)
+      stakes: fillSentenceSlots(effect.stakes, { faction: powerSentenceName(govFaction), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }),
     };
   }
 

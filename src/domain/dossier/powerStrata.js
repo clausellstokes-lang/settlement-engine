@@ -466,9 +466,10 @@ export function deciderOf(settlement) {
 function relationNamesDecider(settlement, governing, decider) {
   const rows = /** @type {Array<{ pair?: unknown, narrative?: unknown }>} */ (Array.isArray(settlement?.powerStructure?.factionRelationships) ? settlement.powerStructure.factionRelationships : []);
   const gov = governing ? nameOf(governing) : null;
-  return rows.some((row) => Array.isArray(row?.pair) && row.pair.includes(gov) && row.pair.includes(decider)
-    && typeof row.narrative === 'string'
-    && (row.narrative.includes(`carries out what ${powerSentenceName(decider)} decides`) || row.narrative.includes(`${powerSentenceName(decider)} makes the decisions that matter`)));
+  // BAR3-PEOPLE (P2, C5598 C7553; the chair's word of 19:53): ANY relation row of the pair is the pair's one home ("tense":
+  // the two do not agree on who decides; "competitive": taxes bargained, not ordered; "dependent": each props up the
+  // other): the note claims no decider beside it (67 of the 91 printing towns at 59185b62a held such a row)
+  return rows.some((row) => Array.isArray(row?.pair) && row.pair.includes(gov) && row.pair.includes(decider));
 }
 
 /**
