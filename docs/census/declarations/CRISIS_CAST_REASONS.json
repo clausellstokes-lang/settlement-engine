@@ -600,6 +600,15 @@
      "stop": []
     },
     {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noProfiteer",
+     "text": "no one on the roster is named",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
      "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.outsideHand",
      "text": "an outside hand, unnamed",
      "needs": [],

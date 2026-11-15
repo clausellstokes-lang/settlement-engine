@@ -101,10 +101,18 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "Is receiving {food} shipments through a covert route and selling them at triple the official price after dark",
       stakes: "Three people know. One of them is already dead. The other two don't know about each other",
+      excludes: ["crisis: under_siege"], text: "Is receiving {food} shipments through a covert route and selling them at triple the official price after dark", // BAR3-PLACES (H1, 2026-11-15): under a siege nothing comes in by any route; the slot takes the twin below
+    },
+    {
+      // BAR3-PLACES (H1): the siege twin of the covert route, reached only by resolution (`twinOf`): no draw moves.
+      secret: "Laid in a cellar of {food} before the siege closed the roads, and is selling it at triple the official price after dark",
+      stakes: "Three people know. One of them is already dead. The other two don't know about each other",
+      twinOf: "Is receiving {food} shipments through a covert route and selling them at triple the official price after dark",
+      needs: ["crisis: under_siege"],
     },
     {
       secret:
-        "Has documentation proving the famine was caused by export decisions made by {faction}, and has been paid to lose it",
+        "Has documentation proving the famine was made worse by decisions taken by {faction}, and has been paid to lose it", // BAR3-PLACES (H1, 2026-11-15): no export claimed (the failed food may be one the town never sold)
       stakes: "The documentation exists in another form. Somewhere",
     },
   ],

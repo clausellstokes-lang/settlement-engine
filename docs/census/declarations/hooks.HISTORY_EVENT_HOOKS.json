@@ -110,11 +110,12 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::guild_conflict#2",
    "text": "Someone is sabotaging both guilds to destabilize the market for a third party",
    "needs": [
-    "market"
+    "market",
+    "guild"
    ],
    "excludes": [],
    "colour": false,
-   "notes": "unhomed: guild; \"destabilize the market\""
+   "notes": "\"destabilize the market\"; BAR3-PLACES-3 (C13868): the guild, homed (facts/guild.js), as its siblings declare"
   },
   {
    "id": "hooks.HISTORY_EVENT_HOOKS::external_threat#0",

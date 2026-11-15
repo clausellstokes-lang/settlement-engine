@@ -31,7 +31,8 @@ const TWIN = /^The best-kept street of (\S+) looks prosperous\. The rest of the 
 const REST = {
   // BAR2-PLACES (PL1, 2026-11-15; re-keyed by identity): the slavic oven line's reword, same slot
   'rr3-village-indebted-port-0': 'Half of Vysokoka seems to be gutting, salting or selling fish. Smoke rises from a household oven, and a neighbour stops in to share its warmth.',
-  'rr3x-village-indebted-mountain_pass-2': 'Bolts of cloth hang drying in long bright strips across every yard. The neighbours turn out together to sweep and mend their own street.',
+  // re-keyed by its text (BAR3-PLACES, 2026-11-15: the cloth line claims the yards, not every yard)
+  'rr3x-village-indebted-mountain_pass-2': 'Bolts of cloth hang drying in long bright strips across the yards. The neighbours turn out together to sweep and mend their own street.',
   // TAIL-HISTORY-3 (the chair's Y14; re-keyed by identity): r2r-village-47 is isolated, so its herb sacks no longer fill carts (the line's reword, same slot)
   'r2r-village-47': 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes. People draw water in an order nobody needs to explain.',
 };

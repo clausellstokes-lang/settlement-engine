@@ -242,12 +242,15 @@ export const PRESSURE_SENTENCES = {
     return (typeof r.warGoesWell === 'boolean' ? r.warGoesWell : (((o = r.compound) == null ? void 0 : o.militaryEffective) || 50) >= 55 &&
       (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45)
       ? [
-          { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
-          { text: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
+          { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
+          { text: `Being on the right side of it keeps the forges of ${r.name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
+          // BAR3-PLACES-2 (C34042, 2026-11-15): no trade is said to have "never paid better": the named commodity is the
+          // town's, and where it is the trade the History calls under strain (bar0-city-wartime-rand-13: the fish trade) the
+          // line was false; the war's contracts are what pays (true wherever the war goes the town's way).
           // TAIL-CONTENT-CLOSE-1 (2026-11-15): the forges are named only where a smith stands; where no row of the pool is
           // admitted, the same war is told without them (never drawn: narrativeGenerator.js reaches it by resolution only)
-          { text: `Being on the right side of it, ${r.name}'s ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`,
-            twinOf: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.` },
+          { text: `Being on the right side of it, ${r.name} lives on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.`,
+            twinOf: `Being on the right side of it keeps the forges of ${r.name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.` },
           { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison', 'prosperity: ≥ comfortable'] }, // TAIL-NARRATIVE (01079): "prospering" needs a town the record calls comfortable or better
         ]
       : [
@@ -447,7 +450,9 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       (majorNamesOf(r).length > 1 ? `It has come through the ${majorNamesOf(r)[0]} and the ${majorNamesOf(r)[1]}, and travellers still remember the place kindly` : r.some(isMajorEvent) ? `The ${r.find(isMajorEvent).name} aside, the history here is long and steady, and travellers remember the place kindly` : "No dramatic history here, only a long steady one, and travellers remember the place kindly"), crisis: ['any'] },
     (r) =>
-      "Stable enough that its tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
+      // BAR3-PLACES (H6, 2026-11-15): no stability and no one kind of tension claimed (a contested seat and a live quarrel
+      // of another kind printed beside it): the oldest quarrels only, beside whatever else divides the place.
+      "Its oldest tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
     { text: (r) =>
       r.length >= 3
         ? `A settlement shaped by the accumulated weight of ${r
@@ -471,7 +476,7 @@ export const POLITICAL_FLAVOR = {
         : "Nothing has ever forced this place to change much. It has kept its options, its neighbours and its temper, and the people here count all three as achievements"),
     (r) =>
       r.length >= 2
-        ? "The tensions here are the domestic kind (inheritances, boundaries, precedence at the festival), and they are managed rather than resolved, passed down like the disputes they are, each generation adding a footnote and settling nothing"
+        ? "Beside whatever else divides it, its oldest quarrels are the domestic kind (inheritances, boundaries, precedence at the festival), and they are managed rather than resolved, passed down like the disputes they are, each generation adding a footnote and settling nothing"
         : r.some(isMajorEvent) // TAIL-NARRATIVE (HIGH B00096): a major event on the record is named, never denied
           ? `Apart from the ${r.find(isMajorEvent).name}, little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it`
           : "Little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it",

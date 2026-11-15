@@ -114,7 +114,10 @@ export const ORIGIN_POOLS = Object.freeze({
 
   river: Object.freeze([
     'Built along the river: water access shapes every economic decision.',
-    'Founded on the bank, where the current does the hauling; every trade here is priced against what the water carries for nothing.',
+    // BAR3-PLACES-2 (C30340, 2026-11-15; the form of b6a0c074c, N6): the line says where the place stands, not why it was
+    // founded: the rung is drawn before the History, whose founding reason is the soil, a grove, the herders' gathering or a
+    // ford in the 27 census towns that print it (bar0-town-occupied-rand-7: the soil).
+    'It stands on the bank, and the current does the hauling; every trade here is priced against what the water carries for nothing.',
     'A river settlement. The channel sets the calendar: what floods, what freezes, and what can be moved between the two.',
     'Sited at the water\'s edge, where the river was the only road worth having, and it has been the argument for staying ever since.',
     // BAR2-PLACES (PL2): no mill is claimed (the roster's, unread here: "All three still hold" beside no mill) and no cause

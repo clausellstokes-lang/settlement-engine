@@ -566,9 +566,10 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // The town Mint was filed on Crafts and the city's Mint (official) on Economy until 2026-09-30.
     {
-      shared: { name: 'Mint (official)', face: 'the mint master', desc: 'State or noble-chartered coin production. Standardises currency across the region. Significant ongoing revenue via seigniorage.', tags: ['banking'], priorityCategory: 'economy' },
+      shared: { name: 'Mint (official)', face: 'the mint master', desc: 'State or noble-chartered coin production. Standardises currency across the region. Its seigniorage is revenue while precious metal reaches the dies.', tags: ['banking'], priorityCategory: 'economy' },
       at: {
-        town: { name: 'Mint', baseChance: 0.15, desc: 'Converts refined precious metal into standardised coinage. Requires noble or royal charter. Significant revenue for the granting authority.', priorityCategory: 'government' },
+        town: { name: 'Mint', baseChance: 0.15, desc: 'Converts refined precious metal into standardised coinage, under the charter of whoever rules. Revenue for the granting authority while metal comes in.', // BAR3-PLACES (H4/H2, 2026-11-15): no royal charter claimed (a sovereign city grants its own), no revenue claimed where no metal comes
+        priorityCategory: 'government' },
         city: { baseChance: 0.4 },
         metropolis: { baseChance: 0.4 },
       },

@@ -510,7 +510,7 @@
         },
         {
           "lineId": "POLITICAL_FLAVOR.stable[3]",
-          "text": "Stable enough that its tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
+          "text": "Its oldest tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
           "needs": [],
           "excludes": [],
           "crisis": "calm",
@@ -579,7 +579,7 @@
         },
         {
           "lineId": "POLITICAL_FLAVOR.stable[8].ge2",
-          "text": "The tensions here are the domestic kind (inheritances, boundaries, precedence at the festival), and they are managed rather than resolved, passed down like the disputes they are, each generation adding a footnote and settling nothing",
+          "text": "Beside whatever else divides it, its oldest quarrels are the domestic kind (inheritances, boundaries, precedence at the festival), and they are managed rather than resolved, passed down like the disputes they are, each generation adding a footnote and settling nothing",
           "needs": [],
           "excludes": [],
           "crisis": "calm",

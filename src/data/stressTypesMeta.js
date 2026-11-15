@@ -26,7 +26,7 @@ export const STRESS_TYPE_META = {
   under_siege: {
     label: 'Under Siege',
     historyColour: 'military',
-    viabilityNote: 'Field work and trade have stopped, and everything now turns on how long the food and water last.',
+    viabilityNote: 'Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns on how long the food and water last.',
   },
   famine: {
     label: 'Famine',

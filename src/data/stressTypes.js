@@ -28,8 +28,10 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The settlement is surrounded. Someone in the leadership is considering terms. Someone else is considering a desperate sortie. The players arrive as this decision is being forced.",
+    // BAR3-PLACES-3 (the chair, 2026-11-15): "Field work and trade have stopped" in every siege town, where the food record still grows
+    // 14 to 43 in a hundred of the food (SIEGE_PRODUCTION_KEPT) in all 31 of the 720: trade by road, gate and water stops; a part is still produced (VETOABLE wording)
     viabilityNote:
-      "Field work and trade have stopped, and everything now turns on how long the food and water last.",
+      "Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns on how long the food and water last.",
     historyColour: "military",
   },
   famine: {
@@ -37,8 +39,11 @@ export const STRESS_TYPE_MAP = {
     colour: "#8b5a1a",
     probability: 0.027,
     requiresTier: null,
+    // BAR3-PLACES-2 (C4510, 2026-11-15): the slot's holder is the famine's lever (the master fishmonger in 11 of the census's
+    // 21 mill towns, the miller, an elder, a reeve), and where the fishery is the source that failed, "has food" was read
+    // as the failed good itself: the hook names no good, only a store laid in before the shortage (true of every holder).
     crisisHook:
-      "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+      "A grain merchant has stores laid in before the shortage, enough to matter. They will sell, but their price is not money. The players can intervene in how this plays out.",
     viabilityNote: "No one can earn a normal living while the famine lasts, and every coin goes on food.",
     historyColour: "economic",
   },
@@ -173,8 +178,9 @@ export const STRESS_TYPE_MAP = {
     colour: "#5a2a0a",
     probability: 0.026,
     requiresTier: null,
+    // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
     crisisHook:
-      "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
+      "An army requisition officer has arrived with orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
     viabilityNote:
       "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.",
     historyColour: "military",

@@ -614,7 +614,7 @@
         },
         {
           "lineId": "ARRIVAL_PEOPLE.greek[3]",
-          "text": "A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.",
+          "text": "A patron stands drinks for the whole room, and makes sure everyone knows who is paying.",
           "needs": [],
           "excludes": [],
           "crisis": "any",

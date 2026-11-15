@@ -812,7 +812,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Furs originate in frontier/northern settlements and travel south through trading posts. Mid-route settlements profit from the trade.',
+          'Furs travel from the hunting grounds through trading posts, and the settlements along the route profit from the trade.', // BAR3-PLACES (H4, 2026-11-15): no northern origin claimed (a town hunting its own grounds printed it)
         minTier: 'hamlet',
       },
       {

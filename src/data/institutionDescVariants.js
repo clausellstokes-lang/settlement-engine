@@ -654,9 +654,11 @@ const PAIRS = [
     "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's building needs. The crew is permanent.",
     "Water or ox power turns logs into planks and beams for the construction trade. A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.",
   ],
+  // BAR3-PLACES (H4, 2026-11-15): no beer sent beyond the town (a brewery stands where no beer is exported): both texts
+  // claim the taverns, the grain and the hands only.
   [
-    "Ale and beer brewed at commercial scale, supplying the town's taverns and the wider region. It eats grain and hires hands in quantity.",
-    "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
+    "Ale and beer brewed at commercial scale, supplying the town's taverns. It eats grain and hires hands in quantity.",
+    "A brewery working at commercial scale. It keeps the taverns stocked, and stands among the larger buyers of grain and employers in the town.",
   ],
   [
     "A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
@@ -2244,14 +2246,17 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
 export const DESC_LATE_SIBLINGS = Object.freeze({
   // TAIL-HOUSES-5 batch 8 (H20 (ii)): the Household elder speaks for the settlement ALONE: true only under one elder ruler
   // (a headman), never under an Elder or a Household Council (37 of the census's 37 Household elders); the twin claims
-  // the house's standing, not who governs.
+  // the house's standing, not who governs. BAR3-PLACES-2 (C24313, 2026-11-15): the twin is the line under a council (37 of
+  // the census's 37 Household elders stand beside a governing Elder or Household Council), so it claims no "no office, no
+  // title, no vote" and no "no title" (false where the household head ranks first of the council that governs): it says
+  // only whose door is knocked on first. The third twin claims habit only and stands.
   "One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding.": Object.freeze([
     Object.freeze({ text: "One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding.", needs: Object.freeze(['ruler: elder']), excludes: Object.freeze(['ruling body']) }),
-    Object.freeze({ text: "One household head is the person everyone goes to first when something needs deciding. No formal appointment, no title.", twinOf: "One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding." }),
+    Object.freeze({ text: "One household head is the person everyone goes to first when something needs deciding.", twinOf: "One household head acts as de facto voice for the settlement. No formal appointment, no title. Just the person everyone goes to when something needs deciding." }),
   ]),
   "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.": Object.freeze([
     Object.freeze({ text: "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.", needs: Object.freeze(['ruler: elder']), excludes: Object.freeze(['ruling body']) }),
-    Object.freeze({ text: "A single household head, never chosen to anything, is the door people knock on first when a thing has to be settled. No office, no title, no vote.", twinOf: "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled." }),
+    Object.freeze({ text: "A single household head is the door people knock on first when a thing has to be settled.", twinOf: "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled." }),
   ]),
   "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.": Object.freeze([
     Object.freeze({ text: "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.", needs: Object.freeze(['ruler: elder']), excludes: Object.freeze(['ruling body']) }),

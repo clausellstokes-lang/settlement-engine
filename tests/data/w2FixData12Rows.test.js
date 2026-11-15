@@ -84,7 +84,7 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
   }, 180_000);
 
   test('REVIEW-R2-CODE-A (the chair\'s 10:57, HIGH): the wine shop\'s patron stands drinks only where a tavern stands, at a village\'s size or more (r2r-thorp-27, r2s-recently_betrayed-hamlet-1, r2r-village-55 hold none); r2r-town-2 keeps it', () => {
-    const WINE = /A patron stands drinks at a wine shop/;
+    const WINE = /A patron stands drinks for the whole room/;
     expectNoSeedFailures(collectSeedFailures(['r2r-thorp-27', 'r2s-recently_betrayed-hamlet-1', 'r2r-village-55'], (seed) => {
       const town = bornCensus(seed);
       const a = String(town.arrivalScene || '');

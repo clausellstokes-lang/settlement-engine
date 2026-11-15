@@ -796,9 +796,7 @@
    ["granary", "after-release", "The settlement keeps more in reserve than its size explains: granaries a little too large, stores a little too deep.", "18800481eb742132"],
    ["granary", "after-release", "The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.", "b443347f937904fb"],
    ["militia", "after-release", " is why this settlement has walls where others do not, why the militia drills when other villages have forgotten how, an", "60cc62a9c7e7172c"],
-   ["war", "after-release", " is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is pa", "477f2721e5d2d6ad"],
    ["war", "after-release", " is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if ", "65cf322223134a9b"],
-   ["war", "after-release", " trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.", "43b91f14a98deff6"],
    ["war", "after-release", "The war reaches ", "896bf77f9e7a16d1"]
   ],
   "src/generators/neighbourGenerator.js": [
@@ -919,9 +917,6 @@
   "src/generators/steps/stepMetadata.js": [
    ["granary", "after-release", "Re-weight emergent stressors against the real roster. Walls suppress sieges, granaries suppress famine.", "4f9ffbb7850cc8f5"],
    ["mill", "after-release", "Propagate one institution’s outputs (a mill makes flour; a baker can now exist).", "7f17939a03b62b60"]
-  ],
-  "src/generators/stressNarrative.js": [
-   ["war", "after-release", " is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right frie", "294c5b817f35c257"]
   ],
   "src/generators/structuralValidator.js": [
    ["docks", "after-release", "A river settlement should exploit its water access: mills, docks, or fishmongers.", "42b0b9c83c65fd57"],

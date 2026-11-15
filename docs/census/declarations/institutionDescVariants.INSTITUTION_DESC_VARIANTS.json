@@ -2724,7 +2724,7 @@
     },
     {
       "id": "town|Crafts|Brewery#0",
-      "text": "Ale and beer brewed at commercial scale, supplying the town's taverns and the wider region. It eats grain and hires hands in quantity.",
+      "text": "Ale and beer brewed at commercial scale, supplying the town's taverns. It eats grain and hires hands in quantity.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2733,7 +2733,7 @@
     },
     {
       "id": "town|Crafts|Brewery#1",
-      "text": "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
+      "text": "A brewery working at commercial scale. It keeps the taverns stocked, and stands among the larger buyers of grain and employers in the town.",
       "needs": [],
       "excludes": [],
       "crisis": [],

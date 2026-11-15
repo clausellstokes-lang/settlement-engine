@@ -1098,7 +1098,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.wartime(winning)[0]",
-          "text": "${name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.",
+          "text": "${name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest is paying. The men who left to fight have not come back.",
           "needs": [
             "garrison"
           ],
@@ -1113,7 +1113,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.wartime(winning)[1]",
-          "text": "Being on the right side of it keeps the forges of ${name} running day and night, and the ${commodity} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.",
+          "text": "Being on the right side of it keeps the forges of ${name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.",
           "needs": [
             "institution: smith"
           ],

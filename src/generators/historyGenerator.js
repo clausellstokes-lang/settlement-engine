@@ -74,7 +74,7 @@ const buildHistoryContext = (
 
   // Determine primary trade commodity — unified scan (tradeCommodity.js); the
   // strict variant (null fallback) because history prose interpolates it.
-  const exports = economicState?.primaryExports || [];
+  const exports = (economicState?.primaryExports || []).map((e) => (typeof e === 'string' ? e.replace(/(?:\s*\((?:transit|naval route only|taxed by occupation)\))+\s*$/i, '') : e)); // BAR3-PLACES (H3): history names the good, never its trade mark (tradeListDisplay.js :: tradeMarkOf's three)
   const tradeCommodity = deriveTradeCommodity(economicState);
 
   // Determine dominant guild
@@ -692,7 +692,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
     // Build context tokens
     const contextTokens = context ? generateTradeNarrative2(cat, context) : {};
 
-    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens, `${config?._seed ?? ''}::histEvent::${i}::${tmpl.type}`, hookFacts);
+    const event = collapseAtFounding(generateEventNarrative(tmpl, yearsAgo, contextTokens, `${config?._seed ?? ''}::histEvent::${i}::${tmpl.type}`, hookFacts), tmpl.type, age);
     event.type = cat;
     // Preserve the stable template id alongside the display category. The final
     // dedup keys on templateType (not category), so two distinct arcs in the same
@@ -742,7 +742,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
           ))
         : null;
       if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
-      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens, `${config?._seed ?? ''}::histAnchor::${cat}::${tmpl.type}`, hookFacts);
+      const replacement = collapseAtFounding(generateEventNarrative(tmpl, event.yearsAgo, contextTokens, `${config?._seed ?? ''}::histAnchor::${cat}::${tmpl.type}`, hookFacts), tmpl.type, age);
       if (replacement) {
         replacement.type = cat;
         replacement.templateType = tmpl.type; // thread the anchor's template id for the dedup
@@ -791,7 +791,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFac
         "Compact signatories' families still hold first call on the grain sales",
       ],
       plotHooks: [
-        'A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable',
+        'A clause in the compact entitles certain families to first refusal on grain sales, and in a lean year that clause is worth fighting over', // BAR3-PLACES-3 (C54896): it claimed "the current shortage" in towns whose food record holds none (16 of 19 on the 720); a lean year, never a claim of now (VETOABLE wording)
         'The original compact was signed under duress; someone wants that history exposed',
       ],
       severity: ['minor', 'major'],
@@ -1290,3 +1290,9 @@ import { admittedResourceEvent, resourceEventAdmitted } from './history/resource
 
 // W2-FIX-DATA-13 (the chair's 12:11 ruling): a lasting effect that names a district or a quarter is a town's (draw-free).
 import { sizedLastingEffects } from './history/sizedLastingEffects.js';
+
+// BAR3-PLACES (H3, 2026-11-15): a trade collapse within five years of the town's age (4 of 88 on the census's 720) failed no
+// trade "the settlement was built upon": it takes the founding twin, draw-free (event, year and every draw unmoved).
+export const TRADE_COLLAPSE_AT_FOUNDING = 'The trade the settlement was founded to serve failed within its first few years, and the wealth it was meant to carry never came';
+/** @param {any} event @param {unknown} templateType @param {number} age */
+const collapseAtFounding = (event, templateType, age) => { if (event && templateType === 'trade_collapse' && typeof event.yearsAgo === 'number' && event.yearsAgo >= age - 5) event.description = TRADE_COLLAPSE_AT_FOUNDING; return event; };

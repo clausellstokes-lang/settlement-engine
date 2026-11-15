@@ -77,7 +77,8 @@ describe('W2-FIX-DATA-7: the census writers in the data lane\'s files (the seven
     expect('viabilityNote' in crisisOf(bornCensus('r2s-religious_conversion-thorp-0'), 'religious_conversion'), 'no house of the faith, no market: no note').toBe(false);
     const miller = bornCensus('r2r-village-24'); const famine = crisisOf(miller, 'famine');
     const lever = famine.cast.roles.find((/** @type {any} */ r) => r.role === 'lever');
-    expect(crisisHookFor(miller, famine)).toMatch(new RegExp(`^${lever.name} has food, enough to matter\\.`));
+    // re-addressed by its text (BAR3-PLACES-2, C4510, 2026-11-15): the hook names no good, a store laid in before the shortage
+    expect(crisisHookFor(miller, famine)).toMatch(new RegExp(`^${lever.name} has stores laid in before the shortage, enough to matter\\.`));
     expect(crisisHookFor(bornCensus('r2r-city-19'), crisisOf(bornCensus('r2r-city-19'), 'plague_onset'))).toMatch(/, the healer who identified the outbreak first, has gone quiet\./);
     expect(crisisOf(bornCensus('r2s-religious_conversion-town-0'), 'religious_conversion').viabilityNote).toMatch(/feast days and fairs are held twice over/);
   }, 240_000);
