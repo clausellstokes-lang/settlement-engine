@@ -60,8 +60,9 @@ describe('TAIL-HISTORY batch 1: the rows cured at the history group\'s tables', 
     expectNoSeedFailures(collectSeedFailures(['r2s-succession_void-hamlet-1', 'r2s-succession_void-hamlet-2', 'r2r-thorp-22'], (seed) => {
       const town = bornCensus(seed);
       const text = crisisText(town);
-      expect(text, seed).not.toMatch(/Three different powers|each office does|some offices no longer/);
       expect(/would-be successors have each|gets by on old habit|some households no longer pay/.test(text), `${seed} prints its crisis's reworded line`).toBe(true);
+      // anchored: the same text is shown directly above to print its crisis's reworded line
+      expect(text, seed).not.toMatch(/Three different powers|each office does|some offices no longer/);
     }), 'the reworded crisis texts');
   }, 240_000);
 
@@ -76,6 +77,8 @@ describe('TAIL-HISTORY batch 1: the rows cured at the history group\'s tables', 
       const town = bornCensus(seed);
       const text = arrivalText(town);
       expect(crises(town).some((c) => c === 'under_siege' || c === 'famine'), `${seed} is under a siege or a famine`).toBe(true);
+      expect(text, `${seed}: the arrival scene names its town`).toContain(town.name);
+      // anchored: the same arrival text is shown directly above to name its town (the scene's own hook)
       expect(text, seed).not.toMatch(/notice of the next fair|Porters bent under loaded frames|goods from routes you have never travelled|records every cartload|still flapping|handed out to anyone who asks|baking since before dawn/);
     }), 'no traffic or offered food under the siege or the famine');
   }, 600_000);
@@ -87,7 +90,11 @@ describe('TAIL-HISTORY batch 1: the rows cured at the history group\'s tables', 
   }, 240_000);
   test('Y4: the salt fish name no carts, in a siege or out of one', () => {
     expectNoSeedFailures(collectSeedFailures(['r2r-thorp-58', 'r2s-under_siege-hamlet-0', 'r2r-hamlet-17'], (seed) => {
-      expect(arrivalText(bornCensus(seed)), seed).not.toMatch(/salt fish stand stacked for the carts/);
+      const town = bornCensus(seed);
+      const text = arrivalText(town);
+      expect(text, `${seed}: the arrival scene names its town`).toContain(town.name);
+      // anchored: the same arrival text is shown directly above to name its town (the scene's own hook)
+      expect(text, seed).not.toMatch(/salt fish stand stacked for the carts/);
     }), 'the salt fish wait for no carts');
   }, 240_000);
 });

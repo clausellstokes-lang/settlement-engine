@@ -17,6 +17,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { faceNameOf } from '../../src/domain/people/cardDoor.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = Object.freeze({
   tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
@@ -66,17 +67,21 @@ const KEEP = Object.freeze([
 
 describe('TAIL-TITLES-2 KT1 · the honorific takes the holder\'s word (one face, one word)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it.each(MOVE)('%s · %s (%s, %s): the line does not open on "%s"', (seed, name, gender, face, old, now) => {
-    const { card, line } = lineOf(seed, name);
-    expect(card?.gender).toBe(gender);
-    expect(card?.institution?.title).toBe(face);
-    expect(String(line).startsWith(`${old} `)).toBe(false);
-    expect(line).toBe(now);
+  it('MOVE (every row) seed · name (gender, face): the line does not open on the old word', () => {
+    expectNoSeedFailures(collectSeedFailures(MOVE, ([seed, name, gender, face, old, now]) => {
+      const { card, line } = lineOf(seed, name);
+      expect(card?.gender).toBe(gender);
+      expect(card?.institution?.title).toBe(face);
+      expect(String(line).startsWith(`${old} `)).toBe(false);
+      expect(line).toBe(now);
+    }), 'MOVE: each holder\'s line does not open on the old word and prints the line named instead');
   });
-  it.each(KEEP)('KEEP %s · %s (%s, %s) prints "%s"', (seed, name, gender, face, still) => {
-    const { card, line } = lineOf(seed, name);
-    expect(card?.gender).toBe(gender);
-    expect(card?.institution?.title).toBe(face);
-    expect(line).toBe(still);
+  it('KEEP (every row) seed · name (gender, face) prints the line it printed', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, name, gender, face, still]) => {
+      const { card, line } = lineOf(seed, name);
+      expect(card?.gender).toBe(gender);
+      expect(card?.institution?.title).toBe(face);
+      expect(line).toBe(still);
+    }), 'KEEP: each holder\'s line still prints exactly what it did');
   });
 });

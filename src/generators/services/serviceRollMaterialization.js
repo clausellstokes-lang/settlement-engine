@@ -62,6 +62,23 @@ function isCriminalProvider(institution) {
 }
 
 /**
+ * Whether the roster holds a criminal house BY NAME (a keyword of the same list; a custom house never counts). The
+ * orchestrator's informal-crime fallback reads it over the whole roster (moved from `servicesGenerator.js`, whose copy
+ * of the keyword list was this one, word for word). Unlike `isCriminalProvider`, a house's `category` alone is no
+ * criminal house here: the fallback has always read names only.
+ *
+ * @param {ReadonlyArray<unknown>} institutions
+ * @returns {boolean}
+ */
+export function hasCriminalInstitution(institutions) {
+  return institutions.some((inst) => {
+    if (isMaterializedCustomContent(inst)) return false;
+    const name = nativeSemanticName(inst).toLowerCase();
+    return CRIMINAL_INSTITUTION_KEYWORDS.some((kw) => name.includes(kw));
+  });
+}
+
+/**
  * THE PER-DEFINITION SERVICE ROLL, RESOLVED (CENSUS-1f unit 1c; Appendix B site 15, R). A service
  * that SURVIVED its rolls (the catalogue roll in `getServicesForInstitution`, the two gates here —
  * none moved, none added) is resolved through `drawDeclared` against the declarations CENSUS-4c

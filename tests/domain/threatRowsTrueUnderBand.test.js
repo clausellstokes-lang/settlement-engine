@@ -47,7 +47,10 @@ describe('the seventh seat\'s cells: the contradicted sentence does not print, a
     ['rv2-calm-thorp-1', 'Beasts & Monsters', 'citizen militia provide a viable but demanding', 'An embattled region, and only a palisade and a citizen militia to hold it.'], // 96: Critical
     ['rv2-calm-town-0', 'Invasion & War', 'no organized military force', 'Walls, and a watch to keep them.'], // 86 + 54: a watch stands
     ['rv2-calm-town-7', 'Beasts & Monsters', 'nobody organised to meet it', 'Active frontier, with walls and a watch to meet what comes.'], // 44 + 16: a watch stands
-    ['rv2-calm-hamlet-1', 'Invasion & War', 'not enough against an army', 'A palisade and armed townsfolk who know how to hold it.'], // 28: Strong
+    // TAIL-CORPUS-DEF-5, RE-KEYED BY IDENTITY: 7509b3794 (UPKEEP-13 P4, the chair's ruling (3) of 2026-11-14, people.
+    // milPerHead 1) holds rv2-calm-hamlet-1 (34 people) to Weak, where the contradicted clause is true and prints; the
+    // nearest town of the same shape that reads Strong behind a palisade and armed townsfolk is rv2-calm-hamlet-12 (88).
+    ['rv2-calm-hamlet-12', 'Invasion & War', 'not enough against an army', 'A palisade and armed townsfolk who know how to hold it.'], // 28: Strong
   ];
   test("each cell's town: its twin prints and the contradicted sentence does not", () => {
     for (const [seed, label, cured, twin] of ROWS) {

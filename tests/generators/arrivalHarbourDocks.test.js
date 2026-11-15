@@ -35,7 +35,8 @@ describe('the cold list\'s thorp, born as the app births it', () => {
     const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'thorp', selectedStressesRandom: false, selectedStresses: [], _randomizePriorities: true }), null, { seed: 'rw3-thorp-calm-1', customContent: {} }));
     expect(factsOf(s).hasInstitution('docks')).toBe(false);
     const opener = String(s.arrivalScene || '').split(/(?<=[.!?])\s+/)[0];
-    expect(opener).not.toMatch(HARBOUR);
     expect(opener).toMatch(/comes down to the sea|face to the open water/);
+    // anchored: the toMatch above proves this same opener is the shore row's live sentence
+    expect(opener).not.toMatch(HARBOUR);
   });
 });

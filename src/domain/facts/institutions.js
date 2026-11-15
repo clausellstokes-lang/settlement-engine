@@ -22,8 +22,10 @@
  *
  * Pure: no randomness, no clock.
  */
-import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
-import { liveInstitutions } from '../institutions/institutionRoster.js';
+// TAIL-TIES-6 (the chair's ruling (T23)): the live roster's native names and the access-only row live in the pure leaf
+// `liveInstitutionNames.js` (one home; `display/clergyHouse.js` reads them there, from the eager chunk, with no edge into this one).
+import { ACCESS_ONLY, liveInstitutionNames } from './liveInstitutionNames.js';
+export { ACCESS_ONLY, liveInstitutionNames };
 
 /** kind → the native-name pattern that means it. @type {Readonly<Record<string, RegExp>>} */
 export const INSTITUTION_KIND_PATTERNS = Object.freeze({
@@ -49,15 +51,6 @@ export const INSTITUTION_KIND_PATTERNS = Object.freeze({
 export const INSTITUTION_KINDS = Object.freeze(Object.keys(INSTITUTION_KIND_PATTERNS));
 
 /**
- * The live roster's native names.
- * @param {{ institutions?: unknown } | null | undefined} record
- * @returns {string[]}
- */
-export function liveInstitutionNames(record) {
-  return liveInstitutions(record).map((inst) => String(nativeSemanticName(inst) || '')).filter(Boolean);
-}
-
-/**
  * THE ONE READER.
  * @param {{ institutions?: unknown } | null | undefined} record a settlement record (or any record carrying `institutions`)
  * @param {string} kind a key of INSTITUTION_KIND_PATTERNS
@@ -68,10 +61,3 @@ export function hasInstitution(record, kind) {
   if (!re) throw new Error(`hasInstitution: unknown institution kind '${kind}'`);
   return liveInstitutionNames(record).some((n) => !ACCESS_ONLY.test(n) && re.test(n));
 }
-
-/**
- * A row that names ACCESS to a neighbour's facility ('Access to external mill', 'Access to parish
- * church') is not that institution standing here (CENSUS-1c unit 6, the vocabulary rulings §6; the
- * faith home already reads the church row as access-only, `faithReading.js :: faithReadingOf`).
- */
-export const ACCESS_ONLY = /^access to\b/i;

@@ -19,6 +19,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own cfgFor (r2r-<size>-<i>, r2s-<crisis>-<size>-<i>). @param {string} seed */
@@ -80,8 +81,7 @@ describe('E12: a row the crisis stops is marked by the leaf, on the journal as o
   for (const [seed, page, own, marked] of RED) {
     test(`${seed} ${page}: not "${own}"; prints "${marked}"`, () => {
       const lines = linesOf(seed, page);
-      expect(lines).not.toContain(own);
-      expect(lines).toContain(marked);
+      expectAbsentWithAnchor(lines, own, marked, `${seed} ${page}`);
     });
   }
   for (const [seed, page, noun] of HEADS) {

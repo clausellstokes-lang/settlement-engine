@@ -20,6 +20,7 @@
  */
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -89,7 +90,7 @@ describe('a house keeps its own service, whatever the place can pay', () => {
   test('RED-FIRST, the page: on the Services tab, every house shows each own service the roster offers when the place can pay in full', () => {
     let checked = 0;
     const missing = [];
-    for (const seed of [...RED, ...FORCED]) {
+    const failures = collectSeedFailures([...RED, ...FORCED], (seed) => {
       const s = born(seed);
       // The catalogue's guaranteed rows (p >= 1) only: a rite at p < 1 rides the seeded catalogue roll,
       // whose stream this test does not share with the birth (the roll arm above holds those).
@@ -112,7 +113,8 @@ describe('a house keeps its own service, whatever the place can pay', () => {
         if (!rows.some((r) => r.house.includes(institutionDisplayName(house))) && !(rows.length && (s.availableServices && Object.values(s.availableServices).flat().some((r) => r.name === name && r.institution !== house)))) missing.push(`${seed}: ${key}`);
       }
       cleanup();
-    }
+    });
+    expectNoSeedFailures(failures, "every born record's Services tab renders its rows");
     expect(checked, 'anchored: own services were looked for on the page').toBeGreaterThan(40);
     expect(missing).toEqual([]);
   });

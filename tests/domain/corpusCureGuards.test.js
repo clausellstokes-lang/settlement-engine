@@ -219,7 +219,10 @@ describe('a cured line is not eligible in the fixed town that made it false', ()
       }
       const pools = READ.get(g.seed) || {};
       expect(Object.keys(pools), `${g.seed} no longer reads ${g.pool}: re-key the row to a town of the case`).toContain(g.pool);
-      expect([...pools[g.pool]], `${g.pool} v${g.vid} is eligible at ${g.seed}`).not.toContain(g.vid);
+      const eligible = [...pools[g.pool]];
+      expect(eligible.length, `${g.seed} draws no line of ${g.pool} at all: re-key the row`).toBeGreaterThan(0);
+      // anchored: the non-empty eligible set asserted directly above is the live draw this exclusion reads
+      expect(eligible, `${g.pool} v${g.vid} is eligible at ${g.seed}`).not.toContain(g.vid);
     });
   }
 });

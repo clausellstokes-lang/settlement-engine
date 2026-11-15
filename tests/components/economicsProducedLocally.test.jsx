@@ -35,6 +35,7 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** The app's own shape, as the reader REVIEW-W2A-3 born its towns. @param {string} seed */
 const birthApp = (seed) => {
@@ -64,8 +65,8 @@ describe('"Produced locally" prints what is made here (item 4(c))', () => {
     // longer on the record's made list: no house here makes them. The anchor keeps the two the record still lists (the
     // parish chain, held here by the thorp's own wayside shrine), which the row itself does not print.
     expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['Religious services', 'Education (basic)']));
-    expect(town.economicState.localProduction, 'a category key is not a good (C2-A)').not.toContain('luxury');
-    expect(town.economicState.localProduction, 'no house here works the timber (C1-A)').not.toContain('timber');
+    expectAbsentWithAnchor(town.economicState.localProduction, 'luxury', 'Religious services', 'a category key is not a good (C2-A)');
+    expectAbsentWithAnchor(town.economicState.localProduction, 'timber', 'Religious services', 'no house here works the timber (C1-A)');
     const pills = producedLocally(town);
     expect(pills.length).toBeGreaterThan(0);
     expect(['timber', 'luxury', 'Religious services', 'Education (basic)'].filter((p) => pills.includes(p))).toEqual([]);

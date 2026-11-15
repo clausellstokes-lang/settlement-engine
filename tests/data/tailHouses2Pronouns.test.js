@@ -9,6 +9,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -71,8 +72,7 @@ describe('TAIL-HOUSES batch 2: a house description gives its one person no sex',
       const face = (t.npcs || []).find((/** @type {any} */ n) => n.institution?.key === house);
       expect(face, `${seed}: the ${house} has its person`).toBeDefined();
       expect(face.gender, `${seed}: the ${house}'s person is of the other sex`).toBe(/women/i.test(old) ? 'male' : 'female');
-      expect(String(inst.desc), `${seed} ${house}`).not.toContain(old);
-      expect(String(inst.desc), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(inst.desc), old, now, `${seed} ${house}`);
     }), 'a house description names no sex for its person');
   }, 600_000);
 

@@ -54,8 +54,9 @@ describe('W2-FIX-DATA-14: the measured rows in the data lane\'s files', () => {
       const mills = (town.institutions || []).filter((/** @type {any} */ i) => i.name === 'Mills (2-5)');
       expect(mills.length, `${seed} has its mills`).toBeGreaterThan(0);
       for (const m of mills) {
-        expect(String(m.desc || ''), seed).not.toMatch(/fulling/i);
         expect(String(m.desc || ''), `${seed} keeps a description of its mills`).toMatch(/\bgrain\b|\bwheels?\b/i);
+        // anchored: the same description is shown directly above to name its grain or wheels
+        expect(String(m.desc || ''), seed).not.toMatch(/fulling/i);
       }
     }), 'no Mills description names fulling');
   }, 240_000);

@@ -9,6 +9,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -71,8 +72,9 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
       expect(town.config.nearbyResourcesDepleted, seed).toContain('stone_quarry');
       const quarry = town.institutions.find((/** @type {any} */ i) => i.name === 'Stone quarry');
       expect(quarry, seed).toBeTruthy();
-      expect(String(quarry.desc), seed).not.toMatch(STATE);
       expect(String(quarry.desc), seed).toMatch(/quarry/i);
+      // anchored: the same description is shown directly above to name its quarry
+      expect(String(quarry.desc), seed).not.toMatch(STATE);
     }), 'every worked-out quarry town names its quarry for what it is');
   }, 60_000);
 
@@ -81,12 +83,15 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
     const customs = roadTown.institutions.find((/** @type {any} */ i) => i.name === 'Customs house');
     expect(customs?.source, 'the cascade added it').toBe('cascade');
     expect(roadTown.institutions.some((/** @type {any} */ i) => /\bdocks?\b|wharf|harbour/i.test(i.name)), 'no docks').toBe(false);
-    expect(String(customs.desc)).not.toMatch(/\bport\b|harbour/i);
     expect(String(customs.desc)).toMatch(/main roads/);
+    // anchored: the same description is shown directly above to name its main roads
+    expect(String(customs.desc)).not.toMatch(/\bport\b|harbour/i);
     const coastTown = bornCensus('r2r-village-11');
     const yard = coastTown.institutions.find((/** @type {any} */ i) => i.name === 'River boatyard');
     expect(yard?.source, 'the cascade added it').toBe('cascade');
     expect([coastTown.config.terrainType, coastTown.config.tradeRouteAccess]).toEqual(['coastal', 'port']);
+    expect(String(yard.desc), 'the boatyard speaks of the water').toMatch(/\bwater\b/);
+    // anchored: the same description is shown directly above to speak of the water
     expect(String(yard.desc)).not.toMatch(/\briver\b/i);
   }, 60_000);
 
@@ -95,33 +100,41 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
     // declares its size (tier: ≥ town), so the two small rr2s towns MATERIALIZE its small-place twin instead (the
     // materializer's own door): the false line is held out one step earlier, and the arrival still prints neither it nor
     // nothing. The bathhouse row (rw3-hamlet-calm-1) still proves the arrival's own hold on a materialized detail.
-    for (const [seed, gone, materialized] of [
+    const failures = collectSeedFailures([
       ['rr2s-thorp-calm-port-1', 'Palisade lines and river stairs', 'painted gables and fenced garden plots face the lane'],
       ['rr2s-hamlet-calm-rand-1', 'Palisade lines and river stairs', 'painted gables and fenced garden plots face the lane'],
       ['rw3-hamlet-calm-1', 'A communal green, bathhouse, and well', 'A communal green, bathhouse, and well'],
-    ]) {
+    ], ([seed, gone, materialized]) => {
       const town = seed.startsWith('rr2s-') ? bornRr2s(seed) : bornRw3(seed);
       expect(String(town.culturalIdentity?.architecturalDetail).toLowerCase(), `${seed}: the materialized detail`).toContain(materialized.toLowerCase());
-      expect(String(town.arrivalScene), seed).not.toContain(gone);
+      expectAbsentWithAnchor(String(town.arrivalScene), gone, town.name, `${seed}: the arrival scene names its town`);
       expect(String(town.arrivalScene), seed).toMatch(/\S/);
-    }
+    });
+    expectNoSeedFailures(failures, 'the arrival prints the materialized detail\'s refused line nowhere, and still prints');
   }, 60_000);
 
   test('a sense line that fills the place needs the house it names: bells a church in a town, the arms trade a smith (ROUND-3 HIGH #46 #600; REVIEW-W2A-3 #184)', () => {
     const thorp = bornRr2s('rr2s-thorp-famine-rand-1');
+    expect(String(thorp.arrivalScene), 'the thorp\'s arrival scene names its town').toContain(thorp.name);
+    // anchored: the same arrival scene is shown directly above to name its town (the scene's own hook)
     expect(String(thorp.arrivalScene)).not.toMatch(/answer one another across the roofs/);
     const town = bornRr2s('rr2s-town-indebted-port-1');
     expect(town.institutions.some((/** @type {any} */ i) => /smith|forge/i.test(i.name)), 'no smith').toBe(false);
+    expect(String(town.arrivalScene), 'the indebted town\'s arrival prints its crisis hook').toContain('outside creditor');
+    // anchored: the same arrival scene is shown directly above to print its indebted hook
     expect(String(town.arrivalScene)).not.toMatch(/Every forge you pass/);
     const hamlet = bornRw3('rw3-hamlet-calm-1');
-    expect(String(hamlet.arrivalScene)).not.toMatch(/most of it is the sound of blades being made/);
     expect(String(hamlet.arrivalScene)).toContain('A smith tests a new blade against a post');
+    // anchored: the same arrival scene is shown directly above to print the smith's line
+    expect(String(hamlet.arrivalScene)).not.toMatch(/most of it is the sound of blades being made/);
   }, 60_000);
 
   test('the docks are described, never by the catalogue\'s condition for them (ROUND-3 HIGH #1343)', () => {
     const town = bornRr2s('rr2s-metropolis-plague_onset-port-1');
     const docks = town.institutions.find((/** @type {any} */ i) => i.name === 'Docks/port facilities');
     expect(docks, 'the port keeps its docks').toBeTruthy();
+    expect(String(docks.desc), 'the docks are described').toContain('loaded and unloaded');
+    // anchored: the same description is shown directly above to describe the docks' work
     expect(String(docks.desc)).not.toMatch(/^If |\bIf coastal\b/);
     expect(town.institutions.map((/** @type {any} */ i) => String(i.desc)).filter((d) => /If coastal or river access/.test(d))).toEqual([]);
   }, 60_000);

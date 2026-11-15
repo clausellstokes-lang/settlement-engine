@@ -27,6 +27,7 @@ import { tradeStoppedHere } from '../../src/domain/display/chainStateShown.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -64,10 +65,14 @@ describe('the PDF prints the nearby-resource groups the tab prints (SURFACES-3 i
   beforeAll(async () => { await loadGenerationLawPayloads(); for (const s of [...SIEGES, GUARD]) TOWNS[s] = birth(s); }, 120000);
   afterEach(cleanup);
 
-  test.each(SIEGES)('%s: under a siege neither the tab nor the PDF calls the grounds "Abundant"', (seed) => {
-    expect(tradeStoppedHere(TOWNS[seed]), `${seed} is under a siege in force`).toBe(true);
-    expect(tabAbundant(TOWNS[seed]), `${seed}: the tab`).toBe(false);
-    expect(pdfAbundant(TOWNS[seed]), `${seed}: the PDF`).toBe(false);
+  test('each siege town: under a siege neither the tab nor the PDF calls the grounds "Abundant" (every town)', () => {
+    expectNoSeedFailures(collectSeedFailures(SIEGES, (seed) => {
+      try {
+        expect(tradeStoppedHere(TOWNS[seed]), `${seed} is under a siege in force`).toBe(true);
+        expect(tabAbundant(TOWNS[seed]), `${seed}: the tab`).toBe(false);
+        expect(pdfAbundant(TOWNS[seed]), `${seed}: the PDF`).toBe(false);
+      } finally { cleanup(); }
+    }), 'every siege town: neither the tab nor the PDF calls the grounds "Abundant"');
   });
 
   test('guard: a calm town keeps its "Abundant" group on the tab and the PDF', () => {

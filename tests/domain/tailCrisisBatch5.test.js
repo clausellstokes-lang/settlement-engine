@@ -8,6 +8,8 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { crisisSummaryForSurface } from '../../src/domain/crisis/crisisSummaryVantage.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -64,13 +66,16 @@ const KEEP = [
 
 describe('TAIL-CRISIS batch 5: the vantage lines claim nothing the town does not hold', () => {
   it('no FALSE words print, and the line every printing town bears prints in their place', () => {
-    for (const [seed, gone, instead] of FALSE) {
+    const failures = collectSeedFailures(FALSE, ([seed, gone, instead]) => {
       const text = said(seed);
-      expect(text, seed).not.toContain(gone);
-      expect(text, seed).toContain(instead);
-    }
+      expectAbsentWithAnchor(text, gone, instead, seed);
+    });
+    expectNoSeedFailures(failures, 'a FALSE phrase printed, or the line in its place did not');
   }, 300000);
   it('every KEEP sibling still prints', () => {
-    for (const [seed, kept] of KEEP) expect(said(seed), seed).toContain(kept);
+    const failures = collectSeedFailures(KEEP, ([seed, kept]) => {
+      expect(said(seed), seed).toContain(kept);
+    });
+    expectNoSeedFailures(failures, 'a KEEP sibling no longer prints');
   }, 300000);
 });

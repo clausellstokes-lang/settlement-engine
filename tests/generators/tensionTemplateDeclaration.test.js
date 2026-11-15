@@ -14,6 +14,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { bootHarness, renderSurfaces } from '../../scripts/audit/soak-review/renderHarness.mjs';
 import { readerBattery } from '../../src/domain/coherence/readerBattery.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { migrationOf } from '../../src/domain/facts/migration.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
@@ -131,10 +132,14 @@ describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () 
     // collaborators, resisters and seized property, a past the timeline does not hold. Such a tension is now set aside at the
     // selection (`historyData.js :: tensionHeldByTimeline`), so these six hold none, and each still carries a tension.
     const UNANCHORED = [24, 91, 38, 105, 142, 71];
+    /** A tension each of the six does carry (read off its birth): the liveness anchor of its tension list. */
+    const CARRIED = { 24: 'heresy_trial', 91: 'resource_scarcity', 38: 'resource_scarcity', 105: 'resource_scarcity', 142: 'external_threat', 71: 'resource_scarcity' };
     const failures = collectSeedFailures(UNANCHORED, (i) => {
       const s = birth(i).settlement;
       expect(s.history.historicalEvents.some((e) => e.templateType === 'occupation_legacy'), `soak1k-${i}: no Occupation on the timeline`).toBe(false);
-      expect(s.history.currentTensions.map((x) => x.type), `soak1k-${i}: no occupation tension`).not.toContain('occupation_legacy');
+      expectAbsentWithAnchor(s.history.currentTensions.map((x) => x.type), 'occupation_legacy', CARRIED[i], `soak1k-${i}: no occupation tension`);
+      expect(JSON.stringify(s.history.currentTensions), `soak1k-${i}: the tensions' words are read`).toContain('"description":"');
+      // anchored: the line above proves the tensions' descriptions are on the string this pattern scans
       expect(JSON.stringify(s.history.currentTensions), `soak1k-${i}: no collaborator or resister`).not.toMatch(/collaborat|resistance|occupier/i);
       expect(s.history.currentTensions.length, `soak1k-${i}: the town still carries a current tension`).toBeGreaterThan(0);
     });

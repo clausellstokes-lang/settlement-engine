@@ -27,7 +27,10 @@ describe('DS-GEN-16: {calamity} is never the subject of a verb it may not agree 
   });
   for (const { id, text } of lines) {
     it(`${id}: no number-marked verb after the slot, no singular pronoun back to it`, () => {
+      expect(text, `${id} names the slot`).toContain('{calamity}');
+      // anchored: the line above shows the slot prints in this text
       expect(text, `${id} makes {calamity} the subject of a singular verb`).not.toMatch(/\{calamity\}(?:,\s*which)?\s+(?:is|was|has|does|[a-z]{2,}s)\b/);
+      // anchored: the slot's presence in this text is asserted two lines above
       expect(text, `${id} refers back to {calamity} as "it"`).not.toMatch(/\b(?:it|its|It|Its)\b/);
     });
   }

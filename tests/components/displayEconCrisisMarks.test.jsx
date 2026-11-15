@@ -26,6 +26,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { rowStoppedBy } from '../../src/domain/display/crisisStoppedRow.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -82,25 +84,41 @@ afterEach(cleanup);
 describe('TAIL-DISPLAY-ECON-4 batch 4: the Economics tab marks what the crisis stops, by the one leaf', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(NOT)('%s does not print the unmarked "%s"; instead: %s', (seed, line) => {
-    expect(textOf(town(seed))).not.toContain(line);
+  test('each NOT row does not print the unmarked line; instead: the marked one (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(NOT, ([seed, line, instead]) => {
+      try {
+        expectAbsentWithAnchor(textOf(town(seed)), line, instead, `${seed}: the marked row prints in the unmarked one's place`);
+      } finally { cleanup(); }
+    }), 'every NOT row: the Economics tab does not print the unmarked line');
   }, 120000);
 
-  test.each(TWIN)('%s prints "%s"', (seed, line) => {
-    expect(textOf(town(seed))).toContain(line);
+  test('each TWIN row prints its line (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(TWIN, ([seed, line]) => {
+      try {
+        expect(textOf(town(seed)), `${seed} prints "${line}"`).toContain(line);
+      } finally { cleanup(); }
+    }), 'every TWIN row: the Economics tab prints the twin');
   }, 120000);
 
-  test.each(KEEP)('%s still prints "%s"', (seed, line) => {
-    expect(textOf(town(seed))).toContain(line);
+  test('each KEEP row still prints its line (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, line]) => {
+      try {
+        expect(textOf(town(seed)), `${seed} still prints "${line}"`).toContain(line);
+      } finally { cleanup(); }
+    }), 'every KEEP row: the Economics tab still prints the true sibling');
   }, 120000);
 
-  test.each(CARD_TOWNS)('%s: the flow cards print the leaf\'s own count of chain marks', (seed) => {
-    const t = town(seed);
-    const leaf = (t.economicState.activeChains || []).filter((/** @type {any} */ c) => rowStoppedBy(t, 'chain', c)).length;
-    expect(leaf).toBeGreaterThan(0);
-    const v = page(t);
-    expect(v.container.querySelectorAll('[data-testid="flow-crisis-mark"]').length).toBe(leaf);
-    v.unmount();
+  test('each card town: the flow cards print the leaf\'s own count of chain marks (every town)', () => {
+    expectNoSeedFailures(collectSeedFailures(CARD_TOWNS, (seed) => {
+      try {
+        const t = town(seed);
+        const leaf = (t.economicState.activeChains || []).filter((/** @type {any} */ c) => rowStoppedBy(t, 'chain', c)).length;
+        expect(leaf, `${seed}: the leaf marks a chain`).toBeGreaterThan(0);
+        const v = page(t);
+        expect(v.container.querySelectorAll('[data-testid="flow-crisis-mark"]').length, `${seed}: the flow cards print the leaf's own count of chain marks`).toBe(leaf);
+        v.unmount();
+      } finally { cleanup(); }
+    }), 'every card town: the flow cards print the leaf\'s own count of chain marks');
   }, 120000);
 
   test('a calm town marks nothing and says nothing of ordinary times', () => {

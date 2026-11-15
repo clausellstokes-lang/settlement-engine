@@ -7,6 +7,7 @@
  * Births as the census's 720 (each pair red at the base); the new wording is pinned at both ends of the size range.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -37,7 +38,7 @@ describe('TAIL-POWERS-4 · batch 3: the vignettes claim no workshop and no guild
   for (const [seed, [was, now]] of Object.entries(CURED)) {
     it(`${seed}: the vignette reads "${now}", not "${was}"`, () => {
       const rc = String(born(seed).powerStructure.recentConflict || '');
-      expect(rc, seed).not.toContain(was);
+      expectAbsentWithAnchor(rc, was, now, seed);
       expect(rc, seed).toContain(now);
     }, 120_000);
   }

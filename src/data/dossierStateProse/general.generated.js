@@ -10827,7 +10827,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LEGACY-RECOVERED": [
         {
           "angle": "ledger",
-          "text": "{settlement} came through the {calamity}, and what the town built in answer still stands; that legacy is {timeband_age}.",
+          "text": "{settlement} came through the {calamity}, and what the town built in answer still stands, a legacy that is {timeband_age}.",
           "slots": [
             "settlement",
             "calamity",
@@ -10837,7 +10837,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Much of what stands in {settlement} now was built after the {calamity}; that legacy is {timeband_age}.",
+          "text": "Much of what stands in {settlement} now was built after the {calamity}, and that legacy is {timeband_age}.",
           "slots": [
             "settlement",
             "calamity",
@@ -10849,17 +10849,17 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LEGACY-SHIFTED": [
         {
           "angle": "ledger",
-          "text": "What {settlement} settled in the wake of the {calamity} still shapes the town, though much has changed since; that legacy is {timeband_age}.",
+          "text": "In the wake of the {calamity}, {settlement} settled into a shape that still holds, a legacy that is {timeband_age}, though much has changed since.",
           "slots": [
-            "settlement",
             "calamity",
+            "settlement",
             "timeband_age"
           ],
           "vid": 1
         },
         {
           "angle": "street",
-          "text": "{settlement} still keeps the shape the town took after the {calamity}, though the times have moved on; that legacy is {timeband_age}.",
+          "text": "{settlement} still keeps the shape the town took after the {calamity}, and that shape is {timeband_age}, though the times have moved on.",
           "slots": [
             "settlement",
             "calamity",

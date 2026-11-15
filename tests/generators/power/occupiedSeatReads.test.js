@@ -19,6 +19,7 @@ import { generateSettlementPipeline } from '../../../src/generators/generateSett
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { governanceAccountOf } from '../../../src/domain/display/governanceAccount.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shape @param {string} seed */
@@ -46,10 +47,10 @@ describe("TAIL-POWERS-2 · P4: under an occupation the seat does not govern; it 
       const s = born(seed);
       const gov = s.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning);
       expect(gov.modifiers, seed).toContain('occupied');
-      expect(gov.desc, seed).not.toContain(seatLine);
+      expectAbsentWithAnchor(gov.desc, seatLine, "keeps the seat, but under the occupation nothing it decides stands without the occupiers' approval.", seed);
       expect(gov.desc, seed).toMatch(TWIN);
       const account = governanceAccountOf(s)?.text || '';
-      expect(account, seed).not.toContain(governs);
+      expectAbsentWithAnchor(account, governs, `answers to the occupiers of ${s.name}.`, seed);
       expect(account, seed).toContain(`answers to the occupiers of ${s.name}.`);
     }, 120_000);
   }
@@ -57,7 +58,7 @@ describe("TAIL-POWERS-2 · P4: under an occupation the seat does not govern; it 
   for (const seed of ['r2s-occupied-thorp-1', 'r2s-occupied-city-0']) {
     it(`${seed}: the Occupation Authority is at odds with the hall, not one that no longer takes its orders`, () => {
       const account = governanceAccountOf(born(seed))?.text || '';
-      expect(account, seed).not.toMatch(/Occupation Authority (?:no longer takes its orders|takes its orders no longer)/);
+      for (const refused of ['Occupation Authority no longer takes its orders', 'Occupation Authority takes its orders no longer']) expectAbsentWithAnchor(account, refused, 'Occupation Authority', seed);
       expect(account, seed).toMatch(/Occupation Authority[^.]* (?:is|are) at odds with it\.|The hall is at odds with [^.]*the Occupation Authority/);
     }, 120_000);
   }

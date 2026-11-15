@@ -64,6 +64,8 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
       expect((town.institutions || []).some((/** @type {any} */ i) => i.name === 'Sawmill (commercial)'), `${seed} holds a commercial sawmill`).toBe(true);
       expect(timberIn(town, 'unexploited'), seed).toEqual([]);
       expect(timberIn(town, 'partiallyExploited'), seed).toContain('partiallyExploited:timber');
+      expect(journalTimberRow(town), `${seed}: the journal prints its Timber row`).toMatch(/^\| Timber \|/);
+      // anchored: the same journal row is shown directly above to be printed (not the empty row of a missing one)
       expect(journalTimberRow(town), seed).not.toMatch(/\| unexploited \|/);
     }), 'a commercial sawmill stands: the timber is not told unworked');
     const keep = bornCensus('r2r-town-12');
@@ -84,7 +86,11 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
   test('REVIEW-R2-CODE-A (the chair\'s 10:57, HIGH): the wine shop\'s patron stands drinks only where a tavern stands, at a village\'s size or more (r2r-thorp-27, r2s-recently_betrayed-hamlet-1, r2r-village-55 hold none); r2r-town-2 keeps it', () => {
     const WINE = /A patron stands drinks at a wine shop/;
     expectNoSeedFailures(collectSeedFailures(['r2r-thorp-27', 'r2s-recently_betrayed-hamlet-1', 'r2r-village-55'], (seed) => {
-      expect(String(bornCensus(seed).arrivalScene || ''), seed).not.toMatch(WINE);
+      const town = bornCensus(seed);
+      const a = String(town.arrivalScene || '');
+      expect(a, `${seed}: the arrival scene names its town`).toContain(town.name);
+      // anchored: the same arrival scene is shown directly above to name its town (the scene's own hook)
+      expect(a, seed).not.toMatch(WINE);
     }), 'no tavern: no wine shop in the arrival');
     expect(String(bornCensus('r2r-town-2').arrivalScene || '')).toMatch(WINE);
   }, 180_000);
@@ -94,17 +100,26 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
     const POOL = /hammering|Forge smoke|ring of the anvils|new ironwork|clang of iron/;
     expectNoSeedFailures(collectSeedFailures(['r2s-infiltrated-metropolis-3', 'r2r-town-47'], (seed) => {
       const a = String(bornCensus(seed).arrivalScene || '');
-      expect(a, seed).not.toMatch(LIVES);
       expect(a, seed).toMatch(/The hammering of the forges echoes through all of|The clang of iron from the smithies carries down the lanes of/);
+      // anchored: the same arrival scene is shown directly above to print the forge line's sound
+      expect(a, seed).not.toMatch(LIVES);
     }), 'the forge line names the sound, not the living');
     expectNoSeedFailures(collectSeedFailures(['r2r-town-26', 'r2s-mass_migration-town-0'], (seed) => {
-      expect(String(bornCensus(seed).arrivalScene || ''), seed).not.toMatch(POOL);
+      const town = bornCensus(seed);
+      const a = String(town.arrivalScene || '');
+      expect(a, `${seed}: the arrival scene names its town`).toContain(town.name);
+      // anchored: the same arrival scene is shown directly above to name its town (the scene's own hook)
+      expect(a, seed).not.toMatch(POOL);
     }), 'no smith: no forge in the arrival');
   }, 180_000);
 
   test('item 5, the reader\'s A06: the arms racks wait for no carts under a siege, as their twins do (r2s-under_siege-city-3); r2r-town-48 keeps them', () => {
     const RACKS = /Racks of spearheads and helms/;
-    expect(String(bornCensus('r2s-under_siege-city-3').arrivalScene || '')).not.toMatch(RACKS);
+    const siege = bornCensus('r2s-under_siege-city-3');
+    const siegeScene = String(siege.arrivalScene || '');
+    expect(siegeScene, 'r2s-under_siege-city-3: the arrival scene names its town').toContain(siege.name);
+    // anchored: the same arrival scene is shown directly above to name its town (the scene's own hook)
+    expect(siegeScene).not.toMatch(RACKS);
     expect(String(bornCensus('r2r-town-48').arrivalScene || '')).toMatch(RACKS);
   }, 180_000);
 });

@@ -454,6 +454,7 @@ registerStep('assembleSettlement', {
   // pass's text; no writer in that window reads a stress entry's summary, hook or note (TAIL-CRISIS-5, by grep), and
   // whatever is added there must not, or must read it here. @enforced-by tests/generators/stressLateReRead.test.js
   for (const [e, kept] of stressLateReads) readStressEntry(e, kept);
+  if (chooseOrPin(pins, 'institutions', () => UNPINNED) === UNPINNED) readHouseDescsLate(settlement); // TAIL-HOUSES-5 (H20): the late re-read reaches a house's description (below); a HELD roster is the DM's
 
   // Propagate the in-pipeline causal trace onto the settlement so
   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
@@ -523,3 +524,25 @@ function withGuardPaidFromDefence(settlement) {
   const pay = purseWordOfBand(economicSurvivalBandOf(settlement), standingLabelOf(es));
   return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies }) } }; // UPKEEP-8: the guard line's two readings of the record
 }
+
+// ── THE LATE RE-READ OF A HOUSE'S DESCRIPTION (TAIL-HOUSES-5, the chair's ruling H20; the pass K21 built, reached to the
+// houses). A description whose claim reads the powers is declared in `institutionDescVariants.js :: DESC_LATE_SIBLINGS`
+// (keyed by the whole description; the draw never reads it). Here, after the last roster write, a stored description that
+// is such a key (in the tier noun the draw spoke it in) resolves against the SETTLED record, and the twin is stored where
+// the original is refused. Draw-free; nothing declared, nothing written (byte-identical); a description a later writer
+// changed is no key and is left. @enforced-by tests/generators/houseDescLateReRead.test.js
+/** @param {any} settlement */
+function readHouseDescsLate(settlement) {
+  const keys = Object.keys(DESC_LATE_SIBLINGS);
+  if (!keys.length || !Array.isArray(settlement?.institutions)) return;
+  const noun = tierNounFor(settlement.tier);
+  const spoken = new Map(keys.map((k) => [speakTierNoun(k, noun), k]));
+  const facts = factsOf(settlement);
+  for (const inst of settlement.institutions) {
+    const key = inst && typeof inst.desc === 'string' ? spoken.get(inst.desc) : undefined;
+    if (key === undefined) continue;
+    const text = resolveSibling(key, DESC_LATE_SIBLINGS, { facts, poolId: 'institutionDescVariants:DESC_LATE_SIBLINGS', surface: 'institutions', drawKind: 'H' });
+    if (typeof text === 'string' && text !== key) inst.desc = speakTierNoun(text, noun);
+  }
+}
+import { DESC_LATE_SIBLINGS } from '../../data/institutionDescVariants.js'; import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // TAIL-HOUSES-5 (H20): at the END, as above (this file's writes are cited by LINE)
