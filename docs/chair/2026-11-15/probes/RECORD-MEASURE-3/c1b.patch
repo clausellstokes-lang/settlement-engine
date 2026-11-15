@@ -1,0 +1,24 @@
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index 5f381faa..d4dd9e4e 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -42,6 +42,7 @@ import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
+ import { partitionDefenseInstitutions, defenseTraditionNamesOf, defenseWallOf, defenceHeldOf } from '../domain/institutions/defenseInstitutionBuckets.js';
+ import { resolveGenerationWorldLaw } from './generationContext.js';
+ import { readinessBandOf } from '../data/bandLadders.js';
++import { SCORE_BAND_CUTS } from '../domain/display/defenseScoreBands.js';
+ import { deriveMagicReliance } from '../domain/magicReliance.js';
+ import { keepOf, keepOfRecord, fundedGate } from '../domain/facts/keep.js';
+ import { DEFENCE_TUNING as W, DEFENCE_WORDS, WATCH_IN_STEAD } from '../data/defenceWeights.js';
+@@ -654,6 +655,11 @@ export function generateDefenseProfile(settlement, upkeep = keepOf(undefined)) {
+     ...Object.fromEntries(SCORE_KEYS.map((d) => [SCORE_NAMES[d], Math.round(Math.round((r.full[d] ?? 0) * 100) / 100)])),
+     magicDependency, traditions, ...(disasterScore !== undefined ? { disaster: disasterScore } : {}),
+   };
++  // RECORD-MEASURE-3 candidate 1b: THE RATING CAPPED BY THE WORD. A town whose printed prosperity is Poor, Struggling or
++  // Subsistence does not rate Economic Survival STRONG ("money in hand"): its score is held below the band's cut.
++  // The readiness reads the parts (`r.full`), not this rounded score, so it does not move.
++  if (['Poor', 'Struggling', 'Subsistence'].includes(String(s.economicState?.prosperity))
++    && scores.economic >= SCORE_BAND_CUTS.strong) scores.economic = SCORE_BAND_CUTS.strong - 1;
+ 
+   // THE LABEL READS THE ROSTER (UPKEEP-12, ruling (a)): walls or a force are never "Undefended".
+   const defenceInstitutions = getDefenseInstitutions(s.institutions || []);

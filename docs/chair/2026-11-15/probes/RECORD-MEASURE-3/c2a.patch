@@ -1,0 +1,56 @@
+diff --git a/src/generators/economy/economicState.js b/src/generators/economy/economicState.js
+index ca365159..42265660 100644
+--- a/src/generators/economy/economicState.js
++++ b/src/generators/economy/economicState.js
+@@ -540,10 +540,17 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+   } { const work = houseOfWorkLine(tier, incomeBuild, instNamesLower, (config.stressTypes || []).includes('under_siege')); if (work) incomeBuild.push(work); } // #93 (UPKEEP-8): a small place's house of work earns too. ── Stage 3: Income normalization ──
+   const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
+   const incomeWeighted = incomeBuild.map((entry) => ({ ...entry, weight: entry.percentage * incomeMultiplier }));
++  // RECORD-MEASURE-3 candidate 2a: ONE FIGURE. The criminal take is the capture the Shadow Economy section prints
++  // (its share held at `blackMarketCapture`); the lawful sources share what is left, in their own proportions.
++  const crimHeld = incomeWeighted.find((entry) => entry.isCriminal);
++  const crimPct = crimHeld ? Math.max(0, Math.min(100, Math.round(crimHeld.percentage))) : 0;
++  const lawfulWeight = incomeWeighted.filter((entry) => !entry.isCriminal).reduce((sum, entry) => sum + entry.weight, 0);
+   const incomeTotalWeight = incomeWeighted.reduce((sum, entry) => sum + entry.weight, 0) || 1;
+   const incomeNormalized = incomeWeighted.map((entry) => ({
+     ...entry,
+-    percentage: Math.round((entry.weight / incomeTotalWeight) * 100),
++    percentage: crimHeld && lawfulWeight > 0
++      ? (entry.isCriminal ? crimPct : Math.round((entry.weight / lawfulWeight) * (100 - crimPct)))
++      : Math.round((entry.weight / incomeTotalWeight) * 100),
+     priorityNote: null,
+   }));
+   // (legacy alias block removed)
+@@ -553,7 +560,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
+       (bestIdx, entry, idx) => (entry.percentage > incomeNormalized[bestIdx].percentage ? idx : bestIdx),
+       0
+     );
+-    incomeNormalized[largestIdx].percentage += 100 - percentageSum;
++    // 2a: the residue of rounding goes to the largest LAWFUL source, so the criminal share stays the capture.
++    const fixIdx = crimHeld ? incomeNormalized.reduce((bestIdx, entry, idx) => (!entry.isCriminal
++      && (incomeNormalized[bestIdx].isCriminal || entry.percentage > incomeNormalized[bestIdx].percentage) ? idx : bestIdx), 0) : largestIdx;
++    incomeNormalized[fixIdx].percentage += 100 - percentageSum;
+   }
+   const stressTypes = config.stressTypes || [];
+   // The pre-chain trade lists (necessity imports, the stress-shaped exports and imports, the goods toggles):
+diff --git a/src/generators/economy/incomeLineSiblings.js b/src/generators/economy/incomeLineSiblings.js
+index 9d250bac..3b81c7fd 100644
+--- a/src/generators/economy/incomeLineSiblings.js
++++ b/src/generators/economy/incomeLineSiblings.js
+@@ -289,10 +289,13 @@ export function keepRowsThePageBearsOut(rows, f) {
+   const unhoused = (/** @type {{ source: string }} */ e) => { const t = ROW_TRADES[e.source]; return !!t && !rosterHas(t.house); };
+   const kept = rows.filter((e) => !unhoused(e) || goodSold(e) !== null);
+   if (kept.length !== rows.length) {
+-    const total = kept.reduce((sum, e) => sum + e.weight, 0) || 1;
+-    for (const e of kept) e.percentage = Math.round((e.weight / total) * 100);
++    // RECORD-MEASURE-3 candidate 2a: the criminal row keeps its share (the capture); the lawful rows share the rest.
++    const crim = kept.find((e) => e.isCriminal); const held = crim ? crim.percentage : 0;
++    const lawful = kept.filter((e) => !e.isCriminal);
++    const total = lawful.reduce((sum, e) => sum + e.weight, 0) || 1;
++    for (const e of lawful) e.percentage = Math.round((e.weight / total) * (100 - held));
+     const sum = kept.reduce((s, e) => s + e.percentage, 0);
+-    if (kept.length && sum !== 100) { let bi = 0; kept.forEach((e, i) => { if (e.percentage > kept[bi].percentage) bi = i; }); kept[bi].percentage += 100 - sum; }
++    if (lawful.length && sum !== 100) { let bi = 0; lawful.forEach((e, i) => { if (e.percentage > lawful[bi].percentage) bi = i; }); lawful[bi].percentage += 100 - sum; }
+     rows.length = 0; rows.push(...kept);
+   }
+   for (const e of rows) {

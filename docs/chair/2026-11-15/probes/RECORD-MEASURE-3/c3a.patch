@@ -1,0 +1,23 @@
+diff --git a/src/generators/economy/foodBalance.js b/src/generators/economy/foodBalance.js
+index e9505403..8d3062a5 100644
+--- a/src/generators/economy/foodBalance.js
++++ b/src/generators/economy/foodBalance.js
+@@ -456,7 +456,17 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
+         ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate))
+         : 0);
+     const magicResidual = Math.max(0, totalCoverage - importPortion);
+-    if (magicResidual > 0 && magicOn && magicFoodRate > 0) {
++    // RECORD-MEASURE-3 candidate 3a: ONE WRITER. Where the writer publishes its own pounds (production, imports,
++    // magic), the view READS them and its shortfall is what they leave of the need: the Economics tab's own
++    // remainder (`foodRowShown.js`), so the viability's "cannot cover ~N lbs" and the tab's "Short: N" are one
++    // figure. The reconstruction from the rounded share stays for a persisted record without the split.
++    if (canonicalSplit || (Number.isFinite(foodSecurity.importCoverage) && Number.isFinite(foodSecurity.magicOffset))) {
++      importCoverageFinal = Math.max(0, Math.round(cImport));
++      magicFoodOffset = Math.max(0, Math.round(cMagic));
++      magicFoodNote = magicFoodOffset > 0 ? magicFoodNoteFor() : '';
++      deficit = Number(foodSecurity.deficit) > 0 ? Math.max(0, Math.round(dailyNeedFinal - dailyProductionFinal - importCoverageFinal - magicFoodOffset)) : 0;
++      deficitPercent = Math.round(dailyNeedFinal) > 0 ? Math.round((deficit / Math.round(dailyNeedFinal)) * 100) : 0;
++    } else if (magicResidual > 0 && magicOn && magicFoodRate > 0) {
+       importCoverageFinal  = importPortion;
+       magicFoodOffset      = magicResidual;
+       magicFoodNote        = magicFoodNoteFor();
