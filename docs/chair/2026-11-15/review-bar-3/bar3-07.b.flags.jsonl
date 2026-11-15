@@ -1,0 +1,13 @@
+{"id":"C12975","town":"bar0-hamlet-calm-rand-7","sev":"MED","kind":"PAIR","why":"Healing capacity printed Adequate, but Medical Readiness is None and no healer is kept here","other":"C13246"}
+{"id":"C13260","town":"bar0-hamlet-calm-rand-7","sev":"MED","kind":"PAIR","why":"Medical role of magic printed 'common' beside no arcane practitioners, no healer, and reliance on magic None","other":"C13241"}
+{"id":"C13310","town":"bar0-hamlet-calm-rand-7","sev":"LOW","kind":"PAIR","why":"A second favour asked before repaying the first puts one two ahead; the line before says neither has ever been more than one ahead","other":"C13309"}
+{"id":"C13758","town":"bar0-hamlet-under_siege-rand-6","sev":"LOW","kind":"PAIR","why":"An ordinary road scene of a dog driving animals across the road, but under siege livestock are penned between houses and nothing moves on the road","other":"C13757"}
+{"id":"C13759","town":"bar0-hamlet-under_siege-rand-6","sev":"LOW","kind":"STATE","why":"Lanes of stalls each with a speaker, in a hamlet of 54 with a monthly periodic market, while trade has stopped under the siege","other":"C13817"}
+{"id":"C13783","town":"bar0-hamlet-under_siege-rand-6","sev":"MED","kind":"STATE","why":"Says anyone can sell at the market now; under siege nothing comes in by road and trade has stopped","other":"C13817"}
+{"id":"C13784","town":"bar0-hamlet-under_siege-rand-6","sev":"LOW","kind":"STATE","why":"'Keeps few institutions': HOUSES lists fifteen, including a market, pawnbroker, mine, quarry and dairy","other":""}
+{"id":"C14504","town":"bar0-hamlet-under_siege-rand-7","sev":"LOW","kind":"STATE","why":"'Keeps few institutions': HOUSES lists twelve, including an alehouse, stable yard, hunter's lodge, charcoal burner and smuggling waypoint","other":""}
+{"id":"C14655","town":"bar0-hamlet-under_siege-rand-7","sev":"MED","kind":"LACKS","why":"'The guild adjudicates conflicts': HOUSES lists no guild; only a smuggling waypoint, in a hamlet of 86","other":""}
+{"id":"C14664","town":"bar0-hamlet-under_siege-rand-7","sev":"LOW","kind":"LACKS","why":"Forgiveness 'delivered by clergy': the hamlet has no church or clergy of its own; HOUSES has only access to a parish church","other":""}
+{"id":"C14930","town":"bar0-hamlet-under_siege-rand-7","sev":"LOW","kind":"LACKS","why":"Names 'corrupt clergy' and the church's cover for fraud; the hamlet has no church or clergy, only access to a parish church elsewhere","other":""}
+{"id":"C15119","town":"bar0-hamlet-under_siege-rand-7","sev":"LOW","kind":"STATE","why":"Compact 'held for a generation', yet PAST dates it only 17 years ago","other":""}
+{"id":"DONE","lines":2380,"blocks":4,"flags":12}
