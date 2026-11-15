@@ -62,9 +62,10 @@ import { resourceShortageImport } from '../resourceSemantics.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import { serviceRowsOf } from '../dossier/entityLinks.js';
+import { chainCrisisStateShown } from './chainStateShown.js';
 import {
   SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN,
-  SIEGE_TWINS_ON_OFFER, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, NONE,
+  SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, NONE,
 } from '../../data/crisisDependence.js';
 
 /** The crises this leaf reads, in the order a row's mark takes them. @type {ReadonlyArray<string>} */
@@ -211,7 +212,7 @@ export function serviceRowDependence(settlement, row) {
   const own = serviceDependenceOf(row);
   const house = houseOfServiceRow(settlement, row);
   if (!house || isCustom(house)) return own;
-  const houseDeps = houseDependenceOf(house);
+  const houseDeps = houseDependenceIn(settlement, house);
   if (houseDeps.length === 0) return own;
   const id = typeof house.catalogId === 'string' && house.catalogId ? house.catalogId : catalogIdForName(typeof house.name === 'string' ? house.name : null);
   const name = typeof row?.name === 'string' ? row.name : '';
@@ -229,6 +230,40 @@ export function serviceRowDependence(settlement, row) {
 export function houseDependenceOf(inst) {
   const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
   return id && Object.prototype.hasOwnProperty.call(HOUSE_DEPENDENCE, id) ? HOUSE_DEPENDENCE[id] : NONE;
+}
+
+/** The chain states a card prints as working (`chainStateShown.js`'s own set). */
+const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
+
+/**
+ * What a house lives on IN THIS PLACE (SV8b): its line, but where a siege is in force and the town's own record holds its
+ * work beyond the gates going on (`crisisDependence.js :: GATES_WORK_HELD_BY_RECORD`), that work is `field work`
+ * (curtailed), or nothing the siege touches where the chain's card keeps a working state.
+ * @param {object | null | undefined} settlement @param {{ catalogId?: unknown, name?: unknown }} inst
+ * @returns {ReadonlyArray<string>}
+ */
+export function houseDependenceIn(settlement, inst) {
+  const deps = houseDependenceOf(inst);
+  if (!deps.includes(GATES) || !settlement || typeof settlement !== 'object') return deps;
+  const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
+  const rule = id && Object.prototype.hasOwnProperty.call(GATES_WORK_HELD_BY_RECORD, id) ? GATES_WORK_HELD_BY_RECORD[id] : null;
+  if (!rule || !stoppingCrisesOf(settlement).includes('under_siege')) return deps;
+  const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null, activeChains?: unknown } | null }} */ (settlement);
+  /** @type {'curtailed' | 'open' | null} */
+  let held = null;
+  if (rule.foodSource) {
+    const sources = s.economicState?.foodSecurity?.foodRecord?.foodSources;
+    if (Array.isArray(sources) && sources.includes(rule.foodSource)) held = 'curtailed';
+  }
+  if (rule.waterGrounds && typeof inst?.name === 'string') {
+    const chains = /** @type {Array<{ resourceKey?: unknown, processingInstitutions?: unknown }>} */ (Array.isArray(s.economicState?.activeChains) ? s.economicState.activeChains : [])
+      .filter((c) => c && rule.waterGrounds?.includes(String(c.resourceKey)) && Array.isArray(c.processingInstitutions) && c.processingInstitutions.includes(inst.name));
+    if (chains.some((c) => CARD_WORKING.has(chainCrisisStateShown(c, settlement)))) held = 'open';
+    else if (chains.length) held = 'curtailed';
+  }
+  if (!held) return deps;
+  const rest = deps.filter((d) => d !== GATES);
+  return held === 'open' ? rest : [...rest, FIELD_WORK];
 }
 
 /**
@@ -252,7 +287,7 @@ export function incomeDependenceOf(income) {
 }
 
 /** Each kind of row's reader of the table (a service row reads its house's line too, SV1). @type {Readonly<Record<string, (row: Record<string, unknown>, settlement: object | null | undefined) => ReadonlyArray<string>>>} */
-const DEPENDENCE_OF = Object.freeze({ service: (row, settlement) => serviceRowDependence(settlement, row), house: houseDependenceOf, chain: chainDependenceOf, income: incomeDependenceOf });
+const DEPENDENCE_OF = Object.freeze({ service: (row, settlement) => serviceRowDependence(settlement, row), house: (row, settlement) => houseDependenceIn(settlement, row), chain: chainDependenceOf, income: incomeDependenceOf });
 
 /**
  * Is this row's description the twin written for this crisis?

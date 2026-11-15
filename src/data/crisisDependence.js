@@ -1317,6 +1317,26 @@ export const GROUNDS_WORKED_OFF_CHAIN = Object.freeze({
 });
 
 /**
+ * THE WORK BEYOND THE GATES THE RECORD HOLDS GOING ON UNDER A SIEGE (BAR3-SERVICES-3, the chair's ruling SV8b of
+ * 2026-11-15; vetoable by the owner). A house declared `beyond the gates` is stopped by a siege, UNLESS the town's own
+ * record reads that work as going on under this siege, by the fact named here for the house:
+ *   foodSource   the food record counts this source in the share the town still grows under the siege
+ *                (`foodSecurity.foodRecord.foodSources`): the hunter's lodge, where it counts game;
+ *   waterGrounds a supply chain the house works on one of these grounds (`economicState.activeChains`, the house among
+ *                its `processingInstitutions`) is on the record: its card's own state under the siege
+ *                (`chainStateShown.js :: chainCrisisStateShown`) bears it: a working state (a port's open sea,
+ *                `seaOpenTo`) leaves the house unmarked; any other ("impaired", "vulnerable") curtails it.
+ * Where the record holds it so, the house reads "Curtailed by the siege." (its work is `field work`, SV8) or unmarked;
+ * where the record cannot tell (no such source, no such chain), "Stopped by the siege." stands. Keyed by catalogue id.
+ * @type {Readonly<Record<string, Readonly<{ foodSource?: string, waterGrounds?: ReadonlyArray<string> }>>>}
+ */
+export const GATES_WORK_HELD_BY_RECORD = Object.freeze({
+  hunter_s_lodge: Object.freeze({ foodSource: 'game' }),
+  fishing_community: Object.freeze({ waterGrounds: Object.freeze(['fishing_grounds', 'river_fish']) }),
+  fisher_s_landing: Object.freeze({ waterGrounds: Object.freeze(['fishing_grounds', 'river_fish']) }),
+});
+
+/**
  * A SIEGE TWIN THAT SAYS THE HOUSE GOES ON, THINLY, IS A ROW STILL ON OFFER (BAR3-SERVICES-3, the chair's ruling SV7b of
  * 2026-11-15; vetoable by the owner). A service row whose description is the siege's own twin
  * (`institutionServices.js :: SERVICE_DESC_SIBLINGS`) says in its own words what the siege did to it. Where those words

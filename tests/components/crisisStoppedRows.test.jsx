@@ -107,7 +107,7 @@ const S8_HOUSES = [
   ['r2s-under_siege-village-0', 'fish_market', SIEGE],
   ['r2s-under_siege-metropolis-0', 'cemetery_network', SIEGE_PARTLY], // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on
   ['r2s-under_siege-city-0', 'chroniclers_exchange', SIEGE],
-  ['r2s-under_siege-hamlet-3', 'hunter_s_lodge', SIEGE],
+  ['r2s-under_siege-hamlet-3', 'hunter_s_lodge', SIEGE_PARTLY], // BAR3-SERVICES-3 SV8b (2026-11-15): re-keyed, the town's food record counts game under the siege
   ['r2s-under_siege-village-0', 'cartographer_s_workshop', SIEGE_PARTLY], // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on
   ['r2s-under_siege-metropolis-0', 'stone_quarry', SIEGE],
   ['r2s-plague_onset-town-0', 'carriers_guild', OUTBREAK],

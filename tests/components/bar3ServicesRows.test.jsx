@@ -33,8 +33,11 @@
  *     reads "Curtailed by the siege.";
  *   · (SV7b) the coaching inn, whose "Lodging" is the siege's twin that goes on ("the rooms stand mostly empty"), reads
  *     "Stopped by the siege." and not "Curtailed by the siege.";
+ *   · (SV8b) a fisher's landing whose fishing chain the record holds (its card "impaired") or a hunter's lodge whose
+ *     town's food record counts game reads "Stopped by the siege.", not "Curtailed by the siege.";
  *   · a KEEP pair stops: the same field houses unmarked in a calm town and under an outbreak, the famine's own mark on
- *     farmland, and the external mill (its one row the siege's twin that stops: "ground by hand at home") "Stopped".
+ *     farmland, the external mill (its one row the siege's twin that stops: "ground by hand at home") "Stopped", and a
+ *     fishing community with no chain on its water and a hunter's lodge with no game on the food record "Stopped".
  */
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -229,6 +232,10 @@ const FIELD = [
   ['r2s-under_siege-city-0', 'salt_works', 'Salt production'],
   ['r2s-under_siege-city-3', 'mine', 'Raw extraction'],
   ['r2s-under_siege-metropolis-0', 'charcoal_burner', 'Charcoal supply'],
+  // SV8b: the work beyond the gates the record holds going on (a fishing chain the landing works; game on the food record)
+  ['r2s-under_siege-hamlet-0', 'fisher_s_landing', 'Fresh fish'],
+  ['r2s-under_siege-hamlet-3', 'hunter_s_lodge', 'Game meat'],
+  ['r2r-village-21', 'fisher_s_landing', 'Salted fish'],
 ];
 /** (seed, a coaching inn whose "Lodging" is the siege twin that goes on). */
 const ON_OFFER = [
@@ -241,6 +248,9 @@ const KEEP_FIELD = [
   ['r2s-plague_onset-village-0', 'farmland', null],
   ['r2s-famine-village-0', 'farmland', 'Scarce in the famine.'],
   ['r2r-thorp-45', 'access_to_external_mill', SIEGE],
+  // SV8b: the record cannot tell (no chain on the water; no game on the food record): "Stopped by the siege." stands
+  ['r2s-under_siege-thorp-0', 'fishing_community', SIEGE],
+  ['r2s-under_siege-town-1', 'hunter_s_lodge', SIEGE],
 ];
 
 /** The siege's partial mark before a description, a short mark (S5) between them where the house is short too. @param {string} text @param {string} desc */

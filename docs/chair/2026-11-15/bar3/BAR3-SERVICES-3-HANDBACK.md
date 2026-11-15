@@ -12,6 +12,10 @@ file stay as they are. The second tree of my books is 52f0a1684.
 - SV7b (20:55 UTC): a siege twin that says the house goes on, thinly, is a row still on offer (its house reads
   "Curtailed by the siege." by SV7's rule); a twin that says the service stopped leaves the house "Stopped".
 
+- SV8b (21:45 UTC): the fishing houses and the hunter's lodges follow the record's own reading (copied whole under
+  batch 4).
+- THIS IS MY HAND-BACK: by time (about eighty minutes); after this push I push nothing more.
+
 ## Batch 3 — SV8 and SV7b, one rule each at the leaf
 
 ### SV8: THE MEASURE FIRST (`sv8.mjs`, `grown.mjs`: the 720 at d29d2fb43, every live field house of a siege town)
@@ -100,9 +104,57 @@ Read whole (`inventory_diff.py before.json after.json`): sentences 30033 -> 3004
 - THE INHERITORS (10, all read): the nine "(curtailed)" door rows and "Curtailed by the siege." itself, in the towns
   above; each is the cure's own line. Nothing else moved.
 
+## Batch 4 — ruling SV8b (the chair's, 21:45 UTC; vetoable by the owner)
+
+THE RULING, AS SENT: "THE MARK FOLLOWS THE RECORD'S OWN READING, AS FOR THE FIELDS: (a) THE FISHING HOUSES (10): they read
+the same fact the chain's own card reads: where the record holds the water open under this siege (the display's leaf for
+an open sea, `seaOpenTo`, or the chain's own state), the house is Curtailed or unmarked as that fact bears; where the
+record holds the water closed, Stopped stands; (b) THE HUNTER'S LODGES (3): Stopped stands (the grounds lie beyond the
+walls) UNLESS the food record's share under the siege counts game for that town: then Curtailed. Measure each town first;
+if the record cannot tell, they stay as they are and you say so."
+
+THE MEASURE (`sv8b.mjs`, the 720 at b47e7ac74: every fishing community, fisher's landing and hunter's lodge of a siege
+town; all 13 read "Stopped by the siege." before):
+- FISHING (10): none is a port (`tradeAccess` river, road or crossroads), so `seaOpenTo` opens no water. THREE work a
+  fishing chain on the record whose card reads the work going on: r2r-village-21 (fishing_grounds: running -> impaired),
+  r2s-under_siege-hamlet-0 (river_fish: impaired; fishing_grounds: vulnerable), r2s-under_siege-village-1 (river_fish,
+  depleted: vulnerable): CURTAILED. SEVEN work no chain on the record (r2r-thorp-45, r2r-thorp-58,
+  r2s-under_siege-thorp-0, -thorp-3, -hamlet-1, -hamlet-2, -village-3): THE RECORD CANNOT TELL: "Stopped by the siege."
+  STANDS. (For the chair: the food record counts fish in the grown share of all ten; the ruling reads the chain, so I did
+  not cure by the food record.)
+- HUNTING (3): r2s-under_siege-hamlet-3's food record counts game (`foodSources` = game): CURTAILED.
+  r2s-under_siege-town-0 (fish only) and -town-1 (none): STOPPED STANDS.
+
+THE CURE: `crisisDependence.js :: GATES_WORK_HELD_BY_RECORD` (hunter_s_lodge: foodSource game; fishing_community and
+fisher_s_landing: waterGrounds fishing_grounds, river_fish) and `crisisStoppedRow.js :: houseDependenceIn`. Under a siege,
+where the town's record holds the house's work beyond the gates going on, the house's `beyond the gates` becomes
+`field work` (SV8's curtailment: "Curtailed by the siege."). Where the chain's card keeps a working state (a port's open
+sea: no town of the 720), it is dropped instead. The house's rows follow it by SV1. AFTER (the leaf over the same
+corpus): 4 houses read "Curtailed by the siege." (3 landings, 1 lodge), with their 6 rows (Fresh fish 3, Salted fish 1,
+Game meat 1, Hunting guide hire 1); the 9 others keep "Stopped by the siege.".
+
+THE GUARD: `bar3ServicesRows.test.jsx` batch 3's FIELD table + 3 pairs (r2s-under_siege-hamlet-0 fisher's landing "Fresh
+fish", -hamlet-3 hunter's lodge "Game meat", r2r-village-21 fisher's landing "Salted fish"): each red at b47e7ac74, and so
+at 52f0a1684, on the tab, the PDF, the Journal and the Services tab. KEEP_FIELD + 2 (r2s-under_siege-thorp-0 fishing
+community, -town-1 hunter's lodge: "Stopped by the siege."), green at both. 8 of 8 green at the tip.
+
+THE PIN MOVED BY THE DECLARED CURE (a guard of the line, re-keyed by identity beside a dated note):
+`tests/components/crisisStoppedRows.test.jsx`, S8's r2s-under_siege-hamlet-3 hunter_s_lodge: "Stopped by the siege." ->
+"Curtailed by the siege." (11 of 11 green).
+
+GATES (batch 4, at the tip, each alone): eslint exit 0; `typecheck:domain:strict` exit 0; `typecheck:ratchet` OK (167,
+ceiling 167). Green: `engineCoreLazyEdge` (the new import `crisisStoppedRow.js -> ./chainStateShown.js`, a display leaf
+beside it), `factLayers`, `layerBoundaries`, `writerReach` (no register row moved), `observedShapeReaders`,
+`chainPrintSites`, `ruinFilterRoster`, `tuningRegister`, `presumedThings`, `proseWiringCensus`, `crisisStoppedRows`,
+`bar2ServicesRows`, `displayEconCrisisMarks`, `journalMarksCrisisRows`, `tailExportsPdf2Batch2`,
+`generationWorkerLazy`. The three corpus walkers are red at the base only, naming neither of my files. NOT RE-RUN: the
+census after batch 4 (my budget). The cure moves no record, and its reach is measured by the tree's own leaf over the
+after corpus (above). A successor runs `census3.sh` at the tip and `inventory_diff.py after.json after4.json`; expected:
+the 6 rows' door words "(stopped)" -> "(curtailed)" and "Curtailed by the siege." in 4 towns more at most, nothing else.
+
 ## THE BOOKS (amendments 2, 10 and 11: my tip against 52f0a1684)
 
-- (a) the files that pin what I changed (`HOUSE_DEPENDENCE`, `rowStoppedBy`, `houseRowGoesOn`, `markedOnPage`, the
+- (a) the files that pin what I changed (`HOUSE_DEPENDENCE`, `rowStoppedBy`, `houseRowGoesOn`, `houseDependenceIn`, `markedOnPage`, the
   marks): all green at the tip (above). None is red, so none was run at 52f0a1684.
 - (b) THE LAW SUITES, each alone at the tip through `gate-tail.sh` (my predecessor's "not run" first): GREEN:
   `defenceFactReaders` (22), `noLegacyFactionReaders` (4), `siteCoherenceRatchet` (9), `tuningRegister` (76),
@@ -115,7 +167,8 @@ Read whole (`inventory_diff.py before.json after.json`): sentences 30033 -> 3004
   `seedLoopTotality.walker` (2 failed), `proseDrawnAnchors.walker` (1 failed): the same bar2 offenders my predecessor
   named; none is my file.
 - A LAW RED AT MY TIP ONLY: none.
-- THE BOOKS MY CURES MOVE: NONE. My batch changes `src/data/crisisDependence.js` and
+- THE BOOKS MY CURES MOVE: NONE (no golden, digest, count or register row; the pins moved are guards of the line,
+  re-keyed by identity). My batch changes `src/data/crisisDependence.js` and
   `src/domain/display/crisisStoppedRow.js`, which no generator imports (`grep -rl` under `src/`: the tabs, the PDF, the
   Journal, `economicsCrisisMarks.js`, and a comment row of `goods.schema.js`): no record moves: 0 OF THE 525 REFERENCE
   CONFIGURATIONS (by construction; against 52f0a1684 the generator tree differs only by my first predecessor's
@@ -127,18 +180,16 @@ Read whole (`inventory_diff.py before.json after.json`): sentences 30033 -> 3004
 | line | towns it is read in |
 |---|---|
 | (SV8) "Curtailed by the siege." on a field house (farmland, subsistence farming, charcoal burner, mine, salt works, dairy farmer, woodcutter's camp, shepherd, beekeeper) and on its rows, the door word "curtailed" | r2s-under_siege-thorp-0 (thorp: Subsistence farming), r2s-under_siege-village-0 (village: Farmland "Grain at harvest", Dairy farmer "Fresh milk", Charcoal burner "Charcoal supply"), r2s-under_siege-metropolis-0 (metropolis: Charcoal burner) |
+| (SV8b) "Curtailed by the siege." on a fisher's landing whose fishing chain the record holds, and on a hunter's lodge whose food record counts game; on their rows, the door word "curtailed" | r2s-under_siege-hamlet-0 (hamlet: Fisher's landing), r2s-under_siege-hamlet-3 (hamlet: Hunter's lodge), r2r-village-21 (village, a siege: Fisher's landing); the largest it reaches is a village |
 | (SV7b) "Curtailed by the siege." on a coaching inn whose "Lodging" is the siege twin that goes on | r2s-under_siege-town-0 (town), r2s-under_siege-metropolis-0 (metropolis), r2r-metropolis-14 (metropolis, a siege) |
 
 ## Left, in order (for a successor)
 
-1. NAMED FOR THE CHAIR (SV8's one contrary voice, not my files): the siege's viability note "Field work and trade have
-   stopped, ..." (`src/data/stressTypes.js`) and the food note "What is already in store is all there will be until it
-   lifts." (`src/generators/economy/foodBalance.js`) beside the page's "about a third of the usual local food production"
-   in every siege town (31 of the 720).
-2. SV8'S SIBLINGS, FOR A RULING (not changed by me: declared "beyond the gates", stopped, by earlier seats): the hunter's
-   lodge (S8; 3 siege towns of the 720) and the fishing community (4) / fisher's landing (6) (S3), all "Stopped by the
-   siege.", whose game and catch the same record keeps a third of under a siege (`sv8sib.mjs`). By SV8's reading they would read "Curtailed by the siege."; a port's sea grounds are open to it
-   (`chainStateShown.js :: seaOpenTo`). Measure them with `sv8.mjs` (add the ids) before any cure.
+1. THE CENSUS AFTER BATCH 4 (owed: see batch 4): `census3.sh` at the tip, `inventory_diff.py` against my `after.json`.
+2. SV8b'S ONE OPEN QUESTION, FOR THE CHAIR: the seven fishing houses whose water runs no chain on the record keep
+   "Stopped by the siege." though the food record counts fish in the share those towns still grow (the ruling reads the
+   chain; I did not cure by the food record). The two lines I named (the siege's "Field work and trade have stopped";
+   the stores line) are routed by the chair (the places seat; the economy branch): not mine.
 3. The first hand-back's items 3 and 4: r2s-plague_onset-thorp-2's depleted fishery with no chain; the salt works on
    spent flats beside live fishing grounds; the mine on no ore ground (r2r-metropolis-14 and r2s-under_siege-metropolis-3
    work depleted iron deposits: they now read "Curtailed by the siege." too). NOT STARTED (my budget).
@@ -152,6 +203,7 @@ directory; `census3.sh <tree> <out> 4 --count-only` (about 15 minutes here; NOTE
 each worker loads the code once at its start: never edit the tree's `src/` while a run is in its births); `inventory.py
 <out> <json>`. My measures (each a few lines over `corpus.ndjson.gz` with the tree's own leaf, `TREE=<tree>
 CORPUS=<out>/corpus.ndjson.gz node <script>`): `sv8.mjs` (every field house of a siege town: its mark, the grown share,
-its chains' states as the card prints them, its rows' marks), `grown.mjs` (the siege towns' grown shares and every
+its chains' states as the card prints them, its rows' marks), `sv8b.mjs` (the fishing houses and hunter's lodges of siege towns: access, grounds, food sources, chains as the card
+prints them, marks), `grown.mjs` (the siege towns' grown shares and every
 own-ground chain's state), `sv7b.mjs` (the houses beside a siege twin, by twin, with the house's mark), `keep.mjs` (the
 field houses by crisis and mark).
