@@ -1,0 +1,7 @@
+{"id":"C26753","town":"bar0-town-calm-rand-7","sev":"LOW","kind":"STATE","why":"land held in common kin by kin; FOUNDING says farmland granted to a favoured noble, and INCOME has Property Rents 8%","other":""}
+{"id":"C26792","town":"bar0-town-calm-rand-7","sev":"MED","kind":"PAIR","why":"authority's right to rule 'openly and widely questioned'; GOVERNMENT says Stable, legitimacy Endorsed, score 78","other":"C26819"}
+{"id":"C27440","town":"bar0-town-calm-rand-7","sev":"MED","kind":"PAIR","why":"merchants boycott Council, both sides acting as if other lost; QUARRELS has Council~Merchant Guilds subordinate, stable; Jelena heads both; Stable government","other":"C27484"}
+{"id":"C27624","town":"bar0-town-calm-rand-7","sev":"LOW","kind":"PAIR","why":"medical role of magic 'common' and others 'occasional'; page says no arcane practitioners, reliance none, nothing structural depends on arcane work, medical care clerical","other":"C27603"}
+{"id":"C28718","town":"bar0-town-calm-rand-8","sev":"LOW","kind":"LACKS","why":"watch 'reports to the council'; GOVERNMENT and HOUSES list no council, only a Town Mayor","other":""}
+{"id":"C28740","town":"bar0-town-calm-rand-8","sev":"LOW","kind":"PAIR","why":"says hearings can fine an offender; Legal Infrastructure printed None, no court or hearing house in HOUSES or services","other":"C28778"}
+{"id":"DONE","lines":2510,"blocks":2,"flags":6}
