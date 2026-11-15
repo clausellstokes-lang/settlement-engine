@@ -212,6 +212,16 @@ re-computed equal to the after pages in all 720.
   Theocratic Council given the Grand Council's guild-masters line, 6), 17039 (= 18061).
 
 ## What is left of this seat's files (by width, measured at 40238d3ab)
+- FIRST (the chair's rulings P16 and P17, 00:45 UTC, reached this seat only at 01:27, after its count; each vetoable by the
+  owner; NOT STARTED): (P16) G2, G3 AND G5 GRANTED, from the record seat's patch (lane/record-measure-2-2026-11-14,
+  docs/chair/2026-11-14/probes/RECORD-MEASURE-2/g235.patch: rulingStructure.js, governanceNarrative.js; its report's row and
+  paragraph g): a bare "Stable" beside a Legitimacy Crisis reads "Tense (the seat has lost the people's trust)" (9 towns;
+  `stability` only); the two theocracy words need a religious seat or a religious power of weight (8 and 8: rows 16601,
+  16602); "strong military presence" needs a force (3: row 15278). Each moves its own label and nothing else; no new red; ONE
+  commit, a declared move; the new stability word listed for the owner's veto. (P17) DA'S LAW FOR THE ARCANE COUNCIL: it
+  governs in 6 towns with no arcane house: a government of a kind only where a house of that kind stands, else the next
+  priority, else the size's civic seat; its own commit with its field diff. NOTE for both: rulingStructure.js is at F31's
+  ceiling (799 lines by wc), so a line must be saved or folded.
 - governanceAccount.js: P3 NOT MET: powerNameInProse does not read powerSentenceName: "The Military/Guard takes its orders no
   longer." (36 towns), "... is at odds with it." (24), "... no longer takes its orders." (18) and lists: 48 towns print "The
   Military/Guard" in the account. The cure: powerNameInProse reads the leaf (one line). NEXT, its own batch. Then the
