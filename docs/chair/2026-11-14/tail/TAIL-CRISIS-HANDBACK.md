@@ -1277,10 +1277,51 @@ the metal in hand: not read as false.
 
 ## What is left (after this seat)
 
-- K24 and K25 done (K25 (b) measured 0). K26 NAMED for the three surfaces; K27 PARKED for a word. The after census and the
-  gates' tail are recorded below once read.
+- K24 and K25 done (K25 (b) measured 0). K26 NAMED for the three surfaces; K27 PARKED for a word.
+- **FOR THE CHAIR (told at the hand-back, the batch already pushed):** where a crisis's own party or written-into power was
+  stored untouched but the page showed it "already at odds" (K12's true quarrel line), it now shows its crisis stake instead:
+  **44 rows in 34 towns** (Merchant Guilds 19, Craft Guilds 9, Grain Holders 5, …). Both lines are true; the row keeps one
+  stake, the crisis's own. If the quarrel should win, `stakeShown` takes it back in one condition.
 - Unchanged from TAIL-CRISIS-5 (under five towns, or parked): K16 11705 14131 (2), X9 20882 (3), 07387 (2), 27012 (1), 13909
   (3); the Germanic "built in timber and stone" on desert ground (4); the Tonight sheet's "Import-Dependent" under a siege (2);
   01034 and X9 01620 28443 30535 (K8's wall); the stored cast rows; the five nextInLine rows; 20893 (DEFECON's condition);
   HISTORY's succession-void viabilityNote (31) and the plague's market note; the Economics tab's one-argument
   `foodStoresWords` call (K7).
+
+## Batch 8 measured on the page (census at aa78d1ec9, `runs/c0`, against b54be3eca, `runs/c1`; the inventory diff)
+
+- **Tabs:** 30,047 → 30,034 distinct sentences; gone 67, new 54, in fewer towns 24, in more 3, moved 0. **Exports (PDF,
+  Journal):** 36,095 → 36,061; gone 142, new 108, fewer 34, more 3.
+- **The rows:** every "<P> has/have no stake yet" fold, **468 printings in 47 folds → 0** on the tabs (**936 → 0** on the
+  exports); "it could side with either camp" 157 → 0 and "they could side with either camp" 125 → 0 (the untouched reason,
+  printed only on those rows). K24's three: Grain Holders 10, Quarantine Council 9 (+2 re-drawn), The Inquiry 8, each now
+  "split · <its reason>".
+- **Other sentences in fewer towns:** the "is/are already at odds" rows and their quarrel reasons, 44 rows in 34 towns
+  (above, for the chair); nothing else.
+- **THE INHERITORS READ** (57 on the tabs, every one this batch's own: "<P> split" and the 21 reasons of the veto list; read in
+  r2r-city-3, r2r-village-24, r2r-city-51 and the r2s towns of the test): no line outside the batch inherits. "Religious
+  Authorities split" 57 → 63 (the war's pastoral sentence); "Third Bloc (Neutrals) split" prints its bracket (K26's shape, the
+  surfaces').
+
+## Gates (at the tree against aa78d1ec9)
+
+- eslint on the touched files: 0. typecheck:domain:strict: 0 (1113, ceiling 1113). typecheck:ratchet: OK (167, ceiling 167).
+- The presumed-things walker `--check`: identical to the base's (149 lines; the base's own exit 1, carried) after b54be3eca.
+- The twelve-birth grid `page-census.mjs --grid`: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), carried.
+- Every test file naming crisisCast, STAKE_REASONS, deriveStakes, crisisPage, composeCrisisPage, CrisisTab, CrisisSections or
+  journalPages (75 files): **10 failing at the base, the same 10 at the tree** (observedShapeReaders.walker ×7,
+  institutionBudgetPromise, tonightOwnGoal, and one more of the base's: CARRIED); the one new red, `crisisTab.test.jsx` (a row
+  per stored stake), re-keyed by identity in ef2d0b07a; the batch-8 test 58 of 58.
+
+## Registers named stale (this seat)
+
+- The sovereignty walker's estate file count: one more test file (tests/domain/tailCrisisBatch8.test.js). Re-taken at the close.
+
+## How this seat's instruments were made
+
+As TAIL-CRISIS-5's (births-only, the census with `--count-only` stopped at the count, `inventory.py`/`inventory_diff.py`), with:
+`probes/k25b.mjs` (every untouched printing classed by the tag tree), `probes/parties.mjs` (every power a crisis pushes or
+amends, by kind, stored untouched / on the roster), `probes/fielddiff.mjs` (by family and path, array indices folded),
+`probes/moved.mjs` (each stake whose reason moved), `probes/veto.mjs` (each new line's towns), `probes/iron2.mjs` (K27).
+THE TAG TREE: a worktree at the base whose `rulingStructure.js` wraps `applyStressEventFactions` (each new power gets
+`__raised`, each amended one `__amended`, `__powerMoved`): births-only over the 720 (about a minute); never committed.
