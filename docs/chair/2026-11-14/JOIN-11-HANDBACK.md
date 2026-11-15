@@ -84,6 +84,7 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 | 2 | lane/tail-close-presumed-2026-11-15 | 2578b9359 (08:10; origin tip = the hash named) | 2ff8ab7ee | 19d50b8b0 | none; no file both sides moved | 2 files outside docs/ (the two presumed registers, its side); run alone: presumedThings.walker 41/43, two ARM 1 reds from the src point (§3) |
 | 3 | lane/tail-close-src-2026-11-15 | 784906a11 (08:44; origin tip = the hash named) | 57cf8e89a | 10e7c76a8 | none; no file both sides moved | 16 files outside docs/; declared-move commit 1393aebb8 (golden carried); run alone: factLayers.walker 3 failed/15 (not risen), standingReadsTheRivalItRead 12/12, settlementQuickGuide 18/18, presumedThings.walker 41/43 (the same two as point 2) |
 | 4 | lane/close-layer-cycle-attempt-2026-11-15 | 36fe6f10c (08:51; origin tip = the hash named) | 061db1367 | 416be57d1 | none (vite.config.js and the layer register/shared merged clean); no file both sides moved | 9 files outside docs/; run alone: layerBoundaries 8/8, engineCoreLazyEdge 3/3, factLayers.walker 1 failed/15 (READERS; 3 before), chainPrintSites 6/6, ruinFilterRoster 12/12, defenceFactReaders 1 failed/22 (red alike before) |
+| 5 | lane/tail-close-doors-2026-11-15 (first pass) | 84a9f46d7 (08:56; origin tip = the hash named) | 04149c5ef | 511f9307d | none; no file both sides moved: its side whole | 20 files outside docs/ (registers, censuses, edge bundles, baselines, landingFixture.js); run alone: poolDominance 16/17, pageCensus 14/14, proseCorpusBytes 18/18, tuningRegister 75/76, engineBundleReplay 5/7 (1 red, 1 skipped) |
 
 ## 3. Every code resolution
 
@@ -94,6 +95,8 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 **Point 3, the files the chair named run alone** (close-src 784906a11 over its point 1; base 57cf8e89a; no conflict; no file both sides moved): `factLayers.walker` 3 failed / 15, the same three as before (not risen); `standingReadsTheRivalItRead` 12/12; `settlementQuickGuide` 18/18; `presumedThings.walker` 41/43, the same two ARM 1 reds as point 2, no new row (`/home/user/j11out/t3.*.log`).
 
 **Point 4, the files the chair named run alone** (the layer cut 36fe6f10c, ruling T29; base 061db1367; no conflict: `vite.config.js`, `factLayers.register.json` and `factLayers.shared.mjs` were not moved by the joined side since the base, so the branch's side stands whole): `layerBoundaries` 8/8, `engineCoreLazyEdge` 3/3 (both green: no abort); `factLayers.walker` 1 failed / 15 (3 before: the strata and LEAVES arms turned green; the READERS arm stays red until the src seat's door); `chainPrintSites` 6/6; `ruinFilterRoster` 12/12; `defenceFactReaders` 1 failed / 22, red ALIKE at the line before (ae6f0adc8, probe `/home/user/j11probe`): `src/domain/display/defenseDisplay.js` reads 4 unbanked (`/home/user/j11out/t4.*.log`).
+
+**Point 5, the doors' first pass, the files the chair named run alone (counts only)** (84a9f46d7; base 04149c5ef; no conflict; no file both sides moved): `poolDominance.walker` 16/17 (red: "no ceiling sits loose above its measure"); `pageCensus.walker` 14/14; `proseCorpusBytes` 18/18; `tuningRegister.walker` 75/76 (red: "the measured tree matches the committed inventory exactly"); `engineBundleReplay` 5 passed, 1 failed, 1 skipped (red: "the espionage fence's 360-settlement driven corpus: bundle equals in-process"). Derived at an earlier tree: stale at the merged tree, expected by the chair, not a stop (`/home/user/j11out/t5.*.log`).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -305,6 +308,7 @@ JOIN-10's (by point):
 | golden | close-src (3) | DECLARED MOVE commit 1393aebb8 (the faith card names the Arcane Orders, ten towns; field diff in its body); d8b08402f strikes the culture's wrong-shape read |
 | `tests/lint/factLayers.walker.test.js` (READERS arm) | layer cut (4), close-src (1, 3) | 1 of 15 red at the merged tree (3 before the cut): the src seat's register door, at its last tip |
 | `tests/lint/defenceFactReaders.walker.test.js` (defenseDisplay.js reads 4, unbanked) | — (red at ae6f0adc8 before point 4, and after) | carried: the src or doors seat's register |
+| `poolDominance.walker` (a loose ceiling), `tuningRegister.walker` (the inventory), `engineBundleReplay` (the espionage fence's 360-town corpus) | tail-close-doors first pass (5) | stale at the merged tree (derived at an earlier tree): the doors' final pass re-derives them at the final tree |
 
 ## 5. Stops
 
@@ -329,4 +333,4 @@ A worktree at origin's tip (`git worktree add /home/user/j11wt -b join11 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed: points 1-4 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors (first pass; final pass LAST OF ALL); tail-record; tail-close-reach; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
+Landed: points 1-5 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors final pass LAST OF ALL; tail-record; tail-close-reach; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
