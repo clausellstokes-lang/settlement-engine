@@ -193,7 +193,7 @@ describe('SPATIAL_TEXT (spatialGenerator.js, inline T cells; carried through tex
   // (R-B1 widened to a cell key — the chair's ruling this lane makes, recorded in the lane doc).
   const guaranteed = (lineId, a) => a.startsWith('terrain:')
     || (a === 'institution: temple' && /\.(sacred|shrine)$/.test(lineId))
-    || (a === 'walls' && /^villageLayouts\.(hills|desert)(\.walled)?$/.test(lineId))
+    || (a === 'walls' && /^villageLayouts\.(hills|desert)(\.walled(\.palisade)?)?$/.test(lineId))
     || (a === 'garrison' && lineId === 'townLayouts.mountain.garrison');
   it('every declaring ledger line is declared in place, exactly', () => {
     expect(inlineArm('SPATIAL_TEXT', 'src/generators/spatialGenerator.js', guaranteed)).toEqual([]);
@@ -203,7 +203,8 @@ describe('SPATIAL_TEXT (spatialGenerator.js, inline T cells; carried through tex
     const by = (head) => [...found.entries()].filter(([k]) => k.startsWith(head)).map(([, v]) => v[0]);
     expect(by('Great river city: bridge quarter')).toEqual([{ needs: ['river', 'market'], excludes: [], crisis: [] }]);
     expect(by('${sacredSubject} and green above the tideline')).toEqual([{ needs: ['coast'], excludes: [], crisis: [] }]);
-    expect(by('Close-built stone houses below the ${sacredHouse}')).toEqual([{ needs: ['gate'], excludes: [], crisis: [] }]);
+    // J1 (2026-11-14): the gate line where a gate stands, its twin without the gate where none does.
+    expect(by('Close-built stone houses below the ${sacredHouse}')).toEqual([{ needs: ['gate'], excludes: [], crisis: [] }, { needs: [], excludes: ['gate'], crisis: [] }]);
   });
 });
 
