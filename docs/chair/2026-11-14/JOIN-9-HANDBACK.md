@@ -59,6 +59,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 - **05:32 UTC:** THE BOOT'S FIRST CUT HOLDS: lane/tail-ties-2026-11-14 at 4ec61102 (a merge of the line at 837cad90; the stores' span words moved to a pure leaf): LAND IT EARLY, THEN (g) as the prompt gives it; ONE LINE with the tip as soon as the ties point is on the line, another after (g).
 - **05:35 UTC:** THE ORDER FROM HERE: after ties and (g): history (8799101fd), corpus-eco (a8ea5ef8e), close-tests-a (432b0330), THEN ONE LINE with the tip; then close-tests-b (1b386d3f or later), close-tests-c (957152178), close-display (451d5c39 or later), close-src (f1e2a777e or later), corpus-def (b284cbe44 or later), then the moving builders (defecon, houses, powers-b) and the sweep's end line.
 - **05:36 UTC:** houses has ended (0907dccf2): land it with history (now 45e88f9aa), corpus-eco (read back: one last text-only commit after a8ea5ef8e) and tests-a, BEFORE the line with the tip.
+- **05:53 UTC:** THE BOOT IS GREEN ON ITS BRANCH: "LAND lane/tail-ties-2026-11-14 at d247d8a3" (or the later tip read back) AS THE NEXT POINT after the one in hand, then one line with the tip; then the first group as ordered and the line, then the rest. The economy generators' seat has ended (887ff8eec); a close seat is on that branch now: it lands as any moving branch.
 
 ## 2. The landings
 
@@ -73,6 +74,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 6 | lane/tail-history-2026-11-14 | 45e88f9aa (05:49) | abe0327eb | 554cb0ad5 | none | 7 files outside docs/; declared-move commits: ed9f3b549  (golden carried); merged clean though both moved: tests/generators/hookTablesDeclared.test.js  |
 | 7 | lane/tail-corpus-eco-2026-11-14 | 7ab28d3ef (05:52) | a8ea5ef8e | 744edb899 | none | 1 files outside docs/; declared-move commits: none (golden carried) |
 | 8 | lane/tail-ties-2026-11-14 | d247d8a32 (05:55) | 4ec61102f | 6587c20df | none | 6 files outside docs/; declared-move commits: none (golden carried) |
+| 9 | lane/tail-close-tests-a-2026-11-15 | 432b0330c (05:59) | 7efc76861 | e3c393377 | none | 58 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/components/displayEconRelianceFoodWords.test.jsx  |
 
 ## 3. Every code resolution
 
@@ -224,6 +226,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | `docs/content/wiring-census.json` | (g), after ties (5) | JOIN-8's row (stale; the door crashed at `crisisHooks.js:102`) is ANSWERED: the door ran under plain node after the ties point; re-taken by it in f468495d9; the corpus door's `--check` exit 0 at that tree. The close re-derives it once more on the final tree |
 | golden | history (6) | DECLARED MOVE commits ed9f3b549  (field diffs in their bodies) |
 | `tests/generators/hookTablesDeclared.test.js` | history (6) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
+| `tests/components/displayEconRelianceFoodWords.test.jsx` | close-tests-a (9) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
 
 ## 5. Item 2 at the landed tip
 
