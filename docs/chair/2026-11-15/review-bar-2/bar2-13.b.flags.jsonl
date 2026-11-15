@@ -1,0 +1,15 @@
+{"id":"C25594","town":"bar0-town-calm-rand-4","sev":"MED","kind":"STATE","why":"says no merchant guild exists; GOVERNMENT lists Merchant Guilds (Suppressed) as a power and PEOPLE seat Zenobia Flavius as its rank 1","other":"C25565"}
+{"id":"C25604","town":"bar0-town-calm-rand-4","sev":"MED","kind":"STATE","why":"says it lives off travellers' stabling and meals; FOUNDING reason is exploiting mineral deposits, exports are minerals, INCOME has no travel trade","other":""}
+{"id":"C25638","town":"bar0-town-calm-rand-4","sev":"MED","kind":"STATE","why":"Zenobia Flavius is the senior craft-guild master (council/guild head), not clergy; 'still lead the prayers every week' does not fit PEOPLE","other":""}
+{"id":"C25590","town":"bar0-town-calm-rand-4","sev":"LOW","kind":"PAIR","why":"Economic Resilience Adequate while Economic capacity is Critical and prosperity Struggling","other":"C25614"}
+{"id":"C25591","town":"bar0-town-calm-rand-4","sev":"LOW","kind":"STATE","why":"Magical Capability Weak where header gives magic high","other":""}
+{"id":"C25669","town":"bar0-town-calm-rand-4","sev":"MED","kind":"STATE","why":"calls Zenobia Flavius 'Mayor'; PEOPLE gives her only 'the senior craft-guild master'; GOVERNMENT lists no mayor, only a Town Council","other":""}
+{"id":"C26505","town":"bar0-town-calm-rand-5","sev":"MED","kind":"STATE","why":"hook under Timur Kovalev, the free-company captain, gives him a 'hierarchy' and 'theology'; PEOPLE lists no church office for him","other":""}
+{"id":"C26509","town":"bar0-town-calm-rand-5","sev":"MED","kind":"STATE","why":"hook gives Timur Kovalev (company captain, Free company hall) a shop with a note on it; PEOPLE gives him no shop","other":""}
+{"id":"C26642","town":"bar0-town-calm-rand-5","sev":"MED","kind":"LACKS","why":"titles Zorana Pavlov 'Captain-Mayor'; PEOPLE gives only 'the watch captain' (first of Military Council); GOVERNMENT lists no mayoralty","other":""}
+{"id":"C26982","town":"bar0-town-calm-rand-5","sev":"MED","kind":"STATE","why":"says taverns' meals depend on grain brought in; FOOD grown 100%, brought in 0%, imports cover None","other":""}
+{"id":"C27195","town":"bar0-town-calm-rand-5","sev":"MED","kind":"PAIR","why":"watch has 'irregular pay'; contradicts C27210 'keep its defenders paid' and 'accounts have money in hand' against GOVERNMENT 'chronically underfunded'","other":"C27210"}
+{"id":"C27313","town":"bar0-town-calm-rand-5","sev":"LOW","kind":"STATE","why":"card titles Filomena Bykov 'Wharfinger'; PEOPLE gives her 'the harbour master' (Harbour master's office); the wharfinger is Anastasia Klimov at the Docks","other":""}
+{"id":"C27210","town":"bar0-town-calm-rand-5","sev":"MED","kind":"PAIR","why":"says accounts have money and defenders are paid; GOVERNMENT stability says 'chronically underfunded' and C27195 gives the watch irregular pay","other":"C26433"}
+{"id":"C27645","town":"bar0-town-calm-rand-5","sev":"MED","kind":"PAIR","why":"treasury takes in more than it pays out; GOVERNMENT stability says 'militarised, chronically underfunded'","other":"C26433"}
+{"id":"DONE","lines":2246,"blocks":2,"flags":14}
