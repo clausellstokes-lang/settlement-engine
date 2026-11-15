@@ -91,7 +91,12 @@ const CEILINGS = Object.freeze({
   // RAISED 536 -> 539 (2026-11-08, MERGE-WAVE at the W1 ECO merge point) under the owner's delegation (ODQ §934.105), as
   // PEOPLE-LAND raised it: THREE names, W1 ECO's FAMINE_MOST_FROM = 50, BROUGHT_IN_FROM = 20, INFLUENCE_WEIGHS_FROM = 60 in
   // src/domain/display/stateProse/economyStateProse.js (725b62eb5), attributed by their DECLARED_GROWTH row.
-  UNREGISTERED_NAMED_CEILING: 539,
+  // RAISED 539 -> 541 (2026-11-15, TAIL-CLOSE-SRC-2) BY THE CHAIR'S RULING TU1, 2026-11-15, the close of the tail (vetoable by
+  // the owner); attributed: TWO names, each by its DECLARED_GROWTH row: SHADOW_CAPTURE_FLOOR = 11 in
+  // src/domain/display/shadowEconomyShown.js (63c3f2ae7 named it, 1f41c23dc set it: the capture share below which the
+  // shadow economy's block is silent) and INCOME_LEADER_FROM = 20 in src/generators/economy/prosperity.js (2ac50c55d: the
+  // income row share at or over which "Highly diversified" is not said). The names earn their register rows when the owner signs.
+  UNREGISTERED_NAMED_CEILING: 541,
   UNITLESS_TABLE_CEILING: 220,
   DECLARED_DIVERGENCE_CEILING: 5,
   PHANTOM_ALIAS_CEILING: 3,
@@ -118,7 +123,10 @@ const CEILINGS = Object.freeze({
   // proved in b46048140's body: the move is a RELOCATION and the estate's totals are conserved — foodLand.js's 7 bare
   // decimals and 4 named constants are exactly foodGenerator.js's 48 -> 41 and its four constants, the same literals.
   // Two ATTRIBUTED rows, each "relocation, net zero"; the six population ceilings above are not touched.
-  DECLARED_GROWTH_CEILING: 12,
+  // RAISED 12 -> 14 (2026-11-15, TAIL-CLOSE-SRC-2) BY THE CHAIR'S RULING TU1, 2026-11-15, the close of the tail; attributed: the
+  // two DECLARED_GROWTH rows above (shadowEconomyShown.js 63c3f2ae7, prosperity.js 2ac50c55d). This counts ATTRIBUTED rows, so it
+  // moves with them; the other population ceilings are not touched.
+  DECLARED_GROWTH_CEILING: 14,
 });
 
 const register = loadTuningRegister(ROOT);
