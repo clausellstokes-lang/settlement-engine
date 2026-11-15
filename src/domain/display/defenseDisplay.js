@@ -228,7 +228,7 @@ export function deriveCriminalStructure(settlement) {
   // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
   const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
     : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
-  return key ? ringNoteUnderStreetFighting(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r) : null; // TAIL-DEFECON-D: no ring the record names
+  return key ? ringNoteUnderStreetFighting(headedPowerAmongRivals(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r), r) : null; // TAIL-DEFECON-D: no ring the record names
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
@@ -982,3 +982,28 @@ function sickTendedByOne(settlement) {
   return (Array.isArray(people) ? people : []).some((p) => TENDS_THE_SICK.test(String(/** @type {{ role?: unknown } | null} */ (p)?.role ?? '')));
 }
 
+// ─── TAIL-DISPLAY-CIVIC-4 (V8): ONE HEADED POWER AMONG RIVAL GANGS (at the end of the file, so no line above moves) ───
+/**
+ * THE STRUCTURE WORD READS THE POWERS (V8, the chair's ruling of 2026-11-15: "lacks a single controlling authority" printed
+ * beside a criminal power whose first seat is a person of the roster, 26 of its 168 towns on the census's 720 at 6cf555801,
+ * each a Thieves' Guild keyed semi-organized by the roster's "Multiple criminal factions"). Where exactly one criminal power
+ * that does not govern stands, and a person of the roster holds its first seat, the note says the power answers to one head
+ * and the rival gangs contest its ground (the row's key and label stand: no single authority rules ALL crime here).
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function headedPowerAmongRivals(row, settlement) {
+  if (row.key !== 'semi-organized') return row;
+  const rings = /** @type {ReadonlyArray<{ category?: unknown, isGoverning?: unknown, faction?: unknown } | null | undefined>} */ (
+    settlement?.powerStructure?.factions || []).filter((f) => f?.category === 'criminal' && f?.isGoverning !== true);
+  if (rings.length !== 1) return row;
+  const name = String(rings[0]?.faction ?? '');
+  const people = /** @type {{ npcs?: unknown }} */ (/** @type {unknown} */ (settlement))?.npcs;
+  const headed = (Array.isArray(people) ? people : []).some((p) => (Array.isArray(p?.memberships) ? p.memberships : [])
+    .some((/** @type {{ power?: unknown, rank?: unknown } | null} */ m) => m?.power === name && m?.rank === 1));
+  if (!name || !headed) return row;
+  const held = /** @type {{ powerLabel?: unknown } | null | undefined} */ (rings[0])?.powerLabel === 'Suppressed' ? 'is held down, keeping what routes it can' : 'holds routes and territories';
+  return Object.freeze({ ...row, note: `The ${powerNameAfterArticle(name)} answers to one head and ${held}, but rival gangs contest its ground: no single authority rules all crime here. Less predictable than an unchallenged guild, more structured than street crime.` });
+}
+import { powerNameAfterArticle } from './powerSentenceName.js';
