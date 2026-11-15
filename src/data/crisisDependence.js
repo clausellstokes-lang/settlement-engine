@@ -1026,7 +1026,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "butchers_3_8": Object.freeze([LIVESTOCK]),
   "caravan_masters_exchange": Object.freeze([TRAVELLERS, GOODS]),
   "caravaneer_s_post": Object.freeze([TRAVELLERS, GOODS]),
-  "caravanserai": Object.freeze([TRAVELLERS, GOODS]),
+  "caravanserai": Object.freeze([TRAVELLERS, GOODS, INPUT]), // BAR2-SERVICES SV1: its camels; "No camels reach the caravanserai." marks it, and its caravans with it
   "carpenter": NONE,
   "carpenter_part_time": NONE,
   "carpenters_5_15": NONE,
@@ -1078,9 +1078,9 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "farmland": Object.freeze([GRAIN]),
   "fence_word_of_mouth": NONE,
   "fighting_pits": NONE,
-  "fish_market": Object.freeze([GOODS, FISH]), // S8
-  "fisher_s_landing": Object.freeze([FISH]),
-  "fishing_community": Object.freeze([FISH]),
+  "fish_market": Object.freeze([GOODS, FISH, INPUT]), // S8; SV6: its catch
+  "fisher_s_landing": Object.freeze([FISH, INPUT]), // SV6: its catch
+  "fishing_community": Object.freeze([FISH, INPUT]), // SV6: its catch
   "fishmonger": Object.freeze([FISH, INPUT]),
   "foundling_home": NONE,
   "free_company_hall": NONE,
@@ -1114,7 +1114,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "housing_500_4000_households": NONE,
   "housing_75_650_households": NONE,
   "human_trafficking_network": NONE,
-  "hunter_s_lodge": Object.freeze([GATES, GAME]), // S8
+  "hunter_s_lodge": Object.freeze([GATES, GAME, INPUT]), // S8; SV6: its game
   "informal_elder_consensus": NONE,
   "inn_multiple": Object.freeze([TRAVELLERS]),
   "inns_and_taverns_district": Object.freeze([TRAVELLERS]),
@@ -1148,7 +1148,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "midwife": NONE,
   "mill": Object.freeze([GRAIN]),
   "mills_2_5": Object.freeze([GRAIN]),
-  "mine": NONE,
+  "mine": Object.freeze([INPUT]), // SV6: its ore
   "mine_open_cast": NONE,
   "mint": NONE,
   "mint_official": NONE,
@@ -1215,7 +1215,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "stable_master": NONE,
   "stable_yard": Object.freeze([TRAVELLERS]),
   "state_granary_complex": NONE,
-  "stone_quarry": Object.freeze([GOODS]), // S8
+  "stone_quarry": Object.freeze([GOODS, INPUT]), // S8; SV6: its stone
   "street_gang": NONE,
   "subsistence_farming": Object.freeze([GRAIN]),
   "tailor": NONE,
@@ -1264,6 +1264,87 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "woodcarver": NONE,
   "woodcutter_s_camp": NONE,
   "workhouse": NONE,
+});
+
+/**
+ * A HOUSE ON A SPENT GROUND IS SHORT OF IT (BAR2-SERVICES, the chair's ruling SV6 of 2026-11-15; vetoable by the owner).
+ * The leaf's second cause reads, beside the page's gap line, the page's own Depleted list (the Resources tab prints
+ * `config.nearbyResourcesDepleted`): a house that makes from what reaches it (`input` above) and whose every own ground
+ * (the record's chains it works, `economicState.activeChains[].resourceKey`) is on that list, with no chain kept by magic
+ * and no shortage import the trade record shows (`resourceSemantics.js :: resourceShortageImport`), is marked short of its
+ * ground's yield, named here. A ground not named here is "its materials". VETOABLE wording (the owner's).
+ * @type {Readonly<Record<string, string>>} resource key -> what the house is short of
+ */
+export const SPENT_GROUND_YIELD = Object.freeze({
+  fishing_grounds: 'fish', river_fish: 'fish', iron_deposits: 'iron ore', salt_flats: 'salt', stone_quarry: 'stone',
+  hunting_grounds: 'game', grazing_land: 'livestock', alpine_pasture: 'livestock', river_clay: 'clay', coal_deposits: 'coal',
+  managed_forest: 'timber', mountain_timber: 'timber', coastal_timber: 'timber', foraging_areas: 'herbs', glass_sand: 'glass sand',
+  grain_fields: 'grain', fertile_floodplain: 'grain', marshlands: 'reeds', vineyards: 'grapes',
+});
+
+/**
+ * THE HOUSES THAT WORK THE GROUND ITSELF (SV6, measured): an import feeds the houses that buy what the ground yields (the
+ * smith's iron, the baker's grain), never the work on the ground: the mine's crews cut no ore from an exhausted seam,
+ * the quarry no stone, the boats no morning catch, however much is bought in. For these the trade record's shortage
+ * import does not lift the mark. Catalogue ids. VETOABLE (the owner's).
+ * @type {ReadonlyArray<string>}
+ */
+export const SPENT_GROUND_WORKERS = Object.freeze(['mine', 'stone_quarry', 'salt_works', 'fisher_s_landing', 'fishing_community', 'fish_market', 'hunter_s_lodge']);
+
+/**
+ * A SERVICE ROW CARRIES THE MARK ITS HOUSE CARRIES (BAR2-SERVICES, the chair's ruling SV1 of 2026-11-15; vetoable by the
+ * owner). Where a house's row is stopped, curtailed or short of its input, every service row of that house that lives on
+ * the same thing prints the same mark: the leaf (`crisisStoppedRow.js :: serviceRowDependence`) reads a service row as
+ * living on its own line above AND on its house's line. This table is the one exception: the rows of a house that do NOT
+ * live on what the house lives on, each with the dependences of its house it is free of (its own line still holds). Read
+ * row by row against the 97 pairs of a house's menu that the house's line reaches and the row's own does not (the
+ * quarry's "Cut stone" lives on the quarry beyond the walls; the chroniclers' archive is consulted though no road brings a
+ * report). Keyed by the house's catalogue id, then the service's name. VETOABLE (the owner's).
+ * @type {Readonly<Record<string, Readonly<Record<string, ReadonlyArray<string>>>>>}
+ */
+export const SERVICE_FREE_OF_HOUSE = Object.freeze({
+  // the mill's other wheels: cloth and timber, not grain
+  "mill": Object.freeze({ "Fulling cloth": Object.freeze([GRAIN]), "Sawing timber": Object.freeze([GRAIN]) }),
+  "mills_2_5": Object.freeze({ "Fulling cloth": Object.freeze([GRAIN]), "Sawing timber": Object.freeze([GRAIN]) }),
+  // honey wine
+  "brewer": Object.freeze({ "Mead": Object.freeze([GRAIN]) }),
+  // judged of what is brought to the house, not made from its own input
+  "vintner": Object.freeze({ "Wine appraisal": Object.freeze([INPUT]) }),
+  "alchemist_shop": Object.freeze({ "Component identification": Object.freeze([INPUT]), "Ingredient sourcing": Object.freeze([INPUT]) }),
+  "apothecary": Object.freeze({ "Consultation": Object.freeze([INPUT]) }),
+  // the caravanserai's planners choose roads; the camels are its caravans'
+  "caravanserai": Object.freeze({ "Route planning": Object.freeze([INPUT]) }),
+  // an inquiry within the walls
+  "customs_house": Object.freeze({ "Smuggling investigation": Object.freeze([GOODS]) }),
+  // carrying and storing within the town
+  "carriers_guild": Object.freeze({ "Porterage": Object.freeze([TRAVELLERS, GOODS]), "Cargo storage": Object.freeze([TRAVELLERS]) }),
+  // the workshop's maps are drawn and copied at the bench, from the data it holds
+  "cartographer_s_workshop": Object.freeze({ "Map making": Object.freeze([TRAVELLERS]), "Copying and reproduction": Object.freeze([TRAVELLERS]), "Route consultation": Object.freeze([TRAVELLERS]) }),
+  // the town's own table and its own music
+  "inn_multiple": Object.freeze({ "Meals and drink": Object.freeze([TRAVELLERS]) }),
+  "inns_and_taverns_district": Object.freeze({ "Entertainment": Object.freeze([TRAVELLERS]) }),
+  "travelers_inn": Object.freeze({ "Meals": Object.freeze([TRAVELLERS]) }),
+  "stable_yard": Object.freeze({ "Overnight boarding": Object.freeze([TRAVELLERS]) }),
+  // made and valued by the quarter's own hands
+  "luxury_goods_quarter": Object.freeze({ "Custom commissions": Object.freeze([GOODS]), "Appraisal": Object.freeze([GOODS]) }),
+  // proclaimed whether or not a crowd gathers
+  "market_square": Object.freeze({ "Civic announcements": Object.freeze([GATHERINGS]) }),
+  // the house's rooms and wardrobe, hired by the few
+  "theaters": Object.freeze({ "Rehearsal space hire": Object.freeze([GATHERINGS]), "Costume and prop hire": Object.freeze([GATHERINGS]) }),
+  // the tracker knows the country whatever it holds (SV6)
+  "hunter_s_lodge": Object.freeze({ "Hunting guide hire": Object.freeze([INPUT]) }),
+  // the market's stores and its buyers are fed by what is brought in; its morning catch is not (SV6)
+  "fish_market": Object.freeze({ "Wholesale trade": Object.freeze([INPUT]), "Preserved fish": Object.freeze([INPUT]) }),
+  // concealment within the walls
+  "smuggling_operation": Object.freeze({ "Hidden storage": Object.freeze([GOODS]) }),
+  "smuggling_waypoint": Object.freeze({ "Safe house": Object.freeze([GOODS]) }),
+  // the rolls and the ground's trade are kept in the office
+  "cemetery_network": Object.freeze({ "Central register": Object.freeze([GATES]), "Plot brokerage": Object.freeze([GATES]) }),
+  // the troupe in the town plays where it stands
+  "traveling_performers": Object.freeze({ "Public performance": Object.freeze([TRAVELLERS]), "Private entertainment": Object.freeze([TRAVELLERS, GATHERINGS]), "Festival coordination": Object.freeze([TRAVELLERS]) }),
+  // weighed against what the register already holds
+  "listening_post": Object.freeze({ "Claim weighing": Object.freeze([TRAVELLERS]), "Traveller vouching": Object.freeze([TRAVELLERS]) }),
+  "chroniclers_exchange": Object.freeze({ "Written answer": Object.freeze([TRAVELLERS]), "Archive consultation": Object.freeze([TRAVELLERS]), "Claim grading": Object.freeze([TRAVELLERS]) }),
 });
 
 /*

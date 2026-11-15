@@ -56,7 +56,7 @@ const FAMINE = 'Scarce in the famine.';
 
 /** (seed, tab, the description of ordinary times, the mark that must lead it). The worklist row each answers is named. */
 const MARKED = [
-  ['r2s-under_siege-city-1', 'services', 'Jewellery, fine clothing, rare spices, and luxury goods from across the world.', SIEGE], // 12206
+  ['r2s-under_siege-city-1', 'services', 'Jewellery, fine clothing, and luxury goods from across the world.', SIEGE], // 12206; BAR2-SERVICES SV2 (2026-11-15): re-keyed by its text, it names no spice
   ['r2s-under_siege-city-1', 'services', 'Multiple gated access points. Customs checks and toll collection.', SIEGE], // 06254
   ['r2s-under_siege-city-1', 'services', 'Large-scale commercial facilitation across regional markets.', SIEGE], // 12523
   ['r2s-under_siege-city-1', 'institutions', 'Multiple inn districts catering to merchants, travelers, and long-term visitors.', SIEGE], // HOUSES 14115
@@ -128,7 +128,7 @@ const BATCH2 = [
   ['r2r-city-0', 'services', 'Every parish served. Religious observance accessible to all.', 'Every district has a temple.'], // B06916, 10717
   ['r2s-under_siege-city-1', 'services', 'Every parish served. Religious observance accessible to all.', 'Every district has a temple.'],
   ['r2r-village-0', 'services', 'Essential for carts, carriers, and working horses', 'Essential for transport and cavalry'], // 07253
-  ['r2r-thorp-50', 'services', 'Bulk purchase by households, institutions, and inland traders.', 'Bulk purchase by taverns'], // 04603, 31188 (no tavern stands)
+  ['r2r-thorp-50', 'services', 'Bulk purchase by households and institutions.', 'Bulk purchase by taverns'], // 04603, 31188 (no tavern stands); BAR2-SERVICES SV2 (2026-11-15): the twin re-keyed by its text, it names no inland trader
   ['r2r-village-11', 'services', "Collects the lord's dues and the tithe", "the temple tithe"], // 05233, 29223
   ['r2s-under_siege-town-1', 'services', 'Devotional figures, holy images, and reliquaries.', 'Crucifixes'], // X9 22599 (an East-Asian-inspired town)
   ['r2r-village-29', 'services', 'Arbitrates quarrels before they come to judgment', "the lord's court"], // X9 08236 (no lord, no court)
