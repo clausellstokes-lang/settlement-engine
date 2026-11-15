@@ -84,8 +84,8 @@ const famineFoodIsPower = (r) => {
   const what = failed !== 'grain' && typeof failed === 'string' && failed in FAILED_SOURCE_WORDS ? `the ${FAILED_SOURCE_WORDS[/** @type {keyof typeof FAILED_SOURCE_WORDS} */ (failed)]} failed` : 'the harvest failed';
   const stores = r.foodRecord?.hasGranary === true ? 'the stores' : 'what food is left';
   const n = typeof r.powerCount === 'number' ? r.powerCount : 0;
-  if (n >= 3) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its strongest powers are fighting over ${stores}.`; // TAIL-NARRATIVE (B17142): the record counts the powers, not who fights; no number is claimed
-  if (n === 2) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its two powers are fighting over ${stores}.`;
+  if (n >= 3) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its strongest powers are each watching who holds ${stores}.`; // TAIL-NARRATIVE (B17142): the record counts the powers, not who fights; no number is claimed. TAIL-NARRATIVE-2 (READ-ALL-4): no fight is claimed either: the record's quarrels are not over the food
+  if (n === 2) return `Since ${what}, whoever holds the food in ${r.name} holds the power, and its two powers are each watching who holds ${stores}.`;
   return `Since ${what}, food is power in ${r.name}, and every household is watching what the others eat.`; // R2-CODE-A-10 (CENSUS-2 b/famine:plenty): "who eats well" in a thorp at a third of its need, where nobody does
 };
 
@@ -180,7 +180,7 @@ export const PRESSURE_SENTENCES = {
     `${r.name}'s outlying farms are being hit one after another, each one near the last; whatever is out there is choosing them.`,
     { text: `The defences of ${r.name} were built for quieter years than these, as ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : r.milForce || "the defenders"} warned at the last muster.`, needs: ['guardPresence'] }, // TAIL-NARRATIVE (HIGH 20438, 20439): defences and a muster need a force that musters (a watch, a militia, a garrison or a hired company)
     { text: "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.", needs: ['tier: ≥ hamlet'] }, // TAIL-NARRATIVE (00172): three farmsteads and the authorities are not a thorp's
-    { text: `${r.name} has drawn its edges inward (fields left unworked, a mill ${r.millExports ? 'kept turning for its buyers' : 'standing idle'}) trading the ${r.commodity || "harvest"} it needs for a perimeter ${r.milForce || "the defenders"} can actually hold.`, needs: ['institution: mill'] }, // TAIL-NARRATIVE (00708): no idle mill where the trade record sells its flour (genPressureDetail's millExports); a branch inside the drawn row
+    { text: `${r.name} has drawn its edges inward (fields left unworked, a mill ${r.millExports ? 'kept turning for its buyers' : 'standing idle'}) giving up its outlying ground for a perimeter ${r.milForce || "the defenders"} can actually hold.`, needs: ['institution: mill'] }, // TAIL-NARRATIVE-2 (READ-ALL-4): "trading the harvest it needs" beside a 17% surplus: the line claims the ground given up, not a need // TAIL-NARRATIVE (00708): no idle mill where the trade record sells its flour (genPressureDetail's millExports); a branch inside the drawn row
     `The bounty ${r.govFaction || "the council"} posted for the creature has attracted the wrong sort of help to ${r.name}: hunters who are more dangerous than useful, and who will expect payment whether or not the thing is dead.`,
     { text: `Whatever is preying on ${r.name} has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open.`, needs: ['walls'] },
   ],

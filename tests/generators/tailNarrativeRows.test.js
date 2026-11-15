@@ -55,7 +55,7 @@ describe('B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1)', ()
     ['00708', 'r2s-monster_pressure-village-3', 'pressure', /a mill standing idle/, /\(fields left unworked, a mill kept turning for its buyers\)/],
     ['01079', 'r2s-wartime-city-1', 'pressure', /is prospering on the right side/, /^Jalalserai is at war and, for now, on the right side of it/],
     ['03831', 'r2s-indebted-metropolis-0', 'pressure', /a distinction that has not gone unnoticed/, /took the loans and is now repaying them/],
-    ['B17142', 'r2s-famine-town-1', 'pressure', /at least three powers/, /its strongest powers are fighting over/],
+    ['B17142', 'r2s-famine-town-1', 'pressure', /at least three powers/, /its strongest powers are each watching who holds/],
     ['B04491', 'r2r-city-37', 'pressure', /nor keep them fed/, /nor find them all work/],
     ['B01841', 'r2s-politically_fractured-metropolis-2', 'pressure', /all three powers/, /the only person every power here will still speak to/],
   ]);
@@ -233,6 +233,42 @@ describe('B3 (N9) the political flavour claims no legitimacy the record lacks (T
   it('the true siblings still print (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(KEEP, ([id, seed, kept]) => {
       expect(read(born(seed), 'history'), `${id} ${seed}`).toMatch(kept);
+    }), 'the true siblings still print');
+  });
+});
+
+/**
+ * BATCH 4 — the chair's READ-ALL-4 faults in new lines (`narrativeText.js`): `famineFoodIsPower` said the powers "are
+ * fighting over the stores" where the record's only quarrel is not over the food: the powers are each watching who
+ * holds the food; `monster_pressure[3]` said the town traded "the harvest it needs" beside a 17% surplus: it gives up
+ * its outlying ground. Rewordings inside their rows; no draw moved.
+ */
+describe('B4 the new lines claim no fight and no need the record lacks (TAIL-NARRATIVE-2 batch 4)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** [seed, must not print, what prints instead] */
+  const CURED = /** @type {Array<[string, RegExp, RegExp]>} */ ([
+    ['r2s-famine-town-1', /are fighting over/, /^Since the harvest failed, whoever holds the food in .+ holds the power, and its strongest powers are each watching who holds /],
+    ['r2s-famine-metropolis-1', /are fighting over/, /^Since the fishing failed, .+ its strongest powers are each watching who holds /],
+    ['r2s-famine-metropolis-2', /are fighting over/, /^Since the herds failed, .+ its strongest powers are each watching who holds /],
+    ['r2s-monster_pressure-village-3', /trading the harvest it needs/, /a mill kept turning for its buyers\) giving up its outlying ground for a perimeter the able-bodied can actually hold\.$/],
+    ['r2s-monster_pressure-village-1', /it needs for a perimeter/, /a mill standing idle\) giving up its outlying ground for a perimeter/],
+    ['r2s-monster_pressure-town-2', /it needs for a perimeter/, /giving up its outlying ground for a perimeter the watch can actually hold\.$/],
+    ['r2s-monster_pressure-metropolis-0', /it needs for a perimeter/, /giving up its outlying ground for a perimeter the garrison can actually hold\.$/],
+  ]);
+  it('the flagged line no longer prints, and the slot says what the record bears (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CURED, ([seed, gone, instead]) => {
+      const text = read(born(seed), 'pressure');
+      expect(text, `${seed}: what prints instead`).toMatch(instead);
+      expect(text, `${seed}: the flagged line`).not.toMatch(gone); // anchored: the line above asserts the slot printed
+    }), 'the new lines claim no fight and no need');
+  });
+  const KEEP = /** @type {Array<[string, RegExp]>} */ ([
+    ['r2r-thorp-17', /^Since the hunt failed, food is power in .+, and every household is watching what the others eat\.$/],
+    ['r2s-monster_pressure-city-3', /outlying farms are being hit one after another/],
+  ]);
+  it('the true siblings still print (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, kept]) => {
+      expect(read(born(seed), 'pressure'), seed).toMatch(kept);
     }), 'the true siblings still print');
   });
 });
