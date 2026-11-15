@@ -447,6 +447,19 @@ print. No exclusion list is built here (D31): the data's holder cures the pairs.
    as at the base (fresh 148, first-register stale 2: no rise; 6ce176aff); the twelve-birth grid's 2 falls as at the
    base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a).
 
+6. NAMED TO THIS FILE BY THE CHAIR at 03:17 (from the economy seat's hand-back, `lane/tail-defecon-2026-11-14`,
+   TAIL-DEFECON-HANDBACK.md, "the fish chains' goods …" and item 2 of its WHAT IS LEFT). NOT D30's gate, so after it, by
+   width; NOT BEGUN (they arrived at this seat's hand-back):
+   - **B14842 "Pilgrim hospitality"** (written in `deriveExportsFromChains`, ~line 743 then): false in 27 of the 83 towns
+     that print it, no house of pilgrimage (a shrine, relic site, temple, cathedral, abbey or monastery). C1-E gates it
+     by an inn or its kin (GOOD_WORKING_HOUSES), not by the pilgrimage, so it wants a second key on the same row. It is
+     an EXPORT move: measure the primaryExports and income families first. More than ten towns means one line to the
+     chair before the push.
+   - **(C) the fish chains' goods under a fish famine** (22820 11, 10282 10, 22836 9, 22837 8, 22847 3, 10284 3, 22821 2,
+     22838 1, 09012 1) and **24992 the Brickmaker with no clay** (23): the chain display's rows (`activeChains`' outputs).
+     Find each reader first. Under a famine no line offers the food that failed. Item 6 of the C-2 list (the export
+     crisis rule, 09013) is the same famine law on the export side.
+
 HANDED BACK by TAIL-DEFECON-C-3 at 2026-11-15 ~03:20 UTC, both parts of D30 built and the page measured. The
 instruments as above; this seat's ad hoc scripts (the D30 census, the pair measure, the record-vs-exploitation check) are
 node over `corpus.ndjson.gz` and the dumps, not committed.
