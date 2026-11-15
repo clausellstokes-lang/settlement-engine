@@ -456,7 +456,24 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate))
         : 0);
     const magicResidual = Math.max(0, totalCoverage - importPortion);
-    if (magicResidual > 0 && magicOn && magicFoodRate > 0) {
+    // ONE FOOD LEDGER (TAIL-DEFECON-5, ruling R3; RECORD-MEASURE-3 row 3, c3a). Where the writer publishes its own
+    // split (imports and magic, lb/day), the view READS it, and its shortfall is what the writer's pounds leave of
+    // the need where the writer has a gap: the Economics tab's own remainder (`foodRowShown.js`). Rebuilt from the
+    // rounded `deficitPct`, a city's shortfall moved by up to a hundred pounds and a metropolis's by up to two
+    // thousand, so the viability's "cannot cover ~N lbs" and the tab's "Short: N" printed two figures (221 of the
+    // census's 720). Its per cent is the tab's too: the share its pounds give, and never 0 beside a pound short (the
+    // tab's own floor; within V-FOOD-PCT's one step), so no verdict reads "0% of daily food need remains uncovered".
+    // The reconstruction stays for a persisted record that carries no split.
+    const writerSplit = Number.isFinite(foodSecurity.importCoverage) && Number.isFinite(foodSecurity.magicOffset);
+    if (writerSplit) {
+      importCoverageFinal = Math.max(0, Math.round(cImport));
+      magicFoodOffset = Math.max(0, Math.round(cMagic));
+      magicFoodNote = magicFoodOffset > 0 ? magicFoodNoteFor() : '';
+      deficit = Number(foodSecurity.deficit) > 0
+        ? Math.max(0, Math.round(dailyNeedFinal - dailyProductionFinal - importCoverageFinal - magicFoodOffset)) : 0;
+      deficitPercent = deficit > 0 && Math.round(dailyNeedFinal) > 0
+        ? Math.max(1, Math.round((deficit / Math.round(dailyNeedFinal)) * 100)) : 0;
+    } else if (magicResidual > 0 && magicOn && magicFoodRate > 0) {
       importCoverageFinal  = importPortion;
       magicFoodOffset      = magicResidual;
       magicFoodNote        = magicFoodNoteFor();
