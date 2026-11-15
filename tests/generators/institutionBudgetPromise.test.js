@@ -142,67 +142,73 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // DECLARED generation move (the generator golden's re-record in each lane's drafted shift record; the powers lane's draft names
 // this pin among the digests its writers re-take). Re-captured at the joined tree e663b2b80 with the factor forced to 1.0, twice
 // and equal.
+// RE-KEYED BY IDENTITY 2026-11-15 (the close of the tail round, TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in
+// the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 60 of 60 moved, none by the budget
+// (densityFactor still forced to 1; src/data/institutionBudget.js untouched by the round), by the round's declared generation
+// moves (the golden master re-recorded 525 of 525 under the same record: a face for every seat of power and the casts drawn
+// after it, the data, upkeep and economy lanes' fields). Re-captured at the golden's tree 8c11f73ea with the factor forced to
+// 1.0, this file's own loop (an untracked probe), twice and equal.
 const BEFORE = Object.freeze([
-  'b89f4e15558adb9d', // 0
-  '1b49d8aa24217d97', // 1
-  'c08fde0b05256ea0', // 2
-  '186f21c8c00e1bcd', // 3
-  '1f4191fdb58dee79', // 4
-  '4141725551a16c28', // 5
-  '4f024d5aeaa959ad', // 6
-  '5e022d6e76d13817', // 7
-  'feaecd1fefa0e4e9', // 8
-  'b93bd034f949fc44', // 9
-  '066eaf9be7abaf99', // 10
-  '083cd5acc1206766', // 11
-  'caefb2da701ba354', // 12
-  '255c5499aafc65ac', // 13
-  'fdbd869ce938b82e', // 14
-  '75f70b63ac7fb0f0', // 15
-  '82b587febd2622fb', // 16
-  '730020228dac830a', // 17
-  'da0fb338514a495f', // 18
-  'd45d0a8c57a19695', // 19
-  '9cd89a208c8387f7', // 20
-  '53f91753deb4f701', // 21
-  '7932ab9f8a5469e3', // 22
-  '746112109fa938ae', // 23
-  '9fb7d4a47a91e3e1', // 24
-  '95937ea08a5575e8', // 25
-  'f15dda8487d472a0', // 26
-  '23b77359a1e1b5f2', // 27
-  'f3a389e137b07189', // 28
-  '5c1e6d7ec8f15040', // 29
-  '929bd0e86a9acc97', // 30
-  '48625768380d533c', // 31
-  '517b9e18f3e03515', // 32
-  '57ed78a7e02687f8', // 33
-  '195140cbbd951b3d', // 34
-  'ea7dec5e55fedcba', // 35
-  '4e152b01ca007685', // 36
-  '7f20ae0b82f626a2', // 37
-  'e1522102d02f24fd', // 38
-  'eddfcf44e9dbef7a', // 39
-  '7a416764ca346893', // 40
-  '62ed790648b7b128', // 41
-  '4e2c0e4536bb7c6c', // 42
-  '6b000036e331a377', // 43
-  '37f84b9dc5854f76', // 44
-  '581b32bd08ccb9f5', // 45
-  '41aef79f7e8f8e8d', // 46
-  '6985122da96d7710', // 47
-  '3f310eb3be3f3911', // 48
-  'ebd6c1f1fc6bd4eb', // 49
-  'c2e8b0fda1220d59', // 50
-  '863fb5c9e7ce3825', // 51
-  '352d250339d758fa', // 52
-  'c9ef08f6d067da7a', // 53
-  '06d7242063ab67cb', // 54
-  'ec40890c3d31aa8e', // 55
-  'e1e7284ce85bd796', // 56
-  '6b80c4f6121944ac', // 57
-  'c95d6412ee41de9c', // 58
-  'd90f80f2c5fa1737', // 59
+  '13392acd7d288253', // 0
+  'a50546f32c96dd04', // 1
+  '043640db8a5147b9', // 2
+  '6f06bb2645eec81d', // 3
+  '37c484c39b954213', // 4
+  '67ca87a0fec18c50', // 5
+  '0fd2ee36a6d00bed', // 6
+  '0abe1e6af733ff6e', // 7
+  '16196186e60d7164', // 8
+  '0c348602c73bec16', // 9
+  'c8650c7f0bb26b44', // 10
+  'ccd8137f17242e0b', // 11
+  '4b532af3f1addb50', // 12
+  'cb153a2796d1e21b', // 13
+  'eed6ee002ffbdecf', // 14
+  'b3bc2a3c7e24de13', // 15
+  'a68306fc8abc1fbf', // 16
+  '0cc26735a3871cf7', // 17
+  '952d3814dc45f811', // 18
+  '77c882f15e3a31aa', // 19
+  'f925852002eb146a', // 20
+  '237e177aaa904bf5', // 21
+  '326afd87c66955d2', // 22
+  '20e84b6a6bac989c', // 23
+  '157d51f8354ee677', // 24
+  '149d31276cbeb873', // 25
+  '14337b9bf1769bde', // 26
+  '056f97d1eb237c9b', // 27
+  'b6dcdf173e1ff29b', // 28
+  'ba46bebed860251b', // 29
+  'a4253793edc4e367', // 30
+  '936f1663e3c163be', // 31
+  '23320ec8960d506b', // 32
+  '7cd1cd869880be2f', // 33
+  '8941fd50658d7cbe', // 34
+  '9c8cfd1d7229b6bc', // 35
+  'af0f94588567ba15', // 36
+  'c1e75cface31c5f5', // 37
+  '288e9268963dda23', // 38
+  'c7f1d1d6aa8876a9', // 39
+  'e0bf2a993a4f969a', // 40
+  'd04d3d5963cb3e67', // 41
+  '30be0efd3c18f2d4', // 42
+  'c6e40c9b759d4bb2', // 43
+  'ae63312423cceb14', // 44
+  '01bf849a7203a00d', // 45
+  '16b0ae75c1906def', // 46
+  '3155ac832b0c18df', // 47
+  '413ba3e5176930e6', // 48
+  '06ae9294c60a0078', // 49
+  'd06dc7ffbc04f136', // 50
+  '6b7173959c817e47', // 51
+  '73568f6cdc07caff', // 52
+  'd260c462fdbe0b47', // 53
+  '5486c1940b5c70ae', // 54
+  '5c02f0c86f711f4b', // 55
+  '42498e116334fc13', // 56
+  '30cfb1c1e31a74df', // 57
+  'd60c1f327bbec7a3', // 58
+  '1769134502c75a52', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);
