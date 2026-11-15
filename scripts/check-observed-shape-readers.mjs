@@ -115,11 +115,12 @@ import {
   RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
   RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
   RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
+  RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema42Baseline,
+  validateSchema43Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -298,7 +299,12 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     (src/domain/display/newsBody.js x1) TAGGED (RETIRED).
  * 42 = schema 41's topology, tag law, roster and bank (78/52), re-governed to THE AGREEMENT LANE'S TIER SEED
  *     (STYLE-2-MERGE point 47, the chair's ruling on STOP 47a): COHERENCE-AGREE moved osr-tier-14's town out
- *     of the overlap; producer 2b's seed re-searched by its own rule to osr-tier-19. THE LIVE AUTHORITY.
+ *     of the overlap; producer 2b's seed re-searched by its own rule to osr-tier-19 (RETIRED).
+ * 43 = schema 42's topology, tag law, roster and bank, re-governed to THE CLOSE OF THE ROUND OF 2026-11-14/15
+ *     (the chair's ruling OR2 of 2026-11-15; the chair's record 456): one rung, the round's causes, every row
+ *     with one and its class: the lawful shrinks retire with cause, the rows the detector lost while their reads
+ *     still stand are recorded as UNCURED INSTRUMENT EROSION, the round's new reads are admitted by cause with
+ *     class and lane; nothing declared, the bank 78/52. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -336,6 +342,7 @@ export {
   RETIRED_TRAIN_CAR4_BASELINE_SCHEMA,
   RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA,
   RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
+  RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1691,7 +1698,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema42Baseline(baseline);
+  validateSchema43Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3244,10 +3251,15 @@ export function baselineOf({
       'first declaration, `outcome on outcome` (src/domain/worldPulse/convergence.js, the proposal record minted',
       'behind interventionActive), the writer behind src/domain/display/newsBody.js :: itemSettlementIds; the',
       'roster 15 -> 16; the one row, admitted ordinary at 40, is TAGGED and nothing else moves (RETIRED).',
-      'SCHEMA 42 = schema 41\'s topology, tag law, roster and bank, re-governed to THE AGREEMENT LANE\'S TIER SEED',
+      'SCHEMA 42 (RETIRED) held schema 41\'s topology, tag law, roster and bank, re-governed to THE AGREEMENT LANE\'S TIER SEED',
       '(STYLE-2-MERGE point 47, COHERENCE-AGREE; the chair\'s ruling on STOP 47a): the lane\'s generation moved',
       'osr-tier-14\'s town out of the town/city overlap; producer 2b\'s seed re-searched by its own rule to osr-tier-19.',
-      'The reconciliation, every moved row with its class, is recorded in the re-freeze commit (act 2).',
+      'The reconciliation, every moved row with its class, is recorded in the re-freeze commit (act 2) (RETIRED).',
+      'SCHEMA 43 = schema 42\'s topology, tag law, roster and bank, re-governed to THE CLOSE OF THE ROUND OF',
+      '2026-11-14/15 (the chair\'s ruling OR2 of 2026-11-15; the chair\'s record 456): the lawful shrinks retire with',
+      'cause; the rows the detector lost while their reads still stand are recorded as UNCURED INSTRUMENT EROSION, never',
+      'as a repair; the round\'s new reads are admitted by cause with class and lane; nothing declared. Every moved row,',
+      'with its cause, is recorded in the rung\'s review (docs/chair/2026-11-15/).',
       'Of the sixteen declared bank entries FIFTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -3258,7 +3270,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–41 are the RETIRED numeric predecessors.',
+      'Schemas 4–42 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3432,7 +3444,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema42Baseline,
+    validateBaseline: validateSchema43Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,
