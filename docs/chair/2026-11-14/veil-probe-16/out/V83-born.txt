@@ -1,0 +1,16 @@
+V8-3 THE ANSWERS DID NOT MOVE, ON BIRTHS NOT TUNED ON (VEIL-16).
+
+REVIEW-VEIL-13's born probe (veil-probe-13/measure/r5-born.probe.jsx, R5_N=4: six sizes, calm and infiltrated, four each;
+both stored shapes; three shares; gallery, link, import and the twin), on a chain of the base's migrations (x212r, built
+from /var/tmp/v16/red-d0a) and on one of the tree's (x212n), compared by veil-probe-16/measure/born-cmp.mjs:
+  towns 48 | 48; rows 1152 | 1152; rows whose fingerprint differs 0; missing 0
+  reads that raise: 0 | 0; gallery reads where server and twin differ: 0 | 0
+
+THE V13-1 PLANT on the link (veil-probe-11/hand/town-p.json and town-pc.json with veil-p.json, REVIEW-VEIL-7/hand/run.sh,
+both chains; jdiff.mjs response against response):
+  V13-1 plant (town-p, town-pc with veil-p; 3 shares x gallery, link, import): 18 of 18 responses 0 paths differ from the base chain; COVERTMARK in link responses: base 0, tree 0; in 4 responses, all Reveal-DM gallery or import (v83p-dm-gallery.json v83p-dm-import.json v83pc-dm-gallery.json v83pc-dm-import.json )
+
+THE HAND TOWNS AND LANGENGRUND, native, base chain against tree chain (md5 of each read): REVIEW-VEIL-7 town-a..e (each
+with its veil and with none, Reveal DM off and on), REVIEW-VEIL-8 town-f and town-g, veil-probe-11 town-p and town-pc,
+Langengrund (no veil record and the default veil, Reveal DM off and on): 32 of 32 stores, every gallery, link and import
+read equal.

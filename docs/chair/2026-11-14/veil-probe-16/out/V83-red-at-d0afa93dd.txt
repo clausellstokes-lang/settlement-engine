@@ -1,0 +1,15 @@
+V8-3 RED FIRST, ON THE BASE'S BYTES (VEIL-16). The archive /var/tmp/v16/red-d0a (git archive d0afa93dd, 9,434 files,
+node_modules linked; 212 aafda53f73fe955e..., its rollback 654d62aa6905aae5...), the tree's new guard file copied in
+for the run (then the archive's own put back: a84ea837ca03700d...).
+
+THE COST ROWS (the red the item cures; native cluster, medians, V83-cost.txt): the V8-3 row 19,356 ms against x211's 6,167
+(3.14 x); Langengrund's link, no veil record, 459.3 against 222.6 (2.06 x; the seat's own at d0afa93dd 525.2 / 223.9,
+2.35 x); with the default veil record 508.8 against 231.9 (2.19 x). By track_functions on the 200-house row: the walk's
+_gallery_veil_name_near 4,003 calls, 990 ms self (each child's text made ready, then one position() per hit string).
+
+THE GUARD, tests/security/galleryVeilHandRows.pglite.test.js -t "V8-3" (pglite), at the base's bytes:
+  x V8-3 THE WALK SCALES: AssertionError: 4N takes 11.41 times N: expected 11.414993854481098 to be less than 8
+    N 1500: 612.3 664.3 619.0 ms; 4N 6000: 6819.1 7066.4 7080.5 ms; medians 619.0 | 7066.4; ratio 11.41
+    (an earlier run at N 1000: ratio 9.63; at N 500: 7.76, which is why N is 1500)
+  v V8-3 THE WALK IN ONE PASS, THE ANSWERS: GREEN at the base (the answers do not move): Tests 1 failed | 1 passed
+    its 9 server responses and 3 twin reads, written by VEIL_V83_OUT: byte for byte the tree's (5 tree runs of 5)

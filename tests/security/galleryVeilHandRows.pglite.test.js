@@ -84,6 +84,17 @@
  *         s, Cyrillic): withheld where a house hidden whole is named outside ASCII and no open house bears the name. What
  *         STAYS: an open Kelvin-sign Kiln works, an open house the hidden one does not answer, İron smelter as its open house
  *         spells it, a needle outside ASCII an open house bears, or no house hidden whole could hold. Server against twin.
+ *   V8-3  THE WALK IN ONE PASS (REVIEW-VEIL-212-8's V8-3, the cost law; built by VEIL-16). Two arms:
+ *         THE ANSWERS    a hidden name held at levels 0, 1, 2, 30, 62, 63, 64 and 65; in a key alone (levels 1, 63, 64);
+ *                        beside an escaped quotation mark, a reverse solidus, an escape spelled out, a control character,
+ *                        an astral code point and U+FF02, U+FF3C, U+FE68 (whose compatibility forms are a quotation mark
+ *                        and a reverse solidus); with a dotted capital I and a sharp s; in Greek, Cyrillic and Han; of
+ *                        symbols only and of separators only; in two siblings at once; in a floor (an open house's id, the
+ *                        town's name, a shown power); beside an open name cut out; each with its near miss, which arrives;
+ *                        every read (gallery, import, the party link, DM off and on) equal to the twin. The premises on
+ *                        this engine, over every code point of every plane: the marks are the tokens (made ready, a text
+ *                        keeps exactly the quoted runs of its JSON spelling), and lower() in the C collation is A-Z alone.
+ *         THE SCALE      the V8-3 row's shape at N and at 4N rows: the name pass and the walk under 8 times as long at 4N.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -1348,5 +1359,144 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     }
     expect.soft(bad, `${bad.length} sends or losses`).toEqual([]);
     expect(differs, `${differs.length} paths at which server and twin differ`).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  // ── V8-3 THE WALK IN ONE PASS (VEIL-16; REVIEW-VEIL-212-8's V8-3, the cost law) ─────────────────────────────────────
+
+  it('V8-3 THE WALK IN ONE PASS, THE ANSWERS: a hidden name held at levels 0, 1, 2, 30, 62, 63, 64 and 65, in a key alone, beside an escaped quotation mark, a reverse solidus, a control character, an astral code point and the three characters whose compatibility form is a quotation mark or a reverse solidus, with a dotted capital I and a sharp s, in Greek, Cyrillic and Han, of symbols only and of separators only, in two siblings at once, in a floor, beside an open name cut out, each with its near miss: every read equal to the twin; and the premises, over every code point of every plane: the marks are the tokens, and A-Z alone are lowered', async () => {
+    const hand = hiddenHouse('inst-hand', 'Red hand');
+    const others = [hiddenHouse('inst-ipek', '\u0130pek Han\u0131'), hiddenHouse('inst-gilde', 'Stra\u00dfenr\u00e4uber Gilde'), hiddenHouse('inst-gr', 'Αδελφότητα Σκιάς'),
+      hiddenHouse('inst-cy', 'Братство Ворона'), hiddenHouse('inst-han', '黑鸦会'), hiddenHouse('inst-sym', '☠ ⚔ ☠'), hiddenHouse('inst-sep', '§§§')];
+    // [a string that names a house hidden whole, its near miss, which names none]
+    const PAIRS = [
+      ['Paid the "Red hand" twice', 'Paid the "Red handed" twice'],
+      ['C:\\Red hand\\ledger', 'C:\\Redhanded\\ledger'],
+      ['the \\u0022 Red hand, spelled as an escape', 'the \\u0022Red hand\\u0022, a digit beside it'],
+      ['line one\u0001Red hand\u001f', 'line one\u0001plain cargo\u001f'],
+      ['\tRed hand\n', '\tShred handles\n'],
+      ['\ud83d\udde1 Red hand \ud83d\udde1', '\ud83d\udde1 a reddish handcart \ud83d\udde1'],
+      ['\uff02Red hand\uff02', '\uff02plain cargo\uff02'],
+      ['\uff3cRed hand\uff3c and \ufe68Red hand\ufe68', '\uff3cplain\uff3c and \ufe68cargo\ufe68'],
+      ['Every caravan stops at the \u0130PEK HANI first.', 'Every caravan stops at the \u0130pek road first.'],
+      ['Die STRASSENRÄUBER GILDE nimmt ihren Zehnten.', 'Die Straßenbauer Gilde nimmt ihren Zehnten.'],
+      ['Οι έμποροι πληρώνουν την ΑΔΕΛΦΟΤΗΤΑ ΣΚΙΑΣ.', 'Οι έμποροι πληρώνουν την ΑΔΕΛΦΟΤΗΤΑ ΦΩΤΟΣ.'],
+      ['у нас братство ворона', 'у нас братство света'],
+      ['城里的商人每月都向黑鸦会纳贡。', '城里的商人每月都向黑鸦纳贡。'],
+      ['The door is chalked ☠ ⚔ ☠ at night.', 'The door is chalked ☠ ⚔ at night.'],
+      ['The ledger is signed §§§ and nothing more.', 'The ledger is signed §§ and nothing more.'],
+      ['The Red hand tannery pays the Red hand', 'The Red hand tannery opens at dawn'],
+    ];
+    // the levels: the root is level 0, economicState level 1, and economicState.lvl<L> holds the pair at level L
+    const LEVELS = [2, 30, 62, 63, 64, 65];
+    const pairAt = (L) => [`Paid to the Red hand at ${L}`, `Paid to the Corn exchange at ${L}`];
+    const economicState = {
+      marketTalk: PAIRS.flat(),
+      lvl1: pairAt(1)[0], lvl1c: pairAt(1)[1],
+      ...Object.fromEntries(LEVELS.map(L => [`lvl${L}`, nested(L - 2, pairAt(L))])),
+      // a hidden name in a key alone: at level 1, at level 63 (the key leaves), at level 64 (its record is withheld whole)
+      tolls: { 'Red hand': 4, 'Corn exchange': 2 }, key63: nested(61, { 'Red hand': 1, 'Corn exchange': 2 }), key64: nested(62, { 'Red hand': 1, 'Corn exchange': 2 }),
+      // two siblings that hold one hit; a list that holds one twice
+      twins: [{ note: 'Paid to the Red hand', n: 1 }, { note: 'Paid to the Red hand', n: 2 }], tallies: ['Red hand tally', 'Red hand tally', 'Corn tally'],
+      // deep and naming nothing: it comes back whole
+      cellar: nested(80, 'Paid to the Corn exchange in full'),
+    };
+    const town = { name: 'Red Hand Crossing', tier: 'town', thesis: 'The Red hand rules the docks.', settlementReason: 'A ford on the Corn road.',
+      institutions: [hand, ...others,
+        { id: 'inst-tan', name: 'Red hand tannery', category: 'Economy', desc: 'The Red hand tannery cures hides.' },
+        // a floor that holds a hidden name: an open house's id (its description is no floor)
+        { id: 'red_hand_annex', name: 'Annex of the ford', category: 'Civic', desc: 'Built by the Red hand.' },
+        { id: 'inst-corn', name: 'Corn exchange', category: 'Economy', desc: 'Grain.' }],
+      npcs: [{ id: 'npc.una', name: 'Una Farrow', role: 'Factor', goal: { short: 'Pay the Red hand' } }, { id: 'npc.bo', name: 'Bo Tanner', role: 'Tanner at the Red hand tannery' }],
+      powerStructure: { factions: [{ faction: 'Red Hand', power: 7, desc: 'Led by the Red hand of the docks.' }] },
+      economicState };
+    const r = await sharesOf(town, hide(hand, ...others));
+    if (process.env.VEIL_V83_OUT) writeFileSync(process.env.VEIL_V83_OUT, `${JSON.stringify(r)}\n`);
+    // the control: every planted string reaches a reader of the share with no veil record
+    const control = valuesOf(r.base.gallery).map(l => l.text);
+    expect([...PAIRS.flat(), ...[1, ...LEVELS].flatMap(pairAt)].filter(t => !control.includes(t))).toEqual([]);
+    // what may still hold 'red hand' as written: the floors, the open name, what holds it only inside the open name, the near misses
+    const MAY = ['Red Hand Crossing', 'Red Hand', 'Red hand tannery', 'The Red hand tannery cures hides.', 'Tanner at the Red hand tannery', ...PAIRS.map(([, miss]) => miss)];
+    const bad = [];
+    for (const { tag, doc } of each(r)) {
+      expect(isRec(doc), tag).toBe(true);
+      const back = valuesOf(doc).map(l => l.text);
+      for (const [hit, miss] of PAIRS) {
+        if (back.includes(hit)) bad.push(`${tag}: ${JSON.stringify(hit)} arrives`);
+        if (!back.includes(miss)) bad.push(`${tag}: the near miss ${JSON.stringify(miss)} is gone`);
+      }
+      for (const h of others) bad.push(...arrivals(doc, h.name).map(a => `${tag}: ${a}`));
+      bad.push(...leaves(doc).filter(l => l.text.toLowerCase().includes('red hand') && !(l.kind === 'value' && MAY.includes(l.text))).map(l => `${tag}: ${l.kind} ${l.path} = ${JSON.stringify(l.text.slice(0, 70))}`));
+      // each level's hit leaves; its near miss stays above the bound, and goes with the container at level 64 that holds a hit
+      for (const L of [1, ...LEVELS]) {
+        const [hit, miss] = pairAt(L);
+        if (back.includes(hit)) bad.push(`${tag}: the hit at level ${L} arrives`);
+        if (back.includes(miss) !== L < 64) bad.push(`${tag}: the near miss at level ${L} ${L < 64 ? 'is gone' : 'arrives past the bound'}`);
+      }
+      if (doc.thesis !== undefined) bad.push(`${tag}: the thesis, which names the house at level 0, arrives`);
+      if (doc.settlementReason !== 'A ford on the Corn road.') bad.push(`${tag}: settlementReason is ${JSON.stringify(doc.settlementReason)}`);
+      const econ = doc.economicState || {};
+      if (JSON.stringify(econ.tolls) !== JSON.stringify({ 'Corn exchange': 2 })) bad.push(`${tag}: tolls is ${JSON.stringify(econ.tolls)}`);
+      if (leaves(econ).filter(l => l.kind === 'KEY' && l.text === 'Corn exchange').length !== 2) bad.push(`${tag}: the key Corn exchange is not kept at levels 1 and 63 alone`);
+      if (JSON.stringify(econ.twins) !== JSON.stringify([{ n: 1 }, { n: 2 }])) bad.push(`${tag}: twins is ${JSON.stringify(econ.twins)}`);
+      if (JSON.stringify(econ.tallies) !== JSON.stringify(['Corn tally'])) bad.push(`${tag}: tallies is ${JSON.stringify(econ.tallies)}`);
+      if (JSON.stringify(econ.cellar) !== JSON.stringify(economicState.cellar)) bad.push(`${tag}: the deep value that names nothing is changed`);
+      // the floors keep what they hold; what stands beside them is no floor
+      if (doc.name !== 'Red Hand Crossing') bad.push(`${tag}: the town's name is ${JSON.stringify(doc.name)}`);
+      const annex = (doc.institutions || []).find(i => isRec(i) && i.id === 'red_hand_annex');
+      if (!annex || annex.name !== 'Annex of the ford' || 'desc' in annex) bad.push(`${tag}: the annex is ${JSON.stringify(annex)}`);
+      const power = ((doc.powerStructure || {}).factions || [])[0];
+      if (!isRec(power) || power.faction !== 'Red Hand' || 'desc' in power) bad.push(`${tag}: the shown power is ${JSON.stringify(power)}`);
+      if (JSON.stringify((doc.institutions || []).map(i => i.name)) !== JSON.stringify(['Red hand tannery', 'Annex of the ford', 'Corn exchange'])) bad.push(`${tag}: institutions[] lists ${JSON.stringify((doc.institutions || []).map(i => i.name))}`);
+    }
+    expect([...new Set(bad)]).toEqual([]);
+    // SERVER AGAINST TWIN, every read: the gallery read and the import against the twin of their share, the party link
+    // (which never reveals the DM's layer) against the twin of the veiled share
+    expect(twinDiffers(r)).toEqual([]);
+    expect(['veil', 'dm'].flatMap(s => [...differ(r[s].import, r[s].client).map(d => `${s}/import: ${d}`), ...differ(r[s].link, r.veil.client).map(d => `${s}/link: ${d}`)])).toEqual([]);
+
+    // THE PREMISES, on this engine (asked by plain SQL and 212's helpers of the base too, so the arm is green on the base's
+    // bytes). (i) THE MARKS ARE THE TOKENS: a list of every code point of every plane (U+0000 and the surrogates aside),
+    // each one string, whose text with its escapes made spaces is made ready (an open name cut out with it), holds
+    // exactly the quoted runs of its JSON spelling (each escaped reverse solidus and quotation mark two control
+    // characters, as _gallery_veil_name_json writes it): two quotation marks a string. (ii) A-Z ALONE: lower() in the C
+    // collation is translate's map over the same code points.
+    const p = (await db.query(`with cp as (select chr(c) as ch from generate_series(1, 1114111) c where c < 55296 or c > 57343),
+        t as (select (select jsonb_agg(ch) from cp)::text as r)
+      select (select count(*) from cp)::int as n,
+             cardinality(string_to_array(public._gallery_veil_name_ready(regexp_replace(t.r, '\\\\(?:u[0-9a-fA-F]{4}|.)', ' ', 'g'),
+                                                                          public._gallery_veil_name_search(array['Red hand'], array['Red hand tannery']) -> 'blank'), '"')) as ready,
+             cardinality(string_to_array(replace(replace(t.r, chr(92) || chr(92), chr(1) || chr(1)), chr(92) || '"', chr(2) || chr(2)), '"')) as json,
+             (select lower(string_agg(ch, '') collate "C") = translate(string_agg(ch, ''), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') from cp) as az
+        from t`)).rows[0];
+    expect(p).toEqual({ n: 1112063, ready: 2 * 1112063 + 1, json: 2 * 1112063 + 1, az: true });
+  }, ARM_TIMEOUT_MS);
+
+  it('V8-3 THE WALK SCALES: on the V8-3 row\'s shape (five houses hidden whole; N rows, each one record whose one string names one of them, every string distinct) the name pass and the walk take under 8 times as long at 4N as at N (linear is about 4; children x hits about 16)', async () => {
+    // The read's own steps, timed alone: the frozen 211's sanitiser is itself more than linear on this shape (natively,
+    // x211's gallery read of 1,000 rows 89 ms, of 4,000 rows 972 ms: docs/chair/2026-11-14/veil-probe-16/out/V83-cost.txt),
+    // so a whole read could not carry the margin. The name search is built as the read builds it.
+    const N = 1500;
+    const srch = (await db.query(`select public._gallery_veil_name_search(array(select 'Aa guild ' || i || ' of the long name' from generate_series(1, 5) i), array['Fish market']) as j`)).rows[0].j;
+    const shape = (n) => JSON.stringify({ name: 'Costwell', tier: 'town',
+      economicState: { rows: Array.from({ length: n }, (_, j) => ({ d: `note ${j + 1} on aa guild ${1 + ((j + 1) % 5)} of the long name` })) } });
+    const once = async (doc) => {
+      const t0 = performance.now();
+      const row = (await db.query(`select (select count(*) from jsonb_array_elements(w.s #> '{economicState,rows}') e where e ? 'd')::int as kept, jsonb_array_length(w.s #> '{economicState,rows}') as rows
+        from (select public._gallery_veil_name_sweep($1::jsonb, h.h, $2::jsonb -> 'blank', $2::jsonb -> 'raw') as s
+                from (select public._gallery_veil_name_hits($1::jsonb, $2::jsonb) as h offset 0) h offset 0) w`, [doc, JSON.stringify(srch)])).rows[0];
+      return { ms: performance.now() - t0, ...row };
+    };
+    const median = (a) => [...a].sort((x, y) => x - y)[Math.floor(a.length / 2)];
+    const small = shape(N); const large = shape(4 * N);
+    await once(small);
+    const t1 = []; const t4 = [];
+    for (let i = 0; i < 3; i += 1) {
+      const a = await once(small); const b = await once(large);
+      expect([a.kept, a.rows, b.kept, b.rows]).toEqual([0, N, 0, 4 * N]);
+      t1.push(a.ms); t4.push(b.ms);
+    }
+    const ratio = median(t4) / median(t1);
+    if (process.env.VEIL_V83_SCALE_OUT) writeFileSync(process.env.VEIL_V83_SCALE_OUT, `N ${N}: ${t1.map(x => x.toFixed(1)).join(' ')} ms; 4N ${4 * N}: ${t4.map(x => x.toFixed(1)).join(' ')} ms; medians ${median(t1).toFixed(1)} | ${median(t4).toFixed(1)}; ratio ${ratio.toFixed(2)}\n`, { flag: 'a' });
+    expect(ratio, `4N takes ${ratio.toFixed(2)} times N`).toBeLessThan(8);
   }, ARM_TIMEOUT_MS);
 });

@@ -76,6 +76,7 @@ arrived); this seat finishes V8-3, pushes it with 212's pair, and hands back the
 | `supabase/migrations/211_server_side_share_veil.sql` (FROZEN, untouched) | `eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01` |
 | `supabase/rollback/211_server_side_share_veil.down.sql` (FROZEN, untouched) | `ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f` |
 | 212 at d0afa93dd (the base) | `aafda53f73fe955e7cfb2601e65b43412a97bf896bf88ec32ba3149a28707892` / down `654d62aa6905aae5eea7518af9f54680cfc8192269110aae41d7384a1cac6d3e` |
+| 212 after V8-3 (the builder's commit on `veil16`, on 19017348f) | `46389052ea3460a2b0ce8181df0e0c0c7599fe4c63e29af58f55ff06941bce0b` / down `5b3eb697ae2531f83c2586d2c59b5afe414e6647ba65b9a884e9dfd09ddf694f` |
 
 **Not final. The owner's pack `docs/chair/2026-11-13/veil-212/` describes old bytes: do not use it.**
 
@@ -101,11 +102,13 @@ arrived); this seat finishes V8-3, pushes it with 212's pair, and hands back the
 
 | Item | Server (212) | Client twin | Red first -> green | Commit |
 |---|---|---|---|---|
+| V8-3, THE WALK IN ONE PASS (the cost law) | The strings that hold a name are marked ONCE: the k-th quoted run of the document's text made ready is its k-th token (no step of the preparation makes or eats a quotation mark: proved over every code point of every plane, both engines), so the one marking pass of `_gallery_veil_name_hits` names the hit tokens, kept by their JSON spelling (new `_gallery_veil_name_json`); `_name_hit` and `_named` are look-ups of that spelling (no text made ready again; the separators-only names asked as written once a string, in the same set); the sweep reads the hit places off its document once, carries each container's range of tokens (new `_gallery_veil_name_tokens`) and asks the sorted places by width_bucket (`_gallery_veil_name_near(int, int, int[])`, re-signed): no children x hits, no preparation a level. `_name_ready` lowers A-Z by lower() in the C collation (the same map; 29 ms to 0.2 on Langengrund). Floors, the bound at level 64, every rebuild unchanged. Helpers 69 to 71 (the rollback drops the new signatures). | Unchanged (no rule moved). Timed on the V8-3 row: 302 ms (`measure/twin8.probe.jsx`). | RED at d0afa93dd: the cost rows (V8-3 row 3.14 x, Langengrund's link 2.06 to 2.35 x) and the new arm V8-3 THE WALK SCALES in the red archive (4N 11.41 times N). GREEN: both new arms 5 of 5 (scale 4.10 to 4.31), THE ANSWERS green at the base too, its 12 responses byte for byte the base's; guards 119 of 119 (galleryVeilHandRows 17, the rest as at the base); acceptance unchanged (exit 1, a07 and d06 only, e06 PASS, twin 15 of 15); born (REVIEW-VEIL-13, R5_N=4) 1,152 rows, 0 fingerprints differ; the V13-1 plant 18 of 18 equal, COVERTMARK in no link response; 212 twice, down, up: exit 0, 71 / 40 / 71. COST, x211 / base / after, ms medians: V8-3 row 6,167 / 19,356 / 7,017 (1.14 x); Langengrund link 222.6 / 459.3 / 400.2 (1.80 x), default veil 231.9 / 508.8 / 380.8 (1.64 x), gallery 277.2 / 540.5 / 404.4 (1.46 x); large rows 1.16 x and 1.11 x; the 200- and 50-house rows 1.47 x and 1.89 x (their rest: the alternation's pass, V8-9's). `veil-probe-16/out/V83-*.txt` | the builder's commit on `veil16` (its message) |
 
 ## 4. WHAT IS LEFT, in order (line by line, for the next seat)
 
-3. V8-3 (the cost law: the largest born town's link is 2.35 x the frozen 211 at d0afa93dd, measured by this seat; this
-   item owns it: IN HAND, its builder working to `veil-probe-16/briefs/SUB-BRIEF-V8-3.md`), V8-9 (a drafted sub-brief:
+3. ~~V8-3 (the cost law: the largest born town's link is 2.35 x the frozen 211 at d0afa93dd, measured by this seat; this
+   item owns it: IN HAND, its builder working to `veil-probe-16/briefs/SUB-BRIEF-V8-3.md`)~~ DONE by its builder (section 3;
+   Langengrund's link 1.64 to 1.80 x, the V8-3 row 1.14 x), V8-9 (a drafted sub-brief:
    `veil-probe-16/briefs/SUB-BRIEF-V8-9.md`, to be brought to the tip it is built on); then V8-2, V8-4, V8-5 (each one commit by identity, else the pack's WHAT 212 DOES NOT CLOSE).
 4. B (V7-5, a07), C (V7-8, d06; R3 with it), D (the income row by its house).
 5. E, the acceptance run at ONE checksum; ONE message to the chair; 212 unchanged until the chair answers.

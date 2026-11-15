@@ -123,6 +123,15 @@
 --       as JavaScript lowers them: for an ASCII needle the engine's match, every code point of every plane measured. A
 --       needle outside ASCII, which no server engine lowers as JavaScript does, WHERE UNSURE, WITHHOLD: a house hidden
 --       whole answers it where it is the name or is named outside ASCII, an open house only where it is the name.
+--   (26) THE WALK IN ONE PASS (VEIL-16; REVIEW-VEIL-8's V8-3, the cost law): the walk asked every child container of a
+--       node on the way whether it might hold a hit by making the child's whole text ready again and scanning it for
+--       every hit string (children x hits, and the preparation once a level). Now the strings that hold a name are
+--       marked ONCE: the k-th quoted run of the document's text made ready is its k-th string or key (no step of the
+--       preparation makes or eats a quotation mark: section 4c), so the one marking pass names the hit tokens, kept by
+--       their JSON spelling (_gallery_veil_name_json); the walk carries each container's range of tokens and asks a
+--       sorted array of the hit places by width_bucket (_gallery_veil_name_near, _gallery_veil_name_tokens). The
+--       separators-only names are asked as written once a string, in the same set. No answer moves: the same keys and
+--       strings leave, the floors, the bound and every rebuild unchanged; the twin is unchanged.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -134,14 +143,14 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
--- NEW: twenty-nine helpers (_gallery_veil_pieces, _runs, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
--- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's sixteen: _name_sep, _name_bound,
--- _name_pad, _name_case, _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_hits, _name_hit, _named, _name_near,
--- _name_floor, _name_taken, _name_sweep). RESTATED, each as 211's statement plus the cure:
+-- NEW: thirty-one helpers (_gallery_veil_pieces, _runs, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
+-- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's eighteen: _name_sep, _name_bound,
+-- _name_pad, _name_case, _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_json, _name_hits, _name_hit, _named,
+-- _name_tokens, _name_near, _name_floor, _name_taken, _name_sweep). RESTATED, each as 211's statement plus the cure:
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier, get_unlisted_dossier
 -- (VEIL-13, ruling (5): its apply's full town) and import_gallery_dossier (their grants restated as 211 states them).
 -- No helper of 211 changes its signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (69 in all). NOT CHANGED: get_gallery_map and every
+-- helper is callable by public, anon or authenticated (71 in all). NOT CHANGED: get_gallery_map and every
 -- other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9); the name search, (19)), called
@@ -340,12 +349,14 @@ $$;
 -- stands here, and in the client's twin rule for rule (gallerySecondHomes.js, THE NAME SEARCH):
 --   THE PREPARATION of a text that holds a character outside ASCII: NFKD, then the combining marks U+0300 to U+036F
 --     removed (a full-width or ligature spelling is its letters; an accent is no part of a letter; U+0130 is I, the
---     Kelvin sign is K). No text is ever case-mapped by an engine's own function.
+--     Kelvin sign is K). No text is ever case-mapped by the database's own locale (A-Z alone are lowered; below).
 --   A SEPARATOR is a character of ONE explicit set (_gallery_veil_name_sep): every ASCII character that is not a letter
 --     or a digit, U+0080 to U+00BF, U+00D7, U+00F7, U+2000 to U+206F, U+2E00 to U+2E7F, U+3000 to U+303F, U+FE30 to
 --     U+FE6F, U+FEFF and the full-width punctuation. EVERYTHING ELSE IS KEPT: a name of symbols only, or in a script
 --     with no case and no spaces, is searched as it is written.
---   THE FOLD: prepared, A-Z lowered by an explicit map, every run of separators one '_'. A text is folded ONCE.
+--   THE FOLD: prepared, A-Z lowered and nothing else (a name by an explicit map, translate; a text made ready by lower()
+--     in the C collation, which lowers A-Z alone in every database, whatever its locale: the same map, the guard asks
+--     every code point of every plane), every run of separators one '_'. A text is folded ONCE.
 --   CASE OUTSIDE A-Z LIVES IN THE NEEDLE: each letter of a hidden name that has another case is written in the pattern
 --     as the bracket of its case class, from ONE table carried as the same literal by both engines
 --     (_gallery_veil_name_case); sharp s and "ss" are one.
@@ -374,13 +385,32 @@ $$;
 --   THE WHOLE TEXT IS ASKED FIRST (the document's text, its escapes made spaces, folded once): no hit, no walk. THE
 --     WALK IS ITERATIVE (211's _gallery_veil_drop_hooks shape: only the nodes on the way to a hit are rebuilt) and
 --     bounded: the root is level 0, and a container at level 64 that holds a hit at any depth is withheld whole.
+--   THE MARKS ARE THE TOKENS (VEIL-16, V8-3): in a document's JSON text each quotation mark not escaped starts or ends a
+--     string or key, so its k-th quoted run is its k-th token. No step of the preparation makes or eats one: the escapes
+--     are made spaces first; the padding writes spaces; the preparation makes spaces of the only three code points whose
+--     compatibility form holds a quotation mark or a reverse solidus (U+FF02, U+FF3C, U+FE68: every code point of every
+--     plane measured, both engines), and its skew writes letters; the separators' fold leaves the quotation mark out;
+--     no needle or cut-out holds one (a name's fold makes it a separator). So the k-th quoted run of the text made
+--     ready is the k-th token as made ready, and the one marking pass names every token that holds a hidden name, by
+--     its place. A token is kept by its JSON spelling (_gallery_veil_name_json: the text as JSON writes it, each escaped
+--     reverse solidus and quotation mark two control characters, which no JSON text holds as written, so that every
+--     quotation mark left is a token's end), which is the same for every copy of the same string: a token of any later
+--     shortening of the document is asked by that spelling (a look-up; _gallery_veil_name_hit, _named), and the walk
+--     reads the places of the tokens that hold a hit off the document it is handed, once, and carries each container's
+--     range of tokens (_gallery_veil_name_tokens counts a child's; _gallery_veil_name_near asks the sorted places by
+--     width_bucket). Never a scan per hit, never a text made ready twice.
 -- THE COST (V7-6), each figure measured on PostgreSQL 16 (docs/chair/2026-11-13/veil-probe-10/out/): one alternation of
 -- 1,200 names takes 0.14 to 0.6 ms to START, so 10,000 strings asked one by one cost 1.4 to 6.2 s, where one 388 KB
 -- text asked whole costs 3 to 145 ms. So the alternation is run ONCE over the document's text, and once more, only
 -- where that found something, to mark the strings that hold a name; every later test of one string is a look-up of
 -- that string among them. And a needle that brackets every ASCII letter's two cases takes 675 ms to compile for 1,200
 -- names of three words, where the same names in lower case take 40 ms: so the text's A-Z are lowered (one pass) and
--- only a letter outside A-Z is bracketed.
+-- only a letter outside A-Z is bracketed. THE WALK (V8-3; docs/chair/2026-11-14/veil-probe-16/out/V83-cost.txt):
+-- asking each child container by its made-ready text whether it held one of the hit strings cost children x hits, and
+-- the preparation once a level (at d0afa93dd, Langengrund's link 2.06 to 2.35 times the frozen 211, 10,000 rows that
+-- each name a hidden house 3.14 times); now each child's tokens are counted once at its level (a count of its
+-- quotation marks: no regular expression, no preparation) and asked of the sorted places in logarithmic time (1.64 to
+-- 1.80 and 1.14 times, medians on the native cluster).
 
 -- [212: NEW] public._gallery_veil_name_sep
 -- THE SEPARATORS, as the body of a bracket expression; `quote` false leaves the quotation mark out (the fold of a
@@ -688,18 +718,24 @@ begin
 end $$;
 
 -- [212: NEW] public._gallery_veil_name_ready
--- A text made ready for the search (THE FOLD of a text): padded (_gallery_veil_name_pad) and prepared; A-Z lowered by an explicit map (never an engine's
--- lower(): the other letters keep their case, which is the needle's); every run of separators one '_' (the quotation
--- mark aside: in a document's text it is where a string ends, and a string asked alone holds none by then); then each
--- open name that holds a hidden one cut out, longest first (in its place the Kelvin sign, U+212A, which no prepared
--- text holds and no needle names: the preparation writes it K; nor is it in the blocking table, so a hidden name beside
--- a cut-out is beside a boundary). A cut-out's pattern consumes no neighbour (COHERENCE-VEIL-12): the mark alone is put.
+-- A text made ready for the search (THE FOLD of a text): padded (_gallery_veil_name_pad) and prepared; A-Z lowered and
+-- nothing else (never the database's locale: the other letters keep their case, which is the needle's); every run of
+-- separators one '_' (the quotation mark aside: in a document's text it is where a string ends, and a string asked
+-- alone holds none by then); then each open name that holds a hidden one cut out, longest first (in its place the
+-- Kelvin sign, U+212A, which no prepared text holds and no needle names: the preparation writes it K; nor is it in the
+-- blocking table, so a hidden name beside a cut-out is beside a boundary). A cut-out's pattern consumes no neighbour
+-- (COHERENCE-VEIL-12): the mark alone is put.
+-- VEIL-16 (V8-3): A-Z are lowered by lower() IN THE C COLLATION, which lowers A-Z alone in every database whatever its
+-- locale (PostgreSQL's str_tolower: a C collation takes asc_tolower), the very map translate wrote; translate walks the
+-- 26 letters at every character of a text that holds one outside ASCII (29 ms on Langengrund's 320 KB, against 0.2).
+-- The guard holds the two equal over every code point of every plane; the separators are then asked in the database's
+-- own collation, as before.
 create or replace function public._gallery_veil_name_ready(t text, blank jsonb)
 returns text language plpgsql immutable as $$
 declare
   b text;
 begin
-  t := regexp_replace(translate(public._gallery_veil_name_prep(public._gallery_veil_name_pad(t)), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),
+  t := regexp_replace(lower(public._gallery_veil_name_prep(public._gallery_veil_name_pad(t)) collate "C") collate "default",
                       '[' || public._gallery_veil_name_sep(false) || ']+', '_', 'g');
   if blank is null or blank = '[]' then return t; end if;
   for b in select jsonb_array_elements_text(blank) loop
@@ -708,66 +744,116 @@ begin
   return t;
 end $$;
 
+-- [212: NEW] public._gallery_veil_name_json
+-- A JSON text WITH ITS TOKENS' ENDS BARE (VEIL-16, V8-3): each escaped reverse solidus written as two U+0001 and then each
+-- escaped quotation mark as two U+0002 (left to right, every reverse solidus of a JSON text starts its escape, so each
+-- replacement stands where an escape stands), so that every quotation mark left starts or ends a string or a key; no
+-- JSON text holds a control character as written, so the spelling is one to one. A string's JSON spelling: the text
+-- to_jsonb writes, its two quotation marks off, through this; two strings are one exactly where these are one. A
+-- name that is separators only stands in a string exactly where its JSON spelling stands in the string's: the
+-- escapes are whole characters, and a spelling cannot start inside one but at the second of two U+0001 (or U+0002),
+-- where the same name also stands one character earlier.
+create or replace function public._gallery_veil_name_json(t text)
+returns text language sql immutable as $$
+  select replace(replace(t, chr(92) || chr(92), chr(1) || chr(1)), chr(92) || '"', chr(2) || chr(2))
+$$;
+
 -- [212: NEW] public._gallery_veil_name_hits
--- THE WHOLE TEXT, ASKED FIRST, AND THE STRINGS THAT HOLD A NAME. The value's text, each escape made one space (an
--- escape stands for a quotation mark, a reverse solidus or a control character: separators all), made ready ONCE; no
--- match of `p`, and '{}' is the answer (a superset: it reads the punctuation between two strings as separators). Else
--- what stands between two strings is dropped, so every string and key is one "..." after another; `p` is run over
--- that once more, a mark (U+0001, which a text made ready never holds) set before each name it finds (inside its
--- string: `p` consumes no neighbour, so two names that share one are each found); and the strings that hold a mark
--- are the answer: {the string as made ready: true}. Whether one string or key holds a hidden name is
--- from here on a look-up among these (_gallery_veil_name_hit): the alternation is never run a string at a time.
+-- THE WHOLE TEXT, ASKED FIRST, AND THE STRINGS THAT HOLD A NAME, MARKED ONCE (VEIL-16, V8-3: section 4c, THE MARKS ARE
+-- THE TOKENS). The value's text, each escape made one space (an escape stands for a quotation mark, a reverse solidus or
+-- a control character: separators all), made ready ONCE; no match of `p`, and no string holds a name. Else `p` is run
+-- over it once more, a mark (U+0001, which a text made ready never holds) set before each name it finds (inside its
+-- string: `p` consumes no neighbour and holds no quotation mark, so two names that share one are each found, and a
+-- match between two strings marks none); the k-th quoted run of that is the k-th token of the value's text, so the
+-- tokens whose run holds a mark are the answer, each by its JSON spelling (_gallery_veil_name_json): {spelling: true}.
+-- With them, each token that holds, as written, a name that is separators only (its JSON spelling in the token's).
+-- Were the two texts ever to hold a different number of quoted runs (the proof says never), every token is the
+-- answer: the walk then withholds every string and key but the floors. Whether one string or key holds a hidden name
+-- is from here on a look-up among these (_gallery_veil_name_hit, _named, _sweep): the alternation is never run a
+-- string at a time, and no text is made ready again.
 create or replace function public._gallery_veil_name_hits(v jsonb, srch jsonb)
 returns jsonb language plpgsql immutable as $$
 declare
-  n text := v::text;
+  r text := v::text;
+  q text;              -- the value's text with its tokens' ends bare: its quoted runs are its tokens' JSON spellings
+  n text;
   p text := srch ->> 'p';
+  raws jsonb := coalesce(srch -> 'raw', '[]');
+  rq text[];
+  aq text[];
+  an text[];
+  h jsonb := '{}';
 begin
-  if p is null then return '{}'; end if;
-  if position('\' in n) > 0 then n := regexp_replace(n, '\\(?:u[0-9a-fA-F]{4}|.)', ' ', 'g'); end if;
-  n := public._gallery_veil_name_ready(n, srch -> 'blank');
-  if n !~ p then return '{}'; end if;
-  n := regexp_replace(regexp_replace(n, '"([^"]*)"[^"]*', '"\1"', 'g'), p, chr(1) || '\&', 'g');
-  return coalesce((select jsonb_object_agg(z.h, true)
-                     from (select distinct btrim(replace(m[1], chr(1), ''), '"') as h
-                             from regexp_matches(n, '"[^"]*"', 'g') m where position(chr(1) in m[1]) > 0) z), '{}');
+  if p is null and raws = '[]' then return '{}'; end if;
+  if p is not null then
+    n := r;
+    if position(chr(92) in n) > 0 then n := regexp_replace(n, '\\(?:u[0-9a-fA-F]{4}|.)', ' ', 'g'); end if;
+    n := public._gallery_veil_name_ready(n, srch -> 'blank');
+    if n ~ p then
+      q := public._gallery_veil_name_json(r);
+      aq := string_to_array(q, '"');
+      an := string_to_array(regexp_replace(n, p, chr(1) || '\&', 'g'), '"');
+      if cardinality(an) is distinct from cardinality(aq) then
+        return coalesce((select jsonb_object_agg(u.t, true) from unnest(aq) with ordinality u(t, o) where u.o % 2 = 0), '{}');
+      end if;
+      select coalesce(jsonb_object_agg(u.b, true), '{}') into h
+        from unnest(an, aq) with ordinality u(a, b, o) where u.o % 2 = 0 and position(chr(1) in u.a) > 0;
+    end if;
+  end if;
+  if raws <> '[]' then
+    if q is null then q := public._gallery_veil_name_json(r); aq := string_to_array(q, '"'); end if;
+    -- the separators-only names, each by its JSON spelling, those the text holds at all; then each token that holds one
+    rq := array(select z.x from (select public._gallery_veil_name_json(substr(j, 2, length(j) - 2)) as x
+                                   from (select to_jsonb(e)::text as j from jsonb_array_elements_text(raws) e) y) z
+                 where position(z.x in q) > 0);
+    if cardinality(rq) > 0 then
+      h := h || coalesce((select jsonb_object_agg(u.t, true) from unnest(aq) with ordinality u(t, o)
+                           where u.o % 2 = 0 and exists (select 1 from unnest(rq) x where position(x in u.t) > 0)), '{}');
+    end if;
+  end if;
+  return h;
 end $$;
 
 -- [212: NEW] public._gallery_veil_name_hit
--- One string or key holds a hidden name: made ready as the document's text was (a quotation mark, a reverse solidus
--- and a control character each one space, as their escapes were), it is one of `hits`; or it holds, as written, a name
--- that is separators only. (The client's twin asks the pattern of each string; the answers are the same: the guard.)
+-- One string or key holds a hidden name: its JSON spelling is one of `hits` (VEIL-16: `hits` holds the tokens that hold
+-- a name by the search and those that hold a separators-only name as written; `blank` and `raws` are in it, and stay
+-- in the signature). Asked of a string of the document `hits` was read from, or of a shortening of it (each of its
+-- strings is one of the document's): the same answer as the search asked of that string alone (the guard).
 create or replace function public._gallery_veil_name_hit(t text, hits jsonb, blank jsonb, raws jsonb)
 returns boolean language sql immutable as $$
-  select hits ? public._gallery_veil_name_ready(translate(t, E'"\\\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f',
-                                                             repeat(' ', 33)), blank)
-      or (raws <> '[]' and exists (select 1 from jsonb_array_elements_text(raws) r where position(r in t) > 0))
+  select hits ? public._gallery_veil_name_json(left(right(to_jsonb(t)::text, -1), -1))
 $$;
 
 -- [212: NEW] public._gallery_veil_named
 -- Some key or string of the value, at any depth, holds a hidden name (exact, and without a call a level: the value's
--- strings are read off its text one token at a time).
+-- tokens are read off its text, each by its JSON spelling, in one split).
 create or replace function public._gallery_veil_named(v jsonb, hits jsonb, blank jsonb, raws jsonb)
 returns boolean language sql immutable as $$
-  select coalesce(jsonb_typeof(v) in ('string', 'object', 'array') and (hits <> '{}' or raws <> '[]')
-    and exists (select 1 from regexp_matches(v::text, '"(?:[^"\\]|\\.)*"', 'g') m
-                 where public._gallery_veil_name_hit(m[1]::jsonb #>> '{}', hits, blank, raws)), false)
+  select coalesce(jsonb_typeof(v) in ('string', 'object', 'array') and hits <> '{}'
+    and exists (select 1 from unnest(string_to_array(public._gallery_veil_name_json(v::text), '"')) with ordinality u(t, o)
+                 where u.o % 2 = 0 and hits ? u.t), false)
+$$;
+
+-- [212: NEW] public._gallery_veil_name_tokens
+-- How many tokens (strings and keys, at any depth) a value's JSON text holds (VEIL-16, V8-3): a string one; a container
+-- half the quotation marks its text holds with its tokens' ends bare; any other value none.
+create or replace function public._gallery_veil_name_tokens(v jsonb)
+returns int language sql immutable as $$
+  select case jsonb_typeof(v) when 'string' then 1
+                              when 'object' then (octet_length(x.j) - octet_length(replace(x.j, '"', ''))) / 2
+                              when 'array' then (octet_length(x.j) - octet_length(replace(x.j, '"', ''))) / 2
+                              else 0 end
+    from (select case when jsonb_typeof(v) in ('object', 'array') then public._gallery_veil_name_json(v::text) end as j offset 0) x
 $$;
 
 -- [212: NEW] public._gallery_veil_name_near
--- A container may hold a hit (a superset, for the walk: its text made ready holds one of the hit strings, or its text
--- holds a separators-only name as JSON writes it).
-create or replace function public._gallery_veil_name_near(v jsonb, hits jsonb, blank jsonb, raws jsonb)
-returns boolean language plpgsql immutable as $$
-declare
-  txt text := v::text;
-  n text;
-begin
-  if raws <> '[]' and exists (select 1 from jsonb_array_elements(raws) r where position(substr(r::text, 2, length(r::text) - 2) in txt) > 0) then return true; end if;
-  if hits = '{}' then return false; end if;
-  n := public._gallery_veil_name_ready(case when position('\' in txt) > 0 then regexp_replace(txt, '\\(?:u[0-9a-fA-F]{4}|.)', ' ', 'g') else txt end, blank);
-  return exists (select 1 from jsonb_object_keys(hits) h where position(h in n) > 0);
-end $$;
+-- A container may hold a hit (VEIL-16, V8-3; exact on the tokens: a hit's place stands among its own): the container
+-- has `b` tokens of the document before it and `n` of its own; `hk` is the places of the tokens that hold a hit,
+-- ascending. Two binary searches (width_bucket counts the places at or below a token).
+create or replace function public._gallery_veil_name_near(b int, n int, hk int[])
+returns boolean language sql immutable as $$
+  select n > 0 and width_bucket(b + n, hk) > width_bucket(b, hk)
+$$;
 
 -- [212: NEW] public._gallery_veil_name_floor
 -- THE FLOORS of a record, by the list it stands in (`list`: that list's path): the `id` and `name` of a house still
@@ -800,9 +886,14 @@ $$;
 -- projection that holds a hidden name leaves it (a record loses the key, a list the entry; an entry whose own `id` or
 -- `name` is taken leaves its list whole), the floors aside. WALKED WITHOUT A CALL A LEVEL, as 211's
 -- _gallery_veil_drop_hooks walks: a recursive query, iterated by the executor, finds the containers ON THE WAY to a
--- hit (it descends only into a child that may hold one, _gallery_veil_name_near, and never below a floor), and those
+-- hit (it descends only into a child that holds one, _gallery_veil_name_near, and never below a floor), and those
 -- alone are rebuilt, deepest first. THE BOUND: the root is level 0; a container at level 64 is not walked: it is
 -- withheld whole if it holds a hit at any depth (the closed answer), and sent as it is if it holds none.
+-- IN ONE PASS (VEIL-16, V8-3): the places of the tokens that hold a hit are read off this document's text once (its
+-- quoted runs, each looked up by its JSON spelling in `hits`), ascending; each node carries how many tokens of the
+-- text stand before it, each child's own are counted once at its level (_gallery_veil_name_tokens: an object's entry
+-- is its key and its value, in the order jsonb keeps and writes them), and a child is walked where a place falls in
+-- its range (two binary searches). No child's text is made ready, and no step asks every hit.
 create or replace function public._gallery_veil_name_sweep(s jsonb, hits jsonb, blank jsonb, raws jsonb)
 returns jsonb language plpgsql immutable as $$
 declare
@@ -816,20 +907,30 @@ declare
   ix int := 1;
   ex int;
   n int;
+  hk int[];     -- the places of the tokens that hold a hit, ascending (the k-th token of the document's text is k)
 begin
-  if hits = '{}' and raws = '[]' then return s; end if;
-  with recursive w(p, d, v, f) as (
-      select '[]'::jsonb, 0, s, '["name"]'::jsonb
+  -- `hits` holds the separators-only names' tokens too (VEIL-16): none, and nothing holds a name
+  if hits = '{}' then return s; end if;
+  hk := array(select (u.o / 2)::int from unnest(string_to_array(public._gallery_veil_name_json(s::text), '"')) with ordinality u(t, o)
+               where u.o % 2 = 0 and hits ? u.t order by u.o);
+  if cardinality(hk) = 0 then return s; end if;
+  with recursive w(p, d, v, f, b) as (
+      select '[]'::jsonb, 0, s, '["name"]'::jsonb, 0
     union all
-      select w.p || to_jsonb(c.k), w.d + 1, c.v, c.f
+      select w.p || to_jsonb(c.k), w.d + 1, c.v, c.f, c.b
         from w, lateral (
-          select x.k, x.v, '[]'::jsonb as f
-            from jsonb_each(case when jsonb_typeof(w.v) = 'object' then w.v else '{}' end) x(k, v)
-           where jsonb_typeof(x.v) in ('object', 'array') and not (w.f ? x.k) and public._gallery_veil_name_near(x.v, hits, blank, raws)
+          -- an entry of a record: its key is a token, then its value's own; of a list: its value's own
+          select e.k, e.v, e.f, e.b
+            from (select x.k, x.v, '[]'::jsonb as f, m.m, (w.b + sum(1 + m.m) over (order by x.o) - m.m)::int as b
+                    from jsonb_each(case when jsonb_typeof(w.v) = 'object' then w.v else '{}' end) with ordinality x(k, v, o),
+                         lateral (select public._gallery_veil_name_tokens(x.v) as m offset 0) m) e
+           where jsonb_typeof(e.v) in ('object', 'array') and not (w.f ? e.k) and public._gallery_veil_name_near(e.b, e.m, hk)
           union all
-          select (y.o - 1)::text, y.v, public._gallery_veil_name_floor(w.p, y.v)
-            from jsonb_array_elements(case when jsonb_typeof(w.v) = 'array' then w.v else '[]' end) with ordinality y(v, o)
-           where jsonb_typeof(y.v) in ('object', 'array') and public._gallery_veil_name_near(y.v, hits, blank, raws)) c
+          select e.k, e.v, e.f, e.b
+            from (select (y.o - 1)::text as k, y.v, public._gallery_veil_name_floor(w.p, y.v) as f, m.m, (w.b + sum(m.m) over (order by y.o) - m.m)::int as b
+                    from jsonb_array_elements(case when jsonb_typeof(w.v) = 'array' then w.v else '[]' end) with ordinality y(v, o),
+                         lateral (select public._gallery_veil_name_tokens(y.v) as m offset 0) m) e
+           where jsonb_typeof(e.v) in ('object', 'array') and public._gallery_veil_name_near(e.b, e.m, hk)) c
        where w.d < 63
   )
   select array_agg(p order by d desc, p), array_agg(d order by d desc, p), array_agg(v order by d desc, p), array_agg(f order by d desc, p) into wp, wd, wv, wf from w;
