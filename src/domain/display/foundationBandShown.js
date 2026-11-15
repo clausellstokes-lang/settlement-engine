@@ -16,6 +16,7 @@
  * Pure: no draw, no write; the model's score does not move.
  */
 import { deriveSupportingCapabilities } from './defenseDisplay.js';
+import { tradeListsAsPrinted } from './tradeListDisplay.js'; // BAR3-LABELS-2 item 4: what the Economics tab prints as arriving
 
 /** The row's scale, worst first (SubstrateTab.jsx's BAND_RANK). */
 const RANK = Object.freeze({ collapsed: 0, critical: 1, strained: 2, adequate: 3, surplus: 4 });
@@ -75,7 +76,23 @@ export function foundationCapOf(settlement, key) {
  * @returns {string}
  */
 export function foundationBandShown(settlement, key, band) {
+  if (key === 'trade_connectivity') return band === 'collapsed' && tradeArrivesOnPage(settlement) ? 'critical' : band;
   const cap = foundationCapOf(settlement, key);
   if (!cap || !Object.hasOwn(RANK, band)) return band;
   return RANK[/** @type {keyof typeof RANK} */ (band)] > RANK[cap] ? cap : band;
+}
+
+/**
+ * TRADE THAT ARRIVES IS NOT COLLAPSED (BAR3-LABELS-2, the chair's direction 4 of 2026-11-15, REVIEW-BAR-3 C6511; vetoable
+ * by the owner). "Trade connectivity: Collapsed", the bottom of the row's scale, printed beside an Imports list the
+ * Economics tab prints as arriving and a River Toll that runs: the model's score sinks under many strained transit chains
+ * (2 of the census's 720 at 8b45191a5, neither at war nor besieged; the read town was at war). Where the tab prints goods
+ * arriving by trade (`tradeListDisplay.js :: tradeListsAsPrinted().imports`, empty where a siege has stopped trade, whose
+ * row prints the siege's own word), the row reads at its next rung, "Critical", in its own scale (no new word).
+ * @param {unknown} settlement @returns {boolean}
+ */
+export function tradeArrivesOnPage(settlement) {
+  try {
+    return tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement)).imports.length > 0;
+  } catch { return false; }
 }

@@ -26,7 +26,7 @@
  *
  * Pure: no randomness, no clock, no write. Every view is built once per block, pool and admitted set.
  */
-import { officialsInCriminalPayOf } from '../../facts/officialsInPay.js';
+import { corruptOfficialsOf, officialsInCriminalPayOf } from '../../facts/officialsInPay.js';
 
 /** The hall's rungs at which the criminals hold it. */
 const HALL_HELD = Object.freeze(['corrupted', 'capture']);
@@ -39,9 +39,12 @@ export const CRIME_LINE_FACTS = Object.freeze({
   'no official in pay': (/** @type {CrimeLineFacts} */ f) => f.officialsInPay === 0 && !HALL_HELD.includes(f.captureState),
   'an official in pay': (/** @type {CrimeLineFacts} */ f) => (f.officialsInPay ?? 0) > 0 || HALL_HELD.includes(f.captureState),
   'no agent in the hall': (/** @type {CrimeLineFacts} */ f) => f.captureState === 'none' || f.captureState === 'adversarial',
+  // BAR3-LABELS-2 item 5 (C20093): an official who sells: one in criminal pay, or one the page prints corrupt
+  // (`facts/officialsInPay.js :: corruptOfficialsOf`: "Flaw: corrupt" on a person of the hall, the watch or the ruling power)
+  'an official who sells': (/** @type {CrimeLineFacts} */ f) => (f.officialsInPay ?? 0) > 0 || HALL_HELD.includes(f.captureState) || (f.corruptOfficials ?? 0) > 0,
 });
 
-/** @typedef {{ officialsInPay: number|null, captureState: string }} CrimeLineFacts */
+/** @typedef {{ officialsInPay: number|null, captureState: string, corruptOfficials?: number|null }} CrimeLineFacts */
 /** @typedef {{ opens: string, falseWhere: keyof typeof CRIME_LINE_FACTS, says: string }} CrimeLineDeclaration */
 
 /** @param {string} opens @param {keyof typeof CRIME_LINE_FACTS} falseWhere @param {string} says @returns {Readonly<CrimeLineDeclaration>} */
@@ -62,7 +65,7 @@ export const CRIME_LINE_DISQUALIFIERS = Object.freeze({
     2: line('The approach was made at {settlement} and did not take', 'an official in pay', 'no official was bought'),
     3: line('The criminals at {settlement} still own a few officials', 'no official in pay', 'the criminals own officials'),
     // the line W2-WRITE-3 wrote for the case the table left empty (a5e74f02): true where no official sold
-    4: line('Criminal money finds little purchase at {settlement}', 'an official in pay', 'no official sells'),
+    4: line('Criminal money finds little purchase at {settlement}', 'an official who sells', 'no official sells'),
   }),
   'DS-DEF-4::capture equilibrium': Object.freeze({
     1: line('The {seat} at {settlement} and the criminal interest have found a line and both keep to it; nothing is bought here', 'an official in pay', 'nothing is bought'),
@@ -84,6 +87,8 @@ export const CRIME_LINE_DISQUALIFIERS = Object.freeze({
 export function crimeLineFactsOf(settlement, audience) {
   return {
     officialsInPay: audience === 'dm' ? officialsInCriminalPayOf(settlement).length : null,
+    // the cast's flaws are the DM's card's (the same veil as the allegiances)
+    corruptOfficials: audience === 'dm' ? corruptOfficialsOf(settlement).length : null,
     // the hall's rung is veiled too (`publicSafe.js`, `galleryVeil.js` strip it): the DM's alone
     captureState: audience === 'dm' ? String(settlement?.powerStructure?.criminalCaptureState ?? '') : '',
   };

@@ -16,6 +16,8 @@ import { defenceHoldsArcane, defenceHoldsDivine, defenceHoldsDruidic, economySho
 import { MAGIC_NOTE_TRADITION } from '../facts/magicSource.js';
 import { chainNeedsMagic, foodMagicShare, FOOD_SUPPLY_DEPENDENT } from '../magicReliance.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js'; // BAR2-LABELS-4: the standing (ruin-filtered) magic bucket
+import { magicSourceOf } from '../facts/magicSource.js'; // BAR3-LABELS-2 L1c: the houses that supply the magic, one home
+import { liveInstitutions } from '../institutions/institutionRoster.js'; // L1c: the live roster the supply names its houses from
 
 /**
  * Whether the town holds the tradition a provision is of.
@@ -178,12 +180,28 @@ function notesShown(record) {
  * @returns {string[]} chain ids, then the food supply
  */
 export function magicDependentsShown(record) {
-  const chains = activeChainsOf(record).filter((c) => {
+  const chains = magicDependentChainsShown(record).map((c) => String(c.chainId ?? 'a supply chain')); // counted, never printed: the chain's id, not its name
+  return [...chains, ...(foodMagicShare(record) > 0 ? [FOOD_SUPPLY_DEPENDENT] : [])];
+}
+
+/**
+ * THE DEPENDENT CHAINS THEMSELVES (BAR3-LABELS-2 L1b, the chair's direction of 2026-11-15; vetoable by the owner): the
+ * active chains `magicDependentsShown` counts (one filter, one home), handed whole to a page that NAMES what relies on
+ * magic: the page prints each one's name through its leaf (`chainPrintName.js`, the `chainPrintSites` law), never here.
+ * @param {unknown} record the settlement record
+ * @returns {Array<Record<string, unknown>>} the active chains that need magic or whose magic note prints, in record order
+ */
+export function magicDependentChainsShown(record) {
+  return activeChainsOf(record).filter((c) => {
     if (chainNeedsMagic(c)) return true;
     const shown = magicNoteShown(c, record);
     return typeof shown === 'string' && shown !== '';
-  }).map((c) => String(c.chainId ?? 'a supply chain')); // counted, never printed: the chain's id, not its name
-  return [...chains, ...(foodMagicShare(record) > 0 ? [FOOD_SUPPLY_DEPENDENT] : [])];
+  });
+}
+
+/** Whether the food supply is among the dependents (`magicDependentsShown`'s own last entry). @param {unknown} record @returns {boolean} */
+export function foodAmongMagicDependents(record) {
+  return foodMagicShare(record) > 0;
 }
 
 /**
@@ -274,4 +292,26 @@ export function magicHeadlineWord(record, availability) {
   if (Object.hasOwn(LEVEL_WORD, level)) return LEVEL_WORD[/** @type {'low'|'medium'|'high'} */ (level)];
   const a = String(availability || '');
   return a.charAt(0).toUpperCase() + a.slice(1);
+}
+
+/** The acceptance words a faith's own supply of magic qualifies (the scale's hostile end: `magicProfile.js`). */
+const ACCEPTANCE_OUTSIDE_OWN_HOUSES = Object.freeze(['hostile', 'wary']);
+
+/**
+ * THE RELIGIOUS ACCEPTANCE WORD THE MAGIC TAB PRINTS (BAR3-LABELS-2, the chair's RULING L1c of 2026-11-15 20:25 UTC;
+ * vetoable by the owner). "Religious acceptance: hostile" printed beside "supplied by House of worship": the faith's
+ * houses supply the town's magic while the faith is hostile to it. BOTH FACTS STAND (the profile's acceptance is not
+ * moved): where a house that supplies the magic (`facts/magicSource.js :: magicSourceOf`) is a religious house on the
+ * live roster and the word is hostile or wary, the word says what the hostility is toward: magic outside the faith's
+ * own houses. Every other word prints as the profile's.
+ * @param {unknown} record the settlement record
+ * @param {unknown} word the magic profile's religious acceptance
+ * @returns {unknown} the word the row prints
+ */
+export function religiousAcceptanceShown(record, word) {
+  if (typeof word !== 'string' || !ACCEPTANCE_OUTSIDE_OWN_HOUSES.includes(word)) return word;
+  const supplying = new Set(magicSourceOf(record).houses);
+  const religious = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record))
+    .some((inst) => supplying.has(String(/** @type {{ name?: unknown }} */ (inst).name ?? '')) && /** @type {{ category?: unknown }} */ (inst).category === 'Religious');
+  return religious ? `${word} outside the faith's own houses` : word;
 }

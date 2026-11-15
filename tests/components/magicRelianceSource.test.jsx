@@ -25,7 +25,10 @@ describe('row 3: the reliance line names its source, or does not print', () => {
     const line = relianceOf(town({ institutions: [{ name: 'Parish churches (10-30)' }, { name: 'Multiple monasteries' }], economicState: { activeChains: [HEALING] } }));
     // re-keyed (W2-A-LEAVES-2, REVIEW-W2A F2): each house is the ROSTER's ("Parish churches (10-30)") through the
     // display seam, its count struck — no longer the chain's catalogue pattern ("Parish church")
-    expect(line?.textContent).toBe('Reliance on magic: Relied upon · supplied by Houses of worship and Multiple monasteries');
+    // re-keyed by its span (BAR3-LABELS-2 L1b, 2026-11-15): the row now also names what relies on magic
+    // (" · for Divine & Magical Healing", the `magic-reliance-for` span) before the source; the source is this arm's subject
+    expect(line?.textContent).toBe('Reliance on magic: Relied upon · for Divine & Magical Healing · supplied by Houses of worship and Multiple monasteries');
+    expect(line?.querySelector('[data-testid="magic-reliance-source"]')?.textContent).toBe(' · supplied by Houses of worship and Multiple monasteries');
   });
   test('nothing on the record supplies it: the reliance line does not print, and the roles still do', () => {
     const settlement = town({ institutions: [{ name: 'Subsistence farming' }], economicState: { activeChains: [{ chainId: 'spellcasting', label: 'Spellcasting Services' }] } });

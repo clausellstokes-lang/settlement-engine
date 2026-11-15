@@ -15,6 +15,32 @@
  * Only the Economics tab calls this leaf. Pure: no randomness, no clock, no write.
  */
 import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine } from './crisisStoppedRow.js';
+import { liveHouseOf } from '../facts/presence.js'; // BAR3-LABELS-2 L3: the roster house a chain's catalogue house answers to
+
+/** The states a flow card prints as working (`chainStateShown.js`'s own set). */
+const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
+
+/**
+ * THE CARD'S WORKING WORD READS THE LEAF THE HOUSES' MARKS READ (BAR3-LABELS-2 L3, the chair's direction of 2026-11-15;
+ * the wide read's C12020; vetoable by the owner). Under a siege, a flow card whose every live processing house the
+ * Services tab marks "stopped" (`crisisStoppedRow.js :: rowStoppedBy`, the houses' one leaf), or that the same leaf
+ * marks stopped itself (the card's own mark), printed a working word ("Running" over a harbour whose harbour master and
+ * docks are stopped, the wide read's city-under_siege+famine-rand-15; "Entrepôt" for a besieged metropolis's smuggling;
+ * "Running" for a tavern trade whose taverns are shut: 4 of the census's 720 at 8b45191a5): the card prints "impaired". Any other card is the one it was given (`chainStateShown.js :: chainAsShown`).
+ * @template {{ status?: unknown }} C
+ * @param {object | null | undefined} town the settlement
+ * @param {Record<string, unknown>} record the chain as the record holds it (`economicState.activeChains[]`)
+ * @param {C} shown the same chain as its card prints it (`chainAsShown`)
+ * @returns {C}
+ */
+export function chainCardUnderSiege(town, record, shown) {
+  if (!CARD_WORKING.has(String(shown?.status ?? '')) || !stoppingCrisesOf(town).includes('under_siege')) return shown;
+  if (rowStoppedBy(town, 'chain', record, ['under_siege']) === 'under_siege') return { ...shown, status: 'impaired' }; // the card's own mark
+  const houses = (Array.isArray(record?.processingInstitutions) ? /** @type {unknown[]} */ (record.processingInstitutions) : [])
+    .map((h) => liveHouseOf(town, h)).filter(Boolean);
+  const stopped = houses.length > 0 && houses.every((h) => rowStoppedBy(town, 'house', /** @type {Record<string, unknown>} */ (h), ['under_siege']) === 'under_siege');
+  return stopped ? { ...shown, status: 'impaired' } : shown;
+}
 
 /**
  * The marks of the flow cards (keyed by the card's chain as shown) and the reading of the share a card names.
