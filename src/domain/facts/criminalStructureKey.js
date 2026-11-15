@@ -65,7 +65,7 @@ export function criminalStructureKeyOf(settlement) {
   // printed "Diffuse, no gang" beside a criminal power on the Power tab (2 of the census's 720). A criminal power
   // is a hierarchy, the pool's own reading of one; the ladder answers only where no criminal power stands.
   // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
-  const key = rivalRingsHere(r) ? 'semi-organized' : signal.factions.length ? 'organized'
+  const key = rivalRingsHere(r) ? 'semi-organized' : signal.powerNames.length ? 'organized'
     : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
   return key;
 }

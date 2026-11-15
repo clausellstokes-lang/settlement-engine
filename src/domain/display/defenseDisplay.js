@@ -832,7 +832,7 @@ function ringWithoutSeat(row, settlement) {
   if (row.key !== 'organized') return row;
   const houses = (settlement?.institutions || []).map((i) => String(i?.name ?? ''));
   if (houses.some((n) => THIEVES_GUILD_HOUSE.test(n))) return row;
-  if (crimeSignalOf({ seats: settlement?.powerStructure?.factions, estate: [] }).factions.length) return row;
+  if (crimeSignalOf({ seats: settlement?.powerStructure?.factions, estate: [] }).powerNames.length) return row;
   const front = houses.some((n) => /front business/i.test(n));
   if (!front && !houses.some((n) => /underground city/i.test(n))) return row;
   return Object.freeze({ ...row, note: front ? NO_SEAT_RING_NOTE.front : NO_SEAT_RING_NOTE.under });

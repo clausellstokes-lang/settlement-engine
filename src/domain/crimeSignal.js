@@ -21,7 +21,7 @@ import { isCriminalInstitution } from './corruption.js';
 /**
  * @typedef {object} CrimeSignal
  * @property {boolean} present  a criminal faction or a criminal house exists
- * @property {string[]} factions the criminal factions' names, roster order
+ * @property {string[]} powerNames the criminal powers' names, roster order (TAIL-CLOSE-SRC-4: the field says what it holds; it was `factions`, the legacy NPC grouping's name)
  * @property {string[]} houses   the criminal houses' names, estate order @property {boolean} seated a criminal power holds a seat on the roster (TAIL-CLOSE-SRC-2: the safety profile's roster lines ask it; one line, so no cited line moves)
  */
 
@@ -37,13 +37,13 @@ import { isCriminalInstitution } from './corruption.js';
 export function crimeSignalOf(lists) {
   const seats = Array.isArray(lists?.seats) ? lists.seats : [];
   const estate = Array.isArray(lists?.estate) ? lists.estate : [];
-  const factions = seats
+  const powerNames = seats
     .filter((seat) => seat?.category === 'criminal')
     .map((seat) => String(seat?.faction ?? seat?.name ?? ''));
   const houses = estate
     .filter((inst) => isCriminalInstitution(/** @type {Parameters<typeof isCriminalInstitution>[0]} */ (inst)))
     .map((inst) => String(/** @type {{ name?: unknown }} */ (inst).name ?? ''));
-  return { present: factions.length > 0 || houses.length > 0, factions, houses, seated: factions.length > 0 };
+  return { present: powerNames.length > 0 || houses.length > 0, powerNames, houses, seated: powerNames.length > 0 };
 }
 
 /** A thieves' or criminal guild, with or without the article and the apostrophe. */
@@ -82,7 +82,7 @@ export function withoutCriminalGuild(text) {
  * @returns {boolean}
  */
 export function crimeHasThievesGuild(signal, crimeFaction = null) {
-  const named = [crimeFaction, ...(signal?.factions || []), ...(signal?.houses || [])];
+  const named = [crimeFaction, ...(signal?.powerNames || []), ...(signal?.houses || [])];
   return named.some((n) => /thie/i.test(String(n || '')) || namesCriminalGuild({ short: n }));
 }
 
@@ -154,11 +154,11 @@ export function isCriminalOrThievesPower(seat) {
  * The roster's crime faction by name: the first seat whose category is 'criminal', or whose name is a thieves', criminal,
  * smuggling or underworld power (TAIL-CLOSE-SRC-4: moved verbatim from `generators/people/castPowers.js`'s cast of the
  * powers into the crime home). Null where none.
- * @param {ReadonlyArray<{ category?: unknown, faction?: string } | null | undefined>} factions the roster's seats
+ * @param {ReadonlyArray<{ category?: unknown, faction?: string } | null | undefined>} seats the roster's seats
  * @returns {string | null}
  */
-export function crimeFactionNameOf(factions) {
-  return factions.find((f) => f?.category === 'criminal' || /thieve|criminal|smuggl|underworld/i.test(String(f?.faction || '')))?.faction || null;
+export function crimeFactionNameOf(seats) {
+  return seats.find((f) => f?.category === 'criminal' || /thieve|criminal|smuggl|underworld/i.test(String(f?.faction || '')))?.faction || null;
 }
 
 /**
