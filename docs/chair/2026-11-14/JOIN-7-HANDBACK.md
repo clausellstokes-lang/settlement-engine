@@ -54,6 +54,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | 19 | tail-crisis-2026-11-14 (SWEEP) | 572cd48e0 (02:27; handed back) | 6a3d98d4c (K2) | 420e8fd09 | none | clean-both `hookTablesDeclared.test.js` (3/3 merged), `presumedThings.widened.register.json` (parses; 2 rows named stale by the lane); DECLARED MOVE f20ce3151 (economicViability.plotHooks): golden carried |
 | 20 | tail-houses-2026-11-14 (SWEEP) | 9525e011b (02:31; handed back) | 2c10ddefe (5) | 794a00cc5 | none | lane-only `INSTITUTION_DESC_VARIANTS.json`; DECLARED MOVE e5a24fd85 (institutions[].desc): golden carried |
 | 21 | tail-ties-2026-11-14 (SWEEP) | fdebbe346 (02:34) | b8991a936 (JOIN-6 6) | 718985525 | none | clean-both `presumedThings.widened.register.json` (parses); lane-only `npcData.STRESS_ECONOMIC_EFFECTS.json`; DECLARED MOVES f00b248fe (relationships 248 towns), 112532f64 (structuralPosition 98): golden carried |
+| 22 | tail-narrative-2026-11-14 (SWEEP) | ca827fc0f (02:37) | 9bd853fd0 (JOIN-6 7) | e6a888e1f | none | lane-only `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json`; DECLARED MOVES b6a0c074c (settlementReason 340), ca827fc0f (pressureSentence 7): golden carried |
 
 ## 3. Every code resolution
 
@@ -146,6 +147,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden; `presumedThings.widened.register.json` | crisis (19) | DECLARED MOVE f20ce3151 (economicViability.plotHooks, iron hooks); two market rows of the widened register named stale by the lane |
 | golden; `INSTITUTION_DESC_VARIANTS.json` | houses (20) | DECLARED MOVE e5a24fd85 (institutions[].desc); the declaration lane-only |
 | golden; `npcData.STRESS_ECONOMIC_EFFECTS.json`; `generationForkCensus.test.js` (re-keyed in the lane) | ties (21) | DECLARED MOVES f00b248fe (relationships[].proseVariant 248, description/tension 245), 112532f64 (npcs[].structuralPosition 98) |
+| golden; `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json` | narrative (22) | DECLARED MOVES b6a0c074c (settlementReason, 340 towns), ca827fc0f (pressureSentence, 7) |
 
 ## 5. Item 2 at the landed tip d817736d8 (each run to a file in /home/user/j7out, read by its tail through `scripts/gate-tail.sh`)
 
