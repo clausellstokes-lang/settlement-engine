@@ -684,3 +684,15 @@ export function applyLegitimacyMultipliers(factions, publicLeg, _tier) {
   // Sort by effective power descending
   factions.sort((a, b) => (b.power || 0) - (a.power || 0));
 }
+
+/**
+ * RECORD-MEASURE-2 G1 (candidate): ONE DOMINANT POWER. "Dominant" is the strongest power's word alone: a second power at
+ * the Dominant share reads "Strong", and where the two strongest hold the same share neither dominates (both "Strong").
+ * Labels only; no share moves. @param {Array<{ power?: number, powerLabel?: string }>} factions
+ */
+export function keepOneDominant(factions) {
+  const ranked = [...(factions || [])].filter((f) => f?.powerLabel === 'Dominant').sort((a, b) => (b.power || 0) - (a.power || 0));
+  if (ranked.length < 2) return;
+  const tie = (ranked[0].power || 0) === (ranked[1].power || 0);
+  ranked.forEach((f, i) => { if (i > 0 || tie) f.powerLabel = 'Strong'; });
+}
