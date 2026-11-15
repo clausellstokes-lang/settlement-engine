@@ -6,6 +6,8 @@
  *
  * (R3) ONE FOOD LEDGER: the viability's food balance READS the writer's split, so its shortfall is the Economics tab's
  * own remainder (`foodRowShown.js`) and its import the writer's, pound for pound.
+ * (R2) ONE SHADOW FIGURE: a criminal income row is held at the capture the Shadow Economy section prints, in both
+ * normalisers; the lawful rows share the rest (the shares still sum to 100).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -33,11 +35,16 @@ const R3_GONE = [
 /** R3: [seed, the shortfall both homes already shared] */
 const R3_KEEP = [['r2r-city-20', 1033], ['r2s-under_siege-town-3', 3331]];
 
+/** R2: [seed, the capture the row must now read, the row's old share at the base] */
+const R2_GONE = [['r2s-slave_revolt-metropolis-3', 46, 16], ['r2s-under_siege-metropolis-3', 45, 18], ['r2r-city-17', 18, 9], ['r2r-city-19', 23, 11]];
+/** R2: [seed, the capture its row already read] */
+const R2_KEEP = [['r2r-village-21', 13], ['r2s-indebted-hamlet-2', 20]];
+
 /** @type {Record<string, any>} */
 const towns = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  for (const seed of new Set([...R3_GONE, ...R3_KEEP].map((r) => String(r[0])))) towns[seed] = censusBirth(seed);
+  for (const seed of new Set([...R3_GONE, ...R3_KEEP, ...R2_GONE, ...R2_KEEP].map((r) => String(r[0])))) towns[seed] = censusBirth(seed);
 }, 300_000);
 
 /** The two homes of the food balance: the writer's row as the tab prints it, and the viability's view. @param {any} s */
@@ -61,6 +68,26 @@ describe('(R3) one food ledger: the viability reads the writer\'s split, and its
       const l = ledgers(towns[seed]);
       expect([l.tabShort, l.viewShort]).toEqual([short, short]);
       expect([l.viewPct, l.viewImport]).toEqual([l.tabPct, l.writerImport]);
+    });
+  }
+});
+
+/** The criminal income row's share, the capture, and the shares' sum. @param {any} s */
+const shadow = (s) => {
+  const rows = s.economicState.incomeSources ?? [];
+  return { row: rows.find((/** @type {any} */ e) => e.isCriminal)?.percentage, capture: s.economicState.safetyProfile?.blackMarketCapture,
+    sum: rows.reduce((/** @type {number} */ a, /** @type {any} */ e) => a + e.percentage, 0) };
+};
+
+describe('(R2) one shadow figure: the criminal income row reads the capture the Shadow Economy section prints', () => {
+  for (const [seed, capture, old] of R2_GONE) {
+    test(`${seed}: the criminal row is ${capture}% (the capture), not ${old}%`, () => {
+      expect(shadow(towns[seed])).toEqual({ row: capture, capture, sum: 100 });
+    });
+  }
+  for (const [seed, capture] of R2_KEEP) {
+    test(`KEEP ${seed}: the row still reads its capture, ${capture}%`, () => {
+      expect(shadow(towns[seed])).toEqual({ row: capture, capture, sum: 100 });
     });
   }
 });

@@ -397,7 +397,8 @@ THE RULINGS (the chair's, 2026-11-15 04:40 UTC, on the third measure's report; e
 
 | cure | commit | field diff (births, 720) | the report's? |
 |---|---|---|---|
-| R3 c3a | (this commit) | 226 towns, 7 families: `economicViability.metrics.foodBalance` 226, `.summary` 23, `.issues` 22, `.dependencies` 15, `.plotHooks` 10, `history.currentTensions` 9, `history.siegeNarrative` 1; `viable` and the stores unmoved | YES, family for family |
+| R3 c3a | 7ce6db273 (+ e1577f2cd: under the module ceiling, byte-identical) | 226 towns, 7 families: `economicViability.metrics.foodBalance` 226, `.summary` 23, `.issues` 22, `.dependencies` 15, `.plotHooks` 10, `history.currentTensions` 9, `history.siegeNarrative` 1; `viable` and the stores unmoved | YES, family for family |
+| R2 c2a | (this commit) | 229 towns, 2 families: `economicState.incomeSources` 229, `economicState.economicComplexity` 35; prosperity unmoved | YES |
 
 ### R3 · one food ledger (c3a, and one rule more)
 
@@ -428,6 +429,34 @@ GATES: eslint on the touched files 0; the walker identical to the base (fresh 14
 the grid identical (the base's 2 falls, r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a); the 52 test files naming the
 view: the base's 9 reds CARRIED (famineStoresOneRounding, worldFactRederive, foodDiversity (2), tailCrisisIronHooks,
 urbanBandInstitutions G3 and G5, labelJoins, the golden master), none new.
+
+### R3's ceiling (e1577f2cd)
+
+R3 left `foodBalance.js` at 915 lines: `economicStructure.test.js` (every economy/ module under 900) red, missed by R3's
+test list (it names no food file); found running R2's. NO CEILING IS RAISED: R3's arm takes every record that publishes
+the split, so the old proportional arm (which needed the same two fields) was dead; it and its comment went, and R3's
+comments were cut: 870 lines. Births-only on the 720: 0 towns moved against R3.
+
+### R2 · one shadow figure (c2a, in one home)
+
+c2a's rule, written ONCE: `incomeLineSiblings.js :: shareIncomeRows(rows, held)` (a criminal row held at `held`, the lawful
+rows sharing the rest, the residue to the largest lawful row; with no criminal row the old normalisation), called by
+both normalisers (`economicState.js` stage 3, held at the capture it was pushed with; `keepRowsThePageBearsOut`, held at
+the share stage 3 gave it). c2a as patched put `economicState.js` at 909 lines (over the ceiling); in one home it is 885.
+Births-only: the record IDENTICAL to c2a as patched (0 towns against the patch's tree), 229 / 35 against R3. After: the
+criminal row equals the capture in 236 of 236 (8 before); every town's shares sum to 100; no row at 0.
+
+THE INHERITORS, read: (a) the income rows' ORDER (161 towns: the list is sorted by share; no row's text moves: the set of
+"source :: line" is identical in all 720). (b) `economicComplexity` in 35 (the ladder's own cut, a row at 20% or more
+caps the count at 8): r2r-city-17 "Highly diversified — multiple major revenue streams" for "Diversified …" (15 rows,
+none at 20% now: Market Taxes 25 → 19, the syndicate 9 → 18, its capture); r2r-city-19 "Diversified — broad institutional
+economic base" for "Highly diversified …" (the smuggling row at its capture, 23%, now leads; 13 rows): each true by the
+ladder. The page's inheritors (the income mix's leader prose) are read in the census after all five.
+
+Guard: `tailDefecon5RecordCures.test.js` (R2: 4 GONE red at e1577f2cd, 2 KEEP green before and after). GATES: eslint 0;
+the walker and the grid identical to the base; the 62 test files naming the two files or the income rows: the base's 23
+reds CARRIED (crisisStoppedRows (2), coherenceAgreeCures (2), generationForkCensus (4), incomeRowsBorneOut, labelJoins,
+observedShapeReaders.walker (6), proseWiringCensus.walker (5), the golden master, semanticFixtures), none new.
 
 ## The veto list (every new or changed line, with towns it was read in)
 
@@ -531,7 +560,7 @@ Batch 1:
 
 ## What is left (TAIL-DEFECON-5, 2026-11-15)
 
-Pushed: the merge 694621784; R3. LEFT, in this order: R2 (c2a), R1 (c1b), R5 (c6a), R4 (c4a); then the census after all
+Pushed: the merge 694621784; R3 (7ce6db273, e1577f2cd); R2. LEFT, in this order: R1 (c1b), R5 (c6a), R4 (c4a); then the census after all
 five and the inventory diff; then the hand-back's veto list. The page census BEFORE: `/home/user/inst5/cbefore` (the
 container's; re-made by `census3.sh` at 694621784).
 
