@@ -1,0 +1,16 @@
+{"id":"00574","town":"r2s-succession_void-village-3","sev":"MED","kind":"STATE","why":"says Highborn Circle has no stake in the succession void; TENSIONS names The Highborn Circle a party to the succession crisis and it is a Significant power","other":""}
+{"id":"00198","town":"r2r-village-11","sev":"LOW","kind":"LACKS","why":"open market with no guild's leave; HOUSES has only a Fish market, and Merchant Guilds (Strong) and Craft Guilds are powers, one quarrelling with the Headman","other":""}
+{"id":"00222","town":"r2r-village-3","sev":"LOW","kind":"LACKS","why":"'the mills' plural and ovens down every lane; HOUSES lists one Mill and no baker","other":""}
+{"id":"00180","town":"r2s-under_siege-town-2","sev":"LOW","kind":"STATE","why":"'A visitor to Yekehiid soon learns' presumes arrivals; CRISIS is Under Siege, nothing comes in by road or gate","other":""}
+{"id":"00149","town":"r2s-under_siege-town-1","sev":"MED","kind":"STATE","why":"says trade done out of sight is 'too little to change what the town is'; INCOME gives Black Market Revenue 15%, fourth largest source","other":""}
+{"id":"00043","town":"r2s-famine-town-3","sev":"LOW","kind":"STATE","why":"'three parts in five of the rest': FOOD brought in 38% of need over a 70% remainder is 54%, nearer a half; grown 30%","other":""}
+{"id":"00106","town":"r2s-famine-town-1","sev":"MED","kind":"STATE","why":"'little of what passes leaves its money here'; INCOME has Toll Revenue 15% and Entrepôt Trade 14%, the top sources, from the crossroads traffic","other":""}
+{"id":"00108","town":"r2s-occupied-town-3","sev":"MED","kind":"STATE","why":"'little of what passes leaves its money here'; INCOME has River Tolls 15% as top source plus Smuggling Network Revenue 10%","other":""}
+{"id":"00242","town":"r2s-occupied-town-3","sev":"LOW","kind":"TAG","why":"council 'holds the seat and collects the taxes' as if ruling freely; tag is occupation only, where Occupation Authority extracts and officers do not rule freely","other":""}
+{"id":"00472","town":"r2r-town-37","sev":"MED","kind":"STATE","why":"says Quarantine Council has no stake yet; it is a listed power, its granary reeve ranks first on it, and the crisis is the plague","other":""}
+{"id":"00211","town":"r2s-infiltrated-town-1","sev":"MED","kind":"LACKS","why":"carts of cloth and wool going out; TRADE exports and made-here list no cloth or wool (only fish, herbs, honey, iron, spices, transit)","other":""}
+{"id":"00277","town":"r2s-indebted-town-2","sev":"LOW","kind":"BROKEN","why":"'Established merchant community; fund civic works...' a noun phrase then a plural verb: the sentence has no subject for 'fund' and 'expect'","other":""}
+{"id":"00411","town":"r2r-town-25","sev":"MED","kind":"BROKEN","why":"slash-joined roster label 'Military/Guard' used as a power's name beside a verb ('Military/Guard is already at odds')","other":""}
+{"id":"00508","town":"r2s-mass_migration-village-2","sev":"LOW","kind":"BROKEN","why":"mark 'Short of clay.' then hedge 'whenever clay can be had' says the same clay shortage twice in two sentences","other":""}
+{"id":"00412","town":"r2s-plague_onset-town-1","sev":"LOW","kind":"BROKEN","why":"mark 'Short of clay.' then hedge 'fired whenever clay can be had' says the same clay shortage twice","other":""}
+{"id":"DONE","lines":1665,"blocks":71,"flags":15}
