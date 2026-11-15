@@ -209,6 +209,16 @@ a power they are not first-rank in); `hookTruth.js` VILLAGER_TIERS (4: "the war 
 thorps); `activeConditions.js` CONDITION_ARCHETYPE_TEMPLATES (2: "Religious Tension" with no religious record); and
 `faithReading.js :: factionLine` (03046: a Suppressed faction given "a small voice").
 
+## The exports' rows (the chair's note X9, 00:00 UTC): NAMED as left
+
+`docs/chair/2026-11-14/read-all-3/WORKLIST3-CRISIS.{md,json}` on the chair's lane lists 29 rows of this group's files
+that only the PDF and the journal print (read at f663a2699). The journal's Tonight and Crisis pages print the sheet's
+lines in their own cut. Not taken this session. Batch 1's writers (faithReading, stressNarrative, crisisSummaryVantage,
+outlookHookSiblings) cure every surface they feed, so any WORKLIST3 row of those writers may already be fewer at
+1409e3cbb. The next seat measures that with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json` (re-fetch the
+instrument for the switch) and checks each row against the record first: that read's header showed no seats and
+lacked `history.currentTensions`.
+
 ## How the instruments are re-made
 
 ```
