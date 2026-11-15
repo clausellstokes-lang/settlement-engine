@@ -82,12 +82,16 @@ A QUESTION TO THE CHAIR: for the 43 rows the corpus has made mute by declaration
 true now is red 5's approved one: the row's town reads the pool, its eligible set is empty, and the declaring commit
 is named. No row is converted to that shape without the word.
 
-## Red 4 — `r3c8ReaderLinesTrue`: NAMED
+## Red 4 — `r3c8ReaderLinesTrue`: GREEN (the chair's word: red 4 is this seat's)
 
-Green on the economy corpus's branch at `7ab28d3ef` (8/8). Red on the joined line from the join's own merge of
-that tip (`744edb899`, JOIN-9 point 7) and at every point after it: "L14 ... r2r-metropolis-33 and the reader's three
-true towns: the line prints only where the stability gives the body no say", `expected 1 to be ≥ 3`. So the cure
-holds on the branch and is undone in the merge, by something already on the line before point 7. Not cured here.
+Green on the economy corpus's branch at `7ab28d3ef` (8/8); red on the joined line from the join's own merge of that
+tip (`744edb899`, JOIN-9 point 7): L14 `expected 1 to be ≥ 3`. The test file is byte-identical at both ends; a probe
+of the four towns at both ends finds the line printed in the same three true towns, worded in number agreement on
+the joined side (`factionDynamics.js:603`, `verb(noble, 'has', 'have')`: "Landed Gentry still has its titles, but"),
+which the desk's literal `'still have their titles, but'` reads only in the plural. The pin is brought to the line
+as it now stands, both agreements (`/still (?:has its|have their) titles, but/`), the same line; the creditor
+exclusion and the `≥ 3` count are unchanged. 1 failed → 8/8. eslint clean; no other test names the file; the
+anchors walker's set unchanged. What a town prints: unchanged.
 
 ## Red 2 — `foundingWorldBones`: RE-KEYED BY IDENTITY, the move named
 

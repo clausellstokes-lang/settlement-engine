@@ -144,7 +144,10 @@ describe('L05: "Complete production chain in place" only where the chain\'s hous
 });
 
 describe('L14: the noble subordinate line is not drawn of a body the record gives a say in every decision', () => {
-  const SUBORDINATE = 'still have their titles, but';
+  // The line as factionDynamics.js now writes it, in both agreements ("still has its titles" of a body named in the
+  // singular, "still have their titles" of a plural): the number agreement came in on the joined side and the line
+  // merge of the corpus desk's tip (744edb899, JOIN-9 point 7) kept the desk's plural-only pin. The same line, re-keyed.
+  const SUBORDINATE = /still (?:has its|have their) titles, but/;
   /** @type {Array<any>} */ let nobleTowns = [];
   beforeAll(() => {
     nobleTowns = ['r2r-metropolis-33', 'r2r-village-27', 'r2r-town-13', 'r2r-city-21']
@@ -152,7 +155,7 @@ describe('L14: the noble subordinate line is not drawn of a body the record give
   }, 120000);
   it('r2r-metropolis-33 and the reader\'s three true towns: the line prints only where the stability gives the body no say', () => {
     const lines = nobleTowns.flatMap((s) => (s.powerStructure?.factionRelationships || [])
-      .filter((/** @type {any} */ r) => String(r?.narrative || '').includes(SUBORDINATE))
+      .filter((/** @type {any} */ r) => SUBORDINATE.test(String(r?.narrative || '')))
       .map((/** @type {any} */ r) => ({ town: s.name, body: r.pair?.[0], stability: String(s.powerStructure?.stability || '') })));
     expect(lines.filter((l) => /creditors have a say/i.test(l.stability) && /creditor/i.test(String(l.body)))).toEqual([]);
     expect(lines.length).toBeGreaterThanOrEqual(3); // the reader's three true towns keep it
