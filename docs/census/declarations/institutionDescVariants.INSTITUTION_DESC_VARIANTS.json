@@ -423,7 +423,7 @@
     },
     {
       "id": "hamlet|Economy|Fisher's landing#0",
-      "text": "A crude landing hung with racks for drying and salting the catch. Near water, it is the chief source of protein.",
+      "text": "A crude landing hung with racks for drying and salting the catch. Near water, and whenever fish can be had, it is the chief source of protein.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -431,7 +431,7 @@
     },
     {
       "id": "hamlet|Economy|Fisher's landing#1",
-      "text": "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
+      "text": "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured whenever fish can be had.",
       "needs": [
         "tier: ≤ hamlet"
       ],

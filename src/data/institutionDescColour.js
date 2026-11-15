@@ -57,7 +57,7 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "Open-field farming, parcelled into strips.": COLOUR,
   "Open pasture the hamlet grazes in common.": COLOUR,
   "Common ground where the settlement's beasts are pastured together.": COLOUR,
-  "A crude landing hung with racks for drying and salting the catch. Near water, it is the chief source of protein.": COLOUR,
+  "A crude landing hung with racks for drying and salting the catch. Near water, and whenever fish can be had, it is the chief source of protein.": COLOUR,
   "A forest-edge camp of fellers and a yard where the logs are stacked. Timber and the hauling of it keep the place alive.": COLOUR,
   "Axe crews work the treeline and stack their cut in a yard nearby. The settlement's living is timber and the carting of it.": COLOUR,
   "A shallow working or shaft sunk for iron ore, coal, or stone. It takes on the poorest hands, and the work is dangerous, filthy, and indispensable.": COLOUR,

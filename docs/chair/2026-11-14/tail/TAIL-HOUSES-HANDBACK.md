@@ -565,7 +565,7 @@ Gates: eslint 0 on the touched files; typecheck:domain:strict 0; typecheck:ratch
 - THE RECORD SEAT: the Vintner's grapes (29818, 93; 29820, 9): H6, as named.
 - A stale comment only: `defenseStateProse.js:845` quotes the old coastal line in prose (not this group's file).
 
-## WHAT IS LEFT (TAIL-HOUSES-3, at batch 5's push; supersedes the TAIL-HOUSES-2 list above)
+## WHAT IS LEFT (TAIL-HOUSES-3, at batch 5's push; superseded by TAIL-HOUSES-4's list below)
 
 1. **Batch 6 (in hand at this push, NOT DONE yet)**: the Fisher's landing's three texts take the one hedge for their catch ("whenever fish can be had"): false only where the fisheries are spent and none live (12 of 76 landings: B02898 2 of 15, its two siblings 6 of 31 and 4 of 30; the coastal hamlets with no fishing-grounds resource fish the sea: the record's food sources hold fish and no gap is named, so not false there).
 2. **THE GOVERNANCE ROWS, OPEN BY H15 (NOT STARTED: the next seat's first work after batch 6, or before it: they are wider)**: FIRST the one merge: `git fetch origin lane/join-2026-11-14`, merge d817736d8 into this branch in its own commit (it holds `ruling body` and `rival power`), `npm ci` if the lockfile moved, then RE-TAKE THE BEFORE at the merged tree (census + both inventories). Then by width, the rows printing in five towns or more at this push's base (towns printing): 15890 (38) "Powerful political force.", 15765 (33), 02600 (32) (the merchant guilds as a political power: `rival power`); B14388 (26), B03373 (18), 20218 (15) (officials and clerks "run the city" / "less formally constituted than a council"); 02783 (26) "A looser arrangement than a council"; B05150 (16) "Alderman" and B05317 (13) "Lord Marshal" (a title the person does not hold: the PEOPLE line read only the first title: check `memberships` first); 03031 (14), 03029 (13), 00186 (13), 14950 (13), 14953 (11), 03033 (8) (a single unchosen figure or household head); 02668 (14), 20701 (13), 02494 (11), 28580 (9) (merchant houses or guild masters "hold the real civic power"); B05076 (13) (family heads, each voice equal); 02643 (12) (a governor "holds sway, the city a noble fief"); 28852 (11), 29000 (8), 03522 (5), 21211 (6) ("where nothing official exists", "in the absence of formal authority"); 03508 (10), 02461 (5) ("an elected council"); B02540 (9) "A free hamlet with no lord's representative."; 02794 (6) / X9 15791 (6) "A man of the lord's choosing" (also the person's sex: batch 2's shape); X9 16720 (21), 16785 (14), 29353 (11), 14179 (9), 29354 (8), 29352 (5). NOT TO BE KEYED ON (H15): the power's capture state, its legitimacy note.
@@ -580,6 +580,126 @@ Gates: eslint 0 on the touched files; typecheck:domain:strict 0; typecheck:ratch
 - `bydesc.mjs <tree> <corpus>`: a house's desc by a needle, counted false by a test over the record (`factsOf`, `atomHolds`, `history.age`, `config.nearbyResources[Depleted]`, `economicState.primaryImports`); `rekey5.py <tree>`: exact old -> new over the four data files and the declaration ledger. Both re-made from this description in minutes.
 - THE RECORD'S FACTS FOR THESE SHAPES: the settlement's age is `history.age` (`config.settlementAgeYears` is 0 under `auto`); the `fish` atom holds wherever fish is a food source, even with the fisheries depleted: read `config.nearbyResourcesDepleted` for a spent fishery; the ruler kind is NOT settled at the description draw (`birthFactsOf` has no `powerStructure`), so a desc sibling keyed on `ruler: ...` would not read; a house added by `faction_boost` keeps the raw catalogue text (no sibling read).
 - Tip: batch 5 57a19f800; this hand-back's commit is the tip. Handed back by time (about 50 minutes of this seat; the count read 0), before batch 6, with H15 just read.
+
+## TAIL-HOUSES-4 · the chair's rulings (2026-11-15 03:06 UTC; each vetoable by the owner)
+
+- **(H16)** FIRST, THE WIDE ROWS NOBODY HAS VERIFIED: the two tables the predecessors left unverified ("Candidates for the H1 strike" and "Left for the next seat: ordinary-times rows"), WIDEST FIRST (B12717 177 towns; B17254 87; then down to five towns): each row measured over EVERY town that prints it. A crisis reason is the services seat's class (the crisis leaf marks the row on every surface): STRIKE it for the leaf if it is true in ordinary times; an ordinary-times reason is this seat's: cure by a condition, a twin or the one hedge form, or strike with the measure.
+- **(H17)** BATCH 6 as the hand-back has it (the fisher's landing: false in 12 of 76).
+- **(H18)** THE GOVERNANCE ROWS (about thirty, 5 to 38 towns): a house's description is drawn BEFORE the powers exist (`birthFactsOf` holds no power structure), so a sibling keyed on `ruling body` or `rival power` CANNOT READ at the draw. No merge for them now; two ways only: (i) a rewording true in every town that prints the line that keeps it a good line (it claims the house's own trade and standing, not who governs); (ii) a row no such rewording saves is PARKED with its measure for THE LATE RE-READ (a pass that re-checks a drawn line's declared needs against the settled record and swaps in its twin; being built on the crisis branch; the chair names the tip). Do not key a description on a power atom before that word.
+- **(H19)** The titles a person does not hold (B05150 "Alderman", B05317 "Lord Marshal"): check the record's `memberships` first; strike what the record bears.
+- A row printing in fewer than five towns waits. H9 and the brewery's banked text stay as H11 and H13 left them.
+- **(U1)** the account's weekly usage warning: commit and push every batch the moment it holds, with WHAT IS LEFT current in the same push; hand back at 250,000 (or about seventy minutes); one line to the chair at the hand-back, a stop, or a question only.
+
+## TAIL-HOUSES-4 · Batch 6 (H17): the Fisher's landing claims its catch in the one hedge form
+
+THE SHAPE (H2, verified by the record): the Fisher's landing's three texts (the catalogue line, `institutionalCatalog.js` shared; PAIRS[21]'s two, `institutionDescVariants.js`, the hamlet and the village pools) land, cure and live on a catch where the town's fisheries are spent and none live (`config.nearbyResourcesDepleted` holds every fishing resource of `config.nearbyResources`): 12 of the 76 census landings (the rough jetty 2 of 15, the crude landing 6 of 31, the rough landing 4 of 30; B02898, its siblings, and the H1 candidate B13370, the crude landing's second sentence). The `fish` atom holds wherever fish is a food source, spent or not, and the vocabulary has no spent-resource word, so no twin can key: THE ONE HEDGE FORM, text only (the same pools, hash and index; the colour declaration and the declaration ledger re-keyed by identity). No draw moved. DECLARED MOVE: `institutions[].desc` only.
+
+THE TRUE LINES IT REPLACES: 64 towns (the live-fishery landings take the hedge too). Over twenty: told to the chair in the hand-back line (U1: no line a batch); the hedge claims nothing a live fishery denies.
+
+| old | new |
+|---|---|
+| A rough landing with racks for drying and salting fish. Primary protein source near water. | A rough landing with racks for drying and salting fish. Whenever fish can be had, the primary protein source near water. |
+| A crude landing hung with racks for drying and salting the catch. Near water, it is the chief source of protein. | A crude landing hung with racks for drying and salting the catch. Near water, and whenever fish can be had, it is the chief source of protein. |
+| A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured. | A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured whenever fish can be had. |
+
+Guard: `tests/data/tailHouses6FishersLanding.test.js`: 12 RED pairs (the 12 spent-fishery landings; 12 of 12 red at the base, each with the record's spent fishery asserted), 3 KEEP pairs (a live fishery prints each text's racks; green at the base and after).
+
+MEASURE (before = the base b3ac30f8a; after = this tree): THE INVENTORY DIFF (tabs): 29,856 -> 29,856; gone 3, new 3, in fewer towns 0, in more towns 0: the three old texts (31, 30, 15 towns) and their hedged forms (31, 30, 15), the same towns. The exports: gone 4, new 4, in fewer 0 (the same, and the journal's "Fisher's landing: ..." line). Rows: B13370 31 -> 0, B02898 15 -> 0 (the catalogue line, 30 -> 0, is the third). THE INHERITORS: the three hedged lines only, read in place.
+
+### The veto list, batch 6 (towns printing; the smallest and the largest it reaches, and a crisis town)
+- "Near water, and whenever fish can be had, it is the chief source of protein." (31): r2r-hamlet-44 (21), r2r-village-11 (374), r2r-village-21 (under siege)
+- "Whenever fish can be had, the primary protein source near water." (30): r2r-hamlet-28 (23; famine), r2r-village-2 (388)
+- "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured whenever fish can be had." (15): r2r-hamlet-16 (20; famine), r2r-hamlet-5 (97)
+
+Gates: eslint 0 on the touched files; typecheck:domain:strict 0; typecheck:ratchet OK (167, ceiling 167); presumed-things `--check` fresh 144, stale 0 (unchanged); page-census `--grid` 0 rises (the same 2 falls, r2r-city-0 and r2s-insurgency-metropolis-0 P7a); the 87 test files naming the touched files (with batch 7's tree): only the carried reds (gapLineHousesByKind, urbanBandInstitutions G5, wiringCensusDeclared, generatorGoldenMaster).
+
+## TAIL-HOUSES-4 · H16: the two unverified tables measured, widest first (no cure unless named)
+
+THE MEASURE. Base: this branch at b3ac30f8a (the census `census3.sh <base> before 4`: 720 births, 0 errors; the tabs' inventory 29,856 sentences, the exports' 35,765). Each row's `fold` read in the inventory (the towns that print it), each printing town's record read off `corpus.ndjson.gz`: its crisis (`stress[].type` in under_siege, famine, plague_onset, occupied) and, OUTSIDE the crisis, the fact the reader's reason names. "ord" = the printing towns in no crisis; "false" = ordinary towns where the record denies the claim. Every row printing in five towns or more of the two tables is here.
+
+### GONE AT THE BASE (the fold no longer prints; cured by batches 3-5): struck
+16857, 14069, 20982, 10137, B22510, 02534, B03000, B00345, B11885, B27842, 20983, B02989, 04579, 28857, B27830, B28049, B20091, 03077, 21986, B22024 (20 rows).
+
+### STRUCK FOR THE LEAF (a crisis reason; TRUE in ordinary times: printing / ord / false in ord)
+| id | towns | ord | false | the ordinary-times fact read |
+|---|---|---|---|---|
+| B12717 | 177 | 148 | 0 | the furs chain card's entrepôt note: the trade's geography, said of the trade, not of the town; prints only on an active furs chain |
+| B17254, B02399, B00206 | 87, 71, 66 | 71, 64, 57 | 0 | apothecaries' "imported medicines": every printing town imports (the 6 isolated ones too: `primaryImports` non-empty) |
+| 05285 / 05276 | 83 / 23 | 77 / 17 | 0 | a brewery's regional trade (05276's "ships" is the verb) |
+| 15651, 18556, 15650 | 82, 43, 37 | 71, 33, 33 | 0 | markets in more than one square: city and metropolis only |
+| B17798 / B21481 / B09671 | 65 / 62 / 54 | 53 / 56 / 48 | 3 / 0 / 2 | the watch, the garrison and the caravans: every ordinary town holds a garrison; the caravans fail only where the town is isolated (3 and 2 towns: fewer than five, WAITS) |
+| 09333, 28847, 11393 | 59, 43, 36 | 53, 37, 28 | 1 each | foreign traders / international merchants: false only in one isolated town each (WAITS; the roster seats a fair or a trade centre with no route: H3, NAMED) |
+| B15261, B12169, B11640 | 52, 49, 31 | 41, 38, 24 | 0 | the coaching inn's relay horses: the roster forbids it where isolated; a coaching inn stands in every printing town |
+| 17955 | 50 | 43 | 0 | grain stores: city only |
+| 06002, B05738 | 49, 32 | 40, 27 | 0 | the fish market already in the one hedge form ("whenever fish can be had") |
+| 21670 | 46 | 39 | 0 | the region's chief religious authority: metropolis only |
+| B02335 | 42 | 39 | 0 | a market square for market days and fairs (a town's square) |
+| B04464, B04463 | 42, 34 | 39, 29 | 0 | burial beyond every gate: walls with gates in every printing town |
+| B06577, B06932 | 41, 41 | 33, 27 | 0 | subsistence farming: thorps only |
+| B20720, 03172, 21103, 17675 | 40, 33, 33, 32 | 32, 28, 27, 21 | 0 | the village house of worship a walk away / a passing priest: every printing hamlet and thorp holds "Access to parish church" |
+| 04663, 04683 | 41, 12 | 33, 9 | 0 | the caravan chain cards: no printing town is isolated |
+| 12702, B11969, 06937 | 36, 28, 18 | 28, 23, 17 | 1 / 0 / 0 | customs by road, harbour or port: the harbour and port texts need `institution: docks` (06937's seven river towns hold docks); 12702 false in one isolated town (WAITS) |
+| 16534 | 33 | 29 | 0 | reports from several roads: no printing town isolated |
+| 04797, 04796 | 20, 17 | 14, 14 | 0 | the ferry's bank and landing |
+| B22199 | 20 | 18 | 1 | the harbour master: one river town (WAITS) |
+| 07216 | 18 | 13 | 0 | the caravans' own guards (not the garrison) |
+| 04423, B02583 | 17, 13 | 14, 9 | 0 / 1 | the caravan exchange (no printing town isolated) and the carters' guild (one isolated town: WAITS) |
+| 16646, 04601 | 8, 8 | 6, 6 | 0 | river barges: river towns only |
+| 13412, B02702, 22419, B03247 | 8, 8, 6, 7 | 7, 6, 5, 5 | 0 | the road's trade and travellers (an isolated village still has its track: "whoever the road brings") |
+| B09887, B03102, B15590, 02485, B27818, B13214 | 7, 7, 7, 5, 5, 5 | 6, 5, 6, 3, 3, 3 | read, no predicate | the house's own trade, read in its ordinary towns: a shipyard (port towns only), a weekly sale, "requires grain surplus", a stable, "where caravans come" (already hedged), a trading day |
+
+### STRUCK (an ordinary-times reason the record does not bear)
+| id | towns | the fact read |
+|---|---|---|
+| B05150 (H19) | 16 | "Alderman": the named person holds rank 1 in the governing power (16 of 16), and that power is a Guild Council, whose office is Alderman (`officeTitles.js`): the record bears the title |
+| B05317 (H19) | 13 | "Lord Marshal": rank 1 in the governing power, a Military City Council or Grand Military Council (Lord Marshal): 13 of 13 |
+| B06447 | 69 | "Draws on: herb gathering areas" under the Resources tab's medicinal-herbs exploitation, which the terrain (forest) gives: the line names the kind of source, not a LAND resource |
+| 06832 | 39 | "Draws on: mountain forest, logging routes": every printing town is mountain terrain with `mountain_timber` or `managed_forest` |
+| B12963 | 22 | the hot-springs chain is printed under its exploitation state ("Unexploited", with its Needs): every printing town holds a hot-springs resource |
+| 14325 | 11 | "not brought in: stone, metals": no ordinary printing town imports a metal or stone |
+| 16366 | 40 | "Refined ingots" with no smelter, mint or foundry: 2 of 37 (WAITS) |
+| B15417, B04587 | 126 | already struck by TAIL-HOUSES-2 (the card says "Normally yields" where the chain is refused: `domain/chainYield.js`) |
+
+### FALSE IN ORDINARY TIMES, LEFT WITH THE MEASURE (this seat's class; not cured here)
+| id | towns | false | the fact | the cure it needs |
+|---|---|---|---|---|
+| B11971 / B06555 | 71 / 36 | 6 / 1 | customs "by the main roads" in an isolated town (`route: isolated`) | these ARE the no-docks twins of the port texts: a twin of a twin is not read by `drawInstitutionDesc` (it takes the first `twinOf` only). A third text keyed `route: isolated`, or the twin reworded "by road" (replaces about 90 true lines: tell the chair first). The roster seating a customs house where the town has no route is NAMED (H3). |
+| 17954 | 67 | 6 | "Several inn districts" in a city of 2,781 to 4,774 (the house is "Inns and taverns (district)") | a size twin (`population` band), or the size class's seat |
+| 17650 | 6 | 6 of 6 | a Hunter's lodge "sends out hunting parties" where the town has no hunting-grounds resource | batch 1's input-gap shape: the hedge "whenever game can be had" |
+
+## TAIL-HOUSES-4 · H18: the governance rows measured (printing towns at the base; the government is `powerStructure.government`, the powers `powerStructure.factions[]`)
+
+### TRUE in every printing town (the house is its own government's, and the text says that government): STRUCK
+03031 (14: Headman's Authority 14 of 14), 14953 (11: the same), 03033 (8: the same), 02668 (14: Merchant oligarchy 8, Grand Merchant Oligarchy 6), 28580 (9: the oligarchies), 20701 (13: Merchant Guild Council 7, Grand Guild Consortium 6), 02494 (11: the same two), B05076 (13: Household Council 13), 02643 (12: Noble Governorship 8, Ducal Governorship 4), B02540 (9: Free Elder Council 9).
+
+### CURED BY REWORDING (H18 (i)): batch 7 (IN HAND at batch 6's push: its census running; if this line still stands, batch 7 was not pushed)
+B14388 (26), 02783 (26), B03373 (18), 20218 (15): City administration "less formal than a council": every printing town is governed by a council, senate or assembly (26, 26, 18, 15 of the same). 02794 (6) and X9 15791 (6): "A man of the lord's choosing" where the appointee is a woman (5 of 6; the government, a Feudal Appointee, is true in 6 of 6).
+
+### PARKED FOR THE LATE RE-READ (H18 (ii)): no rewording keeps a good line true in every printing town; the measure
+| id | towns | false | the claim, and the record |
+|---|---|---|---|
+| 15890 / 15765 / 02600 | 38 / 33 / 32 (the house in 42, 33, 32) | 10 / 7 / 6 | the merchant guilds "a powerful political force" where no merchant, guild or trade power stands among the factions (`rival power`). A rewording exists that claims the house's trade, not its politics ("A power in the city's trade."), but it replaces the true line in about 80 towns: told to the chair first, not done |
+| 00186 / 14950 / 03029 | 13 / 13 / 13 | 11 / 11 / 10 | the Household elder: one head of household speaks for the settlement unchosen, where the government is an Elder Council or a Household Council (true only under a Headman's Authority) |
+| 28852 / 29000 / 03522 | 11 / 8 / 5 | 11 / 8 / 5 | the Town council "where nothing official exists" / "no formal government" / "in the absence of formal authority": every printing town has a named council |
+| 21211 | 6 | 6 | the Village elder "in the absence of formal authority": an Elder, Household or Headman government in each |
+| 03508 / 02461 | 10 / 5 | 10 / 3 | Mayor and council "an elected council" where the government is a theocratic, merchant, military or other council not chosen by vote |
+| X9 16720, 16785, 29353, 14179, 29354, 29352 | 21, 14, 11, 9, 8, 5 | not measured here | as TAIL-HOUSES-3 listed them (the X9 governance rows); owed |
+
+## WHAT IS LEFT (TAIL-HOUSES-4, at batch 6's push; supersedes TAIL-HOUSES-3's list above)
+
+0. **Batch 7 (in hand at this push, NOT pushed yet)**: the City administration's three texts and the Lord's appointee's "A man of the lord's choosing" reworded (H18 (i); listed above under H18).
+
+1. **H16 is DONE for every row of the two tables printing in five towns or more** (above: struck for the leaf, struck, gone at the base, or left with the measure). LEFT WITH THE MEASURE, this seat's class: the customs house "by the main roads" in an isolated town (B11971 6, B06555 1: a twin of a twin is not read; a third text keyed `route: isolated`, or the twin reworded "by road" after telling the chair: about 90 true lines); 17954 "Several inn districts" in a city under 5,000 (6 of 58: a `population` twin); 17650 the Hunter's lodge with no hunting grounds (6 of 6: batch 1's hedge, "whenever game can be had").
+2. **H18 PARKED FOR THE LATE RE-READ, with the measure** (above): the merchant guilds' politics (15890 10, 15765 7, 02600 6: a trade rewording exists, about 80 true lines replaced: the chair first); the Household elder (00186 11, 14950 11, 03029 10); the Town council's "nothing official" (28852 11, 29000 8, 03522 5); the Village elder (21211 6); Mayor and council "elected" (03508 10, 02461 3). The X9 governance rows (16720, 16785, 29353, 14179, 29354, 29352) are NOT measured: owed. When the chair names the late re-read's tip on the joined line: each parked row takes a declaration (`ruling body` / `rival power`) and a twin read at the re-read, not at the draw.
+3. **PARKED (H4)**: 15712 (60), 09319 (7), 21584, 08266.
+4. **WAITS (H13)**: H9 "(powerful)" (15 towns, H11's two cures); 12014 the brewery (banked text) for the close; every row printing in fewer than five towns, and the rows false in fewer than five ordinary towns listed above (B17798 3, B09671 2, 09333/28847/11393 1 each, 12702 1, B22199 1, B02583 1, 16366 2).
+5. **The X9 rows H5 answered by the leaf or sent to the services seat**: as H5 lists them (no cure here).
+
+## TAIL-HOUSES-4 · instruments and tips
+
+- `<scratchpad>/wtbase` (detached at the base, node_modules symlinked) for the BEFORE census; `<scratchpad>/wt` (own `npm ci`) for batch 6; `<scratchpad>/wt7` (node_modules symlinked to wt's) for batch 7, so no tree renders mid-edit. Census `census3.sh <tree> <out> 4`: births + render about 25 minutes with gates running beside it; the count/trace stage is not needed for the inventory (stopped once the dumps are in). `inventory.py` twice (the tabs; `SURFACES=PDF,Journal`); `inventory_diff.py before after rows.json`.
+- The measure scripts (`tools/lib.py` and inline Python): corpus by seed; a row's printing towns from the inventory's fold; a desc row's houses by its first 60 characters over `institutions[].desc`; the crisis by `stress[].type`; the government by `powerStructure.government`, the powers by `powerStructure.factions[].faction`, a person's office by `npcs[].memberships[]` (rank 1 of the governing power) and `src/data/officeTitles.js`. Re-made in minutes.
+- THE RECORD'S FACTS FOR THESE SHAPES: a spent fishery is `config.nearbyResourcesDepleted` against `config.nearbyResources` (`fish`, `river_fish`, `fishing_grounds`); the hot springs' keys are `hot_springs` and `hot_springs_mineral`; `route: isolated` is the route atom (`revenueHomes.js` uses it); a twin is found as the FIRST `twinOf` of a sibling set (`institutionDescDraw.js`), so a twin cannot have its own twin; an `institutionalCatalog.js` desc is single-quoted (escape an apostrophe).
 
 ## Rows NOT cured (what is left, by class)
 

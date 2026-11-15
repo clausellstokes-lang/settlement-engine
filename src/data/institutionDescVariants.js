@@ -111,8 +111,8 @@ const PAIRS = [
     "Common ground where the settlement's beasts are pastured together.",
   ],
   [
-    "A crude landing hung with racks for drying and salting the catch. Near water, it is the chief source of protein.",
-    "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
+    "A crude landing hung with racks for drying and salting the catch. Near water, and whenever fish can be had, it is the chief source of protein.",
+    "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured whenever fish can be had.",
   ],
   [
     "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. Wool is what the flocks are chiefly kept for.",
@@ -2155,7 +2155,7 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
  * grounds #0 named a gate too; it names none since TAIL-HOUSES-2 batch 3 (true with a gate or without).
  */
 export const DESC_VARIANT_DECLARATIONS = Object.freeze({
-  "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
+  "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured whenever fish can be had.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
   "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence no garrison is here to keep. You find them along dangerous frontiers.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#0
