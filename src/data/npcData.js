@@ -1176,7 +1176,7 @@ export const NPC_FACTION_LOYALTY = {
     'They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.',
     { text: "A clerk in their office has been copying letters at night, and the copies have turned up in a rival's hands.", needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     'They signed an order last month on bad information, and the family it ruined has learned whose seal is on it.',
-    'A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.',
+    { text: 'A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.', needs: ['tier: ≥ village'] }, // TAIL-TIES, the chair's ruling (T3): a street, which no thorp or hamlet has (registeredWords.js :: streets)
     { text: 'Someone is collecting fees in their name, and the people paying think the receipts are honest.', needs: ['tier: ≥ village'] }, // R2-CODE-A-6 (the stage read's low 8): a twin carries the condition its office siblings carry
     { text: 'Their deputy has started answering questions meant for them, and people have begun going to the deputy first.', needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
     "An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.",
@@ -1189,8 +1189,8 @@ export const NPC_FACTION_LOYALTY = {
     'They owe their post to a patron who has started asking for repayment in favours they cannot grant openly.',
   ],
   military: [
-    { text: 'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
-    { text: 'Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
+    { text: 'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.', needs: ['guardPresence', 'population: ≥ middling'] }, // TAIL-TIES, the chair's ruling (T3): a district, as the government line's (ruling (f))
+    { text: 'Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.', needs: ['guardPresence', 'garrison'] }, // TAIL-TIES, the chair's ruling (T3): an armoury is a garrison's (registeredWords.js :: armoury; no printing town of the 720 had a militia without a garrison)
     "They received orders from above that contradict what they know to be right. They haven't acted on either yet.",
     { text: 'A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "They've noticed the same group of faces at multiple locations where incidents occurred. No one else has.",
@@ -1235,9 +1235,9 @@ export const NPC_FACTION_LOYALTY = {
     'Someone has been reading the private letters kept in their care, and two of those letters were confessions.',
   ],
   economy: [
-    "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.",
+    { text: "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.", excludes: ['crisis: under_siege', 'route: isolated'] }, // TAIL-TIES, the chair's ruling (T3): goods arrive only by an open route (no siege; not isolated)
     "A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.",
-    'One of their most reliable suppliers has gone dark. The goods are still arriving. Someone else is sending them.',
+    { text: 'One of their most reliable suppliers has gone dark. The goods are still arriving. Someone else is sending them.', excludes: ['crisis: under_siege', 'route: isolated'] }, // TAIL-TIES, the chair's ruling (T3): goods arrive only by an open route (no siege; not isolated)
     { text: 'They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.', needs: ['market'] }, // CENSUS-3e: the ledger's declaration
     "A young trader has been undercutting them in ways that shouldn't be possible on their claimed capital.",
     "Someone is buying up their debts. Quietly. They don't know who, or why, or when they plan to call them in.",
@@ -1245,7 +1245,7 @@ export const NPC_FACTION_LOYALTY = {
     { text: "Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.", needs: ['tier: ≥ village'] }, // R2-CODE-A-6 (the chair's row of 2026-11-14 00:20): no thorp or hamlet keeps a master craftsman (every village and above that printed it holds a house of craft, 145 of 145)
     "A contract they signed in difficult times has a clause they didn't fully read. Someone has read it.",
     "They have been slowly acquiring a controlling interest in a competitor through intermediaries. The competitor hasn't noticed yet.",
-    'A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.',
+    { text: 'A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.', excludes: ['crisis: under_siege', 'route: isolated'] }, // TAIL-TIES, the chair's ruling (T3): goods arrive only by an open route (no siege; not isolated)
     'A buyer has paid them in advance for a whole season of goods, far above the price, and will not say what the goods are for.',
     'Their bookkeeper has been taking a little from every sale for years, and the books balance only because the bookkeeper wrote them.',
     "A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find.",
@@ -1267,8 +1267,8 @@ export const NPC_FACTION_LOYALTY = {
     'A job went wrong in a way that suggests information was leaked. They have three suspects.',
     "They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.",
     'The same new face has turned up at three of their jobs, and they have put someone on to follow the newcomer.',
-    { text: 'The guard captain has a file. They know because someone who works for the guard captain also works for them.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
-    "Someone tried to rob one of their fronts, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.",
+    { text: 'The guard captain has a file. They know because someone who works for the guard captain also works for them.', needs: ['guardPresence', 'watch'] }, // TAIL-TIES, the chair's ruling (T3): a guard captain stands where a watch does (registeredWords.js :: guardCaptain; no printing town of the 720 had a garrison without a watch)
+    'Someone tried to rob them, and did it like a professional: no noise, the lock picked, nothing touched but the strongbox.', // TAIL-TIES, the chair's ruling (T3): no front the roster may not hold (reworded; for the owner's veto)
     'Two of their people have started running jobs of their own, and are telling newer hands that the old boss is finished.',
     'A debt they called in was paid by someone they have never met, and that person now wants to meet.',
     'A load of theirs was taken on the road by people who knew the day, the route and the password.',
@@ -1296,10 +1296,10 @@ export const NPC_FACTION_LOYALTY = {
     "Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious.",
     'Three different people have asked them the same unusual question. None of them knew each other.',
     "They found something hidden in a place it shouldn't be. They put it back. They haven't told anyone.",
-    'A traveller passed through asking which nights their door is left unbarred, and was gone by morning.',
+    { text: 'A traveller passed through asking which nights their door is left unbarred, and was gone by morning.', excludes: ['crisis: under_siege', 'crisis: plague_onset'] }, // TAIL-TIES, the chair's ruling (T3): a traveller passes only by open roads (no siege, no quarantine)
     'Something they were told had been burned has turned up for sale.',
     "They have seen the same unmarked cart pass their door three nights running, and have not wondered why.",
-    "Their oldest friend has started paying for drinks with new silver and will not say where it came from.",
+    { text: "Their oldest friend has started paying for drinks with new silver and will not say where it came from.", needs: ['institution: tavern'] }, // TAIL-TIES, the chair's ruling (T3): drinks are paid for where a tavern stands
     "They've been offered money to not ask questions about something they hadn't even started asking about.",
     'A document they were asked to witness contained a clause they noticed at the time and said nothing about.',
     "Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.",
@@ -1315,7 +1315,7 @@ export const NPC_FACTION_LOYALTY = {
     'Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.',
     'They told a lie to protect a friend, and the friend is now repeating it to people who matter.',
     'A child they took in as a favour has family who want the child back, and want paying for the years.',
-    "Their best customer owes them a year's takings and has started avoiding their street.",
+    { text: "Their best customer owes them a year's takings and has started avoiding their street.", needs: ['tier: ≥ village'] }, // TAIL-TIES, the chair's ruling (T3): a street, which no thorp or hamlet has (registeredWords.js :: streets)
     'Someone has been asking the neighbours what time they leave in the morning and when they come home.',
     'A tool they lent out came back broken, and the borrower insists it was broken when it left.',
     'They have been invited to the wedding of someone who once ruined their family, and refusing would be noticed.',
@@ -1326,7 +1326,7 @@ export const NPC_FACTION_LOYALTY = {
     'An old letter of theirs, written in anger years ago, has been shown to the person it was about.',
     'Their apprentice has been talking to a rival, and came back with an offer to buy them out.',
     'Someone keeps paying off their small debts around the place before they can, and has left no name.',
-    'A cousin has arrived to stay without warning, and spends every day watching one particular house.',
+    { text: 'A cousin has arrived to stay without warning, and spends every day watching one particular house.', excludes: ['crisis: under_siege', 'crisis: plague_onset'] }, // TAIL-TIES, the chair's ruling (T3): a cousin arrives only by open roads (no siege, no quarantine)
     'They found a name scratched into their door overnight, and it belongs to someone who died last winter.',
     'Their savings were hidden in a place only one other person knew, and the savings are gone.',
     "A neighbour's quarrel with them has gone before the people who settle disputes, and the hearing is next week.",
@@ -1345,7 +1345,7 @@ export const NPC_FACTION_LOYALTY = {
     "A cow belonging to one family was found dead in another family's field, and the two families no longer speak.",
     'Someone has been moving the boundary stones at night, a little each time, always in the same direction.',
     'A young couple from two families who do not speak have been seen together, and both families have noticed.',
-    'The person who settled every quarrel here has died, and two neighbours both expect to take their place.',
+    { text: 'The person who settled every quarrel here has died, and two neighbours both expect to take their place.', needs: ['crisis: succession'] }, // TAIL-TIES, the chair's ruling (T3): the one who settled every quarrel is dead only where the seat stands open
     'A pedlar who comes every spring did not come this year, and the goods everyone ordered were paid for in advance.',
     'Someone has been taking eggs and bread from doorsteps, a little at a time, and nobody has caught them.',
     'An outsider has offered to buy the best field for twice what it is worth, and the owner is tempted.',
@@ -2344,8 +2344,8 @@ export const NPC_HOOK_SIBLINGS = Object.freeze({
   ]),
   // NPC_FACTION_LOYALTY — the economy loyalty hook.
   'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.': Object.freeze([
-    Object.freeze({ text: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', needs: Object.freeze(['navigable']) }),
-    Object.freeze({ text: 'A valuable cargo was reported lost on the road. The manifest has reappeared in a market two settlements away.', twinOf: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', excludes: Object.freeze(['navigable']) }),
+    Object.freeze({ text: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', needs: Object.freeze(['coast']) }), // TAIL-TIES, the chair's ruling (T3): the sea is a coast's; a navigable river is not the sea
+    Object.freeze({ text: 'A valuable cargo was reported lost on the road. The manifest has reappeared in a market two settlements away.', twinOf: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', excludes: Object.freeze(['coast']) }),
   ]),
 });
 /**

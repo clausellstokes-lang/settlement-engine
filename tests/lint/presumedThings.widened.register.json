@@ -7334,12 +7334,6 @@
     "81a2b72bebd767e6"
    ],
    [
-    "quarters",
-    "word",
-    "Three guards have gone missing in the same district on night patrol. The report filed says they deserted.",
-    "19d006ecf6c1dc86"
-   ],
-   [
     "practitioner",
     "word",
     "Another practitioner has noticed ",
@@ -7478,12 +7472,6 @@
     "b872b8c74c540cd2"
    ],
    [
-    "armoury",
-    "family",
-    "Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.",
-    "85a88f342c353071"
-   ],
-   [
     "prisoner",
     "family",
     "A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.",
@@ -7494,12 +7482,6 @@
     "family",
     "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.",
     "26bc8ad220dd49e7"
-   ],
-   [
-    "guardCaptain",
-    "family",
-    "The guard captain has a file. They know because someone who works for the guard captain also works for them.",
-    "0dcd1d491e8239f2"
    ],
    [
     "house: warehouse",
