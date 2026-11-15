@@ -475,7 +475,7 @@
     },
     {
       "id": "hamlet|Economy|Woodcutter's camp#0",
-      "text": "A forest-edge camp of fellers and a yard where the logs are stacked. Timber and the hauling of it keep the place alive.",
+      "text": "A forest-edge camp of fellers and a yard where the logs are stacked. Timber and the hauling of it are the camp's whole living.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -483,7 +483,7 @@
     },
     {
       "id": "hamlet|Economy|Woodcutter's camp#1",
-      "text": "Axe crews work the treeline and stack their cut in a yard nearby. The settlement's living is timber and the carting of it.",
+      "text": "Axe crews work the treeline and stack their cut in a yard nearby. The crews live by timber and the carting of it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3819,7 +3819,7 @@
     },
     {
       "id": "city|Economy|Merchant guilds (15-40)#0",
-      "text": "A force to be reckoned with in politics.",
+      "text": "A force to be reckoned with in the city's trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3827,7 +3827,7 @@
     },
     {
       "id": "city|Economy|Merchant guilds (15-40)#1",
-      "text": "Politically, a power in their own right.",
+      "text": "In trade, a power in their own right.",
       "needs": [],
       "excludes": [],
       "crisis": [],

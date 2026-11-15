@@ -123,8 +123,8 @@ const PAIRS = [
     "A dairy for milk, butter, and cheese, from a herd of cattle or goats, whenever livestock can be had. Seasonal work, cresting in the summer months.",
   ],
   [
-    "A forest-edge camp of fellers and a yard where the logs are stacked. Timber and the hauling of it keep the place alive.",
-    "Axe crews work the treeline and stack their cut in a yard nearby. The settlement's living is timber and the carting of it.",
+    "A forest-edge camp of fellers and a yard where the logs are stacked. Timber and the hauling of it are the camp's whole living.",
+    "Axe crews work the treeline and stack their cut in a yard nearby. The crews live by timber and the carting of it.",
   ],
   [
     "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.",
@@ -919,8 +919,8 @@ const PAIRS = [
     "Foreign traders attend, and credit by letter is taken.",
   ],
   [
-    "A force to be reckoned with in politics.",
-    "Politically, a power in their own right.",
+    "A force to be reckoned with in the city's trade.",
+    "In trade, a power in their own right.",
   ],
   [
     "Loans, coin exchange, and letters of credit. The beginnings of banking.",

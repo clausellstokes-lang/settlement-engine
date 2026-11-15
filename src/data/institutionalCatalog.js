@@ -322,7 +322,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { front: 'prime', face: 'the senior guild master', tags: ['guild', 'trade'], priorityCategory: 'economy' },
       at: {
         town: { name: 'Merchant guilds (3-8)', baseChance: 0.8, desc: 'Control trade in specific goods.' },
-        city: { name: 'Merchant guilds (15-40)', baseChance: 0.95, desc: 'Powerful political force.' },
+        city: { name: 'Merchant guilds (15-40)', baseChance: 0.95, desc: 'A power in the city\'s trade.' },
         metropolis: { name: 'Merchant guilds (50-100+)', baseChance: 0.95, desc: 'Dozens of merchant guilds representing every major trade good and route. A formal guild parliament.' },
       },
     },
