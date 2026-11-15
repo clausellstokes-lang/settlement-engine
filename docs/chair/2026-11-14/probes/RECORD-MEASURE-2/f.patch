@@ -1,0 +1,13 @@
+--- a/src/data/bandLadders.js
++++ b/src/data/bandLadders.js
+@@ -53,7 +53,9 @@
+  */
+ export function readinessBandOf(readiness, held = false) {
+   const floor = held ? READINESS_BANDS.length - 2 : READINESS_BANDS.length - 1;
+-  for (let i = 0; i < floor; i += 1) if (readiness >= READINESS_BANDS[i].min) return READINESS_BANDS[i];
++  // RECORD-MEASURE-2 F (candidate; UPKEEP-12's mirror): a roster that holds no walls and no force reads at most Vulnerable
++  const top = held ? 0 : READINESS_BANDS.length - 2;
++  for (let i = top; i < floor; i += 1) if (readiness >= READINESS_BANDS[i].min) return READINESS_BANDS[i];
+   return READINESS_BANDS[floor];
+ }
+ 

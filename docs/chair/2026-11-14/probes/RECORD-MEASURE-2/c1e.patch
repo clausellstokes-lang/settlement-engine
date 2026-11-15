@@ -1,0 +1,67 @@
+--- a/src/generators/computeActiveChains.js
++++ b/src/generators/computeActiveChains.js
+@@ -667,6 +667,40 @@
+ };
+ 
+ 
++// RECORD-MEASURE-2 C1-E (candidate): a good LEAVES the town only where a house of THIS town digs, makes or works
++// it. One table, good -> the houses that work it (an "Access to ..." house is another town's and works nothing here).
++// A good not named here keeps today's gates. Coal and peat are not named: ungated by design (the extraction table).
++const WORKED_BY = (re) => re;
++export const EXPORT_GOOD_HOUSES = Object.freeze({
++  'Toll revenue': WORKED_BY(/toll|customs|gate|bridge/i),
++  'Toll income': WORKED_BY(/toll|customs|gate|bridge/i),
++  'Sea salt': WORKED_BY(/salt/i),
++  'Pilgrim hospitality': WORKED_BY(/\binns?\b|tavern|alehouse|ale house|bath|hostel|caravanserai|waystation|pilgrim/i),
++  'Hospitality for travellers': WORKED_BY(/\binns?\b|tavern|alehouse|ale house|bath|hostel|caravanserai|waystation/i),
++  'Glass blanks': WORKED_BY(/glass/i),
++  'Glassware': WORKED_BY(/glass/i),
++  'Barrels and containers': WORKED_BY(/cooper/i),
++  'Advanced weapons and armor': WORKED_BY(/smith|armou?r|weapon|metalwork|forge/i),
++  'Quality tools and weapons': WORKED_BY(/smith|armou?r|weapon|metalwork|forge/i),
++  'Bows and crossbows': WORKED_BY(/bowyer|fletcher/i),
++  'Arrows (sheaf)': WORKED_BY(/bowyer|fletcher/i),
++  'Dyed cloth': WORKED_BY(/dyer/i),
++  'Flour and meal': WORKED_BY(/^mills?\b|^mill$|maltster|baker/i),
++  'River craft': WORKED_BY(/shipyard|boatyard|shipwright|boatwright/i),
++  'Ship construction': WORKED_BY(/shipyard|boatyard|shipwright|boatwright/i),
++  'Ocean-going vessels': WORKED_BY(/shipyard|shipwright/i),
++  'River barges': WORKED_BY(/shipyard|boatyard|shipwright|boatwright/i),
++  'Books and manuscripts': WORKED_BY(/scribe|printing|librar|monaster|sage|chronicler|wizard/i),
++  'Fine metalwork and jewelry': WORKED_BY(/jewel|metalwork|goldsmith|silversmith|luxury goods/i),
++  'Fine textiles': WORKED_BY(/weaver|textile|tailor|silk/i),
++  'Camel leather': WORKED_BY(/tann|leather|saddl/i),
++});
++/** @param {string} good @param {ReadonlyArray<any>} institutions */
++export function exportGoodWorkedHere(good, institutions) {
++  const re = EXPORT_GOOD_HOUSES[good];
++  return !re || (institutions || []).some((i) => { const n = String(i?.name || ''); return !/^access to/i.test(n) && re.test(n); });
++}
++
+ export function deriveExportsFromChains(
+   activeChains,
+   nearbyResources,
+@@ -728,6 +762,7 @@
+       const requiredInst = gatesForResource[g];
+       if (requiredInst && !_hasInstForGate(requiredInst)) return; // institution not present
+       if (refusedOnly.has(g.toLowerCase())) return; // the card says the chain does not yield it now
++      if (!exportGoodWorkedHere(g, institutions)) return; // RECORD-MEASURE-2 C1-E
+       exports.add(g);
+     });
+   });
+@@ -743,13 +778,14 @@
+         const kws = Array.isArray(requiredInst) ? requiredInst : [requiredInst];
+         if (!kws.some(kw => _hasInstForGate(kw))) return;
+       }
++      if (!exportGoodWorkedHere(o, institutions)) return; // RECORD-MEASURE-2 C1-E
+       exports.add(o);
+     }));
+ 
+   // 3. Entrepôt transit goods — flagged distinctively (COHERENCE-AGREE-6, F2: a chain the leaf refuses sends none)
+   activeChains
+     .filter(c => c.entrepot && !chainYieldRefused(c, isDepletedResource))
+-    .forEach(chain => goodsHeldByFoodRecord(chain.outputs, foodRecord).slice(0, 1).forEach(o => exports.add(`${o} (transit)`)));
++    .forEach(chain => goodsHeldByFoodRecord(chain.outputs, foodRecord).slice(0, 1).forEach(o => { if (/^toll /i.test(o) && !exportGoodWorkedHere(o, institutions)) return; exports.add(`${o} (transit)`); })); // RECORD-MEASURE-2 C1-E: a toll is no transit good where no house takes it
+ 
+   // Apply stress: siege collapses exports, occupation taxes them
+   let list = [...exports];

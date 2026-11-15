@@ -1,0 +1,33 @@
+--- a/src/generators/factionDynamics.js
++++ b/src/generators/factionDynamics.js
+@@ -666,3 +666,15 @@
+   // Sort by effective power descending
+   factions.sort((a, b) => (b.power || 0) - (a.power || 0));
+ }
++
++/**
++ * RECORD-MEASURE-2 G1 (candidate): ONE DOMINANT POWER. "Dominant" is the strongest power's word alone: a second power at
++ * the Dominant share reads "Strong", and where the two strongest hold the same share neither dominates (both "Strong").
++ * Labels only; no share moves. @param {Array<{ power?: number, powerLabel?: string }>} factions
++ */
++export function keepOneDominant(factions) {
++  const ranked = [...(factions || [])].filter((f) => f?.powerLabel === 'Dominant').sort((a, b) => (b.power || 0) - (a.power || 0));
++  if (ranked.length < 2) return;
++  const tie = (ranked[0].power || 0) === (ranked[1].power || 0);
++  ranked.forEach((f, i) => { if (i > 0 || tie) f.powerLabel = 'Strong'; });
++}
+--- a/src/generators/generateSettlementPipeline.js
++++ b/src/generators/generateSettlementPipeline.js
+@@ -1,3 +1,4 @@
++import { keepOneDominant } from './factionDynamics.js'; // RECORD-MEASURE-2 G1
+ /**
+  * generateSettlementPipeline.js — Pipeline-based settlement generation.
+  *
+@@ -195,6 +196,7 @@
+     }
+   }
+ 
++  keepOneDominant(finalCtx.settlement?.powerStructure?.factions); // RECORD-MEASURE-2 G1: on the final roster, the label only
+   if (typeof options.onComplete === 'function') {
+     try { options.onComplete(finalCtx); } catch (e) { console.warn('[pipeline] onComplete threw:', e); }
+   }

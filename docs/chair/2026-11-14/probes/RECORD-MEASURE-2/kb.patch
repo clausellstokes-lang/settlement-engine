@@ -1,0 +1,164 @@
+--- /dev/null
++++ b/src/data/holderTitleForms.js
+@@ -0,0 +1,37 @@
++/**
++ * data/holderTitleForms.js — RECORD-MEASURE-2 K-A (candidate): THE FORM OF A FACE'S TITLE BY ITS HOLDER'S DRAWN GENDER.
++ * A face whose word names a sex ("the ferryman", "the abbot", "the foundling-mother") takes, for a holder of the other
++ * sex, the form below: the plain neutral word a reader would not notice where one exists, a pair only where both words
++ * are ordinary ("the lord" / "the lady"). A face not listed, and a holder of the face's own sex, keep the face as it is.
++ * Read once, at the mints (people/representatives.js, people/castPowers.js), after every draw the face keys; the
++ * card's `institution.title` keeps the registry face (the honorific's and the hook tables' key). Pure data, no draw.
++ */
++
++/** face → { female?: string, male?: string } the holder's form. @type {Readonly<Record<string, Readonly<{ female?: string, male?: string }>>>} */
++export const HOLDER_TITLE_FORMS = Object.freeze({
++  // a man's word, for a woman: the neutral word
++  'the ferryman': Object.freeze({ female: 'the ferry keeper' }),
++  'the boat-headman': Object.freeze({ female: 'the boat-master' }),
++  'the headman': Object.freeze({ female: 'the chief' }),
++  'the camp foreman': Object.freeze({ female: 'the camp overseer' }),
++  'the front man': Object.freeze({ female: 'the nominal owner' }),
++  "the newcomers' spokesman": Object.freeze({ female: "the newcomers' speaker" }),
++  // a pair, both words ordinary
++  'the lord': Object.freeze({ female: 'the lady' }),
++  'the abbot': Object.freeze({ female: 'the abbess' }),
++  'the senior abbot': Object.freeze({ female: 'the senior abbess' }),
++  'the high priest': Object.freeze({ female: 'the high priestess' }),
++  // a woman's word, for a man: the neutral word
++  'the foundling-mother': Object.freeze({ male: 'the foundling-keeper' }),
++  'the alewife': Object.freeze({ male: 'the brewster' }),
++  'the madam': Object.freeze({ male: 'the brothel keeper' }),
++  'the district madam': Object.freeze({ male: 'the district brothel keeper' }),
++});
++
++/** The title a holder of `gender` bears for the face `title`. @param {unknown} title @param {unknown} gender @returns {any} */
++export function titleForHolder(title, gender) {
++  if (typeof title !== 'string') return title;
++  const forms = Object.hasOwn(HOLDER_TITLE_FORMS, title) ? HOLDER_TITLE_FORMS[title] : null;
++  const form = forms && (gender === 'female' ? forms.female : gender === 'male' ? forms.male : undefined);
++  return form || title;
++}
+--- a/src/generators/people/representatives.js
++++ b/src/generators/people/representatives.js
+@@ -56,6 +56,7 @@
+ 
+ import { resolveGenerationContentProfile } from '../../domain/generationContentProfile.js';
+ import { seatMintTitleFor } from './mintTitles.js';
++import { titleForHolder } from '../../data/holderTitleForms.js'; // RECORD-MEASURE-2 K-A
+ import { CIVIC_OFFICE_BY_SIZE, OFFICE_TITLES } from '../../data/officeTitles.js';
+ import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
+ import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
+@@ -559,6 +560,8 @@
+   // tied to the seat so the social graph reaches it.
+   // ONE HOOK PER CARD (PEOPLE-3 HOOKS), in roster order, each on its own keyed fork.
+   drawCardHooks(cards, (card) => hookPools.get(card.id) || 'other', root.fork(HOOKS_FORK_LABEL), npcConfig, hookRegistry, { worldLaw, institutions, tier });
++  // RECORD-MEASURE-2 K-A (candidate): the face's form by the holder's drawn gender, after every draw the face keys
++  for (const card of cards) { const t = titleForHolder(card.title, card.gender); if (t !== card.title) card.title = t; } // K-B: the title only; the role keeps the face (the readers key)
+ 
+   // Draw-free: a name shared by two cards takes a role qualifier, never a second draw.
+   return disambiguateNPCDisplayNames(cards);
+--- a/src/generators/people/castPowers.js
++++ b/src/generators/people/castPowers.js
+@@ -52,6 +52,7 @@
+ import { powerBandOfRole } from '../npcGenerator.js';
+ import { drawCardHooks, dualHatHouseOf, HOOKS_FORK_LABEL, houseKindOf, mintPowerFace, officeTitleFor, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
+ import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
++import { titleForHolder } from '../../data/holderTitleForms.js'; // RECORD-MEASURE-2 K-A
+ import { CLAIMANT_FACE, HOUSELESS_CRIMINAL_FACE } from '../../data/stressPowerFaces.js';
+ import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
+ import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
+@@ -322,8 +323,8 @@
+       // mergeNPCLists runs on the roster's cards; crimeSignal.js :: withTownsOwnUnderworld), after the draw
+       if (card.secret && typeof card.secret === 'object') card.secret = { ...card.secret, what: withTownsOwnUnderworld(card.secret.what, crime.signal, crime.faction) };
+       card.id = id;
+-      card.title = row.title;
+-      card.role = row.title; // M-1b
++      card.title = titleForHolder(row.title, card.gender); // RECORD-MEASURE-2 K-A
++      card.role = row.title; // M-1b (K-B: the role keeps the face)
+       // FIX-PUBLIC-VEIL: the veil bit at birth — a hidden power's mint (the stress infiltrator) or a criminal one's
+       card.institution = { kind: 'power', key: name, family: null, title: row.title, veiled: isVeiledPower(f) };
+       card.memberships = [];
+--- a/src/data/faceHonorifics.js
++++ b/src/data/faceHonorifics.js
+@@ -23,14 +23,15 @@
+  */
+ 
+ import { pickVariant } from '../kernel/proseHash.js';
++import { titleForHolder } from './holderTitleForms.js'; // RECORD-MEASURE-2 K-B
+ 
+ /** @typedef {string | { male: string, female: string }} Honorific */
+ 
+ /** title → the pool of honorifics; the walker (tests/data/faceHonorifics.test.js) pins every face and mint title. @type {Readonly<Record<string, readonly Honorific[]>>} */
+ export const FACE_HONORIFICS = Object.freeze({
+-  "the boat-headman": ["Headman", "Boat-Master", "Skipper"],
++  "the boat-headman": [{ male: "Headman", female: "Boat-Master" }, "Boat-Master", "Skipper"] /* RECORD-MEASURE-2 K-A */,
+   "the head shepherd": ["Head Shepherd", "Master Shepherd"],
+-  "the camp foreman": ["Foreman", "Camp Master"],
++  "the camp foreman": [{ male: "Foreman", female: "Overseer" }, "Camp Master"] /* RECORD-MEASURE-2 K-A */,
+   "the eldest": ["Elder", "Eldest"],
+   "the eldest householder": ["Elder", "Goodman"],
+   "the reeve": ["Reeve"],
+@@ -54,7 +55,7 @@
+   "the smith": ["Smith", "Blacksmith"],
+   "the carpenter": ["Carpenter", "Wright"],
+   "the steward": ["Steward", "Seneschal"],
+-  "the headman": ["Headman", "Chief"],
++  "the headman": [{ male: "Headman", female: "Chief" }, "Chief"] /* RECORD-MEASURE-2 K-A */,
+   "the militia captain": ["Captain", "Captain of the Militia"],
+   "the hedge wizard": ["Hedge Wizard", "Cunning-Man"],
+   "the charter master": ["Chartermaster", "Master of the Charter"],
+@@ -66,7 +67,7 @@
+   "the wildfowler": ["Fowler", "Wildfowler"],
+   "the waystation keeper": ["Waystation Keeper", "Host"],
+   "the carriers' master": ["Master Carrier", "Carriers' Master"],
+-  "the ferryman": ["Ferryman", "Ferry-Master"],
++  "the ferryman": [{ male: "Ferryman", female: "Ferry-Keeper" }, "Ferry-Master"] /* RECORD-MEASURE-2 K-A */,
+   "the boatwright": ["Boatwright", "Master Boatwright"],
+   "the toll-keeper": ["Toll-Keeper", "Tollman"],
+   "the miller": ["Miller", "Master Miller"],
+@@ -135,7 +136,7 @@
+   "the abbot": [{ male: "Abbot", female: "Abbess" }, { male: "Father Abbot", female: "Mother Abbess" }],
+   "the hospitaller": ["Hospitaller", "Brother Hospitaller"],
+   "the almoner": ["Almoner"],
+-  "the foundling-mother": ["Mother", "Matron"],
++  "the foundling-mother": [{ male: "Keeper", female: "Mother" }, { male: "Warden", female: "Matron" }] /* RECORD-MEASURE-2 K-A */,
+   "the grove elder": ["Elder", "Grove-Warden"],
+   "the lord's appointee": ["Bailiff", "Lord's Bailiff"],
+   "the first councillor": ["First Councillor", "Councillor"],
+@@ -158,7 +159,7 @@
+   "the hiring master": ["Hiring Master"],
+   "the blade captain": ["Captain", "Blade-Captain"],
+   "the gang boss": ["Boss"],
+-  "the front man": ["Frontman"],
++  "the front man": [{ male: "Frontman", female: "Proprietor" }] /* RECORD-MEASURE-2 K-A */,
+   "the rookery boss": ["Boss"],
+   "the troupe leader": ["Troupe Leader", "Troupe Master"],
+   "the theatre manager": ["Theatre Manager", "Manager"],
+@@ -233,7 +234,7 @@
+   "the reformer": ["Reformer"],
+   "the investigator": ["Investigator"],
+   "the bloc's speaker": ["Speaker"],
+-  "the newcomers' spokesman": ["Spokesman"],
++  "the newcomers' spokesman": [{ male: "Spokesman", female: "Speaker" }] /* RECORD-MEASURE-2 K-A */,
+   "the alliance's convenor": ["Convenor"],
+   "the commoners' tribune": ["Tribune"],
+   "the neutrals' broker": ["Broker"],
+@@ -380,6 +381,7 @@
+  * @template T @param {T} title @param {unknown} gender @returns {T | string}
+  */
+ export function styledTitleOf(title, gender) {
++  { const held = titleForHolder(title, gender); if (held !== title) return held; } // RECORD-MEASURE-2 K-B: the holder's form, one leaf
+   if (gender !== 'female' || typeof title !== 'string' || !title) return title;
+   const t = title;
+   const pool = FACE_HONORIFICS[t.trim()];
+--- a/src/generators/npcStructure.js
++++ b/src/generators/npcStructure.js
+@@ -534,7 +534,7 @@
+ // it. The cut is taken over the cast less those lords (each card's place among the others); a lord keeps the lines it reads
+ // within the whole cast's cut, as before. Draw-free.
+ /** @param {Record<string, any>} npc */
+-const isMintedLord = (npc) => npc?.institution?.kind === 'power' && npc?.title === CLAIMANT_FACE.title;
++const isMintedLord = (npc) => npc?.institution?.kind === 'power' && (npc?.institution?.title ?? npc?.title) === CLAIMANT_FACE.title; // RECORD-MEASURE-2 K-B: the face, not the holder's form
+ /** The enrichment cut over a cast of `n`. @param {number} n */
+ const cutOf = (n) => Math.min(5, Math.max(2, Math.floor(n * 0.45)));
+ 

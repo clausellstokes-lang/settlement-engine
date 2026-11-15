@@ -1,0 +1,93 @@
+--- a/src/generators/power/rulingStructure.js
++++ b/src/generators/power/rulingStructure.js
+@@ -681,7 +681,7 @@
+   factions.forEach((f) => {
+     if (!f.category) f.category = inferFactionCategory(f.faction || '');
+   });
+-  const { stability, recentConflict } = buildGovernanceLabels({
++  let { stability, recentConflict } = buildGovernanceLabels({ // RECORD-MEASURE-2 G2: let
+     factions,
+     config,
+     stressFlags,
+@@ -696,6 +696,7 @@
+     stressEntries: stressEntries || [],
+     fallbackStressType: stressType,
+     defenseLabel: projection.defenseLabel || null, // POWERS-14 (NEW1): the record's readiness label, on the replay
++    garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison, // RECORD-MEASURE-2 G5
+   });
+   // ── Public legitimacy & faction dynamics ────────────────────────────────
+   // At this point defenseProfile isn't computed yet — we use a provisional
+@@ -733,6 +734,8 @@
+   );
+ 
+   // Apply multipliers before relationship computation (relationships use final powers)
++  // RECORD-MEASURE-2 G2 (candidate): the bare "Stable" is not said beside a legitimacy crisis; the Tense rung says it
++  if (/^Stable(;|$)/.test(String(stability)) && publicLegitimacy?.label === 'Legitimacy Crisis') stability = String(stability).replace(/^Stable/, "Tense (the seat has lost the people's trust)");
+   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
+   settleClaimsToLabel(factions, tier, lowerInstNames); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
+   annotateFactionStanding(factions, standingForce); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort
+--- a/src/generators/power/governanceNarrative.js
++++ b/src/generators/power/governanceNarrative.js
+@@ -244,6 +244,8 @@
+   institutionFlags,
+   neighbourRelationship,
+   defenseLabel = null,
++  theocraticSeat = true, // RECORD-MEASURE-2 G3: a religious seat or a Strong religious power stands
++  garrisonStands = true, // RECORD-MEASURE-2 G5: a garrison stands
+ }) => {
+   // POWERS-14 (the chair's ruling of 2026-11-14, ONE LADDER FOR ONE WORD; the page census's NEW1): the defence word
+   // reads the record's own readiness label (defenseProfile.readiness.label, the Defense verdict the Overview prints),
+@@ -255,7 +257,7 @@
+   const exposed = EXPOSED_READINESS_LABELS.has(String(defenseLabel));
+   if (stressFlags.stateCrime) return 'Enforced Order (authoritarian)';
+   if (stressFlags.crimeIsGovt) return 'Unstable — criminal governance';
+-  if (stressFlags.crusaderSynthesis) return 'Rigid (militant theocracy)';
++  if (stressFlags.crusaderSynthesis && theocraticSeat) return 'Rigid (militant theocracy)'; // RECORD-MEASURE-2 G3
+   if (stressFlags.merchantArmy) return institutionFlags.inst?.hasCourtSystem ? 'Fragile (private security above the public law)' : 'Fragile (private security, no public law)'; // COHERENCE-PRESUME (the chair's ruling of 2026-11-12): never deny the law a hall or court keeps
+ 
+   if (
+@@ -270,7 +272,7 @@
+   ) {
+     return 'Tense (militarised, chronically underfunded)';
+   }
+-  if (stressFlags.theocraticEconomy) return 'Stable (theocratic governance)';
++  if (stressFlags.theocraticEconomy && theocraticSeat) return 'Stable (theocratic governance)'; // RECORD-MEASURE-2 G3
+   if (ADVERSARIAL_RELATIONSHIP_TYPES.has(neighbourRelationship?.relationshipType)) {
+     return 'Tense (external threat)';
+   }
+@@ -281,7 +283,7 @@
+   ) {
+     return 'Vulnerable (prosperous but underdefended)';
+   }
+-  if (institutionFlags.militaryEffective > 68 && !exposed) {
++  if (institutionFlags.militaryEffective > 68 && !exposed && garrisonStands) { // RECORD-MEASURE-2 G5
+     return 'Ordered (strong military presence)';
+   }
+   return 'Stable';
+@@ -669,17 +671,26 @@
+   fallbackStressType,
+   worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
+   defenseLabel = null, // POWERS-14: the record's readiness label, on the power step's replay after the defence profile
++  garrisonStands = true, // RECORD-MEASURE-2 G5: the defence facts' garrison (defenseFacts.js :: hasGarrison)
+ }) => {
+   const magicWorks = resolveGenerationWorldLaw(worldLaw, config).magicFunctions();
+   const hasStress = stressType => stressTypes.includes(stressType);
+   const monsterThreat = config?.monsterThreat || 'frontier';
+   const migrationEntry = (stressEntries || []).find((e) => e?.type === 'mass_migration') ?? { type: 'mass_migration', direction: migrationDirectionOfConfig(config) || 'arrivals' }; const migrationDirection = migrationDirectionOf(migrationEntry) === 'exodus' ? 'departures' : 'arrivals'; // WAVE-RULINGS item 8 (W3 POW): the stability label reads stress[].direction — the entry's own, else its config projection — the one field the vignette reads; both sets, arrivals and departures
+ 
++  // RECORD-MEASURE-2 G3: a theocracy's word only under a religious seat or beside a Strong religious power
++  const RELIGIOUS = /theocra|relig|church|temple|clerg|eccles|priest|faith|holy/i;
++  const theocraticSeat = RELIGIOUS.test(String(configuredGoverningFaction || ''))
++    || RELIGIOUS.test(String(factions.find((f) => f?.isGoverning)?.faction || ''))
++    || factions.some((f) => (RELIGIOUS.test(String(f?.faction || '')) || f?.category === 'religious') && (f?.power || 0) >= 25);
++  // RECORD-MEASURE-2 G5: "strong military presence" only where a garrison stands
+   const baselineStability = deriveBaselineStability({
+     stressFlags,
+     institutionFlags,
+     neighbourRelationship,
+     defenseLabel,
++    theocraticSeat,
++    garrisonStands,
+   });
+   const stressStability = applyStressStability(
+     baselineStability,
