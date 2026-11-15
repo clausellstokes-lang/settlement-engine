@@ -442,6 +442,11 @@ pushed by explicit refspec; the main checkout untouched. No merge made (no row o
   in fewer than five towns waits (the military family's seven single rows wait: they need the final roster at a step
   that does not have it: NAMED). P20 STANDS. `ruling body` is safe at every step and takes new lines (the joined line at
   d817736d8 holds it: the only merge). Not to be keyed on: the seat's capture state, its legitimacy crisis note.
+- (P28, 02:44 UTC; it reached this seat only at 03:32, after batches 1 and 2: the seat had not read its notifications
+  at its start) THE FIRST ACT: merge the joined line at d817736d8 (a merge commit of its own, the only merge) and resolve
+  governanceAccount.js's section 1 THE SEAT: THE DECLARED TWIN (P4) STANDS; X2's "under the Occupation Authority" yields
+  in those sentences (what it leaves unused removed); X2's guard re-keyed to the twin BY IDENTITY; any other change X2
+  made in the file stands. Measure: the 28 occupied towns print the twin and nothing else moves in the account.
 - (U1) The account's weekly usage warning is on: commit and push every batch the moment it holds; WHAT IS LEFT current
   in the same push; hand back at 250,000 or about seventy minutes; one line to the chair at the hand-back only.
 
@@ -490,6 +495,25 @@ Guard: tests/generators/power/tailPowers4Batch2.test.js (6 pairs red at the base
 Silenced elsewhere (both batches): none. "Patron deity" and its two premium lines 717 -> 716 (r2r-thorp-3, the first town
 of a render worker: the render race TAIL-POWERS-3 named; its record moved only in recentConflict).
 
+## Batch 3 · 6c2fe3344 · the vignettes claim no workshop and no guild (governingStressVignettes.js)
+Verified by the record (at e046a2ac4): 05663 prints in 27 (8 thorps of 6 to 30 souls, 5 hamlets: "the farms and
+workshops" where a thorp of 8 holds no workshop); 15434 in 21 (13 with no guild: "two guild masters stayed away"). Both
+REWORDED to claim what every printing town bears (above, the veto list). Measured by one census before (e046a2ac4,
+`runs/after`) and one after (6c2fe3344, `runs/after3`, exit 0): FIELD DIFF towns 48, families 1
+(`powerStructure.recentConflict` 48). Rows: 05663 27 -> 0 GONE, 15434 21 -> 0 GONE, each inherited by its new wording
+town for town; nothing else in fewer towns. Guard: tests/generators/power/tailPowers4Batch3.test.js (4 pairs red at the
+base). The presumed-things walker: fresh 147 (no rise); the files naming the vignettes: the 4 carried reds only.
+
+## The merge · eb5e2ab0d · the joined line at d817736d8 (ruling P28)
+One conflict, governanceAccount.js section 1 (two hunks): resolved to the declared twin; X2's `occupierOf`, `occupier`,
+`under` removed (used nowhere else); X2's guard tests/components/tailDisplayCivicBatch1.test.jsx re-keyed by identity (its
+three occupied rows read "<the hall> answers to the occupiers of <place>."); green. MEASURED by the account over the
+720 records (`acct.mjs`, the merged module against the joined line's): 28 towns print the twin, 0 print "under the
+Occupation Authority"; every other difference is this branch's own landed cures (P3's "The Guard", the Neutrals, P4's
+occupier "at odds with" the hall in r2s-occupied-metropolis-1). Reds after the merge in the files naming the account
+(engineCoreLazyEdge x2, r3c9ReaderLinesTrue n15, powerStateProseDesk 5a and ALIVENESS): red at d817736d8 itself, CARRIED.
+NOT re-taken: a census at the merged tree (the successor's BEFORE: take it first).
+
 ## The gates (base a207c871b against the tip e046a2ac4)
 eslint (touched files) 0; typecheck:domain:strict 0; typecheck:ratchet 0; the presumed-things walker --check: fresh 147,
 strips fresh 1 at the base and at the tip (no rise), stale 0 at the tip. The 71 test files naming the touched files: the
@@ -508,6 +532,10 @@ editCorpusRatchet A3 A4 A7 A8: 18, named, not this seat's). The twelve-birth gri
 - REWORDED (21621): "The rebels' buildings are marked, and parts of the settlement are contested." 24 (every one a slave
   revolt): r2s-slave_revolt-thorp-1 (15), r2s-slave_revolt-metropolis-2 (127,443).
 - Batch 2 adds no line: its inheritors are the tables' existing lines (above).
+- REWORDED (05663): "Conscription has taken the workers, and every household is short-handed." 27 (every one wartime):
+  r2s-wartime-thorp-3 (6 souls), r2s-wartime-city-2 (13,169), r2r-hamlet-5 (97).
+- REWORDED (15434): "Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away
+  from the last assembly." 21: r2s-insurgency-thorp-2 (9), r2r-thorp-52 (25), r2r-metropolis-26 (21,872).
 
 ## Rows struck or named (this seat)
 - 21207 (49): STRUCK by P4's test: every printing town is an Elder Council with NO legitimacy crisis (the crisis half was
@@ -531,8 +559,7 @@ editCorpusRatchet A3 A4 A7 A8: 18, named, not this seat's). The twelve-birth gri
   where they print), 18060 14, 16581 14, 03925 12, 11810 11, 17652 8; under five towns: wait.
 - governanceNarrative.js: 12720 80 (P22: not this seat's); B02464's 35 left (hamlets and villages: true by the size);
   20987 / 00170's 14 left (towns and up); B13714 13; B00338 6 / B13657 2; 20963 2; the military family's singles (wait).
-- governingStressVignettes.js: 05663 27 (conscription's "farms and workshops are short-handed" in a thorp of 8 with no
-  workshop), 15434 21 ("two guild masters stayed away" with no guild), B21342 13, 22121 13, 15215 13, 21190 9.
+- governingStressVignettes.js: (05663, 15434 cured, batch 3) B21342 13, 22121 13, 15215 13, 21190 9.
 - governanceAccount.js: as TAIL-POWERS-3 left it (the styled-title rows are faceHonorifics', B's).
 - The one-member council's plural lines (P21, the hold lifted): merge the joined line at d817736d8 first.
 
@@ -543,7 +570,8 @@ threat, stability, recentConflict, seat, legitimacy, each faction's name/label/p
 base is shown by copying the base's files over the edit tree (`git show HEAD:<f> > <f>`), running, and restoring from a
 tar of the tip's files; a census's tree is never touched while it runs.
 
-## Handed back (03:35 UTC, at the mark by time; the meter reads 0; the account's usage warning on)
-This seat stops after batch 2: a third batch needs a census of ~20 minutes that would end past the mark. The successor's
-order: P25's 23160 and kin (the lent table); 05663 and 15434 (the vignettes); 23333 (a reword to the force's weight); the
-221-town article fault, if the chair rules it in.
+## Handed back (03:45 UTC, at the mark by time; the meter reads 0; the account's usage warning on)
+This seat stops after batch 3 and P28's merge (tip eb5e2ab0d). The successor's BEFORE is a census AT THE MERGED TREE
+(it holds the joined line now). The order then, widest first: P25's 23160 (37) and kin (the lent FACTION table); 23333
+(42 by record: a reword to the force's weight, P20); B21342 / 22121 / 15215 (13 each, the vignettes); the 221-town
+article fault if the chair rules it in; the one-member council's plural lines (P21: `ruling body` is now on this branch).
