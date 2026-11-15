@@ -1,5 +1,48 @@
 # TAIL-POWERS-B · the hand-back (kept current after every batch)
 
+FIFTH SEAT (2026-11-15, from 05:35 UTC): TAIL-POWERS-B-5 (session_01ACmDYY1oQE2u8QUySxACvr) holds this file and this branch
+since c6399e488, a CLOSE seat: the four reds of the first whole check in the powers' area. Merged the joined line at 03466231
+(holds 9d3d177a0) as 4442e1d4d. Pushed from a scratch worktree (local branch `tpb5-work`) by explicit refspec, fast-forward only;
+the main checkout was never staged, committed or reset.
+
+## TAIL-POWERS-B-5 · the four reds (each run alone at the merge 4442e1d4d first)
+- RED 1, THE HALL'S THREE (hallDecidesUnderOccupation 1 of 7, hallLineReadsCrime 1 of 1 (the collected 1 of 8),
+  criminalSwayReadsHall 1 of 6): RE-KEYED BY IDENTITY, a1351a7e6. A DECLARED MOVE of the display the hall's pins did not
+  follow: 82e8fab6e (W2-C-LEAVES-3) and 0044e4f84 (W2-C-LEAVES-11, ruling (1)) read "Multiple criminal factions" with no
+  criminal seat and no thieves' guild as rival rings (semi-organized); 0044e4f84 keeps r2r-city-3 as its own guard. Probed:
+  none of the three towns stands a criminal power or a thieves' guild; the none rung's first line prints, TRUE beside rival
+  rings (POWERS-14's own reading). Not a regression: the hall reads the structure; the structure moved, declared. No src
+  touched; 0 of the 720 prints move. After: 7/7, 1/1, 6/6; eslint 0; typecheck:ratchet 0; grid 2 falls = the base.
+- RED 2, labelJoins (P33/P34): CURED, 833566cf2. claimStanding.js's warehouse scan joins by the catalogue's own ids
+  (WAREHOUSE_IDS: the catalog ids of every rung of the family the catalogue tags TAG.WAREHOUSE, merchant_warehouses and
+  warehouse_district; no new atom, the label not respelled). The 720 births (CENSUS-3 births.mjs) BYTE-IDENTICAL, base
+  4442e1d4d against the cure (sha256 c6a4940b...); both arms print in the 720 (7 towns each): 0 prints move. labelJoins 3/3.
+  The 7 test files naming claimStanding.js: 62/62 at the base and at the cure, after seatNamedAsItSits' unit fixture
+  'bonded warehouse' (a name no catalogue or birth holds; the 720 hold "Warehouse district" 240, "Merchant warehouses" 35)
+  was re-keyed to 'warehouse district' (the chair's P35: disjoint from lane/tail-close-tests-b's hunk). eslint 0;
+  typecheck:ratchet 0; domain strict 0; grid 2 falls = the base.
+- RED 3, captureBirthScale ("floor 372 > 326"): NAMED, THE OWNER'S DOOR (the chair's ruling; nothing changed). The
+  first-parent bisect bfab7bdd8..4f24025c2 turns at 33b12cbef (JOIN-1 · 9, the merge of lane/coherence-upkeep-2026-11-12
+  at c56fd565e, the defence lane: a lane of declared moves of the record), last good 9e3880dd1. THE FIGURES (the sweep's
+  400 criminal cities at equilibrium+, born as the test bears them): 392 at 9e3880dd1, 325 at 33b12cbef, 326 at this
+  branch's merge; the registered floor 372 (capture.criminalCity.equilibrium, alpha 1e-3, 3.809 sigma). A MEASURED ENVELOPE
+  MOVED BY DECLARED MOVES: not re-taken, not the powers' files. (Measured before the chair's ruling arrived, not acted on:
+  inside the lane, 07ebe8bdc's upkeep gates take 393 -> 372 alone.)
+- RED 4, r3c9ReaderLinesTrue (Ainkarez): RE-KEYED BY IDENTITY, 5706c386b. Green at the r3-code-c lane tip da0f201e6, red at
+  its landing c2c12792e; bisect 70d92ed06..b6a5f97ab on Ainkarez's hall rung names 07ebe8bdc (COHERENCE-UPKEEP, the upkeep
+  gates read keepOf(prosperity), declared "86 readiness labels move"; landed by 33b12cbef): the Merchant Council 36 Dominant ->
+  29 Strong, the Thieves' Guild 14 -> 17, the rung adversarial -> equilibrium; its account prints no false line. The
+  town-size seat goes to r2s-slave_revolt-town-3 (Zhongba), the census's one town whose only tie with the hall is the criminal
+  rung at adversarial. No src; 0 prints move. After 7/7; eslint 0; typecheck:ratchet 0.
+- MOVING CHECK: src/generators/power/claimStanding.js and rulingStructure.js show a three-dot diff on
+  lane/tail-corpus-def-2026-11-14, but the two-dot diff of that tip against the joined line is EMPTY for both (the criss-cross
+  merge bases make the three-dot diff carry this branch's own batch 7, already joined): not another seat's unmerged change.
+  The same for tests/domain/r3c9ReaderLinesTrue.test.js on lane/tail-corpus-def (two-dot empty; the hunk is TAIL-CRISIS's).
+
+FOURTH SEAT (2026-11-15, from 04:47 UTC): TAIL-POWERS-B-4 (session_01ACmDYaigqvGezgaSa8oP58) holds this file and this branch
+since cce57ff35: batch 8 (P31) and the U2 reds below are its. Pushed from scratch worktrees by explicit refspec, fast-forward
+only; the main checkout was never staged, committed or reset.
+
 THIRD SEAT (2026-11-15, from about 03:30 UTC): TAIL-POWERS-B-3 (session_01ACmDYYueM8jap9opFBuFtU) holds this file and this
 branch since 4140ad9f4: batch 6b and the batches after it are its. Pushed from the scratch worktree's local branch `tpb3-wt`
 by explicit refspec, fast-forward only; the main checkout was never staged, committed or reset.
@@ -66,6 +109,21 @@ scratch worktree's local branch `tpb-wt` by explicit refspec; the repository's m
 - (U1) THE WEEKLY USAGE WARNING: commit and push every batch the moment it holds, WHAT IS LEFT current in the same push.
 - (02:42) In src/data/powerSiblings.js the tables FACTION_DESC_SIBLINGS and BASELINE_CONFLICT_SIBLINGS are lent to the governance
   seat; src/data/faceHonorifics.js is the titles' seat's; rulingStructure.js and the governance files are another seat's.
+- (P31, the chair, 2026-11-15 04:48 UTC; vetoable by the owner) THE ORDER: FIRST the eight rows two cold reads met in this
+  seat's files (ten fresh towns and the newest lines, at the landed tip 5d1e3096b; check each at the tip; a flag is a candidate:
+  measure it over every town of the 720 that prints it; cure by a condition, a declared twin or a rewording), by width:
+  (1) claimStanding CLERGY_AT_MARGINS (98) where the faith is the strongest power and contends for the seat; (2) the potter's
+  clay secret (85) where no clay is on the land; (3) MERCHANT_CRAFT_VOTE (77) against the page's relation of the pair; (4)
+  "Three powers stand almost level" (17) where five stand level or one governs at Significant over Minor ones; (5) the
+  seat-and-faith "ordained" row's three kin (9, 8, 5) at a HIGH quarrel and under an occupation; (6) a thieves' guild's wartime
+  "hurting the bottom line" (6). THEN the two rows measured and not built; 07269 (44, named for claimStanding.js by the
+  governance seat); then this seat's rows in five towns or more, widest first. MEASURE ONLY: the 495 towns holding a power chip
+  off the documented ladder (factionDynamics.js :: powerLabelOf). `ruling body` safe at every step; not keyed on the governing
+  power's capture state or its legitimacy crisis note.
+- (U2, the chair, 04:49 UTC) REAL BREAKS BEFORE THE EIGHT ROWS: five red files in this area, each run alone at the tip; for each:
+  (i) a regression of an earlier cure in these files: cure it; (ii) a pin a DECLARED MOVE explains: re-key by identity, name the
+  move; (iii) the cause outside these files: one line here with the file and the commit (`git log -S`). Never skip, weaken or
+  delete a test.
 - The brief's laws (BRIEF-TAIL.md): silence is true, a silence of true lines over twenty towns told first; a state left mute takes
   a twin; no ceiling raised; a draw is not moved; one home for one fact; no new vocabulary word without the chair; every new or
   reworded line listed for the owner's veto.
@@ -329,7 +387,105 @@ GUARD tests/generators/standingReadsTheRivalItRead.test.js: 9 refused pairs red 
 KEEP green; 12/12 at the cure. Gates: eslint 0; typecheck ratchet 0; domain strict 0; the walker fresh 147 = the base; the grid
 2 falls = the base (P7a); the 12 test files naming the two files 95/95.
 
+## Batch 8 · d99bce57a · P31 (1)-(6): the powers lines read the roster, the conflicts and the land (TAIL-POWERS-B-4)
+Files: generators/power/claimStanding.js, data/people/titleSecretsPresentations.js, generators/factionDynamics.js,
+generators/power/factionStanding.js, generators/power/stressFactions.js, and the lent hunk of generateSettlementPipeline.js (ONE
+call beside keepOneDominant: settleClergyToFinalRoster, draw-free, on the final roster: the margins line is written at the power
+step and the density law resizes the roster after it). Text only; no draw moved. EACH ROW MEASURED BY THE RECORD at cce57ff35
+over every town that prints it (scratch tools/m.py and inline scans), before the cure:
+- (1) CLERGY_AT_MARGINS (98 towns, 123 cards): FALSE on 11 cards in 11 towns: the faith the strongest power (4), at or above the
+  seat's power though not first (4), or at Significant (3, villages: the line drawn by rulingStructure.js at a low share, the
+  label raised after). There -> "The faith holds no office in the hall, but its moral authority is real and its word carries
+  political weight here." 98 -> 88 towns (one town keeps the line on a density rival far behind the seat, true of it), the twin
+  0 -> 11. None governs.
+- (2) the potter's clay secret (85, hedged by batch 5): the land holds no clay for the potter in 84 of 85 (the record's gap
+  "Potter exists but lacks access to clay"; the 85th holds clay). The vocabulary has no clay atom (no new word asked), and a
+  condition would leave 84 slots mute, so the slot keeps its draw and takes a secret true with or without clay: "Has been selling
+  pots bought in from another workshop as their own throwing, at their own prices" / "The buyers who paid for local work would
+  want their money back, and the workshop's name would go with it". 85 -> 0, the new 0 -> 85 (one true clay line silenced, in
+  the one town that holds clay). batch 5's guard row re-keyed by identity. NAMED for the record's seat: the potter stands without
+  clay in 84 of the 85 towns that print his secret.
+- (3) MERCHANT_CRAFT_VOTE (77): the conflicts hold the pair at HIGH in 12 (moderate in 8: "vote together ... then fight over
+  the profit" is true beside a moderate dispute; left). withConflictRelations (P19's call) gives the vote, in either form, a twin
+  at HIGH: "Merchant Guilds and Craft Guilds are at odds over <issue>, and fight over who keeps the profit of the trade."
+  (direction escalating, as P19). The sibling 77 -> 65, the "against <landholders>" form 21 -> 14 (7 more at HIGH), twins 19.
+- (4) "Three powers stand almost level ... no one leads" (37 towns as the inventory folds the number): FALSE in 27 on the final
+  roster: the third more than five below the first (15), or the level powers across a rung of the ladder (a Significant over
+  Minor ones, 12); and in 9 of the 10 true ones four to seven stand level, not three. The line now reads the roster: the level
+  powers are those within five of the first AT ITS RUNG (powerLabelOf); fewer than three -> the file's own sibling "They are
+  always at the table, but cannot set their own terms." (162 -> 189, the 27 inheritors, read at r2r-city-56, r2r-city-7,
+  r2s-occupied-town-3: true of a third power that sets no terms); three or more -> their number said ("Five powers stand almost
+  level here ..."). 37 -> 10. A SILENCE OVER TWENTY TOWNS, OF FALSE LINES (measured), named here.
+- (5) the seat-and-faith "ordained" row (dependent; 120 towns print "Each props up the other."): beside a HIGH quarrel of the pair
+  (6 towns; P19 had appended "Even so, ..." after "Each props up the other.") -> "<seat> holds the seat and collects the taxes;
+  Religious Authorities have long told people that <seat>'s rule is right and ordained, but the two are now at odds over
+  <issue>."; under an occupation (4 towns: the occupier takes the levy) "<seat> holds the seat; Religious Authorities tell people ...",
+  no taxes said. 120 -> 114 and the four occupied towns' lines reworded.
+- (6) stressFactions.js wartime merchant/guild branch: 'guild' matched the Thieves' Guild (4 cards in 4 towns) -> "Shortage and
+  requisition have pushed trade into the black market, where the guild takes its cut." 4 -> 0 on those cards; the merchants keep
+  their line (true).
+THE INVENTORY DIFF (before cce57ff35 -> after d99bce57a): 29,896 -> 29,918; gone 4 (the clay secret, and three one-town forms
+of (3) and (5)), new 26 (the twins above), fewer 26 (each by exactly its measure), more 2 (the sibling standing line +27; the
+pair's relation direction "escalating" +12, P19's form). Every fewer line is a row of this batch. THE INHERITORS: the twins, read
+where they print (r2r-city-1, r2r-city-7, r2r-town-29, r2r-metropolis-15, r2s-occupied-town-2, r2s-wartime-city-2) and the
+sibling standing line (above). The exports (PDF, journal): gone 1, new 4, fewer 6, more 1: the same lines under the power's
+name. FIELD DIFF BY FAMILY (the 720): npcs[].secret.what and .stakes 85 towns, powerStructure.factions[].desc 43,
+factionRelationships[].narrative 29, factionRelationships[].direction 12. No other.
+GUARD tests/generators/powersReadTheRosterP31.test.js: 13 refused pairs red at cce57ff35 (each names what prints instead), 6
+KEEP green (a Minor faith far behind the seat; the vote with no quarrel; three level at one rung; the ordained row with no
+quarrel; the merchants' wartime line; the density rival's margins line); 19/19 at the cure. Gates at d99bce57a: eslint 0 on the
+touched files; typecheck ratchet 167 = ceiling; domain strict 1113 = ceiling.
+
+THE WALKER (presumed-things --check): the census-measured wording rose it by 3 (147 -> 150; "clergy" in the faith's twin, "under
+the occupation", and the level line's literal re-keyed): the twins were reworded to claim no presumed word ("The faith holds no
+office ...", the occupied seat "holds the seat" with no clause) and the level line keeps its banked literal ("Three powers ...",
+the number put in by replacement): fresh 147 = the base, stale 0. The rewordings print where the measured lines printed (the same
+conditions; text only). THE PINS a declared move of this batch explains, RE-KEYED BY IDENTITY: standingAgainstFigure (the level
+table 20/18/16/15 crosses a rung: the level table is now 24/22/20/15, and 20/18/16/15 asserts the band's own line),
+seatNamedAsItSits (r2s-famine-city-2: the band's own line in place of the level line), relationLinesSayTheRecord
+(r2s-occupied-town-2: no taxes under the occupation). The 36 test files naming the touched files: 2 red, pipelinePinnedChoosers
+A1 and A6, the same 2 red at the base: CARRIED.
+
+## The chair's U2 reds (five files run alone at cce57ff35 and at this tip; all five red at cce57ff35 and at 40238d3ab too)
+- tests/generators/conflictTouched.test.js "a town with no such power gets no clause": (ii) a pin a DECLARED MOVE explains: the
+  sentence names each party by its prose form from the leaf (582b8acad, POWERS-16 r2: "Military/Guard" -> "The Guard", P3);
+  `parties` keeps the label. RE-KEYED BY IDENTITY (the same exact equality, the names through powerSentenceName): 2/2.
+- tests/domain/people/hallDecidesUnderOccupation.test.js (r2s-infiltrated-metropolis-3), tests/domain/people/hallLineReadsCrime.test.js
+  (r2s-under_siege-metropolis-0), tests/domain/display/criminalSwayReadsHall.test.js (r2r-city-3): ONE CAUSE, (iii), not in these
+  files: the three towns hold no criminal power and the house "Multiple criminal factions"; src/domain/display/defenseDisplay.js ::
+  deriveCriminalStructure reads that house as rival rings (rivalRingsHere: 82e8fab6e W2-C-LEAVES-3; 0044e4f84 W2-C-LEAVES-11) and
+  gives `semi-organized` where the pins (2557ea1ef, de53b4b58, POWERS-15, taken on a tree without it) anchor `organized`; the hall
+  line (dmPowerLines.js, patronage.js's variant pick) reads that fact and prints the none rung's first line, true there. For the
+  defence display's seat: is "Multiple criminal factions" with no criminal power rival rings, and the pins re-keyed with it.
+- tests/generators/captureBirthScale.test.js "statistical floor 372 > 326": (iii): hallCapture.js and the capture state are not in
+  these files; green at fd4db104e (2026-11-12), red at 40238d3ab (before this seat): a first-parent bisect of fd4db104e..40238d3ab (231 merges of the joined line) was started in scratch and NOT FINISHED at this
+  hand-back: the commit is NOT YET NAMED; narrowed to good bfab7bdd8, bad 4f24025c2 (JOIN-2 · 0.6, the merge of lane/w2-write-2026-11-13 at
+  fdae163f3, or a merge before it); re-run: `git bisect start --first-parent 4f24025c2 bfab7bdd8; git bisect run <a script that runs
+  captureBirthScale.test.js -t "overwhelming criminal presence">`.
+
+- tests/joins/labelJoins.test.js (the chair's P33, a sixth red): "no file gains a label-join site": claimStanding.js holds ONE
+  instNamesScan site, `instNames.some((n) => String(n).includes('warehouse'))` (TAIL-POWERS-B batch 2's warehouse condition on the
+  trade nexus's "control warehousing", cc834166f; the habitat frozen at 0 for this file). NOT CURED HERE: its one home would be a
+  catalog id the caller (rulingStructure.js, not this seat's) passes in place of the lower-cased names, or a `warehouse` atom of
+  the fact vocabulary (no new word without the chair). ASKED of the chair; renaming the variable to slip the scan is not a cure.
+- THE CHAIR'S RULE FOR NEW TESTS (05:06): this seat's guard (powersReadTheRosterP31.test.js) asserts every negative through
+  tests/helpers/anchoredNegatives.js :: expectAbsentWithAnchor (the twin as the anchor); no seed loop; no state-prose anchor.
+- (P32, 05:12) src/data/people/dmPowerLines.js line 27 (the powerSentenceName import) is lent to TAIL-TIES-5 (its path only):
+  not edited here.
+
 ## EVERY NEW OR CHANGED LINE (the owner's veto), with towns it was read in
+- BATCH 8 (P31): "The faith holds no office in the hall, but its moral authority is real and its word carries political
+  weight here." (r2r-village-12 the smallest, r2s-politically_fractured-metropolis-1 the largest, r2s-religious_conversion-town-1
+  a crisis) · "Has been selling pots bought in from another workshop as their own throwing, at their own prices" / "The buyers
+  who paid for local work would want their money back, and the workshop's name would go with it" (r2r-village-43,
+  r2s-famine-town-1 a famine, r2r-city-1) · "<merchants> and <craft> are at odds over <issue>, and fight over who keeps the
+  profit of the trade." (r2r-town-29, r2r-metropolis-33, r2s-occupied-city-1 an occupation) · "<N> powers stand almost level
+  here ..." with its number (r2r-metropolis-39 Five, r2s-politically_fractured-metropolis-1 Four, a crisis,
+  r2s-succession_void-city-3) · "<seat> holds the seat and collects the taxes; Religious Authorities have long told people that
+  <seat>'s rule is right and ordained, but the two are now at odds over <issue>." (r2r-village-26 the smallest, an insurgency,
+  r2r-metropolis-15, r2s-under_siege-metropolis-2 a siege) · "<seat> holds the seat; Religious Authorities tell people ..." under an occupation (r2s-occupied-town-2,
+  r2s-occupied-town-3, r2s-occupied-city-2) · "Shortage and requisition have pushed trade into the black market, where the guild
+  takes its cut." (r2s-wartime-town-3, r2s-wartime-city-2, r2r-metropolis-4 the largest).
 - (batch 7) "<the arcane rival> has more say right now, and the clergy cannot accept it." (7, the Arcane Council): r2r-town-1 (the
   smallest), r2r-city-45, r2s-under_siege-city-3 (a siege) · "Criminal network operating in shadows; it keeps out of the law's
   sight and takes what it can from illicit trade." (7): r2s-under_siege-town-0 (a siege, the smallest), r2r-city-19,
@@ -400,7 +556,29 @@ r2s-insurgency-metropolis-0, P7a).
 None re-taken. The generator golden (tests/property/generatorGoldenMaster.test.js) was red at the base and stays red: the
 merge seat's re-record carries the three families above.
 
-## What is left (by width), and what is next (kept by TAIL-POWERS-B-3)
+## What is left (by width), and what is next (kept by TAIL-POWERS-B-4)
+- DONE by TAIL-POWERS-B-4: P31 (1)-(6) as batch 8 (d99bce57a); U2: conflictTouched re-keyed (ii); the three hall reds and the
+  capture floor named (iii), above. TAIL-POWERS-B-4 HANDED BACK by the clock (about seventy minutes from 04:47 UTC).
+- 07269 (44 at the governance seat's count) "Established merchant community; fund civic works and expect council access in
+  return." MEASURED at cce57ff35: 45 towns print it, NO card carrying it is labelled Suppressed on the final roster (the claim's
+  Suppressed rung, TAIL-POWERS batch 2, settles those); 8 cards in 8 towns are density rivals (The Guild Alliance, The Merchant
+  Bloc) at a power of 8-10 whose chip reads Minor or Significant (their host's raw power): NAMED for applyDensityLaw.js with the
+  ladder line below; no build here.
+- THE LADDER (MEASURE ONLY, for the chair): the documented ladder is powerLabelOf(power): Dominant >= 35, Strong >= 25,
+  Significant >= 18, Minor >= 10, else Suppressed, on the power share. At cce57ff35 893 cards in 495 towns hold another chip: 591
+  follow the same ladder read on `rawPower` (the label set at the multipliers, applyPerformanceMultipliers, before the density
+  law re-normalises the shares; 354 below the final power's rung, 237 above, 211 of those the density rivals, labelled from the
+  host); 302 follow neither (266 below: 178 of them governing seats, e.g. a thorp's Elder Council at 43 reading Strong: a cap or
+  keepOneDominant's tie rule; 36 above).
+- NEXT (measured by TAIL-POWERS-B-3, not built; check at the tip first): B00397 (20) TIE_GLOSS 'Professional Rivalry' "are rivals
+  in the same line of work" between people of different work -> "are rivals for standing" (settlementNarrative.js TIE_GLOSS only);
+  X 15267 (15) "Knows of a path over the hills that no one else uses" on Plains in 10 of 15 -> a path that claims no hills (check
+  the siege law first: a hidden path out under a siege); then B29842 (5) stressPowerFaces' leaderless War Council beside a
+  "Crown-appointed emergency body", B10688 (5) the maltster under a siege, 17060 (5) the game "sold in the market".
+- THE INSTRUMENTS' LAST AFTER-RUN (c1, at d99bce57a's tree) is the next seat's before-run at the same code (this push adds a test
+  re-key and docs only).
+
+## What was left at TAIL-POWERS-B-3's hand-back (kept for its measures)
 - DONE: P19 (batch 4), P9 + P12 + P18 (batch 5), the READ-ALL-4 HIGH (batch 6a), 6b as prepared (batch 6b), the standing lines
   (batch 7). TAIL-POWERS-B-3 HANDED BACK after batch 7 by the clock (the meter read 0; about seventy minutes from 03:08 UTC).
   The instruments' last after-run (a7, at batch 7's tree) is the next seat's before-run if re-made at the same tip.

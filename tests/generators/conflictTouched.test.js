@@ -12,6 +12,7 @@ import { describe, expect, test } from 'vitest';
 import { generateConflicts } from '../../src/generators/powerGenerator.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+import { powerSentenceName } from '../../src/domain/display/powerSentenceName.js';
 
 const CONSCRIPTION = 'Military conscription of guild apprentices';
 const seeded = (seed, body) => {
@@ -59,6 +60,8 @@ describe('a quarrel names the power its issue touches', () => {
     ];
     const quarrel = conscriptionQuarrel(powers, rels, cast);
     expect(quarrel).not.toBeNull();
-    expect(quarrel.desc).toBe(`Military/Guard and Town Council are in moderate conflict over ${CONSCRIPTION.toLowerCase()}. The stakes are labor control.`.replace('Military/Guard and Town Council', `${quarrel.parties[0]} and ${quarrel.parties[1]}`));
+    // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-POWERS-B-4, the chair's U2): the sentence names each party by its prose form, from the
+    // one leaf (582b8acad, POWERS-16 r2: "Military/Guard" -> "The Guard"); `parties` keeps the label, so the pin reads the leaf
+    expect(quarrel.desc).toBe(`Military/Guard and Town Council are in moderate conflict over ${CONSCRIPTION.toLowerCase()}. The stakes are labor control.`.replace('Military/Guard and Town Council', `${powerSentenceName(quarrel.parties[0])} and ${powerSentenceName(quarrel.parties[1])}`));
   });
 });
