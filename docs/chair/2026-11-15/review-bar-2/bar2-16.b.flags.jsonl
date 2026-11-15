@@ -1,0 +1,8 @@
+{"id":"C32096","town":"bar0-village-calm-rand-5","sev":"LOW","kind":"STATE","why":"'under arms' for defence; DEFENCE has only an unpaid household Village watch, garrison and militia none","other":""}
+{"id":"C32434","town":"bar0-village-calm-rand-5","sev":"LOW","kind":"STATE","why":"states a live noble-vs-merchant case the council hears; QUARRELS none, TENSIONS only plague years, no nobles in GOVERNMENT or PEOPLE","other":""}
+{"id":"C32534","town":"bar0-village-calm-rand-5","sev":"MED","kind":"PAIR","why":"Invasion & War 'Adequate' with no wall, garrison or militia, Defense Strained; page says village could not hold off a raid","other":"C32526"}
+{"id":"C33095","town":"bar0-village-famine-rand-3","sev":"MED","kind":"PAIR","why":"outside buyers come for more than one thing, yet the page lists no significant exports and the fishing failed under Famine","other":"C33087"}
+{"id":"C33249","town":"bar0-village-famine-rand-3","sev":"LOW","kind":"PAIR","why":"a thief is known and shunned within a day; famine page says food theft is too common to punish and nobody is paid to keep order","other":"C33278"}
+{"id":"C33684","town":"bar0-village-famine-rand-4","sev":"MED","kind":"STATE","why":"Sawmill offers 'Lumber milling' unmarked; LAND gaps say Sawmill lacks access to timber (Brickmaker's row is marked short)","other":""}
+{"id":"C33793","town":"bar0-village-famine-rand-4","sev":"LOW","kind":"BROKEN","why":"list repeats 'timber' twice (timber ... timber, mountain timber)","other":""}
+{"id":"DONE","lines":2277,"blocks":3,"flags":7}
