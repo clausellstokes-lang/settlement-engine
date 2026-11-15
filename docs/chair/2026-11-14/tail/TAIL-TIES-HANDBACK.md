@@ -708,3 +708,45 @@ crisisHooks, the test) are unchanged. `dossier/faithReading.js` changes its impo
 
 **Scratch:** `/home/user/tt7` (the worktree), `/home/user/tt7-instr` (the CENSUS-3 and RECORD-MEASURE-1 probes, archived)
 and `/home/user/tt7-measure` (B's builds and scripts). All three are this seat's own and can be removed.
+
+### TAIL-TIES-7: the chair's rulings that reached this seat after the hand-back (sent 06:14–06:33 UTC, read 06:37). NOT STARTED; for the successor
+- **T25 (a): OPTION 2** (the chair, 06:15 and again 06:28). The end of the ruling is no cycle, no test touched and no value
+  moved.
+  - The criminal structure derivation's body moves to a NEW module that does not import `factsOf`.
+  - The facts' `crime` getter calls it with its own facts.
+  - `defenseDisplay.js` keeps the one-argument `deriveCriminalStructure(s)` wrapper, which calls it with `factsOf(s)`.
+  - The proof: the births byte-identical; `layerBoundaries` green; `ringNoteStreetsSmallPlace` and the about 15
+    one-argument callers untouched and green; then one line to the chair.
+  - The facts' only read on this path is `withRingVantage`'s `filterDeclared` (vantage 1, `tier: ≥ village`). Pass the
+    injected facts as `facts: () => facts`.
+- **With (a), two walkers** (the chair, 06:21 and 06:33):
+  - **`tests/lint/defenceFactReaders.walker.test.js`.** Its last red is `defenseDisplay.js` ×4 (the src close seat's
+    reads are on `lane/tail-close-src-2026-11-15` at `4a01f2c16`). If the body's move carries those reads, the register
+    FOLLOWS THE BODY by its own door for a move; otherwise they stay where the register banks them (the wrapper's file).
+    No new row and no count raised. If they are not the cut's doing, name the commit that made them in one line.
+  - **`tests/lint/factLayers.walker.test.js`.** The crime leaf reads `npcs` through `defenseDisplay.js ::
+    headedPowerAmongRivals` (`9b6adf3b4`), a read the facts' law forbids. After (a), say whether it is gone. If it
+    stands, cure it the same way: the leaf is given what it reads by its caller. It is byte-identical or a stop.
+- **T26 (the safe trim, prepared but NOT landed):**
+  - Cut a SEPARATE branch `lane/close-trim-first-paint-2026-11-15` from the tip after (a). It is not a `lane/tail-*`
+    name, so the sweep must not land it.
+  - ONE commit: the 16 riders new since the record, as FP-G7 rows in `ENGINE_SHARED_DOMAIN_EXCISIONS`. The list is in
+    `SIZE-BUDGETS-MEASURE.md`, Trial 1; the scratch trial is `/home/user/tt7-measure/t-x1`, where the rows went after the
+    `FIRSTPAINT2_LAZY_DOMAIN` delete loop.
+  - The budget numbers stay UNTOUCHED: the tests stay red by 8,849 raw until the owner's re-record.
+  - The proof goes in the commit: the build; the boot smoke plain and FLAGGED; the three lazy tests; the 720 births
+    byte-identical; the first paint and the engine chunk in bytes before and after.
+  - One line to the chair with that branch's tip.
+- **T27 (C red 1, vetoable by the owner):**
+  - First MERGE the joined line at `17e38c547` (the chair names it; both halves of the test are on it, and one of them
+    anchored this file).
+  - Then `tests/generators/clerkHookSmallPlace.test.js`'s "each keeps one hook" exempts a crisis cast's MINTED TEMPORARY
+    person BY IDENTITY. Use the record's own mark (`temporary: true` from `resolveCrisisCast.js :: mintTemporary`), not
+    the name or the role text, with `ef0b6208` and `3a6de5c7` named beside it.
+  - It ASSERTS the exempted face IS one (`temporary === true`), so an ordinary face left with no hook still reds. The
+    claim, the towns and the other cases do not move. The file alone green; one line.
+  - Whether a stand-in should carry a hook at all is a question for the owner, next round.
+- **B's remaining ask (06:18)** is answered by `SIZE-BUDGETS-MEASURE.md`. The reachability walk from the true first-paint
+  roots, and Trial 1's bytes, cover `institutionLadders`, `houseScale` and `faceHonorifics` (via `seatKeeper`): all three
+  are riders, and all leave first paint in the measured −34,844 B trial (excise-and-pin). They were not measured one at a
+  time.
