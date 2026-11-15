@@ -295,25 +295,25 @@
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 75,
+    "line": 76,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 75,
+    "line": 76,
     "category": "percentToken",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 91,
+    "line": 94,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 91,
+    "line": 94,
     "category": "percentToken",
     "snippet": "{f.power}"
   },
@@ -391,25 +391,25 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 298,
+    "line": 299,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 490,
+    "line": 491,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 490,
+    "line": 491,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 516,
+    "line": 517,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -979,37 +979,37 @@
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 317,
+    "line": 329,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 386,
+    "line": 401,
     "category": "floatInterpolation",
     "snippet": "{iss.severity}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 485,
+    "line": 500,
     "category": "floatInterpolation",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 485,
+    "line": 500,
     "category": "percentToken",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 490,
+    "line": 505,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 490,
+    "line": 505,
     "category": "percentToken",
     "snippet": "{fb.coveragePct}"
   },
@@ -1093,21 +1093,15 @@
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 101,
+    "line": 103,
     "category": "floatInterpolation",
     "snippet": "{p.criminalCapture.score}"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 235,
+    "line": 237,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
-  },
-  {
-    "path": "src/pdf/sections/Services.jsx",
-    "line": 246,
-    "category": "floatInterpolation",
-    "snippet": "{flow}"
   },
   {
     "path": "src/pdf/sections/SystemStateSnapshot.jsx",

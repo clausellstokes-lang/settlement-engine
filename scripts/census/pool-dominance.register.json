@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 936,
-    "printOneLine": 665,
-    "measuredUnder30Draws": 146,
+    "pools": 948,
+    "printOneLine": 670,
+    "measuredUnder30Draws": 150,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:institutionServices:Access to external mill.Grain milling (a day away)",
@@ -18,7 +18,14 @@
         "pool": "ledger:stressNarrative:STRESS_SUMMARY_SIBLINGS",
         "top1": 0.9692,
         "top5": 1,
-        "draws": 162,
+        "draws": 324,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:institutionServices:Fish market.Wholesale trade",
+        "top1": 0.9686,
+        "top5": 1,
+        "draws": 414,
         "lines": 2
       },
       {
@@ -50,11 +57,25 @@
         "lines": 2
       },
       {
+        "pool": "ledger:npcData:NPC_HOOK_SIBLINGS",
+        "top1": 0.8772,
+        "top5": 1,
+        "draws": 407,
+        "lines": 2
+      },
+      {
         "pool": "ledger:institutionServices:Daily markets.Fresh produce",
         "top1": 0.8734,
         "top5": 1,
         "draws": 450,
         "lines": 2
+      },
+      {
+        "pool": "ledger:institutionDescVariants:city|Crafts|Cartographer's guild",
+        "top1": 0.8396,
+        "top5": 1,
+        "draws": 293,
+        "lines": 4
       },
       {
         "pool": "ledger:cultureProfiles:slavic.foodways",
@@ -69,27 +90,6 @@
         "top5": 1,
         "draws": 809,
         "lines": 3
-      },
-      {
-        "pool": "ledger:institutionServices:River boatyard.Boat repair",
-        "top1": 0.8122,
-        "top5": 1,
-        "draws": 165,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:factionLabelSiblings:FACTION_LABEL_SIBLINGS",
-        "top1": 0.8098,
-        "top5": 1,
-        "draws": 1593,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:institutionServices:Mine (open cast).Raw extraction",
-        "top1": 0.8063,
-        "top5": 1,
-        "draws": 289,
-        "lines": 2
       }
     ],
     "secondWave": [
@@ -1730,9 +1730,9 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:external_threat": {
-      "top1": 0.3453,
+      "top1": 0.6667,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; 3da34c70b (TAIL-HISTORY batch 1, the chair's Y1) declared the first two of its three hooks off a peace (excludes war: peace), so the third (\"The threat has an agent already inside the settlement\") prints alone in a town at peace: top1 0.3453 -> 0.6667 (confirm 0.6571); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:generational_divide": {
@@ -1838,15 +1838,15 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:resource_scarcity": {
-      "top1": 0.3359,
+      "top1": 0.3771,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; traced by the PD3 probe (the same reading at e8327afe7 and at the joined line): 009ee1466 (W2-FIX-DATA-HISTORY item G, 2026-11-13, after this ceiling's banking) declared its first hook off a town with no market (needs: market), refused in 167 of the 566 towns that draw it: top1 0.3359 -> 0.3771 (the confirm corpus's higher reading; banked 0.3745); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis": {
-      "top1": 0.639,
+      "top1": 0.8208,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; DOMINATED (top1 crosses 0.75 on both corpora); traced by the PD3 probe (TAIL-CLOSE-DOORS-1, docs/chair/2026-11-15/probes/TAIL-CLOSE-DOORS-1/pd3-probe.mjs; the same reading at e8327afe7 and at the joined line): 009ee1466 (W2-FIX-DATA-HISTORY item G, 2026-11-13, after this ceiling's banking) declared its two other hooks off ruler: council, ruler: elder and crisis: succession_void, refused in 473 of the 616 towns that draw it, so \"A would-be heir approaches outsiders to investigate a rival's past\" takes the draw: top1 0.639 -> 0.8208 (confirm 0.8073); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:trade_collapse": {
@@ -1880,10 +1880,10 @@
       "lines": 1
     },
     "ledger:historyData:HISTORY_DESC_SIBLINGS": {
-      "top1": 0.6504,
+      "top1": 0.7838,
       "top5": 1,
       "lines": 3,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew; DOMINATED (top1 crosses 0.75 on both corpora): its sibling sets grew from 13 to 28 (tier twins and the place's-own-words twins of 05e98c31e / dda3ca111 W2-FIX-DATA-13, d7921a40c TAIL-HISTORY-4 Y16, ed9f3b549 TAIL-HISTORY-5 Y17); the pool keys each set's member by its index, so member 0 (the original wording of each set, printed wherever the town admits it) takes more of the draws: top1 0.6504 -> 0.7838 (confirm 0.7777); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release"
     },
     "ledger:historyData:HISTORY_QUARTER_WORDS": {
       "top1": 0.2437,
@@ -5531,9 +5531,9 @@
       "lines": 40
     },
     "ledger:npcData:NPC_HOOK_SIBLINGS": {
-      "top1": 0.6094,
+      "top1": 0.8771,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; DOMINATED (top1 crosses 0.75 on both corpora): 97685dc01 (TAIL-TIES batch 2, the chair's T3) declared the lost-at-sea cargo hook off a town without a coast (needs: coast), so its inland twin (member 1) prints in most towns: top1 0.6094 -> 0.8771 (confirm 0.7592); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 2
     },
     "ledger:npcData:NPC_PLOT_HOOKS": {
@@ -5615,21 +5615,21 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mutual_leverage": {
-      "top1": 0.129,
-      "top5": 0.6325,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "top1": 0.1437,
+      "top5": 0.7053,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its council and vote lines off a town with no ruling body (needs: ruling body): top1 0.129 -> 0.1437 (confirm 0.1425), top5 0.6325 -> 0.7053 (confirm 0.6995); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.old_debt": {
       "top1": 0.1293,
-      "top5": 0.64,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "top5": 0.6837,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its two vote lines off a town with no ruling body (needs: ruling body): top5 0.64 -> 0.6837 (the confirm corpus's higher reading; banked 0.6817); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.peer_rivalry": {
       "top1": 0.13,
-      "top5": 0.6427,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "top5": 0.6738,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its council-session and single-vote lines off a town with no ruling body (needs: ruling body): top5 0.6427 -> 0.6738 (confirm 0.6691); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.rel_crim_fraud": {
@@ -5645,9 +5645,9 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.wary_alliance": {
-      "top1": 0.1307,
-      "top5": 0.6457,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "top1": 0.1592,
+      "top5": 0.7105,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its three vote lines off a town with no ruling body, and 21032205a (R2-CODE-A-14, ruling s1) its council-bloc line off a pair with no shared power: top1 0.1307 -> 0.1592 (confirm 0.1583), top5 0.6457 -> 0.7105 (confirm 0.7049); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
       "lines": 8
     },
     "ledger:npcGenerator:CRIME_KNOWLEDGE": {
@@ -5767,6 +5767,78 @@
       ],
       "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)",
       "lines": 11
+    },
+    "ledger:ARRIVAL_SENSES.stone.lines": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.brunt": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.instigator": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.lever": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.treater": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:governingStressVignettes:OCCUPIED_SEAT": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:DESC_LATE_SIBLINGS": {
+      "top1": 0.6364,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Crafts|Cartographer's guild": {
+      "top1": 0.8396,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Crafts|Smelter": {
+      "top1": 0.4885,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Crafts|Cartographer's guild": {
+      "top1": 0.8847,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Crafts|Smelter": {
+      "top1": 0.3427,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:town|Crafts|Smelter": {
+      "top1": 0.591,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }
