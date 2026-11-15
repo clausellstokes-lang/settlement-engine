@@ -455,10 +455,10 @@ describe('the gate tally is not said where no gate stands', () => {
       const d = factsOf(s).defence;
       expect([d?.walls, d?.gate], `${seed}: anchored, walled with no gate`).toEqual([true, false]);
       expect(String(s.economicState.safetyProfile.safetyDesc || '') + String(s.economicState.safetyProfile.guardEffectivenessDesc || ''), `${seed}: anchored, the twin speaks`).toMatch(/The walls leave few ways in/);
-      // anchored: the same town is walled and its twin speaks (both held just above), so the line is read where it can speak
       // TAIL-CORPUS-DEF-4 (U2, 2026-11-15): re-keyed by identity: the `no gate` twins of walls PRESENT (91592cbf1, bc5ee968b,
       // 07f53f717: "has a wall but no proper gate in it", "no gate to count them at") name the gate's ABSENCE, which is
       // true here; what must not be said is a gate that stands, so the absence phrasings are set apart before the read
+      // anchored: the same town is walled and its twin speaks (both held just above), so the line is read where it can speak
       expect(String(defenseForcesProse(s).fortification?.sentence || '').replace(/\bno (proper )?gates?\b/gi, ''), seed).not.toMatch(/\bgates?\b/i);
     }), 'a gate is named where none stands');
   });
