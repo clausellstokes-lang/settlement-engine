@@ -11,13 +11,16 @@ JOIN-5's laws (a) to (i) stand as its hand-back §1 gives them (one merge commit
 (k) DECLARED MOVES: the golden master moves with them and is the owner's door. It is NOT re-taken; its red is CARRIED and listed for the close with the branch that moved it. A pin a seat re-keyed by identity in its own commit merges as code. `tests/generators/coherenceAgreeCures.test.js` was already two red at 06f36ad36: carried, listed, not this seat's.
 (c') and (g) stand as JOIN-5 worked them: the corpus's door after the two corpus merges (`node scripts/generate-dossier-state-prose.mjs --check`; a register the door needs is re-taken through its own door in its own commit; a stale leaf is rebuilt through the door in its own commit; nothing by hand).
 
-THE CHAIR'S RULINGS SENT AFTER THE BRIEF: none yet.
+THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
+- **00:15 UTC:** (1) THE DEFECON GROUP IS THREE BRANCHES by file (ruling D9): lane/tail-defecon-2026-11-14 (the economy generators), lane/tail-defecon-c-2026-11-14 (`computeActiveChains.js` and one call line in `economicState.js`: declared moves C2-A and C1-A, the golden moves), lane/tail-defecon-d-2026-11-14 (`defenseDisplay.js`, `dossierViewModel.js`, the safety files). Each is landed, in that order, where the order has "defecon", once origin holds commits past 345f13157 on it. (2) Successors continue on their predecessors' branches (services, crisis, display-econ, defecon), so a landed branch moves again. Second points come only on "LAND: <branch> at <hash>"; the next services point is wanted EARLY. (3) Both exports branches will hold a merge of the joined line (allowed, at a tip the chair names): they merge as any other.
+- **00:18 UTC:** THE POWERS GROUP IS TWO BRANCHES by file (ruling P10): lane/tail-powers-2026-11-14 (at 40238d3ab: two batches; its successor builds DA there next, a declared move, the golden moves, one pin re-keyed by identity in its commit) and lane/tail-powers-b-2026-11-14 (cut from 40238d3ab: the faction lines, the people's power lines, the title lines). The second is landed where the order has "powers", once origin holds commits past 40238d3ab on it. The chair's read of the tips at 00:18: display-civic 812fa7e1f, display-econ 6e36000a4 or later, crisis 9c07f7461, houses a2550c0ef, ties b85886808 or later, narrative b52481302, powers 40238d3ab, defecon 345f13157, corpus-eco 29271e7bf. The tip read at each merge is the point.
 
 ## 2. The landings
 
 | # | branch | tip merged (read at the merge, UTC) | merge base | merge commit | conflicts | listed for the close |
 |---|---|---|---|---|---|---|
 | 1 | tail-services-2026-11-14 | 4035c33a5 (00:08) | bcad1a358 | 7a9a2fffc | none | — (6 files, all the lane's: the leaf `crisisStoppedRow.js`, the table `crisisDependence.js`; told to the chair at 00:11) |
+| 2 | tail-display-civic-2026-11-14 | 812fa7e1f (00:14) | f663a2699 | 3ff14bc58 | none | — (3 files, the lane's batch 1) |
 
 ## 3. Every code resolution
 
