@@ -44,6 +44,11 @@ const DECLARED = {
   'economy#10': ['no crisis: under_siege', 'no route: isolated'], 'government#13': ['tier: ≥ village'], 'other#24': ['tier: ≥ village'],
   'other#5': ['no crisis: under_siege', 'no crisis: plague_onset'], 'other#35': ['no crisis: under_siege', 'no crisis: plague_onset'],
   'other#8': ['institution: tavern'], 'small_settlement#12': ['crisis: succession'],
+  // TAIL-TIES-2 (X9 row 28943; the chair's ruling (T3); re-keyed by identity with its cause): someone from outside the
+  // settlement is met only where the roads are open (the traveller's form).
+  'government#7': ['no crisis: under_siege', 'no crisis: plague_onset'],
+  // TAIL-TIES-2, the inheritors of (T7)'s walk (the same form): a visitor or an outsider at the gate of a besieged town
+  'small_settlement#0': ['no crisis: under_siege', 'no crisis: plague_onset'], 'small_settlement#15': ['no crisis: under_siege', 'no crisis: plague_onset'],
 };
 
 describe('NPC_FACTION_LOYALTY declarations (CENSUS-3e)', () => {

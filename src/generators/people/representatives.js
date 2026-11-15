@@ -311,7 +311,8 @@ export function drawCardHooks(cards, poolOf, stream, config, hookRegistry, place
     // writing wave's W7 HOOKS authors by title; the lane's record counts them).
     if (before.has(String(line).trim())) {
       // W7 HOOKS (WAVE-RULINGS item 15): the card's TITLE pool is walked first, then the category walk.
-      const spare = spareHookLine([titlePoolName(card.title), ...dryPoolWalk(pool)], before, String(card.id), place);
+      // TAIL-TIES-2, the chair's ruling (T7): the walk reads the crisis the draw read (`birthFactsOf`'s config stress)
+      const spare = spareHookLine([titlePoolName(card.title), ...dryPoolWalk(pool)], before, String(card.id), Array.isArray(config?.stressTypes) ? { ...place, stress: config.stressTypes.map((/** @type {unknown} */ type) => ({ type })) } : place);
       if (spare !== null) line = spare;
     }
     held.add(String(line).trim());
@@ -358,7 +359,7 @@ export function hookOffsetOf(key) {
 /**
  * Where a card's hook lines are drawn: the world law (its port kind), the roster and the tier — the
  * facts the census's declared rows read (MERGE-CAR).
- * @typedef {{ worldLaw?: { portKind?: 'none'|'maritime'|'river' | null } | null, institutions?: unknown[], tier?: string }} HookPlace
+ * @typedef {{ worldLaw?: { portKind?: 'none'|'maritime'|'river' | null } | null, institutions?: unknown[], tier?: string, stress?: unknown[] }} HookPlace
  */
 
 /**
@@ -392,7 +393,7 @@ export function hookOffsetOf(key) {
  */
 export function spareHookLine(pools, held, key, place = {}, accept = () => true) {
   const institutions = Array.isArray(place?.institutions) ? place.institutions : [];
-  const once = rememberedFacts(factsOf({ institutions, tier: place?.tier }, { waterKind: place?.worldLaw?.portKind }));
+  const once = rememberedFacts(factsOf({ institutions, tier: place?.tier, stress: place?.stress }, { waterKind: place?.worldLaw?.portKind })); // TAIL-TIES-2 (T7): the place's crisis
   const facts = () => once;
   for (const name of [...new Set(pools)]) {
     const pool = /** @type {unknown[]} */ (titlePoolLines(name) ?? NPC_FACTION_LOYALTY[/** @type {keyof typeof NPC_FACTION_LOYALTY} */ (name)] ?? []);

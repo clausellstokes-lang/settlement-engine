@@ -101,8 +101,11 @@ export const FACTION_DESC_SIBLINGS = Object.freeze({
  */
 export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
   'Elder Consensus': 'The elders of the hamlet decide things together, and people follow them out of respect.',
-  'Free Elder Council': 'The elders of the hamlet decide things together, and no lord stands over them.',
-  "Headman's Authority": 'A headman settles disputes and gives the orders here.',
+  // TAIL-TIES-2 (rows 20473 / 10615 / 00909 and 02676, 2026-11-15): a seat's line claims no more than every town that
+  // holds the seat bears: an occupier's governor stands over an occupied hamlet's elders and gives its orders, and a
+  // lord may live in a free hamlet (the seat is read at the power step, before the crisis: the line names neither).
+  'Free Elder Council': 'The elders of the hamlet decide things together, and none of them rules alone.',
+  "Headman's Authority": 'A headman settles disputes and speaks for the community.',
   'Priestly Guidance': 'The priest guides the community, and disputes are brought to the priest to settle.',
   'Town Mayor': "A mayor runs the town's day-to-day business.",
   'Grand Guild Council': 'The guilds of the metropolis govern together; the richer the guild, the more say it has.',

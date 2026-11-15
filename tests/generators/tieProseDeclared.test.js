@@ -33,7 +33,9 @@ describe('the tie prose declares in place (CENSUS-4c unit 4)', () => {
     }
   });
   it('the ledger\'s 30 declaring rows carry exactly the ledger\'s declaration; every other row declares nothing', () => {
-    expect(ROWS.filter(declares)).toHaveLength(30);
+    // TAIL-TIES-2 (the chair's ruling (T6), re-keyed by identity with its cause): 30 + the nine vote lines (`ruling body`)
+    // and the two passed-threat lines of wary_alliance (`crisis: threat`, `crisis: wartime`) = 41
+    expect(ROWS.filter(declares)).toHaveLength(41);
     for (const r of ROWS) {
       const { field, index } = at(r.id);
       const d = V.declarationOf(field.lines[index]);
