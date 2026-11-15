@@ -1,0 +1,16 @@
+{"id":"C9990","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"PAIR","why":"Economic Resilience 'Strong' while prosperity is Poor and Economic capacity reads Strained","other":"C10055"}
+{"id":"C10021","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"STATE","why":"Charis Glabas is only rank 3 of Occupation Authority; Eudokia Chrysoberges is rank 1, so she is the strongest figure","other":"C10019"}
+{"id":"C9969","town":"bar0-town-occupied-rand-2","sev":"LOW","kind":"LACKS","why":"a wine shop; HOUSES has taverns and inn but no wine shop","other":""}
+{"id":"C9996","town":"bar0-town-occupied-rand-2","sev":"LOW","kind":"LACKS","why":"a hall of justice; HOUSES has a Town hall and prison but no court","other":""}
+{"id":"C10357","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"LACKS","why":"names a town court; HOUSES lists no court (only Town council, Town hall, Small prison/stocks)","other":""}
+{"id":"C10657","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"STATE","why":"power card over Barracks (Occupation Authority) reads Strong; GOVERNMENT gives Occupation Authority Significant, Merchant Guilds Strong","other":"C10581"}
+{"id":"C10727","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"LACKS","why":"'Court + Prison, full enforcement chain, prosecute'; HOUSES has no court, only Town hall, Town council and Small prison/stocks","other":"C10357"}
+{"id":"C10749","town":"bar0-town-occupied-rand-2","sev":"LOW","kind":"PAIR","why":"says the town would go on 'less comfortably' without the arcane; reliance on magic is None, every role absent, 0% food by magic","other":"C10743"}
+{"id":"C11128","town":"bar0-town-occupied-rand-2","sev":"MED","kind":"PAIR","why":"founders came 'to be far from other people's rule'; FOUNDING says a merchant consortium that needed a waypoint and decided to own it","other":"C11125"}
+{"id":"C11143","town":"bar0-town-occupied-rand-2","sev":"HIGH","kind":"STATE","why":"'When the occupiers left'; CRISIS is Under Occupation now, the occupation 8 years ago still holds, occupiers have not left","other":"C10015"}
+{"id":"C11232","town":"bar0-village-calm-rand-2","sev":"MED","kind":"STATE","why":"a two-season grazing and water feud with families not speaking; QUARRELS none, TENSIONS only tyranny, CRISIS none, stability Stable, no such event in PAST","other":""}
+{"id":"C11266","town":"bar0-village-calm-rand-2","sev":"MED","kind":"STATE","why":"Aleidis Krause is the militia captain, not clergy; the priest is Norbert Krause, so 'still lead the prayers every week' does not fit her","other":""}
+{"id":"C11435","town":"bar0-village-calm-rand-2","sev":"LOW","kind":"BROKEN","why":"doubled word: 'timber' appears twice in the needed-and-not-brought-in list ('timber, stone, luxury goods, timber, mountain timber')","other":""}
+{"id":"C11638","town":"bar0-village-calm-rand-2","sev":"MED","kind":"PAIR","why":"magic roles economic/military/infrastructure 'occasional', medical 'common' under 'Reliance on magic: None'; elsewhere no arcane practitioners, no wards, magic 0% of food","other":"C11620"}
+{"id":"C11759","town":"bar0-village-calm-rand-2","sev":"LOW","kind":"STATE","why":"priest Norbert Krause 'voted against' on a council matter; PEOPLE shows him sitting on no power (In no power), so he holds no vote","other":""}
+{"id":"DONE","lines":1974,"blocks":2,"flags":15}
