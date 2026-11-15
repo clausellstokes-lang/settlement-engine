@@ -1,0 +1,14 @@
+{"id":"C6242","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"offers beeswax candles unmarked; LAND has Beekeeping & Wax impaired (wild foraging depleted)","other":""}
+{"id":"C6322","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"'Frontman' is a male title for Maryam ibn Tufayl, who PEOPLE gives as f","other":""}
+{"id":"C6365","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"'Lord Marshal' for Arwa al-Kindi, whom PEOPLE gives as f","other":""}
+{"id":"C6543","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"'Mother' for Adnan al-Dimashqi, whom PEOPLE gives as m","other":""}
+{"id":"C5998","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"'Well-fed children' claims plenty; FOOD word is Pressured, grown only 44%, 53% imported, gap 3%","other":"C6015"}
+{"id":"C6922","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"'Nobody talks about the price of bread' denies food worry; FOOD word is Pressured, 53% brought in, 3% gap","other":"C6015"}
+{"id":"C6977","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"prints 25,101 imported and short 1,204; STATE gives imports cover 24897 and a 3% deficit (about 1,408)","other":"C6979"}
+{"id":"C7216","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"STATE","why":"'a thin economy' contradicts STATE prosperity Prosperous and the page's own Economic Resilience Strong and Economic capacity Surplus","other":"C6003"}
+{"id":"C7293","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"PAIR","why":"'Well-funded city watch' contradicts the Defense tab's 'resource-constrained... inadequate equipment and irregular pay'","other":"C7309"}
+{"id":"C7312","town":"bar0-metropolis-calm-rand-2","sev":"MED","kind":"PAIR","why":"'Everyone comes and goes by the gates' contradicts the Underground network passing shipments and people beneath the walls unseen","other":"C6335"}
+{"id":"C7506","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"'Emir' is a male title for Vidha al-Rashidi, whom PEOPLE gives as f ('the lady')","other":""}
+{"id":"C8013","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"STATE","why":"Tamara al-Karimi is the garrison commander (PEOPLE); 'learned the work', 'clients' read as a trade at a chandler's side","other":""}
+{"id":"C8044","town":"bar0-metropolis-calm-rand-2","sev":"LOW","kind":"LACKS","why":"Karim al-Jabbar is a gambling house boss sitting on Merchant Guilds only; no judge's office for him in PEOPLE or GOVERNMENT","other":""}
+{"id":"DONE","lines":2375,"blocks":1,"flags":13}
