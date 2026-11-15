@@ -149,3 +149,14 @@ export function namesSmugglingHouse(name) {
 export function isCriminalOrThievesPower(seat) {
   return seat.category === 'criminal' || seat.faction.toLowerCase().includes('thieves');
 }
+
+/**
+ * The roster's crime faction by name: the first seat whose category is 'criminal', or whose name is a thieves', criminal,
+ * smuggling or underworld power (TAIL-CLOSE-SRC-4: moved verbatim from `generators/people/castPowers.js`'s cast of the
+ * powers into the crime home). Null where none.
+ * @param {ReadonlyArray<{ category?: unknown, faction?: string } | null | undefined>} factions the roster's seats
+ * @returns {string | null}
+ */
+export function crimeFactionNameOf(factions) {
+  return factions.find((f) => f?.category === 'criminal' || /thieve|criminal|smuggl|underworld/i.test(String(f?.faction || '')))?.faction || null;
+}
