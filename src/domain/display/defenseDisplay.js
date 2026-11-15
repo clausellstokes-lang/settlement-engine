@@ -195,7 +195,7 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
 export function deriveCriminalStructure(settlement) {
   const r = settlement || {};
   const key = criminalStructureKeyOf(r); // TAIL-TIES-9 (T28): the key's ladder (and its reasons) lives in the crime fact's leaf
-  return key ? ringNoteUnderStreetFighting(headedPowerAmongRivals(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r), r) : null; // TAIL-DEFECON-D: no ring the record names
+  return key ? ringNoteUnderStreetFighting(headedPowerAmongRivals(ringNoteAmongRivalGangs(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r), r), r) : null; // TAIL-DEFECON-D: no ring the record names; BAR3-DEFECON-2 (T28b): nor one ring among rival gangs
 }
 
 export { runningCriminalChains } from '../facts/criminalStructureKey.js'; // TAIL-TIES-9 (T28): moved verbatim to the crime fact's leaf
@@ -914,3 +914,26 @@ function standingEntries(entries, settlement) {
   return kept.length === entries.length ? entries : kept;
 }
 import { isLiveInstitution, liveInstitutions } from '../institutions/institutionRoster.js';
+
+// ─── BAR3-DEFECON-2 (ruling T28b): NO "ONE RING" BESIDE RIVAL GANGS (at the end of the file, so no line above moves) ───
+import { gangHousesOf } from '../crimeSignal.js';
+/**
+ * THE RING'S NOTE AMONG RIVAL GANGS (BAR3-DEFECON-2, the chair's ruling T28b of 2026-11-15 20:58 UTC, vetoable by the owner;
+ * REVIEW-BAR-3 C30870: "Ask who runs crime here and the answer is one ring." beside the roster's "Multiple criminal
+ * factions", whose row reads "Rival gangs, forever disputing their turf."). THE KEY STAYS AS T28 RULED IT (organized: one
+ * organisation governs or dominates); THE NOTE DECLARES: no vantage that says "one ring" prints where the live houses hold
+ * several gangs (the crime home's own count, `crimeSignal.js :: gangHousesOf`: a several-gangs house, or two street gangs);
+ * there the twin says what is true: the answer depends on the street. Measured on the census's 720 at 7a4b48a84: 6 of the
+ * 149 organised towns (each a several-gangs house; none with two street gangs). The other criminal houses (a fence, a
+ * front, a black market) are the ring's own trade and leave the note as drawn. No draw; only the note.
+ */
+export const RING_AMONG_RIVAL_GANGS_NOTE = 'Ask who runs crime here and the answer depends on the street: rival gangs dispute the turf, and whoever holds a street lives on the protection money it pays and on any official it can buy.';
+/**
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row
+ * @param {DefenseDisplaySettlement} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function ringNoteAmongRivalGangs(row, settlement) {
+  if (row.key !== 'organized' || gangHousesOf(liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (settlement)))) < 2) return row;
+  return Object.freeze({ ...row, note: RING_AMONG_RIVAL_GANGS_NOTE });
+}

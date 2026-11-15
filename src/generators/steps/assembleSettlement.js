@@ -329,7 +329,7 @@ registerStep('assembleSettlement', {
   // LABEL, which this never touches).
   const settledEconomy = settleCrimeLinesToSignal(
     settlement.economicState,
-    { seats: settlement.powerStructure?.factions, estate: settlement.institutions },
+    { seats: settlement.powerStructure?.factions, estate: settlement.institutions, tensions: settlement.history?.currentTensions },
   );
   if (settledEconomy !== settlement.economicState) settlement.economicState = settledEconomy;
 
