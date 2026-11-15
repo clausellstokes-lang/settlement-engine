@@ -175,7 +175,7 @@
       "lines": 3
     },
     "ledger:ARRIVAL_MEMORIES.plague_years": {
-      "top1": 0.4546,
+      "top1": 0.4,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -214,7 +214,7 @@
       "top1": 0.2836,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 4
+      "lines": 5
     },
     "ledger:ARRIVAL_PEOPLE.celtic": {
       "top1": 0.2858,
@@ -226,7 +226,7 @@
       "top1": 0.2843,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 4
+      "lines": 5
     },
     "ledger:ARRIVAL_PEOPLE.germanic": {
       "top1": 0.2841,
@@ -265,16 +265,16 @@
       "lines": 4
     },
     "ledger:ARRIVAL_PEOPLE.south_asian": {
-      "top1": 0.3057,
+      "top1": 0.2798,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 4
+      "lines": 5
     },
     "ledger:ARRIVAL_PEOPLE.steppe": {
-      "top1": 0.2691,
+      "top1": 0.2659,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 4
+      "lines": 5
     },
     "ledger:ARRIVAL_SCENES.market": {
       "top1": 0.2517,
@@ -339,7 +339,7 @@
     "ledger:ARRIVAL_SENSES.brewers.dominant": {
       "top1": 0.5,
       "top5": 1,
-      "lines": 2,
+      "lines": 3,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.brewers.lines": {
@@ -352,31 +352,31 @@
       "top1": 0.3507,
       "top5": 1,
       "reason": "held at or below its original ceiling 0.3726 (point 43 re-banked it upward within two draws; restored by POOL-GUARD where the rule holds it): banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 3
+      "lines": 5
     },
     "ledger:ARRIVAL_SENSES.cloth.lines": {
-      "top1": 0.6667,
+      "top1": 0.5,
       "top5": 1,
-      "lines": 2,
+      "lines": 3,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.faith.dominant": {
-      "top1": 0.4703,
+      "top1": 0.4194,
       "top5": 1,
       "reason": "held at or below its original ceiling 0.5527 (point 43 re-banked it upward within two draws; restored by POOL-GUARD where the rule holds it): banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
     },
     "ledger:ARRIVAL_SENSES.faith.lines": {
-      "top1": 0.3509,
+      "top1": 0.3438,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 4
     },
     "ledger:ARRIVAL_SENSES.fish.dominant": {
-      "top1": 0.3556,
-      "top5": 1,
+      "top1": 0.3422,
+      "top5": 0.9895,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 3
+      "lines": 6
     },
     "ledger:ARRIVAL_SENSES.fish.lines": {
       "top1": 0.4348,
@@ -391,9 +391,9 @@
       "lines": 3
     },
     "ledger:ARRIVAL_SENSES.herbs.lines": {
-      "top1": 0.6667,
+      "top1": 0.5,
       "top5": 1,
-      "lines": 2,
+      "lines": 3,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:ARRIVAL_SENSES.horses.dominant": {
@@ -433,7 +433,7 @@
       "lines": 4
     },
     "ledger:ARRIVAL_SENSES.market.lines": {
-      "top1": 0.4667,
+      "top1": 0.4211,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 4
@@ -456,8 +456,14 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
     },
+    "ledger:ARRIVAL_SENSES.stone.lines": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
     "ledger:ARRIVAL_SENSES.tanners.dominant": {
-      "top1": 0.4688,
+      "top1": 0.4517,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -475,7 +481,7 @@
       "lines": 3
     },
     "ledger:ARRIVAL_SENSES.timber.lines": {
-      "top1": 0.3914,
+      "top1": 0.3704,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 4
@@ -575,6 +581,30 @@
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 2
+    },
+    "ledger:LINE_ROLE_CLAUSE.brunt": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.instigator": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.lever": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:LINE_ROLE_CLAUSE.treater": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     },
     "ledger:NPC_STRUCTURE.criminal__contested__dominant": {
       "top1": 1,
@@ -931,7 +961,7 @@
       "lines": 1
     },
     "ledger:POLITICAL_FLAVOR.catastrophic": {
-      "top1": 0.1379,
+      "top1": 0.1364,
       "top5": 0.6461,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
@@ -1060,7 +1090,7 @@
       "top1": 0.3158,
       "top5": 0.8948,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 6
+      "lines": 7
     },
     "ledger:conflicts:HOOKS": {
       "top1": 0.1,
@@ -1160,10 +1190,10 @@
       "lines": 2
     },
     "ledger:foodBalance:OUTLOOK_HOOK_SIBLINGS": {
-      "top1": 0.5876,
+      "top1": 0.5625,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 3
+      "lines": 4
     },
     "ledger:goalFamilies:ALLEGIANCE.escape_fear.short": {
       "top1": 1,
@@ -1699,6 +1729,12 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 2
     },
+    "ledger:governingStressVignettes:OCCUPIED_SEAT": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:corruption_scandal": {
       "top1": 0.3385,
       "top5": 1,
@@ -1748,7 +1784,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_flood": {
-      "top1": 0.6456,
+      "top1": 0.5978,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1760,7 +1796,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:heresy_trial": {
-      "top1": 0.3684,
+      "top1": 0.3605,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1772,7 +1808,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:leadership_vacuum": {
-      "top1": 0.3431,
+      "top1": 0.3427,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1790,7 +1826,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:market_crash": {
-      "top1": 0.399,
+      "top1": 0.3969,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1868,7 +1904,7 @@
       "lines": 3
     },
     "ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:wild_magic": {
-      "top1": 0.3855,
+      "top1": 0.3579,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
@@ -1897,6 +1933,12 @@
       "lines": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
+    "ledger:institutionDescVariants:DESC_LATE_SIBLINGS": {
+      "top1": 0.6364,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
     "ledger:institutionDescVariants:city|Crafts|Alchemist quarter": {
       "top1": 0.3596,
       "top5": 1,
@@ -1920,6 +1962,18 @@
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
+    },
+    "ledger:institutionDescVariants:city|Crafts|Cartographer's guild": {
+      "top1": 0.8396,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:city|Crafts|Smelter": {
+      "top1": 0.4885,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     },
     "ledger:institutionDescVariants:city|Crafts|Specialized metalworkers": {
       "top1": 0.3655,
@@ -2086,6 +2140,18 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
     },
+    "ledger:institutionDescVariants:metropolis|Crafts|Cartographer's guild": {
+      "top1": 0.8847,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:institutionDescVariants:metropolis|Crafts|Smelter": {
+      "top1": 0.3427,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
     "ledger:institutionDescVariants:metropolis|Crafts|Specialized metalworkers": {
       "top1": 0.3699,
       "top5": 1,
@@ -2217,6 +2283,12 @@
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 3
+    },
+    "ledger:institutionDescVariants:town|Crafts|Smelter": {
+      "top1": 0.591,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     },
     "ledger:institutionDescVariants:town|Crafts|Tanner (established)": {
       "top1": 0.3976,
@@ -3599,10 +3671,10 @@
       "lines": 1
     },
     "ledger:institutionServices:Fish market.Wholesale trade": {
-      "top1": 1,
+      "top1": 0.9686,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 1
+      "lines": 2
     },
     "ledger:institutionServices:Fisher's Landing.Fresh fish": {
       "top1": 1,
@@ -5757,7 +5829,7 @@
         "top1"
       ],
       "reason": "the quarrels' plot hooks: COHERENCE-QUARREL cure 2 draws one of the issue's own hooks; the charter's target (no hook above 10%)",
-      "lines": 92
+      "lines": 93
     },
     "record:safetyProfile.plotHooks": {
       "top1": 0.25,
@@ -5766,79 +5838,7 @@
         "top1"
       ],
       "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)",
-      "lines": 11
-    },
-    "ledger:ARRIVAL_SENSES.stone.lines": {
-      "top1": 1,
-      "top5": 1,
-      "lines": 1,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:LINE_ROLE_CLAUSE.brunt": {
-      "top1": 1,
-      "top5": 1,
-      "lines": 1,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:LINE_ROLE_CLAUSE.instigator": {
-      "top1": 1,
-      "top5": 1,
-      "lines": 1,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:LINE_ROLE_CLAUSE.lever": {
-      "top1": 1,
-      "top5": 1,
-      "lines": 1,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:LINE_ROLE_CLAUSE.treater": {
-      "top1": 1,
-      "top5": 1,
-      "lines": 1,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:governingStressVignettes:OCCUPIED_SEAT": {
-      "top1": 1,
-      "top5": 1,
-      "lines": 1,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:institutionDescVariants:DESC_LATE_SIBLINGS": {
-      "top1": 0.6364,
-      "top5": 1,
-      "lines": 2,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:institutionDescVariants:city|Crafts|Cartographer's guild": {
-      "top1": 0.8396,
-      "top5": 1,
-      "lines": 4,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:institutionDescVariants:city|Crafts|Smelter": {
-      "top1": 0.4885,
-      "top5": 1,
-      "lines": 4,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:institutionDescVariants:metropolis|Crafts|Cartographer's guild": {
-      "top1": 0.8847,
-      "top5": 1,
-      "lines": 4,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:institutionDescVariants:metropolis|Crafts|Smelter": {
-      "top1": 0.3427,
-      "top5": 1,
-      "lines": 4,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:institutionDescVariants:town|Crafts|Smelter": {
-      "top1": 0.591,
-      "top5": 1,
-      "lines": 4,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+      "lines": 13
     }
   }
 }

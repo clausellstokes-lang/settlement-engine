@@ -132,7 +132,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 440 → 446 at STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (ODQ §934.105; record
     // docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json): the fresh campaign's simulated year reads the moved
     // defence, power and food figures, so its news is re-dealt — on rr-fresh-full|1 29 section rows leave and 35 arrive (itemCount 438 → 444).
-    expect(Object.keys(manifest)).toHaveLength(446);
+    // 446 → 475 at THE CLOSE OF THE TAIL ROUND (TAIL-CLOSE-DOORS-3; the owner's word of 2026-11-15 06:00 UTC, ODQ §934.105; record
+    // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the round's declared moves re-deal the fresh campaign's cast
+    // and figures, so its simulated year's news is re-dealt — on rr-fresh-full|1 65 section rows leave and 94 arrive (itemCount 444 → 473).
+    expect(Object.keys(manifest)).toHaveLength(475);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -195,10 +198,12 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // organizedCrime 0.05 and the round-robin deal re-deal the year at the stage of c6ded8e3a; the year's misjudgment beats are now 3 (15, 19, 4), all on knowledge.
       // Re-dealt at STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (ODQ §934.105, THE STYLE WAVE'S MERGE, 2026-11-13; record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json):
       // the year reads the moved defence, power and food figures at the stage of 9e2ae9035; the year's misjudgment beats are now 3 (15, 4, 45), all on knowledge.
+      // Re-dealt at THE CLOSE OF THE TAIL ROUND (ODQ §934.105, the owner's word of 2026-11-15 06:00 UTC; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json):
+      // the round's declared moves re-deal the year at the line's final tree (f76fe38fd); the year's misjudgment beats are now 3 (15, 19, 4), all on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.15.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.19.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.45.belief_misjudgment.soak-b.soak-d',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');

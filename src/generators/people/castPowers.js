@@ -187,6 +187,25 @@ export function assignCastPowers(settlement, cards, rng, seed = settlement?._see
  */
 
 /**
+ * THE ROSTER'S SECRETS AS A LATE MINT'S DRAW REFUSES THEM (TAIL-CLOSE-SECRET-1): a line is held when the roster holds it OR
+ * holds the form it will carry — a late face's secret is rewritten after its draw to name no thieves' guild the town lacks
+ * (`crimeSignal.js :: withTownsOwnUnderworld`), so the draw's refusal (`npcGenerator.js`: `has`, then `add`) answers for
+ * that form. Draw-free: the refusal falls through its pool in seed order with no further roll.
+ * @extends {Set<string>}
+ */
+class CarriedSecrets extends Set {
+  /** @param {Iterable<string>} lines @param {(text: string) => string} carry */
+  constructor(lines, carry) {
+    super(lines);
+    /** @type {(text: string) => string} */
+    this.carry = carry;
+  }
+
+  /** @param {string} text @returns {boolean} */
+  has(text) { return super.has(text) || super.has(this.carry(text)); }
+}
+
+/**
  * A1 — LAND: every card's memberships (rank null) from the backing catalogue, the minted seat's,
  * and the `other` mints (R-P3, R-P4). Mints every fork of `people-powers` (mint, ranks, hooks) in
  * the order the one function minted them. `plan` is null where nothing ranks (no power, no cast).
@@ -290,17 +309,18 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
     // THE ONE REGISTRY (MERGE-234, the chair's ruling of 10:4x UTC: one writer per fact): the roster's
     // texts so far, read by the mint's body (no goal, secret, tell or speech repeated) and by the hook
     // draw below (no line the roster holds) — the mint draws NO hook of its own.
+    // the crime signal (one home) and the roster's crime faction as mergeNPCLists reads it, for the minted secrets
+    const crime = { signal: crimeSignalOf({ seats: factions, estate: institutions }), faction: crimeFactionNameOf(factions) }; // the crime home's reader (TAIL-CLOSE-SRC-4)
     const hookRegistry = {
       titles: new Set(cards.flatMap((c) => c?.plotHooks || [])),
       themes: new Set(),
       tells: new Set(cards.map((c) => c?.personality?.tell).filter(Boolean)),
       speech: new Set(cards.map((c) => c?.personality?.speech).filter(Boolean)),
       goals: new Set(cards.map((c) => c?.goal?.short).filter(Boolean)),
-      secrets: new Set(cards.map((c) => c?.secret?.what).filter(Boolean)),
+      // TAIL-CLOSE-SECRET-1: a line is held in the form a late face will CARRY (the rewrite below, after the draw)
+      secrets: new CarriedSecrets(cards.map((c) => c?.secret?.what).filter(Boolean), (text) => withTownsOwnUnderworld(text, crime.signal, crime.faction)),
     };
     const mintCtx = { tier, culture, config, economicState, powerStructure: settlement?.powerStructure, institutions, hookRegistry, worldLaw };
-    // the crime signal (one home) and the roster's crime faction as mergeNPCLists reads it, for the minted secrets
-    const crime = { signal: crimeSignalOf({ seats: factions, estate: institutions }), faction: crimeFactionNameOf(factions) }; // the crime home's reader (TAIL-CLOSE-SRC-4)
     // the pipeline's own npcConfig, as the birth seam spells it, for the hook draw's templates
     const npcConfig = {
       ...config,
@@ -321,7 +341,10 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
       const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
       // COHERENCE-POWERS-7 (leftover 1): a late face's secret names no thieves' guild the town lacks (the rule
       // mergeNPCLists runs on the roster's cards; crimeSignal.js :: withTownsOwnUnderworld), after the draw
-      if (card.secret && typeof card.secret === 'object') card.secret = { ...card.secret, what: withTownsOwnUnderworld(card.secret.what, crime.signal, crime.faction) };
+      if (card.secret && typeof card.secret === 'object') {
+        card.secret = { ...card.secret, what: withTownsOwnUnderworld(card.secret.what, crime.signal, crime.faction) };
+        if (card.secret.what) hookRegistry.secrets.add(String(card.secret.what).trim()); // TAIL-CLOSE-SECRET-1: the carried text is held too
+      }
       card.id = id;
       card.title = titleForHolder(row.title, card.gender); // TAIL-TITLES K-C: the holder's form, after the draw
       card.role = card.title; // M-1b: the role IS the title (the face stays on `institution.title`)
