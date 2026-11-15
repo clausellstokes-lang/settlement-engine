@@ -1443,7 +1443,20 @@ and the four walkers: the same 10 red at base and tree. **Vetoable by the owner:
 
 ## What is left (after this seat)
 
-- Red 1 (`crisisBlindDossierProse`): the writing seats' leaves (five mute pools under a siege) and the floor's door.
+- **Red 1 under the chair's K30 (2026-11-15 05:48, vetoable by the owner).** (a) THE FLOOR, DONE (7eea6a515): 29 ->
+  17, the measured count at this tip, the curing commits named in the test (23 by JOIN-4 · 6, 1c01bdda, the earlier fall
+  not located; 22 at 9eb08470a; 21 at 38a21278; 17 at 31a6f72e). No planted case holds it: MORE CURES CAN TAKE IT TO
+  ZERO, and the pin then needs a plant, not a floor. That arm is green; the file stays red on the mute arm only.
+  (b) THE FIVE MUTE POOLS, READ, NOT CHANGED (the count ran out): four commits inside ba4cc210b DECLARE their pool's
+  every line false under a siege, by the siege ruling (nothing comes in or goes out by road): DS-POW-6 `operation role
+  duty evasion` f8e7326c (v1-v3), DS-GEN-13 `ENTREPOT` 32ab37da (v1 among the siege Overview's road lines), DS-ECO-10
+  `POSTURE: vulnerable` c21abdd5 (v1-v3), DS-DEF-2 `Beasts & Monsters: settled, nothing organized` 35acb779 (v4-v6, `no
+  crisis: under_siege · no crisis: occupied · no guardPresence`); DS-ECO-12 `INCOME WEIGHT: the religious houses` not
+  located (58aaaed2 reworded its no-house case; it reads the compound `sacredHouse`, which the test says to set aside by
+  name). So the silence is DECLARED; the re-key K30 (b) names is the next seat's, and it needs a mechanism the test does
+  not have: `SET_ASIDE` is keyed by POOL and reds if the pool speaks under ANY family it denies, so a pool silent under
+  a siege by design but speaking under a famine needs a set-aside keyed by pool AND family (`… :: threat`), each with its
+  declaring commit, the arm still red if a listed cell speaks. That shape is the chair's to approve.
 - The eighth: the test seat re-keys `tailCrisisIronHooks`' two hamlets (r2r-town-20, r2r-town-1 the nearest).
 - The style walker's three lines (TAIL-HISTORY, TAIL-NARRATIVE); `displayEconCrisisMarks` (display-econ's, D10 and D14).
 - K27 parked (the chair's word for an `iron short` atom); TAIL-CRISIS-6's under-five list unchanged.
