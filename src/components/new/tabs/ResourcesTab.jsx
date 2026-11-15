@@ -16,6 +16,7 @@ import { institutionDisplayName } from '../../../domain/display/institutionDispl
 import { resourceGapLines, housesStillNeeded, exploitationGroupsShown } from '../../../domain/display/validationOnPage.js';
 import { FLUSH } from '../../../design/flush.js';
 import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
+import { fullCardWordUnderSiege } from '../../../domain/display/economicsCrisisMarks.js'; // BAR3-LABELS-3 L3b
 import { plainGoodName } from '../../../domain/display/tradeListDisplay.js'; // W2-C-LEAVES-13 (15): no slash label
 
 /**
@@ -102,10 +103,14 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
       <DrawsOn deps={chain.dependsOn} mobile={mobile} />
     </div>
   );
+  // L3b (BAR3-LABELS-3, the chair's ruling of 2026-11-15 21:20 UTC; vetoable by the owner): under a siege that stops the
+  // field work, a Full card whose every chain card on the Economics tab prints a word that is not working takes THAT word
+  // (economicsCrisisMarks.js :: fullCardWordUnderSiege), never "Fully exploited": no new word.
+  const besieged = fullCardWordUnderSiege(settlement, chain);
   return (
-    <div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
+    <div data-testid={besieged ? 'resource-full-under-siege' : undefined} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:besieged ? '3px solid #8b1a1a' : '3px solid #1a5a28',padding:'8px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✓ Fully exploited</span>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:besieged ? swatch.danger : swatch.success,background:besieged ? swatch.dangerBg : swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>{besieged ? besieged.charAt(0).toUpperCase() + besieged.slice(1) : '✓ Fully exploited'}</span>
         <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
       </div>
@@ -196,7 +201,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           {partExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="partial" moved={x.moved}/>)}
 
           {/* Fully exploited */}
-          {fullExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="full"/>)}
+          {fullExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="full" settlement={r}/>)}
 
           {/* The food the famine failed (V2: the record's failed source) */}
           {famineFailed.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="failed"/>)}

@@ -68,11 +68,14 @@ export const CRIME_LINE_DISQUALIFIERS = Object.freeze({
     4: line('Criminal money finds little purchase at {settlement}', 'an official who sells', 'no official sells'),
   }),
   'DS-DEF-4::capture equilibrium': Object.freeze({
-    1: line('The {seat} at {settlement} and the criminal interest have found a line and both keep to it; nothing is bought here', 'an official in pay', 'nothing is bought'),
+    // RULING CL2 (BAR3-LABELS-3; the chair's, 2026-11-15; vetoable by the owner): a line that says the hall's people are not
+    // for sale is refused beside an official the page prints corrupt, as beside one in criminal pay ('an official who sells')
+    1: line('The {seat} at {settlement} and the criminal interest have found a line and both keep to it; nothing is bought here', 'an official who sells', 'nothing is bought'),
   }),
   'DS-DEF-4::capture none': Object.freeze({
     2: line('There is a criminal interest at {settlement} with the means to reach into the hall and it has not', 'an official in pay', 'the criminals have reached no one'),
-    3: line('Whatever is run at {settlement} is run outside the hall, and business with the hall is straight', 'an official in pay', 'business with the hall is straight'),
+    // RULING CL2: the hall's business is not straight beside an official the page prints corrupt
+    3: line('Whatever is run at {settlement} is run outside the hall, and business with the hall is straight', 'an official who sells', 'business with the hall is straight'),
   }),
 });
 

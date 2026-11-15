@@ -115,7 +115,8 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
     ...magicDependentChainsShown(settlement).map(c => chainPrintName(c, settlement).label).filter(l => typeof l === 'string' && l !== ''),
     ...(foodAmongMagicDependents(settlement) ? [`food (${magicFoodChannelWord(foodRowShown(settlement, false)?.fb.magicFoodNote)} provision)`] : []),
   ])] : [];
-  const relyFor = relyNames.length < 2 ? relyNames.join('') : `${relyNames.slice(0, -1).join(', ')} and ${relyNames[relyNames.length - 1]}`;
+  const relyHead = relyNames.slice(0, -1).join(', ');
+  const relyFor = relyNames.length < 2 ? relyNames.join('') : `${relyHead} and ${relyNames[relyNames.length - 1]}`;
   // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the
   // owner's player view drew, shipped at the save (`magic`); unstamped, SILENT (magicDeskRead.js).
   const magicProse = magicDeskRead(settlement, { publicDossier, playerView });
