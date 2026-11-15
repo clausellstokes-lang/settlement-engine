@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line
+import { FAILED_SOURCE_WORDS } from '../economy/foodBalance.js'; import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line // BAR3-POWERS (C36418): the failed source's words, first on this line
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -576,7 +576,7 @@ const buildSlaveRevoltNarrative = (institutionNames) => {
   );
 };
 
-const buildStressNarratives = ({
+const buildStressNarratives = ({ failedFoodSource = null, // BAR3-POWERS (C36418): foodBalance.js :: failedSource, the famine's failed source
   migrationEntry = null,
   baselineConflict,
   institutionFlags,
@@ -600,7 +600,7 @@ const buildStressNarratives = ({
     famine:
       hasMilitaryInstitution || hasCivicInstitution || hasMarketInstitution
         ? 'Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.'
-        : 'The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.',
+        : `${['fish', 'livestock', 'game'].includes(String(failedFoodSource)) ? `The ${FAILED_SOURCE_WORDS[/** @type {'fish'|'livestock'|'game'} */ (failedFoodSource)]} failed badly this year.` : 'The last harvest failed badly.'} What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.`, // BAR3-POWERS (C36418): the failed source's own word where it is not the harvest
     occupied:
       `An occupying officer arrested a local elder for "seditious speech". ${governingFactionName}` +
       ' filed a formal protest. The protest was returned unread.',
@@ -678,7 +678,7 @@ export const buildGovernanceLabels = ({
   stressEntries = [],
   fallbackStressType,
   worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
-  defenseLabel = null, militaryGate = null, // POWERS-14: the record's readiness label, on the power step's replay after the defence profile
+  failedFoodSource = null, defenseLabel = null, militaryGate = null, // BAR3-POWERS (C36418): the food record's failed source; POWERS-14: the record's readiness label, on the power step's replay after the defence profile
 }) => {
   const magicWorks = resolveGenerationWorldLaw(worldLaw, config).magicFunctions();
   const hasStress = stressType => stressTypes.includes(stressType);
@@ -748,7 +748,7 @@ export const buildGovernanceLabels = ({
     institutionNames,
     tier,
   );
-  const stressNarratives = buildStressNarratives({
+  const stressNarratives = buildStressNarratives({ failedFoodSource, // BAR3-POWERS (C36418)
     // MERGE-R2 (the chair's ruling 1): the vignette reads W0's one field — the entry's own, else its
     // config projection (stressConfirmPass) — through F13's reader; no second derivation.
     migrationEntry,

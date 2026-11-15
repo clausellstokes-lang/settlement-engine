@@ -414,7 +414,15 @@ export function governanceAccountOf(settlement, opts = {}) {
       'Without bargaining with them first, the hall settles nothing large.',
     ],
   };
-  if (gravest) sentences.push(CONSEQUENCE[gravest][pick(`consequence:${gravest}`, CONSEQUENCE[gravest].length)]);
+  // BAR3-POWERS (C31100, the chair's P3): under an occupation the occupier does not bargain and the hall carries out what it
+  // decides (the seat's twin above): the tense consequence takes its twin, the occupier's approval where the occupier is the
+  // gravest, else the bargaining bounded by what the occupiers leave the hall. The slot keeps its draw.
+  const occupiedHall = gravest === 'tense' && governanceStressTypesOf(s).includes('occupied');
+  if (gravest) sentences.push(occupiedHall
+    ? (estranged[0]?.name === 'Occupation Authority' || !tense
+      ? 'Nothing large is settled in the hall until the occupiers have approved it.'
+      : `Even what the occupiers leave to the hall is not settled without bargaining with ${lowerFirst(tense.names)} first.`)
+    : CONSEQUENCE[gravest][pick(`consequence:${gravest}`, CONSEQUENCE[gravest].length)]);
 
   // 4b. A FRACTURE'S BLOCS, NAMED (condition (c)): where the town is politically fractured and the
   // record holds the blocs the stress added, they are named, and the fractured line's own consequence
