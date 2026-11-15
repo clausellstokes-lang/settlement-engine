@@ -191,8 +191,16 @@ r2s-insurgency-metropolis-0, P7a).
 None re-taken. The generator golden (tests/property/generatorGoldenMaster.test.js) was red at the base and stays red: the
 merge seat's re-record carries the three families above.
 
-## What is left (by width), and what is next (THE HAND-BACK: this seat stops here, by the clock's budget)
-- P13(1): built nowhere; waits for the chair's word on one more call at G1's pipeline seam (above).
+## What is left (by width), and what is next (THE HAND-BACK: this seat stops here, by the clock's budget, 01:33 UTC)
+- P13(1): GRANTED by the chair's ruling P19 (01:12 UTC, read at 01:33, after this seat's hand-back by the clock): ONE MORE
+  CALL in the hunk of generateSettlementPipeline.js lent for G1 (the final roster, before onComplete), beside
+  keepOneDominant: factionDynamics.js :: withConflictRelations(powerStructure, conflicts), DRAW-FREE: a pair the conflicts
+  hold at HIGH whose relation row reads symbiotic or dependent takes a twin that names the quarrel, direction 'escalating'.
+  A DECLARED MOVE, its own commit: the field diff by family on the 720 shows the relations' rows of those pairs AND NOTHING
+  ELSE; say the count of pairs and towns; read three towns. Its measure at the base (this seat's relation scan, the census
+  at 40238d3ab, rows of those pairs): the guard's symbiotic row at HIGH 16, the merchants' dependent 23, the faith's
+  dependent 6, the nobles' dependent 2. NOT BUILT HERE: the successor's first item. Keep the twins as whole
+  `narrative = `...`;` lines (the contradiction walker reads only those) and re-run its ANCHOR 5 (37).
 - P9 (the 21 parked title rows), with P12's guard and P18 (17190, the castellan's secret: reword to what he did and hid):
   NOT STARTED. MEASURED at 40238d3ab (the towns PRINTING each row, and in how many the person's own house lacks its input
   by `resourceAnalysis.gaps` "missing" or its chain's input): the vintner 11176 68/68, 11202 60/60, B15974 58/58, B10758
