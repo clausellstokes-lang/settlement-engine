@@ -563,6 +563,18 @@
     "after-base: close-true",
     " · goal: get the mill through the season without borrowing.",
     "3179007cb3ffd6f1"
+   ],
+   [
+    "war",
+    "after-base: close-false",
+    "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows.",
+    "db13c4c73cfa5ca3"
+   ],
+   [
+    "market",
+    "after-base: close-false",
+    "Caravans are passing Cnocby by, and its market stalls stand half empty.",
+    "724c1896440111d1"
    ]
   ],
   "src/components/howto/AboutManifesto.jsx": [
