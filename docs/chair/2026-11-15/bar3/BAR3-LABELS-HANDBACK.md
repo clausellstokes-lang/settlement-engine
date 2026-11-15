@@ -104,7 +104,21 @@ F2 and amendment 2 (52 files). RED AT MY TIP, each run alone at 59185b62a too, t
   `power/claimStanding.js`, `power/rulingStructure.js`), `tests/lint/proseWiringCensus.walker.test.js` (the committed
   register stale at the base) and `tests/lint/writerReach.walker.test.js` (`narrative on factionRelationships`,
   `importPct on foodSecurity`, 1406 against 1407): the registers the chair's line at 52f0a1684 re-takes.
-Everything else green. THE BOOKS MY CURES MOVE: none. No stored figure moved (display only); the presumed-things
+Everything else green at 59185b62a.
+
+AFTER THE CHAIR'S MERGE (my tip 4decc3acc, then 5e9c02c55; my second tree moved to 52f0a1684): the twenty laws re-run
+ALONE at my tip. Green: `engineCoreLazyEdge` (cured by the line), `presumedThings`, `writerReach` and the other
+fourteen. Red at my tip: `generationForkCensus` and `pipelinePinnedMode`, also red at 52f0a1684 with the same arms
+(the base's: golden-derived, red on purpose); and `tests/lint/proseWiringCensus.walker.test.js`, GREEN AT 52f0a1684:
+a STORED FIGURE MY DECLARED CURE MOVES (below).
+
+THE BOOKS MY CURES MOVE (named, NOT re-taken):
+
+| test | arm | old -> new | door | batch |
+|---|---|---|---|---|
+| `tests/lint/proseWiringCensus.walker.test.js` | "the committed census is byte-identical to a fresh build, and the stamp is live"; "THE DRY READ" | the register's STAMP only: `node scripts/wiring-census.mjs --dry` reads "sections that would move: stamp · stamped shas that would move: (none) · ROWS that would move: 0 · bytes delta 0" | `node scripts/wiring-census.mjs` (its own writer) | 1 |
+
+No other stored figure moved. No stored figure moved (display only); the presumed-things
 door's `--check` reads the same rows at both trees (fresh 3, stale 3, none in my files); the grid: 0 falls at both.
 Goods roster: no new import of a goods module in any file I touched (no roster row owed).
 The chair's four laws of the test corpus (19:50 UTC), for my guard `tests/components/bar3LabelWords.test.jsx`:
@@ -115,7 +129,13 @@ anchors no state-prose sentence). The three walkers' remaining reds name only th
 chair's sweep). Manifest entry owed: none (no new test file under `tests/generators`).
 A FILE I DID NOT TOUCH: the repository's main checkout shows `src/domain/facts/crisisKind.js` emptied (225 lines
 deleted, uncommitted, mtime 19:42:38 UTC, while my law runs were in flight in the scratch trees). Not restored, not
-committed: told to the chair at once (its restore is the chair's word).
+committed: told to the chair at once. THE CAUSE WAS MINE: an unquoted heredoc in my hand-back write ran its backtick
+span `src/domain/facts/ironAtHand.js -> src/domain/facts/crisisKind.js`, whose `>` truncated the file by a relative path
+after the harness had reset the shell to the main checkout. The chair's word was to restore it there; MY OWN PERMISSION
+CHECK REFUSED the restore (`git checkout --` of that file), and the refusal stands: the file is still emptied in this
+container's main checkout ONLY; no branch holds it (the chair read my pushed tip: whole). Evidence:
+`git status --short` and `git diff --stat` of the main checkout, saved in my scratchpad (`main-evidence.txt`).
+From then on: absolute paths and quoted heredocs only.
 
 ## THE 525
 0 of the 525 move: no file under `src/generators/`, `src/data/` or any record writer changed (display only); and the
@@ -131,6 +151,17 @@ census's 720 records are byte-identical at base and tip (sha256 of the decompres
 - The books: `runall.sh <tree> <label> <list>`: each file alone through `scripts/gate-tail.sh`; `out/<label>/RESULTS`.
 
 ## What is left, IN ORDER
+0. L1b (the chair's direction of 19:58 UTC, measured, NOT cured: no time for its after-census). MEASURE: the Magic tab
+   does NOT name what relies on magic. Beside the word it prints only the supplier ("Reliance on magic: Relied upon ·
+   supplied by House of worship", `MagicTab.jsx` `magic-reliance-source`) and, under the roles, the dependence block's
+   unnamed sentence ("Some at … do work that nobody else there can do, and the village has come to lean on it…",
+   mount `viability.magicDependency`). That holds in all 315 of the 720 towns where the word is above the lowest (at my
+   tip; e.g. r2r-village-12, whose one dependent is the running chain "Divine & Magical Healing", printed only on the
+   Economics tab). THE CURE TO MAKE: in `MagicTab.jsx`'s reliance row, after the word, a short phrase naming the
+   dependents from the one leaf that counts them (`magicProvisionShown.js :: magicDependentsShown`: chain ids, then
+   "Food supply"). Each chain's name must be printed through its leaf, not `chain.label` (`chainPrintSites` law). The
+   food supply must be named as the food row names it. Then: one guard, one census before and after, and the new
+   words on the veto list with three towns.
 1. L3, the resource and chain labels (DISPLAY-ECON, DEFECON): "✓ Fully exploited Livestock" (C7595 C7371, 95 towns)
    where the card's `dependsOn` ("grazing land") names a ground the record does not hold: the reader is
    `domain/display/validationOnPage.js :: exploitationCardShown` (P1's form): measure the cards whose `dependsOn` ground
