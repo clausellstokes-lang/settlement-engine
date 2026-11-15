@@ -21,7 +21,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { applyNeighbourEconomicBias } from './neighbourEconomicBias.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
-import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
+import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; import { arcaneGuildHouseStands } from '../../domain/facts/magic.js'; import { namesSmugglingHouse } from '../../domain/crimeSignal.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
 import { liveMaterialFor } from './localMaterials.js'; import { hasMarketInstitution } from '../../domain/facts/market.js';
 import { GRAIN_OWN_FIELDS_LINE, GRAIN_SURPLUS_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, FORGE_HOUSE_WORDS, ALCHEMY_TRADE_LINE, ALCHEMIST_SUPPLEMENTS_LINE, GRAIN_BOUGHT_LINE, WOOL_LOCAL_LINE, WOOL_BOUGHT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, FISH_EXPORT_LINE, QUARRY_LINE, MASONS_LINE, TIMBER_LINE, TIMBER_BOUGHT_LINE, trueIncomeDesc, houseOfWorkLine, keepRowsThePageBearsOut, shareIncomeRows, OWN_HARVEST_LINE, PILGRIM_HOUSE_WORDS } from './incomeLineSiblings.js'; import { offersFoodSurplus } from '../../domain/foodSurplus.js';
@@ -343,7 +343,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       (inst) => inst.toLowerCase().includes('black market') || inst.toLowerCase().includes('underground')
     );
     const hasSmuggling = crimInsts.some(
-      (inst) => inst.toLowerCase().includes('smuggl') // TAIL-DEFECON-2 (B05884): a front business is not a smuggling house
+      namesSmugglingHouse, // TAIL-DEFECON-2 (B05884): a front business is not a smuggling house; TAIL-CLOSE-SRC-3: the crime home's reader
     );
     const label =
       hasGuild && hasMarket
@@ -880,6 +880,6 @@ import { goodsOnlyRefusedChainsMake } from '../../domain/chainYield.js'; // at t
 const ARCANE_INDUSTRY_LINE = "Enchanting contracts, magical research commissions, and the licensing of spellcasting practitioners. The mages' guild contributes meaningfully to civic revenue.";
 /** @param {(...names: string[]) => boolean} hasInst the roster's own name test @returns {string} */
 function arcaneIndustryLineOf(hasInst) {
-  return hasInst("mages' guild", "mages' district", 'arcane academy', 'academy of magic', 'magical academy')
+  return arcaneGuildHouseStands(hasInst) // TAIL-CLOSE-SRC-3: the magic home's arcane houses (`facts/magic.js`)
     ? ARCANE_INDUSTRY_LINE : ARCANE_INDUSTRY_LINE.slice(0, ARCANE_INDUSTRY_LINE.indexOf('.') + 1);
 }

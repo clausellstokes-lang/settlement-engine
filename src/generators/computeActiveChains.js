@@ -38,7 +38,7 @@ import {
 } from '../domain/content/customContentSemanticAuthority.js';
 import { druidicFaithRole } from '../domain/arcaneInstitutionIdentity.js';
 import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
-import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
+import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { namesGrainMill } from '../domain/facts/institutions.js'; // TAIL-CLOSE-SRC-4: one line
 
 /**
  * A chain's printed label (F1, rung 1B): a row that names a house the place may lack declares
@@ -119,7 +119,7 @@ function gateKeywordPredicate(kw) {
   }
   // TAIL-DEFECON-C-4 (D33): the GRAIN mill alone (a Mill, Mills (2-5)): a sawmill saws and a maltster malts; neither
   // grinds flour. Read by GOOD_WORKING_HOUSES's flour rows only; the export gates' 'mill' above is not narrowed.
-  if (kw === 'grain mill') return (n) => (n === 'mill' || n.startsWith('mills (')) && !n.includes('access to external');
+  if (kw === 'grain mill') return namesGrainMill; // the institutions home's grain-mill reader (TAIL-CLOSE-SRC-4)
   return (n) => n.includes(kw);
 }
 function gateKeywordIdSet(kw) {

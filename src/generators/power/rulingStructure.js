@@ -595,7 +595,7 @@ export const generatePowerStructure = (
           : governingFaction && governingFaction.includes('Church Council')
             ? 'Church authority is the formal source of governing legitimacy here; clergy hold both spiritual and temporal jurisdiction.'
             : religiousPower > 24
-              ? lowerInstNames.some((name) => name.includes('cathedral') || name.includes('monastery')) && /ecclesiastical/i.test(String(governingFaction || '')) // TAIL-POWERS-4 (04923): "all ecclesiastical" only under the church's own seat
+              ? factsOf({ institutions: nativeInstitutions }).faith.hasChurch && /ecclesiastical/i.test(String(governingFaction || '')) // TAIL-POWERS-4 (04923): "all ecclesiastical" only under the church's own seat; TAIL-CLOSE-SRC-3: the church is the vocabulary's `church` atom
                 ? 'Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.'
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
               : religiousPower > 17

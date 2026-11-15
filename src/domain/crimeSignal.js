@@ -74,6 +74,19 @@ export function withoutCriminalGuild(text) {
 }
 
 /**
+ * Whether the town's crime includes a thieves' or criminal guild: the roster's crime faction, its criminal powers or its
+ * criminal houses, by name (TAIL-CLOSE-SRC-4: the one reading `withTownsOwnUnderworld` and `npcGenerator.js ::
+ * mergeNPCLists`'s `noThievesGuild` each spelled; `/thie/ || namesCriminalGuild` is the latter's `/thie|criminal guild/i`).
+ * @param {CrimeSignal | null | undefined} signal the town's crime signal (`crimeSignalOf`)
+ * @param {unknown} [crimeFaction] the roster's crime faction by name
+ * @returns {boolean}
+ */
+export function crimeHasThievesGuild(signal, crimeFaction = null) {
+  const named = [crimeFaction, ...(signal?.factions || []), ...(signal?.houses || [])];
+  return named.some((n) => /thie/i.test(String(n || '')) || namesCriminalGuild({ short: n }));
+}
+
+/**
  * A minted face's secret (COHERENCE-POWERS-7, the brief's leftover 1; R2-CODE-A item 7's rule, given its home
  * here beside F4's): a thieves' or criminal guild the town does not have is never named. With no crime at all,
  * F4's "a powerful outside interest" (`withoutCriminalGuild`); where crime stands without such a guild, "the
@@ -88,10 +101,71 @@ export function withoutCriminalGuild(text) {
  */
 export function withTownsOwnUnderworld(text, signal, crimeFaction = null) {
   if (typeof text !== 'string' || !new RegExp(CRIMINAL_GUILD, 'i').test(text)) return text;
-  const named = [crimeFaction, ...(signal?.factions || []), ...(signal?.houses || [])];
-  if (named.some((n) => /thie|criminal guild/i.test(String(n || '')))) return text;
+  if (crimeHasThievesGuild(signal, crimeFaction)) return text; // the criminal guild by its own reader (TAIL-CLOSE-SRC-3, -4)
   if (!crimeFaction && !signal?.present) return withoutCriminalGuild(text);
   return /** @type {T} */ (/** @type {unknown} */ (text
     .replace(/on (?:the )?thieves['’]? guild payroll/gi, 'on the payroll of the local underworld')
     .replace(new RegExp(CRIMINAL_GUILD, 'gi'), 'the local underworld')));
 }
+
+/**
+ * How many gang houses the roster holds, the catalogue's several-gangs row counting two (TAIL-CLOSE-SRC-3: moved verbatim
+ * from `generators/safetyLineTruth.js :: GANG_HOUSES_OF`, UPKEEP-8, into the crime home; the safety lines and the
+ * priority flags read it here). A roster row or a bare name.
+ * @param {ReadonlyArray<unknown> | null | undefined} institutions @returns {number}
+ */
+export function gangHousesOf(institutions) {
+  let n = 0;
+  for (const i of institutions || []) {
+    const name = String(typeof i === 'string' ? i : /** @type {{ name?: unknown }} */ (i)?.name || '').toLowerCase();
+    n += name.includes('multiple criminal') ? 2 : name.includes('street gang') ? 1 : 0;
+  }
+  return n;
+}
+
+/**
+ * Whether a criminal power governs: a seat whose category is 'criminal' (the signal's own mark) holds the governing seat
+ * (TAIL-CLOSE-SRC-3: the safety profile's criminal-governance line, `safetyLineTruth.js :: settleRosterCrimeLines`).
+ * @param {unknown} seats the roster's seats @returns {boolean}
+ */
+export function criminalSeatGoverns(seats) {
+  return (Array.isArray(seats) ? seats : []).some((seat) => seat?.category === 'criminal' && seat?.isGoverning === true);
+}
+
+/**
+ * Whether a criminal house's name is a smuggling house (TAIL-DEFECON-2, B05884: a front business is not one).
+ * TAIL-CLOSE-SRC-3: moved verbatim from `economy/economicState.js`'s criminal-revenue label into the crime home.
+ * @param {string} name @returns {boolean}
+ */
+export function namesSmugglingHouse(name) {
+  return name.toLowerCase().includes('smuggl');
+}
+
+/**
+ * Whether a power is a criminal one by its seat's mark, or a thieves' power by its name (TAIL-CLOSE-SRC-4: moved verbatim
+ * from `power/stressFactions.js`'s wartime trade line, TAIL-POWERS-B-4 P31 (6), into the crime home).
+ * @param {{ category?: unknown, faction: string }} seat a roster seat @returns {boolean}
+ */
+export function isCriminalOrThievesPower(seat) {
+  return seat.category === 'criminal' || seat.faction.toLowerCase().includes('thieves');
+}
+
+/**
+ * The roster's crime faction by name: the first seat whose category is 'criminal', or whose name is a thieves', criminal,
+ * smuggling or underworld power (TAIL-CLOSE-SRC-4: moved verbatim from `generators/people/castPowers.js`'s cast of the
+ * powers into the crime home). Null where none.
+ * @param {ReadonlyArray<{ category?: unknown, faction?: string } | null | undefined>} factions the roster's seats
+ * @returns {string | null}
+ */
+export function crimeFactionNameOf(factions) {
+  return factions.find((f) => f?.category === 'criminal' || /thieve|criminal|smuggl|underworld/i.test(String(f?.faction || '')))?.faction || null;
+}
+
+/**
+ * The safety profile's crime-type LABEL for a criminal power that has filled the vacuum of civil authority: written by
+ * `generators/safetyProfile.js` (its `crimeTypes` row) and compared by `generators/safetyLineTruth.js ::
+ * settleRosterCrimeLines` (TAIL-CLOSE-SRC-4, the chair's SR3 (c): the label has one home). It lives in the crime home,
+ * which both already import, and not in the writer: the writer imports the reader's module, so a writer-held constant
+ * would close a new dependency cycle (`tests/architecture/layerBoundaries.test.js`, shrink-only).
+ */
+export const CRIMINAL_GOVERNANCE_TYPE = 'Criminal governance';
