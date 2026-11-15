@@ -116,7 +116,7 @@ describe('the outlook hooks carry their declarations beside the branches that pr
     expect((await import('../../src/generators/economy/foodBalance.js')).OUTLOOK_HOOK_SIBLINGS).toBe(OUTLOOK_HOOK_SIBLINGS);
     // COHERENCE-AGREE (2026-11-11): the timber line's second event, the war line, its three events in peace, the starving set.
     expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).map((k) => k.split(' ').slice(0, 4).join(' '))).toEqual([
-      'Something is killing the', 'War has taken the', 'The timber rafts stopped', 'The iron merchants have',
+      'Something is killing the', 'War has taken the', 'The timber rafts stopped', 'Iron has doubled in', // TAIL-CRISIS K9: re-keyed by identity
       'The iron carts are', 'A new toll on', 'The settlement is starving.']);
     for (const [key, set] of Object.entries(OUTLOOK_HOOK_SIBLINGS)) {
       expect(printed.includes(key), key.slice(0, 40)).toBe(true);

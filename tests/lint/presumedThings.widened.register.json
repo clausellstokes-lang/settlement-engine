@@ -11488,18 +11488,6 @@
   ],
   "src/domain/crisis/crisisSummaryVantage.js": [
    [
-    "market",
-    "root",
-    "Fewer people come to market in {name} since the sickness began, and some goods have stopped arriving altogether.",
-    "84c506caacd723e2"
-   ],
-   [
-    "market",
-    "root",
-    "Travel is discouraged in {name}, fewer come to market, and the goods the carts used to bring run short.",
-    "58bc3e6cfd1063c8"
-   ],
-   [
     "war",
     "root",
     "{name} is in a kingdom at war: army carts pass through, and the war is all anyone talks about.",
@@ -26138,24 +26126,6 @@
     "family",
     "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo",
     "35e040179aa22bf4"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and pe",
-    "dff194ad0848c695"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work ",
-    "a4161c781e58da25"
-   ],
-   [
-    "smith",
-    "family",
-    "A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.",
-    "68ffa8fbf6ed6fb3"
    ]
   ],
   "src/generators/economy/incomeLineSiblings.js": [
@@ -26190,24 +26160,6 @@
     "family",
     "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo",
     "35e040179aa22bf4"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron merchants have doubled their price this season, and the smiths are mending tools with scrap. Work slows, and pe",
-    "dff194ad0848c695"
-   ],
-   [
-    "smith",
-    "family",
-    "The iron carts are three weeks late and the carters will not say why. The smiths are rationing what they have, and work ",
-    "a4161c781e58da25"
-   ],
-   [
-    "smith",
-    "family",
-    "A new toll on the iron road has made metal dear. The smiths blame whoever set it, and the tools still need mending.",
-    "68ffa8fbf6ed6fb3"
    ]
   ],
   "src/generators/economy/prosperity.js": [
