@@ -53,6 +53,9 @@ const LEADING_LOCAL_MERCHANTS = 'Merchants with local reach; a consistent civic 
 // Suppressed one no "reliable secondary presence". Each takes the line true at its label.
 const MERCHANTS_AT_MARGINS = 'Merchants with local reach; they trade here, but have little say in how the place is run.';
 const ARCANE_ADVISORY = 'Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.';
+/** TAIL-POWERS-B-2 (the chair's READ-ALL-4 HIGH, vetoable by the owner): where an arcane power GOVERNS, "not formally empowered" is
+ * false of magic; the practitioners outside the seat take this twin, true in that state. */
+const ARCANE_ADVISORY_UNDER_ARCANE_SEAT = 'Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.';
 const CRAFT_SECONDARY = 'The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life.';
 const CRAFT_AT_MARGINS = 'The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops.';
 /** A merchant claim's rung. @param {string} _tier @param {RungContext} ctx */
@@ -182,11 +185,13 @@ export function settleClaimsToLabel(factions, tier, instNames = [], legitimacy =
     if (line === null) continue;
     f.desc = line + desc.slice(end);
   }
+  const arcaneSeat = factions.find((x) => x?.isGoverning)?.category === 'magic';
   const warehouse = instNames.some((n) => String(n).includes('warehouse'));
   for (const f of factions) {
     if (typeof f?.desc !== 'string') continue;
     if (!seatIsCouncil(governing)) for (const [said, twin] of SEAT_WORDS) f.desc = f.desc.replace(said, twin);
     if (!warehouse) f.desc = f.desc.replace('they set prices, control warehousing, and fund', 'they set prices and fund');
+    if (arcaneSeat && !f.isGoverning) f.desc = f.desc.replace(ARCANE_ADVISORY, ARCANE_ADVISORY_UNDER_ARCANE_SEAT);
   }
 }
 

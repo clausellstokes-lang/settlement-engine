@@ -107,7 +107,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           power: 20,
           desc: 'Noble houses backing the current crown line; their support is conditional on continued royal favour and land grants.',
         })
-        : pushPoolNamed(factions, 'other', 20, 'Claims legitimate authority through different means; controls a distinct district or institution.'),
+        : pushPoolNamed(factions, 'other', 20, 'Claims legitimate authority through different means and has a following of its own.'),
       factions.push({
         faction: P && P.includes('Royal Authority') ? 'Reform Noble Bloc' : 'Third Bloc (Neutrals)',
         power: 15,
@@ -208,7 +208,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       factions.push({
         faction: 'Monster Hunters / Adventurers',
         power: 10,
-        desc: 'Outside professionals brought in or passing through; temporarily powerful because they are useful.',
+        desc: 'Outside professionals brought in or passing through; wanted while the monsters are.',
       })),
     ke('insurgency') &&
       (function () {
@@ -336,7 +336,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             faction: 'War Council',
             power: ye ? 20 : 25,
             desc: (sovereign ? (/** @type {string} */ d) => d.replace(/^Crown-appointed emergency body/, 'Emergency body') : (/** @type {string} */ d) => d)(ye
-              ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly: the war is going well enough that its authority isn't contested."
+              ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. While the war goes well, few people ask what it does."
               : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.'),
           }),
           ye ||
@@ -367,7 +367,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               (ye === 0
                 ? ' Losing congregation to the new faith faster than leadership acknowledges publicly.'
                 : ye === 1
-                  ? ' One of two rival sides claiming the legitimate succession: legal standing of their records is contested.'
+                  ? ' One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested.'
                   : ' Formally compliant with the conversion order. Actual compliance among the congregation is harder to assess.'))),
             he.isGoverning &&
               ((he.power = Math.round(he.power * 0.88)),

@@ -329,6 +329,31 @@ export function withCaptureRelations(powerStructure, state) {
 }
 
 /**
+ * TAIL-POWERS-B-2 (the chair's P13(1)/P19, vetoable by the owner): ONE HOME FOR A PAIR'S STANDING. The relation rows are
+ * drawn before the conflicts exist, so a row can call a pair symbiotic or dependent, and 'stable', where the conflicts hold
+ * the same pair at HIGH. Called once on the final record, where both are final: such a row keeps its kind and its
+ * structural bargain (true beside a named quarrel) and takes a twin that names the quarrel, its direction escalating.
+ * Every other row is kept as it is. Draw-free; never mutates its input.
+ * @param {any} powerStructure @param {Array<{ parties?: string[], intensity?: string, issue?: string }>} conflicts
+ * @returns {any}
+ */
+export function withConflictRelations(powerStructure, conflicts) {
+  const rows = Array.isArray(powerStructure?.factionRelationships) ? powerStructure.factionRelationships : null;
+  const high = (Array.isArray(conflicts) ? conflicts : []).filter((c) => c?.intensity === 'high' && Array.isArray(c.parties) && c.parties.length === 2 && c.issue);
+  if (!rows || !high.length) return powerStructure;
+  const quarrelOf = (/** @type {string[]} */ pair) => high.find((c) => (c.parties[0] === pair[0] && c.parties[1] === pair[1]) || (c.parties[0] === pair[1] && c.parties[1] === pair[0])) || null;
+  let moved = false;
+  const factionRelationships = rows.map((row) => {
+    if (!row || !Array.isArray(row.pair) || (row.type !== 'symbiotic' && row.type !== 'dependent')) return row;
+    const quarrel = quarrelOf(row.pair);
+    if (!quarrel) return row;
+    moved = true;
+    return { ...row, direction: 'escalating', narrative: `${row.narrative} Even so, the two are now at odds over ${String(quarrel.issue).toLowerCase()}.` };
+  });
+  return moved ? { ...powerStructure, factionRelationships } : powerStructure;
+}
+
+/**
  * Compute pairwise faction relationships.
  *
  * @param {Array}  factions
