@@ -48,14 +48,57 @@ bitter_history desc[5] 93 → 92 (true lines). "Patron deity" 718 → 716: the c
 towns each. NO TIE RE-DRAWN (20,846 ties). DECLARED MOVE (tie prose only): relationships[].tension 358 towns;
 .description / .proseVariant 23; prominentRelationship.phrasing / .tension 13 (.full 1); pressureSentence 5.
 
+## Batch 2 · the loyalty hooks (npcData.js :: NPC_FACTION_LOYALTY, mirrored by hookThemes.js), ruling (T3)
+
+Measured by census 3 after batch 1 (before) and after this batch; false = by record through the tree's own `factsOf`.
+
+| row | sentence | towns before → after | false before → after | what |
+|---|---|---|---|---|
+| 03130 | the traveller who "passed through … gone by morning" | 236 → 219 | 21 → 3 | CURED; 3 NAMED (representatives.js) |
+| 02506 | "A cousin has arrived to stay without warning …" | 219 → 206 | 17 → 3 | CURED; 3 NAMED (representatives.js) |
+| 22583 | "… paying for drinks with new silver …" | 203 → 191 | 10 → 0 | CURED (`institution: tavern`) |
+| 22560 | "Their best customer … avoiding their street." | 189 → 192 | 2 → 0 | CURED (`tier: ≥ village`) |
+| 02892 | "A petition … half their street …" | 112 → 103 | 8 → 0 | CURED (`tier: ≥ village`) |
+| 20646 · B00314 · B17377 | "One of their most reliable suppliers has gone dark …" | 160 → 146 | 13 → 0 | CURED (no siege; not isolated) |
+| B03014 | "A supplier is providing goods of uncertain provenance." | 139 → 127 | 12 → 0 | CURED |
+| 03018 | "A shipment they weren't expecting arrived …" | 137 → 126 | 12 → 0 | CURED |
+| B17460 | "… rob one of their fronts …" | 90 → 0 | 21 | REWORDED ("… rob them, …") |
+| 20685 · 22757 | "The guard captain has a file …" | 81 → 80 | 1 → 0 | CURED (`watch`) |
+| 00183 | "Three guards … the same district …" | 80 → 79 | 2 → 1 | CURED 1; r2s-occupied-town-2 NAMED (population unsettled at the draw) |
+| 28599 | "Weapons from the armoury …" | 46 → 40 | 6 → 0 | CURED (`garrison`) |
+| 03139 | "A valuable cargo was reported lost at sea." | 44 → 20 | 24 → 0 | CURED (its twin reads `coast`) |
+| 21278 | "The person who settled every quarrel here has died …" | 15 → 3 | 14 → 0 | CURED (`crisis: succession`) |
+| 21114 | the theatre's "house is full every night" | 20 → 0 | 2 (occupation curfew) | REWORDED |
+| 22767 | "… a crime the guard is currently investigating." | 147 → 147 | 0 by (T3) | STRUCK: every printing town holds a force (3 hold a militia alone: r2r-hamlet-34, r2r-village-56, r2s-insurgency-village-1; for the veto) |
+
+Other lines in fewer towns: the pools' own draws moving within the pool after a refusal (1 to 6 towns each), and the
+route exclusion read unanswered on representative cards (fail-closed). Inheritors: the new fronts line (91), "lost on
+the road" (26), the new theatre line (21), then the pools' own lines (8 towns at most). DECLARED MOVE (hook text only):
+npcs[].plotHooks[] in 194 towns, nothing else. Re-keyed by identity: npcLoyaltyGuardRows' declared map; the
+spareHookLine work bound 8 → 12 (measured 4 → 8.5: two distinct roster facts more, still one reading per fact; told to
+the chair); the presumed-things widened register shrunk through its door (three rows cured).
+
 ## The veto list (every new or changed line, with the towns it was read in)
 
 - old_debt.tension[4]: "{A} has offered to clear what is left of the debt in one payment. {B} would rather be repaid in
   favours." (was "{A} has started repaying the debt in coin. {B} wants it repaid in favours.") — read in r2r-thorp-16
   (10 people, wartime), r2r-metropolis-8 (344,689, succession void), r2r-thorp-1 (occupied).
+- criminal#7: "Someone tried to rob them, and did it like a professional: no noise, the lock picked, nothing touched but
+  the strongbox." (was "… rob one of their fronts, …") — read in r2r-town-8 (1,177, mass migration), r2r-metropolis-13
+  (328,486), r2s-occupied-town-3 (occupied).
+- the theatre manager: "The new play mocks someone powerful by another name, and every performance sells out." (was
+  "… and the house is full every night.") — read in r2r-metropolis-29 (23,730, infiltrated), r2s-succession_void-
+  metropolis-3 (295,750), r2s-occupied-metropolis-0 (occupied, a curfew).
+- (no new line) the cargo twin "A valuable cargo was reported lost on the road. …" now prints in river towns too: read in
+  r2r-village-30 (175), r2s-mass_migration-metropolis-3 (248,369), r2s-famine-village-3 (famine).
 
 ## Rows named for other files
 
+- 03130, 02506 (3 + 3 towns): the representative cards' hook walk (src/generators/people/representatives.js, line 395:
+  `factsOf({ institutions, tier })`) hands no crisis, so a siege or plague reads calm there. The cure: hand the place's
+  stress to that facts call. Outside my group.
+- 00183 (1 town): the population is not settled at the loyalty draw (`birthFactsOf` carries no population; the band
+  reads the tier), so a "town" of 310 reads middling there. The cure belongs to the draw's facts (npcGenerator.js).
 - 01167, 00699 (T2, who taught whom): the contradiction is a SECOND tie of the same pair, of the same archetype, in the
   reverse direction (21 such mentor pairs on the 720; old_debt has 28: who owes whom). The second beat is drawn in
   src/generators/power/relationshipArchetypes.js :: createTieProseDraw (or the tie draw people/ties.js), in no group:
@@ -72,6 +115,23 @@ towns each. NO TIE RE-DRAWN (20,846 ties). DECLARED MOVE (tie prose only): relat
 
 - tests/property/espionageDormancyFence.test.js's driven golden: red at the base (50011ad3…), moved by batch 1
   (→ bab4e09c…).
+
+## What is left of the worklist (not reached: the budget)
+
+- npcData.js tie rows by role (mil_crim_corruption 7, mil_crim_suppression 4, econ_mil_contract 7, econ_crim_blur 4,
+  rel_crim_fraud 2, bitter_history B00665, peer_rivalry B00706 / B00404, mentor_legacy B01171 / B01192, wary_alliance
+  B00422 / B21732): each line gives a card an office the PEOPLE line does not (an arrest record to a blade captain, an
+  altar to a hospital's master); the archetype's choice of pair is the writer (relationshipArchetypes.js, no group), the
+  lines need a per-card word (the chair's PARKED "commands the patrols" family).
+- npcData.js NPC_CRIMINAL_SECRETS_BY_HOLDER (17103, B16645); npcStructure.js reg (8 rows); powerSiblings.js (7 rows:
+  20473 HIGH "no lord stands over them" under an occupation, 28616, 23160, 03038, 02676, 22409, B19180);
+  goalFamilies.js (12 rows); plotHooks.js TENSION_LABELS (2) and ECHO_PREFIXES (7: the hook text is the history
+  generator's, the prefix list only matches it: NAMED for the HISTORY group).
+
+## Guards owed
+
+- the representative walk's crisis (above), with its own NOT pairs (r2s-under_siege-metropolis-2,
+  r2s-plague_onset-metropolis-3).
 
 ## How the instruments are re-made
 
