@@ -1,0 +1,6 @@
+{"id":"C22923","town":"bar0-city-under_siege+famine-rand-20","sev":"LOW","kind":"STATE","why":"Vintner row lists Table wine/Wine wholesale with no short mark; LAND gaps say Vintner lacks access to grapes (Potter, Brickmaker, Smelter rows carry the mark)","other":""}
+{"id":"C23130","town":"bar0-city-under_siege+famine-rand-20","sev":"LOW","kind":"STATE","why":"'No overlord above it, no charter granted from outside' beside FOUNDING 'by royal decree'; a decree is a charter from a crown","other":""}
+{"id":"C24498","town":"bar0-city-under_siege+famine-rand-20","sev":"LOW","kind":"PAIR","why":"Auctioneer's secret has grain shipments arriving by a covert route; siege cuts every road and gate, and no food comes in by trade","other":"C23627"}
+{"id":"C24562","town":"bar0-city-under_siege+famine-rand-20","sev":"LOW","kind":"STATE","why":"Secret about 'goods they sell as locally produced' is on Koharu Ito, the chief magistrate of the courthouses, who sells no goods","other":""}
+{"id":"C23631","town":"bar0-city-under_siege+famine-rand-20","sev":"LOW","kind":"STATE","why":"'Most meals start from salted fish' but FOOD ledger: 11% grown, 36% by magic, 0 brought in; fish market and fresh fish retail are stopped","other":"C23034"}
+{"id":"DONE","lines":2713,"blocks":1,"flags":5}
