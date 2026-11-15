@@ -42,6 +42,7 @@ import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { chooseOrPin, getStepMeta, getStepOrder, runPipeline } from '../../src/generators/pipeline.js';
 import { drawTies } from '../../src/generators/people/ties.js';
+import { OTHER_CARD_PREFIX } from '../../src/generators/people/mintTitles.js';
 import { resolveConfigWithUserContentTunables } from '../../src/domain/content/userContentTunables.js';
 import { pinsFrom, rederive } from '../../src/domain/edit/dmLayer.js';
 import { declarationsFor, isEditableCard } from '../../src/domain/edit/fieldDeclarations.js';
@@ -424,7 +425,18 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
     for (const key of CHOOSER_KEYS) {
       expect(ctx[key], `${key} is produced unpinned`).toBeDefined();
     }
-    expect(ctx.settlement.npcs.length, 'npcs reaches the settlement').toBe(ctx.npcs.length);
+    // RE-KEYED BY IDENTITY 2026-11-15, THE CHAIR'S RULING PM2 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on
+    // the owner's list): the record carries 28 cards to the context's 27: every id of the step's cast reaches the record, and the
+    // one card beyond it is a power's minted face (npc_power_landed_gentry, `castPowers.js`, given after the step to a seat of
+    // power with no face: the powers' follow-up lane's declared move, JOIN-1 point 4). The guard stays: the population key reaches
+    // the record at the count the context carries, and a card beyond the step's cast that is not a power's mint reds.
+    const castIds = new Set(ctx.npcs.map((npc) => npc.id));
+    const recordIds = new Set(ctx.settlement.npcs.map((npc) => npc.id));
+    expect([...castIds].filter((id) => !recordIds.has(id)), 'every card of the step\'s cast reaches the settlement').toEqual([]);
+    const later = ctx.settlement.npcs.filter((npc) => !castIds.has(npc.id));
+    expect(ctx.settlement.npcs.length - later.length, 'npcs reaches the settlement').toBe(ctx.npcs.length);
+    expect(later.filter((npc) => !String(npc.id).startsWith(OTHER_CARD_PREFIX)).map((npc) => npc.id),
+      'a card beyond the step\'s cast that is not a power\'s minted face').toEqual([]);
     // PEOPLE-4 TIES (R-P7): the step provides `[]` under the `relationships` chooser; the ties are drawn at
     // the coherence seam over the final cast, so the record carries them and the context does not.
     expect(ctx.relationships).toEqual([]);
