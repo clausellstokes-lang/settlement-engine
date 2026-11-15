@@ -51,7 +51,11 @@ describe('the goods pills print only where the record bears them out (item 2)', 
 
   test('books by Glassmakers alone are not exported; the glass is; spices from distant lands pass through as transit (rww-city-famine-1)', () => {
     const town = birthApp('rww-city-famine-1');
-    expect(town.economicState.primaryExports, 'anchored: the record exports both').toEqual(expect.arrayContaining(['Glassware', 'Books and manuscripts', 'Rare spices and exotic dyes']));
+    // Re-keyed by identity (TAIL-DEFECON-C-2, C1-E, the chair's D18): the record exported both, and since C1-E it exports
+    // the books no more (no scribe, printer, library, monastery, sage or wizard works them); the glass and the spices it
+    // still exports, so the pills below still read the record's own list.
+    expect(town.economicState.primaryExports, 'anchored: the record exports the glass and the spices').toEqual(expect.arrayContaining(['Glassware', 'Rare spices and exotic dyes']));
+    expect(town.economicState.primaryExports, 'C1-E: the record no longer exports the books').not.toContain('Books and manuscripts');
     expect(roster(town).some((n) => /print|scriptor|librar|bookbind/i.test(n)), 'anchored: no house makes books').toBe(false);
     const exports = pillsUnder(town, 'Exports');
     expect(exports).toContain('Glassware');

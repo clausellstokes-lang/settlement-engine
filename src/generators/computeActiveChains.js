@@ -644,12 +644,50 @@ const MADE_HERE_KEYWORD_WIDENING = {
   'tannery':    ['tannery', 'tanner'],
   'blacksmith': ['blacksmith', 'smith'],
 };
-// Two outputs a house works without digging or tanning (the D7 reading): a cobbler works bought leather into boots; a
-// jeweller or a metalworker works bought gold and silver. (Raw gemstones stay the mine's; milled lumber the sawmill's.)
-const MADE_HERE_OUTPUT_HOUSES = {
-  'Boots and shoes': ['tannery', 'tanner', 'cobbler'],
-  'Precious metals': ['mine', 'smelter', 'jewel', 'metalworker'],
-};
+// ONE TABLE OF GOOD TO THE HOUSES THAT DIG, MAKE OR WORK IT (TAIL-DEFECON-C-2, C1-E: the chair's ruling D18,
+// 2026-11-15), keywords read id-first through `institutionMatchesGate` on the town's own houses (never an "Access to
+// …" row: another town's house works nothing here). Read by the made list for a chain output the export gates below
+// (CHAIN_OUTPUT_INST_GATES), and by ALL THREE export steps of `deriveExportsFromChains`: a good leaves the town only
+// where a house of THIS town works it. A good not named keeps the other gates alone. Coal and peat are not named:
+// ungated by design (the extraction table's comment above).
+const GOOD_WORKING_HOUSES = Object.freeze({
+  // The made list's two worked goods (C1-A, D7): a cobbler works bought leather into boots; a jeweller or a
+  // metalworker works bought gold and silver. (Raw gemstones stay the mine's; milled lumber the sawmill's.)
+  'Boots and shoes':            ['tannery', 'tanner', 'cobbler'],
+  'Precious metals':            ['mine', 'smelter', 'jewel', 'metalworker'],
+  // The export side (C1-E). A toll is taken by a toll bridge, a customs house or a gate; the defended pass's toll is
+  // the pass's own (the chair, 2026-11-15: the pass is its house), so that resource's goods are not asked.
+  'Toll revenue':               ['toll', 'customs', 'gate', 'bridge'],
+  'Toll income':                ['toll', 'customs', 'gate', 'bridge'],
+  'Sea salt':                   ['salt'],
+  'Pilgrim hospitality':        ['inn', 'tavern', 'alehouse', 'ale house', 'bath', 'waystation', 'caravanserai'],
+  'Hospitality for travellers': ['inn', 'tavern', 'alehouse', 'ale house', 'bath', 'waystation', 'caravanserai'],
+  'Glass blanks':               ['glass'],
+  'Glassware':                  ['glass'],
+  'Barrels and containers':     ['cooper'],
+  'Advanced weapons and armor': ['smith', 'metalwork'],
+  'Quality tools and weapons':  ['smith', 'metalwork'],
+  'Bows and crossbows':         ['bowyer'],
+  'Arrows (sheaf)':             ['bowyer'],
+  'Dyed cloth':                 ['dyer'],
+  'Flour and meal':             ['mill', 'baker'],
+  'River craft':                ['shipyard', 'boatyard'],
+  'Ship construction':          ['shipyard', 'boatyard'],
+  'Ocean-going vessels':        ['shipyard'],
+  'River barges':               ['shipyard', 'boatyard'],
+  'Books and manuscripts':      ['scribe', 'printing', 'librar', 'monaster', "sage's", 'chronicler', 'wizard'],
+  'Fine metalwork and jewelry': ['jewel', 'metalwork', 'luxury goods'],
+  'Fine textiles':              ['weaver', 'textile', 'tailor'],
+  'Camel leather':              ['tann'],
+});
+/**
+ * A good is worked here where a house of this town that the table names for it stands (or the table names none).
+ * @param {string} good @param {ReadonlyArray<any>} housed the town's houses, its fabric ("Access to …") left out
+ */
+function goodWorkedHere(good, housed) {
+  const kws = GOOD_WORKING_HOUSES[good];
+  return !kws || kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
+}
 
 // Institution gates for chain-derived output goods.
 // Even if a chain is active, some of its outputs are byproducts that require
@@ -736,6 +774,8 @@ export function deriveExportsFromChains(
   // special case — preserved as the fallback for unstamped institutions
   // (A+ generators.6). id-match === name-predicate by construction → golden-stable.
   const _hasInstForGate = (keyword) => institutions.some(i => institutionMatchesGate(i, keyword));
+  // C1-E (D18): the houses that work a good, the town's own (GOOD_WORKING_HOUSES).
+  const housedHere = (institutions || []).filter(i => i && !isFabricInstitution(i));
 
   nearbyResources.forEach(rk => {
     if (depletedKeys.has(rk)) return; // depleted: no surplus to export
@@ -754,6 +794,7 @@ export function deriveExportsFromChains(
       const requiredInst = gatesForResource[g];
       if (requiredInst && !_hasInstForGate(requiredInst)) return; // institution not present
       if (refusedOnly.has(g.toLowerCase())) return; // the card says the chain does not yield it now
+      if (rk !== 'defended_pass' && !goodWorkedHere(g, housedHere)) return; // C1-E: no house here works it (the pass is its toll's house)
       exports.add(g);
     });
   });
@@ -769,13 +810,18 @@ export function deriveExportsFromChains(
         const kws = Array.isArray(requiredInst) ? requiredInst : [requiredInst];
         if (!kws.some(kw => _hasInstForGate(kw))) return;
       }
+      if (!goodWorkedHere(o, housedHere)) return; // C1-E: no house here works it
       exports.add(o);
     }));
 
   // 3. Entrepôt transit goods — flagged distinctively (COHERENCE-AGREE-6, F2: a chain the leaf refuses sends none)
   activeChains
     .filter(c => c.entrepot && !chainYieldRefused(c, isDepletedResource))
-    .forEach(chain => goodsHeldByFoodRecord(chain.outputs, foodRecord).slice(0, 1).forEach(o => exports.add(`${o} (transit)`)));
+    .forEach(chain => goodsHeldByFoodRecord(chain.outputs, foodRecord).slice(0, 1).forEach(o => {
+      // C1-E: a transit good passes through untouched; a toll on it is earned, and only where a house takes it.
+      if (/^toll /i.test(o) && !goodWorkedHere(o, housedHere)) return;
+      exports.add(`${o} (transit)`);
+    }));
 
   // Apply stress: siege collapses exports, occupation taxes them
   let list = [...exports];
@@ -934,7 +980,7 @@ export function deriveLocalProductionFromChains(
   const outputMadeHere = (good) => {
     const gate = housed && CHAIN_OUTPUT_INST_GATES[good];
     if (!gate) return true;
-    const kws = MADE_HERE_OUTPUT_HOUSES[good]
+    const kws = GOOD_WORKING_HOUSES[good]
       || (Array.isArray(gate) ? gate : [gate]).flatMap(kw => MADE_HERE_KEYWORD_WIDENING[kw] || [kw]);
     return kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
   };
