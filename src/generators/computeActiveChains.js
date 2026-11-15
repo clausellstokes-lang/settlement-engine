@@ -1099,6 +1099,11 @@ const INSTITUTIONAL_SERVICE_MAP = [
  * @param {Array} institutions  - settlement.institutions array
  * @returns {Array} serviceEntries
  */
+// D19: the houses that work water, beside which a dock is a water dock (the harbour master's office is the docks' own
+// office, seated with them by the airship override, so it proves no water); and the air dock's twin of the service.
+const WATER_WORKING_HOUSES = ['ferry', 'barge', 'shipyard', 'boatyard', 'fisher', 'fishing'];
+const AIRSHIP_FREIGHT_OUTPUT = 'Airship freight services';
+const AIRSHIP_FREIGHT_EXPORT = 'Airship freight services (cargo, mooring)';
 export function deriveInstitutionalServices(institutions = []) {
   const services = [];
   const usedLabels = new Set();
@@ -1118,16 +1123,23 @@ export function deriveInstitutionalServices(institutions = []) {
     const maritime = def.waterborne === true && matched.some(name => (
       /\b(?:major port|navy|shipyard)\b/i.test(name)
     ));
+    // TAIL-DEFECON-C-2 (D19, the chair's ruling, 2026-11-15): AN AIR DOCK'S DOCKS. Where an airship dock stands and no
+    // house of the town works water but the docks and the harbour master (the AIRSHIP OVERRIDE of
+    // `steps/cascadePass.js` seats those for the air dock whatever the route), the docks are the air dock's, and the
+    // service is named for the air. On the census's 720 that state is exactly the 11 towns with no water.
+    const airborne = def.waterborne === true && !maritime
+      && institutions.some(i => institutionMatchesKeyword(i, 'airship docking'))
+      && !institutions.some(i => WATER_WORKING_HOUSES.some(p => institutionMatchesKeyword(i, p)));
 
     services.push({
       type: 'institutional_service',
       label: def.incomeLabel,
       icon: def.icon,
       color: def.color,
-      output: maritime ? 'Port & maritime services' : def.output,
+      output: maritime ? 'Port & maritime services' : airborne ? AIRSHIP_FREIGHT_OUTPUT : def.output,
       exportLabel: maritime
         ? 'Maritime services (cargo, pilotage)'
-        : def.exportLabel,
+        : airborne ? AIRSHIP_FREIGHT_EXPORT : def.exportLabel,
       exportable: def.exportable,
       institutions: matched.slice(0, 2),
       status: 'operational', // services don't impair unless institution itself is gone
@@ -1158,5 +1170,6 @@ import { chainYieldRefused, goodsOnlyRefusedChainsMake } from '../domain/chainYi
  */
 export function serviceGoodOfExportLabel(label) {
   if (label === 'Maritime services (cargo, pilotage)') return 'Port & maritime services';
+  if (label === AIRSHIP_FREIGHT_EXPORT) return AIRSHIP_FREIGHT_OUTPUT; // D19
   return INSTITUTIONAL_SERVICE_MAP.find((d) => d.exportLabel === label)?.output ?? null;
 }

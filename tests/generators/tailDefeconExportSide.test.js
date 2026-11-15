@@ -92,3 +92,36 @@ describe('C1-E: a good is exported only where a house that digs, makes or works 
     expect(exportsOf('r2r-city-31')).toContain('Coal');
   }, 60000);
 });
+
+/**
+ * (D19, the chair's ruling, 2026-11-15) AN AIR DOCK'S DOCKS: where an airship dock stands and no house works water but
+ * the docks and the harbour master (the airship override seats those whatever the route), the service is the air's:
+ * "Airship freight services (cargo, mooring)" in place of "Waterborne freight services (cargo, pilotage)". Each AIR row
+ * was red at a10a457e2; each WATER row (a river or a sea beside the airship dock) keeps the water's word.
+ */
+const WATERBORNE = 'Waterborne freight services (cargo, pilotage)';
+const AIRSHIP = 'Airship freight services (cargo, mooring)';
+const AIR = ['r2r-metropolis-9', 'r2r-metropolis-44', 'r2s-occupied-metropolis-0'];
+/** (seed, the water house beside the airship dock, the service's export) */
+const WATER = [
+  ['r2s-indebted-metropolis-1', 'Barge and river transport company', WATERBORNE],
+  ['r2s-mass_migration-metropolis-2', 'River boatyard', WATERBORNE],
+  ['r2r-metropolis-21', 'Shipyard', 'Maritime services (cargo, pilotage)'],
+];
+
+describe('D19: the docks of an air dock are not waterborne', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+
+  test.each(AIR)('%s exports the airship freight service, not the waterborne one', (seed) => {
+    expect(housesOf(seed), 'anchored: the airship dock').toContain('Airship docking (high magic)');
+    expect(exportsOf(seed)).toContain(AIRSHIP);
+    expect(exportsOf(seed)).not.toContain(WATERBORNE);
+  }, 60000);
+
+  test.each(WATER)('%s, an airship dock beside a %s, keeps %s', (seed, house, service) => {
+    expect(housesOf(seed), 'anchored: the airship dock').toContain('Airship docking (high magic)');
+    expect(housesOf(seed), 'anchored: the water house').toContain(house);
+    expect(exportsOf(seed)).toContain(service);
+    expect(exportsOf(seed)).not.toContain(AIRSHIP);
+  }, 60000);
+});
