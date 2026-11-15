@@ -401,3 +401,141 @@ list through a helper and writes no list; green).
    `source` and `desc` alike: neither is this group's to change. At this seat's merged tree (eb054d53f) it still
    printed; the rename to "Harvest" where no landlord stands is the seat that holds `economicState.js` (generators:
    a declared move of the record). The PDF needs no change of its own when it lands: it prints the record's name.
+
+# TAIL-EXPORTS-PDF-3 · the third seat's batch (kept current after every batch)
+
+Seat: TAIL-EXPORTS-PDF-3, the successor of TAIL-EXPORTS-PDF-2, on the same branch, continued from its tip 10c414e9b
+(read back from origin 2026-11-15 02:20 UTC). Batches 1 and 2 above are the predecessors' and were not redone.
+
+## The chair's rulings since (2026-11-15 02:15 UTC; each vetoable by the owner)
+
+- **E20** NO VETO on batch 2's two silences (the EXPORT badge by the tab's printed name; "Thieves' Guild (Powerful)"
+  45 towns to none).
+- **E21** ENTREPÔT (08499; 148 printings): THE EXPORT PRINTS WHAT THE TAB PRINTS, THROUGH THE TAB'S OWN LEAF: the PDF's
+  tag stands where a chain on the page is an entrepôt, as the Economics tab's flows say it. The silence of the 41
+  thorps, hamlets and villages whose record flags `isEntrepot` with no entrepôt chain is ACCEPTED IN ADVANCE; the
+  record's flag is NAMED for the record's next measure.
+- **E22** THE ELEVEN PARKED ROWS: through the leaf (`rowStoppedBy` and its second cause), as the tab prints them.
+- **E23** TWO HEADINGS OVER THE ORIGIN LINE (the narrative seat's batch 3 re-said the origin rows: the origin says WHERE,
+  not WHY): the PDF's "Reason settled:" and the journal's "Why this place exists" take the heading the TAB prints over
+  the same line. The journal's one heading under `src/foundry/` is LENT to this seat for this.
+- THEN 01055, 17282, 29786, 31610, 01241 only if each prints in five towns or more at the tip; else NAMED as left.
+
+## The merge (the chair's first act)
+
+36eaba1af `merge(TAIL-EXPORTS-PDF-3): the joined line at d817736d8`: clean, no conflict; the lockfile did not move (one
+`npm ci` in the scratch tree). THE BEFORE at 36eaba1af: census 720 towns, 0 birth errors; exports' inventory 36,213
+distinct PDF/Journal sentences; the tabs' inventory 30,125.
+
+## Batch 3 — E22 (the leaf's second cause on the PDF's rows), E21 (ENTREPÔT by the page's chains), E23 (the origin heading)
+
+Writers: `src/pdf/lib/crisisMarksOnPage.js` (the PDF's reader over the tabs' leaf, now with the leaf's second cause:
+`rowShortOf`, `shortMarkText`, `SHORT_WORD`; it keeps no word of its own), `src/pdf/lib/viewModelBodySlices.js`
+(`isEntrepot`), a NEW leaf `src/domain/display/entrepotShown.js` (`entrepotChainCount`, `pageSaysEntrepot`: the tab's
+chip "Entrepôt (N)" composed inline in `EconomicsTab.jsx :: EconomicFlowsSection`, now one reader), `src/pdf/sections/
+Overview.jsx` (the label), `src/foundry/journalPages.js` (the heading, lent by E23). Display only: no record moves.
+
+THE CURES:
+- **E22**: a house, its service rows (with a description) and its pills (no description) print the leaf's second cause
+  where the page itself says no input reaches that house (the Resources tab's gap line): "Short of timber. A collier's
+  kilns …" (PDF Institutions, the house), "Charcoal supply: Short of timber. Produce and sell …" (PDF Institutions, a
+  service row), "Charcoal supply (short)" (PDF Services, a pill; "stopped, short" where both causes stand, as the
+  Institutions tab's doors print it); each chapter whose rows carry such a mark prints the leaf's head sentence once
+  ("A row marked short is what its house makes when supplied.", `ordinaryTimesLine(crises, shortMarked)`), calm town or
+  not. A chain card and an income share take no second cause: the leaf gives none, and the tabs' chain cards print none.
+- **E21**: the Economics & Trade chapter's ENTREPÔT tag stands where a chain of the record's `activeChains` is flagged
+  `entrepot` (the tab's chip), not on the record's town-wide `isEntrepot`.
+- **E23**: "Reason settled: <line>" -> "Settlement Origin: <line>" (PDF Overview, under the owner-kept CHARACTER &
+  ORIGIN band); "## Why this place exists" -> "## Settlement Origin" (Foundry journal, Overview page). "Settlement
+  Origin" is the Overview tab's Section title over the same line (`OverviewTab.jsx`, a literal: no leaf holds it, so no
+  leaf was made for one heading). SET AGAINST THE REWORDED ROWS BY READING THE DIFF of lane/tail-narrative-2026-11-14 at
+  b6a0c074c (`settlementOriginProse.js`, `narrativeText.js`: every reworded row says where the place stands or how it
+  trades, none why it was founded), NOT by a census of that branch: it is not merged here.
+
+Guard: `tests/pdf/tailExportsPdf3Batch3.test.jsx` (births of the census's own seeds; 8 NOT pairs each naming what prints
+instead, or null for the accepted ENTREPÔT silence; 1 NOW; 3 KEEP; 2 UNSHORT: a town the page says is short of nothing
+prints no short mark). At the merged base 36eaba1af: the 8 NOT and the NOW red, KEEP and UNSHORT green; at the tip: 14
+green.
+
+### Cured (towns printing, before -> after, by the exports' inventory diff; the measure is where the row was false)
+
+| id | sentence | before -> after | measure | the cure |
+|---|---|---|---|---|
+| 08499 | ENTREPÔT (PDF Economics & Trade) | 148 -> 320 (41 gone, 213 gained) | 41: the record flags `isEntrepot` with no entrepôt chain (16 thorps, 14 hamlets, 11 villages; the town read, r2s-under_siege-thorp-0, among them) | the tag where the tab's chip prints (E21) |
+| (E22) the houses short of their input | Potter, Brickmaker (clay), Charcoal burner, Sawmill (timber), Dairy farmer, Tannery (livestock), Salt works (salt), and Fishmonger, Smelter, Apothecary, Alchemist shop, Caravanserai | e.g. "Pottery and ceramics: Plates, jugs, storage crocks." 269 -> 97 and "Pottery and ceramics: Short of clay." 0 -> 172; "Charcoal supply" 153 -> 123 and "(short)" 0 -> 30; "Short of clay." 193, "Short of timber." 37, "Short of livestock." 36, "Short of salt." 25 | where the page's own gap line says no input reaches the house: the PDF's marks are the tabs' in exactly the same towns (Short of clay 193/193, timber 37/37, livestock 36/36, salt 25/25; the head sentence 270/270) | the leaf's second cause (E22) |
+| (E23) | Reason settled: … / Why this place exists | 720 -> 0 each | the origin line says where, not why (the narrative seat's N6) | the tab's heading |
+
+### Struck, or named (the eleven parked rows and the five narrow ones; one line each)
+
+- 06926, 06925, 06924, 06927, 14345 (the charcoal burner's chain card), 17048 (Mill + Sawmill), 23255 (Salt works »
+  Preserved foods), 06946 (Coastal timber » River ferry): CHAIN CARDS of the PDF's Services chapter. The leaf's second
+  cause is for a house and its service rows only (`rowShortOf(kind: 'service' | 'house')`), and the tabs' chain cards
+  print no short mark; the PDF now prints them as the tab does, and the house and its rows beside them carry the mark
+  where the page says the house is short (r2r-metropolis-24: "Short of timber." on the Charcoal burner and "Charcoal
+  supply (short)"). In the town the reader read (r2s-religious_conversion-hamlet-2) the page says no input is short at
+  all. Still printing 44, 17, 2, 2, 13, 3, 36, 2: NAMED for TAIL-SERVICES (a chain's second cause, if the leaf takes one).
+- 10827 "Game meat: Venison, boar, rabbit." (35): the page says nothing of the Hunter's lodge's input (no gap line); the
+  reader read the record's Furs & Pelts chain gap; the Services tab prints it unmarked in the same towns. Struck: the tab's
+  twin.
+- 11208 Glassblower (13), 29819 Vintner (1): the leaf does not mark them by the chair's ruling S7
+  (`INPUT_GAP_HELD_EVERYWHERE`: the gap stands in 13 of 13 and 184 of 184 towns that hold the house: the record's fault,
+  not the town's state); the tabs print them unmarked. Struck here; NAMED for the record (the gap held everywhere).
+- 01055 "<N> Trade" (3 towns), 31610 (3), 17282 (4), 01241 (1), 29786 (1): each prints in fewer than five towns at the
+  tip: NAMED as left (the chair's rule); the PDF's worklist is done.
+- 04297 "Agricultural Rents" (REST): STRUCK AS NAMED (the chair, 2026-11-15 02:15 UTC): the PDF prints the record's
+  income source; its name is cured at the source by the seat that holds `economicState.js` ("Harvest"). No PDF change.
+
+### Every new or changed line (the owner's veto list)
+
+| line (surface) | towns | read in (smallest · largest · a crisis) |
+|---|---|---|
+| "A row marked short is what its house makes when supplied." (PDF Institutions, Services; the tabs' leaf, `SUPPLIED_LINE`) | 270 | r2r-hamlet-12 · r2r-metropolis-24 · r2s-occupied-city-2 |
+| the leaf's "Short of <input>." before a house's or a service row's description (PDF Institutions) | clay 193, timber 37, livestock 36, salt 25 | r2r-hamlet-12 · r2r-metropolis-24 · r2s-famine-town-1 |
+| the leaf's word after a pill's name ("Pottery and ceramics (short)", "Fresh milk (short)") (PDF Services) | e.g. 172, 36 | r2r-hamlet-12 · r2r-city-1 · r2s-occupied-town-1 |
+| ENTREPÔT where a chain on the page is an entrepôt (PDF Economics & Trade): 213 towns gain it, 41 lose it | 320 | r2r-thorp-1 (gains: a smuggling entrepôt chain; the tab says "Entrepôt (1)") · r2r-metropolis-24 · r2s-under_siege-thorp-0 (loses) |
+| "Settlement Origin: <the origin line>" (PDF Overview) | 720 | r2r-thorp-0 · r2r-city-0 · r2s-under_siege-thorp-0 |
+| "## Settlement Origin" (Foundry journal, Overview) | 720 | the same |
+
+### Lines this batch silenced in other towns (explained)
+
+Read whole in the exports' inventory diff (36,213 -> 36,268 sentences; 37 gone, 92 new, 32 fewer, 1 moved):
+- GONE: "Why this place exists" (720) and the "Reason settled: …" lines (each its "Settlement Origin: …" twin, the same
+  towns); "Salted fish: Salt-cured fish." 4 -> 0 (the Salt works' rows, now "Short of salt." before the same line).
+- FEWER (32): every one a house's or a service's row that now prints with the leaf's mark (the inventory reads "Pottery
+  and ceramics: Short of clay." and "Plates, jugs, storage crocks." as two sentences): Pottery and ceramics, Fired brick,
+  Roof tiles (clay); Charcoal supply, Lumber milling (timber); Fresh milk, Cheese, Butter, Tanned leather, Rawhide
+  (livestock); Salt production, Salted fish (salt); Herbal remedies, Compound medicines, Potion brewing, Iron refining
+  (the apothecary's, the alchemist's and the smelter's inputs). Nothing went silent.
+- ENTREPÔT: the 41 small towns (accepted, E21).
+- THE INHERITORS (93): the headings, the leaf's marks and head sentence, the descriptions split from their marks, and
+  ENTREPÔT in 213 towns (each where the Economics tab prints "Entrepôt (N)"): read.
+
+THE TABS' INVENTORY (before -> after, this seat's last batch): 30,125 -> 30,125; 0 gone, 0 new, 0 fewer, 0 more. No tab
+sentence moved.
+
+### Gates at this tip
+
+Domain strict 1113 / ceiling 1113; type ratchet 167 / ceiling 167; eslint clean on the touched files. The presumed-things
+walker (`--check`): fresh 145 · stale 2, identical at the base and the tip (red at both, carried). The twelve-birth grid:
+2 falls (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a), the same as batch 2's. The 95 test files naming the touched
+files (and the new guard): 12 tests fail at the tip and the SAME 12 at the base 36eaba1af, in five files
+(`houseLabelEverySurface`, `journalMarksCrisisRows`, `coherenceAgreeCures`, `observedShapeReaders.walker`,
+`goldenViewModel`, whose failure output is identical at both): carried from the joined line, not this batch's.
+
+## Rows named for other groups (batch 3)
+
+- TAIL-SERVICES (the leaf): a chain card whose house the page says is short (the eight chain rows above) takes no second
+  cause on any surface; whether a chain takes one is the leaf's call.
+- THE RECORD (its next measure): `economicState.isEntrepot` stands on 41 thorps, hamlets and villages working no
+  entrepôt chain and is absent from 213 towns that work one (64 cities, 68 metropolises, 45 towns): no surface reads it
+  now but `generalDeskRead.js`, the world pulse's `urbanFabricKernel.js` and the dossier-state prose's ladders. The gap
+  held everywhere for the Glassblower and the Vintner (S7).
+- THE ECONOMICS TAB'S GROUP: `EconomicsTab.jsx :: EconomicFlowsSection` counts its chip inline: its switch to
+  `entrepotShown.js :: entrepotChainCount`. THE OVERVIEW TAB'S GROUP: the heading "Settlement Origin" is a literal in
+  `OverviewTab.jsx`; a leaf for it, if one is wanted, is theirs.
+
+## What is left of the worklist (after batch 3)
+
+- THE PDF'S WORKLIST IS DONE by the chair's rule: 01055 (3 towns), 31610 (3), 17282 (4), 01241 (1), 29786 (1) print in
+  fewer than five towns at the tip and are NAMED as left; the eight chain rows wait on the leaf (TAIL-SERVICES).
+- No register is left stale by this batch (no pin or baseline names the touched lines).
