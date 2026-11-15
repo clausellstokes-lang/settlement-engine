@@ -176,3 +176,54 @@ Every file, with its class and evidence; for (d), the `src/` module the test imp
 The (d) rows above in two groups. **Named breaks**: the first-paint break (tail-ties); the crisis-cast collection crash `Cannot read properties of undefined (reading 'face')` (4 files, one cause); probe tests committed under `docs/chair/2026-11-14/probes/POWERS-16/` that vitest collects (2 files: the POWERS-16 seat); walker inventories that GREW: un-anchored negatives +68, bare seed loops +17, defence-fact readers 12 → 15, legacy faction readers +3, raw colours +3, the any-cast debt. A grown walker is a new violation: it is not re-frozen mechanically. **Behaviour reds** (the domain/display/defense/data rows): each is a sentence test that no declared move names. Some may be keyed rows a declared move re-drew; that split is part 4's work, file by file.
 
 Environment note: to let the two (e) env files run, the local ref `refs/heads/review-fixes-2026-07-08` was created in the shared repository by fetch. Left in place in the main checkout `/home/user/settlement-engine`, by the chair's ruling: an untracked symlink `node_modules -> /home/user/cmwt/node_modules`, made so the git hooks could run there for the part 1 commit. It is not committed.
+
+## 4. The rehearsal of the mechanical doors (part 3)
+
+Run at the line's later tip **`a7209f9037a38ef4c6feb1eb0e26c9255c0f47e3`** (JOIN-8 · 5's hand-back), in a plain clone with its own `.git` and its own `npm ci` (`/home/user/cmclose`, per the chair's ruling). Nothing committed. The doors, in order: [`probes/CLOSE-MEASURE-1/close.sh`](probes/CLOSE-MEASURE-1/close.sh) (`close.sh` runs 1-6; `close.sh --refreeze` runs 7-8 on a clean tree after 1-6 are committed; `--rehearse` runs 7-8 first, for a seat that commits nothing).
+
+| # | door | command | result | seconds |
+|---|---|---|---|---|
+| 1 | edge bundles (c) | `npm run build:edge-shared` | **exit 0**: 10 bundle files re-written (aiCharter, aiGrounding, aiOutputSchema, analyticsEvents meta, engineBundle, intentAtlas meta) | 1 |
+| 2 | wiring census (a) | `node scripts/wiring-census.mjs` | **CRASHES**: `ReferenceError: Cannot access 'CAST_REASONS' before initialization` at `src/domain/crisis/crisisHooks.js:102` (a REAL BREAK, below) | 1 |
+| 3 | writer reach (a) | `node scripts/check-writer-reach.mjs --write` | not reached (close.sh stops at the first failure) | |
+| 4 | presumed things (a) | `node scripts/presumed-things-door.mjs --shrink` | not reached | |
+| 5 | page census (a) | `node scripts/census/page-census.mjs --shrink` | not reached | |
+| 6 | pool dominance (a) | `node scripts/census/pool-dominance.mjs --bank-new` (a door by the chair's ruling of 2026-11-12) | not reached | |
+| 7 | tuning inventory (a) | `TUNING_INVENTORY_REFREEZE=<seat> TUNING_INVENTORY_NOTE=<why>`, then vitest on `tests/lint/tuningRegister.walker.test.js` | **REFUSED [POPULATION_GREW]**: unregistered tuning values in `src/domain/display/shadowEconomyShown.js` (0 → 1; JOIN-7 · 13, tail-exports-pdf) and `src/generators/economy/prosperity.js` (0 → 1; JOIN-7 · 25, tail-defecon). Moved to (d) | 12 |
+| 8 | lighting census (a), last | `LIGHTING_CENSUS_REFREEZE=<seat> LIGHTING_CENSUS_NOTE=<why>`, then vitest on `tests/lint/sovereigntyLightingContract.walker.test.js` | the census **re-took** (9 lines of the register). Its verification run is **still red**: the `each`/`for` park debt, a shrink-only ceiling, ROSE (files named include `displayEcon*.test.jsx` of tail-display-econ, `resourcesCatalogueLabel`, `cultureProfiles`, `customContentAdmission`). Moved to (d) | 17 |
+
+**So the mechanical refreeze is NOT mechanical today.** Three of its doors stand behind real breaks: 2 (the crash), 7 (tuning growth) and 8 (the park ceiling). A CLOSE seat cannot run `close.sh` to the end until those three are cured in `src/` and `tests/`. **The whole check after the rehearsal was not completed inside this seat's count.** A run of the 17 steps on the tree with doors 1 and 8 applied was started at 05:11 UTC into `/home/user/cmout/r3/` in this container; its first three heavy steps are green (`typecheck:ratchet` 38 s, `typecheck:domain:strict` 30 s, `lint` 147 s).
+
+### The real breaks found by the rehearsal (add them to part 2's (d))
+
+- **The crisis-cast cycle.** `src/domain/crisis/crisisHooks.js` reads `CAST_REASONS.face` at module top level (line 101 at d817736d8, 102 at a7209f9), from `src/domain/crisis/crisisCast.js:148`. When `crisisCast.js` is reached through an import cycle, the read hits TDZ (a7209f9) or `undefined` (d817736d8). The same cause gives part 2's four `undefined.face` collection crashes (`crisisCast`, `crisisCastDefenceHome`, `crisisCastEdit`, `people/dualHatReaders`), the wiring-census door's crash and, PLAUSIBLY, `layerBoundaries`' new cycle. The line came in with r2-code-b (JOIN-4 · 1, `9618e0319`; JOIN-5 · P2, `e6233009b`); JOIN-7 · 19 (tail-crisis, `420e8fd09`) moved it last. The cure: hoist the set into a function, or break the cycle, in the files of r2-code-b / tail-crisis.
+- **Tuning growth**: the two files above (tail-exports-pdf, tail-defecon): register the values through the tuning door's DECLARED_GROWTH row, or route them through existing tuning.
+- **The `each`/`for` park ceiling**: the new test files that park on `each` (tail-display-econ's first). The cure is a plain parameterless loop in each test (the walker's own text).
+
+## 5. THE OWNER'S LIST (class b: never re-taken by a seat)
+
+Every golden and pin moved, with the declared move that moved it. Commits are from JOIN-6's §4 [J6] (the merges are on the joined line); "rows" is from the failure message at d817736d8:
+
+| golden / pin | rows moved | declared moves |
+|---|---|---|
+| `tests/property/generatorGoldenMaster.test.js` | 525 of 525 | 1409e3cbb (crisis: stressors summary, 66 records), a2550c0ef (houses: institutions[].desc), e0d38e6c4 (ties: relationships[].tension, 358 towns), 97685dc01 (ties: npcs[].plotHooks[], 194 towns), 9bd853fd0 (narrative: founding.reason, 154 towns), 12d8fd0a9 / 21dc7fa4b / d68805134 (powers: presentation; factions[].desc, 284 towns; headman's name, 38 towns), 6b8a9b993 / 10e1cf0ea / 358d6afea (defecon: safetyProfile 223 towns; localProduction 302 / 375 towns), plus JOIN-7's moves: their hand-backs name them, this seat did not read them |
+| `tests/property/dmLayerGoldenIsolation.test.js` | 525 | the same moves (its re-derivation IS the golden) |
+| `tests/property/espionageDormancyFence.test.js` (driven corpus, 360) | 360 | ties (e0d38e6c4, 97685dc01), powers (12d8fd0a9, 21dc7fa4b, d68805134) |
+| `tests/pdf/goldenViewModel.test.js` (pdf.6 snapshot), `tests/property/heraldKnowledgeDeskGolden.test.js` (desk hash) | 1 each | the same generator moves; JOIN-7's exports lanes (pdf 13, journal 14) |
+| generator pins: `pipelinePinnedMode`, `pipelinePinnedChoosers`, `nameHeldThroughAssembly`, `rosterFinalUnderHeldRoster`, `upkeepVocation` | 41 rows each | the same generator moves |
+| `x46NpcBand` (60 worlds), `institutionBudgetPromise` (60), `townCartographyCalibration` (25), `recordMerge` (61 → 50), `hookThemeDraws` (2107 → 2147 hooks: ties 97685dc01), `rosterDuplicateDraws` (853 → 889), `editCorpusRatchet` (332 → 327), `generationForkCensus`, `powerEconomyFreshness` (31 → 32), `dossierProseManifest`, `presetLightingWitness`, `intentAtlasSoakDistiller`, `mundaneRealmAcceptance`, `mergeLadderHeldKeys`, `corpusCureGuards` (12 rows to re-key) | as given | the same generator moves. These are PLAUSIBLE: each move is named from the message, not traced one by one |
+| prose pins: `proseComposed` and `proseWiringCensus` (2951 → 2953 variants), `proseEntryContradiction` (375 → 373), `proseFamilyContract` (scalarRows 37067 → 38161) | as given | the corpus lanes (corpus-eco 11, corpus-def 12) |
+| carried reds, not this line's moves: `worldFactRederive` A7, `urbanBandInstitutions` G3/G5, `coherenceAgreeCures` (ruling k) | | carried by JOIN-6 |
+
+## 6. The times
+
+At d817736d8, run 1: the 11 validators ≤ 1 s each; `typecheck:ratchet` 37 s; `typecheck:domain:strict` 30 s; `lint` 140 s; **`test:ratchet` 4,682 s (78 min)**; `build` 47 s; `verify:dist` 203 s. **The whole check: about 85 minutes.** The re-run of the 124 red files alone: about 45 min, behind the mutex. A first-parent bisect step (fresh build plus one build test): about 2 min. Doors: 1 s (bundles); 12 s and 17 s (the two refreezes, each with its verification run).
+
+## 7. WHAT A CLOSE SEAT MUST BE TOLD
+
+1. **The line is not one mechanical refreeze from green.** Cure first, in this order: (i) the crisis-cast cycle (it blocks a door and four suites); (ii) the first-paint break of tail-ties (`factsOf.js` → `rulingBody.js`; the shipped bundle does not boot); (iii) the tuning growth and the `each` park ceiling (they block doors 7 and 8); (iv) the grown walkers (negatives, seed loops, readers, raw colours, any-cast); (v) the POWERS-16 probe tests under `docs/` that vitest collects; (vi) the behaviour reds of part 2, file by file.
+2. Then `close.sh` (1-6), commit, `close.sh --refreeze` (7-8), commit the census bill. Then the whole check, and the owner's list (§5) to the owner's door. Never re-take a golden or a pin.
+3. Run the whole check in a plain clone with its own `.git`. Ensure the local ref `refs/heads/review-fixes-2026-07-08` exists (`git fetch origin review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08`), or two suites red for the environment. The ratchet's SCOPE SENTINEL stops it before its regression list. Read the failures from its JSON report (`/tmp/test-ratchet-*/results.json`), never through a pipe.
+4. The classification of part 2 is from first messages. Where a (d) row is a keyed row a declared move re-drew, it moves to (b): that split is the CLOSE seat's first measurement.
+
+Hand-back: at 221,000 of 250,000 of this seat's count. The pushes from `/home/user/cmclone` ran no hooks: a fresh clone has no `core.hookspath`. Docs only.
