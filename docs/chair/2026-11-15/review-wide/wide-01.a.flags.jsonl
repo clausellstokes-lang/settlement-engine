@@ -1,0 +1,5 @@
+{"id":"C0320","town":"bar0-city-under_siege+famine-rand-10","sev":"LOW","kind":"PAIR","why":"Butchers row offers 'Fresh meat' unmarked, yet the siege list names Butchers critically impaired; Bakers and Brewery rows carry famine marks","other":"C1455"}
+{"id":"C0500","town":"bar0-city-under_siege+famine-rand-10","sev":"LOW","kind":"PAIR","why":"Daily markets row offers 'Fresh produce', 'open every day' unmarked, yet the siege list names Daily markets critically impaired","other":"C1455"}
+{"id":"C0967","town":"bar0-city-under_siege+famine-rand-10","sev":"LOW","kind":"STATE","why":"says religious houses' take is 'a large part of the city's business'; INCOME gives Church Tithes 4% and Pilgrim Trade 2% against Smuggling 60%","other":""}
+{"id":"C1819","town":"bar0-city-under_siege+famine-rand-10","sev":"LOW","kind":"STATE","why":"master baker Minjung Lin sits only on Ecclesiastical Council (member, no rank), not War Council; 'authorised an illegal sortie' fits no office she holds","other":""}
+{"id":"DONE","lines":2395,"blocks":1,"flags":4}
