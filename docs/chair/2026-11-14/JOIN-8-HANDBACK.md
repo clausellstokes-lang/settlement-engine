@@ -58,6 +58,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 17 | tail-display-econ-2026-11-14 (re-sweep) | 1322e7d0a (04:24; its merge of the line at 5d1e3096b) | 7beec164d (2) | aa169b05e | none | — (no tree change) |
 | 18 | tail-corpus-def-2026-11-14 (re-sweep) | 7ccad225e (04:28; its merge of the line at d817736d8, C17) | 4e0936879 (7) | c095140d3 | none | — (docs only) |
 | 19 | tail-defecon-c-2026-11-14 (re-sweep) | 849bd8679 (04:32) | 4d6d95761 (9) | 3e482b329 | none | `resourceData.js` commodities lent (D32); DECLARED MOVES 0e838bc65 D33, 680d16b54 D34a, 849bd8679 D34b: golden carried |
+| 20 | tail-history-2026-11-14 (re-sweep) | abe0327eb (04:35) | d7921a40c (11) | 796c49ef0 | none | — (docs only) |
 
 ## 3. Every code resolution
 
