@@ -146,8 +146,12 @@ describe('W2-FIX-DATA-9: the census writers in the data lane\'s files (the ninth
     const mine = (seed, tier) => String(generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: tier }), null, { seed, customContent: {} }).institutions.find((/** @type {any} */ i) => i.name === 'Mine').desc);
     expectNoSeedFailures(collectSeedFailures(['r2r-town-11', 'r2r-town-12', 'r2r-town-45'], (seed) => {
       const desc = mine(seed, 'town');
-      expect(desc, seed).not.toMatch(/hired crews|worked|go deep|run deep/i);
+      // TAIL-HOUSES-5 (the chair's U2), RE-KEYED BY IDENTITY: TAIL-HOUSES-2's batch 3 (2c10ddefe; the chair's one hedge form) put the
+      // town mine's texts in the hedge that governs the verb ("worked whenever ore can be had"): no present work is claimed
+      // unhedged. The pin reads the hedge, and still refuses the old crews and depths.
+      expect(desc, seed).not.toMatch(/hired crews|go deep|run deep/i); // anchored: the same desc must match the shaft and the hedge on the next two lines
       expect(desc, seed).toMatch(/shaft/);
+      expect(desc, seed).toMatch(/worked whenever ore can be had/);
     }), 'no present work claimed of a mine whose deposits may be spent');
     expect(mine('r2r-village-3', 'village')).toMatch(/^Ore, coal, or stone is won from a shaft/);
   }, 240_000);
