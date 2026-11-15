@@ -40,6 +40,10 @@ signed record: [`docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json`
 | 4 | `tests/lint/sourceCitationIntegrity.walker.test.js` archival tree count (+ `tests/lint/.source-citation-baseline.json`) | its header's own form (as the last close's record moved it) | 181 -> 182 (the new shift record under `docs/shift-records/**`) | as predicted | 55814810e | 18/18; no other reader |
 | 4 | the readers (`grep -rl`) | each alone | green | bandLadders, institutionDestroyedByKind, institutionRename, ruinInstitution, generatorGoldenMaster, goldenFreeze.walker 90/90 | 55814810e | — |
 | 5 | the preset lighting witness (`tests/fixtures/preset-lighting-witness-golden.json`) | `node scripts/audit/witness-stage.mjs . --out <scratch>`; `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json node scripts/audit/door-write.mjs --surface preset-lighting-witness --from <scratch>` (exit 3, by design) | 15 | 15; 2 of 8 rows moved (dramatic_campaign, full_simulation); 7ea3fe47… -> 2898fcfd…. At 74ded1800 the same two had already moved (the tail round's: full_simulation's world state and news); this round moves only the two rows' settlementUpdatesSha256 | dc15f4378 | presetLightingWitness 7/7; readers institutionDestroyedByKind, ruinInstitution, sourceCitationIntegrity.walker green; goldenFreeze.walker 90/90 |
+| 4 | `dossierProseManifest` THE MIXED-POOL AUDIENCE ARM (the chair's ruling MP1, vetoable; copied below) | MP1's measure reproduced first (a scratch probe on the test's own helpers over the DRIFT corpus); then the file's own form beside dated notes | differ 208 -> 0; pools 1 -> 0; DM-only 203 -> 214 | player cells 36,858, DM 37,072; **player cells on a dm-only variant 0**; differing 0; DM-only 214; `DS-ECO-6 :: TIER: minor shadow activity (≥3)` DM v1 36, DM v4 172, player v4 172 (the old 208 = 172 + 36): the pool's dm-only variants declared `no organised crime` (b760d37d3, 0aa8326fe) | 0a12de992 | dossierProseManifest **17/17**; sourceCitationIntegrity.walker 18/18 |
+| 6 | `tests/generators/x46NpcBand.test.js` (`tests/fixtures/x46-npc-band-dark-digests.json`) | the file's own loop (an untracked probe): at 74ded1800 (60 of 60 reproduce) and twice at the tree (equal), each record also by leaf path; the fixture in its own form; a dated note | moved digests | 58 of 60; text leaves of declared cures only (beyond the golden's list: the slavic social texture and its culturalNotes mirror, 534c29fac) | 8989cbf27 | 24/24; no other reader |
+| 6 | `tests/generators/institutionBudgetPromise.test.js` BEFORE | the same, the factor forced to 1.0 | moved | 55 of 60; text leaves only (beyond the golden's list: the validator's embattled-region reason, c1f9889ae LB4; the stability phrase, e36bd855e PP11); the budget module untouched | 8989cbf27 | 1/1; no other reader |
+| 6 | `tests/lint/generationForkRegistry.contract.test.js` A3s (the FINAL comparand tally) | run alone at the tree | — | GREEN at 1011a8a91 (3/3): nothing to re-key | — | 3/3 |
 
 ## STOPS AND LAW REDS SENT TO THE CHAIR (none forced)
 
@@ -55,8 +59,14 @@ signed record: [`docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json`
 - **LAW** `dossierProseManifest` › THE MIXED-POOL AUDIENCE ARM: "positions where the two faces draw differently: expected +0 to
   be 208" (and with it "over this many of the twelve mixed pools", pinned 1). Red at 74ded1800 too, before and after the door;
   the arm's own text: a count driven to zero is a cure "that stopped composing the player face at all". No covert flag moved in
-  this round's corpus diff. Not touched.
+  this round's corpus diff. Not touched by me; **THE CHAIR'S RULING MP1 (21:40 UTC, vetoable), copied:** the chair measured it
+  at 52f0a1684 ("NO LEAK, NO LOST FACE: a pinned count moved by declared cures"); "REPRODUCE that measure yourself first (by
+  audience and vid for that pool; the count of player cells on a dm-only variant must be 0: if it is not, STOP at once). THEN
+  re-key IN THE FILE'S OWN FORM, beside a dated note that states the cause and those four figures: the differing positions 208
+  to 0, 'over this many of the mixed pools' 1 to 0, and the one-sided positions' pins as measured (REFUSAL 3's arm): no arm
+  weakened, no expectation removed; the note says plainly that the audience control now lives in the one-sided arm". Done:
+  reproduced to the figure, then re-keyed (the row above).
 
 ## WHAT IS LEFT, IN ORDER
 
-1. The remaining class-G pins (x46NpcBand, institutionBudgetPromise, the fork registry contract), the receipt.
+1. The receipt (in progress).
