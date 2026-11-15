@@ -913,7 +913,30 @@ green at both; a plant (the tank read switched off) reds it). Re-keyed by identi
 
 ## What is left of the worklist (after this seat)
 
-Every row left is parked, another seat's, waits under five towns, or needs a stored move not granted:
+**FIRST: K21, THE LATE RE-READ (the chair's ruling of 2026-11-15 02:29 UTC, vetoable by the owner; it reached this seat at
+02:58, after batch 6 was pushed, and the count would not hold a packet of two censuses, so it is written here FIRST for the
+successor).** The ruling, copied: the late re-read, the measuring seat's recommendation, is this seat's to build.
+`git fetch origin lane/order-measure-2026-11-15`; read `docs/chair/2026-11-15/ORDER-MEASURE-1.md` sections "THE ANSWER,
+FIRST", 5 and "RECOMMENDATION, AND WHAT IT LOSES" only. The patch is
+`docs/chair/2026-11-15/probes/ORDER-MEASURE-1/cures/c1b.patch` (draw-free; BYTE-IDENTICAL on the 720 and 0 of 525 golden
+keys moved by its own measure: SHOW BOTH AGAIN before a declaration is added). `src/generators/steps/assembleSettlement.js`
+is LENT for its hunks. In the same packet, the two declarations it was made for, each with its twin:
+- the insurgency summary keyed "a rival of standing" (this group's atom `rival power`, true of the SETTLED record; the late
+  pass is what makes that so; 16 false towns to none, modelled: measure it; K10's hazard is what the late pass answers);
+- "defences built for quieter times" (a defence that exists);
+- and THE GUARD the report names: a sibling declaration whose needs read the powers resolves after the last roster write.
+A patch from a measuring seat is a candidate: run the tests it did not, read the inheritors.
+
+What this seat checked (02:59): `git apply --check` of c1b.patch at e040663dd is CLEAN (one file, +4 lines). It keeps each
+entry's `summaryRoll` in a Map before the roll is deleted, and after `resolveFactionLabelsAtClose` re-renders `e.summary`
+with the same roll and the final facts, and re-resolves `crisisHook` and `viabilityNote` through STRESS_TYPE_SIBLINGS. Two
+things to read before building on it: (1) the second resolve runs on text the first resolve already resolved: a twin that is
+not itself a key stays as the first pass left it, and a `viabilityNote` the first pass DROPPED (`dropRefused`) is gone and
+cannot be re-admitted by the settled facts; (2) the stored summary then differs from a summary rendered at :219 wherever a
+keyed line's needs change between the two passes, so every new `needs:` on the summary is a declared move (field diff:
+`stress`/`stressors` `summary` only).
+
+THEN, every row left is parked, another seat's, waits under five towns, or needs a stored move not granted:
 - **X9 22718** ("Revolt Leadership has no stake yet", 8 towns): `crisisCast.js :: deriveStakes` (a power the stress raised
   loses or gains by it): a declared move of stored stakes, NOT granted. The widest row left; for the chair.
 - **K16 11705 14131** (2 towns), **X9 20882** (3), **07387** (2), **27012** (1), **13909** (3): under five towns, they wait.
