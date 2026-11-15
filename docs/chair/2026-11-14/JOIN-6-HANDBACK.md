@@ -22,6 +22,7 @@ THE CHAIR'S RULINGS SENT AFTER THE BRIEF:
 | 1 | tail-services-2026-11-14 | 4035c33a5 (00:08) | bcad1a358 | 7a9a2fffc | none | — (6 files, all the lane's: the leaf `crisisStoppedRow.js`, the table `crisisDependence.js`; told to the chair at 00:11) |
 | 2 | tail-display-civic-2026-11-14 | 812fa7e1f (00:14) | f663a2699 | 3ff14bc58 | none | — (3 files, the lane's batch 1) |
 | 3 | tail-display-econ-2026-11-14 | 6e36000a4 (00:19) | bcad1a358 | 6b1e0ccf2 | none | — (6 files, the lane's batch 1; the pin in `economicsClergyProvision.test.jsx` moved by the lane alone: code) |
+| 4 | tail-crisis-2026-11-14 | 9c07f7461 (00:24) | bcad1a358 | bdea399e1 | none | DECLARED MOVE (1409e3cbb): stress `summary` in 66 records, economicViability in 7 besieged famines: the golden master's red is carried (§4 [J6]); 3 pins re-keyed by identity in the lane's commit: code |
 
 ## 3. Every code resolution
 
@@ -69,6 +70,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | file / test | branch (JOIN-6 merge #) | why |
 |---|---|---|
 | `tests/generators/coherenceAgreeCures.test.js` (the gate tally) | — (red ×2 at the joined line's 06f36ad36 already) | carried by ruling (k), unbanked, not this seat's |
+| `tests/property/generatorGoldenMaster.test.js` (and the goldens it pins) | tail-crisis (4) | the DECLARED MOVE of 1409e3cbb (stress/stressors `summary` in 66 records: insurgency 37, monster_pressure 17, slave_revolt 8, wartime 4; economicViability in the 7 besieged famines; no draw moved): not re-taken, the owner's door |
 
 ## 5. Item 2 at the landed tip
 
