@@ -1,0 +1,8 @@
+{"id":"C31100","town":"bar0-town-occupied-rand-7","sev":"MED","kind":"PAIR","why":"says the hall bargains with the Occupation Authority; C31228 says the occupier does not bargain, the hall carries out what it decides","other":"C31228"}
+{"id":"C31154","town":"bar0-town-occupied-rand-7","sev":"MED","kind":"STATE","why":"'nobody to appeal to' under an occupation where nothing the appointee decides stands until the occupiers agree; the occupiers are the appeal","other":"C30307"}
+{"id":"C31257","town":"bar0-town-occupied-rand-7","sev":"MED","kind":"PAIR","why":"'Thieves are scarce now' contradicts crime wave tension (crime rising faster than the guard can answer), street gang, Criminal opportunity Elevated","other":"C30335"}
+{"id":"C31292","town":"bar0-town-occupied-rand-7","sev":"MED","kind":"STATE","why":"says the town can close the gates; under occupation the garrison is under occupier command and officers do not rule freely","other":"C31256"}
+{"id":"C31319","town":"bar0-town-occupied-rand-7","sev":"MED","kind":"STATE","why":"part of the baked-goods shortfall 'made up by means beyond' the usual work (magic) while FOOD by magic is 0%; imports cover it","other":""}
+{"id":"C31794","town":"bar0-town-occupied-rand-7","sev":"MED","kind":"BROKEN","why":"the Crash (12 years ago) prose carries the trade label's mark '(taxed by occupation)' inside the sentence; a leaked export tag","other":""}
+{"id":"C30302","town":"bar0-town-occupied-rand-7","sev":"LOW","kind":"LACKS","why":"names a wine shop; HOUSES has taverns and inns but no wine shop","other":""}
+{"id":"DONE","lines":1602,"blocks":1,"flags":7}
