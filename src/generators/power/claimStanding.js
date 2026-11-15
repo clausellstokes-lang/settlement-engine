@@ -43,6 +43,9 @@ const merchantsBeside = (ctx) => ctx.roster.filter((x) => x !== ctx.self && MERC
 // lines are declared against), never by /watch/ (a watchtower is no watch). @param {RungContext} ctx
 const watchStands = (ctx) => ctx.names.some((n) => DEFENSE_BUCKET_KEYWORDS.watch.some((kw) => String(n).includes(kw)));
 const CLERGY_AT_MARGINS = 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.';
+/** TAIL-POWERS-B-4 (the chair's P31 (1), vetoable by the owner; batch 6a's form): "at the margins ... leverage is limited" is false
+ * of a faith that stands level with or above the seat on the final roster, or at Significant or above; there it takes this twin. */
+const CLERGY_WITH_WEIGHT = 'The clergy hold no office in the hall, but their moral authority is real and their word carries political weight here.';
 const LESSER_LANDED = 'Minor landed families with limited political reach; present in civic life but rarely decisive.';
 const LOCAL_MERCHANTS = 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.';
 // the town's leading merchant power, where no merchant power governs, is not "not yet the dominant commercial voice"
@@ -159,6 +162,23 @@ const CLAIM_RUNGS = Object.freeze([
     "Militarised noble families whose landholdings double as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return.",
   ].map((claim) => ({ claim, minor: () => LESSER_LANDED, suppressed: () => LESSER_LANDED })),
 ]);
+
+/**
+ * THE CLERGY'S MARGINS ON THE FINAL ROSTER (TAIL-POWERS-B-4, P31 (1)): the margins line is written at the power step, and the
+ * density law resizes the roster after it; read once on the final roster (beside keepOneDominant), a non-governing card that
+ * stands at or above the seat's power, or holds a label of Significant or above, takes CLERGY_WITH_WEIGHT. Draw-free; mutates
+ * the descriptions in place, as settleClaimsToLabel does.
+ * @param {Array<Record<string, any>> | undefined} factions
+ */
+export function settleClergyToFinalRoster(factions) {
+  if (!Array.isArray(factions)) return;
+  const seat = factions.find((x) => x?.isGoverning);
+  for (const f of factions) {
+    if (!f || f.isGoverning || typeof f.desc !== 'string' || !f.desc.includes(CLERGY_AT_MARGINS)) continue;
+    const weighty = (LABEL_RANK[String(f.powerLabel)] ?? 0) >= LABEL_RANK.Significant || (!!seat && Number(f.power || 0) >= Number(seat.power || 0));
+    if (weighty) f.desc = f.desc.replace(CLERGY_AT_MARGINS, CLERGY_WITH_WEIGHT);
+  }
+}
 
 /**
  * Each power whose description opens with a commanding claim its final label (Minor, Suppressed) denies takes its
