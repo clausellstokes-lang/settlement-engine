@@ -1,0 +1,6 @@
+{"id":"C34238","town":"bar0-village-famine-rand-5","sev":"MED","kind":"PAIR","why":"calls the town orderly; stability is Desperate, hunger eroding order, and Foundations print Law & order Collapsed","other":"C34315"}
+{"id":"C34394","town":"bar0-village-famine-rand-5","sev":"LOW","kind":"STATE","why":"calls the place 'The hamlet'; the town is a village of 251","other":""}
+{"id":"C34241","town":"bar0-village-famine-rand-5","sev":"MED","kind":"PAIR","why":"a guard patrol passes; DEFENCE has no garrison or watch, and the militia 'cannot maintain consistent patrol'; streets 'badly guarded'","other":"C34693"}
+{"id":"C34709","town":"bar0-village-famine-rand-5","sev":"LOW","kind":"PAIR","why":"Invasion & War rated Adequate; defence is Vulnerable, no walls, and the village 'could not hold off a raid'","other":"C34696"}
+{"id":"C34673","town":"bar0-village-famine-rand-5","sev":"MED","kind":"PAIR","why":"'Free of the criminals', yet the Smuggling waypoint is a house of Grain Holders, in which the head of Elder Council holds a half share","other":"C34685"}
+{"id":"DONE","lines":827,"blocks":1,"flags":5}
