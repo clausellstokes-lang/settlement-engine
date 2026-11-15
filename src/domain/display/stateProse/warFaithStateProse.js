@@ -114,6 +114,7 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../../data/dossierStateProse/w
 import { composeStateProse } from './composeStateProse.js';
 import { warFaithStateProseCandidates } from './warFaithStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { powerNameAfterArticle } from '../powerSentenceName.js';
 import { documentSideOf } from '../../worldPulse/treatyOrientation.js';
 import { observancePhraseOf } from '../../dossier/faithReading.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
@@ -880,7 +881,9 @@ export function warFaithStateProse(settlement, readings = {}, options = {}) {
     // `{houses}`, and anchored liveness drops the variants that would have named one.
     houses: phraseFill(faith?.reading?.hasChurch ? faith.reading.churchWords : undefined),
     cleric: properFill(faith?.reading?.seniorCleric?.role),
-    faction: properFill(faith?.reading?.religiousFaction?.name),
+    // TAIL-DISPLAY-CIVIC-3 V1: a power named in a sentence takes the one leaf's form; both pools set "the {faction}",
+    // so its own "The" is struck (display/powerSentenceName.js :: powerNameAfterArticle)
+    faction: properFill(powerNameAfterArticle(text(faith?.reading?.religiousFaction?.name))),
     observance: typeof faith?.reading?.dial === 'number'
       ? phraseFill(observancePhraseOf(faith.reading.dial)) : undefined,
     // `{institution}`, `{band}`, `{season}`, `{good}`, `{route}`, `{reason}` and the three
