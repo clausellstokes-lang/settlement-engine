@@ -26,6 +26,7 @@
 
 import { describe, test, expect, beforeAll } from 'vitest';
 import { allegianceOf } from '../../src/domain/people/allegiance.js';
+import { faceOfRole, titleForHolder } from '../../src/data/holderTitleForms.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import {
   gen,
@@ -296,8 +297,12 @@ describe('RELIGIOUS CAPITAL (city+, religious priority)', () => {
     expect(rank).toBeLessThanOrEqual(1); // religion is #1 or #2 — a genuine capital
   });
 
+  // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-CLOSE-PEOPLE-1, red 5): TAIL-TITLES K-C's DECLARED MOVE 1036bf94 prints a face in its
+  // holder's form; this city's one religious card is a woman, "the senior abbess" of the face "the senior abbot". The guard
+  // reads each card's FACE through the move's own reader (faceOfRole), where its printed role IS that face's holder form.
   test('religious NPCs/roles are present', () => {
-    const rel = npcRoles(s).filter((r) => REL_ROLE.test(r));
+    const faceOf = (/** @type {any} */ c) => { const f = faceOfRole(c); return c && c.role === titleForHolder(f, c.gender) ? f : c?.role; };
+    const rel = (s.npcs || []).map((c) => String(faceOf(c) ?? '')).filter((r) => REL_ROLE.test(r));
     expect(rel.length).toBeGreaterThanOrEqual(1);
   });
 });

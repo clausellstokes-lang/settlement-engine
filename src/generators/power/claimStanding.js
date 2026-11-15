@@ -46,7 +46,10 @@ const SEAT_WORDS = Object.freeze([
  * name's catalog id is among them (labelJoins.test.js: a presence check joins by catalog id, never by a label scan).
  */
 const WAREHOUSE_IDS = new Set(INSTITUTION_FAMILIES
-  .filter((fam) => { const tags = fam.shared?.tags; return Array.isArray(tags) && tags.includes(TAG.WAREHOUSE); })
+  .filter((fam) => {
+    const tags = fam.shared?.tags;
+    return Array.isArray(tags) && tags.includes(TAG.WAREHOUSE);
+  })
   .flatMap((fam) => familyNamesByTier(fam).map(({ name }) => catalogIdForName(name))));
 /** The roster's merchant powers other than this one. @param {RungContext} ctx */
 const merchantsBeside = (ctx) => ctx.roster.filter((x) => x !== ctx.self && MERCHANT_POWER.test(String(x?.faction || '')));
