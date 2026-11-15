@@ -268,7 +268,7 @@ registerStep('assembleSettlement', {
       settlement.powerStructure,
       settlement.economicState,
       ctx.powerIntent,
-      { defenseLabel: settlement.defenseProfile.readiness.label, pins },
+      { defenseLabel: settlement.defenseProfile.readiness.label, militaryGate: settlement.defenseProfile.economicGates?.military, pins },
     );
     refreshPowerGenerationTraces(
       ctx,

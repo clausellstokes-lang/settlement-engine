@@ -695,7 +695,7 @@ export const generatePowerStructure = (
     stressTypes,
     stressEntries: stressEntries || [],
     fallbackStressType: stressType,
-    defenseLabel: projection.defenseLabel || null, // POWERS-14 (NEW1): the record's readiness label, on the replay
+    defenseLabel: projection.defenseLabel || null, militaryGate: projection.militaryGate ?? null, // POWERS-14 (NEW1): the record's readiness label, on the replay; PP11: its funding gate
   });
   // ── Public legitimacy & faction dynamics ────────────────────────────────
   // At this point defenseProfile isn't computed yet — we use a provisional

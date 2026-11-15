@@ -243,7 +243,7 @@ const deriveBaselineStability = ({
   stressFlags,
   institutionFlags,
   neighbourRelationship,
-  defenseLabel = null,
+  defenseLabel = null, militaryGate = null, // PP11 (BAR2-PEOPLE-3): the record's funding gate (defenseProfile.economicGates.military), on the replay
   theocraticSeat = true, // TAIL-POWERS-3 P16 (G3): a religious seat or a religious power of weight stands
   garrisonStands = true, // TAIL-POWERS-3 P16 (G5): a garrison stands (defenseFacts.js :: hasGarrison)
 }) => {
@@ -270,7 +270,7 @@ const deriveBaselineStability = ({
     institutionFlags.militaryEffective > 70 &&
     institutionFlags.economyOutput < 32
   ) {
-    return 'Tense (militarised, chronically underfunded)';
+    return Number(militaryGate) >= 1 ? 'Tense (militarised)' : 'Tense (militarised, chronically underfunded)'; // PP11: funded in full, the forces are not underfunded; absent or under 1, as before
   }
   if (stressFlags.theocraticEconomy && theocraticSeat) return 'Stable (theocratic governance)'; // TAIL-POWERS-3 P16 (G3)
   if (ADVERSARIAL_RELATIONSHIP_TYPES.has(neighbourRelationship?.relationshipType)) {
@@ -678,7 +678,7 @@ export const buildGovernanceLabels = ({
   stressEntries = [],
   fallbackStressType,
   worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
-  defenseLabel = null, // POWERS-14: the record's readiness label, on the power step's replay after the defence profile
+  defenseLabel = null, militaryGate = null, // POWERS-14: the record's readiness label, on the power step's replay after the defence profile
 }) => {
   const magicWorks = resolveGenerationWorldLaw(worldLaw, config).magicFunctions();
   const hasStress = stressType => stressTypes.includes(stressType);
@@ -695,7 +695,7 @@ export const buildGovernanceLabels = ({
     stressFlags,
     institutionFlags,
     neighbourRelationship,
-    defenseLabel,
+    defenseLabel, militaryGate, // PP11: the funding gate beside the readiness label
     theocraticSeat,
     // TAIL-POWERS-3 P16 (G5): "strong military presence" only where a garrison stands; the power step carries the defence
     // facts' garrison on its institution flags (rulingStructure.js; absent, as before: true); measured 3 towns without one
