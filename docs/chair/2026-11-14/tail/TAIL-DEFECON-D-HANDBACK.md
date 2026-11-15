@@ -114,6 +114,31 @@ and with the batch (CARRIED: crimeLineDisqualifiers 3, defenseWordsFindings, fam
 threatRowsTrueUnderBand, pdf/goldenViewModel, ui/defenseTabFlow); `copy/voiceMechanics` (an em dash typed in a string
 literal) cured before the commit.
 
+## D20 · class f: an empty roster reads at most Vulnerable (`src/data/bandLadders.js`, lent) · its own commit
+
+RECORD-MEASURE-2's `f.patch` (`readinessBandOf`: with `held` false the ladder starts at Vulnerable) applied as lent REDS
+SIX TESTS the base does not (bandLadders A2, A5; defensePostureReadsBadge 2; defenseStateProseDesk DS-DEF-1 2): its
+`held = false` is the DEFAULT, and one caller omits it (`defenseStateProse.js :: posturePoolKey` bands the bare score),
+so every town's posture pool would have read at most Vulnerable. CURED IN THE LENT FILE ALONE: `held` is three-state:
+`true` (a held roster: the floor above Undefended, as UPKEEP-12 ruled), `false` (the producer read an EMPTY roster: at
+most Vulnerable, the ruling), omitted (the ladder alone, as before; the posture pool is one for Lightly Defended and
+Vulnerable, so it agrees with the badge in the 24). The two producers (`defenseGenerator.js`, `recordInvariants.js`)
+pass `defenceHeldOf(...)`, a boolean: unchanged.
+
+THE DECLARED MOVE (births only, `corpus.ndjson.gz` at 345f13157 against the base with the cure; field diff by family on
+the 720), exactly the chair's measure: `defenseProfile.readiness` label, color, background, border 24 towns (23 "Lightly
+Defended" and 1 "Defensible" -> "Vulnerable"; thorps 17, hamlets 4, villages 3; every roster empty);
+`powerStructure.publicLegitimacy.score` and `.breakdown` (the defense term) 7; `simulationTrace[].causes[].reason` 7;
+`powerStructure.stability` 1 (r2r-village-49: "Ordered (strong military presence)" -> "Stable", the empty roster no longer
+read as a strong presence). Nothing else moves. "Lightly Defended" with every line empty: 24 -> 0.
+
+Guard: `tests/data/tailDefeconDEmptyRosterBand.test.js` (3 births red at 345f13157 and the leaf's three states; 2 KEEP
+births whose roster holds a force keep "Lightly Defended"). GATES: eslint 0; strict-domain 0; type ratchet 0; walker 147
+(the base's); the grid 0 rises; the 22 test files naming the ladder: the same 5 tests red at the base and with the cure
+(CARRIED: defensePostureReadsBadge "under a siege the strong posture says nothing", editCorpusRatchet A3 A4 A7 A8). The
+generator golden master (525 configurations) moves with the label: NAMED, not re-taken. No line is new or reworded
+(the ladder's own word): nothing for the veto list.
+
 ## The veto list (every new or changed line, with towns it was read in)
 
 Batch 1 (the after census: the smallest and largest it reaches, a crisis among them):
@@ -142,7 +167,7 @@ Batch 1 (the after census: the smallest and largest it reaches, a crisis among t
 - Every row of my four files on the three worklists (21 of WORKLIST-DEFECON after the first seat's batch, D11's 3, X9's
   4, D16's 1) is cured, struck or named above. `safetyProfile.js` and `safetyLineTruth.js` hold no row the first seat
   left (X9's one, #03597, was gone at the base).
-- D20 (class f): its own commit, next (below when pushed).
+- Nothing. The seat hands back after D20 (below).
 
 ## How the instruments are re-made
 
