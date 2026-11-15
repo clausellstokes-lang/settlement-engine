@@ -45,6 +45,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 5 | tail-services-2026-11-14 | dc9702c51 (03:42; handed back) | e35851db1 (JOIN-7 15) | 62a1a16e0 | none | — (docs only: the lane's hand-back) |
 | 6 | tail-titles-2026-11-15 | 688e2f3be (03:45; handed back) | b30c1b7aa (JOIN-7 31) | 66f44805c | none | — (`faceHonorifics.js`, lent; KT1 display text only: 0 of 720 towns moved, by the lane's census) |
 | 7 | tail-corpus-def-2026-11-14 | 4e0936879 (03:49; handed back at its line) | cff6cd098 (JOIN-7 29) | 74c2ff310 | none | clean-both `RECEIPT_POOLS_DOSSIER_STATE.md`; leaves `defense.generated.js`, `stressors.generated.js` the lane's; re-keyed pin (proseMoveGrammar CONTROL 4) green on the merged tree (110/110) |
+| 8 | tail-crisis-2026-11-14 | aa78d1ec9 (03:53) | 572cd48e0 (JOIN-7 19) | 1b095cd0a | none | `assembleSettlement.js` hunks lent (K21); DECLARED MOVES c97caccd9 K20, cd0b1ab7b K21, 07ab77b03 K22: golden carried |
 
 ## 3. Every code resolution
 
@@ -161,6 +162,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | leaves `economy.generated.js`, `general.generated.js`; `RECEIPT_POOLS_DOSSIER_STATE.md` | corpus-eco (1) | (c'), (g) at the sweep's end; RECEIPT_POOLS merged clean though both moved it: measured at the close |
 | golden | defecon (4) | DECLARED MOVE b40f795b2 (D27: resourceAnalysis.exports[].reason 152 towns, economicViability.issues[].title 41, ...); `foodBalance.js`, `resourceGenerator.js` merged clean though both moved them (apart) |
 | `RECEIPT_POOLS_DOSSIER_STATE.md`; leaves `defense.generated.js`, `stressors.generated.js` | corpus-def (7) | merged clean though both moved the pools file: measured at the close; (g) at the sweep's end |
+| golden | crisis (8) | DECLARED MOVES c97caccd9 K20 (stress[].cast.roles[].reason), cd0b1ab7b K21 (stress/stressors summary, 21 records; the lane measured 0 of 525 golden keys), 07ab77b03 K22 (cast.stakes[].reason, 8 records) |
 
 ## 5. Item 2 at the landed tip
 
@@ -193,6 +195,6 @@ A worktree at origin's tip (`git worktree add /home/user/j8wt -b join8 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-6 (the finished branches), 7; the chair's 03:40 "LAND lane/tail-powers-2026-11-14" (eb5e2ab0d or later, in the order with the moving branches) received.
+1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-6 (the finished branches), 7-8; the chair's 03:40 "LAND lane/tail-powers-2026-11-14" (eb5e2ab0d or later, in the order with the moving branches) received.
 2. lane/tail-powers-2026-11-14: waits for the chair's "LAND" (P28).
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
