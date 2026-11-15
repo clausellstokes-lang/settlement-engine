@@ -59,7 +59,10 @@ describe('"Produced locally" prints what is made here (item 4(c))', () => {
 
   test('a thorp that walks to a neighbour\'s church: no unworked timber, no "luxury", no church services (rw3-thorp-calm-2, #45)', () => {
     const town = birthApp('rw3-thorp-calm-2');
-    expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['timber', 'luxury', 'Religious services', 'Education (basic)']));
+    // TAIL-DEFECON-C (C2-A, the chair's ruling D6) re-keyed by identity: "luxury" (gemstone_deposits' category key; no
+    // house makes it) is no longer on the record's made list; the anchor keeps the three the record still lists.
+    expect(town.economicState.localProduction, 'anchored: the record lists them').toEqual(expect.arrayContaining(['timber', 'Religious services', 'Education (basic)']));
+    expect(town.economicState.localProduction, 'a category key is not a good (C2-A)').not.toContain('luxury');
     const pills = producedLocally(town);
     expect(pills.length).toBeGreaterThan(0);
     expect(['timber', 'luxury', 'Religious services', 'Education (basic)'].filter((p) => pills.includes(p))).toEqual([]);
