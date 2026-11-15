@@ -63,6 +63,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 - **06:03 UTC:** point 9's composed red: the tests-a seat re-keys that anchor on its branch; it lands again ON THE CHAIR'S WORD. The new rule stands (a test file both sides moved stops at the merge, before the commit). FOUR CLOSE BRANCHES LAND ONLY ON THE CHAIR'S WORD, in this order, each after its seat has merged the line and settled the shared test files on its own branch: tests-a (its fix), tests-b, tail-close-display, tests-c: OUT OF THE RUNNING SWEEP. Then: houses, the line, then tail-close-src (5d99786c5 or later), corpus-def, defecon, powers-b, crisis (each at the tip read), then the sweep's end line.
 - **06:09 UTC:** "LAND lane/tail-close-tests-a-2026-11-15 at a269fc3f" AS THE NEXT POINT after the one in hand (its fix: the anchor reads 14), then ONE LINE with the tip; then the sweep as ordered.
 - **06:25 UTC:** "LAND lane/tail-close-tests-b-2026-11-15 at 68649d65" AS THE NEXT POINT after the one in hand (its seat merged the line at 80a2d0c5d and settled ten shared test files on its own branch): ONE LINE with the tip; then go on.
+- **06:37 UTC:** NO MORE LANDS: HAND BACK NOW, the hand-back's last section current (the list for the close; every pin where the joined side was kept, by file). A fresh seat settles the crisis row on its branch. JOIN-10 takes the line from f714fb6a5.
 
 ## 2. The landings
 
@@ -85,6 +86,7 @@ THE CHAIR'S RULINGS TO JOIN-9 (each vetoable by the owner):
 | 14 | lane/tail-defecon-2026-11-14 | ad5720386 (06:20) | 76a735ad5 | 26c3dc456 | none | 11 files outside docs/; declared-move commits: 4d0b097dd 7506b7707 9cc8c6826 7ce6db273  (golden carried) |
 | 15 | lane/tail-powers-b-2026-11-14 | 9c337fc97 (06:23) | 034662313 | 470ff0a7a | **CODE (test)**: `hallDecidesUnderOccupation.test.js`, close-tests-a against powers-b: composed, both stand (§3) | 7/7 green composed; DECLARED MOVE 5706c386b: golden carried |
 | 16 | lane/tail-close-tests-b-2026-11-15 | 68649d65e (06:27) | 80a2d0c5d | 3880756f1 | none | 85 files outside docs/; declared-move commits: none (golden carried); merged clean though both moved: tests/generators/people/titleLinesClaimTheTrade.test.js tests/generators/power/seatNamedAsItSits.test.js tests/generators/relationLinesSayTheRecord.test.js tests/generators/tailDefeconSafetyLines.test.js  |
+| — | lane/tail-crisis-2026-11-14 | 325de5153 (06:31) | 74688857c | — | **STOP**: composed red in `journalMarksCrisisRows.test.js` (§6) | aborted; told the chair |
 
 ## 3. Every code resolution
 
@@ -254,6 +256,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | defecon (14) | DECLARED MOVE commits 4d0b097dd 7506b7707 9cc8c6826 7ce6db273  (field diffs in their bodies) |
 | golden | powers-b (15) | DECLARED MOVE commit 5706c386b (field diff in its body) |
 | `tests/generators/people/titleLinesClaimTheTrade.test.js`, `tests/generators/power/seatNamedAsItSits.test.js`, `tests/generators/relationLinesSayTheRecord.test.js`, `tests/generators/tailDefeconSafetyLines.test.js` | close-tests-b (16) | merged clean though both sides moved them; not read hunk by hunk: read at the close |
+| `tests/foundry/journalMarksCrisisRows.test.js` (r2s-under_siege-town-3: the Gate Tolls anchor, KEEP Property Rents 8%) | close-tests-a (9/12) on the line | red at the line before point 17 and after the abort: carried; the crisis seat's famine-town-1 re-key waits (§6) |
 
 ## 5. Item 2 at the landed tip
 
@@ -264,6 +267,7 @@ At the line after the ties point (74688857c; code a06cde784): `node scripts/wiri
 
 - **06:02 UTC, point 9, A COMPOSED RED FOUND AFTER THE PUSH (told the chair):** lane/tail-close-tests-a-2026-11-15 at 432b0330c merged textually clean and was pushed (merge e3c393377, origin 92fcc4fc5) before the both-moved test file was read. `tests/components/displayEconRelianceFoodWords.test.jsx`: tests-a's NOT row for r2s-famine-town-1 takes as its liveness anchor "Contributes to Entrepôt Trade - 13% of income"; display-econ (TAIL-DISPLAY-ECON-5, on the line) re-keyed that card by identity to **14%** in KEEP. Composed: 1 red / 22 green (`t9.log`: LIVENESS ANCHOR missing); 23/23 green at the line before the merge (`t9.pre.log`, in `/home/user/j9probe`). Not plain; this seat reverted nothing and edited nothing. Recommendation: the tests-a seat re-keys that one anchor to 14% on its branch; land on the chair's word. Since then `auto.sh` stops before the commit on any both-moved test file.
   ANSWERED at point 12: the tests-a seat re-keyed the anchor to 14% (a269fc3f8), landed on the chair's 06:09 word; the file 23/23 green on the line (`t12.log`).
+- **06:35 UTC, point 17 STOPPED (`git merge --abort`; the prompt's test-file rule):** lane/tail-crisis-2026-11-14 at 325de5153 (base 74688857c) merged textually clean; the both-moved `tests/foundry/journalMarksCrisisRows.test.js` READ and measured before the commit. crisis (TAIL-CRISIS-7) re-keyed r2s-famine-town-1's shares by identity (Grain Sales 4% -> 5%, Toll Revenue 14% -> 15%, after TAIL-DEFECON-2's D14); close-tests-a (4865cac17, on the line) made the NOT rows anchored (`expectAbsentWithAnchor`). Composed: 3 red / 13 (`t17.m.log`): the famine-town-1 anchor "- Grain Sales (scarce): 5%" is missing (the composed tree prints 4%), plus the two r2s-under_siege-town-3 reds that are red at the line already (Gate Tolls anchor; KEEP Property Rents 8%); the branch alone 16/16, the line before 3 red (its famine KEEP Toll 14%). Not plain: the crisis seat's 5% holds on its own tree and not on the composed one. For the crisis seat: merge the line and settle that row on its branch; land on the chair's word.
 
 ## 7. Hazards
 
@@ -284,4 +288,13 @@ A worktree at origin's tip (`git worktree add /home/user/j9wt -b join9 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-Points 1-15 landed (the table); 9 a composed red found after its push, answered at 12; 13 a criss-cross read; 10 and 15 test-file conflicts, composed. Next: crisis (16), then the sweep's end line to the chair; the four close branches tests-b, close-display, tests-c (and tests-a again) ON THE CHAIR'S WORD only.
+HANDED BACK on the chair's 06:37 word (the count 208,382 at 06:28 UTC, read after point 16; the mark is 250,000). JOIN-10 takes the line from f714fb6a5. Landed code tip **3880756f1** (point 16); origin holds this hand-back's commit on it.
+1. DONE: points 1-16 (the table), each pushed with the hook's three gates; (g) after the ties point (§5: the wiring census re-taken by its own door in f468495d9, the corpus door's `--check` exit 0); the chair's words of 05:32, 05:53, 06:09 and 06:25 each landed as the next point and answered in one line.
+2. STOPPED: point 17, crisis at 325de5153 (§6): waits for its seat and the chair's word.
+3. NOT DONE, for the next merge seat: the chair's words still to come: tail-close-display, tests-c (and any later tests-a/-b tip) ON THE CHAIR'S WORD ONLY (06:03 ruling), each after its seat has settled the shared test files on its own branch; crisis again on its word; "FINAL SWEEP" by §1's laws. The instruments are in §8 (worktree `/home/user/j9wt`, branch `join9`; `/home/user/j9out`: `auto.sh`, which since point 9 STOPS before the commit on any test file both sides moved, so it can be read and measured in the probe worktree `/home/user/j9probe`, and resumes with `RESUME=1 READ=1 ./auto.sh <n> <branch> <short>` once read; `verify.sh` intersects over every merge base, for branches that hold a merge of the line).
+4. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
+5. EVERY PIN WHERE THE JOINED SIDE WAS KEPT (law d), by file, all at point 3 (corpus-eco a8ea5ef8e against corpus-def on the line), each red composed on the final tree until re-keyed by identity at the close (§3, §4 [J9]):
+   - `tests/domain/composeStateProse.test.js`: SHIPPED_POOLS variants: kept 2953 (corpus-eco 2954); composed 2956.
+   - `tests/lint/proseEntryContradiction.walker.test.js` (five hunks): leaves+causal kept 3421 (lane 3422; composed 3424); joined.length kept 2716 (lane 2717; composed 2719); leafLines.size kept 2716 (lane 2717; composed 2719); the row at line 6162 (both 6162: comments only); the row at 2418 kept (lane 2419; "did not load", red at the line before as well).
+   - `tests/lint/proseMoveGrammar.walker.test.js`: uniformSegments kept 570 (lane 569; composed 571), the ratio kept 0.666 (lane 0.665); CONTROL 4's second half (515, a clean hunk) composed 516.
+   No other pin was kept by side: points 10 and 15 were test-file conflicts composed with both sides standing (§3); point 16's and 13's both-moved test files merged clean and were measured.
