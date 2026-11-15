@@ -50,13 +50,20 @@ describe('each line struck only where its fact makes it false, and no case left 
   const REC = 'capture pressure RECOVERING (strong security, prosperity)';
   test('the pressure pools, every rung below corrupted with and without an official in pay', () => {
     const at = (captureState, officialsInPay) => ({ captureState, officialsInPay });
-    expect(vidsOf('DS-POW-6', ADV, at('none', 0))).toEqual([2]);
-    expect(vidsOf('DS-POW-6', ADV, at('none', 1))).toEqual([1, 2, 3]);
-    expect(vidsOf('DS-POW-6', REC, at('none', 0))).toEqual([2]);
+    // re-keyed by identity (TAIL-CLOSE-DISPLAY-1, the move 91592cbf: W2-WRITE round 1 re-said ADVANCING v1 and v3 as
+    // officials who COULD be bought, and grew the pool to eleven): no ADVANCING line presumes either fact, so neither
+    // strikes one; the pool draws whole with and without an official in pay
+    const ADV_ALL = DOSSIER_STATE_PROSE_POWER['DS-POW-6'].pools[ADV].map((v) => v.vid);
+    expect(ADV_ALL.length).toBeGreaterThan(1);
+    expect(vidsOf('DS-POW-6', ADV, at('none', 0))).toEqual(ADV_ALL);
+    expect(vidsOf('DS-POW-6', ADV, at('none', 1))).toEqual(ADV_ALL);
+    // re-keyed by identity (the move a5e74f02: W2-WRITE-3 wrote RECOVERING v4 for the case left empty, "finds little
+    // purchase", true where no official sold): it draws beside v2 wherever no official is in pay
+    expect(vidsOf('DS-POW-6', REC, at('none', 0))).toEqual([2, 4]);
     expect(vidsOf('DS-POW-6', REC, at('none', 1))).toEqual([3]);
-    expect(vidsOf('DS-POW-6', REC, at('adversarial', 0))).toEqual([2]);
+    expect(vidsOf('DS-POW-6', REC, at('adversarial', 0))).toEqual([2, 4]);
     expect(vidsOf('DS-POW-6', REC, at('adversarial', 1))).toEqual([3]);
-    expect(vidsOf('DS-POW-6', REC, at('equilibrium', 0))).toEqual([1, 2]);
+    expect(vidsOf('DS-POW-6', REC, at('equilibrium', 0))).toEqual([1, 2, 4]);
     expect(vidsOf('DS-POW-6', REC, at('equilibrium', 1))).toEqual([1, 3]);
     for (const state of ['none', 'adversarial', 'equilibrium']) for (const n of [0, 1]) {
       expect(vidsOf('DS-POW-6', ADV, at(state, n)).length).toBeGreaterThan(0);
@@ -73,7 +80,8 @@ describe('each line struck only where its fact makes it false, and no case left 
     /** @type {string[]} */ const wrong = [];
     for (let i = 0; i < 12; i += 1) {
       const free = powerStateProse(town('none', [], BREAK({ prosperity: -10, safety: -12 })), {}, { seed: `s${i}`, audience: 'dm' });
-      if (!/^Each season it gets easier to buy an official/.test(free.captureReading?.sentence ?? '')) wrong.push(`s${i} free: ${free.captureReading?.sentence}`);
+      // re-keyed by identity (the move 91592cbf): at none no ADVANCING line is struck, so the pressure pool speaks
+      if (!free.captureReading?.sentence || free.captureReading.provenance?.poolKey !== ADV) wrong.push(`s${i} free: ${free.captureReading?.sentence}`);
       const bought = powerStateProse(town('none', [OFFICIAL], BREAK({ prosperity: 10, safety: 12 })), {}, { seed: `s${i}`, audience: 'dm' });
       if (!/still own a few officials/.test(bought.captureReading?.sentence ?? '')) wrong.push(`s${i} bought: ${bought.captureReading?.sentence}`);
       const def = defenseCriminalProse(town('equilibrium', [OFFICIAL]), 'organized', { seed: `s${i}`, audience: 'dm' });

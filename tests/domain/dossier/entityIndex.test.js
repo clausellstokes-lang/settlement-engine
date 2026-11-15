@@ -624,7 +624,11 @@ describe('dossierSearch indexes the shipped prose on the player-view enumeration
   const sharedOf = (owner, veil = []) => applyVeil(toPublicSafe(withPublicProse(owner, composePublicProse(owner))), veil);
   const sentenceOf = (desk, key) => (desk && desk[key] && typeof desk[key].sentence === 'string' ? desk[key].sentence : null);
 
-  it.each([0, 4, 9])('soak1k-%i: a defense lens line the shared page prints is FOUND there, under Defense, as a prose object', (i) => {
+  // soak1k-9 re-keyed by identity to the nearest birth that still shows the claim (TAIL-CLOSE-DISPLAY-1): soak1k-9 is a
+  // watch-only town (its one force a "Town watch"), and by the DECLARED MOVE 2b7f6199 (R3-TABS-4 F2/F7: a watch is not
+  // the townspeople in arms, nor a force that holds a perimeter) such a town draws no Invasion line and no held-perimeter
+  // beasts line; soak1k-10 (a city with a watch, a garrison and a mercenary quarter) prints both
+  it.each([0, 4, 10])('soak1k-%i: a defense lens line the shared page prints is FOUND there, under Defense, as a prose object', (i) => {
     const shared = sharedOf(birth(i).settlement);
     const line = sentenceOf(publicProseOf(shared, 'defense:threat'), 'beasts')
       || sentenceOf(publicProseOf(shared, 'defense:threat'), 'invasion');

@@ -5,7 +5,8 @@
  *   rpf-metropolis-wartime-13   Narantuya Tanghud (defends): "Wants to hold the line through the war with fewer hands than
  *                               the line needs." — her card: "Find one person willing to speak against Dogshin Kipchak …";
  *   rpf-city-succession_void+politically_fractured-13  Drusilla Pacuvius (instigator): "Wants to keep the pressure on until
- *                               the seat gives way …" where the seat has given way;
+ *                               the seat gives way …" where the seat has given way (the town re-cast at 65dc92af9: its
+ *                               instigator now Publicola Maximus, the pin re-keyed to him by identity);
  *   rpf-village-politically_fractured-13  Eudoxia Bryennios (instigator): "Wants to use this crisis to take the seat for
  *                               themselves." — her card: "Pay someone back for a wrong done to them."
  * Measured on the census's 720 and the readers' 80 (app shape) at 0570b3441: 406 of 427 cast people carry a goal of their
@@ -64,7 +65,11 @@ describe('ROUND THREE · the Tonight sheet voices a cast person with the card\'s
   it('the three lines the reader read are gone, and the cards\' own goals print in their place', () => {
     const by = (seed, name) => composeTonightSheet(born[seed]).people.find((p) => p.name === name);
     expect(by('rpf-metropolis-wartime-13', 'Narantuya Tanghud')?.line).toMatch(/^find one person willing to speak against /);
-    expect(by('rpf-city-succession_void+politically_fractured-13', 'Drusilla Pacuvius')?.line).toMatch(/^ask Plancus Publicola for a favour /);
+    // RE-KEYED BY IDENTITY (TAIL-CRISIS-7): the same town's instigator. JOIN-4 · point 2 (65dc92af9, lane/upkeep-monotone at
+    // 0ca0bbe94, the defence rating's rebuild, whose declared moves shift pins: its merge LISTS them) re-cast the town: its
+    // instigator is now Publicola Maximus, and Drusilla Pacuvius is off the sheet. He prints his card's own goal in the
+    // place of the role's line, as she did (the first test holds every cast person of the town to their own goal).
+    expect(by('rpf-city-succession_void+politically_fractured-13', 'Publicola Maximus')?.line).toMatch(/^do Iulia Laenas a favour /);
     expect(by('rpf-village-politically_fractured-13', 'Eudoxia Bryennios')?.line).toBe('pay someone back for a wrong done to them.');
   });
 

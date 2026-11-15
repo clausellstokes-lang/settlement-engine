@@ -357,6 +357,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
 }
 
 export default function InstitutionsTab({ settlement, canAuthor = false }) {
+  const mobile = useIsMobile(); // bound above the early return: the ordinary-times line is prose, and keeps its phone floor
   const entries = useMemo(() => institutionsWithServices(settlement), [settlement]);
   const houses = useMemo(() => entries.filter((entry) => !entry.fabric), [entries]);
   const fabric = useMemo(() => entries.filter((entry) => entry.fabric), [entries]);
@@ -390,7 +391,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
         <InfoPill text={SECTION_HELP.institutions} />
       </div>
       {ordinaryLine && (
-        <div data-testid="institutions-ordinary-times" style={{ padding: '2px 12px 6px', fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic' }}>{ordinaryLine}</div>
+        <div data-testid="institutions-ordinary-times" style={{ padding: '2px 12px 6px', fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, fontStyle: 'italic' }}>{ordinaryLine}</div>
       )}
       {/* THE FLUSH RULE (X-44): the houses sit edge to edge, parted by their own hairlines. */}
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
