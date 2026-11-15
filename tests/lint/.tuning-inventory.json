@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "d85226542415bee9add864572c018b8352e4195f",
+  "measuredAtSha": "08bd47df54e67ea65bfdf1bc774266137883bd73",
   "measuredBy": "TAIL-CLOSE-DOORS-4",
   "date": "2026-11-15",
-  "note": "the close of the tail round, TAIL-CLOSE-DOORS-4, after part A's pins (the owner's word, 2026-11-15 06:00 UTC)",
+  "note": "the close's final tree",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8626,7 +8626,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 52,
+      "line": 55,
       "spanDigest": "d10115379d15db065531f35da0cda4eee0e18371ba912cf4b17d88afe788735f",
       "leaves": {
         "value": 0.85
