@@ -118,6 +118,16 @@ Every other red of those seven files is red at base with the same arm (the close
 
 So the books my cures move: **7 stored figures, each re-keyed in its own form; 0 laws.**
 
+## Batch 2 (after the merge): the labels seat's two rows
+
+- **"keep its defenders paid" (DS-DEF-2 STRONG v1) at a funding gate under 1:** among the pay claims batch 1 reworded out; it prints in none of the 720 at the tip (the line now reads "...the town can buy what a bad season needs without going begging"). Nothing more to do.
+- **C23849's sibling r2r-thorp-43 (DS-ECO-1 C4 v6), VERIFIED FALSE:** a Poor port thorp whose record carries no exports, no imports and no transit (1 of the 68 towns that print v6; the C4 lines v1 and v2 would be as false there). A TWIN WAS REFUSED BY A LAW: the pool partitions by crisis and market, and an `exports` mark on every calm line leaves it mute in the projection contract's abstract states (measured on C1 in batch 1). CURED BY REWORDING (C4 v1 "{settlement} sits on its {access} and stays poor all the same."; v2 "Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks."; v6 "There is no market at {settlement} to hold whatever its {access} brings, and the town stays poor."), as batch 1 did for C1. The selector grant (CP5, the chair's pointer of 16:58: a third input to `prosperityHeaderPoolKey`, "the approach carries trade") was NOT used: with C1 and C4 claiming no traffic, every line those pools draw is true where nothing passes. LEFT, with the pointer (`origin/lane/bar2-labels-2026-11-15:docs/chair/2026-11-15/bar2/BAR2-LABELS-3-HANDBACK.md`, "Item 2"): C4 v3 ("{settlement}'s {access} is busy", needs a market) would be false in a market town with no trade (0 of the 720).
+- **Measure (both runs on the merged tree, 2 workers each: df2225165 without batch 2, and with it):** records byte-identical; sentences 29941 -> 29935; gone 23, new 17, fewer 0, more 0, moved 0: text only, every reworded line inherits exactly its towns (v2 101, v6 68, v1 74).
+- **Veto list, batch 2:** C4 v1 (74 towns), v2 (101), v6 (68), smallest thorp to town (C4 is a low rung on a working approach: thorp, hamlet, village and town only).
+- **Guard:** `tests/domain/bar2CorpusGuards.test.js` +3 REWORDED rows (39/39 at the tip; the three red on df2225165).
+- **Books batch 2 moves:** prose bytes (economy 185569 -> 185528, lowered); the observed-shape baseline re-frozen through `--write` on the committed tree. Re-run alone at the tip and green: the prose walkers (composed, entry contradiction, wiring census, move grammar), composeStateProse, the projection contract, presumed things, crisis-blind, declaration registers, corpusEcoTailGuards, economyStateProseDesk, prose bytes, observed shape.
+- **The chair's narrower net (16:59)** found my part (a) already run (86 files), so nothing changed.
+
 ## Gates (batch 1)
 
 `typecheck:domain:strict` 1113/1113 OK; `typecheck:ratchet` 167/167 OK; eslint on the touched files 0; presumed-things `--check` exit 0; `page-census.mjs --grid` 0 falls; `wiring-census.mjs --check` 0; `gen:dossier-prose --check` 0. The guard `tests/domain/bar2CorpusGuards.test.js`: 36/36 green at the tip, 33 red at base (its 3 KEEP rows green both sides).
