@@ -86,6 +86,7 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 | 4 | lane/close-layer-cycle-attempt-2026-11-15 | 36fe6f10c (08:51; origin tip = the hash named) | 061db1367 | 416be57d1 | none (vite.config.js and the layer register/shared merged clean); no file both sides moved | 9 files outside docs/; run alone: layerBoundaries 8/8, engineCoreLazyEdge 3/3, factLayers.walker 1 failed/15 (READERS; 3 before), chainPrintSites 6/6, ruinFilterRoster 12/12, defenceFactReaders 1 failed/22 (red alike before) |
 | 5 | lane/tail-close-doors-2026-11-15 (first pass) | 84a9f46d7 (08:56; origin tip = the hash named) | 04149c5ef | 511f9307d | none; no file both sides moved: its side whole | 20 files outside docs/ (registers, censuses, edge bundles, baselines, landingFixture.js); run alone: poolDominance 16/17, pageCensus 14/14, proseCorpusBytes 18/18, tuningRegister 75/76, engineBundleReplay 5/7 (1 red, 1 skipped) |
 | 6 | lane/tail-close-heap-2026-11-15 | e798161fd (09:12; origin tip = the hash named) | 2d8a6632a | db4e41036 | none | 1 file outside docs/ (`scripts/check-writer-reach.mjs`); nothing run alone (the chair's word) |
+| 7 | lane/tail-close-reach-2026-11-15 | 76528d315 (09:16; origin tip = the hash named) | 061db1367 | bfd5d470c | none; no file both sides moved: its side whole | 11 files outside docs/ (no src/); run alone: writerReach 51/52 on the default heap (all ran), observedShapeReaders 44/47, observedShapeBaseline 59/59, Migration 26/26, Sentinel 35/35 |
 
 ## 3. Every code resolution
 
@@ -100,6 +101,8 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 **Point 5, the doors' first pass, the files the chair named run alone (counts only)** (84a9f46d7; base 04149c5ef; no conflict; no file both sides moved): `poolDominance.walker` 16/17 (red: "no ceiling sits loose above its measure"); `pageCensus.walker` 14/14; `proseCorpusBytes` 18/18; `tuningRegister.walker` 75/76 (red: "the measured tree matches the committed inventory exactly"); `engineBundleReplay` 5 passed, 1 failed, 1 skipped (red: "the espionage fence's 360-settlement driven corpus: bundle equals in-process"). Derived at an earlier tree: stale at the merged tree, expected by the chair, not a stop (`/home/user/j11out/t5.*.log`).
 
 **Point 6, the heap** (e798161fd, taken BEFORE the reach branch on the chair's seventh word): a reach merge (76528d315) had been opened at b8435c1e2 and its walkers started under an 8 GB heap before that word was read; the runs were stopped and the merge aborted uncommitted (`git merge --abort`; nothing of it landed or was pushed), then the heap landed clean.
+
+**Point 7, the reach, the files the chair named run alone** (76528d315; base 061db1367; no conflict; d8b08402f beneath): `writerReach.walker` WITHOUT `NODE_OPTIONS`: all 52 ran (no worker died; 87 s), 51 passed, 1 failed: "the surfaceReach grammar round-trips": `institution on availableServices` frozen `campaign-pdf=N … world-book=N`, measured `campaign-pdf=R … world-book=R`; `observedShapeReaders.walker` (8 GB) 44/47, red: SHRINK-ONLY ceiling, THE ERASURE GUARD, A1/A7 schema-7 filters; `observedShapeBaseline` 59/59; `observedShapeMigration` 26/26; `observedShapeSentinel` 35/35 (`/home/user/j11out/t7.*.log`). A drift from the landings before it: the reach seat's final pass.
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -312,6 +315,7 @@ JOIN-10's (by point):
 | `tests/lint/factLayers.walker.test.js` (READERS arm) | layer cut (4), close-src (1, 3) | 1 of 15 red at the merged tree (3 before the cut): the src seat's register door, at its last tip |
 | `tests/lint/defenceFactReaders.walker.test.js` (defenseDisplay.js reads 4, unbanked) | — (red at ae6f0adc8 before point 4, and after) | carried: the src or doors seat's register |
 | `poolDominance.walker` (a loose ceiling), `tuningRegister.walker` (the inventory), `engineBundleReplay` (the espionage fence's 360-town corpus) | tail-close-doors first pass (5) | stale at the merged tree (derived at an earlier tree): the doors' final pass re-derives them at the final tree |
+| `writerReach.walker` (availableServices reach: campaign-pdf, world-book now R); `observedShapeReaders.walker` (3: ceiling, erasure guard, A1/A7) | tail-close-reach (7) | drift from the landings beneath it: the reach seat's final pass re-takes its registers at the final tree |
 
 ## 5. Stops
 
@@ -336,4 +340,4 @@ A worktree at origin's tip (`git worktree add /home/user/j11wt -b join11 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed: points 1-6 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors final pass LAST OF ALL; tail-record; tail-close-reach; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
+Landed: points 1-7 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors final pass LAST OF ALL; tail-record; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
