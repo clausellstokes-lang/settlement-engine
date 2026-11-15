@@ -360,7 +360,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { face: 'the alewife', tags: ['food'], priorityCategory: 'economy' },
       at: {
         hamlet: { name: 'Alehouse', baseChance: 0.55, desc: "Home-brewed ale sold from someone's back room. The hamlet's main gathering place. News, disputes, and arrangements all happen here.", tags: ['food', 'trade'] },
-        village: { name: 'Ale house', baseChance: 0.8, desc: 'Home-based. Women brew and sell ale.' },
+        village: { name: 'Ale house', baseChance: 0.8, desc: 'Home-based. Ale brewed in the house and sold from it.' },
         town: { face: 'the tavern keeper', name: 'Taverns (5-20)', required: true, desc: 'Drinking establishments. Social hubs.' },
       },
       ceiling: { tier: 'town', reason: 'At city scale drink and lodging share one district row.' },

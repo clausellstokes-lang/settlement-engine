@@ -263,7 +263,7 @@
     },
     {
       "id": "thorp|Government|Lord's reeve#0",
-      "text": "A distant lord's man, set here to watch the settlement and remit what it owes. His writ is legitimate; his welcome is not.",
+      "text": "A distant lord's officer, set here to watch the settlement and remit what it owes. The writ is legitimate; the welcome is not.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -271,7 +271,7 @@
     },
     {
       "id": "thorp|Government|Lord's reeve#1",
-      "text": "Placed by a lord who never visits, he holds official charge of the settlement. The paperwork backs him. The neighbours do not.",
+      "text": "Placed by a lord who never visits, this officer holds official charge of the settlement. The paperwork backs the office. The neighbours do not.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -441,7 +441,7 @@
     },
     {
       "id": "hamlet|Economy|Shepherd#0",
-      "text": "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. He is a mainstay of the cloth trade.",
+      "text": "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. Wool is what the flocks are chiefly kept for.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -450,7 +450,7 @@
     },
     {
       "id": "hamlet|Economy|Shepherd#1",
-      "text": "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. The textile trade leans on him.",
+      "text": "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. Wool is the first of what the flocks yield.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -503,7 +503,7 @@
     },
     {
       "id": "hamlet|Economy|Charcoal burner#1",
-      "text": "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.",
+      "text": "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.",
       "needs": [
         "terrain: forest"
       ],
@@ -513,7 +513,7 @@
     },
     {
       "id": "hamlet|Economy|Peat cutter#0",
-      "text": "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what he sells is winter warmth.",
+      "text": "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what it sells is winter warmth.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -850,7 +850,7 @@
     },
     {
       "id": "hamlet|Government|Lord's steward#0",
-      "text": "A lord's man runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
+      "text": "A lord's agent runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -858,7 +858,7 @@
     },
     {
       "id": "hamlet|Government|Lord's steward#1",
-      "text": "Acting for the lord, he administers the land, takes in rent, and imposes the noble's will.",
+      "text": "The office acts for the lord: it administers the land, takes in rent, and imposes the noble's will.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1274,7 +1274,7 @@
     },
     {
       "id": "village|Economy|Ale house#0",
-      "text": "Run from the home. The brewing and selling of ale is women's work.",
+      "text": "Run from the home. Ale is brewed and sold under the same roof.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1282,7 +1282,7 @@
     },
     {
       "id": "village|Economy|Ale house#1",
-      "text": "A household trade. Women brew the ale and sell it.",
+      "text": "A household trade. The ale is brewed at home and sold there.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1415,7 +1415,7 @@
     },
     {
       "id": "village|Crafts|Mill#0",
-      "text": "A water- or wind-driven mill holding the sole right to grind. The miller tends to be the richest man in the village, and the least loved.",
+      "text": "Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1439,7 +1439,7 @@
     },
     {
       "id": "village|Crafts|Blacksmith#1",
-      "text": "Works metal full-time. Tools and horseshoes depend on him.",
+      "text": "Works metal full-time. Tools and horseshoes depend on this work.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1447,7 +1447,7 @@
     },
     {
       "id": "village|Crafts|Carpenter#0",
-      "text": "Houses, carts, and furniture, all his work.",
+      "text": "Houses, carts, and furniture, all of it made here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1487,7 +1487,7 @@
     },
     {
       "id": "village|Crafts|Cooper#1",
-      "text": "Casks for storage and carriage, all his making.",
+      "text": "Casks for storage and carriage, all made here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1706,7 +1706,7 @@
     },
     {
       "id": "village|Crafts|Woodcarver#1",
-      "text": "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. For the church he shapes sacred images and reliquaries.",
+      "text": "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. Sacred images and reliquaries are carved here too.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1715,7 +1715,7 @@
     },
     {
       "id": "village|Crafts|Village scribe#0",
-      "text": "One of the few here who can read and write. He copies letters, sets down plain contracts, and reads out documents for those who cannot. Usually the priest's helper or a layman schooled at a monastery.",
+      "text": "One of the few here who can read and write: letters copied, plain contracts set down, documents read out for those who cannot. Usually schooled at a monastery, or by whoever here could teach.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1731,7 +1731,7 @@
     },
     {
       "id": "village|Crafts|Cartographer's workshop#0",
-      "text": "A mapmaker who draws and sells his work: road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
+      "text": "A mapmaker's workshop, drawing and selling road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1865,7 +1865,7 @@
     },
     {
       "id": "village|Government|Village reeve#0",
-      "text": "Chosen from among the peasants, he arranges the work owed, settles quarrels, and stands for the village before any outside power.",
+      "text": "Chosen from among the peasants to arrange the work owed, settle quarrels, and stand for the village before any outside power.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1873,7 +1873,7 @@
     },
     {
       "id": "village|Government|Village reeve#1",
-      "text": "A peasant elected by his own. He parcels out the labour dues, mediates disputes, and speaks for the village to those above it.",
+      "text": "A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2027,7 +2027,7 @@
     },
     {
       "id": "village|Criminal|Fence (word of mouth)#0",
-      "text": "The one to see when stolen goods need moving without noise. He works from behind a legitimate trade.",
+      "text": "The one to see when stolen goods need moving without noise. The dealing is done from behind a legitimate trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2059,7 +2059,7 @@
     },
     {
       "id": "village|Entertainment|Village musician#0",
-      "text": "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in his songs keeping the local history alive.",
+      "text": "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in song keeping the local history alive.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2067,7 +2067,7 @@
     },
     {
       "id": "village|Entertainment|Village musician#1",
-      "text": "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through his songs the settlement's history is remembered.",
+      "text": "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through those songs the settlement's history is remembered.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2629,7 +2629,7 @@
     },
     {
       "id": "town|Crafts|Blacksmiths (3-10)#0",
-      "text": "Several smiths, each to his specialty.",
+      "text": "Several ironworkers, each to a specialty.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2645,7 +2645,7 @@
     },
     {
       "id": "town|Crafts|Jeweller#0",
-      "text": "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. He works to commission, values stones, and now and then buys from customers who keep quiet about provenance.",
+      "text": "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. The work is to commission; stones are valued, and now and then bought from customers who keep quiet about provenance.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2653,7 +2653,7 @@
     },
     {
       "id": "town|Crafts|Jeweller#1",
-      "text": "Rings, necklaces, seals, and finery, worked from gold and gemstone. He takes orders, appraises stones, and is not above the occasional purchase from a discreet seller.",
+      "text": "Rings, necklaces, seals, and finery, worked from gold and gemstone. Orders are taken, stones appraised, and the occasional purchase from a discreet seller is not refused.",
       "needs": [],
       "excludes": [],
       "crisis": [],

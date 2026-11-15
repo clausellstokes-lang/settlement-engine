@@ -71,8 +71,8 @@ const PAIRS = [
     "Common matters are settled by all the family heads together, each voice equal. It is unhurried, and the more egalitarian for that.",
   ],
   [
-    "A distant lord's man, set here to watch the settlement and remit what it owes. His writ is legitimate; his welcome is not.",
-    "Placed by a lord who never visits, he holds official charge of the settlement. The paperwork backs him. The neighbours do not.",
+    "A distant lord's officer, set here to watch the settlement and remit what it owes. The writ is legitimate; the welcome is not.",
+    "Placed by a lord who never visits, this officer holds official charge of the settlement. The paperwork backs the office. The neighbours do not.",
   ],
   [
     "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.",
@@ -115,8 +115,8 @@ const PAIRS = [
     "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.",
   ],
   [
-    "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. He is a mainstay of the cloth trade.",
-    "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. The textile trade leans on him.",
+    "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. Wool is what the flocks are chiefly kept for.",
+    "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. Wool is the first of what the flocks yield.",
   ],
   [
     "Milk, butter, and cheese from cattle or goats, when there are beasts to run. The work is seasonal, and heaviest in summer.",
@@ -128,10 +128,10 @@ const PAIRS = [
   ],
   [
     "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.",
-    "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.",
+    "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.",
   ],
   [
-    "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what he sells is winter warmth.",
+    "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what it sells is winter warmth.",
     "Digs and dries peat blocks from the neighbouring marshland to burn at home. The trade is seasonal, and the thing sold is warmth against the winter.",
   ],
   [
@@ -211,8 +211,8 @@ const PAIRS = [
     "No lord's representative stands here. The hamlet is free, and its shared affairs are decided by the common consent of its elders.",
   ],
   [
-    "A lord's man runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
-    "Acting for the lord, he administers the land, takes in rent, and imposes the noble's will.",
+    "A lord's agent runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
+    "The office acts for the lord: it administers the land, takes in rent, and imposes the noble's will.",
   ],
   [
     "One well-regarded resident holds sway without a mandate. Nobody voted, nobody appointed, everybody accepts it. What gets decided is practical, never ceremonial.",
@@ -311,8 +311,8 @@ const PAIRS = [
     "A lone inn catering to whoever the road brings: merchants, pilgrims, travellers. It offers a room, stabling, and the common meal.",
   ],
   [
-    "Run from the home. The brewing and selling of ale is women's work.",
-    "A household trade. Women brew the ale and sell it.",
+    "Run from the home. Ale is brewed and sold under the same roof.",
+    "A household trade. The ale is brewed at home and sold there.",
   ],
   [
     "A large walled compound built for desert traders: camel stabling, storage under lock, a well, and beds for fifty. Where caravans come, it is the desert settlement's economic heart.",
@@ -343,15 +343,15 @@ const PAIRS = [
     "A toll house guards this bridge; its keeper gathers the crossing fees and handles the basic repairs. Modest revenue, but steady.",
   ],
   [
-    "A water- or wind-driven mill holding the sole right to grind. The miller tends to be the richest man in the village, and the least loved.",
+    "Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved.",
     "Milling here is a monopoly, water or wind powered. Its keeper is usually the wealthiest villager and, for that reason, the most begrudged.",
   ],
   [
     "A full-time smith. Indispensable for tools and shoeing.",
-    "Works metal full-time. Tools and horseshoes depend on him.",
+    "Works metal full-time. Tools and horseshoes depend on this work.",
   ],
   [
-    "Houses, carts, and furniture, all his work.",
+    "Houses, carts, and furniture, all of it made here.",
     "Raises houses, builds carts, makes furniture.",
   ],
   [
@@ -360,7 +360,7 @@ const PAIRS = [
   ],
   [
     "Builds barrels for storing and hauling goods.",
-    "Casks for storage and carriage, all his making.",
+    "Casks for storage and carriage, all made here.",
   ],
   [
     "Herbal medicines, poultices, and everyday remedies for sale. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
@@ -412,14 +412,14 @@ const PAIRS = [
   ],
   [
     "Works wood into the useful and the ornamental alike (tool handles, holy figures, inlay for furniture) and makes the sacred images and reliquaries the church requires.",
-    "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. For the church he shapes sacred images and reliquaries.",
+    "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. Sacred images and reliquaries are carved here too.",
   ],
   [
-    "One of the few here who can read and write. He copies letters, sets down plain contracts, and reads out documents for those who cannot. Usually the priest's helper or a layman schooled at a monastery.",
+    "One of the few here who can read and write: letters copied, plain contracts set down, documents read out for those who cannot. Usually schooled at a monastery, or by whoever here could teach.",
     "Literate where most are not: copying correspondence, drawing up simple contracts, and reading papers aloud for the unlettered. As often as not the priest's assistant or a monastery-taught layman.",
   ],
   [
-    "A mapmaker who draws and sells his work: road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
+    "A mapmaker's workshop, drawing and selling road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
     "Here a craftsman renders and sells maps: regional roads, land surveys, and crude wilderness charts drawn from what travellers report. Few enough exist that the average village has none.",
   ],
   [
@@ -451,8 +451,8 @@ const PAIRS = [
     "Acting for the lord, the steward takes in the rents and holds the manor's writ over the bound village.",
   ],
   [
-    "Chosen from among the peasants, he arranges the work owed, settles quarrels, and stands for the village before any outside power.",
-    "A peasant elected by his own. He parcels out the labour dues, mediates disputes, and speaks for the village to those above it.",
+    "Chosen from among the peasants to arrange the work owed, settle quarrels, and stand for the village before any outside power.",
+    "A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.",
   ],
   [
     "In the want of any formal power, the oldest or most respected villager steers the decisions. Less official than a reeve, but better than no one at all.",
@@ -491,7 +491,7 @@ const PAIRS = [
     "Chartered under licence, the hall sets bounties, organises monster-hunts, and answers armed emergencies for the territory about it. Found more often in frontier country.",
   ],
   [
-    "The one to see when stolen goods need moving without noise. He works from behind a legitimate trade.",
+    "The one to see when stolen goods need moving without noise. The dealing is done from behind a legitimate trade.",
     "A quiet local hand for shifting lifted goods, screened by another line of business.",
   ],
   [
@@ -499,8 +499,8 @@ const PAIRS = [
     "A handful of tunnels under the houses, cut to slip contraband past the law.",
   ],
   [
-    "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in his songs keeping the local history alive.",
-    "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through his songs the settlement's history is remembered.",
+    "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in song keeping the local history alive.",
+    "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through those songs the settlement's history is remembered.",
   ],
   [
     "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.",
@@ -631,12 +631,12 @@ const PAIRS = [
     "The town's grain is ground at a handful of sites.",
   ],
   [
-    "Several smiths, each to his specialty.",
+    "Several ironworkers, each to a specialty.",
     "A number of smiths, work divided by trade.",
   ],
   [
-    "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. He works to commission, values stones, and now and then buys from customers who keep quiet about provenance.",
-    "Rings, necklaces, seals, and finery, worked from gold and gemstone. He takes orders, appraises stones, and is not above the occasional purchase from a discreet seller.",
+    "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. The work is to commission; stones are valued, and now and then bought from customers who keep quiet about provenance.",
+    "Rings, necklaces, seals, and finery, worked from gold and gemstone. Orders are taken, stones appraised, and the occasional purchase from a discreet seller is not refused.",
   ],
   [
     "Builders and makers of furniture.",
@@ -1971,9 +1971,9 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.", needs: Object.freeze(["terrain: forest"]) }),
     Object.freeze({ text: "Charcoal kilns, tended day and night while a burn lasts, whenever there is wood to burn. Charcoal feeds the hottest fires.", twinOf: "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
-  "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.": Object.freeze([
-    Object.freeze({ text: "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.", needs: Object.freeze(["terrain: forest"]) }),
-    Object.freeze({ text: "A collier's kilns under their turf, for turning whatever wood can be had into charcoal, the fuel that burns hottest.", twinOf: "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.", excludes: Object.freeze(["terrain: forest"]) }),
+  "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.": Object.freeze([
+    Object.freeze({ text: "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.", needs: Object.freeze(["terrain: forest"]) }),
+    Object.freeze({ text: "A collier's kilns under their turf, for turning whatever wood can be had into charcoal, the fuel that burns hottest.", twinOf: "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.", excludes: Object.freeze(["terrain: forest"]) }),
   ]),
   "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.": Object.freeze([
     Object.freeze({ text: "Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.", needs: Object.freeze(["institution: docks"]) }),
@@ -2141,7 +2141,7 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
 export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Economy|Fisher's landing#1
   "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
-  "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
+  "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.": Object.freeze({ needs: Object.freeze(["terrain: forest"]) }), // W2-FIX-DATA (REVIEW-W2B cold list)
   "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence no garrison is here to keep. You find them along dangerous frontiers.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#0
   "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monster hunters bed down inside, and with no garrison to call on it musters the defence. A frontier fixture where the country is dangerous.": Object.freeze({ excludes: Object.freeze(["garrison"]) }), // hamlet|Adventuring|Adventurers' charter hall#1
   "Goods route through the hamlet to slip past the toll roads and customs posts. It is paid for the service in kind, and glad of it.": Object.freeze({ needs: Object.freeze(["tier: ≤ hamlet"]) }), // hamlet|Criminal|Smuggling waypoint#0
