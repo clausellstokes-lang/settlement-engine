@@ -1,5 +1,9 @@
 # TAIL-POWERS-B · the hand-back (kept current after every batch)
 
+SUCCESSOR SEAT (2026-11-15, from 01:33 UTC): TAIL-POWERS-B-2 (session_01ACmDYY3QQBrzJ9NRUefGTx) holds this file and this
+branch since f4eab4088: batches 4 (P19) and 5 (P9 P12 P18) below are its; batches 1-3 are TAIL-POWERS-B's. Pushed from the
+scratch worktree's local branch `tpb2-wt` by explicit refspec; the main checkout was never staged, committed or reset.
+
 Seat: TAIL-POWERS-B (session_01ACmDYYwbBQPYLkHYV4U2QD), the second builder seat of the READ-ALL worklist POWERS, split from
 TAIL-POWERS by file (ruling P10). Chair: session_01ACmDYZrFEVXyZEUg1NDxxC.
 Base: lane/tail-powers-2026-11-14 at **40238d3ab** (the first seat's tip). Branch: lane/tail-powers-b-2026-11-14, pushed from a
@@ -37,6 +41,18 @@ scratch worktree's local branch `tpb-wt` by explicit refspec; the repository's m
   hunk of generateSettlementPipeline.js lent). (P15) P5 IS TAKEN: TAIL-TITLES holds faceHonorifics.js; do not touch it.
 - (P18, 00:48 UTC) Row 17190: the castellan's secret yields to the walls' visible state: reword it to claim what he DID
   and hid (the wall money, the buried survey), not what the walls look like. Text only, with the title-lines batch.
+- (P19, 01:12 UTC) P13(1) GRANTED: ONE MORE CALL at G1's seam, in the lent hunk of generateSettlementPipeline.js beside the
+  one-Dominant call: factionDynamics.js :: withConflictRelations(powerStructure, conflicts), draw-free: a pair the conflicts
+  hold at HIGH whose relation row reads symbiotic or dependent takes a twin naming the quarrel, direction escalating. A
+  declared move, its own commit (rows 09930 09967 09931 10594 06903 10575 09968 10600 09883 10588 of WORKLIST-DISPLAY-CIVIC).
+- (P9, P12, 2026-11-15) THE PARKED TITLE LINES: a row whose house lacks its input in 90% or more of the towns that hold it is
+  NAMED, not reworded (the record's gap is being cured by another seat); a row whose gap VARIES takes the hedge form ("when
+  there is clay to be had"); text only; no draw moved; for the owner's veto. (P18) THE SECRET YIELDS: see above.
+- (P24) THE ONE-MEMBER COUNCILS' PLURAL LINES (102 towns) and any line that needs `ruling body` or `rival power`: both atoms are
+  on the joined line, not on this branch; a measuring seat is counting whether the density resize can change the governing
+  power's one-or-many kind after a line is written: until the chair's word such lines are PARKED with their measure.
+- (X9) THE EXPORTS' READ: read-all-3/WORKLIST3-POWERS.json, measured with `SURFACES=PDF,Journal python3 inventory.py`.
+- THE ORDER: P19; then P9 with P18; then stressFactions, conflictIssues and the exports' rows by width.
 - The brief's laws (BRIEF-TAIL.md): silence is true, a silence of true lines over twenty towns told first; a state left mute takes
   a twin; no ceiling raised; a draw is not moved; one home for one fact; no new vocabulary word without the chair; every new or
   reworded line listed for the owner's veto.
@@ -153,7 +169,97 @@ Measured by one census before (the after-run of batches 1-2, at f89c0d7c1) and o
   seat's file). 05688, B00530, 00587, 26926, B07353, B28204 are not written in dmPowerLines.js (npcData, officeTitles,
   officialsInPay, tonightSheet): the ties seat's.
 
+## Batch 4 · c1263e61c · P19 (= P13(1)): a pair the conflicts hold at HIGH, called symbiotic or dependent, names the quarrel
+## Batch 5 · 594794a67 · P9 P12 P18: a title line claims the trade, not present work on an input the record may deny
+Measured TOGETHER (a declared efficiency, the first seat's form: disjoint surfaces, the relation rows and the people's card
+lines) by one census before (at 700ba76cf: 29,854 sentences) and one after (both cures: 29,891); one commit each.
+BATCH 4 (factionDynamics.js :: withConflictRelations; ONE call in the lent hunk of generateSettlementPipeline.js, after
+keepOneDominant, before onComplete). Draw-free. A symbiotic or dependent row of a pair `conflicts` holds at HIGH keeps its kind
+and its bargain and takes the twin "<its narrative> Even so, the two are now at odds over <the issue>.", direction escalating.
+- The count: 51 pairs in 47 towns (the guard's symbiotic 16, the dependent rows 35: the merchants', the faith's, the nobles',
+  the claimants'); 36 of them were not already escalating. Tense, subordinate, competitive and corrupted rows at HIGH: kept.
+- FIELD DIFF BY FAMILY (the 720): factionRelationships[].narrative 47 towns · factionRelationships[].direction 36. NOTHING ELSE
+  of this batch (the other families below are batch 5's).
+- The rows: 09930 09967 09931 10594 06903 10575 09968 10600 09883 10588 are the CONFLICT's own lines ("High tension <A> vs <B>",
+  the plot hook's title): TRUE (the conflict stands) and still print (3/2/2/2/2/2/1/1/1/1); the false partner the readers named
+  was the relation row's "stable" and "each needs the other", now escalating with the quarrel named: "<A>⇌<B>stable" fewer in
+  every such town (e.g. Grand Merchant Oligarchy⇌Military/Guardstable 5 -> 3, Ducal Governorship⇌Military/Guardstable 3 -> 1,
+  Merchant Guilds↔Religious Authoritiesstable 107 -> 103), the "~escalating" chips more by the same.
+- READ in three towns: r2s-monster_pressure-metropolis-0 ("... each needs the other to stay strong. Even so, the two are now at
+  odds over the cost of keeping the guard."), r2s-under_siege-town-0 (a siege: Town Council and War Council, an unpaid debt),
+  r2s-famine-town-0 (a famine: Guild Council and Merchant Guilds, succession to a council seat): TRUE.
+- NAMED (not this seat's hunk): regenNPCsPipeline (generateSettlementPipeline.js ~589) re-draws `conflicts` on a people regen
+  and keeps the relation rows: a twin born at birth can then name a quarrel the regen no longer holds. The cure is the same
+  call after that seam's generateConflicts (outside the lent hunk): for the chair.
+- The contradiction walker (tests/lint/proseEntryContradiction.walker.test.js, ANCHOR 5 among them): 29/29 green at the cure;
+  the twin is composed on the row, not a `narrative = ` line, and no anchor reads it.
+- GUARD tests/generators/conflictRelationsTwin.test.js: 4 red at 700ba76cf (the three readers' towns and the seam alone), KEEP
+  green; 5/5 at the cure.
+BATCH 5 (data/people/titleSecretsPresentations.js; text only). MEASURED by the record at 700ba76cf (scratch tools/p9.py: the
+card carrying the line, its house `npc.institution.key`, `resourceAnalysis.gaps` kind "missing" for that house; p9c.py: the
+resource's own condition). P12's second count is over the towns HOLDING the house:
+- HEDGED (the gap varies): the potter (clay missing in 172 of 269 towns holding one) B10797 93->0, B16083 85->0; the
+  brickmaker (132/228) B10668 89->0, B16204 71->0; the charcoal burner (timber 69/153) B10676 40->0; the tanner (hides: the
+  Tannery 7/10, the Tanners 0/139, Tanner (established) 0/166) B10687 47->0; the quarry master (stone depleted in 14 of 52
+  printing towns, 45/141 holding) B10693 52->0; the mine captain (ore depleted in 8 of 14; the siege exclusion re-keyed by
+  identity) B16114 14->0; the dairy farmer (livestock missing 36/42 = 86%, under the 90% bar) B10584 16->0, B16106/B16107
+  9->0, B16648 9->0 (also no longer says "goes to market"), B10689 8->0; the hunting (hunting grounds depleted in 22 of 95)
+  11315 83->0 and its twin 12->0.
+- P18: 17190 (61->0): "Pocketed the money that was granted for the wall repairs, and buried the survey that said where they
+  were needed"; its stakes "If the survey is found, everyone will know where the wall money went and who signed for it" (a
+  first wording said "the town" and tripped the tier-noun battery in 53 cities: re-worded, re-measured on the 61 towns by a
+  subset census: the coherence receipt no longer moves).
+- NAMED for the record's seat (P12; not reworded): the vintner 11176 68, 11202 60, B15974 58, B10758 56, 17453 55 (grapes
+  missing in 184 of 184 towns holding a vintner): still print, as ruled.
+- STRUCK: B10633 (15) "keeps you away from the byre": the byre is the house's building, not its herd. B16543 (6) "Sold butter
+  from a sick cow and a child fell ill": a past act, true whatever the herd is now.
+- No draw moved: the guard's 14 towns print the hedge on the SAME card; the field diff (the 720) moves only
+  npcs[].presentation.behaviour 283 towns, npcs[].secret.what 185, npcs[].secret.stakes 61 (the castellan's).
+  getStressHistory's keywords (npcGenerator.js) appear in none of the old or new secrets: no presentation mode moves.
+- The presumed-things registers shrink by the three rows the old lines banked (arm 1: "market" the milk, "walls" the
+  castellan; arm 2: "before it goes to market"), by identity; the walker fresh 147 = the base, first-register stale 0.
+- GUARD tests/generators/people/titleLinesClaimTheTrade.test.js: 14 red at 700ba76cf, KEEP (the vintner) green; 15/15 at the
+  cure. tests/generators/people/titleLinesNeedWhatTheyOffer.test.js: two refused lines re-keyed by identity.
+THE INVENTORY DIFF (before 700ba76cf -> after both): gone 23, new 60, fewer 25, more 12. Every row of the two batches GONE by its
+measure or struck/named above. The other sentences in fewer towns: the relation chips "...stable" (batch 4, above) and
+"Patron deity" with its two premium lines 720 -> 716 (four towns rendered the Power tab without the premium deity panel: the
+render-timing difference the first seat named; no cure here touches that surface). In more towns: the "~escalating" chips
+(batch 4) and "A handful of things about this <city> cannot all be true at once" 14 -> 41 / 14 -> 36, the coherence
+receipt's line, from the first stakes wording; cured by the re-wording (the 61-town subset run: the receipt's family no
+longer moves). The inheritors, widest twenty, are the reworded lines themselves and batch 4's twins: READ above.
+Gates (batch 4 + 5 tree): eslint 0 on the touched files; typecheck ratchet 167 = ceiling; domain strict 1113 = ceiling; the
+walker fresh 147 = the base; the twelve-birth grid 2 falls = the base (r2r-city-0, r2s-insurgency-metropolis-0, P7a). The 46
+test files naming the touched files (52 listed; with the walker): 14 failed at the base and the SAME 14 at the cure
+(powerStateProseDesk x2, r3c9ReaderLinesTrue, captureBirthScale, pipelinePinnedChoosers x2, powerEconomyFreshness x3, the
+presumed-things walker's arm-2 x3 (four other stale rows, carried), espionageDormancyFence, generatorGoldenMaster): CARRIED.
+proseFamilyContract / heldKeyWriterCensus walkers: 5 red at the base and the same 5 at the cure: CARRIED.
+A HAZARD MET (for every seat): a push made while origin is ahead is rejected client-side BEFORE the pre-push hook, which then
+reads no lane ref on stdin and runs the WHOLE check; its git-fixture tests (tests/scripts/implementationPackets.test.js,
+implementationSession.test.js, tests/soak-harness/soakRegister.test.js) inherit the hook's GIT_DIR and wrote five fixture
+commits onto this seat's local branch and the shared .git/config (core.bare = true, a [user] Fixture, [commit] gpgsign =
+false). Repaired here: the three config entries restored (the damaged copy kept in scratch), the local branch put back on its
+last real commit (nothing of the fixture's was pushed; the main checkout's tree and branch untouched). ALWAYS FETCH AND SIT ON
+ORIGIN'S TIP BEFORE A PUSH.
+
 ## EVERY NEW OR CHANGED LINE (the owner's veto), with towns it was read in
+- (batch 4) "<the row's narrative> Even so, the two are now at odds over <the issue>." (51 rows, 47 towns): r2s-under_siege-town-0
+  (a siege, the smallest kind it reaches: a town), r2s-famine-town-0 (a famine), r2s-monster_pressure-metropolis-0 (the largest).
+- (batch 5; each read on the card in the town named, the guard's towns) "Talks while working when there is clay to be had; shows how
+  a pot is thrown and lets visitors try." (93: r2s-famine-city-1) · "Has dug clay from land that belongs to someone else, whenever
+  there was clay to be had, and paid nothing for it" (85: r2s-famine-town-1) · "Sells by the thousand and the cart when there is
+  clay to be had; quick to quote and slow to deliver." (89: r2s-occupied-town-0, an occupation) · "Has taken children to tread
+  the clay for a few coppers a day, when there was clay to tread, and one of them was hurt badly" (71: r2s-famine-city-3) ·
+  "Sells charcoal by the sack, when there is timber to be had, to anyone who can carry it away." (40: r2s-occupied-metropolis-1) ·
+  "Has kept back from the tally what ore the workings still give, and sold it to a smelter elsewhere" (14: r2s-occupied-metropolis-1)
+  · "Sells stone by the block and the cart, from what the quarry still gives; wants half paid before cutting begins." (52:
+  r2r-metropolis-14) · "Sells leather to anyone when there are hides to be had; cash only." (47: r2s-plague_onset-village-2) ·
+  "Offers a cup and talk of the weather and the price of milk." (16: r2s-under_siege-hamlet-3, a siege) · "Has watered the milk
+  for years, whenever there was milk to sell" (9: r2s-indebted-hamlet-2) · "Sells milk, butter and cheese at the posted price,
+  when the cows are giving." (8: r2s-religious_conversion-hamlet-1) · "Has grazed the herd on a neighbour's land at night,
+  whenever there was a herd to graze" (9: r2r-hamlet-12) · "Talks about the woods, the game and where the hunting has been best
+  (; easy to fall into talk with)." (83 + 12: r2r-hamlet-18) · the castellan: "Pocketed the money that was granted for the wall
+  repairs, and buried the survey that said where they were needed" / "If the survey is found, everyone will know where the wall
+  money went and who signed for it" (61: r2s-plague_onset-city-0, a plague).
 - "The hall asks for <the force>'s agreement instead of giving orders, and less and less is decided without it." (37; was
   "the commander's"): r2r-hamlet-5 (the smallest), r2s-succession_void-metropolis-1, r2s-under_siege-town-1 (a siege).
 - "<G> holds the seat and collects the taxes; <R> tell(s) people that <G>'s rule is right and ordained. Each props up the
@@ -191,41 +297,29 @@ r2s-insurgency-metropolis-0, P7a).
 None re-taken. The generator golden (tests/property/generatorGoldenMaster.test.js) was red at the base and stays red: the
 merge seat's re-record carries the three families above.
 
-## What is left (by width), and what is next (THE HAND-BACK: this seat stops here, by the clock's budget, 01:33 UTC)
-- P13(1): GRANTED by the chair's ruling P19 (01:12 UTC, read at 01:33, after this seat's hand-back by the clock): ONE MORE
-  CALL in the hunk of generateSettlementPipeline.js lent for G1 (the final roster, before onComplete), beside
-  keepOneDominant: factionDynamics.js :: withConflictRelations(powerStructure, conflicts), DRAW-FREE: a pair the conflicts
-  hold at HIGH whose relation row reads symbiotic or dependent takes a twin that names the quarrel, direction 'escalating'.
-  A DECLARED MOVE, its own commit: the field diff by family on the 720 shows the relations' rows of those pairs AND NOTHING
-  ELSE; say the count of pairs and towns; read three towns. Its measure at the base (this seat's relation scan, the census
-  at 40238d3ab, rows of those pairs): the guard's symbiotic row at HIGH 16, the merchants' dependent 23, the faith's
-  dependent 6, the nobles' dependent 2. NOT BUILT HERE: the successor's first item. Keep the twins as whole
-  `narrative = `...`;` lines (the contradiction walker reads only those) and re-run its ANCHOR 5 (37).
-- P9 (the 21 parked title rows), with P12's guard and P18 (17190, the castellan's secret: reword to what he did and hid):
-  NOT STARTED. MEASURED at 40238d3ab (the towns PRINTING each row, and in how many the person's own house lacks its input
-  by `resourceAnalysis.gaps` "missing" or its chain's input): the vintner 11176 68/68, 11202 60/60, B15974 58/58, B10758
-  56/56, 17453 55/55 (EVERY town: P12's 90% bar: NAME for the record's seat, not reword; the chair counts 184 of 184 towns
-  holding a vintner); the potter B10797 55/93, B16083 56/85; the brickmaker B10668 56/89 (+9 a stone chain depleted, not
-  clay: re-read), B16204 46/71; the quarry master B10693 17/52 depleted; the tanner B10687 4/47 lack hides (+7 a leather
-  chain depleted: re-read); the collier B10676 19/40 lack timber; the dairy farmer B10584 14/16, B10633 13/15, B16106 7/9,
-  B16648 6/9, B10689 6/8, B16543 5/6, B16107 1/1 (a hamlet's dairy farmer lacks livestock in most: apply P12's count over
-  the towns HOLDING a dairy farmer before rewording); 11315 (the hunting worked out) and B16114 (ore) need the hunting
-  ground's and the ore's own `resourceAnalysis.resourceConditions`, not the house's chain. P12 needs the second count (the
-  towns that hold the house, whether or not they print the row): /tmp/claude-0/tools/p9.py is the first count's script.
-  A reading of mine for the next seat (not a ruling): a line that SELLS a durable good (wine by the cask, leather,
-  charcoal, bricks) claims the trade's stock, not present work on the input; a line that offers a perishable one (milk,
-  butter) or present work ("shows how a pot is thrown", "talk of the herd", "grazing the herd") needs the input.
-- The rest of the files: stressFactions.js (the exports' 25870 37 "controls a distinct district or institution" in a thorp;
-  25719, 25872, 25630 "resident agent of the external creditor" beside a separate Creditor's Representative; 25733),
-  conflictIssues.js (05973, 05970: "a baker says he was told to raise it" with no bakery), handlerTieLines.js (2),
-  factionProfile.js (2), powerStrata (2), stressPowerFaces (1), settlementNarrative TIE_GLOSS (2); the exports' rows of
-  titleSecretsPresentations (25356 HIGH 32: the boat-headman's meal of fish under a famine of fish, PDF/Journal; 15253,
-  15267 and 12380 "a path over the hills" on Plains, 11934 game "sold in the market" with no market, 21444, 23580, 23594,
-  11991, 10879 "hears everything the taverns say" with no tavern). The exports' rows measure with
-  `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json` (X9).
-- P5's rows (00956 the foundling-mother on a man; B11586, B11556): TAIL-TITLES's (P15).
-- Guards owed: the one-member council's plural lines (the first seat's, still owed: r2r-thorp-2 prints "The oldest heads of
-  the community decide things together" over one member).
+## What is left (by width), and what is next (kept by TAIL-POWERS-B-2)
+- DONE: P19 (batch 4), P9 + P12 + P18 (batch 5).
+- NEXT, batch 6 (PREPARED, NOT BUILT: scratch tools/b6edit.py holds the exact rewordings): stressFactions.js 05049 / 25870
+  (37+19 towns: "controls a distinct district or institution" -> "and has a following of its own"), 06241 (3: the War Council
+  "functioning smoothly ... authority isn't contested" beside a Suppressed council -> "While the war goes well, few people ask
+  what it does."), 15394 (1: the hunters "temporarily powerful" -> "they are wanted while the monsters are"), B00215 (4: "the
+  legitimate succession" under a conversion -> "to be the faith's true line"); conflictIssues.js 04491 / 05973 / 05970 ("a
+  baker says he was told to raise it" with no bakery -> "one of the sellers says they were told to raise it"). Two of them
+  shrink banked rows of the widened presumed-things register ("house: baker", "quarters"): shrink by identity.
+- NAMED for applyDensityLaw.js (the density seat; resizeSeats mints a doubled niche's rival as `{...host}`, desc and all):
+  25719, 25872, 25630 ("Resident agent of the external creditor" on The Free Alliance, The Independent Bloc, The Common
+  Interest, beside the real Creditor's Representative), 25733 ("External administrative body" on The Garrison Bloc, The Shield
+  Compact), and the rival copies of "controls a distinct district" (The Free Alliance, The Grey Council, The Common Interest):
+  the rival's desc should not be the host's.
+- STRUCK: B01040 / B00562 (27, handlerTieLines.js): any card may be praised for speaking out against crime; the handler (a
+  criminal face) is the one who chooses which criminals are caught: true by design.
+- Left in my files, by width: factionProfile.js B14921 / B14924 (20: "Popular Uprising" with no uprising on the past),
+  settlementNarrative TIE_GLOSS B00397 (20), B00382 (13), stressPowerFaces B29842 (5), powerStrata 10759 (4), 10748 (1); the
+  exports' rows (X9): claimStanding 04922 (111: Arcane Orders "hold real influence" beside a Suppressed power: P1), 29025 (28),
+  16694 (14), 29028 (13); titleSecretsPresentations' exports rows (25356 HIGH 32 the boat-headman's fish under a famine of
+  fish; 15253, 15267, 12380 "a path over the hills" on Plains; 11934; 21444, 23580, 23594, 11991, 10879).
+- PARKED (P24): the one-member councils' plural lines (102 towns) and any line needing `ruling body` or `rival power`.
+- P5's rows (00956; B11586, B11556): TAIL-TITLES's (P15).
 
 ## How the instruments are re-made
 The census: `git archive origin/lane/census-3-2026-11-14 docs/chair/2026-11-14/probes/CENSUS-3 | tar -x -C <dir>`;
@@ -235,4 +329,5 @@ its diff: READ-ALL's inventory.py / inventory_diff.py (`python3 -I`). This seat'
 a relation-row scan (each row's narrative against the pair's conflict intensity, the legitimacy crisis, the stability, the
 labels), a council scan (each card's "council" phrase against the governing name), the P9 measure (each row's printing
 towns: the person carrying the line, the house's `resourceAnalysis.gaps` "missing" and its chains' input), and a field diff
-by family (flatten each record, array indices folded to []).
+by family (flatten each record, array indices folded to []). TAIL-POWERS-B-2's (scratch tools/): p19scan.py (the pairs
+at HIGH and their rows), p9.py / p9c.py (the P9 measures), fielddiff.py, b6edit.py (batch 6's prepared edits).
