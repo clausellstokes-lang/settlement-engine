@@ -5,6 +5,7 @@
  */
 
 import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
+import { pluralPowerName } from '../../domain/display/governanceAccount.js';
 import { powerLabelOf } from '../factionDynamics.js';
 import { seatIsCouncil } from './claimStanding.js';
 
@@ -13,6 +14,12 @@ import { seatIsCouncil } from './claimStanding.js';
 // behind ... in a sustained dispute": it takes the line its ladder already prints for a guild outpaced by the merchants.
 /** @param {{ power?: number }} f @returns {boolean} the power's label is Minor or Suppressed */
 const isWeakPower = (f) => ['Minor', 'Suppressed'].includes(powerLabelOf(f.power));
+// TAIL-POWERS-B-3 batch 7 (row 20053; P1, P3): the faith's card says "The arcane orders have more say" of the FIRST arcane
+// power on the roster; where that is a governing Arcane Council, the Arcane Orders may stand behind the clergy (their own card
+// says so: 7 of the 17 towns at 4ff449a7b). The line names the rival it read, by its prose form and its number.
+/** @param {{ faction: string }} rival @returns {string} */
+const arcaneAheadSaid = (rival) => /arcane orders/i.test(rival.faction) ? 'The arcane orders have'
+  : powerSentenceName(rival.faction) + (pluralPowerName(powerSentenceName(rival.faction)) ? ' have' : ' has');
 
 // annotateFactionStanding — enrich faction descriptions with their position in
 // the (already normalised and sorted) power ranking (mutates in place).
@@ -222,7 +229,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             if (arcaneRival) {
               var religiousArcaneNote =
                 arcaneRival.power > power
-                  ? 'The arcane orders have more say right now, and the clergy cannot accept it.'
+                  ? arcaneAheadSaid(arcaneRival) + ' more say right now, and the clergy cannot accept it.'
                   : "The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.";
               standing = standing ? standing + ' ' + religiousArcaneNote : religiousArcaneNote;
             }

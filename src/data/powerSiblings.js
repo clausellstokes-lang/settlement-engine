@@ -44,6 +44,16 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'The church wants approval rights over market day activities. The village reeve disagrees.', needs: Object.freeze(['market']) }),
     Object.freeze({ text: 'The most devout households want a say over who may trade and when, and not everyone here agrees.', twinOf: 'The church wants approval rights over market day activities. The village reeve disagrees.', excludes: Object.freeze(['market']) }),
   ]),
+  // TAIL-POWERS-4 (B02464; 20987, 00170): a thorp holds no "families on each side", a hamlet or a village no "three
+  // estates" (the site's facts carry the tier); each twin claims what the smaller place bears.
+  'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.': Object.freeze([
+    Object.freeze({ text: 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.', needs: Object.freeze(['tier: ≥ hamlet']) }),
+    Object.freeze({ text: 'A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.', twinOf: 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.', excludes: Object.freeze(['tier: ≥ hamlet']) }),
+  ]),
+  'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.': Object.freeze([
+    Object.freeze({ text: 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'A merchant has bought land the old landholding family once held, and the family has not forgotten.', twinOf: 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.', excludes: Object.freeze(['tier: ≥ town']) }),
+  ]),
 });
 
 // CENSUS-5e unit 2 (2026-11-05; the chair's answer 1 to CENSUS-5d, R-AN / R-U): the town military

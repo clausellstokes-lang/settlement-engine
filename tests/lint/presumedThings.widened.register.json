@@ -996,7 +996,7 @@
     "famine",
     "word",
     "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judg",
-    "dfa32308413b0367"
+    "bb49c513afbb2c39"
    ]
   ],
   "src/components/new/tabs/EconomicsTab.jsx": [
@@ -7016,8 +7016,8 @@
    [
     "occupation",
     "word",
-    "The founders assumed the settlement would always make its own decisions. Under occupation, it no longer does.",
-    "0e70e61e21695b43"
+    "The settlement always made its own decisions, or believed it did. Under occupation, it no longer does.",
+    "d376443dec338868"
    ],
    [
     "openTrade",
@@ -16506,12 +16506,6 @@
     "root",
     "Controls specific territory through violence. Extorts local businesses. Competes with the watch for street-level authori",
     "5cda302fa8ef4287"
-   ],
-   [
-    "prison",
-    "root",
-    "Court + Prison",
-    "2e5bbcad8d5be670"
    ],
    [
     "house: gambling",
@@ -26814,12 +26808,6 @@
     "family",
     "The priest has been insisting on a say in who can marry whom and what gets planted when. Several families are unhappy.",
     "f9f3d10cc46cc7e6"
-   ],
-   [
-    "streets",
-    "family",
-    "The rebels' buildings are marked, and some streets are contested. ",
-    "75da3dc0fe431604"
    ],
    [
     "armedForce",
