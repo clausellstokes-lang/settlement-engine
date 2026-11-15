@@ -32,6 +32,17 @@ A-rows, pipelinePinnedChoosers A1/A6: pre-existing, not this seat's); eslint cle
 reports nothing in either file; the twelve-birth grid 2 falls before (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a)
 and the same 2 after. No declared move (no output changes).
 
+### Red 7 — generationCertificationCorpus.test.js, "pins the advisory record_coherence_battery failures BY IDENTITY"
+
+**A WIN, pinned by identity.** The one identity gone: `certification-v1-subsistence-thorp-dun` stopped failing (31 → 30); no
+new identity in the list. Earning commit: **ce69ac52** (TAIL-NARRATIVE-4 FB, ruling N17: a founder resolves draw-free to
+one the Origin row agrees with), the only code commit of the merge bd57eb02 (JOIN-8 · 21, narrative at 091ef25e5); 796c49ef
+fails it, bd57eb02 does not. Read at 796c49ef by a probe, the specimen's only battery finding was `battery.defense-words`
+"soldiers without a garrison or a hired company" on the founder line "a discharged soldier who liked the view and had
+nowhere better to be". The row is removed with a RE-KEYED comment naming the commit, as the pin's own text orders. Proof:
+the red alone 1 failed → 13/13 passed; eslint clean; no other file names the specimen. MOVING: the file differs on no
+`lane/tail-*` branch.
+
 ## Declared moves (for the owner's veto list)
 
 - none yet.
