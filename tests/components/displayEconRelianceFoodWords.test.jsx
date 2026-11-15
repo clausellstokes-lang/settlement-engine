@@ -76,7 +76,10 @@ const NOT = /** @type {const} */ ([
   ['r2s-famine-town-2', 'economics', 'Law enforcement, patrol and gate control here depend on iron', 'Law enforcement and patrol here depend on iron (no gate, no wall)', 'Law enforcement and patrol here depend on iron'],
   ['r2s-under_siege-town-1', 'economics', 'Law enforcement, patrol and gate control here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside'],
   ['r2s-under_siege-town-0', 'economics', 'Contributes to Entrepôt Trade - 11% of income', 'silent: the siege stopped the card', 'Contributes to Iron & Metalwork'],
-  ['r2s-famine-town-1', 'economics', 'Contributes to Grain Sales - 4% of income', 'silent: the famine failed the grain', 'Contributes to Entrepôt Trade - 14% of income'],
+  // settled at the merge of the joined line at 17e38c547 (TAIL-CLOSE-DISPLAY-1): the record's shares moved 4 -> 5 and 13 -> 14
+  // at 837cad90 (TAIL-DEFECON-2 5f67f382d, TAIL-DEFECON-3 2ac50c55d) and back to 4 and 13 on JOIN-9's points (measured by the
+  // record at the merged tree; the point not traced here); the same card, the famine still silences it
+  ['r2s-famine-town-1', 'economics', 'Contributes to Grain Sales - 4% of income', 'silent: the famine failed the grain', 'Contributes to Entrepôt Trade - 13% of income'],
 ]);
 /** [seed, tab, the twin true in the state that made the old line false] (new or newly reached lines: red at the base by design) */
 const TWIN = /** @type {const} */ ([
@@ -92,7 +95,7 @@ const KEEP = /** @type {const} */ ([
   ['r2r-village-25', 'magic', 'Reliance on magic: Relied upon'],
   ['r2s-famine-town-2', 'economics', 'Many households go short, and hunger is already here.'],
   ['r2r-town-6', 'economics', 'Law enforcement, patrol and gate control here depend on iron brought in'],
-  ['r2s-famine-town-1', 'economics', 'Contributes to Entrepôt Trade - 14% of income'], // re-keyed by identity (TAIL-DISPLAY-ECON-5): the same card; the record's share moved 13 -> 14 by the economy family's DECLARED MOVES on the joined line (TAIL-DEFECON-2 5f67f382d, TAIL-DEFECON-3 2ac50c55d),
+  ['r2s-famine-town-1', 'economics', 'Contributes to Entrepôt Trade - 13% of income'], // the same card: 13 -> 14 at 837cad90 (TAIL-DISPLAY-ECON-5's re-key), back to 13 on JOIN-9's points (settled at the 17e38c547 merge)
   // RE-KEYED BY IDENTITY (TAIL-DISPLAY-ECON-4, the chair's ruling X25.1): batch 2's silence gave way to the crisis leaf
   // (`crisisStoppedRow.js`), whose table holds the forge and the mine at work under a siege ("Iron & Metalwork": NONE);
   // the Income Sources row prints the same share unmarked. The same town, the same line: it prints again.
