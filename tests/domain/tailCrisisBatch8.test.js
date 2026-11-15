@@ -76,6 +76,25 @@ const FALSE = /** @type {Array<[string, string, string, string]>} */ ([
   ["r2s-plague_onset-metropolis-1", "plague_onset", "The Administrative Circle", "chargedWithSickness"],
   ["r2s-plague_onset-metropolis-2", "plague_onset", "Quarantine Council", "chargedWithSickness"],
   ["r2s-plague_onset-metropolis-3", "plague_onset", "Quarantine Council", "chargedWithSickness"],
+  ["r2s-occupied-metropolis-1", "occupied", "Noble Houses", "termsWithOccupier"],
+  ["r2s-politically_fractured-town-0", "politically_fractured", "The Independent Bloc", "claimsToGovern"],
+  ["r2s-politically_fractured-town-3", "politically_fractured", "Third Bloc (Neutrals)", "courted"],
+  ["r2s-indebted-village-0", "indebted", "Creditor's Representative", "creditorAgent"],
+  ["r2s-indebted-metropolis-3", "indebted", "Noble Houses", "someHoldDebt"],
+  ["r2s-indebted-metropolis-3", "indebted", "Crown Creditors (Noble Coalition)", "holdsDebt"],
+  ["r2s-infiltrated-village-0", "infiltrated", "The Independent Bloc", "infiltrator"],
+  ["r2s-succession_void-village-0", "succession_void", "The Highborn Circle", "claimsSuccession"],
+  ["r2s-succession_void-town-3", "succession_void", "Landed Gentry", "claimantsNeedIt"],
+  ["r2s-insurgency-town-0", "insurgency", "Reform Movement", "leadsChallenge"],
+  ["r2s-slave_revolt-city-1", "slave_revolt", "Merchant Guilds", "revoltCutsLabour"],
+  ["r2s-slave_revolt-metropolis-0", "slave_revolt", "Abolitionist Network", "aidsRevolt"],
+  ["r2s-slave_revolt-metropolis-0", "slave_revolt", "The Independent Bloc", "leadsRevolt"],
+  ["r2s-slave_revolt-metropolis-2", "slave_revolt", "Religious Authorities", "pressedToJudge"],
+  ["r2s-wartime-village-0", "wartime", "Merchant Guilds", "warCostsIt"],
+  ["r2s-wartime-city-0", "wartime", "Religious Authorities", "warNeedsIt"],
+  ["r2s-wartime-city-1", "wartime", "Merchant Guilds", "warDivides"],
+  ["r2s-mass_migration-hamlet-0", "mass_migration", "Newcomers' Settlement", "speaksForNewcomers"],
+  ["r2s-mass_migration-town-1", "mass_migration", "Merchant Guilds", "guildsThreatened"],
 ]);
 
 describe('a power the crisis itself raised is never stored as untouched by it', () => {
@@ -90,14 +109,17 @@ describe('a power the crisis itself raised is never stored as untouched by it', 
   it('KEEPS the slave revolt\'s leadership on its K22 row (r2s-slave_revolt-town-0)', () => {
     expect(stakeOf(birth('r2s-slave_revolt-town-0'), 'slave_revolt', 'Revolt Leadership')?.reason).toBe('it leads the revolt, and rises or falls with it');
   });
+  it('KEEPS a criminal power the crisis\'s merchant sentence was written onto by its name as untouched (r2s-mass_migration-city-2, Thieves\' Guild)', () => {
+    expect(stakeOf(birth('r2s-mass_migration-city-2'), 'mass_migration', "Thieves' Guild")?.reason).toBe('it could side with either camp');
+  });
 
   it('each row names the roster\'s own description, written under the kind it names (stressFactions.js)', () => {
     const src = fs.readFileSync(new URL('../../src/generators/power/stressFactions.js', import.meta.url), 'utf8');
     expect(RAISED_BY_CRISIS.length).toBeGreaterThan(0);
     for (const [kind, opening, key] of RAISED_BY_CRISIS) {
-      const at = src.indexOf(`ke('${kind}')`), next = src.indexOf(" ke('", at + 4);
-      expect(at, kind).toBeGreaterThan(-1);
-      expect(src.slice(at, next < 0 ? undefined : next), `${kind}: ${opening}`).toContain(opening);
+      const segments = src.split(/(?=\bke\(')/).filter((seg) => seg.startsWith(`ke('${kind}')`));
+      expect(segments.length, kind).toBeGreaterThan(0);
+      expect(segments.some((seg) => seg.includes(opening)), `${kind}: ${opening}`).toBe(true);
       expect(typeof STAKE_REASONS[key], key).toBe('string');
     }
   });
