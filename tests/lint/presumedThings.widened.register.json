@@ -3623,6 +3623,18 @@
     "after-base: close-unprinted",
     "{settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.",
     "ba9926bada6b9a34"
+   ],
+   [
+    "occupation",
+    "after-base: close-unprinted",
+    "The occupiers are quartered inside the town, and the town's business is conducted around them.",
+    "71cfd98ad4c329cd"
+   ],
+   [
+    "war",
+    "after-base: close-unprinted",
+    "{settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of",
+    "5bb944e8ab92d013"
    ]
   ],
   "src/data/dossierStateProse/warFaith.generated.js": [
@@ -20775,6 +20787,12 @@
     "after-base: close-unprinted",
     " has no church of its own, and the siege keeps its people from the next village’s parish church.",
     "1913bc012cd632cc"
+   ],
+   [
+    "shrine",
+    "after-base: close-unprinted",
+    ", and the shrines answer to no named god.",
+    "4701f49f57ea8919"
    ]
   ],
   "src/domain/dossier/powerSupport.js": [
@@ -27155,6 +27173,12 @@
     "after-base: close-true",
     " could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (",
     "dab22a2ed49e260e"
+   ],
+   [
+    "market",
+    "after-base: close-unprinted",
+    " quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are ",
+    "1d112886fae02a95"
    ]
   ],
   "src/generators/neighbourGenerator.js": [
@@ -28365,6 +28389,18 @@
     "after-base: close-true",
     "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short.",
     "e50ea71d15039105"
+   ],
+   [
+    "mercenary",
+    "after-base: close-unprinted",
+    "A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.",
+    "2f02a9f898251b8a"
+   ],
+   [
+    "house: adventurers' charter",
+    "after-base: close-unprinted",
+    "The adventurers' charter hall coordinates emergency response to threats.",
+    "ba8f5cbfc878053d"
    ]
   ],
   "src/generators/services/serviceClassifier.js": [
