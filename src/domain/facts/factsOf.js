@@ -34,7 +34,7 @@ import { faithReadingOf } from '../dossier/faithReading.js';
 import { guildOf } from './guild.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { resolveSettlementCulture } from '../resolveCulture.js';
-import { deriveCriminalStructure } from '../display/defenseDisplay.js';
+import { criminalStructureKeyOf } from './criminalStructureKey.js';
 import { prosperityLabelOf } from '../prosperityRank.js';
 import { keepOf } from './keep.js';
 
@@ -116,8 +116,8 @@ export function factsOf(record, options = {}) {
     get exports() { return canonExports(record); },
     /** the culture key (`resolveCulture.js :: resolveSettlementCulture`) */
     get culture() { return resolveSettlementCulture(record); },
-    /** the criminal structure (`defenseDisplay.js :: deriveCriminalStructure`): its key, or 'none' */
-    get crime() { return deriveCriminalStructure(record)?.key ?? 'none'; },
+    /** the criminal structure's key (`criminalStructureKey.js :: criminalStructureKeyOf`, the key `defenseDisplay.js :: deriveCriminalStructure` prints), or 'none' */
+    get crime() { return criminalStructureKeyOf(record) ?? 'none'; },
     /** the prosperity band (`prosperityRank.js :: prosperityLabelOf`), lower-cased, or undefined */
     get prosperity() { const l = prosperityLabelOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity).toLowerCase(); return l || undefined; },
     /** what the place can keep up (`keep.js :: keepOf`), read off the prosperity label: `{ bought, funded }` */

@@ -137,9 +137,10 @@ export const LEAVES = Object.freeze({
   guild: home('guild', 3, ['powerStructure', 'institutions']),
   // TAIL-CRISIS-2 (the chair's ruling K6): a power not the governing one, by its own standing
   rivalPower: home('rivalPower', 3, ['powerStructure']),
-  // W2-C-LEAVES-9: the ring note's vantage reads `_seed`, and the tier for its second vantage's declaration (tier: ≥ village).
-  crime: home('crime', 3, ['_seed', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure', 'tier'], {
-    note: '`deriveCriminalStructure` reads the safety profile\'s crime lines, which assembly settles to the crime signal (a back-write at layer 3): it reads its own layer',
+  // TAIL-TIES-9 (the chair's ruling (T28)): the crime fact's LEAF is the criminal structure's key, moved out of the display
+  // (`deriveCriminalStructure` calls it and keeps its labels and the ring note's vantages, which read `_seed` and the tier).
+  crime: leaf({ layer: 3, module: 'domain/facts/criminalStructureKey.js', exported: 'criminalStructureKeyOf', call: 'record', reads: ['economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'],
+    note: 'the key reads the safety profile\'s crime lines, which assembly settles to the crime signal (a back-write at layer 3): it reads its own layer',
   }),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {

@@ -61,3 +61,36 @@ export function hasInstitution(record, kind) {
   if (!re) throw new Error(`hasInstitution: unknown institution kind '${kind}'`);
   return liveInstitutionNames(record).some((n) => !ACCESS_ONLY.test(n) && re.test(n));
 }
+
+/**
+ * A GRAIN mill's name, lower-cased (a Mill, Mills (2-5)): a sawmill saws and a maltster malts, and neither grinds flour;
+ * an "access to external" row is a neighbour's (TAIL-CLOSE-SRC-4: moved verbatim from `generators/computeActiveChains.js
+ * :: gateKeywordPredicate`'s 'grain mill' row, TAIL-DEFECON-C-4 D33, into the institutions home; the `mill` kind above is
+ * the wider "a mill of any kind").
+ * @param {string} n an institution's name, lower-cased @returns {boolean}
+ */
+export const namesGrainMill = (n) => (n === 'mill' || n.startsWith('mills (')) && !n.includes('access to external');
+
+/**
+ * A food record's source that keeps GRAIN: a grain field, or a mill (the food record's own key for the mill it grinds
+ * at). TAIL-CLOSE-SRC-4: moved verbatim from `generators/economy/foodBalance.js :: foodStoreWord` (R2-CODE-A item 1)
+ * into the institutions home, the mill's.
+ * @param {unknown} s a food record's source key @returns {boolean}
+ */
+export const isGrainFoodSource = (s) => s === 'grain' || s === 'mill';
+
+/**
+ * The crafts a roster lacks, by the viability advice's own words (TAIL-DEFECON-3 #30890: the advice names only the crafts
+ * the roster lacks). TAIL-CLOSE-SRC-4: moved verbatim from `generators/economy/viability.js`'s craft-diversity fix into
+ * the institutions home, the smith's (a name holding "smith" counts: a goldsmith works metal too).
+ * @param {ReadonlyArray<string>} names the roster's names, lower-cased @returns {string[]}
+ */
+export const craftsAbsentFrom = (names) => [['smiths', 'smith'], ['weavers', 'weav'], ['tanners', 'tann']].filter(([, w]) => !names.some((n) => n.includes(w))).map(([c]) => c);
+
+/**
+ * Whether a roster holds a bank or a house of money, by name (a moneylender among them). TAIL-CLOSE-SRC-4: moved verbatim
+ * from `generators/economy/viability.js`'s banking-without-economy warning into the institutions home, the bank's; the
+ * `bank` kind above is the narrower "a bank, a money changer or a counting house".
+ * @param {ReadonlyArray<string>} names the roster's names, lower-cased @returns {boolean}
+ */
+export const namesBankOrMoneyHouse = (names) => names.some((n) => n.includes('bank') || n.includes('money'));

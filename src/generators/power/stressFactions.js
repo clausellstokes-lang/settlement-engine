@@ -6,7 +6,7 @@
 import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
 import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; // CENSUS-1f: one line
-import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; // WIRING-W0 (R-W7 e)
+import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { isCriminalOrThievesPower } from '../../domain/crimeSignal.js'; // WIRING-W0 (R-W7 e); TAIL-CLOSE-SRC-4: one line
 
 /** A roster name compared loosely: case and a leading article set aside. */
 const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\s+/, '');
@@ -324,7 +324,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                     (he.desc || '') +
                     // TAIL-POWERS-B-4 (the chair's P31 (6), vetoable by the owner): 'guild' matches the Thieves' Guild, whose crisis
                     // stake is a gain; a criminal power is not said to lobby for compensation: it takes its twin, true of it
-                    (he.category === 'criminal' || he.faction.toLowerCase().includes('thieves')
+                    (isCriminalOrThievesPower(he) // the crime home's reader (TAIL-CLOSE-SRC-4)
                       ? ' Shortage and requisition have pushed trade into the black market, where the guild takes its cut.'
                       : ' Trade disruption and requisition are hurting the bottom line. The power is lobbying for compensation and receiving promises.')))),
             (he.faction.toLowerCase().includes('religious') || he.faction.toLowerCase().includes('church')) &&
