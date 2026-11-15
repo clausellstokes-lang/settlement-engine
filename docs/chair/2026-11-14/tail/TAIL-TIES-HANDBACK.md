@@ -631,3 +631,59 @@ Here is what was measured, for the successor (each cure is its own commit, and t
 - Cut 4: (a) needs a ruling; (b) is a clean leaf if the chair lends it.
 - The ties' two reds, NOT STARTED, exactly as TAIL-TIES-5 set them out: `clerkHookSmallPlace` (bisect `2f2f9f12..7622238f6`) and `tailTiesBatch1` r2r-village-50 (`git bisect --first-parent 7622238f6..17d03c8f4`; re-key by identity with the move named, never weakened).
 - The scratch trees `/home/user/tt6` (the tip), `/home/user/tt6-base` (the merge tip without the cuts) and `/home/user/tt6-pre` (the attribution probe) are this seat's own and can be removed.
+
+## TAIL-TIES-7 (2026-11-15): T25 (the last layer cycle), T24 (the two size budgets measured), the ties' three reds
+
+**The merge.** The joined line `lane/join-2026-11-14` at `0b45a28d`, as a merge commit of its own (`5a3dee81`), clean. All
+work ran in the scratch worktree `/home/user/tt7`, detached, with its own `npm ci`. The births at the merge
+(RECORD-MEASURE-1 `births-only.sh` over CENSUS-3's `seeds.txt`, sha256 of the uncompressed corpus):
+`2bdbb50cdbb20b65128dc2a3fe77e6ac615161fcd32ab043ccb012d1340206fa`, 720 rows, 0 errors.
+
+**T25 (b): DONE (CONFIRMED), `448860c2`.** `display/governanceAccount.js :: pluralPowerName` moved verbatim to the pure
+leaf `src/domain/display/pluralPowerName.js`, which imports only `powerSentenceName.js` and carries its own private `text`.
+`governanceAccount.js` re-exports it, so the other callers (factionDynamics, factionStanding, hookLines, crisisPage,
+crisisHooks, the test) are unchanged. `dossier/faithReading.js` changes its import line only.
+- `layerBoundaries`: the SCC `defenseDisplay | governanceAccount | faithReading | factsOf` is now `defenseDisplay | factsOf`.
+- Births after: byte-identical (`2bdbb50c…06fa`, 720, 0 errors). eslint on the 3 files: 0. `governanceAccount.test.js`: 17/17.
+- The proof at this cut:
+  - `npm run build`: exit 0.
+  - `scripts/boot-smoke.mjs`: PASS, plain and FLAGGED (`VITE_ENGINE_REMOTE=true … --outDir node_modules/.cache/engine-remote-dist`).
+  - `engineCoreLazyEdge`, `engineChunkLazy`, `cultureProfilesLazy` and `bootSmoke` (VERIFY_DIST=1, VERIFY_ENGINE_REMOTE_DIST=1): green.
+  - The one red is `layerBoundaries`, on (a)'s 2-cycle.
+
+**T25 (a): STOPPED, a question to the chair (the measure that refutes the brief's shape).**
+- **The path.** `deriveCriminalStructure` reads `factsOf` through ONE path: `withRingVantage` → `filterDeclared`
+  (the vantage `ORGANIZED_RING_NOTES[1]` declares `tier: ≥ village`). `faithReadingOf` and `rulerKindOf` belong to
+  `clergyHere` (the Medical Readiness row), not to the criminal structure.
+- **Why injection moves a value.** Injecting the facts is clean for the births: the facts' `crime` getter would pass its
+  own object, and the three product callers (`deskHostArgs.js`, `printProse.js`, `viewModelBodySlices.js`) would pass
+  `factsOf(s)`. But every one-argument call would then hand the list door no facts. `atomHolds` answers `undefined`, and
+  vantage 1 is refused in every place. `tests/domain/display/ringNoteStreetsSmallPlace.test.js` arm 2 pins that vantage
+  in a village, a town and a city, and about 15 test files call `deriveCriminalStructure(s)` with one argument.
+- **Why the brief can't be met as worded.** "No test touched" and "defenseDisplay.js no longer imports factsOf" cannot
+  both hold.
+- **The two shapes put to the chair:**
+  - (1) The test seat re-keys the one-argument calls to pass `factsOf(s)`.
+  - (2) The derivation's body moves to a module that does not import `factsOf`. The getter calls it with its facts, and
+    `defenseDisplay.js` keeps a one-argument wrapper that calls it with `factsOf(s)`. No test is touched and the SCC
+    breaks, but `defenseDisplay.js` still imports `factsOf`.
+- Not made; awaiting the ruling.
+
+**T24: MEASURED, not trimmed: `docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md`.**
+- **The recording commits:**
+  - First paint: `7dc7757f`.
+  - Engine ceiling: `188a2c49`. `git log -S` lands on `dfbf78df`, which is the shallow root and builds 728,177, so it is
+    not the measured tree.
+- **The instrument reproduces all four records exactly:** 1,121,260, 357,225, 299,985 and 726,453.
+- **First paint:** +43,693 raw over the budget.
+  - By rendered module bytes, +16,967 is needed by first paint and +131,223 rides only by the `engine-core` / `EAGER_DATA`
+    grouping.
+  - A trial excision of the 16 riders that are new since the record recovers 34,844 raw. It boots, and the lazy-edge
+    tests are green.
+  - 8,849 raw remains after that.
+- **The engine:** +132,162 over, all of it generator code. It is the owner's re-record.
+
+**C: not started at this push.**
+
+**Scratch:** `/home/user/tt7` (the worktree), `/home/user/tt7-instr` (the CENSUS-3 and RECORD-MEASURE-1 probes, archived)
+and `/home/user/tt7-measure` (B's builds and scripts). All three are this seat's own and can be removed.
