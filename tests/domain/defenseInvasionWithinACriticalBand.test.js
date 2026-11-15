@@ -20,9 +20,15 @@ import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { defenseThreatProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { standingDefenseForces } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { configOf as censusConfigOf } from '../components/pageCensusWalk.shared.mjs';
 
-/** The reader's app shape: rr3-<size>-<calm|s1+s2>-<rand|route>-<i>. */
+/** The reader's app shape: rr3-<size>-<calm|s1+s2>-<rand|route>-<i>; or a census birth (r2r-<size>-<i>, r2s-<crisis>-<size>-<i>). */
 const birth = (seed) => {
+  const c = seed.match(/^r2r-(\w+)-\d+$/) || seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/);
+  if (c) {
+    const row = c[2] ? { size: c[2], crisis: c[1] } : { size: c[1], crisis: null };
+    return generateSettlementPipeline(censusConfigOf(row, DEFAULT_CONFIG, birthConfig), null, { seed, customContent: {} });
+  }
   const m = seed.match(/^rr3-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-([a-z_]+)-(\d+)$/);
   const route = m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] };
   return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
@@ -31,7 +37,12 @@ const birth = (seed) => {
 const withMilitary = (s, military) => ({ ...s, defenseProfile: { ...s.defenseProfile, scores: { ...s.defenseProfile.scores, military } } });
 
 const CLAIMS = /raiders stay away|would think again|could be held|credible against raiders|would see off a raid|answers raiders well/;
-const REAL = ['rr3-thorp-occupied-rand-1', 'rr3-town-occupied-rand-4'];
+// TAIL-CLOSE-SWEEP-C (2026-11-15): RE-KEYED by identity. rr3-thorp-occupied-rand-1 (Makropyrgos) reads WEAK and
+// rr3-town-occupied-rand-4 ADEQUATE since 07ebe8bdc (COHERENCE-UPKEEP: the five upkeep gates read the one home, a DECLARED move of
+// the readiness labels, landed at 33b12cbef): neither is in the band. Of the census's 720 (221 Critical), the towns of the case,
+// Critical and drawing a claiming pool above it, are twelve thorps with walls and townspeople; the two below are an occupied one
+// ("credible against raiders" above Critical, as Makropyrgos's walls-and-townsfolk pool) and a calm one ("would see off a raid").
+const REAL = ['r2s-occupied-thorp-0', 'r2r-thorp-8'];
 /** Walls with townspeople; a force with no walls; walls with a garrison (each at peace, Adequate at birth). */
 const MADE_FROM = { 'rr3-thorp-calm-port-1': 'walls with citizen militia', 'rr3-town-calm-rand-1': 'force with NO walls', 'rr3-town-occupied-rand-4': 'walls AND professional garrison' };
 const CRITICAL = 10;
