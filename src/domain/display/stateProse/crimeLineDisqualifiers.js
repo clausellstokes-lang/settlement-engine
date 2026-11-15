@@ -53,14 +53,16 @@ const line = (opens, falseWhere, says) => Object.freeze({ opens, falseWhere, say
  * @type {Readonly<Record<string, Readonly<Record<number, Readonly<CrimeLineDeclaration>>>>>}
  */
 export const CRIME_LINE_DISQUALIFIERS = Object.freeze({
-  'DS-POW-6::capture pressure ADVANCING (weak security, poor prosperity)': Object.freeze({
-    1: line('Criminal money is reaching the officials of {settlement} one at a time', 'no official in pay', 'officials are taking criminal money'),
-    3: line('Officials at {settlement} are spending money their posts never paid them', 'no official in pay', 'officials are taking criminal money'),
-  }),
+  // The ADVANCING pool carries no declaration: the writing lane re-said its two lines that had officials already taking
+  // criminal money (v1 "is reaching the officials … one at a time", v3 "are spending money their posts never paid
+  // them") as officials who COULD be bought (W2-WRITE round 1, 91592cbf), and its eleven lines now presume neither
+  // fact. Keyed by vid, the two declarations had moved onto the re-said lines and struck them where they are true.
   'DS-POW-6::capture pressure RECOVERING (strong security, prosperity)': Object.freeze({
     1: line('The criminals at {settlement} are losing their grip on the hall', 'no agent in the hall', 'the criminals had a grip on the hall'),
     2: line('The approach was made at {settlement} and did not take', 'an official in pay', 'no official was bought'),
     3: line('The criminals at {settlement} still own a few officials', 'no official in pay', 'the criminals own officials'),
+    // the line W2-WRITE-3 wrote for the case the table left empty (a5e74f02): true where no official sold
+    4: line('Criminal money finds little purchase at {settlement}', 'an official in pay', 'no official sells'),
   }),
   'DS-DEF-4::capture equilibrium': Object.freeze({
     1: line('The {seat} at {settlement} and the criminal interest have found a line and both keep to it; nothing is bought here', 'an official in pay', 'nothing is bought'),

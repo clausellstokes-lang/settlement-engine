@@ -43,8 +43,6 @@ const s = (v) => (typeof v === 'string' ? v : v == null ? '' : String(v));
  * @type {Readonly<Record<string, readonly [string, 'GLANCE'|'SECOND'|'CROSS']>>}
  */
 export const PAGE_CENSUS_ROWS = Object.freeze({
-  P1a: ['1a the food verdict "only just" beside "grows more than it eats"', 'SECOND'],
-  P1b: ['1b "a small margin" beside a quarter or more bought in', 'SECOND'],
   P2siege: ['2 a siege figure in the indicative outside a siege', 'SECOND'],
   P3source: ['3 reliance on magic stated with neither a practitioner nor a named source, or a source printed with a catalogue range or condition, or one house named twice', 'CROSS'],
   P4: ['4 "three powers stand almost level" beside a leader far ahead', 'SECOND'],
@@ -73,7 +71,7 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
 /**
  * THE RETIRED ROWS, each BY NAME with its reason (never a silent zero: the register keeps its counts beside the
  * row that replaced it). id → [the pattern, the reason, the row that replaced it].
- * @type {Readonly<Record<string, readonly [string, string, string]>>}
+ * @type {Readonly<Record<string, readonly [string, string, string|null]>>}
  */
 export const RETIRED_PAGE_CENSUS_ROWS = Object.freeze({
   P2: ['2 the stores stated as two durations',
@@ -88,6 +86,15 @@ export const RETIRED_PAGE_CENSUS_ROWS = Object.freeze({
   P5a: ['5a the hall "free of the criminals" beside criminal money reaching the officials',
     'it counted every capture-pressure line beside a free hall, the true with the false: "each season it gets easier to buy an official" presumes no buyer, and at the stored state none 41 of the census\'s 585 towns hold an official who answers to a criminal house through their office, so the hall\'s rung cannot decide a line about officials (REVIEW-W2A F3; the chair\'s ruling of 2026-11-13)',
     'P5false'],
+  // RETIRED WITH NO REPLACEMENT (the chair's ruling V13 of 2026-11-15, vetoable by the owner): a row whose sentence the
+  // corpus no longer prints, where the cure made its falsehood impossible, is a dead guard; the row's job went with the
+  // line. `null` names that no row replaces it.
+  P1a: ['1a the food verdict "only just" beside "grows more than it eats"',
+    'no line of the corpus says "only just" any more: DS-ECO-9 SECURE v3 was re-said "is fed, but what it keeps put by is not deep" (W2-WRITE-SIDE-ECO-3, e056fbfb), a claim of the stores only, its premise declared on the line (`stores: < 12`), which a surplus does not deny (the chair\'s ruling of 2026-11-15, V13)',
+    null],
+  P1b: ['1b "a small margin" beside a quarter or more bought in',
+    'no line of the corpus says "a small margin" any more: DS-ECO-9 SECURE v1 was re-said "has enough to eat, or near enough" (W2-WRITE-SIDE-ECO-3, e056fbfb), true across the band and of what the town eats, bought or grown (the chair\'s ruling of 2026-11-15, V13)',
+    null],
 });
 
 // ── the tree's own pools, as the counter reads them ──────────────────────────────────────────
@@ -174,7 +181,6 @@ export function pageCensusFindings(settlement, views) {
   const H = V('World/History'); const OV = V('Summary/Overview'); const NP = V('World/NPCs');
   const all = Object.values(views).flat();
   const econ = obj(rec.economicState);
-  const fr = obj(obj(econ.foodSecurity).foodRecord);
   const { capturePools: cap, beastPools: beast, magicIncomePools: mag, houseIncomePools: houses } = pools();
   /** @type {CensusFinding[]} */ const out = [];
   /** @param {string} row @param {() => readonly [unknown, unknown] | null | undefined | false} test */
@@ -190,14 +196,6 @@ export function pageCensusFindings(settlement, views) {
   // the live roster (a ruin is no working house; a birth carries none, so the census's counter reads the same)
   const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec)).map((i) => s(obj(i).name).toLowerCase());
 
-  run('P1a', () => {
-    const onlyJust = E.find((l) => /is fed, but only just/.test(l)); const grows = E.find((l) => /grows (a little more|more|far more) than it eats/.test(l));
-    return onlyJust && grows ? [onlyJust, grows] : null;
-  });
-  run('P1b', () => {
-    const margin = E.find((l) => /feeds itself with a small margin/.test(l));
-    return margin && Number(fr.normalImportPct) >= 25 ? [margin, `record normalImportPct ${s(fr.normalImportPct)}`] : null;
-  });
   run('P2siege', () => {
     // the Food endurance line states what a siege does to the stores: outside a siege that is a condition, so a
     // verb of the siege figure in the indicative (are lost, carries, feeds, stands) is the fault

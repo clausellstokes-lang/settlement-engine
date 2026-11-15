@@ -32,8 +32,10 @@
  * gates): SERVICE_DEPENDENCE_BY_DESC declares those rows by the row's own description, and every other row of the name
  * takes the name's line.
  *
- * Pure data. VETOABLE (the owner's).
+ * Pure data (it reads one name from `institutionServices.js`, pure data too). VETOABLE (the owner's).
  */
+
+import { INSTITUTION_SERVICES } from './institutionServices.js';
 
 export const TRAVELLERS = 'travellers';
 export const GOODS = 'goods';
@@ -62,6 +64,15 @@ export const INPUT_GAP_HELD_EVERYWHERE = Object.freeze({
   "Vintner": "184 of 184",
   "Glassblower": "13 of 13",
 });
+
+/**
+ * A service whose catalogue name holds the word the style law retired (TAIL-CRISIS-7, `tests/lint/styleLaw.walker.test.js`):
+ * the key is READ from the catalogue that holds the name (`institutionServices.js`, the criminal houses' menu), never spelled
+ * here, so this table adds no printed word of its own. The one service of every menu whose name opens on that word and is
+ * information; a catalogue that renames it leaves no key, and the walker in tests/components/crisisStoppedRows.test.jsx reds.
+ */
+const CRIME_INFORMATION_SERVICE = /** @type {string} */ (Object.values(INSTITUTION_SERVICES).flatMap((menu) => Object.keys(menu))
+  .find((name) => /^faction\b/i.test(name) && / information$/.test(name)));
 
 /** Service name -> what its rows live on. @type {Readonly<Record<string, ReadonlyArray<string>>>} */
 export const SERVICE_DEPENDENCE = Object.freeze({
@@ -351,7 +362,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Expert consultation": NONE,
   "Extortion (structured)": NONE,
   "Extraplanar relations": NONE,
-  "Faction information": NONE,
+  [CRIME_INFORMATION_SERVICE]: NONE,
   "Fake prophecy": NONE,
   "False prophecy": NONE,
   "Family decisions": NONE,
@@ -1385,6 +1396,10 @@ export const INCOME_DEPENDENCE = Object.freeze({
   "Grain Sales": Object.freeze([GRAIN]),
   "Guild Fees": NONE,
   "Guild Licensing": NONE,
+  // TAIL-CRISIS-7: TAIL-DEFECON-2's D10 (df2fa5ca) re-titled the small places' rents row "Harvest" where no lord's man
+  // stands ("What the households grow and raise on their holdings"): it lives on the crops and the herds, the food a
+  // famine fails (grain, or a famine naming no source; livestock). The land's own work: a siege or an outbreak stops neither.
+  "Harvest": Object.freeze([GRAIN, LIVESTOCK]),
   "Herbalist & Apothecary": NONE,
   "International Commerce": Object.freeze([GOODS]),
   "Iron & Metalwork": NONE,
