@@ -61,6 +61,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 20 | tail-history-2026-11-14 (re-sweep) | abe0327eb (04:35) | d7921a40c (11) | 796c49ef0 | none | — (docs only) |
 | 21 | tail-narrative-2026-11-14 (re-sweep) | 091ef25e5 (04:38) | 78eadedc5 (13) | bd57eb02c | none | DECLARED MOVE ce69ac520 N17 (founding.foundedBy 140 towns, founding.reason): golden carried |
 | 22 | tail-crisis-2026-11-14 (re-sweep) | c6852f7e2 (04:42) | aa78d1ec9 (8) | 5ab651d6d | none | DECLARED MOVE c6852f7e2 K24 (cast.stakes[].reason, 27 records): golden carried |
+| 23 | tail-display-econ-2026-11-14 (re-sweep) | 756ba4bda (04:45) | 1322e7d0a (17) | c875a184a | none | lane-only `.prose-numerics-baseline.json`; X30-X32 display only |
 
 ## 3. Every code resolution
 
@@ -188,6 +189,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden | defecon-c (19) | DECLARED MOVES 0e838bc65 D33 (localProduction 117 towns), 680d16b54 D34 (a) (235 towns, catalogue), 849bd8679 D34 (b) (25 towns) |
 | golden | narrative (21) | DECLARED MOVE ce69ac520 N17 (history.founding.foundedBy 140 towns, history.founding.reason) |
 | golden | crisis (22) | DECLARED MOVE c6852f7e2 K24 (stress cast.stakes[].reason, 27 records) |
+| `tests/lint/.prose-numerics-baseline.json` | display-econ (23) | lane-only, taken from the lane: the close re-derives it once |
 
 ## 5. Item 2 at the landed tip
 
