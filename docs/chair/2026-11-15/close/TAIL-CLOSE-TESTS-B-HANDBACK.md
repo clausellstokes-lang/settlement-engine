@@ -65,6 +65,11 @@ Whole corpus at 7efc7686: negatives over ceiling 112 files / 203 sites, generati
    place": the collected loop reports **2 of 4** failing (r2r-hamlet-35, r2r-hamlet-30; the reworded line is missing
    in both, and r2r-hamlet-35's hooks text is empty). The bare loop showed only r2r-hamlet-35. It was already red at
    the join.
+   **ANSWERED (crisis seat, through the chair): a premise not met, RE-KEYED BY IDENTITY.** Since 2ac50c55 (TAIL-DEFECON-3's
+   declared move: an iron hook prints only where the import list holds iron) both hamlets import only Salt and Incense,
+   and I measured that they print no iron hook at all. The same two lines now read r2r-town-20 (the doubled line; it imports
+   iron ore) and r2r-town-1 (the rations line; it imports iron), and I measured each printing its line. The words, the
+   anchors and the expected lines are unchanged. The test is GREEN (2/2).
 
 Observation (not red): `tests/generators/foundingRowsRead.test.js` A3 › r2r-thorp-8. Its negative was vacuous, because
 the Origin reason is `null` (silent by design, per A5), so the old assertion matched the string "null". That silence is
