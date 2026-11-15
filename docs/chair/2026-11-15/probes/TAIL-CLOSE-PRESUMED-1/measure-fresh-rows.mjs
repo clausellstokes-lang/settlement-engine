@@ -20,7 +20,7 @@
  * --bank folds it (case (A) vs (B) of PT1).
  *
  * Usage (run from the tree root): node docs/chair/2026-11-15/probes/TAIL-CLOSE-PRESUMED-1/measure-fresh-rows.mjs
- *   [--base <rev>] [--out <file.json>] [--limit <n>]   (writes nothing in the tree unless --out points into it)
+ *   [--base <rev>] [--out <file.json>] [--limit <n>] [--landing <seed>] [--rows <earlier measure.json>]   (writes nothing in the tree unless --out points into it)
  */
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -40,12 +40,20 @@ const opt = (name, dflt) => (args.includes(name) ? args[args.indexOf(name) + 1] 
 const BASE = opt('--base', 'origin/master');
 const OUT = opt('--out', null);
 const LIMIT = Number(opt('--limit', '0')) || 0;
+// --landing <seed>: ALSO read the landing fixture's own town (src/components/home/landingFixture.js is FROZEN engine output of
+// this seed: scripts/generate-landing-fixture.mjs :: buildRegion, advanceRegion), as born and after its weeks: two more records,
+// counted apart from the 1,080 (corpus 'landing')
+const LANDING = opt('--landing', null);
 
 // ── the fresh hits ───────────────────────────────────────────────────────────────────────────────
 const main = JSON.parse(readFileSync(join(ROOT, REGISTER_REL), 'utf8'));
 const reg = JSON.parse(readFileSync(join(ROOT, WIDENED_REGISTER_REL), 'utf8'));
 const banked = new Set([...bankedKeys(main), ...bankedKeys(reg)]);
-const fresh = scanTree(ROOT).filter((h) => !banked.has(hitKey(h.file, h.thing, h.text)));
+// --rows <measure.json>: re-measure the rows of an earlier measure (banked since), not the fresh hits
+const ROWS = opt('--rows', null);
+const fresh = ROWS
+  ? JSON.parse(readFileSync(ROWS, 'utf8')).rows.map((r) => ({ file: r.file, thing: r.thing, text: r.text }))
+  : scanTree(ROOT).filter((h) => !banked.has(hitKey(h.file, h.thing, h.text)));
 process.stderr.write(`fresh ${fresh.length}\n`);
 
 // ── case (A) or (B): did the literal stand in its file at the base (the door's own fold) ────────────
@@ -109,6 +117,15 @@ const births = [
     return withPublicProse(town, composePublicProse(town));
   } })),
 ].slice(0, LIMIT || undefined);
+if (LANDING) {
+  const { buildRegion, advanceRegion } = await import('../../../../../scripts/generate-landing-fixture.mjs');
+  const region = buildRegion(LANDING);
+  // the PRINTED strings are the frozen fixture's own (the landing page prints them); the facts are its town's, as born and
+  // after its weeks (the town the fixture was frozen from)
+  const { fixture } = await import('../../../../../src/components/home/landingFixture.js');
+  births.push({ corpus: 'landing', seed: `${LANDING} (the fixture, facts as born)`, print: fixture, make: () => region.town });
+  births.push({ corpus: 'landing', seed: `${LANDING} (the fixture, facts after its weeks)`, print: fixture, make: () => advanceRegion(LANDING, region.saves, region.edges).saves[0].settlement });
+}
 
 /** @param {unknown} v @param {string} p @param {Array<[string, string]>} out */
 function leaves(v, p, out) {
@@ -123,13 +140,15 @@ for (const b of births) {
   const record = b.make();
   const facts = factsOf(record);
   const names = liveInstitutionNames(record);
-  const ls = leaves(record, '', []).filter(([p, t]) => t.length >= 15 && isPrinted(p)).map(([p, t]) => [p, t, norm(t)]);
+  const ls = leaves(b.print ?? record, '', []).filter(([p, t]) => t.length >= 15 && isPrinted(p)).map(([p, t]) => [p, t, norm(t)]);
   for (const r of rows) {
     let printedHere = false; let againstHere = false;
     for (const [path, text, low] of ls) {
       if (!r.frags.length || !r.frags.every((f) => low.includes(f))) continue;
       if (r.side === 'names' && (isLicensed(path) || text.length < 20)) continue;
-      const sents = sentencesOf(text).filter((s) => r.frags.some((f) => norm(s).includes(f)));
+      // a sentence of the line: it holds a fragment, or a fragment holds it (a literal of two sentences or more is one fragment
+      // that spans them; the first measure missed this and read such a line's sentences as none: corrected 2026-11-15)
+      const sents = sentencesOf(text).filter((s) => { const ns = norm(s).trim(); return ns.length >= 8 && r.frags.some((f) => ns.includes(f) || f.includes(ns)); });
       const live = sents.filter((s) => usesHere(r.thing, r.side, s));
       printedHere = true; r.paths.add(path);
       for (const s of live) if (against(r.thing, r.side, facts, names, record, s)) {
