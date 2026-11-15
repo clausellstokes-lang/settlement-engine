@@ -1,0 +1,36 @@
+# BAR2-CLOSE-DOORS-2 · hand-back (the doors' seat of Part 2 of the close of the round BAR2)
+
+Branch `lane/bar2-close-doors-2-2026-11-15`, cut from **1011a8a91** (the joined line's tip, checked: it read 1011a8a91).
+Scratch tree: a plain clone with its own `.git` and its own `npm ci`, in this seat's scratch directory; a worktree at
+74ded1800 (the tree the stored corpus was last taken at) beside it; every run to a file there. No page line cured, no
+test written, skipped or weakened. Nothing merged.
+
+AUTHORITY: the owner's word in the chair's chat, 2026-11-15 at 20:27:16 UTC, verbatim: "Yes refresh the reference"
+(answering the chair's ask of 17:56 UTC, repeated 19:03 UTC, for the words "Yes, refresh the reference files."). The
+signed record: [`docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json`](../../../shift-records/2026-11-15-the-close-of-the-round-bar2.json)
+(new; the last close's record untouched). Commit trailer `Owner-Signed: §934.105`.
+
+## THE MEASURE BEFORE ANY WRITE
+
+| what | instrument | result |
+|---|---|---|
+| the 525, by field family | a scratch probe (the golden master's own call over `goldenCorpus()`, each record hashed whole and by leaf path) at 74ded1800 and at 1011a8a91 | at 74ded1800 all 525 equal the stored manifest; at 1011a8a91 **418 of 525 move** (thorp 73, hamlet 29, village 43, town 105, city 84, metropolis 84). Leaves: relationships[].description 239, institutions[].desc 237, powerStructure.factions[].desc 168, availableServices.equipment[].desc 156, settlementReason[] 153, economicState.foodSecurity.foodRecord.foodwaysLine 84, culturalIdentity.foodways 84, relationships[].tension 68, availableServices.legal[].desc 60, economicState.incomeSources[].desc 29, arrivalScene 10, npcs[].structuralPosition 9, npcs[].activeConstraint 9, prominentRelationship.phrasing 4, .tension 4, relationships[].proseVariant 1. No array length, no non-text leaf |
+| THE FAMILY CHECK | the leaves above against the five hand-backs' tables | every family declared: services availableServices; places institutions, settlementReason, culturalIdentity, economicState (foodways line), arrivalScene; people relationships, factions, npcs' structuralPosition and activeConstraint, the prominent tie; labels incomeSources, factions. **No stop** |
+| EF1, the fence's behaviour | `tests/property/espionageDormancyFence.test.js` alone at 1011a8a91 | 20/21: every arm green but the driven digest |
+| EF1, the fence's corpus | `node scripts/audit/refence.mjs <74ded1800> --rows-out`; at the tree `--against` it; a scratch leaf-path probe over the same 360 | at 74ded1800 `d4f94b04…` (the committed constant: the spelling proven); at the tree `abbfdfec…`, **267 of 360 move** (thorp 20, hamlet 28, village 42, town 57, city 60, metropolis 60), 360/360 distinct. Moved leaves, all page text: relationships[].description 184, npcs[].structuralPosition 138, .activeConstraint 118, factions[].desc 117, availableServices.equipment 110, institutions[].desc 108, relationships[].tension 62, settlementReason 60, arrivalScene 23, npcs[].presentation.behaviour 20, prominentRelationship.phrasing 14, npcs[].secret.what 12, pressureSentence 10, availableServices.legal 7, coherence receipt evidence (quotes of tie text) 6, prominentRelationship.full 6, safetyProfile.safetyDesc 4, prominentRelationship.tension 3, availableServices.food 2, safetyProfile.guardEffectivenessDesc 2, conflicts' plotHooks 1. Each leaf outside the 525's list traced by `git log -S` to a cure of the five: people 7f040c7e1 (behaviour, secret, hooks), 8026d2c46 (rivalry line, pressure line, prominent tie); places 0d36c3820 (the war's pressure line); services 41ef3a9b4 (food row); labels c4cc22e46 (safety line), c1f9889ae (defenders' pay line). No length or non-text leaf. **EF1 holds: no stop** |
+| the other signed surfaces | each alone at 1011a8a91 | `goldenViewModel` 4/4, `heraldKnowledgeDeskGolden` 3/3: GREEN, not listed |
+| predictedRows | each door with a scratch record predicting 999999 (PREDICTION_MISS, nothing written, tree clean after) | golden master 525; cartography corpus 504; dossier prose manifest 2; preset lighting witness 15 (`scripts/audit/witness-stage.mjs`: 8 rows, 2 moved: dramatic_campaign, full_simulation); the fence's bytes are a JS file (the door counts no rows): 1 by the convention of the last record |
+
+## THE FAMILIES
+
+| # | surface · pin | door (exact) | predicted | held | commit | receipt |
+|---|---|---|---|---|---|---|
+| 1 | generator golden master (`tests/fixtures/generator-golden-master.json`) | `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMaster.test.js`; the header's shift-record row | 525 (418 moved) | 525; 418 lines of the manifest moved; sha256 e74b9398… -> 9fab7487… | 5fd90b42a | generatorGoldenMaster 3/3; goldenFreeze.walker 90/90 |
+| 1 | `tests/domain/worldFactRederive.test.js` A7 (the golden's file sha) | the file's form: a dated line | e74b9398 -> 9fab7487 | as predicted | 5fd90b42a | 7/7 |
+| 1 | `tests/generators/generationForkCensus.test.js` GOLDEN_CONTROL_HASH | the new manifest's control row, a dated line (its leaves moved: institutions[].desc, settlementReason[], relationships[].description) | 7ae63229 -> b05d0766 | as predicted | 5fd90b42a | 7/7 |
+| 1 | `tests/domain/editWorldFactResources.test.js` A2, A6 (PRE_CHANGE) | its own re-capture: the pre-EM-B2b2 step (the live `resolveResources.js` less EM-B2b2's own 31 lines, sha256 adfd3ba4…) planted over a copy of the tree (a worktree), and the live step (twice): the SAME six digests | 6 digests | 6 (rows 0, 21, 42); row 21's derived = the new control b05d0766 | 5fd90b42a | 6/6 |
+| 1 | every reader of the re-taken files (`grep -rl` of each basename over tests/) | each alone | green | 40 files green alone: engineBundleReplay 6+1 skipped (its fence arm), vendorPdfLazy 27+28 skipped (no VERIFY_DIST), landingClaimsParity, bandLadders, institutionDestroyedByKind, institutionRename, ruinInstitution, nameHeldThroughAssembly, pipelinePinnedChoosers, pipelinePinnedMode 15/15, powerEconomyFreshness 10/10, rosterFinalUnderHeldRoster 7/7, sovereigntyLightingContract.walker 34/34, dmLayerGoldenIsolation 15/15, readerCorpusManifest, composedProseSeams, ancientRuinsGeneration, corruption, recordMerge, generation, dossierContent, foodModelSingleWriter, generationWorkerIdentity, narrativeArrival, powerStructure, servicesStructure, timelineVariety, labelJoins, recordRegisterTotality.walker, testRatchet, tuningRegister.walker, pipeline.property, the two other dormancy fences, landingStageMeasure; red only the two pending surfaces (own families below) | 5fd90b42a | — |
+
+## WHAT IS LEFT, IN ORDER
+
+1. The fence (family 2), the three pending surfaces (3 cartography, 4 dossier manifest, 5 witness), the remaining class-G pins (x46NpcBand, institutionBudgetPromise, the fork registry contract), the receipt.
