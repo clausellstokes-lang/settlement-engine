@@ -4466,6 +4466,34 @@
     "tests/generators/tailDefeconMadeListTableRows.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by TAIL-DEFECON-C-4 (the chair's ruling D33), commit 0e838bc6. It pins the rows added to src/generators/computeActiveChains.js :: GOOD_WORKING_HOUSES: on census births flour is made only by a grain mill (not a Sawmill or Maltster), bread by Bakers, cloth by Weavers, Textile workers or a Fuller, clothing by a Tailor, glass by a Glassblower or Glassmakers and pottery by a Potter, in economicState.localProduction and the export steps. The header records each GONE row red at 65a5ecfcf and each KEEP row green before and after; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHistoryBatch6.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by the TAIL-HISTORY-5 batch 6 seat (the chair's ruling Y17 and X9 03015) in commit ed9f3b54. It pins the bar's readers' lines at the writer: the occupation's \"When the occupiers left\" twin (historyData.js :: HISTORY_DESC_SIBLINGS), the fish arrival lines under crisis: hunger (ARRIVAL_SENSES), the caravan broker, money changer and looms (arrivalProse.js), the creditor's agent hook under a siege, and the smaller lasting effects, each twin on its slot with no redraw (arrivalScene.js :: drawAdmitted), plus KEEP rows on census births. The commit records it red 16 of 16 at the base and green at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses10OwnTrade.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by the TAIL-HOUSES-5 batch 10 seat (the chair's ruling H20 (i) and item (3)) in commit 6510d746. It pins institutions[].desc on census births: the city's Merchant guilds (15-40) no longer print the three politics lines where no merchant, guild or trade power stands among the powers, and the Woodcutter's camp no longer claims timber as the town's living where timber is in no income source; each pair asserts the record's fact and the rewording, with two KEEP rows for the true sibling. The commit records its 15 red pairs as 15 of 15 red at the base. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses11RowsLeft.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by the TAIL-HOUSES-5 batch 11 seat (the rows TAIL-HOUSES-4 left, ruling H20) in commit 99438070. It pins institutions[].desc on census births: the Hunter's lodge's hedge form (\"Whenever game can be had\") where the town has no hunting grounds, and the Customs house's isolated twin (\"by road\" / \"along the road\") resolved at the late re-read through DESC_LATE_SIBLINGS (route: isolated), with KEEP rows for road towns that keep their main roads. The commit records its 7 red pairs as 7 of 7 red at the base. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses9GovernanceAbsence.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by the TAIL-HOUSES-5 batch 9 seat (the chair's ruling H20 (i)) in commit 36bcb60b. It pins institutions[].desc on census births: the Town council and the Village elder no longer claim an absence of formal government, and the city's and metropolis's Mayor and council no longer claim an election, where the record's named government denies it; each pair asserts the record's government and the rewording, with three KEEP rows for the true sibling. The commit records its 15 red pairs as 15 of 15 red at the base. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/houseDescLateReRead.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by the TAIL-HOUSES-5 batch 8 seat (the chair's ruling H20 (ii)) in commit 5d906f6e. It pins assembleSettlement.js :: readHouseDescsLate and institutionDescVariants.js :: DESC_LATE_SIBLINGS: the Household elder prints its twin unless one elder rules (rulingBodyOf), the Merchant oligarchy prints its twin where a rival power stands (rivalPowerOf), KEEP pairs, the headman unit, the table's shape (no colour line) and the pass's place after the last roster write. The commit records an executed inverse edit (red 12 of 12 under the plant that drops the late call, which is the base's behaviour). A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/powersReadTheRosterP31.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by the TAIL-POWERS-B-4 batch 8 seat (the chair's P31) in commit d99bce57. It pins the powers lines on census births: the clergy margins line on the final roster (claimStanding.js :: settleClergyToFinalRoster), the potter's clay secret (titleSecretsPresentations.js), the merchants' and craftsmen's vote and the seat-and-faith row beside a HIGH quarrel or an occupation (factionDynamics.js), the three-level count (factionStanding.js) and the wartime thieves' guild (stressFactions.js), with KEEP rows. The commit records 13 refused pairs red at cce57ff35, and the header says KEEP pairs were green before and after. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDefecon5RecordCures.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by the TAIL-DEFECON-5 seat in commit 7ce6db27, for ruling R3, one food ledger (the file now also holds R2). It pins that economicViability.metrics.foodBalance reads the writer's split (src/generators/economy/foodBalance.js), so its shortfall, per cent and import equal the Economics tab's row (foodRowShown) on GONE and KEEP census seeds such as r2s-wartime-metropolis-2 and r2r-city-20; and, for R2, that the criminal income row reads the Shadow Economy capture with shares summing to 100. Its red-first is not on record. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/economy/foodBalance.js."
     }
   },
   "meta": {
