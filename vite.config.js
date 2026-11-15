@@ -229,7 +229,7 @@ const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
 export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/cultureProfiles.js',
   '/src/domain/customCategories.js',
-  '/src/domain/magicFilter.js', '/src/domain/display/magicProvisionShown.js', '/src/domain/facts/magicSource.js', // BAR2-LABELS-4 (2026-11-15): LB1's defenseDisplay.js import (safetyProfile -> defenseDisplay -> them) put both in EAGER engine-core, an engine-core -> coherence-lazy edge (engineCoreLazyEdge); excised, they route as at dcb069bff (unpinned)
+  '/src/domain/magicFilter.js', '/src/domain/display/magicProvisionShown.js', '/src/domain/facts/magicSource.js', '/src/domain/facts/ironAtHand.js', // BAR2-LABELS-4 (2026-11-15): LB1's defenseDisplay.js import (safetyProfile -> defenseDisplay -> them) put both in EAGER engine-core, an engine-core -> coherence-lazy edge (engineCoreLazyEdge); excised, they route as at dcb069bff (unpinned). BAR2-CLOSE-SWEEP-A (2026-11-15): facts/ironAtHand.js (BAR2-PLACES VW2, new; its one importer facts/factsOf.js is generator-reached, so the derivation walked through it) rode EAGER engine-core, and its import of facts/crisisKind.js (crisisOf, the one siege reading; no eager reader of it exists) was an engine-core -> coherence-lazy edge (engineCoreLazyEdge, plain and flagged); excised, unpinned, as those two (routes measured: only this module moves, engine-core -> unpinned)
   // region/foldTradeCategories.js RETIRED 2026-09-20 (FIX-D9, ODQ §934.47 addendum 98) — its row here deleted nothing; docs/DEAD_CODE_DISPOSITION.md, Round-3. ⛔ ONE line replacing one, so no address below this point moves.
   '/src/domain/settlement.schema.js',
   '/src/domain/formatNumber.js',

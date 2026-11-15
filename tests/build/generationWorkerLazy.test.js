@@ -465,7 +465,17 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   power/conflictIssues, generationCoherence, facts/factLayers); JOIN-7 (historyData, computeActiveChains, crisisStoppedRow,
 //   crisisDependence, defenseDisplay). The table: docs/chair/2026-11-15/close/TAIL-CLOSE-WORKER-1-HANDBACK.md. Recorded AT the
 //   measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 2303278;
+// 2,303,278 -> 2,312,179 (2026-11-15, BAR2-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR2; the chair's ruling B3 under the owner's
+// word of 2026-11-15 07:50 UTC, which deferred the size budgets to the chair, and the chair's decision A; VETOABLE BY THE OWNER):
+// A RISE OF 8,901 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this file's own arm: the
+// line's closed tip 74ded1800 reads 2,303,278 (the ceiling, exactly); the round's joined tree (59185b62a + the sweep-a repair
+// 87bbb6c87) reads 2,312,179. The cause: the src/ cures of the round's five branches AS A WHOLE (lane/bar2-corpus, -services,
+// -places, -people, -labels: 39 first-parent commits 74ded1800..59185b62a); the worker carries the whole engine, so the shared-
+// domain excisions (labels' vite.config.js line: display/magicProvisionShown.js, facts/magicSource.js; sweep-a: facts/ironAtHand.js)
+// move no byte of it (customContentPreview.worker moves by the same +8,901). The app build's largest chunk moves over the same
+// span, for orientation: engine +5,463, data-lazy +3,803, crisisStoppedRow +1,688 (services SV6), engine-core +1,314. Recorded
+// AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2312179;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -791,7 +801,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling WB1, 2026-11-15, the close of the tail round, ODQ §934.105). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR2; before it WB1, ODQ §934.105). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

@@ -8868,6 +8868,12 @@
     "family",
     "The priest guides the community, and disputes are brought to the priest to settle.",
     "5f9280675f6121fd"
+   ],
+   [
+    "watch",
+    "after-base: close-true",
+    "City watch; it answers for keeping order and is growing more sure of its own authority.",
+    "6c12f9d5be13b96e"
    ]
   ],
   "src/data/resourceData.js": [
@@ -27208,6 +27214,12 @@
     "after-base: close-unprinted",
     "Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabi",
     "773b4df68d59884d"
+   ],
+   [
+    "watch",
+    "after-base: close-true",
+    "City watch; it answers for keeping order and is growing more sure of its own authority.",
+    "6c12f9d5be13b96e"
    ]
   ],
   "src/generators/power/conflictIssues.js": [
@@ -27676,6 +27688,12 @@
     "family",
     "Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know",
     "4d1330db1a2e96c6"
+   ],
+   [
+    "watch",
+    "after-base: close-true",
+    "City watch; it answers for keeping order and is growing more sure of its own authority.",
+    "6c12f9d5be13b96e"
    ]
   ],
   "src/generators/power/settlementNarrative.js": [
