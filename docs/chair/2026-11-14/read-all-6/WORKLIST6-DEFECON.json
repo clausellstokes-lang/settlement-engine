@@ -1,0 +1,20 @@
+[
+{
+"id": "00275",
+"sev": "MED",
+"n": 19,
+"town": "r2s-plague_onset-village-1",
+"section": "Systems/Economics",
+"fold": "Entrepôt Trade Goods passing through the crossroads, and what their traders spend while they stop.",
+"text": "Entrepôt Trade Goods passing through the crossroads, and what their traders spend while they stop.",
+"why": "describes goods passing the crossroads and traders stopping and spending as running trade; the town is under plague (Plague Unrest): people do not travel or gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 70,
+"fn": "ENTREPOT_LINE"
+}
+}
+]

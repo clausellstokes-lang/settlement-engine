@@ -1,0 +1,442 @@
+[
+{
+"packet": "bar1",
+"id": "C0078",
+"sev": "LOW",
+"kind": "BROKEN",
+"why": "b: Plural power name 'Religious Authorities' with singular verb 'gains'; subject and verb disagree",
+"text": "Religious Authorities gains",
+"town": "bar0-city-under_siege+famine-rand-2",
+"block_town": "bar0-city-under_siege+famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C0086",
+"sev": "LOW",
+"kind": "BROKEN",
+"why": "b: Plural 'Grain Holders' with singular verb 'loses'; subject-verb disagreement",
+"text": "Grain Holders loses",
+"town": "bar0-city-under_siege+famine-rand-2",
+"block_town": "bar0-city-under_siege+famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C0375",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "b: Butchers row offers Fresh meat unmarked under Famine, yet the Services tab marks Fresh meat Impaired",
+"text": "Fresh meat",
+"town": "bar0-city-under_siege+famine-rand-2",
+"block_town": "bar0-city-under_siege+famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C10045",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "b: says local collaborators include a known figure; the Crisis tab says no one is named, no local power gains",
+"text": "The occupation's local collaborators include someone the players will recognise.",
+"town": "bar0-town-occupied-rand-2",
+"block_town": "bar0-town-occupied-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C10749",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: says the town would go on 'less comfortably' without the arcane; reliance on magic is None, every role absent, 0% food by magic",
+"text": "The town would go on if the arcane went away, more slowly and less comfortably.",
+"town": "bar0-town-occupied-rand-2",
+"block_town": "bar0-town-occupied-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C11435",
+"sev": "LOW",
+"kind": "BROKEN",
+"why": "a: doubled word: 'timber' appears twice in the needed-and-not-brought-in list ('timber, stone, luxury goods, timber, mountain timber') | b: the list prints 'timber' twice: 'timber, stone, luxury goods, timber, mountain timber'",
+"text": "Needed, and not brought in: timber, stone, luxury goods, timber, mountain timber.",
+"town": "bar0-village-calm-rand-2",
+"block_town": "bar0-village-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C11640",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "b: 'Medical role: common' for magic, but reliance on magic is None and no arcane practitioners are on the rolls; healing is clergy care",
+"text": "Medical role: common",
+"town": "bar0-village-calm-rand-2",
+"block_town": "bar0-village-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C11759",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: priest Norbert Krause 'voted against' on a council matter; PEOPLE shows him sitting on no power (In no power), so he holds no vote | b: Norbert Krause 'voted against' on a small matter; PEOPLE shows him on no council or power, so he holds no vote",
+"text": "Norbert Krause voted against Joachim Schulz on a small matter last week.",
+"town": "bar0-village-calm-rand-2",
+"block_town": "bar0-village-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C12186",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: shadow economy printed as 22% capture; INCOME gives it as 23% | b: Shadow Economy 22% capture; INCOME gives Shadow Economy 23%",
+"text": "Shadow Economy: 22% capture▲",
+"town": "bar0-village-famine-rand-2",
+"block_town": "bar0-village-famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C12504",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "b: a bail paid eleven years ago presumes a court and gaol; HOUSES has none and the page says the town keeps no court and no gaol",
+"text": "Tserenpuntsag Qonggirad paid Zümür Merkit's bail eleven years ago and has never mentioned it.",
+"town": "bar0-village-famine-rand-2",
+"block_town": "bar0-village-famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C12578",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: calls the religious conflict a generation old; PAST puts it 49 years ago",
+"text": "The religious conflict left a legacy of trouble in Sübeteigol that has never been fully put right, and that legacy is a generation old.",
+"town": "bar0-village-famine-rand-2",
+"block_town": "bar0-village-famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C1662",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: 'unofficial landing points' presumes docks or water landings; trade access is crossroads on Hills and HOUSES has no docks",
+"text": "Corrupt officials, unofficial landing points, and false manifests.",
+"town": "bar0-city-under_siege+famine-rand-2",
+"block_town": "bar0-city-under_siege+famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C2122",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: a vineyard owned here; LAND gaps say no grapes reach the vintner and there is no vineyard resource",
+"text": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+"town": "bar0-city-under_siege+famine-rand-2",
+"block_town": "bar0-city-under_siege+famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C2134",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "b: A master weaver (no rank) 'authorised an illegal sortie that failed'; C0105 says a sortie is only being considered and War Council leads defence",
+"text": "Secret: Authorised an illegal sortie that failed.",
+"town": "bar0-city-under_siege+famine-rand-2",
+"block_town": "bar0-city-under_siege+famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C2202",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: collier 'woods' and a 'charcoal camp'; LAND gives no woodland and the charcoal burner runs on imported timber",
+"text": "How they deal Answers questions about the woods; asks who sent you.",
+"town": "bar0-city-under_siege+famine-rand-2",
+"block_town": "bar0-city-under_siege+famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C2218",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "b: Says famine was caused by export decisions of Religious Authorities; page gives the siege and failed crops as the cause (C1758, C1761)",
+"text": "Secret: Has documentation proving the famine was caused by export decisions made by Religious Authorities, and has been paid to lose it",
+"town": "bar0-city-under_siege+famine-rand-2",
+"block_town": "bar0-city-under_siege+famine-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C2811",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: gives Dolgorsüren Merv a hired 'company' guarding wagons; PEOPLE has her as watch commander, the company captain is Chimgee Ongirad",
+"text": "Dolgorsüren Merv's company still guards the wagons, but more slowly.",
+"town": "bar0-city-wartime-rand-2",
+"block_town": "bar0-city-wartime-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C3078",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: title 'Merchant Prince' for Gantuyaa Taichiud, who PEOPLE gives as f | b: title 'Merchant Prince' for Gantuyaa Taichiud, who PEOPLE gives as (f), the luxury merchant",
+"text": "Connection: Merchant Prince Gantuyaa Taichiud",
+"town": "bar0-city-wartime-rand-2",
+"block_town": "bar0-city-wartime-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C3121",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: title 'Frontman' for Namsrai Naiman, who PEOPLE gives as f | b: title 'Frontman' for Namsrai Naiman, who PEOPLE gives as (f), the nominal owner",
+"text": "Connection: Frontman Namsrai Naiman",
+"town": "bar0-city-wartime-rand-2",
+"block_town": "bar0-city-wartime-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C3445",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: ore cut and carted out now; LAND's only mineral resource, Gemstone Deposits, is depleted and iron is imported",
+"text": "Ore cut underground by the crews and brought out by cart for sorting.",
+"town": "bar0-city-wartime-rand-2",
+"block_town": "bar0-city-wartime-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C4545",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: the carpenters' master wright is said to under-declare the settlement's stores and sell concealed grain; grain stores belong to the granaries, not carpenters",
+"text": "Secret: Has been under-declaring the settlement's stores to the requisition officers and selling the concealed grain to both armies",
+"town": "bar0-city-wartime-rand-2",
+"block_town": "bar0-city-wartime-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C4559",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: the dean of the parish churches is said to sell goods 'sold as locally produced'; PEOPLE has a dean heading Parish churches, no trade",
+"text": "Secret: The goods they sell as locally produced are sourced from somewhere with exploitative labour practices",
+"town": "bar0-city-wartime-rand-2",
+"block_town": "bar0-city-wartime-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C5483",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: 'office of the guard' but DEFENCE has no garrison or watch; Yue Zhu is the militia captain, GOVERNMENT lists no guard office | b: Yue Zhu 'holds the office of the guard'; DEFENCE has garrison none, watch none, only a citizen militia; PEOPLE gives her militia captain.",
+"text": "holds the office of the guard",
+"town": "bar0-hamlet-under_siege-rand-2",
+"block_town": "bar0-hamlet-under_siege-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C5649",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "b: Says short 69 lbs/day; other prints say about 68 lbs (42% of need 162); header gap is 42%.",
+"text": "Short: 69 lbs/day",
+"town": "bar0-hamlet-under_siege-rand-2",
+"block_town": "bar0-hamlet-under_siege-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C5772",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "b: Names the hamlet's workshops; HOUSES lists no workshop or craft house, only an external mill.",
+"text": "The defenders at Huapu make do: the hamlet's workshops cannot keep them properly fed and equipped.",
+"town": "bar0-hamlet-under_siege-rand-2",
+"block_town": "bar0-hamlet-under_siege-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C5897",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "b: Yue Zhu has secured what makes Jiangli's hold obsolete; Rule and succession says nobody stands ready to lead against the Headman's Authority.",
+"text": "Yue Zhu has recently secured something that makes Jiangli Huang's hold obsolete.",
+"town": "bar0-hamlet-under_siege-rand-2",
+"block_town": "bar0-hamlet-under_siege-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C5998",
+"sev": "LOW",
+"kind": "STATE",
+"why": "b: 'Well-fed children' claims plenty; FOOD word is Pressured, grown only 44%, 53% imported, gap 3%",
+"text": "Well-fed children run errands through a busy street.",
+"town": "bar0-metropolis-calm-rand-2",
+"block_town": "bar0-metropolis-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C6242",
+"sev": "LOW",
+"kind": "STATE",
+"why": "b: offers beeswax candles unmarked; LAND has Beekeeping & Wax impaired (wild foraging depleted)",
+"text": "Beeswax candles",
+"town": "bar0-metropolis-calm-rand-2",
+"block_town": "bar0-metropolis-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C6322",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: title 'Frontman' for Maryam ibn Tufayl, who is female in PEOPLE | b: 'Frontman' is a male title for Maryam ibn Tufayl, who PEOPLE gives as f",
+"text": "Connection: Frontman Maryam ibn Tufayl",
+"town": "bar0-metropolis-calm-rand-2",
+"block_town": "bar0-metropolis-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C7341",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: 'unofficial landing points'; trade access is road only and HOUSES has no docks or port",
+"text": "Corrupt officials, unofficial landing points, and false manifests.",
+"town": "bar0-metropolis-calm-rand-2",
+"block_town": "bar0-metropolis-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C7479",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: male title 'Qaid' for Tamara al-Karimi, who is female (f) in PEOPLE",
+"text": "Qaid",
+"town": "bar0-metropolis-calm-rand-2",
+"block_town": "bar0-metropolis-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C7506",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: male title 'Emir' for Vidha al-Rashidi, who is female (f) and 'the lady' in PEOPLE | b: 'Emir' is a male title for Vidha al-Rashidi, whom PEOPLE gives as f ('the lady')",
+"text": "Emir",
+"town": "bar0-metropolis-calm-rand-2",
+"block_town": "bar0-metropolis-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C8013",
+"sev": "LOW",
+"kind": "STATE",
+"why": "b: Tamara al-Karimi is the garrison commander (PEOPLE); 'learned the work', 'clients' read as a trade at a chandler's side",
+"text": "Tamara al-Karimi learned the work at Nabila al-Halabi's side for seven years.",
+"town": "bar0-metropolis-calm-rand-2",
+"block_town": "bar0-metropolis-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C8044",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "b: Karim al-Jabbar is a gambling house boss sitting on Merchant Guilds only; no judge's office for him in PEOPLE or GOVERNMENT",
+"text": "Karim al-Jabbar has been appointed to judge a case in which Ibtisam al-Andalusi is a party.",
+"town": "bar0-metropolis-calm-rand-2",
+"block_town": "bar0-metropolis-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C8626",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: all made by hands and ground without a practitioner; FOOD records 1% of food made by magic",
+"text": "What the thorp makes it makes with hands and ground, and would go on making without a practitioner in it.",
+"town": "bar0-thorp-calm-rand-2",
+"block_town": "bar0-thorp-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C8661",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: names halls and roads better than required; a thorp of 11 with seven houses, none a hall | b: names 'the halls'; HOUSES lists no hall, only dwellings, in a thorp of eleven",
+"text": "The halls, the houses and the roads are all better than a thorp this size strictly requires.",
+"town": "bar0-thorp-calm-rand-2",
+"block_town": "bar0-thorp-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C8741",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: stalls piled with spice; trade page lists spices as needed and not brought in, imports have no spice",
+"text": "Spice and drying herbs scent every lane, and the stalls are piled with them.",
+"town": "bar0-town-calm-rand-2",
+"block_town": "bar0-town-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C8762",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: guilds settle quarrels among themselves; QUARRELS has Church Council vs Merchant Guilds high over apprentices and a guild conflict tension | b: says guilds settle quarrels among themselves; a live guild conflict and an open Church Council vs Merchant Guilds quarrel (high) are recorded",
+"text": "Craftspeople at Naranjomal answer to their guilds and the guilds settle their quarrels among themselves.",
+"town": "bar0-town-calm-rand-2",
+"block_town": "bar0-town-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C8936",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: names market wardens, an office GOVERNMENT and PEOPLE do not list",
+"text": "A covered fish market under the market wardens.",
+"town": "bar0-town-calm-rand-2",
+"block_town": "bar0-town-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C9393",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: hall free of criminals, no criminal power strong; the page records semi-organized networks, gangs and rival crews fighting over the streets",
+"text": "Free of the criminals.",
+"town": "bar0-town-calm-rand-2",
+"block_town": "bar0-town-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C9484",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "b: no arcane practitioners on the rolls, but magic is high, 'Relied upon', Magical Capability Strong, with alchemy exports and a magical node",
+"text": "No arcane practitioners on the rolls.",
+"town": "bar0-town-calm-rand-2",
+"block_town": "bar0-town-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C9500",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: religious acceptance of magic hostile, yet the page says houses of worship and the monastery supply the magic the town relies upon",
+"text": "Religious acceptancehostile",
+"town": "bar0-town-calm-rand-2",
+"block_town": "bar0-town-calm-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C9969",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: a wine shop; HOUSES has taverns and inn but no wine shop",
+"text": "A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.",
+"town": "bar0-town-occupied-rand-2",
+"block_town": "bar0-town-occupied-rand-2"
+},
+{
+"packet": "bar1",
+"id": "C9996",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: a hall of justice; HOUSES has a Town hall and prison but no court",
+"text": "The town is visibly governed: a hall of justice, a gaol.",
+"town": "bar0-town-occupied-rand-2",
+"block_town": "bar0-town-occupied-rand-2"
+}
+]

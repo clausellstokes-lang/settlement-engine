@@ -1,0 +1,128 @@
+[
+{
+"id": "C1599",
+"sev": "MED",
+"n": 98,
+"town": "bar0-city-under_siege+famine-rand-2",
+"section": "Systems/Power",
+"fold": "Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.",
+"text": "Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.",
+"why": "Religious Authorities (strength 17, strongest power, contends for the seat) said to have limited political leverage at the margins; decisions are made by it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 45,
+"fn": "CLERGY_AT_MARGINS"
+}
+},
+{
+"id": "C2256",
+"sev": "MED",
+"n": 85,
+"town": "bar0-city-under_siege+famine-rand-2",
+"section": "World/NPCs",
+"fold": "Secret: Has been digging clay from land that belongs to someone else and paying nothing for it",
+"text": "Secret: Has been digging clay from land that belongs to someone else and paying nothing for it",
+"why": "potter digs clay locally; LAND gaps say Potter lacks access to clay and the Gaps list says no clay reaches the potter",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 192,
+"fn": "ROWS"
+}
+},
+{
+"id": "C9371",
+"sev": "MED",
+"n": 77,
+"town": "bar0-town-calm-rand-2",
+"section": "Systems/Power",
+"fold": "Merchant Guilds and Craft Guilds vote together whenever trade is at stake, then fight over who keeps the profit.",
+"text": "Merchant Guilds and Craft Guilds vote together whenever trade is at stake, then fight over who keeps the profit.",
+"why": "Merchant and Craft Guilds vote together whenever trade is at stake; elsewhere merchants consistently outvote craft masters, and the relation is tense",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 354,
+"fn": "MERCHANT_CRAFT_VOTE"
+}
+},
+{
+"id": "C5005",
+"sev": "MED",
+"n": 57,
+"town": "bar0-hamlet-calm-rand-2",
+"section": "Summary/Overview",
+"fold": "A dispute over grazing rights and water access has run for # seasons, and the families on each side no longer speak to # another.",
+"text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+"why": "a grazing/water dispute not in QUARRELS (none), TENSIONS (succession only), CRISIS or PAST; and 'no longer speak' contradicts Stable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 509,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "C3856",
+"sev": "MED",
+"n": 27,
+"town": "bar0-city-wartime-rand-2",
+"section": "Systems/Power",
+"fold": "A crown officer came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.",
+"text": "A crown officer came last week and left with a list of what will be taken next month, and those in charge signed it because they saw no other choice.",
+"why": "says a crown officer came last week and those in charge already signed; Crisis hook says officer has arrived and the governing power must still decide",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 50,
+"fn": "buildWartimeNarrative"
+}
+},
+{
+"id": "C7216",
+"sev": "MED",
+"n": 12,
+"town": "bar0-metropolis-calm-rand-2",
+"section": "Systems/Power",
+"fold": "Artisan guilds maintaining standards in a thin economy; not politically weak by choice, but by circumstance.",
+"text": "Artisan guilds maintaining standards in a thin economy; not politically weak by choice, but by circumstance.",
+"why": "'in a thin economy'; STATE says Prosperous, Economic Resilience Strong, diversified economic base with nine income sources",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 631,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "C3893",
+"sev": "MED",
+"n": 6,
+"town": "bar0-city-wartime-rand-2",
+"section": "Systems/Power",
+"fold": "Trade disruption and requisition are hurting the bottom line.",
+"text": "Trade disruption and requisition are hurting the bottom line.",
+"why": "says Thieves' Guild is hurt by trade disruption; the crisis stakes say crime gains from the disorder",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 325,
+"fn": "applyStressEventFactions"
+}
+}
+]

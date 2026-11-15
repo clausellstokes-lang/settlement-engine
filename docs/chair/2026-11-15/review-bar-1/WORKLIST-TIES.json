@@ -1,0 +1,56 @@
+[
+{
+"id": "C7293",
+"sev": "MED",
+"n": 101,
+"town": "bar0-metropolis-calm-rand-2",
+"section": "Systems/Power",
+"fold": "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
+"text": "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
+"why": "calls the city watch 'well-funded'; the defence page says garrison and watch are resource-constrained, inadequate equipment, irregular pay",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/powerSiblings.js",
+"line": 87,
+"fn": "FACTION_DESC_SIBLINGS"
+}
+},
+{
+"id": "C11266",
+"sev": "MED",
+"n": 61,
+"town": "bar0-village-calm-rand-2",
+"section": "Summary/Plot Hooks",
+"fold": "They have stopped believing, have told no #, and still lead the prayers every week.",
+"text": "They have stopped believing, have told no one, and still lead the prayers every week.",
+"why": "Aleidis Krause is the militia captain, not clergy; the priest is Norbert Krause, so 'still lead the prayers every week' does not fit her",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/hookThemes.js",
+"line": 205,
+"fn": "AUTHORED_HOOK_THEMES"
+}
+},
+{
+"id": "C12412",
+"sev": "MED",
+"n": 56,
+"town": "bar0-village-famine-rand-2",
+"section": "World/NPCs",
+"fold": "Wants Learn whether <N> can still pay what is owed.",
+"text": "Wants Learn whether Tserenpuntsag Qonggirad can still pay what is owed.",
+"why": "priest wants to learn whether Tserenpuntsag can still pay what is owed, but the debt runs the other way: Zümür Merkit owes Tserenpuntsag",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/goalFamilies.js",
+"line": 531,
+"fn": "GOAL_FAMILY_LINES"
+}
+}
+]

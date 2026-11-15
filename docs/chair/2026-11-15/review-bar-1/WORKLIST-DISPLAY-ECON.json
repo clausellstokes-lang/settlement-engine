@@ -1,0 +1,128 @@
+[
+{
+"id": "C11638",
+"sev": "MED",
+"n": 338,
+"town": "bar0-village-calm-rand-2",
+"section": "Systems/Magic",
+"fold": "Economic role: occasional",
+"text": "Economic role: occasional",
+"why": "magic roles economic/military/infrastructure 'occasional', medical 'common' under 'Reliance on magic: None'; elsewhere no arcane practitioners, no wards, magic 0% of food",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C9234",
+"sev": "MED",
+"n": 183,
+"town": "bar0-town-calm-rand-2",
+"section": "Systems/Economics",
+"fold": "A few households still go short, and a bad season would leave more of them hungry.",
+"text": "A few households still go short, and a bad season would leave more of them hungry.",
+"why": "says households go short and a bad season would hurt; FOOD gap 0%, deficit 0%, Secure, six months in a granary",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/components/new/tabs/EconomicsTab.jsx",
+"line": 768,
+"fn": "shortWords"
+}
+},
+{
+"id": "C3694",
+"sev": "MED",
+"n": 138,
+"town": "bar0-city-wartime-rand-2",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported",
+"text": "Production: 6,176 lbs/day+ 4,426 imported",
+"why": "prints 4,426 imported and C3696 short 1,120; header says imports cover 4374 and deficit 10% (1,172 of 11,722)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C6977",
+"sev": "MED",
+"n": 138,
+"town": "bar0-metropolis-calm-rand-2",
+"section": "Systems/Economics",
+"fold": "Production: # lbs/day+ # imported",
+"text": "Production: 20,625 lbs/day+ 25,101 imported",
+"why": "prints 25,101 lbs/day imported and short 1,204; header FOOD ledger says imports cover 24,897 and the gap is 3% (about 1,408)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C12198",
+"sev": "MED",
+"n": 127,
+"town": "bar0-village-famine-rand-2",
+"section": "Systems/Resources",
+"fold": "✓ Fully exploitedFishmedium value",
+"text": "✓ Fully exploitedFishmedium value",
+"why": "Fish 'Fully exploited' while FOOD says the fish failed (failed source fish, famine cut 65%) and the fishing chain stands impaired",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C8625",
+"sev": "MED",
+"n": 122,
+"town": "bar0-thorp-calm-rand-2",
+"section": "Systems/Magic",
+"fold": "Nothing structural at <N> depends on arcane work.",
+"text": "Nothing structural at Beishan depends on arcane work.",
+"why": "says nothing depends on arcane work; FOOD shows 1% made by magic and the food text says some food came by spell",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/new/tabs/MagicTab.jsx",
+"line": 102,
+"fn": "MagicTab"
+}
+},
+{
+"id": "C1750",
+"sev": "MED",
+"n": 7,
+"town": "bar0-city-under_siege+famine-rand-2",
+"section": "Systems/Magic",
+"fold": "Fuel & Heating: Arcane fabrication and stone-shaping partially offset depleted extraction",
+"text": "Fuel & Heating: Arcane fabrication and stone-shaping partially offset depleted extraction",
+"why": "Fuel & Heating row says stone-shaping offsets 'depleted extraction'; the fuel chain draws on coal/peat, not stone (copied from the stone row)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 54,
+"fn": "NOT_FOOD_NOTES"
+}
+}
+]

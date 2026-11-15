@@ -1,0 +1,615 @@
+[
+{
+"id": "C0278",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: a live would-be-heir plot is in none of CRISIS, QUARRELS, TENSIONS or PAST (the only succession crisis was 60 years ago, minor)"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "A would-be heir approaches outsiders to investigate a rival's past",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Summary/Plot Hooks"
+],
+"fold": "A would-be heir approaches outsiders to investigate a rival's past",
+"n": 180,
+"struck": "STATES ITS OWN FACT: flagged only for being on no list of the header; nothing denies it"
+},
+{
+"id": "C0539",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Charcoal burner offers supply with no mark; LAND gaps say it runs on imported timber, and nothing is imported under siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "ServicesCharcoal supply",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesCharcoal supply",
+"n": 123,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0554",
+"sev": "LOW",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: coaching inn row offers Lodging and Horse change unmarked, with coaches on a schedule; under siege nothing travels by road"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Horses are changed here, not merely rested.",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Horses are changed here, not merely rested.",
+"n": 56,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0565",
+"sev": "LOW",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Daily markets offer Fresh produce and General trade unmarked; Siege stops trade and Famine means food is short (C0134)"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Fresh produce",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Fresh produce",
+"n": 96,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0566",
+"sev": "LOW",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Daily markets offer fresh produce and general trade unmarked; under siege and famine field work and trade have stopped"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "General trade",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "General trade",
+"n": 141,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0569",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: fish 'come in by cart' with no mark; nothing comes in by road under siege, fish is not in TRADE imports, and terrain is Hills",
+"b: Fish 'come in by cart' and Preserved fish unmarked; under Siege nothing comes in by road (C0068), and Famine"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Salted, smoked and dried fish come in by cart, sold by weight and inspected for rot.",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Salted, smoked and dried fish come in by cart, sold by weight and inspected for rot.",
+"n": 58,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0625",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: stone-dressing yards 'at work' beside the quarry face; LAND gives Stone quarry as depleted",
+"b: Stone quarry row offers Cut stone and rubble unmarked; LAND gives Stone quarry as depleted and TRADE imports dressed stone"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Yards for dressing stone stand beside the quarry face, at work whenever good stone can be had.",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Yards for dressing stone stand beside the quarry face, at work whenever good stone can be had.",
+"n": 30,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0747",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: 'Goods move past checkpoints' unmarked under siege, while the same house's Contraband delivery is stopped by the siege",
+"b: Contraband transport: goods move past checkpoints, routes run; contradicts Contraband delivery stopped by the siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Goods move past checkpoints.",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Goods move past checkpoints.",
+"n": 149,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0860",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: 'Large-scale trading', merchants from distant regions, carries no mark under siege; Institutions marks the same fair service stopped",
+"b: Large-scale trading (largest event, distant merchants) printed unmarked here, but marked (stopped) in Institutions; Siege stops trade"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Large-scale trading",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Large-scale trading",
+"n": 177,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0876",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Pottery and ceramics offered with no short mark; LAND gaps say Potter lacks access to clay; Institutions marks it short"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Pottery and ceramics",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Pottery and ceramics",
+"n": 269,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0960",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Burial (interment outside the gates, bearers and cart) shown unmarked under siege; the Institutions tab marks this same service stopped"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Burial",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Burial",
+"n": 720,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C0961",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: Interment outside the gates printed unmarked; under Siege gates are closed and Institutions marks Burial (stopped)"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Interment outside the gates.",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Interment outside the gates.",
+"n": 120,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C1019",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Message relay along the relay chain with fresh horses shown unmarked under siege; the Institutions tab marks this same service stopped",
+"b: Message relay (fresh horses at each station) unmarked; Institutions marks it (stopped) and the siege holds the roads"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Message relay",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Message relay",
+"n": 122,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C1062",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Credit letters honoured across the entire trade network shown unmarked under siege; the Institutions tab marks this same service stopped",
+"b: Credit letters honored across the trade network unmarked; Institutions marks Credit letters (stopped) under siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Credit letters",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Credit letters",
+"n": 78,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C1067",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Duties and tariffs collected on all imports and exports shown unmarked under siege; the Institutions tab marks this same service stopped",
+"b: Duties collected on all import and export goods unmarked; Institutions marks Duties and tariffs (stopped) under siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Duties and tariffs",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Duties and tariffs",
+"n": 204,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C1097",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Trade brokerage across regional markets shown unmarked under siege; the Institutions tab marks this same service stopped",
+"b: Trade brokerage across regional markets unmarked; Institutions marks it (stopped) under siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Trade brokerage",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Trade brokerage",
+"n": 188,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C1123",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Caravan organization, assembling merchants into shared caravans shown unmarked under siege; the Institutions tab marks this same service stopped",
+"b: Caravan organization unmarked in Transportation; Institutions marks it (stopped) and Siege stops all road traffic"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Caravan organization",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Caravan organization",
+"n": 68,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C11232",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: a two-season grazing and water feud with families not speaking; QUARRELS none, TENSIONS only tyranny, CRISIS none, stability Stable, no such event in PAST",
+"b: a grazing-and-water dispute is in none of QUARRELS (none), TENSIONS (only tyranny) or PAST; the only live tension is tyranny"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+"town": "bar0-village-calm-rand-2",
+"sections": [
+"Summary/Overview"
+],
+"fold": "A dispute over grazing rights and water access has run for # seasons, and the families on each side no longer speak to # another.",
+"n": 57,
+"struck": "STATES ITS OWN FACT: flagged only for being on no list of the header; nothing denies it"
+},
+{
+"id": "C1128",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Horse hire for journeys shown unmarked under siege; the Institutions tab marks this same service stopped",
+"b: Horse hire for journeys unmarked; Institutions marks it (stopped); C1127 says no horses go out during the siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Horse hire",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Horse hire",
+"n": 174,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C1135",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Parcel forwarding between relay points shown unmarked under siege; the Institutions tab marks this same service stopped",
+"b: Parcel forwarding between relay points unmarked; Institutions marks it (stopped) under siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Parcel forwarding",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Parcel forwarding",
+"n": 78,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C1138",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Route planning by road, threat and season shown unmarked under siege; the Institutions tab marks this same service stopped",
+"b: Route planning of roads for cargo unmarked; Institutions marks it (stopped) under siege"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Route planning",
+"town": "bar0-city-under_siege+famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Route planning",
+"n": 54,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C11978",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: a grain-importer monopoly with quadrupled price is in no CRISIS, QUARRELS, TENSIONS or PAST line; the one tension is resource scarcity (hoarders, poor, regulators)"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+"town": "bar0-village-famine-rand-2",
+"sections": [
+"Summary/Plot Hooks"
+],
+"fold": "# importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+"n": 60,
+"struck": "STATES ITS OWN FACT: flagged only for being on no list of the header; nothing denies it"
+},
+{
+"id": "C12074",
+"sev": "MED",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"whys": [
+"a: Salted fish offered with no famine mark, though the fish failed and the row is marked scarce in the other tab",
+"b: offers salted fish for sale with no scarcity mark though the fish failed (famine cut 65%); the landing's own row marks it scarce"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Salted fish",
+"town": "bar0-village-famine-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Salted fish",
+"n": 157,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C5626",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: offers a bed for a traveller while under siege (nothing comes in or goes out); the Institutions row marks Dwellings hospitality (stopped), this row carries no mark",
+"b: Offers a bed to a traveller who asks, unmarked, under a siege where nothing comes in; the same Hospitality row is marked (stopped)."
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "A bed by the hearth and a place at a shared table, for a traveller who asks.",
+"town": "bar0-hamlet-under_siege-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "A bed by the hearth and a place at a shared table, for a traveller who asks.",
+"n": 356,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C5630",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: offers grazing for a traveller's beasts under a siege; Institutions marks the same Pasturage service (stopped), this row carries no mark",
+"b: Offers grazing for a traveller's beasts for a fee, unmarked, under siege and isolation; the Pasturage row is marked (stopped)."
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Grazing on the common for a traveller's beasts, for a small fee.",
+"town": "bar0-hamlet-under_siege-rand-2",
+"sections": [
+"Systems/Services"
+],
+"fold": "Grazing on the common for a traveller's beasts, for a small fee.",
+"n": 240,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C8343",
+"sev": "MED",
+"kinds": [
+"STATE",
+"LACKS"
+],
+"whys": [
+"a: devout households' dispute over who may trade is a live tension in none of CRISIS, QUARRELS, TENSIONS (only the flood), PAST",
+"b: devout households' quarrel over trade is in no CRISIS/QUARRELS/TENSIONS/PAST (only the flood tension); thorp has no house of worship"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "The most devout households want a say over who may trade and when, and not everyone here agrees.",
+"town": "bar0-thorp-calm-rand-2",
+"sections": [
+"Summary/Overview"
+],
+"fold": "The most devout households want a say over who may trade and when, and not everyone here agrees.",
+"n": 27,
+"struck": "STATES ITS OWN FACT: flagged only for being on no list of the header; nothing denies it"
+},
+{
+"id": "C9469",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: rival crews fighting over who runs the streets is in none of CRISIS, QUARRELS, TENSIONS or PAST; page also says free of criminals"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Rival crews at Naranjomal are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+"town": "bar0-town-calm-rand-2",
+"sections": [
+"Systems/Defense"
+],
+"fold": "Rival crews at <N> are fighting over who runs the streets, and until # wins, people pay both the cut and the brawling.",
+"n": 60,
+"struck": "STATES ITS OWN FACT: flagged only for being on no list of the header; nothing denies it"
+}
+]

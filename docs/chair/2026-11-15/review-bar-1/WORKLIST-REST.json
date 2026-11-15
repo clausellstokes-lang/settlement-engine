@@ -1,0 +1,38 @@
+[
+{
+"id": "C6001",
+"sev": "MED",
+"n": 720,
+"town": "bar0-metropolis-calm-rand-2",
+"section": "Summary/Overview",
+"fold": "Food Security is re-judged as the campaign advances.",
+"text": "Food Security is re-judged as the campaign advances.",
+"why": "speaks of a campaign advancing; CRISIS is none, no siege or campaign exists in this calm town",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/copy/sectionHelp.js",
+"line": 23,
+"fn": "SYSTEMS_HEALTH_VINTAGE"
+}
+},
+{
+"id": "C4318",
+"sev": "MED",
+"n": 5,
+"town": "bar0-city-wartime-rand-2",
+"section": "World/NPCs",
+"fold": "Wants Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes",
+"text": "Wants Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes",
+"why": "Mine-Master Gantulga Önggirad is said to want unit cohesion as conscription pulls soldiers; PEOPLE has a mine captain, no military role or command",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/npcGenerator.js",
+"line": 406,
+"fn": "STRESS_GOAL_OVERRIDES"
+}
+}
+]
