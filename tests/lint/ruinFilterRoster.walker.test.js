@@ -166,7 +166,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/corruption.js': 'penalty-side — criminal/corruption-impairment classifier (drag, not credit)',
   // TAIL-TIES-10 (the chair's ruling T29 (3)): the crime fact's leaf. Its roster reads moved verbatim out of display/defenseDisplay.js
   // (T28), which this walker read as COMPLIANT file-granularly only because it imports liveInstitutions for its Legal row.
-  'src/domain/facts/criminalStructureKey.js': 'penalty-side/name-lookup — criminalStructureKeyOf classifies the CRIMINAL structure by roster names (the thieves\' guild / syndicate / smuggling / fence ladder, THIEVES_GUILD_HOUSE) and hands the roster to crimeSignalOf / rivalRingsOf; it credits no provider capacity. Moved verbatim (T28): it reads ruined rows exactly as the display did before the cut, so whether a ruined criminal house should key the structure is a behaviour question named for the owner, not this move\'s',
+  'src/domain/facts/criminalStructureKey.js': 'penalty-side/name-lookup — criminalStructureKeyOf classifies the CRIMINAL structure by roster names (the thieves\' guild / syndicate / smuggling / fence ladder, THIEVES_GUILD_HOUSE) and hands the roster to crimeSignalOf / rivalRingsOf, and ringHousesOf (TAIL-CLOSE-SRC-5, SR5 (a): moved verbatim out of defenseDisplay.js :: ringWithoutSeat) names the same ladder\'s houses for the ring note; it credits no provider capacity. Moved verbatim (T28): it reads ruined rows exactly as the display did before the cut, so whether a ruined criminal house should key the structure is a behaviour question named for the owner, not this move\'s',
   // ALLEGIANCE-CAR1 (2026-11-08): the retired corruptionPass's roster read moved here with the deal (J-2), measured.
   'src/domain/people/allegiance.js': 'penalty-side — the allegiance deal reads the roster\'s CRIMINAL houses (isCriminalInstitution) for the corruption climate and organized-crime pressure (drag, not credit), as the retired corruptionPass did through corruption.js, and looks a card\'s house up by name (the handler pool, the `via` mark); it credits no provider capacity',
   'src/domain/state/deriveSystemState.js': 'penalty-side — countByStatus impaired/critical risk penalty (status-aware)',
@@ -218,6 +218,11 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // Infrastructure row now reads the LIVE roster (`liveInstitutions`, a ruined courthouse tries no case), so this
   // walker reads the file as compliant and asked for the row ("now routes through the ruin filter"). Its other reads
   // of the defence buckets (`defenseProfile.institutions`) are unchanged and stay a display of what the town built.
+  // ⭐ TAIL-CLOSE-SRC-5 (the chair's ruling SR5, 2026-11-15): the Legal row's read left for the defence home (SR1), and the
+  // file is COMPLIANT again on its own reads, with no row: the bucket reads (`arcaneDefenseOf`, `deriveArmedForces`) are
+  // counted and listed as what the town fields, so they DECIDE what stands, and they now drop an entry whose house stands
+  // ruined on the current roster (`isLiveInstitution` / `liveInstitutions`); `ringWithoutSeat`'s house lookup moved
+  // verbatim to facts/criminalStructureKey.js :: ringHousesOf (its exempt row above). The discovery count is unmoved.
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
   // ⭐ threatAssessment.js's exempt row is DELETED (lane DEFENSE, 2026-11-03): its rows now ask
   // `domain/defense/defenseFacts.js :: defenseFactsOf`, which reads the LIVE roster through

@@ -501,7 +501,7 @@ const dedupByName = (arr) => [...new Map((arr || []).map((m) => [m?.name, m])).v
  * @returns {ForceEntry[]}
  */
 export function arcaneDefenseOf(settlement) {
-  const magicDef = settlement?.defenseProfile?.institutions?.magicDef || [];
+  const magicDef = standingEntries(settlement?.defenseProfile?.institutions?.magicDef || [], settlement); // SR5 (b): a ruin fields nothing
   if (!magicDef.length) return magicDef;
   return magicWorksAt({ settlement: settlement || {} }) === false ? [] : magicDef;
 }
@@ -517,11 +517,13 @@ export function arcaneDefenseOf(settlement) {
  */
 export function deriveArmedForces(settlement) {
   const inst = settlement?.defenseProfile?.institutions || {};
+  /** @param {ForceEntry[] | undefined} entries */
+  const standing = (entries) => standingEntries(entries || [], settlement); // SR5 (b): a ruined house is no force the town fields
   return {
-    fortifications: inst.walls || [],
-    standing: dedupByName([...(inst.garrison || []), ...(inst.militia || []), ...(inst.watch || [])]),
-    contracted: inst.mercenary || [],
-    charter: inst.charter || [],
+    fortifications: standing(inst.walls),
+    standing: dedupByName(standing([...(inst.garrison || []), ...(inst.militia || []), ...(inst.watch || [])])),
+    contracted: standing(inst.mercenary),
+    charter: standing(inst.charter),
     arcane: arcaneDefenseOf(settlement),
   };
 }
@@ -878,3 +880,30 @@ function headedPowerAmongRivals(row, settlement) {
   return Object.freeze({ ...row, note: `The ${powerNameAfterArticle(name)} answers to one head and ${held}, but rival gangs contest its ground: no single authority rules all crime here. Less predictable than an unchallenged guild, more structured than street crime.` });
 }
 import { powerNameAfterArticle } from './powerSentenceName.js';
+
+// ─── TAIL-CLOSE-SRC-5 (SR5 (b)): A RUINED HOUSE IS NO FORCE THE TOWN FIELDS (at the end of the file, so no line above moves) ───
+/**
+ * THE BUCKETS' ENTRIES THAT STILL STAND (the chair's ruling SR5 of 2026-11-15, vetoable by the owner: a read that decides
+ * what stands in a town goes through the roster that leaves ruined houses out). `defenseProfile.institutions` is the
+ * generation-time snapshot: its entries are the roster's rows as they were born, and a ruin REPLACES its roster row
+ * (`{ ...inst, status: 'ruined', _worldPulseInactive: true }`), so the stamp never reaches the bucket. These entries are
+ * counted (the Defense tab's "N arcane", and whether any force stands at all) and listed as the town's armed forces (the
+ * PDF's defence chapter, the Foundry journal), so the read decides what stands. An entry is dropped where it is itself not
+ * live, or where the current roster holds its name only on rows that are not live (`isLiveInstitution`, the roster's one
+ * predicate). An entry whose name the roster does not hold at all (a later rename) is kept: the snapshot is not re-derived
+ * here, and a ruin is the only cause this reads. Where nothing falls, the same array is returned.
+ * @param {ForceEntry[]} entries
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {ForceEntry[]}
+ */
+function standingEntries(entries, settlement) {
+  const rows = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  /** @param {unknown} i @returns {string} */
+  const nameOf = (i) => String(/** @type {{ name?: unknown } | null} */ (i)?.name ?? '');
+  const live = new Set(liveInstitutions(settlement).map(nameOf));
+  const fallen = new Set(rows.filter((i) => !isLiveInstitution(i)).map(nameOf));
+  const kept = entries.filter((e) => (e === null || typeof e !== 'object' || isLiveInstitution(e))
+    && (live.has(nameOf(e)) || !fallen.has(nameOf(e))));
+  return kept.length === entries.length ? entries : kept;
+}
+import { isLiveInstitution, liveInstitutions } from '../institutions/institutionRoster.js';
