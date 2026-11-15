@@ -4430,18 +4430,6 @@
    [
     "market",
     "implied",
-    "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't",
-    "4c2a6a380523489f"
-   ],
-   [
-    "market",
-    "implied",
-    "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settleme",
-    "e9110cbd544757a1"
-   ],
-   [
-    "market",
-    "implied",
     "Catches wildfowl (using snares, nets, and trained birds) to stock the market with duck, goose, and pigeon.",
     "281c996218fc6382"
    ],
@@ -4572,12 +4560,6 @@
     "62f60824cf000b93"
    ],
    [
-    "resource: salt_flats",
-    "family",
-    "Boils or dries naturally saline brine, yielding the raw salt that preserves food. It works only where salt flats, spring",
-    "18f872b03e3a63dd"
-   ],
-   [
     "house: butcher",
     "family",
     "A gathering of hunters who trade knowledge, butcher game, and deal in furs, keeping account of trails, seasons, and whic",
@@ -4678,12 +4660,6 @@
     "family",
     "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households ",
     "ae2d15c652df60c6"
-   ],
-   [
-    "resource: river_clay",
-    "family",
-    "Shapes and fires clay into bricks for building. With them, structures can be made to last. Clay deposits and fuel are ne",
-    "1d6fc9cfe8440eb1"
    ],
    [
     "clergy",
@@ -4852,18 +4828,6 @@
     "family",
     "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among t",
     "e1f6a11d4dbda793"
-   ],
-   [
-    "house: tavern",
-    "family",
-    "Makes and ages wine, whether from grapes grown near or must brought in. He sells by the barrel to taverns and by the bot",
-    "e1c1419658811a73"
-   ],
-   [
-    "house: tavern",
-    "family",
-    "Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses. I",
-    "6e55e7bec080acce"
    ],
    [
     "house: tannery",
@@ -6392,12 +6356,6 @@
     "db6b359aeeac06f5"
    ],
    [
-    "house: fishing",
-    "family",
-    "Buys, salts, and sells fish. The link between fishing and consumption. Near water: fresh. Inland: dried or salted.",
-    "e6a4bac62a543b62"
-   ],
-   [
     "house: fishmonger",
     "family",
     "the master fishmonger",
@@ -6462,12 +6420,6 @@
     "family",
     "Mine (open cast)",
     "ea6b8fe5e6f0a539"
-   ],
-   [
-    "resource: salt_flats",
-    "family",
-    "Evaporates naturally saline brine into the raw salt used for preservation. Viable only where salt flats, springs, or oth",
-    "7677329f5d3d1415"
    ],
    [
     "house: merchant guild",
@@ -6762,18 +6714,6 @@
     "family",
     "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer an",
     "ff2573e4e1329738"
-   ],
-   [
-    "house: tavern",
-    "family",
-    "Produces and ages wine, either from local grapes or imported must. Sells in bulk to taverns and directly to wealthy clie",
-    "e27fade705efed23"
-   ],
-   [
-    "house: vintner",
-    "family",
-    "Produces and ages wine, either from local grapes or imported must. Sells in bulk to taverns and directly to wealthy clie",
-    "e27fade705efed23"
    ],
    [
     "house: tanner",
