@@ -65,6 +65,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 24 | tail-powers-b-2026-11-14 (re-sweep) | cce57ff35 (04:48) | 4ff449a7b (16) | 5f3c2c138 | none | DECLARED MOVE dd5887961 (factions[].desc 19 towns): golden carried |
 | 25 | tail-powers-2026-11-14 (LAST, P30) | 01ddaba28 (04:52; its merge of the line at d817736d8, P28 resolved) | d817736d8 | 475506bf7 | **CODE**: `governanceAccount.js`, resolved by P30 (§3) | P30's three checks held before the push; DECLARED MOVES of the branch (P4 twin, DA, headman's name): golden carried |
 | 26 | lane/tail-display-civic-2026-11-14 | c2f053333 (05:08) | 6cf555801 | 679e52b01 | none | 17 files outside docs/; declared-move commits: 089bccf98  (golden carried) |
+| 27 | lane/tail-display-econ-2026-11-14 | fbcc5712a (05:11) | 756ba4bda | ba5c1af1b | none | 1 files outside docs/; declared-move commits: fbcc5712a  (golden carried) |
 
 ## 3. Every code resolution
 
@@ -199,6 +200,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden; `governanceAccount.js` (P30's resolution) | powers (25) | the branch's DECLARED MOVES (P4's occupied-seat twin, 28 towns; DA; the headman's name): golden carried; `tests/domain/tailDisplayCivic3V1.test.js` (r2r-metropolis-50) red at the line's 5f3c2c138 BEFORE the powers merge and after it: carried, classed for the close |
 | `docs/content/wiring-census.json` (stale against `generalStateProse.js`, `powerStateProse.js`, `warFaithStateProse.js`); `src/domain/crisis/crisisHooks.js:102` (TDZ: `CAST_REASONS`) | display-civic (10) moved the composers; the TDZ red at 72c37436d already | (g) exit 1: the census's door cannot open until the import order is repaired by its seat; then re-taken by its door, then (g) |
 | golden | display-civic (26) | DECLARED MOVE commits 089bccf98  (field diffs in their bodies) |
+| golden | display-econ (27) | DECLARED MOVE commits fbcc5712a  (field diffs in their bodies) |
 
 ## 5. Item 2 at the landed tip
 
