@@ -21596,6 +21596,14 @@
     "80c1d724586bc2a7"
    ]
   ],
+  "src/domain/facts/magic.js": [
+   [
+    "house: academy",
+    "after-base: close-true",
+    "academy of magic",
+    "8f8aa8b21d5ed32c"
+   ]
+  ],
   "src/domain/fieldManifest.js": [
    [
     "granary",
