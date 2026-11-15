@@ -656,9 +656,13 @@ lane/tail-close-src-2026-11-15 (three-dot diff) when each was taken.
   RE-KEYED (ii): STOP-2's premise is r2r-city-0 of the 720's configuration (Scroll scribe, Enchanter's shop), its own
   record with the magic dial off; anchored on its live record, where the group prints. Plant (arcaneDefenseOf's gate
   off) reds it. 21/21.
+- **vocabularyPageFindings** (C28, 1 of 34): the plant was DS-DEF-5 ARCANE: alchemists v1 (8e70d2bed); 91592cbf1 and
+  3f5da151e reworded both lines of the pool off the house, and no state-prose line names the alchemists' house now (every
+  leaf scanned). Case (ii): the plant MOVED to the one page line that still names it, the Economics income line by its
+  constant (incomeLineSiblings.js :: ALCHEMIST_SUPPLEMENTS_LINE). Family kept, not retired. Plant reds it. 34/34.
 
 ## What is left (TAIL-CORPUS-DEF-5's list, current)
-1. All seven named U2 reds and C25's defenseTabFlow green (bb667e11 and after). Nothing lent to this seat is left.
+1. All seven named U2 reds, C25's defenseTabFlow and C28's vocabularyPageFindings green. Nothing lent to this seat is left.
 2. Seen, not chased (not lent): rv2-wartime-hamlet-5 (walls, no force, 60 Adequate) prints the Invasion line "has walls
    and nobody to put on them. A determined attacker takes this town …" beside an Adequate bar; threatRowsTrueUnderBand's
    FALSE_UNDER holds "A determined attacker" false under ADEQUATE on the readiness rows (its law's births are rv2-calm and
