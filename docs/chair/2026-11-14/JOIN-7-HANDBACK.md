@@ -55,6 +55,8 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | 20 | tail-houses-2026-11-14 (SWEEP) | 9525e011b (02:31; handed back) | 2c10ddefe (5) | 794a00cc5 | none | lane-only `INSTITUTION_DESC_VARIANTS.json`; DECLARED MOVE e5a24fd85 (institutions[].desc): golden carried |
 | 21 | tail-ties-2026-11-14 (SWEEP) | fdebbe346 (02:34) | b8991a936 (JOIN-6 6) | 718985525 | none | clean-both `presumedThings.widened.register.json` (parses); lane-only `npcData.STRESS_ECONOMIC_EFFECTS.json`; DECLARED MOVES f00b248fe (relationships 248 towns), 112532f64 (structuralPosition 98): golden carried |
 | 22 | tail-narrative-2026-11-14 (SWEEP) | ca827fc0f (02:37) | 9bd853fd0 (JOIN-6 7) | e6a888e1f | none | lane-only `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json`; DECLARED MOVES b6a0c074c (settlementReason 340), ca827fc0f (pressureSentence 7): golden carried |
+| — | tail-powers-2026-11-14 (SWEEP) | a207c871b (02:41) | d68805134 | — | **STOP**: code conflict, `governanceAccount.js` (§6) | aborted; the chair's ruling awaited |
+| 24 | tail-powers-b-2026-11-14 (SWEEP) | f4eab4088 (02:42) | f89c0d7c1 (6) | 6ad86c138 | none | DECLARED MOVES cddbc3274 (factions[].powerLabel), 42f7f68c2 (factionRelationships[].direction 15): golden carried |
 
 ## 3. Every code resolution
 
@@ -148,6 +150,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden; `INSTITUTION_DESC_VARIANTS.json` | houses (20) | DECLARED MOVE e5a24fd85 (institutions[].desc); the declaration lane-only |
 | golden; `npcData.STRESS_ECONOMIC_EFFECTS.json`; `generationForkCensus.test.js` (re-keyed in the lane) | ties (21) | DECLARED MOVES f00b248fe (relationships[].proseVariant 248, description/tension 245), 112532f64 (npcs[].structuralPosition 98) |
 | golden; `POLITICAL_FLAVOR.json`, `PRESSURE_SENTENCES.json` | narrative (22) | DECLARED MOVES b6a0c074c (settlementReason, 340 towns), ca827fc0f (pressureSentence, 7) |
+| golden | powers-b (24) | DECLARED MOVES cddbc3274 (powerStructure.factions[].powerLabel), 42f7f68c2 (factionRelationships[].direction, 15 towns) |
 
 ## 5. Item 2 at the landed tip d817736d8 (each run to a file in /home/user/j7out, read by its tail through `scripts/gate-tail.sh`)
 
@@ -159,7 +162,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 ## 6. Stops
 
 - **01:12 UTC, the tripwire:** at the first push origin read c3075efcb, not eb054d53f: one commit by JOIN-6's session (01:09, docs only, four lines of its hand-back). Point 1 was committed locally, nothing pushed; told the chair. The chair's ruling 01:13 (§1): merged and went on.
-- No branch aborted; no hunk needed a choice.
+- **02:42 UTC, point 23 STOPPED (law b):** lane/tail-powers-2026-11-14 at a207c871b, `git merge --abort`. `src/domain/display/governanceAccount.js` :: `governanceAccountOf`, THE SEAT (the three seat sentences, the headless and the unnamed seat; two hunks). Joined side: display-civic 812fa7e1f (ruling X2) says the hall governs "under the Occupation Authority" (`${under}`, 28 towns). Powers a708f0cf9 (ruling P4) replaces the same sentences under occupation with a declared twin, "{Ruler} answers to the occupiers of {place}." Two seats cured one sentence: a choice, told to the chair 02:43. Recommendation: P4's twin with X2's lines as the fallback (`underOccupation(i) ?? [X2's lines]`), if the chair rules it; X2's guard then needs the chair's word.
 
 ## 7. Hazards
 
