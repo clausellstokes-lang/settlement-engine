@@ -47,6 +47,11 @@ const tabText = (town) => {
 const notesOf = (town, tradition) => (town.economicState.activeChains || []).map((/** @type {any} */ c) => c.magicNote)
   .filter((/** @type {any} */ n) => n && MAGIC_NOTE_TRADITION[n] === tradition);
 
+/** @param {any} town @param {string} tradition @returns {string[]} those notes as the card prints them (`magicNoteShown`), the silent left out */
+const shownNotesOf = (town, tradition) => (town.economicState.activeChains || []).filter((/** @type {any} */ c) => c.magicNote && MAGIC_NOTE_TRADITION[c.magicNote] === tradition)
+  .map((/** @type {any} */ c) => magicNoteShown(c, town)).filter(Boolean);
+import { magicNoteShown } from '../../src/domain/display/magicProvisionShown.js';
+
 afterEach(cleanup);
 
 describe('the clergy\'s provision reads the defence\'s tradition (item 5)', () => {
@@ -65,16 +70,17 @@ describe('the clergy\'s provision reads the defence\'s tradition (item 5)', () =
   test('a town whose clergy have powers keeps its divine notes (rww-metropolis-calm-1), and a druid\'s note stands beside a denied divine one (rww-metropolis-infiltrated-1)', () => {
     const calm = birthApp('rww-metropolis-calm-1');
     expect(defenceHoldsDivine(calm), 'anchored').toBe(true);
-    const kept = notesOf(calm, 'divine');
+    const kept = shownNotesOf(calm, 'divine'); // TAIL-DISPLAY-ECON X3: a kept note prints as the card words it (magicNoteShown: the food record's provision)
     expect(kept.length, 'anchored: divine notes').toBeGreaterThan(0);
     const t = tabText(calm);
     for (const n of kept) expect(t, n).toContain(n);
     const mixed = birthApp('rww-metropolis-infiltrated-1');
     expect([defenceHoldsDivine(mixed), defenceHoldsDruidic(mixed)], 'anchored').toEqual([false, true]);
     const tm = tabText(mixed);
-    expect(tm, 'the druid\'s note prints in the same text').toContain('Druidic cultivation supplements depleted farmland');
+    expect(shownNotesOf(mixed, 'druid').length, 'anchored: a druid\'s note the card prints').toBeGreaterThan(0);
+    for (const n of shownNotesOf(mixed, 'druid')) expect(tm, 'the druid\'s note prints in the same text').toContain(n);
     for (const n of notesOf(mixed, 'divine')) expect(tm, n).not.toContain(n); // anchored: the line above finds a druid's note in this text
-    for (const n of notesOf(mixed, 'druid')) expect(tm, n).toContain(n);
+    for (const n of shownNotesOf(mixed, 'druid')) expect(tm, n).toContain(n);
   }, 120000);
 
   test('no "N% recovery" chip on any card (rr2s-metropolis-calm-rand-1, rww-metropolis-famine-1, rww-city-under_siege-1)', () => {

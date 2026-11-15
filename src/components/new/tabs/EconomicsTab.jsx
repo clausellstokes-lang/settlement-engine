@@ -116,11 +116,11 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
   // and white-screen the whole tab — in the live generate flow this section is
   // rendered without an error boundary around it. Filter to entries we can
   // safely .toLowerCase() before the .some/.find matching below.
-  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainAsShown(c, town)); // W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js)
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string'); const chains = chainsAsRead.map(c => chainAsShown(c, town)); /* W2-C-LEAVES item 4(c): the state a crisis left (chainStateShown.js) */ const stoppedByCrisis = new Set(chains.filter((c, i) => c.status === 'impaired' && chainCrisisStateShown({ ...chainsAsRead[i], status: 'running' }, town) === 'impaired')); // TAIL-DISPLAY-ECON-2 (05779, 05780): a card the crisis stops (a famine's failed ground, a siege's stopped trade: chainStateShown.js) contributes nothing now
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
-  const runningCount    = chains.filter(c => c.status === 'running').length; const impairedHouses = impairedHousesOf(town);
+  const runningCount    = chains.filter(c => c.status === 'running').length; const impairedHouses = impairedHousesOf(town); const flowCount = flowHeaderCount(chains, institutionalServices, impairedHouses); // X2: the header counts what the cards show
 
   const filtered = flowFilter === 'all'        ? chains
     : flowFilter === 'impaired'   ? chains.filter(c => c.status === 'impaired' || c.status === 'vulnerable')
@@ -129,7 +129,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
     :                                chains.filter(c => c.entrepot);
 
   return (
-    <Section title={`Economic Flows (${chains.length + institutionalServices.length} active${impairedCount > 0 ? ` · ${impairedCount} impaired` : ''})`}
+    <Section title={`Economic Flows${flowCount.words}`}
       collapsible defaultOpen={impairedCount > 0} accent={impairedCount > 0 ? '#8b1a1a' : undefined} help={SECTION_HELP.supplyChains}>
       {/* Filter tabs */}
       <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:10}}>
@@ -241,7 +241,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
               )}
 
               {/* Income contribution */}
-              {incomeEntry && (
+              {incomeEntry && !stoppedByCrisis.has(chain) && (
                 <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:4}}>
                   Contributes to <strong>{incomeEntry.source}</strong> - {incomeEntry.percentage}% of income
                 </div>
@@ -759,8 +759,10 @@ const GROWN_BANDS = Object.freeze([[0.15, 'less than a fifth'], [0.225, 'about a
 const BROUGHT_BANDS = GROWN_BANDS.map(([under, w]) => [under, w === 'about half' ? 'about half the rest' : `${w} of the rest`]); // the same bands, of what is left to find
 /**
  * @param {number} pct the record's residual share of the need left unmet; a whole sentence, the season ahead last
- * @param {boolean} [famine] a famine in force (`facts/famine.js :: famineOf`): the bad season is not ahead, it is here
- * (W2-C-LEAVES item 4(a); the cold list REVIEW-W2A-3 #161: "a bad season would bring real hunger" under a famine)
+ * @param {boolean} [famine] a famine in force (`facts/famine.js :: famineOf`), or a siege that has stopped the trade
+ * (`chainStateShown.js :: tradeStoppedHere`): the bad season is not ahead, it is here (W2-C-LEAVES item 4(a); the cold
+ * list REVIEW-W2A-3 #161: "a bad season would bring real hunger" under a famine; TAIL-DISPLAY-ECON-2, row 12961: the
+ * same under a siege with nothing brought in)
  */
 const shortWords = (pct, famine = false) => (pct <= 0 ? 'Between them, nobody goes short.'
   : pct <= 5 ? (famine ? 'A few households still go short, and hunger is already here.' : 'A few households still go short, and a bad season would leave more of them hungry.')
@@ -778,17 +780,17 @@ const shortWords = (pct, famine = false) => (pct <= 0 ? 'Between them, nobody go
 function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
   const name = s?.name || 'This place';
   const carriers = carriersOf(s, eco); // W2-C-LEAVES-4 item 3(b): the route's own home and the wharf on the roster
-  const magic = fb.magicFoodOffset > 0 ? ` ${foodBar.magicChannel.charAt(0).toUpperCase()}${foodBar.magicChannel.slice(1)} provision makes up ${shareWords(fb.magicFoodOffset / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all')} of what it eats.` : '';
+  const magic = fb.magicFoodOffset > 0 ? ` ${foodBar.magicChannel.charAt(0).toUpperCase()}${foodBar.magicChannel.slice(1)} provision makes up ${shareWords(fb.magicFoodOffset / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all')} of what it needs.` : ''; // X12: a share of the need, said so
   if (!foodDeficit) {
     if (!foodSurplus) return `What is grown here${fb.importCoverage > 0 && carriers ? ' and brought in' : ''} covers each day's food${Math.round(Number(eco?.foodSecurity?.foodRecord?.storageMonths)) >= 3 ? '.' : ', with nothing to spare against a bad year.'}`;
     const over = fb.surplus / Math.max(1, fb.dailyNeed);
     return `${name} grows ${over < 0.1 ? 'a little more than it eats' : over < 0.3 ? 'more than it eats' : 'far more than it eats'}, with some to put by against a bad year.`;
   }
-  const short = shortWords(fbal.deficitPct, famineOf(s).famine);
+  const short = shortWords(fbal.deficitPct, famineOf(s).famine || tradeStoppedHere(s)); // 12961: a siege's hunger is here too
   if (!(fb.importCoverage > 0) || !carriers) return `No food comes into ${name} by trade.${magic} ${short}`;
   const grown = shareWords(fb.dailyProduction / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all');
   const brought = shareWords(fb.importCoverage / (fb.rawDeficit || fb.importCoverage), BROUGHT_BANDS, 'nearly all the rest');
-  return `${name} grows ${grown} of what it eats, and ${carriers} in ${brought}.${magic} ${short}`;
+  return `${name} grows ${grown} of what it needs, and ${carriers} in ${brought}.${magic} ${short}`; // X12 (00600): the share is of the need, not of what a short town eats
 }
 
 import { tradePillWord } from '../../../domain/display/tradePillWord.js'; // SURFACES-3 item 2 (r3): the trade pill's word, the PDF's and the journal's too
@@ -836,7 +838,7 @@ function NeedsNotMet({ needs, mobile }) {
  * the carrier, the food record) and the Institutions tab's impaired houses (`tabHelpers.js :: computeChainSets`); the
  * record is not touched. At the end of the file, so no line-keyed row above moves.
  */
-import { chainAsShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
+import { chainAsShown, chainCrisisStateShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
 import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
 import { computeChainSets } from '../tabHelpers.js';
 /** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
@@ -854,3 +856,24 @@ function impairedHousesOf(town) {
  * line). The record's imports are untouched; the needs line stands. At the end of the file, so no line-keyed row moves.
  */
 import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
+
+/**
+ * THE ECONOMIC FLOWS HEADER COUNTS WHAT THE CARDS UNDER IT SHOW (TAIL-DISPLAY-ECON, the chair's ruling X2, 2026-11-14; the
+ * READ-ALL row B06680, "Economic Flows (2 active · 1 impaired)" over two cards, one of them impaired). "Active" counted every
+ * card, the impaired ones and those that print no state (a house reached only through an "Access to ..." row) among them,
+ * in 460 of the census's 715 towns with flows. A card is active where it prints a working state (running, operational,
+ * entrepôt, vulnerable, magically sustained) and impaired where it prints Impaired, a service card by its own chip; a card
+ * with no state is neither. Where no card is at work, the count of the impaired stands alone; where none is either, the
+ * header is the section's name.
+ * @param {ReadonlyArray<{ status?: unknown }>} chains the chains as their cards print them (`chainAsShown`)
+ * @param {ReadonlyArray<{ institutions?: unknown }>} services `economicState.institutionalServices`
+ * @param {ReadonlySet<string>} impairedHouses the houses the Institutions tab marks impaired, lower case
+ * @returns {{ active: number, impaired: number, words: string }}
+ */
+function flowHeaderCount(chains, services, impairedHouses) {
+  const svcImpaired = services.filter((v) => serviceStateShown(/** @type {any} */ (v)?.institutions, impairedHouses) === 'impaired').length;
+  const impaired = chains.filter((c) => c.status === 'impaired').length + svcImpaired;
+  const active = chains.filter((c) => c.status !== 'impaired' && c.status !== '').length + services.length - svcImpaired;
+  const words = active > 0 ? ` (${active} active${impaired > 0 ? ` · ${impaired} impaired` : ''})` : impaired > 0 ? ` (${impaired} impaired)` : '';
+  return { active, impaired, words };
+}

@@ -1196,8 +1196,8 @@ export const HISTORICAL_EVENTS_DATA = [
       'A standing levy roster kept ready in the town archive',
     ],
     plotHooks: [
-      'The threat is being exaggerated by someone who profits from wartime contracts',
-      'A diplomatic channel exists that the war party is suppressing',
+      { text: 'The threat is being exaggerated by someone who profits from wartime contracts', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
+      { text: 'A diplomatic channel exists that the war party is suppressing', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
       'The threat has an agent already inside the settlement',
     ],
     severity: ['major', 'catastrophic'],

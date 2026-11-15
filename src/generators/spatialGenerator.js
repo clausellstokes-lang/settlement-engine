@@ -68,6 +68,23 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
   /** The same thing mid-sentence, where the clause supplies its own article or none. */
   const sacredBare = sacredHouse || (waysideShrine ? 'a wayside shrine' : null);
 
+  // ⛔ THE LAYOUT LINE NAMES ONLY WHAT STANDS (TAIL-EXPORTS-JOURNAL, the chair's ruling J1 of 2026-11-14). The line was
+  // drawn by tier and terrain alone, so it promised a defended gate where no gate stands (13 of the 720 census towns),
+  // a citadel or a keep where none stands (22), stone walls round a palisade (6) and warehouses and chandlers on a
+  // waterfront that holds neither or one (16). ONE TABLE of (the noun; the record's fact that bears it): a gate or stone walls,
+  // the defence answer (`defence.hasGate`, `defence.wallKind`); a citadel or a keep, a Citadel on the roster; warehouses
+  // and chandlers, both their houses. No slot is re-drawn (the line is chosen by tier and terrain as before): a line whose noun
+  // the record denies takes ITS TWIN, the same line without that noun. ⚠ This moves `spatialLayout.layout` (a declared
+  // move; the field diff is in the commit). @enforced-by tests/generators/layoutNamesWhatStands.test.js
+  const hasCitadel = has('Citadel');
+  const stoneWalled = defence.wallKind === 'stone';
+  const hasWarehouse = holds('warehouse');
+  const hasChandler = has('Chandler');
+  /** The waterfront clause stands where both its houses do; else the line ends at the harbour (its declared twin). */
+  const waterfrontHousesStand = hasWarehouse && hasChandler;
+  /** The open hill town's line, which names no wall and no keep: the walled hill town's twin where no Citadel stands. */
+  const hillTownOfStone = { text: 'Hill town of stone houses climbing above the market quarter', needs: ['market'] };
+
   const quarters = [];
 
   // Market quarter — present if any market institution
@@ -252,7 +269,9 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
         plains:    { text: 'Sprawling imperial capital: walled inner city, vast suburban rings, the palace district above the outer walls', needs: ['walls'] },
         forest:    'Metropolis carved from the forest heart: the old city is stone, the outer rings are timber and smoke',
         hills:     'Hill metropolis on seven rises: each commanding a district, each district a city unto itself',
-        desert:    { text: 'Great desert metropolis of white stone: the citadel above the wells, the souk below, caravansaries ringing the walls', needs: ['walls', 'market'] },
+        desert:    hasCitadel
+          ? { text: 'Great desert metropolis of white stone: the citadel above the wells, the souk below, caravansaries ringing the walls', needs: ['walls', 'market'] }
+          : { text: 'Great desert metropolis of white stone: the souk by the wells, caravansaries ringing the walls', needs: ['walls', 'market'] },
         mountain:  { text: 'Mountain capital in a high valley: tiered city climbing from the river floor to the fortress crown', needs: ['river'] },
       };
       return textOf(metroLayouts[terrainType]) || 'Dense urban core with sprawling suburbs';
@@ -264,8 +283,12 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
         plains:    { text: 'Walled city with sprawling suburbs beyond the gates, outlying wards growing faster than the walls', needs: ['walls', 'gate'] },
         forest:    { text: 'Walled city carved from the forest, timber yards and charcoal depots in the outer rings', needs: ['walls'] },
         hills:     { text: 'Hill city: castle district commanding the heights, market quarter below, poor wards at the base', needs: ['market'] },
-        desert:    { text: 'Walled desert city of pale stone, caravanserai outside the east gate, citadel above the wells', needs: ['walls', 'gate'] },
-        mountain:  'Mountain city of terraced districts, the citadel at the summit, lower town in the valley',
+        desert:    hasCitadel
+          ? { text: 'Walled desert city of pale stone, caravanserai outside the east gate, citadel above the wells', needs: ['walls', 'gate'] }
+          : { text: 'Walled desert city of pale stone, caravanserai outside the east gate', needs: ['walls', 'gate'] },
+        mountain:  hasCitadel
+          ? 'Mountain city of terraced districts, the citadel at the summit, lower town in the valley'
+          : { text: 'Mountain city of terraced districts, lower town in the valley', needs: ['population: > middling'] },
       };
       return textOf(cityLayouts[terrainType] || { text: 'Walled core with some suburban growth', needs: ['walls'] });
     })(),
@@ -274,18 +297,22 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
       // garrison only where one stands (`defenseFactsOf`). The unwalled lines are VETOABLE.
       if (!defence.hasWalls) {
         const openTownLayouts = {
-          coastal:   { text: 'Port town climbing from the harbour, warehouses and chandlers at the waterfront', needs: ['coast', 'institution: docks'] },
+          coastal:   waterfrontHousesStand
+            ? { text: 'Port town climbing from the harbour, warehouses and chandlers at the waterfront', needs: ['coast', 'institution: docks'] }
+            : { text: 'Port town climbing from the harbour', needs: ['coast', 'institution: docks'] },
           riverside: { text: 'Town straddling the river, a bridge at its commercial heart', needs: ['river'] },
           plains:    { text: 'Compact core, outlying farms and a weekly market field at the edge of town', needs: ['market'] },
           forest:    { text: 'Close-built market town, timber yards and sawpits on the north road', needs: ['market'] },
-          hills:     { text: 'Hill town of stone houses climbing above the market quarter', needs: ['market'] },
+          hills:     hillTownOfStone,
           desert:    'Trading town around a great well, caravanserai on the south road',
           mountain:  'Pass town strung along the valley floor',
         };
         return textOf(openTownLayouts[terrainType]) || 'Compact core, some outlying farms';
       }
       const townLayouts = {
-        coastal:   { text: 'Walled port town climbing from the harbour, warehouses and chandlers at the waterfront', needs: ['coast', 'institution: docks'] },
+        coastal:   waterfrontHousesStand
+          ? { text: 'Walled port town climbing from the harbour, warehouses and chandlers at the waterfront', needs: ['coast', 'institution: docks'] }
+          : { text: 'Walled port town climbing from the harbour', needs: ['coast', 'institution: docks'] },
         riverside: { text: 'Walled town straddling the river, a fortified bridge at its commercial heart', needs: ['river'] },
         plains:    { text: 'Compact within walls, outlying farms and a weekly market field beyond the gates', needs: ['gate', 'market'] },
         forest:    { text: 'Tightly walled market town, timber yards and sawpits outside the north gate', needs: ['gate', 'market'] },
@@ -293,7 +320,10 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
         // class as the desert-village row, §767.3(e); no castle-family
         // institution exists at town tier, so the sentence commits to the one
         // word the tier can honestly carry).
-        hills:     { text: 'Stone-walled hill town, the keep visible above the market quarter', needs: ['market'] },
+        // A Citadel is masonry, so where one stands the walls are stone (`defenseFactsOf`): the keep's line is whole.
+        hills:     stoneWalled && hasCitadel
+          ? { text: 'Stone-walled hill town, the keep visible above the market quarter', needs: ['market'] }
+          : hillTownOfStone,
         desert:    { text: 'Walled trading town around a great well, caravanserai outside the south gate', needs: ['gate'] },
         mountain:  defence.hasGarrison
           ? 'Fortified pass town, walls cutting across the valley floor, garrison above'
@@ -319,16 +349,24 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
           : 'Clustered around the green, fields radiating out in open strips',
         // F1: the walled lines stand only where walls do; the open lines are VETOABLE.
         hills:     defence.hasWalls
-          ? 'Stone-walled village on a south-facing slope, paths converging at the stone cross'
+          ? (stoneWalled
+            ? 'Stone-walled village on a south-facing slope, paths converging at the stone cross'
+            : 'Walled village on a south-facing slope, paths converging at the stone cross')
           : 'Stone-built village on a south-facing slope, paths converging at the stone cross',
         desert:    defence.hasWalls
           ? `Compact walled settlement around a central well${desertSacred}`
           : `Compact settlement around a central well${desertSacred}`,
-        mountain:  sacredHouse
-          ? { text: `Close-built stone houses below the ${sacredHouse}, a single defended gate`, needs: ['gate'] }
-          : waysideShrine
-            ? { text: 'Close-built stone houses below a wayside shrine, a single defended gate', needs: ['gate'] }
-            : { text: 'Close-built stone houses below the ridge, a single defended gate', needs: ['gate'] },
+        mountain:  defence.hasGate
+          ? (sacredHouse
+            ? { text: `Close-built stone houses below the ${sacredHouse}, a single defended gate`, needs: ['gate'] }
+            : waysideShrine
+              ? { text: 'Close-built stone houses below a wayside shrine, a single defended gate', needs: ['gate'] }
+              : { text: 'Close-built stone houses below the ridge, a single defended gate', needs: ['gate'] })
+          : (sacredHouse
+            ? { text: `Close-built stone houses below the ${sacredHouse}`, excludes: ['gate'] }
+            : waysideShrine
+              ? { text: 'Close-built stone houses below a wayside shrine', needs: ['institution: temple'], excludes: ['gate'] }
+              : { text: 'Close-built stone houses below the ridge', excludes: ['gate'] }),
       };
       return textOf(villageLayouts[terrainType])
         || (sacredBare ? `Clustered around ${sacredBare} and green` : 'Clustered around the green');

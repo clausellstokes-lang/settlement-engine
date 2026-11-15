@@ -122,7 +122,9 @@ describe('wartime (loss): no caravans pass through an isolated place (R2-CODE-B-
     const text = renderStressSummary('wartime', 'Avel', { profit: false }, undefined, factsOf(warOn('isolated')));
     // anchored: the next assertion pins the whole paragraph, the clause left out and its neighbours joined by one space
     expect(text).not.toContain(CARAVANS);
-    expect(text).toBe('Avel is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.');
+    // TAIL-CRISIS (READ-ALL 20648): re-keyed by identity with its cause: no army contract reaches an isolated place, so its
+    // sacrifice sentence is the isolated twin
+    expect(text).toBe('Avel is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Food prices have doubled. The governing authority is demanding sacrifice, and not every household gives it in equal measure.');
   });
   it('the profit coin refused in an isolated place resolves to the same loss text, without the caravans', () => {
     const text = renderStressSummary('wartime', 'Avel', { profit: true }, undefined, factsOf(warOn('isolated')));
@@ -140,7 +142,8 @@ describe('wartime (loss): no caravans pass through an isolated place (R2-CODE-B-
     const text = renderStressSummary('wartime', 'Avel', { profit: false }, undefined, factsOf(fed));
     // anchored: the next assertion pins the whole paragraph, both clauses left out and its neighbours joined by one space
     expect(text).not.toContain('the road');
-    expect(text).toBe('Avel is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.');
+    // TAIL-CRISIS (READ-ALL 20648): re-keyed by identity, the isolated sacrifice twin
+    expect(text).toBe('Avel is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. The governing authority is demanding sacrifice, and not every household gives it in equal measure.');
   });
   it('the guard town: a fed place on a road keeps the twin', () => {
     const fed = { ...recordOf(['wartime'], 'secure'), config: { tradeRouteAccess: 'road' } };
