@@ -819,15 +819,26 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
   // fuzzyProcessorMatch: the lower-cased name holds the pattern's first processorPrefix characters), so a house
   // hidden whole as 'Black market bazaar' is processing name 'Black market'. A processing name that a house hidden
   // whole answers to, and no house left open does, is that house's name.
+  // R2 (VEIL-15; PART 12 sections 3 and 7): the server matches the engine's toLowerCase() for an ASCII NEEDLE (the
+  // lowered name's first processorPrefix), every code point of every plane measured. A needle holding a code point outside
+  // ASCII, which no server engine lowers as JavaScript does: WHERE UNSURE, WITHHOLD. A house hidden whole answers it where
+  // it is the name or is named outside ASCII (an ASCII name lowers to ASCII and cannot hold it); an open house only where
+  // it is the name (a stamped one never). SQL twin: migration 212 :: _gallery_veil_hidden_name, rule for rule.
+  /** @param {string} x @returns {string} */
+  const needleOf = (x) => x.toLowerCase().slice(0, SECOND_HOME_LIMITS.processorPrefix);
   /** @param {string} name @param {string} x @returns {boolean} */
-  const answers = (name, x) => name === x || name.toLowerCase().includes(x.toLowerCase().slice(0, SECOND_HOME_LIMITS.processorPrefix));
+  const answers = (name, x) => name === x || name.toLowerCase().includes(needleOf(x));
   // COHERENCE-VEIL-9: a house answers by its birth name too (a stamped house, by its catalogue identity), and an open
   // house answers as the engine reads it: a stamped one by its identity, an unstamped one by its name
   const openHouses = (Array.isArray(s.institutions) ? s.institutions : []).filter(isRec)
     .map(i => (typeof i.catalogId === 'string' && i.catalogId !== '' ? { cid: i.catalogId, name: null } : { cid: null, name: str(i.name) }));
   /** @param {unknown} x @returns {boolean} */
-  const hiddenName = (x) => ([...gone].some(g => answers(g, str(x))) || [...births].some(b => answersByBirth(b, str(x))))
-    && !openHouses.some(o => (o.cid !== null ? answersByBirth(o.cid, str(x)) : answers(/** @type {string} */ (o.name), str(x))));
+  const hiddenName = (x) => {
+    const v = str(x);
+    const sure = !NON_ASCII.test(needleOf(v));
+    return ([...gone].some(g => (sure ? answers(g, v) : g === v || NON_ASCII.test(g))) || [...births].some(b => answersByBirth(b, v)))
+      && !openHouses.some(o => (o.cid !== null ? sure && answersByBirth(o.cid, v) : (sure ? answers(/** @type {string} */ (o.name), v) : o.name === v)));
+  };
   /** every name of a house removed whole: its own, its label where it has no name, the one it was born with, and each processing name only it answers to */
   const named = new Set([...gone, ...labels, ...births]);
   const econ0 = recAt(s, 'economicState');

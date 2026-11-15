@@ -76,6 +76,14 @@
  *         shares Reveal DM off and the Reveal-DM link) the copy and the sentence go and no marker arrives. What STAYS:
  *         Reveal DM's gallery, import and twin keep the four strings; town-pc's open copy; a sentence naming one end of
  *         the dropped tie; one naming an open tie's two ends; another person's tie. Server against twin: every share.
+ *   VEIL-13 R2  THE PROCESSOR MATCH LOWERED AS THE ENGINE LOWERS (PART 12 sections 3 and 7; built by VEIL-15). One arm: a
+ *         processing name only a house hidden whole answers to, as the engine lowers (toLowerCase: U+0130 is i and U+0307,
+ *         U+212A is k, a word-final capital sigma is final), whatever the database's locale: an OPEN İron smelter yard
+ *         beside a hidden Iron smelter of the Vale, an OPEN ΧΑΛΚΟΣΤΑΣΙΟ ΤΗΣ ΑΓΟΡΑΣ beside a hidden ΧΑΛΚΟΣ ΤΗΣ ΚΟΙΛΑΔΑΣ, a
+ *         hidden Kelvin-sign Kiln of the Fen: in no chain, dependency or goal. WHERE UNSURE (a needle outside ASCII: a sharp
+ *         s, Cyrillic): withheld where a house hidden whole is named outside ASCII and no open house bears the name. What
+ *         STAYS: an open Kelvin-sign Kiln works, an open house the hidden one does not answer, İron smelter as its open house
+ *         spells it, a needle outside ASCII an open house bears, or no house hidden whole could hold. Server against twin.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -1269,5 +1277,76 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     }
     expect(bad, `${bad.length} sends or losses`).toEqual([]);
     expect(differs).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  // ── VEIL-13 R2 (built by VEIL-15): THE PROCESSOR MATCH LOWERED AS THE ENGINE LOWERS (PART 12 sections 3 and 7) ─────
+  /** A town of open houses and houses hidden whole, and one chain whose processing names are `procs` and the Corn exchange's (so the chain stays). */
+  const chainTown = (tag, open, hidden, procs, { dep = null, goal = null } = {}) => ({
+    name: `Smeltwick ${tag}`, tier: 'town',
+    institutions: [...hidden, ...open.map((name, i) => ({ id: `inst-${tag}-o${i}`, name, category: 'Industry', desc: 'An open house.' })),
+      { id: `inst-${tag}-corn`, name: 'Corn exchange', category: 'Economy', desc: 'Grain.' }],
+    npcs: [{ id: `npc.${tag}`, name: 'Una Farrow', role: 'Factor', ...(goal ? { goal: { short: goal } } : {}) }],
+    economicState: { activeChains: [{ label: 'Ore to metal', processingInstitutions: [...procs, 'Corn exchange'], ...(dep ? { dependency: { institution: dep, resource: 'ore', severity: 'high' } } : {}) }] },
+  });
+
+  it('VEIL-13 R2: THE PROCESSOR MATCH LOWERED AS THE ENGINE LOWERS: a processing name that only a house hidden whole answers to, as the engine lowers it (a dotted capital I is i and a combining dot, the Kelvin sign k, a word-final capital sigma final), is sent by no read in the chain, its dependency or a goal, whatever the database\'s locale; a needle outside ASCII goes where a house hidden whole could answer it and no open house bears it; what an open house answers to stays', async () => {
+    const bad = []; const differs = [];
+    const H = (id, name) => hiddenHouse(id, name);
+    // [what, the houses hidden whole, the open houses, the chain's processing names, its dependency and a goal, the processing
+    // names that must not arrive (an open house's own name aside), the processing names that must stay in the chain]
+    const ROWS = [
+      ['the dotted capital I (U+0130) in an OPEN house: İron smelter yard does not answer Iron smelter as the engine lowers it (i and U+0307); Iron smelter of the Vale, hidden whole, does',
+        [H('inst-r2a', 'Iron smelter of the Vale')], ['İron smelter yard'], ['Iron smelter'], { dep: 'Iron smelter', goal: 'Sell the ore to the Iron smelter by the gate' }, ['Iron smelter'], []],
+      ['a word-final capital sigma: ΧΑΛΚΟΣ lowers to a final ς; the OPEN ΧΑΛΚΟΣΤΑΣΙΟ ΤΗΣ ΑΓΟΡΑΣ holds a medial σ there and does not answer it; ΧΑΛΚΟΣ ΤΗΣ ΚΟΙΛΑΔΑΣ, hidden whole, does',
+        [H('inst-r2b', 'ΧΑΛΚΟΣ ΤΗΣ ΚΟΙΛΑΔΑΣ')], ['ΧΑΛΚΟΣΤΑΣΙΟ ΤΗΣ ΑΓΟΡΑΣ'],
+        ['ΧΑΛΚΟΣ'], { dep: 'ΧΑΛΚΟΣ', goal: 'Πουλά στο ΧΑΛΚΟΣ κάθε μήνα' }, ['ΧΑΛΚΟΣ'], []],
+      ['the Kelvin sign (U+212A) in the HIDDEN house: Kiln of the Fen answers Kiln (the engine lowers it to k); no open house does',
+        [H('inst-r2c', 'Kiln of the Fen')], ['Brick yard'], ['Kiln'], { dep: 'Kiln', goal: 'Fire the pots at the Kiln' }, ['Kiln'], []],
+      ['WHERE UNSURE, a sharp s: Straßenschmiede (a needle outside ASCII), Straßenschmiede der Gilde hidden whole, no open house of that name (STRAẞENSCHMIEDE AM TOR is not it)',
+        [H('inst-r2d', 'Straßenschmiede der Gilde')], ['STRAẞENSCHMIEDE AM TOR'], ['Straßenschmiede'], { dep: 'Straßenschmiede' }, ['Straßenschmiede'], []],
+      ['WHERE UNSURE, Cyrillic: Кузница (a needle outside ASCII), Кузница Долины hidden whole, no open house of that name (КУЗНИЦА ДВОРА is not it)',
+        [H('inst-r2e', 'Кузница Долины')], ['КУЗНИЦА ДВОРА'],
+        ['Кузница'], { dep: 'Кузница' }, ['Кузница'], []],
+      // WHAT STAYS
+      ['CONTROL: the Kelvin sign (U+212A) in an OPEN house: Kiln works answers Kiln (k), beside Kiln of the Marsh hidden whole',
+        [H('inst-r2f', 'Kiln of the Marsh')], ['Kiln works'], ['Kiln'], { dep: 'Kiln' }, [], ['Kiln']],
+      ['CONTROL: an open house answers and the house hidden whole does not: Iron smelter yard, Cutpurse hall hidden whole',
+        [H('inst-r2g', 'Cutpurse hall')], ['Iron smelter yard'], ['Iron smelter'], { dep: 'Iron smelter' }, [], ['Iron smelter']],
+      ['CONTROL: the dotted capital I as the open house spells it: İron smelter, which İron smelter yard answers and Iron smelter of the Vale (hidden whole) does not',
+        [H('inst-r2h', 'Iron smelter of the Vale')], ['İron smelter yard'], ['İron smelter'], { dep: 'İron smelter' }, [], ['İron smelter']],
+      ['CONTROL: a needle outside ASCII that an open house bears as its name (Greek, Cyrillic, a sharp s), each beside a house hidden whole whose name holds it',
+        [H('inst-r2i1', 'ΧΑΛΚΟΣ ΤΗΣ ΚΟΙΛΑΔΑΣ'), H('inst-r2i2', 'Кузница Долины'), H('inst-r2i3', 'Straßenschmiede der Gilde')],
+        ['ΧΑΛΚΟΣ', 'Кузница', 'Straßenschmiede'], ['ΧΑΛΚΟΣ', 'Кузница', 'Straßenschmiede'], {}, [],
+        ['ΧΑΛΚΟΣ', 'Кузница', 'Straßenschmiede']],
+      ['CONTROL: a needle outside ASCII where every house hidden whole is named in ASCII (none can hold it): Кузница, КУЗНИЦА ДВОРА open, Cutpurse hall hidden whole',
+        [H('inst-r2j', 'Cutpurse hall')], ['КУЗНИЦА ДВОРА'], ['Кузница'], { dep: 'Кузница' }, [], ['Кузница']],
+    ];
+    for (const [what, hidden, open, procs, opts, goneNames, stays] of ROWS) {
+      const town = chainTown(`r2${ROWS.findIndex(x => x[0] === what)}`, open, hidden, procs, opts);
+      const r = await sharesOf(town, hide(...hidden));
+      differs.push(...twinDiffers(r).map(d => `${what}: ${d}`));
+      const openNames = new Set(open);
+      for (const { tag, doc } of each(r)) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        const listed = (doc.institutions || []).filter(isRec).map(i => i.name);
+        for (const o of [...open, 'Corn exchange']) if (!listed.includes(o)) bad.push(`${what}, ${tag}: the open house ${JSON.stringify(o)} is gone`);
+        for (const h of hidden) if (listed.includes(h.name)) bad.push(`${what}, ${tag}: the house hidden whole ${JSON.stringify(h.name)} is listed`);
+        const chain = (doc.economicState?.activeChains || []).find(c => isRec(c) && c.label === 'Ore to metal');
+        if (!chain) { bad.push(`${what}, ${tag}: the chain is gone`); continue; }
+        const kept = Array.isArray(chain.processingInstitutions) ? chain.processingInstitutions : [];
+        if (!kept.includes('Corn exchange')) bad.push(`${what}, ${tag}: the Corn exchange left the chain`);
+        for (const n of goneNames) {
+          if (kept.includes(n)) bad.push(`${what}, ${tag}: the chain keeps ${JSON.stringify(n)}`);
+          if (opts.dep === n && chain.dependency !== undefined) bad.push(`${what}, ${tag}: the dependency on ${JSON.stringify(n)} is sent`);
+          bad.push(...arrivals(doc, n, { unless: [...openNames].map(o => new RegExp(`^${o.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`)) }).map(a => `${what}, ${tag}: ${a}`));
+        }
+        for (const n of stays) {
+          if (!kept.includes(n)) bad.push(`${what}, ${tag}: the chain lost ${JSON.stringify(n)}, which an open house answers to`);
+          if (opts.dep === n && chain.dependency?.institution !== n) bad.push(`${what}, ${tag}: the dependency on ${JSON.stringify(n)} is gone`);
+        }
+      }
+    }
+    expect.soft(bad, `${bad.length} sends or losses`).toEqual([]);
+    expect(differs, `${differs.length} paths at which server and twin differ`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 });

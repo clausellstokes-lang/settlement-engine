@@ -1,0 +1,47 @@
+VEIL-15 ITEM 2, R2 (THE PROCESSOR MATCH LOWERED AS THE ENGINE LOWERS), RED AT 1d8ffe08e'S BYTES (/var/tmp/v15/red-1d8, an
+integrity-counted archive: 9428 files, 9428 in the tree; 212, gallerySecondHomes.js and the guard equal to the commit's blobs)
+
+1. THE PREMISE, PROVED FIRST, BY EXECUTION (measure/r2-premise.probe.mjs on the archive; nothing changed before it)
+  THE CODE: the engine (computeActiveChains.js :: fuzzyProcessorMatch) and the twin (gallerySecondHomes.js :: answers) both
+    lower by String.prototype.toLowerCase, the needle the first 12 UTF-16 units of the lowered pattern; the server
+    (_gallery_veil_hidden_name) by lower(), the needle left(lower(v), 12) in code points. By execution: the engine against
+    J(g).includes(J(x).slice(0, 12)) on 6009 pairs: 0 differ. The twin's lowering IS what the design assumes (JavaScript's).
+  EVERY CODE POINT, U+0001 to U+10FFFF but the surrogates (1,112,063): toLowerCase's image of a code point outside ASCII holds
+    an ASCII code point for 2 alone (U+0130 -> U+0069 U+0307; U+212A -> U+006B). The design's form F (translate, those two
+    spelled out) against toLowerCase, on the MASK (every run outside ASCII one mark: the ASCII runs an ASCII needle can meet):
+    0 disagreements (1460 exact, every one outside ASCII in both images). F in SQL equals F in JavaScript on every code point
+    in all three engines (0 differ). toLowerCase is context-free on the mask (160,137,072 strings, a code point between 12 x
+    12 contexts: 74,752 differ exactly, the final sigma, 0 on the mask).
+  BEFORE, lower() against toLowerCase on the mask (the count of disagreements): native PostgreSQL 16.15 ctype C.UTF-8: 1
+    (U+0130: 'i', against 'i' + U+0307); pglite (PostgreSQL 18.3, ctype C.UTF-8; the guards' engine): 1 (U+0130); native,
+    ctype C (a scratch database, dropped): 2 (U+0130 and U+212A unchanged). Exact: 56, 125, 1462. AFTER (F): 0 in every one.
+  THE STRING LEVEL (6009 pairs, every engine): the needle ASCII in one engine and not the other: 0. ASCII needles (2379): F's
+    match differs from the engine's in 0; lower()'s in 1 (C.UTF-8 and pglite: "İron smelter yard" answers "Iron smelter") and
+    18 (ctype C: the Kelvin sign). NEEDLES OUTSIDE ASCII (3630): lower() differs from the engine in 89 (C.UTF-8, pglite) and
+    687 (C), F in 649: NO server form lowers such a needle as JavaScript does, so the two engines are made to agree toward
+    withholding (WHERE UNSURE, WITHHOLD: section 2 of R2P-green.txt), the twin moving for that case only.
+  WHAT THE ENGINE WRITES: 182 processing patterns in the static chain data and 282 catalogue names, 0 outside ASCII.
+
+2. RED FIRST, THE NEW ARM (VEIL-13 R2) of tests/security/galleryVeilHandRows.pglite.test.js, copied into the archive
+  (the file then restored to the commit's bytes): the file 14 passed, 1 failed (the new arm); the arm: 116 sends, 14 paths at
+  which the server and the twin differ.
+  Sends by row (each of 8 reads: veil and Reveal DM shares x gallery, link, import, twin):
+    26  the dotted capital I in an OPEN house (İron smelter yard beside Iron smelter of the Vale hidden whole): the server
+        keeps "Iron smelter" in the chain, its dependency and the goal that names it (6 server reads); the twin withholds
+    26  a word-final capital sigma (the open ΧΑΛΚΟΣΤΑΣΙΟ ΤΗΣ ΑΓΟΡΑΣ, ΧΑΛΚΟΣ ΤΗΣ ΚΟΙΛΑΔΑΣ hidden whole): the server keeps ΧΑΛΚΟΣ
+    32  WHERE UNSURE, a sharp s (Straßenschmiede): every read keeps it (no rule yet)
+    32  WHERE UNSURE, Cyrillic (Кузница): every read keeps it
+  Paths, server against twin: 7 + 7 (the two first rows; on both shares the chain's processing list at two places, the
+    server's ["Iron smelter", "Corn exchange"] against the twin's ["Corn exchange"], and the dependency; on the Reveal-DM
+    share the goal too).
+  GREEN AT THE BASE, AS MEASURED (this engine's ctype C.UTF-8 lowers U+212A to k as JavaScript does): the Kelvin sign in the
+  hidden house (withheld) and in an open house (kept); every control (an open house answers; İron smelter as its open house
+  spells it; a needle outside ASCII an open house bears; one no hidden house could hold). Under ctype C those Kelvin pairs are
+  red (section 1; section 3).
+
+3. THE RULE, at the base (measure/r2-rule.probe.mjs: 60 written towns, 785 processing names, the gallery read on local chains
+  of the archive's migrations, against the twin and the engine's own match; the engine's answer withholds 234):
+    ctype C.UTF-8: server and twin differ on 1; sent where the engine withholds: server 0, twin 0
+    ctype C:       server and twin differ on 28; sent where the engine withholds: server 10, twin 0
+
+4. BORN, at the base (measure/r2-born.probe.jsx on the archive and a chain of its migrations): see R2P-green.txt section 5.

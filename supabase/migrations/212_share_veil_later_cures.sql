@@ -114,6 +114,15 @@
 --       ends cannot be read, both go. get_unlisted_dossier is restated to hand the apply the live town's relationships[],
 --       prominentRelationship and pressureSentence (it handed the projection twice, so the link could not know the tie);
 --       its people still come from the projection alone. Reveal DM keeps the tie and its strings.
+--   (25) THE PROCESSOR MATCH LOWERED AS THE ENGINE LOWERS (VEIL-15, R2; PART 12 sections 3 and 7): (9)'s processing name
+--       only houses hidden whole answer to was matched by lower(), whose answer is the database's locale's, where the
+--       engine and the twin lower by toLowerCase(): with U+0130 in an OPEN house's name ('İron smelter yard') the server
+--       read that house as answering 'Iron smelter', which the engine never gave it, and sent the name only the hidden
+--       house answers to (in the chain, its dependency and every string the name search would have taken); a word-final
+--       capital sigma the same. _gallery_veil_hidden_name now lowers both sides by translate, U+0130 and U+212A spelled out
+--       as JavaScript lowers them: for an ASCII needle the engine's match, every code point of every plane measured. A
+--       needle outside ASCII, which no server engine lowers as JavaScript does, WHERE UNSURE, WITHHOLD: a house hidden
+--       whole answers it where it is the name or is named outside ASCII, an open house only where it is the name.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -865,14 +874,36 @@ end $$;
 -- pattern's first twelve characters (gallerySecondHomes.js :: answersByBirth). `births`: the identities of the houses
 -- removed whole; `opens`: each house still listed, {cid} where it is stamped (it answers as the engine reads it), else
 -- {name}.
+-- R2 (VEIL-15; PART 12 sections 3 and 7): LOWERED AS THE ENGINE LOWERS, never by lower(), whose answer is the database's
+-- locale's (U+0130 is 'i' in C.UTF-8 and itself in C; U+212A 'k' in C.UTF-8 and itself in C). The engine and the twin
+-- lower by toLowerCase(), whose image of a code point outside ASCII holds an ASCII code point for U+0130 ('i' + U+0307)
+-- and U+212A ('k') alone. So both sides are lowered by translate with those two spelled out (_gallery_veil_fold's two),
+-- and for an ASCII NEEDLE (the lowered name's first twelve) the match is the engine's: every code point of every plane
+-- measured, the lowered text holds the same ASCII runs in the same order as toLowerCase() gives
+-- (docs/chair/2026-11-14/veil-probe-15/out/R2P-red-at-1d8ffe08e.txt). A needle holding a code point outside ASCII,
+-- which no server engine lowers as JavaScript does: WHERE UNSURE, WITHHOLD. A house removed whole answers it where it
+-- is the name or is named outside ASCII (an ASCII name lowers to ASCII and cannot hold it); a house still listed only
+-- where it is the name (a stamped one never: its identity is read for an ASCII needle). gallerySecondHomes.js ::
+-- withholdSecondHomes (hiddenName), rule for rule.
 create or replace function public._gallery_veil_hidden_name(x jsonb, gone jsonb, births text[], opens jsonb)
 returns boolean language sql immutable as $$
-  select (exists (select 1 from jsonb_object_keys(gone) g where g = q.v or position(left(lower(q.v), 12) in lower(g)) > 0)
+  select (exists (select 1 from jsonb_object_keys(gone) g
+                   where g = q.v
+                      or case when q.sure
+                              then position(q.n in translate(replace(replace(g, chr(304), 'i' || chr(775)), chr(8490), 'k'),
+                                                             'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) > 0
+                              else g ~ '[^\x01-\x7f]' end)
           or (q.f <> '' and exists (select 1 from unnest(births) b where position(q.f in b) > 0)))
      and not exists (select 1 from jsonb_array_elements(case when jsonb_typeof(opens) = 'array' then opens else '[]' end) o
-                      where case when o ? 'cid' then q.f <> '' and position(q.f in (o ->> 'cid')) > 0
-                                 else (o ->> 'name') = q.v or position(left(lower(q.v), 12) in lower(o ->> 'name')) > 0 end)
-    from (select public._gallery_veil_str(x) as v, public._gallery_veil_fold(left(public._gallery_veil_str(x), 12)) as f) q
+                      where case when o ? 'cid' then q.sure and q.f <> '' and position(q.f in (o ->> 'cid')) > 0
+                                 else (o ->> 'name') = q.v
+                                      or (q.sure and position(q.n in translate(replace(replace(o ->> 'name', chr(304), 'i' || chr(775)), chr(8490), 'k'),
+                                                                               'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) > 0) end)
+    from (select p.v, p.f, p.n, p.n !~ '[^\x01-\x7f]' as sure
+            from (select r.v, public._gallery_veil_fold(left(r.v, 12)) as f,
+                         left(translate(replace(replace(r.v, chr(304), 'i' || chr(775)), chr(8490), 'k'),
+                                        'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 12) as n
+                    from (select public._gallery_veil_str(x) as v) r) p) q
 $$;
 
 -- [212: NEW] public._gallery_veil_sources
