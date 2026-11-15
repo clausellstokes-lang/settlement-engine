@@ -1,0 +1,87 @@
+/**
+ * tailDefeconCatalogueCommodities.test.js — TAIL-DEFECON-C-4 (the chair's ruling D34, 2026-11-15): THE CATALOGUE'S
+ * FALSE COMMODITIES. `src/data/resourceData.js` bundled a good with a resource that does not give it, and the land gate
+ * is per resource, so one house at the resource admitted the bundled good onto the made list: a river fishery's SALT,
+ * a precious-metal vein's GEMS, the hot springs' MEDICINAL HERBS (both hot-springs keys). The good leaves that
+ * resource's `commodities`; the salt flats, the herb grounds and the groves keep theirs; a grove's honey and an oasis's
+ * dates are kept as true. (Fishing grounds' salt is the next block: made only where a Salt works stands.)
+ *
+ * Born as the census born its 720 (RECORD-MEASURE-1, `seedcfg.mjs`, both arms). Each GONE row was red at 0e838bc65 and
+ * names a good the town still makes; each KEEP row is green before and after.
+ */
+import { beforeAll, describe, expect, test } from 'vitest';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { RESOURCE_DATA } from '../../src/data/resourceData.js';
+
+const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+  selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+/** The census's birth (the r2r- and r2s- arms). @param {string} seed */
+const birth = (seed) => {
+  const s = seed.match(/^r2s-(\w+)-(\w+)-\d+$/);
+  const over = s ? { selectedStresses: [s[1]], selectedStressesRandom: false, settType: s[2] }
+    : { settType: /** @type {RegExpMatchArray} */ (seed.match(/^r2r-(\w+)-\d+$/))[1] };
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, ...over }), null, { seed, customContent: {} });
+};
+/** @type {Map<string, any>} */
+const born = new Map();
+/** @param {string} seed */
+const town = (seed) => {
+  if (!born.has(seed)) born.set(seed, birth(seed));
+  return born.get(seed);
+};
+/** @param {string} seed @returns {string[]} */
+const madeIn = (seed) => town(seed).economicState.localProduction || [];
+/** @param {string} key @returns {string[]} */
+const commoditiesOf = (key) => /** @type {any} */ (RESOURCE_DATA)[key].commodities;
+
+beforeAll(async () => { await loadGenerationLawPayloads(); });
+
+describe('D34: the catalogue bundles no good a resource does not give', () => {
+  test.each([
+    ['river_fish', 'salt', 'fish'],
+    ['precious_metals', 'gems', 'luxury'],
+  ])('%s gives no "%s" (it still gives "%s")', (key, gone, still) => {
+    expect(commoditiesOf(key)).not.toContain(gone);
+    expect(commoditiesOf(key)).toContain(still);
+  });
+  test.each([['hot_springs'], ['hot_springs_mineral']])('%s gives no medicinal herbs (it gives no commodity: its goods are its trade goods)', (key) => {
+    expect(commoditiesOf(key)).toEqual([]);
+    expect(/** @type {any} */ (RESOURCE_DATA)[key].tradeGoods.length).toBeGreaterThan(0);
+  });
+  test.each([
+    ['salt_flats', 'salt'], ['desert_salt', 'salt'], ['foraging_areas', 'medicinal_herbs'], ['ancient_grove', 'medicinal_herbs'],
+    ['ancient_grove', 'honey'], ['oasis_water', 'dates'], ['date_palms', 'dates'],
+  ])('KEPT: %s still gives "%s"', (key, good) => {
+    expect(commoditiesOf(key)).toContain(good);
+  });
+});
+
+/** (seed, the good the resource does not give, a good the town still makes) */
+const GONE = [
+  ['r2r-thorp-44', 'salt', 'fish'],              // a river fishery, no salt land
+  ['r2r-hamlet-40', 'gems', 'grain'],            // a precious-metal vein, no gem deposit
+  ['r2r-thorp-12', 'medicinal herbs', 'grain'],  // hot springs, no herb ground
+  ['r2r-thorp-16', 'medicinal herbs', 'wool'],   // mineral hot springs, no herb ground
+];
+/** (seed, the good, kept where the land that gives it lies) */
+const KEEP = [
+  ['r2r-thorp-24', 'salt'],              // the salt flats
+  ['r2r-thorp-1', 'medicinal herbs'],    // foraging areas beside the hot springs
+  ['r2r-thorp-7', 'medicinal herbs'],    // an ancient grove beside the mineral hot springs
+];
+
+describe('D34: the made list holds no bundled good the land does not give', () => {
+  test.each(GONE)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
+    const list = madeIn(seed);
+    expect(list).not.toContain(gone);
+    expect(list).toContain(still);
+  });
+  test.each(KEEP)('%s still lists "%s"', (seed, good) => {
+    expect(madeIn(seed)).toContain(good);
+  });
+  test('the inheritor: r2r-thorp-44, which makes no salt, imports it as a necessity', () => {
+    expect(town('r2r-thorp-44').economicState.necessityImports).toContain('Salt');
+  });
+});

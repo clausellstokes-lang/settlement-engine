@@ -62,15 +62,20 @@ const C1A = [
   ['r2r-thorp-7', 'timber', 'wool'],                        // no sawmill, woodcutter, charcoal burner or carpenter
   ['r2r-thorp-12', 'Baked goods', 'grain'],                 // only "Access to external mill"
   ['r2r-hamlet-2', 'Leather goods', 'iron'],                // no tanner; THE SMITH'S IRON STAYS (D7)
-  ['r2r-hamlet-18', 'Milled lumber', 'medicinal herbs'],    // no mill, no sawmill (re-keyed, D30 (b): its clay is unexploited)
-  ['r2r-hamlet-18', 'Hospitality for travellers', 'medicinal herbs'], // the pilgrims' chain, run by the neighbour's church (re-keyed, D30 (b))
+  // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-4, D34): hamlet-18's last good was the hot springs' herbs; the springs give none,
+  // so its list is EMPTY and the Produced-locally row silent by design.
+  ['r2r-hamlet-18', 'Milled lumber', EMPTY],                // no mill, no sawmill
+  ['r2r-hamlet-18', 'Hospitality for travellers', EMPTY],   // the pilgrims' chain, run by the neighbour's church
+  // RE-KEYED BY IDENTITY (D34): this was a WORKED row ("gems" stays by its Jeweller). A precious-metal vein gives no gems,
+  // and no resource's commodities name gems now (the gem deposit's hold only "luxury": NAMED for the data's holder), so
+  // the jeweller's gems leave; its gold and silver stay (the WORKED row below).
+  ['r2s-recently_betrayed-town-0', 'gems', 'Precious metals'],
 ];
 /** (seed, a worked good that stays, the house that works it) — green before and after */
 const WORKED = [
   ['r2r-hamlet-2', 'metalwork', 'Resident smith (part-time)'],
   ['r2r-town-0', 'Boots and shoes', "Cobbler's guild"],
   ['r2s-recently_betrayed-town-0', 'Precious metals', 'Jeweller'],
-  ['r2s-recently_betrayed-town-0', 'gems', 'Jeweller'],
 ];
 
 describe('the made list names what the town\'s own houses make (C1-A)', () => {

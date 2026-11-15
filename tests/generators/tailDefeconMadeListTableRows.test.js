@@ -50,7 +50,7 @@ const GONE = [
   ['r2r-village-55', 'Processed textiles', 'livestock'],     // a Mill, no weaver or fuller
   ['r2r-village-55', 'Finished clothing', 'livestock'],      // no tailor
   ['r2r-thorp-10', 'glass', 'livestock'],                    // glass sand, no glassblower
-  ['r2r-thorp-27', 'pottery', 'medicinal herbs'],            // river clay, no potter
+  ['r2s-occupied-thorp-0', 'pottery', 'fish'],               // river clay, no potter (r2r-thorp-27's list is empty after D34)
   ['r2r-hamlet-2', 'Fine wool cloth', 'wool'],               // alpine wool, no weaver or fuller
 ];
 /** (seed, the good, the house that makes it there) */

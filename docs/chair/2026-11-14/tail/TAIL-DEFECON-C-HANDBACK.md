@@ -487,7 +487,8 @@ The rulings worked to (the chair, 2026-11-15 03:20 UTC; each vetoable by the own
 
 | commit | what | record move (births-only field diff on the 720, over the commit before) |
 |---|---|---|
-| **D33** (this commit) | the table's flour, bread, cloth, clothing, glass and pottery rows; the land's commodity asked too | 117 towns: `localProduction` 117, `primaryExports` 21, `economicComplexity` 1; nothing else |
+| **0e838bc65** D33 | the table's flour, bread, cloth, clothing, glass and pottery rows; the land's commodity asked too | 117 towns: `localProduction` 117, `primaryExports` 21, `economicComplexity` 1; nothing else |
+| **D34 (a)** (this commit) | `resourceData.js` commodities: a river fishery's salt, a precious-metal vein's gems, both hot-springs keys' herbs leave | 235 towns: `resourceAnalysis.availableResources` 235, `localProduction` 167, `necessityImports` 29, `primaryImports` 25, `resourceAnalysis.gaps` 16, `resourceChains` 12, `exploitation` 12, `resourceAnalysis.imports` 10, `transit` 8, `resourceAnalysis.exports` 3, `priorityNotes` 1; NO income, prosperity, founding, arrival or hook |
 
 ### D33
 
@@ -520,14 +521,48 @@ The rulings worked to (the chair, 2026-11-15 03:20 UTC; each vetoable by the own
   lines): exit 0. The walker `--check`: fresh 148, first-register stale 2 (as at the base). The grid: 2 falls as at
   the base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a). The golden master moves (the owner's door): not re-taken.
 
+### D34 (a): the three data pairs (each measured alone over D33, then together: the union)
+
+| pair | towns | families (towns) |
+|---|---|---|
+| a river fishery's salt | 59 | availableResources 59 (the commodity set), localProduction 50, necessityImports 29 (+Salt 23), primaryImports 25 (+Salt 21; 5 towns' last import displaced by it), resourceAnalysis imports/gaps 9 (a Salt works with no salt land: "lacks access" / "runs on imported" salt), transit 8 (−Salt) |
+| a precious-metal vein's gems | 91 | availableResources 91, localProduction 35 |
+| the hot springs' herbs (`hot_springs`, `hot_springs_mineral`) | 111 | availableResources 111, localProduction 95 (herbs leave 71; the rest reorder), resourceChains 12 and exploitation 12 (the herb card of the springs), gaps 7, resourceAnalysis.exports 3 (the springs' "potions, tinctures"), priorityNotes 1, imports 1 |
+
+No pair moves income, prosperity, a founding, an arrival scene or a stored hook: each built under the ruling, no line
+owed before the push. Kept as true (asserted): the salt flats' and the desert's salt, the herb grounds' and the grove's
+herbs, the grove's honey, the oasis's and the palms' dates.
+- THE INHERITORS, read: SALT IMPORTED where the river gave it: true (no salt land stands in those towns). THE SALT WORKS
+  GAP LINE ("Salt works exists but lacks access to …", "… runs on imported …", 9 towns, printed on the Resources tab):
+  a Salt works by a river with no salt land: true. THE HERB CARDS (the page's grade, `validationOnPage.js ::
+  exploitationGroupsShown`, run over all 720 before and after): 12 herb cards leave (the springs' herbs: true), and
+  ONE MOVES Unexploited -> Partial: **r2r-village-8** (a divine Healer, no apothecary; the record files its grove's
+  herbs Partial). FALSE, ONE TOWN, NAMED for the page reader's seat (`validationOnPage.js` / the record's
+  `resourceGenerator.js` filing): before D34 the reader graded it Unexploited only because the springs' herb chain
+  was modelled there; the grove's herbs are not modelled, so the filed grade now stands (R3: divine healing works no
+  herbs). EMPTIED, silent by design: r2r-hamlet-18, r2r-thorp-27 (their last good was the springs' herbs).
+- NAMED for the data's holder: no resource's `commodities` names "gems" now (the gem deposit's hold only "luxury"):
+  "a gem deposit keeps theirs" has nothing to keep; adding one is a new draw, not this lane's. The edit pool's
+  commodity vocabulary goes 34 -> 33.
+- Guard: `tests/generators/tailDefeconCatalogueCommodities.test.js` (the data rows and 4 GONE + the import inheritor,
+  9 red at 0e838bc65; the KEPT data rows and 3 KEEP births green before and after). RE-KEYED BY IDENTITY:
+  `apothecaryWorksTheHerbs.test.js` (built on the springs' herbs: the unit's ground is a herb ground; r2r-village-47 is
+  asked of its grove; r2r-town-17's card is gone; r2r-village-8 as named above), `editPools.test.js` (34 -> 33),
+  `resourceDynamicsApply.test.js` (the anchor moves from the vein's gems to the salt flats' salt),
+  `tailDefeconMadeList.test.js` (hamlet-18's rows EMPTY; the Jeweller's "gems" WORKED row becomes GONE),
+  `tailDefeconMadeListWhole.test.js` (hamlet-18 to EMPTIED), `tailDefeconMadeListTableRows.test.js` (thorp-27's
+  pottery row moves to r2s-occupied-thorp-0).
+- Gates: the 66 focused files + both guards: 21 red over 15 files, the 13 CARRIED of D33's list and the 8 re-keyed above
+  (green after). domain-strict, the type ratchet, eslint: exit 0.
+
 ### What is left (TAIL-DEFECON-C-4)
 
-1. D33: DONE (this commit).
-2. D34, the four pairs, measured (over D33) before any is built: river fishery's salt 59 towns (availableResources 59,
-   localProduction 50, necessityImports 29, primaryImports 25, resourceAnalysis imports/gaps 9, transit 8); fishing
-   grounds' salt 61 (availableResources 61, localProduction 41, resourceAnalysis imports/gaps 14); precious metals' gems
-   91 (availableResources 91, localProduction 35); hot springs' herbs (both hot-springs keys) 111 (availableResources
-   111, localProduction 95, resourceChains 12, exploitation 12, gaps 7, exports 3, …). Being read field by field next.
+1. D33: DONE (0e838bc65). D34 (a): DONE (this commit).
+2. D34 (b), FISHING GROUNDS' SALT: measured, being built. Taking "salt" out of the commodities (the ruling's letter)
+   moves 61 towns and plants, in 14, a gap line on a COASTAL Salt works ("lacks access to …" 6, "runs on imported …" 8):
+   false, since the ruling's own words are "do not make salt WITHOUT A SALT WORKS". So the commodity stays and the made
+   list asks a Salt works for the coast's salt (`computeActiveChains.js`, by resource: the salt flats' keep the land's
+   gate): 25 towns, localProduction ONLY (salt leaves 23). A DEVIATION FROM THE LETTER, VETOABLE.
 3. THE PAGE: the census before at 65a5ecfcf is running; the after at the close.
 4. NAMED, NOT BUILT (as the predecessor left them): ONE LEAF for the exploitation's terrain check
    (`resourceGenerator.js`'s seat; held equal by a test meanwhile); `resourceDynamicsKernel.js:575` (the world pulse

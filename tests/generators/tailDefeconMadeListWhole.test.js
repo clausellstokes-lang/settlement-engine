@@ -75,10 +75,12 @@ const GONE_B = [
   ['r2r-thorp-14', 'wool', 'Honey and beeswax'],               // no weaver, fuller or dyer
   ['r2r-thorp-14', 'animal hides', 'Honey and beeswax'],       // no tanner or leatherworker
   ['r2r-village-18', 'timber', 'Preserved foods'],             // no sawmill or carpenters' guild
-  ['r2r-hamlet-18', 'clay', 'medicinal herbs'],                // no potter or brickmaker
 ];
 /** (b) a town whose only good was such a raw: its list is empty, the Produced-locally row silent by design */
-const EMPTIED_B = [['r2r-thorp-0', 'medicinal herbs'], ['r2r-thorp-41', 'medicinal herbs']];
+const EMPTIED_B = [['r2r-thorp-0', 'medicinal herbs'], ['r2r-thorp-41', 'medicinal herbs'],
+  // RE-KEYED BY IDENTITY (TAIL-DEFECON-C-4, D34): a GONE row ("clay"; it still made "medicinal herbs", the hot springs'):
+  // the springs give no herbs, so hamlet-18 lists nothing (no potter or brickmaker for its clay).
+  ['r2r-hamlet-18', 'clay']];
 /** (b) (seed, the raw, kept where a house of the town works its chain) */
 const KEEP_B = [
   ['r2r-town-49', 'animal hides'],   // Tanners
