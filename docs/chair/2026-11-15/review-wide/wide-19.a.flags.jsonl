@@ -1,0 +1,3 @@
+{"id":"C43674","town":"bar0-city-wartime-rand-16","sev":"LOW","kind":"PAIR","why":"vintner bought a vineyard, yet the page says the terrain cannot produce grapes ('needed, and not brought in: grapes')","other":"C42850"}
+{"id":"C44190","town":"bar0-city-wartime-rand-16","sev":"MED","kind":"STATE","why":"Xristos Mosele is the monarch holding the Royal seat over a city of 14,513; 'the only asset Xristos Mosele has' is a debt cannot be so","other":"C43068"}
+{"id":"DONE","lines":2653,"blocks":1,"flags":2}
