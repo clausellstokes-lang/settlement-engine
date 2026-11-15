@@ -110,7 +110,9 @@ ONE after-run measured both batches: the first after-run of batch 1 alone died a
 
 ## The books my cures move
 
-PENDING the run of F2 after the chair's word "MERGE THE LINE AT <tip>" (the line's law suites and stored figures are red for the close's reasons until then). Expected: the golden surfaces move for every record holding a reworded line (settlementReason, institution descs, culture foodways, arrival scene, pressure sentence, stress summary).
+THE REFERENCE CONFIGURATIONS (measured before the merge, so the count is my cures' alone: every record of `tests/helpers/goldenMasterCorpus.js :: goldenCorpus` hashed whole and by top-level field at f8042b61a and at 5cf49f6bd): **334 of the 525 move** (thorp 29, hamlet 29, village 29, town 100, city 84, metropolis 63). By field family: `institutions` 237 (the house descriptions), `settlementReason` 153 (the origin rows), `culturalIdentity` 84 and `economicState` 84 (the foodways line), `arrivalScene` 10. No other field moves in any of the 525: no draw moved. `pressureSentence` and `stress` move in none (the corpus holds no wartime).
+
+THE TABLE (test, arm, old → new, door): PENDING the run of F2 after the chair's word "MERGE THE LINE AT <tip>" (the line's law suites and stored figures are red for the close's reasons until then). Expected among them: `tests/property/generatorGoldenMaster.test.js` (the 334 above, door `UPDATE_GOLDEN=1` through `tests/helpers/goldenRecordDoor.js`, the close's doors' seat) and the surfaces that follow it.
 
 ## Residual risks
 
