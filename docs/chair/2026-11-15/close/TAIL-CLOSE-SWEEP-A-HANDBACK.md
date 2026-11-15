@@ -7,7 +7,7 @@ Seat: TAIL-CLOSE-SWEEP-A (a CLOSE seat). Branch `lane/tail-close-sweep-a-2026-11
 
 | # | file | at dc4bae117 | turning commit | class | what was done |
 |---|---|---|---|---|---|
-| 1 | `tests/lint/siteCoherenceRatchet.test.js` | red | in progress | | |
+| 1 | `tests/lint/siteCoherenceRatchet.test.js` | red (2 added, 9 grown, 4 shrunk, 2 vanished) | COHERENCE-AGREE (point 47, `22cc9ef7d`): 6b932d3e8 · 1dde265d8 · df2249ff8 · aa08dc10b; TAIL-DEFECON-C (JOIN-7 · 26, `390168d6b`): a10a457e2 · 28f86423c | (ii) | re-recorded through the door (`UPDATE_SITE_COHERENCE_BASELINE=1`, the printed literal, `frozenAt` = dc4bae117) |
 | 2 | `tests/lint/newsHeadlineContract.walker.test.js`, `tests/lint/newsVoiceContract.walker.test.js` | red (395 → 417) | in progress | | |
 | 3 | `tests/joins/fieldManifest.test.js` | green already | — | — | — |
 | 4 | `tests/joins/labelJoins.test.js` | green already | — | — | — |
@@ -15,6 +15,38 @@ Seat: TAIL-CLOSE-SWEEP-A (a CLOSE seat). Branch `lane/tail-close-sweep-a-2026-11
 | 6 | `tests/lint/rawColorLiteral.test.js` | green already | — | — | — |
 | 7 | `tests/lint/styleLaw.walker.test.js` | green already | — | — | — |
 | 8 | `tests/generators/institutionProseDeclared.test.js` | green already | — | — | — |
+
+### 1. site coherence — the contradiction inventory, re-dealt by six declared resource and export rules
+
+Each point measured with the TIP's test and baseline copied into a scratch tree at that commit (one scan each).
+The line before point 47 (`f572d12b7`) reads EXACTLY the frozen baseline; point 47 (`22cc9ef7d`, COHERENCE-AGREE at
+69b53decd) moves it; nothing moves it again until JOIN-7 · 26 (`390168d6b`, TAIL-DEFECON-C at ea788e17c), which leaves
+exactly the tip. Inside the lanes (first-parent, bisected then walked over the candidates):
+
+- **6b932d3e8** (COHERENCE-AGREE-3, the chair's ruling: the crossroads position requires crossroads access): desert
+  `dunes|(biome)` 29 → 28, `mountain-flank|ore` 15 → 13, `coal` 7 → 9, `iron` 2 → 3.
+- **1dde265d8** (COHERENCE-AGREE-4, A′ refilled: a rolled winner the access refuses gives its slot to another member):
+  desert `iron` 3 → 1, `dunes` back to 30.
+- **df2249ff8** (COHERENCE-AGREE-7 P3, the refill never fills a slot with a member the terrain refuses): the refilled
+  slots on flat land draw coal, reed and preserved goods: `forest|plains|mountain-flank|coal` 11 → 14 and 12 → 14,
+  `marsh|reed` 6 → 7 on forest, hills and plains, `plains|river|preserved` 4 → 5, the `plain|(biome)` rows fall;
+  desert `iron` vanishes.
+- **aa08dc10b** (COHERENCE-AGREE-7 P2, the roll keeps no mountain pass off the mountains): the pass's freed slot on
+  flat land is refilled; THE TWO ADDED IDENTITIES `forest|mountain-flank|iron` and `plains|mountain-flank|iron` (1
+  each), coal 14 → 15 on both, `hills|river|timber` 2 → 3, `plains|mountain-flank|stone` vanishes.
+- **a10a457e2** (TAIL-DEFECON-C-2 C1-E, a good is exported only where a house that digs, makes or works it stands):
+  coal 15 → 14 on forest and plains, `preserved` grows (forest 2 → 3, plains 5 → 6), desert `ore` 16 → 15.
+- **28f86423c** (TAIL-DEFECON-C-2 D25, salt for preservation exported only where a salt works stands): desert
+  `ore` 15 → 14; the tip.
+
+Why (ii) and not (iii): every added or grown row is an EXISTING contradiction kind (flank on flat, water on dry,
+marsh on dry) in other towns; `iron` was already a frozen decisive token (`desert|mountain-flank|iron`, 2), now
+held by two flat towns instead; each cause is a ruled, declared rule over which resources a town rolls or which
+goods it exports. No site kind a terrain could never hold before is new. THE TOTALS ROSE, said plainly:
+water-on-dry 112 → 119, marsh-on-dry 24 → 27, flank-on-flat 38 → 39, any contradiction 150 → 158 (of 462).
+The wins banked in the same act: `desert|mountain-flank|ore` 15 → 14, `forest|plain|(biome)` 26 → 20,
+`hills|mountain-flank|(biome)` 43 → 41, `plains|plain|(biome)` 25 → 20; vanished `desert|mountain-flank|iron`
+and `plains|mountain-flank|stone`. After: siteCoherenceRatchet 9 of 9. No `src/` line touched.
 
 ### 5. dossier state prose — the shift register's five pins, 2954 → 2959
 
@@ -36,6 +68,13 @@ After: the contract 79 of 79; `node scripts/generate-dossier-state-prose.mjs --c
 No `src/` line touched; nothing a town prints moves in this commit (the twins already printed at the tip).
 
 ## The owner's part, in plain words
+
+- **Site coherence (item 1):** the town-site inventory counts towns whose map site disagrees with their terrain (a
+  river in a desert town, a mountain flank on plains). Six ruled fixes this round changed which resources towns roll
+  and which goods they export, and the site follows the exports, so the count of such towns ROSE from 150 to 158 of
+  462 (river on dry land 112 → 119, marsh on dry land 24 → 27, mountain flank on flat land 38 → 39). No new kind of
+  disagreement appeared, so I re-recorded the inventory (the rule's class ii) — but it is a step backwards on what
+  the site plan's later waves will cure, and yours to veto.
 
 - **Dossier prose register (item 5):** the count of written variants in the dossier's state paragraphs went from
   2954 to 2959 because two writing seats each added twins (a second wording that holds in the other state). Each
