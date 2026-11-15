@@ -1,0 +1,7 @@
+{"id":"C54334","town":"bar0-hamlet-calm-rand-11","sev":"MED","kind":"STATE","why":"calls the caravanserai the hinge of desert trade offering water, fodder, protection; LAND gap says Caravanserai lacks access to camel_herds","other":""}
+{"id":"C54259","town":"bar0-hamlet-calm-rand-11","sev":"MED","kind":"PAIR","why":"says no guild keeps a house at its market; the Merchant Guilds' commercial houses list Periodic market, Alehouse, Caravanserai","other":"C54594"}
+{"id":"C54896","town":"bar0-hamlet-calm-rand-12","sev":"MED","kind":"STATE","why":"says the current shortage makes the grain clause valuable; FOOD is Secure, grown 125%, surplus 25%, no failed source","other":""}
+{"id":"C55187","town":"bar0-hamlet-calm-rand-12","sev":"MED","kind":"LACKS","why":"says the guard watches the ways in; DEFENCE watch none, garrison none, only a citizen militia; C55201 says the palisade has no gate","other":"C55201"}
+{"id":"C55188","town":"bar0-hamlet-calm-rand-12","sev":"MED","kind":"PAIR","why":"calls the guard exceptionally well-drilled; the citizen militia is part-time volunteers with no training or command","other":"C54632"}
+{"id":"C55363","town":"bar0-hamlet-calm-rand-12","sev":"LOW","kind":"STATE","why":"dates the Heresy Trials 'Last century'; PAST gives 43 years ago in a hamlet 48 years old","other":""}
+{"id":"DONE","lines":2435,"blocks":4,"flags":6}
