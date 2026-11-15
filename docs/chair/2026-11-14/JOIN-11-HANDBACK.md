@@ -83,6 +83,7 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 | 1 | lane/tail-close-src-2026-11-15 | 57cf8e89a (08:04; origin tip = the hash named) | 74fb74668 29b9795e4 | 719deda8e | none; no file both sides moved | 8 files outside docs/; declared-move commits: a1568930c (golden carried); run alone: factLayers.walker 3 failed/15 before and after, powerStructure 5/5 |
 | 2 | lane/tail-close-presumed-2026-11-15 | 2578b9359 (08:10; origin tip = the hash named) | 2ff8ab7ee | 19d50b8b0 | none; no file both sides moved | 2 files outside docs/ (the two presumed registers, its side); run alone: presumedThings.walker 41/43, two ARM 1 reds from the src point (§3) |
 | 3 | lane/tail-close-src-2026-11-15 | 784906a11 (08:44; origin tip = the hash named) | 57cf8e89a | 10e7c76a8 | none; no file both sides moved | 16 files outside docs/; declared-move commit 1393aebb8 (golden carried); run alone: factLayers.walker 3 failed/15 (not risen), standingReadsTheRivalItRead 12/12, settlementQuickGuide 18/18, presumedThings.walker 41/43 (the same two as point 2) |
+| 4 | lane/close-layer-cycle-attempt-2026-11-15 | 36fe6f10c (08:51; origin tip = the hash named) | 061db1367 | 416be57d1 | none (vite.config.js and the layer register/shared merged clean); no file both sides moved | 9 files outside docs/; run alone: layerBoundaries 8/8, engineCoreLazyEdge 3/3, factLayers.walker 1 failed/15 (READERS; 3 before), chainPrintSites 6/6, ruinFilterRoster 12/12, defenceFactReaders 1 failed/22 (red alike before) |
 
 ## 3. Every code resolution
 
@@ -91,6 +92,8 @@ THE CHAIR'S RULINGS TO JOIN-11 (each vetoable by the owner):
 **Point 2, the file the chair named run alone** (close-presumed 2578b9359, holding the line at 2ff8ab7ee; no conflict; only its two registers and docs): `tests/lint/presumedThings.walker.test.js` alone at the merged tree: 41 passed, 2 failed of 43 (`/home/user/j11out/t2.m.log`), both ARM 1, both on source the src point (1) moved: "every source literal that names a thing declares it, or has its row" (`src/domain/facts/magic.js :: house: academy :: "academy of magic"`, an undeclared literal) and "no stale row" (`src/generators/priorityHelpers.js	house: criminal faction`, a row whose line moved). By the chair's word not a stop: the presumed seat's final pass.
 
 **Point 3, the files the chair named run alone** (close-src 784906a11 over its point 1; base 57cf8e89a; no conflict; no file both sides moved): `factLayers.walker` 3 failed / 15, the same three as before (not risen); `standingReadsTheRivalItRead` 12/12; `settlementQuickGuide` 18/18; `presumedThings.walker` 41/43, the same two ARM 1 reds as point 2, no new row (`/home/user/j11out/t3.*.log`).
+
+**Point 4, the files the chair named run alone** (the layer cut 36fe6f10c, ruling T29; base 061db1367; no conflict: `vite.config.js`, `factLayers.register.json` and `factLayers.shared.mjs` were not moved by the joined side since the base, so the branch's side stands whole): `layerBoundaries` 8/8, `engineCoreLazyEdge` 3/3 (both green: no abort); `factLayers.walker` 1 failed / 15 (3 before: the strata and LEAVES arms turned green; the READERS arm stays red until the src seat's door); `chainPrintSites` 6/6; `ruinFilterRoster` 12/12; `defenceFactReaders` 1 failed / 22, red ALIKE at the line before (ae6f0adc8, probe `/home/user/j11probe`): `src/domain/display/defenseDisplay.js` reads 4 unbanked (`/home/user/j11out/t4.*.log`).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -300,6 +303,8 @@ JOIN-10's (by point):
 | `tests/lint/factLayers.walker.test.js` (three tests: the strata arm, LEAVES register, READERS banked lines) | close-src (1) | red at the line before (3/15) and after (3/15): carried for the register's writer (close-src, or the layer cut for its rows) |
 | `tests/lint/presumedThings.walker.test.js` (ARM 1: the magic.js "academy of magic" literal; the stale priorityHelpers.js criminal-faction row) | close-presumed (2) after close-src (1) | red at the merged tree, 2 of 43: the presumed seat's final pass; the registers are its side whole |
 | golden | close-src (3) | DECLARED MOVE commit 1393aebb8 (the faith card names the Arcane Orders, ten towns; field diff in its body); d8b08402f strikes the culture's wrong-shape read |
+| `tests/lint/factLayers.walker.test.js` (READERS arm) | layer cut (4), close-src (1, 3) | 1 of 15 red at the merged tree (3 before the cut): the src seat's register door, at its last tip |
+| `tests/lint/defenceFactReaders.walker.test.js` (defenseDisplay.js reads 4, unbanked) | — (red at ae6f0adc8 before point 4, and after) | carried: the src or doors seat's register |
 
 ## 5. Stops
 
@@ -324,4 +329,4 @@ A worktree at origin's tip (`git worktree add /home/user/j11wt -b join11 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed: points 1-3 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors (first pass; final pass LAST OF ALL); close-layer-cycle-attempt; tail-record; tail-close-reach; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
+Landed: points 1-4 (the table). NOT DONE, each only on the chair's word: tail-close-presumed final pass (its 2 ARM 1 reds); tail-close-doors (first pass; final pass LAST OF ALL); tail-record; tail-close-reach; tail-close-sweep-a; tail-close-sweep-b; tail-close-src at its last tip (after the layer cut); close-veto-list. For the close (not this seat's): every row of §4 by its door, once, on the final tree; the whole check once, by the close's seat.
