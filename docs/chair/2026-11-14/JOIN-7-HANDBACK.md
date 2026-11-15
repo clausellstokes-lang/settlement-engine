@@ -50,6 +50,7 @@ THE CHAIR'S RULINGS TO JOIN-7 (each vetoable by the owner):
 | 15 | tail-services-2026-11-14 (SWEEP) | e35851db1 (02:12) | 8df172bf0 (1) | b75b08c35 | none | clean-both `institutionProseDeclared.test.js` (4/4 merged), the two presumed registers (parse); lane-only `INSTITUTION_SERVICES.json`; DECLARED MOVE e35851db1 (availableServices, 239 births): golden carried |
 | 16 | tail-history-2026-11-14 (SWEEP) | 5ed2900cd (02:16) | 3da34c70b (2) | 3f3d9c880 | none | DECLARED MOVE 7bef72cbc (currentTensions 131 towns, siegeNarrative 4): golden carried |
 | 17 | tail-display-civic-2026-11-14 (SWEEP) | cb4ae58f0 (02:20; holds a merge of the line at d817736d8) | d817736d8 (14) | 6e4650375 | none | — (6 files, display only) |
+| 18 | tail-display-econ-2026-11-14 (SWEEP) | fcab8b63d (02:23; holds a merge of the line at eb054d53f) | eb054d53f | d077b9c22 | none | — (5 files, batch 3, no declared move) |
 
 ## 3. Every code resolution
 
