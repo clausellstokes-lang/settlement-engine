@@ -377,6 +377,15 @@
      "stop": []
     },
     {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterMember",
+     "text": "one of a power that gains by the crisis",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
      "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterLinked",
      "text": "the siege's profiteer, still selling what the siege cut off",
      "needs": [
