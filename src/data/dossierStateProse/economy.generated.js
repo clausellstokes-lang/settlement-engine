@@ -2752,8 +2752,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis"
           ],
-          "text": "Things are fine. Not comfortable, not tight: fine, and fine is what people here expect.",
-          "slots": [],
+          "text": "Money at {settlement} is neither comfortable nor tight, and that is what people here expect of it.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 2
         },
         {
@@ -6128,7 +6130,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "INCOME MIX: two or three sources between them": [
         {
           "angle": "ledger",
-          "text": "{settlement} earns most of its living from two or three trades, and none of them could carry the place alone.",
+          "text": "{settlement}'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone.",
           "slots": [
             "settlement"
           ],
@@ -6136,7 +6138,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Ask what {settlement} lives on and you will hear two or three trades named, not one.",
+          "text": "Ask what {settlement} lives on and you will hear more than one trade named.",
           "slots": [
             "settlement"
           ],
@@ -6485,7 +6487,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "sacredHouse",
             "tier: ≥ village"
           ],
-          "text": "Faith carries real weight in {settlement}'s money. What the religious houses take in and spend is a large part of the town's business.",
+          "text": "Faith carries real weight at {settlement}: what the religious houses say is heard in the town's dealings, whatever their own share of its money.",
           "slots": [
             "settlement"
           ],
@@ -6497,7 +6499,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "sacredHouse",
             "tier: ≥ village"
           ],
-          "text": "The religious houses at {settlement} are among its biggest buyers and employers, and a bad year for them is a bad year for the town.",
+          "text": "The religious houses at {settlement} are heard in its dealings, and a quarrel with them is one the town's traders feel.",
           "slots": [
             "settlement"
           ],
@@ -6534,7 +6536,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Magic carries real weight in {settlement}'s money. What the town's practitioners charge for, and what they buy, is a large part of its business.",
+          "text": "Magic carries real weight at {settlement}: what it can do is reckoned with in the town's dealings, whatever its own share of the town's money.",
           "slots": [
             "settlement"
           ],
@@ -6545,7 +6547,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The people who work magic at {settlement} are among its biggest buyers and employers, and much of the town's trade turns on their custom.",
+          "text": "Magic is reckoned with in {settlement}'s dealings, whatever it earns.",
           "slots": [
             "settlement"
           ],

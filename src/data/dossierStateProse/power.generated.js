@@ -2029,7 +2029,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: succession"
           ],
-          "text": "One person decides at {settlement} and decides quickly; what comes out of the {seat} arrives whole and can change entirely between one season and the next.",
+          "text": "Decisions at {settlement} come quickly; what comes out of the {seat} arrives whole and can change entirely between one season and the next.",
           "slots": [
             "settlement",
             "seat"
@@ -2041,7 +2041,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: succession"
           ],
-          "text": "At {settlement} one person gives the answer, and gives it quickly, and there is nobody to ask for a different one.",
+          "text": "At {settlement} the answer comes quickly, and asking again seldom gets a different one.",
           "slots": [
             "settlement"
           ],
@@ -2052,7 +2052,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: succession"
           ],
-          "text": "The {seat} at {settlement} answers to one person, and if that person falls it will be at the hands of someone close to them.",
+          "text": "If the {seat} at {settlement} falls, it will be at the hands of someone close to it.",
           "slots": [
             "seat",
             "settlement"
@@ -2064,7 +2064,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: succession"
           ],
-          "text": "At {settlement} one audience with the {seat} gets a decision, good or bad, and there is nobody to appeal to afterwards.",
+          "text": "At {settlement} one audience with the {seat} gets a decision, good or bad, and it comes quickly.",
           "slots": [
             "settlement",
             "seat"

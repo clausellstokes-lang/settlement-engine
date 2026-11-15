@@ -9400,6 +9400,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset",
             "no crisis: wartime",
+            "no crisis: famine",
             "crisis: any",
             "tier: ≤ town"
           ],
@@ -9680,7 +9681,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no crisis: under_siege"
+            "no crisis: under_siege",
+            "no crisis: occupied"
           ],
           "text": "{settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.",
           "slots": [
@@ -9761,7 +9763,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no guild"
+            "no guild",
+            "no crisis: under_siege"
           ],
           "text": "Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.",
           "slots": [
@@ -9773,7 +9776,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "market",
-            "no guild"
+            "no guild",
+            "no crisis: under_siege"
           ],
           "text": "No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.",
           "slots": [
@@ -9811,7 +9815,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "market",
             "guild"
           ],
-          "text": "The guilds are a power at {settlement} all the same, though none keeps a house at its market, and anyone trading there reckons with them.",
+          "text": "The guilds are a power at {settlement} all the same, and anyone trading at its market reckons with them.",
           "slots": [
             "settlement"
           ],
