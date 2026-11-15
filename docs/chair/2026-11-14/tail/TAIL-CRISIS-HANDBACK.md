@@ -1496,4 +1496,25 @@ the blind arm (with its floor) green. The set-aside table left as it is (another
 
 - eslint on the touched file 0. The twelve-birth grid `page-census.mjs --grid`: 2 falls at base (f714fb6a5) and tree
   alike (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a): no rise.
-- HANDED BACK after the push (nothing more tonight, by the brief).
+- PUSHED at 573c92b6d.
+
+## The chair's one more (after the landing line): `coherence/crisisBlindProse` (1 failed of 9 -> 8/8), RETIRED BY NAME
+
+The case 'soak1k-4800: "the succession question is not a live one" in a succession void is a finding' found nothing.
+Bisected by the file over the joined line's first parents from d817736d8 (green): green at 31a6f72e^1, red at
+**31a6f72e** (JOIN-7 · 29, lane/tail-corpus-def at cff6cd098), inside at **51217c0e** (TAIL-CORPUS-DEF-2 batch 3: DS-POW-4
+`riskLabel: Stable (no challengers)` v1 v2 v3 v6 reworded, every line marked `succession settled`). Verdict (i), A CURE:
+the fixture's v1 now reads "Nobody at Grudets is in a position to take the headman's place: … no contender stands ready
+to try." and the finder's three succession phrases occur in the corpus 3 times at d817736d8 and 0 from 51217c0e on (`git
+grep` over src/data). Not the finder gone blind. No corpus line can be blind that way now: the finder's other succession
+rows read two npcStructure.js goals (government and other `stable`) tagged CALM_ONLY, so none prints under a crisis.
+(A sweep of 72 births of succession_void and politically_fractured, the record's strings and the journal, found 0 at the
+tree and 0 at d817736d8: it does not reach the state-prose desks, so it is no proof; the proof is the grep and the
+CALM_ONLY tags.) So the case is RETIRED BY NAME in the file, the curing commit named. **Owner's veto list:** the case
+retired. The succession family stays covered live by crisisBlindWidened's soak1k-3005. Named, not changed: the famine
+case's `power: noRival` half (line 58) now holds a line that makes no claim, so that half asserts nothing. The finder's three
+DS-POW-4 succession phrases are dead (51217c0e named them; the finder is lent, not cured here).
+
+- eslint 0 on the file; negativeAssertionAnchor and proseDrawnAnchors red at base 573c92b6d and tree alike (the same
+  three tests; the file named in neither).
+- HANDED BACK after the push.
