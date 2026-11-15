@@ -51,8 +51,15 @@ import { INSTITUTION_DISPLAY_NAMES } from '../../src/domain/display/institutionD
 const MACHINERY = /\((?:\d[^)]*|multiple|if [^)]*|high magic)\)/i;
 
 const SEEDS = ['rr2s-town-under_siege-rand-1', 'rr2s-town-calm-rand-1', 'rr2s-metropolis-calm-rand-1', 'r2s-religious_conversion-metropolis-0'];
-/** The defence lane's surfaces, counted exactly (see the header). */
-const DEFENCE_ALLOWANCE = Object.freeze({ 'rr2s-town-under_siege-rand-1': { 'page Systems/Defense': 1, 'pdf-canon_dossier': 1, 'pdf-draft_brief': 1 } });
+/**
+ * The defence lane's surfaces, counted exactly (see the header). STRUCK, A WIN BANKED (TAIL-CLOSE-POOLS-3): the siege town's
+ * three occurrences are gone. The page's at a193ba4fe (R3-TABS-5 ruling (a): the Defense tab's force cards print a house as
+ * the roster names it), on the joined line at 4ebe3d6cb (JOIN-4 · 2); both PDF profiles' at afc90dc9 (UPKEEP-14: the PDF's
+ * defence list prints a force under the roster's label, "Gates (if walled)" -> "Town gates"), on the joined line at
+ * 0537f92f3 (JOIN-4 · 9). A first-parent bisect of this file from 9e3880dd1. Any occurrence now reds.
+ * @type {Readonly<Record<string, Record<string, number>>>}
+ */
+const DEFENCE_ALLOWANCE = Object.freeze({});
 
 function cfgFor(seed) {
   let m = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/);

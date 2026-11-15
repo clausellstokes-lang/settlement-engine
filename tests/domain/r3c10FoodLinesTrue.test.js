@@ -7,6 +7,12 @@
  *   sentence "Herding and mixed farming produce a strongly seasonal food calendar." is drawn into the foodways line only
  *   where the food record holds a herd. r2r-city-1 (a city of 13,260 fed by its grain alone): "Most meals start from the
  *   field grain. Herding and mixed farming produce a strongly seasonal food calendar." (124 of the 1,722 births).
+ *   RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-3), a declared move: 825bcf24 (W2-FIX-DATA-HISTORY item B, ww-10, ww-345)
+ *   reworded the sentence to "Herds and field grain set a strongly seasonal food calendar.", in the reader's own source
+ *   words (sourcesNamedIn reads ['grain', 'livestock']), so it stands only where both feed the place (1 of the 720 prints
+ *   it, r2r-village-38, on grain, herds and fish; none where the record lacks either). The arm reads the culture's
+ *   sentences that claim a herd as the reader reads them (`sourcesNamedIn` holds 'livestock'), not the one word
+ *   "herding"; its herd towns are towns of the culture whose record holds every source the sentence names.
  *
  * (b) THE FISHED-OUT WATER · a foodways line names no catch from a water the record calls depleted
  *   (`resourceAnalysis.resourceConditions`: the fishing grounds or the river fishery `depleted`, the fact the Economy tab
@@ -73,10 +79,14 @@ const fishWatersOf = (s) => (s.resourceAnalysis?.resourceConditions || []).filte
 /** @param {string} line */
 const namesCatch = (line) => sourcesNamedIn(line).includes('fish');
 
-const HERDING = /\bherding\b/i;
+/** The culture's foodways sentences that claim a herd, as the one reader reads them (domain/foodways.js :: SOURCE_WORDS). @param {any} s */
+const herdSentencesOf = (s) => (CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (s.config?.cultureProfileKey)]?.foodways || [])
+  .map((/** @type {any} */ line) => (typeof line === 'string' ? line : String(line?.text || '')))
+  .filter((/** @type {string} */ line) => sourcesNamedIn(line).includes('livestock'));
 /** @param {any} s the culture the town's foodways line drew from */
-const cultureHerds = (s) => (CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (s.config?.cultureProfileKey)]?.foodways || [])
-  .some((/** @type {any} */ line) => HERDING.test(typeof line === 'string' ? line : String(line?.text || '')));
+const cultureHerds = (s) => herdSentencesOf(s).length > 0;
+/** @param {any} s @param {string} line a copy carries one of the culture's herd sentences */
+const carriesHerdSentence = (s, line) => herdSentencesOf(s).some((/** @type {string} */ h) => line.includes(h));
 /** @param {any} s every copy of the line: the one reader's (every surface), the food record's, the identity record's */
 const copiesOf = (s) => [foodwaysLineOf(s) || '', String(s.economicState.foodSecurity.foodRecord.foodwaysLine || ''), String(s.culturalIdentity?.foodways || '')];
 
@@ -86,8 +96,13 @@ const copiesOf = (s) => [foodwaysLineOf(s) || '', String(s.economicState.foodSec
  * game, a village whose grain failed, a city on its grain, a metropolis on its fish.
  */
 const NO_HERD_TOWNS = ['r2s-famine-thorp-2', 'rr3p-thorp-famine-rand-0', 'r2r-hamlet-18', 'r2r-village-42', 'r2s-famine-village-0', 'r2r-city-1', 'r2r-metropolis-11'];
-/** Towns of the same culture whose record holds a herd: the sentence stands. */
-const HERD_TOWNS = ['r2r-thorp-36', 'r2r-village-6'];
+/**
+ * Towns of the same culture whose record holds a herd and the grain the sentence names: the sentence stands. RE-KEYED BY
+ * IDENTITY (TAIL-CLOSE-POOLS-3; was r2r-thorp-36 and r2r-village-6, herds without grain, where 825bcf24's sentence no longer
+ * stands by its own words): r2r-village-38 (the one of the 720 that prints it, on grain, herds and fish) and r2r-village-70
+ * (grain and herds; the census plan at four times its scale, where 6 of 2,880 print it, each on grain and herds).
+ */
+const HERD_TOWNS = ['r2r-village-38', 'r2r-village-70'];
 
 /**
  * (b)'s towns, every fish water fished out: a village under siege and famine (its herds failed), a city under siege and
@@ -140,14 +155,14 @@ beforeAll(async () => {
 
 describe('(a) the herding line: a culture sentence that claims herding is drawn only where the food record holds a herd', () => {
   it('no copy of the foodways line claims herding where no herd feeds the town', () => {
-    const seen = noHerdTowns.map((s) => ({ town: s.name, culture: cultureHerds(s), sources: s.economicState.foodSecurity.foodRecord.foodSources, herding: copiesOf(s).filter((line) => HERDING.test(line)) }));
+    const seen = noHerdTowns.map((s) => ({ town: s.name, culture: cultureHerds(s), sources: s.economicState.foodSecurity.foodRecord.foodSources, herding: copiesOf(s).filter((line) => carriesHerdSentence(s, line)) }));
     // The arm met the culture it watches, in towns with no herd.
     expect(seen.map((t) => [t.culture, t.sources.includes('livestock')])).toEqual(NO_HERD_TOWNS.map(() => [true, false]));
     expect(seen.filter((t) => t.herding.length)).toEqual([]);
   });
 
   it('where the record holds a herd, the sentence still stands on every copy', () => {
-    const seen = herdTowns.map((s) => ({ town: s.name, herds: s.economicState.foodSecurity.foodRecord.foodSources.includes('livestock'), herding: copiesOf(s).every((line) => HERDING.test(line)) }));
+    const seen = herdTowns.map((s) => ({ town: s.name, herds: s.economicState.foodSecurity.foodRecord.foodSources.includes('livestock'), herding: copiesOf(s).every((line) => carriesHerdSentence(s, line)) }));
     expect(seen.map((t) => [t.herds, t.herding])).toEqual(HERD_TOWNS.map(() => [true, true]));
   });
 });

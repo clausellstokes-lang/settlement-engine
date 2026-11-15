@@ -455,7 +455,7 @@ const PAIRS = [
     "A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.",
   ],
   [
-    "The oldest or most respected villager steers the decisions, by standing rather than office, and is heeded all the same.",
+    "The oldest or most respected villager steers the decisions on standing alone, holds no office, and is heeded all the same.",
     "The eldest or best-regarded resident guides what the village decides: an authority of regard, not of office.",
   ],
   [
@@ -2255,7 +2255,7 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
   ]),
   "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.": Object.freeze([
     Object.freeze({ text: "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.", needs: Object.freeze(['ruler: elder']), excludes: Object.freeze(['ruling body']) }),
-    Object.freeze({ text: "One head of household is heard first on the settlement's common matters, by habit rather than appointment. Nobody named them to it.", twinOf: "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway." }),
+    Object.freeze({ text: "One head of household is heard first on the settlement's common matters, out of habit and with no appointment. Nobody named them to it.", twinOf: "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway." }),
   ]),
   // TAIL-HOUSES-5 batch 8 (H20 (ii)): the Merchant oligarchy holds civic power ALONE ("solely", "monopolise", "exclusive"):
   // false where another power stands at Significant or above (`rival power`: 23 of the census's 37); the twin claims the
