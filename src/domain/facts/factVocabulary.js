@@ -210,7 +210,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {(pair: unknown) => boolean|undefined} [sharesPower]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild] @property {boolean} [sacredHouse]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -286,6 +286,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // CENSUS-4b (the chair's answer 4): ONE composite — a live guild-type institution ∨ a guild power
   // (`facts/guild.js :: guildOf`); a criminal guild is `organised crime`'s, never this.
   guild: dim({ shape: 'presence', home: 'guild', reader: (f) => bool(f.guild) }),
+  // TAIL-CRISIS-2, THE CHAIR'S RULING K6 of 2026-11-15 ("THE THIRD ATOM IS GRANTED"; vetoable by the owner): the record
+  // holds a power OTHER THAN THE GOVERNING ONE whose own standing is Significant or above (`rivalPower.js`: the power's
+  // own label, one leaf). A line naming "a strong power" that defies the government needs one. The family (shared
+  // power, ruling body, rival power) is named: no fourth without the chair.
+  'rival power': dim({ shape: 'presence', home: 'rivalPower', reader: (f) => bool(f.rivalPower) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',

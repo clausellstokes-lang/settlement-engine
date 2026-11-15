@@ -25,6 +25,7 @@ import { migrationOf } from './migration.js';
 import { warStateOf } from './warState.js';
 import { hasInstitution } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
+import { rivalPowerOf } from './rivalPower.js';
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
 import { pairSharesPower } from './sharedPower.js';
@@ -88,6 +89,8 @@ export function factsOf(record, options = {}) {
     get sacredHouse() { return hasInstitution(record, 'temple') || hasInstitution(record, 'monastery'); },
     /** CENSUS-4b (the chair's answer 4): a live non-criminal guild on the roster ∨ a guild power (`guild.js`) */
     get guild() { return guildOf(record); },
+    /** TAIL-CRISIS-2 (the chair's ruling K6): a power not the governing one stands at Significant or above (`rivalPower.js`) */
+    get rivalPower() { return rivalPowerOf(record); },
     /** fact 12: small / middling / large */
     get populationBand() { return populationBandOf(record); },
     /** fact 13: the terrain class */
