@@ -172,7 +172,7 @@ export const fixture = {
         "week": "Week 12",
         "season": "the spring of year 1",
         "headline": "Cnocby's trade routes break down",
-        "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
+        "text": "Caravans are passing Cnocby by, and its traders have little to sell."
       }
     ],
     "chronicle": [

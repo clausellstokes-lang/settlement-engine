@@ -177,8 +177,8 @@ export const landing = {
     body1: 'Canonize the draft and Cnocby becomes part of your campaign: it takes events, keeps a chronicle, remembers. Put it on the world map in the Realm with the towns around it, tie them together by trade and grudge, and add your own gods, guilds and goods in the Compendium.',
     // ⚑ FIXTURE-GROUNDED, EVENT BY EVENT. Every beat in this sentence is one row
     // of realm.advance — the same six records the card beside it renders, in the
-    // same order, at the same weeks (2 order · 2 war footing · 4 the faiths' split over
-    // · 9 capture · 12 reforms · 12 crime). It is the most fragile prose on the page and the grounding
+    // same order, at the same weeks (4 the faiths' split over · 5 war footing · 9 capture
+    // · 10 shielding · 10 crime · 12 broken routes). It is the most fragile prose on the page and the grounding
     // suite walks it word against field.
     // 2026-10-02, the Voice Program (ODQ §934.88): re-grounded on the regenerated timeline, which now speaks in deeds
     // ("Cnocby goes onto a war footing", "Crime takes hold of Cnocby", "Cnocby's trade routes break down").
@@ -190,7 +190,11 @@ export const landing = {
     // 2026-11-11 (FOUNDING-WORLDS at the final tip 7ab12183f; an OWNER VETO POINT): re-grounded on the timeline the
     // simulation cure derives (the priest's order, the war footing, the faiths' split over, the Elder Council's
     // capture of the water, the reforms, the crime); the conversion to Vael and the broken routes left the run.
-    body2: 'Then advance time. In Cnocby’s first twelve weeks Étaín Sullivan set out to restore order and the village went onto a war footing; the split between the faiths ended, leaving its sectarian memory behind; by week nine control of the village’s water was passing to the Elder Council; and by week twelve Caoilfhinn Gallagher was pushing through reforms as crime took hold of its streets. Every one of those is a record the engine wrote, and every one carries its cause.',
+    // 2026-11-15 (TAIL-CLOSE-SWEEP-D item 1, at the doors' tip 73090ee9e; an OWNER VETO POINT): re-grounded on the
+    // close's re-emitted timeline (the faiths' split over, the war footing, the Elder Council's capture of the water,
+    // Uathach O'Neill shielding their people, the crime, the broken routes); the priest's order and the reforms left
+    // the run when the round re-drew the cast.
+    body2: 'Then advance time. In Cnocby’s first twelve weeks the split between the faiths ended, leaving its sectarian memory behind, and the village went onto a war footing; by week nine control of the village’s water was passing to the Elder Council; then Uathach O\'Neill set out to shield their people as crime took hold of its streets; and by week twelve its trade routes had broken down, its traders with little to sell. Every one of those is a record the engine wrote, and every one carries its cause.',
     // The chronicle beside the realm map is the REGION's band, not the town's —
     // two cards that now say different things, and a reader needs to be told why.
     regionLine: 'Beside it, the region: what the neighbours did while Cnocby was busy.',

@@ -31,7 +31,7 @@ import { serviceDomainOf } from '../../src/generators/services/serviceAvailabili
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
-import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
+import { institutionDisplayName, institutionHouseLabel } from '../../src/domain/display/institutionDisplayName.js';
 
 afterEach(cleanup);
 
@@ -109,8 +109,15 @@ describe('a house keeps its own service, whatever the place can pay', () => {
         // on the roster offers the same name, the row stands under that house (agree-city-29: the
         // potter's Fired brick, before the brickmaker's). Under its own house, or under the one that
         // offers it first, the service is on the page.
+        // 2026-11-15 (TAIL-CLOSE-PROSE-1, the chair's ruling UV1): the house is looked for by the page's
+        // own reader. Since R2-CODE-B round 3, ruling (a) (d425c31c1, 2026-11-13: "the Services providers
+        // and the Power tab's house lists name each house by its label"), the row's provider line is
+        // printed by `InstitutionLink` through `institutionHouseLabel`, not `institutionDisplayName`:
+        // "Taverns (5-20)" reads "Taverns", "Inn (multiple)" "Inns", "Parish churches (2-5)" "Houses of
+        // worship". The 41 rows the arm read missing all stood on the tab under their house's label.
+        // The service's own name is still read by `institutionDisplayName`.
         const rows = shown.filter((r) => r.name === institutionDisplayName(name));
-        if (!rows.some((r) => r.house.includes(institutionDisplayName(house))) && !(rows.length && (s.availableServices && Object.values(s.availableServices).flat().some((r) => r.name === name && r.institution !== house)))) missing.push(`${seed}: ${key}`);
+        if (!rows.some((r) => r.house.includes(institutionHouseLabel(house))) && !(rows.length && (s.availableServices && Object.values(s.availableServices).flat().some((r) => r.name === name && r.institution !== house)))) missing.push(`${seed}: ${key}`);
       }
       cleanup();
     });

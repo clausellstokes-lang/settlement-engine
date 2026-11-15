@@ -123,4 +123,6 @@ export const NOT_TABLE_CHANNELS = Object.freeze({
   // keyed by TYPE like TENSION_TEMPLATE_DECLARATIONS, and the templates' printed text is not an enrolled table.
   HISTORY_TEMPLATE_RECORD_DECLARATIONS: 'keyed by the history template\'s TYPE beside the selection (W2-FIX-DATA-2 dde3b1277, W2-FIX-DATA-5 dabdb6061): declarations only, no row of it prints; the history templates are not an enrolled table',
   HISTORY_DESC_SIBLINGS: 'keyed by a history template\'s raw description text, resolved at the timeline\'s and the tension\'s print (W2-FIX-DATA-5, ROUND-3-CUT #331); the history templates are not an enrolled table',
+  // TAIL-CLOSE-DOORS-2, by the chair's ruling WC1 (2026-11-15): the declaration the census door needs for 805452e8f.
+  CONDITION_FACT_SIBLINGS: 'keyed by the world pulse condition\'s KIND (`trade`) beside its fact, its texts functions of the town\'s name, resolved where the summary is written (candidateEvents.js :: conditionFactOf, TAIL-CONTENT-CLOSE-1, 805452e8f); the herald\'s condition deeds are not an enrolled table',
 });

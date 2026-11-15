@@ -548,7 +548,9 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
     // Record 47 of the style wave's merge, the coherence-agree merge over the integration branch (2026-11-13-style-2-merge-47-coherence-agree.json), from the stage at 9e2ae9035:
     // the generator master 5ef18089.. -> 7b7089fd.. (525 of 525 rows).
-      .toBe('7b7089fd5e5c45e1f0a5fc247a249c80aa72df0f99dcb3a83946256300ceebb5');
+    // The close of the tail round (2026-11-15-the-close-of-the-tail-round.json, TAIL-CLOSE-DOORS-3), at the line's final tree (f76fe38fd; the doors at 752d74a15):
+    // the generator master 7b7089fd.. -> e74b9398.. (525 of 525 rows).
+      .toBe('e74b93989e4b988e0d1d22da69e60aa34815fdaf3420379b4c16d7d1781af4d5');
     // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
     // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
     // Record 10 of the train, the composed-prose manifest signed ONCE at the train's final tip (2026-11-09-merge-train-10-
