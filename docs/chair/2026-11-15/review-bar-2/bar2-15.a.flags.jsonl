@@ -1,0 +1,7 @@
+{"id":"C30104","town":"bar0-town-occupied-rand-5","sev":"LOW","kind":"BROKEN","why":"doubled item: 'fine glass sand, fine glass sand' printed twice in the needed-and-not-brought-in list","other":""}
+{"id":"C30297","town":"bar0-town-occupied-rand-5","sev":"MED","kind":"PAIR","why":"says decisions that matter are made by Merchant Guilds; the page elsewhere says the Guild Council carries out what the Occupation Authority decides","other":"C30242"}
+{"id":"C30315","town":"bar0-town-occupied-rand-5","sev":"MED","kind":"STATE","why":"Invasion & War 'Adequate' disagrees with STATE defence Vulnerable (no garrison, no militia) and the page's own 'Defense readiness Critical'","other":"C29765"}
+{"id":"C30859","town":"bar0-village-calm-rand-3","sev":"LOW","kind":"LACKS","why":"shepherd called key supplier to the textile trade; HOUSES, TRADE and exports show no textile trade (quality textiles are imports the village lacks)","other":""}
+{"id":"C31592","town":"bar0-village-calm-rand-4","sev":"MED","kind":"STATE","why":"Caravan organization (and Route planning) offered unmarked; LAND gaps say the Caravanserai lacks camels, chain vulnerable, access isolated, nothing leaves for trade","other":"C31700"}
+{"id":"C31855","town":"bar0-village-calm-rand-4","sev":"MED","kind":"PAIR","why":"says what the village raises covers an ordinary year; FOOD has grown 85% of need with a 6% gap and the page says it grows less than it eats","other":"C31851"}
+{"id":"DONE","lines":2498,"blocks":3,"flags":6}
