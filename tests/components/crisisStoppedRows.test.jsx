@@ -114,6 +114,30 @@ const S8_HOUSES = [
   ['r2s-plague_onset-hamlet-0', 'hunter_s_lodge', null],
 ];
 
+/** BATCH 2 (the chair's ruling S11): (seed, tab, the line that must print, the line that must NOT print in its place). The
+ *  worklist row each answers is named. A mark's pair: the description prints with its mark (not bare); a reworded or twinned
+ *  row's pair: the true line prints and the false one does not. */
+const BATCH2 = [
+  ['r2s-under_siege-thorp-0', 'services', `${SIEGE} The weekly service. Attendance expected of all residents.`, null], // 30715 (the access house's rite: a walk to another village)
+  ['r2s-under_siege-thorp-1', 'services', `${SIEGE} The rite that admits a person to the faith. Required for most civil recognition.`, null], // 22730
+  ['r2s-under_siege-hamlet-0', 'services', `${SIEGE} Marriage sanctioned by the faith, legally binding.`, null],
+  ['r2s-plague_onset-hamlet-2', 'services', `${OUTBREAK} The rite that admits a person to the faith. Required for most civil recognition.`, null],
+  ['r2s-under_siege-city-0', 'services', `${SIEGE} Interment outside the gates. The bearers and the cart are found by the ground.`, null], // 11805, 06145
+  ['r2r-city-0', 'services', 'Every parish served. Religious observance accessible to all.', 'Every district has a temple.'], // B06916, 10717
+  ['r2s-under_siege-city-1', 'services', 'Every parish served. Religious observance accessible to all.', 'Every district has a temple.'],
+  ['r2r-village-0', 'services', 'Essential for carts, carriers, and working horses', 'Essential for transport and cavalry'], // 07253
+  ['r2r-thorp-50', 'services', 'Bulk purchase by households, institutions, and inland traders.', 'Bulk purchase by taverns'], // 04603, 31188 (no tavern stands)
+  ['r2r-village-11', 'services', "Collects the lord's dues and the tithe", "the temple tithe"], // 05233, 29223
+  ['r2s-under_siege-town-1', 'services', 'Devotional figures, holy images, and reliquaries.', 'Crucifixes'], // X9 22599 (an East-Asian-inspired town)
+  ['r2r-village-29', 'services', 'Arbitrates quarrels before they come to judgment', "the lord's court"], // X9 08236 (no lord, no court)
+];
+/** BATCH 2 keep pairs: (seed, tab, a line that prints unmarked and unchanged). */
+const BATCH2_KEEP = [
+  ['r2s-plague_onset-city-0', 'services', 'Interment outside the gates. The bearers and the cart are found by the ground.'], // an outbreak does not stop burial beyond the gates
+  ['r2r-thorp-0', 'services', 'The weekly service. Attendance expected of all residents.'], // a calm thorp
+  ['r2r-town-0', 'services', 'Bulk purchase by taverns, institutions, and inland traders.'], // a fish market where a tavern stands
+];
+
 /** S6: (seed, kind, the record's key: a chain's `chainId` or an income source's `source`, the mark it must take). */
 const CHAIN_INCOME_MARKED = [
   ['r2s-under_siege-town-0', 'chain', 'crossroads_trade', SIEGE], // "Strategic Crossroads » Toll bridge + … » Transit trade profit"
@@ -290,6 +314,26 @@ describe('TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on
       if (!inst) { failures.push(`${seed}: no ${id}`); continue; }
       const got = stoppedRowMark(s, 'house', inst);
       if (got !== mark) failures.push(`${seed} ${id}: "${got}", not "${mark}"`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('BATCH 2 (S11), the births table: the access house\'s rites and burial beyond the gates take their crisis; the temple, cavalry, tithe and taverns read true', async () => {
+    const failures = [];
+    for (const [seed, tab, prints, not] of BATCH2) {
+      const text = await tabText(seed, tab);
+      if (!text.includes(prints)) failures.push(`${seed} ${tab}: does not print "${prints}"`);
+      if (not && text.includes(not)) failures.push(`${seed} ${tab}: still prints "${not}"`);
+    }
+    expect(failures).toEqual([]);
+  }, 600_000);
+
+  test('BATCH 2 (S11), the keep pairs: an outbreak\'s burial, a calm thorp\'s rite and a tavern town\'s fish market print as before, unmarked', async () => {
+    const failures = [];
+    for (const [seed, tab, desc] of BATCH2_KEEP) {
+      const text = await tabText(seed, tab);
+      if (!text.includes(desc)) failures.push(`${seed} ${tab}: the row does not print (${desc})`);
+      for (const mark of MARKS) if (text.includes(`${mark} ${desc}`)) failures.push(`${seed} ${tab}: "${desc}" is marked "${mark}"`);
     }
     expect(failures).toEqual([]);
   }, 600_000);

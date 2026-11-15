@@ -464,7 +464,7 @@
     },
     {
       "id": "Village headman|Tithe and dues",
-      "text": "Collects the lord's dues and the temple tithe",
+      "text": "Collects the lord's dues and the tithe",
       "needs": [
         "institution: temple"
       ],
@@ -482,7 +482,7 @@
     },
     {
       "id": "Village elder|Dispute mediation",
-      "text": "Arbitrates quarrels before they reach the lord's court",
+      "text": "Arbitrates quarrels before they come to judgment",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -949,7 +949,7 @@
     },
     {
       "id": "Blacksmith|Horseshoeing",
-      "text": "Essential for transport and cavalry",
+      "text": "Essential for carts, carriers, and working horses",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2118,7 +2118,7 @@
     },
     {
       "id": "Woodcarver|Religious carvings",
-      "text": "Crucifixes, reliquaries, saints' images.",
+      "text": "Devotional figures, holy images, and reliquaries.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4682,7 +4682,9 @@
     {
       "id": "Fish market|Wholesale trade",
       "text": "Bulk purchase by taverns, institutions, and inland traders.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5941,7 +5943,7 @@
     },
     {
       "id": "Parish churches (10-30)|Full religious coverage",
-      "text": "Every district has a temple. Religious observance accessible to all.",
+      "text": "Every parish served. Religious observance accessible to all.",
       "needs": [],
       "excludes": [],
       "crisis": [],
