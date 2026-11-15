@@ -112,7 +112,29 @@ ONE after-run measured both batches: the first after-run of batch 1 alone died a
 
 THE REFERENCE CONFIGURATIONS (measured before the merge, so the count is my cures' alone: every record of `tests/helpers/goldenMasterCorpus.js :: goldenCorpus` hashed whole and by top-level field at f8042b61a and at 5cf49f6bd): **334 of the 525 move** (thorp 29, hamlet 29, village 29, town 100, city 84, metropolis 63). By field family: `institutions` 237 (the house descriptions), `settlementReason` 153 (the origin rows), `culturalIdentity` 84 and `economicState` 84 (the foodways line), `arrivalScene` 10. No other field moves in any of the 525: no draw moved. `pressureSentence` and `stress` move in none (the corpus holds no wartime).
 
-THE TABLE (test, arm, old → new, door): PENDING the run of F2 after the chair's word "MERGE THE LINE AT <tip>" (the line's law suites and stored figures are red for the close's reasons until then). Expected among them: `tests/property/generatorGoldenMaster.test.js` (the 334 above, door `UPDATE_GOLDEN=1` through `tests/helpers/goldenRecordDoor.js`, the close's doors' seat) and the surfaces that follow it.
+THE MERGE: the joined line at **dcb069bff** (the chair's word, 16:21 UTC; confirmed as origin's tip) merged into this branch, one merge commit **cac624100**, no conflict (git auto-merged `tests/lint/presumedThings.widened.register.json`; the walker is green over it).
+
+THE REFERENCE CONFIGURATIONS AT THE MERGED TIP (each record hashed at dcb069bff and at cac624100): **334 of the 525 move**, the same rows and families as before the merge: `institutions` 237, `settlementReason` 153, `culturalIdentity` 84, `economicState` 84, `arrivalScene` 10. No other field moves in any of them, so no draw moved.
+
+F2 AT THE MERGED TIP. Ran alone through `sh scripts/gate-tail.sh`, one run of 287 files: every test file naming a file I touched (counted against dcb069bff) plus the brief's seventeen law suites. 280 pass. **7 files with 10 red arms, ALL GREEN AT dcb069bff (the same 7 files run there alone: 139 of 139), so all are mine. EVERY ONE IS A STORED FIGURE moved by the declared cures (an output-identity golden or a committed register); NO LAW IS RED.** The three owner's-door files the chair named are not among them and were not touched.
+
+| test :: arm | old → new | the door its header names |
+|---|---|---|
+| `tests/property/generatorGoldenMaster.test.js` :: every config produces byte-identical output | 0 → 334 of 525 rows drift (the families above) | `UPDATE_GOLDEN=1` through `tests/helpers/goldenRecordDoor.js` (a shift-record row in its header) |
+| `tests/generators/pipelinePinnedMode.test.js` :: EM-P0 A1, EM-B2a2 A2, EM-R1b A5 (three arms) | 0 → 25 of its 41 golden rows each | none of its own: it reads the golden manifest; green again when the golden is re-taken |
+| `tests/generators/rosterFinalUnderHeldRoster.test.js` :: EM-R2 A1 | 0 → 25 golden rows | the same: it reads the golden manifest |
+| `tests/generators/generationForkCensus.test.js` :: EM-P2 A1 (the control row) | the row `7ae632298ed9…` → `310a10e77a01…` | the same: its control row is a golden manifest row |
+| `tests/domain/worldFactRederive.test.js` :: EM-B2b A7 (the goldens' byte-identity stride) | 0 → 3 | the same: it reads both golden fixtures |
+| `tests/property/espionageDormancyFence.test.js` :: FENCE 1, THE DRIVEN GOLDEN (360 settlements) | `PRE_COUPLING_CORPUS_SHA` `d4f94b04…` → `031d625b…` | its header: re-recorded ONLY inside a named chartered window (the LIGHTING WAVE, §881.4), through `goldenRecordDoor`. **Its own text calls a move a STOP, not a re-record: for the chair and the owner.** |
+| `tests/lint/proseWiringCensus.walker.test.js` :: car 0 (the committed census is byte-identical) and SEAM car 5b (the dry read) | the committed JSON is "stale-bytes" | `scripts/wiring-census.mjs` (the census's own writer, run by the close's doors' seat) |
+
+None of these is re-taken here. A plant was not needed: each arm is red at the tip and green at dcb069bff.
+## The hand-back's state (2026-11-15, after F2)
+
+Handed back by count: my meter read 407,328 tokens at 16:24 UTC, past the 250,000 line; F2 was finished first because the hand-back needs it.
+- **Left, not started: C3396** ("exploits it: <a person>" printed with no rank; the labels seat named it to me; writer `src/domain/crisis/crisisCast.js`, the `exploiter` role, mine by the CRISIS worklist). Its first act for the next seat: verify on the 720 (`runs/after` corpus at 166bb4160, or a fresh census at this tip), then cure at the writer or strike with the measure.
+- "The table rests on salted fish." (`foodways.js`): false in 0 of the 720 per the labels seat; parked as the food record's. Nothing for this seat.
+- The slavic socialTexture "Shared ovens, bathhouses, wells…" (27 towns): left (above); its reword is a fresh literal the presumed-things door cannot bank. For the chair.
 
 ## Residual risks
 
