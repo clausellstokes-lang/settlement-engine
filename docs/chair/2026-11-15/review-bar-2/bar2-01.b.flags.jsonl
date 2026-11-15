@@ -1,0 +1,8 @@
+{"id":"C00031","town":"bar0-city-under_siege+famine-rand-3","sev":"MED","kind":"STATE","why":"'Relied upon' but magic low, FOOD by magic 0%, DEFENCE magic none, Magical Capability Weak; all magic roles 'absent' (C01248)","other":"C01248"}
+{"id":"C00253","town":"bar0-city-under_siege+famine-rand-3","sev":"MED","kind":"BROKEN","why":"'Backs' followed by slash label 'Military/Guard' used as one power's name beside a verb (repeats on other house rows)","other":""}
+{"id":"C01167","town":"bar0-city-under_siege+famine-rand-3","sev":"LOW","kind":"STATE","why":"'To anyone arriving... defended in the ordinary way' under CRISIS siege: gates shut, nothing comes in or out (C01221)","other":"C01221"}
+{"id":"C01229","town":"bar0-city-under_siege+famine-rand-3","sev":"MED","kind":"PAIR","why":"'No arcane practitioners on the rolls' but TRADE makes Spellcasting (minor) here and Divine & Magical Healing chain runs","other":"C00877"}
+{"id":"C00317","town":"bar0-city-under_siege+famine-rand-3","sev":"LOW","kind":"STATE","why":"'Merchant Prince' title for Konstantina Niketas, who is female (PEOPLE f); a masculine title","other":""}
+{"id":"C00423","town":"bar0-city-under_siege+famine-rand-3","sev":"LOW","kind":"STATE","why":"'Landlord' for Sophia Oinaios, who is female (PEOPLE f, the innkeeper); masculine title","other":""}
+{"id":"C00799","town":"bar0-city-under_siege+famine-rand-3","sev":"LOW","kind":"PAIR","why":"'two or three trades... none could carry it' vs Shadow Economy 45% alone and 'Diversified, broad base'","other":"C00776"}
+{"id":"DONE","lines":1965,"blocks":1,"flags":7}
