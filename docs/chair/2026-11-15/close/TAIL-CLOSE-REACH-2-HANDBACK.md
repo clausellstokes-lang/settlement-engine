@@ -166,7 +166,48 @@ the merged tree, each to a file, 8 GB heap:
 - So the later landings brought no new dark identity (WR1 not needed; the growth door NOT used a second time) and no
   moved reader row (OR2 not needed again).
 
+## THE FINAL PASS (the chair's word: "FINAL PASS at f76fe38fd")
+
+`lane/join-2026-11-14` at f76fe38fd merged at d9b01004c (a merge commit, clean). Both doors' plain arms at the merged tree:
+- the writers' door: exit 0, `WRWALKER HOLD — judged 12661 · LIT 691 · LIT-NAME 10563 · DARK 1407 (reviewable 389)`;
+  DARK unchanged, four identities rose from LIT-NAME to LIT; no new dark identity (no WR1 row, the growth door NOT used).
+- the readers' door: exit 1, two STALE rows: `culture on settlement` (settlementQuickGuide.js) and `_worldPulseInactive on
+  institutions` (institutionRoster.js).
+
+**THE SECOND SMALL RUNG, schema 44, "the close's final pass"**: OR2's law requires it, because one of the two rows is
+erosion. A plain shrink-only `--write` would bank it as a repair.
+- `culture on settlement`: class R, a lawful shrink. The read is gone, struck at its root by TAIL-CLOSE-SRC-4 · WR2
+  (d8b08402f).
+- `_worldPulseInactive on institutions` (:40, `isLiveInstitution`): class E, **UNCURED INSTRUMENT EROSION**, recorded
+  as such. The read stands and the file is unchanged. TAIL-CLOSE-SRC-5 · SR5 (b) (9cade66ce) passes the defence
+  buckets' entries to `isLiveInstitution`, so its parameter binds a second shape. **CONFIRMED** by a scratch control
+  (the merged tip with only that call undone, a local commit never pushed): the row scans back.
+- Act 1 a845c2c84: the form of rung 43; the instrument's own tests 120/120; eslint clean. Act 2: scan; migrate
+  **Same 1549 · New 0 · Gone 2**; the three bookkeeping paths; no unscanned movement; the corpus unmoved; the review
+  `docs/chair/2026-11-15/osr-rung44-final-pass-review.json` (1,552 decisions; refusing builder; negative control
+  refused exit 3); bundle; `--write --migrate-schema=44`: "froze 2210 finding(s) / 1549 identit(ies) across 439
+  file(s); bank 78 / 52". No walker pin moved.
+
+**Receipts at the rung-44 tree, each walker alone:**
+- `observedShapeReaders.walker` (8 GB heap): **47 of 47**.
+- `writerReach.walker`, **UNDER THE DEFAULT HEAP** (2,096 MB, `NODE_OPTIONS` unset; the heap cure e798161fd is on the
+  line): **all 52 ran**, no out-of-memory; **51 of 52**. The culture arm is GREEN (WR2 landed). The one red is "the
+  surfaceReach grammar round-trips": `institution on availableServices is missing from the frozen surfaceReach`, frozen
+  `web-transitive=N`, measured `web-transitive=R`.
+
+**HELD FOR THE CHAIR: the writers' register re-stamp.** The door's own `--write` (cohort 1367 → 1367, nothing folded,
+nothing grown) would clear that red. It re-stamps **31 identities' reach, not one**: **13 rises** (`institution on
+availableServices` web-transitive; `name on charter`, `on magicDef`, `on mercenary`, `on walls` each to dossier-pdf, foundry and
+web-display) and **41 falls**. In the falls, **20 identities lose campaign-pdf AND world-book reach** (the campaign-pdf
+closure 166 → 159 files, world-book 181 → 174), and `name on availableServices` loses web-display:
+`inst on compound`, `desc on crimeTypes`, `economicGates on defenseProfile`, `compound on economicState`,
+`magicOffset`/`stockpile on foodSecurity`, `hasChurch`/`hasCourtSystem`/`hasGranary`/`hasHospital`/`hasNavy`/`hasPort`/`hasPrison on inst`,
+`crimeTypes`/`guardEffectivenessDesc`/`safetyDesc on safetyProfile`, `disaster on scores`,
+`structuralViolations on settlement`, `blockadeBypass`/`blockaded on stockpile`. Every one is still LIT through another
+surface. The cause of the closure cut is not measured here. A fall is not "a figure that ROSE", so the re-stamp waits on
+the chair's word. The re-stamped file is kept in the scratch tree. This hand-back is updated when the re-stamp lands.
+
 ## WHAT IS LEFT
 
-- The FINAL PASS on the chair's word ("FINAL PASS at <tip>"): merge that tip, both doors' plain arms, both walkers alone
-  (the culture arm expected green once the src close seat's WR2 strike is on the line), this hand-back.
+- The chair's word on the reach falls. Then the writers' `--write` on a clean tree (or not), the writers' walker alone
+  again (52 of 52), and the last line.
