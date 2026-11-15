@@ -329,10 +329,10 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   insurgency: pools({
     cover: {
-      traveller: '{name} looks calm, but orders go unanswered; some of its people have turned against those in charge.', // TAIL-CRISIS K3: no office, no second power the kind does not guarantee
+      traveller: 'In {name} orders go unanswered, and some of its people have turned against those in charge.', // TAIL-CRISIS K3: no office, no second power the kind does not guarantee; TAIL-CRISIS-4 (K18): not "looks calm" beside its own political violence
       newcomer: 'Newcomers to {name} are asked, quietly, whether they come on the government\'s business.',
       trade: 'In {name} taxes are disputed and some revenue is no longer sent on, and those who trade are unsure whom they owe.', // R3-CODE-C-5: no merchant; TAIL-CRISIS: no office
-      watch: 'Nobody in {name} fights in the open; those watching are counting who still obeys the government and who has stopped.',
+      watch: 'In {name} both the government and those who defy it press people to say which side they are on, and those watching count who has stopped obeying.', // TAIL-CRISIS-4 (K18): every insurgency's record holds its political violence and its loyalty testing
     },
     overview: {
       local: 'People in {name} are choosing between the government and those who defy it, and many have stopped doing what the government asks.', // TAIL-CRISIS K3: no second power
@@ -341,14 +341,14 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       newcomer: 'A newcomer in {name} soon learns that the government\'s word counts for less than it seems.',
     },
     defence: {
-      watch: 'There is no fighting in {name}; the danger is quieter, orders that go unheeded and dues that go unpaid.', // R3-CODE-C-5: no streets; TAIL-CRISIS (READ-ALL 22640): no officials
+      watch: 'In {name} the quarrel over who is in charge has turned to violence, and orders go unheeded and dues unpaid.', // R3-CODE-C-5: no streets; TAIL-CRISIS (READ-ALL 22640): no officials; TAIL-CRISIS-4 (K18): not "no fighting" beside the record's political violence
       official: 'Those who answer for {name} cannot be sure whose side their own people are on.', // R3-CODE-C-5: no force
       local: 'In {name} people keep out of the quarrel between the government and those who defy it, and away from anyone asking questions.', // TAIL-CRISIS (READ-ALL 11471): no second power
-      traveller: 'Passing through {name}, you would not see the quarrel over who is really in charge unless you asked.', // TAIL-CRISIS (READ-ALL B14649): beside a famine something is amiss to see
+      traveller: 'Travellers in {name} are pressed, sooner or later, to say which side they are on, and both sides take note of the answer.', // TAIL-CRISIS (READ-ALL B14649); TAIL-CRISIS-4 (K18): the quarrel is in the open (the record's political violence), and every insurgency tests loyalty
     },
     tonight: {
       official: 'Those in charge of {name} know some of its people are defying them, and cannot say so openly without making the defiance stronger.', // TAIL-CRISIS (READ-ALL 22983): no second power
-      watch: 'The defiance of {name}\'s government grows quietly, and those watching it cannot act in the open.', // TAIL-CRISIS (READ-ALL 21315): no second power
+      watch: 'The defiance of {name}\'s government grows, and those watching it count who still obeys and who has stopped.', // TAIL-CRISIS (READ-ALL 21315): no second power; TAIL-CRISIS-4 (K18): not "quietly" beside the record's political violence
       newcomer: 'Those in charge of {name} need something done that cannot be official, and someone new is whom they would ask.',
       trade: 'Some of what {name} owes the government no longer reaches it, and the government runs on less each season.', // TAIL-CRISIS (READ-ALL 18222): no office
     },
