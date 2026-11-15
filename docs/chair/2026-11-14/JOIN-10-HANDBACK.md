@@ -90,6 +90,7 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 | 14 | lane/tail-corpus-def-2026-11-14 | c358b4832 (07:38) | 922cfa66c | 355bfc1b2 | none | 0 files outside docs/; declared-move commits: none (golden carried) |
 | 15 | lane/tail-ties-2026-11-14 | 319362b0a (07:41) | 2f8ffcaa3 02de38883 | 7d6d807ec | none | 0 files outside docs/; declared-move commits: none (golden carried) |
 | 16 | lane/tail-close-people-2026-11-15 | 5a751f365 (07:44) | 0b1248dbf | 90733e58e | none | 9 files outside docs/; declared-move commits: e81dea035 fc9772001 1ec823d12 8a7183589 42747ad8b 0d6ef7e93 (golden carried) |
+| 17 | lane/tail-close-pools-2-2026-11-15 | b3a319b12 (07:47) | 29b9795e4 1c9ff3933 | 1dac12238 | none | 6 files outside docs/; declared-move commits: b45f1047c (golden carried) |
 
 ## 3. Every code resolution
 
@@ -100,6 +101,8 @@ THE CHAIR'S RULINGS TO JOIN-10 (each vetoable by the owner):
 **CONFLICT IN A TEST FILE, RULED BEFOREHAND (C31), point 11** (close-pools 0711a6a39 against crisis b75ca93c7, landed at point 5): `tests/domain/coherence/crisisBlindProse.test.js`, the soak1k-4800 case, moved by both sides through the chair's own double assignment (crisis TAIL-CRISIS-8 retired it by name; close-pools 0711a6a39 re-shaped the same case: +13/-2). THE JOINED SIDE STANDS WHOLE (`git checkout --ours` inside the merge); THE BRANCH'S EDIT TO THAT FILE IS DROPPED (its commit 0711a6a39's hunk in that file). Measured: the file alone at the merged tree 8/8 green (`/home/user/j10out/t11.m.log`). Every other file of the branch is its own.
 
 **Point 13, the files the chair named run alone** (close-pools 1d3fef703 over its point 11; two merge bases 0711a6a39 and 4e58ed8ba; the branch took the joined side of `crisisBlindProse.test.js` itself, C31 done on the branch): staged only `tests/lint/factLayers.poolTable.json` (one row) and the seat's hand-back; `crisisBlindProse.test.js` and `tests/domain/corpusCureGuards.test.js` (the chair wrote tests/lint/: the file lives under tests/domain/) alone at the merged tree: 126/126 green (`/home/user/j10out/t13.m.log`).
+
+**Point 17, the files the chair named run alone** (close-pools-2 b3a319b12, holding the line at e36318ac1; bases 29b9795e4 and 1c9ff3933; no both-moved file): `styleLaw.walker`, `gapLineHousesByKind`, `r3c10FoodLinesTrue`, `houseLabelEverySurface`, `tailHistoryBatch6` alone at the merged tree: 42/42 green (`/home/user/j10out/t17.m.log`).
 
 ## 4. THE LIST FOR THE CLOSE
 
@@ -278,6 +281,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | tests/domain/coherence/crisisBlindProse.test.js | close-pools (11) | merged clean though both sides moved them: the test files among them run alone at the merged tree, green ; read at the close |
 | golden | close-display (12) | DECLARED MOVE commits 6cd5f374f adbe29e11 9a13dd0a4 (field diffs in their bodies) |
 | golden | close-people (16) | DECLARED MOVE commits e81dea035 fc9772001 1ec823d12 8a7183589 42747ad8b 0d6ef7e93 (field diffs in their bodies) |
+| golden | close-pools-2 (17) | DECLARED MOVE commits b45f1047c (field diffs in their bodies) |
 
 **[J10] every pin where the joined side was kept, by file (for the doors' seat to read each once):**
 
@@ -316,4 +320,4 @@ A worktree at origin's tip (`git worktree add /home/user/j10wt -b join10 <tip>`,
 
 ## 8. WHAT IS LEFT
 
-Landed through point 16 (see the table); count 192,380 at 07:40 UTC after point 15; waiting on the chair's LAND words.
+Landed through point 17 (see the table); count 192,380 at 07:40 UTC after point 15; waiting on the chair's LAND words.
