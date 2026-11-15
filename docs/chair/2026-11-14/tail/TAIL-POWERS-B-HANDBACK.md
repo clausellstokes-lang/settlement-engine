@@ -404,6 +404,24 @@ merge seat's re-record carries the three families above.
 - DONE: P19 (batch 4), P9 + P12 + P18 (batch 5), the READ-ALL-4 HIGH (batch 6a), 6b as prepared (batch 6b), the standing lines
   (batch 7). TAIL-POWERS-B-3 HANDED BACK after batch 7 by the clock (the meter read 0; about seventy minutes from 03:08 UTC).
   The instruments' last after-run (a7, at batch 7's tree) is the next seat's before-run if re-made at the same tip.
+- THE CHAIR'S ROWS FROM THE BAR'S OWN READ (messages of 03:56 and 04:08 UTC, ten fresh towns at the landed tip 5d1e3096b; NOT
+  STARTED: received at the hand-back; check each at this branch's tip first, measure over the printing towns, a batch of the
+  same writer, widest first):
+  (a) claimStanding.js CLERGY_AT_MARGINS "Clergy are present but operate at the margins of civic life ..." (98) where Religious
+      Authorities is the STRONGEST power and contends for the seat: a twin where the power is strong or governs (batch 6a's form).
+  (b) titleSecretsPresentations.js "Has been digging clay from land that belongs to someone else ..." (85; batch 5 hedged it
+      "whenever there was clay to be had"): where the land holds no clay at all; check the hedged line at the tip first.
+  (c) factionDynamics.js MERCHANT_CRAFT_VOTE "Merchant Guilds and Craft Guilds vote together whenever trade is at stake, then
+      fight over ..." (77) against the same page's relation row of the pair.
+  (d) stressFactions.js "Trade disruption and requisition are hurting the bottom line." on a thieves' guild whose crisis stake
+      says it GAINS (6): the wartime merchant/guild branch matches 'guild' in "Thieves' Guild".
+  (e) factionStanding.js "Three powers stand almost level here, and no one leads; every decision has to be bargained for." (17)
+      where FIVE stand at Significant, or one governs at Significant and the rest are Minor: the count and the levelness read
+      the roster.
+  (f) factionDynamics.js computeFactionRelationships, three kin (9, 8, 5): "<seat> holds the seat and collects the taxes;
+      Religious Authorities tell people ... ordained" where the pair stands in a HIGH quarrel on the record (P19's
+      withConflictRelations covers only symbiotic/dependent rows: this kind did not follow), and under an occupation's vassal
+      extraction, where the seat does not collect freely.
 - MEASURED AT 4140ad9f4 BY THE RECORD (TAIL-POWERS-B-3; the rows of this seat's files printing in 5 towns or more, widest first):
   - GONE IN THEIR STATE AT THE BASE (P2, TAIL-POWERS batch 1's declarations stand): the innkeeper's 11127 (115 print, none under a
     famine or a siege) and 11047 (114), the baker's 11229 (92) and 11327 (80), the boat-headman's 11289 / X 25356 (31: none under a
