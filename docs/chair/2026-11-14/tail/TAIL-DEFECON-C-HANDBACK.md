@@ -156,6 +156,7 @@ Same branch, same files. Worked to D18 and D19 (the chair's, 2026-11-15; each ve
 |---|---|---|
 | **a10a457e2** C1-E (D18) | a good is exported only where a house that digs, makes or works it stands | 166 primaryExports, 8 arrivalScene, 7 economicComplexity; NO income, prosperity, import, chain, made-list or trace field (the measuring seat's figures exactly) |
 | **e6700483b** D19 | an air dock's docks: "Airship freight services (cargo, mooring)" | 11 primaryExports, 11 institutionalServices (output and exportLabel only) |
+| **28f86423c** D25 | "Salt for preservation" (the same salt) exported only where a salt works stands | 21 primaryExports, 7 history.founding, 4 incomeSources (Salt Sales) |
 
 ### C1-E (a10a457e2)
 
@@ -175,11 +176,9 @@ Same branch, same files. Worked to D18 and D19 (the chair's, 2026-11-15; each ve
   Toll income (transit) 7, Glassware 6, Glass blanks 5, Dyed cloth 5, ships 4, Camel leather 1, Fine textiles 1.
 - THE INHERITORS, every one read: 48 goods in 41 towns (the commit body's "45 in 39" is a miscount; this is the
   figure). They are true where read (the house stands), with two exceptions, NAMED:
-  - **"Salt for preservation" in 21 towns** takes Sea salt's place: the flats' second trade good, the same salt, and
-    no salt works stands. Gating it too (tried, not committed) moves `incomeSources` in 4 towns (Salt Sales) and
-    re-draws `history.founding`'s reason in 7 ("grew around salt workings …"), which is a stop under D18. TOLD TO THE
-    CHAIR (01:5x), not answered at this writing. If granted: add `'Salt for preservation': ['salt']` to the table
-    (a declared move into income and founding).
+  - **"Salt for preservation" in 21 towns** took Sea salt's place: the flats' second trade good, the same salt, and
+    no salt works stands. That was a stop under D18 (gating it moves income and founding). The chair RULED D25
+    (02:10): the gate covers it, as its own commit: **DONE, 28f86423c** (below).
   - **"Beer (barrel)" in r2r-town-53**: the brewing chain is processed there by a Cooper. Its sibling "Ale (barrel)"
     was already exported at the base. This is the chain-processor class, not the table's.
 - Guard: `tests/generators/tailDefeconExportSide.test.js` (18 GONE rows red at fb341090c, each naming a good still
@@ -204,6 +203,23 @@ Same branch, same files. Worked to D18 and D19 (the chair's, 2026-11-15; each ve
   institutionRename (by `institutions[]`, unchanged). No other source spells the literal.
 - Guard: the D19 block of the same test file (3 AIR rows red at a10a457e2; 3 WATER rows green before and after).
 
+### D25 (28f86423c)
+
+- `'Salt for preservation': ['salt']` in the table. Over e6700483b: 21 primaryExports; 4 incomeSources ("Salt Sales"
+  leaves r2r-thorp-24, r2r-village-5, r2s-indebted-village-3, r2r-town-4); 7 history.founding. In 5 of the 7,
+  "grew around salt workings that made everything they touched last longer …" leaves a town with no salt works
+  (r2r-hamlet-1, -11, r2r-town-4, r2s-monster_pressure-thorp-0, r2s-religious_conversion-village-1). In 2 the reason
+  moves between harbour reasons (r2r-hamlet-47, r2s-infiltrated-thorp-1; a deep harbour stands in both).
+- Inheritors (4, all true): River barges by a Shipyard, Barrels by a Cooper, jewelry by Specialized metalworkers,
+  News by a Town crier.
+- Guard: 3 GONE rows in `tailDefeconExportSide.test.js` (red at e6700483b). RE-KEYED BY IDENTITY:
+  `incomeRowsBorneOut.test.js` "r2r-thorp-24 … titled Salt Sales". The thorp now sells no salt: its row asserts the
+  rents and neither a Salt Sales nor a Fish row. The claim moves to r2s-succession_void-town-0 (a Salt works, no fisher),
+  and the file's birth helper takes the census's r2s arm.
+- THE SALT-WORKINGS FOUNDING, NAMED for the founding's file (not this seat's): the reason "grew around salt workings"
+  is drawn from the exports, not from a salt works. With D25 it leaves the 5 towns above. Whether it still prints
+  where no salt works stands is not measured here.
+
 ### The veto list (successor's)
 
 - "Airship freight services (cargo, mooring)" (an export pill; the service card's output "Airship freight services"):
@@ -223,11 +239,23 @@ PENDING at this push (the after census was running): see the next push of this f
 
 ## What is left of this file's rows (HANDED BACK at the budget, 2026-11-15 ~01:25 UTC, by time: ~70 minutes)
 
-(UPDATED by TAIL-DEFECON-C-2: items 1 and 2 are DONE, a10a457e2 and e6700483b, above. WHAT IS LEFT NOW: the chair's
-answer on "Salt for preservation" (above); 28528 and the WORKLIST3 export rows (other files); D15's remainder; the
-made list read by the whole table (barrels 44, flour 37, bows 17, textiles 16, dyed cloth 15: the measuring seat's
-"natural gate", a localProduction move the chair has not granted); the chain-processor class (a Cooper's beer); the
-gathered and herded goods left ungated.)
+(UPDATED by TAIL-DEFECON-C-2: items 1 and 2 are DONE, a10a457e2 and e6700483b, and D25 at 28f86423c, above. The chair,
+02:10: no successor is seated for `computeActiveChains.js`. WHAT IS LEFT OF IT, widest first, each measured on the
+census's 720 at 28f86423c's record:
+1. THE MADE LIST READ BY THE WHOLE TABLE (localProduction, NOT GRANTED: a move of the made list's family). It lists
+   goods the export now refuses: barrels 44, flour 37, bows/arrows 17, textiles 16, dyed cloth 15, hospitality 11,
+   arms 8, glass 7, ships 6. Cure: `outputMadeHere` asks `GOOD_WORKING_HOUSES` for every good it names, not only
+   the export-gated ones. The measuring seat called the table "the natural gate" for this.
+2. THE GATHERED AND HERDED GOODS left ungated (D15's remainder: herbs 46, hides 33, wool 29, timber 29, clay 5). The
+   made list and the exploitation record ask different questions. The next cure is the chair's call.
+3. COAL 116 / PEAT 94 (made) and 102 / 42 (exported), ungated BY DESIGN. Re-deciding them is the chair's.
+4. THE EXPORT SIDE'S 57 left, judged worked: jewelry 34, beams/planks 12, the pass's toll 11, books 2.
+5. THE CHAIN-PROCESSOR CLASS: a chain kept by a processor that does not make its outputs (a Cooper's "Ale (barrel)" /
+   "Beer (barrel)" in r2r-town-53; not counted wider).
+6. The export list's crisis rule (09013 fish under a fish famine, 09282 pilgrims under a plague: 1 town each, in
+   `deriveExportsFromChains` with economicState.js's tier goods). Under widest first it waits.
+NOT THIS FILE: 28528 (the services' siege rule, economicState.js); WORKLIST3's b1 roster rows; resourceDynamicsKernel.js:575's
+roster; the salt-workings founding (above); "Port Revenue" for an air dock (left, by design: an air dock is a port).)
 
 FIRST, the chair's two rulings that arrived at 00:45:
 1. **(D18) C1-E IS GRANTED: THE EXPORT SIDE** of a good with no house: ONE TABLE of good to the houses that work it,
