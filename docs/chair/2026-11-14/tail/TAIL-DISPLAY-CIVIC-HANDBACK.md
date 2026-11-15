@@ -82,6 +82,10 @@ The chair's (3) in X8, "prefer the label's own one plain word": not taken. The c
 
 - **21394 21466** ("church guidance" / "church sway" beside the ruling power, 4 towns): `src/domain/display/governingModifierWords.js`. The faith family is borne out by `factsOf(...).sacredHouse`, and the thorp has only "access to a parish church". Whether `sacredHouse` counts an outside church is UNVERIFIED; it is the next batch's first read.
 
+- **X9** (the exports' read): `docs/chair/2026-11-14/read-all-3/WORKLIST3-DISPLAY-CIVIC.json` (27 rows, 1 HIGH) is NOT TAKEN: left whole, at this seat's budget. The batches' leaves print on the PDF too (`governanceAccount.js` is the PDF Power chapter's), so batch 1 and batch 3 already cure there.
+- **X8's count**: the chair's "199 towns" was this seat's first measure, which counted "Adequate" beside a contested legitimacy, and X8 leaves that unchanged. By X8's own law the measure is 164, and the after run moved exactly those 164.
+- **X13** was withdrawn; `dossierViewModel.js` was never touched.
+
 ## Registers named stale, guards owed
 
 - No register re-taken (none of this seat's batches moved a pinned register: the presumed-things, grid, domain-strict and type ratchets read equal to the base).
