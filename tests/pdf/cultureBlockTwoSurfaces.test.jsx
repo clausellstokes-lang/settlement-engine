@@ -29,6 +29,7 @@ import { cultureScopeLine } from '../../src/domain/summary/settlementQuickGuide.
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** @param {string} seed */
 const birth720 = (seed) => {
@@ -82,7 +83,7 @@ describe('the culture block of the PDF and the journal (EXPORTS-B24 · B2)', () 
     const town = birth720('r2r-town-6');
     expect(town.culturalIdentity.civicPattern, 'anchored: the row that declares ruler: lord').toMatch(/^A lordly court/);
     const p = printed(town);
-    expect(p.rawRows).not.toContain('civicPattern');
+    expectAbsentWithAnchor(p.rawRows, 'civicPattern', 'builtForm');
     expect(p.rawRows.length, 'the guard: a town keeps its admitted rows').toBeGreaterThan(0);
   }, 180000);
 

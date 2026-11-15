@@ -17,6 +17,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -76,7 +77,7 @@ const KEEP_EXPORT = [['r2r-town-2', 'Baked goods', 'Bakers']];
 describe('D33: flour, textiles, glass and pottery are made only where a house of the table makes them', () => {
   test.each(GONE)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
     const list = madeIn(seed);
-    expect(list).not.toContain(gone);
+    expectAbsentWithAnchor(list, gone, still);
     expect(list).toContain(still);
   });
   test.each(KEEP)('%s still lists "%s" (its %s stands)', (seed, good, house) => {
@@ -85,7 +86,7 @@ describe('D33: flour, textiles, glass and pottery are made only where a house of
   });
   test.each(GONE_EXPORT)('%s exports no "%s"; it still exports "%s"', (seed, gone, still) => {
     const list = exportedFrom(seed);
-    expect(list).not.toContain(gone);
+    expectAbsentWithAnchor(list, gone, still);
     expect(list).toContain(still);
   });
   test.each(KEEP_EXPORT)('%s still exports "%s" (its %s stand)', (seed, good, house) => {

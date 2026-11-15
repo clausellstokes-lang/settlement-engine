@@ -7,6 +7,8 @@
  * print now, with what prints in its place; each KEEP pair a true sibling that prints at both.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -55,13 +57,15 @@ const KEEP = [
 
 describe('TAIL-CRISIS K9/K17: the peacetime iron hooks name no smiths, forge or iron merchants', () => {
   it('no FALSE words print, and the reworded line prints in their place', () => {
-    for (const [seed, gone, instead] of FALSE) {
+    const failures = collectSeedFailures(FALSE, ([seed, gone, instead]) => {
       const text = hooks(birth(seed));
-      expect(text, seed).not.toContain(gone);
+      expectAbsentWithAnchor(text, gone, instead, seed);
       expect(text, seed).toContain(instead);
-    }
+    });
+    expectNoSeedFailures(failures, 'each FALSE town prints no false words, and the reworded line in their place');
   }, 300000);
   it('every KEEP sibling still prints', () => {
-    for (const [seed, kept] of KEEP) expect(hooks(birth(seed)), seed).toContain(kept);
+    const failures = collectSeedFailures(KEEP, ([seed, kept]) => { expect(hooks(birth(seed)), seed).toContain(kept); });
+    expectNoSeedFailures(failures, 'every KEEP sibling still prints');
   }, 300000);
 });

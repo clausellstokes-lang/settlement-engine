@@ -12,6 +12,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
@@ -36,7 +37,7 @@ describe('#93: a small place\'s house of work earns', () => {
     ['rv3-recently_betrayed-village-1', 'The stone the quarrymen cut is sold here.'],
   ];
   test('each town prints its trade\'s line beside its rents, and no house\'s stored name', () => {
-    for (const [seed, text] of ROWS) {
+    const failures = collectSeedFailures(ROWS, ([seed, text]) => {
       const s = birth(seed);
       const sources = s.economicState.incomeSources.map((e) => e.source);
       // TAIL-DEFECON-2 (D10): re-keyed by identity: the farming row is "Harvest" where no lord's steward or reeve stands
@@ -46,14 +47,16 @@ describe('#93: a small place\'s house of work earns', () => {
       const esc = (n) => String(n).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       expect(s.institutions.length, seed).toBeGreaterThan(0);
       expect(s.institutions.filter((i) => new RegExp(`\\b${esc(i.name)}\\b`, 'i').test(text)).map((i) => i.name), seed).toEqual([]); // the roster's names, whole
-    }
+    });
+    expectNoSeedFailures(failures, 'each town prints its trade\'s line beside its rents, and no house\'s stored name');
   });
   test('the guards: no line where the rents are not alone, where no house of work stands, or in a town', () => {
-    for (const seed of ['rv2-calm-thorp-10', 'rv2-calm-thorp-5', 'rv2-calm-town-0']) {
+    const failures = collectSeedFailures(['rv2-calm-thorp-10', 'rv2-calm-thorp-5', 'rv2-calm-town-0'], (seed) => {
       const s = birth(seed);
       expect(s.economicState.incomeSources.length, seed).toBeGreaterThan(0);
       expect(tradesOf(s), seed).toEqual([]);
-    }
+    });
+    expectNoSeedFailures(failures, 'the guards print no house-of-work line');
   });
   test('under a siege the row prints its label and share alone', async () => {
     const { houseOfWorkLine } = await import('../../src/generators/economy/incomeLineSiblings.js');

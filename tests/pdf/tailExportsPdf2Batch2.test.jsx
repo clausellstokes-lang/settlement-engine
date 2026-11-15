@@ -27,6 +27,7 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -96,11 +97,23 @@ const KEEP = [
 ];
 // A calm town marks nothing and prints no head line (the leaf's own rule: no stopping crisis, no mark).
 const CALM = [['r2r-city-0', 'institutions'], ['r2r-city-0', 'services'], ['r2r-city-0', 'economics']];
+/** The calm guard's literals (the alternation it held, each a plain literal: exactly equivalent). */
+const MARKS = ['ordinary times', 'Stopped by the siege', 'Curtailed by the outbreak', 'Scarce in the famine', '(stopped)', '(curtailed)', '(scarce)'];
+/** surface -> a row the calm town really prints there, of the kind the leaf would mark (the liveness anchor) */
+const CALM_ROW = /** @type {Record<string, string>} */ ({
+  institutions: ': Day-to-day governance of the settlement.', // a service row with its description
+  services: 'Full accommodation', // a pill
+  economics: 'District-level duties on specialized goods', // an income share's description
+});
+/** The silent slot's sibling on its own surface: the crisis the cover names in its place (r2r-village-21). */
+const SILENT_SLOT_ANCHOR = /^Under Siege$/m;
 
 describe('TAIL-EXPORTS-PDF-2 batch 2: the crisis leaf on the PDF\'s rows, the cover\'s export, a criminal house by its label', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
   test.each(NOT)('%s %s (%s): not printed', (_id, seed, where, not, instead) => {
     const out = text(seed, where);
+    expect(out).toMatch(instead ? [instead].flat()[0] : SILENT_SLOT_ANCHOR);
+    // anchored: the positive above (what prints instead, or the cover's crisis row) holds on the same text; ^$/m keep the regex
     expect(out).not.toMatch(not);
     for (const re of instead ? [instead].flat() : []) expect(out).toMatch(re);
   }, 120000);
@@ -108,6 +121,7 @@ describe('TAIL-EXPORTS-PDF-2 batch 2: the crisis leaf on the PDF\'s rows, the co
     expect(text(seed, where)).toMatch(keep);
   }, 120000);
   test.each(CALM)('calm %s (%s): no mark, no head line', (seed, where) => {
-    expect(text(seed, where)).not.toMatch(/ordinary times|Stopped by the siege|Curtailed by the outbreak|Scarce in the famine|\((stopped|curtailed|scarce)\)/);
+    const out = text(seed, where);
+    for (const mark of MARKS) expectAbsentWithAnchor(out, mark, CALM_ROW[where], `${seed} ${where}`);
   }, 120000);
 });
