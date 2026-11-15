@@ -738,6 +738,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     nativeNearbyResources,
     depletedResources,
     institutions || [], // TAIL-DEFECON-C (C1-A): the made list asks this town's own houses
+    config?.terrainType || null, // TAIL-DEFECON-C-3 (D30 (b)): a gathered good asks the record's own exploitation
   );
   const instServices = deriveInstitutionalServices(institutions || []);
   const serviceExports = deriveServiceExports(instServices, goodsOnlyRefusedChainsMake(activeChainsList)); // COHERENCE-AGREE-8 (F2's fifth writer): the services ask the leaf too

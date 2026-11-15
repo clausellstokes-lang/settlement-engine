@@ -7,6 +7,12 @@
  *     (GOOD_WORKING_HOUSES, the one table the export steps read), not only for the outputs the export gates by a house:
  *     a brewing chain run by a Brewer lists no barrels without a Cooper; a Hunter's lodge makes no bows; a Weaver dyes
  *     no cloth; a Wayside shrine keeps no inn. (91 towns at 906ff0352; the made list alone moves.)
+ * (b) A GATHERED OR HERDED GOOD (medicinal herbs, animal hides, wool, timber, clay: a land's commodity that a resource
+ *     chain takes as its raw) is listed only where a house of the town works that chain, asked as the record's own
+ *     exploitation asks it (the chain's processing tags or processors; a chain the terrain does not allow is not
+ *     modelled, so not "unexploited"): the made list and `resourceAnalysis.exploitation` agree (D15). (123 towns at
+ *     ea788e17c, exactly the towns whose made list held a raw the record names unexploited; the made list alone moves.)
+ *     Coal and peat stay as designed (no chain takes them).
  *
  * Born as the census born its 720 (RECORD-MEASURE-1, `seedcfg.mjs`, both arms). Each GONE row was red at the base
  * (906ff0352) and names a good the town still makes; each KEEP row is the same good where its house stands, green
@@ -16,6 +22,10 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { madeListTerrainAllowsRaw } from '../../src/generators/computeActiveChains.js';
+import { terrainAllowsResource } from '../../src/generators/resourceGenerator.js';
+import { TERRAIN_DATA } from '../../src/data/geographyData.js';
+import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -58,6 +68,51 @@ const KEEP_A = [
   ['r2r-village-29', 'Bows and crossbows', 'Bowyer'],
   ['r2r-village-55', 'Dyed cloth', 'Dyer'],
 ];
+
+/** (b) (seed, the raw the record names unexploited, a good the town still makes) */
+const GONE_B = [
+  ['r2r-thorp-9', 'medicinal herbs', 'Honey and beeswax'],     // no apothecary, alchemist or healing house
+  ['r2r-thorp-14', 'wool', 'Honey and beeswax'],               // no weaver, fuller or dyer
+  ['r2r-thorp-14', 'animal hides', 'Honey and beeswax'],       // no tanner or leatherworker
+  ['r2r-village-18', 'timber', 'Preserved foods'],             // no sawmill or carpenters' guild
+  ['r2r-hamlet-18', 'clay', 'medicinal herbs'],                // no potter or brickmaker
+];
+/** (b) a town whose only good was such a raw: its list is empty, the Produced-locally row silent by design */
+const EMPTIED_B = [['r2r-thorp-0', 'medicinal herbs'], ['r2r-thorp-41', 'medicinal herbs']];
+/** (b) (seed, the raw, kept where a house of the town works its chain) */
+const KEEP_B = [
+  ['r2r-town-49', 'animal hides'],   // Tanners
+  ['r2r-town-15', 'clay'],           // a Potter and a Brickmaker
+  ['r2r-village-8', 'medicinal herbs'],
+  ['r2r-hamlet-48', 'wool'],
+  ['r2r-hamlet-12', 'timber'],
+];
+
+describe('D30 (b): a gathered or herded good is listed only where the record\'s exploitation works it', () => {
+  test.each(GONE_B)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {
+    const list = madeIn(seed);
+    expect(list).not.toContain(gone);
+    expect(list).toContain(still);
+  });
+  test.each(EMPTIED_B)('%s lists no "%s", and nothing else (silent by design)', (seed, gone) => {
+    expect(madeIn(seed)).toEqual([]);
+    expect(gone).toBeTruthy();
+  });
+  test.each(KEEP_B)('%s still lists "%s" (a house works its chain)', (seed, good) => {
+    expect(madeIn(seed)).toContain(good);
+  });
+});
+
+test('D30 (b): the made list\'s terrain check is the exploitation record\'s own, on every terrain and every chain raw', () => {
+  const raws = [...new Set(Object.values(RESOURCE_CHAINS).map((c) => String(/** @type {any} */ (c).rawResource)))];
+  let pairs = 0;
+  for (const [terrain, t] of Object.entries(TERRAIN_DATA)) for (const raw of raws) {
+    const allowed = /** @type {any} */ (t).allowedResources || [];
+    expect(madeListTerrainAllowsRaw(allowed, raw), `${terrain} / ${raw}`).toBe(terrainAllowsResource(allowed, raw));
+    pairs++;
+  }
+  expect(pairs).toBeGreaterThan(50);
+});
 
 describe('D30 (a): a made good is listed only where a house of the whole table makes or works it', () => {
   test.each(GONE_A)('%s lists no "%s"; it still makes "%s"', (seed, gone, still) => {

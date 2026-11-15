@@ -263,6 +263,8 @@ exports (`SURFACES=PDF,Journal`): 35,779 -> 35,784; gone 86, new 91 (almost all 
 
 ## What is left of this file's rows (HANDED BACK at the budget, 2026-11-15 ~01:25 UTC, by time: ~70 minutes)
 
+(UPDATED by TAIL-DEFECON-C-3, 2026-11-15: items 1 and 2 of the list below are DONE under D30, ea788e17c and
+6ce176aff: see the TAIL-DEFECON-C-3 section at the end, whose WHAT IS LEFT is the current one.)
 (UPDATED by TAIL-DEFECON-C-2: items 1 and 2 are DONE, a10a457e2 and e6700483b, and D25 at 28f86423c, above. The chair,
 02:10: no successor is seated for `computeActiveChains.js`. WHAT IS LEFT OF IT, widest first, each measured on the
 census's 720 at 28f86423c's record:
@@ -326,7 +328,8 @@ Same branch, same files. Worked to **D30** (the chair, 2026-11-15 02:31 UTC; vet
 
 | commit | what | record move (births-only field diff on the 720, over the commit before) |
 |---|---|---|
-| **(a)** (this commit) | `outputMadeHere` asks GOOD_WORKING_HOUSES for every good it names | 91 towns, ONE family: `economicState.localProduction`; no gain anywhere; no made list emptied |
+| **ea788e17c** (a) | `outputMadeHere` asks GOOD_WORKING_HOUSES for every good it names | 91 towns, ONE family: `economicState.localProduction`; no gain anywhere; no made list emptied |
+| **6ce176aff** (b) | a land's commodity that a resource chain takes as its raw is made only where a house works that chain, asked as the record's exploitation asks | 123 towns, ONE family: `economicState.localProduction`; 1 gain (read, true); 2 lists emptied (silent by design) |
 
 ### D30 (a)
 
@@ -349,12 +352,114 @@ Same branch, same files. Worked to **D30** (the chair, 2026-11-15 02:31 UTC; vet
   coherenceAgreeCures x2, urbanBandInstitutions G3/G5), the seventh re-keyed above. domain-strict, the type ratchet,
   eslint: exit 0. The golden master moves (the owner's door): not re-taken.
 
+### D30 (b)
+
+- Rule: in step 1 (the land), a commodity that a chain of `RESOURCE_CHAINS` takes as its `rawResource` is listed only
+  where a house of the town works one such chain, asked EXACTLY as `resourceGenerator.js :: evaluateInstitutions` asks
+  (`institutionSupportsChain`: a processing tag, or a processor by name; never custom content; the fabric rows count,
+  as they do there), and only among the chains the record MODELS there (the terrain allows the raw:
+  `terrainAllowsResource`). A commodity no chain takes (honey, dates, pottery, coal, peat, …) keeps the land's gate
+  alone: COAL AND PEAT stay as designed. The one call in `economicState.js` passes `config.terrainType`; a caller with
+  no roster (the world pulse) keeps the land's reading.
+- MEASURED BEFORE IT WAS BUILT, two ways. A rule asking only "is a house at the chain" moved 398 towns (herbs 302): the
+  record models the herb chain only on forest terrain, so in 256 towns elsewhere it never calls the herbs unexploited.
+  NOT built. The rule as built: **123 towns, exactly D15's set** (the lost goods equal, town by town, the made raws the
+  record names unexploited: 0 mismatches): medicinal herbs 46, animal hides 33, wool 29, timber 29, clay 5. ONE family.
+- ONE HOME, HELD BY A TEST: importing `terrainAllowsResource` would close an import cycle (resourceGenerator ->
+  economicGenerator -> economicState -> computeActiveChains; at the base these are acyclic, and `scripts/boot-smoke.mjs`
+  holds the chunk graph acyclic). So the eight lines and the synonyms are restated (`madeListTerrainAllowsRaw`) and a
+  test holds them equal to the original on every terrain and every chain raw (shown red by a plant that drops one
+  synonym, not committed). OWED to `resourceGenerator.js`'s seat: move the predicate to a domain leaf both read.
+- THE INHERITORS, read: "Structural timber" surfaces in r2s-insurgency-village-2 where "timber" left (the made list folds
+  the raw over its product): the mountain-timber harvest runs there by a Charcoal burner, a Carpenter stands: TRUE.
+  EMPTIED, silent by design: r2r-thorp-0 and r2r-thorp-41 (each listed only medicinal herbs; no apothecary, alchemist or
+  healer there).
+- SEEN, NOT CURED (the table names it not): "pottery", a land commodity of the river clay, in 5 towns with no potter or
+  brickmaker (r2r-thorp-27, r2r-hamlet-18, …): after (b) it stays where its clay left. Same class as the raw "flour",
+  "Baked goods", the textiles and the raw "glass" in (a)'s NAMED list.
+- Guard: the (b) blocks of `tailDefeconMadeListWhole.test.js` (5 GONE + 2 EMPTIED red at ea788e17c; 5 KEEP green before
+  and after; the terrain-check equality). RE-KEYED BY IDENTITY in `tailDefeconMadeList.test.js`: r2r-thorp-0's two C1-A
+  rows kept "medicinal herbs" as the sibling; its list is now empty (the rows assert that); r2r-hamlet-18's two rows kept
+  "clay" / "pottery": now "medicinal herbs" (its pottery has no potter, above). And `tradeListsThreeSurfaces.test.jsx`
+  "the local production …": its anchor was r2r-thorp-0's record listing local goods; it now lists none (both surfaces
+  print none, asserted), and the agreement claim moves to r2r-thorp-9.
+- Gates: the 48 focused files + the guard (816 tests): 6 red, 5 CARRIED (generatorGoldenMaster, worldFactRederive A7,
+  coherenceAgreeCures x2, urbanBandInstitutions G5; G3 passed this run), the sixth re-keyed above. domain-strict, the
+  type ratchet, eslint: exit 0. The golden master moves again (the owner's door): not re-taken.
+
+### THE PAGE (one census before at 906ff0352, one after at 6ce176aff: (a) + (b); tabs only, `CENSUS_RENDER=render.census2.jsx`)
+
+Both `census3.sh` runs exit 0; the after corpus equals the births-only record of 6ce176aff (0 towns moved).
+- **THE D30 CENSUS, "a good made with no house or land for it", printed** (the made list only; a good of the classes'
+  MAKER table with no maker house, coal and peat left out by design, OR a raw the record's exploitation names
+  unexploited; printed where the good's string is in the tabs, `pageprint.mjs`'s way): **232 towns -> 85** (record
+  279 -> 113). The 389 of D30's text was the classes' c1 printed at 358d6afea (both sides, coal and peat in); that
+  instrument at this base: **c1 printed 323 -> 298** (record 373 -> 327; the rest is the export side and coal/peat).
+- LEFT on the made list (towns on the record / printed), each a good GOOD_WORKING_HOUSES does not name or a reading
+  the classes' regex does not share: flour/bread 37/37 (the raw "flour" of the grain land and the mill site, "Baked
+  goods"), gems 37/35 (jewelry by Specialized metalworkers: the table's row; and the bundled gems below), textiles
+  17/16 ("Processed textiles", "Finished clothing", "Fine wool cloth"), glass 7/7 (the raw "glass"), education 37/3,
+  books 2/2. Each needs a table row (which gates the export too) or the data's holder: NAMED.
+- THE INVENTORY (`inventory_diff.py`): sentences 28,898 -> 28,903; gone 27, new 32, fewer 19, more 14, moved 2. Every
+  row but one is a PILL FOLD (the made list's pills fold into one token a town: "timberBarrels and containers"), and
+  every fold that is new or wider holds only goods the town's record still lists (the record lost goods and gained
+  one, read above). The one prose row: **"Produced locally" 657 -> 655**: r2r-village-57 and
+  r2s-mass_migration-hamlet-1 printed only "timber" and "Barrels and containers" (no cooper; timber where a Carpenter
+  alone stands and the record names the timber unexploited); what their records still list (herbs, coal) the row's
+  own filter does not print, so the row is silent: SILENT AND TRUE. The two emptied thorps (r2r-thorp-0, -41) did not
+  print the row before.
+- THE INHERITORS (48 folds, each one town to fourteen): all pill folds of goods still listed: 0 false inheritors.
+
+### The chair's doubted catalogue pairs (D31, the chair's note of 02:31: NAMED, not built here)
+
+Towns whose made list holds the good, the resource nearby, no other nearby resource giving the good, and no house that
+works it (this seat's regexes: a salt works; a mine, jeweller, gem cutter or assayer; an apothecary, alchemist, herbalist
+or healer; a weaver, textile house, fuller or tailor). The economy seat's own counts used other house tests, so the
+figures differ from its; the movement is the measure. Base 906ff0352 (record = printed) -> (a) -> (a)+(b):
+| pair | base | (a) | (a)+(b) |
+|---|---|---|---|
+| fishing grounds' salt | 21 | 21 | 21 |
+| a river fishery's salt | 42 | 42 | 42 |
+| precious metals' gems | 17 | 17 | 17 |
+| hot springs' medicinal herbs | 31 | 31 | **26** |
+| river mills' processed textiles | 14 | 14 | 14 |
+WHY THE GATES DO NOT SILENCE THE SALTS AND THE GEMS: the land gate is per RESOURCE, not per commodity. One house that
+works the resource admits its whole commodity list: a Fish market, Fisher's landing, Fishing community, River ferry or
+Docks admits the river fishery's bundled salt (42); a Smelter admits precious metals' bundled gems (12 of 17 by a
+Smelter). (b) asks a chain for a raw, and no chain takes "salt", "gems" or "processed textiles" as its raw, so it
+leaves them. THE HOT SPRINGS' HERBS ARE THE CASE TO REPORT: they pass the land gate (the hot springs have no gate) on the
+doubted pair alone, and (b) silences only the 5 on forest terrain, where the record models the herb chain; 26 still
+print. No exclusion list is built here (D31): the data's holder cures the pairs.
+
 ### What is left (D30)
 
-1. **(b) THE GATHERED AND HERDED GOODS**: next, measured in a scratch tree before its build. The record's exploitation
-   lists a chain only where the TERRAIN allows its raw (`resourceGenerator.js :: evaluateEconomicActivity`): a rule that
-   asks only "is a house at the chain" moves 398 towns (herbs 302: all but the 46 forest towns are herbs the record
-   never calls unexploited). The cure must ask the record's own activation (the terrain), narrowing to D15's 123.
-2. THE PAGE: one census before (906ff0352, tabs only) and one after both parts.
+1. (b): DONE (this commit).
+2. THE PAGE: DONE (above): 232 -> 85 towns printing a made good with no house or worked land.
 3. NAMED, not built (D30): the chain-processor class (a Cooper's "Ale/Beer (barrel)"); the crisis export rows (09013,
-   09282); the goods the table does not name (above); coal and peat (by design).
+   09282); the goods the table does not name (flour/bread 37, textiles 16, glass 7 printed: a table row gates the
+   export too; pottery 5); coal and peat (by design).
+4. NAMED for other seats: the doubted catalogue pairs (D31, above: river-fishery salt 42, fishing-grounds salt 21,
+   hot springs' herbs 26, precious metals' gems 17, river mills' textiles 14: the data's holder); ONE LEAF for the
+   exploitation's terrain check (`resourceGenerator.js`'s seat; held equal by a test meanwhile);
+   `resourceDynamicsKernel.js:575` (the world pulse re-derives the made list with no roster and no terrain: (a)'s and
+   (b)'s gates are off there until the next birth; pass `settlement.institutions` and the terrain).
+5. REGISTERS NAMED STALE (re-derived at the close): the golden master (the owner's door); the presumed-things register
+   as at the base (fresh 148, first-register stale 2: no rise; 6ce176aff); the twelve-birth grid's 2 falls as at the
+   base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a).
+
+6. NAMED TO THIS FILE BY THE CHAIR at 03:17 (from the economy seat's hand-back, `lane/tail-defecon-2026-11-14`,
+   TAIL-DEFECON-HANDBACK.md, "the fish chains' goods …" and item 2 of its WHAT IS LEFT). NOT D30's gate, so after it, by
+   width; NOT BEGUN (they arrived at this seat's hand-back):
+   - **B14842 "Pilgrim hospitality"** (written in `deriveExportsFromChains`, ~line 743 then): false in 27 of the 83 towns
+     that print it, no house of pilgrimage (a shrine, relic site, temple, cathedral, abbey or monastery). C1-E gates it
+     by an inn or its kin (GOOD_WORKING_HOUSES), not by the pilgrimage, so it wants a second key on the same row. It is
+     an EXPORT move: measure the primaryExports and income families first. More than ten towns means one line to the
+     chair before the push.
+   - **(C) the fish chains' goods under a fish famine** (22820 11, 10282 10, 22836 9, 22837 8, 22847 3, 10284 3, 22821 2,
+     22838 1, 09012 1) and **24992 the Brickmaker with no clay** (23): the chain display's rows (`activeChains`' outputs).
+     Find each reader first. Under a famine no line offers the food that failed. Item 6 of the C-2 list (the export
+     crisis rule, 09013) is the same famine law on the export side.
+
+HANDED BACK by TAIL-DEFECON-C-3 at 2026-11-15 ~03:20 UTC, both parts of D30 built and the page measured. The
+instruments as above; this seat's ad hoc scripts (the D30 census, the pair measure, the record-vs-exploitation check) are
+node over `corpus.ndjson.gz` and the dumps, not committed.
