@@ -1405,7 +1405,24 @@ its pins read 'Agricultural Rents' (now 'Harvest', D10) and 'Pilgrim Trade' (D14
 - The twelve-birth grid `page-census.mjs --grid`: 2 falls at both (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a).
 - K28: the chair's 05:45 word: the merge seat runs the door; closed without a change unless "THE DOOR STILL CRASHES".
 
+## The chair's seventh and eighth (after the joined line merged at 74688857c, the chair's named tip: e5f66a5f)
+
+- **Red 7, `tonightOwnGoal` (1): RE-KEYED BY IDENTITY, e4799144.** "toMatch() … got undefined" (line 67): Drusilla
+  Pacuvius is off rpf-city-succession_void+politically_fractured-13's sheet. Bisected from the test's landing (9618e031,
+  green): turned at **65dc92af9** (JOIN-4 · point 2, lane/upkeep-monotone at 0ca0bbe94, the defence rating's rebuild;
+  its merge declares its moves shift pins and LISTS them). The town is re-cast: its instigator is now Publicola Maximus,
+  who prints his card's own goal; the pin follows the role in the same town. Not goalFamilies.js. 1 failed of 7 -> 7/7.
+- **The eighth, `tailCrisisIronHooks` on r2r-hamlet-35 and -30: A PREMISE THE TWO TOWNS NO LONGER MEET (for the test
+  seat to re-key), not a hole in the cure.** Since **2ac50c55** (TAIL-DEFECON-3 D8, #20893, landed at 1b672cbe8, JOIN-7 ·
+  25) the iron hooks print only where the record's import list holds iron (`foodBalance.js`, `importHeld`); both hamlets
+  import only salt and incense (iron is a critical import by the roster, not an import held), so NO iron hook prints
+  there, neither the false words nor the reworded line (their stored hooks are empty). The same bisect reads the
+  branch's own weaker form red there since 1b672cbe8 (it stops at hamlet-35). No calm hamlet of the census prints
+  either line now; the nearest of the same shape: "Iron has doubled in price … mended with scrap." r2r-town-20 (and
+  r2r-town-48, then cities and metropolises, 18 in all); "What iron there is goes out in rations …" r2r-town-1 (and
+  r2r-town-45, 12 in all). The test file is not committed here (its branch carries the stronger form).
+- **K28:** closed without a change (the chair's 05:45: the merge seat runs the door).
+
 ## What is left (this seat)
 
-- The seventh red (`tonightOwnGoal`, after the joined line at 74688857c) and the eighth (`tailCrisisIronHooks` on
-  r2r-hamlet-35 and -30, the test seat's stronger form): next.
+- K26 (the slash label in the stake rows through `powerSentenceName`), only if the count allows; K27 stays parked.
