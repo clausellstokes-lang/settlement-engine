@@ -42,6 +42,25 @@ export const CONDITION_DEEDS = Object.freeze({
 });
 
 /**
+ * THE CONDITION FACTS THAT NAME A THING, DECLARED (TAIL-CONTENT-CLOSE-1, 2026-11-15; the round's law of a cure:
+ * a false sentence is cured where it is drawn, by its declaration). The trade fact names the market's stalls, so it
+ * NEEDS a market (`factsOf(record).market`); where none stands its TWIN tells the same event without one. Resolved
+ * where the summary is written (candidateEvents.js :: conditionFactOf, through drawDeclared.js :: resolveDeclared);
+ * a kind with no set here prints its `fact` as before. The twin carries no declaration: it is true with a market or
+ * without one, so an unanswered record (no settlement in the snapshot) prints it too (fail-closed).
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: (n: string) => string, needs?: ReadonlyArray<string>, twinOf?: string }>>>>}
+ */
+export const CONDITION_FACT_SIBLINGS = Object.freeze({
+  trade: Object.freeze([
+    Object.freeze({ text: CONDITION_DEEDS.trade.fact, needs: Object.freeze(['market']) }),
+    Object.freeze({
+      text: (/** @type {string} */ n) => `Caravans are passing ${n} by, and its traders have little to sell.`,
+      twinOf: 'Caravans are passing {settlement} by, and its market stalls stand half empty.',
+    }),
+  ]),
+});
+
+/**
  * An NPC's move AGAINST a named rival (npcAgency.js). Membership ALSO gates the rival consequence
  * there, so seek_promotion (which carries a rivalTarget only for rivalry tracking) neither names a
  * subject nor sets one back. `noun` is the deed as the body line names it (NPC_AIM_FRAMES).

@@ -1,0 +1,91 @@
+diff --git a/src/generators/narrativeGenerator.js b/src/generators/narrativeGenerator.js
+index 80a728bdb..800b38558 100644
+--- a/src/generators/narrativeGenerator.js
++++ b/src/generators/narrativeGenerator.js
+@@ -847,8 +847,14 @@ export const generatePressureSentence = settlement => {
+     if (Array.isArray(templates) && templates.length) {
+       // F1: a line that names walls, a garrison or soldiers the record lacks is not drawn.
+       // R-C (CENSUS-2d): a declared row gives back its text; the pick is over the same arrays.
+-      const licensed = templates.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0), pool = licensed.length ? licensed : templates, drawn = pickRandom2(pool), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted, at = pool.indexOf(drawn);
+-      const template = textOf(admitted(drawn) ? drawn : ([...pool.slice(at + 1), ...pool.slice(0, at)].find(admitted) ?? drawn)); // R2-CODE-A P1 (the chair's ruling (a)): a row's own `needs` are honoured after the one pick; a refused row resolves draw-free to the next admitted one
++      // TAIL-CONTENT-CLOSE-1 (2026-11-15): a TWIN row (`twinOf: <its original's text>`) is never drawn: it stands beside its
++      // original and is reached only where nothing in the pool is admitted (in place of keeping the refused original), so no
++      // roll moves and no town that printed a true row moves.
++      const isTwinRow = (/** @type {unknown} */ t) => !!t && typeof t === 'object' && typeof (/** @type {{twinOf?: unknown}} */ (t)).twinOf === 'string';
++      const twins = templates.filter(isTwinRow), drawable = twins.length ? templates.filter((t) => !isTwinRow(t)) : templates;
++      const licensed = drawable.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0), pool = licensed.length ? licensed : drawable, drawn = pickRandom2(pool), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted, at = pool.indexOf(drawn);
++      const twinOfDrawn = twins.find((t) => /** @type {{twinOf: string}} */ (t).twinOf === textOf(drawn) && admitted(t));
++      const template = textOf(admitted(drawn) ? drawn : ([...pool.slice(at + 1), ...pool.slice(0, at)].find(admitted) ?? twinOfDrawn ?? drawn)); // R2-CODE-A P1 (the chair's ruling (a)): a row's own `needs` are honoured after the one pick; a refused row resolves draw-free to the next admitted one
+       return typeof template === 'function' ? template(detail) : template;
+     }
+   }
+diff --git a/src/generators/narrativeText.js b/src/generators/narrativeText.js
+index cd0a4b63c..52778cb1c 100644
+--- a/src/generators/narrativeText.js
++++ b/src/generators/narrativeText.js
+@@ -242,6 +242,10 @@ export const PRESSURE_SENTENCES = {
+       ? [
+           { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
+           { text: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
++          // TAIL-CONTENT-CLOSE-1 (2026-11-15): the forges are named only where a smith stands; where no row of the pool is
++          // admitted, the same war is told without them (never drawn: narrativeGenerator.js reaches it by resolution only)
++          { text: `Being on the right side of it, ${r.name}'s ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`,
++            twinOf: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.` },
+           { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison', 'prosperity: ≥ comfortable'] }, // TAIL-NARRATIVE (01079): "prospering" needs a town the record calls comfortable or better
+         ]
+       : [
+diff --git a/tests/generators/wartimeForgesSmith.test.js b/tests/generators/wartimeForgesSmith.test.js
+new file mode 100644
+index 000000000..61ebe07a1
+--- /dev/null
++++ b/tests/generators/wartimeForgesSmith.test.js
+@@ -0,0 +1,49 @@
++/**
++ * THE WARTIME FORGES ARE NAMED ONLY WHERE A SMITH STANDS (TAIL-CONTENT-CLOSE-1, 2026-11-15).
++ *
++ * The wartime pressure line "Being on the right side of it keeps the forges of {town} running day and night …" declares
++ * `needs: ['institution: smith']`, yet printed in presume-town-25 (no smithy, no smith): where no row of the pool was
++ * admitted, the pressure sentence's draw kept the refused row. It now takes the row's declared twin (narrativeText.js,
++ * `twinOf`), which tells the same war without the forges and is never drawn (narrativeGenerator.js). The anchors are the
++ * pool's own rows at the town's own detail, never a literal sentence.
++ */
++import { beforeAll, describe, expect, it } from 'vitest';
++import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
++import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
++import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
++import { factsOf } from '../../src/domain/facts/factsOf.js';
++import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
++import { loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
++import { corpusConfig } from '../lint/presumedThings.shared.mjs';
++
++// the walker's own corpus (presumedThings.shared.mjs :: corpusConfig, its town seeds), where the false line was measured
++const SEEDS = Array.from({ length: 60 }, (_, i) => `presume-town-${i}`);
++
++/** the forges row's and its twin's heads (their text up to the commodity), at this town's own name @param {string} name */
++const forgesHeads = (name) => {
++  const CUT = '\u0000';
++  const rows = /** @type {any[]} */ (PRESSURE_SENTENCES.wartime({ name, commodity: CUT, compound: { militaryEffective: 99, economyOutput: 99 } }));
++  const twin = rows.find((r) => r && typeof r === 'object' && typeof r.twinOf === 'string');
++  return [String(twin.twinOf).split(CUT)[0], String(twin.text).split(CUT)[0]];
++};
++
++describe('the wartime pressure line names the forges only where a smith stands', () => {
++  beforeAll(async () => { await loadGenerationLawPayloads(); });
++
++  it('no town without a smith hears of its forges; the twin tells the war there', () => {
++    const seen = { twin: 0 };
++    // seed-loop: collected — every town is judged, and a red names each seed that printed the forges with no smith
++    const failures = collectSeedFailures(SEEDS, (seed) => {
++      const town = generateSettlementPipeline({ ...corpusConfig('town') }, null, { seed, customContent: {} });
++      const sentence = String(town.pressureSentence || '');
++      const [forges, twin] = forgesHeads(town.name);
++      if (!sentence.includes(forges) && !sentence.includes(twin)) return;
++      if (factsOf(town).hasInstitution('smith')) return;
++      seen.twin++;
++      expectAbsentWithAnchor(sentence, forges, twin, `${seed}: no smith`);
++    });
++    expectNoSeedFailures(failures, 'the forges line reads the smith');
++    // the arm is live: the measured town (presume-town-25) takes the twin
++    expect(seen.twin, 'no town without a smith reached the twin').toBeGreaterThan(0);
++  }, 120_000);
++});
