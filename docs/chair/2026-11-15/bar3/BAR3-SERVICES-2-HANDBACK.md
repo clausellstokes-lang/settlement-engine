@@ -72,8 +72,40 @@ eslint on the touched files: exit 0. Run alone, green at the tip: the pins above
 `servicesStructure`, `upkeepHired`, `upkeepVocation`, `proxyIsNotProvider`, `serviceCategoryRegistration`,
 `tailExportsPdf3Batch3`, `generationWorkerLazy`; the laws `factLayers`, `layerBoundaries`, `engineCoreLazyEdge`,
 `presumedThings`, `proseWiringCensus`, `writerReach`, `proseComposed`, `proseEntryContradiction`, `ruinFilterRoster`,
-`observedShapeReaders`. The census after this batch: to follow in the next push (the record does not move: a display
-cure).
+`observedShapeReaders`. The census after this batch: see "The inventory diff" below.
+
+### The inventory diff (batch 2: the merged tip 7a57fc34f -> 4bea333ad, the 720)
+
+Read whole (`inventory_diff.py before.json after2.json`): sentences 30032 -> 30033; gone 0; new 1; fewer 3; more 0.
+- NEW: "Curtailed by the siege." 0 -> 11 towns (the 21 house rows of SV7's measure). "Stopped by the siege." prints in no
+  fewer towns (every such town keeps it on other rows). THE INHERITORS: 0.
+- FEWER, NOT MINE: the pantheon panel's three lines ("Patron deity", "Assign a patron god to awaken the settlement's
+  religion layer.", "Upgrade to premiumAvailable at launch to author and assign deities.") 719 -> 716 towns: my one source
+  change is the crisis leaf, which that panel does not read, and no line inherits those towns: a render artifact of three
+  dumps, NAMED for the census's holder (a successor re-renders those three seeds to confirm).
+
+## THE BOOKS (amendments 2 and 10: my tip against 52f0a1684)
+
+Each file run ALONE through `gate-tail.sh` at my tip, every red file again alone at 52f0a1684 (a detached tree, its
+`node_modules` symlinked: `package-lock.json` identical):
+- (a) the files that pin a symbol I changed (`rowStoppedBy`, `STOPPED_WORD`, `ordinaryTimesLine`, `crisisMarkText`, the
+  mark pool; and my predecessor's 17): ALL GREEN at the tip (listed under batch 2's gates), the three pins re-keyed by
+  identity with a dated note (above).
+- (b) the law suites: green at the tip: `factLayers`, `layerBoundaries`, `engineCoreLazyEdge`, `presumedThings`,
+  `proseWiringCensus`, `writerReach`, `proseComposed`, `proseEntryContradiction`, `ruinFilterRoster`,
+  `observedShapeReaders`. RED AT BOTH TREES WITH THE SAME MESSAGE (the base's, not mine): `negativeAssertionAnchor.walker`
+  (2 failed, the same 5 offender rows: the bar2 files above), `seedLoopTotality.walker` (2 failed, the same 2 rows),
+  `proseDrawnAnchors.walker` (1 failed, `bar2CorpusGuards.test.js`), `mutationCoverageManifest` (1 failed, the same 9
+  base files). NOT RUN BY ME (budget): `rosterDuplicateDraws`, `hookThemeDraws`, `upkeepVocation` (run: green),
+  `pipelinePinnedMode` and `generationForkCensus` (golden-derived: red at the base on purpose, amendment 10),
+  `defenceFactReaders`, `noLegacyFactionReaders`, `siteCoherenceRatchet`, `tuningRegister`, `chainPrintSites`: my one
+  source change is a display leaf that adds no generator draw, no numeric constant, no faction, defence or chain-name
+  reader; a successor runs them alone at the tip first.
+- A LAW RED AT MY TIP ONLY: none.
+- THE BOOKS MY CURES MOVE: NONE. No stored figure moves (no golden, digest, count or register row): my batch changes only
+  `src/domain/display/crisisStoppedRow.js` (a display leaf no generator imports), so no record moves: 0 OF THE 525
+  REFERENCE CONFIGURATIONS (by construction: the generator tree is byte-identical to 52f0a1684 but for my predecessor's
+  `servicesGenerator.js` rows, which it measured at 0 of 525). The pins moved are guards of the line, re-keyed (above).
 
 ## Every new or changed line (THE VETO LIST)
 
@@ -83,14 +115,19 @@ cure).
 
 ## Left, in order (for a successor)
 
-1. SV7's census after-run and inventory diff (display only: the 21 house marks and nothing else should move).
-2. SV8 (the field work beyond the gates under a siege): measure first, town by town, against the record's own reading of
-   the siege.
-3. My predecessor's items 3 and 4 (r2s-plague_onset-thorp-2's fishery with no chain; the salt works on spent flats and the
-   mine on no ore ground).
-4. The coaching inn's "Lodging" siege twin ("the rooms stand mostly empty") under a house marked "Stopped by the siege."
-   (6 towns): the twin says the house goes on, thinly; a wording question, not measured further.
-5. THE BOOKS (amendments 2 and 10) at my last tip against 52f0a1684.
+1. SV8 (the chair's ruling: the field work beyond the gates under a siege: farmland 7, subsistence farming 11, charcoal
+   burner 6, mine 5, salt works 3, dairy farmer 3, woodcutter's camp 2, shepherd 2, beekeeper 1 siege towns, my
+   predecessor's `siegeworkers.mjs` counts): NOT STARTED (my budget). Measure first, town by town, against the record's
+   own reading of the siege (the food balance's grown share, `economicState.foodSecurity`; the resource's access; the
+   chain's state on `economicState.activeChains`); cure as declarations in `crisisDependence.js`, or STOP with the table.
+2. My predecessor's items 3 and 4 (r2s-plague_onset-thorp-2's depleted fishery with no chain; the salt works on spent
+   flats beside live fishing grounds and the mine on no ore ground).
+3. The coaching inn's "Lodging" siege twin ("the rooms stand mostly empty") under a house marked "Stopped by the siege."
+   (6 towns): the twin says the house goes on, thinly; a wording question for the chair, not measured further.
+4. The law suites not run by me (THE BOOKS, (b)), alone at the tip.
+5. NAMED FOR OTHER SEATS (my predecessor's, unchanged): C24313 (BAR3-PLACES), C33899 (BAR3-PEOPLE), "Fake relics ...
+   corrupt clergy" (`safetyProfile.js`'s holder), the market's "stall fee" line under a siege (the state-prose corpus's
+   holder).
 
 ## How the instruments are re-made
 
