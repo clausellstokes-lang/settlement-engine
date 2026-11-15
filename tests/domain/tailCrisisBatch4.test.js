@@ -6,6 +6,8 @@
  * print now, with what prints in its place; each KEEP pair a true sibling that prints at both.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../../src/domain/crisis/crisisPage.js';
 import { faithLinesOf, faithReadingOf } from '../../src/domain/dossier/faithReading.js';
 
@@ -67,13 +69,13 @@ const KEEP = [
 
 describe('TAIL-CRISIS batch 4: the stakes say what the record bears; a suppressed faith has no voice', () => {
   it('no FALSE words print, and the line the record bears prints in their place', () => {
-    for (const [seed, gone, instead] of FALSE) {
-      const text = page(birth(seed));
-      expect(text, seed).not.toContain(gone);
-      expect(text, seed).toContain(instead);
-    }
+    expectNoSeedFailures(collectSeedFailures(FALSE, ([seed, gone, instead]) => {
+      expectAbsentWithAnchor(page(birth(seed)), gone, instead, seed);
+    }), 'every FALSE row: the old words are gone and the line the record bears prints');
   }, 300000);
   it('every KEEP sibling still prints', () => {
-    for (const [seed, kept] of KEEP) expect(page(birth(seed)), seed).toContain(kept);
+    expectNoSeedFailures(collectSeedFailures(KEEP, ([seed, kept]) => {
+      expect(page(birth(seed)), seed).toContain(kept);
+    }), 'every KEEP sibling still prints');
   }, 300000);
 });
