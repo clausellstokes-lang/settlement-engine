@@ -7,6 +7,11 @@ Seat: TAIL-HOUSES (builder). Branch `lane/tail-houses-2026-11-14`, cut from the 
 - **(H1)** THE CRISIS CLASS IS NOT YOURS (a house's description of ordinary times printed under a siege, a plague or a famine): the SERVICES seat builds ONE leaf and one table for the Services and the Institutions tabs: you rewrite no description for a crisis: strike those rows as "the SERVICES seat's class" and list them in your hand-back with each house's catalogue id.
 - **(H2)** YOURS: the rows false in ordinary times: a house described with what the town lacks (sea charts in a town with no water; a vintner selling where no grapes reach him; markets "in every quarter" in a place with one), a description that contradicts the house's own chain state, a catalogue row whose size words the tier cannot hold, a chain printed "Running" that the record's own chain state denies.
 - **(H3)** A cure in src/data/institutionalCatalog.js that would change which houses a town is BORN with is a declared move of the record and a STOP: you cure descriptions and declarations, not the roster's draws. The record's own incoherence (a house the size cannot hold) is being measured by another seat: NAME what you meet.
+- **(H5)**, 2026-11-15 00:00-00:40 UTC: THE CRISIS-WORDED ROWS ARE THE LEAF'S (H1 stands: no text is rewritten for a crisis). The leaf is built and landed: `src/domain/display/crisisStoppedRow.js` with its table `src/data/crisisDependence.js` (services by name, houses by catalogue id, chains by chain id, income shares by source). THIS SEAT'S PART, by script, no cure: for each H1 candidate and each crisis row of X9, is the row's house (catalogue id) in the table for the crisis that makes the row false? IN THE TABLE: struck "answered by the leaf". NOT IN THE TABLE: the id, the crisis and the row, to the chair in ONE message (the services seat adds them).
+- **(H6)**: NO RESOURCE WORD IN THE VOCABULARY ("a chain's input reaches its house" is the record's own chain state: the leaf marks a house short of its input; a text claims the trade by the hedge form). The Vintner finding (184 of 184 without grapes) is passed to the record's seat. The hedged texts stay as they are.
+- **(H7)**: THE ORDINARY-TIMES ROWS, by shape, in batches: a house text naming a council, a guild rule or a charter the town does not have reads the record (a condition by an atom this branch holds, or a twin that claims no more than every printing town bears; `ruling body` and `rival power` are on other branches: a line that needs one is PARKED with its measure); a mine's or quarry's text over a depleted resource takes the hedge form; a text naming a citadel, a gate or a wall reads the defence, or takes a twin without it; a supply chain's output named where the chain does not run takes the hedge form.
+- **(H8)**: A CLASS BEING MEASURED, not this seat's to move: prose written before its facts are final (true when drawn, false because the record moved afterwards): such a row is NAMED with that reason.
+- **(X9)**: THE EXPORTS' READ, `docs/chair/2026-11-14/read-all-3/WORKLIST3-HOUSES.{md,json}` (98 rows only the PDF and the journal print), measured with `SURFACES=PDF,Journal python3 inventory.py <out-dir> x.json`. Order: H5's check first; then H7's rows by width; then what is left of X9.
 - BRIEF-TAIL's laws as written (silence is true; a twin for a mute state; no draw moved; one home for one fact; no new vocabulary word without the chair).
 
 ## Instruments (how they are re-made)
@@ -178,6 +183,125 @@ NOT TAKEN (gendered, not flagged, walker-bound): the Town crier ("his wage", bes
 - "Rings, necklaces, seals, and finery, worked from gold and gemstone. Orders are taken, stones appraised, and the occasional purchase from a discreet seller is not refused." (3 towns): r2r-town-14 (1,359), r2r-town-54 (2,451)
 - "One of the few here who can read and write: letters copied, plain contracts set down, documents read out for those who cannot. Usually schooled at a monastery, or by whoever here could teach." (prints in no census town)
 - "Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved." (45 towns): r2s-occupied-village-0 (85), r2s-recently_betrayed-village-2 (394)
+
+## TAIL-HOUSES-2 · H5: the crisis rows against the leaf's table (no cure)
+
+Seat: TAIL-HOUSES-2 (successor), on this branch from ac4710206, scratch worktree. THE CHECK, by script: each row's house by its text (`institutionalCatalog` + `INSTITUTION_DESC_VARIANTS` + `DESC_VARIANT_SIBLINGS`; the journal's `House: text` prefix; a chain row by `SUPPLY_CHAIN_NEEDS` id) -> `catalogIdForName` -> `HOUSE_DEPENDENCE` / `CHAIN_DEPENDENCE` of `src/data/crisisDependence.js` at the joined line 96b4015f4; the crisis is the reader's reason confirmed by the read-in town's record (`crisisOf(...).kinds`, the famine's `foodRecord.failedSource`; census at ac4710206); a row is ANSWERED where the dependence holds a word the crisis stops (siege: travellers, goods; outbreak: travellers, gatherings; famine: the failed food). The rows are 79 H1 candidates (the hand-back's table; the prompt's 81 counted two more that the table does not hold) and the 39 X9 rows whose reason names a crisis.
+
+### ANSWERED BY THE LEAF (struck: the house or chain is in the table for its crisis)
+
+| id | from | towns | key | crisis | sentence |
+|---|---|---|---|---|---|
+| 16646 | H1 | 8 | barge_and_river_transport_company | under_siege | River barges run in fleet, some to a schedule and some to order. |
+| 04601 | H1 | 8 | barge_and_river_transport_company | under_siege | Bulk freight, passengers, and army supply all move on them through the river network. |
+| B12717 | H1 | 177 | furs_north | under_siege | Mid-route settlements profit from the trade. |
+| 14115 | H1 | 84 | inns_and_taverns_district | under_siege | Multiple inn districts catering to merchants, travelers, and long-term visitors. |
+| B11971 | H1 | 71 | customs_house | under_siege | Levies duties on goods entering and leaving by the main roads. |
+| 17954 | H1 | 67 | inns_and_taverns_district | under_siege | Several inn districts, given over to merchants, travellers, and those who stay long. |
+| 09333 | H1 | 59 | major_annual_fairs | under_siege | Foreign traders attend, and credit by letter is taken. |
+| B15261 | H1 | 52 | coaching_inn | plague_onset | Purpose-built for road travellers: stabling for relay horses, scheduled coach departures,  |
+| B12169 | H1 | 49 | post_relay_station | under_siege | Maintains a team of horses for rapid message relay out of the coaching inn. |
+| 28847 | H1 | 43 | international_trade_center | under_siege | Where foreign merchant agents gather, trade disputes are arbitrated, and commodities chang |
+| B02335 | H1 | 42 | market_square | plague_onset | A broad open square given over to market days and fairs. |
+| 04663 | H1 | 41 | camel_caravan | under_siege | Camel Caravan Trade |
+| B06577 | H1 | 41 | subsistence_farming | famine | Each household farms just enough land to feed itself. |
+| B06932 | H1 | 41 | subsistence_farming | famine | Every household works just enough land to stay alive, and no more. |
+| 12702 | H1 | 36 | customs_house | under_siege | Levies charged on all trade in and out by road, collected by officials of crown or town. |
+| 11393 | H1 | 36 | international_trade_center | under_siege | Hub for international merchant representatives, trade arbitration, and commodity exchange. |
+| B06555 | H1 | 36 | customs_house | under_siege | Duties are taken here on goods passing along the main roads. |
+| 03172 | H1 | 33 | access_to_parish_church | under_siege | A walk of a few miles to the village house of worship for services. |
+| 21103 | H1 | 33 | access_to_parish_church | under_siege | The nearest house of worship is the village's, a walk of a few miles away for services. |
+| 17675 | H1 | 32 | access_to_parish_church | under_siege | Services mean a walk of a few miles to the village house of worship. |
+| B05738 | H1 | 32 | fish_market | famine | Covered stalls under the wardens' eye, selling the morning's catch or the week's salted ba |
+| B11640 | H1 | 31 | post_relay_station | under_siege | Keeps relay horses at the coaching inn for fast message riders. |
+| B13370 | H1 | 31 | fisher_s_landing | famine | Near water, it is the chief source of protein. |
+| B11969 | H1 | 28 | customs_house | under_siege | Levies charged on all trade in and out by road or harbour, collected by officials of crown |
+| 05276 | H1 | 23 | brewery | famine | Commercial brewing of ale and beer supplies the taverns and ships across the region, emplo |
+| 04797 | H1 | 20 | river_ferry | plague_onset | Carts, beasts and walkers wait their turn on the bank. |
+| B22199 | H1 | 20 | harbour_master_s_office | under_siege | Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforc |
+| 06937 | H1 | 18 | customs_house | under_siege | Duties are taken here on goods passing through the port or the main roads. |
+| 04796 | H1 | 17 | river_ferry | plague_onset | Carts, beasts and walkers wait their turn at the landing. |
+| 04423 | H1 | 17 | caravan_masters_exchange | under_siege | Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resoluti |
+| 04683 | H1 | 12 | caravan_trade | plague_onset | Caravan & Overland TradeTrade & entrepôt✓ Running |
+| 13412 | H1 | 8 | annual_fair | plague_onset | Merchants from across the region, and luxuries to be had. |
+| B02702 | H1 | 8 | travelers_inn | plague_onset | A lone inn catering to whoever the road brings: merchants, pilgrims, travellers. |
+| B03102 | H1 | 7 | weekly_market | plague_onset | A weekly sale of local goods. |
+| 22419 | H1 | 6 | travelers_inn | under_siege | The village's # inn for the traders, pilgrims, and wayfarers who pass. |
+| 02485 | H1 | 5 | stable_yard | under_siege | A common stable for travellers to lodge their mounts; the stableman sees to basic shoeing  |
+| B27818 | H1 | 5 | caravanserai | under_siege | Where caravans come, it is the desert settlement's economic heart. |
+| 23217 | H1 | 3 | caravaneer_s_post | under_siege | Traders enrol their goods, hire escorts, and strike joint ventures. |
+| 12766 | H1 | 2 | wayside_inn | under_siege | Lodging above the stable and a common table for passing travellers. |
+| 14229 | X9 | 84 | inns_and_taverns_district | under_siege | Inns and taverns (district): Multiple inn districts catering to merchants, travelers, and  |
+| 16007 | X9 | 63 | major_annual_fairs | under_siege | Major annual fairs: Merchants from abroad. |
+| 16005 | X9 | 59 | major_annual_fairs | plague_onset | Major annual fairs: Foreign traders attend, and credit by letter is taken. |
+| 06909 | X9 | 56 | coaching_inn | plague_onset | Coaching inn: Built for the road: relay stabling, coaches on a schedule, meals at set hour |
+| 16006 | X9 | 55 | major_annual_fairs | plague_onset | Major annual fairs: International merchants. |
+| 06286 | X9 | 54 | caravan_trade | plague_onset | Caravan masters' exchange » Overland cargo transport, Escorted caravan, Pack animal hire |
+| 06910 | X9 | 52 | coaching_inn | under_siege | Coaching inn: Purpose-built for road travellers: stabling for relay horses, scheduled coac |
+| 11342 | X9 | 46 | grain, brewing, food_processing | famine | Grain fields » Bakers + Butchers » Baked goods, Preserved foods |
+| 16266 | X9 | 42 | market_square | plague_onset | Market square: A broad open square given over to market days and fairs. |
+| 04157 | X9 | 33 | access_to_parish_church | under_siege | Access to a house of worship: The nearest house of worship is the village's, a walk of a f |
+| 10228 | X9 | 32 | fish_market | famine | Fish market: Covered stalls under the wardens' eye, selling the morning's catch or the wee |
+| 14320 | X9 | 21 | international_trade_center | under_siege | International trade center: A centre for overseas trade representatives, the settling of c |
+| 29533 | X9 | 8 | travelers_inn | plague_onset | Travelers' inn: A lone inn catering to whoever the road brings: merchants, pilgrims, trave |
+| 04705 | X9 | 8 | annual_fair | plague_onset | Annual fair: Merchants from across the region, and luxuries to be had. |
+| 29535 | X9 | 6 | travelers_inn | under_siege | Travelers' inn: The village's # inn for the traders, pilgrims, and wayfarers who pass. |
+| 06309 | X9 | 3 | caravan_trade | under_siege | Caravanserai + Carriers' guild » Overland cargo transport, Escorted caravan, Pack animal h |
+| 19207 | X9 | 2 | mountain_pass_trade | under_siege | Mountain Pass » Customs house » Strategic control, Trade access fees |
+
+14115 also carries an ordinary-times reason (inn DISTRICTS in a city of 2,679): left with the size class (H2).
+
+### NOT IN THE TABLE (sent to the chair for the services seat; the dependence the reason names in brackets)
+
+| id | from | towns | key (its line now) | crisis | sentence | reason |
+|---|---|---|---|---|---|---|
+| B17254 | H1 | 87 | apothecary_district (NONE) | under_siege | Some focus on chirurgery, others on herbal preparations, others on imported medi | goods (imported medicines) |
+| 05285 | H1 | 83 | brewery (food: grain) | under_siege | Commercial-scale ale and beer production supplying taverns and regional distribu | goods (regional distribution) |
+| 15651 | H1 | 82 | multiple_market_squares (NONE) | under_siege | Permanent markets in more than # square, each serving its own #. | doubtful: markets stand inside the walls |
+| B02399 | H1 | 71 | apothecary_district (NONE) | under_siege | A cluster of apothecaries pressed close enough that competition drives them apar | goods (imported medicines) |
+| B00206 | H1 | 66 | apothecary_district (NONE) | under_siege | # leans to chirurgery, another to herbal preparations, a # to imported medicines | goods (imported medicines) |
+| B17798 | H1 | 65 | bowyers_fletchers_guild (NONE) | under_siege | Supplies the watch, the garrison, and the caravans. | goods/travellers (the caravans) |
+| B21481 | H1 | 62 | bowyers_fletchers_guild (NONE) | under_siege | The watch, the garrison, and the caravans buy here. | goods/travellers (the caravans) |
+| 16857 | H1 | 58 | fish_market (food: fish) | under_siege | Salted, smoked and dried fish come in by cart, sold by weight and inspected for  | goods (fish carted in) |
+| B09671 | H1 | 54 | bowyers_fletchers_guild (NONE) | under_siege | Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and | goods/travellers (the caravans) |
+| 17955 | H1 | 50 | city_granaries (NONE) | under_siege | Several large grain stores feed the city between them. | doubtful: stores within |
+| 06002 | H1 | 49 | fish_market (food: fish) | under_siege | Covered stalls under the wardens' eye, selling salt fish and dried fish carted i | goods (fish carted in) |
+| 21670 | H1 | 46 | great_cathedral (NONE) | under_siege | The region's chief religious authority sits here, and the faithful travel to it. | travellers (the faithful travel to it) |
+| 18556 | H1 | 43 | daily_markets (NONE) | plague_onset | Standing markets in more than #, open every day. | gatherings (plague); siege doubtful |
+| B04464 | H1 | 42 | cemetery_network (NONE) | under_siege | Burial has left the walls: grounds beyond every gate, each with its road and its | travellers (grounds beyond every gate) |
+| B20720 | H1 | 40 | burial_ground (NONE) | under_siege | The rite waits for a priest passing through; the burial does not. | travellers (a priest passing through) |
+| 15650 | H1 | 37 | daily_markets (NONE) | under_siege | Permanent market activity in multiple locations. | gatherings (plague); siege doubtful |
+| B04463 | H1 | 34 | cemetery_network (NONE) | under_siege | Burial has left the walls entirely: grounds beyond every gate, each with its own | travellers (grounds beyond every gate) |
+| 16534 | H1 | 33 | chroniclers_exchange (NONE) | under_siege | Reports arrive from several roads and are checked against each other before anyt | travellers (reports by road) |
+| 04579 | H1 | 30 | stone_quarry (NONE) | under_siege | Building stone from here has gone to every part of the region. | goods (stone sent out) |
+| 07216 | H1 | 18 | bowyers_fletchers_guild (NONE) | under_siege | Enough to resupply the caravans and outfit their guards. | goods/travellers (the caravans) |
+| B02583 | H1 | 13 | carriers_guild (goods) | plague_onset | A guild of professional carters, teamsters, and pack-animal drivers who move goo | travellers (carriers on the road) |
+| B09887 | H1 | 7 | shipyard (NONE) | under_siege | Here large merchant and war vessels are built at city scale, across multiple dry | goods (timber imports) |
+| B15590 | H1 | 7 | maltster (food: grain) | under_siege | Requires grain surplus. | goods (grain brought in) |
+| B03247 | H1 | 7 | cartographer_s_workshop (NONE) | under_siege | Adventurers, merchants, and army scouts all stop here. | travellers |
+| 17650 | H1 | 6 | hunter_s_lodge (food: game) | under_siege | Sends out hunting parties over the surrounding country and brings venison, pelts | travellers (parties out over the country) |
+| B13214 | H1 | 5 | periodic_market (NONE) | plague_onset | Monthly or seasonal trading day. | gatherings |
+| 14145 | H1 | 3 | hunter_s_lodge (food: game) | under_siege | Musters hunting parties across the lands about the settlement, selling venison,  | travellers (parties out over the country) |
+| 16376 | X9 | 67 | (not a leaf row) (NONE) | famine | Medium - agricultural heartland, but exposed to raids | not a row the leaf reads (terrain / resource-chain / export line) |
+| 25093 | X9 | 67 | (not a leaf row) (NONE) | famine | Strategic value: Medium - agricultural heartland, but exposed to raids | not a row the leaf reads (terrain / resource-chain / export line) |
+| 29823 | X9 | 54 | vintner (NONE) | under_siege | Vintner: Wine pressed and matured, from local fruit or imported must, sold in bu | NOT A CRISIS ROW: the grape gap (batch 1 text) |
+| 07705 | X9 | 43 | daily_markets (NONE) | plague_onset | Daily markets: Standing markets in more than #, open every day. | gatherings (plague); siege doubtful |
+| 06456 | X9 | 42 | cemetery_network (NONE) | under_siege | Cemetery network: Burial has left the walls: grounds beyond every gate, each wit | travellers (grounds beyond every gate) |
+| 07706 | X9 | 40 | daily_markets (NONE) | plague_onset | Daily markets: Trade that never closes, spread across several sites. | gatherings (plague); siege doubtful |
+| 06455 | X9 | 34 | cemetery_network (NONE) | under_siege | Cemetery network: Burial has left the walls entirely: grounds beyond every gate, | travellers (grounds beyond every gate) |
+| 16297 | X9 | 12 | reed_marsh (NONE) | famine | Marshlands » Subsistence farming » Honey and beeswax, Foraged goods | NOT A CRISIS ROW: the foraging chain state |
+| 29353 | X9 | 11 | town_council (NONE) | plague_onset | Town council: Where nothing official exists, the town's notable men gather and g | NOT A CRISIS ROW: governance (H7) |
+| 13074 | X9 | 6 | hunter_s_lodge (food: game) | under_siege | Hunter's lodge: Sends out hunting parties over the surrounding country and bring | travellers (parties out over the country) |
+| 21555 | X9 | 5 | periodic_market (NONE) | plague_onset | Periodic market: Monthly or seasonal trading day. | gatherings |
+| 13072 | X9 | 3 | hunter_s_lodge (food: game) | under_siege | Hunter's lodge: Musters hunting parties across the lands about the settlement, s | travellers (parties out over the country) |
+| 14635 | X9 | 2 | (not a leaf row) (NONE) | under_siege | It sends out medicines, restorative treatments, mineral salts and lumber. | not a row the leaf reads (terrain / resource-chain / export line) |
+| 09159 | X9 | 1 | (not a leaf row) (NONE) | famine | Exports: Milled flour, Fulled cloth, Roof tiles, Luxury manufactured goods, Fine | not a row the leaf reads (terrain / resource-chain / export line) |
+
+### NO CRISIS THE LEAF READS (the reason is an occupation or a legitimacy crisis; kept for H7 governance, not the leaf's)
+
+B14388 (city_administration, r2s-occupied-city-2), B03373 (city_administration, r2s-occupied-city-3), 03031 (village_headman, r2s-insurgency-hamlet-0), 02668 (merchant_oligarchy, r2s-occupied-metropolis-3), 20701 (guild_consortium, r2s-occupied-metropolis-0), 00186 (household_elder, r2s-plague_onset-thorp-2), 14950 (household_elder, r2s-plague_onset-thorp-2), B05076 (head_of_household_consensus, r2r-thorp-24), 03077 (message_network_high_magic, r2s-occupied-metropolis-0), 14953 (village_headman, r2s-recently_betrayed-hamlet-2), B02540 (informal_elder_consensus, r2s-occupied-hamlet-2), 03033 (village_headman, r2r-hamlet-24), 03522 (town_council, r2s-occupied-town-0), 15808 (terrain line, r2r-thorp-45), 25089 (terrain line, r2r-thorp-45), 06454 (cemetery_network, r2s-occupied-metropolis-1), 16377 (terrain line, r2s-occupied-hamlet-1), 16785 (merchant_oligarchy, r2s-occupied-town-1), 15809 (terrain line, r2r-thorp-41), 25090 (terrain line, r2r-thorp-41), 14179 (informal_elder_consensus, r2s-occupied-hamlet-2)
+
+The four terrain lines "difficult to besiege" (15808, 25089, 15809, 25090) and "controls caravan routes" (16377) are geographyData strengths, not leaf rows: left with X9. "Fresh meat: Beef, pork, mutton." and "Fresh bread: Daily bread." (named in the prompt's X9) are NOT rows of WORKLIST3-HOUSES (98 rows, none of them): another group's (the services' menu), not checked here.
 
 ## Rows NOT cured (what is left, by class)
 
