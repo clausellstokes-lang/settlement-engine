@@ -423,3 +423,127 @@ thin" beside a Safe label (6) with B02757 (11); B02464 (58, a size-true twin); t
 (their text in data/powerSiblings.js: the chair's word on the file first); the one-member council's plural lines (P21,
 the hold lifted: merge the joined line at d817736d8, re-take BEFORE there). The scratch trees are this container's
 only: re-make the instruments as above.
+
+---
+
+# TAIL-POWERS-4 · the fourth seat (session_01ACmDYXF2rc56G4cPvXrn2b), kept current after every batch
+
+Base: this branch at **a207c871b** (read back from origin; TAIL-POWERS-3's close). Scratch worktrees outside the
+repository (`cen` the BEFORE census at the base, `cen2` the AFTER at e046a2ac4, `wt` the edits); local branch `tp4-b`,
+pushed by explicit refspec; the main checkout untouched. No merge made (no row of this seat's needed `ruling body`).
+
+## The chair's rulings since (2026-11-15; each vetoable by the owner), copied
+- (P26, 02:42 UTC) THE TWO TABLES `FACTION_DESC_SIBLINGS` AND `BASELINE_CONFLICT_SIBLINGS` of src/data/powerSiblings.js
+  are LENT to this seat (the sibling tables its files read); the rest of that file is the ties seat's and is not touched.
+- (P27) THE ORDER, BY WIDTH as WHAT IS LEFT lists it: B02464 (58: the false core is the small thorp: a size-true twin);
+  21207 (49: verify first); 07269 (45); P25's 23160 (37, in the lent table) with its three small kin; 23333 (34), 04923
+  (32), 03509 (31); the vignettes' 05663 (27), 15434 (21); 21621 (24); 20987 / 00170 (20 + 20); then down to 13 towns.
+  The monster rung's "stretched thin" under a Safe label (11 towns, 6 Safe or Very Safe) goes with B02757. A row printing
+  in fewer than five towns waits (the military family's seven single rows wait: they need the final roster at a step
+  that does not have it: NAMED). P20 STANDS. `ruling body` is safe at every step and takes new lines (the joined line at
+  d817736d8 holds it: the only merge). Not to be keyed on: the seat's capture state, its legitimacy crisis note.
+- (U1) The account's weekly usage warning is on: commit and push every batch the moment it holds; WHAT IS LEFT current
+  in the same push; hand back at 250,000 or about seventy minutes; one line to the chair at the hand-back only.
+
+## How the two batches were measured (the first seat's declared efficiency)
+Batch 1 moves `powerStructure.recentConflict` (and its reader `pressureSentence`), batch 2 `powerStructure.factions[].desc`:
+disjoint, so ONE census before (a207c871b, `runs/before`, exit 0) and ONE after (e046a2ac4, `runs/after`, exit 0), the
+inventory diff read once per batch's rows. FIELD DIFF (the 720, both batches): towns 109, families 3:
+`powerStructure.recentConflict` 64 (batch 1: 23 thorps + 6 small estates + 11 monster + 24 revolt), `pressureSentence` 22
+(its reader), `powerStructure.factions[].desc` 53 (batch 2). Nothing else moved.
+
+## Batch 1 · 160c99790 · a conflict line claims what the place bears (governanceNarrative.js; the lent BASELINE table)
+Verified by the record (the 720 at the base): B02464 prints in 58 (thorp 23, hamlet 20, village 15; thorps hold 6 to 30
+souls); 20987 / 00170 in 20 (hamlet 3, village 3: "three estates" in places of 42 to 291); the monster rung's military
+line in 11 (no monster raid in any PAST; its order label Safe or Very Safe in 6: "The militia is present and responsive");
+21621 in 24 (4 a size; thorps and hamlets have no streets).
+- B02464: a declared sibling set (needs `tier: ≥ hamlet`), twin "... and those on each side of it no longer speak to one
+  another." The site's facts now carry the tier (`factsOf({ institutions, tier })`; no other set reads it). 58 -> 35 (the
+  23 thorps), inherited town for town by the twin.
+- 20987 / 00170 (+ "The families that lost them have not forgotten."): a declared set (needs `tier: ≥ town`), twin "A
+  merchant has bought land the old landholding family once held, and the family has not forgotten." 20 -> 14 (the 6).
+- B02757 and "stretched thin": the military line reworded: "Monsters prowl near the outlying farms, and no one here can
+  agree whether to raise a levy or pay others to drive them off." 11 -> 0 (with the 7 seat variants of "The <force> is
+  stretched thin and <seat> cannot agree ..."). A first wording ("hire mercenaries against them") rose the presumed-things
+  walker by 1 (the word `mercenary`, a NEW line, not bankable): reworded before commit.
+- 21621: "parts of the settlement are contested" (every size): 24 -> 0, inherited by the new wording 24.
+Guard: tests/generators/power/tailPowers4Batch1.test.js (8 pairs red at the base, 3 KEEP green). Pin re-keyed by
+identity: tests/generators/coherenceRepairPass.test.js "repairs defense before power prose" (the military branch's new
+words; green at base and tip). Registers: the 3 presumed-things rows the cure left stale (streets 75da3dc0, garrison and
+mercenary 664e6208) removed by the door's own `--shrink` (shrink-only; nothing banked).
+
+## Batch 2 · e046a2ac4 · the seat's own line; "all ecclesiastical" only under the church's seat (rulingStructure.js)
+No line added (P20: 799 of 799).
+- 03509: the town body "Town Council" over another seat (Arcane 4, Military 5, Church 6, Merchant 6, Corrupt 4 of the 31)
+  printed the council's "merchants, guilds, and prominent families compete for seats" as the governing line: the seat's
+  own line of the existing tables prints. 31 -> 6 (the 6 left: a Town Council seat). Inherited: "Clergy hold substantial
+  political authority ..." +6, "Merchant interests dominate the council ..." +6, "Military commanders hold direct
+  political authority ..." +5, "The governing body is systematically compromised ..." +4, "Mages govern ..." +4: each the
+  seat's own, read where it prints.
+- 04923: "tithes, land, and courts are all ecclesiastical" needs an Ecclesiastical seat (Theocratic and Church Councils
+  take their own rungs above it); else the ladder's next existing line. 32 -> 3 (the 3 left: an Ecclesiastical Council).
+  Inherited: "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments
+  carries decisive weight." +29 (a church of 25 and over, Significant or Strong, under a crown, a duke, a guild or a
+  city-state: its existing condition). A first try REWORDED the line (no condition): the walker read its "clergy" as a
+  fresh presumption: reverted before commit.
+Guard: tests/generators/power/tailPowers4Batch2.test.js (6 pairs red at the base, 3 KEEP green).
+Silenced elsewhere (both batches): none. "Patron deity" and its two premium lines 717 -> 716 (r2r-thorp-3, the first town
+of a render worker: the render race TAIL-POWERS-3 named; its record moved only in recentConflict).
+
+## The gates (base a207c871b against the tip e046a2ac4)
+eslint (touched files) 0; typecheck:domain:strict 0; typecheck:ratchet 0; the presumed-things walker --check: fresh 147,
+strips fresh 1 at the base and at the tip (no rise), stale 0 at the tip. The 71 test files naming the touched files: the
+base's reds CARRIED, the same at the tip (powerStateProseDesk 5a and ALIVENESS, the driven golden, the generator golden;
+mergeLadderHeldKeys A2 A5 A6, pipelinePinnedChoosers A1 A6, mundaneRealmAcceptance, proseNumerics, proseWiringCensus x3,
+editCorpusRatchet A3 A4 A7 A8: 18, named, not this seat's). The twelve-birth grid: 2 falls at the tip, the base's 2
+(r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a): no rise. Registers named stale: the goldens (as carried).
+
+## EVERY NEW OR CHANGED LINE (this seat; the owner's veto), with towns read
+- NEW (twin, B02464): "A dispute over grazing rights and water access has run for two seasons, and those on each side of
+  it no longer speak to one another." 23 thorps: r2r-thorp-37 (6 souls), r2r-thorp-4 (30), r2s-infiltrated-thorp-3 (a crisis).
+- NEW (twin, 20987/00170): "A merchant has bought land the old landholding family once held, and the family has not
+  forgotten." 6: r2r-hamlet-15 (42), r2r-village-6 (291); no crisis among the 6.
+- REWORDED (B02757): "Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay
+  others to drive them off." 11: r2r-hamlet-6 (57), r2s-infiltrated-metropolis-3 (33,900), r2s-infiltrated-village-3.
+- REWORDED (21621): "The rebels' buildings are marked, and parts of the settlement are contested." 24 (every one a slave
+  revolt): r2s-slave_revolt-thorp-1 (15), r2s-slave_revolt-metropolis-2 (127,443).
+- Batch 2 adds no line: its inheritors are the tables' existing lines (above).
+
+## Rows struck or named (this seat)
+- 21207 (49): STRUCK by P4's test: every printing town is an Elder Council with NO legitimacy crisis (the crisis half was
+  cured by the first seat). NAMED for the chair: 24 of the 49 read "Contested" legitimacy beside "people follow them out
+  of respect" (no ruling covers Contested).
+- 07269 (54 by record): 44 of the 54 print under a MINOR merchant power (P1: false of Minor); the cure is the claim
+  settler's (power/claimStanding.js :: settleClaimsToLabel, the first seat's P1 rung), the other seat's file: NAMED.
+- 23333 (42 by record): "Undermanned and underfunded; unable to enforce law consistently" beside a Fortress (21) or
+  Well-Defended (17) readiness: the line is drawn by the military PRIORITY before the defence profile; readiness reaches
+  only the replay. A cure wants the line reworded to the force's political weight (41 of 42 Suppressed or Minor) or the
+  replay's label: NOT built (P20; no time for its census).
+- FOUND, NOT A ROW (P3's class, the chair's call): rewriteFactionPhrasing (governanceNarrative.js) sets the bare seat
+  name for "the council" ("... and Elder Council cannot agree", "Household Council filed a formal protest"): 221 towns'
+  recentConflict at the base. The cure is the leaf's prose form with its article (`the ${powerSentenceName(seat)}`); a
+  reword in 221 towns, so told before it is built.
+
+## What is left of this seat's files (by width; towns PRINTING at e046a2ac4, the tabs; NOT verified unless said)
+- powerSiblings' lent tables: P25's 23160 (37: "Town watch; it enforces ordinances ... and reports to the council." under
+  a Feudal Appointee; FACTION_DESC_SIBLINGS, `watch` set) with 03038 (4), 22409 (2), B19180 (2): NOT VERIFIED.
+- rulingStructure.js (799 of 799): 07269 (named above), 23333 (named above), 02622 18, 06026 17, 02606 16 / 02559 15 (true
+  where they print), 18060 14, 16581 14, 03925 12, 11810 11, 17652 8; under five towns: wait.
+- governanceNarrative.js: 12720 80 (P22: not this seat's); B02464's 35 left (hamlets and villages: true by the size);
+  20987 / 00170's 14 left (towns and up); B13714 13; B00338 6 / B13657 2; 20963 2; the military family's singles (wait).
+- governingStressVignettes.js: 05663 27 (conscription's "farms and workshops are short-handed" in a thorp of 8 with no
+  workshop), 15434 21 ("two guild masters stayed away" with no guild), B21342 13, 22121 13, 15215 13, 21190 9.
+- governanceAccount.js: as TAIL-POWERS-3 left it (the styled-title rows are faceHonorifics', B's).
+- The one-member council's plural lines (P21, the hold lifted): merge the joined line at d817736d8 first.
+
+## How this seat's instruments are re-made
+As TAIL-POWERS-3's, plus (scratch, minutes): `idx.py <corpus> <out.pkl>` (per town: tier, population, stress, monster
+threat, stability, recentConflict, seat, legitimacy, each faction's name/label/power/desc, houses, readiness, PAST) and
+`fdiff.py <before corpus> <after corpus>` (every record flattened, array indices folded, towns per family). A red at the
+base is shown by copying the base's files over the edit tree (`git show HEAD:<f> > <f>`), running, and restoring from a
+tar of the tip's files; a census's tree is never touched while it runs.
+
+## Handed back (03:35 UTC, at the mark by time; the meter reads 0; the account's usage warning on)
+This seat stops after batch 2: a third batch needs a census of ~20 minutes that would end past the mark. The successor's
+order: P25's 23160 and kin (the lent table); 05663 and 15434 (the vignettes); 23333 (a reword to the force's weight); the
+221-town article fault, if the chair rules it in.
