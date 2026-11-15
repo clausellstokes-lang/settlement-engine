@@ -242,6 +242,10 @@ export const PRESSURE_SENTENCES = {
       ? [
           { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
           { text: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith'] },
+          // TAIL-CONTENT-CLOSE-1 (2026-11-15): the forges are named only where a smith stands; where no row of the pool is
+          // admitted, the same war is told without them (never drawn: narrativeGenerator.js reaches it by resolution only)
+          { text: `Being on the right side of it, ${r.name}'s ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.`,
+            twinOf: `Being on the right side of it keeps the forges of ${r.name} running day and night, and the ${r.commodity || "export"} trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it.` },
           { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison', 'prosperity: ≥ comfortable'] }, // TAIL-NARRATIVE (01079): "prospering" needs a town the record calls comfortable or better
         ]
       : [
