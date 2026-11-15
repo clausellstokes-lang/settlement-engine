@@ -39,7 +39,10 @@ const thieves = () => {
 const UNIT = /** @type {Array<[string, () => string, string, string]>} */ ([
   ['the army under a crown', () => settled('Royal Authority', ARMY), 'the council knows it', 'and the hall knows it.'],
   ['the nexus under a stewardship, no warehouse', () => settled('Feudal Stewardship', NEXUS), 'control warehousing', 'they set prices and fund the hall.'],
-  ['the nexus under a stewardship, a warehouse', () => settled('Feudal Stewardship', NEXUS, ['bonded warehouse']), 'fund the council', 'control warehousing, and fund the hall.'],
+  // TAIL-POWERS-B-5 (P33/P34), RE-KEYED BY IDENTITY: the warehouse is now joined by the catalogue's own ids (claimStanding.js ::
+  // WAREHOUSE_IDS, labelJoins.test.js), so the unit names a house the catalogue holds (the metropolis rung; was "bonded
+  // warehouse", a name no catalogue or birth holds: the 720 hold "Warehouse district" and "Merchant warehouses" only)
+  ['the nexus under a stewardship, a warehouse', () => settled('Feudal Stewardship', NEXUS, ['warehouse district']), 'fund the council', 'control warehousing, and fund the hall.'],
   ['the landowners under a governorship', () => settled('Noble Governorship', 'Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.'), 'the council works', 'the hall works alongside them'],
   ['council access under a mayor', () => settled('Town Mayor', 'Established merchant community; fund civic works and expect council access in return.'), 'council access', 'expect access to the hall in return.'],
   ['three level under a governorship', () => level('Noble Governorship'), 'every council vote', 'every decision has to be bargained for.'],

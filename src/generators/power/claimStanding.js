@@ -15,6 +15,8 @@
 // and its own ladder's lower rung takes its place: the line that ladder already prints for a power of that weight,
 // for this tier. No new words; no draw (the rungs are fixed lines).
 import { DEFENSE_BUCKET_KEYWORDS } from '../../domain/institutions/defenseInstitutionBuckets.js';
+import { INSTITUTION_FAMILIES, catalogIdForName, familyNamesByTier } from '../../data/institutionalCatalog.js';
+import { TAG } from '../../data/entityTags.js';
 
 const SMALL_TIERS = Object.freeze(['thorp', 'hamlet', 'village']);
 // POWERS-11 (REVIEW-POWERS-3 L2): a rung names no council, no merchant capital and no leading merchant its own roster
@@ -37,6 +39,15 @@ const SEAT_WORDS = Object.freeze([
   ['the council works alongside them, not over them.', 'the hall works alongside them, not over them.'],
   ['expect council access in return.', 'expect access to the hall in return.'],
 ]);
+/**
+ * THE WAREHOUSE BY THE CATALOGUE'S OWN IDS (TAIL-POWERS-B-5; the chair's P33/P34, vetoable by the owner: no new atom, the
+ * label written once): the catalog ids of every rung of the family the catalogue itself tags a warehouse (its "Warehouse
+ * district", whose town rung is "Merchant warehouses"), read from institutionalCatalog.js; a house stands one where its
+ * name's catalog id is among them (labelJoins.test.js: a presence check joins by catalog id, never by a label scan).
+ */
+const WAREHOUSE_IDS = new Set(INSTITUTION_FAMILIES
+  .filter((fam) => { const tags = fam.shared?.tags; return Array.isArray(tags) && tags.includes(TAG.WAREHOUSE); })
+  .flatMap((fam) => familyNamesByTier(fam).map(({ name }) => catalogIdForName(name))));
 /** The roster's merchant powers other than this one. @param {RungContext} ctx */
 const merchantsBeside = (ctx) => ctx.roster.filter((x) => x !== ctx.self && MERCHANT_POWER.test(String(x?.faction || '')));
 // POWERS-12 (REVIEW-POWERS-3 M1): a watch stands, read by the defence bucket's own words (the fact the ladder's watch
@@ -221,7 +232,7 @@ export function settleClaimsToLabel(factions, tier, instNames = [], legitimacy =
   const seat = factions.find((x) => x?.isGoverning);
   const arcaneSeat = seat?.category === 'magic';
   const seatRank = LABEL_RANK[String(seat?.powerLabel)] ?? -1;
-  const warehouse = instNames.some((n) => String(n).includes('warehouse'));
+  const warehouse = instNames.map((n) => catalogIdForName(n)).some((id) => WAREHOUSE_IDS.has(id));
   for (const f of factions) {
     if (typeof f?.desc !== 'string') continue;
     if (!seatIsCouncil(governing)) for (const [said, twin] of SEAT_WORDS) f.desc = f.desc.replace(said, twin);
