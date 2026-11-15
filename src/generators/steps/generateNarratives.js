@@ -59,10 +59,11 @@ registerStep('generateNarratives', {
   // MERGE-WAVE record 10 (the chair's ruling (a), 2026-11-09): the flag lives on the institution-presence record, `.inst`;
   // read at the top level it was undefined on every birth, so the docks were never read.
   const hasDocks = Boolean(getInstFlags(effectiveConfig, institutions).inst.hasPort);
+  const estate = { institutions }; // the institutions home's record shape (TAIL-CLOSE-SRC-3: its reader asked by a named record)
   const settlementReason = generateSettlementReason(
     tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed },
     economicViability?.metrics?.foodBalance || null,
-    { hasDocks, hasTravellerHouse: hasInstitution({ institutions }, 'tavern') }, // R2-CODE-A-4 (#154): an inn or a tavern serves travellers
+    { hasDocks, hasTravellerHouse: hasInstitution(estate, 'tavern') }, // R2-CODE-A-4 (#154): an inn or a tavern serves travellers
   );
   // Stamp the pipeline seed onto the config so generateHistory's prose-variant selection
   // (draw-free) is stable per settlement — effectiveConfig itself carries no _seed.
