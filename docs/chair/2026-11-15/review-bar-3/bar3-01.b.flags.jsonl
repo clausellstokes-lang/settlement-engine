@@ -1,0 +1,6 @@
+{"id":"C0013","town":"bar0-city-under_siege+famine-rand-6","sev":"MED","kind":"STATE","why":"Says the city lives on what comes out of the ground; INCOME is 60% smuggling, quarrying 1%, mining chain vulnerable (iron absent), grown food 8%.","other":""}
+{"id":"C0062","town":"bar0-city-under_siege+famine-rand-6","sev":"MED","kind":"PAIR","why":"'The seasons keep being profitable' under siege and famine; STATE prosperity Struggling, economic capacity Critical, trade under siege.","other":"C0026"}
+{"id":"C0297","town":"bar0-city-under_siege+famine-rand-6","sev":"LOW","kind":"STATE","why":"Butchers row offers 'Fresh meat' unmarked under famine (grown 8%, imports none, hunting grounds depleted) while bakers, mills and brewery carry a scarce mark.","other":"C0275"}
+{"id":"C0456","town":"bar0-city-under_siege+famine-rand-6","sev":"LOW","kind":"STATE","why":"Daily markets offers 'Fresh produce' unmarked under siege and famine (no cart in weeks, grown 8%, imports none).","other":"C0018"}
+{"id":"C2031","town":"bar0-city-under_siege+famine-rand-6","sev":"LOW","kind":"STATE","why":"Thecla Schäfer 'voted' against a council member; PEOPLE shows her sitting on no power or council ('In no power').","other":""}
+{"id":"DONE","lines":2339,"blocks":1,"flags":5}
