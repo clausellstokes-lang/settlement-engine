@@ -1,0 +1,146 @@
+[
+{
+"id": "C7553",
+"sev": "MED",
+"n": 40,
+"town": "bar0-city-under_siege+famine-rand-13",
+"section": "Systems/Power",
+"fold": "Holds the title; the decisions that matter are made by Religious Authorities.",
+"text": "Holds the title; the decisions that matter are made by Religious Authorities.",
+"why": "says City Council only holds the title and Religious Authorities make the decisions that matter; page says they have not yet moved to take the hall",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/dossier/powerStrata.js",
+"line": 491,
+"fn": "crisisNoteFor"
+}
+},
+{
+"id": "C21976",
+"sev": "MED",
+"n": 33,
+"town": "bar0-city-under_siege+famine-rand-19",
+"section": "World/NPCs",
+"fold": "Secret: Tells a band on the road which coaches carry money and when they leave",
+"text": "Secret: Tells a band on the road which coaches carry money and when they leave",
+"why": "Coaches 'leave' and a band on the road is tipped; under the siege no coach or traveller goes out and the inn is stopped",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 778,
+"fn": "ROWS"
+}
+},
+{
+"id": "C5398",
+"sev": "MED",
+"n": 8,
+"town": "bar0-city-under_siege+famine-rand-12",
+"section": "Systems/Power",
+"fold": "Senior clergy hold effective civic authority alongside elected aldermen; religious law shapes civil policy.",
+"text": "Senior clergy hold effective civic authority alongside elected aldermen; religious law shapes civil policy.",
+"why": "names 'elected aldermen' alongside the clergy; GOVERNMENT lists no elected body or aldermen, only the Ecclesiastical Council, Religious Authorities, War Council, Order of the Watch",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 349,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "C45570",
+"sev": "MED",
+"n": 7,
+"town": "bar0-city-wartime-rand-17",
+"section": "Systems/Power",
+"fold": "They operate in the shadow of Merchant oligarchy but not comfortably: they are waiting for a chance to push back.",
+"text": "They operate in the shadow of Merchant oligarchy but not comfortably: they are waiting for a chance to push back.",
+"why": "War Council 'waiting for a chance to push back' against Merchant oligarchy; QUARRELS has them symbiotic, stable, each needing the other",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 101,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "C47468",
+"sev": "MED",
+"n": 7,
+"town": "bar0-city-wartime-rand-18",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the watch commander and Lord Marshal.",
+"text": "Its seat is held by Manchu Hayashi, the watch commander and Lord Marshal.",
+"why": "'Lord Marshal' for Manchu Hayashi, who is (f) in PEOPLE; the title does not fit her sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 39,
+"fn": "OCCUPIED_SEAT"
+}
+},
+{
+"id": "C21481",
+"sev": "MED",
+"n": 6,
+"town": "bar0-city-under_siege+famine-rand-19",
+"section": "Systems/Power",
+"fold": "Arcane Council holds the seat and collects the taxes; Religious Authorities tell people that Arcane Council's rule is right and ordained.",
+"text": "Arcane Council holds the seat and collects the taxes; Religious Authorities tell people that Arcane Council's rule is right and ordained.",
+"why": "Arcane Council and Religious Authorities written as partners ('Each props up the other'); QUARRELS has them in open conflict over a council seat",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 362,
+"fn": "withConflictRelations"
+}
+},
+{
+"id": "C7390",
+"sev": "MED",
+"n": 6,
+"town": "bar0-city-under_siege+famine-rand-13",
+"section": "Systems/Power",
+"fold": "The seat<N>, the senior guild master and Lord Mayor",
+"text": "The seatChan Uc, the senior guild master and Lord Mayor",
+"why": "'Lord Mayor' for Chan Uc (f, senior guild master); GOVERNMENT lists no mayor, only City Council. Repeats at C07397",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/faceHonorifics.js",
+"line": 99,
+"fn": "FACE_HONORIFICS.the senior guild master"
+}
+},
+{
+"id": "C51168",
+"sev": "MED",
+"n": 0,
+"town": "bar0-city-wartime-rand-20",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy gives the orders and War Council carries them out; each needs the other to stay strong.",
+"text": "Merchant oligarchy gives the orders and War Council carries them out; each needs the other to stay strong.",
+"why": "Writes Merchant oligarchy and War Council as symbiotic partners; QUARRELS and tensions page give them a moderate conflict over a broken promise of support.",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 457,
+"fn": "computeFactionRelationships"
+}
+}
+]

@@ -1,0 +1,182 @@
+[
+{
+"id": "C9827",
+"sev": "MED",
+"n": 418,
+"town": "bar0-city-wartime-rand-7",
+"section": "Systems/Power",
+"fold": "↳# member",
+"text": "↳1 member",
+"why": "The Trade Compact shown with 1 member; PEOPLE seats five on it (Sigyn, Gudmund, Asa, Kolfinna Rognvaldsson, Lofn)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C12975",
+"sev": "MED",
+"n": 373,
+"town": "bar0-hamlet-calm-rand-7",
+"section": "Summary/Foundations",
+"fold": "Healing capacityAdequate",
+"text": "Healing capacityAdequate",
+"why": "Healing capacity printed Adequate, but Medical Readiness is None and no healer is kept here",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C18609",
+"sev": "MED",
+"n": 195,
+"town": "bar0-metropolis-calm-rand-7",
+"section": "Summary/Overview",
+"fold": "Integral",
+"text": "Integral",
+"why": "Reliance on magic Integral, yet magic is low, food made by magic 0%, Arcane Orders Suppressed, Magical Capability Weak",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C10849",
+"sev": "MED",
+"n": 146,
+"town": "bar0-city-wartime-rand-8",
+"section": "Summary/Overview",
+"fold": "Relied upon",
+"text": "Relied upon",
+"why": "'Relied upon' for magic, but magic is low, food by magic 0%, DEFENCE magic none; no magic reliance in the record",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C30321",
+"sev": "MED",
+"n": 146,
+"town": "bar0-town-occupied-rand-7",
+"section": "Summary/Overview",
+"fold": "Relied upon",
+"text": "Relied upon",
+"why": "'Relied upon' for magic; FOOD by magic 0%, DEFENCE magic none, magic low, Magical Capability Weak",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C15810",
+"sev": "MED",
+"n": 88,
+"town": "bar0-metropolis-calm-rand-6",
+"section": "Summary/Foundations",
+"fold": "Law & orderSurplus",
+"text": "Law & orderSurplus",
+"why": "Law & order Surplus and Criminal opportunity Contained, but the crime wave tension says crime is rising faster than those in charge can answer",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C21298",
+"sev": "MED",
+"n": 88,
+"town": "bar0-metropolis-calm-rand-8",
+"section": "Summary/Foundations",
+"fold": "Law & orderSurplus",
+"text": "Law & orderSurplus",
+"why": "Law & order Surplus beside crime rising faster than those in charge can answer; Thieves' Guild corrupted, crime wave tension",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C35020",
+"sev": "MED",
+"n": 42,
+"town": "bar0-village-calm-rand-8",
+"section": "World/NPCs",
+"fold": "Dairyman",
+"text": "Dairyman",
+"why": "title 'Dairyman' for Rashida al-Basri, who is female in PEOPLE",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C6485",
+"sev": "MED",
+"n": 18,
+"town": "bar0-city-wartime-rand-6",
+"section": "Summary/Crisis",
+"fold": "profits: no power gains",
+"text": "profits: no power gains",
+"why": "says no power profits from the war, yet the crisis text says certain families are quietly thriving on contracts; Noble Families is a power",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C6511",
+"sev": "MED",
+"n": 2,
+"town": "bar0-city-wartime-rand-6",
+"section": "Summary/Foundations",
+"fold": "Trade connectivityCollapsed",
+"text": "Trade connectivityCollapsed",
+"why": "Trade connectivity 'Collapsed' beside river trade access, imports covering 3803 of food need, River Tolls 10%, open market (C6452) and caravans passing (C6479); wartime is not a siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+}
+]

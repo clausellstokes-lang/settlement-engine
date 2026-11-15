@@ -1,0 +1,148 @@
+[
+{
+"id": "C36557",
+"sev": "MED",
+"n": 524,
+"town": "bar0-village-famine-rand-7",
+"section": "Systems/Magic",
+"fold": "Military role: occasional",
+"text": "Military role: occasional",
+"why": "Magic gives a military role 'occasional'; DEFENCE magic: none and C36538 says no arcane practitioner stands with the defence",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 123,
+"fn": "groundDepleted"
+}
+},
+{
+"id": "C37313",
+"sev": "MED",
+"n": 524,
+"town": "bar0-village-famine-rand-8",
+"section": "Systems/Magic",
+"fold": "Military role: occasional",
+"text": "Military role: occasional",
+"why": "Military role of magic 'occasional'; DEFENCE magic: none, C37293 says arcane support none, and reliance on magic is None",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/magicProvisionShown.js",
+"line": 123,
+"fn": "groundDepleted"
+}
+},
+{
+"id": "C13260",
+"sev": "MED",
+"n": 243,
+"town": "bar0-hamlet-calm-rand-7",
+"section": "Systems/Magic",
+"fold": "Medical role: common",
+"text": "Medical role: common",
+"why": "Medical role: common, yet no arcane practitioners, no healer kept, reliance on magic None",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C27624",
+"sev": "MED",
+"n": 243,
+"town": "bar0-town-calm-rand-7",
+"section": "Systems/Magic",
+"fold": "Medical role: common",
+"text": "Medical role: common",
+"why": "says medical role of magic is common, but the page has no arcane practitioners on the rolls and reliance on magic none",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C36552",
+"sev": "MED",
+"n": 153,
+"town": "bar0-village-famine-rand-7",
+"section": "Systems/Magic",
+"fold": "Religious acceptancehostile",
+"text": "Religious acceptancehostile",
+"why": "'Religious acceptance: hostile' but the dominant Religious Authorities' church and priest supply the magic and run healing/pilgrimage chains",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C7595",
+"sev": "MED",
+"n": 95,
+"town": "bar0-city-wartime-rand-6",
+"section": "Systems/Resources",
+"fold": "✓ Fully exploitedLivestockmedium value",
+"text": "✓ Fully exploitedLivestockmedium value",
+"why": "Livestock 'Fully exploited', drawing on grazing land; LAND gives Grazing land absent, Livestock & Dairy vulnerable; C7586 says livestock is in trouble",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C31315",
+"sev": "MED",
+"n": 11,
+"town": "bar0-town-occupied-rand-7",
+"section": "Systems/Magic",
+"fold": "supplied by Houses of worship and Monastery or friary",
+"text": "supplied by Houses of worship and Monastery or friary",
+"why": "magic supplied by houses of worship and monastery, yet religious acceptance of magic is 'hostile'; also FOOD by magic 0%, magic low and rare",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C7514",
+"sev": "MED",
+"n": 10,
+"town": "bar0-city-wartime-rand-6",
+"section": "Systems/Economics",
+"fold": "Grain export",
+"text": "Grain export",
+"why": "running Floodplain chain prints Grain export and Surplus food; FOOD has surplus 0%, 32% brought in, and TRADE exports list no grain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+}
+]

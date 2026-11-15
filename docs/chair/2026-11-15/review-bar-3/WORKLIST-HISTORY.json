@@ -1,0 +1,219 @@
+[
+{
+"id": "C8742",
+"sev": "MED",
+"n": 33,
+"town": "bar0-city-wartime-rand-7",
+"section": "Summary/Crisis",
+"fold": "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare.",
+"text": "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare.",
+"why": "a crown officer issues requisition orders to a sovereign city-state that answers to no higher lord",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/stressTypes.js",
+"line": 177,
+"fn": "STRESS_TYPE_MAP.wartime"
+}
+},
+{
+"id": "C2300",
+"sev": "MED",
+"n": 22,
+"town": "bar0-city-under_siege+famine-rand-7",
+"section": "Summary/Overview",
+"fold": "Bolts of cloth hang drying in long bright strips across every yard.",
+"text": "Bolts of cloth hang drying in long bright strips across every yard.",
+"why": "bolts of cloth drying in every yard, but Economics says little cloth is made here; Textiles & Cloth chain impaired (grazing depleted), imports cut by siege",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 166,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "C13758",
+"sev": "MED",
+"n": 14,
+"town": "bar0-hamlet-under_siege-rand-6",
+"section": "Summary/Overview",
+"fold": "A dog drives a handful of animals across the road, and you wait for them.",
+"text": "A dog drives a handful of animals across the road, and you wait for them.",
+"why": "A dog drives animals across the road; under siege nothing moves and livestock are penned between the houses",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 173,
+"fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "C30302",
+"sev": "MED",
+"n": 14,
+"town": "bar0-town-occupied-rand-7",
+"section": "Summary/Overview",
+"fold": "A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.",
+"text": "A patron stands drinks at a wine shop, and makes sure everyone knows who is paying.",
+"why": "names a wine shop; HOUSES has taverns and inns but no wine shop",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 372,
+"fn": "ARRIVAL_PEOPLE.greek"
+}
+},
+{
+"id": "C24627",
+"sev": "MED",
+"n": 13,
+"town": "bar0-thorp-calm-rand-7",
+"section": "Summary/Overview",
+"fold": "A broker sits in the shade, matching buyers to goods from routes you have never travelled.",
+"text": "A broker sits in the shade, matching buyers to goods from routes you have never travelled.",
+"why": "a broker matching buyers to goods from far routes: HOUSES has no market or trader, imports none, 'No market or fair stands' (C24646)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 322,
+"fn": "ARRIVAL_PEOPLE.arabic"
+}
+},
+{
+"id": "C13759",
+"sev": "MED",
+"n": 8,
+"town": "bar0-hamlet-under_siege-rand-6",
+"section": "Summary/Overview",
+"fold": "Each lane of stalls has someone who speaks for it, and they are all speaking at once.",
+"text": "Each lane of stalls has someone who speaks for it, and they are all speaking at once.",
+"why": "Lanes of stalls with speakers in a hamlet of 54, all speaking at once, under a siege where field work and trade have stopped",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 358,
+"fn": "ARRIVAL_PEOPLE.south_asian"
+}
+},
+{
+"id": "C36357",
+"sev": "MED",
+"n": 7,
+"town": "bar0-village-famine-rand-7",
+"section": "Systems/Economics",
+"fold": "Most meals start from game from the woods.",
+"text": "Most meals start from game from the woods.",
+"why": "'Most meals start from game'; FOOD ledger: grown 59%, brought in 22%, magic 8%; no hunted share. Contradicts C36353 (grows three parts in five)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/foodways.js",
+"line": 28,
+"fn": "SOURCE_PHRASES"
+}
+},
+{
+"id": "C0013",
+"sev": "MED",
+"n": 6,
+"town": "bar0-city-under_siege+famine-rand-6",
+"section": "Summary/Overview",
+"fold": "<N> lives on what comes out of the ground, and the dust of it is on everything.",
+"text": "Hartgrund lives on what comes out of the ground, and the dust of it is on everything.",
+"why": "Says the city lives on what comes out of the ground; INCOME is 60% smuggling, quarrying 1%, mining chain vulnerable (iron absent), grown food 8%.",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 208,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "C15699",
+"sev": "MED",
+"n": 6,
+"town": "bar0-hamlet-under_siege-rand-8",
+"section": "World/History",
+"fold": "The coastal trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"text": "The coastal trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"why": "trade collapse is 32 years ago in a town 32 years old: the trade it was 'built upon' collapses at founding, yet wealth 'once carried' drained",
+"kinds": [
+"RECORD",
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1461,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "C21235",
+"sev": "MED",
+"n": 6,
+"town": "bar0-metropolis-calm-rand-8",
+"section": "Summary/Overview",
+"fold": "<N> lives on what comes out of the ground, and the dust of it is on everything.",
+"text": "Großgasse lives on what comes out of the ground, and the dust of it is on everything.",
+"why": "says the town lives on what comes out of the ground; INCOME is trade, finance, guild fees; quarry and grain fields depleted, iron only 3%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 208,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "C26792",
+"sev": "MED",
+"n": 0,
+"town": "bar0-town-calm-rand-7",
+"section": "Summary/Overview",
+"fold": "The right of the current authority to rule is openly and widely questioned, and no # can agree on who, if anyone, holds a legitimate claim",
+"text": "The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim",
+"why": "says authority's right to rule is openly and widely questioned; header has Stable, legitimacy Endorsed, score 78",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1646,
+"fn": "HISTORICAL_EVENTS_DATA.byMemory"
+}
+},
+{
+"id": "C31794",
+"sev": "MED",
+"n": 0,
+"town": "bar0-town-occupied-rand-7",
+"section": "World/History",
+"fold": "A speculative frenzy in healing waters (bottled) (taxed by occupation) and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation",
+"text": "A speculative frenzy in healing waters (bottled) (taxed by occupation) and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation",
+"why": "the Crash (12 years ago) prose carries the trade label's mark '(taxed by occupation)' inside the sentence; a leaked export tag",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1442,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+}
+]

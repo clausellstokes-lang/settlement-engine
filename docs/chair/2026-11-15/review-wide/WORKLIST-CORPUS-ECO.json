@@ -1,0 +1,110 @@
+[
+{
+"id": "C40450",
+"sev": "MED",
+"n": 109,
+"town": "bar0-city-wartime-rand-15",
+"section": "Systems/Economics",
+"fold": "<N> earns most of its living from # or # trades, and none of them could carry the place alone.",
+"text": "Padmagrad earns most of its living from two or three trades, and none of them could carry the place alone.",
+"why": "says living comes from two or three trades; INCOME lists thirteen sources, top one 27%, and the page calls the base broad and diversified",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6131,
+"fn": "DS-ECO-12 › INCOME MIX: two or three sources between them · v1"
+}
+},
+{
+"id": "C47266",
+"sev": "MED",
+"n": 109,
+"town": "bar0-city-wartime-rand-18",
+"section": "Systems/Economics",
+"fold": "<N> earns most of its living from # or # trades, and none of them could carry the place alone.",
+"text": "Qingyuan earns most of its living from two or three trades, and none of them could carry the place alone.",
+"why": "'two or three trades' carry the living, but INCOME lists twelve sources, largest 29%, and the page says 'Diversified — broad institutional economic base'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6131,
+"fn": "DS-ECO-12 › INCOME MIX: two or three sources between them · v1"
+}
+},
+{
+"id": "C30428",
+"sev": "MED",
+"n": 91,
+"town": "bar0-city-wartime-rand-11",
+"section": "Systems/Economics",
+"fold": "Faith carries real weight in <N>'s money.",
+"text": "Faith carries real weight in Varagrad's money.",
+"why": "religious houses 'a large part of the city's business'; INCOME gives Church Tithes only 6%, fifth of eleven sources",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6488,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the religious houses · v1"
+}
+},
+{
+"id": "C21200",
+"sev": "MED",
+"n": 39,
+"town": "bar0-city-under_siege+famine-rand-19",
+"section": "Systems/Economics",
+"fold": "Magic carries real weight in <N>'s money.",
+"text": "Magic carries real weight in Tenoek's money.",
+"why": "magic 'a large part of its business'; INCOME gives Arcane Industry 3% and Spellcasting 2%, five percent together",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6537,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the practice of magic · v1"
+}
+},
+{
+"id": "C3178",
+"sev": "MED",
+"n": 0,
+"town": "bar0-city-under_siege+famine-rand-11",
+"section": "Systems/Economics",
+"fold": "Since the siege closed the roads, none of the copper ore that <N>'s work needs has reached it, and that work has stopped or soon will.",
+"text": "Since the siege closed the roads, none of the copper ore that Archonea's work needs has reached it, and that work has stopped or soon will.",
+"why": "names copper ore as an input the town's work needs; TRADE imports and LAND gaps list clay, iron, charcoal, never copper ore",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6435,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: a house needs what the land lacks · v3"
+}
+},
+{
+"id": "C54259",
+"sev": "MED",
+"n": 0,
+"town": "bar0-hamlet-calm-rand-11",
+"section": "Summary/Overview",
+"fold": "The guilds are a power at <N> all the same, though none keeps a house at its market.",
+"text": "The guilds are a power at Prabhagram all the same, though none keeps a house at its market.",
+"why": "says no guild keeps a house at its market; the Merchant Guilds' commercial houses list Periodic market, Alehouse, Caravanserai",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9814,
+"fn": "DS-GEN-13 › COMMERCE: a market, no guild · v5"
+}
+}
+]
