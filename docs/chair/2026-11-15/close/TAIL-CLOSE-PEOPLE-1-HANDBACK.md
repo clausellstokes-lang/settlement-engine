@@ -89,4 +89,21 @@ no census move and the grid is not touched.
 
 ## Declared moves (for the owner's veto list)
 
-- none yet.
+- **None of this seat's.** No generator output moves: red 8 is a layout change, and reds 1-7 are guards re-keyed or a pin
+  following a win. The moves the guards now follow are other lanes' declared moves, named so the owner's veto can find them:
+  - 1036bf94 (TAIL-TITLES K-C): a face's word in its holder's sex. A woman minted for a noble body is "the lady", a woman
+    heading the monasteries "the senior abbess", a woman fronting a criminal business "the nominal owner".
+  - 2ac50c55 (TAIL-DEFECON-3): the bank row "does little trade" prints only where fewer than four goods are exported.
+  - ce69ac52 (TAIL-NARRATIVE-4 N17): the founder resolves to one the Origin row agrees with. A thorp loses its discharged-soldier
+    founder, and its advisory battery finding with it.
+
+## Status: HANDED BACK at the tip of `lane/tail-close-people-2026-11-15`
+
+All eight reds are closed, and each file is green run alone at the tip: 8 cured (layout), 7 pinned (a win), 6 and 1-5
+re-keyed (ii). None was sent up as (iii), and none was left.
+Named for others, not cured here:
+- the bank row's own words have no birth witness after 2ac50c55 (the economy lane: a unit birth of `viability.js`).
+- pre-existing reds seen while proving, the same at base and after, not this seat's: `generationForkCensus.test.js` (4
+  A-rows) and `pipelinePinnedChoosers.test.js` (A1, A6); `negativeAssertionAnchor.walker.test.js` (4 un-anchored negatives in
+  crisisTab.test.jsx:102, tailHistoryBatch6.test.js:106, tailCrisisBatch4.test.js:72, tailCrisisBatch8.test.js:149).
+- the twelve-birth grid: 2 falls at base (r2r-city-0 P7a, r2s-insurgency-metropolis-0 P7a) and the same 2 after red 8; no rise.
