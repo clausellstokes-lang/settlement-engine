@@ -39,6 +39,7 @@ import { SCORE_BAND_CUTS, economicSurvivalBandOf, scoreBand } from './defenseSco
 import { laidByBeforeCrisis } from './prosperityInCrisis.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
 import { liveInstitutionNames, ACCESS_ONLY } from '../facts/institutions.js';
+import { crisisOf } from '../facts/crisisKind.js';
 
 /**
  * A HOUSE WITH CLERGY STANDS (EXPORTS-B1, the chair's ruling C on EXPORTS-MEASURE-1 B1): a church, temple, cathedral, chapel,
@@ -145,6 +146,47 @@ export function healerSubject(healerName) {
 }
 
 /**
+ * ⭐ AN OUTBREAK IN FORCE IS NOT A HYPOTHESIS (TAIL-DISPLAY-CIVIC-2, READ-ALL-3 20491 26932 27231, the exports' read): the
+ * care sentence spoke of what "a plague would" do and what "an outbreak would" outrun in towns where the record's own
+ * crisis is the outbreak (`crisisOf(...).has('plague_onset')`, the one crisis reader). There the row says the outbreak has
+ * come and who tends it, from the same roster facts; elsewhere it reads as before. Its no-house twin names houses, not
+ * people: the outbreak's own stand-in ("Tends the sick", `crisisCast.js`) is a person, and no house of care is kept.
+ * @param {{ hasHospital: boolean, hasHealer: boolean, healerName: string|null }} facts @param {boolean} clergy
+ * @param {boolean} outbreak @returns {string}
+ */
+export function careSentence(facts, clergy, outbreak) {
+  if (outbreak) {
+    return facts.hasHospital
+      ? 'The outbreak has come; the hospital is where the sick can be isolated.'
+      : facts.hasHealer
+        ? `The outbreak has come, and ${healerSubject(facts.healerName).replace(/^\w/, (ch) => ch.toLowerCase())} treats the sick one at a time.`
+        : clergy
+          ? 'The outbreak has come, and only the clergy give the sick basic care.'
+          : 'The outbreak has come, and no house here is kept to treat the sick.';
+  }
+  return facts.hasHospital
+    ? 'The hospital can isolate the sick and keep an outbreak from spreading.'
+    : facts.hasHealer
+      ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
+      : clergy
+        ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
+        : 'Nobody here treats the sick, and a plague would run until it burned out.';
+}
+
+/**
+ * ⭐ QUIET COUNTRY IS NOT SAID OF A PLACE UNDER ARMS (TAIL-DISPLAY-CIVIC-2, READ-ALL-3 22279 22277 22278 27635): the heartland
+ * lines call the country quiet and its threats internal; under a siege, an occupation or a war (the threat family's
+ * armed kinds and `wartime`) the danger is armed men from outside, and under a monster pressure creatures press even
+ * here. There the row takes one twin, true under every band; elsewhere the heartland lines read as before.
+ * @param {ReturnType<typeof crisisOf>} c @returns {string | null}
+ */
+function heartlandUnderArms(c) {
+  if (c.has('monster_pressure')) return 'Heartland country, but creatures are pressing on it now.';
+  if (c.has('under_siege') || c.has('occupied') || c.has('wartime')) return 'Few creatures trouble this country; the danger here now is not from beasts.';
+  return null;
+}
+
+/**
  * @param {any} r A settlement object (reads `defenseProfile`, `economicState`,
  *   and `config`; tolerant of missing fields via optional chaining).
  * @returns {{label: string, color: string, assess: string}[]}
@@ -166,6 +208,7 @@ export function buildThreatAssessment(r) {
   // The enclosure by its own kind: a palisade is never called walls, stone walls never a palisade.
   const palisade = facts.wallKind === 'palisade';
   const force = forceStands(r);
+  const crisis = crisisOf(r);
   const result = [];
 
   const monColor = threat === 'plagued'
@@ -188,7 +231,7 @@ export function buildThreatAssessment(r) {
           ? 'Charter hall coordinates specialist monster response.'
           : 'No specialist monster hunters on retainer: the garrison handles everything.'), ['ADEQUATE', 'STRONG']]];
     } else if (hasWalls && hasMilitia) {
-      monLines = [[(palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. '
+      monLines = [[(palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding posture in an embattled region. The militia\'s turns on watch are thin. Simultaneous incursions will break coverage. '
         + (hasCharter
           ? 'Charter hall provides specialist backup.'
           : 'No specialist monster hunters.'), ['ADEQUATE', 'WEAK']],
@@ -210,7 +253,7 @@ export function buildThreatAssessment(r) {
     if (hasWalls && hasGarrison) {
       monLines = [['Active frontier. Walls and garrison provide credible deterrence: most creature threats will not press a defended perimeter. '
         + (hasCharter
-          ? 'Charter hall handles anything above the garrison usual remit. '
+          ? 'Charter hall handles anything above the garrison\'s usual remit. '
           : '')
         + 'Adequate for the threat level.', ['STRONG', 'ADEQUATE']]];
     } else if (hasWalls && hasMilitia) {
@@ -228,6 +271,8 @@ export function buildThreatAssessment(r) {
     } else if (hasWalls && standingDefenseForces(r).watch.present) {
       monLines = [[`Active frontier, with ${wallWord} and a watch to meet what comes.`, BANDS]];
     }
+  } else if (heartlandUnderArms(crisis)) {
+    monLines = [[/** @type {string} */ (heartlandUnderArms(crisis)), BANDS]];
   } else {
     if (hasWalls && hasGarrison) {
       monLines = [['Quiet country, and far more defences than it calls for.', ['STRONG']]];
@@ -285,13 +330,19 @@ export function buildThreatAssessment(r) {
   const intColor = bandBarColor(scoreBand(scores.internal || 0)); // C-L7 (UPKEEP-9): the band its row prints
   const sl = sp.safetyLabel || 'Moderate';
   let intA = 'Internal security: ' + sl + '. ';
-  if (sl.includes('Dangerous')) {
+  // TAIL-DISPLAY-CIVIC-2 (READ-ALL-3 29824): a plain "Dangerous" is the crime ratio's own band and names its danger; a
+  // label that names its cause after a dash ("Dangerous — Monster Threat", "— Plague Conditions") has named it, and
+  // "organised crime" beside it named another (the governance account's law, `governanceAccount.js :: adverseSafetyWord`).
+  if (sl.includes('Dangerous') && !/\s—\s/.test(sl)) {
     intA += 'Violence and organised crime are the main danger here. ';
   }
+  // TAIL-DISPLAY-CIVIC-2 (READ-ALL-3 04982 28629): the court fact is a house that hears cases (a courthouse, or the town
+  // or city hall, or the assembly: `defenseFacts.js :: COURT_RE`), so the line says cases are heard, not that "a court"
+  // stands where the roster lists a town hall, and claims presence, not that all of it "works" under any crisis.
   if (f.hasCourtSystem && f.hasPrison) {
-    intA += 'Arrest, trial and gaol all work here.';
+    intA += 'Cases are heard here, and there is a gaol to hold the guilty.';
   } else if (f.hasCourtSystem) {
-    intA += 'There is a court but almost nowhere to hold anyone.';
+    intA += 'Cases are heard here, but there is almost nowhere to hold anyone.';
   } else if (f.hasPrison) {
     intA += 'People are locked up without trial.';
   } else {
@@ -317,7 +368,7 @@ export function buildThreatAssessment(r) {
       + (hasGarrison ? 'the garrison kept paid' : force ? 'the defenders kept paid' : 'the place kept going')
       + ' while it lasts.';
   } else if (money === 'short') {
-    econA = `Money enough for a short crisis${laidClause}; a long siege would start eating the reserves within months.`;
+    econA = `Money enough for a short crisis${laidClause}; a long one would start eating the reserves within months.`;
   } else if (money === 'late' && !force) {
     // EXPORTS-B1 (the chair's ruling C): where no force stands there are no defenders to pay late (new words: the owner's veto).
     econA = 'Money is already short; a long crisis would empty the reserves.';
@@ -337,13 +388,7 @@ export function buildThreatAssessment(r) {
   // "Do add storehouse months the economy tab."). Stored food is the Economy tab's, printed once
   // in months; this row speaks of who tends the sick, and of a famine by name (F9 unit 1).
   // Under an active famine the row's sentence names it first (F9 unit 1).
-  const care = facts.hasHospital
-    ? 'The hospital can isolate the sick and keep an outbreak from spreading.'
-    : facts.hasHealer
-      ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
-      : clergyStand(r)
-        ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
-        : 'Nobody here treats the sick, and a plague would run until it burned out.';
+  const care = careSentence(facts, clergyStand(r), crisis.has('plague_onset'));
   const disA = inActiveFamine(r) ? `${FAMINE_SENTENCE} ${care}` : care;
   result.push({
     label: 'Disasters & Famine',
