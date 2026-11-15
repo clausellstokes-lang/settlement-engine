@@ -1597,7 +1597,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "{settlement} has people who would take the hall if they could. They cannot, and everyone involved knows it.",
+          "text": "{settlement} has people who would take the hall if they could. For now they cannot, and everyone involved knows it.",
           "slots": [
             "settlement"
           ],

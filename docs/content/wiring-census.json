@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1379
+    "producerIndexFiles": 1380
   },
   "totals": {
     "pools": 856,
@@ -7616,7 +7616,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "blockaded",
@@ -11811,7 +11811,6 @@
         "settlement"
       ],
       "slotsNamed": [
-        "access",
         "complexity",
         "settlement"
       ],
@@ -14081,7 +14080,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 6,
-      "grammars": 1,
+      "grammars": 2,
       "predicate": [
         {
           "field": "eco.safetyProfile.blackMarketCapture",
@@ -17104,7 +17103,7 @@
       "lineDeclares": {
         "crisis: famine": 2,
         "crisis: under_siege": 1,
-        "no crisis: famine": 4,
+        "no crisis: famine": 5,
         "no crisis: plague_onset": 5,
         "no crisis: under_siege": 7,
         "no hunger": 1,
@@ -19950,8 +19949,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "no crisis: under_siege": 1
+      },
+      "undeclared": 2,
       "crisisScoped": false
     },
     {
@@ -30046,6 +30047,7 @@
         "market": 3,
         "no crisis: plague_onset": 3,
         "no crisis: under_siege": 4,
+        "no crisis: wartime": 2,
         "tier: ≤ town": 1
       },
       "undeclared": 0,
@@ -55269,7 +55271,7 @@
         "DS-ECO-6 :: TIER: minor shadow activity (≥3)"
       ],
       "variants": 19,
-      "grammars": 4,
+      "grammars": 5,
       "blocks": [
         "DS-ECO-6"
       ]
@@ -67623,7 +67625,7 @@
       "subject": "Naval Defense: Port only",
       "fields": [],
       "readingFunction": "navalDefensePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68231,7 +68233,7 @@
       "subject": "COMBINATION C1: a high rung on a working approach",
       "fields": [],
       "readingFunction": "prosperityHeaderPoolKey",
-      "count": "4 variant(s) · 1 grammar(s) · slots {access, complexity, settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {complexity, settlement}"
     },
     {
       "tier": "COVERED",
@@ -68535,7 +68537,7 @@
         "eco.safetyProfile.blackMarketCapture"
       ],
       "readingFunction": "shadowEconomyPoolKey",
-      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

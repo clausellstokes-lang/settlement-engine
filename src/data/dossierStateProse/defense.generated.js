@@ -1127,7 +1127,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no mercenary"
           ],
-          "text": "If anyone came for {settlement}, nothing about the town would stop them. Its safety rests on nobody wanting it enough to try.",
+          "text": "If anyone came for {settlement}, nothing about the town would stop them; it is safe for exactly as long as nobody comes.",
           "slots": [
             "settlement"
           ],
@@ -1263,7 +1263,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Bring a complaint at {settlement} and it gets a hearing, not a favour.",
+          "text": "Bring a complaint at {settlement} and there is a court to hear it and a cell for whoever it finds against.",
           "slots": [
             "settlement"
           ],
@@ -1293,7 +1293,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The fines {settlement} hands down cannot be enforced, so each unpaid fine makes the next one easier to ignore.",
+          "text": "{settlement}'s hearings can fine an offender and cannot hold one, so a fine binds only those who mean to stay.",
           "slots": [
             "settlement"
           ],
@@ -1358,7 +1358,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no crisis: famine",
             "prosperity: ≥ moderate"
           ],
-          "text": "{settlement}'s accounts have money in hand: the town can keep its defenders paid and buy what a bad season needs without going begging.",
+          "text": "{settlement}'s accounts have money in hand: the town can buy what a bad season needs without going begging.",
           "slots": [
             "settlement"
           ],
@@ -1380,7 +1380,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no crisis: debt",
             "no crisis: occupied"
           ],
-          "text": "{settlement} had money laid by before this trouble began, and its defenders are still paid from it.",
+          "text": "{settlement} had money laid by before this trouble began, and the trouble is still being paid for from it.",
           "slots": [
             "settlement"
           ],
@@ -1481,7 +1481,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no crisis: famine",
             "no crisis: occupied"
           ],
-          "text": "The town went into this trouble with money in hand, and its defenders are still paid on time.",
+          "text": "The town went into this trouble with money in hand, and so far the money has held.",
           "slots": [],
           "vid": 12
         },
@@ -1529,7 +1529,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "{settlement} is always short of money for its defence: whoever is called to defend it is paid late or not at all, and is slow to turn out when trouble comes.",
+          "text": "{settlement} is always short of money for its defence: there is nothing put by to pay for a long defence, and whoever is called to make one knows it.",
           "slots": [
             "settlement"
           ],
@@ -1548,7 +1548,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} has been short of money for years, and each lean season leaves less to spend when a real crisis comes.",
+          "text": "{settlement}'s defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.",
           "slots": [
             "settlement"
           ],
@@ -1671,7 +1671,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The trades that should supply {settlement}'s defenders are struggling, and the defenders go short of food or gear.",
+          "text": "The trades that should supply {settlement}'s defence are struggling, and its food and gear are the first things at risk.",
           "slots": [
             "settlement"
           ],
@@ -1679,7 +1679,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "The defenders at {settlement} make do: the town's workshops cannot keep them properly fed and equipped.",
+          "text": "The workshops that should feed and equip {settlement}'s defence are failing, and the defence will feel it before long.",
           "slots": [
             "settlement"
           ],
@@ -2673,7 +2673,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "{settlement} keeps a working balance: the law is present, so is crime, and neither has the upper hand.",
+          "text": "{settlement} keeps a working balance: the law is present, so is crime, and neither has the town to itself.",
           "slots": [
             "settlement"
           ],
@@ -2684,7 +2684,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence"
           ],
-          "text": "The town's record of crimes at {settlement} is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes.",
+          "text": "The town's record of crimes at {settlement} is not short, and the next few seasons will decide whether the law or the criminals gain on it.",
           "slots": [
             "settlement"
           ],
@@ -2728,7 +2728,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no guardPresence"
           ],
-          "text": "{settlement} has nobody to keep the peace, and trouble here is left for neighbours to settle between themselves.",
+          "text": "{settlement} pays nobody to keep the peace, and trouble here is settled among its own people.",
           "slots": [
             "settlement"
           ],
@@ -6006,7 +6006,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no threat",
             "crisis: any"
           ],
-          "text": "The port is {settlement}'s living and its open door, and nothing hostile has come through it yet.",
+          "text": "The port is {settlement}'s living and its open door, and nothing at the water would stop a hostile ship coming through it.",
           "slots": [
             "settlement"
           ],
@@ -8155,7 +8155,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The town would go on if the arcane went away, more slowly and less comfortably.",
+          "text": "The town would go on as it is if the arcane went away; nothing it lives by waits on a spell.",
           "slots": [],
           "vid": 3
         }
@@ -9428,7 +9428,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "food: ≥ pressured"
           ],
-          "text": "No dependable road, river or port reaches {settlement}, and the town gets by on its own: enough for an ordinary year, with little to spare.",
+          "text": "No dependable road, river or port reaches {settlement}, so what the town raises is what it has, and an ordinary year leaves nothing over.",
           "slots": [
             "settlement"
           ],
@@ -9439,7 +9439,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "food: ≥ pressured"
           ],
-          "text": "What {settlement} raises covers an ordinary year and no more, so one bad harvest would leave it short before spring.",
+          "text": "What {settlement} raises leaves nothing over in an ordinary year, and a bad harvest is felt before spring.",
           "slots": [
             "settlement"
           ],
@@ -9450,7 +9450,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "food: ≥ pressured"
           ],
-          "text": "People at {settlement} make do with what they have; a good year is comfortable and a bad one is lean.",
+          "text": "People at {settlement} make do with what they have; a good year is enough and a bad one is lean.",
           "slots": [
             "settlement"
           ],
@@ -9715,7 +9715,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: occupied"
           ],
-          "text": "{settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences stand and too few people man them.",
+          "text": "{settlement}'s accounts keep its {defwork} in repair and stretch no further, so the defences stand and too few people man them.",
           "slots": [
             "settlement",
             "defwork"
