@@ -57,3 +57,15 @@ export function defenceOf(record) {
     prison: d.hasPrison,
   });
 }
+
+/**
+ * A SERVICE THE DEFENCE ATOMS DECIDE (TAIL-CLOSE-SRC-2, the defence walker's court-and-gate member: the agreement
+ * `display/chainNeedShown.js` asked on its own line, a printed service string tested for "gate" beside this home's
+ * answer, is a question this home answers): a service that names a gate ("gate control") stands only where a gate
+ * stands (`gate`: stone walls, or a roster row that names one; a palisade alone keeps none); every other service stands.
+ * @param {{ institutions?: unknown } | null | undefined} record @param {unknown} service a service as the record names it
+ * @returns {boolean}
+ */
+export function defenceKeepsService(record, service) {
+  return defenceOf(record).gate || !/\bgate\b/i.test(String(service));
+}
