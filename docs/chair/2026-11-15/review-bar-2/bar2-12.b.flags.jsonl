@@ -1,0 +1,16 @@
+{"id":"C23558","town":"bar0-thorp-calm-rand-3","sev":"MED","kind":"STATE","why":"'nobody wanting it enough to try' but PAST records The Siege 43 years ago, catastrophic: someone did come for it","other":"C23557"}
+{"id":"C23568","town":"bar0-thorp-calm-rand-3","sev":"MED","kind":"PAIR","why":"'nobody to keep the peace' contradicts 'The old families keep the peace' and the neighbours answering to all at once","other":"C23549"}
+{"id":"C23624","town":"bar0-thorp-calm-rand-3","sev":"LOW","kind":"BROKEN","why":"'Find the head-of-household consensus one more source of money': an institution slotted as the person who is wanted/served; unfilled-slot grammar","other":"C23687"}
+{"id":"C23710","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"LACKS","why":"'a busy street' in a thorp of 21 people; population cannot hold streets","other":""}
+{"id":"C23813","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"STATE","why":"fish 'sold daily from the morning catch' but LAND gives Fishing Grounds as depleted","other":""}
+{"id":"C23820","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"LACKS","why":"bulk sale to inland traders, but TRADE exports none and the page says no market or fair stands here","other":"C23728"}
+{"id":"C23849","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"STATE","why":"money to spare kept by 'traffic on its port', but INCOME is Harvest 100% and TRADE exports and imports are none","other":""}
+{"id":"C23861","town":"bar0-thorp-calm-rand-4","sev":"MED","kind":"STATE","why":"says fishing comes first among food it raises, but LAND gives Fishing Grounds as depleted","other":""}
+{"id":"C24150","town":"bar0-thorp-calm-rand-5","sev":"MED","kind":"STATE","why":"'for generations its news came on somebody else's cart' but the thorp is 20 years old","other":""}
+{"id":"C24598","town":"bar0-town-calm-rand-3","sev":"MED","kind":"BROKEN","why":"'Backs' followed by the slash label 'Military/Guard' used as one power's name beside the verb","other":""}
+{"id":"C25150","town":"bar0-town-calm-rand-3","sev":"MED","kind":"PAIR","why":"defenders cannot be properly fed and equipped, but garrison and watch are 'well paid, well equipped'","other":"C25137"}
+{"id":"C25170","town":"bar0-town-calm-rand-3","sev":"MED","kind":"PAIR","why":"accounts 'fall short on the watch's wages' contradicts watch and garrison 'well paid, well equipped'","other":"C25137"}
+{"id":"C25233","town":"bar0-town-calm-rand-3","sev":"LOW","kind":"STATE","why":"'With nothing pressing' but stability is Tense — regional monster threat (monsters plagued)","other":"C24493"}
+{"id":"C25259","town":"bar0-town-calm-rand-3","sev":"MED","kind":"STATE","why":"salt works 'runs well' but LAND gap: it lacks its salt input and no salt reaches it; page marks it short","other":"C25013"}
+{"id":"C25301","town":"bar0-town-calm-rand-3","sev":"MED","kind":"PAIR","why":"'With nothing threatening' for the commander, but stability is Tense — regional monster threat and the page calls the monster threat constant","other":"C25162"}
+{"id":"DONE","lines":2386,"blocks":4,"flags":15}
