@@ -53,6 +53,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | 13 | tail-narrative-2026-11-14 | 78eadedc5 (04:13) | ca827fc0f (JOIN-7 22) | 4c69c3433 | none | clean-both `presumedThings.widened.register.json` (parses); lane-only ARRIVAL_SCENES, STRESS_DESCS, STRESS_INSTITUTION_EFFECTS declarations; DECLARED MOVE 6a3692996 N13: golden carried |
 | 14 | tail-ties-2026-11-14 | 7622238f6 (04:16; at its mark) | fdebbe346 (JOIN-7 21) | 9ba7d6940 | none | clean-both the two presumed registers (parse); lane-only NPC_CRIMINAL_SECRETS, STRESS_ECONOMIC_EFFECTS declarations; DECLARED MOVE 14724c194: golden carried |
 | — | tail-powers-2026-11-14 | 01ddaba28 (04:20; holds the line's merge at d817736d8) | d817736d8 | — | **STOP**: code conflict, `governanceAccount.js` (§6) | aborted; told the chair 04:22 |
+| 16 | tail-powers-b-2026-11-14 | 4ff449a7b (04:20) | f4eab4088 (JOIN-7 24) | d700bda44 | none | clean-both the two presumed registers (parse); DECLARED MOVES c1263e61c, 594794a67, 127b1f8ac, 4ff449a7b: golden carried |
 
 ## 3. Every code resolution
 
@@ -176,6 +177,7 @@ Merged clean though both sides moved them (for the close to re-derive or measure
 | golden; `presumedThings.register.json`; `INSTITUTION_DESC_VARIANTS.json` | houses (12) | DECLARED MOVES 57a19f800, ba3af4202 (institutions[].desc), e45e08b0f (institutions[].desc, resourceAnalysis.strategicValue); the register merged clean though both moved it; the declaration lane-only |
 | golden; `presumedThings.widened.register.json`; `ARRIVAL_SCENES.json`, `STRESS_DESCS.json`, `stressInstitutionEffects.STRESS_INSTITUTION_EFFECTS.json` | narrative (13) | DECLARED MOVE 6a3692996 N13 (founding.stressNote 179 towns, npcs[].secret 115, arrivalScene 62); the widened register merged clean though both moved it; the declarations lane-only |
 | golden; the two presumed registers; `npcData.NPC_CRIMINAL_SECRETS.json`, `npcData.STRESS_ECONOMIC_EFFECTS.json` | ties (14) | DECLARED MOVE 14724c194 T18/T19/T21 (relationships[].description 156 towns, .tension 141, ...); the registers merged clean though both moved them; the declarations lane-only |
+| golden; the two presumed registers | powers-b (16) | DECLARED MOVES c1263e61c P19, 594794a67 P9/P12/P18, 127b1f8ac (arcane advisory, text), 4ff449a7b P29 (factions[].desc 45 towns); the registers merged clean though both moved them |
 
 ## 5. Item 2 at the landed tip
 
@@ -208,6 +210,6 @@ A worktree at origin's tip (`git worktree add /home/user/j8wt -b join8 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-6 (the finished branches), 7-14; the chair's 03:40 "LAND lane/tail-powers-2026-11-14" (eb5e2ab0d or later, in the order with the moving branches) received.
+1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-6 (the finished branches), 7-14, 16 (15 the powers stop, §6); the chair's 03:40 "LAND lane/tail-powers-2026-11-14" (eb5e2ab0d or later, in the order with the moving branches) received.
 2. lane/tail-powers-2026-11-14: waits for the chair's "LAND" (P28).
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
