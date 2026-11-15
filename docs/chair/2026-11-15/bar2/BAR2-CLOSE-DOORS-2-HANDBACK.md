@@ -10,6 +10,9 @@ AUTHORITY: the owner's word in the chair's chat, 2026-11-15 at 20:27:16 UTC, ver
 signed record: [`docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json`](../../../shift-records/2026-11-15-the-close-of-the-round-bar2.json)
 (new; the last close's record untouched). Commit trailer `Owner-Signed: §934.105`.
 
+STATUS: **DONE.** The five signed surfaces and every class-G pin re-taken (the map calibration under the chair's CG1, the dossier's
+audience arm under MP1); the receipt green at the final tree but for the one law not mine (`defenseWordsFindings`, 2 arms).
+
 ## THE MEASURE BEFORE ANY WRITE
 
 | what | instrument | result |
@@ -67,6 +70,54 @@ signed record: [`docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json`
   weakened, no expectation removed; the note says plainly that the audience control now lives in the one-sided arm". Done:
   reproduced to the figure, then re-keyed (the row above).
 
+## THE RECEIPT, AT THE FINAL TREE (c1b10691c, each file alone through `sh scripts/gate-tail.sh npx vitest run <file>`, one log a file)
+
+69 files: every file re-taken, every test that reads a re-taken file (`grep -rl` of each basename over tests/), the seventeen
+law suites (BAR2-LABELS-3's five: proseWiringCensus, writerReach, ruinFilterRoster, pipelinePinnedMode, presumedThings; and
+BAR2-LABELS-4's twelve: rosterDuplicateDraws, hookThemeDraws, upkeepVocation, generationForkCensus, factLayers, layerBoundaries,
+defenceFactReaders, noLegacyFactionReaders, siteCoherenceRatchet, observedShapeReaders, proseComposed, proseEntryContradiction),
+with tuningRegister, engineCoreLazyEdge, domainAnyCastBaseline and the named law. **68 green, 1 red (the named law).**
+
+engineCoreLazyEdge 3/3, layerBoundaries 8/8, engineBundleReplay 7/7, vendorPdfLazy 27/55 (28 skipped without VERIFY_DIST; whole under verify:dist below), composedProseSeams 7/7, landingClaimsParity 7/7, ancientRuinsGeneration 3/3, bandLadders 8/8, corruption 17/17, **defenseWordsFindings 10/12 (RED, not mine, below)**, editWorldFactResources 6/6, faithWitnessSource 35/35, institutionDestroyedByKind 7/7, institutionRename 6/6, recordMerge 8/8, ruinInstitution 7/7, townCartographyBuildings 28/28, townCartographyCalibration 32/32, worldFactRederive 7/7, generation 21/21, dossierContent 20/20, foodModelSingleWriter 14/14, generationForkCensus 7/7, generationWorkerIdentity 8/8, hookThemeDraws 13/13, institutionBudgetPromise 1/1, nameHeldThroughAssembly 7/7, narrativeArrival 25/25, pipelinePinnedChoosers 7/7, pipelinePinnedMode 15/15, powerEconomyFreshness 10/10, powerStructure 5/5, rosterDuplicateDraws 3/3, rosterFinalUnderHeldRoster 7/7, servicesStructure 3/3, timelineVariety 5/5, upkeepVocation 2/2, x46NpcBand 24/24, labelJoins 3/3, defenceFactReaders.walker 22/22, domainAnyCastBaseline 19/19/*, factLayers.walker 15/15, generationForkRegistry.contract 3/3, noLegacyFactionReaders.walker 4/4, observedShapeReaders.walker 47/47, presumedThings.walker 43/43, proseComposed.walker 87/87, proseEntryContradiction.walker 29/29, proseWiringCensus.walker 79/79, recordRegisterTotality.walker 8/8, ruinFilterRoster.walker 12/12, siteCoherenceRatchet 9/9, sourceCitationIntegrity.walker 18/18, sovereigntyLightingContract.walker 34/34, testRatchet 86/86, tuningRegister.walker 76/76, writerReach.walker 52/52, dmLayerGoldenIsolation 15/15, dossierProseManifest 17/17, espionageDormancyFence 21/21, espionageMissionDormancyFence 20/20, faithFieldDormancyFence 13/13, generatorGoldenMaster 3/3, pipeline.property 6/6, underwaysOrganicFoundingDormancyFence 6/6, warCirculationDormancyFence 10/10, landingStageMeasure 11/11, readerCorpusManifest 18/18, presetLightingWitness 7/7.
+
+(*) domainAnyCastBaseline read 18/19 at first ONLY BECAUSE MY SCRATCH CLONE IS SHALLOW (its attribution arm resolves old
+`introducedAt` commits); with d7ea69a4b, 172e5f225 and e0c8646ee fetched (`git fetch --depth=1 origin <sha>`, objects only,
+no file changed): 19/19.
+
+| step | command (each to a file) | result |
+|---|---|---|
+| the fourteen non-test steps | `sh scripts/gate-tail.sh npm run <step>`: validate:hazard-registry, :premortem, :packets, :data, :custom-content-manifest, :migration-head, :edge, :map, :tuning-bands, :foundry-module, :mcp-server, typecheck:ratchet, typecheck:domain:strict, lint | ALL 14 EXIT 0 |
+| the three registers | `node scripts/presumed-things-door.mjs --check`; `node scripts/check-writer-reach.mjs`; `node scripts/check-observed-shape-readers.mjs` | all three exit 0 ("fresh 0 · stale 0 · banked 4678"; "WRWALKER HOLD — judged 12661 · LIT 693 · LIT-NAME 10562 · DARK 1406"; the frozen inventory matched); nothing written |
+| build | `sh scripts/gate-tail.sh npm run build` | exit 0 |
+| verify:dist | `sh scripts/gate-tail.sh npm run verify:dist` | **exit 0: STRICT DIST OK, 67 files, 603 tests**, zero failed/non-run rows (engineBundleReplay's golden and fence arms now run); `dist` (my own build output) removed after, nothing else |
+| goldenFreeze.walker, LAST | `sh scripts/gate-tail.sh npx vitest run tests/lint/goldenFreeze.walker.test.js`, after the last door | **90/90** |
+
+STILL RED, BY NAME: `tests/domain/defenseWordsFindings.test.js` 10/12 (2 arms: "no stored-food sentence beside the one Food
+endurance line", 1 of 64 cases; and "over 64 small places, no owned Defense sentence claims ... an empty store the record
+lacks"): a corpus line the next round's corpus seat is rewording on its own branch. NOT MINE, NOT TOUCHED. Nothing else red.
+
+## FOR THE OWNER, IN PLAIN WORDS
+
+Under your "Yes refresh the reference" of 20:27 UTC, I refreshed the stored "expected output" references the tests compare
+freshly generated towns against, because this round's five fixes reworded what towns say. What was refreshed:
+
+- the 525 reference towns' fingerprints (418 changed, and every change is wording: house and service descriptions, why a town
+  was founded, what people eat, the ties between people, the powers' descriptions, a few people's positions and constraints,
+  income descriptions, a few arrival scenes; no number, no list length, no draw changed);
+- the espionage fence's 360-town fingerprint (267 changed, wording only, and its other twenty checks passed first);
+- the three references left waiting at the last close: the town-map calibration (the maps of 351 of 504 sample towns are drawn
+  slightly differently because the last round changed two inputs the map reads, the defence ratings and how severe a town's
+  trouble is; the stored building maxima and repeated-shape rates were set to the new measured values: villages up to 32
+  buildings, cities 211, metropolises 266), the dossier text manifest (1,050 cells; one check of what the DM sees and the player
+  does not was re-counted: the player never sees a DM-only line, and the difference now shows up as lines only the DM sees,
+  214 of them), and the preset lighting witness (2 of 8 presets);
+- the small stored figures derived from these (two lists of sixty fingerprints, a control fingerprint, three digests of an
+  edit check, two file fingerprints, one count of archived records).
+
+**Saved towns are unaffected**: these are test references, not anyone's data. Each change is on the veto list: a veto of any
+change reverts that change and refreshes these references again. One test stays red and is not mine: the Defense tab's
+stored-food sentence, which the next round's corpus work is rewording.
+
 ## WHAT IS LEFT, IN ORDER
 
-1. The receipt (in progress).
+Nothing of this assignment. Red by name: `tests/domain/defenseWordsFindings.test.js` (2 arms), not mine.
