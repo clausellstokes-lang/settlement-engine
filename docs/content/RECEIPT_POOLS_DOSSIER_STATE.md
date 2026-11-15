@@ -3047,21 +3047,23 @@ reading rather than a settled one.
 **`Very Safe`** {crisis-scoped}
 1. `[street · watch · crisis: any · no crisis: threat, unrest]` Nothing much happens to people at {settlement}. The watch is heavier than anything working against it, by a margin the town does not have to think about.
 2. `[visitor · crisis: any · no crisis: threat, unrest]` You can walk {settlement} at any hour without trouble, and the people who live there do the same without a second thought.
-3. `[ledger · crisis: any]` The town's record of crimes at {settlement} is short: enforcement far outweighs the criminals, and there is little to write down.
+3. `[ledger · guardPresence · crisis: any]` The town's record of crimes at {settlement} is short: enforcement far outweighs the criminals, and there is little to write down.
 4. `[counterforce · watch · crisis: any]` There is money at {settlement} and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+5. `[ledger · no guardPresence · crisis: any]` The town's record of crimes at {settlement} is short: there is little crime to write down, and neighbours settle what there is between themselves.
 
 **`Safe`** {crisis-scoped}
 1. `[street · crisis: any · no crisis: threat, unrest]` Crime at {settlement} stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.
-2. `[ledger · crisis: any]` The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.
-3. `[visitor · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
+2. `[ledger · guardPresence · crisis: any]` The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.
+3. `[visitor · guardPresence · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
+4. `[ledger · no guardPresence · crisis: any]` The town's record of crimes at {settlement} stays short: there is some crime, and neighbours settle most of it between themselves.
 
 **`Moderate`**
 1. `[street · guardPresence]` {settlement} keeps a working balance: the law is present, so is crime, and neither has the upper hand.
 2. `[ledger · guardPresence]` The town's record of crimes at {settlement} is neither short nor growing: the law and the criminals are close to even, and the next few seasons will decide which way it goes.
 3. `[visitor · tier: ≥ village]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.
 4. `[threshold · watch]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.
-5. `[street · no guardPresence]` Nobody at {settlement} is paid to keep order, and for now the place keeps order well enough by itself.
-6. `[ledger · no guardPresence]` {settlement} has nobody to keep the peace and no great need of anyone yet; trouble here is settled between neighbours.
+5. `[street · no guardPresence]` Nobody at {settlement} is paid to keep order; what order the place has, its own people keep.
+6. `[ledger · no guardPresence]` {settlement} has nobody to keep the peace, and trouble here is left for neighbours to settle between themselves.
 7. `[visitor · guardPresence]` {settlement} has people who keep order, and order holds about as well as anyone here expects.
 
 **`Unsafe`**
@@ -3213,7 +3215,7 @@ the leash is the state, not a fate.
 4. `[counterforce · no unrest]` There is very little street violence at {settlement}, and the watch is not the reason: the people who run the town's crime put down anything that would bring the law on them.
 
 **structure `semi-organized`** {colour}
-1. `[ledger]` Criminal work at {settlement} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.
+1. `[ledger]` Criminal work at {settlement} is coordinated enough to hold routes and territories, though not yet tight enough to run the whole town.
 2. `[street]` Everyone at {settlement} knows someone takes a cut, but who it is changes by street and by season.
 3. `[unfolding]` Rival crews at {settlement} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
 
@@ -3316,7 +3318,7 @@ may not say the contract is failing unless the economic arm supplies that.
 **garrison PRESENT**
 1. `[ledger · colour]` {settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.
 2. `[street · colour]` {settlement}'s soldiers serve all year, not for a season; the town relies on them and grumbles about them in equal measure.
-3. `[visitor · gate · no crisis: under_siege]` Everyone entering {settlement} is counted at the gate by a soldier whose job it is, and counted again on the way out.
+3. `[visitor · gate · no crisis: under_siege]` Everyone who comes through {settlement}'s gate is counted there by a soldier whose job it is, and counted again on the way out.
 
 **militia PRESENT (no garrison)** {colour}
 1. `[ledger]` {settlement}'s defense is its own people under arms. They know the ground, they can be raised, and raising them stops everything else the town was doing.
@@ -3674,7 +3676,7 @@ street, the unfolding).
 3. `[unfolding · colour]` Each week the siege lasts, {settlement} has less to hold out with, and its defence is a race against its stores.
 
 **override: INTERNAL PRESSURE (famine)**
-1. `[ledger · guardPresence]` The guards' rations at {settlement} are cut like everyone else's, and a hungry guard cannot be asked for much for long.
+1. `[ledger · guardPresence]` Those who defend {settlement} eat cut rations like everyone else, and a hungry defender cannot be asked for much for long.
 2. `[street · guardPresence]` At {settlement} the people who keep order spend their days at the food stores, not watching the roads.
 3. `[unfolding · guardPresence]` The longer the hunger lasts at {settlement}, the less its defenders can do, and nothing is filling the stores again yet.
 4. `[ledger · no guardPresence]` {settlement} has nobody paid to defend it, only households, and every household is minding its own share of what is left.
@@ -6995,19 +6997,19 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 5. `[ledger · threat · crisis: any]` What {settlement} spent on its {defwork} in the quiet years is what stands between the town and the threat at hand.
 
 **`WALLED-STRAINED`**
-1. `[ledger · watch · no crisis: under_siege · no crisis: occupied]` {settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences are sound and too few people man them.
-2. `[unfolding · guardPresence · no crisis: under_siege · no crisis: occupied]` {settlement}'s defences are sound, but fewer people turn out each season to man them, and the town is slow to notice.
+1. `[ledger · watch · no crisis: under_siege · no crisis: occupied]` {settlement}'s accounts keep its {defwork} in repair but fall short on the watch's wages, so the defences stand and too few people man them.
+2. `[unfolding · guardPresence · no crisis: under_siege · no crisis: occupied]` {settlement} keeps its {defwork} in repair, but fewer people turn out each season to man the defences, and the town is slow to notice.
 3. `[unfolding · no soldiers · crisis: under_siege]` {settlement} had too few hands for its defences before the siege; now everyone who can hold a weapon has a place on them, and most of them are learning as they go.
 4. `[ledger · crisis: under_siege]` The siege has put more people on {settlement}'s defences than the town could ever find for them in quieter seasons.
 5. `[ledger · no guardPresence · no crisis: under_siege · no crisis: occupied]` {settlement} keeps its {defwork} in repair and pays nobody to stand guard there.
-6. `[street · no guardPresence · no crisis: under_siege · no crisis: occupied]` {settlement}'s defences still stand sound, though nobody in the town has the work of manning them.
-7. `[ledger · guardPresence · no watch · no crisis: under_siege · no crisis: occupied]` {settlement}'s defences are sound, and the only people who would stand on them are the town's own.
+6. `[street · no guardPresence · no crisis: under_siege · no crisis: occupied]` {settlement} still keeps its {defwork} in repair, though nobody in the town has the work of manning the defences.
+7. `[ledger · guardPresence · no watch · no crisis: under_siege · no crisis: occupied]` {settlement} keeps its {defwork} in repair, and the only people who would stand on the defences are the town's own.
 
 **`UNWALLED-SMALL`** {crisis-scoped}
 1. `[street · no threat · crisis: any]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
 2. `[visitor · crisis: any]` No wall marks where {settlement} ends; the last houses simply give way to open country.
 3. `[street · threat · crisis: any]` {settlement} is too small to wall, and what has come for it now makes the smallness a danger rather than a protection.
-4. `[ledger · no threat · crisis: any]` {settlement} has no wall, and nothing has yet come against it that a wall would have stopped.
+4. `[ledger · no threat · no crisis: wartime · crisis: any]` {settlement} has no wall, and nothing threatens it now that a wall would keep out.
 5. `[unfolding · threat · crisis: any]` {settlement} has no wall to fall back behind, so the threat now at hand is being met in the open, house by house.
 
 **`UNWALLED-LARGE`** {colour}

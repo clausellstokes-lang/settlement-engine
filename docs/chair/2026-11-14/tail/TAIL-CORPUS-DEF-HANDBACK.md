@@ -415,7 +415,7 @@ Declared (no new words): Beasts plagued perimeter AND force v2; Economic Surviva
   v1 floors at `prosperity: ≥ moderate`, v9 at `≥ poor` (earlier seats); flooring v3 and v12 leaves a Struggling town in a
   crisis MUTE, and no twin is true without knowing what the score counts: the chair's.
 
-## What is left (after batch 5; THE CURRENT LIST)
+## What is left (after batch 5; SUPERSEDED by the list after batch 6, below)
 1. Batch 5 is landed.
 2. By C16 (five towns or more, widest first), at cff6cd098's census: 03383 DS-DEF-5 ARCANE alchemists v1 (17);
    28625 DS-DEF-1 readiness STRONG v2 (15); 23021 DS-DEF-11 WALLED-QUIET v1 (14); 20059 DS-DEF-3 COMPOUND succession v3
@@ -433,3 +433,104 @@ Declared (no new words): Beasts plagued perimeter AND force v2; Economic Surviva
 Two batches landed (4: 13 rows cured, 1 struck; 5: 5 rows cured, 5 struck), 13 new or changed lines on the veto list
 (14-26). The next seat continues from "What is left (after batch 5)" above, re-taking its before census at this branch's
 tip (CENSUS-3's command with `render.census3d.jsx`, made by `mkrender.py`); `f2.mjs` and `facts.mjs` give the facts.
+
+---
+
+# TAIL-CORPUS-DEF-4 (the fourth seat, session_01ACmDYXd3BE95kDrjFpAC1f, a child of the chair session_01ACmDYZrFEVXyZEUg1NDxxC; 2026-11-15)
+
+Continues on the same branch from **b230bfb8b** (read back from origin). Scratch worktree, its own `npm ci`. FIRST ACT:
+merged origin/lane/join-2026-11-14 AT **d817736d8** as C17 names (clean; `--check` 0): **7ccad225e**, pushed. The base
+census there (CENSUS-3's command, `render.census3d.jsx`): 720 towns, 30,112 distinct sentences on the tabs. The named
+test files (every test naming the leaves or the source: 60 files): 36 reds at the merged base, carried.
+INSTRUMENT ADDED (scratch only): `towns.py <inv.json> <run> <fold substring> [expr over R (record), D (dump)] [dist expr]`.
+
+## The chair's ruling since (C18, 2026-11-15 04:03 UTC; vetoable by the owner)
+- (C18) WHAT THE BAR'S READERS MET IN THESE POOLS (ten fresh towns read whole and cold by two readers each at the landed
+  tip 5d1e3096b): each flag a candidate, checked at this branch's tip first (batches 4 and 5 are not on the read line),
+  measured over every town of the 720 that prints it, cured at the pool by a declaration (measured by replay), a twin or a
+  rewording: DS-DEF-11 UNWALLED (78) beside a past occupation; DS-DEF-5 garrison gate (64) beside an underground network;
+  DS-DEF-4 semi-organized (53) beside a thieves' guild with a head; DS-DEF-3 Moderate (36) beside "Law & order: Critical";
+  DS-DEF-2 Economic Survival pay book (15) and DS-DEF-8 rations (4) where only a militia stands; DS-DEF-11 WALLED "sound"
+  (13) beside a Vulnerable defence; DS-DEF-3 Safe v2 "enforcement" where nobody is under arms; DS-POW-4 riskLabel (2)
+  beside a live succession crisis. THE "ECONOMIC SURVIVAL: STRONG" QUESTION IS PARKED (the ratings themselves are the
+  record's measuring seat's): those lines are left. THEN: what is left that prints in five towns or more, widest first.
+
+## Batch 6 — C18 (commit after 7ccad225e)
+
+| flag | pool · line | false in (by the record, at the merged base) | cure | towns before → after |
+|---|---|---|---|---|
+| UNWALLED | DS-DEF-11 UNWALLED-SMALL v4 "nothing has yet come against it that a wall would have stopped" | 27 of 78 (`history.historicalEvents` holds "The Occupation" or "The Siege"); 6 at war | REWORDED (no past claimed) + DECLARED `no crisis: wartime` | 78→0; the new words 72 |
+| garrison | DS-DEF-5 garrison PRESENT v3 "Everyone entering X is counted at the gate" | 17 of 64 (DS-ECO's "underground house" facet prints: "come and go by passages under the town") | REWORDED (only the gate's traffic counted) | 64→0; new 64 |
+| structure | DS-DEF-4 semi-organized v1 "not coordinated enough to have a head" | 14 of 53 (a `criminal` power among `powerStructure.factions`) | REWORDED (no headlessness claimed) | 53→0; new 53 (tier noun: "the whole city") |
+| Moderate | DS-DEF-3 Moderate v5 "keeps order well enough by itself"; v6 "no great need of anyone yet" | 22 of 36; 23 of 34 (the Foundations' Law & order Critical or Collapsed) | REWORDED v5, v6 (no claim that order holds) | 36→0, 34→0 |
+| DS-DEF-8 | override INTERNAL PRESSURE (famine) v1 "The guards' rations" | 1 of 4 (a militia only: r2s-famine-village-1) | REWORDED ("those who defend") | 4→0 |
+| WALLED | DS-DEF-11 WALLED-STRAINED v1 "the defences are sound"; v2, v7 "X's defences are sound"; v6 "still stand sound" | v1 6 of 22; v2 29 of 49; v7 26 of 28; v6 3 of 4 (`defenseProfile.readiness` Vulnerable) | REWORDED (the {defwork} kept in repair; nothing said of holding) | each →0 |
+| Safe v2 | DS-DEF-3 Safe v2 "enforcement keeps it down"; v3 "plain that somebody keeps it that way"; Very Safe v3 "enforcement far outweighs" | 1 of 6; 1 of 17; 1 of 11 (no `guardPresence`: no watch, garrison, militia or company) | DECLARED `guardPresence`; TWINS Safe v4, Very Safe v5 `no guardPresence · crisis: any` (a no-guard Safe town under a threat or unrest crisis was left mute) | 1→0, 17→16, 3→2 |
+
+STRUCK: **pay book** (DS-DEF-2 WEAK v1, 15): the read line held the old words; batch 5 (not on the read line) reworded
+v1 and v2 for exactly this (an unpaid militia is "paid late or not at all"); DS-DEF-8 rations was the same class (cured
+above). NAMED, NOT CURED (fewer than five towns, and a class of the record): **riskLabel** (DS-POW-4 Stable v1 "Nobody … is
+in a position to take the X's place", 52 towns): in 3 (r2r-hamlet-31, r2r-hamlet-39, r2r-thorp-48)
+`history.currentTensions` holds a `succession_crisis` with a "Popular candidate" faction, written in the past tense ("the
+ruler of the time was aging"), beside a power record with no challenger: two homes for one fact; no atom reads the
+history's tensions.
+MEASURED BY REPLAY (`replay2.mjs`, NEWV the two twins): UNWALLED-SMALL v4→v1 2, v4→v2 4 (the war towns); Safe v2→v4 1
+(r2s-infiltrated-village-2), v3→v4 1 (r2r-thorp-28); Very Safe v3→v5 1 (r2r-village-49). NO OTHER POOL MOVED.
+TOLD TO THE CHAIR BEFORE THE PUSH (the 20-town rule): UNWALLED v4, garrison v3, WALLED-STRAINED v1/v2/v7, Moderate v5/v6
+replace TRUE lines in more than twenty towns (near-synonyms, each claiming less).
+INVENTORY DIFF (7ccad225e → batch 6): 30,112 → 30,119; 21 gone, 28 new; every row GONE, or fewer by exactly its measure
+(Safe v3 17→16, Very Safe v3 3→2); no other line in fewer towns. More towns: UNWALLED v2 "No wall marks where X ends"
+106→110 and v1 "too small to wall and knows it" 19→21 (the war towns): TRUE (v1's "safety is its distance and its
+unimportance" in a thorp at war is the line's own claim, admitted there at the base). INHERITORS read where they print:
+the new words (below).
+GUARD: tailCorpusDefGuards +4 DECLARED (each with its `instead`), +3 KEEP, +10 REWORDED: 14 red at the base (the base's
+leaf restored, not committed), the keeps green; 73 green after.
+PINS re-keyed by identity (+2 variants, the twins): composeStateProse variants 2953→2955; proseEntryContradiction
+3421→3423, 2716→2718 (twice), the annex row "the same trades exempt" re-addressed 6162→6164, the trailing-coordinate class
+375→373 (report-only); proseMoveGrammar repeated openers 135→137, share 0.158→0.160; proseWaveGate units 627→629.
+GATES: generator 0 / `--check` 0; strict 0; type ratchet 0; eslint 0 on the touched files; presumed-things fresh 145
+stale 2 (exit 1; none in these files: narrativeText.js, computeActiveChains.js, carried by the merge); grid 2 falls
+(r2r-city-0, r2s-insurgency-metropolis-0 P7a, as before); the named files: 36 reds at the merged base, 35 after, none
+new (the anti-vacuity QUALIFY ARM on DS-POW-5 theocracy went green).
+
+### New or changed lines (the owner's veto list; towns read: smallest · largest · a siege/famine/occupation)
+27. DS-DEF-11 UNWALLED-SMALL v4 (`no threat · no crisis: wartime`): "{settlement} has no wall, and nothing threatens it
+    now that a wall would keep out." — 72: r2s-religious_conversion-thorp-0 · r2r-village-52 · r2s-famine-thorp-2.
+28. DS-DEF-5 garrison PRESENT v3: "Everyone who comes through {settlement}'s gate is counted there by a soldier whose job
+    it is, and counted again on the way out." — 64: r2s-infiltrated-town-2 · r2r-metropolis-32 · r2s-occupied-town-1.
+29. DS-DEF-4 semi-organized v1: "Criminal work at {settlement} is coordinated enough to hold routes and territories,
+    though not yet tight enough to run the whole town." — 53: r2r-hamlet-17 · r2s-politically_fractured-metropolis-2 ·
+    r2s-under_siege-city-0.
+30. DS-DEF-3 Moderate v5: "Nobody at {settlement} is paid to keep order; what order the place has, its own people keep."
+    — 36: r2r-thorp-48 · r2r-village-51 (no siege, famine or occupation prints it).
+31. Moderate v6: "{settlement} has nobody to keep the peace, and trouble here is left for neighbours to settle between
+    themselves." — 34: r2s-infiltrated-thorp-2 · r2r-village-32.
+32. DS-DEF-8 INTERNAL PRESSURE (famine) v1: "Those who defend {settlement} eat cut rations like everyone else, and a
+    hungry defender cannot be asked for much for long." — 4: r2s-famine-village-1 · r2s-famine-metropolis-2.
+33. DS-DEF-11 WALLED-STRAINED v1: "… fall short on the watch's wages, so the defences stand and too few people man
+    them." — 22: r2s-infiltrated-town-2 · r2s-indebted-metropolis-3.
+34. WALLED-STRAINED v2: "{settlement} keeps its {defwork} in repair, but fewer people turn out each season to man the
+    defences, and the town is slow to notice." — 46: r2r-thorp-6 · r2r-metropolis-7.
+35. WALLED-STRAINED v6: "{settlement} still keeps its {defwork} in repair, though nobody in the town has the work of
+    manning the defences." — 4: r2r-thorp-43 · r2r-village-17.
+36. WALLED-STRAINED v7: "{settlement} keeps its {defwork} in repair, and the only people who would stand on the defences
+    are the town's own." — 28: r2s-succession_void-thorp-3 · r2s-famine-village-1 · r2s-famine-village-3.
+37. DS-DEF-3 Very Safe v5 (twin, `no guardPresence · crisis: any`): "The town's record of crimes at {settlement} is short:
+    there is little crime to write down, and neighbours settle what there is between themselves." — 1: r2r-village-49.
+38. Safe v4 (twin, `no guardPresence · crisis: any`): "The town's record of crimes at {settlement} stays short: there is
+    some crime, and neighbours settle most of it between themselves." — 2: r2r-thorp-28 · r2s-infiltrated-village-2.
+Declared (no new words): Safe v2, v3 and Very Safe v3 `guardPresence`.
+
+## What is left (after batch 6; THE CURRENT LIST)
+1. C18 is landed (batch 6) but riskLabel (named above). THE ECONOMIC SURVIVAL STRONG CLASS is parked (C18).
+2. By C16 (five towns or more, widest first), measured at cff6cd098's census (re-measure each at this tip first):
+   00714 DS-POW-6 criminal revenue v1 (19: a PAIR with another writer's famine line: read it first); 03383 DS-DEF-5 ARCANE
+   alchemists v1 (17); 28625 DS-DEF-1 readiness STRONG v2 (15); 23021 DS-DEF-11 WALLED-QUIET v1 (14); 20059 DS-DEF-3
+   COMPOUND succession v3 (13); 00779 DS-DEF-11 UNWALLED-SMALL v5 (12); B00729 DS-DEF-3 COMPOUND migration v1 (12); B20295
+   DS-DEF-6 port only v2 (11); B14096 / 00985 DS-DEF-8 QUARANTINE v2 / v1 (11, 9); 23379 DS-DEF-8 RELIGIOUS UPHEAVAL v3
+   (10); 14024 DS-DEF-8 COMMAND SPLIT v1 (10); 02617 / 20576 DS-DEF-5 free company v1 / v2 (9, 9); 06123 / B05859 DS-POW-6
+   capture RECOVERING (9, 6); B21649 DS-DEF-4 organized v4 (9); 20485 DS-FTH-4 heresy hunted v5 (8); 22361 DS-POW-5
+   merchantArmy v1 (7); 11931 DS-DEF-5 militia PRESENT v3 (7); 15476 DS-DEF-3 COMPOUND plague v2 (6); 28629 DS-DEF-12
+   CAPACITY enough v2 (5); B19173 DS-FTH-4 crusaderSynthesis v1 (5).
+3. OPEN BY C17 (the merge is made: 7ccad225e holds `ruling body` and `rival power`): the council and autocrat rows, by
+   width (04066 autocrat v2 among them). WAITING: DS-DEF-9 magicDependency (C9); 44 rows in fewer than five towns (C16).
