@@ -295,6 +295,12 @@ the powers and their relationships/conflicts counts, legitimacy, conditions) bes
   powerStateProse.js`, the four call sites named above): GIVEN TO THE CIVIC DISPLAY'S SEAT; no pool is reworded round it.
 - (C16) THE ORDER: B00937, 26310, DS-CND-1; then the rows printing in FIVE TOWNS OR MORE, widest first; a row in fewer
   than five towns waits.
+- (C17, the chair 2026-11-15 02:26 UTC, read by this seat only after its hand-back) C14 IS LIFTED: on the 720 the
+  density resize never changes the governing power (name, `government`, category: 720 of 720), so `ruling body` is safe
+  at every step and takes new lines again. THE COUNCIL ROWS ARE OPEN: merge origin/lane/join-2026-11-14 AT d817736d8 (it
+  holds both atoms; the only merge), re-take the before there, and take the council rows in their place by width. STILL
+  NOT TO BE KEYED ON: the governing power's capture state (it moves after the write in 103 towns) and its legitimacy
+  crisis note (11). The one-member council stays the record's class: leave those lines.
 - (U1) the weekly usage warning: commit and push every batch the moment it holds, with WHAT IS LEFT current; hand back at
   250,000; one line to the chair at the hand-back, a stop, or a question only.
 
@@ -420,7 +426,7 @@ Declared (no new words): Beasts plagued perimeter AND force v2; Economic Surviva
    11931 DS-DEF-5 militia PRESENT v3 (7); 15476 DS-DEF-3 COMPOUND plague v2 (6); 28629 DS-DEF-12 CAPACITY enough v2 (5);
    B19173 DS-FTH-4 crusaderSynthesis v1 (5); 00714 DS-POW-6 criminal revenue v1 (19: a PAIR with another writer's famine
    line: read it first).
-3. WAITING: the council and autocrat rows (C14; 04066 autocrat v2 among them); DS-DEF-9 magicDependency (C9: B14709 04098
+3. OPEN BY C17 (not begun): the council and autocrat rows (merge d817736d8 first; 04066 autocrat v2 among them). WAITING: DS-DEF-9 magicDependency (C9: B14709 04098
    11437 B10908 B03973); the Economic Survival STRONG class (above, the chair's); 44 rows in fewer than five towns (C16).
 
 ## TAIL-CORPUS-DEF-3 HANDED BACK at the 250,000 line (2026-11-15 ~03:40 UTC), batch 5's tip 1e7344d2e
