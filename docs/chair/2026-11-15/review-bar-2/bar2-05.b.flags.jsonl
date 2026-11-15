@@ -1,0 +1,10 @@
+{"id":"C7740","town":"bar0-city-wartime-rand-4","sev":"MED","kind":"PAIR","why":"says the market lives off through-traffic; Foundations says Trade connectivity Collapsed, and wartime crown requisition is the only traffic","other":"C7805"}
+{"id":"C8434","town":"bar0-city-wartime-rand-4","sev":"MED","kind":"STATE","why":"says fish sold daily from the morning catch, unmarked; LAND gives Fishing Grounds depleted and TRADE says local sea fisheries exhausted","other":"C8598"}
+{"id":"C8653","town":"bar0-city-wartime-rand-4","sev":"MED","kind":"PAIR","why":"says what it keeps put by is not deep; FOOD gives a granary and 8.7 months in store, and C7794 says about nine months","other":"C8651"}
+{"id":"C8655","town":"bar0-city-wartime-rand-4","sev":"MED","kind":"STATE","why":"says its own fishing comes first among the food it raises; LAND gives Fishing Grounds depleted and C8598 says the fishery is fished out","other":"C8598"}
+{"id":"C8932","town":"bar0-city-wartime-rand-4","sev":"MED","kind":"PAIR","why":"says would-be usurpers cannot take the hall and all know it; the Military/Guard text says a single shift could swap their positions","other":"C9050"}
+{"id":"C8985","town":"bar0-city-wartime-rand-4","sev":"MED","kind":"PAIR","why":"says the hall is free of the criminals; another line says the richest merchants and the criminal bosses are often the same people","other":"C8929"}
+{"id":"C9046","town":"bar0-city-wartime-rand-4","sev":"MED","kind":"PAIR","why":"says the watch keeps order reliably; the Tensions say crime is rising faster than those in charge can answer, and Law & order is Strained","other":"C7746"}
+{"id":"C9161","town":"bar0-city-wartime-rand-4","sev":"MED","kind":"PAIR","why":"says fortification and forces are chronically underfunded with poor equipment and low morale; STATE says Well-Defended and C9046 and C9061 say well-funded and in good order","other":"C9061"}
+{"id":"C7720","town":"bar0-city-wartime-rand-4","sev":"LOW","kind":"PAIR","why":"says the settlement is loyal; legitimacy is Tolerated (45) and C8870 says it tolerates the Merchant oligarchy and no more","other":"C8870"}
+{"id":"DONE","lines":2371,"blocks":1,"flags":9}
