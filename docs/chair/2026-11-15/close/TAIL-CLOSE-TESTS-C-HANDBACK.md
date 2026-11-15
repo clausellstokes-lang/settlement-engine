@@ -7,11 +7,11 @@ Branch `lane/tail-close-tests-c-2026-11-15`, cut from `lane/join-2026-11-14` at 
 - `tests/lint/proseDrawnAnchors.walker.test.js`: red, six files (1 / 1 / 24 / 4 / 2 / 1, frozen none).
 - `docs/chair/2026-11-14/probes/POWERS-16/{sumpdf,surf}.test.jsx`: collected, both red (import from an undefined `TREE`).
 
-## 1. The manifest (status: batch 2 of 4 pushed)
+## 1. The manifest (status: batch 3 of 4 pushed)
 Every entry is kind `rationale`, one written reason per file; none `uncovered` (baseline stays 186); no planted mutation was added, so `scripts/mutation-sweep.sh` and MUTATED_FILES are unchanged. Each rationale cites the file's introducing commit by hash (`git log --diff-filter=A`), names what the file pins (door, reader, towns), and states its red-first only where the commit body or the file header records it, in their words. Where neither does, it says "its red-first is not on record" and names the source file where a sweep plant is owed. No rationale claims an execution by this seat.
 The red-first is not on record for seven: `tests/generators/prosperityStanding.test.js`, `tests/generators/defenceParts.test.js`, `tests/generators/npcStructureBody.test.js`, `tests/lint/defenceDerived.walker.test.js` (its only planted red is on fixture strings inside the file), `tests/data/tailHistoryBatch1.test.js`, `tests/generators/tailTies3Batch1.test.js`, `tests/data/holderTitleForms.test.js` (its commit records only the births arm red).
 `tests/generators/magicCountOnce.test.js`: its commit's cure (reading A) was later withdrawn, so its rationale cites the header's red-first, not the commit's.
-Batches: 1 = 39 entries, 2 = 38, 3 = 39, 4 = 38 (committed one batch at a time). Remaining after batch 2: 77.
+Batches: 1 = 39 entries, 2 = 38, 3 = 39, 4 = 38 (committed one batch at a time). Remaining after batch 3: 38.
 
 ## 2. The anchors (status: 3 of 6 files done; 3 MOVING, held for SWEPT)
 Which files were moving: the brief's `git diff --quiet origin/lane/join-2026-11-14 origin/<branch> -- <file>` flags all six on nearly every builder branch only because those branches are BEHIND the join (they do not yet carry the file). I judged by commits ahead of the join that touch the file (`git log join..branch -- file`): MOVING are `tests/domain/corpusEcoTailGuards.test.js` (tail-corpus-eco), `tests/domain/tailCorpusDefGuards.test.js` (tail-corpus-def) and `tests/generators/tailNarrativeRows.test.js` (tail-narrative). These are held until the chair says SWEPT.

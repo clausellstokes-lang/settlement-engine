@@ -4158,6 +4158,162 @@
     "tests/generators/pressureRowsRead.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by R2-CODE-A-6 (CENSUS-2's writers), commit 52e99133. It pins narrativeText.js :: PRESSURE_SENTENCES drawn by generatePressureSentence: the wartime workshop only beside a house of craft (hasWorkshop), succession_void[5]'s merchants needing a market, the streets and districts rows the middling band, and guard towns r2s-wartime-thorp-3, r2s-succession_void-thorp-2, r2s-insurgency-thorp-0, r2s-slave_revolt-hamlet-3; its header adds later R2-CODE-A-7 arms (courts, the merchant class). The commit records it red 6 of 10 at ff71e26c2 and green 10 of 10 at the cure. A sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/loyaltyHooksRead.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-6 (the chair's hook rows and the stage read's low 8), commit c11bad85. It pins npcData.js :: NPC_FACTION_LOYALTY as drawn by npcGenerator.js :: generatePlotHook: the merchant hook reads `market`, the master craftsman and the three office twins read `tier: ≥ village`, and a refused hook resolves draw-free in the holder's own pool; its guard towns include r2r-thorp-1, r2s-succession_void-thorp-1, r2r-thorp-17, with r2r-town-1 keeping the merchant hook. The commit records it red first (11 of 12 at ff71e26c2) and green at the cure (12 of 12); a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/supplyHooksReadTheRecord.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-8 item 7a (ROUND-3-CUT #208), commit ffea1376. It pins foodBalance.js :: deriveSupplyRiskAnalysis's Trade Monopoly hook \"One importer now brings in all the grain\": written only where factsOf(...).imports (primaryImports) holds grain, with rr2s-hamlet-plague_onset-rand-1 and r2r-thorp-19 as the cut's towns and r2r-hamlet-16 and r2s-under_siege-city-0 as the guard towns that keep it. The commit records it red at ae12d68d3 (2 of 3: the unit arm and the collected born arm) and green at the cure; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/timberHookForestHeld.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by R2-CODE-A-8 item 7b (ROUND-3-CUT #1004, #1336), commit 107c3049. It pins foodBalance.js :: deriveSupplyRiskAnalysis's timber line (\"Something is killing the forest the timber comes from\"): written only where availableNativeResourceKeys holds a standing managed_forest, shipbuilding_timber or mountain_timber and not where siegeCutsImports, later re-keyed by identity to the live-material rule; its towns include rr2s-metropolis-plague_onset-port-1 and rr2s-city-occupied-rand-1. The commit records it red at ffea13764 (3 of 4) and green at the cure; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailCrisisIronHooks.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-CRISIS K9/K17, commit f20ce315. It pins the three peacetime iron hook literals in generators/economy/foodBalance.js and their keys in outlookHookSiblings.js :: PEACE_IRON_HOOKS (READ-ALL 22079 22080 20908): on births of the census's r2r-/r2s- seeds the stored economicViability.plotHooks name no smiths, forge or iron merchants, the reworded line prints in their place, and a KEEP sibling still prints. The commit records its 4 FALSE pairs red at the base (4 of 4) with 1 KEEP green; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/stressLateReRead.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-CRISIS batch 7 (K21, ORDER-MEASURE-1's cure C1b), commit cd0b1ab7. It pins the late re-read in assembleSettlement.js (after every roster writer and resolveFactionLabelsAtClose, before the receipt) by source order, that every stored stress summary equals its renderer on the final record, the insurgency's strong line keyed by `rival power`, and monster_pressure's \"built for quieter times\" KEEP pairs. The commit and header record the strong-line pair red at 3f45e6fa9 and the plain-line pair red under an executed plant that drops the late re-read; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDefeconSafetyLines.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON batch 1, commit 6b8a9b99. It pins the safety profile's lines (safetyProfile.js, safetyLineTruth.js) on census towns of the 720's configuration: each GONE pair a sentence that must not print where the record makes it false (the vacuum line, licence and stall lines in small places, the gates under a siege, the wizard's-tower hook, the plural force verbs) with what prints instead, plus KEEP pairs such as #15308's vacuum line under a criminal seat. The commit records 22 GONE pairs red at bcad1a358 and 18 KEEP pairs green before and after; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDefeconIncomeRows.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON-2 batch 2, commit df2fa5ca. It pins the income rows of economicState.js :: generateEconomicState as the Economics tab prints them: no \"Agricultural Rents ... from tenant farmers\" without a steward or reeve (the Harvest row instead), the siege-closed sources printing label and share alone, a front business that is no smuggling house, and no \"criminals who run them\" without a criminal house, each on a census town of the 720 with KEEP siblings. The commit records 10 GONE pairs red at the base (345f13157) and 7 KEEP green; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDefeconBatch3Lines.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON-3 batch 3, commit 2ac50c55. It pins incomeLineSiblings.js :: trueIncomeDesc and its neighbours on census towns of the 720: the fish lines under a fish famine or a fished-out coast, the quarry and entrepot lines, international commerce under a siege, the iron hooks' condition (D8), the banks' little trade, the craft advice, the inland harbour master, and the D2 agreement of \"Highly diversified\" with incomeMixPoolKey. The commit records 15 GONE pairs red at the base, 8 KEEP green both, and an executed plant that reds the quarry KEEP (not committed); a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDefeconBatch4Lines.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON-4 batch 4 (D27, by width), commit b40f795b. It pins four rows on census towns of the 720: a crisis that adds mouths is headed \"Crisis Adding Mouths to Feed\" not \"Crisis Cutting the Food Supply\" (B05887), the alchemist's thriving line not in a Struggling or Poor place (03703), the slave revolt's reworded harvest line (B27952), and the half-worked chain's export-potential reason (15458, evaluateInstitutionDeps). The commit records 6 GONE pairs red at 21e578caa, 3 KEEP green before and after, and an executed plant (the alchemy twin always taken) that reds the KEEP; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDefeconMadeList.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON-C (C2-A, the chair's ruling D6), commit 10e1cf0e. It pins computeActiveChains.js :: deriveLocalProductionFromChains, the made list economicState.localProduction on the census's r2r- births: no category key (trade access, maritime access, Toll income, Market taxes, luxury, Strategic control, water) is listed as made, and a good is made only where a house that digs or works it stands (C1-A); r2r-town-14 keeps its jeweller's cut gemstones. The commit records 9 GONE pairs red at 345f13157, each with a KEEP sibling in the same town; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDefeconServiceLines.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON-C batch 3, commit e4462712. It pins two lines of computeActiveChains.js on the census's r2r- births: INSTITUTIONAL_SERVICE_MAP's military hire service (row 03905) needs a mercenary quarter, free company hall, hireling hall or hired blades, with r2r-city-0 and r2r-city-1 keeping it; and the external-mill note (rows 15738, 11365, 31448) prints the plain toll line instead of the lord's mill. The commit records 6 GONE pairs red at 345f13157 and 2 KEEP pairs; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDefeconExportSide.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON-C-2 (C1-E, the chair's ruling D18), commit a10a457e. It pins computeActiveChains.js :: deriveExportsFromChains reading GOOD_WORKING_HOUSES: economicState.primaryExports sends a good out only where a house of the town digs, makes or works it, coal and peat ungated (coal still leaves r2r-city-31), the defended pass's toll kept, and D19's air-dock docks not waterborne. The commit records 18 GONE rows red at fb341090c, 11 KEEP rows and the coal row green before and after, and an executed plant (the pass's exemption removed) that reds its KEEP row; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailDefeconDEmptyRosterBand.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON-D (the chair's D20, RECORD-MEASURE-2 class f), commit db505beb. It pins src/data/bandLadders.js :: readinessBandOf's three-state `held`: on census towns of the 720 an empty roster (no walls, garrison, militia, watch or hired company) reads at most Vulnerable instead of \"Lightly Defended\", a town with a force keeps its band, and the leaf test checks false caps, true floors above Undefended, omitted is the ladder alone. The commit records it red at 345f13157, and the header each GONE town red at that base; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/houseInputReaches.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DEFECON-R (M-S, the chair's ruling of 2026-11-15 00:44 UTC), commit 5a446d29. It pins generators/resourceGenerator.js :: evaluateInstitutionChain: a smelter another input reaches writes no `missing` gap row while its `imported` rows still print, the four unfed smelters keep all three `missing` rows (KEEP), and the header's (M-V) arm for vintners and glassblowers on a route under no siege. The commit records it red at the base (the first arm) and an executed plant that counts every house reached reddening the KEEP arm (not committed); a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailDisplayCivic3V3.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-DISPLAY-CIVIC-3 (V3, ruling D26 lending safetyProfile.js and safetyLineTruth.js), commit 89326e70. It pins seven safety lines on births of the census's seeds: the ordinary patrol and well-paid frames take their twin under a siege, occupation or famine (safetyLineTruth.js :: patrolCrisisOf / patrolTwin), war profiteering needs a road, deserters get shelter not food under hunger (settleDesertersUnfed), the migrants' passage claims no bed, and the supply-cut patrol line needs a severed supply (r2r-town-9). The header records every cured pair red at the base and the kept pairs green; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/layoutNamesWhatStands.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-EXPORTS-JOURNAL batch 1 (ruling J1), commit 26e9210a. It pins spatialGenerator.js :: generateSpatialLayout's layout line on census births: a line whose noun the record denies (a single defended gate with no gate, a citadel or keep with no Citadel, stone walls round a palisade, warehouses and chandlers without both houses) takes its twin without that noun on the same slot, and KEEP towns where the noun stands print the whole line. The commit records 11 RED pairs red at the base, 6 KEEP pairs green before and after, and an executed plant that reds all 6; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHistoryBatch1.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HISTORY batch 1, commit 3da34c70, which landed the predecessor's patch (Y1, Y2, Y4) with Y6 and Y7. It pins the history group's tables on census towns: no war hook of the external threat where no war is in force (and KEEP where one is), the succession void and the insurgency naming no powers or offices a small place lacks, no arrival line of traffic or offered food under a siege or famine (with KEEPs), and salt fish naming no carts. The commit says only that the births-over-seeds suites match at base and cure; its red-first is not on record; no planted regression has been run for it; a sweep plant is owed when the sweep next touches src/data/historyData.js, stressTypes.js or arrivalProse.js."
+    },
+    "tests/data/tailHistoryBatch2.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HISTORY batch 2 (the chair's ruling Y5), commit 7bef72cb. It pins historyGenerator.js :: tensionByMemory for ten tension templates (plague_years, great_fire, great_flood, popular_uprising and the rest): a tension whose own event is not on the town's timeline prints its byMemory.unanchored live quarrel, not its event's aftermath, at the smallest and largest census town of each type, and a tension whose event IS on the timeline keeps its own words. The commit records it red at the base (20 of 20) and green at the cure; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHistoryBatch3.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HISTORY-3 batch 3 (the chair's Y13, Y5 widened), commit 6f7786a7. It pins historyGenerator.js :: tensionByMemory for thirteen more tension types (crime_wave, resource_scarcity, guild_conflict, legitimacy_crisis and the rest): an unanchored tension prints no past of an event the timeline lacks, the scarcity's own lead is kept (r2r-thorp-16: the levy), and an anchored tension keeps its own words. The commit records the guard 26 of 26 red at the base; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHistoryBatch4.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HISTORY-3 batch 4 (the chair's Y14), commit a9abf55e. It pins src/data/arrivalProse.js, the arrival pool: the moneylender's queue below a village, the master's mark without a smith or guild, horse traders without horses, and goods, cartloads, cloth and herb carts where no route reaches leave the census towns that make them false, the reword or the declared twin (twinOf) printing on the same slot, with KEEPs where the town holds the fact. The commit records it 8 of 8 red at the base; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHistoryBatch5.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HISTORY-4 batch 5 (the chair's Y16), commit d7921a40. It pins historyData.js :: HISTORY_DESC_SIBLINGS as resolved by generators/history/sizedLastingEffects.js: a timeline event's lasting effect names no watch towers without a force, no levy roster, security office, denunciation records or arbitration council below a town, no rival congregations in a thorp, no mandated grain reserves below a village or under a famine; the twin prints instead, the original kept where held. The commit records it red 15 of 15 at 1918e3d22, green at the cure, KEEP 7 green both; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses1Gaps.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HOUSES batch 1 (INPUT GAP, the chair's ruling H2), commit a2550c0e. It pins the house descriptions (institutions[].desc) of 11 houses, Potter, Brickmaker, Vintner, Smelter and others: a census town whose house has a resourceAnalysis.gaps[] `missing` row prints the rewording that claims the trade, not the present work, and a town whose house has its input still names its trade (KEEP). The commit records 31 red pairs red at the base, 8 keep pairs green before and after, and that a plant reds it; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses2Pronouns.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HOUSES batch 2 (THE PERSON'S SEX, the chair's ruling H2), commit ac471020. It pins 26 house description texts of 21 houses: where the house's own person (npcs[].institution.key) is of the other sex, a census town prints the sexless rewording, not the old text (\"all his making\", \"Women brew and sell ale\"), and the house still names its trade (KEEP). The commit records 18 red pairs red at the base and 5 keep pairs green before and after; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses3DefenceDeposit.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HOUSES-2 batch 3 (the chair's H7), commit 2c10ddef. It pins house texts (institutions[].desc) that named what the record denies: the metropolis wall house's citadel ring with no Citadel, the burial ground's gate with none, the stone quarry at work where depleted or stone is imported, the Mine as the founding reason, the Garrison in noble or royal pay, and the fishing community over depleted fish; census towns print the rewording and KEEP houses still name what they are. The commit records 12 RED pairs red at the base and 6 KEEP; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses4CoastCrown.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HOUSES-2 batch 4 (H7 and the one hedge form), commit e5a24fd8. It pins house texts on census towns: the Cartographer's guild's sea charts need a coast (a DESC_VARIANT_SIBLINGS twin), the Weekly market's charter and Message network lines name no crown or noble the ruler is not, the woodcutters' charcoal wood needs a Charcoal burner, a coastal city keeps its sea charts (KEEP), and no description keeps batch 1's older hedges. The commit records 9 RED red at the base, 3 KEEP, and the one-hedge-form check red at the base; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses5ExportsTerrain.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HOUSES-3 batch 5 (the chair's H13, exports' rows first), commit 57a19f80. It pins resourceAnalysis.strategicValue and house texts on census towns: the coast's \"controls sea routes and naval access\" and the desert's caravan control reworded, the river ferry's \"for generations\" against history.age, the performers' fairs, the hamlet's banalite mill under no lord, and the fish market in the one hedge form \"whenever fish can be had\", with KEEP siblings. The commit records 19 RED pairs red at the base and 5 KEEP; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses6FishersLanding.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HOUSES-4 batch 6 (the chair's H17), commit ba3af420. It pins the Fisher's landing's three texts (the catalogue line and PAIRS[21]'s two): a census town whose every fishing resource is in config.nearbyResourcesDepleted prints the hedge \"whenever fish can be had\" instead of the old unhedged catch claim, and a town with a live fishery still prints its landing's racks (KEEP). The commit records 12 red pairs at the base and 3 keep; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/data/tailHouses7GovernanceWords.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-HOUSES-4 batch 7 (the chair's H18 (i)), commit e45e08b0. It pins two governing houses' texts on census towns: City administration's three texts no longer say \"less formally constituted than a council\" where a council, senate or assembly governs, and claim the house's own trade instead; Lord's appointee reads \"One of the lord's choosing\" not \"A man of the lord's choosing\" where the appointee is a woman; true siblings still print (KEEP). The commit records 11 red pairs at the base and 2 keep; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/tailNarrativeRows.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-NARRATIVE batch 1, commit b5248130. It pins narrativeText.js (PRESSURE_SENTENCES, POLITICAL_FLAVOR, famineFoodIsPower) and narrativeGenerator.js :: genPressureDetail's roster flags (hasWarehouse, hasCivicHall, hasForce, millExports) on census towns: the flagged sentence no longer prints and its slot says what the town bears, true siblings still print; later describes (B2 to B4) add the origin row and political-flavour arms. For batch 1 the commit records 22 pairs red at base, 9 keeps green, and an executed plant that reds the keeps; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/people/titleLinesNeedWhatTheyOffer.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS batch 1 (the chair's ruling P2), commit 12d8fd0a. It pins src/data/people/titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS as settled draw-free by people/poolMap.js :: settleTitleLines: the innkeeper's meal and room, the baker's bread, the boat-headman's fish, the hunt, the games, the post and trade out of town are refused under a famine or siege, the hunt's market sale needs a market, and the brewer's secret names no bakers; 16 towns born as the 720. The commit records it red at bcad1a358 (12 of 16 towns, every refused pair) and an executed plant (the innkeeper's declaration removed) reddening it again; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/power/standingReadsTheNamedPower.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS batch 2 (the chair's rulings P1 and P4), commit 21dc7fa4. It pins power/claimStanding.js :: settleClaimsToLabel and power/factionStanding.js :: annotateFactionStanding (reading factionDynamics.js :: powerLabelOf): \"hold real influence\", \"close behind\", \"a consistent civic presence\" and the craft guilds' lines are not printed of a Minor or Suppressed power, and the elders' respect lines not beside a legitimacy crisis; 19 towns born as the 720 with KEEPs. The commit records it red at bcad1a358 and an executed plant (isWeakPower always false) reddening it again; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/power/occupiedSeatReads.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS-2 batch 1 (P4's occupation half), commit a708f0cf. It pins power/governingStressVignettes.js :: occupiedSeatLine as read by rulingStructure.js and domain/display/governanceAccount.js's seat draws: under an occupation the seat's twin prints and the account says it answers to the occupiers, the occupier at the competitive tie is at odds with the hall; KEEP r2r-metropolis-15 (\"A duke or duchess governs\") and r2r-city-44. The commit records 7 red at the base and an executed plant (the atom read as `under_siege`) that reds 5; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/power/tailPowers3Labels.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS-3 batch 1a (P3), commit 0b1b4145. It pins the governance account's powerNameInProse and pluralPowerName reading domain/display/powerSentenceName.js (\"The Guard\", not \"The Military/Guard\"; \"The Neutrals ... their price\"), and the header's P16 arm, the stability label of power/governanceNarrative.js and rulingStructure.js beside a Legitimacy Crisis, a theocracy word with no religious seat, and strong military presence with no garrison, with KEEPs. The commit records each pair red at the base (288be89f4's census measured); a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/power/tailPowers3Conflict.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS-3 batch 2, commit a5a9e437. It pins power/governanceNarrative.js :: deriveBaselineConflict (powerStructure.recentConflict): the crusader and heresy rungs need P16's G3 religious atom, the church's veto demand is not said under the church's own seat or without a church of its own, and the military rung is not said where the seat is the commanders' own; each falls to the ladder's next rung, with KEEPs where the rival stands. The commit records 8 pairs red at the base and 3 KEEP green before and after; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/power/tailPowers4Batch1.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS-4 batch 1 (P26), commit 160c9979. It pins power/governanceNarrative.js and data/powerSiblings.js :: BASELINE_CONFLICT_SIBLINGS: the grazing quarrel's \"families on each side\" in a thorp, the merchant class outbuying noble landholdings below a town, the monster rung's \"stretched thin\" beside a Safe order, and the slave revolt's \"some streets are contested\" take their twins or rewords in powerStructure.recentConflict, with KEEPs where the place bears the original. The commit records 8 pairs red at the base and 3 KEEP green; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/power/tailPowers4Batch2.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS-4 batch 2 (READ-ALL rows 03509, 04923), commit e046a2ac. It pins power/rulingStructure.js's governing lines in powerStructure.factions[].desc: a Town Council body under another seat prints the seat's own line, not the council's \"compete for seats\" line, and \"tithes, land, and courts are all ecclesiastical\" needs the Ecclesiastical seat, with KEEPs where the Town Council governs and r2r-city-36 under the Ecclesiastical Council. The commit records 6 pairs red at the base and 3 KEEP green; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/power/tailPowers4Batch3.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS-4 batch 3 (READ-ALL rows 05663, 15434), commit 6c2fe334. It pins two vignettes of power/governingStressVignettes.js in powerStructure.recentConflict: wartime's conscription line reads \"every household is short-handed\" instead of naming farms and workshops, and the insurgency's \"two guild masters stayed away\" reads \"several who were expected stayed away\", the new wording pinned at a thorp and at a city or metropolis. The commit records 4 pairs red at the base; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/relationLinesSayTheRecord.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS-B batch 1 (P1 + P3, ruling P10), commit cd97721f. It pins factionDynamics.js's relation narratives and dmPowerLines.js :: CAPTURE_LINES.equilibrium: powers in prose form with verbs in number, the guard row asking the force's agreement, the faith's dependent row not claiming it keeps order, the tense row not claiming a quarrel, no bargained taxes under an occupation, a Suppressed noble power taking the subordinate row, and the thieves' tolerance lines. The commit records 15 refused pairs red at the base (40238d3ab), 4 KEEP green, 19/19 at the cure; a sweep plant would re-plant the same cure-revert the commit already describes."
+    },
+    "tests/generators/power/seatNamedAsItSits.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by TAIL-POWERS-B batch 2 (P10 rows 06725 18554 10424 00339 22709), commit cc834166. It pins claimStanding.js :: settleClaimsToLabel (seatIsCouncil) and factionStanding.js: a power card's claim naming \"the council\" under a seat that is no council names \"the hall\", the trade nexus's merchants control warehousing only where a warehouse stands, \"every council vote\" only under a council, and the thieves' guild gives openly to the poor. The commit records 11 refused pairs red at the base (40238d3ab), 4 KEEP green, 15/15 at the cure; a sweep plant would re-plant the same cure-revert the commit already describes."
     }
   },
   "meta": {
