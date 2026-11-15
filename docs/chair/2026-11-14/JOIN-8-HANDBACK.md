@@ -37,6 +37,7 @@ THE CHAIR'S RULINGS TO JOIN-8 (each vetoable by the owner):
 | # | branch | tip merged (read at the merge, UTC) | merge base | merge commit | conflicts | listed for the close |
 |---|---|---|---|---|---|---|
 | 1 | tail-corpus-eco-2026-11-14 | bf6695a6b (03:25) | 84a41a687 (JOIN-7 28) | 3862c002c | **PIN** (law d): `proseEntryContradiction.walker.test.js` trailing-coordinate count | joined 375 kept (the lane's only hunk); measured composed 371 (372 at the joined tip): RED, listed; the file's other four reds as at 72c37436d; clean-both `RECEIPT_POOLS_DOSSIER_STATE.md`; leaves `economy.generated.js`, `general.generated.js` the lane's |
+| 2 | tail-display-econ-2026-11-14 | 7beec164d (03:31; handed back) | fcab8b63d (JOIN-7 18) | 6b16a02d5 | none | — (7 files, display only; no record moved) |
 
 ## 3. Every code resolution
 
@@ -183,6 +184,6 @@ A worktree at origin's tip (`git worktree add /home/user/j8wt -b join8 <tip>`, `
 
 ## 9. WHAT IS LEFT
 
-1. IN HAND: the sweep (the prompt's order). Landed so far: point 1.
+1. IN HAND: the sweep (the prompt's order). Landed so far: points 1-2.
 2. lane/tail-powers-2026-11-14: waits for the chair's "LAND" (P28).
 3. For the close (not this seat's): every row of §4 by its door, once, on the final tree.
