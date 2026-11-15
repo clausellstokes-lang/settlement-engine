@@ -31,7 +31,7 @@ rising lines**, both `defenseDisplay.js`'s crime reads (C's). The 19 FALLS are u
 | `safetyLineTruth.js` (+ `safetyProfile.js`) | crime | SR3 (c), no town moved: the label is one constant, `crimeSignal.js :: CRIMINAL_GOVERNANCE_TYPE`. The writer writes it and the reader compares against it. **DECLARED PLACEMENT, vetoable**: the ruling said the writer holds it, but `safetyProfile.js` already imports `safetyLineTruth.js`, so a writer-held constant would close a new dependency cycle (the layer battery's cycle set is shrink-only). The crime home, which both import, holds it | `3d94a2c8f` |
 | `power/factionStanding.js` | magic | SR4, **DECLARED MOVE, 10 of 720** (below) | `1393aebb8` |
 | `summary/settlementQuickGuide.js` | WR2 (reach walker's culture class) | `composeIdentity`'s wrong-shape `settlement.culture?.label` read struck at its root, with its typedef property. The cultural identity's label is the one home. No town moved (births and the 720 quick guides byte-identical). No fixture fed a culture label | `d8b08402f` |
-| `display/defenseDisplay.js` (crime ×2; the DEFENCE-FACT READERS walker's four court-bench reads) | | NOT STARTED: C waits on the chair's "THE CUT IS ON THE LINE AT <tip>", which has not come. FOR A SUCCESSOR | — |
+| `display/defenseDisplay.js` | crime; the DEFENCE-FACT READERS walker's four court-bench reads | C, after the chair's word (the cut on the line at `22b3cc82e`, merged as `4782f6bfd`). The cut took one crime line; the other, `headedPowerAmongRivals`'s non-governing criminal seats (V8), moves verbatim to `crimeSignal.js :: criminalSeatsNotGoverning`. The four court-bench reads (SR1): `courtHoldersOf` and `courtBenchOf`, with `COURT_HOUSE` and `COURT_SERVICES`, move VERBATIM into the defence home, `facts/defence.js`. The home's `court` atom asks another question (every town hall a court; 37 of 720 differ by design). No town moved: births, and the Defense tab's twelve one-argument readers over the 720 records, byte-identical (`4f7ba7261d8ecc12`) | `795ff0d1a`, `d9e0c7af3` |
 
 ## FOR THE OWNER'S VETO LIST (in plain words)
 
@@ -50,21 +50,10 @@ commit, so the revert takes it back too.
 
 ## D — the door and the walkers
 
-`node scripts/fact-layers-door.mjs` (read-only first, to a file) **REFUSES at this tip: 4 rises, 19 falls**. Nothing is
-written, so there is no register commit. The four rises:
-  - `leaves crime: npcs` and `pools DS-GEN-13::COMMERCE: a market, no guild: declares guild (layer 3)`: AT THE BASE TOO
-    (the door at `57cf8e89a` reads them, with 21 rises in all). The leaves arm is the layer cut's seat's; the pool row is
-    not mine;
-  - `defenseDisplay.js` crime ×2: these leave the arm with C's cut.
-The door banks falls only once no row rises, so the 19 falls (SRC-3's defenceGenerator falls, the falls my commits made,
-and the swapped-out lines) stay unbanked until those four are cured.
-
-Each walker run alone at this tip, to a file:
-  - `tests/lint/factLayers.walker.test.js`: 4 of 15 red. READERS: red only for the two `defenseDisplay.js` crime lines
-    (C's) and the 19 unbanked falls (the door's, once nothing rises). LEAVES ×2 (`crime` leaf undeclared `npcs`) and
-    POOLS (DS-GEN-13): the base's, for the layer cut's seat and the pools' seat;
-  - `tests/lint/defenceFactReaders.walker.test.js`: 1 of 22 red, one row: `src/domain/display/defenseDisplay.js: 4`
-    (the four court-bench reads, C's).
+BEFORE C (at `784906a11`) the door refused: 4 rises. Two were the base's (`leaves crime: npcs`, pool DS-GEN-13) and two
+were `defenseDisplay.js` crime lines. AFTER the merge and C, `node scripts/fact-layers-door.mjs` reads **0 rises, 19
+falls**. `--shrink` banks them (`c8f7e2322`, 94 register lines out, nothing added) and then reads 0 and 0. The readers
+arm reads exactly the register: 96 files / 453 lines. The walkers, each run alone after C: see the POST-C PROOF block.
 
 ## PROOF carried by this push
 
@@ -80,3 +69,33 @@ Each walker run alone at this tip, to a file:
   tests both ends). None of them is mine. `tests/lint/writerReach.walker.test.js` aborts in `beforeAll` at BOTH ends
   ("writer-reach dark register row 'situationDesc on economicState' is UNVERIFIABLE (clause S): the identity is now
   LIT"), so its culture-class arm never runs here and cannot show WR2's cure. That row is not mine: the reach seat's.
+
+## POST-C PROOF (after the merge `4782f6bfd` of the joined line at `22b3cc82e`)
+
+The commits after the merge: `795ff0d1a` (C: the court readers to the defence home), `d9e0c7af3` (the last crime line to
+the crime home), `c8f7e2322` (D: the door's shrink), `4956e1731` (the chair's word on `noLegacyFactionReaders`: the crime
+signal's `factions` field renamed `powerNames`, its writer and every reader together; red since my `112ac8cfe`, now
+cured; no exemption added).
+- Births: the merge `48ac518fa4ff27fd` (the joined line's own figure, other seats' moves), and the same at `4956e1731`.
+  The Defense tab's twelve one-argument readers over the 720 base records: `4f7ba7261d8ecc12` before and after C.
+- Each walker run alone at `4956e1731`: `factLayers.walker` **15 of 15**, `defenceFactReaders.walker` **22 of 22**,
+  `noLegacyFactionReaders.walker` **4 of 4**. The door reads 0 rises and 0 falls.
+- Type checks, message-normalised, merge against tip: `tsconfig.full.json` 167 -> 167, `tsconfig.domain-strict.json`
+  1898 -> 1898, 0 introduced on both.
+- Tests: the 200 test files that name a touched file (and the three walkers), at the merge and at `4956e1731`. The merge
+  has 13 files red; the tip has 11. CURED by this seat: `defenceFactReaders.walker`, `factLayers.walker` (READERS) and
+  `noLegacyFactionReaders.walker`. **ONE NEW RED, MINE, NOT CURED (for the chair's ruling):**
+  `tests/lint/ruinFilterRoster.walker.test.js` › "every `.institutions` reader is COMPLIANT or EXEMPT" names
+  `src/domain/display/defenseDisplay.js`. The walker judges compliance FILE by file, by an import of `institutionRoster`
+  (its own comments, W2-C-LEAVES-SIDE and T29, say this file was read as compliant only because the Legal row imported
+  `liveInstitutions`). C moved that read, with its import, into the defence home (SR1). The file still names
+  `.institutions` in two places, and neither is a live-provider credit:
+  (i) the defence buckets `defenseProfile.institutions`, which the walker's own comment already calls "a display of what
+  the town built";
+  (ii) `ringWithoutSeat`'s raw roster names (TAIL-DEFECON-D), the same name lookup of the crime ladder as the structure
+  key, which the walker exempts in `facts/criminalStructureKey.js`.
+  I did not route (ii) through `liveInstitutions`: under a ruined "Front businesses" house, the key (raw roster) would
+  still say organized while the note (live roster) found no house, and the false "one criminal ring" line would return.
+  I did not add an exemption or a cosmetic import. THE CHOICES: (a) move (ii) verbatim into the crime leaf, as T29 did,
+  and give the file back its display row for (i), as `institutionProfile.js` has; or (b) another ruling. The other 10
+  red files are the merge's own.
