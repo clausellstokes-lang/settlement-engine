@@ -34,7 +34,7 @@
 
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
-import { pluralPowerName } from '../display/governanceAccount.js';
+import { pluralPowerName } from '../display/pluralPowerName.js'; // TAIL-TIES-7 (T25 (b)): the pure leaf
 import { faceOfRole } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C: the rank keys the face
 
 /**

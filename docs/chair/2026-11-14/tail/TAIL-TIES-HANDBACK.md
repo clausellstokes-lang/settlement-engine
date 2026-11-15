@@ -580,7 +580,7 @@ It fails the same way before and after this cure. **`tests/lint/observedShapeRea
 
 ### Ruling (T23) (the chair, 05:12 UTC): the three named causes, lent to this lane. NOT STARTED; TAIL-TIES-5's count reached the hand-back mark
 Here is what was measured, for the successor (each cure is its own commit, and the 720 births must be byte-identical after each):
-- **(2) `threatAssessment.js:41` -> `display/clergyHouse.js` (20 lines).** clergyHouse's only import is `facts/institutions.js :: liveInstitutionNames, ACCESS_ONLY`, and `institutions.js` is pinned coherence-lazy. `ACCESS_ONLY` (`institutions.js:77`) is a bare regex and can leave verbatim. `liveInstitutionNames` (`:56`) is NOT a pure leaf: it reads `content/customContentSemanticAuthority.js :: nativeSemanticName` and `institutions/institutionRoster.js :: liveInstitutions`. Check both of their chunks (my probe `ec.mjs`-style executed `manualChunks`) before choosing the leaf, so the move carries no new lazy edge.
+- **(2) `threatAssessment.js:41` -> `display/clergyHouse.js` (20 lines).** clergyHouse's only import is `facts/institutions.js :: liveInstitutionNames, ACCESS_ONLY`, and `institutions.js` is pinned coherence-lazy. `ACCESS_ONLY` (then `institutions.js :: ACCESS_ONLY`; since TAIL-TIES-6 cut 2, `liveInstitutionNames.js :: ACCESS_ONLY`) is a bare regex and can leave verbatim. `liveInstitutionNames` (`:56`) is NOT a pure leaf: it reads `content/customContentSemanticAuthority.js :: nativeSemanticName` and `institutions/institutionRoster.js :: liveInstitutions`. Check both of their chunks (my probe `ec.mjs`-style executed `manualChunks`) before choosing the leaf, so the move carries no new lazy edge.
 - **(1) `defenseDisplay.js:895` -> `summary/tonightSheet.js :: storesSpanWords`.** Move that one function to a leaf and leave the rest of tonightSheet.js alone: TAIL-CRISIS-6 holds the file. Measured: with this import absent, engineCoreLazyEdge loses 12 of its 13 rows and the crisis cycle opens. The older `defenseDisplay.js <-> factsOf.js` 2-cycle (`factsOf.js:37 deriveCriminalStructure`) remains after that.
 - **(3) `dmPowerLines.js:27` -> `domain/display/powerSentenceName.js` (92 lines).** Change the import line ONLY in dmPowerLines.js; powerSentenceName.js re-exports. Measured at `ea52c0805`: bootSmoke stage 1 is the 2-chunk cycle `data <-> engine-core`.
 - **The proof the chair names:** build; bootSmoke (plain and FLAGGED), vendorPdfLazy, engineChunkLazy, cultureProfilesLazy, engineCoreLazyEdge and layerBoundaries all green; the first paint in bytes against its budget; births byte-identical.
@@ -612,3 +612,158 @@ Here is what was measured, for the successor (each cure is its own commit, and t
   - `vendorPdfLazy` "the engine chunk ... remains large": 857,204 against the strict ceiling 726,454. The merge tip WITHOUT the cuts builds the engine chunk at 856,952 (a fresh build of the base tree), so the cuts add 252 B and the ceiling was outgrown by the joined lanes since 11-09.
   - `vendorPdfLazy` first-paint closure: raw 1,164,844 against the budget 1,121,260, Brotli 310,922 against 299,985, and gzip also over. The cuts SHRANK it: at the merge tip engine-core was 349,979 and data 204,325, and coherence-lazy and data-lazy rode first paint; after the cuts engine-core is 277,712, data is 174,165, and both lazy chunks are out. The remaining 43,584 B over is what the join's line added to the eight eager chunks since TAIL-TIES-5's probe. It needs a trim, or a re-record by the owner's ruling, and no pin was touched. See the attribution below.
   - `layerBoundaries` cycle: after cut 1 the old `defenseDisplay <-> factsOf` 2-cycle reads as the SCC `defenseDisplay | governanceAccount | faithReading | factsOf` (cut 4's ground).
+
+**Cut 4 NOT MADE: NAMED (it is not as clean).** The `layerBoundaries` SCC is now `defenseDisplay | governanceAccount | faithReading | factsOf`. It holds two cycles:
+- **(a) The older one, `factsOf.js:37` -> `defenseDisplay.js :: deriveCriminalStructure`.** No verbatim leaf can carry it. `deriveCriminalStructure` itself reads `factsOf`: it goes through `withRingVantage` (`filterDeclared(..., { facts: () => factsOf(...) })`), and also through `faithReadingOf` and `rulerKindOf` (via `headedPowerAmongRivals`/`ringWithoutSeat`). So the dependency is mutual in substance, not a shared table in the wrong home. The cure is a design call: either the fact reads a narrower criminal-structure atom, or the vantage read is injected. It needs a ruling, not a move.
+- **(b) The join's, `factsOf.js:33` -> `dossier/faithReading.js:37` -> `display/governanceAccount.js :: pluralPowerName` -> `factsOf`.** `pluralPowerName` reads only `text` and `powerSentenceName`, so it COULD go to a leaf. But it was not in the ruling, and `layerBoundaries` stays red on (a) without it.
+
+**The walkers after the three cuts (`tests/lint`, `tests/data`, `tests/architecture`, run at the tip and at the merge tip without the cuts, failing lists diffed):**
+- 2 fewer reds: both `engineCoreLazyEdge` arms.
+- 1 red cured here: `sourceCitationIntegrity` ARM 2. The T23 note above cited `ACCESS_ONLY` by its old line in `institutions.js`, which cut 2 moved; it is re-addressed to the symbol.
+- 1 environmental: `chainPrintSites` "the roots are every top-level directory of code" names `dist`. That is the build output in the scratch tree, not a source root.
+- 1 base-only flake: `siteCoherenceRatchet` C5.
+- Everything else is identical: 77 reds against 78.
+
+**The first-paint overage could not be attributed further.** A build of TAIL-TIES-5's pre-join merge `17d03c8f4` with these three cuts applied reads 2,978,833 B first paint, so that tree has other eager edges and is no baseline for the tip. The tip's 1,164,844 B is the measure. Successor: bisect the eight eager chunks' growth on the join's first-parent line, or trim; never re-record without the owner's ruling.
+
+**What is left (TAIL-TIES-6 hands back at the time mark):**
+- The two first-paint byte arms of `vendorPdfLazy`, and its engine-chunk ceiling (above).
+- Cut 4: (a) needs a ruling; (b) is a clean leaf if the chair lends it.
+- The ties' two reds, NOT STARTED, exactly as TAIL-TIES-5 set them out: `clerkHookSmallPlace` (bisect `2f2f9f12..7622238f6`) and `tailTiesBatch1` r2r-village-50 (`git bisect --first-parent 7622238f6..17d03c8f4`; re-key by identity with the move named, never weakened).
+- The scratch trees `/home/user/tt6` (the tip), `/home/user/tt6-base` (the merge tip without the cuts) and `/home/user/tt6-pre` (the attribution probe) are this seat's own and can be removed.
+
+## TAIL-TIES-7 (2026-11-15): T25 (the last layer cycle), T24 (the two size budgets measured), the ties' three reds
+
+**The merge.** The joined line `lane/join-2026-11-14` at `0b45a28d`, as a merge commit of its own (`5a3dee81`), clean. All
+work ran in the scratch worktree `/home/user/tt7`, detached, with its own `npm ci`. The births at the merge
+(RECORD-MEASURE-1 `births-only.sh` over CENSUS-3's `seeds.txt`, sha256 of the uncompressed corpus):
+`2bdbb50cdbb20b65128dc2a3fe77e6ac615161fcd32ab043ccb012d1340206fa`, 720 rows, 0 errors.
+
+**T25 (b): DONE (CONFIRMED), `448860c2`.** `display/governanceAccount.js :: pluralPowerName` moved verbatim to the pure
+leaf `src/domain/display/pluralPowerName.js`, which imports only `powerSentenceName.js` and carries its own private `text`.
+`governanceAccount.js` re-exports it, so the other callers (factionDynamics, factionStanding, hookLines, crisisPage,
+crisisHooks, the test) are unchanged. `dossier/faithReading.js` changes its import line only.
+- `layerBoundaries`: the SCC `defenseDisplay | governanceAccount | faithReading | factsOf` is now `defenseDisplay | factsOf`.
+- Births after: byte-identical (`2bdbb50c…06fa`, 720, 0 errors). eslint on the 3 files: 0. `governanceAccount.test.js`: 17/17.
+- The proof at this cut:
+  - `npm run build`: exit 0.
+  - `scripts/boot-smoke.mjs`: PASS, plain and FLAGGED (`VITE_ENGINE_REMOTE=true … --outDir node_modules/.cache/engine-remote-dist`).
+  - `engineCoreLazyEdge`, `engineChunkLazy`, `cultureProfilesLazy` and `bootSmoke` (VERIFY_DIST=1, VERIFY_ENGINE_REMOTE_DIST=1): green.
+  - The one red is `layerBoundaries`, on (a)'s 2-cycle.
+
+**T25 (a): STOPPED, a question to the chair (the measure that refutes the brief's shape).**
+- **The path.** `deriveCriminalStructure` reads `factsOf` through ONE path: `withRingVantage` → `filterDeclared`
+  (the vantage `ORGANIZED_RING_NOTES[1]` declares `tier: ≥ village`). `faithReadingOf` and `rulerKindOf` belong to
+  `clergyHere` (the Medical Readiness row), not to the criminal structure.
+- **Why injection moves a value.** Injecting the facts is clean for the births: the facts' `crime` getter would pass its
+  own object, and the three product callers (`deskHostArgs.js`, `printProse.js`, `viewModelBodySlices.js`) would pass
+  `factsOf(s)`. But every one-argument call would then hand the list door no facts. `atomHolds` answers `undefined`, and
+  vantage 1 is refused in every place. `tests/domain/display/ringNoteStreetsSmallPlace.test.js` arm 2 pins that vantage
+  in a village, a town and a city, and about 15 test files call `deriveCriminalStructure(s)` with one argument.
+- **Why the brief can't be met as worded.** "No test touched" and "defenseDisplay.js no longer imports factsOf" cannot
+  both hold.
+- **The two shapes put to the chair:**
+  - (1) The test seat re-keys the one-argument calls to pass `factsOf(s)`.
+  - (2) The derivation's body moves to a module that does not import `factsOf`. The getter calls it with its facts, and
+    `defenseDisplay.js` keeps a one-argument wrapper that calls it with `factsOf(s)`. No test is touched and the SCC
+    breaks, but `defenseDisplay.js` still imports `factsOf`.
+- Not made; awaiting the ruling.
+
+**T24: MEASURED, not trimmed: `docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md`.**
+- **The recording commits:**
+  - First paint: `7dc7757f`.
+  - Engine ceiling: `188a2c49`. `git log -S` lands on `dfbf78df`, which is the shallow root and builds 728,177, so it is
+    not the measured tree.
+- **The instrument reproduces all four records exactly:** 1,121,260, 357,225, 299,985 and 726,453.
+- **First paint:** +43,693 raw over the budget.
+  - By rendered module bytes, +16,967 is needed by first paint and +131,223 rides only by the `engine-core` / `EAGER_DATA`
+    grouping.
+  - A trial excision of the 16 riders that are new since the record recovers 34,844 raw. It boots, and the lazy-edge
+    tests are green.
+  - 8,849 raw remains after that.
+- **The engine:** +132,162 over, all of it generator code. It is the owner's re-record.
+
+**C: the ties' three reds (each turn found first).**
+- **`clerkHookSmallPlace` (2 of 7): NOT the ties' (CONFIRMED), not cured, told to the chair.**
+  - It is red at `2f2f9f12` and also at the point where the test arrived, JOIN-2 `b23ae427`: the same two seeds; the face
+    was then named "Grain Steward" and is now "Rations the food". The brief's range `2f2f9f12..7622238f6` (2 commits)
+    holds no turn.
+  - The faceless person is the crisis cast's minted stand-in (`generators/steps/resolveCrisisCast.js` `mintTemporary`,
+    R2-CODE-B-9 `ef0b6208` / B-12 `3a6de5c7`). It is minted after the hook draw with `plotHooks` null, and
+    `collectPlotHooks` names it nowhere (r2r-thorp-17, famine: Ehecatl Chel; r2s-recently_betrayed-hamlet-2: Anna
+    Choniates).
+  - No pin decides a stand-in's hooks. The cure is the crisis seat's (the minted card gets its hook), or a ruling that a
+    temporary person is exempt by identity.
+- **`tailTiesBatch1` r2r-village-50: RE-KEYED BY IDENTITY, the move named.**
+  - It failed on the premise: `rulingBodyOf` was true.
+  - `git bisect --first-parent 7622238f6..17d03c8f4` is one commit (the merge). On the joined line's first parent the
+    turn is JOIN-6 · 8 `00e8ba474` (tail-powers). On that lane it is `d6880513`, TAIL-POWERS-2 DA (P7 + P8):
+    "Headman's Authority" is said only where the roster holds a headman's house. The governing power becomes "Elder
+    Council".
+  - At the tip a body rules and the audit line prints, so the pair moves from NOT to KEEP, with a comment naming the move.
+  - The test is 3/3 green; eslint 0. Nothing else in the file changed.
+- **`tailTies2Batch1` "NOT (T6)", r2r-hamlet-4 and r2r-village-16: no hole in T6's cure; a premise those two towns do not
+  meet.** The same declared move `d6880513` turns both from "Headman's Authority" (at `019409ed`) to "Elder Council" (at
+  `d6880513` and at the tip), so `rulingBodyOf` is true, rightly. The test seat re-keys; its file was not committed here.
+
+**Scratch:** `/home/user/tt7` (the worktree), `/home/user/tt7-instr` (the CENSUS-3 and RECORD-MEASURE-1 probes, archived)
+and `/home/user/tt7-measure` (B's builds and scripts). All three are this seat's own and can be removed.
+
+### TAIL-TIES-7: the chair's rulings that reached this seat after the hand-back (sent 06:14–06:33 UTC, read 06:37). NOT STARTED; for the successor
+- **T25 (a): OPTION 2** (the chair, 06:15 and again 06:28). The end of the ruling is no cycle, no test touched and no value
+  moved.
+  - The criminal structure derivation's body moves to a NEW module that does not import `factsOf`.
+  - The facts' `crime` getter calls it with its own facts.
+  - `defenseDisplay.js` keeps the one-argument `deriveCriminalStructure(s)` wrapper, which calls it with `factsOf(s)`.
+  - The proof: the births byte-identical; `layerBoundaries` green; `ringNoteStreetsSmallPlace` and the about 15
+    one-argument callers untouched and green; then one line to the chair.
+  - The facts' only read on this path is `withRingVantage`'s `filterDeclared` (vantage 1, `tier: ≥ village`). Pass the
+    injected facts as `facts: () => facts`.
+- **With (a), two walkers** (the chair, 06:21 and 06:33):
+  - **`tests/lint/defenceFactReaders.walker.test.js`.** Its last red is `defenseDisplay.js` ×4 (the src close seat's
+    reads are on `lane/tail-close-src-2026-11-15` at `4a01f2c16`). If the body's move carries those reads, the register
+    FOLLOWS THE BODY by its own door for a move; otherwise they stay where the register banks them (the wrapper's file).
+    No new row and no count raised. If they are not the cut's doing, name the commit that made them in one line.
+  - **`tests/lint/factLayers.walker.test.js`.** The crime leaf reads `npcs` through `defenseDisplay.js ::
+    headedPowerAmongRivals` (`9b6adf3b4`), a read the facts' law forbids. After (a), say whether it is gone. If it
+    stands, cure it the same way: the leaf is given what it reads by its caller. It is byte-identical or a stop.
+- **T26 (the safe trim, prepared but NOT landed):**
+  - Cut a SEPARATE branch `lane/close-trim-first-paint-2026-11-15` from the tip after (a). It is not a `lane/tail-*`
+    name, so the sweep must not land it.
+  - ONE commit: the 16 riders new since the record, as FP-G7 rows in `ENGINE_SHARED_DOMAIN_EXCISIONS`. The list is in
+    `SIZE-BUDGETS-MEASURE.md`, Trial 1; the scratch trial is `/home/user/tt7-measure/t-x1`, where the rows went after the
+    `FIRSTPAINT2_LAZY_DOMAIN` delete loop.
+  - The budget numbers stay UNTOUCHED: the tests stay red by 8,849 raw until the owner's re-record.
+  - The proof goes in the commit: the build; the boot smoke plain and FLAGGED; the three lazy tests; the 720 births
+    byte-identical; the first paint and the engine chunk in bytes before and after.
+  - One line to the chair with that branch's tip.
+- **T27 (C red 1, vetoable by the owner):**
+  - First MERGE the joined line at `17e38c547` (the chair names it; both halves of the test are on it, and one of them
+    anchored this file).
+  - Then `tests/generators/clerkHookSmallPlace.test.js`'s "each keeps one hook" exempts a crisis cast's MINTED TEMPORARY
+    person BY IDENTITY. Use the record's own mark (`temporary: true` from `resolveCrisisCast.js :: mintTemporary`), not
+    the name or the role text, with `ef0b6208` and `3a6de5c7` named beside it.
+  - It ASSERTS the exempted face IS one (`temporary === true`), so an ordinary face left with no hook still reds. The
+    claim, the towns and the other cases do not move. The file alone green; one line.
+  - Whether a stand-in should carry a hook at all is a question for the owner, next round.
+- **B's remaining ask (06:18)** is answered by `SIZE-BUDGETS-MEASURE.md`. The reachability walk from the true first-paint
+  roots, and Trial 1's bytes, cover `institutionLadders`, `houseScale` and `faceHonorifics` (via `seatKeeper`): all three
+  are riders, and all leave first paint in the measured −34,844 B trial (excise-and-pin). They were not measured one at a
+  time.
+
+## TAIL-TIES-8 (2026-11-15): T25 (a) option 2 (STOPPED, measured), T27 (done), T26 (prepared on its own branch)
+
+**The merge.** The joined line `lane/join-2026-11-14` at `ae50369d4`, one merge commit (`a25aa28d`), clean. All work ran in
+scratch worktrees outside the main checkout (detached, `npm ci` once, the others symlinked). The births at the merge
+(RECORD-MEASURE-1 `births-only.sh` over CENSUS-3's `seeds.txt`, sha256 of the uncompressed corpus):
+`991c330f7e97730d2f0e7ee0ab5d4884274cc49ef7d3b69d45821b41068a47a9`, 720 rows, 0 errors.
+
+**T27: DONE (CONFIRMED).** `tests/generators/clerkHookSmallPlace.test.js`: "each keeps one hook" now holds only where the
+face's hook count is not one AND it is not the crisis cast's minted temporary stand-in, read by the record's own mark
+(`temporary === true`, `resolveCrisisCast.js :: mintTemporary`, `ef0b6208` / `3a6de5c7` named beside it). An ordinary
+face left without exactly one hook still reds (the assertion is `expect(n.temporary).toBe(true)` on every such face). The
+claim, the towns, the office check and the other cases did not move; the generator is unchanged.
+- The exemption is not vacuous: it fires on exactly the two faces traced by TAIL-TIES-7 (r2r-thorp-17: Ehecatl Chel;
+  r2s-recently_betrayed-hamlet-2: Anna Choniates; both `temporary: true`, `temporaryKind: 'grain'`, 0 hooks; the other
+  faces of those two towns hold one hook each). The other five towns were not counted face by face.
+- The file alone: 3/3 green (was 1 red test, 2 of 7 rows). eslint 0.
