@@ -62,6 +62,8 @@ describe('the Invasion row claims no hold beside its own Critical band (ruling (
   });
   test('above the Critical band the same records keep their pools', () => {
     const kept = Object.keys(MADE_FROM).filter((seed) => invasionOf(withMilitary(TOWNS[seed], 50), seed));
-    expect(kept).toEqual(Object.keys(MADE_FROM));
+    // TAIL-CORPUS-DEF-4 (U2, 2026-11-15): re-keyed by identity: rr3-town-occupied-rand-4 is occupied, and DS-DEF-2 walls AND
+    // professional garrison v1-v3 were declared off an occupation by 1dfa83d89 (W2-WRITE-10, HANDBACK-9 HIGH): silent by design
+    expect(kept).toEqual(Object.keys(MADE_FROM).filter((seed) => seed !== 'rr3-town-occupied-rand-4'));
   });
 });

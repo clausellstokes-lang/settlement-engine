@@ -455,7 +455,13 @@ INSTRUMENT ADDED (scratch only): `towns.py <inv.json> <run> <fold substring> [ex
   beside a live succession crisis. THE "ECONOMIC SURVIVAL: STRONG" QUESTION IS PARKED (the ratings themselves are the
   record's measuring seat's): those lines are left. THEN: what is left that prints in five towns or more, widest first.
 
-## Batch 6 — C18 (commit after 7ccad225e)
+- (U2, the chair 2026-11-15 04:49 UTC) NO VETO on batch 6's rewordings. REAL BREAKS BEFORE THE NEXT BATCH: the first
+  whole check of the joined line at d817736d8 found 198 failing tests; twelve red files stand in the defence desk's area.
+  Each is run ALONE at this tip and split: (i) these pools cause it, a regression of an earlier cure: CURED; (ii) a pin a
+  declared move or a rewording explains: RE-KEYED by identity, the move named in the commit; (iii) the cause is not in
+  these files: ONE LINE here with the file and the commit that moved it. Never skip, weaken or delete a test.
+
+## Batch 6 — C18 (commit d4a4bd590)
 
 | flag | pool · line | false in (by the record, at the merged base) | cure | towns before → after |
 |---|---|---|---|---|
@@ -521,6 +527,62 @@ new (the anti-vacuity QUALIFY ARM on DS-POW-5 theocracy went green).
     some crime, and neighbours settle most of it between themselves." — 2: r2r-thorp-28 · r2s-infiltrated-village-2.
 Declared (no new words): Safe v2, v3 and Very Safe v3 `guardPresence`.
 
+## U2 — the thirteen red files in the defence desk's area (commit after d4a4bd590)
+
+Each run ALONE at d4a4bd590 (all red), and at b230bfb8b, d817736d8 and the branch's cut 48fedbe98: eleven were already
+red at 48fedbe98 (before this group's branch); defenseWordsFindings is green at b230bfb8b and red on the joined line.
+The cause of each was bisected (two read-only investigators, their own worktrees; every claim below verified green at
+the parent, red at the commit).
+
+CURED (i), in these pools:
+- **defensePerimeterCalm** ("occupied: the pool went mute"): 5077c9ec1 (W2-WRITE-11 1a) declared DS-DEF-2 Beasts settled,
+  defenses beyond the need v4 v5 off an occupation and left the occupied state mute: TWIN v6 `[ledger · threat · crisis:
+  occupied]`. Replay: no draw of the 720 moved (no census town reaches that state). 5/5 green.
+RE-KEYED BY IDENTITY (ii), the move named:
+- **coherenceAgreeCures** (the chair's thirteenth, 2 of 45): the W2-WRITE `no gate` twins of DS-DEF-5 walls PRESENT
+  (91592cbf1, bc5ee968b, 07f53f717) name the gate's ABSENCE: the fortification read sets "no (proper) gate" apart before it
+  looks for a gate word; the mark test accepts `gate` or `no gate` (either side of the atom). Shown able to red by a plant
+  (v4 made to say "every arrival goes through a gate": red), not committed. 45/45.
+- **defenseSupplyUnderACrisis**: 30895bb67 (W2-WRITE-4 round 3) reworded DS-DEF-2 CHAIN defence supplied v1-v3: SUPPLIED
+  re-keyed to the new words. 2/2.
+- **defenseInvasionWithinACriticalBand** "above the Critical band": rr3-town-occupied-rand-4 is occupied, and 1dfa83d89
+  (W2-WRITE-10) declared walls AND professional garrison v1-v3 off an occupation: that seed is silent by design.
+- **defensePostureAgainstItsFacts** "a walled town with its watch keeps the line": rand-4 now draws readiness STRONG v6
+  (7a2774754 / 47f8bdd8e, W2-WRITE-3): WALLED_KEEPS re-keyed to rr3-town-monster_pressure-rand-8.
+- Pins of the twin (+1 variant): composeStateProse 2955→2956; proseEntryContradiction 3423→3424, 2718→2719 (twice), the
+  annex row 6164→6165; proseMoveGrammar 137→138, share 0.160→0.161; proseWaveGate 629→630.
+NAMED (iii), the cause not in these files (no repair here):
+- defenseInvasionWithinACriticalBand premise + "beside a Critical band": src/generators/defenseGenerator.js, the rebuild
+  33b12cbef (JOIN-1 · 9) then 7509b3794 (UPKEEP-13 P4, milPerHead 1): Makropyrgos 11→31→24 (Weak). New seeds needed.
+- defensePostureAgainstItsFacts premise + "beside a Weak bar": defenseGenerator.js via 33b12cbef (Ingili now 100);
+  "the Guard assessment at its lowest tier": src/generators/safetyLineTruth.js, 48ad4da91 (UPKEEP-8, "exists on paper" gone).
+- defenseWatchIsNotTheLevy: defenseGenerator.js, 7509b3794 (rr3-thorp-famine-rand-0 36→14, Critical: withinTheBar silences it).
+- threatRowsTrueUnderBand: defenseGenerator.js + src/data/defenceWeights.js, 7509b3794 (rv2-calm-hamlet-1, 34 people: WEAK).
+- defenseWithinTheBar: defenseGenerator.js: 07ebe8bdc (COHERENCE-UPKEEP fundedGate), 94c5d408f (UPKEEP-CAPACITY C1), 7509b3794.
+- defenseWordsFindings: src/generators/safetyProfile.js:589, 6b8a9b993 (TAIL-DEFECON batch 1) "What food is put by goes to
+  whoever can pay…" in a tiny place (7 of 64): its words, in TAIL-DEFECON's file.
+- defenceTraditionReaders: defenseGenerator.js, 42d82c775 (UPKEEP-CAPACITY C4a: the walk to another's church, no divine).
+- defenseTabFlow: src/domain/institutions/defenseInstitutionBuckets.js, 83883baaa (UPKEEP-CAPACITY C6: an alchemist is a trade).
+- crimeLineDisqualifiers (3): the cure is in src/domain/display/stateProse/crimeLineDisqualifiers.js (not this group's):
+  91592cbf1 reworded DS-POW-6 ADVANCING #1, #3 (no bought official now: drop those entries; the test's lists [2]→[1..11],
+  [1,2,3]→[1..11], fixture `tier: 'town'`, the desk's free check widened); and a5e74f02b (W2-WRITE-3) added RECOVERING #4
+  "Criminal money finds little purchase…" with no declaration (no atom reads a bought official): its entry belongs in that
+  table (`'an official in pay'`). Verified 8/8 green with those edits in a scratch tree (reverted).
+- defensePostureReadsBadge: A CONFLICT OF TWO CURES, THE CHAIR'S: 7a2774754 (W2-WRITE-3) wrote readiness STRONG v5/v6 as the
+  siege lines on purpose; this test (an earlier guard) says the strong posture says nothing under a siege. Either v5/v6 take
+  `no crisis: occupied, under_siege` (with what then speaks under a siege) or the test admits them. Behind it: wartime-city-0
+  readiness 72→80 (33b12cbef, 'Well-Defended'→'Fortress', iii) and the wartime v7 (ii). Left.
+NAMED TEST FILES after U2: 36 reds at the merged base, 32 now, none new.
+THE CHAIR'S RULE FOR EVERY NEW TEST FROM NOW (2026-11-15 05:06 UTC): anchors computed through tests/helpers/drawnProse.js,
+negatives anchored (tests/helpers/anchoredNegatives.js), seed loops through the totality helper; no more literal
+state-prose anchors in tailCorpusDefGuards (it holds 24: a close seat computes them); never edit
+scripts/mutation-coverage-manifest.json.
+
+### New line (the owner's veto list)
+39. DS-DEF-2 Beasts & Monsters: settled, defenses beyond the need v6 (`threat · crisis: occupied`): "{settlement}'s works
+    were seldom tested by the settled country around it, and now they stand in the occupiers' hands." — no town of the 720
+    prints it (the state is the test's made town); read in defensePerimeterCalm's occupied case.
+
 ## What is left (after batch 6; THE CURRENT LIST)
 1. C18 is landed (batch 6) but riskLabel (named above). THE ECONOMIC SURVIVAL STRONG CLASS is parked (C18).
 2. By C16 (five towns or more, widest first), measured at cff6cd098's census (re-measure each at this tip first):
@@ -532,5 +594,13 @@ Declared (no new words): Safe v2, v3 and Very Safe v3 `guardPresence`.
    capture RECOVERING (9, 6); B21649 DS-DEF-4 organized v4 (9); 20485 DS-FTH-4 heresy hunted v5 (8); 22361 DS-POW-5
    merchantArmy v1 (7); 11931 DS-DEF-5 militia PRESENT v3 (7); 15476 DS-DEF-3 COMPOUND plague v2 (6); 28629 DS-DEF-12
    CAPACITY enough v2 (5); B19173 DS-FTH-4 crusaderSynthesis v1 (5).
+0. U2's named reds above (iii and the chair's conflict) are other files' or the chair's.
 3. OPEN BY C17 (the merge is made: 7ccad225e holds `ruling body` and `rival power`): the council and autocrat rows, by
    width (04066 autocrat v2 among them). WAITING: DS-DEF-9 magicDependency (C9); 44 rows in fewer than five towns (C16).
+
+## TAIL-CORPUS-DEF-4 HANDED BACK at the 250,000 line (2026-11-15 ~05:45 UTC)
+The merge of d817736d8 (7ccad225e), batch 6 (C18: 9 flags, 7 cured, 1 struck, 1 named; lines 27-38) and U2 (13 red files:
+1 cured, 5 re-keyed, the rest named; line 39). The next seat continues from "What is left (after batch 6)" above, re-taking
+its before census at this branch's tip (CENSUS-3's command with `render.census3d.jsx`, made by `mkrender.py`); for twins
+replay with `replay2.mjs` and NEWV=<pool key>:<vid>. A census after U2 was NOT taken: replay shows no draw of the 720
+moved by the one twin, and the rest are test edits.

@@ -2854,6 +2854,7 @@ supplies the ancestry.
 3. `[visitor · no threat · crisis: any · no crisis: unrest]` You notice {settlement}'s works more than anything beyond them: the settled country around the town holds few creatures.
 4. `[ledger · threat · crisis: any · no crisis: occupied]` {settlement}'s works were seldom tested by the settled country around it, and the threat now at hand is testing them in earnest.
 5. `[visitor · threat · crisis: any · no crisis: occupied]` You find {settlement}'s works manned in earnest now; what was built against nothing in particular is being held against something real.
+6. `[ledger · threat · crisis: occupied]` {settlement}'s works were seldom tested by the settled country around it, and now they stand in the occupiers' hands.
 
 **`Beasts & Monsters`: `settled`, nothing organized** {crisis-scoped}
 1. `[ledger · no threat · crisis: any]` {settlement} has no wall against the country, and the settled heartland around it sends little that would call for one.
