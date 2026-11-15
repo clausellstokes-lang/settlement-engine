@@ -15,6 +15,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The reader's births (`births.mjs :: cfgFor`), verbatim. @param {string} seed @returns {any} */
@@ -72,17 +73,20 @@ describe('TAIL-TIES batch 2: a hook presumes only what the town holds (T3)', () 
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('NOT: the line is gone where the town makes it false, and every titled person there still holds a hook (the civic stand-ins of a crisis hold none by design, at the base too)', () => {
-    for (const [seed, key, why] of NOT) {
+    const failures = collectSeedFailures(NOT, ([seed, key, why]) => {
       expect(hooks(seed).filter((h) => h.includes(L[key])), `${seed}: ${key} (${why})`).toEqual([]);
       expect((of(seed).npcs || []).filter((/** @type {any} */ n) => n.title !== undefined && !(n.plotHooks || []).length).map((/** @type {any} */ n) => n.name), `${seed}: a mute card`).toEqual([]);
-    }
+    });
+    expectNoSeedFailures(failures, 'the line is gone where the town makes it false, and every titled person holds a hook');
   });
 
   it('INSTEAD: a cargo lost inland is lost on its way here (the sea line\'s twin keeps the draw)', () => {
-    for (const seed of ['r2r-city-22', 'r2r-city-35', 'r2r-city-55']) expect(hooks(seed).some((h) => h.includes(L.road)), seed).toBe(true);
+    const failures = collectSeedFailures(['r2r-city-22', 'r2r-city-35', 'r2r-city-55'], (seed) => { expect(hooks(seed).some((h) => h.includes(L.road)), seed).toBe(true); });
+    expectNoSeedFailures(failures, 'a cargo lost inland is lost on its way here');
   });
 
   it('KEEP: where the town holds the fact, the line still prints', () => {
-    for (const [seed, key] of KEEP) expect(hooks(seed).some((h) => h.includes(L[key])), `${seed}: ${key}`).toBe(true);
+    const failures = collectSeedFailures(KEEP, ([seed, key]) => { expect(hooks(seed).some((h) => h.includes(L[key])), `${seed}: ${key}`).toBe(true); });
+    expectNoSeedFailures(failures, 'where the town holds the fact, the line still prints');
   });
 });

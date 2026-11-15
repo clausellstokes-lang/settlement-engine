@@ -14,7 +14,11 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { DAYS_PER_MONTH, composeTonightSheet, foodStoresWords, storesSpanWords } from '../../src/domain/summary/tonightSheet.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
-const READERS = ['rpf-thorp-under_siege-13', 'rpf-thorp-succession_void-13', 'rpf-thorp-occupied-13'];
+// RE-KEYED BY IDENTITY (TAIL-DEFECON-6): COHERENCE-UPKEEP's stores move (05ec9b60, the chair's ruling 6 of 2026-11-12: the
+// full granary keeps boughtShare('stores', keepOf(prosperity)) of its months; 225 of the 360 moved, every one down) lays
+// rpf-thorp-succession_void-13 by at 1.2 months, so it no longer holds the span this arm reads. Its member is the nearest
+// thorp of the same shape (succession void, no granary, 1.5 months): rpf-thorp-succession_void-20. The other two stand.
+const READERS = ['rpf-thorp-under_siege-13', 'rpf-thorp-succession_void-20', 'rpf-thorp-occupied-13'];
 /** @param {string} seed */
 function cfgFor(seed) {
   const m = /** @type {RegExpMatchArray} */ (seed.match(/^rpf-(\w+)-([a-z_+]+)-(\d+)$/));

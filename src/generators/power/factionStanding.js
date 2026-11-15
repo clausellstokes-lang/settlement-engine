@@ -23,6 +23,9 @@ const arcaneAheadSaid = (rival) => /arcane orders/i.test(rival.faction) ? 'The a
 
 // annotateFactionStanding — enrich faction descriptions with their position in
 // the (already normalised and sorted) power ranking (mutates in place).
+/** The number of level powers, as the standing line says it (TAIL-POWERS-B-4, P31 (4)); past six, "Many". */
+const LEVEL_COUNT_WORDS = Object.freeze(['', '', '', 'Three', 'Four', 'Five', 'Six', 'Many']);
+
 export const annotateFactionStanding = (factions, force = { body: 'garrison' }) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
       var factionNames = factions.map(function (f) {
           return f.faction;
@@ -36,6 +39,12 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
       // POWERS-16 (the chair's ruling (r2)): a power named in a standing sentence takes its prose form, from one leaf
       var topSaid = topFactionName ? powerSentenceName(topFactionName) : null;
       factions[1] && factions[1].faction;
+      // TAIL-POWERS-B-4 (the chair's P31 (4), vetoable by the owner): "Three powers stand almost level ... no one leads" reads the
+      // roster: the powers level with the first are those within five of it AT ITS OWN RUNG of the ladder (powerLabelOf), so a
+      // Significant power over Minor ones is no level, and their number is said (four or five where they stand so)
+      var levelCount = factions.filter(function (f) {
+        return factions[0] && factions[0].power - f.power <= 5 && powerLabelOf(f.power) === powerLabelOf(factions[0].power);
+      }).length;
       var topPower = factions[0] ? factions[0].power : 0,
         secondPower = factions[1] ? factions[1].power : 0,
         topTwoGap = topPower - secondPower,
@@ -83,8 +92,8 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
                     : 'The order is settled for now; they are busy holding on to second place and make no move on first.')),
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
-              ? (standing = topTwoGap <= 5
-                  ? `Three powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.` // TAIL-POWERS-B: a vote only where a council sits
+              ? (standing = topTwoGap <= 5 && levelCount >= 3
+                  ? `Three powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
                   : 'They are always at the table, but cannot set their own terms.')
               : gapAbove <= 10
                 ? (standing =

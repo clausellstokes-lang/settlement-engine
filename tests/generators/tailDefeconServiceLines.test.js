@@ -12,6 +12,8 @@
  * Born as the census born its 720 (the r2r- arm). GONE pairs red at 345f13157; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -40,30 +42,38 @@ const MILL_NOTE = 'Grain is carried out of the settlement to be ground, and the 
 describe('the hire service needs a company for hire (row 03905)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each([
-    ['r2r-city-2', 'Legal services (contracts, notarial)'],
-    ['r2r-city-3', 'Financial services (letters of credit)'],
-    ['r2r-city-7', 'Legal services (contracts, notarial)'],
-  ])('%s (a city watch, no company for hire): no mercenary hire; "%s" is still exported', (seed, keep) => {
-    const town = birth(seed);
-    expect(serviceOutputs(town), 'GONE').not.toContain('Armed escort & mercenary hire');
-    expect(exportsOf(town), 'GONE').not.toContain('Military contract services');
-    expect(exportsOf(town), 'KEEP').toContain(keep);
+  test('every seed (a city watch, no company for hire): no mercenary hire; its kept service is still exported', () => {
+    expectNoSeedFailures(collectSeedFailures([
+      ['r2r-city-2', 'Legal services (contracts, notarial)'],
+      ['r2r-city-3', 'Financial services (letters of credit)'],
+      ['r2r-city-7', 'Legal services (contracts, notarial)'],
+    ], ([seed, keep]) => {
+      const town = birth(seed);
+      expectAbsentWithAnchor(serviceOutputs(town), 'Armed escort & mercenary hire', 'Legal services', 'GONE');
+      expectAbsentWithAnchor(exportsOf(town), 'Military contract services', keep, 'GONE');
+      expect(exportsOf(town), 'KEEP').toContain(keep);
+    }), 'a city watch alone sells no mercenary hire, and each city keeps its service');
   }, 60000);
 
-  test.each([['r2r-city-0'], ['r2r-city-1']])('%s (a mercenary quarter and hired blades): the service stays', (seed) => {
-    const town = birth(seed);
-    expect(serviceOutputs(town)).toContain('Armed escort & mercenary hire');
-    expect(exportsOf(town)).toContain('Military contract services');
+  test('every seed (a mercenary quarter and hired blades): the service stays', () => {
+    expectNoSeedFailures(collectSeedFailures([['r2r-city-0'], ['r2r-city-1']], ([seed]) => {
+      const town = birth(seed);
+      expect(serviceOutputs(town)).toContain('Armed escort & mercenary hire');
+      expect(exportsOf(town)).toContain('Military contract services');
+    }), 'a company for hire keeps the hire service');
   }, 60000);
 });
 
 describe('the external-mill note says only what every town that prints it bears (rows 15738, 11365, 31448)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each([['r2r-thorp-12'], ['r2r-thorp-13'], ['r2r-thorp-19']])('%s: no lord, no "food security", no "no flour at all"; the plain line prints', (seed) => {
-    const notes = millNotes(birth(seed));
-    expect(notes.join(' '), 'GONE').not.toMatch(/lord's mill|food security is maintained|no flour at all/);
-    expect(notes, 'what prints instead').toContain(MILL_NOTE);
+  test('every seed: no lord, no "food security", no "no flour at all"; the plain line prints', () => {
+    expectNoSeedFailures(collectSeedFailures([['r2r-thorp-12'], ['r2r-thorp-13'], ['r2r-thorp-19']], ([seed]) => {
+      const notes = millNotes(birth(seed));
+      expectAbsentWithAnchor(notes.join(' '), "lord's mill", MILL_NOTE, 'GONE');
+      expectAbsentWithAnchor(notes.join(' '), 'food security is maintained', MILL_NOTE, 'GONE');
+      expectAbsentWithAnchor(notes.join(' '), 'no flour at all', MILL_NOTE, 'GONE');
+      expect(notes, 'what prints instead').toContain(MILL_NOTE);
+    }), 'every town that printed the external-mill note prints the plain line');
   }, 60000);
 });

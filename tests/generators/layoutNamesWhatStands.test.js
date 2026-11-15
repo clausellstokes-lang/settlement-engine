@@ -21,6 +21,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { defenseFactsOf } from '../../src/domain/defense/defenseFacts.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -72,7 +73,8 @@ describe('J1: a layout line whose noun the record denies takes its twin without 
     it(`${seed}: no ${noun.source}; prints "${instead}"`, () => {
       const s = towns.get(seed);
       expect(premise(s), 'fixture premise: the record denies the noun').toBe(true);
-      expect(s.spatialLayout.layout).not.toMatch(noun);
+      // each noun is a plain literal or a literal alternation, so its alternatives are exactly its substrings
+      for (const word of noun.source.split('|')) expectAbsentWithAnchor(s.spatialLayout.layout, word, instead, `${seed}: the denied noun, beside the twin line`);
       expect(s.spatialLayout.layout).toBe(instead);
     });
   }

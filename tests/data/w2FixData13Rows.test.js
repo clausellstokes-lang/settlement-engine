@@ -40,8 +40,9 @@ describe('W2-FIX-DATA-13: the measured rows in the data lane\'s files', () => {
       const smelter = (town.institutions || []).find((/** @type {any} */ i) => i.name === 'Smelter');
       expect(smelter, seed).toBeTruthy();
       const desc = String(smelter.desc || '');
-      if (!hasMine) expect(desc, seed).not.toMatch(/\bmine\b/i);
-      if (!hasSmith) expect(desc, seed).not.toMatch(/smith/i);
+      expect(desc, `${seed}: the Smelter's description names its ore`).toMatch(/\bore\b/);
+      if (!hasMine) expect(desc, seed).not.toMatch(/\bmine\b/i); // anchored: the same desc is shown above to name its ore
+      if (!hasSmith) expect(desc, seed).not.toMatch(/smith/i); // anchored: the same desc is shown above to name its ore
     }), 'no Smelter description names a mine or a smithy the roster lacks');
   }, 120_000);
 

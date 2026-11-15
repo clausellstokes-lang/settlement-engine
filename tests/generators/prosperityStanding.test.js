@@ -20,6 +20,7 @@ import { keepOf, keepOfRecord } from '../../src/domain/facts/keep.js';
 import { deriveProsperityLabel, deriveProsperityLabels } from '../../src/generators/economy/prosperity.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 
@@ -83,7 +84,7 @@ describe('the standing label (R3): the label with no crisis in force, stored by 
 
   test('the two labels take the draw the one label took: no second draw', () => {
     const cfg = { tier: 'thorp', tradeRouteAccess: 'isolated', stressTypes: ['famine'], priorityEconomy: 50 };
-    for (const seed of ['sub-a', 'sub-b', 'sub-c', 'sub-d', 'sub-e', 'sub-f']) {
+    const failures = collectSeedFailures(['sub-a', 'sub-b', 'sub-c', 'sub-d', 'sub-e', 'sub-f'], (seed) => {
       const one = createPRNG(seed); const prevA = setActiveRng(one);
       const label = deriveProsperityLabel('Subsistence', cfg, []);
       const after1 = one.random();
@@ -94,6 +95,7 @@ describe('the standing label (R3): the label with no crisis in force, stored by 
       clearActiveRng(prevB);
       expect(both.prosperity, seed).toBe(label);
       expect(after2, `${seed}: the stream sits where the one label left it`).toBe(after1);
-    }
+    });
+    expectNoSeedFailures(failures, 'the two labels take the one label\'s draw and leave the stream where it left it');
   });
 });

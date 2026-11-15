@@ -14,6 +14,8 @@
  * its maker stands (a cobbler's boots, a jeweller's or metalworker's precious metals are worked goods).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -81,26 +83,37 @@ const WORKED = [
 describe('the made list names what the town\'s own houses make (C1-A)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(C1A)('%s: "%s" is not listed as made; "%s" still is', (seed, gone, keep) => {
-    const list = madeIn(seed);
-    expect(list, 'GONE').not.toContain(gone);
-    if (keep === EMPTY) expect(list, 'KEEP: the list is empty').toEqual([]);
-    else expect(list, 'KEEP').toContain(keep);
+  test('C1A (every row) seed: the good no house makes is not listed as made; the kept good still is', () => {
+    expectNoSeedFailures(collectSeedFailures(C1A, ([seed, gone, keep]) => {
+      const list = madeIn(seed);
+      if (keep === EMPTY) {
+        expect(list, 'KEEP: the list is empty').toEqual([]);
+        // anchored: the line above pins this same list's exact value (empty, the row silent by design)
+        expect(list, 'GONE').not.toContain(gone);
+      } else {
+        expectAbsentWithAnchor(list, gone, keep, 'GONE');
+        expect(list, 'KEEP').toContain(keep);
+      }
+    }), 'C1A: no town lists as made a good no house of it makes, and each keeps its sibling');
   }, 60000);
 
-  test.each(WORKED)('%s: "%s" stays, worked by its %s', (seed, keep, house) => {
-    expect(madeIn(seed)).toContain(keep);
-    expect(birth(seed).institutions.map((/** @type {any} */ i) => i.name)).toContain(house);
+  test('WORKED (every row) seed: the worked good stays, worked by its house', () => {
+    expectNoSeedFailures(collectSeedFailures(WORKED, ([seed, keep, house]) => {
+      expect(madeIn(seed)).toContain(keep);
+      expect(birth(seed).institutions.map((/** @type {any} */ i) => i.name)).toContain(house);
+    }), 'WORKED: each worked good stays where its house stands');
   }, 60000);
 });
 
 describe('the made list names goods (C2-A)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test.each(C2A)('%s: "%s" is not listed as made; "%s" still is', (seed, gone, keep) => {
-    const list = madeIn(seed);
-    expect(list, 'GONE').not.toContain(gone);
-    expect(list, 'KEEP').toContain(keep);
+  test('C2A (every row) seed: the category key is not listed as made; the good still is', () => {
+    expectNoSeedFailures(collectSeedFailures(C2A, ([seed, gone, keep]) => {
+      const list = madeIn(seed);
+      expectAbsentWithAnchor(list, gone, keep, 'GONE');
+      expect(list, 'KEEP').toContain(keep);
+    }), 'C2A: no town lists a category key as made, and each keeps its good');
   }, 60000);
 
   test('the place the keys left: r2r-town-14 lists its jeweller\'s cut gemstones (no longer folded by the catalog into the "luxury" key)', () => {

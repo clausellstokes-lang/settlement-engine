@@ -2,12 +2,9 @@ import { compareCodepoint } from '../domain/deterministicSort.js';
 import { getInstFlags, getStressFlags } from './helpers.js';
 import { generateSafetyProfile } from './safetyProfile.js';
 import {
+  hasCriminalInstitution,
   materializeInstitutionServiceRolls,
 } from './services/serviceRollMaterialization.js';
-import {
-  isMaterializedCustomContent,
-  nativeSemanticName,
-} from '../domain/content/customContentSemanticAuthority.js';
 import {
   resolveGenerationWorldLaw,
 } from './generationContext.js';
@@ -43,18 +40,6 @@ const _ARCANE_UNDERGROUND = '(arcane underground)';
  * This file orchestrates them and re-exports generateAvailableServices.
  */
 
-const _CRIMINAL_INST_KW = [
-  'thieves',
-  'black market',
-  'smuggl',
-  'street gang',
-  'front business',
-  'assassin',
-  'gambling den',
-  'underground',
-  'red light',
-  'criminal faction',
-];
 // generateAvailableServices — roll each institution's services into categorized
 // buckets, then layer in crime/stress-driven informal services. The seeded
 // _rng() call sequence is load-bearing (see inline notes): any branch that
@@ -96,11 +81,7 @@ export const generateAvailableServices = (
   const roster = { institutions };
   const fenceAskLine = hasInstitution(roster, 'tavern') // R3-CODE-C-3: the tavern only where one stands
     ? ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS : ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS;
-  const hasCriminalInst = institutions.some((inst) => {
-      if (isMaterializedCustomContent(inst)) return false;
-      const name = nativeSemanticName(inst).toLowerCase();
-      return _CRIMINAL_INST_KW.some((kw) => name.includes(kw));
-    }),
+  const hasCriminalInst = hasCriminalInstitution(institutions), // a criminal house by name (services/serviceRollMaterialization.js)
     securityRatio = getInstFlags(config, institutions).militaryEffective / Math.max(8, criminalEffective);
   // Synthetic informal-crime fallback — a lawless-enough settlement offers
   // criminal services even when no criminal institution was rolled.

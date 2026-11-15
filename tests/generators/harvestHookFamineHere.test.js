@@ -9,11 +9,13 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 const ELSEWHERE = /A poor harvest somewhere else/;
+const ELSEWHERE_WORDS = 'A poor harvest somewhere else'; // ELSEWHERE as a substring (a plain literal: exactly equivalent)
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** a seed of the census's corpus (its own dials) or of the reviewer's twenty (the app's shape) @param {string} seed */
 function born(seed) {
@@ -38,7 +40,7 @@ describe('the import-dependent hook reads the famine and the channel, born as th
       expect(stresses(s), `${seed}: a famine`).toContain('famine');
       expect(s.economicState.foodSecurity.importCoverage || 0, `${seed}: food still coming in`).toBeGreaterThan(0);
       const h = hooks(s);
-      expect(h.join('\n'), `${seed}: no elsewhere line`).not.toMatch(ELSEWHERE);
+      expectAbsentWithAnchor(h.join('\n'), ELSEWHERE_WORDS, 'failed here this year', `${seed}: no elsewhere line`);
       expect(h.some((t) => /failed here this year/.test(t) && /afford to import/.test(t)), `${seed}: tells the failure here, and the import`).toBe(true);
     }), 'a famine with food still coming in tells the failure here, and the import');
   });
@@ -47,14 +49,14 @@ describe('the import-dependent hook reads the famine and the channel, born as th
       const s = born(seed);
       expect(s.economicState.foodSecurity.importCoverage || 0, `${seed}: nothing coming in`).toBe(0);
       const h = hooks(s);
-      expect(h.join('\n'), `${seed}: no elsewhere line`).not.toMatch(ELSEWHERE);
-      expect(h.join('\n'), `${seed}: no import`).not.toMatch(/afford to import/);
+      expectAbsentWithAnchor(h.join('\n'), ELSEWHERE_WORDS, 'No food can be bought in from outside now', `${seed}: no elsewhere line`);
+      expectAbsentWithAnchor(h.join('\n'), 'afford to import', 'No food can be bought in from outside now', `${seed}: no import`);
       expect(h.some((t) => /^No food can be bought in from outside now/.test(t)), `${seed}: the food already here is told`).toBe(true);
     }), 'nothing coming in, so the food already here is told, and no import');
   });
   it('r2r-village-50: an import-dependent town with food coming in and no famine keeps the line', () => {
     const s = born('r2r-village-50');
-    expect(stresses(s)).not.toContain('famine');
+    expectAbsentWithAnchor(stresses(s), 'famine', 'plague_onset');
     expect(hooks(s).join('\n')).toMatch(ELSEWHERE);
   });
 });

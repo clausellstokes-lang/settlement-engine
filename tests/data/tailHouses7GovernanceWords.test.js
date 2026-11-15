@@ -13,6 +13,7 @@
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -66,8 +67,7 @@ describe('TAIL-HOUSES-4 batch 7: a governing house claims its own trade, not a g
       const text = textOf(t, house);
       expect(text, `${seed} prints a ${house}`).toBeDefined();
       if (house === ADMIN) expect(governedByCouncil(t), `${seed}: the record's government is a council`).toBe(true);
-      expect(String(text), `${seed} ${house}`).not.toContain(old);
-      expect(String(text), `${seed} ${house}`).toContain(now);
+      expectAbsentWithAnchor(String(text), old, now, `${seed} ${house}`);
     }), 'a governing house claims nothing the record denies');
   }, 600_000);
 

@@ -65,6 +65,7 @@ describe('(2) the lever\'s want names a scarce thing the town has', () => {
     expect(t.facts.find((f) => f.id === 'defence')?.text).toBe('No walls and no standing force.');
     const p = t.people.find((x) => x.name === 'Deirdre Murphy');
     expect(p?.line).toMatch(/\bshelter\b/);
+    // anchored: the shelter match directly above shows the want's line prints
     expect(p?.line).not.toMatch(/guards/);
   }, 60_000);
   it('keep-guard: where a force stands the raids still make guards scarce', () => {
