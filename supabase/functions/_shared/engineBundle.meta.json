@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-16T00:16:03.930Z",
+  "generatedAt": "2026-11-16T04:11:28.735Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "c16d8d3021a96bd9",
-  "engineVersion": "bb4d5a8270210bc1",
-  "builtFromCommit": "23fc37058247c5fbb11cce8ed2918d56555a676a",
+  "sourceHash": "e2008a205c8a38aa",
+  "engineVersion": "8b2bdf5e489c0be1",
+  "builtFromCommit": "9d54ce1a743d6e0e4329b905c52f399ce028297c",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -264,6 +264,7 @@
     "src/generators/economicGenerator.js",
     "src/generators/economy/customTradeEndpointIntegration.js",
     "src/generators/economy/economicState.js",
+    "src/generators/economy/exportsImportedShort.js",
     "src/generators/economy/finishedGoodsDemand.js",
     "src/generators/economy/foodBalance.js",
     "src/generators/economy/incomeLineSiblings.js",
