@@ -1,6 +1,6 @@
 # BAR5-BAND · hand-back (the Foundations' law-and-order word in a quiet small place; LAW 1, rule `1c-band/quiet`)
 
-**Base.** `lane/join-2026-11-14` at `600b7683a` (as named; read back from origin). Branch `lane/bar5-band-2026-11-16`: the audit-A merge (`c0ea05497`, helpers and documents only), then this seat's commits. All work in scratch worktrees (a base tree and a tip tree, one `npm ci`, the tip symlinking it).
+**Base.** `lane/join-2026-11-14` at `600b7683a` (as named; read back from origin). Branch `lane/bar5-band-2026-11-16`: the audit-A merge (`c0ea05497`, helpers and documents only), this seat's commits, and (the chair's ruling LB2, 18:42 UTC) ONE merge of BAR5-SAFETY at `f27f05312` (it brings audit B at `d40d6ab28`). All work in scratch worktrees (a base tree and a tip tree, one `npm ci`, the tip symlinking it).
 
 **Status.** AFTER-COUNTS: PENDING (the tip's renders of the three populations are in flight at this push).
 
@@ -10,7 +10,7 @@
 |---|---|
 | **The rule** | `1c-band/quiet`: the Foundations print `Law & order · Critical` or `· Collapsed` on a page whose own words say nothing failed: the Overview's Safety word is Moderate or better, no crisis is in force, no crime wave stands, no criminal power rivals the law. |
 | **The two readings, and where** | (1) the model's band: `src/domain/causalState.js :: deriveLawOrder` (starts at 50; a small place loses by construction: internal security × 0.4, "no court and no watch" −6, an elder council or a commune −8); printed by `SubstrateTab.jsx` through `foundationBandShown`. (2) the page's own Safety word (`OverviewTab.jsx`, `labelBands.js :: safetyBandOf` of `safetyProfile.safetyLabel`), with the crisis and the tensions. A third reader read the RAW band: the Outlook (`dossierViewModel.js :: outlookFactsOf.keepsOrder`), and a fourth the raw grid (`pdf/sections/SystemStateSnapshot.jsx`, the Campaign-State export). |
-| **The one fact made** | `src/domain/display/foundationBandShown.js`: THE FLOOR beside the cap (`foundationFloorOf`, `quietPlaceKeepsLaw`; the chair's ruling LB1, vetoable by the owner): no office of the law (`institutionIsLawOrder` over `liveInstitutions`), no crisis (`facts/crisisKind.js :: activeCrisisTypes`), no crime wave (`crimeWaveStands`), Safety word Moderate or better → the row prints at least `strained`. The model's score does not move; pure; no draw; no record field. The Outlook and the PDF grid now read the one leaf (one line each). |
+| **The one fact made** | THE FLOOR inside THE ONE HOME of the band, `src/domain/facts/lawBand.js :: lawBandOf` (BAR5-SAFETY's leaf; ruling LB2; the floor is ruling LB1, vetoable by the owner): `quietPlaceKeepsLaw`: no office of the law (`institutionIsLawOrder` over `liveInstitutions`), no crisis (the stress container's typed entries through `canonStressors`: crisisKind's carrier (a); crisisKind itself is lazily pinned and the leaf is eager), no crime wave (the leaf's own `crimeWave`), the Safety word Moderate or better (the ladder's top three, read as `safetyBandOf` reads them: no display import; the guard holds the two readings equal in every town of the 720) → at least `strained`. `foundationBandShown`'s law row reads the leaf (SAFETY's line); the Outlook and the PDF grid now read `foundationBandShown` (one line each). `factLayers.js` declares the two crisis fields the leaf now reads. The model's score does not move; pure; no draw; no record field. (First written in `foundationBandShown.js` at `6c7068c05`; moved by LB2 at `6307029d5`.) |
 | **Instances BEFORE (at 600b7683a)** | read 180 (the bar's 30 + the wide read's 150): **30** in 30 towns; the fresh 300: **43** in 43 towns; the 720: **45** in 45 towns (counted on births through the guard's record twin; page render: see the after table). |
 | **Instances AFTER (at the tip)** | PENDING |
 | **What the one change cured** | every instance (the rule is the floor's own condition, plus "no criminal power", which no lifted page has: 0 in each population). Nothing cured line by line. |
@@ -47,7 +47,13 @@ No new or reworded sentence. Changed WORDS: the Foundations row `Law & order · 
 
 ## The books my cures move
 
-PENDING (the net at 600b7683a and at the tip, each file alone).
+| test | arm | old | new | door / cause |
+|---|---|---|---|---|
+| `tests/domain/bar5SafetyLawBand.test.js` (BAR5-SAFETY's guard) | (b) "the row's band as before" over the 720 | every row as before the floor | every row as before, or `strained` where `quietPlaceKeepsLaw`: **45 of 720 lift** (pinned) | RE-KEYED BY ME, THAT ARM ONLY, on the chair's word (18:42 UTC), dated note in the arm |
+
+CARRIED, NOT MINE: `npm run typecheck:domain:strict` reds `src/domain/display/guardLineUnderTheLaw.js: 2 strict errors (baseline 0)` at SAFETY's own tip `f27f05312` with the same message (BAR5-SAFETY's file).
+
+The rest of the net (at 600b7683a and at the tip, each file alone): PENDING.
 
 **The reference.** No record moves: the three changed modules are display-only and no generator imports them (`git grep` over `src/generators`, `src/domain/worldPulse`, `src/store`: comments only). 0 of the 525 reference configurations move against 600b7683a.
 
