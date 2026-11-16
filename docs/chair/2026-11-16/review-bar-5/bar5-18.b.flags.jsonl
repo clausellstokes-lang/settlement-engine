@@ -1,0 +1,17 @@
+{"id":"C40086","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD word is Secure (2% gap, imports cover it, 2.4 months stores)","other":""}
+{"id":"C40116","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"Food · Pressured; FOOD word the page must print is Secure","other":"C40086"}
+{"id":"C40094","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"miller and farming household in dispute; QUARRELS none, TENSIONS only generational divide, neither a power in GOVERNMENT","other":""}
+{"id":"C40276","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"says a bad season in one source leaves no hunger; FOOD has a 2% gap, no granary, 2.4 months stores, and the page says a bad season leaves some short","other":"C40270"}
+{"id":"C40320","town":"bar0-village-calm-rand-25","sev":"LOW","kind":"BROKEN","why":"plural subject 'Weak defences' with singular verb 'has'","other":""}
+{"id":"C40444","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"says nothing depends on arcane work, village needs no practitioner; same tab prints Reliance Present, economic and medical roles common, and divine healer purifies food","other":"C40438"}
+{"id":"C40573","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"Food Pressured; FOOD word the page must print is Secure","other":"C40086"}
+{"id":"C40647","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"Food Pressured on the tonight sheet; FOOD word the page must print is Secure","other":"C40086"}
+{"id":"C40682","town":"bar0-village-calm-rand-26","sev":"MED","kind":"STATE","why":"Food Security Pressured; FOOD word is Secure (1% gap, imports cover 46 of 67 short)","other":""}
+{"id":"C40718","town":"bar0-village-calm-rand-26","sev":"MED","kind":"PAIR","why":"Food · Pressured; FOOD word the page must print is Secure","other":"C40682"}
+{"id":"C41069","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"BROKEN","why":"plural subject 'Weak defences' with singular verb 'keeps'","other":""}
+{"id":"C41094","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"STATE","why":"calls Merchant Guilds 'Dominant commercial class'; GOVERNMENT gives them Significant, and next line says they trail the council","other":"C41095"}
+{"id":"C41203","town":"bar0-village-calm-rand-26","sev":"MED","kind":"PAIR","why":"'No arcane practitioners on the rolls'; HOUSES has a Druid Circle with an archdruid, and magic row says food relies on druidic provision","other":"C41220"}
+{"id":"C41304","town":"bar0-village-calm-rand-26","sev":"MED","kind":"PAIR","why":"secret says fishmonger keeps the best of the catch; LAND gap and page say no fish reaches the fishmonger","other":"C41057"}
+{"id":"C41429","town":"bar0-village-calm-rand-26","sev":"MED","kind":"STATE","why":"Food Pressured on Daily Life; FOOD word the page must print is Secure","other":"C40682"}
+{"id":"C41526","town":"bar0-village-calm-rand-26","sev":"MED","kind":"STATE","why":"Food Pressured on the tonight sheet; FOOD word the page must print is Secure","other":"C40682"}
+{"id":"DONE","lines":1548,"blocks":2,"flags":16}
