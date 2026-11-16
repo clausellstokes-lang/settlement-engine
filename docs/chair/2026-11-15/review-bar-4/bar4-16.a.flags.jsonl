@@ -1,0 +1,6 @@
+{"id":"C39560","town":"bar0-town-occupied-rand-21","sev":"MED","kind":"PAIR","why":"Town council 'answers to no one in particular' under Occupation: officials take the occupiers' orders, offices work under their eye","other":"C39323"}
+{"id":"C39598","town":"bar0-town-occupied-rand-21","sev":"LOW","kind":"STATE","why":"'Consistent, high-volume arrow production' while LAND gives the Bowyer chain impaired, its managed woodland depleted, with no short mark","other":""}
+{"id":"C40012","town":"bar0-town-occupied-rand-21","sev":"MED","kind":"LACKS","why":"'Rival crews fighting over who runs the streets' presumes several gangs; HOUSES has one Street gang, 'Ten to thirty strong', working together","other":"C39519"}
+{"id":"C40032","town":"bar0-town-occupied-rand-21","sev":"MED","kind":"PAIR","why":"'Walking late is watched, not stopped' contradicts the occupation curfew enforced at checkpoints and travellers being stopped","other":"C39990"}
+{"id":"C40862","town":"bar0-town-occupied-rand-22","sev":"MED","kind":"STATE","why":"'A town with timber to hand supplies the region's building work'; LAND gives Managed Woodland depleted, Timber & Lumber impaired, and TRADE imports timber","other":""}
+{"id":"DONE","lines":2769,"blocks":2,"flags":5}
