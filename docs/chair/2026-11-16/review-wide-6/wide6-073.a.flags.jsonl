@@ -1,0 +1,4 @@
+{"id":"C180060","town":"bar0-town-occupied-rand-28","sev":"MED","kind":"STATE","why":"Outlook 'Trade Monopoly': 'one importer brings in all the grain'; header FOOD says grown 75%, brought in only 23%","other":""}
+{"id":"C181033","town":"bar0-town-occupied-rand-28","sev":"MED","kind":"PAIR","why":"History says 'A previous occupation ended'; CRISIS is Under Occupation and C179921 says the occupation has settled in and will not end this year","other":"C179921"}
+{"id":"C181052","town":"bar0-town-occupied-rand-28","sev":"LOW","kind":"STATE","why":"'legacy ... a generation old' of the siege; PAST gives The Siege as 52 years ago (the 18-years-ago event is the occupation)","other":""}
+{"id":"DONE","lines":1222,"blocks":1,"flags":3}
