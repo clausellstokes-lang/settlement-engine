@@ -1,0 +1,7 @@
+{"id":"C1980","town":"bar0-city-under_siege+famine-rand-28","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard' used as a name beside a verb ('Military/Guard has posted guards'); elsewhere the page says 'The Guard'","other":"C1985"}
+{"id":"C2044","town":"bar0-city-under_siege+famine-rand-28","sev":"MED","kind":"PAIR","why":"Blacksmiths row 'Repairs · Tool manufacture' carries no mark, yet Outlook says 'the smiths have nothing to mend tools with' (iron cut by war) and siege stops trade","other":"C2009"}
+{"id":"C2047","town":"bar0-city-under_siege+famine-rand-28","sev":"MED","kind":"STATE","why":"'the caravans buy here' unmarked, but town is under siege and Crisis tab says 'nothing comes in by road'; no caravans can arrive","other":"C1762"}
+{"id":"C2664","town":"bar0-city-under_siege+famine-rand-28","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: \"Teotiha's Banking houses is open\" (plural house name with 'is')","other":""}
+{"id":"C3247","town":"bar0-city-under_siege+famine-rand-28","sev":"MED","kind":"PAIR","why":"'To anyone arriving, Teotiha looks defended in the ordinary way' is a calm-times scene; the siege lets nobody through and the gates are shut","other":"C3250"}
+{"id":"C1718","town":"bar0-city-under_siege+famine-rand-28","sev":"LOW","kind":"PAIR","why":"calm scene of craftspeople 'each worker deep in their own work' under siege and famine; page says 'No one can earn a normal living' and 'Work slows'","other":"C1816"}
+{"id":"DONE","lines":2928,"blocks":1,"flags":6}
