@@ -35,7 +35,10 @@ describe('the tie prose declares in place (CENSUS-4c unit 4)', () => {
   it('the ledger\'s 30 declaring rows carry exactly the ledger\'s declaration; every other row declares nothing', () => {
     // TAIL-TIES-2 (the chair's ruling (T6), re-keyed by identity with its cause): 30 + the nine vote lines (`ruling body`)
     // and the two passed-threat lines of wary_alliance (`crisis: threat`, `crisis: wartime`) = 41
-    expect(ROWS.filter(declares)).toHaveLength(41);
+    // BAR3-CLOSE-DOORS-1 (2026-11-15, the close of the round BAR3, the chair's ruling TP1, re-keyed by identity with its cause):
+    // 41 + the three tie lines BAR3-PEOPLE batch 1 (aef83b4b5, P1: no road, import or coach under a siege) gave
+    // `excludes: ['crisis: under_siege']` (econ_crim_blur.desc#3, desc#6, tension#2) = 44
+    expect(ROWS.filter(declares)).toHaveLength(44);
     for (const r of ROWS) {
       const { field, index } = at(r.id);
       const d = V.declarationOf(field.lines[index]);

@@ -552,7 +552,9 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the generator master 7b7089fd.. -> e74b9398.. (525 of 525 rows).
     // The close of the round BAR2 (2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2), at the joined line's 1011a8a91:
     // the generator master e74b9398.. -> 9fab7487.. (418 of 525 rows; the five builder branches' declared text cures).
-      .toBe('9fab7487beaf0650bf62de5f21b173c033efc76495853e417ec400c1dbc3ed84');
+    // The close of the round BAR3 (2026-11-16-the-close-of-the-round-bar3.json, BAR3-CLOSE-DOORS-2), at the doors' branch over fb59da43e and the second
+    // repair seat's merge (b46b26d92): the generator master 9fab7487.. -> 6adede0d.. (521 of 525 rows; the round's declared text cures).
+      .toBe('6adede0ded4598ac60c2f406b0b32e3534463334769f56662faa56add9b401c4');
     // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
     // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
     // Record 10 of the train, the composed-prose manifest signed ONCE at the train's final tip (2026-11-09-merge-train-10-
@@ -561,8 +563,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // closing-2-composed-prose-manifest.json), from the stage at a3ea0d325: the prose manifest 083c8dd7.. -> 3b9ee8b6.. (1,050 of 1,050 rows).
     // The close of the round BAR2 (2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2), at the joined line's 1011a8a91, the
     // surface left pending at the close of the tail round: the prose manifest 3b9ee8b6.. -> 551a5f5d.. (1,050 of 1,050 rows).
+    // The close of the round BAR3 (2026-11-16-the-close-of-the-round-bar3.json, BAR3-CLOSE-DOORS-2), at the doors' branch over fb59da43e and the
+    // second repair seat's merge: the prose manifest 551a5f5d.. -> be43267f.. (544 of 1,050 rows; the round's declared rewordings).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('551a5f5d454e8dd3d18edefc414cf63240c5b17c28a89c5a4806860c4970258e');
+      .toBe('be43267f52f5eb9309335c5132d7a145fa71dd26098961179fe7ddacca00388c');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

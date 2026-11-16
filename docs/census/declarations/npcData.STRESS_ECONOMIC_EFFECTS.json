@@ -67,7 +67,9 @@
       "id": "econ_crim_blur.desc#3",
       "text": "{A} signs the import papers and {B} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -93,9 +95,11 @@
       "id": "econ_crim_blur.desc#6",
       "text": "{A} vouches for {B}'s people at the guild hall. In return, {B}'s people keep {A}'s carts moving on roads where other carts are stopped.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "econ_crim_blur.desc#7",
@@ -125,9 +129,11 @@
       "id": "econ_crim_blur.tension#2",
       "text": "One profitable season more, {A} keeps saying. The seasons keep being profitable.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "econ_crim_blur.tension#3",
@@ -1865,7 +1871,7 @@
     },
     {
       "id": "mutual_leverage.tension#3",
-      "text": "{A} has asked {B} for a second favour before repaying the first.",
+      "text": "{A} has asked {B} for a second favour before repaying the first, which would put {A} two favours ahead.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1926,7 +1932,7 @@
     },
     {
       "id": "wary_alliance.desc#1",
-      "text": "{A} and {B} are allies because each has reckoned what the other would cost as an enemy. The friendship is warm and public, and it lasts only while that reckoning holds.",
+      "text": "{A} and {B} are allies because each has reckoned what the other would cost as an enemy. The friendship is courteous, and it lasts only while that reckoning holds.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2357,7 +2363,7 @@
     },
     {
       "id": "old_debt.tension#7",
-      "text": "{B} has fallen on hard times, and the debt {A} owes is now the only asset {B} has.",
+      "text": "{B} has begun to count the debt {A} owes among {B}'s assets, and has had it written down before witnesses.",
       "needs": [],
       "excludes": [],
       "crisis": [],

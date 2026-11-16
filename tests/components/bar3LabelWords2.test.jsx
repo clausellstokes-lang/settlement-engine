@@ -91,6 +91,16 @@ const SIEGE_CHAINS = [
   ['r2s-under_siege-village-0', 'tavern_social', 'operational', 'impaired'],
 ];
 const SIEGE_KEEP = [['r2s-under_siege-city-0', 'fishing', 'running']]; // one of its houses works on
+// RULING SW1b (the chair, 2026-11-15 23:41 UTC; vetoable by the owner; BAR3-CLOSE-SWEEP-A): every crisis that marks houses,
+// not the siege alone. [seed, chain id, the state that must not print, the state that prints instead]
+const CRISIS_CHAINS = [
+  ['r2s-plague_onset-village-3', 'tavern_social', 'operational', 'impaired'], // its one inn: the outbreak's "Curtailed"
+  ['r2s-famine-thorp-3', 'forage', 'running', 'impaired'], // its subsistence farming: the famine's "Scarce"
+];
+const CRISIS_KEEP = [
+  ['r2s-famine-city-3', 'wine_spirits', 'entrepot'], // its Brewery scarce, its Vintner unmarked
+  ['r2s-plague_onset-city-1', 'tavern_social', 'operational'], // its taverns curtailed, its bathhouse unmarked
+];
 const TRADE = [
   ['r2r-city-35', 'Trade connectivityCollapsed', 'Trade connectivityCritical'],
   ['r2s-indebted-city-1', 'Trade connectivityCollapsed', 'Trade connectivityCritical'],
@@ -130,6 +140,20 @@ describe('BAR3-LABELS-2: the reliance row names its dependents; four labels say 
     });
     expectNoSeedFailures(failures, 'the chain card reads the houses\' marks');
     for (const [seed, id, state] of SIEGE_KEEP) {
+      const chain = town(seed).economicState.activeChains.find((/** @type {any} */ c) => c.chainId === id);
+      expect(chainCardUnderSiege(town(seed), chain, chainAsShown(chain, town(seed))).status, `${seed} ${id} keeps "${state}"`).toBe(state);
+    }
+  }, 300_000);
+
+  test('SW1b NOT: a working word on a chain whose every house an outbreak or a famine marks ("impaired" prints); KEEP: a house unmarked', () => {
+    const failures = collectSeedFailures(CRISIS_CHAINS.map((r) => r[0]), (seed) => {
+      const [, id, not, instead] = /** @type {string[]} */ (CRISIS_CHAINS.find((r) => r[0] === seed));
+      const chain = town(seed).economicState.activeChains.find((/** @type {any} */ c) => c.chainId === id);
+      expect(chainAsShown(chain, town(seed)).status, `${seed} ${id}: the card as given reads "${not}"`).toBe(not);
+      expect(chainCardUnderSiege(town(seed), chain, chainAsShown(chain, town(seed))).status, `${seed} ${id}: "${instead}", not "${not}"`).toBe(instead);
+    });
+    expectNoSeedFailures(failures, 'the chain card reads every crisis\'s marks');
+    for (const [seed, id, state] of CRISIS_KEEP) {
       const chain = town(seed).economicState.activeChains.find((/** @type {any} */ c) => c.chainId === id);
       expect(chainCardUnderSiege(town(seed), chain, chainAsShown(chain, town(seed))).status, `${seed} ${id} keeps "${state}"`).toBe(state);
     }

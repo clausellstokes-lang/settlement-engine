@@ -239,7 +239,7 @@ export const HOLDER_SOURCES = Object.freeze({
   unaffiliated: Object.freeze({ kind: 'parish', cite: 'src/domain/worldPulse/religionState.js:644', read: true }),
 
   // ── the elders: how long ago a thing happened ──
-  yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:328', read: true }),
+  yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:333', read: true }), // BAR3-CLOSE-DOORS-2 (2026-11-16): :328 -> :333 by identity (the line byte-identical, sha256 a4bc6f0c…), moved by the five lines BAR3-CLOSE-SWEEP-B letter a (5bb670f5a) added above it
 
   // ── the road: the look of the country, which anyone travelling it can see ──
   terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:209', read: true }),

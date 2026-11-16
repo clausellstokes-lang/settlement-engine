@@ -136,6 +136,28 @@ const crossFactionRivalPairs = (powers, relationships, npcs) => {
 // in ten. Draws (on the caller's stream): the count, then one issue pick per conflict.
 //   powers (powerStructure.factions rows), relationships, config, institutions, npcs (the cast:
 //   each person's home power is read from its memberships — PEOPLE-3 HOOKS, never the grouping)
+/** @param {any} c @returns {string|null} the quarrel's pair, unordered */
+const pairKeyOf = (c) => (Array.isArray(c?.parties) && c.parties.length === 2 ? [...c.parties].map(String).sort().join('\u0000') : null);
+
+/**
+ * BAR3-CLOSE-SWEEP-B (2026-11-16, letter c; the chair's RG1c, vetoable by the owner): A QUARREL BETWEEN TWO POWERS DOES
+ * NOT END BECAUSE THE PEOPLE WERE RE-ROLLED. A section regen's conflict list keeps every born quarrel as it is, and takes
+ * its own draws only for the pairs the born list does not name, up to the cap (the born first): the draw's own ceiling
+ * (`generateConflicts :: randInt(1, 3)`), read here as a local, so the tuning estate gains no named constant. A conflict names powers
+ * only (`parties`, `issue`, `stakes`, `intensity`, `desc`, `plotHooks`): no person of the old cast is carried. `drawn` is
+ * returned beside the list so the caller twins only the rows of the pairs the born list did not name (their rows are the
+ * generator's un-twinned rows: a row is twinned only where a conflict names its pair). Pure; no draw.
+ * @param {ReadonlyArray<any>} born @param {ReadonlyArray<any>} regen
+ * @returns {{ conflicts: any[], drawn: any[] }}
+ */
+export function carryBornQuarrels(born, regen) {
+  const cap = 3; // generateConflicts :: randInt(1, 3), the most quarrels one draw deals
+  const kept = (Array.isArray(born) ? born : []).slice(0, cap);
+  const named = new Set(kept.map(pairKeyOf).filter(Boolean));
+  const drawn = (Array.isArray(regen) ? regen : []).filter((c) => !named.has(pairKeyOf(c))).slice(0, cap - kept.length);
+  return { conflicts: [...kept, ...drawn], drawn };
+}
+
 export const generateConflicts = (powers, relationships, config = {}, institutions = [], npcs = []) => {
   const named = (Array.isArray(powers) ? powers : [])
     .map((row) => ({ name: nameOf(row), category: row?.category, isGoverning: row?.isGoverning === true }))

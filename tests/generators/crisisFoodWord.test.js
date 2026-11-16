@@ -56,7 +56,9 @@ describe('the food word has one home: the food record', () => {
     expect(SIEGE_GOALS('legal', { hasGranary: true })[0].short).toBe('Secure enough grain reserves to outlast the blockade');
     const secrets = [...STRESS_INSTITUTION_EFFECTS.under_siege, ...STRESS_INSTITUTION_EFFECTS.famine, ...STRESS_INSTITUTION_EFFECTS.wartime].map((e) => e.secret);
     expect(secrets.filter((t) => /\{commodity\}/.test(t) && foodWordsIn(t.replace(/\{commodity\}/g, 'X')).length)).toEqual([]);
-    expect(secrets.filter((t) => /\{food\}/.test(t))).toHaveLength(4);
+    // BAR3-CLOSE-DOORS-1 (2026-11-15, the close of the round BAR3, measured at the joined tree 98363cb84): 4 -> 5, the covert
+    // route's siege twin carries `{food}` (lane BAR3-PLACES batch 1, its table of books: "the {food} secrets' count 4 -> 5").
+    expect(secrets.filter((t) => /\{food\}/.test(t))).toHaveLength(5);
   });
 });
 

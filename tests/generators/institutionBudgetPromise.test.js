@@ -156,67 +156,76 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // dealings and secret, the arrival scene, the foodways lines, the slavic social texture (534c29fac), the pressure, safety and guard
 // lines, one income row, the validator's embattled-region reason (c1f9889ae, LB4) and the stability phrase (e36bd855e, PP11).
 // Re-captured at the joined line's 1011a8a91 with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
+// RE-KEYED BY IDENTITY 2026-11-16 (the close of the round BAR3, BAR3-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:30:10 UTC, "Yes that one too", in the
+// chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json): 56 of 60 moved by the round's declared cures; the stored sixty
+// reproduce at 83fc14ad6 (60 of 60). FIELD-DIFFED by leaf path: text leaves (tie descriptions and tensions, the foodways lines, the people's dominant
+// trait (P7a), the entrepot note, house, faction and origin rows, the arrival, the recent conflict, the drag, safety and guard lines, the pressure
+// line, the prominent tie, the crisis summaries, hooks, viability notes and cast reasons (one the second repair seat's letter d, efdb3841d), two
+// secrets, the viability issues, a history event) and ONE non-text leaf, declared: economicState.safetyProfile.flags.theocraticEconomy true -> false
+// on seeds 29, 35 and 47, with the coherence note it drives withdrawn (BAR3-DEFECON 7a4b48a84, `settleTheocraticFlag`: its hand-back's table row
+// `flags.theocraticEconomy` and `coherenceNotes`, the theocratic note); the budget module untouched. Re-captured on the doors' branch after the
+// merge b46b26d92 with the factor forced to 1.0, this file's own loop (an untracked probe), twice and equal.
 const BEFORE = Object.freeze([
-  '69cff5bd471b57c0', // 0
+  '6368cc28996ce121', // 0
   '99b5cf060a5535a3', // 1
-  'cefbe7f160c5d06b', // 2
-  '1e52907438bc3cff', // 3
-  '54606a7570f56778', // 4
-  'cce33757fe1c23bd', // 5
-  '0fd2ee36a6d00bed', // 6
-  '3798dc5ced4f4983', // 7
-  '6c2f6846bdb16969', // 8
-  '8099422c161ddc27', // 9
-  'be003cf7ca76b03f', // 10
-  '48220a54be691196', // 11
+  'f583c69729e7420a', // 2
+  '3b2914498ceaeae8', // 3
+  'f382edb15c01289e', // 4
+  'fbf4aa38036e0dbf', // 5
+  'c3ee24fa02e779c1', // 6
+  '9f65f9c9b8da6a3b', // 7
+  'eea0cd9ed2dc2656', // 8
+  '58417219b115e57a', // 9
+  '5cf4fd76ba7ec5d6', // 10
+  '180130b85d7df9da', // 11
   'f67ce964f2cbdc10', // 12
   'cb153a2796d1e21b', // 13
-  '35842dd87190c1f0', // 14
-  '5128e0339a750e48', // 15
-  '2dac51e99730b118', // 16
-  '820e76d880f949b0', // 17
-  'e27156927f04dea2', // 18
-  '0fb990b0be28f46b', // 19
-  'bcc46b78730b9167', // 20
-  '97b02b1e611f312d', // 21
-  '80862e61cf99aac2', // 22
-  '0ca08158643879a9', // 23
-  '157d51f8354ee677', // 24
-  'b4a472380d1b2ad0', // 25
-  '4e559d7325554734', // 26
-  '0dc6fe74a9e51dff', // 27
-  '4c5c0c3d6efdadfd', // 28
-  'f3abc983e8704692', // 29
-  'c7973e8ebdae65d7', // 30
-  '2b1fe29aaa88964d', // 31
-  '7c4f662d9923d5fd', // 32
-  'c024b44cb5ecdd01', // 33
-  '91e6119815eebd5b', // 34
-  'f363184ce2768a88', // 35
-  'e1ad2ea924d58206', // 36
-  'cb5c20cec26d7241', // 37
-  'f4f1df526f142d2d', // 38
-  '06acb89508faa67e', // 39
-  '2e0aec2c25238b99', // 40
-  'ef47dc60dab25bff', // 41
+  '2c6554c7f29e933f', // 14
+  'dcea38eb32d99d95', // 15
+  '397ab58a3771844c', // 16
+  '0009bf62ae58204a', // 17
+  '0db196f6d02bed77', // 18
+  '11109b9ee5980529', // 19
+  '37137d2dd0ef12f9', // 20
+  '41765671443e1725', // 21
+  '9fab0ffcc904c566', // 22
+  '4a3bf2a483658a51', // 23
+  '659c0b60510fb969', // 24
+  'eec605fa525a5a54', // 25
+  '4a49f26faaa39d50', // 26
+  '64db5da834e88462', // 27
+  '2fe0940abec1e34f', // 28
+  'e52465ad29edb03b', // 29
+  '50d4410429995964', // 30
+  '952311d4c6753d48', // 31
+  'e24b8c58d23ce40e', // 32
+  '0dd6b43be23c2946', // 33
+  '3130f4ce2384adab', // 34
+  '0ea6d8767ef42d0c', // 35
+  '3a4a2a08a0ca850a', // 36
+  '42b5c19fa4560297', // 37
+  '2062c61015a90a05', // 38
+  '134409f6a473dd81', // 39
+  'a2bca5d928740238', // 40
+  '5ce69ddccbdacf4c', // 41
   '30be0efd3c18f2d4', // 42
-  '18010daf3e33456d', // 43
-  '1365f41528e5a7d6', // 44
-  '48bb7621ee81e146', // 45
-  '3f5fb6b7004d75a5', // 46
-  '423270fbf462236f', // 47
-  '9ea223be35810fc3', // 48
-  '06ae9294c60a0078', // 49
-  '8a71d56f8d83fee3', // 50
-  '503cc2df9341afe3', // 51
-  '061706c05edd1564', // 52
-  '9c917236660b3185', // 53
-  '137968bc6dc6169b', // 54
-  'b31ad95f93e701d3', // 55
-  '48729a7161a6698b', // 56
-  '1b964bd8abcce098', // 57
-  'a07a77e6b2302cd2', // 58
-  'eb30a791aee4bd06', // 59
+  '81488a5aa609d223', // 43
+  '5891627d0ecbc3d3', // 44
+  'b5340f08507b9e2d', // 45
+  '8c9893fc2737d848', // 46
+  '1d67d8fdda758142', // 47
+  'd3f348f4ad0baf97', // 48
+  'a68d9b6e425c61f3', // 49
+  'e2db80b2a0f90a4a', // 50
+  '140b044054cc9de5', // 51
+  '84f994e383e96d5e', // 52
+  'e13e11fc958c5a00', // 53
+  '065a52a8c4ff3ed6', // 54
+  'aa1ec7672c39e81a', // 55
+  '849b5a1ff83de78e', // 56
+  'fdb7a3fa2f8a690b', // 57
+  '99c9676ad7267e6a', // 58
+  'b5be671d5d5c9039', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);

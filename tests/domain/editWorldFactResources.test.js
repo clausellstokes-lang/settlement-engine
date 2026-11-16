@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '2c934c1571b7877f838370ddd4c349c3c4ef1b33e441aea7fc251cee80850503',
-    replay: 'd4a05254ad672cc32a3c05ea22ec7b73daedce228682fc726b496731d5c98517',
+    derived: '412b06a0e726e66ed9d3584e4fce3c950431c128cb15c524f834eda73235fdf5',
+    replay: '89993afd0dd3805c18ff254cd564f89190fe65fff7cda8017e39623e3a74923a',
   }),
   21: Object.freeze({
-    derived: 'b05d0766bdc670a051d28dd3b74ae95e5648314f062f9a9ef16bfa070c36df50',
-    replay: '07de26409a8260c40f420c063a595597d6f57b477f0ed923784035202157ea74',
+    derived: 'c42b5f2026dab8e1b72daf9bc6d4d2c75006e6dd4f2fcc7f47c68b768e356efe',
+    replay: '884778fc29eb94c311e7dd9dc02975fea28575a1ae8a95c799a280e694543b7a',
   }),
   42: Object.freeze({
-    derived: '95c96d4f4cfed9468ce2d133871c64d39dfc7ab18633e135894479cfd01bb8f5',
-    replay: 'e14f527de702da5664dbc2df1518e84159fa367f487d385c2bc33c4d337df62d',
+    derived: '8ff7bc4882f09a98c985e04c4d19918d0ba132da738fe61f13f7df4a17f7b547',
+    replay: 'ba5c465c307f64bc4db336cd9450f47dcaeb69d5837db70b251d5986b112fbc7',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -286,6 +286,14 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // adfd3ba4..., the step unchanged since point 47) planted over a COPY of the tree and the live step produced the SAME six digests (cmp-equal,
 // the live run twice and equal); on every row the fresh generation equals the dormant re-derivation.
 // Row 21's `derived` is the re-recorded golden's control row (b05d0766, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-16, THE CLOSE OF THE ROUND BAR3 (BAR3-CLOSE-DOORS-2), BY THE SAME PLANT ── Rows 0, 21, 42 moved (six digests) by
+// the round's declared text cures (docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json; the owner's word 2026-11-15 20:30:10 UTC:
+// "Yes that one too"), re-captured at the doors' branch over fb59da43e and the second repair seat's merge (b46b26d92) with the golden master in
+// the same commit. Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4...,
+// the step unchanged since point 47) planted over a COPY of the tree and the live step produced the SAME six digests (cmp-equal, the live run
+// twice and equal, at fb59da43e and again at the merged tree); the same probe reproduces the stored six at 83fc14ad6; on every row the fresh
+// generation equals the dormant re-derivation. Row 21's `derived` is the re-recorded golden's control row (c42b5f20, town|germanic|plains|road|civilized).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

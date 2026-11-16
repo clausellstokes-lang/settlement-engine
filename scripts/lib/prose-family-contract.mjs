@@ -274,14 +274,14 @@ const EXPECTED_ROOTS = new Map([
 // 81/188); regionalLog 2/8/164 → 2/4/158 (changes[].kind 7/83 → 3/77, sourceEvent.type 1/81 holds); chronicle and timeline hold.
 // Totals 62/1079/5545 → 64/1082/5533; bytes 8098 → 8401; digest 141be9b3 → 9bd27a79. Reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 38121, canonEventLogEntries: 1, wizardNewsFinalEntries: 415,
+  scalarRows: 38127, canonEventLogEntries: 1, wizardNewsFinalEntries: 415,
   wizardNewsAccumulatedEntries: 2622, wizardNewsUnique: 417, pulseHistory: 12,
   regionalEventLog: 71, regionalEventLogUnique: 71, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 47, distinctValues: 1491, occurrences: 5170 },
+  { family: 'pulseHistory', identities: 51, distinctValues: 1507, occurrences: 5176 },
   { family: 'regionalLog', identities: 2, distinctValues: 3, occurrences: 113 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
@@ -317,9 +317,21 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // .metadata.warRulingRead.kind/.reason, 1/1 each: no war ruling is read in this corpus's year), 45 rows move a count, none arrives.
 // Totals 64/1362/5402 → 60/1509/5302; pulseHistory 51/1343/5225 → 47/1491/5170; regionalLog 2/4/158 → 2/3/113;
 // bytes 8408 → 7806; digest 3198eb2f → ed98c528.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 60, distinctValues: 1509, occurrences: 5302 });
-const EXPECTED_ROWS_BYTES = 7806; // the close of the tail round (2026-11-15): 8408 → 7806, four identities leave; STYLE-2-MERGE-7 closing act 4: 8404 → 8408 (the final tip's re-key); MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out; (ALLEGIANCE-CAR2 merge): 7798 → 8098, two in; (ALLEGIANCE-CAR3 merge): 8098 → 8401, four in and two out; STYLE-2-PULSE-FOLLOWUP: 8401 → 8404, distinct counts only
-const EXPECTED_ROWS_SHA256 = 'ed98c528a67c8fd93b2d66cdf79b8eb88d22b59d3dc8a22ad1f27b0529d5531c';
+// 2026-11-15 (THE CLOSE OF THE ROUND BAR3, BAR3-CLOSE-DOORS-1; the chair's ruling OC1, vetoable by the owner; RE-RECORDED at the
+// doors' tree c5d49d609 (the joined line 98363cb84 + the sweep-a repair, merged) through this library's own functions, one corpus
+// build, an untracked scratch script, IN THE SAME ACT AS the baseline and the news-headline baseline): THE TAIL CLOSE'S MOVE,
+// REVERSED. No commit of the two rounds BAR2, BAR3 touches the walker's union of the pulse, the events, the region, the news voice,
+// the chronicle, the contract libraries or their baselines (`git log 74ded1800..` over its 23 paths: empty); the rounds' declared
+// generation moves re-deal the observed corpus's towns, and the war ruling is read again (the writers' reach's ruling WR2): the
+// FOUR identities the tail close saw leave ARRIVE (pulseHistory[].consequenceOutcomes[] and selectedOutcomes[]
+// .metadata.warRulingRead.kind/.reason, 1/1 each); no other identity arrives or leaves; 10 rows move a count (consequence
+// proposalPayload.reason 1/2 → 2/2, reasons[] 135 → 137, summary 130 → 131; impactDigest reasons[] 161 → 163, summary 110 → 111;
+// rollExplanations proposalPayload.kind 2/21 → 2/22, .reason 4/10 → 5/11; selected proposalPayload.reason 4 → 5, reasons[] 162 →
+// 164, summary 117 → 118). scalarRows 38121 → 38127; the news layer 415/2622/417 and the regional log 71/71 hold.
+// Totals 60/1509/5302 → 64/1525/5308; pulseHistory 47/1491/5170 → 51/1507/5176; bytes 7806 → 8408; digest ed98c528 → 85f41b79.
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 64, distinctValues: 1525, occurrences: 5308 });
+const EXPECTED_ROWS_BYTES = 8408; // the close of the round BAR3 (2026-11-15, ruling OC1): 7806 → 8408, the four identities arrive again; the close of the tail round (2026-11-15): 8408 → 7806, four identities leave; STYLE-2-MERGE-7 closing act 4: 8404 → 8408 (the final tip's re-key); MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out; (ALLEGIANCE-CAR2 merge): 7798 → 8098, two in; (ALLEGIANCE-CAR3 merge): 8098 → 8401, four in and two out; STYLE-2-PULSE-FOLLOWUP: 8401 → 8404, distinct counts only
+const EXPECTED_ROWS_SHA256 = '85f41b79e75e9ccf66f6b52bdde748e8e9498daf23361d35c5fd38c71fab0a9f';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

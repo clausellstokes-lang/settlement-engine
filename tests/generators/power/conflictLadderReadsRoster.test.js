@@ -40,6 +40,10 @@ const market = (s) => Boolean(factsOf(s).market);
 /** @param {any} s */
 const court = (s) => Boolean(s.economicState?.compound?.inst?.hasCourtSystem);
 const LEVIES = 'has been debating market levies for three months. The merchants have stopped attending the sessions.';
+// BAR3-CLOSE-SWEEP-A (2026-11-15): the levy line where the seat's relation row with the merchant power is settled (the
+// powers branch's c0d013098, its declared cure C27440: `factionDynamics.js :: boycottReadsRelation`); r2r-town-4's Town
+// Mayor stands `subordinate`, `stable` to the Merchant Guilds, and the line naming the market still prints where it stands
+const LEVIES_SETTLED = 'has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.';
 const MURDERED = 'Several merchants have been found murdered this season';
 const OUTBUYING = 'The merchant class is outbuying noble landholdings.';
 const COURTS = 'pushing for expanded authority over civilian courts';
@@ -62,7 +66,7 @@ describe('POWERS-13 #291 · the conflict ladder names a market or a court only w
   }, 240_000);
   it('the twins: each line keeps its place where its market or court stands', () => {
     expectNoSeedFailures(collectSeedFailures([
-      ['r2r-town-4', LEVIES], ['r2r-town-0', MURDERED], ['r2r-town-10', OUTBUYING], ['r2r-town-16', COURTS],
+      ['r2r-town-4', LEVIES_SETTLED], ['r2r-town-0', MURDERED], ['r2r-town-10', OUTBUYING], ['r2r-town-16', COURTS],
     ], ([seed, line]) => {
       const s = born(seed);
       expect(line === COURTS ? court(s) : market(s), `${seed}: the thing stands`).toBe(true);

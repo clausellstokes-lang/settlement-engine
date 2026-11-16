@@ -475,7 +475,16 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // move no byte of it (customContentPreview.worker moves by the same +8,901). The app build's largest chunk moves over the same
 // span, for orientation: engine +5,463, data-lazy +3,803, crisisStoppedRow +1,688 (services SV6), engine-core +1,314. Recorded
 // AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 2312179;
+// 2,312,179 -> 2,322,103 (2026-11-15, BAR3-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR3 (the joined line 98363cb84 + the sweep-a repair through 03abf16cd, merged 1ac74a4c0; the edge bundles re-derived 9d7c7fbc5 and holding after the last merge); the chair's
+// ruling B3 under the owner's word of 2026-11-15 07:50 UTC, which deferred the size budgets to the chair; VETOABLE BY THE OWNER):
+// A RISE OF 9,924 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this file's own arm
+// (VERIFY_DIST=1): the line's closed tip 83fc14ad6 reads 2,312,179 (the ceiling, exactly); this tree reads 2,322,103. The cause:
+// the src/ cures of the round's seven branches AS A WHOLE (lane/bar3-corpus, -services, -places, -labels, -defecon, -people,
+// -powers: 8 first-parent commits 83fc14ad6..98363cb84) and the sweep seat's display leaf; the sweep seat's chunking cure
+// (vite.config.js: facts/sharedPower.js stays in engine-core) moves no byte of the worker (measured 2,322,103 before it and
+// after). customContentPreview.worker moves by the same +9,924. The app build over the same span, for orientation: engine
+// +5,447, engine-core +520 (of it +509 the chunking cure), data +120. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2322103;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -801,7 +810,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR2; before it WB1, ODQ §934.105). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

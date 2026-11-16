@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1381
+    "producerIndexFiles": 1383
   },
   "totals": {
     "pools": 856,
@@ -4205,7 +4205,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 1,
+        "no crisis: famine": 3,
         "no unrest": 2
       },
       "undeclared": 0,
@@ -19751,7 +19752,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "eco.safetyProfile.compound",
@@ -30045,6 +30046,7 @@
         "crisis: plague_onset": 1,
         "crisis: under_siege": 1,
         "market": 3,
+        "no crisis: famine": 1,
         "no crisis: plague_onset": 3,
         "no crisis: under_siege": 4,
         "no crisis: wartime": 2,
@@ -30442,6 +30444,7 @@
       "declares": [],
       "lineDeclares": {
         "colour": 1,
+        "no crisis: occupied": 1,
         "no crisis: under_siege": 3
       },
       "undeclared": 0,
@@ -30620,7 +30623,7 @@
         "guild": 1,
         "market": 2,
         "no crisis: occupied": 1,
-        "no crisis: under_siege": 1,
+        "no crisis: under_siege": 3,
         "no guild": 4
       },
       "undeclared": 0,
@@ -54023,7 +54026,7 @@
         "crisis: under_siege": 1,
         "institution: bank": 2,
         "institution: tavern": 1,
-        "market": 6,
+        "market": 7,
         "navigable": 1,
         "no crisis: hunger": 4,
         "no crisis: infiltrated": 1,
@@ -54031,11 +54034,11 @@
         "no crisis: plague_onset": 1,
         "no crisis: recently_betrayed": 1,
         "no crisis: threat": 1,
-        "no crisis: under_siege": 12,
+        "no crisis: under_siege": 13,
         "no route: isolated": 3,
         "route: isolated": 2,
         "tier: ≤ hamlet": 1,
-        "tier: ≥ town": 3,
+        "tier: ≥ town": 4,
         "tier: ≥ village": 2
       },
       "undeclared": 8,
@@ -54087,7 +54090,7 @@
         "no crisis: hunger": 14,
         "no crisis: monster_pressure": 1,
         "no crisis: threat": 4,
-        "no crisis: under_siege": 13,
+        "no crisis: under_siege": 14,
         "no crisis: unrest": 1,
         "no iron at hand": 1,
         "no route: isolated": 1,
@@ -54257,10 +54260,10 @@
       "name": "CAST_ABSENCES",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701",
-      "lines": 14,
+      "lines": 15,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 14,
+      "undeclared": 15,
       "crisisScoped": false
     },
     {
@@ -54305,7 +54308,7 @@
       "lines": 87,
       "declares": [],
       "lineDeclares": {
-        "guild": 2,
+        "guild": 3,
         "healer": 1,
         "institution: temple": 3,
         "market": 3,
@@ -54675,14 +54678,16 @@
       "name": "STRESS_INSTITUTION_EFFECTS",
       "drawKind": "R",
       "drawSite": "npcGenerator.js:778-780 pickRandom2 (keyed by stress kind; secretsHeldByFoodRecord pre-filter; {npc} is the other-NPC sl",
-      "lines": 97,
+      "lines": 98,
       "declares": [],
       "lineDeclares": {
+        "crisis: under_siege": 1,
         "gate": 2,
         "institution: temple": 1,
         "market": 2,
         "migration: exodus": 2,
         "migration: influx": 5,
+        "no crisis: under_siege": 1,
         "no ruler: lord": 6,
         "no ruler: occupier": 6,
         "other npc": 20,
@@ -54690,7 +54695,7 @@
         "starving": 1,
         "tier: ≥ town": 1
       },
-      "undeclared": 61,
+      "undeclared": 60,
       "crisisScoped": false
     },
     {
@@ -69255,7 +69260,7 @@
       "subject": "INCOME WEIGHT: the practice of magic",
       "fields": [],
       "readingFunction": "incomeWeightPoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

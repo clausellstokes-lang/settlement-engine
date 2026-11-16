@@ -43,7 +43,11 @@ const MUST_NOT = [
 ];
 /** [seed, the true sibling that must still print] */
 const KEEP = [
-  ['r2r-thorp-43', /A broker sits in the shade, matching buyers to goods from routes you have never travelled/],
+  // BAR3-CLOSE-DOORS-1 (2026-11-15, the close of the round BAR3): r2r-thorp-43 -> r2s-monster_pressure-city-0, the KEEP's
+  // address re-taken: lane BAR3-PLACES batch 1 refuses the broker where no market stands (r2r-thorp-43 holds none: its table of
+  // books), and the line prints in the census's market towns; the address is the branch's own KEEP town for this line
+  // (`bar3PlacesRows.test.js`, "H1: the broker of far goods where a market stands"). The line and the arm are unchanged.
+  ['r2s-monster_pressure-city-0', /A broker sits in the shade, matching buyers to goods from routes you have never travelled/],
   ['r2r-thorp-47', /A clerk records every cartload that passes in a careful ledger/],
   ['r2r-town-0', /Bolts of cloth and bales of wool fill the carts waiting on the road out/],
   ['r2r-village-40', /A moneylender sits at a low table with a queue of familiar faces waiting/],

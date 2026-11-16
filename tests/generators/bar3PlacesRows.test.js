@@ -75,7 +75,11 @@ describe('BAR3-PLACES: the rows read the town', () => {
     ['C15699 no trade built upon at the founding', 'r2s-succession_void-hamlet-2', /was built upon failed|what it was collapsed|depended on failed/, /The trade the settlement was founded to serve failed within its first few years/],
     ['C24238 no one kind of tension', 'r2r-city-36', /The tensions here are the domestic kind/, /Beside whatever else divides it, its oldest quarrels are the domestic kind/],
     ['C24620 no stability claimed', 'r2r-city-18', /Stable enough that its tensions/, /Its oldest tensions are the slow kind/],
-    ['C18651 no power over the seat', 'r2r-town-8', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
+    // BAR3-CLOSE-SWEEP-A (2026-11-15): re-keyed by identity from r2r-town-8, whose theocratic note the defecon branch's
+    // declared cure withdraws (7a4b48a84, BAR3-DEFECON-HANDBACK `flags.theocraticEconomy`: its tithes row, 12%, is not
+    // the income record's largest); r2r-town-54 (a Strong Feudal Appointee beside Strong Religious Authorities) is the
+    // one town of the census's 720 that still prints the note (BAR3-DEFECON-2-HANDBACK: 16 -> 1)
+    ['C18651 no power over the seat', 'r2r-town-54', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
     ['C5938 no grain by a covert route under a siege', 'bar0-city-under_siege+famine-rand-8', /through a covert route/, /before the siege closed the roads, and is selling it at triple the official price after dark/],
     ['C8742 the sovereign city: no crown officer', 'bar0-city-wartime-rand-7', /A crown officer has arrived/, /An army requisition officer has arrived with orders/],
     ['C8717 the sovereign city: no kingdom', 'bar0-city-wartime-rand-7', /is in a kingdom/, /is at war and doing well out of it/],
@@ -124,16 +128,18 @@ describe('BAR3-PLACES: the rows read the town', () => {
  * the cast bears; C24313 the household elder's late twins (institutionDescVariants.js) claim no "no office, no title"
  * under the council that governs; C4510 the famine hook (stressTypes.js) names no good its holder may lack; C36830 the war's
  * profit text (stressNarrative.js) claims no merchants getting rich (the merchant power the war hurts).
+ * BAR3-CLOSE-SWEEP-B (2026-11-16, letter d): C6485's new line is reworded in the style law's form ("no one on the roster
+ * is named" -> "no one is named for it": the struck phrase "on the roster"); its towns and its truth unchanged.
  */
 describe('BAR3-PLACES-2: the routed rows read the town', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   /** [row, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['C6485 the profiteer under the war (the read town)', 'bar0-city-wartime-rand-6', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one on the roster is named"/],
-    ['C6485 the profiteer under the war (a thorp)', 'r2r-thorp-11', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one on the roster is named"/],
-    ['C6485 the profiteer beside a power the contracts made rich', 'r2s-wartime-metropolis-0', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one on the roster is named"/],
-    ['C6485 class: the profiteer under a debt', 'r2s-indebted-city-2', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one on the roster is named"/],
+    ['C6485 the profiteer under the war (the read town)', 'bar0-city-wartime-rand-6', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
+    ['C6485 the profiteer under the war (a thorp)', 'r2r-thorp-11', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
+    ['C6485 the profiteer beside a power the contracts made rich', 'r2s-wartime-metropolis-0', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
+    ['C6485 class: the profiteer under a debt', 'r2s-indebted-city-2', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
     ['C24313 no office, no title, no vote under a council (the read town)', 'bar0-thorp-calm-rand-6', /No office, no title, no vote/, /A single household head is the door people knock on first when a thing has to be settled\."/],
     ['C24313 under the Elder Council', 'r2r-thorp-2', /No office, no title, no vote/, /A single household head is the door people knock on first when a thing has to be settled\."/],
     ['C24313 under the Household Council', 'r2s-succession_void-thorp-2', /No office, no title, no vote/, /A single household head is the door people knock on first when a thing has to be settled\."/],
