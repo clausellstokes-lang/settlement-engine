@@ -189,6 +189,22 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-16, THE CLOSE OF THE ROUND BAR3, SIGNED AT THE DOORS' BRANCH (BAR3-CLOSE-DOORS-2) ──
+ * THE HUNDRED-AND-THIRTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word of 2026-11-15 20:30:10 UTC in
+ * the chair's chat ("Yes that one too", answering the chair's question of 20:28:06 UTC; ODQ §934.105; for this close only); the
+ * record is docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json. THE CHAIR'S RULING EF1 (vetoable): the move is the
+ * round's declared page text, re-taken only after every other arm of this fence read green at the tree (20 of 21). THE MOVERS,
+ * FOUND: the round BAR3's seven builder branches joined at 98363cb84 and the second repair seat's letter d (efdb3841d, merged at
+ * b46b26d92); FIELD-DIFFED by leaf path, text leaves only (no length, no non-text leaf): tie descriptions and tensions, the powers'
+ * descriptions, relationships' narratives and recent conflict, the foodways lines, the entrepot note, the people's dominant trait,
+ * the pressure line, house descriptions, the arrival, the safety, guard and drag lines, the crisis hooks, summaries, viability notes
+ * and cast reasons, the history's character and hooks, the viability issues, the prominent tie, two secrets and the coherence
+ * receipt's quoted tie text; each leaf beyond the golden master's own list traced by git log -S to a cure of the round (b7bf413a7,
+ * 808d2bb37, cfea7bb38, 7a4b48a84, decd2a1f8, aef83b4b5, efdb3841d). The espionage subsystem stays dormant.
+ * On THIS corpus 333 of 360 rows (thorp 49, hamlet 46, village 58, town 60, city 60, metropolis 60) move against the close of the
+ * round BAR2's post-state (the tree 83fc14ad6, which reproduces `abbfdfec…`); 360/360 hashes stay distinct. Written on the doors'
+ * branch after the golden master's commit, measured by scripts/audit/refence.mjs before the write.
+ *
  * ── 2026-11-15, THE CLOSE OF THE ROUND BAR2, SIGNED AT THE JOINED LINE'S TREE (BAR2-CLOSE-DOORS-2) ──
  * THE HUNDRED-AND-TWELFTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word of 2026-11-15 20:27:16 UTC in
  * the chair's chat ("Yes refresh the reference"; ODQ §934.105; for this close only); the record is
@@ -1356,7 +1372,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'abbfdfec5279b91816db94e46327943153b4a339381893bc21bec37edbe7cece';
+const PRE_COUPLING_CORPUS_SHA = '05b90d5f96bc2cb514e3d9ee464fd36e0f32462064cb3d9b7c7c36b08fcbb3a0';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

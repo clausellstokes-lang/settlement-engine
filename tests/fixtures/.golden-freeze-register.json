@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "63759cdf00c524aa2441f965e8aecf17a049d2ac7613e3473c86c036b2d538bf",
+      "sha256": "f09393d48593984218c75ca20ba3f927d3c83c1880185ba4c00d743f334220c7",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01ACmDYZrFEVXyZEUg1NDxxC) on 2026-11-15 at 20:27:16 UTC, verbatim \"Yes refresh the reference\", answering the chair's ask of 17:56 UTC (repeated 19:03 UTC) for the words \"Yes, refresh the reference files.\": for the three reference files left pending at the last close and this round's refresh of the reference corpus at the joined tree",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01ACmDYZrFEVXyZEUg1NDxxC) on 2026-11-15 at 20:30:10 UTC, verbatim \"Yes that one too\", answering the chair's question put in that chat at 20:28:06 UTC, two minutes after the owner's word for the round before (\"Yes refresh the reference\", 20:27:16 UTC): that the fixing round then in flight (BAR3) would change those same reference files again when it landed, that the operating standard has each such sign-off confirmed in the chat, and asking the owner to say now \"yes, that one too\" for it or be asked again when it was ready. It authorizes THIS round's signing, at this tree, ONCE; nothing after it",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
