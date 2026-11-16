@@ -1,0 +1,9 @@
+{"id":"C47543","town":"bar0-city-wartime-rand-30","sev":"LOW","kind":"STATE","why":"Harbour master's office row calls Peng Wu \"Wharfinger\"; PEOPLE gives Peng Wu as the harbour master, Xia Wang as wharfinger","other":""}
+{"id":"C47974","town":"bar0-city-wartime-rand-30","sev":"LOW","kind":"BROKEN","why":"Filter chip 'Entrepôt (5)' but only four flow rows are tagged Entrepôt (Smuggling, Luxury Goods, Storage & Logistics, Furs & Pelts)","other":""}
+{"id":"C48148","town":"bar0-city-wartime-rand-30","sev":"MED","kind":"LACKS","why":"'Crown supply carts' and 'a crown officer' (C48150) name a crown; GOVERNMENT lists only the Ecclesiastical Council, Military/Guard, Religious Authorities, Shield Compact","other":"C48150"}
+{"id":"C48270","town":"bar0-city-wartime-rand-30","sev":"MED","kind":"LACKS","why":"'Crown authority over the war' names a crown; GOVERNMENT lists no crown or outside sovereign, only the Ecclesiastical Council and three powers","other":"C48148"}
+{"id":"C48340","town":"bar0-city-wartime-rand-30","sev":"LOW","kind":"LACKS","why":"'crown contracts' presumes a crown; GOVERNMENT lists none (the page elsewhere says army contracts)","other":"C48148"}
+{"id":"C48307","town":"bar0-city-wartime-rand-30","sev":"LOW","kind":"PAIR","why":"'accounts have money in hand' contradicts 'The war takes most of the money: trade suffers' and Moderate prosperity under Wartime","other":"C48289"}
+{"id":"C48442","town":"bar0-city-wartime-rand-30","sev":"MED","kind":"LACKS","why":"Jun Han 'Wants Satisfy the crown requisition order'; GOVERNMENT lists no crown or outside sovereign","other":"C48148"}
+{"id":"C48656","town":"bar0-city-wartime-rand-30","sev":"LOW","kind":"STATE","why":"Peng Wu's card title 'Wharfinger'; PEOPLE gives Peng Wu as the harbour master (Xia Wang is the wharfinger)","other":"C47543"}
+{"id":"DONE","lines":2077,"blocks":1,"flags":8}
