@@ -124,6 +124,10 @@ export function factsOf(record, options = {}) {
     hasOtherNpc: (/** @type {number | object} */ npc) => hasOtherNpc(record, npc),
     /** R2-CODE-A-14 (the chair's ruling (s1), 2026-11-14): the two cards a pair line names share a power (`sharedPower.js`) */
     sharesPower: (/** @type {unknown} */ pair) => pairSharesPower(record, pair),
+    /** BAR4-PEOPLE (the chair's TI1 and its ruling of 11:07): the pair may pass a place, read off the final record, either way round (the draw reads it in the written order: people/pairPlace.js) */
+    sharesPlace: (/** @type {unknown} */ pair) => pairPlaceOf(record, pair),
+    /** BAR4-PEOPLE (TI1, 11:07): the record holds no other tie between the two (the draw answers it from its drafts: people/ties.js) */
+    loneTie: (/** @type {unknown} */ pair) => pairLoneOf(record, pair),
     // ── CENSUS-3b unit 1 (the chair's ruling R-E; the vocabulary rulings §2): DELEGATIONS to the
     // one canonical reader each — no field reader, no new logic. ──
     /** the food record's sources (`foodBalance.js :: deriveFoodRecord`), or undefined when it carries none */
@@ -147,6 +151,33 @@ export function factsOf(record, options = {}) {
     /** what the place can keep up (`keep.js :: keepOf`), read off the prosperity label: `{ bought, funded }` */
     get keep() { return keepOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity); },
   });
+}
+
+/** @typedef {{ id?: unknown, institution?: { kind?: unknown, family?: unknown, title?: unknown } | null, memberships?: Array<{ power?: unknown, rank?: unknown } | null> }} PairCard */
+/** The pair's two cards, as the record's roster holds them. @param {any} record @param {unknown} pair @returns {[PairCard, PairCard] | null} */
+function pairCardsOf(record, pair) {
+  if (!Array.isArray(pair) || pair.length !== 2) return null;
+  const roster = Array.isArray(record?.npcs) ? record.npcs : [];
+  const held = (/** @type {any} */ c) => (c && typeof c === 'object' ? roster.find((/** @type {any} */ n) => n && c.id != null && String(n.id) === String(c.id)) || c : null);
+  const a = held(pair[0]), b = held(pair[1]);
+  return a && b ? [a, b] : null;
+}
+/** BAR4-PEOPLE (11:07): one house's family or face, or either heads a power the other sits in. @param {any} record @param {unknown} pair @returns {boolean | undefined} */
+function pairPlaceOf(record, pair) {
+  const cards = pairCardsOf(record, pair);
+  if (!cards || !cards[0].institution || !cards[1].institution) return undefined;
+  const [a, b] = cards, ia = a.institution, ib = b.institution;
+  if (ia?.kind === 'house' && ib?.kind === 'house' && ia.family && ia.family === ib.family) return true;
+  if (typeof ia?.title === 'string' && ia.title === ib?.title) return true;
+  const heads = (/** @type {PairCard} */ x, /** @type {PairCard} */ y) => (x.memberships || []).some((m) => m?.rank === 1 && m.power && (y.memberships || []).some((n) => n?.power === m.power));
+  return heads(a, b) || heads(b, a);
+}
+/** BAR4-PEOPLE (11:07): at most one tie between the two in the record's relationships. @param {any} record @param {unknown} pair @returns {boolean | undefined} */
+function pairLoneOf(record, pair) {
+  const cards = pairCardsOf(record, pair);
+  if (!cards || !Array.isArray(record?.relationships)) return undefined;
+  const [a, b] = cards.map((c) => String(c.id ?? ''));
+  return record.relationships.filter((/** @type {any} */ t) => t && ((String(t.from) === a && String(t.to) === b) || (String(t.from) === b && String(t.to) === a))).length <= 1;
 }
 
 /**
