@@ -122,28 +122,6 @@ const rowCovered = (text) => {
 const atomsDeclare = (o) => o && ((o.needs && o.needs.length) || (o.excludes && o.excludes.length) || (o.crisis && o.crisis.length) || o.twin || o.isTwin);
 const CRISIS_ATOM = /crisis|war: |famine|siege|threat|law/;
 
-// THE REVIEWED EXCLUSIONS (BRIEF-BAR5 Amendment L, L5): a line that leaves the list by a REVIEWED REASON, by its file and
-// the opening words of its text (never by narrowing the lexicon): its crisis reading is made at its row or site, or it
-// is true under every crisis. Each row names its seat; a seat adds rows for its own files only, beside its own.
-export const REVIEWED = [
-  // BAR5-FOOD (2026-11-16)
-  { seat: 'BAR5-FOOD', file: 'src/domain/foodways.js', starts: "the herds\\' milk and mutton", reason: 'a phrase of the composer\'s herds source: drawn only where the food record names the herds, and struck at print where a famine failed them (foodways.js :: fedLineOf, R3-CODE-C-9)' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/foodBalance.js', starts: 'Establish seasonal access, patronage, or a dependable trade route', reason: 'a suggested fix, not a claim of the town\'s state: true advice under any crisis' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/foodBalance.js', starts: 'minor routes and sanctioned caravans', reason: 'the import channel\'s label, chosen only where the minor routes carry food: their rate is 0 under a siege (`_minorRouteRate`: "a siege severs them"), so it never prints there' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/foodBalance.js', starts: 'Settlement cannot cover ~', reason: 'states the absence of a dependable trade route: true under every crisis that cuts the roads' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/foodBalance.js', starts: 'The … trade route is cut', reason: 'the trade-disruption hook states its own cut route: true under a siege, which cuts it' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/incomeLineSiblings.js', starts: 'Local coal fires the forges, but the iron is bought in', reason: 'gated at its site: under a siege `trueIncomeDesc` prints METAL_WORKED_LINE in its place (incomeLineSiblings.js, the besieged arm)' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/incomeLineSiblings.js', starts: 'Coal is dug here and sold on to other towns', reason: 'gated at its site: under a siege `trueIncomeDesc` prints nothing in its place (the besieged arm)' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/prosperity.js', starts: 'The market is shut and the caravans have stopped coming', reason: 'the siege\'s own line (printed where the primary stress is under_siege): it states what the siege stops' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/prosperity.js', starts: 'The caravans have stopped coming and nothing is bought or sold', reason: 'the siege line\'s twin where no market stands: it states what the siege stops' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/prosperity.js', starts: 'The settlement is too big to live cut off', reason: 'the isolated town\'s line: it states the absence of outside trade, true under every crisis' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/prosperity.js', starts: 'With no outside trade, the settlement struggles', reason: 'the isolated town\'s line: it states the absence of outside trade, true under every crisis' },
-  { seat: 'BAR5-FOOD', file: 'src/generators/economy/prosperity.js', starts: 'The settlement feeds and supplies itself without outside trade', reason: 'the isolated town\'s line: it states the absence of outside trade, true under every crisis' },
-  { seat: 'BAR5-FOOD', file: 'src/data/dossierStateProse/economy.generated.js', starts: 'Plenty of people at {settlement} have used its {institution}', reason: 'the lexicon\'s "plenty" is "many people" here: the line claims no food or goods' },
-  { seat: 'BAR5-FOOD', file: 'src/data/dossierStateProse/economy.generated.js', starts: 'The stores are sealed off, and the road brings nothing more to them', reason: 'the BLOCKADED pool\'s own line: it states what the blockade stops' },
-];
-const reviewedOf = (rel, text) => REVIEWED.find((r) => r.file === rel && text.startsWith(r.starts)) || null;
-
 // ---- the walk
 // THE POOLS THAT PRINT ON A PAGE (the brief's list: the houses' descriptions and variants, the services, the hooks,
 // the ties, the scenes, the state annex's leaves, the food lines; and the defence lines). WIDE=1 reads all of src.
@@ -198,13 +176,12 @@ for (const f of files) {
     else if (inlineDecl) { status = 'line'; via = `inline ${(objText.match(/\b(needs|excludes|crisis|twinOf)\s*:\s*[^,}]*/g) || []).join(' ; ').slice(0, 160)}`; }
     else if (/\bcolour\s*:\s*true\b|\bCOLOUR\b/.test(objText) && objText.length < 1500) { status = 'colour'; via = 'inline colour'; }
     if (status === 'none' || status === 'colour') { const rc = rowCovered(t); if (rc && classes.includes('outside')) { status = status === 'colour' ? 'colour+row' : 'row'; via = rc; } }
-    if (status === 'none' || status === 'colour' || (status === 'line' && !CRISIS_ATOM.test(via))) { const rv = reviewedOf(rel, plain); if (rv) { status = 'reviewed'; via = `reviewed (${rv.seat}): ${rv.reason}; was ${via || status}`; } }
     const crisisDeclared = status === 'line' && CRISIS_ATOM.test(via);
     hits.push({ file: rel, pool: poolOf(src, l.start), line: src.slice(0, l.start).split('\n').length, classes, status, crisisDeclared, via, text: plain.slice(0, 300) });
   }
 }
 // one row a DISTINCT text (a twin's original printed in its table and named again in its sibling set is one line)
-const RANK = { line: 3, row: 2, reviewed: 2, state: 1, 'colour+row': 1, colour: 1, none: 0 };
+const RANK = { line: 3, row: 2, state: 1, 'colour+row': 1, colour: 1, none: 0 };
 const distinct = new Map();
 for (const h of hits) {
   const d = distinct.get(h.text);
@@ -224,7 +201,7 @@ for (const h of hits) {
   for (const c of h.classes) v.classes[c] = (v.classes[c] || 0) + 1;
   byFile.set(k, v);
 }
-for (const h of hits) h.crisisUndeclared = !(h.crisisDeclared || h.status === 'row' || h.status === 'colour+row' || h.status === 'reviewed');
+for (const h of hits) h.crisisUndeclared = !(h.crisisDeclared || h.status === 'row' || h.status === 'colour+row');
 fs.writeFileSync(outPath, JSON.stringify(hits, null, 1));
 const tot = { n: 0, line: 0, lineCrisis: 0, row: 0, colour: 0, none: 0 };
 for (const v of byFile.values()) for (const k of Object.keys(tot)) tot[k] += v[k];

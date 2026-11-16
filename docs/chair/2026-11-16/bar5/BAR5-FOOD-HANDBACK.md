@@ -23,8 +23,9 @@ changes are under "the detector's changes" below).
 **LAW 5 for my files** (the audit's inventory, run at 600b7683a and at my tip, `law5-inventory.mjs`): **12 → 7 of 29**
 crisis-sensitive lines not declared for a crisis WITH my reviewed exclusions, **12 WITHOUT them** (the code files 5 → 1;
 the economy desk's annex lines 7 → 6). The 14 rows are `docs/chair/2026-11-16/bar5/AUDIT/tables/B.law5.exclusions.FOOD.json`
-(the chair's EX1: BAR5-WORLD's form, its reader at the join); before EX1 I had also written them as a `REVIEWED` block in
-`law5-inventory.mjs` (told to the chair; changed no more since): `foodways.js` (the herds' phrase, struck at print by `fedLineOf`), `foodBalance.js` (a
+(the chair's EX1: BAR5-WORLD's form, its reader at the join). The 7 and the 12 were measured with my own reader, a
+`REVIEWED` block I had written in `law5-inventory.mjs` before EX1; that block is REVERTED (the file is the audit's again,
+d40d6ab28), so the inventory on this branch reads 12 until WORLD's reader arrives. The rows: `foodways.js` (the herds' phrase, struck at print by `fedLineOf`), `foodBalance.js` (a
 suggested fix; the minor-routes label, never chosen under a siege; the "no dependable trade route" deficit line; the cut
 route's own hook), `incomeLineSiblings.js` (both coal lines, gated at `trueIncomeDesc`'s besieged arm), `prosperity.js`
 (the siege's own lines and the isolated town's three), the annex (a lexicon false positive; the blockade's own line).
