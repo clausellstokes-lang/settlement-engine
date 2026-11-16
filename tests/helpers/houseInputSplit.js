@@ -58,7 +58,7 @@ export function houseInputSplits(record, { rungHeads = ['sawmill'] } = {}) {
     if (rungHeads && !rungHeads.includes(houseHead(name))) continue;
     const chains = Object.entries(RESOURCE_CHAINS).filter(([key, c]) => CHAIN_INPUTS[key]
       && !arr(c.processingInstitutions).includes(name) && arr(c.processingInstitutions).some((h) => houseHead(h) === houseHead(name)));
-    if (!chains.length || chains.some(([key]) => houseInputAtHand(record, key, inst) !== 'missing')) continue;
+    if (!chains.length || chains.some(([key, c]) => houseInputAtHand(record, key, inst, c) !== 'missing')) continue;
     const exploited = arr(record?.resourceAnalysis?.exploitation?.fullyExploited).concat(arr(record?.resourceAnalysis?.exploitation?.partiallyExploited));
     if (chains.some(([, c]) => exploited.some((x) => x?.rawResource === c.rawResource))) continue; // a chain worked here: the gap writer's own rule
     const shown = String(institutionDisplayName(name) || name).replace(/^access to (?:an? )?/i, '').replace(/\s*\([^)]*\)/g, '').trim().toLowerCase();

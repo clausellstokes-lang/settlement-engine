@@ -31,12 +31,12 @@
  *
  * @enforced-by tests/generators/bar4RecordHouseInput.test.js
  */
-import { RESOURCE_CHAINS } from '../../data/goods/chains.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { availableNativeResourceKeys, resourceKeyForLabel } from '../resourceSemantics.js';
 import { hasTradeRouteConnection } from '../tradeRouteSemantics.js';
 import { institutionHasAnyTag } from '../../lib/entities.js';
 import { nativeSemanticNames } from '../content/customContentSemanticAuthority.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -129,16 +129,6 @@ export function localProducerSupplies(requirement, institutions) {
 }
 
 /**
- * The chain's key in `RESOURCE_CHAINS` for a raw resource ("timber", "mountain_timber"), or null.
- * @param {string} rawResource
- */
-export function chainKeyOfRaw(rawResource) {
-  const raw = str(rawResource).toLowerCase();
-  const hit = Object.entries(RESOURCE_CHAINS).find(([, c]) => str(/** @type {{ rawResource?: unknown }} */ (c).rawResource).toLowerCase() === raw);
-  return hit ? hit[0] : null;
-}
-
-/**
  * @typedef {{
  *   config?: { tradeRouteAccess?: unknown, stressTypes?: unknown, [key: string]: unknown } | null,
  *   economicState?: { localProduction?: unknown, primaryImports?: unknown,
@@ -151,12 +141,13 @@ export function chainKeyOfRaw(rawResource) {
  * THE ONE READER: how a chain's raw input reaches a house.
  * @param {InputRecord | null | undefined} record
  * @param {string} chainKey the chain's key in `RESOURCE_CHAINS`
+ * @param {{ rawResource?: unknown } | null | undefined} chain that chain (`RESOURCE_CHAINS[chainKey]`, handed in by the caller: the
+ *   chain table is the lazy goods surface, which a fact, on the eager side, never imports: WEAVE ST-2)
  * @param {{ name?: unknown, [key: string]: unknown } | null | undefined} house the house asked about
  * @returns {'local' | 'route' | 'imported' | 'missing'}
  */
-export function houseInputAtHand(record, chainKey, house) {
+export function houseInputAtHand(record, chainKey, house, chain) {
   const spec = CHAIN_INPUTS[chainKey];
-  const chain = /** @type {{ rawResource?: unknown } | undefined} */ (/** @type {Record<string, unknown>} */ (RESOURCE_CHAINS)[chainKey]);
   const raw = str(chain?.rawResource);
   const config = record?.config || {};
   const es = record?.economicState || {};
@@ -169,7 +160,7 @@ export function houseInputAtHand(record, chainKey, house) {
   if (words.some((w) => holds(native, w)) || rawNames.some((n) => holds(native, n))) return 'local';
   // What the town makes names the RAW good itself (never the chain's product).
   if (arr(es.localProduction).some((e) => rawNames.some((n) => wholeTokens(str(e), n)))) return 'local';
-  if (localProducerSupplies(raw, arr(record?.institutions))) return 'local';
+  if (localProducerSupplies(raw, liveInstitutions(/** @type {any} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
 
   // The route, where no siege shuts it.
   const besieged = arr(config.stressTypes).includes('under_siege');
@@ -200,14 +191,15 @@ const SAWN_GOODS = Object.freeze(['Milled timber', 'Milled lumber']);
  * @param {ReadonlyArray<string>} nearbyResources the town's resource keys @param {ReadonlyArray<string>} depletedResources
  * @param {ReadonlyArray<unknown> | null | undefined} institutions the roster
  * @param {(house: any) => boolean} isSawmill the caller's own test of a sawmill (its gate's keyword)
+ * @param {Readonly<Record<string, { rawResource?: unknown }>>} chains the chain table (`RESOURCE_CHAINS`, the caller's)
  * @returns {boolean} true unless the good is a sawn good and no sawmill of the roster has its timber
  */
-export function sawnGoodFed(good, nearbyResources, depletedResources, institutions, isSawmill) {
+export function sawnGoodFed(good, nearbyResources, depletedResources, institutions, isSawmill, chains) {
   if (!SAWN_GOODS.includes(good) || !Array.isArray(institutions)) return true;
   const depleted = new Set(arr(depletedResources).map((r) => resourceKeyForLabel(str(r)) || str(r)));
   const record = { config: { nearbyResources: arr(nearbyResources).map(str).filter((k) => !depleted.has(k)) }, economicState: {}, institutions };
   return institutions.filter((i) => !!i && isSawmill(i))
-    .some((house) => houseInputAtHand(record, 'timber', /** @type {any} */ (house)) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {any} */ (house)) !== 'missing');
+    .some((house) => houseInputAtHand(record, 'timber', /** @type {any} */ (house), chains.timber) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {any} */ (house), chains.mountainTimber) !== 'missing');
 }
 
 /**
@@ -243,6 +235,7 @@ export const houseRunsChain = (chain, name) => {
 /**
  * The chains a house runs, as `[chainKey, chain]` (`houseRunsChain`).
  * @param {unknown} name
+ * @param {Readonly<Record<string, unknown>>} chains the chain table (`RESOURCE_CHAINS`, the caller's: WEAVE ST-2)
  * @returns {Array<[string, any]>}
  */
-export const chainsOfHouse = (name) => Object.entries(RESOURCE_CHAINS).filter(([, c]) => houseRunsChain(/** @type {any} */ (c), name));
+export const chainsOfHouse = (name, chains) => Object.entries(chains).filter(([, c]) => houseRunsChain(/** @type {any} */ (c), name));

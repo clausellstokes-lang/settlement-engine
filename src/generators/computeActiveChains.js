@@ -835,7 +835,7 @@ export function deriveExportsFromChains(
         const kws = Array.isArray(requiredInst) ? requiredInst : [requiredInst];
         if (!kws.some(kw => _hasInstForGate(kw))) return;
       }
-      if (!goodWorkedHere(o, housedHere) || !sawnGoodFed(o, nearbyResources, depletedResources, institutions, isSawmill)) return; // C1-E: no house here works it; R1: a sawn good needs the sawmill's timber
+      if (!goodWorkedHere(o, housedHere) || !sawnGoodFed(o, nearbyResources, depletedResources, institutions, isSawmill, RESOURCE_CHAINS)) return; // C1-E: no house here works it; R1: a sawn good needs the sawmill's timber
       exports.add(o);
     }));
 
@@ -1041,7 +1041,7 @@ export function deriveLocalProductionFromChains(
     if (!housed) return true;
     if (GOOD_WORKING_HOUSES[good]) return goodWorkedHere(good, housed);
     const gate = CHAIN_OUTPUT_INST_GATES[good];
-    if (!gate || !sawnGoodFed(good, nearbyResources, depletedResources, institutions, isSawmill)) return !gate; // R1 (BAR4-RECORD): a sawn good needs the sawmill's timber
+    if (!gate || !sawnGoodFed(good, nearbyResources, depletedResources, institutions, isSawmill, RESOURCE_CHAINS)) return !gate; // R1 (BAR4-RECORD): a sawn good needs the sawmill's timber
     const kws = (Array.isArray(gate) ? gate : [gate]).flatMap(kw => MADE_HERE_KEYWORD_WIDENING[kw] || [kw]);
     return kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
   };

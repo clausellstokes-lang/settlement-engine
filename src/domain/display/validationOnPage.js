@@ -106,7 +106,7 @@ const norm = (x) => ` ${x.toLowerCase().replace(/[_/()\-,.]+/g, ' ').replace(/\s
  */
 function inputAnswered(s, chainKey, inst) {
   if (!CHAIN_INPUTS[chainKey]) return true; // a chain this reader cannot name prints nothing (never a rule sentence)
-  return houseInputAtHand(/** @type {Parameters<typeof houseInputAtHand>[0]} */ (s), chainKey, /** @type {Parameters<typeof houseInputAtHand>[2]} */ (inst)) !== 'missing';
+  return houseInputAtHand(/** @type {Parameters<typeof houseInputAtHand>[0]} */ (s), chainKey, /** @type {Parameters<typeof houseInputAtHand>[2]} */ (inst), /** @type {any} */ (RESOURCE_CHAINS)[chainKey]) !== 'missing';
 }
 
 /** @param {{ name?: unknown } | null | undefined} inst @returns {string} the house as the sentence names it ("the potter"; "the sawmill" of a commercial one) */
@@ -501,7 +501,7 @@ export function resourceGapLines(s) {
   for (const g of gaps) if (g && typeof g === 'object' && g.institution) flagged.set(str(g.institution), g);
   for (const [name, g] of flagged) {
     const inst = institutions.find((i) => i?.name === name) || { name };
-    const chains = chainsOfHouse(name); // R1/R2: the chains the writer asked this house of (a sawmill's rung too)
+    const chains = chainsOfHouse(name, RESOURCE_CHAINS); // R1/R2: the chains the writer asked this house of (a sawmill's rung too)
     if (chains.some(([key]) => inputAnswered(s, key, inst))) continue;
     const specs = chains.map(([key]) => CHAIN_INPUTS[key]).filter(Boolean);
     const nouns = [...new Set(specs.map((x) => x.noun))];

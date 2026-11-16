@@ -144,12 +144,37 @@ Read so: a butcher beside hunting grounds works game (r2r-town-1), an apothecary
 herbs (r2r-town-14): the reading is too narrow for those kinds (it names the input by one word); weavers and carpenters with
 nothing of wool or timber are plainly short. The next round's cure is the READING per kind, then the rungs.
 
+## The inventory diffs (the census's 720, each read whole)
+
+- base → batch 1: no sentence gone; in fewer towns only marks moving to their true form ("ServicesCharcoal supply" 110→80
+  as "(short)" 37→67; "Short of coal." 8→5 where a charcoal burner on a spent coal ground is now "Short of timber.", its
+  input; "Caravan organization (stopped)" → "(stopped, short)" under the siege); every inheritor is a designed gap line or
+  its mark.
+- batch 1 → batch 2: no sentence gone; "Milled lumber" 38→34; two arrival lines that presumed sawn timber go ("Stacks of
+  seasoning planks…" 11→10, "The smell of sawn timber…" 7→6) and the same slot re-draws in three more towns (the pilgrims,
+  the kilns: true lines displaced by the export slot's re-read: named); the inheritors READ in their towns, each true:
+  "Hurdles and holding pens…" (r2r-village-52: grazing land, livestock exported), "Laden carts from the workings…"
+  (r2s-recently_betrayed-town-1: a stone quarry), "Carts of grain rattle toward the mills…" (r2r-village-42: a mill,
+  flour exported), "Fresh horses stand saddled…" (r2s-insurgency-town-0: a caravaneer's post); "Furs and pelts (transit)",
+  "Caravan trade goods (transit)" fill the freed export slots.
+- batch 2 → batch 3: no sentence gone; "ServicesLumber milling" 229→148 as "(short)" 15→96 and "No timber reaches the
+  sawmill." 15→96, "Short of timber." 77→122: the commercial sawmills' line and mark. "Patron deity" and its two lines
+  716→704 is THE INSTRUMENT: the census was rendered in four slices after a container restart, and each render worker's
+  FIRST dossier lacks that block (r2r-thorp-0 lacks it in a whole run too: hence 716 of 720 at every tree); no code of
+  mine reads it.
+
 ## Every new or changed line (THE VETO LIST)
 
 No sentence is new or reworded: the gap lines are the designed ones (`resourceGapLines`), now printed where the record
 says the house is short. Read in: "No timber reaches the charcoal burner." r2r-hamlet-9 (hamlet), r2r-metropolis-2
 (metropolis), r2s-under_siege-metropolis-1 (siege); "No timber reaches the sawmill." r2r-village-4, r2s-indebted-village-2,
 bar0-village-famine-rand-21 (famine); "No camels reach the caravanserai." r2s-under_siege-town-1, bar0-hamlet-under_siege-rand-113.
+
+Batch 2 moves no sentence but drops "Milled lumber" and the two arrival lines that presumed sawn timber where the sawmill
+has none (r2r-village-42, r2r-village-52, bar0-village-famine-rand-21). Batch 3: "No timber reaches the sawmill." now also
+names a commercial sawmill (the line's house words strike a rung's bracket, as `proseHouseName` does): read in
+r2r-town-2 (town, the smallest size it reaches), r2r-metropolis-2 (metropolis, the largest), r2s-under_siege-city-1 (a
+siege), r2s-famine-metropolis-1 (a famine), r2s-occupied-town-3 (an occupation).
 
 ## Named for others (one line to the chair each)
 
@@ -165,17 +190,37 @@ bar0-village-famine-rand-21 (famine); "No camels reach the caravanserai." r2s-un
 - `tradeListDisplay.js :: needMetBy` (no seat's): the fact cannot import it (it rides a lazy chunk the eager engine core may
   not reach); the fact's worked-good words mirror its `WORKED_GOOD` plus "work"/"carved": one home once that matcher has a leaf.
 
-## THE BOOKS MY CURES MOVE
+## THE BOOKS MY CURES MOVE (my final tip against `c4ac1ef84a`, each file run ALONE through `gate-tail.sh`; each red re-run alone at the base, green there)
+
+TWO LAWS MY CURES TURNED, CURED AT THEIR CAUSE (batch 4): `tests/lint/ruinFilterRoster.walker.test.js` (the fact read the raw
+`.institutions`: it now reads `liveInstitutions`; the record does not move, 720 re-born and compared); and WEAVE ST-2 in
+`tests/build/vendorPdfLazy.test.js` (a module under `src/domain/facts/`, eager by the chunk rule, imported the lazy chains
+surface `data/goods/chains.js` and dragged it into first paint, +177 KB: the fact no longer imports the chain table; its
+three callers, which already hold it, hand the chain in).
 
 | test | arm | old → new | door | batch |
 |---|---|---|---|---|
-| `tests/lint/presumedThings.walker.test.js` | ARM 1 "every source literal that names a thing declares it, or has its row" | ONE fresh hit: the chain-input table's `mineralHot` row (`raw: 'mineral hot springs'`, resource hot_springs_mineral) MOVED, text unchanged, from `src/domain/display/validationOnPage.js` to `src/domain/facts/houseInputAtHand.js`; its stale row left by the door's `--shrink` in the cure's own commit (amendment 3); the line is the chain table's name for the input, true wherever the gap line prints it | the register's door (the close) | 1 |
-| `tests/lint/tradeListWriters.walker.test.js` | "every row is live" | the row `src/generators/resourceGenerator.js: COPIES 1` is stale (the analysis's copy of `localProduction`/`primaryImports` is gone: the fact reads the record) | the register's own row (the close) | 1 |
+| `tests/property/generatorGoldenMaster.test.js` | every config byte-identical | 88 of 525 rows drift, all `resourceAnalysis.gaps` | the golden's door (a NEW word of the owner) | 1, 3 |
+| `tests/generators/pipelinePinnedMode.test.js` | 3 of 15 ("the golden moved") | golden-derived | the golden's door | 1, 3 |
+| `tests/build/engineBundleReplay.test.js`, `engineServiceCore.test.js`, `engineServiceStoreParity.test.js` | the committed edge bundle equals the in-process pipeline | 88 of 525 rows, 110 of 360 fence settlements, 1 of 3 births, 2 of 3 cores, 1 seed + 1 derive differ: the committed `supabase/functions/_shared/engineBundle.js` predates my cures | `npm run build:edge-shared` and commit the bundle (the close) | 1-3 |
+| `tests/build/generationWorkerLazy.test.js` | worker bundle ceiling | 2322103 → 2325332 B (+3229: the fact module) | ruling B3: the doors re-record every ceiling once | 1-4 |
+| `tests/build/vendorPdfLazy.test.js` | first-paint raw / gzip / Brotli | 1132308 → 1137209 (+4901) / 360756 → 362470 (+1714) / 302830 → 304267 (+1437): the fact is eager by its folder, its home by the brief | ruling B3 | 1-4 |
+| `tests/build/vendorPdfLazy.test.js` | the goods roster | `src/domain/facts/houseInputAtHand.js` imports `data/goods/identity.js` (`RESOURCE_DATA`) with no row in `src/domain/goods.schema.js` | roster row owed (the close) | 1 |
+| `tests/lint/mutationCoverageManifest.test.js` | every generators test has an entry | `tests/generators/bar4RecordHouseInput.test.js` | manifest entry owed (the close) | 1 |
+| `tests/lint/presumedThings.walker.test.js` | ARM 1 | ONE fresh hit: the chain-input table's `mineralHot` line (`'mineral hot springs'`) MOVED, text unchanged, from `validationOnPage.js` to the fact; its stale row out by `--shrink` (amendment 3) | the register's door | 1 |
+| `tests/lint/observedShapeReaders.walker.test.js` | the erasure guard | the frozen row `src/generators/resourceGenerator.js / test on institution` (the local producers' `rule.institution.test`) MOVED with its table to the fact: not erosion, the read stands in its new home; NOT re-frozen | the register's door | 1 |
+| `tests/lint/writerReach.walker.test.js` | the surfaceReach round trip; the lit arm's corpus digest | "food on breakdown" reach row; the walker corpus digest (my declared record move) | WR1: named, never hidden (the close) | 1-3 |
+| `tests/lint/proseWiringCensus.walker.test.js` | the committed census is current | `docs/content/wiring-census.json` stale-bytes | amendment 4: the close re-takes it once | 1-3 |
+| `tests/lint/tradeListWriters.walker.test.js` | every row is live | `src/generators/resourceGenerator.js: COPIES 1` stale (the copy of `localProduction`/`primaryImports` is gone) | the register (the close) | 1 |
 
-Reference configurations moved (of the 525, against `c4ac1ef84a`, each record generated at both trees and compared): 60,
-every one a desert-road row (hamlet to metropolis, every culture: the caravanserai the road now feeds), and in ONE field
-family only: `resourceAnalysis.gaps`. `tests/property/generatorGoldenMaster.test.js` is green at the base and red at my
-tip on those 60 (expected; the reference is not mine to re-take).
+GREEN at my tip, each alone: the other law suites (rosterDuplicateDraws, hookThemeDraws, upkeepVocation, generationForkCensus,
+factLayers, layerBoundaries, defenceFactReaders, noLegacyFactionReaders, siteCoherenceRatchet, proseComposed,
+proseEntryContradiction, engineCoreLazyEdge, tuningRegister, chainPrintSites) and BRIEF-BAR4 amendment 2's ten
+(customContentPresentationClaims, regenDerivedState, styleLaw, deepCraftKillList, economicStructure, proseCorpusBytes,
+stressSecretDeclared, tieProseDeclared, defensePostureAgainstItsFacts, corpusEcoTailGuards), the fork register's contract,
+my guard and the files that pin what I changed, the strict-domain gate, the type ratchet, the twelve-birth grid. ONE
+`npm run build` (green) and `npm run verify:dist`: it refuses on the five build files above alone (stored artifacts,
+ceilings, the owed roster row); `dist/` removed.
 
 ## Registrations owed
 
@@ -188,7 +233,7 @@ tip on those 60 (expected; the reference is not mine to re-take).
 
 1. THE RUNGS OF THE OTHER KINDS (batch 3's table): the reading per kind first (game for a butcher, herbs by any name), then
    the rungs, measured by the RUNG arm with `rungHeads: null`.
-2. The inventory diff of the census at my tip (720) and the 525 reference count; the final net (amendment 2) with its build.
+2. The close's doors for THE BOOKS above (nothing of mine is left to run).
 
 ## How the instruments are re-made
 

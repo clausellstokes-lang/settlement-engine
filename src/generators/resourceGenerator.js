@@ -464,7 +464,7 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
 // split in 67 rows of the census's 720 (a caravanserai on a connected road "lacked camels"; a sawmill the page called
 // answered by the grove's "Sacred wood").
 const supplyOfInput = (chainKey, institution, institutions, evidence = {}) =>
-  houseInputAtHand({ ...evidence, institutions }, chainKey, institution);
+  houseInputAtHand({ ...evidence, institutions }, chainKey, institution, RESOURCE_CHAINS[chainKey]);
 
 // Does another of this house's chains feed it? Worked here (fully or partly exploited), or its input held locally or
 // bought in. M-S, read by evaluateInstitutionChain's lacks-access row.
