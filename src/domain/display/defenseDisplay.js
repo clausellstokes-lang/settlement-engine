@@ -150,8 +150,9 @@ export function criminalOpNote(name) {
     return 'Moves goods around customs and guild charters. Corrupt officials, unofficial landing points, and false manifests.';
   if (n.includes('front business'))
     return 'Legitimate-looking operations used to launder criminal revenue and provide cover for illegal activities.';
+  // BAR6-CRIME (LAW 5 widened, office): "the law", not "the watch": a gang house stands where no watch does
   if (n.includes('gang') || n.includes('street'))
-    return 'Controls specific territory through violence. Extorts local businesses. Competes with the watch for street-level authority.';
+    return 'Controls specific territory through violence. Extorts local businesses. Competes with the law for street-level authority.';
   if (n.includes('gambling'))
     return 'Operates unlicensed gambling. Revenue funds broader criminal network. Attracts debt spirals and desperation crime.';
   if (n.includes('underground'))

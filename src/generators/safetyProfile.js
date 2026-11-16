@@ -276,7 +276,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const visibleAuthority = inst.hasGarrison
       ? 'The garrison is visible everywhere.'
       : 'Armed officials are visible everywhere.';
-    safetyDesc = `The streets are unusually quiet. ${visibleAuthority} Residents face little risk from ` +
+    safetyDesc = `${tiny ? 'The place is unusually quiet.' : 'The streets are unusually quiet.'} ${visibleAuthority} Residents face little risk from ` + // BAR6-CRIME (LAW 5 widened, size): no streets in a thorp or a hamlet
       `common thieves and considerably more from the authorities themselves. Unofficial disappearances are not discussed openly.`;
   } else if (stress.crimeIsGovt) {
     safetyLabel = 'Dangerous — Criminal Governance';

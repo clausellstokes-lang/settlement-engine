@@ -193,9 +193,9 @@ export function guardLineUnderTheForce(text, record) {
 }
 
 /** (d) 6d-paid: the funded reason (`structuralValidator.js :: FUNDED_EMBATTLED`) and its twins where nobody of the force is paid. */
-export const FUNDED_EMBATTLED_SHOWN = 'Embattled region. Fortification and forces are present and paid, but the pressure on them never lets up.';
-export const FUNDED_EMBATTLED_VOLUNTEERS = 'Embattled region. Fortification is kept and volunteers turn out, but the pressure on them never lets up.';
-export const FUNDED_EMBATTLED_NO_FORCE = 'Embattled region. Fortification is kept in repair, but the pressure on it never lets up.';
+export const FUNDED_EMBATTLED_SHOWN = lineText({ text: 'Embattled region. Fortification and forces are present and paid, but the pressure on them never lets up.', needs: ['force: paid'] });
+export const FUNDED_EMBATTLED_VOLUNTEERS = lineText({ text: 'Embattled region. Fortification is kept and volunteers turn out, but the pressure on them never lets up.', needs: ['force: volunteers'] });
+export const FUNDED_EMBATTLED_NO_FORCE = lineText({ text: 'Embattled region. Fortification is kept in repair, but the pressure on it never lets up.', excludes: ['force: kept'] });
 
 /**
  * A defence vulnerability's reason as printed: "forces are present and paid" only where a paid force stands.
