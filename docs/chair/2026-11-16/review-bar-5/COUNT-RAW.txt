@@ -1,0 +1,41 @@
+THE COUNT A TOWN (the union of two readers; a sentence printed twice counted once):
+  bar0-city-under_siege+famine-rand-24   city        sentences  2950 · HIGH  0 · MED   5 · LOW  11
+  bar0-city-under_siege+famine-rand-25   city        sentences  2151 · HIGH  0 · MED   5 · LOW   7
+  bar0-city-under_siege+famine-rand-26   city        sentences  2724 · HIGH  0 · MED   5 · LOW  10
+  bar0-city-wartime-rand-24              city        sentences  3220 · HIGH  0 · MED   6 · LOW   2
+  bar0-city-wartime-rand-25              city        sentences  2570 · HIGH  0 · MED   1 · LOW   7
+  bar0-city-wartime-rand-26              city        sentences  1894 · HIGH  0 · MED   0 · LOW   5
+  bar0-hamlet-calm-rand-24               hamlet      sentences   432 · HIGH  0 · MED   0 · LOW   0
+  bar0-hamlet-calm-rand-25               hamlet      sentences   640 · HIGH  0 · MED   2 · LOW   3
+  bar0-hamlet-calm-rand-26               hamlet      sentences   477 · HIGH  0 · MED   0 · LOW   2
+  bar0-hamlet-under_siege-rand-24        hamlet      sentences   564 · HIGH  0 · MED   5 · LOW   3
+  bar0-hamlet-under_siege-rand-25        hamlet      sentences   609 · HIGH  0 · MED   2 · LOW   1
+  bar0-hamlet-under_siege-rand-26        hamlet      sentences   532 · HIGH  0 · MED   2 · LOW   4
+  bar0-metropolis-calm-rand-24           metropolis  sentences  3972 · HIGH  0 · MED   1 · LOW   7
+  bar0-metropolis-calm-rand-25           metropolis  sentences  3323 · HIGH  0 · MED   2 · LOW   3
+  bar0-metropolis-calm-rand-26           metropolis  sentences  3770 · HIGH  0 · MED   0 · LOW   4
+  bar0-thorp-calm-rand-24                thorp       sentences   406 · HIGH  0 · MED   2 · LOW   1
+  bar0-thorp-calm-rand-25                thorp       sentences   424 · HIGH  0 · MED   1 · LOW   2
+  bar0-thorp-calm-rand-26                thorp       sentences   449 · HIGH  0 · MED   0 · LOW   4
+  bar0-town-calm-rand-24                 town        sentences  1526 · HIGH  0 · MED   5 · LOW   1
+  bar0-town-calm-rand-25                 town        sentences  1910 · HIGH  0 · MED   3 · LOW   3
+  bar0-town-calm-rand-26                 town        sentences  1660 · HIGH  0 · MED   1 · LOW   7
+  bar0-town-occupied-rand-24             town        sentences  1222 · HIGH  0 · MED   2 · LOW   1
+  bar0-town-occupied-rand-25             town        sentences   982 · HIGH  0 · MED   3 · LOW   1
+  bar0-town-occupied-rand-26             town        sentences   899 · HIGH  0 · MED   1 · LOW   1
+  bar0-village-calm-rand-24              village     sentences   754 · HIGH  0 · MED   4 · LOW   2
+  bar0-village-calm-rand-25              village     sentences   596 · HIGH  0 · MED   4 · LOW   3
+  bar0-village-calm-rand-26              village     sentences   879 · HIGH  0 · MED   0 · LOW   3
+  bar0-village-famine-rand-24            village     sentences  1010 · HIGH  0 · MED   2 · LOW   4
+  bar0-village-famine-rand-25            village     sentences   857 · HIGH  0 · MED   4 · LOW   4
+  bar0-village-famine-rand-26            village     sentences  1019 · HIGH  0 · MED   4 · LOW   4
+  IN ALL: HIGH 0 · MED 72 · LOW 110 · a town: HIGH 0.0 · MED 2.4
+
+TWO READERS (HIGH and MED): reader a 59 · reader b 55 · both 42 · union 72
+  if the two reads are independent, the towns hold about 77 such sentences (a x b / both); the union found 93% of them
+BY KIND (HIGH and MED): {'PAIR': 41, 'STATE': 20, 'LACKS': 10, 'BROKEN': 1}
+BY SECTION (HIGH and MED): {'Systems/Institutions': 18, 'Summary/Overview': 12, 'Systems/Economics': 8, 'Systems/Power': 7, 'Systems/Resources': 5, 'Systems/Magic': 5, 'Systems/Defense': 4, 'Systems/Services': 3, 'Summary/Plot Hooks': 3, 'World/Daily Life': 3, 'World/NPCs': 2, 'World/Relationships': 2}
+HOW WIDE ON THE 720 (HIGH and MED rows by the towns that print the same sentence): >=100: 8 · 20-99: 19 · 5-19: 15 · 1-4: 8 · none (new or this town only): 22
+HEADER (the record itself) flags: 2
+   bar5-08 b bar0-hamlet-under_siege-rand-25 · hamlet of 80 with a part-time smith makes advanced weapons and armor and basic education; no school or armourer house on HOUSES
+   bar5-12 b bar0-thorp-calm-rand-25 · thorp of 29 lists Education (basic) and Religious services as made here; HOUSES has no school, shrine unstaffed, church is an access

@@ -1,0 +1,210 @@
+[
+ {
+  "id": "C17061",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "verdict": "STANDS",
+  "evidence": [
+   "\"The settlement relies on arcane workings it does not entirely trust. — cal-07.txt C17061 (again C17547 on World/History)",
+   "Reliance on magic: None — cal-07.txt C17147, C17445",
+   "Whatever magic reaches Waldkoppel, the hamlet does not rest on it: nothing it lives by would stop without it. — cal-07.txt C17451 (Systems/Magic)",
+   "by magic 0% — packet FOOD header",
+   "\"magicDependent\": false / \"magicDependency\": false — record s (several paths); the quote is s.history.historicalCharacter"
+  ],
+  "note": "The page's own Magic tab says the hamlet does not rest on magic and Reliance is None; magic is high and common but its economic and infrastructure roles are only 'occasional', which does not make 'relies on' true. A flat page pair."
+ },
+ {
+  "id": "C17069",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "verdict": "WEAK",
+  "evidence": [
+   "A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud. — cal-07.txt C17069, printed in one paragraph with C17066-C17068 (dump Summary/Overview line 8)",
+   "Carts and timber block the lanes into Waldkoppel, piled in a hurry and manned around the clock. / none of them has slept. — cal-07.txt C17066-C17067",
+   "Carpenter (part-time) · Crafts / Services · Basic repairs — cal-07.txt C17177, C17181 (no siege mark)"
+  ],
+  "note": "The page leaves the carpenter's work unmarked (its repairs still on offer), and nothing in the record forbids people moving inside the hamlet, so no fact is false; what is off is the leisurely 'passers-by judge it out loud' beside barricades manned round the clock: a calm-times tone in a siege paragraph, minor."
+ },
+ {
+  "id": "C17209",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Stopped by the siege. Nothing is ground here; the grain goes out of the hamlet for grinding. — cal-07.txt C17209",
+   "With the roads cut, grain is ground by hand at home until the carts can get through again. — cal-07.txt C17232 (Systems/Services, under Grain milling (a day away))"
+  ],
+  "note": "No contradiction: the house is the hamlet's access to a mill a day away, marked stopped; the Services line is itself the siege's account (roads cut, so households grind by hand at home). 'Nothing is ground here' means no mill here, which both lines agree on. Same row as C17210."
+ },
+ {
+  "id": "C17210",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Access to external mill · Crafts / Stopped by the siege. Nothing is ground here; the grain goes out of the hamlet for grinding. — cal-07.txt C17208-C17209 (the card's own mark)",
+   "Services · Grain milling (a day away) — cal-07.txt C17210",
+   "Grain milling (a day away) / With the roads cut, grain is ground by hand at home until the carts can get through again. — cal-07.txt C17231-C17232 (Services tab)"
+  ],
+  "note": "The chip is printed under a house whose own description carries 'Stopped by the siege.', which the rules count as covering its chips; the Services tab does not offer it bare either, it says the roads are cut and grain is ground by hand. Same row as C17209."
+ },
+ {
+  "id": "C17290",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "verdict": "STANDS",
+  "evidence": [
+   "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch. — cal-07.txt C17290 (Systems/Economics, no mark)",
+   "Stopped by the siege. A rough jetty and its salting-and-drying racks... / Services · Fresh fish (stopped) · Salted fish (stopped) — cal-07.txt C17187, C17190",
+   "Fish & Maritime Produce Stopped by the siege. — cal-07.txt C17277 (same Economics tab)",
+   "The drying racks along the way in stand nearly bare, and only the smell of salt and old catch is left. — cal-07.txt C17068"
+  ],
+  "note": "The page marks the fishing stopped on Institutions, Services and this same tab's income row, yet this food line puts the day's catch on the table with no mark: an ordinary-times line the crisis plainly touches (second-check rule 3), despite the tab's 'ordinary times' caveat."
+ },
+ {
+  "id": "C5441",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "verdict": "STANDS",
+  "evidence": [
+   "...some to herb-work, some to medicines brought from abroad. — cal-03.txt C5441 (Apothecary district · Crafts, C5440: no mark on the card)",
+   "Stopped by the siege. Merchants from abroad. — cal-03.txt C5634",
+   "No food comes into Milogorod by trade. — cal-03.txt C6149; CRISIS: Under Siege, Famine — packet header",
+   "Apothecary & Alchemy ... sold only to the people inside while the siege keeps outside customers away. — cal-03.txt C6136"
+  ],
+  "note": "The apothecary card is unmarked and describes a trade in medicines brought from abroad while the siege has stopped all import; the page marks other abroad-dependent rows. A single clause, but an ordinary-times claim the siege plainly touches with no mark (rule 3). Same card as C5442 (which is not faulty)."
+ },
+ {
+  "id": "C5442",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes are all to be had. — cal-03.txt C5442",
+   "made here: ... medicinal herbs ... — packet TRADE header; Marshlands · peat · honey · medicinal herbs — cal-03.txt C6329 (Commodities available); record s.resourceAnalysis.availableResources includes 'medicinal_herbs', Marshlands 'available'",
+   "Herbal remedies / Wholesale and retail herbs, tinctures, and prepared medicines. / Apothecary district — cal-03.txt C5941-C5943 (Services tab, unmarked, consistent with Institutions)",
+   "Herbalism & Remedies · Healing & medicine · Vulnerable — cal-03.txt C6161 (not in the 11 institutions 'critically impaired by siege', C6673)"
+  ],
+  "note": "Reader b's premise that herbs come only by import is wrong: the header gives medicinal herbs as made here and the Marshlands commodity is available; the page consistently leaves the apothecary and its remedies on offer on both tabs, and C6136 says it still sells to the people inside."
+ },
+ {
+  "id": "C5452",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "verdict": "STANDS",
+  "evidence": [
+   "...supplying the watch, the garrison, and the caravans. — cal-03.txt C5452 (Bowyers & fletchers (guild) · Crafts, C5451: no mark)",
+   "Caravan masters' exchange · Economy · Impaired / Stopped by the siege. ... / Services · Caravan organization (stopped) — cal-03.txt C5594-C5595, C5599",
+   "Caravan & Overland Trade · Trade & entrepôt · Impaired — cal-03.txt C6189"
+  ],
+  "note": "The page itself marks the caravans stopped by the siege, yet the bowyers' unmarked card says they supply the caravans; an ordinary-times clause the crisis plainly touches with no mark (rule 3). Same shape as C5441."
+ },
+ {
+  "id": "C5621",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Daily markets · Economy · Impaired — cal-03.txt C5618 (the card heading, directly above the chip); dump Systems/Institutions line 449",
+   "Services · Fresh produce · General trade — cal-03.txt C5621",
+   "Fresh produce Impaired / Whatever the kitchen gardens still give... — cal-03.txt C5917-C5918"
+  ],
+  "note": "The chip is printed under a card whose own heading carries 'Impaired', which the rules count as the row's mark; Institutions and Services therefore agree. Both readers missed the card mark on the line three above."
+ },
+ {
+  "id": "C6320",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "verdict": "WEAK",
+  "evidence": [
+   "✓ Fully exploited · Medicinal herbs · very high value / Draws on: herb gathering areas — cal-03.txt C6320-C6321",
+   "Little is left worth taking from the wild foraging areas at Milogorod this year... — cal-03.txt C6323 (same section, next lines)",
+   "resourceAnalysis.exploitation.fullyExploited[0] = {rawResource: 'medicinal herbs', processingInstitutions: ['Apothecary','Alchemist shop'], dependsOn: ['herb gathering areas']} — record",
+   "Wild Foraging Areas (depleted) — packet LAND header; but Marshlands · peat · honey · medicinal herbs — cal-03.txt C6329 and 'made here: medicinal herbs' in TRADE"
+  ],
+  "note": "'Fully exploited' is the record's exploitation class (the town has every house that processes herbs), not a yield claim, and herbs remain an available commodity made here; but a green check beside a source the very next line calls spent is a real, if minor, mismatch of presentation."
+ },
+ {
+  "id": "C37631",
+  "town": "bar0-town-occupied-rand-25",
+  "verdict": "WEAK",
+  "evidence": [
+   "Several quarters, each with its house of worship. — cal-16.txt C37631 (the house's stored desc, record institutions 'Parish churches (2-5)'.desc)",
+   "population 329 — packet TOWN line; record s.population 329 (config.population 1500, tier 'town')",
+   "HOUSES: ... Parish churches (2-5); ... Housing (75-650 households) — packet HOUSES header"
+  ],
+  "note": "The town's own record gives it 2-5 parish churches, so several congregations each with a church is the record's fact; what is off is the word 'quarters' for a walled town of 329, a size word too big for the population (the house list was drawn for a town of 1500). Same fault as C37711."
+ },
+ {
+  "id": "C37711",
+  "town": "bar0-town-occupied-rand-25",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Several congregations covering different districts or communities. — cal-16.txt C37711",
+   "HOUSES: ... Parish churches (2-5); Parish burial grounds — packet HOUSES header",
+   "Each congregation buries its own... — cal-16.txt C37626"
+  ],
+  "note": "The record gives the town several parish churches, so several congregations is true, and the sentence's own 'or communities' needs no districts; at most it shares the scale word of C37631."
+ },
+ {
+  "id": "C37887",
+  "town": "bar0-town-occupied-rand-25",
+  "verdict": "STANDS",
+  "evidence": [
+   "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it. — cal-16.txt C37887 (Systems/Resources)",
+   "Leatherworking & Cordwaining · Manufacturing & crafts · Vulnerable / Via Tanners / Outputs Boots and shoes · Saddles and harness · Leather armour — cal-16.txt C37839-C37845 (Systems/Economics)",
+   "Produced locally ... animal hides · Herbal remedies · Boots and shoes — cal-16.txt C37785; TRADE 'made here: ... Boots and shoes'"
+  ],
+  "note": "The page says both that hides are never finished here and that the town produces boots and shoes, saddles and leather armour from them; nothing in the town (no cobbler on HOUSES) reconciles the two. The record itself carries both (gap 'Cannot produce final goods' and made-here 'Boots and shoes')."
+ },
+ {
+  "id": "C17771",
+  "town": "bar0-hamlet-under_siege-rand-25",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Access to external mill · Crafts / Stopped by the siege. Grain is taken out of the hamlet to be ground. — cal-08.txt C17769-C17770 (the card's own mark)",
+   "Services · Grain milling (a day away) — cal-08.txt C17771",
+   "With the roads cut, grain is ground by hand at home until the carts can get through again. — cal-08.txt C17797 (Services tab, under Grain milling, C17796)"
+  ],
+  "note": "The chip sits under a card marked 'Stopped by the siege.', which covers it under the rules, and the Services tab's own line for it (C17796-C17797) states the siege's effect; it is not printed on offer bare anywhere. Same fault-shape as C17210."
+ },
+ {
+  "id": "C17893",
+  "town": "bar0-hamlet-under_siege-rand-25",
+  "verdict": "STANDS",
+  "evidence": [
+   "Faith & Worship · Religion & civic✓ Running / Via Access to a house of worship · Wayside shrine — cal-08.txt C17893-C17895",
+   "Stopped by the siege. The nearest house of worship is the village's... / Services · Marriage ceremony (stopped) · Rite of entry (stopped) · Weekly rite (stopped) — cal-08.txt C17778-C17779",
+   "Services · Wayside blessing (stopped) — cal-08.txt C17767",
+   "Mining & Quarrying ... Impaired / Alpine Wool and Dairy ... Impaired — cal-08.txt C17881, C17888 (same list reads the siege)",
+   "outputs: ['Religious services','Education (basic)','Poor relief','Record keeping'] — record s.economicState.activeChains[5]"
+  ],
+  "note": "The same list prints the other chains Impaired under the siege, yet prints Faith & Worship Running with a check while every service of both its houses is marked stopped. The divine provision counted under food (C18049) is not this chain's output and does not reconcile it."
+ },
+ {
+  "id": "C36355",
+  "town": "bar0-town-occupied-rand-24",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "One importer now brings in all the grain and has quadrupled the price... — cal-16.txt C36355 (Summary/Plot Hooks, under 'Outlook' / 'Trade Monopoly')",
+   "LAND: Extensive Grain Fields (depleted) · Grain & Bread [impaired; its resource Grain fields depleted] — packet LAND header",
+   "imports: Bulk grain (local grain fields depleted) — packet TRADE header",
+   "TENSIONS: resource scarcity (parties: Those hoarding what they can, Those who cannot pay the prices, Those who would fix a fair price) — packet header"
+  ],
+  "note": "The 73% grown locally is food overall, not grain: the town's grain fields are depleted and its grain is imported, so one importer holding all the grain is consistent; and it is a plot hook stating its own fact, which the rules allow unless the header denies it (it fits the live resource-scarcity tension)."
+ },
+ {
+  "id": "C36857",
+  "town": "bar0-town-occupied-rand-24",
+  "verdict": "WEAK",
+  "evidence": [
+   "The town watch exists on paper. / Paid, but poorly equipped. / Susceptible to bribery... — cal-16.txt C36857-C36859 (record s...safetyProfile.guardEffectivenessDesc)",
+   "Keeping order in Chandragram is the occupiers' business now, and the locals are not trusted to help. — cal-16.txt C36863",
+   "Occupation authorities enforce the curfew at the checkpoints. — record safetyProfile.safetyDesc",
+   "Part-time guards who walk the night and hold the gates. — cal-16.txt C36906 (same Defense tab)"
+  ],
+  "note": "The watch is on DEFENCE, and the line is the record's grade of a poor, bribable watch, which the occupation (occupiers keep order, C36863) makes plausible; but the idiom 'exists on paper' overstates it beside the same tab's guards who walk the night and hold the gates. A matter of degree in one phrase."
+ },
+ {
+  "id": "C35627",
+  "town": "bar0-town-calm-rand-26",
+  "verdict": "STANDS",
+  "evidence": [
+   "Heads the leading house in the trade in quiet times; its hold is secure and its say is real. — cal-15.txt C35627 (Corvus Gallus's card; record npcs[Corvus Gallus].structuralPosition)",
+   "Standing marginal — cal-15.txt C35630 (same card, three lines below)",
+   "Merchants with local reach; they trade here, but have little say in how the place is run. / Some merchants are paying for protection — cal-15.txt C35416, C35418",
+   "GOVERNMENT: ... Merchant Guilds (Suppressed) — packet header; powerStructure Merchant Guilds powerLabel 'Suppressed'"
+  ],
+  "note": "The town is calm, so 'in quiet times' is now; the same card then says his standing is marginal and the Power tab says the guilds have little say and pay for protection. Reading 'say' as say in the trade alone does not cover 'its hold is secure' against a Suppressed power and 'Standing marginal'."
+ }
+]
