@@ -220,7 +220,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
  * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
@@ -431,6 +431,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // ── keyed presence: one value of a categorical fact ──
   ruler: dim({ shape: 'presence', home: 'rulerKind', keys: RULER_WORDS,
     reader: (f, key) => (f.rulerKind === undefined ? undefined : f.rulerKind === key) }),
+  // BAR6-HOUSES, THE CHAIR'S RULING SV1 of 2026-11-16 (new vocabulary; vetoable by the owner): the record gives the town a
+  // sovereign (a lord, a liege, an overlord, a crown): the government, a power, a house, a person or the founding names one, or a
+  // war or an occupation supplies the realm's (`sovereign.js`). A line that names a sovereign declares it, or takes a twin naming none.
+  sovereign: dim({ shape: 'presence', home: 'sovereign', reader: (/** @type {FactsLike} */ f) => bool(f.sovereign) }),
   war: dim({ shape: 'presence', home: 'warState', keys: WAR_WORDS,
     reader: (f, key) => (typeof f.warState === 'string' ? f.warState === key : undefined) }),
   migration: dim({ shape: 'presence', home: 'migration', keys: MIGRATION_WORDS,

@@ -108,5 +108,25 @@
   "file": "src/generators/power/rulingStructure.js",
   "text": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
   "reason": "office: read by `militaryForceLine.js :: forceLineOf` against the settled roster (needs a militia or a watch; its twin otherwise), with the late key handed (BAR6-POWERS 10/g)"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.",
+  "reason": "sovereign: the card of the Elected Reeve, drawn only where that power governs; SV1's atom (`sovereign.js`, by XA1 from a804fa1b5) reads the reeve as a sovereign's, and it is TRUE in every one of the 23 towns that print the card in the 150, the 720 and the fresh 300 at afa46d644, at the settled record and from the houses alone"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "The great noble houses are the crown's military and fiscal foundation, and they know it. Royal policy is negotiated with them as much as decreed over them.",
+  "reason": "sovereign: drawn only where Royal Authority governs (the card's own condition, `governingFaction.includes('Royal Authority')`): the crown is the government's own (SV1; the atom reads \"royal\"); printed in none of the 1,170 towns rendered"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "Hereditary landowners whose cooperation the crown depends on for levies, taxes, and regional order. Not powerful enough to dictate, but essential enough to court.",
+  "reason": "sovereign: drawn only where Royal Authority governs (the card's own condition): the crown is the government's own (SV1; the atom reads \"royal\"); printed in none of the 1,170 towns rendered"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "Noble families nominally loyal to the crown, but watching which way the political wind is blowing before committing resources.",
+  "reason": "sovereign: drawn only where Royal Authority governs (the card's own condition): the crown is the government's own (SV1; the atom reads \"royal\"); printed in none of the 1,170 towns rendered"
  }
 ]

@@ -26,6 +26,7 @@ import { magicSupplyOf } from './magicSupply.js'; // BAR4-CORPUS-DEF (D2)
 import { relianceShownOf } from '../display/magicProvisionShown.js'; // BAR5-MAGIC (rule 1a): the reliance word the page prints
 import { rulerKindOf } from './rulerKind.js';
 import { rulingBodyOf } from './rulingBody.js';
+import { sovereignOf } from './sovereign.js'; // BAR6-HOUSES (SV1)
 import { migrationOf } from './migration.js';
 import { warStateOf } from './warState.js';
 import { hasInstitution, liveInstitutionNames } from './institutions.js';
@@ -107,6 +108,8 @@ export function factsOf(record, options = {}) {
     get magicRelianceShown() { return relianceShownOf(record); },
     /** fact 8: elder / lord / priest / mayor / occupier / council */
     get rulerKind() { return rulerKindOf(record); },
+    /** BAR6-HOUSES (the chair's ruling SV1): the record gives a sovereign, or a war or an occupation supplies one (`sovereign.js`) */
+    get sovereign() { return sovereignOf(record); },
     /** TAIL-TIES (the chair's ruling (T5)): ruled by a body of more than one (`rulingBody.js`), or undefined with no government */
     get rulingBody() { return rulingBodyOf(record); },
     /** fact 9: the mass migration's direction */

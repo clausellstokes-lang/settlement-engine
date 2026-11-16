@@ -57,6 +57,11 @@ const variantsOf = (o) => (Array.isArray(o) ? o.flatMap(variantsOf) : o && typeo
 const RULES = new Set(['10f-kind', '10f-tier', '10f-weight', '10f-backs', '10h']);
 /** the census's towns (and the fresh 300's) in which 10f or 10h fired at afa46d644 (runF.mjs over PAGE-COPY renders) */
 const FIRED_10 = Object.freeze([
+  'bar0-city-under_siege+famine-rand-103', 'bar0-city-under_siege+famine-rand-106', 'bar0-city-under_siege+famine-rand-109', 'bar0-city-under_siege+famine-rand-110',
+  'bar0-city-under_siege+famine-rand-113', 'bar0-city-under_siege+famine-rand-115', 'bar0-city-wartime-rand-102', 'bar0-city-wartime-rand-104',
+  'bar0-city-wartime-rand-107', 'bar0-city-wartime-rand-108', 'bar0-city-wartime-rand-114', 'bar0-city-wartime-rand-115',
+  'bar0-city-wartime-rand-119', 'bar0-city-wartime-rand-122', 'bar0-metropolis-calm-rand-106', 'bar0-metropolis-calm-rand-109',
+  'bar0-metropolis-calm-rand-120', 'bar0-metropolis-calm-rand-129', 'bar0-town-occupied-rand-109', 'bar0-town-occupied-rand-124',
   'r2r-city-11', 'r2r-city-13', 'r2r-city-20', 'r2r-city-29',
   'r2r-city-40', 'r2r-city-41', 'r2r-city-42', 'r2r-city-55',
   'r2r-city-7', 'r2r-city-9', 'r2r-metropolis-11', 'r2r-metropolis-17',
@@ -71,6 +76,9 @@ const FIRED_10 = Object.freeze([
 ]);
 /** the census's towns (and the fresh 300's) in which 6d-members fired at afa46d644 (runC.mjs): one member, "its members" */
 const FIRED_MEMBERS = Object.freeze([
+  'bar0-hamlet-calm-rand-105', 'bar0-hamlet-calm-rand-106', 'bar0-hamlet-calm-rand-108', 'bar0-hamlet-calm-rand-125',
+  'bar0-hamlet-under_siege-rand-107', 'bar0-hamlet-under_siege-rand-112', 'bar0-hamlet-under_siege-rand-119', 'bar0-thorp-calm-rand-103',
+  'bar0-thorp-calm-rand-114', 'bar0-thorp-calm-rand-126', 'bar0-thorp-calm-rand-127', 'bar0-thorp-calm-rand-128',
   'r2r-hamlet-28', 'r2r-hamlet-29', 'r2r-hamlet-35', 'r2r-hamlet-37',
   'r2r-hamlet-39', 'r2r-thorp-10', 'r2r-thorp-12', 'r2r-thorp-15',
   'r2r-thorp-20', 'r2r-thorp-23', 'r2r-thorp-27', 'r2r-thorp-3',
