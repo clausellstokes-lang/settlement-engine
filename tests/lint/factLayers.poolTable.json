@@ -574,8 +574,8 @@
    "src": "map:measured"
   },
   "DS-DEF-3::COMPOUND: occupation curfew": {
-   "layer": 3,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `crime wave` (the history's live tension, crimeWave.js, layer 4); was 3 by map:measured (BAR6-DEFDESK, 2026-11-16)"
   },
   "DS-DEF-3::COMPOUND: plague": {
    "layer": 3,
@@ -610,12 +610,12 @@
    "src": "map:measured"
   },
   "DS-DEF-3::Moderate": {
-   "layer": 3,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `law` (the law's band as the page prints it, lawBand.js, layer 4); was 3 by map:measured (BAR6-DEFDESK, 2026-11-16)"
   },
   "DS-DEF-3::Safe": {
-   "layer": 3,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `crime wave` (the history's live tension, crimeWave.js, layer 4); was 3 by map:measured (BAR6-DEFDESK, 2026-11-16)"
   },
   "DS-DEF-3::Unsafe": {
    "layer": 3,
@@ -662,8 +662,8 @@
    "src": "placed: its key reads the capture climate (powerStructure.criminalCaptureState, layer 4); was 4 by map:inferred (W2-A-LEAVES-2, REVIEW-W2A F5)"
   },
   "DS-DEF-4::structure diffuse": {
-   "layer": 3,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `crime wave` (the history's live tension, crimeWave.js, layer 4); was 3 by map:measured (BAR6-DEFDESK, 2026-11-16)"
   },
   "DS-DEF-4::structure null (nothing organized recognized)": {
    "layer": 4,
