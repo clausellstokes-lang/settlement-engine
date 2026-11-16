@@ -1,0 +1,13 @@
+{"id":"C34417","town":"bar0-town-calm-rand-21","sev":"MED","kind":"STATE","why":"one importer brings in ALL the grain at quadrupled price; FOOD: grown 80%, imports 20%, Secure, no gap, no CRISIS","other":""}
+{"id":"C34419","town":"bar0-town-calm-rand-21","sev":"LOW","kind":"STATE","why":"grain shipments stuck and river dammed as present fact; CRISIS none, FOOD Secure with no gap or failed source","other":""}
+{"id":"C34789","town":"bar0-town-calm-rand-21","sev":"LOW","kind":"PAIR","why":"says no one trade carries the town, but C34776 says it lives on a market trade; Market Taxes top the income at 18%","other":"C34776"}
+{"id":"C34791","town":"bar0-town-calm-rand-21","sev":"MED","kind":"PAIR","why":"says copper ore comes from elsewhere and its absence idles work; TRADE imports no copper, C34812 says copper ore is needed and not brought in","other":"C34812"}
+{"id":"C34835","town":"bar0-town-calm-rand-21","sev":"LOW","kind":"STATE","why":"says the town leans first on fishing for its food; FOOD says 80% grown, C34310 has the river carrying what the fields produce, LAND has no fishery","other":"C34310"}
+{"id":"C34945","town":"bar0-town-calm-rand-21","sev":"MED","kind":"STATE","why":"says little of the ground's worth stays in town, powers around it take it; STATE Wealthy, no crisis, income all local, C34776 money to spare","other":"C34776"}
+{"id":"C34977","town":"bar0-town-calm-rand-21","sev":"MED","kind":"STATE","why":"two guilds contest the main trade route; QUARRELS has Guild Council vs Craft Guilds over a defied ruling and Merchant/Craft only tense, no route contest","other":""}
+{"id":"C34978","town":"bar0-town-calm-rand-21","sev":"MED","kind":"STATE","why":"says Guild Council avoids the question; QUARRELS has the Council itself a party, against Craft Guilds, in a moderate dispute over a defied ruling","other":"C35017"}
+{"id":"C34553","town":"bar0-town-calm-rand-21","sev":"LOW","kind":"STATE","why":"personal trade title 'Saltmaster' (a -master compound, like Beemaster) given to Lena Naumann, who is f in PEOPLE","other":""}
+{"id":"C34432","town":"bar0-town-calm-rand-21","sev":"LOW","kind":"STATE","why":"personal trade title 'Smith-master' given to Frieda Schubert, who is f in PEOPLE (repeats at C35322)","other":""}
+{"id":"C34454","town":"bar0-town-calm-rand-21","sev":"LOW","kind":"STATE","why":"personal trade title 'Guildmaster' (a -master compound) given to Rosamund Becker, who is f in PEOPLE (repeats at C35483)","other":""}
+{"id":"C35894","town":"bar0-town-calm-rand-21","sev":"LOW","kind":"PAIR","why":"says few keep the rites beyond weddings and burials; HOUSES has 2-5 parish churches, a handful of congregations, pilgrim trade and healing relied upon","other":"C34591"}
+{"id":"DONE","lines":1695,"blocks":1,"flags":12}
