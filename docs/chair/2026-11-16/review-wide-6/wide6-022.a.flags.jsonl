@@ -1,0 +1,4 @@
+{"id":"C55354","town":"bar0-city-wartime-rand-33","sev":"LOW","kind":"PAIR","why":"Outlook says 'timber carts stopped coming'; Economics tab says timber is 'Needed, and not brought in' (terrain cannot produce, no timber import)","other":"C56301"}
+{"id":"C56725","town":"bar0-city-wartime-rand-33","sev":"LOW","kind":"PAIR","why":"Defense tab: 'accounts have money in hand... without going begging'; the same tab says 'The war takes most of the money: trade suffers' (food short, Pressured)","other":"C56707"}
+{"id":"C58141","town":"bar0-city-wartime-rand-33","sev":"MED","kind":"STATE","why":"Daily Life under 'Food Pressured' says Wukou 'closes every year ahead... margin dependable'; Economics says 'Short: 840 lbs/day', FOOD gap 4%, surplus 0%","other":"C56306"}
+{"id":"DONE","lines":3307,"blocks":1,"flags":3}
