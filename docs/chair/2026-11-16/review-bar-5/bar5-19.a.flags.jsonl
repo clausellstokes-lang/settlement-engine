@@ -1,0 +1,14 @@
+{"id":"C41537","town":"bar0-village-famine-rand-24","sev":"LOW","kind":"LACKS","why":"'built around the bazaar, under the temple': HOUSES has a Fish market and a Parish church, no bazaar or temple","other":""}
+{"id":"C41779","town":"bar0-village-famine-rand-24","sev":"LOW","kind":"LACKS","why":"'ground nearest the wall' in a village whose DEFENCE gives walls: none (may be the graveyard's own wall)","other":""}
+{"id":"C41928","town":"bar0-village-famine-rand-24","sev":"LOW","kind":"LACKS","why":"'street kitchens' and 'tanks' in a village of 260 with no such house on HOUSES","other":""}
+{"id":"C42009","town":"bar0-village-famine-rand-24","sev":"LOW","kind":"PAIR","why":"Extensive Grain Fields listed 'Abundant' while grain failed this year (FOOD: failed source grain, famine cut 50%)","other":"C42001"}
+{"id":"C42011","town":"bar0-village-famine-rand-24","sev":"MED","kind":"STATE","why":"offers 'grain · flour' as commodities available, unmarked, under a famine whose failed source is grain","other":"C42001"}
+{"id":"C42116","town":"bar0-village-famine-rand-24","sev":"MED","kind":"PAIR","why":"calm-times scene: thieves 'known by name within a day' and shunned; famine, law and order collapsed, 'too few consequences for taking'","other":"C42153"}
+{"id":"C42585","town":"bar0-village-famine-rand-25","sev":"LOW","kind":"STATE","why":"'Founded roadside... what stops for the night': FOUNDING says it grew where herders gathered seasonally; no inn or lodging house on HOUSES; famine","other":""}
+{"id":"C42731","town":"bar0-village-famine-rand-25","sev":"LOW","kind":"PAIR","why":"hunters sell game 'at market'; no market house on HOUSES and the page says no market or fair stands in Bjorney","other":"C42575"}
+{"id":"C42840","town":"bar0-village-famine-rand-25","sev":"MED","kind":"LACKS","why":"'Collects the lord's dues': GOVERNMENT lists no lord; FOUNDING is escaped serfs beyond the reach of their former masters","other":""}
+{"id":"C42875","town":"bar0-village-famine-rand-25","sev":"LOW","kind":"BROKEN","why":"list prints 'timber' twice and a stored-key style 'mountain timber' in a plains village","other":""}
+{"id":"C42887","town":"bar0-village-famine-rand-25","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'its herds comes first'","other":""}
+{"id":"C42947","town":"bar0-village-famine-rand-25","sev":"MED","kind":"STATE","why":"offers 'livestock' and 'dairy' as commodities available, unmarked, in a famine whose failed source is livestock","other":"C42937"}
+{"id":"C43125","town":"bar0-village-famine-rand-25","sev":"MED","kind":"PAIR","why":"says part of the village's work 'holds up only with help beyond ordinary labour'; reliance on magic is None, FOOD by magic 0%, all roles absent","other":"C43119"}
+{"id":"DONE","lines":1945,"blocks":2,"flags":13}
