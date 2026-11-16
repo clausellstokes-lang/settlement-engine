@@ -59,7 +59,7 @@ const merchantsBeside = (ctx) => ctx.roster.filter((x) => x !== ctx.self && MERC
 const watchStands = (ctx) => ctx.names.some((n) => DEFENSE_BUCKET_KEYWORDS.watch.some((kw) => String(n).includes(kw)));
 /** BAR5-POWERS (1c-weight): the military's very-high lines at Minor or Suppressed take the watch's line for the tier, where one stands. @param {string} tier @param {RungContext} ctx */
 const militaryRung = (tier, ctx) => !watchStands(ctx) ? null : tier === 'town' ? 'Town watch; it enforces ordinances, manages disorder, and reports to the council.'
-  : ['city', 'metropolis'].includes(tier) ? 'City watch; law enforcement and external defence, stretched between multiple responsibilities.' : null;
+  : tier === 'city' || tier === 'metropolis' ? 'City watch; law enforcement and external defence, stretched between multiple responsibilities.' : null;
 const CLERGY_AT_MARGINS = 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.';
 /** TAIL-POWERS-B-4 (the chair's P31 (1), vetoable by the owner; batch 6a's form): "at the margins ... leverage is limited" is false
  * of a faith that stands level with or above the seat on the final roster, or at Significant or above; there it takes this twin. */

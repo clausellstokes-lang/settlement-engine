@@ -27,11 +27,10 @@ import { resolveGenerationWorldLaw } from '../generationContext.js'; import { ha
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
-import { forceLineOf, stabilityReadsPurse } from './militaryForceLine.js'; // BAR5-POWERS (1c-force): the military description reads the roster
+import { forceLineOf } from './militaryForceLine.js'; // BAR5-POWERS (1c-force): the military description reads the settled roster
 import { settleClaimsToLabel } from './claimStanding.js'; // COHERENCE-POWERS-8: the claim table in its own module (F31's ceiling: a split, never a raise)
 export { settleClaimsToLabel };
 export { normalizeAndAnnotateFactions }; // COHERENCE-POWERS-3 (F12): moved verbatim to power/normalizeAndAnnotateFactions.js, re-exported for its importers
-
 
 export const generatePowerStructure = (
   tier,
@@ -561,7 +560,7 @@ export const generatePowerStructure = (
                 ? 'Town watch; it enforces ordinances, manages disorder, and reports to the council.'
                 : militaryPower > 18
                   ? 'City watch; it answers for keeping order and is growing more sure of its own authority.'
-                  : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'), nativeInstitutions), // BAR5-POWERS (1c-force, ruling PW1): the roster's defence atoms: no force the roster lacks
+                  : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'), projection.forces), // BAR5-POWERS (1c-force, PW1; R-Q): the settled roster's atoms, handed by the late replay only: no force the roster lacks
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +
@@ -770,7 +769,7 @@ export const generatePowerStructure = (
     // type); a transfer of power (domain/rulingPower.js) keeps both in step
     // while previousGovernments records what the seat used to be.
     government: (factions.find((f) => f.isGoverning) || {}).faction || null,
-    stability: stabilityReadsPurse(/^Stable(;|$)/.test(String(stability)) && publicLegitimacy?.label === 'Legitimacy Crisis' ? String(stability).replace(/^Stable/, "Tense (the seat has lost the people's trust)") : stability, economicState?.prosperity), // BAR5-POWERS (1d): the purse the prosperity line reads; TAIL-POWERS-3 P16 (G2): no bare "Stable" beside a Legitimacy Crisis (the stability is written before the legitimacy)
+    stability: /^Stable(;|$)/.test(String(stability)) && publicLegitimacy?.label === 'Legitimacy Crisis' ? String(stability).replace(/^Stable/, "Tense (the seat has lost the people's trust)") : stability, // TAIL-POWERS-3 P16 (G2): no bare "Stable" beside a Legitimacy Crisis (the stability is written before the legitimacy)
     recentConflict: boycottReadsRelation(recentConflict, factionRelationships, governingFaction), // BAR3-POWERS (C27440): the boycott reads the pair's relation row
     publicLegitimacy,
     factionRelationships,

@@ -6,7 +6,7 @@
 // (a) THE ZERO over the towns in which the rule fired at 600b7683a (the census's 720 and the fresh 300: the measure in
 // docs/chair/2026-11-16/bar5/BAR5-POWERS-HANDBACK.md), every town run and every failure collected; (b) A POSITIVE CONTROL,
 // a record built here from the read's own row, on which the detector MUST still fire. And the read's rows (REVIEW-BAR-5:
-// C33631 C35627 C39734 C43925 C38889 C32519), each red at 600b7683a: the refused words and what prints in their place.
+// C33631 C35627), each red at 600b7683a; C38889 is tests/domain/facts/seatOutranked.test.js's; C39734 C43925 await the late key; C32519 is named for BAR5-FOOD: the refused words and what prints in their place.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -15,7 +15,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { npcInteriority } from '../../src/domain/display/npcInteriorityRead.js';
-import { NO_PATROL_LINE, NO_FORCE_LINE, forceLineOf, stabilityReadsPurse } from '../../src/generators/power/militaryForceLine.js';
+import { NO_PATROL_LINE, NO_FORCE_LINE, forceLineOf } from '../../src/generators/power/militaryForceLine.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 
@@ -81,11 +81,11 @@ const CASTERS_LOW = Object.freeze(['r2r-city-5', 'r2r-city-15', 'r2r-city-20', '
 const ROWS = /** @type {Array<[string, string, string, string]>} */ ([
   ['C33631', 'bar0-town-calm-rand-25', 'Clergy and church institutions exercise meaningful civic influence', 'Clergy are present but operate at the margins of civic life'],
   ['C35627', 'bar0-town-calm-rand-26', 'its hold is secure and its say is real', 'though its word counts for little beyond the trade'],
-  ['C39734', 'bar0-village-calm-rand-24', 'Armed patrol of able-bodied residents', NO_PATROL_LINE],
-  ['C43925', 'bar0-village-famine-rand-26', 'Significant military force for this scale', NO_FORCE_LINE],
 ]);
-/** C32519: the stability word beside a purse the prosperity line says is in hand */
-const UNDERFUNDED_TOWN = 'bar0-town-calm-rand-24';
+/** THE NAMED EXCLUSION (R-Q / R-U, tests/generators/census5cMilitiaReword.test.js): the force line reads the SETTLED roster only,
+ * handed by the late replay (`projection.forces`); until that key is handed (the chair's, at assembleSettlement.js) the line
+ * prints as the step chose it, so 1c-force is excluded from the zero here, and its leaf and control are held below. */
+const AWAITS_THE_LATE_KEY = '1c-force/roster';
 /** KEEP: a force line where its force stands, and a secure head of established standing, still print */
 const KEEP = /** @type {Array<[string, RegExp]>} */ ([
   ['bar0-village-calm-rand-22', /^Significant military force for this scale/],
@@ -96,7 +96,7 @@ const KEEP = /** @type {Array<[string, RegExp]>} */ ([
 const towns = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  const seeds = new Set([...FIRED_720, ...FIRED_FRESH, ...CASTERS_LOW, ...ROWS.map((r) => r[1]), UNDERFUNDED_TOWN, ...KEEP.map((r) => r[0])]);
+  const seeds = new Set([...FIRED_720, ...FIRED_FRESH, ...CASTERS_LOW, ...ROWS.map((r) => r[1]), ...KEEP.map((r) => r[0])]);
   for (const seed of seeds) towns[seed] = born(seed);
 }, 1800000);
 
@@ -108,7 +108,7 @@ const said = (s) => JSON.stringify({ powers: (s.powerStructure?.factions || []).
 describe('BAR5-POWERS · 1c and 1d (detector: law1c, law1d over the record\'s printed lines)', () => {
   it('(a) the zero: in every town where a power\'s description or a card claimed a standing its final state denies at 600b7683a', () => {
     const failures = collectSeedFailures([...FIRED_720, ...FIRED_FRESH], (seed) => {
-      expect(instancesOf(seed).map((x) => `${x.law}: ${x.line.slice(0, 80)}`), seed).toEqual([]);
+      expect(instancesOf(seed).filter((x) => x.law !== AWAITS_THE_LATE_KEY).map((x) => `${x.law}: ${x.line.slice(0, 80)}`), seed).toEqual([]);
     });
     expectNoSeedFailures(failures, '1c and 1d: zero in the towns where they printed at 600b7683a');
   });
@@ -118,13 +118,6 @@ describe('BAR5-POWERS · 1c and 1d (detector: law1c, law1d over the record\'s pr
       expect(secure.map((/** @type {any} */ n) => n.name), seed).toEqual([]);
     });
     expectNoSeedFailures(failures, 'the class: a low standing claims no secure hold');
-  });
-  it('(a) the stability word: no town of these reads "underfunded" beside a purse in hand', () => {
-    const failures = collectSeedFailures([...FIRED_720, ...FIRED_FRESH, UNDERFUNDED_TOWN], (seed) => {
-      const s = towns[seed];
-      expect(stabilityReadsPurse(s.powerStructure?.stability, s.economicState?.prosperity), seed).toBe(s.powerStructure?.stability);
-    });
-    expectNoSeedFailures(failures, '1d: the stability word reads the purse');
   });
   it('(b) positive control: a constructed town of the read\'s four 1c rows and its 1d row, each found', () => {
     const noRival = textsOf(DOSSIER_STATE_PROSE_POWER).find((t) => /holds because no rival yet outweighs \{faction\}/.test(t));
@@ -153,10 +146,11 @@ describe('BAR5-POWERS · 1c and 1d (detector: law1c, law1d over the record\'s pr
   });
   it('(b) the leaves: a force line keeps its words where the force stands and takes its twin where none does', () => {
     const patrol = "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.";
-    expect(forceLineOf(patrol, [{ name: 'Militia', category: 'Defense' }])).toBe(patrol);
-    expectAbsentWithAnchor([forceLineOf(patrol, [])], patrol, NO_PATROL_LINE, 'no militia and no watch: no patrol of residents');
-    expect(stabilityReadsPurse('Tense (militarised, chronically underfunded)', 'Poor')).toBe('Tense (militarised, chronically underfunded)');
-    expect(stabilityReadsPurse('Tense (militarised, chronically underfunded)', 'Moderate')).toBe('Tense (militarised)');
+    expect(forceLineOf(patrol, { militia: true })).toBe(patrol);
+    expect(forceLineOf(patrol, null)).toBe(patrol); // R-Q: without the settled atoms the step's own choice prints
+    expectAbsentWithAnchor([forceLineOf(patrol, { garrison: true })], patrol, NO_PATROL_LINE, 'no militia and no watch: no patrol of residents');
+    const force = "Significant military force for this scale; the commander's opinion on civic matters carries institutional weight.";
+    expectAbsentWithAnchor([forceLineOf(force, {})], force, NO_FORCE_LINE, 'no force of any kind');
   });
   it('(b) DS-POW-4: "no rival yet outweighs" declares the town not occupied', () => {
     /** @type {any[]} */ const variants = [];
@@ -175,12 +169,6 @@ describe('BAR5-POWERS · the read\'s rows (REVIEW-BAR-5), each red at 600b7683a'
       expect(text).toContain(instead);
     });
   }
-  it(`C32519 ${UNDERFUNDED_TOWN}: the stability keeps "militarised" and claims no underfunding beside a Moderate purse`, () => {
-    const s = towns[UNDERFUNDED_TOWN];
-    expect(s.economicState?.prosperity).toBe('Moderate');
-    expectAbsentWithAnchor([String(s.powerStructure?.stability)], 'chronically underfunded', 'Tense (militarised)', 'C32519: the stability word');
-    expect(s.powerStructure?.stability).toBe('Tense (militarised)');
-  });
   for (const [seed, kept] of KEEP) {
     it(`KEEP ${seed}: ${kept.source.slice(1, 48)}… still prints (its force stands; its head's standing is not marginal)`, () => {
       expect(said(towns[seed])).toMatch(new RegExp(kept.source.slice(1)));

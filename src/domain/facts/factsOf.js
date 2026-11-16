@@ -30,6 +30,7 @@ import { warStateOf } from './warState.js';
 import { hasInstitution, liveInstitutionNames } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { rivalPowerOf } from './rivalPower.js';
+import { seatOutrankedOf } from './seatOutranked.js';
 import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
 import { timberAtHandOf, timberReachesSawmillOf } from './timberAtHand.js'; // BAR4-HOUSES (H1 (ii)); BAR4-SCENES-2: one home
 import { failedFoodSourceOf, enchantingOfferedOf } from './sceneSupply.js'; // BAR4-SCENES (kind A1)
@@ -110,6 +111,8 @@ export function factsOf(record, options = {}) {
     get guild() { return guildOf(record); },
     /** TAIL-CRISIS-2 (the chair's ruling K6): a power not the governing one stands at Significant or above (`rivalPower.js`) */
     get rivalPower() { return rivalPowerOf(record); },
+    /** BAR5-POWERS (the chair's ruling SO1): a power not the governing one stands above the seat (`seatOutranked.js`) */
+    get seatOutranked() { return seatOutrankedOf(record); },
     /** BAR2-PLACES (the chair's grant VW2): the smiths have iron to work, worked here or brought in past no siege (`ironAtHand.js`) */
     get ironAtHand() { return ironAtHandOf(record); },
     /** BAR4-HOUSES (H1 (ii)): the town works timber of its own, the input's kind `local` (`timberAtHand.js`, on `houseInputAtHand.js`) */

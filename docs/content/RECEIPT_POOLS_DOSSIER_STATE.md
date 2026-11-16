@@ -2323,7 +2323,7 @@ did not die.
 **`riskLabel: Holding`** {colour}
 1. `[ledger]` {faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.
 2. `[street]` {settlement} has people who would take the hall if they could. For now they cannot, and everyone involved knows it.
-3. `[unfolding · no crisis: occupied]` The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.
+3. `[unfolding · no crisis: occupied · no seat outranked]` The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.
 
 **`riskLabel: Contested`** {colour}
 1. `[ledger]` {counterpart} could now take the hall from {faction} at {settlement}; {faction} keeps it only because the office is still its own.

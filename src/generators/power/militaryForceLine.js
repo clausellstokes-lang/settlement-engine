@@ -6,14 +6,18 @@
  * `generatePowerStructure` chooses the military power's description from `priorities.military` and the tier alone, never
  * from the roster: "Armed patrol of able-bodied residents" printed in villages with no militia and no watch, "Significant
  * military force for this scale" where no garrison, militia, watch or hired company stands. Each such line is read here
- * against the roster's defence atoms (`domain/facts/defence.js :: defenceOf`, THE ONE READER of the defence presence, over the
- * roster the step reads: the chair's ruling PW1 of 2026-11-16); where the roster holds none of the force a line names, its
- * twin says what is true of a place with no such force. No draw: the lines are fixed and the choice is the step's own.
+ * against the FINAL roster's defence atoms (`domain/facts/defence.js :: defenceOf`, THE ONE READER of the defence presence: the
+ * chair's ruling PW1 of 2026-11-16); where the roster holds none of the force a line names, its twin says what is true of
+ * a place with no such force. No draw: the lines are fixed and the choice is the step's own.
+ *
+ * ⛔ R-Q / R-U (CENSUS-5c, tests/generators/census5cMilitiaReword.test.js): a militia is NOT settled at the power step (33
+ * of 1,000 births gain one after it), so the step's own roster may not key a line that presumes one. The atoms are read
+ * ONLY when the caller hands the settled ones (`projection.forces`, the late replay's); without them the line prints
+ * as the step chose it. Measured at the tip with the step's roster (the batch taken back for this law): every one of
+ * the 14 twins in the 1,080 towns agreed with the final roster.
  *
  * Pure: no randomness, no clock; it returns a line and writes nothing.
  */
-
-import { defenceOf } from '../../domain/facts/defence.js';
 
 /** @typedef {{ garrison?: boolean, militia?: boolean, watch?: boolean, mercenary?: boolean }} ForceFacts */
 
@@ -36,27 +40,11 @@ const FORCE_LINES = Object.freeze([
 /**
  * The military description as the roster bears it: the line itself where the roster holds a force it names, else its twin.
  * @param {string} line the description the step chose
- * @param {unknown} institutions the roster the step reads (its native institutions)
+ * @param {ForceFacts | null | undefined} forces the SETTLED roster's defence atoms (`defenceOf(settlement)`), or none
  * @returns {string}
  */
-export function forceLineOf(line, institutions) {
+export function forceLineOf(line, forces) {
   const row = FORCE_LINES.find((r) => typeof line === 'string' && line.startsWith(r.opens));
-  if (!row) return line;
-  /** @type {ForceFacts} */ const facts = defenceOf({ institutions });
-  return row.needs.some((k) => facts[k] === true) ? line : row.twin;
-}
-
-// ── THE STABILITY'S "UNDERFUNDED" READS THE PURSE THE PROSPERITY LINE READS (BAR5-POWERS, LAW 1d; the audit's C32519: one
-// town in 1,080) ──────────────────────────────────────────────────────────────────────────────────────────────────────────
-// `governanceNarrative.js` writes "Tense (militarised, chronically underfunded)" from the forces' funding gate alone; the
-// economy desk's prosperity line (DS-ECO-8) reads `economicState.prosperity` and, from Moderate up, says the town pays its
-// own way. Where the town's purse is Moderate or better the word keeps "militarised" and claims no underfunding.
-/** The prosperity bands whose line says the town has money in hand. */
-const PURSE_IN_HAND = Object.freeze(['Moderate', 'Comfortable', 'Prosperous', 'Wealthy']);
-/**
- * @param {unknown} stability the stability word the step wrote @param {unknown} prosperity `economicState.prosperity`
- * @returns {unknown}
- */
-export function stabilityReadsPurse(stability, prosperity) {
-  return stability === 'Tense (militarised, chronically underfunded)' && PURSE_IN_HAND.includes(String(prosperity)) ? 'Tense (militarised)' : stability;
+  if (!row || !forces || typeof forces !== 'object') return line;
+  return row.needs.some((k) => forces[k] === true) ? line : row.twin;
 }
