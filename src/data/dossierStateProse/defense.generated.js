@@ -2927,7 +2927,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "tier: ≥ village"
           ],
-          "text": "A crisis now governs the streets of {settlement}, and the town's usual safety no longer holds.",
+          "text": "A crisis now governs the streets of {settlement}, and the place's usual safety no longer holds.",
           "slots": [
             "settlement"
           ],
@@ -3013,7 +3013,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "tier: ≥ village"
           ],
-          "text": "With the town under siege, quarrels over rations and theft of food are the trouble on {settlement}'s streets now.",
+          "text": "With {settlement} under siege, quarrels over rations and theft of food are the trouble on its streets now.",
           "slots": [
             "settlement"
           ],
@@ -3142,7 +3142,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "guardPresence",
             "tier: ≥ village"
           ],
-          "text": "Fighting between the rebels and the town's guards has closed whole streets of {settlement}.",
+          "text": "Fighting between the rebels and the guards has closed whole streets of {settlement}.",
           "slots": [
             "settlement"
           ],
@@ -4370,7 +4370,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "tier: ≥ village"
           ],
-          "text": "Criminal gangs at {settlement} keep a footing in the town, through the streets they hold or the businesses they front.",
+          "text": "Criminal gangs keep a footing at {settlement}, through the streets they hold or the businesses they front.",
           "slots": [
             "settlement"
           ],

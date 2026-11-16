@@ -3093,7 +3093,7 @@ reading rather than a settled one.
 3. `[visitor · tier: ≥ village]` Nobody at {settlement} warns visitors about particular streets, because the warning would cover all of them.
 
 **COMPOUND override (a crisis stress has rewritten the label)**
-1. `[street · tier: ≥ village]` A crisis now governs the streets of {settlement}, and the town's usual safety no longer holds.
+1. `[street · tier: ≥ village]` A crisis now governs the streets of {settlement}, and the place's usual safety no longer holds.
 2. `[street · tier: ≤ hamlet]` A crisis now governs daily life at {settlement}, and the place's usual safety no longer holds.
 3. `[ledger · watch]` The watch at {settlement} has set aside its usual rounds for the crisis, so the town's ordinary record of order no longer describes it.
 4. `[unfolding · watch]` Order at {settlement} is held under a pressure the watch was not built for, and how long it holds depends on how long the crisis lasts.
@@ -3113,7 +3113,7 @@ the ledger).
 4. `[ledger]` Only those holding the occupiers' passes may be out after dark at {settlement}, and anyone caught without one is taken in.
 
 **COMPOUND: active siege** {colour}
-1. `[street · tier: ≥ village]` With the town under siege, quarrels over rations and theft of food are the trouble on {settlement}'s streets now.
+1. `[street · tier: ≥ village]` With {settlement} under siege, quarrels over rations and theft of food are the trouble on its streets now.
 2. `[visitor]` Inside the siege at {settlement}, people guard their food and keep an eye on their neighbours.
 3. `[ledger]` The ration lists at {settlement} decide who eats while the siege lasts, and the quarrels over them are where the trouble starts.
 
@@ -3134,7 +3134,7 @@ the ledger).
 4. `[street · colour]` People at {settlement} keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.
 
 **COMPOUND: slave revolt**
-1. `[street · guardPresence · tier: ≥ village]` Fighting between the rebels and the town's guards has closed whole streets of {settlement}.
+1. `[street · guardPresence · tier: ≥ village]` Fighting between the rebels and the guards has closed whole streets of {settlement}.
 2. `[visitor · tier: ≥ village]` People at {settlement} keep away from the streets where the revolt is being fought, and nobody walks them after dark.
 3. `[ledger · colour]` Everyone at {settlement} who could keep order has gone to fight the revolt, so the rest of the town keeps its own order.
 
@@ -3295,7 +3295,7 @@ order: the black market, the thieves' guild, the smuggling network, the gangs (`
 2. `[street]` A smuggling network runs through {settlement}, and some of what is sold in the town never paid a toll.
 
 **FIXTURE: gangs** {colour}
-1. `[street · tier: ≥ village]` Criminal gangs at {settlement} keep a footing in the town, through the streets they hold or the businesses they front.
+1. `[street · tier: ≥ village]` Criminal gangs keep a footing at {settlement}, through the streets they hold or the businesses they front.
 2. `[ledger]` Whatever {settlement}'s gangs take in never appears on the tax lists, and the town is poorer by what they collect.
 
 ---
