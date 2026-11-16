@@ -659,8 +659,8 @@ const ROWS = [
       "The buyers who paid for the famous wine include people who would make the vintner pay for every cup"),
     S("Has been adding sweeteners to sour wine that make some drinkers ill",
       "The next person to fall sick after a cup would be traced back to the cellar"),
-    S("Bought the vineyard by lending its old owner money at a rate that could never be paid back",
-      "The old owner's children work in the vineyard now, and they know how their family lost it"),
+    S("Came by the business by lending its old owner money at a rate that could never be paid back", // BAR4-PEOPLE (C4412): no vineyard is claimed (none of the 58 printing towns of the 720 holds one)
+      "The old owner's children work for the new owner now, and they know how their family lost it"),
   ], [
     P("welcoming", "Generous and red-nosed, with a cup ready for anyone who steps into the cellar.",
       "Pours a taste, talks about the year's grapes and suggests a cask."),
@@ -1147,7 +1147,7 @@ const ROWS = [
     P("cautious", "Watches every ship that comes in and every crate that comes off.",
       "Asks what you carry and for whom; writes it down."),
     P("welcoming", "Cheerful and noisy, with news of every ship that has come and gone.",
-      "Talks about the ships, the weather and the cargoes; a good ear on the waterfront."),
+      "Talks about the ships, the weather and the cargoes; a good ear at the berths."), // BAR4-PEOPLE (C23720, WEAK): the berths, whatever they front (6 of 32 printing towns have no water)
   ]],
   ["the chronicler", 138, [
     S("Changes the chronicle for families who pay to have their past written kinder",

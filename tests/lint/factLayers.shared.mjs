@@ -103,6 +103,8 @@ export function leafTouches(row, record, modules, stratumOf) {
     else if (getter === 'hasInstitution') for (const kind of INSTITUTION_PROBES) facts.hasInstitution(kind);
     else if (getter === 'hasOtherNpc') facts.hasOtherNpc(Array.isArray(record.npcs) ? record.npcs[0] : 0);
     else if (getter === 'sharesPower') facts.sharesPower(Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []); // R2-CODE-A-14 (s1): a pair of the roster
+    // BAR4-PEOPLE (the chair's TI1): the two pair facts of pairPlace.js, asked of a pair of the roster
+    else if (getter === 'sharesPlace' || getter === 'pairTieCount') facts[getter](Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []);
   } else if (row.call === 'perChain' || row.call === 'perHouse') {
     // the chain a leaf reads is read through the view; the house NAMES a card asks about are the walker's own
     // argument, taken from the raw record, so asking costs the leaf no read of the economy

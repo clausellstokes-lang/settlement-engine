@@ -30,6 +30,7 @@ import { rivalPowerOf } from './rivalPower.js';
 import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
+import { pairSharesPlaceOf, pairTieCountOf } from './pairPlace.js'; // BAR4-PEOPLE (TI1)
 import { pairSharesPower } from './sharedPower.js';
 import { faithReadingOf } from '../dossier/faithReading.js';
 import { guildOf } from './guild.js';
@@ -109,6 +110,10 @@ export function factsOf(record, options = {}) {
     hasOtherNpc: (/** @type {number | object} */ npc) => hasOtherNpc(record, npc),
     /** R2-CODE-A-14 (the chair's ruling (s1), 2026-11-14): the two cards a pair line names share a power (`sharedPower.js`) */
     sharesPower: (/** @type {unknown} */ pair) => pairSharesPower(record, pair),
+    /** BAR4-PEOPLE (the chair's ruling TI1, 2026-11-16): the first card of a pair may name the second its successor (`pairPlace.js`) */
+    sharesPlace: (/** @type {unknown} */ pair) => pairSharesPlaceOf(record, pair),
+    /** BAR4-PEOPLE (TI1): the ties the record holds between the two cards of a pair (`pairPlace.js`) */
+    pairTieCount: (/** @type {unknown} */ pair) => pairTieCountOf(record, pair),
     // ── CENSUS-3b unit 1 (the chair's ruling R-E; the vocabulary rulings §2): DELEGATIONS to the
     // one canonical reader each — no field reader, no new logic. ──
     /** the food record's sources (`foodBalance.js :: deriveFoodRecord`), or undefined when it carries none */

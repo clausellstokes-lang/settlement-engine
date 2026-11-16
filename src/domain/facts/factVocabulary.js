@@ -208,6 +208,8 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {(pair: unknown) => boolean|undefined} [sharesPower]
+ * @property {(pair: unknown) => boolean|undefined} [sharesPlace] BAR4-PEOPLE (TI1): `pairPlace.js :: pairSharesPlaceOf`
+ * @property {(pair: unknown) => number|undefined} [pairTieCount] BAR4-PEOPLE (TI1): `pairPlace.js :: pairTieCountOf`
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
@@ -311,6 +313,16 @@ export const FACT_DIMENSIONS = Object.freeze({
   // about a bloc needs the pair to share a power; the draw hands the pair as `ctx.pair` (`[from, to]`).
   'shared power': dim({ shape: 'presence', home: 'sharesPower', needsContext: 'pair',
     reader: (f, _key, ctx) => (typeof f.sharesPower === 'function' && ctx && 'pair' in ctx ? f.sharesPower(ctx.pair) : undefined) }),
+  // BAR4-PEOPLE, THE CHAIR'S RULING TI1 of 2026-11-16 (vetoable by the owner): two more PAIR facts (`pairPlace.js`), read by
+  // the tie draw. `shared place`: the first card may name the second its successor (one house's trade or face, or the head's
+  // seat of a power the second sits in). `lone tie`: the two carry no other tie (a line that says they do not speak).
+  'shared place': dim({ shape: 'presence', home: 'sharesPlace', needsContext: 'pair',
+    reader: (f, _key, ctx) => (typeof f.sharesPlace === 'function' && ctx && 'pair' in ctx ? f.sharesPlace(ctx.pair) : undefined) }),
+  'lone tie': dim({ shape: 'presence', home: 'pairTieCount', needsContext: 'pair',
+    reader: (f, _key, ctx) => {
+      const n = typeof f.pairTieCount === 'function' && ctx && 'pair' in ctx ? f.pairTieCount(ctx.pair) : undefined;
+      return typeof n === 'number' ? n <= 1 : undefined;
+    } }),
   // TAIL-TIES, THE CHAIR'S RULING (T5) of 2026-11-14 ("THE WORD IS GRANTED"; vetoable by the owner): ONE atom, the
   // town is ruled by a BODY OF MORE THAN ONE (`rulingBody.js :: rulingBodyOf`, hookTruth.js's `ruledByCouncil` rule
   // moved to its home). A line about THE council (a session, a vote of it, "the council has asked") needs it: under a

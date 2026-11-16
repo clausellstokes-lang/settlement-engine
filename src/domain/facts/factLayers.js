@@ -162,6 +162,9 @@ export const LEAVES = Object.freeze({
   hasOtherNpc: home('hasOtherNpc', 4, ['npcs'], { call: 'factsCall' }),
   // R2-CODE-A-14 (the chair's ruling (s1)): a PAIR's fact — the two cards' memberships (the cast, layer 3)
   sharesPower: home('sharesPower', 4, ['npcs'], { call: 'factsCall' }),
+  // BAR4-PEOPLE (the chair's ruling TI1): two more PAIR facts (`pairPlace.js`): the two cards' houses and ranks; the ties between them
+  sharesPlace: home('sharesPlace', 4, ['npcs'], { call: 'factsCall' }),
+  pairTieCount: home('pairTieCount', 4, ['relationships'], { call: 'factsCall' }),
   magicPractitioners: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'magicPractitioners', call: 'record', reads: ['institutions', 'npcs'] }),
   magicReliance: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'deriveMagicReliance', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'] }),
   magicSource: leaf({ layer: 4, module: 'domain/facts/magicSource.js', exported: 'magicSourceOf', call: 'record', reads: ['config', 'economicState', 'economicViability', 'institutions', 'npcs'],
