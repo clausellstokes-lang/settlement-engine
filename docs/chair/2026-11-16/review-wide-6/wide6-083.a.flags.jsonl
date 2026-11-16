@@ -1,0 +1,6 @@
+{"id":"C193677","town":"bar0-town-occupied-rand-38","sev":"LOW","kind":"PAIR","why":"Systems Health 'Economic Resilience · Adequate' against Foundations 'Economic capacity · Critical' and prosperity Struggling","other":"C193728"}
+{"id":"C193977","town":"bar0-town-occupied-rand-38","sev":"MED","kind":"PAIR","why":"'No trade access: running on existing stockpiles only' against header trade access 'isolated' with imports of Iron and Grain and 18% of food brought in","other":"C193692"}
+{"id":"C194173","town":"bar0-town-occupied-rand-38","sev":"MED","kind":"PAIR","why":"'no trade road reaches Roccafossae' against Food Security's 'carts bring in about half the rest' (616 lbs/day imported) and header imports of Iron and Grain","other":"C194159"}
+{"id":"C194447","town":"bar0-town-occupied-rand-38","sev":"MED","kind":"PAIR","why":"'ordinary theft has dropped' against the line before, 'Theft is rising even under the curfew', and the crime-wave tension 'Crime is rising faster than those in charge can answer'","other":"C194446"}
+{"id":"C194531","town":"bar0-town-occupied-rand-38","sev":"MED","kind":"PAIR","why":"'11 institutions operating on stockpiles only (isolated trade)' against Food Security's 'carts bring in about half the rest' (616 imported) and header imports of Iron and Grain","other":"C194159"}
+{"id":"DONE","lines":1447,"blocks":1,"flags":5}
