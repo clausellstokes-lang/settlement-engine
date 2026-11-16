@@ -22,7 +22,7 @@ bar0-town-occupied-rand-22 timber, bar0-town-occupied-rand-21 answers, bar0-haml
 bar0-village-famine-rand-22 and -23 store, bar0-thorp-calm-rand-21 source). The 720's count was read both off the record and
 off the census's dumps (`printed`: each line found in the town's page text): the same instances. (My K2 line gave the source class as 24 / 6: that was a narrower first reading, by the holding's description words; the chair's FW1 reads the roster, 87 / 28.)
 
-**THE PAGE, NOT YET WHOLE FOR (vi)** (a question to the chair, 2026-11-16 ~08:55): the cure is in the one reader, but two callers hand it the economy alone and so keep the old frame: `src/components/new/tabs/EconomicsTab.jsx:306` (`foodwaysLineOf({ economicState: eco })`, `s` in scope) and `src/generators/steps/assembleSettlement.js:173` (the stored `culturalIdentity.foodways`). The PDF and the Foundry journal hand the record and print the cure. The economy's own roster stamp (`compound.inst.names`) is declared unreadable (`institutionRename.js`).
+**THE PAGE WHOLE FOR (vi): BATCH 3 (the chair's ruling FW1b, 08:55).** Two callers handed the reader the economy alone and so kept the old frame (the economy's own roster stamp, `compound.inst.names`, is declared unreadable by `institutionRename.js`). Each is now ONE argument on its own line, no line added, moved or re-wrapped: the Economics tab (`src/components/new/tabs/EconomicsTab.jsx`, the `foodwaysLine` const) hands `s ? { ...s, economicState: eco } : { economicState: eco }`; the assembly (`src/generators/steps/assembleSettlement.js`, the `culturalIdentity` entry of the record's literal) hands `{ institutions, economicState }`. WHY THAT ROSTER IS THE FINAL ONE: it is the array the same literal stores as `settlement.institutions` (through `fishTradeTwinned`, which rewrites descriptions only), and neither the assembly after it (the late re-reads change descriptions and labels, never a house's name or liveness) nor the pipeline after assembly (`generateSettlementPipeline.js` reads `settlement.institutions`, never reassigns it) changes which houses stand. The guard's (d) proves on a constructed record that the tab's call, the PDF's and Foundry's call (`foodwaysLineOf(settlement)`) and the stored identity print one line, and over the 720 that the stored identity IS the reader's line.
 
 ## The rows
 
@@ -36,7 +36,7 @@ off the census's dumps (`printed`: each line found in the town's page text): the
 | C48079 | bar0-village-famine-rand-23 | STANDS (band famine) | the same |
 | C33207 | bar0-thorp-calm-rand-21 | STANDS (a split in the record: `foodLand.js` counts grain only off grain fields; the roster's Subsistence farming tills for the table) | batch 2, the chair's ruling FW1: `foodways.js :: tilledOneFrame`: where a live subsistence holding stands and the one source is not grain, the frame names both (the page's two callers above still owed) |
 
-## The cures (batch 1, 3cf213071; batch 2, FW1)
+## The cures (batch 1, 3cf213071; batch 2, FW1, d015e3041; batch 3, FW1b and the books' cures, the final push)
 
 - `src/data/institutionDescVariants.js`: the Town crier's pair reworded (no pronoun); `DESC_VARIANT_DECLARATIONS` re-keyed to
   the new texts (needs `market`, as before). `DESC_LATE_SIBLINGS` 8 → 11: the commercial sawmill's two lines (`needs: timber at
@@ -44,13 +44,17 @@ off the census's dumps (`printed`: each line found in the town's page text): the
   twin. Resolved by the existing late re-read (`assembleSettlement.js :: readHouseDescsLate`, untouched). The city-state's
   "no higher lord" lines were measured and left: no occupied town of the 1,050 holds a City-state government.
 - `src/data/institutionDescColour.js`: the two sawmill lines leave the colour column (they now declare).
-- `src/data/cultureProfiles.js`: `FOODWAYS_PRINT_SIBLINGS` (three sets, keyed off the profile rows' own texts): the market
-  vendors (latin) and market supply (greek) lines, `excludes: crisis: under_siege`; the harvest line (slavic), `needs: food: >
-  deficit`. The draw never reads it (no pick moves).
+- `src/data/foodwaysPrintSiblings.js` (NEW, a zero-import leaf): `FOODWAYS_PRINT_SIBLINGS` (three sets, keyed by the
+  profile rows' own texts, held equal to them by the guard's (e)): the market vendors (latin) and market supply (greek)
+  lines, `excludes: crisis: under_siege`; the harvest line (slavic), `needs: food: > deficit`. The draw never reads it (no
+  pick moves). Batches 1 and 2 kept it in `cultureProfiles.js`; the build's boot smoke and `cultureProfilesLazy` (FP-G16:
+  the culture corpus off first paint; LAWS) went red because the eager reader then pulled the corpus into first paint:
+  moved to the leaf in batch 3, `cultureProfiles.js` is again byte-identical to the base.
 - `src/domain/foodways.js :: foodwaysLineOf` (the one reader): resolves each sentence of the line against that table
-  (`resolveSiblingSentences`) over `factsOf` of the record handed; where a caller hands the economy alone (the Economics tab,
-  the identity record at assembly) the food security's own `hasSiege` / `hasFamine` stand in as the stress container
-  (`withFoodCrises`), so the tab and the PDF read one answer.
+  (`resolveSiblingSentences`) over the food record's own readings (`foodwaysFactsOf`: `foodSecurity.hasSiege` /
+  `hasFamine` and `foodRecord.band`), spelled there because this module rides the eager engine core and the fact homes
+  (`factsOf.js`, `crisisKind.js`, `famine.js`) are pinned lazy (`engineCoreLazyEdge`, a law: a first draft read `factsOf`
+  and turned it red; cured before the push).
 - BATCH 2 (FW1): `src/domain/foodways.js`: `FRAMES.oneTilled` (two frames, the 'one' frame's index kept) and `tilledOneFrame`, applied in `foodwaysLineOf` after the famine's reading, over the record's live roster (`liveInstitutions`, `nativeSemanticName`); `foodLand.js` untouched.
 - NEW VOCABULARY (amendment 5b): the atom `timber at hand` beside `iron at hand` (`factVocabulary.js`), its getter
   (`factsOf.js`), its layer row (`factLayers.js`, layer 2 over `economicState`), its home `src/domain/facts/timberAtHand.js`:
@@ -62,10 +66,7 @@ off the census's dumps (`printed`: each line found in the town's page text): the
 - Tests: the guard (new); `houseDescLateReRead.test.js` (the table's length 8 → 11, dated note); `tierNounPoolDraws.test.js`
   (a late twin is a pool line, as a draw-time twin is).
 
-DECLARED MOVE (record; batch 2 moves no record: it is read where the line prints): 25 of the census's 720 records (institutions 18, culturalIdentity 7); 19 of the fresh 300
-(institutions 12, culturalIdentity 7). REFERENCE: 7 of the 525 configurations move against 8aef8e7d46 (institutions 4: four
-germanic plains towns' sawmill or crier; culturalIdentity 3: the slavic forest isolated thorp, hamlet and village, band
-deficit, take the harvest twin).
+DECLARED MOVE (record, at the final tip against 8aef8e7d46): 111 of the census's 720 records (institutions 18, culturalIdentity 93: `culturalIdentity.foodways`, the harvest and market twins and FW1's frame); 47 of the fresh 300 (institutions 12, culturalIdentity 35). REFERENCE: 74 of the 525 configurations (culturalIdentity 70, institutions 4: four germanic plains towns' sawmill or crier). (Batch 1 alone moved 7 of the 525: culturalIdentity 3, institutions 4.)
 
 ## The veto list (every new or changed line, three towns it is read in)
 
@@ -83,11 +84,11 @@ deficit, take the harvest twin).
    r2s-under_siege-city-0 (13,252), r2s-under_siege-metropolis-1 (70,862).
 7. "Food supply and the grain stores become politically charged as population grows." — prints in none of the 1,050 (a greek
    town under a siege); the state's twin.
-10. "Each holding grows for its own table, and beyond that its food is {A}." (FW1; 56 of the 1,050) — r2r-thorp-9 (20), bar0-thorp-calm-rand-21 (19, C33207's town), r2r-thorp-24 (occupied); thorps and hamlets only.
-11. "What each holding grows goes to its own table; beyond that, what it puts on the table itself is {A}." (FW1; 64) — r2r-thorp-3 (12), r2s-under_siege-hamlet-1 (57, siege), r2r-thorp-40 (occupied).
 8. "Fermentation, pickling, and drying are how the households make what food they have last." — r2s-under_siege-thorp-1 (16,
    siege), r2s-famine-hamlet-2 (famine), bar0-city-under_siege+famine-rand-107 (city).
-9. NEW VOCABULARY: the atom `timber at hand` (`facts/timberAtHand.js`).
+9. "Each holding grows for its own table, and beyond that its food is {A}." (FW1; 56 of the 1,050) — r2r-thorp-9 (20), bar0-thorp-calm-rand-21 (19, C33207's town), r2r-thorp-24 (occupied); thorps and hamlets only.
+10. "What each holding grows goes to its own table; beyond that, what it puts on the table itself is {A}." (FW1; 64) — r2r-thorp-3 (12), r2s-under_siege-hamlet-1 (57, siege), r2r-thorp-40 (occupied).
+11. NEW VOCABULARY: the atom `timber at hand` (`facts/timberAtHand.js`).
 
 ## The census (before at 8aef8e7d46, after at 3cf213071), read through the inventory diff
 
@@ -98,24 +99,47 @@ reworded crier lines above, each in exactly the towns that lost its original. (B
 census renders the Economics tab, which hands the economy alone, so its frame shows there only once the callers hand the
 record; measured off the record: 0 / 0.)
 
-## Gates and books at the tip (against 8aef8e7d46)
+## Gates and books at the final tip (against 8aef8e7d46, green whole by the chair's check)
 
-ATOM NAMESAKE (for the join: keep ONE): mine is `'timber at hand'` in `src/domain/facts/factVocabulary.js` (beside `'iron at hand'`, reader `f.timberAtHand`), the getter `timberAtHand` in `src/domain/facts/factsOf.js`, the layer row `timberAtHand` in `src/domain/facts/factLayers.js`, its one reader `src/domain/facts/timberAtHand.js :: timberAtHandOf` (the Timber & Lumber chain, `chainId: 'timber'`, working its own input); declared on two sets of `src/data/institutionDescVariants.js :: DESC_LATE_SIBLINGS` (the commercial sawmill's two lines) and read by the detector `tests/helpers/housePresumptions.js`. BAR4-SCENES' namesake is in `src/domain/facts/sceneSupply.js`.
+ATOM NAMESAKE (for the join: keep ONE): mine is `'timber at hand'` in `src/domain/facts/factVocabulary.js` (beside `'iron
+at hand'`, reader `f.timberAtHand`), the getter `timberAtHand` in `src/domain/facts/factsOf.js`, the layer row `timberAtHand`
+in `src/domain/facts/factLayers.js`, its one reader `src/domain/facts/timberAtHand.js :: timberAtHandOf` (the Timber &
+Lumber chain, `chainId: 'timber'`, working its own input); declared on two sets of `src/data/institutionDescVariants.js ::
+DESC_LATE_SIBLINGS` (the commercial sawmill's two lines) and read by the detector `tests/helpers/housePresumptions.js`.
+BAR4-SCENES' namesake is in `src/domain/facts/sceneSupply.js`.
 
-
-Run alone at the tip: the guard green (and red by a planted pronoun, not committed); `colourMarks4h`, `houseDescLateReRead`,
-`institutionProseDeclared`, `tierNounPoolDraws`, `wiringCensusDeclared`, `negativeAssertionAnchor`, `seedLoopTotality`,
-`proseDrawnAnchors` green; eslint on the touched files, `typecheck:domain:strict` (1113, ceiling 1113),
-`check:observed-shape-readers` green.
+RUN, at the tip: the 17 law suites, the three of BRIEF-BAR3's amendment 2 and the ten of BRIEF-BAR4's amendment 2 EACH
+ALONE (at the batch-2 tip, `laws-tip`), then every one of them again with the pinned set (79 files: the files that pin a
+symbol I changed) and the FW1b list (`sourceCitationIntegrity`, `regenDerivedState`, `generationForkRegistry.contract`,
+`foodwaysOneLine`, `r3c9`/`r3c10` reader lines, `cultureBlockTwoSurfaces`, `heldKeyWriterCensus`) in one run at the final
+tree (102 files), and every file red there, or touched since, ALONE again at the final tip. Green at the final tip: the
+guard, `engineCoreLazyEdge`, `wiringCensusDeclared`, `ruinFilterRoster` (111 → 112, a compliant reader, dated note),
+`chainPrintSites`, `sourceCitationIntegrity` (no test or register cites `assembleSettlement.js` by line), `regenDerivedState`,
+`generationForkRegistry.contract`, `foodwaysOneLine` (its oracle now the one reader: dated note), the three corpus walkers,
+`colourMarks4h`, `houseDescLateReRead`, `institutionProseDeclared`, `tierNounPoolDraws`, and every other law of the list.
+eslint on the touched files, `typecheck:domain:strict` (1113, ceiling 1113), `check:observed-shape-readers` green.
+LAWS MY CURES TURNED RED AND CURED BEFORE THE PUSH: `engineCoreLazyEdge` (the reader imported `factsOf`: now the food
+record's own readings), the boot smoke and `cultureProfilesLazy` (the table moved to a zero-import leaf), `ruinFilterRoster`
+(its count), `foodwaysOneLine` (its oracle).
+ONE BUILD and `verify:dist` at the final tip: build 0; BOOT SMOKE PASSES (plain and flagged); `verify:dist` refuses only on
+the stored figures below; `dist/` removed.
 
 ### The books my cures move (NAMED, not re-taken)
 
 | test / file | arm | old → new | door | why |
 |---|---|---|---|---|
-| `tests/lint/presumedThings.walker.test.js` | ARM 1 "every source literal that names a thing declares it" | 0 → 4 fresh | the close (PT3/PT4) | the crier's two REWORDED lines (`market`, `streets`, two each: each declares `needs: market`, as its banked rows did, and every town has streets: true wherever they print; measured in the 8 and 7 towns of the 1,050 that print them). Their 4 stale rows went out by `--shrink` in this commit. (The council's twin declares `crisis: occupied`: `ruler: occupier` occurs in none of the 1,050 without it) |
-| `tests/generators/generationForkCensus.test.js` | A4 the landing triples | cascade/isolation/factionCorrelation/coherenceRepair `institutions.producedOnRecord` same −4, transformed +4 | `src/domain/generation/generationForkRegistry.js` (the arm prints its fresh literal) | the late re-read now transforms the house descriptions of 4 golden towns |
-| `tests/property/generatorGoldenMaster.test.js` and the golden-derived files | the 525 | 7 of 525 | the owner's word | as above |
-| `docs/content/wiring-census.json` and the pool census's files | a new channel and its rows | (not re-taken) | the close | `FOODWAYS_PRINT_SIBLINGS`, the late sets, the reworded crier lines |
+| `tests/lint/presumedThings.walker.test.js` | ARM 1 "every source literal that names a thing declares it" | 0 → 6 fresh | the close (PT3/PT4) | (a) the crier's two REWORDED lines (`market`, `streets`, two each: each declares `needs: market` as its banked rows did, and a town has streets: true wherever they print, in 8 and 7 towns of the 1,050); their 4 stale rows went out by `--shrink` in batch 1. (b) the leaf's two market KEYS (`foodwaysPrintSiblings.js`): match keys spelled again for the culture's two market rows, which declare `needs: market` in their profile and are admitted at the draw only where a market stands; the leaf prints its twins, never its keys. |
+| `tests/generators/generationForkCensus.test.js` | A4 the landing triples | `institutions.producedOnRecord` same −4, transformed +4 on the four late passes (cascade, isolation, factionCorrelation, coherenceRepair) | `src/domain/generation/generationForkRegistry.js` (the arm prints its fresh literal) | the late re-read now transforms the house descriptions of 4 golden towns |
+| `tests/generators/pipelinePinnedMode.test.js` | A1, A2, A5 (golden rows) | 4 of its 41 golden rows | the golden door (the owner's word) | the same records as the 525 |
+| `tests/property/generatorGoldenMaster.test.js` and the golden-derived files | the 525 | 74 of 525 (culturalIdentity 70, institutions 4) | the owner's word | the declared move |
+| `tests/lint/proseWiringCensus.walker.test.js` | car 0 and car 5b (the committed census current) | stale bytes | `docs/content/wiring-census.json` and the pool census's files (the close) | a new channel (`FOODWAYS_PRINT_SIBLINGS`), the late sets, the reworded crier lines |
+| `tests/lint/mutationCoverageManifest.test.js` | the new guard file | unregistered | `scripts/mutation-coverage-manifest.json` (the close) | registration owed, below |
+| `tests/build/engineBundleReplay.test.js`, `engineServiceCore.test.js`, `engineServiceStoreParity.test.js` (verify:dist) | the committed engine bundle | 74 of 525 rows, 75 of 360 fence settlements, 1 of 3 cases, 1 seed and the derive arm differ | `npm run build:edge-shared` and commit the bundle (the close) | the bundle is stale against the declared move |
+| `tests/build/generationWorkerLazy.test.js` (verify:dist) | the worker bundle's ceiling | 2,322,103 → 2,326,760 B (+4,657) | the ceiling's door (the chair's ruling B3 form) | the cures' code and text (the atom, the reader, the late sets, the leaf) in the worker |
+| `tests/build/vendorPdfLazy.test.js` (verify:dist) | first-paint closure raw / gzip / Brotli; the engine chunk's bound | 1,132,308 → 1,134,786 (+2,478); 360,756 → 361,520 (+764); 302,830 → 303,504 (+674); engine chunk 878,554 → 878,577 (+23) | the budget's door | `foodways.js` rides the eager engine core: its two print-time readings and the leaf's six sentences |
+
+REFERENCE: 74 of the 525 configurations move against 8aef8e7d46 (culturalIdentity 70: `culturalIdentity.foodways`, the
+harvest twin in band-deficit slavic towns and FW1's frame in subsistence thorps and hamlets; institutions 4).
 
 ## Registrations owed
 
@@ -126,9 +150,13 @@ Run alone at the tip: the guard green (and red by a planted pronoun, not committ
 
 ## What is left, in order
 
-1. FW1 on the page: the Economics tab's and the assembly's calls hand the economy alone (the chair's ruling awaited).
-2. The books above (the close's doors).
-3. (This section is completed at the final push with the wide net's results.)
+1. Nothing of the worklist: every row cured; every class 0 in the 720 and in the fresh 300 (off the record; the 720's
+   batch-1 after census read through the inventory diff, above).
+2. The books above, for the close's doors (none re-taken here); the manifest entry owed.
+3. For the join: ONE `timber at hand` (mine and BAR4-SCENES'); BAR4-CORPUS-ECO's "leans first on its hunting" (C33209) is
+   the sibling of FW1 in the same towns (the chair's note).
+4. Not measured by a census render at the final tip: batches 2 and 3 print on the tab only through the callers FW1b
+   changed; the record-level detector reads 0 and the guard's (d) proves the surfaces agree.
 
 ## Instruments
 

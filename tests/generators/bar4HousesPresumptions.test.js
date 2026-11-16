@@ -19,7 +19,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { DESC_LATE_SIBLINGS } from '../../src/data/institutionDescVariants.js';
-import { FOODWAYS_PRINT_SIBLINGS } from '../../src/data/cultureProfiles.js';
+import { FOODWAYS_PRINT_SIBLINGS } from '../../src/data/foodwaysPrintSiblings.js';
+import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 import { foodwaysLineOf } from '../../src/domain/foodways.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -84,6 +85,29 @@ describe('BAR4-HOUSES H1: a house\'s description and the foodways line presume n
   it.each(CONTROLS)('(b) the positive control of class %s: fires in the false state, silent in the true one', (cls, falseState, falseOpts, trueState, trueOpts) => {
     expect(housePresumptionsOf(falseState, falseOpts).map((i) => i.cls)).toEqual([cls]);
     expect(housePresumptionsOf(trueState, trueOpts).map((i) => i.cls)).toEqual([]);
+  });
+
+  it('(d) the surfaces agree (the chair\'s FW1b): the tab\'s call, the PDF\'s and Foundry\'s call and the stored identity print one line', () => {
+    // a constructed record: a thorp of game, a Subsistence farming house, no grain (C33207's state)
+    const rec = { tier: 'thorp', institutions: [{ name: 'Subsistence farming', desc: 'Each family tills a small holding, all of it for the table.' }], npcs: [],
+      economicState: { activeChains: [], foodSecurity: { foodRecord: { band: 'secure', foodSources: ['game'], failedSource: null, foodwaysLine: 'Its own food is game from the woods.' } } } };
+    const tab = foodwaysLineOf({ ...rec, economicState: rec.economicState }); // EconomicsTab.jsx: `s ? { ...s, economicState: eco } : …`
+    const pdfAndFoundry = foodwaysLineOf(rec); // IdentityDailyLife.jsx, journalPages.js: the record
+    const stored = foodwaysLineOf({ institutions: rec.institutions, economicState: rec.economicState }); // assembleSettlement.js (the culturalIdentity call): the roster and the economy
+    expect(tab).toBe('Each holding grows for its own table, and beyond that its food is game from the woods.');
+    expect(pdfAndFoundry).toBe(tab);
+    expect(stored).toBe(tab);
+    // and over the 720 the stored identity is the reader's own line
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const s = born(seed);
+      if (s.culturalIdentity && foodwaysLineOf(s)) expect(s.culturalIdentity.foodways).toBe(foodwaysLineOf(s));
+    });
+    expectNoSeedFailures(failures, 'the stored foodways identity is the line the surfaces print');
+  }, 600000);
+
+  it('(e) each key of the print-time foodways table is a culture profile\'s own foodways row, spelled once more', () => {
+    const rows = new Set(Object.values(CULTURE_PROFILES).flatMap((p) => p.foodways.map((/** @type {any} */ r) => (typeof r === 'string' ? r : r.text))));
+    expect(Object.keys(FOODWAYS_PRINT_SIBLINGS).filter((k) => rows.has(k))).toEqual(Object.keys(FOODWAYS_PRINT_SIBLINGS));
   });
 
   it('(c) the keeps: each cured original still prints in the 720 where its town makes it true, its twin where it does not', () => {

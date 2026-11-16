@@ -170,7 +170,7 @@ registerStep('assembleSettlement', {
     // the same local expression of the culture choice. culturalNotes keeps the
     // established PDF/AI compatibility field while the structured record gives
     // future engineers the seven explicit dimensions behind it.
-    culturalIdentity: culturalIdentity && foodwaysLineOf({ economicState }) ? Object.freeze({ ...culturalIdentity, foodways: foodwaysLineOf({ economicState }) }) : culturalIdentity, // URBAN-FIX C-1 ONE HOME: where the food record exists the stored foodways line IS the record's composed line (domain/foodways.js), the one the page prints; draw-free
+    culturalIdentity: culturalIdentity && foodwaysLineOf({ institutions, economicState }) ? Object.freeze({ ...culturalIdentity, foodways: foodwaysLineOf({ institutions, economicState }) }) : culturalIdentity, // URBAN-FIX C-1 ONE HOME: where the food record exists the stored foodways line IS the record's composed line (domain/foodways.js), the one the page prints; draw-free
     culturalNotes: culturalNotesFor(culturalIdentity),
     // Tier 1.2 — dual-write the stress array under both the legacy
     // `stress` name AND the canonical `stressors` name. Consumers that

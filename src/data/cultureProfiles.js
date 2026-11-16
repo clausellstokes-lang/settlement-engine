@@ -620,41 +620,6 @@ export const CULTURE_LINE_SIBLINGS = Object.freeze({
   ]),
 });
 
-/**
- * BAR4-HOUSES (kind H1 (iv) and (v), REVIEW-BAR-4 C19810, C47050, C48079, 2026-11-16; vetoable by the owner): A FOODWAYS
- * SENTENCE READ WHERE IT PRINTS. A culture's foodways sentence is chosen with the food record, where neither the crisis nor
- * the food's settled band is in the facts it is read with (`foodGenerator.js :: cultureFoodwaysOf` hands the tier, the
- * roster and the configuration); THE ONE READER (`domain/foodways.js :: foodwaysLineOf`) resolves each sentence of the line
- * that is a key here against the record it prints from, and prints the twin where the original is refused. The draw never
- * reads this table (no pick moves); a key's own row in its profile keeps the declaration the draw reads (the market).
- *   · the market's vendors and its supply presume a market trading: under a siege nothing comes in to sell (C19810, a
- *     besieged hamlet's Periodic market "Stopped by the siege" beside its vendors);
- *   · the preserving that "stretch[es] the harvest through winter" presumes a harvest in store: refused where the food
- *     record's band is famine or deficit (C47050: three days in the larder; C48079: the harvest lost a second season).
- * Each twin says what is true in that state: the shared tables, the food supply argued over, the preserving the households
- * still do with what they have (the measure's rule 3: a town in want is told what it still has).
- * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, twinOf?: string }>>>>}
- */
-/** The three foodways rows read where they print, by their profile rows (one spelling; the market rows declare `market` there). */
-const foodwaysRow = (/** @type {string} */ key, /** @type {RegExp} */ pattern) => String(textOf(/** @type {any} */ (CULTURE_PROFILES)[key].foodways.find((/** @type {unknown} */ r) => pattern.test(String(textOf(/** @type {any} */ (r))))) ?? ''));
-const MARKET_VENDORS = foodwaysRow('latin', /^Market vendors/);
-const MARKET_SUPPLY = foodwaysRow('greek', /^Market supply/);
-const HARVEST_KEPT = foodwaysRow('slavic', /stretch the harvest/);
-export const FOODWAYS_PRINT_SIBLINGS = Object.freeze({
-  [MARKET_VENDORS]: Object.freeze([
-    Object.freeze({ text: MARKET_VENDORS, excludes: Object.freeze(['crisis: under_siege']) }),
-    Object.freeze({ text: 'Shared dining customs make food distribution visibly civic.', twinOf: MARKET_VENDORS }),
-  ]),
-  [MARKET_SUPPLY]: Object.freeze([
-    Object.freeze({ text: MARKET_SUPPLY, excludes: Object.freeze(['crisis: under_siege']) }),
-    Object.freeze({ text: 'Food supply and the grain stores become politically charged as population grows.', twinOf: MARKET_SUPPLY }),
-  ]),
-  [HARVEST_KEPT]: Object.freeze([
-    Object.freeze({ text: HARVEST_KEPT, needs: Object.freeze(['food: > deficit']) }),
-    Object.freeze({ text: 'Fermentation, pickling, and drying are how the households make what food they have last.', twinOf: HARVEST_KEPT }),
-  ]),
-});
-
 export const CULTURE_PROFILE_KEYS = Object.freeze(Object.keys(CULTURE_PROFILES));
 
 const CULTURE_ALIASES = Object.freeze({

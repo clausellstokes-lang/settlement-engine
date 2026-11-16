@@ -89,7 +89,7 @@ export const DECLARATION_CHANNELS = Object.freeze([
   // census unless its rows are already censused through another declared channel): the culture's small-place twins
   // (W2-FIX-DATA-2, 4101e30a1) PRINT, in the identity, the arrival and the PDF, and no other channel holds their text.
   { module: 'src/data/cultureProfiles.js', name: 'CULTURE_LINE_SIBLINGS', kind: 'siblings' },
-  { module: 'src/data/cultureProfiles.js', name: 'FOODWAYS_PRINT_SIBLINGS', kind: 'siblings' }, // BAR4-HOUSES (H1 (iv), (v)): the foodways sentences read where they print (domain/foodways.js :: foodwaysLineOf)
+  { module: 'src/data/foodwaysPrintSiblings.js', name: 'FOODWAYS_PRINT_SIBLINGS', kind: 'siblings' }, // BAR4-HOUSES (H1 (iv), (v)): the foodways sentences read where they print (domain/foodways.js :: foodwaysLineOf)
   { module: 'src/data/npcData.js', name: 'NPC_HOOK_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/powerData.js', name: 'FACTION_NAME_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/powerSiblings.js', name: 'BASELINE_CONFLICT_SIBLINGS', kind: 'siblings' },
