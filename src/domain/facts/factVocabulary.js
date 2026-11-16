@@ -350,9 +350,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   // kiln trade split by what its kilns fire, beside `kilns`: `clay kilns` (a potter, a brickmaker) and `charcoal kilns` (a
   // charcoal burner), each unanswered where no house of its kind stands (`tradeAtWork.js :: KILN_KINDS`)
   // BAR6-SCENES (LAW 6 rule 6b; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary): the GOODS a scene
-  // shows, beside the trades: `dairy`, `cloth`, `ironwork`, `herbs`, `spice`, `cut stone`, `enchanting`, each read from the page's
+  // shows, beside the trades: `dairy`, `cloth`, `ironwork`, `herbs`, `spice`, `cut stone`, each read from the page's
   // own lists (`tradeAtWork.js :: GOOD_TRADES`): "Someone is churning butter" beside "Common grazing land" and no dairy
-  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone', 'enchanting'],
+  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.tradeAtWork === 'function' && key ? f.tradeAtWork(key) : undefined) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
   // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
@@ -428,7 +428,7 @@ export const FACT_DIMENSIONS = Object.freeze({
   // BAR6-SCENES (LAW 6 rule 6b "out"; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beneath
   // `exports`: `exported: <good>`, the export list names the good a scene sends out (`goodExported.js`): "Bolts of cloth and
   // bales of wool fill the carts waiting on the road out." beside exports that carry no cloth (bar0-city-wartime-rand-27)
-  exported: dim({ shape: 'presence', home: 'goodExported', keys: ['cloth', 'flour', 'hides', 'ale', 'pots', 'arms'],
+  exported: dim({ shape: 'presence', home: 'goodExported', keys: ['cloth', 'flour', 'hides', 'ale', 'arms'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.goodExported === 'function' && key ? f.goodExported(key) : undefined) }),
   culture: dim({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.culture === undefined ? undefined : f.culture === key) }),

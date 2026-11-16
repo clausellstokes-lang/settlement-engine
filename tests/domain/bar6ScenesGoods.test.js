@@ -171,8 +171,6 @@ describe('the facts the cure made', () => {
     expect(tradeAtWorkOf({ institutions: [{ name: 'Stone quarry' }] }, 'cut stone')).toBe(true);
     expect(tradeAtWorkOf({ institutions: [], economicState: { primaryImports: ['Spices'] } }, 'spice')).toBe(true);
     expect(tradeAtWorkOf({ institutions: [], economicState: { primaryImports: ['Spices'] }, stress: [{ type: 'under_siege' }] }, 'spice')).toBe(false);
-    expect(tradeAtWorkOf({ institutions: [], economicState: { activeChains: [{ status: 'operational', outputs: ['Enchanting services'] }] } }, 'enchanting')).toBe(true);
-    expect(tradeAtWorkOf({ institutions: [], economicState: { activeChains: [{ status: 'impaired', outputs: ['Enchanting services'] }] } }, 'enchanting')).toBe(false);
     expect(goodExportedOf({ economicState: { primaryExports: ['Raw wool'] } }, 'cloth')).toBe(true);
     expect(goodExportedOf({ economicState: { primaryExports: ['Sacred wood'] } }, 'cloth')).toBe(false);
     expect(legitimacyCrisisOf({ powerStructure: { publicLegitimacy: { isLegitimacyCrisis: true } } })).toBe(true);

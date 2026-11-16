@@ -21,7 +21,6 @@ export const EXPORTED_GOODS = Object.freeze({
   flour: /\b(flour|grain|bread|baked)\b/i,
   hides: /\b(hides?|leather|pelts?|furs?)\b/i,
   ale: /\b(ale|beer|mead|malt|cider)\b/i,
-  pots: /\b(pots?|pottery|ceramics?|earthenware|crockery|glass\w*)\b/i,
   arms: /\b(weapons?|armou?r|blades?|swords?|spears?)\b/i,
 });
 
