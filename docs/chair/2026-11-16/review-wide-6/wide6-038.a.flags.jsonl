@@ -1,0 +1,10 @@
+{"id":"C94460","town":"bar0-hamlet-under_siege-rand-36","sev":"MED","kind":"STATE","why":"scene of a work party heading out singing with tools; header CRISIS Under Siege (enemies camped, nothing in or out, none has slept); unmarked ordinary-times scene","other":"C94490"}
+{"id":"C94583","town":"bar0-hamlet-under_siege-rand-36","sev":"MED","kind":"PAIR","why":"mill house 'Stopped by the siege.' but its row 'Grain milling (a day away)' printed on offer with no mark","other":"C94582"}
+{"id":"C94901","town":"bar0-hamlet-under_siege-rand-36","sev":"LOW","kind":"STATE","why":"says the siege legacy 'is a decade old'; PAST gives The Siege 14 years ago","other":"C94891"}
+{"id":"C95095","town":"bar0-hamlet-under_siege-rand-37","sev":"MED","kind":"PAIR","why":"mill house 'Stopped by the siege.' but its row 'Grain milling (a day away)' printed on offer with no mark","other":"C95094"}
+{"id":"C95134","town":"bar0-hamlet-under_siege-rand-37","sev":"MED","kind":"STATE","why":"'Meals and drink' (Food and ale) offered unmarked, beside Lodging stopped; header siege, no food comes in, deficit 62%, 'most households go short'","other":"C95202"}
+{"id":"C95205","town":"bar0-hamlet-under_siege-rand-37","sev":"LOW","kind":"LACKS","why":"'street kitchens' shape supply in a hamlet of 42; HOUSES has no kitchens or streets, only dwellings","other":""}
+{"id":"C95204","town":"bar0-hamlet-under_siege-rand-37","sev":"LOW","kind":"PAIR","why":"'the day's catch' goes on the table, unmarked; Fisher's landing 'Stopped by the siege' and 'almost no fish to work'","other":"C95063"}
+{"id":"C95446","town":"bar0-hamlet-under_siege-rand-37","sev":"LOW","kind":"PAIR","why":"Savita Choudhry's disposition 'incorruptible' against 'Takes the deal, then does as little as the deal allows' and the Power tab's 'a purse offered ... would not be turned away'","other":"C95447"}
+{"id":"C95709","town":"bar0-hamlet-under_siege-rand-38","sev":"MED","kind":"PAIR","why":"mill house 'Stopped by the siege.' but its row 'Grain milling (a day away)' printed on offer with no mark","other":"C95708"}
+{"id":"DONE","lines":1777,"blocks":3,"flags":9}
