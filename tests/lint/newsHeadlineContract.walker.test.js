@@ -162,7 +162,9 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 43/86/602/790 → 44/88/623/790 at the style wave's final tip (STYLE-2-MERGE-7, closing act 4; the causes at news-headline-contract.mjs).
     // 2026-11-15 (TAIL-CLOSE-SWEEP-A at the joined tip dc4bae117, six merge points' generator re-deals, at news-voice-contract.mjs's RE-RECORDED block):
     // 44/2/88/0/88/623/790 → 42/2/84/0/84/659/834; two homes in, four out. Every row stays indicative.
-    expect(baseline.addressTotality.totals).toEqual({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 659, occurrences: 834 });
+    // 2026-11-15 (BAR3-CLOSE-DOORS-1, the close of the round BAR3, the chair's ruling OC1, at news-headline-contract.mjs's ADDRESS_TOTALS):
+    // 42/2/84/0/84/659/834 → 42/2/84/0/84/660/834; no home or address in or out, four rows move a count. Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 660, occurrences: 834 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

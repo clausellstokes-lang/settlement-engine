@@ -197,7 +197,14 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 417, retirements: 
 // digest re-derived with the rows in the baseline by this library's own functions. RAW_LIVENESS below: mechanicalOutcomes 51/26 →
 // 53/26, selectedOutcomes 165/103 → 163/111, the union 216/103 → 216/111; zero prospective in both lanes; the 26 rewrite rows and
 // their totals do not move.
-const ADDRESS_TOTALS = Object.freeze({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 659, occurrences: 834 });
+// ── RE-RECORDED 2026-11-15 BY BAR3-CLOSE-DOORS-1 at c5d49d609 (the close of the round BAR3; the chair's ruling OC1, vetoable by the
+// owner), the same act as the prose-family baseline: no commit of the rounds BAR2, BAR3 touches the pulse, the news voice or this
+// library; the rounds' declared generation moves re-deal the observed corpus's year. NO HOME AND NO ADDRESS ARRIVES OR LEAVES, the
+// CORPUS 12/417/2/415/42 holds; four existing rows move a count: queued|neutral_to_rival headline 3/3 → 2/2, summary 1/3 → 1/2;
+// queued|strategy_sue_for_peace headline 3/3 → 4/4, summary 3/3 → 4/4. 42/2/84/0/84/659/834 → 42/2/84/0/84/660/834; every row stays
+// indicative; the digest re-derived with the rows in the baseline by this library's own functions (3d22d84b → 3b1e4ee5).
+// RAW_LIVENESS, the 26 rewrite rows and their totals do not move (A3 green before and after).
+const ADDRESS_TOTALS = Object.freeze({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 660, occurrences: 834 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([
