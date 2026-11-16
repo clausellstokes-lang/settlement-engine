@@ -1780,8 +1780,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} wants a cut of ${r.name}'s new venture before it opens. The fee was never meant to grow with the business.`, colour: true },
       { line: (r, s) =>
         `${r.name} missed this month's payment by three days. ${s.name} has not sent anyone yet, and that is worse.`, colour: true },
-      (r, s) =>
-        `${r.name} has written to the magistrate about ${s.name}'s collectors. The letter sits unsent in ${r.name}'s desk.`,
+      { line: (r, s) =>
+        `${r.name} has written to the magistrate about ${s.name}'s collectors. The letter sits unsent in ${r.name}'s desk.`, needs: ["court"] }, // BAR6-PEOPLE (LAW 5 widened, office): a magistrate sits only where a court does
       { line: (r, s) =>
         `${s.name}'s collector was found drunk with ${r.name}'s purse still sealed. Someone will have to explain the delay to ${s.name}.`, colour: true },
     ], ['economy', 'criminal']),
@@ -1845,8 +1845,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`, colour: true },
       { line: (r, s) => `${r.name} could end it with one blow, and keeps holding back. Nobody knows why.`, colour: true },
       { line: (r, s) => `Someone among ${r.name}'s people reports to ${s.name}. ${r.name} knows it, and does not know who.`, colour: true },
-      (r, s) =>
-        `${r.name} has a witness willing to name ${s.name} before a magistrate. ${s.name} knows where the witness lives.`,
+      { line: (r, s) =>
+        `${r.name} has a witness willing to name ${s.name} before a magistrate. ${s.name} knows where the witness lives.`, needs: ["court"] }, // BAR6-PEOPLE (LAW 5 widened, office): a magistrate sits only where a court does
       { line: (r, s) =>
         `${s.name} has offered ${r.name} a truce and a purse. ${r.name} has not answered, which ${s.name} counts as progress.`, colour: true },
       { line: (r, s) =>
@@ -2354,7 +2354,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `What first broke ${r.name} and ${s.name} apart is happening again, and both of them know it.`, colour: true },
       { line: (r, s) => `${r.name} and ${s.name} each think the other owes the apology.`, colour: true },
       { line: (r, s) => `A newcomer keeps trying to reconcile ${r.name} and ${s.name}, and is about to learn why nobody else does.`, colour: true },
-      (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
+      { line: (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`, needs: ["court"] }, // BAR6-PEOPLE (LAW 5 widened, office): a case is judged where a court sits
       { line: (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} have been handed the same dispute to settle together. The first meeting is next week.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },  // BAR2-PEOPLE (PP7): no council seat claimed for a card that holds none (70 of 95 ties); text only, the same admission

@@ -2344,5 +2344,14 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Loud and showy, proud of the school and its champions.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: plague_onset']) }),
     'Precise and busy, with a scale for letters and a ledger of every rider.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
     'Friendly and gossipy, with news of every road the riders take.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    // BAR6-PEOPLE (LAW 5 widened, the class `outside`; BRIEF-BAR6 B4): a face that meets travellers, caravans or a queue at its
+    // door NOW is no face of a besieged town, where nothing comes in by road; each title keeps another admitted line
+    'Bored and impatient. The line is long and every traveller has a story.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Watches every traveller coming and remembers them going.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Bored and glad of company, with gossip about everyone who has crossed this week.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Generous and talkative, with a courtyard full of camels, carts and travellers from far away.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Watches every caravan that comes in and remembers where it came from.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Friendly and well-informed, with news of every road and every caravan.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Watches every traveller and remembers where they came from.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
   }),
 });
