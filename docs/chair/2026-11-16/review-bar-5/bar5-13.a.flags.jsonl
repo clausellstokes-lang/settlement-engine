@@ -1,0 +1,7 @@
+{"id":"C31115","town":"bar0-town-calm-rand-24","sev":"MED","kind":"LACKS","why":"surf against 'the outer wall'; DEFENCE walls: none (a harbour mole is not named)","other":""}
+{"id":"C31652","town":"bar0-town-calm-rand-24","sev":"MED","kind":"PAIR","why":"grapes 'needed, and not brought in' (clay too), yet Vintner's Table wine/Wine wholesale print unmarked while Brickmaker's clay row is marked short","other":"C31531"}
+{"id":"C31780","town":"bar0-town-calm-rand-24","sev":"MED","kind":"LACKS","why":"military pushing for authority over 'civilian courts'; HOUSES lists no court, GOVERNMENT lists none","other":""}
+{"id":"C31972","town":"bar0-town-calm-rand-24","sev":"MED","kind":"PAIR","why":"'Nothing structural depends on arcane work' beside Reliance on magic: Present, Economic role common, Infrastructure role common; a teleportation circle runs","other":"C31966"}
+{"id":"C31975","town":"bar0-town-calm-rand-24","sev":"LOW","kind":"STATE","why":"viable 'only while grain keeps arriving'; ledger has 92% grown, imports 8%, six months in store, food Secure","other":""}
+{"id":"C32519","town":"bar0-town-calm-rand-24","sev":"MED","kind":"PAIR","why":"'pays its own way and has a little in hand', 'nothing asks to be remarked on' beside stability Tense (militarised, chronically underfunded) and an open quarrel","other":"C31109"}
+{"id":"DONE","lines":1568,"blocks":1,"flags":6}
