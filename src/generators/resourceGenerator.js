@@ -12,12 +12,12 @@ import {institutionHasAnyTag} from '../lib/entities.js';
 import {institutionDisplayName} from '../domain/display/institutionDisplayName.js';
 import {
   isMaterializedCustomContent,
-  nativeSemanticNames,
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
-import { hasTradeRouteConnection, waterAccessKind } from '../domain/tradeRouteSemantics.js';
+import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
 import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
+import { houseHead, houseInputAtHand, houseRunsChain, localProducerSupplies, terrainSynonymsFor } from '../domain/facts/houseInputAtHand.js';
 
 // ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
 // The terrain table (`TERRAIN_DATA`) says what a kind of ground usually lacks and yields. The town's
@@ -155,17 +155,8 @@ export const resolveNearbyCommodities = (config = {}, terrainType) => {
 // ("copper", "gemstone_deposits"). The plain substring join left four chains
 // matching NO terrain. This table bridges the two AT THE MATCHER — it never
 // renames the displayed rawResource.
-const RAW_RESOURCE_TERRAIN_SYNONYMS = {
-  'copper ore':      ['copper'],
-  'gold/silver ore': ['precious_metals'],
-  'gemstones':       ['gemstone_deposits'],
-  'glass sand':      ['glass_sand'],
-  // 'flax' and 'grapes' match their terrain-vocabulary tokens verbatim (no entry
-  // needed); 'animal hides' is the display name for the 'hides' token.
-  'animal hides':    ['hides'],
-};
-export const terrainSynonymsFor = (rawResource) =>
-  RAW_RESOURCE_TERRAIN_SYNONYMS[String(rawResource || '').toLowerCase()] || [];
+// The table's one home is `domain/facts/houseInputAtHand.js` (BAR4-RECORD R1: the house's input is matched by it there).
+export { terrainSynonymsFor };
 
 // Does a terrain's controlled vocabulary permit this raw resource? Preserves the
 // original substring rule ("timber" still matches "mountain_timber") and adds the
@@ -289,38 +280,9 @@ function availableResourceSatisfies(requirement, availableResources) {
   )) || liveMaterialFor(requirement, availableResources || []) !== null; // COHERENCE-AGREE: "metals" beside live iron, "fuel" beside coal or peat
 }
 
-const LOCAL_REQUIREMENT_PRODUCERS = Object.freeze([
-  {
-    requirement: /\b(?:grain|foodstuffs?|provisions?)\b/i,
-    institution: /\b(?:farm|farmland|subsistence|grain fields?|managed farmland|common fields?)\b/i,
-  },
-  {
-    requirement: /\b(?:timber|lumber|wood)\b/i,
-    institution: /\b(?:woodcutter|logging camp|managed forest)\b/i,
-  },
-  {
-    requirement: /\bstone\b/i,
-    institution: /\b(?:stone quarry|quarry)\b/i,
-  },
-  {
-    requirement: /\b(?:charcoal|fuel)\b/i,
-    institution: /\b(?:charcoal burner|peat cutter|coal mine)\b/i,
-  },
-  {
-    requirement: /\bsalt\b/i,
-    institution: /\b(?:salt works|salt pans?|brine works?)\b/i,
-  },
-]);
-
-function localInstitutionSupplies(requirement, institutions) {
-  const rule = LOCAL_REQUIREMENT_PRODUCERS.find(candidate => (
-    candidate.requirement.test(String(requirement || ''))
-  ));
-  if (!rule) return false;
-  return nativeSemanticNames(institutions).some(name => (
-    rule.institution.test(name)
-  ));
-}
+// The houses that produce a raw good here: one home, `domain/facts/houseInputAtHand.js :: localProducerSupplies` (BAR4-RECORD
+// R1: the gap writer and the page's gap reader read one table).
+const localInstitutionSupplies = (requirement, institutions) => localProducerSupplies(String(requirement || ''), institutions);
 
 const buildViabilityReport = (
   terrainType,
@@ -415,9 +377,7 @@ const buildViabilityReport = (
 const UNHOUSED_GOOD_MAKER = Object.freeze({ beer: 'brewer' });
 /** The chain a famine's failed source stops (foodBalance.js :: failedSource; the mill grinds the grain). */
 const FAILED_SOURCE_CHAIN = Object.freeze({ grain: 'grain', mill: 'grain', livestock: 'livestock', fish: 'fish' });
-/** A house name's head word, as a kind: lower case, no counts or possessives, no plural or -y ending. @param {unknown} name */
-const houseHead = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ')
-  .split(/[\s/]+/).find(Boolean) || '').replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
+// A house name's head word, as a kind: one home, `domain/facts/houseInputAtHand.js :: houseHead` (imported above).
 /** @param {string} name a house the chain names @param {any} chain @param {Array<{ name?: string }>} institutions */
 const houseStands = (name, chain, institutions) => institutions.some((inst) => inst?.name === name
   || (institutionSupportsChain(inst, chain) && houseHead(inst?.name) === houseHead(name)));
@@ -496,36 +456,24 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
 //                the economy's (computeActiveChains.js :: deriveImportsFromChains): no row here says "imported";
 //   'missing'  — none of these: the line as before.
 // A record entry's parenthetical is its reason ("Iron ore (local mines exhausted)"), not a good.
-const FOOD_STAPLE_INPUTS = new Set(['grain']);
-const ROUTE_FED_INPUTS = new Set(['grapes', 'glass sand']);
-const recordHoldsGood = (list, rawResource) => {
-  const goods = [rawResource, ...terrainSynonymsFor(rawResource)];
-  return (Array.isArray(list) ? list : [])
-    .map((entry) => String(entry || '').replace(/\([^)]*\)/g, ' '))
-    .some((entry) => goods.some((good) => tokensReconcile(entry, good)));
-};
-const supplyOfInput = (rawResource, institutions, evidence = {}) => {
-  if (
-    recordHoldsGood(evidence.availableResources, rawResource)
-    || recordHoldsGood(evidence.localProduction, rawResource)
-    || localInstitutionSupplies(rawResource, institutions)
-  ) return 'local';
-  if (ROUTE_FED_INPUTS.has(normalizeToken(rawResource)) && hasTradeRouteConnection(evidence.tradeAccess) && !evidence.besieged) return 'route';
-  if (
-    recordHoldsGood(evidence.primaryImports, rawResource)
-    || (FOOD_STAPLE_INPUTS.has(normalizeToken(rawResource)) && Number(evidence.foodImportPct) > 0)
-  ) return 'imported';
-  return 'missing';
-};
+// BAR4-RECORD R1 (the chair's K6 of BRIEF-BAR4, vetoable by the owner): ONE READING OF "THIS HOUSE'S INPUT IS AT HAND".
+// The kinds above are read by the one home both this writer and the page's gap reader call
+// (`domain/facts/houseInputAtHand.js :: houseInputAtHand`), over the record in the making: the live native roster, what
+// the town makes of the raw good itself, a local producer, the route where no siege shuts it (grapes, glass sand and
+// camels by any route; a house whose trade IS the route), the imports and the food record. The two asked it two ways and
+// split in 67 rows of the census's 720 (a caravanserai on a connected road "lacked camels"; a sawmill the page called
+// answered by the grove's "Sacred wood").
+const supplyOfInput = (chainKey, institution, institutions, evidence = {}) =>
+  houseInputAtHand({ ...evidence, institutions }, chainKey, institution, RESOURCE_CHAINS[chainKey]);
 
 // Does another of this house's chains feed it? Worked here (fully or partly exploited), or its input held locally or
 // bought in. M-S, read by evaluateInstitutionChain's lacks-access row.
 const reachedByAnotherInput = (chain, institution, institutions, exploitation, evidence) => (
-  Object.values(RESOURCE_CHAINS || {}).some((other) => other !== chain
-    && other.processingInstitutions?.includes(institution.name)
+  Object.entries(RESOURCE_CHAINS || {}).some(([otherKey, other]) => other !== chain
+    && houseRunsChain(other, institution.name)
     && (exploitation.fullyExploited?.some((c) => c.rawResource === other.rawResource)
       || exploitation.partiallyExploited?.some((c) => c.rawResource === other.rawResource)
-      || supplyOfInput(other.rawResource, institutions, evidence) !== 'missing'))
+      || supplyOfInput(otherKey, institution, institutions, evidence) !== 'missing'))
 );
 
 // ─── evaluateInstitutionChain ─────────────────────────────────────────────────
@@ -563,13 +511,13 @@ const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => 
 
   // Institutions that exist but whose resource inputs are missing
   institutions.forEach(institution => {
-    Object.values(RESOURCE_CHAINS || {}).forEach(chain => {
-      if (!chain.processingInstitutions?.includes(institution.name)) return;
+    Object.entries(RESOURCE_CHAINS || {}).forEach(([chainKey, chain]) => {
+      if (!houseRunsChain(chain, institution.name)) return; // R1/R2: a sawmill's rung runs the sawmill's chains
       const alreadyInGaps =
         exploitation.fullyExploited?.some(c => c.rawResource === chain.rawResource) ||
         exploitation.partiallyExploited?.some(c => c.rawResource === chain.rawResource);
       if (alreadyInGaps) return;
-      const kind = supplyOfInput(chain.rawResource, institutions, evidence);
+      const kind = supplyOfInput(chainKey, institution, institutions, evidence);
       if (kind === 'local' || kind === 'route') return; // the place holds the input, or trade brings it: not a gap
       // TAIL-DEFECON-R M-S (the chair's ruling of 2026-11-15, vetoable by the owner): A HOUSE IS SHORT ONLY IF NONE OF ITS
       // INPUTS REACHES IT. The Smelter works three chains (iron ore, copper ore, gold/silver ore); judged chain by chain,
@@ -669,14 +617,7 @@ export const generateResourceAnalysis = (
   const gaps           = evaluateInstitutionChain(
     exploitation,
     nativeInstitutions,
-    {
-      availableResources: nearbyResources,
-      localProduction:    economicState?.localProduction,
-      primaryImports:     economicState?.primaryImports,
-      foodImportPct:      economicState?.foodSecurity?.importPct,
-      tradeAccess:        config.tradeRouteAccess, // M-V: a route-fed input reaches its house on any route
-      besieged:           (config.stressTypes || []).includes('under_siege'), // ... that no siege shuts
-    },
+    { config, economicState }, // the record in the making: houseInputAtHand reads it as the page reads the record
   );
   const resourceConditions = nativeResourceConditionRecords(config);
   // after the gaps and the town's settings: a complete row reads both (#457, #1163)

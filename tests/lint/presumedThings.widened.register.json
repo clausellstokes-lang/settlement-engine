@@ -20212,14 +20212,6 @@
     "c5911e464e4aaa8f"
    ]
   ],
-  "src/domain/display/validationOnPage.js": [
-   [
-    "resource: hot_springs_mineral",
-    "family",
-    "mineral hot springs",
-    "1b9f8eb53cade44e"
-   ]
-  ],
   "src/domain/display/visibilityAudit.js": [
    [
     "house: tanner",
