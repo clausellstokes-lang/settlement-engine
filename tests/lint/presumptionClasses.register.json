@@ -1,98 +1,11 @@
 {
  "about": "THE PRESUMPTION-CLASSES WALKER'S REGISTER (tests/lint/presumptionClasses.walker.test.js; BAR6-GUARD, the chair's ruling BG1 of 2026-11-16). TODAY'S DEBT, SHRINK-ONLY: one row a (file, class, line) that held a presumption-class word and declared nothing that answers it at the base. A row is [class, status at the base, the line's first 120 characters, literalHash(the whole line)]. Written ONLY by scripts/presumption-classes-door.mjs: --shrink removes the rows a cure leaves stale and lowers the ceiling; --bank debt-at-base banks only a line whose whole literal stood in its file at the base. A NEW line is never banked: it declares. No other seat edits this file or the walker (BG1); the round's close re-banks it through its door.",
  "base": "afa46d644",
- "ceiling": 2699,
+ "ceiling": 1996,
  "rows": {
-  "src/components/ConfigurationPanel.jsx": [
-   ["plenty","none","Included; availability is resolved for this settlement size. Click to guarantee Abundant.","424cebf7d6f807dd"],
-   ["plenty","none","Forced abundant. Full export potential. Click to force Depleted.","84ce1481984de78a"]
-  ],
-  "src/components/HomeHero.jsx": [
-   ["goods","none","\n        .sf-gauge-station:focus-visible {\n          outline: 2px solid ${GOLD};\n          outline-offset: 2px;\n        ","111b52089adcf8b2"]
-  ],
-  "src/components/HowToUse.jsx": [
-   ["office","none","Walls, garrison, threat response, fortification profile.","d96bffe21fb8c51c"],
-   ["outside","none","Size tiers, trade routes, and what each unlocks.","3b0ef76830df2536"]
-  ],
-  "src/components/admin/AdminUsersPanel.jsx": [
-   ["goods","none","Reversible: hides and unpublishes the settlement.","d1b3ea886927e439"],
-   ["goods","none","Reversible: hides and unpublishes the map or campaign.","d21656f7e7d36cdc"]
-  ],
-  "src/components/compendium/CatalogTabs.jsx": [
-   ["office","none","Strategic chokepoint. Toll and garrison institutions likely.","06c27a582f51ce05"],
-   ["office","none","A managed, active threat. Walls and garrison are elevated; raids and patrols are routine.","09d1f3e80a49293b"],
-   ["office","none","Active war or monster pressure. The militia is the most important institution, and crisis conditions hold.","6e7242fa44d4667e"],
-   ["office","none","Monsters are rumor. Civilian institutions dominate and the militia is law enforcement.","8223058de497ffc8"],
-   ["outside","none","s surplus production; imports are the gaps its own chains cannot cover. Each trade dependency is graded vulnerable (it l","42561f71390fe8e3"],
-   ["plenty","none","4-6 institutions. Surplus production begins. Weekly market.","01d4c1af7f2efb8c"],
-   ["plenty","none","s surplus production; imports are the gaps its own chains cannot cover. Each trade dependency is graded vulnerable (it l","42561f71390fe8e3"]
-  ],
-  "src/components/compendium/ContentPackBar.jsx": [
-   ["outside","none","Definitions imported; existing setting defaults retained.","641479e0e6240055"],
-   ["outside","none","Nothing imported. ${\n          error instanceof Error ? error.message : 'The command failed.'\n        }","91da8e559bf60080"],
-   ["outside","none","Nothing imported. ${receipt.reason || 'The command was refused.'}","cf340f96179ac13a"],
-   ["outside","none","Nothing imported. ${prepared.rejected.length} invalid ${\n          prepared.rejected.length === 1 ? 'entry needs' : 'ent","cf8e473b8cb9ea26"]
-  ],
-  "src/components/compendium/CustomContentCommitControls.jsx": [
-   ["goods","none","Forge the current unsaved sample before committing this revision.","d196a0252f3d76cd"]
-  ],
-  "src/components/compendium/customContentEditorCopy.js": [
-   ["plenty","none","How the settlement observes it: feast, procession, vigil, contest, fair, or offering.","512b22e9c3543289"]
-  ],
-  "src/components/contentStudio/CampaignContentBindingLifecycle.jsx": [
-   ["goods","none","The campaign binding changed after review. Forge a new review before applying.","6f5a92fc3d686a9a"],
-   ["goods","none","The remote binding is now loaded; forge a new review before applying.","d9dfb25dac241f46"]
-  ],
   "src/components/dossier/EngineSections.jsx": [
    ["office","none","Besieged by a coalition (${warStatus.besiegedBy.map(nameFor).join(', ')}). The garrison is thinning under sustained assa","548678a29a9134ec"],
    ["office","none","Besieged by ${nameFor(warStatus.besiegedBy[0])}. The garrison holds the walls.","ec3a580b6e8a1ed0"]
-  ],
-  "src/components/gallery/GalleryCampaigns.jsx": [
-   ["outside","none","Campaign imported. Map and settlements are in your library.","444dc80bf9a7da30"]
-  ],
-  "src/components/gallery/GalleryDetail.jsx": [
-   ["goods","none","Forge a settlement of your own","5dbbf1ab912a3912"]
-  ],
-  "src/components/gallery/GalleryMaps.jsx": [
-   ["outside","none","Map imported into a new campaign.","deddc83b942449ef"]
-  ],
-  "src/components/generate/LayeredConfigurationPanel.jsx": [
-   ["goods","none","Control which goods leave and which arrive. This feeds supply chains and trade between settlements.","371486187d987cbc"]
-  ],
-  "src/components/home/LandingArtifacts.jsx": [
-   ["goods","none","[LandingArtifacts] fixture forge failed:","d67052b9aaa7be42"]
-  ],
-  "src/components/home/landingFixture.js": [
-   ["outside","none","Cnocby's trade routes break down","3d26bbade07037a9"],
-   ["outside","none","Caravans are passing Cnocby by, and its traders have little to sell.","b474922ce249f1eb"],
-   ["outside","none","Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows.","db13c4c73cfa5ca3"],
-   ["size","none","Thieves and racketeers are working Cnocby's streets in the open.","7ae8371b976305d9"]
-  ],
-  "src/components/howto/ForgeExactDemo.jsx": [
-   ["goods","none","[ForgeExactDemo] fixture forge failed:","e04febde5dd17923"]
-  ],
-  "src/components/howto/LivingWorldTab.jsx": [
-   ["sovereign","none","A contested faith weakens the ruler’s divine mandate, and the throne wavers with it.","f6f8b7ba83a0f420"]
-  ],
-  "src/components/map/HeraldCommandBody.jsx": [
-   ["outside","none","This imported record has ambiguous identity and cannot be routed safely","7fb8f9b65d049f6a"],
-   ["threat","none","The archive is quiet.","fac8a71378b2965b"]
-  ],
-  "src/components/map/RealmDashboard.jsx": [
-   ["outside","none","${deployments.length} ${deployments.length === 1 ? 'army' : 'armies'} abroad","efc3d0612d00dd12"]
-  ],
-  "src/components/map/SimulationRulesAxes.jsx": [
-   ["outside","none","Word and armies travel the real road network. News and caravans arrive late over distance.","9740ba6e98f8c5bd"]
-  ],
-  "src/components/map/WhileYouWereAway.jsx": [
-   ["resource","none","Dismiss the catch-up summary","da61353371624681"]
-  ],
-  "src/components/map/WorldMapToolbar.jsx": [
-   ["goods","none","Shows or hides the map’s overlay layers.","a663cc60e840ae90"]
-  ],
-  "src/components/map/heraldWanderers.js": [
-   ["outside","none","They are held abroad at ${heldVenueName}.","ba6d456ee3504160"],
-   ["outside","none","They are held abroad at an unnamed place.","ec78784c128df544"]
   ],
   "src/components/new/NpcLifecycleControls.jsx": [
    ["outside","none","Recall ${npc?.name || 'the traveller'} home early","3fdbc06a165d6282"]
@@ -108,8 +21,7 @@
    ["size","other","There are defenses, but nobody would call this a fortress. The watch patrols the main streets at night. Most people feel","61350579f398099e"]
   ],
   "src/components/new/tabs/EconomicsTab.jsx": [
-   ["office","none","Much of the trade here never passes the tax collector, so the duties come in far short and guild members are undersold b","94e9cd55f3ff9cc4"],
-   ["size","none","A few households still go short, and a bad season would leave more of them hungry.","cfea0dc4b97b3d2c"]
+   ["office","none","Much of the trade here never passes the tax collector, so the duties come in far short and guild members are undersold b","94e9cd55f3ff9cc4"]
   ],
   "src/components/new/tabs/NotesTab.jsx": [
    ["sovereign","none","How does this settlement fit your campaign? e.g. an orc warband hold with a militarized culture; the baron here owes the","ff99ca0ec5db17a0"]
@@ -117,28 +29,10 @@
   "src/components/new/tabs/WarTab.jsx": [
    ["office","none","From here you raise ${name}'s troops, send them out, call them home, and read what they report back.","72c0b30a3403b00b"]
   ],
-  "src/components/organic/samples/fixtures.js": [
-   ["office","none","The wall is sound; the garrison is thin and underpaid.","ea23473f917d50d1"],
-   ["outside","none","Roads, thresholds, and the traveller’s luck","d5d1dcc71abd8681"],
-   ["plenty","none","Grain surplus; a new mint","ea9d78aeb8fe3eb6"],
-   ["resource","none","Mines, the dark, and what is found in it","0ea7b67e2e4d74a7"],
-   ["resource","none","You come to Thornwall by the coast road, and the wall shows first: grey stone the height of four men, salt-stained on it","d9e607ac85c154a5"]
-  ],
-  "src/components/region/RegionalGraphSummary.jsx": [
-   ["outside","none","${confirmed.length} trade route${confirmed.length === 1 ? '' : 's'} link your towns.","642d5324d9d79f1e"]
-  ],
-  "src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx": [
-   ["plenty","none","A measured share of the surplus","9aef9398efecb516"]
-  ],
-  "src/components/tableLedger/TableLedgerPanel.jsx": [
-   ["outside","none","A caravan looted, a mine flooded, a fishery ruined. A worked resource is no longer available.","91f58f983bba2351"],
-   ["resource","none","A caravan looted, a mine flooded, a fishery ruined. A worked resource is no longer available.","91f58f983bba2351"]
-  ],
   "src/data/arrivalProse.js": [
    ["ease","any","A poet holds a small crowd by the well, and nobody hurries the telling along.","4346d561e1082919"],
    ["ease","any","A work party heads out together, singing, with tools on their shoulders.","e62f4b2c8d18f0e3"],
    ["goods","other","Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.","5fc375a6a9dd0a00"],
-   ["goods","other","A clerk records every cartload that passes in a careful ledger.","656333a46692b4aa"],
    ["goods","other","A cook at a doorway mixes the spices of two different homelands into one pot.","eb270ca721d2b774"],
    ["office","none","A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.","2c37613ac8cf7269"],
    ["office","other","An old judge listens to two neighbours by a gate and says nothing until both are finished.","e7b68086bd1c53b1"],
@@ -152,9 +46,7 @@
    ["outside","any","Pilgrim badges are nailed above doorways, collected over years.","db5056f5b299ba33"],
    ["outside","one-kind","Barrels are stacked by every doorway, and the carts on the road out are loaded with more.","ea7a165e913f6726"],
    ["plenty","other","Spice and drying herbs scent every lane, and the stalls are piled with them.","a0010860ef4df49e"],
-   ["plenty","one-kind","A broker sits in the shade, matching buyers to whatever the neighbours have to spare.","ffbb49496ca42319"],
-   ["size","none","Debts from the crash are still remembered, and a few families still do not speak because of them.","2d665a15e2be3fc3"],
-   ["size","none","A few houses still fly the old colours of the rising, and nobody takes them down.","622a307765f7ecc6"]
+   ["plenty","one-kind","A broker sits in the shade, matching buyers to whatever the neighbours have to spare.","ffbb49496ca42319"]
   ],
   "src/data/biomeTexture.js": [
    ["resource","none","meltchannels seam the glacier road","504d351bbe7456b3"]
@@ -189,7 +81,6 @@
    ["outside","one-kind","Water access and preservation skill determine the balance between local produce and caravan-borne staples.","e861c428c2274a26"],
    ["outside","other","Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.","f471123b61522360"],
    ["outside","none","Courtyard houses, waterworks, endowed institutions and caravan trade.","f7ddce0fdb799e70"],
-   ["plenty","none","Household rites, oath sites, burial memory, feast days, and formal sanctuaries overlap.","bf3a896f433a8398"],
    ["resource","none","Political power depends on pasture access, herds, mobility, marriage alliances, and control of caravan corridors.","0fdb598fedb617a8"],
    ["resource","other","painted gables and fenced garden plots face the lane","11f33296eaa5b331"],
    ["resource","none","Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.","1b4b4958e2437e5e"],
@@ -257,21 +148,13 @@
    ["goods","none","{settlement}'s hall is legitimate, its books are clean, and prosperity by itself has never brought anybody to its door. ","0dccd63a6836fe94"],
    ["goods","none","{counterpart} sits in {settlement}'s books as a house of the faithful, on the strength of a report that said so and has ","104b60e2cf342258"],
    ["goods","none","{house} is finished at {settlement} and the seat that acted on its account is not much better off: the exposure charged ","1a73d4da7b17ad61"],
-   ["goods","none","{settlement}'s market books show {npc} bought up the {good} before the talk of a shortage began; the talk came right on ","237cbbf0b503017d"],
-   ["goods","none","The shrine road out of {settlement} is empty when it should be crowded: the town closed the {route}, believing it fed {c","2536b17c6c55a692"],
-   ["goods","none","The letters coming back to {settlement} say what that town actually is, and the road out is thinning behind them; the co","28de017527fe9ba1"],
    ["goods","none","The counting-house on the quay carries {faction}'s mark; {house} kept its books there until the venture failed on the {r","3622bfdc3e72aaf8"],
    ["goods","none","{settlement}'s shrine is shut and stands in {counterpart}'s books as full: the report that said so was honest and is {ti","5af87f8a10b0d611"],
    ["goods","none","{house}'s counters at {settlement} are open and its books are thick: the story reached here at the fourth hand and stopp","64f007b05ad25f08"],
-   ["goods","none","The busiest road out of {settlement} is not the one on the map: the embargo made a second route worth walking, and now i","6e1601cb843c4c06"],
    ["goods","none","Every term under the treaty with {counterpart} is defaulted from the week {npc} said so, and the parchment is kept at {s","6f3e866fbdb1751e"],
-   ["goods","none","{settlement}'s rulers have told the town one thing and their books say another; {house} keeps its own count, and that co","6f7e06aad888f142"],
    ["goods","none","Those who queued that winter remember who was selling into the gap, and remember that {house} keeps its books a town ove","77a81e17262ae49f"],
    ["goods","none","The family outlives the books: every bargain the name asks for on this coast is priced against one voyage that did not c","78c38154f72aa002"],
    ["goods","none","Those who sat in the hall date the change from an argument over books, and will tell you the altar was an afterthought t","7b313e61b6791fc9"],
-   ["goods","none","{house}'s counters at {settlement} are shut, and the books show the order plainly: the refusals first, the failed paymen","a37e50da8a926f09"],
-   ["goods","none","A merchant sits in {settlement}'s hall, and the hall's account books show how: {house} made a fortune in the {good} trad","ac1c02e8ce58cfd4"],
-   ["goods","none","The talk in {settlement} is that {counterpart} means to take the whole {good} trade; {house}'s books say otherwise, but ","b9c1de3e97c09561"],
    ["goods","none","{settlement} keeps one congregation: the dispute over books went to the court and was settled there in one honest hearin","cff216e0e788abaf"],
    ["goods","none","{house}'s doors at {settlement} are shut and the books were sound: the word ran that the house was over-extended, the de","d5e09b383543d904"],
    ["goods","none","{temple}'s books at {settlement} are {band} lighter than they were, and the shortfall has a domestic cause: the hall too","e8e3efda403709e9"],
@@ -292,20 +175,10 @@
    ["outside","none","Travellers at {settlement} are asked, carefully, what they saw on the road, and then asked again by someone else: both p","b5f7ca1097e838a8"],
    ["outside","none","A traveller passes through {settlement} unremarked; the town watches its own gates loosely and always has, because what ","cea29e1c86129871"],
    ["outside","none","{settlement}'s caravans cross a blockaded road every season and have never been stopped, so the town has no grievance ag","f1feeacbfb29c114"],
-   ["plenty","none","The shrine road at {settlement} fills for the feast and empties after it: this town earns from the beds, {counterpart} f","002b3025b0f8a1cd"],
-   ["plenty","none","Nobody at {settlement} calls it a treaty. The two towns keep the same feast, and the road between them has been quiet fo","0553c3dcbf7f7a65"],
-   ["plenty","none","It took {timeband_span} of arrivals before {settlement}'s calendar would carry the newcomers' feast, and by then they ha","1961546c8d32120a"],
-   ["plenty","none","{creed}'s house stands on {settlement}'s main street and {rival_creed}'s feasts are kept on a narrower one; the arrangem","405ef113618ef4d7"],
    ["plenty","none","{settlement} has a surplus and a road, and {band} have walked to it {timeband_since}; the town took in what it had room ","58ef2283d30ae70b"],
-   ["plenty","none","Nothing {temple} said that year has been revisited at {settlement}, though the rain came when the temple said it would n","9f4408c4327445dd"],
-   ["plenty","none","The newer observance at {settlement} has the wide street and the older one keeps its feasts on a narrower; the change to","a5072f9a74c2e99e"],
-   ["plenty","none","{settlement} keeps a feast that is not its own: the families from {counterpart} brought it, and the town calendar says s","a636cd72c872828b"],
-   ["plenty","none","Nobody young in {settlement} can say which feasts came with the newcomers, though the calendar took them {timeband_since","b1425257837df029"],
-   ["plenty","none","The old hands at {settlement} can name the season the argument stopped being about revenue. It has been {timeband_span},","caf835fcd27aca93"],
    ["plenty","none","{settlement} has plenty, but less than the stories on the road say, and a crowd at the gate that came on those stories; ","ce99e5ea8baf650a"],
    ["plenty","none","The lean years turned {settlement}'s court toward {counterpart}'s valley, and it still talks of the plenty there; the va","fd0b8b2bd5fc39a8"],
    ["resource","none","The roll at {settlement} stands near where it stood before the road filled: the town sent {band} down the {route} at the","0f4f058eb052673d"],
-   ["size","none","A quarter of {settlement} is called by another town's name; the people in it came out of {counterpart} {timeband_since} ","21ee15b58b8964a0"],
    ["size","none","{creed}'s house stands on {settlement}'s main street and {rival_creed}'s feasts are kept on a narrower one; the arrangem","405ef113618ef4d7"],
    ["size","none","{settlement}'s rulers are hated for the war in every quarter, but {faction}, which carries the anger, has never had the ","4718c35e7f3e94bf"],
    ["size","none","Half {settlement}'s new quarter is here on paper before it is here on foot: a settlement provision signed with {counterp","5f41647aa337bec9"],
@@ -315,15 +188,10 @@
    ["size","none","{settlement}'s hall is a levy short and holds the refusal in writing: the quarter did not come when it was called, and t","f663b4f57b55e432"]
   ],
   "src/data/dossierStateProse/defense.generated.js": [
-   ["ease","one-kind","People at {settlement} expect to hold against the usual trouble, and they claim no more than that.","1670b3aabdf4f303"],
-   ["ease","one-kind","{settlement} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.","3dcda233d29b1c03"],
    ["ease","one-kind","The town has grain in store and water at the door at {settlement}, and is unhurried about threats in a way that irritate","6eb6bc298a4ad4f0"],
-   ["ease","colour","At {settlement} the usual work no longer yields enough {good}, and the trade that makes it now leans on help beyond ordi","774d7cff2cf6f6e0"],
    ["ease","one-kind","To anyone arriving, {settlement} looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.","b803f0bae8012221"],
    ["goods","colour","Few thefts at {settlement} are ever written into the town's books: a thieves' guild settles them first, and the losses g","0eb17e7ff33ca69a"],
    ["goods","colour","At {settlement} the people with weapons are watching their own neighbours, not the roads.","2666e7b2e0ab01af"],
-   ["goods","colour","Arcane work at {settlement} answers to its military, and the practitioners' own books show it: defence work first, payin","3e9e9737608a06bb"],
-   ["goods","other","{settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.","70e95355965d6528"],
    ["goods","colour","Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very ","8dc348c38289a4a1"],
    ["goods","colour","You find {settlement}'s posts empty while its muster books are kept up to date.","ade54206363b01ed"],
    ["goods","colour","{settlement}'s pay book runs late and the gear is worn; the defenders' patience will run out before their weapons do.","fce21892e72ab267"],
@@ -331,14 +199,11 @@
    ["office","colour","The occupiers' troops at {settlement} protect it from everyone except the people who sent them.","0847527bfbd9f884"],
    ["office","other","Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a","105c6bbe69c29bcf"],
    ["office","colour","The town has sent its soldiers to sit outside somebody else's walls, and is quieter and emptier and more exposed for it.","2bdb20f533a70aeb"],
-   ["office","colour","The town pays for some of its soldiers and knows which ones, and treats them accordingly.","2fe8b75f4c2640c5"],
    ["office","colour","The soldiers at {settlement} command its magic: the arcane houses answer to them, and their work goes first to the town'","41cb674fedbe69d5"],
    ["office","colour","Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again abou","4981288dbf0ebe5c"],
    ["office","colour","The militia at {settlement} know every path around the town, and they know that will not stop a professional army.","794fde202732eb70"],
    ["office","colour","People at {settlement} believe the town could be held, and the soldiers on the walls give them good reason to.","864d9e085885d1df"],
    ["office","colour","{settlement} is strongly held and cannot use its own defence: the troops in the town answer to {counterpart}.","89db722599e14eb1"],
-   ["office","colour","{settlement} could keep soldiers and does not; the town has decided that arming itself when needed costs less than payin","bb8b7cb9a58d16b4"],
-   ["office","colour","{settlement}'s soldiers serve all year, not for a season; the town relies on them and grumbles about them in equal measu","f4a2501bf65efba5"],
    ["office","colour","You can see the courthouse and the gaol at {settlement} from the street, and the town means you to.","f8aa86f5bf0ee11e"],
    ["office","colour","{counterpart}'s troops defend {settlement} against everyone except {counterpart}.","fe72592b8fea8ebf"],
    ["outside","other","{settlement} is closed against the sickness, not an army: the guards turn back travellers and traders alike.","22e2b7dcb62d8282"],
@@ -349,7 +214,6 @@
    ["size","other","{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.","27ba92837d0df93a"],
    ["size","colour","Criminal gangs at {settlement} keep a footing in the town, through the streets they hold or the businesses they front.","2d8851c2dd202f79"],
    ["size","other","Fighting between the rebels and the town's guards has closed whole streets of {settlement}.","3b4a1d2e0cc16601"],
-   ["size","colour","Nobody at {settlement} casts, brews or wards for a living, and nothing in the town leans on magic.","3cfb38d8bf2d7575"],
    ["size","colour","With the town under siege, quarrels over rations and theft of food are the trouble on {settlement}'s streets now.","498cfc75c90d5834"],
    ["size","colour","A crisis now governs the streets of {settlement}, and the town's usual safety no longer holds.","51b6208bfc4e58da"],
    ["size","colour","Whole streets of {settlement} stand half empty now that so many have left, and nobody watches the empty houses.","53ddce44af6d9553"],
@@ -401,30 +265,23 @@
   ],
   "src/data/dossierStateProse/general.generated.js": [
    ["ease","one-kind","The watch at {settlement} has little to report, because the streets are quiet, not because the watch is idle.","2a6c68371bd1b5b2"],
-   ["goods","none","Families are leaving {settlement} by the cartload, and each week the line on the road out is longer.","1d4f0929828464ea"],
-   ["goods","other","{settlement}'s books show a town that pays for itself and does not accumulate.","269ebfd945ce055a"],
    ["goods","other","{settlement} is visibly wealthy, yet its public accounts are modest; someone is keeping the difference off the books.","3c42b7d7f11549c2"],
-   ["goods","none","{settlement} handles more goods than its books show; some leakage is normal in a crossing town, but here it is large.","7ac2a0d5014cb5eb"],
    ["goods","colour","Goods come into {settlement} and goods go out of it, and neither the coming nor the going is remarkable.","a3ae2ec38ba38387"],
    ["goods","none","{settlement}'s year, as the books have it.","d185782090930ec7"],
    ["goods","colour","{settlement}'s books carry more than the town needs, and what to do with the excess is a question in its own right here.","d35ef9156d633a59"],
    ["office","colour","{settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.","0efcb879d014c5c9"],
-   ["office","other","{settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.","b28b38ada8ae47c8"],
    ["office","other","{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.","c6c53056134c456b"],
    ["office","other","{settlement} is orderly under foreign soldiers, and its people go about their business with their eyes down.","db055783d8bf6bf6"],
    ["outside","none","Families are leaving {settlement} by the cartload, and each week the line on the road out is longer.","1d4f0929828464ea"],
    ["outside","none","{settlement} holds its size; the roads bring in as many as they take away.","22f9b66e62350275"],
    ["outside","colour","The road runs past {settlement}, but few travellers stop, and the town sells mostly to itself.","2d539913624af82b"],
-   ["outside","none","Nobody chose {settlement}'s site; the roads met here, and the town grew where travellers stopped.","415b923dd600d73c"],
    ["outside","colour","Travellers from {counterpart} are welcomed in {settlement} as near-neighbours, not outsiders.","420d16dd13628f26"],
    ["outside","none","{settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs.","5c9dfe24886d50c9"],
    ["outside","one-kind","A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying th","6c0148c7dac776e0"],
-   ["outside","none","{settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for","920cbbe3838a9141"],
    ["outside","other","The cathedral stands taller than anything else in {settlement}, and travellers see it long before they arrive.","bd615ce5e29b80c6"],
    ["outside","one-kind","Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.","ebf918fef65f97d0"],
    ["plenty","other","{settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring.","083c260bd6e2191d"],
    ["plenty","colour","The surplus at {settlement} is real and gets spent on the town rather than out of it.","4984a6cc8dce9923"],
-   ["plenty","other","{settlement} sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them.","50dcfcc3b914ebdb"],
    ["plenty","one-kind","{settlement}'s market handles more than the town could ever use; the difference is the town's living.","51702d5240e70fd8"],
    ["plenty","colour","{settlement} is small enough that every household knows its purpose, and surplus, where there is any, is modest.","896c0c8d754a5771"],
    ["resource","other","What may be done with the Art in {settlement} gets argued in the same tone as grazing rights: endlessly, and without any","b42085aeaa81602d"],
@@ -436,7 +293,6 @@
    ["size","other","Movement in {settlement} is watched and limited; the streets are quiet because people are kept off them.","47c4f0a9449224a1"],
    ["size","colour","Whatever authority {settlement} has does not reach into its own streets.","4b48626f4a419587"],
    ["size","other","{settlement} owes money beyond its walls, and each quarter the payment goes out before anything else is decided.","5779a17be9b53c95"],
-   ["size","none","{settlement} has been emptying for years, a few households at a time, with no single cause anyone can name.","5c464620f28e039f"],
    ["size","colour","{settlement} has quarters that do not match each other, and the mismatch dates from {event}.","5d98280d7885e3bd"],
    ["size","colour","Thousands of people have left. What remains occupies a settlement built for something considerably larger.","73d6e9a73ba995b3"],
    ["size","colour","{settlement} was founded {timeband_since} for {reason}, and the oldest streets still show it.","8917dec05988222d"],
@@ -453,9 +309,7 @@
    ["threat","one-kind","{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.","f7aba2e3cae3483a"]
   ],
   "src/data/dossierStateProse/power.generated.js": [
-   ["goods","colour","The {seat} at {settlement} is run by the houses that keep the account books, and it decides things the way a business do","137c8f06eaeca48f"],
    ["goods","colour","Several houses at {settlement} keep perfect books, because perfect books are what they are paid to keep.","7a9d23576cc24b9c"],
-   ["office","colour","The combination at {settlement} has come apart. It lost its members and dissolved, and the hall is back to assembling ea","5d259b69831ff392"],
    ["outside","one-kind","Travellers reach {settlement} and find empty streets and soldiers on every corner. Nobody will talk about the {seat}, an","688db3a18d97da9d"],
    ["plenty","colour","{settlement} is too poor to pay the few people who hold office here, and anyone with money to spare could buy their good","5de475bec0ce6cf8"],
    ["size","other","The garrison keeps {settlement}'s streets quiet and takes its own cut for doing it: dues collected twice, goods taken wi","5e6e7a154d1af7c3"],
@@ -466,13 +320,10 @@
   ],
   "src/data/dossierStateProse/stressors.generated.js": [
    ["goods","none","The magic here is gone because it was spent. Where the surge burned hottest, candles gutter and wards lie cold.","19102926dc2d4d4e"],
-   ["goods","colour","The town's account books show this trouble, but the streets hardly do; it is a small one.","335183ea73c81990"],
-   ["goods","none","The books balance only because nothing is being built. The debt is served first and the town second.","f987bc385ae9b7ce"],
    ["office","none","A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popula","22592d50246e5ce9"],
    ["office","other","The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone know","7764776686a48531"],
    ["office","other","The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for ques","a9bc8aef78d62acd"],
    ["office","none","The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occup","b0ee79d63537f34e"],
-   ["office","none","No outsider is behind this. The threat came from inside {settlement}, and the loyalty tests now going round the council ","b8916ad4b37eedf5"],
    ["outside","colour","What hurts {settlement} started somewhere else, and travellers bring news of it with their goods.","6913b3d121055ff9"],
    ["outside","none","This was paid for from abroad: it happens in {settlement}, but it was decided somewhere else.","8555b26e3ed7db25"],
    ["size","other","The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them.","0b76faaf849dcdee"],
@@ -482,18 +333,15 @@
    ["size","other","{settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in r","7246dda71a9e69aa"],
    ["size","other","The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for ques","a9bc8aef78d62acd"],
    ["size","none","Hunger has moved from the poorest streets into the ordinary ones; what the fields returned does not reach the table.","de4c9cce5131a0c7"],
-   ["size","other","{settlement} loses a few households every season, and those in charge have learned to manage with fewer hands.","ef0a15614b88e049"],
    ["size","none","The streets rose on their own. No power owns this yet, which is what makes it dangerous to everyone.","fb2a1cd6871659d0"]
   ],
   "src/data/dossierStateProse/warFaith.generated.js": [
    ["ease","colour","{settlement} is ready to march and sitting idle, and keeping an army waiting drains the town fast.","864641a7c14578b6"],
    ["ease","one-kind","There is no war at {settlement}: none against it and none of its own. The town's quarrels are the ordinary kind and are ","d140818bd8e8d648"],
    ["goods","colour","{counterpart}'s tribute books now show {settlement} paying more than the troops holding it cost, and the occupation has ","125791183062845e"],
-   ["goods","colour","{settlement}'s market books show the town buying for war: the change shows first in what it buys, and only later in who ","1ca08fcf64c0ed3a"],
    ["goods","colour","The clergy name the ruler in their prayers and in their books, and that backing carries weight here.","422a51e73ee66f0f"],
    ["goods","colour","{counterpart}'s troops have left {settlement}, but the rules they wrote into the town's books remain, and the town must ","61724aeaa74611a8"],
    ["goods","colour","Goods leave {settlement} for {counterpart} on a regular schedule now, planned for at both ends, and the occupation is se","bc9aeb2d0e0c6131"],
-   ["goods","colour","{settlement}'s market books record goods that never arrive, and the cause is {counterpart}'s blockade, not the roads.","c0d0866231439959"],
    ["office","colour","Holding {settlement} is costing {counterpart} more than {settlement} yields; the garrison here is an expense the occupie","0688dbe8dc4a1f8a"],
    ["office","colour","{counterpart}'s troops at {settlement} spend their strength just holding the town, and that costs more each week the tow","07bacda19fc44870"],
    ["office","colour","The soldiers are here and the town has not accepted that they are, and neither side has yet been able to change the othe","10520ecaa0ded034"],
@@ -524,14 +372,7 @@
    ["outside","colour","This is the season the faithful come. Beds are scarce, prices are seasonal, and the town's opinion of pilgrims is season","aafb110259001823"],
    ["outside","colour","The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioni","c3d0b4aa2b5c2c34"],
    ["outside","colour","{creed} is a regional creed. A traveller from the next province will recognize the name and not the calendar.","d5e659eebed15f95"],
-   ["plenty","colour","{creed} has held {settlement} {timeband_age}; its feast days are the town's holidays.","285941d5ec206e66"],
-   ["plenty","colour","The clergy's register shows {settlement} at the feast days and little else; the tithe book is paid up, and nothing more ","2ae8b5f523816f60"],
-   ["plenty","colour","{institution}'s standing at {settlement} is old and entered everywhere: in the rolls, in the feast days, in who is burie","4a30d82d4c3e65a4"],
-   ["plenty","other","Soldiers in {settlement} keep the faith's feast days like crusaders, and the priests' word carries the weight of the gar","514c8db34d435d7a"],
-   ["plenty","other","In {settlement} the priests and the mages are hard to tell apart: the faith's rites use spellcraft, and the mages keep t","a618587d580d6b70"],
-   ["plenty","other","In {settlement} the church has the garrison at its side: soldiers keep the feast days, priests stand at the musters, and","dac7d42ed1149cee"],
    ["size","other","The occupiers' duty lists at {settlement} now put more of their troops on the streets than on the walls, and more each s","0297c3b5da615b11"],
-   ["size","colour","{creed} is kept here by a few households and no more: a following rather than a congregation, and one the town's other r","252ecaf1d4e4968c"],
    ["size","colour","This is a small faith in this town. Small enough that whether it grows is a question about a handful of families.","619262dc51cc12e1"],
    ["size","colour","The rite draws pilgrims from well outside the district, and for weeks each year they fill {settlement}'s beds.","807129d4fa76d221"],
    ["size","colour","{settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets","c87b9103d4727fad"],
@@ -539,28 +380,9 @@
    ["threat","colour","{settlement} is safe from {counterpart} alone but not from {counterpart} with allies, so the town's letters and treaties","b60eced42e57b374"]
   ],
   "src/data/economicData.js": [
-   ["goods","none","foraged herbs and botanical ingredients","0cb882e545772df2"],
-   ["goods","none","herbs and materials for hospital operations","1dc5749f2afb83d8"],
-   ["goods","none","herbs and materials for city-wide hospital network","6497a4253ef2003f"],
-   ["goods","none","herbs and metals for alchemical production at scale","6df0390653b302eb"],
-   ["goods","none","herbs for medicines and treatments","70f7c2bd2f6152f7"],
-   ["goods","none","iron for weapons and basic armour","753913bf2b1f2cba"],
-   ["goods","none","raw wool from livestock or flax from fields","9789e2da999df9d4"],
-   ["goods","none","iron for weapons and equipment","9a09b674d2fc0ca4"],
-   ["goods","none","fine wool, metals, gems for luxury production","a95986155d0770f3"],
-   ["goods","none","herbs to supplement divine healing","e95c7d240c773b4e"],
    ["goods","none","Medicinal herbs + supplies","ff721fa88440f6fe"],
    ["office","none","iron for armaments, grain for soldiers, fuel for forges","c1216edad8ec0b14"],
    ["office","none","iron, grain, and fuel for garrison operations","f211d9c050631367"],
-   ["resource","none","Metal ore + gems","2e4ce3609c4a2474"],
-   ["resource","none","quarried stone for cathedral maintenance","3a187c950fa1e3f9"],
-   ["resource","none","arable land for subsistence crops","717443c75e998d61"],
-   ["resource","none","quarried stone for wall construction and repair","88ea9fb50c1ea2ec"],
-   ["resource","none","raw wool from livestock or flax from fields","9789e2da999df9d4"],
-   ["resource","none","fine wool, metals, gems for luxury production","a95986155d0770f3"],
-   ["resource","none","Metal ore + fuel","af9d0ccd0c40f70a"],
-   ["resource","none","iron ore and fuel for forging at scale","b33d20f16efd1ba2"],
-   ["resource","none","iron ore and charcoal for smithing","d5504c391ab647af"],
    ["size","none","trade access and commodities for district markets","82227141eb6b76dd"],
    ["size","none","grain for district-scale hospitality","a04cfbc22ebc6f60"],
    ["size","none","arcane energy for district-scale magical operations","f9d70ee5a59a8275"]
@@ -628,9 +450,6 @@
    ["outside","none","A reputed relic drew more pilgrims than the town could house, and the money and outsiders they carried in changed the pl","c065f17d9a2c7fc3"],
    ["outside","none","Word of a miracle brought pilgrims in numbers the settlement had never been meant to hold, and the coin and strangers th","f2bc865c7b232dc7"],
    ["size","none","The settlement took in more people than it could house or employ, and the strain showed in every crowded street","337d35558d808d53"]
-  ],
-  "src/data/inlandDescriptions.js": [
-   ["goods","none","An open stall or small roofed shed selling salted and smoked fish. Packed in barrels, it keeps for months.","3ede9ffc2523e363"]
   ],
   "src/data/institutionDescVariants.js": [
    ["ease","colour","Common matters are settled by all the family heads together, each voice equal. It is unhurried, and the more egalitarian","0c0380017dd0bd74"],
@@ -703,11 +522,9 @@
    ["size","colour","Hospitals and infirmaries across the districts, medical care organised for a city's numbers.","7b5b9a6045ffdaea"],
    ["size","colour","Several aqueducts feed cisterns and fountains spread across the districts, a water system built for a city's size.","7e5cb59fae313217"],
    ["size","colour","A quarter given to prostitution, whether licensed or just tolerated.","801768e21a29cd13"],
-   ["size","colour","The region's greatest store of learning: thousands of volumes, archives of maps, and the historical record.","810cc4ecb5bcf3bd"],
    ["size","colour","More than one quarter of inns, serving the merchant, the traveller, and the lingering guest.","82241d92e4122e76"],
    ["size","colour","The central plaza where the weekly market and the fairs are held.","8992be6b64d98d3e"],
    ["size","colour","Those who dress, trade, and sell fur, all pressed into one district. The trade runs high, quality pelts being luxuries.","904247645c0145e8"],
-   ["size","colour","No larger collection of knowledge exists in the region: thousands of books, a map archive, and the histories.","9a71fd021e44bf7b"],
    ["size","colour","A borough court for the settling of local matters.","a1f47d804f1de033"],
    ["size","colour","Apothecary shops crowded into one quarter, where competition forces each to specialise. One leans to chirurgery, another","a8023f84a4cdf979"],
    ["size","colour","A public bathhouse with hot water, a gathering place in some cultures and a suspected den of vice in others. Nowhere in ","b1cbb3e670d22e50"],
@@ -782,12 +599,7 @@
    ["outside","none","Beds for travelers. Range from dormitory to private room.","f065da91f9620379"],
    ["outside","none","Receives travellers and speaks for the settlement","f3052138b06a7c8d"],
    ["outside","none","Access to venerated relics and shrines for pilgrims.","fbc6e6ea35942dcd"],
-   ["plenty","none","The great rites, feast day observances, and the rites of the faith for a whole region.","3f556a1e95dd74fb"],
-   ["plenty","none","Distribution of food and aid to the poor on feast days.","45051d7e5477ca6b"],
    ["plenty","none","Beef, pork, mutton. Slaughtered and dressed on premises or nearby.","455c0d396da11893"],
-   ["plenty","none","The congregations coordinate on feast days and city-wide observances.","5dc6ed616cda9cb9"],
-   ["plenty","none","The most significant religious observances. Major feast days and state occasions.","cd1e3fa3e3f74f30"],
-   ["plenty","none","Stronger or flavored brews for feast days and premium trade.","ce586a50022c6618"],
    ["size","none","Remove vagrants from the streets. Resident in exchange for work.","00732996e28bb20b"],
    ["size","none","Several congregations covering different districts or communities.","173ef032cb08e7e1"],
    ["size","none","Military presence distributed across multiple districts.","2ff4bd57179ff0cd"],
@@ -855,7 +667,6 @@
    ["size","none","Garrison forces distributed across quarters. No single barracks can secure a metropolis.","d20803420a0527c3"],
    ["size","none","Dungeon delving supply district","d71f2b4d9d1ff1a2"],
    ["size","none","Communal bathing facility with heated water. In some cultures a social hub; in others suspect as a venue for vice. Eithe","dad21f23fbe44104"],
-   ["size","none","Largest repository of knowledge in the region: thousands of volumes, map archives, historical records.","e19383b0f3117bd7"],
    ["sovereign","none","A steward appointed by a distant lord to oversee the settlement. Authority is formal but often resented.","586d83b7a73d9afe"],
    ["sovereign","none","Larger holdings get a lord's steward.","8d1003eb650fa1d8"],
    ["sovereign","none","A lord's agent manages the hamlet's lands, collects rents, and enforces noble authority.","8e1186c0ed6d5a7f"],
@@ -886,10 +697,8 @@
    ["size","other","{name} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The ratio","4bdb3c6c41af5cd7"],
    ["size","other","${r} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothi","4cd053aa6d713e70"],
    ["size","other","${r} is going about its business. The market is open, the streets are orderly, the gates are attended by soldiers whose ","570bc30c89f40e24"],
-   ["size","other","The farms outside ${r} are partially abandoned. You count three sets of buildings that have not been worked recently: th","6408389e62839220"],
    ["size","other","${r} is functioning well. Clean streets, busy market, maintained walls. If you were looking for problems, you would not ","7286964e7d4eaa12"],
    ["size","other","There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A req","9c3442c53e6cb248"],
-   ["size","other","The approach to ${r} is interrupted by a checkpoint a quarter mile from the gates: a temporary structure, manned by peop","a5a6718ffe67dc5a"],
    ["size","other","There are soldiers on ${r}'s streets, but they move in pairs and do not linger. The people watch them pass with the part","af93e6abfd75d81c"],
    ["size","other","The gate guard at ${r} asks where you intend to stay: which inn, which district. The answer apparently matters. They not","b2ce4a0441a100d6"],
    ["size","other","${r} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationi","e3c297d3a73ea280"],
@@ -906,11 +715,9 @@
    ["goods","none","touches a specific piece of jewellery when stressed","5567a23c1cacbca0"],
    ["goods","other","A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.","61afa79ac9fd0944"],
    ["goods","colour","${s.name} wants to store weapons beneath ${r.name}'s altar. ${r.name} has refused once and been asked again.","6531d6c5d28471b1"],
-   ["goods","colour","${r.name}'s account books look clean because ${s.name} keeps certain sales out of them. Both of them grow richer for it.","75b7d8b7c8b73c50"],
    ["goods","colour","Expand into a trade that requires less hiding: spice or cloth, not people","777f75d4fb9e9507"],
    ["goods","other","Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.","85a88f342c353071"],
    ["goods","colour","functional armour with personal sigils","d7cb343d85697983"],
-   ["goods","none","Their bookkeeper has been taking a little from every sale for years, and the books balance only because the bookkeeper w","f0f707486d5be4f4"],
    ["office","none","${s.name} has been appointed to judge a case in which ${r.name} is a party.","0147a6af1d9c1bca"],
    ["office","colour","${s.name} carries ${r.name}'s banner on every patrol. Crossing ${s.name} is treated as heresy, and heresy is punished by","269165308159eec4"],
    ["office","other","The ambush that killed two of their best people wasn't random. Someone knew the patrol route.","372c08c18314abc0"],
@@ -923,9 +730,7 @@
    ["outside","any","They buried someone last season that they refer to only as 'the traveller'. They will not say more.","5c8cff42f200606f"],
    ["outside","any","They agreed to hold a parcel for a traveller, and two different people have since come to collect it.","7abac3ed3053fe1b"],
    ["outside","one-kind","${r.name} began paying ${s.name}'s people after the last caravan was lost. No caravan has been lost since, and ${s.name}","c66bc1f1ac1cd603"],
-   ["plenty","any","The family has asked ${r.name} and ${s.name} to end their quarrel before the next feast. Neither will apologise first.","379780a3bbcc8d26"],
    ["resource","colour","practical dress with chalk dust in every seam","31ad8cec5610f791"],
-   ["resource","none","Discovery destroys their flock's trust and their own standing; some would call it heresy","9697152b0a38f77b"],
    ["resource","colour","Identify what is wrong with the crops in the northern fields (it smells magical)","de6d5ce8e2122a95"],
    ["size","colour","${r.name} chooses where ${r.name}'s people go, and ${s.name} pays for their routes. The streets ${s.name} uses are the q","02a80b4b50a0679c"],
    ["size","colour","${r.name} takes ${s.name}'s silver every quarter day and looks the other way when ${s.name}'s people pass. Each treats t","30b3f4f211caa2de"],
@@ -1005,7 +810,6 @@
    ["outside","none","Talks about the road and the travellers; knows who has passed and when.","f43e3aecc3cd9e8f"],
    ["plenty","none","Well-fed, in good boots, and cold. Talks about people as stock.","4ea28b91b106fafd"],
    ["plenty","none","Well-fed, well-dressed and cold. Talks about people as goods.","f9ac90678ea61900"],
-   ["size","none","Red dust in every line of the face and hands. Talks in thousands of bricks and cartloads.","311da01f0387c3e7"],
    ["size","none","If that arrangement became known, the district would close, and the person paid would deny it first","355066520b0e7470"],
    ["size","none","The gang thinks the streets were lost in fair fights; if they knew the truth, they would turn","377aaff064f0ad2c"],
    ["size","none","Builds to order; half paid at the start, a quarter at the launch, the rest at delivery.","53df80a5b92b2cb8"],
@@ -1013,7 +817,6 @@
    ["size","none","Takes a monthly payment to keep patrols away from certain streets on certain nights","7626d9683dc35c81"],
    ["size","none","The streets that were left alone have seen crimes, and the payments are written down somewhere","8c1fad66f606ca49"],
    ["size","none","Offers a drink and a seat; asks who recommended the district.","992c8f666eeda1b3"],
-   ["size","none","Buys at a quarter of the worth; pays in coin.","d7cff752123cdf9d"],
    ["size","none","Pays a share of every house's takings to someone in authority who keeps the district open","e3aee2ed6ca09d80"],
    ["sovereign","none","Grazes their own animals on the lord's meadow and writes the hay down as poor","4a6ee2cef762efd5"],
    ["sovereign","none","Calls families out to the lord's fields on their own harvest days, unless they pay to be let off","789e062ee61c74f5"],
@@ -1037,41 +840,18 @@
    ["goods","none","Tanning requires large amounts of water for processing hides","b9ee3628536aa62f"]
   ],
   "src/data/resourceData.js": [
-   ["goods","none","Surface-accessible fuel for forges, kilns, and domestic heating","0cb4791d97f5b3ad"],
-   ["goods","none","Dense forest with abundant deer, boar, and smaller game; furs and meat available","78d6b3e7855dcbc4"],
-   ["goods","none","Extensive pasture for cattle, sheep, and horses; wool, leather, and dairy production","992feac6734f42de"],
-   ["goods","none","High summer pasture for sheep and goats: wool, cheese, and live animals traded at seasonal markets.","a327f87ddcd4ade4"],
-   ["goods","none","Essential for desert trade and transport. Camel milk, leather, and wool also traded locally.","c5bc338ff1e7dfb8"],
-   ["goods","none","Mushrooms, berries, medicinal herbs, and wild plants; supports herbalists and alchemists","c74498d541d2768a"],
-   ["goods","none","Rich riverbank clay deposits suitable for brickmaking and pottery","f0c19729e5dfd707"],
    ["outside","none","Rare water access determines settlement survival and trade leverage. Controls caravan routes.","41ab360cc1b8165d"],
    ["outside","none","Natural thermal springs with reputed healing properties; attracts pilgrims and the infirm","6980dd8ff546b022"],
    ["outside","none","Old-growth forest with religious or mystical significance; attracts druids and pilgrims","756b3fee20b4d47d"],
    ["outside","none","Intersection of multiple trade routes; every caravan must pass through here","cadc72f23c747664"],
    ["outside","none","Medicinal thermal waters drawing pilgrims and wealthy travelers. Alum and sulfur deposits nearby.","e5571db2e1e0e524"],
-   ["plenty","none","Dense forest with abundant deer, boar, and smaller game; furs and meat available","78d6b3e7855dcbc4"],
-   ["resource","none","Productive desert agriculture: dates, figs, and drought-resistant crops in sufficient quantity to trade.","020eac9c6a6f382e"],
-   ["resource","none","Silver, gold, or copper deposits; attracts merchants and banking infrastructure","09d73cd2d1fd589c"],
-   ["resource","none","Coal or Peat Deposits","0a6ef59506b233df"],
-   ["resource","none","Coastal evaporation pans or inland salt deposits; the settlement produces its own salt","1387dfc605d12cfc"],
-   ["resource","none","Dense evergreen forests at elevation: structural timber, fuel wood, and charcoal production.","33ef15747da7494b"],
-   ["resource","none","High-purity silica sand deposits ideal for glassblowing and fine ceramics.","644a188d9b495693"],
-   ["resource","none","Accessible iron ore veins; enables metalworking and weapon production locally","891636c50a92984e"],
-   ["resource","none","Sustainably harvested timber stands; reliable lumber and charcoal supply","95b25ed4f4c42286"],
-   ["resource","none","Extensive pasture for cattle, sheep, and horses; wool, leather, and dairy production","992feac6734f42de"],
-   ["resource","none","Extensive salt deposits from ancient dried seabeds: major trade commodity across all desert routes.","9fa372ef8eb0b876"],
-   ["resource","none","High summer pasture for sheep and goats: wool, cheese, and live animals traded at seasonal markets.","a327f87ddcd4ade4"],
-   ["resource","none","Wetlands providing reeds, peat, waterfowl, and unusual plant materials; impassable to armies","bc1dfd3297794ae4"],
-   ["resource","none","Essential for desert trade and transport. Camel milk, leather, and wool also traded locally.","c5bc338ff1e7dfb8"],
-   ["resource","none","Medicinal thermal waters drawing pilgrims and wealthy travelers. Alum and sulfur deposits nearby.","e5571db2e1e0e524"],
-   ["resource","none","Rich riverbank clay deposits suitable for brickmaking and pottery","f0c19729e5dfd707"]
+   ["plenty","none","Dense forest with abundant deer, boar, and smaller game; furs and meat available","78d6b3e7855dcbc4"]
   ],
   "src/data/roadmapLedger.js": [
    ["outside","none","Advance time and the region keeps going. Wars start and burn themselves out, trade routes shift, faiths win converts, an","fd9db9f4a5dec733"],
    ["size","none","The map remembers. A burned quarter stays scarred for years, a boom district visibly rises, and the temple grows two siz","0eed353b9d78474b"]
   ],
   "src/data/roadsProse.js": [
-   ["goods","none","${x.npc} has taken the ${x.dest} road out of ${x.home}, sent on ${x.purpose} business.","4e0f6718e9933ca3"],
    ["office","none","Held off the ${x.dest} road by soldiers, ${x.npc} of ${x.home} was delayed a week.","38c042a174336aaa"],
    ["outside","none","The siege of ${x.dest} keeps ${x.npc} of ${x.home} abroad, waiting for the road to open.","24f21cb661dfdad2"],
    ["outside","none","An envoy of ${x.home}, ${x.npc}, is abroad toward ${x.dest} on ${x.purpose} business.","6b1a5ae765cfb0f1"]
@@ -1109,12 +889,7 @@
    ["sovereign","none","No one house speaks for it: the lords who back the crown act together.","d4c131c8eacfffde"]
   ],
   "src/data/stressTypes.js": [
-   ["ease","none","Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns ","7170839281631b0a"],
    ["sovereign","none","The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this (whether a ri","c1f8cab6384febab"]
-  ],
-  "src/data/stressTypesMeta.js": [
-   ["ease","none","Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns ","7170839281631b0a"],
-   ["plenty","none","The tithe is split, feast days and fairs are held twice over, the old house\\'s property has no clear owner, and trade ac","eaed6d7ab3fdc4a0"]
   ],
   "src/data/supplyChainData.js": [
    ["outside","none","Holy sites bring in money through what pilgrims spend: income that does not depend on trade.","08161ea25bfb1f3a"],
@@ -1152,8 +927,7 @@
    ["goods","none","Quality textiles and cloth","2ff70cccf5092acc"],
    ["goods","none","Silk, fine dyes, exotic textiles, and finished luxury garments","92c254b8789bb7de"],
    ["goods","none","Silk, fine dyes, and imported cloth","e3406a752caa94ff"],
-   ["outside","none","Silk, fine dyes, and imported cloth","e3406a752caa94ff"],
-   ["resource","none","Metal ore + gems","2e4ce3609c4a2474"]
+   ["outside","none","Silk, fine dyes, and imported cloth","e3406a752caa94ff"]
   ],
   "src/data/traditionCorpus.js": [
    ["goods","none","candles kept through the dark hours","deda63ae21d4f5a5"],
@@ -1196,149 +970,7 @@
    ["plenty","none","${pop} people give the place plenty of hands for its work.","5f58028b7c883ad7"],
    ["size","none","Order in the streets is ${c > 0 ? 'well' : 'poorly'} kept.","05c587f5926deeee"]
   ],
-  "src/domain/certification/subsystemRowsBaseline.js": [
-   ["resource","none","The gate is a single seam: candidateEvents.js:510 admits evaluateFactionRules only when rules.factionCompetitionEnabled ","cc193476a13352a6"],
-   ["resource","none","The gate is a single seam: candidateEvents.js:507 admits evaluateNpcRules only when rules.npcAgencyEnabled is true, so e","d824c31ea0c77645"],
-   ["resource","none","No flow_trade_scarcity can appear while tradeFlowsEnabled is dark, and none can appear at all under a local or off propa","e50f77bb664c0ea8"]
-  ],
-  "src/domain/certification/subsystemRowsBelief.js": [
-   ["outside","none","THE ROW THE WAR PROGRAM IS WAITING ON, AND IT STILL DECLARES NO CHANNEL. ONE GATE, A CONJUNCTION: subjectAxesActive refu","088c834134015dc9"],
-   ["outside","none","A SUBSYSTEM WITH EXACTLY ONE CALLER SINCE ES-Da, AND EVERY ALIVENESS CHANNEL IS STILL EMPTY - which is now a statement a","720c9bb095d7f76f"],
-   ["outside","none","NARROWED AT ES-3, AND THE NARROWING IS THE POINT. Through ES-2 this claim was the strongest available shape: no module u","a09ce7e6bbee0578"],
-   ["outside","none","The mapping row derives diplomatic from both war purposes, so an errand written before this wave — and every errand the ","e4d6fbc69e95bcdf"],
-   ["plenty","none","A CONDITIONAL FIELD INSIDE ANOTHER SUBSYSTEM CONTAINER, WHICH IS WHY EVERY CHANNEL IS EMPTY. ONE GATE, A CONJUNCTION: su","a6d11239bea06c22"],
-   ["resource","none","With the flag dark no MINT ever writes a purposeClass, declaredPurpose or truePurpose key, so a LIT war layer (the adver","993835196f032f36"],
-   ["resource","none","A CONDITIONAL FIELD FAMILY INSIDE ANOTHER SUBSYSTEM\\'S CONTAINER, WITH NO FOREIGN CALLER YET, which is why every channel","dc830f337024b77c"],
-   ["threat","none","NOT expressible from any receipt schema: the census counts belief-map ENTRIES, never their fields. Pinned in tests/prope","5c0b44f2a2e70680"]
-  ],
-  "src/domain/certification/subsystemRowsCoin.js": [
-   ["office","none","THE ESTATE\\'S FIRST CONSERVED COIN STOCK, and the reversal of a standing ruling: f3cf639e forbade a conserved-coin primi","0e8e2413a1d7e150"],
-   ["sovereign","none","THE ESTATE\\'S FIRST CONSERVED COIN STOCK, and the reversal of a standing ruling: f3cf639e forbade a conserved-coin primi","0e8e2413a1d7e150"]
-  ],
-  "src/domain/certification/subsystemRowsCompact.js": [
-   ["goods","none","A DARK INSTRUMENT WITH NO MOUNT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. TWO GATES, bot","61d0ada8f0c74fb5"],
-   ["goods","none","A ZERO-KEY IDENTITY LAYER, WHICH IS WHY THE CENSUS CANNOT SEE IT AND WHY THAT IS THE CORRECT READING. ONE GATE: oathHold","620090fd6c8ff6f9"],
-   ["goods","none","THE PROMISE: a seed is a world, forever. Re-deriving the world and re-minting the treaty must put the SAME person on the","7b5cb3c909c5024d"],
-   ["goods","none","ONE GATE, ONE WRITE SITE, AND NO CONSUMER AT THIS WAVE. treatyRenewalActive (pactAmendment.js) reads treatyRenewalEnable","db9e7099be885199"],
-   ["goods","none","THIS SUBSYSTEM IS STRUCTURALLY INVISIBLE TO EVERY RECEIPT SHAPE THE ESTATE WRITES, and saying so is the row. ⚠ ONE GATE,","e72afb2c13c31bc0"],
-   ["resource","none","A DARK INSTRUMENT WITH NO MOUNT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. TWO GATES, bot","61d0ada8f0c74fb5"],
-   ["resource","none","With the flag dark the ledger is never opened, no record is written, and the T9 seam never sees a commercial term. The c","6f5e57630fe40c7e"],
-   ["resource","none","THIS SUBSYSTEM IS STRUCTURALLY INVISIBLE TO EVERY RECEIPT SHAPE THE ESTATE WRITES, and saying so is the row. ONE GATE: e","f0846b7f1f281dde"],
-   ["sovereign","none","A vassalage changes overlord without changing rung. The only pre-existing occupier-change writer resets the ladder to co","4585dd573203537a"],
-   ["threat","none","PARTLY expressible from a receipt: a kind census over the stream would show zero of both. Pinned directly in tests/prope","3f08c7603eb31016"],
-   ["threat","none","NOT expressible from a receipt: no census reads per-treaty fields. Pinned in tests/domain/treatyRenewalMemory.test.js by","ad4c0268f9762cfd"]
-  ],
-  "src/domain/certification/subsystemRowsEncounters.js": [
-   ["office","none","Expressible from state and asserted that way in tests/domain/corruptionWebPins.test.js (ENC-2) with plant P6: reverting ","3ef19a41ac121246"],
-   ["outside","none","The select is greedy over a deterministic census order and takes a candidate only if NEITHER party is already spoken for","147bbcfb1716dee5"],
-   ["outside","none","Expressible from the returned receipts and asserted that way in tests/domain/envoyChanceMeeting.test.js (the leaf\\'s own","6bb998630a2d870a"],
-   ["resource","none","THE OWNER DIRECTIVE (ODQ §881.10 to §881.13): chance meetings between named NPCs across settlements, with four outcome f","4726b7898a82381b"],
-   ["resource","none","STATE, NEVER FATE, for the one outcome wide enough to threaten it. A compromise deposits a LEAN the corruption web may o","609d606a8d539382"]
-  ],
-  "src/domain/certification/subsystemRowsGrowth.js": [
-   ["office","none","WAVE P2, the owner where-appropriate clause. Each push driver carries an applicability guard that zeroes it outright rat","ba0e9baa6f6e6ec8"],
-   ["office","none","NOT expressible from any receipt schema today: no envelope records why a settlement did not shed. Pinned at source pairw","d479841602bc674c"],
-   ["plenty","none","WAVE P2, and the whole reason the wave exists. The soak finding was a BIFURCATION rather than a runaway: unbounded winne","39a5762492009bb1"],
-   ["plenty","none","ONE GATE, READ AS ABSENT-MEANS-DARK. upswingArcsActive requires upswingArcsEnabled === true (upswingKernel.js:96) and th","574b4c4cd132140d"],
-   ["plenty","none","THE ROW WITH NO CHANNEL, AND THE REASON IS THE SLICE. Wave P1 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md) cures the finding that","9adca0abc9ee9916"],
-   ["plenty","none","The death rate is the tier natural-mortality band times a multiplier that is at least one, so no combination of prosperi","d053151533c20310"],
-   ["resource","none","None of the six literals can appear while emergentEventsEnabled is dark. The single seam admits the whole map or none of","11124645b9a9fc9a"],
-   ["resource","none","NOT expressible from any receipt schema today: no envelope records a founding alongside the capacity that was available ","27a7b355ee9a3ff0"],
-   ["resource","none","WAVE P4, design law 5. The demographic coupling adds a bounded lift to two EXISTING pressure scores at the one seam inci","5c27a1bf924935d5"],
-   ["resource","none","THE ROW WITH NO CHANNEL, AND THE REASON IS THE SLICE. Wave P1 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md) cures the finding that","9adca0abc9ee9916"],
-   ["resource","none","NOT expressible from any receipt schema today: no envelope pairs a founding with its parent head count. Pinned at source","9bc16cac5c114ea6"],
-   ["resource","none","The six kinds share one producer, one severity floor and one seam. A receipt carrying any of them proves the seam ran, s","b671eb2462a26285"],
-   ["resource","none","ONE SEAM, ONE FLOOR, SIX KINDS OUT OF EIGHT. candidateEvents.js:435 admits the pressure-condition map only when rules.em","f4882d9213328235"],
-   ["size","none","Partially expressible: in a receipt of at least one hundred observed years recording demographicsEnabled true, the sprea","e5cf805e6f505482"],
-   ["threat","none","ONE GATE, READ AS ABSENT-MEANS-DARK. upswingArcsActive requires upswingArcsEnabled === true (upswingKernel.js:96) and th","574b4c4cd132140d"],
-   ["threat","none","WAVE P2, the owner where-appropriate clause. Each push driver carries an applicability guard that zeroes it outright rat","ba0e9baa6f6e6ec8"],
-   ["threat","none","NOT expressible from any receipt schema today: no envelope records why a settlement did not shed. Pinned at source pairw","d479841602bc674c"]
-  ],
-  "src/domain/certification/subsystemRowsMemory.js": [
-   ["office","none","ONE GATE, ONE WRITE SITE, ONE LEDGER. warMemoryActive (worldPulse/concludedWars.js) reads warMemoryEnabled by name with ","400ca48c4459e11c"],
-   ["resource","none","ONE GATE, ONE WRITE SITE, ONE LEDGER. warMemoryActive (worldPulse/concludedWars.js) reads warMemoryEnabled by name with ","400ca48c4459e11c"]
-  ],
-  "src/domain/certification/subsystemRowsPeople.js": [
-   ["ease","none","DARK BY DECLARATION, STILL, AFTER H4, AND THE eventTypes LIST IS STILL EMPTY, THOUGH FOR A NEW REASON THAT MATTERS. H4 i","bbe66520c113839e"],
-   ["resource","none","The gate is a single seam: candidateEvents.js:442 admits evaluateStressorRules only when rules.stressorsEnabled is true,","2ad07ccf0afb5195"],
-   ["resource","none","The gate is a single seam: candidateEvents.js:481 admits evaluateRelationshipRules only when rules.relationshipDynamicsE","2daa792d66bc9431"]
-  ],
-  "src/domain/certification/subsystemRowsPlace.js": [
-   ["outside","none","A returned captive can only exist downstream of a mission that left home: the capture classes all fire on a traveller in","ff0e3057f9af55db"],
-   ["resource","none","The gate is a single seam: tierResourceDynamics.js:530 computes a tierEligibility only when rules.tierDriftEnabled is tr","11e07779cbf8440d"],
-   ["resource","none","THE CEILING PRESET HEADLINE FEATURE LEAVES NO RECEIPT TRACE. The gate is a single seam (calamityEnabled at spatial/calam","3d34d248179b87fe"],
-   ["resource","none","The ledger holds one record per live settlement, not a sample: the layer walks the ordered settlement ids and deposits f","69339c9500ef751a"],
-   ["resource","none","The gate is a single seam: urbanFabricActive (urbanFabricKernel.js:158) reads simulationRules.urbanFabricEnabled === tru","b8e71c9e34fe55c3"],
-   ["size","none","The layer swaps WHERE a consequence lands, never how much of it there is: a calamity toll is narrated by district with t","1fcc5a0dd2f730e3"],
-   ["size","none","Each observed year mints exactly one harvest marker and one hungry-gap marker, and a spring-thaw marker whenever the sea","5fa607d56b5e006c"],
-   ["size","none","The gate is a single seam: urbanFabricActive (urbanFabricKernel.js:158) reads simulationRules.urbanFabricEnabled === tru","b8e71c9e34fe55c3"]
-  ],
-  "src/domain/certification/subsystemRowsSeat.js": [
-   ["ease","none","THE PROMISE, and it is narrower than the usual dark claim because this flag lights a PREDICATE rather than a layer: with","2f77ca0c4ad2ceef"],
-   ["goods","none","The foreign seat (the occupier or overlord who looms over the ruler)","2c3b65f9148118e1"],
-   ["goods","none","THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement\\'s ruling power has \"an equa","9dd348defe01d8bd"],
-   ["office","none","THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement\\'s ruling power has \"an equa","9dd348defe01d8bd"],
-   ["sovereign","none","The foreign seat (the occupier or overlord who looms over the ruler)","2c3b65f9148118e1"],
-   ["sovereign","none","THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement\\'s ruling power has \"an equa","9dd348defe01d8bd"]
-  ],
-  "src/domain/certification/subsystemRowsVirtual.js": [
-   ["goods","none","A DARK INSTRUMENT WITH NO MOUNT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE, by n","1c91089cf96a7a1e"],
-   ["goods","none","A ruined house whose faction is still eligible does not re-open inside the ruin cooldown, and re-forms after it as a NEW","92dc5c4852bdfe88"],
-   ["goods","none","ONE GATE, ONE WRITE SITE, AND ONE READER, ALL IN THIS WAVE. undercityHighWaterActive (undercity/colonization.js) reads u","9a5ac4fcd03a2e9d"],
-   ["goods","none","The merchant house (books, the ruin latch, the threshold acts)","ee2b0e555771d7d5"],
-   ["office","none","THE UNSEATING RECORD. Today a settlement\\'s patron creed changes hands and nothing survives the tick: the fold mints a c","3a8e3e7269b586b8"],
-   ["office","none","THE LAYER FLAG, and it gates a lane that at this wave has no writer at all. Read by name in contributionLedger.contribut","c6c3f90d3982c2eb"],
-   ["outside","none","The colonization driver `criminalShare` IS corruption.js\\'s own reading of the stored profile, imported rather than reco","4ad8df61fedfa7fa"],
-   ["outside","none","A NEWS-ONLY STAGE OVER LEDGERS OTHER LAYERS WRITE, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READI","6ef4c4cad4403756"],
-   ["outside","none","A QUEUE ORDER AND A RETURNED RECEIPT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE,","883c36f70815de01"],
-   ["outside","none","With the key absent, false, or any truthy non-true value, the orchestrator\\'s whole output and six real pulse records ar","97c5bfb8fc292cf8"],
-   ["outside","none","The reputation race (the traveller against his own story, at the gate)","c8910c752941f417"],
-   ["plenty","none","A QUEUE ORDER AND A RETURNED RECEIPT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE,","883c36f70815de01"],
-   ["resource","none","NOT expressible from a receipt. Pinned in tests/domain/undercityColonization.test.js over TWO advances driven through th","2b92339f5d43ca9c"],
-   ["resource","none","A DERIVED READ AND TWO PULSE SEAMS ON EXISTING LEDGERS, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT ","31270096c5d605bb"],
-   ["resource","none","The seam moves the root seed VALUE and introduces no branch, so a lit advance draws the same NUMBER of forks in the same","34674abaedc8733f"],
-   ["resource","none","ONE GATE, BY NAME AND STRICT, AND IT IS OLDER THAN THIS ROW. intelActs.intelTradeActive is the only read of the key in s","4f40d2bf31cfa8ff"],
-   ["resource","none","A QUEUE ORDER AND A RETURNED RECEIPT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. ONE GATE,","883c36f70815de01"],
-   ["resource","none","With the key absent, false, or any truthy non-true value, advanceGenerosity deposits no transfer and writes no cooldown,","982a5d92d2b56ece"],
-   ["resource","none","THE STREAM-IDENTITY GATE. Lit, the store mints one nonce per USER ADVANCE and the kernel appends it to the pulse root as","f7b7d485802e3d90"],
-   ["threat","none","TWO GATES, AND THE OUTER ONE IS AN EIGHT-FLAG CONJUNCTION. vengeanceLicensesActive (vengeanceLicense.js) reads the layer","ce71ab5e09970037"]
-  ],
-  "src/domain/certification/subsystemRowsWar.js": [
-   ["goods","none","Coalition cost is reread from the existing books since entry and never accumulated in a parallel total.","34b0cbe9dce0dd08"],
-   ["goods","none","BUILT AND DEFAULT-DARK, WITH NO BORROWED ALIVENESS CHANNEL. coalitionLedgerEnabled is a virtual key absent from DEFAULT_","503ef7fc4650fcee"],
-   ["goods","none","Nested under warLayerEnabled (read at warDeployment.js:470, inside the gate at 243). MEASURED alive in every completed r","5f173a90da8fb383"],
-   ["goods","none","WR-9 must record the eligible-call denominator beside mutually exclusive join/refuse decisions, each carrying risk, book","75ddfeb96e079e44"],
-   ["goods","none","Nested under warLayerEnabled (read at warDeployment.js:474). The flag scales a deploying settlement\\'s force by its supp","c36da38a4dac5398"],
-   ["goods","none","Every WR-9 war-ruling receipt must retain exactly the four canonical term keys; a missing living ruling seat records rea","d9c4a235505e5fe4"],
-   ["goods","none","Nested under warLayerEnabled through a strict two-flag gate: both warLayerEnabled and warTerminationEnabled must be exac","f55e2b29b76080c0"],
-   ["outside","none","A regime that overextends loses on its own home front, so the scar it accrued abroad is legible in the politics at home.","6fa17a5009166a35"],
-   ["outside","none","Reader receipts speak only on trajectory onset/change, a home-front upward crossing, the first winning-abroad contradict","e0844013e8481a75"],
-   ["resource","none","peaceCausalActive (warReasons.js:378) is warLayerEnabled AND peaceEngineEnabled, both lit in full_simulation, so the two","41ed79a05036c7fe"],
-   ["resource","none","BUILT AND DEFAULT-DARK, WITH NO BORROWED ALIVENESS CHANNEL. coalitionLedgerEnabled is a virtual key absent from DEFAULT_","503ef7fc4650fcee"],
-   ["sovereign","none","Nested under warLayerEnabled (read at warDeployment.js:479, inside the gate at 243). MEASURED SILENT, and that is this r","22fc565b1c421180"],
-   ["sovereign","none","Nested under warLayerEnabled (read at warDeployment.js:477). computeAllyRelief (warCapacityReads.js:74) sums ALLY_RELIEF","3e3d3ba8cc3a00a1"],
-   ["sovereign","none","An overlord that fields an army while holding unbesieged junior clients draws men and grain from them. A span with wars,","67fddf7082ceacc3"],
-   ["threat","none","Every non-quiet homeFrontComponents member must carry its own stateRead and closed band; a source-absent fixture stays q","6ea598551ffa1b19"]
-  ],
-  "src/domain/certification/subsystemRowsWaves.js": [
-   ["office","none","ONE GATE, AND THE SLICE BEHIND IT STILL EMITS NO EVENT. routeLifecycleActive is the virtual routeLifecycleEnabled alone ","35de0c834f54f9e3"],
-   ["office","none","For any receipt whose subsystems.rules records routeLifecycleEnabled true, subsystems.stateKeys carries no route-lifecyc","4c3b326f409a162f"],
-   ["outside","none","ONE GATE, AND THE SLICE BEHIND IT STILL EMITS NO EVENT. routeLifecycleActive is the virtual routeLifecycleEnabled alone ","35de0c834f54f9e3"],
-   ["outside","none","J4 gives the estate five ways to ASK the network a question and exactly one way to write to it, and that write is a cond","43a4daf2afde3468"],
-   ["plenty","none","ONE GATE, READ DEFENSIVELY. constructiveFlowsActive is the flag alone (generosityEV.js:928); there is no spatial or beli","16403b4331e14956"],
-   ["resource","none","A commitment stock is a read of legible public acts over a bounded course taxonomy, never a free-standing hum. An actor ","0a21da648ee08d59"],
-   ["resource","none","A steading founded on a resource strike is placed on ground where that vein could actually be worked, not at an arbitrar","397a42f5121b374d"],
-   ["resource","none","TWO GATES, ONE FLAG. momentumActive requires beliefsActive AND the virtual momentumEnabled (momentum.js:121), so a realm","fd60e41f215afd24"],
-   ["size","none","ONE GATE, AND THE SLICE BEHIND IT IS MAGIC-INDEPENDENT. magicEconomyActive is the virtual magicEconomyEnabled alone (ins","5d84222f1192cdad"],
-   ["size","none","A PRESENTATION-SIDE SUBSYSTEM, AND THE FIRST ONE THIS CONTRACT HOLDS. THE GATE: townCartographyActive is the virtual tow","a405a0f511c295b8"],
-   ["sovereign","none","ONE GATE, READ DEFENSIVELY. constructiveFlowsActive is the flag alone (generosityEV.js:928); there is no spatial or beli","16403b4331e14956"],
-   ["threat","none","An indirect campaign is a WAR strategy that strikes the suppliers instead of the walls. It cannot exist in a run whose w","77b5e739a5fc46c8"]
-  ],
-  "src/domain/certification/warConvergenceContract.js": [
-   ["resource","none"," seam and source. The lighting condition CAN be met; whether to light it is an","51d072b7977cd3e2"]
-  ],
   "src/domain/coherence/crisisBlindFindings.js": [
-   ["plenty","none","s name honoured at every feast while the new offices take its old work\\b/, family: ","119f7a725b77d5c7"],
    ["threat","none","the seat is safe","94d2498073cbd245"]
   ],
   "src/domain/coherence/defenseWordsFindings.js": [
@@ -1354,59 +986,6 @@
   ],
   "src/domain/coherence/readerBattery.js": [
    ["office","none","dawn, the market, the tavern, the watch","5c363ffecd902668"]
-  ],
-  "src/domain/compendium/bandLadders.js": [
-   ["office","none","Organized crime or a crisis has overwhelmed the watch.","a98cabaf331ae0a9"],
-   ["outside","none","A food deficit above 15 percent, covered by imports. A cut trade route turns it into a crisis.","00f83136583f687a"],
-   ["outside","none","Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial you set. An output you re","caff6e1db1078973"],
-   ["plenty","none","Visibly well off. Surplus funds its institutions and defenses across a broad web of trade.","347826e069997f0e"],
-   ["plenty","none","Abundant. The settlement commands wide trade and reserves deep enough to outlast most crises.","b55b51cd2979605d"],
-   ["plenty","none","Steady and ordinary. The settlement supports itself with a thin margin to spare.","e69c49aa88e6c7a4"],
-   ["plenty","none","Reliable surplus. Trade and craft carry it well past subsistence, and reserves exist.","ee0467cd76a9ef8a"],
-   ["plenty","none","A food surplus above 40 percent. Reserves cushion a bad season and can lift prosperity.","f0aaa87beaac444d"]
-  ],
-  "src/domain/compendium/catalogData.js": [
-   ["office","none","Military and economic cooperation. Elevated garrison institutions and shared defense logic on both sides.","65c2a6877efe194f"],
-   ["office","none","Defense first. Civilian economy secondary to garrison supply.","d12ffc76d904680d"],
-   ["outside","none","Pilgrimage destination. Protected status. Trade in relics and indulgences.","9448fbe284be28b3"],
-   ["resource","none","Resource: ore or stone nearby, isolated","707fc9e24cc1a324"]
-  ],
-  "src/domain/compendium/generated/compendiumData.generated.js": [
-   ["office","none","The garrison, guard, or standing force.","3002f4ac62c18e9b"],
-   ["office","none","How prepared the settlement is to withstand attack, from walls and garrison to trained militia. It rises with fortificat","30ee771a5011504f"],
-   ["office","none","Military and economic cooperation. Elevated garrison institutions and shared defense logic on both sides.","65c2a6877efe194f"],
-   ["office","none","Strain from the settlement being unready to defend itself against the threats it faces. It rises as garrison, walls, and","8c1c0f69af387d85"],
-   ["office","none","Organized crime or a crisis has overwhelmed the watch.","a98cabaf331ae0a9"],
-   ["office","none","Defense first. Civilian economy secondary to garrison supply.","d12ffc76d904680d"],
-   ["office","none","How stable and well-governed the settlement's magical forces are. Low stability signals unchecked arcane hazard, leakage","eb0d2c6637d93cbb"],
-   ["outside","none","A food deficit above 15 percent, covered by imports. A cut trade route turns it into a crisis.","00f83136583f687a"],
-   ["outside","none","Named travellers on the roads","36abf82e52926a1a"],
-   ["outside","none","Sets the status of a channel, such as a trade route or a war front, between two settlements in the region.","4a1c9fc9b77824e4"],
-   ["outside","none","How well the settlement is tied into trade routes and partners. It governs the flow of goods in and out, and the wealth ","51b143fe835a96a3"],
-   ["outside","none","Pilgrimage destination. Protected status. Trade in relics and indulgences.","9448fbe284be28b3"],
-   ["outside","none","Create an imported campaign","bc5e6b704f20edbb"],
-   ["outside","none","Lets named NPCs travel for diplomacy, trade, dominion, and observance across a canonized realm. Journeys take time and c","c8a5509e409c1b31"],
-   ["outside","none","Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial you set. An output you re","caff6e1db1078973"],
-   ["outside","none","Imports a shared gallery map together with a new campaign built around it, recording a gallery-imported entry.","dd3fd1afbb2c09c4"],
-   ["outside","none","Imports a full account export of campaigns, saves, and custom content into the store, recording a gallery-imported entry","e858c018e239cf5d"],
-   ["plenty","none","Visibly well off. Surplus funds its institutions and defenses across a broad web of trade.","347826e069997f0e"],
-   ["plenty","none","Abundant. The settlement commands wide trade and reserves deep enough to outlast most crises.","b55b51cd2979605d"],
-   ["plenty","none","An open hand: most of the giver’s surplus above its floor goes out.","cdbccdbf87b2ad87"],
-   ["plenty","none","A gesture: a small share of the giver’s surplus above its own floor.","daa6b4b920f6316b"],
-   ["plenty","none","A considered gift: a meaningful share of the surplus, kept sustainable.","e3b9e6a965588780"],
-   ["plenty","none","Steady and ordinary. The settlement supports itself with a thin margin to spare.","e69c49aa88e6c7a4"],
-   ["plenty","none","Reliable surplus. Trade and craft carry it well past subsistence, and reserves exist.","ee0467cd76a9ef8a"],
-   ["plenty","none","A food surplus above 40 percent. Reserves cushion a bad season and can lift prosperity.","f0aaa87beaac444d"],
-   ["resource","none","Resource: ore or stone nearby, isolated","707fc9e24cc1a324"],
-   ["resource","none","High and rugged. Ore and strong defense, though low agriculture leans on imports, and quakes are its calamity.","d12bcb88f39a8219"],
-   ["size","none","On a mapped realm, it decides where a calamity's toll, a siege's breach, and corruption's creep actually fall across dis","d28571102cf49d6a"],
-   ["size","none","Gives each district a slowly decaying sense of prominence, so old power and wealth linger after a regime or economy shif","f043510e45b37b27"]
-  ],
-  "src/domain/compendium/searchIndex.js": [
-   ["office","none","plagued embattled dangerous monster plague crisis siege-like militia war","1294fc8bdf11993f"],
-   ["office","none","frontier active managed threat walls garrison patrols","7738b7300b25ee9d"],
-   ["plenty","none","surplus production gaps trade vulnerability dependency","18726d1d3e4d40eb"],
-   ["plenty","none","surplus weekly market guilds begin","474cdd37f0078229"]
   ],
   "src/domain/contradictions.js": [
    ["office","none","A ${tier} normally maintains some form of watch, militia, or garrison. Its absence implies either a non-coercive governa","0f2da73cf2fa965b"],
@@ -1439,11 +1018,6 @@
    ["outside","none","Travellers through {name} are stopped and asked their business by officials who are not from here.","c3d38fa19a11380c"],
    ["outside","none","The roads to {name} are dangerous: travellers move in groups and by daylight, and some never arrive.","c9c4fb5ad48e53cc"],
    ["outside","none","At {name}, travellers are asked their business twice, and their answers are remembered.","e00af6fe16d938ba"],
-   ["plenty","none","Arguments over faith in {name} run hot, and a feast day can end in a fight.","349ec3ff7eb8d171"],
-   ["plenty","none","Each faith in {name} watches the other for an insult, and the next feast day could end in a fight.","8e803661645463cc"],
-   ["plenty","none","In {name} feast days and fairs are held twice over, once for each faith, and trade between the two grows harder.","a9387272681d5599"],
-   ["plenty","none","In {name} families keep away from the other faith\\'s feasts, and words between neighbours can turn to blows.","ab06b7ff14e44a8f"],
-   ["plenty","none","Newcomers to {name} find doors shut and no work going; nobody has food to spare for another mouth.","bc6329ab99071e62"],
    ["threat","none","Those who answer for {name}\\'s safety see no threat, and nobody has told them to look.","dbd843017cd9db18"]
   ],
   "src/domain/customContentSchema.js": [
@@ -1452,8 +1026,6 @@
    ["office","none","Watch — patrol & policing","fa49e7ac00aaa444"]
   ],
   "src/domain/dailyLife.js": [
-   ["ease","none","Children are warned about the usual things: the deep well, the strangers\\' road, the woods at twilight.","0d579a55318a793c"],
-   ["ease","none","Locals are happy to discuss most things; the usual private subjects stay private.","428fbf8052fb2b65"],
    ["office","none","The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are wal","17d46740c0be13f0"],
    ["office","none","the watch turning a blind eye to the right pockets","f2874455636beb1d"],
    ["office","none","Bakers light their ovens first, then the smiths; the watch changes as the gates open.","f34ca39293e997b2"],
@@ -1469,7 +1041,6 @@
    ["office","none","a capable militia, enough to defend its own and raid a neighbour","b736b4cdf8e43b27"]
   ],
   "src/domain/display/causeConjunctionClassContent.js": [
-   ["goods","none","The office has been starved of coin for too long, and this {role} has made up the shortfall in ways the books do not sho","981d8e48752eed05"],
    ["office","none","The old pressure eased, but the garrison is hollow now, and covering for what it cannot do has become the arrangement's ","028bc0ecbf864c24"],
    ["office","none","The hollow garrison is a scandal with a face on it: the {role} profited from every unmanned post, and the town has the t","1de968bd78328cf6"],
    ["office","none","The old patron fell, but the garrison is still drained, and the unmanned posts have found the {role} a new set of credit","37ce86f83a17d467"],
@@ -1641,7 +1212,6 @@
    ["office","none","The underworld owns the mob as it owns the offices. The agitator\\'s riots break out wherever the crews need the watch lo","678567ae856d91c5"],
    ["office","none","With the watch restored, the agitator came clean; the priced riots were confessed, and the movement chose its nights fre","85fcfa36ad150f2d"],
    ["office","none","The garrison was refilled and the agitator retired the trade; the invoiced calm was refunded, and the square went back t","d385b1e8ec26414b"],
-   ["office","none","The movement swears its members on a faith no one keeps anymore, and the agitator counts on it: the common purse leaks i","e182a1adf27acf1d"],
    ["office","none","Whoever bought the agitator's riots before is gone, but now the garrison is hollowed out, and the agitator sells riots b","fc387d9eabda1dbc"],
    ["size","none","People from the streets that burned while the garrison stood empty have the dates, and the agitator's prices beside them","1abb05ad9673fa4f"],
    ["size","none","It is out that the agitator sold riots by the night while the garrison stood empty, and the people of the burned streets","53e8d8577d1fb126"]
@@ -1711,7 +1281,6 @@
    ["goods","none","It is public that the guild's books did the underworld's washing, and the guildmaster's beautiful balances are being tak","83fecf95be001573"],
    ["goods","none","The capture was broken and the guildmaster opened the real books; the laundry was documented in his own hand, which is w","8929720d99feef57"],
    ["goods","none","With the garrison hollow, the guildmaster pays the bandits for safe roads, books it as freight costs, and takes a share ","aaa1b13c1c859703"],
-   ["goods","none","The syndicate holds the guild, and the guildmaster's ledgers do its laundry; stolen goods enter as salvage, tribute leav","bd51ececd96b86f0"],
    ["goods","none","It is public that the guildmaster kept two books while the fund ran dry, and members are checking every account since th","bf388002f4b04645"],
    ["goods","none","The faithful are following their tithes from the temple into the guildmaster's books, where the hush money was washed.","f557ecae81ef11cf"],
    ["goods","none","The capture was broken, but the guildmaster still keeps the books the way the underworld wanted, with stolen goods enter","fbec7e7669f07598"],
@@ -1884,8 +1453,6 @@
    ["size","none","A licensed district for commerce in people, with auction halls, holding compounds, and the brokers and clerks that serve","1801d8a342883531"],
    ["size","none","A district given over to organized sellsword companies, from escort outfits to field regiments available for hire.","1b46636803eac6fc"],
    ["size","none","Quarters for the town's guards or a small garrison. Where the armed hand of the settlement sleeps and eats.","28b78898a0481804"],
-   ["size","none","A quarter of concentrated stabling, horse trading, and farriery serving merchants, soldiers, and riders.","2e707ab5567a83bf"],
-   ["size","none","A quarter of fur processors and traders dealing in a high-value luxury good.","3537586e7eb94af4"],
    ["size","none","Dense multi-storey housing and tenements packing a city's population, poorest at the bottom.","40728a918507d453"],
    ["size","none","The central plaza where weekly markets and fairs are held, the commercial heart of a town.","47504a5c9b292b78"],
    ["size","none","A house of worship for every neighbourhood, so no one lives far from a bell.","5f65c71741e3a098"],
@@ -1895,14 +1462,12 @@
    ["size","none","An organized band of pickpockets and toughs who claim a patch of streets and take their tribute from it.","72dcb0b335a0ad69"],
    ["size","none","A district of warehouses holding merchant goods between shipment and sale.","90c41c55e0081662"],
    ["size","none","Soldiers stationed in separate quarters, because no single barracks can hold a city this size.","92b411f85a1de1e1"],
-   ["size","none","The largest store of knowledge for a great distance, holding thousands of volumes and archives.","9aadc54f0ae3fb86"],
    ["size","none","A quiet district of scholars, researchers, and keepers of obscure knowledge who sell answers to those who can afford the","a1d8f1edb2da6b74"],
    ["size","none","A water or wind mill that grinds the district's grain, usually under a monopoly. The miller holds a chokehold on bread a","acddab6436694e75"],
    ["size","none","Leatherworkers who cure hides at scale. Their reek pushes them toward the downstream edge, where the streets can spare t","df28869fde676712"],
    ["size","none","Rival gangs contesting the same streets, whose turf disputes spill into open violence.","e1ac2aba5449a617"],
    ["size","none","Several specialized market districts, each given over to one thing: grain, cloth, metals, livestock, or exotica.","e9d0783b8e9de46c"],
    ["size","none","A chartered market held once a week where the district buys and sells its produce and goods.","ee11620337557dc5"],
-   ["size","none","A quarter of alchemical workshops under guild organization, producing potions and compounds at scale.","fa4ffc1d586c23dc"],
    ["sovereign","none","A steward set over the settlement by a distant lord to collect and oversee. His authority is real and often resented.","23d5d2865503edad"],
    ["sovereign","none","A city administered directly for the crown by a governor or viceroy. High status and high scrutiny.","540272b07588c24b"],
    ["sovereign","none","A chartered works that strikes refined metal into standard coin. A licence from the crown or a lord and a steady source ","58190171c53be95d"],
@@ -1927,7 +1492,6 @@
    ["goods","none","The sick-houses are full to the doors, and the healers have long since run short of herbs and sleep alike.","2962d1372d9e543b"],
    ["goods","none","The healers lay in what herbs they can, for the tales from downriver grow worse with every wagon.","7df35a8e771eed74"],
    ["goods","none","The sickness burned itself out upcountry, and the physic-women set aside the herbs they never needed.","9161d3742678cef8"],
-   ["goods","none","Whatever threatened the trade roads came to naught, and the merchants\\' books show no loss.","b5909309c7d70aa4"],
    ["goods","none","The looked-for revival did not come; the incense is packed away and the bells keep their old silence.","e1a121a02f713e6c"],
    ["goods","none","The fat years mellow into a long ease; the merchants\\' books stay in profit, and prosperity becomes an ordinary thing.","e6d756db16de45bc"],
    ["office","none","News of the fighting passes hand to hand, and the watch keeps a wary eye on the road.","1681dd15c0d2f85c"],
@@ -1957,7 +1521,6 @@
    ["plenty","none","Plenty is upon the country in full; the granaries groan, the roads are gold with commerce, and the poorest table is not ","91a58fb21e638d16"],
    ["plenty","none","The faith has broken over the people like a wave. The temples overflow and the doubters have gone silent.","926c4eac69c0bfc8"],
    ["plenty","none","Word of famine in the near lands reaches the market, and the fortunate are asked to measure out their surplus.","a4d51e6e0ff63302"],
-   ["plenty","none","The whole country has caught the flame; feast and fast alike are observed with a zeal not seen in a lifetime.","ba17408e484395ef"],
    ["plenty","none","The matter of the fat years stirs every hearth, and the careful weigh how long the plenty will hold.","c1e834e563efe6b6"],
    ["plenty","none","Plenty that seemed so near thinned to an ordinary season, and the granary-keepers find room for the harvest after all.","e3ac28392dcb68e1"],
    ["plenty","none","The harbours find their even rhythm again, and the plenty that flooded in becomes a comfortable, lasting tide.","fca7c013f8ccb0ae"],
@@ -1981,9 +1544,6 @@
   ],
   "src/domain/display/occupationStatus.js": [
    ["office","none","restive: sabotage and noncompliance harry the garrison","183228aa9690accf"]
-  ],
-  "src/domain/display/resourceDisplayName.js": [
-   ["resource","none","Coal or Peat Deposits","0a6ef59506b233df"]
   ],
   "src/domain/display/rumorFallbackPhrasePools.js": [
    ["ease","none","a feast day that only part of the town keeps","7b46641d0c37ad01"],
@@ -2053,7 +1613,6 @@
    ["outside","none","travellers passing supply columns headed one way only","f46fae6087479a28"],
    ["outside","none","travellers finding the gate kept by old men","f6a086f995382ba3"],
    ["outside","none","travellers questioned at both ends of the same road","fe602b7858e97efb"],
-   ["plenty","none","a feast day that only part of the town keeps","7b46641d0c37ad01"],
    ["plenty","none","a season's surplus decided elsewhere","d5577210143fe6d0"],
    ["size","none","a season in which the whole district is uneasy","8dc5154d6358785f"],
    ["size","none","whole districts on the road at once","9a565a611d0929f6"],
@@ -2110,8 +1669,6 @@
    ["sovereign","none","travellers finding the overlord's writ ignored here","68c85e634309c832"]
   ],
   "src/domain/display/rumorPhrasePools.js": [
-   ["ease","none","carters arriving empty from the usual direction","1f3445939fee4027"],
-   ["ease","none","a winter in which the usual arrangements stopped being usual","4b148be20973abf0"],
    ["ease","none","craftsmen idle for want of material","e2945360ade0007c"],
    ["goods","none","an obligation left open in both books","e2ab3f7bd1afb8a0"],
    ["office","none","more matters brought to the watch than the watch can take","2bf977ec19f8bcef"],
@@ -2256,16 +1813,10 @@
    ["size","none","${category} districts skew to ${SAFETY_BANDS[idx]}.","2d16c9cc150f43df"],
    ["size","none","Something quiet is shifting in the district\\'s usual routine.","58c8ebb45de09ecc"],
    ["size","none","A new fence accepts coin few quarters will exchange.","6f97121be52c5a0a"],
-   ["size","none","A clerk\\'s ledger appears to be missing a quarter of its entries.","717f7c87385055e2"],
    ["size","none","Acute external threat pulls district safety down.","cc8c9ff16b8f8151"],
    ["size","none","${category} districts skew to ${WEALTH_BANDS[idx]}.","d2fafb2dc003d55a"],
    ["size","none","${t.label} thins the foreign quarter; some have already left.","e910331dd0cefb01"],
    ["size","none","Settlement is ${prosperity}; district wealth nudged down.","f03e817cceefae94"]
-  ],
-  "src/domain/dossier/faithReading.js": [
-   ["plenty","none","Folk attend on the great feast days and keep the lesser rites at home.","9a6459a89029685f"],
-   ["plenty","none","on the great feast days","b71c8ac7b82ea685"],
-   ["plenty","none","In better times folk attend on the great feast days; ${clause} they keep the rites at home.","d9dd369bdddc7d27"]
   ],
   "src/domain/dossier/hookLines.js": [
    ["office","none","${a.name} ${has(a)} offered to split ${issue} down the middle, and ${of(b)} own members cannot agree whether to take it.","9c9d6a6a859c0bae"],
@@ -2365,9 +1916,6 @@
    ["resource","none","the herds\\' milk and mutton","5da8419a2127b783"],
    ["resource","none","meat and milk from the herds","73d3f9f3c9b15bd5"]
   ],
-  "src/domain/historyBeats.js": [
-   ["ease","none","Continuity, with the usual slow erosion of any settlement.","38365699859d9f4c"]
-  ],
   "src/domain/hookEscalation.js": [
    ["office","none","{controller} takes in less, and so does the tax collector.","96d7e66796ee01e7"],
    ["size","none","Public order strains as the conflict spills into the streets.","c255facd6f94a11a"]
@@ -2375,7 +1923,6 @@
   "src/domain/hookThemes.js": [
    ["goods","other","A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.","61afa79ac9fd0944"],
    ["goods","other","Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.","85a88f342c353071"],
-   ["goods","none","Their bookkeeper has been taking a little from every sale for years, and the books balance only because the bookkeeper w","f0f707486d5be4f4"],
    ["office","other","The ambush that killed two of their best people wasn't random. Someone knew the patrol route.","372c08c18314abc0"],
    ["office","other","Someone is paying their soldiers more than their salary. The soldiers aren't saying who.","f87cef04db634632"],
    ["outside","one-kind","A traveller passed through asking which nights their door is left unbarred, and was gone by morning.","18494d86bbbd82c6"],
@@ -2432,8 +1979,7 @@
    ["sovereign","none","src/data/institutionServices.js (Village headman, City administration, Weekly market, City-state government, Lord\\'s app","e01daffcc9b76771"]
   ],
   "src/domain/prose/moveGrammar.js": [
-   ["goods","none","s)? (?:books|roll|rolls|register|registers|count|ledger|ledgers)|the (?:muster|toll) (?:roll|rolls|books|register)|the e","58da831e5bc05f27"],
-   ["plenty","none","a custom, a rite, a feast the world holds","f1e9d3ab662a9e38"]
+   ["goods","none","s)? (?:books|roll|rolls|register|registers|count|ledger|ledgers)|the (?:muster|toll) (?:roll|rolls|books|register)|the e","58da831e5bc05f27"]
   ],
   "src/domain/region/discoverDependencyCandidates.js": [
    ["sovereign","none","${vassal.name} likely owes tribute, levies, or legal obligation to ${overlord.name}.","877c0d1c515f7851"],
@@ -2463,33 +2009,7 @@
    ["sovereign","none","Current settlement is overlord","26346dbb1b696a9d"]
   ],
   "src/domain/resourceSemantics.js": [
-   ["animals","none","Camels and pack animals (local camel herds depleted)","f177b2049d102415"],
-   ["goods","none","Ritual wood and herbs (ancient grove damaged)","2ffff2982c20b206"],
-   ["goods","none","Reeds, peat, and marsh herbs (local wetlands exhausted)","3362b41a4cbb1dc2"],
-   ["goods","none","Game and hides (local hunting grounds exhausted)","4b11145020bbc702"],
-   ["goods","none","Wool, dairy, and livestock (local alpine pasture depleted)","923a148e2a82cae8"],
-   ["goods","none","Herbs and forage (local gathering areas exhausted)","ea3112cd54c690e5"],
-   ["plenty","none","The fields are exhausted or failing and no longer yield a dependable surplus.","55e1e68fed2e5957"],
-   ["resource","none","The workable quarry face is exhausted.","0d8fe60bde03af06"],
-   ["resource","none","Livestock and dairy (local grazing land depleted)","18401bdd933950ea"],
-   ["resource","none","The accessible high-purity glass sand is exhausted.","1a072db896297b45"],
-   ["resource","none","The camel herds have fallen below a sustainable breeding stock.","1adb36795c894d4e"],
-   ["resource","none","Iron ore (local iron mines exhausted)","1d0dd0225f005c72"],
-   ["resource","none","Dates and desert produce (local orchards unproductive)","244a63431f812758"],
-   ["resource","none","Dressed stone (local quarry depleted)","26b6120fb1ba1709"],
-   ["resource","none","Reeds, peat, and marsh herbs (local wetlands exhausted)","3362b41a4cbb1dc2"],
-   ["resource","none","The accessible coal or peat seams are exhausted.","4809eee06d9fabdd"],
-   ["resource","none","Clay and ceramics materials (local clay pits exhausted)","611799f18289cf71"],
-   ["resource","none","The accessible iron seams are exhausted.","6e37c5a910f5ae99"],
-   ["resource","none","Wool, dairy, and livestock (local alpine pasture depleted)","923a148e2a82cae8"],
-   ["resource","none","The pasture is overgrazed and cannot support its former herds.","939bbb0a82c806e0"],
-   ["resource","none","Gemstones (local gem deposits exhausted)","9a1df4a6df5a47b2"],
-   ["resource","none","Coal and fuel (local seams exhausted)","e3f28fcc7694305b"],
-   ["resource","none","Camels and pack animals (local camel herds depleted)","f177b2049d102415"],
-   ["resource","none","Glass sand (local sand pits exhausted)","f2e0b6df4953ecb3"]
-  ],
-  "src/domain/simulationSpine.js": [
-   ["ease","none","continuity, with the usual slow erosion of any settlement","68750df79cd394de"]
+   ["plenty","none","The fields are exhausted or failing and no longer yield a dependable surplus.","55e1e68fed2e5957"]
   ],
   "src/domain/spatial/generosityEV.js": [
    ["plenty","none","LIVE (E1d, design A2): the MARKET TWIN, wired as the post-REFUSE BONDED FALL-THROUGH (\"you won\\'t give? I\\'ll pay\"). Gra","e4e5e2df5b15bbfa"],
@@ -2506,14 +2026,8 @@
    ["outside","none","and the caravan road","f14e834c17b16b80"],
    ["size","other","built around the tank and the bazaar, in quarters by trade, under temple and guild","3df578911280cc1d"],
    ["size","none","built around kin districts and an assembly ground, on pasture and earthwork","5c387f86c1fc9a6d"],
-   ["size","none","built in wards and courtyards","748ca6684a8d8aee"],
    ["size","other","built around the tank, in quarters by trade and kin","a4fca7226a85a319"],
-   ["size","none","built in wards and courtyards, ordered by bureau and lineage","b5aa72f299508ac0"],
-   ["size","none",", in quarters by trade,","c3105f78db3c9213"],
-   ["size","other","built around a civic-ritual plaza, tribute, and market-and-waterworks","d4f8bc2990dbb033"],
-   ["size","none","built around kin districts and an assembly ground","dfd49d19123694a3"],
-   ["size","other","built around a civic-ritual plaza, on tribute and the ritual calendar","f7c6540ea2a3054b"],
-   ["size","none",", in quarters by trade and kin","ffd14e33c2e8c09a"]
+   ["size","none","built in wards and courtyards, ordered by bureau and lineage","b5aa72f299508ac0"]
   ],
   "src/domain/supplyChainState.js": [
    ["office","none","patrols thin; raids go unanswered; protection money changes hands.","e289f22a64db3581"],
@@ -2552,436 +2066,6 @@
   ],
   "src/domain/validation/consistency.js": [
    ["plenty","none","Food balance reports ${Number(fb.surplus) > 0 ? 'a surplus' : 'a deficit'} of ${magnitude} while produced and needed are","5af6d2280d845ad3"]
-  ],
-  "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js": [
-   ["office","none","${powerTransfer.toPowerName} extracts wealth, troops, and authority from the conquered settlement.","6e2bfd0d534555c7"]
-  ],
-  "src/domain/worldPulse/brokerageStamps.js": [
-   ["outside","none"," It has this from far down the road, through hands it cannot name.","766ebad75e09b4e1"]
-  ],
-  "src/domain/worldPulse/calamityKernel.js": [
-   ["size","none","Razed as the district collapsed to a single survivor after the disaster.","1cadf13035f27004"],
-   ["size","none","Dungeon delving supply district","d71f2b4d9d1ff1a2"]
-  ],
-  "src/domain/worldPulse/candidateEvents.js": [
-   ["goods","none","The granary books show less of a shortage than the talk says.","d89bb88ff6bc369e"]
-  ],
-  "src/domain/worldPulse/changeAuthorityPolicy.js": [
-   ["sovereign","none","Every diplomatic relabel built through labelProposal emits a bare applyMode: \"proposal\". A visible relationship label fl","ac98230bed9f79c6"]
-  ],
-  "src/domain/worldPulse/commercialReceiptPools.js": [
-   ["goods","none","The wardens of the towns down the ${x.route} have begun comparing their seizure books, and the same gate is named in all","0692e9e90cdb98a5"],
-   ["goods","none","The books at ${x.settlement} show one supplier of ${x.good} and no second name: a column that reads as a leash.","0eb3d1302fd745aa"],
-   ["goods","none","${x.counterpart} pays its gate-wardens better than the law asks and counts their books oftener, and makes no announcemen","5eb42f6c8c27e546"],
-   ["goods","none","The books at ${x.settlement} show one supplier of ${x.good} for years running, and not one lean month among them.","cc9593ac79f1c117"],
-   ["goods","none","The stall-books of ${x.settlement} record a single hand behind every sale of ${x.good} this season.","d0947032cca29e27"],
-   ["goods","none","${x.counterpart} calls it a partnership; ${x.settlement} has begun to call it a rope, though not yet in public.","d7be5a2826f15f5f"],
-   ["office","none","${x.counterpart} put patrols on the ${x.route}, and the wagons of ${x.settlement} began to arrive whole.","7bf2e4e9045828a6"],
-   ["office","none","Travellers say there are patrol fires along the ${x.route} at night now, and that they slept.","eb2547edae1ff462"],
-   ["outside","none","Travellers at the ${x.settlement} gate are asked how the harvest looked at ${x.counterpart}, and are asked before they a","389137c74d89add0"],
-   ["outside","none","Travellers out of ${x.counterpart} say the ${x.good} was loading before the season turned, and it was.","776b6c143d4175fd"],
-   ["outside","none","Travellers hire a second man for that stretch and do not think themselves timid for it.","86a711b616ac0d40"],
-   ["outside","none","Travellers report the gate on the ${x.route} keeps a shorter list now, and reads it faster.","8e269ece85eede43"],
-   ["outside","none","Travellers out of ${x.counterpart} bring word of full warehouses there and cannot explain the empty road.","c31434e947d6a8a0"],
-   ["outside","none","Travellers say there are patrol fires along the ${x.route} at night now, and that they slept.","eb2547edae1ff462"],
-   ["outside","none","Every winter the question is put again in the guildhall, and every spring the wagons arrive and it is put away.","fe94b7764fda6a41"],
-   ["threat","none","The carters say the ${x.route} is quiet now; they mean the woods and not the traffic.","117281518cd6add4"]
-  ],
-  "src/domain/worldPulse/commonsVoiceKernel.js": [
-   ["office","none","The gathering has become a riot-band: an organised crowd, short of rebellion but past all petitioning, that holds the sq","513a5d3bebd68b5d"],
-   ["size","none","${townName}: the streets rise over ${grievanceWord}","97134dc8a72dc14d"]
-  ],
-  "src/domain/worldPulse/conquestExecution.js": [
-   ["office","none","${occupierLead} holds ${occupiedName} by ${gap} points, which is a garrison and not a conquest.","8271efac1f36562e"]
-  ],
-  "src/domain/worldPulse/conquestFeasibility.js": [
-   ["goods","none","the seat keeps its own books: the war is not yet its own survival.","e32a67dba27a6c04"],
-   ["office","none","${partyId || 'The court'} cannot judge a conquest of ${counterpartId || 'its rival'}: ${why}.","5db806f1e74e34e6"],
-   ["office","none","${partyId || 'The court'} has no bargaining range: it cannot judge the war.","999cfbd25e552158"]
-  ],
-  "src/domain/worldPulse/convergence.js": [
-   ["sovereign","none","Two banners raced for one crown. The prize itself is now the quarrel between them.","27589baebd5e3755"]
-  ],
-  "src/domain/worldPulse/decisionTier.js": [
-   ["resource","none","A steading founding is a growth-class birth at the pulse mover seam (integrator + cooldown + tier caps pace it); a bypas","57fd31bbe4559b7b"],
-   ["resource","none","Flourishing births at the pulse seam (a peace-dwell hysteresis accumulator, like the calamity annual draw), not rollCand","9f3212bdeabf111e"],
-   ["resource","none","The religious conversion/betrayal flip births at probability 1 outside the seam; governor wiring deferred.","f46aa73980ef102f"]
-  ],
-  "src/domain/worldPulse/demographicsHerald.js": [
-   ["size","none","Crowded quarters wore the count down until it fit the ground.","ae6510f8566ab21a"]
-  ],
-  "src/domain/worldPulse/demographicsRates.js": [
-   ["plenty","none","Where filling, pressed and overflowing open on pressure01. The crowding line crosses these.","23a534274e44eaeb"],
-   ["plenty","none","The four overflow words the crowding line crosses and the reading reports.","da488dde422641d9"]
-  ],
-  "src/domain/worldPulse/demographicsResponses.js": [
-   ["plenty","none","${name} sends its overflow to places that already have room.","4648d4569fbbda68"]
-  ],
-  "src/domain/worldPulse/demographicsRisk.js": [
-   ["office","none","the watch is thin","26936b7c13f4d9f4"],
-   ["outside","none","and the road brings strangers every week","3cfcbf8ed84d21c4"],
-   ["size","none","the quarters are packed","1a6b6082e34ae2eb"],
-   ["size","none","and the water and the streets are foul","89f861a707dbce48"]
-  ],
-  "src/domain/worldPulse/deploymentReturn.js": [
-   ["office","none","${homeName}'s surviving soldiers return home.","2fa23c6500d1400c"],
-   ["sovereign","none","${homeName}'s army returned too gutted to challenge the overlord's seat; remnants desert and the order tightens its grip","86fdddd914f70f98"]
-  ],
-  "src/domain/worldPulse/dispositionNews.js": [
-   ["goods","none","${name}'s books refuse a warlike reading","df41533c26ce9b61"]
-  ],
-  "src/domain/worldPulse/envoyNews.js": [
-   ["outside","none","${x.npc} is held abroad by ${x.third_party}","1cd29ff1a78c8785"]
-  ],
-  "src/domain/worldPulse/espionage/infiltrationDrift.js": [
-   ["resource","none","NONE by design; the pulse seam is a later car and no src/ module imports this leaf","50c6b475ef856500"],
-   ["resource","none","an elected-exposure door on the web\\'s creation seam, which F8 rules applies verbatim to placed seats and therefore need","f4dab31b20e4d403"]
-  ],
-  "src/domain/worldPulse/espionage/operationsVoice.js": [
-   ["office","none","The watch stood at one of the places such work must pass, and the face the person wore did not answer for them.","aa7490531820ed73"],
-   ["office","none","The heart under the habits is the one they came with; the watch reads manners moving and fidelity holding.","c0ed59ce58c5503a"],
-   ["outside","none","A caught spy is worth more than a caught traveller, and the deeper the work, the longer the holding and the higher the a","fac54f81b1fcfc94"],
-   ["size","none","If the heart is ever to turn, it will be something that happens to them that turns it. Never the slow weight of the stre","a1d974a5108c2dc2"]
-  ],
-  "src/domain/worldPulse/eventProse.js": [
-   ["outside","none","someone with ties abroad","904593b483541457"],
-   ["outside","none","through their ties abroad","e602ccdd5a00030f"],
-   ["resource","none","The recovery drew on what it had: its prosperity, its masons, the peace, and the aid its allies repaid.","1222d929ad26bfb2"]
-  ],
-  "src/domain/worldPulse/grammarReceiptPools.js": [
-   ["goods","none","The clerks in ${x.settlement} closed the entry, dated it, and shelved the parchment with the others that ran out.","08035303e2785c2e"],
-   ["goods","none","The parchment is soft at the folds; the terms are kept.","3af7cccd64a22969"],
-   ["goods","none","The parchment still joins ${x.settlement} to ${x.counterpart}; the pending question has not broken it.","4888495da43f7785"],
-   ["goods","none","${x.settlement}'s new seat has cast off the oath; every term under it is broken from this week, and the parchment is kep","4e45ad356b530de8"],
-   ["goods","none","The oath ${x.npc} swore is a question this week, and the clerks have set its parchment before the new seat.","570f7bbb099f3731"],
-   ["goods","none","Hollowed and found out: the ${x.term} was kept on parchment and nowhere else.","8d6a9bac498ea85e"],
-   ["goods","none","Between ${x.settlement} and ${x.counterpart} nothing on the parchment moved; the movement was in the answering.","8fe1a3fc383f3ff2"],
-   ["goods","none","On parchment the ${x.term} is honored; in fact ${x.settlement} has sent less than it swore for ${x.band} seasons, and no","9fabc148adb55c4c"],
-   ["goods","none","${x.npc} left an oath standing at ${x.settlement}; the new seat has taken the chair while the parchment remains unanswer","a87b588fe97f4788"],
-   ["goods","none","It ended at the turn of the year, in a season when neither court had anyone watching the parchment.","feff24919e8a30e9"],
-   ["outside","none","The first caravan down the ${x.route} this spring travelled without a writ, and nobody at either gate asked for one.","436a6720d5802fa6"]
-  ],
-  "src/domain/worldPulse/habitForkRegistry.js": [
-   ["outside","none","TRADE — caravan routing. A go/no-go expected-value threshold, paired with the route argmin recorded separately. ⚠⚠ THE T","2f872ec3936b1776"],
-   ["outside","none","which of the eligible residents the traveller happens upon. ⛔ STAY-DETERMINISTIC, and it is HBF-35 verbatim one family o","37c40b17ffb28b97"],
-   ["outside","none","grade a hazard outcome against what the traveller reached and what it cost, and the conversion draw against whether the ","4cfe674ec65755f0"],
-   ["outside","none","grade a taken caravan against whether the shipment ever arrived, which the commodity ledger already records; the loss fr","5de8177582d02c7a"],
-   ["outside","none","the coincidence gate: whether two people already standing in the same place on the same tick notice each other at all. ⛔","e5e78d694abdc3f1"],
-   ["outside","none","SURVEY U-08 - a seeded, sporadic, BOUNDED banditry loss on a trade channel through embattled ground: a fire gate, then a","eacda4287fa35816"],
-   ["outside","none","establish, per modality, whether a hazard gate chooses anything or the world resolves a hazard against a traveller who s","ef6be8d3f64ccd80"],
-   ["outside","none","SURVEY U-42 - THE DENSEST UNREGISTERED CLUSTER IN THE ESTATE, NINE draws behind one symbol: the road hazard classes that","fa801da9dd85c03e"],
-   ["plenty","none","grade a chosen response against the overflow band it was meant to relieve, over the horizon the band takes to move","e64106284a0f7289"],
-   ["resource","none","A KEYED DRAW, one fork per swept town and tick (the stream-theft rule, sweep:<home>:<tick>), one reading per covert watc","01b1e6c7d86dc878"],
-   ["resource","none","grade a depletion against whether the seam ever came back, and a recovery against whether it held; both are one record r","2d0a667f45a47b7e"],
-   ["resource","none","the pin seam: the sweep consumer (IN-3-c, at the direction transport) consults a pending pin over SWEEP_OUTCOMES before ","80e0b32fcf0034c1"],
-   ["resource","none","THE GUARD-CHAIN REGISTER\\'S ONE MEMBER. MEASURED: a chain of early returns with ZERO weighted arms, so it is not a fork ","ad91a524152982b7"],
-   ["sovereign","none","grade the imposed rite\\'s survival to liberation against its restoration, keyed to the overlord\\'s decision to impose","f68c0a63cf222038"]
-  ],
-  "src/domain/worldPulse/heraldDeeds.js": [
-   ["office","none","ready the walls and the watch","30ef49583fb0b8f9"],
-   ["office","none","win a new garrison for the town","a3b6c84b9358f68e"],
-   ["outside","none","${n}'s trade routes break down","55791eac2ac7f819"],
-   ["outside","none","Caravans are passing ${n} by, and its market stalls stand half empty.","b98b9c521166df8b"],
-   ["size","none","Thieves and racketeers are working ${n}'s streets in the open.","6b8eba9372c44773"],
-   ["sovereign","none","settle into overlord and vassal","48f141fe9f0fc568"],
-   ["sovereign","none","throw off the overlord's yoke","acd6cca43e1598bb"],
-   ["sovereign","none","are settling into overlord and vassal","bfbfb620ada77701"]
-  ],
-  "src/domain/worldPulse/infoLure.js": [
-   ["plenty","none","(that ${who} ${more ? 'has plenty' : 'goes short'} of ${String(spec.key).replace(/_/g, ' ')} when it does not)","d3e6fefa86cb04b8"]
-  ],
-  "src/domain/worldPulse/informationReceiptPools.js": [
-   ["office","none","The seat's book at ${x.settlement} opens a line for extra watchmen, lamp oil, and a clerk to keep the gate rolls.","6f106177a2139f41"]
-  ],
-  "src/domain/worldPulse/informationStatecraft.js": [
-   ["outside","none","A court caught spying on a neighbour pays in credibility at home and grievance abroad. The blowback the covert instrumen","c53d294528f17eb3"]
-  ],
-  "src/domain/worldPulse/ledgerOwnershipManifest.js": [
-   ["resource","none","pulse writers only: belief commit -> envoy silence apply -> envoy silence clear -> information statecraft -> generosity;","8946c264a569925f"]
-  ],
-  "src/domain/worldPulse/lineageNews.js": [
-   ["goods","none","The wagon books refuse ${actor}'s claim against ${target}","db0c01e4b9654734"]
-  ],
-  "src/domain/worldPulse/magicBufferModel.js": [
-   ["size","none","The wards reached further than the stores could pay for, and stopped where the coin stopped.","2a99cb9763a77715"],
-   ["size","none","The wards had nothing behind them: no stores to spend and no reserve to call on.","c1e3e85c5363262e"],
-   ["size","none","The wards held over what they could reach","e8c2c8458ed9dd1f"],
-   ["size","none","The wards blunted the worst of it","f17be81fa620323f"]
-  ],
-  "src/domain/worldPulse/marketNews.js": [
-   ["outside","none","${settlement} sent its ${cargo} to ${counterpart} on word that it was ${believedBand} there; the caravan found the marke","88127bcd55262652"],
-   ["outside","none","${settlement} caravans reach ${counterpart} and find the market full","e3589faaefc64c13"]
-  ],
-  "src/domain/worldPulse/marketReceiptPools.js": [
-   ["outside","none","The caravans came for the famine and found the harvest.","927f8381adeeef49"]
-  ],
-  "src/domain/worldPulse/militaryStrength.js": [
-   ["goods","none","${materielHits} domestic weapons/armor/siege/war-magic source(s).","fce1e7d9f71d7d98"],
-   ["office","none","Conventional-force score ${led.military} (walls + garrison) anchors institutional strength.","be8e1e5c1fb2a05e"],
-   ["outside","none","${materielImports} imported military-materiel line(s): access without control.","69e330ed99819ba4"]
-  ],
-  "src/domain/worldPulse/mobilization.js": [
-   ["threat","none","no threat, so drifting back to a civilian footing","7615438ff247c793"]
-  ],
-  "src/domain/worldPulse/momentum.js": [
-   ["sovereign","none","${A} had held its war on ${Tn} well past the point of easy return, but a ${faced} let the crown reverse course and still","a49f4b1c760ea0d3"]
-  ],
-  "src/domain/worldPulse/npcDmVerbRecords.js": [
-   ["outside","none","The realm sets aside what stood against the traveller and sends them onward.","86a32ce356169f2d"]
-  ],
-  "src/domain/worldPulse/occupation.js": [
-   ["office","none","The famine it annexed is part of the garrison bill: ${inheritedHere.receipt}","249f1a9e0bd98d2b"],
-   ["office","none","In ${x.town} people break tools, hide stores and will not do as ${x.occ}'s soldiers say.","804678cdfafe5512"],
-   ["office","none","${x.occ}'s soldiers in ${x.town} find their orders ignored and their stores raided.","a4badbceae8fead3"],
-   ["office","none","Holding ${x.held} keeps ${x.occ}'s soldiers and officials busy far from home.","de48b95e547f79c3"],
-   ["office","none","${x.occ} has soldiers and clerks tied up holding ${x.held}, and fewer to spare at home.","eee2b097b629ea27"],
-   ["plenty","none","${x.occ} has soldiers and clerks tied up holding ${x.held}, and fewer to spare at home.","eee2b097b629ea27"],
-   ["sovereign","none","that of an overlord","4b5bc184303ad495"],
-   ["sovereign","none","${occupiedName} has accepted ${occupierName} as its overlord, and will pay and obey as its vassal.","f32ec9d3081eb9c7"]
-  ],
-  "src/domain/worldPulse/occupationRecordMode.js": [
-   ["office","none","${occupierName} no longer holds occupied settlements. Garrison and administrative strain is no longer renewed, though it","2ad1569e84ffceec"]
-  ],
-  "src/domain/worldPulse/operations/operationGrammar.js": [
-   ["resource","none","placement enrolls through the web CREATION seam, so the caps and the ","61b774ba2ec1116d"],
-   ["resource","none","informationStatecraft detects the contradiction and advanceNpcCredibility deposits ","e90e2b298915547e"]
-  ],
-  "src/domain/worldPulse/pactProposals.js": [
-   ["outside","none","This court already has as many offers abroad as it can answer for.","4d798a5f559dc92a"],
-   ["outside","none","That court already has as many offers abroad as it can answer for. One of them must be answered first.","be3b22c843b5be7a"]
-  ],
-  "src/domain/worldPulse/pactTriggers.js": [
-   ["resource","none","This court believes itself ${word(mine[best.category])} in ${best.category.replace(/_/g, ' ')}","bcbdb92ae2874d44"]
-  ],
-  "src/domain/worldPulse/peaceTermsDrafting.js": [
-   ["office","none","The occupation continues ${years} year${years === 1 ? '' : 's'}. The garrison stays at the walls.","a2708099ea4b3fc8"],
-   ["resource","none","Observer/disclosure clause (registration seam): the loser's court opened to the victor's eyes.","58eb670abdd7102a"],
-   ["resource","none","A victor-aligned seat installed (registration seam): cheap control, brittle control.","aa52a58553939689"]
-  ],
-  "src/domain/worldPulse/pulseKernel.js": [
-   ["outside","none","The ruling council is split: one of its powers sees the dangers abroad differently from the seat.","ee0db11c24395f59"],
-   ["sovereign","none","vassal promotion + advance-win disposition residue","c4e02319ec3515f5"]
-  ],
-  "src/domain/worldPulse/realmEvents.js": [
-   ["outside","none","${name} has risen to a major power in the realm's pantheon. Temples multiply, rivals bend the knee, and the faithful wal","18f216cf0aedcf08"],
-   ["size","none","Hunger, plague, and a fracturing faith feed one another. Flagellants walk the streets, scapegoats are named from pulpits","1e9d9027880189d6"]
-  ],
-  "src/domain/worldPulse/relationshipHierarchy.js": [
-   ["sovereign","none","New vassal obligations force the former alliance into the overlord war.","399bacc3de9e1705"],
-   ["sovereign","none","The overlord compels embargoes and border pressure against the former trade partner.","6c82114ee1d079f0"],
-   ["sovereign","none","The overlord demands a managed ceasefire with its partner.","7065804ad8101d41"],
-   ["sovereign","none","Its overlord\\'s quarrels now decide whom it may deal with, and this friendship is set aside.","8ff4836fc09503bb"]
-  ],
-  "src/domain/worldPulse/relationshipMemory.js": [
-   ["ease","none","Market gossip tracks shortages and favors.","ccb8ad371bb7fb59"],
-   ["goods","none","Craftsmen and merchants compare prices like weapons.","00863507fd5102ea"],
-   ["office","none","Tribute schedules, legal obligations, and patrol expectations shape ordinary routines.","6782b5a25112255b"],
-   ["office","none","Patrols share news but count supplies carefully.","785d9a94f0b41f61"],
-   ["office","none","Agents and informants matter more than soldiers.","7f7887a10a3c608f"],
-   ["office","none","Tax collectors, creditors, or inspectors are more visible.","b23fdb2adbd1b6ee"],
-   ["office","none","Watch patrols, road checks, and defensive routines dominate public life.","d204f148856d008b"],
-   ["office","none","Militia talk assumes help can arrive.","e1217afc62730cd7"],
-   ["office","none","Rumors, coded messages, and cautious patrols shape the mood.","e567104b748460ef"],
-   ["outside","none","Caravans delay departures or seek alternate routes.","045192444244bd0d"],
-   ["outside","none","Caravans and market factors move with confidence.","71fec468837ff915"],
-   ["outside","none","Imported goods feel routine rather than exceptional.","b3993f9162dfd4f0"],
-   ["outside","none","Travelers get questioned twice.","f8b0a4cdaf2b89aa"],
-   ["sovereign","none","People distinguish local custom from overlord command.","011ee515da5d84c3"],
-   ["sovereign","none","${otherName} is a vassal under a ${posture.postureLabel}.","5fba9b6dd6c6013e"],
-   ["sovereign","none","${otherName} is the overlord; the settlement lives under a ${posture.postureLabel}.","6dd660e524b26be2"],
-   ["sovereign","none","Overlord weakness becomes tavern arithmetic.","8d26ccb33e1cf5ed"]
-  ],
-  "src/domain/worldPulse/relationshipRulesCore.js": [
-   ["office","none","A strained patron may demand client troops, supplies, or legal concessions.","29b2405e04867eb3"],
-   ["sovereign","none","The overlord has incentive to protect the vassal, but protection deepens obligation and dependence.","06841d40a98388e5"],
-   ["sovereign","none","The overlord's weak legitimacy, economy, military, or defenses are becoming a remembered vassalage risk.","2566310dfcf48ca1"],
-   ["sovereign","none","If ${itemFor(ctx.snapshot, vassalId)?.name || 'the vassal'} wins, it is free of ${townName(ctx, overlordId)}, but what t","3823026ba9f4c3e1"],
-   ["sovereign","none","The overlord is recovering, so vassal independence pressure cools gradually.","513fb398f38a6bba"],
-   ["sovereign","none","The tribute and levies owed to the overlord are taking food, coin and labour the town needs.","6a35ac85c7ef30a0"],
-   ["sovereign","none","What the vassal makes goes up to its overlord.","7be083684f141c62"],
-   ["sovereign","none","The overlord benefits structurally, but the vassal's local economy and legitimacy are strained.","8936bf9206056cf7"],
-   ["sovereign","none","The pull toward independence is ${relationLevelWordFor(independencePressure)}, and the overlord has looked weak ${number","9674d86c57227a9d"],
-   ["sovereign","none","${itemFor(ctx.snapshot, vassalId)?.name || vassalId} has had enough of its overlord's levies, and talk of independence h","aff2210fed31461b"],
-   ["sovereign","none","The overlord has enough coercive advantage to quash the rebellion for now.","c76d2d9ae81c4f96"],
-   ["sovereign","none","${itemFor(ctx.snapshot, vassalId)?.name || 'The vassal'} pays tribute to ${townName(ctx, overlordId)}, and the anger ove","fbca22c249f385eb"]
-  ],
-  "src/domain/worldPulse/religiousContest.js": [
-   ["size","none","${nameFor(cid)}'s people hold hard to their faith, so the quarrel is loud in the streets.","81d0b41cc3b0c5df"]
-  ],
-  "src/domain/worldPulse/resourceTaxonomy.js": [
-   ["resource","none","A long quiet spell lets prospecting, reopened seams, or trade substitution slowly restore this exhaustible resource.","4b786398b4d1c822"]
-  ],
-  "src/domain/worldPulse/routeNetworkCharterEvents.js": [
-   ["outside","none","The profit is worth the danger, and the caravans will pay for it.","a9090a0b842181ad"]
-  ],
-  "src/domain/worldPulse/routeNetworkConsumersInterdiction.js": [
-   ["office","none","The patrol was set for ${reading.namedGood}, which does not move on this road.","32d56726f8a95a9c"]
-  ],
-  "src/domain/worldPulse/seasons.js": [
-   ["outside","none","The spring thaw opens the passes; caravans move again and the winter\\'s held news travels the roads at last.","32f5f782a1481a74"]
-  ],
-  "src/domain/worldPulse/settlementLifecycleFirstClass.js": [
-   ["outside","none","The older ruins nearby still draw scavengers, pilgrims, and storytellers.","56d39968f33b2cfb"]
-  ],
-  "src/domain/worldPulse/settlementLifecycleKernel.js": [
-   ["goods","none","The former steading now keeps its own books and seat, while its founding line remains remembered.","e061dfc479191977"],
-   ["plenty","none","Satellite steadings tithe their surplus to the parent town.","c8bb43d8621726b5"],
-   ["resource","none","Fed by ${sats.length} outlying steading${sats.length === 1 ? '' : 's'}: grain, timber, and ore flow in from the orbit.","610cfe15b8995247"]
-  ],
-  "src/domain/worldPulse/settlementPolitics.js": [
-   ["office","none","the bloc lost its members and dissolved","694ede13ca982daf"]
-  ],
-  "src/domain/worldPulse/settlementStrategy.js": [
-   ["office","none","${n} spreads its faith outward rather than its soldiers.","0405d1d5686d3c12"],
-   ["outside","none","${n}'s merchants steer their caravans around the danger rather than answer it with steel.","20ab0d44c35f6d3d"],
-   ["outside","none","${name} is itself besieged. Its army abroad is recalled to defend the home walls.","477ddcc776359485"],
-   ["sovereign","none","A vassal of ${name} is under siege. ${name} recalls its army to relieve it.","a4379148ee093cee"]
-  ],
-  "src/domain/worldPulse/sovereigntyAssets.js": [
-   ["sovereign","none","${id} is a settled vassal of ${occupierId}, and a vassalage may be conveyed.","b2556affea90d31f"]
-  ],
-  "src/domain/worldPulse/sovereigntyIntent.js": [
-   ["goods","none","a foreign patron's books","2b83b05b9488d695"],
-   ["goods","none","the seat that looms over this court","9a4179d10b9152a0"]
-  ],
-  "src/domain/worldPulse/sovereigntyNews.js": [
-   ["goods","none","The recorded seat and realm books wanted opposite things, and the seat's interest signed.","3ad3c957463cc179"],
-   ["outside","none","${x.seller}'s sale of ${x.asset} is weighed abroad","22670cdb81e893db"],
-   ["plenty","none","The conveyed steading was the parent settlement's recorded outlet for its own overflow.","21c176624b6806e1"],
-   ["plenty","none","${x.seller} sold the steading its overflow needed","3427f73779482b03"]
-  ],
-  "src/domain/worldPulse/sovereigntyReceiptPools.js": [
-   ["ease","none","The word reached ${x.settlement} the ordinary way, from a carter who had heard it at the far end of ${x.route}.","456ede097f877871"],
-   ["goods","none","${x.npc} sold ${x.settlement} to save the seat; the town's books and the seat's books wanted opposite things, and the se","aad02f4029f6e348"],
-   ["goods","none","At ${x.third_party} the arrivals are entered as though they had always come, and in a generation the books will agree.","b2b40c95b7c02928"],
-   ["office","none","The garrison is small and the compliance is polite, and neither is a settlement.","6e48260b80c5f59f"],
-   ["outside","none","The caravans changed destination and nothing else changed.","8cf3c04e866b6182"],
-   ["plenty","none","${x.counterpart} sold the steading its overflow used to go to, and the overflow has nowhere to go.","0664b63d66dffbd4"],
-   ["sovereign","none","${x.settlement} has learned what its own overlord thought of its prospects, and learned it in public.","64eda71e11979927"],
-   ["sovereign","none","${x.settlement}'s overlord is ${x.third_party} now; the people are the same people and the tolls go elsewhere.","a7604cb47e8ba641"],
-   ["sovereign","none","Each overlord solved a problem and made one for the towns.","f8fdc587ec8e1296"]
-  ],
-  "src/domain/worldPulse/sovereigntyTransfer.js": [
-   ["sovereign","none","A seat bought from an overlord is obeyed less than one that was never for sale.","95338302738c16af"]
-  ],
-  "src/domain/worldPulse/spatialConsequenceKernel.js": [
-   ["size","none","The spatial substrate distributed the calamity toll by district adjacency and flammability. WHERE the harm fell, never H","b530a552613d4cc0"],
-   ["size","none","The spatial substrate diffused the exposed covert corruption along real district adjacency (leash-bounded) instead of a ","d26400b9fd25f14a"]
-  ],
-  "src/domain/worldPulse/stressorDynamics.js": [
-   ["goods","none","Where the surge burned hottest, candles now gutter and wards lie cold.","404e1374e2b0a44e"],
-   ["office","none","the resistance bleeds the garrison white","25a9d2bcdc5f0fc2"],
-   ["office","none","The resistance needs runners, smugglers, and someone who can reach the old garrison.","ae79c76bcabcde89"],
-   ["office","none","The garrison drilled at midnight without orders, or with orders no one admits giving.","d06bc7362563579e"],
-   ["office","none","A list of grievances was nailed to the courthouse door. Nobody has dared remove it.","ff479dba67df4f8c"],
-   ["size","none","the streets are already burning. The palace is distracted","1f6d7abcc6ef0aab"],
-   ["size","none","Where the surge burned hottest, candles now gutter and wards lie cold.","404e1374e2b0a44e"],
-   ["size","none","the palace fights itself instead of the streets","450992f674af5e65"],
-   ["size","none","Wards around the council hall failed twice this tenday. The casters shrug.","971e8087a73aba97"],
-   ["size","none","The streets rose on their own. No power owns this yet.","c0755d8a76857850"]
-  ],
-  "src/domain/worldPulse/stressorGates.js": [
-   ["office","none","Standing defenses patrol the approaches.","27bb823015ec9bf5"],
-   ["office","none","Occupation breeds resistance; every garrison post is a recruiting poster.","449635ea67d5f05e"],
-   ["office","none","Raider pressure pushes the militia toward full mobilization.","d21cfe7ceea418eb"],
-   ["office","none","The occupier's faith arrives with its garrison.","d44b9e13623af88b"],
-   ["resource","none","A weakened orthodoxy cannot hold its flock.","04c89e783ca47f4f"],
-   ["size","none","The rulers have lost the streets.","317ace00343ad6c8"],
-   ["size","none","Standing wards resist the silence, for now.","9011084b6f75729d"]
-  ],
-  "src/domain/worldPulse/stressors.js": [
-   ["outside","none","unsettling news from abroad","244e40d2141153df"],
-   ["size","none","The streets have risen on their own, before any power can claim them.","2a13cd1eedfe185b"],
-   ["sovereign","none","its overlord's grip on its trade","0c6b676a95cd6248"],
-   ["sovereign","none","what its overlord takes from it","9a938bb3cafb497f"]
-  ],
-  "src/domain/worldPulse/tradeWar.js": [
-   ["sovereign","none","${nameFor(forcedOverlord.overlordId)} compels its vassal ${nameFor(buyerId)} to source ${commodityLabelFor(commodityId)}","0ffd933b35be3e61"],
-   ["sovereign","none","Overlord ${nameFor(forcedOverlord.overlordId)} compels the trade. The contest is overridden.","d22aac078107d443"]
-  ],
-  "src/domain/worldPulse/treatyLifecycleVoice.js": [
-   ["goods","none","${obligorName} must open its books to ${obligeeName}","f0f5c06c5148a852"]
-  ],
-  "src/domain/worldPulse/urbanFabricKernel.js": [
-   ["resource","none","The dominant district class changed hands. The old stock decays on the masonry clock while the new deposits; never a fli","c78f08ac2c0a30a8"],
-   ["size","none","A catastrophe reset the struck district stocks and stamped a rebirth marker. Buildings resist rapid change EXCEPT catast","59671c40f78e4f02"],
-   ["size","none","A district class crossed the prominence floor with no prior incumbent: the first fabric dominance.","847a2e41aa9cb052"],
-   ["size","none","The dominant district class changed hands. The old stock decays on the masonry clock while the new deposits; never a fli","c78f08ac2c0a30a8"],
-   ["size","none","The ${detail.type || 'calamity'} has unmade whole quarters of ${townName}; the ${classes} fabric is cleared and rises an","fe26f6679b4b56dd"]
-  ],
-  "src/domain/worldPulse/warCoalitionNews.js": [
-   ["goods","none","The allied court reread the open front through its own books and temperament and chose to remain.","424466f0bc69a229"],
-   ["goods","none","What the ally received answered what its existing books say it spent.","c5a2eea287cc426a"],
-   ["goods","none","What the ally received fell short of what its existing books say it spent.","f07732f765f167bc"],
-   ["goods","none","The called court recorded a refusal after reading the alliance web and its own books.","fa9bf178f96f9e76"]
-  ],
-  "src/domain/worldPulse/warCoalitionRefusal.js": [
-   ["goods","none","own books and history","a111784bd411e819"]
-  ],
-  "src/domain/worldPulse/warDeployment.js": [
-   ["office","none","${x.target} has fallen. ${x.occ}'s soldiers hold its walls, and ${x.occ}'s governors now give the orders.","17f0f36b61f4f6c8"],
-   ["office","none","${x.from} is ready for war, and judges ${x.target} open to attack.","2bc9b322da6310a2"],
-   ["office","none"," sent ${wildly ? 'far ' : ''}too few soldiers for the march.","80b95c5a57a2804d"],
-   ["office","none","${x.from}'s soldiers are on the road to ${x.target}, to put it under siege.","819343e302fcc4c1"]
-  ],
-  "src/domain/worldPulse/warHomeCosts.js": [
-   ["office","none","${name}'s standing army is committed against ${targetName}, thinning the home garrison.","3a2cdb8aef74be4d"],
-   ["office","none","${name}'s garrison marches abroad","4f149f7b4a2f3f33"],
-   ["outside","none","${name}'s garrison marches abroad","4f149f7b4a2f3f33"],
-   ["sovereign","none","${name} calls up its vassals","67c760f4c660abd9"],
-   ["sovereign","none","${name}'s men and grain feed an overlord's war, and the repeated levies wear on the settlement.","a926b62c1cede88c"],
-   ["sovereign","none","${name} levies ${formatCount(totalLevied)} men and grain from its vassals and allies for the war against ${targetName}.","e74750d65ba1bbcc"]
-  ],
-  "src/domain/worldPulse/warReceiptPools.js": [
-   ["ease","none","Hostile banners gather on more marches than one. Strike now, or be surrounded at leisure.","426300eb24bf4c30"],
-   ["ease","none","The harbour is blockaded. No keel comes or goes, and the wharves stand idle; a strangled port cannot bear the war.","4b496d1d19934cca"],
-   ["ease","none","The harbour is blockaded shut. No cargo comes or goes, and the wharves are idle; a throttled port cannot carry the war.","6b9c3cae42431950"],
-   ["ease","none","The mismatch will be discovered in the ordinary way and become the next grievance.","6bb645adb6227fa8"],
-   ["goods","none","The steading at ${x.settlement} stands on its own books now, and remembers whose granary fed it.","04155417cf21f95c"],
-   ["goods","none","Kin do not sack kin cheaply, and both books said so.","0bb4a9ee846938c2"],
-   ["goods","none","The terms of the war were drafted in a hall under the enemy's garrison, and the wine was good.","108e85cd5c9e3204"],
-   ["goods","none","Too many looms and larders bind us to their markets. A war would cost more than either court could bear.","367ec3bb1a75fd50"],
-   ["goods","none","The peace served the man before it served the walls, and the receipt names whose books it answered.","54c9dc6f787d78be"],
-   ["goods","none","The column's court must choose between a paper and a position, and its books disagree.","5ae63d8aae2e4fd3"],
-   ["goods","none","Our looms and larders were bound to their markets by design. The dependence was built to be a leash.","7d99e182349c6591"],
-   ["goods","none","A thriving parent has no quarrel with a modest steading, which is why this parent's books are worth reading.","7ebaba3b05269a0d"],
-   ["goods","none","What the alliance cost was never written down as a total. It is what the other books already say.","89c0a50f7e134522"],
-   ["goods","none","The receipt names whose books were served, and they were not the town's.","8ad86cfa5ce90b32"],
-   ["goods","none","The court could raise the claim; its own wagon books refuse it.","a50cedfe20d9f7f3"],
-   ["goods","none","Nothing was minted, so nothing decays; this claim waits on a change in the wagon books, not a change of heart.","ba89c70f7b40903f"],
-   ["goods","none","The reach of ${x.centerName} looms over the free towns. Sooner a common stand than to be swallowed piecemeal.","d356eca2a0eca02e"],
-   ["goods","none","${x.settlement} read the alliance web, read its own books, and sent regrets down ${x.route}.","e51f5731f1a56639"],
-   ["office","none","The terms of the war were drafted in a hall under the enemy's garrison, and the wine was good.","108e85cd5c9e3204"],
-   ["office","none","They refused peace with somebody else's soldiers in the field.","163e997713e0eff8"],
-   ["office","none","The town gives a ${x.answer} answer when a legate asks for a hearing.","568e5549f52adbb7"],
-   ["outside","none","Collective liability, pairwise payment: the wagons roll along the edges they always rolled along.","71f902881bcb92bb"],
-   ["outside","none","The peace was pairwise, as every peace in this world is; the others learned of it from travellers.","9705bc9a439f2890"],
-   ["outside","none","The gains abroad are real. So is the strain at home, and home is nearer.","a1e829458f84ae7a"],
-   ["outside","none","The trade routes are cut and the treasury drains. The war now costs more than it can win.","c8a937ee22c0fa61"],
-   ["outside","none","The throne is shaky at home. A war abroad costs less than an answer to the streets.","eea678e62f4c2866"],
-   ["resource","none","The crop stands ready and the levies long for home. Even wars pause for the harvest.","8a85531e07c4a953"],
-   ["size","none","Enemies press the frontier from several quarters. Better the first blow than the closing ring.","904074a7093c1f96"],
-   ["size","none","${x.settlement} refused peace, and the streets priced the refusal within the season.","c4f35a6a43934a9a"],
-   ["size","none","The throne is shaky at home. A war abroad costs less than an answer to the streets.","eea678e62f4c2866"],
-   ["sovereign","none","The throne is shaky at home. A war abroad costs less than an answer to the streets.","eea678e62f4c2866"],
-   ["threat","none","The mismatch will be discovered in the ordinary way and become the next grievance.","6bb645adb6227fa8"]
-  ],
-  "src/domain/worldPulse/warRulingsNews.js": [
-   ["goods","none","The offerer's recorded books say the seat, rather than the realm alone, carried the decision.","000a6d3d6c38074b"],
-   ["goods","none","${x.npc}'s war books answer to ${x.faction}","35b0f3b2a5aa1cab"],
-   ["goods","none","The recorded ruler and realm books diverged over a rival's triumph.","94edb159d797695c"],
-   ["goods","none","The recorded ruler and realm books diverged, and the seat's interest held the war open.","bb0cde8ca992e00b"],
-   ["goods","none","The offerer's recorded books say the realm's position carried the decision.","d52dd9ec724640ea"]
-  ],
-  "src/domain/worldPulse/warTermination.js": [
-   ["goods","none","No living ruler is established in the record, so ${actorName}'s position alone carries the books.","4367623a233fc148"],
-   ["sovereign","none","${actorName}'s council answers to ${overlord || 'the power that holds the town'}, not to itself.","83348126addaeb45"]
-  ],
-  "src/domain/worldPulse/warTerminationCauseTables.js": [
-   ["office","none","The needs of the coming harvest are drawing soldiers back toward their fields.","1fd33bfd8907822b"],
-   ["office","none","a garrison seated another creed in its place","3d42b571d6f8f53e"],
-   ["sovereign","none","the throne no longer needs a foreign enemy to steady its seat","1ced849f40e71161"],
-   ["sovereign","none","a god named when the banners rose is no longer worshipped from the same throne","2eb0ca78c2b50c73"]
   ],
   "src/generators/aiLayer.js": [
    ["office","none","Military presence: ${ctx.garrison.join(', ')}","37a23ac878a18073"],
@@ -3034,7 +2118,6 @@
   ],
   "src/generators/economy/foodBalance.js": [
    ["ease","none","With the enslaved workers in revolt, the outlying fields lie idle, and less of the harvest is coming in.","c226a6c5a71fec41"],
-   ["ease","none","The crops failed, and only about a third of the usual harvest will come in. The winter ahead will be hungry.","f5711284441e3b24"],
    ["outside","none","minor routes and sanctioned caravans","3aa27e03446b88e7"],
    ["outside","none","Establish seasonal access, patronage, or a dependable trade route","70d81e91e18c775d"],
    ["outside","none","Bandits are taking the food caravans, and the town has posted a bounty for clearing the trade road; the carters who got ","bb402882c007e0a3"],
@@ -3059,8 +2142,7 @@
   ],
   "src/generators/economy/prosperity.js": [
    ["plenty","none","Subsistence with minor surplus","218a00f487aeb830"],
-   ["plenty","none","Agricultural surplus with trade links","b91bdc613e14242d"],
-   ["size","none","Trade proceeds at an ordinary pace for a settlement of this size.","21c900ef0a8facf2"]
+   ["plenty","none","Agricultural surplus with trade links","b91bdc613e14242d"]
   ],
   "src/generators/economy/tradeGoods.js": [
    ["goods","none","Spices and exotic dyes","1faa6ac1d159a68c"],
@@ -3116,24 +2198,7 @@
    ["sovereign","none","a noble granted lands by the crown and obligated to populate them","30ad4bf5b516aac9"],
    ["sovereign","none","a noble granted lands by the crown with the resources to develop them","91947d2dafda2f38"]
   ],
-  "src/generators/narrative/settlementOriginProse.js": [
-   ["outside","none","It stands where the roads meet, on ground travellers stopped at long before anyone built here.","0001272ea3cd6c57"],
-   ["outside","none","Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensive","00d3f91f47309c36"],
-   ["outside","none","Isolated from major trade routes, and short of what it eats. Nothing is brought in to close the gap; it must make do wit","65c8d8b1819f3453"],
-   ["outside","none","Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.","6a2c1b498d0cc11b"],
-   ["outside","none","Isolated from major trade routes. The settlement cannot fully feed itself, and no food comes in from outside: it must ma","81edae113f86d38d"],
-   ["outside","none","Off the trade routes and under-fed by its own land, and now besieged: nothing comes in by road, and it must make do with","84e03b680d8ae65e"],
-   ["outside","none","Isolated from major trade routes, and short of what it eats. To close the gap it turns to ${CHANNELS_TOKEN} — at a price","8e03a19c1b661fd5"],
-   ["outside","none","Isolated from major trade routes. What the settlement needs, it makes; what it cannot make, it learns to do without.","97e9274ec7bc4015"],
-   ["outside","none","Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it must make do with ${HO","bf4afd7222a601e2"],
-   ["outside","none","Off the trade routes entirely. Nothing arrives that was not sent for, and little is sent for.","ccb30c700ce22017"],
-   ["outside","none","Isolated from major trade routes, and now under siege. The settlement cannot fully feed itself, and nothing comes in by ","d0babe91785c3744"],
-   ["outside","none","Off the trade routes and under-fed by its own land. For what it lacks it looks to ${CHANNELS_TOKEN}. Every season the te","eb5f862630b70581"],
-   ["outside","none","Off the trade routes and under-fed by its own land. Nothing is brought in, and every season it must make do with ${HOLDS","ec15a463a53a97f1"]
-  ],
   "src/generators/narrativeGenerator.js": [
-   ["goods","none","began when a merchant realised the local sheep produced finer wool than anything available on the open market","398b894ab79c5aa6"],
-   ["goods","none","developed where two droving roads crossed, because animals needed water and drovers needed ale","de506dc042ff2f5d"],
    ["plenty","none","This settlement has a recovery narrative: significant economic hardship in its past, followed by more recent growth. Cur","b0344511c2b5b5f8"],
    ["resource","none","A dispute over grazing rights and water access has been running for two seasons without resolution.","459a98a14448feec"],
    ["size","none","A handful of houses; you could greet everyone in it before noon.","de107064541f4bbc"],
@@ -3146,8 +2211,6 @@
   ],
   "src/generators/narrativeText.js": [
    ["ease","other","${r.name} has drawn its edges inward (fields left unworked, a mill ${r.millExports ? 'kept turning for its buyers' : 'st","d2e70d18463f3ba7"],
-   ["goods","none","The road out of ${r.name} is busier than the road in. Shuttered houses stand on every street, and the people who stayed ","49f16d4223c672a0"],
-   ["goods","none","The road into ${r.name} is busier than the road out, and both are watched. By ${r.govFaction || \"the governing authority","f22adb15b8f374c1"],
    ["office","none","The ${s.name} is why this settlement has walls where others do not, why the militia drills when other villages have forg","98a7d5a778f69cf7"],
    ["outside","any","No dramatic history here, only a long steady one, and travellers remember the place kindly","1a057eb8fdc846cf"],
    ["outside","none","The road out of ${r.name} is busier than the road in. Shuttered houses stand on every street, and the people who stayed ","49f16d4223c672a0"],
@@ -3169,12 +2232,6 @@
    ["goods","none","Show their own books are clean while the people above them take payments.","5518397ba14998c4"],
    ["office","none","Holds the seat while money is short, and people judge the seat by what it can no longer pay for.","39b5678b73a7829e"],
    ["office","none","Keep the drills, the patrols and the pay going, and the old hands in charge of them.","7b640730e5517926"],
-   ["plenty","none","Keep the family\\'s name honoured at every feast while the new offices take its old work.","956a3b69689d6f36"],
-   ["resource","none","Serve their flock so faithfully that their superiors cannot pass them over again.","2bb31f877e7f2e0d"],
-   ["resource","none","The flock\\'s trust is easy to earn now, but it buys no say once someone holds the seat firmly again.","2ebc3d614c094300"],
-   ["resource","none","Keep marrying, burying and comforting their flock while the seat fails around them.","6f9f9a4e6509f042"],
-   ["resource","none","Earn their flock\\'s trust face to face, so it outlasts their trust in the crooked seat.","a0d7fdd5b2f7c910"],
-   ["resource","none","Get their own flock a share of whatever relief there is, and be thanked for it.","ed4e3b9597baf08b"],
    ["work","none","Steady work earns no notice; getting ahead takes a crisis or a patron.","9ca1d4eeb543930f"]
   ],
   "src/generators/power/claimStanding.js": [
@@ -3185,7 +2242,6 @@
    ["goods","none","A merchant has found his own stolen cloth for sale two streets away.","b08323c07a11a003"],
    ["goods","none","The tax books for last season are missing, and each side says the other took them.","c18c65d1ee26cb3a"],
    ["outside","none","Control of a key trade route checkpoint","84d439038fd40064"],
-   ["plenty","none","Someone has been paid to start a scuffle at the next feast, and nobody knows which side paid.","0799583863507472"],
    ["size","none","A merchant has found his own stolen cloth for sale two streets away.","b08323c07a11a003"]
   ],
   "src/generators/power/conflicts.js": [
@@ -3270,12 +2326,10 @@
    ["office","other","${head}${many ? 'are' : 'is'} held for the defence, and few patrols can be spared from it.","dade83652207649a"]
   ],
   "src/generators/safetyProfile.js": [
-   ["ease","none","The ${lawRef} ${many ? 'walk' : 'walks'} the usual rounds. That stops a pickpocket or a brawl; anyone who has learned th","123d2b102c555e08"],
    ["goods","none","Suppliers adulterating grain and leather sold to crown contracts. Inspectors are overworked or bribed. The settlement's ","34094e5c8646bd3c"],
    ["goods","none","Price gouging on medicines, protective herbs, and burial services.","a634cefea3a930c7"],
    ["goods","none","Stolen and improvised weapons circulating in the revolt-held districts. Some are being smuggled in from outside. The bla","c468038dbe866d32"],
    ["goods","other","A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.","ca5bbc800b9ecdd4"],
-   ["law","none","${lawRef} Disputes are settled by whoever is stronger. Property is kept only by those who can defend it.${charNote}${cou","acd55522f445d039"],
    ["office","none","The garrison spends its days guarding the food","06e1be9ef1cde3ce"],
    ["office","none","less effective against organized operations that can plan around patrol routes.","07481f9c0666a773"],
    ["office","none","The citizen militia musters when needed but cannot maintain consistent patrol. ","0de722a8009ed34a"],
@@ -3319,26 +2373,15 @@
    ["sovereign","none","Suppliers adulterating grain and leather sold to crown contracts. Inspectors are overworked or bribed. The settlement's ","34094e5c8646bd3c"]
   ],
   "src/generators/spatialGenerator.js": [
-   ["office","none","Fortified pass town, walls cutting across the valley floor, garrison above","c3823cccb02e91fe"],
    ["outside","other","Trading town around a great well, caravanserai on the south road","88e445d0385a42d4"],
    ["outside","none","A simple marker or cairn where travellers leave offerings","9a122822c45ac462"],
    ["outside","one-kind","Houses of worship, cloisters, quiet streets with priests and pilgrims","c701fc3f8da973f9"],
    ["resource","other","Mountain city of terraced districts, lower town in the valley","0a43f7dabef3b28d"],
    ["resource","other","Walled city carved from the forest, timber yards and charcoal depots in the outer rings","462ae1ce1e0e7ee9"],
-   ["size","other","Walled city with sprawling suburbs beyond the gates, outlying wards growing faster than the walls","0e5ed885043c0a28"],
    ["size","none","Dense timber tenements, narrow streets, crowded","13c1a8673e6018b4"],
-   ["size","other","Imperial port city: fortified harbour, merchant districts, grand boulevard from waterfront to palace","3ea8aa67c33792d1"],
-   ["size","other","Hill metropolis on seven rises: each commanding a district, each district a city unto itself","7ded36ba222be0cb"],
-   ["size","other","River delta metropolis: island districts, bridge-markets, the great river-gate controlling all upstream trade","b0bea127c047def7"],
-   ["size","other","Mountain city of terraced districts, the citadel at the summit, lower town in the valley","b461c6e9f13a03aa"],
-   ["size","other","Dense urban core with sprawling suburbs","b9ce09c53fd313f4"],
    ["size","none","Small cluster of homes near water source","bd84568144a4667b"],
    ["size","other","Houses of worship, cloisters, quiet streets with priests and pilgrims","c701fc3f8da973f9"],
    ["size","other","Narrow alleys, hidden markets, criminal activity","c9d806315ba54b06"],
-   ["size","other","Great river city: bridge quarter, merchant districts, ${sacredHouse ? `${sacredHouse} hill` : 'the high ground'} above t","cb71ea1b916a95f4"],
-   ["size","other","Sprawling imperial capital: walled inner city, vast suburban rings, the palace district above the outer walls","e117862720767791"],
-   ["size","other","Hill city: castle district commanding the heights, market quarter below, poor wards at the base","ec8f2b8135c3fe56"],
-   ["size","other","Walled port city rising from the harbour, suburbs sprawling along the coast road","fed45fba0e466eab"],
    ["sovereign","other","Mountain capital in a high valley: tiered city climbing from the river floor to the fortress crown","1bbee5e9edb91e20"]
   ],
   "src/generators/steps/cascadePass.js": [
@@ -3351,9 +2394,6 @@
   "src/generators/steps/resolveResources.js": [
    ["outside","none","\"${resourceKey}\" is compatible with this settlement's trade route + terrain combination.","c361ef6e963692b5"]
   ],
-  "src/generators/steps/stepMetadata.js": [
-   ["size","none","Choose which institutions exist (inn, mill, temple, market, etc.) for this size + culture.","9480dda9951ff11f"]
-  ],
   "src/generators/stressNarrative.js": [
    ["outside","none","Supply caravans pass through on army requisition. ","11b2348fc735b458"],
    ["outside","none","Something in the country around ${place} has grown bolder: ${noTrade ? 'beasts go missing from the fields' : 'caravans g","fb8384efc9069bab"]
@@ -3364,7 +2404,6 @@
    ["office","none","Embattled region with no military force. Walls without defenders are a convenient funnel. A garrison, militia, or mercen","3f2a2ef94ca3d2f0"],
    ["office","none","A garrison without walls is untenable in an embattled region. Defenders have nowhere to make a stand.","41ae8eb216e3d279"],
    ["office","none","Military forces shelter behind walls. A garrison without a perimeter is a vulnerability on the frontier.","55de1587a7e7493d"],
-   ["office","none","Embattled region. Fortification and forces are present and paid, but the pressure on them never lets up.","c11e1502e7338756"],
    ["office","none","Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin","dae5dd32f921cd8d"],
    ["outside","none","Add a road, river, or port trade route as redundancy","39ebb88cb50c6e11"],
    ["outside","none","Any outside trade good (iron tools, salt, medicine) would be precious and potentially plot-relevant","bf8383ac4e688563"],

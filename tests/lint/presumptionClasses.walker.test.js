@@ -6,7 +6,7 @@
  * SHRINK-ONLY, written only by its door `scripts/presumption-classes-door.mjs`.
  *
  * It walks every prose literal (four words or more) under src/data, src/generators, src/domain and src/components
- * (the presumed-things walker's arm-1 roots) and the six desks of the state annex, read structurally. A line holds a
+ * (the presumed-things walker's arm-1 roots; less `NOT_PAGE`, the surfaces that are no town page, by rule) and the six desks of the state annex, read structurally. A line holds a
  * PRESUMPTION CLASS when its words fall in one of thirteen classes (law 5's six crisis classes, and size, goods,
  * ease, threat, office, sovereign, resource): a word that presumes the town has a size, a trade, plenty, ease, no
  * threat, an office, a lord or a worked resource.
@@ -28,19 +28,19 @@
  *     rows than its ceiling, or the ceiling rises over the count banked at the base.
  * Every arm is EXECUTED against planted source in memory.
  */
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, test } from 'vitest';
 
 import {
-  BOUND_CLASSES, CLASS_DIMS, CLASS_FAMILIES, CLASS_IDS, RECORD_FACT_POOLS, REGISTER_REL, ROOTS, STOCK_STATUSES,
-  bankedKeys, classesOf, hitsOf, knownDimension, rowKey, scanAnnex, scanSource, scanTree,
+  BOUND_CLASSES, CLASS_DIMS, CLASS_FAMILIES, CLASS_IDS, NOT_PAGE, RECORD_FACT_POOLS, REGISTER_REL, ROOTS, STOCK_STATUSES,
+  bankedKeys, classesOf, gateAtomsOfPoolKey, hitsOf, knownDimension, notPage, rowKey, scanAnnex, scanSource, scanTree,
 } from './presumptionClasses.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 /** the debt banked at the base (afa46d644): the ceiling may only fall from here */
-const BASE_CEILING = 2699;
+const BASE_CEILING = 1996;
 
 /** The hits of a planted file, as `class:status` per text. @param {string} rel @param {string} src */
 const planted = (rel, src) => hitsOf(scanSource(rel, src)).map((h) => `${h.cls}:${h.status} :: ${h.text}`);
@@ -63,6 +63,7 @@ describe('the lexicon', () => {
     expect(classesOf('The town is divided into four wards by the river.')).toEqual(['size']);
     expect(classesOf('The hills roll on as ever beyond the fields.')).toEqual([]);
     expect(classesOf('Anyone who is paid can be asked a favour here.')).toEqual([]);
+    expect([classesOf('Buys at a quarter of the worth.'), classesOf('A checkpoint a quarter mile from the gate.'), classesOf('Every quarter of the city keeps a shrine.')]).toEqual([[], [], ['size']]);
     expect(classesOf('The guards are paid on the first of each month.')).toEqual(['office']);
   });
 });
@@ -109,9 +110,21 @@ describe('the five arms, planted', () => {
     expect(planted('src/generators/otherDemand.js', `const FACTION_DEMAND = {\n  government: ['Fine silk and embroidered cloth'],\n};\n`)).toEqual(['goods:none :: Fine silk and embroidered cloth']);
     expect(RECORD_FACT_POOLS.map((r) => `${r.file} :: ${r.pool} :: ${r.classes.join(',')}`)).toEqual([
       'src/generators/demandProfile.js :: FACTION_DEMAND :: goods',
-      'src/generators/narrativeGenerator.js :: genArrivalDetail :: resource,outside',
+      'src/generators/narrativeGenerator.js :: genArrivalDetail :: resource,outside,goods',
       'src/data/narrativeData.js :: TERRAIN_NARRATIVE_HOOKS :: resource,outside',
+      'src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS :: outside',
+      'src/data/economicData.js :: TRADE_DEPENDENCY_NEEDS :: resource,goods',
+      'src/generators/structuralValidator.js :: FUNDED_EMBATTLED :: office',
+      'src/domain/summary/settlementQuickGuide.js :: scopeAtSize :: size',
     ]);
+  });
+  test('a key names its band or its gate: the verified tier key, and the annex pool keyed by its gate', () => {
+    expect(planted(F, `const LAYOUT_BY_TIER = {\n  city: {\n    hills: 'Hill town: the old quarter below the heights',\n  },\n  hamlet: {\n    hills: 'A hamlet: the old quarter below the heights',\n  },\n};\n`))
+      .toEqual(['size:band :: A hamlet: the old quarter below the heights']);
+    expect(gateAtomsOfPoolKey('militia PRESENT (no garrison)')).toEqual(['militia']);
+    expect(gateAtomsOfPoolKey('walls ABSENT')).toEqual([]);
+    expect(gateAtomsOfPoolKey('DIRECTION: stable · CRISIS: famine')).toEqual(['crisis: famine']);
+    expect(gateAtomsOfPoolKey('posture UNDER OCCUPATION')).toEqual(['crisis: occupied']);
   });
   test('the annex is read structurally: a variant\'s marks and its pool\'s rulings', () => {
     const block = (marks, pm = {}) => ({ B1: { pools: { calm: [{ text: 'The streets are quiet and nothing threatens the town.', marks }] }, poolMeta: { calm: pm } } });
@@ -122,8 +135,11 @@ describe('the five arms, planted', () => {
     expect(st(block(['colour']))).toEqual(['size:colour', 'threat:colour']);
     expect(st(block([], { crisisScoped: true }))).toEqual(['size:none']);
   });
-  test('the scope is the four roots', () => {
+  test('the scope is the four roots, less the surfaces that are no town page (by rule, each present in the tree)', () => {
     expect(ROOTS).toEqual(['src/data', 'src/generators', 'src/domain', 'src/components']);
+    expect(NOT_PAGE.map(([p]) => p).filter((p) => !existsSync(join(ROOT, p)))).toEqual([]);
+    expect(NOT_PAGE.length).toBe(18);
+    expect([notPage('src/domain/worldPulse/heraldLines.js'), notPage('src/components/new/tabs/DefenseTab.jsx'), notPage('src/components/HomeHero.jsx')]).toEqual([true, false, true]);
   });
 });
 

@@ -13,8 +13,11 @@
  *   • ARM 5 EXEMPTS BY RULE, NEVER BY ROW: a negated mention (`registeredWords.js :: negates`), a line bound to its own
  *     house, title or chain (a goods, resource, office, iron or animals word, never a size or a crisis word: BRIEF-BAR6
  *     B4/BAR6-HOUSES), and the record's own fact printed back (`RECORD_FACT_POOLS`, each with its reason).
- * Three word senses are narrowed (the hand-back's §4: "cured by narrowing the word, never by banking the line"):
- * `wards` as spells, `as ever` (of the land, not of ease), a bare "is paid" (no office in it).
+ * Word senses are narrowed where a fresh seeded fifty read them as false alarms (the hand-back's §4: "cured by
+ * narrowing the word, never by banking the line"; each beside its word below): `wards` as spells, `a quarter of` (a
+ * fraction), `thousands of` books, `as ever` of the land, `the usual` work, a bare "is paid", a feast as an event,
+ * `by the cartload` and `the road out` of people leaving, a lawless line's "disputes are settled by whoever", a flock
+ * of the faithful, a ledger's `books`, a bare `its members`, "of this size" (relative, true everywhere).
  *
  * A LINE'S STATUS FOR A CLASS (one a class its words fall in):
  *   declared · twin · scoped · gate · keyed · bound · negated · record   — answered (not a hit)
@@ -38,12 +41,12 @@ export const hitKey = (file, cls, text) => `${file}\t${cls}\t${literalHash(text)
 // ---------------------------------------------------------------------------------------------------------------
 // THE LEXICON (BAR6-AUDIT-G's thirteen classes; the four misses marked MISS)
 const W = (s) => new RegExp(s, 'i');
-const SIZE_TOWN = String.raw`quarters|(?:the|a|its|every|each|one|old|new|poor|rich|merchant|craft|artisan|temple|foreign|harbour|dock|river) quarter|districts?|neighbou?rhoods?|(?<!\b(?:protective|magical|magic|arcane|runic|holy|warding|spell|minor|binding|their|its) )wards\b(?! (?:off|against))|boroughs?|suburbs?|avenues?|boulevards?|plazas?|tenements?|city blocks?|thousands of|throngs?`;
+const SIZE_TOWN = String.raw`quarters|(?:the|its|every|each|one|old|new|poor|rich|merchant|craft|artisan|temple|foreign|harbour|dock|river) quarter|a quarter(?! (?:of|mile|hour|league))|districts?|neighbou?rhoods?|(?<!\b(?:protective|magical|magic|arcane|runic|holy|warding|spell|minor|binding|their|its) )wards\b(?! (?:off|against|for a living))|boroughs?|suburbs?|avenues?|boulevards?|plazas?|tenements?|city blocks?|thousands of (?:people|souls|residents|inhabitants|citizens|folk|families|households|faces)|throngs?`;
 const SIZE_VILLAGE = String.raw`streets|(?:particular|main|back|side|narrow|crowded|busy|cobbled|paved|few|which) streets?|alley(?:way)?s?`;
 // MISS: SMALL FOR BIG (C128237: "a small group of traders who come on market days", printed in a metropolis)
-const SIZE_SMALL = String.raw`small (?:group|band|number|handful|cluster) of|a handful of (?:traders|merchants|stalls|families|households|houses)|a few (?:families|households|traders|stalls|merchants|houses)|comes? on market days?|everyone knows everyone`;
+const SIZE_SMALL = String.raw`small (?:group|band|number|handful|cluster) of|a handful of (?:traders|merchants|stalls|families|households|houses)|comes? on market days?|everyone knows everyone`;
 // MISS: "FOR THIS SCALE" (C43925: "Significant military force for this scale")
-const SIZE_SCALE = String.raw`for (?:this|its|a place of (?:this|its)|a settlement of (?:this|its)) (?:scale|size)`;
+const SIZE_SCALE = String.raw`for (?:this|its|a place of (?:this|its)|a settlement of (?:this|its)) scale`;
 export const SIZE_BANDS = Object.freeze({ town: W(String.raw`\b(?:${SIZE_TOWN})\b`), village: W(String.raw`\b(?:${SIZE_VILLAGE})\b`), small: W(String.raw`\b(?:${SIZE_SMALL})\b`), scale: W(String.raw`\b(?:${SIZE_SCALE})\b`) });
 
 export const CLASSES = Object.freeze({
@@ -51,22 +54,22 @@ export const CLASSES = Object.freeze({
   outside: W(String.raw`\b(from abroad|abroad|imported|caravans?|caravanserai|travell?ers?|pilgrims?|pilgrimage|merchants? from|foreign (merchants|traders|goods)|passing trade|outside (buyers|customers|trade)|from (distant|far)|trade routes?|the roads? (in|out|bring|brings)|ships? (come|call|arrive|bring)|coach(es)? (depart|arrive)|visitors (come|arrive)`
     // MISS: AN ARRIVAL OF GOODS (C150831: "Porters bent under loaded frames file past", printed under a famine)
     + String.raw`|porters|loaded (frames|carts|wagons|mules|barges|boats)|pack (trains?|mules|horses|animals) (come|arrive|file|wind|plod)|(carts|wagons|barges|mule trains?) (come|coming|roll|rolling|arrive|arriving)( in)?|goods (arrive|arriving|come in|coming in))\b`),
-  plenty: W(String.raw`\b(plenty|plentiful|abundan(t|ce)|feast(s|ing)?|well[- ]fed|never (goes |go )?hungry|without going hungry|fresh (meat|bread|fish|milk|produce|game)|full (larders|granaries|bellies|tables)|beef|pork|mutton|day's catch|piled (high|with)|heaped|overflow(s|ing)?|more than (the|a) (village|town|city|hamlet|place|settlement) (could|can) (ever )?(use|eat|wear)|surplus|to spare|laid in|nobody (here )?(talks|worries) about the price|does not empty the|poor year (in one )?does not|a bad season .{0,30}without)\b`),
+  plenty: W(String.raw`\b(plenty|plentiful|abundan(t|ce)|feasting|feasts? (of|laid|spread)|well[- ]fed|never (goes |go )?hungry|without going hungry|fresh (meat|bread|fish|milk|produce|game)|full (larders|granaries|bellies|tables)|beef|pork|mutton|day's catch|piled (high|with)|heaped|overflow(s|ing)?|more than (the|a) (village|town|city|hamlet|place|settlement) (could|can) (ever )?(use|eat|wear)|surplus|to spare|laid in|nobody (here )?(talks|worries) about the price|does not empty the|poor year (in one )?does not|a bad season .{0,30}without)\b`),
   work: W(String.raw`\b(steady (work|trade|custom|living)|work never dries up|never (short of|without|wants for|lacks) (work|custom|trade)|always (has work|busy|in demand)|business is (good|brisk|steady)|plenty of work)\b`),
   animals: W(String.raw`\b(horse hire|rent(s|ing)? (horses|animals|mounts)|fresh mounts?|draught (animals|horses)|cart hire|wagons? for hire|pack animals)\b`),
   iron: W(String.raw`\b(reforge|mend(s|ing)? (tools|ironwork)|re-edge|tool manufacture|weapon smithing|ironwork|iron (tools|goods|bars))\b`),
-  law: W(String.raw`\b(thief is known|thieves are (caught|known)|until they make it right|crime is (rare|unknown)|doors (are )?(left )?unlocked|nobody steals|no one steals|justice (is )?(swift|sure)|the courts? (sit|sits|hear|hears)|disputes are settled)\b`),
+  law: W(String.raw`\b(thief is known|thieves are (caught|known)|until they make it right|crime is (rare|unknown)|doors (are )?(left )?unlocked|nobody steals|no one steals|justice (is )?(swift|sure)|the courts? (sit|sits|hear|hears)|disputes are settled(?! by (whoever|force|the strong|fists|blades)))\b`),
   // the widening (BRIEF-BAR6-AUDIT seat G)
   size: W(String.raw`\b(?:${SIZE_TOWN}|${SIZE_VILLAGE}|${SIZE_SMALL}|${SIZE_SCALE})\b`),
-  goods: W(String.raw`\b(cloth|wool|linen|silk|bolts of|bales? of|pots|pottery|crockery|glassware|cut stone|chisels?|spices?|herbs|butter|cheeses?|cream|wine|ale|beer|mead|cider|leather|hides|furs|pelts|candles|beeswax|rope|barrels|casks|horseshoes|ironware|weapons|armou?r|blades|arrows|jewel(le)?ry|perfumes?|incense|dyes?|dyed|parchment|books|salt fish|sugar|carts? (of|loaded|piled)|crates of|sacks of|loads of|cartloads?|goods (piled|stacked|go out|leave)|road out|kilns?|looms?|forge|anvil|bellows)\b`),
+  goods: W(String.raw`\b(cloth|wool|linen|silk|bolts of|bales? of|pots|pottery|crockery|glassware|cut stone|chisels?|spices?|herbs|butter|cheeses?|cream|wine|ale|beer|mead|cider|leather|hides|furs|pelts|candles|beeswax|rope|barrels|casks|horseshoes|ironware|weapons|armou?r|blades|arrows|jewel(le)?ry|perfumes?|incense|dyes?|dyed|parchment|(?<!(?:account|ledger) )books(?! (?:show|balance|record|say|tell|look|do not|never))|salt fish|sugar|carts? (of|loaded|piled)|crates of|sacks of|loads of|cartloads? of|goods (piled|stacked|go out|leave)|kilns?|looms?|forge|anvil|bellows)\b`),
   // narrowed: `as ever` dropped (BAR6-AUDIT-G's precision read, its line 11: "as ever" of the land is no ease)
-  ease: W(String.raw`\b(nobody hurries|unhurried|no one hurries|at (their )?leisure|idle(ly)?|lazily|singing|sings|laughter|laughing|gossip(s|ing)?|feast day|dancing|celebrat(e|es|ing|ion)|music (drifts|carries|plays)|a poet holds|children (play|run|chase)|ordinary (day|way|times)|as usual|the usual)\b`),
+  ease: W(String.raw`\b(nobody hurries|unhurried|no one hurries|at (their )?leisure|idle(ly)?|lazily|singing|sings|laughter|laughing|gossip(s|ing)?|feast day|dancing|celebrat(e|es|ing|ion)|music (drifts|carries|plays)|a poet holds|children (play|run|chase)|ordinary (day|way|times)|as usual|the usual (bustle|noise|crowds?|traffic|round|gossip|calm|quiet|business|market))\b`),
   threat: W(String.raw`\b(nothing (threatens|presses|troubles|disturbs)|no (one|body) (fears|threatens)|nothing to fear|without fear|no threat|safe (enough|here|place|roads?)|(is|feels|stays|remains) (safe|quiet|peaceful|calm)|peaceful|untroubled|in the ordinary way|the usual trouble|in (good|working) order|fresh repairs|kept up|raiders and rivals look elsewhere|would make any attack costly|nobody (worries|bothers))\b`),
   // narrowed: a bare "is paid" names no office (its line 36: "anyone who is paid"); a paid FORCE or a paid degree stays
-  office: W(String.raw`\b(law ?courts?|courthouse|courts? of (law|justice)|hall of justice|the court (sits|hears|rules)|a hearing|justice (is|comes|here)|judges?|magistrates?|tribunal|the watch|watchm[ae]n|night watch|patrols?|garrison(ed)?|militia|soldiers|guardsmen|constables?|sheriffs?|bailiffs?|(are|is) (well|badly|poorly) paid|(watch|guards?|soldiers|militia|garrison|troops) (are|is) paid|forces are|troops|standing army|councillors?|aldermen|its members|members cannot|notar(y|ies)|lawyers?|tax collectors?)\b`),
+  office: W(String.raw`\b(law ?courts?|courthouse|courts? of (law|justice)|hall of justice|the court (sits|hears|rules)|a hearing|justice (is|comes|here)|judges?|magistrates?|tribunal|the watch|watchm[ae]n|night watch|patrols?|garrison(ed)?|militia|soldiers|guardsmen|constables?|sheriffs?|bailiffs?|(are|is) (well|badly|poorly) paid|(watch|guards?|soldiers|militia|garrison|troops) (are|is) paid|forces are|troops|standing army|councillors?|aldermen|members cannot|notar(y|ies)|lawyers?|tax collectors?)\b`),
   sovereign: W(String.raw`\b(lord(s|'s)?|liege|overlord|crown|king|king's|queen|monarch|throne|noble oversight|baron|duke|earl|vassals?|fealty|tribute to|emperor)\b`),
   // a resource WORKED, CUT, HELD OR TRADED (a bare 'stone', 'timber' or 'river' as material or landscape is no presumption)
-  resource: W(String.raw`\b(ore|iron ore|quarr(y|ies|ied)|clay ?pits?|sand ?pits?|glass sand|raw sand|logging|lumber|sawn|timber (yard|stacked|cut|felled)|fishing (boats|nets|fleet)|nets|the catch|day's catch|herds?|flocks?|cattle|sheep|goats|pigs|swine|grapes|vines|vineyards?|orchards?|olive groves?|peat|coal|charcoal|salt pans?|honey|dairy|milk|wool|grazing|mines?|mining|miners|(works?|worked|working|cut|cutting|dressed) (the )?stone|stone ?(cutters?|masons?|yards?)|masons|deposits|seams?`
+  resource: W(String.raw`\b(ore|iron ore|quarr(y|ies|ied)|clay ?pits?|sand ?pits?|glass sand|raw sand|logging|lumber|sawn|timber (yard|stacked|cut|felled)|fishing (boats|nets|fleet)|nets|the catch|day's catch|herds?|flocks|(sheep|goat) flock|flock of (sheep|goats|geese)|cattle|sheep|goats|pigs|swine|grapes|vines|vineyards?|orchards?|olive groves?|peat|coal|charcoal|salt pans?|honey|dairy|milk|wool|grazing|mines?|mining|miners|(works?|worked|working|cut|cutting|dressed) (the )?stone|stone ?(cutters?|masons?|yards?)|masons|deposits|seams?`
     // MISS: CROP FARMING (C113231: "Intensive plots, terraces, raised fields")
     + String.raw`|(intensive|their|the|its|small|kitchen|garden|family) plots|terrace[sd]?|terraced fields|raised (fields|beds)|furrows?|ploughed|plowed|tilled|tilling|crops?|sowing|reaping|threshing)\b`),
 });
@@ -155,20 +158,24 @@ export function bandAnswers(text, band) {
 // a house's own description or service, a title's own line, a chain's own name or label: drawn only where the house,
 // the title or the chain stands, so the thing it names is answered by the binding (a goods, resource, office, iron or
 // animals word; NEVER a size or a crisis word)
-export const BOUND_FILES = /^src\/data\/(institutionServices|institutionDescVariants|institutionDescColour|institutionalCatalog|personHooksByTitle|people\/titleSecretsPresentations|institutionServiceKeys\.generated|supplyChainData)\.js$|^src\/domain\/display\/institutionVocabulary\.js$|^src\/generators\/computeActiveChains\.js$/;
+export const BOUND_FILES = /^src\/data\/(institutionServices|institutionDescVariants|institutionDescColour|institutionalCatalog|personHooksByTitle|people\/titleSecretsPresentations|institutionServiceKeys\.generated|supplyChainData|resourceData|inlandDescriptions)\.js$|^src\/domain\/(display\/institutionVocabulary|resourceSemantics)\.js$|^src\/generators\/computeActiveChains\.js$/;
 export const BOUND_CLASSES = Object.freeze(new Set(['goods', 'resource', 'office', 'iron', 'animals']));
 /** The record's own fact printed back: a pool whose key IS the fact the class word names. */
 export const RECORD_FACT_POOLS = Object.freeze([
   { file: 'src/generators/demandProfile.js', pool: 'FACTION_DEMAND', classes: ['goods'], reason: 'a demand item: what a faction would buy, a want and no presence (BAR6-AUDIT-G precision lines 14, 49)' },
-  { file: 'src/generators/narrativeGenerator.js', pool: 'genArrivalDetail', classes: ['resource', 'outside'], reason: 'the founding reason keyed by the record\'s own founding resource: a past, not a present (lines 10, 12, 21)' },
+  { file: 'src/generators/narrativeGenerator.js', pool: 'genArrivalDetail', classes: ['resource', 'outside', 'goods'], reason: 'the founding reason keyed by the record\'s own founding resource: a past, not a present (lines 10, 12, 21)' },
   { file: 'src/data/narrativeData.js', pool: 'TERRAIN_NARRATIVE_HOOKS', classes: ['resource', 'outside'], reason: 'the founding keyed by the record\'s own route and terrain: a past, not a present' },
+  { file: 'src/generators/narrative/settlementOriginProse.js', pool: 'ORIGIN_POOLS', classes: ['outside'], reason: 'the origin keyed by the record\'s own route (an isolated route\'s lines deny the trade they name)' },
+  { file: 'src/data/economicData.js', pool: 'TRADE_DEPENDENCY_NEEDS', classes: ['resource', 'goods'], reason: 'a house\'s needs: what it would draw on, a want and no presence' },
+  { file: 'src/generators/structuralValidator.js', pool: 'FUNDED_EMBATTLED', classes: ['office'], reason: 'printed by settleFundingReasons only where the military gate reads funded (>= 1): "present and paid" is the record\'s own fact' },
+  { file: 'src/domain/summary/settlementQuickGuide.js', pool: 'scopeAtSize', classes: ['size'], reason: 'scopeAtSize rewrites the phrase for a tiny or small place: the size words it keeps print at a town or larger' },
 ]);
 const recordFactRule = (file, pool, cls) => RECORD_FACT_POOLS.find((r) => r.file === file && pool.split('.')[0] === r.pool && r.classes.includes(cls)) || null;
 /** Every sentence that names the class's word denies it (`negates`), or "little/nothing to spare" for plenty. */
 export function negatedFor(cls, text) {
   const re = CLASSES[cls]; const hitSentences = sentencesOf(text).filter((s) => re.test(s));
   if (!hitSentences.length) return false;
-  return hitSentences.every((s) => negates(s, re) || (cls === 'plenty' && [...s.matchAll(new RegExp(re.source, 'ig'))].every((m) => /\b(little|nothing|none|never anything)\s+(?:[\w'-]+\s+){0,1}$/i.test(s.slice(Math.max(0, (m.index ?? 0) - 30), m.index ?? 0)))));
+  return hitSentences.every((s) => negates(s, re) || (cls === 'plenty' && [...s.matchAll(new RegExp(re.source, 'ig'))].every((m) => /\b(little|nothing|none|never|nobody|no one)\b/i.test(s.slice(Math.max(0, (m.index ?? 0) - 40), m.index ?? 0)))));
 }
 
 export const ANSWERED = Object.freeze(new Set(['declared', 'twin', 'scoped', 'gate', 'keyed', 'bound', 'negated', 'record']));
@@ -246,6 +253,22 @@ const subKeyOf = (src, at) => {
   return [key, sub].filter(Boolean).join('/');
 };
 const TIER_KEY = /\b(thorp|hamlet|village|town|city|metropolis|small|large|tiny|tier)\b/i;
+/**
+ * THE VERIFIED TIER KEY: the nearest ENCLOSING object key that is a tier word (`LAYOUT_BY_TIER.city.hills`), read by
+ * indentation from the literal's line up to its top-level declaration. A size word under such a key prints only at
+ * that tier, so the key is its band (arm 4 reads it as a declared `tier: = <key>`).
+ */
+export function tierKeyOf(src, at) {
+  const lines = src.slice(0, at).split('\n'); let indent = lines[lines.length - 1].match(/^\s*/)[0].length;
+  for (let k = lines.length - 2; k >= 0; k--) {
+    const L = lines[k]; if (!L.trim()) continue;
+    if (/^(export\s+)?(const|let|function)\s/.test(L)) return null;
+    const ind = L.match(/^\s*/)[0].length; if (ind >= indent) continue;
+    indent = ind;
+    const m = L.match(/^\s*['"]?(thorp|hamlet|village|town|city|metropolis)['"]?\s*:/); if (m) return m[1];
+  }
+  return null;
+}
 const crisisWord = (x) => (/^crisis:/.test(x) ? x : `crisis: ${x}`);
 
 /** The rows of one source file's literals. @param {string} rel @param {string} src @param {Map<string, object>} chan the declaration channels */
@@ -275,9 +298,28 @@ export function scanSource(rel, src, chan = new Map()) {
     const pool = poolOf(src, l.start); const sub = subKeyOf(src, l.start);
     let keyGate = false; { const ks = src.lastIndexOf('{ key: ', l.start); if (ks >= 0 && l.start - ks < 6000 && /institutions:\s*\[/.test(src.slice(ks, Math.min(l.start, ks + 1200)))) keyGate = true; }
     const tierKey = TIER_KEY.test(sub) || /\b(tier|TIER|population|isSmall|smallPlace|SMALL)\b/.test(src.slice(Math.max(0, l.start - 300), l.start));
+    const tk = tierKeyOf(src, l.start); if (tk) atoms.push(`tier: = ${tk}`);
     rows.push({ file: rel, pool: sub ? `${pool}.${sub}` : pool, line: src.slice(0, l.start).split('\n').length, text: t, decl: { atoms, twin, colour, keyGate, tierKey } });
   }
   return rows;
+}
+
+/**
+ * AN ANNEX POOL KEYED BY ITS GATE: the desk's pool keys name the record state the pool is drawn under
+ * (`militia PRESENT (no garrison)`, `posture UNDER OCCUPATION`, `DIRECTION: stable · CRISIS: famine`, `crossroads`).
+ * The key IS the pool's declaration, read as the atoms it names (a presence, a crisis kind, a route); an ABSENT key
+ * names nothing.
+ */
+export function gateAtomsOfPoolKey(key) {
+  const k = String(key); const out = [];
+  const pres = /^([a-z][a-z /]*?)\s+PRESENT\b/.exec(k);
+  if (pres) for (const w of pres[1].split(/[ /]+/)) if (['walls', 'garrison', 'militia', 'watch', 'mercenary'].includes(w)) out.push(w);
+  const kind = /\bCRISIS:\s*([a-z_]+)/.exec(k); if (kind) out.push(`crisis: ${kind[1]}`);
+  if (/\b(UNDER|ACTIVE) SIEGE\b|\bactive siege\b/.test(k)) out.push('crisis: under_siege');
+  if (/\bUNDER OCCUPATION\b/.test(k)) out.push('crisis: occupied');
+  if (/\bACTIVE FAMINE\b|^FAMINE$|\(famine\)|COMPOUND: famine/.test(k)) out.push('crisis: famine');
+  if (/\bcrossroads\b/.test(k)) out.push('route: crossroads');
+  return out;
 }
 
 /** The rows of one annex module (`src/data/dossierStateProse/<desk>.generated.js`), read structurally. */
@@ -290,7 +332,7 @@ export function scanAnnex(rel, blocks) {
       const marks = Array.isArray(v.marks) ? v.marks : [];
       const poolAtoms = Array.isArray(pm.declares) ? pm.declares : (pm.declares && typeof pm.declares === 'object' ? Object.values(pm.declares).flat() : []);
       rows.push({ file: rel, pool: `${bid}::${pk}`, line: null, text: v.text,
-        decl: { atoms: [...marks, ...poolAtoms.map(String)], scoped: pm.crisisScoped === true, colour: marks.includes('colour') || pm.colour === true, tierKey: TIER_KEY.test(pk) } });
+        decl: { atoms: [...marks, ...poolAtoms.map(String), ...gateAtomsOfPoolKey(pk)], scoped: pm.crisisScoped === true, colour: marks.includes('colour') || pm.colour === true, tierKey: TIER_KEY.test(pk) } });
     }
   }
   return rows;
@@ -317,13 +359,39 @@ export async function readChannels(root) {
 
 // ---- THE SCOPE, by rule: every file under the four roots the presumed-things walker's arm 1 reads (`ARM1_ROOTS`)
 export const ROOTS = Object.freeze(['src/data', 'src/generators', 'src/domain', 'src/components']);
+/**
+ * NOT A TOWN PAGE, by rule (a directory or a file): surfaces no town record is read for, where a line could only
+ * "declare" atoms no reader reads. Each was measured at the base: none of its own lines prints in the 150 wide-read
+ * towns (`bar0-<shape>-rand-<27..41>`, PAGE-COPY render; the world pulse's one match is a house's name it carries).
+ */
+export const NOT_PAGE = Object.freeze([
+  ['src/domain/worldPulse/', 'the world pulse: the news between towns, read by the herald and the realm view'],
+  ['src/domain/certification/', "the subsystems' certification: contracts, receipts and rows for the developer"],
+  ['src/domain/compendium/', 'the compendium: the reference the app shows apart from any town'],
+  ['src/components/compendium/', 'the compendium\'s screens'],
+  ['src/components/map/', 'the world map, the herald and the realm dashboard'],
+  ['src/components/region/', 'the regional graph'],
+  ['src/components/admin/', 'the admin console'],
+  ['src/components/contentStudio/', 'the content studio: authoring chrome'],
+  ['src/components/generate/', 'the generation form: configuration chrome'],
+  ['src/components/home/', 'the home screen'],
+  ['src/components/howto/', 'the how-to screens'],
+  ['src/components/gallery/', 'the gallery'],
+  ['src/components/tableLedger/', 'the table ledger: the DM\'s own notes panel'],
+  ['src/components/organic/samples/', 'design fixtures, no generated town'],
+  ['src/components/settlement/eventComposer/', 'the event composer: authoring chrome'],
+  ['src/components/HomeHero.jsx', 'the home screen'],
+  ['src/components/HowToUse.jsx', 'the how-to screen'],
+  ['src/components/ConfigurationPanel.jsx', 'the generation form: configuration chrome'],
+]);
+export const notPage = (rel) => NOT_PAGE.some(([p]) => (p.endsWith('/') ? rel.startsWith(p) : rel === p));
 export const ANNEX_DESKS = Object.freeze({ defense: 'DOSSIER_STATE_PROSE_DEFENSE', economy: 'DOSSIER_STATE_PROSE_ECONOMY', general: 'DOSSIER_STATE_PROSE_GENERAL', power: 'DOSSIER_STATE_PROSE_POWER', stressors: 'DOSSIER_STATE_PROSE_STRESSORS', warFaith: 'DOSSIER_STATE_PROSE_WAR_FAITH' });
 const ANNEX_FILE = /^src\/data\/dossierStateProse\/[a-zA-Z]+\.generated\.js$/;
 export function listFiles(root) {
   const acc = [];
   const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) { if (!/^(__tests__|__mocks__)$/.test(e.name)) walk(p); } else if (/\.(js|jsx|mjs)$/.test(e.name) && !/\.(test|spec)\./.test(e.name)) acc.push(path.relative(root, p).split(path.sep).join('/')); } };
   for (const r of ROOTS) if (fs.existsSync(path.join(root, r))) walk(path.join(root, r));
-  return acc.sort();
+  return acc.filter((rel) => !notPage(rel)).sort();
 }
 
 /**
