@@ -22,6 +22,9 @@ import { rowMarkText } from '../../src/domain/display/crisisStoppedRow.js';
 import { serviceRowsOf } from '../../src/domain/dossier/entityLinks.js';
 import { warTakesOf, RECEIPTS, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../../src/domain/facts/warReach.js';
 import { STRESS_DESCS } from '../../src/data/narrativeData.js';
+import { DESC_LATE_SIBLINGS } from '../../src/data/institutionDescVariants.js';
+import { speakTierNoun } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { law2MarksInstances } from '../helpers/pageLaws/law2Marks.mjs';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -106,13 +109,22 @@ describe('LAW 2\'s rows of a house or a service (BAR5-MARKS): what the crisis st
     const cobbler = (famine.institutions || []).find((/** @type {any} */ h) => h.name === 'Cobbler');
     expect(cobbler, 'r2s-famine-village-0 holds a cobbler').toBeTruthy();
     expect(law2MarksInstances(famine).filter((i) => i.rule === 'L2.famine.work')).toEqual([]); // the twin prints
-    const back = { ...famine, institutions: famine.institutions.map((/** @type {any} */ h) => (h === cobbler ? { ...h, desc: 'Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.' } : h)) };
+    // the originals and their twins, computed from the late table (no literal anchor): the set whose original the house printed
+    // each set as the late re-read speaks it in the town's own tier noun (`assembleSettlement.js :: readHouseDescsLate`)
+    const spokenSets = (/** @type {any} */ t) => Object.values(DESC_LATE_SIBLINGS).map((set) => set.map((/** @type {any} */ l) => speakTierNoun(l.text, tierNounFor(t.tier))));
+    const setOf = (/** @type {string} */ desc, /** @type {any} */ t) => spokenSets(t).find((set) => set.includes(desc));
+    const cobblerSet = /** @type {string[]} */ (setOf(String(cobbler.desc), famine));
+    expect(cobblerSet, 'the cobbler printed a twin of the late table').toBeTruthy();
+    expect(String(cobbler.desc)).toBe(cobblerSet[1]);
+    const back = { ...famine, institutions: famine.institutions.map((/** @type {any} */ h) => (h === cobbler ? { ...h, desc: cobblerSet[0] } : h)) };
     expect(law2MarksInstances(back).map((i) => i.rule)).toContain('L2.famine.work');
     const siege = town('r2r-metropolis-14');
     const bowyer = (siege.institutions || []).find((/** @type {any} */ h) => /^Bowyers/.test(h.name));
     expect(bowyer, 'r2r-metropolis-14 holds the bowyers').toBeTruthy();
-    expectAbsentWithAnchor(String(bowyer.desc), 'supplying the watch, the garrison, and the caravans', 'With the roads cut', 'r2r-metropolis-14: the late re-read stored the siege\'s twin in the bowyers\' slot');
-    const back2 = { ...siege, institutions: siege.institutions.map((/** @type {any} */ h) => (h === bowyer ? { ...h, desc: 'Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.' } : h)) };
+    const bowyerSet = /** @type {string[]} */ (setOf(String(bowyer.desc), siege));
+    expect(bowyerSet, 'the bowyers printed a twin of the late table').toBeTruthy();
+    expectAbsentWithAnchor([String(bowyer.desc)], bowyerSet[0], bowyerSet[1], 'r2r-metropolis-14: the late re-read stored the siege\'s twin in the bowyers\' slot');
+    const back2 = { ...siege, institutions: siege.institutions.map((/** @type {any} */ h) => (h === bowyer ? { ...h, desc: bowyerSet[0] } : h)) };
     expect(law2MarksInstances(back2).map((i) => i.rule)).toContain('L2.siege.abroad');
   }, 120_000);
 

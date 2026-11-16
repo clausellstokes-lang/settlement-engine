@@ -195,7 +195,11 @@ function noHerdsHere(settlement) {
     ?.economicState?.foodSecurity;
   const sources = food?.foodRecord?.foodSources;
   // and the food ledger's own pastoral chain is off (a shepherd's town keeps its herds whatever the sources list)
-  return Array.isArray(sources) && !sources.includes('livestock') && food?.chains?.['Pastoral & livestock'] === false;
+  if (!(Array.isArray(sources) && !sources.includes('livestock') && food?.chains?.['Pastoral & livestock'] === false)) return false;
+  // and no house of the town's own herds stands (a house declared on both the herds and the land it works: the shepherd,
+  // the dairy farmer): its flocks are here, whatever the ledger counts (bar3ServicesRows' r2s-under_siege-hamlet-2)
+  return !liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .some((h) => h && typeof h.name === 'string' && !isCustom(h) && houseDependenceOf(h).includes(LIVESTOCK) && houseDependenceOf(h).includes(FIELD_WORK));
 }
 
 /**
