@@ -81,19 +81,19 @@ export const classesOf = (t) => CLASS_IDS.filter((k) => CLASSES[k].test(t));
 const C = ['crisis', 'famine', 'starving', 'failed', 'danger coming', 'food', 'stores', 'war', 'migration', 'source spent', 'threat', 'hunger', 'succession', 'unrest'];
 const GOODS = ['trade at work', 'institution', 'exports', 'imports', 'market', 'guild', 'iron at hand', 'timber at hand', 'timber reaches the saws', 'fish', 'grain', 'game', 'livestock', 'failed', 'enchanting', 'magic supply', 'docks', 'port', 'navigable', 'own plots', 'source spent'];
 export const CLASS_DIMS = Object.freeze({
-  outside: [...C, 'route', 'imports', 'exports', 'port', 'navigable', 'docks', 'walls', 'gate'],
+  outside: [...C, 'route', 'imports', 'exports', 'port', 'navigable', 'docks', 'walls', 'gate', 'exported'],
   plenty: [...C, 'prosperity', 'own plots', 'fish', 'grain', 'game', 'livestock', 'food surplus'],
   work: [...C, 'prosperity'],
   animals: [...C, 'institution', 'livestock'],
   iron: [...C, 'iron at hand', 'trade at work', 'institution'],
-  law: [...C, 'crime', 'organised crime', 'criminal income', 'watch', 'court', 'prison', 'patrol', 'garrison', 'militia', 'crime wave'],
-  ease: [...C, 'prosperity'],
+  law: [...C, 'crime', 'organised crime', 'criminal income', 'watch', 'court', 'prison', 'patrol', 'garrison', 'militia', 'crime wave', 'force'],
+  ease: [...C, 'prosperity', 'legitimacy crisis'],
   threat: [...C, 'walls', 'palisade', 'gate', 'organised crime', 'crime', 'ruler', 'rival power', 'watch', 'garrison', 'patrol', 'militia', 'soldiers', 'monster frontier', 'crime wave'],
   size: ['tier', 'population'],
-  goods: GOODS,
+  goods: [...GOODS, 'exported'],
   resource: [...GOODS, 'terrain', 'coast', 'river'],
-  office: ['court', 'prison', 'watch', 'militia', 'garrison', 'patrol', 'soldiers', 'commander', 'mercenary', 'institution', 'ruling body', 'guild', 'ruler', 'rival power', 'walls', 'palisade', 'gate', 'tier', 'population', 'temple', 'church', 'priest', 'clergy', 'crime', 'organised crime'],
-  sovereign: ['ruler', 'war', 'crisis', 'sovereign'],
+  office: ['court', 'prison', 'watch', 'militia', 'garrison', 'patrol', 'soldiers', 'commander', 'mercenary', 'institution', 'ruling body', 'guild', 'ruler', 'rival power', 'walls', 'palisade', 'gate', 'tier', 'population', 'temple', 'church', 'priest', 'clergy', 'crime', 'organised crime', 'force'],
+  sovereign: ['ruler', 'war', 'crisis', 'sovereign', 'legitimacy crisis'],
 });
 /**
  * THE CHAIR'S RULING CD1 (2026-11-16): this table is BAR6-GUARD's alone to extend; the seats' NEW atoms are added to
@@ -104,7 +104,10 @@ export const NAMED_ATOMS = Object.freeze({
   sovereign: 'BAR6-HOUSES 9fa69a146 (presence: needs sovereign, its twin excludes sovereign)',
   'monster frontier': 'BAR6-DEFDESK be3585040 (threat words)',
   'food surplus': 'BAR6-DEFDESK be3585040 (plenty words)',
-  'crime wave': 'BAR6-DEFDESK be3585040 (crime words)',
+  'crime wave': 'BAR6-CRIME 2065d95bc, facts/lawBand.js :: crimeWaveStands (crime words: law and threat; DEFDESK drops its duplicate)',
+  force: 'BAR6-CRIME 2065d95bc, facts/orderForce.js :: orderForceOf (`force: kept|paid|volunteers`: office and law words)',
+  exported: 'BAR6-SCENES 7c0d8a7f5, beneath `exports` (`exported: <good>`: a goods word, and an outside word of goods leaving)',
+  'legitimacy crisis': 'BAR6-SCENES 7c0d8a7f5, beneath `ruler` (a line of loyalty or settled rule: ease and sovereign words)',
 });
 /** ARM 3: the crisis FAMILIES a crisis class must be declared against when only crisis atoms answer it. */
 export const CLASS_FAMILIES = Object.freeze({ plenty: ['hunger'], ease: ['threat', 'hunger'], threat: ['threat'], outside: ['threat'] });

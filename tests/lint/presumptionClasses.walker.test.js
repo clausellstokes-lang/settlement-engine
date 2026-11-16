@@ -53,7 +53,10 @@ describe('the lexicon', () => {
     expect(Object.keys(CLASS_DIMS).sort()).toEqual([...CLASS_IDS].sort());
   });
   test('RULING CD1: the seats\' new atoms answer their classes (named until the joined vocabulary holds them)', () => {
-    expect(Object.keys(NAMED_ATOMS).sort()).toEqual(['crime wave', 'food surplus', 'monster frontier', 'sovereign']);
+    expect(Object.keys(NAMED_ATOMS).sort()).toEqual(['crime wave', 'exported', 'food surplus', 'force', 'legitimacy crisis', 'monster frontier', 'sovereign']);
+    expect(one('src/data/plantedPool.js', `{ text: 'The watch walks its patrols every night.', needs: ['force: paid'] }`)).toEqual([]);
+    expect(one('src/data/plantedPool.js', `{ text: 'Bales of wool leave by the river each spring.', needs: ['exported: wool'] }`)).toEqual(['resource:other :: Bales of wool leave by the river each spring.']);
+    expect(one('src/data/plantedPool.js', `{ text: 'The lord holds the valley in an ordinary way.', excludes: ['legitimacy crisis'] }`)).toEqual([]);
     const F = 'src/data/plantedPool.js';
     expect(one(F, `{ text: 'The lord takes his dues at the harvest.' }`)).toEqual(['sovereign:none :: The lord takes his dues at the harvest.']);
     expect(one(F, `{ text: 'The lord takes his dues at the harvest.', needs: ['sovereign'] }`)).toEqual([]);
