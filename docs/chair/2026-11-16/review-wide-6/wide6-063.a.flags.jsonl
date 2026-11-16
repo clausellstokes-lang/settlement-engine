@@ -1,0 +1,5 @@
+{"id":"C166200","town":"bar0-town-calm-rand-33","sev":"LOW","kind":"BROKEN","why":"\"Weak defences keeps Devakund\": plural subject with singular verb","other":""}
+{"id":"C165663","town":"bar0-town-calm-rand-33","sev":"MED","kind":"PAIR","why":"Summary: magic-workers here are respected, consulted and watched; Defense tab: Arcane Support None, 'No arcane practitioners on the rolls'","other":"C166365"}
+{"id":"C166314","town":"bar0-town-calm-rand-33","sev":"LOW","kind":"PAIR","why":"'The town watch exists on paper' against the watch's night patrols (C166357) and 'The watch covers the main paths'; DEFENCE has watch: Town watch","other":"C166336"}
+{"id":"C165662","town":"bar0-town-calm-rand-33","sev":"LOW","kind":"LACKS","why":"\"built ... in quarters by trade\" (also C165907 \"Several quarters\"): population 936 with Housing of 75-650 households is too small for trade quarters","other":""}
+{"id":"DONE","lines":1232,"blocks":1,"flags":4}
