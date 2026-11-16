@@ -103,7 +103,7 @@ function denials(t) {
     { rule: '9a.contested', claim: NO_ORG, state: wave ? 'a crime wave stands: its hook says it is coordinated' : null },
     { rule: '9a.balance', claim: LAW_PRESENT, state: lawBandOf(t) === 'collapsed' ? 'Law & order · Collapsed' : (!d.watch && !d.garrison) ? 'no watch, no garrison' : null },
     { rule: '9c.putby', claim: PUT_BY, state: typeof stores === 'number' && stores >= 12 ? `stores of ${stores} months` : null },
-    { rule: '9c.nothing-over', claim: NOTHING_OVER, state: growsMoreThanEatsOf(t) ? 'grows more than it eats' : null },
+    { rule: '9c.nothing-over', claim: NOTHING_OVER, state: growsMoreThanEatsOf(t) ? 'the food record holds a surplus (growsMoreThanEats)' : null },
     { rule: 'L2.law.collapsed', claim: COURT_HEARS, state: lawBandOf(t) === 'collapsed' ? 'Law & order · Collapsed' : null },
   ];
 }
@@ -177,17 +177,17 @@ describe('BAR6-DEFDESK: the defence desk\'s lines declare what they presume', ()
 
   test('(c) the positive controls: each cured line under its marks at afa46d644 fires in its own read town', () => {
     const B = DOSSIER_STATE_PROSE_DEFENSE;
-    /** The wide read's standing rows (SECOND-CHECK.final221), the line's block and pool, its vid now, and its marks at the base. */
+    /** The wide read's standing rows (SECOND-CHECK.final221: C205552-kind 7a, C26390, C3247, C154050), the line's block, pool and vid, and its marks at the base. */
     const CONTROLS = [
-      { seed: 'bar0-hamlet-calm-rand-28', block: 'DS-DEF-11', pool: 'UNWALLED-SMALL', fragment: 'nothing threatens it now', base: ['ledger', 'no threat', 'no danger coming', 'no crisis: wartime', 'crisis: any'] },
-      { seed: 'bar0-city-under_siege+famine-rand-36', block: 'DS-DEF-11', pool: 'WALLED-THREATENED', fragment: 'Fresh repairs show on', base: ['visitor'] },
-      { seed: 'bar0-city-under_siege+famine-rand-28', block: 'DS-DEF-1', pool: 'readiness ADEQUATE', fragment: 'defended in the ordinary way', base: ['visitor', 'no crisis: occupied'] },
-      { seed: 'bar0-hamlet-calm-rand-29', block: 'DS-DEF-4', pool: 'structure diffuse', fragment: 'comes from lone thieves, not a gang', base: ['visitor'] },
+      { seed: 'bar0-hamlet-calm-rand-28', block: 'DS-DEF-11', pool: 'UNWALLED-SMALL', vid: 4, base: ['ledger', 'no threat', 'no danger coming', 'no crisis: wartime', 'crisis: any'] },
+      { seed: 'bar0-city-under_siege+famine-rand-36', block: 'DS-DEF-11', pool: 'WALLED-THREATENED', vid: 3, base: ['visitor'] },
+      { seed: 'bar0-city-under_siege+famine-rand-28', block: 'DS-DEF-1', pool: 'readiness ADEQUATE', vid: 2, base: ['visitor', 'no crisis: occupied'] },
+      { seed: 'bar0-hamlet-calm-rand-29', block: 'DS-DEF-4', pool: 'structure diffuse', vid: 5, base: ['visitor'] },
     ];
     for (const c of CONTROLS) {
       const t = town(c.seed);
       const pool = B[c.block].pools[c.pool];
-      const now = pool.find((/** @type {any} */ v) => v.text.includes(c.fragment) && !v.text.includes('purse cut'));
+      const now = pool.find((/** @type {any} */ v) => v.vid === c.vid); // the variant by its id (proseDrawnAnchors: no literal sentence as an anchor)
       expect(now, `${c.seed}: the line stands in its pool`).toBeTruthy();
       const atBase = { ...B, [c.block]: { ...B[c.block], pools: { [c.pool]: [{ ...now, marks: c.base.slice(1) }] }, poolMeta: { [c.pool]: (B[c.block].poolMeta || {})[c.pool] } } };
       const fired = instances(t, c.seed, admitted(t, { [c.block]: atBase[c.block] }));
