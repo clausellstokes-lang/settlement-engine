@@ -1,0 +1,284 @@
+[
+ {
+  "law": "L2",
+  "id": "C0333",
+  "classes": [
+   "outside"
+  ],
+  "text": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "line": 1004,
+    "pool": "PAIRS",
+    "status": "colour",
+    "crisisDeclared": false,
+    "via": "channel column colour"
+   }
+  ]
+ },
+ {
+  "law": "L2",
+  "id": "C0927",
+  "classes": [],
+  "text": "Rare medications and treatments available through district-wide sourcing.",
+  "source": []
+ },
+ {
+  "law": "L2",
+  "id": "C5441",
+  "classes": [
+   "outside"
+  ],
+  "text": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "line": 1004,
+    "pool": "PAIRS",
+    "status": "colour",
+    "crisisDeclared": false,
+    "via": "channel column colour"
+   }
+  ]
+ },
+ {
+  "law": "L2",
+  "id": "C0350",
+  "classes": [
+   "outside"
+  ],
+  "text": "The watch, the garrison, and the caravans buy here.",
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "line": 1007,
+    "pool": "PAIRS",
+    "status": "line",
+    "crisisDeclared": false,
+    "via": "channel column {\"needs\":[\"watch\",\"garrison\"]}"
+   },
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "line": 1008,
+    "pool": "PAIRS",
+    "status": "line",
+    "crisisDeclared": false,
+    "via": "channel column {\"needs\":[\"watch\",\"garrison\"]}"
+   },
+   {
+    "file": "src/data/institutionalCatalog.js",
+    "line": 693,
+    "pool": "INSTITUTION_FAMILIES",
+    "status": "none",
+    "crisisDeclared": false,
+    "via": ""
+   }
+  ]
+ },
+ {
+  "law": "L2",
+  "id": "C3223",
+  "classes": [
+   "outside"
+  ],
+  "text": "The watch, the garrison, and the caravans buy here.",
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "line": 1007,
+    "pool": "PAIRS",
+    "status": "line",
+    "crisisDeclared": false,
+    "via": "channel column {\"needs\":[\"watch\",\"garrison\"]}"
+   },
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "line": 1008,
+    "pool": "PAIRS",
+    "status": "line",
+    "crisisDeclared": false,
+    "via": "channel column {\"needs\":[\"watch\",\"garrison\"]}"
+   },
+   {
+    "file": "src/data/institutionalCatalog.js",
+    "line": 693,
+    "pool": "INSTITUTION_FAMILIES",
+    "status": "none",
+    "crisisDeclared": false,
+    "via": ""
+   }
+  ]
+ },
+ {
+  "law": "L2",
+  "id": "C5452",
+  "classes": [
+   "outside"
+  ],
+  "text": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "line": 1007,
+    "pool": "PAIRS",
+    "status": "line",
+    "crisisDeclared": false,
+    "via": "channel column {\"needs\":[\"watch\",\"garrison\"]}"
+   }
+  ]
+ },
+ {
+  "law": "L2",
+  "id": "C3231",
+  "classes": [
+   "plenty"
+  ],
+  "text": "Services · Fresh meat · Offal and by-products",
+  "source": []
+ },
+ {
+  "law": "L2",
+  "id": "C8174",
+  "classes": [
+   "iron"
+  ],
+  "text": "Services · Repairs · Tool manufacture · Weapon smithing",
+  "source": []
+ },
+ {
+  "law": "L2",
+  "id": "C8475",
+  "classes": [
+   "animals"
+  ],
+  "text": "Services · Horse hire",
+  "source": []
+ },
+ {
+  "law": "L2",
+  "id": "C11307",
+  "classes": [
+   "iron"
+  ],
+  "text": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with.",
+  "source": [
+   {
+    "file": "src/generators/economy/foodBalance.js",
+    "line": 831,
+    "pool": "deriveSupplyRiskAnalysis",
+    "status": "line",
+    "crisisDeclared": true,
+    "via": "channel siblings (twin) {\"needs\":[\"institution: smith\"],\"excludes\":[\"war: peace\"]}"
+   }
+  ]
+ },
+ {
+  "law": "L2",
+  "id": "C43575",
+  "classes": [
+   "work"
+  ],
+  "text": "Since no one goes unshod, the work never dries up.",
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "line": 403,
+    "pool": "PAIRS",
+    "status": "colour",
+    "crisisDeclared": false,
+    "via": "channel column colour"
+   }
+  ]
+ },
+ {
+  "law": "L2",
+  "id": "C42116",
+  "classes": [
+   "law"
+  ],
+  "text": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "source": [
+   {
+    "file": "src/generators/safetyProfile.js",
+    "line": 1018,
+    "pool": "NO_WATCH_SMALL",
+    "status": "none",
+    "crisisDeclared": false,
+    "via": ""
+   }
+  ]
+ },
+ {
+  "law": "L3",
+  "id": "C3874",
+  "classes": [],
+  "text": "Armed escort · Mercenary hire · Training services",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C3911",
+  "classes": [],
+  "text": "Armed escort & mercenary hire",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C17290",
+  "classes": [
+   "plenty"
+  ],
+  "text": "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C17893",
+  "classes": [],
+  "text": "Faith & Worship · Religion & civic✓ Running",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C42011",
+  "classes": [],
+  "text": "River Fisheries · fish · Extensive Grain Fields · grain · flour · Hot Springs / Healing Waters",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C42947",
+  "classes": [],
+  "text": "Ancient Grove · medicinal herbs · honey · Precious Metal Veins · luxury · Open Grazing Land · livestock · wool · dairy · animal hides",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C31652",
+  "classes": [],
+  "text": "Needed, and not brought in: grapes, clay.",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C39608",
+  "classes": [],
+  "text": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C37887",
+  "classes": [],
+  "text": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+  "source": []
+ },
+ {
+  "law": "L3",
+  "id": "C39597",
+  "classes": [],
+  "text": "What it puts on the table itself is the hunters' game.",
+  "source": []
+ }
+]
