@@ -1,0 +1,3 @@
+{"id":"C36645","town":"bar0-town-occupied-rand-24","sev":"LOW","kind":"LACKS","why":"says the town's work uses gold/silver ore; HOUSES has no goldsmith, jeweller or mint, and the only refining house is an iron smelter","other":""}
+{"id":"C37631","town":"bar0-town-occupied-rand-25","sev":"LOW","kind":"LACKS","why":"\"Several quarters, each with its house of worship\": population 329 cannot hold several quarters; also C37711 \"different districts\"","other":"C37711"}
+{"id":"DONE","lines":2284,"blocks":2,"flags":2}
