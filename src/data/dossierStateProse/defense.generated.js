@@ -2774,6 +2774,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "street",
           "marks": [
             "patrol",
+            "force: kept",
             "law: > collapsed"
           ],
           "text": "{settlement} keeps a working balance: the law is present, so is crime, and neither has the town to itself.",
@@ -7394,7 +7395,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "street",
           "marks": [
             "guardPresence",
-            "patrol"
+            "patrol",
+            "force: paid"
           ],
           "text": "At {settlement} the debt is paid before the guards are, and every guard knows it.",
           "slots": [

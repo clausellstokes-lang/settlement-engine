@@ -3074,7 +3074,7 @@ reading rather than a settled one.
 5. `[ledger · no guardPresence · crisis: any]` The town's record of crimes at {settlement} stays short: there is some crime, and neighbours settle most of it between themselves.
 
 **`Moderate`**
-1. `[street · patrol · law: > collapsed]` {settlement} keeps a working balance: the law is present, so is crime, and neither has the town to itself.
+1. `[street · patrol · force: kept · law: > collapsed]` {settlement} keeps a working balance: the law is present, so is crime, and neither has the town to itself.
 2. `[ledger · guardPresence]` The town's record of crimes at {settlement} is not short, and the next few seasons will decide whether the law or the criminals gain on it.
 3. `[visitor · tier: ≥ village]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.
 4. `[threshold · watch · tier: ≥ village]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.
@@ -3716,7 +3716,7 @@ street, the unfolding).
 
 **override: UNDER TRIBUTE**
 1. `[ledger · guardPresence]` {settlement} pays its creditors first and its defence with what is left, and what is left shrinks each year.
-2. `[street · guardPresence · patrol]` At {settlement} the debt is paid before the guards are, and every guard knows it.
+2. `[street · guardPresence · patrol · force: paid]` At {settlement} the debt is paid before the guards are, and every guard knows it.
 3. `[unfolding · colour]` Every year the debt stands, less of {settlement}'s money reaches its defence.
 4. `[street · no guardPresence]` {settlement} keeps no defenders to pay, and the debt is one more reason it never will.
 

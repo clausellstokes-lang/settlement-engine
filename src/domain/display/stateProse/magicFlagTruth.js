@@ -10,12 +10,14 @@
  * @enforced-by tests/domain/bar6DefDeskGuards.test.js
  */
 import { houseBacksOf } from '../../dossier/powerSupport.js';
+import { partitionDefenseInstitutions } from '../../institutions/defenseInstitutionBuckets.js';
+import { liveInstitutions } from '../../institutions/institutionRoster.js';
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
 
 /**
- * BAR6-DEFDESK (LAW 9's `9e.military`; vetoable by the owner): do the town's arcane houses (the catalogue's Magic category)
+ * BAR6-DEFDESK (LAW 9's `9e.military`; vetoable by the owner): do the town's arcane houses (the houses of magic among the defences)
  * each back some power, and none of them a military one, as the Institutions tab's "Backs" lines print it? Then the
  * militarised flag's "the arcane houses answer to them" is false on the page (C62573, C164227). False with no arcane house,
  * or with one that backs nothing.
@@ -23,7 +25,8 @@ const text = (v) => (typeof v === 'string' ? v.trim() : '');
  */
 export function arcaneHousesBackNoForce(settlement) {
   const s = /** @type {{ institutions?: unknown, powerStructure?: { factions?: unknown } | null } | null} */ (settlement);
-  const houses = Array.isArray(s?.institutions) ? s.institutions.filter((i) => /^(magic|arcane)$/i.test(text(i?.category))) : [];
+  // the houses of magic among the defences, the live roster's own bucket (`defenseInstitutionBuckets.js`: the home `magicAmongDefences` reads)
+  const houses = /** @type {Array<{ name?: unknown }>} */ (partitionDefenseInstitutions(liveInstitutions(/** @type {never} */ (settlement))).magicDef || []);
   if (!houses.length) return false;
   const factions = Array.isArray(s?.powerStructure?.factions) ? s.powerStructure.factions : [];
   const categoryOf = new Map(factions.map((f) => [text(f?.faction || f?.name), text(f?.category)]));
