@@ -90,7 +90,12 @@ const SIEGE_CHAINS = [
   ['r2s-under_siege-hamlet-0', 'tavern_social', 'operational', 'impaired'],
   ['r2s-under_siege-village-0', 'tavern_social', 'operational', 'impaired'],
 ];
-const SIEGE_KEEP = [['r2s-under_siege-city-0', 'fishing', 'running']]; // one of its houses works on
+// BAR6-MARKS (2026-11-16): re-keyed by identity from r2s-under_siege-city-0's fishing, whose cooper (its one house the siege
+// left unmarked) is now "Curtailed by the siege." (its timber came in by road: `houseInputAtHand.js ::
+// housesWantingTradeInput`), so every house of that card carries the siege's mark and it prints "impaired" by SW1b, truly; no
+// siege town of the 720 keeps a fishing card working at the seat's tip; r2s-under_siege-town-1's parish (the church and the
+// foundling home) keeps "running": a house of it works on
+const SIEGE_KEEP = [['r2s-under_siege-town-1', 'parish', 'running']]; // one of its houses works on
 // RULING SW1b (the chair, 2026-11-15 23:41 UTC; vetoable by the owner; BAR3-CLOSE-SWEEP-A): every crisis that marks houses,
 // not the siege alone. [seed, chain id, the state that must not print, the state that prints instead]
 const CRISIS_CHAINS = [

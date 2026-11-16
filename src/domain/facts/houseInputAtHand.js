@@ -41,7 +41,6 @@ import { institutionMatchesKeyword } from '../institutions/institutionCategory.j
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT } from '../../data/crisisDependence.js';
-import { warIronHookOutsideWar } from './warReach.js';
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -512,6 +511,23 @@ function dependsFromOutside(record, key) {
   });
 }
 
+/** The war's own iron hook, by its fixed opening (`economy/foodBalance.js`; `outlookHookSiblings.js`'s twin keeps it). */
+const WAR_IRON_HOOK = /^War has taken the iron:/;
+
+/**
+ * BAR6-MARKS (fact (e), left by BAR5-MARKS under WM1b; vetoable by the owner): WHERE THE PAGE PRINTS THE WAR'S IRON HOOK
+ * AND NO WAR IS IN FORCE HERE (an occupied town of a land at war). `warReach.js :: warTakesOf` stops the forge work as a
+ * war's crisis in a town at war only; here the hook's own reading is the input's. Read off the record's own crisis list
+ * (`config.stressTypes`), not `crisisKind.js`, which is pinned lazy and this eager fact may not import (EG1).
+ * @param {unknown} record @returns {boolean}
+ */
+function warIronHookOutsideWar(record) {
+  const r = /** @type {{ config?: { stressTypes?: unknown } | null, economicViability?: { plotHooks?: unknown } | null } | null} */ (record);
+  if (!r || arr(r.config?.stressTypes).includes('wartime')) return false;
+  return arr(r.economicViability?.plotHooks).some((x) => { const h = /** @type {{ category?: unknown, hook?: unknown } | null} */ (x);
+    return !!h && h.category === 'Strategic Resource' && typeof h.hook === 'string' && WAR_IRON_HOOK.test(h.hook); });
+}
+
 /** The luxury trade's own goods, which no chain carries (`HOUSE_TRADE_INPUT`'s `luxury`). */
 const LUXURY_NAMES = Object.freeze(['luxury goods', 'luxury materials']);
 /** An import or a product that meets the luxury trade's need. */
@@ -534,7 +550,7 @@ const WANTING_OF = new WeakMap();
  *               it from outside: its imported share is cut (the page's "… depend on timber from outside, which the siege
  *               has cut off"); a good the town works itself and the chains do not say comes from outside is its own work.
  * The luxury trade's goods (no chain) are not had where the record's own need list names them, no siege is in force (it
- * stops the trade itself), and neither the town's production nor its imports bring a luxury or exotic good. AND THE WAR'S IRON HOOK OUTSIDE A WAR (fact (e), `warReach.js :: warIronHookOutsideWar`):
+ * stops the trade itself), and neither the town's production nor its imports bring a luxury or exotic good. AND THE WAR'S IRON HOOK OUTSIDE A WAR (fact (e), `warIronHookOutsideWar` below):
  * where the page prints it and no siege is in force (a siege's own reading of the imports stands there), every house
  * whose trade is iron is short of it, gap or none. A house on a spent ground is left to that reading (SV6).
  * @param {unknown} record the settlement record

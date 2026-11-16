@@ -81,3 +81,29 @@ timber, a weaver with no wool, the smiths in an occupied land where the war took
 material came in by road says it is curtailed. A famine that killed the herds now also marks the grain sold off the field
 as scarce, as the income line beside it already did. A house that carries such a mark no longer wears the milder
 "Vulnerable" over it. Nothing stored changes: every saved town is read the same way; only what the page prints moves.
+
+## AFTER THE HAND-BACK (the chair's ceiling of 520,000, 2026-11-16 23:03 UTC)
+
+- MY REGRESSION, CURED: `tests/architecture/engineCoreLazyEdge.test.js` was red at d5c8b386a (green at afa46d644): the edge
+  `facts/houseInputAtHand.js` (eager) -> `facts/warReach.js` -> `facts/crisisKind.js` [coherence-lazy], my import of the war's
+  iron hook. The reader moved into `houseInputAtHand.js` (`warIronHookOutsideWar`, reading the record's own
+  `config.stressTypes`); `warReach.js` is back byte for byte at the base. `tests/architecture` 21 files green; the record form
+  unchanged (the 150: 0; the 720: the 4 houses left by name).
+- RECORD'S (2), 6c-unworked: `chainStateShown.js :: chainStateShown` asks THE ONE ANSWER (`facts/chainWorking.js ::
+  chainWorksResource`, its `NOT_WORKED_THROUGH` exceptions) of the chain alone: a chain whose houses do not work its ground
+  prints no state (the form the leaf already gives a chain run only through a neighbour's house). Measured with runC on the
+  11 census towns auditor C counted (rendered at afa46d644 and at my tip): 6c-unworked 11 towns · 11 -> 0; the one other L6
+  row there (6a-w, r2s-mass_migration-village-2) is the same at both.
+- RECORD'S (1), the stored-iron line: NOT TAKEN, A MISMATCH: "<services> here run on stored <goods>: no trade road reaches
+  <town>" is written in `src/domain/display/chainNeedShown.js :: chainNeedLine` (its `tradeAccess === 'isolated'` arm), not in
+  `src/data/crisisDependence.js`, which holds no such line; `chainNeedShown.js` is not on my list. `tradeReach.js` was fetched
+  and verified (blob 1d4c0e3427f8d4fec7cc4f246e35a11100943424) and not added (no reader of mine). Asked of the chair.
+- A BOOK MY CURE MOVED, FOUND IN THIS NET (it was not in my first net): `tests/components/bar3LabelWords2.test.jsx` L3's keep
+  pair, r2s-under_siege-city-0's fishing card "running" (one of its houses works on): its cooper, the one house the siege left
+  unmarked, is now "Curtailed by the siege." (its timber came in by road), so every house of the card carries the siege's mark
+  and SW1b prints "impaired", truly. Re-keyed by identity (dated note; the assertion unchanged) to r2s-under_siege-town-1's
+  parish; no siege town of the 720 keeps a fishing card working at my tip.
+- THE NET AGAIN at this tip, each group alone through gate-tail: `tests/architecture` 21 files green; the test files naming
+  `chainStateShown` or `chainWorksResource` (15) green after the re-key; my guard, `crisisStoppedRows`, `bar4MarkPromise`,
+  `bar3ServicesRows`, BAR5's guards green; `typecheck:domain:strict` 0; `typecheck:ratchet` 0; eslint on my changed files 0.
+  `bar4ScenePresumption` red as before by TW1.

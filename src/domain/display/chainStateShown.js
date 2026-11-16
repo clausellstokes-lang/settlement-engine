@@ -27,6 +27,7 @@
  */
 import { crisisOf } from '../facts/crisisKind.js';
 import { chainCarrierOf } from '../facts/chainCarrier.js';
+import { chainWorksResource } from '../facts/chainWorking.js'; // BAR6-MARKS (6c-unworked): the one answer
 import { ACCESS_ONLY, liveInstitutionNames } from '../facts/institutions.js';
 
 /** The state a card prints as nothing: no chip (W2-C-LEAVES-4 item 1). */
@@ -84,7 +85,24 @@ export function chainCrisisStateShown(chain, record) {
  */
 export function chainStateShown(chain, record) {
   const state = chainCrisisStateShown(chain, record);
-  return SHOWN_WORKING.has(state) && runsOnlyThroughAccess(chain, record) ? NO_STATE_SHOWN : state;
+  return SHOWN_WORKING.has(state) && (runsOnlyThroughAccess(chain, record) || worksNotItsGround(chain)) ? NO_STATE_SHOWN : state;
+}
+
+/**
+ * BAR6-MARKS (LAW 6's 6c-unworked, named by BAR6-RECORD through the chair, 2026-11-16; vetoable by the owner): A CHAIN WHOSE
+ * HOUSES DO NOT WORK ITS GROUND IS NOT RUN HERE. A stone chain's card printed "✓ Running" via the brickmaker alone, where the
+ * Resources tab says no one here works the stone (11 towns of the census's 720). THE ONE ANSWER to "does a chain work this
+ * resource here?" (`facts/chainWorking.js :: chainWorksResource`, its `NOT_WORKED_THROUGH` exceptions) is asked of this chain
+ * alone, read as available and working, so that only its houses decide: where they do not work the ground, no state prints,
+ * as for a chain run only through a neighbour's house above.
+ * @param {unknown} chain
+ * @returns {boolean}
+ */
+function worksNotItsGround(chain) {
+  const c = /** @type {{ resourceInputKey?: unknown } | null} */ (chain && typeof chain === 'object' ? chain : null);
+  if (!c || typeof c.resourceInputKey !== 'string' || !c.resourceInputKey) return false;
+  const alone = { economicState: { activeChains: [{ ...c, resourceInputAvailable: true, status: 'running' }] } };
+  return !chainWorksResource(alone, c.resourceInputKey);
 }
 
 /**
