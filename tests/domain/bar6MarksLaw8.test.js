@@ -88,3 +88,18 @@ describe('EG1: the war read import-free answers as the crisis reader does', () =
     }), 'every census town reads one war');
   }, 1_800_000);
 });
+
+// RULING CN1 (the chair, 2026-11-16; RECORD's 9d.isolated): an isolated village or larger still has a poor road
+// (`facts/tradeReach.js :: minorRoutesReach`): its need line says the goods come dear and late by the minor roads; the
+// clause "no trade road reaches" is kept where no poor road reaches (the same record read as a hamlet)
+describe('CN1: the isolated need line reads the poor road', () => {
+  test('r2r-town-9 (isolated, a town): the twin prints; read as a hamlet, the old clause prints (each way)', async () => {
+    const { chainNeedLine } = await import('../../src/domain/display/chainNeedShown.js');
+    const s = town('r2r-town-9');
+    const lines = (/** @type {any} */ rec) => (rec.economicState?.activeChains || []).map((/** @type {any} */ c) => chainNeedLine(c, rec, true)).filter(Boolean);
+    const asTown = lines(s), asHamlet = lines({ ...s, tier: 'hamlet' });
+    expect(asTown.length, 'r2r-town-9 prints a need line').toBeGreaterThan(0);
+    expect(asTown.every((/** @type {string} */ l) => /by the minor roads\.$/.test(l)), `the twin: ${asTown.join(' | ')}`).toBe(true);
+    expect(asHamlet.every((/** @type {string} */ l) => /: no trade road reaches /.test(l)), `the old clause: ${asHamlet.join(' | ')}`).toBe(true);
+  }, 300_000);
+});

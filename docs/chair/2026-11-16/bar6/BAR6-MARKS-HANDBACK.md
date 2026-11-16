@@ -94,10 +94,23 @@ as scarce, as the income line beside it already did. A house that carries such a
   prints no state (the form the leaf already gives a chain run only through a neighbour's house). Measured with runC on the
   11 census towns auditor C counted (rendered at afa46d644 and at my tip): 6c-unworked 11 towns · 11 -> 0; the one other L6
   row there (6a-w, r2s-mass_migration-village-2) is the same at both.
-- RECORD'S (1), the stored-iron line: NOT TAKEN, A MISMATCH: "<services> here run on stored <goods>: no trade road reaches
-  <town>" is written in `src/domain/display/chainNeedShown.js :: chainNeedLine` (its `tradeAccess === 'isolated'` arm), not in
-  `src/data/crisisDependence.js`, which holds no such line; `chainNeedShown.js` is not on my list. `tradeReach.js` was fetched
-  and verified (blob 1d4c0e3427f8d4fec7cc4f246e35a11100943424) and not added (no reader of mine). Asked of the chair.
+- RECORD'S (1), the stored-iron line, by RULING CN1 (the chair's word after my mismatch: the line is in
+  `display/chainNeedShown.js :: chainNeedLine`, on no seat's list): ONLY ITS `tradeAccess === 'isolated'` ARM changed. It reads
+  `src/domain/facts/tradeReach.js :: minorRoutesReach({ route, tier, siege })`, taken BYTE FOR BYTE by XA1 (`git show
+  1b734476c:src/domain/facts/tradeReach.js`, blob 1d4c0e3427f8d4fec7cc4f246e35a11100943424, frozen). Where a poor road reaches
+  (an isolated village or larger, no siege) the line says the goods come "dear and late by the minor roads" (critical) or
+  "brought in by magic, or dear and late by the minor roads"; "no trade road reaches" is kept for the thorp, the hamlet and
+  the siege. VETO LIST: the two twins, read in r2r-town-9, r2r-city-20, r2s-mass_migration-town-2 ("Cathedral repairs here
+  depend on stone brought in by magic, or dear and late by the minor roads."; "Meals, ale and lodging here depend on grain
+  …"). runE over the 23 towns of the three populations that printed "no trade road reaches" (rendered at afa46d644 and at my
+  tip): 9d.isolated 5 towns · 21 → 5 · 16; its cases on this line 5 → 0; what is left is other writers' (the Outlook's
+  "N institutions operating on stockpiles only (isolated trade)", `generators/economy/viability.js`; the Services row's
+  "No trade access: running on existing stockpiles only."): named for RECORD. Guard: `bar6MarksLaw8.test.js` CN1 case, each
+  way (r2r-town-9 as printed; the same record read as a hamlet). `tests/architecture` green with the new import.
+- EG1, AS THE CHAIR FORMED IT: the war of `warIronHookOutsideWar` is read off the stress container
+  (`canonicalAccessors.js :: canonStressors`, BAR6-HOUSES's form at a804fa1b5), not the raw `config.stressTypes`;
+  `houseInputAtHand.js :: atWar`; its guard case holds it equal to `crisisOf(…).has('wartime')` over the 720 (and, by script,
+  over all 1,170 towns of the three populations: 78 at war, 0 differ).
 - A BOOK MY CURE MOVED, FOUND IN THIS NET (it was not in my first net): `tests/components/bar3LabelWords2.test.jsx` L3's keep
   pair, r2s-under_siege-city-0's fishing card "running" (one of its houses works on): its cooper, the one house the siege left
   unmarked, is now "Curtailed by the siege." (its timber came in by road), so every house of the card carries the siege's mark
