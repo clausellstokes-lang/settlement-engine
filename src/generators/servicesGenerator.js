@@ -31,13 +31,13 @@ const _ARCANE_UNDERGROUND = '(arcane underground)';
 // BAR6-CRIME (BRIEF-BAR6 (e), LAW 9's 9a.lawless; the wide read's C172465; vetoable by the owner): "easily outbid" and
 // "disputes end with whoever can apply more violence" are false where the town keeps its own court and its own gaol (the
 // defence home's `court` and `prison`, `facts/defence.js`), beside "A functioning court and prison mean crimes carry real
-// consequences". There the row keeps its draw and its place and takes its twin: the law is slow, and coin buys it quicker.
-const SLOW_LAW_BRING_COIN = 'Slow law, bring coin';
+// consequences". There the row keeps its draw, its place and its name (the name is the service's identity, declared in
+// `crisisDependence.js :: SERVICE_DEPENDENCE`) and takes its twin description: the law is slow, and coin buys it quicker.
 const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.', needs: ['court', 'prison'] });
 /** @param {Array<{ name?: unknown }>} institutions @returns {{ name: string, desc: string }} */
 const lawlessRow = (institutions) => {
   const d = defenceOf({ institutions });
-  return d.court && d.prison ? { name: SLOW_LAW_BRING_COIN, desc: SLOW_LAW_DESC }
+  return d.court && d.prison ? { name: NO_LAW_BRING_COIN, desc: SLOW_LAW_DESC }
     : { name: NO_LAW_BRING_COIN, desc: THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION };
 };
 

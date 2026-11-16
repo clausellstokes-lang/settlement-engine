@@ -67,7 +67,7 @@ export const COORDINATED_WAVE_HOOK = /^The crime wave is coordinated\b/;
  */
 export function crimeWaveCoordinated(record) {
   return crimeWaveTensions(record).some((t) => (Array.isArray(t.plotHooks) ? t.plotHooks : [])
-    .some((h) => COORDINATED_WAVE_HOOK.test(String(typeof h === 'string' ? h : /** @type {{ text?: unknown } | null} */ (h)?.text ?? ''))));
+    .some((h) => typeof h === 'string' && COORDINATED_WAVE_HOOK.test(h))); // the record stores each hook as its text
 }
 
 /**
