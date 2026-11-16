@@ -57,6 +57,9 @@ const merchantsBeside = (ctx) => ctx.roster.filter((x) => x !== ctx.self && MERC
 // POWERS-12 (REVIEW-POWERS-3 M1): a watch stands, read by the defence bucket's own words (the fact the ladder's watch
 // lines are declared against), never by /watch/ (a watchtower is no watch). @param {RungContext} ctx
 const watchStands = (ctx) => ctx.names.some((n) => DEFENSE_BUCKET_KEYWORDS.watch.some((kw) => String(n).includes(kw)));
+/** BAR5-POWERS (1c-weight): the military's very-high lines at Minor or Suppressed take the watch's line for the tier, where one stands. @param {string} tier @param {RungContext} ctx */
+const militaryRung = (tier, ctx) => !watchStands(ctx) ? null : tier === 'town' ? 'Town watch; it enforces ordinances, manages disorder, and reports to the council.'
+  : ['city', 'metropolis'].includes(tier) ? 'City watch; law enforcement and external defence, stretched between multiple responsibilities.' : null;
 const CLERGY_AT_MARGINS = 'Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.';
 /** TAIL-POWERS-B-4 (the chair's P31 (1), vetoable by the owner; batch 6a's form): "at the margins ... leverage is limited" is false
  * of a faith that stands level with or above the seat on the final roster, or at Significant or above; there it takes this twin. */
@@ -143,6 +146,16 @@ const CLAIM_RUNGS = Object.freeze([
   // POWERS-12 (REVIEW-POWERS-3 M1): the five commanding claims the table did not cover (122 towns of the census's 720).
   // The Major church (city and metropolis only, the hospital and the charity variant): the margins rung, as above.
   { claim: /^Major church institutions hold structural influence\. Land grants, [^.]*\./, minor: () => CLERGY_AT_MARGINS, suppressed: () => CLERGY_AT_MARGINS },
+  // BAR5-POWERS (LAW 1c-weight, the chair's ruling PW1; the audit's C33631: 10 towns of the 720 printed it under Suppressed, 9 under Minor):
+  // the church ladder's own line at a raw 11-17, which the multipliers and the roster's resize leave Minor or Suppressed; read
+  // beside its standing sentence it claims a say the next sentence denies: the margins rung, as above
+  { claim: 'Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust.',
+    minor: () => CLERGY_AT_MARGINS, suppressed: () => CLERGY_AT_MARGINS },
+  // the military ladder's very-high lines below a city (a force "significant for this scale", officers of "disproportionate"
+  // influence) read at Minor or Suppressed: the watch's own line for the tier where a watch stands; with none, no rung is true
+  ...["Significant military force for this scale; the commander's opinion on civic matters carries institutional weight.",
+    'Significant military presence; officers hold political influence disproportionate to formal civic rank.',
+  ].map((claim) => ({ claim, minor: militaryRung, suppressed: militaryRung })),
   // printed only where a merchant power governs: the merchants' rung
   { claim: 'The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.',
     minor: merchantRung, suppressed: () => MERCHANTS_AT_MARGINS },

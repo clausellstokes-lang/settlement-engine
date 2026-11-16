@@ -535,6 +535,22 @@ const HOLDS_THE_SEAT = 'Holds the seat.';
 /** The seat rows' opening (government × condition × dominant): the holder's words, no one else's (N3). */
 const HOLDS_A_SEAT = /^Holds the seat\b/;
 
+// ── A HEAD'S SECURE HOLD READS ITS OWN STANDING (BAR5-POWERS, LAW 1c-npc; the audit's C35627: 41 towns of the 720, 15 of the
+// fresh 300) ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+// The stable head rows are keyed on the town's calm and the house's rank; the same card prints the person's standing from
+// `npc.influence` (`npcInteriorityRead.js` INFLUENCE_WORD: low → "Standing marginal"). A row that says the hold is secure
+// and the say real is false beside "Standing marginal": for a head of low influence it takes its twin, which keeps the
+// rank (the leading house, the casters' head) and claims no say. Draw-free; the slot never empties.
+/** @type {Readonly<Record<string, string>>} */
+const LOW_STANDING_TWIN = Object.freeze({
+  'Heads the leading house in the trade in quiet times; its hold is secure and its say is real.':
+    'Heads the leading house in the trade in quiet times, though its word counts for little beyond the trade.',
+  'Heads the casters in quiet times; their place is secure and their spells are in demand.':
+    'Heads the casters in quiet times; their spells are in demand, though their word counts for little beyond them.',
+});
+/** The card's position as its standing bears it. @param {Record<string, any>} npc @param {unknown} position */
+const positionForStanding = (npc, position) => (npc?.influence === 'low' && typeof position === 'string' && LOW_STANDING_TWIN[position]) || position;
+
 /** The holder's house, second: the dual-hat holder's house title, as the seat row prints it; '' for a one-hat holder. @param {Record<string, any>} npc */
 function holderHouseLineOf(npc) {
   const title = String(npc?.title || '').trim();
@@ -626,7 +642,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     return {
       ...npc,
       goal:               updatedGoal,
-      structuralPosition: isHolder && holderHouseLineOf(npc) ? `${lineText(tmpl.position)} ${holderHouseLineOf(npc)}` : lineText(tmpl.position),
+      structuralPosition: isHolder && holderHouseLineOf(npc) ? `${lineText(tmpl.position)} ${holderHouseLineOf(npc)}` : positionForStanding(npc, lineText(tmpl.position)), // BAR5-POWERS (1c-npc)
       activeConstraint:   lineText(tmpl.constraint),
       settlementCondition: condition,
       structuralRank:     standing.standing,
