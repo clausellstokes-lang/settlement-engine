@@ -19,6 +19,7 @@
  * Instances `{ law: 'L10', rule, town, tab, line, against: { tab?, line?, record? }, why }`. Pure; no I/O.
  */
 import { fold } from './page.mjs';
+import { PROSE_FORMS } from '../../../src/data/people/powerSentenceName.js';
 
 const inst = (rule, town, tab, line, against, why) => ({ law: 'L10', rule, town, tab, line, against, why });
 const linesOf = (tabs) => Object.entries(tabs || {}).flatMap(([tab, ls]) => ls.map((line, i) => ({ tab, i, line })));
@@ -118,7 +119,10 @@ export function law10b({ record, tabs, town }) {
   for (const n of npcsOf(record)) { const h = roleHead(n.title || n.role); if (h.length > 3) { if (!holders.has(h)) holders.set(h, []); holders.get(h).push(n); } }
   const OTHER_SEXED = /\b(man|woman|men|women|son|daughter|boy|girl|widow|widower|husband|wife|brother|sister|father|mother|bride|groom|lover)\b/i;
   const seen = new Set();
-  for (const { path, s, owner } of storyStrings(record)) {
+  // a roster name is no pronoun: "Fujio He" (the fresh 300, bar0-metropolis-calm-rand-118) — names are struck before reading
+  const names = npcsOf(record).map((n) => String(n.name || '')).filter(Boolean).sort((x, y) => y.length - x.length);
+  for (const { path, s: raw, owner } of storyStrings(record)) {
+    let s = raw; for (const nm of names) s = s.split(nm).join('{person}');
     const m = MALE.test(s), f = FEMALE.test(s); if (m === f) continue;
     const sex = m ? 'male' : 'female';
     const stripped = s.replace(/\bthe same (man|woman)\b/gi, '');
@@ -134,7 +138,7 @@ export function law10b({ record, tabs, town }) {
       const hs = narrowed.length ? narrowed : all; if (!hs.every((n) => n.gender && n.gender !== sex)) continue;
       const key = `${h}|${s}`; if (seen.has(key)) continue; seen.add(key);
       const against = { record: `${path} ↔ npcs: ${hs.map((n) => `${n.name} (${n.gender}), ${n.title}`).join('; ')}` };
-      out.push(...placed('10b', town, tabs, s.split(/(?<=\.)\s/)[0], against, `the hook's "${m ? 'he/the same man' : 'she/the same woman'}" is "the ${h}", and the roster's ${h} is ${hs.map((n) => n.gender).join('/')}`));
+      out.push(...placed('10b', town, tabs, raw.split(/(?<=\.)\s/)[0], against, `the hook's "${m ? 'he/the same man' : 'she/the same woman'}" is "the ${h}", and the roster's ${h} is ${hs.map((n) => n.gender).join('/')}`));
     }
   }
   return out;
@@ -174,8 +178,10 @@ export function law10c({ record, tabs, town }) {
 
 /* ───────────────────────── 10d · a tie against the seat and the purse ───────────────────────── */
 const SEAT_ASKED = /\bhas asked for a seat on the council\b/i;
-const DEBT_YEARLY = /\btreasury borrowed\b.*\bevery year since\b|\bthe treasury will not cover it\b|\bmore than the settlement collects in two years\b/i;
-const PURSE_UP = /\btreasury takes in (?:a little )?more than it pays out\b|\bwith a little left over each year\b|\bpays its own way and has a little in hand\b|\bwent into this trouble with money in hand\b|\bruns a (?:small )?surplus\b/i;
+/** PRECISION (720, seed 1016): only YEARLY borrowing against a YEARLY surplus stands; "the treasury will not cover" an
+ * interest bill, a debt "more than two years of taxes" and "money in hand" at a crisis's start read WEAK (13 of 13). */
+const DEBT_YEARLY = /\btreasury borrowed\b.*\bevery year since\b/i;
+const PURSE_UP = /\btreasury takes in (?:a little )?more than it pays out each year\b|\bwith a little left over each year\b/i;
 /** C66115 (a seat asked for and held), C66113 (yearly borrowing against a page that says the treasury runs ahead). */
 export function law10d({ record, tabs, town }) {
   const out = []; if (!record) return out;
@@ -185,12 +191,12 @@ export function law10d({ record, tabs, town }) {
     if (SEAT_ASKED.test(tx) && gov) {
       const asker = tx.startsWith(t.npc1Name) ? byId.get(t.from) : tx.startsWith(t.npc2Name) ? byId.get(t.to) : null;
       const sits = asker && (asker.memberships || []).find((m) => m.power === gov.faction && !m.veiled);
-      if (sits) out.push(...placed('10d', town, tabs, tx, { record: `npcs[${asker.id}].memberships: ${gov.faction} (${sits.rank == null ? 'a member' : 'rank ' + sits.rank}, not veiled)` }, `${asker.name} asks for a seat on the council and already sits on ${gov.faction}, the governing power`));
+      if (sits) out.push(...placed('10d-seat', town, tabs, tx, { record: `npcs[${asker.id}].memberships: ${gov.faction} (${sits.rank == null ? 'a member' : 'rank ' + sits.rank}, not veiled)` }, `${asker.name} asks for a seat on the council and already sits on ${gov.faction}, the governing power`));
     }
     for (const k of ['description', 'tension']) {
       const s = t[k] || ''; if (!DEBT_YEARLY.test(s)) continue;
       const up = linesOf(tabs).find((x) => PURSE_UP.test(x.line));
-      if (up) out.push(...placed('10d', town, tabs, s, { tab: up.tab, line: up.line }, 'the tie says the treasury borrows every year or cannot meet its interest; the page says it runs a little ahead'));
+      if (up) out.push(...placed('10d-purse', town, tabs, s, { tab: up.tab, line: up.line }, 'the tie says the treasury borrows every year or cannot meet its interest; the page says it runs a little ahead'));
     }
   }
   return out;
@@ -198,15 +204,19 @@ export function law10d({ record, tabs, town }) {
 
 /* ───────────────────────── 10e · temperament, secret, house card, pay ───────────────────────── */
 /** A secret of taking money to betray a duty. */
-const CORRUPT_SECRET = /\bpaid to (?:lose|say|keep|look|report|play)\b|\bbeen paid\b|\bis paid by\b|\bfor a (?:share|fee|price)\b|\bin return for a share\b|\bfor a share of\b|\btakes a (?:monthly )?payment\b|\btakes a bribe\b|\bbribe\b|\bskim(?:s|ming)?\b|\bembezzl|\bpocketed\b|\bon the payroll of\b|\bkeeping the difference\b|\bkeeps the extra\b|\bkeeps back a share\b|\bfor whoever pays\b|\bbecause someone paid\b|\bsomeone paid them\b/i;
+const CORRUPT_SECRET = /\bpaid to (?:lose|keep|look|report)\b|\bbeen paid\b|\bis paid by\b|\bfor a (?:share|fee|price)\b|\bin return for a share\b|\bfor a share of\b|\btakes a (?:monthly )?payment\b|\btakes a bribe\b|\bbribe\b|\bskim(?:s|ming)?\b|\bembezzl|\bpocketed\b|\bon the payroll of\b|\bkeeping the difference\b|\bkeeps the extra\b|\bkeeps back a share\b|\bfor whoever pays\b|\bbecause someone paid\b|\bsomeone paid them\b/i;
 /** A secret of deceit: a lie told, a record forged. */
 const DECEIT_SECRET = /\blies\b|\blied\b|\bforged\b|\bforging\b|\bfalsif|\bfraudulent|\bmade up\b|\bmaking up\b|\bfabricat/i;
 const TEMPER_INCORRUPT = new Set(['incorruptible']);
-const TEMPER_HONEST = new Set(['honest', 'candid', 'forthright', 'plain-dealing']);
+/** PRECISION (720, seed 1016): "honest" and "plain-dealing" against a deceit stand (8 of 8); "candid" and "forthright" are
+ * words of manner, not of truth, and read WEAK (0 of 12): counted apart as 10e-temper-manner, never as law. */
+const TEMPER_HONEST = new Set(['honest', 'plain-dealing']);
+const TEMPER_MANNER = new Set(['candid', 'forthright']);
 const DRAWS_PAY = /\bdraws pay\b|\bnames that never\b|\bon the roster\b.*\bpay\b/i;
 const NOBODY_PAID = /\bNobody is paid\b|\bno one is paid\b|\bunpaid\b|\bserve without pay\b/i;
 const WELL_PAID = /\bwell paid\b/i;
-const PAY_CUT = /\bcuts the pay\b|\bpay for stopping it shrinks\b|\bpay (?:is|has been) cut\b|\bpay (?:is )?(?:late|in arrears)\b|\bhave not been paid\b|\bunpaid wages\b/i;
+/** PRECISION (720, seed 1016): "unpaid wages" of an old commission is no pay of the watch (EXPLAINED): only the forces' own pay. */
+const PAY_CUT = /\bcuts the pay of those sent to stop it\b|\bthe pay for stopping it shrinks\b|\b(?:watch|guards?|garrison|soldiers)(?:'s|’s)? pay (?:is|has been) cut\b/i;
 /** C31450 (temperament against its own secret), C200774 (secret against its house card), C51048 (pay claim). */
 export function law10e({ record, tabs, town }) {
   const out = []; if (!record) return out;
@@ -215,7 +225,7 @@ export function law10e({ record, tabs, town }) {
     if (!w) continue;
     // a secret the person only KNOWS of ("Knows the … document was fraudulently created") is not a deceit of theirs
     const theirs = !/^Knows\b/i.test(w) || /\bhelped\b|\band has\b/i.test(w);
-    const kind = TEMPER_INCORRUPT.has(d) && CORRUPT_SECRET.test(w) ? '10e-temper' : TEMPER_HONEST.has(d) && theirs && DECEIT_SECRET.test(w) ? '10e-temper-honest' : null;
+    const kind = TEMPER_INCORRUPT.has(d) && CORRUPT_SECRET.test(w) ? '10e-temper' : TEMPER_HONEST.has(d) && theirs && DECEIT_SECRET.test(w) ? '10e-temper-honest' : TEMPER_MANNER.has(d) && theirs && DECEIT_SECRET.test(w) ? '10e-temper-manner' : null;
     if (kind) {
       const card = cardOf(tabs, n.name);
       const temper = card.filter((x) => new RegExp(`Temperament: ${esc(d)}\\b`).test(x.line));
@@ -261,7 +271,8 @@ export function law10f({ record, tabs, town }) {
     const ms = MORE_SAY.exec(desc);
     if (ms) {
       const who = lc(ms[1]).replace(/^the /, ''); const other = F.find((g) => lc(g.faction).replace(/^the /, '') === who && g !== f) || (SAY_KIND['the ' + who] ? F.find((g) => g.category === SAY_KIND['the ' + who] && g !== f) : null);
-      if (other && (Number(other.power) <= Number(f.power) || /suppressed/i.test(other.powerLabel || ''))) out.push(...placed('10f-weight', town, tabs, desc.slice(ms.index), { record: `${f.faction} power ${f.power} (${f.powerLabel}) > ${other.faction} power ${other.power} (${other.powerLabel})` }, `the card says ${ms[1]} have more say; the page's own weights put ${other.faction} below ${f.faction}`, { tabRe: /Power$/ }));
+      // PRECISION (720, seed 1016): a "Suppressed" label on the power named is no proof it weighs less (4 of 5 EXPLAINED): weights only
+      if (other && Number(other.power) <= Number(f.power)) out.push(...placed('10f-weight', town, tabs, desc.slice(ms.index), { record: `${f.faction} power ${f.power} (${f.powerLabel}) > ${other.faction} power ${other.power} (${other.powerLabel})` }, `the card says ${ms[1]} have more say; the page's own weights put ${other.faction} below ${f.faction}`, { tabRe: /Power$/ }));
     }
   }
   // a house that backs both the governing power and that power's rival in a HIGH quarrel
@@ -315,7 +326,9 @@ export function law10g({ record, tabs, town }) {
     const named = evs.filter((e) => lc(e.name).replace(/^the /, '') === cal);
     if (!named.length) continue;
     if (named.some((e) => PHYSICAL.test(lc(`${e.type} ${e.templateType}`)))) continue;
-    out.push(inst(m[1] ? '10g-legacy' : '10g-legacy-answer', town, x.tab, x.line, { record: `history.historicalEvents: ${named.map((e) => `${e.name} (${e.type}, ${e.templateType}, ${e.severity}, ${e.yearsAgo}y)`).join('; ')}` }, `the line has the town built after "${cal}", an event that destroyed nothing`));
+    // PRECISION (720, seed 1016): a crash or a trade collapse is economic ruin after which rebuilding is plausible (WEAK, 4 of 4)
+    const ruin = named.some((e) => /market_crash|trade_collapse/.test(lc(e.templateType)));
+    out.push(inst(!m[1] ? '10g-legacy-answer' : ruin ? '10g-legacy-ruin' : '10g-legacy', town, x.tab, x.line, { record: `history.historicalEvents: ${named.map((e) => `${e.name} (${e.type}, ${e.templateType}, ${e.severity}, ${e.yearsAgo}y)`).join('; ')}` }, `the line has the town built after "${cal}", an event that destroyed nothing`));
   }
   return out;
 }
@@ -325,14 +338,18 @@ const VERBISH = /^(?:'s|’s|\s+(?:has|have|is|was|says|said|holds|held|keeps|ke
 /** C1980, C76763. A power whose roster label holds a slash, printed inside a sentence beside a verb or a possessive. */
 export function law10h({ record, tabs, town }) {
   const out = []; if (!record) return out;
-  const labels = factionsOf(record).map((f) => f.faction).filter((n) => /\//.test(n));
+  // every roster label the estate writes with a slash or a bracket (PROSE_FORMS: the one table of their prose forms)
+  const labels = factionsOf(record).map((f) => f.faction).filter((n) => /\/|\(/.test(n) || Object.hasOwn(PROSE_FORMS, n));
   if (!labels.length) return out;
   for (const x of linesOf(tabs)) {
     for (const L of labels) {
       let idx = x.line.indexOf(L);
       while (idx >= 0) {
         const after = x.line.slice(idx + L.length);
-        if (VERBISH.test(after)) { out.push(inst('10h', town, x.tab, x.line, { record: `powerStructure.factions["${L}"] (the roster label)` }, `the roster label "${L}" is used as a name ("${(L + after).slice(0, 40)}…")`)); break; }
+        // a name beside a verb or a possessive, or any use inside a prose sentence (a line ending in a stop, eight words or
+        // more, not a "label · value" row): "Military/Guard and its rivals agreed …" (720: r2r-*, Summary/Plot Hooks)
+        const prose = /[.!?]$/.test(x.line.trim()) && x.line.trim().split(/\s+/).length >= 8 && !/^[^.]*· /.test(x.line);
+        if (VERBISH.test(after) || prose) { out.push(inst('10h', town, x.tab, x.line, { record: `powerStructure.factions["${L}"] (the roster label)` }, `the roster label "${L}" is used as a name ("${(L + after).slice(0, 40)}…"); its prose form is "${PROSE_FORMS[L] || L.split('/')[0]}"`)); break; }
         idx = x.line.indexOf(L, idx + 1);
       }
     }

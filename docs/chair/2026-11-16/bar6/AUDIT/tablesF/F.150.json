@@ -684,12 +684,12 @@
     }
    ]
   },
-  "10d": {
-   "towns": 2,
-   "instances": 3,
-   "distinct": 3,
-   "printedTowns": 2,
-   "printedInstances": 3,
+  "10d-purse": {
+   "towns": 1,
+   "instances": 1,
+   "distinct": 1,
+   "printedTowns": 1,
+   "printedInstances": 1,
    "recordOnly": 0,
    "top": [
     {
@@ -698,7 +698,17 @@
      "seeds": [
       "bar0-city-wartime-rand-36"
      ]
-    },
+    }
+   ]
+  },
+  "10d-seat": {
+   "towns": 2,
+   "instances": 2,
+   "distinct": 2,
+   "printedTowns": 2,
+   "printedInstances": 2,
+   "recordOnly": 0,
+   "top": [
     {
      "towns": 1,
      "line": "Jong Sun has asked for a seat on the council as a condition of the next loan. Dan Yoshida (the prison warden) has three weeks to answer.",
@@ -783,41 +793,18 @@
    ]
   },
   "10e-temper-honest": {
-   "towns": 9,
-   "instances": 9,
-   "distinct": 7,
-   "printedTowns": 9,
-   "printedInstances": 9,
+   "towns": 4,
+   "instances": 4,
+   "distinct": 4,
+   "printedTowns": 4,
+   "printedInstances": 4,
    "recordOnly": 0,
    "top": [
-    {
-     "towns": 3,
-     "line": "Temperament: forthright",
-     "seeds": [
-      "bar0-city-under_siege+famine-rand-39",
-      "bar0-city-wartime-rand-29",
-      "bar0-village-calm-rand-31"
-     ]
-    },
     {
      "towns": 1,
      "line": "Flaw: lazy Temperament: plain-dealing",
      "seeds": [
       "bar0-metropolis-calm-rand-31"
-     ]
-    },
-    {
-     "towns": 1,
-     "line": "Flaw: petty Temperament: forthright",
-     "seeds": [
-      "bar0-hamlet-calm-rand-28"
-     ]
-    },
-    {
-     "towns": 1,
-     "line": "Flaw: reckless Temperament: candid",
-     "seeds": [
-      "bar0-metropolis-calm-rand-39"
      ]
     },
     {
@@ -839,6 +826,39 @@
      "line": "Temperament: plain-dealing",
      "seeds": [
       "bar0-city-wartime-rand-32"
+     ]
+    }
+   ]
+  },
+  "10e-temper-manner": {
+   "towns": 5,
+   "instances": 5,
+   "distinct": 3,
+   "printedTowns": 5,
+   "printedInstances": 5,
+   "recordOnly": 0,
+   "top": [
+    {
+     "towns": 3,
+     "line": "Temperament: forthright",
+     "seeds": [
+      "bar0-city-under_siege+famine-rand-39",
+      "bar0-city-wartime-rand-29",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: petty Temperament: forthright",
+     "seeds": [
+      "bar0-hamlet-calm-rand-28"
+     ]
+    },
+    {
+     "towns": 1,
+     "line": "Flaw: reckless Temperament: candid",
+     "seeds": [
+      "bar0-metropolis-calm-rand-39"
      ]
     }
    ]
@@ -1274,6 +1294,26 @@
    ]
   }
  },
+ "labelCensus": {
+  "Military/Guard": {
+   "prose": "The Guard",
+   "towns": 55,
+   "rowLines": 630,
+   "sentenceLines": 2,
+   "townsWithSentence": 2,
+   "townsPrintingProseForm": 55,
+   "sentences": [
+    [
+     "Military/Guard has posted guards on what it says is its own, and Merchant City Council says control of the remaining grain stores was never Military/Guard's to ",
+     1
+    ],
+    [
+     "A ruling on authority over military conscription lists went Military/Guard's way, and Noble Governorship has simply carried on as though it did not.",
+     1
+    ]
+   ]
+  }
+ },
  "controls": [
   {
    "id": "C179090",
@@ -1395,7 +1435,7 @@
   },
   {
    "id": "C66115",
-   "rule": "10d",
+   "rule": "10d-seat",
    "expect": "find",
    "src": "wide6",
    "town": "bar0-city-wartime-rand-36",
@@ -1406,13 +1446,13 @@
    "found": true,
    "foundAny": true,
    "as": [
-    "10d"
+    "10d-seat"
    ],
    "pass": true
   },
   {
    "id": "C66113",
-   "rule": "10d",
+   "rule": "10d-purse",
    "expect": "find",
    "src": "wide6",
    "town": "bar0-city-wartime-rand-36",
@@ -1423,7 +1463,7 @@
    "found": true,
    "foundAny": true,
    "as": [
-    "10d"
+    "10d-purse"
    ],
    "pass": true
   },
@@ -1672,7 +1712,7 @@
    "against": {
     "record": "powerStructure.factions[\"Military/Guard\"] (the roster label)"
    },
-   "why": "the roster label \"Military/Guard\" is used as a name (\"Military/Guard has posted guards on what…\")"
+   "why": "the roster label \"Military/Guard\" is used as a name (\"Military/Guard has posted guards on what…\"); its prose form is \"The Guard\""
   },
   {
    "detector": "law10f",
@@ -1873,7 +1913,7 @@
   {
    "detector": "law10e",
    "law": "L10",
-   "rule": "10e-temper-honest",
+   "rule": "10e-temper-manner",
    "town": "bar0-city-under_siege+famine-rand-39",
    "tab": "World/NPCs",
    "line": "Temperament: forthright",
@@ -1925,7 +1965,7 @@
   {
    "detector": "law10e",
    "law": "L10",
-   "rule": "10e-temper-honest",
+   "rule": "10e-temper-manner",
    "town": "bar0-city-wartime-rand-29",
    "tab": "World/NPCs",
    "line": "Temperament: forthright",
@@ -2042,7 +2082,7 @@
   {
    "detector": "law10d",
    "law": "L10",
-   "rule": "10d",
+   "rule": "10d-seat",
    "town": "bar0-city-wartime-rand-36",
    "tab": "World/Relationships",
    "line": "Tlachtga O'Meara has asked for a seat on the council as a condition of the next loan. Clíodhna O'Dwyer has three weeks to answer.",
@@ -2054,7 +2094,7 @@
   {
    "detector": "law10d",
    "law": "L10",
-   "rule": "10d",
+   "rule": "10d-purse",
    "town": "bar0-city-wartime-rand-36",
    "tab": "World/Relationships",
    "line": "Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.",
@@ -2166,12 +2206,12 @@
    "against": {
     "record": "powerStructure.factions[\"Military/Guard\"] (the roster label)"
    },
-   "why": "the roster label \"Military/Guard\" is used as a name (\"Military/Guard's way, and Noble Governor…\")"
+   "why": "the roster label \"Military/Guard\" is used as a name (\"Military/Guard's way, and Noble Governor…\"); its prose form is \"The Guard\""
   },
   {
    "detector": "law10e",
    "law": "L10",
-   "rule": "10e-temper-honest",
+   "rule": "10e-temper-manner",
    "town": "bar0-hamlet-calm-rand-28",
    "tab": "World/NPCs",
    "line": "Flaw: petty Temperament: forthright",
@@ -2222,7 +2262,7 @@
   {
    "detector": "law10d",
    "law": "L10",
-   "rule": "10d",
+   "rule": "10d-seat",
    "town": "bar0-metropolis-calm-rand-29",
    "tab": "World/Relationships",
    "line": "Jong Sun has asked for a seat on the council as a condition of the next loan. Dan Yoshida (the prison warden) has three weeks to answer.",
@@ -2515,7 +2555,7 @@
   {
    "detector": "law10e",
    "law": "L10",
-   "rule": "10e-temper-honest",
+   "rule": "10e-temper-manner",
    "town": "bar0-metropolis-calm-rand-39",
    "tab": "World/NPCs",
    "line": "Flaw: reckless Temperament: candid",
@@ -2828,7 +2868,7 @@
   {
    "detector": "law10e",
    "law": "L10",
-   "rule": "10e-temper-honest",
+   "rule": "10e-temper-manner",
    "town": "bar0-village-calm-rand-31",
    "tab": "World/NPCs",
    "line": "Temperament: forthright",
