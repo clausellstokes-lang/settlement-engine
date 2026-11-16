@@ -1,0 +1,7 @@
+{"id":"C33368","town":"bar0-town-calm-rand-25","sev":"LOW","kind":"PAIR","why":"says luxury goods are needed and not brought in; Annual fair prints 'Luxury goods available' and TRADE imports list no luxury goods","other":"C32936"}
+{"id":"C33652","town":"bar0-town-calm-rand-25","sev":"LOW","kind":"STATE","why":"says food trades are failing and less is put by than should be; FOOD is Secure, 5% surplus, 6.3 months in a granary","other":"C33378"}
+{"id":"C33713","town":"bar0-town-calm-rand-25","sev":"MED","kind":"PAIR","why":"says part of the town's work holds up only with help beyond ordinary labour; Reliance on magic is None and all four roles absent","other":"C33707"}
+{"id":"C33631","town":"bar0-town-calm-rand-25","sev":"MED","kind":"PAIR","why":"says clergy hold meaningful civic influence; GOVERNMENT gives Religious Authorities as Suppressed (weakest power, weight 7)","other":"C34518"}
+{"id":"C33731","town":"bar0-town-calm-rand-25","sev":"LOW","kind":"STATE","why":"'With nothing pressing' calm-times constraint; stability is Tense (regional monster threat) with a live crime wave","other":"C32668"}
+{"id":"C33863","town":"bar0-town-calm-rand-25","sev":"LOW","kind":"STATE","why":"'With nothing pressing' calm-times constraint; stability is Tense (regional monster threat) with a live crime wave","other":"C32668"}
+{"id":"DONE","lines":1955,"blocks":1,"flags":6}
