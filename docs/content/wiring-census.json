@@ -2,7 +2,7 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "7ef45473ed027916d28b6abe71cde3eb83a436d999e000b4e8598644dee16a49",
+      "src/domain/display/stateProse/generalStateProse.js": "673417e4b13fe52b76a7f740af7b03da46635bcaa000c3440268f3eae9c4a06a",
       "src/domain/display/stateProse/powerStateProse.js": "019dd2312606b1aed4b8fad2e32c4695767672cb94e2b7fae63dc84ae6ec3258",
       "src/domain/display/stateProse/economyStateProse.js": "3480fa792f166d77aa7de7129bf1fe404d1b2e1e86823d9923b119134c118fb2",
       "src/domain/display/stateProse/defenseStateProse.js": "7f1bc6432a4f63e3e93d68aa473a9361ad2594127db6fbd828e9e96452bf950b",
@@ -18,14 +18,14 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1383
+    "producerIndexFiles": 1397
   },
   "totals": {
-    "pools": 856,
+    "pools": 859,
     "blocks": 69,
-    "variants": 2959,
+    "variants": 2977,
     "resolved": 492,
-    "unresolved": 364,
+    "unresolved": 367,
     "resolvedWithPredicate": 321,
     "resolvedWithCleanPredicate": 321,
     "keyFunctions": 151,
@@ -38,7 +38,7 @@
     "tiers": {
       "MISSING": 33,
       "THIN": 615,
-      "COVERED": 241,
+      "COVERED": 244,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -47,7 +47,7 @@
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 112,
-    "mountedRows": 725,
+    "mountedRows": 728,
     "absent": {
       "measured": 590,
       "default": 3,
@@ -56,9 +56,9 @@
     },
     "zeroK": 85,
     "kExecutable": 492,
-    "kNotExecutable": 364,
+    "kNotExecutable": 367,
     "branchGrainRows": 459,
-    "functionGrainRows": 397,
+    "functionGrainRows": 400,
     "customReachableRows": 28,
     "relationRows": 169,
     "relationRowsJoinable": 0,
@@ -120,10 +120,10 @@
     ],
     "sourceLicensedRows": 131,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 722,
+    "sourceUnresolvedRows": 725,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
-    "declaredColumnRows": 856,
+    "declaredColumnRows": 859,
     "tablePools": 51
   },
   "rows": [
@@ -193,6 +193,7 @@
         "no crisis: occupied": 2,
         "no crisis: unrest": 1,
         "no crisis: wartime": 1,
+        "no danger coming": 2,
         "no threat": 3,
         "threat": 2
       },
@@ -1566,6 +1567,7 @@
         "no crisis: occupied": 5,
         "no crisis: threat": 1,
         "no crisis: under_siege": 2,
+        "no danger coming": 1,
         "no mercenary": 8,
         "no threat": 3,
         "no watch": 4,
@@ -2000,7 +2002,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
+      "variants": 6,
       "grammars": 2,
       "predicate": [
         {
@@ -2048,8 +2050,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "crisis: calm": 1,
         "guardPresence": 2,
-        "no guardPresence": 2
+        "no guardPresence": 2,
+        "prosperity: ≤ comfortable": 5,
+        "prosperity: ≥ prosperous": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -4391,7 +4396,8 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
+        "colour": 1,
+        "no criminal income": 2,
         "no organised crime": 1
       },
       "undeclared": 0,
@@ -5346,8 +5352,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "gate": 1
+        "colour": 1,
+        "gate": 1,
+        "no crisis: occupied": 1,
+        "no crisis: wartime": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -9702,7 +9710,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -9754,8 +9762,9 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 2,
-        "magic": 1
+        "magic": 1,
+        "magic supply": 1,
+        "no magic supply": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -11503,7 +11512,7 @@
         "defwork"
       ],
       "hasBag": true,
-      "variants": 5,
+      "variants": 7,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -11563,10 +11572,14 @@
       },
       "declares": [],
       "lineDeclares": {
-        "crisis: any": 5,
+        "crisis: any": 7,
+        "danger coming": 1,
         "no crisis: unrest": 1,
-        "no threat": 3,
-        "threat": 2
+        "no danger coming": 4,
+        "no threat": 5,
+        "no unrest": 2,
+        "threat": 2,
+        "unrest": 1
       },
       "undeclared": 0,
       "crisisScoped": true
@@ -11726,6 +11739,7 @@
       "lineDeclares": {
         "crisis: any": 5,
         "no crisis: wartime": 1,
+        "no danger coming": 1,
         "no threat": 2,
         "threat": 2
       },
@@ -15261,6 +15275,7 @@
       "declares": [],
       "lineDeclares": {
         "hunger": 2,
+        "no crisis": 1,
         "no hunger": 5,
         "stores: < 12": 1,
         "stores: >= 12": 2
@@ -16014,8 +16029,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 1,
+      "variants": 7,
+      "grammars": 2,
       "predicate": [
         {
           "field": "eco.foodSecurity.foodRecord.foodSources.length",
@@ -16069,8 +16084,11 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 1,
-        "no crisis: famine": 2
+        "no crisis: famine": 3,
+        "no own plots": 3,
+        "no source spent": 5,
+        "own plots": 2,
+        "source spent": 2
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -16091,8 +16109,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
-      "grammars": 3,
+      "variants": 8,
+      "grammars": 4,
       "predicate": [],
       "branchReads": [
         "eco.foodSecurity.foodRecord.foodSources",
@@ -16141,8 +16159,14 @@
       "declares": [],
       "lineDeclares": {
         "crisis: famine": 2,
+        "crisis: under_siege": 1,
+        "food: ≤ deficit": 1,
+        "food: ≥ importDependent": 1,
         "food: ≥ secure": 2,
-        "no crisis: famine": 3
+        "no crisis: famine": 6,
+        "no crisis: under_siege": 2,
+        "no source spent": 5,
+        "source spent": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -30547,8 +30571,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
-      "grammars": 2,
+      "variants": 6,
+      "grammars": 3,
       "predicate": [
         {
           "field": "readings.inst.hasMarket",
@@ -30620,11 +30644,12 @@
       },
       "declares": [],
       "lineDeclares": {
+        "crisis: under_siege": 1,
         "guild": 1,
-        "market": 2,
+        "market": 3,
         "no crisis: occupied": 1,
-        "no crisis: under_siege": 3,
-        "no guild": 4
+        "no crisis: under_siege": 4,
+        "no guild": 5
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -31565,6 +31590,59 @@
     },
     {
       "block": "DS-GEN-16",
+      "pool": "ANCHORED-OLD-MARKED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [],
+      "status": "WIRING-UNRESOLVED",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
+      "keyFunction": "",
+      "rung": "none",
+      "reads": [],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": null,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {},
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
       "pool": "LAYERED-ANCHORED",
       "slotsFilled": [
         "calamity",
@@ -31923,6 +32001,59 @@
     },
     {
       "block": "DS-GEN-16",
+      "pool": "LEGACY-RECOVERED-MARKED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 2,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [],
+      "status": "WIRING-UNRESOLVED",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
+      "keyFunction": "",
+      "rung": "none",
+      "reads": [],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": null,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {},
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
       "pool": "LEGACY-SHIFTED",
       "slotsFilled": [
         "calamity",
@@ -31974,6 +32105,59 @@
         "fields": {
           "hist.legacyAnnotations": ""
         },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      },
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "block": "DS-GEN-16",
+      "pool": "LEGACY-SHIFTED-MARKED",
+      "slotsFilled": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsNamed": [
+        "calamity",
+        "settlement",
+        "timeband_age"
+      ],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 2,
+      "grammars": 1,
+      "predicate": [],
+      "branchReads": [],
+      "fieldsRead": [],
+      "status": "WIRING-UNRESOLVED",
+      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
+      "keyFunction": "",
+      "rung": "none",
+      "reads": [],
+      "readsGrain": "function",
+      "narrowed": false,
+      "absent": {},
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "history.legacy",
+        "history.record"
+      ],
+      "attach": [],
+      "k": null,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {},
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -32506,7 +32690,8 @@
       "declares": [],
       "lineDeclares": {
         "institution: monastery": 4,
-        "no crisis: under_siege": 2
+        "no crisis: under_siege": 2,
+        "no institution: tavern": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -54072,33 +54257,45 @@
       "name": "ARRIVAL_SENSES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:150-165 chooseSense (pickRandom over keys within one point of best) then :283-2",
-      "lines": 329,
+      "lines": 362,
       "declares": [],
       "lineDeclares": {
         "church": 2,
-        "colour": 5,
-        "crisis: any": 43,
-        "crisis: hunger": 6,
-        "crisis: under_siege": 1,
+        "colour": 6,
+        "crisis: any": 54,
+        "crisis: hunger": 1,
+        "crisis: under_siege": 6,
         "crisis: wartime, insurgency": 1,
-        "fish": 11,
-        "institution: mill": 2,
+        "enchanting": 1,
+        "failed: livestock": 2,
+        "fish": 12,
+        "institution: mill": 3,
         "institution: smith": 9,
         "iron at hand": 1,
         "market": 10,
         "navigable": 6,
-        "no crisis: hunger": 14,
+        "no crisis: hunger": 15,
         "no crisis: monster_pressure": 1,
         "no crisis: threat": 4,
-        "no crisis: under_siege": 14,
+        "no crisis: under_siege": 25,
         "no crisis: unrest": 1,
+        "no enchanting": 1,
+        "no failed: livestock": 2,
         "no iron at hand": 1,
         "no route: isolated": 1,
+        "no timber reaches the saws": 3,
+        "no trade at work: arcane": 6,
+        "no trade at work: kilns": 6,
         "route: isolated": 1,
         "sacredHouse": 3,
-        "tier: ≥ town": 9
+        "tier: ≥ town": 9,
+        "timber reaches the saws": 3,
+        "trade at work: arcane": 7,
+        "trade at work: fish": 7,
+        "trade at work: kilns": 7,
+        "trade at work: stone": 7
       },
-      "undeclared": 257,
+      "undeclared": 236,
       "crisisScoped": false
     },
     {
@@ -54334,13 +54531,14 @@
       "name": "INSTITUTION_DESC_VARIANTS",
       "drawKind": "H",
       "drawSite": "assembleInstitutions.js:65 shipFreeDesc + :1004 kernel/proseHash.js pickVariant over [catalogDesc, ...variants]",
-      "lines": 1127,
+      "lines": 1130,
       "declares": [],
       "lineDeclares": {
         "church access": 2,
         "coast": 9,
-        "colour": 740,
+        "colour": 738,
         "crisis: famine": 1,
+        "crisis: occupied": 1,
         "crisis: under_siege": 11,
         "garrison": 6,
         "gate": 4,
@@ -54356,6 +54554,7 @@
         "no church access": 2,
         "no coast": 4,
         "no crisis: famine": 1,
+        "no crisis: occupied": 1,
         "no crisis: under_siege": 11,
         "no garrison": 2,
         "no institution: bank": 6,
@@ -54364,6 +54563,7 @@
         "no navigable": 6,
         "no rival power": 6,
         "no river": 16,
+        "no ruler: occupier": 1,
         "no ruling body": 2,
         "no terrain: forest": 10,
         "no walls": 1,
@@ -54373,10 +54573,11 @@
         "tier: = metropolis": 4,
         "tier: ≤ hamlet": 6,
         "tier: ≥ city": 9,
+        "timber at hand": 2,
         "walls": 8,
         "watch": 7
       },
-      "undeclared": 129,
+      "undeclared": 128,
       "crisisScoped": false
     },
     {
@@ -55197,8 +55398,8 @@
       "pools": [
         "DS-ECO-9 :: FOOD SOURCES: one source"
       ],
-      "variants": 3,
-      "grammars": 1,
+      "variants": 7,
+      "grammars": 2,
       "blocks": [
         "DS-ECO-9"
       ]
@@ -55631,8 +55832,8 @@
       "pools": [
         "DS-GEN-13 :: COMMERCE: a market, no guild"
       ],
-      "variants": 5,
-      "grammars": 2,
+      "variants": 6,
+      "grammars": 3,
       "blocks": [
         "DS-GEN-13"
       ]
@@ -55681,7 +55882,7 @@
         "DS-DEF-2 :: Economic Survival: WEAK",
         "DS-DEF-2 :: Economic Survival: CRITICAL"
       ],
-      "variants": 24,
+      "variants": 25,
       "grammars": 7,
       "blocks": [
         "DS-DEF-2"
@@ -63270,7 +63471,7 @@
   "factBudget": {
     "zeroK": 85,
     "executable": 492,
-    "notExecutable": 364,
+    "notExecutable": 367,
     "byBlock": [
       [
         "DS-DEF-5",
@@ -63705,7 +63906,7 @@
     "branch": {
       "zeroK": 85,
       "executable": 492,
-      "notExecutable": 364,
+      "notExecutable": 367,
       "histogram": [
         [
           -8,
@@ -63828,7 +64029,7 @@
     "function": {
       "zeroK": 169,
       "executable": 492,
-      "notExecutable": 364,
+      "notExecutable": 367,
       "histogram": [
         [
           -8,
@@ -64282,7 +64483,7 @@
       "rows": {
         "LICENSED": 131,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 722
+        "SOURCE-UNRESOLVED": 725
       },
       "fields": {
         "LICENSED": 233,
@@ -64336,7 +64537,7 @@
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
-      "rowsWithNoReading": 364,
+      "rowsWithNoReading": 367,
       "kindsWithNoInstitution": [
         "tradition"
       ]
@@ -66854,7 +67055,7 @@
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67946,7 +68147,7 @@
       "subject": "magicDependency false",
       "fields": [],
       "readingFunction": "magicDependencyPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -68208,7 +68409,7 @@
       "subject": "WALLED-QUIET",
       "fields": [],
       "readingFunction": "wallRationalePoolKey",
-      "count": "5 variant(s) · 2 grammar(s) · slots {defwork, settlement}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {defwork, settlement}"
     },
     {
       "tier": "THIN",
@@ -68789,14 +68990,14 @@
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
-      "tier": "THIN",
+      "tier": "COVERED",
       "block": "DS-ECO-9",
       "subject": "FOOD SOURCES: one source",
       "fields": [
         "eco.foodSecurity.foodRecord.foodSources.length"
       ],
       "readingFunction": "foodSourcesPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {good, settlement}"
+      "count": "7 variant(s) · 2 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "COVERED",
@@ -68804,7 +69005,7 @@
       "subject": "FOOD SOURCES: several, the largest named",
       "fields": [],
       "readingFunction": "foodSourcesPoolKey",
-      "count": "5 variant(s) · 3 grammar(s) · slots {good, settlement}"
+      "count": "8 variant(s) · 4 grammar(s) · slots {good, settlement}"
     },
     {
       "tier": "COVERED",
@@ -70813,7 +71014,7 @@
         "readings.inst.hasMarket"
       ],
       "readingFunction": "commercePoolKey",
-      "count": "5 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 3 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -70944,6 +71145,14 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
+      "tier": "COVERED",
+      "block": "DS-GEN-16",
+      "subject": "ANCHORED-OLD-MARKED",
+      "fields": [],
+      "readingFunction": "(unresolved)",
+      "count": "2 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
       "tier": "THIN",
       "block": "DS-GEN-16",
       "subject": "LAYERED-ANCHORED",
@@ -70992,11 +71201,27 @@
       "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
+      "tier": "COVERED",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-RECOVERED-MARKED",
+      "fields": [],
+      "readingFunction": "(unresolved)",
+      "count": "2 variant(s) · 2 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
       "tier": "THIN",
       "block": "DS-GEN-16",
       "subject": "LEGACY-SHIFTED",
       "fields": [],
       "readingFunction": "legacyPoolKey",
+      "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
+    },
+    {
+      "tier": "THIN",
+      "block": "DS-GEN-16",
+      "subject": "LEGACY-SHIFTED-MARKED",
+      "fields": [],
+      "readingFunction": "(unresolved)",
       "count": "2 variant(s) · 1 grammar(s) · slots {calamity, settlement, timeband_age}"
     },
     {
