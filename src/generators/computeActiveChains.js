@@ -367,7 +367,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
         || chain.outputs
       ).filter((output) => !heldOnly || Object.entries(heldOnly).every(([processor, tied]) => (
         !tied.includes(output) || matchedInsts.includes(processor)
-      )));
+      ))).filter((output) => !FINE_ARMS.includes(output) || fineArmsMadeHere(insts)); // BAR6-RECORD (a): what a house can make
       const label = chainLabelFor(chain, resourceInputKey, factsOnce);
 
       activeChains.push({
@@ -650,13 +650,18 @@ const MADE_HERE_KEYWORD_WIDENING = {
   'tannery':    ['tannery', 'tanner'],
   'blacksmith': ['blacksmith', 'smith'],
 };
+// BAR6-RECORD (a) (6c-arms: "Advanced weapons and armor" made and exported by a hamlet's part-time smith, 37 instances
+// of the census's 720; REVIEW-WIDE-6 C86447, C86484): THE HOUSES THAT MAKE FINE ARMS, the town-scale weapons chain's own
+// processors (`supplyChainData.js`, Weapons & Armor: Specialized metalworkers, Blacksmiths (3-10)), keywords read
+// id-first as every gate here. Read by the chain card's outputs (`computeActiveChains`), the made list and the exports
+// (GOOD_WORKING_HOUSES). The village Blacksmith ("tools and horseshoes") and the part-time smith are not among them.
 // ONE TABLE OF GOOD TO THE HOUSES THAT DIG, MAKE OR WORK IT (TAIL-DEFECON-C-2, C1-E: the chair's ruling D18,
 // 2026-11-15), keywords read id-first through `institutionMatchesGate` on the town's own houses (never an "Access to
 // …" row: another town's house works nothing here). Read by the made list for a chain output the export gates below
 // (CHAIN_OUTPUT_INST_GATES), and by ALL THREE export steps of `deriveExportsFromChains`: a good leaves the town only
 // where a house of THIS town works it. A good not named keeps the other gates alone. Coal and peat are not named:
 // ungated by design (the extraction table's comment above).
-const GOOD_WORKING_HOUSES = Object.freeze({
+export const FINE_ARMS = Object.freeze(['Advanced weapons and armor', 'Master-crafted weapons']); const FINE_ARMS_MAKERS = Object.freeze(['blacksmiths (', 'metalworker']); /** Does a house of this town make fine arms (BAR6-RECORD (a))? @param {ReadonlyArray<any>} housed */ export const fineArmsMadeHere = (housed) => FINE_ARMS_MAKERS.some(kw => (housed || []).some(i => institutionMatchesGate(i, kw))); const GOOD_WORKING_HOUSES = Object.freeze({
   // The made list's two worked goods (C1-A, D7): a cobbler works bought leather into boots; a jeweller or a
   // metalworker works bought gold and silver. (Raw gemstones stay the mine's; milled lumber the sawmill's.)
   'Boots and shoes':            ['tannery', 'tanner', 'cobbler'],
@@ -674,7 +679,10 @@ const GOOD_WORKING_HOUSES = Object.freeze({
   'Glass blanks':               ['glass'],
   'Glassware':                  ['glass'],
   'Barrels and containers':     ['cooper'],
-  'Advanced weapons and armor': ['smith', 'metalwork'],
+  // BAR6-RECORD (a) (LAW 6's 6c-arms, the chair's direction of BRIEF-BAR6; vetoable by the owner): WHAT A HOUSE CAN
+  // MAKE. Fine arms are the forge's full trade (FINE_ARMS_MAKERS): a part-time smith or a lone village blacksmith
+  // makes tools, shoes and plain weapons, never these.
+  'Advanced weapons and armor': FINE_ARMS_MAKERS, 'Master-crafted weapons': FINE_ARMS_MAKERS,
   'Quality tools and weapons':  ['smith', 'metalwork'],
   'Bows and crossbows':         ['bowyer'],
   'Arrows (sheaf)':             ['bowyer'],
