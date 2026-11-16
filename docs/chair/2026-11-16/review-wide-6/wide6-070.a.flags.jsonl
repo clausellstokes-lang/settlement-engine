@@ -1,0 +1,5 @@
+{"id":"C175905","town":"bar0-town-calm-rand-40","sev":"MED","kind":"PAIR","why":"'Military Council is ahead' of the Thieves' Guild against 'Crime is rising faster than those in charge can answer it' (Tensions crime wave)","other":"C175095"}
+{"id":"C176015","town":"bar0-town-calm-rand-40","sev":"MED","kind":"PAIR","why":"'random violence is put down... arrangement is stable' / 'keeps the streets quiet' against 'Crime is rising faster than those in charge can answer it'","other":"C175095"}
+{"id":"C176034","town":"bar0-town-calm-rand-40","sev":"MED","kind":"PAIR","why":"Arcane Support: 'No arcane practitioners on the rolls' against Magic tab 'Availability · broad' and header magic high, with Potions and elixirs made here","other":"C176044"}
+{"id":"C175463","town":"bar0-town-calm-rand-40","sev":"LOW","kind":"STATE","why":"Mine row says 'Ore cut underground... brought out by cart' and Tun Hau 'Sells ore by the cart' while LAND gives Iron ore deposits absent and Iron is imported","other":"C176239"}
+{"id":"DONE","lines":1676,"blocks":1,"flags":4}
