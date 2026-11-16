@@ -55,26 +55,26 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 266732,
-      "gzip": 35556,
+      "raw": 266715,
+      "gzip": 35510,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 185528,
-      "gzip": 25711,
+      "raw": 185500,
+      "gzip": 25695,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 298564,
-      "gzip": 38092,
+      "raw": 298675,
+      "gzip": 38100,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 131329,
-      "gzip": 18424,
+      "raw": 131223,
+      "gzip": 18410,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -85,8 +85,8 @@
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 180300,
-      "gzip": 25094,
+      "raw": 180301,
+      "gzip": 25099,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -651,6 +651,14 @@
       "toRaw": 131329,
       "gzipAfter": 18424,
       "reason": "+8 B raw over the committed 131321 (gzip level 9: 18419 -> 18424), measured on disk at the merged tree (af120bdd4) by BAR2-CORPUS: batch 1 (d89e61aac) reworded state prose so each line claims no more than every printing town bears, and marked lines off a crisis. The leaf stands at 36.8 per cent of its ceilingRaw (357097)."
+    },
+    {
+      "car": "BAR3-CORPUS batches 1 and 2 (2026-11-15): the round's declared rewordings of state prose, re-recorded once by BAR3-CLOSE-SWEEP-B (2026-11-16) under the chair's ruling PB1 (2026-11-16 01:35 UTC, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 298564,
+      "toRaw": 298675,
+      "gzipAfter": 38100,
+      "reason": "+111 B raw over the committed 298564 (gzip level 9: 38092 -> 38100), measured on disk at fb59da43e: BAR3-CORPUS batch 1 (cc469b762) and batch 2 (b09297a27) reworded and marked state prose so each line claims no more than every printing town bears. THE ROSTER'S TOTAL FELL: the five state leaves the round moved went defense -17, economy -28, power -106 (lowered), general +111 (this row) and warFaith +1 (180300 -> 180301, b09297a27; its declared chain already ends at 181741, so no row can land on it and only its number moves), 39 bytes fewer together. The leaf stands at 37.5 per cent of its ceilingRaw (796761)."
     }
   ],
   "ceilingTransfersNewLeaves": [
