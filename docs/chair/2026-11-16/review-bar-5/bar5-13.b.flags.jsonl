@@ -1,0 +1,5 @@
+{"id":"C31115","town":"bar0-town-calm-rand-24","sev":"LOW","kind":"LACKS","why":"surf against 'the outer wall'; DEFENCE says walls: none, and the Defense tab says no perimeter walls","other":"C31927"}
+{"id":"C31780","town":"bar0-town-calm-rand-24","sev":"MED","kind":"PAIR","why":"says Feudal Appointee is losing ground over 'civilian courts' (no court on HOUSES); it is Dominant, stable, symbiotic, and the quarrel is a trade checkpoint","other":"C31818"}
+{"id":"C31972","town":"bar0-town-calm-rand-24","sev":"MED","kind":"PAIR","why":"says nothing depends on arcane work, yet the same tab prints Reliance on magic Present, economic and infrastructure roles common; HOUSES has a teleportation circle","other":"C31966"}
+{"id":"C31975","town":"bar0-town-calm-rand-24","sev":"LOW","kind":"STATE","why":"viable 'only while grain keeps arriving'; FOOD has 92% grown at home, no deficit, six months in a granary","other":"C31659"}
+{"id":"DONE","lines":1568,"blocks":1,"flags":4}
