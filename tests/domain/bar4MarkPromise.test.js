@@ -78,10 +78,13 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     ['r2r-metropolis-14', 'tab-split', ['Institutions']], // a marked row, its door read bare
     ['r2s-plague_onset-thorp-2', 'spent-fishery', ['Services']], // FS1: the fishing community on its one depleted fishery
   ];
-  test.each(CONTROLS)('(b) THE POSITIVE CONTROL: in %s the detector finds %s with the marks read blind', (seed, kind, blind) => {
-    const hits = markPromiseInstances(town(seed), { blind }).filter((i) => i.kind === kind && !i.excluded);
-    expect(hits.length).toBeGreaterThan(0);
-  }, 120_000);
+  // BAR4-CLOSE-SWEEP (2026-11-16, the sovereignty lighting law: no new `each`): one parameterless test over the rows, every row run
+  test('(b) THE POSITIVE CONTROL: in each town the detector finds its kind with the marks read blind (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CONTROLS, ([seed, kind, blind]) => {
+      const hits = markPromiseInstances(town(/** @type {string} */ (seed)), { blind }).filter((i) => i.kind === kind && !i.excluded);
+      expect(hits.length, `${seed}: the detector finds ${kind}`).toBeGreaterThan(0);
+    }), '(b) every positive control fires');
+  }, 900_000);
 
   // (c) (seed, row, the mark that must lead it, or null: the row bare where its need is not cut) — MARKED rows red at 8aef8e7d4
   const PAIRS = [
@@ -97,12 +100,14 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     ['r2r-town-0', 'Grain storage', null], // KEEP: the same in a calm town
     ['r2s-plague_onset-thorp-2', 'Fresh fish retail', 'Short of fish.'], // C22221 (FS1): every fishery depleted, whatever the ledger counts
   ];
-  test.each(PAIRS)('(c) in %s the row %s leads with %s', (seed, name, mark) => {
-    const s = town(seed);
-    const svc = row(s, name);
-    expect(svc, `${name} prints in ${seed}`).toBeTruthy();
-    expect(rowMarkText(s, 'service', svc)).toBe(mark);
-  }, 120_000);
+  test('(c) in each town the row leads with its mark, or prints bare (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(PAIRS, ([seed, name, mark]) => {
+      const s = town(/** @type {string} */ (seed));
+      const svc = row(s, name);
+      expect(svc, `${name} prints in ${seed}`).toBeTruthy();
+      expect(rowMarkText(s, 'service', svc), `${seed}: ${name} leads with ${mark}`).toBe(mark);
+    }), '(c) every row leads with its mark');
+  }, 900_000);
 
   test('(d) the mark follows the page\'s gap line: an EX-SPLIT row, its input answered by nothing, reads short', () => {
     const s = town('r2r-hamlet-9');
