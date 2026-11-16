@@ -107,10 +107,12 @@ export function ResourceChainCard({ chain, stage, settlement = null, moved = fal
   // field work, a Full card whose every chain card on the Economics tab prints a word that is not working takes THAT word
   // (economicsCrisisMarks.js :: fullCardWordUnderSiege), never "Fully exploited": no new word.
   const besieged = fullCardWordUnderSiege(settlement, chain);
+  // BAR3-CLOSE-SWEEP-B (2026-11-16, letter e): the siege's word takes no wash (the kill list's tinted callout): its danger INK
+  // and the card's danger RULE (borderLeft) carry the signal, as ClerkNote's plain form asks.
   return (
     <div data-testid={besieged ? 'resource-full-under-siege' : undefined} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:besieged ? '3px solid #8b1a1a' : '3px solid #1a5a28',padding:'8px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:besieged ? swatch.danger : swatch.success,background:besieged ? swatch.dangerBg : swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>{besieged ? besieged.charAt(0).toUpperCase() + besieged.slice(1) : '✓ Fully exploited'}</span>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:besieged ? swatch.danger : swatch.success,background:besieged ? undefined : swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>{besieged ? besieged.charAt(0).toUpperCase() + besieged.slice(1) : '✓ Fully exploited'}</span>
         <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
       </div>
