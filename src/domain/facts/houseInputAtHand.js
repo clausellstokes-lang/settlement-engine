@@ -317,7 +317,7 @@ export function housesShortOf(record) {
   const cached = SHORT_OF.get(record);
   if (cached) return cached;
   const r = /** @type {any} */ (record);
-  const gaps = arr(r.resourceAnalysis?.gaps).filter((g) => g && typeof g === 'object' && typeof g.institution === 'string' && g.institution);
+  const gaps = /** @type {Array<{ institution: string, chain?: unknown }>} */ (arr(r.resourceAnalysis?.gaps).filter((/** @type {any} */ g) => g && typeof g === 'object' && typeof g.institution === 'string' && g.institution));
   /** @type {Map<string, string>} */
   const out = new Map();
   for (const name of [...new Set(gaps.map((g) => g.institution))]) {
