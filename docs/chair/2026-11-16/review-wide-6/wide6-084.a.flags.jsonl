@@ -1,0 +1,5 @@
+{"id":"C195130","town":"bar0-town-occupied-rand-39","sev":"LOW","kind":"PAIR","why":"Foundations 'Defense readiness · Critical' against the Overview's 'Defense · Lightly defended' and STATE 'Lightly Defended' for the same town","other":"C195076"}
+{"id":"C195818","town":"bar0-town-occupied-rand-39","sev":"LOW","kind":"PAIR","why":"Magic envelope 'Institutional control · unregulated' beside 'Legality · regulated' on the same tab","other":"C195817"}
+{"id":"C195099","town":"bar0-town-occupied-rand-39","sev":"LOW","kind":"BROKEN","why":"Crisis tab 'its own officials take their orders.' ends without saying from whom (the occupiers); the sentence is cut mid-clause","other":""}
+{"id":"C195357","town":"bar0-town-occupied-rand-39","sev":"LOW","kind":"PAIR","why":"Services tab sells 'Protection (informal)' from a gang and says disputes end in violence; Defense tab says under the curfew 'Thieves are scarce now' and safety is Controlled","other":"C195781"}
+{"id":"DONE","lines":1283,"blocks":1,"flags":4}
