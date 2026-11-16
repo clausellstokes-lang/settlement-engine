@@ -182,7 +182,7 @@ describe('the facts the cure made', () => {
     const town = BORN.get('r2r-village-0');
     const bare = { ...town, institutions: [{ name: 'Common grazing land' }, { name: 'Tailor' }], economicState: { ...town.economicState, primaryExports: [], localProduction: [], primaryImports: [], activeChains: [] } };
     const facts = factsOf(bare);
-    const goods = /^(trade at work: (dairy|cloth|ironwork|spice)|exported: )/;
+    const goods = /^(trade at work: (dairy|cloth|ironwork|spice|woodwork)|exported: )/;
     // the kilns' twin of the crates is BAR5-THINGS's: unanswered (and so refused with its original) where no kiln house stands, by design
     const pairs = ARRIVAL_SENSES.filter((/** @type {any} */ sense) => sense.key !== 'kilns').flatMap((/** @type {any} */ sense) => ['lines', 'dominant'].flatMap((field) => sense[field]
       .filter((/** @type {any} */ t) => t && typeof t === 'object' && t.twinOf)
@@ -196,5 +196,24 @@ describe('the facts the cure made', () => {
       return refused && !twinOk && !twinNeedsMore;
     }).map((/** @type {any} */ x) => x.twin.twinOf);
     expect(unadmitted).toEqual([]);
+  });
+
+  it('TW1 (the chair, 2026-11-16): where EVERY smith is marked short, the forge line is refused and its twin keeps the slot', async () => {
+    const { CHAIN_RAW_INPUT, houseInputAtHand, housesShortOf } = await import('../../src/domain/facts/houseInputAtHand.js');
+    const base = BORN.get('r2r-village-0');
+    const smith = { name: 'Blacksmith' };
+    const bare = { ...base, institutions: [smith], config: { ...base.config, nearbyResources: [], nearbyResourcesDepleted: [] },
+      economicState: { ...base.economicState, primaryImports: [], primaryExports: ['Quality tools'], localProduction: ['iron'] }, resourceAnalysis: { ...base.resourceAnalysis, gaps: [] } };
+    const key = Object.keys(CHAIN_RAW_INPUT).find((k) => houseInputAtHand(bare, k, smith, { rawResource: CHAIN_RAW_INPUT[k] }) === 'missing');
+    expect(key, 'a raw input the bare smith lacks').toBeTruthy();
+    const town = { ...bare, resourceAnalysis: { ...bare.resourceAnalysis, gaps: [{ chain: CHAIN_RAW_INPUT[/** @type {string} */ (key)], institution: 'Blacksmith', kind: 'missing', impact: 'Blacksmith exists but lacks access to its input', severity: 'high' }] } };
+    expect(housesShortOf(town).has('Blacksmith')).toBe(true);
+    expect(tradeAtWorkOf(town, 'ironwork')).toBe(false); // a list that names iron does not override the mark
+    const pool = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'smiths')).lines;
+    const original = pool.find((/** @type {any} */ l) => l && typeof l === 'object' && !l.twinOf);
+    const twin = pool.find((/** @type {any} */ l) => l && typeof l === 'object' && l.twinOf === String(original.text('{name}')));
+    const facts = /** @type {any} */ (factsOf(town));
+    expect(declarationAdmits(declarationOf(original), facts).admitted).toBe(false);
+    expect(declarationAdmits(declarationOf(twin), facts).admitted).toBe(true);
   });
 });

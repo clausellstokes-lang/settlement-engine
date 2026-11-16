@@ -244,10 +244,15 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['carpenter', 'carpenters', 'sawmill', 'woodcutter', 'lumber', 'joiner', 'cooper', 'shipwright', 'wheelwright', 'woodcarver'],
     trade: ['timber', 'plank', 'lumber', 'sawn'],
     lines: [
-      () => 'The rasp of a saw and the smell of fresh-cut wood come from a workshop yard.',
-      () => 'Sawn planks stand stacked to season against a wall.',
-      () => 'Curls of shavings and chips of bark blow across the lane.', // BAR2-PLACES (PL1): no carpenter claimed (a woodcutter's camp reaches this key)
-      () => 'The knock of a mallet on wood keeps time somewhere close.',
+      // BAR6-SCENES (the chair's ruling TW1, 2026-11-16): each line shows wood worked: some house of the wood trades stands and is not short (`trade at work: woodwork`); its twin keeps the slot
+      { text: () => 'The rasp of a saw and the smell of fresh-cut wood come from a workshop yard.', needs: ['trade at work: woodwork'] },
+      { text: () => 'A saw hangs on its nail in a workshop yard, with no wood on the trestles.', twinOf: 'The rasp of a saw and the smell of fresh-cut wood come from a workshop yard.', excludes: ['trade at work: woodwork'] }, // BAR6-SCENES (the chair's ruling TW1, 2026-11-16): its twin
+      { text: () => 'Sawn planks stand stacked to season against a wall.', needs: ['trade at work: woodwork'] },
+      { text: () => 'A few old planks lean against a wall, grey with weather.', twinOf: 'Sawn planks stand stacked to season against a wall.', excludes: ['trade at work: woodwork'] }, // BAR6-SCENES (the chair's ruling TW1, 2026-11-16): its twin
+      { text: () => 'Curls of shavings and chips of bark blow across the lane.', needs: ['trade at work: woodwork'] }, // BAR2-PLACES (PL1): no carpenter claimed (a woodcutter's camp reaches this key)
+      { text: () => 'Old shavings lie trodden into the lane, and no new ones blow across it.', twinOf: 'Curls of shavings and chips of bark blow across the lane.', excludes: ['trade at work: woodwork'] }, // BAR6-SCENES (the chair's ruling TW1, 2026-11-16): its twin
+      { text: () => 'The knock of a mallet on wood keeps time somewhere close.', needs: ['trade at work: woodwork'] },
+      { text: () => 'A workshop door stands open on an idle bench, and no mallet sounds from it.', twinOf: 'The knock of a mallet on wood keeps time somewhere close.', excludes: ['trade at work: woodwork'] }, // BAR6-SCENES (the chair's ruling TW1, 2026-11-16): its twin
     ],
     dominant: [
       { text: (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`, needs: ['timber reaches the saws'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C45961): the whole place sawing wants wood: timber reaches the saws, its own or brought in (BAR4-SCENES-2: one home, `timberAtHand.js` on `houseInputAtHand.js`)

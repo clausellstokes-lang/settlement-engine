@@ -77,6 +77,8 @@ export const GOOD_TRADES = Object.freeze({
   herbs: Object.freeze({ houses: Object.freeze(['apothecary', 'herbalist', 'physician', 'healer']), listed: /\b(herbs?|herbal|medicinal|remed\w*)\b/i }),
   // spice in sacks and on the stalls: a spice house, spice made or sold, or spice brought in while the road is open
   spice: Object.freeze({ houses: Object.freeze(['spice']), listed: /\bspices?\b/i, imported: true }),
+  // the saw and the mallet: a house that works wood (the chair's TW1: the wood trades, read through the short mark)
+  woodwork: Object.freeze({ houses: Object.freeze(['carpenter', 'carpenters', 'sawmill', 'woodcutter', 'lumber', 'joiner', 'cooper', 'shipwright', 'wheelwright', 'woodcarver']) }),
   // chisels on stone: the stone's cutters (a mine digs; it does not dress stone)
   'cut stone': Object.freeze({ houses: Object.freeze(['quarry', 'stone quarry', 'mason', 'stonecutter']) }),
 });
@@ -104,6 +106,9 @@ function goodAtWork(record, good) {
       return !name.startsWith('access to') && good.houses.some((w) => atWordStart(w, name));
     });
     if (makers.some((h) => !short.has(String(/** @type {{ name?: unknown }} */ (h)?.name ?? '')))) return true;
+    // the chair's ruling TW1: where the good's houses stand and EVERY one is marked short, the page says so ("Short of iron.");
+    // no list overrides the mark (the four trades' own rule: a trade reached by its words alone holds only where no house stands)
+    if (makers.length) return false;
   }
   const listed = good.listed;
   if (listed && [...arr(r?.economicState?.localProduction), ...arr(canonExports(/** @type {Parameters<typeof canonExports>[0]} */ (record)))].some((x) => listed.test(itemText(x)))) return true;

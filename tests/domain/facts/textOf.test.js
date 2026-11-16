@@ -61,6 +61,7 @@ describe('textOf', () => {
     // 189 → 215 (BAR6-SCENES, 2026-11-16, LAW 6 rule 6b; re-keyed by identity, this batch's own count): 18 twins join (the forge 4, the
     // cloth 5, the goods sent out 4, the butter, the spice 2, the porters, the work party) and 8 bare lines become declared objects
     // (the ironwork's 4 and the cloth's 4): 18 + 8 = 26; and the Norse drying racks' twin (ARRIVAL_PEOPLE.norse): 216.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(216);
+    // 216 -> 224 (the chair's ruling TW1, the same batch): the wood trades' four lines declared, each with its twin.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(224);
   });
 });
