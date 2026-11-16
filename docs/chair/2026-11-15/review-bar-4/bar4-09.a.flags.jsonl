@@ -1,0 +1,8 @@
+{"id":"C22108","town":"bar0-metropolis-calm-rand-21","sev":"MED","kind":"LACKS","why":"longshoremen shifting goods between 'ship and shore'; terrain Mountain, trade access road only: no water, no ships","other":""}
+{"id":"C22254","town":"bar0-metropolis-calm-rand-21","sev":"MED","kind":"LACKS","why":"pilots 'through harbour approaches'; Mountain town, trade access road only: no harbour or water route","other":""}
+{"id":"C22274","town":"bar0-metropolis-calm-rand-21","sev":"LOW","kind":"LACKS","why":"names 'the mages' guild'; HOUSES and GOVERNMENT list Mages' district, Academy of magic, Arcane Orders, no mages' guild","other":""}
+{"id":"C23720","town":"bar0-metropolis-calm-rand-21","sev":"MED","kind":"LACKS","why":"wharfinger 'a good ear on the waterfront', talks of ships; terrain Mountain, trade access road only: no waterfront, no ships","other":""}
+{"id":"C23875","town":"bar0-metropolis-calm-rand-21","sev":"LOW","kind":"LACKS","why":"harbour master 'closed the harbour to a rival's ships'; Mountain terrain, road-only trade access: no harbour or ships (the page's docks are airship docks)","other":""}
+{"id":"C24951","town":"bar0-metropolis-calm-rand-21","sev":"MED","kind":"PAIR","why":"the Wild Magic surge is said to have marked the temple district; elsewhere the same event marks the merchants' quarter","other":"C20952"}
+{"id":"C24965","town":"bar0-metropolis-calm-rand-21","sev":"LOW","kind":"PAIR","why":"'Few folk keep the rites beyond weddings and burials' against faith running through every quarter's parish, with 50-100+ parish churches","other":"C21742"}
+{"id":"DONE","lines":4138,"blocks":1,"flags":7}
