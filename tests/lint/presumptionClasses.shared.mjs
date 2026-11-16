@@ -381,6 +381,7 @@ export const NOT_PAGE = Object.freeze([
   ['src/domain/worldPulse/', 'the world pulse: the news between towns, read by the herald and the realm view'],
   ['src/domain/certification/', "the subsystems' certification: contracts, receipts and rows for the developer"],
   ['src/domain/compendium/', 'the compendium: the reference the app shows apart from any town'],
+  ['src/domain/display/newsVoice.js', "the campaign's news voice (the chair's ruling NP1, 2026-11-16): read only by the world map's wizard news panel and the chronicler's letter, both under src/components/map"],
   ['src/components/compendium/', 'the compendium\'s screens'],
   ['src/components/map/', 'the world map, the herald and the realm dashboard'],
   ['src/components/region/', 'the regional graph'],

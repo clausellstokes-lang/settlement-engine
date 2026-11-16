@@ -40,7 +40,7 @@ import {
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 /** the debt banked at the base (afa46d644): the ceiling may only fall from here */
-const BASE_CEILING = 1996;
+const BASE_CEILING = 1938;
 
 /** The hits of a planted file, as `class:status` per text. @param {string} rel @param {string} src */
 const planted = (rel, src) => hitsOf(scanSource(rel, src)).map((h) => `${h.cls}:${h.status} :: ${h.text}`);
@@ -147,7 +147,7 @@ describe('the five arms, planted', () => {
   test('the scope is the four roots, less the surfaces that are no town page (by rule, each present in the tree)', () => {
     expect(ROOTS).toEqual(['src/data', 'src/generators', 'src/domain', 'src/components']);
     expect(NOT_PAGE.map(([p]) => p).filter((p) => !existsSync(join(ROOT, p)))).toEqual([]);
-    expect(NOT_PAGE.length).toBe(18);
+    expect(NOT_PAGE.length).toBe(19);
     expect([notPage('src/domain/worldPulse/heraldLines.js'), notPage('src/components/new/tabs/DefenseTab.jsx'), notPage('src/components/HomeHero.jsx')]).toEqual([true, false, true]);
   });
 });
