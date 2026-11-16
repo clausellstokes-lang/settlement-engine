@@ -23,6 +23,9 @@
 const MARKET_VENDORS = 'Market vendors and shared dining customs make food distribution visibly civic.';
 const MARKET_SUPPLY = 'Market supply and imported grain become politically charged as population grows.';
 const HARVEST_KEPT = 'Fermentation, pickling, and drying stretch the harvest through winter.';
+// BAR5-WORLD (the chair's ruling WS1, 2026-11-16; LAW 5): the arabic profile's foodways presumes the caravans come; under a
+// siege none does (60 towns of the 720 print it, 2 besieged; 27 of the fresh 300, 6 besieged, at 600b7683a).
+const CARAVAN_STAPLES = 'Water access and preservation skill determine the balance between local produce and caravan-borne staples.';
 
 /** @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, twinOf?: string }>>>>} */
 export const FOODWAYS_PRINT_SIBLINGS = Object.freeze({
@@ -33,6 +36,10 @@ export const FOODWAYS_PRINT_SIBLINGS = Object.freeze({
   [MARKET_SUPPLY]: Object.freeze([
     Object.freeze({ text: MARKET_SUPPLY, excludes: Object.freeze(['crisis: under_siege']) }),
     Object.freeze({ text: 'Food supply and the grain stores become politically charged as population grows.', twinOf: MARKET_SUPPLY }),
+  ]),
+  [CARAVAN_STAPLES]: Object.freeze([
+    Object.freeze({ text: CARAVAN_STAPLES, excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: 'Water access and preservation skill decide how long local produce must last while no caravan can come.', twinOf: CARAVAN_STAPLES }),
   ]),
   [HARVEST_KEPT]: Object.freeze([
     Object.freeze({ text: HARVEST_KEPT, needs: Object.freeze(['food: > deficit']) }),

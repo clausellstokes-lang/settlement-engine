@@ -15,6 +15,9 @@
  *     town with an inn keeps its line.
  * (c) LAW 5's daily-life slots (`domain/dailyLife.js`): a town under a famine or a siege is not told its bread is plentiful
  *     (r2s-famine-hamlet-2, r2s-famine-town-1, r2s-famine-metropolis-3 at the base); the surplus band takes its twin.
+ * (d) THE CHAIR'S RULING WS1: the arabic foodways line ("… local produce and caravan-borne staples", `cultureProfiles.js`)
+ *     takes its twin under a siege where it prints (`foodwaysPrintSiblings.js`): the read row of r2s-under_siege-metropolis-2
+ *     and r2r-thorp-58 (besieged; red at the base); r2r-thorp-9 (calm) keeps it.
  * The census (corpus and dumps over the sixty, the 720 and the fresh 300) is the measure: the hand-back's table.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -26,6 +29,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { ORIGIN_POOLS } from '../../src/generators/narrative/settlementOriginProse.js';
 import { extractSettlementContext } from '../../src/components/new/dailyLifeLogic.js';
 import { deriveDailyLife } from '../../src/domain/dailyLife.js';
+import { foodwaysLineOf } from '../../src/domain/foodways.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'random' };
@@ -112,5 +116,19 @@ describe('BAR5-WORLD (c): a town in want is not told its bread is plentiful', ()
       const text = String(deriveDailyLife(born(seed)).slots.food_culture?.text);
       expect(text, `${seed}: what prints instead`).toBe('The stores still hold: bread and broth reach most tables, and the households count what is left.');
     }), 'the surplus band under a famine');
+  });
+});
+
+describe('BAR5-WORLD (d): no caravan brings staples to a besieged town (WS1)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const ORIGINAL = 'Water access and preservation skill determine the balance between local produce and caravan-borne staples.';
+  const TWIN = 'Water access and preservation skill decide how long local produce must last while no caravan can come.';
+
+  it('the besieged towns print the twin; a calm town keeps the line (every town; red at the base)', () => {
+    const cases = /** @type {Array<[string, string]>} */ ([['r2s-under_siege-metropolis-2', TWIN], ['r2r-thorp-58', TWIN], ['r2r-thorp-9', ORIGINAL]]);
+    expectNoSeedFailures(collectSeedFailures(cases, ([seed, want]) => {
+      const line = String(foodwaysLineOf(born(seed)));
+      expect(line.includes(want), `${seed}: ${line}`).toBe(true);
+    }), 'the caravan staples under a siege');
   });
 });
