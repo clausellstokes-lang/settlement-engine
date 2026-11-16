@@ -1,0 +1,8 @@
+{"id":"C15951","town":"bar0-hamlet-calm-rand-25","sev":"MED","kind":"LACKS","why":"kiln smoke and 'dust of fired clay' on everything; no pottery or clay trade in HOUSES, TRADE or made-here (only charcoal kilns, iron, timber)","other":""}
+{"id":"C16255","town":"bar0-hamlet-calm-rand-25","sev":"LOW","kind":"BROKEN","why":"'Weak defences keeps': plural subject with singular verb","other":""}
+{"id":"C16288","town":"bar0-hamlet-calm-rand-25","sev":"LOW","kind":"PAIR","why":"says nobody stands ready to lead against the Council, but TENSIONS has a succession crisis with a Popular candidate and would-be successors gathering support","other":"C15972"}
+{"id":"C16679","town":"bar0-hamlet-calm-rand-26","sev":"LOW","kind":"LACKS","why":"shepherd 'key supplier to the textile trade'; no weaver, cloth trade or wool export in HOUSES or TRADE","other":""}
+{"id":"C17061","town":"bar0-hamlet-under_siege-rand-24","sev":"MED","kind":"PAIR","why":"'relies on arcane workings' but Magic tab and Foundations say Reliance on magic: None, and FOOD shows 0% by magic","other":"C17084"}
+{"id":"C17069","town":"bar0-hamlet-under_siege-rand-24","sev":"MED","kind":"STATE","why":"ordinary-times scene (craftsman shows a finished piece, passers-by judge it) printed unmarked under CRISIS Under Siege, with lanes barricaded and manned around the clock","other":"C17066"}
+{"id":"C17210","town":"bar0-hamlet-under_siege-rand-24","sev":"MED","kind":"PAIR","why":"grain-milling row bare on offer, but its house is marked Stopped by the siege (nothing ground here, roads cut)","other":"C17209"}
+{"id":"DONE","lines":2259,"blocks":4,"flags":7}
