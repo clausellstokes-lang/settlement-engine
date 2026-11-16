@@ -19,9 +19,9 @@
  * own house gives the sovereign (a lord's steward's own services).
  * Pure: no randomness, no clock, no write.
  *
- * @enforced-by tests/domain/facts/sovereign.test.js
+ * @enforced-by tests/domain/bar6HousesSovereign.test.js
  */
-import { activeCrisisTypes, crisisKindOf } from './crisisKind.js';
+import { canonStressors } from '../canonicalAccessors.js'; // EG1: crisisKind.js is pinned lazy; the stress container is read here
 import { liveInstitutionNames } from './liveInstitutionNames.js';
 
 /** The words that give a sovereign, whole words (the page law's `SOV_FACT`, spelled once here for the source). */
@@ -29,6 +29,8 @@ export const SOVEREIGN_WORDS = /\b(lords?|lord's|lordship|noble|nobles|nobility|
 
 /** The crisis kinds that supply the realm's sovereign from outside (SV1: "a war or an occupation"). */
 export const SOVEREIGN_CRISES = Object.freeze(['wartime', 'occupied']);
+/** Those kinds as the stress container may type them: the kind, or its pulse type (`stressorPicker.js :: GEN_TO_PULSE_TYPE`). */
+const SOVEREIGN_TYPES = Object.freeze([...SOVEREIGN_CRISES, 'occupation']);
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v : v && typeof v === 'object' ? JSON.stringify(v) : '');
@@ -40,7 +42,7 @@ const text = (v) => (typeof v === 'string' ? v : v && typeof v === 'object' ? JS
  */
 export function sovereignOf(record) {
   if (!record || typeof record !== 'object') return undefined;
-  if (activeCrisisTypes(record).some((t) => SOVEREIGN_CRISES.includes(String(crisisKindOf(t) ?? t)))) return true;
+  if (canonStressors(record).some((/** @type {any} */ e) => !!e && typeof e === 'object' && SOVEREIGN_TYPES.includes(String(e.type)))) return true;
   const ps = record.powerStructure && typeof record.powerStructure === 'object' ? record.powerStructure : {};
   const sources = [
     text(ps.government), text(ps.governingName),
