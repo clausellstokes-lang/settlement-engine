@@ -1,0 +1,6 @@
+{"id":"C141284","town":"bar0-metropolis-calm-rand-39","sev":"LOW","kind":"STATE","why":"'Half of Albamunicipium' gutting or selling fish, against INCOME 'Fish & Preserved Produce 4%' of 45,046 people","other":""}
+{"id":"C142555","town":"bar0-metropolis-calm-rand-39","sev":"LOW","kind":"PAIR","why":"grapes 'needed, and not brought in' and wine work 'stands idle' (C142548), yet Vintner rows (Table wine, Wine wholesale) print unmarked","other":"C141722"}
+{"id":"C143088","town":"bar0-metropolis-calm-rand-39","sev":"MED","kind":"PAIR","why":"Defense tab 'enforcement keeps it down and keeps it from growing' against 'Crime is on the rise' and the crime wave 'rising faster than those in charge can answer it' (C141310)","other":"C143083"}
+{"id":"C143085","town":"bar0-metropolis-calm-rand-39","sev":"MED","kind":"PAIR","why":"'organized crime has a limited foothold' against 'Organized syndicate' whose people say what is allowed first, the law's after","other":"C143100"}
+{"id":"C141335","town":"bar0-metropolis-calm-rand-39","sev":"LOW","kind":"PAIR","why":"Foundations 'Law & order · Strained' against Defense tab 'enforcement keeps it down' and 'The garrison is present and responsive'","other":"C143088"}
+{"id":"DONE","lines":3489,"blocks":1,"flags":5}
