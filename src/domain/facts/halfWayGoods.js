@@ -30,7 +30,13 @@ export const HALF_WAY_CARDS = Object.freeze({
   wool: Object.freeze(['textiles', 'textile_finishing']), // the wool's cloth and its clothing (the census's 720: 37 + 32 towns)
   'alpine wool': Object.freeze(['textiles', 'textile_finishing']),
   'iron ore': Object.freeze(['iron', 'weapons_armor']), // the ore's metalwork and its arms
-  'animal hides': Object.freeze(['leather_goods']), // the hides' leatherwork
+  // BAR6-RECORD (b) (6c-halfway: "stops half-way: no leatherworkers' guild finishes it" beside a Livestock & Dairy card's
+  // "Leather goods", bar0-metropolis-calm-rand-40): every card that prints the hides' leatherwork, not the leather chain's alone
+  'animal hides': Object.freeze(['leather_goods', 'livestock', 'leather', 'hunting']), // the hides' leatherwork
+  // BAR6-RECORD (b) (6c-halfway: "no carpenters' guild or charcoal burner finishes it" beside a Mountain Timber card's
+  // "Charcoal", bar0-village-calm-rand-38): the timber's sawn goods and its charcoal
+  timber: Object.freeze(['timber', 'mountain_timber_harvest']),
+  'mountain timber': Object.freeze(['timber', 'mountain_timber_harvest']),
   'medicinal herbs': Object.freeze(['herbalism']), // the herbs' remedies
 });
 
@@ -47,6 +53,9 @@ export const FINISHED_BY_HOUSE = Object.freeze({
   // leather: a tanner's leather is not yet boots, harness or armour (C37887)
   "Leatherworkers' guild": Object.freeze(['Boots and shoes', 'Saddles and harness', 'Leather armour', 'Leather goods', 'Belts and straps']),
   Tannery: Object.freeze(['Boots and shoes', 'Saddles and harness', 'Leather armour', 'Leather goods', 'Belts and straps']),
+  // timber (BAR6-RECORD (b)): the sawmill's sawn goods, the burner's charcoal (the cards' own words, `supplyChainData.js`)
+  Sawmill: Object.freeze(['Milled lumber', 'Structural timber']),
+  'Charcoal burner': Object.freeze(['Charcoal']),
   // herbs: the apothecary's remedies, the alchemist's potions
   Apothecary: Object.freeze(['Herbal remedies']),
   'Alchemist shop': Object.freeze(['Potions and elixirs']),

@@ -584,7 +584,8 @@ const RESOURCE_GOOD_INST_GATES = {
   'shipbuilding_timber': { 'Milled lumber': 'sawmill' },
   'river_mills':         { 'Milled flour': 'mill', 'Processed grain': 'mill', 'Fulled cloth': 'fuller' },
   'river_clay':          { 'Fired brick': 'brickmaker', 'Pottery and ceramics': 'potter', 'Roof tiles': 'brickmaker' },
-  'managed_forest':      { 'Milled timber': 'sawmill', 'Hardwood beams': 'carpenter', 'Charcoal': 'charcoal' },
+  // BAR6-RECORD (b): the mountain timber's planks and charcoal as the managed forest's (the half-way gap's sawmill and charcoal burner)
+  'managed_forest':      { 'Milled timber': 'sawmill', 'Hardwood beams': 'carpenter', 'Charcoal': 'charcoal' }, 'mountain_timber': { 'Pine planks': 'sawmill', 'Charcoal': 'charcoal' },
   'foraging_areas':      { 'Alchemical reagents': 'alchemist' },
   'grain_fields':        { 'Milled flour': 'mill' },
   'grazing_land':        { 'Dairy products': 'dairy', 'Leather goods': 'tannery' },
@@ -664,7 +665,7 @@ const MADE_HERE_KEYWORD_WIDENING = {
 export const FINE_ARMS = Object.freeze(['Advanced weapons and armor', 'Master-crafted weapons']); const FINE_ARMS_MAKERS = Object.freeze(['blacksmiths (', 'metalworker']); /** Does a house of this town make fine arms (BAR6-RECORD (a))? @param {ReadonlyArray<any>} housed */ export const fineArmsMadeHere = (housed) => FINE_ARMS_MAKERS.some(kw => (housed || []).some(i => institutionMatchesGate(i, kw))); const GOOD_WORKING_HOUSES = Object.freeze({
   // The made list's two worked goods (C1-A, D7): a cobbler works bought leather into boots; a jeweller or a
   // metalworker works bought gold and silver. (Raw gemstones stay the mine's; milled lumber the sawmill's.)
-  'Boots and shoes':            ['tannery', 'tanner', 'cobbler'],
+  'Boots and shoes':            ['cobbler'], // BAR6-RECORD (b): a tanner's leather is not yet boots (facts/halfWayGoods.js :: FINISHED_BY_HOUSE)
   'Precious metals':            ['mine', 'smelter', 'jewel', 'metalworker'],
   // The export side (C1-E). A toll is taken by a toll bridge, a customs house or a gate; the defended pass's toll is
   // the pass's own (the chair, 2026-11-15: the pass is its house), so that resource's goods are not asked.
@@ -682,7 +683,11 @@ export const FINE_ARMS = Object.freeze(['Advanced weapons and armor', 'Master-cr
   // BAR6-RECORD (a) (LAW 6's 6c-arms, the chair's direction of BRIEF-BAR6; vetoable by the owner): WHAT A HOUSE CAN
   // MAKE. Fine arms are the forge's full trade (FINE_ARMS_MAKERS): a part-time smith or a lone village blacksmith
   // makes tools, shoes and plain weapons, never these.
-  'Advanced weapons and armor': FINE_ARMS_MAKERS, 'Master-crafted weapons': FINE_ARMS_MAKERS,
+  // BAR6-RECORD (b) (6c's pair lines: "none of it leaves" beside raw sand exported; "stops half-way: no leatherworkers'
+  // guild finishes it" beside leather goods exported): the raw sand leaves where a glasshouse works the sand (the record's
+  // exploitation reads the same house), and a tanner's leather is not yet leather goods: the cobbler finishes it
+  // (`houseInputAtHand.js :: tradeFinisherIn`, the finisher by trade the half-way gap reads).
+  'Advanced weapons and armor': FINE_ARMS_MAKERS, 'Master-crafted weapons': FINE_ARMS_MAKERS, 'Raw sand': ['glass'], 'Leather goods': ['cobbler'], 'Saddles and harness': ['cobbler'], 'Leather armour': ['cobbler'], 'Belts and straps': ['cobbler'],
   'Quality tools and weapons':  ['smith', 'metalwork'],
   'Bows and crossbows':         ['bowyer'],
   'Arrows (sheaf)':             ['bowyer'],
