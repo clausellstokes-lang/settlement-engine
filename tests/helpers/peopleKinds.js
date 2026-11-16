@@ -22,7 +22,7 @@
  * it a constructed table on which it MUST fire.
  */
 import { HANDLER_TIE_ARCHETYPES, STRESS_ECONOMIC_EFFECTS, TIE_TEMPER, tieIndexOf } from '../../src/data/npcData.js';
-import { leadsPowerOf, pairOfOneHouse } from '../../src/domain/facts/pairPlace.js';
+import { leadsPowerOf, pairOfOneHouse } from '../../src/generators/people/pairPlace.js';
 import { cardHonorificOf } from '../../src/domain/people/cardDoor.js';
 import { keeperHonorificOf } from '../../src/domain/people/seatKeeper.js';
 import { defenseFactsOf, forceWordsOf } from '../../src/domain/defense/defenseFacts.js';

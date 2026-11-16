@@ -38,7 +38,7 @@ import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.
 import { random as _rng } from '../../kernel/rngContext.js';
 import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
-import { pairSharesPlaceOf } from '../../domain/facts/pairPlace.js';
+import { pairSharesPlaceOf } from './pairPlace.js';
 import { sharesPower } from '../../domain/facts/sharedPower.js';
 import { tieArchetype } from '../npc/tieKind.js';
 import { styledTitleOf } from '../../data/faceHonorifics.js';
@@ -219,7 +219,7 @@ export function drawTies(cards, place, rng, only = {}) {
 const pairKeyOf = (a, b) => [String(a?.id ?? ''), String(b?.id ?? '')].sort().join('\u0000');
 
 /**
- * The birth's facts with the pair's tie count answered from the ties this draw holds (`pairPlace.js :: pairTieCountOf`
+ * The birth's facts with the pair's lone tie answered from the ties this draw holds (`pairPlace.js :: pairIsLoneOf`
  * answers it from a record's relationships; the birth's record has none yet), and the pair's place read in the order the
  * tie being written names them. The (frozen) facts object is the prototype, so every other getter reads as before.
  * @param {object} facts @param {Map<string, number>} counts @param {{ order: [any, any] | null }} writing
@@ -228,7 +228,7 @@ function withPairTies(facts, counts, writing) {
   /** @param {unknown} pair */
   const isPair = (pair) => Array.isArray(pair) && pair.length === 2;
   return Object.freeze(Object.create(facts, {
-    pairTieCount: { enumerable: true, value: (/** @type {unknown} */ pair) => (isPair(pair) ? counts.get(pairKeyOf(/** @type {any[]} */ (pair)[0], /** @type {any[]} */ (pair)[1])) ?? 0 : undefined) },
+    loneTie: { enumerable: true, value: (/** @type {unknown} */ pair) => (isPair(pair) ? (counts.get(pairKeyOf(/** @type {any[]} */ (pair)[0], /** @type {any[]} */ (pair)[1])) ?? 0) <= 1 : undefined) },
     sharesPlace: { enumerable: true, value: (/** @type {unknown} */ pair) => {
       if (!isPair(pair)) return undefined;
       const p = /** @type {[any, any]} */ (pair);

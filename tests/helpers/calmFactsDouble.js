@@ -29,7 +29,7 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   sharesPower: () => true,
   // BAR4-PEOPLE (the chair's TI1): the two pair facts of pairPlace.js, answered so every line is admitted
   sharesPlace: () => true,
-  pairTieCount: () => 1,
+  loneTie: () => true,
   // TAIL-TIES (the chair's ruling (T5)): the atom `ruling body`; "every presence atom holds".
   rulingBody: true,
   // CENSUS-5b (2026-11-05): CENSUS-1c's delegated getters (R-E) arrived after the double was
