@@ -45,4 +45,10 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // holds" covers them too (`factVocabulary.js :: FOOD_SOURCE_ATOMS`, `guild`).
   foodSources: Object.freeze(['fish', 'grain', 'game', 'livestock']),
   guild: true,
+  // BAR4-CORPUS-DEF (2026-11-16): three atoms of a place's TROUBLE arrived after the double (`dangerComing.js`,
+  // `magicSupply.js`, `criminalIncome.js`). Like the crisis above they are the calm reading, not "every presence holds":
+  // a calm place has no danger on its way, lives on no supply a circle brings, and earns nothing from a black market.
+  dangerComing: false,
+  magicSupply: false,
+  criminalIncome: false,
 });

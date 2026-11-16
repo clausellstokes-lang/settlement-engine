@@ -2749,8 +2749,8 @@ margin *arm*. They are different fields on different rows and both are kept;
 **readiness `STRONG`** {crisis-scoped}
 1. `[visitor · crisis: any · guardPresence]` {settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
 2. `[ledger · crisis: any · no threat · no crisis: wartime]` What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
-3. `[street · no threat · crisis: any · no crisis: unrest]` The town does not spend much time thinking about being attacked: its defences are in good order, and its people know it.
-4. `[counterforce · no threat]` Nothing presses {settlement} at present: its defences would make any attack costly, so raiders and rivals look elsewhere.
+3. `[street · no threat · no danger coming · crisis: any · no crisis: unrest]` The town does not spend much time thinking about being attacked: its defences are in good order, and its people know it.
+4. `[counterforce · no threat · no danger coming]` Nothing presses {settlement} at present: its defences would make any attack costly, so raiders and rivals look elsewhere.
 5. `[ledger · threat · crisis: any · no crisis: occupied · guardPresence]` Danger has come to {settlement}, and the town meets it strongly defended.
 6. `[street · threat · crisis: any · no crisis: occupied]` People at {settlement} take the danger seriously, and they trust the town's defences to hold.
 7. `[street · crisis: wartime]` The war has made {settlement} think about being attacked, and what it sees when it looks is a town that would be hard to take.
@@ -2899,7 +2899,7 @@ supplies the ancestry.
 **`Invasion & War`: neither walls nor force** {crisis-scoped}
 1. `[ledger · crisis: any · no crisis: threat · no watch · no mercenary]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
 2. `[counterforce · no threat · crisis: any · no mercenary]` If anyone came for {settlement}, nothing about the town would stop them; it is safe for exactly as long as nobody comes.
-3. `[street · no threat · crisis: any]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
+3. `[street · no threat · no danger coming · crisis: any]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
 4. `[counterforce · threat · crisis: any · no watch · no crisis: occupied · no mercenary]` {settlement} has no line and no force, and danger is close at hand.
 5. `[street · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied · no mercenary]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.
 6. `[visitor · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied · no mercenary]` You find {settlement} with no wall and nobody under arms, and its people keeping close to home until the danger passes.
@@ -2948,11 +2948,12 @@ supplies the ancestry.
 3. `[threshold]` {settlement} can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
 
 **`Economic Survival`: `WEAK`** {colour}
-1. `[ledger · guardPresence]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
-2. `[street · guardPresence]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
-3. `[unfolding]` {settlement}'s defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.
-4. `[ledger · no guardPresence]` {settlement} pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
-5. `[street · no guardPresence]` If {settlement} ever had to hire people to defend it, it would have to borrow the money first.
+1. `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
+2. `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
+3. `[unfolding · prosperity: ≤ comfortable · crisis: calm]` {settlement}'s defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.
+4. `[ledger · no guardPresence · prosperity: ≤ comfortable]` {settlement} pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
+5. `[street · no guardPresence · prosperity: ≤ comfortable]` If {settlement} ever had to hire people to defend it, it would have to borrow the money first.
+6. `[ledger · prosperity: ≥ prosperous]` {settlement} is well off, but little of its wealth is set aside for its defence, and a long crisis would soon outrun what is.
 
 **`Economic Survival`: `CRITICAL`** {colour}
 1. `[ledger]` {settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.
@@ -3228,8 +3229,8 @@ the leash is the state, not a fate.
 3. `[visitor]` The danger at {settlement} comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.
 
 **structure `null` (nothing organized recognized)**
-1. `[ledger · no organised crime]` {settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.
-2. `[street · colour]` What goes wrong at {settlement} goes wrong one thing at a time and belongs to whoever did it.
+1. `[ledger · no organised crime · no criminal income]` {settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.
+2. `[street · no criminal income]` What goes wrong at {settlement} goes wrong one thing at a time and belongs to whoever did it.
 3. `[visitor · colour]` Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.
 
 **capture `none`**
@@ -3331,7 +3332,7 @@ may not say the contract is failing unless the economic arm supplies that.
 **watch PRESENT**
 1. `[ledger · colour]` {settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the town and is not built for what arrives from outside it.
 2. `[street · gate]` There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
-3. `[visitor · colour]` Anyone walking {settlement} late is watched, not stopped, and the watchmen make sure you know it.
+3. `[visitor · no crisis: occupied · no crisis: wartime]` Anyone walking {settlement} late is watched, not stopped, and the watchmen make sure you know it.
 
 **NO organized force at all** {colour}
 1. `[ledger · no crisis: under_siege · no crisis: wartime · no crisis: occupied]` {settlement} has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.
@@ -3817,9 +3818,10 @@ relied on by nothing.
 3. `[street]` People at {settlement} know that part of the town's work now holds up only with help beyond ordinary labour.
 
 **`magicDependency` false**
-1. `[ledger · colour]` Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.
-2. `[counterforce · magic]` Whatever magic reaches {settlement}, the town does not rest on it: nothing it lives by would stop without it.
-3. `[street · colour]` The town would go on as it is if the arcane went away; nothing it lives by waits on a spell.
+1. `[ledger · no magic supply]` Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.
+2. `[counterforce · magic · no magic supply]` Whatever magic reaches {settlement}, the town does not rest on it: nothing it lives by would stop without it.
+3. `[street · no magic supply]` The town would go on as it is if the arcane went away; nothing it lives by waits on a spell.
+4. `[ledger · magic supply]` {settlement}'s own work does not lean on magic, but no trade road reaches it, and some of what it lives on is brought in by magic.
 
 **`magicDependency` false, availability absent** {colour}
 1. `[ledger]` No one works magic at {settlement}, and nothing in the town depends on it.
@@ -6994,11 +6996,13 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[visitor]` Fresh repairs show on {settlement}'s {defwork}; the town keeps its defences in working order against a real threat.
 
 **`WALLED-QUIET`** {crisis-scoped}
-1. `[visitor · no threat · crisis: any · no crisis: unrest]` Though the present peace asks nothing of its defences, {settlement} keeps its {defwork} in repair: mending costs less than building again.
-2. `[elder · no threat · crisis: any]` The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.
-3. `[ledger · no threat · crisis: any]` {settlement}'s accounts show little spent on its {defwork} now that it asks little of it, since built work needs little upkeep.
+1. `[visitor · no threat · no danger coming · crisis: any · no crisis: unrest]` Though the present peace asks nothing of its defences, {settlement} keeps its {defwork} in repair: mending costs less than building again.
+2. `[elder · no threat · no danger coming · no unrest · crisis: any]` The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.
+3. `[ledger · no threat · no danger coming · no unrest · crisis: any]` {settlement}'s accounts show little spent on its {defwork}, since built work needs little upkeep and the town asks little of its defences now.
 4. `[visitor · threat · crisis: any]` {settlement} kept its {defwork} through the quiet years, and that care is earning its keep now.
 5. `[ledger · threat · crisis: any]` What {settlement} spent on its {defwork} in the quiet years is what stands between the town and the threat at hand.
+6. `[visitor · danger coming · no threat · crisis: any]` {settlement} kept its {defwork} in repair through the quiet years, and with news of danger on the way, the town is glad it did.
+7. `[ledger · unrest · no threat · no danger coming · crisis: any]` {settlement}'s {defwork} face outward, and the trouble the town has now is not the kind they keep out.
 
 **`WALLED-STRAINED`**
 1. `[ledger · watch · no crisis: under_siege · no crisis: occupied]` {settlement}'s accounts keep its {defwork} in repair and stretch no further, so the defences stand and too few people man them.
@@ -7013,7 +7017,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 1. `[street · no threat · crisis: any]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
 2. `[visitor · crisis: any]` No wall marks where {settlement} ends; the last houses simply give way to open country.
 3. `[street · threat · crisis: any]` {settlement} is too small to wall, and what has come for it now makes the smallness a danger rather than a protection.
-4. `[ledger · no threat · no crisis: wartime · crisis: any]` {settlement} has no wall, and nothing threatens it now that a wall would keep out.
+4. `[ledger · no threat · no danger coming · no crisis: wartime · crisis: any]` {settlement} has no wall, and nothing threatens it now that a wall would keep out.
 5. `[unfolding · threat · crisis: any]` {settlement} has no wall to fall back behind, so the threat now at hand is being met in the open, house by house.
 
 **`UNWALLED-LARGE`** {colour}

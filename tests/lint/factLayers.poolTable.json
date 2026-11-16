@@ -342,12 +342,12 @@
    "src": "map:measured"
   },
   "DS-DEF-11::UNWALLED-SMALL": {
-   "layer": 2,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `danger coming` (the history's live tensions, layer 4); was 2 by map:measured (BAR4-CORPUS-DEF, 2026-11-16, kind D1)"
   },
   "DS-DEF-11::WALLED-QUIET": {
-   "layer": 4,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `danger coming` (the history's live tensions, layer 4); was 4 by map:measured (BAR4-CORPUS-DEF, 2026-11-16, kind D1)"
   },
   "DS-DEF-11::WALLED-STRAINED": {
    "layer": 4,
@@ -386,8 +386,8 @@
    "src": "map:measured"
   },
   "DS-DEF-1::readiness STRONG": {
-   "layer": 4,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `danger coming` (the history's live tensions, layer 4); was 4 by map:measured (BAR4-CORPUS-DEF, 2026-11-16, kind D1)"
   },
   "DS-DEF-1::readiness WEAK": {
    "layer": 4,
@@ -514,8 +514,8 @@
    "src": "map:measured"
   },
   "DS-DEF-2::Invasion & War: neither walls nor force": {
-   "layer": 2,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `danger coming` (the history's live tensions, layer 4); was 2 by map:measured (BAR4-CORPUS-DEF, 2026-11-16, kind D1)"
   },
   "DS-DEF-2::Invasion & War: walls AND professional garrison": {
    "layer": 4,
