@@ -1,0 +1,8 @@
+{"id":"C217292","town":"bar0-village-famine-rand-37","sev":"MED","kind":"STATE","why":"'market handles more than the village could ever use' is a plenty line, unmarked, under CRISIS Famine, deficit 13%, 'Not viable'","other":"C217283"}
+{"id":"C217422","town":"bar0-village-famine-rand-37","sev":"MED","kind":"PAIR","why":"Maltster 'only runs when grain is in surplus' yet its row 'Malted barley' is unmarked; FOOD gives surplus 0%, famine, stores 1.1 months","other":"C217321"}
+{"id":"C217521","town":"bar0-village-famine-rand-37","sev":"MED","kind":"STATE","why":"Weekly market 'General trade' row offers livestock with no mark, though FOOD's failed source is livestock under Famine and sibling dairy rows are marked scarce","other":"C217459"}
+{"id":"C217617","town":"bar0-village-famine-rand-37","sev":"MED","kind":"PAIR","why":"'No significant exports' against 'some of what leaves the village entered it as imports' and TRADE exports Transit trade, Raw wool, Livestock","other":"C217622"}
+{"id":"C217633","town":"bar0-village-famine-rand-37","sev":"LOW","kind":"BROKEN","why":"'its herds comes first': plural subject with singular verb","other":""}
+{"id":"C217939","town":"bar0-village-famine-rand-37","sev":"LOW","kind":"PAIR","why":"Ottilia 'Wants Collect the tribute the dragon demands' — no dragon in header (monsters: frontier); Defense says 'nothing threatens it now'","other":"C217826"}
+{"id":"C218186","town":"bar0-village-famine-rand-38","sev":"MED","kind":"PAIR","why":"'work party heads out together, singing' is a cheerful ordinary-times scene under Famine, stability 'Desperate — hunger is eroding order'; sibling lines show hunger and shame","other":"C218184"}
+{"id":"DONE","lines":1731,"blocks":2,"flags":7}
