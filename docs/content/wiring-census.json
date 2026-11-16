@@ -8,7 +8,7 @@
       "src/domain/display/stateProse/defenseStateProse.js": "7f1bc6432a4f63e3e93d68aa473a9361ad2594127db6fbd828e9e96452bf950b",
       "src/domain/display/stateProse/stressorsStateProse.js": "e35010d5433bd9cdbde3f6b67c82302bef32d95f51f5b25cb58b0bb1a063d212",
       "src/domain/display/stateProse/warFaithStateProse.js": "e3c17afb8e07d402d4fb8b3a342d9d2c03bc958151b3bb3e0bcbe199eaedeac9",
-      "src/domain/display/stateProse/dossierMounts.js": "5032fe8e0b7d67567a054af136f13a8a54b7d7aa267b1cf4ba3fce629eb750b7"
+      "src/domain/display/stateProse/dossierMounts.js": "66dc430305a530d9ea275c83aec18acd3ba0a7512bc687363369144fbcbed1ad"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1397
+    "producerIndexFiles": 1398
   },
   "totals": {
     "pools": 859,
