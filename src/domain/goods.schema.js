@@ -118,6 +118,7 @@
  * R | l | chains          | surface | src/generators/cascadeGenerator.js
  * R | l | identity+chains | surface | src/generators/computeActiveChains.js
  * R | l | chains          | surface | src/generators/economy/economicState.js
+ * R | l | none            | member  | src/generators/economy/exportsImportedShort.js
  * R | l | chains          | surface | src/generators/economy/finishedGoodsDemand.js
  * R | l | none            | member  | src/generators/economy/foodBalance.js
  * R | l | none            | member  | src/generators/economy/nativeEconomicInputs.js
