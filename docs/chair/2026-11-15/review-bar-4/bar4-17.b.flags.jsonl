@@ -1,0 +1,6 @@
+{"id":"C42033","town":"bar0-town-occupied-rand-23","sev":"MED","kind":"PAIR","why":"says collaborators include someone the players will recognise; the crisis card says collaborates: no one is named, no local power gains","other":"C42014"}
+{"id":"C43552","town":"bar0-village-calm-rand-21","sev":"MED","kind":"STATE","why":"personal trade title Beemaster given to Alyona Alexeyev, who PEOPLE gives as (f)","other":""}
+{"id":"C43690","town":"bar0-village-calm-rand-21","sev":"MED","kind":"STATE","why":"says the village lives on one trade whose bad year sinks it; INCOME gives Harvest 71%, Tithes 20%, the coal stream 9%","other":"C43687"}
+{"id":"C43556","town":"bar0-village-calm-rand-21","sev":"MED","kind":"STATE","why":"pasture grazed in common offered; LAND gives grazing land absent (Leatherworking chain) and C43693 says the country gives too little livestock","other":"C43693"}
+{"id":"C43900","town":"bar0-village-calm-rand-21","sev":"LOW","kind":"LACKS","why":"visitors told which few streets to avoid; a village of 265 in timber compounds on lanes has no streets to name","other":""}
+{"id":"DONE","lines":2418,"blocks":2,"flags":5}
