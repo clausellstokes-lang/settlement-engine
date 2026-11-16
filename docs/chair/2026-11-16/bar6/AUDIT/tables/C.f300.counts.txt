@@ -1,0 +1,25 @@
+towns 300 · instances 196 · towns with one 143
+L6: towns 117 · instances 149 · distinct lines 92
+L7: towns 45 · instances 47 · distinct lines 38
+  6a-size       towns   18 · instances   19 · distinct lines   19 · found by an earlier law 0
+  6a-w          towns   45 · instances   51 · distinct lines   37 · found by an earlier law 0
+  6b-denied     towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6b-nomaker    towns   20 · instances   20 · distinct lines    4 · found by an earlier law 0
+  6b-out        towns    5 · instances    5 · distinct lines    2 · found by an earlier law 0
+  6b-w          towns    2 · instances    2 · distinct lines    1 · found by an earlier law 0
+  6c-arms       towns    5 · instances   11 · distinct lines    5 · found by an earlier law 4
+  6c-halfway    towns    8 · instances    8 · distinct lines    3 · found by an earlier law 0
+  6c-unsold     towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6c-unworked   towns    3 · instances    3 · distinct lines    3 · found by an earlier law 0
+  6d-blurb      towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6d-court      towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6d-fields     towns    9 · instances    9 · distinct lines    1 · found by an earlier law 0
+  6d-force      towns    3 · instances    3 · distinct lines    1 · found by an earlier law 0
+  6d-members    towns   12 · instances   12 · distinct lines   12 · found by an earlier law 0
+  6d-paid       towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6e-sovereign  towns    1 · instances    1 · distinct lines    1 · found by an earlier law 1
+  7a-nothreat   towns   15 · instances   15 · distinct lines   15 · found by an earlier law 0
+  7b-defence    towns   11 · instances   11 · distinct lines   11 · found by an earlier law 0
+  7c-plenty     towns   10 · instances   10 · distinct lines    8 · found by an earlier law 0
+  7d-traffic    towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  7w-tone       towns   10 · instances   10 · distinct lines    4 · found by an earlier law 0
