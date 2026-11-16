@@ -31,7 +31,7 @@ const EMITTED = /^supabase\/functions\/_shared\/\w+Bundle\.js$/;
 
 /** file → [class, the writer lines it holds, the reason] */
 const WRITERS = Object.freeze({
-  'src/generators/economy/economicState.js': ['ASKS', 8, 'the chain-derived exports, the institutional services and the export bonus each ask the leaf (`goodsOnlyRefusedChainsMake`); the military and slave-trade streams name the institution\'s trade, which no chain makes; the rest return the lists'],
+  'src/generators/economy/economicState.js': ['ASKS', 9, 'the chain-derived exports, the institutional services and the export bonus each ask the leaf (`goodsOnlyRefusedChainsMake`); the military and slave-trade streams name the institution\'s trade, which no chain makes; `dropExportsImportedShort` splices out an export a shortage import names (it takes away, it adds no good); the rest return the lists'], // BAR3-CLOSE-DOORS-1 (2026-11-15, the close of the round BAR3): 8 -> 9, the one splice line of lane BAR3-DEFECON-2 batch 2's `dropExportsImportedShort` (its table of books: a TAKES_AWAY writer in a file classed ASKS)
   'src/domain/worldPulse/resourceDynamicsKernel.js': ['ASKS', 3, 'a resource transition re-derives both lists through `deriveExportsFromChains` and `deriveLocalProductionFromChains`, which ask the leaf'],
   'src/generators/economy/primaryTradeLists.js': ['USER', 5, 'the pre-chain exports, which economicState replaces with the chain-derived list; the forced and forbidden goods are the user\'s (`goodsToggles`)'],
   'src/generators/economy/customTradeEndpointIntegration.js': ['USER', 5, 'the user\'s custom trade goods and endpoints'],
