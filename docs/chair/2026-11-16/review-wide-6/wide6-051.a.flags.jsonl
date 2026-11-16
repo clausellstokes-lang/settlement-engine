@@ -1,0 +1,7 @@
+{"id":"C138729","town":"bar0-metropolis-calm-rand-38","sev":"LOW","kind":"BROKEN","why":"Criminal services row 'Contraband transport' prints no source-house line, though the 11 other criminal rows each end with their house","other":""}
+{"id":"C138738","town":"bar0-metropolis-calm-rand-38","sev":"LOW","kind":"BROKEN","why":"Criminal services row 'Fencing stolen goods' prints no source-house line, unlike its siblings that each name a house","other":""}
+{"id":"C139211","town":"bar0-metropolis-calm-rand-38","sev":"LOW","kind":"PAIR","why":"Economics says spices are \"Needed, and not brought in\"; Luxury goods quarter sells \"Silks, spices, precious goods\" and imports list exotic goods","other":"C138374"}
+{"id":"C139658","town":"bar0-metropolis-calm-rand-38","sev":"LOW","kind":"LACKS","why":"Smuggling network 'unofficial landing points'; trade access is road only, no docks or water route on HOUSES","other":""}
+{"id":"C139724","town":"bar0-metropolis-calm-rand-38","sev":"MED","kind":"PAIR","why":"Defense tab 'Arcane Support · None, No arcane practitioners on the rolls' against the Arcane Orders power (4 members, Sage, Alchemist) and the Magical services list","other":"C139450"}
+{"id":"C139746","town":"bar0-metropolis-calm-rand-38","sev":"MED","kind":"PAIR","why":"Magic tab 'Reliance on magic: None' (food by magic 0%, roles absent) against 'holds up only with help beyond ordinary labour'","other":"C139741"}
+{"id":"DONE","lines":3350,"blocks":1,"flags":6}
