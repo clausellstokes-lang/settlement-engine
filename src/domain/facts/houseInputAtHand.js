@@ -128,7 +128,7 @@ const wholeTokens = (a, b) => { const x = sing(norm(a)), y = sing(norm(b)); retu
 export function localProducerSupplies(requirement, institutions) {
   const rule = LOCAL_PRODUCERS.find((candidate) => candidate.requirement.test(requirement));
   if (!rule) return false;
-  return nativeSemanticNames(/** @type {any[]} */ (institutions)).some((name) => rule.institution.test(name));
+  return nativeSemanticNames(institutions).some((name) => rule.institution.test(name));
 }
 
 /**
@@ -167,12 +167,12 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   // (SPENT_GROUND_WORKERS: the mine, the quarry, the boats) is fed by no import there either: the page's SV6 reading, one fact
   const spentGround = onWhollySpentGround(record, house);
   if (spentGround && SPENT_GROUND_WORKERS.includes(String(catalogIdForName(str(house?.name)) ?? ''))) return 'missing';
-  if (!spentGround && localProducerSupplies(raw, liveInstitutions(/** @type {any} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
+  if (!spentGround && localProducerSupplies(raw, liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
 
   // The route, where no siege shuts it.
   const besieged = arr(config.stressTypes).includes('under_siege');
   if (!besieged && hasTradeRouteConnection(str(config.tradeRouteAccess))
-    && (spec?.route || institutionHasAnyTag(/** @type {any} */ (house || {}), [...ROUTE_HOUSE_TAGS]))) return 'route';
+    && (spec?.route || institutionHasAnyTag(house || {}, [...ROUTE_HOUSE_TAGS]))) return 'route';
 
   // The imports bring the raw good; the food record names the source or imports the staple.
   const imports = arr(es.primaryImports).map(str);
@@ -184,7 +184,7 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   return 'missing';
 }
 
-/** A row a user authored (custom content), as the page's leaf reads it (`crisisStoppedRow.js`). @param {any} row */
+/** A row a user authored (custom content), as the page's leaf reads it (`crisisStoppedRow.js`). @param {{ custom?: unknown, source?: unknown, isCustom?: unknown } | null | undefined} row */
 const isCustom = (row) => row?.custom === true || row?.source === 'custom' || row?.isCustom === true;
 
 /**
@@ -253,7 +253,7 @@ function nearbyGrounds(settlement) {
  * stone), and a house that works the ground itself (`SPENT_GROUND_WORKERS`) is fed by no import there either ("an import
  * feeds a buyer, never the work on the ground", SV6's own rule): THIS SIDE MOVED (the page's mark is unchanged). A live
  * ground of the input still answers it.
- * @param {any} record @param {any} house
+ * @param {unknown} record @param {{ name?: unknown } | null | undefined} house
  */
 function onWhollySpentGround(record, house) {
   const name = house && typeof house.name === 'string' ? house.name : '';
@@ -316,8 +316,8 @@ export function housesShortOf(record) {
   if (!record || typeof record !== 'object') return new Map();
   const cached = SHORT_OF.get(record);
   if (cached) return cached;
-  const r = /** @type {any} */ (record);
-  const gaps = /** @type {Array<{ institution: string, chain?: unknown }>} */ (arr(r.resourceAnalysis?.gaps).filter((/** @type {any} */ g) => g && typeof g === 'object' && typeof g.institution === 'string' && g.institution));
+  const r = /** @type {Parameters<typeof houseInputAtHand>[0] & { resourceAnalysis?: { gaps?: unknown } | null }} */ (record);
+  const gaps = /** @type {Array<{ institution: string, chain?: unknown }>} */ (arr(r?.resourceAnalysis?.gaps).filter((/** @type {unknown} */ x) => { const g = /** @type {{ institution?: unknown } | null | undefined} */ (x); return !!g && typeof g === 'object' && typeof g.institution === 'string' && !!g.institution; }));
   /** @type {Map<string, string>} */
   const out = new Map();
   for (const name of [...new Set(gaps.map((g) => g.institution))]) {
@@ -346,7 +346,7 @@ const SAWN_GOODS = Object.freeze(['Milled timber', 'Milled lumber']);
  * @param {string} good the output asked about
  * @param {ReadonlyArray<string>} nearbyResources the town's resource keys @param {ReadonlyArray<string>} depletedResources
  * @param {ReadonlyArray<unknown> | null | undefined} institutions the roster
- * @param {(house: any) => boolean} isSawmill the caller's own test of a sawmill (its gate's keyword)
+ * @param {(house: unknown) => boolean} isSawmill the caller's own test of a sawmill (its gate's keyword)
  * @param {Readonly<Record<string, { rawResource?: unknown }>>} chains the chain table (`RESOURCE_CHAINS`, the caller's)
  * @returns {boolean} true unless the good is a sawn good and no sawmill of the roster has its timber
  */
@@ -355,7 +355,7 @@ export function sawnGoodFed(good, nearbyResources, depletedResources, institutio
   const depleted = new Set(arr(depletedResources).map((r) => resourceKeyForLabel(str(r)) || str(r)));
   const record = { config: { nearbyResources: arr(nearbyResources).map(str).filter((k) => !depleted.has(k)) }, economicState: {}, institutions };
   return institutions.filter((i) => !!i && isSawmill(i))
-    .some((house) => houseInputAtHand(record, 'timber', /** @type {any} */ (house), chains.timber) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {any} */ (house), chains.mountainTimber) !== 'missing');
+    .some((house) => houseInputAtHand(record, 'timber', /** @type {Parameters<typeof houseInputAtHand>[2]} */ (house), chains.timber) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {Parameters<typeof houseInputAtHand>[2]} */ (house), chains.mountainTimber) !== 'missing');
 }
 
 /**
@@ -391,7 +391,8 @@ export const houseRunsChain = (chain, name) => {
 /**
  * The chains a house runs, as `[chainKey, chain]` (`houseRunsChain`).
  * @param {unknown} name
- * @param {Readonly<Record<string, unknown>>} chains the chain table (`RESOURCE_CHAINS`, the caller's: WEAVE ST-2)
- * @returns {Array<[string, any]>}
+ * @param {Readonly<Record<string, C>>} chains the chain table (`RESOURCE_CHAINS`, the caller's: WEAVE ST-2)
+ * @template {{ processingInstitutions?: ReadonlyArray<string> } | null | undefined} C
+ * @returns {Array<[string, C]>}
  */
-export const chainsOfHouse = (name, chains) => Object.entries(chains).filter(([, c]) => houseRunsChain(/** @type {any} */ (c), name));
+export const chainsOfHouse = (name, chains) => Object.entries(chains).filter(([, c]) => houseRunsChain(c, name));

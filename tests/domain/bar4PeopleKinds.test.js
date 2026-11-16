@@ -70,7 +70,9 @@ const ROWS = /** @type {Array<[string, string, string, string]>} */ ([
   // the pair's second tie in the temper of its first (TI1): beside a devoted mentorship the enemy's kind is a rival's
   ['C18833', 'bar0-hamlet-calm-rand-23', 'Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since.', 'Alaa ibn Khalid and Latifa al-Amin trained together and have competed ever since.'],
   // a successor drawn only where the place can pass (TI1): the index resolves to another of the pool's own lines
-  ['C41801', 'bar0-town-occupied-rand-22', 'Bing Shimizu named Wei Kimura as successor in front of witnesses.', "Wei Kimura spent seven years at Bing Shimizu's side."],
+  // BAR4-CLOSE-SWEEP (2026-11-16, the chair's PD1): the pair keeps its drawn index 7 (as before the round) and prints the successor line's TWIN
+  // (`mentor_legacy.desc#7`, where the two share no place); at f19c3b28b the gate had re-drawn it to desc#4's twin ("…spent seven years…")
+  ['C41801', 'bar0-town-occupied-rand-22', 'Bing Shimizu named Wei Kimura as successor in front of witnesses.', 'Bing Shimizu once told a full room that Wei Kimura was the best pupil they had taught.'],
   ['C4412', 'bar0-city-under_siege+famine-rand-22', 'Bought the vineyard by lending its old owner money', 'Came by the business by lending its old owner money'],
   ['C37293', 'bar0-town-calm-rand-22', "Bashir al-Jabbar governs on Imad al-Andalusi's credit.", "Bashir al-Jabbar holds office on Imad al-Andalusi's credit."],
   ['C23720', 'bar0-metropolis-calm-rand-21', 'a good ear on the waterfront.', 'a good ear at the berths.'],

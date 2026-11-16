@@ -4,6 +4,7 @@
 import { pickVariant } from '../kernel/proseHash.js';
 import { HANDLER_TIE_LINES } from './people/handlerTieLines.js';
 import { sharesPower } from '../domain/facts/sharedPower.js';
+import { pairSharesPlaceOf } from '../domain/facts/pairPlace.js'; // BAR4-CLOSE-SWEEP (the chair's PD1, PD1b): `shared place`'s one reader, for the successor line's twin
 
 export const MANNERISMS = [
   'drums fingers on surfaces when thinking',
@@ -1668,7 +1669,8 @@ const voteUnheld = (row, a, b) => {
   return row.votes === 'both' ? !sharesPower(a, b) : !sharesPower(a, a);
 };
 const closureFor = (row, a, b) => (row && typeof row === 'object' && typeof row.twin === 'function'
-  && ((row.sharedTrade && pairTradeKnown(a, b) && !pairSharesTrade(a, b)) || (row.votes && voteUnheld(row, a, b))) ? row.twin : closureOf(row));
+  && ((row.sharedTrade && pairTradeKnown(a, b) && !pairSharesTrade(a, b)) || (row.votes && voteUnheld(row, a, b))
+    || (row.sharedPlace && pairSharesPlaceOf(null, [a, b]) !== true)) ? row.twin : closureOf(row)); // PD1: no place to pass, the twin
 const pairProse = (salt, variants, order = null, debt = false) => Object.assign((r, s, variant, force) => {
   const [a, b] = isReversedTie(variant) ? [s, r] : [r, s]; // TAIL-TIES-2 (T6): the pair's direction, read off the stored variant
   const drawn = order ? endsOf(a, b, order[0], order[1]) : [a, b], ends = debt && secretOwes(drawn[1], drawn[0]) && !secretOwes(drawn[0], drawn[1]) ? [drawn[1], drawn[0]] : drawn; // BAR3-PEOPLE-2 (C35097): the pair's one debt (secretOwes, at the file's end)
@@ -2124,7 +2126,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} still uses ${r.name}'s methods and ${r.name}'s ledger format. Everyone who sees ${s.name}'s work recognises the teacher.`, colour: true, sharedTrade: true, // BAR3-PEOPLE (C22325)
         twin: (r, s) => `${s.name} still keeps ${r.name}'s hours and ${r.name}'s ledger format. Everyone who deals with ${s.name} recognises the teacher.` },
-      { line: (r, s) => `${r.name} named ${s.name} as successor in front of witnesses. The formal handover has not happened.`, successor: true, needs: ['shared place'] }, // BAR4-PEOPLE (P1, C41801; the chair's TI1): a successor is drawn only where the place can pass (288 towns of the 720)
+      { line: (r, s) => `${r.name} named ${s.name} as successor in front of witnesses. The formal handover has not happened.`, successor: true, sharedPlace: true, // BAR4-PEOPLE (P1, C41801; the chair's TI1): a successor only where the place can pass (`pairPlace.js :: pairSharesPlaceOf`)
+        // BAR4-CLOSE-SWEEP (the chair's PD1, 2026-11-16): ITS TWIN where the pair shares no place (as desc 3, 4, 6 carry theirs), so the
+        // pool keeps its eight lines for every pair; the twin names no successor (`successor` is the line's, never the twin's)
+        twin: (r, s) => `${r.name} once told a full room that ${s.name} was the best pupil they had taught. ${r.name} has not said it since.` },
     ]),
     tension: pairProse('t', [
       { line: (r, s) =>

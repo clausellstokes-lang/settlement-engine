@@ -251,9 +251,10 @@ const TILLING_HOUSE = /subsistence|common field|household farm|farming community
  * 8aef8e7d46). Where the line is the composer's one-source frame, its one source is not grain or the mill, and the record
  * handed holds a live tilling house, the frame names both (`FRAMES.oneTilled`, the same index; its flavour kept). A record
  * handed without its roster (`{ economicState }` alone) is read as before. Pure.
- * @param {string} line @param {any} s the record handed @returns {string}
+ * @param {string} line @param {unknown} handed the record handed @returns {string}
  */
-function tilledOneFrame(line, s) {
+function tilledOneFrame(line, handed) {
+  const s = /** @type {{ institutions?: unknown } | null | undefined} */ (handed);
   if (!Array.isArray(s?.institutions)) return line;
   for (let i = 0; i < FRAMES.one.length; i += 1) {
     const [head, tail] = FRAMES.one[i].split('{A}');
@@ -275,9 +276,10 @@ function tilledOneFrame(line, s) {
  * famine home's own field). Every caller hands the economy (the Economics tab, the PDF, the Foundry journal, the identity
  * record at assembly), so all of them read one answer. Spelled here, not read through `facts/factsOf.js`: this module rides
  * the eager engine core and the fact homes are pinned lazy (`tests/architecture/engineCoreLazyEdge.test.js`). Pure.
- * @param {any} s the record handed @returns {object} a facts-like object (`factVocabulary.js :: FactsLike`'s `crisis`, `famine`)
+ * @param {unknown} handed the record handed @returns {object} a facts-like object (`factVocabulary.js :: FactsLike`'s `crisis`, `famine`)
  */
-function foodwaysFactsOf(s) {
+function foodwaysFactsOf(handed) {
+  const s = /** @type {{ economicState?: { foodSecurity?: { hasSiege?: unknown, hasFamine?: unknown, foodRecord?: { band?: unknown } | null } | null } | null } | null | undefined} */ (handed);
   const fs = s?.economicState?.foodSecurity;
   const kinds = [...(fs?.hasSiege === true ? ['under_siege'] : []), ...(fs?.hasFamine === true ? ['famine'] : [])];
   const band = fs?.foodRecord?.band;

@@ -106,7 +106,7 @@ const norm = (x) => ` ${x.toLowerCase().replace(/[_/()\-,.]+/g, ' ').replace(/\s
  */
 function inputAnswered(s, chainKey, inst) {
   if (!CHAIN_INPUTS[chainKey]) return true; // a chain this reader cannot name prints nothing (never a rule sentence)
-  return houseInputAtHand(/** @type {Parameters<typeof houseInputAtHand>[0]} */ (s), chainKey, /** @type {Parameters<typeof houseInputAtHand>[2]} */ (inst), /** @type {any} */ (RESOURCE_CHAINS)[chainKey]) !== 'missing';
+  return houseInputAtHand(/** @type {Parameters<typeof houseInputAtHand>[0]} */ (s), chainKey, /** @type {Parameters<typeof houseInputAtHand>[2]} */ (inst), /** @type {Readonly<Record<string, Parameters<typeof houseInputAtHand>[3]>>} */ (RESOURCE_CHAINS)[chainKey]) !== 'missing';
 }
 
 /** @param {{ name?: unknown } | null | undefined} inst @returns {string} the house as the sentence names it ("the potter"; "the sawmill" of a commercial one) */

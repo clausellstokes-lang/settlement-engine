@@ -85,7 +85,7 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
   });
 
   it('soak1k-2402: the one-earner line that says nothing is failing, under famine', () => {
-    expect(readOn(2402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'on one trade.', s.name) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it */.split(/(?<=\.)\s+/)[1])).toEqual([['nothing is failing', 'hunger']]);
+    expect(readOn(2402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'lives largely on one source of income.', s.name) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it. BAR4-CLOSE-SWEEP (2026-11-16): the anchor follows BAR4-CORPUS-ECO 7354471e5's DECLARED rewording of DS-ECO-12 one source v3 (C43690: "one trade" -> "one source of income"); its second sentence, the one read, unchanged */.split(/(?<=\.)\s+/)[1])).toEqual([['nothing is failing', 'hunger']]);
   });
 
   it('soak1k-5404: pilgrims queue patiently in a besieged city', () => {

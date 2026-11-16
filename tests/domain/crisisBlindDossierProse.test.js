@@ -126,6 +126,12 @@ const PRESENCE_SETTER = {
   // BAR4-CORPUS-ECO (2026-11-16): the two atoms added beside the food sources (`leadingSourceSpent.js`, `ownPlots.js`)
   'source spent': (f, _a, want) => ({ ...f, leadingSourceSpent: want }),
   'own plots': (f, _a, want) => ({ ...f, ownPlots: want }),
+  // BAR4-CLOSE-SWEEP (2026-11-16): the round's other one-home presence atoms (`factVocabulary.js`: BAR4-CORPUS-DEF 6f8081add's
+  // `magic supply`, `danger coming`, `criminal income`, which DS-DEF / DS-GEN lines exclude; BAR4-HOUSES 3cf213071's `timber at hand`)
+  'magic supply': (f, _a, want) => ({ ...f, magicSupply: want }),
+  'danger coming': (f, _a, want) => ({ ...f, dangerComing: want }),
+  'criminal income': (f, _a, want) => ({ ...f, criminalIncome: want }),
+  'timber at hand': (f, _a, want) => ({ ...f, timberAtHand: want }),
   imports: (f, _a, want) => ({ ...f, imports: want ? ['X'] : [] }),
   exports: (f, _a, want) => ({ ...f, exports: want ? ['X'] : [] }),
   priest: (f, _a, want) => ({ ...f, faith: { ...f.faith, seniorCleric: want ? { name: 'X' } : null } }),
@@ -269,7 +275,9 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
     // 16 at BAR2-CORPUS batch 1 (2026-11-15, measured on the merged tree af120bdd4): a calm claim cured at the source.
     // 15 at BAR3-CORPUS batch 1 (2026-11-15, measured on lane/bar3-corpus-2026-11-15 over 59185b62a): a calm claim cured at the source.
     // 14 at BAR3-CORPUS-3 batch 3 (2026-11-15, measured on lane/bar3-corpus-2026-11-15 over 52f0a1684): DS-DEF-4 organized v4's "very little street violence" cured at the source.
-    expect(claims).toBeGreaterThanOrEqual(14);
+    // 13 at BAR4-CORPUS-DEF 6f8081add (2026-11-16, measured by BAR4-CLOSE-SWEEP on the joined line f19c3b28b against c4ac1ef84a; the
+    // seat's DECLARED rewording, its hand-back's inventory diff): DS-DEF-11 WALLED-QUIET v3's threat claim cured at the source (14 - 1).
+    expect(claims).toBeGreaterThanOrEqual(13);
   });
 
   it('a pool the marks partition is never mute under a crisis, and never draws a calm claim there', () => {

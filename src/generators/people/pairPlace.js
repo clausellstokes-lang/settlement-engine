@@ -16,50 +16,10 @@
  * Pure; no draw. One home each; the vocabulary's two atoms read them through the facts the tie draw hands its lines.
  */
 
-/** @typedef {{ id?: unknown, institution?: { kind?: unknown, family?: unknown, title?: unknown } | null, memberships?: unknown }} PlaceCard */
+// BAR4-CLOSE-SWEEP (the chair's PD1b): `shared place`'s reader and its two pair tests live in `domain/facts/pairPlace.js` (moved verbatim)
+import { cardOf, leadsPowerOf, pairOfOneHouse, pairSharesPlaceOf } from '../../domain/facts/pairPlace.js';
 
-/** @param {unknown} card @returns {PlaceCard | null} */
-const cardOf = (card) => (card && typeof card === 'object' ? /** @type {PlaceCard} */ (card) : null);
-/** @param {PlaceCard | null} c @returns {Array<{ power?: unknown, rank?: unknown }>} */
-const membershipsOf = (c) => (Array.isArray(c?.memberships) ? c.memberships : []);
-
-/**
- * The first card holds the first rank of a power the second sits in.
- * @param {unknown} a @param {unknown} b @returns {boolean}
- */
-export function leadsPowerOf(a, b) {
-  const theirs = membershipsOf(cardOf(b));
-  return membershipsOf(cardOf(a)).some((m) => m?.rank === 1 && m.power && theirs.some((n) => n?.power === m.power));
-}
-
-/**
- * The two stand for houses of one family, or wear one face.
- * @param {unknown} a @param {unknown} b @returns {boolean}
- */
-export function pairOfOneHouse(a, b) {
-  const ia = cardOf(a)?.institution, ib = cardOf(b)?.institution;
-  if (ia?.kind === 'house' && ib?.kind === 'house' && ia.family && ia.family === ib.family) return true;
-  return typeof ia?.title === 'string' && ia.title === ib?.title;
-}
-
-/**
- * THE ONE READER of `shared place`: the first card of the pair may name the second its successor.
- * @param {{ npcs?: unknown } | null | undefined} record @param {unknown} pair `[from, to]`
- * @returns {boolean | undefined}
- */
-export function pairSharesPlaceOf(record, pair) {
-  if (!Array.isArray(pair) || pair.length !== 2) return undefined;
-  const roster = Array.isArray(record?.npcs) ? /** @type {Array<PlaceCard | null | undefined>} */ (record.npcs) : null;
-  /** @param {unknown} card */
-  const held = (card) => {
-    const c = cardOf(card);
-    const found = c && roster && c.id != null ? roster.find((n) => n && String(n.id) === String(c.id)) : null;
-    return found || c;
-  };
-  const a = held(pair[0]), b = held(pair[1]);
-  if (!a?.institution || !b?.institution) return undefined;
-  return pairOfOneHouse(a, b) || leadsPowerOf(a, b);
-}
+export { leadsPowerOf, pairOfOneHouse, pairSharesPlaceOf };
 
 /**
  * THE ONE READER of `lone tie`: the two cards carry at most one tie between them, either way round.
