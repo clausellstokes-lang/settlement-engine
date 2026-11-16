@@ -820,7 +820,8 @@ function pickTrue(pick, pool, ok, twin) {
 function outlookFactsOf(settlement) {
   const town = /** @type {OutlookSettlement | null | undefined} */ (/** @type {unknown} */ (settlement));
   const eco = town?.economicState || {};
-  const law = bandForVariable(/** @type {Parameters<typeof bandForVariable>[0]} */ (/** @type {unknown} */ (settlement)), 'law_order'); const rawStress = /** @type {{ stress?: unknown }} */ (/** @type {unknown} */ (settlement))?.stress, stressTypes = (Array.isArray(rawStress) ? rawStress : rawStress ? [rawStress] : []).map((e) => String(/** @type {{ type?: unknown } | null} */ (e)?.type ?? ''));
+  // BAR5-BAND: the band the Foundations print (domain/display/foundationBandShown.js: one reading of the row on every tab)
+  const law = foundationBandShown(settlement, 'law_order', String(bandForVariable(/** @type {Parameters<typeof bandForVariable>[0]} */ (/** @type {unknown} */ (settlement)), 'law_order'))); const rawStress = /** @type {{ stress?: unknown }} */ (/** @type {unknown} */ (settlement))?.stress, stressTypes = (Array.isArray(rawStress) ? rawStress : rawStress ? [rawStress] : []).map((e) => String(/** @type {{ type?: unknown } | null} */ (e)?.type ?? ''));
   const record = eco.foodSecurity?.foodRecord;
   /** @param {unknown} list @returns {string[]} */
   const lower = (list) => (Array.isArray(list) ? list : []).map((x) => String(x).toLowerCase());
@@ -854,7 +855,7 @@ export function outputChipBesideWord(score, label) {
   const high = rung >= 1 + PROSPERITY_LABELS.indexOf('Prosperous'), low = rung <= 1 + PROSPERITY_LABELS.indexOf('Poor');
   return !((score < 35 && high) || (score >= 60 && low));
 }
-import { bandForVariable } from '../causalState.js'; import { PROSPERITY_LABELS } from '../prosperityRank.js'; import { displayTradeList, tradeListsAsPrinted } from './tradeListDisplay.js'; // at the END: no line above moves
+import { bandForVariable } from '../causalState.js'; import { foundationBandShown } from './foundationBandShown.js'; import { PROSPERITY_LABELS } from '../prosperityRank.js'; import { displayTradeList, tradeListsAsPrinted } from './tradeListDisplay.js'; // at the END: no line above moves
 // W2-A-LEAVES (row 3): the leaf the Magic tab's reliance line names its source from (an import at the foot, so the
 // lines the prose wiring census cites above keep their numbers).
 import { magicSourceOf } from '../facts/magicSource.js';

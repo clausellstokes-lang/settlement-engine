@@ -21,7 +21,7 @@ import { RULES } from '../helpers/pageLaws/law2.mjs';
 import { bandForVariable } from '../../src/domain/causalState.js';
 import { crimeWaveStands, foundationBandShown } from '../../src/domain/display/foundationBandShown.js';
 import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
-import { lawBandOf } from '../../src/domain/facts/lawBand.js';
+import { lawBandOf, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
 import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
 import { COURT_AND_PRISON, COURT_NO_PRISON, NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
@@ -97,13 +97,20 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
   }, 600_000);
 
   test('(b) ruling LB2: the row reads the one home, and no row moves by it (the 720, town by town)', () => {
+    // RE-KEYED BY BAR5-BAND, 2026-11-16 (the chair's ruling LB1, written inside `lawBandOf` by LB2): a quiet place that keeps
+    // no office of the law (`quietPlaceKeepsLaw`) prints at least "strained"; every other row is as before. 45 of the 720 lift.
+    /** @type {string[]} */ const lifted = [];
     const failures = collectSeedFailures(CENSUS_720, (seed) => {
       const t = town(seed);
       const now = foundationBandShown(t, 'law_order', /** @type {string} */ (bandForVariable(t, 'law_order')));
       expect(now, `${seed}: the row reads lawBandOf`).toBe(lawBandOf(t));
-      expect(now, `${seed}: the row's band as before`).toBe(rowBefore(t));
+      const before = rowBefore(t);
+      const floored = quietPlaceKeepsLaw(t) && RANK[/** @type {keyof typeof RANK} */ (before)] < RANK.strained;
+      if (floored) lifted.push(seed);
+      expect(now, `${seed}: the row's band as before, or the quiet place's floor`).toBe(floored ? 'strained' : before);
     });
     expectNoSeedFailures(failures);
+    expect(lifted.length, 'BAR5-BAND LB1: the quiet places the floor lifts in the 720').toBe(45);
   }, 900_000);
 
   test('(c) the positive control: C42116, its stored line fires beside its row; the printed line is its twin', () => {

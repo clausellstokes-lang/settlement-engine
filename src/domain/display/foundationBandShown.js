@@ -13,6 +13,9 @@
  * THE CAP, in the row's own scale (surplus > adequate > strained > critical > collapsed; no new word), as
  * `rulingAuthorityShown.js` caps its row: in each state above the row prints at most "strained" (for the lower-is-better
  * criminal opportunity, the word the ladder gives that band: "Elevated"). A band at or below the cap is left as it is.
+ * The law-and-order row reads `facts/lawBand.js :: lawBandOf` (ruling LB2), which holds its cap and its floor (BAR5-BAND,
+ * ruling LB1); every place that prints or reads the row's band reads it through here: the Foundations (SubstrateTab.jsx),
+ * the Outlook (`dossierViewModel.js :: outlookFactsOf`), the printed Campaign-State grid (`pdf/sections/SystemStateSnapshot.jsx`).
  * Pure: no draw, no write; the model's score does not move.
  */
 import { deriveSupportingCapabilities } from './defenseDisplay.js';

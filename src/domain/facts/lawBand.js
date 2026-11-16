@@ -20,9 +20,21 @@
  */
 import { bandForVariable } from '../causalState.js';
 import { LAW_ORDER_RUNGS } from './factVocabulary.js';
+import { canonStressors } from '../canonicalAccessors.js'; // BAR5-BAND LB1 (b): crisisKind.js's carrier (a), read eagerly (crisisKind is lazily pinned)
+import { liveInstitutions } from '../institutions/institutionRoster.js'; // LB1 (a): the roster deriveLawOrder reads
+import { institutionIsLawOrder } from '../institutionClassify.js';
 
 /** The row's cap under a crime wave (BAR3-LABELS L2; the criminal-opportunity row keeps its own in `foundationBandShown.js`). */
 const CRIME_WAVE_CAP = 'strained';
+
+/** THE FLOOR of a quiet place (BAR5-BAND, the chair's ruling LB1 of 2026-11-16; vetoable by the owner). */
+const QUIET_PLACE_FLOOR = 'strained';
+/**
+ * The Overview's Safety word is Moderate or better: the ladder's top three rungs, read off the label as
+ * `display/labelBands.js :: safetyBandOf` reads it (the longest rung the label starts with, not run on into a letter).
+ * Kept here because this leaf takes no display import; `tests/domain/bar5LawBandFloor.test.js` holds the two readings equal.
+ */
+const QUIET_SAFETY_WORD = /^(?:Very Safe|Safe|Moderate)(?![A-Za-z])/;
 
 /**
  * The live tensions hold a crime wave (`history.currentTensions`, the field `foundationBandShown.js :: crimeWaveStands` reads).
@@ -43,8 +55,29 @@ export function lawBandOf(record) {
   const band = bandForVariable(/** @type {never} */ (record), 'law_order');
   const at = LAW_ORDER_RUNGS.indexOf(String(band));
   if (at < 0) return undefined;
-  const capped = crimeWave(record) ? Math.min(at, LAW_ORDER_RUNGS.indexOf(CRIME_WAVE_CAP)) : at;
+  const capped = crimeWave(record) ? Math.min(at, LAW_ORDER_RUNGS.indexOf(CRIME_WAVE_CAP))
+    : quietPlaceKeepsLaw(record) ? Math.max(at, LAW_ORDER_RUNGS.indexOf(QUIET_PLACE_FLOOR)) : at;
   return /** @type {'collapsed'|'critical'|'strained'|'adequate'|'surplus'} */ (LAW_ORDER_RUNGS[capped]);
+}
+
+/**
+ * A QUIET PLACE'S LAW HAS NOT FAILED (BAR5-BAND, the chair's ruling LB1; the wide read's rows in bar0-hamlet-calm-rand-33,
+ * -34, -36 and bar0-thorp-calm-rand-32). `deriveLawOrder` starts at 50 and a small place loses by construction (its
+ * internal-security score, "no court and no watch", an elder council or a commune), so the row printed Critical or
+ * Collapsed beside Safety "Moderate" with nothing wrong in the place. THE FLOOR, in the row's own scale (no new word):
+ * where (a) the town keeps no office of the law (`institutionIsLawOrder` over the live roster, the reading `deriveLawOrder`
+ * itself uses), (b) no crisis is in force (the stress container's typed entries: `crisisKind.js :: activeCrisisTypes`'s
+ * carrier (a), read through `canonicalAccessors.js :: canonStressors` because crisisKind is lazily pinned and this leaf is
+ * eager), (c) no crime wave stands and (d) the
+ * page's own Safety word is Moderate or better, the band is at least `strained`. The model's score does not move.
+ * @param {unknown} record @returns {boolean}
+ */
+export function quietPlaceKeepsLaw(record) {
+  if (!record || typeof record !== 'object' || crimeWave(record)) return false;
+  if (canonStressors(/** @type {never} */ (record)).some((e) => !!e && typeof e === 'object' && typeof /** @type {{ type?: unknown }} */ (e).type === 'string' && /** @type {{ type: string }} */ (e).type !== '')) return false;
+  const label = /** @type {{ economicState?: { safetyProfile?: { safetyLabel?: unknown } } }} */ (record).economicState?.safetyProfile?.safetyLabel;
+  if (typeof label !== 'string' || !QUIET_SAFETY_WORD.test(label.trim())) return false;
+  return !liveInstitutions(/** @type {never} */ (record)).some((i) => institutionIsLawOrder(/** @type {{ catalogId?: string, name?: string }} */ (i)));
 }
 
 /**
