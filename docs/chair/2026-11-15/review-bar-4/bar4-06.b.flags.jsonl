@@ -1,0 +1,8 @@
+{"id":"C15874","town":"bar0-city-wartime-rand-23","sev":"LOW","kind":"STATE","why":"Garrison card offers 'Mercenary hire'; DEFENCE says mercenary company: none (garrison is a standing force, not a hire-out company)","other":""}
+{"id":"C15779","town":"bar0-city-wartime-rand-23","sev":"MED","kind":"PAIR","why":"'timber carts stopped coming' presumes timber is brought in; Settlement necessity says timber and building wood are needed and not brought in; TRADE imports no timber","other":"C16197"}
+{"id":"C16424","town":"bar0-city-wartime-rand-23","sev":"MED","kind":"BROKEN","why":"heading says Institutions behind this power (34); the block lists 29 distinct houses under City Council (23 held + 6 'under the ruling power'); HOUSES 38 minus 9 elsewhere = 29","other":""}
+{"id":"C16539","town":"bar0-city-wartime-rand-23","sev":"LOW","kind":"PAIR","why":"says the city asks little of its walls and gates; CRISIS is Wartime and the war footing has soldiers on the walls","other":"C16508"}
+{"id":"C17460","town":"bar0-hamlet-calm-rand-21","sev":"LOW","kind":"LACKS","why":"steward's hook presumes orders and buyers collecting; TRADE exports/imports none, no market or fair, isolated hamlet of 53 in famine","other":""}
+{"id":"C17576","town":"bar0-hamlet-calm-rand-21","sev":"LOW","kind":"BROKEN","why":"'1 active, 1 impaired' totals 2 but All (4); LAND has four chains, one impaired, so active reads 3 (town one's 11+1=All 12 does add up)","other":"C17578"}
+{"id":"C17793","town":"bar0-hamlet-calm-rand-21","sev":"MED","kind":"PAIR","why":"steward receives food shipments by a covert route; FOOD brought in 0%, imports cover None, TRADE imports none, 'No food comes into Lidosinum by trade'","other":"C17572"}
+{"id":"DONE","lines":2406,"blocks":2,"flags":7}
