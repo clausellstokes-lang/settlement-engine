@@ -1,4 +1,4 @@
-[gate-tail] start:  19:03:20 up 13 min,  0 user,  load average: 2.09, 1.80, 1.11 · cores: 4
+[gate-tail] start:  19:38:59 up 48 min,  0 user,  load average: 2.62, 1.95, 2.03 · cores: 4
 LAW 8 over 30 towns: towns 13 · instances 70 · distinct lines 40 · things 31 · on a LAW 2/3 line 11
 LAW 2/3 rules of this shape (held by the round in flight), for the union: towns 12 · instances 34 · of them on a LAW 8 line 10
     L2.famine.meat         towns    1 · instances     2
@@ -12,7 +12,8 @@ LAW 2/3 rules of this shape (held by the round in flight), for the union: towns 
     L3.foodLineStopped     towns    1 · instances     1
     L3.needed              towns    2 · instances     2
     L3.outputs             towns    2 · instances     3
-  8a.input     towns    8 · instances    54 · distinct lines   29 · things   19 · on a LAW 2/3 line 11
+  8a.input     towns    8 · instances    48 · distinct lines   26 · things   17 · on a LAW 2/3 line 11
+  8a.mild      towns    2 · instances     6 · distinct lines    3 · things    2 · on a LAW 2/3 line 0
   8b.person    towns    8 · instances     8 · distinct lines    5 · things    8 · on a LAW 2/3 line 0
   8c.harvest   towns    1 · instances     2 · distinct lines    2 · things    1 · on a LAW 2/3 line 0
   8d.export    towns    1 · instances     4 · distinct lines    4 · things    4 · on a LAW 2/3 line 0
@@ -73,6 +74,6 @@ CONTROLS (stands/bar/expect must be FOUND; explained must be clear; weak reporte
   neg explained C86893   n/a                          town not in this render
   neg explained C0343    n/a                          town not in this render
 controls off: 0
-[gate-tail] end:  19:03:21 up 13 min,  0 user,  load average: 2.09, 1.80, 1.11
+[gate-tail] end:  19:39:00 up 48 min,  0 user,  load average: 2.62, 1.95, 2.03
 [gate-tail] full log: <log>
 [gate-tail] exit: 0 (the gate's own status, not a pipe's)

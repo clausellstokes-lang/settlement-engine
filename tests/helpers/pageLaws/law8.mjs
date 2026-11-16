@@ -23,7 +23,9 @@ export const GOODS = {
   timber: { words: /\b(timber|lumber)\b/i, houses: /\b(carpenters?|sawmills?|shipwrights?|shipyards?|coopers?|joiners?|wheelwrights?|cartwrights?|woodworkers?|woodcarvers?)\b/i },
   stone: { words: /\bstone\b/i, houses: /\b(stonemasons?|masons?|stonecutters?|sculptors?)\b/i },
   herbs: { words: /\b(medicinal herbs|herbs)\b/i, houses: /\b(apothecar(?:y|ies)|herbalists?|physicians?|hospitals?|infirmar(?:y|ies)|healers?' (?:hall|house))\b/i },
-  luxury: { words: /\b(luxury goods|luxury materials|spices?|silks?)\b/i, houses: /\b(luxury goods quarter|luxury|spice (?:merchants?|market|traders?)|silk (?:merchants?|traders?))\b/i },
+  // precision draw 1 (720, seed 720): "spices" alone does not empty a luxury quarter that also deals in silk and precious things
+  luxury: { words: /\b(luxury goods|luxury materials|silks?)\b/i, houses: /\b(luxury goods quarter|luxury|silk (?:merchants?|traders?))\b/i },
+  spices: { words: /\bspices?\b/i, houses: /\bspice (?:merchants?|market|traders?|quarter)\b/i },
   grain: { words: /\b(grain|barley|wheat)\b/i, houses: /\b(bakers?|baker(?:y|ies)|brewer(?:y|ies|s)?|maltsters?|malthouse|distiller(?:y|ies|s)?|mills?|millers?)\b/i },
   livestock: { words: /\b(livestock|cattle|herds?)\b/i, houses: /\b(dairy|dairy farmers?|butchers?|butcher(?:y|ies)|shambles|slaughterhouses?|cheesemakers?|stockyards?)\b/i },
   hides: { words: /\b(animal hides|hides|leather)\b/i, houses: /\b(tanners?|tanner(?:y|ies)|leatherworkers?|saddlers?|cobblers?|cordwainers?)\b/i },
@@ -55,6 +57,15 @@ export function houseMarks(T, name) {
   }
   for (const e of T.services) if (e.house === name && e.marked) marks.push({ tab: 'Systems/Services', i: e.titleIdx, line: `${e.titleRaw} / ${e.desc}` });
   return marks;
+}
+
+/** A milder state the page gives the house: its card's " · Vulnerable", or a Services row titled "… Vulnerable" (precision
+ * draw 1: a row so titled is not bare; where the page's worst state for it is "cannot be had", it is WEAK, counted apart). */
+export function houseMild(T, name) {
+  const c = T.cards.find((x) => x.name === name);
+  if (c && /· Vulnerable\b/.test(c.head)) return { tab: 'Systems/Institutions', i: c.headIdx, line: c.head };
+  const e = T.services.find((x) => x.house === name && /\sVulnerable$/.test(x.titleRaw));
+  return e ? { tab: 'Systems/Services', i: e.titleIdx, line: e.titleRaw } : null;
 }
 
 /** The surfaces a house prints on: its card (chip line, or its head when it has no chips) and each Services row. */
@@ -168,8 +179,9 @@ export function law8(T, town) {
       const works = named.has(c.name) || (GOODS[k].houses.test(c.name) && !NOT_A_WORKSHOP.test(c.name))
         || (k === 'luxury' && /\b(silks?|spices?|luxury goods)\b/i.test(c.lines.map((l) => l.text).join(' ')) && /\bluxury\b/i.test(c.name));
       if (!works || !bare(c.name)) continue;
-      if (!starved.has(c.name)) starved.set(c.name, { good: k, against });
-      for (const at of houseSurfaces(T, c.name)) push('8a.input', at, against, `the page says ${k} is not had (${against.how}); ${c.name}, whose trade cannot go on without it, carries no mark`, { thing: c.name, good: k });
+      const mild = houseMild(T, c.name);
+      if (!starved.has(c.name) && !mild) starved.set(c.name, { good: k, against });
+      for (const at of houseSurfaces(T, c.name)) push(mild ? '8a.mild' : '8a.input', at, against, `the page says ${k} is not had (${against.how}); ${c.name}, whose trade cannot go on without it, carries no mark`, { thing: c.name, good: k, how: against.how, recordNamed: named.has(c.name) });
     }
   }
 
@@ -261,14 +273,17 @@ export function law8(T, town) {
       const stopped = tr.filter((e) => e.marked);
       if (stopped.length) for (const e of tr) {
         if (e.marked || !bare(e.house)) continue;
+        if (/\b(barges?|boats?|ships?|vessels?|ferr(?:y|ies)|rafts?)\b/i.test(`${e.title} ${e.house}`)) continue; // precision draw 1: the boatwright's work is no road's
         for (const at of houseSurfaces(T, e.house)) push('8d.transport', at, { tab: 'Systems/Services', i: stopped[0].titleIdx, line: `${stopped[0].titleRaw} / ${stopped[0].desc} | ${road.text}` }, `the siege closes the road and the page stops the other transport rows; ${e.title} carries no mark`, { thing: e.house });
       }
     }
   }
   // income rows: an unmarked income row whose chain of the same name the page prints Impaired, beside marked siblings
   const income = readIncome(T);
-  if (T.crises.size && income.some((r) => r.marked)) for (const r of income) {
-    if (r.marked) continue;
+  // precision draw 1: outside a siege the row is WEAK (a famine town still works what it holds), and a row that says its
+  // iron is imported is true beside a spent local ground
+  if (siege && income.some((r) => r.marked)) for (const r of income) {
+    if (r.marked || /\bimported\b/i.test(r.line)) continue;
     const ch = T.chains.find((c) => c.name === r.name && /Impaired|Stopped|Failed/.test(c.state) && c.from.length && c.from.every((f) => /\(depleted\)|\(exhausted\)/.test(f)));
     if (ch) push('8d.income', { tab: 'Systems/Economics', i: r.i, line: r.line }, { tab: 'Systems/Economics', i: ch.headIdx, line: `${ch.head} / From ${ch.from.join(' · ')}` }, `the chain ${ch.name} is printed ${ch.state} on depleted ground; its income row carries no mark while the rows beside it do`, { thing: r.name });
   }
