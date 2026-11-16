@@ -1,0 +1,86 @@
+[
+ {
+  "id": "C24951",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-metropolis-calm-rand-21",
+  "section": "World/History",
+  "text": "A surge of magic no one could contain marked the temple district and everyone caught in it, and what it did has never entirely worn away",
+  "why": "The live wild-magic tension is the legacy of the PAST event 'The Wild Magic' (same template, and the hooks speak of 'the affected district', singular). The same History tab places that one surge in the temple district and, a few lines up, in the merchants' quarter. Nothing in the town says the surge struck two districts.",
+  "evidence": [
+   "A surge of magic no one could contain marked the temple district — cal-09.txt C24951 (World/History, The Wild Magic); record s.history.historicalEvents[The Wild Magic].description",
+   "An uncontrolled surge of magic left its mark on the merchants' quarter — cal-09.txt C20952, C24923; record s.history.currentTensions[type wild_magic].description",
+   "The affected district is slowly spreading its strangeness — record s.history.currentTensions[wild_magic].plotHooks"
+  ],
+  "writers": [
+   {
+    "words": "A surge of magic no one could contain",
+    "files": "src/data/historyDescVariants.js"
+   }
+  ]
+ },
+ {
+  "id": "C53689",
+  "read": "the wide read",
+  "cls": "LEFT-BY-BAR3",
+  "town": "(a wide-read town: seeds in docs/chair/2026-11-14/probes/READ-ALL/packets9/seeds.wide.txt; the row in docs/chair/2026-11-15/review-wide/)",
+  "section": "World/History",
+  "text": "two events each given as what shaped the city (the pilgrimage; the Interregnum)",
+  "why": "LEFT by BAR3-PLACES-3: not located in the 720: bear its read town first.",
+  "evidence": [],
+  "writers": []
+ },
+ {
+  "id": "C26792",
+  "read": "REVIEW-BAR-3",
+  "cls": "LEFT-BY-BAR3",
+  "town": "(see BAR3-PLACES-3-HANDBACK.md, the first holder's item 5)",
+  "section": "World/History",
+  "text": "…the right to rule is widely questioned…",
+  "why": "LEFT by BAR3-PLACES-3: the page shows the council endorsed; the cure needs the late record (BRIEF-BAR3 amendment 6): ONE LINE to the chair with the one key first.",
+  "evidence": [],
+  "writers": [
+   {
+    "words": "widely questioned",
+    "files": "src/data/historyData.js"
+   }
+  ]
+ },
+ {
+  "id": "C14176",
+  "read": "REVIEW-BAR-3",
+  "cls": "LEFT-BY-BAR3",
+  "town": "(3 of 161: see BAR3-POWERS-HANDBACK.md)",
+  "section": "Systems/Power",
+  "text": "Behind <seat> by too much to challenge openly, so they get their way through petitions and procedure instead.",
+  "why": "PARKED by BAR3-POWERS: `src/generators/power/factionStanding.js` rank 1 prints beside a Contested seat in 3 of 161 towns; the display-side file was not that seat's: it is yours this round.",
+  "evidence": [],
+  "writers": [
+   {
+    "words": "too far behind to challenge",
+    "files": ""
+   }
+  ]
+ },
+ {
+  "id": "C26840",
+  "read": "REVIEW-BAR-4",
+  "cls": "WEAK",
+  "town": "bar0-metropolis-calm-rand-22",
+  "section": "Systems/Power",
+  "text": "Thieves' Guild works against Grand Guild Consortium, and Grand Guild Consortium is winning.",
+  "why": "The Consortium does have the upper hand: it is Dominant against a Minor Thieves' Guild and hunting it in earnest. But 'is winning' claims more than the record's own narrative ('not catching all of it ... does not go away') and sits badly beside the page's crime-wave line. It overstates the case rather than being plainly false.",
+  "evidence": [
+   "Grand Guild Consortium (Dominant) ... Thieves' Guild (Minor) — cal-10.txt GOVERNMENT; power 38 vs 12 in record s.powerStructure.factions",
+   "\"captureState\": \"adversarial\", \"narrative\": \"Grand Guild Consortium is hunting Thieves' Guild in earnest but not catching all of it; Thieves' Guild pulls back and regroups, and does not go away.\" — record s.powerStructure.factionRelationships",
+   "Crime is rising faster than those in charge can answer it — cal-10.txt C25027 (crime-wave tension)",
+   "stability: Unstable (pervasive organized crime) — cal-10.txt GOVERNMENT"
+  ],
+  "writers": [
+   {
+    "words": "is winning",
+    "files": "src/generators/factionDynamics.js src/data/dossierStateProse/warFaith.generated.js src/data/dossierStateProse/stressors.generated.js src/data/people/dmPowerLines.js"
+   }
+  ]
+ }
+]
