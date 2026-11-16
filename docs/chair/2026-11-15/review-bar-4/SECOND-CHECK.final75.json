@@ -1,0 +1,1239 @@
+[
+ {
+  "id": "C0300",
+  "town": "bar0-city-under_siege+famine-rand-21",
+  "section": "Systems/Institutions",
+  "text": "Fresh meat",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": "the reading copy dropped the mark the page prints (Impaired)",
+  "why": "The Butchers house is marked Impaired on the rendered Institutions tab and Fresh meat is marked Impaired on Services; the reader saw only the packet's split line, which lost the mark. The row is judged with its house's mark.",
+  "evidence": [
+   "ButchersCraftsImpaired — dump Systems/Institutions line 234 (the house carries the Impaired mark; the packet split the line and its dedupe dropped 'CraftsImpaired' after C0297)",
+   "Fresh meat Impaired / Needs Livestock / game — cal-01.txt C0578, C0582 (Systems/Services)",
+   "Butchers (3-8): 'Supply route severed. Operating at minimal capacity or shut down.' affectedServices ['fresh meat'] — record s.economicState.tradeDependencies (Butchers entry)"
+  ]
+ },
+ {
+  "id": "C1438",
+  "town": "bar0-city-under_siege+famine-rand-21",
+  "section": "World/NPCs",
+  "text": "Secret: Controls a hidden cache of grain reserves that could feed the settlement for two more weeks",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The header's 0.1 months is the town's known store; a hidden hoard is outside that tally by definition, and the town's own live tension and several page lines say grain is being hoarded off the market. C1161 ('what is already in store') is not denied by a cache laid in before the siege. A secret stating a new fact nothing denies is not a flag.",
+  "evidence": [
+   "TENSIONS: resource scarcity (parties: Those hoarding what they can ...) — cal-01.txt header",
+   "Rationing has begun, the wealthy are hoarding — cal-01.txt C0101",
+   "A store of the scarce goods is being kept off the market on purpose — cal-01.txt C0240",
+   "Oh Matsumoto has stores laid in before the shortage, enough to matter. — cal-01.txt C0120"
+  ]
+ },
+ {
+  "id": "C2007",
+  "town": "bar0-city-under_siege+famine-rand-21",
+  "section": "World/History",
+  "text": "For 2 seasons a sickness worked through the settlement, emptying households and straining every institution past what it was built to bear",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": "the reading copy dropped the event's heading (The Plague Years)",
+  "why": "The rendered page prints the Plague Years heading over this line; the packet dropped the event headings (the Schism heading is missing before C2004 the same way). The sentence sits under its own event, not under The Siege.",
+  "evidence": [
+   "The Plague YearsDisastermajor — dump World/History line 1518 (immediately before the sickness line)",
+   "The Plague Years (437 years ago, disaster, major) — header PAST"
+  ]
+ },
+ {
+  "id": "C4061",
+  "town": "bar0-city-under_siege+famine-rand-22",
+  "section": "World/NPCs",
+  "text": "Secret: Controls a hidden cache of grain reserves that could feed the settlement for two more weeks",
+  "readers": "ab",
+  "class": "EXPLAINED",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "THE CHAIR: the same secret was held EXPLAINED at C1438 by another checker (a hidden hoard is outside the public tally; the page says the wealthy are hoarding): one rule for both || the checker (WEAK): A hidden hoard in a few hands is the town's own live tension ('the wealthy are hoarding'), so a secret grain cache is not foreign to this town, and C3983 does not rule out hidden stores. What is off is the size: two weeks of food for the whole city is about five times the ledger's entire stores (0.1 months, about three days). That is a matter of degree, not an invented fact.",
+  "evidence": [
+   "Secret: Controls a hidden cache of grain reserves that could feed the settlement for two more weeks — cal-02.txt C4061 (Usama al-Dimashqi's card)",
+   "stores 0.1 months (granary True) — header FOOD",
+   "What is still grown here and what is already in store are all there will be until it lifts. — cal-02.txt C3983",
+   "Rationing has begun, the wealthy are hoarding — cal-02.txt C2153",
+   "what is left here is in a few hands; those who hold it have quadrupled the price — cal-02.txt C2398",
+   "resource scarcity (parties: Those hoarding what they can, ...) — header TENSIONS"
+  ]
+ },
+ {
+  "id": "C6091",
+  "town": "bar0-city-under_siege+famine-rand-23",
+  "section": "Systems/Institutions",
+  "text": "Every ward has its bakehouses, with weights and prices set by the guild.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The sentence only describes the house, which exists in a city of 12,556 that has guilds. It claims no output. The unmarked service row the reader means is C6093, judged separately.",
+  "evidence": [
+   "Bakers (5-15) — cal-03 header HOUSES; Craft guilds (30-80) — HOUSES",
+   "Every ward has its bakehouses, with weights and prices set by the guild. — cal-03 C6091 (the house's own description)"
+  ]
+ },
+ {
+  "id": "C10322",
+  "town": "bar0-city-wartime-rand-21",
+  "section": "Systems/Power",
+  "text": "Crown supply carts take what they need first, and local needs come second.",
+  "readers": "a",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The reader looked for a crown among the local powers. The town's own page says the War Council is crown-appointed and that crown authority over the war runs through its military channels, and the Wartime crisis has outside army requisitions. Crown supply carts taking first is what that crisis says the town suffers, so the line is not false.",
+  "evidence": [
+   "Crown-appointed emergency body with powers over requisition, conscription, and price controls. — cal-04.txt C10497 (War Council)",
+   "Crown authority over the war flows through military channels now. — cal-04.txt C10486, C10491",
+   "Suppliers adulterating grain and leather sold to crown contracts. — cal-04.txt C10570",
+   "An army requisition officer has arrived with orders that will strip the settlement — cal-04.txt C9075",
+   "What Nandapura has heard from the rest of the realm — cal-04.txt C12173"
+  ]
+ },
+ {
+  "id": "C15779",
+  "town": "bar0-city-wartime-rand-23",
+  "section": "Summary/Plot Hooks",
+  "text": "The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left in the yards.",
+  "readers": "ab",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The readers misread the hook. It says the timber carts have stopped, which is exactly why timber is 'needed, and not brought in' now, and the war's requisition of carts and road explains the stop. It is a hook stating a new fact that nothing denies (NOT A FLAG, second read).",
+  "evidence": [
+   "The timber carts stopped coming a month ago — cal-06 C15779 (Plot Hooks, Resource Conflict)",
+   "Needed, and not brought in: timber and building wood, clay. — cal-06 C16197",
+   "The army has the carts and the road — cal-06 C15633; Crown supply carts take what they need first — C16327"
+  ]
+ },
+ {
+  "id": "C17793",
+  "town": "bar0-hamlet-calm-rand-21",
+  "section": "World/NPCs",
+  "text": "Secret: Is receiving food shipments through a covert route and selling them at triple the official price after dark",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The line is a secret: covert, after-dark shipments are by nature outside the recorded trade that FOOD and TRADE tally, and the hamlet's own scarcity tension and C17721 describe food sold at a holder's price. A secret stating a new fact the header cannot record is not a flag. It is a thin case for a hamlet of 53, but nothing in the record denies it.",
+  "evidence": [
+   "TENSIONS: resource scarcity (parties: Those hoarding what they can, Those who cannot pay the prices, Those who would fix a fair price) — cal-06.txt header",
+   "What food there is goes to whoever can pay the holder's price. — cal-06.txt C17721",
+   "reason: grew at a strategic mountain pass — header FOUNDING",
+   "No food comes into Lidosinum by trade. — cal-06.txt C17572 (the open, recorded trade)"
+  ]
+ },
+ {
+  "id": "C17926",
+  "town": "bar0-hamlet-calm-rand-22",
+  "section": "Summary/Overview",
+  "text": "The strongest armed household has started making decisions on everyone's behalf without asking.",
+  "readers": "ab",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "This is the power structure's recent-conflict line. The rules' NOT A FLAG list says such a line may state a new fact of its own that the header does not deny. Stable, Approved and a single Dominant council do not deny that one armed household is overstepping, and the town's live uprising tension, plus the militia captain's own wish to settle who gives the militia orders, fit it.",
+  "evidence": [
+   "\"recentConflict\": \"The strongest armed household has started making decisions on everyone's behalf without asking.\" — record s.powerStructure.recentConflict",
+   "popular uprising (parties: Those pressing their demands, Those in charge, who will not give way, ...) — header TENSIONS",
+   "Shu Zhou (f), the militia captain @ Citizen militia [sits on: Free Elder Council (rank 3)] — header PEOPLE",
+   "Wants Have those who govern confirm, in writing, who may give orders at the citizen militia. — cal-07.txt C18285"
+  ]
+ },
+ {
+  "id": "C19517",
+  "town": "bar0-hamlet-under_siege-rand-22",
+  "section": "Summary/Crisis",
+  "text": "leads the military",
+  "readers": "a",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The reader went by DEFENCE alone. GOVERNMENT has a War Council of the Military kind, and Accia Brutus heads it (rank 1), so 'leads the military' as the crisis cast's reason for her is true by the town's own power list.",
+  "evidence": [
+   "powers: Feudal Stewardship (Dominant); War Council (Strong) — header GOVERNMENT",
+   "War Council / Military / Strong — cal-07.txt C19915-C19917",
+   "Contests the seatMilitary40 / first Accia Brutus — cal-07.txt C19930-C19932",
+   "Emergency committee with authority over rationing, conscription, and defence spending — cal-07.txt C19972",
+   "Accia Brutus (f) ... [sits on: War Council (rank 1)...] — header PEOPLE"
+  ]
+ },
+ {
+  "id": "C26984",
+  "town": "bar0-metropolis-calm-rand-22",
+  "section": "Systems/Defense",
+  "text": "Uaxacatl's food trades are failing, and what they fail to put by is food the metropolis would miss if it were cut off.",
+  "readers": "ab",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "'Food trades' means the local food-producing chains. By the record their grounds are 'failing' and 'collapsed', so the word is the record's own. FOOD reads Secure only because imports cover 46% and the granary holds 14.8 months, and that fits the clause about food the city would miss if it were cut off.",
+  "evidence": [
+   "\"The fields are exhausted or failing and no longer yield a dependable surplus.\" — record s.resourceAnalysis.resourceConditions (Extensive Grain Fields)",
+   "\"The river fishery has been over-fished and its commercial catch has collapsed.\" — record resourceConditions (River Fisheries)",
+   "Grain & Bread [vulnerable ...depleted]; Food Processing [impaired ...]; River Fishing [vulnerable ... depleted] — cal-10.txt LAND",
+   "A good part of what Uaxacatl eats is brought in — cal-10.txt C26402"
+  ]
+ },
+ {
+  "id": "C27089",
+  "town": "bar0-metropolis-calm-rand-22",
+  "section": "Systems/Magic",
+  "text": "If the help beyond ordinary work failed at Uaxacatl, the trade that makes its baked goods would yield less than it does now.",
+  "readers": "a",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "In the record, the baked-goods chain is propped up by divine provision (magicRecovery 0.4 on depleted grain fields), so it would yield less if that help failed. The reader's '0% by magic' figure is the town's food ledger, not this chain's own support.",
+  "evidence": [
+   "Grain & Bread chain: outputs [\"Baked goods\"], \"magicNote\": \"Blessed stores; divine provision fills the gap\", \"magicRecovery\": 0.4 — record s.economicState chain grain",
+   "supplied by Scroll scribe, Mages' district, Academy of magic, Enchanter's shop, Houses of worship and Great cathedral — cal-10.txt C27085"
+  ]
+ },
+ {
+  "id": "C34417",
+  "town": "bar0-town-calm-rand-21",
+  "section": "Summary/Plot Hooks",
+  "text": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "All of Niederhain's grain is imported (the 80% grown locally is fish), so one importer bringing in all the grain fits the record. The price spike is the plot hook's own new fact, and nothing in the header rules it out (NOT A FLAG: a plot hook stating a new fact).",
+  "evidence": [
+   "imports: Grain — cal-13.txt TRADE header",
+   "\"grain\": \"Forest terrain cannot produce this locally\" — record s.resourceAnalysis.imports.reasons",
+   "foodSources: [\"fish\"] — record s.economicState.foodSecurity.foodRecord (the 80% grown is fish, not grain)",
+   "Meals, ale and lodging here depend on grain brought in — cal-13.txt C34858",
+   "category \"Trade Monopoly\", hook \"One importer now brings in all the grain...\" — record s.economicViability.plotHooks[0]"
+  ]
+ },
+ {
+  "id": "C34791",
+  "town": "bar0-town-calm-rand-21",
+  "section": "Systems/Economics",
+  "text": "A good part of the copper ore Niederhain's work uses must come from elsewhere; when none comes, that work stands idle.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The two sentences agree: copper ore is needed by the Smelter, cannot be found locally, and is not brought in, so the copper work stands idle. The reader's premise (TRADE imports no copper) is true, but the sentence never says copper is imported. It says copper must come from elsewhere.",
+  "evidence": [
+   "Needed, and not brought in: stone, copper ore, gold and silver ore. — cal-13.txt C34812",
+   "\"copper ore\": \"Required by Smelter but not available in Forest terrain\" — record s.resourceAnalysis.imports.reasons (listed under imports.critical)"
+  ]
+ },
+ {
+  "id": "C34945",
+  "town": "bar0-town-calm-rand-21",
+  "section": "Systems/Resources",
+  "text": "A newcomer to Niederhain soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The line closes the Resource Exploitation block. The town's two exploited resources are worked only partly and leave as semi-finished goods, so much of their value is realised elsewhere. Being Wealthy on market and toll income does not contradict that, though the wording is loose.",
+  "evidence": [
+   "PartialMedicinal herbsvery high value / PartialTimbermedium value — cal-13.txt C34939, C34942 (the lines directly above)",
+   "\"reason\": \"Partial processing - worked only to semi-finished goods\" (exports value medium) — record s.resourceAnalysis.exports",
+   "medicinal herbs: Cannot produce final goods, limited to intermediate products — cal-13.txt LAND gaps"
+  ]
+ },
+ {
+  "id": "C34977",
+  "town": "bar0-town-calm-rand-21",
+  "section": "Systems/Power",
+  "text": "Two rival guilds are contesting control of the main trade route.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "This is the record's recent-conflict line, and nothing in the header denies it (NOT A FLAG: a recent-conflict line stating a new fact). The two rival guilds match the tense, escalating Merchant/Craft Guilds pair, and the trade route is the river that brings in 17% of income as tolls.",
+  "evidence": [
+   "\"recentConflict\": \"Two rival guilds are contesting control of the main trade route. ...\" — record s.powerStructure.recentConflict",
+   "Merchant Guilds ~ Craft Guilds: tense, escalating — cal-13.txt QUARRELS"
+  ]
+ },
+ {
+  "id": "C34978",
+  "town": "bar0-town-calm-rand-21",
+  "section": "Systems/Power",
+  "text": "Neither side will back down and Guild Council is avoiding the question.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "This is the second half of the same recent-conflict line. The Council's own quarrel with the Craft Guilds is over a separate ruling, so it can still be avoiding the route dispute between the two guilds. Nothing in the header denies that.",
+  "evidence": [
+   "\"recentConflict\": \"... Neither side will back down and Guild Council is avoiding the question.\" — record s.powerStructure.recentConflict",
+   "Guild Council vs Craft Guilds: moderate (A ruling that one power refuses to obey) — cal-13.txt QUARRELS"
+  ]
+ },
+ {
+  "id": "C38142",
+  "town": "bar0-town-calm-rand-23",
+  "section": "Systems/Services",
+  "text": "Potion brewing Vulnerable",
+  "readers": "a",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The row is not printed as plainly on offer: it carries the mark 'Vulnerable'. The shop's missing herbs are covered by imports of herbs and reagents, as C38179 says, so 'Vulnerable' (dependent on bought-in inputs) is the right state, not 'Short of'.",
+  "evidence": [
+   "Potion brewing Vulnerable — cal-15.txt C38142 (the row carries its own mark)",
+   "imports: ... Ritual wood and herbs (ancient grove damaged) ... Alchemical reagents and scribal supplies — cal-15.txt TRADE",
+   "the town buys from outside or that work stops — cal-15.txt C38179"
+  ]
+ },
+ {
+  "id": "C40012",
+  "town": "bar0-town-occupied-rand-21",
+  "section": "Systems/Defense",
+  "text": "Rival crews at Divoburg are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "readers": "a",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The page's own criminal structure says there is no single controlling authority and several gangs compete; rival crews are not a house, and a gang of up to thirty can hold rival crews. The reader's premise that the street gang is one crew 'working together' is not what the structure line says.",
+  "evidence": [
+   "Criminal structure: Semi-organized networks / ... lacks a single controlling authority. / Several gangs may be competing. — cal-16.txt C39993-C39995",
+   "Street gang / Pickpockets and bruisers working together. / Ten to thirty strong. — cal-16.txt C39519-C39521",
+   "The gangs are territorial and consistent. — cal-16.txt C39590"
+  ]
+ },
+ {
+  "id": "C42033",
+  "town": "bar0-town-occupied-rand-23",
+  "section": "Summary/Crisis",
+  "text": "The occupation's local collaborators include someone the players will recognise.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The crisis card only declines to name a collaborator, and the hook leaves the choice to the game master. Local people do sit on the Occupation Authority (the town's bowyer and its watch captain), so local collaborators exist. It is a hook stating a fact the header does not deny (NOT A FLAG, second read).",
+  "evidence": [
+   "collaborates: no one is named: no local power gains — cal-17 C42014",
+   "Walpurga Gallus (f), the bowyer @ Bowyers & fletchers (guild) [sits on: Guild Council (a member, no rank); Occupation Authority (a member, no rank)] — header PEOPLE",
+   "Crispus Cicero (m), the watch captain @ Town watch [sits on: Occupation Authority (rank 3); Guild Council (a member, no rank)] — header PEOPLE"
+  ]
+ },
+ {
+  "id": "C43556",
+  "town": "bar0-village-calm-rand-21",
+  "section": "Systems/Institutions",
+  "text": "Pasture the whole village grazes in common, lying beside the open fields.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "The village's common pasture is on HOUSES, and this line describes that house. What LAND gives as absent is the wider country's open grazing land as a resource for the leather chain, and C43693 says only that the country gives too little livestock. A small common pasture beside the fields fits both, so the line is not false.",
+  "evidence": [
+   "Common grazing land — header HOUSES (18, the whole list)",
+   "Common grazing landEconomy / ServicesPasturage — cal-17.txt C43555, C43557",
+   "Leatherworking & Cordwaining [vulnerable; its resource Grazing land absent] — header LAND",
+   "Some of Miloka's work cannot go on without livestock, and the country around the village does not give enough of it — cal-17.txt C43693"
+  ]
+ },
+ {
+  "id": "C44762",
+  "town": "bar0-village-calm-rand-22",
+  "section": "Systems/Power",
+  "text": "Salt works",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": "the reading copy printed a repeated label once (Backs Elder Council, Merchant Guilds)",
+  "why": "The rendered card reads 'Backs Elder Council, Merchant Guilds'. The packet shows only 'Merchant Guilds' (cal-18.txt C44456) because the dump prints a repeated label only once. The Salt works backs both powers, as its master sits on both, so its place on Elder Council's list is right.",
+  "evidence": [
+   "Connection: Saltmaster Eudoxia Kalojan / BacksElder CouncilMerchant Guilds — dump bar0-village-calm-rand-22.txt, Systems/Institutions (line 139)",
+   "Eudoxia Kalojan (f), the salt master @ Salt works [sits on: Elder Council (rank 2); Merchant Guilds (a member, no rank)] — cal-18.txt PEOPLE"
+  ]
+ },
+ {
+  "id": "C46445",
+  "town": "bar0-village-famine-rand-21",
+  "section": "Systems/Defense",
+  "text": "Theft driven by economic desperation rather than organization.",
+  "readers": "b",
+  "class": "EXPLAINED",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "This line characterises one crime pattern, the theft, and the page and record agree the theft is hunger-driven. The claim the reader quotes, 'no criminal infrastructure', is C46446, judged separately.",
+  "evidence": [
+   "Survival crime / Theft driven by economic desperation rather than organization. — cal-18 C46444-C46445 (safetyProfile.crimeTypes[0])",
+   "People are hungry and stealing to eat. — cal-18 C46439",
+   "desperation theft / Hunger-driven theft of food, livestock, and stored goods. — cal-18 C46447-C46448"
+  ]
+ },
+ {
+  "id": "C0341",
+  "town": "bar0-city-under_siege+famine-rand-21",
+  "section": "Systems/Institutions",
+  "text": "ServicesIron refining",
+  "readers": "b",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The smelter's only ore is imported, the siege stops all road imports, and the page marks the iron-using Blacksmiths Impaired, yet Iron refining is offered with no mark. Nothing in the town supplies iron ore (its veins are precious metal).",
+  "evidence": [
+   "SmelterCrafts / ServicesIron refining — dump Systems/Institutions lines 270-273 (no Impaired, no 'Short of' mark, unlike BlacksmithsCraftsImpaired line 226)",
+   "Smelter: Smelter runs on imported iron ore — header LAND gaps; record s.resourceAnalysis.gaps (chain 'iron ore', kind 'imported')",
+   "Enemies are camped around Qingkou, and nothing comes in by road. — cal-01.txt C0067"
+  ]
+ },
+ {
+  "id": "C0543",
+  "town": "bar0-city-under_siege+famine-rand-21",
+  "section": "Systems/Services",
+  "text": "Iron refining",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "Same fault as C0341 on the Services tab: the row is unmarked under a siege that cuts its only (imported) ore.",
+  "evidence": [
+   "Iron refining / Smelt raw ore into pig iron ... / Smelter — cal-01.txt C0543-C0545 (no mark), beside 'Horseshoeing Impaired ... Needs Iron + fuel' C0515-C0519",
+   "Smelter: Smelter runs on imported iron ore — header LAND gaps",
+   "Trade by road, gate and water has stopped — cal-01.txt C0093"
+  ]
+ },
+ {
+  "id": "C2020",
+  "town": "bar0-city-under_siege+famine-rand-21",
+  "section": "Table/Tonight sheet",
+  "text": "The besiegers around Qingkou have not moved, and the lookouts wait for the night they do.",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "Two sentences of the same page say the besiegers advance weekly and have not moved; nothing in the town reconciles them.",
+  "evidence": [
+   "The besiegers draw closer to Qingkou each week, and the lookouts count more of them every morning. — cal-01.txt C0017 (Summary/Overview)",
+   "The besiegers around Qingkou have not moved — cal-01.txt C2020 (Table/Tonight sheet)"
+  ]
+ },
+ {
+  "id": "C2056",
+  "town": "bar0-city-under_siege+famine-rand-22",
+  "section": "Summary/Overview",
+  "text": "Magic is a trade in Madinatfort like any other: signs offer enchanting and identification by the hour.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The town has no enchanter or identifier on HOUSES or in the record's magic services (alchemy only), and its own Magic tab gives magic as rare, restricted and extortionate with no arcane practitioners. 'Magic is a trade like any other' with enchanting by the hour is contradicted.",
+  "evidence": [
+   "signs offer enchanting and identification by the hour — cal-02.txt C2056",
+   "magic low — header TOWN; DEFENCE magic: none",
+   "Arcane SupportNone / No arcane practitioners on the rolls. — cal-02.txt C3948-C3949",
+   "Reliance on magic: None; Availabilityrare; Legalityrestricted; Service costextortionate — cal-02.txt C3959-C3966",
+   "availableServices.magic = [Alchemical components, Potion production] (both Alchemist quarter) — record s.availableServices.magic"
+  ]
+ },
+ {
+  "id": "C2708",
+  "town": "bar0-city-under_siege+famine-rand-22",
+  "section": "Systems/Institutions",
+  "text": "Connection: Landlord Khulood al-Misri",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "'Landlord' for an innkeeper is a personal trade title that names a sex (the female form is landlady), and Khulood is (f). The rules count this kind of title as a fault ('Dairyman', 'Beemaster' for a woman).",
+  "evidence": [
+   "Connection: Landlord Khulood al-Misri — cal-02.txt C2708",
+   "Khulood al-Misri (f), the innkeeper @ Inns and taverns (district) — header PEOPLE",
+   "Alewife Slavica / Alewife Klara — other bar4 dumps (the product does give female trade titles elsewhere)"
+  ]
+ },
+ {
+  "id": "C4412",
+  "town": "bar0-city-under_siege+famine-rand-22",
+  "section": "World/NPCs",
+  "text": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The record says, in ordinary times and not only under the siege, that the vintner has no access to grapes and that none are brought in, and LAND lists no vineyard. A vintner who owns 'the vineyard' would have grapes, so the secret contradicts the town's own gaps.",
+  "evidence": [
+   "Secret: Bought the vineyard by lending its old owner money — cal-02.txt C4412 (Jassim al-Tusi, Master Vintner)",
+   "No grapes reach the vintner. — cal-02.txt C3578",
+   "Vintner: Vintner exists but lacks access to grapes — header LAND gaps",
+   "Needed, and not brought in: grapes, iron ore, copper ore, clay. — cal-02.txt C3312",
+   "resources: Fishing Grounds; Marshlands; Ancient Grove; Coal or Peat Deposits; Open Grazing Land; Hunting Grounds — header LAND (no vineyard)"
+  ]
+ },
+ {
+  "id": "C6022",
+  "town": "bar0-city-under_siege+famine-rand-23",
+  "section": "Summary/Plot Hooks",
+  "text": "The guard has not been paid this month, and some of them have started taking payment in kind.",
+  "readers": "b",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The hook and the Defense line flatly contradict each other on whether the guard is paid; nothing in the town reconciles them. The quarrel over the cost of the guard backs the hook, so the generic 'well paid' line (C7336) is the likelier false half. This is one contradiction, flagged at both ends.",
+  "evidence": [
+   "The guard has not been paid this month, and some of them have started taking payment in kind. — cal-03 C6022 (powerStructure.conflicts[0].plotHooks[0])",
+   "The garrison and city watch are well paid and well equipped — cal-03 C7336 (economicState.safetyProfile.guardEffectivenessDesc)",
+   "Military/Guard vs Noble Governorship: high (The cost of keeping the guard) — cal-03 header QUARRELS"
+  ]
+ },
+ {
+  "id": "C6632",
+  "town": "bar0-city-under_siege+famine-rand-23",
+  "section": "Systems/Services",
+  "text": "Street food",
+  "readers": "b",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The row offers roasted meats with no mark, in a famine whose failed source is livestock. On the same tab, fresh meat is marked 'Scarce in the famine' and fresh produce carries its own famine wording. The rules say no line under a famine offers the food that failed.",
+  "evidence": [
+   "Street food / Hot food sold to working people. / Pies, stews, roasted meats. — cal-03 C6632-C6634, no mark",
+   "Fresh meat / Scarce in the famine. Beef, pork, mutton. — cal-03 C6622-C6623",
+   "failed source livestock · famine cut 65% · gap 94% · stores 0.1 months — header FOOD",
+   "availableServices.food: {name: Street food, desc: ... Pies, stews, roasted meats., institution: Daily markets} — record, no crisis mark"
+  ]
+ },
+ {
+  "id": "C7336",
+  "town": "bar0-city-under_siege+famine-rand-23",
+  "section": "Systems/Defense",
+  "text": "The garrison and city watch are well paid and well equipped, but are held for the defence, and few patrols can be spared from it.",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "This is the other end of the C6022 contradiction. 'Well paid' sits against an unpaid-guard hook, a high quarrel over the guard's cost, a Struggling prosperity and a purse-limited line on the same tab. Nothing reconciles it.",
+  "evidence": [
+   "The garrison and city watch are well paid and well equipped — cal-03 C7336",
+   "The guard has not been paid this month — cal-03 C6022",
+   "Military/Guard vs Noble Governorship: high (The cost of keeping the guard); prosperity Struggling — header QUARRELS, STATE",
+   "Hired swords back the garrison when the purse allows. — cal-03 C7339"
+  ]
+ },
+ {
+  "id": "C18744",
+  "town": "bar0-hamlet-calm-rand-23",
+  "section": "Systems/Defense",
+  "text": "Ribatchowk has no wall, and nothing threatens it now that a wall would keep out.",
+  "readers": "b",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The town's one live tension is an external threat, 'news of approaching danger', whose parties argue over preparing for war or fleeing. That is exactly the kind of thing a wall keeps out, so 'nothing threatens it now' is contradicted. The agent already inside (C18504) would not be kept out by a wall, but the approaching danger would.",
+  "evidence": [
+   "Ribatchowk has no wall, and nothing threatens it now that a wall would keep out. — cal-07.txt C18744",
+   "external threat (parties: Prepare for war, Seek diplomacy, Flee/hide) — header TENSIONS",
+   "News of approaching danger divides the community on how to respond — cal-07.txt C18459, C18853",
+   "Organized aggression cannot be resisted here; what preserves the hamlet is distance, diplomacy — cal-07.txt C18729"
+  ]
+ },
+ {
+  "id": "C18802",
+  "town": "bar0-hamlet-calm-rand-23",
+  "section": "World/NPCs",
+  "text": "Landlord",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "'Landlord' is a personal trade title (an innkeeper's) in its male form, and Latifa is (f). By the rules' 'Dairyman / Beemaster for a woman' ruling, this is a fault.",
+  "evidence": [
+   "Latifa al-Amin● / Wayside inn / Elder, first of Elder Council / Landlord — cal-07.txt C18799-C18802",
+   "Latifa al-Amin (f), the innkeeper @ Wayside inn — header PEOPLE"
+  ]
+ },
+ {
+  "id": "C18833",
+  "town": "bar0-hamlet-calm-rand-23",
+  "section": "World/Relationships",
+  "text": "Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "In a hamlet of 44, the same two people are given a current, 'devoted' mentor-and-successor tie on one card, and ten years of not speaking on the other. They are also the only two seats of a two-person Elder Council. The vouching could predate the case, but a 'devoted' mentorship now and ten years of silence cannot both hold. The two cards contradict each other.",
+  "evidence": [
+   "Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since. — cal-07.txt C18833 (the 'ten years ago' case, C18832)",
+   "Mentor and Successor / devoted — cal-07.txt C18817-C18820",
+   "Latifa al-Amin vouched for Alaa ibn Khalid when nobody else would. / Alaa ibn Khalid's first post came from that word. — cal-07.txt C18823-C18824",
+   "Alaa ibn Khalid corrected Latifa al-Amin in public last month — cal-07.txt C18825",
+   "Latifa al-Amin ... [Elder Council (rank 1)]; Alaa ibn Khalid ... [Elder Council (rank 2)] — header PEOPLE"
+  ]
+ },
+ {
+  "id": "C19130",
+  "town": "bar0-hamlet-under_siege-rand-21",
+  "section": "Systems/Economics",
+  "text": "Balcombe's food comes from more than one source, the grain harvest most of all, so a poor year in one does not empty the hamlet's tables.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The first half is true: the record has two food sources, grain and fish. But the sentence's reassurance that one poor year 'does not empty the hamlet's tables' is denied by the lines just above it, which put the hamlet in deficit with hunger already here. Under the siege and a 63% gap, that comfort is false.",
+  "evidence": [
+   "FOOD: the word the page prints Deficit · grown 38% · gap 63% · stores 1.6 months — cal-07.txt FOOD",
+   "Most households go short, and hunger is already here. — cal-07.txt C19126",
+   "Nothing has come into Balcombe since the siege closed the roads, and what the hamlet can still grow is not near enough. — cal-07.txt C19129",
+   "foodSources [\"grain\", \"fish\"], diversityNote \"two food source types\" — record s.economicState.foodSecurity"
+  ]
+ },
+ {
+  "id": "C19497",
+  "town": "bar0-hamlet-under_siege-rand-22",
+  "section": "Summary/Overview",
+  "text": "Buying and selling at Saltocastra is done face to face at the market with no guild between seller and buyer.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The town's only market is printed Stopped by the siege, and this Overview line says, in the present tense and with no mark, that buying and selling is done at the market. Nothing in the town reconciles the two.",
+  "evidence": [
+   "Buying and selling at Saltocastra is done face to face at the market — cal-07.txt C19497 (Summary/Overview, no mark)",
+   "Periodic marketEconomy / Stopped by the siege. Monthly or seasonal trading day. — cal-07.txt C19658-C19659",
+   "Price discovery (stopped) / Trade facilitation (stopped) — cal-07.txt C19662-C19663",
+   "CRISIS: Under Siege — header"
+  ]
+ },
+ {
+  "id": "C19622",
+  "town": "bar0-hamlet-under_siege-rand-22",
+  "section": "Systems/Institutions",
+  "text": "Armed escort",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The page promises that every row the siege touches is marked, and it marks the traveller rows (Lodging, Pasturage), yet escort through dangerous territory, which means travelling out past the besiegers, is printed on offer with no mark. Nothing in the town says escorts still get through.",
+  "evidence": [
+   "Armed escort — cal-07.txt C19622 and C19705, both printed with no mark",
+   "Adventuring party escort through dangerous territory. — cal-07.txt C19706",
+   "Enemies are camped around Saltocastra, and nothing comes in by road. — cal-07.txt C19513",
+   "Trade by road, gate and water has stopped — cal-07.txt C19533",
+   "While the siege lasts, a row it touches is marked. — cal-07.txt C19611, C19703"
+  ]
+ },
+ {
+  "id": "C19810",
+  "town": "bar0-hamlet-under_siege-rand-22",
+  "section": "Systems/Economics",
+  "text": "Market vendors and shared dining customs make food distribution visibly civic.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The Economics tab does carry the caveat 'The descriptions here are of ordinary times. While the siege lasts, a row it touches is marked.' The market is plainly touched (Stopped), though, and this line about market vendors handing out food carries no mark, so it contradicts the page's own Stopped market.",
+  "evidence": [
+   "Market vendors and shared dining customs make food distribution visibly civic. — cal-07.txt C19810 (Systems/Economics, Food Security, no mark)",
+   "Stopped by the siege. Monthly or seasonal trading day. — cal-07.txt C19659 (Periodic market)",
+   "No food comes into Saltocastra by trade. ... hunger is already here. — cal-07.txt C19805-C19807"
+  ]
+ },
+ {
+  "id": "C20588",
+  "town": "bar0-hamlet-under_siege-rand-23",
+  "section": "Systems/Economics",
+  "text": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the hamlet's tables.",
+  "readers": "b",
+  "class": "STANDS",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "THE CHAIR: the same sentence under the same state (a siege, FOOD Deficit) was held to STAND at C19130 by another checker: one rule for both: a calm-times reassurance printed while the tables are short || the checker (EXPLAINED): The line is about a poor year in one source, and the record does give the hamlet several (herds, river fish, 26% by magic). The present hunger comes from the siege cutting the trade, as C20586 says, not from one source failing, and 'does not empty the tables' is not 'no one goes short'.",
+  "evidence": [
+   "River Fisheries (available); Open Grazing Land (available) — header LAND; by magic 26% — header FOOD",
+   "Meat and milk from the herds and the day's catch anchor the table. — cal-08 C20584",
+   "The trade that fed Darhankul is shut out by the siege — cal-08 C20586"
+  ]
+ },
+ {
+  "id": "C20892",
+  "town": "bar0-hamlet-under_siege-rand-23",
+  "section": "Table/Tonight sheet",
+  "text": "The besiegers around Darhankul have not moved, and the lookouts wait for the night they do.",
+  "readers": "b",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The Tonight sheet says the besiegers have not moved, and the Overview says they draw closer each week. The two contradict each other within the same town, and nothing reconciles them.",
+  "evidence": [
+   "The besiegers around Darhankul have not moved, and the lookouts wait for the night they do. — cal-08 C20892",
+   "The besiegers draw closer to Darhankul each week, and the lookouts count more of them every morning. — cal-08 C20387"
+  ]
+ },
+ {
+  "id": "C24951",
+  "town": "bar0-metropolis-calm-rand-21",
+  "section": "World/History",
+  "text": "A surge of magic no one could contain marked the temple district and everyone caught in it, and what it did has never entirely worn away",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The live wild-magic tension is the legacy of the PAST event 'The Wild Magic' (same template, and the hooks speak of 'the affected district', singular). The same History tab places that one surge in the temple district and, a few lines up, in the merchants' quarter. Nothing in the town says the surge struck two districts.",
+  "evidence": [
+   "A surge of magic no one could contain marked the temple district — cal-09.txt C24951 (World/History, The Wild Magic); record s.history.historicalEvents[The Wild Magic].description",
+   "An uncontrolled surge of magic left its mark on the merchants' quarter — cal-09.txt C20952, C24923; record s.history.currentTensions[type wild_magic].description",
+   "The affected district is slowly spreading its strangeness — record s.history.currentTensions[wild_magic].plotHooks"
+  ]
+ },
+ {
+  "id": "C26403",
+  "town": "bar0-metropolis-calm-rand-22",
+  "section": "Systems/Economics",
+  "text": "The metropolis leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "THE CHAIR: the same page says 'It has worked out its river fisheries.' (C26653) and 'Short of fish': one rule with C30469 in the sister metropolis || the checker (EXPLAINED): In the record, all of the 54% grown locally is fish, and fishing is the only food chain running. The fishery is depleted and the chain vulnerable, which is exactly why the sentence warns that a bad fishing season is felt at every table; it claims no abundance. The readers' premise (fishery depleted) is true, but it does not make the sentence false.",
+  "evidence": [
+   "foodSources: [\"fish\"], activeChains: [\"Fishing & water\"] — record s.economicState.foodSecurity",
+   "What it puts on the table itself is fish from the local waters. — record foodRecord.foodwaysLine",
+   "River Fishing [vulnerable; its resource River fisheries depleted] — cal-10.txt LAND",
+   "magicNote \"Temple fishing rites improve depleted catch\" — record river_fishing chain"
+  ]
+ },
+ {
+  "id": "C29106",
+  "town": "bar0-metropolis-calm-rand-23",
+  "section": "Summary/Overview",
+  "text": "Anyone new to Tzulcoatl who needs a meal or a bed is sent to the monks.",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "A calm metropolis with whole inn districts offering full accommodation does not send every newcomer to the monks; the monasteries offer no lodging or meals on the page.",
+  "evidence": [
+   "Inns and taverns (district) / Multiple inn districts catering to merchants, travelers, and long-term visitors. / ServicesFull accommodation — cal-11.txt C29692-C29695",
+   "Major monasteries ... ServicesAdvanced scribing — cal-11.txt C29883-C29886 (no meals or lodging offered)",
+   "Inns and taverns (district): severity 'vulnerable' (not stopped) — record s.economicState.tradeDependencies"
+  ]
+ },
+ {
+  "id": "C30469",
+  "town": "bar0-metropolis-calm-rand-23",
+  "section": "Systems/Economics",
+  "text": "The metropolis leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The page itself says the fishery is fished out and fish is bought in, so the town cannot lean first on its fishing. The line comes from the record's food ledger, which still names fish as the only home food source against its own depleted fishing grounds: a record split, but the page sentence contradicts the page.",
+  "evidence": [
+   "Fish & Maritime Produce The fishery here is fished out; the fish sold now is salted and bought in. — cal-11.txt C30411",
+   "Little is left worth taking from the fishing grounds at Tzulcoatl this year — cal-11.txt C30703",
+   "Fish market: Short of fish — cal-11.txt C29677; LAND: Fishing Grounds (depleted); imports Salted fish (local sea fisheries exhausted)",
+   "foodSources ['fish'], foodwaysLine 'Its own food is the day's catch.' — record s.economicState.foodSecurity.foodRecord (the source of the line)"
+  ]
+ },
+ {
+  "id": "C30692",
+  "town": "bar0-metropolis-calm-rand-23",
+  "section": "Systems/Economics",
+  "text": "The shadow trade at Tzulcoatl is small, but it is not casual: somebody organises it.",
+  "readers": "b",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The page calls the same unrecorded trade 'small' here and 'not small' in Power; with an 11% share, a powerful thieves' guild and an underground city, 'small' is the false one.",
+  "evidence": [
+   "A share of what arrives at Tzulcoatl never appears at the gate, and the share is not small. — cal-11.txt C30831",
+   "Shadow Economy: 11% of trade unrecorded — cal-11.txt C30683",
+   "Criminal Syndicate Revenue 11% (third-largest source); HOUSES: Smuggling network; Thieves' guild (powerful); Underground city; Whisper market; Assassins' guild — header"
+  ]
+ },
+ {
+  "id": "C31074",
+  "town": "bar0-metropolis-calm-rand-23",
+  "section": "Systems/Magic",
+  "text": "If the help beyond ordinary work failed at Tzulcoatl, the trade that makes its salted fish would yield less than it does now.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "THE CHAIR: the same page says 'the fishery here is fished out; the fish sold now is salted and bought in' (C30411): the page contradicts itself, as for C30469 in the same town || the checker (EXPLAINED): The record says the depleted fishery's catch is propped up by temple fishing rites, and the page names houses of worship among the magic's suppliers, so the fish trade would yield less without it. The chain is vulnerable, not stopped, and still runs through the fish market and cooper, so a small salted-fish trade exists beside the imports.",
+  "evidence": [
+   "Fishing & Seafood chain: outputs ['Salted fish', ...], status 'vulnerable', magicNote 'Temple fishing rites improve depleted catch', magicRecovery 0.35 — record s.economicState.activeChains[0]",
+   "supplied by Wizard's tower, Houses of worship, Great cathedral and Chan Nah — cal-11.txt C31069",
+   "Fishing & Seafood / Vulnerable / Fishing grounds (depleted) / Via Cooper, Merchant guilds, Fish market / Normally yields Salted fish — cal-11.txt C30476-C30486"
+  ]
+ },
+ {
+  "id": "C33207",
+  "town": "bar0-thorp-calm-rand-21",
+  "section": "Systems/Economics",
+  "text": "Its own food is game from the woods.",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "THE CHAIR: the same page has every family tilling a holding 'all for the table' (C33132): 'its own food is game' contradicts it || the checker (WEAK): Game is the record's only food source, and the hunting grounds are available, so the sentence matches the record. But the same page has every family tilling a holding for the table, and 'its own food is game' leaves that out. It is a mismatch of emphasis between two true facts, not a flat falsehood.",
+  "evidence": [
+   "\"foodSources\": [\"game\"], \"foodwaysLine\": \"Its own food is game from the woods.\", activeChains [\"Hunting & foraging\"] — record s.economicState.foodSecurity",
+   "Hunting Grounds (available) — cal-12.txt LAND",
+   "Each family tills a small holding, all of it for the table. — cal-12.txt C33132 (Subsistence farming)"
+  ]
+ },
+ {
+  "id": "C34105",
+  "town": "bar0-thorp-calm-rand-23",
+  "section": "Systems/Defense",
+  "text": "Sanctavilla's defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The page calls the thorp wealthy, with an economic surplus and the place doing well, and records no lean seasons, yet says its defence has been short of money for years. A low economic-readiness score may explain where the line comes from, but not the claim of years of want.",
+  "evidence": [
+   "STATE: prosperity Wealthy — cal-12.txt header; 'Economic capacitySurplus' — cal-12.txt C33901",
+   "A farm surplus keeps everyone at Sanctavilla busy. — cal-12.txt C33975",
+   "Fresh paint and well-kept roofs say the place is doing well. — cal-12.txt C33850",
+   "FOOD surplus 7%; PAST: none recorded — header",
+   "defenseProfile.scores.economic = 36 — record (the likely source of the line)"
+  ]
+ },
+ {
+  "id": "C36862",
+  "town": "bar0-town-calm-rand-22",
+  "section": "Systems/Magic",
+  "text": "Whatever magic reaches Madinatserai, the town does not rest on it: nothing it lives by would stop without it.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "An isolated town whose timber, iron and imported grain come by teleportation does rest on magic; the line says nothing would stop without it. C35962's other routes ('the tracks in a good season, or the favour of a patron') are partial and do not make 'nothing would stop' true.",
+  "evidence": [
+   "Construction, furniture and barrel making here depend on timber brought in by magic: no trade road reaches Madinatserai. — cal-14.txt C36506",
+   "Law enforcement, patrol and gate control here depend on iron brought in by magic. — cal-14.txt C36523",
+   "Meals, ale and lodging here depend on grain brought in by magic. — cal-14.txt C36536",
+   "Town remains viable through local foodshed, reserves, seasonal access, patronage, magical transit. — cal-14.txt C36871; trade access isolated; HOUSES: Teleportation circle"
+  ]
+ },
+ {
+  "id": "C37943",
+  "town": "bar0-town-calm-rand-23",
+  "section": "Systems/Institutions",
+  "text": "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The card says 'he' and 'His' and then names a female crier as its connection. The pronouns come from the catalogue's stock description (record institutions Town crier desc), but on the page they misgender the named holder. Nothing reconciles them.",
+  "evidence": [
+   "At fixed times he stands in the market square ... His employer is the town, or else a guild. — cal-15.txt C37943-C37944",
+   "Connection: Crier Ghalia al-Din — cal-15.txt C37945",
+   "Ghalia al-Din (f), the crier @ Town crier — cal-15.txt PEOPLE; record npcs gender \"female\""
+  ]
+ },
+ {
+  "id": "C39560",
+  "town": "bar0-town-occupied-rand-21",
+  "section": "Systems/Institutions",
+  "text": "It answers to no one in particular, but the work gets done.",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The town council, headed by the Church Council's own head, is said to answer to no one, while the page repeatedly says the council answers to the occupiers. This town's Institutions tab carries no 'ordinary times' disclaimer.",
+  "evidence": [
+   "The forces of another power hold Divoburg, and its own officials take their orders. — cal-16.txt C39323",
+   "The Church Council answers to the occupiers of Divoburg. — cal-16.txt C39840",
+   "Nothing large is settled in the hall until the occupiers have approved it. — cal-16.txt C39845",
+   "Connection: Warden of the Council Luba Kuznetsov, the dean — cal-16.txt C39561 (head of Church Council)"
+  ]
+ },
+ {
+  "id": "C40032",
+  "town": "bar0-town-occupied-rand-21",
+  "section": "Systems/Defense",
+  "text": "Anyone walking Divoburg late is watched, not stopped, and the watchmen make sure you know it.",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "Under an enforced curfew with checkpoints, people out late are stopped; 'watched, not stopped' contradicts the town's safety record and three lines of the same tab.",
+  "evidence": [
+   "Occupation authorities enforce the curfew at the checkpoints. — cal-16.txt C39990; record s.economicState.safetyProfile.safetyDesc",
+   "There is a curfew at Divoburg now, and checkpoints — cal-16.txt C39992",
+   "Travellers through Divoburg are stopped and asked their business by officials who are not from here. — cal-16.txt C39970",
+   "safety Controlled — Occupation Curfew — header STATE"
+  ]
+ },
+ {
+  "id": "C40862",
+  "town": "bar0-town-occupied-rand-22",
+  "section": "Systems/Institutions",
+  "text": "A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The town's woodland is cleared, it imports timber, and it exports no lumber, so it neither has timber to hand nor supplies the region's building. The Forest terrain and the Ancient Grove do not help, because the grove's wood is exported as 'Sacred wood', not building timber.",
+  "evidence": [
+   "A town with timber to hand supplies the region's building work — cal-16 C40862",
+   "Managed Woodland (depleted); Timber & Lumber [impaired; its resource Managed woodland depleted] — header LAND",
+   "imports: ... Timber (local managed woodland cleared) — header TRADE; exports list no lumber"
+  ]
+ },
+ {
+  "id": "C41801",
+  "town": "bar0-town-occupied-rand-22",
+  "section": "World/Relationships",
+  "text": "Bing Shimizu named Wei Kimura as successor in front of witnesses.",
+  "readers": "b",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The same pair carries two edges: bitter rivals who keep their distance, and a formally named successor. On top of that, a tanner names a carpenter of another trade as her successor. Nothing on the page links or explains the two edges.",
+  "evidence": [
+   "Bing Shimizu named Wei Kimura as successor in front of witnesses. — cal-16 C41801 (relationships tie_npc_tanner_established, mentor_student, 'formal')",
+   "Professional Rivalry ... bitter / Every friend Wei Kimura wins is one Bing Shimizu lost ... The two keep a polite distance and an exact tally. — cal-16 C41785-C41792 (tie_npc_carpenters_5_15, rival)",
+   "Wei Kimura (m), the master carpenter; Bing Shimizu (f), the master tanner — header PEOPLE"
+  ]
+ },
+ {
+  "id": "C44796",
+  "town": "bar0-village-calm-rand-22",
+  "section": "Systems/Defense",
+  "text": "The local watch is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The guard assessment gives the watch 'irregular pay'. The same page twice says the Village watch is an unpaid rota of households. The paid veterans of the Veteran's lodge are a separate hire, not 'the local watch', so nothing reconciles the two.",
+  "evidence": [
+   "The local watch is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. — record s.defenseProfile...guardEffectivenessDesc; cal-18.txt C44796",
+   "Nobody is paid, and the households hold the rota. — cal-18.txt C44415, C44829 (Village watch)",
+   "watch: Village watch — cal-18.txt DEFENCE"
+  ]
+ },
+ {
+  "id": "C45642",
+  "town": "bar0-village-calm-rand-23",
+  "section": "Systems/Defense",
+  "text": "Gankhuubulag has no wall, and nothing threatens it now that a wall would keep out.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The village's one live tension is an approaching danger serious enough that a faction wants to prepare for war, so 'nothing threatens it now that a wall would keep out' is false. Nothing in the record makes the threat non-physical or over.",
+  "evidence": [
+   "TENSIONS: external threat (parties: Prepare for war, Seek diplomacy, Flee/hide) — cal-18.txt header",
+   "News of approaching danger divides the community on how to respond — cal-18.txt C45249",
+   "The threat has an agent already inside the settlement — cal-18.txt C45301",
+   "currentTensions[0]: type 'external_threat', severity ['major','catastrophic'] — record s.history.currentTensions"
+  ]
+ },
+ {
+  "id": "C45961",
+  "town": "bar0-village-famine-rand-21",
+  "section": "Summary/Overview",
+  "text": "The smell of sawn timber is everywhere in Harthafen, and so is the sawdust.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The village has no timber resource and imports none, and the gap says the sawmill lacks timber, so sawing cannot fill the place with sawdust. The record does contradict itself: the River Mill Industry chain is 'running' with Milled lumber among its outputs, and TRADE exports Milled lumber. That is the source of the fault, not something that reconciles it.",
+  "evidence": [
+   "The smell of sawn timber is everywhere in Harthafen, and so is the sawdust. — cal-18 C45961 (s.arrivalScene)",
+   "Sawmill: Sawmill exists but lacks access to timber; ... lacks access to mountain_timber — header LAND gaps (resourceAnalysis.gaps[1],[2])",
+   "resourceAnalysis.imports.critical includes mountain_timber: 'Required by Sawmill but not available in Riverside terrain'; TRADE imports list no timber — record / header TRADE",
+   "cutting raw logs into planks and beams whenever logs can be had — cal-18 C46101"
+  ]
+ },
+ {
+  "id": "C46104",
+  "town": "bar0-village-famine-rand-21",
+  "section": "Systems/Institutions",
+  "text": "ServicesLumber milling",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "Neighbouring rows carry their shortage marks (Dairy 'Short of livestock', Mill '(scarce)'), but the Sawmill's service prints unmarked on both tabs. The record says it has no timber, and no line of the page anywhere says the sawmill is short.",
+  "evidence": [
+   "ServicesLumber milling — cal-18 C46104 (Sawmill row, no mark); Lumber milling / Raw logs into planks and beams. — C46158-C46159 (Services, no mark)",
+   "Sawmill: Sawmill exists but lacks access to timber — header LAND gaps",
+   "Short of livestock. A dairy ... — cal-18 C46109; ServicesGrain milling (scarce) — C46099"
+  ]
+ },
+ {
+  "id": "C46446",
+  "town": "bar0-village-famine-rand-21",
+  "section": "Systems/Defense",
+  "text": "No criminal infrastructure: just too many people with too little, doing what they must to survive.",
+  "readers": "a",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The village's own record gives it an 18% black-market income and a fencing service, and the page says organised crime has crowded out the church. 'No criminal infrastructure' is contradicted by both.",
+  "evidence": [
+   "No criminal infrastructure: just too many people with too little — cal-18 C46446",
+   "Black Market Revenue 18% — header INCOME; CriminalBlack Market Revenue Untaxed trade, fencing and theft bring money in here — C46216",
+   "Fencing stolen goods / Stolen goods move through back channels — cal-18 C46154-C46156",
+   "organised crime has crowded out most formal moral influence. — cal-18 C46351"
+  ]
+ },
+ {
+  "id": "C46725",
+  "town": "bar0-village-famine-rand-22",
+  "section": "Summary/Overview",
+  "text": "Drovers push their herds along the road, and the whole place smells of the pens.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The arrival scene shows ordinary herd traffic and full pens in a famine whose failed source is the herds, which the page itself says failed. The horse trade (Pack animal trader, Cavalry mounts) might explain some animals, but not drovers' herds as an everyday sight. The 'running' livestock chain in LAND is the ordinary-times state.",
+  "evidence": [
+   "Drovers push their herds along the road, and the whole place smells of the pens. — cal-19 C46725",
+   "failed source livestock · famine cut 65% — header FOOD",
+   "The herds failed here this year — cal-19 C46856; The families who lived off the herds have lost most of what they eat — C47051"
+  ]
+ },
+ {
+  "id": "C47050",
+  "town": "bar0-village-famine-rand-22",
+  "section": "Systems/Economics",
+  "text": "Fermentation, pickling, and drying stretch the harvest through winter.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "The line says preserving carries the harvest through winter, but the village has about three days of food, no granary, and hunger already. 'Preserved foods' among the goods made here does not make that true now.",
+  "evidence": [
+   "Fermentation, pickling, and drying stretch the harvest through winter. — cal-19 C47050",
+   "No granary; about three days in the larder. — cal-19 C47049; stores 0.1 months (granary False) — header FOOD",
+   "Many households go short, and hunger is already here. — cal-19 C47048"
+  ]
+ },
+ {
+  "id": "C48079",
+  "town": "bar0-village-famine-rand-23",
+  "section": "Systems/Economics",
+  "text": "Fermentation, pickling, and drying stretch the harvest through winter.",
+  "readers": "ab",
+  "class": "STANDS",
+  "checker": "STANDS",
+  "artifact": null,
+  "why": "Under an active famine whose failed source is the grain harvest, this unmarked line says preserving stretches 'the harvest' through winter. The page itself says the harvest was lost for a second season, about a month is in store, and the winter ahead will be hungry. Its other harvest rows carry 'Scarce in the famine'; this one does not.",
+  "evidence": [
+   "Fermentation, pickling, and drying stretch the harvest through winter. — cal-19.txt C48079 (Systems/Economics, Food Security, no mark)",
+   "Ravengrad has lost its harvest for a second season. — cal-19.txt C47723",
+   "The grain harvest failed this year ... The winter ahead will be hungry. — cal-19.txt C48381-C48382",
+   "Harvest Scarce in the famine. — cal-19.txt C48038",
+   "stores 1 months (granary False) · failed source grain · famine cut 50% — header FOOD"
+  ]
+ },
+ {
+  "id": "C6093",
+  "town": "bar0-city-under_siege+famine-rand-23",
+  "section": "Systems/Institutions",
+  "text": "ServicesFresh bread",
+  "readers": "a",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "The Institutions row is missing the mark that the Services tab gives the same service (Impaired). Impaired is not stopped, and the granary still holds a few days of grain, so listing bread as a service is not flatly false. Only the mark is missing.",
+  "evidence": [
+   "ServicesFresh bread — cal-03 C6093 (Institutions, Bakers row, no mark)",
+   "Fresh bread Impaired / Needs Grain — cal-03 C6608, C6613 (Systems/Services)",
+   "Bakers (5-15): Bakers runs on imported grain — header LAND gaps; imports cover None — header STATE",
+   "Stores: a granary, about three days of grain — cal-03 C5807"
+  ]
+ },
+ {
+  "id": "C6795",
+  "town": "bar0-city-under_siege+famine-rand-23",
+  "section": "Systems/Economics",
+  "text": "Stone Quarrying",
+  "readers": "ab",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "The income label lacks the 'Stopped by the siege' mark that its sibling incomes and the quarry's own house row carry. It is a bare label of a 2% share by the record, though, and makes no claim of its own. Only the mark is missing.",
+  "evidence": [
+   "Stone Quarrying — cal-03 C6795 (bare label; record economicState.incomeSources[13] desc \"\")",
+   "Pilgrim Trade Stopped by the siege. / Toll Revenue Stopped by the siege. — cal-03 C6794, C6785",
+   "Stopped by the siege. A stone quarry and its dressing yards ... ServicesCut stone (stopped) — cal-03 C6343, C6345"
+  ]
+ },
+ {
+  "id": "C13374",
+  "town": "bar0-city-wartime-rand-22",
+  "section": "Systems/Economics",
+  "text": "It is not a subject anyone raises unprompted.",
+  "readers": "b",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "'Not a subject anyone raises unprompted' is a stock calm line (the same pair prints in Secure Uaxacatl). Here it stands under a printed Pressured word, a 3% shortfall and wartime, which it softens. With the band secure, 8.7 months in store and nearly every household fed, it is a matter of tone rather than a false fact. The grain-monopoly line the reader cites (C12509) is a plot hook.",
+  "evidence": [
+   "FOOD: the word the page prints Pressured · band secure · gap 3% · stores 8.7 months — cal-05.txt FOOD",
+   "Short: 609 lbs/day — cal-05.txt C13366",
+   "nearly every household is fed, and a bad season would leave some of them short — cal-05.txt C13369",
+   "CRISIS: Wartime — cal-05.txt"
+  ]
+ },
+ {
+  "id": "C16539",
+  "town": "bar0-city-wartime-rand-23",
+  "section": "Systems/Defense",
+  "text": "Langkirche's accounts show little spent on its city walls and gates now that it asks little of it, since built work needs little upkeep.",
+  "readers": "ab",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "The war is fought elsewhere: it draws men, carts and supplies, and nothing attacks the walls, so low upkeep on built masonry is not flatly false. 'Asks little of it', said at war footing with soldiers on the walls, is still a loose, off-key phrase. There is also a small agreement slip ('walls and gates ... it').",
+  "evidence": [
+   "Langkirche's accounts show little spent on its city walls and gates now that it asks little of it — cal-06 C16539",
+   "The war makes its demands on Langkirche, in men, carts and supplies — cal-06 C17342; More army carts pass through Langkirche — C15581",
+   "War footing — C16496; the soldiers on the walls give them good reason to. — cal-06 C16508"
+  ]
+ },
+ {
+  "id": "C19472",
+  "town": "bar0-hamlet-under_siege-rand-22",
+  "section": "Summary/Overview",
+  "text": "Carts of rock grind past, their axles complaining.",
+  "readers": "ab",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "The readers' premise is off: these carts are not arriving (C19477 is about carts reaching the town), and the hamlet's own open-cast mine is printed still extracting with no mark, so rock moving inside the barricades is possible. But the quarry is Stopped and Mining & Quarrying is Impaired, so carts of rock grinding past as everyday traffic is a loose fit for the siege, not a flat falsehood.",
+  "evidence": [
+   "Carts of rock grind past, their axles complaining. — cal-07.txt C19472 (Summary/Overview arrival scene)",
+   "No cart has reached Saltocastra in weeks — cal-07.txt C19477",
+   "ServicesRaw extraction — cal-07.txt C19646 (Mine (open cast) row, printed with no siege mark)",
+   "Stopped by the siege. A stone quarry, opened by quarrymen — cal-07.txt C19672",
+   "Mining & QuarryingRaw materials & fuelImpaired — dump Systems/Economics"
+  ]
+ },
+ {
+  "id": "C23720",
+  "town": "bar0-metropolis-calm-rand-21",
+  "section": "World/NPCs",
+  "text": "How they deal Talks about the ships, the weather and the cargoes; a good ear on the waterfront.",
+  "readers": "ab",
+  "class": "WEAK",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "THE CHAIR: told to the owner as one loose word ('waterfront' at the sky docks): kept as WEAK, not struck || the checker (EXPLAINED): This is the brief's own example town. The wharfinger works the airship docks, and the 'ships', 'cargoes' and 'weather' she talks about are airships, their freight and their flying weather. 'Waterfront' is a loose word for the dock front, the same looseness as the 'ship and shore' flag already found wrong in this town.",
+  "evidence": [
+   "Airship docking (high magic); ... Docks/port facilities; Harbour master's office — header HOUSES",
+   "Airship-era dock facilities handling both aerial and surface freight. — cal-09.txt C21507 (Docks/port facilities, connection Wharfinger Saba al-Masri)",
+   "Regulates airship traffic, assigns mooring berths, collects anchorage fees. — cal-09.txt C21518",
+   "Airship freight services (cargo, mooring) — header TRADE exports",
+   "Secret: Assigns the best berths to ships that pay a little extra — cal-09.txt C23721"
+  ]
+ },
+ {
+  "id": "C26840",
+  "town": "bar0-metropolis-calm-rand-22",
+  "section": "Systems/Power",
+  "text": "Thieves' Guild works against Grand Guild Consortium, and Grand Guild Consortium is winning.",
+  "readers": "ab",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "The Consortium does have the upper hand: it is Dominant against a Minor Thieves' Guild and hunting it in earnest. But 'is winning' claims more than the record's own narrative ('not catching all of it ... does not go away') and sits badly beside the page's crime-wave line. It overstates the case rather than being plainly false.",
+  "evidence": [
+   "Grand Guild Consortium (Dominant) ... Thieves' Guild (Minor) — cal-10.txt GOVERNMENT; power 38 vs 12 in record s.powerStructure.factions",
+   "\"captureState\": \"adversarial\", \"narrative\": \"Grand Guild Consortium is hunting Thieves' Guild in earnest but not catching all of it; Thieves' Guild pulls back and regroups, and does not go away.\" — record s.powerStructure.factionRelationships",
+   "Crime is rising faster than those in charge can answer it — cal-10.txt C25027 (crime-wave tension)",
+   "stability: Unstable (pervasive organized crime) — cal-10.txt GOVERNMENT"
+  ]
+ },
+ {
+  "id": "C33209",
+  "town": "bar0-thorp-calm-rand-21",
+  "section": "Systems/Economics",
+  "text": "Quirigche leans first on its hunting for its food, so a bad season for the hunting is felt at every table.",
+  "readers": "a",
+  "class": "WEAK",
+  "checker": "EXPLAINED",
+  "artifact": null,
+  "why": "THE CHAIR: 'leans first on its hunting' beside holdings tilled for the table: an emphasis, the weaker twin of C33207 || the checker (EXPLAINED): 'Leans first on its hunting' leaves room for the smallholdings as a second source, and hunting is the record's food source. The reader's point that foraging areas are absent does not touch hunting, whose grounds are available. 'Harvest 100%' is income, not food.",
+  "evidence": [
+   "\"foodSources\": [\"game\"], activeChains [\"Hunting & foraging\"] — record s.economicState.foodSecurity",
+   "Hunting Grounds (available) — cal-12.txt LAND",
+   "Each family tills a small holding, all of it for the table. — cal-12.txt C33132"
+  ]
+ },
+ {
+  "id": "C37293",
+  "town": "bar0-town-calm-rand-22",
+  "section": "World/Relationships",
+  "text": "Bashir al-Jabbar governs on Imad al-Andalusi's credit.",
+  "readers": "b",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "Bashir does sit on the governing power (as an unranked member), so 'governs' is loose, not plainly false. But it, and the grain-stores choice after it, cast him as the town's governor when Abir ibn Sina holds the seat. One overstated word; the record casts the magistrate in the government's role in four debt ties.",
+  "evidence": [
+   "Bashir al-Jabbar (m), the magistrate @ Courthouse [sits on: Feudal Appointee (a member, no rank)] — header PEOPLE",
+   "Abir ibn Sina (f), the lord's appointee [sits on: Landed Gentry (rank 1); Feudal Appointee (rank 1)] — header PEOPLE",
+   "archetypeKey 'gov_econ_dependence', description 'Bashir al-Jabbar governs on Imad al-Andalusi's credit.' — record s.relationships (tie_npc_mine)"
+  ]
+ },
+ {
+  "id": "C38176",
+  "town": "bar0-town-calm-rand-23",
+  "section": "Systems/Economics",
+  "text": "Apothecary & Alchemy A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+  "readers": "ab",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "The trade is real and exported, so customers from other settlements fit, and its inputs are imported. But 'thriving' is too strong a word for the town's smallest income share (5%), from a shop marked Vulnerable that lacks both of its inputs. The fault is one word of degree, not a false statement.",
+  "evidence": [
+   "Apothecary & Alchemy 5% — cal-15.txt INCOME (the smallest share)",
+   "Alchemist shop exists but lacks access to medicinal herbs; ... hot_springs_mineral — cal-15.txt LAND gaps",
+   "exports: ... Alchemical trade (potions, reagents) — cal-15.txt TRADE",
+   "Alchemist shop / Vulnerable — cal-15.txt C37803, C37805"
+  ]
+ },
+ {
+  "id": "C43690",
+  "town": "bar0-village-calm-rand-21",
+  "section": "Systems/Economics",
+  "text": "Miloka lives on one trade.",
+  "readers": "b",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "This is the page's concentration warning, and its substance is true: 71% of the money comes from the harvest, and a bad harvest year sinks the village. 'Lives on one trade' overstates that, since tithes and coal bring in the other 29%, and 'trade' is a loose word for farming. It is a matter of degree, not a false statement.",
+  "evidence": [
+   "Miloka lives on one trade. / It is doing well enough now, but if that trade has a bad year, the whole village has a bad year. — cal-17.txt C43690-C43691",
+   "Harvest 71%, Church Tithes 20%, Iron & Metalwork 9% — header INCOME",
+   "Harvest What the households grow and raise on their holdings — cal-17.txt C43687"
+  ]
+ },
+ {
+  "id": "C45429",
+  "town": "bar0-village-calm-rand-23",
+  "section": "Systems/Services",
+  "text": "Divine healing magic for the sick and injured.",
+  "readers": "ab",
+  "class": "WEAK",
+  "checker": "WEAK",
+  "artifact": null,
+  "why": "'Reliance: None' is not contradicted: one priest's service beside a midwife and an apothecary is not structural reliance, and the tab scopes itself to arcane work. But 'Medical role: absent' sits beside a priest offering divine healing magic in a medium-magic world, and elsewhere the product counts houses of worship as magic suppliers. That is a real but minor mismatch, between a role rating and one service row.",
+  "evidence": [
+   "Healing / Divine healing magic for the sick and injured. / Priest (resident) — cal-18.txt C45428-C45430; record s.availableServices.healing[4]",
+   "Medical role: absent — cal-18.txt C45671",
+   "Reliance on magic: None / Nothing structural at Gankhuubulag depends on arcane work. — cal-18.txt C45668, C45674"
+  ]
+ }
+]

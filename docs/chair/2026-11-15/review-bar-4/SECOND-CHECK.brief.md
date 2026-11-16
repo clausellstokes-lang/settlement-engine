@@ -1,0 +1,30 @@
+# Second check of a reader's flags against the town's own record (read-only)
+
+You are checking flags that two cold readers raised on generated fantasy-town pages. Each flag says: "this sentence of the town's page is FALSE, because the town's own header (or another sentence of the same page) contradicts it." The count of surviving flags is the measure the project's owner judges the product by, so each verdict must be right and carry its evidence.
+
+THE FAILURE YOU ARE HERE TO CATCH: a reader judged a sentence false from a summary header, when the town's own particulars make it true. Example already found: in a high-magic mountain metropolis with "trade access: road", readers flagged dock workers shifting goods "between ship and shore" and a harbour pilot as false (no water) — but the town has an "Airship docking" house, its docks are described as "airship-era dock facilities handling both aerial and surface freight", and its harbour master "regulates airship traffic". Those two flags were wrong. Hunt for that kind of explanation for EVERY flag: magic, an exotic or unusual house, a service brought in from a day away, a second resource, a named person's actual sex or seat, a crisis that is over, a figure the reader misread, a line that carries its own mark ("Stopped by the siege", "Curtailed", "Scarce", "Short of", "impaired") on or beside it.
+
+THE OPPOSITE FAILURE IS AS BAD: do not explain a real contradiction away. If the page says X and the same town's record or page says not-X, and nothing in the town reconciles them, the flag STANDS. Fantasy as such is never an excuse; the question is whether THIS town's own facts make the sentence true.
+
+## Your inputs
+- Your batch: `@@BATCH@@` — a JSON list; each item has `id` (the sentence's id, e.g. C22108), `town` (a seed such as `bar0-metropolis-calm-rand-21`), `section` (the page tab), `text` (the flagged sentence), `readers` (which of two readers flagged it: a, b or ab), `kinds`, and `whys` (each reader's reason).
+- The readers' own packets: `/home/user/rec/bar4/packets-640266f64/cal-NN.txt` (nineteen files). A town's block starts with a line `==== TOWN <seed> · "<name>" …` followed by the HEADER the readers judged against (CRISIS, GOVERNMENT, STATE, DEFENCE, HOUSES, TRADE, INCOME, FOUNDING, FOOD, LAND, QUARRELS, TENSIONS, PAST, PEOPLE), then every sentence of the page as `C<id> <text>` under `## <tab>` headings. Find a town's file with `grep -l "TOWN <seed>" /home/user/rec/bar4/packets-640266f64/cal-*.txt`. Read the header whole for each town, and read the lines AROUND each flagged id (a row's name, its description and its mark are often on neighbouring lines).
+- The page as rendered, tab by tab: `/home/user/c3out/bar4-640266f64/dumps/<seed>.txt` (headings `== <tab> ==`; NOTE: within one tab a repeated line is printed only the first time, so a list may look shorter than a count above it: that is an artifact of the dump, never a fault of the page).
+- The town's full stored record: `/home/user/c3out/bar4-640266f64/corpus.ndjson.gz` — one JSON object per line, `seed` and the settlement under `s` (keys include `institutions`, `availableServices`, `economicState`, `powerStructure`, `npcs`, `relationships`, `resourceAnalysis`, `history`, `defenseProfile`, `config`, `stress`, `activeConditions`). Use small python scripts (gzip + json) to look up the exact field a reader's premise rests on.
+- The readers' rules (what is and is not a flag): `/home/user/chair/docs/chair/2026-11-14/briefs/BRIEF-REVIEW-BAR-4.md`. Read it whole first: you judge by the same rules, including its list "NOT A FLAG".
+
+## For each flag, decide one verdict
+- `STANDS`: the sentence is contradicted by the town's own record or page, and you found nothing in the town that reconciles it. Quote the contradicting line or field.
+- `EXPLAINED`: something in the town makes the sentence true or plainly reasonable, or the reader's stated premise is wrong on the facts (quote the page line, header line or record field that shows it), or the rules' "NOT A FLAG" list covers it (say which rule).
+- `WEAK`: there is a real mismatch but it is one loose word or a matter of degree that a careful owner would call minor, not a false statement (say exactly what is off).
+- `UNSURE`: you could not settle it; say what you would need.
+Check the reader's premise itself each time (e.g. if a reader says "stores 0.1 months", find that figure). Where two readers gave different reasons, check both.
+
+## Output: write ONLY this one file
+`@@OUT@@` — a JSON list with one object per flag of your batch, in the batch's order: `{"id": "...", "town": "...", "verdict": "STANDS|EXPLAINED|WEAK|UNSURE", "evidence": ["<short verbatim quote> — <where: packet file and C-id, dump tab, or record field path>", ...], "note": "<one or two plain sentences: why>"}`. Every flag of the batch exactly once. Before you finish, check by script that the file parses, has every id of your batch once, and only those four verdict words.
+
+## Constraints
+Read-only on a shared machine where a long test run is in flight: run nothing heavy (no npm, no node test runs, no builds, no git writes). Only read files, grep, and small python scripts. Never touch `/home/user/settlement-engine`. Change nothing under `/home/user/c3out`, `/home/user/rec/bar4/packets-640266f64` or `/home/user/chair`. Scratch scripts go under `/home/user/rec/bar4/verify2/scratch-@@N@@/`.
+
+## Your final report (short)
+The count of each verdict; the ids you marked EXPLAINED with one line each; the ids you marked WEAK or UNSURE with one line each. Say plainly anything you could not verify.

@@ -1,0 +1,113 @@
+[
+{
+"id": "C0394",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Daily markets offers Fresh produce unmarked under famine with 93% food gap and siege; same market's General trade row is Impaired in Services"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Fresh produce",
+"town": "bar0-city-under_siege+famine-rand-21",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Fresh produce",
+"n": 96,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C19049",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Access to external mill is marked Stopped by the siege, yet its own service row 'Grain milling' is printed on offer with no mark",
+"b: house is marked 'Stopped by the siege' but its service 'Grain milling (a day away)' prints on offer with no stopped mark, unlike the other stopped houses"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "ServicesGrain milling (a day away)",
+"town": "bar0-hamlet-under_siege-rand-21",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesGrain milling (a day away)",
+"n": 224,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C6149",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Mills row offers Grain grinding unmarked under siege and famine (grown 6%); Crisis lists Mills as touched, and C7482 calls it impaired"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "ServicesGrain grinding",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesGrain grinding",
+"n": 351,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C6282",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Daily markets row offers Fresh produce and Street food, open every day, unmarked under famine (deficit 94%) and siege; Crisis lists it as touched"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Fresh produce",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Fresh produce",
+"n": 96,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+},
+{
+"id": "C6634",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Street food offers roasted meats unmarked, though FOOD says livestock failed; Fresh meat is marked scarce"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Pies, stews, roasted meats.",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Systems/Services"
+],
+"fold": "Pies, stews, roasted meats.",
+"n": 51,
+"struck": "MARK ADJACENT: the row carries its mark on the line beside the flagged one"
+}
+]
