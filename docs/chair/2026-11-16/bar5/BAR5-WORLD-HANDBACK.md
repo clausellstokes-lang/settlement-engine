@@ -1,6 +1,6 @@
 # BAR5-WORLD · hand-back
 
-**STATUS: CURED AND MEASURED; awaiting the chair's merge tip.** Base `600b7683a` (the joined line), both audits merged (`d40d6ab28`, `c0ea05497`; documents and `tests/helpers/pageLaws/` only). Branch `lane/bar5-world-2026-11-16`. Rulings worked to: BRIEF-BAR5 (Amendment L and the amendments), BRIEF-BAR4's Amendment K, its measure's rules and amendments, BRIEF-BAR3's amendments, BRIEF-BAR2's method; the chair's ruling WS1 (17:54 UTC: the one sibling row in `foodwaysPrintSiblings.js` is this seat's).
+**STATUS: FINAL** at the tip that carries this line (the work complete at `4f5de11c0`; this push adds the hand-back's lines only). No merge of the line (the chair, 19:43 UTC): the branch stays as cut from 600b7683a; the merge seat lands it. Base `600b7683a` (the joined line), both audits merged (`d40d6ab28`, `c0ea05497`; documents and `tests/helpers/pageLaws/` only). Branch `lane/bar5-world-2026-11-16`. Rulings worked to: BRIEF-BAR5 (Amendment L and the amendments), BRIEF-BAR4's Amendment K, its measure's rules and amendments, BRIEF-BAR3's amendments, BRIEF-BAR2's method; the chair's ruling WS1 (17:54 UTC: the one sibling row in `foodwaysPrintSiblings.js` is this seat's).
 
 ## THE RULES
 
@@ -57,8 +57,9 @@ Each file run ALONE at 600b7683a and at `4f4900da6` (43 files: BRIEF-BAR2 F2's s
 
 ## What is left, in order
 
-1. The chair's one tip of the closed line to merge near the end.
-2. BAR5-MAGIC's word for `dailyLifeLogic.js`'s magic flag, if it comes.
+1. THE SEAM (the chair, 19:43 UTC: after the join, not written here): `src/components/new/dailyLifeLogic.js :: extractSettlementContext`, line 130, `const magicDep       = dp.magicDependency ?? false;` reads the record's stored magic flag (`defenseProfile.magicDependency`) into `ctx.magicDep`. It should read THE WORD THE PAGE PRINTS: BAR5-MAGIC's leaf (the shown reliance reading). Today nothing on the Daily Life tab prints `ctx.magicDep` (the local narrative reads neither it nor the magic band), so the page does not move.
+2. `docs/chair/2026-11-16/bar5/AUDIT/law5-inventory.mjs` WAS CHANGED BY THREE SEATS: this branch holds the reader of the PER-SEAT exclusion tables (`tables/B.law5.exclusions.<SEAT>.json`, read after the walk, every stale row reported); BAR5-FOOD's table is already in that form. The join unites the three edits into that one reader.
+3. The close's registrations and stored figures named above (the presumed-things rows, the mutation manifest entry, the reference's 38 configurations, the edge bundle's stale rows, the first-paint bytes).
 
 ## FOR THE OWNER, IN PLAIN WORDS
 
