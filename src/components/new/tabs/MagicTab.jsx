@@ -153,7 +153,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
                 of two is a caption with orphans under it. */}
             <NameColumns count={FACET_ORDER.length} style={{ padding: `0 ${SP.md}px` }}>
               {FACET_ORDER.map(key => (
-                <Facet key={key} label={FACET_LABEL[key]} value={key === 'religiousAcceptance' ? religiousAcceptanceShown(settlement, posture[key]) : posture[key]} /> /* L1c: the word says what the hostility is toward (magicProvisionShown.js :: religiousAcceptanceShown) */
+                <Facet key={key} label={FACET_LABEL[key]} value={key === 'religiousAcceptance' ? religiousAcceptanceShown(settlement, religiousAcceptanceUnderHeresy(settlement, posture[key])) : posture[key]} /> /* L1c: the word says what the hostility is toward (magicProvisionShown.js :: religiousAcceptanceShown); HR2 (BAR6-CULTURE): the faith's stance is the heresy flag's (facts/heresyStance.js) */
               ))}
             </NameColumns>
           </div>
@@ -227,6 +227,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   );
 }
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
+import { religiousAcceptanceUnderHeresy } from '../../../domain/facts/heresyStance.js'; // HR2 (BAR6-CULTURE): the row reads the heresy flag the Faith tab's line reads
 import { foodAmongMagicDependents, magicDependentChainsShown, magicNoteShown, magicRoleBandShown, magicRoleHeld, religiousAcceptanceShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
 import { magicFoodChannelWord } from '../../../domain/display/foodBalanceBar.js'; // L1b: the food row's own channel word
 import { foodRowShown } from '../../../domain/display/foodRowShown.js'; // L1b: the food record as the food row prints it

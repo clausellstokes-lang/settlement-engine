@@ -222,7 +222,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
- * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
+ * @property {boolean} [dangerComing] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
@@ -269,6 +269,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // two facts, each the defence home's own atom (`defence.js :: court`, `prison`), so a line naming one
   // and not the other declares both.
   court: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.court) }),
+  // BAR6-CULTURE (LAW 6 rule 6d-court; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beside the
+  // court: a court sits ON THE LIVE ROSTER, the one reading the Defense tab's Legal Infrastructure row prints (`defence.js ::
+  // courtHoldersOf`: a courthouse, or a house that drew a court service). The `court` atom's name test takes every town hall
+  // for a court and disagrees with that row by design; a line that says the town has a hall of justice presumes this (C161931).
+  'court sits': dim({ shape: 'presence', home: 'courtSits', reader: (f) => bool(f.courtSits) }),
   prison: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.prison) }),
   // BAR5-THINGS (LAW 4 "the notary"; BRIEF-BAR5; amendment 5b; vetoable by the owner, on the veto list as new vocabulary):
   // beside the court: a house that writes, witnesses or tries the law stands, by catalogue identity (`legalHouse.js`). A
@@ -356,6 +361,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
   // presumes its absence (REVIEW-BAR-4 C18744, C45642).
   'danger coming': dim({ shape: 'presence', home: 'dangerComing', reader: (f) => bool(f.dangerComing) }),
+  // BAR6-CULTURE (LAW 10 rule 10g-legacy; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beside the
+  // history's other presence: the event the record's top legacy names pulled something down (a fire, a flood, a sickness, a
+  // siege or raid, an occupation: `legacyRuin.js`). "Much of what stands now was built after the X" presumes it (C55011).
+  'legacy ruin': dim({ shape: 'presence', home: 'legacyRuin', reader: (f) => bool(f.legacyRuin) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',

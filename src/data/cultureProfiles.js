@@ -374,7 +374,11 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Maize, beans, squash, chile, tomatoes, greens, cacao, and locally available fish or game form the staple pattern.',
-      { text: 'Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.', needs: ['population: ≥ middling'] },
+      // BAR6-CULTURE (LAW 6 rule 6d-fields, C113231): the fields are credited with feeding the town only where it grows grain; the
+      // foodways composer keeps a culture sentence only where the sources it names feed the place (domain/foodways.js ::
+      // SOURCE_WORDS), so the sentence names its grain. Was "Intensive plots, terraces, raised fields, and tribute redistribution
+      // support dense populations." (a metropolis fed by its herds alone). VETOABLE wording (the owner's).
+      { text: 'Maize and other grain from intensive plots, terraces, and raised fields, with tribute redistribution, support dense populations.', needs: ['population: ≥ middling'] },
     ],
     sacredLife: [
       { text: 'Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.', needs: ['institution: temple'] },
@@ -391,7 +395,7 @@ export const CULTURE_PROFILES = Object.freeze({
     architecturalDetails: [
       { text: 'a raised ceremonial precinct overlooks a broad and busy open plaza', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #33): a precinct over a busy plaza is a town's (a thorp of twelve printed it)
       'terraces, plastered platforms, and residential compounds step with the terrain',
-      { text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: ['tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
+      { text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS); BAR6-CULTURE (6a, C209939): neighbourhoods are a town's, was `tier: ≥ village`
     ],
     institutionBias: {
       categories: { Religious: 1.08, Economy: 1.07, Agriculture: 1.07 },
@@ -417,7 +421,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.',
-      'Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.',
+      { text: 'Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.', needs: ['tier: ≥ village'] }, // BAR6-CULTURE (LAW 6 rule 6a): a street's kitchens need a village's lanes
     ],
     sacredLife: [
       { text: 'Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.', needs: ['institution: temple'] },
@@ -599,8 +603,9 @@ export const CULTURE_LINE_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'a straight lane runs between the houses to the oldest courtyard', twinOf: 'the main street ends at the administrative precinct', needs: Object.freeze(['tier: ≤ village']) }),
   ]),
   'causeways and managed water divide the settlement into organized neighborhoods': Object.freeze([
-    Object.freeze({ text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≥ village']) }),
-    Object.freeze({ text: 'a raised path and a water channel run between the house compounds', twinOf: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≤ hamlet']) }),
+    // BAR6-CULTURE (LAW 6 rule 6a, C209939): neighbourhoods are a town's (the chair's size ruling); was `tier: ≥ village`.
+    Object.freeze({ text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'a raised path and a water channel run between the house compounds', twinOf: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≤ village']) }),
   ]),
   'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space': Object.freeze([
     Object.freeze({ text: 'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space', needs: Object.freeze(['market', 'tier: ≥ village']) }),

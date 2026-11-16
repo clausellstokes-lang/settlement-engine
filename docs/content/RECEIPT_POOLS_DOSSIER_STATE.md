@@ -7189,7 +7189,9 @@ compass word, no real-world place, no named analogy.*
 
 **`LEGACY-RECOVERED`** {colour}
 1. `[ledger]` {settlement} came through the {calamity}, and what the town built in answer still stands, a legacy that is {timeband_age}.
-2. `[street]` Much of what stands in {settlement} now was built after the {calamity}, and that legacy is {timeband_age}.
+2. `[street · legacy ruin]` Much of what stands in {settlement} now was built after the {calamity}, and that legacy is {timeband_age}.
+3. `[street · no legacy ruin]` {settlement} came through the {calamity} and set itself to rights afterwards; that legacy is {timeband_age}.
+4. `[elder · no legacy ruin]` The {calamity} is behind {settlement} now, and the town that came through it is the one that stands; that legacy is {timeband_age}.
 
 **`LEGACY-RECOVERED-MARKED`** {colour}
 1. `[ledger]` {settlement} came through the {calamity}, and the mark left on the town is {timeband_age}.
@@ -7285,9 +7287,10 @@ no compass word, no real-world place, no named analogy.*
 **PROVENANCE:** The composition mechanism: what a town keeps at all is the town explaining what it is for. Spoken strictly through the boolean composition facts, and through no count, no siting and no adjacency. `R-DST-B` is satisfied without strain, because the roster booleans are STANDING CONFIGURATION and every variant below is a structural clause; not one reaches for how the roster came to be the way it is, and there is no cause pool in this block. **Non-redundancy (`R-DST-A`):** `DS-DEF-6` reads the same booleans and reads them as defense CAPABILITY, keyed against `scores.economic/magical`, `tradeAccess` and `blockade`; this block reads them as civic CHARACTER, keyed against nothing but themselves and tier, and the two compose on different pages (`overview`/`power` against `defense`). Two blocks may read one row where they assert DIFFERENT FACTS about it, which is the case `DS-GEN-15` and `DS-GEN-16` established for the stones and the record and which this block inherits rather than re-argues.
 
 **`ADMINISTERED`** {colour}
-1. `[ledger · no crisis: occupied]` {settlement} keeps its own court and its own gaol, and settles its own quarrels.
-2. `[visitor]` {settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.
-3. `[street]` In {settlement} the law keeps a building of its own, and people take their quarrels there.
+1. `[ledger · no crisis: occupied · court sits · prison]` {settlement} keeps its own court and its own gaol, and settles its own quarrels.
+2. `[visitor · court sits · prison]` {settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.
+3. `[street · court sits]` In {settlement} the law keeps a building of its own, and people take their quarrels there.
+4. `[visitor · no court sits]` {settlement} keeps a gaol of its own, though no court sits here to try anyone.
 
 **`GARRISONED`**
 1. `[visitor · no crisis: occupied]` {settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
