@@ -121,6 +121,7 @@ THE CHAIR'S RULINGS TO JOIN-15 (each vetoable by the owner):
 |---|---|---|---|---|---|---|
 | 22 | lane/bar4-firstpaint-2026-11-16 (first, on the chair's word of 14:34 UTC: the repair seat's tip not ready) | bf16469d9 (14:36 2026-11-16; = the hash named) | 7738e71be | e909ed6b0 | none; no file both sides moved | 3 files (2 outside docs/: `vite.config.js` (the lazy-domain list), the new `tests/architecture/factHomesLazy.test.js`); run alone: the added test 3/3, the round's guards (9 files) 109/109, tests/domain/facts 273/273, tests/architecture 347/347, eslint on `vite.config.js` and the new test 0, typecheck:domain:strict 0; known red and not this seat's (the chair): the doors' stored figures and `tests/domain/stateProseKernel.test.js` (cured on point 21's branch) |
 | 21 | lane/bar4-close-sweep-2026-11-16 (FIRST TIP, the chair's word of 14:53 UTC) | bb60c1a0a (14:54; = the hash named) | 7738e71be (the branch holds the ninth branch by its own merge 2f86840ce) | 82308bb8e | none; no file both sides moved | 31 files (29 outside docs/; 15 src: `npcData.js`, `crisisStoppedRow.js`, `dossierMounts.js`, `validationOnPage.js`, nine under `src/domain/facts/` (the new home `pairPlace.js` among them), `foodways.js`, `src/generators/people/pairPlace.js`); no test added; run alone: the round's guards (9 files) 87/87 (109 at point 22: the branch's 30a419237 folds two each-tables, in `bar4MarkPromise` and `bar4HousesPresumptions`, into tests looping the same rows, declared there as a park-debt cure), tests/domain/facts 273/273, tests/architecture 347/347 (`factHomesLazy`, `engineCoreLazyEdge` green), `stateProseKernel` 38/38, eslint on the fifteen 0, typecheck:domain:strict 0 |
+| 21b | lane/bar4-close-sweep-2026-11-16 (SECOND AND LAST TIP, the chair's word of 15:56 UTC) | 1a5678df0 (15:57; = the hash named) | bb60c1a0a (point 21's tip) | a7a042faa | none; no file both sides moved | 6 files (5 outside docs/; 2 src: `src/data/crisisDependence.js` (HR1), `src/domain/facts/houseInputAtHand.js` (OS1)); no test added; run alone: `crisisStoppedRows`, `tailExportsPdf3Batch3`, `crisisBlindWidened` 25/25, the round's guards (9 files) 87/87, tests/domain/facts 273/273, tests/architecture 347/347, eslint on the two 0, typecheck:domain:strict 0 |
 
 ## 3. Every code resolution
 
@@ -148,5 +149,5 @@ Under `/home/user/j15out/` (worktree `/home/user/j15wt`, branch `join15`): `poin
 
 ## 8. WHAT IS LEFT
 
-Landed: point 22 (e909ed6b0); point 21, first tip (82308bb8e).
-1. Next on the chair's word: point 21's SECOND tip of `lane/bar4-close-sweep-2026-11-16` (two more test-side re-keys), its own point; then the two parts of the close (`lane/bar4-close-doors-2026-11-16`, `lane/bar4-close-doors-2-2026-11-16`), each with the merged tree equal to the branch's tree.
+Landed: point 22 (e909ed6b0); point 21, first tip (82308bb8e); point 21b, the last tip (a7a042faa).
+1. Next on the chair's word: the two parts of the close (`lane/bar4-close-doors-2026-11-16`, `lane/bar4-close-doors-2-2026-11-16`), each with the merged tree equal to the branch's tree.
