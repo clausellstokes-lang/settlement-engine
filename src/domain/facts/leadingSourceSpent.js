@@ -16,7 +16,13 @@
  *
  * THE RECORD SPLIT beneath it (named to the chair, not cured here): `foodLand.js :: fishSource` counts a fish row on water as
  * the catch even where every fishing ground is depleted, so the food record keeps naming fish. Measured on the census's 720
- * at 8aef8e7d4 (see the BAR4-CORPUS-ECO hand-back). Layer 2 (the config's resources and the food record). Pure: no randomness, no clock.
+ * at 8aef8e7d4 (see the BAR4-CORPUS-ECO hand-back).
+ *
+ * THE RITES (the chair's FS1 and CORPUS-DEF's measure, 2026-11-16): 26 of the 36 spent-ground towns of the 720 work a fishing
+ * chain the rites hold up (`activeChains[].magicRecovery` > 0, still running). The atom is still true there: the grounds ARE
+ * spent (the page's land rows and the services' shortage marks read them), and the twins written for it say what is true of
+ * both readings ("once came first … the grounds are worked out: what the town still raises for itself is the less for it").
+ * Layer 2 (the config's resources and the food record). Pure: no randomness, no clock.
  *
  * @enforced-by tests/domain/bar4CorpusEcoKinds.test.js
  */

@@ -43,8 +43,26 @@ read was right; the after-run re-reads them), E2 2 → 0, E3 2 → 0.
 - DS-POW-6 duty evasion v2 (reworded) A share of what arrives at {settlement} never appears at the gate, and the dues on it are never paid.
 - DS-POW-6 duty evasion v3 (reworded) Some of the goods that reach {settlement} pay none of the dues owed on them.
 - `ALCHEMY_TRADE_LINE` An alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.
+- `FISH_RITES_LINE` (batch 2, the chair's FS1 with CORPUS-DEF's measure: 13 of the 19 towns of the 720 printing the bought line work a fishing chain the rites hold up) The fishing grounds here are worked thin; rites keep the catch coming, and what they bring in is landed and sold here.
 - `MODERATE_GAP_TWIN` The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin.
 - NEW VOCABULARY (amendment 5b, beside the food-source atoms): `source spent` (`src/domain/facts/leadingSourceSpent.js`) and `own plots` (`src/domain/facts/ownPlots.js`, the chair's FW1).
+
+## Splits left in the record (the chair's FS1: NOT opened this round; for the owner)
+
+- `src/generators/foodLand.js :: fishSource`: a fish row on water counts as the catch where every fishing ground is on
+  `config.nearbyResourcesDepleted`, so `foodRecord.foodSources` names fish over spent grounds: 36 towns of the 720 (26 of them
+  work a fishing chain the rites hold up, `activeChains[].magicRecovery` > 0; 10 do not), 24 of the fresh 300. That leaf
+  feeds the food band; moving it would change 36 towns' hunger.
+
+## Which state each line reads (the chair's 08:15 line: words and marks must agree)
+
+- DS-ECO-9's food-source lines (`source spent`): the GROUNDS: the config's depleted list against the food record's leading
+  source, the same conditions the page's land rows print and the services' fish rows take their shortage mark from
+  (BAR4-SERVICES under FS1). The twins say what is true of both the grounds and a catch the rites may keep up ("once came
+  first … the grounds are worked out: what the town still raises for itself is the less for it"), so they stand beside a
+  shortage mark and beside the rites alike.
+- The income row (`FISH_EXPORT_LINE`'s family): the grounds (`fisheryExhausted`) AND the fishing chain: held up by the rites
+  and running → `FISH_RITES_LINE`; not → `FISH_BOUGHT_LINE` where salted fish is imported, else silent.
 
 ## Rows named for other seats
 

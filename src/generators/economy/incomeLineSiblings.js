@@ -67,6 +67,9 @@ export const FISH_LANDED_LINE = 'Catch landed here and sold fresh or preserved.'
 export const FISH_SOLD_LINE = 'Fish is sold here, fresh or preserved.';
 /** The fish lines' twin where every fishery near the place is fished out and salted fish is bought in (D5; #77). */
 export const FISH_BOUGHT_LINE = 'The fishery here is fished out; the fish sold now is salted and bought in.';
+/** BAR4-CORPUS-ECO (the chair's FS1 and CORPUS-DEF's measure, 2026-11-16: 13 of the 19 towns of the 720 that print the bought line at
+ * 8aef8e7d4 work a fishing chain the rites hold up, `magicRecovery` > 0, still running): the grounds are spent and the catch still comes. */
+export const FISH_RITES_LINE = 'The fishing grounds here are worked thin; rites keep the catch coming, and what they bring in is landed and sold here.';
 /** The entrepôt row's line (tradeGoods.js prints it) and its twin where no warehouse, toll, customs or caravan house
  * stands (TAIL-DEFECON-3, #07231, X9 29522): goods still pass through the crossroads; no house collects a duty on them. */
 export const ENTREPOT_LINE = 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.';
@@ -133,6 +136,7 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: FISH_LANDED_LINE, twinOf: FISH_EXPORT_LINE, excludes: Object.freeze([SIEGE]) }),
     Object.freeze({ text: FISH_SOLD_LINE, twinOf: FISH_EXPORT_LINE, excludes: Object.freeze([SIEGE]) }),
     Object.freeze({ text: FISH_BOUGHT_LINE, twinOf: FISH_EXPORT_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) }),
+    Object.freeze({ text: FISH_RITES_LINE, twinOf: FISH_EXPORT_LINE, excludes: Object.freeze([SIEGE]) }),
   ]),
   [ENTREPOT_LINE]: Object.freeze([
     Object.freeze({ text: ENTREPOT_LINE, needs: Object.freeze(['institution: warehouse']), excludes: Object.freeze([SIEGE]) }),
@@ -200,6 +204,8 @@ export function trueIncomeDesc(desc, f) {
       // TAIL-DEFECON-3: under a famine whose failed source is fish no line offers fish; where every fishery near the
       // place is fished out, the catch is not landed: the salted fish bought in, or no sentence (D5, #77).
       if (f.besieged || f.fishFailed) return '';
+      // BAR4-CORPUS-ECO (FS1): a fishing chain the rites hold up still lands its catch over spent grounds: the rites line, not "bought in"
+      if (f.fisheryExhausted && f.chains.some((c) => /fish/.test(String(c?.chainId ?? '')) && Number(/** @type {any} */ (c)?.magicRecovery) > 0 && !['impaired', 'failed', 'collapsed'].includes(String(c?.status)))) return FISH_RITES_LINE;
       if (f.fisheryExhausted) return bought(/\bsalt(?:ed)? fish\b/i) ? FISH_BOUGHT_LINE : '';
       if (has(/fisher|fishing/)) return sold(/\bsalt(?:ed)? fish\b/i) ? desc : FISH_LANDED_LINE;
       return has(/\bfish/) ? FISH_SOLD_LINE : '';

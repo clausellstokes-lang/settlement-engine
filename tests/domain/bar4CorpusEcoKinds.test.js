@@ -16,6 +16,7 @@ import { detectE1, detectE2, detectE3, leadingSourceSpent, memberSearch, LEADING
 import { leadingSourceSpentOf } from '../../src/domain/facts/leadingSourceSpent.js';
 import { ownPlotsOf } from '../../src/domain/facts/ownPlots.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
+import { FISH_BOUGHT_LINE, FISH_RITES_LINE } from '../../src/generators/economy/incomeLineSiblings.js';
 
 /** The food-source pools' members (the twins are found by what they declare, never by a literal). */
 const STATE_TWINS = /** @type {Array<{text: string, marks?: string[]}>} */ (Object.entries(/** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY)['DS-ECO-9'].pools)
@@ -44,7 +45,11 @@ const AT_BASE = Object.freeze({
   E2: Object.freeze(['r2r-thorp-45', 'r2r-thorp-58', 'r2s-under_siege-hamlet-0', 'r2r-hamlet-27', 'r2r-town-7', 'r2s-occupied-village-0', 'r2s-indebted-city-0', 'r2s-monster_pressure-town-0', 'r2s-religious_conversion-metropolis-0', 'r2s-wartime-thorp-0', 'r2s-mass_migration-hamlet-2']),
   E3: Object.freeze(['r2r-town-15', 'r2r-city-10', 'r2r-city-36', 'r2r-city-49', 'r2r-metropolis-6', 'r2r-metropolis-24', 'r2r-metropolis-45', 'r2r-metropolis-57', 'r2s-recently_betrayed-city-2', 'r2s-infiltrated-metropolis-3']),
 });
-const SEEDS = [...new Set(Object.values(AT_BASE).flat())];
+/** The chair's FS1 (CORPUS-DEF's measure): towns of the 720 that printed FISH_BOUGHT_LINE at the base over a fishing chain the rites
+ * hold up (13 of the 19), and two that printed it with no rites (6 of 19: the KEEP: still bought in). */
+const RITES_AT_BASE = Object.freeze(['r2r-town-6', 'r2r-city-35', 'r2r-metropolis-11', 'r2s-wartime-city-1']);
+const BOUGHT_KEEP = Object.freeze(['r2r-town-3', 'r2r-city-34']);
+const SEEDS = [...new Set([...Object.values(AT_BASE).flat(), ...RITES_AT_BASE, ...BOUGHT_KEEP])];
 
 /** @param {string} seed */
 function configOf(seed) {
@@ -113,6 +118,19 @@ describe('THE ZERO: in every census town where a kind was found at the base, the
       expect(atom(read.record), `${seed} is still in its state`).toBe(true);
       expect(read.lines.some((l) => res.some((re) => re.test(l))), `${seed} prints a twin of its state`).toBe(true);
     }));
+  });
+});
+
+describe('FS1: the fished-out income line reads the rites that hold the fishing chain up', () => {
+  const descs = (/** @type {string} */ seed) => (/** @type {any} */ (READ.get(seed))?.record?.economicState?.incomeSources || []).map((/** @type {any} */ i) => String(i.desc ?? ''));
+  it('where the rites hold the chain up, the rites line prints in place of "bought in"', () => {
+    expectNoSeedFailures(collectSeedFailures(RITES_AT_BASE, (seed) => {
+      expect(descs(seed), seed).toContain(FISH_RITES_LINE);
+      expect(descs(seed), seed).not.toContain(FISH_BOUGHT_LINE); // anchored: the rites line is on the same list, above
+    }));
+  });
+  it('where no rites hold it, the bought line still prints (KEEP)', () => {
+    expectNoSeedFailures(collectSeedFailures(BOUGHT_KEEP, (seed) => { expect(descs(seed), seed).toContain(FISH_BOUGHT_LINE); }));
   });
 });
 
