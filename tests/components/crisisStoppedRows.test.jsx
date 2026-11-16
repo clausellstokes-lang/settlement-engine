@@ -131,7 +131,7 @@ const BATCH2 = [
   ['r2s-under_siege-city-1', 'services', 'Every parish served. Religious observance accessible to all.', 'Every district has a temple.'],
   ['r2r-village-0', 'services', 'Essential for carts, carriers, and working horses', 'Essential for transport and cavalry'], // 07253
   ['r2r-thorp-50', 'services', 'Bulk purchase by households and institutions.', 'Bulk purchase by taverns'], // 04603, 31188 (no tavern stands); BAR2-SERVICES SV2 (2026-11-15): the twin re-keyed by its text, it names no inland trader
-  ['r2r-village-11', 'services', "Collects the lord's dues and the tithe", "the temple tithe"], // 05233, 29223
+  ['r2r-village-11', 'services', 'Collects the dues owed and the tithe', "the temple tithe"], // 05233, 29223; BAR5-MARKS (2026-11-16, C42840): re-keyed by its text, the line reworded to name no lord the record does not hold
   ['r2s-under_siege-town-1', 'services', 'Devotional figures, holy images, and reliquaries.', 'Crucifixes'], // X9 22599 (an East-Asian-inspired town)
   ['r2r-village-29', 'services', 'Arbitrates quarrels before they come to judgment', "the lord's court"], // X9 08236 (no lord, no court)
 ];

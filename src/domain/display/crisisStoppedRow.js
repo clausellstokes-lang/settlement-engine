@@ -15,6 +15,10 @@
  *   plague_onset  travel is discouraged and people do not gather: travellers and gatherings (curtailed, not stopped)
  *   famine        the food the famine failed (`economicState.foodSecurity.foodRecord.failedSource`; a failed mill is
  *                 the grain's, and a record naming no source failed the crops, the grain): that food grows scarce
+ *   wartime       (BAR5-MARKS, the chair's ruling WM1 of 2026-11-16; vetoable by the owner) ONLY what the page itself says
+ *                 the war took (`facts/warReach.js :: warTakesOf`): the iron, where the war's iron hook prints; the working
+ *                 animals, where the paddocks' line prints. A war whose page says neither stops nothing here. The mark is
+ *                 "Curtailed by the war.": the forge works what scrap it holds, the stables what the army left
  *
  * A ROW WITH A WRITTEN CRISIS TWIN KEEPS ITS TWIN: a service whose description is the twin
  * `institutionServices.js :: SERVICE_DESC_SIBLINGS` wrote for that crisis already says the crisis, and is not marked
@@ -66,6 +70,7 @@
 import { resourceGapLines } from './validationOnPage.js';
 import { housesOnSpentGround } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home
 import { crisisOf } from '../facts/crisisKind.js';
+import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach.js'; // BAR5-MARKS (WM1): what the war takes, one home
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
@@ -76,13 +81,15 @@ import { chainCrisisStateShown } from './chainStateShown.js';
 import {
   SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE,
   SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, IMPORTED_INPUT, INCOME_TRADE_HOUSES, NONE,
+  IRON, WORKING_ANIMALS, INPUT_IMPORTED_AS, INCOME_REMEDY_HOUSES,
 } from '../../data/crisisDependence.js';
+import { canonImports } from '../canonicalAccessors.js';
 
 /** The crises this leaf reads, in the order a row's mark takes them. @type {ReadonlyArray<string>} */
-export const STOPPING_CRISES = Object.freeze(['under_siege', 'plague_onset', 'famine']);
+export const STOPPING_CRISES = Object.freeze(['under_siege', 'plague_onset', 'famine', 'wartime']); // BAR5-MARKS (WM1): the war, last
 
 /** The crisis as the page names it. VETOABLE wording. @type {Readonly<Record<string, string>>} */
-const CRISIS_NOUN = Object.freeze({ under_siege: 'the siege', plague_onset: 'the outbreak', famine: 'the famine' });
+const CRISIS_NOUN = Object.freeze({ under_siege: 'the siege', plague_onset: 'the outbreak', famine: 'the famine', wartime: 'the war' });
 
 /**
  * The mark before a row's description, by crisis. Each names its crisis, so each is DECLARED and handed to the list door
@@ -95,6 +102,8 @@ const MARK_LINES = Object.freeze([
   Object.freeze({ text: 'Scarce in the famine.', needs: Object.freeze(['crisis: famine']), kind: 'famine' }),
   // SV7 (the chair's ruling, 2026-11-15; vetoable by the owner): a house the siege stops but for a row of its own that goes on
   Object.freeze({ text: 'Curtailed by the siege.', needs: Object.freeze(['crisis: under_siege']), kind: 'under_siege:curtailed' }),
+  // WM1 (the chair's ruling, 2026-11-16; vetoable by the owner): what the page says the war took, curtailed and not stopped
+  Object.freeze({ text: 'Curtailed by the war.', needs: Object.freeze(['crisis: wartime']), kind: 'wartime' }),
 ]);
 
 /**
@@ -145,7 +154,7 @@ export function crisisMarkText(settlement, crisis) {
 }
 
 /** The same, as one word after a service's name where no description prints (the Institutions tab's doors). VETOABLE. @type {Readonly<Record<string, string>>} */
-export const STOPPED_WORD = Object.freeze({ under_siege: 'stopped', plague_onset: 'curtailed', famine: 'scarce', 'under_siege:curtailed': 'curtailed' });
+export const STOPPED_WORD = Object.freeze({ under_siege: 'stopped', plague_onset: 'curtailed', famine: 'scarce', 'under_siege:curtailed': 'curtailed', wartime: 'curtailed' });
 
 /** The food a failed source names. @type {Readonly<Record<string, string>>} */
 const FOOD_OF_FAILED_SOURCE = Object.freeze({ grain: GRAIN, mill: GRAIN, livestock: LIVESTOCK, fish: FISH, game: GAME });
@@ -156,7 +165,7 @@ const FOOD_OF_FAILED_SOURCE = Object.freeze({ grain: GRAIN, mill: GRAIN, livesto
  * @returns {ReadonlyArray<string>}
  */
 function stoppedBy(kind, settlement) {
-  if (kind === 'under_siege') return [TRAVELLERS, GOODS, GATES];
+  if (kind === 'under_siege') return noHerdsHere(settlement) ? [TRAVELLERS, GOODS, GATES, LIVESTOCK] : [TRAVELLERS, GOODS, GATES];
   if (kind === 'plague_onset') return [TRAVELLERS, GATHERINGS];
   if (kind === 'famine') {
     const failed = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { failedSource?: unknown } } } } | null | undefined} */ (settlement)
@@ -165,11 +174,36 @@ function stoppedBy(kind, settlement) {
     const food = typeof failed === 'string' ? FOOD_OF_FAILED_SOURCE[failed] : GRAIN;
     return food ? [food] : [];
   }
+  if (kind === 'wartime') {
+    // WM1: what the page says the war took, and nothing more
+    const takes = warTakesOf(settlement);
+    return [...(takes.includes(WAR_TAKES_IRON) ? [IRON] : []), ...(takes.includes(WAR_TAKES_ANIMALS) ? [WORKING_ANIMALS] : [])];
+  }
   return [];
 }
 
 /**
- * The three crises active in this place, in the leaf's order.
+ * BAR5-MARKS (LAW 2's `L2.famine.meat`, 2026-11-16; vetoable by the owner): under a siege nothing comes in, so the meat of
+ * a town that raises no herds of its own is not to be had: the food record's own sources (`foodRecord.foodSources`, the
+ * page's food line) name no livestock and the food ledger's pastoral chain is off. A town whose record states neither is not
+ * read (nothing is guessed).
+ * @param {object | null | undefined} settlement
+ * @returns {boolean}
+ */
+function noHerdsHere(settlement) {
+  const food = /** @type {{ economicState?: { foodSecurity?: { chains?: Record<string, unknown> | null, foodRecord?: { foodSources?: unknown } | null } | null } | null } | null | undefined} */ (settlement)
+    ?.economicState?.foodSecurity;
+  const sources = food?.foodRecord?.foodSources;
+  // and the food ledger's own pastoral chain is off (a shepherd's town keeps its herds whatever the sources list)
+  if (!(Array.isArray(sources) && !sources.includes('livestock') && food?.chains?.['Pastoral & livestock'] === false)) return false;
+  // and no house of the town's own herds stands (a house declared on both the herds and the land it works: the shepherd,
+  // the dairy farmer): its flocks are here, whatever the ledger counts (bar3ServicesRows' r2s-under_siege-hamlet-2)
+  return !liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .some((h) => h && typeof h.name === 'string' && !isCustom(h) && houseDependenceOf(h).includes(LIVESTOCK) && houseDependenceOf(h).includes(FIELD_WORK));
+}
+
+/**
+ * The stopping crises active in this place, in the leaf's order.
  * @param {object | null | undefined} settlement
  * @returns {string[]}
  */
@@ -248,6 +282,14 @@ export function housesOnImportedInput(settlement) {
   const s = /** @type {{ resourceAnalysis?: { gaps?: unknown } | null }} */ (settlement);
   const gaps = Array.isArray(s.resourceAnalysis?.gaps) ? /** @type {Array<{ institution?: unknown, kind?: unknown }>} */ (s.resourceAnalysis.gaps) : [];
   const out = new Set(gaps.filter((g) => g && g.kind === 'imported' && typeof g.institution === 'string' && g.institution).map((g) => /** @type {string} */ (g.institution)));
+  // BAR5-MARKS (L2.siege.cutgood): a house whose input the record's imports bring by its own name (`INPUT_IMPORTED_AS`)
+  const imports = canonImports(/** @type {Parameters<typeof canonImports>[0]} */ (settlement)).map((x) => (typeof x === 'string' ? x : String(/** @type {{ name?: unknown }} */ (x)?.name ?? '')).toLowerCase());
+  for (const house of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
+    if (!house || typeof house.name !== 'string' || isCustom(house)) continue;
+    const id = typeof house.catalogId === 'string' && house.catalogId ? house.catalogId : catalogIdForName(house.name);
+    const good = id && Object.prototype.hasOwnProperty.call(INPUT_IMPORTED_AS, id) ? INPUT_IMPORTED_AS[id] : null;
+    if (good && imports.some((x) => new RegExp(`\\b${good}\\b`).test(x))) out.add(house.name);
+  }
   IMPORTED_HOUSES.set(settlement, out);
   return out;
 }
@@ -402,7 +444,8 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
  */
 function incomeHouseKind(settlement, income, crises) {
   const title = typeof income?.source === 'string' ? income.source.trim() : '';
-  const ids = Object.prototype.hasOwnProperty.call(INCOME_TRADE_HOUSES, title) ? INCOME_TRADE_HOUSES[title] : null;
+  const ids = Object.prototype.hasOwnProperty.call(INCOME_TRADE_HOUSES, title) ? INCOME_TRADE_HOUSES[title]
+    : Object.prototype.hasOwnProperty.call(INCOME_REMEDY_HOUSES, title) ? INCOME_REMEDY_HOUSES[title] : null; // BAR5-MARKS: the remedies' shares
   if (!ids || !settlement || typeof settlement !== 'object') return null;
   const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
     .filter((i) => i && typeof i.name === 'string' && !isCustom(i)) // a catalogue house (a custom one has no catalogue id)

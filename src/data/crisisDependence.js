@@ -30,12 +30,21 @@
  *               (`resourceAnalysis.gaps[]`, `kind: 'imported'`: "Smelter runs on imported iron ore"). A siege CURTAILS it: the
  *               house works what it holds and nothing more comes in (the trade record's own reading of a siege: every
  *               dependency on trade "running on existing stockpiles only"). `crisisStoppedRow.js :: housesOnImportedInput`
- *               reads it; its mark is "Curtailed by the siege."
+ *               reads it; its mark is "Curtailed by the siege." ONE HOUSE DECLARES IT (BAR5-MARKS, 2026-11-16): the apothecary
+ *               district, whose own description deals in imported medicines (one focus of three): a siege curtails it
  *   input       (the chair's ruling S5, 2026-11-15) the house's own raw input: a row that is what the house MAKES from
  *               what reaches it (the vintner's wine from grapes, the potter's pots from clay, the dairy's milk from
  *               livestock). No crisis stops it; the leaf's second cause reads it: where the page says no input reaches
  *               the row's house (`validationOnPage.js :: resourceGapLines`, "No grapes reach the vintner."), the row
  *               is marked short of it
+ *   iron        (BAR5-MARKS, the chair's ruling WM1 of 2026-11-16; vetoable by the owner) the iron a house works: the smiths'
+ *               forge work. A war stops it ONLY where the page itself prints the war's reach, the war's iron hook ("War
+ *               has taken the iron: … the smiths have nothing to mend tools with"; `facts/warReach.js :: warTakesOf`);
+ *               its mark is "Curtailed by the war." No other crisis reads it
+ *   working animals
+ *               (WM1, the same ruling) the working animals a row hires out or keeps for hire: horse and cart hire, the
+ *               stables' and the pack-animal trade's. A war stops it ONLY where the page prints the paddocks' line ("Every
+ *               sound animal of working age has a receipt"; `warTakesOf`); its mark is "Curtailed by the war."
  *
  * EVERY KEY IS DECLARED: every service name of `institutionServices.js :: INSTITUTION_SERVICES` and of the informal rows
  * `servicesGenerator.js` writes, and every catalogue id of `institutionalCatalog.js` (the walker,
@@ -62,10 +71,12 @@ export const INPUT = 'input';
 export const GATES = 'beyond the gates';
 export const FIELD_WORK = 'field work';
 export const IMPORTED_INPUT = 'imported input';
+export const IRON = 'iron'; // BAR5-MARKS (WM1): the war's iron, `facts/warReach.js :: WAR_TAKES_IRON` spells the same word
+export const WORKING_ANIMALS = 'working animals'; // BAR5-MARKS (WM1): the war's animals, `WAR_TAKES_ANIMALS`
 /** @type {ReadonlyArray<string>} */
 export const NONE = Object.freeze([]);
 /** Every dependence word, in the order above. @type {ReadonlyArray<string>} */
-export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, IMPORTED_INPUT, INPUT, GATES, FIELD_WORK]);
+export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, IMPORTED_INPUT, INPUT, GATES, FIELD_WORK, IRON, WORKING_ANIMALS]);
 
 /**
  * THE GAPS THE RECORD HOLDS EVERYWHERE (the chair's ruling S7, 2026-11-15; vetoable by the owner): a house whose input the
@@ -197,7 +208,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Cargo loading and unloading": Object.freeze([GOODS]),
   "Cargo shipping": Object.freeze([GOODS]),
   "Cargo storage": Object.freeze([GOODS]),
-  "Carriage hire": NONE,
+  "Carriage hire": Object.freeze([WORKING_ANIMALS]), // BAR5-MARKS (WM1): the horses that draw it
   "Carved goods": NONE,
   "Cask repair": NONE,
   "Central register": NONE,
@@ -491,7 +502,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Honey": NONE,
   "Horse boarding": NONE,
   "Horse change": Object.freeze([TRAVELLERS]),
-  "Horse hire": Object.freeze([TRAVELLERS]),
+  "Horse hire": Object.freeze([TRAVELLERS, WORKING_ANIMALS]), // BAR5-MARKS (WM1): the war's receipts
   "Horse trading": NONE,
   "Horseshoeing": NONE,
   "Hospitality": Object.freeze([TRAVELLERS]),
@@ -674,7 +685,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Organised games": NONE,
   "Overnight boarding": NONE,
   "Overnight stabling": Object.freeze([TRAVELLERS]),
-  "Pack animal hire": NONE,
+  "Pack animal hire": Object.freeze([WORKING_ANIMALS]), // BAR5-MARKS (WM1)
   "Pack animal sales": NONE,
   "Paid companionship": NONE,
   "Parcel forwarding": Object.freeze([TRAVELLERS, GOODS]),
@@ -985,7 +996,7 @@ export const SERVICE_DEPENDENCE_BY_DESC = Object.freeze({
     "Off-duty soldiers available for escort": Object.freeze([TRAVELLERS]),
   }),
   "Pack animal hire": Object.freeze({
-    "Rent animals with or without handler for journeys.": Object.freeze([TRAVELLERS]),
+    "Rent animals with or without handler for journeys.": Object.freeze([TRAVELLERS, WORKING_ANIMALS]), // BAR5-MARKS (WM1)
   }),
 });
 
@@ -1020,8 +1031,8 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "almshouse": NONE,
   "annual_fair": Object.freeze([TRAVELLERS, GOODS, GATHERINGS]),
   "apothecary": Object.freeze([INPUT]),
-  "apothecary_district": NONE,
-  "apothecary_established": NONE,
+  "apothecary_district": Object.freeze([INPUT, IMPORTED_INPUT]), // BAR5-MARKS: it works medicinal herbs (`INPUT_IMPORTED_AS`), and its own description deals in imported medicines
+  "apothecary_established": Object.freeze([INPUT]), // BAR5-MARKS (L2.siege.cutgood): the same
   "aqueduct_or_water_system": NONE,
   "assassins_guild": NONE,
   "assay_office": NONE,
@@ -1037,8 +1048,8 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "beekeeper": Object.freeze([FIELD_WORK]), // SV8: its hives on the land the siege curtails
   "black_market": NONE,
   "black_market_bazaar": NONE,
-  "blacksmith": NONE,
-  "blacksmiths_3_10": NONE,
+  "blacksmith": Object.freeze([IRON]), // BAR5-MARKS (WM1): the forge works iron
+  "blacksmiths_3_10": Object.freeze([IRON]), // BAR5-MARKS (WM1): the forge works iron
   "bowyer_fletcher": NONE,
   "bowyers_fletchers_guild": NONE,
   "brewer": Object.freeze([GRAIN]),
@@ -1191,7 +1202,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "noble_governor": NONE,
   "opera_house": NONE,
   "outlaw_shelter": NONE,
-  "pack_animal_trader": NONE,
+  "pack_animal_trader": Object.freeze([TRAVELLERS, WORKING_ANIMALS]), // BAR5-MARKS: its trade is the working animals (WM1), hired to travellers by its own description
   "palace_government_complex": NONE,
   "palisade": NONE,
   "palisade_or_earthworks": NONE,
@@ -1212,7 +1223,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "professional_city_watch": NONE,
   "public_bathhouse": NONE,
   "red_light_district": NONE,
-  "resident_smith_part_time": NONE,
+  "resident_smith_part_time": Object.freeze([IRON]), // BAR5-MARKS (WM1): the forge works iron
   "river_boatyard": NONE,
   "river_ferry": Object.freeze([TRAVELLERS]),
   "rookery": NONE,
@@ -1224,8 +1235,8 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "sawmill_commercial": Object.freeze([INPUT]), // HR1 (BAR4-CLOSE-SWEEP, the chair's ruling, 2026-11-16): the rung runs the timber chain (BAR4-RECORD R1), so its house is short where its services are
   "scroll_scribe": NONE,
   "sewage_system": NONE,
-  "shepherd": Object.freeze([FIELD_WORK]), // SV8: its flocks on the grazing the siege curtails
-  "shepherd_collective": Object.freeze([FIELD_WORK]), // SV8: the same flocks, held in common
+  "shepherd": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: its flocks on the grazing the siege curtails
+  "shepherd_collective": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: the same flocks, held in common
   "shipyard": NONE,
   "slave_market": NONE,
   "slave_market_district": NONE,
@@ -1236,7 +1247,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "smuggling_operation": Object.freeze([GOODS]),
   "smuggling_waypoint": Object.freeze([GOODS]),
   "specialized_metalworkers": NONE,
-  "stable_district": NONE,
+  "stable_district": Object.freeze([TRAVELLERS, WORKING_ANIMALS]), // BAR5-MARKS: its trade is the working animals (WM1), for merchants and travellers by its own description
   "stable_master": NONE,
   "stable_yard": Object.freeze([TRAVELLERS]),
   "state_granary_complex": NONE,
@@ -1407,6 +1418,9 @@ export const SERVICE_FREE_OF_HOUSE = Object.freeze({
   "inns_and_taverns_district": Object.freeze({ "Entertainment": Object.freeze([TRAVELLERS]) }),
   "travelers_inn": Object.freeze({ "Meals": Object.freeze([TRAVELLERS]) }),
   "stable_yard": Object.freeze({ "Overnight boarding": Object.freeze([TRAVELLERS]) }),
+  // BAR5-MARKS (2026-11-16): the town's own horses boarded, and the carriages within the walls; the animals sold in town
+  "stable_district": Object.freeze({ "Livery and boarding": Object.freeze([TRAVELLERS]), "Carriage hire": Object.freeze([TRAVELLERS]) }),
+  "pack_animal_trader": Object.freeze({ "Pack animal sales": Object.freeze([TRAVELLERS]), "Tack and equipment": Object.freeze([TRAVELLERS]) }),
   // made and valued by the quarter's own hands
   "luxury_goods_quarter": Object.freeze({ "Custom commissions": Object.freeze([GOODS]), "Appraisal": Object.freeze([GOODS]) }),
   // proclaimed whether or not a crowd gathers
@@ -1539,6 +1553,36 @@ export const CHAIN_DEPENDENCE = Object.freeze({
 
 /** The fish trade's houses (the two fish shares'). @type {ReadonlyArray<string>} */
 const FISH_TRADE_HOUSES = Object.freeze(['fish_market', 'fisher_s_landing', 'fishing_community', 'fishmonger']);
+
+/**
+ * A HOUSE'S INPUT BROUGHT IN BY ITS OWN NAME (BAR5-MARKS, LAW 2's `L2.siege.cutgood`, 2026-11-16; vetoable by the owner):
+ * the herb houses work medicinal herbs, and where the record's imports bring them by that name (`canonicalAccessors.js ::
+ * canonImports`: "Medicinal herbs") the page says the town's healing depends on herbs from outside
+ * (`chainNeedShown.js :: chainNeedLine`, "… depend on medicinal herbs from outside, which the siege has cut off"). Under a
+ * siege such a house is on an imported input as a house the resource analysis gaps `imported` is
+ * (`crisisStoppedRow.js :: housesOnImportedInput`): it works what it holds and nothing more comes in, "Curtailed by the
+ * siege." Keyed by catalogue id; the value is the import's name as the record spells it, matched whole-word, any case.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const INPUT_IMPORTED_AS = Object.freeze({
+  "apothecary": 'medicinal herbs',
+  "apothecary_district": 'medicinal herbs',
+  "apothecary_established": 'medicinal herbs',
+});
+
+/**
+ * THE REMEDIES' SHARES AND THEIR HOUSES (BAR5-MARKS, the same rule): an income share of the remedies trade (the economy's
+ * titles) reads its herb houses as `INCOME_TRADE_HOUSES` reads a resource trade's (`crisisStoppedRow.js ::
+ * incomeHouseKind`): where every live house of the trade carries a mark, the share takes the mildest of them. Apart from
+ * `INCOME_TRADE_HOUSES`, which is the resource trades' own declaration (`economy/incomeLineSiblings.js ::
+ * RESOURCE_ROW_TRADES`, held by tests/domain/bar4MarkPromise.test.js (e)).
+ */
+const REMEDY_TRADE_HOUSES = Object.freeze(['alchemist_shop', 'apothecary', 'apothecary_district', 'apothecary_established']);
+/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+export const INCOME_REMEDY_HOUSES = Object.freeze({
+  "Apothecary & Alchemy": REMEDY_TRADE_HOUSES,
+  "Herbalist & Apothecary": REMEDY_TRADE_HOUSES,
+});
 
 /**
  * AN INCOME SHARE OF A HOUSE'S TRADE AND ITS HOUSES (BAR4-SERVICES S1 (ii), the chair's direction of 2026-11-16; vetoable by
