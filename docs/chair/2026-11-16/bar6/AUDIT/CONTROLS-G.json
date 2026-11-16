@@ -1,0 +1,1051 @@
+[
+ {
+  "id": "C113231",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-metropolis-calm-rand-31",
+  "text": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "printedClasses": [],
+  "source": [],
+  "grepFile": "src/data/cultureProfiles.js"
+ },
+ {
+  "id": "C115374",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-metropolis-calm-rand-32",
+  "text": "Crates of pots and glassware, packed in straw, wait for the carts on the road out.",
+  "printedClasses": [
+   "outside",
+   "goods"
+  ],
+  "source": [
+   {
+    "file": "src/data/arrivalProse.js",
+    "pool": "ARRIVAL_SENSES.kilns/dominant",
+    "line": 258,
+    "classes": [
+     "outside",
+     "goods"
+    ],
+    "status": {
+     "outside": "declared",
+     "goods": "declared"
+    },
+    "via": "needs [trade at work: kilns] · excludes [crisis: under_siege] · crisis [any] · pool keyed by house/trade"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C128237",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-metropolis-calm-rand-35",
+  "text": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+  "printedClasses": [],
+  "source": [],
+  "grepFile": "src/generators/power/rulingStructure.js, src/data/powerSiblings.js"
+ },
+ {
+  "id": "C146255",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-metropolis-calm-rand-40",
+  "text": "Nothing presses Neaeia at present: its defences would make any attack costly, so raiders and rivals look elsewhere.",
+  "printedClasses": [
+   "threat"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/defense.generated.js",
+    "pool": "DS-DEF-1::readiness STRONG",
+    "line": null,
+    "classes": [
+     "threat"
+    ],
+    "status": {
+     "threat": "declared"
+    },
+    "via": "marks [no threat, no danger coming] · pool {crisis-scoped}"
+   },
+   {
+    "file": "src/domain/display/stateProse/postureLineDisqualifiers.js",
+    "pool": "POSTURE_LINE_DISQUALIFIERS",
+    "line": 63,
+    "classes": [
+     "threat"
+    ],
+    "status": {
+     "threat": "none"
+    },
+    "via": ""
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C150831",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-thorp-calm-rand-27",
+  "text": "Porters bent under loaded frames file past, and someone counts them in.",
+  "printedClasses": [],
+  "source": [],
+  "grepFile": "src/data/arrivalProse.js"
+ },
+ {
+  "id": "C154042",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-thorp-calm-rand-34",
+  "text": "Nobody at Loughshaw warns visitors about particular streets, because the warning would cover all of them.",
+  "printedClasses": [
+   "size"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/defense.generated.js",
+    "pool": "DS-DEF-3::Dangerous",
+    "line": null,
+    "classes": [
+     "size"
+    ],
+    "status": {
+     "size": "colour"
+    },
+    "via": "marks [colour]"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C15780",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-city-under_siege+famine-rand-33",
+  "text": "Spice and drying herbs scent every lane, and the stalls are piled with them.",
+  "printedClasses": [
+   "plenty",
+   "goods"
+  ],
+  "source": [
+   {
+    "file": "src/data/arrivalProse.js",
+    "pool": "ARRIVAL_SENSES.herbs/dominant",
+    "line": 304,
+    "classes": [
+     "plenty",
+     "goods"
+    ],
+    "status": {
+     "plenty": "other",
+     "goods": "declared"
+    },
+    "via": "needs [market] · pool keyed by house/trade"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C157891",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-town-calm-rand-27",
+  "text": "Nobody here talks about the price of bread.",
+  "printedClasses": [
+   "plenty"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "pool": "DS-ECO-1::COMBINATION C1: a high rung on a working approach",
+    "line": null,
+    "classes": [
+     "plenty"
+    ],
+    "status": {
+     "plenty": "declared"
+    },
+    "via": "marks [no hunger] · pool {crisis-scoped}"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C158113",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-town-calm-rand-27",
+  "text": "No one here works the stone near Gantulgakhurel.",
+  "printedClasses": [
+   "resource"
+  ],
+  "source": [],
+  "grepFile": "(not in src as written)"
+ },
+ {
+  "id": "C161931",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-town-calm-rand-30",
+  "text": "The town is visibly governed: a hall of justice, a gaol.",
+  "printedClasses": [
+   "office"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/general.generated.js",
+    "pool": "DS-GEN-17::ADMINISTERED",
+    "line": null,
+    "classes": [
+     "office"
+    ],
+    "status": {
+     "office": "colour"
+    },
+    "via": "marks [] · pool {colour}"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C171330",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-town-calm-rand-37",
+  "text": "Work on the timber here stops half-way: no charcoal burner finishes it.",
+  "printedClasses": [
+   "resource"
+  ],
+  "source": [],
+  "grepFile": "src/generators/resourceGenerator.js"
+ },
+ {
+  "id": "C184150",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-town-occupied-rand-31",
+  "text": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the town's tables.",
+  "printedClasses": [
+   "plenty",
+   "resource"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "pool": "DS-ECO-9::FOOD SOURCES: several, the largest named",
+    "line": null,
+    "classes": [
+     "plenty"
+    ],
+    "status": {
+     "plenty": "declared"
+    },
+    "via": "marks [no crisis: famine, no crisis: under_siege, food: ≥ importDependent, no source spent]"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C204663",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-village-calm-rand-33",
+  "text": "There is glass sand in Polaki's country worth real money elsewhere, and none of it leaves the village for sale.",
+  "printedClasses": [
+   "resource"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "pool": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
+    "line": null,
+    "classes": [],
+    "status": {},
+    "via": "marks []"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C205552",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-village-calm-rand-34",
+  "text": "Beiyuan has no wall, and nothing threatens it now that a wall would keep out.",
+  "printedClasses": [
+   "threat"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/defense.generated.js",
+    "pool": "DS-DEF-11::UNWALLED-SMALL",
+    "line": null,
+    "classes": [
+     "threat"
+    ],
+    "status": {
+     "threat": "declared"
+    },
+    "via": "marks [no threat, no danger coming, no crisis: wartime, crisis: any] · pool {crisis-scoped}"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C209939",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-village-calm-rand-41",
+  "text": "Causeways and managed water divide the settlement into organized neighborhoods.",
+  "printedClasses": [
+   "size"
+  ],
+  "source": [
+   {
+    "file": "src/data/cultureProfiles.js",
+    "pool": "CULTURE_PROFILES.architecturalDetails",
+    "line": 394,
+    "classes": [
+     "size"
+    ],
+    "status": {
+     "size": "declared"
+    },
+    "via": "needs [tier: ≥ village] · channel siblings (twin) [tier: ≥ village] · tier key or code gate (unverified)"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C217292",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-village-famine-rand-37",
+  "text": "Kleinberg's market handles more than the village could ever use.",
+  "printedClasses": [
+   "plenty"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/general.generated.js",
+    "pool": "DS-GEN-13::ENTREPOT",
+    "line": null,
+    "classes": [
+     "plenty"
+    ],
+    "status": {
+     "plenty": "declared"
+    },
+    "via": "marks [crisis: any, no crisis: under_siege, no crisis: plague_onset] · pool {crisis-scoped} · pool atoms [market]"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C219863",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-village-famine-rand-40",
+  "text": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "printedClasses": [
+   "goods"
+  ],
+  "source": [
+   {
+    "file": "src/data/arrivalProse.js",
+    "pool": "ARRIVAL_SENSES.livestock/lines",
+    "line": 177,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "keyed"
+    },
+    "via": "crisis [any] · pool keyed by house/trade"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C26390",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-city-under_siege+famine-rand-36",
+  "text": "Fresh repairs show on Lagoorum's city walls and gates; the city keeps its defences in working order against a real threat.",
+  "printedClasses": [
+   "threat"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/defense.generated.js",
+    "pool": "DS-DEF-11::WALLED-THREATENED",
+    "line": null,
+    "classes": [
+     "threat"
+    ],
+    "status": {
+     "threat": "colour"
+    },
+    "via": "marks [] · pool {colour}"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C3247",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-city-under_siege+famine-rand-28",
+  "text": "To anyone arriving, Teotiha looks defended in the ordinary way: enough for the usual trouble, and nothing to spare.",
+  "printedClasses": [
+   "plenty",
+   "ease",
+   "threat"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/defense.generated.js",
+    "pool": "DS-DEF-1::readiness ADEQUATE",
+    "line": null,
+    "classes": [
+     "plenty",
+     "ease",
+     "threat"
+    ],
+    "status": {
+     "plenty": "declared",
+     "ease": "declared",
+     "threat": "declared"
+    },
+    "via": "marks [no crisis: occupied] · pool {colour}"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C39804",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-city-wartime-rand-27",
+  "text": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "printedClasses": [
+   "outside",
+   "goods",
+   "resource"
+  ],
+  "source": [
+   {
+    "file": "src/data/arrivalProse.js",
+    "pool": "ARRIVAL_SENSES.cloth/dominant",
+    "line": 166,
+    "classes": [
+     "outside",
+     "goods",
+     "resource"
+    ],
+    "status": {
+     "outside": "declared",
+     "goods": "keyed",
+     "resource": "keyed"
+    },
+    "via": "excludes [crisis: under_siege, route: isolated] · crisis [any] · pool keyed by house/trade"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C84094",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-hamlet-calm-rand-32",
+  "text": "The chink of chisels on stone carries on the wind.",
+  "printedClasses": [
+   "goods"
+  ],
+  "source": [
+   {
+    "file": "src/data/arrivalProse.js",
+    "pool": "ARRIVAL_SENSES.stone/lines",
+    "line": 211,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "declared"
+    },
+    "via": "needs [trade at work: stone] · excludes [crisis: under_siege] · pool keyed by house/trade"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C85036",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-hamlet-calm-rand-33",
+  "text": "Mingpo has no wall, and nothing threatens it now that a wall would keep out.",
+  "printedClasses": [
+   "threat"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/defense.generated.js",
+    "pool": "DS-DEF-11::UNWALLED-SMALL",
+    "line": null,
+    "classes": [
+     "threat"
+    ],
+    "status": {
+     "threat": "declared"
+    },
+    "via": "marks [no threat, no danger coming, no crisis: wartime, crisis: any] · pool {crisis-scoped}"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C86447",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-hamlet-calm-rand-36",
+  "text": "Grain surplus · Sacred wood · Ritual components · Quality tools and weapons · Advanced weapons and armor",
+  "printedClasses": [
+   "plenty",
+   "goods"
+  ],
+  "source": [
+   {
+    "file": "src/data/finishedGoodsCategory.js",
+    "pool": "INSTITUTION_FINISHED_GOODS_DEMAND.importLabels",
+    "line": 63,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "none"
+    },
+    "via": ""
+   },
+   {
+    "file": "src/data/supplyChainData.js",
+    "pool": "ADVANCED_WEAPONS_AND_ARMOR",
+    "line": 6,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "none"
+    },
+    "via": ""
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C86484",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-hamlet-calm-rand-36",
+  "text": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "printedClasses": [
+   "goods"
+  ],
+  "source": [
+   {
+    "file": "src/data/finishedGoodsCategory.js",
+    "pool": "INSTITUTION_FINISHED_GOODS_DEMAND.importLabels",
+    "line": 63,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "none"
+    },
+    "via": ""
+   },
+   {
+    "file": "src/data/supplyChainData.js",
+    "pool": "ADVANCED_WEAPONS_AND_ARMOR",
+    "line": 6,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "none"
+    },
+    "via": ""
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C88481",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-hamlet-calm-rand-40",
+  "text": "Raw sand · Date harvest · Desert grain · Medicinal herbs · Wild honey · Coal · Palm sugar",
+  "printedClasses": [
+   "goods",
+   "resource"
+  ],
+  "source": [],
+  "grepFile": "src/generators/demandProfile.js, src/generators/aiLayer.js, src/generators/economy/primaryTradeLists.js"
+ },
+ {
+  "id": "C91256",
+  "read": "wide",
+  "fam": "K4",
+  "town": "bar0-hamlet-under_siege-rand-30",
+  "text": "The Headman's Authority at Drumwood has left obvious decisions untaken because its members cannot agree on them.",
+  "printedClasses": [
+   "office"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/power.generated.js",
+    "pool": "DS-POW-5::council",
+    "line": null,
+    "classes": [
+     "office"
+    ],
+    "status": {
+     "office": "declared"
+    },
+    "via": "marks [no ruler: lord] · pool {colour}"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C94460",
+  "read": "wide",
+  "fam": "K2",
+  "town": "bar0-hamlet-under_siege-rand-36",
+  "text": "A work party heads out together, singing, with tools on their shoulders.",
+  "printedClasses": [
+   "ease"
+  ],
+  "source": [
+   {
+    "file": "src/data/arrivalProse.js",
+    "pool": "ARRIVAL_PEOPLE.slavic",
+    "line": 376,
+    "classes": [
+     "ease"
+    ],
+    "status": {
+     "ease": "any"
+    },
+    "via": "crisis [any]"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C40276",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-village-calm-rand-25",
+  "text": "With more than its herds to rely on, Aquaium can take a bad season in one source without going hungry.",
+  "printedClasses": [
+   "plenty",
+   "resource"
+  ],
+  "source": [
+   {
+    "file": "src/data/dossierStateProse/economy.generated.js",
+    "pool": "DS-ECO-9::FOOD SOURCES: several, the largest named",
+    "line": null,
+    "classes": [
+     "plenty"
+    ],
+    "status": {
+     "plenty": "declared"
+    },
+    "via": "marks [no crisis: famine, food: ≥ secure, no source spent]"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C43575",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-village-famine-rand-26",
+  "text": "Since no one goes unshod, the work never dries up.",
+  "printedClasses": [
+   "work"
+  ],
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "pool": "PAIRS",
+    "line": 403,
+    "classes": [
+     "work"
+    ],
+    "status": {
+     "work": "colour"
+    },
+    "via": "channel column []"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C17290",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "text": "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.",
+  "printedClasses": [
+   "plenty",
+   "resource"
+  ],
+  "source": [],
+  "grepFile": "(not in src as written)"
+ },
+ {
+  "id": "C0333",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-city-under_siege+famine-rand-24",
+  "text": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from a",
+  "printedClasses": [
+   "outside"
+  ],
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "pool": "PAIRS",
+    "line": 1004,
+    "classes": [
+     "outside",
+     "goods"
+    ],
+    "status": {
+     "outside": "colour",
+     "goods": "bound"
+    },
+    "via": "channel column []"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C5441",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "text": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from a",
+  "printedClasses": [
+   "outside"
+  ],
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "pool": "PAIRS",
+    "line": 1004,
+    "classes": [
+     "outside",
+     "goods"
+    ],
+    "status": {
+     "outside": "colour",
+     "goods": "bound"
+    },
+    "via": "channel column []"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C0350",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-city-under_siege+famine-rand-24",
+  "text": "The watch, the garrison, and the caravans buy here.",
+  "printedClasses": [
+   "outside",
+   "office"
+  ],
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "pool": "PAIRS",
+    "line": 1008,
+    "classes": [
+     "outside",
+     "goods",
+     "office"
+    ],
+    "status": {
+     "outside": "other",
+     "goods": "bound",
+     "office": "declared"
+    },
+    "via": "channel column [watch, garrison]"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C3223",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-city-under_siege+famine-rand-25",
+  "text": "The watch, the garrison, and the caravans buy here.",
+  "printedClasses": [
+   "outside",
+   "office"
+  ],
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "pool": "PAIRS",
+    "line": 1008,
+    "classes": [
+     "outside",
+     "goods",
+     "office"
+    ],
+    "status": {
+     "outside": "other",
+     "goods": "bound",
+     "office": "declared"
+    },
+    "via": "channel column [watch, garrison]"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C5452",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "text": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "printedClasses": [
+   "outside",
+   "goods",
+   "office"
+  ],
+  "source": [
+   {
+    "file": "src/data/institutionDescVariants.js",
+    "pool": "PAIRS",
+    "line": 1007,
+    "classes": [
+     "outside",
+     "goods",
+     "office"
+    ],
+    "status": {
+     "outside": "other",
+     "goods": "bound",
+     "office": "declared"
+    },
+    "via": "channel column [watch, garrison]"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C42116",
+  "read": "bar",
+  "fam": "K2",
+  "town": "bar0-village-famine-rand-24",
+  "text": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "printedClasses": [
+   "law"
+  ],
+  "source": [
+   {
+    "file": "src/generators/safetyProfile.js",
+    "pool": "NO_WATCH_SMALL",
+    "line": 1018,
+    "classes": [
+     "law"
+    ],
+    "status": {
+     "law": "none"
+    },
+    "via": ""
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C43925",
+  "read": "bar",
+  "fam": "K4",
+  "town": "bar0-village-famine-rand-26",
+  "text": "Significant military force for this scale; the commander's opinion on civic matters carries institutional weight.",
+  "printedClasses": [],
+  "source": [],
+  "grepFile": "src/generators/power/rulingStructure.js"
+ },
+ {
+  "id": "C44306",
+  "read": "bar",
+  "fam": "K4",
+  "town": "bar0-village-famine-rand-26",
+  "text": "Haruto Lin (the stable keeper) has written down what Dan Li owes and left a copy with a notary.",
+  "printedClasses": [
+   "office"
+  ],
+  "source": [
+   {
+    "file": "src/data/npcData.js",
+    "pool": "STRESS_ECONOMIC_EFFECTS.mutual_leverage",
+    "line": 2182,
+    "classes": [
+     "office"
+    ],
+    "status": {
+     "office": "colour"
+    },
+    "via": "colour"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C15951",
+  "read": "bar",
+  "fam": "K4",
+  "town": "bar0-hamlet-calm-rand-25",
+  "text": "Kiln smoke hangs over Ioannochorion, and the dust of fired clay is on everything.",
+  "printedClasses": [
+   "goods"
+  ],
+  "source": [
+   {
+    "file": "src/data/arrivalProse.js",
+    "pool": "ARRIVAL_SENSES.kilns/dominant",
+    "line": 256,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "declared"
+    },
+    "via": "needs [trade at work: kilns] · crisis [any] · pool keyed by house/trade"
+   },
+   {
+    "file": "src/data/arrivalProse.js",
+    "pool": "ARRIVAL_SENSES.kilns/dominant",
+    "line": 257,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "declared"
+    },
+    "via": "excludes [trade at work: kilns] · crisis [any] · twinOf · pool keyed by house/trade"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C39608",
+  "read": "bar",
+  "fam": "K4",
+  "town": "bar0-village-calm-rand-24",
+  "text": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "printedClasses": [
+   "goods"
+  ],
+  "source": [
+   {
+    "file": "src/data/finishedGoodsCategory.js",
+    "pool": "INSTITUTION_FINISHED_GOODS_DEMAND.importLabels",
+    "line": 63,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "none"
+    },
+    "via": ""
+   },
+   {
+    "file": "src/data/supplyChainData.js",
+    "pool": "ADVANCED_WEAPONS_AND_ARMOR",
+    "line": 6,
+    "classes": [
+     "goods"
+    ],
+    "status": {
+     "goods": "none"
+    },
+    "via": ""
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C39734",
+  "read": "bar",
+  "fam": "K4",
+  "town": "bar0-village-calm-rand-24",
+  "text": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "printedClasses": [
+   "office"
+  ],
+  "source": [
+   {
+    "file": "src/generators/power/rulingStructure.js",
+    "pool": "generatePowerStructure",
+    "line": 558,
+    "classes": [
+     "office"
+    ],
+    "status": {
+     "office": "none"
+    },
+    "via": "tier key or code gate (unverified)"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C42840",
+  "read": "bar",
+  "fam": "K4",
+  "town": "bar0-village-famine-rand-25",
+  "text": "Collects the lord's dues and the tithe",
+  "printedClasses": [
+   "sovereign"
+  ],
+  "source": [
+   {
+    "file": "src/data/institutionServices.js",
+    "pool": "INSTITUTION_SERVICES.Village headman",
+    "line": 47,
+    "classes": [
+     "sovereign"
+    ],
+    "status": {
+     "sovereign": "other"
+    },
+    "via": "needs [institution: temple] · tier key or code gate (unverified)"
+   }
+  ],
+  "grepFile": null
+ },
+ {
+  "id": "C37887",
+  "read": "bar",
+  "fam": "K4",
+  "town": "bar0-town-occupied-rand-25",
+  "text": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+  "printedClasses": [
+   "goods"
+  ],
+  "source": [],
+  "grepFile": "(not in src as written)"
+ }
+]
