@@ -1,0 +1,6 @@
+{"id":"C43377","town":"bar0-town-occupied-rand-23","sev":"LOW","kind":"STATE","why":"says the Iron Dispute legacy is \"a generation old\"; PAST puts it 50 years ago, about two generations","other":""}
+{"id":"C43435","town":"bar0-village-calm-rand-21","sev":"LOW","kind":"STATE","why":"'Relied upon' names nothing it is relied on for; FOOD shows magic 1%, DEFENCE magic none, magical capability Critical","other":""}
+{"id":"C43552","town":"bar0-village-calm-rand-21","sev":"MED","kind":"STATE","why":"'Beemaster' is a personal trade title naming a man; Alyona Alexeyev is (f) in PEOPLE","other":""}
+{"id":"C43623","town":"bar0-village-calm-rand-21","sev":"LOW","kind":"STATE","why":"Mine service says 'ore extraction' with no mark; LAND gives iron ore deposits absent (only coal/peat available), Mining & Quarrying vulnerable","other":""}
+{"id":"C43900","town":"bar0-village-calm-rand-21","sev":"LOW","kind":"LACKS","why":"'which few streets to avoid' in a village of 265 whose own lanes are lanes; population cannot hold streets with avoidable corners","other":""}
+{"id":"DONE","lines":2418,"blocks":2,"flags":5}
