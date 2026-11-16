@@ -1,0 +1,4 @@
+{"id":"C155339","town":"bar0-thorp-calm-rand-37","sev":"MED","kind":"PAIR","why":"Defense tab says danger is 'lone thieves, not a gang... nobody running the streets'; Hooks say 'The crime wave is coordinated', tension names 'the criminal network'","other":"C155099"}
+{"id":"C156593","town":"bar0-thorp-calm-rand-40","sev":"LOW","kind":"BROKEN","why":"'Economic Flows (1 active)' heads two flows, 'All (2)'; Faith & Worship row prints no state word though LAND gives it running","other":"C156584"}
+{"id":"C156726","town":"bar0-thorp-calm-rand-40","sev":"MED","kind":"PAIR","why":"Outlook says raised food 'leaves nothing over in an ordinary year'; Food Security says 'grows a little more than it eats, with some to put by'; FOOD surplus 9%","other":"C156579"}
+{"id":"DONE","lines":1932,"blocks":4,"flags":3}
