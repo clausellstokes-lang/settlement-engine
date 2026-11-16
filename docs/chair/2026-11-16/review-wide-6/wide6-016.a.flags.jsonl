@@ -1,0 +1,3 @@
+{"id":"C39804","town":"bar0-city-wartime-rand-27","sev":"MED","kind":"STATE","why":"Overview says bolts of cloth and bales of wool fill the carts going out; TRADE exports no cloth or wool (wool is imported) and the Economics tab says 'Little cloth is made here'.","other":"C40450"}
+{"id":"C40618","town":"bar0-city-wartime-rand-27","sev":"LOW","kind":"PAIR","why":"Shadow economy 'does little harm' / 'is small' (12% of income, 'Criminal opportunity: Elevated') against Defense tab: rival crews brawling so 'people pay both the cut and the brawling'.","other":"C40859"}
+{"id":"DONE","lines":1928,"blocks":1,"flags":2}
