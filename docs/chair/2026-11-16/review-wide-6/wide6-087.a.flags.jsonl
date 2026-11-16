@@ -1,0 +1,9 @@
+{"id":"C199950","town":"bar0-village-calm-rand-27","sev":"MED","kind":"PAIR","why":"Defense tab: 'The militia is present and responsive' against 'Volunteers with other work to do; ... absent during routine crime' and 'cannot maintain consistent patrol'","other":"C199927"}
+{"id":"C200083","town":"bar0-village-calm-rand-27","sev":"LOW","kind":"PAIR","why":"NPC card titles Toragana 'Shaman' while Relationships and Tonight sheet call the same person 'the priest' (PEOPLE: priest)","other":"C200275"}
+{"id":"C200509","town":"bar0-village-calm-rand-28","sev":"MED","kind":"STATE","why":"Economics: 'depends on one source of income' against the four sources listed (Harvest 59%, Toll 18%, Entrepôt 16%, Fish 7%); INCOME has four","other":"C200502"}
+{"id":"C200564","town":"bar0-village-calm-rand-28","sev":"LOW","kind":"BROKEN","why":"'Weak defences keeps Fjordgarde' : plural subject with singular verb","other":""}
+{"id":"C200637","town":"bar0-village-calm-rand-28","sev":"MED","kind":"PAIR","why":"Defense tab: 'The local watch exists on paper' against 'Each household takes its turn walking the lanes after dark' and 'The watch covers the main paths'","other":"C200671"}
+{"id":"C200774","town":"bar0-village-calm-rand-28","sev":"MED","kind":"PAIR","why":"Sergeant's secret 'draws pay for names that never walk' the roster against the watch card's 'Nobody is paid, and the households hold the rota'","other":"C200388"}
+{"id":"C201135","town":"bar0-village-calm-rand-29","sev":"MED","kind":"STATE","why":"Economics: 'depends on one source of income' against three sources listed (Harvest 72%, Church Tithes 19%, Fish & Maritime Produce 9%); INCOME has three","other":"C201130"}
+{"id":"C201196","town":"bar0-village-calm-rand-29","sev":"MED","kind":"STATE","why":"Resources tab lists 'salt' among commodities available, while Salt Flats are depleted ('has worked out its salt flats'; LAND: depleted)","other":"C201189"}
+{"id":"DONE","lines":2200,"blocks":3,"flags":8}
