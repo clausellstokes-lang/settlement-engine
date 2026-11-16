@@ -190,7 +190,9 @@ describe('B3 the origin line says where the place stands and what the record hol
   });
   /** [the struck or untouched row, seed, the true line that must still print] */
   const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
-    ['09400 struck: a place, not a cause', 'r2r-thorp-40', /^Founded roadside, where the day is measured in traffic/],
+    // re-keyed by identity (BAR5-WORLD, 2026-11-16): the same row (ORIGIN_POOLS.road[2]) reworded to tell no founding (LAW 4:
+    // the founding is the History's); the town and the pick unchanged
+    ['09400 struck: a place, not a cause', 'r2r-thorp-40', /^It stands roadside, where the day is measured in traffic/],
     ['22374 struck: trade on every road, no siege', 'r2s-famine-town-0', /^Built at a major crossroads, and trade comes in on every road\.$/],
     ['port.coastal[1]', 'r2r-town-51', /^A seaport\. The tide sets the working day/],
     ['unsupplied[0] at an 8% gap', 'r2r-thorp-23', /^Isolated from major trade routes\. The settlement cannot fully feed itself, and no food comes in from outside: /],

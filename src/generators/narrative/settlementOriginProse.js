@@ -97,7 +97,10 @@ export const ORIGIN_POOLS = Object.freeze({
     // BAR2-PLACES (the chair's ruling (PL2), 2026-11-15): the rung is drawn before the History and cannot read the town's age,
     // so no row claims generations ("for generations" printed in a thorp twenty years old) nor gives the road an age in years.
     'The road was here first. The settlement grew along its verge, and its news has always come on somebody else\'s cart.',
-    'Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.',
+    // BAR5-WORLD (2026-11-16; LAW 4's founding, 23 of the 720 and 9 of the fresh 300 at 9867b4b17): THE FOUNDING IS TOLD
+    // ONCE, BY THE HISTORY (`history.founding.reason`, drawn after this rung): this row said "Founded roadside" above a
+    // History that founds the town at a ford, a mill or a naval base. It says where the place stands, as its siblings do.
+    'It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.',
     // BAR2-PLACES (PL2): it claims the road and the meal, not the living (the income is the economy's: a mineral town printed it)
     'A road settlement: other people\'s journeys pass its doors, and some of them stop for a meal on the way.',
     'Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.',
