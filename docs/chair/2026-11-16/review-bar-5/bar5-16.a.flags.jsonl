@@ -1,0 +1,14 @@
+{"id":"C36231","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD header says the word the page prints is Secure (band secure, deficit 4%, 6.1 months stores)","other":""}
+{"id":"C36261","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"prints 'Food: Pressured'; FOOD header's word is Secure","other":"C36231"}
+{"id":"C36279","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"Foundations prints 'Food · Pressured'; FOOD header's word is Secure","other":"C36231"}
+{"id":"C37321","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"Daily Life prints Food 'Pressured'; FOOD header's word is Secure","other":"C36231"}
+{"id":"C37416","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"Tonight sheet prints 'Food Pressured.'; FOOD header's word is Secure","other":"C36231"}
+{"id":"C37454","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD header says the word the page prints is Secure (band secure, deficit 3%, 5.6 months stores)","other":""}
+{"id":"C37477","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"prints 'Food: Pressured.'; FOOD header's word is Secure","other":"C37454"}
+{"id":"C37493","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"Foundations prints 'Food · Pressured'; FOOD header's word is Secure","other":"C37454"}
+{"id":"C37490","town":"bar0-town-occupied-rand-25","sev":"LOW","kind":"PAIR","why":"Defense readiness Critical, worse than STATE defence Vulnerable and Monster Defense Adequate, for a town with walls, watch and charter hall","other":"C37448"}
+{"id":"C37631","town":"bar0-town-occupied-rand-25","sev":"LOW","kind":"LACKS","why":"'Several quarters, each with its house of worship' in a town of 329 people; population holds hardly several quarters","other":""}
+{"id":"C37887","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"PAIR","why":"says hide work stops half-way, no final goods; page also prints Boots and shoes, saddles, leather armour as made here by the Tanners' chain","other":"C37845"}
+{"id":"C38315","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"Daily Life prints Food 'Pressured'; FOOD header's word is Secure","other":"C37454"}
+{"id":"C38398","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"Tonight sheet prints 'Food Pressured.'; FOOD header's word is Secure","other":"C37454"}
+{"id":"DONE","lines":2284,"blocks":2,"flags":13}
