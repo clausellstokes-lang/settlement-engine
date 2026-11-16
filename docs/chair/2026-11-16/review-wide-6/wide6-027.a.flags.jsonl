@@ -1,0 +1,5 @@
+{"id":"C69676","town":"bar0-city-wartime-rand-38","sev":"LOW","kind":"PAIR","why":"Foundations 'Defense readiness · Adequate' against the Summary's 'Defense · Fortress' (STATE defence Fortress)","other":"C69593"}
+{"id":"C71074","town":"bar0-city-wartime-rand-38","sev":"LOW","kind":"STATE","why":"'Fully exploited' medicinal herbs 'draws on herb gathering areas'; LAND resources list none, and gives 'Wild foraging areas' absent","other":""}
+{"id":"C71283","town":"bar0-city-wartime-rand-38","sev":"LOW","kind":"PAIR","why":"War Council 'Crown-appointed emergency body' against 'Democratic assembly gives the orders and War Council carries them out'; GOVERNMENT lists no crown, only the assembly","other":"C71172"}
+{"id":"C71880","town":"bar0-city-wartime-rand-38","sev":"MED","kind":"PAIR","why":"Resources 'the smiths have nothing to mend tools with. Work slows' against Summary 'The forge fires burn past dark'","other":"C69578"}
+{"id":"DONE","lines":3406,"blocks":1,"flags":4}
