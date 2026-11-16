@@ -1,0 +1,7 @@
+{"id":"C40039","town":"bar0-town-occupied-rand-21","sev":"LOW","kind":"PAIR","why":"'No arcane practitioners; wards beyond this settlement' beside Systems Health 'Magical Capability: Adequate' and header magic high","other":"C39304"}
+{"id":"C40055","town":"bar0-town-occupied-rand-21","sev":"LOW","kind":"STATE","why":"'Religious acceptance hostile' names nothing it is hostile toward; the brief requires the row to name its object","other":""}
+{"id":"C40862","town":"bar0-town-occupied-rand-22","sev":"MED","kind":"STATE","why":"'A town with timber to hand supplies the region's building work': managed woodland depleted, timber imported, exports list no lumber; Timber & Lumber impaired","other":""}
+{"id":"C40942","town":"bar0-town-occupied-rand-22","sev":"LOW","kind":"LACKS","why":"Criminal services (fencing, hired muscle) offered with no backing house; HOUSES has no gang or criminal house, INCOME has no shadow money, crime tab shows no gang","other":""}
+{"id":"C41499","town":"bar0-town-occupied-rand-22","sev":"MED","kind":"STATE","why":"'Smith-master' is a personal trade title that names a sex, printed for Bixia Suzuki (f)","other":""}
+{"id":"C41801","town":"bar0-town-occupied-rand-22","sev":"MED","kind":"PAIR","why":"Bing 'named Wei as successor' (mentor) contradicts the same pair as bitter professional rivals with an exact tally; both edges print for Wei and Bing","other":"C41791"}
+{"id":"DONE","lines":2769,"blocks":2,"flags":6}
