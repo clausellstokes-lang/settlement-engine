@@ -12,8 +12,9 @@ A repair seat of the close of the content round BAR3. It worked from the joined 
 | `tests/generators/power/sovereignNoCrown.test.js` | `rw3-city-wartime-2` | powers c0d013098, declared cure C9941 (`stressFactions.js :: WARTIME_SOVEREIGN_MILITARY`, no rank) | LAW FIRST: the city (a City-state government) prints "…Authority over the war flows through military channels now."; no power's line and no account of the war names crown, kingdom, king or royal (probe, 0 hits). Re-keyed by identity beside a dated note | 1 failed / 1 passed (2) → 2 passed (2) |
 | `tests/lint/domainAnyCastBaseline.test.js` (e, sent by the chair 23:12 UTC) | "any-cast debt grew": `src/domain/display/economicsCrisisMarks.js`, 3 any-holes, allowance 0 | labels db78c76bd (`fullCardWordUnderSiege`: `/** @type {any} */` on the town for `resourceWorkReading` and on the chain and town for `chainAsShown`) | CURED AT THE CAUSE: the town is cast to `validationOnPage.js`'s own `PageRecord` typedef; the working chain is read once as the `Record<string, unknown>` `chainCardUnderSiege` already takes, and `chainAsShown` accepts it too (its record parameter is `unknown`, so the town needs no cast). No allowance; the baseline is untouched | 3 any in the file → 0; the test 19 passed (19) after |
 | `tests/generators/bar3PlacesRows.test.js` (f, sent by the chair 23:12 UTC) | [21] "C18651 no power over the seat", r2r-town-8 (the anchor /has a say the official seat must reck…/ gone) | defecon 7a4b48a84, declared cure (BAR3-DEFECON-HANDBACK row `flags.theocraticEconomy`, `settleTheocraticFlag`): the flag stands only where the tithes row is the income record's largest and a religious power stands Strong or Dominant. In r2r-town-8 the tithes row is 12% and the shadow economy 33%, so the whole note is withdrawn where its claim is false (not lost where true) | re-keyed by identity beside a dated note to **r2r-town-54**, the one town of the 720 that still prints the note (BAR3-DEFECON-2-HANDBACK: 16 → 1; my scan of the 720 at 98363cb84 finds exactly that one). It has a Strong Feudal Appointee beside Strong Religious Authorities, the anchor prints there, and the refused claim of power over the seat prints nowhere in the 720. The row's law holds | 1 failed / 10 passed (11) → 11 passed (11) |
+| `tests/build/bootSmoke.test.js` via `npm run verify:dist` (g, sent by the chair 00:40 UTC 2026-11-16; red at 98363cb84 itself) | `scripts/boot-smoke.mjs` STAGE 1: "the chunk graph has a CYCLE": coherence-lazy ↔ data-lazy (and the build's own "Circular chunk: coherence-lazy -> data-lazy -> coherence-lazy") | people aef83b4b5 (BAR3-PEOPLE batch 1): `src/data/npcData.js` (data-lazy) imports `sharesPower` from `src/domain/facts/sharedPower.js`, which was excised by TAIL-TIES-8 (`ENGINE_SHARED_DOMAIN_EXCISIONS`) and so rode coherence-lazy with `factsOf.js`; coherence-lazy already imports data-lazy | `vite.config.js` ONLY, in its own form: the leaf leaves the excision list and STAYS in engine-core, as `facts/textOf.js` does, with a dated note naming aef83b4b5. The leaf has no `import` line. Its three importers (`generators/people/ties.js`, `data/npcData.js`, `domain/facts/factsOf.js`; `factVocabulary.js` does not import it) reach a sink in eager engine-core, so there is no edge back. No guard names the leaf by list. Nothing under src/ | boot-smoke stage 1 RED (9,219 static chunk edges) → PASS at every stage (9,186 edges, 604/604 chunks initialised, shell mounted); `bootSmoke` under VERIFY_DIST 10 passed, 1 skipped (the engine-remote-dist stage, run only under VERIFY_ENGINE_REMOTE_DIST=1) |
 
-Commits: (a) 049e5be5, (b) b6ea79f9, (c) 5dd6e180, (d) dc7e5b1a, (e) c26bb240d, (f) e93af30f2.
+Commits: (a) 049e5be5, (b) b6ea79f9, (c) 5dd6e180, (d) dc7e5b1a, (e) c26bb240d, (f) e93af30f2, SW1b 640266f64, (g) the commit that carries this row.
 
 ## SW1 (copied as given; vetoable by the owner)
 
@@ -69,6 +70,22 @@ Each run went through `sh scripts/gate-tail.sh` (shared tier, `--maxWorkers=2`),
 | `npm run typecheck:domain:strict` | 0 (1113, ceiling 1113) |
 | `npm run typecheck:ratchet` | 0 (167, ceiling 167) |
 
+## (g) the receipt (each run to a file through `sh scripts/gate-tail.sh`; the build output removed afterwards)
+
+- `npm run build`: exit 0, and no "Circular chunk" warning, which the base build printed. Chunks, base 640266f64 → cure: engine-core 267.19 → 267.70 kB; coherence-lazy 180.80 → 180.31 kB; data-lazy 1,695.55 → 1,695.51 kB; engine-core-lazy 25.88 kB unchanged.
+- `npm run verify:dist` WHOLE: red on 5 files, the same 5 red at the base (built and run in a worktree at 640266f64):
+  - `vendorPdfLazy`, 3 of 55 (a CEILING, the doors' seat's 1g; named, not touched):
+    - first-paint static closure: base 1,131,858 B → cure **1,132,308 B** (+450), budget 1,131,667;
+    - first-paint gzip: 360,582 → **360,744 B** (+162), budget 360,516;
+    - the engine chunk: 878,204 B both, ceiling 872,758.
+
+    The cure's own cost is the leaf's few hundred bytes in eager engine-core, on a ceiling already exceeded at the base.
+  - `generationWorkerLazy`, 1 of 11 (a CEILING): 2,322,103 B both, ceiling 2,312,179.
+  - `engineBundleReplay` 3 of 7, `engineServiceCore` 1 of 1, `engineServiceStoreParity` 4 of 4: the committed edge bundle (`supabase/functions/_shared/engineBundle.js`, built by `scripts/build-edge-shared.mjs`, which does not read `vite.config.js`) is stale against the round's src. That is a stored figure (a bundle), the doors' seat's. The base reds are the same.
+- `tests/architecture/engineCoreLazyEdge.test.js`: plain 3 passed; under VERIFY_DIST=1 3 passed.
+- `tests/build/` each file alone under VERIFY_DIST=1: 62 of 67 green; the five above red.
+- `tests/architecture/` whole: 344 passed. `npx eslint vite.config.js`: 0.
+
 ## Not touched
 
-Every stored figure (goldens, digests, counts, register rows, bundles) is the doors' seat's (BAR3-CLOSE-DOORS-1). No src file other than the one display leaf (a, e) changed.
+Every stored figure (goldens, digests, counts, register rows, bundles) is the doors' seat's (BAR3-CLOSE-DOORS-1). No src file other than the one display leaf (a, e, SW1b) changed; (g) changed `vite.config.js` alone.
