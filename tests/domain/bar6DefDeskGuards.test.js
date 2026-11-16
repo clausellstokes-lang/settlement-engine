@@ -14,6 +14,9 @@
  *   (c) A POSITIVE CONTROL from the wide read's real rows (REVIEW-WIDE-6, SECOND-CHECK.final221): each cured line's marks AT
  *       afa46d644 (written here) still admit it in its own town, and the rule fires on it: the guard cannot go blind;
  *   (d) KEEP: each twin is admitted where its original is refused, so no cured pool is left mute in its town.
+ *   (e) THE CHAIR'S RULING EG1: over the census's 720, `crimeWave.js :: crimeWaveOf` (the one reading, import-free) equals
+ *       `foundationBandShown.js :: crimeWaveStands`, and `monsterFrontier.js`'s band arm (below `SCORE_BAND_CUTS.adequate`,
+ *       zero-import) equals the band `defenseScoreBands.js :: scoreBand` prints.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -29,6 +32,9 @@ import { atomHolds, FACT_DIMENSIONS } from '../../src/domain/facts/factVocabular
 import { monsterFrontierOf } from '../../src/domain/facts/monsterFrontier.js';
 import { growsMoreThanEatsOf } from '../../src/domain/facts/growsMoreThanEats.js';
 import { crimeWaveStands } from '../../src/domain/display/foundationBandShown.js';
+import { crimeWaveOf } from '../../src/domain/facts/crimeWave.js';
+import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
+import { normalizeMonsterThreat } from '../../src/data/monsterThreat.js';
 import { lawBandOf } from '../../src/domain/facts/lawBand.js';
 import { storesMonthsOf } from '../../src/domain/facts/storesMonths.js';
 import { crisisOf } from '../../src/domain/facts/crisisKind.js';
@@ -61,6 +67,13 @@ const SHAPES = ['thorp-calm', 'hamlet-calm', 'hamlet-under_siege', 'village-fami
 const WIDE = SHAPES.flatMap((s) => Array.from({ length: 15 }, (_, i) => `bar0-${s}-rand-${27 + i}`));
 const SMALL = ['thorp', 'hamlet', 'village'].flatMap((size) => Array.from({ length: 20 }, (_, i) => `r2r-${size}-${i}`));
 const SAMPLE = [...WIDE, ...SMALL];
+/** The census's 720 (CENSUS-3 seeds.txt): r2r-<size>-0..59 and r2s-<stress>-<size>-0..3. */
+const STRESSES = ['famine', 'indebted', 'infiltrated', 'insurgency', 'mass_migration', 'monster_pressure', 'occupied', 'plague_onset', 'politically_fractured', 'recently_betrayed', 'religious_conversion', 'slave_revolt', 'succession_void', 'under_siege', 'wartime'];
+const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const CENSUS_720 = [
+  ...TIERS.flatMap((size) => Array.from({ length: 60 }, (_, i) => `r2r-${size}-${i}`)),
+  ...STRESSES.flatMap((st) => TIERS.flatMap((size) => [0, 1, 2, 3].map((i) => `r2s-${st}-${size}-${i}`))),
+];
 
 // ── the auditors' claim words, by rule (law7.mjs, law9.mjs; copied, not narrowed) ──
 const NO_THREAT = /\b(nothing threatens it|nothing presses [A-Z][\w'-]* at present|raiders and rivals look elsewhere|nothing here to fear|no threat (to|worth))\b/i;
@@ -196,4 +209,22 @@ describe('BAR6-DEFDESK: the defence desk\'s lines declare what they presume', ()
       expect(lines.length, `${seed}: ${block} › ${pool} still admits a line`).toBeGreaterThan(0);
     }
   }, 600_000);
+
+  test('(e) ruling EG1: the crime wave\'s one reading and the beasts\' band arm equal their page readings (the 720)', () => {
+    let waves = 0; let frontierWeak = 0;
+    const failures = collectSeedFailures(CENSUS_720, (seed) => {
+      const t = town(seed);
+      expect(crimeWaveOf(t), `${seed}: crimeWaveOf = crimeWaveStands`).toBe(crimeWaveStands(t));
+      if (crimeWaveOf(t)) waves += 1;
+      const raw = t?.config?.monsterThreat;
+      const family = typeof raw === 'string' && raw ? normalizeMonsterThreat(raw) : null;
+      const band = scoreBand(Number(t?.defenseProfile?.scores?.monster) || 0);
+      const byPage = family === 'plagued' || (family === 'frontier' && (band === 'WEAK' || band === 'CRITICAL'));
+      expect(monsterFrontierOf(t), `${seed}: the band arm reads scoreBand's band`).toBe(byPage);
+      if (family === 'frontier' && byPage) frontierWeak += 1;
+    });
+    expectNoSeedFailures(failures);
+    expect(waves, 'the 720 hold crime waves').toBeGreaterThan(0);
+    expect(frontierWeak, 'the 720 hold frontier towns under a Weak or Critical band').toBeGreaterThan(0);
+  }, 1_800_000);
 });
