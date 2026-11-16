@@ -99,11 +99,13 @@ const GONE = [
   { seed: 'r2s-occupied-town-2', pool: 'DS-ECO-10::POSTURE: none', gone: /the town uses/, prints: 2, why: 'an occupation, the occupier levying: "What the town makes, the town uses" (B27697; v1 + `no crisis: occupied`)' },
   { seed: 'r2s-occupied-village-1', pool: 'DS-ECO-10::POSTURE: none', gone: /surplus there is stays/, prints: 2, why: 'an occupation: "Whatever surplus there is stays" (v3 + `no crisis: occupied`)' },
   { seed: 'r2r-town-42', pool: 'DS-ECO-9::PRESSURED', gone: /grows a little less food/, prints: 1, why: 'grows 69% and buys the rest bar 6%: "grows a little less food than it needs" (00588; v1 reworded)' },
-  { seed: 'r2s-wartime-thorp-3', pool: 'DS-ECO-9::IMPORT-DEPENDENT', gone: /bought rather than grown/, prints: 1, why: 'isolated, nothing imported, 17% short: "bought rather than grown ... a trade item" (03095 22253; v1 reworded)' },
+  // RE-KEYED (BAR5-FOOD, 2026-11-16, the chair's FD1: the rung and the `food` atom read the band the page prints): an import-dependent band with nothing imported prints Deficit, so no town of the 720 reads IMPORT-DEPENDENT with nothing imported (0 of 720): the same town and gone text, read in the rung it prints.
+  { seed: 'r2s-wartime-thorp-3', pool: 'DS-ECO-9::DEFICIT', gone: /bought rather than grown/, prints: 2, why: 'isolated, nothing imported, 17% short: "bought rather than grown ... a trade item" (03095 22253; v1 reworded)' },
   { seed: 'r2s-occupied-village-1', pool: 'DS-ECO-9::IMPORT-DEPENDENT', gone: /fed and dependent/, prints: 3, why: 'HIGH: 21% short, not viable: "is fed ... Nothing about the arrangement is failing" (00991 15068; v3 reworded)' },
   // RE-KEYED BY IDENTITY (BAR4-CORPUS-ECO, 2026-11-16): the same town and the same gone text; what prints instead is the siege twin v7 (`crisis: under_siege`): v1 now refuses a siege.
   { seed: 'r2s-under_siege-hamlet-2', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /the others carry it/, prints: 7, why: 'a siege, 35% short: "the others carry it" (20660; v2 + `food: ≥ secure`)' },
-  { seed: 'r2r-thorp-41', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /without going hungry/, prints: 1, why: 'already short: "can take a bad season ... without going hungry" (28996; v3 + `food: ≥ secure`)' },
+  // RE-KEYED (BAR5-FOOD, 2026-11-16, the chair's FD1: the rung and the `food` atom read the band the page prints): what prints instead is the pressured twin v9 (v1 now declares `food: ≥ secure`).
+  { seed: 'r2r-thorp-41', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /without going hungry/, prints: 9, why: 'already short: "can take a bad season ... without going hungry" (28996; v3 + `food: ≥ secure`)' },
   { seed: 'r2r-city-31', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', gone: /Food carts/, prints: 1, why: 'a river town, its food by boat: "Food carts come in most days" (09248; v1 reworded)' },
   // ── BATCH 4 · the chair's ruling C12, the siege's sea exception: the two siege lines claim the roads, not every way in (REWORDED, the same vid) ──
   { seed: 'r2s-under_siege-city-0', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', gone: /every way in/, prints: 4, why: 'a besieged port the sea keeps open (food by ship): "the siege closing every way in" (C12; v4 now "closing the roads")' },
@@ -168,7 +170,8 @@ const KEEP = [
   // ── BATCH 2 · the declared lines still draw where their towns bear them; the reworded keep their stem ──
   { seed: 'r2r-metropolis-7', pool: 'DS-GEN-13::WAREHOUSES', keep: 3, text: /fill after the harvest/, why: 'no famine' },
   { seed: 'r2r-metropolis-58', pool: 'DS-GEN-17::ADMINISTERED', keep: 1, text: /keeps its own court and its own gaol/, why: 'no occupation' },
-  { seed: 'r2r-metropolis-58', pool: 'DS-ECO-8::COMFORTABLE', keep: 3, text: /stores are more than the season needs/, why: 'its food secure' },
+  // RE-KEYED (BAR5-FOOD, 2026-11-16, the chair's FD1: the rung and the `food` atom read the band the page prints): r2r-metropolis-58 prints Pressured, so its food is not secure on the page; r2r-metropolis-0 (Secure) draws v3.
+  { seed: 'r2r-metropolis-0', pool: 'DS-ECO-8::COMFORTABLE', keep: 3, text: /stores are more than the season needs/, why: 'its food secure' },
   { seed: 'r2r-metropolis-8', pool: 'DS-ECO-6::TIER: significant off-book activity (≥15)', keep: 5, text: /plainly goes on there/, why: 'no siege' },
   { seed: 'r2r-metropolis-39', pool: 'DS-ECO-10::POSTURE: established', keep: 3, text: /always something going out/, why: 'no plague' },
   { seed: 'r2r-metropolis-7', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', keep: 2, text: /the rest comes in/, why: 'no famine' },
@@ -199,7 +202,8 @@ const KEEP = [
   { seed: 'r2r-city-27', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', keep: 1, text: /a good part of what the town eats is grown elsewhere and brought in/, why: 'the stem' },
   // ── BATCH 4 (C12) ──
   { seed: 'r2s-under_siege-town-0', pool: 'DS-ECO-1::COMBINATION C4: a low rung on a working approach', keep: 4, text: /has lost what passing trade used to leave behind/, why: 'the stem, old and new' },
-  { seed: 'r2s-under_siege-hamlet-2', pool: 'DS-ECO-9::IMPORT-DEPENDENT', keep: 5, text: /^Whatever \{settlement\} used to buy for its table, none of it has come/, why: 'the stem, old and new' },
+  // RE-KEYED (BAR5-FOOD, 2026-11-16, the chair's FD1: the rung and the `food` atom read the band the page prints): r2s-under_siege-hamlet-2 brings nothing in and prints Deficit; r2s-under_siege-city-0, besieged and still import-dependent on the page, draws v5.
+  { seed: 'r2s-under_siege-city-0', pool: 'DS-ECO-9::IMPORT-DEPENDENT', keep: 5, text: /^Whatever \{settlement\} used to buy for its table, none of it has come/, why: 'the stem, old and new' },
   // ── BATCH 5 ──
   { seed: 'r2r-thorp-45', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', keep: 1, text: /^The country around \{settlement\} does not give the town enough \{good\}/, why: 'the stem, old and new' },
   { seed: 'r2r-city-10', pool: 'DS-ECO-10::POSTURE: entrepot', keep: 2, text: /yards are as busy as its workshops/, why: 'a calm city with yards and workshops' },

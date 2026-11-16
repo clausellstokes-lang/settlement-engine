@@ -311,7 +311,7 @@ function farmedOneFrame(line, handed) {
   }
   // the two- and three-source frames ("{A} and {B} anchor the table", "The table is {A}, with {B} beside it"): the same
   // claim of the whole table, named without the fields' grain; the line keeps its words after the fields' clause.
-  if (!/ anchor the table\b|^The table is /.test(line) || sourcesNamedIn(line).some((src) => src === 'grain' || src === 'mill')) return line;
+  if (!/ anchor the table\b|^The table is /.test(line) || sourcesNamedIn(line).some((src) => stoppedBy('grain').includes(src))) return line;
   if (!liveInstitutions(s).some((inst) => FARMING_HOUSE.test(nativeSemanticName(/** @type {object} */ (inst)).toLowerCase()))) return line;
   return `${FARMED_CLAUSE}${line.charAt(0).toLowerCase()}${line.slice(1)}`;
 }

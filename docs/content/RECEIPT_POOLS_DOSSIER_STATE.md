@@ -1386,7 +1386,7 @@ sentence in two voices. **No named deaths.**
 7. `[street · own plots · no source spent · no crisis: famine]` Of the food {settlement} raises for itself, its {good} and what each family grows on its own holding come first, and a poor season in either means less to go round.
 
 **FOOD SOURCES: several, the largest named**
-1. `[ledger · no crisis: famine · no crisis: under_siege · food: ≥ importDependent · no source spent]` {settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.
+1. `[ledger · no crisis: famine · no crisis: under_siege · food: ≥ secure · no source spent]` {settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.
 2. `[street · no crisis: famine · food: ≥ secure · no source spent]` The {good} feeds {settlement} first, but not alone; when one source has a lean year, the others carry it.
 3. `[unfolding · no crisis: famine · food: ≥ secure · no source spent]` With more than its {good} to rely on, {settlement} can take a bad season in one source without going hungry.
 4. `[ledger · crisis: famine]` {settlement}'s food comes from more than one source, and this year that has not been enough: the town is hungry all the same.
@@ -1394,6 +1394,7 @@ sentence in two voices. **No named deaths.**
 6. `[ledger · no crisis: famine · no crisis: under_siege · food: ≤ deficit · no source spent]` {settlement}'s food comes from more than one source, the {good} most of all, and this year all of them together fall short of what the town eats.
 7. `[ledger · crisis: under_siege · no crisis: famine · no source spent]` {settlement}'s food comes from more than one source, the {good} most of all, and with the siege on, what they give and what is stored is all the town has to eat.
 8. `[ledger · no crisis: famine · source spent]` {settlement} eats from more than one source, but the grounds its {good} came from are worked out, and the others now carry more of the load.
+9. `[ledger · no crisis: famine · no crisis: under_siege · food: ≥ importDependent · food: ≤ pressured · no source spent]` {settlement}'s food comes from more than one source, the {good} most of all, and together they do not quite cover what the town eats.
 
 **FOOD SOURCES: four or more**
 1. `[ledger · colour]` {settlement} eats from many sources at once, the {good} first among them, and no single failure can empty its tables.

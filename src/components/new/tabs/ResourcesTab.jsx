@@ -257,7 +257,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:MUTED,letterSpacing:'0.06em',marginBottom:4}}>Commodities available</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {/* BAR5-FOOD (L3.failedFood): the famine's failed food is marked where it is listed (commoditiesShown.js) */}
-                {commoditiesShown(r).map((c,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{c.failed ? `${c.label} (${FAILED_MARK})` : c.label}</span>)}
+                {commoditiesShown(r).map((item,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{item.failed ? `${item.label} (${FAILED_MARK})` : item.label}</span>)}
               </div>
             </div>}
           </>;
