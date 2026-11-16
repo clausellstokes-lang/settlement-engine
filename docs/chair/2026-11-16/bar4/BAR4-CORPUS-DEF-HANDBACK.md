@@ -105,7 +105,29 @@ holds", as the kernel sweep's reference reads a `no X` line) and `danger coming`
 crisis). RE-KEYED by its own form, with a dated note: `tests/domain/census5cOwedLines.test.js` DS-DEF-4 null's admitting
 record also holds no criminal income.
 
-THE BOOKS RUN (each file alone at the tip, every red read at 8aef8e7d46 too) follows this commit; its table lands in the next push.
+THE BOOKS RUN at 437d67a8b (each file alone, `sh scripts/gate-tail.sh`; the base 8aef8e7d46 is green whole by the
+chair's check of 08:28, so every red here is mine and classed): my guards and every file that pins a changed symbol (28
+files), the seventeen law suites with `engineCoreLazyEdge`, `tuningRegister`, `chainPrintSites`, the ten files of
+BRIEF-BAR4 amendment 2, the three test-corpus walkers, and `generatorGoldenMaster`: GREEN but for the rows below.
+NO LAW OF MINE IS RED. THE 525: `tests/property/generatorGoldenMaster.test.js` green: 0 reference configurations move
+(display prose and eager fact readers only; no record field moves).
+
+| the test · the arm | old → new | its door | class |
+|---|---|---|---|
+| `tests/lint/observedShapeReaders.walker.test.js` · "a freshly re-minted baseline has NO drift" | the input digest of `defense.generated.js` | its shrink-only re-freeze ("lawful, the re-freeze absorbs it") | stored figure |
+| `tests/lint/writerReach.walker.test.js` · the surfaceReach round trip | `economicState.tradeDependencies` gains `campaign-pdf=R` (a real reader: `magicSupply.js`) | the reach register's door (ruling WR1: NAMED) | register row |
+| `tests/lint/proseComposed.walker.test.js` · "the shipped ones, not empty stubs" | state corpus 2959 → 2963 | the close's re-measure | stored count |
+| `tests/lint/proseEntryContradiction.walker.test.js` · "reproduces the projection's arithmetic", "joins every annex row" | 3427 → 3431; 2722 → 2726 | the close's re-measure | stored counts. Its ANTI-VACUITY arm (a law) went red on a row address moved by my twins; RE-ADDRESSED BY ITS TEXT in the file's own form ("the same trades exempt", 6167 → 6169, dated note): green |
+| `tests/lint/proseWiringCensus.walker.test.js` · the variant column, the dry read, byte-identical census | 2959 → 2963; `docs/content/wiring-census.json` stale | the census's own door at the close (amendment 4) | stored file |
+| `tests/lint/tuningRegister.walker.test.js` · "the measured tree matches the committed inventory" | `corruption.js` CAPTURE/CORRUPTION/DEITY_CORRUPTION/DEITY_LAW_TUNING: dependents moved (`criminalIncome.js` imports `isCriminalInstitution`) | the register's refreeze | stored inventory |
+| `tests/lint/proseCorpusBytes.test.js` · RAW is EXACT | `defense.generated.js` 266,715 → 269,046 raw bytes (+2,331: commits 6f8081add, b98bf80ba) | a declared row in `scripts/.prose-byte-baseline.json` at the close | a CEILING: NOT raised by me |
+| `verify:dist` (`npm run build` GREEN) · `tests/build/vendorPdfLazy.test.js` first-paint closure | raw 1,132,308 → 1,133,265 (+957); gzip 360,756 → 361,006 (+250); Brotli 302,830 → 303,023 (+193); the engine chunk 878,555 against < 878,554 | the close's doors, once (RULING B3 for the whole round, the chair 09:39 UTC) | A NAMED MOVE FOR THE CLOSE (commits 6f8081add, b98bf80ba); never raised by me |
+| `verify:dist` · `tests/build/generationWorkerLazy.test.js` worker bundle | 2,322,103 → 2,323,126 (+1,023) | as above | A NAMED MOVE FOR THE CLOSE (the same commits) |
+
+The cause of the byte rises: three eager fact homes, their three getters and three dimensions (~1.5 KB minified). By
+the chair's ruling (09:39 UTC) nothing is re-formed to buy bytes back and the three facts keep their own modules; none
+is a generation-only reader (each is read by the defence desk's draw on the page), so none moves to the lazy side.
+`verify:dist` refuses on those ceilings alone; `npm run build` is green; the built `dist/` was removed.
 
 ## Registrations owed
 
@@ -116,7 +138,8 @@ THE BOOKS RUN (each file alone at the tip, every red read at 8aef8e7d46 too) fol
 
 1. THE D2 SPLIT (named above): when the income line's writer reads the magic-held chain, lower the guard's ceiling
    (`bar4CorpusDefKinds.test.js`, 20) to its new measure.
-2. THE BOOKS AT THE CLOSE: the shift register and the wiring census, through their doors, once.
+2. THE BOOKS AT THE CLOSE: every row of "the books my cures move", through its door, once (the shift register, the wiring
+   census, the composed counts, the byte baseline's declared row, the reach and tuning registers, the size ceilings).
 3. Lines judged loose and left (not this round's kinds; not counted): WEAK v6's elliptical "outrun what is" (could read
    "what there is", a one-word cure if the owner wants it); WALLED-QUIET v2 "ahead of any present need" in a calm
    town is true.
