@@ -1,0 +1,3 @@
+{"id":"C169924","town":"bar0-town-calm-rand-36","sev":"LOW","kind":"LACKS","why":"'different districts' in a town of 523 people; no districts stated","other":""}
+{"id":"C170189","town":"bar0-town-calm-rand-36","sev":"MED","kind":"PAIR","why":"Defense tab 'books record no gang, guild or racket' against Services 'Protection (informal): pay a local strongman... or a gang' and illegal Fighting pits","other":"C169843"}
+{"id":"DONE","lines":1035,"blocks":1,"flags":2}
