@@ -1,0 +1,16 @@
+{"id":"C2056","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"LACKS","why":"enchanting/identification trade by the hour; magic low, DEFENCE magic none, reliance None, C3949 says no arcane practitioners, no enchanter on HOUSES","other":"C3949"}
+{"id":"C2438","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"STATE","why":"sex-named trade title 'Smith-master' for Nabila al-Wahabi, PEOPLE says (f)","other":""}
+{"id":"C2585","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"STATE","why":"sex-named title 'Spymaster' for Karima al-Din, PEOPLE says (f)","other":""}
+{"id":"C2621","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"STATE","why":"sex-named title 'Lodgemaster' for Kausar al-Karimi, PEOPLE says (f)","other":""}
+{"id":"C2708","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"STATE","why":"sex-named title 'Landlord' for Khulood al-Misri, PEOPLE says (f)","other":""}
+{"id":"C2758","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"STATE","why":"sex-named title 'Saltmaster' for Razan al-Iraqi, PEOPLE says (f)","other":""}
+{"id":"C2768","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"STATE","why":"sex-named title 'Quarrymaster' for Saida al-Hakim, PEOPLE says (f)","other":""}
+{"id":"C3776","town":"bar0-city-under_siege+famine-rand-22","sev":"LOW","kind":"BROKEN","why":"heading says 38 institutions behind Merchant oligarchy; Systems/Power card lists 35 plus Alchemist quarter (36)","other":""}
+{"id":"C3823","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"BROKEN","why":"heading says 10 institutions behind War Council; card lists four (exchange, Garrison, Mercenary quarter, Veteran's lodge)","other":""}
+{"id":"C3835","town":"bar0-city-under_siege+famine-rand-22","sev":"LOW","kind":"PAIR","why":"War Council has authority over rationing; C2062 says Merchant oligarchy controls the rationing and the gates","other":"C2062"}
+{"id":"C3964","town":"bar0-city-under_siege+famine-rand-22","sev":"LOW","kind":"BROKEN","why":"'Religious acceptance: hostile' names no object of the hostility; row should say toward what","other":""}
+{"id":"C4015","town":"bar0-city-under_siege+famine-rand-22","sev":"LOW","kind":"PAIR","why":"dean uses magic to alter memories; page says no arcane practitioners, reliance on magic None, DEFENCE magic none","other":"C3949"}
+{"id":"C4061","town":"bar0-city-under_siege+famine-rand-22","sev":"MED","kind":"STATE","why":"hidden grain cache to feed city two weeks; FOOD ledger stores 0.1 months, 'already in store are all there will be' (C3983)","other":"C3983"}
+{"id":"C4412","town":"bar0-city-under_siege+famine-rand-22","sev":"LOW","kind":"STATE","why":"vintner owns a vineyard; LAND lists no grapes or vineyard land and the gaps say no grapes reach the vintner","other":"C3578"}
+{"id":"C4880","town":"bar0-city-under_siege+famine-rand-22","sev":"LOW","kind":"BROKEN","why":"heading counts 76 relationships; section lists 85 cards and its chips (10+13+6+10+6) sum to 45","other":""}
+{"id":"DONE","lines":3726,"blocks":1,"flags":15}
