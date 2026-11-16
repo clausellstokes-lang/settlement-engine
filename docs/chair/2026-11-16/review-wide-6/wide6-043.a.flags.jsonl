@@ -1,0 +1,5 @@
+{"id":"C108544","town":"bar0-metropolis-calm-rand-30","sev":"LOW","kind":"STATE","why":"Systems Health 'Reliance on magic: Relied upon' names nothing; header magic low, by magic 0%, DEFENCE magic none, same panel 'Magical Capability · Weak'","other":"C108548"}
+{"id":"C110252","town":"bar0-metropolis-calm-rand-30","sev":"MED","kind":"PAIR","why":"Noble Houses card: 'The merchant guilds now have more say' against Merchant Guilds card: 'have little say in how the place is run'","other":"C110249"}
+{"id":"C110376","town":"bar0-metropolis-calm-rand-30","sev":"MED","kind":"PAIR","why":"Magic tab names 'Relied upon · for Herbalism & Remedies' but next line says the trade making 'honey and beeswax' would yield less; that is Beekeeping & Wax","other":"C110372"}
+{"id":"C109798","town":"bar0-metropolis-calm-rand-30","sev":"LOW","kind":"PAIR","why":"Economics: grapes 'Needed, and not brought in' and 'that work stops', yet the Vintner's 'Table wine · Wine wholesale' stand unmarked on Institutions and Services","other":"C108984"}
+{"id":"DONE","lines":3472,"blocks":1,"flags":4}
