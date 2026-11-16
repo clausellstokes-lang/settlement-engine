@@ -795,7 +795,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
  *
  * @template {{ safetyProfile?: { crimeTypes?: Array<{ type?: unknown, desc?: unknown }>, criminalInstitutions?: unknown[] } | null, activeChains?: Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null> } | null | undefined} E
  * @param {E} economicState
- * @param {Parameters<typeof crimeSignalOf>[0] & { tensions?: unknown }} lists the FINAL roster's seats and the estate; the
+ * @param {Parameters<typeof crimeSignalOf>[0] & { tensions?: unknown, services?: unknown }} lists the FINAL roster's seats and the estate; the
  *   record's live tensions (`history.currentTensions`, BAR3-DEFECON-2: a crime wave settles the kept-in-hand lines)
  * @returns {E}
  */
@@ -811,7 +811,7 @@ function settleCrimeLinesOnly(economicState, lists) {
   const infrastructure = present
     || (Array.isArray(safetyProfile?.criminalInstitutions) && safetyProfile.criminalInstitutions.length > 0)
     || runningCriminalChains({ economicState: { activeChains: economicState?.activeChains } }).length > 0
-    || covertCrimeHeld({ economicState }); // BAR4-SAFETY (F3, C46446): the income record's own criminal row, the key's own reading
+    || covertCrimeHeld({ economicState, availableServices: lists?.services }); // BAR4-SAFETY (F3, C46446; SF1 c): the key's own two readings
   const hunger = hungerIn(economicState) || crimes.some((entry) => entry?.type === 'desperation theft'); // UPKEEP-8 (#1173): "Hunger-driven" only where the record holds hunger (the famine's or siege's own entry is that record)
   const lineFor = { 'Survival crime': infrastructure ? (hunger ? DESPERATION_THEFT_DESC : THEFT_NETWORK_DESC) : SURVIVAL_NO_NETWORK_DESC,
     'debt evasion': present ? DEBT_EVASION_DESC : DEBT_EVASION_NO_NETWORK_DESC };

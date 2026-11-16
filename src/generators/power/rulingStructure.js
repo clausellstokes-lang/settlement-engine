@@ -588,7 +588,7 @@ export const generatePowerStructure = (
     religiousGate = ['village', 'town', 'city', 'metropolis'].includes(tier) || hasReligiousInst;
   if (religiousPower > 5 && religiousGate) {
     const religiousDesc =
-      priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60
+      priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60 && ['organized', 'semi-organized'].includes(factsOf({ institutions: nativeInstitutions, economicState }).crime) // BAR4-SAFETY (F3, SF1 d): organised crime only where the crime key reads an organisation
         ? 'Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence.'
         : governingFaction && governingFaction.includes('Theocratic Council')
           ? 'Religious law governs directly; clergy are administrators as much as priests, and doctrine shapes civic ordinance.'

@@ -8,10 +8,9 @@
  * The sample: every siege town of the census's 720 (r2s-under_siege-*), the 720's towns where a detector fired at the
  * base (a71788851), and the read towns of REVIEW-BAR-4. Each kind reads ZERO over it, and each detector FIRES on a
  * POSITIVE CONTROL (the base's own line in the state that makes it false), so it cannot go blind.
- * The lines this seat's files do not write are NOT read here (named in the hand-back for their seats): the quarrel's
- * hook (`power/conflicts.js` draws it before it can read the funded gate), the PDF Overview's enforcement line
- * (`shadowEconomyShown.js :: criminalsStandHere`) and the religious power's "organised crime has crowded out"
- * (`power/rulingStructure.js`).
+ * Read here too, under the chair's grants SF1 (b) and (d): the quarrel's hook (C6022: its twin in place where the guard is
+ * paid in full) and the religious power's "organised crime has crowded out" (`power/rulingStructure.js`, read off the key).
+ * The PDF Overview's enforcement line (`pdf/sections/Overview.jsx`, now reading the key) is counted by the census, not here.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -61,18 +60,18 @@ const CENSUS_720 = [
 const READ = ['bar0-village-calm-rand-22', 'bar0-city-under_siege+famine-rand-21', 'bar0-hamlet-under_siege-rand-23', 'bar0-village-famine-rand-21', 'bar0-city-under_siege+famine-rand-23'];
 const SAMPLE = [...CENSUS_720, ...READ];
 /**
- * OWED, NOT EXCLUDED (named for the chair: `steps/assembleSettlement.js` is no seat's): the survival-crime line is settled
- * where the services are not handed (`settleCrimeLinesToSignal`'s lists carry no `services`), so a town whose ONLY criminal
- * reading is a covert service ("Fencing stolen goods", no criminal income row, no house) still prints "No criminal
- * infrastructure" beside its fence. Measured at this tip: 1 town of the 720 (r2r-village-12). A ceiling that only shrinks.
+ * The covert-service-only town (r2r-village-12) was OWED at e52d55824: the survival line was settled where the services were not
+ * handed. The chair's grant SF1 (c) hands them (`assembleSettlement.js`'s late re-read's lists, `services`): the ceiling is 0.
  */
-const OWED_COVERT_ONLY = 1;
+const OWED_COVERT_ONLY = 0;
 
 /** @param {any} t the lines this seat's files print, by kind */
 const linesOf = (t) => ({
-  guard: sentences(t.economicState?.safetyProfile?.guardEffectivenessDesc),
+  guard: [...sentences(t.economicState?.safetyProfile?.guardEffectivenessDesc),
+    ...(t.powerStructure?.conflicts || []).flatMap((/** @type {any} */ c) => (c?.plotHooks || []).flatMap(sentences))],
   tonight: stringsIn(composeTonightSheet(t)),
-  crime: (t.economicState?.safetyProfile?.crimeTypes || []).flatMap((/** @type {any} */ c) => sentences(c?.desc)),
+  crime: [...(t.economicState?.safetyProfile?.crimeTypes || []).flatMap((/** @type {any} */ c) => sentences(c?.desc)),
+    ...(t.powerStructure?.factions || []).flatMap((/** @type {any} */ f) => sentences(f?.desc))],
 });
 
 beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
@@ -124,6 +123,27 @@ describe('BAR4-SAFETY: the positive controls (each detector fires on the base li
     expect(guardPayInstances(guardPayOf(record), sentences(base)).length).toBeGreaterThan(0);
     expect(guardPayInstances(guardPayOf(record), sentences(keptGuardLine(base, record.institutions, 'Poor', { militaryGate: 0.8 })))).toEqual([]);
     expect(guardPayInstances('full', ['The garrison exists on paper.', 'Chronically underpaid and poorly equipped.']).length).toBeGreaterThan(0);
+  });
+  test('F1 (ruling MU1): every rota twin\'s state is reachable, and in it the base line fires and the cured line does not', () => {
+    // a Village watch alone, no garrison: the guard line's branches each draw one of these heads (safetyProfile.js), at either gate
+    const rota = [{ name: 'Village watch' }];
+    const BASE = [
+      'The local watch is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. Effective in a fight; vulnerable to sustained corruption.',
+      'The local watch is well paid, well equipped and patrols properly. They come when called, and though some take bribes, it is not the custom.',
+      'The local watch is well paid and well equipped, but is held for the defence, and few patrols can be spared from it.',
+      'The local watch is well paid and well equipped, but hunger is eroding the order it keeps.',
+      'The local watch exists on paper. Chronically underpaid and poorly equipped. Susceptible to bribery; enforcers who can be bought by whoever has coin.',
+      'The local watch is chronically underpaid and poorly equipped. Susceptible to bribery; enforcers who can be bought by whoever has coin.',
+    ];
+    for (const gate of [1, 0.8]) {
+      const record = { institutions: rota, defenseProfile: { economicGates: { military: gate } } };
+      expect(guardPayOf(record)).toBe('unpaid');
+      for (const line of BASE) {
+        expect(guardPayInstances(guardPayOf(record), sentences(line)).length, `the base line fires: ${line}`).toBeGreaterThan(0);
+        const cured = keptGuardLine(line, rota, 'Poor', { militaryGate: gate });
+        expect(guardPayInstances(guardPayOf(record), sentences(cured)), `gate ${gate}: ${cured}`).toEqual([]);
+      }
+    }
   });
   test('F2: "have not moved" under an advancing siege fires', () => {
     expect(SIEGE_ARCHETYPE, 'the leaf\'s constant is the promotion table\'s own answer').toBe(archetypeForStressor({ type: 'under_siege', label: 'Under Siege' }));
