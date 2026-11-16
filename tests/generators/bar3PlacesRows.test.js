@@ -128,16 +128,18 @@ describe('BAR3-PLACES: the rows read the town', () => {
  * the cast bears; C24313 the household elder's late twins (institutionDescVariants.js) claim no "no office, no title"
  * under the council that governs; C4510 the famine hook (stressTypes.js) names no good its holder may lack; C36830 the war's
  * profit text (stressNarrative.js) claims no merchants getting rich (the merchant power the war hurts).
+ * BAR3-CLOSE-SWEEP-B (2026-11-16, letter d): C6485's new line is reworded in the style law's form ("no one on the roster
+ * is named" -> "no one is named for it": the struck phrase "on the roster"); its towns and its truth unchanged.
  */
 describe('BAR3-PLACES-2: the routed rows read the town', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   /** [row, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['C6485 the profiteer under the war (the read town)', 'bar0-city-wartime-rand-6', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one on the roster is named"/],
-    ['C6485 the profiteer under the war (a thorp)', 'r2r-thorp-11', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one on the roster is named"/],
-    ['C6485 the profiteer beside a power the contracts made rich', 'r2s-wartime-metropolis-0', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one on the roster is named"/],
-    ['C6485 class: the profiteer under a debt', 'r2s-indebted-city-2', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one on the roster is named"/],
+    ['C6485 the profiteer under the war (the read town)', 'bar0-city-wartime-rand-6', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
+    ['C6485 the profiteer under the war (a thorp)', 'r2r-thorp-11', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
+    ['C6485 the profiteer beside a power the contracts made rich', 'r2s-wartime-metropolis-0', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
+    ['C6485 class: the profiteer under a debt', 'r2s-indebted-city-2', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
     ['C24313 no office, no title, no vote under a council (the read town)', 'bar0-thorp-calm-rand-6', /No office, no title, no vote/, /A single household head is the door people knock on first when a thing has to be settled\."/],
     ['C24313 under the Elder Council', 'r2r-thorp-2', /No office, no title, no vote/, /A single household head is the door people knock on first when a thing has to be settled\."/],
     ['C24313 under the Household Council', 'r2s-succession_void-thorp-2', /No office, no title, no vote/, /A single household head is the door people knock on first when a thing has to be settled\."/],

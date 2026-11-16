@@ -18,12 +18,17 @@ describe('the stress secrets declare', () => {
   // secret ("…the war contracts that made the settlement rich") declares `prosperity: ≥ comfortable`.
   // R2-CODE-A-7 (step 1 item 5; re-keyed with its cause): 35 -> 36 — the plague quarantine secret ("…shipments from a specific
   // merchant…") declares `market`.
-  it('36 entries declare (32 + the exodus twin, answer 5, + the direction pair\'s departures line, MERGE-R2, + the war-contracts secret, R2-CODE-A-2, + the quarantine merchant, R2-CODE-A-7), every atom in the vocabulary', () => {
+  // BAR3-CLOSE-SWEEP-B (2026-11-16, letter g; re-keyed with its cause, BAR3-PLACES H1, b7bf413a7): 36 -> 38 — the famine
+  // secret's covert route ("…{food} shipments through a covert route…") declares `excludes: crisis: under_siege`, and its
+  // siege twin ("Laid in a cellar of {food} before the siege closed the roads…", `twinOf`) declares `crisis: under_siege`.
+  it('38 entries declare (32 + the exodus twin, answer 5, + the direction pair\'s departures line, MERGE-R2, + the war-contracts secret, R2-CODE-A-2, + the quarantine merchant, R2-CODE-A-7, + the covert route and its siege twin, BAR3-PLACES H1), every atom in the vocabulary', () => {
     const entries = Object.values(STRESS_INSTITUTION_EFFECTS).flat();
     const declaring = entries.filter((e) => declares(declarationOf(e)));
-    expect(declaring).toHaveLength(36);
+    expect(declaring).toHaveLength(38);
     expect(declaring.find((e) => /shipments from a specific merchant/.test(e.secret))?.needs).toEqual(['market']);
     expect(declaring.some((e) => /war contracts that made the settlement rich/.test(e.secret))).toBe(true);
+    expect(declaring.find((e) => /^Laid in a cellar of \{food\} before the siege/.test(e.secret))?.needs).toEqual(['crisis: under_siege']);
+    expect(declaring.find((e) => /through a covert route/.test(e.secret))?.excludes).toEqual(['crisis: under_siege']);
     for (const e of declaring) for (const a of [...(e.needs || []), ...(e.excludes || [])]) expect(parseAtom(a), a).not.toBeNull();
   });
   it('a {npc} slot declares the other NPC', () => {
