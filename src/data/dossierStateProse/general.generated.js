@@ -185,7 +185,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "elder",
           "marks": [
-            "colour"
+            "tier: >= village"
           ],
           "text": "Many hundreds have gone from {settlement}. Whole streets stand shut, and those who stayed do the work of several.",
           "slots": [
@@ -216,7 +216,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "colour"
+            "tier: >= town"
           ],
           "text": "Thousands have gone from {settlement}, and more leave every season. Whole districts stand empty.",
           "slots": [
@@ -1074,7 +1074,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "major",
-            "crisis: any"
+            "crisis: any",
+            "tier: >= village"
           ],
           "text": "Visitors to {settlement} are warned twice before nightfall which streets to avoid, and the warning is given quietly.",
           "slots": [
@@ -1087,7 +1088,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "catastrophic",
             "watch",
-            "crisis: any"
+            "crisis: any",
+            "tier: >= village"
           ],
           "text": "Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.",
           "slots": [
@@ -2493,7 +2495,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "no crisis: unrest",
-            "crisis: any"
+            "crisis: any",
+            "tier: >= village"
           ],
           "text": "Order in {settlement} is kept quietly: few guards on the streets, and little trouble for them to deal with.",
           "slots": [
@@ -2531,7 +2534,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "no crisis: unrest",
-            "crisis: any"
+            "crisis: any",
+            "tier: >= village"
           ],
           "text": "{settlement} is orderly on the main streets and less particular about the others.",
           "slots": [
@@ -2595,6 +2599,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.internal: CRITICAL": [
         {
           "angle": "visitor",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "Whatever authority {settlement} has does not reach into its own streets.",
           "slots": [
             "settlement"
@@ -3032,7 +3039,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "watch",
             "no crisis: unrest",
-            "crisis: any"
+            "crisis: any",
+            "tier: >= village"
           ],
           "text": "The watch at {settlement} has little to report, because the streets are quiet, not because the watch is idle.",
           "slots": [
@@ -3043,7 +3051,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "crisis: occupied, plague_onset"
+            "crisis: occupied, plague_onset",
+            "tier: >= village"
           ],
           "text": "Movement in {settlement} is watched and limited; the streets are quiet because people are kept off them.",
           "slots": [
@@ -4648,6 +4657,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: threat",
+            "imports",
+            "exports"
+          ],
           "text": "Goods come into {settlement} and goods go out of it, and neither the coming nor the going is remarkable.",
           "slots": [
             "settlement"
@@ -4656,6 +4670,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "no crisis: threat"
+          ],
           "text": "The road runs past {settlement}, but few travellers stop, and the town sells mostly to itself.",
           "slots": [
             "settlement"
@@ -4807,7 +4824,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "deficit"
+            "deficit",
+            "no crisis: threat"
           ],
           "text": "{settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town.",
           "slots": [
@@ -4911,7 +4929,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "elder",
           "marks": [
-            "deficit"
+            "deficit",
+            "no crisis: threat"
           ],
           "text": "{settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring.",
           "slots": [
@@ -5115,7 +5134,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no deficit"
+            "no deficit",
+            "no crisis: threat"
           ],
           "text": "{settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs.",
           "slots": [
@@ -5531,7 +5551,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no crisis: unrest"
+            "no crisis: unrest",
+            "tier: >= village"
           ],
           "text": "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.",
           "slots": [
@@ -6267,6 +6288,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: threat"
+          ],
           "text": "Travellers from {counterpart} are welcomed in {settlement} as near-neighbours, not outsiders.",
           "slots": [
             "counterpart",
@@ -6868,6 +6892,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "founding": [
         {
           "angle": "elder",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "{settlement} was founded {timeband_since} for {reason}, and the oldest streets still show it.",
           "slots": [
             "settlement",
@@ -6915,6 +6942,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "historicalCharacter": [
         {
           "angle": "elder",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "{settlement} is {timeband_age}, and what it has been through still shows in its streets and habits.",
           "slots": [
             "settlement",
@@ -6943,7 +6973,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "elder",
           "marks": [
-            "anchored"
+            "anchored",
+            "tier: >= town"
           ],
           "text": "{settlement} lost {band} to {event} {timeband_since}, and the town has never rebuilt the quarter it happened in.",
           "slots": [
@@ -7377,7 +7408,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "anchored"
+            "anchored",
+            "tier: >= town"
           ],
           "text": "{settlement} has quarters that do not match each other, and the mismatch dates from {event}.",
           "slots": [
@@ -9182,6 +9214,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "HIGH-GROUND": [
         {
           "angle": "visitor",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "{settlement} sits where the ground let it stand, not where it was easy, and its streets climb with the slope.",
           "slots": [
             "settlement"
@@ -10325,6 +10360,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "LEVEL": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: threat"
+          ],
           "text": "{settlement} holds its size; the roads bring in as many as they take away.",
           "slots": [
             "settlement"
@@ -10587,7 +10625,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "crisis: any"
+            "crisis: any",
+            "tier: >= village"
           ],
           "text": "No disaster has marked {settlement}; its streets are evenly worn and nothing in it looks new.",
           "slots": [
@@ -11369,7 +11408,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "traveller",
           "marks": [
-            "institution: temple"
+            "institution: temple",
+            "no crisis: threat"
           ],
           "text": "The cathedral stands taller than anything else in {settlement}, and travellers see it long before they arrive.",
           "slots": [

@@ -1456,7 +1456,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "walls"
+            "walls",
+            "tier: >= village"
           ],
           "text": "The occupiers' duty lists at {settlement} now put more of their troops on the streets than on the walls, and more each season.",
           "slots": [
@@ -3158,6 +3159,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "{settlement} works normally, and it takes a day or two to notice whose troops stand in its streets.",
           "slots": [
             "settlement"
@@ -3281,6 +3285,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "resistance in open revolt": [
         {
           "angle": "ledger",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "{settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets and in daylight.",
           "slots": [
             "settlement",

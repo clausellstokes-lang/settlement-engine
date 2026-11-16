@@ -29,8 +29,8 @@ export const ARRIVAL_SCENES = {
       `${r} runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland.`,
     { text: (r) =>
       `The river carries the sounds of ${r} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`, needs: ['institution: mill', 'institution: docks'] }, // R2-CODE-A-4 (CENSUS-2 a/docks): a jetty only where the roster holds a landing (the docks atom)
-    (r) =>
-      `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`,
+    { text: (r) =>
+      `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`, needs: ['trade at work: fish'] }, // BAR6-CULTURE (B4): declares what it presumes
   ],
   port: [
     // R2-CODE-A item 4 (the cold list REVIEW-W2A-3, HIGH #1): the four harbour scenes declare the docks; 44 of
@@ -38,7 +38,7 @@ export const ARRIVAL_SCENES = {
     { text: (r) =>
       `The harbour at ${r} announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air.`, needs: ['docks'] },
     { text: (r) =>
-      `${r} faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.`, needs: ['docks'] },
+      `${r} faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.`, needs: ['tier: ≥ village', 'docks'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     { text: (r) =>
       `You hear ${r}'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall.`, needs: ['docks'] },
     { text: (r) =>
@@ -61,10 +61,10 @@ export const ARRIVAL_SCENES = {
     { text: (r) =>
       `The sound of a hammer on metal reaches you from ${r}'s smithing quarter: a craftsperson's rhythm, not a soldier's.`, needs: ['institution: smith'] },
     (r) => `${r} smells of work: sawdust, tallow, the particular sharp smell of a tanner at the edge of town.`,
-    (r) =>
-      `${r} announces its trade before its name: the whine of a lathe, the reek of the dye-vats, a workshop door standing open on a scene of unhurried, practised industry.`,
     { text: (r) =>
-      `The approach to ${r} is lined with the overflow of its crafts: timber stacked to season, half-finished goods under eaves, the settlement's work spilling out past its walls for want of room inside.`, needs: ['walls'] },
+      `${r} announces its trade before its name: the whine of a lathe, the reek of the dye-vats, a workshop door standing open on a scene of unhurried, practised industry.`, excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
+    { text: (r) =>
+      `The approach to ${r} is lined with the overflow of its crafts: timber stacked to season, half-finished goods under eaves, the settlement's work spilling out past its walls for want of room inside.`, needs: ['timber at hand', 'walls'] }, // BAR6-CULTURE (B4): declares what it presumes
   ],
   ordinary: [
     (r) =>
@@ -188,7 +188,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `The queue at the granary gate is the first thing you see in ${r}. Not a market queue, not a water queue: the organised, patient, daily queue of people who are waiting to receive what they are owed and are not certain they will receive it.`, needs: ['institution: granary'] },
     { text: r =>
-      `${r} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.`, needs: ['patrol'] }, // BAR2-PLACES (the chair's grant VW2; REVIEW-BAR-2 C34238, C34241): order enforced and a patrol passing need a force that keeps patrol (a watch or a garrison); a militia alone "cannot maintain consistent patrol"
+      `${r} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.`, needs: ['tier: ≥ village', 'patrol'] }, // BAR2-PLACES (the chair's grant VW2; REVIEW-BAR-2 C34238, C34241): order enforced and a patrol passing need a force that keeps patrol (a watch or a garrison); a militia alone "cannot maintain consistent patrol" // BAR6-CULTURE (6a, B4): a size word declares its band
     r =>
       `The dogs of ${r} are gone. It takes a while to notice and longer to stop noticing, and nobody in the settlement will discuss it with a stranger.`,
     { text: r =>
@@ -207,7 +207,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `The approach to ${r} looks like any other settlement. There is graffiti on the wall near the gate that someone has attempted to scrub off. The symbol is still readable.`, needs: ['gate'] },
     { text: r =>
-      `${r} is going about its business. The market is open, the streets are orderly, the gates are attended by soldiers whose armour is not local. Everyone is doing what they are supposed to be doing, which is the point.`, needs: ['market', 'gate'] },
+      `${r} is going about its business. The market is open, the streets are orderly, the gates are attended by soldiers whose armour is not local. Everyone is doing what they are supposed to be doing, which is the point.`, needs: ['tier: ≥ village', 'market', 'gate'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     r =>
       `${r}'s notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door that matters, which is how you learn the occupation intends to stay.`,
     { text: r =>
@@ -220,7 +220,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} has two gates. The eastern one is controlled by one power, the western by another. You can tell by the pennants. The road you are on leads to the eastern gate.`, needs: ['gate'] },
     { text: r =>
-      `The gate guard at ${r} asks where you intend to stay: which inn, which district. The answer apparently matters. They note it and say nothing further.`, needs: ['gate', 'institution: tavern', 'guardPresence'] },
+      `The gate guard at ${r} asks where you intend to stay: which inn, which district. The answer apparently matters. They note it and say nothing further.`, needs: ['tier: ≥ town', 'gate', 'institution: tavern', 'guardPresence'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     r =>
       `The road into ${r} has been marked. Symbols painted on fence posts and milestone stones: the same symbol, repeated, belonging to one power or another. Someone has been doing this recently; the paint is fresh.`,
     r =>
@@ -232,11 +232,11 @@ export const STRESS_DESCS = {
   ],
   indebted: [
     { text: r =>
-      `${r} is in reasonable shape. The walls are standing, the market is functioning, the main street is paved. The paving needs repair. The wall has a section of new brick that doesn't quite match the old. The repairs that needed doing five years ago are still waiting.`, needs: ['walls', 'market'], excludes: ['crisis: threat'] },
+      `${r} is in reasonable shape. The walls are standing, the market is functioning, the main street is paved. The paving needs repair. The wall has a section of new brick that doesn't quite match the old. The repairs that needed doing five years ago are still waiting.`, needs: ['tier: ≥ village', 'walls', 'market'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     { text: _r =>
       "A building near the gate has a new sign, freshly painted with the name of an outside creditor. The creditor has opened an office here, and the locals walk past it without looking in.", needs: ['gate'] },
     { text: r =>
-      `${r} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.`, needs: ['market'] },
+      `${r} gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.`, needs: ['tier: ≥ village', 'market'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     { text: r =>
       `The merchant district of ${r} looks prosperous. The rest of the settlement, visible further in, looks like it has been waiting for the merchant district's prosperity to reach it for some years.`, needs: ['market', 'population: ≥ middling'] }, // R2-CODE-A-3 (the increment's ww-920): a district is a size error below the middling band (ruling (f))
     { text: r =>
@@ -273,7 +273,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} looks normal. There is a moment at the gate (a guard glancing at another guard after you answer a question) that is probably nothing.`, needs: ['gate', 'guardPresence'] },
     { text: r =>
-      `${r} is functioning well. Clean streets, busy market, maintained walls. If you were looking for problems, you would not find them from the outside.`, needs: ['market', 'walls'], excludes: ['crisis: threat', 'crisis: hunger', 'crisis: succession', 'crisis: unrest'] },
+      `${r} is functioning well. Clean streets, busy market, maintained walls. If you were looking for problems, you would not find them from the outside.`, needs: ['tier: ≥ village', 'market', 'walls'], excludes: ['crisis: threat', 'crisis: hunger', 'crisis: succession', 'crisis: unrest'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     { text: r =>
       `Nothing in ${r} is out of place. The watch changes on the hour, the market closes at dusk, the innkeeper remembers your name on the second morning. It is all exactly as a well-run town should be.`, needs: ['watch', 'market', 'institution: tavern'], excludes: ['crisis: threat', 'crisis: hunger', 'crisis: succession', 'crisis: unrest'] },
     { text: r =>
@@ -340,7 +340,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r}'s gate stands open and unmanned. Further in, two different sets of notices are posted on the same wall: one in the formal hand of the authorities, one hand-lettered and torn at the corner. Someone tears down the second kind. Someone keeps putting them back.`, needs: ['gate'] },
     { text: r =>
-      `There are soldiers on ${r}'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a place that has already decided which side it is on and is waiting to be asked.`, needs: ['soldiers'] },
+      `There are soldiers on ${r}'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a place that has already decided which side it is on and is waiting to be asked.`, needs: ['tier: ≥ village', 'soldiers'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     { text: r =>
       `${r} looks governed, and is not, quite. The market runs, the watch patrols, the council building is occupied. But the orders that leave that building are not always the orders that get followed, and everyone in the street knows which is which.`, needs: ['market', 'watch'] },
     { text: r =>
@@ -373,7 +373,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r}'s young men are not in ${r}. You notice it at the gate and it holds true inside: the people working the stalls and the fields are the old, the very young, and the women. A recruiting notice is nailed to the gatepost, its edges soft with weather.`, needs: ['gate', 'market'] },
     { text: r =>
-      `There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square: grain, cloth, iron, and the settlement's own carts to carry it away.`, needs: ['market', 'soldiers'] },
+      `There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square: grain, cloth, iron, and the settlement's own carts to carry it away.`, needs: ['tier: ≥ village', 'market', 'soldiers'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     { text: r =>
       `${r} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.`, needs: ['institution: smith', 'prosperity: ≥ moderate'], excludes: ['crisis: hunger', 'crisis: under_siege', 'war: front'] }, // TAIL-NARRATIVE-5 (N18 (1)): the coin moves only where the record's prosperity is not below moderate
     r =>
@@ -403,13 +403,13 @@ export const STRESS_DESCS = {
   ],
   slave_revolt: [
     { text: r =>
-      `${r}'s gates are shut in daylight, which is wrong for a settlement of its size. There is smoke inside: not cookfire smoke, too much and too dark. On the wall, the guards face inward, toward their own streets, not out toward you.`, needs: ['gate', 'walls', 'guardPresence'] },
+      `${r}'s gates are shut in daylight, which is wrong for a settlement of its size. There is smoke inside: not cookfire smoke, too much and too dark. On the wall, the guards face inward, toward their own streets, not out toward you.`, needs: ['tier: ≥ village', 'gate', 'walls', 'guardPresence'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     { text: r =>
       `The approach to ${r} is blocked by a hasty checkpoint: overturned carts, armed men who are not the regular watch, a hard question about your business before you are allowed within sight of the gate. Whatever is happening inside, they have decided strangers are a risk.`, needs: ['gate', 'watch'] },
     { text: r =>
       `${r} is quiet in the way a held breath is quiet. The slave market at its heart (you can see the empty auction platform from the gate) stands deserted, ringed by guards. The chains are still there. The people who wore them are not.`, needs: ['market', 'gate', 'guardPresence'] },
     { text: r =>
-      `There are bodies being carried through ${r}'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.`, needs: ['population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/streets, c/districts): streets and lower districts, at the middling band
+      `There are bodies being carried through ${r}'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.`, needs: ['tier: ≥ village', 'population: ≥ middling'] }, // R2-CODE-A-4 (CENSUS-2 c/streets, c/districts): streets and lower districts, at the middling band // BAR6-CULTURE (6a, B4): a size word declares its band
     r =>
       `One building in ${r} is shuttered and scorched, the only burned one in sight, which tells you the fire was a statement, not an accident.`, // R2-CODE-A-4 (record 386 (3)/(4)): no manacle-maker's shop the roster cannot name; read where it prints, a hamlet of 48 up
     r =>

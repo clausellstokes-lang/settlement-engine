@@ -4253,7 +4253,7 @@ each cell below is authored from the page-owner's side.
 **`territorial` · `strained`**
 1. `[street · walls]` The garrison keeps {settlement}'s walls uneasily now; the townspeople chafe, stones are thrown, and the throwing has stopped being the work of children.
 2. `[unfolding · colour]` What was a quiet occupation at {settlement} is becoming a contested one, incident by incident, and no single incident has been large enough to name.
-3. `[ledger · walls]` The occupiers' duty lists at {settlement} now put more of their troops on the streets than on the walls, and more each season.
+3. `[ledger · walls · tier: >= village]` The occupiers' duty lists at {settlement} now put more of their troops on the streets than on the walls, and more each season.
 4. `[street · no walls]` The occupiers keep {settlement} uneasily now; the townspeople chafe, stones are thrown, and the throwing has stopped being the work of children.
 5. `[ledger · no walls]` The occupiers' duty lists at {settlement} now put more of their troops on policing the town than on watching the country, and more each season.
 
@@ -4519,7 +4519,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 
 **occupation `stabilized`** {colour}
 1. `[ledger]` {counterpart}'s accounts show the occupation of {settlement} paying its way; it runs smoothly and looks set to last.
-2. `[visitor]` {settlement} works normally, and it takes a day or two to notice whose troops stand in its streets.
+2. `[visitor · tier: >= village]` {settlement} works normally, and it takes a day or two to notice whose troops stand in its streets.
 3. `[street]` The town at {settlement} has arranged itself around the occupier and stopped calling it an occupation in ordinary conversation.
 
 **occupation `vassalized`** {colour}
@@ -4543,7 +4543,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[unfolding]` The resistance at {settlement} is organized and waiting, and could rise in an afternoon.
 
 **resistance `in open revolt`** {colour}
-1. `[ledger]` {settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets and in daylight.
+1. `[ledger · tier: >= village]` {settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets and in daylight.
 2. `[unfolding]` What is happening at {settlement} will decide whether {counterpart} keeps it, and it will be decided within the season.
 3. `[street]` The town at {settlement} is fighting the people holding it, in daylight, and has stopped calculating whether it can win.
 
@@ -4760,7 +4760,7 @@ draws at most one of each.
 
 **FAMINE** · `famine`
 1. `[street · institution: granary]` There is not enough to eat, and everyone knows it now. The granary feeds fewer people each week.
-2. `[unfolding]` Hunger has moved from the poorest streets into the ordinary ones; what the fields returned does not reach the table.
+2. `[unfolding · tier: >= village]` Hunger has moved from the poorest streets into the ordinary ones; what the fields returned does not reach the table.
 3. `[trade · market]` The market has grain at a price most families cannot pay, so they are eating the stores meant for {season}.
 4. `[street]` There is not enough food in {settlement}, and people now say so openly, at the door and in the street.
 5. `[ledger · institution: granary]` {settlement}'s granary tally now decides who gets grain, whatever they can pay, and people keep testing the rule.
@@ -4974,7 +4974,7 @@ the mechanism behind it.
 
 **SYNERGY: occupation × insurgency** · the one ACCELERATING pair
 1. `[unfolding]` The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occupier more each season.
-2. `[street]` {settlement} is occupied and fighting back, and the occupiers no longer walk its streets alone.
+2. `[street · tier: >= village]` {settlement} is occupied and fighting back, and the occupiers no longer walk its streets alone.
 3. `[threshold]` The occupation gave rise to the resistance, and now the resistance is wearing the occupation down; both sides are paying dearly for it.
 
 **SYNERGY: mass_migration × disease_outbreak**
@@ -5021,7 +5021,7 @@ the mechanism behind it.
 **ORIGIN: `resistance`**
 1. `[unfolding]` This is a resistance rather than a revolt. It was born under an occupation, and it defines itself against the occupier rather than the seat.
 2. `[street · crisis: occupied]` The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone knows which is which.
-3. `[visitor · crisis: occupied]` {settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.
+3. `[visitor · crisis: occupied · tier: >= village]` {settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.
 
 **ORIGIN: `palace_coup`**
 1. `[visitor]` The conspiracy is a courtly one. Invitations to private dinners are circulating, and the guest list is the plot.
@@ -5056,9 +5056,9 @@ the mechanism behind it.
 3. `[visitor]` The seat is contested from within its own institution; there is no rebellion here, only two governments wearing the same name.
 
 **ORIGIN: `popular_revolt`**
-1. `[street]` The streets rose on their own. No power owns this yet, which is what makes it dangerous to everyone.
+1. `[street · tier: >= village]` The streets rose on their own. No power owns this yet, which is what makes it dangerous to everyone.
 2. `[visitor · market]` The market square empties at the same hour every evening; somewhere people are meeting, and nobody organized them from above.
-3. `[unfolding]` A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popular, and genuinely leaderless.
+3. `[unfolding · court sits · court]` A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popular, and genuinely leaderless.
 
 **ORIGIN: `servile_uprising`**
 1. `[street]` The bound labour of {settlement} has risen against the households that held it. The work songs in the fields changed first, and the overseers did not understand the new words.
@@ -5102,7 +5102,7 @@ one crisis twice.
 **SLOTS.** `{settlement}` `{reason}` `{timeband_age}`
 
 **SEVERITY: `low`** {colour}
-1. `[ledger]` The town's account books show this trouble, but the streets hardly do; it is a small one.
+1. `[ledger · tier: >= village]` The town's account books show this trouble, but the streets hardly do; it is a small one.
 2. `[visitor]` It is a real pressure and a small one; {settlement} absorbs it without changing anything it does.
 3. `[local]` People notice it, but it has not yet cost the town anything it would miss.
 
@@ -5172,12 +5172,12 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 
 **DIRECTION: `stable` · CRISIS: `occupied`** {crisis: occupied}
 1. `[local]` The occupation of {settlement} has settled in, and nobody there expects it to end this year.
-2. `[traveller]` The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them.
+2. `[traveller · tier: >= village]` The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them.
 3. `[official]` {settlement}'s own leaders still protest the occupation, and the occupiers still ignore them; nothing has changed in months.
 4. `[trade · market]` Merchants in {settlement} pay the occupiers the same share of every sale, season after season, and have learned to price it in.
 
 **DIRECTION: `easing` · CRISIS: `occupied`** {crisis: occupied}
-1. `[local]` The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for questioning.
+1. `[local · tier: >= village]` The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for questioning.
 2. `[official]` {settlement}'s own leaders have been handed back the small matters of governing.
 
 **DIRECTION: `worsening` · CRISIS: `politically_fractured`** {crisis: politically_fractured}
@@ -5396,13 +5396,13 @@ THE STRESS TYPE IN THE POOL KEY (STYLE-RULINGS §1a; W4 PEOPLE, second seat, 202
 **FAMILY: regional transmission** (every `regional_*` · `cold_war_sanctions` · `trade_route_cut`) {colour}
 1. `[ledger]` The trouble did not begin here. It arrived along a connection {settlement} depends on, and the dependence is why it arrived.
 2. `[trade]` This trouble started elsewhere and reached the town the same way its trade comes.
-3. `[traveller]` What hurts {settlement} started somewhere else, and travellers bring news of it with their goods.
+3. `[traveller · no crisis: threat]` What hurts {settlement} started somewhere else, and travellers bring news of it with their goods.
 
 **FAMILY: war layer, aggressor side** (`war_drain` · `army_deployed` · `war_exhaustion` · `war_mobilization` · `reinforcement_cost`) {crisis-scoped}
 1. `[ledger · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` The war is being fought elsewhere and paid for here. Men, coin and grain leave; nothing comes back on the same schedule.
 2. `[visitor · walls · garrison · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` {settlement} sends men and money to a war fought somewhere else. The cost shows in the treasury and the thin garrison, not in the walls.
 3. `[official · crisis: any]` The town is paying for an army that is fighting far away, and every levy leaves it poorer.
-4. `[visitor · no walls · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` Men and money leave {settlement} for a war fought somewhere else. The cost shows in the treasury and the missing men, not in the streets.
+4. `[visitor · no walls · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any · tier: >= village]` Men and money leave {settlement} for a war fought somewhere else. The cost shows in the treasury and the missing men, not in the streets.
 
 **FAMILY: occupation layer** (`occupation_resistance` · `occupation_burden` · `war_spoils` · `vassal_extraction` · `vassal_trade_coercion` · `trade_embargo`)
 1. `[counterforce]` Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was meant for elsewhere.
@@ -5823,12 +5823,12 @@ spatial ledger supplies the counts, never the direction.
 3. `[counterforce · colour]` Several hundred people are no longer here. What they paid in, the town now raises from the ones who stayed.
 
 **QUANTITY: `many hundreds`**
-1. `[elder · colour]` Many hundreds have gone from {settlement}. Whole streets stand shut, and those who stayed do the work of several.
+1. `[elder · tier: >= village]` Many hundreds have gone from {settlement}. Whole streets stand shut, and those who stayed do the work of several.
 2. `[ledger · colour]` Many hundreds have gone. The same walls, wells and bridges now fall to far fewer hands to keep up.
 3. `[visitor · tier: >= town]` Many hundreds have left, and the emptying is legible from the road: whole terraces dark, whole workshops shut.
 
 **QUANTITY: `thousands`**
-1. `[visitor · colour]` Thousands have gone from {settlement}, and more leave every season. Whole districts stand empty.
+1. `[visitor · tier: >= town]` Thousands have gone from {settlement}, and more leave every season. Whole districts stand empty.
 2. `[ledger · walls]` The walls still stand, but thousands have left and most of the houses inside them are empty.
 3. `[elder · colour]` Thousands of people have left. What remains occupies a settlement built for something considerably larger.
 
@@ -6133,8 +6133,8 @@ shared letter would collide.*
 **`crime_wave`** {crisis-scoped}
 1. `[street · minor · watch · crisis: any]` Theft in {settlement} is common enough that people barely mention it; the watch writes the complaint down and nobody expects more.
 2. `[ledger · major · watch · crisis: any]` The watch's book at {settlement} is thick with the same few crimes written many times over, and the names in it are almost never the same twice.
-3. `[visitor · major · crisis: any]` Visitors to {settlement} are warned twice before nightfall which streets to avoid, and the warning is given quietly.
-4. `[unfolding · catastrophic · watch · crisis: any]` Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.
+3. `[visitor · major · crisis: any · tier: >= village]` Visitors to {settlement} are warned twice before nightfall which streets to avoid, and the warning is given quietly.
+4. `[unfolding · catastrophic · watch · crisis: any · tier: >= village]` Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.
 5. `[counterforce · minor · population: ≥ middling · no crisis: unrest · crisis: any]` Thieving in {settlement} hits the same quarters every season, and the town has learned to live with it.
 
 **`economic_disparity`** {crisis-scoped}
@@ -6257,10 +6257,10 @@ shared letter would collide.*
 - `CRITICAL` {colour} — 1. `[visitor]` The country around {settlement} is not held at all, and the town's edge is wherever the last house happens to stand. · 2. `[ledger]` {settlement} has no answer to what lives beyond its fields and nobody whose work it would be. · 3. `[street]` People in {settlement} do not go far out after dark, and they do not need to be told why.
 
 **`scores.internal`**
-- `STRONG` {crisis-scoped} — 1. `[visitor · no crisis: unrest · crisis: any]` Order in {settlement} is kept quietly: few guards on the streets, and little trouble for them to deal with. · 2. `[ledger · crisis: any]` Complaints brought at {settlement} are heard and closed, and the closing is written down. · 3. `[street · no crisis: unrest · no crisis: succession · crisis: any]` A quarrel in {settlement} goes to somebody who will settle it, and everybody knows who that is.
-- `ADEQUATE` {crisis-scoped} — 1. `[visitor · no crisis: unrest · crisis: any]` {settlement} is orderly on the main streets and less particular about the others. · 2. `[ledger · watch · crisis: any]` The watch at {settlement} answers what is reported to it and does not seek out what is not. · 3. `[street · crisis: any]` {settlement} handles its own trouble most of the time, and tolerates the rest.
+- `STRONG` {crisis-scoped} — 1. `[visitor · no crisis: unrest · crisis: any · tier: >= village]` Order in {settlement} is kept quietly: few guards on the streets, and little trouble for them to deal with. · 2. `[ledger · crisis: any]` Complaints brought at {settlement} are heard and closed, and the closing is written down. · 3. `[street · no crisis: unrest · no crisis: succession · crisis: any]` A quarrel in {settlement} goes to somebody who will settle it, and everybody knows who that is.
+- `ADEQUATE` {crisis-scoped} — 1. `[visitor · no crisis: unrest · crisis: any · tier: >= village]` {settlement} is orderly on the main streets and less particular about the others. · 2. `[ledger · watch · crisis: any]` The watch at {settlement} answers what is reported to it and does not seek out what is not. · 3. `[street · crisis: any]` {settlement} handles its own trouble most of the time, and tolerates the rest.
 - `WEAK` — 1. `[visitor · watch]` There is more going on in {settlement} than the watch troubles itself with, and it is not hidden particularly well. · 2. `[ledger]` {settlement}'s complaint book has more entries opened in it than closed. · 3. `[street]` Getting a thing settled in {settlement} depends on who you are, and the town is arranged accordingly.
-- `CRITICAL` {colour} — 1. `[visitor]` Whatever authority {settlement} has does not reach into its own streets. · 2. `[ledger]` Little is reported at {settlement}, because reporting produces no outcome. · 3. `[street]` People in {settlement} settle their own matters, and the settling is not always proportionate.
+- `CRITICAL` {colour} — 1. `[visitor · tier: >= village]` Whatever authority {settlement} has does not reach into its own streets. · 2. `[ledger]` Little is reported at {settlement}, because reporting produces no outcome. · 3. `[street]` People in {settlement} settle their own matters, and the settling is not always proportionate.
 
 **`scores.economic`**
 - `STRONG` {crisis-scoped} — 1. `[ledger · market · no crisis: indebted · crisis: any]` {settlement} could lose a season's trade and go on paying its people; there is enough behind the market to absorb it. · 2. `[visitor · no crisis: hunger · crisis: any]` Prices in {settlement} hold steady from one market to the next; the town is not living hand to mouth. · 3. `[street · no crisis: hunger · no crisis: indebted · crisis: any]` A bad year in {settlement} is a bad year and not a crisis, and the town budgets for one.
@@ -6282,7 +6282,7 @@ shared letter would collide.*
 - `Wealthy` / `Thriving` {colour} — 1. `[visitor]` {settlement} is rich in the way that shows in the paving and the doorframes before it shows in anybody's clothes. · 2. `[ledger]` {settlement}'s books carry more than the town needs, and what to do with the excess is a question in its own right here. · 3. `[street]` Money moves in {settlement} fast enough that people talk about where it is going rather than whether there is any.
 
 **`safetyProfile.safetyLabel`** *(the head word before the em dash; the suffix names a stressor and belongs to the stressor shape, which owns that prose)*
-- head word in {`Secure`, `Controlled`, `Quarantined`} {crisis-scoped} — 1. `[visitor · no crisis: threat · no crisis: unrest · no crisis: plague_onset · crisis: any]` Visitors walk {settlement} at any hour unbothered; the only interest anyone takes in them is what they might buy. · 2. `[street · no crisis: threat · no crisis: plague_onset · crisis: any]` {settlement} is safe, and the townsfolk pay for that safety without grudging it. · 3. `[ledger · watch · no crisis: unrest · crisis: any]` The watch at {settlement} has little to report, because the streets are quiet, not because the watch is idle. · 4. `[street · crisis: occupied, plague_onset]` Movement in {settlement} is watched and limited; the streets are quiet because people are kept off them.
+- head word in {`Secure`, `Controlled`, `Quarantined`} {crisis-scoped} — 1. `[visitor · no crisis: threat · no crisis: unrest · no crisis: plague_onset · crisis: any]` Visitors walk {settlement} at any hour unbothered; the only interest anyone takes in them is what they might buy. · 2. `[street · no crisis: threat · no crisis: plague_onset · crisis: any]` {settlement} is safe, and the townsfolk pay for that safety without grudging it. · 3. `[ledger · watch · no crisis: unrest · crisis: any · tier: >= village]` The watch at {settlement} has little to report, because the streets are quiet, not because the watch is idle. · 4. `[street · crisis: occupied, plague_onset · tier: >= village]` Movement in {settlement} is watched and limited; the streets are quiet because people are kept off them.
 - head word in {`Tense`, `Strained`, `Restricted`, `Unsafe`} {crisis-scoped} — 1. `[visitor · crisis: any]` In {settlement} visitors are served, but someone always takes note of them. · 2. `[street · no crisis: threat · crisis: any]` {settlement} is not dangerous, but nobody here is at ease: doors are barred early and talk stops when outsiders pass. · 3. `[ledger · watch · crisis: any]` The watch at {settlement} has more ground than men; lesser complaints wait days to be looked at.
 - head word in {`Dangerous`, `Desperate`} — 1. `[visitor]` {settlement} is dangerous; even careful people come to harm here. · 2. `[street]` People in {settlement} move in company after dark and do not consider that unusual. · 3. `[ledger · watch]` The watch at {settlement} hears of only a fraction of what happens, and only what others choose to tell it.
 
@@ -6349,7 +6349,7 @@ unchanged.
 
 **`smoke` (route `isolated` / `mountain_pass`)** {colour} — 1. `[visitor]` You see {settlement}'s smoke a long time before you see {settlement}. · 2. `[street]` {settlement} is a long way from anywhere, and it keeps its own stores and its own counsel. · 3. `[ledger]` What reaches {settlement} reaches it deliberately; nothing arrives here by passing through. · 4. `[counterforce]` {settlement} is remote but not cut off: the road is bad, and someone keeps it open.
 
-**`ordinary` (route `road` and the default)** {colour} — 1. `[visitor]` {settlement} comes into view the way working towns do: smoke, a few carts, and little else. · 2. `[street]` {settlement} is on the way to somewhere and has made a modest living out of being on the way. · 3. `[ledger]` Goods come into {settlement} and goods go out of it, and neither the coming nor the going is remarkable. · 4. `[counterforce]` The road runs past {settlement}, but few travellers stop, and the town sells mostly to itself.
+**`ordinary` (route `road` and the default)** {colour} — 1. `[visitor]` {settlement} comes into view the way working towns do: smoke, a few carts, and little else. · 2. `[street]` {settlement} is on the way to somewhere and has made a modest living out of being on the way. · 3. `[ledger · no crisis: threat · imports · exports]` Goods come into {settlement} and goods go out of it, and neither the coming nor the going is remarkable. · 4. `[counterforce · no crisis: threat]` The road runs past {settlement}, but few travellers stop, and the town sells mostly to itself.
 
 ---
 
@@ -6362,11 +6362,11 @@ unchanged.
 **PROVENANCE:** **STRUCTURAL CAUSE LICENSED, HISTORICAL CAUSE FORBIDDEN (R-DST-W4-a).** This shape is the corpus's clearest instance of the distinction. *"The settlement cannot fully feed itself; what the land does not give arrives expensively"* is entailed by the field pair `need` vs `production` and is lawful. *"…because the war took the fields"* is not, and there is no field on this record that could ever make it so. `[elder]` is available here **only** for the standing-origin frame (why a town is where it is, which the route field genuinely asserts) and never for an event.
 **R-DST-W4-f:** the existing line's em dash is apposition inside a woven sentence and stands.
 
-**`crossroads`** — 1. `[ledger · no deficit]` {settlement} is here because the roads are here; the town is what grew in the place where stopping made sense. · 2. `[street · no deficit]` Nobody chose {settlement}'s site; the roads met here, and the town grew where travellers stopped. · 3. `[ledger · deficit]` {settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town. · 4. `[elder · deficit]` {settlement} has always eaten from the crossroads' trade more than from its own fields.
+**`crossroads`** — 1. `[ledger · no deficit]` {settlement} is here because the roads are here; the town is what grew in the place where stopping made sense. · 2. `[street · no deficit]` Nobody chose {settlement}'s site; the roads met here, and the town grew where travellers stopped. · 3. `[ledger · deficit · no crisis: threat]` {settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town. · 4. `[elder · deficit]` {settlement} has always eaten from the crossroads' trade more than from its own fields.
 
 **`port`** — 1. `[visitor · no deficit]` {settlement} exists because of the water, and nothing about the town makes sense without it. · 2. `[ledger · no deficit]` {settlement}'s living comes off the quay; the fields behind it are a convenience the town could manage without. · 3. `[ledger · deficit]` {settlement}'s food and its goods both come in by water; without the harbour the town would have no reason to be here. · 4. `[street · deficit · coast]` {settlement} looks seaward for everything, including dinner.
 
-**`river`** {river} *(W2-WRITE 2026-11-13: six lines for a river that meets the sea, declared `coast`)* — 1. `[ledger · no deficit]` {settlement} is built on its water because the water is the cheapest thing here to move goods on. · 2. `[street · no deficit]` Every decision {settlement} has ever made about where to put a building started with the river. · 3. `[ledger · deficit]` {settlement}'s ground gives less than the town needs and the river makes up the rest, which is why the town is on the river and not on better ground. · 4. `[elder · deficit]` {settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring. · 5. `[ledger · no deficit · coast]` {settlement} stands at a river's mouth because goods could go up the river and out to sea from the same landing. · 6. `[street · no deficit · coast]` {settlement} was put where the river meets the sea, and it has lived off both waters since. · 7. `[elder · no deficit · coast]` {settlement} began as a landing at the river's mouth, and the landing is still the reason for the place. · 8. `[ledger · deficit · coast]` {settlement}'s ground gives less than it needs, and what the river brings down and the sea brings in makes up the rest. · 9. `[visitor · deficit · coast]` {settlement} has few fields between the river and the sea, and it eats from the boats. · 10. `[street · deficit · coast]` Bread in {settlement} comes down the river or in from the sea, because the ground at the mouth was never good for grain.
+**`river`** {river} *(W2-WRITE 2026-11-13: six lines for a river that meets the sea, declared `coast`)* — 1. `[ledger · no deficit]` {settlement} is built on its water because the water is the cheapest thing here to move goods on. · 2. `[street · no deficit]` Every decision {settlement} has ever made about where to put a building started with the river. · 3. `[ledger · deficit]` {settlement}'s ground gives less than the town needs and the river makes up the rest, which is why the town is on the river and not on better ground. · 4. `[elder · deficit · no crisis: threat]` {settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring. · 5. `[ledger · no deficit · coast]` {settlement} stands at a river's mouth because goods could go up the river and out to sea from the same landing. · 6. `[street · no deficit · coast]` {settlement} was put where the river meets the sea, and it has lived off both waters since. · 7. `[elder · no deficit · coast]` {settlement} began as a landing at the river's mouth, and the landing is still the reason for the place. · 8. `[ledger · deficit · coast]` {settlement}'s ground gives less than it needs, and what the river brings down and the sea brings in makes up the rest. · 9. `[visitor · deficit · coast]` {settlement} has few fields between the river and the sea, and it eats from the boats. · 10. `[street · deficit · coast]` Bread in {settlement} comes down the river or in from the sea, because the ground at the mouth was never good for grain.
 
 **`isolated`** — 1. `[ledger · no deficit]` {settlement} is far from the trade roads, so it makes what it needs; nothing else will reach it. · 2. `[street · no deficit]` {settlement} produces what {settlement} uses, because the alternative is a long journey for it. · 3. `[ledger · deficit]` {settlement} is far from the trade roads and cannot feed itself; what the land does not give comes in dear, or not at all. · 4. `[visitor · deficit · market]` {settlement} buys the food it cannot grow, and the market shows it: bread here costs what meat costs elsewhere.
 
@@ -6374,7 +6374,7 @@ unchanged.
 
 **`tier` overlay** *(composed after the route line, never instead of it)*
 - `metropolis` {colour} — 1. `[ledger]` Merchants, officials and petitioners from across the region all end up in {settlement} sooner or later. · 2. `[visitor]` {settlement} is so large that the roads, farms and villages around it all point toward it. · 3. `[street]` Nobody in {settlement} thinks of the region as somewhere else.
-- `city` — 1. `[ledger · no deficit]` {settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs. · 2. `[ledger · deficit]` {settlement} is large enough that its appetites outrun its fields: what the city eats, the city cannot fully grow. · 3. `[visitor]` {settlement} is big enough to have quarters that do not know each other.
+- `city` — 1. `[ledger · no deficit · no crisis: threat]` {settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs. · 2. `[ledger · deficit]` {settlement} is large enough that its appetites outrun its fields: what the city eats, the city cannot fully grow. · 3. `[visitor]` {settlement} is big enough to have quarters that do not know each other.
 - `thorp` / `hamlet` {colour} — 1. `[street]` {settlement} is small enough that every household knows its purpose, and surplus, where there is any, is modest. · 2. `[visitor]` {settlement} is a handful of roofs with a reason, and the reason is usually the ground. · 3. `[ledger]` {settlement}'s whole economy is a few fields and a few trades, and everyone knows them.
 - other tiers {colour} — 1. `[ledger]` {settlement} has grown as large as its fields and trade allow, and no larger. · 2. `[street]` {settlement} is big enough for a hall and small enough that most people know each other. · 3. `[visitor]` {settlement} is an ordinary town: a few trades, a hall, and nothing that stands out.
 
@@ -6408,7 +6408,7 @@ unchanged.
 4. `[unfolding · gate]` While the gates hold, {settlement} lives off its savings, and the stores are all that count.
 
 **`power_stress`: occupation against stated stability**
-1. `[ledger · no crisis: unrest]` {settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.
+1. `[ledger · no crisis: unrest · tier: >= village]` {settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.
 2. `[street · no crisis: unrest]` {settlement} is orderly under foreign soldiers, and its people go about their business with their eyes down.
 3. `[visitor · no crisis: unrest]` {settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.
 4. `[counterforce · no ruler: occupier]` {settlement} is occupied, but its own hall still governs; the occupier takes its tribute and leaves the running to the townsfolk.
@@ -6496,7 +6496,7 @@ unchanged.
 **`allied`** {colour}
 1. `[ledger]` {settlement} and {counterpart} stand by each other, and neither town has to ask twice.
 2. `[street]` Trouble for {counterpart} is trouble in {settlement}, and the town would say so out loud.
-3. `[visitor]` Travellers from {counterpart} are welcomed in {settlement} as near-neighbours, not outsiders.
+3. `[visitor · no crisis: threat]` Travellers from {counterpart} are welcomed in {settlement} as near-neighbours, not outsiders.
 **`patron`** *(arm: {settlement} is the patron)* {colour}
 1. `[ledger]` {counterpart} depends on {settlement}, and {settlement} decides with that in mind.
 2. `[street]` {settlement} does not think of {counterpart} as a neighbour so much as a responsibility.
@@ -6574,19 +6574,19 @@ unchanged.
 **ANCHORED IS THE CAUSAL GATE.** `anchored: true` (badged *STILL RELEVANT TODAY*) is the record's own assertion that the event still bears on the present, and it is the licence for a *"and it still…"* clause. An unanchored event gets described and **not** connected forward. This is the sharpest line in the shape and the easiest to blur.
 
 **`founding`** *(the town's origin as the record holds it)* {colour}
-1. `[elder]` {settlement} was founded {timeband_since} for {reason}, and the oldest streets still show it.
+1. `[elder · tier: >= village]` {settlement} was founded {timeband_since} for {reason}, and the oldest streets still show it.
 2. `[ledger]` {founder} put {settlement} here, and the first hard test was {challenge}; the town survived it.
 3. `[street]` {settlement} tells its founding as a hard start overcome, and the story is mostly true.
 4. `[visitor]` The oldest part of {settlement} still shows what the town was for when it started, which is not always what it is for now.
 5. `[counterforce]` {settlement} was founded for {reason} and has never been anything else; whatever else has been tried here did not take.
 
 **`historicalCharacter`** *(the pull-quote's framing, never a replacement for it)* {colour}
-1. `[elder]` {settlement} is {timeband_age}, and what it has been through still shows in its streets and habits.
+1. `[elder · tier: >= village]` {settlement} is {timeband_age}, and what it has been through still shows in its streets and habits.
 2. `[street]` {settlement} has a character of its own, earned, not chosen.
 3. `[visitor]` {settlement}'s character is not obvious at first; it shows itself over weeks, not hours.
 
 **event type: `disaster`** {colour}
-1. `[elder · anchored]` {settlement} lost {band} to {event} {timeband_since}, and the town has never rebuilt the quarter it happened in.
+1. `[elder · anchored · tier: >= town]` {settlement} lost {band} to {event} {timeband_since}, and the town has never rebuilt the quarter it happened in.
 2. `[ledger · anchored]` {event} is {timeband_age}, and what it destroyed in {settlement} was never replaced.
 3. `[street]` {settlement} remembers {event} as a hard time, and the people who tell it do not make it smaller than it was.
 4. `[visitor]` Anyone in {settlement} will tell a visitor about {event} if asked, even {timeband_since}.
@@ -6634,7 +6634,7 @@ unchanged.
 1. `[ledger · anchored]` {event}, {timeband_since}, changed {settlement}'s numbers by {band}, and the town has been that size since.
 2. `[elder · anchored]` The people who came to {settlement} at {event} are the people {settlement} is now made of, and the older families still know which is which.
 3. `[street]` {settlement} was a different size before {event}, and even {timeband_since} the people old enough to remember can say how different.
-4. `[visitor · anchored]` {settlement} has quarters that do not match each other, and the mismatch dates from {event}.
+4. `[visitor · anchored · tier: >= town]` {settlement} has quarters that do not match each other, and the mismatch dates from {event}.
 5. `[ledger]` The count of households at {settlement} changed with {event}, and the rolls say so in plain figures.
 6. `[street]` Families in {settlement} know which of them were here before {event} and which came or stayed after it.
 7. `[elder]` {event} is told at {settlement} as a year when people came and went in numbers.
@@ -6875,7 +6875,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 4. `[elder]` The water was here first, and {settlement} has been built around it ever since.
 
 **`HIGH-GROUND`** {colour}
-1. `[visitor]` {settlement} sits where the ground let it stand, not where it was easy, and its streets climb with the slope.
+1. `[visitor · tier: >= village]` {settlement} sits where the ground let it stand, not where it was easy, and its streets climb with the slope.
 2. `[street]` Nothing in {settlement} is level for long; the town takes the slope as a condition of living here.
 3. `[ledger]` Everything in {settlement} must be hauled uphill, and the town pays that price for its height.
 
@@ -7099,7 +7099,7 @@ compass word, no real-world place, no named analogy.*
 3. `[counterforce]` The roads into {settlement} are poor and the country is long, yet the town keeps growing.
 
 **`LEVEL`**
-1. `[ledger]` {settlement} holds its size; the roads bring in as many as they take away.
+1. `[ledger · no crisis: threat]` {settlement} holds its size; the roads bring in as many as they take away.
 2. `[elder]` {settlement} is the size it has been, and the ways in and out have not moved it in either direction.
 
 **`FALLING-OPEN`**
@@ -7141,7 +7141,7 @@ compass word, no real-world place, no named analogy.*
 
 **`WORN-PLAIN`** {crisis-scoped}
 1. `[elder]` {settlement} has no great scars, only ordinary wear: worn steps and patched roofs.
-2. `[counterforce · crisis: any]` No disaster has marked {settlement}; its streets are evenly worn and nothing in it looks new.
+2. `[counterforce · crisis: any · tier: >= village]` No disaster has marked {settlement}; its streets are evenly worn and nothing in it looks new.
 
 ---
 
@@ -7312,7 +7312,7 @@ no compass word, no real-world place, no named analogy.*
 ⭐ **THE GREAT HOUSE LENSES (W4 PEOPLE, 2026-11-07; the wiring inventory's C5, "great religious houses present").** Two more lenses at the same position, each keyed on its own composition boolean — `compound.inst.hasCathedral` and `compound.inst.hasMonastery` — and silent where it is false. Every variant names the house by its kind (the cathedral, the monastery), never by the roster's catalogue row, so no slot beyond `{settlement}` is needed. Four vantages each (the intro position), each declaring the house it names.
 
 **`GREAT HOUSE: cathedral`**
-1. `[traveller · institution: temple]` The cathedral stands taller than anything else in {settlement}, and travellers see it long before they arrive.
+1. `[traveller · institution: temple · no crisis: threat]` The cathedral stands taller than anything else in {settlement}, and travellers see it long before they arrive.
 2. `[local · institution: temple]` {settlement} sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them.
 3. `[newcomer · institution: temple]` Ask the way anywhere in {settlement} and you will be given it from the cathedral.
 4. `[official · institution: temple]` {settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to.
