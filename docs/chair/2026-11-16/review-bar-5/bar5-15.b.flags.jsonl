@@ -1,0 +1,5 @@
+{"id":"C34570","town":"bar0-town-calm-rand-26","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD header's printed word is Secure (band secure, 6 months stores, granary)","other":""}
+{"id":"C34601","town":"bar0-town-calm-rand-26","sev":"MED","kind":"STATE","why":"prints Food · Pressured; FOOD header's printed word is Secure","other":"C34570"}
+{"id":"C36098","town":"bar0-town-calm-rand-26","sev":"MED","kind":"STATE","why":"Daily Life prints Food Pressured; FOOD header's printed word is Secure","other":"C34570"}
+{"id":"C36192","town":"bar0-town-calm-rand-26","sev":"MED","kind":"STATE","why":"Tonight sheet prints 'Food Pressured.'; FOOD header's printed word is Secure","other":"C34570"}
+{"id":"DONE","lines":1704,"blocks":1,"flags":4}
