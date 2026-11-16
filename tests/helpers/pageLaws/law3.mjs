@@ -4,6 +4,9 @@
 // `against`) and finds the unmarked contrary print elsewhere.
 import { CHIP_MARK, MARK_LEAD, fold, economicsSections } from './pageB.mjs';
 
+/** BAR5-FOOD: the failed food's chip mark (`display/commoditiesShown.js :: FAILED_MARK`). */
+const FAILED_CHIP = /\(failed\)/;
+
 const tok = (s) => fold(s).replace(/[^a-z' ]/g, ' ').replace(/\s+/g, ' ').trim();
 
 // what a failed food source puts on a list
@@ -89,7 +92,9 @@ export function law3(T, town) {
     const ag = { tab: 'Systems/Resources', i: failedIdx, line: res[failedIdx] };
     const ca = res.findIndex((l) => l === 'Commodities available');
     if (ca >= 0) for (let i = ca + 1; i < res.length && !/▲$/.test(res[i]); i++) {
-      if (re.test(res[i]) && !CHIP_MARK.test(res[i])) { push('L3.failedFood', 'Systems/Resources', i, res[i], ag, `the page says ${f} failed this year; the commodities available list it unmarked`); }
+      // BAR5-FOOD (tightened): read item by item (a row's cells are joined by ` · `): one marked chip does not mark the
+      // row's others; a chip's `(failed)` is the failed food's own mark (`display/commoditiesShown.js`).
+      if (res[i].split(' · ').some((it) => re.test(it) && !CHIP_MARK.test(it) && !FAILED_CHIP.test(it))) { push('L3.failedFood', 'Systems/Resources', i, res[i], ag, `the page says ${f} failed this year; the commodities available list it unmarked`); }
     }
     const sec = economicsSections(eco);
     const tp = sec['Trade Profile'] || [];
@@ -107,8 +112,12 @@ export function law3(T, town) {
 
   // L3.foodModel: the food line names game or fish as the table's own food beside a farmland house that sells its harvest
   const farm = T.cards.find((c) => /^(Farmland|Fields|Common fields|Farmsteads?|Croft(s|land)?|Arable)/i.test(c.name) && c.chips.some((ch) => /grain|harvest/i.test(ch.name) && !ch.marked) && !c.marked);
+  // BAR5-FOOD (widened): every frame of the composer's line makes the same claim of the table (the one-source frame's
+  // other index, "Its own food is …"; the two- and three-source frames, "… anchor the table", "The table is …"), any
+  // source but grain; a line that names grain, the fields' grain (`foodways.js :: FRAMES.oneFarmed`, its clause) or the
+  // holdings' own table (`FRAMES.oneTilled`) does not.
   if (farm) for (const x of T.all) {
-    if (/puts on the table itself is (the hunters' game|fish|the day's catch|salted fish)/.test(x.text) && !/What each holding grows goes to its own table/.test(x.text))
+    if (/^(Its own food is|What it puts on the table itself is|.* anchor the table|The table is )/.test(x.text) && !/\b(grain|grains|breads?|barley|rye|wheat|millet|rice|porridge|pottage|flour|mill)\b|What each holding grows|Each holding grows|Its own fields give it grain/i.test(x.text))
       push('L3.foodModel', x.tab, x.i, x.text, { tab: 'Systems/Institutions', i: farm.chipIdx, line: `${farm.head} / ${farm.chipLine}` }, 'the food line names another food as the table\'s own, beside a farmland house that sells its own grain');
   }
 

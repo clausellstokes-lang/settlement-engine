@@ -657,6 +657,7 @@ function wantsOnce(people) {
 // TAIL-TIES-6 (the chair's ruling (T23)): the span of the stores in words lives in the pure leaf `storesSpanWords.js` (one
 // home; the Defence tab's food endurance line reads it there, so no eager module reaches this sheet through it).
 import { DAYS_PER_MONTH, storesSpanWords } from './storesSpanWords.js';
+import { foodBandShownKey } from '../facts/foodBandShown.js'; // BAR5-FOOD (FD1): the printed band's one home
 export { DAYS_PER_MONTH, storesSpanWords };
 
 /**
@@ -704,10 +705,8 @@ export function foodBandOf(record) {
   /** @type {Record<string, { label: string, color: string }>} */
   const bands = FOOD_SECURITY_BANDS;
   if (!band || !Object.hasOwn(bands, band)) return null;
-  const gap = Number(record?.gapPct);
-  let key = band;
-  if ((band === 'secure' || band === 'surplus') && Number.isFinite(gap) && gap > 0) key = 'pressured';
-  else if (band === 'importDependent' && record?.normalImportPct === 0) key = 'deficit';
+  // BAR5-FOOD (the chair's FD1): the lowering is the one home's (`facts/foodBandShown.js`), read by the vocabulary's `food` too
+  const key = /** @type {string} */ (foodBandShownKey({ ...record, band }));
   return { key, label: bands[key].label, color: bands[key].color };
 }
 

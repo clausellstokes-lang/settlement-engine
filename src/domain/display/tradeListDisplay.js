@@ -273,9 +273,13 @@ export function localProductionAsPrinted(settlement) {
     .flatMap((c) => (Array.isArray(c.outputs) ? c.outputs : []).map((o) => String(o).toLowerCase())));
   const outputs = new Set(chains.flatMap((c) => (Array.isArray(c.outputs) ? c.outputs : []).map((o) => String(o).toLowerCase())));
   const bought = new Set(arrivingOf(settlement).map((x) => fold(tradeMarkOf(x).label)));
+  // BAR5-FOOD (L3.failedFood): the food a famine in force failed is not made here this year (`commoditiesShown.js ::
+  // failedFoodGoodsOf`, the one reading the Resources tab's commodity list marks): "Produced locally" leaves it.
+  const failedFood = failedFoodGoodsOf(settlement).map((g) => new RegExp(`\\b${g}\\b`));
   const kept = list.filter((raw) => {
     const item = raw.toLowerCase().replace(/_/g, ' ').trim();
     if (LOCAL_IDENTIFIERS.has(item)) return false;
+    if (failedFood.some((re) => re.test(item))) return false;
     if (!pillBorneOut(raw, 'local', settlement)) return false; // W2-C-LEAVES-4 item 2: the one pill reader (below)
     if (outputs.has(raw.toLowerCase())) return made.has(raw.toLowerCase());
     const keys = RESOURCES_YIELDING.get(item);
@@ -661,6 +665,7 @@ export function exportsAsPrinted(settlement) {
     .map(String);
 }
 import { chainCrisisStateShown, failedGroundsOf } from './chainStateShown.js';
+import { failedFoodGoodsOf } from './commoditiesShown.js'; // BAR5-FOOD (L3.failedFood)
 import { chainCarrierOf } from '../facts/chainCarrier.js';
 
 /**

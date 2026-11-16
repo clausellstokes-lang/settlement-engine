@@ -18,6 +18,7 @@ import { FLUSH } from '../../../design/flush.js';
 import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
 import { fullCardWordUnderSiege } from '../../../domain/display/economicsCrisisMarks.js'; // BAR3-LABELS-3 L3b
 import { plainGoodName } from '../../../domain/display/tradeListDisplay.js'; // W2-C-LEAVES-13 (15): no slash label
+import { commoditiesShown, FAILED_MARK } from '../../../domain/display/commoditiesShown.js'; // BAR5-FOOD (L3.failedFood)
 
 /**
  * WHAT A RESOURCE DRAWS ON (`exploitation.*[].dependsOn`). Its only reader was Economics'
@@ -255,7 +256,8 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             {res.availableResources?.length>0&&<div style={{paddingTop:6,borderTop:'1px solid #e8dcc8'}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:MUTED,letterSpacing:'0.06em',marginBottom:4}}>Commodities available</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {res.availableResources.map((r2,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{Object.hasOwn(RESOURCE_DISPLAY_LABELS, r2) ? RESOURCE_DISPLAY_LABELS[r2] : r2.replace(/_/g,' ')}</span>)}
+                {/* BAR5-FOOD (L3.failedFood): the famine's failed food is marked where it is listed (commoditiesShown.js) */}
+                {commoditiesShown(r).map((c,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{c.failed ? `${c.label} (${FAILED_MARK})` : c.label}</span>)}
               </div>
             </div>}
           </>;

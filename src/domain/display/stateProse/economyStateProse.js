@@ -1200,7 +1200,9 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const headerKey = prosperityHeaderPoolKey(rank, access);
   const foodKey = foodTilePoolKey(foodBalance);
   const granaryKey = granaryPoolKey(granary);
-  const securityKey = foodSecurityPoolKey(eco.foodSecurity?.label, eco.foodSecurity?.stockpile);
+  // BAR5-FOOD (BRIEF-BAR5 fact (c); AUDIT-A 1b): the rung keys on the food word THE PAGE PRINTS (`foodWordShown.js`: the band's
+  // word, "Pressured" where the stored label says "Secure" over a daily gap), never the stored label it lowers.
+  const securityKey = foodSecurityPoolKey(foodWordShown(settlement)?.label ?? eco.foodSecurity?.label, eco.foodSecurity?.stockpile);
   const mixKey = incomeMixPoolKey(eco.incomeSources);
   const crimeKey = criminalIncomePoolKey(eco.incomeSources);
   const tradeKey = tradeProfilePoolKey(eco);
@@ -1356,3 +1358,4 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
 
 // W2-C-LEAVES-3 P1-c: the grade the Resources tab's cards print (at the end of the file, so no line-keyed row above moves).
 import { exploitationForDesk } from '../validationOnPage.js';
+import { foodWordShown } from '../foodWordShown.js'; // BAR5-FOOD (c): the page's food word

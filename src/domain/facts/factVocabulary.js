@@ -416,7 +416,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   tier: dim({ shape: 'band', home: 'tier', order: TIER_WORDS, reader: (f) => f.tier }),
   population: dim({ shape: 'band', home: 'populationBand', order: POPULATION_WORDS, reader: (f) => f.populationBand }),
   'magic level': dim({ shape: 'band', home: 'magic', order: MAGIC_LEVEL_WORDS, reader: (f) => f.magic?.level }),
-  food: dim({ shape: 'band', home: 'famine', order: FOOD_BAND_WORDS, reader: (f) => f.famine?.band }),
+  // BAR5-FOOD (the chair's FD1 of 2026-11-16, vetoable by the owner): the band THE PAGE PRINTS (`foodBandShown.js`), the
+  // ledger's raw band where a facts object carries no printed one
+  food: dim({ shape: 'band', home: 'famine', order: FOOD_BAND_WORDS, reader: (f) => f.famine?.shownBand ?? f.famine?.band }),
   stores: dim({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
   prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
   crime: dim({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
