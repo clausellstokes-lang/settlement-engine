@@ -1025,7 +1025,7 @@ export const INSTITUTION_SERVICES = {
     "Hedge medicine": { on: false, p: 0.5, desc: "Combination of herbal knowledge and minor magic for common ailments." }
   },
   "Hired blades": {
-    "Bodyguard service": { on: true,  p: 1.0, desc: "Personal protection for merchants, officials, and travelers." },
+    "Bodyguard service": { on: true,  p: 1.0, desc: "Personal protection for merchants, officials, and travelers.", excludes: ["crisis: under_siege"] }, // BAR5-MARKS: its siege twin (SERVICE_DESC_SIBLINGS)
     "Escort": { on: true, p: 0.9, desc: "Armed accompaniment for valuable shipments and vulnerable travelers." },
     "Bounty hunting": { on: false, p: 0.5, desc: "Track and return fugitives. Payment on delivery." },
     "Muscle for hire": { on: false, p: 0.4, desc: "Intimidation, debt collection, and problem resolution. No questions." }
@@ -1130,7 +1130,7 @@ export const INSTITUTION_SERVICES = {
     "Coin inspection": { on: false, p: 0.5, desc: "Verify coin quality and detect forgeries. Official certification available." }
   },
   "Monastery or friary": {
-    [RELIGIOUS_SERVICES]: { on: true,  p: 1.0, desc: "Rites, prayers, and observances. Open to locals and pilgrims." },
+    [RELIGIOUS_SERVICES]: { on: true,  p: 1.0, desc: "Rites, prayers, and observances. Open to locals and pilgrims.", excludes: ["crisis: under_siege"] }, // BAR5-MARKS: its siege twin (SERVICE_DESC_SIBLINGS)
     "Hospitality": { on: true, p: 0.8, desc: "Food and shelter for travelers and pilgrims. Often free or by donation." },
     "Copyist services": { on: true, p: 0.7, desc: "Copy manuscripts and documents. Primary source of book production." },
     "Herbalism and healing": { on: false, p: 0.5, desc: "Monastic herb gardens and healing knowledge serve the local population." },
@@ -1861,6 +1861,11 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   "Move small amounts of cargo across the river.": Object.freeze([
     Object.freeze({ text: "Move small amounts of cargo across the river.", needs: Object.freeze(["river"]) }),
     Object.freeze({ text: "Move small amounts of cargo across the water.", twinOf: "Move small amounts of cargo across the river.", excludes: Object.freeze(["river"]) }),
+  ]),
+  // BAR5-MARKS (LAW 5, 2026-11-16; vetoable by the owner): the monastery's pilgrims come by road.
+  "Rites, prayers, and observances. Open to locals and pilgrims.": Object.freeze([
+    Object.freeze({ text: "Rites, prayers, and observances. Open to locals and pilgrims.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Rites, prayers, and observances, open to all; no pilgrim reaches the house while the siege holds.", twinOf: "Rites, prayers, and observances. Open to locals and pilgrims.", crisis: Object.freeze(['under_siege']) }),
   ]),
   // BAR5-MARKS (LAW 2's `L2.siege.abroad`, 2026-11-16; vetoable by the owner): the bodyguards' merchants and travellers come
   // by road; under a siege the officials and the town's own frightened are left. The row goes on, so it is twinned, not marked.

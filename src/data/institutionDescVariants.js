@@ -2142,48 +2142,6 @@ export const DESC_VARIANT_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Professional cartographers, guild-organised, producing regional maps, sea charts, property surveys, and reconnaissance maps for the army. Some sell off the shelf, others are drawn to order. The city's are the most accurate maps the region has.", needs: Object.freeze(["coast"]) }),
     Object.freeze({ text: "Professional cartographers, guild-organised, producing regional maps, property surveys, and reconnaissance maps for the army. Some sell off the shelf, others are drawn to order. The city's are the most accurate maps the region has.", twinOf: "Professional cartographers, guild-organised, producing regional maps, sea charts, property surveys, and reconnaissance maps for the army. Some sell off the shelf, others are drawn to order. The city's are the most accurate maps the region has.", excludes: Object.freeze(["coast"]) }),
   ]),
-  // BAR5-MARKS (LAW 2's `L2.siege.abroad`, 2026-11-16; vetoable by the owner): the bowyers' lines that sell to the caravans.
-  // The house is not stopped or curtailed by a siege (the watch and the garrison buy more: the chair's S8), so each line
-  // that names the caravans declares the siege it is false in, and its twin, in the same voice, says where the arrows go.
-  "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits their guards.": Object.freeze([
-    Object.freeze({ text: "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits their guards.", excludes: Object.freeze(["crisis: under_siege"]) }),
-    Object.freeze({ text: "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. While the siege holds the roads no caravan comes, and the arrows go to the town's defence.", twinOf: "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits their guards.", crisis: Object.freeze(["under_siege"]) }),
-  ]),
-  "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.": Object.freeze([
-    Object.freeze({ text: "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.", excludes: Object.freeze(["crisis: under_siege"]) }),
-    Object.freeze({ text: "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. With the roads held there are no caravans to restock, and the arrows go to the town's defence.", twinOf: "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.", crisis: Object.freeze(["under_siege"]) }),
-  ]),
-  "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.": Object.freeze([
-    Object.freeze({ text: "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.", excludes: Object.freeze(["crisis: under_siege"]) }),
-    Object.freeze({ text: "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. No caravan comes while the siege lasts, and every sheaf goes to the town's defence.", twinOf: "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.", crisis: Object.freeze(["under_siege"]) }),
-  ]),
-  "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.": Object.freeze([
-    Object.freeze({ text: "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.", excludes: Object.freeze(["crisis: under_siege"]) }),
-    Object.freeze({ text: "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. While the siege lasts it supplies the town's defenders, and no caravan.", twinOf: "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.", crisis: Object.freeze(["under_siege"]) }),
-  ]),
-  "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.": Object.freeze([
-    Object.freeze({ text: "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.", excludes: Object.freeze(["crisis: under_siege"]) }),
-    Object.freeze({ text: "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order. With the roads cut, all of it goes to the town's defence.", twinOf: "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.", crisis: Object.freeze(["under_siege"]) }),
-  ]),
-  "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the caravans buy here.": Object.freeze([
-    Object.freeze({ text: "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the caravans buy here.", excludes: Object.freeze(["crisis: under_siege"]) }),
-    Object.freeze({ text: "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. With the caravans cut off by the siege, the town's defenders buy all of it.", twinOf: "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the caravans buy here.", crisis: Object.freeze(["under_siege"]) }),
-  ]),
-  // BAR5-MARKS (LAW 2's `L2.famine.work`, 2026-11-16; vetoable by the owner): the cobbler's three lines of a trade that
-  // never wants for work, false where the page says no one earns a normal living while the famine lasts. Each declares
-  // the famine; its twin says the shoes still wear out and few can pay.
-  "Makes and repairs shoes and boots. Every person needs footwear. One of the most reliable and consistent trades.": Object.freeze([
-    Object.freeze({ text: "Makes and repairs shoes and boots. Every person needs footwear. One of the most reliable and consistent trades.", excludes: Object.freeze(["crisis: famine"]) }),
-    Object.freeze({ text: "Makes and repairs shoes and boots. Every person needs footwear, though in the famine few can pay for it.", twinOf: "Makes and repairs shoes and boots. Every person needs footwear. One of the most reliable and consistent trades.", crisis: Object.freeze(["famine"]) }),
-  ]),
-  "Makes and mends shoes and boots. Everyone needs something on their feet, which keeps this among the steadiest trades going.": Object.freeze([
-    Object.freeze({ text: "Makes and mends shoes and boots. Everyone needs something on their feet, which keeps this among the steadiest trades going.", excludes: Object.freeze(["crisis: famine"]) }),
-    Object.freeze({ text: "Makes and mends shoes and boots. Everyone needs something on their feet, but in the famine the mending waits while every coin goes on food.", twinOf: "Makes and mends shoes and boots. Everyone needs something on their feet, which keeps this among the steadiest trades going.", crisis: Object.freeze(["famine"]) }),
-  ]),
-  "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.": Object.freeze([
-    Object.freeze({ text: "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.", excludes: Object.freeze(["crisis: famine"]) }),
-    Object.freeze({ text: "Cuts and repairs footwear of every kind. Shoes still wear out in the famine, though few can pay to have them mended.", twinOf: "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.", crisis: Object.freeze(["famine"]) }),
-  ]),
 });
 
 /**
@@ -2353,5 +2311,77 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
   "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.": Object.freeze([
     Object.freeze({ text: "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.", excludes: Object.freeze(['crisis: occupied', 'ruler: occupier']) }),
     Object.freeze({ text: "A loose council of leading citizens sees to the town's common business. It takes its orders from the occupiers now, but the work gets done.", twinOf: "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.", crisis: Object.freeze(['occupied']) }),
+  ]),
+  // BAR5-MARKS (2026-11-16): A CRISIS'S TWINS, READ LATE. A siege or a famine drawn at random is settled after the description
+  // draw (r2r-metropolis-14: the bowyers' caravans printed beside the siege), so these sets are resolved here, against the
+  // settled record, by the late re-read (no draw moves; the twin is stored where the crisis refuses the original).
+  // BAR5-MARKS (LAW 2's `L2.siege.abroad`, 2026-11-16; vetoable by the owner): the bowyers' lines that sell to the caravans.
+  // The house is not stopped or curtailed by a siege (the watch and the garrison buy more: the chair's S8), so each line
+  // that names the caravans declares the siege it is false in, and its twin, in the same voice, says where the arrows go.
+  "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits their guards.": Object.freeze([
+    Object.freeze({ text: "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits their guards.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. While the siege holds the roads no caravan comes, and the arrows go to the town's defence.", twinOf: "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits their guards.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.": Object.freeze([
+    Object.freeze({ text: "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. With the roads held there are no caravans to restock, and the arrows go to the town's defence.", twinOf: "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.": Object.freeze([
+    Object.freeze({ text: "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. No caravan comes while the siege lasts, and every sheaf goes to the town's defence.", twinOf: "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.": Object.freeze([
+    Object.freeze({ text: "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. While the siege lasts it supplies the town's defenders, and no caravan.", twinOf: "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.": Object.freeze([
+    Object.freeze({ text: "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order. With the roads cut, all of it goes to the town's defence.", twinOf: "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the caravans buy here.": Object.freeze([
+    Object.freeze({ text: "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the caravans buy here.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. With the caravans cut off by the siege, the town's defenders buy all of it.", twinOf: "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the caravans buy here.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  // BAR5-MARKS (LAW 5, 2026-11-16; vetoable by the owner): the free company's caravan escort and the great cathedral's pilgrims,
+  // false under a siege that closes the roads; neither house is stopped (the garrison work and the rites go on: the chair's
+  // S8 for the cathedral), so each line declares the siege and its twin says what goes on.
+  "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates. Cheaper than a standing army, more reliable than a mob. These men fight in formation on salary, not for treasure.": Object.freeze([
+    Object.freeze({ text: "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates. Cheaper than a standing army, more reliable than a mob. These men fight in formation on salary, not for treasure.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A billet and contracting office for a band of professional soldiers available between campaigns. With the roads held there is no caravan to escort, and garrison contracts and short-term military hire go at day-wage rates. Cheaper than a standing army, more reliable than a mob. These men fight in formation on salary, not for treasure.", twinOf: "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates. Cheaper than a standing army, more reliable than a mob. These men fight in formation on salary, not for treasure.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-term hire go at day-wages here. Cheaper than a standing army and steadier than a mob. These are salaried men who fight in formation, not for plunder.": Object.freeze([
+    Object.freeze({ text: "A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-term hire go at day-wages here. Cheaper than a standing army and steadier than a mob. These are salaried men who fight in formation, not for plunder.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the roads, so garrison work and short-term hire go at day-wages here. Cheaper than a standing army and steadier than a mob. These are salaried men who fight in formation, not for plunder.", twinOf: "A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-term hire go at day-wages here. Cheaper than a standing army and steadier than a mob. These are salaried men who fight in formation, not for plunder.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Where a band of soldiers lodges and takes contracts between wars. They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble. They form up for a wage, not for treasure.": Object.freeze([
+    Object.freeze({ text: "Where a band of soldiers lodges and takes contracts between wars. They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble. They form up for a wage, not for treasure.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the day for garrison duty and the walls: less costly than keeping an army, more dependable than a rabble. They form up for a wage, not for treasure.", twinOf: "Where a band of soldiers lodges and takes contracts between wars. They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble. They form up for a wage, not for treasure.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.": Object.freeze([
+    Object.freeze({ text: "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege holds.", twinOf: "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.": Object.freeze([
+    Object.freeze({ text: "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.", twinOf: "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  "The great church of the metropolis. The region's chief religious authority sits here, and the faithful travel to it.": Object.freeze([
+    Object.freeze({ text: "The great church of the metropolis. The region's chief religious authority sits here, and the faithful travel to it.", excludes: Object.freeze(["crisis: under_siege"]) }),
+    Object.freeze({ text: "The great church of the metropolis. The region's chief religious authority sits here, and the faithful of the city fill it while the siege keeps the rest away.", twinOf: "The great church of the metropolis. The region's chief religious authority sits here, and the faithful travel to it.", crisis: Object.freeze(["under_siege"]) }),
+  ]),
+  // BAR5-MARKS (LAW 2's `L2.famine.work`, 2026-11-16; vetoable by the owner): the cobbler's three lines of a trade that
+  // never wants for work, false where the page says no one earns a normal living while the famine lasts. Each declares
+  // the famine; its twin says the shoes still wear out and few can pay.
+  "Makes and repairs shoes and boots. Every person needs footwear. One of the most reliable and consistent trades.": Object.freeze([
+    Object.freeze({ text: "Makes and repairs shoes and boots. Every person needs footwear. One of the most reliable and consistent trades.", excludes: Object.freeze(["crisis: famine"]) }),
+    Object.freeze({ text: "Makes and repairs shoes and boots. Every person needs footwear, though in the famine few can pay for it.", twinOf: "Makes and repairs shoes and boots. Every person needs footwear. One of the most reliable and consistent trades.", crisis: Object.freeze(["famine"]) }),
+  ]),
+  "Makes and mends shoes and boots. Everyone needs something on their feet, which keeps this among the steadiest trades going.": Object.freeze([
+    Object.freeze({ text: "Makes and mends shoes and boots. Everyone needs something on their feet, which keeps this among the steadiest trades going.", excludes: Object.freeze(["crisis: famine"]) }),
+    Object.freeze({ text: "Makes and mends shoes and boots. Everyone needs something on their feet, but in the famine the mending waits while every coin goes on food.", twinOf: "Makes and mends shoes and boots. Everyone needs something on their feet, which keeps this among the steadiest trades going.", crisis: Object.freeze(["famine"]) }),
+  ]),
+  "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.": Object.freeze([
+    Object.freeze({ text: "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.", excludes: Object.freeze(["crisis: famine"]) }),
+    Object.freeze({ text: "Cuts and repairs footwear of every kind. Shoes still wear out in the famine, though few can pay to have them mended.", twinOf: "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.", crisis: Object.freeze(["famine"]) }),
   ]),
 });

@@ -1235,8 +1235,8 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "sawmill_commercial": Object.freeze([INPUT]), // HR1 (BAR4-CLOSE-SWEEP, the chair's ruling, 2026-11-16): the rung runs the timber chain (BAR4-RECORD R1), so its house is short where its services are
   "scroll_scribe": NONE,
   "sewage_system": NONE,
-  "shepherd": Object.freeze([FIELD_WORK]), // SV8: its flocks on the grazing the siege curtails
-  "shepherd_collective": Object.freeze([FIELD_WORK]), // SV8: the same flocks, held in common
+  "shepherd": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: its flocks on the grazing the siege curtails
+  "shepherd_collective": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: the same flocks, held in common
   "shipyard": NONE,
   "slave_market": NONE,
   "slave_market_district": NONE,

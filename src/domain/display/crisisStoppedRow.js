@@ -185,14 +185,17 @@ function stoppedBy(kind, settlement) {
 /**
  * BAR5-MARKS (LAW 2's `L2.famine.meat`, 2026-11-16; vetoable by the owner): under a siege nothing comes in, so the meat of
  * a town that raises no herds of its own is not to be had: the food record's own sources (`foodRecord.foodSources`, the
- * page's food line) name no livestock. A town whose record states no sources is not read (nothing is guessed).
+ * page's food line) name no livestock and the food ledger's pastoral chain is off. A town whose record states neither is not
+ * read (nothing is guessed).
  * @param {object | null | undefined} settlement
  * @returns {boolean}
  */
 function noHerdsHere(settlement) {
-  const sources = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null } | null | undefined} */ (settlement)
-    ?.economicState?.foodSecurity?.foodRecord?.foodSources;
-  return Array.isArray(sources) && !sources.includes('livestock');
+  const food = /** @type {{ economicState?: { foodSecurity?: { chains?: Record<string, unknown> | null, foodRecord?: { foodSources?: unknown } | null } | null } | null } | null | undefined} */ (settlement)
+    ?.economicState?.foodSecurity;
+  const sources = food?.foodRecord?.foodSources;
+  // and the food ledger's own pastoral chain is off (a shepherd's town keeps its herds whatever the sources list)
+  return Array.isArray(sources) && !sources.includes('livestock') && food?.chains?.['Pastoral & livestock'] === false;
 }
 
 /**

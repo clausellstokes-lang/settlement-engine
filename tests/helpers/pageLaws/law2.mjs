@@ -8,10 +8,10 @@ import { sentences, lineMarked, cardAt, entryAt, MARK_LEAD } from './pageB.mjs';
 // the history tells of the past (precision draw 2: "drew more pilgrims" 38 years ago is no claim of today)
 const SKIP_TABS = /^(Summary\/Plot Hooks|World\/Rumors & News|World\/History|Notes\/)/;
 // a sentence that speaks of the crisis or of before it is the crisis's own account, not an ordinary-times claim
-const SELF_AWARE = /\b(siege|besieg|famine|war\b|the army|armies|before the|used to|no longer|until the\b|cut off|stopped|nothing comes|remember|could bring|would bring|might bring|supplements? (mundane )?(treatment|medicine)|no (camels|caravans?|traders?|pilgrims?) )/i;
+export const SELF_AWARE = /\b(siege|besieg|famine|war\b|the army|armies|before the|used to|no longer|until the\b|cut off|stopped|nothing comes|remember|could bring|would bring|might bring|supplements? (mundane )?(treatment|medicine)|no (camels|caravans?|traders?|pilgrims?) )/i;
 
 // medicinal goods the page can say come from outside (rule S2: the page's own "depend on <good> from outside, which the siege has cut off")
-const CUT_GOODS = {
+export const CUT_GOODS = {
   'medicinal herbs': /\b(medications|medicines|antidotes|remedies|tinctures|salves|herbalism kits|medicinal herbs)\b/i, // plural: an offer of goods, not "mundane medicine"
 };
 
@@ -96,6 +96,13 @@ export function law2(T, town) {
   const names = [...T.houseNames, ...people].filter((n) => n.length > 2).sort((a, b) => b.length - a.length).map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
   const nameRe = names.length ? new RegExp(names.join('|'), 'gi') : null;
   const stripNames = (s) => (nameRe ? s.replace(nameRe, ' ') : s);
+  // BAR5-MARKS (2026-11-16), A NAMED EXCLUSION of `L2.siege.abroad`: the record's own account of the past, printed on the
+  // Overview as a tension (`history.currentTensions[]`, `historicalEvents[]`: "A claimed miracle or relic drew pilgrims …
+  // and the flood of coin and strangers changed it for good"): the past states its own fact (the measure's rule 2), as the
+  // History tab's lines do (`SKIP_TABS`); one instance in the census's 720 at 600b7683a (r2s-under_siege-city-2)
+  const hist = [...(T.record?.history?.historicalEvents || []), ...(T.record?.history?.currentTensions || [])]
+    .map((e) => String(e?.description || '')).filter((t) => t.length > 20);
+  const pastOfRecord = (s) => hist.some((h) => h.includes(s.replace(/\.$/, '')));
   for (const r of RULES) {
     if (r.crisis && !T.crises.has(r.crisis)) continue;
     let against = null, claim = r.claim;
@@ -151,6 +158,7 @@ export function law2(T, town) {
       for (const s0 of sentences(x.text)) {
         const s = stripNames(s0);
         if (!claim.test(s) || SELF_AWARE.test(s) || MARK_LEAD.test(s)) continue;
+        if (r.id === 'L2.siege.abroad' && pastOfRecord(s0)) continue; // BAR5-MARKS: the named exclusion above
         push(x.tab, x.i, s0);
         break;
       }
