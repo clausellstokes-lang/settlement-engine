@@ -103,6 +103,8 @@ export const LEAVES = Object.freeze({
   hasInstitution: home('hasInstitution', 1, ['institutions'], { call: 'factsCall' }),
   sacredHouse: home('sacredHouse', 1, ['institutions']),
   market: home('market', 1, ['institutions']),
+  legalHouse: home('legalHouse', 1, ['institutions']), // BAR5-THINGS (LAW 4): a house of written law (`legalHouse.js`)
+  appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
   warState: home('warState', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {
     note: 'it reads the crisis home (`crisisOf`), so it carries the crisis leaf\'s bundle: the hunger family touches the economy',

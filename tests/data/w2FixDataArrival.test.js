@@ -33,9 +33,12 @@ describe('W2-FIX-DATA: an arrival beat prints only where it is true', () => {
   });
   it('a patron\'s crowd and a notary\'s clerk only in a town or larger (c09 at 33, c03 at 9)', () => {
     for (const start of ['A patron moves', "A notary's clerk"]) {
-      expect(admits(line(start), town({ tier: 'hamlet' }))).toBe(false);
-      expect(admits(line(start), town({ tier: 'town' }))).toBe(true);
+      expect(admits(line(start), town({ tier: 'hamlet', houses: ['Courthouse'] }))).toBe(false);
+      expect(admits(line(start), town({ tier: 'town', houses: ['Courthouse'] }))).toBe(true);
     }
+    // BAR5-THINGS (2026-11-16, LAW 4 "the notary"): the clerk also needs a house of written law (`legal house`); the patron does not
+    expect(admits(line("A notary's clerk"), town({ tier: 'town', houses: ['Town hall'] }))).toBe(false);
+    expect(admits(line('A patron moves'), town({ tier: 'town', houses: ['Town hall'] }))).toBe(true);
   });
   it('no traveller is offered water at the gate of a besieged town (c12)', () => {
     expect(admits(line('Travellers are offered water'), town({ stress: ['under_siege'] }))).toBe(false);

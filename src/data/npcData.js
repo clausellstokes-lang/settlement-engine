@@ -1188,7 +1188,9 @@ export const NPC_FACTION_LOYALTY = {
     'They were seen leaving a house they had no business in, on the night its owner disappeared.',
     'A rule they wrote to stop one abuse has opened the door to another, and the people using it are their friends.',
     { text: 'Someone has forged their seal well enough to fool their own staff, and three orders went out under it before anyone noticed.', needs: ['tier: ≥ village'] }, // R2-CODE-A-2 (cold #6): an office with staff, which no thorp or hamlet keeps
-    'They owe their post to a patron who has started asking for repayment in favours they cannot grant openly.',
+    // BAR5-THINGS (LAW 4 "the patron"; REVIEW-BAR-5 C30295): a post owed to a patron only where the town keeps posts someone is
+    // named to (`appointed post`): never on a household head nobody named
+    { text: 'They owe their post to a patron who has started asking for repayment in favours they cannot grant openly.', needs: ['appointed post'] },
   ],
   military: [
     { text: 'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.', needs: ['guardPresence', 'population: ≥ middling'] }, // TAIL-TIES, the chair's ruling (T3): a district, as the government line's (ruling (f))
@@ -1324,7 +1326,7 @@ export const NPC_FACTION_LOYALTY = {
     'A purse they found and kept has a rightful owner, and that owner has started asking around.',
     'Their partner in a small venture has disappeared with the takings and left the debts in their name.',
     'A family they look after has stopped answering the door, and the shutters have stayed closed for a week.',
-    'They agreed to hold a parcel for a traveller, and two different people have since come to collect it.',
+    { text: 'They agreed to hold a parcel for a traveller, and two different people have since come to collect it.', crisis: ['any'] }, // BAR5-THINGS (LAW 5): a traveller once, and callers from within: true in any crisis
     'An old letter of theirs, written in anger years ago, has been shown to the person it was about.',
     'Their apprentice has been talking to a rival, and came back with an offer to buy them out.',
     'Someone keeps paying off their small debts around the place before they can, and has left no name.',
@@ -1342,7 +1344,7 @@ export const NPC_FACTION_LOYALTY = {
     'Two families who should be feuding are recently, unexpectedly civil. Neither will explain why.',
     'A child has been asking questions about a person no one has heard of, insisting this person lived here recently.',
     'The well gives good water. The spring above it dried up three years ago. No one mentions this.',
-    "They buried someone last season that they refer to only as 'the traveller'. They will not say more.",
+    { text: "They buried someone last season that they refer to only as 'the traveller'. They will not say more.", crisis: ['any'] }, // BAR5-THINGS (LAW 5): last season's burial: true in any crisis
     'The family that has always mended the common track says it is theirs to close, and has closed it.',
     "A cow belonging to one family was found dead in another family's field, and the two families no longer speak.",
     'Someone has been moving the boundary stones at night, a little each time, always in the same direction.',
@@ -1850,7 +1852,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name}'s best informant inside ${s.name}'s crew has stopped reporting. Nobody has seen the informant for nine days.`, colour: true },
       { line: (r, s) =>
-        `${s.name} has hired an advocate to sue ${r.name} for what ${r.name}'s people did last month. The case comes before the council this season.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+        `${s.name} has brought a claim against ${r.name} for what ${r.name}'s people did last month. The case comes before the council this season.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] }, // BAR5-THINGS (LAW 4 "the notary"): the claim names no advocate, which no legal house may keep; the council hears it
       { line: (r, s) =>
         `${r.name} has been told to leave ${s.name} alone by someone ${r.name} cannot refuse. Nobody has said why.`, colour: true },
     ], ['military', 'criminal']),
@@ -1872,7 +1874,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name}'s people wear ${r.name}'s colours and take ${r.name}'s orders without question. No magistrate has a say over them.`, colour: true },
       { line: (r, s) =>
-        `${r.name} began paying ${s.name}'s people after the last caravan was lost. No caravan has been lost since, and ${s.name}'s fee has doubled.`, colour: true },
+        `${r.name} began paying ${s.name}'s people after the last caravan was lost. No caravan has been lost since, and ${s.name}'s fee has doubled.`, excludes: ['crisis: under_siege'] }, // BAR5-THINGS (LAW 5): caravans that still run are a siege's to deny
       { line: (r, s) =>
         `${s.name} answers to ${r.name}'s purse before any other authority. Everyone in the settlement knows which way ${s.name}'s people would march.`, colour: true },
     ], ['economy', 'military']),
@@ -2179,7 +2181,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
         twin: (r, s) => `The favour ${s.name} needs from ${r.name} comes due next week, and ${r.name} has named a new price.` },
       { line: (r, s) =>
         `${r.name}'s secret is about to come out by other means. Once it does, ${s.name} holds nothing over ${r.name}.`, colour: true },
-      { line: (r, s) => `${s.name} has written down what ${r.name} owes and left a copy with a notary.`, colour: true },
+      // BAR5-THINGS (LAW 4 "the notary"; REVIEW-BAR-5 C44306: "… left a copy with a notary." in 46 towns of the census's 720 and
+      // 22 of the fresh 300 that hold no house of written law): REWORDED to claim no more than every printing town bears. A
+      // `needs: ['legal house']` here refuses the tie's whole INDEX (one index picks this tension and its description, "… sit on
+      // opposite sides of most questions …", true everywhere), and the pair closure has no town facts to write a twin by: measured,
+      // it silenced the description in 49 towns of the fresh 300 and moved the tie. The copy's keeper is no office.
+      { line: (r, s) => `${s.name} has written down what ${r.name} owes and left a sealed copy with a third party.`, colour: true },
     ]),
     type: 'political',
   },
@@ -2320,7 +2327,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name}'s rivals have learned that ${s.name} is family, and have started asking ${s.name} questions.`, colour: true },
       { line: (r, s) =>
-        `The family has asked ${r.name} and ${s.name} to end their quarrel before the next feast. Neither will apologise first.`, colour: true },
+        `The family has asked ${r.name} and ${s.name} to end their quarrel before the next feast. Neither will apologise first.`, crisis: ['any'] }, // BAR5-THINGS (LAW 5): the next feast is a day of the calendar, which no crisis takes away
     ]),
     type: 'family',
   },

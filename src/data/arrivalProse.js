@@ -86,7 +86,10 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['bakery', 'baker', 'bakehouse', 'mill', 'mills'],
     trade: ['baked goods', 'milled flour', 'flour', 'bread', 'grain surplus'],
     lines: [
-      { text: () => 'The smell of fresh bread meets you on the road in.', colour: true }, // R-AO (CENSUS-2f): read; presumes nothing
+      // BAR5-THINGS (LAW 5: the static inventory's `outside` and `plenty`): fresh bread on the road in is a calm town's; under a
+      // hunger or a siege its twin keeps the slot
+      { text: () => 'The smell of fresh bread meets you on the road in.', excludes: ['crisis: hunger', 'crisis: under_siege'], crisis: ['any'] }, // R-AO (CENSUS-2f): read
+      { text: () => 'An oven is lit somewhere close, though the smell of bread on the air is thin.', twinOf: 'The smell of fresh bread meets you on the road in.', crisis: ['any'] }, // BAR5-THINGS (LAW 5): its twin
       { text: () => 'Someone has been baking since before dawn, and the air still carries it.', excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4, Y6; READ-ALL 18339): no bread baked where the food failed; a line a crisis can make false is not colour, so it leaves the colour mark and declares
       { text: () => 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill'], excludes: ['crisis: hunger'] }, // BAR4-SCENES-2 (HW1; kind A1's `house at work`): no flour dust where the famine leaves the mill short (the pool's colour lines still speak)
       { text: () => 'A mill wheel turns somewhere close, slowly, with little grain to grind.', twinOf: 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill', 'crisis: hunger'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
@@ -245,18 +248,18 @@ export const ARRIVAL_SENSES = Object.freeze([
       // BAR4-SCENES-2 (HW1; kind A1's `house at work`): each line shows a kiln house at work: some kiln house not short of its clay, sand or wood
       { text: () => 'A thread of kiln smoke rises over the roofs, and the air tastes faintly of ash.', needs: ['trade at work: kilns'] },
       { text: (n) => `The kilns of ${n} are cold more days than they are lit.`, twinOf: 'A thread of kiln smoke rises over the roofs, and the air tastes faintly of ash.', excludes: ['trade at work: kilns'] }, // BAR4-SCENES-2 (HW1): its twin where every kiln house is short; a twin keeps the slot
-      { text: () => 'Fresh pots stand drying in a row outside a workshop.', needs: ['trade at work: kilns'] },
-      { text: () => 'Drying boards stand empty outside a workshop, with no fresh pots on them.', twinOf: 'Fresh pots stand drying in a row outside a workshop.', excludes: ['trade at work: kilns'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
-      { text: () => 'Charcoal smoke lingers in the lane, thick and sweetish.', needs: ['trade at work: kilns'] },
-      { text: () => 'The charcoal clamps at the end of the lane stand cold and unlit.', twinOf: 'Charcoal smoke lingers in the lane, thick and sweetish.', excludes: ['trade at work: kilns'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => 'Fresh pots stand drying in a row outside a workshop.', needs: ['trade at work: clay kilns'] }, // BAR5-THINGS (LAW 4 "the kilns"): pots are a clay kiln's
+      { text: () => 'Drying boards stand empty outside a workshop, with no fresh pots on them.', twinOf: 'Fresh pots stand drying in a row outside a workshop.', excludes: ['trade at work: clay kilns'] }, // BAR5-THINGS: where a clay kiln stands and is short // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => 'Charcoal smoke lingers in the lane, thick and sweetish.', needs: ['trade at work: charcoal kilns'] }, // BAR5-THINGS (LAW 4 "the kilns"): a charcoal burner's
+      { text: () => 'The charcoal clamps at the end of the lane stand cold and unlit.', twinOf: 'Charcoal smoke lingers in the lane, thick and sweetish.', excludes: ['trade at work: charcoal kilns'] }, // BAR5-THINGS: where a charcoal burner stands and is short // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
       { text: () => 'The heat of a working kiln reaches you from across the lane.', needs: ['trade at work: kilns'] },
       { text: () => 'A kiln stands cold across the lane, its mouth bricked up for now.', twinOf: 'The heat of a working kiln reaches you from across the lane.', excludes: ['trade at work: kilns'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
     ],
     dominant: [
-      { text: (n) => `Kiln smoke hangs over ${n}, and the dust of fired clay is on everything.`, needs: ['trade at work: kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1; kind A1's `house at work`)
-      { text: (n) => `Old kiln dust lies on the doorsteps of ${n}, but little smoke rises now.`, twinOf: 'Kiln smoke hangs over {name}, and the dust of fired clay is on everything.', excludes: ['trade at work: kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
-      { text: () => 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', needs: ['trade at work: kilns'], excludes: ['crisis: under_siege'], crisis: ['any'] },
-      { text: () => 'The yard where crates of pots once waited for the carts stands nearly empty.', twinOf: 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (true where the kilns are short or the siege holds the road)
+      { text: (n) => `Kiln smoke hangs over ${n}, and the dust of fired clay is on everything.`, needs: ['trade at work: clay kilns'], crisis: ['any'] }, // BAR5-THINGS (LAW 4 "the kilns"; REVIEW-BAR-5 C15951): fired clay is a clay kiln's // BAR4-SCENES-2 (HW1; kind A1's `house at work`)
+      { text: (n) => `Old kiln dust lies on the doorsteps of ${n}, but little smoke rises now.`, twinOf: 'Kiln smoke hangs over {name}, and the dust of fired clay is on everything.', excludes: ['trade at work: kilns', 'trade at work: clay kilns'], crisis: ['any'] }, // BAR5-THINGS: where a clay kiln is short and no kiln smokes // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', needs: ['trade at work: clay kilns'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR5-THINGS (LAW 4 "the kilns"): pots are a clay kiln's
+      { text: () => 'The yard where crates of pots once waited for the carts stands nearly empty.', twinOf: 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', excludes: ['trade at work: kilns', 'trade at work: clay kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (true where the kilns are short or the siege holds the road)
       { text: () => 'The kilns are lit all through the day, and the heat of them is in every lane.', needs: ['trade at work: kilns'], crisis: ['any'] },
       { text: (n) => `The kilns of ${n} are lit only now and then, and most days the lanes are cold.`, twinOf: 'The kilns are lit all through the day, and the heat of them is in every lane.', excludes: ['trade at work: kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin where every kiln house is short
     ] },
@@ -345,7 +348,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   latin: [
     { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a crowd and a patron's clients (c09 at 33)
-    { text: () => "A notary's clerk hurries past with a satchel of contracts.", needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a notary's trade (c03 at 9)
+    { text: () => "A notary's clerk hurries past with a satchel of contracts.", needs: ['tier: ≥ town', 'legal house'], crisis: ['any'] }, // BAR5-THINGS (LAW 4): a notary where a house of written law stands // W2-FIX-DATA: a notary's trade (c03 at 9)
     { text: () => 'People argue politics in the open, loudly, and seem to enjoy it.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473): not with the enemy at the walls
     { text: () => 'A benefactor\'s name is carved fresh above a mended well, and people make sure you notice it.', crisis: ['any'] },
   ],
@@ -497,9 +500,11 @@ export const ARRIVAL_MEMORIES = Object.freeze({
     () => 'A preacher speaks carefully, glancing at the crowd between sentences.',
   ],
   pilgrimage_surge: [
-    { text: () => 'Pilgrims still pass through on the old route, and the stalls along the road still sell to them.', needs: ['market'] },
-    () => 'Pilgrim badges are nailed above doorways, collected over years.',
-    () => 'The road in is worn smooth by pilgrim feet.',
+    // BAR5-THINGS (LAW 5: the static inventory's `outside`): pilgrims passing now are a siege's to deny; the badges and the
+    // worn road are years past, true in any crisis, and say so
+    { text: () => 'Pilgrims still pass through on the old route, and the stalls along the road still sell to them.', needs: ['market'], excludes: ['crisis: under_siege'], crisis: ['any'] },
+    { text: () => 'Pilgrim badges are nailed above doorways, collected over years.', crisis: ['any'] },
+    { text: () => 'The road in is worn smooth by pilgrim feet.', crisis: ['any'] },
   ],
   external_threat: [
     { text: () => 'The older folk still keep a weapon by the door, out of habit.', excludes: ['crisis: threat'], crisis: ['any'] },
@@ -522,7 +527,7 @@ export const ARRIVAL_MEMORIES = Object.freeze({
   ],
   trade_collapse: [
     () => 'Old traders still talk about the routes that closed, naming each one like a lost relative.',
-    () => 'People here still talk about the years when the caravans stopped coming.',
+    { text: () => 'People here still talk about the years when the caravans stopped coming.', crisis: ['any'] }, // BAR5-THINGS (LAW 5): a memory of years past, true in any crisis
   ],
   crime_wave: [
     () => 'Every door has a newer, heavier lock than the frame it sits in.',

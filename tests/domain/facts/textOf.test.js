@@ -56,6 +56,8 @@ describe('textOf', () => {
     // (kilns 7, stone 7, arcane 6, horses 5, the flapping basket, the mill wheel: each line the trade at work, the siege or the
     // famine can refuse keeps its slot) and 18 bare lines become declared objects (the kilns', stone's, arcane's and horses' lines,
     // and arcane's spellwork and reagent stalls): 27 + 18 = 45.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(188);
+    // 188 → 189 (BAR5-THINGS, 2026-11-16, LAW 5; re-keyed by identity, this batch's own count): the fresh bread's twin joins (the
+    // oven lit, the smell thin: where a hunger or a siege refuses the fresh bread).
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(189);
   });
 });

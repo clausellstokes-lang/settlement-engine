@@ -36,6 +36,8 @@ import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
 import { timberAtHandOf, timberReachesSawmillOf } from './timberAtHand.js'; // BAR4-HOUSES (H1 (ii)); BAR4-SCENES-2: one home
 import { failedFoodSourceOf, enchantingOfferedOf } from './sceneSupply.js'; // BAR4-SCENES (kind A1)
 import { tradeAtWorkOf } from './tradeAtWork.js'; // BAR4-SCENES-2 (HW1)
+import { legalHouseOf } from './legalHouse.js'; // BAR5-THINGS (LAW 4, the notary)
+import { appointedPostOf } from './appointedPost.js'; // BAR5-THINGS (LAW 4, the patron)
 import { leadingSourceSpentOf } from './leadingSourceSpent.js'; // BAR4-CORPUS-ECO (amendment 5b)
 import { ownPlotsOf } from './ownPlots.js'; // BAR4-CORPUS-ECO (amendment 5b; the chair's FW1)
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
@@ -90,6 +92,10 @@ export function factsOf(record, options = {}) {
     get water() { return options.waterKind ? waterOfKind(options.waterKind) : waterOf(record); },
     /** fact 5: a live market */
     get market() { return marketOf(record); },
+    /** BAR5-THINGS (LAW 4): a house that writes, witnesses or tries the law stands, by catalogue identity (`legalHouse.js`) */
+    get legalHouse() { return legalHouseOf(record); },
+    /** BAR5-THINGS (LAW 4): the town keeps a post someone is named to: no household head nobody named is its voice (`appointedPost.js`) */
+    get appointedPost() { return appointedPostOf(record); },
     /** fact 6: the one starving rule */
     get famine() { return famineOf(record); },
     /** fact 7: magic functions; its level */

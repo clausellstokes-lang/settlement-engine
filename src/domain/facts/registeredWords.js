@@ -182,8 +182,9 @@ export const THINGS = Object.freeze({
     leaf: 'institutions.js :: liveInstitutionNames, by name; defence.js answers its atom: one home owed (W2-A-LEAVES)',
     absent: (_f, names) => !names.some((n) => /prison|gaol|jail|stocks/i.test(n)),
   },
+  // BAR5-THINGS (LAW 4, the audit's "left line by line": REVIEW-BAR-5 C31780): `civilian courts` names the town's court
   court: {
-    words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b/i,
+    words: /\bcourthouses?\b|\bcourts? of law\b|\blaw ?courts?\b|\bcivilian courts?\b/i,
     atoms: ['court'],
     leaf: 'institutions.js :: liveInstitutionNames and COURT_HOUSES; defence.js answers its atom: one home owed (W2-A-LEAVES)',
     absent: (_f, names) => !names.some((n) => /court/i.test(n) || COURT_HOUSES.has(n.toLowerCase())),
@@ -341,9 +342,11 @@ const NEW_WORDS_OPEN = /** @type {Record<string, RegisteredWord>} */ ({
     absent: (f) => !inForce(f, 'succession_void') && !inForce(f, 'politically_fractured'),
   },
   // finding 8 of REVIEW-W2B's third read: `neighbourhoods` is `streets`' alone (a size error only in a thorp or a hamlet)
+  // BAR5-THINGS (LAW 4, the audit's "left line by line": REVIEW-BAR-5 C37631 "Several quarters" in a town of 329): `several
+  // quarters` names districts (never "from several quarters", a direction)
   quarters: {
     kind: 'size', layer: 'P', leaf: 'populationBand.js :: populationBandOf',
-    words: /\bdistricts?\b|\b(?:poor|poorer|poorest|rich|richer|wealthy|merchant|merchants'|craft|crafts|artisan|artisans'|foreign|old|new|temple|harbour|dock|river|eastern|western|northern|southern|outer|inner|lower|upper|noble|guild|market|slum|working)\s+quarters?\b|\burban\b|\bmetropolitan\b|\bslums?\b|\btenements?\b/i,
+    words: /\bdistricts?\b|\b(?:poor|poorer|poorest|rich|richer|wealthy|merchant|merchants'|craft|crafts|artisan|artisans'|foreign|old|new|temple|harbour|dock|river|eastern|western|northern|southern|outer|inner|lower|upper|noble|guild|market|slum|working)\s+quarters?\b|(?<!from )\bseveral quarters\b|\burban\b|\bmetropolitan\b|\bslums?\b|\btenements?\b/i,
     atoms: [], bands: { population: ['middling', 'large'] },
     absent: (f) => f?.populationBand === 'small',
   },
@@ -550,11 +553,14 @@ const ROLE_FAMILIES = /** @type {Record<string, RegisteredWord>} */ ({
     atoms: ['watch', 'garrison'],
     absent: (f) => !f?.defence?.watch && !f?.defence?.garrison,
   },
+  // BAR5-THINGS (LAW 4 "the notary", 2026-11-16): the word's atom is the one fact `legal house` (`legalHouse.js`), and its
+  // reader of absence reads that fact, so the draw door and the register read one reading (before, the register read a
+  // name test that took a guild or a government for a notary's house, and the vocabulary had no atom to declare)
   notary: {
-    kind: 'thing', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames (a house that writes or tries the law: a scribe, a court, a hall)',
+    kind: 'thing', layer: 'P', leaf: 'legalHouse.js :: legalHouseOf (a house that writes, witnesses or tries the law, by catalogue identity)',
     words: /\bnotar(?:y|ies|y's)\b|\blawyers?\b|\badvocates?\b/i,
-    atoms: [],
-    absent: (_f, names) => !rosterHas(names, /scribe|notary|court|town hall|city hall|chancery|administration|government|guild/i),
+    atoms: ['legal house'],
+    absent: (f) => !f?.legalHouse,
   },
   smith: {
     kind: 'thing', layer: 'P', leaf: 'institutions.js :: liveInstitutionNames (a smith or metalworker); its atom `institution: smith` reads the kind',

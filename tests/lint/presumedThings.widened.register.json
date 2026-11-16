@@ -5434,6 +5434,12 @@
     "after-base: close-true",
     "A brewery working at commercial scale. It keeps the taverns stocked, and stands among the larger buyers of grain and emp",
     "fde64fbf2b3c22c9"
+   ],
+   [
+    "quarters",
+    "word",
+    "Several quarters, each with its house of worship.",
+    "b80668f645a2a56d"
    ]
   ],
   "src/data/institutionLadders.js": [
