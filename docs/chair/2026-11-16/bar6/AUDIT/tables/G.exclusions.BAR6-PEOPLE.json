@@ -47,17 +47,17 @@
   {
     "file": "src/data/npcData.js",
     "text": "Cover up a minor corruption scandal before the regional lord hears of it",
-    "reason": "a LORD or a CROWN: named for BAR6-HOUSES's sovereign atom (ruling SV1), not at this base; to be declared on it after the join (one line to the chair)"
+    "reason": "a LORD or a CROWN in a goal: DECLARED `needs: [sovereign]` in place (ruling SV1; sovereign by XA1 from a804fa1b5; read at the goal deal on the record `people/goals.js` hands it, the cast and the powers settled); the inventory's class table answers the class `sovereign` with `ruler`, `war`, `crisis` only: it predates the atom"
   },
   {
     "file": "src/data/npcData.js",
     "text": "Become indispensable to the crown: irreplaceable, never exposed",
-    "reason": "a LORD or a CROWN: named for BAR6-HOUSES's sovereign atom (ruling SV1), not at this base; to be declared on it after the join (one line to the chair)"
+    "reason": "a LORD or a CROWN in a goal: DECLARED `needs: [sovereign]` in place (ruling SV1; sovereign by XA1 from a804fa1b5; read at the goal deal on the record `people/goals.js` hands it, the cast and the powers settled); the inventory's class table answers the class `sovereign` with `ruler`, `war`, `crisis` only: it predates the atom"
   },
   {
     "file": "src/data/npcData.js",
     "text": "Negotiate a tithe reduction with the local lord without compromising principle",
-    "reason": "a LORD or a CROWN: named for BAR6-HOUSES's sovereign atom (ruling SV1), not at this base; to be declared on it after the join (one line to the chair)"
+    "reason": "a LORD or a CROWN in a goal: DECLARED `needs: [sovereign]` in place (ruling SV1; sovereign by XA1 from a804fa1b5; read at the goal deal on the record `people/goals.js` hands it, the cast and the powers settled); the inventory's class table answers the class `sovereign` with `ruler`, `war`, `crisis` only: it predates the atom"
   },
   {
     "file": "src/data/npcData.js",
@@ -482,17 +482,17 @@
   {
     "file": "src/data/people/titleSecretsPresentations.js",
     "text": "Calls families out to the lord's fields on their own harvest days, unless they pay to be let off",
-    "reason": "a LORD or a CROWN: named for BAR6-HOUSES's sovereign atom (ruling SV1), not at this base; to be declared on it after the join (one line to the chair)"
+    "reason": "a LORD: DECLARED `needs: [sovereign]` (ruling SV1; sovereign by XA1 from a804fa1b5) in the title table (`TITLE_LINE_DECLARATIONS.secret`, read by `poolMap.js :: settleTitleLines`; a reeve's own house gives the sovereign at the draw), or the stakes of a secret so declared, drawn and refused with it; the inventory does not read that channel"
   },
   {
     "file": "src/data/people/titleSecretsPresentations.js",
     "text": "Grazes their own animals on the lord's meadow and writes the hay down as poor",
-    "reason": "a LORD or a CROWN: named for BAR6-HOUSES's sovereign atom (ruling SV1), not at this base; to be declared on it after the join (one line to the chair)"
+    "reason": "a LORD: DECLARED `needs: [sovereign]` (ruling SV1; sovereign by XA1 from a804fa1b5) in the title table (`TITLE_LINE_DECLARATIONS.secret`, read by `poolMap.js :: settleTitleLines`; a reeve's own house gives the sovereign at the draw), or the stakes of a secret so declared, drawn and refused with it; the inventory does not read that channel"
   },
   {
     "file": "src/data/people/titleSecretsPresentations.js",
     "text": "The lord's people count the hay, and the count has been coming up short",
-    "reason": "a LORD or a CROWN: named for BAR6-HOUSES's sovereign atom (ruling SV1), not at this base; to be declared on it after the join (one line to the chair)"
+    "reason": "a LORD: DECLARED `needs: [sovereign]` (ruling SV1; sovereign by XA1 from a804fa1b5) in the title table (`TITLE_LINE_DECLARATIONS.secret`, read by `poolMap.js :: settleTitleLines`; a reeve's own house gives the sovereign at the draw), or the stakes of a secret so declared, drawn and refused with it; the inventory does not read that channel"
   },
   {
     "file": "src/data/people/titleSecretsPresentations.js",

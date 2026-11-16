@@ -2308,6 +2308,9 @@ const PERSONS_HELD = Object.freeze(['slavery', 'human_trafficking']);
 export const TITLE_LINE_DECLARATIONS = Object.freeze({
   secret: Object.freeze({
     // BAR6-PEOPLE (LAW 10 rule 10e-house, C200774): pay drawn for padded names needs someone paid to keep order
+    // BAR6-PEOPLE (SV1, sovereign by XA1 from a804fa1b5): the reeve's lord's fields and meadow need a sovereign (a reeve's own house gives one)
+    "Calls families out to the lord's fields on their own harvest days, unless they pay to be let off": Object.freeze({ needs: Object.freeze(['sovereign']) }),
+    "Grazes their own animals on the lord's meadow and writes the hay down as poor": Object.freeze({ needs: Object.freeze(['sovereign']) }),
     'Keeps the night roster short and draws pay for names that never walk it': Object.freeze({ needs: Object.freeze(['paid watch']) }),
     'Buys fish from boats that fished where they are forbidden to, and never asks where the catch came from': Object.freeze({ needs: Object.freeze(['navigable']) }),
     "Has been buying stolen ship's stores at night and selling them in the shop the next morning": Object.freeze({ needs: Object.freeze(['coast']) }),

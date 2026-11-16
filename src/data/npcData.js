@@ -466,6 +466,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
+      needs: ['sovereign'], // BAR6-PEOPLE (SV1, sovereign by XA1 from a804fa1b5): a regional lord stands over the town only where the record gives one
       short: 'Cover up a minor corruption scandal before the regional lord hears of it',
       long: 'Transform this settlement into a city-state with real independence',
       driven_by: 'power',
@@ -484,6 +485,7 @@ export const NPC_FACTION_GOALS = {
   ],
   Governor: [
     {
+      needs: ['sovereign'], // BAR6-PEOPLE (SV1): the crown the governor serves, where the record gives one
       short: 'Secure enough grain reserves before winter to prevent unrest',
       long: 'Become indispensable to the crown: irreplaceable, never exposed',
       driven_by: 'power',
@@ -607,6 +609,7 @@ export const NPC_FACTION_GOALS = {
       colour: true,
     },
     {
+      needs: ['sovereign'], // BAR6-PEOPLE (SV1): a local lord to negotiate with, where the record gives one
       short: 'Negotiate a tithe reduction with the local lord without compromising principle',
       long: 'Leave the monastery in better condition (spiritually and structurally) than they found it',
       driven_by: 'spiritual',
