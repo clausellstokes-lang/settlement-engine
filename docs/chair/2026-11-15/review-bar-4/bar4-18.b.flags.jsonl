@@ -1,0 +1,14 @@
+{"id":"C44301","town":"bar0-village-calm-rand-22","sev":"LOW","kind":"STATE","why":"approach 'by road' (and carts, C44626) though trade access is river only; no road is given","other":"C44626"}
+{"id":"C44758","town":"bar0-village-calm-rand-22","sev":"MED","kind":"BROKEN","why":"Systems/Power card heading says Institutions behind this power (13) but only eleven items are listed under Elder Council","other":""}
+{"id":"C44762","town":"bar0-village-calm-rand-22","sev":"MED","kind":"PAIR","why":"Salt works listed under Elder Council 'held under this authority', but its own card backs Merchant Guilds","other":"C44456"}
+{"id":"C44780","town":"bar0-village-calm-rand-22","sev":"MED","kind":"BROKEN","why":"heading Institutions behind this power (6) over five listed items under Merchant Guilds","other":""}
+{"id":"C44796","town":"bar0-village-calm-rand-22","sev":"MED","kind":"PAIR","why":"watch has 'irregular pay' but the Village watch says nobody is paid and households hold the rota","other":"C44415"}
+{"id":"C45225","town":"bar0-village-calm-rand-23","sev":"LOW","kind":"PAIR","why":"sacks of spices stand in doorways, but the Economics tab says spices are needed and not brought in; imports are only salt and felt","other":"C45478"}
+{"id":"C45429","town":"bar0-village-calm-rand-23","sev":"LOW","kind":"PAIR","why":"priest offers divine healing magic for the sick, but Magic tab gives Medical role: absent and Reliance on magic: None","other":"C45671"}
+{"id":"C45642","town":"bar0-village-calm-rand-23","sev":"MED","kind":"PAIR","why":"says nothing threatens the village now, but TENSIONS gives a live external threat: approaching danger and an agent already inside","other":"C45249"}
+{"id":"C45666","town":"bar0-village-calm-rand-23","sev":"LOW","kind":"STATE","why":"Religious acceptance 'hostile' names no object, while the faith's own priest offers divine healing here (C45429)","other":"C45429"}
+{"id":"C45961","town":"bar0-village-famine-rand-21","sev":"MED","kind":"STATE","why":"sawn timber and sawdust 'everywhere', but LAND gaps say the Sawmill lacks access to timber (and mountain_timber): it has no logs to saw","other":"C46101"}
+{"id":"C46008","town":"bar0-village-famine-rand-21","sev":"LOW","kind":"BROKEN","why":"garbled slot text: 'next in line, the first choice already holding a role that contradicts this one'; also calls Elder Council 'the house'","other":""}
+{"id":"C46104","town":"bar0-village-famine-rand-21","sev":"MED","kind":"STATE","why":"Sawmill row 'Lumber milling' printed on offer with no 'short' mark, though LAND gaps say it lacks timber; Dairy beside it is marked Short","other":"C46109"}
+{"id":"C46445","town":"bar0-village-famine-rand-21","sev":"MED","kind":"PAIR","why":"says crime is unorganized, 'no criminal infrastructure'; INCOME has Black Market Revenue 18%, with a Fencing service and organised crime named","other":"C46216"}
+{"id":"DONE","lines":2534,"blocks":3,"flags":13}
