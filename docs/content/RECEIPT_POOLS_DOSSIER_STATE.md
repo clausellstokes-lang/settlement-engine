@@ -2323,7 +2323,7 @@ did not die.
 **`riskLabel: Holding`** {colour}
 1. `[ledger]` {faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.
 2. `[street]` {settlement} has people who would take the hall if they could. For now they cannot, and everyone involved knows it.
-3. `[unfolding]` The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.
+3. `[unfolding · no crisis: occupied · no seat outranked]` The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.
 
 **`riskLabel: Contested`** {colour}
 1. `[ledger]` {counterpart} could now take the hall from {faction} at {settlement}; {faction} keeps it only because the office is still its own.
@@ -2460,7 +2460,7 @@ and never an assertion that the feared thing is happening.
 
 **FLAG: stateCrime, heavy** *(WIRING W3 C2: `safetyProfile.flags.stateCrime` with `stateCrimeIntensity` in the heavy band)*
 1. `[street · garrison]` The garrison at {settlement} no longer keeps the peace for anyone but itself. Soldiers set the dues, take what they want, and people who argue with them are not seen again.
-2. `[visitor · garrison]` Travellers reach {settlement} and find empty streets and soldiers on every corner. Nobody will talk about the {seat}, and nobody will say where the missing went.
+2. `[visitor · garrison · no crisis: under_siege]` Travellers reach {settlement} and find empty streets and soldiers on every corner. Nobody will talk about the {seat}, and nobody will say where the missing went.
 3. `[counterforce · no garrison]` The {seat}'s armed officials at {settlement} take what they want and answer to nobody; people who argue with them are not seen again.
 
 **FLAG: crimeIsGovt** *(WIRING W3 C3: `safetyProfile.flags.crimeIsGovt`)*

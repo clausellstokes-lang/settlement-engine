@@ -161,6 +161,8 @@ export const LEAVES = Object.freeze({
   guild: home('guild', 3, ['powerStructure', 'institutions']),
   // TAIL-CRISIS-2 (the chair's ruling K6): a power not the governing one, by its own standing
   rivalPower: home('rivalPower', 3, ['powerStructure']),
+  // BAR5-POWERS (the chair's ruling SO1): a power above the seat, by its own standing
+  seatOutranked: home('seatOutranked', 3, ['powerStructure']),
   // TAIL-TIES-9 (the chair's ruling (T28)): the crime fact's LEAF is the criminal structure's key, moved out of the display
   // (`deriveCriminalStructure` calls it and keeps its labels and the ring note's vantages, which read `_seed` and the tier).
   crime: leaf({ layer: 3, module: 'domain/facts/criminalStructureKey.js', exported: 'criminalStructureKeyOf', call: 'record', reads: ['availableServices', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'], // BAR4-SAFETY (F3): the covert criminal services (`covertCrimeHeld`)

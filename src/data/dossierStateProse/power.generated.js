@@ -1605,6 +1605,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "no crisis: occupied",
+            "no seat outranked"
+          ],
           "text": "The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.",
           "slots": [
             "seat",
@@ -2482,7 +2486,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "garrison"
+            "garrison",
+            "no crisis: under_siege"
           ],
           "text": "Travellers reach {settlement} and find empty streets and soldiers on every corner. Nobody will talk about the {seat}, and nobody will say where the missing went.",
           "slots": [

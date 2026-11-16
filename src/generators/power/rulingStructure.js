@@ -27,10 +27,10 @@ import { resolveGenerationWorldLaw } from '../generationContext.js'; import { ha
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
+import { forceLineOf } from './militaryForceLine.js'; // BAR5-POWERS (1c-force): the military description reads the settled roster
 import { settleClaimsToLabel } from './claimStanding.js'; // COHERENCE-POWERS-8: the claim table in its own module (F31's ceiling: a split, never a raise)
 export { settleClaimsToLabel };
 export { normalizeAndAnnotateFactions }; // COHERENCE-POWERS-3 (F12): moved verbatim to power/normalizeAndAnnotateFactions.js, re-exported for its importers
-
 
 export const generatePowerStructure = (
   tier,
@@ -543,7 +543,7 @@ export const generatePowerStructure = (
     });
   }
   if (militaryPower > 5 && (tier !== 'thorp' || priorities.military > 60)) {
-    const militaryDesc = said(
+    const militaryDesc = forceLineOf(said(
         priorityToCategory(priorities.military) === 'very_high'
           ? militaryPower > 25
             ? ['city', 'metropolis'].includes(tier)
@@ -560,7 +560,7 @@ export const generatePowerStructure = (
                 ? 'Town watch; it enforces ordinances, manages disorder, and reports to the council.'
                 : militaryPower > 18
                   ? 'City watch; it answers for keeping order and is growing more sure of its own authority.'
-                  : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'),
+                  : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'), projection.forces), // BAR5-POWERS (1c-force, PW1; R-Q): the settled roster's atoms, handed by the late replay only: no force the roster lacks
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +

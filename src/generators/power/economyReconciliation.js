@@ -193,7 +193,7 @@ export function projectPowerGenerationIntent(
 function projectPower(
   intent,
   economicState,
-  { defenseLabel = null, militaryGate = null } = {}, // PP11 (BAR2-PEOPLE-3): the funding gate rides beside the readiness label
+  { defenseLabel = null, militaryGate = null, forces = null } = {}, // PP11 (BAR2-PEOPLE-3): the funding gate rides beside the readiness label; BAR5-POWERS (PW1): the settled defence atoms
 ) {
   assertIntent(intent);
   const previousRng = setActiveRng(createPRNG(intent.rngSeed));
@@ -205,7 +205,7 @@ function projectPower(
       intent.config,
       intent.institutions,
       {
-        ...(defenseLabel ? { defenseLabel } : {}), ...(militaryGate != null ? { militaryGate } : {}),
+        ...(defenseLabel ? { defenseLabel } : {}), ...(militaryGate != null ? { militaryGate } : {}), ...(forces ? { forces } : {}),
         ...(Array.isArray(intent.stressEntries) ? { stressEntries: intent.stressEntries } : {}),
       },
     );
