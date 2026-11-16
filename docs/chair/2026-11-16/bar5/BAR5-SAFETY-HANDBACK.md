@@ -71,6 +71,8 @@ RE-KEYED BY IDENTITY in the file's own form: `proseEntryContradiction.walker`'s 
 
 THE REFERENCE: 0 of the 525 reference configurations move against 600b7683a (every row's hash and every top-level family's hash equal, base against tip): the only record move, the travellers' siege twin, is reached by none of them.
 
+THE GATES OF THE CHECK, RUN AND NOT RUN: run at the final tip, each to a file: `typecheck:domain:strict` (green at 1113, its ceiling, after the chair found `guardLineUnderTheLaw.js` at +2 at 665ab0232: cured by types only), `typecheck:ratchet` (green), eslint on every touched file (clean), and the 88-file net above (each file alone, base and tip); NOT run: the whole `npm run check` chain, its `validate:*` steps, `test:ratchet` over the full suite, `build`, `verify:dist` and `e2e`.
+
 ## Registrations owed
 
 - None under `tests/generators` (the guard is under `tests/domain`).

@@ -93,7 +93,7 @@ export function guardLineUnderTheLaw(text, record) {
   if (atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) !== false) return text;
   let out = text;
   for (const k of held) {
-    const twin = GUARD_LAW_SIBLINGS[k].find((l) => typeof /** @type {{ twinOf?: unknown }} */ (l).twinOf === 'string');
+    const twin = /** @type {Readonly<Record<string, ReadonlyArray<{ text: string, twinOf?: string }>>>} */ (GUARD_LAW_SIBLINGS)[k].find((l) => typeof l.twinOf === 'string');
     if (twin) out = out.split(k).join(twin.text);
   }
   for (const f of framed) out = out.replace(f.frame, f.twin);
