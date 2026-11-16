@@ -1,0 +1,5 @@
+{"id":"C14443","town":"bar0-city-wartime-rand-26","sev":"LOW","kind":"PAIR","why":"says no charcoal burner finishes the timber; the running Mountain Timber chain's outputs list Charcoal","other":"C14362"}
+{"id":"C14698","town":"bar0-city-wartime-rand-26","sev":"LOW","kind":"LACKS","why":"Medical Readiness rated Infirmary; HOUSES has no infirmary or hospital, and its own line says no beds","other":"C14700"}
+{"id":"C14692","town":"bar0-city-wartime-rand-26","sev":"LOW","kind":"PAIR","why":"says no arcane practitioners on the rolls; an alchemist quarter and alchemist sell potions, exported as Alchemical trade; magic is medium","other":"C14271"}
+{"id":"C15474","town":"bar0-city-wartime-rand-26","sev":"LOW","kind":"STATE","why":"calls the succession crisis's legacy 'a generation old'; PAST dates the Succession Crisis 59 years ago","other":""}
+{"id":"DONE","lines":1938,"blocks":1,"flags":4}
