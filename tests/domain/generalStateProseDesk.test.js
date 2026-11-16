@@ -116,7 +116,7 @@ const BLOCK_POOLS = Object.freeze({
   'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 9, /* W1 ECO construction (2026-11-07): +4 COMMERCE, +1 WAREHOUSES */
   'DS-GEN-7': 8, 'DS-GEN-17': 7, // W4 PEOPLE 2026-11-07: +2, the GREAT HOUSE lens (C5) — composed with W1 ECO's DS-GEN-13 9 (MERGE-WAVE at the W4 PEOPLE merge)
   // The history chapter (DESK-GEN2 car 1).
-  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 10,
+  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 13, // BAR4-HISTORY 155c7e1af (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP): ANCHORED-OLD-, LEGACY-RECOVERED-, LEGACY-SHIFTED-MARKED, declared (10 + 3 -> 13)
   // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
   'DS-GEN-11': 5, 'DS-HK-1': 11, // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool leaves (6 -> 5)
   // The notable connection (DESK-GEN2 car 4).
