@@ -1,0 +1,6 @@
+{"id":"C91105","town":"bar0-hamlet-under_siege-rand-30","sev":"MED","kind":"PAIR","why":"Access to external mill is 'Stopped by the siege' (C91104) yet its service 'Grain milling (a day away)' prints on offer with no stopped mark","other":"C91104"}
+{"id":"C91256","town":"bar0-hamlet-under_siege-rand-30","sev":"MED","kind":"PAIR","why":"says Headman's Authority 'members cannot agree', but the power has '1 member' (C91253) and PEOPLE lists one person on it","other":"C91253"}
+{"id":"C91027","town":"bar0-hamlet-under_siege-rand-30","sev":"LOW","kind":"STATE","why":"'about a month and a half in household stores' (also C91172, C91301); FOOD gives stores 1.3 months","other":""}
+{"id":"C91625","town":"bar0-hamlet-under_siege-rand-31","sev":"MED","kind":"PAIR","why":"Access to external mill is 'Stopped by the siege' (C91624) yet its service 'Grain milling (a day away)' prints on offer with no stopped mark","other":"C91624"}
+{"id":"C92201","town":"bar0-hamlet-under_siege-rand-32","sev":"MED","kind":"PAIR","why":"Access to external mill is 'Stopped by the siege' (C92200) yet its service 'Grain milling (a day away)' prints on offer with no stopped mark","other":"C92200"}
+{"id":"DONE","lines":1801,"blocks":3,"flags":5}
