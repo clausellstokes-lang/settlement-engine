@@ -271,9 +271,27 @@ export function magicRoleHeld(record, role) {
   if (role === 'economic') return economyShowsMagic(record) || magicServiceMade(record) || notes.length > 0 || foodMagicShare(record) > 0;
   if (role === 'military') return magicAmongDefences(record);
   if (role === 'medical') return activeChainsOf(record).some((c) => chainNeedsMagic(c) && /heal/i.test(String(c.chainId ?? '')))
-    || notes.some((n) => MEDICAL_NOTES.has(n));
+    || notes.some((n) => MEDICAL_NOTES.has(n)) || healingByMagicShown(record);
   if (role === 'infrastructure') return notes.some((n) => WORKS_NOTES.has(n));
   return false;
+}
+
+/** A healing row's own words that say it heals by magic. */
+const HEALS_BY_MAGIC = /\b(?:magic\w*|divine|spell\w*)\b/i;
+
+/**
+ * BAR4-SERVICES S3 (C45429; the chair's direction of 2026-11-16; vetoable by the owner): A HEALING ROW THE SERVICES TAB
+ * PRINTS THAT HEALS BY MAGIC IS THE MEDICAL ROLE HELD. "Medical role: absent" printed beside the priest's "Divine healing
+ * magic for the sick and injured." in 33 towns of the census's 720 at 8aef8e7d4 (20 of the fresh 300): the role row reads
+ * the healing chain and the notes, and not the healing the page itself offers. One settled reading: a row of the record's
+ * healing services (`availableServices.healing`, not custom) whose own words name magic, the divine or a spell holds the role.
+ * @param {unknown} record
+ * @returns {boolean}
+ */
+function healingByMagicShown(record) {
+  const rows = /** @type {{ availableServices?: { healing?: unknown } }} */ (record ?? {}).availableServices?.healing;
+  return Array.isArray(rows) && rows.some((r) => r && typeof r === 'object' && r.custom !== true && r.source !== 'custom'
+    && HEALS_BY_MAGIC.test(`${typeof r.name === 'string' ? r.name : ''} ${typeof r.desc === 'string' ? r.desc : ''}`));
 }
 
 /** The ledger's band words, as the Magic tab's headline prints the record's own level. */

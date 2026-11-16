@@ -24,6 +24,13 @@
  *               grown share of 14 to 43 in a hundred), and the chain card of every own-ground chain prints "impaired",
  *               never stopped (`chainStateShown.js :: chainCrisisStateShown`). Its mark is the siege's partial kind,
  *               "Curtailed by the siege." (`crisisStoppedRow.js :: CURTAILED_BY`)
+ *   imported input
+ *               (BAR4-SERVICES, the chair's direction S1 of 2026-11-16; vetoable by the owner) DERIVED, never declared: a row
+ *               that lives on its house's `input` where the record says that input comes in by trade
+ *               (`resourceAnalysis.gaps[]`, `kind: 'imported'`: "Smelter runs on imported iron ore"). A siege CURTAILS it: the
+ *               house works what it holds and nothing more comes in (the trade record's own reading of a siege: every
+ *               dependency on trade "running on existing stockpiles only"). `crisisStoppedRow.js :: housesOnImportedInput`
+ *               reads it; its mark is "Curtailed by the siege."
  *   input       (the chair's ruling S5, 2026-11-15) the house's own raw input: a row that is what the house MAKES from
  *               what reaches it (the vintner's wine from grapes, the potter's pots from clay, the dairy's milk from
  *               livestock). No crisis stops it; the leaf's second cause reads it: where the page says no input reaches
@@ -54,10 +61,11 @@ export const GAME = 'food: game';
 export const INPUT = 'input';
 export const GATES = 'beyond the gates';
 export const FIELD_WORK = 'field work';
+export const IMPORTED_INPUT = 'imported input';
 /** @type {ReadonlyArray<string>} */
 export const NONE = Object.freeze([]);
 /** Every dependence word, in the order above. @type {ReadonlyArray<string>} */
-export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK]);
+export const DEPENDENCES = Object.freeze([TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, IMPORTED_INPUT, INPUT, GATES, FIELD_WORK]);
 
 /**
  * THE GAPS THE RECORD HOLDS EVERYWHERE (the chair's ruling S7, 2026-11-15; vetoable by the owner): a house whose input the
@@ -125,7 +133,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Arcane training": NONE,
   "Archival search": NONE,
   "Archive consultation": NONE,
-  "Armed escort": NONE,
+  "Armed escort": Object.freeze([TRAVELLERS]), // BAR4-SERVICES S1 (C19622): an escort goes out past the gates
   "Armour repair": NONE,
   "Armour warding": NONE,
   "Arrow and bolt production": NONE,
@@ -327,7 +335,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Draconic consultation": NONE,
   "Drainage pipe": Object.freeze([INPUT]),
   "Dream walking": NONE,
-  "Drink service": NONE,
+  "Drink service": Object.freeze([GRAIN]), // BAR4-SERVICES S1: ale, the grain's
   "Driver hire": NONE,
   "Druidic consultation": NONE,
   "Dry dock": NONE,
@@ -437,7 +445,7 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "Grain loans": Object.freeze([GRAIN]),
   "Grain milling": Object.freeze([GRAIN]),
   "Grain milling (a day away)": Object.freeze([GRAIN]),
-  "Grain storage": NONE,
+  "Grain storage": Object.freeze([GRAIN]), // BAR4-SERVICES S1: the grain reserves a grain famine draws down
   "Grave maintenance": NONE,
   "Grave marking": NONE,
   "Gray market goods": NONE,
@@ -870,8 +878,8 @@ export const SERVICE_DEPENDENCE = Object.freeze({
   "State administration": NONE,
   "State governance": NONE,
   "Stolen goods": NONE,
-  "Strategic grain reserves": NONE,
-  "Street food": NONE,
+  "Strategic grain reserves": Object.freeze([GRAIN]), // BAR4-SERVICES S1: the same
+  "Street food": Object.freeze([GRAIN, LIVESTOCK]), // BAR4-SERVICES S1 (C6632): pies and roasted meats
   "Supplier contracts": NONE,
   "Surgery": NONE,
   "Surgical procedures": NONE,
@@ -970,6 +978,14 @@ export const SERVICE_DEPENDENCE_BY_DESC = Object.freeze({
   // TAIL-SERVICES-3 (READ-ALL 11805, X9 06145): burial in a ground beyond the gates; a siege stops it, an outbreak does not (S8's word)
   "Burial": Object.freeze({
     "Interment outside the gates. The bearers and the cart are found by the ground.": Object.freeze([GATES]),
+  }),
+  // BAR4-SERVICES S1 (2026-11-16): the two rows of these names whose own words are travel past the gates; the name's other rows
+  // (soldiers for hire, animals for hire) live on none of the three
+  "Mercenary hire": Object.freeze({
+    "Off-duty soldiers available for escort": Object.freeze([TRAVELLERS]),
+  }),
+  "Pack animal hire": Object.freeze({
+    "Rent animals with or without handler for journeys.": Object.freeze([TRAVELLERS]),
   }),
 });
 

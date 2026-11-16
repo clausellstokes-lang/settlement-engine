@@ -51,6 +51,16 @@
  * "Stopped by the siege." and its "Cut stone" with it; the fair's spectacles with the fair; the bakers' pastries with their
  * bread). The one exception is declared, row by row: `crisisDependence.js :: SERVICE_FREE_OF_HOUSE`.
  *
+ * THE MARK'S PROMISE (BAR4-SERVICES, the chair's direction S1 of 2026-11-16; vetoable by the owner; the detector
+ * `tests/helpers/markPromise.js`): two rows the crisis touched printed bare beside the head line's promise.
+ *   (i)  A HOUSE ON AN IMPORTED INPUT UNDER A SIEGE: where the record says the house's input comes in by trade
+ *        (`resourceAnalysis.gaps[]`, `kind: 'imported'`: "Smelter runs on imported iron ore"), the house and its rows that
+ *        live on that input take the siege's partial kind, "Curtailed by the siege." (`IMPORTED_INPUT`, `CURTAILED_BY`): it
+ *        works what it holds, and nothing more comes in (the smelter's iron refining beside the impaired smiths).
+ *   (ii) AN INCOME SHARE OF A HOUSE'S TRADE READS ITS HOUSES: a share titled by a resource trade
+ *        (`incomeLineSiblings.js :: RESOURCE_ROW_TRADES`: "Stone Quarrying", the fish trades) whose every live house of that
+ *        trade the leaf marks takes the mildest of their marks (the quarry "Stopped by the siege." and its share with it).
+ *
  * Pure: no randomness, no clock, no write.
  */
 import { resourceGapLines } from './validationOnPage.js';
@@ -65,8 +75,9 @@ import { serviceRowsOf } from '../dossier/entityLinks.js';
 import { chainCrisisStateShown } from './chainStateShown.js';
 import {
   SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN,
-  SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, NONE,
+  SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, IMPORTED_INPUT, NONE,
 } from '../../data/crisisDependence.js';
+import { RESOURCE_ROW_TRADES } from '../../generators/economy/incomeLineSiblings.js';
 
 /** The crises this leaf reads, in the order a row's mark takes them. @type {ReadonlyArray<string>} */
 export const STOPPING_CRISES = Object.freeze(['under_siege', 'plague_onset', 'famine']);
@@ -107,7 +118,7 @@ const PARTLY_STOPPED_KIND = Object.freeze({ under_siege: 'under_siege:curtailed'
  * well is stopped.
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
-export const CURTAILED_BY = Object.freeze({ under_siege: Object.freeze([FIELD_WORK]) });
+export const CURTAILED_BY = Object.freeze({ under_siege: Object.freeze([FIELD_WORK, IMPORTED_INPUT]) }); // BAR4-SERVICES S1 (i): an imported input
 
 /** A partial kind's crisis, a crisis's itself. @param {string} kind @returns {string} */
 export function crisisOfMarkKind(kind) {
@@ -212,14 +223,43 @@ export function serviceRowDependence(settlement, row) {
   const own = serviceDependenceOf(row);
   const house = houseOfServiceRow(settlement, row);
   if (!house || isCustom(house)) return own;
-  const houseDeps = houseDependenceIn(settlement, house);
-  if (houseDeps.length === 0) return own;
+  const houseDeps = houseDependenceIn(settlement, house).filter((d) => d !== IMPORTED_INPUT);
   const id = typeof house.catalogId === 'string' && house.catalogId ? house.catalogId : catalogIdForName(typeof house.name === 'string' ? house.name : null);
   const name = typeof row?.name === 'string' ? row.name : '';
   const freeOf = id && Object.prototype.hasOwnProperty.call(SERVICE_FREE_OF_HOUSE, id) && Object.prototype.hasOwnProperty.call(SERVICE_FREE_OF_HOUSE[id], name)
     ? SERVICE_FREE_OF_HOUSE[id][name] : NONE;
   const inherited = houseDeps.filter((d) => !own.includes(d) && !freeOf.includes(d));
-  return inherited.length ? [...own, ...inherited] : own;
+  const deps = inherited.length ? [...own, ...inherited] : own;
+  // S1 (i): a row that lives on its house's input, where that input comes in by trade, under a siege
+  return deps.includes(INPUT) && onImportedInputUnderSiege(settlement, house) ? [...deps, IMPORTED_INPUT] : deps;
+}
+
+/** Each record's houses the record says run on an imported input, read once a record. @type {WeakMap<object, ReadonlySet<string>>} */
+const IMPORTED_HOUSES = new WeakMap();
+
+/**
+ * S1 (i): the houses whose input the record says comes in by trade (`resourceAnalysis.gaps[]`, `kind: 'imported'`).
+ * @param {object | null | undefined} settlement
+ * @returns {ReadonlySet<string>} house names
+ */
+export function housesOnImportedInput(settlement) {
+  if (!settlement || typeof settlement !== 'object') return new Set();
+  const cached = IMPORTED_HOUSES.get(settlement);
+  if (cached) return cached;
+  const s = /** @type {{ resourceAnalysis?: { gaps?: unknown } | null }} */ (settlement);
+  const gaps = Array.isArray(s.resourceAnalysis?.gaps) ? /** @type {Array<{ institution?: unknown, kind?: unknown }>} */ (s.resourceAnalysis.gaps) : [];
+  const out = new Set(gaps.filter((g) => g && g.kind === 'imported' && typeof g.institution === 'string' && g.institution).map((g) => /** @type {string} */ (g.institution)));
+  IMPORTED_HOUSES.set(settlement, out);
+  return out;
+}
+
+/**
+ * Is this house on an imported input, and a siege in force here?
+ * @param {object | null | undefined} settlement @param {{ name?: unknown }} house
+ * @returns {boolean}
+ */
+function onImportedInputUnderSiege(settlement, house) {
+  return typeof house?.name === 'string' && housesOnImportedInput(settlement).has(house.name) && stoppingCrisesOf(settlement).includes('under_siege');
 }
 
 /**
@@ -243,6 +283,17 @@ const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
  * @returns {ReadonlyArray<string>}
  */
 export function houseDependenceIn(settlement, inst) {
+  const deps = gatesWorkIn(settlement, inst);
+  // S1 (i): a house on its input, where that input comes in by trade, under a siege
+  return deps.includes(INPUT) && onImportedInputUnderSiege(settlement, inst) ? [...deps, IMPORTED_INPUT] : deps;
+}
+
+/**
+ * SV8b's reading of the house's work beyond the gates (`houseDependenceIn`'s first step).
+ * @param {object | null | undefined} settlement @param {{ catalogId?: unknown, name?: unknown }} inst
+ * @returns {ReadonlyArray<string>}
+ */
+function gatesWorkIn(settlement, inst) {
   const deps = houseDependenceOf(inst);
   if (!deps.includes(GATES) || !settlement || typeof settlement !== 'object') return deps;
   const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
@@ -324,7 +375,7 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
   const read = Object.prototype.hasOwnProperty.call(DEPENDENCE_OF, kind) ? DEPENDENCE_OF[kind] : null;
   if (!read) return null;
   const deps = read(row, settlement);
-  if (deps.length === 0) return null;
+  if (deps.length === 0) return kind === 'income' ? incomeHouseKind(settlement, row, crises) : null;
   const desc = typeof row.desc === 'string' ? row.desc : '';
   /** @type {string | null} */
   let curtailed = null;
@@ -340,7 +391,27 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
     if (kind === 'house' && Object.prototype.hasOwnProperty.call(PARTLY_STOPPED_KIND, crisis) && houseRowGoesOn(settlement, row, crisis, crises)) return PARTLY_STOPPED_KIND[crisis];
     return crisis;
   }
-  return curtailed;
+  return curtailed ?? (kind === 'income' ? incomeHouseKind(settlement, row, crises) : null);
+}
+
+/**
+ * S1 (ii): the mark of an income share of a house's trade (`RESOURCE_ROW_TRADES`, keyed by the share's title; the maritime
+ * fish share is the fish trade's): where every live house of the trade (the trade's own house words over the roster's names)
+ * carries a crisis mark, the share takes the mildest of them (a partial kind before a stopping one); else none.
+ * @param {object | null | undefined} settlement @param {Record<string, unknown>} income @param {string[]} crises
+ * @returns {string | null}
+ */
+function incomeHouseKind(settlement, income, crises) {
+  const title = typeof income?.source === 'string' ? income.source.trim() : '';
+  const key = title === 'Fish & Maritime Produce' ? 'Fish & Preserved Produce' : title;
+  const trade = Object.prototype.hasOwnProperty.call(RESOURCE_ROW_TRADES, key) ? RESOURCE_ROW_TRADES[/** @type {keyof typeof RESOURCE_ROW_TRADES} */ (key)] : null;
+  if (!trade || !settlement || typeof settlement !== 'object') return null;
+  const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .filter((i) => i && typeof i.name === 'string' && !isCustom(i) && trade.house.test(i.name.toLowerCase()));
+  if (houses.length === 0) return null;
+  const kinds = houses.map((h) => rowStoppedBy(settlement, 'house', h, crises));
+  if (kinds.some((k) => k === null)) return null;
+  return kinds.find((k) => k !== crisisOfMarkKind(/** @type {string} */ (k))) ?? /** @type {string} */ (kinds[0]);
 }
 
 /** Each record's service rows by their house's roster name, read once a record. @type {WeakMap<object, ReadonlyMap<string, ReadonlyArray<Record<string, unknown>>>>} */
