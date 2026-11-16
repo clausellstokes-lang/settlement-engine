@@ -49,6 +49,40 @@ the line by the rule that already ties them (read town bar0-village-famine-rand-
 Tests re-keyed by identity (dated notes in the files): `tests/components/readerValidationOnPage.test.js` (ruling 3's plural
 now read on an import; soak1k-22's stored vintner row predates M-V: the true gap it now anchors on is the clay).
 
+WHAT ELSE READS `resourceAnalysis.gaps` (the chair's question): (1) the page's gap lines, web tab and PDF alike
+(`resourceGapLines`; the PDF's `structuralGaps`); (2) the shortage marks, through that same line
+(`crisisStoppedRow.js :: housesShortOfInput`); (3) the staff panel's raw rows, elevated viewers only (`staffValidationRows`);
+(4) the analysis's own export-potential rows (`evaluateInstitutionDeps`); (5) the rename and edit registers (paths only).
+NO viability score, critical-issue count, verdict sentence or hook reads it, and the record diff confirms it: in the 41
+towns (and the 60 reference rows) `economicViability`, `structuralViolations` and every other field are unchanged.
+
+## Batch 2 · a sawn good is made only where the sawmill has its timber (the chair's grant, 08:19 UTC)
+
+THE CURE: `computeActiveChains.js` (granted for this gate alone; the file is at its 800-line ceiling, so the change adds no
+line): the output gate of 'Milled timber' and 'Milled lumber' (`CHAIN_OUTPUT_INST_GATES`), in the export step and in the
+made list (`outputMadeHere`), also asks `houseInputAtHand.js :: sawnGoodFed`: some sawmill of the roster has its timber by
+the one reading, asked at the economy's own hour over the live resources and the roster (the imports are not drawn yet:
+a sawmill fed only by an import would make no sawn good; no town of either population is in that case).
+
+THE DECLARED MOVE (batch 1's tip → batch 2, the 720): `economicState.localProduction` loses "Milled lumber" in 19 towns;
+`economicState.primaryExports` loses it in 4 (r2r-village-42, r2r-village-52, r2s-recently_betrayed-town-1,
+r2s-insurgency-town-0; in the last two the freed export slot takes "Furs and pelts" / "Caravan trade goods");
+`arrivalScene` re-reads the exports in those 4 ("The smell of sawn timber is everywhere in Rossholme" and "Stacks of
+seasoning planks line the road in" go; the slot draws another line of its own pool). The fresh 300: localProduction in 3
+towns. The read town bar0-village-famine-rand-21: localProduction, exports, arrivalScene. NO PROSPERITY BAND, NO FOOD BAND,
+NO INCOME SHARE AND NO CHAIN STATE MOVES (the field diff to depth four names only those three fields).
+Of the 19+3 towns, 3 of the 720 (r2r-village-42, r2r-village-52, r2s-indebted-village-2) are the sawmills the record calls
+short; the other 16 (and the 3 fresh) are a "Sawmill (commercial)" with no timber that the gap writer never asks (below).
+
+THE DETECTOR'S OUTPUT ARM (`houseInputSplit.js :: OUTPUTS`): a house the record calls short whose output the town still
+makes or sells: 3 towns of the 720 and the read town at batch 1's tip → 0; fresh 0 → 0. Its positive control: a short
+sawmill (r2r-village-4) planted with a "Milled lumber" export fires.
+
+FOUND, NOT CURED (a question to the chair): the gap writer asks a house only by the chain's exact house name
+(`chain.processingInstitutions.includes(institution.name)`), so a ladder rung ("Sawmill (commercial)") is never called short:
+in 16 towns of the 720 such a sawmill has no timber, now makes nothing, and prints no gap line and no mark (silence, not two
+values; its "Lumber milling" row stands bare, the R1 kind by another door).
+
 ## Every new or changed line (THE VETO LIST)
 
 No sentence is new or reworded: the gap lines are the designed ones (`resourceGapLines`), now printed where the record
@@ -58,11 +92,11 @@ bar0-village-famine-rand-21 (famine); "No camels reach the caravanserai." r2s-un
 
 ## Named for others (one line to the chair each)
 
-- THE ECONOMY PART (not my file): the river_milling chain still makes and exports "Milled lumber" beside "No timber reaches
+- THE ECONOMY PART: GRANTED and CURED in batch 2 (below). Was: the river_milling chain still made and exported "Milled lumber" beside "No timber reaches
   the sawmill." (3 towns of the 720, 0 fresh, and the read town): the line I would change is
   `src/generators/computeActiveChains.js:727-728` (`CHAIN_OUTPUT_INST_GATES` 'Milled timber'/'Milled lumber'): the gate also
   asks `houseInputAtHand` of the sawmill. Awaiting the chair's word.
-- BAR4-SCENES: "The smell of sawn timber is everywhere" (C45961) should read the sawmill's input by `houseInputAtHand`.
+- BAR4-SCENES: its sawn-timber gate reads timber at hand by its own reading; AFTER THE JOIN it should call `houseInputAtHand` (the chair, 08:19).
 - BAR4-CORPUS-ECO: the food ledger names `fish` as a source where `river_fish` is depleted (r2s-indebted-village-2): the
   fishmonger reads the ledger and is called fed.
 - `tradeListDisplay.js :: needMetBy` (no seat's): the fact cannot import it (it rides a lazy chunk the eager engine core may
@@ -75,7 +109,10 @@ bar0-village-famine-rand-21 (famine); "No camels reach the caravanserai." r2s-un
 | `tests/lint/presumedThings.walker.test.js` | ARM 1 "every source literal that names a thing declares it, or has its row" | ONE fresh hit: the chain-input table's `mineralHot` row (`raw: 'mineral hot springs'`, resource hot_springs_mineral) MOVED, text unchanged, from `src/domain/display/validationOnPage.js` to `src/domain/facts/houseInputAtHand.js`; its stale row left by the door's `--shrink` in the cure's own commit (amendment 3); the line is the chain table's name for the input, true wherever the gap line prints it | the register's door (the close) | 1 |
 | `tests/lint/tradeListWriters.walker.test.js` | "every row is live" | the row `src/generators/resourceGenerator.js: COPIES 1` is stale (the analysis's copy of `localProduction`/`primaryImports` is gone: the fact reads the record) | the register's own row (the close) | 1 |
 
-Reference configurations moved (of the 525): to be measured (owed in this hand-back's next push).
+Reference configurations moved (of the 525, against `c4ac1ef84a`, each record generated at both trees and compared): 60,
+every one a desert-road row (hamlet to metropolis, every culture: the caravanserai the road now feeds), and in ONE field
+family only: `resourceAnalysis.gaps`. `tests/property/generatorGoldenMaster.test.js` is green at the base and red at my
+tip on those 60 (expected; the reference is not mine to re-take).
 
 ## Registrations owed
 
@@ -86,7 +123,7 @@ Reference configurations moved (of the 525): to be measured (owed in this hand-b
 
 ## Left, in order
 
-1. The chair's word on the economy part (computeActiveChains.js:727-728) — not mine to cut.
+1. The chair's word on the ladder rungs the gap writer never asks ("Sawmill (commercial)", batch 2).
 2. The inventory diff of the census at my tip (720) and the 525 reference count; the final net (amendment 2) with its build.
 
 ## How the instruments are re-made

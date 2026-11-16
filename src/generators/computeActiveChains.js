@@ -38,7 +38,7 @@ import {
 } from '../domain/content/customContentSemanticAuthority.js';
 import { druidicFaithRole } from '../domain/arcaneInstitutionIdentity.js';
 import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
-import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { namesGrainMill } from '../domain/facts/institutions.js'; // TAIL-CLOSE-SRC-4: one line
+import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { namesGrainMill } from '../domain/facts/institutions.js'; import { sawnGoodFed } from '../domain/facts/houseInputAtHand.js'; // TAIL-CLOSE-SRC-4, BAR4-RECORD: one line
 
 /**
  * A chain's printed label (F1, rung 1B): a row that names a house the place may lack declares
@@ -717,7 +717,7 @@ function goodWorkedHere(good, housed) {
 // Institution gates for chain-derived output goods.
 // Even if a chain is active, some of its outputs are byproducts that require
 // a specific additional institution to actually produce and export.
-const CHAIN_OUTPUT_INST_GATES = {
+const isSawmill = (i) => institutionMatchesGate(i, 'sawmill'); const CHAIN_OUTPUT_INST_GATES = { // isSawmill: the sawn goods' house (sawnGoodFed)
   'Leather goods':          'tannery',
   'Leather armour':         'tannery',
   'Boots and shoes':        'tannery',
@@ -835,7 +835,7 @@ export function deriveExportsFromChains(
         const kws = Array.isArray(requiredInst) ? requiredInst : [requiredInst];
         if (!kws.some(kw => _hasInstForGate(kw))) return;
       }
-      if (!goodWorkedHere(o, housedHere)) return; // C1-E: no house here works it
+      if (!goodWorkedHere(o, housedHere) || !sawnGoodFed(o, nearbyResources, depletedResources, institutions, isSawmill)) return; // C1-E: no house here works it; R1: a sawn good needs the sawmill's timber
       exports.add(o);
     }));
 
@@ -1041,7 +1041,7 @@ export function deriveLocalProductionFromChains(
     if (!housed) return true;
     if (GOOD_WORKING_HOUSES[good]) return goodWorkedHere(good, housed);
     const gate = CHAIN_OUTPUT_INST_GATES[good];
-    if (!gate) return true;
+    if (!gate || !sawnGoodFed(good, nearbyResources, depletedResources, institutions, isSawmill)) return !gate; // R1 (BAR4-RECORD): a sawn good needs the sawmill's timber
     const kws = (Array.isArray(gate) ? gate : [gate]).flatMap(kw => MADE_HERE_KEYWORD_WIDENING[kw] || [kw]);
     return kws.some(kw => housed.some(i => institutionMatchesGate(i, kw)));
   };

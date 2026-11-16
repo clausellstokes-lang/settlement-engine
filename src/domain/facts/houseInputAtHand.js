@@ -33,7 +33,7 @@
  */
 import { RESOURCE_CHAINS } from '../../data/goods/chains.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
-import { availableNativeResourceKeys } from '../resourceSemantics.js';
+import { availableNativeResourceKeys, resourceKeyForLabel } from '../resourceSemantics.js';
 import { hasTradeRouteConnection } from '../tradeRouteSemantics.js';
 import { institutionHasAnyTag } from '../../lib/entities.js';
 import { nativeSemanticNames } from '../content/customContentSemanticAuthority.js';
@@ -184,4 +184,28 @@ export function houseInputAtHand(record, chainKey, house) {
   if (spec?.food && arr(food?.foodSources).some((x) => spec.food?.includes(str(x)))) return 'imported';
   if (spec?.staple && (Number(food?.normalImportPct) > 0 || Number(es.foodSecurity?.importPct) > 0)) return 'imported';
   return 'missing';
+}
+
+/** The goods a sawmill makes of its timber (`computeActiveChains.js :: CHAIN_OUTPUT_INST_GATES`). */
+const SAWN_GOODS = Object.freeze(['Milled timber', 'Milled lumber']);
+
+/**
+ * A SAWN GOOD IS MADE ONLY WHERE THE SAWMILL HAS ITS TIMBER (BAR4-RECORD R1, the chair's grant of 2026-11-16 08:19 UTC;
+ * vetoable by the owner): the economy's output gate for 'Milled timber' and 'Milled lumber' asks this reading of the
+ * town's sawmill. The river-milling chain named "Milled lumber" beside "No timber reaches the sawmill." (3 towns of the
+ * census's 720 and bar0-village-famine-rand-21). Asked at the economy's own hour, over the live resources and the roster:
+ * the imports are not drawn yet, so a sawmill fed only by an import makes no sawn good (its gap then says it runs on
+ * imported timber: silence, never two values).
+ * @param {string} good the output asked about
+ * @param {ReadonlyArray<string>} nearbyResources the town's resource keys @param {ReadonlyArray<string>} depletedResources
+ * @param {ReadonlyArray<unknown> | null | undefined} institutions the roster
+ * @param {(house: any) => boolean} isSawmill the caller's own test of a sawmill (its gate's keyword)
+ * @returns {boolean} true unless the good is a sawn good and no sawmill of the roster has its timber
+ */
+export function sawnGoodFed(good, nearbyResources, depletedResources, institutions, isSawmill) {
+  if (!SAWN_GOODS.includes(good) || !Array.isArray(institutions)) return true;
+  const depleted = new Set(arr(depletedResources).map((r) => resourceKeyForLabel(str(r)) || str(r)));
+  const record = { config: { nearbyResources: arr(nearbyResources).map(str).filter((k) => !depleted.has(k)) }, economicState: {}, institutions };
+  return institutions.filter((i) => !!i && isSawmill(i))
+    .some((house) => houseInputAtHand(record, 'timber', /** @type {any} */ (house)) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {any} */ (house)) !== 'missing');
 }

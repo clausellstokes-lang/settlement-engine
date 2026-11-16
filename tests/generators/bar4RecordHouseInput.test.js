@@ -4,7 +4,8 @@
 // THE GUARD: the detector (`tests/helpers/houseInputSplit.js`) reads ZERO in every census town where it fired at
 // c4ac1ef84a (67 rows in these 64 towns of the 720; the fresh 300's 17 in 16 are the hand-back's measure, not a test),
 // each born in the census's own configuration (CENSUS-3 seedcfg.mjs); A POSITIVE CONTROL: a record whose gap says a
-// house is short while the page's reader finds its input (a caravanserai on a connected road) MUST fire; and KEEP pairs:
+// house is short while the page's reader finds its input (a caravanserai on a connected road), and a short sawmill whose
+// town still sells its "Milled lumber" (the economy's gate, computeActiveChains.js), MUST fire; and KEEP pairs:
 // the gap line that now prints, and the caravanserai the road feeds, silent by design.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -62,6 +63,13 @@ describe('R1: a house the record calls short of its input is short on the page t
     expect(town.institutions.some((/** @type {{ name?: string }} */ i) => i?.name === 'Caravanserai')).toBe(true);
     town.resourceAnalysis.gaps = [...town.resourceAnalysis.gaps, { chain: 'camel_herds', institution: 'Caravanserai', kind: 'missing', impact: 'planted', severity: 'high' }];
     expect(houseInputSplits(town).map((x) => x.house)).toEqual(['Caravanserai']);
+  });
+
+  it('POSITIVE CONTROL: a short sawmill whose town is still said to sell its "Milled lumber" fires', () => {
+    const town = structuredClone(BORN.get('r2r-village-4'));
+    expect(houseInputSplits(town)).toEqual([]);
+    town.economicState.primaryExports = [...town.economicState.primaryExports, 'Milled lumber'];
+    expect(houseInputSplits(town).map((x) => `${x.house} ${x.chain}`)).toEqual(['Sawmill output: Milled lumber']);
   });
 
   it('KEEP: the gap line the record now asks for prints, and the mark has its line', () => {
