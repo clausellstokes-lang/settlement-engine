@@ -13,6 +13,12 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { scenePresumptionFindings, PRESUMES } from '../helpers/scenePresumption.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { composeArrivalScene } from '../../src/generators/narrative/arrivalScene.js';
+import { ARRIVAL_SENSES } from '../../src/data/arrivalProse.js';
+import { createPRNG } from '../../src/kernel/prng.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const CRISES = ['famine', 'indebted', 'infiltrated', 'insurgency', 'mass_migration', 'monster_pressure', 'occupied', 'plague_onset',
@@ -117,6 +123,32 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
     expect([...fired].sort()).toEqual(['enchanting', 'herds live', 'market open', 'monks lodge', 'timber at hand']);
     // and each presumption is a reader the table names (no presumption without a reader)
     for (const p of fired) expect(typeof PRESUMES[/** @type {keyof typeof PRESUMES} */ (p)]).toBe('function');
+  });
+
+  // BAR4-SCENES-2 (2026-11-16, the chair's ruling of 09:07: a twin whose STATE IS REACHABLE stays though neither population
+  // draws it, and ONE constructed record proves it). The saws' twin prints in none of the 720 and none of the fresh 300; its
+  // state (the timber sense's "rasp of the saws" slot drawn where no timber is at hand) is reached here: r2r-hamlet-12 draws
+  // the rasp line on the arrival scene's own stream; stripped of its timber, the SAME slot prints the twin and every other
+  // beat of the scene is unchanged (a twin keeps its slot and spends no redraw).
+  it('REACHABLE: the saws\' twin prints in the slot where the rasp line is drawn and no timber is at hand', () => {
+    const b = /** @type {{ town: any }} */ (BORN.get('r2r-hamlet-12'));
+    const scene = (/** @type {any} */ s) => {
+      setActiveRng(createPRNG('bar4-scenes-2-saws-0').fork('arrival-scene'));
+      try { return String(composeArrivalScene(s)); } finally { clearActiveRng(); }
+    };
+    const timber = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'timber'));
+    const rasp = timber.dominant.find((/** @type {any} */ l) => l?.needs?.includes('timber at hand') && !l.twinOf && /rasp/.test(String(l.text('{name}'))));
+    const twin = timber.dominant.find((/** @type {any} */ l) => l?.twinOf === rasp.text('{name}'));
+    const raspLine = String(rasp.text(b.town.name)); const twinLine = String(twin.text(b.town.name));
+    const stripped = { ...b.town, config: { ...b.town.config, nearbyResources: [], nearbyResourcesNative: [], nearbyResourcesState: {} },
+      economicState: { ...b.town.economicState, primaryImports: [], necessityImports: [] } };
+    expect(factsOf(b.town).timberAtHand).toBe(true);
+    expect(factsOf(stripped).timberAtHand).toBe(false);
+    const before = scene(b.town); const after = scene(stripped);
+    expect(before).toContain(raspLine);
+    expect(after).toContain(twinLine);
+    expectAbsentWithAnchor(after, raspLine, twinLine, 'the stripped town prints the twin in the rasp line\'s slot');
+    expect(after).toBe(before.replace(raspLine, twinLine));
   });
 
 });

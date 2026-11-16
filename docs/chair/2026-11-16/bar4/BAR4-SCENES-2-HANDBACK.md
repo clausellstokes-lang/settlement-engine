@@ -109,7 +109,17 @@ SO ONE LINE OF MINE IS SUCH A LINE: the saws' twin prints in neither population.
 - It is the twin of "The rasp of the saws…" (`needs: timber at hand`), and the state it covers (that slot drawn where no timber is at hand) is reachable even though neither sample reaches it.
 - Without the twin, that state is refused rather than twinned, which BRIEF-BAR2's law on mute states forbids.
 
-This is for the chair's word.
+THE CHAIR'S WORD, 09:07: KEEP IT. A twin whose state is reachable by the record stays; only a line whose state cannot occur comes out.
+
+REACHABLE, PROVED by one constructed record, as an arm of the guard (`tests/generators/bar4ScenePresumption.test.js`, "REACHABLE: the saws' twin…"):
+- r2r-hamlet-12 draws "The rasp of the saws…" on the arrival scene's own stream (`createPRNG('bar4-scenes-2-saws-0').fork('arrival-scene')`).
+- Stripped of its timber (no timber ground, no imports), its `timber at hand` reads false.
+- The SAME slot then prints "The saws of Aristoburg are quiet most days, for want of timber to cut.", and every other beat of the scene is byte-identical.
+- The arm computes both lines from `ARRIVAL_SENSES`; neither is a literal.
+
+So none of my lines is a line whose state cannot occur.
+
+The arm was SHOWN ABLE TO RED by a plant I did not commit: the twin declared `needs: crisis: under_siege` instead of `excludes: timber at hand`. The guard is green with it (5 of 5, 53 s), and so are negativeAssertionAnchor, seedLoopTotality, proseDrawnAnchors and eslint.
 
 ## Registrations owed
 
@@ -122,7 +132,7 @@ No line is new or changed in Phase 1. My predecessor's list stands.
 
 ## What is left, in order
 
-1. **The ceilings: RULED (09:02, B3).** Named for the close's doors. The one line no town of either population prints (the saws' twin) waits on the chair's word.
+1. **The ceilings: RULED (09:02, B3).** Named for the close's doors. The one line no town of either population prints (the saws' twin) is KEPT (09:07), its state proved reachable in the guard.
 2. **On the chair's word: Phase 2, the `house at work` remainder** (13 of the 720, 11 of the fresh 300). The steps:
    - Merge `lane/bar4-record-2026-11-16` at the tip the chair names. This is ONE merge commit, and a conflict is a STOP.
    - The scene's `house at work` reads `src/domain/facts/houseInputAtHand.js`, and the `timber at hand` atom calls it too.
