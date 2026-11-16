@@ -11,7 +11,10 @@
  *     the 720 (every 24th seed), born as the census bears them (CENSUS-3 seedcfg.mjs). The census itself (corpus + dumps,
  *     the SHAPE arm with the page's lines) is the measure over the whole 720 and the fresh 300 (the hand-back's table).
  * And (d) the degree word of C26840 (dmPowerLines.js, the adversarial rung): the ruler is ahead; (e) C26792 (the
- * chair's grant of 07:54): an approved or endorsed seat's legitimacy tension takes its twin (rosterText.js :: settleTensionsToRoster).
+ * chair's grant of 07:54): an approved or endorsed seat's legitimacy tension takes its twin (rosterText.js :: settleTensionsToRoster);
+ * (g) T1-SHAPE (the chair's SH1b): the general desk's history row yields its -MARKED twin where the record's character names
+ * ANOTHER event as the one that shaped the place (facts/shapingEvent.js :: shapeYieldingKey), red at the base in the census's
+ * towns named; (h) C14176 (the chair's FS2): the rank-1 power that is the first challenger beside a Contested seat.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -22,6 +25,9 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAPTURE_LINES } from '../../src/data/people/dmPowerLines.js';
 import { LEGITIMACY_HELD_TWINS } from '../../src/data/historyData.js';
+import { shapeYieldingKey } from '../../src/domain/facts/shapingEvent.js';
+import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
+import { SEAT_CONTESTED_STANDING } from '../../src/generators/power/factionStanding.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -124,5 +130,38 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
       expect(said.filter((/** @type {string} */ d) => !twins.has(d))).toEqual([]);
     });
     expectNoSeedFailures(failures, 'C26792: a regenerated history says what the born one says of an accepted seat');
+  }, 300000);
+
+  /** Every string a generated structure holds, flattened (the desk's lines live at several depths). @param {unknown} v @returns {string[]} */
+  const strings = (v) => (typeof v === 'string' ? [v] : Array.isArray(v) ? v.flatMap(strings) : v && typeof v === 'object' ? Object.values(v).flatMap(strings) : []);
+  /** The census's towns where the SHAPE arm fired at the base (8aef8e7d46): the record's character and the desk's row. */
+  const SHAPE_AT_BASE = ['r2r-thorp-14', 'r2r-thorp-54', 'r2r-village-28', 'r2r-village-31', 'r2r-town-9', 'r2r-town-23', 'r2r-town-30', 'r2r-town-34'];
+  it('(g) T1-SHAPE: one shaping event a page (the key yields; the census towns read zero)', () => {
+    const pools = { 'LEGACY-SHIFTED': [], 'LEGACY-SHIFTED-MARKED': [], 'LEGACY-LINKED': [] };
+    const occupation = 'The Occupation is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards';
+    expect(shapeYieldingKey('LEGACY-SHIFTED', 'religious conflict', occupation, pools)).toBe('LEGACY-SHIFTED-MARKED');
+    expect(shapeYieldingKey('LEGACY-SHIFTED', 'occupation', occupation, pools)).toBe('LEGACY-SHIFTED'); // KEEP: its own event
+    expect(shapeYieldingKey('LEGACY-LINKED', 'religious conflict', occupation, pools)).toBe('LEGACY-LINKED'); // KEEP: claims no shape
+    expect(shapeYieldingKey('LEGACY-SHIFTED', 'religious conflict', 'Its character built up slowly, with no single break', pools)).toBe('LEGACY-SHIFTED'); // KEEP: no claim
+    const failures = collectSeedFailures(SHAPE_AT_BASE, (seed) => {
+      const s = born(seed);
+      const lines = strings(generalDeskLines(s, { audience: 'dm' }));
+      expect(lines.length).toBeGreaterThan(0);
+      expect(oneEventOneTellingInstances(s, lines).filter((i) => i.arm === 'SHAPE')).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'T1-SHAPE: no page names two events as the one that shaped it');
+  }, 300000);
+
+  /** The towns where the rank-1 challenger stood "too far behind" a Contested seat at the base (C14176). */
+  const CONTESTED_AT_BASE = ['r2r-village-43', 'r2s-religious_conversion-village-0', 'bar0-hamlet-under_siege-rand-101', 'bar0-hamlet-under_siege-rand-108', 'bar0-city-under_siege+famine-rand-110'];
+  it('(h) C14176: the rank-1 power that could take a Contested seat says so (red at the base in each)', () => {
+    const failures = collectSeedFailures(CONTESTED_AT_BASE, (seed) => {
+      const f = born(seed).powerStructure.factions;
+      expect(f[0].isGoverning).toBe(true);
+      expect(String(f[1].desc)).toContain(SEAT_CONTESTED_STANDING);
+    });
+    expectNoSeedFailures(failures, 'C14176: the challenger is not told it is too far behind');
+    // KEEP: where the rank-1 power is not the challenger the top power is no seat, and the line is true (r2s-under_siege-town-1)
+    expect(String(born('r2s-under_siege-town-1').powerStructure.factions[1].desc)).toMatch(/by too much to challenge openly, so they get their way through petitions and procedure instead\.$/);
   }, 300000);
 });

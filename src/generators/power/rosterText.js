@@ -10,7 +10,8 @@
  * was born.
  */
 import { annotateFactionStanding } from './factionStanding.js';
-import { MERCHANT_CRAFT_VOTE } from '../factionDynamics.js'; import { legitimacyHeldTensions } from '../../data/historyData.js'; // BAR4-HISTORY C26792
+import { MERCHANT_CRAFT_VOTE } from '../factionDynamics.js';
+import { legitimacyHeldTensions } from '../../data/historyData.js'; // BAR4-HISTORY C26792
 import { inferFactionCategory } from './factionCategories.js';
 import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js';
@@ -43,12 +44,12 @@ export function standingForceOf(institutions) {
 
 /**
  * Each power's standing sentence on a roster, by name, and its rank there.
- * @param {RosterSeat[]} roster the standing roster (standingRosterOf) @param {{ body: string }} force
+ * @param {RosterSeat[]} roster the standing roster (standingRosterOf) @param {{ body: string }} force @param {{ publicLegitimacy?: unknown } | null} [seat] its seat's legitimacy, for the coup reading (C14176)
  * @returns {Map<string, { standing: string, rank: number }>}
  */
-function standingsOf(roster, force) {
+function standingsOf(roster, force, seat = null) {
   const seats = roster.map((f) => ({ ...f, desc: '' }));
-  annotateFactionStanding(seats, force);
+  annotateFactionStanding(seats, force, seat); // BAR4-HISTORY C14176 (the chair's FS2): the seat's legitimacy, for the rank-1 line's coup reading
   return new Map(seats.map((f, rank) => [f.faction, { standing: String(f.desc || ''), rank }]));
 }
 
@@ -81,8 +82,8 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
   const factions = Array.isArray(powerStructure?.factions) ? powerStructure.factions : null;
   if (!factions || !annotated.length) return powerStructure;
   const finalRoster = standingRosterOf(factions);
-  const before = standingsOf(annotated, force);
-  const after = standingsOf(finalRoster, force);
+  const before = standingsOf(annotated, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy }); // BAR4-HISTORY C14176
+  const after = standingsOf(finalRoster, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy });
   let moved = false;
   const next = factions.map((f) => {
     const name = String(f?.faction || '');
@@ -112,7 +113,8 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
  * @returns {H}
  */
 export function settleTensionsToRoster(history, powerStructure, annotated) {
-  history = legitimacyToSeat(history, powerStructure); const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null; // BAR4-HISTORY C26792: first, the legitimacy read against the seat
+  history = legitimacyToSeat(history, powerStructure); // BAR4-HISTORY C26792: first, the legitimacy read against the seat
+  const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null;
   if (!tensions || !annotated.length) return history;
   const finalRoster = standingRosterOf(powerStructure?.factions || []);
   const onPage = new Set(finalRoster.map((f) => f.faction));

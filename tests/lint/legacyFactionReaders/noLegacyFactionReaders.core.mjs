@@ -61,8 +61,10 @@ export const OTHER_SHAPES = Object.freeze({
   'src/pdf/sections/PowerStructure.jsx': 'vm.power',
   // COHERENCE-POWERS-3 F2 (28c93c9da): a tension's parties, re-named for the final roster (settleTensionsToRoster); read as viewModel's are
   // re-keyed by identity 123 -> 124 (POWERS-10, the reader's M4 at 96a6ced46: the same tension read, moved one line by 943e34d6f's
-  // settleStandingToRoster, COHERENCE-POWERS-7 H-c)
-  'src/generators/power/rosterText.js:124': 'a tension',
+  // settleStandingToRoster, COHERENCE-POWERS-7 H-c); re-keyed by identity 124 -> 126 (BAR4-HISTORY, 2026-11-16: the same tension
+  // read, moved two lines by C26792's import and its legitimacy read, each statement on its own line as powerStructure's
+  // packing law asks)
+  'src/generators/power/rosterText.js:126': 'a tension',
   // COHERENCE-POWERS-7 leftover 1 (1022e9887): withTownsOwnUnderworld reads the town's crime signal (`crimeSignalOf`'s
   // criminal powers' names, roster order), the class defenseDisplay.js's row names; read by POWERS-10 at the site
   'src/domain/crimeSignal.js:91': 'the crime signal',

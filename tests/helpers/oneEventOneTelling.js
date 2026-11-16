@@ -20,6 +20,7 @@
  */
 import { HISTORICAL_EVENTS_DATA, HISTORY_DESC_SIBLINGS } from '../../src/data/historyData.js';
 import { HISTORY_DESC_VARIANTS } from '../../src/data/historyDescVariants.js';
+import { CHARACTER_SHAPING_CLAIMS } from '../../src/domain/facts/shapingEvent.js';
 
 const PLACE_TOKENS = ['{quarter}', '{location}'];
 const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -61,10 +62,10 @@ export const placeIn = (type, text) => {
 const bare = (/** @type {string} */ n) => String(n || '').replace(/^the\s+/i, '').trim().toLowerCase();
 
 /** The lines that call one event the one that made the town as it stands, each with its event's name group. */
+/** The lines that call one event the one that made the town as it stands, each with its event's name group: the record's
+ * character (`facts/shapingEvent.js`, the one home the desk reads too) and the page's history lines (DS-GEN-16's). */
 export const SHAPING_CLAIMS = Object.freeze([
-  /The (?<ev>[A-Za-z][\w' -]+?) is why this place looks as it does/,
-  /Everything before the (?<ev>[A-Za-z][\w' -]+?) is referred to as 'the old settlement'\. What exists now was built after/,
-  /The (?<ev>[A-Za-z][\w' -]+?) left the buildings standing and changed everything else; the place was rebuilt afterwards/,
+  ...CHARACTER_SHAPING_CLAIMS.map((re) => new RegExp(re.source.replace(/^\^/, ''))),
   /Much of what stands in .+? now was built after the (?<ev>[A-Za-z][\w' -]+?), and that legacy/,
   /In the wake of the (?<ev>[A-Za-z][\w' -]+?), .+? settled into a shape that still holds/,
   /still keeps the shape the \w+ took after the (?<ev>[A-Za-z][\w' -]+?), and that shape/,

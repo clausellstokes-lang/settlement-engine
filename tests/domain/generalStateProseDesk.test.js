@@ -78,6 +78,7 @@ import {
   populationDirectionPoolKey,
 } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
+import { shapeYieldingKey } from '../../src/domain/facts/shapingEvent.js'; // BAR4-HISTORY T1-SHAPE
 import {
   UNMOUNTED_BLOCKS, drawnAtMount, sentenceMountForBlock,
 } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -1229,6 +1230,10 @@ describe('the history chapter', () => {
       )?.key),
       livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [{}] })
         ? 'LIVING-MEMORY' : null,
+      // BAR4-HISTORY T1-SHAPE (the chair's SH1b, 2026-11-16): a pool that claims the shape yields its -MARKED twin where the
+      // record's character names ANOTHER event as the one that shaped the place (facts/shapingEvent.js :: shapeYieldingKey)
+      ...['ANCHORED-OLD', 'LEGACY-RECOVERED', 'LEGACY-SHIFTED'].map((key) => shapeYieldingKey(key, 'pilgrimage',
+        'The Siege is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards', DOSSIER_STATE_PROSE_GENERAL['DS-GEN-16'].pools)),
     ])].sort()).toEqual(poolsOf('DS-GEN-16').sort());
     expect(legacyPoolKey([])).toBeNull();
     expect(legacyPoolKey([{ annotation: '' }])).toBeNull();

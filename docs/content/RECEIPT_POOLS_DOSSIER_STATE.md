@@ -7134,7 +7134,7 @@ compass word, no real-world place, no named analogy.*
 ### DS-GEN-16 · History › What the years left standing (the recorded blow, and whether the record carries it forward) · `history.historicalEvents[]{type, yearsAgo, severity, anchored, lastingEffects[]}`
 
 **RECEIPT:** `history.historicalEvents[]` rows composed at `src/generators/historyGenerator.js` from `src/data/historyData.js`, each carrying `type`, `yearsAgo`, `severity` (`minor` · `major` · `catastrophic`), `anchored`, and `lastingEffects[]` selected per event (`historyGenerator.js`, `selectedEffects`) · the same rows the dossier already renders as a timeline (`src/components/new/tabs/HistoryTab.jsx`) and the PDF carries at `src/pdf/lib/viewModel.js`
-**STATE-KEY:** `ANCHORED-RECENT` (a severe anchored event in the near bands) / `ANCHORED-OLD` (a severe anchored event, old, carrying `lastingEffects`) / `LAYERED-ANCHORED` (more than one anchored event on the record) / `RECORDED-UNANCHORED` (a severe event on the record that is NOT anchored) / `UNMARKED` (no severe event on the record)
+**STATE-KEY:** `ANCHORED-RECENT` (a severe anchored event in the near bands) / `ANCHORED-OLD` (a severe anchored event, old, carrying `lastingEffects`) / `LAYERED-ANCHORED` (more than one anchored event on the record) / `RECORDED-UNANCHORED` (a severe event on the record that is NOT anchored) / `UNMARKED` (no severe event on the record) / `ANCHORED-OLD-MARKED`, `LEGACY-RECOVERED-MARKED`, `LEGACY-SHIFTED-MARKED` (BAR4-HISTORY, the chair's SH1b of 2026-11-16: each the twin of its pool where the record's `historicalCharacter` names ANOTHER event as why the place looks as it does (`facts/shapingEvent.js`); they claim no shape: one shaping event a page; VETOABLE wording, the owner's)
 **SLOTS:** `{settlement}` `{calamity}` `{timeband_age}` *(`{calamity}` as minted for this chapter; here it fills from the event row's own `type` rather than from a scar kind)*
 **SECTION-TARGET:** `history` · also `tensions`
 **PROVENANCE:** **`anchored` IS THE GATE, AND THIS BLOCK IS BUILT AROUND IT.** `DS-GEN-9` rules that `anchored: true` is the record's own assertion that an event still bears on the present and is therefore the licence for an "and it still" clause, that an unanchored event "gets described and NOT connected forward", and that this is "the sharpest line in the shape and the easiest to blur". A block whose entire subject is an event's PRESENT REMAINDER blurs that line by construction unless the gate is keyed, so it is keyed: every forward-connecting pool below requires `anchored`, and `RECORDED-UNANCHORED` exists precisely so that the unanchored case has somewhere lawful to go instead of borrowing an anchored sentence. Its two variants describe the event and decline to carry it forward, which is the ruling rendered as prose. **Non-redundancy, twice over (`R-DST-A`):** `DS-GEN-9` renders the event rows AS A TIMELINE and owns the founding and the record itself; this block renders what the record says REMAINS, and only where `anchored` or `lastingEffects` actually asserts a remainder. `DS-GEN-15` reads the fabric mirror, which is what the STONES show; this block reads the history table, which is what the RECORD says. The two cite different fields and may compose together, since neither restates the other's cell. No variant carries a year: `DS-GEN-9` records that the surface prints a numeral beside its own band ladder, and `R-DST-D` keeps the prose banded.
@@ -7148,6 +7148,10 @@ compass word, no real-world place, no named analogy.*
 1. `[elder]` {settlement} still keeps habits nobody can now explain, from the time of the {calamity}; that time is {timeband_age}.
 2. `[ledger]` {settlement} still does things differently because of the {calamity}, a long-past event.
 3. `[street]` Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town that time made.
+
+**`ANCHORED-OLD-MARKED`** {colour}
+1. `[elder]` {settlement} still keeps habits nobody can now explain, from the time of the {calamity}; that time is {timeband_age}.
+2. `[street]` Nobody now in {settlement} saw the {calamity}, but the town still carries a mark from that time.
 
 **`LAYERED-ANCHORED`** {colour}
 1. `[elder]` One hard season after another has passed over {settlement}, and each still shapes the town.
@@ -7173,9 +7177,17 @@ compass word, no real-world place, no named analogy.*
 1. `[ledger]` {settlement} came through the {calamity}, and what the town built in answer still stands, a legacy that is {timeband_age}.
 2. `[street]` Much of what stands in {settlement} now was built after the {calamity}, and that legacy is {timeband_age}.
 
+**`LEGACY-RECOVERED-MARKED`** {colour}
+1. `[ledger]` {settlement} came through the {calamity}, and the mark left on the town is {timeband_age}.
+2. `[street]` The {calamity} left a mark on {settlement}, and the town came through; that mark is {timeband_age}.
+
 **`LEGACY-SHIFTED`** {colour}
 1. `[ledger]` In the wake of the {calamity}, {settlement} settled into a shape that still holds, a legacy that is {timeband_age}, though much has changed since.
 2. `[street]` {settlement} still keeps the shape the town took after the {calamity}, and that shape is {timeband_age}, though the times have moved on.
+
+**`LEGACY-SHIFTED-MARKED`** {colour}
+1. `[ledger]` The {calamity} left a mark on {settlement}, a legacy that is {timeband_age}, though much has changed since.
+2. `[street]` {settlement} still carries the mark of the {calamity}, and that mark is {timeband_age}, though the times have moved on.
 
 **`LEGACY-LINKED`** {colour}
 1. `[ledger]` What the {calamity} left behind is {timeband_age}, and that legacy still bears on how {settlement} lives.

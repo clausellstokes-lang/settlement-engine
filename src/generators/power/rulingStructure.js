@@ -735,7 +735,7 @@ export const generatePowerStructure = (
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
   settleClaimsToLabel(factions, tier, lowerInstNames, publicLegitimacy); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
-  annotateFactionStanding(factions, standingForce); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort
+  annotateFactionStanding(factions, standingForce, { publicLegitimacy }); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort; BAR4-HISTORY C14176 (FS2): the seat's legitimacy, for its coup reading
 
   const safetyRatio = safetyRatioOf(instFlags);
   // ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13 — ONE writer): the hall-capture state is
