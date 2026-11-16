@@ -55,14 +55,27 @@ each read from their own messages and none is of that kind (no other red arm nam
 | 1d | fork census's observed site (FA1) | the file's own form (DISPLAY_NAME_KEYED_SITES), dated note | — | `src/data/npcData.js:1661` -> `:1676`, sha256-identical line (f82b8da7…), BAR3-PEOPLE batch 1's additions above it | 1b7cbd852 | generationForkCensus 6/7 (A1 class G) |
 | 1d | observed-shape readers | `node scripts/check-observed-shape-readers.mjs --write` on the clean committed tree; the UI arm's cleared gap in the file's own form | the mint of the generated leaves; the cohort 131 -> 129 | all shrinks: the five generated leaves' drift (BAR3-CORPUS); 6 identities / 9 reads left (1549 -> 1543), each because the corpus now writes its key (WorldPulseData.js `factionName`/`settlementIds on stressors`: the cohort 131 -> 129, 195 -> 190, BAR3-PEOPLE-2; four world-pulse outcome reads, the same corpus move as WR2; no reader file touched by either round); the cleared gap 0/16/42 -> 0/18/47 | b3ce79392 | 47/47; the 13 readers of the register each alone green; plain check exit 0 |
 | 1d | proseMoveGrammar (PM1) | the file's own figures, dated notes | 571 -> 573, 516 -> 518 (BAR3-CORPUS) | the cause first: ONE pool joins the repeated openers, DS-DEF-2 `CHAIN: defence short` (v1 and v2 both open "The trades …", BAR3-CORPUS batch 1 cc469b762, C20202); two pools join the uniform (DS-ECO-12 `INCOME WEIGHT: the practice of magic`, `… the religious houses`). Six figures: 573, 0.669, 138, 0.161 (the opener's share, implied by the same count), 518, 129 | c97ed5ff0 | 54/54 |
+| — | MERGE (the chair's word, 23:54 UTC) | `git merge --no-ff` of lane/bar3-close-sweep-a-2026-11-15 at 640266f64, one commit, pushed alone | no conflict | clean | 493c8c90d | the six files it cured, alone at the merged tree: bar3LabelWords2 6/6, bar3People2Rows 13/13, bar3PlacesRows 11/11, conflictLadderReadsRoster 2/2, sovereignNoCrown 2/2, domainAnyCastBaseline 19/19 (a third shallow `introducedAt`, e0c8646ee, fetched); my registers re-checked after its leaf: presumedThings 43, tuningRegister 76, proseWiringCensus 79, observedShapeReaders 47, writerReach 52: none moved |
+| 1d | trade list writers | the walker's own row (`WRITERS`), dated note | `economicState.js` 8 -> 9 (BAR3-DEFECON-2) | 8 -> 9, the class stays ASKS, its reason names `dropExportsImportedShort`'s splice (takes away, adds no good) | 4128c8ca1 | 5/5 |
+| 1d | the tie prose's declarations ledger (colourMarks4h) | the ledger's own form, each moved row re-taken from the live source by its readers' reading | the two colour rows (BAR3-PEOPLE) | SIX rows, every one BAR3-PEOPLE batch 1 (aef83b4b5): econ_crim_blur.desc#6, tension#2 (colour true -> false, the siege exclude: the named two), desc#3 (the siege exclude), mutual_leverage.tension#3, wary_alliance.desc#1, old_debt.tension#7 (the batch's reworded texts) | 6de5d5773 | colourMarks4h 4/4; 24 of the ledger's 25 readers green; **tieProseDeclared STOP, sent to the chair**: its own count of declaring rows `toHaveLength(41)` -> 44 (the three siege excludes), declared by no hand-back (red at 98363cb84 too, 1/3) |
+| 1d | crisisFoodWord | the file's own count, dated note | 4 -> 5 (BAR3-PLACES) | 4 -> 5 | ed9a00279 | 3/3 |
+| 1d | tailHistoryBatch4's KEEP | the row's address, dated note | the broker refused in r2r-thorp-43 (BAR3-PLACES) | r2r-thorp-43 -> r2s-monster_pressure-city-0, the branch's own KEEP town for that line (`bar3PlacesRows.test.js`) | 5869f595c | 2/2 |
+| 1d | lighting census | `LIGHTING_CENSUS_REFREEZE='BAR3-CLOSE-DOORS-1' LIGHTING_CENSUS_NOTE='…' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` on the clean committed tree, then without | files 3619 -> 3631 | files 3619 -> 3631 (the twelve guard files the seven branches added; none deleted), parked 460 -> 465, credited 3159 -> 3166, titles 30557 -> 30599, suiteTitles 8428 -> 8440; no [POPULATION_GREW] | fccd6adb8 | 34/34 |
+| 1e | the manifest's owed entries | `scripts/mutation-coverage-manifest.json`'s own form, kind 'rationale', after the bar2 siblings; never as uncovered | the five the seats named | exactly the five the walker printed: bar3PeopleTies, bar3PeoplePowers, bar3People2Rows, bar3PlacesRows, bar3PowersLines, each from its seat's "kills" line and its header | b3d98e87a | 10/10; the manifest's readers alone: 12 green, two bundles' freshness red (1f), newsHeadlineContract and proseFamilyContract red on arms that read no line of the manifest (below) |
 
 ## LAW REDS AND STOPS SENT TO THE CHAIR
 
-- domainAnyCastBaseline (law): `economicsCrisisMarks.js` 3 any-holes (BAR3-LABELS-3). Sent 23:1x UTC. OPEN.
-- bar3PlacesRows (law): case [21] C18651, r2r-town-8. Sent 23:1x UTC. OPEN.
+- domainAnyCastBaseline (law): `economicsCrisisMarks.js` 3 any-holes (BAR3-LABELS-3). Sent 23:1x UTC. CURED by the sweep seat's merge (19/19).
+- bar3PlacesRows (law): case [21] C18651, r2r-town-8. Sent 23:1x UTC. CURED by the sweep seat's merge (e93af30f2: 11/11).
 - writerReach (1c): ruled WR2, taken.
 - proseMoveGrammar: ruled PM1, taken.
 - generationForkCensus A6: ruled FA1, taken.
+- tieProseDeclared: its declaring rows' count 41 -> 44, undeclared. Sent 00:1x UTC. OPEN.
+- FOUND RED BEYOND MY LIST (on no table; untouched): `tests/lint/newsHeadlineContract.walker.test.js` A2 ("address row
+  moved": the `queued|neutral_to_rival` and `queued|strategy_sue_for_peace` headline and summary rows' counts) and
+  `tests/lint/proseFamilyContract.walker.test.js` A1, A3, A5 (scalarRows 38121 -> 38127; identities 60 -> 64; the pulse
+  history's records). Both freeze the world pulse's AO-0 corpus. By my reading, the same moved draws as WR2; not
+  traced. Sent 00:2x UTC for the chair's class and word. OPEN.
 
 ## FOR THE OWNER, IN PLAIN WORDS
 
@@ -72,7 +85,6 @@ each read from their own messages and none is of that kind (no other red arm nam
 
 ## WHAT IS LEFT, IN ORDER
 
-1. 1d: tradeListWriters (`economicState.js` 8 -> 9), colourMarks4h (the declarations ledger's two rows), crisisFoodWord (4 -> 5), tailHistoryBatch4 (the KEEP address), the lighting census (3619 -> 3631).
-2. 1e: the five manifest entries (`scripts/mutation-coverage-manifest.json`).
-3. 1f and 1g, only after the chair's word on the sweep-a merge.
-4. The two law reds above, the chair's.
+1. 1f: `npm run build:edge-shared` (the merge is in), its own commit if a bundle moves; `tests/build/engineBundleReplay.test.js`, `npm run validate:edge`, every bundle reader.
+2. 1g: one `npm run build`; `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js`; 83fc14ad6 built too for the cause; the goods roster only from a row the walker prints; build output removed.
+3. The chair's words on the OPEN rows above.
