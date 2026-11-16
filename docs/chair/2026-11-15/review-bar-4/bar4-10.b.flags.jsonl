@@ -1,0 +1,12 @@
+{"id":"HEADER","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"RECORD","why":"FOUNDING reason says a ferry crossing became the first bridge 'only three generations ago', but the town is 590 years old and founded by imperial decree","other":""}
+{"id":"C25013","town":"bar0-metropolis-calm-rand-22","sev":"LOW","kind":"STATE","why":"Reliance on magic 'Integral' names nothing, but header: magic low, Magical Capability Weak, 0% food by magic, ley line node depleted","other":"C25017"}
+{"id":"C26403","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"Says the town leans first on its fishing for food; LAND has River Fisheries depleted, River Fishing vulnerable, Fish market short of fish; 54% grown elsewhere","other":""}
+{"id":"C26840","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"PAIR","why":"Says the Consortium 'is winning' against the Thieves' Guild; the page's crime tension says crime rises faster than those in charge can answer, stability 'pervasive organized crime'","other":"C25027"}
+{"id":"C26984","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"Says food trades 'are failing'; FOOD word Secure, failed source None, famine cut 0%, 14.8 months in store; LAND has the food chains vulnerable only","other":""}
+{"id":"C25312","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"Personal trade title 'Chartermaster' (a -master compound) printed for Utzil Xib, who PEOPLE lists as female","other":""}
+{"id":"C25341","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"Personal trade title 'Smith-master' printed for Muyal Ul, who PEOPLE lists as female","other":""}
+{"id":"C25488","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"Personal trade title 'Guildmaster' printed for Teyacapan Zaz, who PEOPLE lists as female","other":""}
+{"id":"C25508","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"Personal trade title 'Spymaster' printed for Yaretzi Lahun, who PEOPLE lists as female","other":""}
+{"id":"C25665","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"Personal trade title 'Stablemaster' printed for Itzel Xul, who PEOPLE lists as female","other":""}
+{"id":"C25141","town":"bar0-metropolis-calm-rand-22","sev":"LOW","kind":"BROKEN","why":"A disambiguating '(the sawyer)' is printed inside the person's name in prose ('Huitzilxochitl Itza (the sawyer) once told the council…'): two people share one name","other":""}
+{"id":"DONE","lines":4142,"blocks":1,"flags":11}
