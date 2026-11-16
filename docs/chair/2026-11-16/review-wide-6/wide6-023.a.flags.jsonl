@@ -1,0 +1,4 @@
+{"id":"C59713","town":"bar0-city-wartime-rand-34","sev":"MED","kind":"PAIR","why":"Military/Guard card says 'a slow war with the guild: arrests are made'; the Web says Guard and Thieves' Guild 'have a working arrangement', 'certain arrests never happen'","other":"C59579"}
+{"id":"C59730","town":"bar0-city-wartime-rand-34","sev":"LOW","kind":"PAIR","why":"The Shield Compact's card prints War Council's blurb verbatim ('Crown-appointed emergency body with powers over requisition...'); two powers given identical powers and text","other":"C59717"}
+{"id":"C61027","town":"bar0-city-wartime-rand-34","sev":"LOW","kind":"PAIR","why":"Land Dispute line names 'the present occupation'; PAST gives The Occupation 180 years ago ('A previous occupation ended') and the crisis is Wartime, not occupation","other":"C61031"}
+{"id":"DONE","lines":2860,"blocks":1,"flags":3}
