@@ -1,0 +1,17 @@
+{"id":"C17926","town":"bar0-hamlet-calm-rand-22","sev":"MED","kind":"STATE","why":"Free Elder Council is the only power, Stable/Approved, 'none rules alone'; a militia household deciding for everyone, unasked, contradicts that","other":"C18172"}
+{"id":"C18395","town":"bar0-hamlet-calm-rand-22","sev":"LOW","kind":"STATE","why":"Trade Collapse was 57 years ago; 'a generation old' understates it (two generations)","other":""}
+{"id":"C18549","town":"bar0-hamlet-calm-rand-23","sev":"LOW","kind":"LACKS","why":"a hiring hall offering mercenaries in a hamlet of 44; HOUSES has no hiring hall and DEFENCE denies any mercenary company or force","other":""}
+{"id":"C18612","town":"bar0-hamlet-calm-rand-23","sev":"LOW","kind":"STATE","why":"FOOD gives stores 1.3 months; 'about a month and a half' overstates","other":""}
+{"id":"C18802","town":"bar0-hamlet-calm-rand-23","sev":"MED","kind":"STATE","why":"'Landlord' is a sex-named personal trade title; Latifa al-Amin is (f) per PEOPLE","other":""}
+{"id":"C18833","town":"bar0-hamlet-calm-rand-23","sev":"MED","kind":"PAIR","why":"Latifa 'has not spoken to Alaa since' a case ten years ago, yet Alaa's 'devoted' mentor who vouched for them; also corrected in public last month","other":"C18823"}
+{"id":"C19049","town":"bar0-hamlet-under_siege-rand-21","sev":"MED","kind":"STATE","why":"Access to external mill is marked Stopped by the siege, yet its own service row 'Grain milling' is printed on offer with no mark","other":"C19048"}
+{"id":"C19130","town":"bar0-hamlet-under_siege-rand-21","sev":"MED","kind":"STATE","why":"claims a poor year does not empty tables, but FOOD is Deficit (gap 63%, grown 38%) under siege; contradicts 'hunger is already here'","other":"C19126"}
+{"id":"C19273","town":"bar0-hamlet-under_siege-rand-21","sev":"LOW","kind":"LACKS","why":"'Balcombe's streets' in a hamlet of 32 people; lanes at most","other":""}
+{"id":"C19472","town":"bar0-hamlet-under_siege-rand-22","sev":"MED","kind":"STATE","why":"ordinary carts of rock moving as usual under Under Siege where no cart has reached the town in weeks and trade has stopped","other":"C19672"}
+{"id":"C19498","town":"bar0-hamlet-under_siege-rand-22","sev":"LOW","kind":"STATE","why":"'keeps few institutions' contradicts HOUSES: 17 houses incl. market, mine, quarry, pawnbroker, alehouse, charter hall, two powers","other":""}
+{"id":"C19517","town":"bar0-hamlet-under_siege-rand-22","sev":"MED","kind":"LACKS","why":"'leads the military' presumes a military; DEFENCE gives no garrison, militia, watch or mercenaries, only a charter hall","other":""}
+{"id":"C19497","town":"bar0-hamlet-under_siege-rand-22","sev":"MED","kind":"PAIR","why":"says buying and selling is done at the market, but the Periodic market is Stopped by the siege and trade by road, gate and water has stopped","other":"C19659"}
+{"id":"C19622","town":"bar0-hamlet-under_siege-rand-22","sev":"MED","kind":"STATE","why":"'Armed escort' through dangerous territory and dungeon clearance printed on offer unmarked under siege, where nothing goes out by road or gate","other":"C19512"}
+{"id":"C19810","town":"bar0-hamlet-under_siege-rand-22","sev":"MED","kind":"STATE","why":"'Market vendors' distribute food, but the Periodic market is Stopped by the siege and the town is in food deficit","other":"C19659"}
+{"id":"C19813","town":"bar0-hamlet-under_siege-rand-22","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'its herds comes first'","other":""}
+{"id":"DONE","lines":2630,"blocks":4,"flags":16}
