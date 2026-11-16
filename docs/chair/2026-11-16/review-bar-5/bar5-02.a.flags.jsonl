@@ -1,0 +1,10 @@
+{"id":"C2960","town":"bar0-city-under_siege+famine-rand-25","sev":"LOW","kind":"STATE","why":"unmarked ordinary market scene (stalls selling reagents to knowing buyers) under siege with nothing coming in and famine","other":""}
+{"id":"C3223","town":"bar0-city-under_siege+famine-rand-25","sev":"MED","kind":"STATE","why":"unmarked 'the caravans buy here' under a siege where nothing comes in or goes out by road, gate or water","other":"C3009"}
+{"id":"C3231","town":"bar0-city-under_siege+famine-rand-25","sev":"MED","kind":"STATE","why":"Butchers offer 'Fresh meat' with no mark in an active famine (grown 7%) while Bakers and Mills are marked scarce","other":"C3215"}
+{"id":"C3334","town":"bar0-city-under_siege+famine-rand-25","sev":"LOW","kind":"STATE","why":"Daily markets offer 'Fresh produce' with no mark in an active famine and siege (grown 7%, nothing comes in) while Bakers/Mills/Granaries are marked scarce","other":"C3215"}
+{"id":"C3874","town":"bar0-city-under_siege+famine-rand-25","sev":"MED","kind":"PAIR","why":"Mercenary Forces row offers 'Mercenary hire' and armed escort as Operational, unmarked; Garrison row and Services tab mark Mercenary hire stopped by the siege","other":"C3476"}
+{"id":"C3911","town":"bar0-city-under_siege+famine-rand-25","sev":"MED","kind":"PAIR","why":"Military Contracts export 'armed escort & mercenary hire' shown Operational, unmarked, while mercenary hire is marked stopped by the siege elsewhere","other":"C3476"}
+{"id":"C3906","town":"bar0-city-under_siege+famine-rand-25","sev":"LOW","kind":"STATE","why":"Legal Services export shown Operational with no mark though siege has stopped all trade by road, gate and water","other":"C3009"}
+{"id":"C3763","town":"bar0-city-under_siege+famine-rand-25","sev":"LOW","kind":"BROKEN","why":"Issues (15) but rows marked Impaired (10) plus Vulnerable (6) make 16","other":"C3762"}
+{"id":"C4177","town":"bar0-city-under_siege+famine-rand-25","sev":"LOW","kind":"PAIR","why":"Medical Readiness labelled 'Infirmary' (none on HOUSES) yet next line says no beds; Medical role absent","other":"C4179"}
+{"id":"DONE","lines":2199,"blocks":1,"flags":9}
