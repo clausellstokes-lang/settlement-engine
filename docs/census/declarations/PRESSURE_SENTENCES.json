@@ -255,12 +255,14 @@
         {
           "lineId": "PRESSURE_SENTENCES.occupied[5]",
           "text": "The curfew in ${name} is enforced unevenly, and the unevenness is the point: no one can be sure which night, or which street, or which face at the checkpoint will decide that the rules apply to them.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ village"
+          ],
           "excludes": [],
           "crisis": [
             "occupied"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         }
       ]
@@ -283,12 +285,14 @@
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[0]",
           "text": "${name} has no effective government; ${topFaction} controls one district and the institutions inside it, a rival controls another, and the contested space between them is where things go wrong.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ town"
+          ],
           "excludes": [],
           "crisis": [
             "politically_fractured"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -340,12 +344,14 @@
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[5]",
           "text": "The last thing ${topFaction} and its rivals agreed on in ${name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ village"
+          ],
           "excludes": [],
           "crisis": [
             "politically_fractured"
           ],
-          "colour": true,
+          "colour": false,
           "stop": []
         }
       ]
@@ -991,7 +997,9 @@
         {
           "lineId": "PRESSURE_SENTENCES.mass_migration(strongeconomy)[0]",
           "text": "${name} is taking in more people than it was built for. The newcomers and the old residents share the same streets, but not a language, customs or trust, and ${govFaction} cannot keep up with how fast they come.",
-          "needs": [],
+          "needs": [
+            "tier: ≥ village"
+          ],
           "excludes": [],
           "crisis": [
             "mass_migration"
@@ -1173,9 +1181,11 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.wartime(losing)[0]",
-          "text": "${name} is losing people and resources to a war it did not choose the terms of. Conscription has hollowed out the skilled workforce. ${govFaction} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.",
+          "text": "${name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${govFaction} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "legitimacy crisis"
+          ],
           "crisis": [
             "wartime"
           ],

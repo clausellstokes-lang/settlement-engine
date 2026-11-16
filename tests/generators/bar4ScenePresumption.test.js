@@ -202,7 +202,8 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
       const original = sense[field].find((/** @type {any} */ o) => o && typeof o === 'object' && !o.twinOf && String(o.text('{name}')) === t.twinOf);
       const atoms = [...(original?.needs || []), ...(original?.excludes || [])];
       const state = (t.needs || []).includes('crisis: under_siege') ? 'siege' : (t.needs || []).includes('crisis: hunger') && sense.key === 'bread' ? 'hunger'
-        : atoms.some((/** @type {string} */ a) => a.startsWith('trade at work')) && !(t.excludes || []).includes('enchanting') ? 'short' : null;
+        : atoms.some((/** @type {string} */ a) => a.startsWith('trade at work')) && !(t.excludes || []).includes('enchanting')
+          && Object.prototype.hasOwnProperty.call(TRADE_HOUSES, sense.key) ? 'short' : null; // BAR6-SCENES (2026-11-16): the four trades' twins; the goods' twins (forge, cloth, dairy, spice) are proved by tests/domain/bar6ScenesGoods.test.js
       return state && (state !== 'siege' || sense.key === 'horses') ? { key: sense.key, sense, field, pool: sense[field], original, twin: t, state } : null;
     }))).filter(Boolean);
     expect(twins.length, 'the twins of the trades at work').toBeGreaterThan(20);
@@ -247,7 +248,9 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
     for (const [key, words] of Object.entries(TRADE_HOUSES)) expect(words).toEqual(/** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === key)).institutions);
     // BAR5-THINGS (2026-11-16, LAW 4 "the kilns"): the kiln trade's two kinds join the keys (`tradeAtWork.js :: KILN_KINDS`)
     const { KILN_KINDS } = await import('../../src/domain/facts/tradeAtWork.js');
-    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS)].sort());
+    // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): the goods a scene shows join the keys (`tradeAtWork.js :: GOOD_TRADES`)
+    const { GOOD_TRADES } = await import('../../src/domain/facts/tradeAtWork.js');
+    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS), ...Object.keys(GOOD_TRADES)].sort());
   });
 
 });

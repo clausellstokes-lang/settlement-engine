@@ -56,10 +56,15 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['blacksmith', 'smith', 'smelter', 'foundry', 'armourer', 'armorer', 'weaponsmith', 'bladesmith', 'metalworker', 'specialized metalworker'],
     trade: ['metalwork', 'steel', 'quality tools', 'iron & metalwork'],
     lines: [
-      (n) => `The ring of hammer on anvil carries over the roofs of ${n}.`,
-      () => 'You hear the forge work before you see it: hammer on iron, steady as a heartbeat.',
-      () => 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.',
-      () => 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.',
+      // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): each line shows the forge at work: some smith's house stands with its iron (`trade at work: forge`); its twin keeps the slot where every smith is short
+      { text: (n) => `The ring of hammer on anvil carries over the roofs of ${n}.`, needs: ['trade at work: forge'] },
+      { text: (n) => `The anvil at ${n} is quiet more days than it rings, for want of iron.`, twinOf: 'The ring of hammer on anvil carries over the roofs of {name}.', excludes: ['trade at work: forge'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'You hear the forge work before you see it: hammer on iron, steady as a heartbeat.', needs: ['trade at work: forge'] },
+      { text: () => 'The forge is banked low, and no hammer sounds from it today.', twinOf: 'You hear the forge work before you see it: hammer on iron, steady as a heartbeat.', excludes: ['trade at work: forge'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.', needs: ['trade at work: forge'] },
+      { text: () => 'Only a thin thread of smoke rises from the forge, and no hammer keeps time under it.', twinOf: 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.', excludes: ['trade at work: forge'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.', needs: ['trade at work: forge'] },
+      { text: () => 'A smith sits in the forge doorway with no iron on the anvil.', twinOf: 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.', excludes: ['trade at work: forge'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
     ],
     dominant: [ // W2-FIX-DATA-3 (REVIEW-W2A-3 #366): these four lines speak of many forges; a village or smaller has one (a hamlet's part-time smith, a village's blacksmith), so they declare tier: ≥ town. A one-forge place then draws none and its sense beat is left out (the redraw finds no clean line and draws nothing more); a line of its own would lengthen the pool and re-deal the arrival in every town that draws it (measured: 44 of 720)
       { text: (n) => `The hammering of the forges echoes through all of ${n}.`, needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3: no claim the place lives by them (false in 16 of 16: metalwork 3 to 12% of the income, never first)
@@ -79,7 +84,8 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: (n) => `The hammering echoes throughout ${n}, and most of it is the sound of blades being made.`, needs: ['institution: smith', 'tier: ≥ town', 'iron at hand'], crisis: ['any'] }, // BAR2-PLACES (the chair's grant VW2; REVIEW-BAR-2 C3297): blades are made only where the smiths have iron (a siege had cut off the iron it imports)
       { text: (n) => `The forges of ${n} stand cold: there is no iron left to make blades from.`, twinOf: 'The hammering echoes throughout {name}, and most of it is the sound of blades being made.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['iron at hand'], crisis: ['any'] }, // BAR2-PLACES (VW2): its twin where the iron is not at hand
       { text: () => 'Racks of spearheads and helms stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-12 item 5 (the reader's A06): the twin carries its siblings' siege exclusion: no cart reaches a besieged town
-      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['crisis: under_siege'], crisis: ['wartime', 'insurgency'] }, // W2-FIX-DATA-5 (ww-1157): a war the record holds
+      { text: () => 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town', 'exported: arms'], excludes: ['crisis: under_siege'], crisis: ['wartime', 'insurgency'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) "out": the arms the carts take out are an export of the town's
+      { text: () => 'Every forge you pass is making something meant for a war, and the army takes all of it.', twinOf: 'Every forge you pass is making something meant for a war, and the carts on the road out are full of it.', needs: ['institution: smith', 'tier: ≥ town'], crisis: ['wartime', 'insurgency'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin where no arms are exported or the siege holds the road // W2-FIX-DATA-5 (ww-1157): a war the record holds
       { text: () => 'A smith tests a new blade against a post, frowns, and sends it back to the fire.', needs: ['institution: smith'], crisis: ['any'] },
     ] },
   { key: 'bread',
@@ -99,7 +105,8 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: (n) => `The smell of bread hits you as you walk into ${n}, and it never really leaves.`, excludes: ['crisis: hunger'], crisis: ['any'] },
       { text: () => 'Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane.', needs: ['institution: mill'], excludes: ['crisis: hunger'], crisis: ['any'] },
       { text: () => 'Flour dust lies pale on the doorsteps, and the whole place smells of the ovens.', excludes: ['crisis: hunger'], crisis: ['any'] },
-      { text: () => 'Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.', excludes: ['crisis: hunger'], crisis: ['any'] },
+      { text: () => 'Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.', needs: ['exported: flour'], excludes: ['crisis: hunger', 'crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) "out": flour carted out is an export of the town's, and no cart leaves under a siege
+      { text: () => 'Sacks of flour are stacked by the mill door, all of it for the ovens here.', twinOf: 'Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.', excludes: ['crisis: hunger'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
     ] },
   { key: 'tanners',
     institutions: ['tanner', 'tannery', 'tanners', 'leatherwork', 'saddler', 'furrier'],
@@ -112,7 +119,8 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: (n) => `The reek of the tanning pits hangs over ${n}, and the locals have long since stopped noticing it.`, crisis: ['any'] },
-      { text: () => 'Bales of hides and bundled pelts crowd the carts on the road out.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Bales of hides and bundled pelts crowd the carts on the road out.', needs: ['exported: hides'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) "out": the hides leave as an export of the town's
+      { text: () => 'Bales of hides and bundled pelts are stacked high in the tanning yard.', twinOf: 'Bales of hides and bundled pelts crowd the carts on the road out.', crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
       { text: () => 'Frames of drying leather line the lanes, and the sour smell of the pits follows you everywhere.', crisis: ['any'] },
     ] },
   { key: 'brewers',
@@ -126,7 +134,8 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: (n) => `${n} smells of malt from one end to the other.`, crisis: ['any'] },
-      { text: () => 'Barrels are stacked by every doorway, and the carts on the road out are loaded with more.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Barrels are stacked by every doorway, and the carts on the road out are loaded with more.', needs: ['exported: ale'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) "out": the ale leaves as an export of the town's
+      { text: () => 'Barrels are stacked by every doorway, and all of it is for the cups here.', twinOf: 'Barrels are stacked by every doorway, and the carts on the road out are loaded with more.', crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
       { text: () => 'The steam of the mash tuns drifts across the roofs, sweet and heavy.', crisis: ['any'] },
     ] },
   { key: 'fish',
@@ -158,17 +167,23 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],
     trade: ['wool', 'cloth', 'textile', 'linen', 'silk', 'dye'],
     lines: [
-      () => 'A loom clatters behind an open shutter.',
-      () => 'Lengths of dyed cloth hang drying in bright strips between the houses.',
-      () => 'The thump of the fulling stocks carries from the cloth yard.',
-      () => 'A dyer walks past with hands stained to the wrist.',
+      // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): the key is reached by a tailor or a draper, who sew and sell cloth; each line shows cloth MADE (`trade at work: cloth`), its twin keeps the slot
+      { text: () => 'A loom clatters behind an open shutter.', needs: ['trade at work: cloth'] },
+      { text: () => 'Someone sits stitching a seam behind an open shutter.', twinOf: 'A loom clatters behind an open shutter.', excludes: ['trade at work: cloth'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'Lengths of dyed cloth hang drying in bright strips between the houses.', needs: ['trade at work: cloth'] },
+      { text: () => 'A length of cloth hangs in a shop doorway, brought in from elsewhere to be cut and sewn.', twinOf: 'Lengths of dyed cloth hang drying in bright strips between the houses.', excludes: ['trade at work: cloth'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'The thump of the fulling stocks carries from the cloth yard.', needs: ['trade at work: cloth'] },
+      { text: () => 'Bolts of cloth are measured out on a shop counter, a length at a time.', twinOf: 'The thump of the fulling stocks carries from the cloth yard.', excludes: ['trade at work: cloth'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'A dyer walks past with hands stained to the wrist.', needs: ['trade at work: cloth'] },
+      { text: () => 'Someone walks past with a measuring cord round their neck and a bolt of cloth under one arm.', twinOf: 'A dyer walks past with hands stained to the wrist.', excludes: ['trade at work: cloth'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
     ],
     dominant: [
-      { text: (n) => `The clatter of looms follows you through ${n}, from one shutter to the next.`, excludes: ['crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-5 (Y17 (3)): not the whole place weaving as usual under a siege
+      { text: (n) => `The clatter of looms follows you through ${n}, from one shutter to the next.`, needs: ['trade at work: cloth'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): the looms want a house that makes cloth // TAIL-HISTORY-5 (Y17 (3)): not the whole place weaving as usual under a siege
       { text: (n) => `Here and there a loom still clatters behind a shutter in ${n}, though no cloth has gone out in weeks.`, twinOf: 'The clatter of looms follows you through {name}, from one shutter to the next.', needs: ['crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-5 (Y17): its twin under a siege
-      { text: () => 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', excludes: ['crisis: under_siege', 'route: isolated'], crisis: ['any'] }, // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no road out where no route reaches (1 of 22)
-      { text: () => 'Bolts of cloth and bales of wool are stacked high in the workshops, more than the place can wear.', twinOf: 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', needs: ['route: isolated'], crisis: ['any'] }, // TAIL-HISTORY-3 (Y14): its twin where no route reaches; a twin keeps the slot and spends no redraw (arrivalScene.js :: drawAdmitted), so no later beat moves (VETOABLE wording)
-      { text: () => 'Bolts of cloth hang drying in long bright strips across the yards.', crisis: ['any'] }, // BAR3-PLACES (H1, 2026-11-15): not every yard: the trade is named, not its whole share
+      { text: () => 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', needs: ['exported: cloth'], excludes: ['crisis: under_siege', 'route: isolated'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) "out" (REVIEW-WIDE-6 C39804): the cloth or the wool leaves as an export of the town's (an income share opened the pool) // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no road out where no route reaches (1 of 22)
+      { text: () => 'Bolts of cloth and bales of wool are stacked high in the workshops, more than the place can wear.', twinOf: 'Bolts of cloth and bales of wool fill the carts waiting on the road out.', needs: ['trade at work: cloth'], crisis: ['any'] }, // TAIL-HISTORY-3 (Y14): its twin where no route reaches; a twin keeps the slot and spends no redraw (arrivalScene.js :: drawAdmitted), so no later beat moves (VETOABLE wording)
+      { text: () => 'Bolts of cloth hang drying in long bright strips across the yards.', needs: ['trade at work: cloth'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): cloth made here
+      { text: () => 'Bolts of cloth brought in from elsewhere are stacked in the shops, waiting to be cut.', twinOf: 'Bolts of cloth hang drying in long bright strips across the yards.', excludes: ['trade at work: cloth'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin // BAR3-PLACES (H1, 2026-11-15): not every yard: the trade is named, not its whole share
     ] },
   { key: 'livestock',
     institutions: ['livestock', 'cattle', 'stockyard', 'shambles', 'slaughter', 'shepherd', 'drover', 'dairy farmer', 'common grazing', 'herd'],
@@ -177,7 +192,8 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'Sheep call to one another from the grazing beyond the houses.', excludes: ['crisis: under_siege', 'crisis: monster_pressure'], crisis: ['any'] },
       { text: () => 'A dog drives a handful of animals across the road, and you wait for them.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR3-PLACES (H1, 2026-11-15): no herd crosses the road under a siege
       { text: () => 'The smell of the byres reaches you on the breeze.', crisis: ['any'] },
-      { text: () => 'Someone is churning butter in a doorway, and the rhythm of it carries.', crisis: ['any'] },
+      { text: () => 'Someone is churning butter in a doorway, and the rhythm of it carries.', needs: ['trade at work: dairy'], excludes: ['failed: livestock'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) (REVIEW-WIDE-6 C219863): "Common grazing land" opened the pool with no dairy; butter wants milk animals kept or a dairy good made
+      { text: () => 'Someone is mending a hurdle in a doorway, and the knock of the mallet carries.', twinOf: 'Someone is churning butter in a doorway, and the rhythm of it carries.', crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
     ],
     dominant: [
       { text: () => 'Drovers push their herds along the road, and the whole place smells of the pens.', excludes: ['crisis: under_siege', 'failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C46725): no herds on the road where the famine failed them
@@ -211,7 +227,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'Old grey dust from the workings still lies in the doorways, but no new dust comes.', twinOf: 'A fine grey dust from the workings settles on every doorstep.' }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (true where the workings are short or the siege stops them)
       { text: () => 'Carts of rock grind past, their axles complaining.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'] },
       { text: () => 'Few carts of rock come down from the workings now.', twinOf: 'Carts of rock grind past, their axles complaining.' }, // BAR4-SCENES-2 (HW1): its twin, true where the workings are short or the siege stops them; a twin keeps the slot
-      { text: () => 'The chink of chisels on stone carries on the wind.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'] },
+      { text: () => 'The chink of chisels on stone carries on the wind.', needs: ['trade at work: stone', 'trade at work: cut stone'], excludes: ['crisis: under_siege'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) (REVIEW-WIDE-6 C84094): chisels are the stone's cutters; a mine digs
       { text: () => 'No chink of chisels comes from the workings today.', twinOf: 'The chink of chisels on stone carries on the wind.' }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (as above)
       { text: () => 'Workers coming off a shift are grey with dust to the eyebrows.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'] },
       { text: () => 'Workers who cut the stone stand idle by the road, the old dust still in their clothes.', twinOf: 'Workers coming off a shift are grey with dust to the eyebrows.' }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (as above)
@@ -258,7 +274,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     dominant: [
       { text: (n) => `Kiln smoke hangs over ${n}, and the dust of fired clay is on everything.`, needs: ['trade at work: clay kilns'], crisis: ['any'] }, // BAR5-THINGS (LAW 4 "the kilns"; REVIEW-BAR-5 C15951): fired clay is a clay kiln's // BAR4-SCENES-2 (HW1; kind A1's `house at work`)
       { text: (n) => `Old kiln dust lies on the doorsteps of ${n}, but little smoke rises now.`, twinOf: 'Kiln smoke hangs over {name}, and the dust of fired clay is on everything.', excludes: ['trade at work: kilns', 'trade at work: clay kilns'], crisis: ['any'] }, // BAR5-THINGS: where a clay kiln is short and no kiln smokes // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
-      { text: () => 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', needs: ['trade at work: clay kilns'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR5-THINGS (LAW 4 "the kilns"): pots are a clay kiln's
+      { text: () => 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', needs: ['trade at work: clay kilns', 'exported: pots'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) "out" (REVIEW-WIDE-6 C115374): the pots leave as an export of the town's // BAR5-THINGS (LAW 4 "the kilns"): pots are a clay kiln's
       { text: () => 'The yard where crates of pots once waited for the carts stands nearly empty.', twinOf: 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', excludes: ['trade at work: kilns', 'trade at work: clay kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (true where the kilns are short or the siege holds the road)
       { text: () => 'The kilns are lit all through the day, and the heat of them is in every lane.', needs: ['trade at work: kilns'], crisis: ['any'] },
       { text: (n) => `The kilns of ${n} are lit only now and then, and most days the lanes are cold.`, twinOf: 'The kilns are lit all through the day, and the heat of them is in every lane.', excludes: ['trade at work: kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin where every kiln house is short
@@ -304,8 +320,10 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'Someone is grinding something pungent behind an open shutter.',
     ],
     dominant: [
-      { text: () => 'Spice and drying herbs scent every lane, and the stalls are piled with them.', needs: ['market'] },
-      { text: () => 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.', colour: true }, // R-AO (CENSUS-2f); TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no carts where no route reaches (2 of 12): reworded, the colour mark kept
+      { text: () => 'Spice and drying herbs scent every lane, and the stalls are piled with them.', needs: ['market', 'trade at work: spice'], excludes: ['crisis: hunger', 'crisis: under_siege'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) (REVIEW-WIDE-6 C15780): spice made here, sold, or brought in past no siege; no stalls piled under a famine or a siege
+      { text: () => 'A few bundles of drying herbs hang by the stalls, and there is little else to scent the lanes.', twinOf: 'Spice and drying herbs scent every lane, and the stalls are piled with them.', needs: ['market'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.', needs: ['trade at work: spice'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): the spice is made here, sold, or brought in past no siege (a line a fact can make false leaves the colour mark)
+      { text: () => 'Bundles of drying herbs hang in the doorways, and the smell of them clings to your clothes.', twinOf: 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.', needs: ['trade at work: herbs'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin // R-AO (CENSUS-2f); TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no carts where no route reaches (2 of 12): reworded, the colour mark kept
       { text: () => 'Every other doorway seems to sell a remedy for something.', colour: true },
     ] },
   { key: 'arcane', arcane: true,
@@ -324,7 +342,7 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: (n) => `Magic is a trade in ${n} like any other: signs offer enchanting and identification by the hour.`, needs: ['enchanting', 'trade at work: arcane'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C2056): the signs want a house that offers it (the Services tab's rows)
-      { text: (n) => `Nobody in ${n} sells enchanting by the hour, and what magic is done here is done quietly.`, twinOf: 'Magic is a trade in {name} like any other: signs offer enchanting and identification by the hour.', excludes: ['enchanting'] }, // BAR4-SCENES (A1): its twin where no house offers it
+      { text: (n) => `Nobody in ${n} sells enchanting by the hour, and what magic is done here is done quietly.`, twinOf: 'Magic is a trade in {name} like any other: signs offer enchanting and identification by the hour.', needs: ['magic reliance: ≤ relied-upon'], excludes: ['enchanting', 'trade at work: enchanting'] }, // BAR6-SCENES (LAW 9 rule 9e.quietly; REVIEW-WIDE-6 C32780): not beside an enchanting chain at work or a reliance the page prints Integral // BAR4-SCENES (A1): its twin where no house offers it
       { text: () => 'The air prickles faintly, the way it does where a great deal of spellwork is done.', needs: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1; kind A1's `house at work`)
       { text: (n) => `Little spellwork is done in ${n} these days, for want of the stuff it takes.`, twinOf: 'The air prickles faintly, the way it does where a great deal of spellwork is done.', excludes: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1): its twin where every arcane house is short
       { text: () => 'Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.', needs: ['trade at work: arcane'] },
@@ -356,7 +374,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'A poet holds a small crowd by the well, and nobody hurries the telling along.', crisis: ['any'] },
     { text: () => 'A household feeds passing travellers at its door, and makes sure everyone sees it doing so.', excludes: ['crisis: hunger'], crisis: ['any'] },
     { text: () => 'Greetings are called across the lane, and every greeting comes with a question about family.', crisis: ['any'] },
-    { text: () => 'An old judge listens to two neighbours by a gate and says nothing until both are finished.', crisis: ['any'] },
+    { text: () => 'An elder listens to two neighbours by a gate and says nothing until both are finished.', crisis: ['any'] }, // BAR6-SCENES (LAW 5 widened, the office class): no judge named where the roster holds no court (VETOABLE wording)
   ],
   arabic: [
     { text: () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.', needs: ['market'], excludes: ['crisis: under_siege', 'route: isolated'] }, // BAR3-PLACES (H1, 2026-11-15): no broker of far goods where no market stands
@@ -368,7 +386,8 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   norse: [
     { text: () => 'People argue law in the open as freely as they trade.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473's sibling): no trade moves under a siege
-    { text: () => 'Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.', needs: ['navigable'], excludes: ['crisis: hunger'], crisis: ['any'] },
+    { text: () => 'Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.', needs: ['navigable', 'fish'], excludes: ['crisis: hunger'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b; r2s-occupied-town-1): drying fish where the food record has a catch
+    { text: () => 'Empty drying racks stand beside the houses, waiting for whatever can be laid in against the winter.', twinOf: 'Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.', crisis: ['any'] }, // BAR6-SCENES (6b): its twin
     { text: () => 'A household leader hands out gifts in the open, and everyone watching keeps count.', crisis: ['any'] },
     { text: () => 'Neighbours work together to mend a roof, and nobody seems to be in charge of it.', crisis: ['any'] },
   ],
@@ -376,7 +395,8 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Smoke rises from a household oven, and a neighbour stops in to share its warmth.', crisis: ['any'] }, // BAR2-PLACES (PL1's class): no shared oven claimed, and no bread (true under a famine too, so no condition is added and no draw moves); was "Smoke rises from a shared oven, and neighbours queue to bake together."
     { text: () => 'People gather at the well, and the news of the whole place passes through it.', crisis: ['any'] },
     { text: () => 'Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.', excludes: ['crisis: hunger'], crisis: ['any'] },
-    { text: () => 'A work party heads out together, singing, with tools on their shoulders.', crisis: ['any'] },
+    { text: () => 'A work party heads out together, singing, with tools on their shoulders.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (LAW 7 rule 7d; REVIEW-WIDE-6 C94460): nobody heads out under a siege
+    { text: () => 'A work party gathers inside the defences with tools on their shoulders, to shore up whatever needs it.', twinOf: 'A work party heads out together, singing, with tools on their shoulders.', needs: ['crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (7d): its twin under the siege
   ],
   east_asian: [
     { text: () => 'A clerk records every cartload that passes in a careful ledger.', excludes: ['crisis: under_siege', 'route: isolated'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02470): no cartload passes under a siege; TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): nor where no route reaches (1 of 20)
@@ -386,7 +406,8 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Each lane seems to keep to its own trade, and each trade to its own lane.', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item F (ww-541): lanes of trades are a town's (a hamlet of 31 has a handful of houses)
   ],
   mesoamerican: [
-    { text: () => 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 15806): nothing is carried in under a siege
+    { text: () => 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege', 'route: isolated'] }, // BAR6-SCENES (LAW 7 rule 7d; REVIEW-WIDE-6 C150831): no laden file from the road where no route reaches
+    { text: () => 'Porters bent under loads from the fields file past, and someone counts them in.', twinOf: 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege'] }, // BAR6-SCENES (7d): its twin where no route reaches // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 15806): nothing is carried in under a siege
     () => 'The neighbours turn out together to sweep and mend their own street.',
     () => 'Festival banners hang above the doors, faded from one year and waiting for the next.',
     { text: () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.', needs: ['market'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #2): rows to each trade are a market's (a thorp of twelve printed it)

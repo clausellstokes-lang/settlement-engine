@@ -20,6 +20,7 @@
 import { random as _rng } from "../kernel/rngContext.js";
 import { pickRandom2 } from "./helpers.js"; /** A drawn history event of one type, by name ("this event" where none): the pool rows' own draw, in its own statement (TAIL-CLOSE-SRC-4, the chair's SR3 (a): the row keeps its declaration, the filter is read here). @param {any[]} r @param {string} type @returns {string} */ const drawnEventOfType = (r, type) => pickRandom2(r.filter((s) => s.type === type))?.name || "this event"; // one line, so no cited line moves
 import { speakTierNoun } from "../domain/display/stateProse/stateProseKernel.js";
+import { powerSentenceName } from "../domain/display/powerSentenceName.js"; // BAR6-SCENES (LAW 10 rule 10h): a power inside a sentence takes its prose form
 import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js"; import { foodStoreWord, FAILED_SOURCE_WORDS } from "./economy/foodBalance.js"; // R2-CODE-A item 1: one line, so no cited line moves
 
 // AMENDMENT B — THE CASING PASS. The ${govFaction}/${topFaction} interpolations
@@ -98,7 +99,10 @@ const famineFoodIsPower = (r) => {
  */
 const powersHeld = (r) => (typeof r.powerCount === 'number' ? r.powerCount : 0);
 
-export const PRESSURE_SENTENCES = {
+/** BAR6-SCENES (LAW 10 rule 10h; F's census): a power named inside a pressure sentence takes its prose form ("The Guard", never the
+ * roster label "Military/Guard": r2s-politically_fractured-metropolis-0); an empty name stays empty, so each slot's own fallback prints. */
+const say = (/** @type {unknown} */ n) => (n ? powerSentenceName(n) : n);
+const PRESSURE_ROWS = {
   under_siege: (r) => [
     `${r.name} is surrounded. Supply lines are cut, morale is fracturing, and ${r.govFaction || "the leadership"} is deciding whether to negotiate terms or hold out for relief that may not be coming.`, // R2-CODE-A-3 (the increment's ww-1070, ww-1225): who treats is the seat's holder (the crisis cast's treater, cast after this line), so the line names the governing power, never the first card
     { text: `The siege has entered its second week; ${r.govFaction || "the council"} controls the rationing and the gates, which means they control everything else too, for now.`, needs: ['gate'] },
@@ -121,15 +125,15 @@ export const PRESSURE_SENTENCES = {
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior local official"} is simultaneously expected to enforce the occupiers' directives and protect the people those directives are aimed at: a position that is becoming untenable.`,
     `The occupiers of ${r.name} are careful to leave the forms of local rule in place (${r.govFaction || "the council"} still meets, still signs, still presides) which fools no one and is not meant to.`,
     `Every household in ${r.name} has decided what it would do if the occupiers asked it for names, and every one of them hopes it is never asked.`,
-    `The curfew in ${r.name} is enforced unevenly, and the unevenness is the point: no one can be sure which night, or which street, or which face at the checkpoint will decide that the rules apply to them.`,
+    { text: `The curfew in ${r.name} is enforced unevenly, and the unevenness is the point: no one can be sure which night, or which street, or which face at the checkpoint will decide that the rules apply to them.`, needs: ['tier: ≥ village'] }, // BAR6-SCENES (LAW 5 widened, the size class; BRIEF-BAR6 B4): a street is a village's or larger; a smaller place resolves to the next row
   ],
   politically_fractured: (r) => [
-    `${r.name} has no effective government; ${r.topFaction || "the leading power"} controls one district and the institutions inside it, a rival controls another, and the contested space between them is where things go wrong.`,
+    { text: `${r.name} has no effective government; ${r.topFaction || "the leading power"} controls one district and the institutions inside it, a rival controls another, and the contested space between them is where things go wrong.`, needs: ['tier: ≥ town'] }, // BAR6-SCENES (LAW 5 widened, the size class; BRIEF-BAR6 B4): a district is a town's or larger; a smaller place resolves to the next row
     powersHeld(r) === 3 ? `Three powers in ${r.name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.` : powersHeld(r) > 3 ? `The powers of ${r.name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.` : `The powers of ${r.name} are each waiting for the other to slip, and meanwhile nothing gets mended and no quarrel gets settled.`, // TAIL-NARRATIVE (00338): the number only where the record holds it
     powersHeld(r) === 3 ? `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.` : `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person every power here will still speak to, which makes them either the key to resolution or the next target.`, // TAIL-NARRATIVE (01722, 01760, 01720, B01841): the number only where the record holds it
     `Nothing gets decided in ${r.name}, because any decision would hand one power a win the others will not allow, and every power prefers the deadlock to losing.`,
     { text: `${r.name} has two of everything now, two watches and two courts of a kind, and people have learned which one to ask for which favour.`, needs: ['watch'] },
-    `The last thing ${r.topFaction || "the leading power"} and its rivals agreed on in ${r.name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.`,
+    { text: `The last thing ${r.topFaction || "the leading power"} and its rivals agreed on in ${r.name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.`, needs: ['tier: ≥ village'] }, // BAR6-SCENES (LAW 5 widened, the size class; BRIEF-BAR6 B4): the streets are a village's or larger
   ],
   indebted: (r) => [
     `${r.name} owes more than it can repay; the creditor's representative arrived last month, and every civic decision since has been made with one eye on what they might accept as partial satisfaction.`,
@@ -215,13 +219,13 @@ export const PRESSURE_SENTENCES = {
     var o;
     if (r.migrationDirection === 'departures') return [
       `${r.name} is emptying by the season. The families who could leave have gone, and ${r.govFaction || "the governing authority"} is keeping the same offices running on half the hands.`,
-      `The road out of ${r.name} is busier than the road in. Shuttered houses stand on every street, and the people who stayed are counting who will go next.`,
+      { text: `The road out of ${r.name} is busier than the road in. Shuttered houses stand on every street, and the people who stayed are counting who will go next.`, needs: ['tier: ≥ village'] }, // BAR6-SCENES (LAW 5 widened, the size class; BRIEF-BAR6 B4): every street is a village's or larger
       `Every month fewer hearths are lit in ${r.name}. ${capFirst(r.govFaction) || "The governing authority"} has stopped calling it a bad season and has not yet found a word for what it is.`,
     ];
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
           // COHERENCE-PRESUME: the market was incidental and the draw never honoured its `needs` (presume-village-38)
-          `${r.name} is taking in more people than it was built for. The newcomers and the old residents share the same streets, but not a language, customs or trust, and ${r.govFaction || "the governing authority"} cannot keep up with how fast they come.`,
+          { text: `${r.name} is taking in more people than it was built for. The newcomers and the old residents share the same streets, but not a language, customs or trust, and ${r.govFaction || "the governing authority"} cannot keep up with how fast they come.`, needs: ['tier: ≥ village'] }, // BAR6-SCENES (LAW 5 widened, the size class; BRIEF-BAR6 B4): the streets are a village's or larger
           `The ${r.commodity || "trade"} that made ${r.name} worth coming to cannot keep pace with the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
           `Newcomers have built a second, poorer town at the edges of ${r.name}, and ${r.govFaction || "the governing authority"} has not decided whether it governs it; until it does, the outer town keeps its own rules.`,
         ]
@@ -254,7 +258,9 @@ export const PRESSURE_SENTENCES = {
           { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.`, needs: ['garrison', 'prosperity: ≥ comfortable'] }, // TAIL-NARRATIVE (01079): "prospering" needs a town the record calls comfortable or better
         ]
       : [
-          `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`,
+          // BAR6-SCENES (LAW 9 rule 9f; REVIEW-WIDE-6 C76517): "loyal" is refused where the public legitimacy is in crisis; the
+          // pool's own resolution (narrativeGenerator.js :: generatePressureSentence) gives the next row, draw-free, true there
+          { text: `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`, excludes: ['legitimacy crisis'] },
           `The war reaches ${r.name} as a series of demands rather than battles: levies of men, of ${r.commodity || foodStoreWord(r.foodRecord)}, of coin, each one framed as duty and none of them refusable. ${r.name} is losing people and resources it will not get back, and the front it is bleeding for is somewhere it will never see.`,
           `Every capable pair of hands ${r.name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (${r.hasWorkshop ? "a workshop closed for want of a master" : "a trade left without its master"}, a field unsown for want of a back) while ${r.govFaction || "the governing authority"} reports the settlement loyal and does not report the rest.`, // R2-CODE-A-6 (CENSUS-2 a/workshops): a workshop only where the roster holds a house of craft (genPressureDetail's hasWorkshop); a branch inside the drawn row, so no draw moves
         ];
@@ -280,6 +286,9 @@ export const PRESSURE_SENTENCES = {
     `In ${r.name} the two sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and ${r.govFaction || "the governing power"} cannot retake it without destroying what made it worth holding. What comes next will be a bargain neither wanted, struck between people who no longer pretend to be anything but enemies.`,
   ],
 };
+/** BAR6-SCENES (LAW 10 rule 10h): every stressor's rows read the powers by their prose form (`say`), the record's labels untouched. */
+export const PRESSURE_SENTENCES = Object.freeze(Object.fromEntries(Object.entries(PRESSURE_ROWS).map(([stress, rows]) => [stress,
+  (/** @type {any} */ r) => rows(r && typeof r === 'object' ? { ...r, topFaction: say(r.topFaction), govFaction: say(r.govFaction) } : r)])));
 
 // ─── Historical character flavor text (consumed by narrativeGenerator/history) ──
 // POLITICAL_FLAVOR maps history-event-type patterns to arrays of description

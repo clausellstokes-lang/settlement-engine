@@ -36,7 +36,7 @@ const MUST_NOT = [
   ['r2s-wartime-thorp-2', /routes you have never travelled/, /A broker sits in the shade, matching buyers to whatever the neighbours have to spare/],
   ['r2r-thorp-48', /records every cartload/, /A clerk records every sack and basket that comes in from the fields/],
   ['r2s-politically_fractured-town-2', /fill the carts waiting on the road out/, /Bolts of cloth and bales of wool are stacked high in the workshops/],
-  ['r2r-village-47', /herbs and spices fill the carts/, /Sacks of herbs and spices stand open in the doorways/],
+  ['r2r-village-47', /herbs and spices fill the carts/, /Bundles of drying herbs hang in the doorways/], // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): an isolated village with no spice made, sold or brought in: the spice sacks' twin holds the slot
   ['r2r-thorp-4', /a master's mark/, /An errand-runner hurries past, a household's mark stitched on his sleeve/],
   ['r2r-thorp-3', /Horse traders/, /Herders show their animals at the edge of the settlement/],
   ['r2r-thorp-57', /A moneylender sits at a low table/, /An old woman sits at a low table by her door/],

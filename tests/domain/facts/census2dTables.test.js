@@ -228,7 +228,9 @@ describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor
     // 16 -> 18 (R2-CODE-A-3, round three #40 / #4): famine[0] and famine[4] presume a common store and need a granary
     // 18 -> 21 (R2-CODE-A-6, CENSUS-2's writers): succession_void[5] needs a market, insurgency(street)[1] and slave_revolt[0] the middling band
     // 21 -> 23 (TAIL-NARRATIVE, READ-ALL 20438/20439 and 00172): monster_pressure[1] needs a force that musters, [2] the hamlet tier
-    expect(declaring).toBe(23);
+    // 23 -> 28 (BAR6-SCENES, 2026-11-16; re-keyed by identity, this batch's own count): the size rows occupied[5],
+    // politically_fractured[0] and [5], mass_migration(strongeconomy)[0] (`tier`), and wartime(losing)[0] (`legitimacy crisis`)
+    expect(declaring).toBe(28);
   });
 });
 

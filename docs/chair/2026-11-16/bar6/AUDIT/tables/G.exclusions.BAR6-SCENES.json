@@ -1,0 +1,72 @@
+[
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.",
+  "reason": "office (word sense): \"judge it out loud\" is to appraise the piece; the line names no judge and no office"
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "A poet holds a small crowd by the well, and nobody hurries the telling along.",
+  "reason": "ease: a story told to a few neighbours holds in a hard year too; REVIEW-WIDE-6 judged the line WEAK (tone), and no crisis of the record makes a telling false"
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.",
+  "reason": "goods (word sense): household stores laid in by every house, not a traded good; the plenty a famine denies is already excluded (`crisis: hunger`)"
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "A clerk records every cartload that passes in a careful ledger.",
+  "reason": "goods (word sense): the cartload is the road's own traffic, which the line's `crisis: under_siege` and `route: isolated` exclusions answer (its twin keeps the slot where no route reaches); it names no good"
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "A cook at a doorway mixes the spices of two different homelands into one pot.",
+  "reason": "goods (word sense): a household pot in a town of two homelands, the cook's own spices; no good on sale is shown"
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "A shopkeeper hands a fat purse to a man who is plainly not a tax collector, and does not argue.",
+  "reason": "office (negated): \"plainly not a tax collector\" names no office; the pool is the criminal-governance tension, drawn only where the safety label names it"
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "Pilgrim badges are nailed above doorways, collected over years.",
+  "reason": "outside: a memory of years past (ARRIVAL_MEMORIES.pilgrimage_surge, \"collected over years\"), true under any crisis; no pilgrim is said to pass now"
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "The road in is worn smooth by pilgrim feet.",
+  "reason": "outside: a memory of years past (ARRIVAL_MEMORIES.pilgrimage_surge), the wear of the road, true under any crisis; no pilgrim is said to pass now"
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "text": "People here still talk about the years when the caravans stopped coming.",
+  "reason": "outside: a memory of the trade collapse (ARRIVAL_MEMORIES.trade_collapse), true under any crisis; it says the caravans stopped"
+ },
+ {
+  "file": "src/generators/narrativeText.js",
+  "text": "The betrayal cost … something specific (a contract, a caravan, a name that vouched for the place), and the loss of it is only now working its way through the ledgers, arriving as bad news that seems, wrongly, unrelated.",
+  "reason": "outside: the crisis line states its own fact (BRIEF-BAR4 \"The measure's own rules\" 2): the caravan is one example of what the betrayal cost, not a route said to be open now"
+ },
+ {
+  "file": "src/generators/narrativeText.js",
+  "text": "The road out of … is busier than the road in. Shuttered houses stand on every street, and the people who stayed are counting who will go next.",
+  "reason": "outside, goods: the departures' own movement (drawn only under mass_migration with `migrationDirection` departures): \"the road out\" is the leaving, not trade, and no good is named; its size word is declared (`tier: ≥ village`)"
+ },
+ {
+  "file": "src/generators/narrativeText.js",
+  "text": "The road into … is busier than the road out, and both are watched. By …, which can neither turn people away nor find them all work, and by the old residents, who are keeping a private account of who arrived.",
+  "reason": "outside, goods: the arrivals' own movement (drawn only under mass_migration with arrivals): \"the road into\" is the coming, not trade, and no good is named"
+ },
+ {
+  "file": "src/generators/narrativeText.js",
+  "text": "The … is why this settlement has walls where others do not, why the militia drills when other villages have forgotten how, and why certain paths through the surrounding territory are still considered inadvisable",
+  "reason": "office: the file's own measure (POLITICAL_FLAVOR's header, CENSUS-2e): the branch is a monster incursion's, printed in 0 of 1,000 births, both facts true on the final record wherever it could print"
+ },
+ {
+  "file": "src/generators/narrativeText.js",
+  "text": "No dramatic history here, only a long steady one, and travellers remember the place kindly",
+  "reason": "outside: the `stable` pool is crisis-scoped (`POLITICAL_FLAVOR_CRISIS_SCOPED`): its calm lines are refused under every crisis, so travellers remember a calm town"
+ }
+]

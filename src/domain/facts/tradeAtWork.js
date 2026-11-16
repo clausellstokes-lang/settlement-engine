@@ -26,12 +26,28 @@
  * ("no fresh pots", "the clamps stand cold") prints in a town that has no such house; true where one stands and is not
  * short; false where every one is short. `trade at work: kilns` keeps its reading for the lines any kiln answers.
  *
+ * THE GOOD A SCENE SHOWS (BAR6-SCENES, LAW 6 rule 6b, 2026-11-16; BRIEF-BAR6 seat BAR6-SCENES (a); amendment 5b: keys
+ * beside the trades, vetoable by the owner, on the veto list as new vocabulary). The arrival sense pools are opened by a
+ * loose match on a house's name ("Common grazing land" opens the butter scene; "Mine (open cast)" the chisels; an income
+ * share "Spice" nowhere), so a line that shows a GOOD declares the good itself: `trade at work: <good>` (`GOOD_TRADES`)
+ * is read from the page's own lists: a house that makes the good stands on the live roster and is not short, or the
+ * economy's Produced locally or Exports name the good; a good the town buys in (`imported`: the spices) counts while
+ * no siege holds the road. The chisels are the stone CUTTERS' (`cut stone`: a quarry, a mason, a stonecutter; a mine
+ * digs, it does not dress stone: bar0-hamlet-calm-rand-32 printed "The chink of chisels on stone" beside "No one here
+ * works the stone"). `enchanting` is a working chain whose outputs name enchanting, or an export that does: the page's
+ * own flows (bar0-city-under_siege+famine-rand-39 printed "Nobody in Kallipolis sells enchanting" beside an operational
+ * Spellcasting chain).
+ *
  * Layer 2 (over the roster, the resources and the economy). Pure: no randomness, no clock, no write.
  * @enforced-by tests/generators/bar4ScenePresumption.test.js
+ * @enforced-by tests/domain/bar6ScenesGoods.test.js
  */
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { housesShortOf } from './houseInputAtHand.js';
+import { canonExports, canonImports } from '../canonicalAccessors.js';
+import { crisisOf } from './crisisKind.js';
+import { WORKING_CHAIN_STATUSES } from './chainWorking.js';
 
 /** The arrival picker's house words, by trade (a copy of `ARRIVAL_SENSES[].institutions`, pinned). */
 export const TRADE_HOUSES = Object.freeze({
@@ -47,8 +63,65 @@ export const KILN_KINDS = Object.freeze({
   'charcoal kilns': Object.freeze(['charcoal']),
 });
 
+/**
+ * BAR6-SCENES (LAW 6 rule 6b): the goods a scene shows, each with the houses that make it (`houses`, the picker's
+ * word-start rule), the words the economy's lists name it by (`listed`), and whether a good bought in counts
+ * (`imported`, while no siege holds the road). A good with no `listed` words is read from its houses alone.
+ * @type {Readonly<Record<string, Readonly<{ houses: ReadonlyArray<string>, listed?: RegExp, imported?: boolean, chains?: RegExp }>>>}
+ */
+export const GOOD_TRADES = Object.freeze({
+  // the butter churn: a house that keeps milk animals, or a dairy good made or sold (not "Common grazing land")
+  dairy: Object.freeze({ houses: Object.freeze(['dairy', 'cheese', 'cattle', 'cow', 'goat', 'herd', 'shepherd', 'livestock']), listed: /\b(dairy|butter|cheese|milk)\b/i }),
+  // the loom, the dye vats and the fulling stocks: a house that makes cloth (a tailor or a draper sews or sells it)
+  cloth: Object.freeze({ houses: Object.freeze(['weaver', 'weavers', 'textile', 'fuller', 'dyer']), listed: /\b(cloth|textiles?|linen|silk)\b/i }),
+  // the forge at work: a smith's house with its iron (the mark "Short of iron." is the page's own)
+  forge: Object.freeze({ houses: Object.freeze(['blacksmith', 'smith', 'smelter', 'foundry', 'armourer', 'armorer', 'weaponsmith', 'bladesmith', 'metalworker', 'specialized metalworker']) }),
+  // drying herbs: a house that dries or doses them, or herbs gathered, made or sold
+  herbs: Object.freeze({ houses: Object.freeze(['apothecary', 'herbalist', 'physician', 'healer']), listed: /\b(herbs?|herbal|medicinal|remed\w*)\b/i }),
+  // spice in sacks and on the stalls: a spice house, spice made or sold, or spice brought in while the road is open
+  spice: Object.freeze({ houses: Object.freeze(['spice']), listed: /\bspices?\b/i, imported: true }),
+  // chisels on stone: the stone's cutters (a mine digs; it does not dress stone)
+  'cut stone': Object.freeze({ houses: Object.freeze(['quarry', 'stone quarry', 'mason', 'stonecutter']) }),
+  // enchanting sold: a working chain whose outputs name it, or an export that does (the page's own flows)
+  enchanting: Object.freeze({ houses: Object.freeze([]), listed: /\benchant/i, chains: /\benchant/i }),
+});
+
 /** A word at a word start of a name (the picker's rule). @param {string} word @param {string} name */
 const atWordStart = (word, name) => new RegExp(`(^|[^a-z])${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(name);
+
+/** @param {unknown} v @returns {unknown[]} */
+const arr = (v) => (Array.isArray(v) ? v : []);
+/** @param {unknown} x @returns {string} a list item's own words */
+const itemText = (x) => (typeof x === 'string' ? x : String(/** @type {{ name?: unknown, good?: unknown, source?: unknown }} */ (x)?.name
+  ?? /** @type {{ good?: unknown }} */ (x)?.good ?? /** @type {{ source?: unknown }} */ (x)?.source ?? ''));
+
+/**
+ * BAR6-SCENES: a good of `GOOD_TRADES` at work (see the header).
+ * @param {object} record @param {Readonly<{ houses: ReadonlyArray<string>, listed?: RegExp, imported?: boolean, chains?: RegExp }>} good
+ * @returns {boolean}
+ */
+function goodAtWork(record, good) {
+  const r = /** @type {{ economicState?: { localProduction?: unknown, activeChains?: unknown } | null }} */ (record);
+  if (good.houses.length) {
+    const short = housesShortOf(record);
+    const makers = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)).filter((inst) => {
+      const name = String(nativeSemanticName(/** @type {object} */ (inst)) || /** @type {{ name?: unknown }} */ (inst)?.name || '').toLowerCase();
+      return !name.startsWith('access to') && good.houses.some((w) => atWordStart(w, name));
+    });
+    if (makers.some((h) => !short.has(String(/** @type {{ name?: unknown }} */ (h)?.name ?? '')))) return true;
+  }
+  const listed = good.listed;
+  if (listed && [...arr(r?.economicState?.localProduction), ...arr(canonExports(r))].some((x) => listed.test(itemText(x)))) return true;
+  if (listed && good.imported && !crisisOf(record).has('under_siege') && arr(canonImports(r)).some((x) => listed.test(itemText(x)))) return true;
+  const chains = good.chains;
+  if (chains) {
+    return arr(r?.economicState?.activeChains).some((c) => {
+      const chain = /** @type {{ status?: unknown, outputs?: unknown }} */ (c);
+      return WORKING_CHAIN_STATUSES.includes(String(chain?.status)) && arr(chain?.outputs).some((o) => chains.test(itemText(o)));
+    });
+  }
+  return false;
+}
 
 /**
  * THE ONE READER of `trade at work: <key>`.
@@ -58,7 +131,9 @@ const atWordStart = (word, name) => new RegExp(`(^|[^a-z])${word.replace(/[.*+?^
  */
 export function tradeAtWorkOf(record, key) {
   if (!record || typeof record !== 'object') return undefined;
-  const kind = /** @type {Record<string, ReadonlyArray<string>>} */ (KILN_KINDS)[key];
+  const good = Object.prototype.hasOwnProperty.call(GOOD_TRADES, key) ? /** @type {Record<string, Parameters<typeof goodAtWork>[1]>} */ (GOOD_TRADES)[key] : undefined;
+  if (good) return goodAtWork(record, good); // BAR6-SCENES (6b): the good itself, from the page's own lists
+  const kind =/** @type {Record<string, ReadonlyArray<string>>} */ (KILN_KINDS)[key];
   const words = kind ?? /** @type {Record<string, ReadonlyArray<string>>} */ (TRADE_HOUSES)[key];
   if (!words) return undefined;
   const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)).filter((inst) => {

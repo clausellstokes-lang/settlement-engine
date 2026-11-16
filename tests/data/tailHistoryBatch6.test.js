@@ -75,7 +75,7 @@ const MUST_NOT = [
   ['r2s-under_siege-city-8', /A money changer sits at his table with coins from many mints/, /A money changer sits at his table with little to do, counting the same coins from many mints again\./],
   ['r2s-under_siege-metropolis-43', /A money changer sits at his table with coins from many mints/, /A money changer sits at his table with little to do/],
   ['r2s-under_siege-town-8', /The clatter of looms follows you/, /Here and there a loom still clatters behind a shutter in .+, though no cloth has gone out in weeks\./],
-  ['r2s-under_siege-metropolis-67', /The clatter of looms follows you/, /Here and there a loom still clatters behind a shutter/],
+  ['r2s-under_siege-metropolis-67', /The clatter of looms follows you/, /Bolts of cloth and bales of wool are stacked high in the workshops/], // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): the first draw is the road out, refused by the siege; its twin now keeps the slot where cloth is made (it was held to an isolated route), so no redraw lands on the looms
   ['r2s-under_siege-thorp-1', /creditor's agent is in town/i, SILENT, 'r2r-thorp-28'],
   ['r2r-thorp-0', /Price ceilings on the affected goods/, /In lean seasons the affected goods are still shared out by agreement, not sold to whoever pays most/],
   ['r2r-hamlet-16', /Price ceilings on the affected goods/, /In lean seasons the affected goods are still shared out by agreement/],

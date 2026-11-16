@@ -221,7 +221,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
- * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
+ * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
  * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
@@ -349,7 +349,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // BAR5-THINGS (LAW 4 "the kilns"; BRIEF-BAR5; amendment 5b; vetoable by the owner, on the veto list as new vocabulary): the
   // kiln trade split by what its kilns fire, beside `kilns`: `clay kilns` (a potter, a brickmaker) and `charcoal kilns` (a
   // charcoal burner), each unanswered where no house of its kind stands (`tradeAtWork.js :: KILN_KINDS`)
-  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane'],
+  // BAR6-SCENES (LAW 6 rule 6b; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary): the GOODS a scene
+  // shows, beside the trades: `dairy`, `cloth`, `forge`, `herbs`, `spice`, `cut stone`, `enchanting`, each read from the page's
+  // own lists (`tradeAtWork.js :: GOOD_TRADES`): "Someone is churning butter" beside "Common grazing land" and no dairy
+  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'forge', 'herbs', 'spice', 'cut stone', 'enchanting'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.tradeAtWork === 'function' && key ? f.tradeAtWork(key) : undefined) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
   // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
@@ -422,11 +425,20 @@ export const FACT_DIMENSIONS = Object.freeze({
   'own plots': dim({ shape: 'presence', home: 'ownPlots', reader: (/** @type {FactsLike} */ f) => bool(f.ownPlots) }),
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
+  // BAR6-SCENES (LAW 6 rule 6b "out"; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beneath
+  // `exports`: `exported: <good>`, the export list names the good a scene sends out (`goodExported.js`): "Bolts of cloth and
+  // bales of wool fill the carts waiting on the road out." beside exports that carry no cloth (bar0-city-wartime-rand-27)
+  exported: dim({ shape: 'presence', home: 'goodExported', keys: ['cloth', 'flour', 'hides', 'ale', 'pots', 'arms'],
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.goodExported === 'function' && key ? f.goodExported(key) : undefined) }),
   culture: dim({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.culture === undefined ? undefined : f.culture === key) }),
   // ── keyed presence: one value of a categorical fact ──
   ruler: dim({ shape: 'presence', home: 'rulerKind', keys: RULER_WORDS,
     reader: (f, key) => (f.rulerKind === undefined ? undefined : f.rulerKind === key) }),
+  // BAR6-SCENES (LAW 9 rule 9f; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beneath `ruler`:
+  // `legitimacy crisis`, the public legitimacy in its crisis band (`legitimacyCrisis.js`). "The settlement is loyal." presumes
+  // its absence (REVIEW-WIDE-6 C76517)
+  'legitimacy crisis': dim({ shape: 'presence', home: 'legitimacyCrisis', reader: (/** @type {FactsLike} */ f) => bool(f.legitimacyCrisis) }),
   war: dim({ shape: 'presence', home: 'warState', keys: WAR_WORDS,
     reader: (f, key) => (typeof f.warState === 'string' ? f.warState === key : undefined) }),
   migration: dim({ shape: 'presence', home: 'migration', keys: MIGRATION_WORDS,
