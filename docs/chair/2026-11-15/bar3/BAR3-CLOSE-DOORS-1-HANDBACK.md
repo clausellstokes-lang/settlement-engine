@@ -6,7 +6,7 @@ file there; a second tree at the line's closed tip 83fc14ad6 (a detached worktre
 identical, `node_modules` linked) for PM1's cause. No page line cured, no test written, skipped or weakened. Part 2
 (the signed golden door) is not this seat's.
 
-STATUS: **PART 1 IN PROGRESS** (this file is current at every push).
+STATUS: **PART 1 DONE BUT 1g's COMMIT** (held on a law red the chair owns: bootSmoke). This file is current at every push.
 
 ## 1a · THE LIST (each file alone at 98363cb84, `npx vitest run <file>` through `scripts/gate-tail.sh`, one log a file, a TSV)
 
@@ -62,6 +62,8 @@ each read from their own messages and none is of that kind (no other red arm nam
 | 1d | tailHistoryBatch4's KEEP | the row's address, dated note | the broker refused in r2r-thorp-43 (BAR3-PLACES) | r2r-thorp-43 -> r2s-monster_pressure-city-0, the branch's own KEEP town for that line (`bar3PlacesRows.test.js`) | 5869f595c | 2/2 |
 | 1d | lighting census | `LIGHTING_CENSUS_REFREEZE='BAR3-CLOSE-DOORS-1' LIGHTING_CENSUS_NOTE='…' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` on the clean committed tree, then without | files 3619 -> 3631 | files 3619 -> 3631 (the twelve guard files the seven branches added; none deleted), parked 460 -> 465, credited 3159 -> 3166, titles 30557 -> 30599, suiteTitles 8428 -> 8440; no [POPULATION_GREW] | fccd6adb8 | 34/34 |
 | 1e | the manifest's owed entries | `scripts/mutation-coverage-manifest.json`'s own form, kind 'rationale', after the bar2 siblings; never as uncovered | the five the seats named | exactly the five the walker printed: bar3PeopleTies, bar3PeoplePowers, bar3People2Rows, bar3PlacesRows, bar3PowersLines, each from its seat's "kills" line and its header | b3d98e87a | 10/10; the manifest's readers alone: 12 green, two bundles' freshness red (1f), newsHeadlineContract and proseFamilyContract red on arms that read no line of the manifest (below) |
+| 1f | edge bundles | `npm run build:edge-shared` at the merged tree | the engine bundle and the AI bundles stale against src/ | engineBundle js + meta (sourceHash 5048adb0 -> c16d8d30, engineVersion e6f14278 -> bb4d5a82, 398 inputs, the list unchanged); aiCharter (27695b70 -> 314d06eb), aiGrounding (f3a894bc -> 8fb89934), aiOutputSchema (c8272d48 -> a6462d2a) js + meta, input lists unchanged; analyticsEvents and intentAtlas metas restamped only. Cause: the round's source in the bundles' inputs, as a whole | 9d7c7fbc5 | all 21 files that read a bundle green alone (engineBundleReplay 5 + 2 skipped: its golden and fence arms, while the golden is stale: Part 2); `npm run validate:edge` exit 0 |
+| 1g | size ceilings (B3) | one `npm run build`; `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js`; the same at 83fc14ad6 (a scratch worktree, `node_modules` linked, lockfile identical: 66/66, its figures equal the old ceilings exactly) | five ceilings red, all under +60,000 | MEASURED, **HELD AS A PATCH, NOT COMMITTED** (the law red below may move chunk bytes): worker 2,312,179 -> 2,322,103 (+9,924; customContentPreview.worker the same +9,924); engine chunk 872,757 -> 878,204 (+5,447; the strict bound 872,758 -> 878,205); first paint raw 1,131,667 -> 1,131,858 (+191: data +120, index +60, engine-core +11), gzip 360,516 -> 360,590 (+74), Brotli 302,753 -> 302,817 (+64). Cause: the seven branches and the sweep seat's leaf as a whole; no vite.config.js, package.json or lockfile byte moved. With the patch applied: 66/66; the goods roster walker printed no row (nothing owed) | — | `npm run verify:dist` exit 1: bootSmoke FAILED (the law red below); engineBundleReplay's two rows SKIPPED (Part 2). Build output removed from both trees |
 
 ## LAW REDS AND STOPS SENT TO THE CHAIR
 
@@ -76,15 +78,36 @@ each read from their own messages and none is of that kind (no other red arm nam
   `tests/lint/proseFamilyContract.walker.test.js` A1, A3, A5 (scalarRows 38121 -> 38127; identities 60 -> 64; the pulse
   history's records). Both freeze the world pulse's AO-0 corpus. By my reading, the same moved draws as WR2; not
   traced. Sent 00:2x UTC for the chair's class and word. OPEN.
+- **bootSmoke (law)**: `tests/build/bootSmoke.test.js` (through `npm run verify:dist`): `scripts/boot-smoke.mjs` STAGE 1,
+  "the chunk graph has a CYCLE of 2 chunks": coherence-lazy <-> data-lazy. RED AT 98363cb84 ITSELF (built alone: the same
+  chunk hashes); 83fc14ad6 PASSES (602 chunks). The new edge: data-lazy (`src/data/npcData.js :: closureFor`) imports
+  `sharesPower` from `src/domain/facts/sharedPower.js`, which the build places in coherence-lazy, and coherence-lazy
+  already imports from data-lazy: BAR3-PEOPLE batch 1's declared new import (aef83b4b5). Untouched. Sent 00:3x UTC. OPEN.
 
 ## FOR THE OWNER, IN PLAIN WORDS
 
 - Style (PM1): two variants of one pool now open alike: the defence's supply line under a short chain (DS-DEF-2
   `CHAIN: defence short`), v1 "The trades that feed and equip <town>'s defenders are not on a sure footing, …" and
   v2, which also opens "The trades …". For the remainder list.
+- The round's registers and counts are re-taken, each by its own door and with its cause named (the list above). Where a
+  figure moved for a reason no branch had written down, I stopped and the chair ruled first.
+- ONE REAL FAULT FOUND IN THE BUILD: the built app at the joined line has two lazily loaded code chunks that import each
+  other. The boot check refuses such a bundle, because it may fail to start in a browser. It came from one new import in the
+  people branch. It is not mine to cure; the chair seats the cure. The size ceilings are measured (each rise a few
+  kilobytes at most) and wait for that cure before they are recorded.
+- Part 2, the signed golden record, is not taken here: the files that wait for it are listed under FOR PART 2.
 
 ## WHAT IS LEFT, IN ORDER
 
-1. 1f: `npm run build:edge-shared` (the merge is in), its own commit if a bundle moves; `tests/build/engineBundleReplay.test.js`, `npm run validate:edge`, every bundle reader.
-2. 1g: one `npm run build`; `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js`; 83fc14ad6 built too for the cause; the goods roster only from a row the walker prints; build output removed.
-3. The chair's words on the OPEN rows above.
+1. 1g's commit, on the chair's word: apply the held patch (the scratch directory's `1g-held.patch`, the five figures
+   above, in each file's own form) once the boot-smoke cycle's cure is in, or now; if the cure moves a chunk, re-measure
+   the five first (one build of the cured tree) and record those instead, once.
+2. The chair's words on the OPEN rows above (tieProseDeclared's count; the two world-pulse contracts; bootSmoke).
+
+## FOR PART 2 (class G, red at this tip: they read the golden corpus or a figure derived from it)
+
+generatorGoldenMaster (A: the 525), pipelinePinnedMode (3 arms), pipelinePinnedChoosers, powerEconomyFreshness,
+rosterFinalUnderHeldRoster, nameHeldThroughAssembly, generationForkCensus A1 (the control row), dmLayerGoldenIsolation,
+worldFactRederive, editWorldFactResources (2 arms), x46NpcBand, institutionBudgetPromise, espionageDormancyFence (the
+driven digest), dossierProseManifest (the drift arm, 544 rows); and engineBundleReplay's two skipped arms (the golden, the
+fence), which arm themselves when those are re-recorded. townCartographyCalibration and presetLightingWitness are green.
