@@ -1,0 +1,6 @@
+{"id":"C38889","town":"bar0-town-occupied-rand-26","sev":"MED","kind":"PAIR","why":"says no rival outweighs Church Council; GOVERNMENT has Occupation Authority Strong over Council Significant, and page says nothing is settled without occupiers' approval","other":"C38840"}
+{"id":"C39734","town":"bar0-village-calm-rand-24","sev":"MED","kind":"LACKS","why":"describes an armed patrol of able-bodied residents as Military Party's arm; DEFENCE gives militia none, watch none, garrison none","other":""}
+{"id":"C39978","town":"bar0-village-calm-rand-24","sev":"LOW","kind":"STATE","why":"says Eadgyth Becker brings the votes and the alliance won every vote; PEOPLE shows her sitting on no power","other":""}
+{"id":"C39999","town":"bar0-village-calm-rand-24","sev":"MED","kind":"PAIR","why":"village is 58 years old; says old buildings patched and nothing new goes up, but the history says everything looks recently built, most of it was","other":"C40017"}
+{"id":"C39186","town":"bar0-town-occupied-rand-26","sev":"LOW","kind":"STATE","why":"says refusing would cost the alliance its majority; Rutilius Geta sits on no power per PEOPLE","other":""}
+{"id":"DONE","lines":1728,"blocks":2,"flags":5}
