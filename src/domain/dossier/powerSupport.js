@@ -219,7 +219,6 @@ export function houseBacksOf(settlement) {
     if (edit.kind === 'institution' && edit.path === 'backs' && edit.record) authoredBacks.set(edit.entityIndex, edit.record.value);
   }
 
-  const seatHouse = ruler ? seatHouseName(institutions) : null; // BAR6-POWERS (10f-backs): the ruler's own house
   for (let index = 0; index < institutions.length; index += 1) {
     const inst = institutions[index];
     const key = String(inst?.name || '');
@@ -276,14 +275,33 @@ export function houseBacksOf(settlement) {
     // works outside the seat's law, not under it (a criminal ruler takes its houses above, as its kind's leader).
     if (list.length === 0 && ruler && !isCriminalInstitution(inst)) list.push({ faction: ruler, basis: 'default', why: DEFAULT_BASIS, share: 0, weight });
     list.sort((x, y) => y.share - x.share || BASIS_RANK[x.basis] - BASIS_RANK[y.basis]);
-    // BAR6-POWERS (LAW 10f-backs, the audit's C102099; the chair's 10/d): THE RULER'S OWN SEAT BACKS THE RULER ONLY. The seat's
-    // house (`seatHouseName`, the Government shelf's first) landed its catalogue shares on the ruler AND on the leader of each
-    // other archetype it names ("Backs · Craft Guilds · Grand Guild Consortium" beside the two in high quarrel): the house the
-    // ruler sits in takes its whole weight to the ruler, in the ruler's landing. The DM's word and a founding mark stand above.
-    const own = key === seatHouse ? list.find((b) => b.faction === ruler) : undefined;
-    if (own && list.length > 1) list.splice(0, list.length, { ...own, share: list.reduce((sum, b) => sum + b.share, 0) });
     byHouse.set(key, list);
   }
+  return byHouse;
+}
+
+/**
+ * THE POWERS EACH HOUSE STANDS BEHIND, AS THE PAGE PRINTS THEM (BAR6-POWERS, LAW 10f-backs, the audit's C102099; the brief
+ * BAR6's fact (d), a reading at print): `houseBacksOf` with ONE reading more, THE RULER'S OWN SEAT BACKS THE RULER ONLY. The
+ * seat's house (`seatHouseName`, the Government shelf's first) lands its catalogue shares on the ruler AND on the leader of each
+ * other archetype its row names, so the page printed "Backs · Craft Guilds · Grand Guild Consortium" beside the two powers'
+ * high quarrel (28 towns of the census's 720 at 600b7683a). Here the house the ruler sits in takes its whole weight to the
+ * ruler, in the ruler's own landing; the DM's word and a founding mark stand as written.
+ * ⛔ PRINT ONLY. `houseBacksOf` stays the birth's arithmetic: `generators/people/castPowers.js` (the memberships) and
+ * `generators/power/rulerKin.js` deal the cast from it, so a change there re-draws people and ties (measured on the wide
+ * read's 150: 50 towns moved). The page's readers read this one.
+ * @param {SupportSettlement} settlement
+ * @returns {Map<string, HouseBack[]>}
+ */
+export function houseBacksShownOf(settlement) {
+  const byHouse = houseBacksOf(settlement);
+  const institutions = settlement?.institutions;
+  const ruler = Array.isArray(settlement?.powerStructure?.factions) ? powerIndex(settlement).ruler : null;
+  const seat = ruler && Array.isArray(institutions) ? seatHouseName(institutions) : null;
+  const list = seat ? byHouse.get(seat) : undefined;
+  const own = list ? list.find((b) => b.faction === ruler) : undefined;
+  if (!list || !own || list.length < 2 || list.some((b) => b.basis === 'authored' || b.basis === 'founded')) return byHouse;
+  byHouse.set(/** @type {string} */ (seat), [{ ...own, share: list.reduce((sum, b) => sum + b.share, 0) }]);
   return byHouse;
 }
 
@@ -523,7 +541,7 @@ export function deriveFactionSupport(settlement) {
     const key = nameOf(f);
     if (key && !byFaction.has(key)) byFaction.set(key, []);
   }
-  const backs = houseBacksOf(settlement);
+  const backs = houseBacksShownOf(settlement); // BAR6-POWERS (10f-backs): the page's reading
   for (const inst of institutions) {
     const name = String(inst?.name || '');
     for (const back of backs.get(name) || []) {
@@ -550,7 +568,7 @@ export function deriveFactionSupport(settlement) {
 export function institutionBackers(settlement) {
   /** @type {Map<string, string[]>} */
   const byInstitution = new Map();
-  for (const [name, list] of houseBacksOf(settlement)) {
+  for (const [name, list] of houseBacksShownOf(settlement)) { // BAR6-POWERS (10f-backs): the page's reading
     if (list.length) byInstitution.set(name, list.map((b) => b.faction));
   }
   return byInstitution;
