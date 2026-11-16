@@ -1,0 +1,18 @@
+{"id":"C40086","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD word is Secure (grown 92%, deficit 2%, stores 2.4 months)","other":""}
+{"id":"C40094","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"names miller vs largest farming household dispute; QUARRELS none, TENSIONS only generational divide, not in PAST","other":""}
+{"id":"C40116","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"prints Food Pressured; FOOD word is Secure","other":"C40086"}
+{"id":"C40276","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"says a bad season in one source leaves no one hungry; C40270 says a bad season would leave some households short","other":"C40270"}
+{"id":"C40320","town":"bar0-village-calm-rand-25","sev":"LOW","kind":"BROKEN","why":"'Weak defences has left': subject and verb do not agree","other":""}
+{"id":"C40408","town":"bar0-village-calm-rand-25","sev":"LOW","kind":"LACKS","why":"'few streets to avoid' in a village of 186; streets presume a built-up place the size does not hold","other":""}
+{"id":"C40444","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"says nothing structural depends on arcane work; C40438 prints Reliance on magic: Present with economic, medical, infrastructure roles common","other":"C40438"}
+{"id":"C40573","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"Daily Life prints Food Pressured; FOOD word is Secure","other":""}
+{"id":"C40647","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"Tonight sheet prints Food Pressured; FOOD word is Secure","other":"C40086"}
+{"id":"C40682","town":"bar0-village-calm-rand-26","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD word is Secure (grown 88%, imports 8%, gap 1%)","other":""}
+{"id":"C40718","town":"bar0-village-calm-rand-26","sev":"MED","kind":"STATE","why":"prints Food Pressured; FOOD word is Secure","other":"C40682"}
+{"id":"C41069","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"BROKEN","why":"'Weak defences keeps': subject and verb do not agree","other":""}
+{"id":"C41094","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"STATE","why":"calls Merchant Guilds a 'Dominant commercial class'; GOVERNMENT gives them Significant, and C41095 puts them in the council's shadow","other":"C41095"}
+{"id":"C41186","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"LACKS","why":"'few streets to avoid' in a village of 275; streets presume a built-up place the size does not hold","other":""}
+{"id":"C41304","town":"bar0-village-calm-rand-26","sev":"MED","kind":"STATE","why":"fishmonger keeps 'the best of the catch'; LAND gap says it lacks access to fish and C41057 says no fish reaches it","other":"C41057"}
+{"id":"C41429","town":"bar0-village-calm-rand-26","sev":"MED","kind":"STATE","why":"Daily Life prints Food Pressured; FOOD word is Secure","other":"C40682"}
+{"id":"C41526","town":"bar0-village-calm-rand-26","sev":"MED","kind":"STATE","why":"Tonight sheet prints Food Pressured; FOOD word is Secure","other":"C40682"}
+{"id":"DONE","lines":1548,"blocks":2,"flags":17}
