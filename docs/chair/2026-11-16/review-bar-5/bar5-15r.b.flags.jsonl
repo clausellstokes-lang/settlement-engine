@@ -1,0 +1,4 @@
+{"id":"C35329","town":"bar0-town-calm-rand-26","sev":"LOW","kind":"STATE","why":"Arcane Orders (13) called close enough to the two above (Thieves' 21, Arcane Council 54); the page's own scores put it far below the Council.","other":""}
+{"id":"C35303","town":"bar0-town-calm-rand-26","sev":"LOW","kind":"PAIR","why":"merchants murdered, guard idle, but the syndicate 'stamps out random violence' and 'puts down any violence that would bring the law' (C35449, C35469).","other":"C35449"}
+{"id":"C35627","town":"bar0-town-calm-rand-26","sev":"MED","kind":"PAIR","why":"Corvus Gallus's guild 'hold is secure and its say is real'; GOVERNMENT has Merchant Guilds Suppressed and C35416 says they have little say in running the place.","other":"C35416"}
+{"id":"DONE","lines":1704,"blocks":1,"flags":3}
