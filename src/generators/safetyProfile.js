@@ -635,11 +635,11 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       'Enforcement authorities paying for information about non-compliant households. Neighbour reporting on neighbour. Some reports are sincere. Many are settled scores.');
   }
   if (hasStress('wartime')) {
-    // TAIL-DEFECON (#18752 #11777 #21987 #03039 #B27552): no crown contracts, inspectors, industry or wealthy families in a thorp or a hamlet
+    // BAR6-CRIME (the chair's SV1): the army's contracts, no crown named. TAIL-DEFECON (#18752 #11777 #21987 #03039 #B27552): no crown contracts, inspectors, industry or wealthy families in a thorp or a hamlet
     // TAIL-DISPLAY-CIVIC-3 V3: a place with no trade route sells nothing to an army's buyers (r2s-wartime-thorp-2: isolated, no
     // exports, no imports); the deserters' food is settled against the food record at assembly (settleCrimeLinesToSignal)
     if (config.tradeRouteAccess !== 'isolated') addCrimeIfMissing('war profiteering', tiny ? "Whatever the army's buyers will take is sold to them dear, and not all of it is as sound as it is said to be."
-      : "Suppliers adulterating grain and leather sold to crown contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.");
+      : "Suppliers adulterating grain and leather sold to the army's contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.");
     addCrimeIfMissing('deserter networks', tiny ? DESERTERS_FED_TINY : DESERTERS_FED);
     if (!tiny) addCrimeIfMissing('conscription fraud',
       'Wealthy families paying poorer ones to send sons in their place. The practice is illegal, widespread, and poorly enforced. It concentrates the actual dying in specific households.');

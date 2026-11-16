@@ -186,8 +186,8 @@
  },
  {
   "file": "src/generators/safetyProfile.js",
-  "text": "Suppliers adulterating grain and leather sold to crown contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.",
-  "reason": "branch-bound: war profiteering under a war and a trade route; the crown is the war's realm (the chair's SV1: a war supplies the realm's crown), the grain and leather the army's contracts"
+  "text": "Suppliers adulterating grain and leather sold to the army's contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.",
+  "reason": "branch-bound: war profiteering, drawn only under a war and a trade route: the grain and leather are the army's contracts (named no crown: SV1), not a claim of the town's own output"
  },
  {
   "file": "src/generators/safetyProfile.js",

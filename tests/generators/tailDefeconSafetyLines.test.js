@@ -50,7 +50,8 @@ const GONE = [
   ['05801', 'r2s-under_siege-thorp-2', 'Controlled goods (grain, salt, preserved meat)', "What food there is goes to whoever can pay the holder's price."],
   ['18708', 'r2s-insurgency-thorp-2', 'insurgent supporters and those who keep order', "Confrontations between the rebels' supporters and those loyal to the current authority."],
   ['16495', 'r2s-religious_conversion-thorp-0', 'Religious buildings, land, and endowments', SILENT],
-  ['18752', 'r2s-wartime-thorp-3', 'Suppliers adulterating grain and leather sold to crown contracts', 'Deserters passing through need food and discretion, and some here give both.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: an isolated thorp sells nothing to an army's buyers
+  // BAR6-CRIME, 2026-11-16 (the chair's SV1): re-keyed by identity to its cure's words (the army's contracts, no crown named)
+  ['18752', 'r2s-wartime-thorp-3', "Suppliers adulterating grain and leather sold to the army's contracts", 'Deserters passing through need food and discretion, and some here give both.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: an isolated thorp sells nothing to an army's buyers
   ['03039', 'r2s-wartime-thorp-3', 'A small industry has emerged to provide all three', 'Deserters passing through need food and discretion, and some here give both.'],
   ['B27552', 'r2s-wartime-thorp-3', 'Wealthy families paying poorer ones', SILENT],
   ['09343', 'r2s-mass_migration-thorp-3', 'Forged residence documents', 'A way onward, sold quietly to newcomers who were told to move on.'], // TAIL-DISPLAY-CIVIC-3 V3, re-keyed by identity: no bed presumed
@@ -80,7 +81,7 @@ const KEEP = [
   ['05801', 'r2r-village-58', 'Controlled goods (grain, salt, preserved meat)'],
   ['18708', 'r2r-thorp-25', 'insurgent supporters and'],
   ['16495', 'r2s-religious_conversion-hamlet-1', 'Religious buildings, land, and endowments'],
-  ['18752', 'r2s-wartime-village-3', 'Suppliers adulterating grain and leather sold to crown contracts'],
+  ['18752', 'r2s-wartime-village-3', "Suppliers adulterating grain and leather sold to the army's contracts"], // BAR6-CRIME, 2026-11-16 (SV1): re-keyed by identity
   ['09343', 'r2s-mass_migration-village-3', 'Forged residence documents'],
   ['09714', 'r2s-plague_onset-village-3', 'the stalls that pay their fees'],
   ['18208', 'r2r-village-12', 'Some goods change hands here without a licence'],
