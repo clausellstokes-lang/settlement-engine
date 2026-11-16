@@ -2396,4 +2396,16 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.", needs: Object.freeze(['sovereign']) }),
     Object.freeze({ text: "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the richest powers.", twinOf: "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.", excludes: Object.freeze(['sovereign']) }),
   ]),
+  // BAR6-HOUSES (LAW 5 WIDENED, 2026-11-16; the wide read's C16139, bar0-city-under_siege+famine-rand-33; vetoable by the owner): the
+  // brewery's catalogue lines send its ale out to "regional distribution", which nothing reaches while a siege holds the roads (an
+  // occupation and a monster frontier close no road, so the siege alone is declared). Read late, as the crisis twins above: a siege
+  // drawn at random is settled after the description draw. The brewery's grain mark is the mark leaf's (BAR6-MARKS).
+  "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.": Object.freeze([
+    Object.freeze({ text: "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Commercial-scale ale and beer production for the taverns; while the siege holds the roads none of it goes further. Major grain consumer and employer.", twinOf: "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.": Object.freeze([
+    Object.freeze({ text: "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Commercial-scale ale and beer production. Supplies the town's taverns; while the siege holds the roads none of it goes further. Major grain consumer and employer.", twinOf: "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.", crisis: Object.freeze(['under_siege']) }),
+  ]),
 });

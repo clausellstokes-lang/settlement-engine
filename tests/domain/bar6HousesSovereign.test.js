@@ -36,6 +36,9 @@ function born(seed) {
   let m = seed.match(new RegExp(`^r2r-${SIZE}-\\d+$`));
   let cfg = m ? { ...DEFAULT_CONFIG, ...DIALS, settType: m[1] } : null;
   if (!cfg && (m = seed.match(new RegExp(`^r2s-(\\w+)-${SIZE}-\\d+$`)))) cfg = { ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] };
+  if (!cfg && (m = seed.match(new RegExp(`^bar0-${SIZE}-([a-z_+]+)-([a-z_]+)-\\d+$`)))) {
+    cfg = { ...DEFAULT_CONFIG, ...(m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] }), settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : m[2].split('+'), _randomizePriorities: true };
+  }
   if (!cfg) throw new Error(`no shape for ${seed}`);
   return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
 }
@@ -68,10 +71,15 @@ const ROWS = Object.freeze(['r2r-village-2', 'r2r-village-6', 'r2r-metropolis-34
 const KEEP = Object.freeze(['r2r-village-1', 'r2r-metropolis-41']);
 const SIEGE = 'r2s-under_siege-town-0';
 const CALM = 'r2r-town-1';
+/** the wide read's C16139 (the brewery's "regional distribution" under a siege) and its KEEP under a war that closes no road */
+const BREW_SIEGE = 'bar0-city-under_siege+famine-rand-33';
+const BREW_WAR = 'bar0-city-wartime-rand-34';
+/** the brewery's siege sets (found by their declaration and their good, never a literal) */
+const BREWERY = Object.entries(DESC_LATE_SIBLINGS).filter(([k, set]) => /\bale\b/.test(k) && set.some((/** @type {any} */ l) => (l.excludes || []).includes('crisis: under_siege')));
 /** @type {Record<string, any>} */ const towns = {};
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  for (const seed of [...ROWS, ...KEEP, SIEGE, CALM]) towns[seed] = born(seed);
+  for (const seed of [...ROWS, ...KEEP, SIEGE, CALM, BREW_SIEGE, BREW_WAR]) towns[seed] = born(seed);
 }, 600000);
 
 describe('(a) the atom: a sovereign the record gives, or a war or an occupation supplies', () => {
@@ -157,6 +165,17 @@ describe('(c) the detector on the record: 6e of the houses', () => {
     const descsOf = (/** @type {any} */ s) => JSON.stringify(s?.availableServices ?? '').match(/"desc":"[^"]*"/g)?.map((x) => x.slice(8, -1)) ?? [];
     expectAbsentWithAnchor(descsOf(towns[SIEGE]), key, twin, `${SIEGE}: the twin prints, and no beef, pork and mutton`);
     expect(descsOf(towns[CALM])).toContain(key);
+  });
+});
+
+describe('LAW 5 WIDENED: the brewery sends nothing out through a siege (the wide read\'s C16139)', () => {
+  it(`${BREW_SIEGE}: the twin is stored where the original stood at afa46d644; under a war (${BREW_WAR}) the original stands`, () => {
+    expect(BREWERY.length).toBe(2);
+    const twins = BREWERY.map(([k, set]) => set.find((/** @type {any} */ l) => l.twinOf === k).text);
+    const descs = (/** @type {any} */ s) => (s.institutions || []).map((/** @type {any} */ i) => String(i.desc));
+    const [original] = BREWERY.map(([k]) => k).filter((k) => descs(towns[BREW_WAR]).includes(k));
+    expect(original).toBeTypeOf('string');
+    expectAbsentWithAnchor(descs(towns[BREW_SIEGE]), original, twins[BREWERY.findIndex(([k]) => k === original)], `${BREW_SIEGE}: the twin, not the original`);
   });
 });
 
