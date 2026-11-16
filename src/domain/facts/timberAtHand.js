@@ -44,7 +44,7 @@ export const TIMBER_CHAINS = Object.freeze([
 export function timberInputOf(record) {
   if (!record || typeof record !== 'object') return undefined;
   if (!(/** @type {{ economicState?: unknown }} */ (record).economicState)) return undefined;
-  const kinds = TIMBER_CHAINS.map(([key, chain]) => houseInputAtHand(/** @type {any} */ (record), /** @type {string} */ (key), null, /** @type {any} */ (chain)));
+  const kinds = TIMBER_CHAINS.map(([key, chain]) => houseInputAtHand(/** @type {Parameters<typeof houseInputAtHand>[0]} */ (record), /** @type {string} */ (key), null, /** @type {Parameters<typeof houseInputAtHand>[3]} */ (chain)));
   for (const kind of /** @type {const} */ (['local', 'imported', 'route'])) if (kinds.includes(kind)) return kind;
   return 'missing';
 }

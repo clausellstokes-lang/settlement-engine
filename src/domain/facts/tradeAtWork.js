@@ -45,7 +45,7 @@ export function tradeAtWorkOf(record, key) {
   if (!record || typeof record !== 'object') return undefined;
   const words = /** @type {Record<string, ReadonlyArray<string>>} */ (TRADE_HOUSES)[key];
   if (!words) return undefined;
-  const houses = liveInstitutions(/** @type {any} */ (record)).filter((inst) => {
+  const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)).filter((inst) => {
     const name = String(nativeSemanticName(/** @type {object} */ (inst)) || /** @type {{ name?: unknown }} */ (inst)?.name || '').toLowerCase();
     return words.some((w) => atWordStart(w, name));
   });
