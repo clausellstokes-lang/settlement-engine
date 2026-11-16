@@ -77,7 +77,7 @@ const TWIN = /** @type {const} */ ([
 ]);
 /** [seed, the true sibling that must still print] (green before and after) */
 const KEEP = /** @type {const} */ ([
-  ['r2s-under_siege-town-1', 'Iron & Metalwork Metal is smelted or worked here.'], // the siege stops no forge (the leaf's table)
+  ['r2s-under_siege-city-0', 'Iron & Metalwork Metal is smelted or worked here.'], // the siege stops no forge (the leaf's table); re-keyed by identity 2026-11-16 (BAR6-ECON, 8d.income): r2s-under_siege-town-1's Iron & Metalwork card prints Impaired by the siege, so its share takes the siege's partial mark; 6 besieged towns of the 720 print the share bare
   ['r2r-town-37', 'Guild Fees Annual licensing fees'],
   // re-keyed by identity (TAIL-CLOSE-DISPLAY-1): the same claim in a famine hamlet that still holds the rents row (TAIL-DEFECON-2
   // df2fa5ca: r2s-famine-hamlet-0's own-fields share is "Harvest" now, the rents row only where a lord's steward or reeve stands)

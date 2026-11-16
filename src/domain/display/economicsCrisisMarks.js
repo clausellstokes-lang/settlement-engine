@@ -186,7 +186,7 @@ export function incomeKindShown(town, src, crises = stoppingCrisesOf(town)) {
   if (!title) return null;
   const chains = /** @type {{ economicState?: { activeChains?: unknown } } | null | undefined} */ (town)?.economicState?.activeChains;
   const titled = (Array.isArray(chains) ? /** @type {Record<string, unknown>[]} */ (chains) : [])
-    .filter((c) => c && folded(chainPrintName(/** @type {any} */ (c), town)) === title); // the chain's printed name, the leaf's (chainPrintSites F1)
+    .filter((c) => c && folded(chainPrintName(/** @type {any} */ (c), town)?.label) === title); // the chain's printed name, the leaf's (chainPrintSites F1)
   return titled.some((c) => impairedBySiege(town, c)) ? SIEGE_CURTAILED : null;
 }
 
