@@ -98,7 +98,7 @@ describe('BAR4-SAFETY: the three kinds read one settled fact each', () => {
   test('the read rows: what prints instead', () => {
     const rota = linesOf(town('bar0-village-calm-rand-22')).guard;
     expect(guardPayOf(town('bar0-village-calm-rand-22')), 'C44796: the village watch is an unpaid rota').toBe('unpaid');
-    expect(rota.join(' '), 'C44796: the rota twin prints').toContain('disciplined but unpaid: neighbours who keep the rota');
+    expect(rota.join(' '), 'C44796: the drawn line\'s rota twin prints (no wage, no kit the gate denies)').toContain('The local watch is unpaid, but walks the rounds properly.');
     for (const [seed, name] of [['bar0-city-under_siege+famine-rand-21', 'Qingkou'], ['bar0-hamlet-under_siege-rand-23', 'Darhankul']]) {
       expect(siegeMotionOf(town(seed)), `${seed}: the siege advances`).toBe('advancing');
       expect(linesOf(town(seed)).tonight.join(' '), `${seed}: the advancing twin prints`).toContain(`The besiegers around ${name} tighten their lines each week`);

@@ -108,29 +108,23 @@ export function payTruth(text, gate) {
  */
 export function rotaTruth(text, institutions) {
   if (!watchIsUnpaidRota(liveInstitutions({ institutions: /** @type {any} */ (institutions) }))) return text;
-  const m = /^The (.+?) (?:is|are|exists?) /.exec(text);
-  if (!m) return text;
-  const law = m[1];
-  const many = manyForce(law);
-  const be = many ? 'are' : 'is';
-  const crisis = /** @type {const} */ (['siege', 'occupied', 'famine']).find((c) => text.startsWith(String(patrolTwin(law, c, true))));
-  if (crisis) return String(patrolTwin(law, crisis)) + text.slice(String(patrolTwin(law, crisis, true)).length);
-  /** @type {ReadonlyArray<readonly [string, string]>} */
-  const pairs = [
-    [`The ${law} ${be} disciplined but resource-constrained: motivated with inadequate equipment and irregular pay.`, ROTA_IRREGULAR(law, many)],
-    [`The ${law} ${be} disciplined, paid in full and properly equipped.`, `The ${law} ${be} disciplined and properly equipped, though nobody is paid to keep the rota.`],
-    [`The ${law} ${be} well paid, well equipped and ${many ? 'patrol' : 'patrols'} properly.`, `The ${law} ${be} unpaid but well equipped, and ${many ? 'walk' : 'walks'} the rounds properly.`],
-    [`The ${law} ${many ? 'exist' : 'exists'} on paper. Chronically underpaid and poorly equipped`, `The ${law} ${many ? 'exist' : 'exists'} on paper. Unpaid and poorly equipped`],
-    [`The ${law} ${be} chronically underpaid and poorly equipped`, `The ${law} ${be} unpaid and poorly equipped`],
-    [`The ${law} ${many ? 'exist' : 'exists'} on paper. Paid, but poorly equipped`, `The ${law} ${many ? 'exist' : 'exists'} on paper. Unpaid and poorly equipped`],
-    [`The ${law} ${be} paid, but poorly equipped`, `The ${law} ${be} unpaid and poorly equipped`],
-  ];
-  const hit = pairs.find(([line]) => text.startsWith(line));
-  return hit ? hit[1] + text.slice(hit[0].length) : text;
+  const hit = ROTA_TWINS.find(([re]) => re.test(text));
+  return hit ? text.replace(hit[0], hit[1]) : text;
 }
-/** The rota's twin of "inadequate equipment and irregular pay" (C44796). */
-export const ROTA_IRREGULAR = (/** @type {string} */ law, /** @type {boolean} */ many) =>
-  `The ${law} ${many ? 'are' : 'is'} disciplined but unpaid: neighbours who keep the rota, with little equipment.`;
+/**
+ * The rota's twins, read BEFORE the gate (`keptGuardLine`): each pay claim the guard line's branches can draw, its rota
+ * twin. The paid crisis head ("well paid and well equipped, but …", `patrolTwin(…, true)`) takes the unpaid crisis twin.
+ * @type {ReadonlyArray<readonly [RegExp, string]>}
+ */
+const ROTA_TWINS = Object.freeze([
+  [/^(The .+? (?:is|are)) disciplined but resource-constrained: motivated with inadequate equipment and irregular pay\./, '$1 disciplined but unpaid: neighbours who keep the rota, with little equipment.'],
+  [/^(The .+? (?:is|are)) well paid, well equipped and (walk|patrol)(s?) properly\./, '$1 unpaid, but walk$3 the rounds properly.'],
+  [/^(The .+?) (?:is|are) well paid and well equipped, but (?=(?:is|are) held|walks? only)/, '$1 '],
+  [/^(The .+?) is well paid and well equipped, but hunger/, '$1 still walks the rounds, but hunger'],
+  [/^(The .+?) are well paid and well equipped, but hunger/, '$1 still walk the rounds, but hunger'],
+  [/^(The .+? exists?) on paper\. Chronically underpaid/, '$1 on paper. Unpaid'],
+  [/^(The .+? (?:is|are)) chronically underpaid/, '$1 unpaid'],
+].map(([re, to]) => Object.freeze(/** @type {readonly [RegExp, string]} */ ([/** @type {RegExp} */ (re), String(to)]))));
 
 /** LB4's twin of "irregular pay" where the gate is 1 (fully funded): the same force, its pay and kit as the record holds them. */
 export const PAID_IN_FULL = (/** @type {string} */ law, /** @type {boolean} */ many) =>

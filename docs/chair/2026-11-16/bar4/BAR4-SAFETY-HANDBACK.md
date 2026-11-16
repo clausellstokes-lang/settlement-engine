@@ -40,13 +40,15 @@ three surfaces counts three), read by the detectors against each town's record (
    bar0-city-under_siege+famine-rand-105 (siege and famine); 10 towns of the 720, 16 of the fresh 300 (every town that lost "have not moved").
 2. The easing twin: "The besiegers around {name} have pulled their lines back, and the lookouts watch for the night they return." Prints in
    no town measured (no siege is born easing); true by its status.
-3. `safetyLineTruth.js :: ROTA_IRREGULAR`: "The {law} is disciplined but unpaid: neighbours who keep the rota, with little equipment."
-   Read in bar0-village-calm-rand-22 (C44796's own town; the guard pins it); in no town of the 720 or the fresh 300.
-4. `rotaTruth`'s other twins ("… is disciplined and properly equipped, though nobody is paid to keep the rota."; "… is unpaid but well
-   equipped, and walks the rounds properly."; "… exists on paper. Unpaid and poorly equipped"; "… is unpaid and poorly equipped"): in no
-   town measured; the crisis case reaches the existing unpaid twin ("The local watch still walks the rounds, but hunger is eroding the order
-   it keeps."), newly printed in bar0-village-famine-rand-106 (it printed "is well paid and well equipped, but hunger …" beside "Nobody is
-   paid, and the households hold the rota").
+3. `safetyLineTruth.js :: ROTA_TWINS` (read BEFORE the gate in `keptGuardLine`, so a rota town's line takes no gate-made pay word):
+   "The {law} is unpaid, but walks the rounds properly." (the drawn "well paid, well equipped and patrols properly" of an unpaid rota:
+   no wage, and no kit the gate would deny). Read in bar0-village-calm-rand-22 (C44796's own town; the guard pins it). "The {law} is
+   disciplined but unpaid: neighbours who keep the rota, with little equipment." (the drawn "irregular pay"); "… exists on paper.
+   Unpaid and poorly equipped"; "… is unpaid and poorly equipped": in no town measured.
+4. The crisis case reaches the existing unpaid twins ("The local watch is held for the defence …", "… walks only the rounds the
+   occupiers allow.", "The local watch still walks the rounds, but hunger is eroding the order it keeps."), the last newly printed in
+   bar0-village-famine-rand-106 (it printed "is well paid and well equipped, but hunger …" beside "Nobody is paid, and the households
+   hold the rota").
 5. `payTruth`'s gate-1 paper twins: "The {law} exists on paper. Paid, but poorly equipped." (bar0-town-occupied-rand-103, -125: both
    printed "Chronically underpaid" beside a gate of 1); "… is paid, but poorly equipped"; "… exists on paper. Poorly equipped: these are
    volunteers …" (no town measured).
@@ -92,9 +94,10 @@ symbol I changed: 101 green). Red at my tip, classed:
 - THE BUILD: `npm run build` green. `npm run verify:dist` REFUSED at the build tests: (a) `tests/build/vendorPdfLazy.test.js`'s first-paint
   closure rose 538 B (`siegeMotion.js` drew `conditionPromotion.js` eagerly): BOUGHT BACK (the siege's archetype held as a constant,
   pinned in the guard to `archetypeForStressor`'s own answer); green after a second build; (b) `tests/build/generationWorkerLazy.test.js`'s
-  worker ceiling: 2,324,662 B against 2,322,103 B (+2,559 B: my twins, readers and the three fact leaves). A CEILING, "A RISE IS NEVER A
-  LANE'S EDIT: buy the bytes back, or take the ruling": NOT RAISED; THE CHAIR'S RULING IS ASKED (one line sent). The boot smoke did not
-  run (the strict dist refuses before it). `dist/` removed.
+  worker ceiling: 2,324,662 B against 2,322,103 B at the first build (+2,559 B). BOUGHT BACK 469 B (the rota twins as one regex table,
+  read before the gate, which retired two of its pairs): 2,324,193 B, +2,090 B: what is left is the cure itself (the three fact leaves,
+  220-320 B each minified; the twins; the crime reading). A CEILING, "A RISE IS NEVER A LANE'S EDIT: buy the bytes back, or take the
+  ruling": NOT RAISED; THE CHAIR'S RULING IS ASKED. The boot smoke did not run (the strict dist refuses before it). `dist/` removed.
 
 ## Registrations owed
 
@@ -116,7 +119,7 @@ symbol I changed: 101 green). Red at my tip, classed:
 
 ## What is left, IN ORDER
 
-0. The worker ceiling (+2,559 B): the chair's ruling, or the bytes bought back (the unreached rota twins are the cheapest ~600 B).
+0. The worker ceiling (+2,090 B at e52d55824's successor): the chair's ruling, or more bytes bought back (the siege getter on `factsOf` is in the worker only because `factsOf` is: ~320 B if the Tonight sheet handed the record instead).
 1. The five named lines above, by their seats.
 2. When item 2 lands, lower `OWED_COVERT_ONLY` in `tests/domain/bar4SafetyKinds.test.js` to 0.
 

@@ -1068,7 +1068,7 @@ export function purseWordOfBand(band, standing) {
 /** @param {string} desc @param {Array<{ name?: string }>} institutions @param {unknown} prosperity
  * @param {{ forceScore?: unknown, tradeDependencies?: unknown, militaryGate?: unknown }} [read] the record's readings after the defence profile (BAR2-LABELS-2 LB4: `militaryGate`, `defenseProfile.economicGates.military`) @returns {string} */
 export function keptGuardLine(desc, institutions, prosperity, read = {}) {
-  const text = rotaTruth(payTruth(patrolTruth(paperTruth(String(desc || ''), prosperity, read), read, STANDARD_PATROL), read.militaryGate), institutions); // BAR4-SAFETY (F1, C44796): an unpaid rota takes no wage; UPKEEP-8 (#713 #1201, #459); BAR2-LABELS-2 LB4: the pay by the record's military gate
+  const text = payTruth(rotaTruth(patrolTruth(paperTruth(String(desc || ''), prosperity, read), read, STANDARD_PATROL), institutions), read.militaryGate); // BAR4-SAFETY (F1, C44796): an unpaid rota takes no wage; UPKEEP-8 (#713 #1201, #459); BAR2-LABELS-2 LB4: the pay by the record's military gate
   /** @type {Omit<import('../domain/facts/drawDeclared.js').DrawDeclaredOptions, 'draw'>} */
   const opts = {
     facts: () => factsOf({ institutions, economicState: { prosperity } }),
