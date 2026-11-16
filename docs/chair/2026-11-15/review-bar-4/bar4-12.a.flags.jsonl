@@ -1,0 +1,4 @@
+{"id":"C33209","town":"bar0-thorp-calm-rand-21","sev":"MED","kind":"PAIR","why":"says the thorp leans first on hunting for food; C33132 and Harvest 100% give it farming smallholdings; LAND says foraging areas absent","other":"C33132"}
+{"id":"C33207","town":"bar0-thorp-calm-rand-21","sev":"MED","kind":"PAIR","why":"'Its own food is game from the woods' contradicts C33132 (each family tills a holding, all for the table) and Harvest 100% income","other":"C33132"}
+{"id":"C34105","town":"bar0-thorp-calm-rand-23","sev":"MED","kind":"STATE","why":"defence 'short of money for years', 'each lean season'; STATE prosperity is Wealthy, with farm surplus (C33975) and economic capacity Surplus (C33901)","other":"C33901"}
+{"id":"DONE","lines":1332,"blocks":3,"flags":3}
