@@ -130,13 +130,13 @@ function outputNamesMarkedService(town, crises, named) {
  * Otherwise the card's state is `chainStateShown.js :: serviceStateShown` (its houses the Institutions tab marks impaired).
  * The flow header counts what this gives (`EconomicsTab.jsx :: flowHeaderCount`).
  * @param {object | null | undefined} town the settlement
- * @param {{ institutions?: unknown, exportable?: unknown, output?: unknown } | null | undefined} svc one service card's record
- * @param {ReadonlySet<string>} impairedHouses the houses the Institutions tab marks impaired, lower case
+ * @param {{ exportable?: unknown, output?: unknown } | null | undefined} svc one service card's record
+ * @param {'impaired' | 'operational'} ownState the card's state by its own houses, as the caller reads it
+ *   (`chainStateShown.js :: serviceStateShown` over the card's houses and the Institutions tab's impaired set)
  * @returns {{ state: 'impaired' | 'operational', exportStopped: boolean }}
  */
-export function serviceCardShown(town, svc, impairedHouses) {
-  const houses = Array.isArray(svc?.institutions) ? /** @type {unknown[]} */ (svc.institutions) : [];
-  const own = serviceStateShown(houses, impairedHouses);
+export function serviceCardShown(town, svc, ownState) {
+  const own = ownState;
   const output = typeof svc?.output === 'string' ? [svc.output] : [];
   const impaired = own === 'impaired' || outputNamesMarkedService(town, stoppingCrisesOf(town), output);
   return { state: impaired ? 'impaired' : 'operational', exportStopped: svc?.exportable === true && tradeStoppedHere(town) };
@@ -255,7 +255,7 @@ export function fullCardWordUnderSiege(town, card) {
 
 /** The chain words that say the chain still works its ground (`facts/chainWorking.js :: WORKING_CHAIN_STATUSES`). */
 const CARD_STILL_WORKING = new Set(WORKING_CHAIN_STATUSES);
-import { tradeStoppedHere, chainAsShown, serviceStateShown } from './chainStateShown.js';
+import { tradeStoppedHere, chainAsShown } from './chainStateShown.js';
 import { chainPrintName } from './chainPrintName.js';
 import { resourceWorkReading } from './validationOnPage.js';
 import { chainsWorking, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';

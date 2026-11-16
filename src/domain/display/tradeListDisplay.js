@@ -906,7 +906,7 @@ export function plainGoodName(text) {
  */
 export function foodCarriersShown(carriers, channel) {
   if (!carriers || typeof channel !== 'string') return carriers;
-  if (/\bteleport/i.test(channel)) return 'the teleportation circle brings';
+  if (/\bteleport/i.test(channel)) return `the ${channel.trim()} brings`; // the record's own channel word (foodBalance.js writes it only beside the house)
   if (/\bairship/i.test(channel)) return 'airships bring';
   return carriers;
 }

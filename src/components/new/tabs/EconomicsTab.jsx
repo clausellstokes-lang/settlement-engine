@@ -267,7 +267,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>
                   <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:svc.color,background:`${svc.color}15`,padding:'0 5px'}}>Service</span>
                   {((card) => <>{/* BAR6-ECON (8d.export, 8e.svcOutput): the card reads the siege's stop of its export and its output's marked service (economicsCrisisMarks.js :: serviceCardShown) */}{svc.exportable && <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:card.exportStopped?FLOW_STATUS.impaired.color:swatch.success,background:card.exportStopped?`${FLOW_STATUS.impaired.color}15`:swatch['#E8F5EC'],padding:'0 5px'}}>{card.exportStopped?EXPORT_STOPPED_TAG:'Export'}</span>}
-                  {((svcImpaired) => <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:svcImpaired?FLOW_STATUS.impaired.color:swatch.inkMag3,background:svcImpaired?`${FLOW_STATUS.impaired.color}15`:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>{svcImpaired?FLOW_STATUS.impaired.label:'○ Operational'}</span>)(card.state === 'impaired')}</>)(serviceCardShown(town, svc, impairedHouses))}
+                  {((svcImpaired) => <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:svcImpaired?FLOW_STATUS.impaired.color:swatch.inkMag3,background:svcImpaired?`${FLOW_STATUS.impaired.color}15`:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>{svcImpaired?FLOW_STATUS.impaired.label:'○ Operational'}</span>)(card.state === 'impaired')}</>)(serviceCardShown(town, svc, serviceStateShown(svc.institutions, impairedHouses)))}
                 </div>
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>
                   <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionHouseLabel).join(' · ')}
@@ -838,7 +838,7 @@ function NeedsNotMet({ needs, mobile }) {
  * the carrier, the food record) and the Institutions tab's impaired houses (`tabHelpers.js :: computeChainSets`); the
  * record is not touched. At the end of the file, so no line-keyed row above moves.
  */
-import { chainAsShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
+import { chainAsShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
 import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
 import { computeChainSets } from '../tabHelpers.js';
 /** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
@@ -872,7 +872,7 @@ import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js'; i
  * @returns {{ active: number, impaired: number, words: string }}
  */
 function flowHeaderCount(chains, services, impairedHouses, town = null) {
-  const svcImpaired = services.filter((v) => serviceCardShown(town, /** @type {any} */ (v), impairedHouses).state === 'impaired').length; // BAR6-ECON: the service card's own reading
+  const svcImpaired = services.filter((v) => serviceCardShown(town, /** @type {any} */ (v), serviceStateShown(/** @type {any} */ (v)?.institutions, impairedHouses)).state === 'impaired').length; // BAR6-ECON: the service card's own reading
   const impaired = chains.filter((c) => c.status === 'impaired').length + svcImpaired;
   const active = chains.filter((c) => c.status !== 'impaired' && c.status !== '').length + services.length - svcImpaired;
   const words = active > 0 ? ` (${active} active${impaired > 0 ? ` · ${impaired} impaired` : ''})` : impaired > 0 ? ` (${impaired} impaired)` : '';

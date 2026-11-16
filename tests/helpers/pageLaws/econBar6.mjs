@@ -46,7 +46,7 @@ export function econBar6Instances(town, { blind = false } = {}) {
   const rows = serviceRowsOf(town?.availableServices).map(({ svc }) => svc);
   // 8d.export, 8e.svcOutput: the service economy's cards
   for (const svc of eco.institutionalServices || []) {
-    const card = blind ? { state: serviceStateShown(svc.institutions, new Set()), exportStopped: false } : serviceCardShown(town, svc, new Set());
+    const card = blind ? { state: serviceStateShown(svc.institutions, new Set()), exportStopped: false } : serviceCardShown(town, svc, serviceStateShown(svc.institutions, new Set()));
     if (siege && svc.exportable === true && !card.exportStopped) out.push({ rule: '8d.export', row: String(svc.label) });
     const output = fold(svc.output);
     const stops = rows.some((row) => {

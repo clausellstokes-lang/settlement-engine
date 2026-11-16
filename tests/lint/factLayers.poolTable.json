@@ -1045,6 +1045,10 @@
    "layer": 5,
    "src": "map:measured"
   },
+  "DS-ECO-11::EXPLOITATION: partiallyExploited, nothing exported": {
+   "layer": 5,
+   "src": "placed: BAR6-ECON 2026-11-16, its sibling's key and the export list as printed (tradeListDisplay.js :: tradeListsAsPrinted)"
+  },
   "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high": {
    "layer": 5,
    "src": "map:measured"
@@ -1294,8 +1298,8 @@
    "src": "map:inferred"
   },
   "DS-ECO-6::TIER: minor shadow activity (≥3)": {
-   "layer": 3,
-   "src": "map:measured"
+   "layer": 4,
+   "src": "placed: BAR6-ECON 2026-11-16 (was map:measured, 3): v4 declares the crime band (crime: ≥ organized, layer 3), one above it"
   },
   "DS-ECO-6::TIER: significant off-book activity (≥15)": {
    "layer": 3,
@@ -3068,6 +3072,10 @@
   "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED": {
    "layer": 3,
    "src": "map:measured"
+  },
+  "DS-SUP-3::A CATEGORY PRESENT BUT ITS HOUSE STOPPED": {
+   "layer": 3,
+   "src": "placed: BAR6-ECON 2026-11-16, its sibling's key and the siege's marks of the house's service rows (crisisStoppedRow.js :: rowStoppedBy)"
   },
   "DS-SUP-3::A METROPOLIS-TIER CATALOG, COMPLETE": {
    "layer": 3,
