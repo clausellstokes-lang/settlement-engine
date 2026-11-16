@@ -702,7 +702,20 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //   three modules are excised from the engine's shared domain: labels' one line of vite.config.js, display/magicProvisionShown.js
 //   and facts/magicSource.js, and sweep-a's facts/ironAtHand.js) and the round's reworded src/data lines (the data chunk).
 //   VETOABLE: a veto reverts this commit and the three arms read red again.
-const CLOSURE_BUDGET_BYTES = 1_131_667; // 2026-11-15, BAR2-CLOSE-DOORS-1: 1_130_209 -> 1_131_667 (ruling B3, note above); 2026-11-15: re-recorded AT THE CLOSE's measured final tree under the owner's word of 07:50 UTC, the chair's decision A (note above); was 1_121_260 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note above); was 1_104_215 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note above); was 1_075_758 (FIX-ARROW-PLAQUE's lane tip) / 1_075_589 (MERGE-WAVE step 4)
+// 2026-11-15, BAR3-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR3 (the joined line 98363cb84 + the sweep-a repair through 03abf16cd, merged 1ac74a4c0; the edge bundles re-derived 9d7c7fbc5 and holding after the last merge): the three first-paint budgets re-recorded ONCE at this tree's measured
+// figures under the chair's ruling B3 (the owner's word of 2026-11-15 07:50 UTC deferred the size budgets to the chair); vetoable.
+// MEASURED by one fresh `npm run build` of this tree and of the line's closed tip 83fc14ad6 (which reads the old budgets exactly),
+// read by this file's own arms (VERIFY_DIST=1):
+//   raw 1,131,667 -> 1,132,308 (+641) · gzip 360,516 -> 360,742 (+226) · Brotli 302,753 -> 302,830 (+77).
+//   By chunk: engine-core +520 raw (gzip +173, Brotli +93); data +120 (+47, +16); index +1 (+6, -32); the other first-paint
+//   chunks unmoved. The cause, by the round's seven branches AS A WHOLE (corpus, services, places, labels, defecon, people,
+//   powers) and the sweep seat's repair: THE CURE'S OWN SHARE, measured at the tree before it (1,131,858 · 360,590 · 302,817):
+//   +450 raw, +152 gzip, +13 Brotli, the sweep seat's letter (g) (03abf16cd, vite.config.js: facts/sharedPower.js leaves the
+//   engine's shared-domain excisions and stays in the eager engine core, as textOf.js does, curing the boot smoke's
+//   coherence-lazy <-> data-lazy chunk cycle from BAR3-PEOPLE batch 1's new import): engine-core +509, index -59; the rest,
+//   +191 raw, +74 gzip, +64 Brotli, the branches' src/ bytes (the data chunk: the round's reworded src/data lines).
+//   VETOABLE: a veto reverts this commit and the three arms read red again.
+const CLOSURE_BUDGET_BYTES = 1_132_308; // 2026-11-15, BAR3-CLOSE-DOORS-1: 1_131_667 -> 1_132_308 (ruling B3, note above); 2026-11-15, BAR2-CLOSE-DOORS-1: 1_130_209 -> 1_131_667 (ruling B3, note above); 2026-11-15: re-recorded AT THE CLOSE's measured final tree under the owner's word of 07:50 UTC, the chair's decision A (note above); was 1_121_260 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note above); was 1_104_215 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note above); was 1_075_758 (FIX-ARROW-PLAQUE's lane tip) / 1_075_589 (MERGE-WAVE step 4)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -732,8 +745,8 @@ const CLOSURE_BUDGET_BYTES = 1_131_667; // 2026-11-15, BAR2-CLOSE-DOORS-1: 1_130
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 360_516; // 2026-11-15, BAR2-CLOSE-DOORS-1: 360_054 -> 360_516 (ruling B3, note at the raw budget); 2026-11-15, TAIL-CLOSE-DOORS-4: 360_052 -> 360_054 at the final tree (ruling B2, note at the raw budget); 2026-11-15: re-recorded AT THE CLOSE's measured final tree, the chair's decision A (note at the raw budget); was 357_225 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 351_590 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 342_975 (FIX-ARROW-PLAQUE's lane tip) / 342_846 (MERGE-WAVE step 4)
-const CLOSURE_BROTLI_BUDGET_BYTES = 302_753; // 2026-11-15, BAR2-CLOSE-DOORS-1: 302_175 -> 302_753 (ruling B3, note at the raw budget); 2026-11-15, TAIL-CLOSE-DOORS-4: 302_161 -> 302_175 at the final tree (ruling B2, note at the raw budget); 2026-11-15: re-recorded AT THE CLOSE's measured final tree, the chair's decision A (note at the raw budget); was 299_985 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 295_016 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 288_470 (FIX-ARROW-PLAQUE's lane tip) / 288_452 (MERGE-WAVE step 4)
+const CLOSURE_GZIP_BUDGET_BYTES = 360_742; // 2026-11-15, BAR3-CLOSE-DOORS-1: 360_516 -> 360_742 (ruling B3, note at the raw budget); 2026-11-15, BAR2-CLOSE-DOORS-1: 360_054 -> 360_516 (ruling B3, note at the raw budget); 2026-11-15, TAIL-CLOSE-DOORS-4: 360_052 -> 360_054 at the final tree (ruling B2, note at the raw budget); 2026-11-15: re-recorded AT THE CLOSE's measured final tree, the chair's decision A (note at the raw budget); was 357_225 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 351_590 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 342_975 (FIX-ARROW-PLAQUE's lane tip) / 342_846 (MERGE-WAVE step 4)
+const CLOSURE_BROTLI_BUDGET_BYTES = 302_830; // 2026-11-15, BAR3-CLOSE-DOORS-1: 302_753 -> 302_830 (ruling B3, note at the raw budget); 2026-11-15, BAR2-CLOSE-DOORS-1: 302_175 -> 302_753 (ruling B3, note at the raw budget); 2026-11-15, TAIL-CLOSE-DOORS-4: 302_161 -> 302_175 at the final tree (ruling B2, note at the raw budget); 2026-11-15: re-recorded AT THE CLOSE's measured final tree, the chair's decision A (note at the raw budget); was 299_985 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 295_016 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 288_470 (FIX-ARROW-PLAQUE's lane tip) / 288_452 (MERGE-WAVE step 4)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -1025,7 +1038,14 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // are excised from the engine's shared domain (labels' one line of vite.config.js: display/magicProvisionShown.js,
     // facts/magicSource.js; sweep-a's facts/ironAtHand.js: magicProvisionShown moved out of tradeListDisplay -4,925 into
     // coherence-lazy +6,699). VETOABLE: a veto reverts this commit and this arm reads red again.
-    expect(size).toBeLessThan(872_758);
+    // CEILING 872_758 -> 878_205 (2026-11-15, BAR3-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR3 (the joined line 98363cb84 + the sweep-a repair through 03abf16cd, merged 1ac74a4c0; the edge bundles re-derived 9d7c7fbc5 and holding after the last merge);
+    // re-recorded ONCE under the chair's ruling B3, the owner's word of 2026-11-15 07:50 UTC deferring the size budgets to the
+    // chair; vetoable): measured 878,204 by one fresh `npm run build`, read by this arm (VERIFY_DIST=1); the bound is strict, so
+    // the measured figure + 1. Old 872,758 (the line's closed tip 83fc14ad6 measured 872,757, built the same way), the difference
+    // +5,447. The cause: the src/ cures of the round's seven branches AS A WHOLE (corpus, services, places, labels, defecon,
+    // people, powers) and the sweep seat's display leaf; the sweep seat's chunking cure (03abf16cd) moves no byte of this chunk
+    // (878,204 before it and after). VETOABLE: a veto reverts this commit and this arm reads red again.
+    expect(size).toBeLessThan(878_205);
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
@@ -1963,9 +1983,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_131_667); // BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 1_130_209 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the close's final tree, the owner's word of 07:50 UTC by the chair's decision A (note at the constant); STYLE-2-MERGE-7 1_121_260 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11 (note at the constant: every byte by merge point); MERGE-TRAIN 1_104_215 before; MERGE-TRAIN, 2026-11-09 (note at the constant: every byte by car); FIX-ARROW-PLAQUE 1_075_758 before; (note at the constant); MERGE-WAVE step 4 1_075_589 / FIX-ARROW-SECTIONS 1_072_604 before
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(360_516); // BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 360_054 before; TAIL-CLOSE-DOORS-4, 2026-11-15, ruling B2: 360_052 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the chair's decision A; STYLE-2-MERGE-7 357_225 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 351_590 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 342_975 before;; MERGE-WAVE step 4 342_846 before
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(302_753); // BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 302_175 before; TAIL-CLOSE-DOORS-4, 2026-11-15, ruling B2: 302_161 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the chair's decision A; STYLE-2-MERGE-7 299_985 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 295_016 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 288_470 before;; MERGE-WAVE step 4 288_452 before
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_132_308); // BAR3-CLOSE-DOORS-1, 2026-11-15, ruling B3: 1_131_667 before; BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 1_130_209 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the close's final tree, the owner's word of 07:50 UTC by the chair's decision A (note at the constant); STYLE-2-MERGE-7 1_121_260 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11 (note at the constant: every byte by merge point); MERGE-TRAIN 1_104_215 before; MERGE-TRAIN, 2026-11-09 (note at the constant: every byte by car); FIX-ARROW-PLAQUE 1_075_758 before; (note at the constant); MERGE-WAVE step 4 1_075_589 / FIX-ARROW-SECTIONS 1_072_604 before
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(360_742); // BAR3-CLOSE-DOORS-1, 2026-11-15, ruling B3: 360_516 before; BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 360_054 before; TAIL-CLOSE-DOORS-4, 2026-11-15, ruling B2: 360_052 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the chair's decision A; STYLE-2-MERGE-7 357_225 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 351_590 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 342_975 before;; MERGE-WAVE step 4 342_846 before
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(302_830); // BAR3-CLOSE-DOORS-1, 2026-11-15, ruling B3: 302_753 before; BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 302_175 before; TAIL-CLOSE-DOORS-4, 2026-11-15, ruling B2: 302_161 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the chair's decision A; STYLE-2-MERGE-7 299_985 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 295_016 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 288_470 before;; MERGE-WAVE step 4 288_452 before
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
