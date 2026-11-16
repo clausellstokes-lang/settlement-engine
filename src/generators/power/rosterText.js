@@ -10,7 +10,7 @@
  * was born.
  */
 import { annotateFactionStanding } from './factionStanding.js';
-import { MERCHANT_CRAFT_VOTE } from '../factionDynamics.js';
+import { MERCHANT_CRAFT_VOTE } from '../factionDynamics.js'; import { legitimacyHeldTensions } from '../../data/historyData.js'; // BAR4-HISTORY C26792
 import { inferFactionCategory } from './factionCategories.js';
 import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js';
@@ -112,7 +112,7 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
  * @returns {H}
  */
 export function settleTensionsToRoster(history, powerStructure, annotated) {
-  const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null;
+  history = legitimacyToSeat(history, powerStructure); const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null; // BAR4-HISTORY C26792: first, the legitimacy read against the seat
   if (!tensions || !annotated.length) return history;
   const finalRoster = standingRosterOf(powerStructure?.factions || []);
   const onPage = new Set(finalRoster.map((f) => f.faction));
@@ -133,6 +133,20 @@ export function settleTensionsToRoster(history, powerStructure, annotated) {
     return { ...t, factions: settled };
   });
   return moved ? { ...history, currentTensions: next } : history;
+}
+
+/**
+ * BAR4-HISTORY C26792 (the chair's grant, 2026-11-16): the legitimacy tension read against the record's final legitimacy:
+ * where the seat is approved or endorsed, its "openly and widely questioned" takes its twin, and where it is not, its own
+ * form (historyData.js :: legitimacyHeldTensions, which the history step and its section regeneration read too). Draw-free.
+ * Returns the same object where nothing moves.
+ * @template {{ currentTensions?: Array<Record<string, any>> }} H
+ * @param {H} history @param {{ factions?: Array<Record<string, any>>, publicLegitimacy?: { isApproved?: boolean } }} powerStructure @returns {H}
+ */
+function legitimacyToSeat(history, powerStructure) {
+  const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null;
+  const next = tensions ? legitimacyHeldTensions(tensions, powerStructure) : tensions;
+  return next === tensions ? history : { ...history, currentTensions: next };
 }
 
 /**

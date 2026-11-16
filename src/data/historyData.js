@@ -1795,6 +1795,44 @@ export const HISTORY_SMALL_PLACE_WORDS = Object.freeze({
 });
 
 /**
+ * BAR4-HISTORY T1 (C24951, 2026-11-16): THE PLACE A PAST EVENT'S OWN SENTENCE GAVE IT, read back draw-free, so that the
+ * current tension of the same type places it there too (`historyGenerator.js :: buildHistoricalEvent`, through
+ * `placedTensionTokens`: the tension's `{quarter}` and `{location}` take that place; the timeline drew `{quarter}` from
+ * HISTORY_QUARTER_WORDS while the tension read the route's word, and one surge was told in two districts). The place is
+ * read by aligning the event's sentence against its type's authored forms (the catalog's and HISTORY_DESC_VARIANTS'), the
+ * place token's span the place. Null where the timeline holds no event of the type, or no form aligns.
+ * @param {string} type @param {ReadonlyArray<any>} timeline @returns {string|null}
+ */
+export const ownEventPlace = (type, timeline) => {
+  const own = (Array.isArray(timeline) ? timeline : []).find((e) => e?.templateType === type);
+  if (!own) return null;
+  const said = String(own.description ?? '');
+  const forms = [HISTORICAL_EVENTS_DATA.find((e) => e.type === type)?.description, ...(HISTORY_DESC_VARIANTS[type] || [])];
+  for (const form of forms) {
+    if (typeof form !== 'string' || !/\{(quarter|location)\}/.test(form)) continue;
+    const parts = form.split(/(\{[a-z_]+\})/);
+    let placed = false;
+    const src = parts.map((part) => {
+      if (!/^\{[a-z_]+\}$/.test(part)) return part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      if (!placed && (part === '{quarter}' || part === '{location}')) { placed = true; return '(.+?)'; }
+      return '.+?';
+    }).join('');
+    const m = new RegExp(`^${src}$`).exec(said);
+    if (m && m[1]) return m[1];
+  }
+  return null;
+};
+/**
+ * The current tension's tokens with its own past event's place (ownEventPlace), where the timeline holds that event.
+ * @param {Record<string, unknown>} tokens the tensions' shared tokens @param {string} type @param {ReadonlyArray<any>} timeline
+ * @returns {Record<string, unknown>}
+ */
+export const placedTensionTokens = (tokens, type, timeline) => {
+  const place = ownEventPlace(type, timeline);
+  return place ? { ...tokens, '{quarter}': place, '{location}': place } : tokens;
+};
+
+/**
  * W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #331): THE HISTORY TEXTS THAT PRESUME A PLACE'S SIZE, AND THEIR SMALL-PLACE TWINS
  * (`historyGenerator.js :: sizedHistoryText`, at the timeline's description and the tension's). The great fire burns
  * "across whole districts", "across entire districts", "street by street until whole quarters were gone", through
@@ -1948,6 +1986,46 @@ export const HISTORY_DESC_SIBLINGS = Object.freeze({
     Object.freeze({ text: "When the last occupiers left, they left behind a town of former collaborators and former resisters, and none of it was settled before the new occupation came", twinOf: "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled", needs: Object.freeze(['crisis: occupied']) }),
   ]),
 });
+
+/**
+ * BAR4-HISTORY C26792 (the chair's grant of 2026-11-16, 07:54): A SEAT THE TOWN ACCEPTS IS NOT "WIDELY QUESTIONED". The
+ * legitimacy tension's two forms say the right to rule is openly and widely questioned and that no one can agree who holds a
+ * claim, and its hook says no one will speak for those in power unpaid; where the record's own legitimacy reads the seat
+ * approved or endorsed (`powerStructure.publicLegitimacy.isApproved`, true of every endorsed seat), each takes its twin,
+ * which says what is true there: most accept the seat, and the quarrel is a minority's. VETOABLE wording (the owner's).
+ */
+export const LEGITIMACY_HELD_TWINS = Object.freeze({
+  'The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim':
+    'The right of the current authority to rule was openly questioned, and though most here came to accept it, the doubters never quite let the question drop',
+  'The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim':
+    "Most here accept the current authority's right to rule, but some question it openly and will not let the question drop",
+  'Those in power are paying people to speak for them at the gatherings, because no one will do it for free':
+    'Those in power are paying people to speak for them at the gatherings, so that their backers sound louder than the doubters',
+});
+/** Each twin back to its form (a seat the record does not call approved). */
+const LEGITIMACY_HELD_FORMS = Object.freeze(Object.fromEntries(Object.entries(LEGITIMACY_HELD_TWINS).map(([form, twin]) => [twin, form])));
+/**
+ * The tensions with the legitimacy tension's words read against the seat: its twins where the seat is approved or endorsed,
+ * its own forms where it is not (a one-to-one swap, so a later reading undoes an earlier one); the same array where nothing
+ * moves. Read at the history step and its section regeneration (`historyGenerator.js :: generateHistory`, the power
+ * structure it is handed) and again at assembly, where the legitimacy is final (`power/rosterText.js :: settleTensionsToRoster`).
+ * @template {Record<string, any>} T
+ * @param {T[]} tensions @param {{ publicLegitimacy?: { isApproved?: boolean } } | null | undefined} powerStructure @returns {T[]}
+ */
+export const legitimacyHeldTensions = (tensions, powerStructure) => {
+  /** @type {Readonly<Record<string, string>>} */
+  const swap = powerStructure?.publicLegitimacy?.isApproved === true ? LEGITIMACY_HELD_TWINS : LEGITIMACY_HELD_FORMS;
+  let moved = false;
+  const next = tensions.map((t) => {
+    if (t?.type !== 'legitimacy_crisis') return t;
+    const description = swap[String(t.description)] ?? t.description;
+    const hooks = Array.isArray(t.plotHooks) ? t.plotHooks.map((/** @type {unknown} */ h) => swap[String(h)] ?? h) : t.plotHooks;
+    if (description === t.description && (!Array.isArray(hooks) || hooks.every((h, i) => h === t.plotHooks[i]))) return t;
+    moved = true;
+    return { ...t, description, ...(Array.isArray(hooks) ? { plotHooks: hooks } : {}) };
+  });
+  return moved ? next : tensions;
+};
 
 /**
  * W2-FIX-DATA-HISTORY item C (2026-11-13; the review of the data lane, L4; ROUND-3-CUT-INCREMENT ww-254, ww-724, ww-752,
