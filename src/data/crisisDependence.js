@@ -1323,7 +1323,10 @@ export const SPENT_GROUND_WORKERS = Object.freeze(['mine', 'stone_quarry', 'salt
  * page's Depleted list holds every fishery the town has and the trade record brings salted fish in (16 towns of the 720
  * at 59185b62a). For these houses alone, where no chain names the house, its grounds are the record's chains on the
  * town's fisheries of the kinds named here, read by SV6's own reading (every one on the Depleted list, none kept by magic):
- * the same mark ("Short of fish."). A town whose fisheries run no chain is not read here. Catalogue ids -> resource keys.
+ * the same mark ("Short of fish."). RULING FS1 (the chair's, 2026-11-16; vetoable by the owner): a town whose fisheries run no
+ * chain is read by its grounds themselves, the town's own fisheries of these kinds on the record (`config.nearbyResources`):
+ * every one on the Depleted list, the house is short of fish whatever the food ledger counts (r2s-plague_onset-thorp-2,
+ * C22221). Catalogue ids -> resource keys.
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const GROUNDS_WORKED_OFF_CHAIN = Object.freeze({

@@ -6,9 +6,13 @@
  * its named exclusions). THIS FILE REDS WHEN
  *   (a) THE ZERO: any instance the detector finds and no named exclusion explains prints in a town of the census's 720
  *       (born in the census's own configuration shape, CENSUS-3 seedcfg.mjs: `r2r-<size>-<i>` random dials,
- *       `r2s-<crisis>-<size>-<i>` the one crisis ticked). At 8aef8e7d4 it found 93 instances in 53 towns;
+ *       `r2s-<crisis>-<size>-<i>` the one crisis ticked). At 8aef8e7d4 it found 94 instances in 54 towns;
  *   (b) THE POSITIVE CONTROL: the detector, its tabs read blind (their marks read as bare), stops finding the record's own
  *       need in a town that holds it (each part of the kind has its town): so it cannot go blind itself;
+ *   (d) THE MARK FOLLOWS THE PAGE'S GAP LINE (the chair's question of 2026-11-16, for BAR4-RECORD's cure of the K6 split):
+ *       an EX-SPLIT town's record CONSTRUCTED so that nothing answers the house's input (no goods made, sold or bought,
+ *       the route isolated, no food source): the page's gap line prints and the row takes "Short of …" (all 61 of the
+ *       720's EX-SPLIT rows do so at this tip; one is pinned here);
  *   (c) A MARKED pair (each red at 8aef8e7d4) stops leading its row with its mark, or a KEEP pair (the same row where its
  *       need is not cut) starts printing one.
  */
@@ -69,6 +73,7 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     ['r2r-village-1', 'magic-medical', ['Magic']], // the priest's divine healing magic
     ['r2r-village-4', 'gap-missing', ['Services']], // the brickmaker the page says no clay reaches
     ['r2r-metropolis-14', 'tab-split', ['Institutions']], // a marked row, its door read bare
+    ['r2s-plague_onset-thorp-2', 'spent-fishery', ['Services']], // FS1: the fishing community on its one depleted fishery
   ];
   test.each(CONTROLS)('(b) THE POSITIVE CONTROL: in %s the detector finds %s with the marks read blind', (seed, kind, blind) => {
     const hits = markPromiseInstances(town(seed), { blind }).filter((i) => i.kind === kind && !i.excluded);
@@ -87,12 +92,22 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     ['r2r-village-6', 'Drink service', null], // KEEP: ale in a calm village
     ['r2s-famine-town-1', 'Grain storage', 'Scarce in the famine.'], // the granary's reserves in a grain famine
     ['r2r-town-0', 'Grain storage', null], // KEEP: the same in a calm town
+    ['r2s-plague_onset-thorp-2', 'Fresh fish retail', 'Short of fish.'], // C22221 (FS1): every fishery depleted, whatever the ledger counts
   ];
   test.each(PAIRS)('(c) in %s the row %s leads with %s', (seed, name, mark) => {
     const s = town(seed);
     const svc = row(s, name);
     expect(svc, `${name} prints in ${seed}`).toBeTruthy();
     expect(rowMarkText(s, 'service', svc)).toBe(mark);
+  }, 120_000);
+
+  test('(d) the mark follows the page\'s gap line: an EX-SPLIT row, its input answered by nothing, reads short', () => {
+    const s = town('r2r-hamlet-9');
+    expect(markPromiseInstances(s).some((i) => i.excluded === 'EX-SPLIT' && i.row === 'Charcoal supply')).toBe(true);
+    const e = s.economicState;
+    const built = { ...s, config: { ...s.config, tradeRouteAccess: 'isolated' }, economicState: { ...e, tradeAccess: 'isolated', localProduction: [], primaryExports: [], primaryImports: [], foodSecurity: { ...e.foodSecurity, foodRecord: { ...(e.foodSecurity?.foodRecord || {}), foodSources: [], normalImportPct: 0 } } } };
+    expect(rowMarkText(built, 'service', row(built, 'Charcoal supply'))).toMatch(/^Short of /);
+    expect(rowMarkText(s, 'service', row(s, 'Charcoal supply'))).toBe(null); // the record as born: the page prints no gap line, and no mark
   }, 120_000);
 
   test('(c) S1 (ii): the fish share beside its stopped fishing community carries its house\'s mark (calm: its own line)', () => {

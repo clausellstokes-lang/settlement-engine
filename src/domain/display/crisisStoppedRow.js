@@ -554,7 +554,10 @@ function housesOnSpentGround(settlement) {
     const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(house) || '');
     if (!Object.prototype.hasOwnProperty.call(GROUNDS_WORKED_OFF_CHAIN, id)) continue;
     const own = chains.filter((c) => c && typeof c.resourceKey === 'string' && GROUNDS_WORKED_OFF_CHAIN[id].includes(c.resourceKey));
-    if (own.length) grounds.set(house, own);
+    // RULING FS1 (the chair's, 2026-11-16; vetoable by the owner): where no chain works the town's fisheries, the grounds
+    // themselves: the town's own fisheries of these kinds on the record (`config.nearbyResources`), whatever the food ledger counts
+    const fished = own.length ? own : nearbyGrounds(settlement).filter((k) => GROUNDS_WORKED_OFF_CHAIN[id].includes(k)).map((k) => ({ resourceKey: k }));
+    if (fished.length) grounds.set(house, fished);
   }
   for (const [house, own] of grounds) {
     const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
@@ -565,6 +568,16 @@ function housesOnSpentGround(settlement) {
     out.set(house, Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, key) ? SPENT_GROUND_YIELD[key] : 'its materials');
   }
   return out;
+}
+
+/**
+ * The town's own grounds on the record (`config.nearbyResources`), depleted or not (FS1).
+ * @param {object} settlement
+ * @returns {string[]}
+ */
+function nearbyGrounds(settlement) {
+  const near = /** @type {{ config?: { nearbyResources?: unknown } }} */ (settlement).config?.nearbyResources;
+  return Array.isArray(near) ? near.filter((k) => typeof k === 'string') : [];
 }
 
 /**

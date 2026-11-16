@@ -16,6 +16,10 @@
  *   famine-food   under a famine, a row whose own words name the food the famine failed (`foodRecord.failedSource`), bare
  *   gap-missing   a row of a house the record says LACKS its input (`gaps[]`, `kind: 'missing'`) that lives on that input,
  *                 bare (in ordinary times as in a crisis)
+ *   spent-fishery (RULING FS1, the chair's, 2026-11-16) a row living on its house's input, of a fishing house (the
+ *                 houses `crisisDependence.js :: GROUNDS_WORKED_OFF_CHAIN` names), in a town whose every fishery on the
+ *                 record (`config.nearbyResources`) is on the Depleted list, bare of its shortage mark, whatever the food
+ *                 ledger counts
  *   tab-split     one service row marked on one tab and bare on the other
  *   income-house  an income share of a house's trade whose every live house of that trade the leaf marks, bare
  *   magic-medical the Magic tab's "Medical role: absent" beside a service row the Services tab prints that heals by magic
@@ -50,7 +54,8 @@ import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 import { magicRoleBandShown, magicRoleHeld } from '../../src/domain/display/magicProvisionShown.js';
 import { deriveMagicPosture } from '../../src/domain/display/dossierViewModel.js';
 import { RESOURCE_ROW_TRADES } from '../../src/generators/economy/incomeLineSiblings.js';
-import { INPUT } from '../../src/data/crisisDependence.js';
+import { INPUT, GROUNDS_WORKED_OFF_CHAIN } from '../../src/data/crisisDependence.js';
+import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
 
 /** Travel past the gates, in a row's own words. */
 export const TRAVEL_WORDS = /\b(escort(?:s|ed)?|convoys?|caravans?|expeditions?|through dangerous territory|overland|journeys?|voyages?|ferry|ferries|crossings?)\b/i;
@@ -141,6 +146,17 @@ export function markPromiseInstances(s, opts = {}) {
       if (!chain || !serviceRowDependence(s, svc).includes(INPUT)) continue;
       if (!blind.has('Services') && (rowShortOf(s, 'service', svc) !== null || pill(svc))) continue;
       push({ kind: 'gap-missing', tab: 'Services', row: svc.name, house: svc.institution, need: `lacks ${chain}`, ...(pageSaysShort(svc.institution) ? {} : { excluded: 'EX-SPLIT' }) });
+    }
+  }
+  // spent-fishery (FS1)
+  const fisheries = (Array.isArray(s.config?.nearbyResources) ? s.config.nearbyResources : []).filter((k) => Object.values(GROUNDS_WORKED_OFF_CHAIN).some((g) => g.includes(k)));
+  const spent = new Set(Array.isArray(s.config?.nearbyResourcesDepleted) ? s.config.nearbyResourcesDepleted : []);
+  if (fisheries.length && fisheries.every((k) => spent.has(k))) {
+    for (const svc of rows) {
+      const id = String(catalogIdForName(String(svc.institution || '')) || '');
+      if (!Object.prototype.hasOwnProperty.call(GROUNDS_WORKED_OFF_CHAIN, id) || !serviceRowDependence(s, svc).includes(INPUT)) continue;
+      if (!blind.has('Services') && rowShortOf(s, 'service', svc) !== null) continue;
+      push({ kind: 'spent-fishery', tab: 'Services', row: svc.name, house: svc.institution, need: `every fishery depleted (${fisheries.join(', ')})` });
     }
   }
   // income-house
