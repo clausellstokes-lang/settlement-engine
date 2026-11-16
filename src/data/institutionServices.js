@@ -1871,6 +1871,6 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   // by road; under a siege the officials and the town's own frightened are left. The row goes on, so it is twinned, not marked.
   "Personal protection for merchants, officials, and travelers.": Object.freeze([
     Object.freeze({ text: "Personal protection for merchants, officials, and travelers.", excludes: Object.freeze(['crisis: under_siege']) }),
-    Object.freeze({ text: "Personal protection for officials, and for anyone with reason to fear the streets while the siege lasts.", twinOf: "Personal protection for merchants, officials, and travelers.", crisis: Object.freeze(['under_siege']) }),
+    Object.freeze({ text: "Personal protection for officials, and for anyone with reason to fear for their safety while the siege lasts.", twinOf: "Personal protection for merchants, officials, and travelers.", crisis: Object.freeze(['under_siege']) }),
   ]),
 });
