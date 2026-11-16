@@ -1,0 +1,8 @@
+{"id":"C202157","town":"bar0-village-calm-rand-30","sev":"LOW","kind":"PAIR","why":"Magic tab's 'Institutional control · unregulated' beside 'Legality · regulated' on the line above (C202156)","other":"C202156"}
+{"id":"C202387","town":"bar0-village-calm-rand-30","sev":"LOW","kind":"PAIR","why":"Daily Life's 'buildings are finished rather than patched' against Foundations' 'Infrastructure condition · Strained'","other":"C201644"}
+{"id":"C202481","town":"bar0-village-calm-rand-31","sev":"LOW","kind":"STATE","why":"Overview scene has tanning pits smelling sour with no mark; LAND gaps and the Tannery rows say it lacks livestock and hides (Short of its materials)","other":"C202604"}
+{"id":"C202816","town":"bar0-village-calm-rand-31","sev":"LOW","kind":"BROKEN","why":"'Needed, and not brought in: timber, stone, luxury goods, timber, mountain timber' lists timber twice","other":""}
+{"id":"C203010","town":"bar0-village-calm-rand-31","sev":"LOW","kind":"PAIR","why":"'Militia volunteers patrol the main paths' against Guard assessment 'militia musters when needed but cannot maintain consistent patrol'; DEFENCE watch: none","other":"C202987"}
+{"id":"C203044","town":"bar0-village-calm-rand-31","sev":"MED","kind":"PAIR","why":"'Fortification and forces are present and paid' against 'Volunteers with other work to do' and a citizen militia; garrison, watch and mercenaries none","other":"C202988"}
+{"id":"C203071","town":"bar0-village-calm-rand-31","sev":"MED","kind":"PAIR","why":"Magic tab's 'Reliance on magic: None' against 'the trade that makes it now leans on help beyond ordinary work'; FOOD by magic 0%","other":"C203065"}
+{"id":"DONE","lines":1882,"blocks":2,"flags":7}
