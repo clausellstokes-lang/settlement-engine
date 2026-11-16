@@ -484,7 +484,18 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // (vite.config.js: facts/sharedPower.js stays in engine-core) moves no byte of the worker (measured 2,322,103 before it and
 // after). customContentPreview.worker moves by the same +9,924. The app build over the same span, for orientation: engine
 // +5,447, engine-core +520 (of it +509 the chunking cure), data +120. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 2322103;
+// 2,322,103 -> 2,356,121 (2026-11-16, BAR4-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR4: the joined line 2d80aa740 + THE ONE MERGE of
+// 600b7683a (the repair seat BAR4-CLOSE-SWEEP and the first-paint seat BAR4-FIRSTPAINT), merged abf643259, the edge bundles re-derived
+// e8852a5b5; re-recorded ONCE under the chair's ruling B3, the owner's word of 2026-11-15 07:50 UTC deferring the size budgets to the
+// chair; VETOABLE BY THE OWNER): A RISE OF 34,018 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this
+// file's own arm (VERIFY_DIST=1): the line's closed tip c4ac1ef84a reads 2,322,080 (23 under the old ceiling); this tree reads
+// 2,356,121. The cause: the src/ cures of the round's nine branches AS A WHOLE (the worker carries the whole engine); the largest by
+// their hand-backs' own measures: BAR4-SCENES-2 +13,714 at its tip over the joined f19c3b28b (2,342,187 -> 2,355,901: HW1's one fact for
+// "this house is short", `trade at work` and the namesake's one home), BAR4-HOUSES +4,657 (the atom, the reader, the late sets, the leaf),
+// BAR4-PEOPLE +3,898 (the pair readings); then BAR4-RECORD +3,229, BAR4-SAFETY +2,746, BAR4-HISTORY +2,669, BAR4-CORPUS-ECO +1,724,
+// BAR4-CORPUS-DEF +1,023, each on its own base; BAR4-FIRSTPAINT's seam moves no byte of the worker and the repair seat's last cures
+// +220. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2356121;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
