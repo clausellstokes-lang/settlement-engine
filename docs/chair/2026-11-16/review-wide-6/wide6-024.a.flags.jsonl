@@ -1,0 +1,6 @@
+{"id":"C61115","town":"bar0-city-wartime-rand-35","sev":"MED","kind":"PAIR","why":"'Pilgrims crowd the road in' as ordinary traffic under Wartime; Crisis tab says caravans pass only 'on army requisition' and army holds the road","other":"C61167"}
+{"id":"C61345","town":"bar0-city-wartime-rand-35","sev":"LOW","kind":"LACKS","why":"Outlook says timber is short and builders bid for 'the yards'; LAND lists no timber resource, TRADE imports no timber, HOUSES has no timber yard","other":""}
+{"id":"C62474","town":"bar0-city-wartime-rand-35","sev":"MED","kind":"PAIR","why":"'food trades are failing' against FOOD word Secure, failed source None, and 'Tyrhammer is fed' / 'can take a bad season without going hungry'","other":"C62012"}
+{"id":"C62573","town":"bar0-city-wartime-rand-35","sev":"MED","kind":"PAIR","why":"'arcane houses answer to the soldiers' against Wizard's tower and Teleportation circle both 'Backs · Corrupt City Council' and 'Military role: occasional'","other":"C61628"}
+{"id":"C61967","town":"bar0-city-wartime-rand-35","sev":"MED","kind":"PAIR","why":"'a little left over each year' (and Daily Life 'takes in a little more than it pays out') against 'The war takes most of the money' under Wartime","other":"C62454"}
+{"id":"DONE","lines":2522,"blocks":1,"flags":5}
