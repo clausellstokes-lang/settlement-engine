@@ -172,8 +172,9 @@ export function flowCrisisMarks(town, records, shown) {
  * siege bringing none in) and the shares beside it carry their marks. The share's mark is the leaf's (`rowStoppedBy`,
  * kind 'income'); where the leaf gives none and trade is stopped (`tradeStoppedHere`), a share whose title is a chain's
  * printed name (`chainPrintName`, or the record's label) takes the siege's partial mark, "Curtailed by the siege.", where
- * that chain's card prints "impaired" (`chainCardUnderCrisis` over `chainAsShown`, the card's own reading): the trade works
- * what it holds and nothing comes in to mend it. Outside a siege the share reads the leaf alone.
+ * that chain's card prints "impaired" by the siege (`impairedBySiege`: `chainCardUnderCrisis` over `chainAsShown`, the card's
+ * own reading, of a chain the record holds at work or on a worked-out ground): the trade works what it holds and nothing
+ * comes in to mend it. Outside a siege the share reads the leaf alone.
  * @param {object | null | undefined} town @param {Record<string, unknown> | null | undefined} src `economicState.incomeSources[]`
  * @param {string[]} [crises] the stopping crises in force (read from the town when absent)
  * @returns {string | null} the mark's kind, else null
@@ -186,7 +187,20 @@ export function incomeKindShown(town, src, crises = stoppingCrisesOf(town)) {
   const chains = /** @type {{ economicState?: { activeChains?: unknown } } | null | undefined} */ (town)?.economicState?.activeChains;
   const titled = (Array.isArray(chains) ? /** @type {Record<string, unknown>[]} */ (chains) : [])
     .filter((c) => c && (folded(c.label) === title || folded(chainPrintName(/** @type {any} */ (c), town)) === title));
-  return titled.some((c) => String(chainCardUnderCrisis(town, c, chainAsShown(c, town))?.status ?? '') === 'impaired') ? SIEGE_CURTAILED : null;
+  return titled.some((c) => impairedBySiege(town, c)) ? SIEGE_CURTAILED : null;
+}
+
+/**
+ * Is this chain's card impaired by the siege: its card prints "impaired" where the record's own state is a working one (the
+ * siege's reading of the card did it), or the record's impairment is a ground worked out (`resourceDepleted`) that no import
+ * can now mend? A chain the record holds impaired for a cause of its own (a spellcasting trade short of its casters) is not
+ * the siege's, and its share keeps no siege mark.
+ * @param {object | null | undefined} town @param {Record<string, unknown>} c `economicState.activeChains[]`
+ * @returns {boolean}
+ */
+function impairedBySiege(town, c) {
+  if (String(chainCardUnderCrisis(town, c, chainAsShown(c, town))?.status ?? '') !== 'impaired') return false;
+  return CARD_WORKING.has(String(c.status ?? '')) || String(c.status ?? '') === 'vulnerable' || c.resourceDepleted === true;
 }
 
 /** The siege's partial kind, the leaf's own key (`crisisStoppedRow.js :: MARK_LINES`, "Curtailed by the siege."). */

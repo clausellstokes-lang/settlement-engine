@@ -1372,7 +1372,7 @@ import { foodWordShown } from '../foodWordShown.js'; // BAR5-FOOD (c): the page'
  * @param {unknown} settlement the town
  * @returns {string | null}
  */
-function partialUnderNoExport(key, settlement) {
+export function partialUnderNoExport(key, settlement) {
   if (key !== 'EXPLOITATION: partiallyExploited' || !settlement || typeof settlement !== 'object' || tradeStoppedHere(settlement)) return key;
   return tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement)).exports.length === 0 ? PARTIAL_NO_EXPORT_KEY : key;
 }
@@ -1392,7 +1392,7 @@ import { tradeStoppedHere } from '../chainStateShown.js';
  * @param {unknown} settlement @param {unknown} name the house the Services tab names
  * @returns {string | null}
  */
-function houseStoppedWhole(key, settlement, name) {
+export function houseStoppedWhole(key, settlement, name) {
   if (key !== 'A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED' || !settlement || typeof settlement !== 'object') return key;
   const house = text(name);
   const rows = serviceRowsOf(/** @type {{ availableServices?: unknown }} */ (settlement).availableServices).map(({ svc }) => svc)
