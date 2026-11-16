@@ -1,0 +1,8 @@
+{"id":"C36355","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"'One importer brings in all the grain' but FOOD: 73% grown locally, only 23% brought in; 'Trade Monopoly' is in no tension, crisis or past.","other":""}
+{"id":"C36645","town":"bar0-town-occupied-rand-24","sev":"LOW","kind":"STATE","why":"Says the metalwork needs gold/silver ore from elsewhere; LAND, TRADE and income show an iron trade only, no gold or silver work.","other":""}
+{"id":"C36857","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"PAIR","why":"'The town watch exists on paper' but DEFENCE lists a Town watch that walks the night and holds the gates, as C36906 and C36909 say.","other":"C36909"}
+{"id":"C37631","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"LACKS","why":"'Several quarters, each with its house of worship' in a town of 329 people with 2-5 parish churches; the population cannot hold quarters.","other":""}
+{"id":"C37699","town":"bar0-town-occupied-rand-25","sev":"LOW","kind":"LACKS","why":"By-products 'sold to chandlers'; HOUSES has no chandler and TRADE imports beeswax candles, so no candle-maker is here.","other":""}
+{"id":"C37711","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"LACKS","why":"'Several congregations covering different districts' in a town of 329; the population cannot hold districts.","other":"C37631"}
+{"id":"C37887","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"PAIR","why":"Says hide work stops half-way, no finishing; but Tanners' chain prints boots, saddles and leather armour as outputs and the town makes boots and shoes.","other":"C37845"}
+{"id":"DONE","lines":2284,"blocks":2,"flags":7}
