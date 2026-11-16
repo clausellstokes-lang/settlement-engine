@@ -1,0 +1,4 @@
+{"id":"C11307","town":"bar0-city-wartime-rand-25","sev":"MED","kind":"PAIR","why":"says smiths have nothing to mend tools with; Blacksmiths row offers Repairs and Tool manufacture with no short/curtailed mark","other":"C11327"}
+{"id":"C12002","town":"bar0-city-wartime-rand-25","sev":"LOW","kind":"PAIR","why":"says the city buys iron ore from outside; the page also says iron ore is needed and not brought in","other":"C12009"}
+{"id":"C12185","town":"bar0-city-wartime-rand-25","sev":"LOW","kind":"LACKS","why":"names a Crown that supplies, appoints War Council and holds war authority; GOVERNMENT lists no crown, only the Merchant oligarchy and its four powers","other":""}
+{"id":"DONE","lines":2622,"blocks":1,"flags":3}
