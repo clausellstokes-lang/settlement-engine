@@ -601,7 +601,7 @@
     },
     {
      "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noProfiteer",
-     "text": "no one on the roster is named",
+     "text": "no one is named for it",
      "needs": [],
      "excludes": [],
      "crisis": "any",
