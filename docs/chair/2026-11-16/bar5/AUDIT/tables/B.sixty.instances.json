@@ -15,7 +15,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -33,7 +35,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -51,7 +55,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -69,7 +75,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Offal and by-products",
+  "factWriter": "src/generators/economy/foodBalance.js :: grownShareOf"
  },
  {
   "law": "L2",
@@ -87,7 +95,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/foodBalance.js :: grownShareOf"
  },
  {
   "law": "L3",
@@ -105,7 +115,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L2",
@@ -123,7 +135,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -141,7 +155,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L3",
@@ -159,7 +175,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
  },
  {
   "law": "L3",
@@ -177,7 +195,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Gladiator hire"
  },
  {
   "law": "L3",
@@ -195,7 +215,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.coal_deposits",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
  },
  {
   "law": "L2",
@@ -213,7 +235,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -231,7 +255,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -249,7 +275,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -267,7 +295,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
  },
  {
   "law": "L2",
@@ -285,7 +315,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
  },
  {
   "law": "L2",
@@ -303,7 +335,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
  },
  {
   "law": "L2",
@@ -321,7 +355,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
  },
  {
   "law": "L2",
@@ -339,7 +375,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/generators/economy/incomeLineSiblings.js :: REMEDIES_LINE",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
  },
  {
   "law": "L2",
@@ -357,7 +395,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/domain/display/magicProvisionShown.js :: NOT_FOOD_NOTES",
+  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
  },
  {
   "law": "L2",
@@ -375,7 +415,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -393,7 +435,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Offal and by-products",
+  "factWriter": "src/generators/economy/foodBalance.js :: grownShareOf"
  },
  {
   "law": "L2",
@@ -411,7 +455,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/foodBalance.js :: grownShareOf"
  },
  {
   "law": "L3",
@@ -429,7 +475,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Defence services"
  },
  {
   "law": "L2",
@@ -447,7 +495,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -465,7 +515,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescVariants.js :: PAIRS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L2",
@@ -483,7 +535,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L3",
@@ -501,7 +555,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L3",
@@ -519,7 +575,9 @@
   "crises": [
    "under_siege",
    "famine"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L3",
@@ -536,7 +594,9 @@
   "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L2",
@@ -553,7 +613,9 @@
   "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture, Weapon smithing; card Blacksmiths)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
  },
  {
   "law": "L2",
@@ -570,7 +632,9 @@
   "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Repairs @ Blacksmiths)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
  },
  {
   "law": "L2",
@@ -587,7 +651,9 @@
   "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Tool manufacture @ Blacksmiths)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
  },
  {
   "law": "L2",
@@ -604,7 +670,9 @@
   "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Weapon smithing @ Blacksmiths)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Weapon smithing",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
  },
  {
   "law": "L2",
@@ -621,7 +689,9 @@
   "why": "the page says the army holds every sound working animal and the carts; this unmarked line hires them out (chips: Horse hire; card Stable district)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/data/narrativeData.js :: STRESS_DESCS.wartime"
  },
  {
   "law": "L2",
@@ -638,7 +708,9 @@
   "why": "the page says the army holds every sound working animal and the carts; this unmarked line hires them out (entry Horse hire @ Stable district)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/data/narrativeData.js :: STRESS_DESCS.wartime"
  },
  {
   "law": "L2",
@@ -655,7 +727,9 @@
   "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (chips: Repairs, Tool manufacture, Weapon smithing; card Blacksmiths)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
  },
  {
   "law": "L2",
@@ -672,7 +746,9 @@
   "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Repairs @ Blacksmiths)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "(untraced)",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
  },
  {
   "law": "L2",
@@ -689,7 +765,9 @@
   "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Tool manufacture @ Blacksmiths)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
  },
  {
   "law": "L2",
@@ -706,7 +784,9 @@
   "why": "the page says war has taken the iron and the smiths have nothing to mend tools with; this unmarked smith row offers ironwork (entry Weapon smithing @ Blacksmiths)",
   "crises": [
    "wartime"
-  ]
+  ],
+  "writer": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Weapon smithing",
+  "factWriter": "src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK"
  },
  {
   "law": "L2",
@@ -723,7 +803,9 @@
   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
   "crises": [
    "under_siege"
-  ]
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L2",
@@ -740,7 +822,9 @@
   "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
   "crises": [
    "under_siege"
-  ]
+  ],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
   "law": "L3",
@@ -757,7 +841,9 @@
   "why": "chain Taverns & Social Life is printed ○ Operational and lists \"lodging\", which the page marks stopped",
   "crises": [
    "under_siege"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Meals and drink"
  },
  {
   "law": "L3",
@@ -774,7 +860,9 @@
   "why": "chain Taverns & Social Life is printed ○ Operational over houses (Access to a house of worship) whose every service the page marks stopped",
   "crises": [
    "under_siege"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.hamlet"
  },
  {
   "law": "L3",
@@ -791,7 +879,9 @@
   "why": "the food line puts the catch on the table; the page marks the fishing stopped",
   "crises": [
    "under_siege"
-  ]
+  ],
+  "writer": "src/domain/foodways.js :: FRAMES",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L3",
@@ -808,7 +898,9 @@
   "why": "chain Faith & Worship is printed ✓ Running over houses (Access to a house of worship, Wayside shrine) whose every service the page marks stopped",
   "crises": [
    "under_siege"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS"
  },
  {
   "law": "L3",
@@ -823,7 +915,9 @@
    "line": "Needed, and not brought in: timber, stone, grapes, copper ore, mountain timber. | Ask what Shriganj lives on and you will hear more than one trade named. Magic carries real weight at Shriganj: what it can do is reckoned with in the metropolis's dealings, whatever its own share of the metropolis's money. A good part of the grapes Shriganj's work uses must come from elsewhere; when none comes, that work stands idle."
   },
   "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
-  "crises": []
+  "crises": [],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "src/data/supplyChainData.js :: SUPPLY_CHAIN_NEEDS.resourceSubstitutes"
  },
  {
   "law": "L3",
@@ -838,7 +932,9 @@
    "line": "Needed, and not brought in: stone, copper ore, gold and silver ore. | Niederhain lives on many trades, and no one of them carries the town. Magic is reckoned with in Niederhain's dealings, whatever it earns. A good part of the copper ore Niederhain's work uses must come from elsewhere; when none comes, that work stands idle."
   },
   "why": "the page says copper ore is needed and not brought in, and that the work stands idle; this house works copper ore with no mark",
-  "crises": []
+  "crises": [],
+  "writer": "src/data/institutionDescVariants.js :: DESC_VARIANT_SIBLINGS",
+  "factWriter": "src/foundry/journalPages.js :: resourcesPage"
  },
  {
   "law": "L3",
@@ -853,7 +949,9 @@
    "line": "Needed, and not brought in: grapes, clay. | No one trade earns half of what Andronkastro makes, so a bad year in any one of them would hurt without ruining it. Magic is reckoned with in Andronkastro's dealings, whatever it earns. A good part of the grapes Andronkastro's work uses must come from elsewhere; when none comes, that work stands idle."
   },
   "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
-  "crises": []
+  "crises": [],
+  "writer": "src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L3",
@@ -864,13 +962,15 @@
   "line": "Herbal remedies · Potions and elixirs",
   "against": {
    "tab": "Systems/Resources",
-   "i": 18,
-   "line": "Partial processing - worked only to semi-finished goods"
+   "i": 3,
+   "line": "Partial · Medicinal herbs · very high value | Partial processing - worked only to semi-finished goods"
   },
   "why": "the page says work on medicinal herbs stops half-way (no Alchemist shop); chain Herbalism & Remedies prints finished goods of the missing house",
   "crises": [
    "occupied"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "src/data/resourceChains.js :: RESOURCE_CHAINS.herbs"
  },
  {
   "law": "L3",
@@ -887,7 +987,9 @@
   "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leatherworking & Cordwaining prints finished goods of the missing house",
   "crises": [
    "occupied"
-  ]
+  ],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L3",
@@ -902,7 +1004,9 @@
    "line": "Farmland · Economy / Services · Grain at harvest"
   },
   "why": "the food line names another food as the table's own, beside a farmland house that sells its own grain",
-  "crises": []
+  "crises": [],
+  "writer": "src/domain/foodways.js :: FRAMES",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Grain at harvest"
  },
  {
   "law": "L3",
@@ -917,7 +1021,9 @@
    "line": "Farmland · Economy / Services · Grain at harvest"
   },
   "why": "the food line names another food as the table's own, beside a farmland house that sells its own grain",
-  "crises": []
+  "crises": [],
+  "writer": "src/domain/foodways.js :: FRAMES",
+  "factWriter": "src/data/institutionServices.js :: INSTITUTION_SERVICES.Grain at harvest"
  },
  {
   "law": "L3",
@@ -928,11 +1034,13 @@
   "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
   "against": {
    "tab": "Systems/Resources",
-   "i": 18,
-   "line": "Partial processing - worked only to semi-finished goods"
+   "i": 5,
+   "line": "Partial · Iron ore · very high value | Partial processing - worked only to semi-finished goods"
   },
   "why": "the page says work on iron ore stops half-way (no Smelter); chain Iron & Metalwork prints finished goods of the missing house",
-  "crises": []
+  "crises": [],
+  "writer": "src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L2",
@@ -949,7 +1057,9 @@
   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
   "crises": [
    "famine"
-  ]
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L3",
@@ -966,7 +1076,9 @@
   "why": "the page says livestock failed this year; the commodities available list it unmarked",
   "crises": [
    "famine"
-  ]
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grazing_land",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
  },
  {
   "law": "L3",
@@ -983,7 +1095,9 @@
   "why": "the page says grain failed this year; the commodities available list it unmarked",
   "crises": [
    "famine"
-  ]
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.grain_fields",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
  },
  {
   "law": "L2",
@@ -1000,7 +1114,9 @@
   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
   "crises": [
    "famine"
-  ]
+  ],
+  "writer": "src/generators/safetyProfile.js :: NO_WATCH_SMALL",
+  "factWriter": "(untraced)"
  },
  {
   "law": "L3",
@@ -1017,7 +1133,9 @@
   "why": "the page says grain failed this year; the commodities available list it unmarked",
   "crises": [
    "famine"
-  ]
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.hot_springs",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
  },
  {
   "law": "L3",
@@ -1034,7 +1152,9 @@
   "why": "the page says livestock failed this year; the commodities available list it unmarked",
   "crises": [
    "famine"
-  ]
+  ],
+  "writer": "src/data/resourceData.js :: RESOURCE_DATA.precious_metals",
+  "factWriter": "src/components/new/tabs/ResourcesTab.jsx :: ResourceChainCard"
  },
  {
   "law": "L2",
@@ -1051,6 +1171,8 @@
   "why": "the page says no one earns a normal living while the famine lasts; this unmarked line promises steady work",
   "crises": [
    "famine"
-  ]
+  ],
+  "writer": "src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS",
+  "factWriter": "src/data/stressTypes.js :: STRESS_TYPE_MAP.famine"
  }
 ]

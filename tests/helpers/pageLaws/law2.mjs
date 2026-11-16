@@ -5,13 +5,14 @@
 // and (3) the line is unmarked. Plot hooks and rumours state their own facts and are not read.
 import { sentences, lineMarked, cardAt, entryAt, MARK_LEAD } from './pageB.mjs';
 
-const SKIP_TABS = /^(Summary\/Plot Hooks|World\/Rumors & News|Notes\/)/;
+// the history tells of the past (precision draw 2: "drew more pilgrims" 38 years ago is no claim of today)
+const SKIP_TABS = /^(Summary\/Plot Hooks|World\/Rumors & News|World\/History|Notes\/)/;
 // a sentence that speaks of the crisis or of before it is the crisis's own account, not an ordinary-times claim
 const SELF_AWARE = /\b(siege|besieg|famine|war\b|the army|armies|before the|used to|no longer|until the\b|cut off|stopped|nothing comes|remember|no (camels|caravans?|traders?|pilgrims?) )/i;
 
 // medicinal goods the page can say come from outside (rule S2: the page's own "depend on <good> from outside, which the siege has cut off")
 const CUT_GOODS = {
-  'medicinal herbs': /\b(medications?|medicines?|antidotes?|remed(y|ies)|tinctures?|salves?|herbalism kits?|medicinal herbs)\b/i,
+  'medicinal herbs': /\b(medications|medicines|antidotes|remedies|tinctures|salves|herbalism kits|medicinal herbs)\b/i, // plural: an offer of goods, not "mundane medicine"
 };
 
 export const RULES = [
@@ -70,7 +71,9 @@ export const RULES = [
   },
   {
     id: 'L2.war.animals', crisis: 'wartime',
-    reach: /Every sound animal of working age has a receipt|horses in .{1,40} are old, or lame|The army has the carts/,
+    // the page's own word that the army holds the animals (not "the army has the carts and the road", which the
+    // second check read as a matter of degree: C7834 WEAK)
+    reach: /Every sound animal of working age has a receipt|horses in .{1,40} are old, or lame/,
     chip: /^(Horse hire|Cart hire|Wagon hire|Mount hire|Draught animals)$/i,
     claim: /\b(rent horses|horse hire|fresh mount|cart hire|wagons? for hire|mounts for hire)\b/i,
     why: 'the page says the army holds every sound working animal and the carts; this unmarked line hires them out',
@@ -88,7 +91,9 @@ const ROW_TABS = new Set(['Systems/Institutions', 'Systems/Services', 'Systems/E
 export function law2(T, town) {
   const out = [];
   // a house's NAME is not a claim ("Caravan masters' exchange" on a Power row): strip the names before reading
-  const names = [...T.houseNames].filter((n) => n.length > 3).sort((a, b) => b.length - a.length).map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  // and a person's name ("Pilgrim Fuchs" is a man, not a pilgrim)
+  const people = (T.record?.npcs || []).flatMap((n) => [n.name, ...String(n.name || '').split(' ')]).filter((n) => n && n.length > 2);
+  const names = [...T.houseNames, ...people].filter((n) => n.length > 2).sort((a, b) => b.length - a.length).map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
   const nameRe = names.length ? new RegExp(names.join('|'), 'gi') : null;
   const stripNames = (s) => (nameRe ? s.replace(nameRe, ' ') : s);
   for (const r of RULES) {
@@ -130,6 +135,7 @@ export function law2(T, town) {
       }
       if (/^(Needs |Backs · |Connection:|Secret: )/.test(x.text)) continue;
       if (x.tab === 'Systems/Economics' && T.chains.some((c) => c.headIdx === x.i)) continue; // a chain's name and state
+      if (x.tab === 'Systems/Economics' && /^(Produced locally|Exports|Imports)$/.test(T.tabs[x.tab][x.i - 1] || '')) continue; // the trade lists are LAW 3's
       if (x.tab === 'Systems/Services' && T.services.some((e) => e.houseIdx === x.i)) continue; // a house's name
       if (lineMarked(T, x.tab, x.i)) continue;
       if (r.chipHouse && x.tab === 'Systems/Institutions' && !r.chipHouse.test(cardAt(T, x.i)?.name || '')) continue;

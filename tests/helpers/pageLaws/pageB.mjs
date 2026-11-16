@@ -136,6 +136,9 @@ export function lineMarked(T, tab, i) {
     const c = e && T.cards.find((c) => c.name === e.house);
     if (c?.marked) return 'card';
   }
-  if (tab === 'Systems/Economics') { const ch = chainAt(T, i); if (ch?.marked) return 'chain'; }
+  if (tab === 'Systems/Economics') {
+    const ch = chainAt(T, i); if (ch?.marked) return 'chain';
+    if (ch && ch.yieldsNormally && i === ch.outIdx) return 'normally'; // "Normally yields": the chain says it is not yielding now
+  }
   return null;
 }

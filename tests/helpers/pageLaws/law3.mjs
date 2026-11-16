@@ -112,7 +112,7 @@ export function law3(T, town) {
       push('L3.foodModel', x.tab, x.i, x.text, { tab: 'Systems/Institutions', i: farm.chipIdx, line: `${farm.head} / ${farm.chipLine}` }, 'the food line names another food as the table\'s own, beside a farmland house that sells its own grain');
   }
 
-  // L3.needed: "Needed, and not brought in: X" with "when none comes, that work stands idle" -> an unmarked working house (Crafts, Economy) that works X
+  // L3.needed: "Needed, and not brought in: X" with "when none comes, that work stands idle" -> an unmarked craft house that works X
   const need = T.all.find((x) => /^Needed, and not brought in: /.test(x.text));
   if (need) {
     const goods = need.text.replace(/^Needed, and not brought in: /, '').replace(/\.$/, '').split(/, | and /).map((g) => g.replace(/\(.*?\)/g, '').trim().toLowerCase()).filter(Boolean);
@@ -123,7 +123,7 @@ export function law3(T, town) {
       const word = g.split(' ').pop().replace(/s$/, '');
       const re = new RegExp(`\\b${word}s?\\b`, 'i');
       for (const c of T.cards) {
-        if (done.has(c.name) || !/^(Crafts|Economy)$/.test(c.cat.trim())) continue;
+        if (done.has(c.name) || !/^Crafts$/.test(c.cat.trim())) continue; // a craft that works the good (precision draw 2: a pasture is no work standing idle)
         if (c.marked || c.chips.some((ch) => ch.marked)) continue;
         if (!c.lines.some((l) => re.test(l.text))) continue;
         done.add(c.name);
@@ -142,7 +142,13 @@ export function law3(T, town) {
     if (!chainRe) continue;
     const prod = (g.missing || []).map((h) => FINISHED_BY[Object.keys(FINISHED_BY).find((k) => new RegExp(k, 'i').test(h))]).filter(Boolean);
     if (!prod.length) continue;
-    const ag = T.all.find((x) => new RegExp(`Work on the ${r} here stops half-way`, 'i').test(x.text)) || said;
+    // the page must name THIS material: "Work on the <r> here stops half-way", or a Resources row "Partial · <r>" beside
+    // the semi-finished line (the generic line alone does not say which material: precision draw 1, 2026-11-16)
+    const res = T.tabs['Systems/Resources'] || [];
+    const pi = res.findIndex((l) => new RegExp(`^Partial · ${r}\\b`, 'i').test(l));
+    const ag = T.all.find((x) => new RegExp(`Work on the ${r} here stops half-way`, 'i').test(x.text))
+      || (pi >= 0 && res.includes('Partial processing - worked only to semi-finished goods') ? { tab: 'Systems/Resources', i: pi, text: `${res[pi]} | Partial processing - worked only to semi-finished goods` } : null);
+    if (!ag) continue;
     for (const ch of T.chains) {
       if (!ch.outputs || ch.yieldsNormally || !(chainRe.test(ch.name) || ch.from.some((f) => chainRe.test(f)))) continue;
       const hit = prod.find((re) => re.test(ch.outputs));
