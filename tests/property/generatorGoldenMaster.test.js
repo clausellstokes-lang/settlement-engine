@@ -18,6 +18,17 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-16 — THE CLOSE OF THE ROUND BAR3, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-15 20:30:10 UTC: "Yes that one too", answering the chair's question of 20:28:06 UTC;
+ *   record docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json; seat BAR3-CLOSE-DOORS-2, vetoable).
+ *   521 of 525 rows (thorp 81, hamlet 84, village 83, town 105, city 84, metropolis 84) against the stored corpus's tree 83fc14ad6 (which reproduces
+ *   all 525). THE CAUSE: the round's seven builder branches' declared cures, joined at 98363cb84 (people, powers, places, defecon; corpus, services and
+ *   labels move no row), and the second repair seat's letter d (efdb3841d; it moves no golden row: the same bytes at fb59da43e and after its merge).
+ *   FIELD-DIFFED by leaf path, text leaves only: relationships[] description 349 / tension 301, powerStructure recentConflict 272 / factions[].desc 249 /
+ *   factionRelationships[].narrative 140, economicState...foodwaysLine 236 and culturalIdentity.foodways 212, npcs[].personality.dominant 145 (P7a),
+ *   institutions[].desc 70, economicState.safetyProfile economicDragDesc 60 / guardEffectivenessDesc 36, prominentRelationship 57, the entrepot note 37,
+ *   stress/stressors crisisHook 12, pressureSentence 7, arrivalScene 1, economicViability.plotHooks 1; no array length, no non-text leaf.
+ *   Written at b46b26d92's line (the doors' branch at 8694af277). 9fab7487.. -> 6adede0d..
+ *
  * 2026-11-15 — THE CLOSE OF THE ROUND BAR2, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-15 20:27:16 UTC:
  *   "Yes refresh the reference"; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json; seat BAR2-CLOSE-DOORS-2, vetoable).
  *   418 of 525 rows (thorp 73, hamlet 29, village 43, town 105, city 84, metropolis 84) against the stored corpus's tree 74ded1800 (which reproduces
