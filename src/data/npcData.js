@@ -2015,7 +2015,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} owes ${s.name} more than the settlement collects in two years of taxes. ${s.name} is paid first, every quarter.`, colour: true },
       { line: (r, s) =>
         `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, needs: ["institution: bank","ruling body"], excludes: ["ruler: lord","ruler: occupier"] }, // COHERENCE-POWERS-2: no counting-house where the town has no bank
-      { line: (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`, colour: true },
+      { line: (r, s) => `${r.name} holds office on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`, colour: true }, // BAR4-PEOPLE (C37293, WEAK): the government's card holds an office, not always the seat (20 of 21 printings on the 720)
     ], ['government', 'economy']),
     tension: pairProse('t', [
       { line: (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`, colour: true },
@@ -2124,7 +2124,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} still uses ${r.name}'s methods and ${r.name}'s ledger format. Everyone who sees ${s.name}'s work recognises the teacher.`, colour: true, sharedTrade: true, // BAR3-PEOPLE (C22325)
         twin: (r, s) => `${s.name} still keeps ${r.name}'s hours and ${r.name}'s ledger format. Everyone who deals with ${s.name} recognises the teacher.` },
-      { line: (r, s) => `${r.name} named ${s.name} as successor in front of witnesses. The formal handover has not happened.`, colour: true },
+      { line: (r, s) => `${r.name} named ${s.name} as successor in front of witnesses. The formal handover has not happened.`, successor: true, needs: ['shared place'] }, // BAR4-PEOPLE (P1, C41801; the chair's TI1): a successor is drawn only where the place can pass (288 towns of the 720)
     ]),
     tension: pairProse('t', [
       { line: (r, s) =>
@@ -2321,22 +2321,22 @@ export const STRESS_ECONOMIC_EFFECTS = {
   },
   bitter_history: {
     label: 'Unresolved History',
-    desc: pairProse('d', [
+    desc: pairProse('d', [ // BAR4-PEOPLE (TI1): an enemy's line states the pair's trust (none): no later line of the pair trusts completely
       { line: (r, s) =>
-        `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`, colour: true },
+        `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`, colour: true, trust: 'none' },
       { line: (r, s) =>
-        `${r.name} and ${s.name} were close once, and whatever broke between them is the one subject neither will discuss.`, colour: true },
+        `${r.name} and ${s.name} were close once, and whatever broke between them is the one subject neither will discuss.`, colour: true, trust: 'none' },
       { line: (r, s) =>
-        `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`, colour: true },
-      (r, s) =>
-        `${r.name} testified against ${s.name} in a case ten years ago. ${s.name} lost a fortune and has not spoken to ${r.name} since.`,
+        `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`, colour: true, trust: 'none' },
+      { line: (r, s) => // BAR4-PEOPLE (P1, C18833; the chair's TI1): a silence needs the two to carry no other tie (5 towns of the 720)
+        `${r.name} testified against ${s.name} in a case ten years ago. ${s.name} lost a fortune and has not spoken to ${r.name} since.`, contact: 'none', needs: ['lone tie'], trust: 'none' },
       { line: (r, s) =>
-        `${s.name} took the post ${r.name} had been promised. ${r.name} has treated ${s.name} as an enemy from that day.`, colour: true },
+        `${s.name} took the post ${r.name} had been promised. ${r.name} has treated ${s.name} as an enemy from that day.`, colour: true, trust: 'none' },
       { line: (r, s) =>
-        `${r.name} and ${s.name} were partners until one of them emptied the shared account. Each says it was the other.`, colour: true },
-      { line: (r, s) => `${r.name} blames ${s.name} for a death in ${r.name}'s family. ${s.name} has never denied it.`, colour: true },
+        `${r.name} and ${s.name} were partners until one of them emptied the shared account. Each says it was the other.`, colour: true, trust: 'none' },
+      { line: (r, s) => `${r.name} blames ${s.name} for a death in ${r.name}'s family. ${s.name} has never denied it.`, colour: true, trust: 'none' },
       { line: (r, s) =>
-        `${r.name} and ${s.name} fought a duel in their youth. Both survived, and the scar is on ${s.name}'s face.`, colour: true },
+        `${r.name} and ${s.name} fought a duel in their youth. Both survived, and the scar is on ${s.name}'s face.`, colour: true, trust: 'none' },
     ]),
     tension: pairProse('t', [
       { line: (r, s) => `What first broke ${r.name} and ${s.name} apart is happening again, and both of them know it.`, colour: true },
@@ -2366,6 +2366,19 @@ export const HANDLER_TIE_ARCHETYPES = Object.freeze(Object.fromEntries(Object.en
   tension: pairProse('t', row.tension),
   type: row.type,
 })])));
+
+/**
+ * BAR4-PEOPLE (the chair's ruling TI1 of 2026-11-16, vetoable by the owner): A TIE'S TEMPER, read by the tie draw
+ * (`people/ties.js :: drawTies`) so a pair's second tie is drawn in the temper of its first, and by the pair's detector
+ * (tests/helpers/peopleKinds.js). WARM: a devoted or lifelong teacher, a deep respect (and any line declaring
+ * `trust: 'full'`); COLD: an enemy of any strength. A rival's tie is neither (rivals respect one another; a rival was
+ * taught), and so is a family's (blood holds whatever the quarrel). By kind, then by strength (`'*'` every strength).
+ */
+export const TIE_TEMPER = Object.freeze({
+  mentor_student: Object.freeze({ devoted: 'warm', lifelong: 'warm' }),
+  respect: Object.freeze({ deep: 'warm' }),
+  enemy: Object.freeze({ '*': 'cold' }),
+});
 
 // TRAIT_AGGRESSION (belligerent↔pacific) and TRAIT_ALIGNMENT (good↔evil) — the two light
 // signed-weight maps over the AUTHORED personality vocabulary — now live in the zero-import

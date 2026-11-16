@@ -208,6 +208,8 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {(pair: unknown) => boolean|undefined} [sharesPower]
+ * @property {(pair: unknown) => boolean|undefined} [sharesPlace] BAR4-PEOPLE (TI1): `pairPlace.js :: pairSharesPlaceOf`
+ * @property {(pair: unknown) => boolean|undefined} [loneTie] BAR4-PEOPLE (TI1): `pairPlace.js :: pairIsLoneOf`
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
@@ -236,6 +238,8 @@ const bool = (v) => (typeof v === 'boolean' ? v : undefined);
  * @param {Dimension} d @returns {Readonly<Dimension>}
  */
 const dim = (d) => Object.freeze(d);
+/** BAR4-PEOPLE (TI1): a pair's fact the tie draw hands its lines (`people/ties.js :: withPairTies`); unanswered elsewhere. @param {unknown} read @param {Record<string, unknown> | null | undefined} ctx */
+const pairFact = (read, ctx) => (typeof read === 'function' && ctx && 'pair' in ctx ? read(ctx.pair) : undefined);
 
 /**
  * THE VOCABULARY. Atom names are EXACTLY the design's §1 table and §3.2 lists.
@@ -311,6 +315,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // about a bloc needs the pair to share a power; the draw hands the pair as `ctx.pair` (`[from, to]`).
   'shared power': dim({ shape: 'presence', home: 'sharesPower', needsContext: 'pair',
     reader: (f, _key, ctx) => (typeof f.sharesPower === 'function' && ctx && 'pair' in ctx ? f.sharesPower(ctx.pair) : undefined) }),
+  // BAR4-PEOPLE, THE CHAIR'S RULING TI1 of 2026-11-16 (vetoable by the owner): two more PAIR facts (`pairPlace.js`), read by
+  // the tie draw. `shared place`: the first card may name the second its successor (one house's trade or face, or the head's
+  // seat of a power the second sits in). `lone tie`: the two carry no other tie (a line that says they do not speak).
+  'shared place': dim({ shape: 'presence', home: 'sharesPlace', needsContext: 'pair', reader: (f, _key, ctx) => pairFact(f.sharesPlace, ctx) }),
+  'lone tie': dim({ shape: 'presence', home: 'loneTie', needsContext: 'pair', reader: (f, _key, ctx) => pairFact(f.loneTie, ctx) }),
   // TAIL-TIES, THE CHAIR'S RULING (T5) of 2026-11-14 ("THE WORD IS GRANTED"; vetoable by the owner): ONE atom, the
   // town is ruled by a BODY OF MORE THAN ONE (`rulingBody.js :: rulingBodyOf`, hookTruth.js's `ruledByCouncil` rule
   // moved to its home). A line about THE council (a session, a vote of it, "the council has asked") needs it: under a
