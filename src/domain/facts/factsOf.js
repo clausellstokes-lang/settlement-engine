@@ -14,6 +14,9 @@
  * Pure: no randomness, no clock, no write.
  */
 import { dangerComingOf } from './dangerComing.js'; // BAR4-CORPUS-DEF (D1)
+import { monsterFrontierOf } from './monsterFrontier.js'; // BAR6-DEFDESK (7a)
+import { growsMoreThanEatsOf } from './growsMoreThanEats.js'; // BAR6-DEFDESK (9c.nothing-over)
+import { crimeWaveStands } from '../display/foundationBandShown.js'; // BAR6-DEFDESK (9a.wave): the crime wave's one exported reading
 import { crisisOf } from './crisisKind.js';
 import { siegeMotionOf } from './siegeMotion.js'; // BAR4-SAFETY (F2)
 import { storesMonthsOf } from './storesMonths.js';
@@ -76,8 +79,12 @@ export function factsOf(record, options = {}) {
     get siegeMotion() { return siegeMotionOf(record); },
     /** BAR4-CORPUS-DEF (D1): a danger from outside is on its way, a live external-threat tension (`dangerComing.js`) */
     get dangerComing() { return dangerComingOf(record); },
+    /** BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`) */
+    get monsterFrontier() { return monsterFrontierOf(record); },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
+    /** BAR6-DEFDESK (9c.nothing-over): the town grows more than it eats (`growsMoreThanEats.js`) */
+    get growsMoreThanEats() { return growsMoreThanEatsOf(record); },
     /** fact 3: walls / gate / watch / militia / garrison / hospital / healer */
     get defence() { return defenceOf(record); },
     /** the ONE composite (the vocabulary rulings §3): watch ∨ garrison ∨ militia ∨ hired company */
@@ -166,6 +173,8 @@ export function factsOf(record, options = {}) {
     get culture() { return resolveSettlementCulture(record); },
     /** the criminal structure's key (`criminalStructureKey.js :: criminalStructureKeyOf`, the key `defenseDisplay.js :: deriveCriminalStructure` prints), or 'none' */
     get crime() { return criminalStructureKeyOf(record) ?? 'none'; },
+    /** BAR6-DEFDESK (9a.wave, 9a.curfew, HK1): a crime wave stands (`foundationBandShown.js :: crimeWaveStands`) */
+    get crimeWave() { return crimeWaveStands(record); },
     /** BAR5-SAFETY (L2.law.collapsed): the law's band as the Foundations row prints it (`lawBand.js :: lawBandOf`), or undefined */
     get lawBand() { return lawBandOf(record); },
     /** BAR4-CORPUS-DEF (C24893): the income list carries a criminal revenue (`criminalIncome.js`) */

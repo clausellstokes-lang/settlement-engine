@@ -97,7 +97,7 @@
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
-import { magicDialAbsent } from '../../magicReliance.js'; import { relianceShownOf } from '../magicProvisionShown.js'; // BAR5-MAGIC (LAW 1 rule 1a): the word the page prints
+import { magicDialAbsent } from '../../magicReliance.js'; import { relianceShownOf, magicDependentChainsShown, magicRoleHeld } from '../magicProvisionShown.js'; // BAR5-MAGIC (LAW 1 rule 1a): the word the page prints; BAR6-DEFDESK (9e): the row's own chains and the Military role
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { readinessBandOf } from '../../../data/bandLadders.js';
@@ -2146,7 +2146,11 @@ export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent 
 export function defenseMagicDependencyProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
   options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
-  const chains = settlement?.economicState?.activeChains;
+  // BAR6-DEFDESK (LAW 9's `9e.leans`; vetoable by the owner): the NAMED chain is drawn FROM THE CHAINS THE RELIANCE ROW NAMES
+  // (`magicProvisionShown.js :: magicDependentChainsShown`, the list the Magic tab prints after "for"), never the record's first
+  // chain with a magic note: "the usual work no longer yields enough baked goods" stood beside a row that named medical treatment
+  // (REVIEW-WIDE-6 C128358 C158346; C14460). With none of them named the pool is not the NAMED one. The record is not touched.
+  const chains = settlement ? magicDependentChainsShown(settlement) : [];
   const slots = {
     settlement: properFill(text(settlement?.name)),
     good: namedMagicChainGood(chains),
@@ -2167,7 +2171,12 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
     })
     : null;
   // THE TWO FLAGS (W2 DEF construction C1, C2): said beside the dependency line, never alone.
-  const flagKey = magicFlagPoolKey(settlement?.economicState?.safetyProfile?.flags);
+  // BAR6-DEFDESK (LAW 9's `9e.military`; vetoable by the owner): the militarised flag is drawn at the economy step without the
+  // defences' own houses (`priorityHelpers.js :: getStressFlags`); its line is said only where the page's Military role holds
+  // something (`magicProvisionShown.js :: magicRoleHeld`: a house of magic among the defences), never beside "Military role:
+  // absent" (C62573 C164227). A reading at print: the stored flag is left as it is.
+  const rawFlagKey = magicFlagPoolKey(settlement?.economicState?.safetyProfile?.flags);
+  const flagKey = rawFlagKey === 'FLAG: magicMilitarized' && !magicRoleHeld(settlement, 'military') ? null : rawFlagKey;
   const flagLine = reliance && flagKey
     ? composeStateProse(CORPUS, 'DS-DEF-9', { ...options, slots, spineKey: flagKey })
     : null;

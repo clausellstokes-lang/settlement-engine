@@ -226,6 +226,9 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
+ * @property {boolean} [growsMoreThanEats] BAR6-DEFDESK: `growsMoreThanEats.js`
+ * @property {boolean} [crimeWave] BAR6-DEFDESK: `foundationBandShown.js :: crimeWaveStands`
+ * @property {boolean} [monsterFrontier] BAR6-DEFDESK: `monsterFrontier.js`
  * @property {string} [prosperity]
  */
 /**
@@ -356,6 +359,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
   // presumes its absence (REVIEW-BAR-4 C18744, C45642).
   'danger coming': dim({ shape: 'presence', home: 'dangerComing', reader: (f) => bool(f.dangerComing) }),
+  // BAR6-DEFDESK (LAW 7's `7a-nothreat`; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beside
+  // `danger coming`: the page itself prints the country's beasts as a threat (`monsterFrontier.js`: plagued country, or frontier
+  // country under a Beasts & Monsters band Weak or Critical), a frontier condition and no crisis. "Nothing threatens it now that a
+  // wall would keep out" presumes its absence.
+  'monster frontier': dim({ shape: 'presence', home: 'monsterFrontier', reader: (f) => bool(f.monsterFrontier) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',
@@ -446,9 +454,19 @@ export const FACT_DIMENSIONS = Object.freeze({
   // BAR5-FOOD (the chair's FD1 of 2026-11-16, vetoable by the owner): the band THE PAGE PRINTS (`foodBandShown.js`), the
   // ledger's raw band where a facts object carries no printed one
   food: dim({ shape: 'band', home: 'famine', order: FOOD_BAND_WORDS, reader: (f) => f.famine?.shownBand ?? f.famine?.band }),
+  // BAR6-DEFDESK (LAW 9's `9c.nothing-over`; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beside `food`:
+  // the town grows more than it eats (`growsMoreThanEats.js`, the food record's flag the Economics tab prints). "An ordinary year
+  // leaves nothing over" presumes its absence; the printed band does not carry it (such towns print Secure).
+  'food surplus': dim({ shape: 'presence', home: 'growsMoreThanEats', reader: (/** @type {FactsLike} */ f) => bool(f.growsMoreThanEats) }),
   stores: dim({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
   prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
   crime: dim({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
+  // BAR6-DEFDESK (LAW 9's `9a.wave`, `9a.curfew` and `9a.contested`; BRIEF-BAR6 B6 and the chair's ruling HK1; vetoable by the owner,
+  // on the veto list as new vocabulary), beneath `crime`: a crime wave stands, the history's live `crime_wave` tension, read through
+  // its ONE exported reading (`foundationBandShown.js :: crimeWaveStands`). Every such tension carries the hook "The crime wave is
+  // coordinated" (150 of 150 at afa46d644). A line that says theft has dropped, that crime is kept down, or that nobody directs the
+  // crime presumes its absence; under it the diffuse lines speak of appearances (HK1).
+  'crime wave': dim({ shape: 'presence', home: 'crimeWave', reader: (/** @type {FactsLike} */ f) => bool(f.crimeWave) }),
   // BAR5-SAFETY (LAW 2's `L2.law.collapsed`; amendment 5b; vetoable by the owner): `law: > collapsed` = the page's own
   // `Law & order` band (`lawBand.js`). A line that says how a wrong is answered presumes it above Collapsed.
   law: dim({ shape: 'band', home: 'lawBand', order: LAW_ORDER_RUNGS, reader: (/** @type {FactsLike} */ f) => f.lawBand }),
