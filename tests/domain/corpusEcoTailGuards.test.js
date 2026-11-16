@@ -174,7 +174,7 @@ const KEEP = [
   { seed: 'r2r-village-9', pool: 'DS-GEN-13::NO-MARKET', keep: 3, text: /^No market or fair stands in \{settlement\}: what trade the town does is done house to house/, why: 'the stem' },
   { seed: 'r2r-metropolis-46', pool: 'DS-GEN-18::BOUGHT-IN', keep: 9, text: /of what changes hands at \{settlement\} came from somewhere else first/, why: 'the stem' },
   { seed: 'r2r-metropolis-9', pool: 'DS-GEN-13::MARKET-NARROW', keep: 2, text: /people trade with each other/, why: 'the stem' },
-  { seed: 'r2r-village-55', pool: 'DS-GEN-13::COMMERCE: a market, no guild', keep: 2, text: /the stall fee/, why: 'the stem' },
+  { seed: 'r2s-plague_onset-village-1', pool: 'DS-GEN-13::COMMERCE: a market, no guild', keep: 2, text: /the stall fee/, why: 'the stem (RE-KEYED by identity, BAR3-CLOSE-SWEEP-B 2026-11-16: BAR3-CORPUS-2 b09297a27 marks v2 `no crisis: under_siege` (its C7 class row: r2r-village-55 is besieged), so v3 draws there; v2 still draws in 3 towns of the 720 at fb59da43e, r2r-hamlet-4, r2s-plague_onset-village-1 and -3)' },
   { seed: 'r2r-metropolis-57', pool: 'DS-ECO-10::POSTURE: entrepot', keep: 2, text: /^The trade here is in the moving of things/, why: 'the stem' },
   { seed: 'r2r-metropolis-9', pool: 'DS-ECO-8::PROSPEROUS', keep: 1, text: /^\{settlement\} has money to spend/, why: 'the stem' },
   // ── BATCH 3 (TAIL-CORPUS-ECO-2) ──
