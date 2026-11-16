@@ -214,6 +214,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
+ * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -278,6 +279,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // carries a lake: the terrain classes have none); `port` is the trade-route reader's.
   port: dim({ shape: 'presence', home: 'route', reader: (f) => (typeof f.route === 'string' ? f.route === 'port' : undefined) }),
   magic: dim({ shape: 'presence', home: 'magic', reader: (f) => bool(f.magic?.functions) }),
+  // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): goods the town lives
+  // on arrive by magic, an isolated route whose trade needs are met (`magicSupply.js`). "Nothing it lives by would stop without
+  // it" presumes its absence (REVIEW-BAR-4 C36862).
+  'magic supply': dim({ shape: 'presence', home: 'magicSupply', reader: (f) => bool(f.magicSupply) }),
   // ── presence: institutions (fact 11; `facts/institutions.js`) ──
   temple: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
   docks: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('docks') : undefined) }),
@@ -309,6 +314,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // the town works timber of its own, its Timber & Lumber chain working its input (`timberAtHand.js`). A house that supplies
   // the region's building from "timber to hand" presumes it (REVIEW-BAR-4 C40862: the woodland cleared, timber imported).
   'timber at hand': dim({ shape: 'presence', home: 'timberAtHand', reader: (f) => bool(f.timberAtHand) }),
+  // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
+  // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
+  // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
+  // presumes its absence (REVIEW-BAR-4 C18744, C45642).
+  'danger coming': dim({ shape: 'presence', home: 'dangerComing', reader: (f) => bool(f.dangerComing) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',
@@ -352,6 +362,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // `semi-organized` or above (routes and territory, or a hierarchy); a diffuse presence is not one.
   'organised crime': dim({ shape: 'presence', home: 'crime',
     reader: (/** @type {FactsLike} */ f) => (typeof f.crime === 'string' ? CRIME_WORDS.indexOf(f.crime) >= CRIME_WORDS.indexOf('semi-organized') : undefined) }),
+  // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): the income list
+  // carries a criminal revenue (`criminalIncome.js`), which the structure's key does not read. "The books record no gang, guild
+  // or racket" presumes its absence (BAR3-CORPUS-3's C24893: 4 of 64).
+  'criminal income': dim({ shape: 'presence', home: 'criminalIncome', reader: (/** @type {FactsLike} */ f) => bool(f.criminalIncome) }),
   ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, dim({ shape: 'presence', home: 'foodSources',
     reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.foodSources) ? f.foodSources.includes(src) : undefined) })])),
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),

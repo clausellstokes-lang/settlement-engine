@@ -13,6 +13,7 @@
  *
  * Pure: no randomness, no clock, no write.
  */
+import { dangerComingOf } from './dangerComing.js'; // BAR4-CORPUS-DEF (D1)
 import { crisisOf } from './crisisKind.js';
 import { siegeMotionOf } from './siegeMotion.js'; // BAR4-SAFETY (F2)
 import { storesMonthsOf } from './storesMonths.js';
@@ -21,6 +22,7 @@ import { waterOf, waterOfKind } from './water.js';
 import { marketOf } from './market.js';
 import { famineOf } from './famine.js';
 import { magicOf } from './magic.js';
+import { magicSupplyOf } from './magicSupply.js'; // BAR4-CORPUS-DEF (D2)
 import { rulerKindOf } from './rulerKind.js';
 import { rulingBodyOf } from './rulingBody.js';
 import { migrationOf } from './migration.js';
@@ -38,6 +40,7 @@ import { guildOf } from './guild.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { resolveSettlementCulture } from '../resolveCulture.js';
 import { criminalStructureKeyOf } from './criminalStructureKey.js';
+import { criminalIncomeOf } from './criminalIncome.js'; // BAR4-CORPUS-DEF (C24893)
 import { prosperityLabelOf } from '../prosperityRank.js';
 import { keepOf } from './keep.js';
 
@@ -63,6 +66,8 @@ export function factsOf(record, options = {}) {
     get crisis() { return crisisOf(record, options); },
     /** BAR4-SAFETY (F2): whether the besiegers move: the siege condition's own status (`siegeMotion.js`), or null with no siege */
     get siegeMotion() { return siegeMotionOf(record); },
+    /** BAR4-CORPUS-DEF (D1): a danger from outside is on its way, a live external-threat tension (`dangerComing.js`) */
+    get dangerComing() { return dangerComingOf(record); },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
     /** fact 3: walls / gate / watch / militia / garrison / hospital / healer */
@@ -83,6 +88,8 @@ export function factsOf(record, options = {}) {
     get famine() { return famineOf(record); },
     /** fact 7: magic functions; its level */
     get magic() { return magicOf(record); },
+    /** BAR4-CORPUS-DEF (D2): goods the town lives on arrive by magic, an isolated route's needs met (`magicSupply.js`) */
+    get magicSupply() { return magicSupplyOf(record); },
     /** fact 8: elder / lord / priest / mayor / occupier / council */
     get rulerKind() { return rulerKindOf(record); },
     /** TAIL-TIES (the chair's ruling (T5)): ruled by a body of more than one (`rulingBody.js`), or undefined with no government */
@@ -127,6 +134,8 @@ export function factsOf(record, options = {}) {
     get culture() { return resolveSettlementCulture(record); },
     /** the criminal structure's key (`criminalStructureKey.js :: criminalStructureKeyOf`, the key `defenseDisplay.js :: deriveCriminalStructure` prints), or 'none' */
     get crime() { return criminalStructureKeyOf(record) ?? 'none'; },
+    /** BAR4-CORPUS-DEF (C24893): the income list carries a criminal revenue (`criminalIncome.js`) */
+    get criminalIncome() { return criminalIncomeOf(record); },
     /** the prosperity band (`prosperityRank.js :: prosperityLabelOf`), lower-cased, or undefined */
     get prosperity() { const l = prosperityLabelOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity).toLowerCase(); return l || undefined; },
     /** what the place can keep up (`keep.js :: keepOf`), read off the prosperity label: `{ bought, funded }` */

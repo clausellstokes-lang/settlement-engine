@@ -124,6 +124,10 @@ export const LEAVES = Object.freeze({
   imports: home('imports', 2, ['economicState']),
   exports: home('exports', 2, ['economicState']),
   prosperity: home('prosperity', 2, ['economicState']),
+  // BAR4-CORPUS-DEF (D2): goods arrive by magic, an isolated route whose trade needs are met (`magicSupply.js`)
+  magicSupply: home('magicSupply', 2, ['economicState']),
+  // BAR4-CORPUS-DEF (C24893): a criminal revenue on the income list (`criminalIncome.js`)
+  criminalIncome: home('criminalIncome', 2, ['availableServices', 'economicState']),
   // BAR2-PLACES (the chair's grant VW2): iron worked here (the chains) or imported past no siege (the crisis kinds)
   ironAtHand: home('ironAtHand', 2, ['economicState', 'stress', 'stressors', 'activeConditions']),
   // BAR4-HOUSES (H1 (ii)): the Timber & Lumber chain working its own input (the chains alone)
@@ -159,6 +163,8 @@ export const LEAVES = Object.freeze({
   // ── layer 4: over the cast ──
   importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'config', 'economicState', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config)
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
+  // BAR4-CORPUS-DEF (D1): a danger from outside on its way, a live external-threat tension of the history (`dangerComing.js`)
+  dangerComing: home('dangerComing', 4, ['history']),
   // W2-A-LEAVES-2 (REVIEW-W2A F3): an official in a criminal's pay, the cast's own fact; the crime desk's lines
   // about bought officials are struck by it (`display/stateProse/crimeLineDisqualifiers.js`)
   officialsInPay: leaf({ layer: 4, module: 'domain/facts/officialsInPay.js', exported: 'officialsInCriminalPayOf', call: 'record', reads: ['npcs', 'powerStructure'] }),
