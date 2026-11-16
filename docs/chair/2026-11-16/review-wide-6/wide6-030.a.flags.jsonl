@@ -1,0 +1,6 @@
+{"id":"C79603","town":"bar0-city-wartime-rand-41","sev":"MED","kind":"STATE","why":"'Pilgrims crowd the road in' as ordinary-times scene; CRISIS is Wartime and the scene's own next lines say army carts and levies fill the road","other":"C79606"}
+{"id":"C79600","town":"bar0-city-wartime-rand-41","sev":"LOW","kind":"PAIR","why":"'young men are not in Dobroburg' (all) against Crisis tab's 'Conscription has taken a third of the working-age men'","other":"C79647"}
+{"id":"C80552","town":"bar0-city-wartime-rand-41","sev":"MED","kind":"PAIR","why":"Defense tab: 'too few people man them' (walls) against 'its people under arms and its works are both in good order' and 'the walls and the soldiers who belong on them'","other":"C80483"}
+{"id":"C80532","town":"bar0-city-wartime-rand-41","sev":"LOW","kind":"STATE","why":"'sold to crown contracts' but the town is an independent city-state: 'No overlord above it' (Institutions, City-state government); no crown in GOVERNMENT","other":"C79935"}
+{"id":"C80619","town":"bar0-city-wartime-rand-41","sev":"LOW","kind":"STATE","why":"'the crown requisition order' but Dobroburg is an independent city-state, 'No overlord above it' (C79935); GOVERNMENT lists no crown","other":"C79935"}
+{"id":"DONE","lines":1755,"blocks":1,"flags":5}
