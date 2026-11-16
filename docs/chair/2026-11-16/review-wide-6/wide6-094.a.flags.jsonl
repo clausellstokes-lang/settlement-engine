@@ -1,0 +1,6 @@
+{"id":"C213284","town":"bar0-village-famine-rand-31","sev":"MED","kind":"PAIR","why":"Economics: unrecorded trade 'goes through the same organised hands each time' against Defense: who takes the black-market cut 'changes by street and by season'","other":"C213459"}
+{"id":"C213454","town":"bar0-village-famine-rand-31","sev":"LOW","kind":"PAIR","why":"Defense: 'No single dominant organisation' against Power tab: Underground network fronts the Mill and Blacksmith and the Elder Council head 'answers to' it","other":"C213388"}
+{"id":"C213597","town":"bar0-village-famine-rand-31","sev":"LOW","kind":"BROKEN","why":"filter chips 'Allies (1) · Leverage (2) · Patronage (2)' sum to 5, but 'All (6)' and the heading 'NPC Relationships (6)' list six ties","other":"C213596"}
+{"id":"C213905","town":"bar0-village-famine-rand-32","sev":"MED","kind":"PAIR","why":"Services 'Grain at harvest' sold from the field printed with no mark, against Economics 'Harvest Scarce in the famine' and header grown 36%, famine cut 65%","other":"C213947"}
+{"id":"C213975","town":"bar0-village-famine-rand-32","sev":"LOW","kind":"BROKEN","why":"'its herds comes first': plural subject with singular verb","other":""}
+{"id":"DONE","lines":1418,"blocks":2,"flags":5}
