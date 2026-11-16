@@ -1,0 +1,8 @@
+{"id":"C46725","town":"bar0-village-famine-rand-22","sev":"MED","kind":"PAIR","why":"Drovers push herds, place smells of pens; FOOD says livestock source failed (famine cut 65%) and C46856 says the herds failed.","other":"C46856"}
+{"id":"C47050","town":"bar0-village-famine-rand-22","sev":"MED","kind":"PAIR","why":"Says preserving stretches the harvest through winter; FOOD gives stores 0.1 months, no granary, active famine, grown 45% of need.","other":"C47049"}
+{"id":"C47053","town":"bar0-village-famine-rand-22","sev":"LOW","kind":"BROKEN","why":"'its herds comes first': subject and verb do not agree.","other":""}
+{"id":"C47304","town":"bar0-village-famine-rand-22","sev":"LOW","kind":"BROKEN","why":"Religious acceptance row prints bare 'hostile' with no object naming what the hostility is toward.","other":""}
+{"id":"C47897","town":"bar0-village-famine-rand-23","sev":"LOW","kind":"LACKS","why":"Lodge 'sells venison, pelts, and game to market'; HOUSES has no market and C47701 says no market or fair stands here.","other":"C47701"}
+{"id":"C48079","town":"bar0-village-famine-rand-23","sev":"MED","kind":"PAIR","why":"Says preserving stretches the harvest through winter; the harvest failed (famine cut 50%, failed source grain) and stores are 1 month, no granary.","other":"C48077"}
+{"id":"C48275","town":"bar0-village-famine-rand-23","sev":"MED","kind":"BROKEN","why":"Grain Holders 'Institutions behind this power (8)' lists six distinct houses; the 20 HOUSES are fully shared out as 11+3+6, so no two are hidden.","other":""}
+{"id":"DONE","lines":2181,"blocks":2,"flags":7}
