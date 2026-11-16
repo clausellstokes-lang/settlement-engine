@@ -1221,7 +1221,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "sage_s_quarter": NONE,
   "salt_works": Object.freeze([INPUT, FIELD_WORK]), // SV8: its pans, the chain impaired under a siege
   "sawmill": Object.freeze([INPUT]),
-  "sawmill_commercial": NONE,
+  "sawmill_commercial": Object.freeze([INPUT]), // HR1 (BAR4-CLOSE-SWEEP, the chair's ruling, 2026-11-16): the rung runs the timber chain (BAR4-RECORD R1), so its house is short where its services are
   "scroll_scribe": NONE,
   "sewage_system": NONE,
   "shepherd": Object.freeze([FIELD_WORK]), // SV8: its flocks on the grazing the siege curtails
@@ -1246,7 +1246,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "tailor": NONE,
   "tailor_s_guild": NONE,
   "tanner_established": NONE,
-  "tanners": NONE,
+  "tanners": Object.freeze([INPUT]), // HR1: measured, every service short wherever its input is missing (11 towns of the 720, 1 of a fresh 300)
   "tannery": Object.freeze([INPUT]),
   "taverns_5_20": NONE,
   "teleportation_circle": NONE,
