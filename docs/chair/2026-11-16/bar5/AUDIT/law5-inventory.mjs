@@ -269,6 +269,36 @@ for (const h of hits) {
   byFile.set(k, v);
 }
 for (const h of hits) h.crisisUndeclared = !(h.crisisDeclared || /row|excluded/.test(h.status));
+// THE UNITED TOOL (the chair, 2026-11-16, for the join of the round BAR5): three seats each added a way for a line to leave the list by a
+// reviewed reason, in three forms, at one place. ALL THREE STAND, one after another: BAR5-MARKS's (the row words of each crisis and
+// `EXCLUDED_LINES`, read as the hits are built: status `excluded`), BAR5-SAFETY's (`REVIEWED`, by file and opening words: status
+// `reviewed`), BAR5-WORLD's (a table a seat under `tables/B.law5.exclusions.<SEAT>.json`: BAR5-FOOD's and BAR5-WORLD's tables). A NEW
+// exclusion is written in the last form only (the chair's ruling EX1).
+// THE REVIEWED EXCLUSIONS (BRIEF-BAR5 L5: a line leaves the list by its declaration, its row's dependence, or a reviewed
+// reason HERE). Keyed by file and the line's opening words; each reason says why no crisis can make the line false.
+export const REVIEWED = Object.freeze([
+  { file: 'src/generators/safetyProfile.js', starts: '… Disputes are settled by whoever is stronger.', by: 'BAR5-SAFETY',
+    reason: 'the Lawlessness crime type: "disputes are settled by whoever is stronger" says the law FAILS; no crisis makes a lawless town lawful (the lexicon reads "disputes are settled" as order)' },
+  { file: 'src/generators/safetyProfile.js', starts: 'A pilgrim paid a fortune for a holy relic', by: 'BAR5-SAFETY',
+    reason: 'a plot hook (LAW 2 skips hooks: a hook states its own fact, the measure\'s rule 2); the pilgrim is in the town already, and a siege keeps them there' },
+]);
+for (const h of hits) {
+  const r = REVIEWED.find((x) => x.file === h.file && h.text.startsWith(x.starts));
+  if (r) { h.status = 'reviewed'; h.via = `reviewed (${r.by}): ${r.reason}`; h.crisisUndeclared = false; }
+}
+// THE REVIEWED EXCLUSIONS (BAR5-WORLD, 2026-11-16; BRIEF-BAR5 L5): a line that leaves the list by a reviewed reason, not a
+// declaration. One file a seat (`tables/B.law5.exclusions.<SEAT>.json`: [{ file, text, reason }], `text` the row's own text or
+// its first words); a row named there is `excluded` with its reason and counts as declared. A named row the walk no longer
+// finds is reported, so a stale exclusion cannot stand unseen.
+{
+  const TD = path.join(path.dirname(new URL(import.meta.url).pathname), 'tables');
+  const ex = fs.readdirSync(TD).filter((f) => /^B\.law5\.exclusions\.[A-Z0-9-]+\.json$/.test(f)).flatMap((f) => JSON.parse(fs.readFileSync(path.join(TD, f), 'utf8')).map((e) => ({ ...e, table: f })));
+  for (const e of ex) {
+    const h = hits.find((x) => x.file === e.file && x.text.startsWith(e.text));
+    if (!h) { console.log(`EXCLUSION STALE (no such row): ${e.table} ${e.file} ${e.text.slice(0, 60)}`); continue; }
+    h.excluded = `${e.table}: ${e.reason}`; h.crisisUndeclared = false;
+  }
+}
 fs.writeFileSync(outPath, JSON.stringify(hits, null, 1));
 const tot = { n: 0, line: 0, lineCrisis: 0, row: 0, colour: 0, none: 0 };
 for (const v of byFile.values()) for (const k of Object.keys(tot)) tot[k] += v[k];

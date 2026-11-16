@@ -105,7 +105,7 @@ const DEFENSE_VULNERABILITY_RE = /fort|milit|wall|garrison|defense|guard|structu
  */
 export function deriveGuardAssessment(settlement) {
   const value = settlement?.economicState?.safetyProfile?.guardEffectivenessDesc;
-  return typeof value === 'string' && value.trim() ? value.trim() : null;
+  return typeof value === 'string' && value.trim() ? guardLineAsPrinted(value.trim(), settlement) : null; // BAR5-SAFETY: below
 }
 
 /**
@@ -936,4 +936,16 @@ export const RING_AMONG_RIVAL_GANGS_NOTE = 'Ask who runs crime here and the answ
 function ringNoteAmongRivalGangs(row, settlement) {
   if (row.key !== 'organized' || gangHousesOf(liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (settlement)))) < 2) return row;
   return Object.freeze({ ...row, note: RING_AMONG_RIVAL_GANGS_NOTE });
+}
+
+// ── BAR5-SAFETY (LAW 2's L2.law.collapsed, the audit's C42116; vetoable by the owner) ── at the END: no line above moves.
+import { guardLineUnderTheLaw } from './guardLineUnderTheLaw.js';
+import { isEdited } from '../userEdits.js';
+/**
+ * The guard assessment as printed: a line that says how a wrong is answered reads the law's band the page prints
+ * (`guardLineUnderTheLaw.js`); a DM's own line (an edited field, `userEdits.js`) is returned as written.
+ * @param {string} text @param {unknown} settlement @returns {string}
+ */
+function guardLineAsPrinted(text, settlement) {
+  return isEdited(/** @type {never} */ (settlement), 'economicState.safetyProfile.guardEffectivenessDesc') ? text : guardLineUnderTheLaw(text, settlement);
 }

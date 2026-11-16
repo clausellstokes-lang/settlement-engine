@@ -154,6 +154,8 @@ export function factsOf(record, options = {}) {
     get culture() { return resolveSettlementCulture(record); },
     /** the criminal structure's key (`criminalStructureKey.js :: criminalStructureKeyOf`, the key `defenseDisplay.js :: deriveCriminalStructure` prints), or 'none' */
     get crime() { return criminalStructureKeyOf(record) ?? 'none'; },
+    /** BAR5-SAFETY (L2.law.collapsed): the law's band as the Foundations row prints it (`lawBand.js :: lawBandOf`), or undefined */
+    get lawBand() { return lawBandOf(record); },
     /** BAR4-CORPUS-DEF (C24893): the income list carries a criminal revenue (`criminalIncome.js`) */
     get criminalIncome() { return criminalIncomeOf(record); },
     /** the prosperity band (`prosperityRank.js :: prosperityLabelOf`), lower-cased, or undefined */
@@ -216,3 +218,4 @@ export function birthFactsOf(partial = {}, worldLaw = null) {
   const stress = partial.stress ?? (Array.isArray(config.stressTypes) ? config.stressTypes.map((/** @type {unknown} */ type) => ({ type })) : []);
   return factsOf({ institutions: partial.institutions, config, tier: partial.tier ?? config.tier, stress, powerStructure: partial.powerStructure }, worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {});
 }
+import { lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.law.collapsed): at the END, no line above moves

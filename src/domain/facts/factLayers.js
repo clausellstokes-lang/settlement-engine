@@ -166,6 +166,9 @@ export const LEAVES = Object.freeze({
   crime: leaf({ layer: 3, module: 'domain/facts/criminalStructureKey.js', exported: 'criminalStructureKeyOf', call: 'record', reads: ['availableServices', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'], // BAR4-SAFETY (F3): the covert criminal services (`covertCrimeHeld`)
     note: 'the key reads the safety profile\'s crime lines, which assembly settles to the crime signal (a back-write at layer 3): it reads its own layer',
   }),
+  // BAR5-SAFETY (L2.law.collapsed; amendment 5b; vetoable by the owner): the law's band as the Foundations row prints it, read
+  // off the finished record (`lawBand.js`); read where a line prints (the guard assessment's one reader), never at a draw.
+  lawBand: home('lawBand', 4, ['activeConditions', 'config', 'defenseProfile', 'economicState.safetyProfile', 'history', 'institutions', 'powerStructure']),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
     note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '

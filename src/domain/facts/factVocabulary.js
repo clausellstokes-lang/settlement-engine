@@ -184,6 +184,10 @@ export const CULTURE_WORDS = Object.freeze([
 /** The criminal structure, none → organized (`defenseDisplay.js :: deriveCriminalStructure`'s keys). */
 export const CRIME_WORDS = Object.freeze(['none', 'diffuse', 'semi-organized', 'organized']);
 
+/** BAR5-SAFETY (BRIEF-BAR5 amendment 5b; vetoable by the owner): the law's band as the Foundations row prints it, worst first
+ * (`causalState.js :: CAUSAL_BANDS`, reversed; read by `lawBand.js :: lawBandOf`). */
+export const LAW_ORDER_RUNGS = Object.freeze(['collapsed', 'critical', 'strained', 'adequate', 'surplus']);
+
 /** The prosperity ladder (`prosperityRank.js :: PROSPERITY_LABELS`, below it the generator's own bottom rung `Subsistence`), lower-cased. */
 export const PROSPERITY_WORDS = Object.freeze(['subsistence', 'struggling', 'poor', 'moderate', 'comfortable', 'prosperous', 'wealthy']);
 
@@ -218,6 +222,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
+ * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
  * @property {string} [prosperity]
  */
 /**
@@ -420,6 +425,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   stores: dim({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
   prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
   crime: dim({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
+  // BAR5-SAFETY (LAW 2's `L2.law.collapsed`; amendment 5b; vetoable by the owner): `law: > collapsed` = the page's own
+  // `Law & order` band (`lawBand.js`). A line that says how a wrong is answered presumes it above Collapsed.
+  law: dim({ shape: 'band', home: 'lawBand', order: LAW_ORDER_RUNGS, reader: (/** @type {FactsLike} */ f) => f.lawBand }),
   // ── the crisis dimension (the inverse default) ──
   crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
 });
