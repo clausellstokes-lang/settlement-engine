@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "01ab94ddaa40f4288d9f5709598577f3d7dad278",
-  "measuredBy": "BAR3-CLOSE-DOORS-2",
+  "measuredAtSha": "56106cb2f7c759290369a16ecc6268ac6e329c99",
+  "measuredBy": "BAR4-CLOSE-DOORS-1",
   "date": "2026-11-16",
-  "note": "the close of the round BAR3, Part 2 seat (2026-11-16), after the merge of lane/bar3-close-sweep-b-2026-11-16 at f319ee76e: titles 30599 -> 30600, net +1 by this census own count, from the test titles the repair seat added or re-worded (letter a 5bb670f5a, tests/domain/customContentPresentationClaims.test.js; letter c 1a5ee3639, tests/generators/regenDerivedState.test.js; letter g 83f2db01f, tests/generators/stressSecretDeclared.test.js); no file added or removed; no other figure moved",
-  "files": 3631,
-  "parked": 465,
-  "credited": 3166,
-  "titles": 30600,
-  "suiteTitles": 8440
+  "note": "BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4, after THE ONE MERGE of 600b7683a): files 3631 -> 3641, the ten test files the round added (the nine guards: tests/domain/bar4CorpusDefKinds, bar4CorpusEcoKinds, bar4MarkPromise, bar4PeopleKinds, bar4SafetyKinds; tests/generators/bar4HistoryOneTelling, bar4HousesPresumptions, bar4RecordHouseInput, bar4ScenePresumption; and BAR4-FIRSTPAINT tests/architecture/factHomesLazy); none deleted; the titles BAR4-CLOSE-SWEEP re-shaped (bar4MarkPromise (b), (c); bar4HousesPresumptions (b))",
+  "files": 3641,
+  "parked": 468,
+  "credited": 3173,
+  "titles": 30647,
+  "suiteTitles": 8448
 }
