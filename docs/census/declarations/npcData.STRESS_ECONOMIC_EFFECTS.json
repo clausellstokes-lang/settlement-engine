@@ -1693,10 +1693,8 @@
     },
     {
       "id": "mentor_legacy.desc#7",
-      "text": "{A} named {B} as successor in front of witnesses. The formal handover has not happened.",
-      "needs": [
-        "shared place"
-      ],
+      "text": "{A} once told a full room that {B} was the best pupil they had taught. {A} has not said it since.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
