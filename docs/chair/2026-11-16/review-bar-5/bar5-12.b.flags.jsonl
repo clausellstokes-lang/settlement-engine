@@ -1,0 +1,8 @@
+{"id":"C29831","town":"bar0-thorp-calm-rand-24","sev":"MED","kind":"PAIR","why":"says the settlement relies on arcane workings; Reliance on magic is None, magic low, no magic defence","other":"C29852"}
+{"id":"C29866","town":"bar0-thorp-calm-rand-24","sev":"MED","kind":"PAIR","why":"says not much left to sell; header has 17% surplus, six exports, Prosperous, money to spare","other":"C29968"}
+{"id":"C29988","town":"bar0-thorp-calm-rand-24","sev":"LOW","kind":"STATE","why":"claims exports entered as imports; only import is Salt, which is not among the exports","other":""}
+{"id":"C30295","town":"bar0-thorp-calm-rand-25","sev":"MED","kind":"PAIR","why":"Treasa O'Brien owes her post to a patron; the elder's card says nobody named them to it, held by habit","other":"C30316"}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-25","sev":"LOW","kind":"RECORD","why":"thorp of 29 lists Education (basic) and Religious services as made here; HOUSES has no school, shrine unstaffed, church is an access","other":""}
+{"id":"C30695","town":"bar0-thorp-calm-rand-26","sev":"LOW","kind":"STATE","why":"says little is left to sell; header has 13% food surplus and four exports (fish, catch, sacred wood, ritual components)","other":""}
+{"id":"C30826","town":"bar0-thorp-calm-rand-26","sev":"LOW","kind":"LACKS","why":"names street kitchens and tanks in a thorp of 13 whose HOUSES hold no kitchen, tank or street","other":""}
+{"id":"DONE","lines":1386,"blocks":3,"flags":7}
