@@ -56,9 +56,31 @@ const variantsOf = (o) => (Array.isArray(o) ? o.flatMap(variantsOf) : o && typeo
 /** MY RULES (F's and C's names): 10f-kind, 10f-tier, 10f-weight, 10f-backs, 10h; 6d-members through its atom */
 const RULES = new Set(['10f-kind', '10f-tier', '10f-weight', '10f-backs', '10h']);
 /** the census's towns (and the fresh 300's) in which 10f or 10h fired at afa46d644 (runF.mjs over PAGE-COPY renders) */
-const FIRED_10 = Object.freeze(/* FILLED */ []);
+const FIRED_10 = Object.freeze([
+  'r2r-city-11', 'r2r-city-13', 'r2r-city-20', 'r2r-city-29',
+  'r2r-city-40', 'r2r-city-41', 'r2r-city-42', 'r2r-city-55',
+  'r2r-city-7', 'r2r-city-9', 'r2r-metropolis-11', 'r2r-metropolis-17',
+  'r2r-metropolis-18', 'r2r-metropolis-3', 'r2r-metropolis-31', 'r2r-metropolis-4',
+  'r2r-metropolis-40', 'r2r-metropolis-45', 'r2r-metropolis-47', 'r2r-metropolis-49',
+  'r2r-metropolis-5', 'r2r-metropolis-53', 'r2r-town-34', 'r2s-famine-town-0',
+  'r2s-famine-town-1', 'r2s-infiltrated-metropolis-3', 'r2s-insurgency-metropolis-1', 'r2s-insurgency-metropolis-3',
+  'r2s-mass_migration-metropolis-1', 'r2s-monster_pressure-city-0', 'r2s-occupied-metropolis-0', 'r2s-plague_onset-city-2',
+  'r2s-politically_fractured-metropolis-2', 'r2s-religious_conversion-metropolis-0', 'r2s-religious_conversion-metropolis-1', 'r2s-religious_conversion-metropolis-3',
+  'r2s-slave_revolt-city-3', 'r2s-under_siege-city-1', 'r2s-wartime-city-0', 'r2s-wartime-city-1',
+  'r2s-wartime-metropolis-1', 'r2s-wartime-metropolis-3',
+]);
 /** the census's towns (and the fresh 300's) in which 6d-members fired at afa46d644 (runC.mjs): one member, "its members" */
-const FIRED_MEMBERS = Object.freeze(/* FILLED */ []);
+const FIRED_MEMBERS = Object.freeze([
+  'r2r-hamlet-28', 'r2r-hamlet-29', 'r2r-hamlet-35', 'r2r-hamlet-37',
+  'r2r-hamlet-39', 'r2r-thorp-10', 'r2r-thorp-12', 'r2r-thorp-15',
+  'r2r-thorp-20', 'r2r-thorp-23', 'r2r-thorp-27', 'r2r-thorp-3',
+  'r2r-thorp-37', 'r2r-thorp-56', 'r2r-thorp-59', 'r2r-thorp-7',
+  'r2r-thorp-9', 'r2s-famine-thorp-1', 'r2s-infiltrated-thorp-0', 'r2s-mass_migration-thorp-2',
+  'r2s-monster_pressure-thorp-1', 'r2s-occupied-hamlet-0', 'r2s-plague_onset-thorp-1', 'r2s-politically_fractured-hamlet-3',
+  'r2s-politically_fractured-village-3', 'r2s-recently_betrayed-thorp-2', 'r2s-recently_betrayed-thorp-3', 'r2s-religious_conversion-hamlet-1',
+  'r2s-religious_conversion-thorp-1', 'r2s-religious_conversion-thorp-2', 'r2s-succession_void-thorp-1', 'r2s-under_siege-thorp-0',
+  'r2s-wartime-thorp-0',
+]);
 
 /** the wide read's C102099: the ruler's own seat (Guild consortium) printed backing the ruler and its high rival at afa46d644 */
 const SEAT_TOWN = 'bar0-metropolis-calm-rand-28';
