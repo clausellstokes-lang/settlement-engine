@@ -119,7 +119,6 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known best: which trails are safe and which are not.": COLOUR,
   "Whenever game can be had, it sends out hunting parties over the surrounding country and brings back venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.": COLOUR,
   "Local produce and wares. Held under charter.": COLOUR,
-  "A weekly sale of local goods. A charter from crown or lord is required.": COLOUR,
   "The village's one inn for the traders, pilgrims, and wayfarers who pass. Beds, a stable, and a shared table.": COLOUR,
   "A lone inn catering to whoever the road brings: merchants, pilgrims, travellers. It offers a room, stabling, and the common meal.": COLOUR,
   "Run from the home. Ale is brewed and sold under the same roof.": COLOUR,
@@ -508,5 +507,4 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "Mooring towers, warded against the weather by magic.": COLOUR,
   "Towers to moor airships, with magical protection from the elements.": COLOUR,
   "A network of paired Speaking Stones. A station costs as much as a merchant house, so only the richest powers keep them.": COLOUR,
-  "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.": COLOUR,
 });

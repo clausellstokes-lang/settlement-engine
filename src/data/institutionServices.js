@@ -596,7 +596,7 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Butchers (3-8)": {
-    "Fresh meat": { on: true,  p: 1.0, desc: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby." },
+    "Fresh meat": { on: true,  p: 1.0, desc: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.", excludes: ["crisis: hunger"] }, // BAR6-HOUSES: its hunger twin (SERVICE_DESC_SIBLINGS)
     "Offal and by-products": { on: true, p: 0.8, desc: "Tripe, tallow, bone, hide. Nothing wasted. By-products sold to chandlers and tanners." },
     "Salting and preservation": { on: false, p: 0.6, desc: "Salt-cure meat for storage and travel. Essential before winter." },
     "Sausage and charcuterie": { on: false, p: 0.5, desc: "Processed meat products. Use lesser cuts and offal. Profitable margins." }
@@ -1058,15 +1058,18 @@ export const INSTITUTION_SERVICES = {
     "Ransom facilitation": { on: false, p: 0.7, desc: "Negotiate ransom payment and arrange safe release. Cut taken." },
     "Safe houses": { on: false, p: 0.5, desc: "Secure locations to hold victims or shelter fugitives." }
   },
+  // BAR6-HOUSES (the chair's ruling SV1, 2026-11-16; vetoable by the owner): a service that names the lord, the crown or the
+  // monarch declares the sovereign atom (`facts/sovereign.js`). Each of these is its own house's (a lord's appointee, steward or
+  // reeve, a noble governor, a royal seat), whose name gives the sovereign, so the roll admits it wherever it is drawn.
   "Lord's appointee": {
-    "Administrative orders": { on: true,  p: 1.0, desc: "Implement the lord's directives at local level." },
-    "Tax collection": { on: true, p: 0.9, desc: "Collect rents and taxes owed to the lord." },
-    "Legal representation": { on: false, p: 0.5, desc: "Represent the lord's interests in local disputes." }
+    "Administrative orders": { on: true,  p: 1.0, desc: "Implement the lord's directives at local level.", needs: ["sovereign"] },
+    "Tax collection": { on: true, p: 0.9, desc: "Collect rents and taxes owed to the lord.", needs: ["sovereign"] },
+    "Legal representation": { on: false, p: 0.5, desc: "Represent the lord's interests in local disputes.", needs: ["sovereign"] }
   },
   "Lord's steward": {
-    "Estate management": { on: true,  p: 1.0, desc: "Oversee the lord's properties, staff, and revenues." },
+    "Estate management": { on: true,  p: 1.0, desc: "Oversee the lord's properties, staff, and revenues.", needs: ["sovereign"] },
     "Record keeping": { on: true, p: 0.9, desc: "Maintain accounts, rental rolls, and estate documents." },
-    "Supplier contracts": { on: false, p: 0.5, desc: "Negotiate supply contracts for the lord's household." }
+    "Supplier contracts": { on: false, p: 0.5, desc: "Negotiate supply contracts for the lord's household.", needs: ["sovereign"] }
   },
   "Luxury goods quarter": {
     // BAR2-SERVICES (the chair's ruling SV2, 2026-11-15): the row names no good the town may lack (it sold "rare spices" where the
@@ -1177,7 +1180,7 @@ export const INSTITUTION_SERVICES = {
     "Venue hire": { on: false, p: 0.4, desc: "Hire a theater for private performances or special events." }
   },
   "Noble governor": {
-    "Noble administration": { on: true,  p: 1.0, desc: "Govern in the name of the crown or great noble house." },
+    "Noble administration": { on: true,  p: 1.0, desc: "Govern in the name of the crown or great noble house.", needs: ["sovereign"] },
     "Court access": { on: false, p: 0.5, desc: "Introduction to noble court circles. Useful for ambitious petitioners." },
     "Patronage": { on: false, p: 0.4, desc: "Noble patronage for artists, scholars, and loyal subjects." }
   },
@@ -1264,7 +1267,7 @@ export const INSTITUTION_SERVICES = {
   "Royal seat": {
     "State governance": { on: true,  p: 1.0, desc: "Centre of royal administration and decision-making." },
     "Noble registration": { on: false, p: 0.5, desc: "Register noble titles, land grants, and hereditary claims." },
-    "Royal audience": { on: false, p: 0.2, desc: "Rare opportunity to petition the monarch directly." }
+    "Royal audience": { on: false, p: 0.2, desc: "Rare opportunity to petition the monarch directly.", needs: ["sovereign"] }
   },
   "Scroll scribe": {
     "Document writing": { on: true,  p: 1.0, desc: "Write contracts, letters, and official documents for illiterate clients." },
@@ -1383,7 +1386,7 @@ export const INSTITUTION_SERVICES = {
   "Village reeve": {
     "Administrative oversight": { on: true,  p: 1.0, desc: "Manage the village's affairs day to day. Allocate strips and common access." },
     [DISPUTE_RESOLUTION]: { on: true, p: 0.8, desc: "Settle minor disputes before they require higher authority." },
-    "Tax collection": { on: false, p: 0.7, desc: "Collect dues owed to the lord and accounting for common resources." }
+    "Tax collection": { on: false, p: 0.7, desc: "Collect dues owed to the lord and accounting for common resources.", needs: ["sovereign"] }
   },
   "Village scribe": {
     "Letter writing": { on: true,  p: 1.0, desc: "Write letters for illiterate villagers." },
@@ -1872,5 +1875,12 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   "Personal protection for merchants, officials, and travelers.": Object.freeze([
     Object.freeze({ text: "Personal protection for merchants, officials, and travelers.", excludes: Object.freeze(['crisis: under_siege']) }),
     Object.freeze({ text: "Personal protection for officials, and for anyone with reason to fear for their safety while the siege lasts.", twinOf: "Personal protection for merchants, officials, and travelers.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // BAR6-HOUSES (LAW 5 WIDENED, 2026-11-16; vetoable by the owner): the butcher's three meats are plenty a siege or a famine (the
+  // hunger family) does not give: the siege prints the row unmarked, so the definition declares the family and its twin says
+  // what is sold while it lasts.
+  "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.": Object.freeze([
+    Object.freeze({ text: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.", excludes: Object.freeze(['crisis: hunger']) }),
+    Object.freeze({ text: "Whatever meat can be had, slaughtered and dressed on premises or nearby.", twinOf: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.", crisis: Object.freeze(['hunger']) }),
   ]),
 });
