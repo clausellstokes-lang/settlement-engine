@@ -225,7 +225,9 @@ export const CAST_ABSENCES = Object.freeze({
   // cast for it. "no power gains" stood beside the war's own text ("certain families are quietly thriving on contracts";
   // "those with the right friends are getting rich") and beside a power whose stake is that contracts made part of it
   // rich (warDivides): the war's profit is the crisis text's, its profiteer simply unnamed. The exploiter keeps noGains.
-  noProfiteer: 'no one on the roster is named',
+  // BAR3-CLOSE-SWEEP-B (2026-11-16, letter d): the style law's form (no "on the roster": the retired word's word is "power");
+  // the truth unchanged: the slot names no one, power or person.
+  noProfiteer: 'no one is named for it',
   occupierOnly: 'no one is named: no local power gains', // R2-CODE-B-11, row 179: the collaborator is a local
   outsideHand: 'an outside hand, unnamed',
   noSeat: 'no seat or governing house stands',
