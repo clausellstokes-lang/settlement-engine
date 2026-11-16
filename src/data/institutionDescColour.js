@@ -247,8 +247,6 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "They raise buildings and craft furniture both.": COLOUR,
   "A proper shop kept by a trained herbalist, its shelves stocked and a back room set aside for consultations. It sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings. A few of its keepers also work as chirurgeons.": COLOUR,
   "An established herbalist's shop, well stocked, with a back room for private consultation. On offer are herbalism kit supplies, common antidotes, medicinal herbs, and simple surgical dressings, and some apothecaries here double as chirurgeons.": COLOUR,
-  "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's building needs. The crew is permanent.": COLOUR,
-  "Water or ox power turns logs into planks and beams for the construction trade. A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.": COLOUR,
   "Leather-making. Kept downstream and downwind wherever the ground allows.": COLOUR,
   "The making of leather. Sited downwind and downstream of the rest where a town can manage it.": COLOUR,
   "The making of cloth, usually under a guild.": COLOUR,

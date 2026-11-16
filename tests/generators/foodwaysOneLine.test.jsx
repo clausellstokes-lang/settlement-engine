@@ -62,8 +62,11 @@ describe('the foodways line: one writer on the record, the same line on every su
     // Collected, so every seed runs and the failure count is the true count (seedLoopTotality).
     const failures = collectSeedFailures(SEEDS, ({ tier, seed }) => {
       const s = generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
-      const line = s.economicState.foodSecurity.foodRecord.foodwaysLine;
-      expect(typeof line === 'string' && line.length > 10, `${seed}: the record carries a line`).toBe(true);
+      const stored = s.economicState.foodSecurity.foodRecord.foodwaysLine;
+      expect(typeof stored === 'string' && stored.length > 10, `${seed}: the record carries a line`).toBe(true);
+      // BAR4-HOUSES (2026-11-16, the chair's FW1/FW1b): the line the surfaces print is the ONE READER's reading of the stored
+      // line (`foodwaysLineOf`: the famine's, the roster's, the crisis's), which the stored identity holds too
+      const line = /** @type {string} */ (foodwaysLineOf(s));
       lines.add(line);
 
       const { container, unmount } = render(<EconomicsTab settlement={s} economicState={s.economicState} narrativeNote={null} />);

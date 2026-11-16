@@ -303,7 +303,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   const eco = economicState || s?.economicState;
   const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord, s ? factsOf(s).crisis : null) : ''; // TAIL-DISPLAY-ECON-3 (X21, K7 · 18671's kin): the crisis handed in, the Tonight sheet's own call: one home
   // FOOD-4: the foodways line is the food record's, read through the one reader; never composed here.
-  const foodwaysLine = foodwaysLineOf({ economicState: eco });
+  const foodwaysLine = foodwaysLineOf(s ? { ...s, economicState: eco } : { economicState: eco });
   // The derivation is deskHostArgs.js's, shared with the public prose composer (SW-B7b).
   const flowDrift = useMemo(() => flowDriftOf({ settlement: s, economicState: eco, campaigns, saveId }), [saveId, s, campaigns, eco]);
   // MARKET PRICES (round-21 Wave 7; §776 price-heuristics law) — the crier's

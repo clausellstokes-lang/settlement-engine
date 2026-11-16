@@ -126,6 +126,8 @@ export const LEAVES = Object.freeze({
   prosperity: home('prosperity', 2, ['economicState']),
   // BAR2-PLACES (the chair's grant VW2): iron worked here (the chains) or imported past no siege (the crisis kinds)
   ironAtHand: home('ironAtHand', 2, ['economicState', 'stress', 'stressors', 'activeConditions']),
+  // BAR4-HOUSES (H1 (ii)): the Timber & Lumber chain working its own input (the chains alone)
+  timberAtHand: home('timberAtHand', 2, ['economicState']),
   // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label
   keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),
