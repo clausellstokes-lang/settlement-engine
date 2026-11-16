@@ -1,0 +1,5 @@
+{"id":"C10098","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'its herds comes first' (plural subject, singular verb)","other":""}
+{"id":"C10445","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"BROKEN","why":"heading says 26 institutions behind Military City Council; Systems/Power card lists only 21 (18 held + 3 under the ruling power)","other":""}
+{"id":"C8987","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"LACKS","why":"says the town is 'under the temple'; HOUSES has no temple, only Cathedral, Parish churches, Multiple monasteries (C9026 names the cathedral)","other":"C9026"}
+{"id":"C9425","town":"bar0-city-wartime-rand-21","sev":"LOW","kind":"PAIR","why":"Vintner row offers table wine unmarked, but C10071 says grapes are needed and not brought in and C10039 says that work then stands idle","other":"C10071"}
+{"id":"DONE","lines":3278,"blocks":1,"flags":4}
