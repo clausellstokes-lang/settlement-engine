@@ -1,0 +1,7 @@
+{"id":"C161038","town":"bar0-town-calm-rand-29","sev":"MED","kind":"PAIR","why":"'Two rival guilds contesting control of the main trade route' vs trade access isolated and 'no trade road reaches Neadgill' / 'No great road feeds the market'","other":"C160933"}
+{"id":"C160887","town":"bar0-town-calm-rand-29","sev":"LOW","kind":"PAIR","why":"'this income stream leans on the trade route' vs trade access isolated and 'no trade road reaches Neadgill'","other":"C160933"}
+{"id":"C161079","town":"bar0-town-calm-rand-29","sev":"LOW","kind":"PAIR","why":"Religious Authorities (Minor): 'opinion... sought and usually influential' vs 'A small voice in the town's affairs belongs to the Religious Authorities'","other":"C161877"}
+{"id":"C161104","town":"bar0-town-calm-rand-29","sev":"LOW","kind":"PAIR","why":"'officials have little reason to sell' vs secrets: customs collector waves carts through for a share, toll-keeper and mint master take cuts","other":"C161297"}
+{"id":"C161223","town":"bar0-town-calm-rand-29","sev":"LOW","kind":"PAIR","why":"Defense tab 'Legal Infrastructure · None' vs Law & Governance 'Legal services' via Town hall and 'hearings can fine an offender'","other":"C161001"}
+{"id":"C161251","town":"bar0-town-calm-rand-29","sev":"LOW","kind":"STATE","why":"'balance only because supplies arrive by magic' vs FOOD 'by magic 0%', grown 82%, deficit 0%, six months in store; Reliance names only bows and timber","other":""}
+{"id":"DONE","lines":1636,"blocks":1,"flags":6}
