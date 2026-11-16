@@ -1,0 +1,7 @@
+{"id":"HEADER","town":"bar0-town-occupied-rand-37","sev":"LOW","kind":"RECORD","why":"FOUNDING: founded by military veterans on land grants, yet reason 'to exploit rich mineral deposits'; LAND lists no mineral resource; Settlement Origin says road settlement","other":""}
+{"id":"C192752","town":"bar0-town-occupied-rand-37","sev":"LOW","kind":"PAIR","why":"Timber & Lumber chain outputs 'Milled lumber'; Gaps tab says 'no sawmill finishes it' and timber stops half-way","other":"C192845"}
+{"id":"C192229","town":"bar0-town-occupied-rand-37","sev":"LOW","kind":"PAIR","why":"Hook says the occupation's local collaborators include someone the players know; Crisis tab says 'collaborates: no one is named: no local power gains'","other":"C192210"}
+{"id":"C192993","town":"bar0-town-occupied-rand-37","sev":"LOW","kind":"PAIR","why":"Says Deirtappa's 'hearings can fine an offender'; Supporting Capabilities says 'Legal Infrastructure · None' and HOUSES lists no court","other":"C193053"}
+{"id":"C193073","town":"bar0-town-occupied-rand-37","sev":"LOW","kind":"STATE","why":"'Integral' reliance, 'leans on help beyond ordinary work', while FOOD gives magic only 3% and Medical role is 'absent'; row names only spellcasting and 3% food","other":"C193067"}
+{"id":"C193606","town":"bar0-town-occupied-rand-37","sev":"LOW","kind":"BROKEN","why":"The Occupation (85y ago) is tagged 'Ancient' yet the 202y and 222y events are 'Deep history' and the 49y Siege 'Last century'; age labels out of order","other":"C193601"}
+{"id":"DONE","lines":1529,"blocks":1,"flags":6}
