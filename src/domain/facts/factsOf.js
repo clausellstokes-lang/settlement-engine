@@ -14,6 +14,7 @@
  * Pure: no randomness, no clock, no write.
  */
 import { crisisOf } from './crisisKind.js';
+import { siegeMotionOf } from './siegeMotion.js'; // BAR4-SAFETY (F2)
 import { storesMonthsOf } from './storesMonths.js';
 import { defenceOf } from './defence.js';
 import { waterOf, waterOfKind } from './water.js';
@@ -59,6 +60,8 @@ export function factsOf(record, options = {}) {
   return Object.freeze({
     /** fact 1: the crisis kinds, families and the one siege reading */
     get crisis() { return crisisOf(record, options); },
+    /** BAR4-SAFETY (F2): whether the besiegers move: the siege condition's own status (`siegeMotion.js`), or null with no siege */
+    get siegeMotion() { return siegeMotionOf(record); },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
     /** fact 3: walls / gate / watch / militia / garrison / hospital / healer */

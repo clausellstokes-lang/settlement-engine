@@ -40,6 +40,7 @@
 import { migrationDirectionOf } from './migrationDirection.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { atomHolds } from '../facts/factVocabulary.js';
+import { lineText } from '../facts/drawDeclared.js';
 
 /**
  * The Latin square: surface → the vantage it prints in column k (k = 0..3). Every column holds
@@ -533,6 +534,32 @@ const NO_GRAIN_TWINS = Object.freeze({
 });
 
 /**
+ * BAR4-SAFETY (kind F2, REVIEW-BAR-4 C2020 C20892; vetoable by the owner): WHETHER THE BESIEGERS MOVE HAS ONE HOME
+ * (`facts/siegeMotion.js :: siegeMotionOf`, read through the facts' `siegeMotion`): the siege condition's own status, the
+ * one the stressor desk's direction pool speaks ("The besiegers draw closer to {settlement} each week"). The Tonight
+ * sheet's watch line says the besiegers "have not moved": true only where the siege holds; where it advances or eases it
+ * prints its twin, true in that state. Read only where a caller hands the facts; an unanswered motion keeps the line.
+ * rr3: bar0-city-under_siege+famine-rand-21 (Qingkou), bar0-hamlet-under_siege-rand-23 (Darhankul).
+ */
+export const SIEGE_MOTION_TWINS = Object.freeze({
+  under_siege: Object.freeze({
+    tonight: Object.freeze({
+      watch: Object.freeze({
+        advancing: String(lineText({ text: 'The besiegers around {name} tighten their lines each week, and the lookouts wait for the night they attack.', needs: ['crisis: siege'] })),
+        easing: String(lineText({ text: 'The besiegers around {name} have pulled their lines back, and the lookouts watch for the night they return.', needs: ['crisis: siege'] })),
+      }),
+    }),
+  }),
+});
+
+/** @param {string} kind @param {string} surface @param {string} vantage @param {unknown} facts @returns {string} */
+function siegeMotionTwin(kind, surface, vantage, facts) {
+  const byMotion = /** @type {Record<string, Record<string, Record<string, Record<string, string>>>>} */ (SIEGE_MOTION_TWINS)[kind]?.[surface]?.[vantage];
+  const motion = byMotion && facts && typeof facts === 'object' ? /** @type {{ siegeMotion?: unknown }} */ (facts).siegeMotion : null;
+  return byMotion && typeof motion === 'string' ? byMotion[motion] ?? '' : '';
+}
+
+/**
  * The summary a named SURFACE prints: the line of the town's column in that surface's pool, the
  * settlement's name in its slot; the stored summary where the table has no line for the crisis
  * (an authored custom crisis) or no name is known. The crisis section is not a key here on
@@ -553,7 +580,8 @@ export function crisisSummaryForSurface(entry, name, surface, facts) {
   const kind = clean(entry?.type);
   const vantage = columns[summaryColumnOf(place, kind)];
   const twins = /** @type {Record<string, Record<string, Record<string, string>>>} */ (NO_GRAIN_TWINS)[kind]?.[surface];
-  const twin = twins?.[vantage] && facts && atomHolds('grain', facts) === false ? twins[vantage] : '';
+  const twin = (twins?.[vantage] && facts && atomHolds('grain', facts) === false ? twins[vantage] : '')
+    || siegeMotionTwin(kind, surface, vantage, facts);
   const line = clean(twin || set[/** @type {keyof SurfacePools} */ (surface)]?.[vantage]);
   return line ? line.replace(/\{name\}/g, place) : stored;
 }

@@ -329,7 +329,7 @@ registerStep('assembleSettlement', {
   // LABEL, which this never touches).
   const settledEconomy = settleCrimeLinesToSignal(
     settlement.economicState,
-    { seats: settlement.powerStructure?.factions, estate: settlement.institutions, tensions: settlement.history?.currentTensions },
+    { seats: settlement.powerStructure?.factions, estate: settlement.institutions, tensions: settlement.history?.currentTensions, services: settlement.availableServices },
   );
   if (settledEconomy !== settlement.economicState) settlement.economicState = settledEconomy;
 
@@ -417,7 +417,7 @@ registerStep('assembleSettlement', {
   settlement.conflicts = inAssemblySubstream(
     rng,
     'faction-conflicts',
-    () => generateConflicts(settlement.powerStructure?.factions || [], settlement.relationships || [], effectiveConfig, settlement.institutions || [], settlement.npcs || []),
+    () => generateConflicts(settlement.powerStructure?.factions || [], settlement.relationships || [], effectiveConfig, settlement.institutions || [], settlement.npcs || [], settlement.defenseProfile),
   );
   if (settlement.powerStructure) {
     settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts };
