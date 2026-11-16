@@ -17,12 +17,13 @@ const { foodWordShown } = await import(path.join(ROOT, 'src/domain/display/foodW
 const facts = [];
 const DETECTORS = { ...LAW1, ...law4.LAW4 };
 const corpus = new Map(zlib.gunzipSync(fs.readFileSync(path.join(dir, 'corpus.ndjson.gz'))).toString().split('\n').filter(Boolean).map((l) => { const o = JSON.parse(l); return [o.seed, o.s]; }));
-const instances = []; const pages = new Map();
+const instances = []; const pages = new Map(); const named = {};
 for (const f of fs.readdirSync(path.join(dir, 'dumps')).sort()) {
   const town = f.replace(/\.txt$/, '');
   const { tabs } = parseDump(fs.readFileSync(path.join(dir, 'dumps', f), 'utf8'));
   const t = { record: corpus.get(town), tabs: dossierTabs(tabs), town }; pages.set(town, Object.values(t.tabs).flat().map(fold));
   for (const [name, d] of Object.entries(DETECTORS)) for (const x of d(t)) instances.push({ detector: name, ...x });
+  for (const [thing, re] of Object.entries(law4.NAMES_4N)) for (const ls of Object.values(t.tabs)) for (const l of ls) if (re.test(l)) { const e = (named[thing] ||= { towns: new Set(), lines: new Set() }); e.towns.add(town); e.lines.add(l.trim()); }
   const s = t.record; const page = (re) => { for (const ls of Object.values(t.tabs)) for (const l of ls) { const m = re.exec(l); if (m) return m[1]; } return null; };
   const fsec = s?.economicState?.foodSecurity || {};
   facts.push({ town, magicRecord: deriveMagicReliance(s).reading, magicShown: deriveMagicRelianceView(s).reading, magicPage: page(/^Reliance on magic: (None|Present|Relied upon|Integral)\b/), defenceFlag: s?.defenseProfile?.magicDependency ?? null,
@@ -51,7 +52,8 @@ if (f72) {
 }
 const tally = (f) => { const m = {}; for (const x of facts) { const k = f(x); m[k] = (m[k] || 0) + 1; } return m; };
 const splits = { magic: tally((x) => `record ${x.magicRecord} · shown ${x.magicShown} · page ${x.magicPage} · defenceFlag ${x.defenceFlag}`), food: tally((x) => `label ${x.foodLabel} · band ${x.foodBand} · shown ${x.foodShown} · page ${x.foodPage}`) };
-fs.writeFileSync(outFile, JSON.stringify({ towns, counts, lawTop, splits, controls, facts, instances }, null, 1));
+const namedAt = Object.fromEntries(Object.entries(named).map(([k, e]) => [k, { townsNaming: e.towns.size, distinctLines: e.lines.size, townsWithout: new Set(instances.filter((x) => x.law === '4n-' + k).map((x) => x.town)).size }]));
+fs.writeFileSync(outFile, JSON.stringify({ towns, counts, lawTop, splits, namedAt, controls, facts, instances }, null, 1));
 console.log(`towns ${towns} · instances ${instances.length}`);
 for (const [k, v] of Object.entries(counts)) console.log(`  ${k}: towns ${v.towns} · instances ${v.instances} · distinct ${v.distinct}`);
 if (controls) for (const c of controls.filter((c) => c.rendered)) console.log(`  ${c.found ? 'FOUND' : '-----'} ${c.printed ? 'printed' : 'NOT-PRINTED'} ${c.id} ${c.verdict} want:${c.expect} law:${c.law} ${c.as.join(',')} :: ${c.text.slice(0, 80)}`);

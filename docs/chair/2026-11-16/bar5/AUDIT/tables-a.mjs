@@ -30,6 +30,9 @@ for (const r of runs) {
   for (const [k, v] of Object.entries(r.j.splits.food).sort((a, b) => b[1] - a[1])) L.push(`| ${esc(k)} | ${v} |`);
   L.push('');
 }
+L.push('## LAW 4 (4n): each thing, named at all and named without (towns naming · distinct lines naming · towns that print one without the thing)', '', `| thing | ${runs.map((r) => r.label).join(' | ')} |`, `|---|${runs.map(() => '---').join('|')}|`);
+for (const k of [...new Set(runs.flatMap((r) => Object.keys(r.j.namedAt || {})))].sort()) L.push(`| ${k} | ${runs.map((r) => { const c = (r.j.namedAt || {})[k]; return c ? `${c.townsNaming} · ${c.distinctLines} · ${c.townsWithout}` : '0'; }).join(' | ')} |`);
+L.push('');
 const big = runs.find((r) => r.label === '720') || runs[runs.length - 1];
 L.push(`## The register's vocabulary on the page, 4r, by thing (${big.label}: towns that print a line naming it without it · distinct lines)`, '', '| thing | towns | instances | distinct |', '|---|---|---|---|');
 for (const [k, c] of Object.entries(big.j.counts).filter(([k]) => k.startsWith('4r')).sort((a, b) => b[1].towns - a[1].towns)) L.push(`| ${k} | ${c.towns} | ${c.instances} | ${c.distinct} |`);

@@ -36,7 +36,7 @@ const ARCANE_HOUSE = /\b(?:mages?'?|wizards?'?|sorcer|arcan|enchant|magic(?:al)?
 export const FOOD_REASSURES = [
   /\bwithout going hungry\b/i,
   /\bdoes not empty the [\w' ]*tables\b/i,
-  /\b(?:nobody|no one) (?:here )?(?:goes|is going) (?:hungry|without bread)\b/i,
+  /\b(?:nobody|no one) (?:here )?goes hungry\b/i, // PRECISION (720 draw, seed 516): "nobody is going without bread" in a Pressured town read WEAK; not read
   /\bfood to spare\b/i,
 ];
 /** 1b · food alarm, false where the page prints Secure (no crisis): the town said not to feed itself. */
@@ -46,7 +46,9 @@ export const FOOD_ALARMS = [
   /\bcannot grow richer while it cannot feed itself\b/i,
   /\bhouseholds still go short\b/i,
 ];
-const FOOD_WORD = /^Food Security · (Secure|Surplus|Pressured|Deficit|Import-Dependent)(?: — (.*))?$/;
+const FOOD_WORD = /^Food Security · (Secure|Surplus|Pressured|Deficit|Import-[Dd]ependent)(?: — (.*))?$/;
+/** PRECISION (720 draw, seed 516): a reassurance in a town with six months or more put by read EXPLAINED (a poor year is covered by the store). */
+const STORE_COVERS = 6;
 
 /** 1c · a power's stock description that asserts WEIGHT (C33631; rulingStructure.js's descriptions). */
 export const POWER_WEIGHT = [
@@ -58,6 +60,8 @@ export const POWER_WEIGHT = [
   /\bhold direct temporal power\b/i,
   /\bstructural influence the [\w ]+ cannot easily override\b/i,
 ];
+/** 1c · the strongest of those, read against a Minor standing too (reported as its own sub-law). */
+export const STRONG_WEIGHT = [/\bsubstantial temporal power\b/i, /\bcarries decisive weight\b/i, /\bgenuine political weight\b/i, /\bhold direct temporal power\b/i];
 /** 1c · a power's description that asserts a FORCE, with the roster it needs (C39734 C43925). */
 export const FORCE_CLAIMS = [
   { re: /\bArmed patrol of able-bodied residents\b/i, needs: ['militia', 'watch'] },
@@ -80,6 +84,7 @@ export const PROSPERITY_UP = [
   /\bis rich and behaves like it\b/i,
   /\bThe wealth here is not the kind a stranger has to look for\b/i,
   /\baccounts still balance\b/i,
+  /\baccounts have money in hand\b/i,
 ];
 export const PROSPERITY_DOWN = [
   /\bnever quite makes ends meet\b/i,
@@ -112,7 +117,9 @@ export function law1a({ record, tabs, town }) {
   if (!w) return out;
   const word = w.m[1];
   const against = { tab: w.tab, line: w.line.trim() };
-  if (word === 'None' || word === 'Present') {
+  // PRECISION (720 draw, seed 516): under Present, a role line the page prints integral or common supports the line (WEAK)
+  const roleHeld = (tabs['Systems/Magic'] || []).some((l) => /^(?:Economic|Military|Medical|Infrastructure) role: (?:integral|common)\b/.test(l));
+  if (word === 'None' || (word === 'Present' && !roleHeld)) {
     for (const h of hitsOf(tabs, MAGIC_DEPENDS)) out.push(inst(word === 'None' ? '1a-depends/None' : '1a-depends/Present', town, h, against, `asserts reliance on magic; the page's word is ${word}`));
   }
   if (word === 'Relied upon' || word === 'Integral') {
@@ -132,7 +139,8 @@ export function law1b({ record, tabs, town }) {
   if (!w) return out;
   const word = w.m[1];
   const against = { tab: w.tab, line: w.line.trim() };
-  if (word !== 'Secure' && word !== 'Surplus') {
+  const months = Number(record?.economicState?.foodSecurity?.foodRecord?.storageMonths ?? record?.economicState?.foodSecurity?.storageMonths);
+  if (word !== 'Secure' && word !== 'Surplus' && !(months >= STORE_COVERS)) {
     for (const h of hitsOf(tabs, FOOD_REASSURES)) out.push(inst('1b-reassures/' + word, town, h, against, `a food reassurance; the page's food word is ${word}${w.m[2] ? ' — ' + w.m[2] : ''}`));
   }
   if ((word === 'Secure' || word === 'Surplus') && crisesOf(record).size === 0) {
@@ -154,6 +162,10 @@ export function law1c({ record, tabs, town }) {
     const lines = Object.entries(tabs).flatMap(([tab, ls]) => ls.filter((l) => l.startsWith(head)).map((line) => ({ tab, line })));
     if (!lines.length) continue;
     const h = lines.find((x) => x.tab === 'Systems/Power') || lines[0];
+    if (f.powerLabel === 'Minor') {
+      const re = STRONG_WEIGHT.find((r) => r.test(desc));
+      if (re) out.push(inst('1c-weight/Minor', town, h, { record: 'powerStructure.factions[].powerLabel', line: `${f.faction} (Minor, ${f.power})` }, `a power's description asserts strong weight (${re.source}); its standing is Minor`));
+    }
     if (f.powerLabel === 'Suppressed') {
       const re = POWER_WEIGHT.find((r) => r.test(desc));
       if (re) out.push(inst('1c-weight/Suppressed', town, h, { record: 'powerStructure.factions[].powerLabel', line: `${f.faction} (Suppressed, ${f.power})` }, `a power's description asserts weight (${re.source}); its standing is Suppressed`));
@@ -193,9 +205,9 @@ export function law1c({ record, tabs, town }) {
 export function law1d({ record, tabs, town }) {
   const out = [];
   const stab = String(record?.powerStructure?.stability || '');
-  const dl = { 'World/Daily Life': tabs['World/Daily Life'] || [] };
-  if (STABILITY_POOR.test(stab)) for (const h of hitsOf(dl, PROSPERITY_UP)) out.push(inst('1d-up/underfunded', town, h, { tab: 'Systems/Power', line: `Stability ${stab}` }, 'the prosperity sentence says the town has money; the stability word says it is underfunded'));
-  if (STABILITY_RICH.test(stab)) for (const h of hitsOf(dl, PROSPERITY_DOWN)) out.push(inst('1d-down/prosperous', town, h, { tab: 'Systems/Power', line: `Stability ${stab}` }, 'the prosperity sentence says the town is poor; the stability word says it is prosperous'));
+  const where = (h) => (h.tab === 'World/Daily Life' ? '' : '/elsewhere');
+  if (STABILITY_POOR.test(stab)) for (const h of hitsOf(tabs, PROSPERITY_UP)) out.push(inst('1d-up/underfunded' + where(h), town, h, { tab: 'Systems/Power', line: `Stability ${stab}` }, 'the prosperity sentence says the town has money; the stability word says it is underfunded'));
+  if (STABILITY_RICH.test(stab)) for (const h of hitsOf(tabs, PROSPERITY_DOWN)) out.push(inst('1d-down/prosperous' + where(h), town, h, { tab: 'Systems/Power', line: `Stability ${stab}` }, 'the prosperity sentence says the town is poor; the stability word says it is prosperous'));
   return out;
 }
 

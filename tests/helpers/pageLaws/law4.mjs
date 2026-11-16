@@ -48,6 +48,8 @@ const NOTARY = /\bnotar(?:y|ies)\b/i;
 const LEGAL_HOUSE = /notar|scribe|court|magistrat|lawyer|advocate|registr|clerk|chancer|justic/i;
 /** 4n LORD (C42840): a lord named where the government, the houses and the neighbours name no lord. */
 const LORD = /\bthe lord(?:'s|s)?\b|\bliege\b|\boverlords?\b/; // lower case: "the Lord" of a faith is not read
+/** PRECISION (720 draw, seed 516): "the lord or municipality" is a hedge (EXPLAINED); "No overlord" a denial. */
+const LORD_SPARED = /\bthe lord or\b|\bor the lord\b|\bno overlord\b/i;
 const LORD_FACT = /lord|noble|feudal|baron|count(?!ing|er|ry|y)|duk|ducal|crown|royal|king|queen|prince|manor|appointee|gentry|liege|seign|vassal|steward|castellan|earl|jarl|margrav|governor/i;
 /** 4n FIRED CLAY (C15951): fired clay where no house fires clay. */
 const FIRED_CLAY = /\bfired clay\b|\bbrick dust\b|\bpottery kilns?\b/i;
@@ -56,7 +58,9 @@ const CLAY_HOUSE = /potter|brick|tile|ceramic|kiln(?!s?\b.*charcoal)/i;
 const PATRON = /\bowes? (?:their|his|her) (?:post|position|office|seat|appointment) to a patron\b/i;
 const NOT_NAMED = /\bNobody named them to it\b|\bwith no appointment\b/i;
 /** 4n FOUNDING (C22786): the Overview's founding claim against the History's origin. */
-const FOUNDED_ROAD = /^Founded roadside\b|^The road was here first\. The settlement grew along its verge\b/;
+// PRECISION (720 draw, seed 516): "The road was here first. The settlement grew along its verge" read WEAK beside a stronghold's or
+// a healer's founding (a growth along a road, not a founding for it); only the founding claim is read
+const FOUNDED_ROAD = /^Founded roadside\b/;
 const ROAD_ORIGIN = /road|route|crossroad|intersection|junction|waystation|waypoint|travel|toll|market|caravan|pass\b|bridge|ford|traffic|merchant|trade/i;
 /** 4n WEEKS (C2000): a count of weeks before a crisis the page says is younger. */
 const AGO = /\b(two|three|four|five|six|seven|eight|nine|ten|\d+) (weeks|months) ago\b/i;
@@ -78,13 +82,14 @@ export function law4n({ record, tabs, town }) {
   }
   // lord
   const ps = record?.powerStructure || {};
-  const lordFacts = [ps.governingName, ps.government && JSON.stringify(ps.government), ...(ps.factions || []).map((f) => f.faction), ...names, JSON.stringify(record?.neighborRelationship || '')].join(' | ');
+  const lordFacts = [ps.governingName, ps.government && JSON.stringify(ps.government), ...(ps.factions || []).map((f) => f.faction), ...names, ...(record?.npcs || []).flatMap((n) => [n?.role, n?.title]), JSON.stringify(record?.neighborRelationship || '')].join(' | ');
   if (!LORD_FACT.test(lordFacts)) {
-    for (const h of L.filter((h) => LORD.test(h.line))) out.push(inst('4n-lord', town, h.tab, h.line, { record: 'powerStructure · institutions · neighborRelationship', line: 'no lord, noble, crown or appointee' }, 'names a lord; the government, houses and neighbours name none'));
+    for (const h of L.filter((h) => LORD.test(h.line) && !LORD_SPARED.test(h.line))) out.push(inst('4n-lord', town, h.tab, h.line, { record: 'powerStructure · institutions · neighborRelationship', line: 'no lord, noble, crown or appointee' }, 'names a lord; the government, houses and neighbours name none'));
   }
   // fired clay
   if (!names.some((n) => CLAY_HOUSE.test(n) && !/charcoal/i.test(n))) {
-    for (const h of L.filter((h) => FIRED_CLAY.test(h.line))) out.push(inst('4n-clay', town, h.tab, h.line, { record: 'institutions', line: 'no potter, brickmaker, tile-works or kiln for clay' }, 'names fired clay; no house fires clay'));
+    for (const h of L.filter((h) => FIRED_CLAY.test(h.line) && !h.line.includes('→'))) out.push( // a chain's rungs (→) are LAW 3's
+     inst('4n-clay', town, h.tab, h.line, { record: 'institutions', line: 'no potter, brickmaker, tile-works or kiln for clay' }, 'names fired clay; no house fires clay'));
   }
   // patron: the hook's person (the line above it) against their own house card
   const hooks = tabs['Summary/Plot Hooks'] || [];
@@ -124,3 +129,6 @@ export function law4n({ record, tabs, town }) {
 }
 
 export const LAW4 = { law4n, law4r };
+
+/** The words of each 4n thing, for the census of lines that NAME it at all (the hand-back: distinct lines and towns). */
+export const NAMES_4N = Object.freeze({ notary: NOTARY, lord: LORD, clay: FIRED_CLAY, patron: PATRON, founding: FOUNDED_ROAD, weeks: AGO, oldnew: OLD_BUILDINGS });

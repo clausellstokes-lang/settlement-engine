@@ -49,35 +49,37 @@
 
 ## The counts by sub-law (towns · instances · distinct lines)
 
-| sub-law | sixty (60 towns) |
-|---|---|
-| 1a-depends/None | 5 · 7 · 4 |
-| 1b-reassures/Pressured | 1 · 1 · 1 |
-| 1c-force/roster | 2 · 2 · 2 |
-| 1c-norival/outranked | 1 · 1 · 1 |
-| 1c-npc/marginal | 6 · 6 · 1 |
-| 1c-weight/Suppressed | 2 · 2 · 1 |
-| 1d-up/underfunded | 1 · 1 · 1 |
-| 4n-clay | 1 · 1 · 1 |
-| 4n-founding | 4 · 4 · 2 |
-| 4n-lord | 4 · 4 · 2 |
-| 4n-notary | 3 · 4 · 4 |
-| 4n-oldnew | 1 · 1 · 1 |
-| 4n-patron | 1 · 1 · 1 |
-| 4n-weeks | 2 · 2 · 1 |
+| sub-law | sixty (60 towns) | 720 (720 towns) | fresh300 (300 towns) |
+|---|---|---|---|
+| 1a-depends/None | 5 · 7 · 4 | 23 · 24 · 23 | 9 · 10 · 9 |
+| 1b-reassures/Pressured | 1 · 1 · 1 | 3 · 3 · 3 | 1 · 1 · 1 |
+| 1c-force/roster | 2 · 2 · 2 | 9 · 9 · 6 | 3 · 3 · 3 |
+| 1c-norival/occupied | 0 | 0 | 1 · 1 · 1 |
+| 1c-norival/outranked | 1 · 1 · 1 | 1 · 1 · 1 | 0 |
+| 1c-npc/marginal | 6 · 6 · 1 | 41 · 41 · 1 | 15 · 15 · 1 |
+| 1c-weight/Suppressed | 2 · 2 · 1 | 10 · 12 · 6 | 3 · 3 · 3 |
+| 1d-up/underfunded | 1 · 1 · 1 | 0 | 0 |
+| 4n-clay | 1 · 1 · 1 | 2 · 2 · 2 | 0 |
+| 4n-founding | 3 · 3 · 1 | 23 · 23 · 1 | 9 · 9 · 1 |
+| 4n-lord | 1 · 1 · 1 | 4 · 4 · 1 | 2 · 2 · 1 |
+| 4n-notary | 3 · 4 · 4 | 46 · 49 · 47 | 22 · 23 · 23 |
+| 4n-oldnew | 1 · 1 · 1 | 1 · 1 · 1 | 1 · 1 · 1 |
+| 4n-patron | 1 · 1 · 1 | 0 | 0 |
+| 4n-weeks | 2 · 2 · 1 | 1 · 1 · 1 | 7 · 7 · 1 |
 
 **By law** (towns · instances · distinct lines):
 
-| law | sixty |
-|---|---|
-| 1a | 5 · 7 · 4 |
-| 1b | 1 · 1 · 1 |
-| 1c | 11 · 11 · 5 |
-| 1d | 1 · 1 · 1 |
-| 4n | 15 · 17 · 12 |
-| 4r-size | 7 · 7 · 7 |
-| 4r-state | 60 · 382 · 105 |
-| 4r-thing | 59 · 722 · 454 |
+| law | sixty | 720 | fresh300 |
+|---|---|---|---|
+| 1a | 5 · 7 · 4 | 23 · 24 · 23 | 9 · 10 · 9 |
+| 1b | 1 · 1 · 1 | 3 · 3 · 3 | 1 · 1 · 1 |
+| 1c | 11 · 11 · 5 | 59 · 63 · 14 | 21 · 22 · 8 |
+| 1d | 1 · 1 · 1 | 0 | 0 |
+| 4n | 11 · 13 · 10 | 76 · 80 · 53 | 41 · 42 · 27 |
+| 4r-count | 0 | 1 · 1 · 1 | 0 |
+| 4r-size | 7 · 7 · 7 | 36 · 41 · 37 | 20 · 22 · 20 |
+| 4r-state | 60 · 382 · 105 | 720 · 4739 · 417 | 297 · 1853 · 243 |
+| 4r-thing | 59 · 722 · 454 | 694 · 8757 · 3646 | 290 · 3640 · 1714 |
 
 ## The two-facts splits (sixty)
 
@@ -99,137 +101,317 @@
 | label Deficit · band deficit · shown Deficit · page Deficit | 4 |
 | label Import-Dependent · band importDependent · shown Deficit · page Deficit | 2 |
 
-## The register's vocabulary on the page, 4r, by thing (sixty: towns that print a line naming it without it · distinct lines)
+## The two-facts splits (720)
+
+| magic: record reading · shown reading · page word · defenceFlag | towns |
+|---|---|
+| record none · shown none · page None · defenceFlag false | 366 |
+| record integral · shown integral · page Integral · defenceFlag true | 143 |
+| record relied-upon · shown relied-upon · page Relied upon · defenceFlag true | 122 |
+| record integral · shown relied-upon · page Relied upon · defenceFlag true | 50 |
+| record relied-upon · shown none · page None · defenceFlag true | 22 |
+| record present · shown present · page Present · defenceFlag false | 13 |
+| record integral · shown present · page Present · defenceFlag true | 2 |
+| record relied-upon · shown present · page Present · defenceFlag true | 2 |
+
+| food: stored label · band · shown word · page word | towns |
+|---|---|
+| label Secure · band secure · shown Secure · page Secure | 446 |
+| label Secure · band secure · shown Pressured · page Pressured | 146 |
+| label Pressured · band pressured · shown Pressured · page Pressured | 45 |
+| label Deficit — Active Famine · band famine · shown Deficit — Active Famine · page Deficit | 44 |
+| label Deficit · band deficit · shown Deficit · page Deficit | 25 |
+| label Import-Dependent · band importDependent · shown Import-Dependent · page Import-dependent | 9 |
+| label Import-Dependent · band importDependent · shown Deficit · page Deficit | 5 |
+
+## The two-facts splits (fresh300)
+
+| magic: record reading · shown reading · page word · defenceFlag | towns |
+|---|---|
+| record none · shown none · page None · defenceFlag false | 149 |
+| record relied-upon · shown relied-upon · page Relied upon · defenceFlag true | 64 |
+| record integral · shown integral · page Integral · defenceFlag true | 63 |
+| record integral · shown relied-upon · page Relied upon · defenceFlag true | 10 |
+| record relied-upon · shown none · page None · defenceFlag true | 8 |
+| record present · shown present · page Present · defenceFlag false | 6 |
+
+| food: stored label · band · shown word · page word | towns |
+|---|---|
+| label Secure · band secure · shown Secure · page Secure | 128 |
+| label Deficit — Active Famine · band famine · shown Deficit — Active Famine · page Deficit | 63 |
+| label Secure · band secure · shown Pressured · page Pressured | 59 |
+| label Pressured · band pressured · shown Pressured · page Pressured | 22 |
+| label Deficit · band deficit · shown Deficit · page Deficit | 22 |
+| label Import-Dependent · band importDependent · shown Deficit · page Deficit | 6 |
+
+## LAW 4 (4n): each thing, named at all and named without (towns naming · distinct lines naming · towns that print one without the thing)
+
+| thing | sixty | 720 | fresh300 |
+|---|---|---|---|
+| clay | 20 · 5 · 1 | 254 · 14 · 2 | 92 · 9 · 0 |
+| founding | 7 · 1 · 3 | 67 · 1 · 23 | 24 · 1 · 9 |
+| lord | 13 · 37 · 1 | 156 · 186 · 4 | 54 · 50 · 2 |
+| notary | 26 · 32 · 3 | 332 · 352 · 46 | 133 · 137 · 22 |
+| oldnew | 4 · 4 · 1 | 45 · 45 · 1 | 18 · 18 · 1 |
+| patron | 6 · 1 · 1 | 106 · 1 · 0 | 28 · 1 · 0 |
+| weeks | 21 · 6 · 2 | 302 · 42 · 1 | 127 · 6 · 7 |
+
+## The register's vocabulary on the page, 4r, by thing (720: towns that print a line naming it without it · distinct lines)
 
 | thing | towns | instances | distinct |
 |---|---|---|---|
-| 4r-state:siege | 48 | 97 | 37 |
-| 4r-state:famine | 47 | 112 | 6 |
-| 4r-state:succession | 31 | 47 | 16 |
-| 4r-state:occupation | 25 | 61 | 19 |
-| 4r-thing:house: fishmonger | 24 | 91 | 68 |
-| 4r-thing:house: performer | 16 | 16 | 2 |
-| 4r-thing:house: stable master | 15 | 22 | 22 |
-| 4r-state:plague | 14 | 34 | 14 |
-| 4r-thing:house: reeve | 14 | 70 | 57 |
-| 4r-thing:house: fishing | 13 | 60 | 44 |
-| 4r-thing:house: stone quarry | 13 | 32 | 26 |
-| 4r-thing:resource: mountain_timber | 11 | 15 | 15 |
-| 4r-thing:resource: stone_quarry | 11 | 42 | 18 |
-| 4r-thing:clergy | 10 | 11 | 6 |
-| 4r-thing:house: druid | 10 | 12 | 6 |
-| 4r-thing:resource: hunting_grounds | 10 | 21 | 12 |
-| 4r-thing:house: jeweller | 9 | 9 | 2 |
-| 4r-state:revolt | 8 | 17 | 6 |
-| 4r-thing:resource: iron_deposits | 8 | 17 | 11 |
-| 4r-thing:resource: precious_metals | 8 | 12 | 10 |
-| 4r-thing:house: tavern | 7 | 9 | 3 |
-| 4r-thing:resource: foraging_areas | 7 | 18 | 11 |
-| 4r-state:refugees | 6 | 6 | 3 |
-| 4r-thing:house: household elder | 6 | 35 | 34 |
-| 4r-thing:house: river transport | 6 | 7 | 3 |
-| 4r-thing:house: smuggling | 6 | 6 | 2 |
-| 4r-thing:resource: grain_fields | 6 | 10 | 10 |
-| 4r-size:streets | 5 | 5 | 5 |
-| 4r-thing:house: auction | 5 | 10 | 5 |
-| 4r-thing:house: chandler | 5 | 5 | 1 |
-| 4r-thing:house: cobbler | 5 | 5 | 2 |
-| 4r-thing:house: theater | 5 | 5 | 1 |
-| 4r-thing:mercenary | 5 | 9 | 7 |
-| 4r-thing:resource: gemstone_deposits | 5 | 7 | 6 |
-| 4r-thing:resource: managed_forest | 5 | 17 | 12 |
-| 4r-thing:war | 5 | 5 | 3 |
-| 4r-state:openTrade | 4 | 8 | 6 |
-| 4r-thing:house: headman | 4 | 21 | 19 |
-| 4r-thing:house: hired blade | 4 | 7 | 3 |
-| 4r-thing:resource: ancient_ruins | 4 | 8 | 6 |
-| 4r-thing:resource: coal_deposits | 4 | 8 | 6 |
-| 4r-thing:resource: hot_springs_mineral | 4 | 4 | 4 |
-| 4r-thing:house: mine | 3 | 3 | 3 |
-| 4r-thing:mill | 3 | 3 | 2 |
-| 4r-thing:resource: fishing_grounds | 3 | 9 | 7 |
-| 4r-thing:resource: magical_node | 3 | 5 | 4 |
-| 4r-thing:resource: marshlands | 3 | 7 | 5 |
-| 4r-thing:resource: salt_flats | 3 | 6 | 6 |
-| 4r-size:quarters | 2 | 2 | 2 |
-| 4r-thing:armedForce | 2 | 3 | 3 |
-| 4r-thing:garrison | 2 | 4 | 3 |
-| 4r-thing:house: alehouse | 2 | 2 | 2 |
-| 4r-thing:house: almshouse | 2 | 2 | 1 |
-| 4r-thing:house: butcher | 2 | 2 | 1 |
-| 4r-thing:house: gambling | 2 | 2 | 1 |
-| 4r-thing:house: mages' guild | 2 | 2 | 1 |
-| 4r-thing:house: opera | 2 | 2 | 1 |
-| 4r-thing:house: warehouse | 2 | 2 | 1 |
-| 4r-thing:market | 2 | 2 | 2 |
-| 4r-thing:notary | 2 | 3 | 3 |
-| 4r-thing:prisoner | 2 | 2 | 1 |
-| 4r-thing:resource: date_palms | 2 | 8 | 6 |
-| 4r-thing:resource: defended_pass | 2 | 2 | 1 |
-| 4r-thing:resource: grazing_land | 2 | 2 | 2 |
-| 4r-thing:smith | 2 | 2 | 1 |
-| 4r-thing:walls | 2 | 2 | 1 |
-| 4r-thing:bank | 1 | 1 | 1 |
-| 4r-thing:house: apothecary | 1 | 1 | 1 |
-| 4r-thing:house: dyer | 1 | 1 | 1 |
-| 4r-thing:house: glassmaker | 1 | 1 | 1 |
-| 4r-thing:house: hedge wizard | 1 | 1 | 1 |
-| 4r-thing:house: lord's steward | 1 | 1 | 1 |
-| 4r-thing:house: scribe | 1 | 1 | 1 |
-| 4r-thing:house: street gang | 1 | 1 | 1 |
-| 4r-thing:house: waystation | 1 | 1 | 1 |
-| 4r-thing:resource: ancient_grove | 1 | 2 | 2 |
-| 4r-thing:resource: desert_salt | 1 | 3 | 3 |
-| 4r-thing:resource: river_fish | 1 | 3 | 3 |
-| 4r-thing:resource: shipbuilding_timber | 1 | 2 | 2 |
+| 4r-state:siege | 689 | 1338 | 151 |
+| 4r-state:famine | 676 | 1664 | 6 |
+| 4r-state:occupation | 317 | 774 | 64 |
+| 4r-state:succession | 314 | 496 | 122 |
+| 4r-thing:house: fishmonger | 270 | 997 | 697 |
+| 4r-thing:house: fishing | 217 | 890 | 312 |
+| 4r-thing:house: stable master | 174 | 276 | 268 |
+| 4r-thing:house: performer | 171 | 171 | 4 |
+| 4r-thing:resource: hunting_grounds | 149 | 330 | 124 |
+| 4r-thing:house: reeve | 141 | 704 | 533 |
+| 4r-thing:house: jeweller | 138 | 138 | 2 |
+| 4r-thing:house: druid | 132 | 152 | 25 |
+| 4r-thing:resource: stone_quarry | 131 | 700 | 149 |
+| 4r-thing:clergy | 127 | 172 | 13 |
+| 4r-thing:house: stone quarry | 125 | 297 | 189 |
+| 4r-thing:resource: precious_metals | 118 | 144 | 120 |
+| 4r-thing:resource: iron_deposits | 91 | 209 | 97 |
+| 4r-state:plague | 89 | 242 | 49 |
+| 4r-thing:resource: mountain_timber | 85 | 140 | 86 |
+| 4r-thing:resource: coal_deposits | 82 | 151 | 85 |
+| 4r-thing:resource: foraging_areas | 80 | 192 | 102 |
+| 4r-thing:resource: ancient_grove | 79 | 151 | 131 |
+| 4r-thing:house: river transport | 76 | 96 | 5 |
+| 4r-thing:resource: grazing_land | 76 | 108 | 89 |
+| 4r-state:refugees | 74 | 74 | 3 |
+| 4r-thing:house: auction | 70 | 138 | 11 |
+| 4r-thing:house: tavern | 69 | 80 | 8 |
+| 4r-state:revolt | 65 | 138 | 28 |
+| 4r-thing:mercenary | 65 | 96 | 9 |
+| 4r-thing:war | 60 | 60 | 7 |
+| 4r-thing:house: household elder | 55 | 305 | 265 |
+| 4r-thing:resource: marshlands | 55 | 123 | 65 |
+| 4r-thing:resource: managed_forest | 54 | 169 | 109 |
+| 4r-thing:house: chandler | 51 | 52 | 2 |
+| 4r-thing:resource: gemstone_deposits | 50 | 73 | 55 |
+| 4r-thing:resource: grain_fields | 49 | 74 | 64 |
+| 4r-thing:house: hired blade | 45 | 83 | 3 |
+| 4r-thing:armedForce | 44 | 47 | 42 |
+| 4r-thing:house: headman | 44 | 208 | 169 |
+| 4r-thing:mill | 42 | 76 | 30 |
+| 4r-thing:house: cobbler | 41 | 41 | 3 |
+| 4r-thing:house: mages' guild | 39 | 39 | 1 |
+| 4r-thing:house: mine | 36 | 36 | 36 |
+| 4r-thing:house: theater | 36 | 36 | 1 |
+| 4r-thing:prisoner | 36 | 39 | 9 |
+| 4r-thing:house: opera | 34 | 34 | 2 |
+| 4r-thing:house: scribe | 30 | 30 | 1 |
+| 4r-size:streets | 29 | 29 | 29 |
+| 4r-thing:resource: hot_springs_mineral | 29 | 31 | 28 |
+| 4r-thing:resource: fishing_grounds | 28 | 77 | 35 |
+| 4r-thing:resource: river_fish | 28 | 78 | 46 |
+| 4r-thing:house: gambling | 26 | 26 | 1 |
+| 4r-thing:house: warehouse | 26 | 26 | 5 |
+| 4r-thing:notary | 25 | 37 | 16 |
+| 4r-thing:resource: shipbuilding_timber | 25 | 59 | 27 |
+| 4r-thing:resource: salt_flats | 24 | 70 | 43 |
+| 4r-thing:resource: ancient_ruins | 23 | 46 | 24 |
+| 4r-thing:bank | 21 | 22 | 19 |
+| 4r-thing:resource: magical_node | 21 | 36 | 12 |
+| 4r-thing:market | 20 | 20 | 5 |
+| 4r-thing:house: smuggling | 19 | 25 | 9 |
+| 4r-thing:house: waystation | 17 | 17 | 2 |
+| 4r-thing:resource: glass_sand | 17 | 23 | 18 |
+| 4r-thing:house: street gang | 15 | 15 | 1 |
+| 4r-thing:garrison | 14 | 28 | 4 |
+| 4r-thing:house: adventurers' charter | 14 | 14 | 4 |
+| 4r-thing:house: apothecary | 14 | 16 | 6 |
+| 4r-thing:house: glassmaker | 13 | 20 | 19 |
+| 4r-thing:practitioner | 12 | 12 | 2 |
+| 4r-thing:resource: alpine_pasture | 11 | 29 | 19 |
+| 4r-thing:house: alchemist | 10 | 10 | 1 |
+| 4r-thing:house: tanner | 10 | 10 | 1 |
+| 4r-thing:house: wizard's tower | 10 | 10 | 1 |
+| 4r-thing:house: brewer | 9 | 11 | 4 |
+| 4r-thing:house: metalworker | 9 | 9 | 1 |
+| 4r-state:openTrade | 8 | 13 | 9 |
+| 4r-thing:house: lord's steward | 8 | 8 | 3 |
+| 4r-size:quarters | 7 | 12 | 8 |
+| 4r-thing:house: almshouse | 7 | 7 | 1 |
+| 4r-thing:resource: defended_pass | 7 | 7 | 1 |
+| 4r-thing:house: butcher | 6 | 6 | 2 |
+| 4r-thing:house: library | 6 | 12 | 3 |
+| 4r-thing:religiousHouses | 6 | 12 | 3 |
+| 4r-thing:house: alehouse | 5 | 7 | 2 |
+| 4r-thing:resource: fertile_floodplain | 5 | 11 | 7 |
+| 4r-thing:house: assay | 4 | 8 | 2 |
+| 4r-thing:resource: river_clay | 4 | 8 | 7 |
+| 4r-thing:resource: camel_herds | 3 | 8 | 7 |
+| 4r-thing:resource: date_palms | 3 | 12 | 8 |
+| 4r-thing:resource: desert_salt | 3 | 7 | 7 |
+| 4r-thing:smith | 3 | 3 | 1 |
+| 4r-thing:house: hedge wizard | 2 | 3 | 3 |
+| 4r-count:housesCount | 1 | 1 | 1 |
+| 4r-thing:armoury | 1 | 1 | 1 |
+| 4r-thing:house: citadel | 1 | 1 | 1 |
+| 4r-thing:temple | 1 | 1 | 1 |
+| 4r-thing:walls | 1 | 1 | 1 |
 
-## Law 4n · the commonest distinct lines (sixty; towns)
-
-| towns | line |
-|---|---|
-| 3 | Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night. |
-| 3 | Toll collected on goods sold. A share goes to the lord or municipality. |
-| 2 | Secret: Passed information about the settlement's water supply to someone in the besieging camp three weeks ago |
-| 1 | Ioannochorion is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for. A shade tree and a worn bench mark the ground where people meet. Kiln smoke hangs |
-| 1 | The road was here first. The settlement grew along its verge, and its news has always come on somebody else's cart. |
-| 1 | Madhav Bajaj and Sanjay Bhatt each hold something over the other. Sanjay Bhatt has written down what Madhav Bajaj owes and left a copy with a notary. |
-| 1 | Sanjay Bhatt has written down what Madhav Bajaj owes and left a copy with a notary. |
-| 1 | They owe their post to a patron who has started asking for repayment in favours they cannot grant openly. |
-| 1 | Mirjana Tarasov has written down what Dalibor Lebedev owes and left a copy with a notary. |
-| 1 | In Neuburg the old buildings are patched and kept standing, and nothing new goes up. |
-| 1 | Collects the lord's dues and the tithe |
-| 1 | Haruto Lin (the stable keeper) has written down what Dan Li owes and left a copy with a notary. |
-
-## Law 1a · the commonest distinct lines (sixty; towns)
-
-| towns | line |
-|---|---|
-| 2 | "The settlement relies on arcane workings it does not entirely trust. The Arcane Incident proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather" |
-| 1 | People at Ingines know that part of the city's work now holds up only with help beyond ordinary labour. |
-| 1 | People at Padmavalli know that part of the town's work now holds up only with help beyond ordinary labour. |
-| 1 | People at Bjorney know that part of the village's work now holds up only with help beyond ordinary labour. |
-
-## Law 1c · the commonest distinct lines (sixty; towns)
+## Law 1c · the commonest distinct lines (720; towns)
 
 | towns | line |
 |---|---|
-| 6 | Heads the leading house in the trade in quiet times; its hold is secure and its say is real. |
-| 2 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. |
-| 1 | The Church Council at Pratonovum holds because no rival yet outweighs Church Council, and the weighing is done again every season. |
+| 41 | Heads the leading house in the trade in quiet times; its hold is secure and its say is real. |
+| 3 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. |
+| 3 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. Arcane Orders have more say right now, and the clergy cannot accept it. |
+| 3 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. |
+| 2 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure in |
+| 1 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. Arcane Council has more say right now, and the clergy cannot accept it. |
+| 1 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. The arcane orders are present but operate in the clergy's shadow. Questions of what is sancti |
+| 1 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. Close enough to the two above that their support is worth buying; they play Religious Authorities and Household Counci |
 | 1 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. They are always at the table, but cannot set their own terms. |
-| 1 | Significant military force for this scale; the commander's opinion on civic matters carries institutional weight. |
+| 1 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. Close enough to the two above that their support is worth buying; they play Elder Council and Religious Authorities ag |
+| 1 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure in |
+| 1 | Significant military presence; officers hold political influence disproportionate to formal civic rank. Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. |
+| 1 | The Ecclesiastical Council at Torrivilla holds because no rival yet outweighs Ecclesiastical Council, and the weighing is done again every season. |
+| 1 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. The pastoral burden of wartime (soldiers praying before departure, families grieving) has mad |
 
-## Law 1d · the commonest distinct lines (sixty; towns)
-
-| towns | line |
-|---|---|
-| 1 | Nothing about Andronkastro's condition asks to be remarked on. The town pays its own way and has a little in hand. |
-
-## Law 1b · the commonest distinct lines (sixty; towns)
+## Law 1a · the commonest distinct lines (720; towns)
 
 | towns | line |
 |---|---|
-| 1 | With more than its herds to rely on, Aquaium can take a bad season in one source without going hungry. |
+| 1 | At Benhurst the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | People at Drumbury know that part of the metropolis's work now holds up only with help beyond ordinary labour. |
+| 1 | If the help beyond ordinary work failed at Kitaxian, the trade that makes its preserved foods would yield less than it does now. |
+| 1 | People at Nokhoiserai know that part of the metropolis's work now holds up only with help beyond ordinary labour. |
+| 1 | At Hongtian the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | If the help beyond ordinary work failed at Nahrkhel, the trade that makes its honey and beeswax would yield less than it does now. |
+| 1 | At Kashithal the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | At Milonick the usual work no longer yields enough salted fish, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | People at Ulfborg know that part of the village's work now holds up only with help beyond ordinary labour. |
+| 1 | People at Naglsund know that part of the village's work now holds up only with help beyond ordinary labour. |
+| 1 | If the help beyond ordinary work failed at Lagosinum, the trade that makes its baked goods would yield less than it does now. |
+| 1 | People at Liponick know that part of the village's work now holds up only with help beyond ordinary labour. |
+| 1 | People at Yaxchtzal know that part of the village's work now holds up only with help beyond ordinary labour. |
+| 1 | At Dongan the usual work no longer yields enough salted fish, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | People at Vatanabad know that part of the city's work now holds up only with help beyond ordinary labour. |
+| 1 | If the help beyond ordinary work failed at Uxmalahau, the trade that makes its baked goods would yield less than it does now. |
+| 1 | At Olympnea the usual work no longer yields enough salted fish, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | If the help beyond ordinary work failed at Oberkirche, the trade that makes its river fish would yield less than it does now. |
+| 1 | At Khirbetserai the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | At Mingan the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | If the help beyond ordinary work failed at Baizhen, the trade that makes its baked goods would yield less than it does now. |
+| 1 | "The settlement relies on arcane workings it does not entirely trust. The Arcane Incident proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather" |
+| 1 | People at Vysokoichi know that part of the metropolis's work now holds up only with help beyond ordinary labour. |
+
+## Law 4n · the commonest distinct lines (720; towns)
+
+| towns | line |
+|---|---|
+| 23 | Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night. |
+| 4 | Collects the lord's dues and the tithe |
+| 1 | Egor Petrov has written down what Anastasia Borisov owes and left a copy with a notary. |
+| 1 | A child runs past you on the road into Polavich, chasing something or being chased by something (unclear which). Nobody in the street pays attention. Painted timber fronts and enclosed garden plots line the older lanes. |
+| 1 | Ügedei Jalayir has written down what Burmaa Jalayir owes and left a copy with a notary. |
+| 1 | Ra'id al-Misri has written down what Tamara al-Rashidi owes and left a copy with a notary. |
+| 1 | Salma al-Andalusi has written down what Omar al-Aziz owes and left a copy with a notary. |
+| 1 | Jamukha Budaad has written down what Vachir Geniges owes and left a copy with a notary. |
+| 1 | Hostus Julianus has written down what Valens Silanus owes and left a copy with a notary. |
+| 1 | Taghrid ibn Ali has written down what Latifa al-Andalusi owes and left a copy with a notary. |
+| 1 | Ashoka Jain has written down what Omkara Deshpande owes and left a copy with a notary. |
+| 1 | Pooja Jain has written down what Durga Chaudhary owes and left a copy with a notary. |
+| 1 | Vagn Ingvarsson has written down what Oswald Rognvaldsson owes and left a copy with a notary. |
+| 1 | Quetzal Ucan has written down what Nakul Chan owes and left a copy with a notary. |
+| 1 | Inge Njálsson has written down what Brynhild Styrkarsson owes and left a copy with a notary. |
+| 1 | Rekha Roy has written down what Tara Jain owes and left a copy with a notary. |
+| 1 | Khatan Olqunu'ud has written down what Borchigid Samarkand owes and left a copy with a notary. |
+| 1 | Hadwige Schröder has written down what Notburga Fischer owes and left a copy with a notary. |
+| 1 | Dhruv Mishra has written down what Ekalavya Panda owes and left a copy with a notary. |
+| 1 | Sabbas Nestongos has written down what Romanos Doukas owes and left a copy with a notary. |
+| 1 | Dag Magnusson has written down what Mord Bjarnarson owes and left a copy with a notary. |
+| 1 | Katla Eriksson has written down what Záleif Gormsson owes and left a copy with a notary. |
+| 1 | Bera Olafsson has written down what Unn Bjornsson owes and left a copy with a notary. |
+| 1 | Baebia Aurelius has written down what Hortensia Celer owes and left a copy with a notary. |
+| 1 | Helena Becker has written down what Yolanda Maier owes and left a copy with a notary. |
+| 1 | Tae Zhou has written down what Genji Xiao owes and left a copy with a notary. |
+| 1 | Dayaram Dubey has written down what Kalpana Kapoor owes and left a copy with a notary. |
+| 1 | Zoran Klimov has written down what Artem Volkov owes and left a copy with a notary. |
+| 1 | Wilhelm Lehmann has written down what Reinhard Huber owes and left a copy with a notary. |
+| 1 | Kyriakos Alexios has written down what Stylianos Gregoraios owes and left a copy with a notary. |
+
+## Law 1b · the commonest distinct lines (720; towns)
+
+| towns | line |
+|---|---|
+| 1 | Not all of Xinyuan's food is grown or bought: some of what the thorp eats is provided by spell or by prayer, and the thorp would go shorter without it. Its food comes from more than one source, the fishing most of all, s |
+| 1 | Ainkarez's food comes from more than one source, the herds most of all, so a poor year in one does not empty the town's tables. |
+| 1 | Ringford's food comes from more than one source, the grain harvest most of all, so a poor year in one does not empty the town's tables. |
+
+## Law 4n · the commonest distinct lines (fresh300; towns)
+
+| towns | line |
+|---|---|
+| 9 | Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night. |
+| 7 | Secret: Passed information about the settlement's water supply to someone in the besieging camp three weeks ago |
+| 2 | Collects the lord's dues and the tithe |
+| 1 | Gordana Aleksandrov has written down what Radomir Petrov owes and left a copy with a notary. |
+| 1 | Möngke Qonggirad has written down what Burilgi Jalayir owes and left a copy with a notary. |
+| 1 | Claudia Severus has written down what Munatia Severus owes and left a copy with a notary. |
+| 1 | Nanthild Becker has written down what Notburga Fischer owes and left a copy with a notary. |
+| 1 | Niamh Doherty has written down what Daigh Burke owes and left a copy with a notary. |
+| 1 | Narantuya Jalayir has written down what Qutlugh Bukhara owes and left a copy with a notary. |
+| 1 | Gordana Morozov and Marina Aleksandrov each hold something over the other. Marina Aleksandrov has written down what Gordana Morozov owes and left a copy with a notary. |
+| 1 | Marina Aleksandrov has written down what Gordana Morozov owes and left a copy with a notary. |
+| 1 | Tariq al-Qadir has written down what Aziz al-Aziz owes and left a copy with a notary. |
+| 1 | Tamara al-Rashidi has written down what Waheed al-Dimashqi owes and left a copy with a notary. |
+| 1 | Tao Kanil has written down what Hunahpu Caan owes and left a copy with a notary. |
+| 1 | Jörunnaek Bjornsson has written down what Magnhild Gunnarsson owes and left a copy with a notary. |
+| 1 | Varro Nero has written down what Cornelia Aquila owes and left a copy with a notary. |
+| 1 | Chimalli Cohuoh has written down what Xiuhcoatl Kab owes and left a copy with a notary. |
+| 1 | Ulfhéðinn Yngvarsson has written down what Varg Hrafnsson owes and left a copy with a notary. |
+| 1 | Ekaterini Muzalon has written down what Athanasia Drimys owes and left a copy with a notary. |
+| 1 | Bodvar Bjornsson has written down what Kráka Andersson owes and left a copy with a notary. |
+| 1 | Ariadne Attaleiates has written down what Panteleimonissa Kalojan owes and left a copy with a notary. |
+| 1 | Pitao Ucan has written down what Kanleox Batab owes and left a copy with a notary. |
+| 1 | Hyunji Lu has written down what Jin Xiao owes and left a copy with a notary. |
+| 1 | Rory Daly has written down what Gareth Murphy owes and left a copy with a notary. |
+| 1 | In Yurtbulag the old buildings are patched and kept standing, and nothing new goes up. |
+| 1 | Ernst Schmitt has written down what Liesel Müller owes and left a copy with a notary. |
+| 1 | Kadan Ongirad has written down what Alaqai Geniges owes and left a copy with a notary. |
+
+## Law 1a · the commonest distinct lines (fresh300; towns)
+
+| towns | line |
+|---|---|
+| 1 | At Vedavaram the usual work no longer yields enough game meat, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | People at Shivagrad know that part of the city's work now holds up only with help beyond ordinary labour. |
+| 1 | At Bayantala the usual work no longer yields enough herbal remedies, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | "A settlement with an unusual relationship to magic: the Arcane Incident made it both more dependent on arcane resources and more wary of them simultaneously" |
+| 1 | If the help beyond ordinary work failed at Teotichihua, the trade that makes its preserved foods would yield less than it does now. |
+| 1 | At Mahatala the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | People at Neuburg know that part of the village's work now holds up only with help beyond ordinary labour. |
+| 1 | At Uaxacpan the usual work no longer yields enough salted fish, and the trade that makes it now leans on help beyond ordinary work. |
+| 1 | If the help beyond ordinary work failed at Rajiwadi, the trade that makes its river fish would yield less than it does now. |
+
+## Law 1c · the commonest distinct lines (fresh300; towns)
+
+| towns | line |
+|---|---|
+| 15 | Heads the leading house in the trade in quiet times; its hold is secure and its say is real. |
+| 1 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. Behind Feudal Stewardship by too much to challenge openly, so they get their way through petitions and procedure inste |
+| 1 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. The arcane orders are present but operate in the clergy's shadow. Questions of what is sancti |
+| 1 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. Arcane Senate has more say right now, and the clergy cannot accept it. |
+| 1 | Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular trust. Arcane Orders have more say right now, and the clergy cannot accept it. The criminal network |
+| 1 | The Church Council at Polagorod holds because no rival yet outweighs Church Council, and the weighing is done again every season. |
+| 1 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure in |
+| 1 | Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical. |
+
+## Law 1b · the commonest distinct lines (fresh300; towns)
+
+| towns | line |
+|---|---|
+| 1 | Part of Nishiyuan's food is neither grown nor bought, and the table would be thinner without it. With more than its grain harvest to rely on, Nishiyuan can take a bad season in one source without going hungry. |
 
 ## By writer file (sixty; distinct lines of each sub-law traced by PAGE-COPY writers2.mjs)
 
@@ -244,12 +426,52 @@
 | 1c-weight | src/generators/power/rulingStructure.js | generatePowerStructure | 1 |
 | 1d-up | src/data/dossierStateProse/economy.generated.js | DS-ECO-8 › MODERATE · v3 | 1 |
 | 4n-clay | src/data/narrativeData.js | ARRIVAL_SCENES.ordinary | 1 |
-| 4n-founding | src/generators/narrative/settlementOriginProse.js | ORIGIN_POOLS | 2 |
-| 4n-lord | src/data/institutionServices.js | INSTITUTION_SERVICES.Tax collection | 1 |
+| 4n-founding | src/generators/narrative/settlementOriginProse.js | ORIGIN_POOLS | 1 |
 | 4n-lord | src/data/institutionServices.js | INSTITUTION_SERVICES.Tithe and dues | 1 |
 | 4n-notary | src/data/npcData.js | STRESS_ECONOMIC_EFFECTS.twin | 3 |
 | 4n-notary | src/generators/power/settlementNarrative.js | TIE_GLOSS | 1 |
 | 4n-oldnew | src/data/dossierStateProse/economy.generated.js | DS-ECO-8 › POOR · v3 | 1 |
 | 4n-patron | src/domain/hookThemes.js | AUTHORED_HOOK_THEMES | 1 |
+| 4n-weeks | src/data/stressInstitutionEffects.js | STRESS_INSTITUTION_EFFECTS.excludes | 1 |
+
+## By writer file (720; distinct lines of each sub-law traced by PAGE-COPY writers2.mjs)
+
+| sub-law | writer file | function or pool | distinct lines |
+|---|---|---|---|
+| 1a-depends | src/data/dossierStateProse/defense.generated.js | DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1 | 13 |
+| 1a-depends | src/data/dossierStateProse/defense.generated.js | DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v2 | 1 |
+| 1a-depends | src/data/dossierStateProse/defense.generated.js | DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v3 | 8 |
+| 1a-depends | src/generators/narrativeText.js | POLITICAL_FLAVOR | 1 |
+| 1b-reassures | src/data/dossierStateProse/economy.generated.js | DS-ECO-9 › FOOD SOURCES: several, the largest named · v1 | 2 |
+| 1b-reassures | src/data/dossierStateProse/economy.generated.js | DS-ECO-9 › HOW THE NEED IS MET: part of it by magic · v1 | 1 |
+| 1c-force | src/generators/power/rulingStructure.js | generatePowerStructure | 6 |
+| 1c-norival | src/data/dossierStateProse/power.generated.js | DS-POW-4 › riskLabel: Holding · v3 | 1 |
+| 1c-npc | src/generators/npcStructure.js | reg | 1 |
+| 1c-weight | src/generators/power/rulingStructure.js | generatePowerStructure | 6 |
+| 4n-clay | src/data/cultureProfiles.js | CULTURE_PROFILES.architecturalDetails | 1 |
+| 4n-clay | src/data/narrativeData.js | STRESS_DESCS.plague_onset | 1 |
+| 4n-founding | src/generators/narrative/settlementOriginProse.js | ORIGIN_POOLS | 1 |
+| 4n-lord | src/data/institutionServices.js | INSTITUTION_SERVICES.Tithe and dues | 1 |
+| 4n-notary | src/data/npcData.js | STRESS_ECONOMIC_EFFECTS.twin | 47 |
+| 4n-oldnew | src/data/dossierStateProse/economy.generated.js | DS-ECO-8 › POOR · v3 | 1 |
+| 4n-weeks | src/data/stressInstitutionEffects.js | STRESS_INSTITUTION_EFFECTS.excludes | 1 |
+
+## By writer file (fresh300; distinct lines of each sub-law traced by PAGE-COPY writers2.mjs)
+
+| sub-law | writer file | function or pool | distinct lines |
+|---|---|---|---|
+| 1a-depends | src/data/dossierStateProse/defense.generated.js | DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1 | 6 |
+| 1a-depends | src/data/dossierStateProse/defense.generated.js | DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v3 | 2 |
+| 1a-depends | src/generators/narrativeText.js | POLITICAL_FLAVOR | 1 |
+| 1b-reassures | src/data/dossierStateProse/economy.generated.js | DS-ECO-9 › FOOD SOURCES: several, the largest named · v3 | 1 |
+| 1c-force | src/generators/power/rulingStructure.js | generatePowerStructure | 3 |
+| 1c-norival | src/data/dossierStateProse/power.generated.js | DS-POW-4 › riskLabel: Holding · v3 | 1 |
+| 1c-npc | src/generators/npcStructure.js | reg | 1 |
+| 1c-weight | src/generators/power/rulingStructure.js | generatePowerStructure | 3 |
+| 4n-founding | src/generators/narrative/settlementOriginProse.js | ORIGIN_POOLS | 1 |
+| 4n-lord | src/data/institutionServices.js | INSTITUTION_SERVICES.Tithe and dues | 1 |
+| 4n-notary | src/data/npcData.js | STRESS_ECONOMIC_EFFECTS.twin | 22 |
+| 4n-notary | src/generators/power/settlementNarrative.js | TIE_GLOSS | 1 |
+| 4n-oldnew | src/data/dossierStateProse/economy.generated.js | DS-ECO-8 › POOR · v3 | 1 |
 | 4n-weeks | src/data/stressInstitutionEffects.js | STRESS_INSTITUTION_EFFECTS.excludes | 1 |
 
