@@ -1,0 +1,5 @@
+{"id":"C214430","town":"bar0-village-famine-rand-33","sev":"MED","kind":"PAIR","why":"'The famine turns on the mill... if it gives way' (conditional) against 'The mill failed this year and took most of the food' and FOOD failed source mill","other":"C214343"}
+{"id":"C214505","town":"bar0-village-famine-rand-33","sev":"LOW","kind":"LACKS","why":"Druid Circle text 'tend gardens in the city, or groves hidden within it': a village of 267 has no city","other":""}
+{"id":"C214847","town":"bar0-village-famine-rand-33","sev":"MED","kind":"PAIR","why":"Defense tab 'No arcane practitioners on the rolls' against Druid Circle with an Archdruid offering 'Nature magic services' and Magic tab 'Relied upon · for food (druidic provision)'","other":"C214508"}
+{"id":"C215480","town":"bar0-village-famine-rand-34","sev":"LOW","kind":"LACKS","why":"Elected Reeve described as acting 'under noble oversight'; GOVERNMENT lists no noble or overlord power, only Grain Holders and Elected Reeve","other":""}
+{"id":"DONE","lines":1476,"blocks":2,"flags":4}
