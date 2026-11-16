@@ -1,0 +1,8 @@
+{"id":"C96337","town":"bar0-hamlet-under_siege-rand-39","sev":"MED","kind":"PAIR","why":"table 'with salted fish beside it' unmarked under the siege; Fisher's landing 'Salted fish (stopped)' and 'Stopped by the siege' on the same page","other":"C96242"}
+{"id":"C96256","town":"bar0-hamlet-under_siege-rand-39","sev":"LOW","kind":"PAIR","why":"house row 'Stopped by the siege.' yet its only service 'Grain milling (a day away)' printed bare with no mark, here and on Services tab","other":"C96255"}
+{"id":"C96793","town":"bar0-hamlet-under_siege-rand-40","sev":"MED","kind":"STATE","why":"Pack animal trader's 'Pack animal sales' and road rental unmarked under the siege, while Caravanserai and Stable yard rows are '(stopped)' and 'almost nothing changes hands'","other":"C96699"}
+{"id":"C96818","town":"bar0-hamlet-under_siege-rand-40","sev":"LOW","kind":"PAIR","why":"house row 'Stopped by the siege.' yet its only service 'Grain milling (a day away)' printed bare with no mark","other":"C96817"}
+{"id":"C97044","town":"bar0-hamlet-under_siege-rand-40","sev":"LOW","kind":"LACKS","why":"'Sübeteibash's streets' in a hamlet of 86, which the page elsewhere calls 'the lanes' and 'the last houses'","other":""}
+{"id":"C97389","town":"bar0-hamlet-under_siege-rand-41","sev":"LOW","kind":"PAIR","why":"house row 'Stopped by the siege.' yet its only service 'Grain milling (a day away)' printed bare with no mark","other":"C97388"}
+{"id":"C97566","town":"bar0-hamlet-under_siege-rand-41","sev":"LOW","kind":"LACKS","why":"'Dongkou's streets' in a hamlet of 79; the page elsewhere gives no streets, 'the roofs' and a lookout","other":""}
+{"id":"DONE","lines":1710,"blocks":3,"flags":7}
