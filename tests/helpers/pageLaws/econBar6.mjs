@@ -58,7 +58,7 @@ export function econBar6Instances(town, { blind = false } = {}) {
   // 8d.income: a share titled by a chain whose card prints impaired, under a siege
   if (siege) for (const src of eco.incomeSources || []) {
     const title = fold(src?.source);
-    const impaired = (eco.activeChains || []).some((/** @type {any} */ c) => (fold(c.label) === title || fold(chainPrintName(c, town)) === title)
+    const impaired = (eco.activeChains || []).some((/** @type {any} */ c) => fold(chainPrintName(c, town)) === title
       && String(chainCardUnderCrisis(town, c, chainAsShown(c, town))?.status ?? '') === 'impaired'
       && (['running', 'operational', 'entrepot', 'vulnerable'].includes(String(c.status)) || c.resourceDepleted === true)); // impaired by the siege, not by a cause of its own
     const kind = blind ? rowStoppedBy(town, 'income', src, crises) : incomeKindShown(town, src, crises);

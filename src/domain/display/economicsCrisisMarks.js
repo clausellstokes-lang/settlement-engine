@@ -171,7 +171,7 @@ export function flowCrisisMarks(town, records, shown) {
  * times bare, while the chain card of the same name, two sections down, prints "Impaired" (its ore worked out, and the
  * siege bringing none in) and the shares beside it carry their marks. The share's mark is the leaf's (`rowStoppedBy`,
  * kind 'income'); where the leaf gives none and trade is stopped (`tradeStoppedHere`), a share whose title is a chain's
- * printed name (`chainPrintName`, or the record's label) takes the siege's partial mark, "Curtailed by the siege.", where
+ * printed name (`chainPrintName`, the one leaf of a chain's name) takes the siege's partial mark, "Curtailed by the siege.", where
  * that chain's card prints "impaired" by the siege (`impairedBySiege`: `chainCardUnderCrisis` over `chainAsShown`, the card's
  * own reading, of a chain the record holds at work or on a worked-out ground): the trade works what it holds and nothing
  * comes in to mend it. Outside a siege the share reads the leaf alone.
@@ -186,7 +186,7 @@ export function incomeKindShown(town, src, crises = stoppingCrisesOf(town)) {
   if (!title) return null;
   const chains = /** @type {{ economicState?: { activeChains?: unknown } } | null | undefined} */ (town)?.economicState?.activeChains;
   const titled = (Array.isArray(chains) ? /** @type {Record<string, unknown>[]} */ (chains) : [])
-    .filter((c) => c && (folded(c.label) === title || folded(chainPrintName(/** @type {any} */ (c), town)) === title));
+    .filter((c) => c && folded(chainPrintName(/** @type {any} */ (c), town)) === title); // the chain's printed name, the leaf's (chainPrintSites F1)
   return titled.some((c) => impairedBySiege(town, c)) ? SIEGE_CURTAILED : null;
 }
 

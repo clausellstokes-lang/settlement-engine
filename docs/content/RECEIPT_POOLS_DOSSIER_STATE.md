@@ -939,7 +939,7 @@ already in register and stand as index 0 of their pools, quoted below.
 4. `[ledger · no walls]` Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own bounds.
 
 **ADEQUATE** {crisis-scoped}
-0. *(canonical)* `[no crisis: under_siege]` Caravans keep to their rounds. Trade moves at its accustomed pace.
+0. *(canonical)* `[colour]` Caravans keep to their rounds. Trade moves at its accustomed pace.
 1. `[ledger · crisis: any]` The traffic through {settlement} matches what the ledgers expect of it. Arrivals and departures come out even, week on week.
 2. `[street]` The carts come when the carts come. Nobody is watching the road for them.
 3. `[visitor · crisis: any]` Trade at {settlement} is ordinary: carts arrive and leave on their usual days.
@@ -1728,9 +1728,10 @@ A composed page draws one of each grain, never two.
 5. `[unfolding · crisis: under_siege]` With the roads cut by the siege, {settlement} can no longer send out its {resource}, and what it has stays in the town.
 
 **EXPLOITATION: `partiallyExploited`, nothing exported** *(BAR6-ECON: the twin of the pool above where the export list the Economics tab prints holds nothing: "No significant exports.")*
-1. `[ledger]` {settlement} works part of the line that {resource} could support, and none of it is sold beyond the town now.
-2. `[street]` What {settlement} takes from its {resource}, it keeps; none of it goes out to buyers at present.
-3. `[visitor]` Nothing of {settlement}'s {resource} goes out to buyers now, worked or raw.
+1. `[ledger · no crisis: under_siege]` {settlement} works part of the line that {resource} could support, and none of it is sold beyond the town now.
+2. `[street · no crisis: under_siege]` What {settlement} takes from its {resource}, it keeps; none of it goes out to buyers at present.
+3. `[visitor · no crisis: under_siege]` Nothing of {settlement}'s {resource} goes out to buyers now, worked or raw.
+4. `[unfolding · crisis: under_siege]` With the roads cut by the siege, none of {settlement}'s {resource} goes out to buyers, worked or raw.
 
 **EXPLOITATION: `fullyExploited`**
 1. `[ledger · no crisis: under_siege]` The {resource} in {settlement}'s country is worked all the way to the finished {good}.
@@ -1920,6 +1921,7 @@ reading of the catalog itself.
 1. `[ledger · crisis: under_siege]` {settlement}'s {institution} still stands, but the siege has stopped every service it keeps.
 2. `[street · crisis: under_siege]` The doors of {settlement}'s {institution} are open and there is nothing behind them to sell; the siege has stopped all its work.
 3. `[unfolding · crisis: under_siege]` {settlement}'s {institution} does none of its trade while the siege lasts, and will take up again only when the roads open.
+4. `[visitor · no crisis: under_siege]` {settlement}'s {institution} still stands, and none of its services is on offer now.
 
 **A METROPOLIS-TIER CATALOG, COMPLETE**
 1. `[ledger]` {settlement} has every kind of service there is, including some no ordinary place would keep.
