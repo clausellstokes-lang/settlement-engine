@@ -1,0 +1,8 @@
+{"id":"C34847","town":"bar0-town-calm-rand-26","sev":"LOW","kind":"PAIR","why":"Weekly market 'requires a market charter' while DEFENCE gives charter: none; the market stands without one","other":""}
+{"id":"C35032","town":"bar0-town-calm-rand-26","sev":"LOW","kind":"PAIR","why":"Town council 'keeps the charter'; DEFENCE gives charter: none","other":"C34847"}
+{"id":"C35303","town":"bar0-town-calm-rand-26","sev":"LOW","kind":"PAIR","why":"Merchants murdered this season; the syndicate is said to stamp out random violence that would bring the law, and Safety is Moderate","other":"C35449"}
+{"id":"C35627","town":"bar0-town-calm-rand-26","sev":"MED","kind":"STATE","why":"Merchant Guilds are Suppressed (subordinate to the Council); 'its hold is secure and its say is real' contradicts it and C35416 'little say'","other":"C35416"}
+{"id":"C35438","town":"bar0-town-calm-rand-26","sev":"LOW","kind":"PAIR","why":"Says enough in hand to see the town through a lean year; the food page says a bad season would leave some households short","other":"C35147"}
+{"id":"C35549","town":"bar0-town-calm-rand-26","sev":"LOW","kind":"STATE","why":"Says people accept the seat and there is room to act; legitimacy is only Tolerated and stability Unstable (pervasive organized crime)","other":"C35302"}
+{"id":"C35551","town":"bar0-town-calm-rand-26","sev":"LOW","kind":"STATE","why":"'With nothing pressing' calm-times line; the header gives Unstable (pervasive organized crime) and the page reports merchants murdered this season","other":"C35303"}
+{"id":"DONE","lines":1704,"blocks":1,"flags":7}
