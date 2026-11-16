@@ -1,0 +1,6 @@
+{"id":"C161939","town":"bar0-town-calm-rand-30","sev":"LOW","kind":"STATE","why":"Overview says 'Founded roadside, where the day is measured in traffic' but FOUNDING says religious authorities founded it around a sacred grove","other":""}
+{"id":"C162477","town":"bar0-town-calm-rand-30","sev":"MED","kind":"PAIR","why":"says the town's work uses copper ore from elsewhere; the town works local iron ore ('Local ore feeds the smithy directly', C162468) and imports no copper ore","other":"C162468"}
+{"id":"C162606","town":"bar0-town-calm-rand-30","sev":"MED","kind":"PAIR","why":"Resources tab: medicinal herbs 'Fully exploited · very high value' drawing on herb gathering areas, but Wild Foraging Areas are Depleted and 'little is left worth taking'","other":"C162609"}
+{"id":"C162769","town":"bar0-town-calm-rand-30","sev":"MED","kind":"PAIR","why":"Defense tab: 'a working balance: the law is present, so is crime' vs 'Law & order · Critical', 'Unstable (pervasive organized crime)' and the hall's arrests 'no longer its own to give' (C162634)","other":"C162634"}
+{"id":"C161931","town":"bar0-town-calm-rand-30","sev":"MED","kind":"PAIR","why":"Overview names 'a hall of justice'; HOUSES has no court and Defense tab's Legal Infrastructure reads 'Prison only · Detention without process'","other":"C162815"}
+{"id":"DONE","lines":1688,"blocks":1,"flags":5}
