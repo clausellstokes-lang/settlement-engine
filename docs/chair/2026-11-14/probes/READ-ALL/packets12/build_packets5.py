@@ -78,7 +78,7 @@ def page_food(out,seed):
         w=None
         try:
             for line in io.open('%s/dumps/%s.txt'%(out,seed),encoding='utf-8'):
-                m=re.match(r'^Food Security\s*([A-Z][A-Za-z -]{2,30})$',line.strip())
+                m=re.match(r'^Food Security(?:\s*·\s*|\s*)([A-Z][A-Za-z —-]{2,40})$',line.strip())   # 2026-11-16: the mended copy prints the row as "Food Security · Pressured" (the old pattern missed the seam and the header fell back to the record's label)
                 if m: w=m.group(1); break
         except OSError: pass
         PAGEFOOD[k]=w
