@@ -68,7 +68,7 @@ export const STRATA = Object.freeze({
  * @property {number} layer the fact's layer (the layer map's §2a value layer, unless the row says otherwise)
  * @property {string} module the leaf's module, from `src/`
  * @property {string} exported the export the walker calls; `factsOf.<getter>` for a vocabulary home
- * @property {'record'|'crimeLists'|'factsGetter'|'factsCall'|'pairCall'|'perChain'|'perHouse'} call how the walker calls it on a
+ * @property {'record'|'crimeLists'|'factsGetter'|'factsCall'|'perChain'|'perHouse'} call how the walker calls it on a
  *   record (`perChain`: once per active chain, `(chain, record)`; `perHouse`: once per chain's house, `(record, name)`)
  * @property {ReadonlyArray<string>} reads the strata it touches (keys of STRATA)
  * @property {boolean} [stored] it hands on one stored value as it is: it may read its own stratum
@@ -162,11 +162,11 @@ export const LEAVES = Object.freeze({
   hasOtherNpc: home('hasOtherNpc', 4, ['npcs'], { call: 'factsCall' }),
   // R2-CODE-A-14 (the chair's ruling (s1)): a PAIR's fact — the two cards' memberships (the cast, layer 3)
   sharesPower: home('sharesPower', 4, ['npcs'], { call: 'factsCall' }),
-  // BAR4-PEOPLE (the chair's rulings TI1 and its ceiling ruling of 09:29): two more PAIR facts, homed in `people/pairPlace.js` and answered
-  // only where a tie is drawn (`people/ties.js :: withPairTies`, the lazy tie draw; never `factsOf`, so the first paint does not
-  // carry them): the two cards' houses and ranks; the ties between them. `pairCall`: the walker hands a record and a pair of its roster.
-  sharesPlace: leaf({ layer: 4, module: 'generators/people/pairPlace.js', exported: 'pairSharesPlaceOf', call: 'pairCall', reads: ['npcs'] }),
-  loneTie: leaf({ layer: 4, module: 'generators/people/pairPlace.js', exported: 'pairIsLoneOf', call: 'pairCall', reads: ['relationships'] }),
+  // BAR4-PEOPLE (the chair's TI1 and its ruling of 11:07): two more PAIR facts, read off the final record by `factsOf` (the presumption
+  // check re-reads a drawn line's needs there), and at the draw by `people/ties.js :: withPairTies` from its drafts: the two cards'
+  // houses and ranks (the cast, layer 3); the ties between them (layer 3)
+  sharesPlace: home('sharesPlace', 4, ['npcs'], { call: 'factsCall' }),
+  loneTie: home('loneTie', 4, ['npcs', 'relationships'], { call: 'factsCall' }),
   magicPractitioners: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'magicPractitioners', call: 'record', reads: ['institutions', 'npcs'] }),
   magicReliance: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'deriveMagicReliance', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'] }),
   magicSource: leaf({ layer: 4, module: 'domain/facts/magicSource.js', exported: 'magicSourceOf', call: 'record', reads: ['config', 'economicState', 'economicViability', 'institutions', 'npcs'],
