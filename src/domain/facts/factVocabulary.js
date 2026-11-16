@@ -217,6 +217,8 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {(pair: unknown) => boolean|undefined} [sharesPower]
  * @property {(pair: unknown) => boolean|undefined} [sharesPlace] BAR4-PEOPLE (TI1): `pairPlace.js :: pairSharesPlaceOf`
  * @property {(pair: unknown) => boolean|undefined} [loneTie] BAR4-PEOPLE (TI1): `pairPlace.js :: pairIsLoneOf`
+ * @property {(pair: unknown) => boolean|undefined} [seatHeld] BAR6-PEOPLE (10d-seat): `seatHeld.js :: pairSeatHeld`
+ * @property {boolean} [paidWatch] BAR6-PEOPLE (10e-house): `guardPay.js :: paidWatchOf`
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
@@ -261,6 +263,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   palisade: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.palisade) }),
   gate: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.gate) }),
   watch: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.watch) }),
+  // BAR6-PEOPLE (LAW 10 rule 10e-house; BRIEF-BAR6 fact (f), amendment B6; vetoable by the owner, on the veto list as new
+  // vocabulary): beside the watch: someone is paid to keep order, false where the village's unpaid rota is the whole watch
+  // (`guardPay.js :: paidWatchOf`). A line of pay drawn for a watch presumes it.
+  'paid watch': dim({ shape: 'presence', home: 'paidWatch', reader: (f) => bool(f.paidWatch) }),
   militia: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.militia) }),
   garrison: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.garrison) }),
   hospital: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.hospital) }),
@@ -371,6 +377,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // seat of a power the second sits in). `lone tie`: the two carry no other tie (a line that says they do not speak).
   'shared place': dim({ shape: 'presence', home: 'sharesPlace', needsContext: 'pair', reader: (f, _key, ctx) => pairFact(f.sharesPlace, ctx) }),
   'lone tie': dim({ shape: 'presence', home: 'loneTie', needsContext: 'pair', reader: (f, _key, ctx) => pairFact(f.loneTie, ctx) }),
+  // BAR6-PEOPLE (LAW 10 rule 10d-seat; BRIEF-BAR6 fact (d), amendment B6; vetoable by the owner, on the veto list as new vocabulary):
+  // beside the pair's facts: a card of the pair outside the government's category already sits, unveiled, on the governing power
+  // (`seatHeld.js`). A tie line in which that card asks for a seat on the council presumes it does not.
+  'seat held': dim({ shape: 'presence', home: 'seatHeld', needsContext: 'pair', reader: (f, _key, ctx) => pairFact(f.seatHeld, ctx) }),
   // TAIL-TIES, THE CHAIR'S RULING (T5) of 2026-11-14 ("THE WORD IS GRANTED"; vetoable by the owner): ONE atom, the
   // town is ruled by a BODY OF MORE THAN ONE (`rulingBody.js :: rulingBodyOf`, hookTruth.js's `ruledByCouncil` rule
   // moved to its home). A line about THE council (a session, a vote of it, "the council has asked") needs it: under a

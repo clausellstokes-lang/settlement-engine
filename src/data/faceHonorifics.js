@@ -341,6 +341,30 @@ export const FACE_HONORIFICS_BY_CULTURE = Object.freeze({
   }),
 });
 
+/** A word folded for comparison: lower case, letters only, a possessive's "'s" dropped ("the post's master" is the postmaster). @param {string} w */
+const foldWord = (w) => w.toLowerCase().replace(/['’]s\b/g, '').replace(/[^a-z]/g, '');
+/** Every registry title as the honorific of its own office would print it bare ("the wharfinger" → "wharfinger"). */
+const OFFICE_NAMES = new Set(Object.keys(FACE_HONORIFICS).map((t) => foldWord(t.replace(/^the\s+/i, ''))));
+/**
+ * BAR6-PEOPLE (LAW 10 rule 10c; BRIEF-BAR6 fact (b); the owner's pin M-1b: a representative's role IS its institution's
+ * title; vetoable by the owner): A FACE'S HONORIFIC NEVER NAMES ANOTHER OFFICE. A form of a title's pool that is ANOTHER
+ * registry title's own name gives the face another house's title, which another person of the town may hold: the inland
+ * harbour master styled "Wharfinger" beside the docks' wharfinger ("Connection: Wharfinger Madhuri Rao", the wide read's
+ * C196525; 36 towns of the census's 720). Such a form is refused; a looser name for the title's own office (its own words
+ * hold the form: "Commander" of the garrison commander, "Innkeeper" of the coaching-inn keeper) stands. A pool whose every
+ * form is refused keeps its own (none is: the guard `tests/domain/bar6PeopleLaw10.test.js` lists the pools). Display only.
+ * @param {string} title @param {Honorific} form @returns {boolean}
+ */
+const namesAnotherOffice = (title, form) => {
+  const own = foldWord(title.replace(/^the\s+/i, ''));
+  return [typeof form === 'string' ? form : form.male, typeof form === 'string' ? form : form.female].some((f) => {
+    const w = foldWord(f);
+    return w !== own && OFFICE_NAMES.has(w) && !own.includes(w);
+  });
+};
+/** The pool's forms that name no other office (the whole pool where every form would be refused). @param {string} title @param {readonly Honorific[]} pool */
+export const ownOfficeForms = (title, pool) => { const kept = pool.filter((h) => !namesAnotherOffice(title, h)); return kept.length ? kept : pool; };
+
 /** The seat mint's fallback title, "the head of <power>" (mintTitles.js :: headOf). */
 const HEAD_OF = /^the head of (.+)$/i;
 
@@ -362,7 +386,7 @@ export function honorificOfTitle(title, gender, seed, place = {}) {
   const pool = (byCulture && Object.hasOwn(byCulture, t) && byCulture[t])
     || (place?.coastal === false && FACE_HONORIFICS_INLAND[t]) || FACE_HONORIFICS[t];
   if (pool) {
-    const h = /** @type {Honorific} */ (pickVariant(pool, seed));
+    const h = /** @type {Honorific} */ (pickVariant(ownOfficeForms(t, pool), seed)); // BAR6-PEOPLE (10c): never another office's name
     return typeof h === 'string' ? h : gender === 'female' ? h.female : h.male;
   }
   const head = HEAD_OF.exec(t);
