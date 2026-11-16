@@ -1,7 +1,8 @@
 /**
  * bar5LawBandFloor.test.js — BAR5-BAND (BRIEF-BAR5 section "BAR5-BAND", Amendment L4; the chair's ruling LB1 of
  * 2026-11-16, vetoable by the owner): THE FOUNDATIONS' LAW-AND-ORDER WORD IN A QUIET PLACE, read through its ONE reader
- * (`domain/display/foundationBandShown.js :: foundationBandShown`, its floor `foundationFloorOf`) and kept by the rule's
+ * (`domain/display/foundationBandShown.js :: foundationBandShown`, whose law row reads THE ONE HOME `domain/facts/lawBand.js ::
+ * lawBandOf`, the chair's ruling LB2; the floor `quietPlaceKeepsLaw` is written there) and kept by the rule's
  * own detector (`tests/helpers/pageLaws/law1Band.mjs :: law1cBand`, rule `1c-band/quiet`).
  *
  * The page the detector reads is rebuilt from the record as the tabs print it: the Foundations row
@@ -12,14 +13,16 @@
  *      (the page at the base) the detector fires.
  *   2. THREE CONTROLS keep the model's band: a small place under a crisis, a small place whose Safety word is Unsafe or
  *      Dangerous, a place that keeps an office of the law (each a real town of the census's 720).
- *   3. THE ZERO over the census's 720: the detector finds no instance of the rule.
+ *   3. THE ZERO over the census's 720: the detector finds no instance of the rule; and the leaf's own reading of the
+ *      quiet place (no display import) equals the page's (the Overview's `safetyBandOf`, the detector's facts) in every town.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { bandForVariable } from '../../src/domain/causalState.js';
-import { foundationBandShown, foundationFloorOf } from '../../src/domain/display/foundationBandShown.js';
+import { foundationBandShown } from '../../src/domain/display/foundationBandShown.js';
+import { lawBandOf, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
 import { safetyBandOf } from '../../src/domain/display/labelBands.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { law1cBand, quietFactsOf } from '../helpers/pageLaws/law1Band.mjs';
@@ -79,7 +82,8 @@ describe('BAR5-BAND LB1: a quiet place without an office of the law prints its l
     const s = town(seed);
     const b = bandsOf(s);
     expect(b.model, `${seed}: the model's band (the score does not move)`).toBe(model);
-    expect(foundationFloorOf(s, 'law_order'), `${seed}: the floor stands`).toBe('strained');
+    expect(quietPlaceKeepsLaw(s), `${seed}: the floor stands`).toBe(true);
+    expect(lawBandOf(s), `${seed}: the one home reads the floor`).toBe('strained');
     expect(b.shown, `${seed}: the row prints the floor`).toBe('strained');
     expect(quietHits(seed, b.model).map((x) => x.line), `${seed}: POSITIVE CONTROL: the page at the base is the rule's instance`).toEqual([`Law & order · ${cap(model)}`]);
     expect(quietHits(seed, b.shown).map((x) => x.line), `${seed}: the page at the tip prints "Law & order · Strained" and is no instance`).toEqual([]);
@@ -89,7 +93,7 @@ describe('BAR5-BAND LB1: a quiet place without an office of the law prints its l
     const s = town(seed);
     const b = bandsOf(s);
     expect(b.model, `${seed}: the model's band`).toBe(model);
-    expect(foundationFloorOf(s, 'law_order'), `${seed}: no floor`).toBeNull();
+    expect(quietPlaceKeepsLaw(s), `${seed}: no floor`).toBe(false);
     expect(b.shown, `${seed}: the row prints the model's band`).toBe(model);
   });
 
@@ -98,6 +102,9 @@ describe('BAR5-BAND LB1: a quiet place without an office of the law prints its l
       const s = town(seed);
       const hits = quietHits(seed, bandsOf(s).shown);
       expect(hits.map((x) => `${x.line} (Safety ${x.safety}; offices ${quietFactsOf(s).offices.length})`), `${seed}: the rule's instances`).toEqual([]);
+      const f = quietFactsOf(s);
+      const onPage = !f.offices.length && !f.crises.length && !f.crimeWave && ['Very Safe', 'Safe', 'Moderate'].includes(String(safetyBandOf(s?.economicState?.safetyProfile?.safetyLabel)));
+      expect(quietPlaceKeepsLaw(s), `${seed}: the leaf's quiet place is the page's`).toBe(onPage);
     });
     expectNoSeedFailures(failures);
   }, 900_000);
