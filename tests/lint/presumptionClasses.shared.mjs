@@ -82,18 +82,29 @@ const C = ['crisis', 'famine', 'starving', 'failed', 'danger coming', 'food', 's
 const GOODS = ['trade at work', 'institution', 'exports', 'imports', 'market', 'guild', 'iron at hand', 'timber at hand', 'timber reaches the saws', 'fish', 'grain', 'game', 'livestock', 'failed', 'enchanting', 'magic supply', 'docks', 'port', 'navigable', 'own plots', 'source spent'];
 export const CLASS_DIMS = Object.freeze({
   outside: [...C, 'route', 'imports', 'exports', 'port', 'navigable', 'docks', 'walls', 'gate'],
-  plenty: [...C, 'prosperity', 'own plots', 'fish', 'grain', 'game', 'livestock'],
+  plenty: [...C, 'prosperity', 'own plots', 'fish', 'grain', 'game', 'livestock', 'food surplus'],
   work: [...C, 'prosperity'],
   animals: [...C, 'institution', 'livestock'],
   iron: [...C, 'iron at hand', 'trade at work', 'institution'],
-  law: [...C, 'crime', 'organised crime', 'criminal income', 'watch', 'court', 'prison', 'patrol', 'garrison', 'militia'],
+  law: [...C, 'crime', 'organised crime', 'criminal income', 'watch', 'court', 'prison', 'patrol', 'garrison', 'militia', 'crime wave'],
   ease: [...C, 'prosperity'],
-  threat: [...C, 'walls', 'palisade', 'gate', 'organised crime', 'crime', 'ruler', 'rival power', 'watch', 'garrison', 'patrol', 'militia', 'soldiers'],
+  threat: [...C, 'walls', 'palisade', 'gate', 'organised crime', 'crime', 'ruler', 'rival power', 'watch', 'garrison', 'patrol', 'militia', 'soldiers', 'monster frontier', 'crime wave'],
   size: ['tier', 'population'],
   goods: GOODS,
   resource: [...GOODS, 'terrain', 'coast', 'river'],
   office: ['court', 'prison', 'watch', 'militia', 'garrison', 'patrol', 'soldiers', 'commander', 'mercenary', 'institution', 'ruling body', 'guild', 'ruler', 'rival power', 'walls', 'palisade', 'gate', 'tier', 'population', 'temple', 'church', 'priest', 'clergy', 'crime', 'organised crime'],
-  sovereign: ['ruler', 'war', 'crisis'],
+  sovereign: ['ruler', 'war', 'crisis', 'sovereign'],
+});
+/**
+ * THE CHAIR'S RULING CD1 (2026-11-16): this table is BAR6-GUARD's alone to extend; the seats' NEW atoms are added to
+ * the classes they answer as the chair names them. Each is named here with its seat and commit until the joined
+ * vocabulary holds it (`knownDimension`); a line declared on one answers its class before the join as after it.
+ */
+export const NAMED_ATOMS = Object.freeze({
+  sovereign: 'BAR6-HOUSES 9fa69a146 (presence: needs sovereign, its twin excludes sovereign)',
+  'monster frontier': 'BAR6-DEFDESK be3585040 (threat words)',
+  'food surplus': 'BAR6-DEFDESK be3585040 (plenty words)',
+  'crime wave': 'BAR6-DEFDESK be3585040 (crime words)',
 });
 /** ARM 3: the crisis FAMILIES a crisis class must be declared against when only crisis atoms answer it. */
 export const CLASS_FAMILIES = Object.freeze({ plenty: ['hunger'], ease: ['threat', 'hunger'], threat: ['threat'], outside: ['threat'] });
@@ -115,6 +126,8 @@ export function readDeclaration(words) {
     if (MARK_DIM.has(w)) { const d = MARK_DIM.get(w); if (['severity', 'deficit', 'anchor'].includes(d)) continue; dims.add(d); real++; if (d === 'crisis') crisis.push({ neg: /^no\s/i.test(w), values: null }); continue; }
     const negm = /^no\s+(.+)$/i.exec(w); const neg = !!negm; const body = negm ? negm[1] : w;
     const a = parseAtom(body);
+    const named = !a && Object.keys(NAMED_ATOMS).find((n) => body === n || body.startsWith(`${n}:`));
+    if (named) { dims.add(named); real++; continue; }
     if (!a) {
       const cv = /^crisis:\s*(.+)$/i.exec(body) || (/^(any|calm|under_siege|famine|wartime|occupied)$/.test(body) ? [0, body] : null);
       if (cv) { if (/^\s*any\s*$/.test(cv[1]) && !neg) anyOnly = true; else { dims.add('crisis'); real++; crisis.push({ neg, values: String(cv[1]).split(',').map((s) => s.trim()) }); } }

@@ -34,7 +34,7 @@ import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, test } from 'vitest';
 
 import {
-  BOUND_CLASSES, CLASS_DIMS, CLASS_FAMILIES, CLASS_IDS, NOT_PAGE, RECORD_FACT_POOLS, REGISTER_REL, ROOTS, STOCK_STATUSES,
+  BOUND_CLASSES, CLASS_DIMS, CLASS_FAMILIES, CLASS_IDS, NAMED_ATOMS, NOT_PAGE, RECORD_FACT_POOLS, REGISTER_REL, ROOTS, STOCK_STATUSES,
   bankedKeys, classesOf, gateAtomsOfPoolKey, hitsOf, knownDimension, notPage, rowKey, scanAnnex, scanSource, scanTree,
 } from './presumptionClasses.shared.mjs';
 
@@ -48,9 +48,18 @@ const one = (rel, entry) => planted(rel, `export const POOL = [\n  ${entry},\n];
 
 describe('the lexicon', () => {
   test('every answering dimension is a dimension of the facts\' vocabulary', () => {
-    const bad = Object.entries(CLASS_DIMS).flatMap(([c, ds]) => ds.filter((d) => !knownDimension(d)).map((d) => `${c}: ${d}`));
+    const bad = Object.entries(CLASS_DIMS).flatMap(([c, ds]) => ds.filter((d) => !knownDimension(d) && !NAMED_ATOMS[d]).map((d) => `${c}: ${d}`));
     expect(bad).toEqual([]);
     expect(Object.keys(CLASS_DIMS).sort()).toEqual([...CLASS_IDS].sort());
+  });
+  test('RULING CD1: the seats\' new atoms answer their classes (named until the joined vocabulary holds them)', () => {
+    expect(Object.keys(NAMED_ATOMS).sort()).toEqual(['crime wave', 'food surplus', 'monster frontier', 'sovereign']);
+    const F = 'src/data/plantedPool.js';
+    expect(one(F, `{ text: 'The lord takes his dues at the harvest.' }`)).toEqual(['sovereign:none :: The lord takes his dues at the harvest.']);
+    expect(one(F, `{ text: 'The lord takes his dues at the harvest.', needs: ['sovereign'] }`)).toEqual([]);
+    expect(one(F, `{ text: 'Nothing threatens the town from the hills.', needs: ['no monster frontier'] }`)).toEqual([]);
+    expect(one(F, `{ text: 'There is plenty on every table this week.', needs: ['food surplus'] }`)).toEqual([]);
+    expect(one(F, `{ text: 'Crime is rare and doors are left unlocked.', excludes: ['crime wave'] }`)).toEqual([]);
   });
   test('the four misses of the audit are read (an arrival of goods, crop farming, small for big, "for this scale")', () => {
     expect(classesOf('Porters under loaded frames come past the gate at dusk.')).toContain('outside');
