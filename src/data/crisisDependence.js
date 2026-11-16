@@ -1537,6 +1537,26 @@ export const CHAIN_DEPENDENCE = Object.freeze({
   "slave_trade": NONE,
 });
 
+/** The fish trade's houses (the two fish shares'). @type {ReadonlyArray<string>} */
+const FISH_TRADE_HOUSES = Object.freeze(['fish_market', 'fisher_s_landing', 'fishing_community', 'fishmonger']);
+
+/**
+ * AN INCOME SHARE OF A HOUSE'S TRADE AND ITS HOUSES (BAR4-SERVICES S1 (ii), the chair's direction of 2026-11-16; vetoable by
+ * the owner): the shares titled by a resource trade (`economy/incomeLineSiblings.js :: RESOURCE_ROW_TRADES`, the maritime fish
+ * share the fish trade's) and the catalogue ids of the houses of that trade (the trade's own house words over the catalogue's
+ * names: `tests/domain/bar4MarkPromise.test.js` pins the two equal). Where every live house of the trade carries a crisis mark,
+ * the share takes the mildest of them (`crisisStoppedRow.js :: incomeHouseKind`). Declared here so that the display leaf
+ * reads no generator module (the domain -> generators boundary).
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const INCOME_TRADE_HOUSES = Object.freeze({
+  "Iron & Metalwork": Object.freeze(['blacksmith', 'blacksmiths_3_10', 'mine', 'mine_open_cast', 'resident_smith_part_time', 'smelter', 'specialized_metalworkers']),
+  "Stone Quarrying": Object.freeze(['stone_quarry']),
+  "Timber Trade": Object.freeze(['sawmill', 'sawmill_commercial', 'woodcutter_s_camp']),
+  "Fish & Preserved Produce": FISH_TRADE_HOUSES,
+  "Fish & Maritime Produce": FISH_TRADE_HOUSES,
+});
+
 /** Income source title -> what the share lives on. @type {Readonly<Record<string, ReadonlyArray<string>>>} */
 export const INCOME_DEPENDENCE = Object.freeze({
   "Agricultural Rents": NONE,

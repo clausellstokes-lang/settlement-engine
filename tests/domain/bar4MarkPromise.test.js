@@ -28,6 +28,9 @@ import { deriveMagicPosture } from '../../src/domain/display/dossierViewModel.js
 import { serviceRowsOf } from '../../src/domain/dossier/entityLinks.js';
 import { markPromiseInstances } from '../helpers/markPromise.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { RESOURCE_ROW_TRADES } from '../../src/generators/economy/incomeLineSiblings.js';
+import { INCOME_TRADE_HOUSES } from '../../src/data/crisisDependence.js';
+import * as catalog from '../../src/data/institutionalCatalog.js';
 
 await loadGenerationLawPayloads();
 
@@ -109,6 +112,20 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     expect(rowMarkText(built, 'service', row(built, 'Charcoal supply'))).toMatch(/^Short of /);
     expect(rowMarkText(s, 'service', row(s, 'Charcoal supply'))).toBe(null); // the record as born: the page prints no gap line, and no mark
   }, 120_000);
+
+  test('(e) S1 (ii)\'s declaration is the generator\'s own: each trade\'s house words over the catalogue\'s names give its declared ids', () => {
+    /** @type {Set<string>} */
+    const names = new Set();
+    const walk = (/** @type {any} */ x, d = 0) => {
+      if (d > 5 || !x || typeof x !== 'object') return;
+      for (const [k, v] of Object.entries(x)) { if (v && typeof v === 'object') { if (!Array.isArray(x)) names.add(k); walk(v, d + 1); } if (k === 'name' && typeof v === 'string') names.add(v); }
+    };
+    walk(catalog.institutionalCatalog);
+    const derived = Object.fromEntries(Object.entries(RESOURCE_ROW_TRADES).map(([title, trade]) => [title,
+      [...new Set([...names].filter((n) => trade.house.test(n.toLowerCase())).map((n) => catalog.catalogIdForName(n)).filter(Boolean))].sort()]));
+    derived['Fish & Maritime Produce'] = derived['Fish & Preserved Produce'];
+    expect(Object.fromEntries(Object.entries(INCOME_TRADE_HOUSES).map(([k, v]) => [k, [...v].sort()]))).toEqual(derived);
+  });
 
   test('(c) S1 (ii): the fish share beside its stopped fishing community carries its house\'s mark (calm: its own line)', () => {
     const besieged = town('r2s-under_siege-thorp-0').economicState.incomeSources.find((x) => x.source === 'Fish & Preserved Produce');

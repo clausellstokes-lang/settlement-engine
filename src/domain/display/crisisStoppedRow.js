@@ -58,7 +58,7 @@
  *        live on that input take the siege's partial kind, "Curtailed by the siege." (`IMPORTED_INPUT`, `CURTAILED_BY`): it
  *        works what it holds, and nothing more comes in (the smelter's iron refining beside the impaired smiths).
  *   (ii) AN INCOME SHARE OF A HOUSE'S TRADE READS ITS HOUSES: a share titled by a resource trade
- *        (`incomeLineSiblings.js :: RESOURCE_ROW_TRADES`: "Stone Quarrying", the fish trades) whose every live house of that
+ *        (`crisisDependence.js :: INCOME_TRADE_HOUSES`: "Stone Quarrying", the fish trades) whose every live house of that
  *        trade the leaf marks takes the mildest of their marks (the quarry "Stopped by the siege." and its share with it).
  *
  * Pure: no randomness, no clock, no write.
@@ -75,9 +75,8 @@ import { serviceRowsOf } from '../dossier/entityLinks.js';
 import { chainCrisisStateShown } from './chainStateShown.js';
 import {
   SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN,
-  SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, IMPORTED_INPUT, NONE,
+  SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, IMPORTED_INPUT, INCOME_TRADE_HOUSES, NONE,
 } from '../../data/crisisDependence.js';
-import { RESOURCE_ROW_TRADES } from '../../generators/economy/incomeLineSiblings.js';
 
 /** The crises this leaf reads, in the order a row's mark takes them. @type {ReadonlyArray<string>} */
 export const STOPPING_CRISES = Object.freeze(['under_siege', 'plague_onset', 'famine']);
@@ -395,19 +394,18 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
 }
 
 /**
- * S1 (ii): the mark of an income share of a house's trade (`RESOURCE_ROW_TRADES`, keyed by the share's title; the maritime
- * fish share is the fish trade's): where every live house of the trade (the trade's own house words over the roster's names)
- * carries a crisis mark, the share takes the mildest of them (a partial kind before a stopping one); else none.
+ * S1 (ii): the mark of an income share of a house's trade (`INCOME_TRADE_HOUSES`, keyed by the share's title): where every
+ * live house of the trade (by catalogue id) carries a crisis mark, the share takes the mildest of them (a partial kind before
+ * a stopping one); else none.
  * @param {object | null | undefined} settlement @param {Record<string, unknown>} income @param {string[]} crises
  * @returns {string | null}
  */
 function incomeHouseKind(settlement, income, crises) {
   const title = typeof income?.source === 'string' ? income.source.trim() : '';
-  const key = title === 'Fish & Maritime Produce' ? 'Fish & Preserved Produce' : title;
-  const trade = Object.prototype.hasOwnProperty.call(RESOURCE_ROW_TRADES, key) ? RESOURCE_ROW_TRADES[/** @type {keyof typeof RESOURCE_ROW_TRADES} */ (key)] : null;
-  if (!trade || !settlement || typeof settlement !== 'object') return null;
+  const ids = Object.prototype.hasOwnProperty.call(INCOME_TRADE_HOUSES, title) ? INCOME_TRADE_HOUSES[title] : null;
+  if (!ids || !settlement || typeof settlement !== 'object') return null;
   const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
-    .filter((i) => i && typeof i.name === 'string' && !isCustom(i) && trade.house.test(i.name.toLowerCase()));
+    .filter((i) => i && typeof i.name === 'string' && !isCustom(i) && ids.includes(String((typeof i.catalogId === 'string' && i.catalogId) || catalogIdForName(i.name) || '')));
   if (houses.length === 0) return null;
   const kinds = houses.map((h) => rowStoppedBy(settlement, 'house', h, crises));
   if (kinds.some((k) => k === null)) return null;

@@ -57,18 +57,68 @@ No new words. These marks are new on rows that printed bare (the marks' words ar
   r2s-under_siege-city-0 (city).
 - "Short of fish." on a fishing house no chain names, every fishery depleted (FS1): r2s-plague_onset-thorp-2 (thorp; the
   one town of the 720, none of the 300).
+- "Stopped by the siege." / "(stopped)" on Mercenary hire "Off-duty soldiers available for escort" and Pack animal hire
+  "… for journeys."; "Curtailed by the outbreak." on the same travel rows and Armed escort under an outbreak:
+  r2s-under_siege-city-0 (city), r2s-plague_onset-town-1 (town), r2s-plague_onset-city-1 (city).
 - The Magic tab's medical row: "Medical role: occasional" where it read "absent" beside the priest's divine healing:
   r2r-village-1, r2r-village-4, r2r-village-5 (villages).
 
 ## The books my cures move
 
-PENDING (the after-run and the books are run at my final tip; this section is filled before the last push).
+THE BASE IS GREEN WHOLE (the chair's check of 8aef8e7d4, 08:28), so every red at my tip is mine. Run alone at my final tip,
+each to a file through `sh scripts/gate-tail.sh`: BRIEF-BAR2's seventeen law suites, BRIEF-BAR3's three
+(`engineCoreLazyEdge`, `tuningRegister`, `chainPrintSites`), BRIEF-BAR4's ten (`customContentPresentationClaims`,
+`regenDerivedState`, `styleLaw.walker`, `deepCraftKillList`, `economicStructure`, `proseCorpusBytes`, `stressSecretDeclared`,
+`tieProseDeclared`, `defensePostureAgainstItsFacts`, `corpusEcoTailGuards`), `generatorGoldenMaster`, the three corpus
+walkers of BRIEF-BAR3's amendment 11, and the files that pin a symbol I changed (`crisisStoppedRows`, `bar2ServicesRows`,
+`bar3ServicesRows`, `bar2MagicWords`, `bar3LabelWords` 1-3, `displayEconCrisisMarks`, `journalMarksCrisisRows`,
+`tailExportsPdf2Batch2`, `tailExportsPdf3Batch3`, `generationWorkerLazy`, `observedShapeReaders`, `layerBoundaries`):
+ALL GREEN BUT ONE, a stored register's row:
+
+| test | arm | old | new | door | batch |
+|---|---|---|---|---|---|
+| `tests/lint/writerReach.walker.test.js` | "the surfaceReach grammar round-trips": `kind on gaps` | every surface N | `dossier-pdf=R foundry=R web-display=R` (the rest N) | `scripts/check-writer-reach.mjs --write` (its charter), the baseline `scripts/.writer-reach-baseline.json` | 1: a REAL reader of `resourceAnalysis.gaps[].kind` (`crisisStoppedRow.js :: housesOnImportedInput`), which the Services and Institutions tabs, the PDF and the journal reach (ruling WR1: named, not cured, never hidden). Green at 8aef8e7d4. |
+
+TWO LAWS MY FIRST BUILD TURNED RED, CURED AT THEIR CAUSE before this push: `tests/build/domainGeneratorsBoundary.test.js`
+(a new domain -> generators edge: `crisisStoppedRow.js` imported `incomeLineSiblings.js :: RESOURCE_ROW_TRADES`) and
+`tests/build/vendorPdfLazy.test.js` (the engine chunk 878,561 bytes against its 878,554 ceiling, the generator module pulled
+along with the import). THE CURE INVERTS THE EDGE: the trades' houses are DECLARED in my data file
+(`crisisDependence.js :: INCOME_TRADE_HOUSES`, by catalogue id), and the guard's arm (e) pins that declaration equal to the
+generator's own house words over the catalogue's names. The engine chunk now reads 878,553 bytes, the same as a build of
+8aef8e7d4 (878,553): my cures add nothing to it. NOTE FOR THE CLOSE: the base's own engine chunk stands 1 byte under its
+ceiling. ONE BUILD AND `verify:dist` AT MY FINAL TIP: see the last line of this section.
+
+THE 525 REFERENCE CONFIGURATIONS: `generatorGoldenMaster` green at my tip: 0 of 525 move. The census's 720 records hashed
+at 8aef8e7d4 and at my tip: 0 of 720 move (no generator reads a changed function).
+
+THE INVENTORY DIFF (census3 `--count-only` at 8aef8e7d4 and at my tip, `inventory.py`, `inventory_diff.py`):
+- the 720: 30,152 sentences -> 30,175; gone 0; new 23; fewer 20; more 5. Every line in fewer towns is a row that now
+  carries its mark (it moves to its marked form) or "Medical role: absent" (602 -> 569, the 33 towns: it reads "occasional"
+  in 21 and "common" in 5; in 7 the profile's band is "absent" and the row is left out, the tab's own rule). THREE OTHER
+  LINES, "Patron deity" and its two premium-prompt lines (719 -> 716 in r2r-thorp-0, -2, -3), are AN ARTIFACT OF THE
+  RENDER, NOT MY CURE: they drop from the first town a render worker draws; rendered again at my tip in another order the
+  three print them and the first town drawn (r2r-thorp-5) loses them.
+- the fresh 300: 21,856 -> 21,876; gone 1 ("Stone Quarrying" bare, 8 -> 0: it prints now with "Stopped by the siege.");
+  new 21; fewer 16; more 4. The one line silenced that is not a row's own: "Contributes to Stone Quarrying - #% of income"
+  (15 -> 9): a chain card leaves that line out where the leaf marks the share it names (`economicsCrisisMarks.js ::
+  flowCrisisMarks`, batch 2 of TAIL-DISPLAY-ECON-4): the share is now marked stopped, and the silence is true.
+- THE INHERITORS read: the widest are the rows' marked forms ("ServicesIron refining (curtailed)", "ServicesGrain storage
+  (scarce)", "ServicesArmed escort (stopped)", "Stone Quarrying Stopped by the siege.", "Medical role: occasional").
+
+THE ANNEX: no block of `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` is mine and none moved; no shared stored file is
+re-taken.
+
+THE FINAL LINE: at my final tip, ONE `npm run build` (exit 0) and `npm run verify:dist` (exit 0: "STRICT DIST OK — 67
+discovered/reported file(s), 603 test(s), zero failed"; its boot smoke passes), then `dist/` removed, then
+`bar4MarkPromise`, `crisisStoppedRows` and `chainPrintSites` re-run alone: all green. The type ratchet and the strict-domain
+gate hold their ceilings (167; 1113); eslint clean on every touched file.
 
 ## Registrations owed
 
 - None under `tests/generators` (the guard is `tests/domain/bar4MarkPromise.test.js`: no manifest entry owed).
-- A new import of `generators/economy/incomeLineSiblings.js` (`RESOURCE_ROW_TRADES`) in `src/domain/display/crisisStoppedRow.js`:
-  it is not a goods module of amendment 12's list, so no roster row is owed.
+- No new import of a goods module (amendment 12) and no new src -> generators edge (the trade table is declared in
+  `crisisDependence.js`; only the guard test reads `incomeLineSiblings.js`).
+- The writer-reach register's row for `kind` on `resourceAnalysis.gaps` (above): owed to the close, through its door.
 
 ## Left, in order (for a successor)
 
