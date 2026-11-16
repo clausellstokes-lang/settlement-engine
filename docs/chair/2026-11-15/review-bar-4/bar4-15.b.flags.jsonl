@@ -1,0 +1,4 @@
+{"id":"C37943","town":"bar0-town-calm-rand-23","sev":"LOW","kind":"STATE","why":"house text says 'he stands... His employer' but the crier Ghalia al-Din is (f) in PEOPLE","other":""}
+{"id":"C38176","town":"bar0-town-calm-rand-23","sev":"MED","kind":"STATE","why":"claims a 'thriving' alchemical trade; LAND gaps say the Alchemist shop lacks access to medicinal herbs and mineral hot springs, its potion brewing marked Vulnerable","other":"C38179"}
+{"id":"C37987","town":"bar0-town-calm-rand-23","sev":"LOW","kind":"PAIR","why":"Housing is 'Timber and stone'; the Economics tab says timber and building wood are needed and not brought in, and the terrain cannot produce them","other":"C38201"}
+{"id":"DONE","lines":1677,"blocks":1,"flags":3}
