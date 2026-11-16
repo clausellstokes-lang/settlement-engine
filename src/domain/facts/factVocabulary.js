@@ -214,7 +214,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
- * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork]
+ * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
  * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
@@ -262,6 +262,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // and not the other declares both.
   court: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.court) }),
   prison: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.prison) }),
+  // BAR5-THINGS (LAW 4 "the notary"; BRIEF-BAR5; amendment 5b; vetoable by the owner, on the veto list as new vocabulary):
+  // beside the court: a house that writes, witnesses or tries the law stands, by catalogue identity (`legalHouse.js`). A
+  // line naming a notary, a lawyer or an advocate presumes it; the register's word `notary` reads it.
+  'legal house': dim({ shape: 'presence', home: 'legalHouse', reader: (f) => bool(f.legalHouse) }),
   // the rulings §2's delegated getters CENSUS-1c owns (R-E): `soldiers` = a garrison or a hired
   // company (the twin table's and `forceWordsOf`'s meaning); `commander` = a garrison stands, so
   // someone commands it (`hasCommander`); `mercenary` = a hired company.
@@ -330,7 +334,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // (`tradeAtWork.js`, on the one fact `houseInputAtHand.js :: housesShortOf` the page's mark reads). Beside its kin `iron at
   // hand`: a scene that shows a trade at work presumes it (r2r-hamlet-10: "Half of Bellanovum seems to be gutting, salting or
   // selling fish." beside a fish house "Short of fish.").
-  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'stone', 'arcane'],
+  // BAR5-THINGS (LAW 4 "the kilns"; BRIEF-BAR5; amendment 5b; vetoable by the owner, on the veto list as new vocabulary): the
+  // kiln trade split by what its kilns fire, beside `kilns`: `clay kilns` (a potter, a brickmaker) and `charcoal kilns` (a
+  // charcoal burner), each unanswered where no house of its kind stands (`tradeAtWork.js :: KILN_KINDS`)
+  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.tradeAtWork === 'function' && key ? f.tradeAtWork(key) : undefined) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
   // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
@@ -356,6 +363,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // town is ruled by a BODY OF MORE THAN ONE (`rulingBody.js :: rulingBodyOf`, hookTruth.js's `ruledByCouncil` rule
   // moved to its home). A line about THE council (a session, a vote of it, "the council has asked") needs it: under a
   // lone headman, a priest-king, a lord, a mayor or an occupier the line is refused. Unanswered with no government.
+  // BAR5-THINGS (LAW 4 "the patron"; BRIEF-BAR5; amendment 5b; vetoable by the owner, on the veto list as new vocabulary):
+  // beside the ruling body: the town keeps a post someone is named to, false where its civic voice is a household head
+  // nobody named (`appointedPost.js`). A hook that gives its holder a post owed to a patron presumes it.
+  'appointed post': dim({ shape: 'presence', home: 'appointedPost', reader: (f) => bool(f.appointedPost) }),
   'ruling body': dim({ shape: 'presence', home: 'rulingBody', reader: (f) => bool(f.rulingBody) }),
   // `priest` = a senior cleric stands among the named people (`faithReadingOf(record).seniorCleric`;
   // the rulings §2, CENSUS-1c).

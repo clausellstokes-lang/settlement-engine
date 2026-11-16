@@ -16,7 +16,7 @@ const CALM = Object.freeze({
 export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   crisis: CALM,
   storesMonths: 12,
-  defence: Object.freeze({ walls: true, wallKind: 'stone', palisade: true, gate: true, watch: true, militia: true, garrison: true, hospital: true, healer: true, mercenary: true }),
+  defence: Object.freeze({ walls: true, wallKind: 'stone', palisade: true, gate: true, watch: true, militia: true, garrison: true, hospital: true, healer: true, mercenary: true, court: true }),
   guardPresence: true,
   water: Object.freeze({ navigable: true, coast: true, river: true }),
   market: true,
@@ -62,4 +62,8 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   leadingSourceSpent: true,
   ownPlots: true,
   timberAtHand: true,
+  // BAR5-THINGS (2026-11-16): `legal house` and `appointed post` (`legalHouse.js`, `appointedPost.js`) arrived after the double,
+  // and `court` (COHERENCE-AGREE-4's defence atom) was never answered here; "every presence atom holds" covers the three.
+  legalHouse: true,
+  appointedPost: true,
 });

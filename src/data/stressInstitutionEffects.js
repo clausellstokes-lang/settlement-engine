@@ -32,8 +32,11 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "Two of the people enforcing the rationing know about the stores; they've been paid to look the other way",
     },
     {
-      secret: "Passed information about the settlement's water supply to someone in the besieging camp three weeks ago",
+      // BAR5-THINGS (LAW 4 "the weeks"; REVIEW-BAR-5 C2000): the secret counts no weeks the siege's own age may deny ("The
+      // siege has entered its second week", narrativeText.js); it dates the betrayal by the siege itself
+      secret: "Passed information about the settlement's water supply to someone in the besieging camp in the first days of the siege",
       stakes: "People have already died because of it; they've been living with that knowledge",
+      needs: ["crisis: under_siege"], // BAR5-THINGS: the besieging camp is the siege's: declared
     },
     {
       secret: "Knows the barricade across the main approach is structurally compromised and has told no one",
@@ -201,7 +204,8 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret:
         "Knows the debt contains a clause that transfers significant civic assets to the creditor on default (a clause that was buried in the original document)",
-      stakes: "{npc} is a notary who helped draft it. They've been avoiding eye contact for six months",
+      // BAR5-THINGS (LAW 4 "the notary"): {npc} is any other card, never a notary by the record: the stakes name no office
+      stakes: "{npc} was in the room when it was signed. They've been avoiding eye contact for six months",
       needs: ["other npc"],
     },
     {

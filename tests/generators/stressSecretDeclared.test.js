@@ -21,10 +21,13 @@ describe('the stress secrets declare', () => {
   // BAR3-CLOSE-SWEEP-B (2026-11-16, letter g; re-keyed with its cause, BAR3-PLACES H1, b7bf413a7): 36 -> 38 — the famine
   // secret's covert route ("…{food} shipments through a covert route…") declares `excludes: crisis: under_siege`, and its
   // siege twin ("Laid in a cellar of {food} before the siege closed the roads…", `twinOf`) declares `crisis: under_siege`.
-  it('38 entries declare (32 + the exodus twin, answer 5, + the direction pair\'s departures line, MERGE-R2, + the war-contracts secret, R2-CODE-A-2, + the quarantine merchant, R2-CODE-A-7, + the covert route and its siege twin, BAR3-PLACES H1), every atom in the vocabulary', () => {
+  // BAR5-THINGS (2026-11-16, LAW 4 "the weeks"; re-keyed with its cause): 38 -> 39 — the siege secret "… to someone in the besieging
+  // camp in the first days of the siege" (no count of weeks) declares `crisis: under_siege`, the camp it names.
+  it('39 entries declare (32 + the exodus twin, answer 5, + the direction pair\'s departures line, MERGE-R2, + the war-contracts secret, R2-CODE-A-2, + the quarantine merchant, R2-CODE-A-7, + the covert route and its siege twin, BAR3-PLACES H1), every atom in the vocabulary', () => {
     const entries = Object.values(STRESS_INSTITUTION_EFFECTS).flat();
     const declaring = entries.filter((e) => declares(declarationOf(e)));
-    expect(declaring).toHaveLength(38);
+    expect(declaring).toHaveLength(39);
+    expect(declaring.find((e) => /besieging camp in the first days of the siege/.test(e.secret))?.needs).toEqual(['crisis: under_siege']);
     expect(declaring.find((e) => /shipments from a specific merchant/.test(e.secret))?.needs).toEqual(['market']);
     expect(declaring.some((e) => /war contracts that made the settlement rich/.test(e.secret))).toBe(true);
     expect(declaring.find((e) => /^Laid in a cellar of \{food\} before the siege/.test(e.secret))?.needs).toEqual(['crisis: under_siege']);

@@ -24,6 +24,13 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
   // docs/CENSUS_5_LANE_2026-11-04.md, "CENSUS-5b"); this site is a T lookup, so a twin moves only
   // the births whose record refuses the original. The militia captain's branch is reached with NO
   // military institution, and the two market lines' branches with no market-named house. R2-CODE-A item 5 (P3): a twin names no office or house its site's facts (the roster's names) cannot verify.
+  // BAR5-THINGS (the chair's LD1, 2026-11-16: `governanceNarrative.js:479` is this seat's, that one line and its declaration):
+  // the register's `court` word now reads "civilian courts" (REVIEW-BAR-5 C31780), so the line declares the court it names;
+  // its twin names the disputes, not a court, where the roster holds none
+  'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.': Object.freeze([
+    Object.freeze({ text: 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.', needs: Object.freeze(['court', 'guardPresence']) }), // the commanders: the site's own gate (a military house)
+    Object.freeze({ text: "The military commanders are pushing for expanded authority over the town's disputes, and the council is losing ground.", twinOf: 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.', needs: Object.freeze(['guardPresence']), excludes: Object.freeze(['court']) }),
+  ]),
   'The village militia captain is pushing for authority over disputes that the reeve used to handle.': Object.freeze([
     Object.freeze({ text: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', needs: Object.freeze(['militia']) }),
     Object.freeze({ text: 'The strongest armed household is pushing for authority over disputes the community used to settle for itself.', twinOf: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', excludes: Object.freeze(['militia']) }),

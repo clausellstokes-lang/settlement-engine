@@ -245,7 +245,9 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
     expect(CHAIN_RAW_INPUT).toEqual(Object.fromEntries(Object.entries(RESOURCE_CHAINS).map(([k, c]) => [k, /** @type {any} */ (c).rawResource])));
     for (const [key, chain] of TIMBER_CHAINS) expect(/** @type {any} */ (chain).rawResource).toBe(/** @type {any} */ (RESOURCE_CHAINS)[/** @type {string} */ (key)].rawResource);
     for (const [key, words] of Object.entries(TRADE_HOUSES)) expect(words).toEqual(/** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === key)).institutions);
-    expect(/** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys).toEqual(Object.keys(TRADE_HOUSES));
+    // BAR5-THINGS (2026-11-16, LAW 4 "the kilns"): the kiln trade's two kinds join the keys (`tradeAtWork.js :: KILN_KINDS`)
+    const { KILN_KINDS } = await import('../../src/domain/facts/tradeAtWork.js');
+    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS)].sort());
   });
 
 });
