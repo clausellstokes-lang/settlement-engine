@@ -40,7 +40,8 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { institutionMatchesKeyword } from '../institutions/institutionCategory.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
-import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE } from '../../data/crisisDependence.js';
+import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT } from '../../data/crisisDependence.js';
+import { warIronHookOutsideWar } from './warReach.js';
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -247,6 +248,12 @@ export function housesOnSpentGround(settlement) {
     if (fished.length) grounds.set(house, fished);
   }
   for (const [house, own] of grounds) {
+    // BAR6-MARKS (8a.input): a house whose trade is a good (`HOUSE_TRADE_INPUT`) is read by the one reader of that good
+    // (`housesWantingTradeInput`), not by the chains it is listed on (the cooper's barrels hold the herds' meat: it was
+    // "Short of livestock." on a spent pasture; a brewery "Short of grain." on spent fields that the imports refill), but
+    // the houses this reading held before it (`SPENT_READ_HELD`) keep it
+    const tradeId = String(catalogIdForName(house) ?? '');
+    if (Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, tradeId) && !SPENT_READ_HELD.includes(tradeId)) continue;
     const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
     const allSpent = own.every((c) => spent.has(/** @type {string} */ (c.resourceKey)) && c.status !== 'magically_sustained'
       && (works || !imports.has(String(resourceShortageImport(/** @type {string} */ (c.resourceKey)) ?? ''))));
@@ -330,7 +337,9 @@ const SHORT_OF = new WeakMap();
  *   (i)  a house the record's gaps call short of an input (`resourceAnalysis.gaps[].institution`), none of whose gapped
  *        inputs the record answers on this reading (`houseInputAtHand`), the gaps the record holds everywhere excepted
  *        (`INPUT_GAP_HELD_EVERYWHERE`, S7);
- *   (ii) a house on a ground wholly spent (`housesOnSpentGround`, SV6).
+ *   (ii) a house on a ground wholly spent (`housesOnSpentGround`, SV6);
+ *   (iii) (BAR6-MARKS) a house whose trade is a good (`HOUSE_TRADE_INPUT`) that no gap of its own speaks of, where that good
+ *        is not had (`housesWantingTradeInput`).
  * @param {unknown} record the settlement record
  * @returns {ReadonlyMap<string, string>} house name -> what it is short of (the input's noun)
  */
@@ -351,6 +360,8 @@ export function housesShortOf(record) {
     out.set(name, [...new Set(keys.map((key) => CHAIN_INPUTS[/** @type {string} */ (key)].noun))].join(' or '));
   }
   for (const [house, ground] of housesOnSpentGround(r)) if (!out.has(house)) out.set(house, ground);
+  // BAR6-MARKS (iii): a house whose trade is a good no gap of its own speaks of, where that good is not had
+  for (const [house, want] of housesWantingTradeInput(r)) if (want.reach === 'missing' && !out.has(house)) out.set(house, want.noun);
   SHORT_OF.set(record, out);
   return out;
 }
@@ -470,4 +481,86 @@ export function tradeFinisherIn(houses, name) {
     if (!have || have.startsWith('access to') || id.startsWith('access_to')) return false;
     return trades.some((w) => institutionMatchesKeyword(/** @type {Parameters<typeof institutionMatchesKeyword>[0]} */ (inst), w));
   }));
+}
+
+/** How the mark names a trade's good: the smiths work iron, not its ore. @param {string} key */
+const tradeNoun = (key) => (key === 'ironOre' ? 'iron' : key === 'luxury' ? 'luxury goods' : CHAIN_INPUTS[key]?.noun ?? 'its materials');
+
+/** The houses of `HOUSE_TRADE_INPUT` the spent-ground reading held before it, whose line was `input` at afa46d644 (the sawmills, the smelter). */
+const SPENT_READ_HELD = Object.freeze(['sawmill', 'sawmill_commercial', 'smelter']);
+
+/**
+ * Whether the record's imports bring a chain's raw good by its own name (`houseInputAtHand`'s own reading of the imports).
+ * @param {InputRecord} record @param {string} key
+ */
+function importsBring(record, key) {
+  const spec = CHAIN_INPUTS[key], raw = CHAIN_RAW_INPUT[key] ?? '';
+  const names = [raw, spec?.raw, spec?.noun, ...terrainSynonymsFor(raw)].filter((x) => typeof x === 'string' && x !== '');
+  return arr(record?.economicState?.primaryImports).map(str).some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))));
+}
+
+/** The luxury trade's own goods, which no chain carries (`HOUSE_TRADE_INPUT`'s `luxury`). */
+const LUXURY_NAMES = Object.freeze(['luxury goods', 'luxury materials']);
+/** An import or a product that meets the luxury trade's need. */
+const LUXURY_MET = /\b(?:luxur|exotic)/i;
+
+/** One reading a record object. @type {WeakMap<object, ReadonlyMap<string, { noun: string, reach: 'missing' | 'imported' }>>} */
+const WANTING_OF = new WeakMap();
+
+/**
+ * THE GOOD A HOUSE'S TRADE WORKS, WHERE NO GAP OF ITS OWN SPEAKS (BAR6-MARKS, LAW 8's 8a.input, BRIEF-BAR6 fact (a),
+ * 2026-11-16; vetoable by the owner). The record's gap writer speaks only of the houses a chain names; the cooper, the
+ * woodcarver, the carpenters, the smiths, the fuller, the cobbler and the brewery work a good no chain names them for
+ * (`crisisDependence.js :: HOUSE_TRADE_INPUT`), and printed bare where the page said that good was "Needed, and not brought
+ * in" or cut off by the siege. Each such live, native house with no gap of its own is read by THE ONE READER of an input
+ * (`houseInputAtHand` above, the chain's raw input handed in from `CHAIN_RAW_INPUT`):
+ *   'missing'   the good is not had: the house is short of it (`housesShortOf` (iii), the page's "Short of timber.");
+ *   'imported'  the imports bring it: under a siege the house works what it holds (`crisisStoppedRow.js ::
+ *               housesOnImportedInput`, "Curtailed by the siege."); in a quiet town nothing is marked. Under a siege a good
+ *               the land gives AND the imports bring is read so too: its imported share is cut (the page's "… depend on
+ *               timber from outside, which the siege has cut off").
+ * The luxury trade's goods (no chain) are not had where the record's own need list names them, no siege is in force (it
+ * stops the trade itself), and neither the town's production nor its imports bring a luxury or exotic good. AND THE WAR'S IRON HOOK OUTSIDE A WAR (fact (e), `warReach.js :: warIronHookOutsideWar`):
+ * where the page prints it and no siege is in force (a siege's own reading of the imports stands there), every house
+ * whose trade is iron is short of it, gap or none. A house on a spent ground is left to that reading (SV6).
+ * @param {unknown} record the settlement record
+ * @returns {ReadonlyMap<string, { noun: string, reach: 'missing' | 'imported' }>} house name -> the good and how it is had
+ */
+export function housesWantingTradeInput(record) {
+  if (!record || typeof record !== 'object') return new Map();
+  const cached = WANTING_OF.get(record);
+  if (cached) return cached;
+  const r = /** @type {Parameters<typeof houseInputAtHand>[0] & { resourceAnalysis?: { gaps?: unknown } | null }} */ (record);
+  const gapped = new Set(arr(r?.resourceAnalysis?.gaps).map((/** @type {unknown} */ g) => str(/** @type {{ institution?: unknown } | null} */ (g)?.institution)).filter(Boolean));
+  const spent = housesOnSpentGround(record);
+  // the hook outside a war, and outside a siege too: a siege reads the iron by the imports' own reading (S1 (i))
+  const warIron = warIronHookOutsideWar(record) && !arr(r?.config?.stressTypes).includes('under_siege');
+  const imports = arr(r?.economicState?.primaryImports).map(str);
+  const made = arr(r?.economicState?.localProduction).map(str);
+  const besieged = arr(r?.config?.stressTypes).includes('under_siege');
+  /** @type {Map<string, { noun: string, reach: 'missing' | 'imported' }>} */
+  const out = new Map();
+  for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (r))) {
+    const name = inst && typeof inst.name === 'string' ? inst.name : '';
+    if (!name || isCustom(inst) || spent.has(name)) continue;
+    const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(name) || '');
+    const key = Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, id) ? HOUSE_TRADE_INPUT[id] : '';
+    if (!key) continue;
+    if (key === 'ironOre' && warIron) { out.set(name, { noun: 'iron', reach: 'missing' }); continue; }
+    if (gapped.has(name)) continue; // the record's gap writer spoke of this house: its own reading stands
+    if (key === 'luxury') {
+      // a siege stops the luxury trade's goods already (its line, `goods`); any luxury or exotic import meets the need, as
+      // the Economics tab meets it ("Luxury textiles and exotic goods")
+      if (!besieged && needListNames(r, LUXURY_NAMES) && !imports.some((x) => LUXURY_MET.test(x)) && !made.some((x) => LUXURY_MET.test(x))) out.set(name, { noun: 'luxury goods', reach: 'missing' });
+      continue;
+    }
+    if (!CHAIN_INPUTS[key]) continue;
+    const reach = houseInputAtHand(r, key, inst, { rawResource: CHAIN_RAW_INPUT[key] });
+    if (reach === 'missing' || reach === 'imported') out.set(name, { noun: tradeNoun(key), reach });
+    // under a siege, a good the imports bring as well as the land gives is cut in its imported share (the page's own "…
+    // depend on timber from outside, which the siege has cut off", `chainNeedShown.js :: chainNeedLine`): curtailed
+    else if (besieged && importsBring(r, key)) out.set(name, { noun: tradeNoun(key), reach: 'imported' });
+  }
+  WANTING_OF.set(record, out);
+  return out;
 }

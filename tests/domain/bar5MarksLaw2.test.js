@@ -116,7 +116,12 @@ describe('LAW 2\'s rows of a house or a service (BAR5-MARKS): what the crisis st
     const cobblerSet = /** @type {string[]} */ (setOf(String(cobbler.desc), famine));
     expect(cobblerSet, 'the cobbler printed a twin of the late table').toBeTruthy();
     expect(String(cobbler.desc)).toBe(cobblerSet[1]);
-    const back = { ...famine, institutions: famine.institutions.map((/** @type {any} */ h) => (h === cobbler ? { ...h, desc: cobblerSet[0] } : h)) };
+    // BAR6-MARKS (2026-11-16, the premise re-held by construction): the cobbler's trade now reads its hides
+    // (`houseInputAtHand.js :: housesWantingTradeInput`), and this town, the census's one famine town with a cobbler, has no
+    // herds and imports no hides, so its cobbler is "Short of hides." and the bare row this control needs is gone; the
+    // constructed record also brings hides in, so the cobbler is not short and its original line stands bare as before
+    const back = { ...famine, economicState: { ...famine.economicState, primaryImports: [...(famine.economicState?.primaryImports || []), 'Animal hides'] },
+      institutions: famine.institutions.map((/** @type {any} */ h) => (h === cobbler ? { ...h, desc: cobblerSet[0] } : h)) };
     expect(law2MarksInstances(back).map((i) => i.rule)).toContain('L2.famine.work');
     const siege = town('r2r-metropolis-14');
     const bowyer = (siege.institutions || []).find((/** @type {any} */ h) => /^Bowyers/.test(h.name));

@@ -61,3 +61,24 @@ export function warTakesOf(record) {
   READ.set(record, frozen);
   return frozen;
 }
+
+/** The war's own iron hook, by its fixed opening (`economy/foodBalance.js`; `economy/outlookHookSiblings.js`'s twin keeps it). */
+export const WAR_IRON_HOOK = /^War has taken the iron:/;
+
+/**
+ * BAR6-MARKS (LAW 8's 8a.input, BRIEF-BAR6 fact (e), left by BAR5-MARKS under WM1b; vetoable by the owner): WHERE THE PAGE
+ * PRINTS THE WAR'S IRON HOOK AND NO WAR IS IN FORCE HERE. An occupied or a besieged town of a land at war prints "War has
+ * taken the iron: … the smiths have nothing to mend tools with" under its Plot Hooks (the record's `Strategic Resource`
+ * hook, in the war's own words) while `warTakesOf` above, which stops the forge work as a war's crisis, reads a town at war
+ * only. The hook's own reading is the input's: the iron is not had, and the houses that work it are short of it
+ * (`facts/houseInputAtHand.js :: housesWantingTradeInput`). False in a town at war, whose war curtails the forge work
+ * instead (one mark, not two).
+ * @param {object | null | undefined} record a settlement record
+ * @returns {boolean}
+ */
+export function warIronHookOutsideWar(record) {
+  if (!record || typeof record !== 'object' || crisisOf(record).has('wartime')) return false;
+  const r = /** @type {{ economicViability?: { plotHooks?: unknown } | null }} */ (record);
+  const hooks = Array.isArray(r.economicViability?.plotHooks) ? /** @type {Array<{ category?: unknown, hook?: unknown }>} */ (r.economicViability.plotHooks) : [];
+  return hooks.some((h) => !!h && h.category === IRON_HOOK_CATEGORY && typeof h.hook === 'string' && WAR_IRON_HOOK.test(h.hook));
+}

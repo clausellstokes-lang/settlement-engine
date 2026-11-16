@@ -68,7 +68,7 @@ import EntityLink from '../../primitives/EntityLink.jsx';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
-import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, STOPPED_WORD, SHORT_WORD, markedDescription, ordinaryTimesLine } from '../../../domain/display/crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, STOPPED_WORD, SHORT_WORD, markedDescription, ordinaryTimesLine, setsWithMarkedHousesWorse } from '../../../domain/display/crisisStoppedRow.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -363,7 +363,8 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
   const entries = useMemo(() => institutionsWithServices(settlement), [settlement]);
   const houses = useMemo(() => entries.filter((entry) => !entry.fabric), [entries]);
   const fabric = useMemo(() => entries.filter((entry) => entry.fabric), [entries]);
-  const sets = useMemo(() => computeChainSets(settlement || {}), [settlement]);
+  // BAR6-MARKS (8a.mild): the card's state word prints the leaf's worse state
+  const sets = useMemo(() => setsWithMarkedHousesWorse(settlement, computeChainSets(settlement || {})), [settlement]);
   // X-45: the editor's choices and each house's address in the roster (the edit action's index).
   const powers = useMemo(() => rosterPowerNames(settlement), [settlement]);
   const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
