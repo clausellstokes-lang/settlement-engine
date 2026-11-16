@@ -76,3 +76,15 @@ describe('LAW 8\'s mark rules (BAR6-MARKS): the mark leaf reads every worst stat
     }), '(b) every positive control fires');
   }, 900_000);
 });
+
+// EG1 (the chair, 2026-11-16): the eager fact reads the war off the stress container (`houseInputAtHand.js :: atWar`, through
+// `canonStressors`), not through the lazily pinned `crisisKind.js`; over the census's 720 it answers as `crisisOf` does
+describe('EG1: the war read import-free answers as the crisis reader does', () => {
+  test('atWar equals crisisOf(...).has("wartime") in every town of the 720 (every row)', async () => {
+    const { atWar } = await import('../../src/domain/facts/houseInputAtHand.js');
+    const { crisisOf } = await import('../../src/domain/facts/crisisKind.js');
+    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+      expect(atWar(town(seed)), `${seed}: the two readings of the war`).toBe(crisisOf(town(seed)).has('wartime'));
+    }), 'every census town reads one war');
+  }, 1_800_000);
+});

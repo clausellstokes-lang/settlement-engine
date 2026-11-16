@@ -37,6 +37,7 @@ import { hasTradeRouteConnection } from '../tradeRouteSemantics.js';
 import { institutionHasAnyTag } from '../../lib/entities.js';
 import { nativeSemanticNames } from '../content/customContentSemanticAuthority.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { canonStressors } from '../canonicalAccessors.js'; // EG1: the war read import-free of the lazily pinned crisisKind.js
 import { institutionMatchesKeyword } from '../institutions/institutionCategory.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
@@ -511,19 +512,32 @@ function dependsFromOutside(record, key) {
   });
 }
 
+/** The war as the stress container types it: the kind, or its pulse type (`stressorPicker.js :: GEN_TO_PULSE_TYPE`, the same word). */
+const WAR_TYPES = Object.freeze(['wartime']);
+
+/**
+ * Is a war in force here, by the record's stress container (EG1: import-free of `crisisKind.js`)?
+ * @param {unknown} record @returns {boolean}
+ */
+export function atWar(record) {
+  return canonStressors(/** @type {Parameters<typeof canonStressors>[0]} */ (record))
+    .some((/** @type {unknown} */ e) => !!e && typeof e === 'object' && WAR_TYPES.includes(String(/** @type {{ type?: unknown }} */ (e).type)));
+}
+
 /** The war's own iron hook, by its fixed opening (`economy/foodBalance.js`; `outlookHookSiblings.js`'s twin keeps it). */
 const WAR_IRON_HOOK = /^War has taken the iron:/;
 
 /**
  * BAR6-MARKS (fact (e), left by BAR5-MARKS under WM1b; vetoable by the owner): WHERE THE PAGE PRINTS THE WAR'S IRON HOOK
  * AND NO WAR IS IN FORCE HERE (an occupied town of a land at war). `warReach.js :: warTakesOf` stops the forge work as a
- * war's crisis in a town at war only; here the hook's own reading is the input's. Read off the record's own crisis list
- * (`config.stressTypes`), not `crisisKind.js`, which is pinned lazy and this eager fact may not import (EG1).
+ * war's crisis in a town at war only; here the hook's own reading is the input's. The war is read off the record's stress
+ * container (`canonicalAccessors.js :: canonStressors`, the chair's EG1 form, as BAR6-HOUSES's `sovereign.js`), not
+ * `crisisKind.js`, which is pinned lazy and this eager fact may not import; the guard holds it equal to `crisisOf`.
  * @param {unknown} record @returns {boolean}
  */
-function warIronHookOutsideWar(record) {
-  const r = /** @type {{ config?: { stressTypes?: unknown } | null, economicViability?: { plotHooks?: unknown } | null } | null} */ (record);
-  if (!r || arr(r.config?.stressTypes).includes('wartime')) return false;
+export function warIronHookOutsideWar(record) {
+  const r = /** @type {{ economicViability?: { plotHooks?: unknown } | null } | null} */ (record);
+  if (!r || atWar(record)) return false;
   return arr(r.economicViability?.plotHooks).some((x) => { const h = /** @type {{ category?: unknown, hook?: unknown } | null} */ (x);
     return !!h && h.category === 'Strategic Resource' && typeof h.hook === 'string' && WAR_IRON_HOOK.test(h.hook); });
 }
