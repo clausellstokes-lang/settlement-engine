@@ -6,7 +6,7 @@
 // (a) THE ZERO over the towns in which the rule fired at 600b7683a (the census's 720 and the fresh 300: the measure in
 // docs/chair/2026-11-16/bar5/BAR5-POWERS-HANDBACK.md), every town run and every failure collected; (b) A POSITIVE CONTROL,
 // a record built here from the read's own row, on which the detector MUST still fire. And the read's rows (REVIEW-BAR-5:
-// C33631 C35627), each red at 600b7683a; C38889 is tests/domain/facts/seatOutranked.test.js's; C39734 C43925 await the late key; C32519 is named for BAR5-FOOD: the refused words and what prints in their place.
+// C33631 C35627), each red at 600b7683a; C38889 is tests/domain/facts/seatOutranked.test.js's; C39734 C43925 are cured by the late key (BAR6-POWERS, 2026-11-16: `forces` handed at assembleSettlement.js's late reconcile; the exclusion below lifted); C32519 is named for BAR5-FOOD: the refused words and what prints in their place.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -82,10 +82,9 @@ const ROWS = /** @type {Array<[string, string, string, string]>} */ ([
   ['C33631', 'bar0-town-calm-rand-25', 'Clergy and church institutions exercise meaningful civic influence', 'Clergy are present but operate at the margins of civic life'],
   ['C35627', 'bar0-town-calm-rand-26', 'its hold is secure and its say is real', 'though its word counts for little beyond the trade'],
 ]);
-/** THE NAMED EXCLUSION (R-Q / R-U, tests/generators/census5cMilitiaReword.test.js): the force line reads the SETTLED roster only,
- * handed by the late replay (`projection.forces`); until that key is handed (the chair's, at assembleSettlement.js) the line
- * prints as the step chose it, so 1c-force is excluded from the zero here, and its leaf and control are held below. */
-const AWAITS_THE_LATE_KEY = '1c-force/roster';
+/* THE NAMED EXCLUSION `AWAITS_THE_LATE_KEY` ('1c-force/roster') IS LIFTED (BAR6-POWERS, 2026-11-16): the force line reads the
+ * SETTLED roster only, handed by the late replay (`projection.forces`; R-Q / R-U, tests/generators/census5cMilitiaReword.test.js),
+ * and the key is handed now (`forces` in assembleSettlement.js's late reconcile options), so 1c-force joins the zero. */
 /** KEEP: a force line where its force stands, and a secure head of established standing, still print */
 const KEEP = /** @type {Array<[string, RegExp]>} */ ([
   ['bar0-village-calm-rand-22', /^Significant military force for this scale/],
@@ -108,7 +107,7 @@ const said = (s) => JSON.stringify({ powers: (s.powerStructure?.factions || []).
 describe('BAR5-POWERS · 1c and 1d (detector: law1c, law1d over the record\'s printed lines)', () => {
   it('(a) the zero: in every town where a power\'s description or a card claimed a standing its final state denies at 600b7683a', () => {
     const failures = collectSeedFailures([...FIRED_720, ...FIRED_FRESH], (seed) => {
-      expect(instancesOf(seed).filter((x) => x.law !== AWAITS_THE_LATE_KEY).map((x) => `${x.law}: ${x.line.slice(0, 80)}`), seed).toEqual([]);
+      expect(instancesOf(seed).map((x) => `${x.law}: ${x.line.slice(0, 80)}`), seed).toEqual([]);
     });
     expectNoSeedFailures(failures, '1c and 1d: zero in the towns where they printed at 600b7683a');
   });

@@ -2147,7 +2147,7 @@ common state.
 **`breakdown` dominated by SAFETY, adverse** {colour}
 1. `[street]` People at {settlement} do not feel safe after dark, and they blame the {seat} for it.
 2. `[ledger]` The {seat} has lost {settlement}'s trust over crime. People who do not feel safe stop backing whoever is meant to protect them.
-3. `[unfolding]` Each season {settlement}'s streets go badly policed, fewer people back the {seat}, and it can do less about it.
+3. `[unfolding]` Each season {settlement} is policed worse, fewer people back the {seat}, and it can do less about it.
 
 **`breakdown` dominated by DEFENSE, adverse** {colour}
 1. `[visitor]` The complaint against the {seat} at {settlement} is weakness, not theft: people think the town is badly defended, and they blame the {seat}.
@@ -2400,7 +2400,8 @@ and never an assertion that the feared thing is happening.
 1. `[ledger · no ruler: lord]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
 2. `[street · no ruler: lord]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
 3. `[unfolding · no crisis: succession]` The {seat} at {settlement} watches the town's temper closely: what it fears is the town turning on it.
-4. `[counterforce · no ruler: lord]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
+4. `[counterforce · no ruler: lord · seat members]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
+5. `[counterforce · no ruler: lord · no seat members]` The {seat} at {settlement} has left obvious decisions untaken, and nobody in the town can make it take them.
 
 **`theocracy`** {colour}
 1. `[ledger]` The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.
@@ -2455,13 +2456,13 @@ and never an assertion that the feared thing is happening.
 3. `[street]` {settlement} calls its hall the {seat} in public and something shorter everywhere else.
 
 **FLAG: stateCrime** *(WIRING W3 C2: `safetyProfile.flags.stateCrime`, intensity below the heavy band)*
-1. `[street · garrison]` The garrison keeps {settlement}'s streets quiet and takes its own cut for doing it: dues collected twice, goods taken without payment, and no complaint made where a soldier can hear.
+1. `[street · garrison]` The garrison keeps {settlement} quiet and takes its own cut for doing it: dues collected twice, goods taken without payment, and no complaint made where a soldier can hear.
 2. `[counterforce · garrison]` Common thieves are rare at {settlement}; the danger is the garrison. Soldiers take what they please in the {seat}'s name, and people who object are not talked about afterwards.
 3. `[counterforce · no garrison]` Common thieves are rare at {settlement}; the danger is the {seat}'s own armed officials, who take what they please in its name.
 
 **FLAG: stateCrime, heavy** *(WIRING W3 C2: `safetyProfile.flags.stateCrime` with `stateCrimeIntensity` in the heavy band)*
 1. `[street · garrison]` The garrison at {settlement} no longer keeps the peace for anyone but itself. Soldiers set the dues, take what they want, and people who argue with them are not seen again.
-2. `[visitor · garrison · no crisis: under_siege]` Travellers reach {settlement} and find empty streets and soldiers on every corner. Nobody will talk about the {seat}, and nobody will say where the missing went.
+2. `[visitor · garrison · no crisis: under_siege]` Travellers reach {settlement} and find nobody about and soldiers wherever they look. Nobody will talk about the {seat}, and nobody will say where the missing went.
 3. `[counterforce · no garrison]` The {seat}'s armed officials at {settlement} take what they want and answer to nobody; people who argue with them are not seen again.
 
 **FLAG: crimeIsGovt** *(WIRING W3 C3: `safetyProfile.flags.crimeIsGovt`)*
@@ -2532,7 +2533,7 @@ own entailment and licenses nothing about who runs it.
 11. `[ledger · dm-only · tier: ≥ village · crisis: occupied]` {settlement}'s officials work under the occupiers' eye now, but they are paid little, and a purse the occupiers never see would still be welcome.
 
 **capture pressure RECOVERING (strong security, prosperity)** *(every variant `dm-only`)*
-1. `[unfolding · dm-only · colour]` The criminals at {settlement} are losing their grip on the hall: the town is doing well again and its streets are guarded.
+1. `[unfolding · dm-only · colour]` The criminals at {settlement} are losing their grip on the hall: the town is doing well again and it is well guarded.
 2. `[counterforce · dm-only · watch]` The approach was made at {settlement} and did not take. Prosperity and a working watch did what no investigation did.
 3. `[ledger · dm-only · colour]` The criminals at {settlement} still own a few officials, but keeping them bought now costs more than it brings in.
 4. `[ledger · dm-only · colour]` Criminal money finds little purchase at {settlement}: the town is doing well, and its officials have little reason to sell.

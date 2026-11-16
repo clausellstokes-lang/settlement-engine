@@ -219,6 +219,7 @@ export function houseBacksOf(settlement) {
     if (edit.kind === 'institution' && edit.path === 'backs' && edit.record) authoredBacks.set(edit.entityIndex, edit.record.value);
   }
 
+  const seatHouse = ruler ? seatHouseName(institutions) : null; // BAR6-POWERS (10f-backs): the ruler's own house
   for (let index = 0; index < institutions.length; index += 1) {
     const inst = institutions[index];
     const key = String(inst?.name || '');
@@ -275,6 +276,12 @@ export function houseBacksOf(settlement) {
     // works outside the seat's law, not under it (a criminal ruler takes its houses above, as its kind's leader).
     if (list.length === 0 && ruler && !isCriminalInstitution(inst)) list.push({ faction: ruler, basis: 'default', why: DEFAULT_BASIS, share: 0, weight });
     list.sort((x, y) => y.share - x.share || BASIS_RANK[x.basis] - BASIS_RANK[y.basis]);
+    // BAR6-POWERS (LAW 10f-backs, the audit's C102099; the chair's 10/d): THE RULER'S OWN SEAT BACKS THE RULER ONLY. The seat's
+    // house (`seatHouseName`, the Government shelf's first) landed its catalogue shares on the ruler AND on the leader of each
+    // other archetype it names ("Backs · Craft Guilds · Grand Guild Consortium" beside the two in high quarrel): the house the
+    // ruler sits in takes its whole weight to the ruler, in the ruler's landing. The DM's word and a founding mark stand above.
+    const own = key === seatHouse ? list.find((b) => b.faction === ruler) : undefined;
+    if (own && list.length > 1) list.splice(0, list.length, { ...own, share: list.reduce((sum, b) => sum + b.share, 0) });
     byHouse.set(key, list);
   }
   return byHouse;
