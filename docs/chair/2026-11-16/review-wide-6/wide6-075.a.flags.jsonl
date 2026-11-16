@@ -1,0 +1,6 @@
+{"id":"C182276","town":"bar0-town-occupied-rand-30","sev":"MED","kind":"STATE","why":"'Food is being handed out to anyone who asks' implies want; header FOOD is Secure, deficit 0%, 6.3 months in store with a granary","other":"C182295"}
+{"id":"C182900","town":"bar0-town-occupied-rand-30","sev":"MED","kind":"PAIR","why":"Gaps say hide work 'stops half-way: no leatherworkers' guild finishes it' while the town makes Boots and shoes (Produced locally) and the leather chain outputs boots, harness, armour","other":"C182793"}
+{"id":"C183057","town":"bar0-town-occupied-rand-30","sev":"MED","kind":"PAIR","why":"'Theft is rising even under the curfew' against 'ordinary theft has dropped, and people fear informers more than thieves' on the same tab","other":"C183058"}
+{"id":"C183125","town":"bar0-town-occupied-rand-30","sev":"MED","kind":"PAIR","why":"'Nothing structural depends on arcane work' against the same tab's 'Reliance on magic: Present', 'Economic role: common', 'Infrastructure role: common' (magic high, teleportation circle)","other":"C183119"}
+{"id":"C182791","town":"bar0-town-occupied-rand-30","sev":"LOW","kind":"PAIR","why":"'sells more than one thing beyond the town' while the Economics tab's Exports lists only 'Waterborne freight services'","other":"C182786"}
+{"id":"DONE","lines":1467,"blocks":1,"flags":5}
