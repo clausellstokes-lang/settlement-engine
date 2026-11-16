@@ -1,0 +1,9 @@
+{"id":"C5441","town":"bar0-city-under_siege+famine-rand-26","sev":"LOW","kind":"STATE","why":"apothecaries' medicines 'brought from abroad' printed bare (Herbal remedies unmarked) while the siege stops all trade by road, gate and water","other":"C5190"}
+{"id":"C5452","town":"bar0-city-under_siege+famine-rand-26","sev":"LOW","kind":"STATE","why":"bowyers 'supplying ... the caravans' unmarked; caravan exchange is marked stopped by the siege and nothing comes in by road","other":"C5599"}
+{"id":"C5621","town":"bar0-city-under_siege+famine-rand-26","sev":"MED","kind":"PAIR","why":"Institutions prints Daily markets' 'Fresh produce · General trade' bare in an active famine (93% gap); Services marks both Impaired, produce 'whatever the gardens still give'","other":"C5917"}
+{"id":"C5467","town":"bar0-city-under_siege+famine-rand-26","sev":"LOW","kind":"PAIR","why":"Carpenters' 'Furniture making · Wagon and cart work' bare here; Services marks both Impaired (Needs Timber)","other":"C5831"}
+{"id":"C5535","town":"bar0-city-under_siege+famine-rand-26","sev":"LOW","kind":"PAIR","why":"Weavers' 'Cloth production' bare here; Services marks it Impaired (Needs Wool / flax)","other":"C5827"}
+{"id":"C5593","town":"bar0-city-under_siege+famine-rand-26","sev":"LOW","kind":"PAIR","why":"Banking houses' 'Commercial loans · Deposit accounts' bare here; Services marks both Impaired","other":"C5971"}
+{"id":"C5975","town":"bar0-city-under_siege+famine-rand-26","sev":"LOW","kind":"BROKEN","why":"'Milogorod's Banking houses is open': plural house name with singular verb","other":""}
+{"id":"C6320","town":"bar0-city-under_siege+famine-rand-26","sev":"MED","kind":"STATE","why":"Medicinal herbs 'Fully exploited', drawing on herb gathering areas; LAND gives Wild Foraging Areas as depleted and C6323 says little is left to take","other":"C6323"}
+{"id":"DONE","lines":2776,"blocks":1,"flags":8}
