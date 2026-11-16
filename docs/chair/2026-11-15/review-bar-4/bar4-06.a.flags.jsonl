@@ -1,0 +1,8 @@
+{"id":"C15908","town":"bar0-city-wartime-rand-23","sev":"LOW","kind":"BROKEN","why":"\"More than one quarter of inns\" reads as a garbled fragment for the Inns and taverns (district) house; sense is unclear","other":""}
+{"id":"C15779","town":"bar0-city-wartime-rand-23","sev":"MED","kind":"PAIR","why":"timber carts 'stopped coming' presumes timber is brought in; C16197 says timber and building wood are needed and not brought in; TRADE imports no timber","other":"C16197"}
+{"id":"C16424","town":"bar0-city-wartime-rand-23","sev":"MED","kind":"BROKEN","why":"heading says City Council has 34 institutions, but Systems/Power (every line shown) lists only 29 distinct houses under it (23 held + 6 under the ruling power)","other":""}
+{"id":"C16539","town":"bar0-city-wartime-rand-23","sev":"MED","kind":"STATE","why":"says the walls are asked little now, but CRISIS is Wartime, military status is war footing and the page says soldiers hold the walls","other":"C16508"}
+{"id":"C16570","town":"bar0-city-wartime-rand-23","sev":"LOW","kind":"PAIR","why":"Institutional control 'unregulated' beside Legality 'regulated' on the same magic envelope","other":"C16569"}
+{"id":"C16562","town":"bar0-city-wartime-rand-23","sev":"LOW","kind":"LACKS","why":"Medical Readiness value 'Infirmary' but HOUSES has no infirmary or hospital, and the row's own text says no beds","other":""}
+{"id":"C17747","town":"bar0-hamlet-calm-rand-21","sev":"LOW","kind":"PAIR","why":"Institutional control 'unregulated' beside Legality 'restricted' on the same magic envelope","other":"C17746"}
+{"id":"DONE","lines":2406,"blocks":2,"flags":7}
