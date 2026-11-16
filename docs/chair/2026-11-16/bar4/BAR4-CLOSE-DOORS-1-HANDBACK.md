@@ -6,7 +6,7 @@ there through `sh scripts/gate-tail.sh`; a second tree at the line's closed tip 
 `package-lock.json` identical, `node_modules` linked). No page line cured, no test written, skipped or weakened. Part 2 (the
 signed golden door) is not this seat's.
 
-STATUS: **PART 1 IN PROGRESS** (1a-1f taken; THE ONE MERGE taken (abf643259) and every family it moved re-taken; next 1g, the size ceilings, and the goods roster as the walker prints it).
+STATUS: **PART 1 DONE** (final; after this push this seat pushes nothing more). Part 2 waits on its own seat.
 
 ## 1a · THE LIST (each file alone at 2d80aa740, `npx vitest run <file>` through `scripts/gate-tail.sh`, one log a file, a TSV)
 
@@ -37,7 +37,7 @@ corpus walkers, the nine guards of the round and the facts' laws the people seat
 | 1f | edge bundles | `npm run build:edge-shared` at 185855f08 (twice: the metas share one build window) | the engine bundle and the AI bundles stale against src/ | engineBundle js + meta (sourceHash e2008a20 -> 817e93f6, engineVersion 8b2bdf5e -> fd73c360, inputs 399 -> 414, the round's 15 new modules in, none out); aiGrounding (8fb89934 -> 7b6de100, inputs 143 -> 156, none out); aiCharter (314d06eb -> 8ab240a4), aiOutputSchema (a6462d2a -> 7bf35e77) input lists unchanged; analyticsEvents and intentAtlas metas restamped only (the reproducibility arm asks one build window). Cause: the round's source as a whole | 1be27b78c | the four edge files green alone (29, 23, 20, 19); the 18 files that read a bundle green (engineBundleReplay 5 + 2 skipped: its golden and fence arms, Part 2); `npm run validate:edge` exit 0 |
 | 1d | observed-shape readers | `node scripts/check-observed-shape-readers.mjs` (exit 1); `--write` on the clean tree | the input drift (5 generated leaves) and BAR4-RECORD's moved row | **STOP (sent)**: `--write` REFUSES (shrink-only: `src/domain/facts/houseInputAtHand.js` NEW `test on institution`, a key no writer produces, ceiling 0; the frozen row in `resourceGenerator.js` stale). Untouched; the input drift waits on the same door | — | observedShapeReaders.walker 44/47 (SHRINK-ONLY, ERASURE GUARD, input drift) |
 | 1e | the manifest's owed entries | `scripts/mutation-coverage-manifest.json`'s own form, kind 'rationale', after the bar3 siblings; never as uncovered | the four the seats named | exactly the four the walker printed: bar4HistoryOneTelling, bar4HousesPresumptions, bar4RecordHouseInput, bar4ScenePresumption, each from its seat's "kills" line and its header | cfab67960 | 10/10; the manifest's 16 other readers alone: 12 green, red on arms that read no line of it (two AI bundles, 1f; sovereigntyLightingContract and implementationPackets, the repair seat's, red the same without the edit) |
-| 1e | the goods roster | `src/domain/goods.schema.js`, ONLY as the walker prints it at the last step | BAR4-RECORD's row | `vendorPdfLazy` (plain) prints `src/domain/facts/houseInputAtHand.js` absent; to be taken at 1g's build, as the walker prints it then | — | — |
+| 1e | the goods roster | `src/domain/goods.schema.js`'s own form, ONLY the rows `vendorPdfLazy`'s arm "every consumer in the tree is declared…" prints at the last step (the merged tree, after the one build) | BAR4-RECORD's row, `l` since the first-paint seam | `src/domain/facts/houseInputAtHand.js` absent: `R \| l \| identity \| surface` (the arm's import-graph check agrees with every column); then `src/domain/display/crisisStoppedRow.js` (`R \| l \| none \| member`) stale: BAR4-SCENES-2 HW1 (6dd18224a) moved its one member import (`resourceShortageImport`) into houseInputAtHand.js | c54fa9073 | vendorPdfLazy plain 41 + 14 skipped |
 
 ## THE ONE MERGE AND WHAT IT MOVED
 
@@ -50,6 +50,14 @@ corpus walkers, the nine guards of the round and the facts' laws the people seat
 | m4 | pool-dominance row | `node scripts/census/pool-dominance.mjs --bank-new` | `FOODWAYS_PRINT_SIBLINGS` (BAR4-HOUSES) | one row banked (top1 0.8643, 2 lines, 1002 draws), no other row; the census figures follow (pools 948 -> 949); no ceiling re-taken | 56106cb2f | poolDominance 17/17 |
 | m5 | lighting census | `LIGHTING_CENSUS_REFREEZE='BAR4-CLOSE-DOORS-1' LIGHTING_CENSUS_NOTE='…' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` on the clean tree, then without | the round's new test files | files 3631 -> 3641 (exactly the ten added: the nine guards and factHomesLazy; none deleted), parked 465 -> 468, credited 3166 -> 3173, titles 30600 -> 30647, suiteTitles 8440 -> 8448; no [POPULATION_GREW] | 646386ea1 | sovereigntyLightingContract 34/34; baseStateCapsule 9/9 |
 | m6 | edge bundles again | `npm run build:edge-shared` | engine and grounding stale against the merge | engine (817e93f6 -> 2e4ab465, inputs 414 -> 415: facts/pairPlace.js in), aiGrounding (7b6de100 -> 607d3f46, inputs unchanged); the others held | e8852a5b5 | the 18 bundle readers green (engineBundleReplay 5 + 2 skipped, Part 2); `npm run validate:edge` exit 0 |
+| 1g | size ceilings (B3) | one `npm run build` of this tree and of c4ac1ef84a; `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js tests/build/engineServiceStoreParity.test.js`; each figure read from its own arm's message (an untracked scratch copy with the ceilings at 0, removed); re-recorded ONCE in each file's own form, a dated note | the chair's line: first paint near 1,138,000, the worker near 2,356,000 | first paint raw 1,132,308 -> 1,139,072 (+6,764), gzip 360,756 -> 362,621 (+1,865), Brotli 302,830 -> 304,224 (+1,394); engine chunk < 878,554 -> < 881,331 (881,330, +2,777); worker 2,322,103 -> 2,356,121 (+34,018). c4ac1ef84a reads 1,132,308 · 360,756 · 302,825 · 878,553 · 2,322,080. Each under the 60,000 stop. Cause: the round's branches as a whole; the largest by their hand-backs: first paint BAR4-RECORD, BAR4-HOUSES, BAR4-CORPUS-ECO (BAR4-FIRSTPAINT's seam cured BAR4-SCENES-2's +148,600 at the cause; the repair seat's last cures +696); engine chunk BAR4-PEOPLE, BAR4-SAFETY, BAR4-HISTORY; worker BAR4-SCENES-2 (+13,714), BAR4-HOUSES, BAR4-PEOPLE. The ARCH car 2 pins move with the three budgets. **engineServiceStoreParity GREEN** (the law) | 17a677958 | the three files 70/70 under VERIFY_DIST; `npm run verify:dist` whole: no FAILED row, STRICT DIST REFUSED on the two SKIPPED rows only (engineBundleReplay's golden and fence arms: Part 2); `npm run smoke:boot` PASS (604/604); build output removed from both trees |
+
+| m7 | proseTasteCorruption (the chair's word of 16:44 UTC) | the file's own form, re-keyed "by that cause", a dated note | the desk's shipped list gains lib/entities.js | "what the desk already ships" 4 -> 5 files: `src/lib/entities.js`, reached by the defense desk through `houseInputAtHand.js` (BAR4-SCENES-2 HW1 6dd18224a), which imports `institutionHasAnyTag` (BAR4-RECORD R1 b7d3da983); THE BYTE ARM green and untouched | 4e4ba0851 | proseTasteCorruption 7/7; composeStateProseFence 10/10 |
+| m8 | fork register and an observed site | A4's own fresh literal, eight tallies in place in `src/domain/generation/generationForkRegistry.js`; A6 in the file's own form under FA1's general form | BAR4-HOUSES's named move (A4) | A4: `institutions.producedOnRecord` on the four late passes, same -4, transformed +4 each (the late re-read transforms the house descriptions of 4 golden towns); A6: `src/data/npcData.js:1676` -> `:1678`, byte-identical (sha256 f82b8da7…), moved by BAR4-CLOSE-SWEEP PD1b's two lines above it | 7a172dfd7 | generationForkCensus 6/7 (A1: class G); generationForkRegistry.contract, chooserRecordPathRegistry, editDeclarations, transientChooserRegistry green alone |
+
+CONFIRMED GREEN AT THIS TIP, each alone (the chair's ask of 16:44 UTC): tradeListWriters.walker 5/5 (its stale row out,
+e79405052), sovereigntyLightingContract.walker 34/34 (the estate's files 3,631 -> 3,641, 646386ea1), poolDominance.walker 17/17
+(the new pool's row, 56106cb2f).
 
 ## LAW REDS AND STOPS SENT TO THE CHAIR
 
@@ -57,8 +65,31 @@ corpus walkers, the nine guards of the round and the facts' laws the people seat
 - proseWiringCensus, the alias draft's report half (STOP), sent 15:0x UTC: candidate rows 19 -> 21, endpoints 5 -> 6, noCandidate 83 -> 82 (docblock 45 held); the two rows `system:public_legitimacy|factions` and `|force`, generator-write, BAR4-HISTORY 155c7e1af. The chair, 15:07 UTC: RE-KEY THE THREE with the cause (HL1, FS2); taken, 185855f08.
 - observed-shape readers (STOP), sent 15:2x UTC: `--write` refuses the moved read `test on institution` (now in `houseInputAtHand.js`, BAR4-RECORD b7d3da983). The chair, 15:07 UTC: DO NOT re-address the identity: the old false positive moved with its code (a rule table's key `institution` holding a pattern); the cure is at the cause, the repair seat's (the key renamed in `houseInputAtHand.js`); after THE ONE MERGE the register's own door shrinks the stale row and absorbs the five leaves' input drift.
 
+## FOR THE OWNER, IN PLAIN WORDS
+
+- Every stored count, register and ledger the round's nine branches moved has been re-taken through its own door, once, at the
+  joined tree, with its cause named. Where a figure moved for a reason no branch had written down, I stopped and the chair ruled
+  first: twice, both answered and taken.
+- The app grew a little, which is the round's named growth: the first screen by 6,764 bytes (gzip 1,865, Brotli 1,394), the
+  engine chunk by 2,777 and the generation worker by 34,018. The largest share of the first-screen growth is the record branch's
+  one shared reading of "this house's input is at hand". At one point in the round the first screen had grown by about 148,600
+  bytes; the first-paint seat cured that at its cause before I measured. Each figure is recorded as a new ceiling and is yours to
+  veto.
+- The built app boots (604 of 604 chunks), and the remote engine agrees with the local one.
+- Part 2, the signed golden record, is not taken here: the files that wait for it are listed below.
+
 ## WHAT IS LEFT, IN ORDER
 
-1. THE ONE MERGE on the chair's word (it brings the repair seat's finished work, the first-paint seat's seam, the house rows' "Short of" page cure under HR1 and the last re-keys); then every door's `--check` and every class R file alone again; re-take what those two seats' cures moved.
-2. After it: the observed-shape readers by their own `--write` (the stale row out, the five leaves' input drift absorbed); the pool-dominance register's row for `FOODWAYS_PRINT_SIBLINGS` (`node scripts/pool-dominance.mjs --bank-new`; that arm alone); the goods roster row only as the walker prints it at the last step.
-3. 1g: the size ceilings under ruling B3, last, after the merge.
+1. Nothing of Part 1. The scratch artefacts (logs, scripts, measures) stay in this seat's scratch directory; none is committed.
+2. PART 2 (the signed golden door), ANOTHER SEAT'S: the files below; then `npm run verify:dist` whole, whose only refusal at this
+   tip is engineBundleReplay's two skipped arms.
+
+## FOR PART 2 (class G, red at this tip: they read the golden corpus or a figure derived from it)
+
+Run each alone at this tip (after every family above), `npx vitest run <file>` through `scripts/gate-tail.sh`:
+generatorGoldenMaster 1/3 (the 525), pipelinePinnedMode 3/15, pipelinePinnedChoosers 1/7, powerEconomyFreshness 1/10,
+rosterFinalUnderHeldRoster 1/7, nameHeldThroughAssembly 1/7, generationForkCensus A1 (the control row's digest; A4 and A6
+re-taken here), dmLayerGoldenIsolation 1/15, worldFactRederive 1/7, editWorldFactResources 2/6, x46NpcBand 1/24,
+institutionBudgetPromise 1/1, espionageDormancyFence 1/21 (the driven digest), dossierProseManifest 1/17 (the drift arm);
+and engineBundleReplay's two skipped arms (the golden, the fence), which arm themselves when those are re-recorded.
+townCartographyCalibration 32/32 and presetLightingWitness 7/7 are GREEN.
