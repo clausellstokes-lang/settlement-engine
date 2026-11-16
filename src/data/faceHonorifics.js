@@ -341,8 +341,9 @@ export const FACE_HONORIFICS_BY_CULTURE = Object.freeze({
   }),
 });
 
-/** A word folded for comparison: lower case, letters only, a possessive's "'s" dropped ("the post's master" is the postmaster). @param {string} w */
-const foldWord = (w) => w.toLowerCase().replace(/['’]s\b/g, '').replace(/[^a-z]/g, '');
+/** A word folded for comparison: lower case, letters only. "the post's master" is folded "postsmaster", so it is not the registry's
+ * other office "the postmaster" (a town of the fresh 300, bar0-town-calm-rand-123, holds both, in two houses). @param {string} w */
+const foldWord = (w) => w.toLowerCase().replace(/[^a-z]/g, '');
 /** Every registry title as the honorific of its own office would print it bare ("the wharfinger" → "wharfinger"). */
 const OFFICE_NAMES = new Set(Object.keys(FACE_HONORIFICS).map((t) => foldWord(t.replace(/^the\s+/i, ''))));
 /**

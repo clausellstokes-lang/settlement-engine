@@ -104,7 +104,8 @@ describe("the harbour master's pool is the one its coast admits (A-11)", () => {
     }
     // anchored: the harbour forms exist in the registry, and the inland pick names neither
     expectAbsentWithAnchor([...inland], 'Master of the Harbour', 'Dockmaster', 'a harbour form an inland harbour master never reads');
-    expectAbsentWithAnchor([...inland], 'Harbourmaster', 'Wharfinger', 'a harbour form an inland harbour master never reads');
+    expectAbsentWithAnchor([...inland], 'Harbourmaster', 'Dockmaster', 'a harbour form an inland harbour master never reads'); // BAR6-PEOPLE (2026-11-16, 10c): anchored on the form the pick keeps
+    expectAbsentWithAnchor([...inland], 'Wharfinger', 'Dockmaster', "the docks' wharfinger's own office, never the harbour master's (M-1b)");
   });
   it('a COASTAL settlement, and a card read with no place, keep the registry\'s pool: Harbourmaster or Master of the Harbour', () => {
     const coastal = new Set(seeds.map((seed) => honorificOfTitle('the harbour master', null, seed, { coastal: true })));

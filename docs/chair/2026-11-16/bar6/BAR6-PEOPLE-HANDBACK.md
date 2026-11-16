@@ -12,12 +12,12 @@ Towns / instances (printed; record-only 0 everywhere). Base = afa46d644; tip = t
 
 | rule | the two readings, and where | the one fact made (or read) | 150 base → tip | 720 base → tip | fresh 300 base → tip | one change cured · line by line |
 |---|---|---|---|---|---|---|
-| 8b.person | the card's "How they deal" (`presentation.behaviour`, drawn by trade, `npcComponents.jsx`) printed bare; the house's mark (`crisisStoppedRow.js :: rowMarkText`) on the Institutions and Services tabs | READ, not made: the card takes its house's `rowMarkText` before a line that offers the trade (`npcComponents.jsx :: dealingShown`, at print) | 23/27 → 4/4 | 97/102 → 3/3 | 45/52 → TIP300_8B | one reading: every house the leaf marks. LEFT: houses the page calls starved that the leaf does not mark: in the 150 the war's iron (smelter ×2), a siege's timber, the spent open-cast mine (C93688); in the 720 two apothecaries whose herbs are "Needed, and not brought in" and one mill ("No grain reaches the mill": the audit's precision draw judged a toll mill's line WEAK). BAR6-MARKS's facts (a), (b), (e): they clear through `rowMarkText` when its leaf lands; no line of mine to change |
+| 8b.person | the card's "How they deal" (`presentation.behaviour`, drawn by trade, `npcComponents.jsx`) printed bare; the house's mark (`crisisStoppedRow.js :: rowMarkText`) on the Institutions and Services tabs | READ, not made: the card takes its house's `rowMarkText` before a line that offers the trade (`npcComponents.jsx :: dealingShown`, at print) | 23/27 → 4/4 | 97/102 → 3/3 | 45/52 → 4/4 | one reading: every house the leaf marks. LEFT: houses the page calls starved that the leaf does not mark: in the 150 the war's iron (smelter ×2), a siege's timber, the spent open-cast mine (C93688); in the fresh 300 the war's iron (smelter ×3) and a brewery under a siege's iron; in the 720 two apothecaries whose herbs are "Needed, and not brought in" and one mill ("No grain reaches the mill": the audit's precision draw judged a toll mill's line WEAK). BAR6-MARKS's facts (a), (b), (e): they clear through `rowMarkText` when its leaf lands; no line of mine to change |
 | 10a | `allegiance.js :: dealAllegiances` (A2) deals before `castPowers.js :: rankPowers` (A3) seats the head | NO NEW FACT: the ranks, read after they land: an allegiance still to be handled whose power the card heads (rank 1) is withdrawn (`assignHandlers`) | 1/3 → 0 | 0 → 0 | 1/3 → 0 | one change |
-| 10c | `faceHonorifics.js` pools (the inland harbour master's "Wharfinger"); the roster's titles | the pool's forms that name ANOTHER registry office are refused at the pick (`ownOfficeForms`, read by `honorificOfTitle`); a looser name of the own office stands | 7/14 → 0 | 36/72 → 0 | 11/22 → TIP300_10C | one change (Wharfinger; and "Master Tanner" for the tanner beside the master tanner's office) |
-| 10d-seat | the tie line "<s> has asked for a seat on the council" (`npcData.js :: gov_econ_dependence.tension#3`); the pair's memberships | NEW ATOM `seat held` (pair; `src/domain/facts/seatHeld.js :: pairSeatHeld`), declared `excludes` on the line | 2/2 → 0 | 6/6 → 0 | 2/2 → TIP300_10DS | one declaration |
+| 10c | `faceHonorifics.js` pools (the inland harbour master's "Wharfinger"); the roster's titles | the pool's forms that name ANOTHER registry office are refused at the pick (`ownOfficeForms`, read by `honorificOfTitle`); a looser name of the own office stands | 7/14 → 0 | 36/72 → 0 | 11/22 → 0 (the render read 1/2: "Postmaster" for the post's master beside the postmaster, bar0-town-calm-rand-123; cured by refusing the possessive fold, that town re-rendered: 0) | one change (refused forms: the inland harbour master's Wharfinger, the tanner's Master Tanner, the post's master's Postmaster, the guild's master's Guildmaster: each keeps its own office's words) |
+| 10d-seat | the tie line "<s> has asked for a seat on the council" (`npcData.js :: gov_econ_dependence.tension#3`); the pair's memberships | NEW ATOM `seat held` (pair; `src/domain/facts/seatHeld.js :: pairSeatHeld`), declared `excludes` on the line | 2/2 → 0 | 6/6 → 0 | 2/2 → 0 | one declaration |
 | 10d-purse | "has borrowed every year since" (`gov_econ_dependence.desc#3`); the economy desk's yearly surplus (DS-ECO-8) | none: `drawTies` is not handed the economy (its caller is `narrativeGenerator.js`, not mine): the line is REWORDED to claim no yearly borrowing ("has never cleared the debt") | 1/1 → 0 | 2/2 → 0 | 0 → 0 | line by line (one line) |
-| 10e-temper (with -honest) | the temperament (`npcGenerator.js`, drawn first); the secret (three pools, drawn after) | `npcData.js :: SECRETS_DENIED_BY_TEMPERAMENT` beside `FLAWS_DENIED_BY_TEMPERAMENT`; THE TEMPERAMENT YIELDS to its secret, as it yields to the flaw (ruling P7a's form), once over the whole cast at `rankPowers`' head (`temperamentYieldsToSecret`) | 4/4 + 4/4 → 0 | 15/15 + 11/11 → 0 | 12/13 + 8/8 → TIP300_10E | one change |
+| 10e-temper (with -honest) | the temperament (`npcGenerator.js`, drawn first); the secret (three pools, drawn after) | `npcData.js :: SECRETS_DENIED_BY_TEMPERAMENT` beside `FLAWS_DENIED_BY_TEMPERAMENT`; THE TEMPERAMENT YIELDS to its secret, as it yields to the flaw (ruling P7a's form), once over the whole cast at `rankPowers`' head (`temperamentYieldsToSecret`) | 4/4 + 4/4 → 0 | 15/15 + 11/11 → 0 | 12/13 + 8/8 → 0 | one change |
 | 10e-house | the watch sergeant's "draws pay for names that never walk it" (`titleSecretsPresentations.js`); the village watch card's "Nobody is paid" | NEW ATOM `paid watch` (`guardPay.js :: paidWatchOf`, over `watchIsUnpaidRota`), declared `needs` on the secret (`TITLE_LINE_DECLARATIONS.secret`) | 2/2 → 0 | 0 → 0 | 0 → 0 | one declaration |
 
 NAMED EXCLUSIONS: none (no detector excludes anything for me). Every STANDS control of my rules in the wide read's 221 is GONE
@@ -63,7 +63,7 @@ SAME, BAR6-MARKS's fact (b): its leaf does not mark that mine; my card will read
 2. THE TIE LINE REWORDED (`npcData.js`, gov_econ_dependence.desc#3): "<r>'s treasury borrowed from <s> to cover a bad harvest and
    has never cleared the debt. The interest is paid before the wages.": bar0-town-calm-rand-29, bar0-metropolis-calm-rand-37, and
    r2s-wartime-metropolis-0 (wartime; the census's 720).
-3. THE INLAND HARBOUR MASTER IS A DOCKMASTER ONLY; THE TANNER A TANNER (`faceHonorifics.js :: ownOfficeForms`): bar0-town-calm-rand-27,
+3. THE INLAND HARBOUR MASTER IS A DOCKMASTER ONLY; THE TANNER A TANNER; THE POST'S MASTER "MASTER OF THE POST"; THE GUILD'S MASTER "MASTER OF THE GUILD" (`faceHonorifics.js :: ownOfficeForms`; bar0-town-calm-rand-123 for the post): bar0-town-calm-rand-27,
    bar0-metropolis-calm-rand-27, bar0-town-occupied-rand-40 (occupied; C196525's town).
 4. THE TEMPERAMENT YIELDS TO ITS SECRET (`npcData.js :: SECRETS_DENIED_BY_TEMPERAMENT`): incorruptible → warm-hearted in
    bar0-city-under_siege+famine-rand-38 (C31450); honest → brave in bar0-village-calm-rand-28; plain-dealing → hospitable in
@@ -81,7 +81,36 @@ SAME, BAR6-MARKS's fact (b): its leaf does not mark that mine; my card will read
 
 ## THE BOOKS MY CURES MOVE (red at my tip; each also red at afa46d644, so the close's)
 
-NET_TABLE
+THE NET (each run to a file through `scripts/gate-tail.sh`): BRIEF-BAR2's seventeen law suites, BRIEF-BAR3's three, BRIEF-BAR4's
+amendment-2 list, BRIEF-BAR5's four, the three walkers of the corpus (negative anchors, seed loops, drawn anchors), the
+mutation manifest, the BAR5 guards (`tests/domain/bar5*`, `tests/generators/bar5*`), `tests/architecture` (the chair's EG1:
+21 files, 347 tests, green), the test files that pin a symbol I changed, and my guard: 86 files, 1,520 tests at the tip.
+AT afa46d644 THE SAME LIST (my guard aside) READS 47 RED TESTS IN 15 FILES; AT THE TIP THE SAME 47, BY IDENTITY, AND NO OTHER
+(a 48th, `faceHonorifics.test.js`'s inland anchor, was mine: re-anchored on the form the pick keeps, with a dated note, green).
+Every red at the tip is red at the base: stored figures, the close's, not chased:
+
+| file (red at base and at tip) | tests |
+|---|---|
+| `tests/data/tailHouses1Gaps.test.js` | 1 |
+| `tests/generators/generationForkCensus.test.js` | 3 |
+| `tests/generators/pipelinePinnedMode.test.js` | 3 |
+| `tests/generators/tieProseDeclared.test.js` | 2 |
+| `tests/lint/factLayers.walker.test.js` | 2 |
+| `tests/lint/mutationCoverageManifest.test.js` | 1 |
+| `tests/lint/observedShapeReaders.walker.test.js` | 4 |
+| `tests/lint/presumedThings.walker.test.js` | 2 |
+| `tests/lint/proseComposed.walker.test.js` | 2 |
+| `tests/lint/proseCorpusBytes.test.js` | 2 |
+| `tests/lint/proseEntryContradiction.walker.test.js` | 4 |
+| `tests/lint/proseTasteCorruption.walker.test.js` | 1 |
+| `tests/lint/proseWiringCensus.walker.test.js` | 13 |
+| `tests/lint/tuningRegister.walker.test.js` | 1 |
+| `tests/lint/writerReach.walker.test.js` | 6 |
+
+Of these, my cures also MOVE (named, not re-taken): `tieProseDeclared` (my five rows spelled in its ledger; its count 44 is the
+close's, the ledger already seven rows stale at the base); `factLayers.walker` (the register: `paidWatch`, `seatHeld`, and
+sovereign's by XA1); `generationForkCensus` and `pipelinePinnedMode` (golden-derived). `typecheck:domain:strict` (1113, ceiling
+1113), `typecheck:ratchet` (167, ceiling 167) and `eslint` on my 14 changed files: green.
 
 THE 525 REFERENCE CONFIGURATIONS: **7 of 525 move against afa46d644**: `relationships` (6), `prominentRelationship` (5),
 `npcs[].personality` (1) (hashed by field family at base and at tip, `generateSettlementPipeline` as the golden master births
