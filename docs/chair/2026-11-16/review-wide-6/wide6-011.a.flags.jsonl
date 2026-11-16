@@ -1,0 +1,7 @@
+{"id":"C27985","town":"bar0-city-under_siege+famine-rand-37","sev":"LOW","kind":"STATE","why":"Summary 'rasp of a saw, fresh-cut wood' workshop-yard scene unmarked under siege+famine; LAND gives Managed Woodland depleted, Bowyer impaired","other":"C27984"}
+{"id":"C28567","town":"bar0-city-under_siege+famine-rand-37","sev":"LOW","kind":"BROKEN","why":"'its herds comes first': plural subject 'herds' with singular verb 'comes'","other":""}
+{"id":"C28629","town":"bar0-city-under_siege+famine-rand-37","sev":"LOW","kind":"STATE","why":"Adventuring & Escort 'Operational', output 'Armed escort' unmarked; header siege: nothing leaves by road; Mercenary hire/escort rows marked (stopped)","other":"C28369"}
+{"id":"C28848","town":"bar0-city-under_siege+famine-rand-37","sev":"MED","kind":"PAIR","why":"Defense 'Offenders arrested, heard and held... a hearing, not a beating' against Foundations 'Law & order · Collapsed' and 'Internal Security Critical' bar","other":"C28094"}
+{"id":"C28829","town":"bar0-city-under_siege+famine-rand-37","sev":"LOW","kind":"PAIR","why":"'A functioning court and prison mean crimes carry real consequences' against 'Law & order · Collapsed', Corrupt Council 'decisions are bought'","other":"C28094"}
+{"id":"C29013","town":"bar0-city-under_siege+famine-rand-37","sev":"LOW","kind":"PAIR","why":"Hildegard Zimmermann 'Temperament: incorruptible' against her own secret of selling hoarded grain at triple the official price after dark","other":"C29020"}
+{"id":"DONE","lines":1617,"blocks":1,"flags":6}
