@@ -67,7 +67,7 @@ export const KILN_KINDS = Object.freeze({
  * BAR6-SCENES (LAW 6 rule 6b): the goods a scene shows, each with the houses that make it (`houses`, the picker's
  * word-start rule), the words the economy's lists name it by (`listed`), and whether a good bought in counts
  * (`imported`, while no siege holds the road). A good with no `listed` words is read from its houses alone.
- * @type {Readonly<Record<string, Readonly<{ houses: ReadonlyArray<string>, listed?: RegExp, imported?: boolean, chains?: RegExp }>>>}
+ * @type {Readonly<Record<string, Readonly<{ houses: ReadonlyArray<string>, listed?: RegExp, imported?: boolean, fromChains?: boolean }>>>}
  */
 export const GOOD_TRADES = Object.freeze({
   // the butter churn: a house that keeps milk animals, or a dairy good made or sold (not "Common grazing land")
@@ -83,7 +83,7 @@ export const GOOD_TRADES = Object.freeze({
   // chisels on stone: the stone's cutters (a mine digs; it does not dress stone)
   'cut stone': Object.freeze({ houses: Object.freeze(['quarry', 'stone quarry', 'mason', 'stonecutter']) }),
   // enchanting sold: a working chain whose outputs name it, or an export that does (the page's own flows)
-  enchanting: Object.freeze({ houses: Object.freeze([]), listed: /\benchant/i, chains: /\benchant/i }),
+  enchanting: Object.freeze({ houses: Object.freeze([]), listed: /\benchant/i, fromChains: true }),
 });
 
 /** A word at a word start of a name (the picker's rule). @param {string} word @param {string} name */
@@ -97,7 +97,7 @@ const itemText = (x) => (typeof x === 'string' ? x : String(/** @type {{ name?: 
 
 /**
  * BAR6-SCENES: a good of `GOOD_TRADES` at work (see the header).
- * @param {object} record @param {Readonly<{ houses: ReadonlyArray<string>, listed?: RegExp, imported?: boolean, chains?: RegExp }>} good
+ * @param {object} record @param {Readonly<{ houses: ReadonlyArray<string>, listed?: RegExp, imported?: boolean, fromChains?: boolean }>} good
  * @returns {boolean}
  */
 function goodAtWork(record, good) {
@@ -113,11 +113,10 @@ function goodAtWork(record, good) {
   const listed = good.listed;
   if (listed && [...arr(r?.economicState?.localProduction), ...arr(canonExports(/** @type {Parameters<typeof canonExports>[0]} */ (record)))].some((x) => listed.test(itemText(x)))) return true;
   if (listed && good.imported && !crisisOf(record).has('under_siege') && arr(canonImports(/** @type {Parameters<typeof canonImports>[0]} */ (record))).some((x) => listed.test(itemText(x)))) return true;
-  const chains = good.chains;
-  if (chains) {
+  if (listed && good.fromChains) {
     return arr(r?.economicState?.activeChains).some((c) => {
       const chain = /** @type {{ status?: unknown, outputs?: unknown }} */ (c);
-      return WORKING_CHAIN_STATUSES.includes(String(chain?.status)) && arr(chain?.outputs).some((o) => chains.test(itemText(o)));
+      return WORKING_CHAIN_STATUSES.includes(String(chain?.status)) && arr(chain?.outputs).some((o) => listed.test(itemText(o)));
     });
   }
   return false;
