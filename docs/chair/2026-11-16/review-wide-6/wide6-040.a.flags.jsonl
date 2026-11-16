@@ -1,0 +1,5 @@
+{"id":"C99086","town":"bar0-metropolis-calm-rand-27","sev":"LOW","kind":"BROKEN","why":"Imports line lists 'Precious metal veins' (a resource label, LAND: absent) as an imported good; TRADE record says 'Precious metals'","other":""}
+{"id":"C99619","town":"bar0-metropolis-calm-rand-27","sev":"MED","kind":"PAIR","why":"Defense tab says 'food trades are failing'; but Food Security 'Secure', FOOD failed source None, 15 months stored, 'What is grown here and brought in covers each day's food'","other":"C97742"}
+{"id":"C99088","town":"bar0-metropolis-calm-rand-27","sev":"LOW","kind":"PAIR","why":"Economics: grapes 'needed, and not brought in' and vintner's work 'stands idle' when none comes; Services print Vintner's Table wine and Wine wholesale on offer with no mark","other":"C98760"}
+{"id":"C99103","town":"bar0-metropolis-calm-rand-27","sev":"LOW","kind":"BROKEN","why":"Filter chip 'Entrepôt (11)' but only six flows under it read Entrepôt (Smuggling, Salt, Spices, Storage, Wine, River Toll)","other":""}
+{"id":"DONE","lines":3718,"blocks":1,"flags":4}
