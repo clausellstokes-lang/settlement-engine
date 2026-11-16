@@ -99,3 +99,111 @@ export function guardLineUnderTheLaw(text, record) {
   for (const f of framed) out = out.replace(f.frame, f.twin);
   return out;
 }
+
+// ─── BAR6-CRIME (BRIEF-BAR6 (a) (c) (d) (h); LAW 9's 9a.structure, 9a.contested, 9a.watch, 9a.militia, 9a.pay; LAW 6's 6d-paid;
+// vetoable by the owner): the safety lines read the town's FINAL crime and force where they print. At the END: no line above
+// moves. Each reader leaves the stored line as drawn (a DM's own line is the caller's to keep: `defenseDisplay.js`). ───
+import { criminalStructureKeyOf } from '../facts/criminalStructureKey.js';
+import { crimeWaveCoordinated } from '../facts/lawBand.js';
+import { orderForceOf } from '../facts/orderForce.js';
+import { rowMarkText } from './crisisStoppedRow.js';
+import { lineText } from '../facts/drawDeclared.js';
+
+/** The foothold clause the safety profile's Safe line draws (`safetyLineTruth.js :: footholdWord`). */
+const FOOTHOLD = /organized crime has (a limited foothold|found no foothold)\./;
+/** (a): the clause each crime key makes true (`criminalStructureKeyOf`, the key the Defense tab prints). */
+const FOOTHOLD_BY_KEY = Object.freeze({
+  organized: 'organized crime answers to one ring.',
+  'semi-organized': 'organized crime has a limited foothold.',
+  diffuse: 'organized crime has found no foothold.',
+  none: 'organized crime has found no foothold.',
+});
+/** (c), the chair's HK1: beside the hook "The crime wave is coordinated", no line says nobody runs the crime: it speaks of appearances. */
+const FOOTHOLD_COORDINATED = 'organized crime seems to have found no foothold, though someone may be directing the trouble.';
+
+/** (d): the Safe line's "is present and responsive" for a militia alone (C199950: "musters when needed but cannot maintain consistent patrol"). */
+const MILITIA_PRESENT = /The militia is present and responsive\./;
+export const MILITIA_TURNS_OUT = lineText({ text: 'The militia turns out when called, but it keeps no regular patrol.', needs: ['militia'] });
+
+/**
+ * THE SAFETY LINE AS PRINTED (`safetyProfile.safetyDesc`, the Defense tab's public-order paragraph): the foothold clause
+ * reads the crime structure's key and, where the crime wave is coordinated, speaks of appearances (HK1); a militia alone is
+ * not "present and responsive" to routine crime.
+ * @param {string} text the stored line @param {unknown} record the settlement @returns {string}
+ */
+export function safetyLineAsPrinted(text, record) {
+  let out = String(text ?? '');
+  const m = FOOTHOLD.exec(out);
+  if (m) {
+    const key = criminalStructureKeyOf(/** @type {never} */ (record)) ?? 'none';
+    const clause = key !== 'organized' && key !== 'semi-organized' && crimeWaveCoordinated(record) ? FOOTHOLD_COORDINATED
+      : FOOTHOLD_BY_KEY[/** @type {keyof typeof FOOTHOLD_BY_KEY} */ (key)] ?? m[0];
+    out = out.replace(m[0], clause);
+  }
+  // the force's one reading (`orderForce.js`), not a word of the line, decides; a line without the claim is left as it is
+  const f = orderForceOf(record);
+  if (f.count.militia > 0 && f.count.garrison === 0 && f.count.watch === 0) out = out.replace(MILITIA_PRESENT, MILITIA_TURNS_OUT);
+  return out;
+}
+
+/** The diffuse structure's note (`defenseDisplay.js :: CRIM_STRUCTURE_DATA.diffuse`) and its twin beside a coordinated wave (HK1). */
+export const DIFFUSE_NOTE_COORDINATED = 'Thieves, fences and bandits each seem to work for themselves; if there is a boss behind them, nobody has found one.';
+
+/**
+ * (c) HK1: the diffuse note where the crime-wave hook "is coordinated" stands. @param {string} note @param {unknown} record @returns {string}
+ */
+export function diffuseNoteAsPrinted(note, record) {
+  return crimeWaveCoordinated(record) ? DIFFUSE_NOTE_COORDINATED : note;
+}
+
+/** (d) "exists on paper" with the pay or kit clause `paperTruth`, `rotaTruth` and `payTruth` may leave after it. */
+const PAPER = /^The (.+?) exists? on paper\.(?: (Chronically underpaid and poorly equipped|Unpaid|Paid, but poorly equipped|Poorly equipped)(: these are volunteers with day jobs, not soldiers)?\.)?/;
+/** (h) the well-paid claims (`payTruth`, `patrolTwin(…, true)`, `PAID_IN_FULL`) and each one's twin where the pay is being cut. */
+const PAY_CUT_TWINS = Object.freeze([
+  [/^The (.+?) (is|are) well paid, well equipped and (patrols?) properly\./, (/** @type {string[]} */ g) => `The ${g[1]} ${g[2]} well equipped and ${g[3]} properly, though the pay for keeping order is being cut.`],
+  [/^The (.+?) (is|are) well paid and well equipped, but /, (/** @type {string[]} */ g) => `The ${g[1]} ${g[2]} well equipped, though short of pay, and `],
+  [/^The (.+?) (is|are) disciplined, paid in full and properly equipped\./, (/** @type {string[]} */ g) => `The ${g[1]} ${g[2]} disciplined and properly equipped, though the pay for keeping order is being cut.`],
+]);
+
+/**
+ * THE GUARD LINE READS THE FORCE THAT KEEPS ORDER (`facts/orderForce.js`): "exists on paper" only where every house of the
+ * force carries a mark on the page (the card of a force that works prints none: C200637 C187260); a well-paid claim gives way
+ * where a person under arms says the pay of those keeping order is cut (C51048).
+ * @param {string} text @param {unknown} record @returns {string}
+ */
+export function guardLineUnderTheForce(text, record) {
+  let out = String(text ?? '');
+  const p = PAPER.exec(out);
+  if (p) {
+    const f = orderForceOf(record);
+    const working = f.houses.some((h) => !rowMarkText(/** @type {never} */ (record), 'house', /** @type {never} */ (h)));
+    if (f.kept && working) {
+      const many = / and /.test(p[1]);
+      const kit = p[2] ? `${/ and |,/.test(p[2]) ? ',' : ' and'} ${p[2].charAt(0).toLowerCase()}${p[2].slice(1)}` : '';
+      out = `The ${p[1]} ${many ? 'are' : 'is'} thinly kept${kit}${p[3] || ''}.${out.slice(p[0].length)}`;
+    }
+  }
+  if (orderForceOf(record).payCut) {
+    for (const [re, to] of PAY_CUT_TWINS) {
+      const g = /** @type {RegExp} */ (re).exec(out);
+      if (g) { out = /** @type {(g: string[]) => string} */ (to)(g) + out.slice(g[0].length); break; }
+    }
+  }
+  return out;
+}
+
+/** (d) 6d-paid: the funded reason (`structuralValidator.js :: FUNDED_EMBATTLED`) and its twins where nobody of the force is paid. */
+export const FUNDED_EMBATTLED_SHOWN = 'Embattled region. Fortification and forces are present and paid, but the pressure on them never lets up.';
+export const FUNDED_EMBATTLED_VOLUNTEERS = 'Embattled region. Fortification is kept and volunteers turn out, but the pressure on them never lets up.';
+export const FUNDED_EMBATTLED_NO_FORCE = 'Embattled region. Fortification is kept in repair, but the pressure on it never lets up.';
+
+/**
+ * A defence vulnerability's reason as printed: "forces are present and paid" only where a paid force stands.
+ * @param {string} reason @param {unknown} record @returns {string}
+ */
+export function fundingReasonAsPrinted(reason, record) {
+  if (!String(reason).startsWith(FUNDED_EMBATTLED_SHOWN)) return reason;
+  const f = orderForceOf(record);
+  if (f.paid) return reason;
+  return (f.kept ? FUNDED_EMBATTLED_VOLUNTEERS : FUNDED_EMBATTLED_NO_FORCE) + String(reason).slice(FUNDED_EMBATTLED_SHOWN.length);
+}

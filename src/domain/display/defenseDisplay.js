@@ -123,7 +123,10 @@ export function deriveDefenseVulnerabilities(settlement) {
   return rows.filter((row) => (
     typeof row?.reason === 'string'
     && DEFENSE_VULNERABILITY_RE.test(row.reason)
-  ));
+  )).map((row) => { // BAR6-CRIME (6d-paid, C203044): "forces are present and paid" reads the force that keeps order
+    const reason = fundingReasonAsPrinted(String(row.reason), settlement);
+    return reason === row.reason ? row : { ...row, reason };
+  });
 }
 
 // scoreColor + scoreBand moved to display/defenseScoreBands.js (R-5b item #20)
@@ -195,7 +198,7 @@ const CRIM_STRUCTURE_DATA = Object.freeze({
 export function deriveCriminalStructure(settlement) {
   const r = settlement || {};
   const key = criminalStructureKeyOf(r); // TAIL-TIES-9 (T28): the key's ladder (and its reasons) lives in the crime fact's leaf
-  return key ? ringNoteUnderStreetFighting(headedPowerAmongRivals(ringNoteAmongRivalGangs(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r), r), r) : null; // TAIL-DEFECON-D: no ring the record names; BAR3-DEFECON-2 (T28b): nor one ring among rival gangs
+  return key ? ringNoteUnderStreetFighting(diffuseUnderCoordinatedWave(headedPowerAmongRivals(ringNoteAmongRivalGangs(ringWithoutSeat(withRingVantage(CRIM_STRUCTURE_DATA[key], r), r), r), r), r), r) : null; // TAIL-DEFECON-D: no ring the record names; BAR3-DEFECON-2 (T28b): nor one ring among rival gangs
 }
 
 export { runningCriminalChains } from '../facts/criminalStructureKey.js'; // TAIL-TIES-9 (T28): moved verbatim to the crime fact's leaf
@@ -643,11 +646,13 @@ import { hashKey } from './stateProse/stateProseKernel.js';
  * W2-C-LEAVES-9 (the chair's ruling of 2026-11-14 05:28 (1)): the second vantage says "the streets", a size word a thorp or
  * a hamlet makes false (`registeredWords.js :: streets`), so it DECLARES the tier where it is true; `withRingVantage`
  * hands the drawn vantage to the list door and, where it is refused, prints the table's own note.
- * @type {ReadonlyArray<string | { text: string, needs: string[] }>}
+ * @type {ReadonlyArray<string | { text: string, needs: string[], excludes?: string[] }>}
  */
 const ORGANIZED_RING_NOTES = Object.freeze([
   CRIM_STRUCTURE_DATA.organized.note,
-  { text: 'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.', needs: ['tier: ≥ village'] },
+  // BAR6-CRIME (9a.wave, BRIEF-BAR6 (b); C43177): "keeps the streets quiet" presumes no crime wave (`crime wave`, the one
+  // reading `facts/lawBand.js :: crimeWaveStands`); refused, the table's own note prints (no roll moves)
+  { text: 'Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.', needs: ['tier: ≥ village'], excludes: ['crime wave'] },
   'Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are known and can be negotiated.',
   'Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down any violence that would bring the law; it lives on protection money and on any official it can bribe.',
 ]);
@@ -939,7 +944,7 @@ function ringNoteAmongRivalGangs(row, settlement) {
 }
 
 // ── BAR5-SAFETY (LAW 2's L2.law.collapsed, the audit's C42116; vetoable by the owner) ── at the END: no line above moves.
-import { guardLineUnderTheLaw } from './guardLineUnderTheLaw.js';
+import { diffuseNoteAsPrinted, fundingReasonAsPrinted, guardLineUnderTheForce, guardLineUnderTheLaw, safetyLineAsPrinted } from './guardLineUnderTheLaw.js'; // BAR6-CRIME: the four readers after the first
 import { isEdited } from '../userEdits.js';
 /**
  * The guard assessment as printed: a line that says how a wrong is answered reads the law's band the page prints
@@ -947,5 +952,45 @@ import { isEdited } from '../userEdits.js';
  * @param {string} text @param {unknown} settlement @returns {string}
  */
 function guardLineAsPrinted(text, settlement) {
-  return isEdited(/** @type {never} */ (settlement), 'economicState.safetyProfile.guardEffectivenessDesc') ? text : guardLineUnderTheLaw(text, settlement);
+  return isEdited(/** @type {never} */ (settlement), 'economicState.safetyProfile.guardEffectivenessDesc') ? text : guardLineUnderTheForce(guardLineUnderTheLaw(text, settlement), settlement); // BAR6-CRIME (d) (h): the force that keeps order
+}
+
+// ── BAR6-CRIME (BRIEF-BAR6 (a) (c) (d); vetoable by the owner) ── at the END: no line above moves.
+/**
+ * THE SAFETY LINE AS PRINTED (the Defense tab's public-order paragraph, `safetyProfile.safetyDesc`): its foothold clause and
+ * its force read the finished record (`guardLineUnderTheLaw.js :: safetyLineAsPrinted`); a DM's own line is returned as written.
+ * @param {DefenseDisplaySettlement | null | undefined} settlement @returns {string | null}
+ */
+export function deriveSafetyLine(settlement) {
+  const value = /** @type {{ safetyDesc?: unknown } | undefined} */ (settlement?.economicState?.safetyProfile)?.safetyDesc;
+  if (typeof value !== 'string' || !value) return null;
+  return isEdited(/** @type {never} */ (settlement), 'economicState.safetyProfile.safetyDesc') ? value : safetyLineAsPrinted(value, settlement);
+}
+/**
+ * (f) LAW 8's 8e.crime (C8633): AN OPERATION THE DEFENSE BLOCK LISTS READS ITS HOUSE'S MARK. The block lists the safety
+ * profile's operations by name (`safetyProfile.criminalInstitutions`); the same house's card on the Institutions tab prints
+ * "Stopped by the siege." The mark is the card's own (`crisisStoppedRow.js :: rowMarkText`, the one reading of a house's
+ * marks), read off the operation's house on the live roster by name; null where the house takes none or none stands.
+ * Read by the Defense tab; the printed export's list (`pdf/sections`) is named to read it too.
+ * @param {DefenseDisplaySettlement | null | undefined} settlement @param {unknown} name the operation as listed
+ * @returns {string | null}
+ */
+export function criminalOpMark(settlement, name) {
+  const key = String(name ?? '').trim().toLowerCase();
+  if (!key) return null;
+  const house = /** @type {Array<Record<string, unknown>>} */ (liveInstitutions(/** @type {never} */ (settlement)) || [])
+    .find((h) => String(h?.name ?? '').trim().toLowerCase() === key);
+  return house ? rowMarkText(/** @type {never} */ (settlement), 'house', /** @type {never} */ (house)) : null;
+}
+import { rowMarkText } from './crisisStoppedRow.js';
+
+/**
+ * (c) the chair's HK1: the diffuse note beside the hook "The crime wave is coordinated" speaks of appearances.
+ * @param {{ key: string, label: string, color: string, bg: string, note: string }} row @param {DefenseDisplaySettlement} settlement
+ * @returns {{ key: string, label: string, color: string, bg: string, note: string }}
+ */
+function diffuseUnderCoordinatedWave(row, settlement) {
+  if (row.key !== 'diffuse') return row;
+  const note = diffuseNoteAsPrinted(row.note, settlement);
+  return note === row.note ? row : Object.freeze({ ...row, note });
 }

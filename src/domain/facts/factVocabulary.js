@@ -191,6 +191,9 @@ export const CRIME_WORDS = Object.freeze(['none', 'diffuse', 'semi-organized', '
  * (`causalState.js :: CAUSAL_BANDS`, reversed; read by `lawBand.js :: lawBandOf`). */
 export const LAW_ORDER_RUNGS = Object.freeze(['collapsed', 'critical', 'strained', 'adequate', 'surplus']);
 
+/** BAR6-CRIME (BRIEF-BAR6 (d) and B6; vetoable by the owner): the force that keeps order (`orderForce.js :: orderForceOf`). */
+export const ORDER_FORCE_WORDS = Object.freeze(['kept', 'paid', 'volunteers']);
+
 /** The prosperity ladder (`prosperityRank.js :: PROSPERITY_LABELS`, below it the generator's own bottom rung `Subsistence`), lower-cased. */
 export const PROSPERITY_WORDS = Object.freeze(['subsistence', 'struggling', 'poor', 'moderate', 'comfortable', 'prosperous', 'wealthy']);
 
@@ -226,6 +229,8 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
+ * @property {boolean} [crimeWave] BAR6-CRIME: `lawBand.js :: crimeWaveStands`
+ * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
  */
 /**
@@ -449,9 +454,20 @@ export const FACT_DIMENSIONS = Object.freeze({
   stores: dim({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
   prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
   crime: dim({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
+  // BAR6-CRIME (LAW 9's `9a.wave`, BRIEF-BAR6 (b) and B6; vetoable by the owner, on the veto list as new vocabulary): `crime
+  // wave` = the live tensions hold a crime wave (`lawBand.js :: crimeWaveStands`, the one reading). A line that says crime is
+  // kept down or the streets are quiet presumes its absence; every crime wave carries the hook "The crime wave is coordinated"
+  // (`lawBand.js :: crimeWaveCoordinated`), so a line that says nobody runs the crime excludes it too (the chair's HK1).
+  'crime wave': dim({ shape: 'presence', home: 'crimeWave', reader: (/** @type {FactsLike} */ f) => bool(f.crimeWave) }),
   // BAR5-SAFETY (LAW 2's `L2.law.collapsed`; amendment 5b; vetoable by the owner): `law: > collapsed` = the page's own
   // `Law & order` band (`lawBand.js`). A line that says how a wrong is answered presumes it above Collapsed.
   law: dim({ shape: 'band', home: 'lawBand', order: LAW_ORDER_RUNGS, reader: (/** @type {FactsLike} */ f) => f.lawBand }),
+  // BAR6-CRIME (BRIEF-BAR6 (d) and B6; vetoable by the owner, on the veto list as new vocabulary): `force: kept` = a garrison,
+  // a watch or a militia stands; `force: paid` = a garrison, a paid watch or a hired company stands; `force: volunteers` = a
+  // force is kept and nobody in it is paid (`orderForce.js :: orderForceOf`). "The law is present" presumes the first; "forces
+  // are present and paid" the second.
+  force: dim({ shape: 'presence', home: 'orderForce', keys: ORDER_FORCE_WORDS,
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.orderForce && typeof f.orderForce === 'object' && key ? bool(/** @type {Record<string, unknown>} */ (f.orderForce)[key]) : undefined) }),
   // ── the crisis dimension (the inverse default) ──
   crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
 });
