@@ -202,6 +202,18 @@ for (const h of hits) {
   byFile.set(k, v);
 }
 for (const h of hits) h.crisisUndeclared = !(h.crisisDeclared || h.status === 'row' || h.status === 'colour+row');
+// THE REVIEWED EXCLUSIONS (BRIEF-BAR5 L5: a line leaves the list by its declaration, its row's dependence, or a reviewed
+// reason HERE). Keyed by file and the line's opening words; each reason says why no crisis can make the line false.
+export const REVIEWED = Object.freeze([
+  { file: 'src/generators/safetyProfile.js', starts: '… Disputes are settled by whoever is stronger.', by: 'BAR5-SAFETY',
+    reason: 'the Lawlessness crime type: "disputes are settled by whoever is stronger" says the law FAILS; no crisis makes a lawless town lawful (the lexicon reads "disputes are settled" as order)' },
+  { file: 'src/generators/safetyProfile.js', starts: 'A pilgrim paid a fortune for a holy relic', by: 'BAR5-SAFETY',
+    reason: 'a plot hook (LAW 2 skips hooks: a hook states its own fact, the measure\'s rule 2); the pilgrim is in the town already, and a siege keeps them there' },
+]);
+for (const h of hits) {
+  const r = REVIEWED.find((x) => x.file === h.file && h.text.startsWith(x.starts));
+  if (r) { h.status = 'reviewed'; h.via = `reviewed (${r.by}): ${r.reason}`; h.crisisUndeclared = false; }
+}
 fs.writeFileSync(outPath, JSON.stringify(hits, null, 1));
 const tot = { n: 0, line: 0, lineCrisis: 0, row: 0, colour: 0, none: 0 };
 for (const v of byFile.values()) for (const k of Object.keys(tot)) tot[k] += v[k];

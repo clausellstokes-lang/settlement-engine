@@ -2770,9 +2770,10 @@ margin *arm*. They are different fields on different rows and both are kept;
 4. `[threshold · no crisis: occupied]` {settlement} has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
 
 **readiness `WEAK`** {crisis-scoped}
-1. `[ledger · crisis: any]` {settlement} could deal with a brawl or a thief, but the town could not hold off a raid.
+1. `[ledger · crisis: any · law: > collapsed]` {settlement} could deal with a brawl or a thief, but the town could not hold off a raid.
 2. `[visitor · walls · crisis: any · no crisis: threat, unrest]` Much of {settlement}'s perimeter has nobody on it, and the people who live there seem used to that.
 3. `[unfolding · crisis: any · no crisis: threat, unrest]` {settlement} would struggle to hold against anything more than a handful of raiders, and the people who live there know it.
+4. `[ledger · crisis: any · law: = collapsed]` {settlement} could not hold off a raid, and its brawls and thefts go unanswered as it is.
 
 **readiness `CRITICAL`** {crisis-scoped}
 1. `[ledger · crisis: any · no guardPresence]` {settlement} is all but undefended. Nothing in the town would stop a serious attack for long.
@@ -2915,8 +2916,8 @@ supplies the ancestry.
 9. `[street · watch · threat · crisis: any · no crisis: occupied · no mercenary]` With trouble at hand, {settlement}'s watch is all the town has to send, and there is no wall to send it to.
 
 **`Internal Security`: full legal chain (court AND prison)**
-1. `[ledger · colour]` Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.
-2. `[street · watch]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
+1. `[ledger · law: > collapsed]` Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.
+2. `[street · watch · law: > collapsed]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
 3. `[visitor · colour]` Bring a complaint at {settlement} and there is a court to hear it and a cell for whoever it finds against.
 
 **`Internal Security`: court without detention** {colour}

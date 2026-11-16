@@ -99,6 +99,7 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/domain/activeConditions.js', name: 'CONDITION_ARCHETYPE_SIBLINGS', kind: 'siblings' },
   { module: 'src/domain/crisis/crisisCast.js', name: 'CAST_REASON_SIBLINGS', kind: 'siblings' },
   { module: 'src/domain/crisis/crisisCast.js', name: 'CAST_CRISIS_SIBLINGS', kind: 'siblings' },
+  { module: 'src/domain/display/guardLineUnderTheLaw.js', name: 'GUARD_LAW_SIBLINGS', kind: 'siblings' }, // BAR5-SAFETY: the guard lines that say how a wrong is answered, read against the law's band the page prints
   { module: 'src/domain/hookEscalation.js', name: 'HOOK_ESCALATION_SIBLINGS', kind: 'siblings' },
   { module: 'src/domain/rulingPower.js', name: 'RULING_POWER_SIBLINGS', kind: 'siblings' },
   { module: 'src/domain/summary/settlementQuickGuide.js', name: 'QUICK_GUIDE_SIBLINGS', kind: 'siblings' },
