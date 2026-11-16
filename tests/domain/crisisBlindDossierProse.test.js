@@ -101,6 +101,7 @@ const BAND_FIELD = Object.freeze({
   food: (f, v) => ({ ...f, famine: { ...f.famine, band: v } }),
   prosperity: (f, v) => ({ ...f, prosperity: v }),
   crime: (f, v) => ({ ...f, crime: v }),
+  law: (f, v) => ({ ...f, lawBand: v }), // BAR5-SAFETY (2026-11-16): the `law` band (`lawBand.js`)
   stores: (f, v) => ({ ...f, storesMonths: v }),
 });
 const withInstitution = (f, kind, want) => {

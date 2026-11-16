@@ -62,4 +62,7 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   leadingSourceSpent: true,
   ownPlots: true,
   timberAtHand: true,
+  // BAR5-SAFETY (2026-11-16): the `law` band (`lawBand.js`, the Foundations row's `Law & order`) arrived after the double. A calm
+  // place's law stands in the row's middle rung, so a line declaring `law: > collapsed` is admitted and its Collapsed twin is not.
+  lawBand: 'adequate',
 });

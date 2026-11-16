@@ -6,7 +6,8 @@
  * (`defenseDisplay.js :: deriveGuardAssessment`). The one fact both read: `facts/lawBand.js :: lawBandOf`.
  *   (a) ZERO over the census's small towns (r2r- and r2s- thorps, hamlets and villages of the 720: the no-watch lines are
  *       drawn only there) and the read towns of REVIEW-BAR-5 that print the band Collapsed;
- *   (b) THE FACT IS THE ROW: `lawBandOf` equals the row's own reader on every birth of the sample;
+ *   (b) THE FACT IS THE ROW (the chair's ruling LB2): the row reads `lawBandOf`, and its band over the census's 720 is the
+ *       band it printed before the ruling, town by town;
  *   (c) A POSITIVE CONTROL from the read's real row C42116 (bar0-village-famine-rand-24): its STORED line (the draw is not
  *       moved) still fires the rule beside its band; the printed line does not; a DM's own line is printed as written;
  *   (d) KEEP: where the band is above Collapsed the drawn line prints as drawn.
@@ -18,7 +19,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { RULES } from '../helpers/pageLaws/law2.mjs';
 import { bandForVariable } from '../../src/domain/causalState.js';
-import { foundationBandShown } from '../../src/domain/display/foundationBandShown.js';
+import { crimeWaveStands, foundationBandShown } from '../../src/domain/display/foundationBandShown.js';
 import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
 import { lawBandOf } from '../../src/domain/facts/lawBand.js';
 import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
@@ -51,9 +52,25 @@ const CENSUS_SMALL = [
   ...SMALL.flatMap((size) => Array.from({ length: 60 }, (_, i) => `r2r-${size}-${i}`)),
   ...STRESSES.flatMap((st) => SMALL.flatMap((size) => [0, 1, 2, 3].map((i) => `r2s-${st}-${size}-${i}`))),
 ];
-/** The read towns of REVIEW-BAR-5 the audit found the rule in (its sixty: C42116 and its two siblings). */
-const READ = ['bar0-village-famine-rand-24', 'bar0-hamlet-calm-rand-21', 'bar0-hamlet-under_siege-rand-21'];
+/** The read towns of REVIEW-BAR-5 the audit found the rule in (its sixty: C42116 and its two siblings), and the wide read's
+ * four cities the chair named (18:20 UTC: "crimes carry real consequences", "arrested, heard and held" under Collapsed). */
+const READ = ['bar0-village-famine-rand-24', 'bar0-hamlet-calm-rand-21', 'bar0-hamlet-under_siege-rand-21',
+  'bar0-city-under_siege+famine-rand-30', 'bar0-city-under_siege+famine-rand-32', 'bar0-city-under_siege+famine-rand-36', 'bar0-city-under_siege+famine-rand-37'];
 const SAMPLE = [...CENSUS_SMALL, ...READ];
+/** The whole of the census's 720, for the row's band before and after the chair's ruling LB2. */
+const CENSUS_720 = [
+  ...[...SMALL, 'town', 'city', 'metropolis'].flatMap((size) => Array.from({ length: 60 }, (_, i) => `r2r-${size}-${i}`)),
+  ...STRESSES.flatMap((st) => [...SMALL, 'town', 'city', 'metropolis'].flatMap((size) => [0, 1, 2, 3].map((i) => `r2s-${st}-${size}-${i}`))),
+];
+/** The row's law band AS IT WAS before LB2 (`foundationBandShown.js` at 9b719d10b: the model's band under the crime-wave cap). */
+const RANK = Object.freeze({ collapsed: 0, critical: 1, strained: 2, adequate: 3, surplus: 4 });
+/** @param {any} t */
+const rowBefore = (t) => {
+  const band = /** @type {keyof typeof RANK} */ (bandForVariable(t, 'law_order'));
+  return crimeWaveStands(t) && RANK[band] > RANK.strained ? 'strained' : band;
+};
+/** Every declared original the printed guard line still holds (the table's own declarations, read against the row). @param {string} line */
+const declaredHeld = (line) => [...Object.keys(GUARD_LAW_SIBLINGS).filter((k) => line.includes(k)), ...GUARD_LAW_FRAMES.filter((f) => f.frame.test(line)).map((f) => String(f.frame))];
 
 /** THE AUDIT'S RULE, unchanged (`law2.mjs`). */
 const RULE = /** @type {{ reach: RegExp, claim: RegExp }} */ (RULES.find((r) => r.id === 'L2.law.collapsed'));
@@ -68,15 +85,26 @@ const instances = (row, line) => (RULE.reach.test(row) && typeof line === 'strin
 beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
 
 describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law band the page prints', () => {
-  test('(a) zero instances over the sample; (b) the fact is the row', () => {
+  test('(a) zero instances over the sample, by the audit\'s rule and by the table\'s own declarations', () => {
     const failures = collectSeedFailures(SAMPLE, (seed) => {
       const t = town(seed);
       const row = rowPrinted(t);
-      expect(`Law & order · ${String(lawBandOf(t)).replace(/^./, (c) => c.toUpperCase())}`, `${seed}: lawBandOf is the row`).toBe(row);
-      expect(instances(row, deriveGuardAssessment(t)), `${seed}`).toEqual([]);
+      const printed = deriveGuardAssessment(t);
+      expect(instances(row, printed), `${seed}`).toEqual([]);
+      if (row === 'Law & order · Collapsed') expect(declaredHeld(String(printed ?? '')), `${seed}: a declared original beside Collapsed`).toEqual([]);
     });
     expectNoSeedFailures(failures);
   }, 600_000);
+
+  test('(b) ruling LB2: the row reads the one home, and no row moves by it (the 720, town by town)', () => {
+    const failures = collectSeedFailures(CENSUS_720, (seed) => {
+      const t = town(seed);
+      const now = foundationBandShown(t, 'law_order', /** @type {string} */ (bandForVariable(t, 'law_order')));
+      expect(now, `${seed}: the row reads lawBandOf`).toBe(lawBandOf(t));
+      expect(now, `${seed}: the row's band as before`).toBe(rowBefore(t));
+    });
+    expectNoSeedFailures(failures);
+  }, 900_000);
 
   test('(c) the positive control: C42116, its stored line fires beside its row; the printed line is its twin', () => {
     const t = town('bar0-village-famine-rand-24');
