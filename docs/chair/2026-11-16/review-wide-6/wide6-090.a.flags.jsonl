@@ -1,0 +1,6 @@
+{"id":"C205262","town":"bar0-village-calm-rand-34","sev":"LOW","kind":"STATE","why":"Farmland 'Grain at harvest' on offer unmarked; LAND gives Extensive Grain Fields (depleted) and the Grain & Bread chain's resource depleted","other":""}
+{"id":"C205552","town":"bar0-village-calm-rand-34","sev":"MED","kind":"PAIR","why":"'nothing threatens it now that a wall would keep out' against header monsters frontier and the Defense tab's 'Beasts & Monsters: Critical' and 'anything that came at the village ... would get in'","other":"C205528"}
+{"id":"C205588","town":"bar0-village-calm-rand-34","sev":"MED","kind":"PAIR","why":"Magic tab's 'Reliance on magic: None' (FOOD by magic 0%) against 'the trade that makes its baked goods would yield less' if 'the help beyond ordinary work failed'","other":"C205582"}
+{"id":"C206170","town":"bar0-village-calm-rand-35","sev":"MED","kind":"LACKS","why":"'told which few streets to avoid' (and 'corners', 'areas') in a village of population 81 with no watch; a village of 81 cannot hold streets with bad quarters","other":""}
+{"id":"C206515","town":"bar0-village-calm-rand-36","sev":"LOW","kind":"STATE","why":"'the brewster' (the feminine of brewer) printed for Batu Kereit, who PEOPLE gives as (m)","other":""}
+{"id":"DONE","lines":1996,"blocks":3,"flags":5}
