@@ -176,6 +176,10 @@ export const LEAVES = Object.freeze({
   // BAR5-SAFETY (L2.law.collapsed; amendment 5b; vetoable by the owner): the law's band as the Foundations row prints it, read
   // off the finished record (`lawBand.js`); read where a line prints (the guard assessment's one reader), never at a draw.
   lawBand: home('lawBand', 4, ['activeConditions', 'config', 'defenseProfile', 'economicState.safetyProfile', 'history', 'institutions', 'powerStructure', 'stress', 'stressors']), // BAR5-BAND: the floor reads the crisis container (LB1 (b))
+  // BAR6-CRIME (BRIEF-BAR6 (b) (d)): the crime wave's one reading (`lawBand.js :: crimeWaveStands`, the live tensions) and the
+  // force that keeps order (`orderForce.js`: the live roster, the funded gate, the cast under arms); read where a line prints.
+  crimeWave: home('crimeWave', 4, ['history']),
+  orderForce: home('orderForce', 4, ['defenseProfile', 'institutions', 'npcs']),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
     note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '
@@ -190,8 +194,6 @@ export const LEAVES = Object.freeze({
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
   // BAR4-CORPUS-DEF (D1): a danger from outside on its way, a live external-threat tension of the history (`dangerComing.js`)
   dangerComing: home('dangerComing', 4, ['history']),
-  // BAR6-DEFDESK (9a.wave): a crime wave stands, the history's live tension (`crimeWave.js`)
-  crimeWave: home('crimeWave', 4, ['history']),
   // BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`: the config and the monster score)
   monsterFrontier: home('monsterFrontier', 3, ['config', 'defenseProfile']),
   // W2-A-LEAVES-2 (REVIEW-W2A F3): an official in a criminal's pay, the cast's own fact; the crime desk's lines

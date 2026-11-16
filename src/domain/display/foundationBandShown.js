@@ -30,14 +30,10 @@ function rows(v) {
 }
 
 /**
- * The town's live tensions hold a crime wave (`history.currentTensions`, the History tab's and the crisis panel's own
- * reading: "Crime is rising faster than those in charge can answer it").
- * @param {unknown} settlement @returns {boolean}
+ * The town's live tensions hold a crime wave: ONE exported reading, `facts/lawBand.js :: crimeWaveStands` (BAR6-CRIME (b)),
+ * re-exported here under the name its readers import.
  */
-export function crimeWaveStands(settlement) {
-  const t = /** @type {{ history?: { currentTensions?: unknown } | null } | null} */ (settlement)?.history?.currentTensions;
-  return rows(t).some((x) => x.type === 'crime_wave');
-}
+export { crimeWaveStands } from '../facts/lawBand.js';
 
 /**
  * A crisis in force whose own summary (the text the Summary prints) says conscription has taken the working hands.
@@ -100,4 +96,4 @@ export function tradeArrivesOnPage(settlement) {
     return tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement)).imports.length > 0;
   } catch { return false; }
 }
-import { lawBandOf } from '../facts/lawBand.js'; // BAR5-SAFETY (ruling LB2): at the END, no line above moves
+import { crimeWaveStands, lawBandOf } from '../facts/lawBand.js'; // BAR5-SAFETY (ruling LB2): at the END, no line above moves; BAR6-CRIME: the crime wave's one reading

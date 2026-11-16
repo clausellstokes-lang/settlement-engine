@@ -14,8 +14,8 @@
  *   (c) A POSITIVE CONTROL from the wide read's real rows (REVIEW-WIDE-6, SECOND-CHECK.final221): each cured line's marks AT
  *       afa46d644 (written here) still admit it in its own town, and the rule fires on it: the guard cannot go blind;
  *   (d) KEEP: each twin is admitted where its original is refused, so no cured pool is left mute in its town.
- *   (e) THE CHAIR'S RULING EG1: over the census's 720, `crimeWave.js :: crimeWaveOf` (the one reading, import-free) equals
- *       `foundationBandShown.js :: crimeWaveStands`, and `monsterFrontier.js`'s band arm (below `SCORE_BAND_CUTS.adequate`,
+ *   (e) THE CHAIR'S RULINGS EG1 and XA2: over the census's 720, the one reading (`lawBand.js :: crimeWaveStands`, BAR6-CRIME's,
+ *       eager-safe) equals what the display leaf answers (`foundationBandShown.js :: crimeWaveStands`), and `monsterFrontier.js`'s band arm (below `SCORE_BAND_CUTS.adequate`,
  *       zero-import) equals the band `defenseScoreBands.js :: scoreBand` prints.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
@@ -32,7 +32,7 @@ import { atomHolds, FACT_DIMENSIONS } from '../../src/domain/facts/factVocabular
 import { monsterFrontierOf } from '../../src/domain/facts/monsterFrontier.js';
 import { growsMoreThanEatsOf } from '../../src/domain/facts/growsMoreThanEats.js';
 import { crimeWaveStands } from '../../src/domain/display/foundationBandShown.js';
-import { crimeWaveOf } from '../../src/domain/facts/crimeWave.js';
+import { crimeWaveStands as crimeWaveOfLaw } from '../../src/domain/facts/lawBand.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { normalizeMonsterThreat } from '../../src/data/monsterThreat.js';
 import { lawBandOf } from '../../src/domain/facts/lawBand.js';
@@ -210,12 +210,12 @@ describe('BAR6-DEFDESK: the defence desk\'s lines declare what they presume', ()
     }
   }, 600_000);
 
-  test('(e) ruling EG1: the crime wave\'s one reading and the beasts\' band arm equal their page readings (the 720)', () => {
+  test('(e) rulings EG1, XA2: the crime wave\'s one reading and the beasts\' band arm equal their page readings (the 720)', () => {
     let waves = 0; let frontierWeak = 0;
     const failures = collectSeedFailures(CENSUS_720, (seed) => {
       const t = town(seed);
-      expect(crimeWaveOf(t), `${seed}: crimeWaveOf = crimeWaveStands`).toBe(crimeWaveStands(t));
-      if (crimeWaveOf(t)) waves += 1;
+      expect(crimeWaveOfLaw(t), `${seed}: the one reading = the display's`).toBe(crimeWaveStands(t));
+      if (crimeWaveOfLaw(t)) waves += 1;
       const raw = t?.config?.monsterThreat;
       const family = typeof raw === 'string' && raw ? normalizeMonsterThreat(raw) : null;
       const band = scoreBand(Number(t?.defenseProfile?.scores?.monster) || 0);
