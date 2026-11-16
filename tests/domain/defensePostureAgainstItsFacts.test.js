@@ -218,7 +218,15 @@ describe('no strong posture beside a guard that exists on paper', () => {
  * line's tip 976db5b19, 203 at bb2bf91c5 by L1). The strong pool is not drawn where the supply key reads short, read
  * from the same fact. RED-FIRST at 08acc23d4: the three towns below.
  */
-const SHORT = ['rr3-town-religious_conversion-rand-1', 'rr3-city-famine-rand-5', 'rr3-city-wartime-rand-1'];
+// BAR3-CLOSE-SWEEP-B (2026-11-16, letter b), RE-KEYED BY IDENTITY: BAR3-CORPUS batch 1 (cc469b762, C20202, declared)
+// rewords the supply line where the defence's chains are vulnerable only ("…runs short: the trades … are failing" ->
+// "…are not on a sure footing, so the defence is a little weaker…"), and rr3-city-famine-rand-5 (Fortress) and
+// rr3-city-wartime-rand-1 (Well-Defended) read that line now, so they no longer meet the premise. MEASURED at fb59da43e:
+// no town of the census's 720 (37 short, 107 strong) and none of 200 rr3 towns (town and city; famine, wartime,
+// religious_conversion, calm; 0..24) prints the strong pool beside a short Invasion row. They are replaced by the
+// nearest towns of the shape (a city whose badge would draw the strong pool and whose Invasion row goes short; no famine
+// town or city of those 200 goes short): rr3-city-calm-rand-11 (Fortress) and rr3-city-wartime-rand-4 (Well-Defended).
+const SHORT = ['rr3-town-religious_conversion-rand-1', 'rr3-city-calm-rand-11', 'rr3-city-wartime-rand-4'];
 const GOES_SHORT = /make do|the defenders go short|worse off|runs short/;
 describe('no strong posture beside a defence short of supply', () => {
   beforeAll(() => { for (const seed of SHORT) TOWNS[seed] = TOWNS[seed] || birth(seed); }, 300000);
