@@ -795,7 +795,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
  *
  * @template {{ safetyProfile?: { crimeTypes?: Array<{ type?: unknown, desc?: unknown }>, criminalInstitutions?: unknown[] } | null, activeChains?: Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null> } | null | undefined} E
  * @param {E} economicState
- * @param {Parameters<typeof crimeSignalOf>[0] & { tensions?: unknown }} lists the FINAL roster's seats and the estate; the
+ * @param {Parameters<typeof crimeSignalOf>[0] & { tensions?: unknown, services?: unknown }} lists the FINAL roster's seats and the estate; the
  *   record's live tensions (`history.currentTensions`, BAR3-DEFECON-2: a crime wave settles the kept-in-hand lines)
  * @returns {E}
  */
@@ -810,7 +810,8 @@ function settleCrimeLinesOnly(economicState, lists) {
   const present = crimeSignalOf(lists).present;
   const infrastructure = present
     || (Array.isArray(safetyProfile?.criminalInstitutions) && safetyProfile.criminalInstitutions.length > 0)
-    || runningCriminalChains({ economicState: { activeChains: economicState?.activeChains } }).length > 0;
+    || runningCriminalChains({ economicState: { activeChains: economicState?.activeChains } }).length > 0
+    || covertCrimeHeld({ economicState, availableServices: lists?.services }); // BAR4-SAFETY (F3, C46446; SF1 c): the key's own two readings
   const hunger = hungerIn(economicState) || crimes.some((entry) => entry?.type === 'desperation theft'); // UPKEEP-8 (#1173): "Hunger-driven" only where the record holds hunger (the famine's or siege's own entry is that record)
   const lineFor = { 'Survival crime': infrastructure ? (hunger ? DESPERATION_THEFT_DESC : THEFT_NETWORK_DESC) : SURVIVAL_NO_NETWORK_DESC,
     'debt evasion': present ? DEBT_EVASION_DESC : DEBT_EVASION_NO_NETWORK_DESC };
@@ -1067,7 +1068,7 @@ export function purseWordOfBand(band, standing) {
 /** @param {string} desc @param {Array<{ name?: string }>} institutions @param {unknown} prosperity
  * @param {{ forceScore?: unknown, tradeDependencies?: unknown, militaryGate?: unknown }} [read] the record's readings after the defence profile (BAR2-LABELS-2 LB4: `militaryGate`, `defenseProfile.economicGates.military`) @returns {string} */
 export function keptGuardLine(desc, institutions, prosperity, read = {}) {
-  const text = payTruth(patrolTruth(paperTruth(String(desc || ''), prosperity, read), read, STANDARD_PATROL), read.militaryGate); // UPKEEP-8 (#713 #1201, #459); BAR2-LABELS-2 LB4: the pay by the record's military gate
+  const text = payTruth(rotaTruth(patrolTruth(paperTruth(String(desc || ''), prosperity, read), read, STANDARD_PATROL), institutions), read.militaryGate); // BAR4-SAFETY (F1, C44796): an unpaid rota takes no wage; UPKEEP-8 (#713 #1201, #459); BAR2-LABELS-2 LB4: the pay by the record's military gate
   /** @type {Omit<import('../domain/facts/drawDeclared.js').DrawDeclaredOptions, 'draw'>} */
   const opts = {
     facts: () => factsOf({ institutions, economicState: { prosperity } }),
@@ -1107,7 +1108,7 @@ export function keptGuardLine(desc, institutions, prosperity, read = {}) {
 // ─── UPKEEP-8 (2026-11-13): the safety lines say only what the record holds (safetyLineTruth.js) ─────────────
 // At the END of the file, as the frames above, so no producer write moves.
 import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
-import { footholdWord, gatesSmugglersLine, GANG_HOUSES_OF, smugglingHookUnderSiege, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, payTruth, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines, SIEGE_NO_FORCE_ORDER } from './safetyLineTruth.js';
+import { footholdWord, gatesSmugglersLine, GANG_HOUSES_OF, smugglingHookUnderSiege, MERCHANT_ARMY_BESIDE, SMALL_PLACES, THEFT_NETWORK_DESC, TINY_PLACES, DESERTERS_FED, DESERTERS_FED_TINY, hungerIn, manyForce, NO_WATCH_OCCUPIED, paperTruth, patrolCrisisOf, patrolTruth, patrolTwin, payTruth, rotaTruth, covertCrimeHeld, RELIGIOUS_HOUSE, settleDesertersUnfed, settleRosterCrimeLines, SIEGE_NO_FORCE_ORDER } from './safetyLineTruth.js';
 
 /** The enforcement sentence the desperation-theft lines end on (UPKEEP-14, ruling (h)): dropped where no enforcer stands. */
 const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival crime from organised theft.';

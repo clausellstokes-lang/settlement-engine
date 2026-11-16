@@ -208,12 +208,15 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {(pair: unknown) => boolean|undefined} [sharesPower]
+ * @property {(pair: unknown) => boolean|undefined} [sharesPlace] BAR4-PEOPLE (TI1): `pairPlace.js :: pairSharesPlaceOf`
+ * @property {(pair: unknown) => boolean|undefined} [loneTie] BAR4-PEOPLE (TI1): `pairPlace.js :: pairIsLoneOf`
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand]
- * @property {boolean} [timberAtHand] @property {boolean} [enchanting]
- * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {ReadonlyArray<unknown>} [imports]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
+ * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting]
+ * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {boolean} [criminalIncome]
+ * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
  */
@@ -237,6 +240,8 @@ const bool = (v) => (typeof v === 'boolean' ? v : undefined);
  * @param {Dimension} d @returns {Readonly<Dimension>}
  */
 const dim = (d) => Object.freeze(d);
+/** BAR4-PEOPLE (TI1): a pair's fact the tie draw hands its lines (`people/ties.js :: withPairTies`); unanswered elsewhere. @param {unknown} read @param {Record<string, unknown> | null | undefined} ctx */
+const pairFact = (read, ctx) => (typeof read === 'function' && ctx && 'pair' in ctx ? read(ctx.pair) : undefined);
 
 /**
  * THE VOCABULARY. Atom names are EXACTLY the design's §1 table and §3.2 lists.
@@ -278,6 +283,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // BAR4-SCENES (kind A1; amendment 5b; vetoable by the owner): `enchanting`: some house offers enchanting or
   // identification among the record's services (`sceneSupply.js`). Beside `magic`: magic real is not magic for hire.
   enchanting: dim({ shape: 'presence', home: 'enchanting', reader: (f) => bool(f.enchanting) }),
+  // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): goods the town lives
+  // on arrive by magic, an isolated route whose trade needs are met (`magicSupply.js`). "Nothing it lives by would stop without
+  // it" presumes its absence (REVIEW-BAR-4 C36862).
+  'magic supply': dim({ shape: 'presence', home: 'magicSupply', reader: (f) => bool(f.magicSupply) }),
   // ── presence: institutions (fact 11; `facts/institutions.js`) ──
   temple: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
   docks: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('docks') : undefined) }),
@@ -305,10 +314,22 @@ export const FACT_DIMENSIONS = Object.freeze({
   patrol: dim({ shape: 'presence', home: 'defence', reader: (f) => (f.defence ? bool(f.defence.watch === true || f.defence.garrison === true) : undefined) }),
   // `iron at hand`: the town's smiths have iron to work: worked here, or brought in where no siege stops it (`ironAtHand.js`).
   'iron at hand': dim({ shape: 'presence', home: 'ironAtHand', reader: (f) => bool(f.ironAtHand) }),
-  // ── BAR4-SCENES (kind A1 of REVIEW-BAR-4, 2026-11-16; BRIEF-BAR4's amendment 5b; vetoable by the owner, on the veto list) ──
-  // `timber at hand`: the sawyers have wood: a timber ground here not spent, or timber imported (`sceneSupply.js`). Beside
-  // its kin `iron at hand`: a scene that shows the whole place sawing presumes it.
+  // BAR4-HOUSES (H1 (ii)) and BAR4-SCENES (kind A1), BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new
+  // vocabulary. ONE ATOM, ONE HOME (BAR4-SCENES-2, the chair's ruling of 2026-11-16 12:16 UTC): both seats named an atom
+  // `timber at hand`; it survives once, read through BAR4-RECORD's `houseInputAtHand.js` (`timberAtHand.js`).
+  // `timber at hand`: the town works timber of its own (the input's kind `local`: a live timber ground, not spent). A house
+  // that supplies the region's building from "timber to hand" presumes it (REVIEW-BAR-4 C40862: the woodland cleared,
+  // timber imported). Beside its kin `iron at hand`.
   'timber at hand': dim({ shape: 'presence', home: 'timberAtHand', reader: (f) => bool(f.timberAtHand) }),
+  // `timber reaches the saws`: timber reaches the town's sawyers by either kind (`local`, or `imported` by its own name),
+  // the page's own gap line "No timber reaches the saws." denied. A scene that shows the whole place sawing presumes it
+  // (REVIEW-BAR-4 C45961).
+  'timber reaches the saws': dim({ shape: 'presence', home: 'timberReachesSawmill', reader: (f) => bool(f.timberReachesSawmill) }),
+  // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
+  // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
+  // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
+  // presumes its absence (REVIEW-BAR-4 C18744, C45642).
+  'danger coming': dim({ shape: 'presence', home: 'dangerComing', reader: (f) => bool(f.dangerComing) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',
@@ -319,6 +340,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // about a bloc needs the pair to share a power; the draw hands the pair as `ctx.pair` (`[from, to]`).
   'shared power': dim({ shape: 'presence', home: 'sharesPower', needsContext: 'pair',
     reader: (f, _key, ctx) => (typeof f.sharesPower === 'function' && ctx && 'pair' in ctx ? f.sharesPower(ctx.pair) : undefined) }),
+  // BAR4-PEOPLE, THE CHAIR'S RULING TI1 of 2026-11-16 (vetoable by the owner): two more PAIR facts (`pairPlace.js`), read by
+  // the tie draw. `shared place`: the first card may name the second its successor (one house's trade or face, or the head's
+  // seat of a power the second sits in). `lone tie`: the two carry no other tie (a line that says they do not speak).
+  'shared place': dim({ shape: 'presence', home: 'sharesPlace', needsContext: 'pair', reader: (f, _key, ctx) => pairFact(f.sharesPlace, ctx) }),
+  'lone tie': dim({ shape: 'presence', home: 'loneTie', needsContext: 'pair', reader: (f, _key, ctx) => pairFact(f.loneTie, ctx) }),
   // TAIL-TIES, THE CHAIR'S RULING (T5) of 2026-11-14 ("THE WORD IS GRANTED"; vetoable by the owner): ONE atom, the
   // town is ruled by a BODY OF MORE THAN ONE (`rulingBody.js :: rulingBodyOf`, hookTruth.js's `ruledByCouncil` rule
   // moved to its home). A line about THE council (a session, a vote of it, "the council has asked") needs it: under a
@@ -347,12 +373,23 @@ export const FACT_DIMENSIONS = Object.freeze({
   // `semi-organized` or above (routes and territory, or a hierarchy); a diffuse presence is not one.
   'organised crime': dim({ shape: 'presence', home: 'crime',
     reader: (/** @type {FactsLike} */ f) => (typeof f.crime === 'string' ? CRIME_WORDS.indexOf(f.crime) >= CRIME_WORDS.indexOf('semi-organized') : undefined) }),
+  // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): the income list
+  // carries a criminal revenue (`criminalIncome.js`), which the structure's key does not read. "The books record no gang, guild
+  // or racket" presumes its absence (BAR3-CORPUS-3's C24893: 4 of 64).
+  'criminal income': dim({ shape: 'presence', home: 'criminalIncome', reader: (/** @type {FactsLike} */ f) => bool(f.criminalIncome) }),
   ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, dim({ shape: 'presence', home: 'foodSources',
     reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.foodSources) ? f.foodSources.includes(src) : undefined) })])),
   // BAR4-SCENES (kind A1; amendment 5b; vetoable by the owner): `failed: <source>`, the food source the famine failed
   // (`sceneSupply.js`). Beside the source atoms, which a failed source does not leave: the food record keeps it.
   failed: dim({ shape: 'presence', home: 'failedSource', keys: FOOD_SOURCE_ATOMS,
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.failedSource === undefined ? undefined : f.failedSource === key) }),
+  // BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b, beside the food-source atoms): `source spent` = the food record's leading source
+  // has grounds on the resource record and none is available (`leadingSourceSpent.js`). A line that says the town leans on that
+  // source for its food presumes the opposite (REVIEW-BAR-4 C26403, C30469).
+  'source spent': dim({ shape: 'presence', home: 'leadingSourceSpent', reader: (/** @type {FactsLike} */ f) => bool(f.leadingSourceSpent) }),
+  // BAR4-CORPUS-ECO (the chair's FW1 of 2026-11-16): `own plots` = a subsistence house tills for the table while the food
+  // record names no grain (`ownPlots.js`): a line that gives the record's one source as what every table leans on first refuses it.
+  'own plots': dim({ shape: 'presence', home: 'ownPlots', reader: (/** @type {FactsLike} */ f) => bool(f.ownPlots) }),
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
   culture: dim({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,

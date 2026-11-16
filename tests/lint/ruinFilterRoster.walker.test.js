@@ -532,7 +532,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // the seat's house where a house leads is faced by the dual-hat leader), measured by this file's own scan.
     // TAIL-TIES-10 (2026-11-15, T29 (3)): 110 -> 111, src/domain/facts/criminalStructureKey.js :: criminalStructureKeyOf's roster-name read
     // (EXEMPT above; moved verbatim out of defenseDisplay.js, which stays a reader), measured by this file's own scan.
-    expect(readers.length).toBe(111);
+    // BAR4-HOUSES (2026-11-16, the chair's ruling FW1): 111 -> 112, src/domain/foodways.js :: tilledOneFrame's roster read (the
+    // one-source foodways frame against the subsistence holdings), COMPLIANT (liveInstitutions), measured by this file's own scan.
+    expect(readers.length).toBe(112);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

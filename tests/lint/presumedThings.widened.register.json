@@ -4620,18 +4620,6 @@
     "281c996218fc6382"
    ],
    [
-    "market",
-    "implied",
-    "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays",
-    "ace9419251a0e13a"
-   ],
-   [
-    "market",
-    "implied",
-    "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is",
-    "6c5573c33e4d8b17"
-   ],
-   [
     "militia",
     "implied",
     "A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keep",
@@ -4990,18 +4978,6 @@
     "family",
     "Rule falls to the lord's appointee, whose noble warrant stands above local custom.",
     "5c23d1e2a9624b7f"
-   ],
-   [
-    "streets",
-    "family",
-    "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays",
-    "ace9419251a0e13a"
-   ],
-   [
-    "streets",
-    "family",
-    "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is",
-    "6c5573c33e4d8b17"
    ],
    [
     "prisoner",
@@ -20234,14 +20210,6 @@
     "family",
     " besiegers, the spoils split by the strength each brought.",
     "c5911e464e4aaa8f"
-   ]
-  ],
-  "src/domain/display/validationOnPage.js": [
-   [
-    "resource: hot_springs_mineral",
-    "family",
-    "mineral hot springs",
-    "1b9f8eb53cade44e"
    ]
   ],
   "src/domain/display/visibilityAudit.js": [

@@ -773,8 +773,11 @@ const PAIRS = [
     "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.",
   ],
   [
-    "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.",
-    "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is the town, or else a guild.",
+    // BAR4-HOUSES (H1 (i), REVIEW-BAR-4 C37943, 2026-11-16): the crier is named by the office, never by a pronoun: a woman holds
+    // the post in 5 of the 8 towns of the census's 720 that print these (and in bar0-town-calm-rand-23); was "pays his wage", "he stands …
+    // His employer is the town"
+    "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays the wage.",
+    "At fixed times the proclamations, the prices, and the news are called out in the market square. The town pays for it, or else a guild.",
   ],
   [
     "Buildings of several storeys, in timber and stone.",
@@ -2190,8 +2193,8 @@ export const DESC_VARIANT_DECLARATIONS = Object.freeze({
   "The town's bread. Prices fixed by the guild.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#0
   "Bread baked for sale, with the guild setting the price.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Crafts|Bakers (5-15)#1
   "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.": Object.freeze({ needs: Object.freeze(["guild"]) }), // town|Religious|Parish burial grounds#1
-  "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#0
-  "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is the town, or else a guild.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#1
+  "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays the wage.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#0
+  "At fixed times the proclamations, the prices, and the news are called out in the market square. The town pays for it, or else a guild.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Government|Town crier#1
   "An innermost stronghold, the city's final hold under siege.": Object.freeze({ needs: Object.freeze(["tier: ≥ city"]) }), // town|Defense|Citadel#1
   "Message birds kept above a city yard by people who declare nothing. The word arrives unsigned and moves faster than the watch.": Object.freeze({ needs: Object.freeze(["watch","tier: ≥ city"]) }), // town|Criminal|Rookery#0
   "Bards, jugglers, and acrobats, come for the festivals.": Object.freeze({ needs: Object.freeze(["market"]) }), // town|Entertainment|Traveling performers#0
@@ -2287,5 +2290,26 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
   "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.": Object.freeze([
     Object.freeze({ text: "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it.", excludes: Object.freeze(['route: isolated']) }),
     Object.freeze({ text: "Duties are taken here on goods passing along the road. Royal or municipal officers run it.", twinOf: "Duties are taken here on goods passing along the main roads. Royal or municipal officers run it." }),
+  ]),
+  // BAR4-HOUSES (kind H1 (ii), REVIEW-BAR-4 C40862, 2026-11-16; vetoable by the owner): the commercial sawmill "supplies the
+  // region's building work" from "timber to hand" only where the town works timber of its own (`timber at hand`: its Timber &
+  // Lumber chain working its input, `facts/timberAtHand.js`); the chains are settled after the draw, so the late re-read
+  // reads it. 11 of the 19 towns of the census's 720 that print the two lines have none (the woodland cleared or never there);
+  // the twin claims the mill's own trade on whatever logs reach it, true wherever a sawmill stands.
+  "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's building needs. The crew is permanent.": Object.freeze([
+    Object.freeze({ text: "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's building needs. The crew is permanent.", needs: Object.freeze(['timber at hand']) }),
+    Object.freeze({ text: "A saw driven by water or ox, cutting planks and beams for builders whenever logs can be had. The crew is permanent.", twinOf: "A mill driven by water or ox, cutting planks and beams for builders. Sited near timber, it can meet a whole region's building needs. The crew is permanent." }),
+  ]),
+  "Water or ox power turns logs into planks and beams for the construction trade. A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.": Object.freeze([
+    Object.freeze({ text: "Water or ox power turns logs into planks and beams for the construction trade. A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.", needs: Object.freeze(['timber at hand']) }),
+    Object.freeze({ text: "Water or ox power turns logs into planks and beams for the construction trade whenever logs can be had, and a standing crew works it.", twinOf: "Water or ox power turns logs into planks and beams for the construction trade. A town with timber to hand supplies the region's building work, and keeps a standing crew to do it." }),
+  ]),
+  // BAR4-HOUSES (kind H1 (iii), REVIEW-BAR-4 C39560, 2026-11-16; vetoable by the owner): the town council that "answers to no
+  // one in particular" is false under an occupation, where the page says the town's own officials take the occupiers' orders
+  // (the crisis home's `occupied`, or an occupier ruling: settled after the draw, read late). The twin says the occupation. (The
+  // city-state's "no higher lord" lines are not keyed: no occupied town of the 1,050 measured holds a City-state government.)
+  "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.": Object.freeze([
+    Object.freeze({ text: "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.", excludes: Object.freeze(['crisis: occupied', 'ruler: occupier']) }),
+    Object.freeze({ text: "A loose council of leading citizens sees to the town's common business. It takes its orders from the occupiers now, but the work gets done.", twinOf: "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.", crisis: Object.freeze(['occupied']) }),
   ]),
 });

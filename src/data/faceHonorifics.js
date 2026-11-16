@@ -46,7 +46,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the salt master": ["Saltmaster", "Master of the Saltworks"],
   "the master of the hunt": ["Huntmaster", "Master of the Hunt"],
   "the pawnbroker": ["Pawnbroker", "Pawnmaster"],
-  "the innkeeper": ["Innkeeper", "Landlord", "Host"],
+  "the innkeeper": ["Innkeeper", { male: "Landlord", female: "Landlady" }, "Host"], // BAR4-PEOPLE (P2, C2708 C18802): an everyday word that names a sex takes the holder's form
   "the alewife": [{ male: "Brewster", female: "Alewife" }, "Brewster"], // POWERS-9 (ROUND-3-CUT-INCREMENT pf#250): no Alewife of a man; the pool's own "Brewster" (a man's "Brewer" named a brewery the town lacks: the census's kind a, 10 villages)
   "the caravanserai keeper": ["Caravanserai Keeper", "Host"],
   "the horse-coper": ["Horse-Coper", "Horse-Dealer"],
@@ -57,7 +57,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the steward": ["Steward", "Seneschal"],
   "the headman": [{ male: "Headman", female: "Chief" }, "Chief"], // TAIL-TITLES-2 KT1: her title "the chief"
   "the militia captain": ["Captain", "Captain of the Militia"],
-  "the hedge wizard": ["Hedge Wizard", "Cunning-Man"],
+  "the hedge wizard": ["Hedge Wizard", { male: "Cunning-Man", female: "Cunning-Woman" }], // BAR4-PEOPLE (P2)
   "the charter master": ["Chartermaster", "Master of the Charter"],
   "the bandit contact": ["Go-Between"],
   "the smuggler": ["Smuggler"],
@@ -98,8 +98,8 @@ export const FACE_HONORIFICS = Object.freeze({
   "the musician": ["Minstrel", "Bard"],
   "the senior guild master": ["Guildmaster", "Master of the Guild", "Warden of the Guild"],
   "the banker": ["Banker", "Master of the House"],
-  "the tavern keeper": ["Taverner", "Landlord", "Host"],
-  "the coaching-inn keeper": ["Innkeeper", "Landlord", "Host"],
+  "the tavern keeper": ["Taverner", { male: "Landlord", female: "Landlady" }, "Host"], // BAR4-PEOPLE (P2)
+  "the coaching-inn keeper": ["Innkeeper", { male: "Landlord", female: "Landlady" }, "Host"], // BAR4-PEOPLE (P2)
   "the post's master": ["Postmaster", "Master of the Post"],
   "the stable master": ["Stablemaster", "Master of Horse"],
   "the beast master": ["Beastmaster", "Master of Beasts"],

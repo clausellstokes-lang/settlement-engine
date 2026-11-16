@@ -20,7 +20,8 @@ import { rivalRingsOf } from '../corruption.js';
  * The record slice the key reads (structural; the display's `DefenseDisplaySettlement` narrowed to these fields).
  * @typedef {Object} CrimeKeySettlement
  * @property {Array<{ name?: string }>} [institutions]
- * @property {{ safetyProfile?: { criminalInstitutions?: unknown[] }, activeChains?: Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null> }} [economicState]
+ * @property {{ safetyProfile?: { criminalInstitutions?: unknown[] }, activeChains?: Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null>, incomeSources?: unknown }} [economicState]
+ * @property {unknown} [availableServices] BAR4-SAFETY (F3): the services menu (its covert criminal rows)
  * @property {{ factions?: Array<{ category?: unknown } | null | undefined> }} [powerStructure]
  */
 
@@ -66,8 +67,25 @@ export function criminalStructureKeyOf(settlement) {
   // is a hierarchy, the pool's own reading of one; the ladder answers only where no criminal power stands.
   // (The ladder is a reader of the crime fact: tests/lint/factLayers.walker.test.js counts it, family crime.)
   const key = rivalRingsHere(r) ? 'semi-organized' : signal.powerNames.length ? 'organized'
-    : ladder ?? (signal.houses.length || listed ? 'semi-organized' : null);
+    : ladder ?? (signal.houses.length || listed ? 'semi-organized' : covertCrimeHeld(r) ? 'diffuse' : null); // BAR4-SAFETY (F3, C46446)
   return key;
+}
+
+/**
+ * BAR4-SAFETY (kind F3, REVIEW-BAR-4 C46446; vetoable by the owner): THE RECORD'S OWN CRIME, WHERE NO HOUSE NAMES IT. The
+ * key read only the roster, the seats and the two operation lists, so a village whose income record carries "Black Market
+ * Revenue" ("Untaxed trade, fencing and theft bring money in here", `economy/economicState.js`, `isCriminal`) and whose
+ * services list a covert fence ("Fencing stolen goods", `servicesGenerator.js`, institution "(covert)") printed "No
+ * criminal infrastructure" beside both. Either is crime that works through someone: at the least the diffuse rung
+ * (thieves, fences and bandits each working for themselves), never a ring.
+ * @param {{ economicState?: { incomeSources?: unknown }, availableServices?: unknown } | null | undefined} settlement
+ * @returns {boolean}
+ */
+export function covertCrimeHeld(settlement) {
+  const income = settlement?.economicState?.incomeSources;
+  const services = /** @type {{ criminal?: unknown } | null | undefined} */ (settlement?.availableServices)?.criminal;
+  return (Array.isArray(income) && income.some((/** @type {any} */ row) => row?.isCriminal === true && Number(row?.percentage) > 0))
+    || (Array.isArray(services) && services.some((/** @type {any} */ x) => x?.institution === '(covert)'));
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */

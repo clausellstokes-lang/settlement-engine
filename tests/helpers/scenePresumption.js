@@ -15,8 +15,9 @@
  *   house at work   some house of the sense's trade stands on the live roster and the page marks it neither stopped,
  *                   scarce nor short of its input (`crisisStoppedRow.js :: rowMarkText`, the Institutions tab's own
  *                   mark; a house CURTAILED by a siege still works);
- *   timber at hand  a timber ground stands here, not spent (`resourceSemantics.js :: availableNativeResourceKeys`), or
- *                   timber is imported (`canonicalAccessors.js :: canonImports`): the whole place sawing wants wood;
+ *   timber reaches the saws  timber reaches the town's sawyers, its own or imported by name (`facts/timberAtHand.js`, on
+ *                   BAR4-RECORD's `houseInputAtHand.js`, the page's own gap reader: BAR4-SCENES-2, one home): the whole place
+ *                   sawing wants wood;
  *   herds live      the food record's herds are a source and not the source the famine failed
  *                   (`economicState.foodSecurity.foodRecord`);
  *   market open     a live market stands (`facts/market.js :: isMarketInstitution`) that the page does not mark
@@ -39,8 +40,7 @@ import { liveInstitutions } from '../../src/domain/institutions/institutionRoste
 import { nativeSemanticName } from '../../src/domain/content/customContentSemanticAuthority.js';
 import { isColourLine } from '../../src/domain/facts/factVocabulary.js';
 import { textOf } from '../../src/domain/facts/textOf.js';
-import { availableNativeResourceKeys } from '../../src/domain/resourceSemantics.js';
-import { canonImports } from '../../src/domain/canonicalAccessors.js';
+import { timberReachesSawmillOf } from '../../src/domain/facts/timberAtHand.js';
 
 /** @param {string} s */
 const lower = (s) => String(s || '').toLowerCase();
@@ -92,14 +92,9 @@ export const PRESUMES = Object.freeze({
     if (fr.failedSource === 'livestock') return 'the famine failed the herds (foodRecord.failedSource: livestock)';
     return null;
   },
-  /** @param {any} record */
-  'timber at hand': (record) => {
-    const native = availableNativeResourceKeys(record?.config).filter((k) => /timber|forest/.test(k));
-    if (native.length) return null;
-    const imported = canonImports(record).some((x) => /timber|\bwood|lumber|\blogs?\b/i.test(typeof x === 'string' ? x : String(x?.name ?? x?.good ?? '')));
-    if (imported) return null;
-    return 'no timber ground is worked here and none is imported (resources; imports)';
-  },
+  /** @param {any} record (BAR4-SCENES-2: one home with BAR4-HOUSES' atom, `timberAtHand.js` on `houseInputAtHand.js`, the page's own gap reader) */
+  'timber reaches the saws': (record) => (timberReachesSawmillOf(record) === false
+    ? 'no timber reaches the saws: no timber ground worked here and none imported by name (houseInputAtHand)' : null),
   /** @param {any} record */
   'market open': (record) => {
     const markets = liveInstitutions(record).filter(isMarketInstitution);
@@ -126,9 +121,9 @@ export const PRESUMES = Object.freeze({
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const SENSE_PRESUMES = Object.freeze({
-  'The smell of sawn timber is everywhere in {name}, and so is the sawdust.': ['timber at hand'],
-  'Stacks of seasoning planks line the road in, taller than the carts that wait for them.': ['timber at hand'],
-  'The rasp of the saws carries from yard to yard all through the day.': ['timber at hand'],
+  'The smell of sawn timber is everywhere in {name}, and so is the sawdust.': ['timber reaches the saws'],
+  'Stacks of seasoning planks line the road in, taller than the carts that wait for them.': ['timber reaches the saws'],
+  'The rasp of the saws carries from yard to yard all through the day.': ['timber reaches the saws'],
   'Drovers push their herds along the road, and the whole place smells of the pens.': ['herds live'],
   'The lowing of penned cattle carries across {name} at every hour.': ['herds live'],
   'Hurdles and holding pens crowd the edge of the settlement, full and noisy.': ['herds live'],

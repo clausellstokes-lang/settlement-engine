@@ -221,12 +221,12 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'The knock of a mallet on wood keeps time somewhere close.',
     ],
     dominant: [
-      { text: (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`, needs: ['timber at hand'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C45961): the whole place sawing wants wood: a timber ground here, or timber brought in
-      { text: (n) => `Timber is scarce in ${n}, and what little wood the workshops get is worked to the last shaving.`, twinOf: 'The smell of sawn timber is everywhere in {name}, and so is the sawdust.', excludes: ['timber at hand'] }, // BAR4-SCENES (A1): its twin where no timber is at hand; a twin keeps the slot and spends no redraw
-      { text: () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', needs: ['timber at hand'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): no cart waits on a road the siege has cut; BAR4-SCENES (A1): and no stacks without wood
-      { text: () => 'A few planks stand seasoning by the road in, and there is little timber to add to them.', twinOf: 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', excludes: ['timber at hand'], crisis: ['any'] }, // BAR4-SCENES (A1): its twin where no timber is at hand
-      { text: () => 'The rasp of the saws carries from yard to yard all through the day.', needs: ['timber at hand'] }, // BAR4-SCENES (A1): the saws want wood
-      { text: (n) => `The saws of ${n} are quiet most days, for want of timber to cut.`, twinOf: 'The rasp of the saws carries from yard to yard all through the day.', excludes: ['timber at hand'] }, // BAR4-SCENES (A1): its twin where no timber is at hand
+      { text: (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`, needs: ['timber reaches the saws'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C45961): the whole place sawing wants wood: timber reaches the saws, its own or brought in (BAR4-SCENES-2: one home, `timberAtHand.js` on `houseInputAtHand.js`)
+      { text: (n) => `Timber is scarce in ${n}, and what little wood the workshops get is worked to the last shaving.`, twinOf: 'The smell of sawn timber is everywhere in {name}, and so is the sawdust.', excludes: ['timber reaches the saws'] }, // BAR4-SCENES (A1): its twin where no timber reaches the saws; a twin keeps the slot and spends no redraw
+      { text: () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', needs: ['timber reaches the saws'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): no cart waits on a road the siege has cut; BAR4-SCENES (A1): and no stacks without wood
+      { text: () => 'A few planks stand seasoning by the road in, and there is little timber to add to them.', twinOf: 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', excludes: ['timber reaches the saws'], crisis: ['any'] }, // BAR4-SCENES (A1): its twin where no timber reaches the saws
+      { text: () => 'The rasp of the saws carries from yard to yard all through the day.', needs: ['timber reaches the saws'] }, // BAR4-SCENES (A1): the saws want wood
+      { text: (n) => `The saws of ${n} are quiet most days, for want of timber to cut.`, twinOf: 'The rasp of the saws carries from yard to yard all through the day.', excludes: ['timber reaches the saws'] }, // BAR4-SCENES (A1): its twin where no timber reaches the saws
     ] },
   { key: 'kilns',
     institutions: ['potter', 'pottery', 'kiln', 'brickmaker', 'charcoal', 'glassblower', 'glassmaker', 'glassmakers', 'lime'],

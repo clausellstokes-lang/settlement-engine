@@ -3357,7 +3357,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "gate",
             "no crisis: under_siege"
           ],
-          "text": "A share of what arrives at {settlement} never appears at the gate, and the share is not small.",
+          "text": "A share of what arrives at {settlement} never appears at the gate, and the dues on it are never paid.",
           "slots": [
             "settlement"
           ],
@@ -3368,7 +3368,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "A good share of the goods that reach {settlement} pays none of the dues owed on it.",
+          "text": "Some of the goods that reach {settlement} pay none of the dues owed on them.",
           "slots": [
             "settlement"
           ],

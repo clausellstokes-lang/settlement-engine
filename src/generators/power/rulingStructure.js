@@ -588,7 +588,7 @@ export const generatePowerStructure = (
     religiousGate = ['village', 'town', 'city', 'metropolis'].includes(tier) || hasReligiousInst;
   if (religiousPower > 5 && religiousGate) {
     const religiousDesc =
-      priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60
+      priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60 && ['organized', 'semi-organized'].includes(factsOf({ institutions: nativeInstitutions, economicState }).crime) // BAR4-SAFETY (F3, SF1 d): organised crime only where the crime key reads an organisation
         ? 'Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence.'
         : governingFaction && governingFaction.includes('Theocratic Council')
           ? 'Religious law governs directly; clergy are administrators as much as priests, and doctrine shapes civic ordinance.'
@@ -735,7 +735,7 @@ export const generatePowerStructure = (
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
   settleClaimsToLabel(factions, tier, lowerInstNames, publicLegitimacy); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
-  annotateFactionStanding(factions, standingForce); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort
+  annotateFactionStanding(factions, standingForce, { publicLegitimacy }); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort; BAR4-HISTORY C14176 (FS2): the seat's legitimacy, for its coup reading
 
   const safetyRatio = safetyRatioOf(instFlags);
   // ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13 — ONE writer): the hall-capture state is

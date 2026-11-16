@@ -27,6 +27,9 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   hasOtherNpc: () => true,
   // R2-CODE-A-14 (the chair's ruling (s1)): the pair atom `shared power`; "every presence atom holds".
   sharesPower: () => true,
+  // BAR4-PEOPLE (the chair's TI1): the two pair facts of pairPlace.js, answered so every line is admitted
+  sharesPlace: () => true,
+  loneTie: () => true,
   // TAIL-TIES (the chair's ruling (T5)): the atom `ruling body`; "every presence atom holds".
   rulingBody: true,
   // CENSUS-5b (2026-11-05): CENSUS-1c's delegated getters (R-E) arrived after the double was
@@ -45,4 +48,11 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // holds" covers them too (`factVocabulary.js :: FOOD_SOURCE_ATOMS`, `guild`).
   foodSources: Object.freeze(['fish', 'grain', 'game', 'livestock']),
   guild: true,
+  // BAR4-CORPUS-DEF (2026-11-16): three presence atoms arrived after the double. `magic supply` and `criminal income`
+  // (`magicSupply.js`, `criminalIncome.js`): "every presence atom holds" covers them, so a `no X` line is refused here
+  // exactly as the kernel sweep's pre-cure reference refuses it (`stateProseKernel.test.js :: excludesPresence`).
+  // `danger coming` (`dangerComing.js`) is a TROUBLE, read like the crisis above: a calm place has none on its way.
+  dangerComing: false,
+  magicSupply: true,
+  criminalIncome: true,
 });

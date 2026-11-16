@@ -41,7 +41,9 @@ const GONE = [
 /** [row, seed, a true sibling that must still print] */
 const KEEP = [
   ['B05887', 'r2r-thorp-38', 'Crisis Cutting the Food Supply :: The crops failed'],
-  ['03703', 'r2r-city-11', 'A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.'],
+  // RE-KEYED BY IDENTITY (BAR4-CORPUS-ECO, 2026-11-16): the true sibling is the same line, its degree word gone (C38176:
+  // "thriving" said of the smallest income share in all 70 of the 720 that print it); the town and the row are unchanged.
+  ['03703', 'r2r-city-11', 'An alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.'],
   ['15458', 'r2r-city-0', 'Complete production chain in place'],
 ];
 

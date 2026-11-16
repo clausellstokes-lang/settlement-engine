@@ -13,22 +13,28 @@
  *
  * Pure: no randomness, no clock, no write.
  */
+import { dangerComingOf } from './dangerComing.js'; // BAR4-CORPUS-DEF (D1)
 import { crisisOf } from './crisisKind.js';
+import { siegeMotionOf } from './siegeMotion.js'; // BAR4-SAFETY (F2)
 import { storesMonthsOf } from './storesMonths.js';
 import { defenceOf } from './defence.js';
 import { waterOf, waterOfKind } from './water.js';
 import { marketOf } from './market.js';
 import { famineOf } from './famine.js';
 import { magicOf } from './magic.js';
+import { magicSupplyOf } from './magicSupply.js'; // BAR4-CORPUS-DEF (D2)
 import { rulerKindOf } from './rulerKind.js';
 import { rulingBodyOf } from './rulingBody.js';
 import { migrationOf } from './migration.js';
 import { warStateOf } from './warState.js';
-import { hasInstitution } from './institutions.js';
+import { hasInstitution, liveInstitutionNames } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { rivalPowerOf } from './rivalPower.js';
 import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
-import { timberAtHandOf, failedFoodSourceOf, enchantingOfferedOf } from './sceneSupply.js'; // BAR4-SCENES (kind A1)
+import { timberAtHandOf, timberReachesSawmillOf } from './timberAtHand.js'; // BAR4-HOUSES (H1 (ii)); BAR4-SCENES-2: one home
+import { failedFoodSourceOf, enchantingOfferedOf } from './sceneSupply.js'; // BAR4-SCENES (kind A1)
+import { leadingSourceSpentOf } from './leadingSourceSpent.js'; // BAR4-CORPUS-ECO (amendment 5b)
+import { ownPlotsOf } from './ownPlots.js'; // BAR4-CORPUS-ECO (amendment 5b; the chair's FW1)
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
 import { pairSharesPower } from './sharedPower.js';
@@ -37,6 +43,7 @@ import { guildOf } from './guild.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { resolveSettlementCulture } from '../resolveCulture.js';
 import { criminalStructureKeyOf } from './criminalStructureKey.js';
+import { criminalIncomeOf } from './criminalIncome.js'; // BAR4-CORPUS-DEF (C24893)
 import { prosperityLabelOf } from '../prosperityRank.js';
 import { keepOf } from './keep.js';
 
@@ -60,6 +67,10 @@ export function factsOf(record, options = {}) {
   return Object.freeze({
     /** fact 1: the crisis kinds, families and the one siege reading */
     get crisis() { return crisisOf(record, options); },
+    /** BAR4-SAFETY (F2): whether the besiegers move: the siege condition's own status (`siegeMotion.js`), or null with no siege */
+    get siegeMotion() { return siegeMotionOf(record); },
+    /** BAR4-CORPUS-DEF (D1): a danger from outside is on its way, a live external-threat tension (`dangerComing.js`) */
+    get dangerComing() { return dangerComingOf(record); },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
     /** fact 3: walls / gate / watch / militia / garrison / hospital / healer */
@@ -80,6 +91,8 @@ export function factsOf(record, options = {}) {
     get famine() { return famineOf(record); },
     /** fact 7: magic functions; its level */
     get magic() { return magicOf(record); },
+    /** BAR4-CORPUS-DEF (D2): goods the town lives on arrive by magic, an isolated route's needs met (`magicSupply.js`) */
+    get magicSupply() { return magicSupplyOf(record); },
     /** fact 8: elder / lord / priest / mayor / occupier / council */
     get rulerKind() { return rulerKindOf(record); },
     /** TAIL-TIES (the chair's ruling (T5)): ruled by a body of more than one (`rulingBody.js`), or undefined with no government */
@@ -98,8 +111,10 @@ export function factsOf(record, options = {}) {
     get rivalPower() { return rivalPowerOf(record); },
     /** BAR2-PLACES (the chair's grant VW2): the smiths have iron to work, worked here or brought in past no siege (`ironAtHand.js`) */
     get ironAtHand() { return ironAtHandOf(record); },
-    /** BAR4-SCENES (kind A1): a timber ground stands here, not spent, or timber is imported (`sceneSupply.js`) */
+    /** BAR4-HOUSES (H1 (ii)): the town works timber of its own, the input's kind `local` (`timberAtHand.js`, on `houseInputAtHand.js`) */
     get timberAtHand() { return timberAtHandOf(record); },
+    /** BAR4-SCENES (kind A1): timber reaches the town's sawyers, local or imported (`timberAtHand.js`, on `houseInputAtHand.js`) */
+    get timberReachesSawmill() { return timberReachesSawmillOf(record); },
     /** BAR4-SCENES (kind A1): some house offers enchanting or identification among the services (`sceneSupply.js`) */
     get enchanting() { return enchantingOfferedOf(record); },
     /** fact 12: small / middling / large */
@@ -114,12 +129,20 @@ export function factsOf(record, options = {}) {
     hasOtherNpc: (/** @type {number | object} */ npc) => hasOtherNpc(record, npc),
     /** R2-CODE-A-14 (the chair's ruling (s1), 2026-11-14): the two cards a pair line names share a power (`sharedPower.js`) */
     sharesPower: (/** @type {unknown} */ pair) => pairSharesPower(record, pair),
+    /** BAR4-PEOPLE (the chair's TI1 and its ruling of 11:07): the pair may pass a place, read off the final record, either way round (the draw reads it in the written order: people/pairPlace.js) */
+    sharesPlace: (/** @type {unknown} */ pair) => pairPlaceOf(record, pair),
+    /** BAR4-PEOPLE (TI1, 11:07): the record holds no other tie between the two (the draw answers it from its drafts: people/ties.js) */
+    loneTie: (/** @type {unknown} */ pair) => pairLoneOf(record, pair),
     // ── CENSUS-3b unit 1 (the chair's ruling R-E; the vocabulary rulings §2): DELEGATIONS to the
     // one canonical reader each — no field reader, no new logic. ──
     /** the food record's sources (`foodBalance.js :: deriveFoodRecord`), or undefined when it carries none */
     get foodSources() { const v = /** @type {FactsOwnFields} */ (record)?.economicState?.foodSecurity?.foodRecord?.foodSources; return Array.isArray(v) ? v : undefined; },
     /** BAR4-SCENES (kind A1): the food source the famine failed, or null (`sceneSupply.js`) */
     get failedSource() { return failedFoodSourceOf(record); },
+    /** BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b): the leading food source's grounds are all spent (`leadingSourceSpent.js`) */
+    get leadingSourceSpent() { return leadingSourceSpentOf(record); },
+    /** BAR4-CORPUS-ECO (the chair's FW1): a subsistence house tills for the table beside a food record with no grain (`ownPlots.js`) */
+    get ownPlots() { return ownPlotsOf(record, liveInstitutionNames(/** @type {{ institutions?: unknown }} */ (record))); },
     /** the import list (`canonicalAccessors.js :: canonImports`) */
     get imports() { return canonImports(record); },
     /** the export list (`canonicalAccessors.js :: canonExports`) */
@@ -128,11 +151,40 @@ export function factsOf(record, options = {}) {
     get culture() { return resolveSettlementCulture(record); },
     /** the criminal structure's key (`criminalStructureKey.js :: criminalStructureKeyOf`, the key `defenseDisplay.js :: deriveCriminalStructure` prints), or 'none' */
     get crime() { return criminalStructureKeyOf(record) ?? 'none'; },
+    /** BAR4-CORPUS-DEF (C24893): the income list carries a criminal revenue (`criminalIncome.js`) */
+    get criminalIncome() { return criminalIncomeOf(record); },
     /** the prosperity band (`prosperityRank.js :: prosperityLabelOf`), lower-cased, or undefined */
     get prosperity() { const l = prosperityLabelOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity).toLowerCase(); return l || undefined; },
     /** what the place can keep up (`keep.js :: keepOf`), read off the prosperity label: `{ bought, funded }` */
     get keep() { return keepOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity); },
   });
+}
+
+/** @typedef {{ id?: unknown, institution?: { kind?: unknown, family?: unknown, title?: unknown } | null, memberships?: Array<{ power?: unknown, rank?: unknown } | null> }} PairCard */
+/** The pair's two cards, as the record's roster holds them. @param {any} record @param {unknown} pair @returns {[PairCard, PairCard] | null} */
+function pairCardsOf(record, pair) {
+  if (!Array.isArray(pair) || pair.length !== 2) return null;
+  const roster = Array.isArray(record?.npcs) ? record.npcs : [];
+  const held = (/** @type {any} */ c) => (c && typeof c === 'object' ? roster.find((/** @type {any} */ n) => n && c.id != null && String(n.id) === String(c.id)) || c : null);
+  const a = held(pair[0]), b = held(pair[1]);
+  return a && b ? [a, b] : null;
+}
+/** BAR4-PEOPLE (11:07): one house's family or face, or either heads a power the other sits in. @param {any} record @param {unknown} pair @returns {boolean | undefined} */
+function pairPlaceOf(record, pair) {
+  const cards = pairCardsOf(record, pair);
+  if (!cards || !cards[0].institution || !cards[1].institution) return undefined;
+  const [a, b] = cards, ia = a.institution, ib = b.institution;
+  if (ia?.kind === 'house' && ib?.kind === 'house' && ia.family && ia.family === ib.family) return true;
+  if (typeof ia?.title === 'string' && ia.title === ib?.title) return true;
+  const heads = (/** @type {PairCard} */ x, /** @type {PairCard} */ y) => (x.memberships || []).some((m) => m?.rank === 1 && m.power && (y.memberships || []).some((n) => n?.power === m.power));
+  return heads(a, b) || heads(b, a);
+}
+/** BAR4-PEOPLE (11:07): at most one tie between the two in the record's relationships. @param {any} record @param {unknown} pair @returns {boolean | undefined} */
+function pairLoneOf(record, pair) {
+  const cards = pairCardsOf(record, pair);
+  if (!cards || !Array.isArray(record?.relationships)) return undefined;
+  const [a, b] = cards.map((c) => String(c.id ?? ''));
+  return record.relationships.filter((/** @type {any} */ t) => t && ((String(t.from) === a && String(t.to) === b) || (String(t.from) === b && String(t.to) === a))).length <= 1;
 }
 
 /**

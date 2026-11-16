@@ -275,9 +275,10 @@ describe('W2-FIX-DATA-HISTORY item F: the arrival and the inland fish stall say 
     expect(decl(said(ARRIVAL_PEOPLE.east_asian, 'Tea is poured'))).toEqual({ needs: ['market'], excludes: [] });
     expect(decl(said(ARRIVAL_PEOPLE.arabic, 'A merchant swears'))).toEqual({ needs: ['market'], excludes: [] });
     const timber = ARRIVAL_SENSES.find((/** @type {any} */ s) => s.key === 'timber');
-    // BAR4-SCENES-2 (2026-11-16, re-keyed by identity): BAR4-SCENES 187c46f61 (kind A1, REVIEW-BAR-4 C45961) adds `needs: timber at hand`
-    // (no stacks of planks without wood; its twin prints where none is at hand); this item's own arm, no cart under a siege, is unchanged.
-    expect(decl(said(timber.dominant, 'Stacks of seasoning planks'))).toEqual({ needs: ['timber at hand'], excludes: ['crisis: under_siege'] });
+    // BAR4-SCENES-2 (2026-11-16, re-keyed by identity): BAR4-SCENES 187c46f61 (kind A1, REVIEW-BAR-4 C45961) adds a timber need (no
+    // stacks of planks without wood; its twin prints where none reaches the sawmill), spelled `timber reaches the saws` since the
+    // namesake's one home (the chair's ruling of 12:16 UTC); this item's own arm, no cart under a siege, is unchanged.
+    expect(decl(said(timber.dominant, 'Stacks of seasoning planks'))).toEqual({ needs: ['timber reaches the saws'], excludes: ['crisis: under_siege'] });
     for (const w of ['brought in by cart', 'price holds']) expectAbsentWithAnchor(INLAND_DESCRIPTIONS['village|Economy|Fish market'], w, 'salted and smoked fish');
   });
   it('rww-hamlet-succession_void-1 (ww-541): a hamlet of 31 is told of no lanes of trades', () => {

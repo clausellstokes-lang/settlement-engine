@@ -125,19 +125,26 @@ describe('ruling 3 — a gap prints only when the record lacks the input', () =>
 
   test('soak1k-22: bakers (Grain imported), bathhouse (hot springs near), salt works (salt produced) are not gaps', () => {
     const t = text(ResourcesTab, clone(BIRTHS['soak1k-22']));
-    expect(t).toContain('No grapes reach the vintner.');
+    // RE-KEYED by identity 2026-11-16 (BAR4-RECORD R1, vetoable by the owner): the page's reader now reads the one fact
+    // the gap's writer reads (`facts/houseInputAtHand.js`), and by M-V grapes come by any route: this river town's vintner
+    // is fed (the stored row predates M-V; today's generator writes none). The true gap the line still names: the clay.
+    expect(t).toContain('No clay reaches the potter.');
     expect(t).not.toMatch(/bakers|bathhouse|salt works/i); // anchored: a true gap is matched in this same text on the line above
   });
 });
 
-test('ruling 3, the plural: "Mineral salts" exported answers the salt works (soak1k-249 / -801 at 1,000)', async () => {
+// RE-KEYED by identity 2026-11-16 (BAR4-RECORD R1, the chair's K6 of BRIEF-BAR4; vetoable by the owner): an EXPORT never
+// answers a house's input (the house's own output, or an unrelated good: "Sacred wood" answered 33 charcoal burners of the
+// 720); the plural is now read where the raw good arrives, by import ("Mineral salts" brought in answers the salt works).
+test('ruling 3, the plural: "Mineral salts" brought in answers the salt works (soak1k-249 / -801 at 1,000)', async () => {
   const { resourceGapLines } = await import('../../src/domain/display/validationOnPage.js');
   const s = { name: 'Saltby', config: { terrainType: 'mountain', tradeRouteAccess: 'isolated', nearbyResources: [] },
     institutions: [{ name: 'Salt works', tags: ['trade'] }],
     resourceAnalysis: { gaps: [{ chain: 'desert_salt', institution: 'Salt works', impact: 'Salt works exists but lacks access to desert_salt', severity: 'high' }] },
-    economicState: { localProduction: [], primaryImports: [], primaryExports: ['Mineral salts'], foodSecurity: { foodRecord: { foodSources: [], normalImportPct: 0 } } } };
+    economicState: { localProduction: [], primaryImports: ['Mineral salts'], primaryExports: [], foodSecurity: { foodRecord: { foodSources: [], normalImportPct: 0 } } } };
   expect(resourceGapLines(s)).toEqual([]);
-  s.economicState.primaryExports = [];
+  s.economicState.primaryImports = [];
+  s.economicState.primaryExports = ['Mineral salts']; // what the house is said to sell does not reach it
   expect(resourceGapLines(s).map((g) => g.impact)).toEqual(['No salt reaches the salt works.']);
 });
 

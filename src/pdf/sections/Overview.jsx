@@ -186,7 +186,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
             <View style={{ marginBottom: 6 }}>
               <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Enforcement ratio</Text>
               <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second }}>
-                {enforcementWords(o.safetyRatio, settlement ? factsOf(settlement).guardPresence : true, settlement ? criminalsStandHere(settlement?.economicState?.safetyProfile) : true)}
+                {enforcementWords(o.safetyRatio, settlement ? factsOf(settlement).guardPresence : true, settlement ? criminalsStandHere(settlement?.economicState?.safetyProfile) || factsOf(settlement).crime !== 'none' : true)}
               </Text>
             </View>
           )}

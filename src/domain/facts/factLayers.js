@@ -110,6 +110,7 @@ export const LEAVES = Object.freeze({
   crisis: home('crisis', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {
     note: 'the kinds are layer 1 (the crises in force); the hunger FAMILY is read off the food band (layer 2): the second bundled leaf of the layer map\'s §2c',
   }),
+  siegeMotion: home('siegeMotion', 1, ['stress', 'activeConditions']), // BAR4-SAFETY (F2): the siege condition's own status (`siegeMotion.js`)
   defence: home('defence', 1, ['institutions', 'economicState'], {
     note: 'walls, gate, watch are layer 1 by value; `defenseFactsOf` computes the stores in the same object, so every defence atom touches the economy: the first bundled leaf of the layer map\'s §2c',
   }),
@@ -121,20 +122,33 @@ export const LEAVES = Object.freeze({
   foodSources: home('foodSources', 2, ['economicState']),
   // BAR4-SCENES (kind A1): the food source the famine failed (`sceneSupply.js`)
   failedSource: home('failedSource', 2, ['economicState']),
+  // BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b): the leading food source's grounds all spent: the food record against the config's resources
+  leadingSourceSpent: home('leadingSourceSpent', 2, ['economicState', 'config']),
+  // BAR4-CORPUS-ECO (the chair's FW1): a subsistence house tills for the table beside a food record with no grain
+  ownPlots: home('ownPlots', 2, ['economicState', 'institutions']),
   storesMonths: home('storesMonths', 2, ['economicState']),
   imports: home('imports', 2, ['economicState']),
   exports: home('exports', 2, ['economicState']),
   prosperity: home('prosperity', 2, ['economicState']),
+  // BAR4-CORPUS-DEF (D2): goods arrive by magic, an isolated route whose trade needs are met (`magicSupply.js`)
+  magicSupply: home('magicSupply', 2, ['economicState']),
+  // BAR4-CORPUS-DEF (C24893): a criminal revenue on the income list (`criminalIncome.js`)
+  criminalIncome: home('criminalIncome', 2, ['availableServices', 'economicState']),
   // BAR2-PLACES (the chair's grant VW2): iron worked here (the chains) or imported past no siege (the crisis kinds)
   ironAtHand: home('ironAtHand', 2, ['economicState', 'stress', 'stressors', 'activeConditions']),
-  // BAR4-SCENES (kind A1): a timber ground not spent (the config's resources) or timber imported (the economy);
-  // enchanting among the services (`sceneSupply.js`)
-  timberAtHand: home('timberAtHand', 2, ['config', 'economicState']),
+  // BAR4-HOUSES (H1 (ii)) and BAR4-SCENES (kind A1), ONE HOME (BAR4-SCENES-2, the chair's ruling of 2026-11-16 12:16 UTC):
+  // how timber reaches the town's sawyers, by BAR4-RECORD's one reading (`houseInputAtHand.js`), in `timberAtHand.js`:
+  // `timber at hand` its own ground (`local`); `timber reaches the saws` any kind (local or imported)
+  timberAtHand: home('timberAtHand', 2, ['config', 'economicState', 'institutions']),
+  timberReachesSawmill: home('timberReachesSawmill', 2, ['config', 'economicState', 'institutions']),
+  // BAR4-SCENES (kind A1): enchanting among the services (`sceneSupply.js`)
   enchanting: home('enchanting', 2, ['availableServices']),
   // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label
   keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),
   foodEndurance: leaf({ layer: 2, module: 'domain/defense/defenseFacts.js', exported: 'foodEnduranceOf', call: 'record', reads: ['economicState'] }),
+  // BAR4-CORPUS-ECO (the chair's FS1): a chain the rites hold up and that still runs (the fished-out income line reads it)
+  ritesHoldAChain: leaf({ layer: 2, module: 'domain/facts/chainRites.js', exported: 'ritesHoldAChain', call: 'record', reads: ['economicState'] }),
   chainCarrier: leaf({ layer: 2, module: 'domain/facts/chainCarrier.js', exported: 'chainCarrierOf', call: 'perChain', reads: ['config', 'economicState'] }),
   readiness: leaf({ layer: 2, module: 'domain/facts/factLayers.js', exported: 'defenseProfile.readiness', call: 'record', reads: ['defenseProfile'], stored: true,
     note: 'the stored readiness: the defence profile is layer 2 by value; born at assembly (NEW-1\'s step order)' }),
@@ -147,7 +161,7 @@ export const LEAVES = Object.freeze({
   rivalPower: home('rivalPower', 3, ['powerStructure']),
   // TAIL-TIES-9 (the chair's ruling (T28)): the crime fact's LEAF is the criminal structure's key, moved out of the display
   // (`deriveCriminalStructure` calls it and keeps its labels and the ring note's vantages, which read `_seed` and the tier).
-  crime: leaf({ layer: 3, module: 'domain/facts/criminalStructureKey.js', exported: 'criminalStructureKeyOf', call: 'record', reads: ['economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'],
+  crime: leaf({ layer: 3, module: 'domain/facts/criminalStructureKey.js', exported: 'criminalStructureKeyOf', call: 'record', reads: ['availableServices', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'], // BAR4-SAFETY (F3): the covert criminal services (`covertCrimeHeld`)
     note: 'the key reads the safety profile\'s crime lines, which assembly settles to the crime signal (a back-write at layer 3): it reads its own layer',
   }),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
@@ -162,12 +176,19 @@ export const LEAVES = Object.freeze({
   // ── layer 4: over the cast ──
   importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'config', 'economicState', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config)
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
+  // BAR4-CORPUS-DEF (D1): a danger from outside on its way, a live external-threat tension of the history (`dangerComing.js`)
+  dangerComing: home('dangerComing', 4, ['history']),
   // W2-A-LEAVES-2 (REVIEW-W2A F3): an official in a criminal's pay, the cast's own fact; the crime desk's lines
   // about bought officials are struck by it (`display/stateProse/crimeLineDisqualifiers.js`)
   officialsInPay: leaf({ layer: 4, module: 'domain/facts/officialsInPay.js', exported: 'officialsInCriminalPayOf', call: 'record', reads: ['npcs', 'powerStructure'] }),
   hasOtherNpc: home('hasOtherNpc', 4, ['npcs'], { call: 'factsCall' }),
   // R2-CODE-A-14 (the chair's ruling (s1)): a PAIR's fact — the two cards' memberships (the cast, layer 3)
   sharesPower: home('sharesPower', 4, ['npcs'], { call: 'factsCall' }),
+  // BAR4-PEOPLE (the chair's TI1 and its ruling of 11:07): two more PAIR facts, read off the final record by `factsOf` (the presumption
+  // check re-reads a drawn line's needs there), and at the draw by `people/ties.js :: withPairTies` from its drafts: the two cards'
+  // houses and ranks (the cast, layer 3); the ties between them (layer 3)
+  sharesPlace: home('sharesPlace', 4, ['npcs'], { call: 'factsCall' }),
+  loneTie: home('loneTie', 4, ['npcs', 'relationships'], { call: 'factsCall' }),
   magicPractitioners: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'magicPractitioners', call: 'record', reads: ['institutions', 'npcs'] }),
   magicReliance: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'deriveMagicReliance', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'] }),
   magicSource: leaf({ layer: 4, module: 'domain/facts/magicSource.js', exported: 'magicSourceOf', call: 'record', reads: ['config', 'economicState', 'economicViability', 'institutions', 'npcs'],

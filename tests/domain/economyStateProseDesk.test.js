@@ -1359,7 +1359,9 @@ describe('W1 ECO — the construction lenses', () => {
     ['foodMeans', 'DS-ECO-9', 'HOW THE NEED IS MET: much of it brought in', base({ foodSecurity: { label: 'Pressured', foodRecord: { normalImportPct: 35, magicPct: 0 } } })],
     ['foodMeans', 'DS-ECO-9', 'HOW THE NEED IS MET: part of it by magic', base({ foodSecurity: { label: 'Secure', foodRecord: { normalImportPct: 0, magicPct: 12 } } })],
     ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: one source', base({ foodSecurity: { label: 'Secure', activeChainsCount: 1, foodRecord: { foodSources: ['livestock'] } } })],
-    ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: several, the largest named', base({ foodSecurity: { label: 'Secure', activeChainsCount: 2, foodRecord: { foodSources: ['fish', 'grain'] } } })],
+    // BAR4-CORPUS-ECO (2026-11-16): the record's own band beside its label (v1 now declares `food: ≥ importDependent`, as v2 and v3
+    // declared `food: ≥ secure`): a record with no band answers no band, and the pool was reached here by v1 alone
+    ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: several, the largest named', base({ foodSecurity: { label: 'Secure', activeChainsCount: 2, foodRecord: { band: 'secure', foodSources: ['fish', 'grain'] } } })],
     ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: four or more', base({ foodSecurity: { label: 'Secure', activeChainsCount: 4, foodRecord: { foodSources: ['grain', 'fish', 'livestock', 'game'] } } })],
     ['foodOnProsperity', 'DS-ECO-8', 'FOOD AND PROSPERITY: hunger holds the town down', base({ foodSecurity: { label: 'Active Famine', prosperityMod: { type: 'cap' } } })],
     ['foodOnProsperity', 'DS-ECO-8', 'FOOD AND PROSPERITY: the cost of food weighs on the town', base({ foodSecurity: { label: 'Pressured', prosperityMod: { type: 'penalty' } } })],

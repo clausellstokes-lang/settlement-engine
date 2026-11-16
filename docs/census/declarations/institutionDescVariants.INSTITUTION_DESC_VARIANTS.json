@@ -2712,7 +2712,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "BAR4-HOUSES (2026-11-16, REVIEW-BAR-4 C40862): presumes timber the town works (`timber at hand`): declared on its late sibling set (DESC_LATE_SIBLINGS)"
     },
     {
       "id": "town|Crafts|Sawmill (commercial)#1",
@@ -2720,7 +2721,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "BAR4-HOUSES (2026-11-16, REVIEW-BAR-4 C40862): presumes timber the town works (`timber at hand`): declared on its late sibling set (DESC_LATE_SIBLINGS)"
     },
     {
       "id": "town|Crafts|Brewery#0",
@@ -3204,7 +3206,7 @@
     },
     {
       "id": "town|Government|Town crier#0",
-      "text": "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.",
+      "text": "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays the wage.",
       "needs": [
         "market"
       ],
@@ -3214,7 +3216,7 @@
     },
     {
       "id": "town|Government|Town crier#1",
-      "text": "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is the town, or else a guild.",
+      "text": "At fixed times the proclamations, the prices, and the news are called out in the market square. The town pays for it, or else a guild.",
       "needs": [
         "market"
       ],

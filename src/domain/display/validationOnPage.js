@@ -32,16 +32,16 @@ import { RESOURCE_CHAINS } from '../../data/goods/chains.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { availableNativeResourceKeys } from '../resourceSemantics.js';
 import { isTradeRouteDisconnected } from '../tradeRouteSemantics.js';
-import { institutionHasAnyTag } from '../../lib/entities.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
 import { compareCodepoint } from '../deterministicSort.js';
-import { exportsAsPrinted, houseMakesGoodNamed, importsAsPrinted, tradeMarkOf } from './tradeListDisplay.js';
+import { exportsAsPrinted, houseMakesGoodNamed, tradeMarkOf } from './tradeListDisplay.js';
 import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
+import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand } from '../facts/houseInputAtHand.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -91,87 +91,28 @@ import { crisisOf } from '../facts/crisisKind.js';
 const str = (x) => (typeof x === 'string' ? x : x == null ? '' : String(x));
 /** @template T @param {T} x @returns {ArrOf<T>} */
 const arr = (x) => /** @type {ArrOf<T>} */ (Array.isArray(x) ? x : []);
-/** @param {string} text a `recordGoods` text @param {string} word the singular word @returns {boolean} the word or its plural ("mineral salts" answers salt) */
+/** @param {string} text a normed goods text @param {string} word the singular word @returns {boolean} the word or its plural ("mineral salts" answers salt) */
 const holds = (text, word) => text.includes(norm(word)) || text.includes(norm(`${word}s`));
 /** @param {string} x */
 const norm = (x) => ` ${x.toLowerCase().replace(/[_/()\-,.]+/g, ' ').replace(/\s+/g, ' ').trim()} `;
 
 /**
- * What each chain's input is CALLED on the record (the economy's goods vocabulary and the
- * nearby-resource keys), and how the DM sentence names it. Keyed by the chain's key in
- * `RESOURCE_CHAINS`, never by an institution. `food` names the food record's source that
- * answers the input; `route` says a connected trade route brings it (caravans bring camels).
- * @type {Readonly<Record<string, { words: ReadonlyArray<string>, noun: string, raw?: string, plural?: boolean, food?: ReadonlyArray<string>, staple?: boolean, route?: boolean }>>}
+ * Whether the record answers a chain's input for this house: THE ONE READING the gap's writer reads
+ * (`facts/houseInputAtHand.js :: houseInputAtHand`, BAR4-RECORD R1, the chair's K6 of BRIEF-BAR4, vetoable by the owner).
+ * This reader searched the record's goods as one text (production, arrivals, EXPORTS, live resources) and so called a
+ * sawmill answered by the grove's "Sacred wood" export or by the "Milled lumber" it is said to make, while the record
+ * called it short (67 rows in 64 towns of the census's 720): a house's own output never answers its input.
+ * @param {PageRecord} s @param {string} chainKey @param {unknown} inst
  */
-const CHAIN_INPUTS = Object.freeze({
-  wool: { words: ['wool'], noun: 'wool' },
-  flax: { words: ['flax', 'linen'], noun: 'flax' },
-  grain: { words: ['grain', 'flour', 'grain fields', 'fertile floodplain'], noun: 'grain', food: ['grain', 'mill'], staple: true },
-  grapes: { words: ['grapes', 'vineyard', 'vineyards'], noun: 'grapes', plural: true },
-  livestock: { words: ['livestock', 'dairy', 'grazing land', 'cattle'], noun: 'livestock', food: ['livestock'] },
-  ironOre: { words: ['iron', 'iron ore', 'iron deposits'], noun: 'iron ore' },
-  copperOre: { words: ['copper', 'copper ore'], noun: 'copper ore' },
-  preciousMetals: { words: ['precious metals', 'gold', 'silver'], noun: 'gold or silver ore' },
-  timber: { words: ['timber', 'wood', 'lumber', 'managed forest'], noun: 'timber' },
-  stone: { words: ['stone', 'stone quarry'], noun: 'stone' },
-  clay: { words: ['clay', 'river clay'], noun: 'clay' },
-  hides: { words: ['animal hides', 'hides', 'furs'], noun: 'hides', plural: true },
-  fish: { words: ['fish', 'fishing grounds', 'river fish'], noun: 'fish', food: ['fish'] },
-  gemstones: { words: ['gems', 'gemstones', 'gemstone deposits'], noun: 'gemstones', plural: true },
-  sand: { words: ['glass sand', 'glass'], noun: 'glass sand', raw: 'glass sand' },
-  herbs: { words: ['medicinal herbs', 'herbs'], noun: 'medicinal herbs', plural: true },
-  alpineWool: { words: ['wool', 'alpine pasture'], noun: 'wool' },
-  mountainTimber: { words: ['timber', 'wood', 'mountain timber'], noun: 'timber', raw: 'timber' },
-  desertSalt: { words: ['salt', 'desert salt', 'salt flats', 'salt pans'], noun: 'salt' },
-  desertGlass: { words: ['glass sand', 'glass'], noun: 'glass sand', raw: 'glass sand' },
-  camelCaravan: { words: ['camel', 'camels', 'camel herds'], noun: 'camels', plural: true, route: true },
-  oasisDate: { words: ['dates', 'date palms', 'oasis water'], noun: 'dates', plural: true },
-  mineralHot: { words: ['hot springs', 'hot springs mineral', 'healing waters'], noun: 'water from the hot springs', raw: 'mineral hot springs' },
-});
-
-/** The catalogue tags of a house whose trade IS the route (a market, a caravanserai). */
-const ROUTE_HOUSE_TAGS = Object.freeze(['market', 'transport']);
-
-/**
- * The record's own goods, as one searchable text: what the economy produces, what TRADE BRINGS IN
- * (`tradeListDisplay.js :: importsAsPrinted(s).arriving`), the exports, and the nearby resources that are not
- * depleted (their keys and their commodities). A good the terrain needs and no trade brings (`.needed`) is NOT a
- * good the town has: the record's own gap kind for its house is `missing`, so the gap line prints (W2-A-LEAVES-2,
- * REVIEW-W2A F1: the first seat read the need list as arrivals and silenced 445 true gaps).
- * @param {PageRecord} s
- */
-function recordGoods(s) {
-  const es = s?.economicState || {};
-  const keys = availableNativeResourceKeys(s?.config || {});
-  /** @type {string[]} */
-  const goods = [
-    ...arr(es.localProduction), ...importsAsPrinted(/** @type {Parameters<typeof importsAsPrinted>[0]} */ (s)).arriving, ...arr(es.primaryExports),
-    ...keys, ...keys.flatMap((/** @type {string} */ k) => arr(/** @type {Readonly<Record<string, { commodities?: unknown } | undefined>>} */ (RESOURCE_DATA)[k]?.commodities)),
-  ].map(str);
-  return goods.map(norm).join('|');
+function inputAnswered(s, chainKey, inst) {
+  if (!CHAIN_INPUTS[chainKey]) return true; // a chain this reader cannot name prints nothing (never a rule sentence)
+  return houseInputAtHand(/** @type {Parameters<typeof houseInputAtHand>[0]} */ (s), chainKey, /** @type {Parameters<typeof houseInputAtHand>[2]} */ (inst), /** @type {any} */ (RESOURCE_CHAINS)[chainKey]) !== 'missing';
 }
 
-/**
- * Whether the record answers a chain's input.
- * @param {PageRecord} s @param {string} chainKey @param {unknown} inst @param {string} goods from `recordGoods`
- */
-function inputAnswered(s, chainKey, inst, goods) {
-  const spec = CHAIN_INPUTS[chainKey];
-  if (!spec) return true; // a chain this reader cannot name prints nothing (never a rule sentence)
-  if (spec.words.some((w) => holds(goods, w))) return true;
-  const food = s?.economicState?.foodSecurity?.foodRecord;
-  if (food && spec.food && arr(food.foodSources).some((x) => spec.food?.includes(x))) return true;
-  // The staple comes in by ordinary supply (hinterland carts, trade) when the food record says so.
-  if (food && spec.staple && Number(food.normalImportPct) > 0) return true;
-  const route = s?.config?.tradeRouteAccess ?? s?.economicState?.tradeAccess;
-  const connected = Boolean(route) && !isTradeRouteDisconnected(route);
-  if (connected && (spec.route || institutionHasAnyTag(inst, [...ROUTE_HOUSE_TAGS]))) return true;
-  return false;
-}
-
-/** @param {{ name?: unknown } | null | undefined} inst @returns {string} the house as the sentence names it ("the potter") */
+/** @param {{ name?: unknown } | null | undefined} inst @returns {string} the house as the sentence names it ("the potter"; "the sawmill" of a commercial one) */
 function houseWords(inst) {
-  const name = str(institutionDisplayName(inst) || inst?.name).replace(/^access to (?:an? )?/i, '');
+  // the house's prose name, its rung struck ("Sawmill (commercial)" is the sawmill: BAR4-RECORD R2), as proseHouseName reads it
+  const name = str(institutionDisplayName(inst) || inst?.name).replace(/^access to (?:an? )?/i, '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
   return `the ${name.charAt(0).toLowerCase()}${name.slice(1)}`;
 }
 
@@ -519,7 +460,6 @@ export function resourceGapLines(s) {
   const ra = s?.resourceAnalysis;
   const gaps = arr(ra?.gaps);
   if (!gaps.length) return [];
-  const goods = recordGoods(s);
   const institutions = arr(s?.institutions);
   /** @type {GapLine[]} */
   const out = [];
@@ -561,8 +501,8 @@ export function resourceGapLines(s) {
   for (const g of gaps) if (g && typeof g === 'object' && g.institution) flagged.set(str(g.institution), g);
   for (const [name, g] of flagged) {
     const inst = institutions.find((i) => i?.name === name) || { name };
-    const chains = Object.entries(RESOURCE_CHAINS).filter(([, c]) => arr(c.processingInstitutions).includes(name));
-    if (chains.some(([key]) => inputAnswered(s, key, inst, goods))) continue;
+    const chains = chainsOfHouse(name, RESOURCE_CHAINS); // R1/R2: the chains the writer asked this house of (a sawmill's rung too)
+    if (chains.some(([key]) => inputAnswered(s, key, inst))) continue;
     const specs = chains.map(([key]) => CHAIN_INPUTS[key]).filter(Boolean);
     const nouns = [...new Set(specs.map((x) => x.noun))];
     if (!nouns.length) continue;

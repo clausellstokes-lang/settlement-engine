@@ -120,7 +120,7 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
       `Anyone new to ${name} who needs a meal or a bed is sent to the monks.`,
     ];
     const fired = new Set(scenePresumptionFindings(town, lines).map((f) => f.presumes));
-    expect([...fired].sort()).toEqual(['enchanting', 'herds live', 'market open', 'monks lodge', 'timber at hand']);
+    expect([...fired].sort()).toEqual(['enchanting', 'herds live', 'market open', 'monks lodge', 'timber reaches the saws']);
     // and each presumption is a reader the table names (no presumption without a reader)
     for (const p of fired) expect(typeof PRESUMES[/** @type {keyof typeof PRESUMES} */ (p)]).toBe('function');
   });
@@ -137,13 +137,16 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
       try { return String(composeArrivalScene(s)); } finally { clearActiveRng(); }
     };
     const timber = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'timber'));
-    const rasp = timber.dominant.find((/** @type {any} */ l) => l?.needs?.includes('timber at hand') && !l.twinOf && /rasp/.test(String(l.text('{name}'))));
+    const rasp = timber.dominant.find((/** @type {any} */ l) => l?.needs?.includes('timber reaches the saws') && !l.twinOf && /rasp/.test(String(l.text('{name}'))));
     const twin = timber.dominant.find((/** @type {any} */ l) => l?.twinOf === rasp.text('{name}'));
     const raspLine = String(rasp.text(b.town.name)); const twinLine = String(twin.text(b.town.name));
+    // stripped of its timber by every road the one reader reads (`houseInputAtHand.js`): no timber ground, no timber made or bought,
+    // and its woodcutter's camp ruined (off the live roster that produces; still a name the picker reads, so the slot is the same)
     const stripped = { ...b.town, config: { ...b.town.config, nearbyResources: [], nearbyResourcesNative: [], nearbyResourcesState: {} },
-      economicState: { ...b.town.economicState, primaryImports: [], necessityImports: [] } };
-    expect(factsOf(b.town).timberAtHand).toBe(true);
-    expect(factsOf(stripped).timberAtHand).toBe(false);
+      economicState: { ...b.town.economicState, primaryImports: [], necessityImports: [], localProduction: [] },
+      institutions: b.town.institutions.map((/** @type {any} */ i) => (/woodcutter/i.test(String(i?.name)) ? { ...i, _worldPulseInactive: true } : i)) };
+    expect(factsOf(b.town).timberReachesSawmill).toBe(true);
+    expect(factsOf(stripped).timberReachesSawmill).toBe(false);
     const before = scene(b.town); const after = scene(stripped);
     expect(before).toContain(raspLine);
     expect(after).toContain(twinLine);
