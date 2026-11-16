@@ -87,6 +87,8 @@ export const RULES = [
 ];
 
 const ROW_TABS = new Set(['Systems/Institutions', 'Systems/Services', 'Systems/Economics']); // Resources' lists are LAW 3's
+/** An income row's title (a few words, no full stop), then a mark. */
+const INCOME_TITLE_MARK = /^[A-Z][^.:]{2,48}? (Stopped by the|Curtailed by the|Scarce in the|Short of) /;
 
 export function law2(T, town) {
   const out = [];
@@ -146,6 +148,10 @@ export function law2(T, town) {
       if (x.tab === 'Systems/Economics' && /^(Produced locally|Exports|Imports)$/.test(T.tabs[x.tab][x.i - 1] || '')) continue; // the trade lists are LAW 3's
       if (x.tab === 'Systems/Services' && T.services.some((e) => e.houseIdx === x.i)) continue; // a house's name
       if (lineMarked(T, x.tab, x.i)) continue;
+      // BAR5-MARKS (2026-11-16), A DETECTOR CORRECTION: an Economics income row prints its title, then its mark, then its
+      // description ("Apothecary & Alchemy Curtailed by the siege. Remedies …", `economicsCrisisMarks.js :: incomeDescShown`):
+      // the mark after the title is the row's own (the PDF prints the same mark leading the row). No control rests on it.
+      if (x.tab === 'Systems/Economics' && INCOME_TITLE_MARK.test(x.text)) continue;
       if (r.chipHouse && x.tab === 'Systems/Institutions' && !r.chipHouse.test(cardAt(T, x.i)?.name || '')) continue;
       if (r.chipHouse && x.tab === 'Systems/Services' && !r.chipHouse.test(entryAt(T, x.i)?.house || '')) continue;
       if (/^Services · /.test(x.text)) {
@@ -159,6 +165,10 @@ export function law2(T, town) {
         const s = stripNames(s0);
         if (!claim.test(s) || SELF_AWARE.test(s) || MARK_LEAD.test(s)) continue;
         if (r.id === 'L2.siege.abroad' && pastOfRecord(s0)) continue; // BAR5-MARKS: the named exclusion above
+        // BAR5-MARKS (2026-11-16), A NAMED EXCLUSION of `L2.siege.cutgood`: a line that itself says its herbs run short
+        // (`economy/incomeLineSiblings.js :: REMEDIES_SHORT_LINE`, "… made here, but few, while the herbs and reagents they need
+        // run short"): it offers few remedies and says why, true beside the siege's cut (1 instance in the read's 300 at tip)
+        if (r.id === 'L2.siege.cutgood' && /\bbut few\b.*\brun short\b/.test(s0)) continue;
         push(x.tab, x.i, s0);
         break;
       }
