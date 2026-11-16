@@ -139,6 +139,8 @@ export const REVIEWED = [
   { seat: 'BAR5-FOOD', file: 'src/generators/economy/prosperity.js', starts: 'The settlement is too big to live cut off', reason: 'the isolated town\'s line: it states the absence of outside trade, true under every crisis' },
   { seat: 'BAR5-FOOD', file: 'src/generators/economy/prosperity.js', starts: 'With no outside trade, the settlement struggles', reason: 'the isolated town\'s line: it states the absence of outside trade, true under every crisis' },
   { seat: 'BAR5-FOOD', file: 'src/generators/economy/prosperity.js', starts: 'The settlement feeds and supplies itself without outside trade', reason: 'the isolated town\'s line: it states the absence of outside trade, true under every crisis' },
+  { seat: 'BAR5-FOOD', file: 'src/data/dossierStateProse/economy.generated.js', starts: 'Plenty of people at {settlement} have used its {institution}', reason: 'the lexicon\'s "plenty" is "many people" here: the line claims no food or goods' },
+  { seat: 'BAR5-FOOD', file: 'src/data/dossierStateProse/economy.generated.js', starts: 'The stores are sealed off, and the road brings nothing more to them', reason: 'the BLOCKADED pool\'s own line: it states what the blockade stops' },
 ];
 const reviewedOf = (rel, text) => REVIEWED.find((r) => r.file === rel && text.startsWith(r.starts)) || null;
 
