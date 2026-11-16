@@ -1,0 +1,8 @@
+{"id":"C25014","town":"bar0-metropolis-calm-rand-22","sev":"LOW","kind":"STATE","why":"Overview row names nothing it relies on, says Integral; header magic low, food by magic 0%, Magical Capability Weak (C25017)","other":"C25017"}
+{"id":"C26403","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"says the metropolis leans first on its fishing for food; LAND gives River Fisheries depleted, River Fishing vulnerable, fish market short of fish; 54% grown, 46% imported","other":"C26437"}
+{"id":"C26840","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"PAIR","why":"says GGC is winning against Thieves' Guild; stability Unstable (pervasive organized crime); crime 'rising faster than those in charge can answer it'","other":"C25027"}
+{"id":"C26853","town":"bar0-metropolis-calm-rand-22","sev":"LOW","kind":"BROKEN","why":"heading says Institutions behind this power (46) but Power section (every line shown) lists 43 items under it","other":""}
+{"id":"C26907","town":"bar0-metropolis-calm-rand-22","sev":"LOW","kind":"BROKEN","why":"heading says Institutions behind this power (47) but Power section (every line shown) lists 39 items under it","other":""}
+{"id":"C26984","town":"bar0-metropolis-calm-rand-22","sev":"LOW","kind":"STATE","why":"says food trades are failing; FOOD word Secure, stores 14.8 months, failed source None, gap 0%","other":"C25018"}
+{"id":"C27089","town":"bar0-metropolis-calm-rand-22","sev":"MED","kind":"STATE","why":"says the baked-goods trade would yield less if magic failed; FOOD by magic 0%, reliance row names only enchanting, herbalism, spellcasting; Bakers not supplied by magic","other":"C27085"}
+{"id":"DONE","lines":4142,"blocks":1,"flags":7}
