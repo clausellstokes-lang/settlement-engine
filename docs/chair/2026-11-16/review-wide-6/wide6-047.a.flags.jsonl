@@ -1,0 +1,5 @@
+{"id":"C124324","town":"bar0-metropolis-calm-rand-34","sev":"MED","kind":"PAIR","why":"Economics says luxury goods and spices are 'needed, and not brought in'; Luxury goods quarter 'luxury goods from across the world', 'silk, spice'","other":"C123972"}
+{"id":"C124317","town":"bar0-metropolis-calm-rand-34","sev":"LOW","kind":"BROKEN","why":"slash-joined raw label 'gold/silver ore' printed in the prose as a name","other":""}
+{"id":"C124335","town":"bar0-metropolis-calm-rand-34","sev":"LOW","kind":"BROKEN","why":"'its herds comes first': plural subject 'herds' with singular verb 'comes'","other":""}
+{"id":"C124856","town":"bar0-metropolis-calm-rand-34","sev":"LOW","kind":"PAIR","why":"'Reliance on magic: Integral' against the same tab's 'Economic role: common', 'Infrastructure role: common', header 'magic low' and food by magic 0%","other":"C124857"}
+{"id":"DONE","lines":3374,"blocks":1,"flags":4}
