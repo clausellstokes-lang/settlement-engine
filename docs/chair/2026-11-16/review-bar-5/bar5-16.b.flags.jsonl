@@ -1,0 +1,16 @@
+{"id":"C36231","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD header says the page prints Secure (band secure, 4% gap covered by imports, 6.1 months stores)","other":""}
+{"id":"C36261","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"prints 'Food: Pressured'; FOOD header's word is Secure","other":"C36231"}
+{"id":"C36279","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"prints 'Food · Pressured'; FOOD header's word is Secure","other":"C36231"}
+{"id":"C36860","town":"bar0-town-occupied-rand-24","sev":"LOW","kind":"PAIR","why":"'thieves know the court sits and the cells are real' beside 'the law here is slow and easily outbid' and 'thieves are scarce now'","other":"C36502"}
+{"id":"C37321","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"Daily Life prints food 'Pressured'; FOOD header's word is Secure","other":"C36231"}
+{"id":"C37416","town":"bar0-town-occupied-rand-24","sev":"MED","kind":"STATE","why":"Tonight sheet prints 'Food Pressured'; FOOD header's word is Secure","other":"C36231"}
+{"id":"C37454","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD header says the page prints Secure (band secure, deficit 3% covered by imports, 5.6 months stores)","other":""}
+{"id":"C37477","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"prints 'Food: Pressured'; FOOD header's word is Secure","other":"C37454"}
+{"id":"C37493","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"prints 'Food · Pressured'; FOOD header's word is Secure","other":"C37454"}
+{"id":"C37490","town":"bar0-town-occupied-rand-25","sev":"LOW","kind":"PAIR","why":"Defense readiness 'Critical' beside Defense 'Vulnerable' (STATE defence word) for the same town","other":"C37448"}
+{"id":"C37631","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"LACKS","why":"'Several quarters, each with its house of worship': a town of 329 people cannot hold several quarters; HOUSES gives 2-5 parish churches","other":""}
+{"id":"C37796","town":"bar0-town-occupied-rand-25","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'its herds comes first'","other":""}
+{"id":"C38014","town":"bar0-town-occupied-rand-25","sev":"LOW","kind":"PAIR","why":"thieves, fences and bandits each at work, beside 'Thieves are scarce now' and 'ordinary theft has dropped' under the curfew","other":"C38011"}
+{"id":"C38315","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"Daily Life prints food 'Pressured'; FOOD header's word is Secure","other":"C37454"}
+{"id":"C38398","town":"bar0-town-occupied-rand-25","sev":"MED","kind":"STATE","why":"Tonight sheet prints 'Food Pressured'; FOOD header's word is Secure","other":"C37454"}
+{"id":"DONE","lines":2284,"blocks":2,"flags":15}
