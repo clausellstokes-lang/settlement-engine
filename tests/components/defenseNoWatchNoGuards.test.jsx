@@ -19,6 +19,7 @@ import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 import { quarrelUnderViolence } from '../../src/generators/safetyLineTruth.js';
+import { GUARD_LAW_SIBLINGS } from '../../src/domain/display/guardLineUnderTheLaw.js';
 
 const STRESSES = [
   'mass_migration', 'famine', 'under_siege', 'occupied', 'politically_fractured', 'indebted',
@@ -73,7 +74,11 @@ describe('one reader of the watch fact on the Defense tab', () => {
     // RE-KEYED BY IDENTITY (BAR3-DEFECON, 2026-11-15, C25320): where the safety label reads violence, the third vantage takes
     // its declared twin ("…though many come to blows first", `safetyLineTruth.js :: quarrelUnderViolence`), which says the
     // same absence; the pool's members and their twins are the members.
-    const members = [...new Set(NO_WATCH_SMALL.flatMap((member) => [member, quarrelUnderViolence(member, 'Dangerous')]))];
+    // RE-KEYED BY IDENTITY (BAR5-SAFETY, 2026-11-16, the audit's C42116): where the page prints `Law & order · Collapsed` each
+    // member prints its declared twin (`guardLineUnderTheLaw.js :: GUARD_LAW_SIBLINGS`), which opens on the same absence ("There
+    // is no watch", "Nobody here is paid to keep order"); the twins are members.
+    const twinsOf = (/** @type {string} */ m) => (GUARD_LAW_SIBLINGS[m] || []).filter((l) => typeof l.twinOf === 'string').map((l) => l.text);
+    const members = [...new Set(NO_WATCH_SMALL.flatMap((member) => [member, quarrelUnderViolence(member, 'Dangerous')]).flatMap((m) => [m, ...twinsOf(m)]))];
     const saying = TABS.filter(({ text }) => members.some((member) => text.includes(member))).length;
     expect(saying, 'the guard assessment no longer reads the absence').toBeGreaterThan(TABS.length * 0.9);
   });

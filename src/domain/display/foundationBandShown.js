@@ -72,7 +72,7 @@ export function noHealingKept(settlement) {
  */
 export function foundationCapOf(settlement, key) {
   if (key === 'healing_capacity') return noHealingKept(settlement) ? 'strained' : null;
-  if (key === 'law_order' || key === 'criminal_opportunity') return crimeWaveStands(settlement) ? 'strained' : null;
+  if (key === 'criminal_opportunity') return crimeWaveStands(settlement) ? 'strained' : null; // law_order's cap: `facts/lawBand.js` (ruling LB2)
   if (key === 'labor_capacity') return conscriptionTookHands(settlement) ? 'strained' : null;
   return null;
 }
@@ -85,6 +85,7 @@ export function foundationCapOf(settlement, key) {
  */
 export function foundationBandShown(settlement, key, band) {
   if (key === 'trade_connectivity') return band === 'collapsed' && tradeArrivesOnPage(settlement) ? 'critical' : band;
+  if (key === 'law_order') return lawBandOf(settlement) ?? band; // BAR5-SAFETY (ruling LB2): the law row's band has ONE home, `facts/lawBand.js`
   const cap = foundationCapOf(settlement, key);
   if (!Object.hasOwn(RANK, band)) return band;
   const floor = foundationFloorOf(settlement, key);
@@ -139,3 +140,4 @@ export function tradeArrivesOnPage(settlement) {
     return tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement)).imports.length > 0;
   } catch { return false; }
 }
+import { lawBandOf } from '../facts/lawBand.js'; // BAR5-SAFETY (ruling LB2): at the END, no line above moves

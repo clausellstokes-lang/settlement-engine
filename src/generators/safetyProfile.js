@@ -338,7 +338,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       inst.hasMercenary  ? 'The mercenary company focuses on protecting those who pay them, not the general population.' :
                            'There is no meaningful guard presence.';
     const wallNote = inst.hasWalls ? " Walls slow entry but don't solve what happens inside them." : '';
-    safetyDesc = `Crime is a persistent and visible problem. ${lawRef} Travelers are advised to move in groups and keep valuables hidden.${wallNote}`;
+    safetyDesc = `Crime is a persistent and visible problem. ${lawRef} ${hasStress('under_siege') ? lineText({ text: 'Inside the siege lines, people are advised to move in groups and keep valuables hidden.', needs: ['crisis: siege'] }) : lineText({ text: 'Travelers are advised to move in groups and keep valuables hidden.', excludes: ['crisis: siege'] })}${wallNote}`; // BAR5-SAFETY (LAW 5): no travellers come in under a siege
   } else {
     safetyLabel = 'Dangerous';
     const lawRef =
@@ -979,7 +979,7 @@ const SMUGGLING_HOOKS = Object.freeze([
 ].map((text) => Object.freeze({ id: text, text })));
 
 /** #17: a court AND a prison stand (the branch's two facts). @param {string} lawRef */
-function COURT_AND_PRISON(lawRef) {
+export function COURT_AND_PRISON(lawRef) {
   return [
     ' A functioning court and prison mean crimes carry real consequences.',
     ' A wrong done here goes before the court, and the guilty can be locked up for it.',
@@ -989,7 +989,7 @@ function COURT_AND_PRISON(lawRef) {
 }
 
 /** #17's sibling: a court and no prison. @param {string} lawRef */
-function COURT_NO_PRISON(lawRef) {
+export function COURT_NO_PRISON(lawRef) {
   return [
     ' A court exists, though there is nowhere to hold the guilty.',
     ' The court can try a case, but there is little room to hold anyone it convicts.',

@@ -390,8 +390,8 @@
    "src": "placed: its lines declare `danger coming` (the history's live tensions, layer 4); was 4 by map:measured (BAR4-CORPUS-DEF, 2026-11-16, kind D1)"
   },
   "DS-DEF-1::readiness WEAK": {
-   "layer": 4,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `law` (the law's band as the page prints it, lawBand.js, layer 4); was 4 by map:measured (BAR5-SAFETY, 2026-11-16, L2.law.collapsed)"
   },
   "DS-DEF-1::strategic value HIGH": {
    "layer": 5,
@@ -498,8 +498,8 @@
    "src": "map:inferred"
   },
   "DS-DEF-2::Internal Security: full legal chain (court AND prison)": {
-   "layer": 3,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: its lines declare `law` (the law's band as the page prints it, lawBand.js, layer 4); was 3 by map:measured (BAR5-SAFETY, 2026-11-16, L2.law.collapsed)"
   },
   "DS-DEF-2::Internal Security: no legal infrastructure": {
    "layer": 3,
