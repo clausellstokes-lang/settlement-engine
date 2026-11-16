@@ -23,7 +23,7 @@ import { applyNeighbourEconomicBias } from './neighbourEconomicBias.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { minorRoutesReach } from '../../domain/facts/tradeReach.js'; // BAR6-RECORD (c): isolated with a minor route is a poor road
 /** BAR6-RECORD (c): the isolated need where a poor road still reaches (`minorRoutesReach`); read by `viability.js`'s Outlook line. */
-export const POOR_ROAD_SUPPLY_LINE = 'Poor road: supplies come in irregularly by minor routes, and stores carry the gaps between loads.';
+export const POOR_ROAD_SUPPLY_LINE = 'Poor road: supplies come in irregularly by minor routes.'; // under the Services row's 70-character clip
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; import { arcaneGuildHouseStands } from '../../domain/facts/magic.js'; import { namesSmugglingHouse } from '../../domain/crimeSignal.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
