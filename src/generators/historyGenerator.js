@@ -25,6 +25,7 @@ import {
 import { deriveHistoryRouteContext, smallPlaceWordsOf } from './history/historyRouteContext.js';
 import { drawDeclared, filterDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js';
 import { factsOf } from '../domain/facts/factsOf.js';
+import { nativeSemanticResourceKeys } from '../domain/content/customContentSemanticAuthority.js';
 import { generateSafetyNarrative2, generateTradeNarrative2 } from './history/historyEventStrands.js';
 export {
   STRESS_TO_TENSION,
@@ -155,7 +156,11 @@ const buildHistoryContext = (
     monsterThreat: threat || 'frontier',
     // resolveResources writes the resolved resource list back to config.nearbyResources;
     // surface it so the resource-anchored history events below are reachable.
-    nearbyResources: config.nearbyResources || [],
+    // BAR3-CLOSE-SWEEP-B (2026-11-16, letter a): the NATIVE members only (`nativeSemanticResourceKeys`, the roster's
+    // identity), never a custom label. The resource-anchored rolls below match keys by substring, so a custom resource
+    // named "grain_fields …" took an extra roll and shifted the stream the tensions draw from; since BAR3-DEFECON-2
+    // (decd2a1f8) the crime-wave tension settles the safety profile's lines at assembly, so a rename moved mechanics.
+    nearbyResources: nativeSemanticResourceKeys(config),
     primaryExports: exports,
     incomeSources: (economicState?.incomeSources || []).map(s => s.source),
     prosperity: economicState?.prosperity || 'Modest',
