@@ -1,0 +1,15 @@
+{"id":"C152965","town":"bar0-thorp-calm-rand-32","sev":"MED","kind":"LACKS","why":"'Two congregations' on holy days in a thorp of 12; HOUSES has only a Burial ground, 'No clergy is near enough'","other":"C153046"}
+{"id":"C152996","town":"bar0-thorp-calm-rand-32","sev":"MED","kind":"STATE","why":"Foundations 'Law & order · Critical' against STATE safety Moderate, Stable government, no crime; other rows Strained","other":"C152970"}
+{"id":"C153109","town":"bar0-thorp-calm-rand-32","sev":"LOW","kind":"BROKEN","why":"'The herds feeds' subject-verb disagreement","other":""}
+{"id":"C153547","town":"bar0-thorp-calm-rand-33","sev":"LOW","kind":"BROKEN","why":"'Weak defences is the reason' subject-verb disagreement (plural subject, singular verb)","other":""}
+{"id":"C153753","town":"bar0-thorp-calm-rand-34","sev":"MED","kind":"STATE","why":"'passing travellers' fed at the door in a thorp 'Off the trade routes entirely' (isolated, no exports or imports), food Pressured","other":"C153778"}
+{"id":"C153912","town":"bar0-thorp-calm-rand-34","sev":"LOW","kind":"PAIR","why":"'Loughshaw is fed' against Food Security 'Short: 2 lbs/day' and the Pressured food word, grown 96%, gap 4%","other":"C153907"}
+{"id":"C154042","town":"bar0-thorp-calm-rand-34","sev":"MED","kind":"LACKS","why":"'particular streets', 'all of them' in a thorp of 23; a population that size has no streets","other":""}
+{"id":"C154050","town":"bar0-thorp-calm-rand-34","sev":"MED","kind":"PAIR","why":"'lone thieves, not a gang... nobody running the streets' against hook 'The crime wave is coordinated. Someone is directing it' and tension party 'the criminal network'","other":"C153815"}
+{"id":"C154221","town":"bar0-thorp-calm-rand-35","sev":"LOW","kind":"LACKS","why":"'Nobody in the street' in a thorp of 28; a population that size has no streets","other":""}
+{"id":"C154358","town":"bar0-thorp-calm-rand-35","sev":"MED","kind":"PAIR","why":"Trade Profile 'No recorded imports' against Food Security '5 imported' and 'carts bring in about three parts in five'; FOOD brought in 8%","other":"C154364"}
+{"id":"C154255","town":"bar0-thorp-calm-rand-35","sev":"LOW","kind":"STATE","why":"Foundations 'Law & order · Critical' against STATE safety Moderate and Stable government","other":"C154229"}
+{"id":"C154607","town":"bar0-thorp-calm-rand-35","sev":"LOW","kind":"LACKS","why":"'the shrines' plural; HOUSES lists one Wayside shrine only","other":""}
+{"id":"C154665","town":"bar0-thorp-calm-rand-36","sev":"LOW","kind":"STATE","why":"Foundations 'Law & order · Critical' against STATE safety Moderate and Stable government","other":"C154640"}
+{"id":"C154778","town":"bar0-thorp-calm-rand-36","sev":"LOW","kind":"BROKEN","why":"'Economic Flows (1 active)' over 'All (3) · Issues (1)'; LAND has Grain & Bread and Faith & Worship running, so two active","other":"C154779"}
+{"id":"DONE","lines":2254,"blocks":5,"flags":14}
