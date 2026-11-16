@@ -64,6 +64,8 @@ function configOf(seed) {
 
 /** @type {Map<string, {record: any, lines: string[]}>} */
 const READ = new Map();
+/** The economy desk's read of a record, every line it draws (set in beforeAll; BAR4-SCENES-2's MU1 proof reads it). @type {(town: any) => string[]} */
+let deskLines = () => [];
 
 beforeAll(async () => {
   const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
@@ -87,6 +89,11 @@ beforeAll(async () => {
     READ.set(seed, { record: town, lines: seen.cur });
     seen.cur = null;
   }
+  deskLines = (/** @type {any} */ town) => {
+    seen.cur = [];
+    try { economyDeskRead(town, { publicDossier: false, playerView: false, tier: town?.tier, ...economicsDeskArgs(town) }); } catch { /* a desk that throws prints nothing */ }
+    const out = seen.cur; seen.cur = null; return out;
+  };
 }, 600000);
 
 const DETECTORS = Object.freeze({ E1: detectE1, E2: detectE2, E3: detectE3 });
@@ -143,6 +150,27 @@ const record = (/** @type {any} */ over) => ({
 });
 /** A member's authored text, its slots filled as a page fills them. @param {{text: string}} w */
 const printed = (w) => w.text.replace(/\{settlement\}/g, 'Tzulcoatl').replace(/\{good\}/g, 'fishing').replace(/\{\w+\}/g, 'the guild');
+
+// BAR4-SCENES-2 (2026-11-16, the chair's MU1 of 12:16 UTC: a line whose state is reachable stays, proved by one constructed
+// record). DS-ECO-9 "FOOD SOURCES: several, the largest named" v6 (a food band at or under deficit, no siege, no famine, no source
+// spent) prints in neither population; its state is reached here: a guard town whose desk draws the pool, its food band set to
+// deficit, prints v6, the pool's one line its declarations admit there.
+describe('REACHABLE (MU1): DS-ECO-9 several v6 prints in a town of its state', () => {
+  it('a guard town that draws the pool, its band at deficit and no crisis, prints v6', () => {
+    const pool = /** @type {Array<{text: string, vid: number, marks?: string[]}>} */ (/** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY)['DS-ECO-9'].pools['FOOD SOURCES: several, the largest named']);
+    // the draw spy records each drawn variant's own text (its template), so a member is found by its text
+    const calmVids = new Set([1, 2, 3]); // the pool's members of no crisis and a band above deficit
+    const drewCalm = (/** @type {string[]} */ lines) => pool.some((v) => calmVids.has(v.vid) && lines.includes(v.text));
+    const seed = SEEDS.find((x) => drewCalm(/** @type {any} */ (READ.get(x)).lines));
+    expect(seed, 'a guard town drew one of the pool\'s no-crisis members').toBeTruthy();
+    const town = /** @type {any} */ (READ.get(/** @type {string} */ (seed))).record;
+    const e = town.economicState; const fs = e.foodSecurity;
+    const deficit = { ...town, economicState: { ...e, foodSecurity: { ...fs, foodRecord: { ...fs.foodRecord, band: 'deficit' } } } };
+    const v6 = /** @type {{text: string}} */ (pool.find((v) => v.vid === 6));
+    const lines = deskLines(deficit);
+    expect(lines, `v6 prints in ${seed} at deficit`).toContain(v6.text);
+  });
+});
 
 describe('THE POSITIVE CONTROL: on a record in the kind\'s state, a line of the kind printed there is found', () => {
   it('E1: a spent fishery under a fish-led food record, with a food-source line', () => {

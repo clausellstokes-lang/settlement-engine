@@ -104,6 +104,7 @@ export function leafTouches(row, record, modules, stratumOf) {
     else if (getter === 'hasOtherNpc') facts.hasOtherNpc(Array.isArray(record.npcs) ? record.npcs[0] : 0);
     else if (getter === 'sharesPower') facts.sharesPower(Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []); // R2-CODE-A-14 (s1): a pair of the roster
     else if (getter === 'sharesPlace' || getter === 'loneTie') facts[getter](Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []); // BAR4-PEOPLE (11:07): a pair of the roster
+    else if (getter === 'tradeAtWork') for (const trade of ['fish', 'kilns', 'stone', 'arcane']) facts.tradeAtWork(trade); // BAR4-SCENES-2 (HW1): each trade the atom keys
   } else if (row.call === 'perChain' || row.call === 'perHouse') {
     // the chain a leaf reads is read through the view; the house NAMES a card asks about are the walker's own
     // argument, taken from the raw record, so asking costs the leaf no read of the economy

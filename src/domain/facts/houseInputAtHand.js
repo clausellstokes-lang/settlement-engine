@@ -37,6 +37,9 @@ import { hasTradeRouteConnection } from '../tradeRouteSemantics.js';
 import { institutionHasAnyTag } from '../../lib/entities.js';
 import { nativeSemanticNames } from '../content/customContentSemanticAuthority.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { catalogIdForName } from '../../data/institutionalCatalog.js';
+import { resourceShortageImport } from '../resourceSemantics.js';
+import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE } from '../../data/crisisDependence.js';
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -125,7 +128,7 @@ const wholeTokens = (a, b) => { const x = sing(norm(a)), y = sing(norm(b)); retu
 export function localProducerSupplies(requirement, institutions) {
   const rule = LOCAL_PRODUCERS.find((candidate) => candidate.requirement.test(requirement));
   if (!rule) return false;
-  return nativeSemanticNames(institutions).some((name) => rule.institution.test(name));
+  return nativeSemanticNames(/** @type {any[]} */ (institutions)).some((name) => rule.institution.test(name));
 }
 
 /**
@@ -160,12 +163,16 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   if (words.some((w) => holds(native, w)) || rawNames.some((n) => holds(native, n))) return 'local';
   // What the town makes names the RAW good itself (never the chain's product).
   if (arr(es.localProduction).some((e) => rawNames.some((n) => wholeTokens(str(e), n)))) return 'local';
-  if (localProducerSupplies(raw, liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
+  // HW1 (BAR4-SCENES-2): a house on a ground wholly spent is not its own producer, and a house that works the ground itself
+  // (SPENT_GROUND_WORKERS: the mine, the quarry, the boats) is fed by no import there either: the page's SV6 reading, one fact
+  const spentGround = onWhollySpentGround(record, house);
+  if (spentGround && SPENT_GROUND_WORKERS.includes(String(catalogIdForName(str(house?.name)) ?? ''))) return 'missing';
+  if (!spentGround && localProducerSupplies(raw, liveInstitutions(/** @type {any} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
 
   // The route, where no siege shuts it.
   const besieged = arr(config.stressTypes).includes('under_siege');
   if (!besieged && hasTradeRouteConnection(str(config.tradeRouteAccess))
-    && (spec?.route || institutionHasAnyTag(house || {}, [...ROUTE_HOUSE_TAGS]))) return 'route';
+    && (spec?.route || institutionHasAnyTag(/** @type {any} */ (house || {}), [...ROUTE_HOUSE_TAGS]))) return 'route';
 
   // The imports bring the raw good; the food record names the source or imports the staple.
   const imports = arr(es.primaryImports).map(str);
@@ -175,6 +182,155 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   if (spec?.food && arr(food?.foodSources).some((x) => spec.food?.includes(str(x)))) return 'imported';
   if (spec?.staple && (Number(food?.normalImportPct) > 0 || Number(es.foodSecurity?.importPct) > 0)) return 'imported';
   return 'missing';
+}
+
+/** A row a user authored (custom content), as the page's leaf reads it (`crisisStoppedRow.js`). @param {any} row */
+const isCustom = (row) => row?.custom === true || row?.source === 'custom' || row?.isCustom === true;
+
+/**
+ * THE THIRD READING (SV6): the houses whose every own ground the page prints as depleted, none kept by magic and none fed
+ * by the shortage import the trade record shows, each with what it is short of (`SPENT_GROUND_YIELD`).
+ * @param {object} settlement
+ * @returns {ReadonlyMap<string, string>} house name -> what it is short of
+ */
+export function housesOnSpentGround(settlement) {
+  const s = /** @type {{ config?: { nearbyResourcesDepleted?: unknown }, economicState?: { activeChains?: unknown, primaryImports?: unknown } }} */ (settlement);
+  const spent = new Set(Array.isArray(s.config?.nearbyResourcesDepleted) ? s.config.nearbyResourcesDepleted : []);
+  /** @type {Map<string, string>} */
+  const out = new Map();
+  if (spent.size === 0) return out;
+  const imports = new Set((Array.isArray(s.economicState?.primaryImports) ? s.economicState.primaryImports : []).map(String));
+  const chains = /** @type {Array<{ resourceKey?: unknown, status?: unknown, processingInstitutions?: unknown }>} */ (Array.isArray(s.economicState?.activeChains) ? s.economicState.activeChains : []);
+  /** @type {Map<string, Array<{ resourceKey?: unknown, status?: unknown }>>} */
+  const grounds = new Map();
+  for (const c of chains) {
+    if (!c || typeof c.resourceKey !== 'string' || !c.resourceKey) continue;
+    for (const h of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) {
+      if (typeof h !== 'string') continue;
+      if (!grounds.has(h)) grounds.set(h, []);
+      /** @type {Array<{ resourceKey?: unknown, status?: unknown }>} */ (grounds.get(h)).push(c);
+    }
+  }
+  // BAR3-SERVICES (S3): a fishing house no chain names works the chains on the town's own fisheries
+  // (`GROUNDS_WORKED_OFF_CHAIN`), and is judged by the same reading as a house a chain names
+  for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
+    const house = inst && typeof inst.name === 'string' ? inst.name : '';
+    if (!house || grounds.has(house) || isCustom(inst)) continue;
+    const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(house) || '');
+    if (!Object.prototype.hasOwnProperty.call(GROUNDS_WORKED_OFF_CHAIN, id)) continue;
+    const own = chains.filter((c) => c && typeof c.resourceKey === 'string' && GROUNDS_WORKED_OFF_CHAIN[id].includes(c.resourceKey));
+    // RULING FS1 (the chair's, 2026-11-16; vetoable by the owner): where no chain works the town's fisheries, the grounds
+    // themselves: the town's own fisheries of these kinds on the record (`config.nearbyResources`), whatever the food ledger counts
+    const fished = own.length ? own : nearbyGrounds(settlement).filter((k) => GROUNDS_WORKED_OFF_CHAIN[id].includes(k)).map((k) => ({ resourceKey: k }));
+    if (fished.length) grounds.set(house, fished);
+  }
+  for (const [house, own] of grounds) {
+    const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
+    const allSpent = own.every((c) => spent.has(/** @type {string} */ (c.resourceKey)) && c.status !== 'magically_sustained'
+      && (works || !imports.has(String(resourceShortageImport(/** @type {string} */ (c.resourceKey)) ?? ''))));
+    if (!allSpent) continue;
+    const key = /** @type {string} */ (own[0].resourceKey);
+    out.set(house, Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, key) ? SPENT_GROUND_YIELD[key] : 'its materials');
+  }
+  return out;
+}
+
+/**
+ * The town's own grounds on the record (`config.nearbyResources`), depleted or not (FS1).
+ * @param {object} settlement
+ * @returns {string[]}
+ */
+function nearbyGrounds(settlement) {
+  const near = /** @type {{ config?: { nearbyResources?: unknown } }} */ (settlement).config?.nearbyResources;
+  return Array.isArray(near) ? near.filter((k) => typeof k === 'string') : [];
+}
+
+/**
+ * BAR4-SCENES-2 (the chair's ruling HW1 of 2026-11-16 12:26 UTC; vetoable by the owner): A GROUND WHOLLY SPENT IS NOT AT HAND.
+ * The stone quarry of r2r-city-18 was answered `local` here (the quarry is its own local producer of stone) while the page
+ * marked it "Short of stone." by `housesOnSpentGround` above: one fact, two values. A house of the roster whose every own
+ * ground the record holds spent is not answered by the town's own producer of its input (the house itself, a quarry for
+ * stone), and a house that works the ground itself (`SPENT_GROUND_WORKERS`) is fed by no import there either ("an import
+ * feeds a buyer, never the work on the ground", SV6's own rule): THIS SIDE MOVED (the page's mark is unchanged). A live
+ * ground of the input still answers it.
+ * @param {any} record @param {any} house
+ */
+function onWhollySpentGround(record, house) {
+  const name = house && typeof house.name === 'string' ? house.name : '';
+  if (!name || !record || typeof record !== 'object') return false;
+  let spent = SPENT_OF.get(record);
+  if (!spent) { spent = housesOnSpentGround(record); SPENT_OF.set(record, spent); }
+  return spent.has(name);
+}
+/** One spent-ground reading a record object. @type {WeakMap<object, ReadonlyMap<string, string>>} */
+const SPENT_OF = new WeakMap();
+
+/**
+ * Each chain's raw input as the chain table names it (`resourceChains.js :: RESOURCE_CHAINS[key].rawResource`), copied so
+ * that a fact (eager) can read a gap's chain without the lazy chain table (WEAVE ST-2); the scene's guard pins the copy to
+ * the table, name for name (`tests/generators/bar4ScenePresumption.test.js`).
+ * @type {Readonly<Record<string, string>>}
+ */
+export const CHAIN_RAW_INPUT = Object.freeze({
+  wool: "wool",
+  flax: "flax",
+  grain: "grain",
+  grapes: "grapes",
+  livestock: "livestock",
+  ironOre: "iron ore",
+  copperOre: "copper ore",
+  preciousMetals: "gold/silver ore",
+  timber: "timber",
+  stone: "stone",
+  clay: "clay",
+  hides: "animal hides",
+  fish: "fish",
+  gemstones: "gemstones",
+  sand: "glass sand",
+  herbs: "medicinal herbs",
+  alpineWool: "alpine_pasture",
+  mountainTimber: "mountain_timber",
+  desertSalt: "desert_salt",
+  desertGlass: "glass_sand",
+  camelCaravan: "camel_herds",
+  oasisDate: "oasis_water",
+  mineralHot: "hot_springs_mineral",
+});
+/** The chain key of a gap's raw input name. @type {ReadonlyMap<string, string>} */
+const CHAIN_KEY_OF_RAW = new Map(Object.entries(CHAIN_RAW_INPUT).map(([key, rawName]) => [rawName, key]));
+
+/** One reading a record object (the page reads it many times over). @type {WeakMap<object, ReadonlyMap<string, string>>} */
+const SHORT_OF = new WeakMap();
+
+/**
+ * THE ONE FACT "THIS HOUSE IS SHORT" (BAR4-SCENES-2, the chair's ruling HW1 of 2026-11-16 12:26 UTC; vetoable by the owner),
+ * read by the arrival scene (`facts/tradeAtWork.js`), as the page's mark reads it (`crisisStoppedRow.js :: housesShortOfInput`):
+ *   (i)  a house the record's gaps call short of an input (`resourceAnalysis.gaps[].institution`), none of whose gapped
+ *        inputs the record answers on this reading (`houseInputAtHand`), the gaps the record holds everywhere excepted
+ *        (`INPUT_GAP_HELD_EVERYWHERE`, S7);
+ *   (ii) a house on a ground wholly spent (`housesOnSpentGround`, SV6).
+ * @param {unknown} record the settlement record
+ * @returns {ReadonlyMap<string, string>} house name -> what it is short of (the input's noun)
+ */
+export function housesShortOf(record) {
+  if (!record || typeof record !== 'object') return new Map();
+  const cached = SHORT_OF.get(record);
+  if (cached) return cached;
+  const r = /** @type {any} */ (record);
+  const gaps = /** @type {Array<{ institution: string, chain?: unknown }>} */ (arr(r.resourceAnalysis?.gaps).filter((/** @type {any} */ g) => g && typeof g === 'object' && typeof g.institution === 'string' && g.institution));
+  /** @type {Map<string, string>} */
+  const out = new Map();
+  for (const name of [...new Set(gaps.map((g) => g.institution))]) {
+    if (Object.prototype.hasOwnProperty.call(INPUT_GAP_HELD_EVERYWHERE, name)) continue;
+    const house = liveInstitutions(r).find((i) => i?.name === name) || { name };
+    const keys = gaps.filter((g) => g.institution === name).map((g) => CHAIN_KEY_OF_RAW.get(str(g.chain))).filter((k) => typeof k === 'string' && !!CHAIN_INPUTS[k]);
+    if (!keys.length) continue;
+    if (keys.some((key) => houseInputAtHand(r, /** @type {string} */ (key), house, { rawResource: CHAIN_RAW_INPUT[/** @type {string} */ (key)] }) !== 'missing')) continue;
+    out.set(name, [...new Set(keys.map((key) => CHAIN_INPUTS[/** @type {string} */ (key)].noun))].join(' or '));
+  }
+  for (const [house, ground] of housesOnSpentGround(r)) if (!out.has(house)) out.set(house, ground);
+  SHORT_OF.set(record, out);
+  return out;
 }
 
 /** The goods a sawmill makes of its timber (`computeActiveChains.js :: CHAIN_OUTPUT_INST_GATES`). */
@@ -190,7 +346,7 @@ const SAWN_GOODS = Object.freeze(['Milled timber', 'Milled lumber']);
  * @param {string} good the output asked about
  * @param {ReadonlyArray<string>} nearbyResources the town's resource keys @param {ReadonlyArray<string>} depletedResources
  * @param {ReadonlyArray<unknown> | null | undefined} institutions the roster
- * @param {(house: unknown) => boolean} isSawmill the caller's own test of a sawmill (its gate's keyword)
+ * @param {(house: any) => boolean} isSawmill the caller's own test of a sawmill (its gate's keyword)
  * @param {Readonly<Record<string, { rawResource?: unknown }>>} chains the chain table (`RESOURCE_CHAINS`, the caller's)
  * @returns {boolean} true unless the good is a sawn good and no sawmill of the roster has its timber
  */
@@ -199,7 +355,7 @@ export function sawnGoodFed(good, nearbyResources, depletedResources, institutio
   const depleted = new Set(arr(depletedResources).map((r) => resourceKeyForLabel(str(r)) || str(r)));
   const record = { config: { nearbyResources: arr(nearbyResources).map(str).filter((k) => !depleted.has(k)) }, economicState: {}, institutions };
   return institutions.filter((i) => !!i && isSawmill(i))
-    .some((house) => houseInputAtHand(record, 'timber', /** @type {Parameters<typeof houseInputAtHand>[2]} */ (house), chains.timber) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {Parameters<typeof houseInputAtHand>[2]} */ (house), chains.mountainTimber) !== 'missing');
+    .some((house) => houseInputAtHand(record, 'timber', /** @type {any} */ (house), chains.timber) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {any} */ (house), chains.mountainTimber) !== 'missing');
 }
 
 /**
@@ -235,8 +391,7 @@ export const houseRunsChain = (chain, name) => {
 /**
  * The chains a house runs, as `[chainKey, chain]` (`houseRunsChain`).
  * @param {unknown} name
- * @template {{ processingInstitutions?: ReadonlyArray<string> } | null | undefined} C
- * @param {Readonly<Record<string, C>>} chains the chain table (`RESOURCE_CHAINS`, the caller's: WEAVE ST-2)
- * @returns {Array<[string, C]>}
+ * @param {Readonly<Record<string, unknown>>} chains the chain table (`RESOURCE_CHAINS`, the caller's: WEAVE ST-2)
+ * @returns {Array<[string, any]>}
  */
-export const chainsOfHouse = (name, chains) => Object.entries(chains).filter(([, c]) => houseRunsChain(c, name));
+export const chainsOfHouse = (name, chains) => Object.entries(chains).filter(([, c]) => houseRunsChain(/** @type {any} */ (c), name));

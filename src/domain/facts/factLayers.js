@@ -120,6 +120,8 @@ export const LEAVES = Object.freeze({
   // ── layer 2: over the economy ──
   famine: home('famine', 2, ['economicState']),
   foodSources: home('foodSources', 2, ['economicState']),
+  // BAR4-SCENES (kind A1): the food source the famine failed (`sceneSupply.js`)
+  failedSource: home('failedSource', 2, ['economicState']),
   // BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b): the leading food source's grounds all spent: the food record against the config's resources
   leadingSourceSpent: home('leadingSourceSpent', 2, ['economicState', 'config']),
   // BAR4-CORPUS-ECO (the chair's FW1): a subsistence house tills for the table beside a food record with no grain
@@ -134,8 +136,15 @@ export const LEAVES = Object.freeze({
   criminalIncome: home('criminalIncome', 2, ['availableServices', 'economicState']),
   // BAR2-PLACES (the chair's grant VW2): iron worked here (the chains) or imported past no siege (the crisis kinds)
   ironAtHand: home('ironAtHand', 2, ['economicState', 'stress', 'stressors', 'activeConditions']),
-  // BAR4-HOUSES (H1 (ii)): the Timber & Lumber chain working its own input (the chains alone)
-  timberAtHand: home('timberAtHand', 2, ['economicState']),
+  // BAR4-HOUSES (H1 (ii)) and BAR4-SCENES (kind A1), ONE HOME (BAR4-SCENES-2, the chair's ruling of 2026-11-16 12:16 UTC):
+  // how timber reaches the town's sawyers, by BAR4-RECORD's one reading (`houseInputAtHand.js`), in `timberAtHand.js`:
+  // `timber at hand` its own ground (`local`); `timber reaches the saws` any kind (local or imported)
+  timberAtHand: home('timberAtHand', 2, ['config', 'economicState', 'institutions']),
+  timberReachesSawmill: home('timberReachesSawmill', 2, ['config', 'economicState', 'institutions']),
+  // BAR4-SCENES (kind A1): enchanting among the services (`sceneSupply.js`)
+  enchanting: home('enchanting', 2, ['availableServices']),
+  // BAR4-SCENES-2 (HW1): a trade the scene shows is at work (`tradeAtWork.js`, on `houseInputAtHand.js :: housesShortOf`)
+  tradeAtWork: home('tradeAtWork', 4, ['institutions', 'resourceAnalysis', 'config', 'economicState'], { call: 'factsCall' }), // layer 4: it reads the resource analysis's gaps (layer 3)
   // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label
   keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),

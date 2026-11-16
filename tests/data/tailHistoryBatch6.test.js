@@ -63,7 +63,9 @@ const MUST_NOT = [
   ['r2r-hamlet-16', /seems to be gutting, salting or selling fish/, /has worked fish all its life, and there is almost no fish to work\./],
   ['r2r-hamlet-28', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water, and even the gulls have given up on them\./],
   ['r2r-thorp-58', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water/],
-  ['r2s-famine-thorp-0', /the smell of the catch follows you/, /Nets hang drying on poles, and they have brought in little for a long while\./],
+  // BAR4-SCENES-2 (2026-11-16, re-keyed by identity): the slot's first draw here is the basket line, which now has its own twin (the chair's
+  // ruling HW1: a twin keeps the slot and spends no redraw), so the redraw that reached the nets line is no longer spent; the false words stay out
+  ['r2s-famine-thorp-0', /the smell of the catch follows you/, /An empty fish basket is carried past, back from the water with nothing in it\./],
   ['r2s-under_siege-village-1', /the smell of the catch follows you/, /Nets hang drying on poles, and they have brought in little for a long while\./],
   ['r2r-thorp-8', /A caravan broker shouts terms/, /A pair of pack animals stands in a yard, unladen, while their keeper mends a strap\./],
   // RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-2, 2026-11-15): r2s-plague_onset-village-0 printed the broker only on the history's own
@@ -152,10 +154,12 @@ describe('TAIL-HISTORY-5 batch 6: what the bar\'s readers met prints only where 
     expect(originals.length).toBeGreaterThan(0);
     for (const l of originals) {
       expect(l.excludes || [], own(l)).toContain('crisis: hunger');
-      if (own(l) === BARE_SINCE_BATCH_1) continue;
+      if (own(l) === BARE_SINCE_BATCH_1 && !rows.some((t) => t.twinOf === own(l))) continue; // BAR4-SCENES-2: it has its twin now (HW1)
       const twin = rows.find((t) => t.twinOf === own(l));
       expect(twin, `the twin of ${own(l)}`).toBeTruthy();
-      expect(twin.needs, own(twin)).toContain('crisis: hunger');
+      // BAR4-SCENES-2 (2026-11-16, re-keyed by identity; the chair's ruling HW1): a twin speaks wherever its original is refused for want of
+      // fish (the hunger, or every fish house short: `trade at work: fish`), so it needs its original's other needs and not the hunger
+      expect(twin.needs, own(twin)).toEqual((l.needs || []).filter((/** @type {string} */ a) => a !== 'trade at work: fish'));
     }
   });
 });

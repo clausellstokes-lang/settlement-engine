@@ -14,6 +14,7 @@
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { housePresumptionsOf } from '../helpers/housePresumptions.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -73,7 +74,9 @@ describe('BAR4-HOUSES H1: a house\'s description and the foodways line presume n
     ['sex', town({ institutions: [{ name: 'Town crier', desc: CRIER }], npcs: [{ name: 'Ghalia al-Din', gender: 'female', institution: { key: 'Town crier' } }] }), {},
       town({ institutions: [{ name: 'Town crier', desc: CRIER }], npcs: [{ name: 'Tomas', gender: 'male', institution: { key: 'Town crier' } }] }), {}],
     ['timber', town({ institutions: [{ name: 'Sawmill (commercial)', desc: SAW }] }), {},
-      town({ institutions: [{ name: 'Sawmill (commercial)', desc: SAW }], economicState: { activeChains: [TIMBER_CHAIN], foodSecurity: { foodRecord: { band: 'secure', foodSources: ['grain'] } } } }), {}],
+      // BAR4-SCENES-2 (2026-11-16, the chair's ruling of 12:16 UTC; re-keyed by identity): `timber at hand` has one home now, BAR4-RECORD's
+      // reading (`timberAtHand.js` on `houseInputAtHand.js`, the input's kind `local`): the true state is a live timber ground of its own
+      town({ institutions: [{ name: 'Sawmill (commercial)', desc: SAW }], config: { nearbyResources: ['managed_forest'] }, economicState: { activeChains: [TIMBER_CHAIN], foodSecurity: { foodRecord: { band: 'secure', foodSources: ['grain'] } } } }), {}],
     ['answers', town({ institutions: [{ name: 'Town council', desc: COUNCIL }], stress: [{ type: 'occupied' }] }), {},
       town({ institutions: [{ name: 'Town council', desc: COUNCIL }] }), {}],
     ['market', town({ stress: [{ type: 'under_siege' }] }), { foodwaysLine: VENDORS }, town(), { foodwaysLine: VENDORS }],
@@ -111,6 +114,21 @@ describe('BAR4-HOUSES H1: a house\'s description and the foodways line presume n
   it('(e) each key of the print-time foodways table is a culture profile\'s own foodways row, spelled once more', () => {
     const rows = new Set(Object.values(CULTURE_PROFILES).flatMap((p) => p.foodways.map((/** @type {any} */ r) => (typeof r === 'string' ? r : r.text))));
     expect(Object.keys(FOODWAYS_PRINT_SIBLINGS).filter((k) => rows.has(k))).toEqual(Object.keys(FOODWAYS_PRINT_SIBLINGS));
+  });
+
+  // BAR4-SCENES-2 (2026-11-16, the chair's MU1 of 12:16 UTC: a twin whose state is reachable stays, proved by one constructed
+  // record). The greek culture's market-supply twin prints in neither population; its state (the culture's market-supply sentence
+  // in a town under a siege) is reached here: the same record prints the original in calm and the twin under the siege.
+  it('(f) REACHABLE (MU1): the market-supply twin prints where a siege refuses the original, on one constructed record', () => {
+    const [original, twin] = /** @type {any} */ (Object.values(FOODWAYS_PRINT_SIBLINGS).find((set) => set.some((l) => typeof l.twinOf === 'string' && /grain stores/.test(l.text))));
+    expect(twin.twinOf).toBe(original.text);
+    const rec = (/** @type {boolean} */ siege) => ({ economicState: { foodSecurity: { hasSiege: siege, hasFamine: false,
+      foodRecord: { band: 'adequate', foodSources: ['grain'], failedSource: null, foodwaysLine: `Most meals start from bread. ${original.text}` } } } });
+    const calm = String(foodwaysLineOf(rec(false))); const besieged = String(foodwaysLineOf(rec(true)));
+    expect(calm).toContain(original.text);
+    expect(besieged).toContain(twin.text);
+    expectAbsentWithAnchor(besieged, original.text, twin.text, 'the besieged record prints the twin in the original\'s place');
+    expect(besieged).toBe(calm.replace(original.text, twin.text));
   });
 
   it('(c) the keeps: each cured original still prints in the 720 where its town makes it true, its twin where it does not', () => {

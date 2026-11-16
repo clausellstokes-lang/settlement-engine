@@ -29,10 +29,13 @@ const DECLARED = [
   { batch: 1, seed: 'r2s-famine-town-2', pool: 'DS-DEF-4::structure organized', vid: 3, instead: 2, why: 'a famine: "visitors are not robbed" (C12393\'s class)' },
   // C3/C4's commerce lines under the crisis that stops the trade they claim
   { batch: 1, seed: 'r2s-famine-village-0', pool: 'DS-GEN-13::MARKET-OPEN', vid: 1, instead: 4, why: 'a famine: "the roads bring buyers" (C35244)' },
-  { batch: 1, seed: 'r2s-under_siege-hamlet-0', pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 1, instead: 3, why: 'a siege: "anyone can sell at the market" (C13783)' },
+  // BAR4-SCENES-2 (2026-11-16, re-keyed by identity): under a siege the sibling admitted in v1's and v2's place is now the siege twin v6 (BAR4-SCENES
+  // 187c46f61, REVIEW-BAR-4 C19497: v3 "done face to face at the market" declares `no crisis: under_siege`); v6 declares `market`, so v1's row
+  // moves to a town of the case (r2s-under_siege-hamlet-0 holds no market, and the pool is drawn only where one stands); the cured lines are unchanged.
+  { batch: 1, seed: 'r2s-under_siege-village-0', pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 1, instead: 6, why: 'a siege: "anyone can sell at the market" (C13783)' },
   { batch: 1, seed: 'r2s-occupied-town-0', pool: 'DS-GEN-13::COMMERCE: a merchant guild, no bank', vid: 2, instead: 3, why: 'an occupation: "the merchant guild sets the terms of trade" (C31881)' },
   // BAR3-CORPUS-2 · C7's class: the stall-fee sibling under a siege (2 of its 5 printing towns besieged)
-  { batch: 2, seed: 'r2s-under_siege-village-0', pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 2, instead: 3, why: 'a siege: "the town\'s own hold on trade there is the stall fee" (C7\'s class)' },
+  { batch: 2, seed: 'r2s-under_siege-village-0', pool: 'DS-GEN-13::COMMERCE: a market, no guild', vid: 2, instead: 6, why: 'a siege: "the town\'s own hold on trade there is the stall fee" (C7\'s class)' },
 ];
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */
 const KEEP = [

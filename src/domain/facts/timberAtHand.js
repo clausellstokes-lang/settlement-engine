@@ -1,36 +1,70 @@
 /**
- * domain/facts/timberAtHand.js — THE TIMBER-AT-HAND HOME (BAR4-HOUSES, kind H1 (ii), 2026-11-16; BRIEF-BAR4 amendment 5b:
- * an atom added beside its family, `iron at hand`; vetoable by the owner, on the veto list as new vocabulary). ONE atom,
- * the record's fact: the town works timber of its own. A house's description that has "timber to hand" and supplies "the
- * region's building work" presumes it; "A town with timber to hand supplies the region's building work" printed beside a
- * managed woodland the Resources tab calls depleted, timber among the imports and no lumber among the exports (REVIEW-BAR-4
- * C40862, bar0-town-occupied-rand-22).
+ * domain/facts/timberAtHand.js — THE TIMBER HOME: HOW TIMBER REACHES THE TOWN'S SAWYERS (BAR4-HOUSES, kind H1 (ii), and
+ * BAR4-SCENES, kind A1, 2026-11-16; BRIEF-BAR4 amendment 5b: atoms added beside their family, `iron at hand`; vetoable by
+ * the owner, on the veto list as new vocabulary).
  *
- *   timberAtHandOf(record)   THE ONE READER: true where the Timber & Lumber chain of `economicState.activeChains`
- *                            (`chainId: 'timber'`) has its input (`resourceInputAvailable`) and is working (the states of
- *                            `chainWorking.js :: WORKING_CHAIN_STATUSES`, spelled here as `ironAtHand.js` spells them:
- *                            that leaf rides a lazy chunk and the facts are eager, so it is not imported); else false (no
- *                            timber chain, or one whose woodland is spent: bought timber is not timber to hand for the
- *                            region's building work).
+ * ONE ATOM, ONE HOME (BAR4-SCENES-2, the chair's ruling of 2026-11-16 12:16 UTC). Two seats named an atom `timber at hand`
+ * and read it two ways (the Timber & Lumber chain working its input; a timber ground or a timber import). It survives
+ * once, and the reading has one home: BAR4-RECORD's `houseInputAtHand.js`, the same reader the gap's writer and the page's
+ * gap line read ("No timber reaches the saws."), asked of the two timber chains:
  *
- * Measured on the census's 720 at 8aef8e7d46: of the 19 towns that print the commercial sawmill's two timber lines, 8 have
- * timber at hand (each of them exports lumber); 11 have none (no timber chain, or one whose woodland is spent). Layer 2 (over the economy). Pure: no
- * randomness, no clock, no write.
+ *   timberInputOf(record)           how timber reaches the town: 'local' (a live timber ground, its own production, a
+ *                                   house of the roster that makes it), 'imported' (the imports name timber by its own
+ *                                   name), else 'missing' (the timber chains take no route: their input comes by none).
+ *   timberAtHandOf(record)          `timber at hand`: the town works timber of its own (`local`). A house that supplies
+ *                                   "the region's building work" from "timber to hand" presumes it (REVIEW-BAR-4 C40862,
+ *                                   bar0-town-occupied-rand-22: a managed woodland the Resources tab calls depleted,
+ *                                   timber among the imports).
+ *   timberReachesSawmillOf(record)  `timber reaches the saws`: either kind (`local` or `imported`). "The smell of sawn
+ *                                   timber is everywhere" presumes it (REVIEW-BAR-4 C45961, bar0-village-famine-rand-21:
+ *                                   no timber ground, none brought in, the sawmill's own gap).
+ *
+ * The chain table is the lazy goods surface, which a fact never imports (WEAVE ST-2): the two timber chains' raw input is
+ * handed to the reader as the chain table names it (`resourceChains.js :: RESOURCE_CHAINS.timber.rawResource` and
+ * `.mountainTimber.rawResource`), and the guard pins the two names to the table.
+ *
+ * Layer 2 (over the economy, the resources and the roster). Pure: no randomness, no clock, no write.
  *
  * @enforced-by tests/generators/bar4HousesPresumptions.test.js
+ * @enforced-by tests/generators/bar4ScenePresumption.test.js
  */
+import { houseInputAtHand } from './houseInputAtHand.js';
 
-/** The chain states in which a chain is working its input (`chainWorking.js :: WORKING_CHAIN_STATUSES`, the same list). */
-const WORKING = Object.freeze(['running', 'operational', 'entrepot', 'vulnerable', 'magically_sustained']);
+/** The two timber chains, as the chain table keys them, with their raw input as it names it. */
+export const TIMBER_CHAINS = Object.freeze([
+  Object.freeze(['timber', Object.freeze({ rawResource: 'timber' })]),
+  Object.freeze(['mountainTimber', Object.freeze({ rawResource: 'mountain_timber' })]),
+]);
 
 /**
- * THE ONE READER of `timber at hand`.
+ * How timber reaches the town, by the one reader.
  * @param {unknown} record the settlement record
- * @returns {boolean | undefined} undefined where there is no record or no economy
+ * @returns {'local' | 'imported' | 'route' | 'missing' | undefined} undefined where there is no record or no economy
+ */
+export function timberInputOf(record) {
+  if (!record || typeof record !== 'object') return undefined;
+  if (!(/** @type {{ economicState?: unknown }} */ (record).economicState)) return undefined;
+  const kinds = TIMBER_CHAINS.map(([key, chain]) => houseInputAtHand(/** @type {any} */ (record), /** @type {string} */ (key), null, /** @type {any} */ (chain)));
+  for (const kind of /** @type {const} */ (['local', 'imported', 'route'])) if (kinds.includes(kind)) return kind;
+  return 'missing';
+}
+
+/**
+ * THE ONE READER of `timber at hand`: the town works timber of its own.
+ * @param {unknown} record the settlement record
+ * @returns {boolean | undefined}
  */
 export function timberAtHandOf(record) {
-  if (!record || typeof record !== 'object') return undefined;
-  const chains = /** @type {{ economicState?: { activeChains?: unknown } }} */ (record).economicState?.activeChains;
-  if (!Array.isArray(chains)) return undefined;
-  return chains.some((c) => !!c && c.chainId === 'timber' && c.resourceInputAvailable === true && WORKING.includes(String(c.status)));
+  const kind = timberInputOf(record);
+  return kind === undefined ? undefined : kind === 'local';
+}
+
+/**
+ * THE ONE READER of `timber reaches the saws`: timber reaches the town's sawyers, by either kind.
+ * @param {unknown} record the settlement record
+ * @returns {boolean | undefined}
+ */
+export function timberReachesSawmillOf(record) {
+  const kind = timberInputOf(record);
+  return kind === undefined ? undefined : kind !== 'missing';
 }

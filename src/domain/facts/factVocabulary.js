@@ -214,8 +214,9 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
+ * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork]
  * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {boolean} [criminalIncome]
- * @property {ReadonlyArray<string>} [foodSources] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
+ * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
  */
@@ -279,6 +280,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   // carries a lake: the terrain classes have none); `port` is the trade-route reader's.
   port: dim({ shape: 'presence', home: 'route', reader: (f) => (typeof f.route === 'string' ? f.route === 'port' : undefined) }),
   magic: dim({ shape: 'presence', home: 'magic', reader: (f) => bool(f.magic?.functions) }),
+  // BAR4-SCENES (kind A1; amendment 5b; vetoable by the owner): `enchanting`: some house offers enchanting or
+  // identification among the record's services (`sceneSupply.js`). Beside `magic`: magic real is not magic for hire.
+  enchanting: dim({ shape: 'presence', home: 'enchanting', reader: (f) => bool(f.enchanting) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): goods the town lives
   // on arrive by magic, an isolated route whose trade needs are met (`magicSupply.js`). "Nothing it lives by would stop without
   // it" presumes its absence (REVIEW-BAR-4 C36862).
@@ -310,10 +314,24 @@ export const FACT_DIMENSIONS = Object.freeze({
   patrol: dim({ shape: 'presence', home: 'defence', reader: (f) => (f.defence ? bool(f.defence.watch === true || f.defence.garrison === true) : undefined) }),
   // `iron at hand`: the town's smiths have iron to work: worked here, or brought in where no siege stops it (`ironAtHand.js`).
   'iron at hand': dim({ shape: 'presence', home: 'ironAtHand', reader: (f) => bool(f.ironAtHand) }),
-  // BAR4-HOUSES (H1 (ii), BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): `timber at hand`:
-  // the town works timber of its own, its Timber & Lumber chain working its input (`timberAtHand.js`). A house that supplies
-  // the region's building from "timber to hand" presumes it (REVIEW-BAR-4 C40862: the woodland cleared, timber imported).
+  // BAR4-HOUSES (H1 (ii)) and BAR4-SCENES (kind A1), BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new
+  // vocabulary. ONE ATOM, ONE HOME (BAR4-SCENES-2, the chair's ruling of 2026-11-16 12:16 UTC): both seats named an atom
+  // `timber at hand`; it survives once, read through BAR4-RECORD's `houseInputAtHand.js` (`timberAtHand.js`).
+  // `timber at hand`: the town works timber of its own (the input's kind `local`: a live timber ground, not spent). A house
+  // that supplies the region's building from "timber to hand" presumes it (REVIEW-BAR-4 C40862: the woodland cleared,
+  // timber imported). Beside its kin `iron at hand`.
   'timber at hand': dim({ shape: 'presence', home: 'timberAtHand', reader: (f) => bool(f.timberAtHand) }),
+  // `timber reaches the saws`: timber reaches the town's sawyers by either kind (`local`, or `imported` by its own name),
+  // the page's own gap line "No timber reaches the saws." denied. A scene that shows the whole place sawing presumes it
+  // (REVIEW-BAR-4 C45961).
+  'timber reaches the saws': dim({ shape: 'presence', home: 'timberReachesSawmill', reader: (f) => bool(f.timberReachesSawmill) }),
+  // BAR4-SCENES-2 (kind A1's `house at work`; the chair's ruling HW1 of 2026-11-16; amendment 5b; vetoable by the owner, on the
+  // veto list as new vocabulary): `trade at work: <trade>`: some house of the arrival sense's trade stands and is not short
+  // (`tradeAtWork.js`, on the one fact `houseInputAtHand.js :: housesShortOf` the page's mark reads). Beside its kin `iron at
+  // hand`: a scene that shows a trade at work presumes it (r2r-hamlet-10: "Half of Bellanovum seems to be gutting, salting or
+  // selling fish." beside a fish house "Short of fish.").
+  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'stone', 'arcane'],
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.tradeAtWork === 'function' && key ? f.tradeAtWork(key) : undefined) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
   // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
   // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
@@ -368,6 +386,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   'criminal income': dim({ shape: 'presence', home: 'criminalIncome', reader: (/** @type {FactsLike} */ f) => bool(f.criminalIncome) }),
   ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, dim({ shape: 'presence', home: 'foodSources',
     reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.foodSources) ? f.foodSources.includes(src) : undefined) })])),
+  // BAR4-SCENES (kind A1; amendment 5b; vetoable by the owner): `failed: <source>`, the food source the famine failed
+  // (`sceneSupply.js`). Beside the source atoms, which a failed source does not leave: the food record keeps it.
+  failed: dim({ shape: 'presence', home: 'failedSource', keys: FOOD_SOURCE_ATOMS,
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.failedSource === undefined ? undefined : f.failedSource === key) }),
   // BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b, beside the food-source atoms): `source spent` = the food record's leading source
   // has grounds on the resource record and none is available (`leadingSourceSpent.js`). A line that says the town leans on that
   // source for its food presumes the opposite (REVIEW-BAR-4 C26403, C30469).

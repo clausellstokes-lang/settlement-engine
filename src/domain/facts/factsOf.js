@@ -31,7 +31,9 @@ import { hasInstitution, liveInstitutionNames } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { rivalPowerOf } from './rivalPower.js';
 import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
-import { timberAtHandOf } from './timberAtHand.js'; // BAR4-HOUSES (H1 (ii))
+import { timberAtHandOf, timberReachesSawmillOf } from './timberAtHand.js'; // BAR4-HOUSES (H1 (ii)); BAR4-SCENES-2: one home
+import { failedFoodSourceOf, enchantingOfferedOf } from './sceneSupply.js'; // BAR4-SCENES (kind A1)
+import { tradeAtWorkOf } from './tradeAtWork.js'; // BAR4-SCENES-2 (HW1)
 import { leadingSourceSpentOf } from './leadingSourceSpent.js'; // BAR4-CORPUS-ECO (amendment 5b)
 import { ownPlotsOf } from './ownPlots.js'; // BAR4-CORPUS-ECO (amendment 5b; the chair's FW1)
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
@@ -110,8 +112,14 @@ export function factsOf(record, options = {}) {
     get rivalPower() { return rivalPowerOf(record); },
     /** BAR2-PLACES (the chair's grant VW2): the smiths have iron to work, worked here or brought in past no siege (`ironAtHand.js`) */
     get ironAtHand() { return ironAtHandOf(record); },
-    /** BAR4-HOUSES (H1 (ii), BRIEF-BAR4 amendment 5b): the town works timber of its own, its Timber & Lumber chain working its input (`timberAtHand.js`) */
+    /** BAR4-HOUSES (H1 (ii)): the town works timber of its own, the input's kind `local` (`timberAtHand.js`, on `houseInputAtHand.js`) */
     get timberAtHand() { return timberAtHandOf(record); },
+    /** BAR4-SCENES (kind A1): timber reaches the town's sawyers, local or imported (`timberAtHand.js`, on `houseInputAtHand.js`) */
+    get timberReachesSawmill() { return timberReachesSawmillOf(record); },
+    /** BAR4-SCENES (kind A1): some house offers enchanting or identification among the services (`sceneSupply.js`) */
+    get enchanting() { return enchantingOfferedOf(record); },
+    /** BAR4-SCENES-2 (HW1): a trade the scene shows is at work, some house of it not short (`tradeAtWork.js`) */
+    get tradeAtWork() { return (/** @type {string} */ key) => tradeAtWorkOf(record, key); },
     /** fact 12: small / middling / large */
     get populationBand() { return populationBandOf(record); },
     /** fact 13: the terrain class */
@@ -132,6 +140,8 @@ export function factsOf(record, options = {}) {
     // one canonical reader each — no field reader, no new logic. ──
     /** the food record's sources (`foodBalance.js :: deriveFoodRecord`), or undefined when it carries none */
     get foodSources() { const v = /** @type {FactsOwnFields} */ (record)?.economicState?.foodSecurity?.foodRecord?.foodSources; return Array.isArray(v) ? v : undefined; },
+    /** BAR4-SCENES (kind A1): the food source the famine failed, or null (`sceneSupply.js`) */
+    get failedSource() { return failedFoodSourceOf(record); },
     /** BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b): the leading food source's grounds are all spent (`leadingSourceSpent.js`) */
     get leadingSourceSpent() { return leadingSourceSpentOf(record); },
     /** BAR4-CORPUS-ECO (the chair's FW1): a subsistence house tills for the table beside a food record with no grain (`ownPlots.js`) */
