@@ -33,6 +33,7 @@ import { rivalPowerOf } from './rivalPower.js';
 import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
 import { timberAtHandOf, timberReachesSawmillOf } from './timberAtHand.js'; // BAR4-HOUSES (H1 (ii)); BAR4-SCENES-2: one home
 import { failedFoodSourceOf, enchantingOfferedOf } from './sceneSupply.js'; // BAR4-SCENES (kind A1)
+import { tradeAtWorkOf } from './tradeAtWork.js'; // BAR4-SCENES-2 (HW1)
 import { leadingSourceSpentOf } from './leadingSourceSpent.js'; // BAR4-CORPUS-ECO (amendment 5b)
 import { ownPlotsOf } from './ownPlots.js'; // BAR4-CORPUS-ECO (amendment 5b; the chair's FW1)
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
@@ -117,6 +118,8 @@ export function factsOf(record, options = {}) {
     get timberReachesSawmill() { return timberReachesSawmillOf(record); },
     /** BAR4-SCENES (kind A1): some house offers enchanting or identification among the services (`sceneSupply.js`) */
     get enchanting() { return enchantingOfferedOf(record); },
+    /** BAR4-SCENES-2 (HW1): a trade the scene shows is at work, some house of it not short (`tradeAtWork.js`) */
+    get tradeAtWork() { return (/** @type {string} */ key) => tradeAtWorkOf(record, key); },
     /** fact 12: small / middling / large */
     get populationBand() { return populationBandOf(record); },
     /** fact 13: the terrain class */

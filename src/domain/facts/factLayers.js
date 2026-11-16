@@ -143,6 +143,8 @@ export const LEAVES = Object.freeze({
   timberReachesSawmill: home('timberReachesSawmill', 2, ['config', 'economicState', 'institutions']),
   // BAR4-SCENES (kind A1): enchanting among the services (`sceneSupply.js`)
   enchanting: home('enchanting', 2, ['availableServices']),
+  // BAR4-SCENES-2 (HW1): a trade the scene shows is at work (`tradeAtWork.js`, on `houseInputAtHand.js :: housesShortOf`)
+  tradeAtWork: home('tradeAtWork', 4, ['institutions', 'resourceAnalysis', 'config', 'economicState'], { call: 'factsCall' }), // layer 4: it reads the resource analysis's gaps (layer 3)
   // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label
   keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),

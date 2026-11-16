@@ -64,17 +64,17 @@
  * Pure: no randomness, no clock, no write.
  */
 import { resourceGapLines } from './validationOnPage.js';
+import { housesOnSpentGround } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home
 import { crisisOf } from '../facts/crisisKind.js';
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
-import { resourceShortageImport } from '../resourceSemantics.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import { serviceRowsOf } from '../dossier/entityLinks.js';
 import { chainCrisisStateShown } from './chainStateShown.js';
 import {
-  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE, SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN,
+  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE,
   SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, IMPORTED_INPUT, INCOME_TRADE_HOUSES, NONE,
 } from '../../data/crisisDependence.js';
 
@@ -520,63 +520,9 @@ export function housesShortOfInput(settlement) {
   return out;
 }
 
-/**
- * THE THIRD READING (SV6): the houses whose every own ground the page prints as depleted, none kept by magic and none fed
- * by the shortage import the trade record shows, each with what it is short of (`SPENT_GROUND_YIELD`).
- * @param {object} settlement
- * @returns {ReadonlyMap<string, string>} house name -> what it is short of
- */
-function housesOnSpentGround(settlement) {
-  const s = /** @type {{ config?: { nearbyResourcesDepleted?: unknown }, economicState?: { activeChains?: unknown, primaryImports?: unknown } }} */ (settlement);
-  const spent = new Set(Array.isArray(s.config?.nearbyResourcesDepleted) ? s.config.nearbyResourcesDepleted : []);
-  /** @type {Map<string, string>} */
-  const out = new Map();
-  if (spent.size === 0) return out;
-  const imports = new Set((Array.isArray(s.economicState?.primaryImports) ? s.economicState.primaryImports : []).map(String));
-  const chains = /** @type {Array<{ resourceKey?: unknown, status?: unknown, processingInstitutions?: unknown }>} */ (Array.isArray(s.economicState?.activeChains) ? s.economicState.activeChains : []);
-  /** @type {Map<string, Array<{ resourceKey?: unknown, status?: unknown }>>} */
-  const grounds = new Map();
-  for (const c of chains) {
-    if (!c || typeof c.resourceKey !== 'string' || !c.resourceKey) continue;
-    for (const h of Array.isArray(c.processingInstitutions) ? c.processingInstitutions : []) {
-      if (typeof h !== 'string') continue;
-      if (!grounds.has(h)) grounds.set(h, []);
-      /** @type {Array<{ resourceKey?: unknown, status?: unknown }>} */ (grounds.get(h)).push(c);
-    }
-  }
-  // BAR3-SERVICES (S3): a fishing house no chain names works the chains on the town's own fisheries
-  // (`GROUNDS_WORKED_OFF_CHAIN`), and is judged by the same reading as a house a chain names
-  for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
-    const house = inst && typeof inst.name === 'string' ? inst.name : '';
-    if (!house || grounds.has(house) || isCustom(inst)) continue;
-    const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(house) || '');
-    if (!Object.prototype.hasOwnProperty.call(GROUNDS_WORKED_OFF_CHAIN, id)) continue;
-    const own = chains.filter((c) => c && typeof c.resourceKey === 'string' && GROUNDS_WORKED_OFF_CHAIN[id].includes(c.resourceKey));
-    // RULING FS1 (the chair's, 2026-11-16; vetoable by the owner): where no chain works the town's fisheries, the grounds
-    // themselves: the town's own fisheries of these kinds on the record (`config.nearbyResources`), whatever the food ledger counts
-    const fished = own.length ? own : nearbyGrounds(settlement).filter((k) => GROUNDS_WORKED_OFF_CHAIN[id].includes(k)).map((k) => ({ resourceKey: k }));
-    if (fished.length) grounds.set(house, fished);
-  }
-  for (const [house, own] of grounds) {
-    const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
-    const allSpent = own.every((c) => spent.has(/** @type {string} */ (c.resourceKey)) && c.status !== 'magically_sustained'
-      && (works || !imports.has(String(resourceShortageImport(/** @type {string} */ (c.resourceKey)) ?? ''))));
-    if (!allSpent) continue;
-    const key = /** @type {string} */ (own[0].resourceKey);
-    out.set(house, Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, key) ? SPENT_GROUND_YIELD[key] : 'its materials');
-  }
-  return out;
-}
-
-/**
- * The town's own grounds on the record (`config.nearbyResources`), depleted or not (FS1).
- * @param {object} settlement
- * @returns {string[]}
- */
-function nearbyGrounds(settlement) {
-  const near = /** @type {{ config?: { nearbyResources?: unknown } }} */ (settlement).config?.nearbyResources;
-  return Array.isArray(near) ? near.filter((k) => typeof k === 'string') : [];
-}
+/* THE THIRD READING (SV6), `housesOnSpentGround`, moved VERBATIM to the fact `facts/houseInputAtHand.js` (BAR4-SCENES-2, the
+ * chair's ruling HW1 of 2026-11-16 12:26 UTC, vetoable by the owner: ONE FACT FOR "this house is short", read by the mark and
+ * by the arrival scene; the layer law, facts import no display, holds by the move). This leaf calls it. */
 
 /**
  * The input this row's house is short of, or null: a row declared `input` whose house the page says no input reaches.

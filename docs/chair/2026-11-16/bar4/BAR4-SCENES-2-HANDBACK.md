@@ -2,15 +2,64 @@
 
 Successor of BAR4-SCENES on `lane/bar4-scenes-2026-11-16`. I started at 187c46f61b. The second tree of the books is a71788851f; the chair's whole check at 08:28 found that base green whole.
 
-Phase 1 (the books my predecessor did not run) is DONE. Phase 2 (the `house at work` remainder) waits on the chair's word and a named tip.
+Phase 1 (the books my predecessor did not run) is DONE (1abaca806, f14a74f85, f0d4818d9). PHASE 2 (the chair's word of 12:16 UTC, changed from my prompt: the JOINED LINE merged, not one branch; ruling HW1 of 12:26 UTC) is DONE: one merge commit of `lane/join-2026-11-14` at f19c3b28b, then the cure. Handed back at about 560,000 of my 600,000.
 
 ## THE KINDS
 
 | kind | detector | 720 before → after | fresh 300 before → after | named exclusions | guard · positive control |
 |---|---|---|---|---|---|
-| A1 · the scene's presumption | `tests/helpers/scenePresumption.js :: scenePresumptionFindings` (unchanged) | 47 → 13, all `house at work`, frozen (Phase 2) | arrival 14 → 11 (`house at work`) | none | `tests/generators/bar4ScenePresumption.test.js`: green at the tip; its positive control fires |
+| A1 · the scene's presumption | `tests/helpers/scenePresumption.js :: scenePresumptionFindings` (its timber presumption now reads the one home) | at f19c3b28b, the arrival scene: 20 in 20 towns (`house at work` 16) → **0** | 14 in 14 (`house at work` 11) → **0** | none (`EXCLUDED` empty; the horses' "smell of horses and hay" is declared `colour`: true under a siege, horses are stabled) | `tests/generators/bar4ScenePresumption.test.js` (8 arms): the zero over the 720; the frozen remainder EMPTY; two positive controls (the five presumptions, and `house at work` on r2r-village-34's potter); the copies pinned to their tables; two REACHABLE arms (MU1) |
 
-Phase 1 moved no page line, so the counts are unchanged.
+## Phase 2 · the merge, the namesake, HW1, and the chair's steps 2 to 4
+
+### The merge (ONE merge commit; the only merge)
+
+`lane/join-2026-11-14` at f19c3b28b. Four conflicts, all of the kinds the chair allowed:
+- `factLayers.js`, `factVocabulary.js`, `factsOf.js`: additions at one place of the shared vocabulary, both kept.
+- `general.generated.js`: only the header's variant count conflicted (738 mine, 743 theirs). The generator refuses on the joined line itself: BAR4-HISTORY's 155c7e1af moved `generalStateProse.js` without re-taking the wiring census. So I took the header the generator writes (744), and PROVED it: in a throwaway copy, with the census re-taken, `npm run gen:dossier-prose` writes a `general.generated.js` byte-identical to the merged leaf, and every other generated file unchanged. The census itself is not re-taken (amendment 4: NAMED for the close).
+
+### The namesake (the chair's word of 12:16): ONE home, two atoms
+
+Both seats named an atom `timber at hand`. ONE reading now, BAR4-RECORD's `houseInputAtHand.js`, in `src/domain/facts/timberAtHand.js` (rewritten; `timberInputOf` asks the two timber chains):
+- `timber at hand` = the input's kind is `local` (BAR4-HOUSES' "timber to hand" line; its declaration unchanged);
+- `timber reaches the saws` (NEW, beside it) = local OR imported (my sawn-timber, planks and saws lines). A second atom rather than one keyed atom: a keyed one would have changed BAR4-HOUSES' data file. VETOABLE.
+- `sceneSupply.js` keeps `failed: <source>` and `enchanting` and imports nothing now (the goods roster row I named in Phase 1 is NO LONGER OWED).
+- Both guards read zero: BAR4-HOUSES' positive control's true state re-keyed by identity (a live timber ground, not a working chain).
+
+### HW1 (the chair's ruling of 12:26, vetoable): ONE FACT FOR "this house is short"
+
+- (b) **The spent-ground reading moved**, VERBATIM, out of `src/domain/display/crisisStoppedRow.js` into `src/domain/facts/houseInputAtHand.js :: housesOnSpentGround`; the display leaf calls the fact (facts import no display).
+  - **The one fact**: `houseInputAtHand.js :: housesShortOf(record)` = a house whose gapped inputs this reading calls `missing` (`CHAIN_RAW_INPUT`, the chain table's raw names copied and pinned) ∪ `housesOnSpentGround`. It AGREES with the page's `housesShortOfInput` in all 1,020 towns (720 + fresh 300).
+  - **THE MARKS DO NOT MOVE**: every house and service row's mark (`rowMarkText`) over the 1,020 towns, 91,338 rows, is BYTE-IDENTICAL at f19c3b28b and at the tip.
+  - **The quarries' one reading**: a house on a ground wholly spent is not its own producer, and a house that works the ground itself (`SPENT_GROUND_WORKERS`) is fed by no import (SV6's own rule). THE FACT SIDE MOVED: 70 house readings in 49 towns of the 720 and 21 of the fresh 300 now read `missing` (61 stone quarries, 4 "Access to external mill", 3 salt works, 2 mills), each where the page already marked it short. An earlier, wider form moved a Smelter's mark in r2s-monster_pressure-metropolis-2; it was narrowed until no mark moved.
+- (a) **`trade at work: <trade>`** (NEW keyed atom, beside `iron at hand`; `src/domain/facts/tradeAtWork.js`, layer 4: it reads the resource analysis): some house of the arrival sense's trade (the picker's own house words, `TRADE_HOUSES`, pinned to `ARRIVAL_SENSES`) is not short. Declared on every fish, kilns, stone and arcane sense line. VETOABLE.
+- (c) **The crisis marks**: the stone lines exclude the siege; the horses' traffic lines exclude the siege (the "smell of horses and hay" declared colour); the mill wheel excludes the hunger.
+- **A DRAW IS NOT MOVED**: every line these declarations can refuse has its own twin (27 new), so a refused line keeps its slot and spends no redraw. In 37 of the 38 towns whose scene changed, ONLY the sense beat changed; in r2s-under_siege-hamlet-2 the basket line's new twin removes a redraw the joined line spent (a declared move of that paragraph). The fish family's six hunger twins are WIDENED: they speak wherever their original is refused for want of fish (the hunger, or every fish house short).
+- **MU1**: every twin of the trades at work is proved reachable by a constructed record in the guard (a census town whose slot draws the original, put in the refusing state, prints the twin). For the arcane `lines` pool, which no census town reaches, an arcane town has its trade words struck so that the slot draws from `lines`.
+
+### The chair's steps 2 and 3
+
+- (2) `tests/domain/bar4MarkPromise.test.js` arm (d) RE-KEYED: r2r-hamlet-9's 'Charcoal supply' on the REAL page ("No timber reaches the charcoal burner." prints, the row reads "Short of timber.") and one constructed proof kept.
+- (3) MU1 proofs: the greek market-supply twin (`tests/generators/bar4HousesPresumptions.test.js` (f)); DS-ECO-9 "several, the largest named" v6 (`tests/domain/bar4CorpusEcoKinds.test.js`, a guard town that draws the pool, its band at deficit, prints v6). Both green.
+
+### Step 4: each alone at the tip, against f19c3b28b
+
+69 files (the nine BAR4 guards; `tests/domain/facts` and `tests/architecture` whole; regenDerivedState; customContentPresentationClaims; the entry walker; the files that pin what I changed; the law suites and amendment 2's ten). Re-run alone after the re-keys: GREEN are the nine BAR4 guards, `tests/domain/facts`, `tests/architecture`, regenDerivedState, customContentPresentationClaims, factLayers, presumedThings' new hits (cured by rewording), styleLaw, deepCraftKillList, the corpus walkers and every pin I re-keyed.
+
+RE-KEYED BY IDENTITY (each with a dated note): `textOf` object rows 143 → 188; `census2fColour` (the fish lines' needs; bread's colour index 3 → 4); `tailHistoryBatch6` (the fish twins' needs; r2s-famine-thorp-0's twin on the slot); `bar3PlacesRows` C0013 (r2r-city-18's twin on the slot); `bar4HousesPresumptions` (timber's true state); `bar4MarkPromise` (d); `w2FixDataHistoryItems` (the planks' atom).
+
+RED AT f19c3b28b WITH THE SAME MESSAGES (the joined line's; not mine): crisisBlindDossierProse, generationForkCensus, observedShapeReaders, tieProseDeclared, proseMoveGrammar, tuningRegister, tailExportsPdf3Batch3, and the rest of the projection contract.
+
+NAMED (stored figures the declared cures move; not re-taken):
+
+| test · arm | f19c3b28b → tip | door |
+|---|---|---|
+| dossierStateProseProjection, proseComposed, proseEntryContradiction, proseWiringCensus · the variant counts | 2976 → 2977; 3444 → 3445; 2739 → 2740 (DS-GEN-13 v6) | the close |
+| proseComposed · A0b under-claims (a shrink-only ceiling) | 2014 → 2016 (the joined line is over its 2012 already) | FOR THE CHAIR: the +2 is DS-GEN-13 v6's and the monastery v3's marks as the merged walker counts them (green at 187c46f61) |
+| proseCorpusBytes · general.generated.js | the joined line's figure + 489 | a CEILING (B3) |
+| pipelinePinnedMode · golden rows | 30 → 31 | the golden's door |
+| writerReach · surfaceReach round-trip | its first stale row is `food on breakdown` (+campaign-pdf) where the line's is the same row | WR1 |
+| presumedThings · ARM 1 | `house: tavern :: "no institution: tavern"` (the monastery's mark) | PT3/PT4 |
 
 ## Phase 1 · the books, at 187c46f61b against a71788851f
 
@@ -121,24 +170,69 @@ So none of my lines is a line whose state cannot occur.
 
 The arm was SHOWN ABLE TO RED by a plant I did not commit: the twin declared `needs: crisis: under_siege` instead of `excludes: timber at hand`. The guard is green with it (5 of 5, 53 s), and so are negativeAssertionAnchor, seedLoopTotality, proseDrawnAnchors and eslint.
 
+### The 525 reference configurations, the build and `verify:dist` (Phase 2, against f19c3b28b)
+
+- **25 of 525** reference configurations move against f19c3b28b, in two field families:
+  - `resourceAnalysis.gaps` (24: a Salt works on spent ground, "runs on imported desert_salt" → "lacks access": SV6's rule that an import feeds no work on the ground, now the one reading's);
+  - `arrivalScene` (1).
+- ONE `npm run build`: GREEN. `npm run verify:dist`: the boot smoke PASSES. It REFUSES on:
+  - **the stale committed edge bundle** (`engineBundleReplay` 390 of 525 rows and 248 of 360 fence settlements; `engineServiceCore`, `engineServiceStoreParity`): NAMED (door: `npm run build:edge-shared` at the close);
+  - **the goods roster** (`houseInputAtHand.js` absent): the joined line's own (red there the same);
+  - **the size ceilings**:
+
+| ceiling | f19c3b28b | tip |
+|---|---|---|
+| generation worker (2,322,103) | 2,342,187 (red) | 2,355,901 (+13,714) |
+| engine chunk (< 878,554) | under | 882,000 |
+| **first-paint static closure (1,132,308)** | **under (passes)** | **1,291,683: about +159,000 raw** (gzip 409,511 against 360,756) |
+
+**THE FIRST-PAINT RISE IS MINE AND IT IS NOT SMALL (a regression, NOT cured: item 1 below).**
+- The namesake's one home and `trade at work` make `factsOf` (eager, first paint) import `timberAtHand.js` and `tradeAtWork.js`, and with them `houseInputAtHand.js`.
+- That brings its imports in turn: the goods identity table, resource semantics, and with HW1 `data/crisisDependence.js` and the institution catalogue. At f19c3b28b none of it rode the first paint.
+- The atoms are read at generation time only (the arrival scene; the houses' late re-read), so the cure is a seam: the two getters reach the reading lazily, or the reading's data stays on the lazy side. That is a design call I did not make at the end of my budget.
+
 ## Registrations owed
 
 - Manifest entry owed (my predecessor's): `tests/generators/bar4ScenePresumption.test.js`.
-- ROSTER ROW OWED: `src/domain/facts/sceneSupply.js` (it imports `resourceSemantics` and `canonicalAccessors`) in `src/domain/goods.schema.js`, as `R | E | none | member`.
+- The goods roster row for `sceneSupply.js` named in Phase 1 is NO LONGER OWED: it imports nothing since the namesake's one home.
+- New modules: `src/domain/facts/tradeAtWork.js` (imports the roster, the semantic name and `houseInputAtHand.js`: no goods module). `houseInputAtHand.js` adds `data/institutionalCatalog.js`, `data/crisisDependence.js` and `resourceShortageImport` of `resourceSemantics.js` (a goods module it imported already): `verify:dist`'s roster arm says whether a row is owed (see the build).
 
-## The veto list
+## The veto list (every new or changed line of Phase 2, with towns it is read in)
 
-No line is new or changed in Phase 1. My predecessor's list stands.
+New twins that print in the census's 720 or the fresh 300 (the towns read):
+
+| line | towns |
+|---|---|
+| "The charcoal clamps at the end of the lane stand cold and unlit." | r2r-hamlet-9 (hamlet), r2r-village-49 (village), bar0-hamlet-under_siege-rand-117 (hamlet, siege) |
+| "A kiln stands cold across the lane, its mouth bricked up for now." | r2r-village-34 (village), r2s-politically_fractured-hamlet-2 (hamlet) |
+| "The kilns of {n} are cold more days than they are lit." | r2r-town-50 (town) |
+| "Part of {n}'s living used to come out of the ground, and the workings stand quiet now." | r2r-city-18 (city), bar0-city-under_siege+famine-rand-103 (city, siege and famine), bar0-hamlet-under_siege-rand-126 (hamlet, siege) |
+| "Spoil heaps rise beyond the houses, but the workings beyond them stand quiet." | bar0-city-under_siege+famine-rand-107, -112 (city, siege and famine), bar0-metropolis-calm-rand-123 (metropolis) |
+| "Little spellwork is done in {n} these days, for want of the stuff it takes." | r2s-insurgency-town-2 (town, insurgency) |
+| "The reagent stalls are half bare, and the few jars left are dear." | r2r-metropolis-42 (metropolis) |
+| "An ostler walks a horse up and down the yard; no rider has come in for days." | bar0-hamlet-under_siege-rand-113 (hamlet, siege) |
+| "An empty fish basket is carried past, back from the water with nothing in it." | r2s-under_siege-hamlet-2, r2s-under_siege-village-3 (siege), r2s-famine-thorp-0 (thorp, famine) |
+| "A mill wheel turns somewhere close, slowly, with little grain to grind." | bar0-village-famine-rand-114 (village, famine) |
+
+New twins that print in neither population: each is proved reachable in the guard (MU1):
+- kilns: "Drying boards stand empty outside a workshop, with no fresh pots on them."; "Old kiln dust lies on the doorsteps of {n}, but little smoke rises now."; "The yard where crates of pots once waited for the carts stands nearly empty."; "The kilns of {n} are lit only now and then, and most days the lanes are cold.";
+- stone: "Few carts of rock come down from the workings now."; "Old grey dust from the workings still lies in the doorways, but no new dust comes."; "No chink of chisels comes from the workings today."; "Workers who cut the stone stand idle by the road, the old dust still in their clothes."; "The road from the workings is empty of carts.";
+- arcane: "Shutters are drawn on an upper window where, they say, magic used to be worked."; "Doors where magic is worked stay shut, for want of what the work needs."; "A charm-seller's tray stands nearly empty, and few stop to look."; "A doorway off the lane is lit by an ordinary oil lamp.";
+- horses: "A team stands unharnessed in the yard; no carter has a load to take out."; "Harness hangs on its pegs by the yard gate, and no cart pulls out."; "{n} is full of horses with nowhere to go while the road stays closed."; "Horses stand in their stalls with no rider to carry while the road stays closed.".
+
+Changed, words unchanged:
+- `trade at work: <trade>` declared on every fish (7), kilns (7), stone (7) and arcane (8) sense line;
+- the siege excluded on the stone lines (6) and the horses' traffic lines (5);
+- the hunger excluded on the mill wheel; the horses' "smell of horses and hay" declared colour;
+- the fish family's six hunger twins widened (their `crisis: hunger` need struck): "Half of {n} has worked fish all its life, and there is almost no fish to work." now also prints in 7 towns whose fish houses are short (r2r-hamlet-10, r2r-village-45, r2r-town-29, …), the drying racks' twin in 3 (r2r-town-3, r2r-town-6, bar0-metropolis-calm-rand-114), the salt barrels' in r2s-indebted-village-1, the nets' in r2s-plague_onset-thorp-2;
+- my sawn-timber lines' atom renamed (`timber reaches the saws`).
 
 ## What is left, in order
 
-1. **The ceilings: RULED (09:02, B3).** Named for the close's doors. The one line no town of either population prints (the saws' twin) is KEPT (09:07), its state proved reachable in the guard.
-2. **On the chair's word: Phase 2, the `house at work` remainder** (13 of the 720, 11 of the fresh 300). The steps:
-   - Merge `lane/bar4-record-2026-11-16` at the tip the chair names. This is ONE merge commit, and a conflict is a STOP.
-   - The scene's `house at work` reads `src/domain/facts/houseInputAtHand.js`, and the `timber at hand` atom calls it too.
-   - The guard's frozen list shrinks to empty, and its positive control must still fire.
-   - Re-run alone the files that pin what changed, then the build with `verify:dist`.
-3. **For the close's doors:** every row of the books table above, the edge bundles, and the roster row.
+1. **THE FIRST-PAINT REGRESSION (above), FIRST:** about +159,000 raw bytes on the first paint from `factsOf` reaching `houseInputAtHand.js` through `timberAtHand.js` and `tradeAtWork.js`. Cure it at its cause, keeping the atoms' one home off the eager closure (measure with `npm run build` + `tests/build/vendorPdfLazy.test.js`, and `tests/architecture/engineCoreLazyEdge.test.js`), or take the chair's ruling. The worker (+13,714) and the engine chunk (+3,446) are the same reading's bytes.
+2. **For the chair:** `proseComposed`'s under-claims ceiling, 2014 at f19c3b28b and 2016 at the tip (the +2 is my predecessor's DS-GEN-13 v6 and monastery v3 marks as the merged walker counts them). A ruling, or a re-worded v6 and v3 by the next seat of the general desk.
+3. **For the close's doors:** every NAMED row of both tables above (the variant counts, the byte rows, the golden rows, the registers, the wiring census), the edge bundles (`npm run build:edge-shared`), the size ceilings (B3), and the manifest entry.
+4. **Not cured (the joined line's own reds, the same message there):** the seven files listed under step 4.
 
 ## Instruments (scratch, outside every tree)
 
@@ -146,3 +240,4 @@ No line is new or changed in Phase 1. My predecessor's list stands.
 - `books/ref/hash.mjs <tree> <out>`: the 525 hashed, with records kept gzipped. `books/ref/diff.mjs <dir> <manifest>`: base against manifest, tip against base, by family.
 - `books/ref/fence.mjs <tip> <base>`: the fence's 360, leaf-walked.
 - `books/adm3.mjs <tree>`: DS-GEN-13's market-no-guild pool, drawn and admitted, over the 24 census siege towns.
+- Phase 2: `books/scene2.mjs <tree> <seedcfg> <out.tsv> <seeds…>` (each town's arrival scene and the detector; `scene3.mjs` reads another tree's towns with the tip's detector); `books/marks.mjs` (every row's mark over the 1,020 towns, and the fact against the page); `books/hia.mjs` (every live house's `houseInputAtHand` answers); `books/haw.mjs`, `haw2.mjs` (the `house at work` instances and their houses' readings). The seeds: CENSUS-3 `seedcfg.mjs` and `seeds.txt` (`git archive` of `lane/census-3-2026-11-14`), and `seeds.fresh300.txt` (the chair's lane).

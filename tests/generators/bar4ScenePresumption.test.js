@@ -54,8 +54,10 @@ const stringsOf = (v, out = []) => {
  * materials."). Not yet cured: the cure needs an atom over the house's own mark (`crisisStoppedRow.js :: rowMarkText`,
  * a display leaf the facts cannot import). A town leaves this list when it is cured; none may join it.
  */
-const HOUSE_AT_WORK_LEFT = Object.freeze(['r2r-hamlet-10', 'r2r-village-34', 'r2r-village-45', 'r2r-village-49', 'r2r-town-3', 'r2r-town-6',
-  'r2r-town-29', 'r2r-town-50', 'r2r-city-14', 'r2r-city-18', 'r2r-metropolis-58', 'r2s-indebted-village-1', 'r2s-insurgency-town-2']);
+// BAR4-SCENES-2 (2026-11-16, the chair's ruling HW1): EMPTY. The 16 towns of the 720 the remainder read after the join (and 11 of the
+// fresh 300) are cured: the scene's lines declare `trade at work: <trade>` (`facts/tradeAtWork.js`, on the one fact the page's mark
+// reads, `houseInputAtHand.js :: housesShortOf`) and the siege or the famine where the page marks a house stopped or scarce.
+const HOUSE_AT_WORK_LEFT = Object.freeze(/** @type {string[]} */ ([]));
 
 /** @type {Map<string, { town: any, lines: string[] }>} */
 const BORN = new Map();
@@ -152,6 +154,98 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
     expect(after).toContain(twinLine);
     expectAbsentWithAnchor(after, raspLine, twinLine, 'the stripped town prints the twin in the rasp line\'s slot');
     expect(after).toBe(before.replace(raspLine, twinLine));
+  });
+
+  // BAR4-SCENES-2 (HW1): the `house at work` presumption cannot go blind: on r2r-village-34, whose one kiln house is the Potter the
+  // page marks "Short of clay.", a kiln line fires it, and the gate's atom reads the same town as no kiln trade at work.
+  it('POSITIVE CONTROL (house at work): a kiln line beside a potter the page marks short fires, and the atom agrees', () => {
+    const b = /** @type {{ town: any }} */ (BORN.get('r2r-village-34'));
+    const kilns = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'kilns'));
+    const line = String(kilns.lines.find((/** @type {any} */ l) => l?.needs?.includes('trade at work: kilns')).text(b.town.name));
+    expect(scenePresumptionFindings(b.town, [line]).map((f) => f.presumes)).toEqual(['house at work']);
+    expect(factsOf(b.town).tradeAtWork('kilns')).toBe(false);
+  });
+
+  // BAR4-SCENES-2 (2026-11-16, the chair's MU1: a twin whose state is reachable stays, proved by a constructed record). Each twin the
+  // ruling HW1 added or widened is proved reachable at once: a census town whose sense slot draws the twin's original on a stream of
+  // the scene's own, put in the state that refuses the original (every house of the trade short, or the siege, or the famine),
+  // prints the twin in that slot.
+  it('REACHABLE (MU1): every twin of the trades at work prints where its original is drawn and the town\'s state refuses it', async () => {
+    const { TRADE_HOUSES } = await import('../../src/domain/facts/tradeAtWork.js');
+    const { canonStressors } = await import('../../src/domain/canonicalAccessors.js');
+    const { CHAIN_RAW_INPUT, houseInputAtHand } = await import('../../src/domain/facts/houseInputAtHand.js');
+    const scene = (/** @type {any} */ town, /** @type {string} */ stream) => {
+      setActiveRng(createPRNG(stream).fork('arrival-scene'));
+      try { return String(composeArrivalScene(town)); } finally { clearActiveRng(); }
+    };
+    const atStart = (/** @type {string} */ w, /** @type {string} */ n) => new RegExp(`(^|[^a-z])${w}`).test(n);
+    /** the record in the state that refuses the original: every house of the trade short (a gap no reading answers), or a crisis */
+    const refusing = (/** @type {any} */ town, /** @type {string} */ key, /** @type {string} */ state) => {
+      const withCrisis = (/** @type {string} */ type) => { const list = [...canonStressors(town), { type }]; return { ...town, stress: list, stressors: list }; };
+      if (state === 'siege') return withCrisis('under_siege');
+      if (state === 'hunger') return withCrisis('famine');
+      const words = /** @type {any} */ (TRADE_HOUSES)[key];
+      const houses = (town.institutions || []).filter((/** @type {any} */ i) => words.some((/** @type {string} */ w) => atStart(w, String(i?.name).toLowerCase())));
+      /** each house gapped on an input this town's own reading calls missing (`houseInputAtHand`): the record's own short */
+      const gapped = (/** @type {any} */ base) => {
+        const gaps = houses.map((/** @type {any} */ h) => {
+          const key2 = Object.keys(CHAIN_RAW_INPUT).find((k) => houseInputAtHand(base, k, h, { rawResource: CHAIN_RAW_INPUT[k] }) === 'missing');
+          return key2 ? { chain: CHAIN_RAW_INPUT[key2], institution: h.name, kind: 'missing', impact: `${h.name} exists but lacks access to ${CHAIN_RAW_INPUT[key2]}`, severity: 'high' } : null;
+        }).filter(Boolean);
+        return { ...base, resourceAnalysis: { ...base.resourceAnalysis, gaps: [...(base.resourceAnalysis?.gaps || []), ...gaps] } };
+      };
+      const own = gapped(town);
+      // a market house's trade IS the route: where the gaps alone leave the trade at work, the road is cut too (isolated)
+      return factsOf(own).tradeAtWork(key) === false ? own : gapped({ ...town, config: { ...town.config, tradeRouteAccess: 'isolated' } });
+    };
+    const twins = ARRIVAL_SENSES.flatMap((/** @type {any} */ sense) => ['lines', 'dominant'].flatMap((field) => sense[field].filter((/** @type {any} */ t) => t?.twinOf).map((/** @type {any} */ t) => {
+      const original = sense[field].find((/** @type {any} */ o) => o && typeof o === 'object' && !o.twinOf && String(o.text('{name}')) === t.twinOf);
+      const atoms = [...(original?.needs || []), ...(original?.excludes || [])];
+      const state = (t.needs || []).includes('crisis: under_siege') ? 'siege' : (t.needs || []).includes('crisis: hunger') && sense.key === 'bread' ? 'hunger'
+        : atoms.some((/** @type {string} */ a) => a.startsWith('trade at work')) && !(t.excludes || []).includes('enchanting') ? 'short' : null;
+      return state && (state !== 'siege' || sense.key === 'horses') ? { key: sense.key, sense, field, pool: sense[field], original, twin: t, state } : null;
+    }))).filter(Boolean);
+    expect(twins.length, 'the twins of the trades at work').toBeGreaterThan(20);
+    const streams = Array.from({ length: 60 }, (_, i) => `bar4-scenes-2-mu1-${i}`);
+    /** the town with its trade at work again: its trade houses' gaps and its spent grounds struck (the slot then draws the original) */
+    const atWork = (/** @type {any} */ town, /** @type {string} */ key) => {
+      const words = /** @type {any} */ (TRADE_HOUSES)[key] || [];
+      const of = (/** @type {any} */ g) => words.some((/** @type {string} */ w) => atStart(w, String(g?.institution).toLowerCase()));
+      return { ...town, config: { ...town.config, nearbyResourcesDepleted: [] }, resourceAnalysis: { ...town.resourceAnalysis, gaps: (town.resourceAnalysis?.gaps || []).filter((/** @type {any} */ g) => !of(g)) } };
+    };
+    const speaks = (/** @type {any[]} */ pool, /** @type {any} */ town, /** @type {string} */ scene0) => pool.some((l) => l && scene0.includes(String((typeof l === 'function' ? l : l.text)(town.name))));
+    /** a town whose trade words are struck from its exports and income: its sense then speaks from the `lines` pool (`chooseSense`) */
+    const ordinary = (/** @type {any} */ town, /** @type {any} */ sense) => {
+      const traded = (/** @type {unknown} */ w) => sense.trade.some((/** @type {string} */ t) => atStart(t, String(typeof w === 'string' ? w : /** @type {any} */ (w)?.source).toLowerCase()));
+      const e = town.economicState || {};
+      return { ...town, economicState: { ...e, primaryExports: (e.primaryExports || []).filter((/** @type {unknown} */ w) => !traded(w)), incomeSources: (e.incomeSources || []).filter((/** @type {unknown} */ w) => !traded(w)) } };
+    };
+    const unproved = twins.filter((/** @type {any} */ x) => ![...BORN.values()].some(({ town: born, lines }) => {
+      // a town whose scene speaks from this pool (its sense and its field the ones the slot draws from), or, for a `lines` pool no
+      // census town reaches, a town of the same sense that speaks from its `dominant` pool, its trade words struck
+      let town = born;
+      if (!speaks(x.pool, born, String(lines[0]))) {
+        if (x.field !== 'lines' || !speaks(x.sense.dominant, born, String(lines[0]))) return false;
+        town = ordinary(born, x.sense);
+      }
+      const base = x.state === 'short' ? atWork(town, x.key) : town;
+      const rec = refusing(base, x.key, x.state);
+      if (x.state === 'short' && factsOf(rec).tradeAtWork(x.key) !== false) return false;
+      return streams.some((st) => scene(base, st).includes(String(x.original.text(town.name))) && scene(rec, st).includes(String(x.twin.text(town.name))));
+    })).map((/** @type {any} */ x) => `${x.key} (${x.state}): ${x.twin.text('{name}')}`);
+    expect(unproved).toEqual([]);
+  }, 900000);
+
+  it('THE COPIES ARE THE TABLES\' OWN: the chains\' raw inputs, the timber chains and the trades\' house words, word for word', async () => {
+    const { RESOURCE_CHAINS } = await import('../../src/data/resourceChains.js');
+    const { CHAIN_RAW_INPUT } = await import('../../src/domain/facts/houseInputAtHand.js');
+    const { TIMBER_CHAINS } = await import('../../src/domain/facts/timberAtHand.js');
+    const { TRADE_HOUSES } = await import('../../src/domain/facts/tradeAtWork.js');
+    const { FACT_DIMENSIONS } = await import('../../src/domain/facts/factVocabulary.js');
+    expect(CHAIN_RAW_INPUT).toEqual(Object.fromEntries(Object.entries(RESOURCE_CHAINS).map(([k, c]) => [k, /** @type {any} */ (c).rawResource])));
+    for (const [key, chain] of TIMBER_CHAINS) expect(/** @type {any} */ (chain).rawResource).toBe(/** @type {any} */ (RESOURCE_CHAINS)[/** @type {string} */ (key)].rawResource);
+    for (const [key, words] of Object.entries(TRADE_HOUSES)) expect(words).toEqual(/** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === key)).institutions);
+    expect(/** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys).toEqual(Object.keys(TRADE_HOUSES));
   });
 
 });

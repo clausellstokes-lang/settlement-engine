@@ -24,23 +24,26 @@ const originals = (pool) => pool.filter((line) => !(line && typeof line === 'obj
 describe('R-AP amended: the fish key\'s lines declare the catch and the water they presume', () => {
   it('lines: the stalls\' catch (market, navigable, fish); the wet baskets (fish, market); the nets, the flapping basket (fish)', () => {
     const [stalls, monger, nets, basket] = originals(sense('fish').lines);
-    expect(needsOf(stalls)).toEqual(['market', 'navigable', 'fish']);
+    // BAR4-SCENES-2 (2026-11-16, the chair's ruling HW1; re-keyed by identity): each catch line also needs its trade at work (some fish
+    // house not short: `trade at work: fish`), first; the catch and the water it presumes are unchanged
+    expect(needsOf(stalls)).toEqual(['trade at work: fish', 'market', 'navigable', 'fish']);
     // W2-FIX-DATA (the REVIEW-W2B cold list, c05): the fishmonger shouts a price at a market, so the wet baskets need one too
-    expect(needsOf(monger)).toEqual(['fish', 'market']);
-    for (const l of [nets, basket]) expect(needsOf(l)).toEqual(['fish']);
+    expect(needsOf(monger)).toEqual(['trade at work: fish', 'fish', 'market']);
+    for (const l of [nets, basket]) expect(needsOf(l)).toEqual(['trade at work: fish', 'fish']);
   });
   it('dominant: the racks of catch (navigable, fish); the gutting (fish); the salt barrels and their gulls (navigable)', () => {
     const [racks, gutting, barrels] = originals(sense('fish').dominant);
-    expect(needsOf(racks)).toEqual(['navigable', 'fish']);
-    expect(needsOf(gutting)).toEqual(['fish']);
-    expect(needsOf(barrels)).toEqual(['navigable']);
+    expect(needsOf(racks)).toEqual(['trade at work: fish', 'navigable', 'fish']); // BAR4-SCENES-2 (HW1, re-keyed by identity): as above
+    expect(needsOf(gutting)).toEqual(['trade at work: fish', 'fish']);
+    expect(needsOf(barrels)).toEqual(['trade at work: fish', 'navigable']);
   });
 });
 
 /** the bare lines this seat read in its mixed pools, by pool and index (R-AO) */
 // TAIL-HISTORY batch 1 (2026-11-15, the chair's Y6): bread.lines[1], the baking since before dawn, leaves the colour mark and
 // declares `no crisis: hunger` (a line a crisis can make false is not colour): [0, 1, 3] → [0, 3]
-const ARRIVAL_COLOUR = { 'bread.lines': [0, 3], 'faith.lines': [2], 'herbs.dominant': [1, 2] };
+// BAR4-SCENES-2 (2026-11-16, re-keyed by identity): the mill wheel's twin joins bread.lines after the mill wheel, so the warm oven moves [3] → [4]
+const ARRIVAL_COLOUR = { 'bread.lines': [0, 4], 'faith.lines': [2], 'herbs.dominant': [1, 2] };
 const FLAVOR_COLOUR = { disaster_heavy: [0, 1, 2, 3, 5], religious_heavy: [1, 3, 4, 5, 6], magical_heavy: [0, 3, 5] };
 
 describe('R-AO: the read bare lines of the mixed pools are marked colour, and declare nothing', () => {
