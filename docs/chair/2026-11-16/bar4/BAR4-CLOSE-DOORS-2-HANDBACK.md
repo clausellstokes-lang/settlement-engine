@@ -16,7 +16,7 @@ FOR THIS ROUND'S SIGNING, AT THIS TREE, ONCE. The signed record:
 [`docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json`](../../../shift-records/2026-11-16-the-close-of-the-round-bar4.json)
 (new; no earlier record touched). Commit trailer `Owner-Signed: §934.105` on the signed-door commits.
 
-STATUS: **IN PROGRESS.** Every surface and pin re-taken: the record and the golden master (1581ed12, WRITTEN sent 18:55 UTC), the golden's pins (b38b7d68), the espionage fence (06462c1c), the dossier prose manifest (05199688), x46 and the budget; next: the receipt.
+STATUS: **DONE. The three signed surfaces (the golden master, the espionage fence, the dossier prose manifest) and every pin that reads them re-taken through their doors, under the owner's words and the chair's line "SIGN" (18:52 UTC); WRITTEN sent at 18:55 UTC. The receipt green whole at 5cd04316: nothing red. After this hand-back's push this seat pushes nothing more.**
 
 ## THE MEASURE BEFORE ANY WRITE (at e73d53d8; e942f648 differs by Part 1's hand-back only)
 
@@ -52,8 +52,8 @@ record), generationForkRegistry.contract 3/3 (nothing to re-key).
 | 2 | the espionage fence's driven golden (`PRE_COUPLING_CORPUS_SHA`, 360 settlements) | EF1 first (above); `node scripts/audit/refence.mjs . --produce <scratch> --header <block>`; `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json node scripts/audit/door-write.mjs --surface espionage-dormancy-fence --from <scratch>` (exit 3, by design) | 1 (the fence file) | 248 of 360 moved; `05b90d5f…` -> `8e5881d6…` (the measure's own); the hundred-and-fourteenth movement block; the written file byte-equal to the produced one | 06462c1c | espionageDormancyFence 21/21; its readers alone: engineBundleReplay 7/7 (no arm skipped), espionageMissionDormancyFence 20/20, faithFieldDormancyFence 13/13, faithWitnessSource 35/35, generatorGoldenMaster 3/3; goldenFreeze.walker 90/90 |
 | 3 | the dossier prose manifest (`tests/fixtures/dossier-prose-manifest-golden.json`) | `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json node scripts/prose-manifest-cells.mjs --record` | 2 | 2; 734 of 1,050 rows moved (the drift arm's own count before the write); be43267f… -> 99c8150a… | 05199688 | dossierProseManifest **17/17**: THE MIXED-POOL AUDIENCE ARM (MP1's control) and the drift arm GREEN, no re-key, nothing to send under MP1 |
 | 3 | `tests/domain/worldFactRederive.test.js` A7 (the prose manifest's file sha) | a dated line | be43267f -> 99c8150a | as predicted | 05199688 | 7/7; its readers alone: dossierStateProseProjection.contract 79/79, bandLadders 8/8, institutionDestroyedByKind 7/7, institutionRename 6/6, ruinInstitution 7/7, landingStageMeasure 11/11, sourceCitationIntegrity 18/18, generatorGoldenMaster 3/3; goldenFreeze.walker 90/90 |
-| 4 | `tests/generators/x46NpcBand.test.js` (`tests/fixtures/x46-npc-band-dark-digests.json`) | the file's own loop (an untracked probe): at c4ac1ef84a (60 of 60 reproduce) and twice at the tree (equal), each record also by leaf path; the fixture in its own form (key order and bytes checked); a dated note | 38 moved | 38 of 60; declared cures only (ties, the supply gaps, income, foodways, houses, powers, the arrival, secrets, one hook twin) | (this commit) | 24/24; no other reader |
-| 4 | `tests/generators/institutionBudgetPromise.test.js` BEFORE | the same, the factor forced to 1.0 | 47 moved | 47 of 60; declared cures only (ties, the supply gaps and a priority note, foodways, houses, secrets, presentations, three guard lines (BAR4-SAFETY e52d5582), a hook twin, history tensions, a power, income, an outlook hook); the budget module untouched since c4ac1ef84a | (this commit) | 1/1; no other reader |
+| 4 | `tests/generators/x46NpcBand.test.js` (`tests/fixtures/x46-npc-band-dark-digests.json`) | the file's own loop (an untracked probe): at c4ac1ef84a (60 of 60 reproduce) and twice at the tree (equal), each record also by leaf path; the fixture in its own form (key order and bytes checked); a dated note | 38 moved | 38 of 60; declared cures only (ties, the supply gaps, income, foodways, houses, powers, the arrival, secrets, one hook twin) | 5cd04316 | 24/24; no other reader |
+| 4 | `tests/generators/institutionBudgetPromise.test.js` BEFORE | the same, the factor forced to 1.0 | 47 moved | 47 of 60; declared cures only (ties, the supply gaps and a priority note, foodways, houses, secrets, presentations, three guard lines (BAR4-SAFETY e52d5582), a hook twin, history tensions, a power, income, an outlook hook); the budget module untouched since c4ac1ef84a | 5cd04316 | 1/1; no other reader |
 | 4 | `tests/lint/generationForkRegistry.contract.test.js` | run alone at the tree | — | GREEN (3/3): nothing to re-key | — | 3/3 |
 
 ## STOPS AND LAW REDS SENT TO THE CHAIR
@@ -61,10 +61,50 @@ record), generationForkRegistry.contract 3/3 (nothing to re-key).
 - None forced. Lines sent: READY FOR PART 1'S TIP; READY TO SIGN (at e73d53d8); the correction applied (e942f648, the measure stands);
   HOLDING (on the chair's HOLD of 17:43); WRITTEN (18:55 UTC, 1581ed12).
 
+## THE RECEIPT, AT THE FINAL TREE (5cd04316, each file alone through `sh scripts/gate-tail.sh npx vitest run <file>`, one log a file)
 
+156 files: every file re-taken, every test that reads a re-taken file (`grep -rl` of each basename over tests/), the red list, the law
+suites (BAR3-CLOSE-DOORS-2's receipt list, 127 files), the round's nine guards (`tests/domain/bar4*.test.js`,
+`tests/generators/bar4*.test.js`) and the repair seat's last re-key (tailHouses1Gaps). **156 green alone, 0 red; goldenFreeze.walker
+90/90, LAST.** ONE FALSE RED OF MY OWN, CURED BEFORE THIS RECEIPT (as at the last close): `tests/lint/domainAnyCastBaseline.test.js` read
+18/19 ONLY BECAUSE MY SCRATCH CLONE IS SHALLOW (its attribution arm resolves the `introducedAt` commits d7ea69a4b, 172e5f225, e0c8646ee);
+with those three fetched by their full shas (`git fetch --depth=1 origin <sha>`, objects only, no file changed): 19/19. The container
+was restarted once during the receipt's last steps; the steps not yet logged were re-run from the register checks on (the tree unchanged).
 
+engineCoreLazyEdge 3, layerBoundaries 8, engineBundleReplay 7, engineServiceCore 1, engineServiceStoreParity 4, validateEdgeFunctionsSyntaxOnly 3, vendorPdfLazy 27 + 28 skipped, bar3LabelWords2 6, dossierPhoneFloorAllViews 2, composedProseSeams 7, landingClaimsParity 7, colourMarks4h 4, dossierStateProseProjection.contract 79, tailHistoryBatch4 2, tailHouses1Gaps 2, ancientRuinsGeneration 3, bandLadders 8, bar4CorpusDefKinds 15, bar4CorpusEcoKinds 12, bar4MarkPromise 7, bar4PeopleKinds 16, bar4SafetyKinds 7, corpusEcoTailGuards 136, corruption 17, customContentPresentationClaims 169, defensePostureAgainstItsFacts 10, defenseWordsFindings 12, editWorldFactResources 6, faithWitnessSource 35, institutionDestroyedByKind 7, institutionRemoval 4, institutionRename 6, livingContentPromiseBytes 5, mergeLadderHeldKeys 8, mergeLadderHistory 5, recordInvariants 7, recordMerge 8, rosterOps 5, ruinInstitution 7, townCartographyBuildings 28, townCartographyCalibration 32, tracePartition 11, worldFactRederive 7, accountDeletionDurableWorker 6, adminActionTwoKeyWalker 10, aiCharterBundle.freshness 19, aiGroundingBundle.freshness 20, aiGroundingContract 95, aiOutputSchemaBundle.freshness 23, aiOutputToolWiring 52, aiProviderAbstraction 55, analyticsEventsBundle.freshness 14, autoReloadLifetime 14, autonomyCore 15, contracts 214, cors 24, creditFlow 13, edgeSharedBundleReproducibility 29, intentAtlasBundle.freshness 26, paymentRefundDurableWorker 8, promptEfficiency 7, sessionGateCensus 23, surveyorByok 91, surveyorKillSwitch 8, generation 21, arrivalScene 28, bar3People2Rows 13, bar3PlacesRows 11, bar4HistoryOneTelling 9, bar4HousesPresumptions 6, bar4RecordHouseInput 7, bar4ScenePresumption 8, crisisFoodWord 3, dossierContent 20, foodModelSingleWriter 14, foodwaysOneLine 6, generationForkCensus 7, generationWorkerIdentity 8, hookThemeDraws 13, hookTruthAtBirth 13, institutionBudgetPromise 1, nameHeldThroughAssembly 7, narrativeArrival 25, castDerived 6, castPowers 13, representatives 5, ties 10, pipelinePinnedChoosers 7, pipelinePinnedMode 15, conflictLadderReadsRoster 2, sovereignNoCrown 2, powerEconomyFreshness 10, powerStructure 5, regenDerivedState 5, rosterDuplicateDraws 3, rosterFinalUnderHeldRoster 7, servicesStructure 3, stressSecretDeclared 3, tieProseDeclared 3, timelineVariety 5, upkeepVocation 2, w0WriterAgreement 6, x46NpcBand 24, labelJoins 3, mundaneRealmAcceptance 21, chainPrintSites.walker 6, chooserRecordPathRegistry.walker 3, defenceFactReaders.walker 22, domainAnyCastBaseline 19 (re-run), editDeclarations.walker 5, factLayers.walker 15, generationForkRegistry.contract 3, heldKeyWriterCensus.walker 7, institutionTable.walker 20, mutationCoverageManifest 10, negativeAssertionAnchor.walker 9, newsHeadlineContract.walker 8, noLegacyFactionReaders.walker 4, observedShapeReaders.walker 47, presumedThings.walker 43, proseComposed.walker 87, proseCorpusBytes 18, proseDrawnAnchors.walker 6, proseEntryContradiction.walker 29, proseFamilyContract.walker 8, proseMoveGrammar.walker 54, proseWiringCensus.walker 79, recordRegisterTotality.walker 8, ruinFilterRoster.walker 12, seedLoopTotality.walker 9, siteCoherenceRatchet 9, sourceCitationIntegrity.walker 18, sovereigntyLightingContract.walker 34, styleLaw.walker 20, testRatchet 86, tradeListWriters.walker 5, tuningRegister.walker 76, wiringCensusDeclared.walker 9, writerReach.walker 52, goldenViewModel 4, dmLayerGoldenIsolation 15, dossierProseManifest 17, editCorpusRatchet 8, espionageDormancyFence 21, espionageMissionDormancyFence 20, faithFieldDormancyFence 13, generatorGoldenMaster 3, heraldKnowledgeDeskGolden 3, npcCredibilityDormancyGolden 5, pipeline.property 6, underwaysOrganicFoundingDormancyFence 6, warCirculationDormancyFence 10, landingStageMeasure 11, readerCorpusManifest 18, presetLightingWitness 7, participationWriteBase.contract 5.
 
+| step | command (each to a file) | result |
+|---|---|---|
+| the fourteen non-test steps | `sh scripts/gate-tail.sh npm run <step>`: validate:hazard-registry, :premortem, :packets, :data, :custom-content-manifest, :migration-head, :edge, :map, :tuning-bands, :foundry-module, :mcp-server, typecheck:ratchet, typecheck:domain:strict, lint | ALL 14 EXIT 0 |
+| the registers | `node scripts/presumed-things-door.mjs --check`; `node scripts/check-writer-reach.mjs`; `node scripts/check-observed-shape-readers.mjs`; `node scripts/wiring-census.mjs --check` | all four exit 0 ("fresh 0 · stale 0 · banked 4692"; "WRWALKER HOLD — judged 12703 · LIT 694 · LIT-NAME 10596 · DARK 1413"; the frozen inventory matched; "verified 859 pools / 2977 variants / 169 relation rows"); nothing written |
+| build | `sh scripts/gate-tail.sh npm run build` | exit 0 |
+| verify:dist | `sh scripts/gate-tail.sh npm run verify:dist` | **exit 0: STRICT DIST OK, 67 files, 603 tests**, zero failed/non-run/uncollected/missing/extra/duplicate rows (engineBundleReplay's golden and fence arms run); `dist` (my own build output) removed after, the tree clean |
+| goldenFreeze.walker, LAST | `sh scripts/gate-tail.sh npx vitest run tests/lint/goldenFreeze.walker.test.js`, after the last door | **90/90** |
+
+STILL RED, BY NAME: **nothing.**
+
+## FOR THE OWNER, IN PLAIN WORDS
+
+Under your two words in the chair's chat (08:55 UTC, "Later: a new yes for the example-town refresh when this round closes.", and, after
+the chair's own permission check held its first go-ahead, 18:51 UTC, "Yes to plain yes for the example-town refresh."), I refreshed the
+stored "expected output" references the tests compare freshly generated towns against, because this round's fixes changed what towns
+say and, in one place, what a town records as short. What was refreshed:
+
+- the 525 reference towns' fingerprints (390 changed): the lines about ties between people (and, where a pair already has a warm tie,
+  their second tie is now a rivalry rather than a feud: the people branch's declared rule), the vintner's secret, the income lines and
+  the outlook hooks, what people eat, four houses' descriptions, one arrival scene, and the list of supply gaps (a house short of what it
+  works with is now listed once, from the one fact the page reads; a salt works on spent ground now "lacks access" instead of "runs on
+  imports"). Nothing outside the families the round's branches declared moved;
+- the espionage fence's 360-town fingerprint (248 changed, the same kinds of lines; its other twenty checks passed first, so nothing about
+  how espionage behaves moved);
+- the dossier text manifest (734 of its 1,050 cells changed wording; its check that a player never sees a DM-only line passed as it
+  stands, nothing re-counted);
+- the small stored figures derived from these: two lists of sixty fingerprints, a control fingerprint, four digests of an edit check, two
+  file fingerprints and one count of archived records.
+
+**Saved towns are unaffected**: these are test references, not anyone's data. Each change is on the veto list: a veto of any change
+reverts that change and refreshes these references again. Nothing stays red.
 
 ## WHAT IS LEFT, IN ORDER
 
-1. The receipt (the law suites, the round's guards, the fourteen steps, build, verify:dist, the registers, goldenFreeze.walker last) and FOR THE OWNER.
+Nothing of this assignment. The scratch-only artefacts (probes, logs, measures, the plant) stay in this seat's scratch directory; none is committed.
