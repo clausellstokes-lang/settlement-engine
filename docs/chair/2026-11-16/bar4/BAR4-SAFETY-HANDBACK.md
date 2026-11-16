@@ -1,4 +1,4 @@
-# BAR4-SAFETY hand-back (2026-11-16)
+# BAR4-SAFETY hand-back (2026-11-16) · FINAL at the chair's word of 10:18 UTC
 
 Base: `lane/bar4-safety-2026-11-16` at a71788851 = 8aef8e7d46 plus the close's hand-back (docs only). Second tree of the
 books: 8aef8e7d4. Work in a scratch worktree (detached; pushed with an explicit refspec).
@@ -111,13 +111,15 @@ symbol I changed: 101 green). Red at my tip, classed:
   The law suites and amendment 2's ten files re-run alone at the final tip: 28 green, the two stored figures above.
 - THE BUILD: `npm run build` green. `npm run verify:dist` at the final tree REFUSES on THREE SIZE CEILINGS (each a ceiling: NOT
   raised by me; each is the cure's own code, the three fact leaves, the twins and the crime reading; the chair's ruling of 09:21 UTC
-  grants the worker as a named move for the close's doors under B3, and the other two are ASKED of the chair in the same form):
+  ruled at 10:18 UTC: RULING B3 COVERS ALL THREE, NAMED MOVES FOR THE CLOSE). THE BOOKS MY CURES MOVE, the size ceilings:
   | test :: arm | ceiling -> final tree | where the bytes are |
   |---|---|---|
   | `tests/build/generationWorkerLazy.test.js` :: the worker bundle stays under its measured ceiling | 2,322,103 -> 2,324,849 B (+2,746) | e52d55824 (+2,559), 3297cbe36 (-469: the rota table), the SF1 commit (+656: the hook's twin and the pay read) |
   | `tests/build/vendorPdfLazy.test.js` :: the engine chunk still exists (lazy) and remains large (its upper bound) | < 878,554 -> 880,408 B (+1,854) | the same generator code (safetyLineTruth, guardPay, conflicts, rulingStructure) |
   | `tests/build/vendorPdfLazy.test.js` :: the entry static closure under the first-paint budget (raw, gzip, Brotli) | 1,132,308 -> 1,133,011 raw (+703); 360,756 -> 361,008 gzip; 302,830 -> 302,934 Brotli | the eager facts and the Tonight sheet: `siegeMotion.js` and its `factsOf` getter, `covertCrimeHeld`, the siege twins |
-  A CORRECTION OF MY e52d55824 HAND-BACK: I wrote the first-paint rise "bought back, green after a second build". It was NOT measured:
+  THE CORRECTION, in the chair's words: first paint was never measured before: the size arms are skipped without VERIFY_DIST=1;
+  the close's doors will measure with VERIFY_DIST=1. `verify:dist` refuses on these three alone.
+  In detail, A CORRECTION OF MY e52d55824 HAND-BACK: I wrote the first-paint rise "bought back, green after a second build". It was NOT measured:
   `vendorPdfLazy` run alone SKIPS its size arms unless `VERIFY_DIST=1` (14 skipped). The bytes holding `conditionPromotion.js` out of the
   eager closure did come back (the siege's archetype is a constant), but the closure stays over by the figures above.
   The boot smoke did not run (the strict dist refuses before it). `dist/` removed.
@@ -136,8 +138,8 @@ symbol I changed: 101 green). Red at my tip, classed:
 
 ## What is left, IN ORDER
 
-1. The chair's ruling on the engine-chunk and first-paint budgets (asked; the worker is granted as a named move). Then the close:
-   re-record the size ceilings (B3), `docs/content/wiring-census.json`, and the writerReach register's rows (WR1).
+1. The close: re-record the three size ceilings under B3 (measured with VERIFY_DIST=1), `docs/content/wiring-census.json`, and the
+   writerReach register's rows (WR1).
 2. BAR4-CORPUS-DEF: DS-DEF-11 against `guardPayOf`.
 3. Nothing else of mine: the three kinds read 0 in both populations, and the guard holds them.
 
