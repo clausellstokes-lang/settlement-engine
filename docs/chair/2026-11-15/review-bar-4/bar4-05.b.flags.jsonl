@@ -1,0 +1,8 @@
+{"id":"C13374","town":"bar0-city-wartime-rand-22","sev":"MED","kind":"PAIR","why":"says food is 'not a subject anyone raises' though STATE word is Pressured (3% gap) and C12509 has a grain importer who quadrupled the price, locals arguing","other":"C12509"}
+{"id":"C13592","town":"bar0-city-wartime-rand-22","sev":"LOW","kind":"STATE","why":"lists salt among commodities available under Fishing Grounds; LAND gives Salt Flats depleted and TRADE imports salt (local flats exhausted)","other":"C13580"}
+{"id":"C13594","town":"bar0-city-wartime-rand-22","sev":"LOW","kind":"BROKEN","why":"'mage counsel' tag on Merchant Guild Council; GOVERNMENT lists no mage or counsel power, only the guild council","other":""}
+{"id":"C12607","town":"bar0-city-wartime-rand-22","sev":"MED","kind":"STATE","why":"'Guildmaster' personal title for Xenia Pulvillus, PEOPLE (f); sex-named trade title for a woman (Beemaster rule)","other":""}
+{"id":"C12743","town":"bar0-city-wartime-rand-22","sev":"MED","kind":"STATE","why":"'Beastmaster' personal title for Fabia Scaeva, PEOPLE (f); sex-named trade title for a woman (Beemaster rule)","other":""}
+{"id":"C12819","town":"bar0-city-wartime-rand-22","sev":"MED","kind":"STATE","why":"'Stablemaster' personal title for Macrina Laenas, PEOPLE (f); sex-named trade title for a woman","other":""}
+{"id":"C12846","town":"bar0-city-wartime-rand-22","sev":"MED","kind":"STATE","why":"'Golem-Master' personal title for Titia Ravilla, PEOPLE (f); sex-named trade title for a woman","other":""}
+{"id":"DONE","lines":3412,"blocks":1,"flags":7}
