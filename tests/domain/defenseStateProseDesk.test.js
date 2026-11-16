@@ -50,6 +50,7 @@ import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domai
 import { DEFENSE_STRESS_STATUS, deriveCriminalStructure, deriveGuardAssessment, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveMagicReliance } from '../../src/domain/magicReliance.js';
+import { relianceShownOf } from '../../src/domain/display/magicProvisionShown.js'; // BAR5-MAGIC: the word the page prints
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { SMALL_TIERS, TIER_ORDER, TOWN_PLUS_TIERS } from '../../src/data/constants.js';
@@ -1924,6 +1925,9 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
         tradeRouteAccess: 'road', priorityMagic: 85, priorityReligion: 80,
       }, null, { seed: `mx-${i}`, customContent: {} });
       if (s.defenseProfile?.magicDependency !== true) continue;
+      // BAR5-MAGIC (2026-11-16, LAW 1 rule 1a): the desk reads the reliance word THE PAGE PRINTS (`relianceShownOf`), which is
+      // never above the record's; a stored flag the page lowers to None or Present draws the false pool, as the page reads
+      if (!['relied-upon', 'integral'].includes(relianceShownOf(s))) continue;
       trueSeen++;
       expect(['relied-upon', 'integral'], `mx-${i} the flag is the reading`).toContain(deriveMagicReliance(s).reading);
       const drawn = defenseMagicDependencyProse(s, { seed: `mx-${i}`, audience: 'dm' });

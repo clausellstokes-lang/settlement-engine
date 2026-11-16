@@ -503,17 +503,17 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why this settlement treats arcane matters with more caution than neighbours do, not superstition, institutional memory`, colour: true },
     { text: (r) =>
-      `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic'] },
+      `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic', 'magic reliance: ≥ relied-upon'] }, // BAR5-MAGIC (rule 1a): a dependence the page's reliance word bears out
     { text: (r) =>
       `The ${drawnEventOfType(r, "magical")} is still discussed here, carefully. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] }, // TAIL-NARRATIVE (00010): no practitioners are claimed; the page's own Arcane Support row may say there are none
     { text: (r) =>
       `Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why`, colour: true },
     { text: (r) =>
-      `The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`, needs: ['magic'] },
+      `The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`, needs: ['magic', 'magic reliance: ≥ relied-upon'] }, // BAR5-MAGIC (rule 1a): a dependence the page's reliance word bears out
     { text: (r) =>
       `There are places in and around the settlement that people simply do not go, and the reasons have hardened into custom without needing to be spoken. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is where the custom started`, colour: true },
     { text: (r) =>
-      `The magic-workers here are respected, consulted and watched, all at once. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} taught people here that the most useful people can also be the most dangerous`, needs: ['magic'] },
+      `The magic-workers here are respected, consulted and watched, all at once. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} taught people here that the most useful people can also be the most dangerous`, needs: ['magic', 'magic reliance: ≥ present'] }, // BAR5-MAGIC (rule 1a, the inheritor read): magic-workers need a practitioner, which the page's None denies
   ],
 };
 

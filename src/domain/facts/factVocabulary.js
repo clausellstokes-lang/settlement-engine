@@ -155,6 +155,9 @@ export const POPULATION_WORDS = Object.freeze(['small', 'middling', 'large']);
 /** The magic level bands (`magicLedger.js`). */
 export const MAGIC_LEVEL_WORDS = Object.freeze(['none', 'low', 'medium', 'high']);
 
+/** BAR5-MAGIC (LAW 1 rule 1a): the reliance readings, weakest first (`magicReliance.js :: MAGIC_RELIANCE_READINGS`). */
+export const MAGIC_RELIANCE_WORDS = Object.freeze(['none', 'present', 'relied-upon', 'integral']);
+
 /** The food record's bands (`data/bandLadders.js :: FOOD_SECURITY_BANDS` keys), scarce → plenty. */
 export const FOOD_BAND_WORDS = Object.freeze(['famine', 'deficit', 'importDependent', 'pressured', 'secure', 'surplus']);
 
@@ -215,7 +218,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork]
- * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {boolean} [criminalIncome]
+ * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -416,6 +419,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   tier: dim({ shape: 'band', home: 'tier', order: TIER_WORDS, reader: (f) => f.tier }),
   population: dim({ shape: 'band', home: 'populationBand', order: POPULATION_WORDS, reader: (f) => f.populationBand }),
   'magic level': dim({ shape: 'band', home: 'magic', order: MAGIC_LEVEL_WORDS, reader: (f) => f.magic?.level }),
+  // BAR5-MAGIC (LAW 1 rule 1a; BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): how far the
+  // town relies on magic, AS THE PAGE PRINTS IT ("Reliance on magic: …", `magicProvisionShown.js :: relianceShownOf`). Beside
+  // `magic` and `magic level`: magic that works is not magic relied upon ("relies on arcane workings" under None).
+  'magic reliance': dim({ shape: 'band', home: 'magicRelianceShown', order: MAGIC_RELIANCE_WORDS, reader: (f) => f.magicRelianceShown }),
   food: dim({ shape: 'band', home: 'famine', order: FOOD_BAND_WORDS, reader: (f) => f.famine?.band }),
   stores: dim({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
   prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
