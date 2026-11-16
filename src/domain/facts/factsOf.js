@@ -23,6 +23,7 @@ import { marketOf } from './market.js';
 import { famineOf } from './famine.js';
 import { magicOf } from './magic.js';
 import { magicSupplyOf } from './magicSupply.js'; // BAR4-CORPUS-DEF (D2)
+import { relianceShownOf } from '../display/magicProvisionShown.js'; // BAR5-MAGIC (rule 1a): the reliance word the page prints
 import { rulerKindOf } from './rulerKind.js';
 import { rulingBodyOf } from './rulingBody.js';
 import { migrationOf } from './migration.js';
@@ -95,6 +96,8 @@ export function factsOf(record, options = {}) {
     get magic() { return magicOf(record); },
     /** BAR4-CORPUS-DEF (D2): goods the town lives on arrive by magic, an isolated route's needs met (`magicSupply.js`) */
     get magicSupply() { return magicSupplyOf(record); },
+    /** BAR5-MAGIC (rule 1a): the reliance reading the page prints, one of none · present · relied-upon · integral */
+    get magicRelianceShown() { return relianceShownOf(record); },
     /** fact 8: elder / lord / priest / mayor / occupier / council */
     get rulerKind() { return rulerKindOf(record); },
     /** TAIL-TIES (the chair's ruling (T5)): ruled by a body of more than one (`rulingBody.js`), or undefined with no government */

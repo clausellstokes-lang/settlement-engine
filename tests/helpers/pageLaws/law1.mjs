@@ -19,6 +19,11 @@ export const MAGIC_DEPENDS = [
   /\bleans on help beyond ordinary work\b/i,
   /\bif the help beyond ordinary work failed\b/i,
   /\bmore dependent on arcane resources\b/i,
+  // BAR5-MAGIC (L3, widened 2026-11-16): the siblings of the same DS-DEF-9 pool ("magicDependency true" v1 v2 v3), which make
+  // the same claim in other words and were not read (the audit's patterns were drawn from the NAMED-chain pool's rows)
+  /\brelies on help beyond ordinary work\b/i,
+  /\bhas come to lean on it without ever deciding to\b/i,
+  /\bleans on the people who give it help beyond ordinary work\b/i,
 ];
 /** 1a · prose that DENIES it (negative controls C31972 C40444 under Present; old C36862). */
 export const MAGIC_DENIES = [

@@ -1672,7 +1672,7 @@
    ],
    "magic": [
     {
-     "line": "`A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === \"magical\"))?.name || \"this event\"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic'] },",
+     "line": "`A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === \"magical\"))?.name || \"this event\"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic', 'magic reliance: ≥ relied-upon'] },",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {
@@ -1684,11 +1684,11 @@
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {
-     "line": "`The magic-workers here are respected, consulted and watched, all at once. The ${pickRandom2(r.filter((s) => s.type === \"magical\"))?.name || \"this event\"} taught people here that the most useful people can also be the most dangerous`, needs: ['magic'] },",
+     "line": "`The magic-workers here are respected, consulted and watched, all at once. The ${pickRandom2(r.filter((s) => s.type === \"magical\"))?.name || \"this event\"} taught people here that the most useful people can also be the most dangerous`, needs: ['magic', 'magic reliance: ≥ present'] },",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {
-     "line": "`The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === \"magical\"))?.name || \"this event\"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`, needs: ['magic'] },",
+     "line": "`The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === \"magical\"))?.name || \"this event\"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`, needs: ['magic', 'magic reliance: ≥ relied-upon'] },",
      "reason": "banked unread at the arm's first commit (deb1544eb): a name test of this family's words outside its home; owed to the family's leaf, or to be classed here as another sense of the word with its reason"
     },
     {

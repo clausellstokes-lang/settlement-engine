@@ -14,7 +14,7 @@
  */
 import { defenceHoldsArcane, defenceHoldsDivine, defenceHoldsDruidic, economyShowsMagic, magicOf } from '../facts/magic.js';
 import { MAGIC_NOTE_TRADITION } from '../facts/magicSource.js';
-import { chainNeedsMagic, foodMagicShare, FOOD_SUPPLY_DEPENDENT } from '../magicReliance.js';
+import { chainNeedsMagic, deriveMagicReliance, foodMagicShare, FOOD_SUPPLY_DEPENDENT } from '../magicReliance.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js'; // BAR2-LABELS-4: the standing (ruin-filtered) magic bucket
 import { magicSourceOf } from '../facts/magicSource.js'; // BAR3-LABELS-2 L1c: the houses that supply the magic, one home
 import { liveInstitutions } from '../institutions/institutionRoster.js'; // L1c: the live roster the supply names its houses from
@@ -221,6 +221,19 @@ export function relianceReadingShown(record, reliance) {
 }
 
 /**
+ * THE WORD THE PAGE PRINTS, AS ONE FACT (BAR5-MAGIC, LAW 1 rule 1a; the audit's finding: the record's reading and the
+ * page's word are two readings of one thing). `relianceReadingShown` over the one reading: the reading the Magic tab
+ * and Foundations print ("Reliance on magic: …"). EVERY SENTENCE ABOUT RELIANCE READS THIS, never `deriveMagicReliance`
+ * alone: the DS-DEF-9 desk (`defenseStateProse.js :: reliesOnMagic`) and the `magic reliance` atom
+ * (`facts/factVocabulary.js`). The stored `defenseProfile.magicDependency` is not touched.
+ * @param {unknown} record the settlement record
+ * @returns {string} one of `magicReliance.js :: MAGIC_RELIANCE_READINGS`
+ */
+export function relianceShownOf(record) {
+  return relianceReadingShown(record, deriveMagicReliance(/** @type {import('../magicReliance.js').MagicRelianceSource} */ (record)));
+}
+
+/**
  * HOW DEEP THE DEPENDENCE GOES (BAR3-LABELS L1, the chair's direction of 2026-11-15; vetoable by the owner): the
  * dependents the page bears out (`magicDependentsShown`), with every made magical service (an active chain that needs
  * magic: spellcasting, enchanting, alchemy) counted ONCE, as the town's one magic trade. "Integral" said a low- or
@@ -252,9 +265,13 @@ export function relianceDepth(record) {
  * @returns {unknown} the band the row prints
  */
 export function magicRoleBandShown(record, role, band) {
-  if (role === 'economic') return economicRoleBandShown(record, band);
-  if ((role === 'military' || role === 'medical') && band !== 'absent' && !magicRoleHeld(record, role)) return 'absent';
-  return band;
+  // BAR5-MAGIC (LAW 1 rule 1a; vetoable by the owner): "integral" is a dependence; under a reliance word that says nothing
+  // depends on magic (None, Present) the row prints the ladder's next word, "common" (r2s-religious_conversion-city-3:
+  // "Economic role: integral" and "Infrastructure role: integral" under "Reliance on magic: Present"; 1 town of 1,080).
+  const shown = band === 'integral' && !['relied-upon', 'integral'].includes(relianceShownOf(record)) ? 'common' : band;
+  if (role === 'economic') return economicRoleBandShown(record, shown);
+  if ((role === 'military' || role === 'medical') && shown !== 'absent' && !magicRoleHeld(record, role)) return 'absent';
+  return shown;
 }
 
 /**

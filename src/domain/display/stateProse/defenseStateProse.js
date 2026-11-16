@@ -97,7 +97,7 @@
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
-import { deriveMagicReliance, magicDialAbsent } from '../../magicReliance.js';
+import { magicDialAbsent } from '../../magicReliance.js'; import { relianceShownOf } from '../magicProvisionShown.js'; // BAR5-MAGIC (LAW 1 rule 1a): the word the page prints
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { readinessBandOf } from '../../../data/bandLadders.js';
@@ -2067,14 +2067,14 @@ export function hasNamedMagicChain(activeChains) {
 }
 
 /**
- * Does this place rely on magic? The one reading (`magicReliance.js :: deriveMagicReliance`) at
- * relied-upon or integral; the same answer the defence generator stores as `magicDependency`.
+ * Does this place rely on magic? THE WORD THE PAGE PRINTS (BAR5-MAGIC, LAW 1 rule 1a): the one reading as the page
+ * shows it (`magicProvisionShown.js :: relianceShownOf`) at relied-upon or integral. It re-derived the record's own
+ * reading before, so the desk said "part of the work holds up only with help beyond ordinary labour" under
+ * "Reliance on magic: None" (22 towns of the 720 at 600b7683a; C17061 C9617 C33713 C43125). The record is not touched.
  * @param {object} settlement @returns {boolean}
  */
 function reliesOnMagic(settlement) {
-  const { reading } = deriveMagicReliance(
-    /** @type {import('../../magicReliance.js').MagicRelianceSource} */ (settlement),
-  );
+  const reading = relianceShownOf(settlement);
   return reading === 'relied-upon' || reading === 'integral';
 }
 
@@ -2088,7 +2088,7 @@ function reliesOnMagic(settlement) {
  */
 function noMagicHere(settlement) {
   const source = /** @type {import('../../magicReliance.js').MagicRelianceSource} */ (settlement);
-  return magicDialAbsent(source) && deriveMagicReliance(source).reading === 'none';
+  return magicDialAbsent(source) && relianceShownOf(source) === 'none'; // BAR5-MAGIC: the word the page prints
 }
 
 /**
