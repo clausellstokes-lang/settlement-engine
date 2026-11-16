@@ -1555,15 +1555,6 @@ export const CHAIN_DEPENDENCE = Object.freeze({
 const FISH_TRADE_HOUSES = Object.freeze(['fish_market', 'fisher_s_landing', 'fishing_community', 'fishmonger']);
 
 /**
- * AN INCOME SHARE OF A HOUSE'S TRADE AND ITS HOUSES (BAR4-SERVICES S1 (ii), the chair's direction of 2026-11-16; vetoable by
- * the owner): the shares titled by a resource trade (`economy/incomeLineSiblings.js :: RESOURCE_ROW_TRADES`, the maritime fish
- * share the fish trade's) and the catalogue ids of the houses of that trade (the trade's own house words over the catalogue's
- * names: `tests/domain/bar4MarkPromise.test.js` pins the two equal). Where every live house of the trade carries a crisis mark,
- * the share takes the mildest of them (`crisisStoppedRow.js :: incomeHouseKind`). Declared here so that the display leaf
- * reads no generator module (the domain -> generators boundary).
- * @type {Readonly<Record<string, ReadonlyArray<string>>>}
- */
-/**
  * A HOUSE'S INPUT BROUGHT IN BY ITS OWN NAME (BAR5-MARKS, LAW 2's `L2.siege.cutgood`, 2026-11-16; vetoable by the owner):
  * the herb houses work medicinal herbs, and where the record's imports bring them by that name (`canonicalAccessors.js ::
  * canonImports`: "Medicinal herbs") the page says the town's healing depends on herbs from outside
@@ -1585,14 +1576,23 @@ export const INPUT_IMPORTED_AS = Object.freeze({
  * incomeHouseKind`): where every live house of the trade carries a mark, the share takes the mildest of them. Apart from
  * `INCOME_TRADE_HOUSES`, which is the resource trades' own declaration (`economy/incomeLineSiblings.js ::
  * RESOURCE_ROW_TRADES`, held by tests/domain/bar4MarkPromise.test.js (e)).
- * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 const REMEDY_TRADE_HOUSES = Object.freeze(['alchemist_shop', 'apothecary', 'apothecary_district', 'apothecary_established']);
+/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
 export const INCOME_REMEDY_HOUSES = Object.freeze({
   "Apothecary & Alchemy": REMEDY_TRADE_HOUSES,
   "Herbalist & Apothecary": REMEDY_TRADE_HOUSES,
 });
 
+/**
+ * AN INCOME SHARE OF A HOUSE'S TRADE AND ITS HOUSES (BAR4-SERVICES S1 (ii), the chair's direction of 2026-11-16; vetoable by
+ * the owner): the shares titled by a resource trade (`economy/incomeLineSiblings.js :: RESOURCE_ROW_TRADES`, the maritime fish
+ * share the fish trade's) and the catalogue ids of the houses of that trade (the trade's own house words over the catalogue's
+ * names: `tests/domain/bar4MarkPromise.test.js` pins the two equal). Where every live house of the trade carries a crisis mark,
+ * the share takes the mildest of them (`crisisStoppedRow.js :: incomeHouseKind`). Declared here so that the display leaf
+ * reads no generator module (the domain -> generators boundary).
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
 export const INCOME_TRADE_HOUSES = Object.freeze({
   "Iron & Metalwork": Object.freeze(['blacksmith', 'blacksmiths_3_10', 'mine', 'mine_open_cast', 'resident_smith_part_time', 'smelter', 'specialized_metalworkers']),
   "Stone Quarrying": Object.freeze(['stone_quarry']),
