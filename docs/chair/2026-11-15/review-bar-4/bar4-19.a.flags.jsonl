@@ -1,0 +1,7 @@
+{"id":"C46725","town":"bar0-village-famine-rand-22","sev":"MED","kind":"STATE","why":"drovers push herds along the road as ordinary trade under Famine whose failed source is livestock; herds failed per C46856","other":"C46856"}
+{"id":"C47050","town":"bar0-village-famine-rand-22","sev":"LOW","kind":"PAIR","why":"says drying and pickling stretch the harvest through winter; FOOD stores 0.1 months, no granary, active famine","other":"C46785"}
+{"id":"C47053","town":"bar0-village-famine-rand-22","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'its herds comes first'","other":""}
+{"id":"C47897","town":"bar0-village-famine-rand-23","sev":"LOW","kind":"PAIR","why":"hunter's lodge 'sells ... to market'; HOUSES has no market and the page says no market or fair stands here","other":"C47701"}
+{"id":"C48079","town":"bar0-village-famine-rand-23","sev":"LOW","kind":"PAIR","why":"says drying and pickling stretch the harvest through winter; the grain harvest failed, stores about one month, no granary, active famine","other":"C47744"}
+{"id":"C48275","town":"bar0-village-famine-rand-23","sev":"LOW","kind":"BROKEN","why":"Grain Holders heading says 8 institutions; six are listed, and 11+3+6 makes exactly the 20 HOUSES, so no other two exist","other":""}
+{"id":"DONE","lines":2181,"blocks":2,"flags":5}
