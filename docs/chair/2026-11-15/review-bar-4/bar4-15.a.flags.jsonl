@@ -1,0 +1,7 @@
+{"id":"C37643","town":"bar0-town-calm-rand-23","sev":"LOW","kind":"PAIR","why":"road merges with no identifiable edge, yet DEFENCE gives Town walls and Gates; C37645 has a gatehouse arch framing the road","other":"C37645"}
+{"id":"C37943","town":"bar0-town-calm-rand-23","sev":"MED","kind":"STATE","why":"town crier printed 'he'/'His employer'; PEOPLE gives the crier Ghalia al-Din (f)","other":"C37945"}
+{"id":"C38176","town":"bar0-town-calm-rand-23","sev":"MED","kind":"STATE","why":"'thriving alchemical trade'; LAND gaps say the Alchemist shop lacks medicinal herbs (and C38179 says that work stops without them)","other":"C38179"}
+{"id":"C38142","town":"bar0-town-calm-rand-23","sev":"MED","kind":"STATE","why":"potion brewing offered with no 'short of' mark; LAND gaps: Alchemist shop lacks access to medicinal herbs","other":"C38179"}
+{"id":"C37987","town":"bar0-town-calm-rand-23","sev":"LOW","kind":"PAIR","why":"housing 'timber and stone'; TRADE says timber and building wood is needed and not brought in, terrain cannot produce it","other":"C38201"}
+{"id":"C38384","town":"bar0-town-calm-rand-23","sev":"LOW","kind":"LACKS","why":"watch 'reports to the council'; GOVERNMENT lists a Feudal Appointee and four powers, no council","other":""}
+{"id":"DONE","lines":1677,"blocks":1,"flags":6}
