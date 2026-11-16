@@ -1,0 +1,10 @@
+{"id":"C42011","town":"bar0-village-famine-rand-24","sev":"MED","kind":"PAIR","why":"lists grain and flour as commodities available while the same page says the grain harvest failed this year; FOOD failed source is grain","other":"C42001"}
+{"id":"C42116","town":"bar0-village-famine-rand-24","sev":"MED","kind":"PAIR","why":"calm-times line (thief shunned till they make it right, no mark) in a famine town with stability Desperate, no watch, theft rampant","other":"C42144"}
+{"id":"C42731","town":"bar0-village-famine-rand-25","sev":"MED","kind":"LACKS","why":"Hunter's lodge sells venison and pelts 'at market'; HOUSES has no market and the page says no market or fair stands in Bjorney","other":"C42575"}
+{"id":"C42840","town":"bar0-village-famine-rand-25","sev":"MED","kind":"LACKS","why":"Village headman 'collects the lord's dues'; GOVERNMENT lists no lord, and founders were escaped serfs beyond their masters' reach","other":""}
+{"id":"C42729","town":"bar0-village-famine-rand-25","sev":"LOW","kind":"PAIR","why":"Farmland 'Grain at harvest' printed bare under famine while Harvest income is marked 'Scarce in the famine'","other":"C42863"}
+{"id":"C42875","town":"bar0-village-famine-rand-25","sev":"LOW","kind":"BROKEN","why":"doubled word: 'timber' listed twice in 'timber, stone, luxury goods, timber, mountain timber'","other":""}
+{"id":"C42887","town":"bar0-village-famine-rand-25","sev":"LOW","kind":"BROKEN","why":"subject and verb do not agree: 'its herds comes first'","other":""}
+{"id":"C42947","town":"bar0-village-famine-rand-25","sev":"MED","kind":"PAIR","why":"lists livestock, dairy and hides as commodities available while the same page says livestock failed this year; FOOD failed source is livestock","other":"C42937"}
+{"id":"C43125","town":"bar0-village-famine-rand-25","sev":"MED","kind":"STATE","why":"says village work holds up only with help beyond ordinary labour; page and FOOD give reliance on magic None, magic 0%, every role absent, no arcane practitioners","other":"C43119"}
+{"id":"DONE","lines":1945,"blocks":2,"flags":9}
