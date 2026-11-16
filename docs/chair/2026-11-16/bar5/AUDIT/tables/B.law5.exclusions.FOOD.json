@@ -1,0 +1,72 @@
+[
+ {
+  "file": "src/domain/foodways.js",
+  "text": "the herds\\' milk and mutton",
+  "reason": "a phrase of the composer's herds source: drawn only where the food record names the herds, and struck at print where a famine failed them (foodways.js :: fedLineOf, R3-CODE-C-9)"
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "text": "Establish seasonal access, patronage, or a dependable trade route",
+  "reason": "a suggested fix, not a claim of the town's state: true advice under any crisis"
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "text": "minor routes and sanctioned caravans",
+  "reason": "the import channel's label, chosen only where the minor routes carry food: their rate is 0 under a siege (`_minorRouteRate`: \"a siege severs them\"), so it never prints there"
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "text": "Settlement cannot cover ~",
+  "reason": "states the absence of a dependable trade route: true under every crisis that cuts the roads"
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "text": "The … trade route is cut",
+  "reason": "the trade-disruption hook states its own cut route: true under a siege, which cuts it"
+ },
+ {
+  "file": "src/generators/economy/incomeLineSiblings.js",
+  "text": "Local coal fires the forges, but the iron is bought in",
+  "reason": "gated at its site: under a siege `trueIncomeDesc` prints METAL_WORKED_LINE in its place (incomeLineSiblings.js, the besieged arm)"
+ },
+ {
+  "file": "src/generators/economy/incomeLineSiblings.js",
+  "text": "Coal is dug here and sold on to other towns",
+  "reason": "gated at its site: under a siege `trueIncomeDesc` prints nothing in its place (the besieged arm)"
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "text": "The market is shut and the caravans have stopped coming",
+  "reason": "the siege's own line (printed where the primary stress is under_siege): it states what the siege stops"
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "text": "The caravans have stopped coming and nothing is bought or sold",
+  "reason": "the siege line's twin where no market stands: it states what the siege stops"
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "text": "The settlement is too big to live cut off",
+  "reason": "the isolated town's line: it states the absence of outside trade, true under every crisis"
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "text": "With no outside trade, the settlement struggles",
+  "reason": "the isolated town's line: it states the absence of outside trade, true under every crisis"
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "text": "The settlement feeds and supplies itself without outside trade",
+  "reason": "the isolated town's line: it states the absence of outside trade, true under every crisis"
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "text": "Plenty of people at {settlement} have used its {institution}",
+  "reason": "the lexicon's \"plenty\" is \"many people\" here: the line claims no food or goods"
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "text": "The stores are sealed off, and the road brings nothing more to them",
+  "reason": "the BLOCKADED pool's own line: it states what the blockade stops"
+ }
+]
