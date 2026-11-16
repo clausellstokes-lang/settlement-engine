@@ -53,3 +53,18 @@ export function leadingSourceSpentOf(record) {
     .filter((/** @type {string} */ key) => keys.some((k) => key.includes(k)));
   return grounds.length > 0 && grounds.every((/** @type {string} */ key) => depleted.has(key));
 }
+
+/** The chain states in which a chain is not running. */
+const STOPPED = Object.freeze(['impaired', 'failed', 'collapsed']);
+
+/**
+ * THE RITES' READER (the chair's FS1, 2026-11-16): is this chain held up by the rites and still running? The chain record's
+ * own recovery (`activeChains[].magicRecovery` > 0, the share the rites give back to a spent ground: "Temple fishing rites
+ * improve depleted catch") and its status. The income row reads it (`incomeLineSiblings.js`: the fished-out line).
+ * @param {unknown} chain one of `economicState.activeChains`
+ * @returns {boolean}
+ */
+export function chainHeldUpByRites(chain) {
+  const c = chain && typeof chain === 'object' ? /** @type {{ magicRecovery?: unknown, status?: unknown }} */ (chain) : {};
+  return Number(c.magicRecovery) > 0 && !STOPPED.includes(String(c.status));
+}

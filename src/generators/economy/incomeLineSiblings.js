@@ -9,7 +9,10 @@
  * every printed line against the town's resources and its food record. Keyed by the printed text.
  */
 
+import { chainHeldUpByRites } from '../../domain/facts/leadingSourceSpent.js'; // BAR4-CORPUS-ECO (FS1): the rites' one reader
+
 /** The grain line that sells a surplus, and its twin for a town whose own fields do not cover what it eats. */
+
 export const GRAIN_SURPLUS_LINE = 'Surplus from local harvest sold to nearby settlements and passing merchants: steady income tied to the growing season.';
 export const GRAIN_OWN_FIELDS_LINE = 'Grain from local fields sold within the settlement: it eats more than it grows, so none is left to sell to other settlements.';
 
@@ -69,7 +72,7 @@ export const FISH_SOLD_LINE = 'Fish is sold here, fresh or preserved.';
 export const FISH_BOUGHT_LINE = 'The fishery here is fished out; the fish sold now is salted and bought in.';
 /** BAR4-CORPUS-ECO (the chair's FS1 and CORPUS-DEF's measure, 2026-11-16: 13 of the 19 towns of the 720 that print the bought line at
  * 8aef8e7d4 work a fishing chain the rites hold up, `magicRecovery` > 0, still running): the grounds are spent and the catch still comes. */
-export const FISH_RITES_LINE = 'The fishing grounds here are worked thin; rites keep the catch coming, and what they bring in is landed and sold here.';
+export const FISH_RITES_LINE = 'The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.';
 /** The entrepôt row's line (tradeGoods.js prints it) and its twin where no warehouse, toll, customs or caravan house
  * stands (TAIL-DEFECON-3, #07231, X9 29522): goods still pass through the crossroads; no house collects a duty on them. */
 export const ENTREPOT_LINE = 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.';
@@ -205,7 +208,7 @@ export function trueIncomeDesc(desc, f) {
       // place is fished out, the catch is not landed: the salted fish bought in, or no sentence (D5, #77).
       if (f.besieged || f.fishFailed) return '';
       // BAR4-CORPUS-ECO (FS1): a fishing chain the rites hold up still lands its catch over spent grounds: the rites line, not "bought in"
-      if (f.fisheryExhausted && f.chains.some((c) => /fish/.test(String(c?.chainId ?? '')) && Number(/** @type {any} */ (c)?.magicRecovery) > 0 && !['impaired', 'failed', 'collapsed'].includes(String(c?.status)))) return FISH_RITES_LINE;
+      if (f.fisheryExhausted && f.chains.some((c) => /fish/.test(String(c?.chainId ?? '')) && chainHeldUpByRites(c))) return FISH_RITES_LINE;
       if (f.fisheryExhausted) return bought(/\bsalt(?:ed)? fish\b/i) ? FISH_BOUGHT_LINE : '';
       if (has(/fisher|fishing/)) return sold(/\bsalt(?:ed)? fish\b/i) ? desc : FISH_LANDED_LINE;
       return has(/\bfish/) ? FISH_SOLD_LINE : '';

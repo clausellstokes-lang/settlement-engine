@@ -133,6 +133,8 @@ export const LEAVES = Object.freeze({
   keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),
   foodEndurance: leaf({ layer: 2, module: 'domain/defense/defenseFacts.js', exported: 'foodEnduranceOf', call: 'record', reads: ['economicState'] }),
+  // BAR4-CORPUS-ECO (the chair's FS1): a chain the rites hold up and that still runs (the fished-out income line reads it)
+  chainHeldUpByRites: leaf({ layer: 2, module: 'domain/facts/leadingSourceSpent.js', exported: 'chainHeldUpByRites', call: 'perChain', reads: ['economicState'] }),
   chainCarrier: leaf({ layer: 2, module: 'domain/facts/chainCarrier.js', exported: 'chainCarrierOf', call: 'perChain', reads: ['config', 'economicState'] }),
   readiness: leaf({ layer: 2, module: 'domain/facts/factLayers.js', exported: 'defenseProfile.readiness', call: 'record', reads: ['defenseProfile'], stored: true,
     note: 'the stored readiness: the defence profile is layer 2 by value; born at assembly (NEW-1\'s step order)' }),
