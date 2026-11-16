@@ -46,7 +46,9 @@ export const INCOME_LINE_SIBLINGS = Object.freeze({
 // its branch in economicState.js by its constant; `trueIncomeDesc` reads the finished record (the roster, the
 // siege, the final trade lists, the chains' states) and gives the declared twin where the original is false, or ''
 // where no true line is held (the row prints its source and share alone: silence is not a false sentence).
-export const ALCHEMY_TRADE_LINE = 'A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.';
+// BAR4-CORPUS-ECO (REVIEW-BAR-4 C38176, WEAK: one word): "thriving" said of the smallest income share in every one of the 70
+// towns of the census's 720 that print the line (8aef8e7d4): the degree word goes, the trade and its customers stay.
+export const ALCHEMY_TRADE_LINE = 'An alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.';
 export const ALCHEMIST_SUPPLEMENTS_LINE = 'Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.';
 export const ALCHEMY_UNDER_SIEGE_LINE = 'Alchemical preparations and curative potions, sold only to the people inside while the siege keeps outside customers away.';
 export const REMEDIES_LINE = 'Remedies and simple preparations, made and sold here: a modest trade.';

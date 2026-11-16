@@ -45,7 +45,10 @@ export { WAR_IRON_HOOK };
 const WAR_STATES_REFUSED = Object.freeze(['war: front', 'war: aggressor', 'war: at war']);
 /** COHERENCE-AGREE: the timber line's second event (foodBalance.js prints it), so no one line carries the pool. */
 export const TIMBER_RAFT_HOOK = 'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.';
-export const MODERATE_GAP_TWIN = 'The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin.';
+// BAR4-CORPUS-ECO (C47622, left by BAR3-DEFECON-2): "a price the settlement cannot pay in coin" beside a Strong economic resilience
+// (5 of the 31 towns of the census's 720 that print the twin at 8aef8e7d4 score 72 to 100): the price is still not coin, which
+// is the hook; whether the town could pay coin is no longer said.
+export const MODERATE_GAP_TWIN = 'The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin.';
 const STARVING_HOOK = 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.';
 /** Where no merchant can come: an isolated route, or a siege on the roads (R3-CODE-C-2, CENSUS-2 kind a). */
 const NO_MERCHANT_COMES = Object.freeze(['route: isolated', 'crisis: under_siege']);

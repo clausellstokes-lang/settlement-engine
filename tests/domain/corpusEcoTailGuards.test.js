@@ -101,7 +101,8 @@ const GONE = [
   { seed: 'r2r-town-42', pool: 'DS-ECO-9::PRESSURED', gone: /grows a little less food/, prints: 1, why: 'grows 69% and buys the rest bar 6%: "grows a little less food than it needs" (00588; v1 reworded)' },
   { seed: 'r2s-wartime-thorp-3', pool: 'DS-ECO-9::IMPORT-DEPENDENT', gone: /bought rather than grown/, prints: 1, why: 'isolated, nothing imported, 17% short: "bought rather than grown ... a trade item" (03095 22253; v1 reworded)' },
   { seed: 'r2s-occupied-village-1', pool: 'DS-ECO-9::IMPORT-DEPENDENT', gone: /fed and dependent/, prints: 3, why: 'HIGH: 21% short, not viable: "is fed ... Nothing about the arrangement is failing" (00991 15068; v3 reworded)' },
-  { seed: 'r2s-under_siege-hamlet-2', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /the others carry it/, prints: 1, why: 'a siege, 35% short: "the others carry it" (20660; v2 + `food: ≥ secure`)' },
+  // RE-KEYED BY IDENTITY (BAR4-CORPUS-ECO, 2026-11-16): the same town and the same gone text; what prints instead is the siege twin v7 (`crisis: under_siege`): v1 now refuses a siege.
+  { seed: 'r2s-under_siege-hamlet-2', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /the others carry it/, prints: 7, why: 'a siege, 35% short: "the others carry it" (20660; v2 + `food: ≥ secure`)' },
   { seed: 'r2r-thorp-41', pool: 'DS-ECO-9::FOOD SOURCES: several, the largest named', gone: /without going hungry/, prints: 1, why: 'already short: "can take a bad season ... without going hungry" (28996; v3 + `food: ≥ secure`)' },
   { seed: 'r2r-city-31', pool: 'DS-ECO-9::HOW THE NEED IS MET: much of it brought in', gone: /Food carts/, prints: 1, why: 'a river town, its food by boat: "Food carts come in most days" (09248; v1 reworded)' },
   // ── BATCH 4 · the chair's ruling C12, the siege's sea exception: the two siege lines claim the roads, not every way in (REWORDED, the same vid) ──
@@ -141,9 +142,12 @@ const GONE = [
   { seed: 'r2r-village-0', pool: MARKET_NO_GUILD, gone: memberRe(MARKET_NO_GUILD, 1), prints: 5, why: 'a guild power stands: "without a guild\'s leave" (C19; v1 + `no guild`, the twin v5)' },
   { seed: 'r2s-occupied-village-2', pool: MARKET_NO_GUILD, gone: memberRe(MARKET_NO_GUILD, 4), prints: 5, why: 'an occupation and a guild power: "with nobody\'s leave but the stall-keeper\'s" (C19; v4 + `no guild · no crisis: occupied`, the twin v5)' },
   // ── BATCH 8 (ruling C20: a lone food source is not "the whole" beside a farm house or a harvest income; no atom reads that gate, so the family is REWORDED to the twin's claim, "first") ──
-  { seed: 'r2r-thorp-3', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /and little else/, prints: 1, why: 'a farm house or a harvest income beside the one named source: "comes from its {good} and little else" (C20; v1 now "comes first of all from its {good}")' },
-  { seed: 'r2r-thorp-9', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /all goes back to the/, prints: 2, why: 'the same: "all goes back to the {good}" (C20; v2 now "its {good} comes first")' },
-  { seed: 'r2r-thorp-8', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /little food of its own but/, prints: 3, why: 'the same: "has little food of its own but its {good}" (C20; v3 now "leans first on its {good}")' },
+  // RE-KEYED BY IDENTITY (BAR4-CORPUS-ECO, 2026-11-16): the same town and the same gone text; what prints instead is the own-plots twin v6 (the chair's FW1): v1-v3 now refuse `own plots`.
+  { seed: 'r2r-thorp-3', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /and little else/, prints: 6, why: 'a farm house or a harvest income beside the one named source: "comes from its {good} and little else" (C20; v1 now "comes first of all from its {good}")' },
+  // RE-KEYED BY IDENTITY (BAR4-CORPUS-ECO, 2026-11-16): the same town and the same gone text; what prints instead is the own-plots twin v7.
+  { seed: 'r2r-thorp-9', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /all goes back to the/, prints: 7, why: 'the same: "all goes back to the {good}" (C20; v2 now "its {good} comes first")' },
+  // RE-KEYED BY IDENTITY (BAR4-CORPUS-ECO, 2026-11-16): the same town and the same gone text; what prints instead is the own-plots twin v6.
+  { seed: 'r2r-thorp-8', pool: 'DS-ECO-9::FOOD SOURCES: one source', gone: /little food of its own but/, prints: 6, why: 'the same: "has little food of its own but its {good}" (C20; v3 now "leans first on its {good}")' },
 ];
 /** @type {ReadonlyArray<KeepRow>} */
 const KEEP = [

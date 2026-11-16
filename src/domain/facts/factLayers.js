@@ -119,6 +119,10 @@ export const LEAVES = Object.freeze({
   // ── layer 2: over the economy ──
   famine: home('famine', 2, ['economicState']),
   foodSources: home('foodSources', 2, ['economicState']),
+  // BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b): the leading food source's grounds all spent: the food record against the config's resources
+  leadingSourceSpent: home('leadingSourceSpent', 2, ['economicState', 'config']),
+  // BAR4-CORPUS-ECO (the chair's FW1): a subsistence house tills for the table beside a food record with no grain
+  ownPlots: home('ownPlots', 2, ['economicState', 'institutions']),
   storesMonths: home('storesMonths', 2, ['economicState']),
   imports: home('imports', 2, ['economicState']),
   exports: home('exports', 2, ['economicState']),
