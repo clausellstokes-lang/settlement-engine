@@ -1,0 +1,8 @@
+{"id":"C40094","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"Prints a miller/farming-household dispute; QUARRELS says none and TENSIONS lists only the generational divide","other":""}
+{"id":"C40194","town":"bar0-village-calm-rand-25","sev":"LOW","kind":"PAIR","why":"Dwellings timber-framed, but the town is printed as built in masonry","other":"C40062"}
+{"id":"C40276","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"Says Aquaium can take a bad season without going hungry; ledger shows 2% gap, no granary, Pressured, and C40270 says a bad season leaves some short","other":"C40270"}
+{"id":"C40320","town":"bar0-village-calm-rand-25","sev":"LOW","kind":"BROKEN","why":"Subject and verb disagree: 'Weak defences has left'","other":""}
+{"id":"C40444","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"Says nothing structural depends on arcane work, yet the tab prints reliance Present with economic, medical and infrastructure roles common; the healer's divine magic serves","other":"C40438"}
+{"id":"C41069","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"BROKEN","why":"Subject and verb disagree: 'Weak defences keeps Svetopol'","other":""}
+{"id":"C41172","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"PAIR","why":"Says nothing would stop an attacker, under an Invasion & War bar rated Adequate (and DEFENCE shows a charter hall)","other":"C41171"}
+{"id":"DONE","lines":1548,"blocks":2,"flags":7}
