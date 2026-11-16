@@ -318,7 +318,12 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/summary/storesSpanWords.js',
   '/src/domain/facts/founder.js',
   '/src/domain/chainYield.js',
-  '/src/domain/facts/sharedPower.js',
+  // BAR3-CLOSE-SWEEP-A (g), 2026-11-16: facts/sharedPower.js (a zero-import leaf) is NO LONGER EXCISED: it STAYS in
+  // engine-core on purpose, like facts/textOf.js (the FIRSTPAINT-2 note below). BAR3-PEOPLE batch 1 (aef83b4b5) made
+  // data/npcData.js (data-lazy) import it; excised, it rode coherence-lazy with factsOf.js, and coherence-lazy already
+  // imports data-lazy: the data-lazy <-> coherence-lazy chunk cycle boot-smoke's stage 1 refuses. In engine-core it is a
+  // sink (it imports nothing), so its three importers (people/ties.js, data/npcData.js, facts/factsOf.js) reach it
+  // with no edge back.
   '/src/domain/facts/rivalPower.js',
   '/src/domain/facts/rulingBody.js',
   '/src/domain/facts/rulerKindLabel.js',
