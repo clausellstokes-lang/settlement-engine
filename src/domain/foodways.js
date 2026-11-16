@@ -15,7 +15,10 @@
  * its source's small library. Pure.
  */
 import { fnv1a32 } from '../kernel/proseHash.js';
-import { drawDeclared, lineText } from './facts/drawDeclared.js';
+import { drawDeclared, lineText, resolveSiblingSentences } from './facts/drawDeclared.js';
+import { factsOf } from './facts/factsOf.js';
+import { canonStressors } from './canonicalAccessors.js';
+import { FOODWAYS_PRINT_SIBLINGS } from '../data/cultureProfiles.js';
 
 /** @typedef {'grain'|'livestock'|'fish'|'mill'|'game'} FoodSource */
 
@@ -221,7 +224,29 @@ export function foodwaysLineOf(settlement) {
   const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodwaysLine?: unknown, foodSources?: unknown, failedSource?: unknown } | null } | null, activeChains?: unknown } | null } | null | undefined} */ (settlement);
   const record = s?.economicState?.foodSecurity?.foodRecord;
   const line = record?.foodwaysLine;
-  return typeof line === 'string' && line.trim() ? fedLineOf(line.trim(), record || {}, fishedOut(s?.economicState?.activeChains)) : null;
+  if (!(typeof line === 'string' && line.trim())) return null;
+  const fed = fedLineOf(line.trim(), record || {}, fishedOut(s?.economicState?.activeChains));
+  // BAR4-HOUSES (H1 (iv), (v)): each culture sentence that presumes the market trading or a harvest in store is read
+  // against the record it prints from (`cultureProfiles.js :: FOODWAYS_PRINT_SIBLINGS`), its twin printed where refused.
+  return resolveSiblingSentences(fed, FOODWAYS_PRINT_SIBLINGS, {
+    facts: () => factsOf(/** @type {object} */ (withFoodCrises(s))), poolId: 'cultureProfiles:FOODWAYS_PRINT_SIBLINGS', surface: 'economics', drawKind: 'T',
+  });
+}
+
+/**
+ * The record the foodways sentences are read against. Most callers hand the economy alone (the Economics tab, the
+ * identity record at assembly: `{ economicState }`), and the crisis home reads the record's stress container: there, the
+ * crises the food record was made under (`foodSecurity.hasSiege`, `hasFamine`, written by the food generator from the
+ * same configuration) stand in as the container, so the tab and the PDF (which hands the whole record) read one answer.
+ * A record that carries its own stress is read as it is. Pure.
+ * @param {any} s @returns {object}
+ */
+function withFoodCrises(s) {
+  const record = s && typeof s === 'object' ? s : {};
+  if (canonStressors(record).length) return record;
+  const fs = record.economicState?.foodSecurity;
+  const stressors = [...(fs?.hasSiege === true ? [{ type: 'under_siege' }] : []), ...(fs?.hasFamine === true ? [{ type: 'famine' }] : [])];
+  return stressors.length ? { ...record, stressors } : record;
 }
 
 /** The fish waters a place can have (the resource keys foodLand.js :: foodLandOf reads as fishing). */

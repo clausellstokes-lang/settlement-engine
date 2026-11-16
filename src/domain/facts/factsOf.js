@@ -28,6 +28,7 @@ import { hasInstitution } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { rivalPowerOf } from './rivalPower.js';
 import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
+import { timberAtHandOf } from './timberAtHand.js'; // BAR4-HOUSES (H1 (ii))
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
 import { pairSharesPower } from './sharedPower.js';
@@ -97,6 +98,8 @@ export function factsOf(record, options = {}) {
     get rivalPower() { return rivalPowerOf(record); },
     /** BAR2-PLACES (the chair's grant VW2): the smiths have iron to work, worked here or brought in past no siege (`ironAtHand.js`) */
     get ironAtHand() { return ironAtHandOf(record); },
+    /** BAR4-HOUSES (H1 (ii), BRIEF-BAR4 amendment 5b): the town works timber of its own, its Timber & Lumber chain working its input (`timberAtHand.js`) */
+    get timberAtHand() { return timberAtHandOf(record); },
     /** fact 12: small / middling / large */
     get populationBand() { return populationBandOf(record); },
     /** fact 13: the terrain class */
