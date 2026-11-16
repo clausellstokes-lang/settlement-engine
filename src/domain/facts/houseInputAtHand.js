@@ -98,11 +98,11 @@ const ROUTE_HOUSE_TAGS = Object.freeze(['market', 'transport']);
 
 /** The houses that produce a raw good here (the resource analysis's local producers, one home). */
 const LOCAL_PRODUCERS = Object.freeze([
-  { requirement: /\b(?:grain|foodstuffs?|provisions?)\b/i, institution: /\b(?:farm|farmland|subsistence|grain fields?|managed farmland|common fields?)\b/i },
-  { requirement: /\b(?:timber|lumber|wood)\b/i, institution: /\b(?:woodcutter|logging camp|managed forest)\b/i },
-  { requirement: /\bstone\b/i, institution: /\b(?:stone quarry|quarry)\b/i },
-  { requirement: /\b(?:charcoal|fuel)\b/i, institution: /\b(?:charcoal burner|peat cutter|coal mine)\b/i },
-  { requirement: /\bsalt\b/i, institution: /\b(?:salt works|salt pans?|brine works?)\b/i },
+  { requirement: /\b(?:grain|foodstuffs?|provisions?)\b/i, houseName: /\b(?:farm|farmland|subsistence|grain fields?|managed farmland|common fields?)\b/i },
+  { requirement: /\b(?:timber|lumber|wood)\b/i, houseName: /\b(?:woodcutter|logging camp|managed forest)\b/i },
+  { requirement: /\bstone\b/i, houseName: /\b(?:stone quarry|quarry)\b/i },
+  { requirement: /\b(?:charcoal|fuel)\b/i, houseName: /\b(?:charcoal burner|peat cutter|coal mine)\b/i },
+  { requirement: /\bsalt\b/i, houseName: /\b(?:salt works|salt pans?|brine works?)\b/i },
 ]);
 
 /** The words of a worked good: it meets no raw need (`tradeListDisplay.js :: WORKED_GOOD`'s words, and a smith's "work"). */
@@ -128,7 +128,7 @@ const wholeTokens = (a, b) => { const x = sing(norm(a)), y = sing(norm(b)); retu
 export function localProducerSupplies(requirement, institutions) {
   const rule = LOCAL_PRODUCERS.find((candidate) => candidate.requirement.test(requirement));
   if (!rule) return false;
-  return nativeSemanticNames(institutions).some((name) => rule.institution.test(name));
+  return nativeSemanticNames(institutions).some((name) => rule.houseName.test(name));
 }
 
 /**
