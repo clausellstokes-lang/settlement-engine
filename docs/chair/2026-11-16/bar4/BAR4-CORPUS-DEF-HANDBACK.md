@@ -11,7 +11,8 @@ Base 8aef8e7d46 (my checkout's tip a71788851f differs from it in documents only:
 | D2 what rests on magic | `magicSupplyOf` (DS-DEF-9 `magicDependency false` v1-v3) | 0 / 0 → 0 | 0 / 0 → 0 | none | control bar0-town-calm-rand-22 (C36862); its twin v4 drawn there |
 | D2 · THE SPLIT (K6, not this desk's) | `fishedOutMagicChainOf` (DS-DEF-9 named-chain pool beside "fished out ... bought in") | 20 / 20 → 20 / 20 (not mine) | 15 / 15 → 15 / 15 (not mine) | none: the income line is the false side | a CEILING (20, shrink-only) in the same guard; control bar0-metropolis-calm-rand-23 (C31074) |
 | D3 a calm line in a crisis | `curfewOf` (watch v3), `fullPurseOf` (WEAK v1-v5), `activeCrisisOf` (WEAK v3 "when a real crisis comes"), `armedUnrestOf` (WALLED-QUIET v2, v3) | 69 / 68 → 0 | 25 / 24 → 0 | none | controls bar0-town-occupied-rand-21 (C40032), bar0-thorp-calm-rand-23 (C34105; its twin v6 drawn), bar0-city-wartime-rand-23 (C16539) |
-| C24893 "no gang, guild or racket" beside criminal income | `criminalIncomeOf` (DS-DEF-4 null v1, v2) | 8 / 8 → 0 | 2 / 2 → 0 | none | a constructed record (a Black Market Revenue row) |
+| PAY (BAR4-SAFETY's row, the chair 08:59) a line presuming paid defenders beside an unpaid rota | `unpaidRotaOf` (DS-DEF-6 Well-funded v2-v4, Underfunded v1, Critical v2; DS-DEF-8 tribute v2; DS-DEF-11 STRAINED v1) | 0 / 0 → 0 | 0 / 0 → 0 | none | a constructed record (a `village_watch`, no paid force). PREMISE: no DS-DEF member says "fall short on the watch's wages" (the paraphrase of `safetyLineTruth.js :: payTruth`'s comment); over the seven Village-watch towns of the 1,020 none of mine prints a pay claim; the false one there is the safety line "The local watch is well paid and well equipped" (bar0-village-famine-rand-106), BAR4-SAFETY's. After the join the gate reads `guardPayOf` (BAR4-SAFETY's `src/domain/facts/guardPay.js`). |
+| C24893 "no gang, guild or racket" beside criminal income | `criminalIncomeOf` (DS-DEF-4 null v1, v2: a criminal revenue, or a criminal house's covert service) | 8 / 8 → 0 | 2 / 2 → 0 | none | constructed records (a Black Market Revenue row; a Local fence's service). THE GATE'S TWO READINGS BECOME ONE AT THE JOIN: `no organised crime` (the structure's key, which BAR4-SAFETY widens to read the income's `isCriminal` and the covert services) and `no criminal income` (mine, reading both itself until then). |
 
 The raw D1 count before the exclusions was 49 instances in 27 census towns. BEFORE is read at 8aef8e7d46's dumps with
 8aef8e7d46's own leaf (the member texts), AFTER at my tip's (the 720 and the 300 re-rendered at the tip, the towns the
@@ -40,7 +41,8 @@ denies it; where that leaves a state mute, a twin true in that state.
   `danger coming` (`src/domain/facts/dangerComing.js`: a live `external_threat` tension of the history, layer 4),
   `magic supply` (`src/domain/facts/magicSupply.js`: an isolated route whose trade needs are met, the economy's
   "teleportation imports replace road access", layer 2), `criminal income` (`src/domain/facts/criminalIncome.js`: an
-  income row with the writer's own `isCriminal: true`, layer 2). Getters in `factsOf.js`, rows in `factLayers.js`.
+  income row with the writer's own `isCriminal: true`, or a service a criminal house offers, read by
+  `corruption.js :: isCriminalInstitution`, layer 2). Getters in `factsOf.js`, rows in `factLayers.js`.
 - D1: `no danger coming` on readiness STRONG v3, v4; Invasion & War neither v3; WALLED-QUIET v1, v2, v3; UNWALLED-SMALL
   v4. Twin WALLED-QUIET v6.
 - D2: `no magic supply` on DS-DEF-9 `magicDependency false` v1-v3 (v1, v3 lose their `colour` mark). Twin v4.
@@ -92,12 +94,16 @@ income` (above).
 | the test · the arm | old → new | its door | why |
 |---|---|---|---|
 | `tests/data/dossierStateProseProjection.contract.test.js` · SEAM car 4, "recomputes every pin" and its MUTANT | `docs/content/prose-shift-register.json`: variant-count pin 0 2959 → 2963; pin 1, face-count pins 0 and 2, vids pin 0 (digests) | the register's own row, edited in the cure's commit by the close (amendment 4: a shared stored file of the annex, NOT re-taken by a desk) | four twins: WALLED-QUIET v6, v7; WEAK v6; DS-DEF-9 false v4 |
+| `tests/domain/composeStateProse.test.js` · "every block lives in exactly one leaf" | variants 2959 → 2963 | the close's re-measure of the composed figure (TAIL-CLOSE-DOORS-3's form) | the four twins |
 | `docs/content/wiring-census.json` (the annex's shared census) | not re-taken | `npm run` the census's door at the close | the DS-DEF pools' declarations and four new members |
 
 RE-PLACED BY THE FILE'S OWN FORM (a dated `placed:` row, as W2-A-LEAVES-2 did): `tests/lint/factLayers.poolTable.json`
 DS-DEF-11 UNWALLED-SMALL (2 → 5), WALLED-QUIET (4 → 5), DS-DEF-1 readiness STRONG (4 → 5), DS-DEF-2 Invasion & War
 neither walls nor force (2 → 5): their lines now declare `danger coming` (the history, layer 4).
-TAUGHT: `tests/helpers/calmFactsDouble.js` answers the three new atoms with the calm reading (false), like its crisis.
+TAUGHT: `tests/helpers/calmFactsDouble.js` answers `magic supply` and `criminal income` true ("every presence atom
+holds", as the kernel sweep's reference reads a `no X` line) and `danger coming` false (a trouble, read like its calm
+crisis). RE-KEYED by its own form, with a dated note: `tests/domain/census5cOwedLines.test.js` DS-DEF-4 null's admitting
+record also holds no criminal income.
 
 THE BOOKS RUN (each file alone at the tip, every red read at 8aef8e7d46 too) follows this commit; its table lands in the next push.
 

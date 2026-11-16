@@ -94,10 +94,22 @@ export function armedUnrestOf(s) {
   return t ? `crisis ${t}` : null;
 }
 
-/** @param {any} s @returns {string|null} a criminal revenue on the income list, or null */
+/** @param {any} s @returns {string|null} a criminal revenue on the income list, or a service a criminal house offers, or null */
 export function criminalIncomeOf(s) {
   const src = (s?.economicState?.incomeSources || []).find((/** @type {any} */ i) => /black market|smuggling|criminal|syndicate/i.test(String(i?.source || '')));
-  return src ? `income: ${src.source}` : null;
+  if (src) return `income: ${src.source}`;
+  const svc = s?.availableServices;
+  const rows = Array.isArray(svc) ? svc : Object.values(svc || {}).flat();
+  const covert = rows.find((/** @type {any} */ x) => /\bfence\b|smuggl|black market|thieves|criminal|syndicate/i.test(String(x?.institution || '')));
+  return covert ? `a covert service: ${covert.name} (${covert.institution})` : null;
+}
+
+/** @param {any} s @returns {string|null} the watch is the unpaid rota of households (the village watch) and nobody else is paid to defend, or null */
+export function unpaidRotaOf(s) {
+  const inst = s?.defenseProfile?.institutions || {};
+  const watch = Array.isArray(inst.watch) ? inst.watch : [];
+  const paid = ['garrison', 'mercenary'].some((k) => Array.isArray(inst[k]) && inst[k].length > 0);
+  return watch.length > 0 && !paid && watch.every((/** @type {any} */ w) => w?.catalogId === 'village_watch') ? 'the watch is an unpaid rota of households' : null;
 }
 
 /**
@@ -118,6 +130,12 @@ export const DEFENCE_DESK_KINDS = Object.freeze([
   { kind: 'D3', blockId: 'DS-DEF-2', poolKey: 'Economic Survival: WEAK', vids: [1, 2, 3, 4, 5], state: fullPurseOf },
   { kind: 'D3', blockId: 'DS-DEF-11', poolKey: 'WALLED-QUIET', vids: [2, 3], state: armedUnrestOf },
   { kind: 'D3', blockId: 'DS-DEF-2', poolKey: 'Economic Survival: WEAK', vids: [3], state: activeCrisisOf },
+  // PAY (BAR4-SAFETY's row, the chair 08:59): a member that presumes paid defenders, beside an unpaid rota and no paid force
+  { kind: 'PAY', blockId: 'DS-DEF-6', poolKey: 'Economic Backing: Well-funded', vids: [2, 3, 4], state: unpaidRotaOf },
+  { kind: 'PAY', blockId: 'DS-DEF-6', poolKey: 'Economic Backing: Underfunded', vids: [1], state: unpaidRotaOf },
+  { kind: 'PAY', blockId: 'DS-DEF-6', poolKey: 'Economic Backing: Critical', vids: [2], state: unpaidRotaOf },
+  { kind: 'PAY', blockId: 'DS-DEF-8', poolKey: 'override: UNDER TRIBUTE', vids: [2], state: unpaidRotaOf },
+  { kind: 'PAY', blockId: 'DS-DEF-11', poolKey: 'WALLED-STRAINED', vids: [1], state: unpaidRotaOf },
   { kind: 'C24893', blockId: 'DS-DEF-4', poolKey: 'structure null (nothing organized recognized)', vids: [1, 2], state: criminalIncomeOf },
 ]);
 

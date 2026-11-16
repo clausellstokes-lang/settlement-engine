@@ -51,7 +51,9 @@ const under = (type) => withFacts({ crisis: factsOf({ stress: [{ type }] }).cris
 const OWED = Object.freeze([
   ['DS-DEF-6', 'Economic Backing: Well-funded', /The soldiers at \{settlement\} are paid/, 'soldiers', withFacts({ soldiers: false }), CALM_FACTS_ADMIT_ALL],
   ['DS-DEF-4', 'capture none', /There is a criminal interest at/, 'organised crime', withFacts({ crime: 'none' }), withFacts({ crime: 'organized' })],
-  ['DS-DEF-4', 'structure null (nothing organized recognized)', /books record no gang, guild or racket/, 'no organised crime', withFacts({ crime: 'organized' }), withFacts({ crime: 'diffuse' })],
+  // BAR4-CORPUS-DEF (2026-11-16, C24893): the line also declares `no criminal income` now, so the record that holds it
+  // holds no criminal revenue either (the double's own reading is "every presence holds"); the refusing record is unchanged.
+  ['DS-DEF-4', 'structure null (nothing organized recognized)', /books record no gang, guild or racket/, 'no organised crime', withFacts({ crime: 'organized' }), withFacts({ crime: 'diffuse', criminalIncome: false })],
   ['DS-FTH-3', 'LEGITIMACY: established', /Nobody disputes it/, 'no crisis: religious_conversion', under('religious_conversion'), CALM_FACTS_ADMIT_ALL],
   ['DS-WAR-5', 'posture peace', /no soldiers to speak of/, 'no soldiers', CALM_FACTS_ADMIT_ALL, withFacts({ soldiers: false })],
   ['DS-WAR-5', 'settlementWarStatus null (peace, not missing data)', /quarrels are the ordinary kind/, 'no crisis: unrest', under('insurgency'), CALM_FACTS_ADMIT_ALL],

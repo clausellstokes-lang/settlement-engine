@@ -97,7 +97,7 @@ beforeAll(async () => {
 }, 1800000);
 
 describe('THE ZERO: no defence-desk member prints in a state that makes it false (the census\'s 720 and the read towns)', () => {
-  it('every census town and every read town reads zero instances of D1, D2, D3 and C24893', () => {
+  it('every census town and every read town reads zero instances of D1, D2, D3, PAY and C24893', () => {
     const failures = collectSeedFailures([...CENSUS, ...READ.map((r) => r.seed)], (seed) => {
       const town = TOWNS.get(seed);
       expect(town, `${seed} was born`).toBeDefined();
@@ -126,7 +126,18 @@ describe('THE POSITIVE CONTROL: each detector fires on the read town whose state
     });
   }
   it('every kind of the table has a read town that fires it', () => {
-    expect([...new Set(READ.map((r) => r.kind))].sort()).toEqual([...new Set(DEFENCE_DESK_KINDS.map((k) => k.kind))].filter((k) => k !== 'C24893').sort());
+    // C24893 and PAY have no read town of their own: each has a constructed control below
+    expect([...new Set(READ.map((r) => r.kind))].sort()).toEqual([...new Set(DEFENCE_DESK_KINDS.map((k) => k.kind))].filter((k) => k !== 'C24893' && k !== 'PAY').sort());
+  });
+  it('PAY fires on a constructed record: a well-funded line beside an unpaid rota of households and no paid force', () => {
+    const record = { defenseProfile: { institutions: { watch: [{ name: 'Village watch', catalogId: 'village_watch' }], garrison: [], mercenary: [] } } };
+    const found = defenceDeskKindsIn(record, [{ blockId: 'DS-DEF-6', poolKey: 'Economic Backing: Well-funded', vid: 4 }], marksOf);
+    expect(found.map((i) => i.kind)).toEqual(['PAY']);
+  });
+  it('C24893 fires on a constructed record: the null structure line beside a fence\'s covert service', () => {
+    const record = { availableServices: [{ name: 'Sell stolen goods', institution: 'Local fence' }], economicState: { incomeSources: [] } };
+    const found = defenceDeskKindsIn(record, [{ blockId: 'DS-DEF-4', poolKey: 'structure null (nothing organized recognized)', vid: 1 }], marksOf);
+    expect(found.map((i) => i.kind)).toEqual(['C24893']);
   });
   it('C24893 fires on a constructed record: the null structure line beside a black-market revenue', () => {
     const record = { economicState: { incomeSources: [{ source: 'Black Market Revenue', percentage: 12 }] } };

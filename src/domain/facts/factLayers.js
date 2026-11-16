@@ -126,7 +126,7 @@ export const LEAVES = Object.freeze({
   // BAR4-CORPUS-DEF (D2): goods arrive by magic, an isolated route whose trade needs are met (`magicSupply.js`)
   magicSupply: home('magicSupply', 2, ['economicState']),
   // BAR4-CORPUS-DEF (C24893): a criminal revenue on the income list (`criminalIncome.js`)
-  criminalIncome: home('criminalIncome', 2, ['economicState']),
+  criminalIncome: home('criminalIncome', 2, ['availableServices', 'economicState']),
   // BAR2-PLACES (the chair's grant VW2): iron worked here (the chains) or imported past no siege (the crisis kinds)
   ironAtHand: home('ironAtHand', 2, ['economicState', 'stress', 'stressors', 'activeConditions']),
   // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label

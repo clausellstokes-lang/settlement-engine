@@ -10,19 +10,30 @@
  *
  *   criminalIncomeOf(record)   THE ONE READER: true where an income row carries the writer's own flag, `isCriminal: true`
  *                              (`economicState.js` sets it on every criminal revenue it writes; the world treasury's
- *                              `isCriminalIncome` reads the same flag), never a test of the label's words.
+ *                              `isCriminalIncome` reads the same flag), never a test of the label's words; or where a
+ *                              service the record offers is a criminal house's (`availableServices[].institution`, "Sell
+ *                              stolen goods" at a "Local fence"), read by the estate's ONE criminal detector
+ *                              (`corruption.js :: isCriminalInstitution`). THE CHAIR, 08:12 UTC: the structure's key reads
+ *                              neither today; BAR4-SAFETY widens the key on its own branch, and the gate's two readings
+ *                              (this atom and `no organised crime`) become one at the join.
  *
  * Layer 2 (over the economy). Pure: no randomness, no clock, no write.
  *
  * @enforced-by tests/domain/bar4CorpusDefKinds.test.js
  */
+import { isCriminalInstitution } from '../corruption.js';
 
 /**
- * Does the town's income list carry a criminal revenue?
+ * Does the town's income list carry a criminal revenue, or a criminal house offer a service?
  * @param {unknown} record the settlement record
  * @returns {boolean}
  */
 export function criminalIncomeOf(record) {
-  const sources = /** @type {{ economicState?: { incomeSources?: unknown } | null } | null} */ (record)?.economicState?.incomeSources;
-  return Array.isArray(sources) && sources.some((i) => !!i && typeof i === 'object' && /** @type {{ isCriminal?: unknown }} */ (i).isCriminal === true);
+  const r = /** @type {{ economicState?: { incomeSources?: unknown } | null, availableServices?: unknown } | null} */ (record);
+  const sources = r?.economicState?.incomeSources;
+  if (Array.isArray(sources) && sources.some((i) => !!i && typeof i === 'object' && /** @type {{ isCriminal?: unknown }} */ (i).isCriminal === true)) return true;
+  const svc = r?.availableServices;
+  const rows = Array.isArray(svc) ? svc : svc && typeof svc === 'object' ? Object.values(svc).flat() : [];
+  return rows.some((x) => !!x && typeof x === 'object' && typeof /** @type {{ institution?: unknown }} */ (x).institution === 'string'
+    && isCriminalInstitution({ name: /** @type {{ institution: string }} */ (x).institution }));
 }
