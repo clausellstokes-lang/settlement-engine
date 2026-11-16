@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-16T15:18:25.393Z",
+  "generatedAt": "2026-11-16T16:34:42.592Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "817e93f638e35f97",
-  "engineVersion": "fd73c3604420cff3",
-  "builtFromCommit": "185855f08a50ea83809848ba30c97e8be64a403e",
+  "sourceHash": "2e4ab4655b9a39fa",
+  "engineVersion": "66a7d46b15a70daf",
+  "builtFromCommit": "646386ea167691c89da4bdb14a0daafd894b1352",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -177,6 +177,7 @@
     "src/domain/facts/migration.js",
     "src/domain/facts/otherNpc.js",
     "src/domain/facts/ownPlots.js",
+    "src/domain/facts/pairPlace.js",
     "src/domain/facts/populationBand.js",
     "src/domain/facts/presence.js",
     "src/domain/facts/presumptionLedger.js",
