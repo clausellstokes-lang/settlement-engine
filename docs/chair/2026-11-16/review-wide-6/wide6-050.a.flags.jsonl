@@ -1,0 +1,5 @@
+{"id":"C135343","town":"bar0-metropolis-calm-rand-37","sev":"MED","kind":"PAIR","why":"Economics says the metropolis 'buys from outside' the grapes its work needs; the Terrain panel says grapes are 'needed, and not brought in'; the Vintner's wine rows carry no short mark.","other":"C135351"}
+{"id":"C135747","town":"bar0-metropolis-calm-rand-37","sev":"MED","kind":"PAIR","why":"Power card says clergy 'exercise meaningful civic influence'; the Faith tab says 'The Religious Authorities are suppressed in the metropolis', and GOVERNMENT lists them Suppressed.","other":"C137955"}
+{"id":"C136029","town":"bar0-metropolis-calm-rand-37","sev":"LOW","kind":"STATE","why":"Magic tab lists 'food (arcane provision)' among what relies on magic; FOOD ledger gives 'by magic 0%' (12 lbs of 87,032 a day).","other":""}
+{"id":"C137947","town":"bar0-metropolis-calm-rand-37","sev":"LOW","kind":"PAIR","why":"'Ringgarth came through the scandal, and what the metropolis built in answer still stands' against the Scandal's own line: 'those in power are stifling the investigation'.","other":"C137898"}
+{"id":"DONE","lines":4322,"blocks":1,"flags":4}
