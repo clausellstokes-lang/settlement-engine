@@ -16,7 +16,7 @@
 import { dangerComingOf } from './dangerComing.js'; // BAR4-CORPUS-DEF (D1)
 import { monsterFrontierOf } from './monsterFrontier.js'; // BAR6-DEFDESK (7a)
 import { growsMoreThanEatsOf } from './growsMoreThanEats.js'; // BAR6-DEFDESK (9c.nothing-over)
-import { crimeWaveStands } from '../display/foundationBandShown.js'; // BAR6-DEFDESK (9a.wave): the crime wave's one exported reading
+import { crimeWaveOf } from './crimeWave.js'; // BAR6-DEFDESK (9a.wave): the crime wave, its import-free reading
 import { crisisOf } from './crisisKind.js';
 import { siegeMotionOf } from './siegeMotion.js'; // BAR4-SAFETY (F2)
 import { storesMonthsOf } from './storesMonths.js';
@@ -173,8 +173,8 @@ export function factsOf(record, options = {}) {
     get culture() { return resolveSettlementCulture(record); },
     /** the criminal structure's key (`criminalStructureKey.js :: criminalStructureKeyOf`, the key `defenseDisplay.js :: deriveCriminalStructure` prints), or 'none' */
     get crime() { return criminalStructureKeyOf(record) ?? 'none'; },
-    /** BAR6-DEFDESK (9a.wave, 9a.curfew, HK1): a crime wave stands (`foundationBandShown.js :: crimeWaveStands`) */
-    get crimeWave() { return crimeWaveStands(record); },
+    /** BAR6-DEFDESK (9a.wave, 9a.curfew, HK1): a crime wave stands (`crimeWave.js`) */
+    get crimeWave() { return crimeWaveOf(record); },
     /** BAR5-SAFETY (L2.law.collapsed): the law's band as the Foundations row prints it (`lawBand.js :: lawBandOf`), or undefined */
     get lawBand() { return lawBandOf(record); },
     /** BAR4-CORPUS-DEF (C24893): the income list carries a criminal revenue (`criminalIncome.js`) */

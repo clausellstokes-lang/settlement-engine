@@ -104,6 +104,7 @@ import { readinessBandOf } from '../../../data/bandLadders.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
 import { migrationDirectionOfEntry, migrationDirectionOfStress } from '../../migrationDirection.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
+import { arcaneHousesBackNoForce } from './magicFlagTruth.js'; // BAR6-DEFDESK (9e.military): the arcane houses' backing
 import {
   DM_FIELD_FRAMED_BY_BLOCK, projectBesideDmField, readProsePath,
 } from './dmFieldProjection.js';
@@ -2175,8 +2176,10 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
   // defences' own houses (`priorityHelpers.js :: getStressFlags`); its line is said only where the page's Military role holds
   // something (`magicProvisionShown.js :: magicRoleHeld`: a house of magic among the defences), never beside "Military role:
   // absent" (C62573 C164227). A reading at print: the stored flag is left as it is.
+  // And never where every arcane house the Institutions tab prints backs a power that is not a military one (its "Backs" lines,
+  // `powerSupport.js :: houseBacksOf`): "the arcane houses answer to them" beside each house backing the guild council.
   const rawFlagKey = magicFlagPoolKey(settlement?.economicState?.safetyProfile?.flags);
-  const flagKey = rawFlagKey === 'FLAG: magicMilitarized' && !magicRoleHeld(settlement, 'military') ? null : rawFlagKey;
+  const flagKey = rawFlagKey === 'FLAG: magicMilitarized' && (!magicRoleHeld(settlement, 'military') || arcaneHousesBackNoForce(settlement)) ? null : rawFlagKey;
   const flagLine = reliance && flagKey
     ? composeStateProse(CORPUS, 'DS-DEF-9', { ...options, slots, spineKey: flagKey })
     : null;

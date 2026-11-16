@@ -190,7 +190,7 @@ export const LEAVES = Object.freeze({
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
   // BAR4-CORPUS-DEF (D1): a danger from outside on its way, a live external-threat tension of the history (`dangerComing.js`)
   dangerComing: home('dangerComing', 4, ['history']),
-  // BAR6-DEFDESK (9a.wave): a crime wave stands, the history's live tension (`foundationBandShown.js :: crimeWaveStands`)
+  // BAR6-DEFDESK (9a.wave): a crime wave stands, the history's live tension (`crimeWave.js`)
   crimeWave: home('crimeWave', 4, ['history']),
   // BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`: the config and the monster score)
   monsterFrontier: home('monsterFrontier', 3, ['config', 'defenseProfile']),

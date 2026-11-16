@@ -227,7 +227,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
  * @property {boolean} [growsMoreThanEats] BAR6-DEFDESK: `growsMoreThanEats.js`
- * @property {boolean} [crimeWave] BAR6-DEFDESK: `foundationBandShown.js :: crimeWaveStands`
+ * @property {boolean} [crimeWave] BAR6-DEFDESK: `crimeWave.js :: crimeWaveOf`
  * @property {boolean} [monsterFrontier] BAR6-DEFDESK: `monsterFrontier.js`
  * @property {string} [prosperity]
  */
@@ -462,8 +462,8 @@ export const FACT_DIMENSIONS = Object.freeze({
   prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
   crime: dim({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
   // BAR6-DEFDESK (LAW 9's `9a.wave`, `9a.curfew` and `9a.contested`; BRIEF-BAR6 B6 and the chair's ruling HK1; vetoable by the owner,
-  // on the veto list as new vocabulary), beneath `crime`: a crime wave stands, the history's live `crime_wave` tension, read through
-  // its ONE exported reading (`foundationBandShown.js :: crimeWaveStands`). Every such tension carries the hook "The crime wave is
+  // on the veto list as new vocabulary), beneath `crime`: a crime wave stands, the history's live `crime_wave` tension (`crimeWave.js`,
+  // import-free: the field `foundationBandShown.js :: crimeWaveStands` reads). Every such tension carries the hook "The crime wave is
   // coordinated" (150 of 150 at afa46d644). A line that says theft has dropped, that crime is kept down, or that nobody directs the
   // crime presumes its absence; under it the diffuse lines speak of appearances (HK1).
   'crime wave': dim({ shape: 'presence', home: 'crimeWave', reader: (/** @type {FactsLike} */ f) => bool(f.crimeWave) }),
