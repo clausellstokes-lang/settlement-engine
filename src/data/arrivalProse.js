@@ -56,15 +56,15 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['blacksmith', 'smith', 'smelter', 'foundry', 'armourer', 'armorer', 'weaponsmith', 'bladesmith', 'metalworker', 'specialized metalworker'],
     trade: ['metalwork', 'steel', 'quality tools', 'iron & metalwork'],
     lines: [
-      // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): each line shows the forge at work: some smith's house stands with its iron (`trade at work: forge`); its twin keeps the slot where every smith is short
-      { text: (n) => `The ring of hammer on anvil carries over the roofs of ${n}.`, needs: ['trade at work: forge'] },
-      { text: (n) => `The anvil at ${n} is quiet more days than it rings, for want of iron.`, twinOf: 'The ring of hammer on anvil carries over the roofs of {name}.', excludes: ['trade at work: forge'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
-      { text: () => 'You hear the forge work before you see it: hammer on iron, steady as a heartbeat.', needs: ['trade at work: forge'] },
-      { text: () => 'The forge is banked low, and no hammer sounds from it today.', twinOf: 'You hear the forge work before you see it: hammer on iron, steady as a heartbeat.', excludes: ['trade at work: forge'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
-      { text: () => 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.', needs: ['trade at work: forge'] },
-      { text: () => 'Only a thin thread of smoke rises from the forge, and no hammer keeps time under it.', twinOf: 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.', excludes: ['trade at work: forge'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
-      { text: () => 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.', needs: ['trade at work: forge'] },
-      { text: () => 'A smith sits in the forge doorway with no iron on the anvil.', twinOf: 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.', excludes: ['trade at work: forge'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): each line shows the forge at work: some smith's house stands with its iron (`trade at work: ironwork`); its twin keeps the slot where every smith is short
+      { text: (n) => `The ring of hammer on anvil carries over the roofs of ${n}.`, needs: ['trade at work: ironwork'] },
+      { text: (n) => `The anvil at ${n} is quiet more days than it rings, for want of iron.`, twinOf: 'The ring of hammer on anvil carries over the roofs of {name}.', excludes: ['trade at work: ironwork'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'You hear the forge work before you see it: hammer on iron, steady as a heartbeat.', needs: ['trade at work: ironwork'] },
+      { text: () => 'The forge is banked low, and no hammer sounds from it today.', twinOf: 'You hear the forge work before you see it: hammer on iron, steady as a heartbeat.', needs: ['institution: smith'], excludes: ['trade at work: ironwork'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.', needs: ['trade at work: ironwork'] },
+      { text: () => 'Only a thin thread of smoke rises from the forge, and no hammer keeps time under it.', twinOf: 'A drift of forge smoke hangs over the roofs, and somewhere under it a hammer keeps time.', needs: ['institution: smith'], excludes: ['trade at work: ironwork'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.', needs: ['trade at work: ironwork'] },
+      { text: () => 'A smith sits in the forge doorway with no iron on the anvil.', twinOf: 'A smith quenches a blade in a hiss of steam, and the sound follows you down the lane.', needs: ['institution: smith'], excludes: ['trade at work: ironwork'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
     ],
     dominant: [ // W2-FIX-DATA-3 (REVIEW-W2A-3 #366): these four lines speak of many forges; a village or smaller has one (a hamlet's part-time smith, a village's blacksmith), so they declare tier: ≥ town. A one-forge place then draws none and its sense beat is left out (the redraw finds no clean line and draws nothing more); a line of its own would lengthen the pool and re-deal the arrival in every town that draws it (measured: 44 of 720)
       { text: (n) => `The hammering of the forges echoes through all of ${n}.`, needs: ['institution: smith', 'tier: ≥ town'] }, // W2-FIX-DATA-12 item 3: no claim the place lives by them (false in 16 of 16: metalwork 3 to 12% of the income, never first)
@@ -106,7 +106,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'Carts of grain rattle toward the mills while the ovens send the smell of bread down every lane.', needs: ['institution: mill'], excludes: ['crisis: hunger'], crisis: ['any'] },
       { text: () => 'Flour dust lies pale on the doorsteps, and the whole place smells of the ovens.', excludes: ['crisis: hunger'], crisis: ['any'] },
       { text: () => 'Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.', needs: ['exported: flour'], excludes: ['crisis: hunger', 'crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) "out": flour carted out is an export of the town's, and no cart leaves under a siege
-      { text: () => 'Sacks of flour are stacked by the mill door, all of it for the ovens here.', twinOf: 'Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.', excludes: ['crisis: hunger'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      { text: () => 'Sacks of flour are stacked against a wall, all of it for the ovens here.', twinOf: 'Sacks of flour are stacked shoulder high by the roadside, waiting to be carted out.', excludes: ['crisis: hunger'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
     ] },
   { key: 'tanners',
     institutions: ['tanner', 'tannery', 'tanners', 'leatherwork', 'saddler', 'furrier'],

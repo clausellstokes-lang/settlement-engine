@@ -74,8 +74,8 @@ export const GOOD_TRADES = Object.freeze({
   dairy: Object.freeze({ houses: Object.freeze(['dairy', 'cheese', 'cattle', 'cow', 'goat', 'herd', 'shepherd', 'livestock']), listed: /\b(dairy|butter|cheese|milk)\b/i }),
   // the loom, the dye vats and the fulling stocks: a house that makes cloth (a tailor or a draper sews or sells it)
   cloth: Object.freeze({ houses: Object.freeze(['weaver', 'weavers', 'textile', 'fuller', 'dyer']), listed: /\b(cloth|textiles?|linen|silk)\b/i }),
-  // the forge at work: a smith's house with its iron (the mark "Short of iron." is the page's own)
-  forge: Object.freeze({ houses: Object.freeze(['blacksmith', 'smith', 'smelter', 'foundry', 'armourer', 'armorer', 'weaponsmith', 'bladesmith', 'metalworker', 'specialized metalworker']) }),
+  // the ironwork at the forge: a smith's house with its iron (the mark "Short of iron." is the page's own)
+  ironwork: Object.freeze({ houses: Object.freeze(['blacksmith', 'smith', 'smelter', 'foundry', 'armourer', 'armorer', 'weaponsmith', 'bladesmith', 'metalworker', 'specialized metalworker']) }),
   // drying herbs: a house that dries or doses them, or herbs gathered, made or sold
   herbs: Object.freeze({ houses: Object.freeze(['apothecary', 'herbalist', 'physician', 'healer']), listed: /\b(herbs?|herbal|medicinal|remed\w*)\b/i }),
   // spice in sacks and on the stalls: a spice house, spice made or sold, or spice brought in while the road is open
@@ -111,8 +111,8 @@ function goodAtWork(record, good) {
     if (makers.some((h) => !short.has(String(/** @type {{ name?: unknown }} */ (h)?.name ?? '')))) return true;
   }
   const listed = good.listed;
-  if (listed && [...arr(r?.economicState?.localProduction), ...arr(canonExports(r))].some((x) => listed.test(itemText(x)))) return true;
-  if (listed && good.imported && !crisisOf(record).has('under_siege') && arr(canonImports(r)).some((x) => listed.test(itemText(x)))) return true;
+  if (listed && [...arr(r?.economicState?.localProduction), ...arr(canonExports(/** @type {Parameters<typeof canonExports>[0]} */ (record)))].some((x) => listed.test(itemText(x)))) return true;
+  if (listed && good.imported && !crisisOf(record).has('under_siege') && arr(canonImports(/** @type {Parameters<typeof canonImports>[0]} */ (record))).some((x) => listed.test(itemText(x)))) return true;
   const chains = good.chains;
   if (chains) {
     return arr(r?.economicState?.activeChains).some((c) => {

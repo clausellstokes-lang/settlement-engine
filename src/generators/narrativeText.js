@@ -287,8 +287,8 @@ const PRESSURE_ROWS = {
   ],
 };
 /** BAR6-SCENES (LAW 10 rule 10h): every stressor's rows read the powers by their prose form (`say`), the record's labels untouched. */
-export const PRESSURE_SENTENCES = Object.freeze(Object.fromEntries(Object.entries(PRESSURE_ROWS).map(([stress, rows]) => [stress,
-  (/** @type {any} */ r) => rows(r && typeof r === 'object' ? { ...r, topFaction: say(r.topFaction), govFaction: say(r.govFaction) } : r)])));
+export const PRESSURE_SENTENCES = /** @type {typeof PRESSURE_ROWS} */ (/** @type {unknown} */ (Object.freeze(Object.fromEntries(Object.entries(PRESSURE_ROWS).map(([stress, rows]) => [stress,
+  (/** @type {any} */ r) => rows(r && typeof r === 'object' ? { ...r, topFaction: say(r.topFaction), govFaction: say(r.govFaction) } : r)])))));
 
 // ─── Historical character flavor text (consumed by narrativeGenerator/history) ──
 // POLITICAL_FLAVOR maps history-event-type patterns to arrays of description

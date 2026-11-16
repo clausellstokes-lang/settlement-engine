@@ -184,7 +184,7 @@ describe('the facts the cure made', () => {
     const town = BORN.get('r2r-village-0');
     const bare = { ...town, institutions: [{ name: 'Common grazing land' }, { name: 'Tailor' }], economicState: { ...town.economicState, primaryExports: [], localProduction: [], primaryImports: [], activeChains: [] } };
     const facts = factsOf(bare);
-    const goods = /^(trade at work: (dairy|cloth|forge|spice)|exported: )/;
+    const goods = /^(trade at work: (dairy|cloth|ironwork|spice)|exported: )/;
     // the kilns' twin of the crates is BAR5-THINGS's: unanswered (and so refused with its original) where no kiln house stands, by design
     const pairs = ARRIVAL_SENSES.filter((/** @type {any} */ sense) => sense.key !== 'kilns').flatMap((/** @type {any} */ sense) => ['lines', 'dominant'].flatMap((field) => sense[field]
       .filter((/** @type {any} */ t) => t && typeof t === 'object' && t.twinOf)

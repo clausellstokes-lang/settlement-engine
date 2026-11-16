@@ -60,7 +60,7 @@ describe('textOf', () => {
     // oven lit, the smell thin: where a hunger or a siege refuses the fresh bread).
     // 189 → 215 (BAR6-SCENES, 2026-11-16, LAW 6 rule 6b; re-keyed by identity, this batch's own count): 18 twins join (the forge 4, the
     // cloth 5, the goods sent out 4, the butter, the spice 2, the porters, the work party) and 8 bare lines become declared objects
-    // (the forge's 4 and the cloth's 4): 18 + 8 = 26.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(215);
+    // (the ironwork's 4 and the cloth's 4): 18 + 8 = 26; and the Norse drying racks' twin (ARRIVAL_PEOPLE.norse): 216.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(216);
   });
 });
