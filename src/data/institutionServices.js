@@ -44,7 +44,7 @@ export const INSTITUTION_SERVICES = {
   "Village headman": {
     "Dispute mediation": { on: true, p: 1.0, desc: "Judges disputes over land, livestock, and debt" },
     "Communal labour": { on: true, p: 0.9, desc: "Organises shared work: harvest, repairs, the common fields" },
-    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the tithe", needs: ["institution: temple"] }, // TAIL-SERVICES-3 (05233): the atom admits a parish church or a shrine; the line names no temple
+    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the dues owed and the tithe", needs: ["institution: temple"] }, // TAIL-SERVICES-3 (05233): the atom admits a parish church or a shrine; the line names no temple. BAR5-MARKS (C42840, LAW 4): no lord the record does not hold (a headman's village of escaped serfs owes no lord)
     "Record of custom": { on: true, p: 0.7, desc: "Holds the customary law of the village" }
   },
   "Village elder": {
@@ -1861,5 +1861,11 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
   "Move small amounts of cargo across the river.": Object.freeze([
     Object.freeze({ text: "Move small amounts of cargo across the river.", needs: Object.freeze(["river"]) }),
     Object.freeze({ text: "Move small amounts of cargo across the water.", twinOf: "Move small amounts of cargo across the river.", excludes: Object.freeze(["river"]) }),
+  ]),
+  // BAR5-MARKS (LAW 2's `L2.siege.abroad`, 2026-11-16; vetoable by the owner): the bodyguards' merchants and travellers come
+  // by road; under a siege the officials and the town's own frightened are left. The row goes on, so it is twinned, not marked.
+  "Personal protection for merchants, officials, and travelers.": Object.freeze([
+    Object.freeze({ text: "Personal protection for merchants, officials, and travelers.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Personal protection for officials, and for anyone with reason to fear the streets while the siege lasts.", twinOf: "Personal protection for merchants, officials, and travelers.", crisis: Object.freeze(['under_siege']) }),
   ]),
 });

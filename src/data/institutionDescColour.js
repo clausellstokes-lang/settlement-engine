@@ -153,8 +153,6 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "A wheel and a modest kiln for domestic ware: plates, jugs, and storage jars, made whenever clay can be had.": COLOUR,
   "Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed.": COLOUR,
   "Moulds and a kiln for building brick, fired whenever clay can be had; brick allows sturdier, more lasting construction. The work depends on clay and fuel.": COLOUR,
-  "Makes and mends shoes and boots. Everyone needs something on their feet, which keeps this among the steadiest trades going.": COLOUR,
-  "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.": COLOUR,
   "Cuts and stitches finished cloth into clothes, filling the middle ground between the home seamstress and the master clothier.": COLOUR,
   "Makes garments from finished cloth, serving those above the household seamstress but below the master clothier.": COLOUR,
   "Attends births, handles the hard labours, and gives what women's care there is. No medical service in a settlement is called upon more.": COLOUR,
