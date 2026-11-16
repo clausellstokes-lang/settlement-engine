@@ -1,0 +1,8 @@
+{"id":"C43575","town":"bar0-village-famine-rand-26","sev":"MED","kind":"PAIR","why":"'the work never dries up' on an unmarked Boot repair row under famine; C43468 says no one can earn a normal living","other":"C43468"}
+{"id":"C43620","town":"bar0-village-famine-rand-26","sev":"MED","kind":"STATE","why":"Pasturage offered unmarked under famine; LAND gives Grazing land absent and its livestock chains vulnerable","other":""}
+{"id":"C43789","town":"bar0-village-famine-rand-26","sev":"LOW","kind":"BROKEN","why":"needed-goods list repeats 'timber' three times ('timber and building wood', 'timber', 'mountain timber'): doubled item","other":""}
+{"id":"C43925","town":"bar0-village-famine-rand-26","sev":"MED","kind":"LACKS","why":"'Significant military force' for Military Party; DEFENCE gives no garrison, militia, watch or mercenaries, and C43973 says nobody is paid to defend the village","other":"C43973"}
+{"id":"C44306","town":"bar0-village-famine-rand-26","sev":"MED","kind":"LACKS","why":"a copy left 'with a notary'; no notary or legal house on HOUSES, and the page says Legal Infrastructure: None and no court","other":"C44020"}
+{"id":"C43405","town":"bar0-village-famine-rand-26","sev":"LOW","kind":"PAIR","why":"'the history here is long' in a village 40 years old; C44377 says it has not stood long","other":"C44377"}
+{"id":"C43411","town":"bar0-village-famine-rand-26","sev":"LOW","kind":"STATE","why":"'Every other doorway sells a remedy' overstates one Apothecary house (6% of income) in a village of 306 with 22 houses","other":""}
+{"id":"DONE","lines":1058,"blocks":1,"flags":7}
