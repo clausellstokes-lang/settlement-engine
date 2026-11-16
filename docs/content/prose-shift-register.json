@@ -21,16 +21,16 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2959
+          "value": 2977
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "eb801d3f5581a2b094662a560b6c88b2d3e6c73161ba9bf7d195de1c0966536c"
+          "value": "b1600fa37e78e82a85191d6845e328fae93dd0784d5e651665fea866f507fbd4"
         }
       ],
-      "note": "RE-TAKEN 2026-11-15 by TAIL-CLOSE-SWEEP-A (ruling SW1) at the joined tip dc4bae117: 2954 -> 2959, five pure additions, each a declared twin taking the NEXT vid (no vid renumbered): DS-ECO-1 C1 v4 and DS-GEN-13 COMMERCE a market, no guild v5 (4467cd7d6, TAIL-CORPUS-ECO-4 batch 7); DS-DEF-2 Beasts & Monsters settled, defenses beyond the need v6 (b284cbe44, TAIL-CORPUS-DEF-4 U2); DS-DEF-3 Safe v4 and Very Safe v5 (d4a4bd590, TAIL-CORPUS-DEF-4 batch 6). The two lanes re-took (eco, 2950 -> 2954 at a8ea5ef8e) or left (def) these pins on their own bases; the joins JOIN-9 3 (c46e61abe) and JOIN-9 4 (954340b6f) composed them to 2956 and 2959."
+      "note": "RE-TAKEN 2026-11-16 by BAR4-CLOSE-DOORS-1 at the close of the round BAR4, at the joined tree 2d80aa740 (measured per pool against c4ac1ef84a): 2959 -> 2977 variants, 856 -> 859 pools. Pure additions: twelve declared twins each taking the NEXT vid (no vid renumbered, no face moved from 1, no attach set of an existing pool moved): DS-DEF-11 WALLED-QUIET v6 v7, DS-DEF-2 Economic Survival: WEAK v6, DS-DEF-9 magicDependency false v4 (BAR4-CORPUS-DEF, 6f8081add); DS-ECO-9 FOOD SOURCES: one source v4-v7, several, the largest named v6-v8 (BAR4-CORPUS-ECO, 7354471e5); DS-GEN-13 COMMERCE: a market, no guild v6 (BAR4-SCENES, 187c46f61); and three NEW pools of two variants each, attach [], keys added and none renamed: DS-GEN-16 ANCHORED-OLD-MARKED, LEGACY-RECOVERED-MARKED, LEGACY-SHIFTED-MARKED (BAR4-HISTORY batch 2, 155c7e1af). Each named in its seat's hand-back (the books my cures move)."
     },
     {
       "id": "face-count-per-variant",
@@ -43,7 +43,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2959
+          "value": 2977
         },
         {
           "kind": "integer",
@@ -54,10 +54,10 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "f88ec242c8549e5f311f5460763d9961362ad8be0a85a18149b1a5c71e9e30cd"
+          "value": "5e3d17ef82d722c79b7bfbaa043bc8a16ce0b285ebab5fb3976aad0dc3f5a2ee"
         }
       ],
-      "note": "RE-TAKEN 2026-11-15 by TAIL-CLOSE-SWEEP-A (ruling SW1) at the joined tip dc4bae117: 2954 -> 2959, five pure additions, each a declared twin taking the NEXT vid (no vid renumbered): DS-ECO-1 C1 v4 and DS-GEN-13 COMMERCE a market, no guild v5 (4467cd7d6, TAIL-CORPUS-ECO-4 batch 7); DS-DEF-2 Beasts & Monsters settled, defenses beyond the need v6 (b284cbe44, TAIL-CORPUS-DEF-4 U2); DS-DEF-3 Safe v4 and Very Safe v5 (d4a4bd590, TAIL-CORPUS-DEF-4 batch 6). The two lanes re-took (eco, 2950 -> 2954 at a8ea5ef8e) or left (def) these pins on their own bases; the joins JOIN-9 3 (c46e61abe) and JOIN-9 4 (954340b6f) composed them to 2956 and 2959."
+      "note": "RE-TAKEN 2026-11-16 by BAR4-CLOSE-DOORS-1 at the close of the round BAR4, at the joined tree 2d80aa740 (measured per pool against c4ac1ef84a): 2959 -> 2977 variants, 856 -> 859 pools. Pure additions: twelve declared twins each taking the NEXT vid (no vid renumbered, no face moved from 1, no attach set of an existing pool moved): DS-DEF-11 WALLED-QUIET v6 v7, DS-DEF-2 Economic Survival: WEAK v6, DS-DEF-9 magicDependency false v4 (BAR4-CORPUS-DEF, 6f8081add); DS-ECO-9 FOOD SOURCES: one source v4-v7, several, the largest named v6-v8 (BAR4-CORPUS-ECO, 7354471e5); DS-GEN-13 COMMERCE: a market, no guild v6 (BAR4-SCENES, 187c46f61); and three NEW pools of two variants each, attach [], keys added and none renamed: DS-GEN-16 ANCHORED-OLD-MARKED, LEGACY-RECOVERED-MARKED, LEGACY-SHIFTED-MARKED (BAR4-HISTORY batch 2, 155c7e1af). Each named in its seat's hand-back (the books my cures move)."
     },
     {
       "id": "vids",
@@ -70,10 +70,10 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "bd33ab8b65018db16be6c97e95c2b8c4bc1522116888f9ea47e21ebf3f41fd3a"
+          "value": "f19e36406763e7dcaecd6b53c4de72fcbf337045a459db6cb9136e30e638cb8b"
         }
       ],
-      "note": "RE-TAKEN 2026-11-15 by TAIL-CLOSE-SWEEP-A (ruling SW1) at the joined tip dc4bae117: 2954 -> 2959, five pure additions, each a declared twin taking the NEXT vid (no vid renumbered): DS-ECO-1 C1 v4 and DS-GEN-13 COMMERCE a market, no guild v5 (4467cd7d6, TAIL-CORPUS-ECO-4 batch 7); DS-DEF-2 Beasts & Monsters settled, defenses beyond the need v6 (b284cbe44, TAIL-CORPUS-DEF-4 U2); DS-DEF-3 Safe v4 and Very Safe v5 (d4a4bd590, TAIL-CORPUS-DEF-4 batch 6). The two lanes re-took (eco, 2950 -> 2954 at a8ea5ef8e) or left (def) these pins on their own bases; the joins JOIN-9 3 (c46e61abe) and JOIN-9 4 (954340b6f) composed them to 2956 and 2959."
+      "note": "RE-TAKEN 2026-11-16 by BAR4-CLOSE-DOORS-1 at the close of the round BAR4, at the joined tree 2d80aa740 (measured per pool against c4ac1ef84a): 2959 -> 2977 variants, 856 -> 859 pools. Pure additions: twelve declared twins each taking the NEXT vid (no vid renumbered, no face moved from 1, no attach set of an existing pool moved): DS-DEF-11 WALLED-QUIET v6 v7, DS-DEF-2 Economic Survival: WEAK v6, DS-DEF-9 magicDependency false v4 (BAR4-CORPUS-DEF, 6f8081add); DS-ECO-9 FOOD SOURCES: one source v4-v7, several, the largest named v6-v8 (BAR4-CORPUS-ECO, 7354471e5); DS-GEN-13 COMMERCE: a market, no guild v6 (BAR4-SCENES, 187c46f61); and three NEW pools of two variants each, attach [], keys added and none renamed: DS-GEN-16 ANCHORED-OLD-MARKED, LEGACY-RECOVERED-MARKED, LEGACY-SHIFTED-MARKED (BAR4-HISTORY batch 2, 155c7e1af). Each named in its seat's hand-back (the books my cures move)."
     },
     {
       "id": "pool-key-rename",
@@ -86,9 +86,10 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "`${block} :: ${pool}` for all 708 pools, in order",
-          "value": "3041eef3e4ab1f59028c975a91a0215a00fc55f3cceaf0e28134679c15649ad1"
+          "value": "4ad75b1b926cd3c6517d17d01c911bdabc7913b5434f919866dfed9a544a637b"
         }
-      ]
+      ],
+      "note": "RE-TAKEN 2026-11-16 by BAR4-CLOSE-DOORS-1 at the close of the round BAR4, at the joined tree 2d80aa740 (measured per pool against c4ac1ef84a): 2959 -> 2977 variants, 856 -> 859 pools. Pure additions: twelve declared twins each taking the NEXT vid (no vid renumbered, no face moved from 1, no attach set of an existing pool moved): DS-DEF-11 WALLED-QUIET v6 v7, DS-DEF-2 Economic Survival: WEAK v6, DS-DEF-9 magicDependency false v4 (BAR4-CORPUS-DEF, 6f8081add); DS-ECO-9 FOOD SOURCES: one source v4-v7, several, the largest named v6-v8 (BAR4-CORPUS-ECO, 7354471e5); DS-GEN-13 COMMERCE: a market, no guild v6 (BAR4-SCENES, 187c46f61); and three NEW pools of two variants each, attach [], keys added and none renamed: DS-GEN-16 ANCHORED-OLD-MARKED, LEGACY-RECOVERED-MARKED, LEGACY-SHIFTED-MARKED (BAR4-HISTORY batch 2, 155c7e1af). Each named in its seat's hand-back (the books my cures move)."
     },
     {
       "id": "connective-list-length",
@@ -155,9 +156,10 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.attach per pool, joined by pipes",
-          "value": "d7a8157c8af1e458895fcf4ddd43f80f2b1fe22e0e99ce28f37f154cdf023ef2"
+          "value": "d882cb66368496b2560bc809fa3311473aa90a047446c1cbcac6299b4c0394d8"
         }
-      ]
+      ],
+      "note": "RE-TAKEN 2026-11-16 by BAR4-CLOSE-DOORS-1 at the close of the round BAR4, at the joined tree 2d80aa740 (measured per pool against c4ac1ef84a): 2959 -> 2977 variants, 856 -> 859 pools. Pure additions: twelve declared twins each taking the NEXT vid (no vid renumbered, no face moved from 1, no attach set of an existing pool moved): DS-DEF-11 WALLED-QUIET v6 v7, DS-DEF-2 Economic Survival: WEAK v6, DS-DEF-9 magicDependency false v4 (BAR4-CORPUS-DEF, 6f8081add); DS-ECO-9 FOOD SOURCES: one source v4-v7, several, the largest named v6-v8 (BAR4-CORPUS-ECO, 7354471e5); DS-GEN-13 COMMERCE: a market, no guild v6 (BAR4-SCENES, 187c46f61); and three NEW pools of two variants each, attach [], keys added and none renamed: DS-GEN-16 ANCHORED-OLD-MARKED, LEGACY-RECOVERED-MARKED, LEGACY-SHIFTED-MARKED (BAR4-HISTORY batch 2, 155c7e1af). Each named in its seat's hand-back (the books my cures move)."
     },
     {
       "id": "draw-formula",
