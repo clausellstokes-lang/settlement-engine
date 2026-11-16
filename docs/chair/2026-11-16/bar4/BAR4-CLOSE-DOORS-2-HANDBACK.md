@@ -16,7 +16,7 @@ FOR THIS ROUND'S SIGNING, AT THIS TREE, ONCE. The signed record:
 [`docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json`](../../../shift-records/2026-11-16-the-close-of-the-round-bar4.json)
 (new; no earlier record touched). Commit trailer `Owner-Signed: §934.105` on the signed-door commits.
 
-STATUS: **IN PROGRESS.** The record and the golden master written (1581ed12, WRITTEN sent 18:55 UTC); the golden's pins (b38b7d68); the espionage fence; next: the dossier prose manifest, x46 and the budget, the receipt.
+STATUS: **IN PROGRESS.** The record and the golden master written (1581ed12, WRITTEN sent 18:55 UTC); the golden's pins (b38b7d68); the espionage fence (06462c1c); the dossier prose manifest; next: x46 and the budget, the receipt.
 
 ## THE MEASURE BEFORE ANY WRITE (at e73d53d8; e942f648 differs by Part 1's hand-back only)
 
@@ -49,7 +49,9 @@ record), generationForkRegistry.contract 3/3 (nothing to re-key).
 | 1 | `tests/domain/editWorldFactResources.test.js` A2, A6 (PRE_CHANGE) | its own re-capture: the pre-EM-B2b2 step (adfd3ba4…) planted over a copy of the tree (a detached worktree), and the live step (twice): the SAME six digests; the probe reproduces the stored six at c4ac1ef84a; a dated note | rows 0, 21 (4 digests); 42 unmoved | as predicted; row 21's derived = the new control 5437998b | b38b7d68 | 6/6 |
 | 1 | `tests/lint/sourceCitationIntegrity.walker.test.js` archival tree count (+ `tests/lint/.source-citation-baseline.json`) | its header's own form | 183 -> 184 (the new record) | as predicted | b38b7d68 | 18/18 |
 | 1 | every reader of the re-taken files (`grep -rl` of each basename over tests/) | each alone | green | 78 files: all green but the four whose own families follow (x46NpcBand, institutionBudgetPromise, dossierProseManifest, espionageDormancyFence); pipelinePinnedMode 15/15, pipelinePinnedChoosers 7/7, powerEconomyFreshness 10/10, rosterFinalUnderHeldRoster 7/7, nameHeldThroughAssembly 7/7, dmLayerGoldenIsolation 15/15, engineBundleReplay 6 + 1 skipped (its golden arm armed; the fence arm waits for its family), goldenFreeze.walker 90/90 | b38b7d68 | — |
-| 2 | the espionage fence's driven golden (`PRE_COUPLING_CORPUS_SHA`, 360 settlements) | EF1 first (above); `node scripts/audit/refence.mjs . --produce <scratch> --header <block>`; `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json node scripts/audit/door-write.mjs --surface espionage-dormancy-fence --from <scratch>` (exit 3, by design) | 1 (the fence file) | 248 of 360 moved; `05b90d5f…` -> `8e5881d6…` (the measure's own); the hundred-and-fourteenth movement block; the written file byte-equal to the produced one | (this commit) | espionageDormancyFence 21/21; its readers alone: engineBundleReplay 7/7 (no arm skipped), espionageMissionDormancyFence 20/20, faithFieldDormancyFence 13/13, faithWitnessSource 35/35, generatorGoldenMaster 3/3; goldenFreeze.walker 90/90 |
+| 2 | the espionage fence's driven golden (`PRE_COUPLING_CORPUS_SHA`, 360 settlements) | EF1 first (above); `node scripts/audit/refence.mjs . --produce <scratch> --header <block>`; `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json node scripts/audit/door-write.mjs --surface espionage-dormancy-fence --from <scratch>` (exit 3, by design) | 1 (the fence file) | 248 of 360 moved; `05b90d5f…` -> `8e5881d6…` (the measure's own); the hundred-and-fourteenth movement block; the written file byte-equal to the produced one | 06462c1c | espionageDormancyFence 21/21; its readers alone: engineBundleReplay 7/7 (no arm skipped), espionageMissionDormancyFence 20/20, faithFieldDormancyFence 13/13, faithWitnessSource 35/35, generatorGoldenMaster 3/3; goldenFreeze.walker 90/90 |
+| 3 | the dossier prose manifest (`tests/fixtures/dossier-prose-manifest-golden.json`) | `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json node scripts/prose-manifest-cells.mjs --record` | 2 | 2; 734 of 1,050 rows moved (the drift arm's own count before the write); be43267f… -> 99c8150a… | (this commit) | dossierProseManifest **17/17**: THE MIXED-POOL AUDIENCE ARM (MP1's control) and the drift arm GREEN, no re-key, nothing to send under MP1 |
+| 3 | `tests/domain/worldFactRederive.test.js` A7 (the prose manifest's file sha) | a dated line | be43267f -> 99c8150a | as predicted | (this commit) | 7/7; its readers alone: dossierStateProseProjection.contract 79/79, bandLadders 8/8, institutionDestroyedByKind 7/7, institutionRename 6/6, ruinInstitution 7/7, landingStageMeasure 11/11, sourceCitationIntegrity 18/18, generatorGoldenMaster 3/3; goldenFreeze.walker 90/90 |
 
 ## STOPS AND LAW REDS SENT TO THE CHAIR
 
@@ -62,6 +64,5 @@ record), generationForkRegistry.contract 3/3 (nothing to re-key).
 
 ## WHAT IS LEFT, IN ORDER
 
-1. The dossier prose manifest: `GOLDEN_SHIFT_SIGNED=<record> node scripts/prose-manifest-cells.mjs --record`; worldFactRederive's prose sha; its readers alone.
-2. x46NpcBand and institutionBudgetPromise in their files' own forms (measured above).
-3. The receipt (the law suites, the round's guards, the fourteen steps, build, verify:dist, the registers, goldenFreeze.walker last) and FOR THE OWNER.
+1. x46NpcBand and institutionBudgetPromise in their files' own forms (measured above).
+2. The receipt (the law suites, the round's guards, the fourteen steps, build, verify:dist, the registers, goldenFreeze.walker last) and FOR THE OWNER.
