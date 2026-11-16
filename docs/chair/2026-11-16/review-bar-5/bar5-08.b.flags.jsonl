@@ -1,0 +1,7 @@
+{"id":"C17771","town":"bar0-hamlet-under_siege-rand-25","sev":"MED","kind":"PAIR","why":"Grain milling printed bare (also C17796) while its house, Access to external mill, is Stopped by the siege on the same card","other":"C17770"}
+{"id":"C18377","town":"bar0-hamlet-under_siege-rand-26","sev":"MED","kind":"PAIR","why":"Grain milling printed bare (also C18398) while its house, Access to external mill, is Stopped by the siege on the same card","other":"C18376"}
+{"id":"C17893","town":"bar0-hamlet-under_siege-rand-25","sev":"MED","kind":"PAIR","why":"Faith & Worship chain printed Running under siege while both its houses (house of worship, wayside shrine) have every service stopped","other":"C17767"}
+{"id":"HEADER","town":"bar0-hamlet-under_siege-rand-25","sev":"LOW","kind":"RECORD","why":"hamlet of 80 with a part-time smith makes advanced weapons and armor and basic education; no school or armourer house on HOUSES","other":""}
+{"id":"C18013","town":"bar0-hamlet-under_siege-rand-25","sev":"LOW","kind":"LACKS","why":"names Dongxian's streets; a hamlet of 80 (lanes at most) has no streets","other":""}
+{"id":"C18584","town":"bar0-hamlet-under_siege-rand-26","sev":"LOW","kind":"LACKS","why":"an alley and 'running the streets' in a hamlet of 61 with no streets","other":""}
+{"id":"DONE","lines":1215,"blocks":2,"flags":6}
