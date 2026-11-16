@@ -1,0 +1,6 @@
+{"id":"C10574","town":"bar0-city-under_siege+famine-rand-31","sev":"LOW","kind":"BROKEN","why":"service 'Arcane services (illicit)' printed with no providing house line, unlike its neighbours (Assassination → Contract killer)","other":""}
+{"id":"C10588","town":"bar0-city-under_siege+famine-rand-31","sev":"LOW","kind":"BROKEN","why":"service 'Contraband transport' printed with no providing house line, unlike Contraband delivery → Smuggling network","other":""}
+{"id":"C10974","town":"bar0-city-under_siege+famine-rand-31","sev":"MED","kind":"STATE","why":"says the work needs copper ore from outside; TRADE imports and LAND chains/resources name no copper ore (iron ore is available locally)","other":"C10978"}
+{"id":"C10978","town":"bar0-city-under_siege+famine-rand-31","sev":"MED","kind":"STATE","why":"'Needed, and not brought in: copper ore'; TRADE imports list no copper ore and no chain on LAND draws on it","other":"C10974"}
+{"id":"C12294","town":"bar0-city-under_siege+famine-rand-31","sev":"MED","kind":"BROKEN","why":"heading 'NPC Relationships (63)' and chip 'All (63)' over 56 relationship rows actually listed (112 lines, a title and a role line each)","other":""}
+{"id":"DONE","lines":3001,"blocks":1,"flags":5}
