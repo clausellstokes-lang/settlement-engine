@@ -1,0 +1,9 @@
+{"id":"C30469","town":"bar0-metropolis-calm-rand-23","sev":"MED","kind":"STATE","why":"says the metropolis leans first on fishing for food; LAND has Fishing Grounds depleted, food grown 52% and imported 48%, fishery fished out","other":"C30411"}
+{"id":"C30727","town":"bar0-metropolis-calm-rand-23","sev":"LOW","kind":"LACKS","why":"names a 'mages' quarter'; HOUSES has Wizard's tower, Sage's quarter and Alchemist quarter but no mages' quarter","other":""}
+{"id":"C30692","town":"bar0-metropolis-calm-rand-23","sev":"MED","kind":"PAIR","why":"calls the shadow trade small; Criminal Syndicate Revenue is 11% (third source) and C30831 says the unrecorded share 'is not small'","other":"C30831"}
+{"id":"C30874","town":"bar0-metropolis-calm-rand-23","sev":"MED","kind":"BROKEN","why":"heading says 28 institutions behind the High Theocratic Council; the card (every line shown) lists 23","other":""}
+{"id":"C30908","town":"bar0-metropolis-calm-rand-23","sev":"MED","kind":"BROKEN","why":"heading says 9 institutions behind Religious Authorities; the card (every line shown) lists 6","other":""}
+{"id":"C30920","town":"bar0-metropolis-calm-rand-23","sev":"MED","kind":"BROKEN","why":"heading says 8 institutions behind Noble Houses; the card (every line shown) lists 4","other":""}
+{"id":"C31074","town":"bar0-metropolis-calm-rand-23","sev":"MED","kind":"STATE","why":"says local trade makes salted fish and would yield less; Fishing Grounds depleted, TRADE imports salted fish ('fish sold now is salted and bought in')","other":"C30411"}
+{"id":"C29694","town":"bar0-metropolis-calm-rand-23","sev":"LOW","kind":"STATE","why":"'Landlord' is a male-coded personal title for Huitzilxochitl Tec, who PEOPLE gives as (f), the innkeeper","other":""}
+{"id":"DONE","lines":4032,"blocks":1,"flags":8}
