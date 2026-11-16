@@ -1,0 +1,5 @@
+{"id":"C36466","town":"bar0-town-calm-rand-22","sev":"LOW","kind":"PAIR","why":"'no dependable way to move them' beside Carriers' guild freight haulage 'Reliable, guild-backed' (isolated access, Carriers' guild on HOUSES)","other":"C36411"}
+{"id":"C36734","town":"bar0-town-calm-rand-22","sev":"LOW","kind":"BROKEN","why":"'Institutions behind this power (18)' over 16 houses listed (15 held under authority + Houses of worship); Power is a card section, every line shown","other":""}
+{"id":"C36761","town":"bar0-town-calm-rand-22","sev":"MED","kind":"BROKEN","why":"Landed Gentry 'Institutions behind this power (3)' lists only Mills (1 item); Power section shows every line","other":""}
+{"id":"C36862","town":"bar0-town-calm-rand-22","sev":"MED","kind":"PAIR","why":"'nothing it lives by would stop without [magic]' contradicts grain/timber/iron 'brought in by magic' dependence rows and 'magical transit' viability line","other":"C36536"}
+{"id":"DONE","lines":1761,"blocks":1,"flags":4}
