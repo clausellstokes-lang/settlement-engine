@@ -1,0 +1,6 @@
+{"id":"C66489","town":"bar0-city-wartime-rand-37","sev":"LOW","kind":"PAIR","why":"Overview says 'prospering... coin moving fast' but STATE prosperity is Comfortable and C66493 says 'Comfortable while it lasts'","other":"C66493"}
+{"id":"C66533","town":"bar0-city-wartime-rand-37","sev":"LOW","kind":"PAIR","why":"'doing well out of it... prices are high' against 'The war takes most of the money: trade suffers'","other":"C66554"}
+{"id":"C66536","town":"bar0-city-wartime-rand-37","sev":"LOW","kind":"STATE","why":"'leads the military' of Odhrán Burke (watch commander, War Council); PEOPLE gives Ultan O'Gorman rank 1 of Military/Guard","other":""}
+{"id":"C67884","town":"bar0-city-wartime-rand-37","sev":"LOW","kind":"PAIR","why":"'Little of Balgarth's trade goes unrecorded' against the Shadow Economy panel's '14% of trade unrecorded' (and INCOME smuggling 14%)","other":"C67878"}
+{"id":"C68141","town":"bar0-city-wartime-rand-37","sev":"LOW","kind":"LACKS","why":"Smuggling card names 'unofficial landing points' (a water landing); the town is Hills with crossroads trade access only, and C68155 says overland smuggling","other":"C68155"}
+{"id":"DONE","lines":3152,"blocks":1,"flags":5}
