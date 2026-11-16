@@ -1,0 +1,11 @@
+{"id": "C29096", "town": "bar0-metropolis-calm-rand-23", "sev": "LOW", "kind": "STATE", "why": "Overview row 'Relied upon' names no use (the Magic tab does); magic low, Magical Capability Weak, food by magic 0%", "other": ""}
+{"id": "C29575", "town": "bar0-metropolis-calm-rand-23", "sev": "MED", "kind": "STATE", "why": "'Spymaster' is a sex-named personal title; PEOPLE gives Zipna Kab as f (the network's head)", "other": ""}
+{"id": "C29644", "town": "bar0-metropolis-calm-rand-23", "sev": "MED", "kind": "STATE", "why": "'Beastmaster' is a sex-named personal title (like Beemaster); PEOPLE gives Sak Ramillete as f", "other": ""}
+{"id": "C29741", "town": "bar0-metropolis-calm-rand-23", "sev": "MED", "kind": "STATE", "why": "'Stablemaster' is a sex-named personal title; PEOPLE gives Malinalxochitl Dzul as f", "other": ""}
+{"id": "C29749", "town": "bar0-metropolis-calm-rand-23", "sev": "MED", "kind": "STATE", "why": "'Quarrymaster' is a sex-named personal title; PEOPLE gives Tun Oc as f", "other": ""}
+{"id": "C29694", "town": "bar0-metropolis-calm-rand-23", "sev": "LOW", "kind": "STATE", "why": "'Landlord' is a sex-named title; PEOPLE gives Huitzilxochitl Tec as f (the innkeeper)", "other": ""}
+{"id": "C30469", "town": "bar0-metropolis-calm-rand-23", "sev": "MED", "kind": "STATE", "why": "Says the town leans first on fishing for food; LAND has Fishing Grounds depleted, fish imported salted, 52% of food grown on farms", "other": "C30411"}
+{"id": "C30727", "town": "bar0-metropolis-calm-rand-23", "sev": "LOW", "kind": "LACKS", "why": "Names 'the mages' quarter'; HOUSES has Wizard's tower, Sage's quarter, Alchemist quarter but no mages' quarter; magic is low", "other": ""}
+{"id":"C31074","town":"bar0-metropolis-calm-rand-23","sev":"MED","kind":"STATE","why":"Says the town's trade 'makes its salted fish'; the town imports salted fish (fisheries exhausted) and the magic row names only Spellcasting and Magical Items","other":"C30411"}
+{"id":"C29106","town":"bar0-metropolis-calm-rand-23","sev":"MED","kind":"STATE","why":"Sends anyone new needing a meal or bed to the monks; HOUSES has Inns and taverns (district), 'multiple inn districts' for travellers","other":"C29693"}
+{"id":"DONE","lines":4032,"blocks":1,"flags":10}
