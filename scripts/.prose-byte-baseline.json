@@ -55,20 +55,20 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 266715,
-      "gzip": 35510,
+      "raw": 269046,
+      "gzip": 35811,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 185500,
-      "gzip": 25695,
+      "raw": 188975,
+      "gzip": 26073,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 298675,
-      "gzip": 38100,
+      "raw": 301857,
+      "gzip": 38286,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
@@ -659,6 +659,30 @@
       "toRaw": 298675,
       "gzipAfter": 38100,
       "reason": "+111 B raw over the committed 298564 (gzip level 9: 38092 -> 38100), measured on disk at fb59da43e: BAR3-CORPUS batch 1 (cc469b762) and batch 2 (b09297a27) reworded and marked state prose so each line claims no more than every printing town bears. THE ROSTER'S TOTAL FELL: the five state leaves the round moved went defense -17, economy -28, power -106 (lowered), general +111 (this row) and warFaith +1 (180300 -> 180301, b09297a27; its declared chain already ends at 181741, so no row can land on it and only its number moves), 39 bytes fewer together. The leaf stands at 37.5 per cent of its ceilingRaw (796761)."
+    },
+    {
+      "car": "BAR4 (2026-11-16): the round's declared twins and pools of state prose, re-recorded once by BAR4-CLOSE-DOORS-1 at the joined tree 2d80aa740 (the close of the round BAR4; the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 266746,
+      "toRaw": 269046,
+      "gzipAfter": 35811,
+      "reason": "+2331 B raw over the committed 266715 (the row chains from 266746, where the declared chain stood above the committed figure after an earlier shrink: +2300 over the chain) (gzip level 9: 35510 -> 35811), measured on disk at the joined tree: BAR4-CORPUS-DEF (6f8081add): the four twins (DS-DEF-11 WALLED-QUIET v6 v7, DS-DEF-2 WEAK v6, DS-DEF-9 magicDependency false v4) and the DS-DEF pools' `danger coming` declarations (BAR4-CORPUS-DEF-HANDBACK, the books my cures move: 266,715 -> 269,046). The leaf stands at 55.1 per cent of its ceilingRaw (488168)."
+    },
+    {
+      "car": "BAR4 (2026-11-16): the round's declared twins and pools of state prose, re-recorded once by BAR4-CLOSE-DOORS-1 at the joined tree 2d80aa740 (the close of the round BAR4; the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 185744,
+      "toRaw": 188975,
+      "gzipAfter": 26073,
+      "reason": "+3475 B raw over the committed 185500 (the row chains from 185744, where the declared chain stood above the committed figure after an earlier shrink: +3231 over the chain) (gzip level 9: 25695 -> 26073), measured on disk at the joined tree: BAR4-CORPUS-ECO (7354471e5): the seven twins of DS-ECO-9 (one source v4-v7, several v6-v8) and their declarations (BAR4-CORPUS-ECO-HANDBACK, the books my cures move: raw 185500 -> 188975, gzip 25695 -> 26073). The leaf stands at 48.0 per cent of its ceilingRaw (393810)."
+    },
+    {
+      "car": "BAR4 (2026-11-16): the round's declared twins and pools of state prose, re-recorded once by BAR4-CLOSE-DOORS-1 at the joined tree 2d80aa740 (the close of the round BAR4; the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 298675,
+      "toRaw": 301857,
+      "gzipAfter": 38286,
+      "reason": "+3182 B raw over the committed 298675 (gzip level 9: 38100 -> 38286), measured on disk at the joined tree: BAR4-HISTORY batch 2 (155c7e1af) +2693, the three DS-GEN-16 -MARKED pools of two (BAR4-HISTORY-HANDBACK: 298,675 -> 301,368 on its own base), and BAR4-SCENES (187c46f61) +489, DS-GEN-13 COMMERCE v6 and the monastery line's exclusion mark (BAR4-SCENES-2-HANDBACK: 298675 -> 299164 on its own base); the two compose exactly (2693 + 489 = 3182). The leaf stands at 37.9 per cent of its ceilingRaw (796761)."
     }
   ],
   "ceilingTransfersNewLeaves": [
