@@ -1389,9 +1389,12 @@ describe('W1 ECO — the construction lenses', () => {
   });
 
   it('is SILENT where the record does not hold the fact (R-W1: said only when not the default)', () => {
+    // BAR5-FOOD (2026-11-16, the chair's FD1): the rung keys on the word the page prints (`foodWordShown`, the food record's
+    // band), so the case's record carries the import-dependent band its label states (it carried `band: 'pressured'`,
+    // which the page prints as Pressured); the assertion is unchanged.
     const quiet = economyStateProse(base({
       safetyProfile: { flags: { arcaneBlackMarket: false, theocraticEconomy: false }, compound: { religionInfluence: 40, magicInfluence: 30 } },
-      foodSecurity: { label: 'Import-Dependent', activeChainsCount: 0, prosperityMod: null, foodRecord: { band: 'pressured', failedSource: null, normalImportPct: 45, magicPct: 0, foodSources: [] } },
+      foodSecurity: { label: 'Import-Dependent', activeChainsCount: 0, prosperityMod: null, foodRecord: { band: 'importDependent', failedSource: null, normalImportPct: 45, magicPct: 0, foodSources: [] } },
       activeChains: [{ label: 'Bread', upstreamWeak: [] }],
     }, { institutions: [{ name: 'Smithy' }], resourceAnalysis: { resourceConditions: [{ label: 'Salt Flats', condition: 'available', recoveryMode: 'manual' }], imports: { critical: [], reasons: {} } } }),
     {}, { seed: 'w1-quiet', audience: AUDIENCE_DM });

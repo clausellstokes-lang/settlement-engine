@@ -534,7 +534,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // (EXEMPT above; moved verbatim out of defenseDisplay.js, which stays a reader), measured by this file's own scan.
     // BAR4-HOUSES (2026-11-16, the chair's ruling FW1): 111 -> 112, src/domain/foodways.js :: tilledOneFrame's roster read (the
     // one-source foodways frame against the subsistence holdings), COMPLIANT (liveInstitutions), measured by this file's own scan.
-    expect(readers.length).toBe(112);
+    // BAR5-FOOD (2026-11-16, L3.foodLineStopped): 112 -> 113, src/domain/facts/catchStopped.js :: catchStoppedBySiege's roster read (the
+    // fish trade's houses the siege stops), COMPLIANT (liveInstitutions), measured by this file's own scan.
+    expect(readers.length).toBe(113);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

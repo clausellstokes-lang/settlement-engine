@@ -19,6 +19,8 @@ import { drawDeclared, lineText, resolveSiblingSentences } from './facts/drawDec
 import { FOODWAYS_PRINT_SIBLINGS } from '../data/foodwaysPrintSiblings.js';
 import { liveInstitutions } from './institutions/institutionRoster.js';
 import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
+import { catchStoppedBySiege } from './facts/catchStopped.js';
+import { foodBandShownKey } from './facts/foodBandShown.js';
 
 /** @typedef {'grain'|'livestock'|'fish'|'mill'|'game'} FoodSource */
 
@@ -42,6 +44,11 @@ const FRAMES = Object.freeze({
   // (`tilledOneFrame`, read where the line prints): it names both, the holdings' own table and the source (the frame's
   // index kept). Never drawn: a print-time reading of the drawn 'one' frame.
   oneTilled: Object.freeze(['Each holding grows for its own table, and beyond that its food is {A}.', 'What each holding grows goes to its own table; beyond that, what it puts on the table itself is {A}.']),
+  // BAR5-FOOD (LAW 3's `L3.foodModel`; the chair's standing ruling: the food ledger's figures are not opened, the wording
+  // is made true; vetoable by the owner): the one-source frame where a live farmland house of the roster sells its grain
+  // and the food record names no grain (`farmedOneFrame`, read where the line prints): it names the fields' grain first
+  // (the frame's index kept). Never drawn: a print-time reading of the drawn 'one' frame.
+  oneFarmed: Object.freeze(['Its own fields give it grain, and beyond that its food is {A}.', 'Its own fields give it grain; beyond that, what it puts on the table itself is {A}.']),
   two: Object.freeze(['{A} and {B} anchor the table.', 'The table is {A}, with {B} beside it.']),
   more: Object.freeze(['{A} and {B} anchor the table; {C} fills the winter.', 'The table is {A} and {B}, and {C} carries it through the lean months.']),
 });
@@ -188,8 +195,10 @@ function readOwnSentence(line, sources) {
  * (99 of the reader's 1,722 births: every famine). A line that does not name a failed source is returned as stored.
  * R3-CODE-C-10 (b) (the chair's ruling of 2026-11-14, vetoable by the owner): a water the record calls depleted is
  * stopped the same way (`fishedOut`, read by foodwaysLineOf below).
+ * BAR5-FOOD (LAW 3's `L3.foodLineStopped`): a catch the siege stops (`facts/catchStopped.js`, the mark leaf's own verdict
+ * on the fish trade) is stopped the same way.
  * @param {string} line @param {{ foodSources?: unknown, failedSource?: unknown }} record
- * @param {boolean} [fishedOut] every fish water the place has is depleted
+ * @param {boolean} [fishedOut] every fish water the place has is depleted, or the siege has stopped the catch
  * @returns {string}
  */
 function fedLineOf(line, record, fishedOut = false) {
@@ -230,7 +239,7 @@ export function foodwaysLineOf(settlement) {
   const record = s?.economicState?.foodSecurity?.foodRecord;
   const line = record?.foodwaysLine;
   if (!(typeof line === 'string' && line.trim())) return null;
-  const fed = tilledOneFrame(fedLineOf(line.trim(), record || {}, fishedOut(s?.economicState?.activeChains)), s);
+  const fed = farmedOneFrame(tilledOneFrame(fedLineOf(line.trim(), record || {}, fishedOut(s?.economicState?.activeChains) || catchStoppedBySiege(s)), s), s);
   // BAR4-HOUSES (H1 (iv), (v)): each culture sentence that presumes the market trading or a harvest in store is read
   // against the record it prints from (`data/foodwaysPrintSiblings.js`), its twin printed where refused.
   return resolveSiblingSentences(fed, FOODWAYS_PRINT_SIBLINGS, {
@@ -269,6 +278,47 @@ function tilledOneFrame(line, handed) {
   return line;
 }
 
+/** The roster's farmland, by the names the food land reads it (`generators/foodLand.js :: hasFarmland`, the same words). */
+const FARMING_HOUSE = /farmland|grain field|managed farmland/;
+
+/**
+ * BAR5-FOOD (LAW 3's `L3.foodModel`; REVIEW-BAR-5 C39597): THE ONE-SOURCE FRAME AGAINST THE ROSTER'S FARMLAND. The food
+ * record counts grain only where the land has grain fields, so a village whose Farmland sells "Grain at harvest" was
+ * told "What it puts on the table itself is the hunters' game." (13 of the census's 720, 2 of the fresh 300 at
+ * 600b7683a). The ledger's figures stand (the chair's standing ruling); the line is made true: where the line is the
+ * composer's one-source frame, its one source is not grain or the mill, and the record handed holds a live farmland
+ * house, the frame names the fields' grain first (`FRAMES.oneFarmed`, the same index; its flavour kept). Not under a
+ * siege (the outlying fields are the siege's, its own food note) and not where a famine failed the grain or the mill. A
+ * line the roster's holdings already answer (`FRAMES.oneTilled`) is left. The two- and three-source frames make the same
+ * claim of the whole table: where they name no grain or mill, the fields' clause goes before them (`FARMED_CLAUSE`; 2 of
+ * the sixty read towns). A record handed without its roster is read as before. Pure.
+ * @param {string} line @param {unknown} handed the record handed @returns {string}
+ */
+function farmedOneFrame(line, handed) {
+  const s = /** @type {{ institutions?: unknown, economicState?: { foodSecurity?: { hasSiege?: unknown, foodRecord?: { failedSource?: unknown } | null } | null } | null } | null | undefined} */ (handed);
+  if (!Array.isArray(s?.institutions)) return line;
+  const fs = s?.economicState?.foodSecurity;
+  if (fs?.hasSiege === true || stoppedBy(fs?.foodRecord?.failedSource).includes('grain')) return line;
+  for (let i = 0; i < FRAMES.one.length; i += 1) {
+    const [head, tail] = FRAMES.one[i].split('{A}');
+    if (!line.startsWith(head)) continue;
+    const source = /** @type {FoodSource[]} */ (Object.keys(SOURCE_PHRASES)).find((src) => SOURCE_PHRASES[src].some((p) => line.startsWith(`${head}${p}${tail}`)));
+    if (!source || source === 'grain' || source === 'mill') return line;
+    if (!liveInstitutions(s).some((inst) => FARMING_HOUSE.test(nativeSemanticName(/** @type {object} */ (inst)).toLowerCase()))) return line;
+    const phrase = /** @type {string} */ (SOURCE_PHRASES[source].find((p) => line.startsWith(`${head}${p}${tail}`)));
+    const rest = line.slice(`${head}${phrase}${tail}`.length);
+    return `${FRAMES.oneFarmed[i].replace('{A}', phrase)}${rest}`;
+  }
+  // the two- and three-source frames ("{A} and {B} anchor the table", "The table is {A}, with {B} beside it"): the same
+  // claim of the whole table, named without the fields' grain; the line keeps its words after the fields' clause.
+  if (!/ anchor the table\b|^The table is /.test(line) || sourcesNamedIn(line).some((src) => stoppedBy('grain').includes(src))) return line;
+  if (!liveInstitutions(s).some((inst) => FARMING_HOUSE.test(nativeSemanticName(/** @type {object} */ (inst)).toLowerCase()))) return line;
+  return `${FARMED_CLAUSE}${line.charAt(0).toLowerCase()}${line.slice(1)}`;
+}
+
+/** The fields' clause before a two- or three-source frame (BAR5-FOOD, `farmedOneFrame`). VETOABLE wording. */
+const FARMED_CLAUSE = 'Its own fields give it grain; beyond that, ';
+
 /**
  * THE FACTS the foodways sentences are read against: the food record's own readings of the state it was made under, the
  * two the sibling table declares (`data/foodwaysPrintSiblings.js`): the crises (`foodSecurity.hasSiege`,
@@ -285,7 +335,8 @@ function foodwaysFactsOf(handed) {
   const band = fs?.foodRecord?.band;
   return Object.freeze({
     crisis: Object.freeze({ active: kinds.length > 0, has: (/** @type {string} */ kind) => kinds.includes(kind) }),
-    famine: Object.freeze({ band: typeof band === 'string' ? band : null }),
+    // BAR5-FOOD (FD1): the band the page prints beside the ledger's (`facts/foodBandShown.js`), as `famine.js` gives both
+    famine: Object.freeze({ band: typeof band === 'string' ? band : null, shownBand: foodBandShownKey(fs?.foodRecord) }),
   });
 }
 

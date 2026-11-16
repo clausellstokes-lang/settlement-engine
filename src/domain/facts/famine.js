@@ -16,6 +16,7 @@
  * Pure: no randomness, no clock.
  */
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
+import { foodBandShownKey } from './foodBandShown.js';
 import { recordAllowsStarving } from '../foodSurplus.js';
 
 const HUNGRY_LABELS = new Set([FOOD_SECURITY_BANDS.famine.label, FOOD_SECURITY_BANDS.deficit.label]);
@@ -33,7 +34,7 @@ const HUNGRY_LABELS = new Set([FOOD_SECURITY_BANDS.famine.label, FOOD_SECURITY_B
 /**
  * THE ONE READER.
  * @param {unknown} record a settlement record (read as a `FamineRecord`)
- * @returns {Readonly<{ band: string|null, known: boolean, starvingAllowed: boolean, famine: boolean }>}
+ * @returns {Readonly<{ band: string|null, shownBand: string|null, known: boolean, starvingAllowed: boolean, famine: boolean }>}
  */
 export function famineOf(record) {
   const fs = /** @type {FamineRecord} */ (record)?.economicState?.foodSecurity;
@@ -43,6 +44,9 @@ export function famineOf(record) {
   const starvingAllowed = foodRecord ? recordAllowsStarving(foodRecord) : (label === null || HUNGRY_LABELS.has(label));
   return Object.freeze({
     band,
+    // BAR5-FOOD (the chair's FD1, vetoable by the owner): the band THE PAGE PRINTS (`foodBandShown.js`), which the vocabulary's
+    // `food` dimension reads; `band` stays the ledger's raw band for what must read the ledger (`starvingAllowed`, the gap grade)
+    shownBand: foodRecord ? foodBandShownKey(foodRecord) : null,
     known: foodRecord !== null || label !== null,
     starvingAllowed,
     famine: band === 'famine' || label === FOOD_SECURITY_BANDS.famine.label,
