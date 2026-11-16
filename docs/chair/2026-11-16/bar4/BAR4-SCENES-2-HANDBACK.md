@@ -86,6 +86,31 @@ Buying them back would mean re-forming my predecessor's cure (for example, a `tw
 - The changed lines do print in the 525 (seasoning planks 150, penned cattle 96, enchanting 1). In every one of those towns the new declaration still admits the line.
 - Instrument: `hash.mjs` and `diff.mjs` (scratch). They bear `goldenCorpus()` with `generateSettlementPipeline` at each tree, hash the JSON, and walk the leaves of any that differ.
 
+## The chair's ruling of 09:02 on the ceilings, and the one unprinted line
+
+The chair ruled at 09:02: the three size ceilings (and the prose byte row) are NAMED for the close's doors (ruling B3). No cure is re-formed to buy bytes back; "only a line that no town of either population prints would come out".
+
+I measured the arrival lines that 187c46f61 adds or declares over both populations at the tip (instrument: `books/twins.mjs`). Each figure is the number of towns whose arrival scene prints the line; the 720 come first, then the fresh 300.
+
+The six twins:
+
+| line | 720 | fresh 300 |
+|---|---|---|
+| "Timber is scarce in {n}…" | 1 (r2r-village-42) | 0 |
+| "A few planks stand seasoning…" | 1 (r2s-recently_betrayed-town-1) | 0 |
+| **"The saws of {n} are quiet most days, for want of timber to cut."** | **0** | **0** |
+| "The pens … stand half empty…" | 1 | 1 |
+| "The few cattle left in the pens of {n}…" | 0 | 1 (bar0-village-famine-rand-123) |
+| "Nobody in {n} sells enchanting by the hour…" | 3 | 1 |
+
+The declared lines all still print: sawn timber 6 and 6; stacks of planks 10 and 2; rasp of the saws 7 and 4; drovers 6 and 0; penned cattle 6 and 3; enchanting signs 10 and 5. The general desk's v6 is the only admitted line of the drawn pool in r2s-under_siege-hamlet-3 and r2s-under_siege-village-0, so it prints.
+
+SO ONE LINE OF MINE IS SUCH A LINE: the saws' twin prints in neither population. I have NOT taken it out, for two reasons:
+- It is the twin of "The rasp of the saws…" (`needs: timber at hand`), and the state it covers (that slot drawn where no timber is at hand) is reachable even though neither sample reaches it.
+- Without the twin, that state is refused rather than twinned, which BRIEF-BAR2's law on mute states forbids.
+
+This is for the chair's word.
+
 ## Registrations owed
 
 - Manifest entry owed (my predecessor's): `tests/generators/bar4ScenePresumption.test.js`.
@@ -97,7 +122,7 @@ No line is new or changed in Phase 1. My predecessor's list stands.
 
 ## What is left, in order
 
-1. **On the chair's word: the ceilings.** These are the worker bundle (+2449), the engine chunk, and the first-paint closure (+918 raw), plus the prose byte row (+489). Either the chair's ruling re-records them, or the cure is re-formed to buy the bytes back.
+1. **The ceilings: RULED (09:02, B3).** Named for the close's doors. The one line no town of either population prints (the saws' twin) waits on the chair's word.
 2. **On the chair's word: Phase 2, the `house at work` remainder** (13 of the 720, 11 of the fresh 300). The steps:
    - Merge `lane/bar4-record-2026-11-16` at the tip the chair names. This is ONE merge commit, and a conflict is a STOP.
    - The scene's `house at work` reads `src/domain/facts/houseInputAtHand.js`, and the `timber at hand` atom calls it too.
