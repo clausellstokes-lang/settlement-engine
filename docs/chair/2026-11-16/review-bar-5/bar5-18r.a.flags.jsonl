@@ -1,0 +1,9 @@
+{"id":"C40094","town":"bar0-village-calm-rand-25","sev":"MED","kind":"STATE","why":"names a live miller-vs-farming-household dispute; QUARRELS none, TENSIONS only generational divide, PAST has no such quarrel; no farming household in PEOPLE; miller sits on the Household Council","other":""}
+{"id":"C40087","town":"bar0-village-calm-rand-25","sev":"MED","kind":"LACKS","why":"market day where 'the roads bring buyers'; trade access is river only and HOUSES has only a Fish market, no market","other":""}
+{"id":"C40068","town":"bar0-village-calm-rand-25","sev":"LOW","kind":"LACKS","why":"arcaded market fronts define the principal square; HOUSES has only a Fish market, no general market","other":""}
+{"id":"C40276","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"says it can take a bad season without going hungry; Food is Pressured with a 2% deficit, and C40270 says a bad season would leave some short","other":"C40270"}
+{"id":"C40320","town":"bar0-village-calm-rand-25","sev":"LOW","kind":"BROKEN","why":"'Weak defences has left' subject and verb do not agree","other":""}
+{"id":"C40444","town":"bar0-village-calm-rand-25","sev":"MED","kind":"PAIR","why":"says nothing depends on arcane work, the village would make the same without a practitioner; page prints reliance on magic Present, medical, economic and infrastructure roles common","other":"C40438"}
+{"id":"C41069","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"BROKEN","why":"'Weak defences keeps' subject and verb do not agree","other":""}
+{"id":"C41203","town":"bar0-village-calm-rand-26","sev":"LOW","kind":"PAIR","why":"'No arcane practitioners on the rolls' beside an archdruid, a Druid Circle offering nature magic services, and druidic food provision (reliance Relied upon)","other":"C41220"}
+{"id":"DONE","lines":1548,"blocks":2,"flags":8}
