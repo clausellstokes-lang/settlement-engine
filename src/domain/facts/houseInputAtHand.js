@@ -125,7 +125,7 @@ const wholeTokens = (a, b) => { const x = sing(norm(a)), y = sing(norm(b)); retu
 export function localProducerSupplies(requirement, institutions) {
   const rule = LOCAL_PRODUCERS.find((candidate) => candidate.requirement.test(requirement));
   if (!rule) return false;
-  return nativeSemanticNames(/** @type {any[]} */ (institutions)).some((name) => rule.institution.test(name));
+  return nativeSemanticNames(institutions).some((name) => rule.institution.test(name));
 }
 
 /**
@@ -160,12 +160,12 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   if (words.some((w) => holds(native, w)) || rawNames.some((n) => holds(native, n))) return 'local';
   // What the town makes names the RAW good itself (never the chain's product).
   if (arr(es.localProduction).some((e) => rawNames.some((n) => wholeTokens(str(e), n)))) return 'local';
-  if (localProducerSupplies(raw, liveInstitutions(/** @type {any} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
+  if (localProducerSupplies(raw, liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
 
   // The route, where no siege shuts it.
   const besieged = arr(config.stressTypes).includes('under_siege');
   if (!besieged && hasTradeRouteConnection(str(config.tradeRouteAccess))
-    && (spec?.route || institutionHasAnyTag(/** @type {any} */ (house || {}), [...ROUTE_HOUSE_TAGS]))) return 'route';
+    && (spec?.route || institutionHasAnyTag(house || {}, [...ROUTE_HOUSE_TAGS]))) return 'route';
 
   // The imports bring the raw good; the food record names the source or imports the staple.
   const imports = arr(es.primaryImports).map(str);
@@ -190,7 +190,7 @@ const SAWN_GOODS = Object.freeze(['Milled timber', 'Milled lumber']);
  * @param {string} good the output asked about
  * @param {ReadonlyArray<string>} nearbyResources the town's resource keys @param {ReadonlyArray<string>} depletedResources
  * @param {ReadonlyArray<unknown> | null | undefined} institutions the roster
- * @param {(house: any) => boolean} isSawmill the caller's own test of a sawmill (its gate's keyword)
+ * @param {(house: unknown) => boolean} isSawmill the caller's own test of a sawmill (its gate's keyword)
  * @param {Readonly<Record<string, { rawResource?: unknown }>>} chains the chain table (`RESOURCE_CHAINS`, the caller's)
  * @returns {boolean} true unless the good is a sawn good and no sawmill of the roster has its timber
  */
@@ -199,7 +199,7 @@ export function sawnGoodFed(good, nearbyResources, depletedResources, institutio
   const depleted = new Set(arr(depletedResources).map((r) => resourceKeyForLabel(str(r)) || str(r)));
   const record = { config: { nearbyResources: arr(nearbyResources).map(str).filter((k) => !depleted.has(k)) }, economicState: {}, institutions };
   return institutions.filter((i) => !!i && isSawmill(i))
-    .some((house) => houseInputAtHand(record, 'timber', /** @type {any} */ (house), chains.timber) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {any} */ (house), chains.mountainTimber) !== 'missing');
+    .some((house) => houseInputAtHand(record, 'timber', /** @type {Parameters<typeof houseInputAtHand>[2]} */ (house), chains.timber) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {Parameters<typeof houseInputAtHand>[2]} */ (house), chains.mountainTimber) !== 'missing');
 }
 
 /**
@@ -235,7 +235,8 @@ export const houseRunsChain = (chain, name) => {
 /**
  * The chains a house runs, as `[chainKey, chain]` (`houseRunsChain`).
  * @param {unknown} name
- * @param {Readonly<Record<string, unknown>>} chains the chain table (`RESOURCE_CHAINS`, the caller's: WEAVE ST-2)
- * @returns {Array<[string, any]>}
+ * @template {{ processingInstitutions?: ReadonlyArray<string> } | null | undefined} C
+ * @param {Readonly<Record<string, C>>} chains the chain table (`RESOURCE_CHAINS`, the caller's: WEAVE ST-2)
+ * @returns {Array<[string, C]>}
  */
-export const chainsOfHouse = (name, chains) => Object.entries(chains).filter(([, c]) => houseRunsChain(/** @type {any} */ (c), name));
+export const chainsOfHouse = (name, chains) => Object.entries(chains).filter(([, c]) => houseRunsChain(c, name));

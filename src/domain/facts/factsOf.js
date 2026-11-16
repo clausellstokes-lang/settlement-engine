@@ -154,15 +154,20 @@ export function factsOf(record, options = {}) {
 }
 
 /** @typedef {{ id?: unknown, institution?: { kind?: unknown, family?: unknown, title?: unknown } | null, memberships?: Array<{ power?: unknown, rank?: unknown } | null> }} PairCard */
-/** The pair's two cards, as the record's roster holds them. @param {any} record @param {unknown} pair @returns {[PairCard, PairCard] | null} */
+/** @typedef {{ npcs?: unknown, relationships?: unknown } | null | undefined} PairRecord the record slice the pair readers read */
+/** The pair's two cards, as the record's roster holds them. @param {PairRecord} record @param {unknown} pair @returns {[PairCard, PairCard] | null} */
 function pairCardsOf(record, pair) {
   if (!Array.isArray(pair) || pair.length !== 2) return null;
-  const roster = Array.isArray(record?.npcs) ? record.npcs : [];
-  const held = (/** @type {any} */ c) => (c && typeof c === 'object' ? roster.find((/** @type {any} */ n) => n && c.id != null && String(n.id) === String(c.id)) || c : null);
+  const roster = /** @type {ReadonlyArray<PairCard | null | undefined>} */ (Array.isArray(record?.npcs) ? record.npcs : []);
+  const held = (/** @type {unknown} */ x) => {
+    if (!x || typeof x !== 'object') return null;
+    const c = /** @type {PairCard} */ (x);
+    return roster.find((n) => n && c.id != null && String(n.id) === String(c.id)) || c;
+  };
   const a = held(pair[0]), b = held(pair[1]);
   return a && b ? [a, b] : null;
 }
-/** BAR4-PEOPLE (11:07): one house's family or face, or either heads a power the other sits in. @param {any} record @param {unknown} pair @returns {boolean | undefined} */
+/** BAR4-PEOPLE (11:07): one house's family or face, or either heads a power the other sits in. @param {PairRecord} record @param {unknown} pair @returns {boolean | undefined} */
 function pairPlaceOf(record, pair) {
   const cards = pairCardsOf(record, pair);
   if (!cards || !cards[0].institution || !cards[1].institution) return undefined;
@@ -172,12 +177,13 @@ function pairPlaceOf(record, pair) {
   const heads = (/** @type {PairCard} */ x, /** @type {PairCard} */ y) => (x.memberships || []).some((m) => m?.rank === 1 && m.power && (y.memberships || []).some((n) => n?.power === m.power));
   return heads(a, b) || heads(b, a);
 }
-/** BAR4-PEOPLE (11:07): at most one tie between the two in the record's relationships. @param {any} record @param {unknown} pair @returns {boolean | undefined} */
+/** BAR4-PEOPLE (11:07): at most one tie between the two in the record's relationships. @param {PairRecord} record @param {unknown} pair @returns {boolean | undefined} */
 function pairLoneOf(record, pair) {
   const cards = pairCardsOf(record, pair);
-  if (!cards || !Array.isArray(record?.relationships)) return undefined;
+  const ties = /** @type {ReadonlyArray<{ from?: unknown, to?: unknown } | null | undefined> | null} */ (Array.isArray(record?.relationships) ? record.relationships : null);
+  if (!cards || !ties) return undefined;
   const [a, b] = cards.map((c) => String(c.id ?? ''));
-  return record.relationships.filter((/** @type {any} */ t) => t && ((String(t.from) === a && String(t.to) === b) || (String(t.from) === b && String(t.to) === a))).length <= 1;
+  return ties.filter((t) => t && ((String(t.from) === a && String(t.to) === b) || (String(t.from) === b && String(t.to) === a))).length <= 1;
 }
 
 /**

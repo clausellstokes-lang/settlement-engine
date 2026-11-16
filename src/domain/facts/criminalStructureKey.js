@@ -84,8 +84,8 @@ export function criminalStructureKeyOf(settlement) {
 export function covertCrimeHeld(settlement) {
   const income = settlement?.economicState?.incomeSources;
   const services = /** @type {{ criminal?: unknown } | null | undefined} */ (settlement?.availableServices)?.criminal;
-  return (Array.isArray(income) && income.some((/** @type {any} */ row) => row?.isCriminal === true && Number(row?.percentage) > 0))
-    || (Array.isArray(services) && services.some((/** @type {any} */ x) => x?.institution === '(covert)'));
+  return (Array.isArray(income) && income.some((/** @type {{ isCriminal?: unknown, percentage?: unknown } | null | undefined} */ row) => row?.isCriminal === true && Number(row?.percentage) > 0))
+    || (Array.isArray(services) && services.some((/** @type {{ institution?: unknown } | null | undefined} */ x) => x?.institution === '(covert)'));
 }
 
 /** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
