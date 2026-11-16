@@ -1,0 +1,2723 @@
+[
+ {
+  "law": "L9",
+  "rule": "9c.fish-stopped",
+  "town": "bar0-city-under_siege+famine-rand-27",
+  "tab": "Systems/Economics",
+  "line": "Its own food is the day's catch.",
+  "sentence": "Its own food is the day's catch.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Fish market · Economy (marked)"
+  },
+  "why": "the page marks the fishing stopped (\"Fish market · Economy (marked)\"); this food line puts the catch on the table unmarked",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "Its own food is the day's catch."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-city-under_siege+famine-rand-30",
+  "tab": "Systems/Defense",
+  "line": "Offenders at Khutulunserai are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "sentence": "Offenders at Khutulunserai are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "Offenders at X are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-city-under_siege+famine-rand-31",
+  "tab": "Systems/Defense",
+  "line": "The garrison and city watch are held for the defence, and few patrols can be spared from it. A functioning court and prison mean crimes carry real consequences. The gates are shut against the siege, and the garrison and city watch hold them. Hired swords back the garrison when the purse allows.",
+  "sentence": "A functioning court and prison mean crimes carry real consequences.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "A functioning court and prison mean crimes carry real consequences."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-city-under_siege+famine-rand-32",
+  "tab": "Systems/Defense",
+  "line": "The garrison and city watch are held for the defence, and few patrols can be spared from it. Thieves here know that the court sits and the cells are real. The gates are shut against the siege, and the garrison and city watch hold them. Hired swords back the garrison when the purse allows.",
+  "sentence": "Thieves here know that the court sits and the cells are real.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "Thieves here know that the court sits and the cells are real."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-city-under_siege+famine-rand-32",
+  "tab": "Systems/Defense",
+  "line": "Offenders at Indragarh are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "sentence": "Offenders at Indragarh are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "Offenders at X are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.leans",
+  "town": "bar0-city-under_siege+famine-rand-32",
+  "tab": "Systems/Magic",
+  "line": "At Indragarh the usual work no longer yields enough medical treatment, and the trade that makes it now leans on help beyond ordinary work.",
+  "sentence": "At Indragarh the usual work no longer yields enough medical treatment, and the trade that makes it now leans on help beyond ordinary work.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Relied upon · for Spellcasting Services · supplied by Mages' guild, Scroll scribe, Enchanter's shop, Houses of worship and Cathedral / Medical role: absent"
+  },
+  "why": "the reliance row names Spellcasting Services and Medical role: absent; this line says the trade making medical treatment (Hospital & Surgery) leans on magic",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "At X the usual work no longer yields enough medical treatment, and the trade that makes it now leans on help beyond ordinary work."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.military",
+  "town": "bar0-city-under_siege+famine-rand-34",
+  "tab": "Systems/Magic",
+  "line": "People at Chernoburg know that part of the city's work now holds up only with help beyond ordinary labour. The soldiers at Chernoburg command its magic: the arcane houses answer to them, and their work goes first to the city's defence.",
+  "sentence": "The soldiers at Chernoburg command its magic: the arcane houses answer to them, and their work goes first to the city's defence.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant oligarchy; Backs · Merchant oligarchy; Backs · Merchant oligarchy (every arcane house)"
+  },
+  "why": "the page prints \"Backs · Merchant oligarchy; Backs · Merchant oligarchy; Backs · Merchant oligarchy (every arcane house)\"; this line puts the town's magic under its soldiers",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "The soldiers at X command its magic: the arcane houses answer to them, and their work goes first to the <tier>'s defence."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-city-under_siege+famine-rand-36",
+  "tab": "Systems/Defense",
+  "line": "The garrison and city watch are held for the defence, and few patrols can be spared from it. A functioning court and prison mean crimes carry real consequences. The gates are shut against the siege, and the garrison and city watch hold them. Hired swords back the garrison when the purse allows.",
+  "sentence": "A functioning court and prison mean crimes carry real consequences.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "A functioning court and prison mean crimes carry real consequences."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-city-under_siege+famine-rand-36",
+  "tab": "Systems/Defense",
+  "line": "Offenders at Lagoorum are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "sentence": "Offenders at Lagoorum are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "Offenders at X are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-city-under_siege+famine-rand-37",
+  "tab": "Systems/Defense",
+  "line": "The garrison and city watch are held for the defence, and few patrols can be spared from it. A functioning court and prison mean crimes carry real consequences. The gates are shut against the siege, and the garrison and city watch hold them.",
+  "sentence": "A functioning court and prison mean crimes carry real consequences.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "A functioning court and prison mean crimes carry real consequences."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-city-under_siege+famine-rand-37",
+  "tab": "Systems/Defense",
+  "line": "Offenders at Neugasse are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "sentence": "Offenders at Neugasse are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "Offenders at X are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.quietly",
+  "town": "bar0-city-under_siege+famine-rand-39",
+  "tab": "Summary/Overview",
+  "line": "The approach to Kallipolis is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls. Nobody in Kallipolis sells enchanting by the hour, and what magic is done here is done quietly. Two citizens argue a point of law loudly enough for the neighbours to stop and listen.",
+  "sentence": "Nobody in Kallipolis sells enchanting by the hour, and what magic is done here is done quietly.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Spellcasting Services · Arcane & magical○ Operational / Outputs Spellcasting (minor) · Magical identification · Enchanting services"
+  },
+  "why": "the page prints \"Spellcasting Services · Arcane & magical○ Operational / Outputs Spellcasting (minor) · Magical identification · Enchanting services\"; this line says nobody sells enchanting and magic is done quietly",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "Nobody in X sells enchanting by the hour, and what magic is done here is done quietly."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.military",
+  "town": "bar0-city-under_siege+famine-rand-40",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Tihovich, the trade that makes its game meat would yield less than it does now. Arcane work at Tihovich answers to its military, and the practitioners' own books show it: defence work first, paying work after.",
+  "sentence": "Arcane work at Tihovich answers to its military, and the practitioners' own books show it: defence work first, paying work after.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Backs · Royal Authority (every arcane house)"
+  },
+  "why": "the page prints \"Backs · Royal Authority (every arcane house)\"; this line puts the town's magic under its soldiers",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "Arcane work at X answers to its military, and the practitioners' own books show it: defence work first, paying work after."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.wave",
+  "town": "bar0-city-wartime-rand-28",
+  "tab": "Systems/Defense",
+  "line": "Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.",
+  "sentence": "It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"
+  },
+  "why": "the page prints the crime-wave tension (\"Crime is rising faster than those in charge can answer it\"); this line says crime is kept down",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.if-help",
+  "town": "bar0-city-wartime-rand-28",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Tlalhuacan, the trade that makes its preserved foods would yield less than it does now.",
+  "sentence": "If the help beyond ordinary work failed at Tlalhuacan, the trade that makes its preserved foods would yield less than it does now.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Relied upon · for Spellcasting Services · supplied by Mages' guild, Scroll scribe, Houses of worship and Cathedral"
+  },
+  "why": "the reliance row names Spellcasting Services; this line names the trade making preserved foods (Livestock & Dairy; the record's chain note backs it: WEAK)",
+  "held": null,
+  "status": "apart",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its preserved foods would yield less than it does now."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.pay",
+  "town": "bar0-city-wartime-rand-31",
+  "tab": "Systems/Defense",
+  "line": "The garrison and city watch are well paid, well equipped and patrol properly. They come when called, and though some take bribes, it is not the custom. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls. Hired swords back the garrison when the purse allows.",
+  "sentence": "The garrison and city watch are well paid, well equipped and patrol properly.",
+  "against": {
+   "tab": "World/NPCs",
+   "line": "Keeps order while money is short, when trouble grows and the pay for stopping it shrinks."
+  },
+  "why": "the page prints \"Keeps order while money is short, when trouble grows and the pay for stopping it shrinks.\"; this line says the forces are well paid",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "The garrison and <tier> watch are well paid, well equipped and patrol properly."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.military",
+  "town": "bar0-city-wartime-rand-31",
+  "tab": "Systems/Magic",
+  "line": "At Treshaw the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work. Arcane work at Treshaw answers to its military, and the practitioners' own books show it: defence work first, paying work after.",
+  "sentence": "Arcane work at Treshaw answers to its military, and the practitioners' own books show it: defence work first, paying work after.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Backs · Merchant Guild Council; Backs · Merchant Guilds; Backs · Merchant Guild Council; Backs · Merchant Guild Council (every arcane house)"
+  },
+  "why": "the page prints \"Backs · Merchant Guild Council; Backs · Merchant Guilds; Backs · Merchant Guild Council; Backs · Merchant Guild Council (every arcane house)\"; this line puts the town's magic under its soldiers",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "Arcane work at X answers to its military, and the practitioners' own books show it: defence work first, paying work after."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.if-help",
+  "town": "bar0-city-wartime-rand-32",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Kaltenturm, the trade that makes its preserved foods would yield less than it does now.",
+  "sentence": "If the help beyond ordinary work failed at Kaltenturm, the trade that makes its preserved foods would yield less than it does now.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Integral · for Reed & Marsh Harvest and Spellcasting Services · supplied by Mages' guild, Golem workforce and Sigrid Moser"
+  },
+  "why": "the reliance row names Reed & Marsh Harvest and Spellcasting Services; this line names the trade making preserved foods (Livestock & Dairy; the record's chain note backs it: WEAK)",
+  "held": null,
+  "status": "apart",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its preserved foods would yield less than it does now."
+ },
+ {
+  "law": "L9",
+  "rule": "9f.loyal-contested",
+  "town": "bar0-city-wartime-rand-34",
+  "tab": "Summary/Overview",
+  "line": "Zelenonick is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. Corrupt City Council signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.",
+  "sentence": "The settlement is loyal.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Public legitimacy · Contested"
+  },
+  "why": "the page prints \"Public legitimacy · Contested\"; this line says the settlement is loyal (Contested, not a crisis: apart)",
+  "held": null,
+  "status": "apart",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "The settlement is loyal."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.military",
+  "town": "bar0-city-wartime-rand-35",
+  "tab": "Systems/Magic",
+  "line": "People at Tyrhammer know that part of the city's work now holds up only with help beyond ordinary labour. The soldiers at Tyrhammer command its magic: the arcane houses answer to them, and their work goes first to the city's defence.",
+  "sentence": "The soldiers at Tyrhammer command its magic: the arcane houses answer to them, and their work goes first to the city's defence.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Backs · Corrupt City Council; Backs · Corrupt City Council (every arcane house)"
+  },
+  "why": "the page prints \"Backs · Corrupt City Council; Backs · Corrupt City Council (every arcane house)\"; this line puts the town's magic under its soldiers",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "The soldiers at X command its magic: the arcane houses answer to them, and their work goes first to the <tier>'s defence."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.purse",
+  "town": "bar0-city-wartime-rand-36",
+  "tab": "Systems/Economics",
+  "line": "With a little left over each year, Eassike gets by on a broad base of trades, and every year people argue over how to spend it.",
+  "sentence": "With a little left over each year, Eassike gets by on a broad base of trades, and every year people argue over how to spend it.",
+  "against": {
+   "tab": "World/Relationships",
+   "line": "Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since."
+  },
+  "why": "the page prints \"Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since.\" — the treasury of Clíodhna O'Dwyer (the mint master · Mint (official)); this line says the town's purse has something over",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.purse",
+  "town": "bar0-city-wartime-rand-36",
+  "tab": "World/Daily Life",
+  "line": "Eassike's treasury takes in a little more than it pays out each year. It is enough, and no more.",
+  "sentence": "Eassike's treasury takes in a little more than it pays out each year.",
+  "against": {
+   "tab": "World/Relationships",
+   "line": "Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since."
+  },
+  "why": "the page prints \"Clíodhna O'Dwyer's treasury borrowed from Tlachtga O'Meara to cover a bad harvest and has borrowed every year since.\" — the treasury of Clíodhna O'Dwyer (the mint master · Mint (official)); this line says the town's purse has something over",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "X's treasury takes in a little more than it pays out each year."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.if-help",
+  "town": "bar0-city-wartime-rand-39",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Naranjobalam, the trade that makes its baked goods would yield less than it does now.",
+  "sentence": "If the help beyond ordinary work failed at Naranjobalam, the trade that makes its baked goods would yield less than it does now.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Relied upon · for Alchemy & Reagents, Spellcasting Services and Magical Items & Enchanting · supplied by Mages' guild, Scroll scribe, Enchanter's shop, Elder Grove Council and Alchemist quarter"
+  },
+  "why": "the reliance row names Alchemy & Reagents, Spellcasting Services and Magical Items & Enchanting; this line names the trade making baked goods (Grain & Bread; the record's chain note backs it: WEAK)",
+  "held": null,
+  "status": "apart",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its baked goods would yield less than it does now."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.manned",
+  "town": "bar0-city-wartime-rand-40",
+  "tab": "Systems/Defense",
+  "line": "Khānmandi's accounts keep its city walls and gates in repair and stretch no further, so the defences stand and too few people man them.",
+  "sentence": "Khānmandi's accounts keep its city walls and gates in repair and stretch no further, so the defences stand and too few people man them.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "With the war on, Khānmandi's people under arms and its works are both in good order, and the city means to keep them so."
+  },
+  "why": "the page prints \"With the war on, Khānmandi's people under arms and its works are both in good order, and the city means to keep them so.\"; this line says too few people man the walls",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "X's accounts keep its <tier> walls and gates in repair and stretch no further, so the defences stand and too few people man them."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.if-help",
+  "town": "bar0-city-wartime-rand-40",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Khānmandi, the trade that makes its river fish would yield less than it does now.",
+  "sentence": "If the help beyond ordinary work failed at Khānmandi, the trade that makes its river fish would yield less than it does now.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Relied upon · for Divine & Magical Healing and Spellcasting Services · supplied by Mages' guild, Elder Grove Council, Houses of worship, Cathedral and Multiple monasteries"
+  },
+  "why": "the reliance row names Divine & Magical Healing and Spellcasting Services; this line names the trade making river fish (River Fishing; the record's chain note backs it: WEAK)",
+  "held": null,
+  "status": "apart",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its river fish would yield less than it does now."
+ },
+ {
+  "law": "L9",
+  "rule": "9f.loyal",
+  "town": "bar0-city-wartime-rand-40",
+  "tab": "Summary/Overview",
+  "line": "Khānmandi is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. Noble Governorship signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.",
+  "sentence": "The settlement is loyal.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Public legitimacy · Legitimacy crisis"
+  },
+  "why": "the page prints \"Public legitimacy · Legitimacy crisis\"; this line says the settlement is loyal",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "The settlement is loyal."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.manned",
+  "town": "bar0-city-wartime-rand-41",
+  "tab": "Systems/Defense",
+  "line": "Dobroburg's accounts keep its city walls and gates in repair and stretch no further, so the defences stand and too few people man them.",
+  "sentence": "Dobroburg's accounts keep its city walls and gates in repair and stretch no further, so the defences stand and too few people man them.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "With the war on, Dobroburg's people under arms and its works are both in good order, and the city means to keep them so."
+  },
+  "why": "the page prints \"With the war on, Dobroburg's people under arms and its works are both in good order, and the city means to keep them so.\"; this line says too few people man the walls",
+  "held": null,
+  "status": "count",
+  "tier": "city",
+  "crises": [
+   "wartime"
+  ],
+  "form": "X's accounts keep its <tier> walls and gates in repair and stretch no further, so the defences stand and too few people man them."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-hamlet-calm-rand-27",
+  "tab": "Systems/Defense",
+  "line": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "sentence": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-hamlet-calm-rand-27",
+  "tab": "Systems/Defense",
+  "line": "Things go missing at Gangapur, taken by whoever saw the chance; with no gang behind it, it is less dangerous and harder to stop.",
+  "sentence": "Things go missing at Gangapur, taken by whoever saw the chance; with no gang behind it, it is less dangerous and harder to stop.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Things go missing at X, taken by whoever saw the chance; with no gang behind it, it is less dangerous and harder to stop."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-28",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-hamlet-calm-rand-29",
+  "tab": "Systems/Defense",
+  "line": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "sentence": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-hamlet-calm-rand-29",
+  "tab": "Systems/Defense",
+  "line": "The danger at Skálgarde comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "sentence": "The danger at Skálgarde comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "The danger at X comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-30",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-31",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Collapsed",
+  "sentence": "Law & order · Collapsed",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Collapsed on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Collapsed"
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-hamlet-calm-rand-31",
+  "tab": "Systems/Economics",
+  "line": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "sentence": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 13% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 13% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "A little changes hands here quietly, between neighbours, and no one reckons it up."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.heresy",
+  "town": "bar0-hamlet-calm-rand-32",
+  "tab": "World/Faith",
+  "line": "The faithful of Raskot treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+  "sentence": "The faithful of Raskot treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Religious acceptance · indifferent"
+  },
+  "why": "the Magic tab prints \"Religious acceptance · indifferent\"; this Faith line says the faithful hunt magic as heresy",
+  "held": null,
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "The faithful of X treat magic as heresy and hunt it as such: a suspicion is enough to bring the neighbours to the door."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-33",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-34",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Collapsed",
+  "sentence": "Law & order · Collapsed",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Collapsed on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Collapsed"
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-hamlet-calm-rand-34",
+  "tab": "Systems/Economics",
+  "line": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "sentence": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 15% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 15% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "A little changes hands here quietly, between neighbours, and no one reckons it up."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-35",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-36",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-37",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-38",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-39",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9b.subsistence",
+  "town": "bar0-hamlet-calm-rand-40",
+  "tab": "Systems/Economics",
+  "line": "Subsistence — survival economy",
+  "sentence": "Subsistence — survival economy",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Comfortable"
+  },
+  "why": "the page prints Prosperity Comfortable; the economy's label reads a survival economy",
+  "held": null,
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Subsistence — survival economy"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-hamlet-calm-rand-41",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9b.subsistence",
+  "town": "bar0-hamlet-calm-rand-41",
+  "tab": "Systems/Economics",
+  "line": "Subsistence — survival economy",
+  "sentence": "Subsistence — survival economy",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Comfortable"
+  },
+  "why": "the page prints Prosperity Comfortable; the economy's label reads a survival economy (the page itself says \"a subsistence living\": WEAK, only \"survival\" is off)",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "Subsistence — survival economy"
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-hamlet-calm-rand-41",
+  "tab": "Systems/Economics",
+  "line": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "sentence": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 11% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 11% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "A little changes hands here quietly, between neighbours, and no one reckons it up."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-hamlet-calm-rand-41",
+  "tab": "Systems/Economics",
+  "line": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.",
+  "sentence": "What passes for a shadow economy here has never grown into one.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 11% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 11% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [],
+  "form": "What passes for a shadow economy here has never grown into one."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-hamlet-under_siege-rand-29",
+  "tab": "Systems/Economics",
+  "line": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "sentence": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 11% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 11% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "A little changes hands here quietly, between neighbours, and no one reckons it up."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.fish-stopped",
+  "town": "bar0-hamlet-under_siege-rand-29",
+  "tab": "Systems/Economics",
+  "line": "Each holding grows for its own table, and beyond that its food is fish from the local waters.",
+  "sentence": "Each holding grows for its own table, and beyond that its food is fish from the local waters.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Fisher's landing · Economy (marked)"
+  },
+  "why": "the page marks the fishing stopped (\"Fisher's landing · Economy (marked)\"); this food line puts the catch on the table unmarked",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "Each holding grows for its own table, and beyond that its food is fish from the local waters."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-hamlet-under_siege-rand-30",
+  "tab": "Systems/Economics",
+  "line": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "sentence": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 11% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 11% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "A little changes hands here quietly, between neighbours, and no one reckons it up."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-hamlet-under_siege-rand-30",
+  "tab": "Systems/Economics",
+  "line": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.",
+  "sentence": "What passes for a shadow economy here has never grown into one.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 11% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 11% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "What passes for a shadow economy here has never grown into one."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-32",
+  "tab": "Systems/Defense",
+  "line": "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "sentence": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "A thief is known by name within a day, and everyone shuns them until they make it right."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.fish-stopped",
+  "town": "bar0-hamlet-under_siege-rand-37",
+  "tab": "Systems/Economics",
+  "line": "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch. Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+  "sentence": "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Fisher's landing · Economy (marked)"
+  },
+  "why": "the page marks the fishing stopped (\"Fisher's landing · Economy (marked)\"); this food line puts the catch on the table unmarked",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-hamlet-under_siege-rand-38",
+  "tab": "Systems/Defense",
+  "line": "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "sentence": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "A thief is known by name within a day, and everyone shuns them until they make it right."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-hamlet-under_siege-rand-39",
+  "tab": "Systems/Economics",
+  "line": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "sentence": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 11% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 11% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "A little changes hands here quietly, between neighbours, and no one reckons it up."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.fish-stopped",
+  "town": "bar0-hamlet-under_siege-rand-39",
+  "tab": "Systems/Economics",
+  "line": "The table is cheese and smoked meat from the grazing herds, with salted fish beside it. Herd cycles and winter fodder matter as much as harvests to food security.",
+  "sentence": "The table is cheese and smoked meat from the grazing herds, with salted fish beside it.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Fisher's landing · Economy (marked)"
+  },
+  "why": "the page marks the fishing stopped (\"Fisher's landing · Economy (marked)\"); this food line puts the catch on the table unmarked",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "tier": "hamlet",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "The table is cheese and smoked meat from the grazing herds, with salted fish beside it."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.if-help",
+  "town": "bar0-metropolis-calm-rand-30",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Agioscastron, the trade that makes its honey and beeswax would yield less than it does now.",
+  "sentence": "If the help beyond ordinary work failed at Agioscastron, the trade that makes its honey and beeswax would yield less than it does now.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Relied upon · for Herbalism & Remedies · supplied by Houses of worship and Great cathedral"
+  },
+  "why": "the reliance row names Herbalism & Remedies; this line names the trade making honey and beeswax (Foraging & Smallholding; the record's chain note backs it: WEAK)",
+  "held": null,
+  "status": "apart",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its honey and beeswax would yield less than it does now."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.if-help",
+  "town": "bar0-metropolis-calm-rand-32",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Rathsike, the trade that makes its baked goods would yield less than it does now.",
+  "sentence": "If the help beyond ordinary work failed at Rathsike, the trade that makes its baked goods would yield less than it does now.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Integral · for Iron & Metalwork, Fuel & Heating, Smelting & Refining, Spellcasting Services, Magical Items & Enchanting, Planar Trade and Divine & Magical Healing · supplied by Mages' district, Academy of magic, Enchanter's shop, Scroll scribe, Teleportation circle, Planar embassy, Planar traders, Golem workforce, Undead labor, Dream parlors, Message network, Houses of worship, Major monasteries and 3 practitioners"
+  },
+  "why": "the reliance row names Iron & Metalwork, Fuel & Heating, Smelting & Refining, Spellcasting Services, Magical Items & Enchanting, Planar Trade and Divine & Magical Healing; this line names the trade making baked goods (Grain & Bread; the record's chain note backs it: WEAK)",
+  "held": null,
+  "status": "apart",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its baked goods would yield less than it does now."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.putby",
+  "town": "bar0-metropolis-calm-rand-35",
+  "tab": "Systems/Defense",
+  "line": "The metropolis could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it. The food trades at Sundhavn are struggling to keep up, and less is being put by against the metropolis being cut off than ought to be.",
+  "sentence": "The food trades at Sundhavn are struggling to keep up, and less is being put by against the metropolis being cut off than ought to be.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Food endurance: Under siege the outlying fields would be lost; the granary would carry the metropolis for more than a year at full rations, more than two years on half, and what is still harvested would stretch it further."
+  },
+  "why": "the same panel prints \"Food endurance: Under siege the outlying fields would be lost; the granary would carry the metropolis for more than a year at full rations, more than two years on half, and what is still harvested would stretch it further.\"; this line says less is put by than ought to be",
+  "held": null,
+  "status": "count",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "The food trades at X are struggling to keep up, and less is being put by against the <tier> being cut off than ought to be."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.leans",
+  "town": "bar0-metropolis-calm-rand-35",
+  "tab": "Systems/Magic",
+  "line": "At Sundhavn the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work.",
+  "sentence": "At Sundhavn the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Relied upon · for Divine & Magical Healing · supplied by Houses of worship and Great cathedral"
+  },
+  "why": "the reliance row names Divine & Magical Healing; this line says the trade making baked goods (Grain & Bread) leans on magic",
+  "held": null,
+  "status": "count",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "At X the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.structure",
+  "town": "bar0-metropolis-calm-rand-36",
+  "tab": "Systems/Defense",
+  "line": "Crime exists but is well-managed. The garrison is present and responsive. Petty theft is the primary risk; organized crime has a limited foothold. With a working court, organised crime treads carefully. The walls keep most trouble outside.",
+  "sentence": "Petty theft is the primary risk; organized crime has a limited foothold.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Criminal structure: Organized syndicate"
+  },
+  "why": "the page prints \"Criminal structure: Organized syndicate\"; this line says organised crime has a limited foothold",
+  "held": null,
+  "status": "count",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "Petty theft is the primary risk; organized crime has a limited foothold."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-metropolis-calm-rand-38",
+  "tab": "Systems/Magic",
+  "line": "People at Varapuram know that part of the metropolis's work now holds up only with help beyond ordinary labour.",
+  "sentence": "People at Varapuram know that part of the metropolis's work now holds up only with help beyond ordinary labour.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "People at X know that part of the <tier>'s work now holds up only with help beyond ordinary labour."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.structure",
+  "town": "bar0-metropolis-calm-rand-39",
+  "tab": "Systems/Defense",
+  "line": "Crime is on the rise. The garrison is present and responsive. Petty theft is the primary risk; organized crime has a limited foothold. With a working court, organised crime treads carefully. The walls keep most trouble outside.",
+  "sentence": "Petty theft is the primary risk; organized crime has a limited foothold.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Criminal structure: Organized syndicate"
+  },
+  "why": "the page prints \"Criminal structure: Organized syndicate\"; this line says organised crime has a limited foothold",
+  "held": null,
+  "status": "count",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "Petty theft is the primary risk; organized crime has a limited foothold."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.wave",
+  "town": "bar0-metropolis-calm-rand-39",
+  "tab": "Systems/Defense",
+  "line": "The metropolis's record of crimes at Albamunicipium stays short: there is crime, but enforcement keeps it down and keeps it from growing.",
+  "sentence": "The metropolis's record of crimes at Albamunicipium stays short: there is crime, but enforcement keeps it down and keeps it from growing.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"
+  },
+  "why": "the page prints the crime-wave tension (\"Crime is rising faster than those in charge can answer it\"); this line says crime is kept down",
+  "held": null,
+  "status": "count",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "The <tier>'s record of crimes at X stays short: there is crime, but enforcement keeps it down and keeps it from growing."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.if-help",
+  "town": "bar0-metropolis-calm-rand-41",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Neuhausen, the trade that makes its preserved foods would yield less than it does now.",
+  "sentence": "If the help beyond ordinary work failed at Neuhausen, the trade that makes its preserved foods would yield less than it does now.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Relied upon · for Spellcasting Services · supplied by Mages' district, Houses of worship and Great cathedral"
+  },
+  "why": "the reliance row names Spellcasting Services; this line names the trade making preserved foods (Livestock & Dairy; the record's chain note backs it: WEAK)",
+  "held": null,
+  "status": "apart",
+  "tier": "metropolis",
+  "crises": [],
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its preserved foods would yield less than it does now."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-thorp-calm-rand-28",
+  "tab": "Systems/Defense",
+  "line": "Crime is on the rise. Neighbours notice trouble and deal with it themselves. Petty theft is the primary risk; organized crime has found no foothold.",
+  "sentence": "Petty theft is the primary risk; organized crime has found no foothold.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Petty theft is the primary risk; organized crime has found no foothold."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-thorp-calm-rand-28",
+  "tab": "Systems/Defense",
+  "line": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "sentence": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-thorp-calm-rand-28",
+  "tab": "Systems/Defense",
+  "line": "Crime at Jalalbash is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy.",
+  "sentence": "Crime at Jalalbash is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Crime at X is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-thorp-calm-rand-29",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-thorp-calm-rand-32",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-thorp-calm-rand-34",
+  "tab": "Systems/Defense",
+  "line": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "sentence": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-thorp-calm-rand-34",
+  "tab": "Systems/Defense",
+  "line": "The danger at Loughshaw comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "sentence": "The danger at Loughshaw comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "thorp",
+  "crises": [],
+  "form": "The danger at X comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-thorp-calm-rand-35",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.balance",
+  "town": "bar0-thorp-calm-rand-35",
+  "tab": "Systems/Defense",
+  "line": "Skaldfoss keeps a working balance: the law is present, so is crime, and neither has the thorp to itself.",
+  "sentence": "Skaldfoss keeps a working balance: the law is present, so is crime, and neither has the thorp to itself.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Skaldfoss keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it."
+  },
+  "why": "the page says the place keeps no watch and no court; this line says the law is present",
+  "held": null,
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "X keeps a working balance: the law is present, so is crime, and neither has the <tier> to itself."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.no-imports",
+  "town": "bar0-thorp-calm-rand-35",
+  "tab": "Systems/Economics",
+  "line": "No recorded imports.",
+  "sentence": "No recorded imports.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 47 lbs/day+ 5 imported · Need: 56 lbs/day · Short: 4 lbs/day"
+  },
+  "why": "the same tab prints \"Production: 47 lbs/day+ 5 imported · Need: 56 lbs/day · Short: 4 lbs/day\"; this line says nothing is imported",
+  "held": null,
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "No recorded imports."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-thorp-calm-rand-36",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-thorp-calm-rand-37",
+  "tab": "Systems/Defense",
+  "line": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "sentence": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-thorp-calm-rand-37",
+  "tab": "Systems/Defense",
+  "line": "The danger at Medinaistan comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "sentence": "The danger at Medinaistan comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "thorp",
+  "crises": [],
+  "form": "The danger at X comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-thorp-calm-rand-38",
+  "tab": "Systems/Defense",
+  "line": "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "sentence": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "thorp",
+  "crises": [
+   "famine"
+  ],
+  "form": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-thorp-calm-rand-39",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-thorp-calm-rand-40",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9c.nothing-over",
+  "town": "bar0-thorp-calm-rand-40",
+  "tab": "Systems/Outlook",
+  "line": "What Schwarzhausen raises leaves nothing over in an ordinary year, and a bad harvest is felt before spring.",
+  "sentence": "What Schwarzhausen raises leaves nothing over in an ordinary year, and a bad harvest is felt before spring.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Schwarzhausen grows a little more than it eats, with some to put by against a bad year."
+  },
+  "why": "the page prints \"Schwarzhausen grows a little more than it eats, with some to put by against a bad year.\"; this line says nothing is left over",
+  "held": null,
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "What X raises leaves nothing over in an ordinary year, and a bad harvest is felt before spring."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-thorp-calm-rand-41",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.balance",
+  "town": "bar0-thorp-calm-rand-41",
+  "tab": "Systems/Defense",
+  "line": "Waldhausen keeps a working balance: the law is present, so is crime, and neither has the thorp to itself.",
+  "sentence": "Waldhausen keeps a working balance: the law is present, so is crime, and neither has the thorp to itself.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Waldhausen keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it."
+  },
+  "why": "the page says the place keeps no watch and no court; this line says the law is present",
+  "held": null,
+  "status": "count",
+  "tier": "thorp",
+  "crises": [],
+  "form": "X keeps a working balance: the law is present, so is crime, and neither has the <tier> to itself."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.leans",
+  "town": "bar0-town-calm-rand-27",
+  "tab": "Systems/Magic",
+  "line": "At Gantulgakhurel the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work.",
+  "sentence": "At Gantulgakhurel the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: Relied upon · for Divine & Magical Healing · supplied by Houses of worship and Monastery or friary"
+  },
+  "why": "the reliance row names Divine & Magical Healing; this line says the trade making baked goods (Grain & Bread) leans on magic",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [],
+  "form": "At X the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.military",
+  "town": "bar0-town-calm-rand-31",
+  "tab": "Systems/Magic",
+  "line": "Nothing structural at Zelenosk depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it. Arcane work at Zelenosk answers to its military, and the practitioners' own books show it: defence work first, paying work after.",
+  "sentence": "Arcane work at Zelenosk answers to its military, and the practitioners' own books show it: defence work first, paying work after.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Military role: absent"
+  },
+  "why": "the page prints \"Military role: absent\"; this line puts the town's magic under its soldiers",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [],
+  "form": "Arcane work at X answers to its military, and the practitioners' own books show it: defence work first, paying work after."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.watch",
+  "town": "bar0-town-calm-rand-33",
+  "tab": "Systems/Defense",
+  "line": "The town watch exists on paper. Susceptible to bribery; enforcers who can be bought by whoever has coin. A court exists, though there is nowhere to hold the guilty.",
+  "sentence": "The town watch exists on paper.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "The watch covers the main paths; quieter spots after dark carry genuine risk."
+  },
+  "why": "the page prints a working watch (\"The watch covers the main paths; quieter spots after dark carry genuine risk.\"); this line says it exists on paper",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [],
+  "form": "The <tier> watch exists on paper."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.lawless",
+  "town": "bar0-town-calm-rand-38",
+  "tab": "Systems/Services",
+  "line": "The law here is slow and easily outbid. Disputes end with whoever can apply more violence or pay more for protection.",
+  "sentence": "The law here is slow and easily outbid.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "The town keeps its own court and its own gaol."
+  },
+  "why": "the page prints \"The town keeps its own court and its own gaol.\" and Law & order Adequate or better; this service line says the law is easily outbid",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [],
+  "form": "The law here is slow and easily outbid."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.wave",
+  "town": "bar0-town-calm-rand-40",
+  "tab": "Systems/Defense",
+  "line": "Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.",
+  "sentence": "It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"
+  },
+  "why": "the page prints the crime-wave tension (\"Crime is rising faster than those in charge can answer it\"); this line says crime is kept down",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [],
+  "form": "It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.carts",
+  "town": "bar0-town-calm-rand-41",
+  "tab": "Systems/Economics",
+  "line": "Beloovo grows about four parts in five of what it needs, and carts bring in nearly all the rest. Druidic provision makes up less than a fifth of what it needs. Between them, nearly every household is fed, and a bad season would leave some of them short.",
+  "sentence": "Beloovo grows about four parts in five of what it needs, and carts bring in nearly all the rest.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Weapon repair, tool sharpening and armour fitting here depend on iron and fuel brought in by magic: no trade road reaches Beloovo."
+  },
+  "why": "the import comes another way (\"Weapon repair, tool sharpening and armour fitting here depend on iron and fuel brought in by magic: no trade road reaches Beloovo.\"); this line says carts bring it",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [],
+  "form": "X grows about four parts in five of what it needs, and carts bring in nearly all the rest."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.watch-weak",
+  "town": "bar0-town-occupied-rand-27",
+  "tab": "Systems/Defense",
+  "line": "The town watch exists on paper. Susceptible to bribery; enforcers who can be bought by whoever has coin. Thieves here know that the court sits and the cells are real.",
+  "sentence": "The town watch exists on paper.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "It keeps a watch, which is a matter of order rather than of war."
+  },
+  "why": "the page prints \"It keeps a watch, which is a matter of order rather than of war.\" under an occupation (the occupiers keep order); \"exists on paper\" overstates it: WEAK, apart",
+  "held": null,
+  "status": "apart",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "The <tier> watch exists on paper."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.watch-weak",
+  "town": "bar0-town-occupied-rand-28",
+  "tab": "Systems/Defense",
+  "line": "The town watch exists on paper. Susceptible to bribery; enforcers who can be bought by whoever has coin. A functioning court and prison mean crimes carry real consequences.",
+  "sentence": "The town watch exists on paper.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "It keeps a watch, which is a matter of order rather than of war."
+  },
+  "why": "the page prints \"It keeps a watch, which is a matter of order rather than of war.\" under an occupation (the occupiers keep order); \"exists on paper\" overstates it: WEAK, apart",
+  "held": null,
+  "status": "apart",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "The <tier> watch exists on paper."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.watch-weak",
+  "town": "bar0-town-occupied-rand-29",
+  "tab": "Systems/Defense",
+  "line": "The town watch exists on paper. Chronically underpaid and poorly equipped. Susceptible to bribery; enforcers who can be bought by whoever has coin.",
+  "sentence": "The town watch exists on paper.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "It keeps a watch, which is a matter of order rather than of war."
+  },
+  "why": "the page prints \"It keeps a watch, which is a matter of order rather than of war.\" under an occupation (the occupiers keep order); \"exists on paper\" overstates it: WEAK, apart",
+  "held": null,
+  "status": "apart",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "The <tier> watch exists on paper."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.curfew",
+  "town": "bar0-town-occupied-rand-30",
+  "tab": "Systems/Defense",
+  "line": "There is a curfew at Nandapeta now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.",
+  "sentence": "There is a curfew at Nandapeta now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Theft is rising even under the curfew, and the greater danger is informers and occupation officials; the resistance works out of sight."
+  },
+  "why": "the page says theft is rising under the curfew; this line says it has dropped",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "There is a curfew at X now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.reassure",
+  "town": "bar0-town-occupied-rand-31",
+  "tab": "Systems/Economics",
+  "line": "Shattbazaar grows only part of what it eats; the rest comes in from the farms around it and from trade. Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the town's tables.",
+  "sentence": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the town's tables.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Food · Pressured"
+  },
+  "why": "the page prints \"Food · Pressured\"; this line says a poor year does not leave the tables empty",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the <tier>'s tables."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.watch-weak",
+  "town": "bar0-town-occupied-rand-33",
+  "tab": "Systems/Defense",
+  "line": "The town watch exists on paper. Susceptible to bribery; enforcers who can be bought by whoever has coin.",
+  "sentence": "The town watch exists on paper.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Men and women serving part-time, walking the night rounds."
+  },
+  "why": "the page prints \"Men and women serving part-time, walking the night rounds.\" under an occupation (the occupiers keep order); \"exists on paper\" overstates it: WEAK, apart",
+  "held": null,
+  "status": "apart",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "The <tier> watch exists on paper."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.curfew",
+  "town": "bar0-town-occupied-rand-38",
+  "tab": "Systems/Defense",
+  "line": "There is a curfew at Roccafossae now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.",
+  "sentence": "There is a curfew at Roccafossae now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Theft is rising even under the curfew, and the greater danger is informers and occupation officials; the resistance works out of sight."
+  },
+  "why": "the page says theft is rising under the curfew; this line says it has dropped",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "There is a curfew at X now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.isolated",
+  "town": "bar0-town-occupied-rand-38",
+  "tab": "Systems/Services",
+  "line": "Needs Iron + grain. No trade access: running on existing stockpiles only.",
+  "sentence": "No trade access: running on existing stockpiles only.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 2,074 lbs/day+ 616 imported+ 285 by divine provision · Need: 3,403 lbs/day · Short: 428 lbs/day"
+  },
+  "why": "the page prints \"Production: 2,074 lbs/day+ 616 imported+ 285 by divine provision · Need: 3,403 lbs/day · Short: 428 lbs/day\" (food brought in by road); this line says no trade reaches the place",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "No trade access: running on existing stockpiles only."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.isolated",
+  "town": "bar0-town-occupied-rand-38",
+  "tab": "Systems/Economics",
+  "line": "Law enforcement, patrol and gate control here run on stored iron: no trade road reaches Roccafossae.",
+  "sentence": "Law enforcement, patrol and gate control here run on stored iron: no trade road reaches Roccafossae.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 2,074 lbs/day+ 616 imported+ 285 by divine provision · Need: 3,403 lbs/day · Short: 428 lbs/day"
+  },
+  "why": "the page prints \"Production: 2,074 lbs/day+ 616 imported+ 285 by divine provision · Need: 3,403 lbs/day · Short: 428 lbs/day\" (food brought in by road); this line says no trade reaches the place",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "Law enforcement, patrol and gate control here run on stored iron: no trade road reaches X."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.isolated",
+  "town": "bar0-town-occupied-rand-38",
+  "tab": "Systems/Outlook",
+  "line": "11 institutions operating on stockpiles only (isolated trade): Weekly market, Market square, Taverns, Town granary, Mills, Butchers, Town watch, Citadel, Free company hall, Bakers, Town walls.",
+  "sentence": "11 institutions operating on stockpiles only (isolated trade): Weekly market, Market square, Taverns, Town granary, Mills, Butchers, Town watch, Citadel, Free company hall, Bakers, Town walls.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 2,074 lbs/day+ 616 imported+ 285 by divine provision · Need: 3,403 lbs/day · Short: 428 lbs/day"
+  },
+  "why": "the page prints \"Production: 2,074 lbs/day+ 616 imported+ 285 by divine provision · Need: 3,403 lbs/day · Short: 428 lbs/day\" (food brought in by road); this line says no trade reaches the place",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "11 institutions operating on stockpiles only (isolated trade): Weekly market, Market square, Taverns, Town granary, Mills, Butchers, Town watch, Citadel, Free company hall, Bakers, Town walls."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.curfew",
+  "town": "bar0-town-occupied-rand-41",
+  "tab": "Systems/Defense",
+  "line": "There is a curfew at Dagaker now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.",
+  "sentence": "There is a curfew at Dagaker now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Theft is rising even under the curfew, and the greater danger is informers and occupation officials; the resistance works out of sight."
+  },
+  "why": "the page says theft is rising under the curfew; this line says it has dropped",
+  "held": null,
+  "status": "count",
+  "tier": "town",
+  "crises": [
+   "occupied"
+  ],
+  "form": "There is a curfew at X now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.militia",
+  "town": "bar0-village-calm-rand-27",
+  "tab": "Systems/Defense",
+  "line": "Crime exists but is well-managed. The militia is present and responsive. Petty theft is the primary risk; organized crime has found no foothold. The walls keep most trouble outside.",
+  "sentence": "The militia is present and responsive.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "The citizen militia musters when needed but cannot maintain consistent patrol."
+  },
+  "why": "the page prints the militia absent from routine crime (\"The citizen militia musters when needed but cannot maintain consistent patrol.\"); this line says it is present and responsive",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "The militia is present and responsive."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.isolated",
+  "town": "bar0-village-calm-rand-27",
+  "tab": "Systems/Services",
+  "line": "Needs Iron. No trade access: running on existing stockpiles only.",
+  "sentence": "No trade access: running on existing stockpiles only.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 503 lbs/day+ 25 imported · Need: 532 lbs/day · Short: 4 lbs/day"
+  },
+  "why": "the page prints \"Production: 503 lbs/day+ 25 imported · Need: 532 lbs/day · Short: 4 lbs/day\" (food brought in by road); this line says no trade reaches the place",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "No trade access: running on existing stockpiles only."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.isolated",
+  "town": "bar0-village-calm-rand-27",
+  "tab": "Systems/Outlook",
+  "line": "1 institution operating on stockpiles only (isolated trade): Citizen militia.",
+  "sentence": "1 institution operating on stockpiles only (isolated trade): Citizen militia.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 503 lbs/day+ 25 imported · Need: 532 lbs/day · Short: 4 lbs/day"
+  },
+  "why": "the page prints \"Production: 503 lbs/day+ 25 imported · Need: 532 lbs/day · Short: 4 lbs/day\" (food brought in by road); this line says no trade reaches the place",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "1 institution operating on stockpiles only (isolated trade): Citizen militia."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.watch",
+  "town": "bar0-village-calm-rand-28",
+  "tab": "Systems/Defense",
+  "line": "The local watch exists on paper. Susceptible to bribery; enforcers who can be bought by whoever has coin. Without courts or prison, enforcement relies entirely on fines, exile, or summary violence.",
+  "sentence": "The local watch exists on paper.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "The watch covers the main paths; quieter spots after dark carry genuine risk."
+  },
+  "why": "the page prints a working watch (\"The watch covers the main paths; quieter spots after dark carry genuine risk.\"); this line says it exists on paper",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "The local watch exists on paper."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.game",
+  "town": "bar0-village-calm-rand-28",
+  "tab": "Systems/Economics",
+  "line": "What it puts on the table itself is the day's catch. Smoking, drying, fermenting, and winter storage are central household technologies.",
+  "sentence": "What it puts on the table itself is the day's catch. Smoking, drying, fermenting, and winter storage are central household technologies.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 18,
+   "line": "Farmland · Economy / Services · Grain at harvest"
+  },
+  "why": "(LAW 3 · L3.foodModel) the food line names another food as the table's own, beside a farmland house that sells its own grain",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "What it puts on the table itself is the day's catch. Smoking, drying, fermenting, and winter storage are central household technologies."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-village-calm-rand-29",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9c.game",
+  "town": "bar0-village-calm-rand-29",
+  "tab": "Systems/Economics",
+  "line": "What it puts on the table itself is fish from the local waters. Water access and preservation skill determine the balance between local produce and caravan-borne staples.",
+  "sentence": "What it puts on the table itself is fish from the local waters. Water access and preservation skill determine the balance between local produce and caravan-borne staples.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 24,
+   "line": "Farmland · Economy / Services · Grain at harvest"
+  },
+  "why": "(LAW 3 · L3.foodModel) the food line names another food as the table's own, beside a farmland house that sells its own grain",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "What it puts on the table itself is fish from the local waters. Water access and preservation skill determine the balance between local produce and caravan-borne staples."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-calm-rand-31",
+  "tab": "Systems/Magic",
+  "line": "At Jómsfoss the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work.",
+  "sentence": "At Jómsfoss the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "At X the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-village-calm-rand-32",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-calm-rand-34",
+  "tab": "Systems/Magic",
+  "line": "If the help beyond ordinary work failed at Beiyuan, the trade that makes its baked goods would yield less than it does now.",
+  "sentence": "If the help beyond ordinary work failed at Beiyuan, the trade that makes its baked goods would yield less than it does now.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its baked goods would yield less than it does now."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-village-calm-rand-35",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-calm-rand-35",
+  "tab": "Summary/Overview",
+  "line": "\"A settlement with an unusual relationship to magic: the Arcane Incident made it both more dependent on arcane resources and more wary of them simultaneously\"",
+  "sentence": "\"A settlement with an unusual relationship to magic: the Arcane Incident made it both more dependent on arcane resources and more wary of them simultaneously\"",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "\"A settlement with an unusual relationship to magic: the Arcane Incident made it both more dependent on arcane resources and more wary of them simultaneously\""
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-calm-rand-35",
+  "tab": "World/History",
+  "line": "\"A settlement with an unusual relationship to magic: the Arcane Incident made it both more dependent on arcane resources and more wary of them simultaneously\"",
+  "sentence": "\"A settlement with an unusual relationship to magic: the Arcane Incident made it both more dependent on arcane resources and more wary of them simultaneously\"",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "\"A settlement with an unusual relationship to magic: the Arcane Incident made it both more dependent on arcane resources and more wary of them simultaneously\""
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-village-calm-rand-37",
+  "tab": "Systems/Defense",
+  "line": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "sentence": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "village",
+  "crises": [],
+  "form": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.contested",
+  "town": "bar0-village-calm-rand-37",
+  "tab": "Systems/Defense",
+  "line": "Things go missing at Bregburg, taken by whoever saw the chance; with no gang behind it, it is less dangerous and harder to stop.",
+  "sentence": "Things go missing at Bregburg, taken by whoever saw the chance; with no gang behind it, it is less dangerous and harder to stop.",
+  "against": {
+   "tab": "Summary/Plot Hooks",
+   "line": "The crime wave is coordinated."
+  },
+  "why": "the plot hook says the crime wave is coordinated; this line says no one runs the crime (a hook states its own fact: ruled both ways)",
+  "held": null,
+  "status": "apart",
+  "tier": "village",
+  "crises": [],
+  "form": "Things go missing at X, taken by whoever saw the chance; with no gang behind it, it is less dangerous and harder to stop."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-calm-rand-37",
+  "tab": "Systems/Magic",
+  "line": "People at Bregburg know that part of the village's work now holds up only with help beyond ordinary labour.",
+  "sentence": "People at Bregburg know that part of the village's work now holds up only with help beyond ordinary labour.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "People at X know that part of the <tier>'s work now holds up only with help beyond ordinary labour."
+ },
+ {
+  "law": "L9",
+  "rule": "9c.game",
+  "town": "bar0-village-calm-rand-37",
+  "tab": "Systems/Economics",
+  "line": "What it puts on the table itself is the hunters' game. Fermentation, pickling, and drying stretch the harvest through winter.",
+  "sentence": "What it puts on the table itself is the hunters' game. Fermentation, pickling, and drying stretch the harvest through winter.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 32,
+   "line": "Farmland · Economy / Services · Grain at harvest"
+  },
+  "why": "(LAW 3 · L3.foodModel) the food line names another food as the table's own, beside a farmland house that sells its own grain",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "What it puts on the table itself is the hunters' game. Fermentation, pickling, and drying stretch the harvest through winter."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-village-calm-rand-38",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9c.game",
+  "town": "bar0-village-calm-rand-38",
+  "tab": "Systems/Economics",
+  "line": "What it puts on the table itself is the hunters' game.",
+  "sentence": "What it puts on the table itself is the hunters' game.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "i": 23,
+   "line": "Farmland · Economy / Services · Grain at harvest"
+  },
+  "why": "(LAW 3 · L3.foodModel) the food line names another food as the table's own, beside a farmland house that sells its own grain",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "What it puts on the table itself is the hunters' game."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-village-calm-rand-40",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9a.band-quiet",
+  "town": "bar0-village-calm-rand-41",
+  "tab": "Summary/Foundations",
+  "line": "Law & order · Critical",
+  "sentence": "Law & order · Critical",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Moderate"
+  },
+  "why": "Law & order · Critical on a quiet place with no office of the law, no crisis, no crime wave, Safety Moderate",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "Law & order · Critical"
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-calm-rand-41",
+  "tab": "Summary/Overview",
+  "line": "\"The settlement relies on arcane workings it does not entirely trust. The Arcane Incident proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather\"",
+  "sentence": "\"The settlement relies on arcane workings it does not entirely trust. The Arcane Incident proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather\"",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "\"The settlement relies on arcane workings it does not entirely trust. The Arcane Incident proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather\""
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-calm-rand-41",
+  "tab": "World/History",
+  "line": "\"The settlement relies on arcane workings it does not entirely trust. The Arcane Incident proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather\"",
+  "sentence": "\"The settlement relies on arcane workings it does not entirely trust. The Arcane Incident proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather\"",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [],
+  "form": "\"The settlement relies on arcane workings it does not entirely trust. The Arcane Incident proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather\""
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-village-famine-rand-27",
+  "tab": "Systems/Defense",
+  "line": "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "sentence": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.no-exports",
+  "town": "bar0-village-famine-rand-28",
+  "tab": "Systems/Economics",
+  "line": "No significant exports.",
+  "sentence": "No significant exports.",
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The village works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more."
+  },
+  "why": "the Resources tab prints \"The village works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more.\" (an export that moves); this line says there are none",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "No significant exports."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-village-famine-rand-29",
+  "tab": "Systems/Defense",
+  "line": "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "sentence": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "A thief is known by name within a day, and everyone shuns them until they make it right."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-village-famine-rand-31",
+  "tab": "Systems/Defense",
+  "line": "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "sentence": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.hands",
+  "town": "bar0-village-famine-rand-31",
+  "tab": "Systems/Economics",
+  "line": "Little of Mayancalco's trade goes unrecorded, but what does goes through the same organised hands each time.",
+  "sentence": "Little of Mayancalco's trade goes unrecorded, but what does goes through the same organised hands each time.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Several gangs may be competing."
+  },
+  "why": "the Defense tab prints \"Several gangs may be competing.\"; this line says one organised hand takes the off-book trade",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "Little of X's trade goes unrecorded, but what does goes through the same organised hands each time."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-village-famine-rand-32",
+  "tab": "Systems/Defense",
+  "line": "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "sentence": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "A thief is known by name within a day, and everyone shuns them until they make it right."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-village-famine-rand-35",
+  "tab": "Systems/Economics",
+  "line": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.",
+  "sentence": "What passes for a shadow economy here has never grown into one.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 11% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 11% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "What passes for a shadow economy here has never grown into one."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-village-famine-rand-36",
+  "tab": "Systems/Defense",
+  "line": "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "sentence": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "A thief is known by name within a day, and everyone shuns them until they make it right."
+ },
+ {
+  "law": "L9",
+  "rule": "9b.shadow",
+  "town": "bar0-village-famine-rand-36",
+  "tab": "Systems/Economics",
+  "line": "What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.",
+  "sentence": "What passes for a shadow economy here has never grown into one.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Shadow Economy: 11% of trade unrecorded▲"
+  },
+  "why": "the heading prints \"Shadow Economy: 11% of trade unrecorded▲\"; this line says the off-book trade is next to nothing",
+  "held": null,
+  "status": "apart",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "What passes for a shadow economy here has never grown into one."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-famine-rand-36",
+  "tab": "Systems/Magic",
+  "line": "People at Eldthorpe know that part of the village's work now holds up only with help beyond ordinary labour.",
+  "sentence": "People at Eldthorpe know that part of the village's work now holds up only with help beyond ordinary labour.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "People at X know that part of the <tier>'s work now holds up only with help beyond ordinary labour."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.no-exports",
+  "town": "bar0-village-famine-rand-37",
+  "tab": "Systems/Economics",
+  "line": "No significant exports.",
+  "sentence": "No significant exports.",
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The village works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more."
+  },
+  "why": "the Resources tab prints \"The village works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more.\" (an export that moves); this line says there are none",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "No significant exports."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-village-famine-rand-38",
+  "tab": "Systems/Defense",
+  "line": "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "sentence": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-village-famine-rand-39",
+  "tab": "Systems/Defense",
+  "line": "There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "sentence": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it."
+ },
+ {
+  "law": "L9",
+  "rule": "9e.none",
+  "town": "bar0-village-famine-rand-39",
+  "tab": "Systems/Magic",
+  "line": "At Divograd the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work.",
+  "sentence": "At Divograd the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work.",
+  "against": {
+   "tab": "Systems/Magic",
+   "line": "Reliance on magic: None"
+  },
+  "why": "(LAW 1 · 1a) asserts reliance on magic; the page's word is None",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "At X the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.isolated",
+  "town": "bar0-village-famine-rand-40",
+  "tab": "Systems/Services",
+  "line": "Needs Iron. No trade access: running on existing stockpiles only.",
+  "sentence": "No trade access: running on existing stockpiles only.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 64 lbs/day+ 10 imported+ 48 by divine provision · Need: 194 lbs/day · Short: 72 lbs/day"
+  },
+  "why": "the page prints \"Production: 64 lbs/day+ 10 imported+ 48 by divine provision · Need: 194 lbs/day · Short: 72 lbs/day\" (food brought in by road); this line says no trade reaches the place",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "No trade access: running on existing stockpiles only."
+ },
+ {
+  "law": "L9",
+  "rule": "9d.isolated",
+  "town": "bar0-village-famine-rand-40",
+  "tab": "Systems/Outlook",
+  "line": "1 institution operating on stockpiles only (isolated trade): Citizen militia.",
+  "sentence": "1 institution operating on stockpiles only (isolated trade): Citizen militia.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 64 lbs/day+ 10 imported+ 48 by divine provision · Need: 194 lbs/day · Short: 72 lbs/day"
+  },
+  "why": "the page prints \"Production: 64 lbs/day+ 10 imported+ 48 by divine provision · Need: 194 lbs/day · Short: 72 lbs/day\" (food brought in by road); this line says no trade reaches the place",
+  "held": null,
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "1 institution operating on stockpiles only (isolated trade): Citizen militia."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.collapsed",
+  "town": "bar0-village-famine-rand-41",
+  "tab": "Systems/Defense",
+  "line": "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "sentence": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed (under a crisis, a crime wave or an unsafe word); this unmarked line says crime is answered",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "tier": "village",
+  "crises": [
+   "famine"
+  ],
+  "form": "A thief is known by name within a day, and everyone shuns them until they make it right."
+ }
+]

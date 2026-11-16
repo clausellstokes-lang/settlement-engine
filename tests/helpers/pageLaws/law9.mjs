@@ -76,6 +76,7 @@ function chainOfGood(T, W, goodRaw) {
   return { good, label, named: !!label && W.relianceFor.toLowerCase().includes(label.toLowerCase()) };
 }
 
+const FOOD_GOOD = /\b(baked goods|bread|preserved foods|river fish|salted fish|fish|game meat|meat|grain|flour|dairy|cheese|honey|fruit|vegetables|ale|beer)\b/;
 const UP_PROSPERITY = /^(Comfortable|Prosperous|Wealthy|Rich|Affluent|Thriving)$/;
 const SAFE_WORD = /^(Safe|Very Safe|Moderate)$/;
 
@@ -145,10 +146,23 @@ export const RULES = [
   },
 
   // the watch's own row: "exists on paper" beside a watch the page prints working (C187260 C200637; bar read WEAK C36857)
-  pair('9a.watch', /\bwatch exists on paper\b/,
-    (T) => find(T, /\b(The watch covers the main paths|walking the night rounds|walking the lanes after dark|It keeps a watch, which is a matter of order|The watch is present and responsive)\b/)
-      || (() => { const ch = T.chains.find((c) => /watch/i.test(c.name) && /Operational|Running/.test(c.state)); return ch ? { tab: 'Systems/Economics', i: ch.headIdx, text: ch.head } : null; })(),
-    (h, ag) => `the page prints a working watch ("${ag.sentence || ag.text}"); this line says it exists on paper`),
+  // PRECISION (720, seed 616: 3 of 5): "It keeps a watch, which is a matter of order rather than of war" is the defence
+  // roster's word, not a working watch; under an occupation the occupiers keep order (bar read WEAK C36857), so there the
+  // line is counted only beside a page line that prints the watch at work.
+  {
+    rule: '9a.watch', status: 'count',
+    run(T) {
+      const hits = findAll(T, /\bwatch exists on paper\b/);
+      if (!hits.length) return [];
+      const working = find(T, /\b(The watch covers the main paths|The watch is present and responsive)\b/);
+      const rounds = find(T, /\b(walking the night rounds|walking the lanes after dark)\b/);
+      const occupied = T.crises.has('occupied');
+      const ag = working || (!occupied ? rounds : null);
+      if (ag) return hits.map((h) => ({ at: h, against: ag, why: `the page prints a working watch ("${ag.sentence}"); this line says it exists on paper` }));
+      const weak = rounds || find(T, /\bIt keeps a watch, which is a matter of order\b/);
+      return weak ? hits.map((h) => ({ at: h, against: weak, status: 'apart', rule: '9a.watch-weak', why: `the page prints "${weak.sentence}"${occupied ? ' under an occupation (the occupiers keep order)' : ''}; "exists on paper" overstates it: WEAK, apart` })) : [];
+    },
+  },
 
   // the militia's own row (C199950)
   pair('9a.militia', /\bThe militia is present and responsive\b/,
@@ -199,10 +213,31 @@ export const RULES = [
       return [{ at: lab, against: W.prosperity, why: `the page prints Prosperity ${W.prosperityWord}; the economy's label reads a survival economy${own ? ' (the page itself says "a subsistence living": WEAK, only "survival" is off)' : ''}`, status: own ? 'apart' : 'count' }];
     },
   },
-  pair('9b.purse', /\b(pays its own way and has a little in hand|treasury takes in a little more than it pays out|With a little left over each year|closes every year ahead|ends each year with money to spare)\b/,
-    (T) => find(T, /\b(chronically underfunded\)|has borrowed every year since|The interest is paid before the wages)\b/, [/^(Summary|Systems|World)\//]),
-    (h, ag) => `the page prints "${ag.sentence}"; this line says the purse has something over`,
-    { skip: (h) => /^Embattled region/.test(h.sentence) }),
+  // the purse: "a little in hand" / "money to spare" against the stability word's "chronically underfunded" (bar read
+  // C32519) or a borrowing line about a PUBLIC purse (C66113: the mint master's treasury). PRECISION (720, seed 616): the
+  // same relationship line names a HOUSE's treasury (an arena master's, a granary reeve's) in 8 of 9 draws, which does not
+  // deny the town's own purse: those are reported apart (9b.purse-house).
+  {
+    rule: '9b.purse', status: 'count',
+    run(T) {
+      const UP = /\b(pays its own way and has a little in hand|treasury takes in a little more than it pays out|With a little left over each year|closes every year ahead|ends each year with money to spare)\b/;
+      const claims = findAll(T, UP).filter((h) => !/^Embattled region/.test(h.sentence));
+      if (!claims.length) return [];
+      const under = find(T, /\bchronically underfunded\)/, [/^(Summary|Systems|World)\//]);
+      const borrow = find(T, /\b(\S.*?)'s treasury borrowed from .+ has borrowed every year since\b/, [/^(Summary|Systems|World)\//]);
+      let ag = under, status = 'count', who = '';
+      if (!ag && borrow) {
+        const name = borrow.sentence.split("'s treasury")[0].trim();
+        const npc = (T.record?.npcs || []).find((n) => n?.name === name);
+        const key = String((npc?.institution && typeof npc.institution === 'object' ? npc.institution.key : npc?.institution) || '');
+        const pub = /mint|treasur|exchequer|counting|tax|toll|customs|council|hall|seat/i.test(key) || /treasurer|steward|reeve of the town|mayor|chancellor/i.test(String(npc?.role || ''));
+        ag = borrow; status = pub ? 'count' : 'apart'; who = `${name} (${npc?.role || '?'} · ${key || '?'})`;
+      }
+      if (!ag) return [];
+      return claims.map((h) => ({ at: h, against: ag, status, rule: status === 'apart' ? '9b.purse-house' : '9b.purse',
+        why: `the page prints "${ag.sentence}"${who ? ` — the treasury of ${who}` : ''}; this line says the town's purse has something over${status === 'apart' ? ' (a house\'s treasury, not the town\'s: apart)' : ''}` }));
+    },
+  },
   // WEAK, apart: the shadow economy's sentences against the share its heading prints (C89075 C83868 C216091 C216874)
   pair('9b.shadow', /\b(What passes for a shadow economy here has never grown into one|A little changes hands here quietly, between neighbours)\b/,
     (T) => { const x = find(T, /^Shadow Economy: (\d+)% of trade unrecorded/, ['Systems/Economics']); return x && Number(x.text.match(/(\d+)%/)[1]) >= 10 ? x : null; },
@@ -251,6 +286,8 @@ export const RULES = [
       return findAll(T, /\bno longer yields enough ([^,]+), and the trade that makes it now leans on help beyond ordinary work\b/, ['Systems/Magic']).flatMap((h) => {
         const v = chainOfGood(T, W, h.m[1]);
         if (v.named) return [];
+        // PRECISION (720, seed 616): a food good under a row that names "food (arcane/druidic provision)" is backed by it
+        if (FOOD_GOOD.test(v.good) && /\bfood \(/.test(W.relianceFor)) return [];
         const medicalAbsent = /medic|heal|treatment/.test(v.good) && W.roles.medical?.word === 'absent';
         return [{ at: h, against: medicalAbsent ? { ...W.roles.medical, sentence: `${W.reliance.text} / ${W.roles.medical.text}` } : W.reliance, why: `the reliance row names ${W.relianceFor || 'nothing'}${medicalAbsent ? ' and Medical role: absent' : ''}; this line says the trade making ${v.good} (${v.label || 'no chain found'}) leans on magic` }];
       });
@@ -306,9 +343,9 @@ export function law9(T, town) {
   const seen = new Set();
   for (const r of RULES) {
     for (const x of r.run(T, W)) {
-      const k = `${r.rule}#${x.at.tab}#${x.at.i}#${x.at.sentence}`;
+      const k = `${x.rule || r.rule}#${x.at.tab}#${x.at.i}#${x.at.sentence}`;
       if (seen.has(k)) continue; seen.add(k);
-      out.push({ law: LAW, rule: r.rule, town, tab: x.at.tab, line: x.at.text, sentence: x.at.sentence || x.at.text,
+      out.push({ law: LAW, rule: x.rule || r.rule, town, tab: x.at.tab, line: x.at.text, sentence: x.at.sentence || x.at.text,
         against: { tab: x.against.tab, line: x.against.sentence || x.against.text }, why: x.why, held: r.held || null, status: x.status || r.status || 'count' });
     }
   }

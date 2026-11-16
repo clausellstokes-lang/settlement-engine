@@ -8,7 +8,7 @@
     "C131929": ["9a.structure", "STANDS", "wide"], "C143085": ["9a.structure", "STANDS", "wide"],
     "C143088": ["9a.wave", "STANDS", "wide"], "C43177": ["9a.wave", "STANDS", "wide"],
     "C183057": ["9a.curfew", "STANDS", "wide"], "C194447": ["9a.curfew", "STANDS", "wide"], "C198660": ["9a.curfew", "STANDS", "wide"],
-    "C187260": ["9a.watch", "STANDS", "wide"], "C200637": ["9a.watch", "STANDS", "wide"], "C36857": ["9a.watch", "WEAK", "bar"],
+    "C187260": ["9a.watch-weak", "STANDS", "wide"], "C200637": ["9a.watch", "STANDS", "wide"], "C36857": ["9a.watch-weak", "WEAK", "bar"],
     "C199950": ["9a.militia", "STANDS", "wide"],
     "C157107": ["9a.balance", "STANDS", "wide"], "C162769": ["9a.balance", "WEAK", "wide"],
     "C172465": ["9a.lawless", "STANDS", "wide"],
