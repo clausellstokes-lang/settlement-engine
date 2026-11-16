@@ -1,0 +1,8 @@
+{"id":"C11106","town":"bar0-city-wartime-rand-25","sev":"LOW","kind":"STATE","why":"says Juliana (watch commander, War Council rank 1) leads the military; PEOPLE gives Military/Guard rank 1 to Loukas Kyriadotes","other":""}
+{"id":"C11307","town":"bar0-city-wartime-rand-25","sev":"MED","kind":"PAIR","why":"says smiths have no iron to mend tools; Blacksmiths row offers Repairs, Tool manufacture, Weapon smithing with no mark","other":"C11327"}
+{"id":"C12185","town":"bar0-city-wartime-rand-25","sev":"LOW","kind":"LACKS","why":"names Crown supply carts and (C12187) a crown officer; GOVERNMENT lists no crown or overlord power, only Merchant oligarchy and local powers","other":"C12187"}
+{"id":"C12279","town":"bar0-city-wartime-rand-25","sev":"LOW","kind":"LACKS","why":"'Crown authority over the war' presumes a crown; GOVERNMENT lists no crown or higher authority, only local powers","other":"C12185"}
+{"id":"C12352","town":"bar0-city-wartime-rand-25","sev":"LOW","kind":"LACKS","why":"calls War Council 'Crown-appointed'; GOVERNMENT lists no crown that could appoint it","other":"C12185"}
+{"id":"C12428","town":"bar0-city-wartime-rand-25","sev":"LOW","kind":"LACKS","why":"'sold to crown contracts' presumes a crown; GOVERNMENT lists none (the army's buyers are local War Council and Military/Guard)","other":"C12185"}
+{"id":"C12475","town":"bar0-city-wartime-rand-25","sev":"LOW","kind":"PAIR","why":"Medical Readiness labelled 'Infirmary' yet says 'no beds to contain an outbreak'; HOUSES has no infirmary or hospital","other":"C12473"}
+{"id":"DONE","lines":2622,"blocks":1,"flags":7}
