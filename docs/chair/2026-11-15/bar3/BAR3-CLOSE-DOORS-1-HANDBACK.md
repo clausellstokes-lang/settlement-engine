@@ -42,6 +42,17 @@ each read from their own messages and none is of that kind (no other red arm nam
   added above it, is re-addressed by identity without a further word, listed in this table; an address whose line
   changed is a stop.
 
+- **TP1** (00:22 UTC): `tieProseDeclared`'s `toHaveLength(41)` -> 44, re-taken in the file's own form (the sum spelled as
+  the note before it spells its own): BAR3-PEOPLE batch 1 gave `excludes: ['crisis: under_siege']` to exactly three tie
+  lines that declared nothing before; if this seat's count of newly declaring rows is not exactly those three: STOP.
+- **OC1** (00:22 UTC): `proseFamilyContract.walker` (A1, A3, A5) and `newsHeadlineContract.walker` (A2): class (R), this
+  seat's, once: (1) `git log 74ded1800..<tip>` over the walker's EXPECTED_UNION empty; (2) the move is the tail close's,
+  reversed: exactly the four `warRulingRead` identities arrive, no other identity in or out, on the headline contract only
+  counts of existing address rows move; (3) the door TAIL-CLOSE-DOORS-4 took (its row 12): the libraries' own functions, one
+  build, an untracked scratch script, the baselines and the libraries' frozen figures in one act, dated notes;
+  `.news-voice-baseline.json` only if its walker is red; (4) the receipt, each alone. Anything else: STOP.
+- Noted by the chair, no action: the WR1 measure (the people row LIT -> LIT-NAME) accepted as taken.
+
 ## PART 1 · THE FAMILIES
 
 | # | family | door (exact) | predicted | held | commit | receipt |
@@ -62,6 +73,8 @@ each read from their own messages and none is of that kind (no other red arm nam
 | 1d | tailHistoryBatch4's KEEP | the row's address, dated note | the broker refused in r2r-thorp-43 (BAR3-PLACES) | r2r-thorp-43 -> r2s-monster_pressure-city-0, the branch's own KEEP town for that line (`bar3PlacesRows.test.js`) | 5869f595c | 2/2 |
 | 1d | lighting census | `LIGHTING_CENSUS_REFREEZE='BAR3-CLOSE-DOORS-1' LIGHTING_CENSUS_NOTE='…' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` on the clean committed tree, then without | files 3619 -> 3631 | files 3619 -> 3631 (the twelve guard files the seven branches added; none deleted), parked 460 -> 465, credited 3159 -> 3166, titles 30557 -> 30599, suiteTitles 8428 -> 8440; no [POPULATION_GREW] | fccd6adb8 | 34/34 |
 | 1e | the manifest's owed entries | `scripts/mutation-coverage-manifest.json`'s own form, kind 'rationale', after the bar2 siblings; never as uncovered | the five the seats named | exactly the five the walker printed: bar3PeopleTies, bar3PeoplePowers, bar3People2Rows, bar3PlacesRows, bar3PowersLines, each from its seat's "kills" line and its header | b3d98e87a | 10/10; the manifest's readers alone: 12 green, two bundles' freshness red (1f), newsHeadlineContract and proseFamilyContract red on arms that read no line of the manifest (below) |
+| 1d | tieProseDeclared (TP1) | the file's own form, dated note | 41 -> 44 | the three newly declaring rows are exactly econ_crim_blur.desc#3, desc#6, tension#2 | c5d49d609 | 3/3 |
+| 1d | prose-family and news-headline contracts (OC1) | `buildObservedCorpus` + `deriveProseFamilyContract`, `reconstructWizardNewsIntroductions` + `deriveNewsAddressRows` + `addressRowsSha256`: one build, an untracked scratch script; both baselines, both libraries' frozen figures and the walkers' readings in one act | the four identities arrive | union log EMPTY; prose family 60 -> 64 (exactly the four `warRulingRead` kind/reason rows), none leaves, 10 rows move a count, bytes 7806 -> 8408, digest ed98c528 -> 85f41b79; headline: no home or address in or out, four rows' counts move, totals .../659/834 -> .../660/834; `.news-voice-baseline.json` untouched (its walker green) | 75200a9db | both walkers 8/8; newsVoiceContract 8/8; hazardRegistryFailClosed 33/33; observedShapeReaders, sovereigntyLightingContract, testRatchet, siteCoherenceRatchet green |
 | 1f | edge bundles | `npm run build:edge-shared` at the merged tree | the engine bundle and the AI bundles stale against src/ | engineBundle js + meta (sourceHash 5048adb0 -> c16d8d30, engineVersion e6f14278 -> bb4d5a82, 398 inputs, the list unchanged); aiCharter (27695b70 -> 314d06eb), aiGrounding (f3a894bc -> 8fb89934), aiOutputSchema (c8272d48 -> a6462d2a) js + meta, input lists unchanged; analyticsEvents and intentAtlas metas restamped only. Cause: the round's source in the bundles' inputs, as a whole | 9d7c7fbc5 | all 21 files that read a bundle green alone (engineBundleReplay 5 + 2 skipped: its golden and fence arms, while the golden is stale: Part 2); `npm run validate:edge` exit 0 |
 | 1g | size ceilings (B3) | one `npm run build`; `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js`; the same at 83fc14ad6 (a scratch worktree, `node_modules` linked, lockfile identical: 66/66, its figures equal the old ceilings exactly) | five ceilings red, all under +60,000 | MEASURED, **HELD AS A PATCH, NOT COMMITTED** (the law red below may move chunk bytes): worker 2,312,179 -> 2,322,103 (+9,924; customContentPreview.worker the same +9,924); engine chunk 872,757 -> 878,204 (+5,447; the strict bound 872,758 -> 878,205); first paint raw 1,131,667 -> 1,131,858 (+191: data +120, index +60, engine-core +11), gzip 360,516 -> 360,590 (+74), Brotli 302,753 -> 302,817 (+64). Cause: the seven branches and the sweep seat's leaf as a whole; no vite.config.js, package.json or lockfile byte moved. With the patch applied: 66/66; the goods roster walker printed no row (nothing owed) | — | `npm run verify:dist` exit 1: bootSmoke FAILED (the law red below); engineBundleReplay's two rows SKIPPED (Part 2). Build output removed from both trees |
 
@@ -72,12 +85,12 @@ each read from their own messages and none is of that kind (no other red arm nam
 - writerReach (1c): ruled WR2, taken.
 - proseMoveGrammar: ruled PM1, taken.
 - generationForkCensus A6: ruled FA1, taken.
-- tieProseDeclared: its declaring rows' count 41 -> 44, undeclared. Sent 00:1x UTC. OPEN.
+- tieProseDeclared: its declaring rows' count 41 -> 44, undeclared. Sent 00:1x UTC. Ruled TP1, taken.
 - FOUND RED BEYOND MY LIST (on no table; untouched): `tests/lint/newsHeadlineContract.walker.test.js` A2 ("address row
   moved": the `queued|neutral_to_rival` and `queued|strategy_sue_for_peace` headline and summary rows' counts) and
   `tests/lint/proseFamilyContract.walker.test.js` A1, A3, A5 (scalarRows 38121 -> 38127; identities 60 -> 64; the pulse
   history's records). Both freeze the world pulse's AO-0 corpus. By my reading, the same moved draws as WR2; not
-  traced. Sent 00:2x UTC for the chair's class and word. OPEN.
+  traced. Sent 00:2x UTC for the chair's class and word. Ruled OC1 (class R), taken.
 - **bootSmoke (law)**: `tests/build/bootSmoke.test.js` (through `npm run verify:dist`): `scripts/boot-smoke.mjs` STAGE 1,
   "the chunk graph has a CYCLE of 2 chunks": coherence-lazy <-> data-lazy. RED AT 98363cb84 ITSELF (built alone: the same
   chunk hashes); 83fc14ad6 PASSES (602 chunks). The new edge: data-lazy (`src/data/npcData.js :: closureFor`) imports
@@ -102,7 +115,7 @@ each read from their own messages and none is of that kind (no other red arm nam
 1. 1g's commit, on the chair's word: apply the held patch (the scratch directory's `1g-held.patch`, the five figures
    above, in each file's own form) once the boot-smoke cycle's cure is in, or now; if the cure moves a chunk, re-measure
    the five first (one build of the cured tree) and record those instead, once.
-2. The chair's words on the OPEN rows above (tieProseDeclared's count; the two world-pulse contracts; bootSmoke).
+2. The chair's word on bootSmoke (OPEN above).
 
 ## FOR PART 2 (class G, red at this tip: they read the golden corpus or a figure derived from it)
 
