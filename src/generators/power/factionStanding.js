@@ -9,6 +9,14 @@ import { pluralPowerName } from '../../domain/display/governanceAccount.js';
 import { powerLabelOf } from '../factionDynamics.js';
 import { seatIsCouncil } from './claimStanding.js';
 import { STRESS_POWER_FACES } from '../../data/stressPowerFaces.js';
+import { coupContenders, coupRiskLabel } from '../../domain/rulingPowerCoup.js';
+
+// BAR4-HISTORY C14176 (the chair's ruling FS2 of 2026-11-16, vetoable by the owner): A POWER THAT COULD TAKE THE SEAT IS NOT
+// "TOO FAR BEHIND". The rank-1 line said "behind <seat> by too much to challenge openly" (or "too far behind to lead") beside
+// the seat's own coup reading "Contested" (the challenger outweighs the gated incumbent: `rulingPowerCoup.js ::
+// coupRiskLabel`). The callers hand the seat's legitimacy; the coup's own reader (`coupContenders`) reads the roster with it;
+// the rank-1 power that is its first challenger takes this line. VETOABLE wording (the owner's).
+export const SEAT_CONTESTED_STANDING = 'Close enough now to contest the seat, and they know it.';
 
 // BAR2-PEOPLE (PP10, the chair's ruling of 2026-11-15, vetoable by the owner): A POWER SENT IN BY AN OCCUPATION DECIDES. The
 // ladder's rank lines say a power below the first bargains, petitions or waits ("Behind <top> by too much to challenge openly,
@@ -41,7 +49,7 @@ const arcaneAheadSaid = (rival) => // TAIL-CLOSE-SRC-4 (SR4): named as its card 
 /** The number of level powers, as the standing line says it (TAIL-POWERS-B-4, P31 (4)); past six, "Many". */
 const LEVEL_COUNT_WORDS = Object.freeze(['', '', '', 'Three', 'Four', 'Five', 'Six', 'Many']);
 
-export const annotateFactionStanding = (factions, force = { body: 'garrison' }) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
+export const annotateFactionStanding = (factions, force = { body: 'garrison' }, seat = null) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
       var factionNames = factions.map(function (f) {
           return f.faction;
         }),
@@ -50,7 +58,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
             return name.toLowerCase().includes(keyword.toLowerCase());
           });
         },
-        topFactionName = factions[0] ? factions[0].faction : null;
+        topFactionName = factions[0] ? factions[0].faction : null,
+        seatReading = seat ? coupContenders(/** @type {any} */ ({ powerStructure: { factions, publicLegitimacy: seat.publicLegitimacy } })) : null, // BAR4-HISTORY C14176 (FS2)
+        contestedBy = seatReading && coupRiskLabel(seatReading) === 'Contested' ? (seatReading.challengers[0]?.name ?? null) : null;
       // POWERS-16 (the chair's ruling (r2)): a power named in a standing sentence takes its prose form, from one leaf
       var topSaid = topFactionName ? powerSentenceName(topFactionName) : null;
       factions[1] && factions[1].faction;
@@ -94,6 +104,8 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }) 
                     (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
                     ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.'
                   : 'No one clearly leads here; one scandal or one lost ally could change who does.')
+              : contestedBy && factionName === contestedBy && factions[0] && factions[0].isGoverning
+                ? (standing = SEAT_CONTESTED_STANDING)
               : topTwoGap <= 14
                 ? (standing = topFactionName
                     ? 'They operate in the shadow of ' +

@@ -86,7 +86,7 @@ import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { defenceOf } from '../../facts/defence.js';
 import { marketOf } from '../../facts/market.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
-import { factsAnswered } from '../../facts/factsAnswered.js';
+import { factsAnswered } from '../../facts/factsAnswered.js'; import { shapeYieldingKey } from '../../facts/shapingEvent.js'; // BAR4-HISTORY T1-SHAPE
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
 
@@ -2210,7 +2210,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       record: recordKey
         ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-16', {
           ...options,
-          spineKey: recordKey,
+          spineKey: shapeYieldingKey(recordKey, calamityFill(calamityRow?.name), hist.historicalCharacter, CORPUS['DS-GEN-16'].pools), // BAR4-HISTORY T1-SHAPE (SH1b): one shaping event a page (facts/shapingEvent.js)
           candidates: generalStateProseCandidates('DS-GEN-16', readings),
           slots: {
             ...slots,
@@ -2223,7 +2223,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       // memory, at DS-GEN-16's one speaking position (`history.legacy`).
       legacy: Object.freeze([
         livingMemoryName ? legacyLine('LIVING-MEMORY', { calamity: calamityFill(livingMemoryName) }) : null,
-        legacy ? legacyLine(legacy.key, {
+        legacy ? legacyLine(/** @type {string} */ (shapeYieldingKey(legacy.key, calamityFill(legacy.row.eventName), hist.historicalCharacter, CORPUS['DS-GEN-16'].pools)), { // BAR4-HISTORY T1-SHAPE (SH1b)
           calamity: calamityFill(text(legacy.row.eventName)),
           timeband_age: timebandAgeFill(legacy.row.yearsAgo),
         }) : null,

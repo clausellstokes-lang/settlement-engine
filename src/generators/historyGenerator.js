@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, placedTensionTokens, legitimacyHeldTensions, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -584,8 +584,8 @@ const buildHistoricalEvent = (
       ...tension,
       description: apartFromOwnEvent(renderHistoryTemplate(
         substituteNames(sizedHistoryText(tensionDescription({ ...tension, descriptionByDirection }, config), hookFacts)), // #20: the migration's own direction; W2-FIX-DATA-5 (#331): its small-place twin
-        tensionTokens, // COHERENCE-PRESUME: never its own past event's sentence, word for word (apartFromOwnEvent)
-      ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(sizedHistoryText(text, hookFacts)), tensionTokens)),
+        placedTensionTokens(tensionTokens, tension.type, timeline), // BAR4-HISTORY T1 (C24951): ONE EVENT, ONE PLACE (historyData.js); COHERENCE-PRESUME: never its own past event's sentence, word for word (apartFromOwnEvent)
+      ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(sizedHistoryText(text, hookFacts)), placedTensionTokens(tensionTokens, tension.type, timeline))),
       factions: (tension.factions || []).map(substituteNames),
       // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
       // filtered by the record (a refused row leaves it) and stored as text; a list that declares
@@ -1024,7 +1024,7 @@ export const generateHistory = (
     age,
     founding: speakFounding(founding, noun),
     historicalEvents: spokenTimeline,
-    currentTensions: Array.isArray(tensions) ? tensions.map((t) => speakRecord(t, noun)) : tensions,
+    currentTensions: Array.isArray(tensions) ? legitimacyHeldTensions(tensions.map((t) => speakRecord(t, noun)), powerStructure) : tensions, // BAR4-HISTORY C26792: an accepted seat's legitimacy tension in its twin (historyData.js)
     historicalCharacter,
     ...(ancientRuin ? { ancientRuin } : {}),
     eventsTimeline: spokenTimeline.map(e => ({

@@ -1769,6 +1769,10 @@
    "layer": 5,
    "src": "map:static"
   },
+  "DS-GEN-16::ANCHORED-OLD-MARKED": {
+   "layer": 5,
+   "src": "map:static"
+  },
   "DS-GEN-16::ANCHORED-RECENT": {
    "layer": 5,
    "src": "map:static"
@@ -1785,7 +1789,15 @@
    "layer": 5,
    "src": "map:static"
   },
+  "DS-GEN-16::LEGACY-RECOVERED-MARKED": {
+   "layer": 5,
+   "src": "map:static"
+  },
   "DS-GEN-16::LEGACY-SHIFTED": {
+   "layer": 5,
+   "src": "map:static"
+  },
+  "DS-GEN-16::LEGACY-SHIFTED-MARKED": {
    "layer": 5,
    "src": "map:static"
   },

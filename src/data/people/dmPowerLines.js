@@ -217,8 +217,10 @@ export const CAPTURE_LINES = Object.freeze({
     (f) => `No criminal house gives ${f.ruler} its orders. One that wants something from it has to ask, pay or wait like anyone else.`,
   ]),
   // the climate alone: a criminal power stands against the ruler and the ruler is winning; no agent in the three
+  // BAR4-HISTORY (C26840, WEAK, 2026-11-16): the degree word reads the rung, as its own relation row says it ("hunting ... in
+  // earnest but not catching all of it"): the ruler is ahead, not the fight won (was "is winning"; no longer, so the first-paint bytes do not rise)
   adversarial: Object.freeze([
-    (f) => `${criminalsOf(f)} works against ${f.ruler}, and ${f.ruler} is winning. Nobody at its head answers to the criminals.`,
+    (f) => `${criminalsOf(f)} works against ${f.ruler}, and ${f.ruler} is ahead. Nobody at its head answers to the criminals.`,
     (f) => `${f.ruler} and ${criminalsOf(f)} are openly at odds. ${f.ruler} goes after ${powerPossessive(criminalsOf(f))} people when it can catch them, and nobody in ${f.ruler} protects them.`,
     (f) => `${criminalsOf(f)} has no friend among the head, the second and the third of ${f.ruler}. It survives by staying out of their sight.`,
   ]),
