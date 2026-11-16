@@ -1,0 +1,4 @@
+{"id":"C197599","town":"bar0-town-occupied-rand-41","sev":"LOW","kind":"STATE","why":"ordinary 'Market day... the roads bring buyers' with no mark, while header gives Under Occupation, 'Controlled — Occupation Curfew' and Suppressed stability","other":""}
+{"id":"C198300","town":"bar0-town-occupied-rand-41","sev":"LOW","kind":"PAIR","why":"Economics: grapes 'needed, and not brought in', yet Vintner row 'Table wine · Wine wholesale' carries no short mark; only Brickmaker is marked short","other":"C198149"}
+{"id":"C198660","town":"bar0-town-occupied-rand-41","sev":"MED","kind":"PAIR","why":"'ordinary theft has dropped' beside 'Theft is rising even under the curfew' and the crime-wave tension 'Crime is rising faster than those in charge can answer it'","other":"C198659"}
+{"id":"DONE","lines":1982,"blocks":1,"flags":3}
