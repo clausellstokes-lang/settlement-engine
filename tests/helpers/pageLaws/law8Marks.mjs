@@ -28,7 +28,12 @@ import { serviceRowsOf } from '../../../src/domain/dossier/entityLinks.js';
 import { crisisOf } from '../../../src/domain/facts/crisisKind.js';
 
 /** A named exclusion: { rule, house (a RegExp over the house's name), why }. */
-export const EXCLUDED = Object.freeze([]);
+export const EXCLUDED = Object.freeze([
+  // r2s-indebted-metropolis-0: the smelter's own gap names its ore (gold or silver, brought in): the record's gap writer
+  // speaks of this house, and its reading stands (`housesWantingTradeInput` reads no gapped house); the need list's iron
+  // ore is the iron trade's, which no iron house of that town works
+  { rule: '8a.input', house: /^Smelter$/, why: 'a smelter whose own gap names its ore: the gap writer spoke of it' },
+]);
 
 // `law8.mjs`'s own readings of a good's name and of a house that only trades it (copied: the page form exports GOODS alone)
 const goodOf = (text) => {

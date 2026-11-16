@@ -1588,10 +1588,10 @@ export const INPUT_IMPORTED_AS = Object.freeze({
  */
 export const HOUSE_TRADE_INPUT = Object.freeze({
   blacksmith: 'ironOre', blacksmiths_3_10: 'ironOre', resident_smith_part_time: 'ironOre', specialized_metalworkers: 'ironOre',
-  brewer: 'grain', brewery: 'grain', maltster: 'grain', mill: 'grain', mills_2_5: 'grain',
+  brewer: 'grain', brewery: 'grain', maltster: 'grain', mill: 'grain', mills_2_5: 'grain', bakers_5_15: 'grain',
   carpenter: 'timber', carpenter_part_time: 'timber', carpenters_5_15: 'timber', cooper: 'timber', woodcarver: 'timber', shipyard: 'timber',
   sawmill: 'timber', sawmill_commercial: 'timber',
-  cobbler: 'hides', cobbler_s_guild: 'hides', tanner_established: 'hides',
+  cobbler: 'hides', cobbler_s_guild: 'hides', tanner_established: 'hides', tanners: 'hides', tannery: 'hides',
   fuller: 'wool', weavers_textile_workers: 'wool',
   glassmakers: 'sand',
   smelter: 'ironOre',

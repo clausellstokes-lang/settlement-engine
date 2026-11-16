@@ -314,7 +314,10 @@ describe('TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on
     // short of timber since BAR4-RECORD's declared reading (505f244f3 R1 rungs, the ninth's HW1 6dd18224a): their tabs print the line,
     // truly. Measured on the 720 at the merged tree (rowShortOf over every service and house row): 354 towns hold no row short; two
     // of them, a town and a city, neither printing the line
-    for (const [seed, tab] of [['r2r-town-0', 'services'], ['r2r-town-0', 'institutions'], ['r2r-city-13', 'services'], ['r2r-city-13', 'institutions']]) if ((await tabText(seed, tab)).includes(SUPPLIED)) failures.push(`${seed} ${tab}: the line of a row marked short, with no row short`);
+    // BAR6-MARKS (2026-11-16): re-keyed by identity from r2r-city-13, which holds a house short of its trade's good since the
+    // mark reads it (`houseInputAtHand.js :: housesWantingTradeInput`): its tabs print the line, truly. Measured on the 720 at
+    // the seat's tip: 13 towns and cities hold no row short; r2r-city-54 is one
+    for (const [seed, tab] of [['r2r-town-0', 'services'], ['r2r-town-0', 'institutions'], ['r2r-city-54', 'services'], ['r2r-city-54', 'institutions']]) if ((await tabText(seed, tab)).includes(SUPPLIED)) failures.push(`${seed} ${tab}: the line of a row marked short, with no row short`);
     expect(failures).toEqual([]);
   }, 600_000);
 

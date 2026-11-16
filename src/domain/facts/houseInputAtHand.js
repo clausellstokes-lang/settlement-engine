@@ -499,6 +499,19 @@ function importsBring(record, key) {
   return arr(record?.economicState?.primaryImports).map(str).some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))));
 }
 
+/**
+ * Whether the record's own chains say a house of the town depends on this good from outside (`activeChains[].dependency`:
+ * the field the page's "… depend on timber from outside, which the siege has cut off" is written from, `chainNeedShown.js`).
+ * @param {InputRecord & { economicState?: { activeChains?: unknown } | null }} record @param {string} key
+ */
+function dependsFromOutside(record, key) {
+  const words = CHAIN_INPUTS[key]?.words ?? [];
+  return arr(/** @type {{ activeChains?: unknown }} */ (record?.economicState ?? {}).activeChains).some((c) => {
+    const res = str(/** @type {{ dependency?: { resource?: unknown } | null } | null} */ (c)?.dependency?.resource);
+    return res !== '' && words.some((w) => holds(norm(res), w));
+  });
+}
+
 /** The luxury trade's own goods, which no chain carries (`HOUSE_TRADE_INPUT`'s `luxury`). */
 const LUXURY_NAMES = Object.freeze(['luxury goods', 'luxury materials']);
 /** An import or a product that meets the luxury trade's need. */
@@ -517,8 +530,9 @@ const WANTING_OF = new WeakMap();
  *   'missing'   the good is not had: the house is short of it (`housesShortOf` (iii), the page's "Short of timber.");
  *   'imported'  the imports bring it: under a siege the house works what it holds (`crisisStoppedRow.js ::
  *               housesOnImportedInput`, "Curtailed by the siege."); in a quiet town nothing is marked. Under a siege a good
- *               the land gives AND the imports bring is read so too: its imported share is cut (the page's "… depend on
- *               timber from outside, which the siege has cut off").
+ *               the land gives AND the imports bring is read so too where the record's chains say the town depends on
+ *               it from outside: its imported share is cut (the page's "… depend on timber from outside, which the siege
+ *               has cut off"); a good the town works itself and the chains do not say comes from outside is its own work.
  * The luxury trade's goods (no chain) are not had where the record's own need list names them, no siege is in force (it
  * stops the trade itself), and neither the town's production nor its imports bring a luxury or exotic good. AND THE WAR'S IRON HOOK OUTSIDE A WAR (fact (e), `warReach.js :: warIronHookOutsideWar`):
  * where the page prints it and no siege is in force (a siege's own reading of the imports stands there), every house
@@ -559,7 +573,7 @@ export function housesWantingTradeInput(record) {
     if (reach === 'missing' || reach === 'imported') out.set(name, { noun: tradeNoun(key), reach });
     // under a siege, a good the imports bring as well as the land gives is cut in its imported share (the page's own "…
     // depend on timber from outside, which the siege has cut off", `chainNeedShown.js :: chainNeedLine`): curtailed
-    else if (besieged && importsBring(r, key)) out.set(name, { noun: tradeNoun(key), reach: 'imported' });
+    else if (besieged && importsBring(r, key) && dependsFromOutside(r, key)) out.set(name, { noun: tradeNoun(key), reach: 'imported' });
   }
   WANTING_OF.set(record, out);
   return out;
