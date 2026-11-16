@@ -465,6 +465,29 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   // identical, one mangled import name apart; engine-core 277,921 -> 277,915 B keeps its 425 exports and none of the
   // key's strings); the engine chunk 860,445 -> 860,445 B. Pinned here, never left unpinned (FP-G11).
   '/src/domain/facts/criminalStructureKey.js',
+  // BAR4-FIRSTPAINT (2026-11-16; the round's first-paint regression, BAR4-SCENES-2's hand-back item 1). THE SAME
+  // PREMISE, THE SAME MEASUREMENT. facts/houseInputAtHand.js (BAR4-RECORD's one reading of "an input is at hand") is
+  // generator-reached (resourceGenerator.js, computeActiveChains.js), so the derivation put it in EAGER engine-core; the
+  // chair's HW1 gave it a static import of data/crisisDependence.js (four small tables of the spent-ground reading), and
+  // that table imports data/institutionServices.js: both left data-lazy for the eager `data` chunk (+143,714 B), and the
+  // derivation walked through facts/factsOf.js (pinned here) into its new homes facts/timberAtHand.js,
+  // facts/tradeAtWork.js and facts/sceneSupply.js (engine-core +4,855 B). First paint 1,143,114 B raw at f19c3b28b,
+  // 1,291,683 at 7738e71be. NO module of the true first-paint graph reaches any of the four (measured on this file's own
+  // EAGER_FIRST_PAINT_MODULES: their only eager importers were each other, as derived-set seeds); their importers are
+  // facts/factsOf.js (pinned here), the lazy display leaves display/validationOnPage.js and display/crisisStoppedRow.js
+  // (which already import crisisKind.js and factsOf.js from this chunk) and the engine chunk's generators (which already
+  // import this chunk); their own imports ride engine-core and `data`, or data-lazy (crisisDependence.js), which this
+  // chunk already imports. So they ride coherence-lazy beside factsOf.js, the one door every reading of their atoms
+  // passes: a getter of factsOf.js runs only once this chunk has evaluated, and the four with it. No source line moves.
+  // MEASURED (npm run build, VERIFY_DIST=1 vendorPdfLazy): first paint 1,291,683 -> 1,138,376 B raw (gzip 409,511 ->
+  // 362,463; Brotli 340,927 -> 304,277), 4,738 under f19c3b28b's (houseInputAtHand.js's and timberAtHand.js's own code
+  // left with them); `data` 296,244 -> 152,530 (f19c3b28b's, to the byte); engine-core 282,468 -> 272,875;
+  // coherence-lazy 182,232 -> 191,805; the engine chunk 882,000 -> 881,999; the generation worker unchanged (2,355,901).
+  // @guarded-by tests/architecture/factHomesLazy.test.js (the eager graph holds none of the four, nor the two tables).
+  '/src/domain/facts/houseInputAtHand.js',
+  '/src/domain/facts/timberAtHand.js',
+  '/src/domain/facts/tradeAtWork.js',
+  '/src/domain/facts/sceneSupply.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);

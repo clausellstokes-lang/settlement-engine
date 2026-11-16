@@ -307,8 +307,11 @@ describe('TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on
       if (!text.includes(desc)) { failures.push(`${seed} ${tab}: the row does not print (${desc})`); continue; }
       if (new RegExp(`Short of [^.]+\\. ${desc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(text)) failures.push(`${seed} ${tab}: "${desc}" is marked short`);
     }
-    // r2r-town-2 holds no short house; r2r-city-44's only short house is its vintner (S7): neither prints the line
-    for (const [seed, tab] of [['r2r-town-2', 'services'], ['r2r-town-2', 'institutions'], ['r2r-city-44', 'services'], ['r2r-city-44', 'institutions']]) if ((await tabText(seed, tab)).includes(SUPPLIED)) failures.push(`${seed} ${tab}: the line of a row marked short, with no row short`);
+    // BAR4-CLOSE-SWEEP (2026-11-16, the chair's 14:38): re-keyed by identity from r2r-town-2 and r2r-city-44, which each hold a sawmill
+    // short of timber since BAR4-RECORD's declared reading (505f244f3 R1 rungs, the ninth's HW1 6dd18224a): their tabs print the line,
+    // truly. Measured on the 720 at the merged tree (rowShortOf over every service and house row): 354 towns hold no row short; two
+    // of them, a town and a city, neither printing the line
+    for (const [seed, tab] of [['r2r-town-0', 'services'], ['r2r-town-0', 'institutions'], ['r2r-city-13', 'services'], ['r2r-city-13', 'institutions']]) if ((await tabText(seed, tab)).includes(SUPPLIED)) failures.push(`${seed} ${tab}: the line of a row marked short, with no row short`);
     expect(failures).toEqual([]);
   }, 600_000);
 

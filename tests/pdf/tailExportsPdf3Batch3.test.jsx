@@ -93,7 +93,11 @@ const KEEP = [
   ['r2s-famine-city-3', 'institutions', /^: Scarce in the famine\. Daily bread\./m], // the first cause stands
 ];
 // A town no house of which the page says is short prints no short mark and no supplied line.
-const UNSHORT = [['r2s-religious_conversion-hamlet-2', 'institutions'], ['r2s-religious_conversion-hamlet-2', 'services']];
+// BAR4-CLOSE-SWEEP (2026-11-16, the chair's word of 15:50): re-keyed by identity from r2s-religious_conversion-hamlet-2, whose
+// Charcoal burner is short of timber since the round's declared reading of a house's input (BAR4-RECORD b7d3da983, R1: no
+// row short there at c4ac1ef84a, short at f19c3b28b), so its tabs print the mark, truly. Measured on the 720 at 7203ec6df (rowShortOf over every service and
+// house row): 354 towns hold no row short, 40 of them a hamlet under a forced crisis; this is one, under the same crisis.
+const UNSHORT = [['r2s-religious_conversion-hamlet-0', 'institutions'], ['r2s-religious_conversion-hamlet-0', 'services']];
 
 describe('TAIL-EXPORTS-PDF-3 batch 3: the leaf\'s second cause, ENTREPÔT by the page\'s chains, the origin heading', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);

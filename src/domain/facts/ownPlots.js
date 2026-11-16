@@ -29,7 +29,7 @@ const GRAIN_SOURCES = Object.freeze(['grain', 'mill']);
  */
 export function ownPlotsOf(record, liveNames) {
   if (!record || typeof record !== 'object') return undefined;
-  const sources = /** @type {{ economicState?: any }} */ (record).economicState?.foodSecurity?.foodRecord?.foodSources;
+  const sources = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null }} */ (record).economicState?.foodSecurity?.foodRecord?.foodSources;
   if (Array.isArray(sources) && sources.some((s) => GRAIN_SOURCES.includes(String(s)))) return false;
   return (Array.isArray(liveNames) ? liveNames : []).some((n) => String(n).toLowerCase().includes('subsistence'));
 }

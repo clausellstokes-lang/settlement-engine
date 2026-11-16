@@ -23,7 +23,7 @@ export const UNPAID_WATCH = /^village watch$/i;
  * @returns {boolean}
  */
 export function watchIsUnpaidRota(institutions) {
-  const b = partitionDefenseInstitutions(/** @type {any} */ (institutions || []));
+  const b = partitionDefenseInstitutions(institutions || []);
   const watch = /** @type {Array<{ name?: unknown }>} */ (b.watch || []);
   return watch.length > 0 && (b.garrison || []).length === 0 && watch.every((i) => UNPAID_WATCH.test(String(i?.name ?? '').trim()));
 }
@@ -33,7 +33,7 @@ export function watchIsUnpaidRota(institutions) {
  * @returns {'full' | 'short' | 'unpaid' | null}
  */
 export function guardPayOf(record) {
-  if (watchIsUnpaidRota(liveInstitutions(/** @type {any} */ (record)))) return 'unpaid';
+  if (watchIsUnpaidRota(liveInstitutions(record))) return 'unpaid';
   const gate = record?.defenseProfile?.economicGates?.military;
   if (typeof gate !== 'number' || !Number.isFinite(gate)) return null;
   return gate >= 1 ? 'full' : 'short';

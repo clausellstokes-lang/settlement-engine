@@ -43,7 +43,7 @@ export const SOURCE_GROUND_KEYS = Object.freeze({
  */
 export function leadingSourceSpentOf(record) {
   if (!record || typeof record !== 'object') return undefined;
-  const r = /** @type {{ economicState?: any, config?: any }} */ (record);
+  const r = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null } | null, config?: { nearbyResources?: unknown, nearbyResourcesDepleted?: unknown } | null }} */ (record);
   const sources = r.economicState?.foodSecurity?.foodRecord?.foodSources;
   const keys = Array.isArray(sources) ? /** @type {Record<string, ReadonlyArray<string>>} */ (SOURCE_GROUND_KEYS)[String(sources[0])] : undefined;
   if (!keys) return false;

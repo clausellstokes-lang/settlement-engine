@@ -19,6 +19,7 @@ import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/ec
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 /** The one leaf variant whose text holds a fragment, slots filled with the place's name. */
 function leafLine(leaf, fragment, name) {
@@ -85,7 +86,7 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
   });
 
   it('soak1k-2402: the one-earner line that says nothing is failing, under famine', () => {
-    expect(readOn(2402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'on one trade.', s.name) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it */.split(/(?<=\.)\s+/)[1])).toEqual([['nothing is failing', 'hunger']]);
+    expect(readOn(2402, (s) => variantByVid({ leaf: 'economy', blockId: 'DS-ECO-12', poolKey: 'INCOME MIX: one source carries the town', vid: 3, slots: { settlement: s.name } }) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it. BAR4-CLOSE-SWEEP (2026-11-16): computed by its identity, DS-ECO-12 one source v3 (a literal anchor is the drawn-anchors law's), after BAR4-CORPUS-ECO 7354471e5's DECLARED rewording (C43690: "one trade" -> "one source of income"); its second sentence, the one read, unchanged */.split(/(?<=\.)\s+/)[1])).toEqual([['nothing is failing', 'hunger']]);
   });
 
   it('soak1k-5404: pilgrims queue patiently in a besieged city', () => {

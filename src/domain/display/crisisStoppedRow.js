@@ -405,7 +405,8 @@ function incomeHouseKind(settlement, income, crises) {
   const ids = Object.prototype.hasOwnProperty.call(INCOME_TRADE_HOUSES, title) ? INCOME_TRADE_HOUSES[title] : null;
   if (!ids || !settlement || typeof settlement !== 'object') return null;
   const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
-    .filter((i) => i && typeof i.name === 'string' && !isCustom(i) && ids.includes(String((typeof i.catalogId === 'string' && i.catalogId) || catalogIdForName(i.name) || '')));
+    .filter((i) => i && typeof i.name === 'string' && !isCustom(i)) // a catalogue house (a custom one has no catalogue id)
+    .filter((i) => ids.includes(String((typeof i.catalogId === 'string' && i.catalogId) || catalogIdForName(i.name) || ''))); // of the trade, by id
   if (houses.length === 0) return null;
   const kinds = houses.map((h) => rowStoppedBy(settlement, 'house', h, crises));
   if (kinds.some((k) => k === null)) return null;

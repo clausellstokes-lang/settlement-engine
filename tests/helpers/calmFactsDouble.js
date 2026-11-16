@@ -55,4 +55,11 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   dangerComing: false,
   magicSupply: true,
   criminalIncome: true,
+  // BAR4-CLOSE-SWEEP (2026-11-16): three more presence atoms arrived after the double, unanswered here (so fail-closed, and
+  // the kernel sweep's law 5 drifted on DS-ECO-9's two food-source pools, 36 rows): BAR4-CORPUS-ECO 7354471e5's `source spent`
+  // and `own plots` (`leadingSourceSpent.js`, `ownPlots.js`) and BAR4-HOUSES 3cf213071's `timber at hand` (`timberAtHand.js`).
+  // "Every presence atom holds" covers them, so a `no X` line is refused here exactly as the pre-cure reference refuses it.
+  leadingSourceSpent: true,
+  ownPlots: true,
+  timberAtHand: true,
 });

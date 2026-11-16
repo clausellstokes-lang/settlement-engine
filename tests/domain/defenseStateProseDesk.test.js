@@ -311,7 +311,7 @@ const FORCE_NAME = Object.freeze({
 function fort({
   monsterThreat = 'frontier', walls = false, garrison = false, militia = false,
   hasCourtSystem = false, hasPrison = false, hasGranary = false, hasHospital = false,
-  hasChurch = false, economic = 50, ruined = false,
+  hasChurch = false, economic = 50, ruined = false, prosperity = undefined,
 } = {}) {
   const roster = [];
   if (walls) roster.push({ name: FORCE_NAME.walls });
@@ -326,7 +326,7 @@ function fort({
       ? roster.map((i) => ({ ...i, status: 'ruined', _worldPulseInactive: true }))
       : roster,
     defenseProfile: { scores: { economic } },
-    economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } } },
+    economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } }, ...(prosperity ? { prosperity } : {}) },
   };
 }
 
@@ -573,10 +573,13 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
                 for (const hasGranary of [true, false]) {
                   for (const hasHospital of [true, false]) {
                     for (const hasChurch of [true, false]) {
-                      for (const economic of [80, 50, 30, 10]) {
+                      // BAR4-CLOSE-SWEEP (2026-11-16): the record's prosperity label, an axis of the space since BAR4-CORPUS-DEF
+                      // 6f8081add (D3, DECLARED: every `Economic Survival: WEAK` line reads `prosperity: ≤ comfortable`, its twin
+                      // v6 `≥ prosperous`); the economy always writes it, the fixture did not, so the pool read unanswered (mute)
+                      for (const [economic, prosperity] of [80, 50, 30, 10].flatMap((e) => [[e, 'Moderate'], [e, 'Prosperous']])) {
                         const drawn = defenseThreatProse(fort({
                           monsterThreat, walls, garrison, militia, hasCourtSystem,
-                          hasPrison, hasGranary, hasHospital, hasChurch, economic,
+                          hasPrison, hasGranary, hasHospital, hasChurch, economic, prosperity,
                         }), { seed: 'sweep' });
                         for (const row of ['beasts', 'invasion', 'internal', 'economic', 'disaster']) {
                           const rung = drawn[row];

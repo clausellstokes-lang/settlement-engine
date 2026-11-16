@@ -85,9 +85,12 @@ describe('BAR4-HOUSES H1: a house\'s description and the foodways line presume n
     ['store', town({ economicState: { activeChains: [], foodSecurity: { foodRecord: { band: 'famine', foodSources: ['grain'] } } } }), { foodwaysLine: HARVEST },
       town(), { foodwaysLine: HARVEST }],
   ]);
-  it.each(CONTROLS)('(b) the positive control of class %s: fires in the false state, silent in the true one', (cls, falseState, falseOpts, trueState, trueOpts) => {
-    expect(housePresumptionsOf(falseState, falseOpts).map((i) => i.cls)).toEqual([cls]);
-    expect(housePresumptionsOf(trueState, trueOpts).map((i) => i.cls)).toEqual([]);
+  // BAR4-CLOSE-SWEEP (2026-11-16, the sovereignty lighting law: no new `each`): one parameterless test over the classes, every row run
+  it('(b) the positive control of each class: fires in the false state, silent in the true one (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(CONTROLS, ([cls, falseState, falseOpts, trueState, trueOpts]) => {
+      expect(housePresumptionsOf(falseState, falseOpts).map((i) => i.cls), `${cls}: fires in the false state`).toEqual([cls]);
+      expect(housePresumptionsOf(trueState, trueOpts).map((i) => i.cls), `${cls}: silent in the true one`).toEqual([]);
+    }), '(b) every class\'s positive control');
   });
 
   it('(d) the surfaces agree (the chair\'s FW1b): the tab\'s call, the PDF\'s and Foundry\'s call and the stored identity print one line', () => {
