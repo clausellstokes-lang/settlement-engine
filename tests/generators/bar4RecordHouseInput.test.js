@@ -21,7 +21,11 @@ const FIRED = Object.freeze({
   Fishmonger: 'r2r-village-36 r2s-religious_conversion-village-0',
   Smelter: 'r2r-city-17',
 });
-const SEEDS = Object.values(FIRED).flatMap((list) => list.split(' '));
+/** The census towns where the RUNG arm fired at b193fa89a (the chair's R2: a "Sawmill (commercial)" with no timber by
+ * both readings, this fact's and BAR4-HOUSES' `timber at hand`, and no gap line). */
+const RUNG_FIRED = 'r2r-town-2 r2r-town-29 r2r-town-34 r2r-town-45 r2r-town-48 r2r-town-49 r2r-city-0 r2r-city-6 r2r-city-7 r2r-city-11 r2r-city-14 r2r-city-21 r2r-city-24 r2r-city-35 r2r-city-36 r2r-city-40 r2r-city-41 r2r-city-44 r2r-city-56 r2r-metropolis-2 r2r-metropolis-4 r2r-metropolis-7 r2r-metropolis-8 r2r-metropolis-14 r2r-metropolis-19 r2r-metropolis-22 r2r-metropolis-24 r2r-metropolis-27 r2r-metropolis-28 r2r-metropolis-29 r2r-metropolis-33 r2r-metropolis-34 r2r-metropolis-35 r2r-metropolis-39 r2r-metropolis-40 r2r-metropolis-41 r2r-metropolis-47 r2r-metropolis-50 r2r-metropolis-57 r2s-under_siege-city-1 r2s-famine-metropolis-1 r2s-occupied-town-3 r2s-occupied-city-0 r2s-occupied-city-2 r2s-occupied-metropolis-2 r2s-occupied-metropolis-3 r2s-politically_fractured-metropolis-0 r2s-politically_fractured-metropolis-1 r2s-politically_fractured-metropolis-2 r2s-indebted-metropolis-0 r2s-recently_betrayed-town-1 r2s-recently_betrayed-city-1 r2s-recently_betrayed-city-2 r2s-recently_betrayed-metropolis-0 r2s-recently_betrayed-metropolis-1 r2s-recently_betrayed-metropolis-2 r2s-recently_betrayed-metropolis-3 r2s-infiltrated-city-0 r2s-plague_onset-city-0 r2s-plague_onset-metropolis-1 r2s-succession_void-town-3 r2s-succession_void-metropolis-2 r2s-monster_pressure-city-3 r2s-monster_pressure-metropolis-0 r2s-insurgency-town-0 r2s-insurgency-city-1 r2s-insurgency-city-3 r2s-insurgency-metropolis-3 r2s-religious_conversion-city-0 r2s-religious_conversion-city-1 r2s-religious_conversion-metropolis-0 r2s-slave_revolt-metropolis-0 r2s-wartime-town-3 r2s-wartime-city-3 r2s-wartime-metropolis-0 r2s-wartime-metropolis-2 r2s-mass_migration-town-1 r2s-mass_migration-metropolis-0 r2s-mass_migration-metropolis-1 r2s-mass_migration-metropolis-2 r2s-mass_migration-metropolis-3';
+const FIRST = Object.values(FIRED).flatMap((list) => list.split(' '));
+const SEEDS = [...FIRST, ...RUNG_FIRED.split(' ').filter((seed) => !FIRST.includes(seed))];
 
 /** CENSUS-3 seedcfg.mjs's r2r-/r2s- arms, verbatim in shape. @param {string} seed */
 function configOf(seed) {
@@ -51,7 +55,8 @@ const gapLineOf = (/** @type {string} */ chainKey, /** @type {string} */ house) 
 
 describe('R1: a house the record calls short of its input is short on the page too (one reading, houseInputAtHand)', () => {
   it('the detector reads zero in every census town where it fired at c4ac1ef84a', () => {
-    expect(SEEDS).toHaveLength(64);
+    expect(FIRST).toHaveLength(64);
+    expect(RUNG_FIRED.split(' ')).toHaveLength(81);
     const failures = collectSeedFailures(SEEDS, (seed) => {
       expect(houseInputSplits(BORN.get(seed)).map((x) => `${x.house} (${x.chain})`)).toEqual([]);
     });
@@ -77,6 +82,19 @@ describe('R1: a house the record calls short of its input is short on the page t
     expect(resourceGapLines(BORN.get('r2r-village-4')).map((l) => l.impact)).toContain(gapLineOf('timber', 'sawmill'));
     // a siege shuts the road: the besieged caravanserai is short, and says so
     expect(resourceGapLines(BORN.get('r2s-under_siege-town-1')).map((l) => l.impact)).toContain(gapLineOf('camelCaravan', 'caravanserai'));
+  });
+
+  it('KEEP: a commercial sawmill with no timber is short by its kind, its line names it as the sawmill', () => {
+    const town = BORN.get('r2r-town-2');
+    expect(town.institutions.some((/** @type {{ name?: string }} */ i) => i?.name === 'Sawmill (commercial)')).toBe(true);
+    expect(town.resourceAnalysis.gaps.filter((/** @type {{ institution?: string, kind?: string }} */ g) => g.institution === 'Sawmill (commercial)').map((/** @type {{ kind?: string }} */ g) => g.kind)).toEqual(['missing', 'missing']);
+    expect(resourceGapLines(town).map((l) => l.impact)).toContain(gapLineOf('timber', 'sawmill'));
+  });
+
+  it('POSITIVE CONTROL (the rung arm): a commercial sawmill with no timber whose gap rows are struck fires', () => {
+    const town = structuredClone(BORN.get('r2r-town-2'));
+    town.resourceAnalysis.gaps = town.resourceAnalysis.gaps.filter((/** @type {{ institution?: string }} */ g) => g.institution !== 'Sawmill (commercial)');
+    expect(houseInputSplits(town).map((x) => x.house)).toEqual(['Sawmill (commercial)']);
   });
 
   it('KEEP: a caravanserai the connected road feeds has no gap row and no gap line (silent by design: the route is its trade)', () => {

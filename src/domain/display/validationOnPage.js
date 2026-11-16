@@ -41,7 +41,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
-import { CHAIN_INPUTS, houseInputAtHand } from '../facts/houseInputAtHand.js';
+import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand } from '../facts/houseInputAtHand.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -109,9 +109,10 @@ function inputAnswered(s, chainKey, inst) {
   return houseInputAtHand(/** @type {Parameters<typeof houseInputAtHand>[0]} */ (s), chainKey, /** @type {Parameters<typeof houseInputAtHand>[2]} */ (inst)) !== 'missing';
 }
 
-/** @param {{ name?: unknown } | null | undefined} inst @returns {string} the house as the sentence names it ("the potter") */
+/** @param {{ name?: unknown } | null | undefined} inst @returns {string} the house as the sentence names it ("the potter"; "the sawmill" of a commercial one) */
 function houseWords(inst) {
-  const name = str(institutionDisplayName(inst) || inst?.name).replace(/^access to (?:an? )?/i, '');
+  // the house's prose name, its rung struck ("Sawmill (commercial)" is the sawmill: BAR4-RECORD R2), as proseHouseName reads it
+  const name = str(institutionDisplayName(inst) || inst?.name).replace(/^access to (?:an? )?/i, '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
   return `the ${name.charAt(0).toLowerCase()}${name.slice(1)}`;
 }
 
@@ -500,7 +501,7 @@ export function resourceGapLines(s) {
   for (const g of gaps) if (g && typeof g === 'object' && g.institution) flagged.set(str(g.institution), g);
   for (const [name, g] of flagged) {
     const inst = institutions.find((i) => i?.name === name) || { name };
-    const chains = Object.entries(RESOURCE_CHAINS).filter(([, c]) => arr(c.processingInstitutions).includes(name));
+    const chains = chainsOfHouse(name); // R1/R2: the chains the writer asked this house of (a sawmill's rung too)
     if (chains.some(([key]) => inputAnswered(s, key, inst))) continue;
     const specs = chains.map(([key]) => CHAIN_INPUTS[key]).filter(Boolean);
     const nouns = [...new Set(specs.map((x) => x.noun))];

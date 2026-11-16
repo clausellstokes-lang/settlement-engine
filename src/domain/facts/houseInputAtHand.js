@@ -209,3 +209,40 @@ export function sawnGoodFed(good, nearbyResources, depletedResources, institutio
   return institutions.filter((i) => !!i && isSawmill(i))
     .some((house) => houseInputAtHand(record, 'timber', /** @type {any} */ (house)) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {any} */ (house)) !== 'missing');
 }
+
+/**
+ * A house name's head word, as a kind: lower case, no counts or possessives, no plural or -y ending ("Sawmill
+ * (commercial)" and "Sawmill" are one kind; "Carpenters (5-15)" and "Carpenters' guild" one). Moved here from
+ * `resourceGenerator.js` (one home), which reads it for its houses by kind.
+ * @param {unknown} name
+ */
+export const houseHead = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ')
+  .split(/[\s/]+/).find(Boolean) || '').replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
+
+/**
+ * The kinds whose ladder rungs run their chain's work (the chair's ruling R2 of 2026-11-16 09:27 UTC, vetoable by the
+ * owner): the sawmill alone. Measured by head on the census's 720, a rung of every chain's house reads 774 instances in 328
+ * towns (weavers, butchers, dyers, carpenters, tanners, smiths, apothecaries): a MEASURED KIND for the next round, not a
+ * cure (a butcher beside hunting grounds works game this reading does not read as livestock).
+ */
+const RUNG_HEADS = Object.freeze(['sawmill']);
+
+/**
+ * Whether a house runs a chain: the chain names it, OR names a house of its kind where that kind's rungs are admitted
+ * (`RUNG_HEADS`; BAR4-RECORD R1, the chair's rulings of 2026-11-16 09:23 and 09:27 UTC, vetoable by the owner: A LADDER
+ * RUNG IS THE SAME HOUSE: "Sawmill (commercial)" runs the timber chain the "Sawmill" runs, and is short of timber where
+ * the Sawmill would be).
+ * @param {{ processingInstitutions?: ReadonlyArray<string> } | null | undefined} chain @param {unknown} name
+ */
+export const houseRunsChain = (chain, name) => {
+  const houses = arr(chain?.processingInstitutions).map(str);
+  const head = houseHead(name);
+  return houses.includes(str(name)) || (RUNG_HEADS.includes(head) && houses.some((h) => houseHead(h) === head));
+};
+
+/**
+ * The chains a house runs, as `[chainKey, chain]` (`houseRunsChain`).
+ * @param {unknown} name
+ * @returns {Array<[string, any]>}
+ */
+export const chainsOfHouse = (name) => Object.entries(RESOURCE_CHAINS).filter(([, c]) => houseRunsChain(/** @type {any} */ (c), name));

@@ -17,7 +17,7 @@ import {
 import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
 import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
 import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
-import { houseInputAtHand, localProducerSupplies, terrainSynonymsFor } from '../domain/facts/houseInputAtHand.js';
+import { houseHead, houseInputAtHand, houseRunsChain, localProducerSupplies, terrainSynonymsFor } from '../domain/facts/houseInputAtHand.js';
 
 // ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
 // The terrain table (`TERRAIN_DATA`) says what a kind of ground usually lacks and yields. The town's
@@ -377,9 +377,7 @@ const buildViabilityReport = (
 const UNHOUSED_GOOD_MAKER = Object.freeze({ beer: 'brewer' });
 /** The chain a famine's failed source stops (foodBalance.js :: failedSource; the mill grinds the grain). */
 const FAILED_SOURCE_CHAIN = Object.freeze({ grain: 'grain', mill: 'grain', livestock: 'livestock', fish: 'fish' });
-/** A house name's head word, as a kind: lower case, no counts or possessives, no plural or -y ending. @param {unknown} name */
-const houseHead = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ')
-  .split(/[\s/]+/).find(Boolean) || '').replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
+// A house name's head word, as a kind: one home, `domain/facts/houseInputAtHand.js :: houseHead` (imported above).
 /** @param {string} name a house the chain names @param {any} chain @param {Array<{ name?: string }>} institutions */
 const houseStands = (name, chain, institutions) => institutions.some((inst) => inst?.name === name
   || (institutionSupportsChain(inst, chain) && houseHead(inst?.name) === houseHead(name)));
@@ -472,7 +470,7 @@ const supplyOfInput = (chainKey, institution, institutions, evidence = {}) =>
 // bought in. M-S, read by evaluateInstitutionChain's lacks-access row.
 const reachedByAnotherInput = (chain, institution, institutions, exploitation, evidence) => (
   Object.entries(RESOURCE_CHAINS || {}).some(([otherKey, other]) => other !== chain
-    && other.processingInstitutions?.includes(institution.name)
+    && houseRunsChain(other, institution.name)
     && (exploitation.fullyExploited?.some((c) => c.rawResource === other.rawResource)
       || exploitation.partiallyExploited?.some((c) => c.rawResource === other.rawResource)
       || supplyOfInput(otherKey, institution, institutions, evidence) !== 'missing'))
@@ -514,7 +512,7 @@ const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => 
   // Institutions that exist but whose resource inputs are missing
   institutions.forEach(institution => {
     Object.entries(RESOURCE_CHAINS || {}).forEach(([chainKey, chain]) => {
-      if (!chain.processingInstitutions?.includes(institution.name)) return;
+      if (!houseRunsChain(chain, institution.name)) return; // R1/R2: a sawmill's rung runs the sawmill's chains
       const alreadyInGaps =
         exploitation.fullyExploited?.some(c => c.rawResource === chain.rawResource) ||
         exploitation.partiallyExploited?.some(c => c.rawResource === chain.rawResource);

@@ -9,6 +9,8 @@ joined line's tip, the same tree as `a71788851f`). Branch: `lane/bar4-record-202
 | kind | detector | 720 before → after | fresh 300 before → after | named exclusions | guard and positive control |
 |---|---|---|---|---|---|
 | R1 · the house short of its input that the page still counts | `tests/helpers/houseInputSplit.js :: houseInputSplits` (record `resourceAnalysis.gaps[]` kind `missing` against the page's own gap reader `resourceGapLines`) | 67 rows in 64 towns → 0 | 17 rows in 16 towns → 0 | none | `tests/generators/bar4RecordHouseInput.test.js`: zero in the 64 towns where it fired; POSITIVE CONTROL a planted `missing` row for a caravanserai on a connected road (r2r-hamlet-14) must fire |
+| R1 · its output arm: the short house whose output the town still makes or sells | the same function, `OUTPUTS` (a sawmill's sawn goods in production and exports) | 3 towns (+ the read town) at b7d3da983 → 0 | 0 → 0 | none | the same file: a short sawmill planted with a "Milled lumber" export (r2r-village-4) must fire |
+| R1 · its rung arm: a house of a chain's KIND never asked (cured scope: the sawmill) | the same function, `rungHeads` | 81 towns → 0 | 25 towns → 0 | the other kinds' rungs are a MEASURED KIND, not excluded as true (ruling R2; `rungHeads: null` reads them: 693 in 323 towns / 256 in 126 at my tip) | the same file: zero in the 81 towns; a commercial sawmill with its gap rows struck (r2r-town-2) must fire |
 
 ## The measure before (K2, sent to the chair 08:0x UTC)
 
@@ -83,6 +85,65 @@ FOUND, NOT CURED (a question to the chair): the gap writer asks a house only by 
 in 16 towns of the 720 such a sawmill has no timber, now makes nothing, and prints no gap line and no mark (silence, not two
 values; its "Lumber milling" row stands bare, the R1 kind by another door).
 
+## Batch 3 · the sawmill's ladder rung (the chair's rulings of 09:23 and R2 of 09:27 UTC; vetoable by the owner)
+
+THE DETECTOR FIRST, WIDENED (`houseInputSplit.js`, the RUNG arm): a live native house of a chain's KIND (`houseHead`), not
+its spelling, its every input absent by the one reading, no chain on it worked, and no gap line naming it. Read over every
+kind it counts 774 instances in 328 towns of the 720 and 281 in 127 of the fresh 300 at b193fa89a: NOT A CURE (ruling R2
+(1)): the sawmill alone is cured; the rest are a measured kind (the table below). The arm's cured scope (`rungHeads`,
+default `['sawmill']`): 81 towns of the 720 and 25 of the fresh 300 → 0 and 0.
+
+AGAINST BAR4-HOUSES' `timber at hand` (`lane/bar4-houses-2026-11-16`, `src/domain/facts/timberAtHand.js`: the Timber &
+Lumber chain working its input), every "Sawmill (commercial)" of both populations:
+
+| this reading (houseInputAtHand) | BAR4-HOUSES' (timberAtHandOf) | 720 | fresh | why they differ, and which is true by the record |
+|---|---|---|---|---|
+| absent | absent | 81 | 25 | they agree: no timber resource live, no timber chain, no raw timber arriving (r2r-town-2): CURED now |
+| at hand | at hand | 57 | 24 | they agree (a working managed forest, mountain or shipbuilding timber) |
+| at hand (imported) | absent | 83 | 31 | THE QUESTIONS DIFFER, BOTH TRUE: an arriving import ("Timber", "Shipbuilding timber (local shipbuilding stands cleared)", "Timber (local managed woodland cleared)") reaches the sawmill (it runs on bought timber: its gap row says "imported"), while BAR4-HOUSES asks whether the town has timber OF ITS OWN to supply the region's building work (it has not). For the join: ONE reading of "the sawmill's timber" is this fact's; BAR4-HOUSES' description line asks the narrower "timber of its own", and should read this fact's `'local'` kind (not `'imported'`) if it is to be the same home |
+| absent | at hand | 0 | 0 | — |
+
+(BAR4-HOUSES' 11 of the 720 counted only the 19 towns that print its sawmill description's timber line; mine counts every
+commercial sawmill: the same answer where both look.)
+
+THE CURE: the gap writer asks a house by its KIND where that kind's rungs are admitted (`houseInputAtHand.js ::
+houseRunsChain`, `RUNG_HEADS = ['sawmill']`; `houseHead` moved there, one home), in `evaluateInstitutionChain` and
+`reachedByAnotherInput`; the page's reader asks the same chains (`chainsOfHouse`), and the gap line names the house by its
+prose name, its rung struck ("No timber reaches the sawmill.", as `proseHouseName` reads a house; no gap line printed a
+bracket before).
+
+THE DECLARED MOVE (b193fa89a → batch 3): `resourceAnalysis.gaps` in 163 towns of the 720 (81 commercial sawmills now
+`missing` timber, 82 now `imported`: the second print nowhere but the elevated staff panel) and 56 of the fresh 300;
+`resourceAnalysis.priorityNotes` in 29 of the 720 and 6 fresh (the staff panel's "Military focus highlights gap: timber
+processing is incomplete" now names the sawmill's timber first: printed on no DM surface). NOTHING ELSE: no viability score,
+verdict, issue count, prosperity band, food band, income or trade list moves. The page: +81 "No timber reaches the
+sawmill." in the 720, +25 fresh, none lost; the row takes its mark on each tab (r2r-town-2: "Lumber milling (short)",
+"Short of timber.").
+
+THE RUNGS LEFT, A MEASURED KIND FOR THE NEXT ROUND (ruling R2 (1)): by house, what this reading calls absent, the instances
+in the 720, one town where the absence is plain (no resource, import or production of the input by any name), and one
+where a reader would hold the input at hand by another name (the evidence in brackets; a hint by words, to be read):
+
+| house (rung) | input the fact reads absent | 720 | plainly absent | at hand by another name |
+|---|---|---|---|---|
+| Weavers/Textile workers | wool/flax | 146 | r2r-town-8 | r2r-town-14 (Dyed cloth and quality textiles) |
+| Butchers (3-8) | livestock | 131 | r2r-town-4 | r2r-town-1 (hunting_grounds; game meat) |
+| Dyer | wool | 126 | r2r-village-21 | r2r-town-2 (Incense, ritual oil, sacred texts, and vestment cloth (bulk)) |
+| Carpenters (5-15) | timber | 99 | r2r-town-5 | r2r-town-31 (Cordage, tar, timber fittings, and bulk vessel supplies) |
+| Tanner (established) | livestock/hides | 59 | r2r-town-6 | r2r-city-46 (Felt and leather goods) |
+| Tanners | livestock/hides | 35 | r2r-town-2 | r2s-wartime-city-1 (Felt and leather goods) |
+| Blacksmith | iron ore | 21 | r2r-village-4 | r2r-village-0 (precious_metals) |
+| Apothecary district | medicinal herbs/water from the hot springs | 18 | r2r-city-2 | r2r-city-8 (Ritual wood and herbs (ancient grove damaged)) |
+| Blacksmiths (3-10) | iron ore | 15 | r2r-city-5 | r2r-city-17 (Iron fittings and arrowheads) |
+| Carpenter | timber | 14 | r2r-village-9 | r2s-monster_pressure-village-0 (Sandalwood and camphor) |
+| Carpenter (part-time) | timber | 13 | r2r-hamlet-3 | — |
+| Apothecary (established) | medicinal herbs/water from the hot springs | 10 | r2r-town-18 | r2r-town-14 (Herbs and forage (local gathering areas exhausted)) |
+| Alchemist quarter | medicinal herbs/water from the hot springs | 6 | r2s-politically_fractured-metropolis-2 | r2s-succession_void-metropolis-1 (Ritual wood and herbs (ancient grove damaged)) |
+
+Read so: a butcher beside hunting grounds works game (r2r-town-1), an apothecary with "Herbs and forage" arriving has
+herbs (r2r-town-14): the reading is too narrow for those kinds (it names the input by one word); weavers and carpenters with
+nothing of wool or timber are plainly short. The next round's cure is the READING per kind, then the rungs.
+
 ## Every new or changed line (THE VETO LIST)
 
 No sentence is new or reworded: the gap lines are the designed ones (`resourceGapLines`), now printed where the record
@@ -96,6 +157,8 @@ bar0-village-famine-rand-21 (famine); "No camels reach the caravanserai." r2s-un
   the sawmill." (3 towns of the 720, 0 fresh, and the read town): the line I would change is
   `src/generators/computeActiveChains.js:727-728` (`CHAIN_OUTPUT_INST_GATES` 'Milled timber'/'Milled lumber'): the gate also
   asks `houseInputAtHand` of the sawmill. Awaiting the chair's word.
+- BAR4-HOUSES: the commercial sawmill's description reads `timber at hand` (timber of its own); this fact's `'local'` kind
+  is the same reading; after the join one home (batch 3's table).
 - BAR4-SCENES: its sawn-timber gate reads timber at hand by its own reading; AFTER THE JOIN it should call `houseInputAtHand` (the chair, 08:19).
 - BAR4-CORPUS-ECO: the food ledger names `fish` as a source where `river_fish` is depleted (r2s-indebted-village-2): the
   fishmonger reads the ledger and is called fed.
@@ -123,7 +186,8 @@ tip on those 60 (expected; the reference is not mine to re-take).
 
 ## Left, in order
 
-1. The chair's word on the ladder rungs the gap writer never asks ("Sawmill (commercial)", batch 2).
+1. THE RUNGS OF THE OTHER KINDS (batch 3's table): the reading per kind first (game for a butcher, herbs by any name), then
+   the rungs, measured by the RUNG arm with `rungHeads: null`.
 2. The inventory diff of the census at my tip (720) and the 525 reference count; the final net (amendment 2) with its build.
 
 ## How the instruments are re-made
