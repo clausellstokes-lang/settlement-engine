@@ -1,0 +1,3471 @@
+[
+ {
+  "file": "src/components/new/dailyLifeLogic.js",
+  "pool": "TERRAIN_CONTEXT",
+  "line": 213,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Water is the central organising fact of daily life. Where it is, who controls it, how far to reach it. The heat governs the schedule: activity before midday and after dusk, stillness in between. Shade, shelter from sandstorms, and the oasis or well are social gathering points. Caravans are lifelines",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/components/new/dailyLifeLogic.js",
+  "pool": "ROUTE_CONTEXT",
+  "line": 218,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A main road means a steady trickle of travellers, merchants, and news. The inn and the stables see constant turnover. People here know more about what\\'s happening in distant places than isolated settlements do. Strangers are normal.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/components/new/dailyLifeLogic.js",
+  "pool": "ROUTE_CONTEXT",
+  "line": 219,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Multiple roads converging means constant movement: merchants, pilgrims, soldiers, refugees. The settlement sees a rotation of faces. News arrives from several directions simultaneously. The market is the heart of everything. Conflict between passing groups is a recurring management problem.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/components/new/dailyLifeLogic.js",
+  "pool": "ROUTE_CONTEXT",
+  "line": 220,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The river is a highway. Barges and boats bring bulk goods that no cart could carry economically. The landing, the dock, and the ferryman\\'s house are where deals are made. The population is accustomed to travellers from upstream and downstream. Floods are a shared reference point for time (\"the year",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/components/new/dailyLifeLogic.js",
+  "pool": "ROUTE_CONTEXT",
+  "line": 221,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The sea brings the world to the door. The harbour is never quiet. Sailors from distant ports, foreign merchants, exotic goods, and foreign diseases all arrive by ship. The population is accustomed to the strange and is harder to shock. The dockside district has its own rough social order.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/components/new/dailyLifeLogic.js",
+  "pool": "ROUTE_CONTEXT",
+  "line": 223,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The pass controls movement between regions. In season, a steady stream of merchants and travellers; in winter, near-total isolation. The settlement exists to service the pass: stabling, food, shelter, guides. Every resident has opinions about road conditions, weather, and the character of travellers",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 67,
+  "classes": [
+   "iron"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['institution: smith' ; excludes: ['crisis: under_siege'] ",
+  "text": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 82,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['institution: smith' ; excludes: ['crisis: under_siege'] ; crisis: ['wartime'",
+  "text": "Every forge you pass is making something meant for a war, and the carts on the road out are full of it.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 89,
+  "classes": [
+   "outside",
+   "plenty"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "inline colour",
+  "text": "The smell of fresh bread meets you on the road in.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 112,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline excludes: ['crisis: under_siege'] ; crisis: ['any'] ",
+  "text": "Bales of hides and bundled pelts crowd the carts on the road out.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 126,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline excludes: ['crisis: under_siege'] ; crisis: ['any'] ",
+  "text": "Barrels are stacked by every doorway, and the carts on the road out are loaded with more.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 166,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline excludes: ['crisis: under_siege' ; crisis: ['any'] ",
+  "text": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "also": [
+   "src/data/arrivalProse.js:167"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 198,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['market'] ; excludes: ['crisis: threat'] ; crisis: ['any'] ",
+  "text": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 200,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['church'] ; excludes: ['crisis: threat' ; crisis: unrest'] ; crisis: ['any'] ",
+  "text": "Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 219,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['trade at work: stone'] ; excludes: ['crisis: under_siege'] ; crisis: ['any'] ",
+  "text": "Laden carts from the workings grind along the road in a line that never seems to end.",
+  "also": [
+   "src/data/arrivalProse.js:220"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 236,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['timber reaches the saws'] ; excludes: ['crisis: under_siege'] ; crisis: ['any'] ",
+  "text": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
+  "also": [
+   "src/data/arrivalProse.js:237"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 237,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline twinOf: 'Stacks of seasoning planks line the road in ; excludes: ['timber reaches the saws'] ; crisis: ['any'] ",
+  "text": "A few planks stand seasoning by the road in, and there is little timber to add to them.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_SENSES",
+  "line": 258,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['trade at work: kilns'] ; excludes: ['crisis: under_siege'] ; crisis: ['any'] ",
+  "text": "Crates of pots and glassware, packed in straw, wait for the carts on the road out.",
+  "also": [
+   "src/data/arrivalProse.js:259"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_PEOPLE",
+  "line": 354,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline excludes: ['crisis: hunger'] ; crisis: ['any'] ",
+  "text": "A household feeds passing travellers at its door, and makes sure everyone sees it doing so.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_PEOPLE",
+  "line": 362,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline excludes: ['crisis: under_siege'] ",
+  "text": "Travellers are offered water before anyone asks their business.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_PEOPLE",
+  "line": 401,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['market'] ; excludes: ['crisis: under_siege' ; crisis: ['any'] ",
+  "text": "A caravan broker shouts terms to a line of laden animals and the people leading them.",
+  "also": [
+   "src/data/arrivalProse.js:402"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_PEOPLE",
+  "line": 402,
+  "classes": [
+   "animals"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline twinOf: 'A caravan broker shouts terms to a line of laden animals and the people leading them.' ; crisis: ['any'] ",
+  "text": "A pair of pack animals stands in a yard, unladen, while their keeper mends a strap.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_TENSIONS",
+  "line": 454,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline excludes: ['starving' ; crisis: hunger'] ; crisis: ['any'] ",
+  "text": "Well-fed children run errands from door to door.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_MEMORIES",
+  "line": 500,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: ['market'] ",
+  "text": "Pilgrims still pass through on the old route, and the stalls along the road still sell to them.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_MEMORIES",
+  "line": 501,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Pilgrim badges are nailed above doorways, collected over years.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_MEMORIES",
+  "line": 502,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The road in is worn smooth by pilgrim feet.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/arrivalProse.js",
+  "pool": "ARRIVAL_MEMORIES",
+  "line": 525,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "People here still talk about the years when the caravans stopped coming.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 190,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Courtyard houses, waterworks, endowed institutions and caravan trade.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 193,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Dense masonry quarters open onto caravan yards, covered lanes, and planted courtyards.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 200,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Caravan organization, brokerage, credit, warehousing, and inspected weights sustain regional exchange.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 205,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Water access and preservation skill determine the balance between local produce and caravan-borne staples.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 208,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: ['institution: school'] ",
+  "text": "Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 209,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: ['institution: temple'] ",
+  "text": "Religious institutions also support law, education, hospitality, water, and relief for travelers.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 222,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"needs\":[\"market\",\"tier: ≥ town\"]}",
+  "text": "caravan courts and covered lanes make movement through the merchant quarter deliberate",
+  "also": [
+   "src/data/cultureProfiles.js:586",
+   "src/data/cultureProfiles.js:587"
+  ],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 251,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Household rites, oath sites, burial memory, feast days, and formal sanctuaries overlap.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 338,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Ritual calendars connect family memorials, neighborhood festivals, pilgrimage, and civic legitimacy.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 380,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: ['institution: temple'] ",
+  "text": "Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 415,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: ['market'] ",
+  "text": "Bazaars, merchant houses, craft corporations, credit, pilgrimage, and caravan or maritime routes support exchange.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 423,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: ['institution: temple'] ",
+  "text": "Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 448,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Herds and caravans, part settled and part on the move, held together by clans.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 455,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Political power depends on pasture access, herds, mobility, marriage alliances, and control of caravan corridors.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 458,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Livestock, horses, felt, leather, transport, tribute, and caravan brokerage dominate exchange.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 479,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "storehouses and caravan yards mark the boundary between settlement and seasonal encampment",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "pool": "CULTURE_PROFILES",
+  "line": 506,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings (twin) {\"excludes\":[\"crisis: under_siege\"]}",
+  "text": "Market supply and imported grain become politically charged as population grows.",
+  "also": [
+   "src/data/foodwaysPrintSiblings.js:24"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_DEFENSE",
+  "line": 26,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"readiness STRONG\" marks [ \"crisis: any\", \"guardPresence\" ]",
+  "text": "{settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_DEFENSE",
+  "line": 7330,
+  "classes": [
+   "outside"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"override: QUARANTINE ACTIVE\" marks [ \"guardPresence\" ]",
+  "text": "{settlement} is closed against the sickness, not an army: the guards turn back travellers and traders alike.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/defense.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_DEFENSE",
+  "line": 7363,
+  "classes": [
+   "outside"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"override: QUARANTINE ACTIVE\" marks [ \"no guardPresence\" ]",
+  "text": "Nobody at {settlement} is paid to hold the quarantine, so households take turns at the edge of the place, turning travellers away.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 178,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"COMBINATION C4: a low rung on a working approach\" marks [ \"crisis: under_siege\" ]",
+  "text": "With the siege closing the roads, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 236,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"COMBINATION C5: a low rung on a narrow approach\" marks [ \"food: ≥ secure\", \"no crisis: under_siege\" ]",
+  "text": "{settlement} lives on a {complexity} that feeds it and no more, and the road in is too poor to bring anything extra.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 909,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "pool \"ADEQUATE\" marks [ \"colour\" ]",
+  "text": "Caravans keep to their rounds. Trade moves at its accustomed pace.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 948,
+  "classes": [
+   "outside",
+   "plenty"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"SURPLUS × trade-dependent\" marks [ \"market\" ]",
+  "text": "The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 1001,
+  "classes": [
+   "plenty"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "pool \"SURPLUS × not trade-dependent\" marks [ \"colour\" ]",
+  "text": "Plenty passes here. Not much of it stops.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 2315,
+  "classes": [
+   "plenty"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "pool \"FACET: a clandestine house\" marks [ \"dm-only\", \"colour\" ]",
+  "text": "Plenty of people at {settlement} have used its {institution}; few will say where it meets or who runs it.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 3011,
+  "classes": [
+   "plenty"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "pool \"FOOD AND PROSPERITY: full stores lift the town\" marks [ \"colour\" ]",
+  "text": "A lean month at {settlement} is something people talk about, not something they live through, and the full larders are part of why the place does well.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 3568,
+  "classes": [
+   "outside"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"BLOCKADED\" marks [ \"no walls\" ]",
+  "text": "The stores are sealed off, and the road brings nothing more to them. What is already in the town is what the town has, and no count is being added to it.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 3882,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"FOOD SOURCES: several, the largest named\" marks [ \"no crisis: famine\", \"food: ≥ secure\", \"no source spent\" ]",
+  "text": "With more than its {good} to rely on, {settlement} can take a bad season in one source without going hungry.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 6959,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"ONE EXPECTED CATEGORY MISSING\" marks [ \"no crisis: under_siege\" ]",
+  "text": "Everything a traveller expects at {settlement} is here but one.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/economy.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_ECONOMY",
+  "line": 6991,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Travellers stock up before they reach {settlement}; a place this size cannot supply all they would expect.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 282,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Families are leaving {settlement} by the cartload, and each week the line on the road out is longer.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 1601,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"resource_scarcity\" marks [ \"major\", \"crisis: any\" ]",
+  "text": "{settlement} rations something a town this size should have in plenty, and visitors notice the queues.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 4659,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The road runs past {settlement}, but few travellers stop, and the town sells mostly to itself.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 4801,
+  "classes": [
+   "outside"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"crossroads\" marks [ \"no deficit\" ]",
+  "text": "Nobody chose {settlement}'s site; the roads met here, and the town grew where travellers stopped.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 4812,
+  "classes": [
+   "outside"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"crossroads\" marks [ \"deficit\" ]",
+  "text": "{settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 4916,
+  "classes": [
+   "plenty"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"river\" marks [ \"deficit\" ]",
+  "text": "{settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 5120,
+  "classes": [
+   "outside"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"tier overlay: city\" marks [ \"no deficit\" ]",
+  "text": "{settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 6270,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Travellers from {counterpart} are welcomed in {settlement} as near-neighbours, not outsiders.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 8228,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "{settlement}'s people matter one by one and agree on most things; there is plenty to get involved in, and little of it is urgent.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 8283,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "{settlement}'s troubles are old and unsolved; nothing is urgent, but there is plenty to work on.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 9407,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"MARKET-OPEN\" marks [ \"no crisis: under_siege\", \"no crisis: plague_onset\", \"no crisis: wartime\", \"no crisis: famine\", \"c",
+  "text": "Market day is when {settlement} fills: the roads bring buyers, and the stalls are there for them.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 9629,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"COMMERCE: a bank\" marks [ \"no crisis: under_siege\" ]",
+  "text": "A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 10328,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "{settlement} holds its size; the roads bring in as many as they take away.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 11321,
+  "classes": [
+   "outside"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"GREAT HOUSE: cathedral\" marks [ \"institution: temple\" ]",
+  "text": "The cathedral stands taller than anything else in {settlement}, and travellers see it long before they arrive.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_GENERAL",
+  "line": 11332,
+  "classes": [
+   "plenty"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"GREAT HOUSE: cathedral\" marks [ \"institution: temple\" ]",
+  "text": "{settlement} sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_POWER",
+  "line": 2487,
+  "classes": [
+   "outside"
+  ],
+  "status": "state",
+  "crisisDeclared": false,
+  "via": "pool \"FLAG: stateCrime, heavy\" marks [ \"garrison\" ]",
+  "text": "Travellers reach {settlement} and find empty streets and soldiers on every corner. Nobody will talk about the {seat}, and nobody will say where the missing went.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_STRESSORS",
+  "line": 1725,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "This was paid for from abroad: it happens in {settlement}, but it was decided somewhere else.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_STRESSORS",
+  "line": 3657,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Feast days in {settlement} are kept twice over now, once by each faith, and traders have learned to keep both.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_STRESSORS",
+  "line": 4072,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "pool \"ARCHETYPE: boom\" marks [ \"no crisis: hunger\", \"no crisis: threat\", \"no crisis: indebted\", \"crisis: any\" ]",
+  "text": "Coin is easy here: work is plentiful, wages hold, and nobody asks what happens if the trade moves elsewhere.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "pool": "DOSSIER_STATE_PROSE_STRESSORS",
+  "line": 4249,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "What hurts {settlement} started somewhere else, and travellers bring news of it with their goods.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/historyData.js",
+  "pool": "HISTORICAL_EVENTS_DATA",
+  "line": 1465,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A caravan master swears the collapse was arranged, and kept the correspondence to prove it",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/historyData.js",
+  "pool": "HISTORICAL_EVENTS_DATA",
+  "line": 1511,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A family taken by fever swears it came in with a traveller off the road, and wants that traveller found",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/historyData.js",
+  "pool": "HISTORICAL_EVENTS_DATA",
+  "line": 1556,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold, and the flood of coin and strangers changed it for good",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/historyData.js",
+  "pool": "HISTORICAL_EVENTS_DATA",
+  "line": 1560,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: ['institution: temple'] ",
+  "text": "The pilgrim trade made one family rich enough to buy the office that authenticates relics",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/historyData.js",
+  "pool": "HISTORICAL_EVENTS_DATA",
+  "line": 1564,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: ['institution: temple']  ; needs: ['institution: temple'] ",
+  "text": "A claimed miracle is splitting the settlement: some would proclaim it and welcome the pilgrims it could bring, others call it a fraud that will bring nothing but strangers",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 118,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. Wool is what the flocks are chiefly kept for.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 162,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "house wayside_inn: travellers",
+  "text": "A room over the stable and a shared meal for whoever the road brings through. It exists because the road does.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 163,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "house wayside_inn: travellers",
+  "text": "Lodging above the stable and a common table for passing travellers. Were there no road, there would be no inn.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 170,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house caravanserai: travellers, goods, input",
+  "text": "A walled waystation offering merchants, their beasts, and their goods a safe night's rest. It is the hinge of the desert trade (water, fodder, and protection, all for a fee), and without it no caravan crosses the country around in safety.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 171,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house caravanserai: travellers, goods, input",
+  "text": "Behind its walls, merchants shelter their animals and cargo overnight in security. Water, fodder, and guard are had here for payment, and it stands at the heart of the desert trade; lacking one, no caravan can safely make the surrounding passage.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 174,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "Deals in mules, donkeys, and draft horses, buying and selling, and hires them out to travellers and merchants who need something to carry a load down the road.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 175,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "Buys and sells mules, donkeys, and draft horses, and rents them to whoever on the road wants carrying power. Traveller or merchant alike.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 178,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house stable_yard: travellers",
+  "text": "A shared stable where travellers may leave their horses, the stableman offering rough farriery and fodder.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 179,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house stable_yard: travellers",
+  "text": "A common stable for travellers to lodge their mounts; the stableman sees to basic shoeing and feed.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 190,
+  "classes": [
+   "iron"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "Mends tools, shoes horses. Also works a plot.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 270,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel column {\"needs\":[\"navigable\"]}",
+  "text": "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 271,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel column {\"needs\":[\"navigable\"]}",
+  "text": "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 286,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel column {\"needs\":[\"terrain: forest\"]}",
+  "text": "Works kilns out in the surrounding woods, producing the fuel for smiths, bakers, and hearths. Where timber runs plentiful, no fuel source is steadier.",
+  "also": [
+   "src/data/institutionDescVariants.js:1964",
+   "src/data/institutionDescVariants.js:1965"
+  ],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 287,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel column {\"needs\":[\"terrain: forest\"]}",
+  "text": "Tends charcoal kilns in the nearby woodland to feed the forge, the oven, and the fire. When timber is abundant, it is the settlement's surest supply of fuel.",
+  "also": [
+   "src/data/institutionDescVariants.js:1968",
+   "src/data/institutionDescVariants.js:1969"
+  ],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 310,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house travelers_inn: travellers",
+  "text": "The village's one inn for the traders, pilgrims, and wayfarers who pass. Beds, a stable, and a shared table.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 311,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house travelers_inn: travellers",
+  "text": "A lone inn catering to whoever the road brings: merchants, pilgrims, travellers. It offers a room, stabling, and the common meal.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 318,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house caravanserai: travellers, goods, input",
+  "text": "A large walled compound built for desert traders: camel stabling, storage under lock, a well, and beds for fifty. Where caravans come, it is the desert settlement's economic heart.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 319,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house caravanserai: travellers, goods, input",
+  "text": "A stout walled enclosure for the desert merchant, with stabling for camels, locked stores, a well, and sleeping room for fifty. Any desert settlement on a caravan route turns about it.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 322,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house waystation: travellers, goods",
+  "text": "A fortified halt for the night, with stabling, a well, and plain provisions. It serves merchant caravans and travellers going far. Unlike the inn, it is made for beasts and loaded wagons, not for comfort.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 323,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"needs\":[\"walls\"]}",
+  "text": "An overnight stop behind walls, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.",
+  "also": [
+   "src/data/institutionDescVariants.js:1901",
+   "src/data/institutionDescVariants.js:1902"
+  ],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 403,
+  "classes": [
+   "work"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 422,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "house cartographer_s_workshop: travellers",
+  "text": "A mapmaker's workshop, drawing and selling road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 423,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "house cartographer_s_workshop: travellers",
+  "text": "Here a craftsman renders and sells maps: regional roads, land surveys, and crude wilderness charts drawn from what travellers report. Few enough exist that the average village has none.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 530,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings (twin) {\"excludes\":[\"crisis: under_siege\"]}",
+  "text": "Merchants from across the region, and luxuries to be had.",
+  "also": [
+   "src/data/institutionDescVariants.js:2093",
+   "src/data/institutionDescVariants.js:2094"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 539,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "They change coin from abroad. Banking in its infancy.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 555,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house coaching_inn: travellers",
+  "text": "A house made for travellers by coach: fresh horses stabled, departures timed, fixed mealtimes, and a passengers' waiting room. The teams are swapped out, not just given a rest.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 558,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house caravaneer_s_post: travellers, goods",
+  "text": "Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool ventures here.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 559,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house caravaneer_s_post: travellers, goods",
+  "text": "Where regional caravans are mustered, scheduled, and briefed on their routes. Traders enrol their goods, hire escorts, and strike joint ventures.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 566,
+  "classes": [
+   "outside",
+   "animals"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 567,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 603,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "Warehouses where traders keep stock awaiting sale, shipment, or seasonal release. Indispensable to any town on a trade route.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 650,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm their guards.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 651,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit their guards.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 665,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Wine pressed and matured from local fruit or imported must, when either comes to the cellar, and sold in bulk or direct to wealthy houses.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 733,
+  "classes": [
+   "law"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel column {\"needs\":[\"guild\"]}",
+  "text": "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 827,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-term hire go at day-wages here. Cheaper than a standing army and steadier than a mob. These are salaried men who fight in formation, not for plunder.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 923,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house major_annual_fairs: travellers, goods, gatherings",
+  "text": "Merchants from abroad. Letters of credit are honoured.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 924,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house major_annual_fairs: travellers, goods, gatherings",
+  "text": "Foreign traders attend, and credit by letter is taken.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 935,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house inns_and_taverns_district: travellers",
+  "text": "Several inn districts, given over to merchants, travellers, and those who stay long.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 936,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house inns_and_taverns_district: travellers",
+  "text": "More than one quarter of inns, serving the merchant, the traveller, and the lingering guest.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 939,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house caravan_masters_exchange: travellers, goods",
+  "text": "Permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route intelligence, the assembly of armed convoys, and the settling of commercial disputes.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 940,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour+row",
+  "crisisDeclared": false,
+  "via": "house caravan_masters_exchange: travellers, goods",
+  "text": "A city-scale exchange with standing offices, where caravan masters meet merchants and armed escorts to transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution are all conducted here.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 1003,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "Apothecary shops crowded into one quarter, where competition forces each to specialise. One leans to chirurgery, another to herbal preparations, a third to imported medicines. Between them they carry herbalism kits, medicinal herbs, surgical supplies, and basic antidotes.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 1004,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes are all to be had.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 1007,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel column {\"needs\":[\"watch\",\"garrison\"]}",
+  "text": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 1008,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel column {\"needs\":[\"watch\",\"garrison\"]}",
+  "text": "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. The watch, the garrison, and the caravans buy here.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 1232,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "Every principal commodity and trade route has its guild, scores of them in all, sitting together as a chartered guild parliament.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 1259,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "PAIRS",
+  "line": 1303,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "channel column colour",
+  "text": "A chartered school of the arcane, with a full course of study, laboratories, and scholars come from abroad.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "DESC_VARIANT_SIBLINGS",
+  "line": 1902,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"excludes\":[\"walls\"]}",
+  "text": "An overnight stop inside a fenced yard, offering stabling, a well, and basic supplies to caravans and long-haul travellers. Where the inn sees to comfort, this sees to the animals and the laden wagons.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "pool": "DESC_VARIANT_SIBLINGS",
+  "line": 1960,
+  "classes": [
+   "plenty"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"needs\":[\"terrain: forest\"]}",
+  "text": "Operates kilns in the surrounding woodland, supplying fuel for smithing, baking, and heating. The settlement's most reliable fuel source when timber is abundant.",
+  "also": [
+   "src/data/institutionDescVariants.js:1961",
+   "src/data/institutionalCatalog.js:228"
+  ],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 42,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Hospitality: travellers",
+  "text": "Receives travellers and speaks for the settlement",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 431,
+  "classes": [
+   "animals"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Secure enclosure for pack animals. Feed included.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 432,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Basic provisions: travellers",
+  "text": "Grain, hay, hardtack, water. Caravan pricing.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 475,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Caravan assembly: travellers, goods",
+  "text": "Register to join an outgoing caravan.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 569,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings (twin) {\"excludes\":[\"crisis: under_siege\"]}",
+  "text": "Beds, meals, and stabling for travelers on the road. Priced by quality.",
+  "also": [
+   "src/data/institutionServices.js:1850",
+   "src/data/institutionServices.js:1851"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 579,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Market intelligence: goods",
+  "text": "Price reports from distant markets. Useful for timing purchases and sales.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 586,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Caravan organization: travellers, goods",
+  "text": "Organize and insure shared merchant caravans for long-distance trade.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 594,
+  "classes": [
+   "iron"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 599,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 625,
+  "classes": [
+   "animals"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Rent horses for single journeys or extended travel. Quality varies by price.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 678,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Stronger or flavored brews for feast days and premium trade.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 719,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings (twin) {\"excludes\":[\"crisis: under_siege\"]}",
+  "text": "Once-a-year market drawing merchants from across the region.",
+  "also": [
+   "src/data/institutionServices.js:1810",
+   "src/data/institutionServices.js:1811"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 749,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Road intelligence: goods",
+  "text": "Know which caravans are carrying what and when. Sellable information.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 780,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Exotic animal sales: goods",
+  "text": "Unusual animals sourced from distant regions. Status symbols and curiosities.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 813,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Caravan organization: travellers, goods",
+  "text": "Assemble merchants with compatible routes into shared caravans for safety and economy.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 840,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Accurate maps of regions, trade routes, coastlines, and interiors.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 851,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The great rites, feast day observances, and the rites of the faith for a whole region.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 852,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Pilgrimage destination: travellers, gatherings",
+  "text": "Attracts pilgrims from across the region. Economic and spiritual significance.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 963,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Escort contracts: travellers",
+  "text": "Armed escort for valuable shipments, merchants, and travelers.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 999,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The most significant religious observances. Major feast days and state occasions.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1000,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Pilgrimage services: travellers, gatherings",
+  "text": "Accommodate and process pilgrims. Relics, blessings, and remissions bought outright.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1028,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Personal protection for merchants, officials, and travelers.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1029,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Escort: travellers",
+  "text": "Armed accompaniment for valuable shipments and vulnerable travelers.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1049,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Message receipt: travellers",
+  "text": "Receive and hold messages and parcels for guests and travelers.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1054,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Information hub: travellers",
+  "text": "Travelers pass through constantly. News and rumors flow freely.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1076,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Exotic imports: goods",
+  "text": "Goods sourced from distant regions unavailable elsewhere.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1086,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Large-scale trading: travellers, goods, gatherings",
+  "text": "The largest trading event of the year. Merchants from distant regions.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1133,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Rites, prayers, and observances. Open to locals and pilgrims.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1134,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Hospitality: travellers",
+  "text": "Food and shelter for travelers and pilgrims. Often free or by donation.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1186,
+  "classes": [
+   "animals"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Rent animals with or without handler for journeys.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1207,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The congregations coordinate on feast days and city-wide observances.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1257,
+  "classes": [
+   "iron"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Simple ironwork, repairs, and basic tool making.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1261,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"needs\":[\"river\"]}",
+  "text": "Transport foot travelers and small goods across the river.",
+  "also": [
+   "src/data/institutionServices.js:1858",
+   "src/data/institutionServices.js:1859"
+  ],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1303,
+  "classes": [
+   "animals"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Rent horses for local or short-distance travel.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1306,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Basic horse care: travellers",
+  "text": "Feed and shelter for traveler's horses during stays.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1357,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "inline needs: [\"gate\"] ",
+  "text": "Check travelers entering and leaving. Note unusual visitors.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1361,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Accommodation: travellers",
+  "text": "Beds for travelers. Range from dormitory to private room.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1362,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Hot meals suited to travelers. Hearty portions.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1407,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Import processing: goods",
+  "text": "Receive, quarantine, and process incoming slave shipments from distant regions.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1523,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Wayside blessing: travellers",
+  "text": "A brief blessing for travelers on the road. Costs nothing; donations welcomed.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1543,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Pilgrim shelter: travellers",
+  "text": "Food and a bed for pilgrims and travelers. Free or by donation.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1547,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Distribution of food and aid to the poor on feast days.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1553,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Reliquary access: travellers",
+  "text": "Access to venerated relics and shrines for pilgrims.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1598,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Toll collection: travellers, goods",
+  "text": "Levy on goods and travelers passing through the gates.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1599,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Entry inspection: travellers, goods",
+  "text": "Check travelers and cargoes for contraband or wanted persons.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1703,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Ask whether a named traveller passed through, and in whose company.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1735,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Hospitality: travellers",
+  "text": "A bed by the hearth and a place at a shared table, for a traveller who asks.",
+  "also": [
+   "src/data/institutionServices.js:1738",
+   "src/data/institutionServices.js:1741"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "INSTITUTION_SERVICES",
+  "line": 1769,
+  "classes": [
+   "outside"
+  ],
+  "status": "row",
+  "crisisDeclared": false,
+  "via": "service Pasturage: travellers",
+  "text": "Grazing on the common for a traveller's beasts, for a small fee.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "SERVICE_DESC_SIBLINGS",
+  "line": 1811,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings (twin) {\"crisis\":[\"under_siege\"]}",
+  "text": "The yearly fair that draws merchants from across the region. None can reach it while the roads are held.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "pool": "SERVICE_DESC_SIBLINGS",
+  "line": 1859,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"excludes\":[\"river\"]}",
+  "text": "Transport foot travelers and small goods across the water.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 178,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 350,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Multiple inn districts catering to merchants, travelers, and long-term visitors.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 352,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A room above a stable and a common meal for travelers passing through. Exists because the road does.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 353,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A single inn serving traders, pilgrims, and travelers passing through. Rooms, stabling, and a common meal.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 370,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room. Horses changed here, not just rested.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 378,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A substantial walled compound for desert merchants: stabling for camels, locked storage, a well, and sleeping quarters for fifty. The economic hub of any desert settlement that sees caravan traffic.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 380,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A walled waystation providing secure overnight lodging for merchants, animals, and goods. The centre of desert trade: water, fodder, and protection available for a fee. Without one, caravans cannot safely cross the surrounding terrain.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 388,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Permanent offices where caravan masters, merchants, and armed escorts transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 390,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A fortified overnight stop with stabling, a well, and basic provisions. Serves merchant caravans and long-distance travellers. Distinct from the inn. Built for animals and loaded wagons, not comfort.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 391,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 404,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "City haulage is bonded through the caravan masters.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 408,
+  "classes": [
+   "outside",
+   "animals"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Buys and sells mules, donkeys, and draft horses. Rents animals to travellers and merchants who need load-carrying capacity for the road.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 417,
+  "classes": [
+   "outside",
+   "animals"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Concentrated stabling, horse trading, and farriery. Serves merchants, military, and travelers needing fresh mounts.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 419,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Communal stable where travelers can leave horses. Stableman provides basic farriery and fodder.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 523,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Warehouse facilities for merchants storing goods awaiting sale, transit, or seasonal distribution. Essential infrastructure for any trade route settlement.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 585,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, and found wherever the roads bring traffic.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 684,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Multiple apothecary shops clustered together. Competition drives specialization. Some focus on chirurgery, others on herbal preparations, others on imported medicines. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes all available.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 693,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 696,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Multiple craftsmen organized under a guild. Standard arrows by the sheaf, specialty broadheads, composite bows to commission. Restocks merchant caravans and outfits their guards.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 720,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 892,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A craftsman who draws and sells maps: regional road maps, property surveys, and rough wilderness sketches from traveler accounts. Rare enough that most villages don't have one.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 973,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "pool": "INSTITUTION_FAMILIES",
+  "line": 1296,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates. Cheaper than a standing army, more reliable than a mob. These men fight in formation on salary, not for treasure",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "pool": "TERRAIN_NARRATIVE_HOOKS",
+  "line": 95,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "grew at the intersection of two major trade routes",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "pool": "TERRAIN_NARRATIVE_HOOKS",
+  "line": 98,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "developed from a rest stop for traveling caravans",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "pool": "TERRAIN_NARRATIVE_HOOKS",
+  "line": 119,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "grew along a major overland trade route",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "pool": "TERRAIN_NARRATIVE_HOOKS",
+  "line": 120,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "was established as a waystation for travelers",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "pool": "STRESS_DESCS",
+  "line": 280,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline needs: ['institution: tavern' ; excludes: ['crisis: hunger'] ",
+  "text": "… welcomes travellers with practised ease: a good inn, fair prices, incurious guards. A week later you would struggle to say why the ease sat strangely. It was practised.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/npcData.js",
+  "pool": "NPC_FACTION_LOYALTY",
+  "line": 1301,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "inline excludes: ['crisis: under_siege' ; crisis: plague_onset'] ",
+  "text": "A traveller passed through asking which nights their door is left unbarred, and was gone by morning.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/data/npcData.js",
+  "pool": "NPC_FACTION_LOYALTY",
+  "line": 1327,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "They agreed to hold a parcel for a traveller, and two different people have since come to collect it.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/npcData.js",
+  "pool": "NPC_FACTION_LOYALTY",
+  "line": 1345,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "They buried someone last season that they refer to only as 'the traveller'. They will not say more.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/npcData.js",
+  "pool": "STRESS_ECONOMIC_EFFECTS",
+  "line": 1875,
+  "classes": [
+   "outside"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "inline colour",
+  "text": "… began paying …'s people after the last caravan was lost. No caravan has been lost since, and …'s fee has doubled.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/data/npcData.js",
+  "pool": "STRESS_ECONOMIC_EFFECTS",
+  "line": 2323,
+  "classes": [
+   "plenty"
+  ],
+  "status": "colour",
+  "crisisDeclared": false,
+  "via": "inline colour",
+  "text": "The family has asked … and … to end their quarrel before the next feast. Neither will apologise first.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/domain/dailyLife.js",
+  "pool": "deriveFoodCulture",
+  "line": 178,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Bread, broth, and … are plentiful; markets close their stalls without empty crates.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/domain/dailyLife.js",
+  "pool": "deriveFoodCulture",
+  "line": 179,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Bread and broth are plentiful; few households go to bed hungry.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/domain/dailyLife.js",
+  "pool": "deriveFoodCulture",
+  "line": 195,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Hunger is everywhere. People queue at temple kitchens; rumors fly about caravans that never arrived.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/domain/dailyLife.js",
+  "pool": "deriveDawnWork",
+  "line": 230,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Merchant caravans roll before light; porters and apprentices queue at the warehouses, and dawn brings the smell of woodsmoke and grain.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/domain/foodways.js",
+  "pool": "SOURCE_PHRASES",
+  "line": 28,
+  "classes": [
+   "plenty"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "the herds\\' milk and mutton",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "pool": "ESTABLISH_SEASONAL_ACCESS_PATRONAGE_OR_A_DEPENDABLE_TRADE_ROUTE",
+  "line": 29,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Establish seasonal access, patronage, or a dependable trade route",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "pool": "deriveFoodBalanceAnalysis",
+  "line": 337,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "minor routes and sanctioned caravans",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "pool": "deriveFoodBalanceAnalysis",
+  "line": 462,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Settlement cannot cover ~… lbs of food per day (…% of needs) and has no dependable trade route.",
+  "also": [
+   "src/generators/economy/foodBalance.js:508"
+  ],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "pool": "deriveFoodBalanceAnalysis",
+  "line": 498,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The … trade route is cut, and nothing has come along it in days. The town has … days of food left, and no one knows when the next load will come.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "pool": "deriveSupplyRiskAnalysis",
+  "line": 792,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Bandits are taking the food caravans, and the town has posted a bounty for clearing the trade road; the carters who got away say the \"bandits\" looked like families who had fled somewhere worse.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/foodBalance.js",
+  "pool": "deriveSupplyRiskAnalysis",
+  "line": 831,
+  "classes": [
+   "iron"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings (twin) {\"needs\":[\"institution: smith\"],\"excludes\":[\"war: peace\"]}",
+  "text": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.",
+  "also": [
+   "src/generators/economy/outlookHookSiblings.js:31"
+  ],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/generators/economy/incomeLineSiblings.js",
+  "pool": "LOCAL_COAL_LINE",
+  "line": 20,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"needs\":[\"imports\"]}",
+  "text": "Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/incomeLineSiblings.js",
+  "pool": "LOCAL_COAL_SOLD_LINE",
+  "line": 24,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"needs\":[\"imports\"]}",
+  "text": "Coal is dug here and sold on to other towns, so this income stream leans on the trade route.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/incomeLineSiblings.js",
+  "pool": "ALCHEMY_UNDER_SIEGE_LINE",
+  "line": 56,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings (twin) {\"needs\":[\"crisis: under_siege\"]}",
+  "text": "Alchemical preparations and curative potions, sold only to the people inside while the siege keeps outside customers away.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/generators/economy/incomeLineSiblings.js",
+  "pool": "IRON_IMPORTED_LINE",
+  "line": 60,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings (twin) {\"needs\":[\"imports\"],\"excludes\":[\"crisis: under_siege\"]}",
+  "text": "Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/generators/economy/incomeLineSiblings.js",
+  "pool": "MASONS_LINE",
+  "line": 83,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings {\"needs\":[\"imports\"],\"excludes\":[\"crisis: under_siege\"]}",
+  "text": "Stone masons work imported material; the quarrying income notation reflects processing margin only.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/generators/economy/incomeLineSiblings.js",
+  "pool": "TIMBER_BOUGHT_LINE",
+  "line": 97,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": true,
+  "via": "channel siblings {\"excludes\":[\"crisis: under_siege\"]}",
+  "text": "Timber sourced from more distant forests and resold or processed locally: trade route dependent.",
+  "also": [],
+  "crisisUndeclared": false
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "pool": "situationDescOf",
+  "line": 115,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"needs\":[\"market\"]}",
+  "text": "The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.",
+  "also": [
+   "src/generators/economy/prosperity.js:464"
+  ],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "pool": "situationDescOf",
+  "line": 144,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The settlement is too big to live cut off. With no trade routes it cannot buy what it does not make or sell what it has spare, and it cannot keep this many people fed.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "pool": "situationDescOf",
+  "line": 152,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "With no outside trade, the settlement struggles to feed and supply itself. Everything is rationed, and there is nothing to spare for growing.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "pool": "situationDescOf",
+  "line": 153,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "The settlement feeds and supplies itself without outside trade, but it has little to spare and cannot get what it does not make.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/economy/prosperity.js",
+  "pool": "PROSPERITY_LINE_SIBLINGS",
+  "line": 465,
+  "classes": [
+   "outside"
+  ],
+  "status": "line",
+  "crisisDeclared": false,
+  "via": "channel siblings (twin) {\"excludes\":[\"market\"]}",
+  "text": "The caravans have stopped coming and nothing is bought or sold. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "pool": "generateSafetyProfile",
+  "line": 341,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "Crime is a persistent and visible problem. … Travelers are advised to move in groups and keep valuables hidden.…",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "pool": "generateSafetyProfile",
+  "line": 561,
+  "classes": [
+   "law"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "… Disputes are settled by whoever is stronger. Property is kept only by those who can defend it.……",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "pool": "generateSafetyProfile",
+  "line": 735,
+  "classes": [
+   "outside"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "pool": "COURT_AND_PRISON",
+  "line": 987,
+  "classes": [
+   "law"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": " Thieves here know that the court sits and the cells are real.",
+  "also": [],
+  "crisisUndeclared": true
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "pool": "NO_WATCH_SMALL",
+  "line": 1018,
+  "classes": [
+   "law"
+  ],
+  "status": "none",
+  "crisisDeclared": false,
+  "via": "",
+  "text": "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "also": [],
+  "crisisUndeclared": true
+ }
+]
