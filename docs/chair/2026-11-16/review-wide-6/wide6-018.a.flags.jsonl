@@ -1,0 +1,4 @@
+{"id":"C45912","town":"bar0-city-wartime-rand-29","sev":"LOW","kind":"PAIR","why":"Defense tab \"should come through this crisis\" against Crisis tab \"fighting a war it may not win\"; legitimacy crisis, Struggling","other":"C44645"}
+{"id":"C45439","town":"bar0-city-wartime-rand-29","sev":"LOW","kind":"PAIR","why":"Town crier row proclaims \"royal decrees\"; Institutions tab: city-state answers to no higher lord, GOVERNMENT lists no crown","other":"C45141"}
+{"id":"C45966","town":"bar0-city-wartime-rand-29","sev":"LOW","kind":"LACKS","why":"\"sold to crown contracts\"; GOVERNMENT lists only City-State Council, sovereign polity with no higher lord (C45141); no crown exists","other":"C45141"}
+{"id":"DONE","lines":2647,"blocks":1,"flags":3}
