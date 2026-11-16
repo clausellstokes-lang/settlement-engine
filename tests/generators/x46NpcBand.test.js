@@ -224,6 +224,14 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // the people's positions, constraints, dealings and secrets, service rows, faction and house descriptions, the foodways lines, the
   // arrival scene, the slavic social texture and its culturalNotes mirror (534c29fac, BAR2-PLACES-2), the prominent tie, the pressure
   // and safety lines. Re-captured at the joined line's 1011a8a91 by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-16 (the close of the round BAR3, BAR3-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:30:10 UTC, "Yes that one too",
+  // in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json): 53 of 60 moved by the round's declared text cures;
+  // the stored sixty reproduce at 83fc14ad6 (60 of 60). FIELD-DIFFED by leaf path, text leaves only (no length, no non-text leaf): tie descriptions
+  // and tensions, the powers' recent conflict, descriptions and relationships' narratives, the foodways lines, the entrepot note, the people's
+  // dominant trait (P7a), the pressure line, the arrival, the drag and guard lines, the houses, the history's character and hook, the crisis hooks,
+  // summaries, viability notes and cast reasons (one of them the second repair seat's letter d, efdb3841d), the viability issues, the prominent tie,
+  // a secret and the coherence receipt's quoted tie text. Re-captured on the doors' branch after the merge b46b26d92 by this file's own loop (an
+  // untracked probe), twice and equal.
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
