@@ -171,7 +171,11 @@ JOIN-12's §4 stands on its own file (`docs/chair/2026-11-14/JOIN-12-HANDBACK.md
 
 ## 5. Stops
 
-None at points 1-10. At the BAR4 join (points 11-17) the push was HELD after the seventh merge and the gates: people's two law reds told to the chair before the push, by its word of 10:55 UTC; pushed on its answer (11:05 UTC: the reds BAR4-PEOPLE's own, sent back to that seat). Point 18 (BAR4-PEOPLE's follow-up) landed at 1a221e338; point 19 (BAR4-RECORD) at 4b5e6c7b2. Point 20 (BAR4-SCENES, the last builder branch) landed at 9ef9a5e3c, its tree the branch's; arm (d) green there. Next on the chair's word: point 21, lane/bar4-close-sweep-2026-11-16.
+None at points 1-10. At the BAR4 join (points 11-17) the push was HELD after the seventh merge and the gates: people's two law reds told to the chair before the push, by its word of 10:55 UTC; pushed on its answer (11:05 UTC: the reds BAR4-PEOPLE's own, sent back to that seat). Point 18 (BAR4-PEOPLE's follow-up) landed at 1a221e338; point 19 (BAR4-RECORD) at 4b5e6c7b2. Point 20 (BAR4-SCENES, the last builder branch) landed at 9ef9a5e3c, its tree the branch's; arm (d) green there.
+
+**HANDED BACK AT THE MARK** (2026-11-16 14:23 UTC; the count read 286,363 by `get_session`, past 250,000), the line at 2d80aa740 before this commit, nothing in flight, the worktree clean.
+1. LEFT FOR THE SUCCESSOR, on the chair's word: POINT 21, `lane/bar4-close-sweep-2026-11-16` at the tip the chair names (the repair seat's branch: tests and one tie line), not yet named when this seat handed back.
+2. The instruments (§7) do not survive a new container: re-make them as written there, with this seat's own session id in the `Claude-Session` trailer (see §6's trailer error).
 
 ## 6. Hazards
 
