@@ -10,9 +10,10 @@
  *   (b) THE POSITIVE CONTROL: the detector, its tabs read blind (their marks read as bare), stops finding the record's own
  *       need in a town that holds it (each part of the kind has its town): so it cannot go blind itself;
  *   (d) THE MARK FOLLOWS THE PAGE'S GAP LINE (the chair's question of 2026-11-16, for BAR4-RECORD's cure of the K6 split):
- *       an EX-SPLIT town's record CONSTRUCTED so that nothing answers the house's input (no goods made, sold or bought,
- *       the route isolated, no food source): the page's gap line prints and the row takes "Short of …" (all 61 of the
- *       720's EX-SPLIT rows do so at this tip; one is pinned here);
+ *       r2r-hamlet-9's 'Charcoal supply', an EX-SPLIT row until BAR4-RECORD cured the split: on the REAL page the gap line
+ *       prints and the row takes "Short of …"; and on its record CONSTRUCTED so that nothing answers the house's input (no
+ *       goods made, sold or bought, the route isolated, no food source), the row reads short too (re-keyed by identity,
+ *       BAR4-SCENES-2, 2026-11-16);
  *   (c) A MARKED pair (each red at 8aef8e7d4) stops leading its row with its mark, or a KEEP pair (the same row where its
  *       need is not cut) starts printing one.
  */
@@ -22,6 +23,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { rowMarkText } from '../../src/domain/display/crisisStoppedRow.js';
+import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 import { incomeDescShown } from '../../src/domain/display/economicsCrisisMarks.js';
 import { magicRoleBandShown } from '../../src/domain/display/magicProvisionShown.js';
 import { deriveMagicPosture } from '../../src/domain/display/dossierViewModel.js';
@@ -104,13 +106,17 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     expect(rowMarkText(s, 'service', svc)).toBe(mark);
   }, 120_000);
 
-  test('(d) the mark follows the page\'s gap line: an EX-SPLIT row, its input answered by nothing, reads short', () => {
+  // BAR4-SCENES-2 (2026-11-16, the chair's direction of 12:16 UTC; re-keyed by identity): r2r-hamlet-9 no longer holds the split.
+  // BAR4-RECORD's one reading (`houseInputAtHand.js`) cured it: the record as born says no timber reaches the charcoal burner, and
+  // the page says so too. So the arm asserts the REAL page (the gap line prints and the row takes its shortage mark), and keeps one
+  // constructed proof (nothing answers the input: no goods made, sold or bought, the route isolated, no food source).
+  test('(d) the mark follows the page\'s gap line: the row whose input nothing answers reads short, on the real page and on a constructed record', () => {
     const s = town('r2r-hamlet-9');
-    expect(markPromiseInstances(s).some((i) => i.excluded === 'EX-SPLIT' && i.row === 'Charcoal supply')).toBe(true);
+    expect(resourceGapLines(s).map((l) => String(l?.impact ?? ''))).toContain('No timber reaches the charcoal burner.');
+    expect(rowMarkText(s, 'service', row(s, 'Charcoal supply'))).toMatch(/^Short of /);
     const e = s.economicState;
     const built = { ...s, config: { ...s.config, tradeRouteAccess: 'isolated' }, economicState: { ...e, tradeAccess: 'isolated', localProduction: [], primaryExports: [], primaryImports: [], foodSecurity: { ...e.foodSecurity, foodRecord: { ...(e.foodSecurity?.foodRecord || {}), foodSources: [], normalImportPct: 0 } } } };
     expect(rowMarkText(built, 'service', row(built, 'Charcoal supply'))).toMatch(/^Short of /);
-    expect(rowMarkText(s, 'service', row(s, 'Charcoal supply'))).toBe(null); // the record as born: the page prints no gap line, and no mark
   }, 120_000);
 
   test('(e) S1 (ii)\'s declaration is the generator\'s own: each trade\'s house words over the catalogue\'s names give its declared ids', () => {

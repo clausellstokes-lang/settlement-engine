@@ -48,6 +48,14 @@ describe('textOf', () => {
     // original among them was an object already.
     // 133 → 134 (BAR2-PLACES batch 2, 2026-11-15, the chair's grant VW2; re-keyed by identity): one twin joins (the arms
     // key's blades line, where the iron is not at hand). Its original was an object already.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(134);
+    // 134 → 143 (BAR4-SCENES, 2026-11-16, kind A1; re-keyed by identity, this batch's own count): six twins join (the
+    // timber key's three, where no timber is at hand; the drovers and the penned cattle, where the herds failed; the
+    // enchanting signs, where no house offers it) and three bare lines become declared objects (the sawn
+    // timber, the saws, the enchanting signs): 6 + 3 = 9.
+    // 143 → 188 (BAR4-SCENES-2, 2026-11-16, the chair's ruling HW1; re-keyed by identity, this batch's own count): 27 twins join
+    // (kilns 7, stone 7, arcane 6, horses 5, the flapping basket, the mill wheel: each line the trade at work, the siege or the
+    // famine can refuse keeps its slot) and 18 bare lines become declared objects (the kilns', stone's, arcane's and horses' lines,
+    // and arcane's spellwork and reagent stalls): 27 + 18 = 45.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(188);
   });
 });

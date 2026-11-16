@@ -64,7 +64,9 @@ describe('BAR3-PLACES: the rows read the town', () => {
     ['C4391 no runner out of a shut gate', 'r2s-under_siege-metropolis-2', /A runner comes out of the small side gate/, /A face shows at the grille of the small side gate, sees your group, and is gone\./],
     ['C30302 no wine shop', 'r2r-city-3', /at a wine shop/, /A patron stands drinks for the whole room/],
     ['C2300 not every yard', 'r2r-city-20', /across every yard/, /Bolts of cloth hang drying in long bright strips across the yards\./],
-    ['C0013 no living from the ground', 'r2r-city-18', /lives on what comes out of the ground/, /living comes out of the ground, and its dust is on the doorsteps nearest the workings\./],
+    // BAR4-SCENES-2 (2026-11-16, re-keyed by identity; the chair's ruling HW1): r2r-city-18's one stone house, its every ground spent, is
+    // "Short of stone." on the page, so the living-from-the-ground line takes its twin on the slot; the flagged words stay out
+    ['C0013 no living from the ground', 'r2r-city-18', /lives on what comes out of the ground/, /living used to come out of the ground, and the workings stand quiet now\./],
     ['C53735 no press of the lane', 'r2r-hamlet-20', /press of the lane/, /The smell of incense drifts out into the lane\./],
     ['C35876 no export decisions', 'r2r-city-44', /caused by export decisions/, /the famine was made worse by decisions taken by/],
     ['C29348 no beer across the region', 'r2r-town-28', /sends beer across the region/, /It keeps the taverns stocked, and stands among the larger buyers/],

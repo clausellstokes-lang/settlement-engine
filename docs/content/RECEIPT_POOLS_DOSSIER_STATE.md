@@ -6949,9 +6949,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`COMMERCE: a market, no guild`** *(`hasMarket`, none of the other three)*
 1. `[visitor · no guild · no crisis: under_siege]` Anyone with goods and the stall fee can sell at {settlement}'s market without a guild's leave.
 2. `[ledger · market · no guild · no crisis: under_siege]` No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.
-3. `[street · no guild]` Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.
+3. `[street · no guild · no crisis: under_siege]` Buying and selling at {settlement} is done face to face at the market with no guild between seller and buyer.
 4. `[threshold · no guild · no crisis: under_siege · no crisis: occupied]` A stranger can set up and sell at {settlement} on the next market day with nobody's leave but the stall-keeper's.
 5. `[ledger · market · guild]` The guilds are a power at {settlement} all the same, and anyone trading at its market reckons with them.
+6. `[street · market · no guild · crisis: under_siege]` Since the siege shut the market, what little buying and selling {settlement} still does is done face to face, door to door.
 
 **`WAREHOUSES`** *(`hasWarehouse`, R-W3: one clause, only when true)*
 1. `[visitor · no crisis: under_siege]` Goods wait in {settlement}'s warehouses between the road and the buyer until the price is right.
@@ -7314,7 +7315,7 @@ no compass word, no real-world place, no named analogy.*
 **`GREAT HOUSE: monastery`**
 1. `[traveller · institution: monastery · no crisis: under_siege]` Robed monks and nuns are a common sight on the way into {settlement}.
 2. `[local · institution: monastery]` The monks keep their own hours, and the rest of {settlement} leaves them to it.
-3. `[newcomer · institution: monastery · no crisis: under_siege]` Anyone new to {settlement} who needs a meal or a bed is sent to the monks.
+3. `[newcomer · institution: monastery · no institution: tavern · no crisis: under_siege]` Anyone new to {settlement} who needs a meal or a bed is sent to the monks.
 4. `[official · institution: monastery]` The monks answer to their own order before they answer to whoever governs {settlement}.
 
 ---

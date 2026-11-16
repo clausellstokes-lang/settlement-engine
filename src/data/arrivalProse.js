@@ -88,7 +88,8 @@ export const ARRIVAL_SENSES = Object.freeze([
     lines: [
       { text: () => 'The smell of fresh bread meets you on the road in.', colour: true }, // R-AO (CENSUS-2f): read; presumes nothing
       { text: () => 'Someone has been baking since before dawn, and the air still carries it.', excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4, Y6; READ-ALL 18339): no bread baked where the food failed; a line a crisis can make false is not colour, so it leaves the colour mark and declares
-      { text: () => 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill'] },
+      { text: () => 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill'], excludes: ['crisis: hunger'] }, // BAR4-SCENES-2 (HW1; kind A1's `house at work`): no flour dust where the famine leaves the mill short (the pool's colour lines still speak)
+      { text: () => 'A mill wheel turns somewhere close, slowly, with little grain to grind.', twinOf: 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill', 'crisis: hunger'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
       { text: () => 'The warm smell of an oven reaches you before the first doorway does.', colour: true },
     ],
     dominant: [
@@ -131,23 +132,24 @@ export const ARRIVAL_SENSES = Object.freeze([
     lines: [
       // CENSUS-2f, R-AP: the picker reaches `fish` by a fish market's or a fishmonger's NAME, which guarantees no
       // catch (soak1k-152), so every line here declares `fish` (the food record's source) and a refused beat redraws.
-      { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2) and its 04:08 note: ONE CONDITION FOR THE WHOLE FAMILY of fish-and-catch lines): no catch where the food failed or under a siege (0 of the 720 at d7921a40c; the family's measure is in the hand-back)
-      { text: () => 'Gulls quarrel over the empty fish stalls, and there is no morning catch to smell.', twinOf: "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there
-      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market'], excludes: ['crisis: hunger'] }, // W2-FIX-DATA: a price is shouted at a market (c05); TAIL-HISTORY-5 (Y17, the family's one condition): no catch to sell where the food failed or under a siege
-      { text: () => 'A fishmonger stands behind an empty slab, with nothing to shout a price for.', twinOf: 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there
-      { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2), 2026-11-15; the bar's readers at 5d1e3096b): no catch under a siege or where the food failed (5 of 11 towns)
-      { text: () => 'Nets hang drying on poles, and they have brought in little for a long while.', twinOf: 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there; a twin keeps the slot and spends no redraw
-      { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02382): no fresh catch under a siege or where the food failed
+      { text: () => "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['trade at work: fish', 'market', 'navigable', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2) and its 04:08 note: ONE CONDITION FOR THE WHOLE FAMILY of fish-and-catch lines): no catch where the food failed or under a siege (0 of the 720 at d7921a40c; the family's measure is in the hand-back)
+      { text: () => 'Gulls quarrel over the empty fish stalls, and there is no morning catch to smell.', twinOf: "Gulls quarrel over the fish stalls, and the air smells of the morning's catch.", needs: ['market', 'navigable', 'fish'] }, // TAIL-HISTORY-5 (Y17): its twin there
+      { text: () => 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['trade at work: fish', 'fish', 'market'], excludes: ['crisis: hunger'] }, // W2-FIX-DATA: a price is shouted at a market (c05); TAIL-HISTORY-5 (Y17, the family's one condition): no catch to sell where the food failed or under a siege
+      { text: () => 'A fishmonger stands behind an empty slab, with nothing to shout a price for.', twinOf: 'A fishmonger shouts a price over the slap of wet baskets.', needs: ['fish', 'market'] }, // TAIL-HISTORY-5 (Y17): its twin there
+      { text: () => 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['trade at work: fish', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2), 2026-11-15; the bar's readers at 5d1e3096b): no catch under a siege or where the food failed (5 of 11 towns)
+      { text: () => 'Nets hang drying on poles, and they have brought in little for a long while.', twinOf: 'Nets hang drying on poles, and the smell of the catch follows you.', needs: ['fish'] }, // TAIL-HISTORY-5 (Y17): its twin there; a twin keeps the slot and spends no redraw
+      { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['trade at work: fish', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02382): no fresh catch under a siege or where the food failed
+      { text: () => 'An empty fish basket is carried past, back from the water with nothing in it.', twinOf: 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (true where the famine took the catch or the fish houses are short)
     ],
     dominant: [
       // CENSUS-2f, R-AP amended: the dominant pool is picked by the exports' fish trade, which guarantees the trade and no
       // catch; the racks of catch and the gutting declare `fish`, the gulls' water `navigable`, both where both.
-      { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2), 2026-11-15; the bar's readers at 5d1e3096b): a line a crisis can make false is not colour (Y6): no catch drying where the fish failed or under a siege (4 of 36 towns)
-      { text: () => 'The drying racks along the way in stand nearly bare, and only the smell of salt and old catch is left.', twinOf: 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there, on the same slot
-      { text: (n) => `Half of ${n} seems to be gutting, salting or selling fish.`, needs: ['fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): the same (1 of 27 towns)
-      { text: (n) => `Half of ${n} has worked fish all its life, and there is almost no fish to work.`, twinOf: 'Half of {name} seems to be gutting, salting or selling fish.', needs: ['fish', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there
-      { text: () => 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 04287): "stacked for the carts" printed under a siege, when no cart leaves; reworded to name no carts, so no condition and no new line in the pool (VETOABLE wording, the owner's); TAIL-HISTORY-5 (Y17): no stacked salt fish where the food failed or is cut off (5 of 18 towns)
-      { text: () => 'Empty salt barrels stand stacked by the water, and even the gulls have given up on them.', twinOf: 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable', 'crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): its twin there
+      { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['trade at work: fish', 'navigable', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (the chair's Y17 (2), 2026-11-15; the bar's readers at 5d1e3096b): a line a crisis can make false is not colour (Y6): no catch drying where the fish failed or under a siege (4 of 36 towns)
+      { text: () => 'The drying racks along the way in stand nearly bare, and only the smell of salt and old catch is left.', twinOf: 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish'] }, // TAIL-HISTORY-5 (Y17): its twin there, on the same slot
+      { text: (n) => `Half of ${n} seems to be gutting, salting or selling fish.`, needs: ['trade at work: fish', 'fish'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY-5 (Y17): the same (1 of 27 towns)
+      { text: (n) => `Half of ${n} has worked fish all its life, and there is almost no fish to work.`, twinOf: 'Half of {name} seems to be gutting, salting or selling fish.', needs: ['fish'] }, // TAIL-HISTORY-5 (Y17): its twin there
+      { text: () => 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['trade at work: fish', 'navigable'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 04287): "stacked for the carts" printed under a siege, when no cart leaves; reworded to name no carts, so no condition and no new line in the pool (VETOABLE wording, the owner's); TAIL-HISTORY-5 (Y17): no stacked salt fish where the food failed or is cut off (5 of 18 towns)
+      { text: () => 'Empty salt barrels stand stacked by the water, and even the gulls have given up on them.', twinOf: 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'] }, // TAIL-HISTORY-5 (Y17): its twin there
     ] },
   { key: 'cloth',
     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],
@@ -175,8 +177,10 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'Someone is churning butter in a doorway, and the rhythm of it carries.', crisis: ['any'] },
     ],
     dominant: [
-      { text: () => 'Drovers push their herds along the road, and the whole place smells of the pens.', excludes: ['crisis: under_siege'], crisis: ['any'] },
-      { text: (n) => `The lowing of penned cattle carries across ${n} at every hour.`, crisis: ['any'] },
+      { text: () => 'Drovers push their herds along the road, and the whole place smells of the pens.', excludes: ['crisis: under_siege', 'failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C46725): no herds on the road where the famine failed them
+      { text: () => 'The pens at the edge of the settlement stand half empty, and the drovers have little left to drive.', twinOf: 'Drovers push their herds along the road, and the whole place smells of the pens.', needs: ['failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (A1): its twin where the herds failed; a twin keeps the slot and spends no redraw
+      { text: (n) => `The lowing of penned cattle carries across ${n} at every hour.`, excludes: ['failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (A1): not full pens where the herds failed
+      { text: (n) => `The few cattle left in the pens of ${n} low at every hour.`, twinOf: 'The lowing of penned cattle carries across {name} at every hour.', needs: ['failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (A1): its twin there
       { text: () => 'Hurdles and holding pens crowd the edge of the settlement, full and noisy.', excludes: ['crisis: hunger'], crisis: ['any'] },
     ] },
   { key: 'faith',
@@ -199,15 +203,23 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['quarry', 'stone quarry', 'mason', 'mine', 'mines', 'stonecutter'],
     trade: ['stone', 'marble', 'granite', 'coal', 'ore', 'gemstone'],
     lines: [
-      () => 'A fine grey dust from the workings settles on every doorstep.',
-      () => 'Carts of rock grind past, their axles complaining.',
-      () => 'The chink of chisels on stone carries on the wind.',
-      () => 'Workers coming off a shift are grey with dust to the eyebrows.',
+      // BAR4-SCENES-2 (HW1; kind A1's `house at work`): each line shows the workings at work: some stone house not short, and no siege stopping it (the chair's HW1 (c))
+      { text: () => 'A fine grey dust from the workings settles on every doorstep.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'] },
+      { text: () => 'Old grey dust from the workings still lies in the doorways, but no new dust comes.', twinOf: 'A fine grey dust from the workings settles on every doorstep.' }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (true where the workings are short or the siege stops them)
+      { text: () => 'Carts of rock grind past, their axles complaining.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'] },
+      { text: () => 'Few carts of rock come down from the workings now.', twinOf: 'Carts of rock grind past, their axles complaining.' }, // BAR4-SCENES-2 (HW1): its twin, true where the workings are short or the siege stops them; a twin keeps the slot
+      { text: () => 'The chink of chisels on stone carries on the wind.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'] },
+      { text: () => 'No chink of chisels comes from the workings today.', twinOf: 'The chink of chisels on stone carries on the wind.' }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (as above)
+      { text: () => 'Workers coming off a shift are grey with dust to the eyebrows.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'] },
+      { text: () => 'Workers who cut the stone stand idle by the road, the old dust still in their clothes.', twinOf: 'Workers coming off a shift are grey with dust to the eyebrows.' }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (as above)
     ],
     dominant: [
-      { text: (n) => `Part of ${n}'s living comes out of the ground, and its dust is on the doorsteps nearest the workings.`, crisis: ['any'] }, // BAR3-PLACES (H1, 2026-11-15): the trade is named, not its share: the income may lie elsewhere
-      { text: () => 'Laden carts from the workings grind along the road in a line that never seems to end.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR2-PLACES (PL1): no ore claimed (a quarry town with no ore printed it); the workings are the key's own
-      { text: () => 'Spoil heaps rise beyond the houses, and the sound of the workings never quite stops.', crisis: ['any'] },
+      { text: (n) => `Part of ${n}'s living comes out of the ground, and its dust is on the doorsteps nearest the workings.`, needs: ['trade at work: stone'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR3-PLACES (H1, 2026-11-15): the trade is named, not its share: the income may lie elsewhere
+      { text: (n) => `Part of ${n}'s living used to come out of the ground, and the workings stand quiet now.`, twinOf: "Part of {name}'s living comes out of the ground, and its dust is on the doorsteps nearest the workings.", crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (as above)
+      { text: () => 'Laden carts from the workings grind along the road in a line that never seems to end.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR2-PLACES (PL1): no ore claimed (a quarry town with no ore printed it); the workings are the key's own
+      { text: () => 'The road from the workings is empty of carts.', twinOf: 'Laden carts from the workings grind along the road in a line that never seems to end.', crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (as above)
+      { text: () => 'Spoil heaps rise beyond the houses, and the sound of the workings never quite stops.', needs: ['trade at work: stone'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1; kind A1's `house at work`)
+      { text: () => 'Spoil heaps rise beyond the houses, but the workings beyond them stand quiet.', twinOf: 'Spoil heaps rise beyond the houses, and the sound of the workings never quite stops.', crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin, true where the workings are short or the siege stops them
     ] },
   { key: 'timber',
     institutions: ['carpenter', 'carpenters', 'sawmill', 'woodcutter', 'lumber', 'joiner', 'cooper', 'shipwright', 'wheelwright', 'woodcarver'],
@@ -219,37 +231,54 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'The knock of a mallet on wood keeps time somewhere close.',
     ],
     dominant: [
-      (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`,
-      { text: () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): no cart waits on a road the siege has cut
-      () => 'The rasp of the saws carries from yard to yard all through the day.',
+      { text: (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`, needs: ['timber reaches the saws'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C45961): the whole place sawing wants wood: timber reaches the saws, its own or brought in (BAR4-SCENES-2: one home, `timberAtHand.js` on `houseInputAtHand.js`)
+      { text: (n) => `Timber is scarce in ${n}, and what little wood the workshops get is worked to the last shaving.`, twinOf: 'The smell of sawn timber is everywhere in {name}, and so is the sawdust.', excludes: ['timber reaches the saws'] }, // BAR4-SCENES (A1): its twin where no timber reaches the saws; a twin keeps the slot and spends no redraw
+      { text: () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', needs: ['timber reaches the saws'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): no cart waits on a road the siege has cut; BAR4-SCENES (A1): and no stacks without wood
+      { text: () => 'A few planks stand seasoning by the road in, and there is little timber to add to them.', twinOf: 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', excludes: ['timber reaches the saws'], crisis: ['any'] }, // BAR4-SCENES (A1): its twin where no timber reaches the saws
+      { text: () => 'The rasp of the saws carries from yard to yard all through the day.', needs: ['timber reaches the saws'] }, // BAR4-SCENES (A1): the saws want wood
+      { text: (n) => `The saws of ${n} are quiet most days, for want of timber to cut.`, twinOf: 'The rasp of the saws carries from yard to yard all through the day.', excludes: ['timber reaches the saws'] }, // BAR4-SCENES (A1): its twin where no timber reaches the saws
     ] },
   { key: 'kilns',
     institutions: ['potter', 'pottery', 'kiln', 'brickmaker', 'charcoal', 'glassblower', 'glassmaker', 'glassmakers', 'lime'],
     trade: ['pottery', 'brick', 'charcoal', 'glass', 'ceramic'],
     lines: [
-      () => 'A thread of kiln smoke rises over the roofs, and the air tastes faintly of ash.',
-      () => 'Fresh pots stand drying in a row outside a workshop.',
-      () => 'Charcoal smoke lingers in the lane, thick and sweetish.',
-      () => 'The heat of a working kiln reaches you from across the lane.',
+      // BAR4-SCENES-2 (HW1; kind A1's `house at work`): each line shows a kiln house at work: some kiln house not short of its clay, sand or wood
+      { text: () => 'A thread of kiln smoke rises over the roofs, and the air tastes faintly of ash.', needs: ['trade at work: kilns'] },
+      { text: (n) => `The kilns of ${n} are cold more days than they are lit.`, twinOf: 'A thread of kiln smoke rises over the roofs, and the air tastes faintly of ash.', excludes: ['trade at work: kilns'] }, // BAR4-SCENES-2 (HW1): its twin where every kiln house is short; a twin keeps the slot
+      { text: () => 'Fresh pots stand drying in a row outside a workshop.', needs: ['trade at work: kilns'] },
+      { text: () => 'Drying boards stand empty outside a workshop, with no fresh pots on them.', twinOf: 'Fresh pots stand drying in a row outside a workshop.', excludes: ['trade at work: kilns'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => 'Charcoal smoke lingers in the lane, thick and sweetish.', needs: ['trade at work: kilns'] },
+      { text: () => 'The charcoal clamps at the end of the lane stand cold and unlit.', twinOf: 'Charcoal smoke lingers in the lane, thick and sweetish.', excludes: ['trade at work: kilns'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => 'The heat of a working kiln reaches you from across the lane.', needs: ['trade at work: kilns'] },
+      { text: () => 'A kiln stands cold across the lane, its mouth bricked up for now.', twinOf: 'The heat of a working kiln reaches you from across the lane.', excludes: ['trade at work: kilns'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
     ],
     dominant: [
-      { text: (n) => `Kiln smoke hangs over ${n}, and the dust of fired clay is on everything.`, crisis: ['any'] },
-      { text: () => 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', excludes: ['crisis: under_siege'], crisis: ['any'] },
-      { text: () => 'The kilns are lit all through the day, and the heat of them is in every lane.', crisis: ['any'] },
+      { text: (n) => `Kiln smoke hangs over ${n}, and the dust of fired clay is on everything.`, needs: ['trade at work: kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1; kind A1's `house at work`)
+      { text: (n) => `Old kiln dust lies on the doorsteps of ${n}, but little smoke rises now.`, twinOf: 'Kiln smoke hangs over {name}, and the dust of fired clay is on everything.', excludes: ['trade at work: kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', needs: ['trade at work: kilns'], excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'The yard where crates of pots once waited for the carts stands nearly empty.', twinOf: 'Crates of pots and glassware, packed in straw, wait for the carts on the road out.', crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves (true where the kilns are short or the siege holds the road)
+      { text: () => 'The kilns are lit all through the day, and the heat of them is in every lane.', needs: ['trade at work: kilns'], crisis: ['any'] },
+      { text: (n) => `The kilns of ${n} are lit only now and then, and most days the lanes are cold.`, twinOf: 'The kilns are lit all through the day, and the heat of them is in every lane.', excludes: ['trade at work: kilns'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin where every kiln house is short
     ] },
   { key: 'horses',
     institutions: ['coaching inn', 'stable', 'stables', 'livery', 'carriers', 'post relay', 'horse', 'beast trainers', 'caravaneer'],
     trade: ['horse', 'haulage', 'carting', 'caravan'],
     lines: [
-      () => 'The smell of horses and hay comes from the stables.',
-      () => 'A team stands in harness, stamping, while the carters argue over the load.',
-      () => 'An ostler leads a tired horse past you toward the trough.',
-      () => 'Harness jingles somewhere behind you as a cart pulls out.',
+      { text: () => 'The smell of horses and hay comes from the stables.', colour: true }, // BAR4-SCENES-2 (HW1): read; presumes nothing (horses are stabled under a siege too)
+      // BAR4-SCENES-2 (HW1; kind A1's `house at work`) (c): the traffic of a road the siege has cut: none of it under a siege
+      { text: () => 'A team stands in harness, stamping, while the carters argue over the load.', excludes: ['crisis: under_siege'] },
+      { text: () => 'A team stands unharnessed in the yard; no carter has a load to take out.', twinOf: 'A team stands in harness, stamping, while the carters argue over the load.', needs: ['crisis: under_siege'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => 'An ostler leads a tired horse past you toward the trough.', excludes: ['crisis: under_siege'] },
+      { text: () => 'An ostler walks a horse up and down the yard; no rider has come in for days.', twinOf: 'An ostler leads a tired horse past you toward the trough.', needs: ['crisis: under_siege'] }, // BAR4-SCENES-2 (HW1): its twin under the siege; a twin keeps the slot
+      { text: () => 'Harness jingles somewhere behind you as a cart pulls out.', excludes: ['crisis: under_siege'] },
+      { text: () => 'Harness hangs on its pegs by the yard gate, and no cart pulls out.', twinOf: 'Harness jingles somewhere behind you as a cart pulls out.', needs: ['crisis: under_siege'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
     ],
     dominant: [
       { text: () => 'Hooves and wheels fill the road, and the yards are crowded with teams changing over.', excludes: ['crisis: under_siege'], crisis: ['any'] },
-      { text: (n) => `${n} is loud with horses: shod, sold, hired and fed at every hour.`, crisis: ['any'] },
-      { text: () => 'Fresh horses stand saddled and waiting while the tired ones are led away.', crisis: ['any'] },
+      { text: (n) => `${n} is loud with horses: shod, sold, hired and fed at every hour.`, excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1; kind A1's `house at work`) (c): no horses hired or changed where the siege has cut the road
+      { text: (n) => `${n} is full of horses with nowhere to go while the road stays closed.`, twinOf: '{name} is loud with horses: shod, sold, hired and fed at every hour.', needs: ['crisis: under_siege'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin under the siege
+      { text: () => 'Fresh horses stand saddled and waiting while the tired ones are led away.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+      { text: () => 'Horses stand in their stalls with no rider to carry while the road stays closed.', twinOf: 'Fresh horses stand saddled and waiting while the tired ones are led away.', needs: ['crisis: under_siege'], crisis: ['any'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
     ] },
   { key: 'market',
     institutions: ['market square', 'market squares', 'weekly market', 'daily markets', 'markets', 'market hall', 'bazaar', 'annual fair', 'fairs'],
@@ -280,15 +309,23 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['mage', 'mages', 'wizard', 'arcane', 'alchemist', 'alchemy', 'enchanter', 'enchanting', 'sorcer', 'magelight', 'spellcast'],
     trade: ['enchant', 'arcane', 'potion', 'spellcasting', 'magical'],
     lines: [
-      () => 'A faint glow lingers in an upper window, even at midday.',
-      () => "The air near an alchemist's door smells of sulphur and something sweeter.",
-      () => 'A vendor sells charms from a tray, and nobody laughs at the buyers.',
-      () => 'A lamp that burns without oil lights a doorway off the lane.',
+      // BAR4-SCENES-2 (HW1; kind A1's `house at work`): each line shows magic worked: some arcane house not short of its materials
+      { text: () => 'A faint glow lingers in an upper window, even at midday.', needs: ['trade at work: arcane'] },
+      { text: () => 'Shutters are drawn on an upper window where, they say, magic used to be worked.', twinOf: 'A faint glow lingers in an upper window, even at midday.', excludes: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => "The air near an alchemist's door smells of sulphur and something sweeter.", needs: ['trade at work: arcane'] },
+      { text: () => 'Doors where magic is worked stay shut, for want of what the work needs.', twinOf: "The air near an alchemist's door smells of sulphur and something sweeter.", excludes: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1): its twin where every arcane house is short; a twin keeps the slot
+      { text: () => 'A vendor sells charms from a tray, and nobody laughs at the buyers.', needs: ['trade at work: arcane'] },
+      { text: () => "A charm-seller's tray stands nearly empty, and few stop to look.", twinOf: 'A vendor sells charms from a tray, and nobody laughs at the buyers.', excludes: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
+      { text: () => 'A lamp that burns without oil lights a doorway off the lane.', needs: ['trade at work: arcane'] },
+      { text: () => 'A doorway off the lane is lit by an ordinary oil lamp.', twinOf: 'A lamp that burns without oil lights a doorway off the lane.', excludes: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
     ],
     dominant: [
-      (n) => `Magic is a trade in ${n} like any other: signs offer enchanting and identification by the hour.`,
-      () => 'The air prickles faintly, the way it does where a great deal of spellwork is done.',
-      () => 'Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.',
+      { text: (n) => `Magic is a trade in ${n} like any other: signs offer enchanting and identification by the hour.`, needs: ['enchanting', 'trade at work: arcane'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C2056): the signs want a house that offers it (the Services tab's rows)
+      { text: (n) => `Nobody in ${n} sells enchanting by the hour, and what magic is done here is done quietly.`, twinOf: 'Magic is a trade in {name} like any other: signs offer enchanting and identification by the hour.', excludes: ['enchanting'] }, // BAR4-SCENES (A1): its twin where no house offers it
+      { text: () => 'The air prickles faintly, the way it does where a great deal of spellwork is done.', needs: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1; kind A1's `house at work`)
+      { text: (n) => `Little spellwork is done in ${n} these days, for want of the stuff it takes.`, twinOf: 'The air prickles faintly, the way it does where a great deal of spellwork is done.', excludes: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1): its twin where every arcane house is short
+      { text: () => 'Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.', needs: ['trade at work: arcane'] },
+      { text: () => 'The reagent stalls are half bare, and the few jars left are dear.', twinOf: 'Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.', excludes: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
     ] },
 ]);
 
