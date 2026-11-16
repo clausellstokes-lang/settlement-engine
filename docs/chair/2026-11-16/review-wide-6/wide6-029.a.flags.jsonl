@@ -1,0 +1,5 @@
+{"id":"C76517","town":"bar0-city-wartime-rand-40","sev":"MED","kind":"PAIR","why":"'The settlement is loyal' against Foundations 'Public legitimacy · Legitimacy crisis' and GOVERNMENT 'Legitimacy Crisis', legitimacy score 25","other":"C76584"}
+{"id":"C76763","town":"bar0-city-wartime-rand-40","sev":"MED","kind":"BROKEN","why":"slash label 'Military/Guard's way' used as one power's name inside a sentence beside a verb","other":""}
+{"id":"C78115","town":"bar0-city-wartime-rand-40","sev":"LOW","kind":"PAIR","why":"The Shield Compact's card prints War Council's own description ('Crown-appointed emergency body... requisition, conscription, price controls'), the same words as War Council's row","other":"C77952"}
+{"id":"C78252","town":"bar0-city-wartime-rand-40","sev":"MED","kind":"PAIR","why":"says river-fish trade relies on magic, but the Reliance row names only Divine & Magical Healing and Spellcasting Services; the river fishery is also depleted","other":"C78246"}
+{"id":"DONE","lines":3146,"blocks":1,"flags":4}
