@@ -1,0 +1,4 @@
+{"id":"C7834","town":"bar0-city-wartime-rand-24","sev":"LOW","kind":"STATE","why":"Ordinary-times scene of pilgrims crowding the road in, unmarked, in a town under Wartime requisition and conscription","other":"C7837"}
+{"id":"C9489","town":"bar0-city-wartime-rand-24","sev":"LOW","kind":"PAIR","why":"Commercial Circle's card repeats the Craft Guilds' text 'The trades regulate their own production and apprenticeships'; Circle is innkeeper, pawnbroker, factor, not a craft body","other":"C9359"}
+{"id":"C9617","town":"bar0-city-wartime-rand-24","sev":"MED","kind":"PAIR","why":"Says part of the city's work holds up only with help beyond ordinary labour (magic reliance); page says Reliance on magic: None, magic 0% of food, DEFENCE magic none","other":"C9611"}
+{"id":"DONE","lines":3278,"blocks":1,"flags":3}
