@@ -76,8 +76,13 @@ export function readChains(lines = []) {
   const out = [];
   let ch = null;
   const HEAD = /^(.+?) · (.+?)(✓ Running|○ Operational| · Impaired| · Vulnerable| · Stopped| · Failed|✗ [A-Za-z]+)\s*$/;
+  // BAR5-CHAINS (2026-11-16): a card that prints NO state (`chainStateShown.js :: NO_STATE_SHOWN`: a chain run only through
+  // an "Access to …" row) is a card too: its head is "<name> · <Category>" straight before its From or Via. Read as no head,
+  // its Via was read as the card above's (3 of the 13 L3.chainOverStopped of the 720 and the 300: "Black market … Operational
+  // over (Access to a house of worship)").
+  const STATELESS = /^(.+?) · ([A-Z][^·]*)$/;
   lines.forEach((l, i) => {
-    const m = l.match(HEAD);
+    const m = l.match(HEAD) || (/^(From|Via)$/.test(lines[i + 1] || '') && l.match(STATELESS) ? [l, ...l.match(STATELESS).slice(1, 3), ''] : null);
     if (m && !/^(From|Via|Outputs|Normally yields)$/.test(l)) {
       ch = { name: m[1].trim(), cat: m[2].trim(), state: m[3].replace(/^ · /, '').trim(), head: l, headIdx: i, lines: [], via: [], from: [], outputs: null, outIdx: -1, yieldsNormally: false };
       ch.marked = /Impaired|Stopped|Failed|✗/.test(ch.state);

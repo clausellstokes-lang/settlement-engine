@@ -133,7 +133,12 @@ const OVERVIEW_GRAIN = ['r2s-famine-town-1', 'rr3-metropolis-famine-rand-4'];
  * resourceAnalysis.gaps in 16 of the 720) takes rr3-town-famine-isolated-1's herbs chain off its roster, so it holds no partial
  * gap; its member is the nearest town of the same shape, rr3-town-famine-isolated-2 (a town of 1,200 under famine, an
  * established apothecary beside the partial herbs chain, "Alchemist shop" named missing). */
-const KIND_TOWNS = ['r2r-town-56', 'rr3-city-infiltrated-rand-5', 'rr3-metropolis-recently_betrayed-rand-4', 'r2s-religious_conversion-city-0', 'r2s-politically_fractured-city-0', 'rr3-town-famine-isolated-2'];
+// BAR5-CHAINS (2026-11-16, BRIEF-BAR5 (a), vetoable by the owner; re-keyed by identity, the assertion unchanged): the gap now reads its
+// finisher by trade too (`houseInputAtHand.js :: tradeFinisherIn`), so none of the six towns below names a house any more (each held
+// a finisher of its missing house by another trade). Three census towns that hold a commercial sawmill and a half-way gap that still
+// names a house (31 such towns of the 720 at the tip) are added, so the arm still meets a house no kind of stands.
+const KIND_TOWNS = ['r2r-town-56', 'rr3-city-infiltrated-rand-5', 'rr3-metropolis-recently_betrayed-rand-4', 'r2s-religious_conversion-city-0', 'r2s-politically_fractured-city-0', 'rr3-town-famine-isolated-2',
+  'r2r-town-11', 'r2r-town-42', 'r2r-city-20'];
 /** A house name's kind, as resourceGenerator.js :: houseHead reads it. @param {unknown} name */
 const kindOf = (name) => (String(name || '').toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[\s/]+/).find(Boolean) || '').replace(/['’]/g, '').replace(/s$/, '').replace(/y$/, '');
 

@@ -41,7 +41,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
-import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand } from '../facts/houseInputAtHand.js';
+import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, tradeFinisherIn } from '../facts/houseInputAtHand.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -192,35 +192,9 @@ function scaleGroupsOf(...names) {
   return out;
 }
 
-/**
- * THE TRADES THAT FINISH WHAT A CHAIN'S HOUSE FINISHES (W2-C-LEAVES R1, the chair's ruling on REVIEW-R2-STAGES finding
- * 1: "by kind" answers a house with no catalogue row too). One closed list, keyed by the house a chain's list names;
- * each entry gives the words of a house's name that do the same finishing, with the cause. Matched on the live
- * roster's own houses (a road to a neighbour's house, "Access to …", finishes nothing here).
- * @type {Readonly<Record<string, ReadonlyArray<string>>>}
- */
-const FINISHING_TRADES = Object.freeze({
-  "leatherworkers' guild": ['leatherwork', 'cobbler', 'furrier', 'saddler', 'cordwainer', 'shoemaker'], // the review's 17: a Cobbler's guild or a Furrier's district finishes the leather
-  "carpenters' guild": ['carpenter', 'joiner', 'cooper', 'wheelwright'], // the review's 3: Carpenters (5-15) beside "no carpenters' guild"
-  'sawmill': ['sawmill', 'sawyer', 'lumber'],
-  'apothecary': ['apothecar', 'herbalist', 'alchemist'], // the review's 4: an Apothecary or Alchemist house finishes the herbs
-  'alchemist shop': ['alchemist', 'apothecar'],
-  "blacksmiths' guild": ['blacksmith', 'smithy', 'smith', 'armourer', 'armorer', 'weaponsmith', 'metalworker'],
-  'smelter': ['smelter', 'foundry', 'ironworks'],
-  "goldsmiths' guild": ['goldsmith', 'silversmith', 'jeweler', 'jeweller'],
-  "jewelers' guild": ['jeweler', 'jeweller', 'gem cutter', 'lapidar', 'goldsmith'],
-  "coppersmiths' guild": ['coppersmith'],
-  "stonemasons' guild": ['stonemason', 'mason', 'stonecutter'],
-  "weavers' guild": ['weaver', 'textile', 'cloth'],
-  "dyers' guild": ['dyer'],
-  'fulling mill': ['fuller', 'fulling'],
-  'glassblower': ['glassblow', 'glassmaker', 'glassworks'],
-  'potter': ['potter', 'pottery'],
-  'brickmaker': ['brickmaker', 'brickworks', 'potter'], // a Potter finishes the clay (the cold list REVIEW-W2A-3 #990; r2s-insurgency-town-0)
-});
 
 /**
- * Whether a live house of the named house's trade (`FINISHING_TRADES`) stands here, finishing what it finishes.
+ * Whether a live house of the named house's trade (`facts/houseInputAtHand.js :: FINISHING_TRADES`) stands here, finishing what it finishes.
  * @param {PageRecord} s @param {string} name a house the chain's list names, missing by kind
  */
 function tradeFinisherHere(s, name) {
@@ -229,12 +203,7 @@ function tradeFinisherHere(s, name) {
 
 /** The live house of the named house's finishing trade (`tradeFinisherHere`'s reading), or undefined. @param {PageRecord} s @param {string} name */
 function tradeFinisherOn(s, name) {
-  const trades = FINISHING_TRADES[name.toLowerCase()];
-  if (!trades) return undefined;
-  return liveInstitutions(s).find((inst) => {
-    const have = str(inst?.name).toLowerCase();
-    return !!have && !have.startsWith('access to') && trades.some((w) => have.includes(w));
-  });
+  return tradeFinisherIn(liveInstitutions(s), name); // BAR5-CHAINS (a): one table, read by identity, with the gap writer
 }
 
 /**

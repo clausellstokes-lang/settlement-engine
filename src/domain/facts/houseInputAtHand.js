@@ -37,6 +37,7 @@ import { hasTradeRouteConnection } from '../tradeRouteSemantics.js';
 import { institutionHasAnyTag } from '../../lib/entities.js';
 import { nativeSemanticNames } from '../content/customContentSemanticAuthority.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { institutionMatchesKeyword } from '../institutions/institutionCategory.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE } from '../../data/crisisDependence.js';
@@ -122,6 +123,19 @@ const sing = (x) => x.replace(/([a-z]{3,}[^su\s])s(?= )/g, '$1');
 const wholeTokens = (a, b) => { const x = sing(norm(a)), y = sing(norm(b)); return x.trim() !== '' && y.trim() !== '' && (x.includes(y) || y.includes(x)); };
 
 /**
+ * Whether the record's own need list (the terrain's critical imports, `resourceAnalysis.imports.critical`: the goods the land
+ * cannot give and the town's houses require) names the raw good whole (BAR5-CHAINS (b)). The generator's record in the making
+ * carries the list as the saved record does (`resourceGenerator.js :: generateResourceAnalysis` hands it in).
+ * @param {InputRecord | null | undefined} record @param {ReadonlyArray<string>} names the raw good's names
+ * @returns {boolean}
+ */
+function needListNames(record, names) {
+  const imports = /** @type {{ critical?: unknown } | unknown[] | null | undefined} */ (record?.resourceAnalysis?.imports);
+  const critical = Array.isArray(imports) ? [] : arr(imports?.critical).map(str);
+  return critical.some((c) => names.some((n) => wholeTokens(c, n)));
+}
+
+/**
  * Whether a local producer of the roster makes the requirement (a quarry for stone; salt works for salt).
  * @param {string} requirement @param {ReadonlyArray<unknown>} institutions
  */
@@ -137,6 +151,7 @@ export function localProducerSupplies(requirement, institutions) {
  *   economicState?: { localProduction?: unknown, primaryImports?: unknown,
  *     foodSecurity?: { importPct?: unknown, foodRecord?: { foodSources?: unknown, normalImportPct?: unknown } | null } | null } | null,
  *   institutions?: ReadonlyArray<unknown> | null,
+ *   resourceAnalysis?: { imports?: { critical?: unknown } | unknown[] | null } | null,
  * }} InputRecord the record, or the generator's record in the making (the same fields)
  */
 
@@ -169,14 +184,21 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   if (spentGround && SPENT_GROUND_WORKERS.includes(String(catalogIdForName(str(house?.name)) ?? ''))) return 'missing';
   if (!spentGround && localProducerSupplies(raw, liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
 
-  // The route, where no siege shuts it.
+  // The route, where no siege shuts it. BAR5-CHAINS (b) (LAW 3's L3.needed, the chair's direction of BRIEF-BAR5 under HW1;
+  // vetoable by the owner): A GOOD THE RECORD'S OWN NEED LIST NAMES IS NOT BROUGHT BY THE ROUTE ALONE. The terrain's need
+  // list (`resourceAnalysis.imports.critical`, "grapes: Required by Vintner but not available in Coastal terrain") is
+  // printed as "Needed, and not brought in: grapes" where no import names it, while this reader answered the vintner
+  // 'route' (TAIL-DEFECON-R M-V: grapes come by any route), so its gap was never written and its rows stood bare (the
+  // vintner in 38 of the census's 720, BAR5-AUDIT-B). A good the need list names reaches the house only as the imports
+  // bring it (below); a house whose own trade IS the route (a market, a caravanserai) keeps the route.
   const besieged = arr(config.stressTypes).includes('under_siege');
-  if (!besieged && hasTradeRouteConnection(str(config.tradeRouteAccess))
-    && (spec?.route || institutionHasAnyTag(house || {}, [...ROUTE_HOUSE_TAGS]))) return 'route';
-
-  // The imports bring the raw good; the food record names the source or imports the staple.
   const imports = arr(es.primaryImports).map(str);
   const names = [raw, spec?.raw, spec?.noun, ...terrainSynonymsFor(raw)].filter((x) => typeof x === 'string' && x !== '');
+  const routeHouse = institutionHasAnyTag(house || {}, [...ROUTE_HOUSE_TAGS]);
+  if (!besieged && hasTradeRouteConnection(str(config.tradeRouteAccess))
+    && (routeHouse || (spec?.route && !needListNames(record, /** @type {string[]} */ (names))))) return 'route';
+
+  // The imports bring the raw good; the food record names the source or imports the staple.
   if (imports.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))))) return 'imported';
   const food = es.foodSecurity?.foodRecord;
   if (spec?.food && arr(food?.foodSources).some((x) => spec.food?.includes(str(x)))) return 'imported';
@@ -396,3 +418,56 @@ export const houseRunsChain = (chain, name) => {
  * @returns {Array<[string, C]>}
  */
 export const chainsOfHouse = (name, chains) => Object.entries(chains).filter(([, c]) => houseRunsChain(c, name));
+
+/**
+ * THE TRADES THAT FINISH WHAT A CHAIN'S HOUSE FINISHES (W2-C-LEAVES R1, the chair's ruling on REVIEW-R2-STAGES finding
+ * 1: "by kind" answers a house with no catalogue row too). One closed list, keyed by the house a chain's list names;
+ * each entry gives the words of a house's name that do the same finishing, with the cause. Matched on the live
+ * roster's own houses (a road to a neighbour's house, "Access to …", finishes nothing here). MOVED HERE from
+ * `display/validationOnPage.js` (BAR5-CHAINS, LAW 3's L3.halfway, the chair's direction (a) of BRIEF-BAR5; vetoable by the
+ * owner): the record's gap (`resourceGenerator.js :: evaluateInstitutionChain`) named "Fulling mill" missing beside a Fuller
+ * and "Leatherworkers' guild" beside a Cobbler's guild while the page's line read this table (98 of the 171 houses the gaps
+ * of the census's 720 called missing in its half-way towns, the audit BAR5-AUDIT-B): ONE TABLE, both read it.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const FINISHING_TRADES = Object.freeze({
+  "leatherworkers' guild": ['leatherwork', 'cobbler', 'furrier', 'saddler', 'cordwainer', 'shoemaker'], // the review's 17: a Cobbler's guild or a Furrier's district finishes the leather
+  "carpenters' guild": ['carpenter', 'joiner', 'cooper', 'wheelwright'], // the review's 3: Carpenters (5-15) beside "no carpenters' guild"
+  'sawmill': ['sawmill', 'sawyer', 'lumber'],
+  'apothecary': ['apothecar', 'herbalist', 'alchemist'], // the review's 4: an Apothecary or Alchemist house finishes the herbs
+  'alchemist shop': ['alchemist', 'apothecar'],
+  "blacksmiths' guild": ['blacksmith', 'smithy', 'smith', 'armourer', 'armorer', 'weaponsmith', 'metalworker'],
+  'smelter': ['smelter', 'foundry', 'ironworks'],
+  "goldsmiths' guild": ['goldsmith', 'silversmith', 'jeweler', 'jeweller'],
+  "jewelers' guild": ['jeweler', 'jeweller', 'gem cutter', 'lapidar', 'goldsmith'],
+  "coppersmiths' guild": ['coppersmith'],
+  "stonemasons' guild": ['stonemason', 'mason', 'stonecutter'],
+  "weavers' guild": ['weaver', 'textile', 'cloth'],
+  "dyers' guild": ['dyer'],
+  'fulling mill': ['fuller', 'fulling'],
+  'glassblower': ['glassblow', 'glassmaker', 'glassworks'],
+  'potter': ['potter', 'pottery'],
+  'brickmaker': ['brickmaker', 'brickworks', 'potter'], // a Potter finishes the clay (the cold list REVIEW-W2A-3 #990; r2s-insurgency-town-0)
+});
+
+/**
+ * THE LIVE HOUSE THAT FINISHES A CHAIN'S NAMED HOUSE'S WORK BY ITS TRADE (`FINISHING_TRADES`), or undefined. Read BY
+ * CATALOGUE IDENTITY, never by a display name: a stamped house answers by its `catalogId` (the keyword id-set, built from
+ * the catalogue's own names: `institutionCategory.js :: institutionMatchesKeyword`, so a generated roster is matched
+ * exactly as its names would be), an unstamped native one by its name, a custom house never. A road to a neighbour's
+ * house ("Access to …") finishes nothing here. The record's gap writer and the page's gap reader both read this.
+ * @param {ReadonlyArray<unknown> | null | undefined} houses the roster to look in (the live one, or the generator's native roster)
+ * @param {unknown} name a house the chain's list names
+ * @returns {Record<string, unknown> | undefined}
+ */
+export function tradeFinisherIn(houses, name) {
+  const trades = FINISHING_TRADES[str(name).toLowerCase()];
+  if (!trades) return undefined;
+  return /** @type {Record<string, unknown> | undefined} */ (arr(houses).find((x) => {
+    const inst = /** @type {{ name?: unknown, catalogId?: unknown } | null | undefined} */ (x);
+    if (!inst || typeof inst !== 'object') return false;
+    const have = str(inst.name).toLowerCase(), id = typeof inst.catalogId === 'string' ? inst.catalogId : '';
+    if (!have || have.startsWith('access to') || id.startsWith('access_to')) return false;
+    return trades.some((w) => institutionMatchesKeyword(/** @type {Parameters<typeof institutionMatchesKeyword>[0]} */ (inst), w));
+  }));
+}

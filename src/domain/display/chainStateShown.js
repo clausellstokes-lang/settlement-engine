@@ -158,15 +158,36 @@ export function serviceStateShown(serviceHouses, impairedHouses) {
  * THE CHAIN AS ITS CARD PRINTS IT (W2-C-LEAVES-7 item 9: the Economics tab's own reader, `EconomicsTab.jsx ::
  * shownStateOf`, moved here whole, so the tab, the Foundry journal's chain line and the PDF's chain flow read ONE
  * reader): the state a crisis left (`chainStateShown`) and the magic note whose tradition the town holds
- * (`magicProvisionShown.js :: magicNoteShown`, W2-C-LEAVES-5 item 5). The record is not touched: the chain itself is
+ * (`magicProvisionShown.js :: magicNoteShown`, W2-C-LEAVES-5 item 5), and the outputs a half-way gap leaves (BAR5-CHAINS,
+ * `outputsShown`). The record is not touched: the chain itself is
  * returned where nothing differs, else a copy.
  * @template {{ status?: unknown, magicNote?: unknown }} C
  * @param {C} chain one of `economicState.activeChains`
  * @param {unknown} record the settlement record
- * @returns {C & { status?: unknown, magicNote?: unknown }}
+ * @returns {C & { status?: unknown, magicNote?: unknown, outputs?: unknown }}
  */
 export function chainAsShown(chain, record) {
   const status = chainStateShown(chain, record), magicNote = magicNoteShown(chain, record);
-  return status === chain?.status && magicNote === chain?.magicNote ? chain : { ...chain, status, magicNote };
+  const outputs = outputsShown(chain, record);
+  if (status === chain?.status && magicNote === chain?.magicNote && outputs === null) return chain;
+  return outputs === null ? { ...chain, status, magicNote } : { ...chain, status, magicNote, outputs };
+}
+
+/**
+ * THE OUTPUTS THE CARD PRINTS (BAR5-CHAINS, LAW 3's L3.halfway, the chair's direction (a) of BRIEF-BAR5; vetoable by the
+ * owner): a card on a material the record's gap says is worked only half-way does not print the finished goods of the
+ * house that gap names missing (`facts/halfWayGoods.js :: halfWayGoodsDenied`): "Boots and shoes · Saddles and harness ·
+ * Leather armour" stood over a lone Tanner beside "Work on the animal hides here stops half-way". The tab, the PDF and the
+ * journal read the chain as shown; the record keeps its outputs. Null where nothing is denied.
+ * @param {unknown} chain @param {unknown} record
+ * @returns {unknown[] | null}
+ */
+function outputsShown(chain, record) {
+  const outputs = chain && typeof chain === 'object' ? /** @type {{ outputs?: unknown }} */ (chain).outputs : undefined;
+  if (!Array.isArray(outputs)) return null;
+  const denied = halfWayGoodsDenied(record, chain);
+  if (denied.size === 0 || !outputs.some((o) => denied.has(String(o)))) return null;
+  return outputs.filter((o) => !denied.has(String(o)));
 }
 import { magicNoteShown } from './magicProvisionShown.js';
+import { halfWayGoodsDenied } from '../facts/halfWayGoods.js';
