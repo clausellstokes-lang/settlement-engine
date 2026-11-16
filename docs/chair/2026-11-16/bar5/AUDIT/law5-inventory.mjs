@@ -202,6 +202,19 @@ for (const h of hits) {
   byFile.set(k, v);
 }
 for (const h of hits) h.crisisUndeclared = !(h.crisisDeclared || h.status === 'row' || h.status === 'colour+row');
+// THE REVIEWED EXCLUSIONS (BAR5-WORLD, 2026-11-16; BRIEF-BAR5 L5): a line that leaves the list by a reviewed reason, not a
+// declaration. One file a seat (`tables/B.law5.exclusions.<SEAT>.json`: [{ file, text, reason }], `text` the row's own text or
+// its first words); a row named there is `excluded` with its reason and counts as declared. A named row the walk no longer
+// finds is reported, so a stale exclusion cannot stand unseen.
+{
+  const TD = path.join(path.dirname(new URL(import.meta.url).pathname), 'tables');
+  const ex = fs.readdirSync(TD).filter((f) => /^B\.law5\.exclusions\.[A-Z0-9-]+\.json$/.test(f)).flatMap((f) => JSON.parse(fs.readFileSync(path.join(TD, f), 'utf8')).map((e) => ({ ...e, table: f })));
+  for (const e of ex) {
+    const h = hits.find((x) => x.file === e.file && x.text.startsWith(e.text));
+    if (!h) { console.log(`EXCLUSION STALE (no such row): ${e.table} ${e.file} ${e.text.slice(0, 60)}`); continue; }
+    h.excluded = `${e.table}: ${e.reason}`; h.crisisUndeclared = false;
+  }
+}
 fs.writeFileSync(outPath, JSON.stringify(hits, null, 1));
 const tot = { n: 0, line: 0, lineCrisis: 0, row: 0, colour: 0, none: 0 };
 for (const v of byFile.values()) for (const k of Object.keys(tot)) tot[k] += v[k];

@@ -171,10 +171,15 @@ function deriveFoodCulture(s, ctx) {
   const stableFood = foodChains.find(c => c.status === 'stable');
   const disruptedFood = foodChains.find(c => c.status !== 'stable');
 
+  // BAR5-WORLD (2026-11-16; LAW 5): a town under a famine or a siege is not told its bread is plentiful: the surplus band
+  // takes its twin, true while the stores hold (the measure's rule 3: a town in want is told what it still has).
+  const wanting = ctx.threats.some((t) => t.type === 'famine' || t.type === 'siege');
   let text;
   switch (food.band) {
     case 'surplus':
-      text = stableFood
+      text = wanting
+        ? 'The stores still hold: bread and broth reach most tables, and the households count what is left.'
+        : stableFood
         ? `Bread, broth, and ${stableFood.outputs?.[0] || 'staple grains'} are plentiful; markets close their stalls without empty crates.`
         : 'Bread and broth are plentiful; few households go to bed hungry.';
       break;
@@ -226,6 +231,9 @@ function deriveDawnWork(s, ctx) {
     text = 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.';
   } else if (dominantCraftPower >= 25) {
     text = 'Smithy fires light before sunrise; guild-callers move from shop to shop, and apprentices haul water before the bell.';
+  } else if (dominantMerchantPower >= 30 && ctx.threats.some((t) => t.type === 'siege')) {
+    // BAR5-WORLD (2026-11-16; LAW 5): under a siege no caravan rolls; the merchants' dawn is a count of their stock.
+    text = 'The merchants count their stock before light, and the porters wait for loads that do not come; dawn brings the smell of woodsmoke and grain.';
   } else if (dominantMerchantPower >= 30) {
     text = 'Merchant caravans roll before light; porters and apprentices queue at the warehouses, and dawn brings the smell of woodsmoke and grain.';
   } else {
