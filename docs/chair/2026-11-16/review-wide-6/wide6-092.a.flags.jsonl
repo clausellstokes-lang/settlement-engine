@@ -1,0 +1,9 @@
+{"id":"C209331","town":"bar0-village-calm-rand-40","sev":"LOW","kind":"PAIR","why":"Foundations 'Law & order · Critical' against Summary 'Safety Moderate' and header stability Stable with a corruption scandal only","other":"C209303"}
+{"id":"C209287","town":"bar0-village-calm-rand-40","sev":"LOW","kind":"PAIR","why":"'built in masonry around a civic square' against Dwellings 'Timber-framed, raised on stone foundations'","other":"C209444"}
+{"id":"C209534","town":"bar0-village-calm-rand-40","sev":"LOW","kind":"PAIR","why":"'Its own food is meat and milk from the herds' against Farmland's 'Grain at harvest' and Harvest 84% of income as the main living","other":"C209468"}
+{"id":"C209933","town":"bar0-village-calm-rand-41","sev":"MED","kind":"PAIR","why":"Overview 'relies on arcane workings' against Summary and Magic tab 'Reliance on magic: None' with every role absent and 0% food by magic","other":"C209953"}
+{"id":"C209939","town":"bar0-village-calm-rand-41","sev":"MED","kind":"LACKS","why":"'divide the settlement into organized neighborhoods': a village of 128 with ten houses cannot hold neighbourhoods","other":""}
+{"id":"C209974","town":"bar0-village-calm-rand-41","sev":"LOW","kind":"PAIR","why":"Foundations 'Law & order · Critical' against Summary 'Safety Moderate' and header stability Stable","other":"C209947"}
+{"id":"C210715","town":"bar0-village-famine-rand-27","sev":"MED","kind":"STATE","why":"Exports 'Date harvest · Desert grain' offered with no mark under active famine (grown 29%, 35% deficit) and beside imports of Grain","other":"C210717"}
+{"id":"C210690","town":"bar0-village-famine-rand-27","sev":"LOW","kind":"STATE","why":"'a place at a shared table, for a traveller who asks' unmarked under active famine with three days in the larder, while grain rows are marked scarce","other":"C210671"}
+{"id":"DONE","lines":1924,"blocks":3,"flags":8}
