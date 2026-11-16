@@ -1,0 +1,9 @@
+{"id":"C156826","town":"bar0-thorp-calm-rand-41","sev":"LOW","kind":"LACKS","why":"'the busier lanes' with upper floors projecting; a thorp of 26 people (Dwellings 1-8) holds no busy lanes","other":""}
+{"id":"C157107","town":"bar0-thorp-calm-rand-41","sev":"MED","kind":"PAIR","why":"'the law is present, neither has the thorp to itself' against 'There is no watch', 'no court and no gaol' and Internal Security 'Critical'; Legal Infrastructure 'None'","other":"C157097"}
+{"id":"C157141","town":"bar0-thorp-calm-rand-41","sev":"LOW","kind":"PAIR","why":"Magic tab 'Legality · regulated' against 'Institutional control · unregulated'","other":"C157140"}
+{"id":"C157279","town":"bar0-town-calm-rand-27","sev":"LOW","kind":"LACKS","why":"'a hall of justice' presumes a court; HOUSES lists Town hall and Small prison/stocks but no court; stability reads 'private security above the public law'","other":""}
+{"id":"C157891","town":"bar0-town-calm-rand-27","sev":"MED","kind":"PAIR","why":"'Nobody here talks about the price of bread' against Bakers 'Short of grain', 'Fresh bread (short)' and 'Pastries (short)'; Grain fields depleted","other":"C157742"}
+{"id":"C158113","town":"bar0-town-calm-rand-27","sev":"MED","kind":"PAIR","why":"'No one here works the stone' and 'Unexploited · Stone' against Stone & Construction chain 'Running' with outputs 'Quarried stone · Building materials'","other":"C157982"}
+{"id":"C158335","town":"bar0-town-calm-rand-27","sev":"LOW","kind":"PAIR","why":"Magic tab 'Legality · regulated' against 'Institutional control · unregulated'","other":"C158334"}
+{"id":"C158346","town":"bar0-town-calm-rand-27","sev":"MED","kind":"STATE","why":"says baked goods lean on 'help beyond ordinary work'; Magic tab relies on magic only for Divine & Magical Healing, FOOD 'by magic 0%'","other":"C158340"}
+{"id":"DONE","lines":2359,"blocks":2,"flags":8}
