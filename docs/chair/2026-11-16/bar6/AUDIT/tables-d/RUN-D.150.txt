@@ -1,0 +1,5 @@
+  neg explained C0343    clear                        Standing markets in more than one quarter, open every day.
+controls off: 0
+[gate-tail] end:  19:40:14 up 50 min,  0 user,  load average: 2.49, 2.09, 2.07
+[gate-tail] full log: <log>
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
