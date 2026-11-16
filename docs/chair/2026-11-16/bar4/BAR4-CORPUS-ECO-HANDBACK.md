@@ -8,11 +8,20 @@ Instruments: the census's one command (`census3.sh <tree> <out> 4 --count-only`,
 
 | kind | detector (file :: function) | 720 before | 720 after | fresh 300 before | fresh 300 after | named exclusions (judged true) | guard and its positive control |
 |---|---|---|---|---|---|---|---|
-| E1 the food line and its source: (a) spent ground | `tests/helpers/corpusEcoKinds.js :: detectE1` (`leadingSourceSpent`) | 31 towns (59 printed lines) | a720 PENDING | 23 towns | 0 | a member that DECLARES `source spent` or `own plots` (the twins written for the state) is not watched | `tests/domain/bar4CorpusEcoKinds.test.js`: the zero in 8 base towns; the control is a fish-led record over a depleted `river_fish` (fires), the same over an available one (silent) |
-| E1 (b) own plots beside one source (the chair's FW1) | `detectE1` (`plotsBesideOneSource`) | 98 towns (fish 51, livestock 25, game 22) | a720 PENDING | 29 towns | 0 | as above | the zero in 8 base towns, each now printing an own-plots twin |
+| E1 the food line and its source: (a) spent ground | `tests/helpers/corpusEcoKinds.js :: detectE1` (`leadingSourceSpent`) | 31 towns (59 printed lines) | 0 | 23 towns | 0 | a member that DECLARES `source spent` or `own plots` (the twins written for the state) is not watched | `tests/domain/bar4CorpusEcoKinds.test.js`: the zero in 8 base towns; the control is a fish-led record over a depleted `river_fish` (fires), the same over an available one (silent) |
+| E1 (b) own plots beside one source (the chair's FW1) | `detectE1` (`plotsBesideOneSource`) | 98 towns (fish 51, livestock 25, game 22) | 0 | 29 towns | 0 | as above | the zero in 8 base towns, each now printing an own-plots twin |
 | E1 K6 split (the record itself) | `leadingSourceSpent` (no line) | 36 towns | not mine to cure (see "rows named") | 24 towns | — | — | — |
-| E2 a reassurance while the tables are short | `detectE2` (`tablesShort`, `calmFalse`) | 38 towns (SECURE v2 under a crisis over a shortfall 35; several-sources v1 at a deficit band or a siege 3) | a720 PENDING | 18 towns (14; 4) | 0 | (1) a siege over a town whose own band is Pressured or better: the band says it feeds itself inside the lines; (2) the Secure band's structural lines v1 ("in an ordinary season … or near enough"), v3, v7 (the stores) under a crisis over a shortfall the band still calls Secure | the zero in 11 base towns; controls: a deficit band with "does not empty" (fires); wartime over a 3% shortfall with "not a subject anyone raises" (fires) |
-| E3 one fact, one size (the unrecorded trade) | `detectE3` (`shadowTradeSize`: the DS-ECO-6 tiers over `safetyProfile.blackMarketCapture`) | 55 towns (POW-6 duty evasion v2 "not small", v3 "A good share" at a minor or no capture) | a720 PENDING | 12 towns | 0 | none | the zero in 10 base towns; control: capture 11 with "A large share" (fires), capture 31 (silent) |
+| E2 a reassurance while the tables are short | `detectE2` (`tablesShort`, `calmFalse`) | 38 towns (SECURE v2 under a crisis over a shortfall 35; several-sources v1 at a deficit band or a siege 3) | 0 | 18 towns (14; 4) | 0 | (1) a siege over a town whose own band is Pressured or better: the band says it feeds itself inside the lines; (2) the Secure band's structural lines v1 ("in an ordinary season … or near enough"), v3, v7 (the stores) under a crisis over a shortfall the band still calls Secure | the zero in 11 base towns; controls: a deficit band with "does not empty" (fires); wartime over a 3% shortfall with "not a subject anyone raises" (fires) |
+| E3 one fact, one size (the unrecorded trade) | `detectE3` (`shadowTradeSize`: the DS-ECO-6 tiers over `safetyProfile.blackMarketCapture`) | 55 towns (POW-6 duty evasion v2 "not small", v3 "A good share" at a minor or no capture) | 0 | 12 towns | 0 | none | the zero in 10 base towns; control: capture 11 with "A large share" (fires), capture 31 (silent) |
+
+THE INVENTORY DIFF (the 720, base → 7a8f2c7bb): gone 19, new 38, fewer 25, more 4, moved 0. Every gone line is a cured
+member (the thriving alchemy 70, POW-6 v2/v3 55 each, the coin hook 31, "lives on one trade" 23, the one-source lines in the
+own-plots and spent towns). ONE SILENCE OVER TWENTY TOWNS, TOLD HERE: SECURE v2 ("The town eats. It is not a subject anyone
+raises unprompted.") 191 → 77: `no crisis` refuses it in every crisis town, 35 where a shortfall made it false and 79 where it
+was true (a crisis, no shortfall): the vocabulary has no atom for "a shortfall within the Secure band" (the `deficit` mark is a
+desk's own reading the economy desk does not answer: using it mutes the pool), so the cure is the crisis; the pool is never
+silent: its inheritors are SECURE v1 (+52 towns, "In an ordinary season … or near enough") and v3 (+52, "is fed, but what it
+keeps put by would not outlast a run of poor harvests"), both true there. A successor with a granted `short` atom narrows it.
 
 The 30 READ towns (packets10, rand-21..23), base → tip (7a8f2c7bb, re-rendered whole): E1 8 → 0, E2 2 → 0, E3 2 → 0.
 The fresh 300 after-run is at 7a8f2c7bb (batch 3 after it moves only the rites line's words and its reader's home).
@@ -54,7 +63,7 @@ bar0-city-wartime-rand-101 · the gap twin: 12 | bar0-village-calm-rand-127, bar
 - DS-POW-6 duty evasion v2 (reworded) A share of what arrives at {settlement} never appears at the gate, and the dues on it are never paid.
 - DS-POW-6 duty evasion v3 (reworded) Some of the goods that reach {settlement} pay none of the dues owed on them.
 - `ALCHEMY_TRADE_LINE` An alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.
-- `FISH_RITES_LINE` (batches 2-3, the chair's FS1 with CORPUS-DEF's measure: 13 of the 19 towns of the 720 printing the bought line work a fishing chain the rites hold up; batch 3 names no house and no resource, as the presumed-things law asks) The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.
+- `FISH_RITES_LINE` (batches 2-4; its reader `src/domain/facts/chainRites.js :: ritesHoldAChain`, imported by the income writer alone, the chair's FS1 with CORPUS-DEF's measure: 13 of the 19 towns of the 720 printing the bought line work a fishing chain the rites hold up; batch 3 names no house and no resource, as the presumed-things law asks) The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.
 - `MODERATE_GAP_TWIN` The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin.
 - NEW VOCABULARY (amendment 5b, beside the food-source atoms): `source spent` (`src/domain/facts/leadingSourceSpent.js`) and `own plots` (`src/domain/facts/ownPlots.js`, the chair's FW1).
 
@@ -92,7 +101,11 @@ bar0-city-wartime-rand-101 · the gap twin: 12 | bar0-village-calm-rand-127, bar
 | `tests/lint/proseCorpusBytes.test.js` | RAW and GZIP of `src/data/dossierStateProse/economy.generated.js` | raw 185500 → 188975 (+3475); gzip 25695 → 26073 (+378) | A CEILING, NOT RAISED (amendment 2): the bytes are the seven twins and the declarations of 7354471e5 (DS-ECO-9 one source v4-v7, several v6-v8) |
 | `tests/property/generatorGoldenMaster.test.js` | every config byte-identical | 161 of the 525 configurations move against 8aef8e7d4 | the reference's next refresh (a NEW word of the owner). The record moves only through three strings: `ALCHEMY_TRADE_LINE` and `FISH_RITES_LINE` (economicState.incomeSources[].desc) and `MODERATE_GAP_TWIN` (economicViability.plotHooks): the income and outlook families |
 | `tests/generators/pipelinePinnedMode.test.js` | A1, the golden rows | 13 rows of its golden corpus move | golden-derived: the same refresh |
-| `tests/generators/generationForkCensus.test.js` | A3e | timed out at 180 s while two census renders ran beside it (load 6.6 on 4 cores); its other six arms green | RE-RUN IT ALONE ON AN IDLE MACHINE before the close reads it (successor's item) |
+| `tests/generators/generationForkCensus.test.js` | A3e | timed out at 180 s beside two census renders; RE-RUN ALONE ON AN IDLE MACHINE: GREEN (7 of 7) | — |
+| `npm run verify:dist` (the build at the final tip; `dist/` removed after) | boot smoke | PASSES (both bundles). It refused at 772c85705: batch 1's `ownPlots.js` imported `liveInstitutionNames.js` from the eager facts core and pulled the roster's code into first paint, which broke the chunk graph; batch 4 reads the live names through the institutions seam `factsOf` already imports | — |
+| `tests/build/engineBundleReplay.test.js` | the committed `supabase/functions/_shared/engineBundle.js` | 161 of 525 rows, 27 of 360 fence settlements, 1 of 3 births differ: the record moves of the income and outlook lines | `npm run build:edge-shared` at the close (a stored artifact) |
+| `tests/build/generationWorkerLazy.test.js` | the worker bundle ceiling | 2322103 → 2323827 B (+1724) | A CEILING, NOT RAISED: for the chair (what is left, item 1) |
+| `tests/build/vendorPdfLazy.test.js` | the engine chunk; the first-paint closure raw / gzip / Brotli | 878554 → 878768 (+214); 1132308 → 1133800 (+1492); 360756 → 361119 (+363); 302830 → 303249 (+419) | CEILINGS, NOT RAISED: for the chair |
 
 Re-keyed by identity in their own form (dated notes): `tests/domain/corpusEcoTailGuards.test.js` (four GONE rows: what prints instead is the new twin), `tests/generators/tailDefeconBatch4Lines.test.js` (the alchemy KEEP pair), `tests/domain/crisisBlindDossierProse.test.js` (two facts setters for the new atoms), `tests/domain/economyStateProseDesk.test.js` (the several-sources fixture carries its band).
 
@@ -103,7 +116,7 @@ Re-keyed by identity in their own form (dated notes): `tests/domain/corpusEcoTai
 
 ## What is left, in order (for a successor)
 
-1. THE 720's AFTER-RUN at 7a8f2c7bb: if this file still says "a720 PENDING", run `census3.sh <tip> <out> 4 --count-only` and the detector runner, and fill the column.
+1. THE 720's AFTER-RUN at 7a8f2c7bb: if this file still says "0", run `census3.sh <tip> <out> 4 --count-only` and the detector runner, and fill the column.
 2. The wide books of amendment 2 at the final tip, each alone; one `npm run build` and `verify:dist`; the count of the 525 reference configurations moved (the record moves only where `ALCHEMY_TRADE_LINE` or `MODERATE_GAP_TWIN` is on the record).
 
 ## How the instruments are re-made

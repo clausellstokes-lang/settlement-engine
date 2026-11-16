@@ -15,6 +15,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { detectE1, detectE2, detectE3, leadingSourceSpent, memberSearch, LEADING_SOURCE_LINES, REASSURANCE, SIZING } from '../helpers/corpusEcoKinds.js';
 import { leadingSourceSpentOf } from '../../src/domain/facts/leadingSourceSpent.js';
 import { ownPlotsOf } from '../../src/domain/facts/ownPlots.js';
+import { liveInstitutionNames } from '../../src/domain/facts/liveInstitutionNames.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { FISH_BOUGHT_LINE, FISH_RITES_LINE } from '../../src/generators/economy/incomeLineSiblings.js';
 
@@ -112,7 +113,7 @@ describe('THE ZERO: in every census town where a kind was found at the base, the
   it('E1: a spent-ground town and an own-plots town now read the twin written for their state', () => {
     const twin = (/** @type {string} */ mark) => STATE_TWINS.filter((m) => (m.marks || []).includes(mark)).map((m) => memberSearch(m.text));
     const cases = [...SPENT_AT_BASE.map((seed) => ({ seed, res: twin('source spent'), atom: leadingSourceSpentOf })),
-      ...PLOTS_AT_BASE.map((seed) => ({ seed, res: twin('own plots'), atom: ownPlotsOf }))];
+      ...PLOTS_AT_BASE.map((seed) => ({ seed, res: twin('own plots'), atom: (/** @type {any} */ r) => ownPlotsOf(r, liveInstitutionNames(r)) }))];
     expectNoSeedFailures(collectSeedFailures(cases, ({ seed, res, atom }) => {
       const read = /** @type {{record: any, lines: string[]}} */ (READ.get(seed));
       expect(atom(read.record), `${seed} is still in its state`).toBe(true);

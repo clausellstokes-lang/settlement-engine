@@ -9,7 +9,7 @@
  * every printed line against the town's resources and its food record. Keyed by the printed text.
  */
 
-import { chainHeldUpByRites } from '../../domain/facts/leadingSourceSpent.js'; // BAR4-CORPUS-ECO (FS1): the rites' one reader
+import { ritesHoldAChain } from '../../domain/facts/chainRites.js'; // BAR4-CORPUS-ECO (FS1): the rites' one reader
 
 /** The grain line that sells a surplus, and its twin for a town whose own fields do not cover what it eats. */
 
@@ -208,7 +208,7 @@ export function trueIncomeDesc(desc, f) {
       // place is fished out, the catch is not landed: the salted fish bought in, or no sentence (D5, #77).
       if (f.besieged || f.fishFailed) return '';
       // BAR4-CORPUS-ECO (FS1): a fishing chain the rites hold up still lands its catch over spent grounds: the rites line, not "bought in"
-      if (f.fisheryExhausted && f.chains.some((c) => /fish/.test(String(c?.chainId ?? '')) && chainHeldUpByRites(c))) return FISH_RITES_LINE;
+      if (f.fisheryExhausted && ritesHoldAChain({ activeChains: f.chains }, /fish/)) return FISH_RITES_LINE;
       if (f.fisheryExhausted) return bought(/\bsalt(?:ed)? fish\b/i) ? FISH_BOUGHT_LINE : '';
       if (has(/fisher|fishing/)) return sold(/\bsalt(?:ed)? fish\b/i) ? desc : FISH_LANDED_LINE;
       return has(/\bfish/) ? FISH_SOLD_LINE : '';

@@ -24,7 +24,7 @@ import { rulerKindOf } from './rulerKind.js';
 import { rulingBodyOf } from './rulingBody.js';
 import { migrationOf } from './migration.js';
 import { warStateOf } from './warState.js';
-import { hasInstitution } from './institutions.js';
+import { hasInstitution, liveInstitutionNames } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { rivalPowerOf } from './rivalPower.js';
 import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
@@ -118,7 +118,7 @@ export function factsOf(record, options = {}) {
     /** BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b): the leading food source's grounds are all spent (`leadingSourceSpent.js`) */
     get leadingSourceSpent() { return leadingSourceSpentOf(record); },
     /** BAR4-CORPUS-ECO (the chair's FW1): a subsistence house tills for the table beside a food record with no grain (`ownPlots.js`) */
-    get ownPlots() { return ownPlotsOf(record); },
+    get ownPlots() { return ownPlotsOf(record, liveInstitutionNames(/** @type {{ institutions?: unknown }} */ (record))); },
     /** the import list (`canonicalAccessors.js :: canonImports`) */
     get imports() { return canonImports(record); },
     /** the export list (`canonicalAccessors.js :: canonExports`) */
