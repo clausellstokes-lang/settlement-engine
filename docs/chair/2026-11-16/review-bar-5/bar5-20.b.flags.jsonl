@@ -1,0 +1,6 @@
+{"id":"C43575","town":"bar0-village-famine-rand-26","sev":"MED","kind":"PAIR","why":"'work never dries up' printed unmarked under Famine; C43468 says no one can earn a normal living while the famine lasts","other":"C43468"}
+{"id":"C43789","town":"bar0-village-famine-rand-26","sev":"LOW","kind":"BROKEN","why":"'timber' printed twice in one list ('timber and building wood ... timber, clay, mountain timber'); doubled item","other":""}
+{"id":"C43925","town":"bar0-village-famine-rand-26","sev":"MED","kind":"STATE","why":"'Significant military force' for Military Party; DEFENCE has no garrison, militia, watch or company, and defence word is Undefended","other":"C43973"}
+{"id":"C44038","town":"bar0-village-famine-rand-26","sev":"LOW","kind":"PAIR","why":"Medical role 'common' and economic/infrastructure 'occasional' beside 'Reliance on magic: None' and 'Nothing structural depends on arcane work'; rows name nothing relied on","other":"C44035"}
+{"id":"C43411","town":"bar0-village-famine-rand-26","sev":"LOW","kind":"LACKS","why":"'Every other doorway sells a remedy'; HOUSES has one Apothecary, Herbalist income 6%","other":""}
+{"id":"DONE","lines":1058,"blocks":1,"flags":5}
