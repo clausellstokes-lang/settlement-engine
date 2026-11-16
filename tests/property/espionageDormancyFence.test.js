@@ -189,6 +189,24 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-16, THE CLOSE OF THE ROUND BAR4, SIGNED AT THE DOORS' BRANCH (BAR4-CLOSE-DOORS-2) ──
+ * THE HUNDRED-AND-FOURTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own words in the chair's chat (2026-11-16
+ * 08:55:14 UTC, "Yes to the following:" / "Later: a new yes for the example-town refresh when this round closes.", answering the
+ * chair's report of 08:30:14 UTC; and, the chair's own permission check having held the first go-ahead at 17:40 UTC, 18:51:17 UTC,
+ * "Yes to plain yes for the example-town refresh.", answering the chair's ask of 17:42, 18:06 and 18:35 UTC; ODQ §934.105; for this
+ * close only); the record is docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json. THE CHAIR'S RULING EF1 (vetoable): the
+ * move is the round's declared page text, re-taken only after every other arm of this fence read green at the tree (20 of 21). THE
+ * MOVERS, FOUND: the round BAR4's builder branches as joined, the repair seat BAR4-CLOSE-SWEEP (PD1's tie twin) and Part 1 (stored
+ * figures only), at 6483322cc; FIELD-DIFFED by leaf path: tie descriptions, tensions and their variant index, the vintner's secret,
+ * the wharfinger's presentation, the prominent tie, the supply gaps (entries in and out: BAR4-RECORD, BAR4-SCENES-2), the foodways
+ * lines and two houses' descriptions (BAR4-HOUSES), the income lines and outlook hooks (BAR4-CORPUS-ECO), the arrival, the history's
+ * tensions and hooks and three powers' descriptions (BAR4-HISTORY), two ties' kind and strength where a pair's second tie takes the
+ * temper of its first (BAR4-PEOPLE TI1, declared), and the coherence receipt's quoted tie text (two towns: the same finding quoting
+ * the new tie line's sentences, its status unchanged). The espionage subsystem stays dormant.
+ * On THIS corpus 248 of 360 rows (thorp 38, hamlet 24, village 23, town 48, city 55, metropolis 60) move against the close of the
+ * round BAR3's post-state (the tree c4ac1ef84a, which reproduces `05b90d5f…`); 360/360 hashes stay distinct. Written on the doors'
+ * branch after the golden master's commit (1581ed12), measured by scripts/audit/refence.mjs before the write.
+ *
  * ── 2026-11-16, THE CLOSE OF THE ROUND BAR3, SIGNED AT THE DOORS' BRANCH (BAR3-CLOSE-DOORS-2) ──
  * THE HUNDRED-AND-THIRTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word of 2026-11-15 20:30:10 UTC in
  * the chair's chat ("Yes that one too", answering the chair's question of 20:28:06 UTC; ODQ §934.105; for this close only); the
@@ -1372,7 +1390,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '05b90d5f96bc2cb514e3d9ee464fd36e0f32462064cb3d9b7c7c36b08fcbb3a0';
+const PRE_COUPLING_CORPUS_SHA = '8e5881d64d3c2b892a7cecdae5eb07eb4d98c51770d1b7e16dd1c215a4734074';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

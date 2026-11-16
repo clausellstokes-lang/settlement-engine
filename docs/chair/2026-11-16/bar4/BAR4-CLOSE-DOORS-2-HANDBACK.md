@@ -16,7 +16,7 @@ FOR THIS ROUND'S SIGNING, AT THIS TREE, ONCE. The signed record:
 [`docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json`](../../../shift-records/2026-11-16-the-close-of-the-round-bar4.json)
 (new; no earlier record touched). Commit trailer `Owner-Signed: §934.105` on the signed-door commits.
 
-STATUS: **IN PROGRESS.** The record and the golden master written (1581ed12, WRITTEN sent 18:55 UTC); the golden's pins re-taken; next: the espionage fence, the dossier prose manifest, x46 and the budget, the receipt.
+STATUS: **IN PROGRESS.** The record and the golden master written (1581ed12, WRITTEN sent 18:55 UTC); the golden's pins (b38b7d68); the espionage fence; next: the dossier prose manifest, x46 and the budget, the receipt.
 
 ## THE MEASURE BEFORE ANY WRITE (at e73d53d8; e942f648 differs by Part 1's hand-back only)
 
@@ -44,11 +44,12 @@ record), generationForkRegistry.contract 3/3 (nothing to re-key).
 | — | MERGE (the chair's line, 17:08 UTC) | `git merge --no-ff aa70b0711` | no conflict | clean | e73d53d8 | tailHouses1Gaps 2/2 |
 | — | MERGE (the chair's correction, 17:12 UTC) | `git merge --no-ff 6483322cc` | Part 1's hand-back +2 | that only | e942f648 | no re-measure |
 | 1 | the signed record + the generator golden master (`tests/fixtures/generator-golden-master.json`) | `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMaster.test.js`; the header's shift-record row | 525 (390 moved) | 525; byte-equal to the measure; 6adede0d… -> 03f9688f… | 1581ed12 | generatorGoldenMaster 3/3; goldenFreeze.walker 90/90 |
-| 1 | `tests/domain/worldFactRederive.test.js` A7 (the golden's file sha) | the file's form: a dated line | 6adede0d -> 03f9688f | as predicted | (this commit) | 7/7 |
-| 1 | `tests/generators/generationForkCensus.test.js` GOLDEN_CONTROL_HASH | the new manifest's control row (index 252, town\|germanic\|plains\|road\|civilized), a dated line (its one leaf: relationships[].description) | c42b5f20 -> 5437998b | as predicted | (this commit) | 7/7 |
-| 1 | `tests/domain/editWorldFactResources.test.js` A2, A6 (PRE_CHANGE) | its own re-capture: the pre-EM-B2b2 step (adfd3ba4…) planted over a copy of the tree (a detached worktree), and the live step (twice): the SAME six digests; the probe reproduces the stored six at c4ac1ef84a; a dated note | rows 0, 21 (4 digests); 42 unmoved | as predicted; row 21's derived = the new control 5437998b | (this commit) | 6/6 |
-| 1 | `tests/lint/sourceCitationIntegrity.walker.test.js` archival tree count (+ `tests/lint/.source-citation-baseline.json`) | its header's own form | 183 -> 184 (the new record) | as predicted | (this commit) | 18/18 |
-| 1 | every reader of the re-taken files (`grep -rl` of each basename over tests/) | each alone | green | 78 files: all green but the four whose own families follow (x46NpcBand, institutionBudgetPromise, dossierProseManifest, espionageDormancyFence); pipelinePinnedMode 15/15, pipelinePinnedChoosers 7/7, powerEconomyFreshness 10/10, rosterFinalUnderHeldRoster 7/7, nameHeldThroughAssembly 7/7, dmLayerGoldenIsolation 15/15, engineBundleReplay 6 + 1 skipped (its golden arm armed; the fence arm waits for its family), goldenFreeze.walker 90/90 | (this commit) | — |
+| 1 | `tests/domain/worldFactRederive.test.js` A7 (the golden's file sha) | the file's form: a dated line | 6adede0d -> 03f9688f | as predicted | b38b7d68 | 7/7 |
+| 1 | `tests/generators/generationForkCensus.test.js` GOLDEN_CONTROL_HASH | the new manifest's control row (index 252, town\|germanic\|plains\|road\|civilized), a dated line (its one leaf: relationships[].description) | c42b5f20 -> 5437998b | as predicted | b38b7d68 | 7/7 |
+| 1 | `tests/domain/editWorldFactResources.test.js` A2, A6 (PRE_CHANGE) | its own re-capture: the pre-EM-B2b2 step (adfd3ba4…) planted over a copy of the tree (a detached worktree), and the live step (twice): the SAME six digests; the probe reproduces the stored six at c4ac1ef84a; a dated note | rows 0, 21 (4 digests); 42 unmoved | as predicted; row 21's derived = the new control 5437998b | b38b7d68 | 6/6 |
+| 1 | `tests/lint/sourceCitationIntegrity.walker.test.js` archival tree count (+ `tests/lint/.source-citation-baseline.json`) | its header's own form | 183 -> 184 (the new record) | as predicted | b38b7d68 | 18/18 |
+| 1 | every reader of the re-taken files (`grep -rl` of each basename over tests/) | each alone | green | 78 files: all green but the four whose own families follow (x46NpcBand, institutionBudgetPromise, dossierProseManifest, espionageDormancyFence); pipelinePinnedMode 15/15, pipelinePinnedChoosers 7/7, powerEconomyFreshness 10/10, rosterFinalUnderHeldRoster 7/7, nameHeldThroughAssembly 7/7, dmLayerGoldenIsolation 15/15, engineBundleReplay 6 + 1 skipped (its golden arm armed; the fence arm waits for its family), goldenFreeze.walker 90/90 | b38b7d68 | — |
+| 2 | the espionage fence's driven golden (`PRE_COUPLING_CORPUS_SHA`, 360 settlements) | EF1 first (above); `node scripts/audit/refence.mjs . --produce <scratch> --header <block>`; `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json node scripts/audit/door-write.mjs --surface espionage-dormancy-fence --from <scratch>` (exit 3, by design) | 1 (the fence file) | 248 of 360 moved; `05b90d5f…` -> `8e5881d6…` (the measure's own); the hundred-and-fourteenth movement block; the written file byte-equal to the produced one | (this commit) | espionageDormancyFence 21/21; its readers alone: engineBundleReplay 7/7 (no arm skipped), espionageMissionDormancyFence 20/20, faithFieldDormancyFence 13/13, faithWitnessSource 35/35, generatorGoldenMaster 3/3; goldenFreeze.walker 90/90 |
 
 ## STOPS AND LAW REDS SENT TO THE CHAIR
 
@@ -61,7 +62,6 @@ record), generationForkRegistry.contract 3/3 (nothing to re-key).
 
 ## WHAT IS LEFT, IN ORDER
 
-1. The espionage fence's driven golden (EF1 measured above): `node scripts/audit/refence.mjs . --produce <scratch> --header <block>`, then `GOLDEN_SHIFT_SIGNED=<record> node scripts/audit/door-write.mjs --surface espionage-dormancy-fence --from <scratch>`; its readers alone.
-2. The dossier prose manifest: `GOLDEN_SHIFT_SIGNED=<record> node scripts/prose-manifest-cells.mjs --record`; worldFactRederive's prose sha; its readers alone.
-3. x46NpcBand and institutionBudgetPromise in their files' own forms (measured above).
-4. The receipt (the law suites, the round's guards, the fourteen steps, build, verify:dist, the registers, goldenFreeze.walker last) and FOR THE OWNER.
+1. The dossier prose manifest: `GOLDEN_SHIFT_SIGNED=<record> node scripts/prose-manifest-cells.mjs --record`; worldFactRederive's prose sha; its readers alone.
+2. x46NpcBand and institutionBudgetPromise in their files' own forms (measured above).
+3. The receipt (the law suites, the round's guards, the fourteen steps, build, verify:dist, the registers, goldenFreeze.walker last) and FOR THE OWNER.
