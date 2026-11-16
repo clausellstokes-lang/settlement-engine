@@ -70,7 +70,11 @@ const NOT = [
   ['07849', 'r2s-succession_void-thorp-1', 'defense', /Defense relies on armed citizens\./, /No organized force\. Defense relies on individual armed citizens\./],
   ['07849/h', 'r2s-succession_void-thorp-1', 'defenseHeadline', /no one under arms/, /no walls and no organized force\./],
   // no criminal house, no crime pattern, no shadow share the tab prints: the Defense desk's own denial
-  ['26502', 'r2r-town-26', 'overview', /The criminals outmatch those who keep order\./, /No criminal infrastructure has been identified\./],
+  // BAR4-CLOSE-SWEEP (2026-11-16): re-keyed by identity from r2r-town-26, where BAR4-SAFETY 2ee6f3a05 (SF1 (d), DECLARED: the line reads
+  // the crime key beside `criminalsStandHere`) now sets its covert fence and hired muscle (`covertCrimeHeld`, key `diffuse`) against
+  // the watch, as the Defense tab prints the Diffuse block. Measured on the 720 at f19c3b28b: 7 towns stand guarded, with no criminal
+  // the key or the tab names and the order-keeping ratio under 1 (where the old line printed "The criminals outmatch"); this is one.
+  ['26502', 'r2r-hamlet-27', 'overview', /The criminals outmatch those who keep order\./, /No criminal infrastructure has been identified\./],
   ['29174', 'r2r-town-4', 'overview', /Those who keep order clearly outmatch the criminals\./, /No criminal infrastructure has been identified\./],
   ['29175', 'r2r-thorp-4', 'overview', /Those who keep order roughly match the criminals\./, /No criminal infrastructure has been identified\./],
   ['01243', 'r2r-village-9', 'powerHeadline', /pressing close behind/, /^Elder Council holds the seat, but more weight lies with Religious Authorities\.$/],
