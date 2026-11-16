@@ -11,6 +11,7 @@
 - The chair's **PW1**, vetoable by the owner:
   - `src/generators/power/claimStanding.js` is this seat's file for the two label rungs.
   - The force cure lives in a new leaf, `power/militaryForceLine.js`, reading `src/domain/facts/defence.js`.
+- The chair's **PA1**, vetoable: no key this round. The force line stays inert at the power step, and the 1d revert stands.
 - The chair's **SO1**, vetoable: the fourth atom of the power family, `seat outranked`, homed in `src/domain/facts/seatOutranked.js`. DS-POW-4 v3 declares `no seat outranked`.
 
 ## THE RULES
@@ -26,7 +27,7 @@
 | **1c-weight/Suppressed** | The description is drawn from the raw power (`rulingStructure.js`). The standing word is the final label. `claimStanding.js :: settleClaimsToLabel` had no rung for these lines. | Two rungs at the one home (PW1): "meaningful civic influence" takes CLERGY_AT_MARGINS at Minor and Suppressed; the two "Significant military …" lines take the tier's watch line where a watch stands. | 2 · 2 → **0** | 10 · 12 → **0** | 3 · 3 → **0** | **One change.** Traced: no later relabel leaves a claim stale (0 at record level on the 132 affected towns). | none | the same guard: (a) and the control in C33631's shape |
 | **1c-norival** | DS-POW-4 › Holding v3 keys on the risk label alone. The page rates a power above the seat, or the town is occupied. | v3 declares `no crisis: occupied` and `no seat outranked` (SO1). | 1 · 1 → **0** | 1 · 1 → **0** | 1 · 1 → **0** | Line by line: one line, two declarations. | none | `tests/domain/facts/seatOutranked.test.js`, with the real row r2s-under_siege-city-1 as control |
 | **1c-force/roster** | The military description is keyed on `priorities.military` and the tier, never on the roster. | `militaryForceLine.js :: forceLineOf` reads the SETTLED roster's atoms (`projection.forces`, i.e. `defenceOf(settlement)`), with a twin for each force line. It is **inert until the late key is handed** (R-Q, below). | 2 · 2 → 2 · 2 | 9 · 9 → 9 · 9 | 3 · 3 → 3 · 3 | Measured, with the step's own roster: 9, 3 and 2 → **0**. All 14 twins in the 1,080 agreed with the final roster. Taken back for R-Q. | **AWAITS THE LATE KEY**, named in the guard | the guard's leaf arm and control (C39734, C43925) |
-| **1d-up/underfunded** | The stability word "Tense (militarised, chronically underfunded)" reads the forces' funding gate (`governanceNarrative.js`). DS-ECO-8 MODERATE v3 reads `economicState.prosperity`. | Made and taken back: the stability reading the purse silenced PP11's KEEP r2r-town-16, the only town of the 720 it reaches, where the word is true. | 1 · 1 → 1 · 1 | 0 → 0 | 0 → 0 | **Named for BAR5-FOOD:** the one false line is DS-ECO-8 MODERATE v3 ("has a little in hand") beside forces funded below 1. | — | (detector control only) |
+| **1d-up/underfunded** | The stability word "Tense (militarised, chronically underfunded)" reads the forces' funding gate (`governanceNarrative.js`). DS-ECO-8 MODERATE v3 reads `economicState.prosperity`. | Made and taken back: the stability reading the purse silenced PP11's KEEP r2r-town-16, the only town of the 720 it reaches, where the word is true. | 1 · 1 → 1 · 1 | 0 → 0 | 0 → 0 | **Recorded by the chair for the next wave (PA1):** the one false line is DS-ECO-8 MODERATE v3 ("has a little in hand") beside forces funded below 1. | — | (detector control only) |
 
 **LAW 5 for my files** (`law5-inventory.mjs`, static):
 - Before: **1** undeclared line, DS-POW › "FLAG: stateCrime, heavy" v2, "Travellers reach {settlement} …".
@@ -110,9 +111,18 @@ Each record was hashed at the base and at the final tip, and the hashes compared
 
 ## What is left, in order
 
-1. **The chair hands the late key** (above). Then re-render the 14 force towns (`seeds.delta`) and lift the guard's named exclusion `AWAITS_THE_LATE_KEY`.
-2. **BAR5-FOOD:** DS-ECO-8 MODERATE v3 beside "chronically underfunded" (C32519, bar0-town-calm-rand-24).
-3. **The close re-takes:** the golden-derived files and the reference, the wiring census, the projection's pins.
+1. **THE FORCE CURE'S MISSING HALF** (the chair's ruling PA1: nobody adds the key this round; `assembleSettlement.js` stays closed, as L6 says). The next wave takes it with the pipeline's owner.
+   - **The key:** `forces: defenceOf(settlement)`, the settled defence atoms from `src/domain/facts/defence.js`.
+   - **Where it goes:** `assembleSettlement.js`, the late replay's call to `reconcilePowerStructure(settlement.powerStructure, settlement.economicState, ctx.powerIntent, { defenseLabel, militaryGate, pins })`, which runs once `settlement.defenseProfile.readiness.label` exists. The key joins that options object.
+   - **Its two readers, already in place:**
+     - `economyReconciliation.js :: projectPower` takes `forces` from the options and hands it to `generatePowerStructure` in the `projection`;
+     - `rulingStructure.js` reads `projection.forces` into `militaryForceLine.js :: forceLineOf`.
+   - **Why the power step cannot read it:** the roster can change after the power step. A militia joins the roster after it in 33 of 1,000 births (CENSUS-5c's measure; R-Q / R-U, held by `census5cMilitiaReword.test.js` and `factionDescSiblings.test.js` (a)). Only the late replay holds the settled roster.
+   - **The count that remains:** 1c-force reads 9 towns of the 720, 3 of the fresh 300 and 2 of the sixty, as it printed at the base: no twin, no regression. With the key it measured 0 in all three, and all 14 twins agreed with the final roster.
+   - **The stored family the twin would move:** `powerStructure.factions[].desc` (the military power's row). It is a declared move of the reference, to be counted then. The standing word does not move.
+   - **When the key is handed:** re-render `seeds.delta`, and lift the guard's named exclusion `AWAITS_THE_LATE_KEY` in `tests/domain/bar5PowersStanding.test.js`.
+2. **Recorded by the chair for the next wave, not this seat's:** DS-ECO-8 MODERATE v3 ("has a little in hand") beside forces funded below 1 (C32519, bar0-town-calm-rand-24). The 1d revert stands: PP11 keeps "underfunded" where it is true.
+3. **The close re-takes:** the golden-derived files and the reference, the wiring census, and the projection's pins.
 
 ## How the instruments are re-made
 
@@ -133,6 +143,6 @@ Each record was hashed at the base and at the final tip, and the hashes compared
 
 **Ready, waiting on one switch:** a village with no militia or watch will no longer be described as patrolled by armed residents. That waits on one line in the assembly that the chair holds.
 
-**Handed to the economy seat:** one rare line, a town "with a little in hand" beside forces called chronically underfunded.
+**Recorded by the chair for the next wave:** one rare line, a town "with a little in hand" beside forces called chronically underfunded.
 
 **Nothing moved:** no figure, no standing word and no draw.
