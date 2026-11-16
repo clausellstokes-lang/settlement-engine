@@ -212,7 +212,8 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand]
- * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
+ * @property {boolean} [timberAtHand] @property {boolean} [enchanting]
+ * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
  */
@@ -274,6 +275,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   // carries a lake: the terrain classes have none); `port` is the trade-route reader's.
   port: dim({ shape: 'presence', home: 'route', reader: (f) => (typeof f.route === 'string' ? f.route === 'port' : undefined) }),
   magic: dim({ shape: 'presence', home: 'magic', reader: (f) => bool(f.magic?.functions) }),
+  // BAR4-SCENES (kind A1; amendment 5b; vetoable by the owner): `enchanting`: some house offers enchanting or
+  // identification among the record's services (`sceneSupply.js`). Beside `magic`: magic real is not magic for hire.
+  enchanting: dim({ shape: 'presence', home: 'enchanting', reader: (f) => bool(f.enchanting) }),
   // ── presence: institutions (fact 11; `facts/institutions.js`) ──
   temple: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
   docks: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('docks') : undefined) }),
@@ -301,6 +305,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   patrol: dim({ shape: 'presence', home: 'defence', reader: (f) => (f.defence ? bool(f.defence.watch === true || f.defence.garrison === true) : undefined) }),
   // `iron at hand`: the town's smiths have iron to work: worked here, or brought in where no siege stops it (`ironAtHand.js`).
   'iron at hand': dim({ shape: 'presence', home: 'ironAtHand', reader: (f) => bool(f.ironAtHand) }),
+  // ── BAR4-SCENES (kind A1 of REVIEW-BAR-4, 2026-11-16; BRIEF-BAR4's amendment 5b; vetoable by the owner, on the veto list) ──
+  // `timber at hand`: the sawyers have wood: a timber ground here not spent, or timber imported (`sceneSupply.js`). Beside
+  // its kin `iron at hand`: a scene that shows the whole place sawing presumes it.
+  'timber at hand': dim({ shape: 'presence', home: 'timberAtHand', reader: (f) => bool(f.timberAtHand) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',
@@ -341,6 +349,10 @@ export const FACT_DIMENSIONS = Object.freeze({
     reader: (/** @type {FactsLike} */ f) => (typeof f.crime === 'string' ? CRIME_WORDS.indexOf(f.crime) >= CRIME_WORDS.indexOf('semi-organized') : undefined) }),
   ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, dim({ shape: 'presence', home: 'foodSources',
     reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.foodSources) ? f.foodSources.includes(src) : undefined) })])),
+  // BAR4-SCENES (kind A1; amendment 5b; vetoable by the owner): `failed: <source>`, the food source the famine failed
+  // (`sceneSupply.js`). Beside the source atoms, which a failed source does not leave: the food record keeps it.
+  failed: dim({ shape: 'presence', home: 'failedSource', keys: FOOD_SOURCE_ATOMS,
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.failedSource === undefined ? undefined : f.failedSource === key) }),
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
   culture: dim({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,

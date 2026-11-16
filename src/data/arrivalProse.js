@@ -175,8 +175,10 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'Someone is churning butter in a doorway, and the rhythm of it carries.', crisis: ['any'] },
     ],
     dominant: [
-      { text: () => 'Drovers push their herds along the road, and the whole place smells of the pens.', excludes: ['crisis: under_siege'], crisis: ['any'] },
-      { text: (n) => `The lowing of penned cattle carries across ${n} at every hour.`, crisis: ['any'] },
+      { text: () => 'Drovers push their herds along the road, and the whole place smells of the pens.', excludes: ['crisis: under_siege', 'failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C46725): no herds on the road where the famine failed them
+      { text: () => 'The pens at the edge of the settlement stand half empty, and the drovers have little left to drive.', twinOf: 'Drovers push their herds along the road, and the whole place smells of the pens.', needs: ['failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (A1): its twin where the herds failed; a twin keeps the slot and spends no redraw
+      { text: (n) => `The lowing of penned cattle carries across ${n} at every hour.`, excludes: ['failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (A1): not full pens where the herds failed
+      { text: (n) => `The few cattle left in the pens of ${n} low at every hour.`, twinOf: 'The lowing of penned cattle carries across {name} at every hour.', needs: ['failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (A1): its twin there
       { text: () => 'Hurdles and holding pens crowd the edge of the settlement, full and noisy.', excludes: ['crisis: hunger'], crisis: ['any'] },
     ] },
   { key: 'faith',
@@ -219,9 +221,12 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'The knock of a mallet on wood keeps time somewhere close.',
     ],
     dominant: [
-      (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`,
-      { text: () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): no cart waits on a road the siege has cut
-      () => 'The rasp of the saws carries from yard to yard all through the day.',
+      { text: (n) => `The smell of sawn timber is everywhere in ${n}, and so is the sawdust.`, needs: ['timber at hand'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C45961): the whole place sawing wants wood: a timber ground here, or timber brought in
+      { text: (n) => `Timber is scarce in ${n}, and what little wood the workshops get is worked to the last shaving.`, twinOf: 'The smell of sawn timber is everywhere in {name}, and so is the sawdust.', excludes: ['timber at hand'] }, // BAR4-SCENES (A1): its twin where no timber is at hand; a twin keeps the slot and spends no redraw
+      { text: () => 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', needs: ['timber at hand'], excludes: ['crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind b): no cart waits on a road the siege has cut; BAR4-SCENES (A1): and no stacks without wood
+      { text: () => 'A few planks stand seasoning by the road in, and there is little timber to add to them.', twinOf: 'Stacks of seasoning planks line the road in, taller than the carts that wait for them.', excludes: ['timber at hand'], crisis: ['any'] }, // BAR4-SCENES (A1): its twin where no timber is at hand
+      { text: () => 'The rasp of the saws carries from yard to yard all through the day.', needs: ['timber at hand'] }, // BAR4-SCENES (A1): the saws want wood
+      { text: (n) => `The saws of ${n} are quiet most days, for want of timber to cut.`, twinOf: 'The rasp of the saws carries from yard to yard all through the day.', excludes: ['timber at hand'] }, // BAR4-SCENES (A1): its twin where no timber is at hand
     ] },
   { key: 'kilns',
     institutions: ['potter', 'pottery', 'kiln', 'brickmaker', 'charcoal', 'glassblower', 'glassmaker', 'glassmakers', 'lime'],
@@ -286,7 +291,8 @@ export const ARRIVAL_SENSES = Object.freeze([
       () => 'A lamp that burns without oil lights a doorway off the lane.',
     ],
     dominant: [
-      (n) => `Magic is a trade in ${n} like any other: signs offer enchanting and identification by the hour.`,
+      { text: (n) => `Magic is a trade in ${n} like any other: signs offer enchanting and identification by the hour.`, needs: ['enchanting'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C2056): the signs want a house that offers it (the Services tab's rows)
+      { text: (n) => `Nobody in ${n} sells enchanting by the hour, and what magic is done here is done quietly.`, twinOf: 'Magic is a trade in {name} like any other: signs offer enchanting and identification by the hour.', excludes: ['enchanting'] }, // BAR4-SCENES (A1): its twin where no house offers it
       () => 'The air prickles faintly, the way it does where a great deal of spellwork is done.',
       () => 'Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.',
     ] },

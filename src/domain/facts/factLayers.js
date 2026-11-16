@@ -119,12 +119,18 @@ export const LEAVES = Object.freeze({
   // ── layer 2: over the economy ──
   famine: home('famine', 2, ['economicState']),
   foodSources: home('foodSources', 2, ['economicState']),
+  // BAR4-SCENES (kind A1): the food source the famine failed (`sceneSupply.js`)
+  failedSource: home('failedSource', 2, ['economicState']),
   storesMonths: home('storesMonths', 2, ['economicState']),
   imports: home('imports', 2, ['economicState']),
   exports: home('exports', 2, ['economicState']),
   prosperity: home('prosperity', 2, ['economicState']),
   // BAR2-PLACES (the chair's grant VW2): iron worked here (the chains) or imported past no siege (the crisis kinds)
   ironAtHand: home('ironAtHand', 2, ['economicState', 'stress', 'stressors', 'activeConditions']),
+  // BAR4-SCENES (kind A1): a timber ground not spent (the config's resources) or timber imported (the economy);
+  // enchanting among the services (`sceneSupply.js`)
+  timberAtHand: home('timberAtHand', 2, ['config', 'economicState']),
+  enchanting: home('enchanting', 2, ['availableServices']),
   // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label
   keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),
