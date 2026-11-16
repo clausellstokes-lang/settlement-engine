@@ -1,13 +1,13 @@
 # BAR5-SAFETY · HAND-BACK · the law's own state (LAW 2's `L2.law.collapsed`)
 
-**STATUS: IN PROGRESS (pushed early on the chair's ruling LB2 (ii)); the 720's after-count follows in the next push.**
+**STATUS: FINAL (my rule cured in all three populations; the books named). Pushed early once on the chair's ruling LB2 (ii); this push carries the 720.**
 Base: the joined line `lane/join-2026-11-14` at `600b7683a` (unchanged when read). The audit `lane/bar5-audit-b-2026-11-16` at `d40d6ab28` merged (`--no-ff`, helpers and documents only). Work in scratch worktrees; the base tree kept frozen beside the tip.
 
 ## THE RULES
 
 | rule | the two readings, and where | the one fact made | instances / towns BEFORE (60 · 720 · 300) | AFTER (60 · 720 · 300) | cured by the one change | line by line | named exclusions | guard and positive control | LAW 5, my file |
 |---|---|---|---|---|---|---|---|---|---|
-| `L2.law.collapsed` | the Foundations row's `Law & order · <band>` (`causalState.js :: deriveLawOrder` under the row's crime-wave cap, read off the FINISHED record at render) against the guard line (`safetyProfile.js :: NO_WATCH_SMALL`, drawn at the economy step on `watch` alone, before anything the band reads exists) | `src/domain/facts/lawBand.js :: lawBandOf` (ONE home of the row's band; the row reads it: ruling LB2); the vocabulary's `law` band beside `crime` (`factVocabulary.js`, `factsOf.js`, its layer row: layer 4) | 3/3 · 29/29 · 13/13 | 0 · (next push) · 0 | ALL: the guard line's one reader (`defenseDisplay.js :: deriveGuardAssessment`, ruling DG1) prints each declared line's twin where the row prints Collapsed (`display/guardLineUnderTheLaw.js :: GUARD_LAW_SIBLINGS`, enrolled in `DECLARATION_CHANNELS`); LAW 2's totals fell by exactly this rule (36→33 in the sixty, 120→107 in the 300); no other rule moved; LAW 3 unchanged | none needed for the rule; its siblings: the court's lines, the quarrel line's violent telling, the defence desk's two annex lines (below) | none | `tests/domain/bar5SafetyLawBand.test.js`: (a) the audit's own rule (`law2.mjs :: RULES`) and the table's declarations over the 720's small towns, the read towns and the chair's four wide-read cities: 0; (b) LB2: the row reads `lawBandOf` and prints as before over the 720, town by town; (c) POSITIVE CONTROL C42116 (`bar0-village-famine-rand-24`): its STORED line (the draw is not moved) fires beside its row, the printed line is its twin, a DM's own line prints as written. A plant of the base reading (the reader returning the stored line) reds (a), town by town, and (c). | 5 → 0 |
+| `L2.law.collapsed` | the Foundations row's `Law & order · <band>` (`causalState.js :: deriveLawOrder` under the row's crime-wave cap, read off the FINISHED record at render) against the guard line (`safetyProfile.js :: NO_WATCH_SMALL`, drawn at the economy step on `watch` alone, before anything the band reads exists) | `src/domain/facts/lawBand.js :: lawBandOf` (ONE home of the row's band; the row reads it: ruling LB2); the vocabulary's `law` band beside `crime` (`factVocabulary.js`, `factsOf.js`, its layer row: layer 4) | 3/3 · 29/29 · 13/13 | 0 · 0 · 0 | ALL: the guard line's one reader (`defenseDisplay.js :: deriveGuardAssessment`, ruling DG1) prints each declared line's twin where the row prints Collapsed (`display/guardLineUnderTheLaw.js :: GUARD_LAW_SIBLINGS`, enrolled in `DECLARATION_CHANNELS`); LAW 2's totals fell by exactly this rule (36→33 in the sixty, 83→54 in the 720, 120→107 in the 300); NO other rule of LAW 2 or LAW 3 moved in any population (rule by rule, base against tip) | none needed for the rule; its siblings: the court's lines, the quarrel line's violent telling, the defence desk's two annex lines (below) | none | `tests/domain/bar5SafetyLawBand.test.js`: (a) the audit's own rule (`law2.mjs :: RULES`) and the table's declarations over the 720's small towns, the read towns and the chair's four wide-read cities: 0; (b) LB2: the row reads `lawBandOf` and prints as before over the 720, town by town; (c) POSITIVE CONTROL C42116 (`bar0-village-famine-rand-24`): its STORED line (the draw is not moved) fires beside its row, the printed line is its twin, a DM's own line prints as written. A plant of the base reading (the reader returning the stored line) reds (a), town by town, and (c). | 5 → 0 |
 
 The detector was not changed. Every STANDS control of the sixty is still found but C42116 (cured); no EXPLAINED control is found.
 
@@ -44,12 +44,32 @@ Each twin prints only where the page prints `Law & order · Collapsed`; the orig
 - " A court stands, though few offenders are ever brought before it, and there is nowhere to hold them."
 - DS-DEF-1 WEAK 4: "{settlement} could not hold off a raid, and its brawls and thefts go unanswered as it is."
 - "Inside the siege lines, people are advised to move in groups and keep valuables hidden." (an Unsafe town under siege)
-The three towns each (smallest, largest, a crisis) from the 720's tip render: next push.
+Read in the tip's renders of the three populations (towns where it prints · smallest | largest | a crisis):
+- the old families' twin: 38 · r2r-thorp-22 | r2s-under_siege-village-1 | r2s-under_siege-thorp-3
+- the neighbours' twin: 41 · r2r-thorp-17 | r2s-under_siege-village-0 | r2s-famine-thorp-2
+- the quarrel's twin: 48 · r2r-thorp-25 | r2s-under_siege-village-2 | r2s-insurgency-thorp-2
+- the thief's twin: 45 · r2r-thorp-10 | r2s-wartime-village-3 | r2s-famine-thorp-0
+- the court-and-prison twin: 6 · bar0-city-under_siege+famine-rand-21 | bar0-city-under_siege+famine-rand-129 | bar0-city-under_siege+famine-rand-103
+- the court-only twin: 3 · r2r-town-37 | bar0-city-under_siege+famine-rand-120 | bar0-city-under_siege+famine-rand-111
+- DS-DEF-1 WEAK 4: 76 · r2r-thorp-10 | r2s-under_siege-town-3 | r2s-indebted-thorp-1
+- the travellers' siege twin: prints in none of the 1,080 (an Unsafe town under siege); its branch is reachable.
+The no-watch twins replace a line the page made false in 172 towns of the 1,080: a replacement, not a silence (told to the chair at the first push).
 
 ## The books my cures move
 
-Run alone at 600b7683a FIRST (88 files): 16 red there (`dossierStateProseProjection.contract`, `tailHouses1Gaps`, `generationForkCensus`, `pipelinePinnedMode`, `tieProseDeclared`, `mutationCoverageManifest`, `observedShapeReaders.walker`, `presumedThings.walker`, `proseCorpusBytes`, `proseTasteCorruption.walker`, `proseWiringCensus.walker`, `sovereigntyLightingContract.walker`, `tuningRegister.walker`, `wiringCensusDeclared.walker`, `writerReach.walker`, `generatorGoldenMaster`): the base's, named, not chased. Red at my tip and not at the base: four, each cured above (`defenseNoWatchNoGuards`, `crisisBlindDossierProse`, `lawBandTable.walker` (my rung list was named `LAW_BAND_*`, the law-band curve fence's pattern: renamed `LAW_ORDER_RUNGS`), and the projection contract's thin-state arm, cured by the calm double). The whole net's comparison at the final tip: next push.
-The 525 reference configurations: next push (only the travellers twin moves the record).
+Run alone at 600b7683a FIRST (88 files): 16 red there (`dossierStateProseProjection.contract`, `tailHouses1Gaps`, `generationForkCensus`, `pipelinePinnedMode`, `tieProseDeclared`, `mutationCoverageManifest`, `observedShapeReaders.walker`, `presumedThings.walker`, `proseCorpusBytes`, `proseTasteCorruption.walker`, `proseWiringCensus.walker`, `sovereigntyLightingContract.walker`, `tuningRegister.walker`, `wiringCensusDeclared.walker`, `writerReach.walker`, `generatorGoldenMaster`): the base's, named, not chased. Red at my tip and not at the base: four, each cured above (`defenseNoWatchNoGuards`, `crisisBlindDossierProse`, `lawBandTable.walker` (my rung list was named `LAW_BAND_*`, the law-band curve fence's pattern: renamed `LAW_ORDER_RUNGS`), and the projection contract's thin-state arm, cured by the calm double). RED AT MY TIP ONLY, STORED FIGURES MOVED BY MY DECLARED CURE (the annex's one new variant, DS-DEF-1 WEAK v4), NAMED, NOT RE-TAKEN:
+
+| test · arm | old | new | door |
+|---|---|---|---|
+| `tests/lint/proseComposed.walker.test.js` · GUARD THE GUARD, the shipped state corpus | 2977 | 2978 | the corpus count, re-taken at the close |
+| `tests/lint/proseEntryContradiction.walker.test.js` · loads every home and reproduces the projection's arithmetic | 3445 | 3446 | the same |
+| `tests/lint/proseEntryContradiction.walker.test.js` · joins every annex row to its projected twin | 2740 | 2741 | the same |
+| `tests/lint/proseWaveGate.walker.test.js` · ONE UNIT BUILDER, the units compared | 634 | 635 | the same |
+
+RE-KEYED BY IDENTITY in the file's own form: `proseEntryContradiction.walker`'s anti-vacuity arm, the shipped breach row "the same trades exempt", 6176 → 6177 (one annex line above it).
+`docs/content/wiring-census.json` is stale at the base (the round before's close re-takes it); the annex generator refuses on it: I re-took it LOCALLY only to regenerate my desk's file, and did not commit it.
+
+THE REFERENCE: 0 of the 525 reference configurations move against 600b7683a (every row's hash and every top-level family's hash equal, base against tip): the only record move, the travellers' siege twin, is reached by none of them.
 
 ## Registrations owed
 
@@ -57,9 +77,13 @@ The 525 reference configurations: next push (only the travellers twin moves the 
 
 ## What is left, in order
 
-1. The 720's after-count and the veto list's towns (render running).
-2. The whole net at the tip against the base's sixteen; the 525.
-3. Ruling LB2 (iii)-(iv): BAR5-BAND writes its floor inside `lawBandOf`; I change nothing in its band logic from this push.
+1. Ruling LB2 (iii)-(iv): BAR5-BAND writes its floor inside `lawBandOf` (its LB1); I changed nothing in its band logic after f27f05312. When the floor lands, the twins follow it by construction (they read `lawBandOf`).
+2. The four stored counts above, for the close's door.
+3. Not run: `npm run build` / `verify:dist` (the brief's close step; the new modules are reached only through the Defense display and the facts, which the engine core already reaches: `engineCoreLazyEdge` and `layerBoundaries` green).
+
+## How the instruments are re-made
+
+PAGE-COPY (`lane/chair-2026-11-08 :: docs/chair/2026-11-16/probes/PAGE-COPY`, git-archived out of every tree): `HOLDERS=<pc>/holders.tipA.json sh <pc>/census3.sh <tree> <out> 4 --seeds <seeds> --count-only` for the sixty (`bar0-<shape>-rand-21..26` of `seeds.bar0.txt`'s ten shapes), the 720 (`seeds.txt`) and the fresh 300 (`READ-ALL/packets11/seeds.fresh300.txt`); then `node docs/chair/2026-11-16/bar5/AUDIT/runB.mjs <out> <result.json> [SECOND-CHECK.final72.json]`. LAW 5: `node docs/chair/2026-11-16/bar5/AUDIT/law5-inventory.mjs <tree> <out.json>`.
 
 ## FOR THE OWNER, IN PLAIN WORDS
 
