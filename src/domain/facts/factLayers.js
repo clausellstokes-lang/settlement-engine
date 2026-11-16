@@ -110,6 +110,7 @@ export const LEAVES = Object.freeze({
   crisis: home('crisis', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {
     note: 'the kinds are layer 1 (the crises in force); the hunger FAMILY is read off the food band (layer 2): the second bundled leaf of the layer map\'s §2c',
   }),
+  siegeMotion: home('siegeMotion', 1, ['stress', 'activeConditions']), // BAR4-SAFETY (F2): the siege condition's own status (`siegeMotion.js`)
   defence: home('defence', 1, ['institutions', 'economicState'], {
     note: 'walls, gate, watch are layer 1 by value; `defenseFactsOf` computes the stores in the same object, so every defence atom touches the economy: the first bundled leaf of the layer map\'s §2c',
   }),
@@ -141,7 +142,7 @@ export const LEAVES = Object.freeze({
   rivalPower: home('rivalPower', 3, ['powerStructure']),
   // TAIL-TIES-9 (the chair's ruling (T28)): the crime fact's LEAF is the criminal structure's key, moved out of the display
   // (`deriveCriminalStructure` calls it and keeps its labels and the ring note's vantages, which read `_seed` and the tier).
-  crime: leaf({ layer: 3, module: 'domain/facts/criminalStructureKey.js', exported: 'criminalStructureKeyOf', call: 'record', reads: ['economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'],
+  crime: leaf({ layer: 3, module: 'domain/facts/criminalStructureKey.js', exported: 'criminalStructureKeyOf', call: 'record', reads: ['availableServices', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure'], // BAR4-SAFETY (F3): the covert criminal services (`covertCrimeHeld`)
     note: 'the key reads the safety profile\'s crime lines, which assembly settles to the crime signal (a back-write at layer 3): it reads its own layer',
   }),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),

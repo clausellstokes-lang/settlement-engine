@@ -10,7 +10,11 @@ import { scoreBand } from '../domain/display/defenseScoreBands.js';
 import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { lineText } from '../domain/facts/drawDeclared.js';
 import { CRIMINAL_GOVERNANCE_TYPE, criminalSeatGoverns, gangHousesOf } from '../domain/crimeSignal.js';
-import { criminalStructureKeyOf } from '../domain/facts/criminalStructureKey.js';
+import { criminalStructureKeyOf, covertCrimeHeld } from '../domain/facts/criminalStructureKey.js';
+import { watchIsUnpaidRota } from '../domain/facts/guardPay.js';
+import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
+/** BAR4-SAFETY (F3): the crime key's own reading of the record's criminal income, for the survival line (`safetyProfile.js`). */
+export { covertCrimeHeld };
 
 /** The census's small places (a district, a military command); TINY: streets too. */
 /** BAR2-LABELS LB5 (the chair's ruling of 2026-11-15, vetoable by the owner): the siege's order clause where no force stands
@@ -69,6 +73,12 @@ export function paperTruth(text, prosperity, read) {
  */
 export function payTruth(text, gate) {
   if (typeof gate !== 'number' || !Number.isFinite(gate)) return text;
+  // BAR4-SAFETY (F1, the fresh sample's "Chronically underpaid" beside a gate of 1): the paper line's pay claim, read by the
+  // same gate: funded in full, the force is paid; its kit and its bribes stand.
+  const p = gate >= 1 ? /^The (.+?) (exists?|is|are) (on paper\. )?[Cc]hronically underpaid and poorly equipped/.exec(text) : null;
+  // (volunteers with day jobs take no wage claim at all: their kit is what the line still says)
+  const volunteers = p ? text.slice(p[0].length).startsWith(': these are volunteers') : false;
+  if (p) return `The ${p[1]} ${p[2]} ${p[3] ? `on paper. ${volunteers ? 'Poorly equipped' : 'Paid, but poorly equipped'}` : volunteers ? 'poorly equipped' : 'paid, but poorly equipped'}${text.slice(p[0].length)}`;
   const m = /^The (.+?) (?:is|are) (?:well paid, well equipped and patrols? properly\. They come when called, and though some take bribes, it is not the custom\.|well paid and well equipped, but |disciplined but resource-constrained: motivated with inadequate equipment and irregular pay\. Effective in a fight; vulnerable to sustained corruption\.)/.exec(text);
   if (!m) return text;
   const law = m[1];
@@ -87,6 +97,40 @@ export function payTruth(text, gate) {
   }
   return `The ${law} ${be} disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. Effective in a fight; vulnerable to sustained corruption.${rest}`;
 }
+
+/**
+ * BAR4-SAFETY (kind F1, REVIEW-BAR-4 C44796; vetoable by the owner): HOW THE GUARD IS PAID HAS ONE HOME
+ * (`facts/guardPay.js :: guardPayOf`), and where no garrison stands and the only watch is the village's own rota (the
+ * catalogue's Village watch: "Nobody is paid, and the households hold the rota"), no guard line gives the watch a wage:
+ * each pay claim the guard line can make (irregular pay, well paid, paid in full, chronically underpaid) prints its rota
+ * twin, the rest of the line its own. The slot keeps its draw. @param {string} text the guard line after `payTruth`
+ * @param {ReadonlyArray<{ name?: unknown } | null | undefined>} institutions the roster @returns {string}
+ */
+export function rotaTruth(text, institutions) {
+  if (!watchIsUnpaidRota(liveInstitutions({ institutions: /** @type {any} */ (institutions) }))) return text;
+  const m = /^The (.+?) (?:is|are|exists?) /.exec(text);
+  if (!m) return text;
+  const law = m[1];
+  const many = manyForce(law);
+  const be = many ? 'are' : 'is';
+  const crisis = /** @type {const} */ (['siege', 'occupied', 'famine']).find((c) => text.startsWith(String(patrolTwin(law, c, true))));
+  if (crisis) return String(patrolTwin(law, crisis)) + text.slice(String(patrolTwin(law, crisis, true)).length);
+  /** @type {ReadonlyArray<readonly [string, string]>} */
+  const pairs = [
+    [`The ${law} ${be} disciplined but resource-constrained: motivated with inadequate equipment and irregular pay.`, ROTA_IRREGULAR(law, many)],
+    [`The ${law} ${be} disciplined, paid in full and properly equipped.`, `The ${law} ${be} disciplined and properly equipped, though nobody is paid to keep the rota.`],
+    [`The ${law} ${be} well paid, well equipped and ${many ? 'patrol' : 'patrols'} properly.`, `The ${law} ${be} unpaid but well equipped, and ${many ? 'walk' : 'walks'} the rounds properly.`],
+    [`The ${law} ${many ? 'exist' : 'exists'} on paper. Chronically underpaid and poorly equipped`, `The ${law} ${many ? 'exist' : 'exists'} on paper. Unpaid and poorly equipped`],
+    [`The ${law} ${be} chronically underpaid and poorly equipped`, `The ${law} ${be} unpaid and poorly equipped`],
+    [`The ${law} ${many ? 'exist' : 'exists'} on paper. Paid, but poorly equipped`, `The ${law} ${many ? 'exist' : 'exists'} on paper. Unpaid and poorly equipped`],
+    [`The ${law} ${be} paid, but poorly equipped`, `The ${law} ${be} unpaid and poorly equipped`],
+  ];
+  const hit = pairs.find(([line]) => text.startsWith(line));
+  return hit ? hit[1] + text.slice(hit[0].length) : text;
+}
+/** The rota's twin of "inadequate equipment and irregular pay" (C44796). */
+export const ROTA_IRREGULAR = (/** @type {string} */ law, /** @type {boolean} */ many) =>
+  `The ${law} ${many ? 'are' : 'is'} disciplined but unpaid: neighbours who keep the rota, with little equipment.`;
 
 /** LB4's twin of "irregular pay" where the gate is 1 (fully funded): the same force, its pay and kit as the record holds them. */
 export const PAID_IN_FULL = (/** @type {string} */ law, /** @type {boolean} */ many) =>

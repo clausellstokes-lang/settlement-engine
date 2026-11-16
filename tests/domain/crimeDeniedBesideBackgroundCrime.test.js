@@ -33,9 +33,16 @@ describe('R-E1: the denial prints beside a pattern that itself denies organisati
     expect(blockListsCrime(place({ crimeTypes: [BACKGROUND], criminalInstitutions: ['Gambling Den'] }))).toBe(true);
   });
 
-  it('soak1k-362 (Background crime alone): the Defense tab and the print chapter print the denial', async () => {
+  // BAR4-SAFETY (2026-11-16, F3, RE-KEYED BY IDENTITY): soak1k-362 holds a Black Market Revenue row (13%) and a covert fence
+  // ("Fencing stolen goods"), and the crime key now reads both (`criminalStructureKey.js :: covertCrimeHeld`: the diffuse rung),
+  // as do all ten soak1k towns whose only pattern is "Background crime" (362 411 452 506 572 686 740 800 848 884, each with a
+  // covert service). The arm keeps its identity: soak1k-362's own record, MADE with nothing criminal held (its criminal income
+  // row and its criminal services removed), Background crime its only pattern.
+  it('soak1k-362 made with nothing criminal held (Background crime alone): the Defense tab and the print chapter print the denial', async () => {
     await ensureLaws();
-    const s = birth(362).settlement;
+    const born = birth(362).settlement;
+    const s = { ...born, availableServices: { ...born.availableServices, criminal: [] },
+      economicState: { ...born.economicState, incomeSources: (born.economicState.incomeSources || []).filter((/** @type {any} */ r) => r?.isCriminal !== true) } };
     expect((s.economicState.safetyProfile.crimeTypes || []).map((c) => c.type)).toEqual(['Background crime']);
     expect(deriveCriminalStructure(s)).toBeNull();
     const r = renderSurfaces(await bootHarness(), s);
