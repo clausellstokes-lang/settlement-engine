@@ -1,0 +1,8 @@
+{"id":"C172465","town":"bar0-town-calm-rand-38","sev":"MED","kind":"STATE","why":"'The law here is slow and easily outbid' vs Summary 'Law & order · Adequate', 'Criminal opportunity · Contained', legitimacy Approved, no shadow income","other":"C172229"}
+{"id":"C172679","town":"bar0-town-calm-rand-38","sev":"LOW","kind":"PAIR","why":"Produced locally lists 'salt' while Imports says 'Salt (local salt flats exhausted)' and Salt Flats are depleted","other":"C172675"}
+{"id":"C172688","town":"bar0-town-calm-rand-38","sev":"LOW","kind":"BROKEN","why":"filter chip 'Entrepôt (3)' but only two entrepôt flows are listed (Spices & Dyes, Harbour Dues)","other":""}
+{"id":"C172798","town":"bar0-town-calm-rand-38","sev":"LOW","kind":"PAIR","why":"Commodities available lists 'salt' while Resources says 'Nothing more can be taken from the salt flats' and Salt Flats are Depleted","other":"C172790"}
+{"id":"C172931","town":"bar0-town-calm-rand-38","sev":"LOW","kind":"STATE","why":"'Everyone comes and goes by the gates' in a port with docks, harbour, ferry and sea trade access; arrivals by water do not pass a gate","other":""}
+{"id":"C172955","town":"bar0-town-calm-rand-38","sev":"LOW","kind":"PAIR","why":"'books record no gang, guild or racket' vs Services tab offering protection from 'a local strongman, a neighbor, or a gang' and violence deciding disputes","other":"C172462"}
+{"id":"C172991","town":"bar0-town-calm-rand-38","sev":"LOW","kind":"PAIR","why":"Magic tab 'Legality · regulated' beside 'Institutional control · unregulated'","other":"C172990"}
+{"id":"DONE","lines":1392,"blocks":1,"flags":7}
