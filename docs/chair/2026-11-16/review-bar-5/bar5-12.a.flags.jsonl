@@ -1,0 +1,9 @@
+{"id":"C29831","town":"bar0-thorp-calm-rand-24","sev":"MED","kind":"PAIR","why":"says the settlement relies on arcane workings; Reliance on magic is None, magic low, no magic defence","other":"C29852"}
+{"id":"C29866","town":"bar0-thorp-calm-rand-24","sev":"LOW","kind":"PAIR","why":"'not much left to sell' beside surplus 17%, six exports, 'lives on a farm surplus'","other":"C29968"}
+{"id":"C30295","town":"bar0-thorp-calm-rand-25","sev":"LOW","kind":"PAIR","why":"hook says Treasa owes her post to a patron; the Household elder house says nobody named them to it (self-arisen headship)","other":"C30316"}
+{"id":"C30237","town":"bar0-thorp-calm-rand-25","sev":"LOW","kind":"PAIR","why":"claims it kept its neighbours and temper; legitimacy crisis, two sides of a dispute no longer speak, collaborators and resisters unreconciled","other":"C30457"}
+{"id":"C30603","town":"bar0-thorp-calm-rand-25","sev":"LOW","kind":"PAIR","why":"founded 'at a strategic mountain pass' beside 'off the trade routes entirely'; trade access isolated, no exports or imports","other":"C30269"}
+{"id":"C30661","town":"bar0-thorp-calm-rand-26","sev":"LOW","kind":"STATE","why":"'made its name in trade': a thorp of 13, Poor, income only rents and fish, no market; its recorded major past event is a siege","other":""}
+{"id":"C30695","town":"bar0-thorp-calm-rand-26","sev":"LOW","kind":"PAIR","why":"'not much left to sell' beside surplus 13%, four exports and 11% fish sales","other":"C30797"}
+{"id":"C30937","town":"bar0-thorp-calm-rand-26","sev":"LOW","kind":"PAIR","why":"'the law is present' beside nobody paid to keep order, no court, no gaol, no watch, Legal Infrastructure None","other":"C30927"}
+{"id":"DONE","lines":1386,"blocks":3,"flags":8}
