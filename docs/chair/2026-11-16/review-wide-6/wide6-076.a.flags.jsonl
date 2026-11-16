@@ -1,0 +1,5 @@
+{"id":"C183905","town":"bar0-town-occupied-rand-31","sev":"LOW","kind":"PAIR","why":"Connection calls Luqman al-Nuri 'Wharfinger'; PEOPLE gives him 'the harbour master'; Zakariya ibn Rushd is the wharfinger (C183895)","other":"C183895"}
+{"id":"C184150","town":"bar0-town-occupied-rand-31","sev":"MED","kind":"STATE","why":"calm reassurance 'a poor year ... does not empty the town's tables' in a town in food deficit; Food Security 'Pressured' and 'Some households still go short' (C184143)","other":"C184143"}
+{"id":"C184661","town":"bar0-town-occupied-rand-31","sev":"LOW","kind":"BROKEN","why":"'Leverage (4)' filter, but five rows carry Mutual Leverage (Oula-Shahd, Daoud-Said, Saqr-Said, Sawsan-Said, Said-Zakariya)","other":""}
+{"id":"C184829","town":"bar0-town-occupied-rand-31","sev":"MED","kind":"PAIR","why":"History says 'An occupation had ended years before' for The Occupation (7y ago); CRISIS is Under Occupation now and Crisis tab says forces hold the town (C183734)","other":"C183734"}
+{"id":"DONE","lines":1237,"blocks":1,"flags":4}
