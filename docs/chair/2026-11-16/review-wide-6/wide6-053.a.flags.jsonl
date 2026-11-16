@@ -1,0 +1,8 @@
+{"id":"C145096","town":"bar0-metropolis-calm-rand-40","sev":"MED","kind":"PAIR","why":"Vintner's table wine and wine wholesale printed with no mark, but Economics says grapes are 'needed, and not brought in' and the vintner's work 'stops' without them","other":"C145773"}
+{"id":"C145784","town":"bar0-metropolis-calm-rand-40","sev":"LOW","kind":"BROKEN","why":"'The herds feeds Neaeia': plural subject with singular verb","other":""}
+{"id":"C146054","town":"bar0-metropolis-calm-rand-40","sev":"LOW","kind":"PAIR","why":"Gaps say hide work 'stops half-way: no leatherworkers' guild finishes it', but Leatherworking & Cordwaining runs, outputting boots, saddles, leather armour","other":"C145880"}
+{"id":"C145786","town":"bar0-metropolis-calm-rand-40","sev":"LOW","kind":"BROKEN","why":"filter 'Entrepôt (8)' but only five flows are tagged Entrepôt (Luxury, Spices, Silk, Wine, River Toll)","other":""}
+{"id":"C146255","town":"bar0-metropolis-calm-rand-40","sev":"MED","kind":"PAIR","why":"Defense says 'Nothing presses Neaeia at present'; Power tab gives stability 'Tense — regional monster threat' and monsters prowling the outlying farms (monsters plagued)","other":"C146073"}
+{"id":"C146376","town":"bar0-metropolis-calm-rand-40","sev":"LOW","kind":"PAIR","why":"Governor's constraint 'With nothing pressing' reads as calm, but the Power tab's stability is 'Tense — regional monster threat'","other":"C146068"}
+{"id":"C146450","town":"bar0-metropolis-calm-rand-40","sev":"LOW","kind":"PAIR","why":"Dean's constraint 'With nothing pressing, it is easy to grow comfortable' reads as calm, but stability is 'Tense — regional monster threat'","other":"C146068"}
+{"id":"DONE","lines":3014,"blocks":1,"flags":7}
