@@ -1,0 +1,8 @@
+{"id":"C130109","town":"bar0-metropolis-calm-rand-36","sev":"LOW","kind":"PAIR","why":"Settlement Origin says 'Founded roadside, where the day is measured in traffic'; FOUNDING reason is 'grew from a logging camp' by a trade house","other":""}
+{"id":"C130353","town":"bar0-metropolis-calm-rand-36","sev":"MED","kind":"STATE","why":"'the commander are the same man'; PEOPLE gives the garrison commander Orlaith Kennedy as (f)","other":""}
+{"id":"C130354","town":"bar0-metropolis-calm-rand-36","sev":"MED","kind":"STATE","why":"'He's authorizing military action': the garrison commander in PEOPLE is Orlaith Kennedy (f)","other":"C130353"}
+{"id":"C131921","town":"bar0-metropolis-calm-rand-36","sev":"LOW","kind":"PAIR","why":"'food trades are failing' beside Systems Health 'Food Security · Secure', 15 months in a granary and 'Economic Survival Strong'","other":"C130085"}
+{"id":"C131929","town":"bar0-metropolis-calm-rand-36","sev":"MED","kind":"PAIR","why":"'organized crime has a limited foothold' against 'One criminal ring decides what crime is allowed here' and Thieves' Guild 'Powerful... Deeply embedded in civic life'","other":"C131943"}
+{"id":"C133674","town":"bar0-metropolis-calm-rand-36","sev":"MED","kind":"PAIR","why":"History says the Plague Years lasted 'For 2 seasons'; the Tensions tab's plague years says the sickness moved 'for three seasons'","other":"C130094"}
+{"id":"C133702","town":"bar0-metropolis-calm-rand-36","sev":"MED","kind":"PAIR","why":"'the church has the garrison at its side... armed men who call themselves crusaders' against 'each wishes the other would keep quieter' and Religious Authorities 'small voice'; DEFENCE has no crusaders","other":"C131885"}
+{"id":"DONE","lines":3726,"blocks":1,"flags":7}
