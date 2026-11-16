@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "5869f595ce3724696a9a98407e6b83f7a3635bf8",
-  "measuredBy": "BAR3-CLOSE-DOORS-1",
+  "measuredAtSha": "01ab94ddaa40f4288d9f5709598577f3d7dad278",
+  "measuredBy": "BAR3-CLOSE-DOORS-2",
   "date": "2026-11-16",
-  "note": "the close of the round BAR3 (2026-11-15): the twelve guard files the round seven branches added (bar3LabelWords, bar3LabelWords2, bar3LabelWords3, bar3ServicesRows, bar3CorpusGuards, bar3Defecon2Lines, bar3DefeconLines, bar3People2Rows, bar3PeoplePowers, bar3PeopleTies, bar3PlacesRows, bar3PowersLines)",
+  "note": "the close of the round BAR3, Part 2 seat (2026-11-16), after the merge of lane/bar3-close-sweep-b-2026-11-16 at f319ee76e: titles 30599 -> 30600, net +1 by this census own count, from the test titles the repair seat added or re-worded (letter a 5bb670f5a, tests/domain/customContentPresentationClaims.test.js; letter c 1a5ee3639, tests/generators/regenDerivedState.test.js; letter g 83f2db01f, tests/generators/stressSecretDeclared.test.js); no file added or removed; no other figure moved",
   "files": 3631,
   "parked": 465,
   "credited": 3166,
-  "titles": 30599,
+  "titles": 30600,
   "suiteTitles": 8440
 }
