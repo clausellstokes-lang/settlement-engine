@@ -1,0 +1,153 @@
+// BAR5-AUDIT-B · LAW 3 · ONE STATE ON EVERY TAB.
+// A service, a house, a chain, a resource or a food source that ANY tab marks stopped, short, failed or impaired is
+// not printed operational, available, running or eaten on another. Each rule reads the page's own mark (the
+// `against`) and finds the unmarked contrary print elsewhere.
+import { CHIP_MARK, MARK_LEAD, fold, economicsSections } from './pageB.mjs';
+
+const tok = (s) => fold(s).replace(/[^a-z' ]/g, ' ').replace(/\s+/g, ' ').trim();
+
+// what a failed food source puts on a list
+const FAILED_FOOD = {
+  grain: /\b(grain|flour)\b/i,
+  livestock: /\b(livestock|dairy)\b/i,
+  fish: /\b(fish)\b/i,
+};
+// a raw material whose work "stops half-way" -> the chains that would finish it
+const HALFWAY_CHAIN = {
+  'iron ore': /iron|metal|weapons|tool/i,
+  iron: /iron|metal|weapons|tool/i,
+  'animal hides': /leather|hide|cordwain/i,
+  'camel herds': /leather|hide|cordwain/i,
+  wool: /wool|textile|cloth|weav/i,
+  timber: /timber|wood|charcoal|carpent/i,
+  stone: /stone|mason/i,
+  'medicinal herbs': /herb|remed|healing|apothec/i,
+  clay: /clay|pottery|ceramic|brick/i,
+};
+
+// the finished goods a missing house would make
+const FINISHED_BY = {
+  smelter: /\b(tools|weapons|armou?r|blades)\b/i,
+  'weaver|fulling|dyer': /\b(cloth|garments|textiles|woollens|dyed)\b/i,
+  'tanner|leatherworker': /\b(boots|shoes|saddles|harness|leather armou?r|leather goods)\b/i,
+  '^apothecary': /\b(remedies|medicines)\b/i,
+  alchemist: /\b(potions|elixirs)\b/i,
+  stonemason: /\b(dressed stone|carved stone|masonry|sculpture)\b/i,
+  'charcoal burner': /\bcharcoal\b/i,
+  potter: /\b(pottery|ceramics|fired)\b/i,
+};
+
+export function law3(T, town) {
+  const out = [];
+  const push = (rule, tab, i, line, against, why) => out.push({ law: 'L3', rule, town, tab, i, line, against, why });
+  const inst = T.tabs['Systems/Institutions'] || [], svc = T.tabs['Systems/Services'] || [], eco = T.tabs['Systems/Economics'] || [], res = T.tabs['Systems/Resources'] || [];
+
+  // ---- the marks the page prints: service names marked anywhere
+  const markedSvc = new Map(); // folded name -> {tab,i,line}
+  for (const c of T.cards) for (const ch of c.chips) if (ch.marked || (c.marked && /^Stopped by/.test(c.lines[0]?.text || ''))) {
+    if (!markedSvc.has(tok(ch.name))) markedSvc.set(tok(ch.name), { tab: 'Systems/Institutions', i: c.chipIdx, line: c.chipLine });
+  }
+  for (const e of T.services) if (e.marked && /^(Stopped by|Curtailed by)/.test(e.desc)) {
+    if (!markedSvc.has(tok(e.title))) markedSvc.set(tok(e.title), { tab: 'Systems/Services', i: e.descIdx, line: `${e.titleRaw} / ${e.desc}` });
+  }
+
+  // L3.outputs: an Operational/Running chain lists as its output or export a service the page marks stopped
+  for (const ch of T.chains) {
+    if (ch.marked || ch.yieldsNormally || !ch.outputs || !/Running|Operational/.test(ch.state)) continue;
+    const items = ch.outputs.split(/ · |, | & | and /).map(tok).filter(Boolean);
+    const blob = tok(ch.outputs);
+    for (const [name, at] of markedSvc) {
+      if (name.length < 6) continue;
+      if (items.includes(name) || new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(blob)) {
+        push('L3.outputs', 'Systems/Economics', ch.outIdx, ch.outputs, at, `chain ${ch.name} is printed ${ch.state} and lists "${name}", which the page marks stopped`);
+        break;
+      }
+    }
+  }
+
+  // L3.chainOverStopped: a chain printed Running/Operational whose every house is stopped
+  const houseStopped = (name) => {
+    const c = T.cards.find((c) => c.name === name);
+    if (!c) return null;
+    if (/^Stopped by/.test(c.lines[0]?.text || '')) return true;
+    return c.chips.length > 0 && c.chips.every((x) => /\((stopped)/.test(x.raw));
+  };
+  for (const ch of T.chains) {
+    if (ch.marked || !/Running|Operational/.test(ch.state) || !ch.via.length) continue;
+    const st = ch.via.map(houseStopped);
+    if (st.every((x) => x === true)) {
+      const c = T.cards.find((c) => c.name === ch.via[0]);
+      push('L3.chainOverStopped', 'Systems/Economics', ch.headIdx, ch.head, { tab: 'Systems/Institutions', i: c.headIdx, line: `${c.head} / ${c.lines[0]?.text || c.chipLine}` }, `chain ${ch.name} is printed ${ch.state} over houses (${ch.via.join(', ')}) whose every service the page marks stopped`);
+    }
+  }
+
+  // L3.failedFood: a failed food source among the commodities available / produced locally
+  const failedIdx = res.findIndex((l) => /^✗ Failed this year · /.test(l));
+  if (failedIdx >= 0) {
+    const f = res[failedIdx].replace(/^✗ Failed this year · /, '').trim().toLowerCase();
+    const re = FAILED_FOOD[f] || new RegExp(`\\b${f}\\b`, 'i');
+    const ag = { tab: 'Systems/Resources', i: failedIdx, line: res[failedIdx] };
+    const ca = res.findIndex((l) => l === 'Commodities available');
+    if (ca >= 0) for (let i = ca + 1; i < res.length && !/▲$/.test(res[i]); i++) {
+      if (re.test(res[i]) && !CHIP_MARK.test(res[i])) { push('L3.failedFood', 'Systems/Resources', i, res[i], ag, `the page says ${f} failed this year; the commodities available list it unmarked`); }
+    }
+    const sec = economicsSections(eco);
+    const tp = sec['Trade Profile'] || [];
+    tp.forEach((x, k) => { if (tp[k - 1]?.text === 'Produced locally' && re.test(x.text)) push('L3.failedFood', 'Systems/Economics', x.i, x.text, ag, `the page says ${f} failed this year; "Produced locally" lists it unmarked`); });
+  }
+
+  // L3.foodLineStopped: the food line puts on the table a catch the page marks stopped
+  const fishStopped = T.all.find((x) => /^Fish & Maritime Produce Stopped by|Fresh fish \(stopped/.test(x.text) || (/Fresh fish \(stopped/.test(x.text)));
+  const huntStopped = T.all.find((x) => /^Hunting[^·]* Stopped by|Game meat \(stopped|Fresh game \(stopped/.test(x.text));
+  for (const x of T.all) {
+    if (!/puts on the table itself is/.test(x.text) || MARK_LEAD.test(x.text)) continue;
+    if (fishStopped && /day's catch|fish from the local waters|salted fish|fresh fish/.test(x.text)) push('L3.foodLineStopped', x.tab, x.i, x.text, { tab: fishStopped.tab, i: fishStopped.i, line: fishStopped.text }, 'the food line puts the catch on the table; the page marks the fishing stopped');
+    if (huntStopped && /hunters' game/.test(x.text)) push('L3.foodLineStopped', x.tab, x.i, x.text, { tab: huntStopped.tab, i: huntStopped.i, line: huntStopped.text }, "the food line puts the hunters' game on the table; the page marks the hunting stopped");
+  }
+
+  // L3.foodModel: the food line names game or fish as the table's own food beside a farmland house that sells its harvest
+  const farm = T.cards.find((c) => /^(Farmland|Fields|Common fields|Farmsteads?|Croft(s|land)?|Arable)/i.test(c.name) && c.chips.some((ch) => /grain|harvest/i.test(ch.name) && !ch.marked) && !c.marked);
+  if (farm) for (const x of T.all) {
+    if (/puts on the table itself is (the hunters' game|fish|the day's catch|salted fish)/.test(x.text) && !/What each holding grows goes to its own table/.test(x.text))
+      push('L3.foodModel', x.tab, x.i, x.text, { tab: 'Systems/Institutions', i: farm.chipIdx, line: `${farm.head} / ${farm.chipLine}` }, 'the food line names another food as the table\'s own, beside a farmland house that sells its own grain');
+  }
+
+  // L3.needed: "Needed, and not brought in: X" with "when none comes, that work stands idle" -> an unmarked working house (Crafts, Economy) that works X
+  const need = T.all.find((x) => /^Needed, and not brought in: /.test(x.text));
+  if (need) {
+    const goods = need.text.replace(/^Needed, and not brought in: /, '').replace(/\.$/, '').split(/, | and /).map((g) => g.replace(/\(.*?\)/g, '').trim().toLowerCase()).filter(Boolean);
+    const done = new Set();
+    for (const g of goods) {
+      const idle = T.all.find((x) => new RegExp(`part of the ${g} .{0,60}must come from elsewhere; when none comes, that work stands idle`, 'i').test(x.text));
+      if (!idle) continue;
+      const word = g.split(' ').pop().replace(/s$/, '');
+      const re = new RegExp(`\\b${word}s?\\b`, 'i');
+      for (const c of T.cards) {
+        if (done.has(c.name) || !/^(Crafts|Economy)$/.test(c.cat.trim())) continue;
+        if (c.marked || c.chips.some((ch) => ch.marked)) continue;
+        if (!c.lines.some((l) => re.test(l.text))) continue;
+        done.add(c.name);
+        push('L3.needed', 'Systems/Institutions', c.headIdx, `${c.head} / ${c.lines.map((l) => l.text).join(' ')}`.slice(0, 400), { tab: need.tab, i: need.i, line: `${need.text} | ${idle.text}` }, `the page says ${g} is needed and not brought in, and that the work stands idle; this house works ${g} with no mark`);
+      }
+    }
+  }
+
+  // L3.halfway: the record's gap "cannot produce final goods" (printed: "stops half-way" / "semi-finished"), yet a
+  // chain drawing on that material prints as its output a finished good of the missing house
+  const said = T.all.find((x) => /stops half-way|worked only to semi-finished goods/.test(x.text));
+  const gaps = (T.record?.resourceAnalysis?.gaps || []).filter((g) => /final goods/i.test(g.impact || ''));
+  if (said) for (const g of gaps) {
+    const r = String(g.chain || '').replace(/_/g, ' ').toLowerCase();
+    const chainRe = HALFWAY_CHAIN[r] || HALFWAY_CHAIN[r.replace(/^alpine pasture$/, 'wool')];
+    if (!chainRe) continue;
+    const prod = (g.missing || []).map((h) => FINISHED_BY[Object.keys(FINISHED_BY).find((k) => new RegExp(k, 'i').test(h))]).filter(Boolean);
+    if (!prod.length) continue;
+    const ag = T.all.find((x) => new RegExp(`Work on the ${r} here stops half-way`, 'i').test(x.text)) || said;
+    for (const ch of T.chains) {
+      if (!ch.outputs || ch.yieldsNormally || !(chainRe.test(ch.name) || ch.from.some((f) => chainRe.test(f)))) continue;
+      const hit = prod.find((re) => re.test(ch.outputs));
+      if (hit) push('L3.halfway', 'Systems/Economics', ch.outIdx, ch.outputs, { tab: ag.tab, i: ag.i, line: ag.text }, `the page says work on ${r} stops half-way (no ${g.missing.join(', ')}); chain ${ch.name} prints finished goods of the missing house`);
+    }
+  }
+  return out;
+}
