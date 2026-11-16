@@ -1,0 +1,594 @@
+[
+ {
+  "law": "L7",
+  "rule": "7w-tone",
+  "town": "bar0-city-wartime-rand-24",
+  "tab": "Summary/Overview",
+  "i": 6,
+  "line": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = wartime"
+  },
+  "why": "\"crowd the road\": ordinary traffic under wartime (WEAK by the second check: the work goes on, the tone is off)",
+  "crises": [
+   "wartime"
+  ],
+  "tier": "city",
+  "pop": 14941,
+  "earlier": [],
+  "writer": "src/data/arrivalProse.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6b-out",
+  "town": "bar0-city-wartime-rand-25",
+  "tab": "Summary/Overview",
+  "i": 6,
+  "line": "Crates of pots and glassware, packed in straw, wait for the carts on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Milled flour · Sacred wood · Ritual components · Coal · Candles and wax · Spellcasting (minor) · Magical identification · News and information · Maps and charts · Glassware · Financial services (letters of credit) · Legal services (contracts, notarial)"
+  },
+  "why": "a scene sends pots out of the town; the page's exports carry none",
+  "crises": [
+   "wartime"
+  ],
+  "tier": "city",
+  "pop": 7734,
+  "earlier": [],
+  "writer": "src/data/arrivalProse.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6c-halfway",
+  "town": "bar0-city-wartime-rand-26",
+  "tab": "Systems/Resources",
+  "i": 22,
+  "line": "Work on the timber here stops half-way: no charcoal burner finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Mountain Timber · Raw materials & fuel✓ Running · Outputs Structural timber · Fuel wood · Charcoal"
+  },
+  "why": "the page says the timber is never finished here; it exports or yields the finished good",
+  "crises": [
+   "wartime"
+  ],
+  "tier": "city",
+  "pop": 4756,
+  "earlier": [],
+  "writer": "src/generators/resourceGenerator.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-hamlet-calm-rand-24",
+  "tab": "Systems/Economics",
+  "i": 23,
+  "line": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 52"
+  },
+  "why": "\"street kitchens\" in a hamlet of 52 (one street, or a foodways word: WEAK)",
+  "crises": [],
+  "tier": "hamlet",
+  "pop": 52,
+  "earlier": [],
+  "writer": "src/data/cultureProfiles.js"
+ },
+ {
+  "law": "L7",
+  "rule": "7a-nothreat",
+  "town": "bar0-hamlet-calm-rand-24",
+  "tab": "Systems/Defense",
+  "i": 27,
+  "line": "Prabhagiri has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "crises": [],
+  "tier": "hamlet",
+  "pop": 52,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6b-nomaker",
+  "town": "bar0-hamlet-calm-rand-25",
+  "tab": "Summary/Overview",
+  "i": 6,
+  "line": "Kiln smoke hangs over Ioannochorion, and the dust of fired clay is on everything.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes pots; Produced locally: timber · medicinal herbs · honey · iron · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows fired clay; no house makes it and the page lists none made or sent out",
+  "crises": [],
+  "tier": "hamlet",
+  "pop": 42,
+  "earlier": [
+   "4n-clay"
+  ],
+  "writer": "src/data/arrivalProse.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-hamlet-calm-rand-26",
+  "tab": "Systems/Economics",
+  "i": 26,
+  "line": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 25"
+  },
+  "why": "\"street kitchens\" in a hamlet of 25 (one street, or a foodways word: WEAK)",
+  "crises": [],
+  "tier": "hamlet",
+  "pop": 25,
+  "earlier": [],
+  "writer": "src/data/cultureProfiles.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-size",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "tab": "Systems/Defense",
+  "i": 29,
+  "line": "With the hamlet under siege, quarrels over rations and theft of food are the trouble on Waldkoppel's streets now.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 38"
+  },
+  "why": "\"streets\" in a hamlet of 38",
+  "crises": [
+   "under_siege"
+  ],
+  "tier": "hamlet",
+  "pop": 38,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-size",
+  "town": "bar0-hamlet-under_siege-rand-25",
+  "tab": "Systems/Defense",
+  "i": 29,
+  "line": "With the hamlet under siege, quarrels over rations and theft of food are the trouble on Dongxian's streets now.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 80"
+  },
+  "why": "\"streets\" in a hamlet of 80",
+  "crises": [
+   "under_siege"
+  ],
+  "tier": "hamlet",
+  "pop": 80,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6c-arms",
+  "town": "bar0-hamlet-under_siege-rand-25",
+  "tab": "Systems/Economics",
+  "i": 48,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "crises": [
+   "under_siege"
+  ],
+  "tier": "hamlet",
+  "pop": 80,
+  "earlier": [],
+  "writer": "src/data/supplyChainData.js + src/data/tradeGoodsData.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-hamlet-under_siege-rand-26",
+  "tab": "Systems/Economics",
+  "i": 22,
+  "line": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 61"
+  },
+  "why": "\"street kitchens\" in a hamlet of 61 (one street, or a foodways word: WEAK)",
+  "crises": [
+   "under_siege"
+  ],
+  "tier": "hamlet",
+  "pop": 61,
+  "earlier": [],
+  "writer": "src/data/cultureProfiles.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-size",
+  "town": "bar0-hamlet-under_siege-rand-26",
+  "tab": "Systems/Defense",
+  "i": 37,
+  "line": "The danger at Nandagiri comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 61"
+  },
+  "why": "\"streets\" in a hamlet of 61",
+  "crises": [
+   "under_siege"
+  ],
+  "tier": "hamlet",
+  "pop": 61,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6b-nomaker",
+  "town": "bar0-hamlet-under_siege-rand-26",
+  "tab": "Summary/Overview",
+  "i": 6,
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: medicinal herbs · honey · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "crises": [
+   "under_siege"
+  ],
+  "tier": "hamlet",
+  "pop": 61,
+  "earlier": [],
+  "writer": "src/data/arrivalProse.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6d-members",
+  "town": "bar0-thorp-calm-rand-25",
+  "tab": "Systems/Power",
+  "i": 32,
+  "line": "The Elder Council at Loughworth has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "crises": [],
+  "tier": "thorp",
+  "pop": 29,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/power.generated.js"
+ },
+ {
+  "law": "L7",
+  "rule": "7a-nothreat",
+  "town": "bar0-thorp-calm-rand-25",
+  "tab": "Systems/Defense",
+  "i": 27,
+  "line": "Loughworth has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "crises": [],
+  "tier": "thorp",
+  "pop": 29,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-thorp-calm-rand-26",
+  "tab": "Summary/Overview",
+  "i": 6,
+  "line": "Nobody in the street pays attention.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 13"
+  },
+  "why": "\"the street\" in a thorp of 13 (one street, or a foodways word: WEAK)",
+  "crises": [],
+  "tier": "thorp",
+  "pop": 13,
+  "earlier": [],
+  "writer": "src/data/narrativeData.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-thorp-calm-rand-26",
+  "tab": "Systems/Economics",
+  "i": 27,
+  "line": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 13"
+  },
+  "why": "\"street kitchens\" in a thorp of 13 (one street, or a foodways word: WEAK)",
+  "crises": [],
+  "tier": "thorp",
+  "pop": 13,
+  "earlier": [],
+  "writer": "src/data/cultureProfiles.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6c-halfway",
+  "town": "bar0-town-occupied-rand-25",
+  "tab": "Systems/Resources",
+  "i": 22,
+  "line": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Leatherworking & Cordwaining · Manufacturing & crafts · Vulnerable · Outputs Boots and shoes · Saddles and harness · Leather armour"
+  },
+  "why": "the page says the animal hides is never finished here; it exports or yields the finished good",
+  "crises": [
+   "occupied"
+  ],
+  "tier": "town",
+  "pop": 329,
+  "earlier": [],
+  "writer": "(untraced)"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-village-calm-rand-24",
+  "tab": "Systems/Defense",
+  "i": 21,
+  "line": "Visitors to Neuburg are told which few streets to avoid, and the advice turns out to be right.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 291"
+  },
+  "why": "\"streets\" in a village of 291 (WEAK by the second check: one loose word)",
+  "crises": [],
+  "tier": "village",
+  "pop": 291,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-village-calm-rand-24",
+  "tab": "Systems/Defense",
+  "i": 24,
+  "line": "Rival crews at Neuburg are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 291"
+  },
+  "why": "\"streets\" in a village of 291 (WEAK by the second check: one loose word)",
+  "crises": [],
+  "tier": "village",
+  "pop": 291,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6c-arms",
+  "town": "bar0-village-calm-rand-24",
+  "tab": "Systems/Economics",
+  "i": 17,
+  "line": "Sacred wood · Ritual components · Iron ore · Weapons and armour · Quality tools and weapons · Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor exported; no house of the town makes fine arms",
+  "crises": [],
+  "tier": "village",
+  "pop": 291,
+  "earlier": [],
+  "writer": "src/data/supplyChainData.js + src/data/tradeGoodsData.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6c-arms",
+  "town": "bar0-village-calm-rand-24",
+  "tab": "Systems/Economics",
+  "i": 24,
+  "line": "iron · metalwork · Quality tools and weapons · Advanced weapons and armor · Religious services · Education (basic)",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor yielded; no house of the town makes fine arms",
+  "crises": [],
+  "tier": "village",
+  "pop": 291,
+  "earlier": [],
+  "writer": "src/data/supplyChainData.js + src/data/tradeGoodsData.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6c-arms",
+  "town": "bar0-village-calm-rand-24",
+  "tab": "Systems/Economics",
+  "i": 40,
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "crises": [],
+  "tier": "village",
+  "pop": 291,
+  "earlier": [
+   "L3.halfway"
+  ],
+  "writer": "src/data/supplyChainData.js + src/data/tradeGoodsData.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6d-force",
+  "town": "bar0-village-calm-rand-24",
+  "tab": "Systems/Power",
+  "i": 83,
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "crises": [],
+  "tier": "village",
+  "pop": 291,
+  "earlier": [],
+  "writer": "src/generators/power/rulingStructure.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-village-calm-rand-25",
+  "tab": "Systems/Defense",
+  "i": 23,
+  "line": "Visitors to Aquaium are told which few streets to avoid, and the advice turns out to be right.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 186"
+  },
+  "why": "\"streets\" in a village of 186 (WEAK by the second check: one loose word)",
+  "crises": [],
+  "tier": "village",
+  "pop": 186,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L7",
+  "rule": "7c-plenty",
+  "town": "bar0-village-calm-rand-25",
+  "tab": "Systems/Economics",
+  "i": 26,
+  "line": "With more than its herds to rely on, Aquaium can take a bad season in one source without going hungry.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Food Security · Pressured"
+  },
+  "why": "\"without going hungry\": plenty or ease, unmarked, where the page says there is want",
+  "crises": [],
+  "tier": "village",
+  "pop": 186,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/economy.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-village-calm-rand-26",
+  "tab": "Systems/Defense",
+  "i": 23,
+  "line": "Visitors to Svetopol are told which few streets to avoid, and the advice turns out to be right.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 275"
+  },
+  "why": "\"streets\" in a village of 275 (WEAK by the second check: one loose word)",
+  "crises": [],
+  "tier": "village",
+  "pop": 275,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/defense.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6a-w",
+  "town": "bar0-village-famine-rand-24",
+  "tab": "Systems/Power",
+  "i": 45,
+  "line": "Each season it gets easier to buy an official at Somavalli: the village stays poor, the streets stay badly guarded, and nobody in the Headman's Authority is mending either.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 260"
+  },
+  "why": "\"streets\" in a village of 260 (WEAK by the second check: one loose word)",
+  "crises": [
+   "famine"
+  ],
+  "tier": "village",
+  "pop": 260,
+  "earlier": [],
+  "writer": "src/data/dossierStateProse/power.generated.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6e-sovereign",
+  "town": "bar0-village-famine-rand-25",
+  "tab": "Systems/Services",
+  "i": 62,
+  "line": "Collects the lord's dues and the tithe",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people, neighbour and founding name no lord, crown or noble"
+  },
+  "why": "\"the lord's\"; the town has no such sovereign and no crisis supplies one",
+  "crises": [
+   "famine"
+  ],
+  "tier": "village",
+  "pop": 268,
+  "earlier": [
+   "4n-lord"
+  ],
+  "writer": "src/data/institutionServices.js"
+ },
+ {
+  "law": "L6",
+  "rule": "6c-halfway",
+  "town": "bar0-village-famine-rand-26",
+  "tab": "Systems/Resources",
+  "i": 23,
+  "line": "Work on the camel herds here stops half-way: no leather tanner finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Livestock & Dairy · Food security · Vulnerable · Outputs Leather goods"
+  },
+  "why": "the page says the camel herds is never finished here; it exports or yields the finished good",
+  "crises": [
+   "famine"
+  ],
+  "tier": "village",
+  "pop": 306,
+  "earlier": [],
+  "writer": "(untraced)"
+ },
+ {
+  "law": "L6",
+  "rule": "6d-force",
+  "town": "bar0-village-famine-rand-26",
+  "tab": "Systems/Power",
+  "i": 44,
+  "line": "Significant military force for this scale; the commander's opinion on civic matters carries institutional weight.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Significant military force for this scale\"; the town keeps no standing force",
+  "crises": [
+   "famine"
+  ],
+  "tier": "village",
+  "pop": 306,
+  "earlier": [],
+  "writer": "src/generators/power/rulingStructure.js"
+ }
+]

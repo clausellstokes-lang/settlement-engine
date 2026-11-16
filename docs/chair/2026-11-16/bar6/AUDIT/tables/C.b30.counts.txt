@@ -1,0 +1,66 @@
+towns 30 · instances 31 · towns with one 18
+L6: towns 17 · instances 27 · distinct lines 23
+L7: towns 4 · instances 4 · distinct lines 4
+  6a-size       towns    3 · instances    3 · distinct lines    3 · found by an earlier law 0
+  6a-w          towns    8 · instances   10 · distinct lines    7 · found by an earlier law 0
+  6b-nomaker    towns    2 · instances    2 · distinct lines    2 · found by an earlier law 1
+  6b-out        towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6c-arms       towns    2 · instances    4 · distinct lines    3 · found by an earlier law 1
+  6c-halfway    towns    3 · instances    3 · distinct lines    3 · found by an earlier law 0
+  6d-force      towns    2 · instances    2 · distinct lines    2 · found by an earlier law 0
+  6d-members    towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6e-sovereign  towns    1 · instances    1 · distinct lines    1 · found by an earlier law 1
+  7a-nothreat   towns    2 · instances    2 · distinct lines    2 · found by an earlier law 0
+  7c-plenty     towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  7w-tone       towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+7    stands    C3247   n/a                  · town not in this render
+7    stands    C94460  n/a                  · town not in this render
+7    stands    C150831 n/a                  · town not in this render
+7    stands    C85036  n/a                  · town not in this render
+7    stands    C205552 n/a                  · town not in this render
+7    stands    C146255 n/a                  · town not in this render
+7    stands    C157891 n/a                  · town not in this render
+7    stands    C26390  n/a                  · town not in this render
+7    stands    C217292 n/a                  · town not in this render
+7    stands    C184150 n/a                  · town not in this render
+7    stands    C40276  FOUND 7c-plenty      · With more than its herds to rely on, Aquaium can take a bad season in one source without g
+7    weak      C0013   n/a                  · town not in this render
+7    weak      C4592   n/a                  · town not in this render
+7    weak      C61115  n/a                  · town not in this render
+7    weak      C79603  n/a                  · town not in this render
+7    weak      C218186 n/a                  · town not in this render
+7    weak      C218926 n/a                  · town not in this render
+7    explained C0343   n/a                  · town not in this render
+7    explained C182276 n/a                  · town not in this render
+7    stands_by_L2 C43575  FOUND L2.famine.work · Since no one goes unshod, the work never dries up.
+7    stands_by_L2 C0350   FOUND L2.siege.abroad · The watch, the garrison, and the caravans buy here.
+7    stands_by_L2 C3223   FOUND L2.siege.abroad · The watch, the garrison, and the caravans buy here.
+7    stands_by_L2 C5452   FOUND L2.siege.abroad · Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite
+6a   stands    C154042 n/a                  · town not in this render
+6a   stands    C209939 n/a                  · town not in this render
+6a   weak      C206170 n/a                  · town not in this render
+6b   stands    C39804  n/a                  · town not in this render
+6b   stands    C84094  n/a                  · town not in this render
+6b   stands    C115374 n/a                  · town not in this render
+6b   stands    C219863 n/a                  · town not in this render
+6b   stands    C15780  n/a                  · town not in this render
+6b   stands    C15951  FOUND 6b-nomaker     · Kiln smoke hangs over Ioannochorion, and the dust of fired clay is on everything.
+6c   stands    C86447  n/a                  · town not in this render
+6c   stands    C86484  n/a                  · town not in this render
+6c   stands    C88481  n/a                  · town not in this render
+6c   stands    C204663 n/a                  · town not in this render
+6c   stands    C171330 n/a                  · town not in this render
+6c   stands    C158113 n/a                  · town not in this render
+6c   stands    C39608  FOUND 6c-arms        · Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons
+6c   stands    C37887  FOUND 6c-halfway     · Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.
+6d   stands    C161931 n/a                  · town not in this render
+6d   stands    C203044 n/a                  · town not in this render
+6d   stands    C91256  n/a                  · town not in this render
+6d   stands    C128237 n/a                  · town not in this render
+6d   stands    C113231 n/a                  · town not in this render
+6d   stands    C43925  FOUND 6d-force       · Significant military force for this scale; the commander's opinion on civic matters carrie
+6d   stands    C39734  FOUND 6d-force       · Armed patrol of able-bodied residents; the settlement's primary recourse when disputes tur
+6e   stands    C42840  FOUND 6e-sovereign   · Collects the lord's dues and the tithe
+6e   explained C48148  n/a                  · town not in this render
+6e   explained C48270  n/a                  · town not in this render
+6e   explained C48442  n/a                  · town not in this render
