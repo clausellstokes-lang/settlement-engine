@@ -13,10 +13,18 @@
  * THE CAP, in the row's own scale (surplus > adequate > strained > critical > collapsed; no new word), as
  * `rulingAuthorityShown.js` caps its row: in each state above the row prints at most "strained" (for the lower-is-better
  * criminal opportunity, the word the ladder gives that band: "Elevated"). A band at or below the cap is left as it is.
+ * THE FLOOR (BAR5-BAND, ruling LB1): the law-and-order row of a quiet place that keeps no office of the law prints at
+ * least "strained" (`foundationFloorOf`). Every place that prints or reads the row's band reads it here: the Foundations
+ * (SubstrateTab.jsx), the Outlook (`dossierViewModel.js :: outlookFactsOf`), the printed Campaign-State grid
+ * (`pdf/sections/SystemStateSnapshot.jsx`).
  * Pure: no draw, no write; the model's score does not move.
  */
 import { deriveSupportingCapabilities } from './defenseDisplay.js';
 import { tradeListsAsPrinted } from './tradeListDisplay.js'; // BAR3-LABELS-2 item 4: what the Economics tab prints as arriving
+import { safetyBandOf } from './labelBands.js'; // BAR5-BAND LB1: the Overview's Safety word
+import { activeCrisisTypes } from '../facts/crisisKind.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { institutionIsLawOrder } from '../institutionClassify.js';
 
 /** The row's scale, worst first (SubstrateTab.jsx's BAND_RANK). */
 const RANK = Object.freeze({ collapsed: 0, critical: 1, strained: 2, adequate: 3, surplus: 4 });
@@ -78,8 +86,43 @@ export function foundationCapOf(settlement, key) {
 export function foundationBandShown(settlement, key, band) {
   if (key === 'trade_connectivity') return band === 'collapsed' && tradeArrivesOnPage(settlement) ? 'critical' : band;
   const cap = foundationCapOf(settlement, key);
-  if (!cap || !Object.hasOwn(RANK, band)) return band;
+  if (!Object.hasOwn(RANK, band)) return band;
+  const floor = foundationFloorOf(settlement, key);
+  if (floor && RANK[/** @type {keyof typeof RANK} */ (band)] < RANK[floor]) return floor;
+  if (!cap) return band;
   return RANK[/** @type {keyof typeof RANK} */ (band)] > RANK[cap] ? cap : band;
+}
+
+/**
+ * A QUIET PLACE'S LAW HAS NOT FAILED (BAR5-BAND, the chair's ruling LB1 of 2026-11-16; vetoable by the owner; the wide
+ * read's rows in bar0-hamlet-calm-rand-33, -34, -36 and bar0-thorp-calm-rand-32). `causalState.js :: deriveLawOrder`
+ * starts at 50 and a small place loses by construction (its internal-security score, "no court and no watch", an elder
+ * council or a commune), so "Law & order · Critical" or "· Collapsed" printed beside Safety "Moderate" with nothing wrong
+ * in the place. THE FLOOR, beside the cap, in the row's own scale (no new word): where (a) the town keeps no office of
+ * the law (`institutionIsLawOrder` over the live roster, the reading `deriveLawOrder` itself uses), (b) no crisis is in
+ * force (`facts/crisisKind.js :: activeCrisisTypes`), (c) no crime wave stands (`crimeWaveStands`) and (d) the page's own
+ * Safety word (the Overview's: `labelBands.js :: safetyBandOf`) is Moderate or better, the row prints at least
+ * "strained". The model's score does not move. Pure: no draw, no write.
+ * @param {unknown} settlement @returns {boolean}
+ */
+export function quietPlaceKeepsLaw(settlement) {
+  if (activeCrisisTypes(/** @type {object} */ (settlement)).length > 0 || crimeWaveStands(settlement)) return false;
+  const safety = safetyBandOf(/** @type {{ economicState?: { safetyProfile?: { safetyLabel?: string } } } | null} */ (settlement)?.economicState?.safetyProfile?.safetyLabel);
+  if (!safety || !QUIET_SAFETY.has(safety)) return false;
+  return !liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .some((i) => institutionIsLawOrder(/** @type {{ catalogId?: string, name?: string }} */ (i)));
+}
+
+/** The Safety words that say daily life is safe enough (the ladder's top three: `compendium/bandLadders.js`). */
+const QUIET_SAFETY = new Set(['Very Safe', 'Safe', 'Moderate']);
+
+/**
+ * The floor the record sets under a Foundations row, or null where it sets none.
+ * @param {unknown} settlement @param {string} key the row's variable
+ * @returns {'strained' | null}
+ */
+export function foundationFloorOf(settlement, key) {
+  return key === 'law_order' && quietPlaceKeepsLaw(settlement) ? 'strained' : null;
 }
 
 /**

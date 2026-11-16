@@ -24,6 +24,7 @@ import { type, palette, space, pt, swatch } from '../theme.js';
 import { BAND_COLOR, BAND_HINT, dimensionScaleNote } from '../../domain/state/bands.js';
 import { causalBandWord, deriveCausalState, SYSTEM_VARIABLES } from '../../domain/causalState.js';
 import { activeConditionWords, conditionsSentence } from '../../domain/display/conditionWords.js';
+import { foundationBandShown } from '../../domain/display/foundationBandShown.js';
 import { humanize } from '../lib/format.js';
 import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 
@@ -109,7 +110,7 @@ function CausalSubstrate({ settlement, vm }) {
     .map(name => {
       const v = causal.variables[name] || {};
       const top = (v.contributors || []).find(c => c?.reason)?.reason || null;
-      return { name, band: v.band || 'adequate', score: v.score ?? 50, why: top };
+      return { name, band: foundationBandShown(vm?.active || settlement, name, v.band || 'adequate'), score: v.score ?? 50, why: top }; // BAR5-BAND: the Foundations' one reading
     })
     .sort((a, b) => (BAND_RANK[a.band] ?? 5) - (BAND_RANK[b.band] ?? 5));
 
