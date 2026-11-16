@@ -13,15 +13,15 @@ Counts are towns / instances / distinct lines, the auditors' counted instances (
 
 | rule | the two readings, and where | the one fact made (or read) | 150 before → after | 720 before → after | fresh 300 before → after | one change / line by line | named exclusions | guard and positive control | LAW 5 (G) |
 |---|---|---|---|---|---|---|---|---|---|
-| 8d.export | the service card's `exportable` tag and `status` (`EconomicsTab.jsx`, the record's `economicState.institutionalServices`) against the siege's own reach ("none of them can reach a buyer now", DS-ECO-10) | `economicsCrisisMarks.js :: serviceCardShown`: where trade is stopped (`chainStateShown.js :: tradeStoppedHere`, the reading the Imports list and the chain cards make) an exportable card's tag prints "Export stopped" (the leaf's own word, `STOPPED_WORD.under_siege`); its work for those inside keeps its own state word | 12 / 28 / 6 → 0 | 9 / 25 / 8 → see below | 26 / 67 / 7 → 0 | one change (every card) | none | `tests/domain/bar6EconStateShown.test.js` (b): r2s-under_siege-town-0 read blind | — |
-| 8e.svcOutput | the card's state (its houses only, `serviceStateShown`) against a service the leaf stops named in its output ("Armed escort & mercenary hire" beside "Armed escort (stopped)") | the same leaf: an output naming a service row the mark leaf marks for a crisis in force prints "Impaired" (`outputNamesMarkedService`: ruling CC1 (i)'s one reading, now shared by the chain cards and the service cards; `chainCardUnderCrisis` reads it unchanged); the flow header counts it (`flowHeaderCount`) | 5 / 5 / 1 → 0 | 1 / 1 / 1 → see below | 8 / 8 / 1 → 0 | one change | none | (b): r2s-under_siege-city-0 | — |
-| 8d.income | the share's mark (`rowStoppedBy(…,'income')`: "Iron & Metalwork" is NONE in the dependence table) against its chain's card of the same name, Impaired | `economicsCrisisMarks.js :: incomeKindShown`: under a siege, a share whose title is a chain's printed name (`chainPrintName(…).label`) takes the siege's partial mark "Curtailed by the siege." where the siege impaired that card (the record holds the chain at work, or on a worked-out ground); `incomeDescShown`, the head line and the card's "Contributes to" line read it | 3 / 3 / 1 → 0 | 2 / 2 / 1 → see below | 1 / 1 / 1 → 0 | one change | a chain the record holds impaired for its own cause (Spellcasting Services short of casters) is not the siege's: not marked | (b): r2s-under_siege-town-0 | — |
+| 8d.export | the service card's `exportable` tag and `status` (`EconomicsTab.jsx`, the record's `economicState.institutionalServices`) against the siege's own reach ("none of them can reach a buyer now", DS-ECO-10) | `economicsCrisisMarks.js :: serviceCardShown`: where trade is stopped (`chainStateShown.js :: tradeStoppedHere`, the reading the Imports list and the chain cards make) an exportable card's tag prints "Export stopped" (the leaf's own word, `STOPPED_WORD.under_siege`); its work for those inside keeps its own state word | 12 / 28 / 6 → 0 | 9 / 25 / 8 → 0 | 26 / 67 / 7 → 0 | one change (every card) | none | `tests/domain/bar6EconStateShown.test.js` (b): r2s-under_siege-town-0 read blind | — |
+| 8e.svcOutput | the card's state (its houses only, `serviceStateShown`) against a service the leaf stops named in its output ("Armed escort & mercenary hire" beside "Armed escort (stopped)") | the same leaf: an output naming a service row the mark leaf marks for a crisis in force prints "Impaired" (`outputNamesMarkedService`: ruling CC1 (i)'s one reading, now shared by the chain cards and the service cards; `chainCardUnderCrisis` reads it unchanged); the flow header counts it (`flowHeaderCount`) | 5 / 5 / 1 → 0 | 1 / 1 / 1 → 0 | 8 / 8 / 1 → 0 | one change | none | (b): r2s-under_siege-city-0 | — |
+| 8d.income | the share's mark (`rowStoppedBy(…,'income')`: "Iron & Metalwork" is NONE in the dependence table) against its chain's card of the same name, Impaired | `economicsCrisisMarks.js :: incomeKindShown`: under a siege, a share whose title is a chain's printed name (`chainPrintName(…).label`) takes the siege's partial mark "Curtailed by the siege." where the siege impaired that card (the record holds the chain at work, or on a worked-out ground); `incomeDescShown`, the head line and the card's "Contributes to" line read it | 3 / 3 / 1 → 0 | 2 / 2 / 1 → 0 | 1 / 1 / 1 → 0 | one change | a chain the record holds impaired for its own cause (Spellcasting Services short of casters) is not the siege's: not marked | (b): r2s-under_siege-town-0 | — |
 | 8e.open | DS-SUP-3's "is open but short of supplies, and it can do less" against the house's card and both tabs, every service "Stopped by the siege." | `economyStateProse.js :: houseStoppedWhole`: where every service row the house keeps is stopped by the siege (`rowStoppedBy`, kind 'service'), the line is drawn from the twin pool "A CATEGORY PRESENT BUT ITS HOUSE STOPPED" | 1 / 1 / 1 → 0 | 0 → 0 | 0 → 0 | one change | none | (b): r2r-hamlet-0 | — |
-| 9b.subsistence | `COMPLEXITY_LABEL.SUBSISTENCE` "Subsistence — survival economy" under the Prosperity word Comfortable | `labelBands.js :: complexityLabelShown`: at Comfortable or better the label prints its twin "Subsistence economy" (the head word and the label's own noun); `economicComplexity` untouched | 1 / 1 / 1 → 0 | 4 / 4 / 1 → see below | 2 / 2 / 1 → 0 | one change | the WEAK rows (the page itself says "a subsistence living") take the twin too | (b): r2r-thorp-0 | — |
-| 9c.carts | `foodSentence`'s carrier (`foodCarrier.js :: carriersOf`, the route's) against `foodBalance.importChannel` "teleportation circle" | `tradeListDisplay.js :: foodCarriersShown`: the record's channel names the carrier where no cart is one ("the teleportation circle brings", "airships bring"); every other channel keeps the route's | 1 / 1 / 1 → 0 | 6 / 6 / 6 → see below | 2 / 2 / 2 → 0 | one change | none | (b): r2r-town-12 | — |
-| 9c.no-imports | "No recorded imports." (the trade list) against the food row's "+ N imported" four lines below | `tradeListDisplay.js :: importsEmptyLineShown`: where the food row brings any food in (`foodRowShown`), the empty Imports column says "Only food is brought in." | 1 / 1 / 1 → 0 | 10 / 10 / 1 → see below | 4 / 4 / 1 → 0 | one change | none | (b): r2r-thorp-24 | — |
+| 9b.subsistence | `COMPLEXITY_LABEL.SUBSISTENCE` "Subsistence — survival economy" under the Prosperity word Comfortable | `labelBands.js :: complexityLabelShown`: at Comfortable or better the label prints its twin "Subsistence economy" (the head word and the label's own noun); `economicComplexity` untouched | 1 / 1 / 1 → 0 | 4 / 4 / 1 → 0 | 2 / 2 / 1 → 0 | one change | the WEAK rows (the page itself says "a subsistence living") take the twin too | (b): r2r-thorp-0 | — |
+| 9c.carts | `foodSentence`'s carrier (`foodCarrier.js :: carriersOf`, the route's) against `foodBalance.importChannel` "teleportation circle" | `tradeListDisplay.js :: foodCarriersShown`: the record's channel names the carrier where no cart is one ("the teleportation circle brings", "airships bring"); every other channel keeps the route's | 1 / 1 / 1 → 0 | 6 / 6 / 6 → 0 | 2 / 2 / 2 → 0 | one change | none | (b): r2r-town-12 | — |
+| 9c.no-imports | "No recorded imports." (the trade list) against the food row's "+ N imported" four lines below | `tradeListDisplay.js :: importsEmptyLineShown`: where the food row brings any food in (`foodRowShown`), the empty Imports column says "Only food is brought in." | 1 / 1 / 1 → 0 | 10 / 10 / 1 → 0 | 4 / 4 / 1 → 0 | one change | none | (b): r2r-thorp-24 | — |
 | 9d.no-exports | "No significant exports." (the ONE filtered list, `tradeListsAsPrinted`) against DS-ECO-11's "the raw material moves" (the record's own unfiltered exploitation grade) | `economyStateProse.js :: partialUnderNoExport`: where the printed export list holds nothing and trade is not stopped, the partial-exploitation line is drawn from its twin pool "EXPLOITATION: partiallyExploited, nothing exported" | 2 / 2 / 1 → 0 | 0 → 0 | 2 / 2 / 1 → 0 | one change | none | (b): the wide read's own town bar0-village-famine-rand-28 (C211337) | — |
-| 9a.hands (DS-ECO-6 v4) | "the same organised hands each time" (declared `organised crime` = semi-organised or above) against the Defense tab's "Semi-organized networks" | the existing crime band (`criminalStructureKeyOf` through `factsOf`): v4 declares `crime: ≥ organized` | 1 / 1 / 1 → 0 | 6 / 6 / 1 → see below | 2 / 2 / 1 → 0 | one declaration | none | (c): the variant's marks | — |
+| 9a.hands (DS-ECO-6 v4) | "the same organised hands each time" (declared `organised crime` = semi-organised or above) against the Defense tab's "Semi-organized networks" | the existing crime band (`criminalStructureKeyOf` through `factsOf`): v4 declares `crime: ≥ organized` | 1 / 1 / 1 → 0 | 6 / 6 / 1 → 0 | 2 / 2 / 1 → 0 | one declaration | none | (c): the variant's marks | — |
 | 9c.reassure (DS-ECO-9) | — | struck: the several-sources pool already declares `food: ≥ secure` on the food word the page prints (BAR5-FOOD's FD1); 0 at the base in every population (the audit read 1 / 8 / 6 before BAR5) | 0 → 0 | 0 → 0 | 0 → 0 | — | — | — | — |
 
 THE GUARD: `tests/domain/bar6EconStateShown.test.js` with its detector `tests/helpers/pageLaws/econBar6.mjs ::
@@ -74,7 +74,7 @@ their dues are undersold": no guild and no tax collector presumed).
 | "<Service> · Service · Export stopped" (the tag) | `economicsCrisisMarks.js :: EXPORT_STOPPED_TAG` | bar0-city-under_siege+famine-rand-29, -rand-36, bar0-hamlet-under_siege (any with a service economy) |
 | "Iron & Metalwork Curtailed by the siege." (the leaf's existing mark on a new row) | `incomeKindShown` | bar0-city-under_siege+famine-rand-27, -30, -36 |
 | "Subsistence economy" | `labelBands.js :: SUBSISTENCE_TWIN` | bar0-hamlet-calm-rand-40; r2r-thorp-0; r2r-hamlet-1 |
-| "… and the teleportation circle brings in …" / "… and airships bring in …" | `tradeListDisplay.js :: foodCarriersShown` | bar0-town-calm-rand-41; r2r-town-12; r2r-city-20 |
+| "… and the teleportation circle brings in …" (the record's own channel word) / "… and airships bring in …" | `tradeListDisplay.js :: foodCarriersShown` | bar0-town-calm-rand-41; r2r-town-12; r2r-city-20 |
 | "Only food is brought in." | `tradeListDisplay.js :: ONLY_FOOD_IMPORTED` | bar0-thorp-calm-rand-35; r2r-thorp-24; r2s-occupied-thorp-0 (an occupation) |
 | DS-ECO-11 "EXPLOITATION: partiallyExploited, nothing exported" v1–v4 (v4 the siege's) | the annex | bar0-village-famine-rand-28, -37 (a famine); fresh 300's two |
 | DS-SUP-3 "A CATEGORY PRESENT BUT ITS HOUSE STOPPED" v1–v4 | the annex | bar0-city-under_siege+famine-rand-36 (Lagoorum), Neugasse (the 150); a siege only |
@@ -105,7 +105,44 @@ NO NEW VOCABULARY. No new fact module (each reading is a function of an existing
   r2s-under_siege-city-0), `displayEconRelianceFoodWords.test.jsx` KEEP (→ r2s-under_siege-metropolis-3, the one of twelve
   besieged towns whose Iron card the siege leaves at work) and one NOT row's anchor, `economicsFoodTradeUnderSiege.test.jsx`
   (the carrier words), `economyStateProseDesk.test.js` (the new pool reached over a constructed siege).
-- THE LAW NET: see "THE NET" below.
+- `tests/lint/factLayers.walker.test.js` POOLS arm: the register's row `DS-ECO-6::TIER: minor shadow activity (≥3): declares
+  organised crime (layer 3)` FALLS (v4 now declares `crime: ≥ organized`; the pool placed one above it, layer 4, in the pool
+  table); its door (`scripts/fact-layers-door.mjs --shrink`) REFUSES at my tip because of the base's own RISE (`leaves
+  legalHouse: availableServices`, red at afa46d644): named for the close. The two new pools have their rows in
+  `factLayers.poolTable.json` (the table's own law).
+- `tests/lint/presumedThings.walker.test.js`: two rows of the register go STALE by my cures (`economy.generated.js openTrade
+  c6bb92c07a034b19`, the busy roads now declared; `streets dee285c9f8970f57`, the underground facet reworded); fresh hits 32
+  at both trees (no new hit of mine). The door's `--shrink` removes every stale row (12, 10 of them the base's): not run;
+  named for the close.
+- `tests/lint/writerReach.walker.test.js` (ruling WR1): my reader of `activeChains[].resourceDepleted` (the income mark's
+  worked-out ground) moves the frozen surfaceReach row: red at the base (6 arms, first mismatch "food on breakdown"), the same
+  6 arms at my tip with my row the first mismatch: named, not re-taken.
+- `tests/lint/proseComposed.walker.test.js` (2016 ceiling: 2017 at the base, 2019 at my tip; the corpus 2977: 2979 → 2988)
+  and `tests/lint/proseEntryContradiction.walker.test.js` (2740 / 3445 / the trailing-coordinate count 370: moved by my nine
+  variants; its ANCHOR 5, red at the base on a line address of the annex, is green at my tip, and its QUALIFY ARM reds on
+  the count instead): stored counts and a ceiling moved by the new variants: named, not raised.
+
+## THE NET (run alone at my tip, each to a file; every file red at my tip run alone at afa46d644)
+
+GREEN at my tip (the law suites and the renders at 3f775ff28; batch 4 after them moves one house-list read to the caller and names the circle by the record's word: ruinFilterRoster, presumedThings, chainPrintSites, factLayers and the touched component tests re-run green or as named at c1ca37812): `npm run typecheck:domain:strict` (1113, ceiling 1113), `npm run typecheck:ratchet` (167, ceiling 167),
+`npx eslint` on every changed source file, my guard (`tests/domain/bar6EconStateShown.test.js`, the 720's zero included),
+the round before's guards (`tests/domain/bar5*.test.js`, `tests/generators/bar5*.test.js`), `npx vitest run tests/architecture`
+(21 files; engineCoreLazyEdge and factHomesLazy among them: no new edge), and of the law suites: layerBoundaries,
+crisisStoppedRows, deepCraftKillList, corpusEcoTailGuards, customContentPresentationClaims, defensePostureAgainstItsFacts,
+economicStructure, hookThemeDraws, regenDerivedState, rosterDuplicateDraws, stressSecretDeclared, upkeepVocation,
+chainPrintSites, defenceFactReaders, noLegacyFactionReaders, ruinFilterRoster, siteCoherenceRatchet, styleLaw,
+tailExportsPdf3Batch3.
+
+RED AT BOTH TREES WITH THE SAME MESSAGE (the base's, not chased): tailHouses1Gaps, generationForkCensus, pipelinePinnedMode,
+tieProseDeclared, observedShapeReaders, proseCorpusBytes, proseTasteCorruption, tuningRegister. RED AT BOTH, MY FIGURE
+FURTHER (named above): factLayers, presumedThings, proseComposed, proseEntryContradiction, proseWiringCensus, writerReach;
+and of my symbol net: dossierStateProseProjection.contract, wiringCensusDeclared, observedShapeReaders, proseNumerics,
+dossierProseManifest (the same arms, my pools' counts), dossierPhoneFloorAllViews, economicsChainYieldLabel,
+publicProseEquality (the same messages). RED AT MY TIP ONLY: `tests/domain/facts/declarationRegisters.test.js`'s "fell" arm
+(a stored register moved by my declaration, named above). No law of my making is red.
+
+The build (`npm run build`, `npm run verify:dist`) was not run: my cures add no import to the eager core
+(`engineCoreLazyEdge` green) and no new module.
 
 ## REGISTRATIONS OWED
 
