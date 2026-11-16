@@ -3225,12 +3225,6 @@
     "edf5771d22df2612"
    ],
    [
-    "streets",
-    "family",
-    "Each season {settlement}'s streets go badly policed, fewer people back the {seat}, and it can do less about it.",
-    "62e5173fa967343e"
-   ],
-   [
     "siege",
     "family",
     "Everything at {settlement} answers to the siege now. Whatever the hall was arguing about before, the walls have settled ",
@@ -3249,28 +3243,10 @@
     "246702cf26374802"
    ],
    [
-    "streets",
-    "family",
-    "The garrison keeps {settlement}'s streets quiet and takes its own cut for doing it: dues collected twice, goods taken wi",
-    "5e6e7a154d1af7c3"
-   ],
-   [
-    "streets",
-    "family",
-    "Travellers reach {settlement} and find empty streets and soldiers on every corner. Nobody will talk about the {seat}, an",
-    "688db3a18d97da9d"
-   ],
-   [
     "armedForce",
     "family",
     "The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses d",
     "1170b553e4467d98"
-   ],
-   [
-    "streets",
-    "family",
-    "The criminals at {settlement} are losing their grip on the hall: the town is doing well again and its streets are guarde",
-    "633cf13452d62962"
    ],
    [
     "house: gambling",
@@ -27430,12 +27406,6 @@
     "family",
     "The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; other",
     "60f0207d2cd36202"
-   ],
-   [
-    "house: merchant guild",
-    "family",
-    "The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the mo",
-    "60e5ec265761979f"
    ],
    [
     "clergy",

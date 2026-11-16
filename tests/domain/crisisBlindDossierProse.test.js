@@ -133,6 +133,8 @@ const PRESENCE_SETTER = {
   'danger coming': (f, _a, want) => ({ ...f, dangerComing: want }),
   'criminal income': (f, _a, want) => ({ ...f, criminalIncome: want }),
   'timber at hand': (f, _a, want) => ({ ...f, timberAtHand: want }),
+  // BAR6-POWERS (2026-11-16): `seat members` (`seatMembers.js`), declared by DS-POW-5 › council's counterforce line and its twin
+  'seat members': (f, _a, want) => ({ ...f, seatMembers: want }),
   imports: (f, _a, want) => ({ ...f, imports: want ? ['X'] : [] }),
   exports: (f, _a, want) => ({ ...f, exports: want ? ['X'] : [] }),
   priest: (f, _a, want) => ({ ...f, faith: { ...f.faith, seniorCleric: want ? { name: 'X' } : null } }),

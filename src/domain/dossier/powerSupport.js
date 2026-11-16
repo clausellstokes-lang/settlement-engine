@@ -282,11 +282,13 @@ export function houseBacksOf(settlement) {
 
 /**
  * THE POWERS EACH HOUSE STANDS BEHIND, AS THE PAGE PRINTS THEM (BAR6-POWERS, LAW 10f-backs, the audit's C102099; the brief
- * BAR6's fact (d), a reading at print): `houseBacksOf` with ONE reading more, THE RULER'S OWN SEAT BACKS THE RULER ONLY. The
- * seat's house (`seatHouseName`, the Government shelf's first) lands its catalogue shares on the ruler AND on the leader of each
- * other archetype its row names, so the page printed "Backs · Craft Guilds · Grand Guild Consortium" beside the two powers'
- * high quarrel (28 towns of the census's 720 at 600b7683a). Here the house the ruler sits in takes its whole weight to the
- * ruler, in the ruler's own landing; the DM's word and a founding mark stand as written.
+ * BAR6's fact (d), a reading at print, NARROWED by the chair's ruling of 2026-11-16 to the fault it counted): `houseBacksOf`
+ * with ONE reading more, THE RULER'S OWN SEAT DOES NOT BACK THE RULER'S HIGH RIVAL. The seat's house (`seatHouseName`, the
+ * Government shelf's first) lands its catalogue shares on the ruler AND on the leader of each other archetype its row
+ * names, so the page printed "Backs · Craft Guilds · Grand Guild Consortium" beside the two powers' HIGH quarrel (28 towns
+ * of the census's 720 at 600b7683a). Here a power the ruler is in high conflict with (`powerStructure.conflicts`, the
+ * quarrel the page prints) leaves the seat's list, its share to the ruler's own landing. A second power with NO such quarrel
+ * stays (a hall partly in another's pocket is true, and the line's interest); the DM's word and a founding mark stand.
  * ⛔ PRINT ONLY. `houseBacksOf` stays the birth's arithmetic: `generators/people/castPowers.js` (the memberships) and
  * `generators/power/rulerKin.js` deal the cast from it, so a change there re-draws people and ties (measured on the wide
  * read's 150: 50 towns moved). The page's readers read this one.
@@ -300,8 +302,15 @@ export function houseBacksShownOf(settlement) {
   const seat = ruler && Array.isArray(institutions) ? seatHouseName(institutions) : null;
   const list = seat ? byHouse.get(seat) : undefined;
   const own = list ? list.find((b) => b.faction === ruler) : undefined;
-  if (!list || !own || list.length < 2 || list.some((b) => b.basis === 'authored' || b.basis === 'founded')) return byHouse;
-  byHouse.set(/** @type {string} */ (seat), [{ ...own, share: list.reduce((sum, b) => sum + b.share, 0) }]);
+  if (!list || !own || list.some((b) => b.basis === 'authored' || b.basis === 'founded')) return byHouse;
+  const conflicts = /** @type {{ powerStructure?: { conflicts?: unknown } }} */ (settlement).powerStructure?.conflicts;
+  const rivals = new Set((Array.isArray(conflicts) ? conflicts : [])
+    .filter((c) => !!c && String(c.intensity).toLowerCase() === 'high' && Array.isArray(c.parties) && c.parties.includes(ruler))
+    .flatMap((c) => c.parties.filter((p) => p !== ruler)));
+  const refused = list.filter((b) => rivals.has(b.faction));
+  if (!refused.length) return byHouse;
+  const moved = refused.reduce((sum, b) => sum + b.share, 0);
+  byHouse.set(/** @type {string} */ (seat), list.filter((b) => !rivals.has(b.faction)).map((b) => (b === own ? { ...b, share: b.share + moved } : b)));
   return byHouse;
 }
 

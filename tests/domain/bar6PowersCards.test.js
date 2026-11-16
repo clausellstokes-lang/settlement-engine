@@ -7,6 +7,7 @@
 // census's 720 and the fresh 300: the measure in docs/chair/2026-11-16/bar6/BAR6-POWERS-HANDBACK.md), every town run and
 // every failure collected; (b) A POSITIVE CONTROL, a record built here from the wide read's own rows (C121364, C128237,
 // C110252, C102099, C1980, C91256), on which the detector or the atom MUST still fire.
+import { execSync } from 'node:child_process';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -153,11 +154,24 @@ describe('BAR6-POWERS · 10f, 10h and 6d-members (detectors: law10f, law10h over
 });
 
 describe('BAR6-POWERS · the chair\'s ruling IT1: the page reads the seat\'s backing from one print-only leaf', () => {
-  it('the seat backs the ruler only on the page; the birth\'s arithmetic (`houseBacksOf`) is untouched', () => {
+  it('the seat drops the ruler\'s high rival on the page; the birth\'s arithmetic (`houseBacksOf`) is untouched', () => {
     const town = towns[SEAT_TOWN]; const seat = /** @type {string} */ (seatHouseName(town.institutions));
     const ruler = town.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning).faction;
-    expect(houseBacksOf(town).get(seat).map((/** @type {any} */ b) => b.faction).length).toBeGreaterThan(1);
+    const raw = houseBacksOf(town).get(seat).map((/** @type {any} */ b) => b.faction);
+    expect(raw).toContain('Craft Guilds');
     expect(houseBacksShownOf(town).get(seat).map((b) => b.faction)).toEqual([ruler]);
+  });
+  it('(KEEP, the chair\'s narrowing of 2026-11-16) a second power the ruler has NO high quarrel with stays on the seat\'s line', () => {
+    const town = structuredClone(towns[SEAT_TOWN]); const seat = /** @type {string} */ (seatHouseName(town.institutions));
+    town.powerStructure.conflicts = (town.powerStructure.conflicts || []).filter((/** @type {any} */ c) => !(c.parties || []).includes('Craft Guilds'));
+    expect(houseBacksShownOf(town).get(seat)).toEqual(houseBacksOf(town).get(seat));
+    expect(houseBacksShownOf(town).get(seat).map((b) => b.faction)).toContain('Craft Guilds');
+  });
+  it('(the chair\'s ruling PL1) the power desk is drawn at print only: no generator imports it', () => {
+    const importers = execSync("git grep -l -E \"from '[^']*(powerStateProse|dossierStateProse/power\\.generated|powerDeskRead|dossierMounts|printProse)\\.js'\" -- src/generators || true", { encoding: 'utf8' }).trim();
+    const desk = execSync("git grep -l -E \"from '[^']*dossierStateProse/power\\.generated\\.js'\" -- src || true", { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+    expect(desk.length).toBeGreaterThan(0);
+    expect(importers).toBe('');
   });
   it('(1) a list the DM authored (X-45) prints as authored: the shown reading narrows only the derived list', () => {
     const town = structuredClone(towns[SEAT_TOWN]); const seat = /** @type {string} */ (seatHouseName(town.institutions));
@@ -184,6 +198,6 @@ describe('BAR6-POWERS · the chair\'s ruling IT1: the page reads the seat\'s bac
     expect(institutionsWithServices(town).find((r) => r.inst.name === seat)?.backs.map((/** @type {any} */ b) => b.faction)).toEqual(shown);
     expect(institutionBackers(town).get(seat)).toEqual(shown);
     const onWeb = [...deriveFactionSupport(town)].filter(([, bucket]) => bucket.some((x) => x.name === seat)).map(([f]) => f);
-    expect(onWeb).toEqual(shown);
+    expect(new Set(onWeb)).toEqual(new Set(shown));
   });
 });
