@@ -25,6 +25,11 @@ const HALFWAY_CHAIN = {
   clay: /clay|pottery|ceramic|brick/i,
 };
 
+// the houses that work several raw inputs (`RESOURCE_CHAINS`: the smelter's three ores), by the page's names for them
+const SEVERAL_INPUTS = {
+  smelter: ['iron ore', 'copper ore', 'gold and silver ore'],
+};
+
 // the finished goods a missing house would make
 const FINISHED_BY = {
   smelter: /\b(tools|weapons|armou?r|blades)\b/i,
@@ -124,6 +129,18 @@ export function law3(T, town) {
       const re = new RegExp(`\\b${word}s?\\b`, 'i');
       for (const c of T.cards) {
         if (done.has(c.name) || !/^Crafts$/.test(c.cat.trim())) continue; // a craft that works the good (precision draw 2: a pasture is no work standing idle)
+        // NAMED EXCLUSION (BAR5-CHAINS, 2026-11-16; the chair's ruling M-S of TAIL-DEFECON-R): A HOUSE IS SHORT ONLY IF NONE OF
+        // ITS INPUTS REACHES IT. The smelter works iron, copper and gold or silver ore; where the page names one of them needed
+        // and not another, the smelter smelts the other, and its rows stand true (7 rows of the instance towns: copper needed,
+        // iron at hand).
+        const several = SEVERAL_INPUTS[c.name.toLowerCase()];
+        if (several && several.some((o) => !need.text.toLowerCase().includes(o))) continue;
+        // NAMED EXCLUSION (BAR5-CHAINS, 2026-11-16; the chair's ruling R2 of 2026-11-16 09:27 UTC): A LADDER RUNG RUNS NO
+        // CHAIN BUT THE SAWMILL'S. The need list names the house it requires ("Required by Apothecary"); a rung of that house
+        // ("Apothecary (established)") is not asked of the chain by the record's one reader (`houseInputAtHand.js ::
+        // houseRunsChain`, RUNG_HEADS), a MEASURED KIND R2 left for the next round (1 row of the 720, 0 of the 300).
+        const reqd = Object.values(T.record?.resourceAnalysis?.imports?.reasons || {}).map((r) => /^Required by (.+?) but not available/.exec(String(r))?.[1]).filter(Boolean);
+        if (reqd.length && !reqd.includes(c.name) && reqd.some((h) => c.name.startsWith(`${h} (`))) continue;
         if (c.marked || c.chips.some((ch) => ch.marked)) continue;
         if (!c.lines.some((l) => re.test(l.text))) continue;
         done.add(c.name);
@@ -151,6 +168,10 @@ export function law3(T, town) {
     if (!ag) continue;
     for (const ch of T.chains) {
       if (!ch.outputs || ch.yieldsNormally || !(chainRe.test(ch.name) || ch.from.some((f) => chainRe.test(f)))) continue;
+      // NAMED EXCLUSION (BAR5-CHAINS, 2026-11-16): AN ENTREPÔT CARD WORKS NO MATERIAL HERE. "Silk & Luxury Textiles · Trade &
+      // entrepôt" carries cloth made elsewhere through the town (`chainCarrier.js`: transit); its name holds "Textiles", not
+      // the town's wool (6 rows of the instance towns, all of them this card).
+      if (/entrep/i.test(ch.cat)) continue;
       const hit = prod.find((re) => re.test(ch.outputs));
       if (hit) push('L3.halfway', 'Systems/Economics', ch.outIdx, ch.outputs, { tab: ag.tab, i: ag.i, line: ag.text }, `the page says work on ${r} stops half-way (no ${g.missing.join(', ')}); chain ${ch.name} prints finished goods of the missing house`);
     }

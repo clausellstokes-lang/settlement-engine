@@ -17,7 +17,7 @@ import {
 import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
 import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
 import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
-import { houseHead, houseInputAtHand, houseRunsChain, localProducerSupplies, terrainSynonymsFor } from '../domain/facts/houseInputAtHand.js';
+import { houseHead, houseInputAtHand, houseRunsChain, localProducerSupplies, terrainSynonymsFor, tradeFinisherIn } from '../domain/facts/houseInputAtHand.js';
 
 // ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
 // The terrain table (`TERRAIN_DATA`) says what a kind of ground usually lacks and yields. The town's
@@ -487,9 +487,16 @@ const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => 
   // ("Work on the timber here stops half-way: no sawmill or carpenters' guild finishes it.", validationOnPage.js) are
   // those no house of the same kind stands for (houseHead, as (3) and (5) read a house): 'Sawmill' is not missing
   // beside 'Sawmill (commercial)', nor "Carpenters' guild" beside 'Carpenters (5-15)'.
+  // BAR5-CHAINS (a) (LAW 3's L3.halfway, the chair's direction of BRIEF-BAR5; vetoable by the owner): A FINISHER BY TRADE
+  // STANDS FOR THE NAMED HOUSE, AS THE PAGE READS IT. The gap named "Fulling mill" missing beside a Fuller and
+  // "Leatherworkers' guild" beside a Cobbler's guild (98 of the 171 houses the census's 720 half-way towns called missing)
+  // while the page's own reader answered them (`validationOnPage.js :: resourceGapLines`, R1: where one finisher of the
+  // missing houses stands, the work does not stop half-way). One table, `houseInputAtHand.js :: tradeFinisherIn`, read by
+  // catalogue identity, and the page's rule: no gap where a finisher of one of the missing houses stands.
   exploitation.partiallyExploited?.forEach(chain => {
     const missingInsts = chain.processingInstitutions.filter(name =>
       !institutions.some(i => i.name === name || houseHead(i?.name) === houseHead(name)));
+    if (missingInsts.some((name) => tradeFinisherIn(institutions, name))) return;
     if (missingInsts.length > 0) {
       gaps.push({
         chain:   chain.rawResource,
@@ -617,7 +624,7 @@ export const generateResourceAnalysis = (
   const gaps           = evaluateInstitutionChain(
     exploitation,
     nativeInstitutions,
-    { config, economicState }, // the record in the making: houseInputAtHand reads it as the page reads the record
+    { config, economicState, resourceAnalysis: { imports } }, // the record in the making: houseInputAtHand reads it as the page reads the record (BAR5-CHAINS (b): the need list too)
   );
   const resourceConditions = nativeResourceConditionRecords(config);
   // after the gaps and the town's settings: a complete row reads both (#457, #1163)

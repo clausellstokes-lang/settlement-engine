@@ -97,9 +97,12 @@ const SHORT_KEEP = [
   ['r2r-town-15', 'services', 'Plates, jugs, storage crocks. Functional and cheap.'], // a potter clay reaches
   ['r2r-town-15', 'services', 'Kiln-fired clay bricks for construction.'],
   ['r2s-under_siege-village-3', 'services', 'Evaporation, boiling, or mining to produce raw salt.'], // B06897: the page reads its salt as bought in (no gap line)
-  // S7: the vintner's and the glassblower's gaps hold in every census town that holds the house: the record's fault, unmarked
-  ['r2r-city-44', 'services', 'House wine by the jug or bottle.'], // 10827, left to the record's measuring seat
-  ['r2s-famine-town-1', 'services', 'Bottles, flasks, and cups.'], // B04346, the same
+  // BAR5-CHAINS (2026-11-16, BRIEF-BAR5 (b), the chair's direction under HW1; re-keyed by identity, the assertion unchanged): the
+  // record's fault S7 named is cured: a good the terrain's need list names ("Needed, and not brought in: grapes") is no longer
+  // brought by the route alone, so r2r-city-44's vintner and r2s-famine-town-1's glassblower are short, truly (each beside its
+  // need line). Measured on the 720 at the tip: 36 of 184 vintner towns hold a vintner its grapes reach (their own ground or an
+  // import); 0 of 13 glassblower towns hold a glassblower its sand reaches, so the glassblower's keep row has no town and goes.
+  ['r2r-city-1', 'services', 'House wine by the jug or bottle.'], // a vintner its grapes reach (was r2r-city-44)
 ];
 
 /** S8: (seed, the house's catalogue id, the mark the house takes under the town's crisis). */

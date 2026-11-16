@@ -47,8 +47,13 @@ const SMELTER_IMPORTS = [['r2s-under_siege-town-1', 'Smelter | iron ore | import
 
 /** M-V NOT: a vintner on a route (the smallest, a town of 540; a famine; an occupation; the largest, 344,689), a
  * glassblower on a route (511; a famine; 2,465). */
-const ROUTE_FED = [['r2r-town-22', 'Vintner'], ['r2r-city-44', 'Vintner'], ['r2s-occupied-city-3', 'Vintner'], ['r2r-metropolis-8', 'Vintner'],
-  ['r2r-town-55', 'Glassblower'], ['r2s-famine-town-1', 'Glassblower'], ['r2r-town-51', 'Glassblower']];
+// BAR5-CHAINS (2026-11-16, BRIEF-BAR5 (b), the chair's direction under HW1, vetoable by the owner; re-keyed by identity, the
+// assertion unchanged): M-V is NARROWED: the route brings grapes or glass sand only where the record's own need list does not name
+// the good (`houseInputAtHand.js :: needListNames`). The seven towns below named it (r2r-town-22, r2r-city-44, r2s-occupied-city-3,
+// r2r-metropolis-8; r2r-town-55, r2s-famine-town-1, r2r-town-51), their houses are short now, beside the page's "Needed, and not
+// brought in". Measured on the 720 at the tip: 36 of 184 vintner towns on a route hold a vintner short of nothing; 0 of 13 glassblower
+// towns hold such a glassblower (no glassblower row is left).
+const ROUTE_FED = [['r2r-town-16', 'Vintner'], ['r2r-town-32', 'Vintner'], ['r2r-city-1', 'Vintner'], ['r2r-city-3', 'Vintner']];
 /** M-V KEEP: an isolated vintner (6,341; 55,265), an isolated glassblower, a besieged vintner (11,745; 271,164). */
 const ROUTE_SHUT = [['r2r-city-49', 'Vintner', 'grapes'], ['r2r-metropolis-54', 'Vintner', 'grapes'], ['r2r-town-9', 'Glassblower', 'glass sand'],
   ['r2s-under_siege-city-2', 'Vintner', 'grapes'], ['r2r-metropolis-14', 'Vintner', 'grapes']];

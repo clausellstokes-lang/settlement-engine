@@ -17,6 +17,7 @@
  */
 import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, crisisOfMarkKind, markedDescription, ordinaryTimesLine } from './crisisStoppedRow.js';
 import { liveHouseOf } from '../facts/presence.js'; // BAR3-LABELS-2 L3: the roster house a chain's catalogue house answers to
+import { serviceRowsOf } from '../dossier/entityLinks.js'; // BAR5-CHAINS CC1: the service rows as the Services and Institutions tabs read them
 
 /** The states a flow card prints as working (`chainStateShown.js`'s own set). */
 const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
@@ -54,6 +55,12 @@ export function chainCardUnderSiege(town, record, shown) {
  * where every live processing house carries that one crisis's mark: `rowStoppedBy` asked of that crisis alone, its
  * partial kind read through `crisisOfMarkKind` (the leaf's own reading, no table copied). A card with one house the
  * crisis leaves unmarked keeps its word; any other card is the one it was given.
+ * RULING CC1 (the chair, 2026-11-16 17:54 UTC; vetoable by the owner; BAR5-CHAINS, LAW 3's L3.outputs and
+ * L3.chainOverStopped): THE CARD'S WORD AND ITS SERVICES' MARKS ARE ONE DECISION. (i) A card that names among its outputs
+ * a service the leaf marks for a crisis in force ("Armed escort" on "Adventuring & Escort", its row "(stopped)" on the
+ * Services tab) prints "impaired"; (ii) a house whose every service row one crisis marks counts as marked by it, as a house
+ * the leaf marks itself does (a wayside shrine whose every service the siege stops, under "Faith & Worship"). The leaf is
+ * read by its own function (`rowStoppedBy`, kind 'service'), so every mark it gives counts here unspelled.
  * @template {{ status?: unknown }} C
  * @param {object | null | undefined} town the settlement
  * @param {Record<string, unknown>} record the chain as the record holds it (`economicState.activeChains[]`)
@@ -64,17 +71,39 @@ export function chainCardUnderCrisis(town, record, shown) {
   const crises = stoppingCrisesOf(town);
   if (!CARD_WORKING.has(String(shown?.status ?? '')) || crises.length === 0) return shown;
   if (crises.includes('under_siege') && rowStoppedBy(town, 'chain', record, ['under_siege']) === 'under_siege') return { ...shown, status: 'impaired' }; // the card's own mark
+  const rows = serviceRowsOf(/** @type {{ availableServices?: unknown } | null | undefined} */ (town)?.availableServices).map(({ svc }) => svc); // the tabs' own rows (`dossier/entityLinks.js`)
+  /** @param {string} crisis @param {Record<string, unknown>} row the leaf marks this service row for this crisis */
+  const serviceMarked = (crisis, row) => {
+    const kind = rowStoppedBy(town, 'service', row, [crisis]);
+    return kind !== null && crisisOfMarkKind(kind) === crisis;
+  };
+  // CC1 (i): an output the card names that is a service the leaf marks (the Services tab's own row)
+  const named = /** @type {{ outputs?: unknown } | null | undefined} */ (/** @type {unknown} */ (shown))?.outputs;
+  const outputs = (Array.isArray(named) ? named : []).map(folded);
+  const outMarked = crises.some((crisis) => rows.some((row) => {
+    const name = folded(row.name);
+    return name.length >= 6 && outputs.some((o) => ` ${o} `.includes(` ${name} `)) && serviceMarked(crisis, row);
+  }));
+  if (outMarked) return { ...shown, status: 'impaired' };
   const houses = (Array.isArray(record?.processingInstitutions) ? /** @type {unknown[]} */ (record.processingInstitutions) : [])
     .map((h) => liveHouseOf(town, h)).filter(Boolean);
   if (houses.length === 0) return shown;
   /** @param {string} crisis @param {unknown} h */
   const marks = (crisis, h) => {
     const kind = rowStoppedBy(town, 'house', /** @type {Record<string, unknown>} */ (h), [crisis]);
-    return kind !== null && crisisOfMarkKind(kind) === crisis; // SW1: stopped, or the crisis's partial kind
+    if (kind !== null && crisisOfMarkKind(kind) === crisis) return true; // SW1: stopped, or the crisis's partial kind
+    // CC1 (ii): a house whose every service row the crisis marks is marked (its card on the Institutions tab prints every
+    // service so)
+    const name = String(/** @type {{ name?: unknown }} */ (h)?.name ?? '');
+    const own = rows.filter((row) => row.institution === name);
+    return own.length > 0 && own.every((row) => serviceMarked(crisis, row));
   };
   const marked = crises.some((crisis) => houses.every((h) => marks(crisis, h)));
   return marked ? { ...shown, status: 'impaired' } : shown;
 }
+
+/** @param {unknown} x @returns {string} lower case, words only, single spaces (a service's name inside an output's) */
+const folded = (x) => String(x ?? '').toLowerCase().replace(/[^a-z' ]+/g, ' ').replace(/\s+/g, ' ').trim();
 
 /**
  * The marks of the flow cards (keyed by the card's chain as shown) and the reading of the share a card names.
