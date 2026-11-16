@@ -1,0 +1,9 @@
+{"id":"C38436","town":"bar0-town-occupied-rand-26","sev":"MED","kind":"STATE","why":"prints Food Security Pressured; FOOD's printed word is Secure (band secure, deficit 2%, imports cover it, 6 months stored)","other":""}
+{"id":"C38462","town":"bar0-town-occupied-rand-26","sev":"MED","kind":"STATE","why":"'Food: Pressured' but the FOOD word the page prints is Secure","other":"C38436"}
+{"id":"C38482","town":"bar0-town-occupied-rand-26","sev":"MED","kind":"STATE","why":"'Food · Pressured' but the FOOD word the page prints is Secure","other":"C38436"}
+{"id":"C38889","town":"bar0-town-occupied-rand-26","sev":"MED","kind":"PAIR","why":"says no rival outweighs Church Council; GOVERNMENT has Occupation Authority Strong over Church Council Significant, and the page says the council answers to the occupiers","other":"C38836"}
+{"id":"C39188","town":"bar0-town-occupied-rand-26","sev":"MED","kind":"STATE","why":"Daily Life prints Food Pressured; FOOD's printed word is Secure","other":"C38436"}
+{"id":"C39297","town":"bar0-town-occupied-rand-26","sev":"MED","kind":"STATE","why":"Tonight sheet prints 'Food Pressured'; FOOD's printed word is Secure","other":"C38436"}
+{"id":"C39734","town":"bar0-village-calm-rand-24","sev":"MED","kind":"LACKS","why":"Military Party described as an armed patrol of residents, the primary recourse; DEFENCE gives militia none, watch none, garrison none","other":"C39774"}
+{"id":"C40017","town":"bar0-village-calm-rand-24","sev":"MED","kind":"PAIR","why":"says everything looks recently built (village is 58 years old), yet the Daily Life tab says the old buildings are patched and nothing new goes up","other":"C39999"}
+{"id":"DONE","lines":1728,"blocks":2,"flags":8}
