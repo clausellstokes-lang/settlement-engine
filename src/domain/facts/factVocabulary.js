@@ -215,7 +215,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [dangerComing] @property {boolean} [magicSupply] @property {boolean} [criminalIncome]
- * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
+ * @property {ReadonlyArray<string>} [foodSources] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
  */
@@ -368,6 +368,13 @@ export const FACT_DIMENSIONS = Object.freeze({
   'criminal income': dim({ shape: 'presence', home: 'criminalIncome', reader: (/** @type {FactsLike} */ f) => bool(f.criminalIncome) }),
   ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, dim({ shape: 'presence', home: 'foodSources',
     reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.foodSources) ? f.foodSources.includes(src) : undefined) })])),
+  // BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b, beside the food-source atoms): `source spent` = the food record's leading source
+  // has grounds on the resource record and none is available (`leadingSourceSpent.js`). A line that says the town leans on that
+  // source for its food presumes the opposite (REVIEW-BAR-4 C26403, C30469).
+  'source spent': dim({ shape: 'presence', home: 'leadingSourceSpent', reader: (/** @type {FactsLike} */ f) => bool(f.leadingSourceSpent) }),
+  // BAR4-CORPUS-ECO (the chair's FW1 of 2026-11-16): `own plots` = a subsistence house tills for the table while the food
+  // record names no grain (`ownPlots.js`): a line that gives the record's one source as what every table leans on first refuses it.
+  'own plots': dim({ shape: 'presence', home: 'ownPlots', reader: (/** @type {FactsLike} */ f) => bool(f.ownPlots) }),
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
   culture: dim({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,

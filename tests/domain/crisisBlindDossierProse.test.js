@@ -123,6 +123,9 @@ const PRESENCE_SETTER = {
   starving: (f, _a, want) => ({ ...f, famine: { ...f.famine, starvingAllowed: want } }),
   ...Object.fromEntries(['fish', 'grain', 'game', 'livestock'].map((k) => [k, (f, _a, want) => ({
     ...f, foodSources: [...(f.foodSources || []).filter((x) => x !== k), ...(want ? [k] : [])] })])),
+  // BAR4-CORPUS-ECO (2026-11-16): the two atoms added beside the food sources (`leadingSourceSpent.js`, `ownPlots.js`)
+  'source spent': (f, _a, want) => ({ ...f, leadingSourceSpent: want }),
+  'own plots': (f, _a, want) => ({ ...f, ownPlots: want }),
   imports: (f, _a, want) => ({ ...f, imports: want ? ['X'] : [] }),
   exports: (f, _a, want) => ({ ...f, exports: want ? ['X'] : [] }),
   priest: (f, _a, want) => ({ ...f, faith: { ...f.faith, seniorCleric: want ? { name: 'X' } : null } }),

@@ -1312,7 +1312,7 @@ sentence in two voices. **No named deaths.**
 
 **SECURE**
 1. `[ledger · no hunger]` In an ordinary season {settlement} has enough to eat, or near enough.
-2. `[street · no hunger]` The town eats. It is not a subject anyone raises unprompted.
+2. `[street · no hunger · no crisis]` The town eats. It is not a subject anyone raises unprompted.
 3. `[threshold · no hunger · stores: < 12]` {settlement} is fed, but what it keeps put by would not outlast a run of poor harvests.
 4. `[street · hunger]` The town ate well enough until the hunger came, and the margin it had is the first thing the hunger has spent.
 5. `[ledger · hunger]` {settlement}'s counts came out ahead before the hunger; they do not now, and nobody at {settlement} calls the town fed.
@@ -1377,16 +1377,23 @@ sentence in two voices. **No named deaths.**
 3. `[visitor · colour]` A visitor may not see it, but some of the food on {settlement}'s tables was never grown or bought: it came by spell or by prayer.
 
 **FOOD SOURCES: one source**
-1. `[ledger · no crisis: famine]` {settlement}'s own food comes first of all from its {good}, so one bad year for the {good} is felt across the whole town.
-2. `[street · colour]` Of the food {settlement} raises for itself, its {good} comes first, and after a poor season for the {good} there is less to go round.
-3. `[unfolding · no crisis: famine]` {settlement} leans first on its {good} for its food, so a bad season for the {good} is felt at every table.
+1. `[ledger · no crisis: famine · no source spent · no own plots]` {settlement}'s own food comes first of all from its {good}, so one bad year for the {good} is felt across the whole town.
+2. `[street · no source spent · no own plots]` Of the food {settlement} raises for itself, its {good} comes first, and after a poor season for the {good} there is less to go round.
+3. `[unfolding · no crisis: famine · no source spent · no own plots]` {settlement} leans first on its {good} for its food, so a bad season for the {good} is felt at every table.
+4. `[ledger · source spent]` {settlement}'s own food once came first from its {good}, and the grounds are worked out: what the town still raises for itself is the less for it.
+5. `[street · source spent]` {settlement} has worked out the grounds of its {good}, and there is less of its own food on every table for it.
+6. `[ledger · own plots · no source spent]` {settlement}'s own food comes from its {good} and from the holdings its families till, so a bad season for either is felt at every table.
+7. `[street · own plots · no source spent · no crisis: famine]` Of the food {settlement} raises for itself, its {good} and what each family grows on its own holding come first, and a poor season in either means less to go round.
 
 **FOOD SOURCES: several, the largest named**
-1. `[ledger · no crisis: famine]` {settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.
-2. `[street · no crisis: famine · food: ≥ secure]` The {good} feeds {settlement} first, but not alone; when one source has a lean year, the others carry it.
-3. `[unfolding · no crisis: famine · food: ≥ secure]` With more than its {good} to rely on, {settlement} can take a bad season in one source without going hungry.
+1. `[ledger · no crisis: famine · no crisis: under_siege · food: ≥ importDependent · no source spent]` {settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.
+2. `[street · no crisis: famine · food: ≥ secure · no source spent]` The {good} feeds {settlement} first, but not alone; when one source has a lean year, the others carry it.
+3. `[unfolding · no crisis: famine · food: ≥ secure · no source spent]` With more than its {good} to rely on, {settlement} can take a bad season in one source without going hungry.
 4. `[ledger · crisis: famine]` {settlement}'s food comes from more than one source, and this year that has not been enough: the town is hungry all the same.
 5. `[street · crisis: famine]` Having more than its {good} to rely on has not kept the famine out of {settlement}.
+6. `[ledger · no crisis: famine · no crisis: under_siege · food: ≤ deficit · no source spent]` {settlement}'s food comes from more than one source, the {good} most of all, and this year all of them together fall short of what the town eats.
+7. `[ledger · crisis: under_siege · no crisis: famine · no source spent]` {settlement}'s food comes from more than one source, the {good} most of all, and with the siege on, what they give and what is stored is all the town has to eat.
+8. `[ledger · no crisis: famine · source spent]` {settlement} eats from more than one source, but the grounds its {good} came from are worked out, and the others now carry more of the load.
 
 **FOOD SOURCES: four or more**
 1. `[ledger · colour]` {settlement} eats from many sources at once, the {good} first among them, and no single failure can empty its tables.
@@ -1774,7 +1781,7 @@ shape.
 **INCOME MIX: one source carries the town**
 1. `[ledger · colour]` More than half of what {settlement} earns comes from a single source, and most households depend on it one way or another.
 2. `[street · colour]` Almost everyone's living at {settlement} depends on one source of income, whether or not they earn from it directly.
-3. `[threshold · no hunger · prosperity: ≥ moderate]` {settlement} lives on one trade. It is doing well enough now, but if that trade has a bad year, the whole town has a bad year.
+3. `[threshold · no hunger · prosperity: ≥ moderate]` {settlement} lives largely on one source of income. It is doing well enough now, but if that source has a bad year, the whole town has a bad year.
 
 **INCOME MIX: two or three sources between them**
 1. `[ledger]` {settlement}'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone.
@@ -2546,8 +2553,8 @@ own entailment and licenses nothing about who runs it.
 
 **operation role `duty evasion`**
 1. `[ledger · no crisis: under_siege]` Goods reach {settlement} unrecorded: the cargo lists are false, and the dues owed on them are never paid.
-2. `[street · gate · no crisis: under_siege]` A share of what arrives at {settlement} never appears at the gate, and the share is not small.
-3. `[counterforce · no crisis: under_siege]` A good share of the goods that reach {settlement} pays none of the dues owed on it.
+2. `[street · gate · no crisis: under_siege]` A share of what arrives at {settlement} never appears at the gate, and the dues on it are never paid.
+3. `[counterforce · no crisis: under_siege]` Some of the goods that reach {settlement} pay none of the dues owed on them.
 
 **operation role `unlicensed revenue`** {colour}
 1. `[ledger]` There is gambling at {settlement} that nobody licenses, and it funds a good deal more than itself.

@@ -9,7 +9,10 @@
  * every printed line against the town's resources and its food record. Keyed by the printed text.
  */
 
+import { ritesHoldAChain } from '../../domain/facts/chainRites.js'; // BAR4-CORPUS-ECO (FS1): the rites' one reader
+
 /** The grain line that sells a surplus, and its twin for a town whose own fields do not cover what it eats. */
+
 export const GRAIN_SURPLUS_LINE = 'Surplus from local harvest sold to nearby settlements and passing merchants: steady income tied to the growing season.';
 export const GRAIN_OWN_FIELDS_LINE = 'Grain from local fields sold within the settlement: it eats more than it grows, so none is left to sell to other settlements.';
 
@@ -46,7 +49,9 @@ export const INCOME_LINE_SIBLINGS = Object.freeze({
 // its branch in economicState.js by its constant; `trueIncomeDesc` reads the finished record (the roster, the
 // siege, the final trade lists, the chains' states) and gives the declared twin where the original is false, or ''
 // where no true line is held (the row prints its source and share alone: silence is not a false sentence).
-export const ALCHEMY_TRADE_LINE = 'A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.';
+// BAR4-CORPUS-ECO (REVIEW-BAR-4 C38176, WEAK: one word): "thriving" said of the smallest income share in every one of the 70
+// towns of the census's 720 that print the line (8aef8e7d4): the degree word goes, the trade and its customers stay.
+export const ALCHEMY_TRADE_LINE = 'An alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.';
 export const ALCHEMIST_SUPPLEMENTS_LINE = 'Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.';
 export const ALCHEMY_UNDER_SIEGE_LINE = 'Alchemical preparations and curative potions, sold only to the people inside while the siege keeps outside customers away.';
 export const REMEDIES_LINE = 'Remedies and simple preparations, made and sold here: a modest trade.';
@@ -65,6 +70,9 @@ export const FISH_LANDED_LINE = 'Catch landed here and sold fresh or preserved.'
 export const FISH_SOLD_LINE = 'Fish is sold here, fresh or preserved.';
 /** The fish lines' twin where every fishery near the place is fished out and salted fish is bought in (D5; #77). */
 export const FISH_BOUGHT_LINE = 'The fishery here is fished out; the fish sold now is salted and bought in.';
+/** BAR4-CORPUS-ECO (the chair's FS1 and CORPUS-DEF's measure, 2026-11-16: 13 of the 19 towns of the 720 that print the bought line at
+ * 8aef8e7d4 work a fishing chain the rites hold up, `magicRecovery` > 0, still running): the grounds are spent and the catch still comes. */
+export const FISH_RITES_LINE = 'The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.';
 /** The entrepôt row's line (tradeGoods.js prints it) and its twin where no warehouse, toll, customs or caravan house
  * stands (TAIL-DEFECON-3, #07231, X9 29522): goods still pass through the crossroads; no house collects a duty on them. */
 export const ENTREPOT_LINE = 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.';
@@ -131,6 +139,7 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: FISH_LANDED_LINE, twinOf: FISH_EXPORT_LINE, excludes: Object.freeze([SIEGE]) }),
     Object.freeze({ text: FISH_SOLD_LINE, twinOf: FISH_EXPORT_LINE, excludes: Object.freeze([SIEGE]) }),
     Object.freeze({ text: FISH_BOUGHT_LINE, twinOf: FISH_EXPORT_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) }),
+    Object.freeze({ text: FISH_RITES_LINE, twinOf: FISH_EXPORT_LINE, excludes: Object.freeze([SIEGE]) }),
   ]),
   [ENTREPOT_LINE]: Object.freeze([
     Object.freeze({ text: ENTREPOT_LINE, needs: Object.freeze(['institution: warehouse']), excludes: Object.freeze([SIEGE]) }),
@@ -198,6 +207,8 @@ export function trueIncomeDesc(desc, f) {
       // TAIL-DEFECON-3: under a famine whose failed source is fish no line offers fish; where every fishery near the
       // place is fished out, the catch is not landed: the salted fish bought in, or no sentence (D5, #77).
       if (f.besieged || f.fishFailed) return '';
+      // BAR4-CORPUS-ECO (FS1): a fishing chain the rites hold up still lands its catch over spent grounds: the rites line, not "bought in"
+      if (f.fisheryExhausted && ritesHoldAChain({ activeChains: f.chains }, /fish/)) return FISH_RITES_LINE;
       if (f.fisheryExhausted) return bought(/\bsalt(?:ed)? fish\b/i) ? FISH_BOUGHT_LINE : '';
       if (has(/fisher|fishing/)) return sold(/\bsalt(?:ed)? fish\b/i) ? desc : FISH_LANDED_LINE;
       return has(/\bfish/) ? FISH_SOLD_LINE : '';

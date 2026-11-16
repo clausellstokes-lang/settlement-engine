@@ -120,6 +120,10 @@ export const LEAVES = Object.freeze({
   // ── layer 2: over the economy ──
   famine: home('famine', 2, ['economicState']),
   foodSources: home('foodSources', 2, ['economicState']),
+  // BAR4-CORPUS-ECO (BRIEF-BAR4 amendment 5b): the leading food source's grounds all spent: the food record against the config's resources
+  leadingSourceSpent: home('leadingSourceSpent', 2, ['economicState', 'config']),
+  // BAR4-CORPUS-ECO (the chair's FW1): a subsistence house tills for the table beside a food record with no grain
+  ownPlots: home('ownPlots', 2, ['economicState', 'institutions']),
   storesMonths: home('storesMonths', 2, ['economicState']),
   imports: home('imports', 2, ['economicState']),
   exports: home('exports', 2, ['economicState']),
@@ -136,6 +140,8 @@ export const LEAVES = Object.freeze({
   keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),
   foodEndurance: leaf({ layer: 2, module: 'domain/defense/defenseFacts.js', exported: 'foodEnduranceOf', call: 'record', reads: ['economicState'] }),
+  // BAR4-CORPUS-ECO (the chair's FS1): a chain the rites hold up and that still runs (the fished-out income line reads it)
+  ritesHoldAChain: leaf({ layer: 2, module: 'domain/facts/chainRites.js', exported: 'ritesHoldAChain', call: 'record', reads: ['economicState'] }),
   chainCarrier: leaf({ layer: 2, module: 'domain/facts/chainCarrier.js', exported: 'chainCarrierOf', call: 'perChain', reads: ['config', 'economicState'] }),
   readiness: leaf({ layer: 2, module: 'domain/facts/factLayers.js', exported: 'defenseProfile.readiness', call: 'record', reads: ['defenseProfile'], stored: true,
     note: 'the stored readiness: the defence profile is layer 2 by value; born at assembly (NEW-1\'s step order)' }),
