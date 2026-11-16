@@ -1,0 +1,5 @@
+{"id":"C186503","town":"bar0-town-occupied-rand-33","sev":"MED","kind":"PAIR","why":"Crisis tab 'collaborates: no one is named: no local power gains' against its Hook 'The occupation's local collaborators include someone the players will recognise'","other":"C186522"}
+{"id":"C187041","town":"bar0-town-occupied-rand-33","sev":"MED","kind":"PAIR","why":"Leatherworking chain Outputs 'Boots and shoes · Saddles and harness · Leather armour' against Resources 'Partial processing - worked only to semi-finished goods' and 'no leatherworkers' guild finishes it'","other":"C187126"}
+{"id":"C187260","town":"bar0-town-occupied-rand-33","sev":"MED","kind":"PAIR","why":"Defense tab 'The town watch exists on paper' against 'Standing Watch · Operational', 'Night patrol' and 'serving part-time, walking the night rounds'","other":"C187317"}
+{"id":"C187337","town":"bar0-town-occupied-rand-33","sev":"LOW","kind":"PAIR","why":"Magic Envelope 'Institutional control · unregulated' beside 'Legality · regulated'","other":"C187336"}
+{"id":"DONE","lines":1577,"blocks":1,"flags":4}
