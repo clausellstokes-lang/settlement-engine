@@ -14,13 +14,15 @@ amendments 2 to 9, 11, 12.
 | H1 (iii) answers to no one, under an occupation | class `answers` | 0 → 0 | 1 in 1 → 0 | a contract killer "answering to no assassins guild" (no government spoken of) | (a); (b) the council's line under `occupied` fires, calm is silent |
 | H1 (iv) the market's vendors, under a siege | class `market` | 3 in 3 → 0 | 3 in 3 → 0 | none | (a); (b) the vendors line under a siege fires, calm is silent |
 | H1 (v) the harvest kept, in want | class `store` (band famine or deficit) | 4 in 4 → 0 | 4 in 4 → 0 | none (the lines of technique, "Smoking, drying, fermenting, and winter storage are central household technologies", "Herd cycles and winter fodder matter …", carry none of the class's words and are true in want) | (a); (b) the harvest line under a famine band fires, secure is silent |
-| H1 (vi) the food's own source (K6: A SPLIT IN THE RECORD) | class `source` | 24 in 24 → 24 (not cured) | 6 in 6 → 6 | — | (a) held at a ceiling of 24 (never raised) |
-| **all cured classes** | | **23 in 23 → 0** | **18 in 18 → 0** | | |
+| H1 (vi) the food's own source: the one-source frame against the roster (a split in the record, cured on the page by the chair's ruling FW1) | class `source` (a live subsistence holding by `foodLand.js`'s four names, native name; no grain in the food record) | 87 in 87 → 0 | 28 in 28 → 0 | — | (a); (b) the game frame beside a Subsistence farming house with no grain fires, with grain is silent |
+| **all classes** | | **110 in 108 → 0** | **46 in 46 → 0** | | |
 
 The detector fires on all seven worklist rows in their own read towns at the base (bar0-town-calm-rand-23 sex,
 bar0-town-occupied-rand-22 timber, bar0-town-occupied-rand-21 answers, bar0-hamlet-under_siege-rand-22 market,
 bar0-village-famine-rand-22 and -23 store, bar0-thorp-calm-rand-21 source). The 720's count was read both off the record and
-off the census's dumps (`printed`: each line found in the town's page text): the same 47 instances (23 cured + 24 split).
+off the census's dumps (`printed`: each line found in the town's page text): the same instances. (My K2 line gave the source class as 24 / 6: that was a narrower first reading, by the holding's description words; the chair's FW1 reads the roster, 87 / 28.)
+
+**THE PAGE, NOT YET WHOLE FOR (vi)** (a question to the chair, 2026-11-16 ~08:55): the cure is in the one reader, but two callers hand it the economy alone and so keep the old frame: `src/components/new/tabs/EconomicsTab.jsx:306` (`foodwaysLineOf({ economicState: eco })`, `s` in scope) and `src/generators/steps/assembleSettlement.js:173` (the stored `culturalIdentity.foodways`). The PDF and the Foundry journal hand the record and print the cure. The economy's own roster stamp (`compound.inst.names`) is declared unreadable (`institutionRename.js`).
 
 ## The rows
 
@@ -32,9 +34,9 @@ off the census's dumps (`printed`: each line found in the town's page text): the
 | C19810 | bar0-hamlet-under_siege-rand-22 | STANDS (siege) | the culture's two market lines exclude `crisis: under_siege` where they print; twins name no market |
 | C47050 | bar0-village-famine-rand-22 | STANDS (band famine, 0.1 months) | the harvest line needs `food: > deficit` where it prints; its twin is the preserving the households still do |
 | C48079 | bar0-village-famine-rand-23 | STANDS (band famine) | the same |
-| C33207 | bar0-thorp-calm-rand-21 | K6 SPLIT, NAMED for the chair (not cured) | `src/generators/foodLand.js` counts grain only off `grain_fields`/`fertile_floodplain`; the roster's Subsistence farming (`hasSubsistence`) tills holdings for the table: 24 of the 720 and 6 of the 300 print the one-source frame beside a tilling house with no grain in the food record |
+| C33207 | bar0-thorp-calm-rand-21 | STANDS (a split in the record: `foodLand.js` counts grain only off grain fields; the roster's Subsistence farming tills for the table) | batch 2, the chair's ruling FW1: `foodways.js :: tilledOneFrame`: where a live subsistence holding stands and the one source is not grain, the frame names both (the page's two callers above still owed) |
 
-## The cures (one commit)
+## The cures (batch 1, 3cf213071; batch 2, FW1)
 
 - `src/data/institutionDescVariants.js`: the Town crier's pair reworded (no pronoun); `DESC_VARIANT_DECLARATIONS` re-keyed to
   the new texts (needs `market`, as before). `DESC_LATE_SIBLINGS` 8 → 11: the commercial sawmill's two lines (`needs: timber at
@@ -49,6 +51,7 @@ off the census's dumps (`printed`: each line found in the town's page text): the
   (`resolveSiblingSentences`) over `factsOf` of the record handed; where a caller hands the economy alone (the Economics tab,
   the identity record at assembly) the food security's own `hasSiege` / `hasFamine` stand in as the stress container
   (`withFoodCrises`), so the tab and the PDF read one answer.
+- BATCH 2 (FW1): `src/domain/foodways.js`: `FRAMES.oneTilled` (two frames, the 'one' frame's index kept) and `tilledOneFrame`, applied in `foodwaysLineOf` after the famine's reading, over the record's live roster (`liveInstitutions`, `nativeSemanticName`); `foodLand.js` untouched.
 - NEW VOCABULARY (amendment 5b): the atom `timber at hand` beside `iron at hand` (`factVocabulary.js`), its getter
   (`factsOf.js`), its layer row (`factLayers.js`, layer 2 over `economicState`), its home `src/domain/facts/timberAtHand.js`:
   the Timber & Lumber chain (`chainId: 'timber'`) working its own input.
@@ -59,7 +62,7 @@ off the census's dumps (`printed`: each line found in the town's page text): the
 - Tests: the guard (new); `houseDescLateReRead.test.js` (the table's length 8 → 11, dated note); `tierNounPoolDraws.test.js`
   (a late twin is a pool line, as a draw-time twin is).
 
-DECLARED MOVE (record): 25 of the census's 720 records (institutions 18, culturalIdentity 7); 19 of the fresh 300
+DECLARED MOVE (record; batch 2 moves no record: it is read where the line prints): 25 of the census's 720 records (institutions 18, culturalIdentity 7); 19 of the fresh 300
 (institutions 12, culturalIdentity 7). REFERENCE: 7 of the 525 configurations move against 8aef8e7d46 (institutions 4: four
 germanic plains towns' sawmill or crier; culturalIdentity 3: the slavic forest isolated thorp, hamlet and village, band
 deficit, take the harvest twin).
@@ -80,11 +83,25 @@ deficit, take the harvest twin).
    r2s-under_siege-city-0 (13,252), r2s-under_siege-metropolis-1 (70,862).
 7. "Food supply and the grain stores become politically charged as population grows." — prints in none of the 1,050 (a greek
    town under a siege); the state's twin.
+10. "Each holding grows for its own table, and beyond that its food is {A}." (FW1; 56 of the 1,050) — r2r-thorp-9 (20), bar0-thorp-calm-rand-21 (19, C33207's town), r2r-thorp-24 (occupied); thorps and hamlets only.
+11. "What each holding grows goes to its own table; beyond that, what it puts on the table itself is {A}." (FW1; 64) — r2r-thorp-3 (12), r2s-under_siege-hamlet-1 (57, siege), r2r-thorp-40 (occupied).
 8. "Fermentation, pickling, and drying are how the households make what food they have last." — r2s-under_siege-thorp-1 (16,
    siege), r2s-famine-hamlet-2 (famine), bar0-city-under_siege+famine-rand-107 (city).
 9. NEW VOCABULARY: the atom `timber at hand` (`facts/timberAtHand.js`).
 
+## The census (before at 8aef8e7d46, after at 3cf213071), read through the inventory diff
+
+sentences 30,152 → 30,156; gone 3, new 7, in fewer towns 6, in more 0. EVERY LOSS IS A DETECTOR INSTANCE: the crier's three
+pronoun sentences (5, 3, 3 → 0); the sawmill's four timber sentences (9 → 3, 10 → 5: the 11); "stretch the harvest" 64 → 60
+(the 4); "Market vendors …" 32 → 29 (the 3). No other sentence moved. THE INHERITORS (all seven read): the twins and the
+reworded crier lines above, each in exactly the towns that lost its original. (Batch 2 is read where the line prints: the
+census renders the Economics tab, which hands the economy alone, so its frame shows there only once the callers hand the
+record; measured off the record: 0 / 0.)
+
 ## Gates and books at the tip (against 8aef8e7d46)
+
+ATOM NAMESAKE (for the join: keep ONE): mine is `'timber at hand'` in `src/domain/facts/factVocabulary.js` (beside `'iron at hand'`, reader `f.timberAtHand`), the getter `timberAtHand` in `src/domain/facts/factsOf.js`, the layer row `timberAtHand` in `src/domain/facts/factLayers.js`, its one reader `src/domain/facts/timberAtHand.js :: timberAtHandOf` (the Timber & Lumber chain, `chainId: 'timber'`, working its own input); declared on two sets of `src/data/institutionDescVariants.js :: DESC_LATE_SIBLINGS` (the commercial sawmill's two lines) and read by the detector `tests/helpers/housePresumptions.js`. BAR4-SCENES' namesake is in `src/domain/facts/sceneSupply.js`.
+
 
 Run alone at the tip: the guard green (and red by a planted pronoun, not committed); `colourMarks4h`, `houseDescLateReRead`,
 `institutionProseDeclared`, `tierNounPoolDraws`, `wiringCensusDeclared`, `negativeAssertionAnchor`, `seedLoopTotality`,
@@ -109,7 +126,7 @@ Run alone at the tip: the guard green (and red by a planted pronoun, not committ
 
 ## What is left, in order
 
-1. C33207's K6 split (named for the chair): `foodLand.js` vs the roster's subsistence holdings (24 of the 720, 6 of the 300).
+1. FW1 on the page: the Economics tab's and the assembly's calls hand the economy alone (the chair's ruling awaited).
 2. The books above (the close's doors).
 3. (This section is completed at the final push with the wide net's results.)
 

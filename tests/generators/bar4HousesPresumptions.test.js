@@ -8,9 +8,9 @@
  *   (b) A POSITIVE CONTROL per class: a record constructed in the state that makes the class's line false, on which the
  *       detector MUST fire (so it cannot go blind), beside the same record in the true state, on which it is silent;
  *   (c) THE KEEPS: each cured original still prints where its town makes it true (the twin is printed only where refused).
- * The sixth class (`source`, the one-source foodways frame beside a house whose households till for the table, the food
- * record holding no grain) is A SPLIT IN THE RECORD (amendment K6: `foodLand.js` counts grain only off grain fields, the
- * roster holds the subsistence holdings): named for the chair, not cured here; held at its count (24) so it cannot grow.
+ * The sixth class (`source`, the one-source foodways frame beside a subsistence holding of the roster, the food record
+ * holding no grain: a split in the record, `foodLand.js` counting grain only off grain fields) is cured ON THE PAGE by the
+ * chair's ruling FW1 (`foodways.js :: tilledOneFrame`): zero too.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -45,22 +45,16 @@ const born = (seed) => {
   if (!births.has(seed)) births.set(seed, generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
   return births.get(seed);
 };
-const CURED = ['sex', 'timber', 'answers', 'market', 'store'];
-/** The K6 split's count over the 720 at 8aef8e7d46: a ceiling, never raised. */
-const SOURCE_SPLIT_CEILING = 24;
+const CURED = ['sex', 'timber', 'answers', 'market', 'store', 'source'];
 
 describe('BAR4-HOUSES H1: a house\'s description and the foodways line presume nothing their town denies', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  it('(a) the detector reads no instance of the cured classes in the census\'s 720, and the K6 split holds its count', () => {
-    let split = 0;
+  it('(a) the detector reads no instance of the six classes in the census\'s 720', () => {
     const failures = collectSeedFailures(SEEDS, (seed) => {
-      const found = housePresumptionsOf(born(seed));
-      split += found.filter((i) => i.cls === 'source').length;
-      expect(found.filter((i) => CURED.includes(i.cls)).map((i) => `${i.cls}: ${i.line} [${i.state}]`)).toEqual([]);
+      expect(housePresumptionsOf(born(seed)).filter((i) => CURED.includes(i.cls)).map((i) => `${i.cls}: ${i.line} [${i.state}]`)).toEqual([]);
     });
     expectNoSeedFailures(failures, 'no house description or foodways line presumes what its town denies');
-    expect(split).toBeLessThanOrEqual(SOURCE_SPLIT_CEILING);
   }, 600000);
 
   // (b) the positive controls: each class's line in the state that makes it false (the detector fires), and in the state
@@ -82,6 +76,8 @@ describe('BAR4-HOUSES H1: a house\'s description and the foodways line presume n
     ['answers', town({ institutions: [{ name: 'Town council', desc: COUNCIL }], stress: [{ type: 'occupied' }] }), {},
       town({ institutions: [{ name: 'Town council', desc: COUNCIL }] }), {}],
     ['market', town({ stress: [{ type: 'under_siege' }] }), { foodwaysLine: VENDORS }, town(), { foodwaysLine: VENDORS }],
+    ['source', town({ institutions: [{ name: 'Subsistence farming', desc: 'Each family tills a small holding, all of it for the table.' }], economicState: { activeChains: [], foodSecurity: { foodRecord: { band: 'secure', foodSources: ['game'] } } } }), { foodwaysLine: 'Its own food is game from the woods.' },
+      town({ institutions: [{ name: 'Subsistence farming', desc: 'Each family tills a small holding, all of it for the table.' }], economicState: { activeChains: [], foodSecurity: { foodRecord: { band: 'secure', foodSources: ['grain'] } } } }), { foodwaysLine: 'Its own food is bread from the home fields.' }],
     ['store', town({ economicState: { activeChains: [], foodSecurity: { foodRecord: { band: 'famine', foodSources: ['grain'] } } } }), { foodwaysLine: HARVEST },
       town(), { foodwaysLine: HARVEST }],
   ]);
@@ -113,5 +109,9 @@ describe('BAR4-HOUSES H1: a house\'s description and the foodways line presume n
     expect(at('Shared dining customs make food distribution visibly civic.')).toBeGreaterThan(0);
     expect(at(HARVEST)).toBeGreaterThan(0);
     expect(at('Fermentation, pickling, and drying are how the households make what food they have last.')).toBeGreaterThan(0);
+    // the one-source frame beside a subsistence holding names both (FW1), and the plain frame still prints where no holding stands
+    const frames = SEEDS.map((seed) => foodwaysLineOf(born(seed)) || '');
+    expect(frames.filter((l) => /^(?:Each holding grows for its own table|What each holding grows goes to its own table)/.test(l)).length).toBeGreaterThan(0);
+    expect(frames.filter((l) => /^(?:Its own food is|What it puts on the table itself is) /.test(l)).length).toBeGreaterThan(0);
   }, 600000);
 });

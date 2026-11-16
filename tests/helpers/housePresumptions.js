@@ -18,8 +18,8 @@
  *   store    "stretch the harvest through winter", "fills the winter", "carries it through the lean months" presume food in
  *            store: false where the food record's band is famine or deficit (C47050, C48079; the measure's rule 3);
  *   source   the composer's one-source frame ("Its own food is …") presumes its source is the town's own food: false where a
- *            house of the town says its households till holdings for the table and the food record holds no grain
- *            (C33207): A SPLIT IN THE RECORD ITSELF (amendment K6), reported, not cured here.
+ *            live house of the roster is a subsistence holding (`foodLand.js :: hasSubsistence`'s four names, by native
+ *            name) and the food record holds no grain (C33207: the frame against the roster; the chair's ruling FW1).
  *
  * NAMED EXCLUSIONS (lines the words reach that are TRUE in the state, each with its reason; never noise):
  *   EXCLUDED_TRUE below.
@@ -31,6 +31,7 @@ import { crisisOf } from '../../src/domain/facts/crisisKind.js';
 import { timberAtHandOf } from '../../src/domain/facts/timberAtHand.js';
 import { rulerKindOf } from '../../src/domain/facts/rulerKind.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
+import { nativeSemanticName } from '../../src/domain/content/customContentSemanticAuthority.js';
 
 /** The pronouns of a holder, by the sex they presume. */
 const MALE = /\b(?:he|his|him|himself)\b/i;
@@ -40,8 +41,8 @@ const ANSWERS = /\banswers to no one\b|\banswering to no higher lord\b|\bno high
 const SELLERS = /\b(?:vendors?|stalls?|hawkers?)\b/i;
 const STORE = /\bstretch the harvest through winter\b|\bfills the winter\b|\bcarries it through the lean months\b/i;
 const ONE_FRAME = /^(?:Its own food is|What it puts on the table itself is) /;
-/** A house whose description says the households till for the table (the subsistence holdings: `foodLand.js :: hasSubsistence`'s names). */
-const TILLS = /\b(?:tills? a (?:small )?holding|works just enough land|works a holding)\b/i;
+/** A subsistence holding of the roster (`foodLand.js :: hasSubsistence`'s names), read by its native name. */
+const TILLS = /subsistence|common field|household farm|farming community/;
 
 /**
  * NAMED EXCLUSIONS: a line the class's words reach that is TRUE in the state the class reads, and why.
@@ -95,8 +96,8 @@ export function housePresumptionsOf(record, options = {}) {
     if ((MARKET_WORDS.test(food) || SELLERS.test(food)) && siege && !excluded('market', food)) out.push({ cls: 'market', writer: 'foodways', line: food, state: 'under siege' });
     if (STORE.test(food) && (band === 'famine' || band === 'deficit') && !excluded('store', food)) out.push({ cls: 'store', writer: 'foodways', line: food, state: `food band ${band}` });
     if (ONE_FRAME.test(food) && Array.isArray(sources) && !sources.includes('grain') && !sources.includes('mill')) {
-      const tiller = houses.find((i) => typeof i?.desc === 'string' && TILLS.test(i.desc) && printed(i.desc));
-      if (tiller) out.push({ cls: 'source', writer: 'foodways', line: food, state: `no grain in the food record beside "${tiller.desc}" (${tiller.name})` });
+      const tiller = houses.find((i) => TILLS.test(nativeSemanticName(i).toLowerCase()));
+      if (tiller) out.push({ cls: 'source', writer: 'foodways', line: food, state: `no grain in the food record beside the ${tiller.name} ("${tiller.desc}")` });
     }
   }
   return out;

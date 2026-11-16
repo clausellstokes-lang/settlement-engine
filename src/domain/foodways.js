@@ -19,6 +19,8 @@ import { drawDeclared, lineText, resolveSiblingSentences } from './facts/drawDec
 import { factsOf } from './facts/factsOf.js';
 import { canonStressors } from './canonicalAccessors.js';
 import { FOODWAYS_PRINT_SIBLINGS } from '../data/cultureProfiles.js';
+import { liveInstitutions } from './institutions/institutionRoster.js';
+import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 
 /** @typedef {'grain'|'livestock'|'fish'|'mill'|'game'} FoodSource */
 
@@ -37,6 +39,11 @@ const FRAMES = Object.freeze({
   // rests on" where its own food is under half (19 and 19 of the census's 720: a besieged fishing thorp at 29%, a metropolis
   // fed 54% by magic): the frame says only that the source is the place's own food (the frame's index kept).
   one: Object.freeze(['Its own food is {A}.', 'What it puts on the table itself is {A}.']),
+  // BAR4-HOUSES (the chair's ruling FW1 of 2026-11-16, REVIEW-BAR-4 C33207; vetoable by the owner): the one-source frame
+  // where a house of the roster says its households till holdings for their own table and the food record names no grain
+  // (`tilledOneFrame`, read where the line prints): it names both, the holdings' own table and the source (the frame's
+  // index kept). Never drawn: a print-time reading of the drawn 'one' frame.
+  oneTilled: Object.freeze(['Each holding grows for its own table, and beyond that its food is {A}.', 'What each holding grows goes to its own table; beyond that, what it puts on the table itself is {A}.']),
   two: Object.freeze(['{A} and {B} anchor the table.', 'The table is {A}, with {B} beside it.']),
   more: Object.freeze(['{A} and {B} anchor the table; {C} fills the winter.', 'The table is {A} and {B}, and {C} carries it through the lean months.']),
 });
@@ -225,12 +232,42 @@ export function foodwaysLineOf(settlement) {
   const record = s?.economicState?.foodSecurity?.foodRecord;
   const line = record?.foodwaysLine;
   if (!(typeof line === 'string' && line.trim())) return null;
-  const fed = fedLineOf(line.trim(), record || {}, fishedOut(s?.economicState?.activeChains));
+  const fed = tilledOneFrame(fedLineOf(line.trim(), record || {}, fishedOut(s?.economicState?.activeChains)), s);
   // BAR4-HOUSES (H1 (iv), (v)): each culture sentence that presumes the market trading or a harvest in store is read
   // against the record it prints from (`cultureProfiles.js :: FOODWAYS_PRINT_SIBLINGS`), its twin printed where refused.
   return resolveSiblingSentences(fed, FOODWAYS_PRINT_SIBLINGS, {
     facts: () => factsOf(/** @type {object} */ (withFoodCrises(s))), poolId: 'cultureProfiles:FOODWAYS_PRINT_SIBLINGS', surface: 'economics', drawKind: 'T',
   });
+}
+
+/**
+ * The roster's subsistence holdings, by the names the food land reads them (`generators/foodLand.js :: hasSubsistence`,
+ * the same four words, over each live house's native name: a renamed house keeps its kind).
+ */
+const TILLING_HOUSE = /subsistence|common field|household farm|farming community/;
+
+/**
+ * BAR4-HOUSES (the chair's ruling FW1, C33207): THE ONE-SOURCE FRAME AGAINST THE ROSTER. The food record counts grain only
+ * where the land has grain fields, so a thorp whose Subsistence farming house says "Each family tills a small holding, all
+ * of it for the table" was told "Its own food is game from the woods." (24 of the census's 720, 6 of the fresh 300 at
+ * 8aef8e7d46). Where the line is the composer's one-source frame, its one source is not grain or the mill, and the record
+ * handed holds a live tilling house, the frame names both (`FRAMES.oneTilled`, the same index; its flavour kept). A record
+ * handed without its roster (`{ economicState }` alone) is read as before. Pure.
+ * @param {string} line @param {any} s the record handed @returns {string}
+ */
+function tilledOneFrame(line, s) {
+  if (!Array.isArray(s?.institutions)) return line;
+  for (let i = 0; i < FRAMES.one.length; i += 1) {
+    const [head, tail] = FRAMES.one[i].split('{A}');
+    if (!line.startsWith(head)) continue;
+    const source = /** @type {FoodSource[]} */ (Object.keys(SOURCE_PHRASES)).find((src) => SOURCE_PHRASES[src].some((p) => line.startsWith(`${head}${p}${tail}`)));
+    if (!source || source === 'grain' || source === 'mill') return line;
+    if (!liveInstitutions(s).some((inst) => TILLING_HOUSE.test(nativeSemanticName(/** @type {object} */ (inst)).toLowerCase()))) return line;
+    const phrase = /** @type {string} */ (SOURCE_PHRASES[source].find((p) => line.startsWith(`${head}${p}${tail}`)));
+    const rest = line.slice(`${head}${phrase}${tail}`.length);
+    return `${FRAMES.oneTilled[i].replace('{A}', phrase)}${rest}`;
+  }
+  return line;
 }
 
 /**
