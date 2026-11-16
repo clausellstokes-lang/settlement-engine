@@ -138,5 +138,10 @@
   "file": "src/domain/dailyLife.js",
   "text": "Hunger is everywhere.",
   "reason": "the collapsed food band's own line: the caravans \"never arrived\" is the crisis's truth, not an offer"
+ },
+ {
+  "file": "src/data/foodwaysPrintSiblings.js",
+  "text": "Water access and preservation skill decide how long local produce must last while no caravan can come.",
+  "reason": "the siege's own twin (twinOf the caravan-staples line, printed only where the siege refuses the original: the chair's ruling WS1): it says no caravan comes"
  }
 ]
