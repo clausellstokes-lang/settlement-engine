@@ -1,6 +1,6 @@
 # BAR5-AUDIT-B · HAND-BACK · laws 2, 3 and 5 (seat B)
 
-**STATUS: IN PROGRESS (the fresh 300 pending).** Tip read: `9867b4b17` (the joined line, `lane/join-2026-11-14`). Nothing under `src/` changed, no test file was added, and nothing is cured.
+**STATUS: FINAL.** Tip read: `9867b4b17` (the joined line, `lane/join-2026-11-14`). Nothing under `src/` changed, no test file was added, and nothing is cured.
 
 ## How to run it again
 
@@ -83,9 +83,15 @@ The controls were checked again after each narrowing (section 3), and every STAN
 
 | population | LAW 2 | LAW 3 | towns with any |
 |---|---|---|---|
-| the sixty read towns | 37 instances in 12 towns | 24 instances in 19 towns | 24 of 60 |
-| the census's 720 (PAGE-COPY `seeds.txt`) | 86 instances in 48 towns | 211 instances in 134 towns | 169 of 720 |
-| the fresh 300 (`seeds.fresh300.txt`) | pending | pending | pending |
+| the sixty read towns | 36 instances in 12 towns | 24 instances in 19 towns | 24 of 60 |
+| the census's 720 (PAGE-COPY `seeds.txt`) | 83 instances in 48 towns | 211 instances in 134 towns | 169 of 720 |
+| the fresh 300 (`seeds.fresh300.txt`) | 120 instances in 51 towns | 92 instances in 66 towns | 91 of 300 |
+
+How the populations differ:
+- The 720 are the census's mix: 15 crisis kinds, and 478 of the 720 towns hold one.
+- The fresh 300 are the bar's ten shapes. Half are under a crisis, and siege, famine and war are frequent.
+- So LAW 2 runs deeper in the 300, and the 720 holds more of LAW 3's calm-time faults: half-way chains and idle vintners.
+- Precision was judged on the 720 only.
 
 The rules (each one's reach, read off the page itself):
 - **L2.siege.abroad:** a siege, and "nothing comes in by road" or "Trade by road, gate and water has stopped". An unmarked line names caravans, travellers, pilgrims, or goods "from abroad".
@@ -108,13 +114,13 @@ The rules (each one's reach, read off the page itself):
 
 | law · rule | towns | instances |
 |---|---|---|
-| **L2** | **12** | **37** |
+| **L2** | **12** | **36** |
 | **L3** | **19** | **24** |
 | L2.famine.meat | 2 | 4 |
 | L2.famine.work | 1 | 1 |
 | L2.law.collapsed | 3 | 3 |
 | L2.siege.abroad | 6 | 13 |
-| L2.siege.cutgood | 1 | 6 |
+| L2.siege.cutgood | 1 | 5 |
 | L2.war.animals | 1 | 2 |
 | L2.war.iron | 2 | 8 |
 | L3.chainOverStopped | 2 | 2 |
@@ -125,7 +131,7 @@ The rules (each one's reach, read off the page itself):
 | L3.needed | 4 | 4 |
 | L3.outputs | 5 | 7 |
 
-### The sixty: the thirty commonest distinct lines of L2 (24 distinct)
+### The sixty: the thirty commonest distinct lines of L2 (23 distinct)
 
 | towns | rule | line | writer |
 |---|---|---|---|
@@ -145,7 +151,6 @@ The rules (each one's reach, read off the page itself):
 | 1 | L2.siege.cutgood | Herbal remedies | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies` |
 | 1 | L2.siege.cutgood | Rare medications and treatments available through district-wide sourcing. | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds` |
 | 1 | L2.siege.cutgood | Apothecary & Alchemy Remedies and simple preparations, made and sold here: a modest trade. | `src/generators/economy/incomeLineSiblings.js :: REMEDIES_LINE` |
-| 1 | L2.siege.cutgood | Alchemical remedies supplement treatment | `src/domain/display/magicProvisionShown.js :: NOT_FOOD_NOTES` |
 | 1 | L2.siege.abroad | Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount. | `src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS` |
 | 1 | L2.war.iron | Services · Repairs · Tool manufacture · Weapon smithing | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture` |
 | 1 | L2.war.animals | Services · Horse hire | `(untraced)` |
@@ -171,7 +176,6 @@ The rules (each one's reach, read off the page itself):
 | `src/data/institutionServices.js` | L2.siege.abroad | 1 | 1 | src/data/crisisDependence.js (HOUSE_/SERVICE_DEPENDENCE: no `travellers`/`goods` on the row) via src/domain/display/crisisStoppedRow.js :: rowStoppedBy |
 | `src/data/institutionDescColour.js` | L2.siege.cutgood | 1 | 1 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
 | `src/generators/economy/incomeLineSiblings.js` | L2.siege.cutgood | 1 | 1 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
-| `src/domain/display/magicProvisionShown.js` | L2.siege.cutgood | 1 | 1 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
 | `src/data/institutionDescColour.js` | L2.famine.work | 1 | 1 | src/data/stressTypes.js :: STRESS_TYPE_MAP.famine (viabilityNote) against src/data/institutionDescColour.js (the line declared colour) |
 
 ### The sixty: the thirty commonest distinct lines of L3 (18 distinct)
@@ -215,11 +219,11 @@ The rules (each one's reach, read off the page itself):
 
 | law · rule | towns | instances |
 |---|---|---|
-| **L2** | **48** | **86** |
+| **L2** | **48** | **83** |
 | **L3** | **134** | **211** |
 | L2.famine.work | 1 | 1 |
 | L2.law.collapsed | 29 | 29 |
-| L2.siege.abroad | 12 | 27 |
+| L2.siege.abroad | 12 | 24 |
 | L2.siege.cutgood | 3 | 15 |
 | L2.war.animals | 2 | 5 |
 | L2.war.iron | 4 | 9 |
@@ -231,7 +235,7 @@ The rules (each one's reach, read off the page itself):
 | L3.needed | 43 | 43 |
 | L3.outputs | 15 | 18 |
 
-### The 720: the thirty commonest distinct lines of L2 (29 distinct)
+### The 720: the thirty commonest distinct lines of L2 (28 distinct)
 
 | towns | rule | line | writer |
 |---|---|---|---|
@@ -244,7 +248,6 @@ The rules (each one's reach, read off the page itself):
 | 3 | L2.siege.cutgood | Services · Herbal remedies · Specialist compounds | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds` |
 | 3 | L2.siege.cutgood | Herbal remedies | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies` |
 | 3 | L2.siege.cutgood | Rare medications and treatments available through district-wide sourcing. | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds` |
-| 3 | L2.siege.abroad | How they deal Talks about the road and the travellers; knows who has passed and when. | `src/data/people/titleSecretsPresentations.js :: ROWS` |
 | 3 | L2.war.iron | Services · Horseshoeing · Repairs · Tool manufacture · Weapon smithing | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture` |
 | 3 | L2.war.iron | Reforge broken tools, re-edge blades, mend ironwork. | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs` |
 | 2 | L2.siege.abroad | The watch, the garrison, and the caravans buy here. | `src/data/institutionDescVariants.js :: PAIRS` |
@@ -277,7 +280,6 @@ The rules (each one's reach, read off the page itself):
 | `src/data/institutionServices.js` | L2.siege.abroad | 5 | 5 | src/data/crisisDependence.js (HOUSE_/SERVICE_DEPENDENCE: no `travellers`/`goods` on the row) via src/domain/display/crisisStoppedRow.js :: rowStoppedBy |
 | `src/data/institutionalCatalog.js` | L2.siege.abroad | 4 | 4 | src/data/crisisDependence.js (HOUSE_/SERVICE_DEPENDENCE: no `travellers`/`goods` on the row) via src/domain/display/crisisStoppedRow.js :: rowStoppedBy |
 | `src/generators/economy/incomeLineSiblings.js` | L2.siege.cutgood | 3 | 3 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
-| `src/data/people/titleSecretsPresentations.js` | L2.siege.abroad | 3 | 3 | src/data/crisisDependence.js (HOUSE_/SERVICE_DEPENDENCE: no `travellers`/`goods` on the row) via src/domain/display/crisisStoppedRow.js :: rowStoppedBy |
 | `src/data/institutionDescColour.js` | L2.siege.cutgood | 2 | 2 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
 | `src/data/institutionServices.js` | L2.war.animals | 2 | 2 | src/data/narrativeData.js :: STRESS_DESCS.wartime / the arrival scene's war senses against crisisStoppedRow.js :: STOPPING_CRISES (no wartime) |
 | `(untraced)` | L2.war.animals | 2 | 2 | src/data/narrativeData.js :: STRESS_DESCS.wartime / the arrival scene's war senses against crisisStoppedRow.js :: STOPPING_CRISES (no wartime) |
@@ -340,7 +342,127 @@ The rules (each one's reach, read off the page itself):
 | `src/data/foodwaysPrintSiblings.js` | L3.foodLineStopped | 1 | 1 | crisisStoppedRow.js (the fishing marked stopped) against src/domain/foodways.js :: foodwaysLineOf |
 
 
-_PENDING: the fresh 300 still rendering._
+### The fresh 300: by law and rule
+
+| law · rule | towns | instances |
+|---|---|---|
+| **L2** | **51** | **120** |
+| **L3** | **66** | **92** |
+| L2.famine.meat | 4 | 8 |
+| L2.law.collapsed | 13 | 13 |
+| L2.siege.abroad | 28 | 55 |
+| L2.siege.cutgood | 5 | 17 |
+| L2.war.animals | 1 | 2 |
+| L2.war.iron | 10 | 25 |
+| L3.chainOverStopped | 7 | 7 |
+| L3.failedFood | 22 | 24 |
+| L3.foodLineStopped | 1 | 1 |
+| L3.foodModel | 2 | 2 |
+| L3.halfway | 16 | 27 |
+| L3.needed | 10 | 10 |
+| L3.outputs | 17 | 21 |
+
+### The fresh 300: the thirty commonest distinct lines of L2 (29 distinct)
+
+| towns | rule | line | writer |
+|---|---|---|---|
+| 13 | L2.law.collapsed | A thief is known by name within a day, and everyone shuns them until they make it right. | `src/generators/safetyProfile.js :: NO_WATCH_SMALL` |
+| 11 | L2.siege.abroad | Personal protection for merchants, officials, and travelers. | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Bodyguard service` |
+| 10 | L2.siege.abroad | A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medi | `src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS` |
+| 8 | L2.siege.abroad | Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, | `src/data/institutionDescVariants.js :: PAIRS` |
+| 8 | L2.siege.abroad | Supplies the watch, the garrison, and the caravans. | `src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared` |
+| 7 | L2.war.iron | Reforge broken tools, re-edge blades, mend ironwork. | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Repairs` |
+| 6 | L2.siege.abroad | The watch, the garrison, and the caravans buy here. | `src/data/institutionDescVariants.js :: PAIRS` |
+| 5 | L2.siege.abroad | Serves merchants, military, and travelers needing fresh mounts. | `src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared` |
+| 4 | L2.famine.meat | Services · Fresh meat | `(untraced)` |
+| 4 | L2.famine.meat | Fresh meat | `(untraced)` |
+| 4 | L2.siege.cutgood | Herbal remedies | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies` |
+| 4 | L2.siege.abroad | Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount. | `src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS` |
+| 3 | L2.war.iron | Services · Repairs · Tool manufacture · Weapon smithing | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture` |
+| 3 | L2.war.iron | Services · Horseshoeing · Repairs · Tool manufacture | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture` |
+| 3 | L2.war.iron | Repairs | `(untraced)` |
+| 3 | L2.war.iron | Tool manufacture | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture` |
+| 3 | L2.war.iron | Services · Horseshoeing · Repairs · Tool manufacture · Weapon smithing | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture` |
+| 3 | L2.siege.abroad | Rents animals to travellers and merchants who need load-carrying capacity for the road. | `src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared` |
+| 2 | L2.siege.cutgood | A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medi | `src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS` |
+| 2 | L2.siege.cutgood | Services · Herbal remedies · Specialist compounds | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds` |
+| 2 | L2.siege.cutgood | Rare medications and treatments available through district-wide sourcing. | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Specialist compounds` |
+| 2 | L2.siege.cutgood | Services · Herbal remedies | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Herbal remedies` |
+| 2 | L2.siege.cutgood | Apothecary & Alchemy Remedies and simple preparations, made and sold here: a modest trade. | `src/generators/economy/incomeLineSiblings.js :: REMEDIES_LINE` |
+| 2 | L2.siege.cutgood | Some focus on chirurgery, others on herbal preparations, others on imported medicines. | `src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared` |
+| 2 | L2.war.iron | Weapon smithing | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Weapon smithing` |
+| 1 | L2.siege.cutgood | Apothecary & Alchemy Remedies and preparations are made here, but few, while the herbs and reagents they need run short. | `src/generators/economy/incomeLineSiblings.js :: REMEDIES_SHORT_LINE` |
+| 1 | L2.war.animals | Services · Horse hire · Livery and boarding | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Livery and boarding` |
+| 1 | L2.war.animals | Horse hire | `(untraced)` |
+| 1 | L2.war.iron | Services · Repairs · Tool manufacture | `src/data/institutionServices.js :: INSTITUTION_SERVICES.Tool manufacture` |
+
+### The fresh 300: L2 by writer file (the false line) and the file holding the fact it should have read
+
+| writer file | rule | towns | instances | the fact is in |
+|---|---|---|---|---|
+| `src/data/institutionServices.js` | L2.war.iron | 10 | 22 | src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK against crisisStoppedRow.js :: STOPPING_CRISES (no wartime) |
+| `src/data/institutionalCatalog.js` | L2.siege.abroad | 15 | 16 | src/data/crisisDependence.js (HOUSE_/SERVICE_DEPENDENCE: no `travellers`/`goods` on the row) via src/domain/display/crisisStoppedRow.js :: rowStoppedBy |
+| `src/data/institutionDescVariants.js` | L2.siege.abroad | 14 | 14 | src/data/crisisDependence.js (HOUSE_/SERVICE_DEPENDENCE: no `travellers`/`goods` on the row) via src/domain/display/crisisStoppedRow.js :: rowStoppedBy |
+| `src/data/institutionDescColour.js` | L2.siege.abroad | 13 | 14 | src/data/crisisDependence.js (HOUSE_/SERVICE_DEPENDENCE: no `travellers`/`goods` on the row) via src/domain/display/crisisStoppedRow.js :: rowStoppedBy |
+| `src/generators/safetyProfile.js` | L2.law.collapsed | 13 | 13 | the Law & order band (src/domain/causalState.js law_order) against src/generators/safetyProfile.js :: NO_WATCH_SMALL (drawn on `watch` only) |
+| `src/data/institutionServices.js` | L2.siege.abroad | 11 | 11 | src/data/crisisDependence.js (HOUSE_/SERVICE_DEPENDENCE: no `travellers`/`goods` on the row) via src/domain/display/crisisStoppedRow.js :: rowStoppedBy |
+| `src/data/institutionServices.js` | L2.siege.cutgood | 4 | 10 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
+| `(untraced)` | L2.famine.meat | 4 | 8 | economicState.foodSecurity (src/generators/economy/foodBalance.js) read by crisisStoppedRow.js :: stoppedBy (the failed source only) |
+| `src/generators/economy/incomeLineSiblings.js` | L2.siege.cutgood | 3 | 3 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
+| `(untraced)` | L2.war.iron | 3 | 3 | src/generators/economy/outlookHookSiblings.js :: WAR_IRON_HOOK against crisisStoppedRow.js :: STOPPING_CRISES (no wartime) |
+| `src/data/institutionDescColour.js` | L2.siege.cutgood | 2 | 2 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
+| `src/data/institutionalCatalog.js` | L2.siege.cutgood | 2 | 2 | src/domain/display/chainNeedShown.js :: chainNeedLine (the herbs "from outside, cut off") against src/data/crisisDependence.js SERVICE_DEPENDENCE ("Specialist compounds", "Herbal remedies": no `imported input`) |
+| `src/data/institutionServices.js` | L2.war.animals | 1 | 1 | src/data/narrativeData.js :: STRESS_DESCS.wartime / the arrival scene's war senses against crisisStoppedRow.js :: STOPPING_CRISES (no wartime) |
+| `(untraced)` | L2.war.animals | 1 | 1 | src/data/narrativeData.js :: STRESS_DESCS.wartime / the arrival scene's war senses against crisisStoppedRow.js :: STOPPING_CRISES (no wartime) |
+
+### The fresh 300: the thirty commonest distinct lines of L3 (45 distinct)
+
+| towns | rule | line | writer |
+|---|---|---|---|
+| 14 | L3.outputs | Armed escort · Monster hunting services · Dungeon clearance | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 8 | L3.halfway | Processed textiles · Guild-manufactured goods · Dyed cloth | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 5 | L3.needed | Vintner · Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is so | `src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared` |
+| 4 | L3.halfway | Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 4 | L3.outputs | Armed escort · Mercenary hire · Training services | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 4 | L3.halfway | Finished clothing · Dyed cloth · Tailored garments | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 4 | L3.halfway | Boots and shoes · Saddles and harness · Leather armour | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 3 | L3.needed | Vintner · Crafts / A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine  | `src/data/institutionDescVariants.js :: PAIRS` |
+| 3 | L3.chainOverStopped | Faith & Worship · Religion & civic✓ Running | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 2 | L3.failedFood | Open Grazing Land · livestock · wool · dairy · animal hides · Strategic Crossroads · trade access | `src/data/resourceData.js :: RESOURCE_DATA.crossroads_position` |
+| 2 | L3.chainOverStopped | Faith & Worship · Religion & civic○ Operational | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 2 | L3.outputs | Lodging · Meals and drink | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 2 | L3.halfway | Leather goods · Guild-manufactured goods | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 1 | L3.failedFood | Fishing Grounds · fish · salt · Coastal Timber · timber · Magical Ley Line Node · medicinal herbs · Deep Natural Harbour · maritime access | `src/data/resourceData.js :: RESOURCE_DATA.magical_node` |
+| 1 | L3.failedFood | Deep Natural Harbour · maritime access · Coastal Timber · timber · Fishing Grounds · fish · salt | `src/data/resourceData.js :: RESOURCE_DATA.deep_harbour` |
+| 1 | L3.failedFood | Fishing Grounds · fish · salt · Salt Flats · Magical Ley Line Node · medicinal herbs · Deep Natural Harbour · maritime access | `src/data/resourceData.js :: RESOURCE_DATA.magical_node` |
+| 1 | L3.failedFood | River Fisheries · fish · Marshlands · peat · honey · medicinal herbs · Hot Springs / Healing Waters · Iron Ore Deposits · iron · metalwork · | `src/data/resourceData.js :: RESOURCE_DATA.hot_springs` |
+| 1 | L3.failedFood | Wild Foraging Areas · honey · medicinal herbs · Ancient Grove · Managed Woodland · timber · Extensive Grain Fields · grain · flour | `src/data/resourceData.js :: RESOURCE_DATA.grain_fields` |
+| 1 | L3.failedFood | Deep Natural Harbour · maritime access · Salt Flats · salt · Ancient Ruins · trade access · Fishing Grounds · fish · Coastal Timber · timber | `src/data/resourceData.js :: RESOURCE_DATA.deep_harbour` |
+| 1 | L3.failedFood | Hunting Grounds · game meat · animal hides · furs · Strategic Crossroads · trade access · Iron Ore Deposits · iron · metalwork · Extensive G | `src/data/resourceData.js :: RESOURCE_DATA.grain_fields` |
+| 1 | L3.failedFood | Ancient Grove · medicinal herbs · honey · Iron Ore Deposits · iron · metalwork · Extensive Grain Fields · grain · flour | `src/data/resourceData.js :: RESOURCE_DATA.grain_fields` |
+| 1 | L3.failedFood | Managed Woodland · timber · Ancient Grove · medicinal herbs · honey · Coal or Peat Deposits · coal · Extensive Grain Fields · grain · flour | `src/data/resourceData.js :: RESOURCE_DATA.grain_fields` |
+| 1 | L3.failedFood | River Fisheries · fish · Wild Foraging Areas · honey · medicinal herbs · Strategic Crossroads · trade access · Iron Ore Deposits · iron · me | `src/data/resourceData.js :: RESOURCE_DATA.crossroads_position` |
+| 1 | L3.failedFood | iron · metalwork · Salted fish · Smoked seafood · Freshwater catch · Quality tools and weapons · Advanced weapons and armor · Refined iron i | `src/data/supplyChainData.js :: ADVANCED_WEAPONS_AND_ARMOR` |
+| 1 | L3.chainOverStopped | Taverns & Social Life · Entertainment & culture○ Operational | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 1 | L3.outputs | Lodging · Meals and drink · Stabling | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 1 | L3.foodLineStopped | What each holding grows goes to its own table; beyond that, what it puts on the table itself is fish from the local waters. | `src/domain/foodways.js :: FRAMES` |
+| 1 | L3.chainOverStopped | Black market · Criminal economy○ Operational | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+| 1 | L3.needed | Smelter · Crafts / Converts raw ore to refined metal using charcoal-fueled furnaces, whenever ore can be had. | `src/data/institutionalCatalog.js :: INSTITUTION_FAMILIES.shared` |
+| 1 | L3.halfway | Finished clothing · Dyed cloth | `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection` |
+
+### The fresh 300: L3 by writer file (the false line) and the file holding the fact it should have read
+
+| writer file | rule | towns | instances | the fact is in |
+|---|---|---|---|---|
+| `src/components/new/tabs/EconomicsTab.jsx` | L3.halfway | 16 | 27 | resourceAnalysis.gaps "Cannot produce final goods" (src/generators/resourceGenerator.js :: evaluateInstitutionDeps) against the chain's outputs (src/generators/computeActiveChains.js) |
+| `src/data/resourceData.js` | L3.failedFood | 22 | 22 | foodRecord.failedSource against src/components/new/tabs/ResourcesTab.jsx (commodities from src/data/resourceData.js) and the Trade Profile's produced-locally list |
+| `src/components/new/tabs/EconomicsTab.jsx` | L3.outputs | 17 | 21 | crisisStoppedRow.js (the service rows' marks) against src/domain/display/chainStateShown.js :: chainCrisisStateShown (the chain's state) — two deciders for one service |
+| `src/components/new/tabs/EconomicsTab.jsx` | L3.chainOverStopped | 7 | 7 | crisisStoppedRow.js (every service of the via houses stopped) against chainStateShown.js :: chainCrisisStateShown |
+| `src/data/institutionalCatalog.js` | L3.needed | 6 | 6 | resourceAnalysis.imports.critical (the "Needed, and not brought in" line) against crisisStoppedRow.js :: rowShortOf / housesShortOfInput (no "Short of" on the craft) |
+| `src/data/institutionDescVariants.js` | L3.needed | 4 | 4 | resourceAnalysis.imports.critical (the "Needed, and not brought in" line) against crisisStoppedRow.js :: rowShortOf / housesShortOfInput (no "Short of" on the craft) |
+| `src/data/supplyChainData.js` | L3.failedFood | 2 | 2 | foodRecord.failedSource against src/components/new/tabs/ResourcesTab.jsx (commodities from src/data/resourceData.js) and the Trade Profile's produced-locally list |
+| `src/domain/foodways.js` | L3.foodModel | 2 | 2 | economicState.foodSecurity.foodSources (src/generators/economy/foodBalance.js, which leaves out the Farmland house) printed by src/domain/foodways.js :: foodwaysLineOf |
+| `src/domain/foodways.js` | L3.foodLineStopped | 1 | 1 | crisisStoppedRow.js (the fishing marked stopped) against src/domain/foodways.js :: foodwaysLineOf |
 
 
 ## 3. PRECISION (the 720, drawn by a fixed seed and judged by hand against the page, by the second check's rules)
@@ -350,10 +472,11 @@ _PENDING: the fresh 300 still rendering._
 | draw | law | stand | what failed, and the narrowing that followed |
 |---|---|---|---|
 | 1 | L2 | 12 of 20 | 4 NPC names read as pilgrims ("Pilgrim Fuchs"); 1 a "Normally yields" chain line; 3 horse hire against "the army has the carts and the road" only (C7834 calls that degree). Narrowed: people's names stripped; "Normally yields" counts as a mark; the war-animals reach needs the receipts or old-and-lame line. |
-| 1 | L3 | not judged | not judged row by row: on reading, 13 of the 20 were L3.halfway rows resting on the generic "semi-finished" line, which names no material, so the rule was narrowed before judging. Narrowed: the page must name the material (Partial · <material>, or "Work on the <material> here stops half-way"). |
+| 1 | L3 | - | not judged row by row: on reading, 13 of the 20 were L3.halfway rows resting on the generic "semi-finished" line, which names no material, so the rule was narrowed before judging. Narrowed: the page must name the material (Partial · <material>, or "Work on the <material> here stops half-way"). |
 | 2 | L2 | 14 of 20 | 2 grain rows on the Trade Profile (WEAK; LAW 3's lists); 2 "Divine healing supplements mundane medicine" (EXPLAINED); 1 history "drew more pilgrims" 38 years ago (EXPLAINED); 1 income remedies row (WEAK). Narrowed: History skipped; the medicine words plural; the trade lists left to LAW 3. |
 | 2 | L3 | 19 of 20 | 1 a common pasture under "Needed: livestock" (WEAK). Narrowed after: L3.needed reads Crafts houses only (it only removes rows). |
 | 3 | L2 | 18 of 20 | 1 income remedies row (WEAK); 1 a toll-keeper's manner (WEAK). |
+| after the 300 | L2 | - | not a draw: the fresh 300 showed three kinds the draws had judged not standing, now in many towns. A person's manner ("How they deal … the travellers", WEAK at draw 3; 8 towns of the 300). "Alchemical remedies supplement treatment", the kind of "Divine healing supplements mundane medicine" (EXPLAINED at draw 2). A conditional "could bring pilgrims". Narrowed out; this only removes rows. The counts in section 2 are after it, and every STANDS control on the sixty is still found. |
 
 The counts in section 2 are after the last narrowing. LAW 3 was narrowed once more after draw 2, and that only removes rows: L3.needed now reads Crafts houses only. Every row of each judged draw, with its verdict and note, is in `tables/B.precision.720.json`.
 
@@ -536,8 +659,8 @@ WHAT LAW 5 CANNOT SEE:
 ## 6. FOR THE OWNER, IN PLAIN WORDS
 
 **LAW 2 (a crisis's reach, unmarked):**
-- In the 720 it stands in 48 towns (86 lines).
-- The fresh 300 is still pending.
+- In the 720 it stands in 48 towns (83 lines).
+- In the fresh 300 it stands in 51 towns (120 lines).
 - About nine in ten of what the detector finds is a real fault.
 - Most of it is **five kinds of line**:
   - one defence sentence that says a thief is shunned in a town whose law has collapsed;
@@ -551,7 +674,7 @@ WHAT LAW 5 CANNOT SEE:
 - In the source, 158 of the 244 crisis-sensitive lines of the printing pools are not declared against any crisis.
 
 **LAW 3 (one thing in two states on two tabs):**
-- In the 720 it stands in 134 towns (211 lines).
+- In the 720 it stands in 134 towns (211 lines), and in the fresh 300 in 66 towns.
 - Half of it is one rule, the "half-way" chains: the page says wool or hides are worked only half-way, while its own flows make cloth and boots.
 - In those towns, the check for "is the finishing house here?" looks for a "Fulling mill" or a "Leatherworkers' guild". Of the 171 houses it calls missing, 98 are there, as a Fuller or a Cobbler's guild.
 - The next cause is the vintner: "grapes needed and not brought in", while the vintner is never marked short.

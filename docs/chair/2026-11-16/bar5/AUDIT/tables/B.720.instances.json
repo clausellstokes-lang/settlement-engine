@@ -4472,25 +4472,6 @@
  {
   "law": "L2",
   "rule": "L2.siege.abroad",
-  "town": "r2s-under_siege-city-2",
-  "tab": "World/NPCs",
-  "i": 490,
-  "line": "How they deal Talks about the road and the travellers; knows who has passed and when.",
-  "against": {
-   "tab": "Summary/Crisis",
-   "i": 1,
-   "line": "Enemies are camped around Andronarion, and nothing comes in by road."
-  },
-  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
-  "crises": [
-   "under_siege"
-  ],
-  "writer": "src/data/people/titleSecretsPresentations.js :: ROWS",
-  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
- },
- {
-  "law": "L2",
-  "rule": "L2.siege.abroad",
   "town": "r2s-under_siege-city-3",
   "tab": "Systems/Institutions",
   "i": 33,
@@ -4812,25 +4793,6 @@
   "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {
-  "law": "L2",
-  "rule": "L2.siege.abroad",
-  "town": "r2s-under_siege-metropolis-1",
-  "tab": "World/NPCs",
-  "i": 335,
-  "line": "How they deal Talks about the road and the travellers; knows who has passed and when.",
-  "against": {
-   "tab": "Summary/Crisis",
-   "i": 1,
-   "line": "Enemies are camped around Torriplenum, and nothing comes in by road."
-  },
-  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
-  "crises": [
-   "under_siege"
-  ],
-  "writer": "src/data/people/titleSecretsPresentations.js :: ROWS",
-  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
- },
- {
   "law": "L3",
   "rule": "L3.outputs",
   "town": "r2s-under_siege-metropolis-1",
@@ -4961,25 +4923,6 @@
    "under_siege"
   ],
   "writer": "src/data/institutionDescVariants.js :: PAIRS",
-  "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
- },
- {
-  "law": "L2",
-  "rule": "L2.siege.abroad",
-  "town": "r2s-under_siege-metropolis-3",
-  "tab": "World/NPCs",
-  "i": 596,
-  "line": "How they deal Talks about the road and the travellers; knows who has passed and when.",
-  "against": {
-   "tab": "Summary/Crisis",
-   "i": 1,
-   "line": "Enemies are camped around Andronrion, and nothing comes in by road."
-  },
-  "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
-  "crises": [
-   "under_siege"
-  ],
-  "writer": "src/data/people/titleSecretsPresentations.js :: ROWS",
   "factWriter": "src/generators/narrative/settlementOriginProse.js :: ORIGIN_POOLS"
  },
  {

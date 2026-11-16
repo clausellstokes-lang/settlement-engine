@@ -8,7 +8,7 @@ import { sentences, lineMarked, cardAt, entryAt, MARK_LEAD } from './pageB.mjs';
 // the history tells of the past (precision draw 2: "drew more pilgrims" 38 years ago is no claim of today)
 const SKIP_TABS = /^(Summary\/Plot Hooks|World\/Rumors & News|World\/History|Notes\/)/;
 // a sentence that speaks of the crisis or of before it is the crisis's own account, not an ordinary-times claim
-const SELF_AWARE = /\b(siege|besieg|famine|war\b|the army|armies|before the|used to|no longer|until the\b|cut off|stopped|nothing comes|remember|no (camels|caravans?|traders?|pilgrims?) )/i;
+const SELF_AWARE = /\b(siege|besieg|famine|war\b|the army|armies|before the|used to|no longer|until the\b|cut off|stopped|nothing comes|remember|could bring|would bring|might bring|supplements? (mundane )?(treatment|medicine)|no (camels|caravans?|traders?|pilgrims?) )/i;
 
 // medicinal goods the page can say come from outside (rule S2: the page's own "depend on <good> from outside, which the siege has cut off")
 const CUT_GOODS = {
@@ -133,7 +133,8 @@ export function law2(T, town) {
         // chips only through r.chip; Needs/Backs never claim
         if (!/^Services · /.test(x.text)) continue;
       }
-      if (/^(Needs |Backs · |Connection:|Secret: )/.test(x.text)) continue;
+      // a person's manner ("How they deal") is no offer (precision draw 3, WEAK; 8 towns of the fresh 300)
+      if (/^(Needs |Backs · |Connection:|Secret: |How they deal )/.test(x.text)) continue;
       if (x.tab === 'Systems/Economics' && T.chains.some((c) => c.headIdx === x.i)) continue; // a chain's name and state
       if (x.tab === 'Systems/Economics' && /^(Produced locally|Exports|Imports)$/.test(T.tabs[x.tab][x.i - 1] || '')) continue; // the trade lists are LAW 3's
       if (x.tab === 'Systems/Services' && T.services.some((e) => e.houseIdx === x.i)) continue; // a house's name

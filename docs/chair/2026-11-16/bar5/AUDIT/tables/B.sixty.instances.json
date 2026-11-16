@@ -381,26 +381,6 @@
  },
  {
   "law": "L2",
-  "rule": "L2.siege.cutgood",
-  "town": "bar0-city-under_siege+famine-rand-24",
-  "tab": "Systems/Economics",
-  "i": 79,
-  "line": "Alchemical remedies supplement treatment",
-  "against": {
-   "tab": "Systems/Economics",
-   "i": 78,
-   "line": "Healing, surgical care and long-term recovery here depend on medicinal herbs from outside, which the siege has cut off."
-  },
-  "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
-  "crises": [
-   "under_siege",
-   "famine"
-  ],
-  "writer": "src/domain/display/magicProvisionShown.js :: NOT_FOOD_NOTES",
-  "factWriter": "src/domain/display/chainNeedShown.js :: chainNeedLine"
- },
- {
-  "law": "L2",
   "rule": "L2.siege.abroad",
   "town": "bar0-city-under_siege+famine-rand-25",
   "tab": "Systems/Institutions",
