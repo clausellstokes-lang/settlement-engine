@@ -891,3 +891,37 @@ export function plainGoodName(text) {
   return String(text ?? '').replace(/(\p{L})\s*\/\s*(\p{L})/gu, '$1 and $2');
 }
 
+
+/**
+ * WHO BRINGS THE FOOD IN NAMES THE CHANNEL THE RECORD GIVES (BAR6-ECON, LAW 9's rule 9c.carts of BRIEF-BAR6; the wide
+ * read's C177322; vetoable by the owner). The food sentence's carrier is the route's (`foodCarrier.js :: carriersOf`:
+ * ships over docks, carts on a road), and an isolated town whose food balance brings its share in by magic or by air
+ * (`economicViability.metrics.foodBalance.importChannel`: "teleportation circle", "airship traffic", "airship runs") was
+ * told "carts bring in", beside a page that says no trade road reaches it. The record's channel names the carrier where it
+ * is one no cart is: the circle, the airships. Every other channel (a route's trade, the minor routes and caravans) keeps
+ * the route's carrier; where the route's reading names none (a siege's cut), none is named here either.
+ * @param {string} carriers the route's carrier phrase (`carriersOf`), '' where no food comes in by trade
+ * @param {unknown} channel the food balance's `importChannel`
+ * @returns {string}
+ */
+export function foodCarriersShown(carriers, channel) {
+  if (!carriers || typeof channel !== 'string') return carriers;
+  if (/\bteleport/i.test(channel)) return 'the teleportation circle brings';
+  if (/\bairship/i.test(channel)) return 'airships bring';
+  return carriers;
+}
+
+/**
+ * THE IMPORTS' EMPTY LINE READS THE FOOD BROUGHT IN BELOW IT (BAR6-ECON, LAW 9's rule 9c.no-imports of BRIEF-BAR6; the
+ * wide read's C154358; vetoable by the owner). "No recorded imports." printed above the Food Security row's "+ 5 imported"
+ * and its sentence "carts bring in about three parts in five of the rest": the trade list carries no good, and the food
+ * the same tab says comes in is an import all the same. Where the food row brings any in (`foodRowShown.js`, the figure the
+ * row prints), the empty list says what is true: only food comes in. VETOABLE.
+ * @param {{ importCoverage?: unknown } | null | undefined} fb the food balance as the row prints it
+ * @returns {string}
+ */
+export function importsEmptyLineShown(fb) {
+  return Number(fb?.importCoverage) > 0 ? ONLY_FOOD_IMPORTED : 'No recorded imports.';
+}
+/** VETOABLE (BAR6-ECON): the twin of "No recorded imports." where the food row brings food in. */
+export const ONLY_FOOD_IMPORTED = 'Only food is brought in.';

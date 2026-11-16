@@ -939,20 +939,20 @@ already in register and stand as index 0 of their pools, quoted below.
 4. `[ledger · no walls]` Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own bounds.
 
 **ADEQUATE** {crisis-scoped}
-0. *(canonical)* `[colour]` Caravans keep to their rounds. Trade moves at its accustomed pace.
+0. *(canonical)* `[no crisis: under_siege]` Caravans keep to their rounds. Trade moves at its accustomed pace.
 1. `[ledger · crisis: any]` The traffic through {settlement} matches what the ledgers expect of it. Arrivals and departures come out even, week on week.
 2. `[street]` The carts come when the carts come. Nobody is watching the road for them.
 3. `[visitor · crisis: any]` Trade at {settlement} is ordinary: carts arrive and leave on their usual days.
 
 **SURPLUS × trade-dependent**
-0. *(canonical)* `[market]` The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.
+0. *(canonical)* `[market · no crisis: under_siege]` The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.
 1. `[ledger · market]` More is moving through {settlement} than the town's own trade accounts for. Everything the market depends on arrives ahead of its need.
 2. `[street · market]` The yard is full most mornings and the market is fat on it. What the town cannot make, the town can simply buy.
 3. `[visitor · colour]` Visitors wait behind carts to get into {settlement}. The roads carry more than the town needs.
 
 **SURPLUS × not trade-dependent**
 1. `[ledger · colour]` Heavy traffic runs through {settlement}, but most of it is bound elsewhere and leaves little behind.
-2. `[street · colour]` Plenty passes here. Not much of it stops.
+2. `[street · no crisis: under_siege]` Plenty passes here. Not much of it stops.
 3. `[visitor · market]` The traffic on these roads outruns the market. What arrives is mostly going somewhere else.
 
 ---
@@ -1143,7 +1143,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 1. `[ledger · dm-only · no organised crime]` Some of {settlement}'s trade is done out of sight, and nobody has organised it into anything more.
 2. `[street · dm-only · no organised crime]` There is some thieving and some selling without a licence. Every town this size has both.
 3. `[counterforce · dm-only · no organised crime]` What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.
-4. `[ledger · organised crime]` Little of {settlement}'s trade goes unrecorded, but what does goes through the same organised hands each time.
+4. `[ledger · crime: ≥ organized]` Little of {settlement}'s trade goes unrecorded, but what does goes through the same organised hands each time.
 5. `[street · organised crime]` The shadow trade at {settlement} is small, but it is not casual: somebody organises it.
 
 **FLAG: arcaneBlackMarket**
@@ -1157,11 +1157,11 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 3. `[visitor · dm-only · colour]` A merchant arriving at {settlement} soon learns that the religious house has the last word on who trades here and on what terms.
 
 **FACET: an underground house**
-1. `[ledger · dm-only · colour]` {settlement}'s {institution} works below its streets, in cellars and tunnels out of sight of the town above.
+1. `[ledger · dm-only · colour]` {settlement}'s {institution} works below ground, in cellars and tunnels out of sight of the houses above.
 2. `[street · dm-only · colour]` The way into {settlement}'s {institution} is through a cellar, and the people who use it come and go by passages under the town.
 
 **FACET: a clandestine house**
-1. `[ledger · dm-only · colour]` {settlement}'s {institution} does its business out of sight and pays nothing to the town's tax collectors.
+1. `[ledger · dm-only · colour]` {settlement}'s {institution} does its business out of sight and pays the town no dues.
 2. `[street · dm-only · colour]` Plenty of people at {settlement} have used its {institution}; few will say where it meets or who runs it.
 
 ---
@@ -1271,11 +1271,11 @@ contradict** it (R-DST-C).
 3. `[unfolding · colour]` As long as food costs {settlement} this much, the town's fortunes will sit a step lower than its work deserves.
 
 **FOOD AND PROSPERITY: full stores lift the town** *(type bonus)*
-1. `[ledger · institution: granary]` Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.
+1. `[ledger · institution: granary · no crisis: famine]` Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.
 2. `[street · institution: granary]` Nobody at {settlement} worries much about the next meal, and the spare food in the granary is part of why the town does as well as it does.
 3. `[unfolding · institution: granary]` With its granary full, {settlement} can meet a lean season without selling what it cannot spare.
-4. `[trade · colour]` {settlement} grows more food than it eats, and what it sells of the surplus brings coin in every season.
-5. `[local · colour]` A lean month at {settlement} is something people talk about, not something they live through, and the full larders are part of why the place does well.
+4. `[trade · no crisis: famine · no crisis: under_siege]` {settlement} grows more food than it eats, and what it sells of the surplus brings coin in every season.
+5. `[local · no crisis: famine · no crisis: under_siege]` A lean month at {settlement} is something people talk about, not something they live through, and the full larders are part of why the place does well.
 6. `[threshold · colour]` {settlement}'s good fortune rests partly on its harvests: so long as they come in full, the place can afford to be generous.
 
 ---
@@ -1727,6 +1727,11 @@ A composed page draws one of each grain, never two.
 4. `[street · no crisis: under_siege]` The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.
 5. `[unfolding · crisis: under_siege]` With the roads cut by the siege, {settlement} can no longer send out its {resource}, and what it has stays in the town.
 
+**EXPLOITATION: `partiallyExploited`, nothing exported** *(BAR6-ECON: the twin of the pool above where the export list the Economics tab prints holds nothing: "No significant exports.")*
+1. `[ledger]` {settlement} works part of the line that {resource} could support, and none of it is sold beyond the town now.
+2. `[street]` What {settlement} takes from its {resource}, it keeps; none of it goes out to buyers at present.
+3. `[visitor]` Nothing of {settlement}'s {resource} goes out to buyers now, worked or raw.
+
 **EXPLOITATION: `fullyExploited`**
 1. `[ledger · no crisis: under_siege]` The {resource} in {settlement}'s country is worked all the way to the finished {good}.
 2. `[visitor · gate · no crisis: under_siege]` Every stage of the {resource} trade at {settlement} is done here, from the ground to the gate.
@@ -1893,7 +1898,8 @@ reading of the catalog itself.
 **SEVERAL EXPECTED CATEGORIES MISSING**
 1. `[ledger]` {settlement} offers fewer services than a place its size usually does.
 2. `[street]` This town is bigger than the things it can do for you, and the people here are used to going elsewhere for several of them.
-3. `[visitor]` Travellers stock up before they reach {settlement}; a place this size cannot supply all they would expect.
+3. `[visitor · no crisis: under_siege]` Travellers stock up before they reach {settlement}; a place this size cannot supply all they would expect.
+4. `[unfolding · crisis: under_siege]` {settlement} offers fewer services than a place its size usually does, and while the siege lasts nobody from outside comes to make up the rest.
 
 **THE HEALING GAP** *(the absence that reads as a real deficiency rather than an inconvenience)*
 1. `[ledger]` {settlement} keeps no house of healing at a size where one is assumed; what is done for the badly hurt here is done by whoever is nearest.
@@ -1909,6 +1915,11 @@ reading of the catalog itself.
 1. `[ledger]` {settlement}'s {institution} is open but short of supplies, and it can do less than it used to.
 2. `[street]` The house is still there and cannot do half of what it is known for, and the town has adjusted its expectations quietly.
 3. `[unfolding]` {settlement}'s {institution} can offer less the longer its supplies stay short, and nobody is putting it right.
+
+**A CATEGORY PRESENT BUT ITS HOUSE STOPPED** *(BAR6-ECON: the twin of the pool above where the siege stops every service the house keeps)*
+1. `[ledger · crisis: under_siege]` {settlement}'s {institution} still stands, but the siege has stopped every service it keeps.
+2. `[street · crisis: under_siege]` The doors of {settlement}'s {institution} are open and there is nothing behind them to sell; the siege has stopped all its work.
+3. `[unfolding · crisis: under_siege]` {settlement}'s {institution} does none of its trade while the siege lasts, and will take up again only when the roads open.
 
 **A METROPOLIS-TIER CATALOG, COMPLETE**
 1. `[ledger]` {settlement} has every kind of service there is, including some no ordinary place would keep.

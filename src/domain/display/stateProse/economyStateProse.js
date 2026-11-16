@@ -1221,7 +1221,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const strengthsKey = terrainNamed ? economicStrengthsPoolKey(analysis?.economicStrengths) : null;
   const strategicKey = strategicValuePoolKey(analysis?.strategicValue);
   const leading = leadingExploitation(/** @type {ResourceAnalysisView} */ (exploitationForDesk(/** @type {Parameters<typeof exploitationForDesk>[0]} */ (settlement)))); // W2-C-LEAVES-3 P1-c (SHARED FILE, this one read): the grade the cards print
-  const exploitKey = leading ? exploitationPoolKey(leading.row, leading.bucket) : null;
+  const exploitKey = leading ? partialUnderNoExport(exploitationPoolKey(leading.row, leading.bucket), settlement) : null; // BAR6-ECON (9d.no-exports): the export list the page prints
   // ⚠ THE EXPLOITATION LENS CARRIES ITS OWN SLOT BAG, and that is the whole of finding
   // R-DST-ROLE. `{good}` in the shared bag means THE TOWN'S LEADING EXPORT (DS-ECO-12's
   // seams say "sends {good} out"); here it means the finished article at the far end of one
@@ -1238,7 +1238,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
 
   // ── DS-SUP-3, the catalog and its absences ──────────────────────────────────────────
   const catalogKey = serviceCatalogPoolKey(readings.notableAbsences, settlement?.tier);
-  const impairedKey = impairedServicePoolKey(readings.impairedInstitution);
+  const impairedKey = houseStoppedWhole(impairedServicePoolKey(readings.impairedInstitution), settlement, readings.impairedInstitution); // BAR6-ECON (8e.open)
   const impairedSlots = impairedKey
     ? { institution: properFill(text(readings.impairedInstitution)) }
     : null;
@@ -1359,3 +1359,47 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
 // W2-C-LEAVES-3 P1-c: the grade the Resources tab's cards print (at the end of the file, so no line-keyed row above moves).
 import { exploitationForDesk } from '../validationOnPage.js';
 import { foodWordShown } from '../foodWordShown.js'; // BAR5-FOOD (c): the page's food word
+
+/**
+ * "THE RAW MATERIAL MOVES" READS THE EXPORT LIST THE PAGE PRINTS (BAR6-ECON, LAW 9's rule 9d.no-exports of BRIEF-BAR6;
+ * the wide read's C211337 C217617; vetoable by the owner). The Economics tab prints its export column from ONE filtered
+ * list (`tradeListDisplay.js :: tradeListsAsPrinted`: each export borne out, a famine's failed herds' wool among those it
+ * leaves out) and says "No significant exports." where it holds none; the Resources tab's partial-exploitation line said
+ * of the same town "the raw material moves" (and its siblings "sends its {resource} out", "sells the rest of it"). Where
+ * the printed list holds no export at all and trade is not stopped (a siege has its own line, variant 5 of the pool), the
+ * line is drawn from its twin pool, which says the work is begun and nothing of it leaves.
+ * @param {string | null} key the exploitation pool key (`exploitationPoolKey`)
+ * @param {unknown} settlement the town
+ * @returns {string | null}
+ */
+function partialUnderNoExport(key, settlement) {
+  if (key !== 'EXPLOITATION: partiallyExploited' || !settlement || typeof settlement !== 'object' || tradeStoppedHere(settlement)) return key;
+  return tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement)).exports.length === 0 ? PARTIAL_NO_EXPORT_KEY : key;
+}
+/** The twin pool's key in DS-ECO-11 (the annex). */
+export const PARTIAL_NO_EXPORT_KEY = 'EXPLOITATION: partiallyExploited, nothing exported';
+import { tradeListsAsPrinted } from '../tradeListDisplay.js';
+import { tradeStoppedHere } from '../chainStateShown.js';
+
+/**
+ * "OPEN BUT SHORT OF SUPPLIES" READS THE HOUSE'S OWN MARKS (BAR6-ECON, LAW 8's rule 8e.open of BRIEF-BAR6; the wide read's
+ * C25827; vetoable by the owner). The Services tab's closing line said of a besieged city's caravan exchange that it "is
+ * open but short of supplies, and it can do less than it used to", while its card and both tabs print its every service
+ * "Stopped by the siege.". Where every service row the house keeps (`dossier/entityLinks.js :: serviceRowsOf`, joined by
+ * `institution`) is stopped by the siege (`crisisStoppedRow.js :: rowStoppedBy`, kind 'service', the siege's own stop and
+ * not its partial kind), the line is drawn from the twin pool, which says the siege has stopped all its work.
+ * @param {string | null} key the impaired-service pool key (`impairedServicePoolKey`)
+ * @param {unknown} settlement @param {unknown} name the house the Services tab names
+ * @returns {string | null}
+ */
+function houseStoppedWhole(key, settlement, name) {
+  if (key !== 'A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED' || !settlement || typeof settlement !== 'object') return key;
+  const house = text(name);
+  const rows = serviceRowsOf(/** @type {{ availableServices?: unknown }} */ (settlement).availableServices).map(({ svc }) => svc)
+    .filter((row) => row && row.institution === house);
+  return rows.length > 0 && rows.every((row) => rowStoppedBy(settlement, 'service', row) === 'under_siege') ? HOUSE_STOPPED_KEY : key;
+}
+/** The twin pool's key in DS-SUP-3 (the annex). */
+export const HOUSE_STOPPED_KEY = 'A CATEGORY PRESENT BUT ITS HOUSE STOPPED';
+import { serviceRowsOf } from '../../dossier/entityLinks.js';
+import { rowStoppedBy } from '../crisisStoppedRow.js';

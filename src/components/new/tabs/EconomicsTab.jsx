@@ -25,7 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName, institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
-import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown, plainGoodName } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown, plainGoodName, foodCarriersShown, importsEmptyLineShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -120,7 +120,7 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
-  const runningCount    = chains.filter(c => c.status === 'running').length; const impairedHouses = impairedHousesOf(town); const flowCount = flowHeaderCount(chains, institutionalServices, impairedHouses); // X2: the header counts what the cards show
+  const runningCount    = chains.filter(c => c.status === 'running').length; const impairedHouses = impairedHousesOf(town); const flowCount = flowHeaderCount(chains, institutionalServices, impairedHouses, town); // X2: the header counts what the cards show
 
   const filtered = flowFilter === 'all'        ? chains
     : flowFilter === 'impaired'   ? chains.filter(c => c.status === 'impaired' || c.status === 'vulnerable')
@@ -266,8 +266,8 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
                 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>
                   <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:svc.color,background:`${svc.color}15`,padding:'0 5px'}}>Service</span>
-                  {svc.exportable && <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch.success,background:swatch['#E8F5EC'],padding:'0 5px'}}>Export</span>}
-                  {((svcImpaired) => <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:svcImpaired?FLOW_STATUS.impaired.color:swatch.inkMag3,background:svcImpaired?`${FLOW_STATUS.impaired.color}15`:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>{svcImpaired?FLOW_STATUS.impaired.label:'○ Operational'}</span>)(serviceStateShown(svc.institutions, impairedHouses) === 'impaired')}
+                  {((card) => <>{/* BAR6-ECON (8d.export, 8e.svcOutput): the card reads the siege's stop of its export and its output's marked service (economicsCrisisMarks.js :: serviceCardShown) */}{svc.exportable && <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:card.exportStopped?FLOW_STATUS.impaired.color:swatch.success,background:card.exportStopped?`${FLOW_STATUS.impaired.color}15`:swatch['#E8F5EC'],padding:'0 5px'}}>{card.exportStopped?EXPORT_STOPPED_TAG:'Export'}</span>}
+                  {((svcImpaired) => <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:svcImpaired?FLOW_STATUS.impaired.color:swatch.inkMag3,background:svcImpaired?`${FLOW_STATUS.impaired.color}15`:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>{svcImpaired?FLOW_STATUS.impaired.label:'○ Operational'}</span>)(card.state === 'impaired')}</>)(serviceCardShown(town, svc, impairedHouses))}
                 </div>
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>
                   <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionHouseLabel).join(' · ')}
@@ -403,7 +403,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <NarrativeNote note={narrativeNote} />
 
       {/* ── PROSPERITY HEADER (the tab's glance surface; the campaign tiles close the page) ── */}
-      <EconomicsGlance eco={eco} settlement={s} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
+      <EconomicsGlance eco={{ ...eco, economicComplexity: complexityLabelShown(eco) }} settlement={s} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
         headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung} />
 
       {econOrdinaryTimesLine(s, eco)&&<p data-testid="economics-ordinary-times" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5}}>{econOrdinaryTimesLine(s, eco)}</p>}{/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
@@ -513,7 +513,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                   {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}>Settlement necessity</span>}
                 </div>}
               </div>
-              :tradeStoppedHere(s)?null:<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>
+              :tradeStoppedHere(s)?null:<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>{importsEmptyLineShown(fb)}</p>
             }{unmetNeeds.length>0&&<NeedsNotMet needs={unmetNeeds} mobile={mobile} />}
           </div>
         </div>
@@ -635,7 +635,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         // Scale context: same % means different things at different tiers
         const _tier = s?.tier || 'village';
         const scaleNote = bmc>=30
-          ? 'Much of the trade here never passes the tax collector, so the duties come in far short and guild members are undersold by traders who pay no fees.'
+          ? 'Much of the trade here is never taxed, so the duties come in far short and those who pay their dues are undersold by traders who pay none.' // BAR6-ECON (LAW 5 widened, office): no guild and no tax collector presumed
           : bmc>=15
           ? 'A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.'
           : 'Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.';
@@ -779,7 +779,7 @@ const shortWords = (pct, famine = false, band = null) => (pct <= 0 ? 'Between th
  */
 function foodSentence(s, eco, fb, fbal, foodBar, foodDeficit, foodSurplus) {
   const name = s?.name || 'This place';
-  const carriers = carriersOf(s, eco); // W2-C-LEAVES-4 item 3(b): the route's own home and the wharf on the roster
+  const carriers = foodCarriersShown(carriersOf(s, eco), s?.economicViability?.metrics?.foodBalance?.importChannel); // W2-C-LEAVES-4 item 3(b): the route's own home and the wharf on the roster; BAR6-ECON (9c.carts): the record's channel where no cart carries it
   const magic = fb.magicFoodOffset > 0 ? ` ${foodBar.magicChannel.charAt(0).toUpperCase()}${foodBar.magicChannel.slice(1)} provision makes up ${shareWords(fb.magicFoodOffset / Math.max(1, fb.dailyNeed), GROWN_BANDS, 'nearly all')} of what it needs.` : ''; // X12: a share of the need, said so
   if (!foodDeficit) {
     if (!foodSurplus) return `What is grown here${fb.importCoverage > 0 && carriers ? ' and brought in' : ''} covers each day's food${Math.round(Number(eco?.foodSecurity?.foodRecord?.storageMonths)) >= 3 ? '.' : ', with nothing to spare against a bad year.'}`;
@@ -838,7 +838,7 @@ function NeedsNotMet({ needs, mobile }) {
  * the carrier, the food record) and the Institutions tab's impaired houses (`tabHelpers.js :: computeChainSets`); the
  * record is not touched. At the end of the file, so no line-keyed row above moves.
  */
-import { chainAsShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
+import { chainAsShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
 import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
 import { computeChainSets } from '../tabHelpers.js';
 /** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
@@ -868,14 +868,16 @@ import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js'; i
  * @param {ReadonlyArray<{ status?: unknown }>} chains the chains as their cards print them (`chainAsShown`)
  * @param {ReadonlyArray<{ institutions?: unknown }>} services `economicState.institutionalServices`
  * @param {ReadonlySet<string>} impairedHouses the houses the Institutions tab marks impaired, lower case
+ * @param {object | null} [town] the settlement (the service card's reading, `serviceCardShown`)
  * @returns {{ active: number, impaired: number, words: string }}
  */
-function flowHeaderCount(chains, services, impairedHouses) {
-  const svcImpaired = services.filter((v) => serviceStateShown(/** @type {any} */ (v)?.institutions, impairedHouses) === 'impaired').length;
+function flowHeaderCount(chains, services, impairedHouses, town = null) {
+  const svcImpaired = services.filter((v) => serviceCardShown(town, /** @type {any} */ (v), impairedHouses).state === 'impaired').length; // BAR6-ECON: the service card's own reading
   const impaired = chains.filter((c) => c.status === 'impaired').length + svcImpaired;
   const active = chains.filter((c) => c.status !== 'impaired' && c.status !== '').length + services.length - svcImpaired;
   const words = active > 0 ? ` (${active} active${impaired > 0 ? ` · ${impaired} impaired` : ''})` : impaired > 0 ? ` (${impaired} impaired)` : '';
   return { active, impaired, words };
 }
 
-import { factsOf } from '../../../domain/facts/factsOf.js'; import { chainCardUnderSiege, flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
+import { factsOf } from '../../../domain/facts/factsOf.js'; import { complexityLabelShown } from '../../../domain/display/labelBands.js'; /* BAR6-ECON (9b.subsistence): the survival label's twin under a purse past survival */ import { chainCardUnderSiege, flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown, serviceCardShown, EXPORT_STOPPED_TAG } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
+
