@@ -123,7 +123,9 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
   // whose burner the story leaves idle (its woodland used up, nothing bought): the gap line prints and the row is short
   test('(d) the mark follows the page\'s gap line: the row whose input nothing answers reads short, on the real page and on a constructed record', () => {
     const s = town('r2s-religious_conversion-hamlet-2');
-    expect(resourceGapLines(s).map((l) => String(l?.impact ?? ''))).toContain('No timber reaches the charcoal burner.');
+    // RE-KEYED BY IDENTITY (BAR8-J-ROWS G1, 2026-11-17): the worked-out burner's gap line is its story's own line (the general
+    // line beside it struck); no town of the 720 or the 150 prints the burner's general line alone, so the claim stays here
+    expect(resourceGapLines(s).map((l) => String(l?.impact ?? ''))).toContain('The charcoal burner is worked out: its own ground is depleted (Managed woodland).');
     expect(rowMarkText(s, 'service', row(s, 'Charcoal supply'))).toMatch(/^Short of /);
     const e = s.economicState;
     const built = { ...s, config: { ...s.config, tradeRouteAccess: 'isolated' }, economicState: { ...e, tradeAccess: 'isolated', localProduction: [], primaryExports: [], primaryImports: [], foodSecurity: { ...e.foodSecurity, foodRecord: { ...(e.foodSecurity?.foodRecord || {}), foodSources: [], normalImportPct: 0 } } } };

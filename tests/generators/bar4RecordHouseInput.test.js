@@ -87,7 +87,10 @@ describe('R1: a house the record calls short of its input is short on the page t
   });
 
   it('KEEP: the gap line the record now asks for prints, and the mark has its line', () => {
-    expect(resourceGapLines(BORN.get(BURNER_SHORT)).map((l) => l.impact)).toContain(gapLineOf('mountainTimber', 'charcoal burner'));
+    // RE-KEYED BY IDENTITY (BAR8-J-ROWS G1, 2026-11-17): a worked-out house's gap line is its story's own line, the general line
+    // beside it struck (one house, one material, one line). No town of the 720 or the 150 prints the burner's general line alone
+    // (every short burner is worked out), so the claim stays on this town, by the line the page now prints for the house.
+    expect(resourceGapLines(BORN.get(BURNER_SHORT)).map((l) => l.impact)).toContain('The charcoal burner is worked out: its own ground is depleted (Managed woodland).');
     expect(resourceGapLines(BORN.get(REKEYED.sawmill)).map((l) => l.impact)).toContain(gapLineOf('timber', 'sawmill'));
     // a siege shuts the road: the besieged caravanserai is short, and says so
     expect(resourceGapLines(BORN.get('r2s-under_siege-town-1')).map((l) => l.impact)).toContain(gapLineOf('camelCaravan', 'caravanserai'));

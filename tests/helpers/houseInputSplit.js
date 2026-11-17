@@ -37,7 +37,11 @@ const arr = (x) => (Array.isArray(x) ? x : []);
  */
 export function houseInputSplits(record, { rungHeads = ['sawmill'] } = {}) {
   const lines = resourceGapLines(record).map((l) => String(l.impact));
-  const reached = new Set(lines.map((l) => l.match(/^No .+ reach(?:es)? the (.+)\.$/)?.[1]).filter(Boolean).map((h) => String(h).toLowerCase()));
+  // RE-KEYED BY IDENTITY (BAR8-J-ROWS G1, 2026-11-17): the page says no input reaches a house by its general gap line, or, for a
+  // house whose supply story has its own line (worked out on its spent ground; the failed venture), by that line alone: the
+  // general line beside it is struck (one house, one material, one line)
+  const said = (/** @type {string} */ l) => l.match(/^No .+ reach(?:es)? the (.+)\.$/)?.[1] ?? l.match(/^The (.+?) (?:is|are) (?:worked out|failing):/)?.[1] ?? l.match(/^The (.+?) stands? abandoned\b/)?.[1];
+  const reached = new Set(lines.map(said).filter(Boolean).map((h) => String(h).toLowerCase()));
   /** @type {Array<{ house: string, chain: string, lines: string[] }>} */
   const out = [];
   const seen = new Set();
