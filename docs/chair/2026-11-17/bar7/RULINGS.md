@@ -248,3 +248,23 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   27; outsiders 26; 47 magic only; 30 the owner's own). THE ODDS DO NOT CHANGE. The brief was published whole BEFORE the
   seat was seated (a seat reads a late message late: BIRTH-2 read one only after it had handed back). Every row is on
   the owner's veto list; the owner sees each beside a real card at the seat's hand-back.
+- **BR8 (2026-11-17, 09:28 UTC; the chair's, vetoable; IT CORRECTS THE CHAIR'S OWN BR5 AND BR7): THE SEED WRITES ONCE, AT
+  THE BIRTH; EVERY VIEW READS THE RECORD.** BR5 and BR7 had the page read the town's seed to tell each house's story
+  ("nothing stored; one function reads the seed for the birth and the print"). THE CHAIR DID NOT KNOW THAT EVERY SHARED
+  VIEW IS STRIPPED OF THE SEED (the seed is confidential on every shared page, gallery view and the DM screen:
+  `src/domain/display/publicSafe.js`): there the story was read with an empty seed while the stored gaps and imports
+  carried the birth's story: two views of one town told two stories (the second reader's H1 on BIRTH-2; verified by the
+  chair in the code; the cause of the public prose equality test's two towns). RULED: (1) no reader at print, in any
+  view, reads the seed or anything worked out from it at read time; the seed enters the supply rule at one place, the
+  birth's writer; (2) the birth writes every story it picks into the fields the page already stores: the import's word
+  where the story is bought in; a gap row for every house its story leaves without its material (idle on a used-up
+  ground; the failed venture), whether or not a chain asks the material; nothing where the land answers; (3) the one
+  reading is a function of the stored record alone; (4) the gap line's contract stands; (5) NO NEW FIELD ON THE SAVED
+  RECORD AND THE SEED STAYS CONFIDENTIAL: nothing is stored but what the page already prints; (6) a town saved before
+  the rule tells the story its stored rows tell; (7) the guard holds THE THREE EQUAL: the record, the record without
+  its seed and its public projection tell one story, mark for mark and line for line, and the birth's pick for every
+  house equals the story read back. BUILT BY BIRTH-3 (`docs/chair/2026-11-14/briefs/BRIEF-BIRTH-3.md`) on the joined
+  tree: it is cut from BIRTH-2's tip and its first commit is the one merge of the line's tip into its own branch (the
+  chair had asked JOIN-17 for a staging branch; JOIN-17 rightly refused to push any branch but the line; no one
+  pushes outside their own branch). THE OWNER'S DESIGN IS UNCHANGED (the stories, the odds, the failed venture): only
+  where the dice's result is kept changes: on the page's own rows, not in a re-reading of the seed.
