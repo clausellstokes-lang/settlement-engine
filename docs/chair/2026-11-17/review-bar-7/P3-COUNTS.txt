@@ -1,0 +1,58 @@
+P3 (PREP-READ-7, 2026-11-17) over the thirty dumps of REVIEW-BAR-7's render (tree 4a9735d2f9ed4ef8e21aa19ec145de2e719e11f0, seeds.bar7.txt).
+Made by: python3 -I docs/chair/2026-11-17/review-bar-7/p3_count.py <scratch>/render/dumps <scratch>/publish <rows.json> <scratch>/render/corpus.ndjson.gz
+  <rows.json>: in the tree, node -e "import('./src/data/rareSecrets.js').then(m=>{const o=[];for(const [fam,rows] of Object.entries(m.RARE_SECRET_ROWS))for(const r of rows)o.push({fam,key:r.key,what:r.what,stakes:r.stakes});require('fs').writeFileSync('<rows.json>',JSON.stringify(o))})"
+A dump holds every surface (the tabs, the Tonight sheet, the PDF's text, the Foundry journal); the packets hold the tabs World, Systems, Summary, Table only.
+
+P3 · WHAT THE PAGE NOW PRINTS BY DESIGN, COUNTED (thirty dumps: every surface of the dump; and the packets: the lines the readers read)
+pattern                                                dump lines    towns   packet lines
+Abandoned: a failed venture.                                    7        1              4
+Failing: a failed venture.                                      5        1              3
+Curtailed by the siege.                                       292        6            144
+Stopped by the siege.                                         277        6            121
+Short of (as a mark)                                           49        6             26
+ is worked out: its own ground is depleted                     12        5              6
+^No .+ reach(es)? (a gap line)                                 16        7              8
+ stands abandoned, a venture of an earlier time                 2        1              1
+ failing: no                                                    2        1              1
+Curtailed by the war.                                          32        1             16
+a card line that is ONLY a house mark (NPC sections)             83       16             92
+   (the packet column of this row: packet lines that are only a mark, any section)
+   (by section: {'World/NPCs': 75, 'PDF/NotableNPCs': 8}; every line of the dump that is only a mark, any section: 122, by section: {'World/NPCs': 75, 'PDF/EconomicsTrade': 24, 'Systems/Economics': 15, 'PDF/NotableNPCs': 8})
+   (by mark: {'Curtailed by the siege.': 43, 'Stopped by the siege.': 18, 'Scarce in the famine.': 6, 'Curtailed by the war.': 4, 'Short of iron ore.': 4, 'Short of stone.': 3, 'Short of iron.': 2, 'Short of fish.': 2, 'Failing: a failed venture.': 1})
+   three as printed (the line above it, then the mark):
+     bar0-city-under_siege+famine-rand-45:1365 [World/NPCs]  Docks/port facilities · member of Merchant Guild Council  /  Stopped by the siege.
+     bar0-city-under_siege+famine-rand-45:1399 [World/NPCs]  Specialized metalworkers · member of Merchant Guild Council  /  Curtailed by the siege.
+     bar0-city-under_siege+famine-rand-46:1641 [World/NPCs]  Bakers · member of Noble Governorship  /  Scarce in the famine.
+
+THE THREE TOWNS WITH THE MOST "Short of " MARKS (dump lines):
+  bar0-metropolis-calm-rand-47 · 13 lines
+     541 [Systems/Institutions] Short of iron ore. A shaft driven into the deposits, with winding gear and ore carts at the pithead, worked whenever ore can be had.
+     580 [Systems/Institutions] Short of stone. A stone quarry and its dressing yards, worked whenever good stone can be had.
+     830 [Systems/Services] Short of stone. Dressed stone blocks for construction. Consistency and size matter for fortifications.
+     896 [Systems/Services] Short of iron ore. Ore cut underground by the crews and brought out by cart for sorting.
+     911 [Systems/Services] Short of stone. Rough stone for road beds and fill. Bulk sale, low value per unit.
+  bar0-town-occupied-rand-46 · 10 lines
+     154 [Systems/Institutions] Short of iron. Multiple smiths with specializations.
+     293 [Systems/Services] Short of iron. Essential service for any settlement with working horses. Routine maintenance.
+     305 [Systems/Services] Short of iron. Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new.
+     311 [Systems/Services] Short of iron. Axes, ploughs, hinges, nails. The foundation of agricultural and construction work.
+     705 [World/NPCs] Short of iron.
+  bar0-metropolis-calm-rand-46 · 7 lines
+     594 [Systems/Institutions] Short of stone. A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.
+     903 [Systems/Services] Short of stone. Dressed stone blocks for construction. Consistency and size matter for fortifications.
+     987 [Systems/Services] Short of stone. Rough stone for road beds and fill. Bulk sale, low value per unit.
+     2629 [World/NPCs] Short of stone.
+     4765 [PDF/Institutions] Short of stone. A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.
+
+THE VERY RARE SECRETS (src/data/rareSecrets.js, 194 rows, matched by each row's "what" text, the holder read from the record's npcs[].secret; a row's stakes alone is not matched: "It does not" would match any prose): every line of the thirty dumps
+  bar0-city-under_siege+famine-rand-45 · Aifric Doyle · [World/NPCs:1445] ties/dragonBlood · Secret: Carries a dragon's blood, and it has begun to show
+  bar0-city-under_siege+famine-rand-46 · Vasyl Smirnov · [World/NPCs:1812] natures/noPain · Secret: Feels no pain, heat or cold, and has never told anyone
+  bar0-city-under_siege+famine-rand-46 · Vesna Zaytsev · [World/NPCs:1823] deeds/swappedBabes · Secret: Exchanged two newborns years ago to save one of them from a hard house, and has watched both grow
+  bar0-city-under_siege+famine-rand-47 · Swati Khanna · [World/NPCs:1282] ties/wolves · Secret: Was raised by wolves until the age of seven, and has told everyone it was an aunt
+  bar0-city-wartime-rand-47 · Ehecatl Koh · [World/NPCs:2023] natures/truthInWine · Secret: Tells the whole plain truth when drunk, and so never drinks
+  bar0-city-wartime-rand-47 · Utzil Cohuoh · [World/NPCs:2126] deeds/soldThrice · Secret: Sold the same field to three buyers, and is running out of excuses
+  bar0-hamlet-under_siege-rand-46 · Uinseann Brennan · [World/NPCs:454] ties/twin · Secret: Has a twin no one here knows of, who has already been mistaken for them once
+  bar0-hamlet-under_siege-rand-46 · Lasairfhiona MacCarthy · [World/NPCs:478] deeds/cursed · Secret: Called a curse down on a neighbour, and it worked
+  bar0-hamlet-under_siege-rand-46 · Uinseann Brennan · [PDF/NotableNPCs:1381] ties/twin · Has a twin no one here knows of, who has already been mistaken for them once: The twin is not a careful person
+  bar0-hamlet-under_siege-rand-46 · Uinseann Brennan · [Journal/NPC 2:1619] ties/twin · Has a twin no one here knows of, who has already been mistaken for them once: The twin is not a careful person
+  lines 10 · towns 5 · rows {'ties/dragonBlood': 1, 'natures/noPain': 1, 'deeds/swappedBabes': 1, 'ties/wolves': 1, 'natures/truthInWine': 1, 'deeds/soldThrice': 1, 'ties/twin': 3, 'deeds/cursed': 1}
