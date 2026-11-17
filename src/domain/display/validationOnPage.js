@@ -42,7 +42,7 @@ import { catalogIdForName, familyOfInstitution, institutionalCatalog } from '../
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
 import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, tradeFinisherIn, ventureHouseOf } from '../facts/houseInputAtHand.js';
-import { sourceStoryOf, ventureLineText } from '../facts/supplyStory.js';
+import { FAMILY_NOUN, GROUND_YIELD, rowGoodOf, sourceStoryOf, ventureLineText } from '../facts/supplyStory.js';
 import { SOURCE_GROUNDS, isSourceHouse } from '../facts/houseKinds.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
@@ -513,6 +513,35 @@ export function resourceGapLines(s) {
 
   // The houses the generator calls short of an input, grouped by house: one line per idle house.
   const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (s));
+  /**
+   * BAR8-J-ROWS (G1): the house's own story lines (worked out; the failed venture's) and the materials they tell: a
+   * worked-out source house's every own ground is spent (`sourceGround`), so it tells each ground's good (by the row's own
+   * name: a peat cutter's peat); the venture tells its material.
+   * @param {{ name?: unknown, catalogId?: unknown }} inst @param {string} name @param {string} severity
+   * @returns {{ lines: GapLine[], nouns: Set<string> }}
+   */
+  const storyLines = (inst, name, severity) => {
+    /** @type {GapLine[]} */
+    const lines = [];
+    const nouns = new Set();
+    const id = str((typeof inst?.catalogId === 'string' && inst.catalogId) || catalogIdForName(str(inst?.name)) || '');
+    const ground = sourceGround(s, inst);
+    if (ground) {
+      lines.push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${ground}).`, severity });
+      for (const k of arr(SOURCE_GROUNDS[id])) { if (GROUND_YIELD[k]) nouns.add(GROUND_YIELD[k]); const own = rowGoodOf(id, k); if (own) nouns.add(own); }
+    }
+    if (venture && venture.name === name) {
+      const why = ventureLine(venture, inst);
+      if (why) {
+        lines.push({ chain: null, impact: why, severity });
+        if (FAMILY_NOUN[venture.family]) nouns.add(FAMILY_NOUN[venture.family]);
+        const own = rowGoodOf(venture.id || id, venture.ground);
+        if (own) nouns.add(own);
+        if (id === 'peat_cutter') nouns.add('peat');
+      }
+    }
+    return { lines, nouns };
+  };
   /** @type {Map<string, GapRow>} */
   const flagged = new Map();
   for (const g of gaps) if (g && typeof g === 'object' && g.institution) flagged.set(str(g.institution), g);
@@ -529,10 +558,10 @@ export function resourceGapLines(s) {
       const own = gaps.filter((x) => x && typeof x === 'object' && x.institution === name && x.kind === 'missing');
       const goods = [...new Set(own.map((x) => rowNoun(str(x?.chain))).filter((x) => !!x.noun).map((x) => JSON.stringify(x)))].map((x) => /** @type {{ noun: string, plural: boolean }} */ (JSON.parse(x)));
       if (!goods.length) continue;
-      push({ chain: null, impact: `No ${orList(goods.map((x) => x.noun))} ${goods.length === 1 && goods[0].plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
-      const spentGround = sourceGround(s, inst);
-      if (spentGround) push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${spentGround}).`, severity: str(g.severity) || 'high' });
-      if (venture && venture.name === name) { const why = ventureLine(venture, inst); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); }
+      const told = storyLines(inst, name, str(g.severity) || 'high');
+      const left = goods.filter((x) => !told.nouns.has(x.noun));
+      if (left.length) push({ chain: null, impact: `No ${orList(left.map((x) => x.noun))} ${left.length === 1 && left[0].plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
+      told.lines.forEach(push);
       continue;
     }
 
@@ -545,10 +574,14 @@ export function resourceGapLines(s) {
     // The gap line keeps its form ("No stone reaches the stone quarry."): the page's mark reads its good off it
     // (`crisisStoppedRow.js :: housesShortOfInput`) and the record's detectors its house; the worked-out ground is the
     // line after it.
-    push({ chain: null, impact: `No ${orList(nouns)} ${plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
-    const ground = sourceGround(s, inst);
-    if (ground) push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${ground}).`, severity: str(g.severity) || 'high' });
-    if (venture && venture.name === name) { const why = ventureLine(venture, inst); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); }
+    // BAR8-J-ROWS (G1, the chair's item; LAW 11's 11g): ONE HOUSE, ONE MATERIAL, ONE LINE. Where the house's own story line
+    // follows (worked out on its own spent ground; the failed venture), the general line does not name that material too
+    // ("No iron ore reaches the mine." beside "The mine is worked out: …": no ore reaches a mine, the mine digs it). A
+    // material no story line tells keeps the general line; a row with no story line keeps it whole.
+    const told = storyLines(inst, name, str(g.severity) || 'high');
+    const left = nouns.filter((n) => !told.nouns.has(n));
+    if (left.length) push({ chain: null, impact: `No ${orList(left)} ${plural && left.length === nouns.length ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
+    told.lines.forEach(push);
   }
   // BIRTH-2 (BR6, the owner's fifth story): the failed venture's ONE line, after its gap line, or alone where no chain asks its
   // house of an input (a mine, a peat cutter)
