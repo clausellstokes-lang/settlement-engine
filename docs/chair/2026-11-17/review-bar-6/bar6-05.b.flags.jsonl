@@ -1,0 +1,6 @@
+{"id":"C12508","town":"bar0-city-wartime-rand-43","sev":"MED","kind":"PAIR","why":"looms clattering shutter to shutter shows weaving at work; the only weavers' house is marked 'Short of wool' with cloth production (short)","other":"C12930"}
+{"id":"C13557","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"BROKEN","why":"income source 'Grain Sales' (4%) printed with no description line, unlike every other source row","other":""}
+{"id":"C13803","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"LACKS","why":"'Crown supply carts' and 'a crown officer' (C13805) presume a crown; GOVERNMENT lists no crown power, the Merchant Guild Council governs","other":"C13805"}
+{"id":"C14749","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"PAIR","why":"war contracts 'made the settlement rich'; page says the war takes most of the money, a few grow rich, prosperity only Comfortable","other":"C12586"}
+{"id":"C15153","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"PAIR","why":"'closes every year ahead... dependable margin, reserves behind it' calm line under Wartime and a 4% food gap; page says it is running thin","other":"C12516"}
+{"id":"DONE","lines":2813,"blocks":1,"flags":5}
