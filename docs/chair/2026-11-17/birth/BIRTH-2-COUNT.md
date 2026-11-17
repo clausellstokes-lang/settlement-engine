@@ -273,3 +273,55 @@ import. If the owner wants the import to READ cut off, that is one new line for 
 The people moved are unchanged by the correction (the cause takes no draw). THE RECOMMENDATION OF 7 STANDS, with the reader
 change of (c) folded into BIRTH-1's R4 and the charcoal burner's pair (c4) put to the owner. Under the mixed rule, 111 of
 the 720 and 44 of the fresh 300 (14.7%) hold a kept source house.
+
+---
+
+## V · THE HOUSE STIPULATES ITS GROUND (the owner's question, the chair 04:58 UTC), PROTOTYPED AND COUNTED
+
+V1, THE RULE AS BUILT: where a source house of the seven barren kinds stands on none of its grounds, its kind's ground is
+written onto `config.nearbyResources` and `nearbyResourcesNative` AS AVAILABLE (not spent), if the terrain admits it
+(`resourceTerrainCompatibility.js :: getCompatibleResources`). No house is removed, no cause is invented, and "worked out"
+stays only where the record's own depletion roll spent the ground. It is on top of BIRTH-1 (R2 + R5) and counted against
+`R25s`. Prototype: `birthKinds.js :: birthWriteGround`, `BIRTH_RULE=R2,R5,V BIRTH_VSITE=early|late`, in
+`PROTOTYPE-BIRTH2.patch`. Births `VE-*`, `VL-*`, all `EXIT 0`.
+
+V2, WHERE IT IS WRITTEN (the 720 · the 150 · the 525):
+
+| site | towns moved | people · ties · names · roster | what the record then says |
+|---|---|---|---|
+| (a) EARLY, after the roster, before the economy (`cascadePass`) | 116 · 23 · 2 | **people 98 · 20 · 2**; ties, names, roster 0 | the economy builds on it: `activeChains` 109, the made list 110, **exports 97**, `resourceChains` 87, gaps 106 of the 720 |
+| (b) LATE, after the history (`generateNarratives` end) | 114 · 23 · 2 | **0 · 0 · 0 · 0** | `config.nearbyResources(+Native)` 114, the coherence receipt 114, the arrival scene 2; nothing else |
+
+THE PAGE AT (b): the Resources tab's "Nearby Resources" section prints every key of `config.nearbyResources`
+(`ResourcesTab.jsx`, lines 224–226), so the new ground prints there as a resource of the town. Its "Resource Exploitation"
+cards read `resourceAnalysis.exploitation`, computed before the late write, so no card is printed. The house's card and
+mark: none (the reader already answered the house by itself; now its ground agrees). No chain card, no export, no made
+pill, no income share. WHAT AGREES: the house and the land. WHAT IS SILENT: the working of the ground (no exploitation card
+beside a quarry at work). WHAT WOULD BE FALSE: nothing was found in the record's lines (c2 and c3 of 8 hold: no pill or
+export names a good that is not made). At (a) the economy turns one small quarry into a chain, an export (97 towns) and a
+made good: THE PRESUMPTION THE CHAIR FEARED, "known for its stone" from one quarry, and people move.
+
+V3, BY KIND, AND THE HOUSES THE TERRAIN DENIES (the ground each takes: quarry `stone_quarry`; mine and open-cast mine
+`iron_deposits`; peat cutter `marshlands`; salt works off the coast `salt_flats`, since the record has no brine spring (no
+ground of `RESOURCE_DATA` is a spring with salt; `hot_springs` holds none); dairy `grazing_land`; charcoal burner
+`managed_forest`). DENIED by the terrain's own compatibility, the 720 + 150 + 525 together (`VDENIED` in the VL births'
+logs): **salt works 46** (salt flats belong to few terrains: nearly every river salt works), charcoal burner 30, stone
+quarry 13, dairy farmer 11, mine 7 + open-cast 5, peat cutter 6. These are the houses this rule cannot keep: they stay
+marked short.
+
+V4, WHAT IT LEAVES (late): born-short houses in calm connected towns **16 in 16 of the 720, 4 in 4 of the 150** (the
+denied kinds above, and the luxury quarter's 4 · 1); marks 2,066 → 559 (BIRTH-1 alone 652); towns changed 114 · 23 · 2;
+the 525: 2 (resource lists and receipt only). NO NEW LINE PRESUMES MORE THAN THE HOUSE PROVES at the late site (no chain,
+export or made good is written); at the early site, 97 exports do.
+
+V5, MY VIEW:
+1. The late stipulation is the cheapest truthful rule there is: no draw, no person and 2 of the 525 move, and the house
+   proves its ground. I would take it for the quarry, the mines, the peat cutter, the dairy and the charcoal burner
+   wherever the terrain admits the ground.
+2. The mix: stipulate late where the terrain admits; where it denies (salt works 46, charcoal 30, quarry 13, dairy 11,
+   mines 12, peat 6, the three populations together), use the by-kind rule of 7 (kept with a stated cause, or not drawn).
+   The salt works off the coast is mostly that denied case.
+3. I would NOT write the ground early: the economy then builds chains and exports on one house (97 towns) and people move
+   in 98 of the 720. Nor would I stipulate a ground the terrain forbids.
+   Left for the owner: the exploitation card the late ground lacks. Either the Resources tab reads the ground's working
+   from the house, or the ground prints as a nearby resource only, as now.

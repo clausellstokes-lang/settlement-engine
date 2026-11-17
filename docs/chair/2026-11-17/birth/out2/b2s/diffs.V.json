@@ -1,0 +1,176 @@
+{
+ "VE-720": {
+  "towns": 720,
+  "changed": 116,
+  "spread": {
+   "npcs": 98,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "resourceAnalysis.availableResources": 116,
+   "resourceAnalysis.resourceConditions": 116,
+   "config.nearbyResources": 116,
+   "config.nearbyResourcesNative": 116,
+   "simulationTrace": 116,
+   "economicState.localProduction": 110,
+   "generationCoherenceReceipt": 110,
+   "economicState.activeChains": 109,
+   "resourceAnalysis.gaps": 106,
+   "npcs": 98,
+   "economicState.primaryExports": 97,
+   "resourceAnalysis.resourceChains": 87,
+   "resourceAnalysis.exploitation": 87,
+   "economicState.tradeDependencies": 69,
+   "economicState.incomeSources": 67,
+   "economicState.primaryImports": 63,
+   "economicViability.warnings": 61,
+   "resourceAnalysis.exports": 59,
+   "defenseProfile": 55,
+   "resourceAnalysis.imports": 53,
+   "history": 47,
+   "resourceAnalysis.economicStrengths": 44,
+   "resourceAnalysis.priorityNotes": 42,
+   "economicViability.metrics": 38,
+   "arrivalScene": 37,
+   "economicState.foodSecurity": 25,
+   "culturalIdentity": 25,
+   "resourceAnalysis.strategicValue": 16,
+   "economicViability.summary": 13,
+   "economicViability.dependencies": 11,
+   "economicViability.plotHooks": 9,
+   "economicState.economicComplexity": 8,
+   "economicViability.issues": 6,
+   "economicViability.suggestions": 4,
+   "economicState.safetyProfile": 4,
+   "settlementReason": 2,
+   "economicState.necessityImports": 2,
+   "activeConditions": 1,
+   "pressureSentence": 1
+  }
+ },
+ "VE-150": {
+  "towns": 150,
+  "changed": 23,
+  "spread": {
+   "npcs": 20,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "economicState.localProduction": 23,
+   "resourceAnalysis.availableResources": 23,
+   "resourceAnalysis.resourceConditions": 23,
+   "config.nearbyResources": 23,
+   "config.nearbyResourcesNative": 23,
+   "simulationTrace": 23,
+   "economicState.activeChains": 22,
+   "generationCoherenceReceipt": 22,
+   "npcs": 20,
+   "resourceAnalysis.gaps": 20,
+   "resourceAnalysis.resourceChains": 18,
+   "resourceAnalysis.exploitation": 18,
+   "economicState.primaryImports": 15,
+   "economicState.tradeDependencies": 15,
+   "history": 15,
+   "economicState.incomeSources": 15,
+   "economicState.primaryExports": 14,
+   "defenseProfile": 13,
+   "resourceAnalysis.economicStrengths": 13,
+   "resourceAnalysis.exports": 12,
+   "resourceAnalysis.imports": 10,
+   "economicViability.warnings": 10,
+   "economicViability.metrics": 9,
+   "arrivalScene": 9,
+   "resourceAnalysis.priorityNotes": 7,
+   "resourceAnalysis.strategicValue": 7,
+   "economicState.foodSecurity": 6,
+   "culturalIdentity": 6,
+   "economicViability.issues": 6,
+   "economicState.economicComplexity": 3,
+   "economicViability.dependencies": 3,
+   "economicViability.plotHooks": 2,
+   "economicViability.summary": 2,
+   "economicState.safetyProfile": 2,
+   "economicState.necessityImports": 1
+  }
+ },
+ "VE-ref": {
+  "towns": 525,
+  "changed": 2,
+  "spread": {
+   "npcs": 2,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "economicState.incomeSources": 2,
+   "economicState.localProduction": 2,
+   "economicState.activeChains": 2,
+   "npcs": 2,
+   "resourceAnalysis.availableResources": 2,
+   "resourceAnalysis.resourceConditions": 2,
+   "history": 2,
+   "config.nearbyResources": 2,
+   "config.nearbyResourcesNative": 2,
+   "simulationTrace": 2,
+   "generationCoherenceReceipt": 2,
+   "economicState.primaryExports": 1,
+   "resourceAnalysis.resourceChains": 1,
+   "resourceAnalysis.exploitation": 1,
+   "resourceAnalysis.exports": 1,
+   "resourceAnalysis.gaps": 1,
+   "resourceAnalysis.economicStrengths": 1
+  }
+ },
+ "VL-720": {
+  "towns": 720,
+  "changed": 114,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "config.nearbyResources": 114,
+   "config.nearbyResourcesNative": 114,
+   "generationCoherenceReceipt": 114,
+   "arrivalScene": 2
+  }
+ },
+ "VL-150": {
+  "towns": 150,
+  "changed": 23,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "config.nearbyResources": 23,
+   "config.nearbyResourcesNative": 23,
+   "generationCoherenceReceipt": 23,
+   "arrivalScene": 1
+  }
+ },
+ "VL-ref": {
+  "towns": 525,
+  "changed": 2,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "config.nearbyResources": 2,
+   "config.nearbyResourcesNative": 2,
+   "generationCoherenceReceipt": 2
+  }
+ }
+}

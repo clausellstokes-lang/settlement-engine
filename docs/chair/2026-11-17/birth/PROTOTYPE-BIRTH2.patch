@@ -1,9 +1,9 @@
 diff --git a/src/domain/facts/birthKinds.js b/src/domain/facts/birthKinds.js
 new file mode 100644
-index 000000000..f37377768
+index 000000000..c143014f5
 --- /dev/null
 +++ b/src/domain/facts/birthKinds.js
-@@ -0,0 +1,113 @@
+@@ -0,0 +1,136 @@
 +/**
 + * PROTOTYPE (BIRTH-AUDIT, scratch only; never pushed under src/): the kind of a house by catalogue id, and the rule switch.
 + * BIRTH_RULE (environment, a comma list): R1 the reader's rule everywhere; R1p the reader's rule at print only; R2 the
@@ -116,6 +116,29 @@ index 000000000..f37377768
 +    }
 +  }
 +  return n;
++}
++
++// ── V · THE HOUSE STIPULATES ITS GROUND (prototype; BIRTH_RULE 'V', BIRTH_VSITE 'early' | 'late') ──────────────────────
++export const VSITE = ENV2.BIRTH_VSITE === 'early' ? 'early' : 'late';
++/** Write, for every source house on none of its grounds, its kind's ground as AVAILABLE where the terrain admits it.
++ * `compatibleOf(route, terrain)` -> the resource keys the terrain admits. Returns { written, denied: [id, ground] }. */
++export function birthWriteGround({ institutions, config, idOf, nearbyCtx, terrainType, compatibleOf }) {
++  const near = Array.isArray(config.nearbyResources) ? config.nearbyResources : (config.nearbyResources = []);
++  const route = String(config.tradeRouteAccess ?? ''); const terrain = String(terrainType ?? config.terrainOverride ?? '');
++  const ok = new Set(compatibleOf(route, terrainType || null));
++  const out = { written: 0, denied: [] };
++  for (const inst of institutions || []) {
++    if (!inst || typeof inst.name !== 'string' || inst.status === 'ruined') continue;
++    const id = String(idOf(inst) || ''); const g = BARREN_GROUNDS[id];
++    if (!g || g.some((k) => near.includes(k))) continue;
++    if (id === 'salt_works' && (route === 'port' || terrain === 'coastal')) continue;
++    const k = CAUSES[id].worked;
++    if (!ok.has(k)) { out.denied.push([id, k]); continue; }
++    for (const f of ['nearbyResources', 'nearbyResourcesNative']) { if (!Array.isArray(config[f])) config[f] = []; if (!config[f].includes(k)) config[f].push(k); }
++    if (Array.isArray(nearbyCtx) && !nearbyCtx.includes(k)) nearbyCtx.push(k);
++    out.written++;
++  }
++  return out;
 +}
 diff --git a/src/domain/facts/houseInputAtHand.js b/src/domain/facts/houseInputAtHand.js
 index e74df09fc..83919e7da 100644
@@ -341,20 +364,22 @@ index 936ac238f..d337b187d 100644
  }
  
 diff --git a/src/generators/steps/cascadePass.js b/src/generators/steps/cascadePass.js
-index 8ca7f7a4b..b105a962d 100644
+index 8ca7f7a4b..06e3ad4c4 100644
 --- a/src/generators/steps/cascadePass.js
 +++ b/src/generators/steps/cascadePass.js
-@@ -14,6 +14,9 @@ import { collapseUpgradeChains, settlementDensity, settledStressTypes, shipFreeD
+@@ -14,6 +14,11 @@ import { collapseUpgradeChains, settlementDensity, settledStressTypes, shipFreeD
  import { drawInstitutionDesc } from './institutionDescDraw.js';
  import { birthFactsOf } from '../../domain/facts/factsOf.js';
  import { recordTrace } from '../../domain/trace.js';
-+import { RULE as BIRTH_RULE, birthWriteCauses } from '../../domain/facts/birthKinds.js'; // BIRTH-2-COUNT prototype
++import { RULE as BIRTH_RULE, birthWriteCauses, birthWriteGround, VSITE } from '../../domain/facts/birthKinds.js'; // BIRTH-2-COUNT prototype
++import { getCompatibleResources as birthCompat } from '../../domain/resourceTerrainCompatibility.js';
++
 +import { hasTradeRouteConnection as birthConnected } from '../../domain/tradeRouteSemantics.js';
 +import { catalogIdForName as birthIdForName } from '../../data/institutionalCatalog.js';
  import {
    nativeSemanticName,
  } from '../../domain/content/customContentSemanticAuthority.js';
-@@ -50,6 +53,8 @@ registerStep('cascadePass', {
+@@ -50,6 +55,8 @@ registerStep('cascadePass', {
      population: typeof population === 'number' ? population : null,
      // THE ONE DENSITY FACTOR (RUNG1B-F6): the settlement's own, read as assembleInstitutions reads it.
      density: settlementDensity(ctx),
@@ -363,30 +388,33 @@ index 8ca7f7a4b..b105a962d 100644
    });
    if (cascadeAdditions.length > 0) {
      // A-11 (chair ruling, round 3, 3b): an added row takes its ship-free text inland.
-@@ -163,5 +168,8 @@ registerStep('cascadePass', {
+@@ -163,5 +170,9 @@ registerStep('cascadePass', {
      }
    }
  
 +  // BIRTH-2-COUNT (prototype): the stated cause written once the roster is drawn, before the economy (BIRTH_SITE=draw)
 +  if (BIRTH_RULE.has('K') && ctx.effectiveConfig) birthWriteCauses({ institutions, config: ctx.effectiveConfig, economicState: null, seed: ctx._seed, tier, site: 'draw', terrainType,
 +    shortageImport: () => null, connectedOf: birthConnected, idOf: (i) => i.catalogId || birthIdForName(i.name), nearbyCtx: Array.isArray(ctx.nearbyResources) ? ctx.nearbyResources : null });
++  if (BIRTH_RULE.has('V') && VSITE === 'early' && ctx.effectiveConfig) birthWriteGround({ institutions, config: ctx.effectiveConfig, idOf: (i) => i.catalogId || birthIdForName(i.name), nearbyCtx: Array.isArray(ctx.nearbyResources) ? ctx.nearbyResources : null, terrainType, compatibleOf: (r, t) => birthCompat(r, t).filter((x) => x.compatible).map((x) => x.key) });
    return {};
  });
 diff --git a/src/generators/steps/generateNarratives.js b/src/generators/steps/generateNarratives.js
-index 4701b0945..b1dfc0b7f 100644
+index 4701b0945..46df05523 100644
 --- a/src/generators/steps/generateNarratives.js
 +++ b/src/generators/steps/generateNarratives.js
-@@ -8,6 +8,9 @@
+@@ -8,6 +8,11 @@
   */
  
  import { registerStep } from '../pipeline.js';
-+import { RULE as BIRTH_RULE, birthWriteCauses } from '../../domain/facts/birthKinds.js'; // BIRTH-2-COUNT prototype
++import { RULE as BIRTH_RULE, birthWriteCauses, birthWriteGround, VSITE } from '../../domain/facts/birthKinds.js'; // BIRTH-2-COUNT prototype
++import { getCompatibleResources as birthCompat } from '../../domain/resourceTerrainCompatibility.js';
++
 +import { hasTradeRouteConnection as birthConnected } from '../../domain/tradeRouteSemantics.js';
 +import { catalogIdForName as birthIdForName } from '../../data/institutionalCatalog.js';
  import { generateSettlementReason } from '../narrativeGenerator.js';
  import { generateResourceAnalysis, resolveNearbyCommodities } from '../resourceGenerator.js';
  import { generateEconomicViability } from '../economicGenerator.js';
-@@ -41,6 +44,7 @@ registerStep('generateNarratives', {
+@@ -41,6 +46,7 @@ registerStep('generateNarratives', {
    const nearbyResources = resolveNearbyCommodities(effectiveConfig, terrainT);
    const specialResources = effectiveConfig.specialResources || [];
    // The reconciled economy rides along so a gap line says which kind it is (REVIEW-INTAKE-3 R9).
@@ -394,12 +422,13 @@ index 4701b0945..b1dfc0b7f 100644
    const resourceAnalysis = generateResourceAnalysis(terrainT, nearbyResources, specialResources, institutions, effectiveConfig, economicState);
    // Viability first: settlementReason is deficit-aware — an isolated settlement
    // with a food shortfall must not claim self-sufficiency. Feed it the same
-@@ -140,5 +144,8 @@ registerStep('generateNarratives', {
+@@ -140,5 +146,9 @@ registerStep('generateNarratives', {
      });
    }
  
 +  // BIRTH-2-COUNT (prototype, BIRTH_SITE=late): the spent ground written once the history has read the resources
 +  if (BIRTH_RULE.has('K')) birthWriteCauses({ institutions: institutions.filter((i) => !i?.isCustom), config: effectiveConfig, economicState: null, seed: ctx._seed, tier, site: 'late', terrainType: terrainT,
 +    shortageImport: () => null, connectedOf: birthConnected, idOf: (i) => i.catalogId || birthIdForName(i.name), nearbyCtx: null });
++  if (BIRTH_RULE.has('V') && VSITE === 'late') { const v = birthWriteGround({ institutions: institutions.filter((i) => !i?.isCustom), config: effectiveConfig, idOf: (i) => i.catalogId || birthIdForName(i.name), nearbyCtx: null, terrainType: terrainT, compatibleOf: (r, t) => birthCompat(r, t).filter((x) => x.compatible).map((x) => x.key) }); if (process.env.BIRTH_VLOG && v.denied.length) console.error('VDENIED', ctx._seed, JSON.stringify(v.denied)); }
    return { settlementReason, resourceAnalysis, economicViability, history };
  });
