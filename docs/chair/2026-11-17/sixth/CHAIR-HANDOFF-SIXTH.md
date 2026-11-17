@@ -171,6 +171,27 @@ the previous account its sessions should be paused or archived by the owner's ha
   commit the true claim is pinned in their place (the besieged row prints its mark; the KEEP table keeps a row of the
   same line in a state that cuts no supply). A besieged town that prints the row bare is a fault to name. LEFT-KEYS, K3.
 
+- **BR13 (18:16 UTC, 2026-11-17; the handler deal; ON THE OWNER'S VETO LIST AS A QUESTION).** Seat K counted, in the 720, 106
+  networks of one house handled by another house's people ONE WAY (56 towns) and 20 where two houses' networks are
+  handled ONLY by each other's people (THE SWAP, 11 towns; the seventh read's C6183). RULED under the owner's
+  deferral: the one-way deal is the design of `allegiance.js :: assignHandlers` (a boss who runs people inside
+  another house is what a network is) AND STAYS; THE SWAP IS CURED (a house's network is handled by its own people
+  first where it has any who can). The owner may reopen it: "should a house's network ever be run by another house's
+  boss?" K-PEOPLE, item 3.
+- **BR14 (18:16 UTC; new vocabulary given by name in BAR8).** (a) THE HOLDER TEST of `rareSecrets.js :: HOLDER_KEYS` is
+  given to the crisis pools' rows that presume a command or an office (`stressInstitutionEffects.js`, 10 of 98 rows)
+  and to the plot hooks that presume a trade (`npcData.js`): a declaration on the row, read off what the record
+  already keeps of the person; NO NEW FIELD ON THE SAVED RECORD. (b) THE WORD "Emira" as the female form of the one
+  title "Emir" (`faceHonorifics.js`); the other one-string forms are offices' titles and stay; whether the owner wants
+  any of them paired is the owner's. (c) An atom a later section of `BRIEF-BAR8.md` names (12d, 12e, 13e, 14c) is
+  written under rule R6 and named for the veto list.
+- **BR15 (18:16 UTC; twins given by name in BAR8).** The no-grazing twin of the stock quarrel (15b: the fallback line
+  stays in the small places; its twin prints where the place has no grazing house, no pastoral chain and no grazing
+  ground, and reads the place's own grounds); a description for a minted rival where the host's names one body (14a);
+  the Elected Reeve's desc where no noble is on the record (14d); "goes to the {seat}" for a seat of one member (14c).
+  Each is the fixing itself under the owner's rule (a twin says what is true where a line was false) and is listed
+  with three towns for the veto list.
+
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -294,3 +315,15 @@ the previous account its sessions should be paused or archived by the owner's ha
   `resourceGenerator.js`) is src: the next round's. `briefs/BRIEF-READ-LEFT.md` IS WRITTEN: the second reader of a
   builder's hand-back (a child session of the middle tier at high effort; the prompt names the seat, its branch, its
   tip and its base).
+- **18:16 UTC. BAR8-AUDIT-K HANDED BACK (18:13)**: `lane/bar8-audit-k-2026-11-17` at 1ceae1ede (four commits, eleven NEW
+  files: the detectors `tests/helpers/pageLaws/pageK.mjs`, `law12K.mjs` to `law15K.mjs`, the runner
+  `docs/chair/2026-11-17/bar8/AUDIT/runK.mjs`, `controlsK.json`, the three runs, the hand-back; nothing under `src/`, no
+  test file). THE CHAIR RAN THE RUNNER ON THE THIRTY (`/home/user/k`, the seventh read's render): "controls: 49 of 49
+  as expected", the output equal to the published `RUN-K.30.txt`. Its counts: 25 rules; in the 720, 277 towns · 478
+  instances · 248 distinct lines with every wider family; precision read rule by rule (its section 1). ITS WORKLIST:
+  five seats by disjoint files (K-POWERS, K-PEOPLE, K-SCENES; K-MARKS after LEFT-MARKS; K-DESKS after LEFT-LINES).
+  A CORRECTION OF THE CHAIR'S PREMISE, OWED TO THE OWNER IN ONE LINE: C6865's "illegal sortie" is NOT one of the owner's
+  very rare secrets; it is the siege's ordinary crisis pool (no holder test). Of 273 rare secrets dealt in the 720,
+  none stands against its holder. `briefs/BRIEF-BAR8.md` IS WRITTEN (the rules; K-POWERS and K-PEOPLE in full; the
+  other three K seats in the table). K-POWERS AND K-PEOPLE ARE SEATED NOW from K's tip (their files are no one
+  else's); K-SCENES waits for seat J's worklist (J's rule 11b reads scenes: the files may be shared).
