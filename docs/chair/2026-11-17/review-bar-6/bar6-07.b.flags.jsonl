@@ -1,0 +1,6 @@
+{"id":"C17900","town":"bar0-hamlet-calm-rand-42","sev":"LOW","kind":"LACKS","why":"Hook puts a shipment in the stable keeper's 'warehouse'; HOUSES lists no warehouse in a hamlet of 48","other":""}
+{"id":"C18116","town":"bar0-hamlet-calm-rand-42","sev":"MED","kind":"STATE","why":"A two-season grazing/water dispute with families not speaking is in none of QUARRELS (none), TENSIONS, PAST, and clashes with Stable stability","other":""}
+{"id":"C18655","town":"bar0-hamlet-calm-rand-43","sev":"MED","kind":"STATE","why":"A two-season grazing/water feud is in none of QUARRELS (none), TENSIONS (occupation legacy), PAST; Stable stability and 72 legitimacy","other":""}
+{"id":"C18905","town":"bar0-hamlet-calm-rand-43","sev":"MED","kind":"PAIR","why":"'Plainly past subsistence', 'stores more than the season needs' vs Subsistence economy, surplus 2%, 1.5 months stores, no granary, Disasters & Famine Weak","other":"C18594"}
+{"id":"C19487","town":"bar0-hamlet-under_siege-rand-42","sev":"LOW","kind":"STATE","why":"Newcomer is 'noticed by the second day here'; under siege nothing comes in by road, so arrivals presumed","other":"C19493"}
+{"id":"DONE","lines":2302,"blocks":4,"flags":5}
