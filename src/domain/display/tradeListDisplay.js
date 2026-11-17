@@ -280,6 +280,7 @@ export function localProductionAsPrinted(settlement) {
     const item = raw.toLowerCase().replace(/_/g, ' ').trim();
     if (LOCAL_IDENTIFIERS.has(item)) return false;
     if (failedFood.some((re) => re.test(item))) return false;
+    if (halfWayDeniedHere(settlement, item)) return false; // SEAM-ECON item 4: the card's half-way reading
     if (!pillBorneOut(raw, 'local', settlement)) return false; // W2-C-LEAVES-4 item 2: the one pill reader (below)
     if (outputs.has(raw.toLowerCase())) return made.has(raw.toLowerCase());
     const keys = RESOURCES_YIELDING.get(item);
@@ -662,6 +663,7 @@ export function exportsAsPrinted(settlement) {
   const scarce = harvestScarceHere(settlement); // SEAM-ECON item 1 (8c.export)
   return displayTradeList(eco.primaryExports, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'exports' })
     .filter((raw) => !(scarce && HARVEST_CROP_GOOD.test(fold(tradeMarkOf(raw).label))))
+    .filter((raw) => !halfWayDeniedHere(settlement, fold(tradeMarkOf(raw).label).replace(/_/g, ' '))) // SEAM-ECON item 4
     .map((raw) => pillAsPrinted(raw, 'exports', settlement))
     .filter((x) => x !== null && !seen.has(fold(tradeMarkOf(x).label)) && !!seen.add(fold(tradeMarkOf(x).label)))
     .map(String);
@@ -699,6 +701,24 @@ export function harvestScarceHere(settlement) {
 const HARVEST_CROP_GOOD = /\b(?:grain|wheat|barley|rye|oats|millet|rice|maize|dates?|flour|meal|harvest|palm sugar|produce)\b/;
 import { FAMINE_FAILED_FOOD, GRAIN, INCOME_DEPENDENCE, NONE } from '../../data/crisisDependence.js';
 import { housesShortOf } from '../facts/houseInputAtHand.js';
+
+/**
+ * A GOOD THE RECORD'S HALF-WAY GAP DENIES IS NEITHER SENT OUT NOR MADE HERE (SEAM-ECON item 4, the chair's BRIEF-BAR6-SEAM
+ * 2026-11-17, BAR6-RECORD's 6c-arms left by name; vetoable by the owner). Blacksmiths (3-10) beside iron ore the record works
+ * only half-way for want of a smelter (r2r-town-57, r2s-under_siege-town-3): the chain card already denies the ore's tools
+ * and blades (`facts/halfWayGoods.js :: halfWayGoodsDenied`, "ore not smelted here is no tool or blade made of it"), while
+ * the Exports and "Produced locally" still carried them. Both read the card's own fact: a good that every chain card making
+ * it is denied by the half-way gap is not listed. A good no card makes is not read here. Display only.
+ * @param {unknown} settlement @param {string} good the good, folded (lower case, spaced)
+ * @returns {boolean}
+ */
+function halfWayDeniedHere(settlement, good) {
+  const eco = /** @type {{ economicState?: { activeChains?: unknown } | null } | null | undefined} */ (settlement)?.economicState;
+  const chains = /** @type {Array<{ outputs?: unknown }>} */ ((Array.isArray(eco?.activeChains) ? eco.activeChains : []).filter((c) => c && typeof c === 'object'))
+    .filter((c) => (Array.isArray(c.outputs) ? c.outputs : []).some((o) => fold(o) === good));
+  return chains.length > 0 && chains.every((c) => [...halfWayGoodsDenied(settlement, c)].some((d) => fold(d) === good));
+}
+import { halfWayGoodsDenied } from '../facts/halfWayGoods.js';
 import { chainCarrierOf } from '../facts/chainCarrier.js';
 
 /**
