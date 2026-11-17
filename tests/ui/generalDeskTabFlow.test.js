@@ -688,7 +688,7 @@ const {
   },
   FOUNDED: { blockId: 'DS-GEN-14', poolKey: 'FOUNDED-OLD' },
   RECORD: { blockId: 'DS-GEN-16', poolKey: 'ANCHORED-RECENT', slots: RECORD_SLOTS },
-}, { leaf: 'general', seed: CHRONICLED._seed, slots: CHRONICLED_SLOTS });
+}, { leaf: 'general', seed: CHRONICLED._seed, slots: CHRONICLED_SLOTS, facts: factsOf(CHRONICLED) }); // BAR6-CULTURE (2026-11-16): DS-GEN-9's founding lens declares a size (`tier: >= village`, its oldest streets), so the read hands the fixture's facts, as the desk does (drawnProse.js cause 5)
 
 /** @param {boolean} publicDossier */
 const renderHistory = (publicDossier) => render(e(HistoryTab, {

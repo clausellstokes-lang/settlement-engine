@@ -134,6 +134,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "Hunger has moved from the poorest streets into the ordinary ones; what the fields returned does not reach the table.",
           "slots": [],
           "vid": 2
@@ -1636,6 +1639,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "{settlement} is occupied and fighting back, and the occupiers no longer walk its streets alone.",
           "slots": [
             "settlement"
@@ -1852,7 +1858,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "crisis: occupied"
+            "crisis: occupied",
+            "tier: >= village"
           ],
           "text": "{settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.",
           "slots": [
@@ -2027,6 +2034,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: popular_revolt": [
         {
           "angle": "street",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "The streets rose on their own. No power owns this yet, which is what makes it dangerous to everyone.",
           "slots": [],
           "vid": 1
@@ -2042,6 +2052,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "court sits",
+            "court"
+          ],
           "text": "A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popular, and genuinely leaderless.",
           "slots": [],
           "vid": 3
@@ -2674,6 +2688,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "SEVERITY: low": [
         {
           "angle": "ledger",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "The town's account books show this trouble, but the streets hardly do; it is a small one.",
           "slots": [],
           "vid": 1
@@ -2999,6 +3016,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "traveller",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them.",
           "slots": [
             "settlement"
@@ -3028,6 +3048,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DIRECTION: easing · CRISIS: occupied": [
         {
           "angle": "local",
+          "marks": [
+            "tier: >= village"
+          ],
           "text": "The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for questioning.",
           "slots": [
             "settlement"
@@ -4246,6 +4269,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "traveller",
+          "marks": [
+            "no crisis: threat"
+          ],
           "text": "What hurts {settlement} started somewhere else, and travellers bring news of it with their goods.",
           "slots": [
             "settlement"
@@ -4298,7 +4324,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: occupied",
             "no war: front",
-            "crisis: any"
+            "crisis: any",
+            "tier: >= village"
           ],
           "text": "Men and money leave {settlement} for a war fought somewhere else. The cost shows in the treasury and the missing men, not in the streets.",
           "slots": [

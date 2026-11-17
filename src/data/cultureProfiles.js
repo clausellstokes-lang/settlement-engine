@@ -107,7 +107,7 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'Dense street blocks open into arcades, fountains, markets, and reused monumental precincts.', needs: ['market'] },
     ],
     civicPattern: [
-      'Councils, magistrates, patrons, and legal corporations compete through offices, charters, and public works.',
+      { text: 'Councils, magistrates, patrons, and legal corporations compete through offices, charters, and public works.', needs: ['court', 'court sits'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
       'Civic office and private patronage are intertwined; public generosity is a recognized route to influence.',
     ],
     exchangePattern: [
@@ -170,7 +170,7 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'War bands and kin levies assemble around a smaller retinue of experienced fighters.', needs: ['militia'] },
     ],
     socialTexture: [
-      'Kinship and neighborhood obligations carry legal force, while poets, judges, and mediators preserve public memory.',
+      { text: 'Kinship and neighborhood obligations carry legal force, while poets, judges, and mediators preserve public memory.', needs: ['court', 'court sits'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
       'Status is made visible through generosity, oath keeping, and the ability to mobilize relatives and clients.',
     ],
     architecturalDetails: [
@@ -190,14 +190,14 @@ export const CULTURE_PROFILES = Object.freeze({
     scope: 'Courtyard houses, waterworks, endowed institutions and caravan trade.',
     builtForm: [
       'Shaded lanes connect inward-looking courtyard buildings, arcades, gardens, and managed water points.',
-      'Dense masonry quarters open onto caravan yards, covered lanes, and planted courtyards.',
+      { text: 'Dense masonry quarters open onto caravan yards, covered lanes, and planted courtyards.', excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
     ],
     civicPattern: [
-      'Judges, endowed institutions, leading households, and merchant notables share administration.',
+      { text: 'Judges, endowed institutions, leading households, and merchant notables share administration.', needs: ['court', 'court sits'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
       'Formal law and charitable endowment sit beside neighborhood mediation and courtly patronage.',
     ],
     exchangePattern: [
-      'Caravan organization, brokerage, credit, warehousing, and inspected weights sustain regional exchange.',
+      { text: 'Caravan organization, brokerage, credit, warehousing, and inspected weights sustain regional exchange.', excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
       'Merchant partnerships and route intelligence connect local workshops to long-distance trade.',
     ],
     foodways: [
@@ -205,8 +205,8 @@ export const CULTURE_PROFILES = Object.freeze({
       'Water access and preservation skill determine the balance between local produce and caravan-borne staples.',
     ],
     sacredLife: [
-      { text: 'Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.', needs: ['institution: school'] },
-      { text: 'Religious institutions also support law, education, hospitality, water, and relief for travelers.', needs: ['institution: temple'] },
+      { text: 'Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.', needs: ['institution: school'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
+      { text: 'Religious institutions also support law, education, hospitality, water, and relief for travelers.', needs: ['institution: temple'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
     ],
     defensePattern: [
       { text: 'Controlled gates, towers, citadels, and protected water infrastructure define strategic defense.', needs: ['gate'] },
@@ -283,7 +283,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Collective land and labor customs coexist with tribute, estate, and court obligations.',
     ],
     exchangePattern: [
-      { text: 'River trade, forest products, grain, wax, furs, and seasonal fairs connect households to wider routes.', needs: ['river'] },
+      { text: 'River trade, forest products, grain, wax, furs, and seasonal fairs connect households to wider routes.', needs: ['river', 'exports'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
       'Communal production and itinerant merchants precede more formal guild and warehouse systems.',
     ],
     foodways: [
@@ -335,7 +335,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     sacredLife: [
       'Temple, shrine, household, ancestor, philosophical, and state observances coexist without a single institutional center.',
-      'Ritual calendars connect family memorials, neighborhood festivals, pilgrimage, and civic legitimacy.',
+      { text: 'Ritual calendars connect family memorials, neighborhood festivals, pilgrimage, and civic legitimacy.', excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
     ],
     defensePattern: [
       'Where the state can pay for it, defense runs in depth: enclosed wards, controlled gates, stored grain, and drilled troops.',
@@ -374,10 +374,14 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     foodways: [
       'Maize, beans, squash, chile, tomatoes, greens, cacao, and locally available fish or game form the staple pattern.',
-      { text: 'Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.', needs: ['population: ≥ middling'] },
+      // BAR6-CULTURE (LAW 6 rule 6d-fields, C113231): the fields are credited with feeding the town only where it grows grain; the
+      // foodways composer keeps a culture sentence only where the sources it names feed the place (domain/foodways.js ::
+      // SOURCE_WORDS), so the sentence names its grain. Was "Intensive plots, terraces, raised fields, and tribute redistribution
+      // support dense populations." (a metropolis fed by its herds alone). VETOABLE wording (the owner's).
+      { text: 'Maize and other grain from intensive plots, terraces, and raised fields, with tribute redistribution, support dense populations.', needs: ['population: ≥ middling'] },
     ],
     sacredLife: [
-      { text: 'Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.', needs: ['institution: temple'] },
+      { text: 'Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.', needs: ['institution: temple'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
       'Ritual specialists track agricultural, dynastic, and communal obligations through a public festival cycle.',
     ],
     defensePattern: [
@@ -391,7 +395,7 @@ export const CULTURE_PROFILES = Object.freeze({
     architecturalDetails: [
       { text: 'a raised ceremonial precinct overlooks a broad and busy open plaza', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #33): a precinct over a busy plaza is a town's (a thorp of twelve printed it)
       'terraces, plastered platforms, and residential compounds step with the terrain',
-      { text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: ['tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
+      { text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS); BAR6-CULTURE (6a, C209939): neighbourhoods are a town's, was `tier: ≥ village`
     ],
     institutionBias: {
       categories: { Religious: 1.08, Economy: 1.07, Agriculture: 1.07 },
@@ -412,15 +416,15 @@ export const CULTURE_PROFILES = Object.freeze({
       'Local assemblies and guild institutions negotiate tax, water, ritual, and occupational obligations with rulers.',
     ],
     exchangePattern: [
-      { text: 'Bazaars, merchant houses, craft corporations, credit, pilgrimage, and caravan or maritime routes support exchange.', needs: ['market'] },
+      { text: 'Bazaars, merchant houses, craft corporations, credit, pilgrimage, and caravan or maritime routes support exchange.', needs: ['market'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
       'Occupational specialization links rural production to dense networks of processing and resale.',
     ],
     foodways: [
       'Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.',
-      'Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.',
+      { text: 'Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.', needs: ['tier: ≥ village'] }, // BAR6-CULTURE (LAW 6 rule 6a): a street's kitchens need a village's lanes
     ],
     sacredLife: [
-      { text: 'Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.', needs: ['institution: temple'] },
+      { text: 'Temple, monastery, shrine, household, philosophical, and pilgrimage traditions share a crowded sacred landscape.', needs: ['institution: temple'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
       { text: 'Festival patronage, feeding, waterworks, education, and ritual service make sacred institutions civic actors.', needs: ['institution: temple'] },
     ],
     defensePattern: [
@@ -432,7 +436,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Water access, trade standing, ritual service, and credit relationships are everyday political facts.',
     ],
     architecturalDetails: [
-      { text: 'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines', needs: ['market', 'institution: temple'] },
+      { text: 'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines', needs: ['market', 'institution: temple', 'tier: ≥ town'] }, // BAR6-CULTURE (6a, B4): neighbourhoods are a town's; its small-place twin in CULTURE_LINE_SIBLINGS
       { text: 'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space', needs: ['market', 'tier: ≥ village'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
       { text: 'occupational quarters cluster around shared wells and water channels', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item D: a size word of a larger place (its small-place twin in CULTURE_LINE_SIBLINGS)
     ],
@@ -452,10 +456,10 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     civicPattern: [
       'Clan leaders, assemblies, military followings, trade brokers, and appointed governors negotiate authority.',
-      'Political power depends on pasture access, herds, mobility, marriage alliances, and control of caravan corridors.',
+      { text: 'Political power depends on pasture access, herds, mobility, marriage alliances, and control of caravan corridors.', needs: ['livestock'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
     ],
     exchangePattern: [
-      'Livestock, horses, felt, leather, transport, tribute, and caravan brokerage dominate exchange.',
+      { text: 'Livestock, horses, felt, leather, transport, tribute, and caravan brokerage dominate exchange.', needs: ['livestock'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
       { text: 'Seasonal markets connect mobile producers to settled grain, metalwork, textiles, and administration.', needs: ['market'] },
     ],
     foodways: [
@@ -467,11 +471,11 @@ export const CULTURE_PROFILES = Object.freeze({
       'Ritual authority often travels with households even when major sanctuaries anchor regional gatherings.',
     ],
     defensePattern: [
-      { text: 'Mounted patrols, mobile musters, earthworks, corrals, and signal systems protect people and herds.', needs: ['militia'] },
+      { text: 'Mounted patrols, mobile musters, earthworks, corrals, and signal systems protect people and herds.', needs: ['militia', 'livestock'] }, // BAR6-CULTURE (B4): declares what it presumes
       { text: 'A small permanent guard relies on rapid reinforcement from a dispersed mounted population.', needs: ['guardPresence'] },
     ],
     socialTexture: [
-      'Clan, household, herd ownership, alliance, military following, and hospitality obligations organize public standing.',
+      { text: 'Clan, household, herd ownership, alliance, military following, and hospitality obligations organize public standing.', needs: ['livestock'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
       'The settlement is where mobile and settled ways of life meet, and much of the society lives beyond it.',
     ],
     architecturalDetails: [
@@ -494,7 +498,7 @@ export const CULTURE_PROFILES = Object.freeze({
       { text: 'A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.', needs: ['market', 'tier: ≥ town'] }, // W2-FIX-DATA-2 item 4
     ],
     civicPattern: [
-      'Assemblies, magistrates, councils, patrons, sanctuaries, and civic associations compete through public office.',
+      { text: 'Assemblies, magistrates, councils, patrons, sanctuaries, and civic associations compete through public office.', needs: ['court', 'court sits'] }, // BAR6-CULTURE (B4): declares what it presumes; read at print (pdf/lib/cultureOnPage.js ruling (iii))
       'Citizenship institutions coexist with oligarchic wealth, household patronage, and resident outsider communities.',
     ],
     exchangePattern: [
@@ -598,9 +602,16 @@ export const CULTURE_LINE_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'the main street ends at the administrative precinct', needs: Object.freeze(['tier: ≥ town']) }),
     Object.freeze({ text: 'a straight lane runs between the houses to the oldest courtyard', twinOf: 'the main street ends at the administrative precinct', needs: Object.freeze(['tier: ≤ village']) }),
   ]),
+  // BAR6-CULTURE (6a, B4, 2026-11-16): the bazaar's neighbourhood shrines are a town's; the twin names no neighbourhood and
+  // presumes no house (the twins' form above: a twin is not held to a row at print). VETOABLE wording (the owner's).
+  'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines': Object.freeze([
+    Object.freeze({ text: 'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines', needs: Object.freeze(['market', 'institution: temple', 'tier: ≥ town']) }),
+    Object.freeze({ text: 'shaded doorways open onto the ground between the houses', twinOf: 'shaded bazaar fronts open toward tanks, wells, and neighborhood shrines', needs: Object.freeze(['tier: ≤ village']) }),
+  ]),
   'causeways and managed water divide the settlement into organized neighborhoods': Object.freeze([
-    Object.freeze({ text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≥ village']) }),
-    Object.freeze({ text: 'a raised path and a water channel run between the house compounds', twinOf: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≤ hamlet']) }),
+    // BAR6-CULTURE (LAW 6 rule 6a, C209939): neighbourhoods are a town's (the chair's size ruling); was `tier: ≥ village`.
+    Object.freeze({ text: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'a raised path and a water channel run between the house compounds', twinOf: 'causeways and managed water divide the settlement into organized neighborhoods', needs: Object.freeze(['tier: ≤ village']) }),
   ]),
   'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space': Object.freeze([
     Object.freeze({ text: 'carved stone, plastered courtyards, and workshop lanes layer sacred and commercial space', needs: Object.freeze(['market', 'tier: ≥ village']) }),

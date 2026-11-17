@@ -1823,13 +1823,40 @@ export const ownEventPlace = (type, timeline) => {
   return null;
 };
 /**
- * The current tension's tokens with its own past event's place (ownEventPlace), where the timeline holds that event.
+ * BAR6-CULTURE (LAW 10, rule 10g-span; C133674, 2026-11-16): THE LENGTH A PAST EVENT'S OWN SENTENCE GAVE IT, read back
+ * draw-free as `ownEventPlace` reads its place, so that the current tension of the same type lasts as long. The timeline
+ * drew `{duration}` (`historyGenerator.js :: generateEventNarrative`, one to five) while the tensions' shared tokens fix
+ * it at "three" (`historyTemplate.js :: buildCurrentTensionTokens`), and one plague was told on one tab as lasting two
+ * seasons and three. Null where the timeline holds no event of the type, or no form with a length aligns.
+ * @param {string} type @param {ReadonlyArray<any>} timeline @returns {string|null}
+ */
+export const ownEventDuration = (type, timeline) => {
+  const own = (Array.isArray(timeline) ? timeline : []).find((e) => e?.templateType === type);
+  if (!own) return null;
+  const said = String(own.description ?? '');
+  const forms = [HISTORICAL_EVENTS_DATA.find((e) => e.type === type)?.description, ...(HISTORY_DESC_VARIANTS[type] || [])];
+  for (const form of forms) {
+    if (typeof form !== 'string' || !form.includes('{duration}')) continue;
+    const src = form.split(/(\{[a-z_]+\})/).map((part) => {
+      if (!/^\{[a-z_]+\}$/.test(part)) return part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return part === '{duration}' ? '(\\d+|[a-z]+)' : '.+?';
+    }).join('');
+    const m = new RegExp(`^${src}$`).exec(said);
+    if (m && m[1]) return m[1];
+  }
+  return null;
+};
+/**
+ * The current tension's tokens with its own past event's place (ownEventPlace) and length (ownEventDuration), where the
+ * timeline holds that event.
  * @param {Record<string, unknown>} tokens the tensions' shared tokens @param {string} type @param {ReadonlyArray<any>} timeline
  * @returns {Record<string, unknown>}
  */
 export const placedTensionTokens = (tokens, type, timeline) => {
   const place = ownEventPlace(type, timeline);
-  return place ? { ...tokens, '{quarter}': place, '{location}': place } : tokens;
+  const duration = ownEventDuration(type, timeline);
+  const placed = place ? { ...tokens, '{quarter}': place, '{location}': place } : tokens;
+  return duration ? { ...placed, '{duration}': duration } : placed;
 };
 
 /**

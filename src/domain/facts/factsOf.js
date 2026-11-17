@@ -16,10 +16,11 @@
 import { dangerComingOf } from './dangerComing.js'; // BAR4-CORPUS-DEF (D1)
 import { monsterFrontierOf } from './monsterFrontier.js'; // BAR6-DEFDESK (7a)
 import { growsMoreThanEatsOf } from './growsMoreThanEats.js'; // BAR6-DEFDESK (9c.nothing-over)
+import { legacyRuinOf } from './legacyRuin.js'; // BAR6-CULTURE (10g-legacy)
 import { crisisOf } from './crisisKind.js';
 import { siegeMotionOf } from './siegeMotion.js'; // BAR4-SAFETY (F2)
 import { storesMonthsOf } from './storesMonths.js';
-import { defenceOf } from './defence.js';
+import { courtHoldersOf, defenceOf } from './defence.js';
 import { waterOf, waterOfKind } from './water.js';
 import { marketOf } from './market.js';
 import { famineOf } from './famine.js';
@@ -85,6 +86,10 @@ export function factsOf(record, options = {}) {
     get dangerComing() { return dangerComingOf(record); },
     /** BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`) */
     get monsterFrontier() { return monsterFrontierOf(record); },
+    /** BAR6-CULTURE (10g-legacy): the event the record's top legacy names destroyed something (`legacyRuin.js`) */
+    get legacyRuin() { return legacyRuinOf(record); },
+    /** BAR6-CULTURE (6d-court): a court sits on the live roster, the Defense tab's Legal Infrastructure row (`defence.js :: courtHoldersOf`) */
+    get courtSits() { return courtHoldersOf(/** @type {any} */ (record)).length > 0; },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
     /** BAR6-DEFDESK (9c.nothing-over): the town grows more than it eats (`growsMoreThanEats.js`) */

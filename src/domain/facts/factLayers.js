@@ -105,6 +105,7 @@ export const LEAVES = Object.freeze({
   market: home('market', 1, ['institutions']),
   legalHouse: home('legalHouse', 1, ['institutions']), // BAR5-THINGS (LAW 4): a house of written law (`legalHouse.js`)
   paidWatch: home('paidWatch', 1, ['institutions']), // BAR6-PEOPLE (10e-house): someone is paid to keep order (`guardPay.js`)
+  courtSits: home('courtSits', 2, ['availableServices', 'institutions']), // BAR6-CULTURE (6d-court): a court on the live roster (`defence.js :: courtHoldersOf`)
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
   warState: home('warState', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {
@@ -204,6 +205,8 @@ export const LEAVES = Object.freeze({
   dangerComing: home('dangerComing', 4, ['history']),
   // BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`: the config and the monster score)
   monsterFrontier: home('monsterFrontier', 3, ['config', 'defenseProfile']),
+  // BAR6-CULTURE (10g-legacy): the blow the record's top legacy names destroyed something (`legacyRuin.js`)
+  legacyRuin: home('legacyRuin', 4, ['history']),
   // W2-A-LEAVES-2 (REVIEW-W2A F3): an official in a criminal's pay, the cast's own fact; the crime desk's lines
   // about bought officials are struck by it (`display/stateProse/crimeLineDisqualifiers.js`)
   officialsInPay: leaf({ layer: 4, module: 'domain/facts/officialsInPay.js', exported: 'officialsInCriminalPayOf', call: 'record', reads: ['npcs', 'powerStructure'] }),
