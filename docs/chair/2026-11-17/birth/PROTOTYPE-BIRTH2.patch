@@ -1,6 +1,6 @@
 diff --git a/src/domain/facts/birthKinds.js b/src/domain/facts/birthKinds.js
 new file mode 100644
-index 000000000..c143014f5
+index 000000000..5f29f5273
 --- /dev/null
 +++ b/src/domain/facts/birthKinds.js
 @@ -0,0 +1,136 @@
@@ -133,7 +133,7 @@ index 000000000..c143014f5
 +    if (!g || g.some((k) => near.includes(k))) continue;
 +    if (id === 'salt_works' && (route === 'port' || terrain === 'coastal')) continue;
 +    const k = CAUSES[id].worked;
-+    if (!ok.has(k)) { out.denied.push([id, k]); continue; }
++    if (!ok.has(k)) { out.denied.push([id, k]); if (ENV2.BIRTH_VFORCE !== '1') continue; } // W2: BIRTH_VFORCE=1, the house wins there too
 +    for (const f of ['nearbyResources', 'nearbyResourcesNative']) { if (!Array.isArray(config[f])) config[f] = []; if (!config[f].includes(k)) config[f].push(k); }
 +    if (Array.isArray(nearbyCtx) && !nearbyCtx.includes(k)) nearbyCtx.push(k);
 +    out.written++;

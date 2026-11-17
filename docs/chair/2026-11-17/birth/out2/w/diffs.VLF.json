@@ -1,0 +1,34 @@
+{
+ "VLF-720": {
+  "towns": 720,
+  "changed": 193,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "config.nearbyResources": 193,
+   "config.nearbyResourcesNative": 193,
+   "generationCoherenceReceipt": 193,
+   "arrivalScene": 2
+  }
+ },
+ "VLF-150": {
+  "towns": 150,
+  "changed": 36,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "config.nearbyResources": 36,
+   "config.nearbyResourcesNative": 36,
+   "generationCoherenceReceipt": 36,
+   "arrivalScene": 1
+  }
+ }
+}

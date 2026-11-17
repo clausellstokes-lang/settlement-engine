@@ -1,0 +1,36 @@
+
+== a record.config: same 0 of 10
+  r2r-hamlet-9: DIFFERS in stress, stressors, config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-12: DIFFERS in config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-14: DIFFERS in config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-23: DIFFERS in config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-26: DIFFERS in config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-36: DIFFERS in stress, stressors, config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-38: DIFFERS in stress, stressors, config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-45: DIFFERS in stress, stressors, config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-48: DIFFERS in config, _config, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-49: DIFFERS in config, _config, simulationTrace, generationCoherenceReceipt
+
+== b record._config: same 10 of 10
+  r2r-hamlet-9: SAME
+  r2r-hamlet-12: SAME
+  r2r-hamlet-14: SAME
+  r2r-hamlet-23: SAME
+  r2r-hamlet-26: SAME
+  r2r-hamlet-36: SAME
+  r2r-hamlet-38: SAME
+  r2r-hamlet-45: SAME
+  r2r-hamlet-48: SAME
+  r2r-hamlet-49: SAME
+
+== c record.config, manual roster: same 0 of 10
+  r2r-hamlet-9: DIFFERS in economicState, resourceAnalysis, stress, stressors, config, _config, arrivalScene, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-12: DIFFERS in economicState, settlementReason, resourceAnalysis, economicViability, culturalIdentity, config, _config, defenseProfile, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-14: DIFFERS in economicState, npcs, resourceAnalysis, economicViability, culturalIdentity, config, _config, arrivalScene, defenseProfile, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-23: DIFFERS in economicState, resourceAnalysis, config, _config, arrivalScene, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-26: DIFFERS in economicState, npcs, resourceAnalysis, economicViability, culturalIdentity, config, _config, defenseProfile, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-36: DIFFERS in economicState, npcs, resourceAnalysis, stress, stressors, config, _config, arrivalScene, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-38: DIFFERS in economicState, resourceAnalysis, economicViability, history, culturalIdentity, stress, stressors, config, _config, defenseProfile, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-45: DIFFERS in economicState, npcs, resourceAnalysis, economicViability, history, culturalIdentity, stress, stressors, config, _config, arrivalScene, defenseProfile, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-48: DIFFERS in institutions, economicState, availableServices, powerStructure, npcs, relationships, resourceAnalysis, history, config, _config, arrivalScene, defenseProfile, simulationTrace, generationCoherenceReceipt
+  r2r-hamlet-49: DIFFERS in economicState, resourceAnalysis, config, _config, simulationTrace, generationCoherenceReceipt

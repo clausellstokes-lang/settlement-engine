@@ -325,3 +325,67 @@ V5, MY VIEW:
    in 98 of the 720. Nor would I stipulate a ground the terrain forbids.
    Left for the owner: the exploitation card the late ground lacks. Either the Resources tab reads the ground's working
    from the house, or the ground prints as a nearby resource only, as now.
+
+---
+
+## W · THE ROUND TRIP, THE DENIED GROUNDS, THE WORKING OF THE GROUND (the chair, 05:15 UTC)
+
+**W1 · THE SAVED TOWN'S ROUND TRIP** (`probes/w1roundtrip.mjs`; `out2/w/w1.VL.txt`, control `out2/w/w1.R25s.txt`). Ten towns of
+the 720 that V-late changes, generated again from the produced record, under the same rule, in three forms:
+
+| form fed back | V-late | the control (the same ten without V) |
+|---|---|---|
+| (a) `record.config` with `record._seed`: **the product's regenerate** (`store/settlementRegenAction.js`: `const cfg = settlement.config \|\| config`) | 0 of 10 identical; every one differs only in `config`, `_config`, `simulationTrace`, the receipt (and `stress`/`stressors` in 4) | **the same families, the same towns**: the round trip's own drift, not V's |
+| (b) `record._config` (the kept input) | **10 of 10 SAME** | 10 of 10 SAME |
+| (c) `record.config` with `nearbyResourcesRandom: false` (the stored roster read as the DM's word, as the wizard's manual roster reads it) | **10 of 10 differ in substance**: the economy (10), people (5), history (2), culture, defence, and the ROSTER of r2r-hamlet-48 | bookkeeping only |
+
+So the late write is stable under the product's regenerate and under a seed replay. In random mode, `resolveResources`
+ignores a stored roster that carries its native sidecar (the sidecar marks the generator's own answer). It is NOT stable
+where the stored list becomes input: there the stipulated ground acts EARLY (chains, exports, people). The panel's switch
+(`ConfigurationPanel.jsx`, `toggleRandom`) does not feed the stored list back: it writes every compatible key. Only a
+person keeping the stored list as a manual roster, or an import that strips the sidecar, would.
+WHAT I WOULD BUILD: **(i) NOTHING STORED, ONE IMPORT-FREE READING**: "the town's grounds as the page reads them = the
+stored list plus the ground each source house of the seven kinds implies". It is stable by construction, needs no new
+field, and nothing generation reads changes. ITS READERS ON THE PAGE: the Resources tab's Nearby Resources
+(`ResourcesTab.jsx`, lines 224–240); the facts that read the land list (`facts/registeredWords.js`,
+`facts/leadingSourceSpent.js`, `facts/chainCarrier.js`, `facts/houseInputAtHand.js :: availableNativeResourceKeys`'s
+callers); `display/tracePresentation.js`; `display/tradeListDisplay.js`. 41 page-side files name `nearbyResources`.
+WHAT (i) LEAVES UNSAID: every other reader of the stored list. The six ground keys are named page-side in 73 lines of 30
+files (`stone_quarry` 16 lines in 7 files, `iron_deposits` 20 in 5, `grazing_land` 15 in 8, `managed_forest` 16 in 4,
+`marshlands` 4 in 4, `salt_flats` 2 in 2; outside `src/generators`): a line declared on those keys would not see the
+implied ground unless it reads the one reading. (ii) A stored form generation provably ignores exists today (the sidecar
+in random mode), but the manual roster breaks it, so I would not rely on it.
+
+**W2 · THE HOUSE WINS WHERE THE ROLL TABLE DENIES** (`BIRTH_VFORCE=1`; births `VLF-*`, `EXIT 0`; `probes/w2denied.mjs`,
+`out2/w/w2.*.txt`). Towns changed against BIRTH-1: **193 of the 720, 36 of the 150; people, ties, names, roster 0**; only
+the two resource lists move. Born-short left in calm connected towns: **4 · 1 (the luxury quarter only)**. THE DENIED GROUNDS
+WRITTEN, the 720 (the 150): salt works on salt flats 39 (5), charcoal burner on managed woodland 24 (6), stone quarry 12
+(1), mine on iron deposits 10 (1), dairy on grazing land 9 (2), peat cutter on marshlands 6. THE PAGE prints each under the
+Nearby Resources section's **"Abundant"** label (unlabelled under a siege), by `RESOURCE_DISPLAY_LABELS`: r2r-hamlet-2 (road,
+mountain) and r2r-hamlet-18 (river, riverside) "Salt Flats"; r2r-hamlet-3 (port, coastal) "Iron Ore Deposits";
+r2r-hamlet-15 (crossroads, plains) "Marshlands"; r2r-hamlet-19 (port, coastal) "Open Grazing Land"; r2r-village-45 (port,
+coastal) "Stone quarry"; r2r-city-10 (crossroads, plains) "Managed Woodland". OBJECTIONS: 0 stored ("is not compatible
+with", which `coherence/readerBattery.js` reads), because the validator ran before the late write. No reader of the page
+re-checks compatibility. THE WORD THAT PRESUMES: "Abundant". One quarry does not prove plenty, at the admitted grounds as
+at the denied ones: a stipulated ground should print without "Abundant" (a word for the owner's veto: under the section's
+title alone, as the siege form already prints it). THE SALT WORKS APART: all 39 off-coast denied salt works stand on a
+connected route, and none on an isolated one. The existing "Salt" import carries every one ("bought in", §8: no mark,
+"Curtailed by the siege." under a siege). "Salt Flats, Abundant" in a mountain or riverside hamlet reads FALSE, while
+"Imports: Salt" beside a salt works that refines it reads TRUE. So: bought in for the salt works off the coast; on an
+isolated route, nothing is left (0 here).
+
+**W3 · THE WORKING OF THE GROUND.** The Resources tab's exploitation cards read `resourceAnalysis.exploitation`, written
+before the late ground. THE SMALLEST READING: in the tab's stage reader (`ResourcesTab.jsx`, the `shown` lists, line ~159,
+through the one reader of "worked here", `facts/chainWorking.js :: chainWorksResource`), a ground the house implies is
+worked by the chain `RESOURCE_CHAINS` names that house in: stone (Stone quarry, Stonemasons' guild), livestock (Butcher,
+Tannery, Dairy farmer), mountainTimber (Sawmill, Carpenters' guild, Charcoal burner; the written ground is managed
+woodland, whose own chain `timber` does not name the burner: a mismatch to settle), desertSalt (Salt works). The mines and
+the peat cutter are named by no chain, so no card. TOWNS GAINING A CARD at V-late, the 720: up to 114 (grounds written:
+managed woodland 51, stone 45, grazing 25, marsh 10 with no card, salt flats 1). THE CARD'S FIELDS (`rawResource`,
+`processingInstitutions`, `intermediateGoods`, `finalProducts`, `exportValue`, `dependsOn`): `finalProducts` ("cut stone",
+"stone blocks"; "meat, hides, dairy"; "lumber, planks, charcoal") and **`exportValue` presume more than one house proves**.
+A lone quarry is a "partial" stage at most ("no stonemasons' guild finishes it"). Print the card with the house's own
+stage and services only, never the export value.
+
+**MY VIEW (W):** build (i), the reading, not a stored ground. Let the house win everywhere except the salt works off the
+coast, which is bought in ("Salt"). Drop "Abundant" for a stipulated ground. Print its card without `exportValue`.
