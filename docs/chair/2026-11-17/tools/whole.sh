@@ -49,8 +49,14 @@ while [ "$i" -le "$SHARDS" ]; do
   i=$((i + 1))
 done
 if want build; then
+  # THE DIST PHASE AS `npm run verify:dist` RUNS IT (scripts/check-test-ratchet.mjs --verify-dist: remoteDistBuildCommandOf and
+  # the runner's env): the plain build, THE FLAGGED BUILD (the artifact that ships), then tests/build with VERIFY_DIST=1
+  # and VERIFY_ENGINE_REMOTE_DIST=1, so the arms that read the built files (the size ceilings among them) RUN instead of
+  # skipping. Until 2026-11-17 19:10 UTC this step ran tests/build with neither variable: a check made before that hour
+  # did not read the dist (its vitest-build names are the source-only arms).
   step build npm run build
-  step vitest-build npx vitest run tests/build/ --reporter=json --outputFile="$OUT/vitest-build.json"
+  step build-remote env VITE_ENGINE_REMOTE=true NODE_OPTIONS=--max-old-space-size=4096 npx vite build --outDir node_modules/.cache/engine-remote-dist --emptyOutDir
+  step vitest-dist env VERIFY_DIST=1 VERIFY_ENGINE_REMOTE_DIST=1 npx vitest run tests/build/ --reporter=json --outputFile="$OUT/vitest-dist.json"
 fi
 if ls "$OUT"/vitest-*.json >/dev/null 2>&1; then
   node "$HERE/failnames.mjs" "$OUT"/vitest-*.json > "$OUT/names.txt" 2> "$OUT/counts.txt"
