@@ -47,7 +47,7 @@ import { SOURCE_GROUNDS, isSourceHouse } from '../facts/houseKinds.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
-/** @typedef {{ institution?: unknown, chain?: unknown, impact?: unknown, severity?: unknown, missing?: unknown }} GapRow */
+/** @typedef {{ institution?: unknown, chain?: unknown, impact?: unknown, severity?: unknown, missing?: unknown, kind?: unknown }} GapRow */
 
 /**
  * One viability issue or warning as the record carries it (`economicViability.issues` /
@@ -522,7 +522,7 @@ export function resourceGapLines(s) {
       // one for a source house its story leaves idle and for the failed venture: a mine, a peat cutter, a cobbler's guild)
       // has the same gap line, of the row's own good, and its cause after it
       const own = gaps.filter((x) => x && typeof x === 'object' && x.institution === name && x.kind === 'missing');
-      const goods = [...new Set(own.map((x) => rowNoun(str(x.chain))).filter((x) => !!x.noun).map((x) => JSON.stringify(x)))].map((x) => /** @type {{ noun: string, plural: boolean }} */ (JSON.parse(x)));
+      const goods = [...new Set(own.map((x) => rowNoun(str(x?.chain))).filter((x) => !!x.noun).map((x) => JSON.stringify(x)))].map((x) => /** @type {{ noun: string, plural: boolean }} */ (JSON.parse(x)));
       if (!goods.length) continue;
       push({ chain: null, impact: `No ${orList(goods.map((x) => x.noun))} ${goods.length === 1 && goods[0].plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
       const spentGround = sourceGround(s, inst);
