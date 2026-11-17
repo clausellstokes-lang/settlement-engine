@@ -15,21 +15,31 @@
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { rowMarkText } from './crisisStoppedRow.js';
 
+/**
+ * A stress-effect issue of the record (`economicViability.issues`), the shape `validationOnPage.js :: stressEffectsOf` returns:
+ * its description a string, or an object carrying the short and the long text.
+ * @typedef {import('./validationOnPage.js').ViabilityIssue} StressEffect
+ */
+/** A row of the record's roster, read by name. @typedef {{ name?: unknown, [key: string]: unknown }} RosterRow */
+/** The settlement record, as far as this leaf reads it. @typedef {{ institutions?: RosterRow[] | null, [key: string]: unknown }} SettlementRecord */
+
 /** The record's line, as `viability.js` writes it. */
 export const IMPAIRED_LIST = /^(\d+) institutions? critically impaired by siege: (.+)\.$/;
 
 /**
  * A stress-effect issue as the page prints it: the list line keeps only the houses the mark leaf marks (a name the roster
  * does not hold is kept), recounted; null where it keeps none; every other issue unchanged.
- * @param {any} item a stress-effect issue @param {any} s the settlement record @returns {any}
+ * @param {StressEffect | null | undefined} item a stress-effect issue @param {SettlementRecord | null | undefined} s the settlement record
+ * @returns {StressEffect | null | undefined}
  */
 export function impairedListMarked(item, s) {
-  const d = typeof item?.description === 'object' && item.description ? (item.description.short || item.description.text) : item?.description;
+  const desc = item?.description;
+  const d = typeof desc === 'object' && desc ? (desc.short || desc.text) : desc;
   const m = typeof d === 'string' ? IMPAIRED_LIST.exec(d) : null;
   if (!m) return item;
   const houses = Array.isArray(s?.institutions) ? s.institutions : [];
   const kept = m[2].split(', ').filter((name) => {
-    const house = houses.find((/** @type {any} */ h) => h?.name === name || institutionDisplayName(h?.name) === name);
+    const house = houses.find((h) => h?.name === name || institutionDisplayName(h?.name) === name);
     return !house || !!rowMarkText(s, 'house', house);
   });
   if (!kept.length) return null;
@@ -40,9 +50,15 @@ export function impairedListMarked(item, s) {
 /**
  * The stress effects the Outlook prints, in the record's order: `stressEffectsOf` (the record's list), each read by
  * `impairedListMarked`. The tab and the PDF both print this.
- * @param {any[]} effects the record's stress effects (`validationOnPage.js :: stressEffectsOf`) @param {any} s
- * @returns {any[]}
+ * @param {ReadonlyArray<StressEffect> | null | undefined} effects the record's stress effects (`validationOnPage.js :: stressEffectsOf`)
+ * @param {SettlementRecord | null | undefined} s
+ * @returns {StressEffect[]}
  */
 export function stressEffectsShown(effects, s) {
-  return (Array.isArray(effects) ? effects : []).map((item) => impairedListMarked(item, s)).filter(Boolean);
+  /** @type {StressEffect[]} */ const out = [];
+  for (const item of Array.isArray(effects) ? effects : []) {
+    const shown = impairedListMarked(item, s);
+    if (shown) out.push(shown);
+  }
+  return out;
 }
