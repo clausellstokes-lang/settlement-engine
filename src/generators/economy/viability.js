@@ -22,6 +22,7 @@ import {
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
+import { minorRoutesReach } from '../../domain/facts/tradeReach.js'; // BAR6-RECORD (c): isolated with a minor route is a poor road
 import { waterOf } from '../../domain/facts/water.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-1f: one line
 import { hasMarketInstitution } from '../../domain/facts/market.js';
 import { defenseTraditionNamesOf } from '../../domain/institutions/defenseInstitutionBuckets.js'; import { craftsAbsentFrom, namesBankOrMoneyHouse } from '../../domain/facts/institutions.js'; import { namesAlchemistHouse } from '../../domain/facts/magic.js'; // TAIL-CLOSE-SRC-4: one line
@@ -528,7 +529,11 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
         description:
           (isSieged
             ? `${critical.length} institution${critical.length > 1 ? 's' : ''} critically impaired by siege: `
-            : `${critical.length} institution${critical.length > 1 ? 's' : ''} operating on stockpiles only (isolated trade): `) +
+            // BAR6-RECORD (c) (9d.isolated; vetoable by the owner): where a poor road still reaches the isolated place
+            // (`facts/tradeReach.js`, the food balance's minor routes) its houses are supplied irregularly, not from stores alone
+            : minorRoutesReach({ route: economicState?.tradeAccess ?? cfg.tradeRouteAccess, tier })
+              ? `${critical.length} institution${critical.length > 1 ? 's' : ''} supplied only irregularly over a poor road (isolated trade): `
+              : `${critical.length} institution${critical.length > 1 ? 's' : ''} operating on stockpiles only (isolated trade): `) +
           critical.map((d) => institutionDisplayName(d.institution)).join(', ') +
           '.',
       });

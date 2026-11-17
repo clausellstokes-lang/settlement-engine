@@ -21,6 +21,9 @@ import { dropExportsImportedShort } from './exportsImportedShort.js'; // BAR3-CL
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { applyNeighbourEconomicBias } from './neighbourEconomicBias.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
+import { minorRoutesReach } from '../../domain/facts/tradeReach.js'; // BAR6-RECORD (c): isolated with a minor route is a poor road
+/** BAR6-RECORD (c): the isolated need where a poor road still reaches (`minorRoutesReach`); read by `viability.js`'s Outlook line. */
+export const POOR_ROAD_SUPPLY_LINE = 'Poor road: supplies come in irregularly by minor routes.'; // under the Services row's 70-character clip
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
 import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; import { arcaneGuildHouseStands } from '../../domain/facts/magic.js'; import { namesSmugglingHouse } from '../../domain/crimeSignal.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
@@ -660,7 +663,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       impact = isUnderStress
         ? 'Supply route severed. Operating at minimal capacity or shut down.'
         : isEffectivelyIsolated
-          ? 'No trade access: running on existing stockpiles only.'
+          // BAR6-RECORD (c) (9d.isolated, the chair's direction of BRIEF-BAR6; vetoable by the owner): an isolated village
+          // or larger is a poor road, not no trade: the food balance's minor routes reach it (`facts/tradeReach.js`), so
+          // its need comes in irregularly and stores carry the gaps; a thorp or a hamlet off every road runs on stores.
+          ? (minorRoutesReach({ route: tradeRoute, tier }) ? POOR_ROAD_SUPPLY_LINE : 'No trade access: running on existing stockpiles only.')
           : _hasMagicTradeForDeps && isIsolatedRoute
             ? 'Supplied via magical trade infrastructure: teleportation imports replace road access.'
             : 'Dependent on trade routes. Siege, road closure, or blockade would impair operations.';
