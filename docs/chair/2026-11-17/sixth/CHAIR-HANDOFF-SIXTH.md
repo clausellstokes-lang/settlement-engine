@@ -647,3 +647,14 @@ should be paused or archived by the owner's hand.
   branch, or to tell the chair to add one sentence to the repository's CLAUDE.md. THE CHAIR DOES NEITHER ON ITS OWN, AND
   TRIES NO OTHER WAY ROUND (its own check denied its grant messages; a different directory, a patch hand-over or a fresh
   seat to dodge the refusal would each be a route round it).
+- **21:28 UTC. IN:** LEFT-CHAIN's first follow-up (21:23, 444327bd9: the metal share's houses taken by catalogue id through
+  `supplyStory.js :: idOfHouse`; `labelJoins` green; read by the chair); its second (the goods roster's row: the new
+  import may ask a row for `economicsCrisisMarks.js` too) is awaited. POINT 40's CHECK, part 2 (CHECKS-2, 21:25: shards 3
+  and 4 and the dist phase): 58 names, THE SAME 58 as at the batch's commit. J-ROWS IS DONE AND COULD COMMIT (21:27,
+  316cdb66c, base J's audit tip 0cdedd206): G1 = 11g 129 -> 0 in the 720 at print, the mark's reading byte-identical;
+  item 1 by the chair's grant: the fish market's catch row is "Preserved fish" where the town's fish grounds are used
+  up (`_fishUsedUp` handed in at the roll): the 29 services -> 0, the titles 51 -> 4 (the landings' own rows); a
+  declared move of `availableServices` in 35 towns of the 720 and 48 of the 525; three tests re-keyed by identity
+  (read by the chair: the same claims on the lines the page now prints). ITS SECOND READER: READ-J-ROWS
+  session_01FbPLbfntPW6nVqiBHsPQ9x (seated 21:27). It lands with LEFT-CHAIN's follow-up after point 40, on a landing
+  branch and a shared whole check.
