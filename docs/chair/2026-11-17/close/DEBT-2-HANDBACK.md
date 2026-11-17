@@ -59,6 +59,13 @@ through `sh scripts/gate-tail.sh`, never through a pipe.
 2. `generationForkCensus` A4: `economyReconcilePass\|economicState.producedOnRecord` (two cells), a stored landing count, the close's.
 3. The four `vendorPdfLazy` size ceilings under `VERIFY_DIST=1` (above), stored ceilings, the close's.
 
+## AMENDMENT 1 (the chair's grant, received 19:06 UTC)
+
+1. **The grant:** `tests/lint/generationForkRegistry.contract.test.js` is mine for EXACTLY the patch's five pinned figures, each with its dated note, and nothing else in that file.
+2. **The patch, applied** at 526379d36: 5 lines in, 5 out (`git diff --stat`), nothing else. `npx eslint` on the file: exit 0. Both type gates: exit 0 (167 against a ceiling of 167; 1,113 against 1,113).
+3. **The contract: 3/3 green.** The census at the tip reads A3e, A5, A7 and A8e green. A1 and A6 are red with the same messages as at the base. A4's only remaining differences are the 2 `economyReconcilePass|economicState` cells (the close's).
+4. **All of `tests/lint` by name against my base: 69 at the tip against 71 at the base.** LEFT: `generationForkRegistry.contract` A2 and `heldKeyWriterCensus.walker` A2, both mine. APPEARED: **none** (A3s is green again).
+
 ```diff
 --- a/tests/lint/generationForkRegistry.contract.test.js	2026-11-17 18:49:00.315171209 +0000
 +++ b/tests/lint/generationForkRegistry.contract.test.js	2026-11-17 18:49:00.336266685 +0000
