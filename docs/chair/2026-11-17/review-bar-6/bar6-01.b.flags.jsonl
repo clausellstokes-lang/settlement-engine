@@ -1,0 +1,6 @@
+{"id":"C0350","town":"bar0-city-under_siege+famine-rand-42","sev":"MED","kind":"STATE","why":"says food can still be bought from outside; the siege (C0065) leaves nothing coming in by road, gate or water; FOOD failed source is None","other":"C0065"}
+{"id":"C0638","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"STATE","why":"Daily markets offer fresh produce with no mark in an active famine under siege; bread and ale on other rows carry (scarce)","other":"C0385"}
+{"id":"C2524","town":"bar0-city-under_siege+famine-rand-42","sev":"MED","kind":"PAIR","why":"toll-keeper's card shows tolls taken and the gate lifted for carts with no mark; the Toll bridge is Stopped by the siege, none to gather","other":"C0704"}
+{"id":"C2365","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"PAIR","why":"fishmonger's card shows ordinary haggling over a regular's price, unmarked; the Fish market is Stopped by the siege and famine","other":"C0640"}
+{"id":"C2654","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"PAIR","why":"caravanserai keeper charges by animal and night, unmarked; the Caravanserai is Stopped by the siege, no caravans come","other":"C0605"}
+{"id":"DONE","lines":3633,"blocks":1,"flags":5}
