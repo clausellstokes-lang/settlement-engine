@@ -215,3 +215,27 @@ describe('BIRTH-1: a house that buys its material has it brought in; a source ho
     }), 'no word twice');
   }, 1_800_000);
 });
+
+// LEFT-MARKS M2 (the second reader on BIRTH-3, 2026-11-17): `resourceGenerator.js :: importsBroughtAtBirth`'s `bring` brings a
+// word only if it adds a canonical good (`goodsCatalog.js :: subsumeTradeGoods`); over the corpus the reader's own table
+// answers first, so its removal turned nothing red. A CONSTRUCTED RECORD (a town on a road, r2r-town-0, its land emptied, a
+// tanner alone on its roster, no chain): with "Livestock" on the imports the reader feeds the tanner (`ONE_GOOD_BOUGHT`) and
+// nothing is brought; with another word of the same good that the hides reader does not read ("Dairy products", "Meat": the
+// catalogue's livestock good), the tanner's story is bought in and `bring` alone keeps the second word of the one good out.
+// With nothing on the imports the hides word is brought (the arm's positive; the seed 'm2' is one whose pick of the failed
+// venture leaves the tanner a buyer: a venture buys nothing). PROVEN BY THE MUTATION: with `bring`'s
+// `subsumeTradeGoods` clause removed in scratch, the two words read ["Raw hides and animal products"]; restored, [].
+describe('LEFT-MARKS M2: the birth brings no second word of one canonical good', () => {
+  test('a tanner on a road: nothing brought beside "Livestock", "Dairy products" or "Meat"; the hides word on an empty list', () => {
+    const s = JSON.parse(JSON.stringify(town('r2r-town-0'))); // the stored record (a born record carries the birth's picks)
+    expect(hasTradeRouteConnection(String(s.config?.tradeRouteAccess ?? '')), 'r2r-town-0 is on a road').toBe(true);
+    const make = (/** @type {string[]} */ imports) => ({ ...s, config: { ...s.config, nearbyResources: [], nearbyResourcesNative: [], nearbyResourcesDepleted: [] },
+      institutions: [{ name: 'Tanners', status: 'active' }], economicState: { ...s.economicState, primaryImports: imports, localProduction: [], activeChains: [] },
+      resourceAnalysis: { ...s.resourceAnalysis, gaps: [], imports: { critical: [], recommended: [], reasons: {} } } });
+    expect(importsBroughtAtBirth(make([]), 'm2'), 'nothing on the imports: the hides word is brought').toEqual(['Raw hides and animal products']);
+    for (const word of ['Livestock', 'Dairy products', 'Meat']) {
+      expect(subsumeTradeGoods([word, 'Raw hides and animal products']).length, `${word} and the hides word are one good`).toBe(1);
+      expect(importsBroughtAtBirth(make([word]), 'm2'), `"${word}" on the imports: no hides word`).toEqual([]);
+    }
+  }, 300_000);
+});
