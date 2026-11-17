@@ -674,24 +674,30 @@ import { failedFoodGoodsOf } from './commoditiesShown.js'; // BAR5-FOOD (L3.fail
  * vetoable by the owner). The Economics tab printed "Harvest Scarce in the famine." on the income row and, beside it, an
  * Exports list carrying "Date harvest · Desert grain · Palm sugar" (bar0-village-famine-rand-27) or "Milled flour · Flour and
  * meal" (bar0-village-famine-rand-38, where the herds failed and the mark reads the harvest's grain scarce with them). THE
- * ONE FACT is the page's own mark: an income share of the record that lives on the grain (`crisisStoppedRow.js ::
- * incomeDependenceOf`) which the famine in force marks (`rowStoppedBy`, the reading that prints "Scarce in the famine.";
- * it composes the failed source's food with BAR6-MARKS's `harvestFoodsScarce`, so a famine of the herds that marks the
- * harvest's grain is read too). Where it holds, a crop of the field, the grove or the mill (`HARVEST_CROP_GOOD`) leaves the
- * Exports. Display only: the record's list is untouched.
+ * ONE FACT is the page's own mark (`crisisStoppedRow.js :: rowStoppedBy` on an income share): the famine in force marks a
+ * share that lives on the grain (`INCOME_DEPENDENCE`) where the food it failed (`FAMINE_FAILED_FOOD`) is the grain, or where
+ * a share lives on that food and the grain both (BAR6-MARKS's `harvestFoodsScarce`: the herds failed, the harvest's grain is
+ * read scarce with them). It is read here from the dependence table, because the mark's leaf imports this file through
+ * `validationOnPage.js` (the cycle guard, `tests/architecture/layerBoundaries.test.js`, is shrink-only); the guard
+ * `tests/domain/bar6SeamEcon.test.js` holds it equal to `rowStoppedBy` over a fixed sample. Where it holds, a crop of the
+ * field, the grove or the mill (`HARVEST_CROP_GOOD`) leaves the Exports. Display only: the record's list is untouched.
  * @param {unknown} settlement @returns {boolean}
  */
-function harvestScarceHere(settlement) {
-  if (!stoppingCrisesOf(/** @type {object} */ (settlement)).includes('famine')) return false;
-  const shares = /** @type {{ economicState?: { incomeSources?: unknown } | null } | null | undefined} */ (settlement)?.economicState?.incomeSources;
-  return (Array.isArray(shares) ? shares : []).some((sh) => !!sh && typeof sh === 'object'
-    && incomeDependenceOf(sh).includes(GRAIN) && rowStoppedBy(/** @type {object} */ (settlement), 'income', sh, ['famine']) === 'famine');
+export function harvestScarceHere(settlement) {
+  if (!settlement || typeof settlement !== 'object' || !crisisOf(/** @type {object} */ (settlement)).has('famine')) return false;
+  const eco = /** @type {{ economicState?: { incomeSources?: unknown, foodSecurity?: { foodRecord?: { failedSource?: unknown } | null } | null } | null }} */ (settlement).economicState;
+  const failed = eco?.foodSecurity?.foodRecord?.failedSource;
+  const food = typeof failed === 'string' ? (Object.hasOwn(FAMINE_FAILED_FOOD, failed) ? FAMINE_FAILED_FOOD[failed] : null) : GRAIN;
+  if (!food) return false;
+  const shares = /** @type {Array<Record<string, unknown>>} */ ((Array.isArray(eco?.incomeSources) ? eco.incomeSources : []).filter((sh) => !!sh && typeof sh === 'object'))
+    .filter((sh) => sh.custom !== true && sh.source !== 'custom' && sh.isCustom !== true);
+  const deps = shares.map((sh) => { const t = typeof sh.source === 'string' ? sh.source.trim() : ''; return Object.hasOwn(INCOME_DEPENDENCE, t) ? INCOME_DEPENDENCE[t] : NONE; });
+  return deps.some((d) => d.includes(GRAIN)) && (food === GRAIN || deps.some((d) => d.includes(food) && d.includes(GRAIN)));
 }
 
 /** The crops of the field, the grove and the mill, by a word of the good's name (folded). */
 const HARVEST_CROP_GOOD = /\b(?:grain|wheat|barley|rye|oats|millet|rice|maize|dates?|flour|meal|harvest|palm sugar|produce)\b/;
-import { incomeDependenceOf, rowStoppedBy, stoppingCrisesOf } from './crisisStoppedRow.js';
-import { GRAIN } from '../../data/crisisDependence.js';
+import { FAMINE_FAILED_FOOD, GRAIN, INCOME_DEPENDENCE, NONE } from '../../data/crisisDependence.js';
 import { housesShortOf } from '../facts/houseInputAtHand.js';
 import { chainCarrierOf } from '../facts/chainCarrier.js';
 

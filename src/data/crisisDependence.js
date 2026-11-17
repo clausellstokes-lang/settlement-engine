@@ -67,6 +67,15 @@ export const GRAIN = 'food: grain';
 export const LIVESTOCK = 'food: livestock';
 export const FISH = 'food: fish';
 export const GAME = 'food: game';
+/**
+ * THE FOOD A FAMINE FAILED, by the food record's `failedSource` (a failed mill is the grain's; a famine whose record names
+ * no source failed the crops, the grain: the reader's fallback). SEAM-ECON item 1 (2026-11-17): the Exports' reading of a
+ * scarce harvest (`display/tradeListDisplay.js :: harvestScarceHere`) reads it here, import-free, because the mark's own
+ * leaf (`display/crisisStoppedRow.js`, whose private `FOOD_OF_FAILED_SOURCE` is the same table) sits in an import cycle
+ * with the trade lists; `tests/domain/bar6SeamEcon.test.js` holds the two readings equal.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const FAMINE_FAILED_FOOD = Object.freeze({ grain: GRAIN, mill: GRAIN, livestock: LIVESTOCK, fish: FISH, game: GAME });
 export const INPUT = 'input';
 export const GATES = 'beyond the gates';
 export const FIELD_WORK = 'field work';
