@@ -1,0 +1,10 @@
+{"id":"C7307","town":"bar0-city-under_siege+famine-rand-44","sev":"MED","kind":"STATE","why":"one importer brings in all the grain, quadrupling price; the siege has stopped trade by road, gate and water","other":"C7086"}
+{"id":"C7309","town":"bar0-city-under_siege+famine-rand-44","sev":"LOW","kind":"PAIR","why":"imports to be weighed and food 'bought from outside' while the siege has stopped trade by road, gate and water","other":"C7086"}
+{"id":"C8021","town":"bar0-city-under_siege+famine-rand-44","sev":"MED","kind":"PAIR","why":"Wool & Textile income row bare ('Cloth is woven or finished here') though Weavers and Fuller are marked Short of wool","other":"C7403"}
+{"id":"C8033","town":"bar0-city-under_siege+famine-rand-44","sev":"LOW","kind":"PAIR","why":"exports 'Maritime services (cargo, pilotage)' print unmarked while pilotage and cargo loading are stopped by the siege","other":"C7978"}
+{"id":"C8842","town":"bar0-city-under_siege+famine-rand-44","sev":"MED","kind":"PAIR","why":"stablemaster 'knows every rider who has come and gone this month' unmarked; Stable district is Stopped by the siege and nothing comes in or goes out","other":"C7541"}
+{"id":"C8878","town":"bar0-city-under_siege+famine-rand-44","sev":"LOW","kind":"PAIR","why":"wharfinger 'talks about the ships, the weather and the cargoes; a good ear at the berths' unmarked; Docks are Stopped by the siege","other":"C7483"}
+{"id":"C9104","town":"bar0-city-under_siege+famine-rand-44","sev":"LOW","kind":"PAIR","why":"collector asks what you carry, where from and where to, unmarked; Customs house is Stopped by the siege and nothing comes in","other":"C7473"}
+{"id":"C7141","town":"bar0-city-under_siege+famine-rand-44","sev":"LOW","kind":"PAIR","why":"'Defense readiness · Adequate' beside STATE defence Fortress and 'Defense · Fortress' on the same page","other":"C7025"}
+{"id":"C7132","town":"bar0-city-under_siege+famine-rand-44","sev":"LOW","kind":"PAIR","why":"'Economic capacity · Critical' beside 'Economic Resilience · Adequate'; trade income is nil and prosperity Struggling","other":"C7029"}
+{"id":"DONE","lines":2800,"blocks":1,"flags":9}
