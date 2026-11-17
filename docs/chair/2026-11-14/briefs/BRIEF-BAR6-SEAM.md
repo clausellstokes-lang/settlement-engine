@@ -185,8 +185,8 @@ RUNNER: runC (6d, 7c) and runF (10g) over the 150 and the 720.
 ### SEAM-DESKS · the people's, the defence's, the houses' and the crime's leftovers, and the class table
 
 YOUR FILES: `src/data/npcData.js`, `src/domain/facts/guardPay.js`, `src/generators/safetyProfile.js`,
-`src/data/institutionDescVariants.js`; THE DEFENCE DESK AND THE ECONOMY DESK of the annex with
-`src/data/dossierStateProse/defense.generated.js` and `economy.generated.js`;
+`src/data/institutionDescVariants.js`; THE DEFENCE DESK, THE ECONOMY DESK AND THE POWER DESK of the annex with
+`src/data/dossierStateProse/defense.generated.js`, `economy.generated.js` and `power.generated.js`;
 `tests/lint/presumptionClasses.shared.mjs` (the class table; ruling CD1 passes it to you now that its seat is final);
 and, FOR ITEM 1 ONLY, the `paid watch` lines of the three shared facts' files.
 READ: SEAM-LIST's items marked PEOPLE, DEFDESK, HOUSES and the two fresh lines of CRIME's; `BAR6-PEOPLE-HANDBACK.md`,
@@ -215,4 +215,15 @@ YOUR ITEMS:
    (BAR6-POWERS's; it lands beside you: add it by name as the guard seat added named atoms), and whatever item 1 leaves.
    Then `node scripts/presumption-classes-door.mjs --check` reads `fresh 0` at your tip (SEAM-CULTURE cures the one
    fresh line that is its own; say the count you read with and without it).
+7. THE POWER DESK (the powers seat's leftovers, found by its reading): its new DS-POW-5 `council` twin, "... and nobody in
+   the town can make it take them." (`counterforce · no ruler: lord · no seat members`), says "the town" with no size
+   band: a noun every tier bears. AND ONE THING TO CONFIRM, READING ONLY (`src/generators/power/factionStanding.js` is
+   not your file): the sentence "The merchant guilds now have more say: the noble families keep their titles ..." is now
+   built from two pieces, so the presumed-things walker no longer sees its whole literal and the powers seat removed its
+   row: a guard case in your own guard file holds that it prints only where a power named Merchant Guilds stands; if it
+   can print without one, name it for the close.
+   AND ONE FRESH LINE for the build guard's door in the power desk's generated file: "Travellers reach {settlement} and
+   find nobody about and soldiers wherever they look. Nobody will talk about the ..." (class `outside`, status `one-kind`:
+   it is declared against one crisis where the family is meant): declare it against the THREAT family in the annex's
+   own form and regenerate (AX1).
 RUNNERS: runE (9a) and runF (10e) over the 150 and the 720; the two doors.

@@ -76,3 +76,24 @@ RED, EACH NAMED, NONE A STOP FOR THE MERGE SEAT (the seam's, or the close's):
 The wide read's 147 standing rows over its 150 towns: found by a detector at the base 140; after BAR5 97; at this tree
 10 (eight under the powers seat's rules, not yet joined); 7 are found by no detector. Towns with no standing row: 66,
 then 84, then 135 of 150.
+
+## THE ELEVENTH POINT (added 2026-11-17 02:10 UTC): `lane/bar6-powers-2026-11-16`
+
+BAR6-POWERS handed back after the ten were rehearsed. The chair read it (seven commits, signed; a helper's reading: no
+HIGH; every grant kept), passed it through its own gates at its tip, and rehearsed it ON TOP OF THE TENTH POINT.
+
+- AT EXACTLY: fdf9e83dc72c3897361e49978cca425c32175d22.
+- IT COLLIDES IN TWO FILES, both unions: `src/domain/facts/factVocabulary.js` (the type note's first line gains
+  `seatMembers` beside `sovereign`; the `legitimacy crisis` entry stays where the powers' side holds nothing) and
+  `src/domain/facts/factsOf.js` (the legitimacy getter stays). Take the chair's whole files:
+  `factVocabulary.after-powers.js` (blob `68d285c70b5f9cd71fed71b831d523f0619fd77e`) and `factsOf.after-powers.js` (blob
+  `a0fac108e30279526d7f482653d478a35a2b5cc7`). Its copy of `sovereign.js` is already the line's blob: no conflict there.
+  The Institutions tab, the pool table and the presumed-things register merge by themselves. Any other conflict is a STOP.
+- AFTER ITS MERGE (the merge seat's hand-back commit stands between, so the whole tree is not compared here):
+  `git rev-parse HEAD:src` reads `e88e71e934ed2f0c8d3e1844499403a4a6e1d22a` and `git rev-parse HEAD:tests` reads
+  `b264a72623ce8024cc59ca2b3f63e75607565629`.
+- AT THE REHEARSAL TREE OF ELEVEN: the two type gates, eslint, the architecture guards (347), the round BAR5's guards, the
+  build and the two build tests GREEN; ALL ELEVEN GUARDS TOGETHER (the ten and `tests/domain/bar6PowersCards.test.js`):
+  2 files failed, 3 tests failed of 84, the same three by name; the build guard's door `hits 1805 · banked 1938 · fresh 4
+  · stale 137` (the fourth fresh line is the power desk's "Travellers reach {settlement} and find nobody about ...": the
+  seam's); the scene guard 2 of the 720 as before; the presumed-things door fresh 39, stale 72.
