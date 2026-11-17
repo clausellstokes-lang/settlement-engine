@@ -383,7 +383,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
   const shortBy = useMemo(() => new Map(entries.map(({ inst }) => [inst, rowShortOf(settlement, 'house', inst)])), [entries, settlement]);
   const serviceShortBy = useMemo(() => new Map(entries.flatMap(({ services }) => services.map((svc) => [svc, rowShortOf(settlement, 'service', svc)]))), [entries, settlement]);
   const markOf = (inst) => (stoppedBy.get(inst) || shortBy.get(inst) ? rowMarkText(settlement, 'house', inst) : null);
-  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values(), ...serviceStoppedBy.values()].filter(Boolean), [...shortBy.values(), ...serviceShortBy.values()].some(Boolean));
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values(), ...serviceStoppedBy.values()].filter(Boolean), [...shortBy.values(), ...serviceShortBy.values()]); // LEFT-MARKS M3: the leaf reads a venture's mark as no short mark
   if (!entries.length) return <Empty message="No institutions are recorded for this settlement." />;
 
   return (

@@ -579,14 +579,21 @@ export const SUPPLIED_LINE = 'A row marked short is what its house makes when su
 
 /**
  * The tab's one head line where at least one of its rows is marked; else null. VETOABLE wording.
+ * LEFT-MARKS M3 (the second reader on BIRTH-3, 2026-11-17): A FAILED VENTURE'S MARK IS NO SHORT MARK FOR THIS LINE. Its
+ * second sentence ("A row marked short is what its house makes when supplied.") printed where the only mark on the tab was
+ * a failed venture's ("Abandoned: a failed venture."), so no row was marked short (10 towns of the 720, 3 of the 150). The
+ * leaf decides it: handed the rows' short readings (`rowShortOf`'s answers), it counts a row marked short only where the
+ * answer is the short mark, never the venture's (`isVentureMark`); a caller that hands a boolean keeps its reading.
  * @param {string[]} crises the crises that marked a row on this tab, in the leaf's order
- * @param {boolean} [shortMarked] whether a row of the tab is marked short of its input (S5)
+ * @param {boolean | ReadonlyArray<unknown>} [shortMarked] whether a row of the tab is marked short of its input (S5), or
+ *   the rows' short readings, from which the leaf reads it
  * @returns {string | null}
  */
 export function ordinaryTimesLine(crises, shortMarked = false) {
   const named = crises.map(crisisOfMarkKind);
   const nouns = STOPPING_CRISES.filter((k) => named.includes(k)).map((k) => CRISIS_NOUN[k]);
-  const supplied = shortMarked ? SUPPLIED_LINE : null;
+  const short = Array.isArray(shortMarked) ? shortMarked.some((m) => typeof m === 'string' && m !== '' && !isVentureMark(m)) : !!shortMarked;
+  const supplied = short ? SUPPLIED_LINE : null;
   if (nouns.length === 0) return supplied;
   const list = nouns.length === 1 ? nouns[0] : `${nouns.slice(0, -1).join(', ')} and ${nouns[nouns.length - 1]}`;
   const head = nouns.length === 1

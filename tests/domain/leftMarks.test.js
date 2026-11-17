@@ -1,3 +1,4 @@
+/** @vitest-environment jsdom */
 /**
  * leftMarks.test.js — LEFT-MARKS (the sixth chair's BRIEF-LEFT, 2026-11-17; vetoable by the owner): THE MARK'S ONE LEAF READS
  * WHAT EARLIER SEATS LEFT BY NAME. Over fixed seeds of the census's 720 (born in the census's own configuration shape, as
@@ -14,8 +15,12 @@
  *         is "Short of grain." where the page's food line is short ("Short: N lbs/day"), in a crisis or not: the four
  *         maltsters of the 720 on a short food line (r2r-hamlet-27, calm; r2s-under_siege-hamlet-1, -3; r2s-wartime-village-3)
  *         are marked, the ten on a food line that is not short are not; alike on the three views (N4).
- * POSITIVE CONTROL: at the base (e0242a12a) the two houses print bare, the apothecary of r2r-village-13 is marked and the
- * four maltsters print bare: the file is red there.
+ *   (M3)  THE HEAD LINE OVER A VENTURE: "A row marked short is what its house makes when supplied." prints on neither the
+ *         Institutions tab nor the Services tab where the only mark there is a failed venture's (the ten towns of the 720 at
+ *         the base; r2r-hamlet-27 of them now carries a short mark of its own, the maltster's (L16), and prints it); it
+ *         prints in a town with a short mark (r2r-city-20).
+ * POSITIVE CONTROL: at the base (e0242a12a) the two houses print bare, the apothecary of r2r-village-13 is marked, the
+ * four maltsters print bare and the head line prints over the ten towns' ventures: the file is red there.
  */
 import { describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -27,6 +32,10 @@ import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
+import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 
 await loadGenerationLawPayloads();
 
@@ -96,4 +105,25 @@ describe('L16 · the house that works only a surplus is short where the page\'s 
       expect(mark.includes('Short of grain.'), `${seed}: the maltster's mark ${mark}`).toBe(SHORT.includes(seed));
     }), 'L16 rows');
   }, 600_000);
+});
+
+describe('M3 · the head line over a failed venture: no "marked short" sentence where no row is marked short', () => {
+  const SUPPLIED = 'A row marked short is what its house makes when supplied.';
+  /** @param {any} s @returns {{ inst: boolean, svc: boolean }} whether each rendered tab prints the sentence */
+  const printed = (s) => {
+    const inst = render(React.createElement(InstitutionsTab, { settlement: s })).container.textContent || '';
+    cleanup();
+    const svc = render(React.createElement(ServicesTab, { services: s.availableServices, settlement: s, narrativeNote: null })).container.textContent || '';
+    cleanup();
+    return { inst: inst.includes(SUPPLIED), svc: svc.includes(SUPPLIED) };
+  };
+  const VENTURE_ONLY = ['r2r-hamlet-26', 'r2r-hamlet-48', 'r2r-hamlet-57', 'r2r-town-13', 'r2r-town-18', 'r2s-infiltrated-town-1',
+    'r2s-politically_fractured-hamlet-0', 'r2s-under_siege-city-1', 'r2s-wartime-city-3'];
+  test('absent on both tabs in the nine towns whose only mark is a venture\'s; present in r2r-city-20 (a short mark) and r2r-hamlet-27 (the maltster\'s)', () => {
+    expectNoSeedFailures(collectSeedFailures([...VENTURE_ONLY, 'r2r-city-20', 'r2r-hamlet-27'], (seed) => {
+      const shown = printed(town(seed));
+      if (VENTURE_ONLY.includes(seed)) expect(shown, `${seed}: the sentence on the Institutions and the Services tab`).toEqual({ inst: false, svc: false });
+      else expect(shown.inst, `${seed}: the sentence on the Institutions tab, over its short mark`).toBe(true);
+    }), 'M3 rows');
+  }, 900_000);
 });
