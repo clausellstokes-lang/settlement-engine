@@ -274,6 +274,12 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                         a power the record calls Minor or Suppressed. */}
                     {typeof op?.name === 'string' ? institutionHouseLabel(op.name) : label(op)}
                   </Text>
+                  {/* SEAM-PDF item 1: the house's own mark, said before its note, as the Defense tab says it */}
+                  {op?.mark && (
+                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.bad, lineHeight: 1.35, marginBottom: op?.note ? 1 : 0 }}>
+                      {op.mark}
+                    </Text>
+                  )}
                   {op?.note && (
                     <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
                       {op.note}

@@ -16,7 +16,7 @@
 import { criminalOpEcon } from '../../domain/criminalOpRole.js';
 import { criminalOpNote, deriveCriminalStructure, deriveSupportingCapabilities,
   deriveDefenseReadiness, deriveArmedForces, deriveGuardAssessment,
-  deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../domain/display/defenseDisplay.js';
+  deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, criminalOpMark } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { entityIdFor } from '../../domain/dossier/entityLinks.js';
@@ -38,6 +38,7 @@ export const exploitName = (c) =>
 // leaf every print site of a chain's name reads; the import sits beside its one reader.
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { pageSaysEntrepot } from '../../domain/display/entrepotShown.js';
+import { complexityLabelShown } from '../../domain/display/labelBands.js'; // SEAM-PDF item 3: the tab's label (the chapter and the journal read it)
 
 export function economicsSlice(active) {
   const s = active || {};
@@ -71,7 +72,7 @@ export function economicsSlice(active) {
   return {
     prosperity:         ec.prosperity || null,
     prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null
-    economicComplexity: ec.economicComplexity || null,
+    economicComplexity: complexityLabelShown(ec) || null,
     economyOutput:      ec.compound?.economyOutput ?? null,
     tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,
     incomeSources:      normalizeIncomeSources(ec.incomeSources || []),
@@ -175,8 +176,11 @@ export function defenseSlice(active) {
   const criminalCapture = s?.powerStructure?.criminalCaptureState || sp?.criminalCapture || null;
   // X-50 (BOILERPLATE ONCE): two operations that fall to the same note (the catch-all, or two
   // names one rule matches) carry it on the first only, as the screen Defense tab prints it.
+  // SEAM-PDF item 1 (2026-11-17; BAR6-CRIME's LAW 8 8e.crime, C8633): each operation carries the mark its own house's card
+  // prints ("Stopped by the siege."), read through the Defense tab's one reader (`defenseDisplay.js :: criminalOpMark`).
   const criminalOps = (sp?.criminalInstitutions || []).map((name, i, all) => ({
     name,
+    mark: criminalOpMark(s, name),
     note: all.slice(0, i).some((prev) => criminalOpNote(prev) === criminalOpNote(name)) ? null : criminalOpNote(name),
   }));
   const criminalStructure = deriveCriminalStructure(s);
