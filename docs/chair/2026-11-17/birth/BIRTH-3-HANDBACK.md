@@ -66,6 +66,37 @@ town). It is red ON THE LINE too (below: `publicProseEquality` soak1k-5). NAMED 
 not the seed; its cure is a question of what the shared page may know of the war's hold on the iron, which the owner or the
 war's seat decides.
 
+## AMENDMENT 1 (the chair's message of 11:19 UTC: three more reds of the birth's making, red at my base too)
+
+**(1) `pipelineContract` · "every step declares its writes" (11 tests red at the base).** DECLARED: the narratives step's
+registration (`steps/generateNarratives.js`) gains `mutates: ['economicState']` (the birth writes its words onto
+`economicState.primaryImports` in place); nothing else in the file. **10 of the 11 green.** THE ELEVENTH
+(metropolis/plains/crossroads) now passes the narratives step and stops at the NEXT undeclared write: `step
+"assembleSettlement" wrote undeclared ctx key(s) [npcs]`, hidden at the base behind the narratives throw; the assembly step
+is no seat's to edit: LEFT, named for the chair. THE STEPS THAT READ `economicState` AFTER IT: `assembleSettlement` (reads it
+`reconciled`: the record's economy whole; the fish trade's twin reads `primaryImports` for fish, `fishTradeTwinLines.js`; the
+foodways line; the defence profile's purse) and `resolveCrisisCast` (reads the assembled `settlement`). The pipeline's tests
+(`pipeline*.test.js`, `generationForkCensus`): at the base 20 red, at my tip 10 red: the 10 contract tests cured; the rest
+(`generationForkCensus` A1, A3e, A4, A6; `pipelinePinnedChoosers` A1; `pipelinePinnedMode` A1, A2; and the eleventh contract
+test above) are red at the base as at my tip, the golden corpus's figures and the census's stored counts (the close's).
+**(2) `isolatedTrade` · "no duplicate canonical goods" (seed 5).** CURED: the birth writes no second word of one canonical
+good (the trade catalog's own reading, `goodsCatalog.js :: subsumeTradeGoods`; seed 5 held "Raw hides and animal products"
+beside "Livestock and dairy (local grazing land depleted)", which the catalog holds one good). Measured: the only birth words
+of two materials that share one canonical good are the hides and the beasts (`collide.mjs`: every other pair is one material
+under two words: timber, grain, clay, livestock). So the one reader reads that pair as one good bought in
+(`houseInputAtHand.js :: ONE_GOOD_BOUGHT`: a tanner is fed by the livestock trade's import, a butcher by "… animal products").
+What it moves: the imports in 60 towns of the 720, 17 of the 150 and 37 of the 525 (a second word not written); four tanners
+of the 720 that read short now read bought ("short, no ground used up" 71 → 67); one failed venture fewer (a tanner beside the
+livestock trade: 11 of the 720); the table's "never there, bought in" 1,925 → 1,873 and "used up, bought in" 1,044 → 1,097 (the
+same houses bought in, the word on the list now their spent ground's). No person, tie, name or roster moves.
+**(3) `publicProseEquality` · services, soak1k-5.** FOUND: `warReach.js :: warTakesOf` read the war's hold on the iron off
+the DM's iron hook (`economicViability.plotHooks`), which the public projection withholds. CURED under BR8's rule: it reads
+what the hook is written from (`economy/foodBalance.js`), which every view keeps: a war (as before), the town's dependency
+"Imports metals" (`economicViability.dependencies`) and an import of iron or metal; the hook still answers where it stands.
+THE THREE EQUAL NOW DIFFER IN **2 towns of the 720 and 3 of the 150**, all occupied towns of a land at war ("Short of iron."
+off `houseInputAtHand.js :: warIronHookOutsideWar`, the same hook): its war line needs the war's STATE
+(`facts/warState.js`), which imports a module the build pins lazy, so this eager fact cannot read it (EG1): LEFT, named.
+
 ## BR8 AS BUILT: my calls inside it (each vetoable)
 
 1. THE FAILED VENTURE IS KNOWN BY ITS ROW'S LINE, not by a `kind` value: its stored gap row keeps `kind: 'missing'` (so

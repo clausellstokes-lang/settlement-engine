@@ -22,6 +22,7 @@
  *
  * @enforced-by this file (the guard of `src/domain/facts/houseKinds.js` and `resourceGenerator.js :: importsBroughtAtBirth`)
  */
+import { subsumeTradeGoods } from '../../src/domain/region/goodsCatalog.js';
 import { describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -199,7 +200,11 @@ describe('BIRTH-1: a house that buys its material has it brought in; a source ho
       // claim on a besieged town is that the site, over its own record, writes no word its record lacks; on no road, none
       expect(importsBroughtAtBirth(s, s._seed), `${seed}: the birth over its own product brings nothing more`).toEqual([]);
       const stored = new Set((s.economicState?.primaryImports || []).map(wordOf));
-      if (besieged) expect(site(s, s.config).filter((/** @type {string} */ w) => !stored.has(wordOf(w))), `${seed}: the site writes no word the record lacks`).toEqual([]);
+      // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the chair's AMENDMENT 1 (2): the birth writes no second word of one
+      // canonical good): "a word the record lacks" is a good no word of the record names, by the trade catalog's own reading
+      // (the blind record, its buyer words struck, may bring the hides' word where the record holds the beasts', one good)
+      const listed = s.economicState?.primaryImports || [];
+      if (besieged) expect(site(s, s.config).filter((/** @type {string} */ w) => !stored.has(wordOf(w)) && subsumeTradeGoods([...listed, w]).length > subsumeTradeGoods(listed).length), `${seed}: the site writes no word the record lacks`).toEqual([]);
       else expect(site(s, s.config), `${seed}: the site writes nothing`).toEqual(blind(s).economicState.primaryImports);
     }), 'the write site, siege and isolated towns');
     expect(gated, 'towns under a siege or on no connected road read').toBeGreaterThan(54);

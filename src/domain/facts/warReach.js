@@ -54,7 +54,14 @@ export function warTakesOf(record) {
   if (crisisOf(record).has('wartime')) {
     const r = /** @type {{ economicViability?: { plotHooks?: unknown } | null, arrivalScene?: unknown }} */ (record);
     const hooks = Array.isArray(r.economicViability?.plotHooks) ? /** @type {Array<{ category?: unknown, hook?: unknown }>} */ (r.economicViability.plotHooks) : [];
-    if (hooks.some((h) => !!h && h.category === IRON_HOOK_CATEGORY && typeof h.hook === 'string' && h.hook.length > 0)) out.push(WAR_TAKES_IRON);
+    // BIRTH-3 (the chair's AMENDMENT 1 (3), ruling BR8: every view reads what the public record keeps): the iron hook is the
+    // DM's (the shared page withholds `plotHooks`), so the war's hold on the iron is read off what the hook is written from
+    // (`economy/foodBalance.js`): the town must import its metal ("Imports metals", `economicViability.dependencies`, kept)
+    // and its imports hold iron or metal; the hook itself still answers where it stands
+    const v = /** @type {{ economicViability?: { dependencies?: unknown } | null, economicState?: { primaryImports?: unknown } | null }} */ (record);
+    const mustImport = (Array.isArray(v.economicViability?.dependencies) ? v.economicViability.dependencies : []).some((d) => /^Imports .*\b(?:iron|metal)/i.test(String(/** @type {{ title?: unknown } | null} */ (d)?.title ?? '')));
+    const bought = (Array.isArray(v.economicState?.primaryImports) ? v.economicState.primaryImports : []).some((x) => /\b(?:iron|metal)/i.test(String(x)));
+    if (hooks.some((h) => !!h && h.category === IRON_HOOK_CATEGORY && typeof h.hook === 'string' && h.hook.length > 0) || (mustImport && bought)) out.push(WAR_TAKES_IRON);
     if (typeof r.arrivalScene === 'string' && RECEIPTS.test(r.arrivalScene)) out.push(WAR_TAKES_ANIMALS);
   }
   const frozen = Object.freeze(out);

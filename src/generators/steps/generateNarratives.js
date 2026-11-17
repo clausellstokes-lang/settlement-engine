@@ -25,6 +25,7 @@ registerStep('generateNarratives', {
   reads: ['economicState', 'effectiveConfig', 'generationContext', 'institutions', 'population', 'powerStructure', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   readsVersion: { economicState: 'reconciled' },
   provides: ['settlementReason', 'resourceAnalysis', 'economicViability', 'history'],
+  mutates: ['economicState'], // BIRTH-1/BIRTH-3 (BR3, BR8): the resource analysis's birth writes the words a house's story buys in onto economicState.primaryImports in place (resourceGenerator.js :: importsBroughtAtBirth)
   phase: 'narrative',
 }, (ctx) => {
   const {

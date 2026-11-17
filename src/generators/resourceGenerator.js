@@ -25,6 +25,7 @@ import { ALSO_USES, BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RU
 import { BIRTH_PICKS, rowGoodOf, rowNamesGround, boughtAtBirth, groundPicksAtBirth, impliedGroundsShown, sourceStoryOf, storySeed, usedGroundOf, ventureAtBirth } from '../domain/facts/supplyStory.js';
 import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
 import { HOUSE_TRADE_INPUT, SPENT_GROUND_YIELD } from '../data/crisisDependence.js';
+import { subsumeTradeGoods } from '../domain/region/goodsCatalog.js';
 import { catalogIdForName } from '../data/institutionalCatalog.js';
 
 // ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
@@ -743,7 +744,10 @@ export function importsBroughtAtBirth(record, seed) {
   const add = [];
   const held = new Set(have.map(importWordOf));
   /** @param {unknown} word */
-  const bring = (word) => { if (typeof word === 'string' && word && !held.has(importWordOf(word))) { held.add(importWordOf(word)); add.push(word); } };
+  // BIRTH-3 (the chair's AMENDMENT 1 (2)): no second word of one canonical good (the trade catalog's own reading,
+  // `goodsCatalog.js :: subsumeTradeGoods`: "Raw hides and animal products" is the livestock good "Livestock" names)
+  const bring = (word) => { if (typeof word === 'string' && word && !held.has(importWordOf(word))
+    && subsumeTradeGoods([...have, ...add, word]).length > subsumeTradeGoods([...have, ...add]).length) { held.add(importWordOf(word)); add.push(word); } };
   /** @param {unknown} inst */
   const idOf = (inst) => { const i = /** @type {{ name?: unknown, catalogId?: unknown } | null} */ (inst);
     return String((typeof i?.catalogId === 'string' && i.catalogId) || catalogIdForName(String(i?.name ?? '')) || ''); };

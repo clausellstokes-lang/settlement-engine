@@ -97,6 +97,13 @@ const RAW_RESOURCE_TERRAIN_SYNONYMS = {
 export const terrainSynonymsFor = (rawResource) =>
   /** @type {Record<string, string[]>} */ (RAW_RESOURCE_TERRAIN_SYNONYMS)[String(rawResource || '').toLowerCase()] || [];
 
+/**
+ * BIRTH-3 (AMENDMENT 1 (2)): the goods the trade's catalog holds ONE GOOD under another word (`domain/region/goodsCatalog.js`:
+ * the livestock good's aliases hold "raw hides and animal products"): a chain key -> the words of the import that brings it so.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const ONE_GOOD_BOUGHT = Object.freeze({ hides: Object.freeze(['livestock']), livestock: Object.freeze(['animal products']) });
+
 /** The catalogue tags of a house whose trade IS the route (a market, a caravanserai). */
 const ROUTE_HOUSE_TAGS = Object.freeze(['market', 'transport']);
 
@@ -232,6 +239,10 @@ function inputAtHandCore(record, chainKey, house, chain) {
   const runsOnBought = Object.prototype.hasOwnProperty.call(RUNS_ON_BOUGHT, idOfHouse(/** @type {{ name?: unknown }} */ (house)));
   const fed = sourceHouse && !runsOnBought && gapSaysMissing(record, house) ? imports.filter((imp) => !BUYER_IMPORT_WORDS.has(imp)) : imports;
   if (fed.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))))) return 'imported';
+  // BIRTH-3 (AMENDMENT 1 (2)): ONE GOOD, BOUGHT UNDER EITHER WORD: the trade's catalog holds the hides and the beasts one good
+  // ("Raw hides and animal products" is an alias of livestock, `goodsCatalog.js`), and the birth writes no second word of it
+  const oneGood = Object.prototype.hasOwnProperty.call(ONE_GOOD_BOUGHT, chainKey) ? ONE_GOOD_BOUGHT[chainKey] : [];
+  if (oneGood.length && fed.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && oneGood.some((n) => wholeTokens(imp, n)))) return 'imported';
   const food = es.foodSecurity?.foodRecord;
   if (spec?.food && arr(food?.foodSources).some((x) => spec.food?.includes(str(x)))) return 'imported';
   if (spec?.staple && (Number(food?.normalImportPct) > 0 || Number(es.foodSecurity?.importPct) > 0)) return 'imported';
