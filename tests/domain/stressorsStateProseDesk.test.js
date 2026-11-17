@@ -430,10 +430,15 @@ describe('DS-STR-2 — the two wired lenses are identities over PERSISTED fields
 
   it('ALIVENESS: all TWENTY-TWO lit pools speak over played worlds', () => {
     const reached = new Set();
+    // DEBT-1 (2026-11-17): BAR6-CULTURE batch 2 (21a5f2de1, B4) made every line of `ORIGIN: popular_revolt` declare what it
+    // presumes (`tier: >= village`, `market`, `court sits` + `court`); the bare fixture answered none, so the pool read
+    // unanswered (mute) here while it speaks in born towns (the generator always writes a tier). The played world's town
+    // answers its size band.
+    const played = { ...town, tier: 'village' };
     for (const stage of STRESSOR_LIFECYCLE_STAGES) {
       for (const variant of Object.keys(VARIANT_HOOKS)) {
         const drawn = stressorsStateProse(
-          town, { worldStressor: playedStressor(stage, variant) }, { seed: `s2-${stage}-${variant}` },
+          played, { worldStressor: playedStressor(stage, variant) }, { seed: `s2-${stage}-${variant}` },
         );
         for (const rung of ['worldStressorLifecycle', 'worldStressorOrigin']) {
           const line = drawn[rung];

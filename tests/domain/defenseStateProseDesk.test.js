@@ -199,10 +199,12 @@ describe('the defense desk — the FIRST-SURVEY framing rests on a measurement',
       ...CLEAN_LABELS.map((label) => [label, undefined]),
       ...COMPOUND_CONDITIONS.map((c) => [`Tense — ${c}`, undefined]),
       ['Strained — Mass Migration', [{ type: 'mass_migration', direction: 'departures' }]],
-      ['Tense — Some Future Crisis', undefined],
+      // DEBT-1 (2026-11-17): the generic COMPOUND pool's lines declare the size band (`tier: ≥ village` / `≤ hamlet`,
+      // BAR6-DEFDESK be35850406, 0218a4df8) and the generator always writes a tier: the fixture answers it
+      ['Tense — Some Future Crisis', undefined, { tier: 'village' }],
     ];
-    for (const [label, stress] of swept) {
-      const drawn = defenseStateProse({ ...town(label), ...(stress ? { stress } : {}) }, { seed: `d-${label}`, audience: 'dm' });
+    for (const [label, stress, extra] of swept) {
+      const drawn = defenseStateProse({ ...town(label), ...(stress ? { stress } : {}), ...(extra || {}) }, { seed: `d-${label}`, audience: 'dm' });
       for (const key of ['publicOrder', 'firstSurvey']) {
         const rung = drawn[key]?.rung;
         if (rung?.sentence) {
@@ -312,12 +314,18 @@ const FORCE_NAME = Object.freeze({
 function fort({
   monsterThreat = 'frontier', walls = false, garrison = false, militia = false,
   hasCourtSystem = false, hasPrison = false, hasGranary = false, hasHospital = false,
-  hasChurch = false, economic = 50, ruined = false, prosperity = undefined,
+  hasChurch = false, economic = 50, ruined = false, prosperity = undefined, storageMonths = undefined,
 } = {}) {
   const roster = [];
   if (walls) roster.push({ name: FORCE_NAME.walls });
   if (garrison) roster.push({ name: FORCE_NAME.garrison });
   if (militia) roster.push({ name: FORCE_NAME.militia });
+  // DEBT-1 (2026-11-17): the producer's flags are the defence home's own reading of the roster (`priorityHelpers.js ::
+  // getInstFlags`: hasCourtSystem = defenseFactsOf.hasCourt, hasPrison = .hasPrison), and BAR6-DEFDESK (be35850406) made the
+  // full legal chain's lines declare `court` and `prison`, which read the roster. A fixture with the flags and no rows
+  // was a town no generator births: the pool read unanswered (mute). The rows the flags stand for are now on the roster.
+  if (hasCourtSystem) roster.push({ name: 'Courthouse' });
+  if (hasPrison) roster.push({ name: 'Prison' });
   return {
     name: 'Thornwall', _seed: 'seed-def2',
     config: { monsterThreat },
@@ -327,7 +335,10 @@ function fort({
       ? roster.map((i) => ({ ...i, status: 'ruined', _worldPulseInactive: true }))
       : roster,
     defenseProfile: { scores: { economic } },
-    economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } }, ...(prosperity ? { prosperity } : {}) },
+    economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } }, ...(prosperity ? { prosperity } : {}),
+      // DEBT-1 (2026-11-17): the food record's months in store, which the economy always writes; BAR6-DEFDESK's CHAIN: food
+      // trades failing lines declare `stores` (be35850406), so a fixture that carries none reads that pool unanswered
+      ...(storageMonths !== undefined ? { foodSecurity: { storageMonths } } : {}) },
   };
 }
 
@@ -2224,8 +2235,9 @@ describe('DS-DEF-2 · the supply-chain clauses (W2 DEF construction C6, 2026-11-
     expect(supplied.economic.sentence.length).toBeGreaterThan(bare.economic.sentence.length);
     expect(supplied.invasion.provenance.poolKey).toBe(bare.invasion.provenance.poolKey);
     // No force to supply: the force clause is not said, the food clause still is.
-    const unmanned = defenseThreatProse(withChains({ military: 6, economic: -8 }, { walls: true }), { seed: 'c6' });
-    const unmannedBare = defenseThreatProse(fort({ walls: true }), { seed: 'c6' });
+    // DEBT-1 (2026-11-17): the food record answers `stores` (see fort): the failing clause's lines declare a stores band
+    const unmanned = defenseThreatProse(withChains({ military: 6, economic: -8 }, { walls: true, storageMonths: 6 }), { seed: 'c6' });
+    const unmannedBare = defenseThreatProse(fort({ walls: true, storageMonths: 6 }), { seed: 'c6' });
     expect(unmanned.invasion.sentence).toBe(unmannedBare.invasion.sentence);
     expect(unmanned.economic.sentence.length).toBeGreaterThan(unmannedBare.economic.sentence.length);
   });
