@@ -18,6 +18,9 @@ const CRISIS_WORDS = /** @type {Record<string, RegExp>} */ ({
   under_siege: /\bsiege\b|\bbesieg/i,
   plague_onset: /\bsickness\b|\bplague\b/i,
   famine: /\bfamine\b|\bhunger\b|\bharvest\b/i,
+  // DEBT-1 (2026-11-17): the HUNGER family (`crisis: hunger`, factVocabulary.js: famine, a siege, or a food record in
+  // deficit), marked on DS-GEN-13 ENTREPOT v5 by SEAM-CULTURE (1d72767c88); the page names it by the food that is short.
+  hunger: /\bhunger\b|\bhungry\b|\bfamine\b|\bfood short\b|\bshort of food\b|\bfood is short\b/i,
   occupied: /\boccupi/i,
 });
 const SITE_BLOCKS = ['DS-GEN-12', 'DS-GEN-13', 'DS-GEN-17'];

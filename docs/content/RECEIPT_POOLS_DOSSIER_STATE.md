@@ -3026,7 +3026,7 @@ in about two towns in five that keep a force.
 
 **CHAIN: food trades failing** {colour}
 1. `[ledger · no crisis: under_siege · stores: < 12]` {settlement}'s food trades are failing, so less food is being put by than should be; if the town were cut off, it would have less to fall back on than it ought.
-2. `[ledger · no crisis: under_siege · stores: ≥ 12]` {settlement}'s food trades are failing, though its stores would still carry it through a year cut off.
+2. `[ledger · no crisis: under_siege · stores: ≥ 12]` {settlement}'s food trades are failing, though its stores would still carry it a long while if it were cut off.
 3. `[street · no crisis: under_siege · stores: < 12]` The food trades at {settlement} are struggling to keep up, and less is being put by against the town being cut off than ought to be.
 4. `[unfolding · no crisis: under_siege · stores: < 12]` {settlement}'s food trades are failing, and what they fail to put by is food the town would miss if it were cut off.
 5. `[ledger · crisis: under_siege · stores: < 12]` {settlement} is cut off now, and its food trades were failing before the siege began, so less was put by than there should have been.
@@ -6965,7 +6965,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 2. `[visitor · no crisis: under_siege · crisis: any]` Half the goods traded in {settlement} are only passing through, and the town lives off their passing.
 3. `[street · no crisis: under_siege · crisis: any]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 4. `[ledger · market · crisis: any · no crisis: under_siege · no crisis: plague_onset · no crisis: hunger · tier: ≤ village]` {settlement}'s market handles more than its own people could ever use; the difference is their living.
-5. `[ledger · market · crisis: hunger · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market was built to handle far more than its people could ever use; with food short, it cannot now feed them.
+5. `[ledger · market · crisis: hunger · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market was built to handle far more than its people could ever use, yet with food short it cannot now feed them.
 
 **`NO-MARKET`** {no market}
 1. `[counterforce · gate · institution: tavern · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
@@ -7237,7 +7237,7 @@ compass word, no real-world place, no named analogy.*
 1. `[ledger · legacy ruin]` {settlement} came through the {calamity}, and what it built in answer still stands, a legacy that is {timeband_age}.
 2. `[street · legacy ruin]` Much of what stands in {settlement} now was built after the {calamity}, and that legacy is {timeband_age}.
 3. `[street · no legacy ruin]` {settlement} came through the {calamity} and set itself to rights afterwards; that legacy is {timeband_age}.
-4. `[elder · no legacy ruin]` The {calamity} is behind {settlement} now, and the place that came through it is the one that stands; that legacy is {timeband_age}.
+4. `[elder · no legacy ruin]` {settlement} is past the {calamity} now, and the place that came through is the one that stands; that legacy is {timeband_age}.
 5. `[ledger · no legacy ruin]` {settlement} came through the {calamity} without losing what it had built, a legacy that is {timeband_age}.
 
 **`LEGACY-RECOVERED-MARKED`** {colour}

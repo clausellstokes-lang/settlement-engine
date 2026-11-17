@@ -1851,7 +1851,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "stores: ≥ 12"
           ],
-          "text": "{settlement}'s food trades are failing, though its stores would still carry it through a year cut off.",
+          "text": "{settlement}'s food trades are failing, though its stores would still carry it a long while if it were cut off.",
           "slots": [
             "settlement"
           ],

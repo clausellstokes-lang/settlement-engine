@@ -9591,7 +9591,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
-          "text": "{settlement}'s market was built to handle far more than its people could ever use; with food short, it cannot now feed them.",
+          "text": "{settlement}'s market was built to handle far more than its people could ever use, yet with food short it cannot now feed them.",
           "slots": [
             "settlement"
           ],
@@ -10974,10 +10974,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no legacy ruin"
           ],
-          "text": "The {calamity} is behind {settlement} now, and the place that came through it is the one that stands; that legacy is {timeband_age}.",
+          "text": "{settlement} is past the {calamity} now, and the place that came through is the one that stands; that legacy is {timeband_age}.",
           "slots": [
-            "calamity",
             "settlement",
+            "calamity",
             "timeband_age"
           ],
           "vid": 4
