@@ -1,0 +1,11 @@
+{"id":"C19996","town":"bar0-hamlet-under_siege-rand-43","sev":"LOW","kind":"LACKS","why":"a work party gathers 'inside the defences'; DEFENCE gives no walls, garrison, militia or watch","other":""}
+{"id":"C20104","town":"bar0-hamlet-under_siege-rand-43","sev":"MED","kind":"STATE","why":"Maltster row 'Requires grain surplus', offers Malted barley unmarked; FOOD deficit 62%, imports none, siege stops trade; Carpenter row is marked","other":"C20015"}
+{"id":"HEADER","town":"bar0-hamlet-under_siege-rand-43","sev":"LOW","kind":"RECORD","why":"INCOME 'Iron & Metalwork 8%' but no smith or metalworking house, iron only imported, exports none","other":""}
+{"id":"C20241","town":"bar0-hamlet-under_siege-rand-43","sev":"LOW","kind":"PAIR","why":"'Needed, and not brought in: metals' but TRADE header lists Iron (weapons) among imports","other":""}
+{"id":"C20287","town":"bar0-hamlet-under_siege-rand-43","sev":"MED","kind":"PAIR","why":"Fish 'Fully exploited', draws on fishing grounds; LAND gives fishing grounds absent and the Fishing & Seafood chain vulnerable (C20257)","other":"C20257"}
+{"id":"C20383","town":"bar0-hamlet-under_siege-rand-43","sev":"LOW","kind":"STATE","why":"Disasters & Famine rated Adequate; STATE has food Deficit 62%, stores 1.9 months, not viable, under siege","other":"C20015"}
+{"id":"C20528","town":"bar0-hamlet-under_siege-rand-43","sev":"LOW","kind":"PAIR","why":"secret names a barricade across the main approach; page says no perimeter, no chokepoint, unfortified","other":"C20404"}
+{"id":"C20823","town":"bar0-hamlet-under_siege-rand-44","sev":"LOW","kind":"PAIR","why":"Harvest income 'Stopped by the siege' but Subsistence farming only 'Curtailed' and FOOD shows 33% still grown","other":"C20758"}
+{"id":"C20830","town":"bar0-hamlet-under_siege-rand-44","sev":"MED","kind":"STATE","why":"'No significant exports' but TRADE lists exports Salted fish, Smoked seafood, Fish oil (naval route); C20832 'several trades selling outward' also overstates one fish trade","other":"C20832"}
+{"id":"C20639","town":"bar0-hamlet-under_siege-rand-44","sev":"LOW","kind":"PAIR","why":"'disputes settled by precedent' but page says no court, nobody answers for wrongdoing, law & order collapsed, legitimacy score 1","other":"C20962"}
+{"id":"DONE","lines":1228,"blocks":2,"flags":10}
