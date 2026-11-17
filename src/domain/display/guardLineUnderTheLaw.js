@@ -67,27 +67,21 @@ export const GUARD_LAW_SIBLINGS = Object.freeze({
     ' A wrong done here goes before the court, and the guilty can be locked up for it.', COURT_AND_PRISON_UNDER_COLLAPSE),
   ' Thieves here know that the court sits and the cells are real.': declaredSet(
     ' Thieves here know that the court sits and the cells are real.', COURT_AND_PRISON_UNDER_COLLAPSE),
-  // BAR7-ORDER (LAW 9's 9a.order, C5430; vetoable by the owner): the siege's order clause (`safetyProfile.js`, the siege
-  // branch's `milRef`, the head of a sentence of the SAFETY line, read by `safetyLineAsPrinted` through `SIEGE_ORDER_CLAUSES`).
-  // Each subject keeps its own twin; a small place has no command and no streets (the profile's own rule), and the garrison
-  // stands in small places too, so neither of their twins names the streets.
-  'The garrison keeps order, and more harshly as the food runs down': declaredSet(
-    'The garrison keeps order, and more harshly as the food runs down',
-    'The garrison holds the defences, but order among the people has gone, and things get worse as the food runs down'),
-  'Those holding the place keep order, and more harshly as the food runs down': declaredSet(
-    'Those holding the place keep order, and more harshly as the food runs down',
-    'Those holding the place see to its defence, but order among the people has gone, and things get worse as the food runs down'),
-  'The military command has taken charge of the streets, and more harshly as the food runs down': declaredSet(
-    'The military command has taken charge of the streets, and more harshly as the food runs down',
-    'The military command holds the defences, but order in the streets has gone, and things get worse as the food runs down'),
 });
 
-/** BAR7-ORDER: the keys of `GUARD_LAW_SIBLINGS` that are the siege's order clause (the safety line's, not the guard line's). */
-export const SIEGE_ORDER_CLAUSES = Object.freeze([
-  'The garrison keeps order, and more harshly as the food runs down',
-  'Those holding the place keep order, and more harshly as the food runs down',
-  'The military command has taken charge of the streets, and more harshly as the food runs down',
-]);
+/**
+ * BAR7-ORDER (LAW 9's 9a.order, C5430; vetoable by the owner): THE SIEGE'S ORDER CLAUSE, the head of a sentence of the
+ * SAFETY line (`safetyProfile.js`, the siege branch's `milRef` and its tail), read by `safetyLineAsPrinted` beside the band
+ * as the court's lines are read by their frame: the subject is the writer's own (a garrison, those holding a small place, the
+ * military command), never this table's, so each subject keeps its own twin. The twin names no streets (a small place has
+ * none: the profile's own rule; a garrison stands in small places too).
+ */
+export const SIEGE_ORDER_FRAME = Object.freeze({
+  frame: /\b(The garrison|Those holding the place|The military command) (?:keeps? order|has taken charge of the streets), and more harshly as the food runs down/,
+  needs: Object.freeze([LAW_ANSWERS_ATOM]),
+  /** @param {string} subject the writer's own subject @returns {string} */
+  twin: (subject) => `${subject} ${subject === 'Those holding the place' ? 'man' : 'mans'} the defences, but order among the people has gone, and things get worse as the food runs down`,
+});
 
 /**
  * THE COURT'S LINES THAT NAME THE FORCE (`safetyProfile.js :: COURT_AND_PRISON(lawRef)[2]`, `COURT_NO_PRISON(lawRef)[2]`):
@@ -116,15 +110,6 @@ function guardLineUnderTheBand(text, record) {
   const framed = GUARD_LAW_FRAMES.filter((f) => f.frame.test(text));
   if (!held.length && !framed.length) return text;
   if (atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) !== false) return text;
-  return twinsUnderCollapse(text, held, framed);
-}
-
-/**
- * Each declared line the text holds gives way to its twin (the band is Collapsed: the caller has read it).
- * @param {string} text @param {string[]} held keys of `GUARD_LAW_SIBLINGS` @param {typeof GUARD_LAW_FRAMES[number][]} framed
- * @returns {string}
- */
-function twinsUnderCollapse(text, held, framed) {
   let out = text;
   for (const k of held) {
     const twin = /** @type {Readonly<Record<string, ReadonlyArray<{ text: string, twinOf?: string }>>>} */ (GUARD_LAW_SIBLINGS)[k].find((l) => typeof l.twinOf === 'string');
@@ -178,8 +163,9 @@ export function safetyLineAsPrinted(text, record) {
   const f = orderForceOf(record);
   if (f.count.militia > 0 && f.count.garrison === 0 && f.count.watch === 0) out = out.replace(MILITIA_PRESENT, MILITIA_TURNS_OUT);
   // BAR7-ORDER (9a.order, C5430): the siege's order clause reads the band the page prints, as the guard line does
-  const clauses = SIEGE_ORDER_CLAUSES.filter((k) => out.includes(k));
-  if (clauses.length && atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) === false) out = twinsUnderCollapse(out, clauses, []);
+  if (SIEGE_ORDER_FRAME.frame.test(out) && atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) === false) {
+    out = out.replace(SIEGE_ORDER_FRAME.frame, (_, /** @type {string} */ subject) => SIEGE_ORDER_FRAME.twin(subject));
+  }
   return out;
 }
 

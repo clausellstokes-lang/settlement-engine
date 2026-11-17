@@ -23,7 +23,7 @@ import { crimeWaveStands, foundationBandShown } from '../../src/domain/display/f
 import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
 import { lawBandOf, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
 import { readFileSync } from 'node:fs';
-import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, SIEGE_ORDER_CLAUSES, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, SIEGE_ORDER_FRAME, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
 import { COURT_AND_PRISON, COURT_NO_PRISON, NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 
@@ -139,13 +139,14 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
       expect(kept[i], line).toBe(line);
     }
     for (const line of NO_WATCH_SMALL) expect(Object.keys(GUARD_LAW_SIBLINGS), 'each no-watch line is declared').toContain(line);
-    // BAR7-ORDER, 2026-11-17 (9a.order): the siege's order clause joins the table, each key held to the siege branch's source
-    // (its subject is `milRef`'s, the clause's tail the branch's own), and each is read on the safety line (`SIEGE_ORDER_CLAUSES`)
+    // BAR7-ORDER, 2026-11-17 (9a.order): the siege's order clause joins the law by its frame (the court's form: the subject
+    // is the writer's own), each subject of the siege branch's `milRef` and the branch's own tail held to its source
     const SIEGE_SRC = readFileSync(new URL('../../src/generators/safetyProfile.js', import.meta.url), 'utf8');
-    for (const line of SIEGE_ORDER_CLAUSES) {
-      expect(Object.keys(GUARD_LAW_SIBLINGS), 'each siege order clause is declared').toContain(line);
-      const [subject, tail] = line.split(', and ');
-      expect(SIEGE_SRC.includes(`'${subject}'`) && SIEGE_SRC.includes(`\${milRef}, and ${tail}\``), line).toBe(true);
+    expect(SIEGE_SRC.includes('${milRef}, and more harshly as the food runs down`'), 'the siege branch\'s tail').toBe(true);
+    const milRef = /const milRef = inst\.hasGarrison \? '([^']+)' : small \? '([^']+)' : '([^']+)'/.exec(SIEGE_SRC);
+    expect(milRef, 'the siege branch\'s three subjects').not.toBeNull();
+    for (const subject of /** @type {RegExpExecArray} */ (milRef).slice(1)) {
+      expect(SIEGE_ORDER_FRAME.frame.test(`${subject}, and more harshly as the food runs down`), subject).toBe(true);
     }
     // the court's lines that say a wrong is answered: each declared or read by its frame, for every force noun the writer passes
     for (const lawRef of ['local watch', 'garrison and city watch', 'citizen militia']) {
