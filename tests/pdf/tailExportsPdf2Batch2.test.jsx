@@ -64,6 +64,14 @@ const text = (seed, where) => {
 };
 
 const HEAD_SIEGE = /^The descriptions here are of ordinary times\. While the siege lasts, a row it touches is marked\.$/m;
+// BAR7-CARDS (2026-11-17, BRIEF-BAR7 item 4): E17/house and E17/pill RE-KEYED BY IDENTITY. The PDF is not wrong: at the joined
+// line's 7e4a64a19 its Institutions and Services chapters of r2s-under_siege-town-2 print the siege's head line, and the leaf
+// (`crisisStoppedRow.js :: ordinaryTimesLine`, the one the tabs print) now ends it with its second cause's sentence on the
+// same line, because the town's Tanners and Cobbler's guild are marked short of hides (TAIL-EXPORTS-PDF-3's declared reading,
+// ruling E22). The `$` of HEAD_SIEGE made the anchor untrue. Measured at 7e4a64a19: no other siege town of the census's 720
+// (the 24 forced and the 7 drawn) prints the bare line beside a curtailed inn row or a stopped Accommodation pill, so the
+// claim stays on its own town, the line anchored whole as the leaf prints it there (the same literal form, ^…$).
+const HEAD_SIEGE_SUPPLIED = /^The descriptions here are of ordinary times\. While the siege lasts, a row it touches is marked\. A row marked short is what its house makes when supplied\.$/m;
 // [id, seed, surface, must NOT print, what prints instead (one or more; null: the slot is silent by design); the
 // chapter's head line is the leaf's (ordinaryTimesLine)]
 const NOT = [
@@ -74,9 +82,9 @@ const NOT = [
   ['25075', 'r2s-plague_onset-city-0', 'services', /^Strategic Crossroads » Coaching inn » Transit trade profit$/m, /^Curtailed by the outbreak\. Strategic Crossroads » Coaching inn/m],
   // E17: a house, a service row with its description, a pill with none, an income share; and each chapter's head line
   // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on (its "Meals and drink"): the inn reads "Curtailed by the siege."
-  ['E17/house', 'r2s-under_siege-town-2', 'institutions', /^Beds for merchants on the road\.$/m, [/^Curtailed by the siege\. Beds for merchants on the road\.$/m, HEAD_SIEGE]],
+  ['E17/house', 'r2s-under_siege-town-2', 'institutions', /^Beds for merchants on the road\.$/m, [/^Curtailed by the siege\. Beds for merchants on the road\.$/m, HEAD_SIEGE_SUPPLIED]], // re-keyed BAR7-CARDS 2026-11-17 (above),
   ['E17/service', 'r2s-famine-city-3', 'institutions', /^: Daily bread\./m, /^: Scarce in the famine\. Daily bread\./m],
-  ['E17/pill', 'r2s-under_siege-town-2', 'services', /^Accommodation$/m, [/^Accommodation \(stopped\)$/m, HEAD_SIEGE]],
+  ['E17/pill', 'r2s-under_siege-town-2', 'services', /^Accommodation$/m, [/^Accommodation \(stopped\)$/m, HEAD_SIEGE_SUPPLIED]], // re-keyed BAR7-CARDS 2026-11-17 (above),
   ['E17/income', 'r2s-under_siege-town-2', 'economics', /^Magical trade conduits generate/m, [/^Stopped by the siege\. Magical trade conduits generate/m, HEAD_SIEGE]],
   // E1: an output is badged EXPORT where the tab's Exports print it, by its own name (a good id is a family)
   ['17065', 'r2s-mass_migration-hamlet-1', 'economics', /^Milled lumber\n {2}EXPORT$/m, /^Milled lumber$/m],

@@ -201,25 +201,36 @@ export function ConflictCard({conflict:c}) {
 }
 
 
-/** A line that offers the house's trade: a sale, a cut, a grind, a mix, a brew, a hire, a rent. */
-const TRADE_LINE = /\b(?:sells?|cuts?|grinds?|mix(?:es)?|deals in|rents?|brews?|bakes?|hires?|weighs|pours?|trades?)\b/i;
+/**
+ * BAR6-PEOPLE (LAW 8, 8b.person; BRIEF-BAR6 fact (a)) set the house's mark IN FRONT of "How they deal", and only where the
+ * line matched twelve trade verbs ("How they deal Short of wool. Talks about who is weaving what ..."): every reader of the
+ * sixth read read it as broken (25 LOW rows), and 1,589 lines of a marked house's keeper of the census's 720 carried none.
+ * BAR7-CARDS item 1 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): THE PERSON'S SENTENCES ARE LEFT AS
+ * WRITTEN. "How they deal" prints the birth-drawn `presentation.behaviour` as drawn, nothing set in front of it; the
+ * house's mark is the card's own line (`houseMarkShown`). Display only: no draw, no stored byte.
+ * @param {Record<string, any>} npc @param {Record<string, any> | null} [_settlement] kept for the callers' form
+ * @returns {string}
+ */
+export function dealingShown(npc, _settlement) {
+  return typeof npc?.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
+}
 
 /**
- * BAR6-PEOPLE (LAW 8, 8b.person; BRIEF-BAR6 fact (a); vetoable by the owner): A PERSON'S OWN TRADE LINE READS THE PERSON'S
- * HOUSE'S MARK. "How they deal" (`presentation.behaviour`, drawn at birth by trade) offered the house's goods bare where the
- * Institutions and Services tabs mark that house "Short of grapes." or "Stopped by the siege."; the card now takes the
- * house's own mark (`crisisStoppedRow.js :: rowMarkText`, the one leaf those tabs read) before a line that offers the
- * trade, in the mark's own form. Display only: no draw, no stored byte. A calm, supplied house prints its line as before.
- * @param {Record<string, any>} npc @param {Record<string, any> | null} settlement @returns {string}
+ * BAR7-CARDS item 1 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): A PERSON'S CARD SAYS ITS HOUSE'S STATE
+ * ONCE. Every person who keeps a house the one leaf marks (`crisisStoppedRow.js :: rowMarkText`, kind `house`: the mark
+ * the Institutions and Services tabs print, "Stopped by the siege.", "Short of timber.") takes that mark as ONE LINE OF ITS
+ * OWN, straight under the card's house line; by the second check's rule 1 a card's mark covers what its rows say, so
+ * the card's deal, Wants and secret lines are covered at once with no line of prose touched. Null for a house the leaf
+ * marks not, a minted face (its "house" is a power), a DM's person. The PDF's person card prints the same line
+ * (`pdf/lib/viewModel.js :: houseMark`). Display only: no draw, no stored byte.
+ * @param {Record<string, any>} npc @param {Record<string, any> | null} settlement @returns {string | null}
  */
-export function dealingShown(npc, settlement) {
-  const line = typeof npc?.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
-  if (!line || !TRADE_LINE.test(line)) return line;
+export function houseMarkShown(npc, settlement) {
   const houseName = cardHouseOf(npc);
+  if (!houseName) return null;
   const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  const house = houseName ? roster.find((r) => r && r.name === houseName) : null;
-  const mark = house ? rowMarkText(settlement, 'house', house) : null;
-  return mark ? `${mark} ${line}` : line;
+  const house = roster.find((r) => r && r.name === houseName);
+  return house ? rowMarkText(settlement, 'house', house) : null;
 }
 
 // Inline NPC card — replaces the removed NPCCard export. Exported for the dossier search
@@ -337,6 +348,7 @@ export function NPCInlineCard({
   // WIRING W3 C9 (R-W6, FOR THE OWNER'S VETO): how the face deals with strangers, the authored
   // `presentation.behaviour` line drawn at birth. X-48's look-and-voice class (`impression`) stays dark.
   const dealing = dealingShown(npc, placeSettlement || settlement);
+  const houseMark = houseMarkShown(npc, placeSettlement || settlement); // BAR7-CARDS item 1 (CM1): the house's mark, once
   // NO CHIP REPEATS A WANT (2026-09-18). The `Goal:` chip went first, because the
   // card printed that one sentence three times over. The rule behind it is wider
   // than the goal, and keying it on a LABEL would have left the same defect a row
@@ -449,6 +461,9 @@ export function NPCInlineCard({
         {cardDoor && cardPowerTail ? ' · ' : ''}
         {cardPowerTail}
       </div>
+      {/* BAR7-CARDS item 1 (the chair's ruling CM1, 2026-11-17): the house's mark, ONE LINE OF ITS OWN straight under the
+          house line, said once; the person's sentences below print as written. */}
+      {houseMark && <div data-testid="npc-house-mark" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,fontStyle:'italic'}}>{houseMark}</div>}
       {honorific && <div data-testid="npc-role" style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>{honorific}</div>}
         </div>
       )}

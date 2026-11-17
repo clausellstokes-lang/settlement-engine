@@ -97,7 +97,12 @@ const KEEP = [
 // Charcoal burner is short of timber since the round's declared reading of a house's input (BAR4-RECORD b7d3da983, R1: no
 // row short there at c4ac1ef84a, short at f19c3b28b), so its tabs print the mark, truly. Measured on the 720 at 7203ec6df (rowShortOf over every service and
 // house row): 354 towns hold no row short, 40 of them a hamlet under a forced crisis; this is one, under the same crisis.
-const UNSHORT = [['r2s-religious_conversion-hamlet-0', 'institutions'], ['r2s-religious_conversion-hamlet-0', 'services']];
+// BAR7-CARDS (2026-11-17, BRIEF-BAR7 item 4): re-keyed by identity from r2s-religious_conversion-hamlet-0, whose Carpenter
+// (part-time) is short of timber at the joined line's 7e4a64a19 (the same born-short reading as the note above), so its
+// tabs and its PDF print the leaf's mark, truly: the PDF is not wrong. Measured at 7e4a64a19 over the census's 24
+// religious_conversion towns (`housesShortOfInput`, and the guard's own regex over both surfaces): hamlet-3 holds no
+// house short and prints no short mark on either surface; it is the one hamlet of the four, under the same crisis.
+const UNSHORT = [['r2s-religious_conversion-hamlet-3', 'institutions'], ['r2s-religious_conversion-hamlet-3', 'services']];
 
 describe('TAIL-EXPORTS-PDF-3 batch 3: the leaf\'s second cause, ENTREPÔT by the page\'s chains, the origin heading', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);

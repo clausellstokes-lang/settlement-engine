@@ -31,6 +31,9 @@ import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 // purse past survival), the one reading (`labelBands.js :: complexityLabelShown`), at every print of it below.
 import { complexityLabelShown } from '../../domain/display/labelBands.js';
 import { criticalIssuesOf, stressEffectsOf, viabilityIssueText } from '../../domain/display/validationOnPage.js';
+// BAR7-CARDS (2026-11-17): the Outlook's impaired list and a person's house mark, read by the tabs' own leaves.
+import { stressEffectsShown } from '../../domain/display/impairedListShown.js';
+import { rowMarkText } from '../../domain/display/crisisStoppedRow.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
@@ -574,6 +577,16 @@ function isArcaneChain(ch) {
   return ARCANE_CHAIN_IDS.some(a => id.includes(a)) || /arcane|magic|spell/.test(label);
 }
 
+/**
+ * BAR7-CARDS item 2: the mark the leaf gives the card's house, read from the record's roster row of that name.
+ * @param {any} s the settlement record @param {string | null} houseName @returns {string | null}
+ */
+function houseMarkOf(s, houseName) {
+  if (!houseName) return null;
+  const row = (Array.isArray(s?.institutions) ? s.institutions : []).find((r) => r && r.name === houseName);
+  return row ? rowMarkText(s, 'house', row) : null;
+}
+
 function viabilitySlice(active) {
   const s = active || {};
   const v = s?.economicViability || {};
@@ -586,7 +599,9 @@ function viabilitySlice(active) {
   // render twice (they get their own PDF sections).
   // READER-R1 ruling 2: a CRITICAL stress consequence is one of the critical issues (the
   // summary and `metrics.criticalIssueCount` count it); only the others are stress effects.
-  const stressConsequences = stressEffectsOf(v);
+  // BAR7-CARDS item 3 (2026-11-17; the seam's PDF seat's LEFT item 2): the list "N institutions critically impaired by
+  // siege" prints the houses the Outlook tab prints, by the one leaf both read (`impairedListShown.js`), not the record's.
+  const stressConsequences = stressEffectsShown(stressEffectsOf(v), s);
   // pdf-3: by_design items are pushed to the settlement-root structuralViolations
   // (structuralValidator), NOT economicViability.issues — so the old issues-only
   // filter was permanently empty and those authored plot seeds printed as garbled
@@ -773,6 +788,11 @@ function npcsSlice(active) {
       // (PEOPLE-5A wires the print: `house` is the house's name, `powerLine` the ranked line).
       // A pre-car record carries neither.
       house: cardHouseOf(n),
+      // BAR7-CARDS item 2 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): THE HOUSE'S MARK, ONE LINE OF ITS
+      // OWN under the card's house line, as the NPC tab's card prints it: the house's `rowMarkText`
+      // (`crisisStoppedRow.js`, the leaf the Institutions and Services tabs read), said once; null for a house it marks
+      // not, a minted face, a DM's person. The person's own sentences (`dealing`, the secrets) print as written.
+      houseMark: houseMarkOf(s, cardHouseOf(n)),
       powers: Array.isArray(n?.memberships)
         ? n.memberships.map((m) => ({ power: m?.power || null, rank: m?.rank ?? null }))
         : [],

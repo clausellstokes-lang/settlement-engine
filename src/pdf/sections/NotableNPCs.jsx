@@ -212,6 +212,14 @@ function FullCard({ npc, index }) {
         </Text>
       )}
 
+      {/* BAR7-CARDS item 2 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): the house's mark, one line of its
+          own straight under the house line, said once, as the NPC tab's card prints it (`viewModel.js :: houseMark`). */}
+      {npc.houseMark && (
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1, fontStyle: 'italic' }}>
+          {safe(npc.houseMark)}
+        </Text>
+      )}
+
       {/* Description / blurb */}
       {npc.blurb && (
         <View style={{ marginTop: 4 }}>

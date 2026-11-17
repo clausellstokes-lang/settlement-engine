@@ -9,31 +9,10 @@ import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/v
 // READER-R1 (the chair's rulings 1, 2 and 4): one critical list, the stress effects that are
 // not in it, an issue's text read against the route, and the generator's checks for staff only.
 import { byDesignItemsOf, criticalIssuesOf, stressEffectsOf, viabilityIssueText, staffValidationRows } from '../../../domain/display/validationOnPage.js';
-import { houseLabelsInText, institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
-import { rowMarkText } from '../../../domain/display/crisisStoppedRow.js';
-
-const IMPAIRED_LIST = /^(\d+) institutions? critically impaired by siege: (.+)\.$/;
-/**
- * BAR6-RECORD (d) (LAW 8's 8e.outlook, the chair's direction of BRIEF-BAR6; vetoable by the owner): THE OUTLOOK'S LIST OF
- * HOUSES "critically impaired by siege" AND THEIR CARDS READ ONE READING. The record's list (`viability.js`, from the
- * trade dependencies) named a house its own card prints bare ("Mercenary quarter", bar0-city-under_siege+famine-rand-34);
- * the list prints only the houses the mark leaf marks (`crisisStoppedRow.js :: rowMarkText`), with its count, and no
- * line where it marks none. The record keeps its list.
- * @param {any} item a stress-effect issue @param {any} s the settlement record @returns {any}
- */
-function impairedListMarked(item, s) {
-  const d = typeof item?.description === 'object' && item.description ? (item.description.short || item.description.text) : item?.description;
-  const m = typeof d === 'string' ? IMPAIRED_LIST.exec(d) : null;
-  if (!m) return item;
-  const houses = Array.isArray(s?.institutions) ? s.institutions : [];
-  const kept = m[2].split(', ').filter((name) => {
-    const house = houses.find((h) => h?.name === name || institutionDisplayName(h?.name) === name);
-    return !house || !!rowMarkText(s, 'house', house);
-  });
-  if (!kept.length) return null;
-  if (kept.length === m[2].split(', ').length) return item;
-  return { ...item, description: `${kept.length} institution${kept.length > 1 ? 's' : ''} critically impaired by siege: ${kept.join(', ')}.` };
-}
+import { houseLabelsInText } from '../../../domain/display/institutionDisplayName.js';
+// BAR7-CARDS item 3 (2026-11-17): the Outlook's impaired list is read by the one display leaf the PDF also reads
+// (`impairedListShown.js`, moved there unchanged from this file: BAR6-RECORD (d)'s reading, one reading on both surfaces).
+import { stressEffectsShown } from '../../../domain/display/impairedListShown.js';
 import { useStore } from '../../../store/index.js';
 
 
@@ -118,7 +97,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // so they don't pollute the structural plausibility assessment.
   // A CRITICAL stress consequence is in the Critical Issues list (it is one of the issues the
   // verdict counts); only the non-critical ones are listed here (READER-R1 ruling 2).
-  const stressConsequences = stressEffectsOf(v).map((item) => impairedListMarked(item, s)).filter(Boolean); // BAR6-RECORD (d)
+  const stressConsequences = stressEffectsShown(stressEffectsOf(v), s); // BAR6-RECORD (d); BAR7-CARDS item 3: the leaf's reading
 
   // Severity colors
   const sevColor = sev => sev==='critical'?'#8b1a1a':sev==='high'?'#8a3010':sev==='dependency'||sev==='warning'?'#b8860b':'#6b5340';
