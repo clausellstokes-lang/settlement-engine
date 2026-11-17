@@ -339,7 +339,10 @@ describe('the facts the cure made', () => {
   // tier bands of W2-FIX-DATA-4 keep the blades and the war's carts to a town; a third line would be drawn and move the draw)
   it('B7 (BAR7-SCENES): the kilns hold three in r2s-religious_conversion-metropolis-0; the arms\' villages keep two, not one', () => {
     expect(admittedByPool(BORN.get('r2s-religious_conversion-metropolis-0'))['kilns.dominant']).toBeGreaterThanOrEqual(3);
-    for (const seed of ['r2r-village-18', 'r2s-insurgency-village-2']) expect(admittedByPool(BORN.get(seed))['arms.dominant'], seed).toBeGreaterThanOrEqual(2);
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-18', 'r2s-insurgency-village-2'], (seed) => {
+      const n = admittedByPool(BORN.get(seed))['arms.dominant'];
+      if (!(n >= 2)) throw new Error(`${seed}: arms.dominant admits ${n} (17f760584: 1)`);
+    }), 'B7 (BAR7-SCENES): the arms\' villages');
   });
 
   // the smiths' `lines` pool in a town whose only iron house is a Smelter short of iron (no smith house; bar0-town-occupied-rand-31 of

@@ -25,6 +25,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { KILN_FURNACE_ONLY, TRADE_HOUSES, tradeAtWorkOf } from '../../src/domain/facts/tradeAtWork.js';
 import { housesShortOf } from '../../src/domain/facts/houseInputAtHand.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 /** seedcfg.mjs's bar0- arm, verbatim in shape (as `tests/domain/bar6SeamEcon.test.js`). @param {string} seed */
@@ -58,7 +59,8 @@ describe('BAR7-SCENES item 1 (8k.trade): the generic kilns key is answered by a 
     for (const h of ['Potter', 'Brickmaker', 'Charcoal burner']) { expect(names).toContain(h); expect(short.has(h), h).toBe(true); }
     expect(names.some((n) => /^Glassmakers?$/.test(n) && !short.has(n))).toBe(true);
     expect(tradeAtWorkOf(s, 'kilns')).toBe(false);
-    expect(String(s.arrivalScene)).not.toContain('The kilns are lit all through the day');
+    // the kiln slot prints the pool's own twin of the crates (the clay kilns short), drawn in the same sense beat
+    expectAbsentWithAnchor(String(s.arrivalScene), 'The kilns are lit all through the day', 'The yard where crates of pots once waited for the carts stands nearly empty.', 'the kilns sense beat');
   });
 
   test('planted: a glass furnace answers the kilns only where no house that fires a kiln stands', () => {
@@ -80,7 +82,8 @@ describe('BAR7-SCENES item 2 (8k.market): no busy market under the crises that s
     // the premise, still held: a famine, a market house stands, the fish failed
     expect((Array.isArray(s.stress) ? s.stress : [s.stress]).map((/** @type {any} */ x) => x?.type)).toContain('famine');
     expect(factsOf(s).market).toBe(true);
-    expect(String(s.history?.historicalCharacter || '')).not.toMatch(/busy market/);
+    // the slot prints the stable pool's admitted argmax
+    expectAbsentWithAnchor(String(s.history?.historicalCharacter || ''), 'busy market', 'travellers remember the place kindly', 'the history character slot');
     expect(admits(row(), s)).toBe(false);
   });
   test('planted: refused under a famine, a siege and an outbreak; admitted in a calm town with a market', () => {
@@ -97,13 +100,13 @@ describe('BAR7-SCENES item 3 (9g.margin, the chair\'s PM1): the war\'s requisiti
     const s = town('bar0-city-wartime-rand-43');
     expect(String(s.economicState?.prosperity)).toBe('Comfortable');
     expect(String(s.pressureSentence)).toContain('signed a requisition order last week');
-    expect(String(s.pressureSentence)).not.toMatch(/cannot afford|running thin/);
+    for (const denial of ['cannot afford', 'running thin']) expectAbsentWithAnchor(String(s.pressureSentence), denial, 'signed a requisition order last week', 'the war row');
   });
   test('planted: Comfortable and above take the twin; Moderate and below keep "cannot afford … running thin"', () => {
     for (const p of ['Comfortable', 'Prosperous', 'Wealthy']) {
       const t = String(losing(p).text);
       expect(t, p).toContain('requisition order');
-      expect(t, p).not.toMatch(/cannot afford|running thin/);
+      for (const denial of ['cannot afford', 'running thin']) expectAbsentWithAnchor(t, denial, 'signed a requisition order last week', p);
     }
     for (const p of ['Moderate', 'Poor', 'Struggling']) expect(String(losing(p).text), p).toMatch(/cannot afford and could not refuse[^]*running thin/);
     expect(declarationOf(losing('Comfortable')).excludes).toContain('legitimacy crisis'); // the row keeps its declaration
@@ -118,7 +121,7 @@ describe('BAR7-SCENES item 4 (LOW): a calm-times overview line under a siege', (
   });
   test('C19996: the siege\'s work party names no defence', () => {
     const twin = rowOf(/** @type {any[]} */ (Object.values(ARRIVAL_PEOPLE).flat()), /^A work party gathers/);
-    expect(textOfLine(twin)).not.toMatch(/defences|walls|palisade|garrison/);
+    for (const noun of ['defences', 'walls', 'palisade', 'garrison']) expectAbsentWithAnchor(textOfLine(twin), noun, 'A work party gathers with tools on their shoulders', 'the siege work party');
   });
 });
 
@@ -136,7 +139,7 @@ describe('BAR7-SCENES item 5: the arrival pools the seam left', () => {
   });
   test('(b) the tanners\' dominant twin says no tier noun (a hamlet\'s tanner reaches the pool)', () => {
     const twin = rowOf(sense('tanners').dominant, /^Hardly a hide hangs drying/);
-    expect(textOfLine(twin)).not.toMatch(/\b(thorp|hamlet|village|town|city|metropolis)\b/);
+    expect(textOfLine(twin)).not.toMatch(/\b(thorp|hamlet|village|town|city|metropolis)\b/); // anchored: the row was found by its own words through rowOf, which asserts it, so the text is live
     const hamlet = { tier: 'hamlet', institutions: [{ name: 'Tanner' }], economicState: { primaryExports: [] } };
     expect(tradeAtWorkOf({ ...hamlet, institutions: [{ name: 'Saddler' }] }, 'leather')).toBe(false);
   });
@@ -146,12 +149,15 @@ describe('BAR7-SCENES item 5: the arrival pools the seam left', () => {
     expect(tradeAtWorkOf(smelter, 'ironwork')).toBe(false);
     const said = [...sense('smiths').lines, ...sense('smiths').dominant].filter((l) => l?.twinOf && admits(l, smelter)).map(textOfLine);
     expect(said.length).toBeGreaterThanOrEqual(2);
-    for (const t of said) expect(t).not.toMatch(/\bno iron\b/);
+    for (const t of said) expect(t).not.toMatch(/\bno iron\b/); // anchored: `said` is asserted to hold at least two admitted twins just above
   });
-  test('(d) the brought-in twin says first that little cloth is made here, and names no road', () => {
-    const twin = rowOf(sense('cloth').dominant, /bolts in the shops were brought in from elsewhere/);
+  // (d) re-keyed 2026-11-17 (the chair's second-reader note): the twin named "the shops", and r2r-village-26 of the 720 printed it;
+  // the same claim (little cloth made here, what is sold brought in) is now read on a wording that presumes no shop, at any tier
+  test('(d) the brought-in twin says first that little cloth is made here, and names no road and no shop (a village prints it)', () => {
+    const twin = rowOf(sense('cloth').dominant, /was brought in from elsewhere/);
     expect(textOfLine(twin)).toMatch(/^Little cloth is made here/);
-    expect(textOfLine(twin)).not.toMatch(/\broad\b|\bcarts?\b/);
+    expect(textOfLine(twin)).not.toMatch(/\broad\b|\bcarts?\b|\bshops?\b/); // anchored: the same text is asserted to open "Little cloth is made here" just above
+    expect(declarationOf(twin).needs ?? []).not.toContainEqual(expect.stringMatching(/^tier/)); // no band: true at every tier
   });
   test('(e) the tanners\' lines show the pits at work only where a tanner has its hides; each twin keeps the slot', () => {
     const pool = sense('tanners').lines;
@@ -170,7 +176,8 @@ describe('BAR7-SCENES item 5: the arrival pools the seam left', () => {
     const s = town('bar0-village-calm-rand-31');
     expect((s.institutions || []).some((/** @type {any} */ i) => /^Tannery$/.test(String(i?.name)))).toBe(true);
     expect(tradeAtWorkOf(s, 'leather')).toBe(false);
-    expect(String(s.arrivalScene)).not.toMatch(/tanning pits the air turns sharp|The tannery makes itself known|Hides hang drying on frames|sour reek drifts over the rooftops/);
+    // the slot prints the first line's twin
+    for (const line of ['tanning pits the air turns sharp', 'The tannery makes itself known', 'Hides hang drying on frames', 'sour reek drifts over the rooftops']) expectAbsentWithAnchor(String(s.arrivalScene), line, 'Few hides are tanned here these days', 'the tanners sense beat');
   });
 });
 

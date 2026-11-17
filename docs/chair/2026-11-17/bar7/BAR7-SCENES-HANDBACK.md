@@ -142,3 +142,35 @@ Counted in the tip dumps of the 30, the 150 and the 720 together (the first thre
 | `npm run build`, then `vendorPdfLazy` + `bootSmoke` (I changed `src/domain/facts/tradeAtWork.js`; no import added) | — | 0; 0 (49 passed, 17 skipped by their own conditions) |
 
 Nothing was red at my base.
+
+## 8. AFTER THE SECOND READER (the chair, 2026-11-17 about 07:10 UTC; one more commit)
+
+1. **THE BROUGHT-IN TWIN PRESUMED SHOPS.** Counted in the tip dumps of 02287a5's renders: the 720 print it in 12 towns
+   (city 5, metropolis 2, town 4, **village 1: r2r-village-26**); the 150 in 4 (city 3, metropolis 1); no thorp or hamlet. A
+   village can print it, so it now presumes no shop and takes no band: **"Little cloth is made here, and the cloth that is sold
+   was brought in from elsewhere."** ("was": true under a siege). runC's 6b reading still passes it by its own rule (the
+   sentence holds "little"). My guard's case (d) is RE-KEYED by identity with a dated note: the same claim, now with "shop"
+   among the words it refuses and no tier band. Its reach is the same 16 towns as before (the declaration did not move).
+2. **THE WALKERS.** `npx vitest run tests/lint` whole, through gate-tail: at base 17f760584 **59 failed | 3167 passed (3226)**,
+   at my tip **59 failed | 3167 passed (3226)**; the failing tests are the SAME 59 BY NAME (no test red at tip and not at base).
+   Inside those 59, the messages differ in two lines only (numbers folded):
+   - `mutationCoverageManifest` (TOTALITY), already red at base for `tests/generators/bar5WorldLines.test.js`, now names my
+     guard `tests/generators/bar7Scenes.test.js` too. **REGISTRATION OWED** (the manifest `scripts/mutation-coverage-manifest.json`
+     is a shared tool, not on my list; SEAM-ECON registered BAR6-RECORD's the same way). Proposed rationale: "Introduced by the
+     BAR7-SCENES seat (lane/bar7-scenes-2026-11-17). It pins, on named births of the sixth read's thirty and the wide read's
+     150 (bar0- shape) and on planted records: the generic kilns key answered by a house that fires a kiln (a glass furnace only
+     where no such house stands), the busy-market line refused under a famine, a siege and an outbreak, the losing war's
+     requisition row denying no margin a Comfortable purse holds, the precedent row's law band, and the arrival twins of items
+     5a-5f. Each case fails at 17f760584."
+   - `poolDominance` ("no pool rises above its ceiling"), red at base: its row `ARRIVAL_SENSES.kilns.dominant` (topN above its
+     ceiling) is GONE at my tip (item 1 opens the kilns' twins); the test stays red on its other rows.
+   - `seedLoopTotality` and `negativeAssertionAnchor`: red at base and at tip on files not mine (`tests/pdf/seamPdfReadsTheTabs`,
+     `bar6SeamDesks`, `bar6SeamEcon`, and `bar6ScenesGoods` line 225, a line I did not write). **My guard is in neither:** its
+     nine negatives are anchored (`expectAbsentWithAnchor` with a sibling the same record prints, or a one-line `// anchored:`
+     reason where the subject is a table row the test just found), and the case I added to `bar6ScenesGoods` collects its seeds
+     through `collectSeedFailures`. Before this commit the anchor walker counted 9 in my guard; now 0.
+   - THE TWO DOORS: `presumption-classes-door --check` "fresh 0" and `presumed-things-door --check` the same 39 fresh rows as base,
+     at this commit too.
+3. Re-run at this commit: my guard, `bar6ScenesGoods`, `arrivalScene`, `bar4ScenePresumption` 61 of 61; eslint 0 on the changed
+   files. THE READER'S OTHER NOTES, accepted as LOW by the chair and named for later: the spearheads twin under a siege beside
+   smiths short of iron; "has paid it" for a Comfortable town that is also indebted; the rise of the apart rule 9g.margin-war.
