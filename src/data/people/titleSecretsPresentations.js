@@ -2356,5 +2356,12 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Watches every caravan that comes in and remembers where it came from.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
     'Friendly and well-informed, with news of every road and every caravan.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
     'Watches every traveller and remembers where they came from.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    // LEFT-LINES (L33, one line of it; 2026-11-17; B7-DESKS left it by name: brewer villages of the 720, r2r-village-16 and
+    // r2s-wartime-village-1 among them, print "hears everything the taverns say" with no tavern): the brewer's welcoming line
+    // hears the taverns, and its transactional line sells to them, so each needs a tavern-kind house to stand (`institution:
+    // tavern`, the EXISTING atom: a tavern, an inn or an ale house, `institutions.js`); where none stands the title's next
+    // admitted line is the cautious one, which names only the brewery's own vats and store
+    'Smells of malt and hops, round and good-humoured. Offers you a taste before anything else.': Object.freeze({ needs: Object.freeze(['institution: tavern']) }),
+    'Practical, with the red hands of someone who works hot vats all day.': Object.freeze({ needs: Object.freeze(['institution: tavern']) }),
   }),
 });

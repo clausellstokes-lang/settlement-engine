@@ -367,7 +367,12 @@ export const STRESS_DESCS = {
     { text: r =>
       `The road to ${r} has acquired a verge of graves: recent, orderly, unmarked but tended. People arrived here in numbers, and not all of them finished the journey.`, needs: ['migration: influx'] },
     { text: r =>
-      `${r}'s smithy has a queue for wheel-rims and none for ploughshares. A town where the carts outnumber the fields is a town still filling with people who came here with everything they own.`, needs: ['migration: influx', 'institution: smith'] },
+      `${r}'s smithy has a queue for wheel-rims and none for ploughshares. A town where the carts outnumber the fields is a town still filling with people who came here with everything they own.`, needs: ['migration: influx', 'institution: smith', 'trade at work: ironwork'] }, // LEFT-LINES (L4, 2026-11-17; B7-SCENES left it by name: r2s-mass_migration-metropolis-1, its smiths all "Short of iron."): a queue at the smithy wants the forge at work; the twin below keeps the slot
+    // LEFT-LINES (L4): its twin where every iron house is short; it names no forge (runH's 8k.trade reads the forge's words). VETOABLE wording (the owner's).
+    { text: r =>
+      `Carts wait outside ${r}'s smith for wheel-rims there is no iron to make. A town where the carts outnumber the fields is a town still filling with people who came here with everything they own.`,
+    twinOf: "{name}'s smithy has a queue for wheel-rims and none for ploughshares. A town where the carts outnumber the fields is a town still filling with people who came here with everything they own.",
+    needs: ['migration: influx', 'institution: smith'], excludes: ['trade at work: ironwork'] },
   ],
   wartime: [
     { text: r =>
@@ -377,7 +382,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square: grain, cloth, iron, and the settlement's own carts to carry it away.`, needs: ['tier: ≥ village', 'market', 'soldiers'] }, // BAR6-CULTURE (6a, B4): a size word declares its band
     { text: r =>
-      `${r} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.`, needs: ['institution: smith', 'prosperity: ≥ moderate'], excludes: ['crisis: hunger', 'crisis: under_siege', 'war: front'] }, // TAIL-NARRATIVE-5 (N18 (1)): the coin moves only where the record's prosperity is not below moderate
+      `${r} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.`, needs: ['institution: smith', 'trade at work: ironwork', 'prosperity: ≥ moderate'], excludes: ['crisis: hunger', 'crisis: under_siege', 'war: front'] }, // TAIL-NARRATIVE-5 (N18 (1)): the coin moves only where the record's prosperity is not below moderate // LEFT-LINES (L4, 2026-11-17; r2s-wartime-village-0, its one Blacksmith "Short of iron."): forge fires burning past dark want the forge at work
     r =>
       `${r}'s noticeboard is a wall of requisition orders, each stamped, each superseding the last. At its foot, a smaller paper, hand-lettered: prayers offered nightly, all welcome.`,
     r =>
@@ -387,7 +392,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} is busy in a way that feels wrong for a place this poor. The forge fires burn past dark, but the coin they earn leaves with the carts, and all of it points one direction, toward a war that is not fought here but is paid for here.`,
     twinOf: '{name} is busy in a way that feels wrong. The forge fires burn past dark, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.',
-    needs: ['institution: smith'], excludes: ['prosperity: ≥ moderate', 'crisis: hunger', 'crisis: under_siege', 'war: front'] },
+    needs: ['institution: smith', 'trade at work: ironwork'], excludes: ['prosperity: ≥ moderate', 'crisis: hunger', 'crisis: under_siege', 'war: front'] }, // LEFT-LINES (L4): its forge fires burn too, so it wants the forge at work as its original does
   ],
   religious_conversion: [
     { text: r =>

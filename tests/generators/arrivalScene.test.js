@@ -427,7 +427,7 @@ describe('MASS MIGRATION NAMES ONE DIRECTION (chair ruling 2, 2026-10-30; ODQ §
       ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 80 } }),
       ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 20 } }),
     ].map(textOf);
-    expect(vignettes.length).toBe(6);
+    expect(vignettes.length).toBe(7); // LEFT-LINES (L4, 2026-11-17): the six drawn rows and the wheel-rims line's twin (reached by resolution only); every one is read below
     expect(pressure.length).toBe(6);
     const failures = collectSeedFailures([...vignettes, ...pressure], (line) => {
       expect(LEAVING.test(line), `a mass-migration line tells a departure: "${line}"`).toBe(false);
