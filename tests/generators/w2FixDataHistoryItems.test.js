@@ -243,7 +243,7 @@ describe('W2-FIX-DATA-HISTORY item E: the resource events and two timeline hooks
     // form of the iron dispute names a lord now, so no town keeps the drawn description whole; the same claim (a town with a
     // mine keeps the mine's own words: "controls extraction", the fortified sites, the mining contract) is held on the
     // event as every town now prints it, the assertion's form kept.
-    expect(sizedResourceEvent(iron, village(['Mine (shaft)']))).toEqual({ ...iron, description: 'Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who controls extraction to this day.' });
+    expect(sizedResourceEvent(iron, village(['Mine (shaft)']))).toEqual({ ...iron, description: 'Rights to the iron in the local ground became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who controls extraction to this day.' });
     expect(noMine.description, 'BAR7-LINES: no form names a lord').not.toMatch(/\blord\b/);
   });
 
