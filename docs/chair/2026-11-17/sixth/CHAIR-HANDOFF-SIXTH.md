@@ -720,3 +720,8 @@ should be paused or archived by the owner's hand.
   FOLLOW-UP (it keys every anchor once, at the tree that holds them all); each with the early small commit. A NEW
   ASSIGNMENT IN A NEW SEAT IS NOT A ROUTE ROUND A REFUSAL; RE-SEATING A REFUSED SEAT'S OWN ASSIGNMENT (J-INCOME's) WOULD
   BE: that waits for the owner. SECTION 0's "THE LINE" IS REWRITTEN AS OF THIS HOUR.
+- **22:20 UTC. LEFT-MARKS's BR21 FOLLOW-UP IS IN (22:17, 6c8972d4e: `KEY_IMPORT_WORDS`'s word is "herbs and forage"; read by the chair) AND MERGED AS
+  POINT 43** on point 42: `lane/landing-43-2026-11-17` at 67887afdc9f5d89a5d1d10860f963b0da119c716 (no conflict; at it
+  `bar7EconTab`, `leftMarks`, `bar6MarksLaw8`, `birthKindsLaw`, `bar8Rows`: 5 files / 35 tests green; being pushed).
+  IT LANDS AFTER 41 AND 42 ON THAT TARGETED NET (a one-line change of a word table), and the next whole check reads it.
+  THEN MARKS-2 AND LEFT-KEYS ARE SEATED from the line's tip.
