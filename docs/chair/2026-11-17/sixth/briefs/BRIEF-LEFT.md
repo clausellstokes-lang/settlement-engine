@@ -282,3 +282,66 @@ is false and its twin printed there (each arm FAILS at your base). THE TWO DOORS
 a fresh row, say the door's last line before and after. MEASURE (R4): runC and runI over the thirty and the 150 (and
 the 720 for items 1 to 3). N3 for item 1 (a generator's file). Every new or reworded line is listed in your hand-back
 with three towns it prints in, for the owner's veto list.
+
+## LEFT-KEYS · the tests the supply rule left on stale anchors, and two detectors that read the old record (written 2026-11-17, 17:57 UTC; SEATED WHEN THE FOUR BUILDERS HAVE LANDED: its base is the working line's tip then, named in its prompt, not the candidate)
+
+YOU TOUCH NO FILE UNDER `src/`. Your files are tests and the chair's detectors (docs tools) only:
+`tests/generators/tailDefeconBatch3Lines.test.js`, `tests/generators/foundryExportsFishTrade.test.js`,
+`tests/domain/bar3Defecon2Lines.test.js`, `tests/data/w2FixData5Rows.test.js`, `tests/data/tailHouses1Gaps.test.js`,
+`tests/components/displayEconCrisisMarks.test.jsx`, `tests/components/displayEconRelianceFoodWords.test.jsx`,
+`tests/domain/display/needMetUnderAnotherName.test.js`, THE TESTS YOUR PROMPT NAMES (the whole check's comparison:
+anchors the supply rule fed), `docs/chair/2026-11-16/bar5/AUDIT/run-a.mjs`, `docs/chair/2026-11-16/bar6/AUDIT/runC.mjs`.
+A test whose red needs a change in `src/` is NOT yours: name it, with the file and the line, and leave it red.
+
+WHY THE ORDER: the four builders move marks (the siege, the failed venture, the mines); an anchor keyed before they
+land can go stale again. You key every anchor ONCE, at the tree that holds them all.
+
+THE RULE FOR EVERY ITEM (R8, and N7): a test the supply rule made untrue is RE-KEYED BY IDENTITY: THE SAME CLAIM, ANOTHER
+ANCHOR, A DATED NOTE that names the old anchor and why it left. Search for the anchor in this order: the census's 720
+(PAGE-COPY's `seeds.txt`), the 150, then a CONSTRUCTED record only where no born town bears the claim (and say so). A
+re-keyed assertion must be able to FAIL: show it red once in scratch (revert the src hunk it guards, or point it at the
+old anchor), then restore. A NOT claim keeps a positive beside it. YOU RE-TAKE NO STORED FIGURE (reference files,
+registers, censuses, counts, size ceilings: the close's, with the owner's yes): a red whose cure is a stored figure is
+named and left.
+
+1. **K1 = L11 · four anchors whose NOT claim needed a good missing that the birth now buys in.**
+   `tailDefeconBatch3Lines` (2: the iron hooks; r2r-hamlet-30 and r2r-city-36 import "Iron ore"),
+   `foundryExportsFishTrade` (soak1k-1652 imports "Salted fish"), `bar3Defecon2Lines` (the timber twin; r2r-town-34,
+   r2r-metropolis-2, r2s-insurgency-city-3 import Timber), `w2FixData5Rows` (the cold forge; rww-city-famine-1 imports
+   "Iron ore"). Each re-keys to A TOWN THAT CANNOT BUY IN (the supply rule's fourth story, "used up and not bought in",
+   or a town on no road): `src/domain/facts/supplyStory.js` tells the story of a house and a material; read it, do not
+   re-derive it.
+2. **K2 = L12 · `tests/data/tailHouses1Gaps.test.js`**: the RED list (line 42 at the candidate) names houses that
+   lacked their input; some towns have it now. Re-key each such pair by identity to a town where the house still lacks
+   it; a pair no town bears (720, 150) is said so and retired with the note, the count kept honest in the file's head.
+3. **K3 = L14 UNDER RULING BR12** (section 6 of the chair's handoff: it REPLACES the chair's earlier word on L14). The
+   KEEP row of `displayEconCrisisMarks.test.jsx` at r2s-under_siege-city-0 ("Iron & Metalwork Metal is smelted or
+   worked here." bare: "the siege stops no forge") and the row of `displayEconRelianceFoodWords.test.jsx` at
+   r2s-under_siege-metropolis-3 ("Contributes to Iron & Metalwork - 2% of income") claim what NO besieged town can bear
+   under BR11 (the town's own ground is curtailed too, and so are the houses that work its material). EACH IS RETIRED
+   WITH A DATED NOTE NAMING BR11 AND BR12, AND IN THE SAME COMMIT THE TRUE CLAIM IS PINNED IN ITS PLACE: on the same
+   anchor the row prints its mark (a NOT or TWIN row, if the table holds none for a besieged iron trade), and the KEEP
+   table keeps at least one row of the same line in a state that cuts no supply and stops no forge, so that it still
+   proves the true sibling prints. Count, over the 96 besieged towns of the census, how many print the row marked and
+   how many bare; A BARE ONE IS A FAULT TO NAME (with the houses' marks beside it), not an anchor.
+4. **K4 · `tests/domain/display/needMetUnderAnotherName.test.js`**: r2r-town-17's timber need is met at the candidate
+   (green at ed1d43529, red at the candidate). Re-key by identity to a town whose need is still met under another name.
+5. **K5 · the anchors your prompt names** (new reds of the whole check at the candidate that the chair read as stale
+   anchors, not faults): each by the rule above.
+6. **K6 · two detectors read the old record.** (a) `run-a.mjs`: its "register's reader" says a town lacks a ground the
+   supply rule PROVED at the birth (the Resources tab prints proven grounds, and the "worked out" lines name them): the
+   720's rise of `4r-thing:resource:*` rows (managed_forest 54/170 -> 128/256 and ten more; MEASURE-1's TABLE.md, last
+   section, `lane/measure-2026-11-17`) is this. The reader takes the stored record's grounds (listed AND proven, the
+   depleted told as depleted). (b) `runC.mjs` `6b-denied`: it denies a forge scene ("The hammering of the forges
+   echoes through all of ...") on the MINE's gap line; in r2r-metropolis-45, -53, -59, -6 the Blacksmiths and the
+   Smelter are at work on bought-in iron (the chair probed all four). A scene of forges is denied only where EVERY
+   forge house on the page carries a mark. For each: the rule's count over the 720 before and after, five instances
+   that left read by you on the page (each must be TRUE as printed), and every instance that stays.
+
+NOT YOURS, NAMED FOR THE NEXT ROUND: L13 (`tests/joins/labelJoins.test.js`: one label join more than frozen, in
+`src/generators/resourceGenerator.js`; the cure is in src).
+
+YOUR NET: every file you changed, each alone, at your base and at your tip; ALL of `tests/lint` by name (N2); both
+type gates; `npx eslint` on your changed files. THE HAND-BACK: `docs/chair/2026-11-17/left/LEFT-KEYS-HANDBACK.md`: one
+row an assertion (the claim, the old anchor, the new anchor, the scratch proof that it can fail), the retired rows with
+their rulings, the faults you named and left.

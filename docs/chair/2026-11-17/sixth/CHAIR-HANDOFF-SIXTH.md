@@ -161,6 +161,16 @@ the previous account its sessions should be paused or archived by the owner's ha
   siege.", as a house on a listed ground does, and so do the houses that work that material. LEFT-MARKS, AMENDMENT 2
   (M7). It is the one place found so far where the supply rule reads worse than the line did.
 
+- **BR12 (17:57 UTC, 2026-11-17; the besieged KEEP rows; IT REPLACES THE CHAIR'S EARLIER WORD ON L14 in section 0's table).**
+  The chair first ruled (about 16:15) that a KEEP row whose claim no town bears is held on a constructed besieged record
+  whose iron trade runs wholly on its own live ground, and that a mark there would be a fault. BR11 (16:41) made that
+  untenable: under a siege the town's own ground is curtailed too, and so are the houses that work its material, so on
+  that very record the rule itself prints the mark. TWO RULINGS OF ONE CHAIR DISAGREED FOR NINETY MINUTES; the later
+  governs. RULED: the two besieged KEEP rows (`displayEconCrisisMarks.test.jsx` at r2s-under_siege-city-0;
+  `displayEconRelianceFoodWords.test.jsx` at r2s-under_siege-metropolis-3) RETIRE with a dated note, and in the same
+  commit the true claim is pinned in their place (the besieged row prints its mark; the KEEP table keeps a row of the
+  same line in a state that cuts no supply). A besieged town that prints the row bare is a fault to name. LEFT-KEYS, K3.
+
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -277,3 +287,10 @@ the previous account its sessions should be paused or archived by the owner's ha
   misstates how the house works. Sent to BAR8-AUDIT-J to count over the 720 and to give a row.
   (The three messages to LEFT-MARKS, LEFT-CHAIN and BAR8-AUDIT-J carry "18:05 UTC" in their first line: the chair wrote
   the hour without reading the clock; they went out at 17:52 to 17:53.)
+- **17:57 UTC. LEFT-KEYS IS SEATED ONLY WHEN THE FOUR BUILDERS HAVE LANDED** (its base is the line's tip then): the
+  builders move marks, and an anchor keyed before they land can go stale again. Its section of `briefs/BRIEF-LEFT.md` is
+  WRITTEN (K1 to K6: L11, L12, L14 under BR12, `needMetUnderAnotherName`, the comparison's anchors, and the two
+  detectors' debts in `run-a.mjs` and `runC.mjs`); the comparison's names are added to its prompt. L13 (a label join in
+  `resourceGenerator.js`) is src: the next round's. `briefs/BRIEF-READ-LEFT.md` IS WRITTEN: the second reader of a
+  builder's hand-back (a child session of the middle tier at high effort; the prompt names the seat, its branch, its
+  tip and its base).
