@@ -248,3 +248,32 @@ the previous account its sessions should be paused or archived by the owner's ha
   a lane between a push's start and its end; read `git status -sb` (ahead N) before every push and do not push at "ahead 0".
   THE WHOLE CHECK AT THE CANDIDATE RAN UNDER THAT EXTRA LOAD DURING ITS FOURTH AND FIFTH SHARDS: `retry-slow.sh` re-runs
   every red that ran 19 s or more, alone, before the list is read.
+- **17:54 UTC. THE WHOLE CHECK AT THE CANDIDATE WAS STOPPED AT ITS TWO-HOUR LIMIT DURING ITS SIXTH SHARD AND RESUMED** (the
+  harness stops a background command at two hours; `whole.sh` skips every step that has its `.exit` file, so the second
+  run is only the sixth shard, the build and its tests; steps 1 to 5 stand as they ran). CHECKS-1 launched its own run
+  at 16:08 with the same limit and has said nothing since: the chair told it at 17:52 what to do if it is stopped (run the
+  same command again) and to run `retry-slow.sh` before it publishes (`names.final.txt`). ITS BRANCH DOES NOT EXIST ON
+  ORIGIN YET (`git fetch` of a list that names it fails as a whole: fetch the seats' branches one by one).
+- **17:54 UTC. MEASURE-1's 720 READ** (`lane/measure-2026-11-17` a455ea239, `measure/TABLE.md`, last section). c3 = c2 on
+  every row. EVERY RISE HAS AN OWNER OR IS THE OLD DETECTOR'S:
+  - runC `6b-denied` 1 -> 5 ("The hammering of the forges echoes through all of ..."; r2r-metropolis-45, -53, -59, -6):
+    PROBED ALL FOUR (`wk/town.mjs`): the Blacksmiths and the Smelter are at work on bought-in iron, only the Mine is
+    idle. THE SCENE IS TRUE; the detector reads the mine's gap line as "iron is not had". A DETECTOR'S DEBT (LEFT-KEYS:
+    deny the forge scene only when every forge house on the page is marked).
+  - runD `8a.input` 2/6 -> 7/23: r2r-hamlet-27's Dairy farmer reads "Failing: a failed venture." (M6: the old detector
+    does not know the mark); r2r-metropolis-14 is besieged and its Cooper and Sawmill print bare (M7 = BR11 to measure).
+    Sent to LEFT-MARKS as controls: it runs the row's seven towns and names any that neither item cures.
+  - runD `8b.extract` 0 -> 3/6 (r2r-metropolis-57, r2s-infiltrated-metropolis-1, r2s-insurgency-metropolis-3): L17 =
+    BR10 (2), page form: sent to LEFT-MARKS as controls.
+  - runH `8f.short` 0 -> 2 (r2r-metropolis-24, r2s-monster_pressure-metropolis-2): L7: sent to LEFT-CHAIN as controls.
+  - run-a's resource and house rows (managed_forest 54/170 -> 128/256 and the rest): the proven grounds and the "worked
+    out" lines the supply rule prints; the register's reader in `run-a.mjs` does not read the stored record. A
+    DETECTOR'S DEBT (LEFT-KEYS).
+  - `8b.person` 30/31 -> 14/14 FELL (the dealing lines of idle houses left).
+  A NEW FAMILY THE PROBES SHOWED, FOR BAR8 (no LEFT seat holds the file): `validationOnPage.js :: resourceGapLines`
+  (lines 532, 548) prints the GENERAL gap line beside the supply story's own for one house and one material ("No iron
+  ore reaches the mine." beside "The mine is worked out: its own ground is depleted (Iron ore deposits)."; "No livestock
+  reaches the dairy farmer." beside "The dairy farmer is failing: ..."); for a source house the general line also
+  misstates how the house works. Sent to BAR8-AUDIT-J to count over the 720 and to give a row.
+  (The three messages to LEFT-MARKS, LEFT-CHAIN and BAR8-AUDIT-J carry "18:05 UTC" in their first line: the chair wrote
+  the hour without reading the clock; they went out at 17:52 to 17:53.)
