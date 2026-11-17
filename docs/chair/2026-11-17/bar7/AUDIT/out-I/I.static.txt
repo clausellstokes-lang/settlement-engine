@@ -1,0 +1,103 @@
+BAR7-AUDIT-I · the static half over 3002 desk variants
+rule              lines  declaring a band that admits a denying state
+7x.occupied-seat     12  12
+9a.order              4  4
+9g.food               8  8
+9g.money              6  5
+9g.stores             5  2
+9g.subsistence        1  1
+9i.crews              1  1
+  9g.stores       defense/DS-DEF-2 · Disasters & Famine: granary AND pa · v1 · [] · admits: stores under three months (no granary, household stores)
+      "There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against diseas"
+  9g.money        defense/DS-DEF-6 · Economic Backing: Well-funded · v1 · ["colour"] · admits: a war (the war takes most of the money; the seat cannot afford its requisition); a debt; a siege or an occupation
+      "{settlement} pays its defense in full and on time, keeps the equipment maintained and holds something in reserve; every "
+  9g.food         defense/DS-DEF-12 · CAPACITY: ample · v1 · ["food: ≥ pressured"] · admits: food word Pressured or lower, or a food gap; a siege or a famine
+      "No dependable road, river or port reaches {settlement}, and the town does not need one: it keeps itself supplied with ro"
+  9g.food         defense/DS-DEF-12 · CAPACITY: ample · v3 · ["food: ≥ pressured"] · admits: food word Pressured or lower, or a food gap; a siege or a famine
+      "Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a har"
+  9g.money        economy/DS-ECO-1 · COMBINATION C1: a high rung on a w · v2 · ["crisis: any","no crisis: indebted"] · admits: a war (the war takes most of the money; the seat cannot afford its requisition); a siege or an occupation
+      "{settlement} lives on a {complexity} and ends each year with money to spare."
+  9g.money        economy/DS-ECO-1 · COMBINATION C3: the middle rungs · v1 · ["crisis: any"] · admits: a war (the war takes most of the money; the seat cannot afford its requisition); a debt; a siege or an occupation
+      "With a little left over each year, {settlement} gets by on a {complexity}, and every year people argue over how to spend"
+  9g.food         economy/DS-ECO-2 · FOOD: surplus · v1 · ["crisis: any"] · admits: a siege or a famine
+      "{settlement} eats well below what it raises. The excess is counted, stored, and argued over rather than needed."
+  9g.stores       economy/DS-ECO-2 · GRANARY: well stocked · v5 · ["no hunger","no institution: granary"] · admits: stores under three months (no granary, household stores)
+      "The stores go into {season} deep, and they reach past the turn of the year with room to spare."
+  9g.food         economy/DS-ECO-3 · SURPLUS × not trade-dependent · v2 · ["no crisis: under_siege"] · admits: food word Pressured or lower, or a food gap
+      "Plenty passes here. Not much of it stops."
+  9g.money        economy/DS-ECO-8 · COMFORTABLE · v1 · ["no crisis: indebted"] · admits: a war (the war takes most of the money; the seat cannot afford its requisition); a siege or an occupation
+      "{settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it."
+  9g.subsistence  economy/DS-ECO-8 · COMFORTABLE · v3 · ["food: ≥ secure"] · admits: economy label Subsistence (the economy desk's own complexity rung)
+      "The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the s"
+  9g.food         economy/DS-ECO-8 · FOOD AND PROSPERITY: full stores l · v1 · ["institution: granary","no crisis: famine"] · admits: food word Pressured or lower, or a food gap
+      "Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and"
+  9g.food         economy/DS-ECO-8 · FOOD AND PROSPERITY: full stores l · v4 · ["no crisis: famine","no crisis: under_siege"] · admits: food word Pressured or lower, or a food gap
+      "{settlement} grows more food than it eats, and what it sells of the surplus brings coin in every season."
+  9g.food         general/DS-GEN-3 · prosperity: Moderate / Modest · v3 · ["no crisis: hunger","crisis: any"] · admits: food word Pressured or lower, or a food gap
+      "{settlement} eats well enough and does not talk about it."
+  9g.money        general/DS-GEN-3 · prosperity: Comfortable / Prospero · v2 · [] · admits: a war (the war takes most of the money; the seat cannot afford its requisition); a debt; a siege or an occupation
+      "The surplus at {settlement} is real and gets spent on the town rather than out of it."
+  9g.food         general/DS-GEN-3 · foodSecurity.label: Import-Depende · v4 · ["no crisis: hunger","crisis: any"] · admits: food word Pressured or lower, or a food gap
+      "{settlement} eats well, but on food grown elsewhere; if the carts stop, so do the meals."
+  9i.crews        defense/DS-DEF-4 · structure semi-organized · v3 · ["tier: ≥ village"] · admits: Safety Safe or Very Safe ("walk anywhere at any hour"); an occupation's curfew ("Thieves are scarce now")
+      "Rival crews at {settlement} are fighting over who runs the streets, and until one wins, people pay both the cut and the "
+  9a.order        defense/DS-DEF-2 · Invasion & War: neither walls nor  · v7 · ["watch","no threat","crisis: any","no mercenary","tier: ≥ village"] · admits: Law & order · Collapsed
+      "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army."
+  9a.order        defense/DS-DEF-3 · Moderate · v7 · ["guardPresence"] · admits: Law & order · Collapsed
+      "{settlement} has people who keep order, and order holds about as well as anyone here expects."
+  9a.order        defense/DS-DEF-6 · Legal Infrastructure: None · v1 · [] · admits: Law & order · Collapsed
+      "{settlement} keeps no court and no gaol, so no complaint is ever written down and order holds only where someone armed i"
+  9a.order        power/DS-POW-5 · FLAG: merchantArmy · v1 · ["no crisis: occupied"] · admits: Law & order · Collapsed
+      "The trading houses at {settlement} pay for their own armed guards, a private army that keeps order wherever the houses d"
+  7x.occupied-seat power/DS-POW-1 · Approved · v1 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "{settlement} thinks well enough of the {seat}, not warmly, but well enough that what it decides carries in most quarters"
+  7x.occupied-seat power/DS-POW-1 · Approved · v4 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "The {seat} is liked well enough at {settlement} that it can make an unpopular decision and still be obeyed."
+  7x.occupied-seat power/DS-POW-2 · stable matched · v3 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "Anyone doing business at {settlement} needs one name, {faction}'s, and can plan a season ahead on its word."
+  7x.occupied-seat power/DS-POW-2 · stable matched · v4 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "Everyone at {settlement} knows who decides, and nobody expects that to change this season."
+  7x.occupied-seat power/DS-POW-2 · no token matched: unclassified (th · v5 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "Every decision about {settlement} is taken by {faction}, and every answer comes from there."
+  7x.occupied-seat power/DS-POW-3 · shallow ladder (few rungs recorded · v3 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "Deal with {faction} at {settlement} and there is nobody else to be sent to. {npc} decides, and the others are people {np"
+  7x.occupied-seat power/DS-POW-5 · autocrat · v2 · ["no crisis: succession"] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "At {settlement} the answer comes quickly, and asking again seldom gets a different one."
+  7x.occupied-seat power/DS-POW-5 · autocrat · v4 · ["no crisis: succession"] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "At {settlement} one audience with the {seat} gets a decision, good or bad, and it comes quickly."
+  7x.occupied-seat power/DS-POW-5 · theocracy · v1 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against w"
+  7x.occupied-seat power/DS-POW-5 · merchant_league · v1 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "The {seat} at {settlement} is run by the houses that keep the account books, and it decides things the way a business do"
+  7x.occupied-seat power/DS-POW-5 · FLAG: secularBrutalism · v1 · ["garrison","no sacredHouse"] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "{settlement} is ruled by force. Soldiers carry out the {seat}'s orders, and no temple or priest stands between the town "
+  7x.occupied-seat power/DS-POW-7 · a RULING bloc, consolidated · v1 · [] · admits: an occupation ("nothing it decides stands without the occupiers' approval")
+      "A working majority sits at {settlement} with the {seat} inside it; what the hall decides is decided by that combination "
+6e · source lines naming a crown, a king, a realm or a royal thing: 104 in 25 files; declaring sovereign within their row: 15; not: 89
+    38  src/data/institutionDescVariants.js  (undeclared 32)
+     8  src/generators/power/stressFactions.js  (undeclared 5)
+     7  src/generators/power/rulingStructure.js  (undeclared 7)
+     6  src/data/institutionDescColour.js  (undeclared 6)
+     5  src/generators/power/governanceNarrative.js  (undeclared 5)
+     5  src/domain/display/institutionVocabulary.js  (undeclared 5)
+     3  src/data/institutionServices.js  (undeclared 1)
+     3  src/data/institutionalCatalog.js  (undeclared 3)
+     3  src/data/stressPowerFaces.js  (undeclared 3)
+     3  src/generators/narrativeGenerator.js  (undeclared 3)
+     2  src/data/faceHonorifics.js  (undeclared 2)
+     2  src/data/npcData.js  (undeclared 1)
+     2  src/generators/narrative/foundingRowAdmits.js  (undeclared 2)
+     2  src/generators/npcGenerator.js  (undeclared 2)
+     2  src/generators/power/governingStressVignettes.js  (undeclared 0)
+     2  src/domain/display/settlementRumors.js  (undeclared 1)
+     2  src/domain/display/stateProse/stateProseKernel.js  (undeclared 2)
+     2  src/domain/display/warAndRoadNames.js  (undeclared 2)
+     1  src/data/cultureProfiles.js  (undeclared 1)
+     1  src/data/foundingSeeds.js  (undeclared 1)
+     1  src/data/people/powerSentenceName.js  (undeclared 1)
+     1  src/data/spatialData.js  (undeclared 1)
+     1  src/generators/people/mintTitles.js  (undeclared 1)
+     1  src/generators/spatialGenerator.js  (undeclared 1)
+     1  src/domain/display/governanceAccount.js  (undeclared 1)
+5x · slash labels authored: 12: Livestock / game (data/economicData.js); Wool / flax (data/economicData.js); Desert/Arid (data/geographyData.js); Docks/port facilities (generators/steps/cascadePass.js); Weavers/Textile workers (data/institutionalCatalog.js); Palace/government complex (data/institutionalCatalog.js); Small prison/stocks (data/institutionalCatalog.js); Colosseum/arena (data/institutionalCatalog.js); Hot Springs / Healing Waters (data/resourceData.js); Sage/library (data/resourceData.js); Spa/healing house (data/resourceData.js); Monster Hunters / Adventurers (generators/power/stressFactions.js)
+5x · desk lines with a house or power slot ({institution} {faction} {house} {power}): 135

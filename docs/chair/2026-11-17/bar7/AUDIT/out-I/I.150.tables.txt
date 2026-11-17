@@ -1,0 +1,136 @@
+== BAR7-AUDIT-I tables 150 (out150.json)
+
+# 10i.pair: counted 4 in 4 towns · apart 0 in 0
+    1 Renuka Mehta · Professional Rivalry · Tara Sahu | Tara Sahu · Pragmatic Alliance · Renuka Mehta
+    1 Organa Naiman · Pragmatic Alliance · Ergene Barlas | Ergene Barlas · Professional Rivalry · Organa Naiman
+    1 Lidija Solovyov · Pragmatic Alliance · Biljana Kovalyov | Biljana Kovalyov · Professional Rivalry · Lidija Solovyov
+    1 Eirenaion Chomatenos · Pragmatic Alliance · Constantinos Gabalas | Constantinos Gabalas · Professional Rivalry · Eirenaion Chomate
+
+# 10i.pair-respect: counted 0 in 0 towns · apart 3 in 3
+    1 (apart) Tabassum al-Nuri · Professional Rivalry · Bashir al-Jazari | Bashir al-Jazari · Genuine Respect · Tabassum al-Nuri
+    1 (apart) Intisar al-Jabbar · Genuine Respect · Bashir al-Qadir | Bashir al-Qadir · Professional Rivalry · Intisar al-Jabbar
+    1 (apart) Anatoly Korolev · Professional Rivalry · Iosif Alexeyev | Iosif Alexeyev · Genuine Respect · Anatoly Korolev
+
+# 5x.slash: counted 3 in 3 towns · apart 0 in 0
+    2 X's Weavers/Textile workers can offer less the longer its supplies stay short, and nobody is putting it right.
+    1 X's Weavers/Textile workers is open but short of supplies, and it can do less than it used to.
+
+# 5x.slash-list: counted 0 in 0 towns · apart 4 in 4
+    1 (apart) 5 institutions critically impaired by siege: Inns and taverns (district), Mills, Carpenters, Weavers/Textile workers, Bakers.
+    1 (apart) 6 institutions critically impaired by siege: Inns and taverns (district), Mills, Luxury goods quarter, Carpenters, Weavers/Textile
+    1 (apart) 5 institutions critically impaired by siege: Inns and taverns (district), Mills, Carpenters, Weavers/Textile workers, Luxury goods
+    1 (apart) 9 institutions critically impaired by siege: Inns and taverns (district), Mills, Blacksmiths, Specialized metalworkers, Luxury goo
+
+# 6e.crown: counted 1 in 1 towns · apart 0 in 0
+    1 Proclaim laws, royal decrees, and official notices to the public.
+
+# 6e.no-higher: counted 2 in 2 towns · apart 0 in 0
+    2 Proclaim laws, royal decrees, and official notices to the public.
+
+# 6e.realm-world: counted 0 in 0 towns · apart 58 in 58
+   58 (apart) What X has heard from the rest of the realm, true or not, as the news reaches it.
+
+# 7x.occupied-seat: counted 2 in 2 towns · apart 0 in 0
+    1 The Merchant oligarchy at X is run by the houses that keep the account books, and it decides things the way a business does: by wh
+    1 At X the answer comes quickly, and asking again seldom gets a different one.
+
+# 9a.order: counted 7 in 7 towns · apart 0 in 0
+    7 The garrison keeps order, and more harshly as the food runs down.
+
+# 9g.margin-mild: counted 0 in 0 towns · apart 2 in 1
+    1 (apart) With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it.
+    1 (apart) X's treasury takes in a little more than it pays out each year.
+
+# 9g.margin-war: counted 0 in 0 towns · apart 11 in 7
+    6 (apart) With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it.
+    2 (apart) X's treasury takes in a little more than it pays out each year.
+    1 (apart) X lives on a broad base of trades and ends each year with money to spare.
+    1 (apart) X closes every year ahead.
+    1 (apart) The margin is not large and it is dependable, and there are reserves behind it.
+
+# 9g.stores: counted 3 in 3 towns · apart 0 in 0
+    3 The buildings are finished rather than patched, and the stores are more than the season needs.
+
+# 9h.no-exports: counted 1 in 1 towns · apart 0 in 0
+    1 No significant exports.
+
+# 9h.no-exports-record: counted 3 in 3 towns · apart 0 in 0
+    3 No significant exports.
+
+# 9h.no-exports-transit: counted 0 in 0 towns · apart 1 in 1
+    1 (apart) No significant exports.
+
+# design.outside: counted 0 in 0 towns · apart 36 in 22
+   14 (apart) One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another su
+    9 (apart) The settlement must decide what it can still afford to import, and whoever brings the food in is watching it decide.
+    6 (apart) The crops failed here this year, and what food can still be bought from outside costs more every week.
+    2 (apart) The herds failed here this year, and what food can still be bought from outside costs more every week.
+    2 (apart) The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+    2 (apart) The hunt failed here this year, and what food can still be bought from outside costs more every week.
+    1 (apart) The fishing failed here this year, and what food can still be bought from outside costs more every week.
+
+# low.agree: counted 0 in 0 towns · apart 13 in 13
+    7 (apart) Weak defences is the reason.
+    4 (apart) Weak defences keeps X from more than tolerating the Elder Council.
+    1 (apart) Weak defences keeps X from more than tolerating the Town Council.
+    1 (apart) Weak defences keeps X from more than tolerating the Elected Reeve.
+
+# low.doubled: counted 0 in 0 towns · apart 106 in 81
+   10 (apart) medicinal herbs · honey · Honey and beeswax · Foraged goods
+    5 (apart) honey · medicinal herbs · Honey and beeswax · Foraged goods
+    3 (apart) grain · medicinal herbs · honey · Honey and beeswax · Foraged goods
+    2 (apart) dates · grain · iron · metalwork · Ale (barrel) · Beer (barrel) · Overland cargo transport · Escorted caravan · Quality tools and 
+    2 (apart) Needed, and not brought in: timber, grapes, copper ore, mountain timber.
+    2 (apart) game meat · animal hides · Furs and pelts · iron · metalwork · flour · processed textiles · livestock · wool · dairy · clay · pott
+    2 (apart) Bulk raw materials and agricultural goods · Clay and raw materials · Dressed stone (local quarry depleted) · Gemstones (local gem 
+    2 (apart) Clay and raw materials · Dressed stone (local quarry depleted) · Iron · Livestock · Luxury materials · Medicinal herbs · Paper · P
+
+# low.generation: counted 0 in 0 towns · apart 19 in 19
+    5 (apart) The siege left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old.
+    2 (apart) Nobody in X has finished putting right the legacy the siege left, and that legacy is a generation old.
+    1 (apart) Nobody in X has finished putting right the legacy the succession crisis left, and that legacy is a generation old.
+    1 (apart) Nobody in X has finished putting right the legacy the great harvest compact left, and that legacy is a generation old.
+    1 (apart) Nobody in X has finished putting right the legacy the shortage left, and that legacy is a generation old.
+    1 (apart) The interregnum is behind X now, and the <tier> that came through it is the one that stands; that legacy is a generation old.
+    1 (apart) The wild magic left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old.
+    1 (apart) The plague years left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old.
+
+# low.hook-party: counted 0 in 0 towns · apart 7 in 7
+    3 (apart) The old families once kept the peace; they have fallen out among themselves, and nobody keeps it now.
+    2 (apart) The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among 
+    2 (apart) The corruption goes higher than anyone yet suspects; the reformers are being used
+
+## low.generation by age
+    10 in  10 towns · 40-49 years
+     5 in   5 towns · 55-60 years
+     4 in   4 towns · 50-54 years
+
+## low.doubled by kind and list
+    72 in  69 towns · within-word · Produced locally
+    25 in  19 towns · within-word · Imports
+     5 in   5 towns · within-word · Needed
+     3 in   3 towns · exact · Needed
+     1 in   1 towns · exact · Exports
+
+## design.outside by case
+    34 in  21 towns · no siege · grain imported
+     2 in   1 towns · no siege · food imported, no grain
+
+## 6e.crown by word
+     1 in   1 towns · royal decrees
+
+## 6e.no-higher by word
+     2 in   2 towns · royal decrees
+
+## 10i.pair by kinds
+     1 in   1 towns · rival/bitter + ally/moderate
+     1 in   1 towns · ally/weak + rival/professional
+     1 in   1 towns · ally/moderate + rival/professional
+     1 in   1 towns · ally/moderate + rival/personal
+
+## 10i.pair-respect by kinds
+     2 in   2 towns · rival/personal + respect/deep
+     1 in   1 towns · respect/deep + rival/professional
+
+## 5x.slash by label
+     3 in   3 towns · Weavers/Textile workers
