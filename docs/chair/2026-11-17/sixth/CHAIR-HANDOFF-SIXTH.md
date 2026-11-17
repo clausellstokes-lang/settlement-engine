@@ -14,19 +14,20 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
 
 ## 0. THE STATE AT 19:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; it REPLACES the 17:04 state; the lines of section 7 written after 19:04 govern where they differ)
 
-**THE LINE.** `lane/join-2026-11-14` stands at 3b06c724bfe1f2cfffcec3031b2e8a4c6513f27b (pushed 21:15 UTC): POINT 33 (the owner's
+**THE LINE.** `lane/join-2026-11-14` stands at f86295196124d1c5f82ee08bb3f1ac0f02d45228 (pushed 21:55 UTC): POINT 33 (the owner's
 supply rule, e0242a12a), 34 AND 35 (BAR8's two audits, ef5fd621e), the record's commit 9378609ba
 (`docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE: rows 33 to 35), POINT 36 (DEBT-2, 2e54c06c2), 37 (LEFT-LINES,
-f1ca75555), 38 (LEFT-PDF, e60d42a20), 39 (LEFT-CHAIN, 3b06c724b). POINT 40 (LEFT-MARKS) IS BUILT ON IT:
-`lane/landing-40-2026-11-17` at f86295196124d1c5f82ee08bb3f1ac0f02d45228; its reader said LAND; its whole check (label
-`landing-40-f86295196`) is running on the three CHECKS seats. THE ROWS OF 36 TO 40 ARE NOT WRITTEN YET: one docs commit
-on the line AFTER point 40 (the landing commits must stay fast-forwards). TWO REDS OF LEFT-CHAIN's ARE NAMED ON THE LINE
-until its follow-up lands as a point after 40 (`tests/joins/labelJoins`: a name join in `economicsCrisisMarks.js`;
-`tests/build/vendorPdfLazy` WEAVE ST-2: the goods roster lacks `chainHouses.js`). THE CHAIR IS THE LINE'S ONLY WRITER:
-`/home/user/line` (hooks). THE BASELINE FOR COMPARISONS BY NAME: the batch's whole check at 3b06c724b (the three CHECKS
-seats' branches, `checks/landing-36-39-3b06c724b/part-<n>/names.final.txt`: 163 names joined; `/home/user/wk/b1.all.txt`
-on the chair's machine), and before it the candidate's (`checks/candidate-e0242a12a/`, `checks/dist-candidate-e0242a12a/`
-on this lane). A RED THAT A LANDING WAS TO CURE IS READ BY ITS MESSAGE, NOT ONLY BY ITS NAME.
+f1ca75555), 38 (LEFT-PDF, e60d42a20), 39 (LEFT-CHAIN, 3b06c724b), 40 (LEFT-MARKS, f86295196). ALL FOUR LEFT BUILDERS ARE
+ON THE LINE. BUILT ON IT AND IN THEIR WHOLE CHECK: `lane/landing-41-42-2026-11-17`: POINT 41 (LEFT-CHAIN's follow-up
+3f03b847f, the merge 8f392d100f94e1722f178746b9bd97a1cb0dcc89) and POINT 42 (J-ROWS 316cdb66c, the merge
+7d045555a569049008390175cdba5128441f4b64; READ-J-ROWS reading). THE ROWS OF 36 ONWARD ARE NOT WRITTEN YET: one docs commit
+on the line after the last landing commit that is already built (the landing commits must stay fast-forwards). REDS NAMED
+ON THE LINE WITH THEIR CURES IN FLIGHT: `tests/joins/labelJoins` and `tests/build/vendorPdfLazy` ST-2 (LEFT-CHAIN: cured
+at point 41); `tests/components/bar7EconTab` C39519 (LEFT-MARKS's import word "herbs": ruling BR21, its follow-up
+awaited: the next point after 42). THE CHAIR IS THE LINE'S ONLY WRITER: `/home/user/line` (hooks). THE BASELINE FOR
+COMPARISONS BY NAME: point 40's whole check (the three CHECKS seats' branches, `checks/landing-40-f86295196/part-<n>/names.final.txt`:
+162 names joined; `/home/user/wk/p40.all.txt` on the chair's machine). A RED THAT A LANDING WAS TO CURE IS READ BY ITS
+MESSAGE, NOT ONLY BY ITS NAME. `editCorpusRatchet` A5 comes and goes by its watchdog (BR22).
 
 **THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`; builders and readers of code
 are the middle tier at high effort, the mechanical seats the cheaper tier at low effort).**
@@ -713,3 +714,9 @@ should be paused or archived by the owner's hand.
   and 14 towns of the 720; 0 of the 525 move. FIVE SEATS NOW HOLD FINISHED WORK THEY MAY NOT COMMIT: K-POWERS, K-PEOPLE,
   K-WATCH, DESKS-DEF, DESKS-ECO (sessions in section 0 and the task list); J-INCOME is stopped at its first commit.
   ONLY THE OWNER'S WORD RELEASES THEM.
+- **21:56 UTC. POINT 40 IS LANDED** (21:55:51: `3b06c724b..f86295196 lane/join-2026-11-14`, read back): LEFT-MARKS, the last of the four LEFT builders.
+  PDF-2 is told (its item 3 may go in if its base's function allows; item 4 stays waiting: J-INCOME is held). MARKS-2 IS
+  SEATED ONLY AFTER LEFT-MARKS's BR21 FOLLOW-UP HAS LANDED (the same file), LEFT-KEYS AFTER POINTS 41, 42 AND THAT
+  FOLLOW-UP (it keys every anchor once, at the tree that holds them all); each with the early small commit. A NEW
+  ASSIGNMENT IN A NEW SEAT IS NOT A ROUTE ROUND A REFUSAL; RE-SEATING A REFUSED SEAT'S OWN ASSIGNMENT (J-INCOME's) WOULD
+  BE: that waits for the owner. SECTION 0's "THE LINE" IS REWRITTEN AS OF THIS HOUR.
