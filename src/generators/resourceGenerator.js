@@ -670,7 +670,7 @@ export function importsBroughtAtBirth(record, seed) {
   // (1b) BIRTH-2: a source house that runs on bought-in material (`RUNS_ON_BOUGHT`) and whose story is bought: its word
   for (const inst of live) {
     if (!Object.prototype.hasOwnProperty.call(RUNS_ON_BOUGHT, idOf(inst)) || venture?.name === inst.name) continue;
-    const story = sourceStoryOf(base, inst, seed);
+    const story = sourceStoryOf(base, inst, resourceShortageImport, seed);
     if (story?.story === 'bought' && story.word && !held.has(importWordOf(RUNS_ON_BOUGHT[idOf(inst)]))) bring(story.word);
   }
   // (2) a buyer none of whose inputs the one reader answers: its input's word. The record read with the words of (1).

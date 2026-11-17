@@ -2,6 +2,7 @@
 // Reads every stored town through the tree's own readers; prints the counts the hand-back needs.
 import fs from 'node:fs'; import zlib from 'node:zlib'; import readline from 'node:readline';
 const R = process.env.TREE + '/src';
+const RS = await import(R + '/domain/resourceSemantics.js');
 const has = (p) => fs.existsSync(R + p);
 const HI = await import(R + '/domain/facts/houseInputAtHand.js');
 const SS = has('/domain/facts/supplyStory.js') ? await import(R + '/domain/facts/supplyStory.js') : null;
@@ -36,7 +37,7 @@ for await (const line of rl) {
   for (const inst of liveInstitutions(s)) {
     if (!inst || inst.isCustom) continue; const id = idOf(inst);
     if (!Object.prototype.hasOwnProperty.call(HK.SOURCE_GROUNDS, id)) continue;
-    let st = SS ? SS.sourceStoryOf(s, inst) : null;
+    let st = SS ? SS.sourceStoryOf(s, inst, RS.resourceShortageImport) : null;
     let story = v && v.name === inst.name ? 'abandoned' : st ? st.story : 'none';
     const k = `${id}:${story}:${connected ? 'conn' : 'isol'}${besieged ? ':siege' : ''}`; inc(C.stories, k); if (!towns.has(k)) { towns.add(k); inc(C.storyTowns, k); }
     // c1: a taker fed by an import (the reader answers imported for a taker)

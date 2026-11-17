@@ -337,7 +337,7 @@ function spentGroundReading(settlement) {
   for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
     const house = inst && typeof inst.name === 'string' ? inst.name : '';
     if (!house || isCustom(inst)) continue;
-    const story = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (settlement), inst);
+    const story = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (settlement), inst, resourceShortageImport);
     if (!story) continue;
     if (story.story === 'idle' && story.ground) out.set(house, Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, story.ground) ? SPENT_GROUND_YIELD[story.ground] : 'its materials');
     else if (story.story === 'local' || story.story === 'bought') out.delete(house);

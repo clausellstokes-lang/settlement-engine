@@ -38,11 +38,10 @@ import { BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGH
 
 /**
  * COPIES, so that this leaf (routed to the eager chunk with its folder) reads no module the build pins lazy (EG1: the
- * dependence table `crisisDependence.js`) and no goods member (`resourceSemantics.js`, the goods roster's): each is held
- * equal to its source, key for key, by `tests/domain/supplyStoryLaw.test.js`.
+ * dependence table `crisisDependence.js`), held equal to its source, key for key, by `tests/domain/supplyStoryLaw.test.js`.
+ * (The goods member `resourceSemantics.js` is not read here either: its shortage words are handed in by the callers that
+ * already read it, `sourceStoryOf`'s `shortageWord`.)
  *   GROUND_YIELD   what a spent ground yields (`crisisDependence.js :: SPENT_GROUND_YIELD`)
- *   SHORTAGE_WORD  the imports list's own word for a spent ground of the three houses that can run on bought-in material
- *                  (`resourceSemantics.js :: resourceShortageImport`)
  */
 export const GROUND_YIELD = Object.freeze(/** @type {Record<string, string>} */ ({
   fishing_grounds: 'fish', river_fish: 'fish', iron_deposits: 'iron ore', salt_flats: 'salt', stone_quarry: 'stone',
@@ -50,14 +49,6 @@ export const GROUND_YIELD = Object.freeze(/** @type {Record<string, string>} */ 
   managed_forest: 'timber', mountain_timber: 'timber', coastal_timber: 'timber', foraging_areas: 'herbs', glass_sand: 'glass sand',
   grain_fields: 'grain', fertile_floodplain: 'grain', marshlands: 'reeds', vineyards: 'grapes',
 }));
-export const SHORTAGE_WORD = Object.freeze(/** @type {Record<string, string>} */ ({
-  managed_forest: 'Timber (local managed woodland cleared)',
-  mountain_timber: 'Timber (local mountain timber cleared)', shipbuilding_timber: 'Shipbuilding timber (local shipbuilding stands cleared)',
-  grazing_land: 'Livestock and dairy (local grazing land depleted)', alpine_pasture: 'Wool, dairy, and livestock (local alpine pasture depleted)', fertile_floodplain: 'Grain and produce (local floodplain unproductive)',
-  camel_herds: 'Camels and pack animals (local camel herds depleted)',
-  salt_flats: 'Salt (local salt flats exhausted)', desert_salt: 'Salt (local desert pans exhausted)',
-}));
-
 /** The noun of a material family, as the Depleted list's grounds yield it (`SPENT_GROUND_YIELD`) and the lines name it. */
 export const FAMILY_NOUN = Object.freeze(/** @type {Record<string, string>} */ ({
   timber: 'timber', ironOre: 'iron ore', livestock: 'livestock', stone: 'stone', desertSalt: 'salt', clay: 'clay',
@@ -205,10 +196,12 @@ const onCoast = (record) => str(record?.config?.tradeRouteAccess) === 'port' || 
  * (c) THE STORY OF A SOURCE HOUSE AND ITS MATERIAL (`SOURCE_GROUNDS`), the failed venture aside (`ventureOf`), or null
  * where this reading says nothing (a kind of the second ring on no ground of its own: as before).
  * @param {StoryRecord | null | undefined} record @param {{ name?: unknown, catalogId?: unknown } | null | undefined} inst
+ * @param {(ground: string) => unknown} shortageWord the imports list's own word for a spent ground
+ *   (`resourceSemantics.js :: resourceShortageImport`, handed in by every caller: one word, one pick)
  * @param {unknown} [seed]
  * @returns {{ story: Story, ground: string, word: string } | null} ground: the used-up ground an idle or bought house stands on; word: the word bought
  */
-export function sourceStoryOf(record, inst, seed = seedOfRecord(record)) {
+export function sourceStoryOf(record, inst, shortageWord, seed = seedOfRecord(record)) {
   const id = idOfHouse(inst);
   if (!Object.prototype.hasOwnProperty.call(SOURCE_GROUNDS, id)) return null;
   const { all, live, spent } = storedGrounds(record);
@@ -217,7 +210,7 @@ export function sourceStoryOf(record, inst, seed = seedOfRecord(record)) {
   /** @param {string} ground the used-up ground @returns {{ story: Story, ground: string, word: string }} */
   const usedUp = (ground) => {
     if (TAKERS.has(id) || !runs) return { story: 'idle', ground, word: '' };
-    const word = (Object.prototype.hasOwnProperty.call(SHORTAGE_WORD, ground) && SHORTAGE_WORD[ground]) || RUNS_ON_BOUGHT[id];
+    const word = str(shortageWord(ground)) || RUNS_ON_BOUGHT[id];
     // the plain word on the list answers too ("Timber" bought for the cooper is the burner's cordwood)
     return boughtIn(record, word, true, seed) || importsHold(record, RUNS_ON_BOUGHT[id]) ? { story: 'bought', ground, word } : { story: 'idle', ground, word: '' };
   };

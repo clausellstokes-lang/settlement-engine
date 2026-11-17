@@ -30,7 +30,7 @@
 
 import { RESOURCE_CHAINS } from '../../data/goods/chains.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
-import { availableNativeResourceKeys } from '../resourceSemantics.js';
+import { availableNativeResourceKeys, resourceShortageImport } from '../resourceSemantics.js';
 import { isTradeRouteDisconnected } from '../tradeRouteSemantics.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
@@ -134,7 +134,7 @@ function sourceGround(s, inst) {
   if (spent) return str(resourceDisplayName(spent));
   // BIRTH-2 (BR4 (b), BR5): THE GROUND THE HOUSE PROVES, USED UP BY THE SEED, is the house's own ground too: the Depleted
   // list prints it (`ResourcesTab.jsx`), and an idle house reads it worked out by the same label
-  const story = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (s), /** @type {{ name?: unknown }} */ (inst));
+  const story = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (s), /** @type {{ name?: unknown }} */ (inst), resourceShortageImport);
   return story?.story === 'idle' && story.ground ? str(resourceDisplayName(story.ground)) : '';
 }
 

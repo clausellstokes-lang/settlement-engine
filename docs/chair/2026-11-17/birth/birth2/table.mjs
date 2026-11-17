@@ -1,6 +1,7 @@
 // BIRTH-2 item 11: how often each story comes up. TREE=<tree> node table.mjs <corpus> ; prints JSON
 import fs from 'node:fs'; import zlib from 'node:zlib'; import readline from 'node:readline';
 const R = process.env.TREE + '/src';
+const RS = await import(R + '/domain/resourceSemantics.js');
 const HI = await import(R + '/domain/facts/houseInputAtHand.js');
 const HK = await import(R + '/domain/facts/houseKinds.js');
 const SS = fs.existsSync(R + '/domain/facts/supplyStory.js') ? await import(R + '/domain/facts/supplyStory.js') : null;
@@ -26,7 +27,7 @@ for await (const line of rl) {
     else {
       const key = KEYOF[mat];
       const reach = key && HI.CHAIN_INPUTS[key] ? HI.houseInputAtHand(s, key, inst, { rawResource: HI.CHAIN_RAW_INPUT[key] }) : null;
-      const st = SS && Object.prototype.hasOwnProperty.call(HK.SOURCE_GROUNDS, id) ? SS.sourceStoryOf(s, inst) : null;
+      const st = SS && Object.prototype.hasOwnProperty.call(HK.SOURCE_GROUNDS, id) ? SS.sourceStoryOf(s, inst, RS.resourceShortageImport) : null;
       const isShort = short.has(inst.name);
       if (st) k = st.story === 'local' ? '2' : st.story === 'bought' ? (st.ground ? '1' : '3') : st.ground ? '4' : 'never-nobuy';
       else if (isShort) k = (spent.has(inst.name) || (SS && SS.usedGroundOf(s, mat))) ? '4' : 'short, no ground used up';

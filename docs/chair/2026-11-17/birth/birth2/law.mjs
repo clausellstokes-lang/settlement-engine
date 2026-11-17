@@ -1,6 +1,7 @@
 // BIRTH-2: the law L1-L3 over a corpus, by the tree's own readers. TREE=<tree> node law.mjs <corpus>
 import fs from 'node:fs'; import zlib from 'node:zlib'; import readline from 'node:readline';
 const R = process.env.TREE + '/src';
+const RS = await import(R + '/domain/resourceSemantics.js');
 const HI = await import(R + '/domain/facts/houseInputAtHand.js');
 const SS = await import(R + '/domain/facts/supplyStory.js');
 const HK = await import(R + '/domain/facts/houseKinds.js');
@@ -28,7 +29,7 @@ for await (const line of rl) {
       const w = SS.familyWord(v.family); if (w && imports.some((x) => struck(x) === struck(w))) add('venture-import', `${seed}:${inst.name}`);
       continue;
     }
-    const st = SS.sourceStoryOf(s, inst); if (!st) continue;
+    const st = SS.sourceStoryOf(s, inst, RS.resourceShortageImport); if (!st) continue;
     const mark = CSR.rowMarkText(s, 'house', inst) || '';
     if (st.story === 'local' && short.has(inst.name)) add('local-short', `${seed}:${inst.name}:${short.get(inst.name)}`);
     if (st.story === 'bought') {

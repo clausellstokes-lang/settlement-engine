@@ -30,6 +30,7 @@ import { housesOnSpentGround, housesShortOf } from '../../src/domain/facts/house
 import { housesShortOfInput } from '../../src/domain/display/crisisStoppedRow.js';
 import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, MATERIAL_OF, SOURCE_GROUNDS, isSourceHouse } from '../../src/domain/facts/houseKinds.js';
 import { sourceStoryOf, usedGroundOf } from '../../src/domain/facts/supplyStory.js';
+import { resourceShortageImport } from '../../src/domain/resourceSemantics.js';
 import { ventureHouseOf } from '../../src/domain/facts/houseInputAtHand.js';
 import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
 import { hasTradeRouteConnection } from '../../src/domain/tradeRouteSemantics.js';
@@ -93,7 +94,7 @@ function lawInstances(seed, s) {
     if (venture?.name === house) continue;
     const inst = (s.institutions || []).find((/** @type {any} */ i) => i?.name === house) || { name: house };
     if (BUYS_AND_WORKS.has(id)) { if (!spent.has(house) && !usedGroundOf(s, MATERIAL_OF[id] || '')) out.push(`${seed} · ${house}`); continue; }
-    if (isSourceHouse(id) && sourceStoryOf(s, inst)?.story === 'idle') continue;
+    if (isSourceHouse(id) && sourceStoryOf(s, inst, resourceShortageImport)?.story === 'idle') continue;
     if (isSourceHouse(id) && !spent.has(house) && !SOURCE_GROUNDS[id].some((k) => depleted.has(k))) out.push(`${seed} · ${house}`);
   }
   return out;
