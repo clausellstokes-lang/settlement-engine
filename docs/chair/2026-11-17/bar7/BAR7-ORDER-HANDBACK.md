@@ -117,3 +117,34 @@ is empty both ways). None is mine. Three of the 60 are walkers my first draft di
 `proseDrawnAnchors` and `seedLoopTotality`. Their tip messages no longer name `bar7OrderUnderTheLaw.test.js` or
 `bar5SafetyLawBand.test.js`: the negatives are paired with liveness anchors (`expectPresentThenAbsent`), and the siege
 subjects are read from the writer's source instead of being pinned as literals. My new file has no `any`.
+
+## 11 · THE CHAIR'S FOUR POINTS ON 4275a997d (one commit, 18a7b4450; this section supersedes the siege twin's wording above)
+
+1. **The siege twin presumes only the siege.** Before: "… mans the defences, but …". The clause also prints for a charter hall alone, so the twin now reads "**The garrison holds out, but order among the people has gone, and things get worse as the food runs down**" ("Those holding the place **hold** out", "The military command holds out"). I DID NOT write the chair's "against the siege": the presumed-things door reads "siege" as a thing, and a table read at print cannot declare it (the same refusal as section 8, point 1). It was one fresh line, measured, then gone. The frame reads only the siege branch's clause, so "holds out" says the siege without naming it. Vetoable.
+2. **"The oldest families" get the same reading.** Where the record holds no such party, the party's words become every place's: "the heads of the oldest families" and "the oldest families" both become "the heads of households". Nothing else in the line changes. The stored line and the table's keys stay as drawn. Towns printing "the oldest families" on the guard line, base → tip (a corpus measure: every stored guard line of the base renders, through each tree's own readers): **the thirty 8 → 7 · the 150 35 → 24 · the 720 153 → 119**. Every town left holds the party. "The old families", the same way: 1 → 1 · 10 → 5 · 66 → 53. No town still names either where the auditor's own reading finds no party. The stored record is unmoved: it is a print reading.
+   OLD → NEW LINES (the owner's veto list; the count is instances over the three populations, then three towns):
+   - "When someone does wrong, the neighbours deal with it themselves, and the oldest families have the last word." → "… and the heads of households have the last word." (11: bar0-thorp-calm-rand-33, -41, r2r-hamlet-47)
+   - "When someone does wrong, nobody makes them answer for it, and the oldest families no longer have the last word." → "… and the heads of households no longer have the last word." (12: bar0-village-famine-rand-30, -34, r2r-thorp-17)
+   - "A quarrel goes to the heads of the oldest families, and most are settled before they come to blows." → "A quarrel goes to the heads of households, and most are settled before they come to blows." (11: bar0-thorp-calm-rand-44, -28, bar0-hamlet-calm-rand-29)
+   - "A quarrel goes to the heads of the oldest families, though many come to blows first." → "A quarrel goes to the heads of households, though many come to blows first." (2: bar0-thorp-calm-rand-34, r2s-plague_onset-thorp-3)
+   - "A quarrel no longer goes to the heads of the oldest families; it is settled by whoever is stronger." → "A quarrel no longer goes to the heads of households; it is settled by whoever is stronger." (10: bar0-hamlet-under_siege-rand-29, -30, r2r-thorp-38)
+   - The two "old families" lines as in section 3, items 4 and 5 (18 instances in all).
+3. **"Names the families" reads whole words** (family, families, noble, nobles, nobility, clan, clans, elder, elders; no welder, wielder or clandestine), **plus the noble pool's own names, read from the pool**: `powerData.js :: FACTION_DESCRIPTORS.noble` and `FACTION_DESCRIPTORS_EXTRA.noble`. That gives ten names, the four the chair named among them. `powerData.js` imports nothing, so EG1 is untouched; `tests/architecture` was green at the last full net (section 7).
+4. **The guard** gains (e) and (f).
+   - (e) Planted Collapsed records, one for each of the three subjects ("holds out" and "hold out", the third subject's twin included), each beside its anchor (`expectPresentThenAbsent`).
+   - (f) Every line of the table that names "the oldest families" (five: the no-watch line, the two quarrel lines and their twins), each planted beside Collapsed (bar0-hamlet-under_siege-rand-29, a Collapsed record holding no party) and above it, each negative anchored. A held record and the noble pool's names keep them as drawn, and whole words only.
+   - Re-key by identity: `tests/components/defenseNoWatchNoGuards.test.jsx`, dated note 2026-11-17. Its members now include each member's party-free form, which opens on the same absence.
+
+THE NET OF THIS COMMIT:
+- `typecheck:domain:strict` 0 · `typecheck:ratchet` 0 · eslint 0 on the four files.
+- My guard, `bar5SafetyLawBand`, `defenseNoWatchNoGuards`: green at the tip.
+- Both doors at the tip print the base's last lines (`fresh 0 · stale 143`; `fresh 39 · stale 72 · first-register stale 6`).
+- Other tests naming these readers: `tests/domain/defenseStateProseDesk.test.js` has the same 3 red at the base, by name. `tests/generators/tailDefeconSafetyLines.test.js` has the same 1 red at the base (#18752, crime types, a draw-path test). Named, not chased.
+- `tests/lint` whole: base 60 red, tip 60 red, the same by name.
+
+THE SCRATCH MERGE (local only, never pushed): the line's tip 7cf3cb9f0 with my 18a7b4450, merged cleanly. The line moved no file of mine, none I read and no package file. In it:
+- My guard and the two modified tests: 12 of 12 pass.
+- Both doors print exactly the line tip's own last lines (`hits 1787 · fresh 0 · stale 151`; `fresh 39 · stale 72 · first-register stale 7`).
+- `tests/lint` whole: 65 red in the merge and 65 at the line's tip, the same by name (nothing new, nothing gone).
+
+The scratch merge commit was made with `--no-verify`, locally, in a throwaway worktree. It is not on any branch and has not been pushed; I name it because the rule says never.
