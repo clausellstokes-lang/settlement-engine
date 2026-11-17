@@ -42,8 +42,10 @@
  *   EX-BOUGHT      (BIRTH-3, 2026-11-17; the owner's rule as BR4 and BR5 rule it, built by BIRTH-2) spent-fishery where the
  *                  fishing house is A BUYER (`houseKinds.js :: BUYS_AND_WORKS`: the fish market, the fishmonger: "it sells
  *                  the catch brought to it"), the town's imports bring its fish by name (its fisheries' shortage word, the
- *                  owner's first story, "used up, bought in"), and the one reader answers the house at work (`houseInputAtHand`
- *                  not 'missing'): its row bare is true; the houses that fish the water themselves stay in the rule
+ *                  owner's first story, "used up, bought in": the engine's own word, `IMPORT_WORD.fish`), no siege shuts the
+ *                  town or the row carries the siege's mark, and the one reader answers it brought in (`imported`, or `route`
+ *                  for a market whose trade is the road): its row bare is true (under a siege, its siege mark); a besieged
+ *                  market's BARE row and the houses that fish the water themselves stay in the rule
  *
  * THE POSITIVE CONTROL'S DOOR: `blind`, the tabs whose printed marks the detector reads as bare (the record's needs are
  * read as ever), so that a guard can show the detector fires on the record's own instances where the marks are not there.
@@ -61,7 +63,7 @@ import { deriveMagicPosture } from '../../src/domain/display/dossierViewModel.js
 import { RESOURCE_ROW_TRADES } from '../../src/generators/economy/incomeLineSiblings.js';
 import { INPUT, GROUNDS_WORKED_OFF_CHAIN } from '../../src/data/crisisDependence.js';
 import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
-import { BUYS_AND_WORKS } from '../../src/domain/facts/houseKinds.js';
+import { BUYS_AND_WORKS, IMPORT_WORD } from '../../src/domain/facts/houseKinds.js';
 import { CHAIN_RAW_INPUT, houseInputAtHand } from '../../src/domain/facts/houseInputAtHand.js';
 
 /** Travel past the gates, in a row's own words. */
@@ -164,9 +166,17 @@ export function markPromiseInstances(s, opts = {}) {
       if (!Object.prototype.hasOwnProperty.call(GROUNDS_WORKED_OFF_CHAIN, id) || !serviceRowDependence(s, svc).includes(INPUT)) continue;
       if (!blind.has('Services') && rowShortOf(s, 'service', svc) !== null) continue;
       const house = liveInstitutions(s).find((i) => i?.name === svc.institution);
-      // EX-BOUGHT (BIRTH-3): a buyer the one reader answers at work, in a town whose imports bring its fish by name
-      const fishBought = (Array.isArray(s.economicState?.primaryImports) ? s.economicState.primaryImports : []).some((x) => /\bfish\b/i.test(String(x).replace(/\([^)]*\)/g, ' ')));
-      const bought = BUYS_AND_WORKS.has(id) && !!house && fishBought && houseInputAtHand(s, 'fish', house, { rawResource: CHAIN_RAW_INPUT.fish }) !== 'missing';
+      // EX-BOUGHT (BIRTH-3; tightened by the chair's AMENDMENT 2 (C)): the owner's first story exactly: a buyer, in a town no
+      // siege shuts, whose imports hold the engine's own word for its good (`houseKinds.js :: IMPORT_WORD.fish`, "Salted fish",
+      // its bracketed reason struck: the fisheries' shortage word is that word), and which the one reader answers brought in
+      // (`imported`, or `route`: a market's own trade is the road that brings the catch, answered only where no siege shuts it)
+      const struckWord = (/** @type {unknown} */ x) => String(x).replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+      const besiegedHere = (Array.isArray(s.config?.stressTypes) ? s.config.stressTypes : []).includes('under_siege');
+      const fishBought = (Array.isArray(s.economicState?.primaryImports) ? s.economicState.primaryImports : []).some((x) => struckWord(x) === struckWord(IMPORT_WORD.fish));
+      const answer = house ? houseInputAtHand(s, 'fish', house, { rawResource: CHAIN_RAW_INPUT.fish }) : 'missing';
+      // under a siege the bought catch is cut off: excused only where the row carries the siege's own mark (never bare)
+      const sieged = besiegedHere && rowStoppedBy(s, 'service', svc, crises) !== null;
+      const bought = BUYS_AND_WORKS.has(id) && (!besiegedHere || sieged) && fishBought && (answer === 'imported' || answer === 'route');
       push({ kind: 'spent-fishery', tab: 'Services', row: svc.name, house: svc.institution, need: `every fishery depleted (${fisheries.join(', ')})`, ...(bought ? { excluded: 'EX-BOUGHT' } : {}) });
     }
   }
