@@ -222,10 +222,9 @@ function traitWordsOf(card) {
 /** The card's own hook lines, as one text. @param {Rec} card @returns {string} */
 const hooksOf = (card) => {
   /** @type {string[]} */ const out = [];
-  for (const x of arr(card.plotHooks)) { // AMENDMENT 3: a hook of either shape (a string, or a declared line with its text)
-    if (typeof x === 'string') out.push(x);
-    else { const t = rec(x).text; if (typeof t === 'string') out.push(t); }
-  }
+  // AMENDMENT 3: a hook of either shape: a string, or a declared line, whose every word is read (all its strings: a
+  // refusal reads the words, it draws nothing, so no declaration is set aside). The 720 and the 150 store strings only.
+  for (const x of arr(card.plotHooks)) out.push(...(typeof x === 'string' ? [x] : Object.values(rec(x)).filter((v) => typeof v === 'string')));
   return out.join(' ');
 };
 /** The card's own printed goal and hook lines, as one text (a target is never one they name). @param {Rec} card @returns {string} */
