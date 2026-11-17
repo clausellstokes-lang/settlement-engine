@@ -676,6 +676,8 @@ function supplyToldShort(settlement, house) {
 
 /** The failed venture's two marks (`supplyStory.js :: ventureMarkText`), which `shortMarkText` prints as they are. */
 const VENTURE_MARK = /^(?:Abandoned|Failing): a failed venture\.$/;
+/** BIRTH-3: whether a gate's answer is the failed venture's own mark (no door word "short" beside it). @param {unknown} x */
+export const isVentureMark = (x) => typeof x === 'string' && VENTURE_MARK.test(x);
 
 /**
  * The mark for a row short of its input. Four words at most (a mark repeats on a house's rows: X-50 counts a sentence

@@ -18,7 +18,7 @@
  */
 import {
   stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, STOPPED_WORD,
-  rowShortOf, shortMarkText, SHORT_WORD,
+  rowShortOf, shortMarkText, SHORT_WORD, isVentureMark,
 } from '../../domain/display/crisisStoppedRow.js';
 
 /** The active stopping crises of a record, read once a record. @type {WeakMap<object, string[]>} */
@@ -88,7 +88,7 @@ export function markedOnPage(settlement, kind, row, desc) {
  */
 export function stoppedWordOnPage(settlement, kind, row) {
   const crisis = stoppedOnPage(settlement, kind, row);
-  const words = [crisis && crisisMarkText(settlement, crisis) ? STOPPED_WORD[crisis] || null : null, shortOnPage(settlement, kind, row) ? SHORT_WORD : null].filter(Boolean);
+  const words = [crisis && crisisMarkText(settlement, crisis) ? STOPPED_WORD[crisis] || null : null, shortOnPage(settlement, kind, row) && !isVentureMark(shortOnPage(settlement, kind, row)) ? SHORT_WORD : null].filter(Boolean); // BIRTH-3: none beside a failed venture's mark
   return words.length ? words.join(', ') : null;
 }
 

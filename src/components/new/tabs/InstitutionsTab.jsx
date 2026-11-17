@@ -68,7 +68,7 @@ import EntityLink from '../../primitives/EntityLink.jsx';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
-import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, STOPPED_WORD, SHORT_WORD, markedDescription, ordinaryTimesLine, setsWithMarkedHousesWorse } from '../../../domain/display/crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, STOPPED_WORD, SHORT_WORD, markedDescription, ordinaryTimesLine, setsWithMarkedHousesWorse, isVentureMark } from '../../../domain/display/crisisStoppedRow.js'; // BIRTH-3: no door word beside a failed venture's mark
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -348,7 +348,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
             return (
               <span key={`${entity.id}-${j}`} data-testid="institution-service" style={{ fontSize: FS['12.5'] }}>
                 <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionHouseLabel(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
-                {(serviceStoppedBy?.get(svc) || serviceShortBy?.get(svc)) && <span data-testid="institution-service-stopped" style={{ color: MUTED, fontStyle: 'italic' }}> ({[serviceStoppedBy?.get(svc) ? STOPPED_WORD[serviceStoppedBy.get(svc)] : null, serviceShortBy?.get(svc) ? SHORT_WORD : null].filter(Boolean).join(', ')})</span>}
+                {(serviceStoppedBy?.get(svc) || (serviceShortBy?.get(svc) && !isVentureMark(serviceShortBy.get(svc)))) && <span data-testid="institution-service-stopped" style={{ color: MUTED, fontStyle: 'italic' }}> ({[serviceStoppedBy?.get(svc) ? STOPPED_WORD[serviceStoppedBy.get(svc)] : null, serviceShortBy?.get(svc) && !isVentureMark(serviceShortBy.get(svc)) ? SHORT_WORD : null].filter(Boolean).join(', ')})</span>}
               </span>
             );
           })}

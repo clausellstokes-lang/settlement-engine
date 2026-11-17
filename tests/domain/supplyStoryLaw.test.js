@@ -49,7 +49,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf, warIronHookOutsideWar } from '../../src/domain/facts/houseInputAtHand.js';
+import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf } from '../../src/domain/facts/houseInputAtHand.js';
 import { FAMILY_NOUN, GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, isVentureLine, sourceStoryOf, ventureLineText, ventureMarkText, ventureOfLine } from '../../src/domain/facts/supplyStory.js';
 import { ALSO_USES } from '../../src/domain/facts/houseKinds.js';
 import { HOUSE_TRADE_INPUT, houseDependenceOf, INPUT } from '../../src/data/crisisDependence.js';
@@ -283,7 +283,7 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
 
   test('BR8 · no view reads the seed: the record, the record without its seed, its public projection and the share veil tell one story, and it is the birth\'s pick', () => {
     /** @type {string[]} */
-    const found = []; /** @type {string[]} */ const byTheWar = []; let read = 0, used = 0, imported = 0;
+    const found = []; let read = 0, used = 0, imported = 0;
     expectNoSeedFailures(collectSeedFailures([...CENSUS, ...WIDE], (seed) => {
       const s = town(seed);
       const again = importsBroughtAtBirth(s, s._seed);
@@ -295,11 +295,8 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
       // the birth's pick for every house is the story read back from the record it wrote
       if (j(supplyReading(birthPicksOn(s, s._seed))) !== a) found.push(`${seed} · the birth's pick and the record's story`);
       for (const [form, r] of /** @type {Array<[string, any]>} */ ([['without its seed', unseeded(s)], ['public', toPublicSafe(structuredClone(s))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(s)), null)]])) {
-        if (j(supplyReading(r)) === a) continue;
-        // the war's iron reading reads the DM's plot hooks, which the projection withholds: no supply story (named, BIRTH-3)
-        const hooked = { ...r, economicViability: { ...(r.economicViability || {}), plotHooks: s.economicViability?.plotHooks } };
-        if (form !== 'without its seed' && (warIronHookOutsideWar(s) || /war/.test(String(s.config?.stressTypes))) && j(supplyReading(hooked)) === a) { byTheWar.push(`${seed} (${form})`); continue; }
-        found.push(`${seed} · ${form}`);
+        // BIRTH-3 (the chair's ruling BR9): no carve-out: the war's iron mark reads what every view keeps (`warIronHook.js`)
+        if (j(supplyReading(r)) !== a) found.push(`${seed} · ${form}`);
       }
       read++;
       if (impliedGroundsOf(s).states.size) used += [...impliedGroundsOf(s).states.values()].filter((st) => st === 'used').length;
@@ -308,7 +305,6 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
     expect(read, 'towns read').toBe(CENSUS.length + WIDE.length);
     expect(used, 'proven grounds the record tells used up (the anchor)').toBeGreaterThan(20);
     expect(found, 'a town two views or the birth and the record tell two ways').toEqual([]);
-    expect(new Set(byTheWar.map((x) => x.split(' ')[0])).size, `towns whose only difference is the war's reading of the DM's plot hooks: ${byTheWar.join(', ')}`).toBeLessThan(30);
   }, 1_800_000);
 
   test('BR8 · the seed enters the supply rule at one place: no file of src but the birth\'s writer asks a pick of the seed', () => {

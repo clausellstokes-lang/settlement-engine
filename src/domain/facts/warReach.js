@@ -25,13 +25,12 @@
  * @enforced-by tests/domain/bar5MarksLaw2.test.js
  */
 import { crisisOf } from './crisisKind.js';
+import { warHoldsIron } from './warIronHook.js'; // BIRTH-3 (BR9): the iron hook's own predicate
 
 /** What the war can take, as the dependence words of `data/crisisDependence.js` spell them. */
 export const WAR_TAKES_IRON = 'iron';
 export const WAR_TAKES_ANIMALS = 'working animals';
 
-/** The supply hook's category the economy writes for the iron hooks only (`foodBalance.js`). */
-const IRON_HOOK_CATEGORY = 'Strategic Resource';
 
 /** The fixed clause of the war's paddocks line (`narrativeData.js :: STRESS_DESCS.wartime`). */
 export const RECEIPTS = /\bEvery sound animal of working age has a receipt\b/;
@@ -52,16 +51,11 @@ export function warTakesOf(record) {
   /** @type {string[]} */
   const out = [];
   if (crisisOf(record).has('wartime')) {
-    const r = /** @type {{ economicViability?: { plotHooks?: unknown } | null, arrivalScene?: unknown }} */ (record);
-    const hooks = Array.isArray(r.economicViability?.plotHooks) ? /** @type {Array<{ category?: unknown, hook?: unknown }>} */ (r.economicViability.plotHooks) : [];
-    // BIRTH-3 (the chair's AMENDMENT 1 (3), ruling BR8: every view reads what the public record keeps): the iron hook is the
-    // DM's (the shared page withholds `plotHooks`), so the war's hold on the iron is read off what the hook is written from
-    // (`economy/foodBalance.js`): the town must import its metal ("Imports metals", `economicViability.dependencies`, kept)
-    // and its imports hold iron or metal; the hook itself still answers where it stands
+    const r = /** @type {{ arrivalScene?: unknown }} */ (record);
+    // BIRTH-3 (the chair's ruling BR9: a mark the players see is never read off the DM's hooks): the war's hold on the iron
+    // is the iron hook's own predicate (`warIronHook.js`), over the fields every view keeps
     const v = /** @type {{ economicViability?: { dependencies?: unknown } | null, economicState?: { primaryImports?: unknown } | null }} */ (record);
-    const mustImport = (Array.isArray(v.economicViability?.dependencies) ? v.economicViability.dependencies : []).some((d) => /^Imports .*\b(?:iron|metal)/i.test(String(/** @type {{ title?: unknown } | null} */ (d)?.title ?? '')));
-    const bought = (Array.isArray(v.economicState?.primaryImports) ? v.economicState.primaryImports : []).some((x) => /\b(?:iron|metal)/i.test(String(x)));
-    if (hooks.some((h) => !!h && h.category === IRON_HOOK_CATEGORY && typeof h.hook === 'string' && h.hook.length > 0) || (mustImport && bought)) out.push(WAR_TAKES_IRON);
+    if (warHoldsIron(Array.isArray(v.economicViability?.dependencies) ? v.economicViability.dependencies : [], Array.isArray(v.economicState?.primaryImports) ? v.economicState.primaryImports : [], 'at war')) out.push(WAR_TAKES_IRON);
     if (typeof r.arrivalScene === 'string' && RECEIPTS.test(r.arrivalScene)) out.push(WAR_TAKES_ANIMALS);
   }
   const frozen = Object.freeze(out);

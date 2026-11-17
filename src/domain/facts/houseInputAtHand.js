@@ -42,6 +42,7 @@ import { institutionMatchesKeyword } from '../institutions/institutionCategory.j
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT } from '../../data/crisisDependence.js';
+import { warHoldsIron } from './warIronHook.js'; // BIRTH-3 (BR9): the iron hook's own predicate (EG1: import-free)
 import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, RUNS_ON_BOUGHT, TAKERS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
 import { impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
 
@@ -626,8 +627,6 @@ export function atWar(record) {
     .some((/** @type {unknown} */ e) => !!e && typeof e === 'object' && WAR_TYPES.includes(String(/** @type {{ type?: unknown }} */ (e).type)));
 }
 
-/** The war's own iron hook, by its fixed opening (`economy/foodBalance.js`; `outlookHookSiblings.js`'s twin keeps it). */
-const WAR_IRON_HOOK = /^War has taken the iron:/;
 
 /**
  * BAR6-MARKS (fact (e), left by BAR5-MARKS under WM1b; vetoable by the owner): WHERE THE PAGE PRINTS THE WAR'S IRON HOOK
@@ -638,10 +637,14 @@ const WAR_IRON_HOOK = /^War has taken the iron:/;
  * @param {unknown} record @returns {boolean}
  */
 export function warIronHookOutsideWar(record) {
-  const r = /** @type {{ economicViability?: { plotHooks?: unknown } | null } | null} */ (record);
+  const r = /** @type {{ economicViability?: { dependencies?: unknown } | null, economicState?: { primaryImports?: unknown } | null } | null} */ (record);
   if (!r || atWar(record)) return false;
-  return arr(r.economicViability?.plotHooks).some((x) => { const h = /** @type {{ category?: unknown, hook?: unknown } | null} */ (x);
-    return !!h && h.category === 'Strategic Resource' && typeof h.hook === 'string' && WAR_IRON_HOOK.test(h.hook); });
+  // BIRTH-3 (the chair's ruling BR9: a mark the players see is never read off the DM's hooks): the hook's own predicate
+  // (`warIronHook.js`) over the kept fields; the war's state as `facts/warState.js :: warStateOf` reads it off the record,
+  // here off the stress container (EG1: warState.js reaches a module the build pins lazy; the guard holds the two equal)
+  const types = canonStressors(/** @type {Parameters<typeof canonStressors>[0]} */ (record)).map((e) => String(/** @type {{ type?: unknown } | null} */ (e)?.type ?? ''));
+  const state = types.includes('under_siege') ? 'front' : types.includes('wartime') || types.includes('occupied') ? 'at war' : 'peace';
+  return warHoldsIron(arr(r.economicViability?.dependencies), arr(r.economicState?.primaryImports), state);
 }
 
 /** The luxury trade's own goods, which no chain carries (`HOUSE_TRADE_INPUT`'s `luxury`). */
