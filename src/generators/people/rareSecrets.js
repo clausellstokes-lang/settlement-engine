@@ -40,7 +40,7 @@
  * who was excluded and why) rides beside it (`rareSecretReceiptOf`), never on the record.
  */
 
-import { HOLDER_KEYS, RARE_SECRET_FAMILIES, RARE_SECRET_GENERATION_YEARS, RARE_SECRET_ODDS, RARE_SECRET_ROWS } from '../../data/rareSecrets.js';
+import { HOLDER_KEYS, RARE_SECRET_FAMILIES, RARE_SECRET_AGE_YEARS, RARE_SECRET_GENERATION_YEARS, RARE_SECRET_ODDS, RARE_SECRET_ROWS } from '../../data/rareSecrets.js';
 import { NPC_AGE_DATA, NPC_PRESENTATION_MODES } from '../../data/npcData.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { filterDeclared } from '../../domain/facts/drawDeclared.js';
@@ -53,10 +53,10 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ key: string, what: string, stakes: string, owner?: boolean, magic?: boolean, needs?: readonly string[], excludes?: readonly string[], holder?: Readonly<Holder>, names?: 'superior' | 'other' | 'younger' }} RareRow */
-/** @typedef {{ age?: 'ofYears' | 'old' | 'notOld', not?: readonly string[], office?: readonly string[], keepsHouse?: boolean, roles?: readonly string[], category?: readonly string[], notRoles?: readonly string[], notCategory?: readonly string[], notHouses?: readonly string[], deniedBy?: readonly string[] }} Holder */
+/** @typedef {{ age?: 'ofYears' | 'old' | 'notOld', not?: readonly string[], office?: readonly string[], keepsHouse?: boolean, roles?: readonly string[], category?: readonly string[], notRoles?: readonly string[], notCategory?: readonly string[], notHouses?: readonly string[], deniedBy?: readonly string[], minYears?: number, notHookWords?: readonly string[] }} Holder */
 /** @typedef {'deeds' | 'natures' | 'ties' | 'masters' | 'outsiders'} Family */
 /** @typedef {{ family: Family, key: string, id: string, names: string | null }} Dealt */
-/** @typedef {{ seed: string, persons: number, eligible: number, excluded: Record<string, number>, magic: boolean, dealt: Dealt[] }} RareReceipt */
+/** @typedef {{ seed: string, persons: number, eligible: number, excluded: Record<string, number>, magic: boolean, dealt: Dealt[], kept: Dealt[], passed: Record<string, number> }} RareReceipt */
 
 /** The keyed family the deal reads its hash under (no fork: no draw). */
 export const RARE_SECRETS_KEY = 'rare-secrets';
@@ -81,13 +81,8 @@ const unit = (key) => fnv1a32(key) / 4294967296;
 /** A word list as one whole-word test over a lower-cased text. @param {readonly string[]} words @returns {RegExp} */
 const wordsTest = (words) => new RegExp(`(?:^|[^a-z'-])(?:${words.map((w) => w.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})(?:$|[^a-z'-])`);
 
-/** The card's age words in years (the age vocabulary's own words, `NPC_AGE_DATA`); null when not one of them. */
-const AGE_YEARS = Object.freeze(/** @type {Record<string, number>} */ ({
-  'early twenties': 22, 'mid-twenties': 25, 'late twenties': 28,
-  'early thirties': 32, 'mid-thirties': 35, 'late thirties': 38, 'early forties': 42, 'mid-forties': 45,
-  'late forties': 48, 'early fifties': 52, 'mid-fifties': 55, 'late fifties': 58,
-  'early sixties': 62, 'mid-sixties': 65, 'late sixties': 68, seventies: 74,
-}));
+/** The card's age words in years (data/rareSecrets.js :: RARE_SECRET_AGE_YEARS). */
+const AGE_YEARS = /** @type {Readonly<Record<string, number>>} */ (RARE_SECRET_AGE_YEARS);
 /** @param {Rec} card @returns {string} */
 const ageWordsOf = (card) => str(rec(card.physical).age).trim().toLowerCase();
 /** @param {Rec} card @returns {'young' | 'middle' | 'mature' | 'elder' | null} */
@@ -146,6 +141,8 @@ function placeOf(settlement, cards, relationships, worldLaw) {
   const order = powerOrderOf(record);
   const governing = governingNameOf(record);
   const lordly = rulerKindOfLabel(rec(settlement.powerStructure).government) === 'lord';
+  /** @type {Map<string, string>} the powers' categories, by name */
+  const powerCategory = new Map(arr(rec(settlement.powerStructure).factions).map((x) => [str(rec(x).faction) || str(rec(x).name), str(rec(x).category).toLowerCase()]));
   /** @type {Map<string, Set<string>>} */
   const tiesOf = new Map();
   for (const t of relationships) {
@@ -161,6 +158,7 @@ function placeOf(settlement, cards, relationships, worldLaw) {
     order,
     governing,
     lordly,
+    powerCategory,
     relationships,
     /** @param {string} a @param {string} b @returns {Set<string>} */
     tieTypes: (a, b) => tiesOf.get(`${a}\t${b}`) || new Set(),
@@ -176,6 +174,13 @@ function isHereditary(card, place) {
   if (place.lordly && isHead(card, place)) return true;
   return powersByRankOf(card, place.order).some((m) => NOBLE_POWER.test(str(m.power)));
 }
+/** A power of the underworld, by its category or its name. */
+const CRIMINAL_POWER = /\bthie|\bcrim|\bunderworld\b|\bsyndicate\b|\bgangs?\b|\bsmuggl|\bcartel\b|\bshadow\b|\brookery\b/i;
+/** AMENDMENT 2: first of a criminal power (veiled or not). @param {Rec} card @param {Place} place */
+const isCriminalHead = (card, place) => arr(card.memberships).some((m) => {
+  const power = str(rec(m).power);
+  return rec(m).rank === 1 && (place.powerCategory.get(power) === 'criminal' || CRIMINAL_POWER.test(power));
+});
 /** @param {Rec} card */
 const isElder = (card) => ELDER_OFFICE.test(str(card.role)) || ELDER_OFFICE.test(str(card.title));
 /** Kin on the page, an elder's office, or a title of blood. @param {Rec} card @param {Place} place */
@@ -212,6 +217,11 @@ function traitWordsOf(card) {
   return [p.dominant, p.flaw, p.modifier, rec(card.presentation).disposition].map((w) => str(w).toLowerCase()).filter(Boolean);
 }
 
+/** The card's own hook lines, as one text. @param {Rec} card @returns {string} */
+const hooksOf = (card) => arr(card.plotHooks).filter((x) => typeof x === 'string').join(' ');
+/** The card's own printed goal and hook lines, as one text (a target is never one they name). @param {Rec} card @returns {string} */
+const ownLinesOf = (card) => [str(rec(card.goal).short), str(rec(card.goal).long), hooksOf(card)].join(' ');
+
 /** The person's own conditions (the row's `holder`). @param {Holder | undefined} h @param {Rec} card @param {Place} place @returns {boolean} */
 function holderAdmits(h, card, place) {
   if (!h) return true;
@@ -224,6 +234,7 @@ function holderAdmits(h, card, place) {
     if (o === 'elder' && isElder(card)) return false;
     if (o === 'hereditary' && isHereditary(card, place)) return false;
     if (o === 'knownFromBirth' && knownFromBirth(card, place)) return false;
+    if (o === 'criminalHead' && isCriminalHead(card, place)) return false;
   }
   for (const o of h.office || []) if (o === 'head' && !isHead(card, place)) return false;
   if (h.keepsHouse && rec(card.institution).kind !== 'house') return false;
@@ -237,6 +248,8 @@ function holderAdmits(h, card, place) {
   if (h.notRoles && wordsTest(h.notRoles).test(role)) return false;
   if (h.notCategory && h.notCategory.includes(category)) return false;
   if (h.notHouses && wordsTest(h.notHouses).test(` ${str(rec(card.institution).key).toLowerCase()} `)) return false;
+  if (typeof h.minYears === 'number') { const y = AGE_YEARS[ageWordsOf(card)]; if (y === undefined || y < h.minYears) return false; }
+  if (h.notHookWords && wordsTest(h.notHookWords).test(` ${hooksOf(card).toLowerCase()} `)) return false;
   if (h.deniedBy) { const words = traitWordsOf(card); if (h.deniedBy.some((w) => words.includes(w))) return false; }
   return true;
 }
@@ -253,8 +266,10 @@ function namedFor(row, card, cards, place, seed, family) {
   const id = String(card.id);
   const refused = TARGET_REFUSALS[row.key] || [];
   const holderYears = AGE_YEARS[ageWordsOf(card)];
+  const own = ownLinesOf(card);
   const pool = cards.filter((c) => {
     if (c === card || c.id == null || String(c.id) === id || !str(c.name) || c === superior) return false;
+    if (own.includes(str(c.name))) return false; // AMENDMENT 2: never one the card's own goal or hook names
     if (str(c.name) === str(card.name)) return false;
     if (refused.some((t) => place.tieTypes(id, String(c.id)).has(t))) return false;
     if (row.names === 'younger') {
@@ -267,6 +282,22 @@ function namedFor(row, card, cards, place, seed, family) {
   const ranked = pool.map((c) => ({ c, h: fnv1a32(`${seed}::${RARE_SECRETS_KEY}::${family}::${id}::${row.key}::${String(c.id)}`) }))
     .sort((a, b) => a.h - b.h || (String(a.c.id) < String(b.c.id) ? -1 : 1));
   return ranked[0].c;
+}
+
+/** Every row's two lines as patterns (a name slot reads as any words), by family. */
+const ROW_PATTERNS = Object.freeze(/** @type {readonly Family[]} */ (RARE_SECRET_FAMILIES).flatMap((family) => /** @type {readonly RareRow[]} */ (RARE_SECRET_ROWS[family]).map((row) => {
+  /** @param {string} t */ const re = (t) => new RegExp(`^${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:superior|target)\\\}/g, '.+')}$`);
+  return { family, row, what: re(row.what), stakes: re(row.stakes) };
+})));
+/**
+ * The row a secret is, by its words (AMENDMENT 2: a kept person's rare secret is known by them), or null.
+ * @param {unknown} secret @returns {{ family: Family, row: RareRow } | null}
+ */
+export function rareRowOf(secret) {
+  const what = str(rec(secret).what); const stakes = str(rec(secret).stakes);
+  if (!what) return null;
+  const hit = ROW_PATTERNS.find((p) => p.what.test(what) && p.stakes.test(stakes));
+  return hit ? { family: hit.family, row: hit.row } : null;
 }
 
 /** @param {string} text @param {string} name */
@@ -353,7 +384,7 @@ export function dealRareSecrets(settlement, cards, relationships, options = {}) 
   const keep = options.keep || new Set();
   const place = placeOf(rec(settlement), cards, arr(relationships), options.worldLaw);
   /** @type {RareReceipt} */
-  const receipt = { seed, persons: cards.length, eligible: 0, excluded: {}, magic: place.magic, dealt: [] };
+  const receipt = { seed, persons: cards.length, eligible: 0, excluded: {}, magic: place.magic, dealt: [], kept: [], passed: {} };
   /** @type {Rec[]} */ const eligible = [];
   for (const c of cards) {
     const why = exclusionOf(rec(c), cards, keep);
@@ -361,9 +392,17 @@ export function dealRareSecrets(settlement, cards, relationships, options = {}) 
     else eligible.push(c);
   }
   receipt.eligible = eligible.length;
+  // AMENDMENT 2: a KEPT person's rare secret (known by its words) fills its family's cap in the place
+  /** @type {Set<Family>} */ const filled = new Set();
+  for (const c of cards) {
+    if (!keep.has(String(rec(c).id))) continue;
+    const r = rareRowOf(rec(c).secret);
+    if (r) { filled.add(r.family); receipt.kept.push({ family: r.family, key: r.row.key, id: String(rec(c).id), names: null }); }
+  }
   /** @type {Map<Rec, { row: RareRow, family: Family, name: string | null }>} */
   const dealt = new Map();
   for (const family of /** @type {readonly Family[]} */ (RARE_SECRET_FAMILIES)) {
+    if (filled.has(family)) continue;
     const odds = /** @type {{ perPerson?: number, perPlace?: number, tiers?: readonly string[] }} */ (RARE_SECRET_ODDS[family]);
     if (odds.tiers && !odds.tiers.includes(place.tier)) continue;
     const rows = placeRows(family, place);
@@ -374,6 +413,7 @@ export function dealRareSecrets(settlement, cards, relationships, options = {}) 
       .map((c) => ({ c, u: unit(`${seed}::${RARE_SECRETS_KEY}::${family}::${String(c.id)}`) }))
       .filter((x) => typeof odds.perPerson !== 'number' || x.u < odds.perPerson)
       .sort((a, b) => a.u - b.u || (String(a.c.id) < String(b.c.id) ? -1 : 1));
+    receipt.passed[family] = ranked.length;
     for (const { c } of ranked) {
       const standing = standingFor(c, rows, cards, place, seed, family);
       if (!standing.length) continue;

@@ -13,8 +13,10 @@
 import { describe, expect, it, vi } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
-import { HOLDER_KEYS, RARE_SECRET_FAMILIES, RARE_SECRET_ODDS, RARE_SECRET_ROWS } from '../../src/data/rareSecrets.js';
-import { dealRareSecrets, rareRowsStandingFor, rareSecretReceiptOf, rareSecretRows, superiorOf } from '../../src/generators/people/rareSecrets.js';
+import { HOLDER_KEYS, RARE_SECRET_AGE_YEARS, RARE_SECRET_FAMILIES, RARE_SECRET_ODDS, RARE_SECRET_ROWS } from '../../src/data/rareSecrets.js';
+import { dealRareSecrets, rareRowOf, rareRowsStandingFor, rareSecretReceiptOf, rareSecretRows, superiorOf } from '../../src/generators/people/rareSecrets.js';
+import { NPC_PRESENTATION_MODES } from '../../src/data/npcData.js';
+import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
 import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
 import { refreshRosterProse } from '../../src/generators/generateSettlementPipeline.js';
 import { NPC_AGE_DATA, NPC_PERSONALITY_TRAITS } from '../../src/data/npcData.js';
@@ -214,6 +216,8 @@ describe('SECRETS-1: every row stands for some planted roster, and only where it
       if (h.age === 'ofYears') for (const a of NPC_AGE_DATA.young) expectPresentThenAbsent(before, standingKeys(place, withCand({ physical: { age: a } })), row.key, `${row.key} never on one in their ${a}`);
       if (h.age === 'old') expectPresentThenAbsent(before, standingKeys(place, withCand({ physical: { age: 'mid-forties' } })), row.key, `${row.key} only on the old`);
       if (h.age === 'notOld') for (const a of NPC_AGE_DATA.elder) expectPresentThenAbsent(before, standingKeys(place, withCand({ physical: { age: a } })), row.key, `${row.key} never on one in their ${a}`);
+      if (typeof h.minYears === 'number') for (const [a, y] of Object.entries(RARE_SECRET_AGE_YEARS)) if (y < h.minYears) expectPresentThenAbsent(before, standingKeys(place, withCand({ physical: { age: a } })), row.key, `${row.key} never on one in their ${a}`);
+      for (const w of h.notHookWords || []) expectPresentThenAbsent(before, standingKeys(place, withCand({ plotHooks: [`Their ${w} is owed money by half the street.`] })), row.key, `${row.key} never beside a hook naming "${w}"`);
       if (h.keepsHouse) expectPresentThenAbsent(before, standingKeys(place, withCand({ institution: { kind: 'power', key: COUNCIL } })), row.key, `${row.key} only on a house's keeper`);
       if (h.roles && !h.category) expectPresentThenAbsent(before, standingKeys(place, withCand({ role: 'the cartwright-of-nothing' })), row.key, `${row.key} only on its own trade`);
       if (h.office && h.office.includes('head')) expectPresentThenAbsent(before, standingKeys(place, withCand({ memberships: [{ power: GUILD, rank: null, share: 1, veiled: false }] })), row.key, `${row.key} only on the head`);
@@ -223,6 +227,7 @@ describe('SECRETS-1: every row stands for some planted roster, and only where it
         else if (o === 'elder') patch = { role: 'Elder' };
         else if (o === 'hereditary') patch = { role: 'the lord' };
         else if (o === 'knownFromBirth') patch = { role: 'the eldest' };
+        else if (o === 'criminalHead') patch = { memberships: [{ power: "Thieves' Guild", rank: 1, share: 1, veiled: true }] };
         else throw new Error(`no planted office for ${o}`);
         const after = standingKeys(place, withCand(patch).map((c) => (o === 'head' && c.id === 'head' ? { ...c, memberships: [] } : c)));
         expectPresentThenAbsent(before, after, row.key, `${row.key} never on the ${o}`);
@@ -375,6 +380,80 @@ describe('SECRETS-1: the deal over seeds (planted)', () => {
     const r = dealRareSecrets(cityPlace, cards.map((c) => (c.id === 'p7' ? { ...c, secret: { what: 'Has been passing information to Planted Person9', stakes: 'x' } } : c)), RELS, { seed: 'rare-law-0' });
     expect(rareSecretReceiptOf(r)?.excluded["named in another card's secret"]).toBe(1);
   });
+});
+
+// ── AMENDMENT 2 (the chair, 2026-11-17): the two exclusions, the re-roll, the small places, the magic list, the cap ──
+/** The forty-seven magic-only keys, pinned (the brief's count: 26 of the first hundred, 21 of AMENDMENT 1). */
+const MAGIC_KEYS = ['demon', 'cursed', 'raisedDead', 'growsYounger', 'luck', 'foresees', 'beastSpeech', 'ageless', 'hearsLies', 'nightSight', 'deathWatch',
+  'ghost', 'godBlood', 'dragonBlood', 'changeling', 'fey', 'moonChanged', 'feyReplaced', 'ghostChild', 'familiar', 'seventhChild', 'selkie', 'grandmother',
+  'masterWizard', 'fromThePast', 'fromTheFuture', 'regressor', 'otherWorld', 'realWorld', 'loop', 'returns', 'statSight', 'riddler', 'sameDay',
+  'trueName', 'noShadow', 'smallGod', 'deathsClerk', 'wrongEnding', 'madeThing', 'starFallen', 'swappedBodies', 'thousandLives', 'dragonHiding', 'underTheHat', 'narrator', 'prophecy'];
+describe('SECRETS-1 AMENDMENT 2: the exclusions, the re-roll, the small places, the magic list, the cap', () => {
+  it('the forty-seven magic-only keys are exactly these', () => {
+    expect(MAGIC_KEYS.length).toBe(47);
+    expect(rareSecretRows().filter((r) => r.row.magic).map((r) => r.row.key).sort()).toEqual([...MAGIC_KEYS].sort());
+  });
+  it('a face drawn from its secret, and a crisis pool\'s own secret, never carry one', () => {
+    const { place, cards } = plantFor('ties', rareSecretRows().find((r) => r.row.key === 'brothersWife').row);
+    const before = standingKeys(place, cards);
+    const mode = NPC_PRESENTATION_MODES.dangerous_presents_safe[0];
+    const faced = cards.map((c) => (c.id === 'cand' ? { ...c, presentation: mode } : c));
+    expectPresentThenAbsent(before, standingKeys(place, faced), 'brothersWife', 'a face drawn from the secret');
+    const crisis = Object.values(STRESS_INSTITUTION_EFFECTS).flat()[0];
+    const crisisCards = cards.map((c) => (c.id === 'cand' ? { ...c, secret: { what: crisis.secret.replace(/\{[a-zA-Z]+\}/g, 'the guild'), stakes: crisis.stakes } } : c));
+    expectPresentThenAbsent(before, standingKeys(place, crisisCards), 'brothersWife', "a crisis pool's own secret");
+  });
+  it('a hidden master stands in a thorp and in a hamlet as in a village', () => {
+    const failures = collectSeedFailures(rareSecretRows().filter((r) => r.family === 'masters'), ({ family, row }) => {
+      for (const tier of ['thorp', 'hamlet', 'village']) {
+        const { place, cards } = plantFor(family, row);
+        expect(standingKeys({ ...place, tier }, cards), `${row.key} in a ${tier}`).toContain(row.key);
+      }
+    });
+    expectNoSeedFailures(failures, 'every hidden master stands in each small place');
+  });
+  it('one seed places two candidates of a family, and the cap deals one', () => {
+    const cards = bigRoster();
+    const hit = SEEDS.map((seed) => ({ seed, r: rareSecretReceiptOf(dealRareSecrets(plantPlace({ tier: 'city' }), cards, RELS, { seed })) }))
+      .find(({ r }) => Object.values(r?.passed || {}).some((n) => n >= 2));
+    expect(hit, 'a seed of the 300 passes two of one family').toBeTruthy();
+    const fam = Object.entries(hit.r.passed).find(([, n]) => n >= 2)[0];
+    expect(hit.r.dealt.filter((d) => d.family === fam).length).toBe(1);
+  });
+  it('a kept person\'s rare secret fills its family\'s cap, in the deal and through a re-roll end to end', async () => {
+    const cards = bigRoster();
+    const place = plantPlace({ tier: 'city' });
+    const found = SEEDS.map((seed) => ({ seed, out: dealRareSecrets(place, cards, RELS, { seed }) })).find(({ out }) => (rareSecretReceiptOf(out)?.dealt || []).length);
+    expect(found).toBeTruthy();
+    const d = rareSecretReceiptOf(found.out).dealt[0];
+    // the holder kept, and every seed of the 300 dealt again: no second of that family
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const again = dealRareSecrets(place, found.out, RELS, { seed, keep: new Set([d.id]) });
+      const r = rareSecretReceiptOf(again);
+      expect(r.kept.map((k) => k.family)).toEqual([d.family]);
+      expect(r.dealt.filter((x) => x.family === d.family)).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'a kept holder fills the cap');
+    // end to end: a born town's holder kept by a user's edit through regenNPCsPipeline
+    const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { generateSettlementPipeline, regenNPCsPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    const { applyUserEdit } = await import('../../src/domain/userEdits.js');
+    await boundary.loadGenerationLawPayloads();
+    const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    const town = generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: 'metropolis' }), null, { seed: 'r2r-metropolis-1', customContent: {} });
+    const holder = town.npcs.find((n) => rareRowOf(n.secret));
+    expect(holder, 'r2r-metropolis-1 is born with a rare secret').toBeTruthy();
+    const fam = rareRowOf(holder.secret).family;
+    applyUserEdit(holder, 'goal.short', 'Keep the customs ledgers in order this season.', { editedAt: '2026-01-01T00:00:00.000Z' });
+    const rerolls = collectSeedFailures(['rare-reroll-0', 'rare-reroll-1', 'rare-reroll-2'], (seed) => {
+      const parts = regenNPCsPipeline(town, town.config, { seed });
+      const kept = parts.npcs.find((n) => n.name === holder.name);
+      expect(kept?.secret).toEqual(holder.secret);
+      expect(parts.npcs.filter((n) => rareRowOf(n.secret)?.family === fam).length, `${seed}: one of the ${fam} family`).toBe(1);
+    });
+    expectNoSeedFailures(rerolls, 'a re-roll keeps the holder and breaks no cap');
+  }, 120000);
 });
 
 // ── THE BORN SAMPLE: NO DRAW TAKEN ─────────────────────────────────────────────────────────────────────────────────

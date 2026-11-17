@@ -34,6 +34,14 @@ export const RARE_SECRET_ODDS = Object.freeze({
   outsiders: Object.freeze({ perPlace: 1 / 60 }),
 });
 
+/** The card's age words (`npcData.js :: NPC_AGE_DATA`) read as years (`parentOf`'s generation; AMENDMENT 2's `minYears`). */
+export const RARE_SECRET_AGE_YEARS = Object.freeze({
+  'early twenties': 22, 'mid-twenties': 25, 'late twenties': 28,
+  'early thirties': 32, 'mid-thirties': 35, 'late thirties': 38, 'early forties': 42, 'mid-forties': 45,
+  'late forties': 48, 'early fifties': 52, 'mid-fifties': 55, 'late fifties': 58,
+  'early sixties': 62, 'mid-sixties': 65, 'late sixties': 68, seventies: 74,
+});
+
 /** A generation, in years by the card's age words (`parentOf`'s "a generation younger"). */
 export const RARE_SECRET_GENERATION_YEARS = 18;
 
@@ -43,15 +51,18 @@ export const RARE_SECRET_GENERATION_YEARS = 18;
  *   not        offices the person must NOT hold: 'head' (first of the governing power), 'elder' (an elder's office:
  *              Elder, Headman, the eldest), 'hereditary' (a title of blood, or a noble of the page), 'knownFromBirth'
  *              (kin on the page, an elder's office or a title of blood)
+ *              'criminalHead' (AMENDMENT 2: first of a criminal power, the masterThief's refusal)
  *   office     offices the person MUST hold ('head')
  *   keepsHouse the person is the face of a house of their own (`institution.kind === 'house'`)
  *   roles      the person's role holds one of these words (whole words, lower case); with `category`, either answers
  *   category   the person's card category is one of these
  *   notRoles   the person's role holds none of these words; `notCategory` their category is none of these; `notHouses`
  *              their house's name holds none of these words
+ *   minYears   the card's age words read as years (`RARE_SECRET_AGE_YEARS`) are at least this (AMENDMENT 2: "twenty years")
+ *   notHookWords the card's own hook (`plotHooks`) holds none of these words (AMENDMENT 2)
  *   deniedBy   the engine's own trait words (temperament, flaw, modifier, disposition) the row never stands beside
  */
-export const HOLDER_KEYS = Object.freeze(['age', 'not', 'office', 'keepsHouse', 'roles', 'category', 'notRoles', 'notCategory', 'notHouses', 'deniedBy']);
+export const HOLDER_KEYS = Object.freeze(['age', 'not', 'office', 'keepsHouse', 'roles', 'category', 'notRoles', 'notCategory', 'notHouses', 'deniedBy', 'minYears', 'notHookWords']);
 
 const f = Object.freeze;
 /** The words of deceit the engine's temperaments of truth refuse (npcData.js :: SECRETS_DENIED_BY_TEMPERAMENT's honest four). */
@@ -63,6 +74,16 @@ const FIRE_HOUSES = f(['blacksmith', 'blacksmiths', 'smelter', 'bakers', 'bakery
 const TOUCH_ROLES = f(['healer', 'midwife', 'bath-keeper', 'barber', 'madam', 'keeper of the house', 'keeper of the houses']);
 const TASTE_ROLES = f(['cook', 'baker', 'brewer', 'brewster', 'alewife', 'vintner', 'apothecary', 'innkeeper', 'tavern keeper', 'coaching-inn keeper']);
 const LETTER_ROLES = f(['scribe', 'clerk', 'teacher', 'chronicler', 'librarian', 'sage', 'cartographer', 'printer', 'college master', 'dean', 'chancellor', 'postmaster', "post's master", 'message-master']);
+/**
+ * AMENDMENT 2 (the chair, 2026-11-17): the trades of letters, learning, law, account, faith and magic (the catalogue's
+ * faces): one who cannot read, or has read one book only, is never one of these.
+ */
+const LEARNED_ROLES = f([...LETTER_ROLES, 'scroll scribe', 'charter master', 'magistrate', 'notary', 'lawyer', 'customs collector', 'mint master', 'exchange master', "exchange's steward", 'auctioneer', 'banker', 'assayer', 'warehouse factor', 'chief administrator', 'granaries', 'granary reeve', 'priest', 'abbot', 'abbess', 'bishop', 'almoner', 'hospitaller', 'archdruid', 'circle-keeper', 'grove elder', 'wizard', 'alchemist', 'enchanter', 'archmage', 'golem-master', 'necromancer-overseer', 'dream-keeper', 'planar factor', 'fortune teller']);
+/** AMENDMENT 2: the trades of wealth (one "quietly ashamed of how poor it has kept them" is never one of these). */
+const WEALTH_ROLES = f(['luxury merchant', 'banker', 'mint master', 'exchange master', "exchange's steward", 'first magnate', 'jeweller', 'auctioneer']);
+/** AMENDMENT 2: a hook that names the person's kin, or their spouse. */
+const KIN_WORDS = f(['sister', 'brother', 'son', 'daughter', 'mother', 'father', 'parent', 'parents', 'child', 'children', 'spouse', 'wife', 'husband', 'cousin', 'uncle', 'aunt', 'niece', 'nephew', 'grandmother', 'grandfather']);
+const SPOUSE_WORDS = f(['spouse', 'wife', 'husband', 'widow', 'widower', 'married', 'marriage']);
 const BLOOD_ROLES = f(['healer', 'barber', 'butcher', 'midwife', 'hunt', 'hunter', 'militia', 'watch', 'garrison', 'castellan', 'captain', 'marshal', 'lanista', 'arena', 'killer', "hospital's master"]);
 const DECEIT_ROLES = f(['fortune teller', 'front man', 'nominal owner', 'whisper broker', 'fixer', 'fence', 'smuggler']);
 
@@ -73,7 +94,7 @@ export const RARE_DEEDS = f([
   f({ key: 'spouse', what: 'Has been giving their own spouse a little poison each week, and is patient about it', stakes: 'Any healer who looks closely will know the signs', needs: ['tier: ≥ village'], holder: f({ deniedBy: f(['merciful', 'compassionate', 'warm-hearted']) }) }),
   f({ key: 'floor', what: 'Has a body buried under their own floor', stakes: "The missing one's kin have never stopped asking", needs: ['tier: ≥ hamlet'] }),
   f({ key: 'hired', what: 'Has taken coin to kill {target}, and has not yet decided to refuse', stakes: 'Whoever paid expects it done, and {target} suspects nothing', needs: ['tier: ≥ town'], names: 'other', holder: f({ deniedBy: f(['incorruptible']) }) }),
-  f({ key: 'felon', owner: true, what: 'Is wanted for a crime in another town, and came here to be forgotten', stakes: 'A traveller from there would know the face', needs: ['tier: town'], excludes: ['route: isolated'], holder: f({ not: f(['head', 'hereditary', 'elder']) }) }),
+  f({ key: 'felon', owner: true, what: 'Is wanted for a crime in another place, and came here to be forgotten', stakes: 'A traveller from there would know the face', excludes: ['route: isolated'], holder: f({ not: f(['head', 'hereditary', 'elder']) }) }),
   f({ key: 'demon', owner: true, magic: true, what: 'Made a bargain with a demon, and the price has not yet been named', stakes: 'It will be named at the worst hour', holder: f({ deniedBy: f(['pious']) }) }),
   f({ key: 'drowned', what: 'Let a rival drown and has told it as a failed rescue ever since', stakes: 'One other person was on the bank that day', holder: f({ deniedBy: TRUTHFUL }) }),
   f({ key: 'sellsSecrets', what: 'Sells what is said here in private to someone outside, a letter at a time', stakes: 'The letters are kept, and not by them', needs: ['tier: ≥ village'], excludes: ['route: isolated'], holder: f({ deniedBy: f(['loyal', 'incorruptible']) }) }),
@@ -83,31 +104,31 @@ export const RARE_DEEDS = f([
   f({ key: 'robbedDead', what: 'Robbed a dying traveller on the road and left them there', stakes: 'The traveller did not die', excludes: ['route: isolated'], holder: f({ deniedBy: f(['merciful', 'compassionate', 'honest']) }) }),
   f({ key: 'oathBreaker', what: 'Swore to protect someone and stood aside when it mattered', stakes: 'The one they failed has kin who keep count', holder: f({ deniedBy: f(['loyal', 'steadfast', 'protective']) }) }),
   f({ key: 'blackmailer', what: 'Is bleeding {target} for coin over a thing done long ago', stakes: '{target} has begun to wonder whether another way would be cheaper', needs: ['tier: ≥ town'], names: 'other', holder: f({ deniedBy: f(['principled', 'generous']) }) }),
-  f({ key: 'graveRobber', what: 'Digs up the newly buried for what was buried with them', stakes: 'The last grave had more kin than they thought', needs: ['tier: ≥ village'], holder: f({ deniedBy: f(['pious']) }) }),
+  f({ key: 'graveRobber', what: 'Digs up the newly buried for what was buried with them', stakes: 'The last grave had more kin than they thought', needs: ['tier: ≥ village'], holder: f({ not: f(['head', 'hereditary']), deniedBy: f(['pious']) }) }),
   f({ key: 'counterfeit', what: 'Clips and re-casts coin in a back room, a little at a time', stakes: 'A trader has started weighing every coin that comes from here', needs: ['tier: ≥ town'], holder: f({ deniedBy: f(['honest', 'incorruptible', 'plain-dealing']) }) }),
   f({ key: 'cursed', magic: true, what: 'Called a curse down on a neighbour, and it worked', stakes: 'Curses of that kind are paid for twice', needs: ['tier: ≥ hamlet'], holder: f({ deniedBy: f(['merciful', 'compassionate']) }) }),
   f({ key: 'falseWitness', what: 'Sent an innocent to the gallows with a lie, and watched', stakes: 'The one who truly did it knows who lied', needs: ['tier: ≥ town'], holder: f({ deniedBy: f([...TRUTHFUL, 'fair-minded']) }) }),
   f({ key: 'leftForDead', what: 'Left a partner for dead in the wilds and came home with both shares', stakes: 'The partner has been seen alive', holder: f({ deniedBy: f(['loyal']) }) }),
-  f({ key: 'raisedDead', magic: true, what: 'Raised something from a grave, once, and could not put it back', stakes: 'It has been seen at the edge of the fields', needs: ['tier: ≥ hamlet'] }),
+  f({ key: 'raisedDead', magic: true, what: 'Raised something from a grave, once, and could not put it back', stakes: 'It has been seen at the edge of the fields', needs: ['tier: ≥ hamlet'], holder: f({ deniedBy: f(['pious']) }) }),
   // AMENDMENT 1 (2026-11-17): THE DEEDS, now dark or bright
   f({ key: 'postsLetters', what: 'Writes a letter every week to someone who died years ago, and posts every one', stakes: 'The carrier has started reading them', excludes: ['route: isolated'] }),
   f({ key: 'feedsNeighbour', what: "Leaves food on a neighbour's step each night, and has never once let themselves be seen", stakes: 'The neighbour has started lying awake to catch them' }),
   f({ key: 'bearLie', what: 'Has told one small lie for so long that half the place believes they once wrestled a bear', stakes: 'Sooner or later someone who was there will pass through', holder: f({ deniedBy: TRUTHFUL }) }),
-  f({ key: 'paysDebts', what: "Has been quietly paying off a stranger's debts for years, and will not say why", stakes: 'The stranger has found out, and wants to know what is owed in return', holder: f({ deniedBy: f(['greedy']) }) }),
+  f({ key: 'paysDebts', what: "Has been quietly paying off someone else's debts for years, and will not say why", stakes: 'The one they are paying for has found out, and wants to know what is owed in return', holder: f({ deniedBy: f(['greedy']) }) }),
   f({ key: 'buriedHoard', what: 'Buried a fortune somewhere near and has forgotten exactly where', stakes: 'They dig at night, and someone has been filling in the holes' }),
   f({ key: 'savedEnemy', what: 'Once saved the life of the person they hate most, and has regretted it every day since', stakes: 'That person still does not know who it was' }),
   f({ key: 'wroteSong', what: 'Wrote the song everyone here knows, and has never told a soul', stakes: 'A singer passing through is claiming it as their own', holder: f({ deniedBy: f(['vain']) }) }),
   f({ key: 'tookBlame', what: "Took the blame for another's crime, and has carried the name of it ever since", stakes: 'The one who did it has prospered' }),
   f({ key: 'hidesSomeone', what: 'Is hiding someone under their roof, and has been for a month', stakes: 'The house is not as quiet as it was' }),
-  f({ key: 'stoleRelic', what: 'Stole a holy thing from a roadside altar and cannot bring themselves to sell it', stakes: 'The ones it was taken from are still asking along the road', excludes: ['route: isolated'], holder: f({ deniedBy: f(['honest']) }) }),
-  f({ key: 'fakedDeath', what: 'Is supposed to be dead, with a grave and mourners in another town', stakes: 'One of the mourners travels', needs: ['tier: town'] }),
+  f({ key: 'stoleRelic', what: 'Stole a holy thing from a roadside altar and cannot bring themselves to sell it', stakes: 'The ones it was taken from are still asking along the road', excludes: ['route: isolated'], holder: f({ deniedBy: f(['honest', 'pious', 'incorruptible']) }) }),
+  f({ key: 'fakedDeath', what: 'Is supposed to be dead, with a grave and mourners in another place', stakes: 'One of the mourners travels' }),
   f({ key: 'forgedLetters', what: 'Fakes letters of introduction, and more than one newcomer who prospered here carried one', stakes: 'One of them has been found out, elsewhere', needs: ['tier: ≥ town'], holder: f({ deniedBy: TRUTHFUL }) }),
   f({ key: 'swappedBabes', what: 'Exchanged two newborns years ago to save one of them from a hard house, and has watched both grow', stakes: 'The two are of an age now to be told, or to find out', holder: f({ age: 'ofYears' }) }),
   f({ key: 'burnedRecord', what: "Burned the one record that proved a neighbour's claim, out of spite", stakes: 'A copy exists', needs: ['tier: ≥ village'], holder: f({ deniedBy: f(['fair-minded', 'equitable']) }) }),
   f({ key: 'soldThrice', what: 'Sold the same field to three buyers, and is running out of excuses', stakes: 'The three have started comparing papers', needs: ['tier: ≥ village'], holder: f({ deniedBy: f([...TRUTHFUL, 'incorruptible']) }) }),
   f({ key: 'wishedDeath', what: 'Wished a brother dead in anger the night before he died, and has believed it their doing ever since', stakes: 'They are atoning in ways that have started to cost other people' }),
-  f({ key: 'thumbOnScale', what: 'Has kept a thumb on the scale for twenty years, a grain at a time', stakes: 'Someone has brought their own weights', holder: f({ roles: f(['miller', 'butcher', 'baker', 'fishmonger', 'chandler', 'apothecary', 'salt master', 'grocer', 'spicer']), deniedBy: f(['honest', 'incorruptible', 'plain-dealing', 'fair-minded', 'equitable']) }) }),
-  f({ key: 'spared', what: 'Was sent here to kill someone, and has stayed eleven years without doing it', stakes: 'Whoever sent them has started to ask' }),
+  f({ key: 'thumbOnScale', what: 'Has kept a thumb on the scale for twenty years, a grain at a time', stakes: 'Someone has brought their own weights', holder: f({ minYears: 40, roles: f(['miller', 'butcher', 'baker', 'fishmonger', 'chandler', 'apothecary', 'salt master', 'grocer', 'spicer']), deniedBy: f(['honest', 'incorruptible', 'plain-dealing', 'fair-minded', 'equitable', 'candid', 'forthright']) }) }),
+  f({ key: 'spared', what: 'Was sent here to kill someone, and has stayed eleven years without doing it', stakes: 'Whoever sent them has started to ask', holder: f({ minYears: 30 }) }),
   f({ key: 'holdsDeeds', what: 'Holds, by a debt no one remembers, the deed to half the houses on their street', stakes: 'They have not decided whether to call it in', needs: ['tier: ≥ town'] }),
   f({ key: 'gaveCredit', what: 'Pulled three children from a flood years ago and let another take the credit', stakes: 'The other has built a name on it', holder: f({ deniedBy: f(['vain', 'cowardly']) }) }),
   f({ key: 'stagedMiracle', what: 'Once staged a miracle with a mirror and a length of thread, and people still speak of it', stakes: 'Pilgrims have begun to ask the way', needs: ['tier: ≥ village'], excludes: ['route: isolated'], holder: f({ deniedBy: TRUTHFUL }) }),
@@ -141,7 +162,7 @@ export const RARE_NATURES = f([
   f({ key: 'noTaste', what: 'Cannot taste or smell anything, and has hidden it for years', stakes: 'The day something spoils, they will be the last to know', holder: f({ notRoles: TASTE_ROLES }) }),
   f({ key: 'afraidDark', what: 'Cannot bear the dark, and burns a light all night at a cost they can ill afford', stakes: 'The night the oil runs out, someone will hear' }),
   f({ key: 'twoPeople', what: "Is two people by turns, and neither remembers the other's days", stakes: "One of them has made promises the other will have to keep" }),
-  f({ key: 'cannotRead', what: 'Cannot read a word, and conceals it behind a good memory and a trusted helper', stakes: 'The helper has started to ask for more', holder: f({ notRoles: LETTER_ROLES, deniedBy: f(['scholarly']) }) }),
+  f({ key: 'cannotRead', what: 'Cannot read a word, and conceals it behind a good memory and a trusted helper', stakes: 'The helper has started to ask for more', holder: f({ notRoles: LEARNED_ROLES, notCategory: f(['religious', 'magic']), deniedBy: f(['scholarly']) }) }),
   f({ key: 'bloodFaint', what: 'Faints at the sight of blood, and has arranged never to be seen near it', stakes: 'The day someone is hurt in front of them, it will be known', holder: f({ notRoles: BLOOD_ROLES, notCategory: f(['military']) }) }),
   f({ key: 'foresees', magic: true, what: 'Dreams of things before they happen, and has stopped telling anyone', stakes: 'The last dream was about this place' }),
   f({ key: 'beastSpeech', magic: true, what: 'Understands what animals say, and wishes they did not', stakes: 'The dogs here know something' }),
@@ -157,22 +178,22 @@ export const RARE_NATURES = f([
   f({ key: 'lovesStorms', what: 'Walks out into every storm, bare-headed, and comes back calmer', stakes: 'One day they will not come back' }),
   f({ key: 'fearsWater', what: 'Has not crossed water since the day of a drowning, and will walk a day round sooner than take a ferry', stakes: 'The day the only way is across', holder: f({ notRoles: f(['fisher', 'boatman', 'ferryman', 'ferry keeper', 'sailor', 'boat-master', 'boat-headman', 'barge master', 'boatwright', 'shipwright', 'harbour master', 'wharfinger']) }) }),
   f({ key: 'reckons', what: 'Can reckon any sum in their head faster than a clerk with a board, and pretends to count on their fingers', stakes: 'Someone with debts has noticed' }),
-  f({ key: 'neverAngry', what: 'Has not been angry in twenty years, and is saving all of it for one person', stakes: 'That person lives nearer than they think', holder: f({ deniedBy: f(['wrathful', 'volatile']) }) }),
+  f({ key: 'neverAngry', what: 'Has not been angry in twenty years, and is saving all of it for one person', stakes: 'That person lives nearer than they think', holder: f({ minYears: 40, deniedBy: f(['wrathful', 'volatile']) }) }),
   f({ key: 'keepsTeeth', what: 'Keeps a tooth of everyone they have ever loved, in a tin', stakes: 'The tin is nearly full' }),
   f({ key: 'cannotBeAlone', what: 'Cannot bear to be alone, not for an hour, and has built a life with no empty rooms', stakes: 'The rooms are emptying', holder: f({ deniedBy: f(['detached']) }) }),
   f({ key: 'truthInWine', what: 'Tells the whole plain truth when drunk, and so never drinks', stakes: 'Someone has bought them a drink, and is waiting', holder: f({ deniedBy: f(['hedonistic']), notRoles: f(['brewer', 'brewster', 'alewife', 'vintner', 'maltster']) }) }),
-  f({ key: 'hearsLies', magic: true, what: 'Always knows when they are being lied to, and has learned to keep a straight face', stakes: 'They know of three lies in this place that matter' }),
+  f({ key: 'hearsLies', magic: true, what: 'Always knows a lie when they hear one, and has learned to keep a straight face', stakes: 'They know of three lies in this place that matter' }),
   f({ key: 'tooStrong', what: 'Is far stronger than anyone their size should be, and breaks things when they forget', stakes: "The last thing they broke was someone's arm" }),
   f({ key: 'mimic', what: "Can speak in anyone's voice after hearing it once", stakes: 'They have already used it twice' }),
   f({ key: 'luckless', what: 'Nothing they touch goes right, not once, and they have started to think it is aimed', stakes: 'People have begun to cross the street' }),
-  f({ key: 'oneBook', what: 'Taught themselves to read from a single book, knows it by heart, and has read nothing else', stakes: 'The book is not what they think it is', holder: f({ notRoles: LETTER_ROLES, deniedBy: f(['scholarly']) }) }),
+  f({ key: 'oneBook', what: 'Taught themselves to read from a single book, knows it by heart, and has read nothing else', stakes: 'The book is not what they think it is', holder: f({ notRoles: LEARNED_ROLES, notCategory: f(['religious', 'magic']), deniedBy: f(['scholarly']) }) }),
   f({ key: 'keepsList', what: 'Keeps a list of every wrong done to them, with the dates, and reads it nightly', stakes: 'Half the place is on it', holder: f({ deniedBy: f(['merciful', 'magnanimous']) }) }),
   f({ key: 'nightSight', magic: true, what: 'Sees in the dark as well as by day, and has never mentioned it', stakes: 'They have seen who walks at night here' }),
   f({ key: 'lateLaugh', what: 'Has never understood a joke in their life, and laughs half a breath after everyone else', stakes: 'One person has begun to test it', holder: f({ deniedBy: f(['good-humoured']) }) }),
   f({ key: 'sings', what: 'Sings in a voice that makes people weep, alone, where no one can hear', stakes: 'Someone has heard', excludes: ['crisis: threat', 'crisis: hunger'], holder: f({ notRoles: f(['musician', 'minstrel', 'singer']) }) }),
   f({ key: 'sameBattle', what: 'Wakes every night at the same hour from the same battle, and walks until dawn', stakes: 'The watch has started to wonder who walks', needs: ['watch'], holder: f({ age: 'ofYears' }) }),
   f({ key: 'wanderer', what: 'Has never slept two years in one place, and the itch has started again', stakes: 'They have made promises here', holder: f({ not: f(['elder', 'hereditary', 'knownFromBirth']) }) }),
-  f({ key: 'tooHonest', what: 'Has never taken a coin that was not theirs, and is quietly ashamed of how poor it has kept them', stakes: 'Someone has offered them a great deal to change', holder: f({ deniedBy: f(['corrupt', 'greedy', 'deceitful', 'mendacious', 'self-serving']) }) }),
+  f({ key: 'tooHonest', what: 'Has never taken a coin that was not theirs, and is quietly ashamed of how poor it has kept them', stakes: 'Someone has offered them a great deal to change', holder: f({ notRoles: WEALTH_ROLES, deniedBy: f(['corrupt', 'greedy', 'deceitful', 'mendacious', 'self-serving']) }) }),
   f({ key: 'deathWatch', magic: true, what: 'Knows, to the day, when each person they meet will die, and has never been wrong', stakes: 'They have met everyone here' }),
   f({ key: 'paintsOneFace', what: 'Paints the same face over and over on anything that will take paint, and does not know whose it is', stakes: 'Someone here does' }),
   f({ key: 'stammer', what: 'Stammers with everyone but one person, and has never worked out why', stakes: 'That person is leaving', holder: f({ deniedBy: f(['charismatic']) }) }),
@@ -202,25 +223,25 @@ export const RARE_TIES = f([
   f({ key: 'feyReplaced', owner: true, magic: true, what: 'Is not the person everyone remembers: a fey thing ate that one and has worn the face ever since', stakes: 'It has the memories, but not all of them, and someone has begun to test it' }),
   f({ key: 'firstWord', owner: true, what: 'Will fall in love, at once and completely, with the first newcomer who speaks to them', stakes: 'They will not hide it well, and it will not pass' }),
   // AMENDMENT 1 (2026-11-17)
-  f({ key: 'lostChild', what: 'Gave up a child at birth, and has watched for its face in every stranger since', stakes: 'A stranger with that face would be of an age to ask questions now', holder: f({ age: 'ofYears' }) }),
+  f({ key: 'lostChild', what: 'Gave up a child at birth, and has watched for its face in every stranger since', stakes: 'Anyone with that face would be of an age to ask questions now', holder: f({ age: 'ofYears' }) }),
   f({ key: 'oldLove', what: 'Has loved the same person for forty years and never once said so', stakes: 'That person is ailing', holder: f({ age: 'old' }) }),
   f({ key: 'deadTitle', what: 'Is heir to a title that no longer has any land under it, and keeps the seal in a sock', stakes: 'Someone is buying up dead titles', holder: f({ not: f(['hereditary']) }) }),
   f({ key: 'wolves', what: 'Was raised by wolves until the age of seven, and has told everyone it was an aunt', stakes: 'They still answer to a howl' }),
   f({ key: 'penFriend', what: 'Has written for years to someone in a far city they have never met, and is in love with the handwriting', stakes: 'The letters have stopped', excludes: ['route: isolated'] }),
   f({ key: 'owesLife', what: 'Owes their life to {target}, and has never found a way to say it', stakes: '{target} has asked them for something they ought to refuse', names: 'other' }),
   f({ key: 'guardian', what: 'Was asked by a dying friend to watch over {target}, and has done it for years without a word', stakes: '{target} thinks they are being followed', names: 'other' }),
-  f({ key: 'promised', what: 'Was promised in marriage as a child to someone they have never met, and the day is coming', stakes: 'The other family keeps its promises', holder: f({ age: 'notOld' }) }),
+  f({ key: 'promised', what: 'Was promised in marriage as a child to someone they have never met, and the day is coming', stakes: 'The other family keeps its promises', holder: f({ age: 'notOld', notHookWords: SPOUSE_WORDS }) }),
   f({ key: 'ghostChild', magic: true, what: 'Is followed by the ghost of a child who is not theirs, and has started leaving out milk', stakes: 'The child has begun to bring things', needs: ['livestock'] }),
   f({ key: 'familiar', magic: true, what: 'Keeps a small creature in the roof that is not an animal, and feeds it secrets', stakes: 'It has been asking for bigger ones' }),
   f({ key: 'seventhChild', magic: true, what: 'Is a seventh child of a seventh child, and things they say in anger come true', stakes: 'They are very careful, and very tired', holder: f({ deniedBy: f(['volatile', 'wrathful']) }) }),
   f({ key: 'shortLived', what: 'Comes of a family in which no one has ever grown old, and has begun to put things in order', stakes: 'They have not told the ones who will be left', holder: f({ age: 'notOld' }) }),
   f({ key: 'oathAgainst', what: 'Belongs to a family sworn, generations back, to end the line of {target}, and is the last who remembers the oath', stakes: 'They like {target}', names: 'other' }),
-  f({ key: 'runaway', what: 'Ran from a marriage on the morning of it, three towns away, and the other family still pays people to look', stakes: 'One of those people has reached this road', excludes: ['route: isolated'] }),
+  f({ key: 'runaway', what: 'Ran from a marriage on the morning of it, three towns away, and the other family still pays people to look', stakes: 'One of those people has come this way', excludes: ['route: isolated'] }),
   f({ key: 'inheritance', what: 'Will inherit a fortune the day a certain old woman dies, and has started visiting her with soup', stakes: 'The old woman is no fool' }),
   f({ key: 'hiddenSpouse', what: 'Is secretly married to {target}, and neither has found the right day to say so', stakes: 'A third person has started courting one of them', names: 'other' }),
   f({ key: 'ward', what: 'Is the secret ward of someone powerful far away, who pays for everything and has never once visited', stakes: 'A visit has been announced' }),
   f({ key: 'debtOfHonour', what: 'Carries a debt of honour to a family they have never met, laid on them by a dying parent', stakes: 'That family has fallen on hard times, and does not know to ask' }),
-  f({ key: 'nameless', what: 'Does not know their true name or where they were born: they were found on the road with a purse and a knife', stakes: 'The knife has a maker\'s mark that someone here knows', holder: f({ not: f(['elder', 'hereditary', 'knownFromBirth']) }) }),
+  f({ key: 'nameless', what: 'Does not know their true name or where they were born: they were found on the road with a purse and a knife', stakes: 'The knife has a maker\'s mark that someone here knows', holder: f({ not: f(['elder', 'hereditary', 'knownFromBirth']), notHookWords: KIN_WORDS }) }),
   f({ key: 'selkie', magic: true, what: 'Has a sealskin hidden in the rafters, and a spouse who must never find it', stakes: 'The roof needs mending', needs: ['coast'] }),
   f({ key: 'grandmother', magic: true, what: 'Had a grandmother who was not a woman, and it has begun to show in the teeth', stakes: 'Someone has started counting them' }),
 ]);
@@ -231,7 +252,7 @@ export const RARE_MASTERS = f([
   f({ key: 'masterHealer', what: 'Was physician to a great house, and treats sprains and fevers here so that no one asks', stakes: 'They left after a death that was never explained, and someone is still looking', needs: ['healer'], holder: f({ age: 'ofYears', roles: f(['healer', 'midwife', 'barber']) }) }),
   f({ key: 'masterCook', what: "Once cooked for a great house's table, and conceals how good they are", stakes: 'One feast would give them away', holder: f({ age: 'ofYears', roles: f(['cook', 'baker', 'innkeeper', 'tavern keeper', 'coaching-inn keeper', 'waystation keeper']) }) }),
   f({ key: 'masterBuilder', what: 'Built siege works for an army, and mends carts and roofs here so that no one asks', stakes: 'The army that lost to those works has not forgotten the builder', holder: f({ age: 'ofYears', roles: f(['carpenter', 'mason', 'wheelwright', 'builder', 'thatcher']) }) }),
-  f({ key: 'masterBlade', what: "Was captain of a great house's guard, and came here so that no one would ask them to fight again", stakes: 'The day the place is threatened, everyone will see what they are', holder: f({ age: 'ofYears', roles: f(['hunter', 'hunt', 'guard', 'watch captain', 'watcher', 'militia captain', 'militia']) }) }),
+  f({ key: 'masterBlade', what: "Was captain of a great house's guard, and keeps a quiet watch here so that no one asks", stakes: 'The day the place is threatened, everyone will see what they are', holder: f({ age: 'ofYears', roles: f(['hunter', 'hunt', 'guard', 'watch captain', 'watcher', 'militia captain', 'militia']) }) }),
   f({ key: 'masterTutor', what: 'Was tutor to a noble heir, and keeps tallies here so that no one asks', stakes: 'The heir, grown, would know them at a glance', holder: f({ age: 'ofYears', roles: f(['scribe', 'clerk', 'teacher']) }) }),
   f({ key: 'masterTailor', what: 'Once dressed a great court, and mends workaday clothes here so that no one asks', stakes: 'A single fine stitch would start the questions', holder: f({ age: 'ofYears', roles: f(['tailor', 'weaver', 'dyer']) }) }),
   f({ key: 'masterTrader', what: 'Once ran a trading house in a great city, and walked away from it', stakes: 'The partners they left behind are still owed an answer', holder: f({ age: 'ofYears', roles: f(['trader', 'pedlar', 'shopkeeper', 'pawnbroker', 'chandler', 'outfitter', 'merchant']) }) }),
@@ -243,7 +264,7 @@ export const RARE_MASTERS = f([
   f({ key: 'masterSinger', what: 'Once sang for courts, and sings for suppers here so that no one asks', stakes: 'There is a song about why they stopped, and someone here knows it', excludes: ['crisis: threat', 'crisis: hunger'], holder: f({ age: 'ofYears', roles: f(['minstrel', 'storyteller', 'musician']) }) }),
   f({ key: 'masterCraft', what: 'Is a master of their craft far beyond this place, and sells plain work here so that no one asks', stakes: 'One fine piece, sold by mistake, would bring buyers and questions', holder: f({ age: 'ofYears', roles: f(['potter', 'carver', 'woodcarver', 'cooper', 'cobbler', 'tanner', 'brickmaker', 'ropemaker', 'glassmaker', 'jeweller', 'bowyer', 'sawyer']) }) }),
   f({ key: 'masterRuler', what: 'Once governed a city, and settles fence disputes here so that no one asks', stakes: 'The city did not let them go willingly', holder: f({ age: 'ofYears', office: f(['head']), roles: f(['elder', 'reeve', 'headman', 'eldest', 'eldest householder', 'household elder']) }) }),
-  f({ key: 'masterThief', what: "Was the best lock-breaker of a great city's guild, and lifts nothing here so that no one asks", stakes: 'The guild believes they are dead, and would correct the error', holder: f({ age: 'ofYears', category: f(['criminal']) }) }),
+  f({ key: 'masterThief', what: "Was the best lock-breaker of a great city's guild, and keeps to small work here so that no one asks", stakes: 'The guild believes they are dead, and would correct the error', holder: f({ age: 'ofYears', category: f(['criminal']), not: f(['criminalHead']) }) }),
   f({ key: 'masterPoisoner', what: "Was a great house's poisoner, and sells simples here so that no one asks", stakes: 'Three deaths at that house were never explained', holder: f({ age: 'ofYears', roles: f(['herbalist', 'apothecary']) }) }),
   // AMENDMENT 1 (2026-11-17). Left out BY NAME (the engine has no such role in a thorp, a hamlet or a village):
   // masterGardener (a gardener or an orchard keeper), masterSexton (a gravedigger or a sexton), masterFool (a juggler, a
