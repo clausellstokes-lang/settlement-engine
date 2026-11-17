@@ -1,0 +1,9 @@
+{
+  "_": "BAR7-AUDIT-H controls (BRIEF-BAR7-AUDIT, seat H) from SECOND-CHECK.final51.json: stands must be FOUND by the named sub-rule family, explained must be clear; held: found, and the seam's seat named holds it",
+  "8f": { "stands": ["C8021", "C40674", "C41826", "C41825", "C33921", "C4828"] },
+  "8g": { "stands": ["C39519"] },
+  "8h": { "stands": ["C2524", "C8842", "C43844"], "explained": ["C37251"] },
+  "8i": { "stands": ["C7539", "C20104", "C20287"], "explained": ["C19589", "C4179"] },
+  "8j": { "stands": ["C44447"] },
+  "8k": { "stands": ["C12508", "C45015"], "explained": ["C37728", "C9756"] }
+}
