@@ -410,7 +410,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:5}}>
           {eco.incomeSources.map((src,i)=>{
-            const isCrim = src.isCriminal; const shownDesc = incomeDescShown(s, src); // TAIL-DISPLAY-ECON-4 (X25.1): the share's mark, the Services tab's form (economicsCrisisMarks.js)
+            const isCrim = src.isCriminal; const shownDesc = incomeDescShown(s, src, ordinaryIncomeLineOf); // TAIL-DISPLAY-ECON-4 (X25.1): the share's mark, the Services tab's form (economicsCrisisMarks.js)
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             // ⛔ AUTHORED TEXT IS NEVER CLAMPED ON THE DOSSIER (owner, ODQ §934.23). The
             // 2026-09-18 car cured the PHONE, where a prose floor inside a clamp showed the
@@ -882,3 +882,4 @@ function flowHeaderCount(chains, services, impairedHouses, town = null) {
 import { factsOf } from '../../../domain/facts/factsOf.js'; import { complexityLabelShown } from '../../../domain/display/labelBands.js'; /* BAR6-ECON (9b.subsistence): the survival label's twin under a purse past survival */ import { chainCardUnderSiege, flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown, serviceCardShown, EXPORT_STOPPED_TAG, incomeShareOfChain, chainOutputsOnCard, exportsEmptyLineShown } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
 import { setsWithMarkedHousesWorse } from '../../../domain/display/crisisStoppedRow.js'; // BAR7-ECON item 2 (8g): the service card reads the leaf's worse state of its house
 import { neededNamesShown } from '../../../domain/display/criticalImportsShown.js'; // BAR7-ECON item 7: one good, once, on the needs line
+import { ordinaryIncomeLineOf } from '../../../generators/economy/incomeLineSiblings.js'; // BAR7-ECON (the second reader's point 1): a short twin under no mark prints the trade's ordinary line

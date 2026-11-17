@@ -173,3 +173,50 @@ any golden-derived file reading `incomeSources[].desc`; the census's counts of t
   conversion) keeps "No significant exports.".
 - Not touched, as the section says: the share cell alone, a chip alone, the shipyard's dependence, `houseInputAtHand.js`,
   8i.surplus and the seam's four houses (held for after BIRTH-1).
+
+## 10. AFTER THE SECOND READER (the chair's message of 2026-11-17, about 06:27 UTC; one commit on 952af9e2e)
+
+The chair accepted the three calls (the cloth houses' own table; CY1 read one layer up; the walker's exempt row). The four
+points, each measured at the tip over the tip's renders (records unchanged by this commit: every change is read at print):
+
+1. **THE SHORT TWINS PRINT ONLY UNDER A MARK.** Counted first: a stored short twin on a share the page leaves UNMARKED (instances):
+
+   | twin | the 720 | the 150 | the 30 |
+   |---|---|---|---|
+   | "Little metal is worked here …" | 43 | 6 | 1 |
+   | "Little cloth is made here …" (the older arm) | 50 | 5 | 1 |
+   | "Little timber is worked here …" | 2 | 0 | 0 |
+
+   After: **0 · 0 · 0** (the twins under a mark stay: 20 · 12 · 3). `economicsCrisisMarks.js :: incomeDescShown(town, src,
+   ordinaryOf)`: where the share takes no mark, the caller's `ordinaryOf` gives the trade's ordinary line; the tab passes
+   `economy/incomeLineSiblings.js :: ordinaryIncomeLineOf` (the texts live in the generator, which `src/domain` may not import:
+   `tests/build/domainGeneratorsBoundary.test.js`, shrink-only). The lines printed in their place, over the 720: "Metal is smelted
+   or worked here." 43, "Cloth is woven or finished here." 50 (no sentence where no weaving or fulling house stands: 0 such),
+   "Local forest provides timber revenue, and the timber is sawn here." 2. NOT EXACTLY THE DRAW'S LINE: the record does not hold
+   the line the draw began from, so this is the family's plain declared twin (it claims no flocks, no managed felling, no trade
+   route). Guard arms: one town on each side for metal and for cloth (bar0-metropolis-calm-rand-42 unmarked;
+   bar0-village-calm-rand-44 and bar0-city-wartime-rand-43 marked), and the tab's own render.
+   **LEFT BY NAME, with what I measured**: in 4 towns of the 720 (r2s-famine-metropolis-1, -3, r2s-plague_onset-city-0, -3) the
+   plain metal line now stands, under a crisis, beside an iron chain card the page prints "Impaired" (its STORED state) that
+   says it feeds the share: the runner's 8f.chain would read them (0 → 4 by my emulation; 0 in the 150 and the 30). There the
+   chain card and the houses disagree on the page itself; the chair's rule makes the share follow its houses, and I kept it.
+2. **ONE GOOD, NEVER TWO.** `neededNamesShown` merges a name into a longer one only by a declared table
+   (`criticalImportsShown.js :: ONE_GOOD_NAMES`); equal names (the bracket read apart) still merge. The pairs it merges over the
+   720 and the 150, all of one good: timber → mountain timber 32 (and "timber (for large vessels)" → mountain timber 3), timber →
+   timber and building wood 1, livestock → livestock for meat and draft 1, "fine glass sand" twice 28. "iron" stays beside "iron
+   ore" (a guard arm), and any undeclared pair is said twice.
+3. **`METAL_WORKED_LINE`'S ANCHOR.** `tests/generators/incomeLinesSayTheRecord.test.js` gains the row
+   `['rr2s-city-wartime-rand-1', LOCAL_ORE_LINE, METAL_WORKED_LINE]` (a smelter and metalworkers, no smithy, on its own iron;
+   its smelting chain vulnerable, not impaired), with a dated note.
+4. **THE TWO SHORT READINGS HELD EQUAL.** A guard arm holds `everyMakerShortHere`'s reading (the fact `housesShortOf`, a house
+   whose dependence holds INPUT) equal to `rowShortOf`, house for house, over ten fixed towns (the guard's and the controls').
+   Over the 720 at the tip the same equality held for every house (0 of 193 fact-short houses differ once the INPUT filter is
+   read: measured before item 5's second commit).
+
+NET (this commit): `typecheck:domain:strict` 1113 of ceiling 1113; `typecheck:ratchet` 167 of 167; eslint on my changed files 0 problems;
+`tests/architecture` 347/347; my guard 12/12; the modified tests green (`incomeLinesSayTheRecord` 9/9 with the new anchor,
+`chainPrintSites.walker`, `resourceLabelSeam.census`, `domainGeneratorsBoundary`); the 106 files near mine: the same 10 files
+and 12 tests red as at the base, same messages; bar5*/bar6*: `bar6ScenesGoods.test.js:170` red at base and tip alike. ALSO
+RED AT BASE, same rows: `tests/lint/proseNumerics.test.js` (three rows moved by a line in `npcComponents.jsx` and
+`SystemStateSnapshot.jsx`, not my files; `EconomicsTab.jsx` stays line-neutral). The doors: the base's last lines, no fresh line.
+No file under `src/domain/facts`: no build owed.

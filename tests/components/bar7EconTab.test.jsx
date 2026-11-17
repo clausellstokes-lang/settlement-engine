@@ -32,7 +32,12 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import * as marks from '../../src/domain/display/economicsCrisisMarks.js';
-import { rowMarkText, SUPPLIED_LINE } from '../../src/domain/display/crisisStoppedRow.js';
+import { rowMarkText, rowShortOf, SUPPLIED_LINE } from '../../src/domain/display/crisisStoppedRow.js';
+import { housesShortOf } from '../../src/domain/facts/houseInputAtHand.js';
+import { houseDependenceOf, INPUT } from '../../src/data/crisisDependence.js';
+import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
+import { CLOTH_SHORT_LINE, CLOTH_WORKED_LINE, METAL_SHORT_LINE, METAL_WORKED_LINE, ordinaryIncomeLineOf } from '../../src/generators/economy/incomeLineSiblings.js';
+import { neededNamesShown } from '../../src/domain/display/criticalImportsShown.js';
 import { exportsAsPrinted, localProductionAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
 import { serviceRowsOf } from '../../src/domain/dossier/entityLinks.js';
@@ -173,5 +178,62 @@ describe('BAR7-ECON item 6 (9h): the empty export column says the crisis that em
       const other = line === 'No significant exports.' ? 'Nothing is sold outward' : 'No significant exports.';
       expect(text.includes(other), `${seed}: the other line`).toBe(false);
     }), 'item 6: every town');
+  }, 600000);
+});
+
+// ── AFTER THE SECOND READER (the chair's message of 2026-11-17, about 06:27 UTC; vetoable by the owner) ──────────────────────
+describe('point (1): a stored short twin prints only under a mark; an unmarked share prints its trade\'s ordinary line', () => {
+  // [seed, share, the stored twin, the line printed]: one town on each side, for metal and for cloth
+  const ROWS = [
+    ['bar0-metropolis-calm-rand-42', 'Iron & Metalwork', METAL_SHORT_LINE, METAL_WORKED_LINE], // unmarked: the smiths at work
+    ['bar0-village-calm-rand-44', 'Iron & Metalwork', METAL_SHORT_LINE, `Short of iron. ${METAL_SHORT_LINE}`], // marked: the twin stays
+    ['bar0-metropolis-calm-rand-42', 'Wool & Textile Trade', CLOTH_SHORT_LINE, CLOTH_WORKED_LINE], // unmarked
+    ['bar0-city-wartime-rand-43', 'Wool & Textile Trade', CLOTH_SHORT_LINE, /^(?:Short of|Curtailed by|Stopped by|Scarce in)[^.]*\. .*Little cloth is made here/], // marked
+  ];
+  test('each town: the record stores the twin; the tab prints the line of its side (the tab\'s own call)', () => {
+    expectNoSeedFailures(collectSeedFailures(ROWS, ([seed, title, twin, printed]) => {
+      const s = town(seed);
+      const src = share(s, title);
+      expect(src?.desc, `${seed}: anchored, the record stores the short twin`).toBe(twin);
+      const shown = marks.incomeDescShown(s, src, ordinaryIncomeLineOf);
+      if (printed instanceof RegExp) expect(shown).toMatch(printed); else expect(shown).toBe(printed);
+    }), 'point (1): every row');
+  }, 600000);
+  test('the tab prints it so: the unmarked metropolis shows no short twin', () => {
+    const { text } = economics(town('bar0-metropolis-calm-rand-42'));
+    expect(text).toContain(METAL_WORKED_LINE);
+    expect(text).not.toContain(METAL_SHORT_LINE);
+  }, 300000);
+});
+
+describe('point (2): one good once on the needs line, never two goods merged', () => {
+  test('the measured pairs merge; two goods do not', () => {
+    expect(neededNamesShown(['timber', 'mountain timber', 'stone'])).toEqual(['mountain timber', 'stone']);
+    expect(neededNamesShown(['fine glass sand', 'fine glass sand'])).toEqual(['fine glass sand']);
+    expect(neededNamesShown(['timber (for large vessels)', 'timber'])).toEqual(['timber (for large vessels)']);
+    expect(neededNamesShown(['iron', 'iron ore'])).toEqual(['iron', 'iron ore']); // two goods
+    expect(neededNamesShown(['salt', 'desert salt'])).toEqual(['salt', 'desert salt']); // no pair declared: both said
+  });
+});
+
+describe('point (4): the lists\' short reading equals the page\'s mark, house for house', () => {
+  // the guard's own towns and the controls' (the 30 and the 150), every live house
+  const SAMPLE = ['bar0-city-under_siege+famine-rand-44', 'bar0-village-calm-rand-42', 'bar0-town-calm-rand-42', 'bar0-town-occupied-rand-43',
+    'bar0-town-occupied-rand-44', 'bar0-metropolis-calm-rand-27', 'bar0-metropolis-calm-rand-39', 'bar0-metropolis-calm-rand-42',
+    'bar0-hamlet-under_siege-rand-44', 'bar0-village-famine-rand-28'];
+  test('`everyMakerShortHere`\'s set (the fact, a house whose dependence holds INPUT) is `rowShortOf`\'s, in every town', () => {
+    let read = 0;
+    expectNoSeedFailures(collectSeedFailures(SAMPLE, (seed) => {
+      const s = town(seed);
+      const fact = housesShortOf(s);
+      for (const h of liveInstitutions(s)) {
+        const name = String(h?.name ?? '');
+        if (!name) continue;
+        read++;
+        const lists = fact.has(name) && houseDependenceOf(h).includes(INPUT);
+        expect(lists, `${seed}: ${name}`).toBe(rowShortOf(s, 'house', /** @type {any} */ (h)) !== null);
+      }
+    }), 'point (4): every town');
+    expect(read, 'anti-vacuity: houses were read').toBeGreaterThan(200);
   }, 600000);
 });

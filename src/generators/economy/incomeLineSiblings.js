@@ -240,6 +240,29 @@ export function trueIncomeDesc(desc, f) {
   }
 }
 
+/**
+ * THE TRADE'S ORDINARY LINE IN PLACE OF A STORED SHORT TWIN (BAR7-ECON after the second reader, the chair's point (1),
+ * 2026-11-17; vetoable by the owner). The three short twins (`CLOTH_SHORT_LINE`, `METAL_SHORT_LINE`, `TIMBER_SHORT_LINE`) are
+ * drawn by the chain's STORED status, so "Little metal is worked here …" stood where the smiths are fed by an import and the page
+ * marks no house. The page reads it at print (`economicsCrisisMarks.js :: incomeDescShown`): a short twin prints only where the
+ * share takes a mark; where it takes none, this gives the trade's ordinary line, a declared twin of the same family that claims
+ * only what the roster holds: "Cloth is woven or finished here." where a weaving or fulling house stands (else no sentence),
+ * "Metal is smelted or worked here." (the twin is drawn only beside a forge house), "Local forest provides timber revenue, and
+ * the timber is sawn here." where a sawmill stands, else "Local forest provides timber revenue.". The record does not hold the
+ * line the draw began from, so this is the family's plain line, not always the exact one (no "managed felling", no flocks, no
+ * trade route: none of them is read here). Pure; no draw. Not a short twin: null.
+ * @param {unknown} desc the stored line @param {{ institutions?: unknown } | null | undefined} town
+ * @returns {string | null}
+ */
+export function ordinaryIncomeLineOf(desc, town) {
+  if (desc !== CLOTH_SHORT_LINE && desc !== METAL_SHORT_LINE && desc !== TIMBER_SHORT_LINE) return null;
+  const roster = (Array.isArray(town?.institutions) ? town.institutions : []).map((i) => String(i?.name ?? '').toLowerCase());
+  const has = (/** @type {RegExp} */ re) => roster.some((n) => re.test(n));
+  if (desc === CLOTH_SHORT_LINE) return has(/weav|fuller/) ? CLOTH_WORKED_LINE : '';
+  if (desc === METAL_SHORT_LINE) return METAL_WORKED_LINE;
+  return has(/sawmill|lumber/) ? TIMBER_SAWN_LINE : TIMBER_PLAIN_LINE;
+}
+
 // ── #93 (UPKEEP-8; the chair's ruling of 2026-11-13, 23:48, a DECLARED MOVE of the income family) ──────────────────
 // Where Agricultural Rents is a small place's ONLY income line and a house of work stands on the roster, one line is
 // added at the branches' own weight for that house's WORK, worded from the trade (never the house's stored name, which a

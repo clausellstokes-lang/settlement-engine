@@ -232,10 +232,16 @@ const SIEGE_CURTAILED = 'under_siege:curtailed';
 /**
  * An income share's description as the tab prints it: the leaf's mark, then the description of ordinary times.
  * @param {object | null | undefined} town @param {{ source?: unknown, desc?: unknown }} src `economicState.incomeSources[]`
+ * @param {((desc: unknown, town: any) => string | null) | null} [ordinaryOf] the trade's ordinary line in place of a stored short twin, or null
  * @returns {string}
  */
-export function incomeDescShown(town, src) {
-  return markedDescription(incomeMarkShown(town, /** @type {Record<string, unknown>} */ (src)), src?.desc);
+export function incomeDescShown(town, src, ordinaryOf = null) {
+  const mark = incomeMarkShown(town, /** @type {Record<string, unknown>} */ (src));
+  // BAR7-ECON after the second reader (the chair's point (1)): a stored short twin prints only under a mark; an unmarked share
+  // prints its trade's ordinary line, given by the caller (`economy/incomeLineSiblings.js :: ordinaryIncomeLineOf`: the texts
+  // live in the generator, which this layer does not import, `tests/build/domainGeneratorsBoundary.test.js`)
+  const ordinary = mark === null && ordinaryOf ? ordinaryOf(src?.desc, town) : null;
+  return markedDescription(mark, ordinary ?? src?.desc);
 }
 
 /**
