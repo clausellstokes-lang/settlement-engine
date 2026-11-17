@@ -97,5 +97,46 @@ institutions and the view model's grounds; no mark or line moves on any tab or o
 5. The PDF's NEARBY RESOURCES prints the proven grounds, unlabelled: r2r-hamlet-8 ("Iron Ore Deposits"), r2r-hamlet-9
    ("Managed Woodland"), r2r-hamlet-12 ("Open Grazing Land").
 
+## LEFT BY NAME
+
+1. **Item 3 · the head line over no short row (LEFT-MARKS's M3).** The chair's message (21:56 UTC): LEFT-MARKS is on the
+   line at f86295196 (POINT 40); build the hunk against the function AS IT IS AT MY BASE, else leave it by name. AT MY
+   BASE 3b06c724b `crisisStoppedRow.js :: ordinaryTimesLine(crises, shortMarked)` reads `shortMarked ? SUPPLIED_LINE :
+   null`: a boolean only. Handed the rows' readings (an array, always truthy) it would print the short sentence over EVERY
+   marked or unmarked chapter, so the hunk cannot go in on my base: LEFT, with the exact hunk. At f86295196 the leaf takes
+   `boolean | ReadonlyArray<unknown>` (line 618: an array counts a row short only where a reading is a short mark, never a
+   venture's), and the Institutions and Services tabs hand their readings (InstitutionsTab.jsx:386, ServicesTab.jsx:160);
+   the Economics tab's `econOrdinaryTimesLine` still hands a BOOLEAN (economicsCrisisMarks.js:303, 306). THE HUNK, for the
+   merge point (`src/pdf/lib/crisisMarksOnPage.js :: ordinaryTimesOnPage`, my file), so each PDF chapter hands what its
+   tab hands:
+
+   ```js
+   export function ordinaryTimesOnPage(settlement, rows, { readings = true } = {}) {
+     const marked = [];
+     /** @type {Array<string | null>} */ const shorts = [];
+     for (const [kind, row] of rows) {
+       const crisis = stoppedOnPage(settlement, kind, row);
+       if (crisis && crisisMarkText(settlement, crisis)) marked.push(crisis);
+       shorts.push(shortOnPage(settlement, kind, row));
+     }
+     // LEFT-MARKS M3: the rows' short readings, as the Services and Institutions tabs hand them (a failed venture's mark is
+     // no short mark); the Economics chapter hands the boolean its tab hands (econOrdinaryTimesLine)
+     return ordinaryTimesLine(marked, readings ? shorts : shorts.some((m) => m !== null));
+   }
+   ```
+   with `src/pdf/sections/EconomicsTrade.jsx`'s call taking `{ readings: false }` (Services.jsx:62 and Institutions.jsx:60
+   unchanged). The probe's count at my tip: the PDF prints the short sentence in 150 towns of the 720 (322 chapters), 27 of
+   the 150, 8 of the thirty; how many of those stand over no short row is read only at the merge (the brief's nine).
+2. **Item 4 · the income share's ordinary line, and L7's twin.** The chair's message: J-INCOME is held; no leaf to copy.
+   95 towns of the 720 (108 shares), 16 of the 150, 3 of the thirty print the stored short twin ("Little metal is worked
+   here while the metal trade is short of what it needs.") where the tab prints the trade's ordinary line ("Metal is
+   smelted or worked here."): r2r-town-8, r2r-town-16, bar0-metropolis-calm-rand-45. The hunk, once the leaf
+   `src/domain/display/incomeOrdinaryLines.js` is copied byte for byte: `EconomicsTrade.jsx`'s row
+   `incomeDescShown(settlement, s, ordinaryIncomeLineOf)` with `import { ordinaryIncomeLineOf } from
+   '../../domain/display/incomeOrdinaryLines.js'` (LEFT-PDF's afb259a34 form). The journal's share prints no description:
+   nothing there.
+3. `src/pdf/lib/chainStateOnPage.js` (not my file): could fold `chainCardUnderSiege` into `chainStateOnPage` and be the
+   one reading; its callers on my list read `chainCardOnPage` instead.
+
 NO NEW WORDS: every line above is a word or a row the tab already prints. DECLARED MOVES: none (no generator, no saved
 field, no stored figure).
