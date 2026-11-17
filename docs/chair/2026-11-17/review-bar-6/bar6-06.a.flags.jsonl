@@ -1,0 +1,5 @@
+{"id":"C16398","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"STATE","why":"Medicinal herbs 'fully exploited', drawing on herb gathering areas; LAND gives foraging/wild foraging areas as absent and lists no such resource","other":"C16228"}
+{"id":"C16611","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"PAIR","why":"Internal Security rated Strong beside text that the law cannot keep the wrongdoer; Law & order Adequate, Criminal opportunity Elevated, smuggling network","other":"C15352"}
+{"id":"C16768","town":"bar0-city-wartime-rand-44","sev":"MED","kind":"PAIR","why":"Radoslav wants to satisfy 'the crown requisition order'; the city-state has 'no higher lord, no external charter' and the council itself signed the order","other":"C15771"}
+{"id":"C17793","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"STATE","why":"calls the legacy of the siege 'a generation old'; PAST puts the siege 58 years ago, two generations back","other":"C17759"}
+{"id":"DONE","lines":2624,"blocks":1,"flags":4}
