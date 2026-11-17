@@ -848,3 +848,10 @@ should be paused or archived by the owner's hand.
   questions, three of them answered AT THE MERGE: the atom against the mark leaf house by house, rule R7 over the
   pools, the laws by name and by message). POINT 45's WHOLE CHECK is asked of the three CHECKS seats when their parts
   of points 43 and 44 are in.
+- **23:48 UTC. ALL FIVE HELD SEATS STILL HAD THEIR TREES AND HAVE PRINTED THEIR WORK INTO THEIR OWN CONVERSATIONS (23:47; nothing staged, nothing changed):**
+  K-POWERS 8 files, 597 lines · K-WATCH 8 files, 468 lines (HEAD 1ceae1ede) · K-PEOPLE 10 files, 691 lines · DESKS-DEF
+  13 files, 906 lines (HEAD f1ca75555; NOT printed and NOT to be committed: a 1057-line diff of
+  `docs/content/wiring-census.json`, scratch output of `node scripts/wiring-census.mjs` left in its tree) · DESKS-ECO 13
+  files, 937 lines (HEAD f1ca75555). Each session's idle clock restarted at 23:47. THE CHAIR HAS NOT READ THE PRINTED
+  WORK AND APPLIES NONE OF IT: the seats commit it themselves if the owner releases them; if a machine is replaced
+  first, the seat (or a successor the owner allows) rebuilds its tree from its own conversation.
