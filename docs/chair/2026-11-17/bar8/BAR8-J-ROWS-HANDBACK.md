@@ -140,7 +140,7 @@ reading of the peat cutter keeps "No peat reaches the peat cutter." while the pr
 the marks still read every house; N4 (owner, public, veil). **FAILS at the base (3 of 6), passes at the tip (6 of 6).**
 
 THE NET (R11, N2), each alone through `scripts/gate-tail.sh`. The base is a shared clone at 0cdedd206 (a `git archive` copy
-of the base without `.git` failed git-reading tests spuriously and is not used for the names); the tip is d99333f54.
+of the base without `.git` failed git-reading tests spuriously and is not used for the names); the tip is d99333f54, every gate run again at 4bb175521 (the constraint's form) with the same results.
 
 | gate | base | tip |
 |---|---|---|
@@ -150,7 +150,7 @@ of the base without `.git` failed git-reading tests spuriously and is not used f
 | `npx vitest run tests/architecture` | 0 | 0 |
 | the rounds' guards (bar5*, bar6*, bar7*) + mine | red: bar6MarksLaw8 "(a) THE ZERO over the census's 720" (17 instances, "r2r-town-45 · 8b.extract · Mine" first), and my guard's 2 by design | red: bar6MarksLaw8 (a), the same message; my guard 5 of 5 |
 | `tests/lint`, by name | 73 failing | 73 failing, the same names; `ledgerCitationIntegrity.test.js` differs only by the checkout's path in its message (both lack a local `review-fixes-2026-07-08` branch) |
-| the 18 tests that read `resourceGapLines` / `housesShortOfInput` / the mark helpers | 138 of 138 | 138 of 138 (3 of them re-keyed, section 4; red at the tip before the re-key) |
+| the 18 tests that read `resourceGapLines` / `housesShortOfInput` / the mark helpers | 138 of 138 | 138 of 138 (3 of them re-keyed, section 4; red at the tip before the re-key); with my guard 144 of 144 |
 | presumption-classes door `--check` | hits 1787 · banked 1938 · fresh 0 · stale 151 · ceiling 1938 | the same |
 | presumed-things door `--check` | fresh 39 · stale 72 · first-register stale 7 · banked 4688 · strips fresh 0 stale 0 banked 107 | the same: no fresh line of mine |
 
