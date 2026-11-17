@@ -1,0 +1,5 @@
+{"id":"C45843","town":"bar0-village-famine-rand-44","sev":"LOW","kind":"PAIR","why":"says the scarcity was engineered (supply route destroyed); crisis says the fishing failed and took the food","other":"C45761"}
+{"id":"C45848","town":"bar0-village-famine-rand-44","sev":"MED","kind":"STATE","why":"one importer brings in ALL the grain; header shows grain grown 44% locally, imports only 29%, Farmland sells grain, and no merchant house or market exists","other":"C46050"}
+{"id":"C46190","town":"bar0-village-famine-rand-44","sev":"LOW","kind":"LACKS","why":"names 'the old families' who once kept the peace; no such party or power in GOVERNMENT, QUARRELS, TENSIONS or PAST; watch: none","other":""}
+{"id":"C46532","town":"bar0-village-famine-rand-44","sev":"LOW","kind":"PAIR","why":"priests and mages share authority and church blesses mages' work; the only mage (Hedge wizard) sits on no power, and acceptance reads Hostile outside the faith's houses","other":"C46264"}
+{"id":"DONE","lines":867,"blocks":1,"flags":4}
