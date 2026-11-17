@@ -1,0 +1,6 @@
+{"id":"C33166","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"PAIR","why":"\"nobody looks hungry\" beside Food Security Pressured (C33181) and Food Pressured in header","other":"C33181"}
+{"id":"C33342","town":"bar0-town-calm-rand-42","sev":"MED","kind":"STATE","why":"one importer brings in \"all the grain\"; FOOD says 74% grown here, 24% brought in; Trade Monopoly is in no tension, quarrel or past","other":""}
+{"id":"C33921","town":"bar0-town-calm-rand-42","sev":"MED","kind":"PAIR","why":"alchemical trade draws customers, but the Alchemist shop (only house making it) is marked Short of its materials, brewing Impaired","other":"C33861"}
+{"id":"C34039","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"PAIR","why":"Alchemical Trade export shown Operational via Alchemist shop, which is marked Short of its materials / Impaired","other":"C33861"}
+{"id":"C34264","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"PAIR","why":"\"no boss, nobody directs it\" vs crime-wave tension: \"The crime wave is coordinated. Someone is directing it\" and a criminal network","other":"C33336"}
+{"id":"DONE","lines":2056,"blocks":1,"flags":5}
