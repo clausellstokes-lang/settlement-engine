@@ -33,8 +33,10 @@ describe('R-AP amended: the fish key\'s lines declare the catch and the water th
   });
   it('dominant: the racks of catch (navigable, fish); the gutting (fish); the salt barrels and their gulls (navigable)', () => {
     const [racks, gutting, barrels] = originals(sense('fish').dominant);
-    expect(needsOf(racks)).toEqual(['trade at work: fish', 'navigable', 'fish']); // BAR4-SCENES-2 (HW1, re-keyed by identity): as above
-    expect(needsOf(gutting)).toEqual(['trade at work: fish', 'fish']);
+    // BAR8-SCENES (2026-11-17, item 3, J's 11b; re-keyed by identity): the racks and the gutting declare the catch TAKEN here, the
+    // fish story's key of the same atom (`trade at work: fish taken here`), in the place of the plain key; the water and the catch as before
+    expect(needsOf(racks)).toEqual(['trade at work: fish taken here', 'navigable', 'fish']); // BAR4-SCENES-2 (HW1, re-keyed by identity): as above
+    expect(needsOf(gutting)).toEqual(['trade at work: fish taken here', 'fish']);
     expect(needsOf(barrels)).toEqual(['trade at work: fish', 'navigable']);
   });
 });
