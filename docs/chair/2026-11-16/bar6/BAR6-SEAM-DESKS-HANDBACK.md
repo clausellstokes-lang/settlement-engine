@@ -16,11 +16,11 @@ Every figure below was read by me, base and tip, in scratch worktrees; every run
 | 5 | CRIME's two fresh lines in `safetyProfile.js` | **DONE** | the build guard's door no longer reads either (fresh 4 → 1, the 1 SEAM-CULTURE's) | `bar6SeamDesks` item 5 (the rule planted) |
 | 6 | the class table | **DONE (legacy ruin by name)** | `court sits` → office, law; `seat held` → office; `seat members` → office; `paid watch` → office, law. `legacy ruin` joins NO class (below). The door reads `fresh 1` at my tip, the one line SEAM-CULTURE cures; `fresh 0` without it | `bar6SeamDesks` item 6 |
 | 7 | the power desk | **DONE** | the council twin says "nobody there"; the merchant guilds' sentence prints only beside a power named Merchant Guilds (CONFIRMED, a guard case; nothing for the close); the travellers' line is declared `no crisis: threat`, with a twin for the threat family | `bar6SeamDesks` item 7 |
-| 8 | the temperament of manner | **DONE** | runF's 10e-temper-manner: **5 → 0** over the 150; **14 → __T720F__** over the 720 | `bar6SeamDesks` item 8 |
+| 8 | the temperament of manner | **DONE** | runF's 10e-temper-manner: **5 → 0** over the 150; **14 → 0** over the 720 | `bar6SeamDesks` item 8 |
 
-RUNNERS (S6): runE's LAW 9 over the 150: 0 counted → 0 (apart 11 → 11); over the 720: 0 → __T720E__ (apart 29 → __T720EA__).
+RUNNERS (S6): runE's LAW 9 over the 150: 0 counted → 0 (apart 11 → 11); over the 720: 0 → 0 (apart 29 → 29).
 runF's LAW 10 over the 150: 44 instances → 39 (10e-temper-manner 5 → 0; 10f-backs-wide 37 and 10g-legacy-answer 2 unchanged, not
-mine); over the 720: 213 → __T720FI__. THE TWO DOORS, last lines (S7):
+mine); over the 720: 213 → 199 (the 14 of 10e-temper-manner and no other). THE TWO DOORS, last lines (S7):
 - `presumption-classes-door --check`: base `hits 1805 · banked 1938 · fresh 4 · stale 137 · ceiling 1938` → tip
   `hits 1802 · banked 1938 · fresh 1 · stale 137 · ceiling 1938` (the fresh one: `src/data/cultureProfiles.js` (resource), "Maize
   and other grain …", SEAM-CULTURE's item 5). The stale rows are the same 137 at base and tip.
@@ -83,6 +83,9 @@ mine); over the 720: 213 → __T720FI__. THE TWO DOORS, last lines (S7):
 - The travellers' line under a threat crisis and its twin print in none of the 150 (the heavy state-crime flag is rare); the
   tavern lines print unchanged.
 EVERY CHANGED LINE OF THE 150: 29 towns' dumps differ, and every differing line is one of the above (no other line moved).
+OVER THE 720: 90 towns' dumps differ, every differing line one of the above kinds but one: on r2s-mass_migration-metropolis-1's
+card whose temperament yields (forthright → prudent) the goal drawn after it moves too ("Wants Finish the work they have been
+given …" → "Wants Stay out of every quarrel …", and the next card's in turn): the draw's knock-on of item 8, on that card.
 
 ## DECLARED MOVES (B5) AND THE 525
 
