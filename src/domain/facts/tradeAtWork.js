@@ -45,15 +45,21 @@
  * THE MARK'S WORST STATE (BAR8-SCENES, BRIEF-BAR8 seat SCENES item 1, 2026-11-17; the chair's ruling BR17: two keys of the
  * existing atom, vetoable by the owner, on the veto list as new vocabulary). The atom read the SHORT mark only, so three
  * scenes printed over a trade the page itself calls stopped or thin:
- *   (a) A HOUSE THE CRISIS STOPS OR IMPAIRS IS NOT AT WORK (`houseAtWork`). The page's mark leaf is read through its own
- *       readings (`display/crisisStoppedRow.js :: rowStoppedBy`, its words `STOPPED_WORD`): a house it marks "Stopped by the
- *       siege." or "Scarce in the famine." does no work; one it marks "Curtailed by …" works what it holds (K's `.mild`
- *       lines, "the clang of iron … carries", stay true there); a house it leaves bare under a siege, every chain of which the
- *       page prints Impaired (`display/chainStateShown.js :: chainStateShown`), does no work ("Stalls sell reagents in
- *       stoppered jars" beside a Wizard's tower whose every reagent chain was Impaired under the siege:
- *       bar0-city-under_siege+famine-rand-47, the seventh read's C5157).
- *   (b) `trade at work: <trade> in full` (`IN_FULL`): the trade is at work AND no house of it carries any mark of the leaf
- *       (`rowMarkText`: no crisis mark, no short mark). The boom scenes declare it ("running day and night", "racks of new
+ *   (a) A HOUSE THE SIEGE IMPAIRS IS NOT AT WORK (`houseAtWork`): under a siege, a house the crisis table declares no
+ *       dependence for (`data/crisisDependence.js :: houseDependenceOf`: the mark leaf can give it no mark, so the chain card
+ *       is its only state) whose every chain the record stores Impaired does no work ("Stalls sell reagents in stoppered
+ *       jars" beside a Wizard's tower whose every reagent chain was Impaired under the siege: bar0-city-under_siege+famine-
+ *       rand-47, the seventh read's C5157). A house the table declares keeps the leaf's reading (its "Curtailed by …" works
+ *       what it holds: K's `.mild` lines stay true). The leaf itself (`display/crisisStoppedRow.js`) is NOT imported here: it
+ *       is a display leaf, and a static edge to it from this lazy home pulls it, `tradeListDisplay.js` and
+ *       `validationOnPage.js` into the eager engine-core and closes a cycle through `factsOf.js`
+ *       (`tests/architecture/engineCoreLazyEdge.test.js`, `factHomesLazy.test.js`, `layerBoundaries.test.js`, measured).
+ *   (b) `trade at work: ironwork in full` (`IN_FULL`): the ironwork at work, no smiths' house short, and the crisis takes none
+ *       of the smiths' iron: the iron is at hand (`ironAtHand.js`: worked here, or brought in past no siege: the leaf's
+ *       "Curtailed by the siege." of a house on an imported input) and the war takes no iron (the iron hook's own predicate
+ *       under a war in force, `warIronHook.js :: warHoldsIron`, as `warReach.js :: warTakesOf` reads it for the leaf's WM1
+ *       "Curtailed by the war."; `warReach.js` itself is not imported: generator-reached, it would ride engine-core and import
+ *       the lazily pinned `crisisKind.js`, measured by `tests/architecture/engineCoreLazyEdge.test.js`). The boom scenes declare it ("running day and night", "racks of new
  *       ironwork … waiting for the carts", "never quite stops", "hangs over everything" printed over smiths every one
  *       "Curtailed by the war."/"… siege.": bar0-city-wartime-rand-45, C7246 and C7242). The mild scenes keep the plain key.
  *   (c) `trade at work: fish taken here` (`FISH_TAKEN_HERE`): a TAKER of fish (`houseKinds.js :: TAKERS`: a landing, a
@@ -74,11 +80,11 @@ import { nativeSemanticName } from '../content/customContentSemanticAuthority.js
 import { housesShortOf } from './houseInputAtHand.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { crisisOf } from './crisisKind.js';
-import { rowMarkText, rowStoppedBy, STOPPED_WORD } from '../display/crisisStoppedRow.js'; // BAR8-SCENES (item 1): the mark's worst state, through the leaf's own readings
-import { chainStateShown } from '../display/chainStateShown.js'; // BAR8-SCENES (item 1): the chain card's state, the page's own word
+import { houseDependenceOf } from '../../data/crisisDependence.js'; // BAR8-SCENES (item 1a): the dependence table's own reader (the lazy table houseInputAtHand.js reads)
+import { ironAtHandOf } from './ironAtHand.js'; // BAR8-SCENES (item 1b): the iron the smiths work, the siege's reading
+import { warHoldsIron } from './warIronHook.js'; // BAR8-SCENES (item 1b): the war's hold on the iron, the iron hook's own predicate (EG1: import-free)
 import { GROUND_YIELD, idOfHouse, sourceStoryOf, usedGroundOf } from './supplyStory.js'; // BAR8-SCENES (item 1c): the fish story
 import { SOURCE_GROUNDS, TAKERS } from './houseKinds.js';
-import { resourceShortageImport } from '../resourceSemantics.js';
 
 /** The arrival picker's house words, by trade (a copy of `ARRIVAL_SENSES[].institutions`, pinned). */
 export const TRADE_HOUSES = Object.freeze({
@@ -221,66 +227,60 @@ function kilnHousesAnswering(houses) {
   return firing.length ? firing : houses;
 }
 
-/** BAR8-SCENES (item 1a): the leaf's words (`STOPPED_WORD`) under which a house does no work; "curtailed" works what it holds. */
-const NO_WORK_WORDS = Object.freeze(['stopped', 'scarce']);
-
 /** @param {unknown} inst @returns {string} */
 const rosterName = (inst) => String(/** @type {{ name?: unknown }} */ (inst)?.name ?? '');
 
 /**
- * BAR8-SCENES (item 1a): IS THIS HOUSE AT WORK? Not marked short (the one fact, `housesShortOf`); not stopped or scarce by the
- * crisis (the leaf's `rowStoppedBy`, its word `STOPPED_WORD`); and, where the leaf leaves it bare under a siege, not a house
- * every chain of which the page prints Impaired (`impairedUnderSiege`).
+ * BAR8-SCENES (item 1a): IS THIS HOUSE AT WORK? Not marked short (the one fact, `housesShortOf`), and not a house the siege
+ * impairs (`impairedUnderSiege`).
  * @param {object} record @param {unknown} house a row of the live roster @param {{ has: (name: string) => boolean }} short the houses marked short (`housesShortOf`)
  * @returns {boolean}
  */
 function houseAtWork(record, house, short) {
-  if (short.has(rosterName(house))) return false;
-  const kind = rowStoppedBy(record, 'house', /** @type {Record<string, unknown>} */ (house));
-  if (kind) return !NO_WORK_WORDS.includes(/** @type {Record<string, string>} */ (STOPPED_WORD)[kind] ?? '');
-  return !impairedUnderSiege(record, house);
+  return !short.has(rosterName(house)) && !impairedUnderSiege(record, house);
 }
 
 /**
- * BAR8-SCENES (item 1a): under a siege, a house that runs at least one chain of the record and every one of them the page's
- * chain card prints Impaired (`chainStateShown`). Outside a siege a chain's Impaired is the trade's own state, not a stop.
+ * BAR8-SCENES (item 1a): under a siege, a house the crisis table declares no dependence for, that runs at least one chain of
+ * the record and every one of them the record stores Impaired (the chain card's own word).
  * @param {object} record @param {unknown} house @returns {boolean}
  */
 function impairedUnderSiege(record, house) {
   if (!crisisOf(record).has('under_siege')) return false;
+  if (houseDependenceOf(/** @type {{ catalogId?: unknown, name?: unknown }} */ (house)).length > 0) return false;
   const name = rosterName(house);
   const chains = arr(/** @type {{ economicState?: { activeChains?: unknown } | null }} */ (record).economicState?.activeChains)
     .filter((c) => !!c && typeof c === 'object' && arr(/** @type {{ processingInstitutions?: unknown }} */ (c).processingInstitutions).includes(name));
-  return chains.length > 0 && chains.every((c) => chainStateShown(c, record) === 'impaired');
+  return chains.length > 0 && chains.every((c) => /** @type {{ status?: unknown }} */ (c).status === 'impaired');
 }
 
-/** BAR8-SCENES (item 1b; BR17): the key's suffix that asks for the trade IN FULL: no house of it carries any mark. */
+/** BAR8-SCENES (item 1b; BR17): the key's suffix that asks for the trade IN FULL (answered for the ironwork). */
 export const IN_FULL = ' in full';
 
 /**
- * BAR8-SCENES (item 1b): the houses of a trade key, as its reading above takes them (a good's makers, a kiln kind's or a
- * trade's houses).
- * @param {object} record @param {string} key @returns {ReadonlyArray<unknown>}
- */
-function housesOfKey(record, key) {
-  const good = Object.prototype.hasOwnProperty.call(GOOD_TRADES, key) ? /** @type {Record<string, { houses: ReadonlyArray<string> }>} */ (GOOD_TRADES)[key] : undefined;
-  const words = good ? good.houses : (/** @type {Record<string, ReadonlyArray<string>>} */ (KILN_KINDS)[key] ?? /** @type {Record<string, ReadonlyArray<string>>} */ (TRADE_HOUSES)[key] ?? []);
-  return liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)).filter((inst) => {
-    const name = String(nativeSemanticName(/** @type {object} */ (inst)) || /** @type {{ name?: unknown }} */ (inst)?.name || '').toLowerCase();
-    return !(good && name.startsWith('access to')) && words.some((w) => atWordStart(w, name));
-  });
-}
-
-/**
- * BAR8-SCENES (item 1b): `trade at work: <key> in full`: the trade at work, and no house of it marked by the leaf
- * (`rowMarkText`: a crisis mark or a short mark) nor impaired under the siege.
+ * BAR8-SCENES (item 1b): `trade at work: ironwork in full` (see the header); unanswered for any other trade.
  * @param {object} record @param {string} key @returns {boolean | undefined}
  */
 function tradeInFullOf(record, key) {
+  if (key !== 'ironwork') return undefined;
   const atWork = tradeAtWorkOf(record, key);
   if (atWork !== true) return atWork;
   const short = housesShortOf(record);
-  return housesOfKey(record, key).every((h) => houseAtWork(record, h, short) && rowMarkText(record, 'house', /** @type {Record<string, unknown>} */ (h)) === null);
+  const smiths = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)).filter((inst) => {
+    const name = String(nativeSemanticName(/** @type {object} */ (inst)) || /** @type {{ name?: unknown }} */ (inst)?.name || '').toLowerCase();
+    return !name.startsWith('access to') && GOOD_TRADES.ironwork.houses.some((w) => atWordStart(w, name));
+  });
+  return smiths.every((h) => !short.has(rosterName(h))) && ironAtHandOf(record) === true && !warTakesIron(record);
+}
+
+/**
+ * BAR8-SCENES (item 1b): the war in force holds the smiths' iron (`warReach.js :: warTakesOf`'s iron, by the same predicate
+ * over the same kept fields). @param {object} record @returns {boolean}
+ */
+function warTakesIron(record) {
+  if (!crisisOf(record).has('wartime')) return false;
+  const v = /** @type {{ economicViability?: { dependencies?: unknown } | null, economicState?: { primaryImports?: unknown } | null }} */ (record);
+  return warHoldsIron(arr(v.economicViability?.dependencies), arr(v.economicState?.primaryImports), 'at war');
 }
 
 /** BAR8-SCENES (item 1c; BR17): the fish story's key: a taker of fish at work on a live ground. */
@@ -305,7 +305,8 @@ function fishTakenHere(record) {
   const short = housesShortOf(record);
   return takers.some((h) => {
     if (!houseAtWork(record, h, short)) return false;
-    const told = sourceStoryOf(story, /** @type {{ name?: unknown, catalogId?: unknown }} */ (h), resourceShortageImport)?.story;
+    // a taker's used-up ground is idle by its kind (`sourceStoryOf`'s TAKERS arm), so no shortage word is ever asked of it
+    const told = sourceStoryOf(story, /** @type {{ name?: unknown, catalogId?: unknown }} */ (h), () => '')?.story;
     return told === 'local' || (told == null && !used);
   });
 }
