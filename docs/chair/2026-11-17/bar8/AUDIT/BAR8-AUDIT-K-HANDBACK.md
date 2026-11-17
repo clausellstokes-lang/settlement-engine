@@ -200,7 +200,18 @@ reading); 12c, 12b, 13a, 13b, 14d, 14h, 15a, a DECLARATION only.
 
 ## 4. THE NET (at the tip, each alone through `sh scripts/gate-tail.sh`)
 
-@@NET@@
+Each alone, `sh scripts/gate-tail.sh <command>`, the gate's own exit read:
+
+- `npm run typecheck:domain:strict`: exit 0 ("no strict-type regressions (1113 errors, ceiling 1113)").
+- `npm run typecheck:ratchet`: exit 0 ("no type regressions (167 error(s), ceiling 167)").
+- `npx eslint` on the six new code files: exit 0.
+- `npx vitest run tests/architecture`: exit 0, 21 files, 347 tests passed.
+- ALL of `tests/lint` at the base (a scratch worktree at e0242a12a, `node_modules` linked from this seat's own `npm ci`) and
+  at the tip, each with `--reporter=json`, compared BY NAME: 3226 tests at each, the same names; 3142 passed, 68 failed,
+  16 skipped AT BOTH; NO TEST'S STATUS DIFFERS between the base and the tip. The 68 are red at the base itself (the any-cast
+  ratchet, the fact-layer walker, the prose wiring census, the writer-reach ratchet and the rest; not this seat's to mend);
+  no new helper of this seat owes a walker a registration that the walkers name (none turned red).
+- The push hook (typecheck, `eslint src/ tests/ scripts/`) passed on each of the three pushes: 0 errors.
 
 ## 5. STATE
 
