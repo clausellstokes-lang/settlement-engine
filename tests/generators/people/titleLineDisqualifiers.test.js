@@ -18,6 +18,8 @@ import { generateSettlementPipeline } from '../../../src/generators/generateSett
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { waterOf } from '../../../src/domain/facts/water.js';
+import { factsOf } from '../../../src/domain/facts/factsOf.js';
+import { declarationAdmits, declarationOf } from '../../../src/domain/facts/factVocabulary.js';
 import { TITLE_LINE_DECLARATIONS, TITLE_PRESENTATIONS, TITLE_SECRETS } from '../../../src/data/people/titleSecretsPresentations.js';
 
 /** @param {string} seed */
@@ -52,7 +54,8 @@ describe('COHERENCE-POWERS-7 · the reviewer\'s towns read no title line their r
     for (const c of s.npcs) {
       for (const [d, text] of [[TITLE_LINE_DECLARATIONS.secret[c.secret?.what], c.secret?.what], [TITLE_LINE_DECLARATIONS.presentation[c.presentation?.impression], c.presentation?.impression]]) {
         if (!d) continue;
-        if ((d.needs || []).some((a) => !water[a])) refused.push(`${c.title}: ${text}`);
+        // LEFT-LINES (L33, 2026-11-17): an atom that is no water's (the brewer's `institution: tavern`) is read by the vocabulary's own rule
+        if ((d.needs || []).some((a) => (a in water ? !water[a] : !declarationAdmits(declarationOf({ needs: [a] }), factsOf(s)).admitted))) refused.push(`${c.title}: ${text}`);
         if (d.topic && text === FOUNDLINGS && s.config.contentBoundaries?.human_trafficking !== true) refused.push(`${c.title}: ${text}`);
       }
     }

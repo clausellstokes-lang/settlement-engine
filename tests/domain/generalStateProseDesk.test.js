@@ -554,7 +554,9 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
       { institutions: stalls, tradeRouteAccess: 'isolated' }, { institutions: stalls, tradeRouteAccess: 'road' },
     ]) {
       // db3ed88c1: the three market pools declare `market`, read off the record's live roster.
-      const record = { institutions: state.institutions, config: { tradeRouteAccess: state.tradeRouteAccess } };
+      // LEFT-LINES (L32, 2026-11-17): ENTREPOT v2's "the town" now declares its size band (v6 its small-place twin), so the
+      // constructed record carries a tier as every born record does; the claim (each market pool yields a sentence) is kept
+      const record = { tier: 'town', institutions: state.institutions, config: { tradeRouteAccess: state.tradeRouteAccess } };
       expectSentence(draw(state, record).market, JSON.stringify(state));
     }
   });
