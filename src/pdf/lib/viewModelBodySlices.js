@@ -28,6 +28,7 @@ import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantag
 import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js';
 import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // TAIL-EXPORTS-PDF batch 1
 import { tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // TAIL-EXPORTS-PDF batch 1
+import { impliedGroundsOnPage } from '../../domain/facts/houseInputAtHand.js'; // LEFT-PDF L19: the grounds the Resources tab reads
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
@@ -369,9 +370,17 @@ export function resourcesSlice(active) {
 
   // Split nearby resources into depleted vs abundant
   const allNearby = ra.nearbyResources || cfg.nearbyResources || [];
-  const depletedSet = new Set(cfg.nearbyResourcesDepleted || []);
-  const depleted  = allNearby.filter(k => depletedSet.has(k));
+  // LEFT-PDF L19 (BRIEF-LEFT, the sixth chair, 2026-11-17; BIRTH-3's P6 item 1; vetoable by the owner): THE LAND LIST
+  // READS WHAT THE RESOURCES TAB READS. The tab reads the grounds the houses prove off the stored record
+  // (`houseInputAtHand.js :: impliedGroundsOnPage`, BIRTH-2's BR4 (b) and BR5): a ground used up joins "Depleted" (and
+  // leaves the grounds of plenty), a ground a house proves there that the record's list does not hold is printed under the
+  // list's own title, never as "Abundant" (`nearbyProven`). The PDF printed the stored lists alone (172 towns of the
+  // census's 720 at e0242a12a). The stored record is untouched.
+  const implied = impliedGroundsOnPage(s);
+  const depletedSet = new Set([...(cfg.nearbyResourcesDepleted || []), ...implied.used]);
+  const depleted  = [...allNearby.filter(k => depletedSet.has(k)), ...[...depletedSet].filter(k => !allNearby.includes(k)).sort()];
   const abundant  = allNearby.filter(k => !depletedSet.has(k));
+  const proven    = [...new Set(implied.there)].filter(k => !allNearby.includes(k)).sort();
 
   return {
     terrain:            ra.terrain || null,
@@ -383,6 +392,7 @@ export function resourcesSlice(active) {
     nearbyResources:    allNearby,
     nearbyDepleted:     depleted,
     nearbyAbundant:     abundant,
+    nearbyProven:       proven,   // LEFT-PDF L19: the grounds the houses prove, printed under no word of plenty
     nearbyCustom:       cfg.nearbyResourcesCustom || [],   // §14 — gold-tint these
     availableCommodities: ra?.availableResources || s?.availableResources || [],
     // resourceAnalysis emits exports/gaps/priorityNotes (resourceGenerator); the

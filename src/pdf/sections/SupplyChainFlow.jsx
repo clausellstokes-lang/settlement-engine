@@ -85,7 +85,7 @@ function ChainRow({ chain, instNames, primaryExports, town }) { const shown = ch
   // web SupplyChainsPanel, or the PDF badge disagrees with the screen when
   // subsumption keeps a different alias spelling as the surviving export.
   const exportIds = new Set((primaryExports || []).map(exactGoodId).filter(Boolean));
-  const outputs = (town ? chainOutputsShown(chain, town) : (chain.outputs || def.outputs || [])).slice(0, 3).map((o) => { // SURFACES-1 item 2: the tab card's outputs (tradeListDisplay.js :: chainOutputsShown)
+  const outputs = (town ? chainOutputsOnCard(chain, town) : (chain.outputs || def.outputs || [])).slice(0, 3).map((o) => { // SURFACES-1 item 2: the tab card's outputs; LEFT-PDF L2 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): by the tab card's own reading (economicsCrisisMarks.js :: chainOutputsOnCard, ruling CY1), not chainOutputsShown beneath it
     const oid = exactGoodId(o);
     return {
       label: o,
@@ -293,7 +293,8 @@ export default SupplyChainFlow;
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { chainStateOnPage } from '../lib/chainStateOnPage.js';
-import { chainOutputsShown, tradeListsAsPrinted, tradeMarkOf } from '../../domain/display/tradeListDisplay.js';
+import { tradeListsAsPrinted, tradeMarkOf } from '../../domain/display/tradeListDisplay.js';
+import { chainOutputsOnCard } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L2: the tab card's outputs
 import { markOnPage } from '../lib/crisisMarksOnPage.js';
 import { swatch } from '../../design/tokens.js'; // TAIL-CLOSE-SRC-1: NO_STATE's three colours, the same hex through the swatch
 
