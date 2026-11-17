@@ -1,0 +1,8 @@
+{"id":"C35191","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"PAIR","why":"guilds 'settle their quarrels among themselves' while TENSIONS has an open guild conflict with non-guild traders","other":"C35195"}
+{"id":"C35481","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"LACKS","why":"town crier proclaims 'royal decrees'; GOVERNMENT lists only Church Council, Religious Authorities, Military/Guard; no crown or royal office","other":""}
+{"id":"C35573","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"imports list prints 'Incense and ritual oil' and 'Incense, ritual oil, and vestment materials': doubled import label","other":""}
+{"id":"C35690","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"STATE","why":"calls Cerroripa 'the village'; HEADER size word is town, population 1530","other":""}
+{"id":"C35954","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"PAIR","why":"gaoler's deal 'a visit or a blanket can be had, if the coin is right' beside his temperament 'incorruptible'","other":"C35948"}
+{"id":"C35966","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"mark 'Short of clay.' set as the potter's 'How they deal' text, in front of a different sentence about selling from the shelves","other":"C35308"}
+{"id":"C35702","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"PAIR","why":"Military/Guard shown as contender for the seat; the Web has it subordinate, stable, enforcing but not making law; QUARRELS none","other":"C35721"}
+{"id":"DONE","lines":1200,"blocks":1,"flags":7}
