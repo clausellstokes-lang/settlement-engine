@@ -1,0 +1,1259 @@
+[
+ {
+  "law": "L11",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "rule": "11a.imported",
+  "tab": "Systems/Economics",
+  "line": "Needed, and not brought in: iron ore, copper ore, gold and silver ore.",
+  "item": "iron ore",
+  "fam": "ironOre",
+  "story": "bought-never",
+  "cause": "siege",
+  "against": {
+   "field": "resourceAnalysis.gaps",
+   "value": "Smelter runs on imported iron ore"
+  },
+  "why": "\"iron ore\" needed and not brought in; the record's own gap row says \"Smelter runs on imported iron ore\"",
+  "rowLines": [
+   "Needed, and not brought in: iron ore, copper ore, gold and silver ore."
+  ],
+  "form": "Needed, and not brought in: iron ore, copper ore, gold and silver ore.",
+  "crises": [
+   "under_siege",
+   "famine"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "rule": "11e.siegeBought",
+  "tab": "Systems/Institutions",
+  "line": "Services · Livery and uniforms",
+  "fam": "wool",
+  "story": "bought-never",
+  "cause": "siege",
+  "kind": "chip",
+  "rowLines": [
+   "Services · Livery and uniforms",
+   "Tailor's guild · Crafts"
+  ],
+  "against": {
+   "field": "economicState.primaryImports",
+   "value": "Wool"
+  },
+  "why": "Tailor's guild bare under a siege; its wool is bought in (Wool) and the siege cuts the imports",
+  "form": "Services · Livery and uniforms",
+  "crises": [
+   "under_siege",
+   "famine"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "rule": "11e.siegeBought",
+  "tab": "Systems/Institutions",
+  "line": "Services · Coin production",
+  "fam": "precious",
+  "story": "bought-used",
+  "cause": "siege",
+  "kind": "chip",
+  "rowLines": [
+   "Services · Coin production",
+   "Mint (official) · Economy"
+  ],
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Law enforcement, patrol and investigation here depend on iron from outside, which the siege has cut off."
+  },
+  "why": "Mint (official) bare under a siege; its precious is bought in (its veins exhausted) and the page says the siege cuts it off",
+  "form": "Services · Coin production",
+  "crises": [
+   "under_siege",
+   "famine"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "rule": "11b.landOffers",
+  "tab": "Systems/Resources",
+  "line": "✓ Agriculture✓ Milling✓ River trade",
+  "sentence": "✓Agriculture",
+  "fam": "grain",
+  "story": "bought-used",
+  "cause": "siege",
+  "kind": "tick",
+  "against": {
+   "field": "config.nearbyResourcesDepleted",
+   "value": "fertile_floodplain"
+  },
+  "why": "\"✓ Agriculture\" where every ground of grain is used up (fertile_floodplain)",
+  "rowLines": [
+   "✓ Agriculture✓ Milling✓ River trade"
+  ],
+  "form": "✓Agriculture",
+  "crises": [
+   "under_siege",
+   "famine"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "rule": "11e.siegeBought",
+  "tab": "Systems/Institutions",
+  "line": "Services · Dyed cloth",
+  "fam": "wool",
+  "story": "bought-never",
+  "cause": "siege",
+  "kind": "chip",
+  "rowLines": [
+   "Services · Dyed cloth",
+   "Dyer · Crafts"
+  ],
+  "against": {
+   "field": "economicState.primaryImports",
+   "value": "Wool"
+  },
+  "why": "Dyer bare under a siege; its wool is bought in (Wool) and the siege cuts the imports",
+  "form": "Services · Dyed cloth",
+  "crises": [
+   "under_siege",
+   "famine"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "rule": "11e.siegeBought",
+  "tab": "Systems/Institutions",
+  "line": "Services · Livery and uniforms",
+  "fam": "wool",
+  "story": "bought-never",
+  "cause": "siege",
+  "kind": "chip",
+  "rowLines": [
+   "Services · Livery and uniforms",
+   "Tailor's guild · Crafts"
+  ],
+  "against": {
+   "field": "economicState.primaryImports",
+   "value": "Wool"
+  },
+  "why": "Tailor's guild bare under a siege; its wool is bought in (Wool) and the siege cuts the imports",
+  "form": "Services · Livery and uniforms",
+  "crises": [
+   "under_siege",
+   "famine"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "rule": "11e.stalls",
+  "tab": "Summary/Overview",
+  "line": "Vedatala has drawn in on itself. Every family from the outlying fields is sleeping under a neighbour's roof, the livestock are penned between the houses, and someone is always watching the treeline. Stalls sell reagents in stoppered jars, and the buyers know exactly what they want. People draw water in an order nobody needs to explain.",
+  "sentence": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.",
+  "fam": "reagents",
+  "story": "siege",
+  "cause": "siege",
+  "kind": "scene",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Alchemy & Reagents · Arcane & magical · Impaired"
+  },
+  "why": "stalls sell a good whose only chain is Impaired under the siege, and no unmarked house makes it",
+  "rowLines": [
+   "Vedatala has drawn in on itself. Every family from the outlying fields is sleeping under a neighbour's roof, the livestock are penned between the houses, and someone is always watching the treeline. Stalls sell reagents in stoppered jars, and the buyers know exactly what they want. People draw water in an order nobody needs to explain."
+  ],
+  "form": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.",
+  "crises": [
+   "under_siege",
+   "famine"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-wartime-rand-45",
+  "rule": "11e.wantBuy",
+  "tab": "World/NPCs",
+  "line": "Wants Buy stone and iron and grain at the market in bulk this season, while the price is still fair.",
+  "good": "stone",
+  "fam": "stone",
+  "story": "none",
+  "cause": "calm",
+  "kind": "person.wants",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed, and not brought in: stone, copper ore, gold and silver ore."
+  },
+  "why": "presumes a supply of \"stone\"; the page says \"stone\" is needed and not brought in",
+  "rowLines": [
+   "Wants Buy stone and iron and grain at the market in bulk this season, while the price is still fair."
+  ],
+  "form": "Wants Buy stone and iron and grain at the market in bulk this season, while the price is still fair.",
+  "crises": [
+   "wartime"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-wartime-rand-47",
+  "rule": "11b.fishTitle",
+  "tab": "Systems/Institutions",
+  "line": "Services · Fresh fish retail",
+  "sentence": "Services · Fresh fish retail",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "chip",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"Fresh fish retail\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Services · Fresh fish retail"
+  ],
+  "form": "Services · Fresh fish retail",
+  "crises": [
+   "wartime"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-wartime-rand-47",
+  "rule": "11b.fishTitle",
+  "tab": "Systems/Services",
+  "line": "Fresh fish retail",
+  "sentence": "Fresh fish retail",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "service",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"Fresh fish retail\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fresh fish retail"
+  ],
+  "form": "Fresh fish retail",
+  "crises": [
+   "wartime"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-wartime-rand-47",
+  "rule": "11b.fish",
+  "tab": "Systems/Services",
+  "line": "Fish sold daily from the morning catch. Selection varies by season.",
+  "sentence": "Fish sold daily from the morning catch.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "service",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"morning catch\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fish sold daily from the morning catch. Selection varies by season."
+  ],
+  "form": "Fish sold daily from the morning catch.",
+  "crises": [
+   "wartime"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-wartime-rand-47",
+  "rule": "11b.fish",
+  "tab": "Systems/Economics",
+  "line": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "sentence": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "income",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"keep the catch coming\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here."
+  ],
+  "form": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "crises": [
+   "wartime"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-wartime-rand-47",
+  "rule": "11c.needed",
+  "tab": "Systems/Economics",
+  "line": "Yaxchco's biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Nobody at Yaxchco names its biggest trade aloud, because naming it would get someone hurt. Faith carries real weight at Yaxchco: what the religious houses say is heard in the city's dealings, whatever their own share of its money. A good part of the copper ore Yaxchco's work uses must come from elsewhere; when none comes, that work stands idle.",
+  "fam": "copper ore",
+  "story": "needed",
+  "cause": "needed",
+  "kind": "economics",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed, and not brought in: stone (for major construction), copper ore."
+  },
+  "why": "\"copper ore\" said to come from elsewhere, where the page says \"copper ore\" is needed and not brought in and no import names it",
+  "rowLines": [
+   "Yaxchco's biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Nobody at Yaxchco names its biggest trade aloud, because naming it would get someone hurt. Faith carries real weight at Yaxchco: what the religious houses say is heard in the city's dealings, whatever their own share of its money. A good part of the copper ore Yaxchco's work uses must come from elsewhere; when none comes, that work stands idle."
+  ],
+  "form": "<name>'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Nobody at <name> names its biggest trade aloud, because naming it would get someone hurt. Faith carries real weight at <name>: what the religious houses say is heard in the city's dealings, whatever their own share of its money. A good part of the copper ore <name>'s work uses must come from elsewhere; when none comes, that work stands idle.",
+  "crises": [
+   "wartime"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-hamlet-under_siege-rand-45",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "venture",
+  "cause": "venture",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry stands abandoned, a venture of an earlier time: no stone lies near and none is brought in."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry stands abandoned, a venture of an earlier time: no stone lies near and none is brought in."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry stands abandoned, a venture of an earlier time: no stone lies near and none is brought in.\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
+  "crises": [
+   "under_siege"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-45",
+  "rule": "11b.fish",
+  "tab": "Summary/Overview",
+  "line": "Gantulgaabad has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door. A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here. Half of Gantulgaabad seems to be gutting, salting or selling fish. Felt tents stand beside the houses, and their owners seem at home in either. Even the outbuildings have new roofs, and nobody looks hungry.",
+  "sentence": "Half of Gantulgaabad seems to be gutting, salting or selling fish.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "scene",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"gutting\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Gantulgaabad has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door. A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here. Half of Gantulgaabad seems to be gutting, salting or selling fish. Felt tents stand beside the houses, and their owners seem at home in either. Even the outbuildings have new roofs, and nobody looks hungry."
+  ],
+  "form": "Half of <name> seems to be gutting, salting or selling fish.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-45",
+  "rule": "11b.fishTitle",
+  "tab": "Systems/Services",
+  "line": "Fresh fish retail",
+  "sentence": "Fresh fish retail",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "service",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"Fresh fish retail\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fresh fish retail"
+  ],
+  "form": "Fresh fish retail",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-45",
+  "rule": "11b.fish",
+  "tab": "Systems/Services",
+  "line": "Fish sold daily from the morning catch. Selection varies by season.",
+  "sentence": "Fish sold daily from the morning catch.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "service",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"morning catch\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fish sold daily from the morning catch. Selection varies by season."
+  ],
+  "form": "Fish sold daily from the morning catch.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-45",
+  "rule": "11b.fish",
+  "tab": "Systems/Economics",
+  "line": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "sentence": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "income",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"keep the catch coming\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here."
+  ],
+  "form": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-45",
+  "rule": "11b.fish",
+  "tab": "World/NPCs",
+  "line": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "sentence": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "person.how",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"the boats, the catch\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news."
+  ],
+  "form": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-46",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-47",
+  "rule": "11b.ironOre",
+  "tab": "Systems/Institutions",
+  "line": "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses.",
+  "sentence": "The industrial step from what the mine yields to what the smith uses.",
+  "fam": "ironOre",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "card",
+  "against": {
+   "field": "story",
+   "value": "bought-used: iron_deposits (spent) · Iron ore (local iron mines exhausted) · Smelter runs on imported iron ore"
+  },
+  "why": "\"the mine yields\": ironOre taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses."
+  ],
+  "form": "The industrial step from what the mine yields to what the smith uses.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-47",
+  "rule": "11c.noImport",
+  "tab": "Systems/Institutions",
+  "line": "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "sentence": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "fam": "fish",
+  "story": "none",
+  "cause": "none",
+  "kind": "card",
+  "against": {
+   "field": "economicState.primaryImports",
+   "value": "no import names it"
+  },
+  "why": "fish brought in by cart or road, where the imports name none and the story is none",
+  "rowLines": [
+   "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot."
+  ],
+  "form": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-47",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-47",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No iron ore reaches the mine.",
+  "fam": "iron ore",
+  "house": "mine",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "mine",
+  "rowLines": [
+   "No iron ore reaches the mine.",
+   "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  },
+  "why": "\"No iron ore reaches the mine.\" beside \"The mine is worked out: its own ground is depleted (Iron ore deposits).\": one house, one material, two lines",
+  "form": "No iron ore reaches the mine.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-45",
+  "rule": "11e.offer",
+  "tab": "Systems/Institutions",
+  "line": "Regional merchants. Luxury goods available.",
+  "sentence": "Luxury goods available.",
+  "good": "luxury goods",
+  "fam": "luxury",
+  "story": "needed",
+  "cause": "calm",
+  "kind": "card",
+  "rowLines": [
+   "Regional merchants. Luxury goods available.",
+   "Luxury goods available."
+  ],
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed, and not brought in: stone (for major construction), luxury goods."
+  },
+  "why": "Annual fair offers \"Luxury goods available.\" beside \"luxury goods\" needed and not brought in",
+  "form": "Luxury goods available.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-46",
+  "rule": "11a.atWork",
+  "tab": "Systems/Economics",
+  "line": "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs.",
+  "item": "livestock for meat and draft",
+  "fam": "livestock",
+  "story": "none",
+  "cause": "calm",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Butchers · Crafts · Vulnerable",
+   "house": "Butchers (3-8)"
+  },
+  "why": "\"livestock for meat and draft\" needed and not brought in; Butchers (3-8) works it and its card carries no mark",
+  "rowLines": [
+   "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs."
+  ],
+  "form": "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-46",
+  "rule": "11c.venture",
+  "tab": "Systems/Economics",
+  "line": "Ask what Drumbeck lives on and you will hear more than one trade named. A good part of the clay Drumbeck's work uses must come from elsewhere; when none comes, that work stands idle.",
+  "fam": "clay",
+  "story": "venture",
+  "cause": "venture",
+  "kind": "economics",
+  "against": {
+   "field": "the failed venture",
+   "value": "Potter"
+  },
+  "why": "\"clay\" said to come from elsewhere, where Potter is a failed venture: none is brought in",
+  "rowLines": [
+   "Ask what Drumbeck lives on and you will hear more than one trade named. A good part of the clay Drumbeck's work uses must come from elsewhere; when none comes, that work stands idle."
+  ],
+  "form": "Ask what <name> lives on and you will hear more than one trade named. A good part of the clay <name>'s work uses must come from elsewhere; when none comes, that work stands idle.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-46",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No clay reaches the potter.",
+  "fam": "clay",
+  "house": "potter",
+  "story": "venture",
+  "cause": "venture",
+  "kind": "potter",
+  "rowLines": [
+   "No clay reaches the potter.",
+   "The potter is failing: no clay lies near and none is brought in."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The potter is failing: no clay lies near and none is brought in."
+  },
+  "why": "\"No clay reaches the potter.\" beside \"The potter is failing: no clay lies near and none is brought in.\": one house, one material, two lines",
+  "form": "No clay reaches the potter.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-46",
+  "rule": "11e.wantBuy",
+  "tab": "World/NPCs",
+  "line": "Wants Lay in a season of livestock and game at the butchers while it can still be had.",
+  "good": "livestock",
+  "fam": "livestock",
+  "story": "none",
+  "cause": "calm",
+  "kind": "person.wants",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs."
+  },
+  "why": "presumes a supply of \"livestock\"; the page says \"livestock for meat and draft\" is needed and not brought in",
+  "rowLines": [
+   "Wants Lay in a season of livestock and game at the butchers while it can still be had."
+  ],
+  "form": "Wants Lay in a season of livestock and game at the butchers while it can still be had.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-46",
+  "rule": "11e.offer",
+  "tab": "Systems/Institutions",
+  "line": "Services · Livestock auction · Seasonal trading · Entertainment",
+  "sentence": "Livestock auction",
+  "good": "livestock for meat and draft",
+  "fam": "livestock",
+  "story": "needed",
+  "cause": "calm",
+  "kind": "chip",
+  "rowLines": [
+   "Services · Livestock auction · Seasonal trading · Entertainment",
+   "Livestock auction"
+  ],
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs."
+  },
+  "why": "Annual fair offers \"Livestock auction\" beside \"livestock for meat and draft\" needed and not brought in",
+  "form": "Livestock auction",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-47",
+  "rule": "11c.noImport",
+  "tab": "Systems/Institutions",
+  "line": "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "sentence": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "fam": "fish",
+  "story": "none",
+  "cause": "none",
+  "kind": "card",
+  "against": {
+   "field": "economicState.primaryImports",
+   "value": "no import names it"
+  },
+  "why": "fish brought in by cart or road, where the imports name none and the story is none",
+  "rowLines": [
+   "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot."
+  ],
+  "form": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-47",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-45",
+  "rule": "11b.fish",
+  "tab": "Summary/Overview",
+  "line": "Agiichorio's notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door that matters, which is how you learn the occupation intends to stay. Racks of drying fish line the way in, and the smell of salt and catch is everywhere. A patron stands drinks for the whole room, and makes sure everyone knows who is paying.",
+  "sentence": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "scene",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"Racks of drying fish\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Agiichorio's notices are posted in two languages now, the local one second. The new lettering is neat, official, and on every door that matters, which is how you learn the occupation intends to stay. Racks of drying fish line the way in, and the smell of salt and catch is everywhere. A patron stands drinks for the whole room, and makes sure everyone knows who is paying."
+  ],
+  "form": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-45",
+  "rule": "11b.fishTitle",
+  "tab": "Systems/Institutions",
+  "line": "Services · Fresh fish retail",
+  "sentence": "Services · Fresh fish retail",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "chip",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"Fresh fish retail\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Services · Fresh fish retail"
+  ],
+  "form": "Services · Fresh fish retail",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-45",
+  "rule": "11b.fishTitle",
+  "tab": "Systems/Services",
+  "line": "Fresh fish retail",
+  "sentence": "Fresh fish retail",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "service",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"Fresh fish retail\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fresh fish retail"
+  ],
+  "form": "Fresh fish retail",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-45",
+  "rule": "11b.fish",
+  "tab": "Systems/Services",
+  "line": "Fish sold daily from the morning catch. Selection varies by season.",
+  "sentence": "Fish sold daily from the morning catch.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "service",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"morning catch\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fish sold daily from the morning catch. Selection varies by season."
+  ],
+  "form": "Fish sold daily from the morning catch.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-45",
+  "rule": "11b.fish",
+  "tab": "World/NPCs",
+  "line": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "sentence": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "person.how",
+  "against": {
+   "field": "story",
+   "value": "bought-used: river_fish (spent) · Salted fish (local river fishery exhausted)"
+  },
+  "why": "\"the boats, the catch\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news."
+  ],
+  "form": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-46",
+  "rule": "11d.warIron",
+  "tab": "Summary/Overview",
+  "line": "Strangers in foreign colours stand about in the middle of Ulaanabad, and the locals walk around them as if they were furniture nobody wanted. The forges of Ulaanabad are quiet more often than not, for want of iron. Guests are greeted with a cup before a word of business is spoken.",
+  "fam": "ironOre",
+  "story": "bought-used",
+  "cause": "warHook",
+  "kind": "scene",
+  "what": "for want of iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Clay and raw materials · Composite bow materials · Fine horses and tack · Grain · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Salt"
+  },
+  "why": "\"for want of iron\" in a town no war is in force in (occupied), where the imports print \"Iron ore (local iron mines exhausted)\"",
+  "rowLines": [
+   "Strangers in foreign colours stand about in the middle of Ulaanabad, and the locals walk around them as if they were furniture nobody wanted. The forges of Ulaanabad are quiet more often than not, for want of iron. Guests are greeted with a cup before a word of business is spoken."
+  ],
+  "form": "Strangers in foreign colours stand about in the middle of <name>, and the locals walk around them as if they were furniture nobody wanted. The forges of <name> are quiet more often than not, for want of iron. Guests are greeted with a cup before a word of business is spoken.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-46",
+  "rule": "11d.warIron",
+  "tab": "Summary/Plot Hooks",
+  "line": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.",
+  "fam": "ironOre",
+  "story": "bought-used",
+  "cause": "warHook",
+  "kind": "hook",
+  "what": "War has taken the iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Clay and raw materials · Composite bow materials · Fine horses and tack · Grain · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Salt"
+  },
+  "why": "\"War has taken the iron\" in a town no war is in force in (occupied), where the imports print \"Iron ore (local iron mines exhausted)\"",
+  "rowLines": [
+   "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain."
+  ],
+  "form": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-46",
+  "rule": "11d.warIron",
+  "tab": "Systems/Services",
+  "line": "Short of iron. Essential service for any settlement with working horses. Routine maintenance.",
+  "fam": "ironOre",
+  "story": "bought-used",
+  "cause": "warHook",
+  "kind": "service",
+  "what": "Short of iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Clay and raw materials · Composite bow materials · Fine horses and tack · Grain · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Salt"
+  },
+  "why": "\"Short of iron\" in a town no war is in force in (occupied), where the imports print \"Iron ore (local iron mines exhausted)\"",
+  "rowLines": [
+   "Short of iron. Essential service for any settlement with working horses. Routine maintenance."
+  ],
+  "form": "Short of iron. Essential service for any settlement with working horses. Routine maintenance.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-46",
+  "rule": "11d.warIron",
+  "tab": "Systems/Services",
+  "line": "Short of iron. Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new.",
+  "fam": "ironOre",
+  "story": "bought-used",
+  "cause": "warHook",
+  "kind": "service",
+  "what": "Short of iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Clay and raw materials · Composite bow materials · Fine horses and tack · Grain · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Salt"
+  },
+  "why": "\"Short of iron\" in a town no war is in force in (occupied), where the imports print \"Iron ore (local iron mines exhausted)\"",
+  "rowLines": [
+   "Short of iron. Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new."
+  ],
+  "form": "Short of iron. Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-46",
+  "rule": "11d.warIron",
+  "tab": "Systems/Services",
+  "line": "Short of iron. Axes, ploughs, hinges, nails. The foundation of agricultural and construction work.",
+  "fam": "ironOre",
+  "story": "bought-used",
+  "cause": "warHook",
+  "kind": "service",
+  "what": "Short of iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Clay and raw materials · Composite bow materials · Fine horses and tack · Grain · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Salt"
+  },
+  "why": "\"Short of iron\" in a town no war is in force in (occupied), where the imports print \"Iron ore (local iron mines exhausted)\"",
+  "rowLines": [
+   "Short of iron. Axes, ploughs, hinges, nails. The foundation of agricultural and construction work."
+  ],
+  "form": "Short of iron. Axes, ploughs, hinges, nails. The foundation of agricultural and construction work.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-46",
+  "rule": "11d.warIron",
+  "tab": "Systems/Economics",
+  "line": "Iron & Metalwork Short of iron. Little metal is worked here while the metal trade is short of what it needs.",
+  "fam": "ironOre",
+  "story": "bought-used",
+  "cause": "warHook",
+  "kind": "income",
+  "what": "Short of iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Clay and raw materials · Composite bow materials · Fine horses and tack · Grain · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Salt"
+  },
+  "why": "\"Short of iron\" in a town no war is in force in (occupied), where the imports print \"Iron ore (local iron mines exhausted)\"",
+  "rowLines": [
+   "Iron & Metalwork Short of iron. Little metal is worked here while the metal trade is short of what it needs."
+  ],
+  "form": "Iron & Metalwork Short of iron. Little metal is worked here while the metal trade is short of what it needs.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-46",
+  "rule": "11d.warIron",
+  "tab": "World/NPCs",
+  "line": "Short of iron.",
+  "fam": "ironOre",
+  "story": "bought-used",
+  "cause": "warHook",
+  "kind": "person",
+  "what": "Short of iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Clay and raw materials · Composite bow materials · Fine horses and tack · Grain · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Salt"
+  },
+  "why": "\"Short of iron\" in a town no war is in force in (occupied), where the imports print \"Iron ore (local iron mines exhausted)\"",
+  "rowLines": [
+   "Short of iron."
+  ],
+  "form": "Short of iron.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-occupied-rand-47",
+  "rule": "11c.noImport",
+  "tab": "Systems/Institutions",
+  "line": "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "sentence": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "fam": "fish",
+  "story": "none",
+  "cause": "none",
+  "kind": "card",
+  "against": {
+   "field": "economicState.primaryImports",
+   "value": "no import names it"
+  },
+  "why": "fish brought in by cart or road, where the imports name none and the story is none",
+  "rowLines": [
+   "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot."
+  ],
+  "form": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "crises": [
+   "occupied"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-46",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No iron ore reaches the mine.",
+  "fam": "iron ore",
+  "house": "mine",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "mine",
+  "rowLines": [
+   "No iron ore reaches the mine.",
+   "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  },
+  "why": "\"No iron ore reaches the mine.\" beside \"The mine is worked out: its own ground is depleted (Iron ore deposits).\": one house, one material, two lines",
+  "form": "No iron ore reaches the mine.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-47",
+  "rule": "11a.imported",
+  "tab": "Systems/Economics",
+  "line": "Needed, and not brought in: livestock.",
+  "item": "livestock",
+  "fam": "livestock",
+  "story": "bought-never",
+  "cause": "bought",
+  "against": {
+   "field": "resourceAnalysis.gaps",
+   "value": "Tannery runs on imported livestock"
+  },
+  "why": "\"livestock\" needed and not brought in; the record's own gap row says \"Tannery runs on imported livestock\"",
+  "rowLines": [
+   "Needed, and not brought in: livestock."
+  ],
+  "form": "Needed, and not brought in: livestock.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-47",
+  "rule": "11b.fish",
+  "tab": "Systems/Institutions",
+  "line": "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.",
+  "sentence": "Where the day's catch is sold, from an open stall or a small covered market.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "card",
+  "against": {
+   "field": "story",
+   "value": "bought-used: fishing_grounds (spent) · Salted fish (local sea fisheries exhausted)"
+  },
+  "why": "\"the day's catch\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait."
+  ],
+  "form": "Where the day's catch is sold, from an open stall or a small covered market.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-47",
+  "rule": "11b.fishTitle",
+  "tab": "Systems/Institutions",
+  "line": "Services · Fresh fish retail",
+  "sentence": "Services · Fresh fish retail",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "chip",
+  "against": {
+   "field": "story",
+   "value": "bought-used: fishing_grounds (spent) · Salted fish (local sea fisheries exhausted)"
+  },
+  "why": "\"Fresh fish retail\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Services · Fresh fish retail"
+  ],
+  "form": "Services · Fresh fish retail",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-47",
+  "rule": "11b.fishTitle",
+  "tab": "Systems/Services",
+  "line": "Fresh fish retail",
+  "sentence": "Fresh fish retail",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "service",
+  "against": {
+   "field": "story",
+   "value": "bought-used: fishing_grounds (spent) · Salted fish (local sea fisheries exhausted)"
+  },
+  "why": "\"Fresh fish retail\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fresh fish retail"
+  ],
+  "form": "Fresh fish retail",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-47",
+  "rule": "11b.fish",
+  "tab": "Systems/Services",
+  "line": "Fish sold daily from the morning catch. Selection varies by season.",
+  "sentence": "Fish sold daily from the morning catch.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "service",
+  "against": {
+   "field": "story",
+   "value": "bought-used: fishing_grounds (spent) · Salted fish (local sea fisheries exhausted)"
+  },
+  "why": "\"morning catch\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fish sold daily from the morning catch. Selection varies by season."
+  ],
+  "form": "Fish sold daily from the morning catch.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-47",
+  "rule": "11b.fish",
+  "tab": "Systems/Economics",
+  "line": "Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "sentence": "Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "income",
+  "against": {
+   "field": "story",
+   "value": "bought-used: fishing_grounds (spent) · Salted fish (local sea fisheries exhausted)"
+  },
+  "why": "\"keep the catch coming\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here."
+  ],
+  "form": "Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-47",
+  "rule": "11b.fish",
+  "tab": "World/NPCs",
+  "line": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "sentence": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "fam": "fish",
+  "story": "bought-used",
+  "cause": "bought",
+  "kind": "person.how",
+  "against": {
+   "field": "story",
+   "value": "bought-used: fishing_grounds (spent) · Salted fish (local sea fisheries exhausted)"
+  },
+  "why": "\"the boats, the catch\": fish taken here, where the record's story is bought-used",
+  "rowLines": [
+   "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news."
+  ],
+  "form": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-47",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No fish reaches the fisher's landing.",
+  "fam": "fish",
+  "house": "fisher's landing",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "fisher's landing",
+  "rowLines": [
+   "No fish reaches the fisher's landing.",
+   "The fisher's landing is worked out: its own ground is depleted (Fishing grounds)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The fisher's landing is worked out: its own ground is depleted (Fishing grounds)."
+  },
+  "why": "\"No fish reaches the fisher's landing.\" beside \"The fisher's landing is worked out: its own ground is depleted (Fishing grounds).\": one house, one material, two lines",
+  "form": "No fish reaches the fisher's landing.",
+  "crises": []
+ }
+]
