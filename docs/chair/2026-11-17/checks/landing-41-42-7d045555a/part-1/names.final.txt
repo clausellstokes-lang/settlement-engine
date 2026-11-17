@@ -1,0 +1,33 @@
+tests/components/bar2ServicesRows.test.jsx :: BAR2-SERVICES batch 1: a service row carries its house's mark; four rows reworded or renamed true SV1 MARKED: each row prints with its house's mark before it
+tests/components/phoneChromeFloor.census.test.js :: THE PHONE CHROME FLOOR — a census of the source, on every route the router declares each surface matches its registry row, and an owned surface may only shrink
+tests/data/tailHouses1Gaps.test.js :: TAIL-HOUSES batch 1: a house is not described at work on an input that never reaches it the house whose input is missing prints the rewording, not the old text
+tests/domain/composeStateProse.test.js :: the composer — the corpus loads, and the merge is legal every block lives in exactly one leaf, and the sweep found the whole corpus
+tests/domain/composeStateProse.test.js :: ⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the composer's own rule the seedless corpus reads canonical-at-zero the way the gallery import does
+tests/domain/composeStateProse.test.js :: ⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the composer's own rule ⭐ THE CELL ARM CAN NOW TELL `vid` FROM `index`: the blind spot closed at car 8a-1
+tests/domain/composeStateProse.test.js :: ⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves nothing is byte-identical to `readStateProse` on all 708 pools, both faces, six seeds
+tests/domain/display/needMetUnderAnotherName.test.js :: a need an import meets under another name is not a need left unmet (item 4(b)) the leaf on the census's towns: r2r-city-0's luxury goods are met; r2r-town-17's mountain timber is not
+tests/domain/worldFactRederive.test.js :: EM-B2b — world facts by consequence: the route, the refusals and the stated radius A4 — THE STATED BLAST RADIUS IS COMPLETE: the culture reader set under src/generators is EXACT in both directions
+tests/domain/worldFactRederive.test.js :: EM-B2b — world facts by consequence: the route, the refusals and the stated radius A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden
+tests/generators/nameHeldThroughAssembly.test.js :: EM-R4 — the settlement name is held through assembly A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where it was
+tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — `--update` refuses to bank a declared overrun ⛔ every LIVE declared row is refused against the LIVE register
+tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)
+tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — fix the types, do not widen
+tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — the declared-overrun ledger is honest ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+tests/lint/factLayers.walker.test.js :: nothing reads at or above its own layer (shrink-only) LEAVES: the tree reads exactly the register
+tests/lint/factLayers.walker.test.js :: nothing reads at or above its own layer (shrink-only) POOLS: the tree reads exactly the register, with no pool unplaced and no atom unlayered
+tests/lint/factLayers.walker.test.js :: the layer table covers every leaf and every pool every leaf declares exactly the strata it touches, and every stored field it reads is placed
+tests/lint/newsHeadlineContract.walker.test.js :: [FILE] 
+tests/lint/noLegacyFactionReaders.walker.test.js :: no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) every read outside the FPZ list is red; zero at the landing
+tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the EXECUTED corpus the producers ran and the corpus is not empty
+tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan the provenance drift classifier separates a detector change from an input change THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all
+tests/lint/proseWaveGate.walker.test.js :: THE ROSTER — a desk section is a LEAF, and the partition is asserted each section names its own leaf's pools, and a bad name is NOT-EXECUTABLE
+tests/lint/proseWaveGate.walker.test.js :: THE ROSTER — a desk section is a LEAF, and the partition is asserted ⛔ THE SIX LEAVES COVER EVERY POOL EXACTLY ONCE
+tests/lint/proseWaveGate.walker.test.js :: the CARTESIAN unit set is the attach set times the spines times the faces ⭐⭐ ONE UNIT BUILDER: the gate and the lib agree on EVERY pool of a section
+tests/lint/siteCoherenceRatchet.test.js :: site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) C1 — the live row set equals the frozen baseline in both directions
+tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title ⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS — and the false reformat reds here
+tests/lint/tuningRegister.walker.test.js :: tuning register — the inventory is frozen and honest the measured tree matches the committed inventory exactly
+tests/lint/wiringCensusDeclared.walker.test.js :: the state rows' declared columns every row carries the four columns, equal to a fresh annex reading
+tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A7 the honesty figures are re-measured and the ride-along has its first population in the chain
