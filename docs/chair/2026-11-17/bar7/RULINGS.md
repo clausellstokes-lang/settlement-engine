@@ -179,3 +179,23 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   (d) THE SEED PICKS AND NO DRAW IS TAKEN: for the same seed a town is born as before but for that one card's secret;
   a saved town is never touched; no new field on the saved record; (e) built now by a seat of its own (SECRETS-1,
   `docs/chair/2026-11-14/briefs/BRIEF-SECRETS-1.md`) beside BIRTH-2, so that the seventh read reads it.
+- **RS1, WIDENED TWICE BY THE OWNER'S NEXT WORDS (2026-11-17, each verbatim, the typing kept).** About 08:57 UTC: "But
+  also related to personalities as well. Or has ocd, only feels good when he self sacrifices, can't feel anything
+  physical at allC etc." About 08:59 UTC: "His best friend is a ghost (magic only). Has the bloodline of a god or
+  dragon (magic only). Is xenophobic. Survived a fire and is terrified of flames. Is really good at gambling, etc etc
+  etc. Is a wanted felon from another settlement. Is the bastard son of a previous lord. Is part of a harem that is
+  looking to expand. Made a deal with a demon but at what cost (magic only)" THE CHAIR'S FORM, told to the owner in the
+  same answers, each part vetoable: THREE FAMILIES, TWENTY-FOUR ROWS, the only new words: THE DEEDS (seven: the
+  owner's killer, the one who means to kill a superior, the wanted felon, the demon's bargain; the chair's poisoned
+  spouse, body under the floor, coin taken to kill); THE NATURES (eleven: the owner's cold one, the one who counts and
+  straightens, the one only at ease giving up, the one who feels no pain, the one who distrusts strangers, the one
+  afraid of flame, the hidden gambler; the chair's four); THE TIES AND THE BLOOD (six: the owner's brother's wife, the
+  former lord's unacknowledged child, the hidden harem looking for one more, the ghost friend, a god's blood, a
+  dragon's blood). DESCRIBED, NOT LABELLED ("OCD", "xenophobic" are not printed). MAGIC ONLY (the owner's own tag on
+  four rows): only where the world's law holds that magic exists. TRUE ON THE PAGE: the lord's child only under a
+  lord's or a noble house's government; the fear of flame never on a person who works a fire; the felon never an elder
+  or a hereditary ruler; a nature never beside the card's word that says the opposite. HOW RARE: each family about one
+  named person in two hundred, never more than one of a family in a town, a person at most one (told to the owner:
+  most thorps and villages none, most cities one, a metropolis one to three; the killer very rare of itself). THEY
+  PRINT ON THE CARD'S SECRET ROW (nothing new stored); OFFERED AND NOT BUILT: a visible personality line of their own,
+  as a follow-up if the owner says so. The seat's brief was rewritten whole before it was seated.
