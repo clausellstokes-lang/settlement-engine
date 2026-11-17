@@ -62,7 +62,8 @@ ONE place. A seat is seated from the working line's tip once the seats it waits 
 
 - The table's rules: K's 12a (4), 12f (3); J's 11e.siegeBought (10), 11a.atWork (13), 11d (19; ruling BR16), the roots'
   gapImportedNoImport (8).
-- LEFT-MARKS HANDED BACK AT b745bb33e WITH ITEMS 1 TO 4 AND M1 TO M5; ITS AMENDMENT 2 WAS NOT BUILT, SO BOTH ITEMS ARE
+- (VOID SINCE 19:36: LEFT-MARKS resumed and is building its AMENDMENT 2 itself; this paragraph stands only for an item
+  it then leaves by name.) LEFT-MARKS HANDED BACK AT b745bb33e WITH ITEMS 1 TO 4 AND M1 TO M5; ITS AMENDMENT 2 WAS NOT BUILT, SO BOTH ITEMS ARE
   MARKS-2's: M6 (the old detectors do not know the failed venture's mark "Failing: a failed venture." / "Abandoned: a
   failed venture.": runD's `8a.input` flags r2r-hamlet-27's Dairy farmer; the detectors' files
   `tests/helpers/pageLaws/law8.mjs`, `law8Marks.mjs`, `law8H.mjs`, `pageB.mjs` come with the item) and M7 = RULING BR11

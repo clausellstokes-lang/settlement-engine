@@ -504,3 +504,11 @@ should be paused or archived by the owner's hand.
   written; the annex is one file held in two seats' own sections, as in the round BAR4). ALL FOUR LEFT BUILDERS ARE IN:
   THE FIRST BATCH IS DEBT-2, LEFT-LINES, LEFT-PDF, LEFT-CHAIN (its amended L18 commit is awaited) AND LEFT-MARKS, AS
   POINTS 36 TO 40.
+- **19:35 UTC. A CORRECTION: LEFT-MARKS IS NOT DONE.** After its hand-back message (19:27) it took up its AMENDMENT 2 (the chair's
+  messages reach a seat only between its turns): M6 is committed (3ce392df7, 19:28: the old detector reads a failed
+  venture's mark as a mark) and M7 = BR11 is in progress (`get_session`: running). SO M6 AND M7 STAY LEFT-MARKS's (the
+  worklist file's MARKS-2 paragraph that gives them to MARKS-2 is void unless LEFT-MARKS leaves one by name), and
+  LEFT-MARKS LANDS IN A SECOND BATCH: its reader reads b745bb33e now and the later commits in a short second read when
+  the last tip is in (told 19:36). THE FIRST BATCH IS DEBT-2, LEFT-LINES, LEFT-PDF AND LEFT-CHAIN: POINTS 36 TO 39
+  (`/home/user/wk/batch1.sh <LEFT-CHAIN's tip>` builds `lane/landing-36-39-2026-11-17` in `/home/user/line`). The owner
+  asked at 19:32 where everything stands and has a full account in plain words (19:35).
