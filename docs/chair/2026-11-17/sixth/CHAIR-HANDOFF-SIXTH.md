@@ -54,7 +54,7 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
 | READ-BIRTH-3B | session_01FbPLbfk2W1eNFUKH8Wg5g3 | the middle tier, high effort | the second reader of BIRTH-3's amendments (882cae319..8b0506eae), read-only | one message |
 | CHECKS-1 | session_01FbPLbbbn3AfHPBuK7SXxRu | the cheaper tier, low effort | the whole check at a tree the chair names (first: the line's ed1d43529) | `lane/checks-2026-11-17` |
 | MEASURE-1 | session_01FbPLbfsyUsu4FiR9AaJT4E | the cheaper tier, medium effort | the eight detectors at the line and at the merged tree, rule by rule | `lane/measure-2026-11-17` |
-| PREP-READ-7 | (section 7) | the middle tier, medium effort | the seventh read's packets built as the sixth's were; the merge tool proven on the sixth's flags | `lane/read7-prep-2026-11-17` |
+| PREP-READ-7 | session_01FbPLbfNgMStXkJ7yMbE9fd | the middle tier, medium effort | the seventh read's packets built as the sixth's were; the merge tool proven on the sixth's flags | `lane/read7-prep-2026-11-17` |
 
 ## 5. The queue, in order
 
@@ -84,4 +84,20 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
   item; until it lands, LAW 8 (a) is red on the line BY NAME with these 17.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
-
+- 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
+  e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
+  4a9735d2f9ed4ef8e21aa19ec145de2e719e11f0 (src ac11d22681fc0c0e272ef9e5f5cbef21c05a31ca, tests
+  261a33b945b356cc609a825b8d97eff4b8f06466), pushed through the hook as `lane/point33-candidate-2026-11-17`. IT IS NOT
+  THE LINE YET: the line's tip moves to it (a fast-forward push of that same commit) only when the checks clear. The
+  round of the leftovers is cut from it so that no seat waits on the landing.
+- 16:19 UTC · THE WHOLE CHECK AT THAT TREE RUNS ON THE CHAIR'S MACHINE (`/home/user/checks/merged-d98b11ad8`, six
+  shards; shard 1: 13 files and 22 tests red). THE CHAIR'S OWN PUSHES RAN THEIR HOOK GATES BESIDE IT: four tests of
+  shard 1 are 20-second timeouts under that load (`simulationSpine`, `foodDiversity` twice, `incomeLinesSayTheRecord`,
+  `timelineVariety`): EVERY FAILED TEST THAT RAN 19 SECONDS OR MORE IS RUN AGAIN ALONE before the list is read. ONE
+  REAL NEW RED SO FAR, PROVEN BY A RUN AT THE LINE'S TIP (green there, 2 of 2): `tests/domain/display/
+  needMetUnderAnotherName.test.js` (r2r-town-17's mountain timber need is met now: the birth brings its timber in):
+  an anchor the supply rule fed; LEFT-KEYS re-keys it by identity.
+- 16:19 UTC · THE ROUND OF THE LEFTOVERS: `briefs/BRIEF-LEFT.md` and `LEFTOVERS-WORKLIST.md` (37 rows gathered by a
+  read-only helper from every hand-back; the chair checked every file and symbol the brief names at the candidate
+  tree: ONE ROW WAS ALREADY CURED (L29, by BAR7-CARDS) and was struck; one item (L7) moved to the seat that holds its
+  file). Four seats by file (PDF, CHAIN, MARKS, LINES), a fifth (KEYS, tests only) after the whole check.
