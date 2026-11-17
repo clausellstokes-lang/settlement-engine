@@ -142,3 +142,16 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
   items; the grounds a house proves stand first with no label): a paragraph was added to the brief at 16:34 for the
   readers not yet started (some running second readers re-read the brief and have it too). NO NUMBER GOES TO THE OWNER
   BEFORE THE STRICT SECOND CHECK.
+- 16:50 UTC · **THE SEVENTH READ, COUNTED AFTER THE STRICT SECOND CHECK: HIGH 0 · MED THAT STANDS 16 IN 30 TOWNS (the sixth 29,
+  the fifth 41, the fourth 40) · TOWNS WITH NONE 18 OF 30 (11 before). THE BAR IS NOT MET; THE COUNT FELL AGAIN.** Published
+  with every verdict: `docs/chair/2026-11-17/review-bar-7/` (COUNT-AFTER-THE-SECOND-CHECK.txt first; SECOND-CHECK.final27.json;
+  COUNT-RAW.txt by PREP-READ-7's merge tool, run by the chair with `--flags-dir` over the render PREP published at 3eccb8583).
+  THE SECOND CHECK: three checkers (helpers on the chair's machine, the middle tier, high effort), nine flags each, whole towns
+  to a batch: STANDS 16 · WEAK 1 · EXPLAINED 10 (four of the ten a misreading of the Resources block's label-first layout; five
+  the stock recent-conflict line in places that do hold grazing land and water). THE 16 BY FAMILY (14 distinct faults): (A)
+  a line about law and order that the town's own legal state denies, 5 flags; (B) a house's mark or state and a line that does
+  not read it, 6; (C) a line that presumes what the place does not hold, 2; (D) a count or a word the page's own row denies, 3.
+  NONE IS A ROW OF THE LEFTOVERS IN FLIGHT. THE OWNER WAS TOLD IN PLAIN WORDS at the same hour, with the caveat that the readers
+  ran differently from the sixth's (two readers agreed on 13 of 27 MED sentences: by the two-reader estimate the union found
+  88 in 100) and that a THIRD READER on the middle tier is reading all 22 packets to see what two readers left: its MED flags
+  get the same second check and are reported APART from the two-reader measure.
