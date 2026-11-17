@@ -16,6 +16,6 @@ import { rivalRingsOf } from '../corruption.js';
  * @returns {boolean}
  */
 export function rivalRingsStand(record) {
-  const r = /** @type {{ powerStructure?: { factions?: unknown }, institutions?: unknown } | null | undefined} */ (record);
+  const r = /** @type {{ powerStructure?: { factions?: ReadonlyArray<{ category?: unknown, isGoverning?: unknown }> }, institutions?: ReadonlyArray<{ name?: unknown }> } | null | undefined} */ (record);
   return rivalRingsOf(r?.powerStructure?.factions, r?.institutions);
 }
