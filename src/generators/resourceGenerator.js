@@ -645,7 +645,7 @@ const sentenceName = (inst) => { const name = String(institutionDisplayName(inst
 /**
  * THE BIRTH'S PICKS ON THE RECORD IN THE MAKING (the grounds the houses prove, the failed venture, the words bought), made
  * once with the generator's seed; a record already picked is returned as it is.
- * @template {object} T @param {T} record @param {unknown} seed @returns {T}
+ * @template {Record<string, any>} T @param {T} record @param {unknown} seed @returns {T}
  */
 export function birthPicksOn(record, seed) {
   if (record && /** @type {Record<symbol, unknown>} */ (record)[BIRTH_PICKS]) return record;
