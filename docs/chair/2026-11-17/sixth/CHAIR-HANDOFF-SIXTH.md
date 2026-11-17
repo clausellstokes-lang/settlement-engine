@@ -14,16 +14,19 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
 
 ## 0. THE STATE AT 19:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; it REPLACES the 17:04 state; the lines of section 7 written after 19:04 govern where they differ)
 
-**THE LINE.** `lane/join-2026-11-14` stands at f1ca75555ebfa2c6ca111b713ffb2d66fcfc9500 (pushed 20:09 UTC): POINT 33 (the owner's
+**THE LINE.** `lane/join-2026-11-14` stands at 3b06c724bfe1f2cfffcec3031b2e8a4c6513f27b (pushed 21:15 UTC): POINT 33 (the owner's
 supply rule, e0242a12a), 34 AND 35 (BAR8's two audits, ef5fd621e), the record's commit 9378609ba
-(`docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE: rows 33 to 35), POINT 36 (DEBT-2, the merge 2e54c06c2) AND POINT
-37 (LEFT-LINES, the merge f1ca75555). THE ROWS OF 36 TO 39 ARE NOT WRITTEN YET: they go on the line in one docs commit
-AFTER point 39, because the landing branch `lane/landing-36-39-2026-11-17` (38 LEFT-PDF e60d42a20, 39 LEFT-CHAIN
-3b06c724bfe1f2cfffcec3031b2e8a4c6513f27b) sits directly on f1ca75555 and must stay a fast-forward. THE CHAIR IS THE LINE'S
-ONLY WRITER: `/home/user/line` (hooks). THE BASELINE FOR COMPARISONS BY NAME is the candidate's lists on this lane:
-`checks/candidate-e0242a12a/names.final.txt` (source; A5 of `editCorpusRatchet` is in it only by the chair's slow machine)
-and `checks/dist-candidate-e0242a12a/names.txt` (the dist phase); joined and sorted they are 165 names
-(`/home/user/wk/cand.baseline.txt` on the chair's machine).
+(`docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE: rows 33 to 35), POINT 36 (DEBT-2, 2e54c06c2), 37 (LEFT-LINES,
+f1ca75555), 38 (LEFT-PDF, e60d42a20), 39 (LEFT-CHAIN, 3b06c724b). POINT 40 (LEFT-MARKS) IS BUILT ON IT:
+`lane/landing-40-2026-11-17` at f86295196124d1c5f82ee08bb3f1ac0f02d45228; its reader said LAND; its whole check (label
+`landing-40-f86295196`) is running on the three CHECKS seats. THE ROWS OF 36 TO 40 ARE NOT WRITTEN YET: one docs commit
+on the line AFTER point 40 (the landing commits must stay fast-forwards). TWO REDS OF LEFT-CHAIN's ARE NAMED ON THE LINE
+until its follow-up lands as a point after 40 (`tests/joins/labelJoins`: a name join in `economicsCrisisMarks.js`;
+`tests/build/vendorPdfLazy` WEAVE ST-2: the goods roster lacks `chainHouses.js`). THE CHAIR IS THE LINE'S ONLY WRITER:
+`/home/user/line` (hooks). THE BASELINE FOR COMPARISONS BY NAME: the batch's whole check at 3b06c724b (the three CHECKS
+seats' branches, `checks/landing-36-39-3b06c724b/part-<n>/names.final.txt`: 163 names joined; `/home/user/wk/b1.all.txt`
+on the chair's machine), and before it the candidate's (`checks/candidate-e0242a12a/`, `checks/dist-candidate-e0242a12a/`
+on this lane). A RED THAT A LANDING WAS TO CURE IS READ BY ITS MESSAGE, NOT ONLY BY ITS NAME.
 
 **THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`; builders and readers of code
 are the middle tier at high effort, the mechanical seats the cheaper tier at low effort).**
@@ -630,3 +633,8 @@ should be paused or archived by the owner's hand.
   lazy and the goals' dealer is in the eager core) and 14e (`representatives.js`): the worklist's PEOPLE-2.
   NEW SEATS FROM NOW MAKE A FIRST SMALL COMMIT AND PUSH IN THEIR FIRST MINUTES (the hand-back's skeleton), so that a
   permission refusal shows before any work is done; a seat that is refused stops and says so.
+- **21:15 UTC. POINTS 38 AND 39 ARE LANDED** (21:15:02: `f1ca75555..3b06c724b lane/join-2026-11-14`, read back). SEATED FROM IT (21:15): J-INCOME
+  session_01FbPLbcyyKD3MtjStn78biV (`lane/bar8-j-income-2026-11-17`) and PDF-2 session_01FbPLbcHDcMXSTnK26x643P
+  (`lane/bar8-pdf-2-2026-11-17`), the middle tier at high effort; each makes a first small commit and push before any
+  work, and stops with one line if its permission check refuses. PDF-2's items 3 and 4 wait for the chair's messages
+  (LEFT-MARKS on the line; J-INCOME's leaf commit's hash). SECTION 0's "THE LINE" IS REWRITTEN AS OF THIS HOUR.
