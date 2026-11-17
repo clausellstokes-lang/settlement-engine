@@ -141,3 +141,11 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   mark, the ground under Depleted); here there was never anything to work. BUILT BY BIRTH-2 (its brief is amended); the
   mark's words sit in the mark's one leaf, which the round BAR7's economy seat holds: BIRTH-2 is therefore seated once
   BIRTH-1 AND that seat have landed, and is given that one hunk by name.
+- **BR6, AMENDED BY THE OWNER'S EIGHTH WORD (2026-11-17, about 05:50 UTC, verbatim): "Say abandoned or failing: a failed
+  venture."** THE CHAIR'S READING, told to the owner as a reading: THE FIFTH STORY HAS TWO VERSIONS AND THE SEED PICKS
+  WHICH: the mark reads "Abandoned: a failed venture." (the works stands empty) or "Failing: a failed venture." (the
+  works is still open and going under); four words each; the two together stay about one town in fifty, half and half.
+  Each has its one gap line: "The <house> stands abandoned, a venture of an earlier time: no <material> lies near and
+  none is brought in." and "The <house> is failing: no <material> lies near and none is brought in." Everything else
+  of BR6 stands for both (one house a town; never a whole trade; no ground on the land list, nothing on the imports; the
+  mark covers the house's rows).

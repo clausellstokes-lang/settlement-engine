@@ -13,7 +13,8 @@ resources, no buy in. And any other configuration." Before it: "Doesn't the ston
 that there is stone in the ground?"; "they have the supplies because they buy it in despite the exhausted resource";
 of a siege: "those failings are simply true because in normal times it would be bought in ... Rather than reworked";
 "making sure they align with imports". AND, AFTER IT, of the story the chair had left out and offered as "an abandoned
-works": "I like this. Infrastructure from a by gone era. It's abandoned a failed business venture, but very rare".
+works": "I like this. Infrastructure from a by gone era. It's abandoned a failed business venture, but very rare"; and of
+its words: "Say abandoned or failing: a failed venture."
 
 SO: FOR EACH HOUSE AND ITS MATERIAL THE SEED PICKS ONE STORY, AND EVERY PART OF THE PAGE TELLS THAT STORY:
 
@@ -26,7 +27,7 @@ SO: FOR EACH HOUSE AND ITS MATERIAL THE SEED PICKS ONE STORY, AND EVERY PART OF 
 | other | has it | as well | as today (a larger town that uses more than it has): nothing to build |
 | other | any bought-in story, under a siege | cut off | the same story; the house reads "Curtailed by the siege."; nothing is reworked |
 | other | no route even in ordinary times | impossible | only "has it" or "used up, idle" |
-| THE OWNER'S FIFTH, VERY RARE | never had it | no | THE ABANDONED WORKS: the house stays, marked "Abandoned: a failed venture."; no such ground on the land list, nothing of it on the imports; its rows not on offer; ONE line says why |
+| THE OWNER'S FIFTH, VERY RARE | never had it | no | THE FAILED VENTURE, in one of two versions the seed picks: the house stays, marked "Abandoned: a failed venture." or "Failing: a failed venture."; no such ground on the land list, nothing of it on the imports; the mark covers its rows; ONE line says why |
 
 THE STARTING ODDS (told to the owner as one small table, easy to change): THE GROUND USED UP AND THE TOWN CAN TRADE: bought
 in 3 times in 4, not bought in 1 in 4. A SOURCE HOUSE WHERE THE LAND LIST HOLDS NO GROUND OF ITS KIND: the ground is there
@@ -124,7 +125,9 @@ ONE HUNK OF ANOTHER SEAT'S FILE IS YOURS IF YOUR PROMPT SAYS YOUR BASE HOLDS THE
    (where the seed picks two, the first by catalogue id keeps it and the other follows its usual story); never a house
    whose material another live house of the town uses (a whole trade is not abandoned: several houses on one material
    buy it in as usual). For that house: no ground is implied, the town does not buy the material, the reader answers
-   `missing`, and the page says ABANDONED and not short (item 6).
+   `missing`, and the page says ABANDONED or FAILING and not short (item 5's two forms). WHICH OF THE TWO is the seed's
+   pick too (`<seed>::venture::<catalogue id>`, half and half): ABANDONED: the works stands empty; FAILING: it is still
+   open and going under. Both are the one story for every rule of this file; only the words differ.
    (e) OUTSIDE THAT PICK, "NEVER HAD IT AND BUYS NOTHING" IS NEVER A STORY. It can still arise for a buyer on an isolated
    route with no ground of its material: COUNT those houses over the 720 by kind, and make the page say the owner's
    fourth story of them (the ground implied USED UP, the house idle) if the count is small and the reading of five such
@@ -149,17 +152,19 @@ ONE HUNK OF ANOTHER SEAT'S FILE IS YOURS IF YOUR PROMPT SAYS YOUR BASE HOLDS THE
    own ("... from a ground of its own: none lies near.") HAS NO CASE LEFT (an implied ground stands, or the salt is
    bought): remove it, and say how many towns printed it. No line says a material "reaches" a house from elsewhere where
    the house is worked out; no gap line for a house the story has at work.
-   THE ABANDONED WORKS' TWO NEW FORMS (the only new words of your seat; the owner's own words; each vetoable; name them
-   in your hand-back for the owner's veto list): (i) ITS GAP LINE, once for the house, on the Resources tab: "The <house>
-   stands abandoned, a venture of an earlier time: no <material> lies near and none is brought in."; (ii) ITS MARK, on
-   the house's card and rows wherever the short mark would print: "Abandoned: a failed venture." (four words: the
-   mark law counts a sentence at five, and a mark repeats on a house's rows). The mark is printed by the one leaf
+   THE FAILED VENTURE'S NEW FORMS (the only new words of your seat; the owner's own words; each vetoable; name them in
+   your hand-back for the owner's veto list): (i) ITS GAP LINE, once for the house, on the Resources tab: ABANDONED: "The
+   <house> stands abandoned, a venture of an earlier time: no <material> lies near and none is brought in."; FAILING:
+   "The <house> is failing: no <material> lies near and none is brought in."; (ii) ITS MARK, on the house's card and
+   rows wherever the short mark would print: "Abandoned: a failed venture." or "Failing: a failed venture." (the
+   owner: "Say abandoned or failing: a failed venture."; four words each: the mark law counts a sentence at five, and
+   a mark repeats on a house's rows). The mark is printed by the one leaf
    (`crisisStoppedRow.js :: rowMarkText` and `shortMarkText`): IF YOUR BASE HOLDS THE ROUND BAR7's ECONOMY SEAT, the one
-   hunk there is yours: an abandoned works' row takes that mark in place of "Short of ...", read from your leaf
+   hunk there is yours: a failed venture's row takes its mark in place of "Short of ...", read from your leaf
    (`supplyStory.js`), and the tab's head line for short marks ("A row marked short is what its house makes when
    supplied.") is not printed on its account; a person's card and the PDF read the same leaf and follow. IF IT DOES
-   NOT, the mark stays "Short of ..." (true of it), the gap line alone says abandoned, and the mark's words are left
-   BY NAME.
+   NOT, the mark stays "Short of ..." (true of it), the gap line alone says abandoned or failing, and the mark's
+   words are left BY NAME.
 6. THE PAGE (`ResourcesTab.jsx`, the Nearby Resources section) prints the grounds of item 2 (a): a STORED live ground as
    today ("Abundant", or unlabelled under a siege); AN IMPLIED GROUND THAT IS THERE without the word "Abundant" (one
    quarry does not prove plenty: W2): in the unlabelled form the siege already uses, under the section's title; AN
@@ -204,7 +209,8 @@ ONE HUNK OF ANOTHER SEAT'S FILE IS YOURS IF YOUR PROMPT SAYS YOUR BASE HOLDS THE
     row of the table at the head of this file, by tier, and by material for the owner's four; and the same before your
     rule (BIRTH-1's tree). Plain words; a person who knows no code reads it.
 12. THE PAGE AFTER YOU, READ: render twenty-eight towns across the tiers (six of the owner's fourth story in a town that
-    can trade; four of the first; four of the third; four abandoned works, their keepers' cards among what you read;
+    can trade; four of the first; four of the third; two abandoned and two failing works, their keepers' cards among what
+    you read;
     four with an implied ground the roll table denies; three off-coast salt works; three besieged) and READ the Resources tab, the house's card, the Economics tab's Imports, Exports and
     income rows, the Outlook, the arrival scene: does any line show an idle house at work, name an import beside a house
     short of it, export a worked-out ground's good, or say "imports nothing"? Each such pair is named in your hand-back
