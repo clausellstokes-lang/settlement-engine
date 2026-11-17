@@ -44,7 +44,9 @@ const WRITERS = Object.freeze({
   'src/generators/economy/tradeGoods.js': ['COPIES', 1, 'a local list of the land\'s commodities, read for the necessity imports'],
   'src/generators/historyGenerator.js': ['COPIES', 1, 'the history\'s economic context'],
   'src/generators/neighbourGenerator.js': ['COPIES', 1, 'a neighbour\'s record read'],
-  'src/generators/resourceGenerator.js': ['COPIES', 1, 'the analysis\'s context'],
+  // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): the row `src/generators/resourceGenerator.js` ['COPIES', 1, the
+  // analysis's context] LEAVES (stale: the file holds no writer line): BAR4-RECORD R1 (b7d3da983) took the context's copy of
+  // `localProduction` out of resourceGenerator.js; the one fact (`src/domain/facts/houseInputAtHand.js`) READS the list, no write.
   'src/domain/worldPulse/warCosts.js': ['COPIES', 1, 'the goods a war can cost, read'],
   'src/domain/region/deriveRegionalState.js': ['COPIES', 2, 'the regional projection'],
   'src/domain/prose/holderTable.js': ['COPIES', 2, 'the table of each field\'s writer'],

@@ -38,7 +38,12 @@ describe('the tie prose declares in place (CENSUS-4c unit 4)', () => {
     // BAR3-CLOSE-DOORS-1 (2026-11-15, the close of the round BAR3, the chair's ruling TP1, re-keyed by identity with its cause):
     // 41 + the three tie lines BAR3-PEOPLE batch 1 (aef83b4b5, P1: no road, import or coach under a siege) gave
     // `excludes: ['crisis: under_siege']` (econ_crim_blur.desc#3, desc#6, tension#2) = 44
-    expect(ROWS.filter(declares)).toHaveLength(44);
+    // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4, the chair's ruling TI1, re-keyed by identity with its cause):
+    // 44 + the two tie lines BAR4-PEOPLE batch 1 (46b693c2c, P1 at the draw) made declare: mentor_legacy.desc#7
+    // `needs: ['shared place']` and bitter_history.desc#3 `needs: ['lone tie']` = 46
+    // BAR4-CLOSE-DOORS-1 (2026-11-16, after THE ONE MERGE of 600b7683a, the chair's ruling PD1/PD1b, re-keyed by identity with its cause):
+    // 46 - mentor_legacy.desc#7, which BAR4-CLOSE-SWEEP L4 (4ed8a41e9) made a closure gated by its own twin (no `needs` again) = 45
+    expect(ROWS.filter(declares)).toHaveLength(45);
     for (const r of ROWS) {
       const { field, index } = at(r.id);
       const d = V.declarationOf(field.lines[index]);

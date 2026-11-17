@@ -65,7 +65,13 @@ const RED = [
   ['r2r-village-9', 'Tannery', 'Converts hides into leather using oak bark. Foul', 'Converts hides into leather using oak bark, whenever hides can be had.'],
   ['r2r-village-14', 'Tannery', 'Turns hides to leather with oak bark. The stink', 'Turns hides to leather with oak bark, whenever hides can be had.'],
   ['r2r-village-49', 'Fishmonger', 'Buys, salts, and sells fish. The link', 'Buys, salts, and sells fish, whenever fish can be had.'],
-  ['r2r-village-36', 'Fishmonger', 'Buys the catch, salts it', 'Buys fish whenever fish can be had'],
+  // BAR4-CLOSE-SWEEP (2026-11-16, the chair's word of 16:44): re-keyed by identity from r2r-village-36, whose Fishmonger the record
+  // now answers (BAR4-RECORD b7d3da983, R1, declared: the gap's writer reads the page's one reading; the town's food record names fish,
+  // "Its own food is the day's catch", so the gap is `imported`, and the page agrees: no fish gap line, the house unmarked). Measured on
+  // the 720 at 1a5678df0: 4 fishmongers still lack fish (r2r-village-49, a case above; r2r-village-57; r2s-succession_void-village-0;
+  // r2s-monster_pressure-village-2), none drawing this row's "Buys the catch" variant; this one draws the third variant, so its own
+  // pair (the old text of a2550c0ef, its rewording) is the anchor. The "Buys the catch" twin stays in the data (a reachable state).
+  ['r2s-succession_void-village-0', 'Fishmonger', 'Deals in fish: bought, salted', 'Deals in fish, whenever fish can be had'],
   ['r2r-town-293', 'Glassblower', 'Small-scale glasswork: bottles', 'Small-scale glasswork, when sand can be had'],
   ['r2r-town-406', 'Glassblower', 'Glass worked on a small scale: bottles', 'Glass worked on a small scale, whenever sand reaches the furnace'],
   ['r2r-town-9', 'Glassblower', 'A modest glassworks making bottles', 'A modest glassworks for bottles'],

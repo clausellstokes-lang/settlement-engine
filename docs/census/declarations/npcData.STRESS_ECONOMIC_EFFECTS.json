@@ -1237,7 +1237,7 @@
     },
     {
       "id": "gov_econ_dependence.desc#7",
-      "text": "{A} governs on {B}'s credit. Every loan renewed adds one more condition to the next.",
+      "text": "{A} holds office on {B}'s credit. Every loan renewed adds one more condition to the next.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1693,11 +1693,11 @@
     },
     {
       "id": "mentor_legacy.desc#7",
-      "text": "{A} named {B} as successor in front of witnesses. The formal handover has not happened.",
+      "text": "{A} once told a full room that {B} was the best pupil they had taught. {A} has not said it since.",
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "mentor_legacy.tension#0",
@@ -2540,7 +2540,9 @@
     {
       "id": "bitter_history.desc#3",
       "text": "{A} testified against {B} in a case ten years ago. {B} lost a fortune and has not spoken to {A} since.",
-      "needs": [],
+      "needs": [
+        "lone tie"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false

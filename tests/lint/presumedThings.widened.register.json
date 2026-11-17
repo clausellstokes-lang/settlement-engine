@@ -3209,6 +3209,12 @@
     "after-base: close-unprinted",
     "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.",
     "f7aba2e3cae3483a"
+   ],
+   [
+    "house: tavern",
+    "after-base: close-true",
+    "no institution: tavern",
+    "0ed3340e99985e22"
    ]
   ],
   "src/data/dossierStateProse/power.generated.js": [
@@ -4170,6 +4176,20 @@
     "family",
     "Captain of the Watch",
     "3099ca5c4ce8e997"
+   ]
+  ],
+  "src/data/foodwaysPrintSiblings.js": [
+   [
+    "market",
+    "after-base: close-true",
+    "Market vendors and shared dining customs make food distribution visibly civic.",
+    "2cfeb9a9393de195"
+   ],
+   [
+    "market",
+    "after-base: close-true",
+    "Market supply and imported grain become politically charged as population grows.",
+    "a2dfff82c1db927a"
    ]
   ],
   "src/data/foundingSeeds.js": [
@@ -5440,6 +5460,30 @@
     "word",
     "Several quarters, each with its house of worship.",
     "b80668f645a2a56d"
+   ],
+   [
+    "market",
+    "after-base: close-true",
+    "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays",
+    "b2336c23ff151b9d"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays",
+    "b2336c23ff151b9d"
+   ],
+   [
+    "market",
+    "after-base: close-true",
+    "At fixed times the proclamations, the prices, and the news are called out in the market square. The town pays for it, or",
+    "3b60d080337c77be"
+   ],
+   [
+    "streets",
+    "after-base: close-true",
+    "At fixed times the proclamations, the prices, and the news are called out in the market square. The town pays for it, or",
+    "3b60d080337c77be"
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -21528,6 +21572,14 @@
     "family",
     "the character's title is faction-token prose (\"Thieves' Guild Master\"); leaving it stale renders a member chip that stil",
     "80c1d724586bc2a7"
+   ]
+  ],
+  "src/domain/facts/houseInputAtHand.js": [
+   [
+    "resource: hot_springs_mineral",
+    "family",
+    "mineral hot springs",
+    "1b9f8eb53cade44e"
    ]
   ],
   "src/domain/facts/magic.js": [
