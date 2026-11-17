@@ -242,15 +242,15 @@ export const RARE_MASTERS = f([
   f({ key: 'masterRuler', what: 'Once governed a city, and settles fence disputes here so that no one asks', stakes: 'The city did not let them go willingly', holder: f({ age: 'ofYears', office: f(['head']), roles: f(['elder', 'reeve', 'headman', 'eldest', 'eldest householder', 'household elder']) }) }),
   f({ key: 'masterThief', what: "Was the best lock-breaker of a great city's guild, and lifts nothing here so that no one asks", stakes: 'The guild believes they are dead, and would correct the error', holder: f({ age: 'ofYears', category: f(['criminal']) }) }),
   f({ key: 'masterPoisoner', what: "Was a great house's poisoner, and sells simples here so that no one asks", stakes: 'Three deaths at that house were never explained', holder: f({ age: 'ofYears', roles: f(['herbalist', 'apothecary']) }) }),
-  // AMENDMENT 1 (2026-11-17). Left out BY NAME (the engine has no such role): masterGardener (a gardener or an orchard
-  // keeper), masterSexton (a gravedigger or a sexton).
+  // AMENDMENT 1 (2026-11-17). Left out BY NAME (the engine has no such role in a thorp, a hamlet or a village):
+  // masterGardener (a gardener or an orchard keeper), masterSexton (a gravedigger or a sexton), masterFool (a juggler, a
+  // fool or an entertainer but a singer: the catalogue's troupe leader stands from a town up, its musician is masterSinger's).
   f({ key: 'masterMiller', what: 'Once ran the mills of a great city, and grinds for a few fields here so that no one asks', stakes: 'The city went hungry the year they left', needs: ['institution: mill'], holder: f({ age: 'ofYears', roles: f(['miller']) }) }),
   f({ key: 'masterHuntsman', what: "Was huntsman to a great house, and sets snares here so that no one asks", stakes: "The house's best hound would still know them", holder: f({ age: 'ofYears', roles: f(['trapper', 'fowler', 'wildfowler', 'forester']) }) }),
   f({ key: 'masterShipwright', what: 'Built ships for a great harbour, and patches hulls here so that no one asks', stakes: 'One of those ships is overdue', needs: ['navigable'], holder: f({ age: 'ofYears', roles: f(['boat-builder', 'boatwright', 'shipwright']) }) }),
   f({ key: 'masterBrewer', what: "Brewed for a great house's cellar, and keeps a plain brew here so that no one asks", stakes: 'One cask of the old kind is still in the back', holder: f({ age: 'ofYears', roles: f(['brewer', 'brewster', 'alewife', 'vintner', 'maltster']) }) }),
   f({ key: 'masterMiner', what: 'Sank the deepest shaft of a famous pit, and digs wells here so that no one asks', stakes: 'They know why that shaft was closed', holder: f({ age: 'ofYears', roles: f(['miner', 'mine captain', 'quarryman', 'quarry master', 'well-digger']) }) }),
   f({ key: 'masterCarrier', what: "Carried a great house's letters for twenty years, and drives a cart here so that no one asks", stakes: 'They read some of what they carried', holder: f({ age: 'ofYears', roles: f(['carter', 'carrier', "carriers' master", 'messenger', 'message-master', 'postmaster', "post's master"]) }) }),
-  f({ key: 'masterFool', what: 'Was fool to a great court, and has not made a joke since', stakes: 'The court is still looking for what they overheard', holder: f({ age: 'ofYears', roles: f(['juggler', 'fool', 'jester', 'troupe leader', 'impresario']) }) }),
 ]);
 
 /** THE OUTSIDERS (people who do not belong to this time or this world); any size of place. */
