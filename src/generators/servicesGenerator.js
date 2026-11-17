@@ -37,10 +37,8 @@ const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but b
 /** @param {Array<{ name?: unknown }>} institutions @returns {{ name: string, desc: string }} */
 const lawlessRow = (institutions) => {
   const d = defenceOf({ institutions });
-  return d.court && d.prison ? { name: NO_LAW_BRING_COIN, desc: SLOW_LAW_DESC }
-    : { name: NO_LAW_BRING_COIN, desc: THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION };
+  return { name: NO_LAW_BRING_COIN, desc: d.court && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name said once (275ce166f made both branches one name)
 };
-
 
 /**
  * servicesGenerator.js
