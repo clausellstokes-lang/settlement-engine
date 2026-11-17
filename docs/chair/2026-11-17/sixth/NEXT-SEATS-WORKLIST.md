@@ -82,6 +82,11 @@ ONE place. A seat is seated from the working line's tip once the seats it waits 
   on the guard's LEFT list); the detector's reading of proven grounds through `supplyStory.js :: impliedGroundsOf`
   (named). ITS FOUR NEW TABLES are on the owner's veto list: `HOUSE_NEED_INPUT`, `SURPLUS_HOUSES` (`crisisDependence.js`),
   `KEY_IMPORT_WORDS`, `TRADE_STOCK_WORDS` (`houseInputAtHand.js`).
+- RULING BR21 (LEFT-MARKS's second reader, LOW 1): `houseInputAtHand.js :: KEY_IMPORT_WORDS` reads the whole word "herbs", so
+  "Ritual wood and herbs (ancient grove damaged)" feeds the established apothecary of bar0-town-occupied-rand-43 and
+  the birth drops "Medicinal herbs" from its imports (the one declared move of the thirty). RITUAL HERBS ARE NOT AN
+  APOTHECARY'S STOCK: the word is scoped to what the brief named ("Herbs and forage", and "Medicinal herbs" itself).
+  MARKS-2 builds it (a declared move back in that one town; say the 720 and the 525).
 - RULING BR20: bar0-hamlet-calm-rand-40 (a maltster printed bare on a short food line, in a calm town on a road):
   AS LEFT-MARKS BUILT IT. The birth's law (a buyer in a calm town on a connected road buys in and is never marked)
   is the owner's supply rule and stands; L16's reading stays out of such a town. Nothing to build.
@@ -108,6 +113,17 @@ ONE place. A seat is seated from the working line's tip once the seats it waits 
   fish"): key them after it, or on a town whose fish is its own.
 - K6 (c), ruling BR18: the detector `8f.chain` (runH) does not flag a chain card "Impaired" on a spent ground beside a
   trade at work on bought material.
+- READ-LEFT-MARKS's two MED (20:27 and 20:50; it said LAND): THE RE-KEYED `8b.extract` IS PARTLY BLIND IN TWO WAYS. (1) The
+  born form (`tests/helpers/pageLaws/law8.mjs :: ownGroundsOnRecord`, both forms) takes a house's PROVEN ground from
+  `supplyStory.js :: impliedGroundsOf`, the leaf under test: with that leaf mutated (`states.set(ground, 'there')`) 12
+  quarries of the 720 print bare beside their own gap row "missing: stone" and the detector finds 0 (the fault is
+  caught by `birthKindsLaw` and `supplyStoryLaw`, not by LAW 8). The proven state is read off the house's own stored
+  gap rows (kind missing or imported, naming its ground): the reader's own independent reading did that and agrees
+  with the leaf at the tip. (2) The page form (`law8.mjs`, about lines 235 and 247) still requires the sentence
+  "Nothing more can be taken from the " on the page; four of six newly held towns print the spent ground only as "The
+  mine/stone quarry is worked out: its own ground is depleted (...)" (r2r-town-52, r2r-hamlet-3, r2r-metropolis-56,
+  r2r-hamlet-23): a planted bare mine there reads 0. Both are LEFT-KEYS's (K7), each proven by the planted fault it
+  must then find. ALSO LOW 4: `leftMarks` M3's positive checks the Institutions tab only: add the Services tab.
 - L13 is cured at point 33 (`labelJoins` green): struck.
 - Seat J's detector (`tests/helpers/pageLaws/law11Supply.mjs`, rule 11g) misses the story line's plural form "are
   failing" (J-ROWS read 130 where it counts 129: its hand-back names the line and the town): a detector's debt.

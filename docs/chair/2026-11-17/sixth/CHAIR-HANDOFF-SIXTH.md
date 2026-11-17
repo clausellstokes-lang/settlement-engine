@@ -586,3 +586,11 @@ should be paused or archived by the owner's hand.
   chair's to rule); its short second read of the amendment is asked. J-ROWS (20:43, 6019ec841): G1 = 11g now 129 -> 0
   in the 720 (the three peat cutters too), the mark's per-house reading byte-identical for 1732 houses; it has not yet
   read the chair's grant of the pass-through (20:12) for the fish rows.
+- **20:51 UTC. READ-LEFT-MARKS SAYS "LAND 9326b520c" (20:50)**: on the amendment HIGH 0 · MED 0 · LOW 0 (M6 is no blinding: a bare house that
+  is no venture still fires; M7 is BR11 as written: exactly 10 houses in 3 towns move, null to "Curtailed by the
+  siege.", each page true). POINT 40's LANDING COMMIT IS BUILT AND PUSHED: `lane/landing-40-2026-11-17` at
+  f86295196124d1c5f82ee08bb3f1ac0f02d45228 (LEFT-MARKS 9326b520c merged on 3b06c724b, no conflict; pushed 20:48). ITS
+  WHOLE CHECK (label `landing-40-f86295196`) is asked of the three CHECKS seats, each after its part of the first
+  batch's. RULING BR21 (the worklist file): the import word "herbs" is scoped (ritual herbs are not an apothecary's
+  stock): MARKS-2. The reader's two MED are LEFT-KEYS's K7 (the worklist file). THE FOUR SEATS THAT CANNOT COMMIT have
+  each a neutral message (20:47): the refusal stands, hold the checkout, the owner has been asked.
