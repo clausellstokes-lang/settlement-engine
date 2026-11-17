@@ -275,3 +275,52 @@ NOTE ON THE NET'S ORDER: the walkers, the one build, the runners and the doors' 
 AMENDMENT 1; after it I re-ran the guard (8 of 8), the brief's list, the round's guards, the bar5 and bar6 guards, the scene
 guard, the PDF anchors, the architecture guards, both type gates (the push hook), eslint on the changed files and both doors
 (the same lines), all green but the named reds. The walkers and the build were not run again (my count).
+
+## AMENDMENT 2 (the chair's messages of 13:03 and 13:12 UTC; the second reader's five MED and ruling BR9), done in its order
+
+Final tip after this section's commit. Each part pushed after it (6bec5015c, the C commit, the D commit, the E commit, 9709ca93c).
+
+- **The trial merge** with the line's tip fd93fb998 (BAR7-ORDER since my base): `git merge --no-commit` at my tip c253bf115,
+  local, aborted, its worktree removed: **CLEAN**; my guard there **green, 8 of 8**.
+- **The duplicate import, guarded**: the guard's BR8 arm holds that no town carries two words of one canonical good
+  (`subsumeTradeGoods`): **57 towns of the 720 at the base, 55 at the line, 0 at my tip**. (The reader's lead was right:
+  only path (1) asked `namesGood`; my cure gates every path at the one `bring`.)
+- **A** · a house is worked out only when every ground of its own is spent (`supplyStory.js :: sourceStoryOf`): **17 houses
+  in 17 towns of the 720 and 2 of the 150 before, 0 after** (mines on live iron beside a spent coal chain).
+  NAMED FOR THE CHAIR: `tests/domain/bar6MarksLaw8.test.js` (a) now reads these **17 mines as `8b.extract`** (an extracting
+  house whose named chain's ground is spent, its rows bare): ruling A and LAW 8's rule now disagree on them; the chair's to
+  rule (re-key LAW 8 to "every ground of its own", or mark the coal rows only). Not re-keyed by me.
+- **B** · the supply rule's own reading passes the short gate whatever the crisis table's class of the row
+  (`crisisStoppedRow.js :: rowShortOf`, `supplyToldShort`): the peat cutter that printed no mark now prints "Failing: a failed
+  venture." (r2r-hamlet-48); every venture of the 720 is marked on its card and in the PDF (12 of 12 were 11); an idle source
+  house's card carries its short mark (the guard's new L1 arm; its venture skip struck).
+- **C** · EX-BOUGHT to the owner's first story exactly: the engine's own word (`IMPORT_WORD.fish`, its reason struck), the one
+  reader's bought-in answer (`imported`, or `route` for a market whose trade is the road), and under a siege only a row the
+  siege marks. The 30 rows of the 720 still fit; a besieged market with a BARE row would not (r2s-under_siege-metropolis-1's
+  reads "Stopped by the siege.").
+- **D** · `houseInputReaches` ROUTE_SHUT's note now says it asserts the isolated form only; my guard holds the besieged form of
+  a buyer (its word on the imports, the one reader answering `imported`, the house curtailed by the siege, never `missing`):
+  read over every besieged buyer of the 720 and the 150; rows the crisis table holds the food's (`food: grain`: 4 mills, 3
+  bakers, 1 brewery under a siege, bare of a siege mark) are the food's reading: NAMED. The war carve-out: gone (F).
+- **E** · the failed venture's words in ONE table (`supplyStory.js :: VENTURE_WORDS`) its writer and its reader
+  (`ventureOfLine`) share, with the note that a rewording keeps the old words readable; the guard proves every line the
+  writer can build (both versions, singular and plural houses, every material) reads back, and BIRTH-2's old words still read.
+- **F · RULING BR9**: the new leaf `src/domain/facts/warIronHook.js` (import-free) holds the iron hook's condition over kept
+  fields (the dependency "Imports <metal>", the imports, the war's state); `foodBalance.js`'s writer calls it in place of its
+  condition (**908 lines, as before**), `warReach.js :: warTakesOf` and `houseInputAtHand.js :: warIronHookOutsideWar` call it
+  and read `plotHooks` no longer (the outside-war reader reads the war's state off the stress container, as `warStateOf`
+  reads it off the record, EG1). PROOF: the predicate equals the stored hook in **every town of the 720 (11 hooks), the 150
+  (15) and the 525 (0)**; `publicProseEquality` soak1k-5 **green**; **THE THREE EQUAL: 0 towns of the 720 and of the 150**;
+  the guard's carve-out struck; **no owner mark moves** (the tree before BR9 against after, over the 720 and the 150); 120
+  towns re-born byte-identical. RE-KEYED BY IDENTITY: `bar5MarksLaw2` (b), its constructed control plants the predicate's
+  kept fields (a metal dependency and an iron import) in place of the hook's text.
+- **The door word**: no "short" beside a failed venture's mark (`InstitutionsTab.jsx`, `crisisMarksOnPage.js`, one hunk each).
+
+THE FINAL TIP'S MEASURES (t6): the birth's pick equals the record's story in **720 + 150 + 525 of 1,395 towns**; the three
+equal **0 · 0**; `fieldDiff` against the base: **no person, tie, name or roster moves** (towns changed 124 · 30 · 40: gaps and
+imports); ventures **11 of the 720**. THE NET AFTER AMENDMENT 2: my guard **9 of 9**; the brief's list with `isolatedTrade`
+and `pipelineContract`: **538 passed, 2 red** (LAW 8's 17 mines, above; `pipelineContract` metropolis/plains/crossroads at
+`assembleSettlement`'s `[npcs]`, named); the round's guards, bar5, bar6, the scene guard, the PDF anchors and
+`tests/architecture`: **609 passed, the same LAW 8 red** and `bar5MarksLaw2` (b) red then re-keyed (green, 5 of 5); both
+type gates (the push hook), eslint on every changed file, both doors (`hits 1787 · fresh 0`, `fresh 39 · stale 72`): green.
+NOT RE-RUN AFTER THE AMENDMENTS (my count): the walkers whole, the one build and its tests, the auditors' runners.
