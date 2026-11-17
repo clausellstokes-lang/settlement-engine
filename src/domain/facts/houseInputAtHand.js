@@ -108,10 +108,11 @@ const ONE_GOOD_BOUGHT = Object.freeze({ hides: Object.freeze(['livestock']), liv
 /**
  * LEFT-MARKS item 3 (L25, SEAM-ECON's houses; the sixth chair's BRIEF-LEFT, 2026-11-17; vetoable by the owner): THE IMPORTS
  * LIST'S OWN WORDS FOR A GOOD THE CHAIN'S NAMES DO NOT SPELL. The herbs come in as "Herbs and forage (local gathering areas
- * exhausted)" or "Ritual wood and herbs (ancient grove damaged)": the word "herbs", whole, brings the medicinal herbs (a chain
- * key -> the words). @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ * exhausted)": that word brings the medicinal herbs (a chain key -> the words). RULING BR21 (the sixth chair, 2026-11-17):
+ * RITUAL HERBS ARE NOT AN APOTHECARY'S OR AN ALCHEMIST'S STOCK: "Ritual wood and herbs (ancient grove damaged)" feeds no house
+ * of medicine, so the word is the brief's own, not "herbs" alone. @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
-const KEY_IMPORT_WORDS = Object.freeze({ herbs: Object.freeze(['herbs']) });
+const KEY_IMPORT_WORDS = Object.freeze({ herbs: Object.freeze(['herbs and forage']) });
 /**
  * LEFT-MARKS item 3: THE STOCK OF A HOUSE WHOSE OWN TRADE TAKES THE GOOD (`crisisDependence.js :: HOUSE_TRADE_INPUT`,
  * `HOUSE_NEED_INPUT`): the
