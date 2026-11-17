@@ -21,7 +21,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { law10a, law10d, law10e } from '../helpers/pageLaws/law10.mjs';
 import { shownHonorificOf } from '../../src/domain/people/seatKeeperDisplay.js';
 import { rowMarkText } from '../../src/domain/display/crisisStoppedRow.js';
-import { dealingShown } from '../../src/components/new/npcComponents.jsx';
+import { dealingShown, houseMarkShown } from '../../src/components/new/npcComponents.jsx';
 import { assignHandlers } from '../../src/domain/people/allegiance.js';
 import { temperamentYieldsToSecret } from '../../src/data/npcData.js';
 import { honorificOfTitle, ownOfficeForms, FACE_HONORIFICS, FACE_HONORIFICS_INLAND, FACE_HONORIFICS_BY_CULTURE } from '../../src/data/faceHonorifics.js';
@@ -81,7 +81,14 @@ export function drawnPayFindings(town) {
 
 /** A line that offers a trade (the audit's detector's verbs: `law8.mjs :: 8b.person`). */
 const SELLS = /\b(sells?|will sell|will grind|will mix|deals in|rents)\b/i;
-/** 8b.person: a card's trade line, as the card prints it, bare beside its house's mark. @param {any} town */
+/**
+ * 8b.person: a card's trade line, as the card prints it, bare beside its house's mark.
+ * RE-KEYED BY IDENTITY (BAR7-CARDS, 2026-11-17; the chair's ruling CM1): the same people (a keeper of a marked house whose
+ * line offers the trade), the same claim (the card carries the house's mark), the form kept. The mark is no longer set in
+ * front of "How they deal" (every reader of the sixth read read that form as broken); it is the card's own line under the
+ * house line (`npcComponents.jsx :: houseMarkShown`), so the finding is a card whose mark line is not the leaf's mark.
+ * @param {any} town
+ */
 export function dealingFindings(town) {
   const roster = Array.isArray(town?.institutions) ? town.institutions : [];
   /** @type {string[]} */ const out = [];
@@ -91,8 +98,8 @@ export function dealingFindings(town) {
     const house = roster.find((/** @type {any} */ r) => r?.name === n.institution.key);
     const mark = house ? rowMarkText(town, 'house', house) : null;
     if (!mark) continue;
-    const shown = dealingShown(n, town);
-    if (!shown.startsWith(mark)) out.push(`${n.name} (${house.name}, marked "${mark}"): "${shown}"`);
+    const shown = houseMarkShown(n, town);
+    if (shown !== mark) out.push(`${n.name} (${house.name}, marked "${mark}"): card's mark line "${shown}" beside "${dealingShown(n, town)}"`);
   }
   return out;
 }
@@ -212,7 +219,10 @@ describe('BAR6-PEOPLE: a person\'s lines read the house and the roster', () => {
       && (town.institutions || []).some((/** @type {any} */ r) => r?.name === n.institution.key && rowMarkText(town, 'house', r)));
     const house = town.institutions.find((/** @type {any} */ r) => r?.name === npc.institution.key);
     const mark = rowMarkText(town, 'house', house);
-    expect(dealingShown(npc, town)).toBe(`${mark} ${npc.presentation.behaviour.trim()}`);
+    // RE-KEYED BY IDENTITY (BAR7-CARDS, 2026-11-17; ruling CM1): the card leads with the mark as its own line under the
+    // house line, and the person's sentence prints as written (before: the mark set in front of the sentence).
+    expect(houseMarkShown(npc, town)).toBe(mark);
+    expect(dealingShown(npc, town)).toBe(npc.presentation.behaviour.trim());
     // the line as the base printed it (bare) is what the detector finds
     expect(npc.presentation.behaviour.trim().startsWith(String(mark))).toBe(false);
   });
