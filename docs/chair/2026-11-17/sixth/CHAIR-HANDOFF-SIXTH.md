@@ -725,3 +725,10 @@ should be paused or archived by the owner's hand.
   `bar7EconTab`, `leftMarks`, `bar6MarksLaw8`, `birthKindsLaw`, `bar8Rows`: 5 files / 35 tests green; being pushed).
   IT LANDS AFTER 41 AND 42 ON THAT TARGETED NET (a one-line change of a word table), and the next whole check reads it.
   THEN MARKS-2 AND LEFT-KEYS ARE SEATED from the line's tip.
+- **22:20 UTC. THE CHECK OF POINTS 41 AND 42, part 2 (CHECKS-2, 22:17: shards 3 and 4 and the dist phase; 58 names): `vendorPdfLazy` ST-2 IS GONE (point 41);
+  ONE NEW: `tests/lint/seedLoopTotality.walker.test.js` "the generation-facing quarantine is EXACT"**: J-ROWS's guard
+  `tests/generators/bar8Rows.test.js` holds five bare seed loops (lines 89, 105, 125, 134, 147; rule N7: a guard's seed
+  loops collect every failure). The walker's other arm was already red by name for another file
+  (`tests/pdf/seamPdfReadsTheTabs.test.jsx`, two loops, at the line already): A NAME HID A NEW CAUSE AGAIN. J-ROWS is
+  told (22:22): one tests-only commit, the collecting form. It lands as a point after 43 on a targeted net (the walker,
+  its guard). Parts 1 and 3 and READ-J-ROWS are awaited.
