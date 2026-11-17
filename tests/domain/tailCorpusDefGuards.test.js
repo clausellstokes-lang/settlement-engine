@@ -53,7 +53,10 @@ const KEEP = [
   { batch: 1, seed: 'r2r-hamlet-1', pool: 'DS-DEF-5::walls ABSENT', vid: 2, why: 'no wall, no siege, no occupation: anyone walks in' },
   { batch: 1, seed: 'r2r-city-0', pool: 'DS-DEF-5::walls PRESENT', vid: 2, why: 'a walled road town with a gate and a watch: every arrival is at a gate' },
   { batch: 1, seed: 'r2r-city-10', pool: 'DS-DEF-8::override active, viability intact', vid: 2, why: 'a town with defenders: the defence makes do' },
-  { batch: 2, seed: 'r2r-town-54', pool: 'DS-DEF-12::CAPACITY: ample', vid: 3, why: 'an isolated town with ample paths and a secure food record: more than enough for a hard year' },
+  // RE-KEYED BY IDENTITY (BAR7-DESKS, 2026-11-17; BRIEF-BAR7 R8): the same claim on a town that still bears it. r2r-town-54's
+  // record is Secure but the page prints its food word as Pressured (`foodWordShown.js`, a daily gap), the state the sixth
+  // read's C41011 stood on: the line now declares `food: ≥ secure · no hunger` and is refused there, as it should be.
+  { batch: 2, seed: 'r2s-politically_fractured-town-2', pool: 'DS-DEF-12::CAPACITY: ample', vid: 3, why: 'an isolated town with ample paths and a secure food record: more than enough for a hard year' },
   { batch: 2, seed: 'r2r-town-17', pool: 'DS-POW-5::autocrat', vid: 1, why: 'a Feudal Appointee at peace, its seat settled: one person decides' },
   { batch: 3, seed: 'r2r-village-23', pool: 'DS-POW-4::riskLabel: Contested', vid: 4, why: 'a contested seat, no siege: visitors are warned to stay polite to the challenger' },
   { batch: 3, seed: 'r2r-city-44', pool: 'DS-POW-4::riskLabel: Critical. The seat could fall', vid: 3, why: 'an ungated seat, no occupation: no move on the hall yet' }, // title reworded (TAIL-CLOSE-TESTS-C): it quoted DS-POW-4's own words
