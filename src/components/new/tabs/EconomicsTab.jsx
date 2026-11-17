@@ -156,7 +156,13 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
           const st = FLOW_STATUS[chain.status] || FLOW_STATUS.operational;
           // A chain may lack a label; default to '' so .split(' ')[0] is always
           // a defined string before .toLowerCase() (matches a malformed entry).
-          const incomeEntry = incomeShareOfChain(chain, safeIncome); // BAR7-ECON item 1: the card's share, the one reading the share's own mark reads (economicsCrisisMarks.js)
+          // BAR7-ECON item 1 (8f.chain, 2026-11-17): the share this card says it feeds
+          // ("Contributes to <share>") is read by the one rule the share's own mark
+          // reads (economicsCrisisMarks.js :: incomeShareOfChain): the first share whose
+          // title holds the first word of the chain's label, or the entrepôt's share. A
+          // share fed by a chain the siege impairs takes the siege's mark, and this line
+          // then goes (`crisisMarks.incomeStopped`), as for a chain of the share's name.
+          const incomeEntry = incomeShareOfChain(chain, safeIncome);
           // T2-6: the facts the retired Supply Chains diagram alone carried (resource node,
           // missing houses, upstream imports, the upstream note) — one derivation, shared
           // with the Compendium's ChainRow.
@@ -818,7 +824,7 @@ import { foodRowShown } from '../../../domain/display/foodRowShown.js';
  * @param {{ needs: ReadonlyArray<string>, mobile: boolean }} props
  */
 function NeedsNotMet({ needs, mobile }) {
-  const names = needs.map((n) => plainGoodName(resourceDisplayName(n) || n)).map((n) => n.charAt(0).toLowerCase() + n.slice(1)); // W2-C-LEAVES-13 (15): no slash label
+  const names = neededNamesShown(needs.map((n) => plainGoodName(resourceDisplayName(n) || n)).map((n) => n.charAt(0).toLowerCase() + n.slice(1))); // W2-C-LEAVES-13 (15): no slash label; BAR7-ECON item 7: one good, once
   return <p data-testid="economics-needs-not-met" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.45}}>
     Needed, and not brought in: {names.join(', ')}.
   </p>;
@@ -835,17 +841,10 @@ function NeedsNotMet({ needs, mobile }) {
 import { chainAsShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
 import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
 import { computeChainSets } from '../tabHelpers.js';
-/**
- * The houses the Institutions tab marks impaired, lower case. BAR7-ECON item 2 (LAW 8's 8g; C39519; vetoable by the owner): the
- * card head's own reading, the leaf's worse state of a house (`crisisStoppedRow.js :: setsWithMarkedHousesWorse`), not the
- * chains' raw set: "Alchemical Trade · Export ○ Operational" printed through an alchemist shop whose card reads "Impaired" and
- * "Short of its materials.".
- * @param {unknown} town @returns {Set<string>}
- */
+/** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case: BAR7-ECON item 2 (8g, C39519), the card head's own reading, the leaf's worse state (`setsWithMarkedHousesWorse`), not the chains' raw set */
 function impairedHousesOf(town) {
   return new Set([...setsWithMarkedHousesWorse(/** @type {any} */ (town), computeChainSets(/** @type {any} */ (town) || {})).impaired].map((h) => String(h).toLowerCase()));
 }
-import { setsWithMarkedHousesWorse } from '../../../domain/display/crisisStoppedRow.js';
 
 /**
  * W2-C-LEAVES-3, #169 (the chair's round three, FIRST; REVIEW-R2-STAGES' cold list, HIGH, rr2s-hamlet-under_siege-rand-1:
@@ -881,4 +880,5 @@ function flowHeaderCount(chains, services, impairedHouses, town = null) {
 }
 
 import { factsOf } from '../../../domain/facts/factsOf.js'; import { complexityLabelShown } from '../../../domain/display/labelBands.js'; /* BAR6-ECON (9b.subsistence): the survival label's twin under a purse past survival */ import { chainCardUnderSiege, flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown, serviceCardShown, EXPORT_STOPPED_TAG, incomeShareOfChain, chainOutputsOnCard, exportsEmptyLineShown } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
-
+import { setsWithMarkedHousesWorse } from '../../../domain/display/crisisStoppedRow.js'; // BAR7-ECON item 2 (8g): the service card reads the leaf's worse state of its house
+import { neededNamesShown } from '../../../domain/display/criticalImportsShown.js'; // BAR7-ECON item 7: one good, once, on the needs line

@@ -18,7 +18,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import {
   ALCHEMY_TRADE_LINE, GRAIN_BOUGHT_LINE, IRON_IMPORTED_LINE, LOCAL_COAL_LINE, LOCAL_COAL_SOLD_LINE, QUARRY_LINE, FISH_EXPORT_LINE,
-  WOOL_LOCAL_LINE, TITHES_RENTS_LINE, TITHES_RENTS_PLAIN_LINE, REMEDIES_SHORT_LINE, METAL_WORKED_LINE, WOOL_LOCAL_WORKED_LINE,
+  WOOL_LOCAL_LINE, TITHES_RENTS_LINE, TITHES_RENTS_PLAIN_LINE, REMEDIES_SHORT_LINE, METAL_SHORT_LINE, WOOL_LOCAL_WORKED_LINE,
   ALCHEMY_UNDER_SIEGE_LINE, INCOME_STATE_SIBLINGS, SIEGE_CLOSED_SOURCES, GRAIN_OWN_FIELDS_LINE,
 } from '../../src/generators/economy/incomeLineSiblings.js';
 
@@ -45,9 +45,15 @@ describe('the reader\'s towns: the cured line does not print', () => {
     ['rr2s-town-indebted-port-1', FISH_EXPORT_LINE, null, /^Fish & /], // #621: no fishing house
     ['rr2s-city-under_siege+famine-rand-1', FISH_EXPORT_LINE, null, /^Fish & /], // #910: no fishing house, and a siege
     ['rr2s-city-under_siege+famine-rand-1', ALCHEMY_TRADE_LINE, ALCHEMY_UNDER_SIEGE_LINE], // an alchemist, under a siege
-    ['rr2s-metropolis-wartime-rand-1', LOCAL_COAL_LINE, METAL_WORKED_LINE], // #1301: no iron among the imports
+    // BAR7-ECON item 1 (2026-11-17), re-keyed BY IDENTITY, the same town and the same cured line: this metropolis's iron and
+    // smelting chains are impaired (anchored below), so its true twin is now the impaired chain's arm, METAL_SHORT_LINE, and
+    // no longer "Metal is smelted or worked here." (the cloth line's arm, written for metal)
+    ['rr2s-metropolis-wartime-rand-1', LOCAL_COAL_LINE, METAL_SHORT_LINE], // #1301: no iron among the imports
     ['rww-metropolis-wartime-1', TITHES_RENTS_LINE, TITHES_RENTS_PLAIN_LINE], // #ww-414: the third source does not dominate
   ];
+  test('the re-key\'s anchor (BAR7-ECON, 2026-11-17): #1301\'s metropolis holds its iron chain impaired', () => {
+    expect((birth('rr2s-metropolis-wartime-rand-1').economicState.activeChains || []).filter((c) => c.chainId === 'iron').map((c) => c.status)).toEqual(['impaired']);
+  });
   test("each reader's town: the cured line does not print, and its twin or the silent row does", () => {
     for (const [seed, cured, twin, gone] of ROWS) {
       const s = birth(seed);

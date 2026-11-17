@@ -26,3 +26,24 @@ export function criticalImportsShown(settlement) {
   const meets = (/** @type {string} */ tc) => trade.imports.some((imp) => imp.toLowerCase().includes(tc.toLowerCase()) || tc.toLowerCase().includes(imp.toLowerCase()));
   return critical.filter((x) => typeof x === 'string').map(String).filter((tc) => trade.needed.includes(tc) || meets(tc));
 }
+
+/**
+ * ONE GOOD, ONCE, ON "Needed, and not brought in" (BAR7-ECON item 7, the auditor's low.doubled; vetoable by the owner). The need
+ * line names each need by its plain name (`tradeListDisplay.js :: plainGoodName` over `resourceDisplayName`), and two tables can
+ * give one good twice: "timber" beside "mountain timber", "fine glass sand" twice (17 towns of the census's 720 at cfc2b680a).
+ * A name is said once, and a name whose words stand whole inside another need's name (its qualifier in brackets read apart)
+ * gives way to the longer: "mountain timber", not "timber, mountain timber"; "timber (for large vessels)" stays the one
+ * timber. The order is the list's own. Display only.
+ * @param {ReadonlyArray<string>} needs the needs' names as the line prints them (the tab names each by the label seam)
+ * @returns {string[]} the names printed, each good once
+ */
+export function neededNamesShown(needs) {
+  const names = needs.map(String);
+  const bare = (/** @type {string} */ n) => n.replace(/\s*\(.*?\)\s*/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+  const within = (/** @type {string} */ a, /** @type {string} */ b) => a !== b && ` ${b} `.includes(` ${a} `);
+  /** @type {Map<string, number>} the fullest name of each bare name, by its index */
+  const best = new Map();
+  names.forEach((n, i) => { const b = bare(n); const at = best.get(b); if (at === undefined || n.length > names[at].length) best.set(b, i); });
+  const bares = [...best.keys()];
+  return names.filter((n, i) => best.get(bare(n)) === i && !bares.some((m) => within(bare(n), m)));
+}

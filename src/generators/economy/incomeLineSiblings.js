@@ -97,7 +97,7 @@ export const TIMBER_PLAIN_LINE = 'Local forest provides timber revenue.';
 /** BAR2-LABELS LB6: the timber line's twin where a sawmill stands and no managed woodland does (vetoable by the owner). */
 export const TIMBER_SAWN_LINE = 'Local forest provides timber revenue, and the timber is sawn here.';
 /** BAR7-ECON item 1 (8f.chain; vetoable by the owner): the timber line's twin where the timber chain is impaired. */
-export const TIMBER_SHORT_LINE = 'Little timber is felled or sawn here while the timber trade is short of what it needs.';
+export const TIMBER_SHORT_LINE = 'Little timber is worked here while the timber trade is short of what it needs.';
 export const TIMBER_BOUGHT_LINE = 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.';
 /** The market-day line, declared on its own text (it names the market; economicState.js prints its literal, registered there). */
 const MARKET_DAY_SET = Object.freeze([Object.freeze({ text: 'Market day stall fees and toll collection on goods entering the market.', needs: Object.freeze(['market']), excludes: Object.freeze(['crisis: under_siege']) })]);
