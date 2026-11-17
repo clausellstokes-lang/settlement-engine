@@ -20,7 +20,7 @@
  * that base, read here BLIND (the words the birth brings in for the buyers struck from the record's imports): the house
  * is marked again, so the reader still sees what the base saw and the cure is the birth's word.
  *
- * @enforced-by this file (the guard of `src/domain/facts/houseKinds.js` and `resourceGenerator.js :: importsBroughtAtBirth`)
+ * @enforced-by this file (the guard of `src/domain/facts/houseKinds.js` and `src/generators/resourceGenerator.js :: importsBroughtAtBirth`)
  */
 import { subsumeTradeGoods } from '../../src/domain/region/goodsCatalog.js';
 import { describe, expect, test } from 'vitest';
