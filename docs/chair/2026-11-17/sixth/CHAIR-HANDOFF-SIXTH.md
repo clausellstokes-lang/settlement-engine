@@ -707,3 +707,9 @@ should be paused or archived by the owner's hand.
   that one red named for its follow-up (one town of the 900 is touched). THE ORDER NOW: 40 (landing) · 41 and 42
   (`lane/landing-41-42-2026-11-17`, their whole check running; READ-J-ROWS reading) · then LEFT-MARKS's follow-up as
   the next point · then the docs commit with the rows of 36 onward.
+- **21:53 UTC. DESKS-ECO IS DONE AND UNCOMMITTED TOO (21:53; its check refused `git add` and `git commit`; its hand-back is in its checkout):** 12d
+  16 -> 1 (the salt half left: POOR sits at layer 3), 11c.needed 8 -> 0, 11c.venture and 11c.idle -> 0, 15e left, the
+  fishmonger left, DS-GEN-3 Import-Dependent's v4 retired; a new atom `critical import brought in`; twins print in 24
+  and 14 towns of the 720; 0 of the 525 move. FIVE SEATS NOW HOLD FINISHED WORK THEY MAY NOT COMMIT: K-POWERS, K-PEOPLE,
+  K-WATCH, DESKS-DEF, DESKS-ECO (sessions in section 0 and the task list); J-INCOME is stopped at its first commit.
+  ONLY THE OWNER'S WORD RELEASES THEM.
