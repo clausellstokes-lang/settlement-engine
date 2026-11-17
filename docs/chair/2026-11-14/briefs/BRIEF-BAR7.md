@@ -188,6 +188,27 @@ YOUR ITEMS:
    "Summary/Overview"): an ordinary day printed under a siege ("A trader wanting credit … must satisfy the bank …", "A
    newcomer is noticed by the second day here …"). For each line that is YOUR FILE'S: declare it against the family
    that denies it, or say in one line why it is true. Count them; this item is LOW and comes last.
+5. THREE LEFTOVERS OF THE SEAM'S SCENES SEAT, found by its reader in your files (`arrivalProse.js`): (a) THE DYER'S TWIN
+   ("A dyer walks past …") still `excludes: trade at work: cloth` while its original now needs `trade at work: dyed
+   cloth`: where cloth is made and no dyer works both are refused and the slot is lost: a twin excludes the key its
+   original needs. (b) THE TANNERS' DOMINANT TWIN, "Hardly a hide hangs drying anywhere, and the lanes smell of nothing
+   worse than the town.", says "the town" under no size band, and the tanners' sense admits a hamlet: a noun every tier
+   bears, or a band. (c) THE SMITHS' TWINS that end "… there is no iron to work." and "… with no iron to work." say the
+   place has no iron where a smelter that is not short stands (the smelter left the ironwork key): the twin says the
+   SMITHS' own state, or is refused where a house of the town holds iron. Each with a planted case in your guard.
+   AND THREE THE SEAM'S SCENES SEAT ITSELF LEFT BY NAME (its hand-back, `docs/chair/2026-11-16/bar6/BAR6-SEAM-SCENES-HANDBACK.md`
+   on the joined line): (d) THE BROUGHT-IN TWIN, "Bolts of cloth brought in from elsewhere are stacked in the shops,
+   waiting to be cut.": TRUE wherever it prints, and the runner (`runC`, 6b-denied) convicts it by its words: 4 of the
+   150 and 12 of the 720 at the seam's tip. Reword it in the page's voice so that it says first that little cloth is
+   made here (that seat's proposal, vetoable: "Little cloth is made here now; the bolts in the shops are brought in
+   from elsewhere."); it stays true under a siege (bolts in the shops, none on the road); count 6b-denied over the 150
+   and the 720 before and after, false lines apart from true lines the runner convicts by their words (the anvil twin
+   "… for want of iron", 1 of the 720, is such a one: leave it, name it). (e) THE TANNERS' `lines` POOL (four bare
+   lines, among them "Downwind of the tanning pits …" and "Hides hang drying on frames …") shows the pits at work
+   where every tanner is short (no instance in the 150 or the 720 today): the leather key on each, with a twin, B7
+   held. (f) B7 OUTSIDE THAT SEAT'S SAMPLE: three pools the tip reaches under three lines: the kilns' dominant pool
+   (r2s-religious_conversion-metropolis-0: your item 1's pool: hold three there) and the arms' dominant pool
+   (r2r-village-18, r2s-insurgency-village-2: cure it if the pool is in your file, else name it).
 DO NOT: cure `8k.trade.mild` (a war curtails AND feeds the forges: five of eight read were explained).
 
 ### BAR7-DESKS · a desk's line declares a band that cannot admit the state that denies it (LAW 9: 9g, 9h.entrepot, 9i; LAW 7: 7x; 5x)
