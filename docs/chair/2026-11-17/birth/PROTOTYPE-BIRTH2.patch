@@ -1,9 +1,9 @@
 diff --git a/src/domain/facts/birthKinds.js b/src/domain/facts/birthKinds.js
 new file mode 100644
-index 000000000..dc27d98eb
+index 000000000..f37377768
 --- /dev/null
 +++ b/src/domain/facts/birthKinds.js
-@@ -0,0 +1,108 @@
+@@ -0,0 +1,113 @@
 +/**
 + * PROTOTYPE (BIRTH-AUDIT, scratch only; never pushed under src/): the kind of a house by catalogue id, and the rule switch.
 + * BIRTH_RULE (environment, a comma list): R1 the reader's rule everywhere; R1p the reader's rule at print only; R2 the
@@ -60,6 +60,9 @@ index 000000000..dc27d98eb
 +  salt_works: { worked: 'salt_flats', bought: 'Salt' },
 +  dairy_farmer: { worked: 'grazing_land', bought: 'Fodder and hay', boughtMinTier: 'town' }, // 'worked': the audit's correction
 +});
++/** The finished good an exhausted house's town now brings in: the ground's shortage import, but the charcoal burner's is its
++ * charcoal (its woods' shortage import, "Timber (…cleared)", is its raw material and would feed it). */
++export const finishedGood = (id, shortageImport) => (id === 'charcoal_burner' ? 'Charcoal and fuel' : shortageImport(CAUSES[id].worked));
 +/** FNV-1a 32 (the kernel's own hash, `fnv1a32`, copied so this leaf stays import-free). @param {string} s */
 +export function hash32(s) { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return h >>> 0; }
 +/** Is the barren house of this id KEPT in this town (the seed's own, no draw)? @param {unknown} seed @param {string} id */
@@ -67,7 +70,7 @@ index 000000000..dc27d98eb
 +const SHARE_BY = Object.fromEntries(String(ENV2.BIRTH_SHARE_BY || '').split(',').filter(Boolean).map((x) => { const [k, v] = x.split(':'); return [k.trim(), Number(v)]; }));
 +export const keepBarren = (seed, id) => (hash32(`${String(seed)}::birth-keep::${id}`) % 60) < Math.round((Object.prototype.hasOwnProperty.call(SHARE_BY, id) ? SHARE_BY[id] : SHARE) * 60);
 +const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-+/** The cause a kept house bears: 'bought' on a connected road no siege shuts where the kind can bear it (by the seed's hash
++/** The cause a kept house bears: 'bought' on a route connected in ordinary times (a siege does not count) where the kind can bear it (by the seed's hash
 + * between the two where both are open), else 'worked'. */
 +export function causeOf(seed, id, tier, connected) {
 +  const c = CAUSES[id]; if (!c) return null;
@@ -85,7 +88,8 @@ index 000000000..dc27d98eb
 +  const near = Array.isArray(config.nearbyResources) ? config.nearbyResources : (config.nearbyResources = []);
 +  const route = String(config.tradeRouteAccess ?? '');
 +  const terrain = String(terrainType ?? config.terrainOverride ?? '');
-+  const connected = connectedOf(route) && !(Array.isArray(config.stressTypes) ? config.stressTypes : []).includes('under_siege');
++  // THE OWNER (2026-11-17 04:33 UTC): a cause is of ordinary times: a siege does not take "bought in" away; only an isolated route does
++  const connected = connectedOf(route);
 +  for (const inst of institutions || []) {
 +    if (!inst || typeof inst.name !== 'string' || inst.status === 'ruined') continue;
 +    const id = String(idOf(inst) || '');
@@ -100,11 +104,12 @@ index 000000000..dc27d98eb
 +        if (!config[f].includes(k)) config[f].push(k);
 +      }
 +      if (Array.isArray(nearbyCtx) && !nearbyCtx.includes(k)) nearbyCtx.push(k);
-+      if (site === 'gap' && imp) { const w = shortageImport(k); if (w && !imp.includes(w)) imp.push(w); }
++      if (site === 'gap' && imp && connected) { const w = finishedGood(id, shortageImport); if (w && !imp.includes(w)) imp.push(w); }
 +      n++;
-+    } else if (cause === 'worked' && site === 'gap' && SITE === 'late' && imp) {
-+      // 'late': the import at the gaps' hour, the ground at the narratives' end (after the history reads the resources)
-+      const w = shortageImport(CAUSES[id].worked); if (w && !imp.includes(w)) imp.push(w);
++    } else if (cause === 'worked' && site === 'gap' && SITE === 'late' && imp && connected) {
++      // 'late': the import at the gaps' hour, the ground at the narratives' end (after the history reads the resources);
++      // THE OWNER (04:30): the finished good now brought in, and only where a route is open
++      const w = finishedGood(id, shortageImport); if (w && !imp.includes(w)) imp.push(w);
 +      n++;
 +    } else if (cause === 'bought' && site === 'gap' && imp) {
 +      const w = CAUSES[id].bought; if (!imp.includes(w)) imp.push(w); n++;
@@ -113,7 +118,7 @@ index 000000000..dc27d98eb
 +  return n;
 +}
 diff --git a/src/domain/facts/houseInputAtHand.js b/src/domain/facts/houseInputAtHand.js
-index e74df09fc..ee264b34b 100644
+index e74df09fc..83919e7da 100644
 --- a/src/domain/facts/houseInputAtHand.js
 +++ b/src/domain/facts/houseInputAtHand.js
 @@ -41,6 +41,7 @@ import { canonStressors } from '../canonicalAccessors.js'; // EG1: the war read
@@ -154,7 +159,7 @@ index e74df09fc..ee264b34b 100644
    const raw = str(chain?.rawResource);
    const config = record?.config || {};
    const es = record?.economicState || {};
-@@ -177,11 +191,13 @@ export function houseInputAtHand(record, chainKey, house, chain) {
+@@ -177,12 +191,14 @@ export function houseInputAtHand(record, chainKey, house, chain) {
    const native = [...keys, ...keys.flatMap((k) => arr(/** @type {Record<string, { commodities?: unknown } | undefined>} */ (RESOURCE_DATA)[k]?.commodities))].map(str).map(norm).join('|');
    const rawNames = [raw, ...terrainSynonymsFor(raw)];
    if (words.some((w) => holds(native, w)) || rawNames.some((n) => holds(native, n))) return 'local';
@@ -165,10 +170,12 @@ index e74df09fc..ee264b34b 100644
    // HW1 (BAR4-SCENES-2): a house on a ground wholly spent is not its own producer, and a house that works the ground itself
    // (SPENT_GROUND_WORKERS: the mine, the quarry, the boats) is fed by no import there either: the page's SV6 reading, one fact
 -  const spentGround = onWhollySpentGround(record, house);
+-  if (spentGround && SPENT_GROUND_WORKERS.includes(String(catalogIdForName(str(house?.name)) ?? ''))) return 'missing';
 +  const spentGround = onWhollySpentGround(record, house) || !!ownGroundSpent(record, house);
-   if (spentGround && SPENT_GROUND_WORKERS.includes(String(catalogIdForName(str(house?.name)) ?? ''))) return 'missing';
++  if (spentGround && (SPENT_GROUND_WORKERS.includes(String(catalogIdForName(str(house?.name)) ?? '')) || (RULE.has('K') && !!BARREN_GROUNDS[houseId]))) return 'missing'; // BIRTH-2-COUNT: every source house works its ground
    if (!spentGround && localProducerSupplies(raw, liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
  
+   // The route, where no siege shuts it. BAR5-CHAINS (b) (LAW 3's L3.needed, the chair's direction of BRIEF-BAR5 under HW1;
 @@ -197,7 +213,7 @@ export function houseInputAtHand(record, chainKey, house, chain) {
    const names = [raw, spec?.raw, spec?.noun, ...terrainSynonymsFor(raw)].filter((x) => typeof x === 'string' && x !== '');
    const routeHouse = institutionHasAnyTag(house || {}, [...ROUTE_HOUSE_TAGS]);
@@ -190,10 +197,12 @@ index e74df09fc..ee264b34b 100644
    for (const [house, own] of grounds) {
      // BAR6-MARKS (8a.input): a house whose trade is a good (`HOUSE_TRADE_INPUT`) is read by the one reader of that good
      // (`housesWantingTradeInput`), not by the chains it is listed on (the cooper's barrels hold the herds' meat: it was
-@@ -255,6 +276,8 @@ export function housesOnSpentGround(settlement) {
+@@ -254,7 +275,9 @@ export function housesOnSpentGround(settlement) {
+     // the houses this reading held before it (`SPENT_READ_HELD`) keep it
      const tradeId = String(catalogIdForName(house) ?? '');
      if (Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, tradeId) && !SPENT_READ_HELD.includes(tradeId)) continue;
-     const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
+-    const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
++    const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')) || (RULE.has('K') && !!BARREN_GROUNDS[String(catalogIdForName(house) ?? '')]); // an import feeds a buyer, never the work on the ground (BIRTH-2-COUNT: every source house)
 +    // BIRTH-AUDIT R1: a buyer on a spent ground is fed by a connected road no siege shuts
 +    if ((RULE.has('R1') || RULE.has('R1p')) && !works && BUYS_AND_WORKS.has(tradeId) && hasTradeRouteConnection(String(/** @type {any} */ (s).config?.tradeRouteAccess ?? '')) && !arr(/** @type {any} */ (s).config?.stressTypes).includes('under_siege')) continue;
      const allSpent = own.every((c) => spent.has(/** @type {string} */ (c.resourceKey)) && c.status !== 'magically_sustained'
@@ -229,7 +238,7 @@ index 61c16ac49..830f4b947 100644
          if (_rng() < cascadeChance) {
            // Carry the full catalog def (desc/tags/priorityCategory/...) like
 diff --git a/src/generators/resourceGenerator.js b/src/generators/resourceGenerator.js
-index 41a788cbb..db94b4f15 100644
+index 41a788cbb..2958ec075 100644
 --- a/src/generators/resourceGenerator.js
 +++ b/src/generators/resourceGenerator.js
 @@ -15,7 +15,12 @@ import {
@@ -263,8 +272,8 @@ index 41a788cbb..db94b4f15 100644
 +  if (RULE.has('K') && economicState) birthWriteCauses({ institutions: nativeInstitutions, config, economicState, seed: globalThis.__birthSeed, tier: economicState.tier, site: 'gap', terrainType,
 +    shortageImport: birthShortage, connectedOf: hasTradeRouteConnection, idOf: (i) => i.catalogId || catalogIdForName(i.name) });
 +  // BIRTH-AUDIT R2 (prototype): the input of a house that buys and works joins the imports where nothing here answers it
-+  if ((RULE.has('R2') || RULE.has('NOOP_import')) && economicState && hasTradeRouteConnection(String(config.tradeRouteAccess ?? ''))
-+    && !(Array.isArray(config.stressTypes) ? config.stressTypes : []).includes('under_siege')) {
++  // THE OWNER (2026-11-17 04:33 UTC): the import is the town's ordinary trade, written under a siege too (it reads cut off there)
++  if ((RULE.has('R2') || RULE.has('NOOP_import')) && economicState && hasTradeRouteConnection(String(config.tradeRouteAccess ?? ''))) {
 +    const rec = { config, economicState, resourceAnalysis: { imports }, institutions: nativeInstitutions };
 +    const add = [];
 +    for (const inst of nativeInstitutions) {

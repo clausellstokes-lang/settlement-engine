@@ -183,3 +183,92 @@ WHAT SHOULD NOT BE DONE, WITH THE COUNT:
 WHAT WOULD CHANGE MY MIND: if the owner reads a city charcoal burner on carted wood as true, share 1 for it costs nothing
 in people (75 more towns hold the exception, 35 of them metropolises). If the owner will move no person at all, share 1
 for every kind is the only such rule, and NEW 1 and NEW 2 then carry most of its truth.
+
+---
+
+## 8 · THE OWNER'S ADDENDUM: THE CAUSES ALIGN WITH THE IMPORTS (the chair, 04:30 and 04:33 UTC), RE-BORN AND COUNTED
+
+THE RULE AS CORRECTED, and the prototype changed to it (`PROTOTYPE-BIRTH2.patch` regenerated; every figure in this section
+is from the new births `*s-720/150/ref`, read by `probes/b2-all.sh` and `probes/b2align.mjs`; outputs `out2/b2s/`):
+- A CAUSE IS OF ORDINARY TIMES. "Bought in" is open wherever the route is connected in ordinary times, **a siege
+  included**. Only an ISOLATED route closes it, and there a kept house is "exhausted" or not drawn. BIRTH-1's own import
+  (R2) is written under a siege too: its births were re-made as `R25s`, and every share here is counted against `R25s`.
+- "EXHAUSTED" PAIRS WITH THE FINISHED GOOD NOW BROUGHT IN, ONLY WHERE A ROUTE IS OPEN; on an isolated route, no import.
+- EVERY SOURCE HOUSE WORKS ITS OWN GROUND: an import never lifts its mark (the prototype reads the seven barren kinds as
+  `SPENT_GROUND_WORKERS` do). Without this the peat cutter, the charcoal burner and the dairy were fed by their own
+  ground's shortage import (c1 below: 44 towns of the 720 before the change).
+
+### (b) THE PAIRS: kind · cause · route · the import line · the card's mark (the mixed rule of 7; share 1 for the two removed kinds)
+
+| kind | cause | route | the line on `primaryImports` | the card's mark | the Imports heading | houses, the 720 |
+|---|---|---|---|---|---|---|
+| stone quarry | exhausted | connected | "Dressed stone (local quarry depleted)" | "Short of stone." | prints it | 52 |
+| stone quarry | exhausted | besieged | the same, kept as ordinary trade | "Short of stone." | heading left out (trade stopped) | 3 |
+| stone quarry | exhausted | isolated | none | "Short of stone." | prints nothing of it | 2 |
+| mine, open-cast | exhausted | connected · besieged | "Iron ore (local iron mines exhausted)" | "Short of iron ore." | prints it · heading left out | 9 · 1 |
+| peat cutter | exhausted | connected | "Reeds, peat, and marsh herbs (local wetlands exhausted)" | "Short of …" in 8; **no mark in 6** (see c1) | prints it | 14 |
+| salt works | bought in | connected | "Salt" | none | prints it | 22 |
+| salt works | **bought in** | **besieged** | "Salt", kept as ordinary trade | **"Curtailed by the siege."** (the leaf's own rule: an imported input under a siege) | heading left out (trade stopped) | 1 |
+| salt works | exhausted | connected | "Salt (local salt flats exhausted)" | "Short of salt." | prints it | 17 |
+| charcoal burner (share 1) | bought in | connected | "Timber" | none in 30; "Short of timber." in 15 (their own woods are spent, see c4) | prints it | 45 |
+| charcoal burner (share 1) | exhausted | connected · besieged | "Charcoal and fuel" (an existing word of the list; the woods' own shortage import is timber, its raw material) | "Short of timber." | prints it · left out | 29 · 1 |
+| dairy farmer (share 1) | exhausted | connected · besieged · isolated | "Livestock and dairy (local grazing land depleted)", none on the isolated route | "Short of livestock." | prints it · left out · nothing | 29 · 3 · 2 |
+
+THE WORDS FOR "BOUGHT IN": salt is "Salt" (exists); cordwood is "Timber" (exists; the reader answers the burner's timber by
+it); rock salt needs no word of its own ("Salt"); fodder has NO WORD, and it would be one new word, "Fodder and hay", but
+never needed (no dairy stands at a town or larger). THE WORDS FOR "EXHAUSTED": every ground's shortage import exists; the
+charcoal burner's finished good is "Charcoal and fuel" (exists, `UPSTREAM_IMPORT_LABELS.fuel`).
+
+### (c) THE REVERSE, towns where it would be false after the rule (`b2align.mjs`; the 720 · the 150)
+
+| share | c1 an import feeds a house the page calls exhausted | c2 an export or Produced-locally pill names its good | c3 "Needed, and not brought in" names a material the imports list names | kept houses in besieged towns |
+|---|---|---|---|---|
+| BIRTH-1 alone, today's kinds (before "every source house works its ground") | 44 · — (peat 13, charcoal 27, salt 6: their own shortage import lifts the mark) | 0 | 0 | — |
+| 0 | 1 · 0 | 0 · 0 | 0 · 0 | 0 |
+| 1/5 | 2 · 1 | 0 · 0 | 0 · 0 | 1 |
+| 1/3 | 4 · 2 | 0 · 0 | 0 · 0 | 3 |
+| 1 | 16 · 1 | 1 · 0 (a woodcutter's "Sacred wood") | 0 · 0 | 9 |
+| **the mixed rule** | **7 · 0** | **0 · 0** | **0 · 0** | **5** (3 quarries, 1 mine: "Short of …"; 1 salt works bought in: "Curtailed by the siege.") |
+
+WHAT IS LEFT IN c1, AND THE READER THAT MUST CHANGE: the peat cutters (6 at the mixed rule) stand on a chain of another
+ground (the coal chain lists "Charcoal burner, Peat cutter"), and `houseInputAtHand.js :: housesOnSpentGround` judges a
+house by EVERY chain it is listed on, so a live coal chain hides the spent marsh. The shepherd (1–10) is not a barren kind
+here (its spent pasture is BIRTH-1's buyer reading). THE CHANGE: a kind (ii) house is judged by its own kind's grounds and
+the Depleted list (`ownGroundSpent`), not by the chains it is listed on: BIRTH-1's R4 reading, as said in 3. The same
+reading counts as spent the houses the chain reading misses in the target. The born-short houses left in calm connected
+towns at the mixed rule: 9 in 8 of the 720 = the luxury quarter 4 (BIRTH-1's word), the 2 worked-out salt works of 4,
+and 3 charcoal burners on their own spent woods (r2r-city-22, r2r-metropolis-17): all true marks, the kinds reading's
+exceptions. c2 and c3 hold by construction. The Produced-locally and Exports pills print a made good only where a chain
+works it (`tradeListDisplay.js :: pillBorneOut`), and the need line is computed against the record's whole imports list,
+not the printed heading (`importsAsPrinted`). So the owner's point holds under a siege too: "Needed, and not brought in"
+never names a material the list names (0 towns in every share and at the base).
+
+c4, A PAIR TO RULE ON (the charcoal burner only): with every source house working its ground, a burner on its own spent
+woods is "Short of timber." beside the woods' own shortage import "Timber (local managed woodland cleared)". That is the
+quarry's form, but the import is the burner's RAW material, not its finished good: 35 burners in the 720 at the mixed
+rule (BIRTH-1 alone prints them unmarked, fed). Either the owner reads it as true (the town buys timber for its carpenters,
+and the burner's work in the wood is over), or the burner is not a ground worker and these 35 read "bought in".
+
+### (d) UNDER A SIEGE
+
+A kept "bought in" house keeps its cause and its import. The card prints **"Curtailed by the siege."** (the leaf's
+`housesOnImportedInput`: the stored gap is `imported`, since BIRTH-1's import is written under the siege too); it is never
+short with no cause, never re-read as exhausted, never removed. TODAY'S PAGE PRINTS NO "cut off" LINE: where a siege stops
+trade, the Economics tab leaves its Imports heading out (`tradeListDisplay.js :: tradeListsAsPrinted`, `tradeStopped`,
+`chainStateShown.js :: tradeStoppedHere`), while the need line still reads the whole list, so it does not name the cut
+import. If the owner wants the import to READ cut off, that is one new line for the owner's veto, at that heading:
+**"Imports: cut off by the siege (in ordinary times: Salt, …)."**
+
+### THE SHARES AGAIN, UNDER THE CORRECTED RULE (against R25s; the 720 · the 150 · the 525)
+
+| share | houses removed, the 720 | people · ties · roster move | born-short left in calm connected towns | marks, the 720 (base 2,066; BIRTH-1 alone 652) |
+|---|---|---|---|---|
+| 0 | 235 | 205 · 203 · 205 · 37 · 36 · 37 · 6 · 5 · 6 | 7 in 6 · 2 in 2 | 564 |
+| 1/5 | 193 | 178 · 177 · 178 · 29 · 28 · 29 · 6 · 5 · 6 | 9 in 8 · 3 in 3 | 597 |
+| 1/3 | 160 | 151 · 150 · 151 · 26 · 25 · 26 · 6 · 5 · 6 | 11 in 10 · 3 in 3 | 621 |
+| 1 | 0 | 0 in all | 17 in 16 · 5 in 5 | 730 |
+| **mixed** | 112 (charcoal 75, dairy 34, 3 by re-draw) | **106 · 105 · 106 · 24 · 23 · 24 · 0 · 0 · 0** | 9 in 8 · 3 in 3 (all true marks; above) | 652 |
+
+The people moved are unchanged by the correction (the cause takes no draw). THE RECOMMENDATION OF 7 STANDS, with the reader
+change of (c) folded into BIRTH-1's R4 and the charcoal burner's pair (c4) put to the owner. Under the mixed rule, 111 of
+the 720 and 44 of the fresh 300 (14.7%) hold a kept source house.
