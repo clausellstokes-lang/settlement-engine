@@ -243,6 +243,13 @@ should be paused or archived by the owner's hand.
   have one): each in a commit of its own, proven to move nothing (records byte-equal over the 900 births and the 525;
   the 720's pages byte-equal) before any twin is written.
 
+- **BR24 (22:44 UTC, 2026-11-17; the fish market's row in an idle town; J-ROWS's second reader's HIGH 2).** J-ROWS swapped the Fish market's
+  catch row to "Preserved fish" wherever the fish grounds are used up. Where fish is BOUGHT IN that is true. Where the
+  town is IDLE (grounds spent, nothing brought in: 4 towns of the 720) the swap took the row from "Short of fish. Fish
+  sold daily from the morning catch." (marked: true by the page's convention) to a bare "Preserved fish: Smoked, dried,
+  and salt-preserved fish ..." under a card that still reads "Short of fish.": a false line the cure added. RULED: THE
+  SWAP IS FOR THE BOUGHT STORY ONLY; an idle town keeps its base row with its mark. J-ROWS builds it in its own files.
+
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -732,3 +739,19 @@ should be paused or archived by the owner's hand.
   (`tests/pdf/seamPdfReadsTheTabs.test.jsx`, two loops, at the line already): A NAME HID A NEW CAUSE AGAIN. J-ROWS is
   told (22:22): one tests-only commit, the collecting form. It lands as a point after 43 on a targeted net (the walker,
   its guard). Parts 1 and 3 and READ-J-ROWS are awaited.
+- **22:44 UTC. THE WHOLE CHECK OF POINTS 41 AND 42 IS IN (CHECKS-2 22:17, CHECKS-1 22:29, CHECKS-3 22:39): 161 names at 7d045555a; against point 40's (162):
+  GONE `labelJoins` and `vendorPdfLazy` ST-2 (point 41 cured both); ONE NEW, the seed-loop walker's arm (J-ROWS's guard).
+  READ-J-ROWS SAYS "DO NOT LAND YET" (22:43), AND THIS TIME THE CHAIR HOLDS THE SEAT BACK:** HIGH 1 the walker (the seat is
+  told); HIGH 2 the idle towns' fish row (ruling BR24 above: the seat is told, 22:45); MED 3: the Fisher's landing's
+  "Fresh fish / Catch of the day." stands false in r2s-religious_conversion-village-0 and unsupported in r2r-village-36,
+  and twelve more idle landings print it under "Short of fish." (their pool lives in `src/data/institutionServices.js`,
+  no seat's: ROWS-2); LOW: `markReadsAlone` is honest and brittle (one setter of the key in src); two stale comments; a
+  duplicated peat line; `tests/helpers/houseInputSplit.js` re-keyed outside the list (accepted: the story line counts
+  as "said"). EVERYTHING ELSE AS THE SEAT SAID (G1: 130 general lines gone in 119 towns, none added, no town loses its
+  only gap line, the mark's reading byte-identical; the declared move is `availableServices` alone: 35 of the 720, 48 of
+  the 525; 158 reference test files: the same 25 reds at base and tip).
+  SO: POINT 41 ALONE IS BEING LANDED NOW (8f392d100: its two reds gone, nothing new of its own). THE COMMITS 7d045555a
+  (point 42 as first built) AND 67887afdc (point 43 as first built on it) ARE VOID FOR LANDING and stay on origin only as
+  the branches `lane/landing-41-42-2026-11-17` and `lane/landing-43-2026-11-17`. NEXT: LEFT-MARKS's BR21 follow-up is
+  merged again, directly on point 41, as the new POINT 42 (a targeted net), so that MARKS-2 can be seated; J-ROWS's
+  corrected tip becomes a later point after its reader's short second read and a whole check.
