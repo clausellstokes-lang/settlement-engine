@@ -1,0 +1,17 @@
+{"id":"C0036","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"STATE","why":"a trader seeking credit at the bank is ordinary-times trade scene, unmarked, under a siege that closed the road","other":"C0065"}
+{"id":"C0350","town":"bar0-city-under_siege+famine-rand-42","sev":"MED","kind":"STATE","why":"food 'still bought from outside' under siege where nothing comes in by road, gate or water; FOOD failed source is None","other":"C0065"}
+{"id":"C0351","town":"bar0-city-under_siege+famine-rand-42","sev":"MED","kind":"STATE","why":"deciding what it can 'still afford to import' under a siege that stopped all trade; imports cannot arrive","other":"C0087"}
+{"id":"C0748","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"connection label doubles the title: 'Archmage of the Council Yuki Cao, the guild archmage'","other":""}
+{"id":"C1631","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"STATE","why":"'the city buys what it used to take' as ordinary-times remedy, while the siege has cut all trade by road, gate and water","other":"C0065"}
+{"id":"C2038","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"PAIR","why":"collector 'asks what you carry, where from' goods checked: unmarked customs scene; Customs house is Stopped by the siege, roads shut","other":"C0630"}
+{"id":"C2424","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"mark 'Short of grapes.' set in front of the how-they-deal sentence, so the line reads wrong","other":""}
+{"id":"C2438","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"mark 'Curtailed by the siege.' stands as the whole how-they-deal text before the sentence it does not belong to","other":""}
+{"id":"C2449","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"mark 'Stopped by the siege.' set in front of how-they-deal sentence, so the line reads wrong","other":""}
+{"id":"C2524","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"PAIR","why":"toll-keeper 'takes the toll and lifts the gate' unmarked; Toll bridge is Stopped by the siege, none to gather","other":"C0705"}
+{"id":"C2593","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"mark 'Short of clay.' set in front of the how-they-deal sentence, so the line reads wrong","other":""}
+{"id":"C2616","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"mark 'Scarce in the famine.' set in front of the how-they-deal sentence, so the line reads wrong","other":""}
+{"id":"C2654","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"PAIR","why":"host 'charges by the animal and the night' unmarked; Caravanserai is Stopped by the siege, no caravans reach it","other":"C0605"}
+{"id":"C2685","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"mark 'Stopped by the siege.' set in front of the how-they-deal sentence, so the line reads wrong","other":""}
+{"id":"C2779","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"marks 'Curtailed by the siege. Short of iron ore.' set in front of the how-they-deal sentence, so the line reads wrong","other":""}
+{"id":"C2899","town":"bar0-city-under_siege+famine-rand-42","sev":"LOW","kind":"BROKEN","why":"mark 'Curtailed by the siege.' stands as the how-they-deal text before the sentence it does not belong to","other":""}
+{"id":"DONE","lines":3633,"blocks":1,"flags":16}
