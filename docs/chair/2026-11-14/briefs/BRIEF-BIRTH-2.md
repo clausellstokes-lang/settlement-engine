@@ -57,9 +57,11 @@ works of the census's 720 stand on a connected route).
    environment switches: you do neither; its `keepBarren` shows the seed's own hash that takes no draw); the probes under
    `docs/chair/2026-11-17/birth/probes/` are yours to run and to extend in files of your own.
 4. AT YOUR CHECKOUT: BIRTH-1's hand-back `docs/chair/2026-11-17/birth/BIRTH-1-HANDBACK.md` WHOLE (what it built in four
-   of your files, its guard, its counted exceptions, and the four lists the chair asked of it for you: the buyers under a
-   siege left short with no cause; the towns where a bought word stands beside a source house short of that material; the
-   source houses on no ground still marked, with the gap line each prints; every word the birth wrote and where).
+   of your files; its guard and counted exceptions; item 3's table of what the full rule would have marked; item 4's
+   contract of the gap line; item 6's pairs; every word the birth wrote and in how many towns; what it left for you by
+   name; its re-keys, the smelter's KEEP on a constructed record among them: re-key that one to a born town if your
+   fourth story gives one). ITS BIRTH WRITES NOTHING UNDER A SIEGE (`importsBroughtAtBirth` returns at once there): the
+   houses that leaves "Short of ..." with no cause in besieged towns are yours to count first and to end (item 4).
 
 ## Your base, your branch, your files
 
@@ -74,7 +76,9 @@ of a town's grounds and of each material's story; EG1 binds it); `src/domain/fac
 `tests/domain/supplyStoryLaw.test.js` (NEW); BIRTH-1's guard `tests/domain/birthKindsLaw.test.js` where your rule changes
 its arms (re-keyed by identity with a dated note: its "no import word under a siege" arm becomes "under a siege the
 bought-in house carries the siege's mark"); `tests/domain/bar6MarksLaw8.test.js`: ONLY the rows of its `LEFT` list that
-item 9 cures. NOT YOURS, whatever the cure seems to need (five seats of the round BAR7 hold them):
+item 9 cures and the one control item 3 names; `tests/generators/bar4ScenePresumption.test.js`: ONLY the way its arm
+"REACHABLE (MU1)" composes a refusing town (below); and, by rule R8, any other test your cure makes untrue, re-keyed
+by identity with a dated note. NOT YOURS, whatever the cure seems to need (five seats of the round BAR7 hold them):
 `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/display/tradeListDisplay.js`,
 `src/components/new/tabs/EconomicsTab.jsx`, `src/pdf/**`, `src/domain/facts/tradeAtWork.js`, the annex and its generated
 files, `src/data/institutionServices.js`, any draw (`src/generators/steps/assembleInstitutions.js`,
@@ -86,13 +90,27 @@ land list's two groups, the imports' words, the short mark, BIRTH-1's worked-out
 ONE HUNK OF ANOTHER SEAT'S FILE IS YOURS IF YOUR PROMPT SAYS YOUR BASE HOLDS THE ROUND BAR7's ECONOMY SEAT:
 `src/domain/display/crisisStoppedRow.js`: the mark's words for an abandoned works (item 6), and nothing else of that file.
 
+## Red at your base by BIRTH-1's cure, and yours to mend (the join's rehearsal found it)
+
+THE SCENE GUARD's ARM "REACHABLE (MU1): every twin of the trades at work prints where its original is drawn and the
+town's state refuses it" (`tests/generators/bar4ScenePresumption.test.js`) reads ONE TWIN UNPROVED at your base:
+"cloth (short): Someone walks past with a measuring cord round their neck and a bolt of cloth under one arm." The arm
+makes a town refuse a good by striking it from the lists; since BIRTH-1 the makers' STORED gap says `imported`, so the
+struck list no longer leaves them short. Nothing on the page is false; the arm has lost the state it composed. IT IS
+NEVER NARROWED AND NO TWIN LEAVES ITS PROOF: after your cure the arm composes its refusing town through YOUR reading (a
+house the story leaves idle: the fourth story, or a constructed record whose stored gap says so), and every goods
+twin is proved again (the seam's scenes seat proved 23). Say the count proved at your base and at your tip.
+
 ## Your items, in this order
 
 1. THE KINDS AND THE ODDS (`houseKinds.js`). Over `SOURCE_GROUNDS`: `TAKERS` (the ten above) and `RUNS_ON_BOUGHT` (the
    three, each with its word; each word exists on the imports list today: say where), each id with its one line of
    reason. `IMPLIED_GROUND`: the ground a source house proves where none of its own grounds is on the record, live or
    spent (stone quarry: `stone_quarry`; mine and open-cast mine: `iron_deposits`; peat cutter: `marshlands`; dairy
-   farmer: `grazing_land`; charcoal burner: `managed_forest`; THE SALT WORKS: NONE). THE SECOND RING, COUNT BEFORE YOU
+   farmer: `grazing_land`; charcoal burner: `managed_forest`; THE SALT WORKS: NONE). AND ONE ROW OF BIRTH-1's TABLE TO MEND:
+   `SOURCE_GROUNDS.salt_works` holds `fishing_grounds`, so the page prints "The salt works is worked out: its own ground
+   is depleted (Fishing grounds)." (r2s-wartime-city-1): a fishery is not a salt works' ground: on a coast the sea is its
+   brine whatever the fishery's state: strike that ground from its row and let the coast rule answer it. THE SECOND RING, COUNT BEFORE YOU
    KEEP: the audit judged six more source houses "not barren" though the record names no ground of theirs (the fisher's
    landing 32 and the fishing community 15 of the 720, the woodcutter's camp 28, the hunter's lodge 24, the shepherd 22,
    the wildfowler 2): give a kind its implied ground only where one line states the choice (the landing: the sea's
@@ -139,7 +157,19 @@ ONE HUNK OF ANOTHER SEAT'S FILE IS YOURS IF YOUR PROMPT SAYS YOUR BASE HOLDS THE
    listed on (the audit's c1: six peat cutters stand on a live coal chain that hides their spent marsh; the peat cutter
    is fed today by its own bog's shortage import): you read `TAKERS` beside the dependence table's `SPENT_GROUND_WORKERS`
    and do not edit that table. BIRTH-1's narrow rule (a word bought for a buyer feeds no source house) holds for the
-   takers and is LIFTED for the three that run on bought-in material. COUNT over the 720 and the 150, each apart: houses
+   takers and is LIFTED for the three that run on bought-in material. THE FISH MARKET IS A BUYER (the owner's table,
+   BIRTH-1's kind (i): "it sells the catch brought to it"), though the dependence table lists it among the houses that
+   work the ground: on its spent fisheries it follows its material's story like any buyer (34 fish markets of the 720
+   are marked there today, 18 in calm towns on a connected route): your reader reads the kinds table for it; SAY which
+   other readers still read the dependence table's list for it, and name them. (BIRTH-1's birth writes "Salted fish"
+   for it at its second step while its reader still answers `missing`: an import beside a house short of the same good:
+   count that pair at your base; your rule ends it.) BIRTH-1's GUARD COUNTS ITS EXCEPTIONS AS A
+   RATCHET (dairy farmer 14 + 5, charcoal burner 14 + 4, salt works 8 + 1, fish market 18 + 1, the 720 and the 150):
+   after you each is 0 or a taker on a used-up ground or a house the seed left idle: re-key that arm by identity.
+   ONE CONTROL TO GIVE BACK ITS OWN CAUSE: BIRTH-1 moved `tests/domain/bar6MarksLaw8.test.js`'s 8a.mild control from an
+   input-short house (r2r-city-0's carpenters, a Vulnerable card) to a market under an outbreak (r2r-city-19), because no
+   born town bore the first any more: your fourth story bears it again: re-key that control to a house the seed left idle
+   whose card's state word the leaf lifts, and keep the outbreak's case beside it. COUNT over the 720 and the 150, each apart: houses
    newly unmarked; houses newly marked and what the mark says; in calm towns on a connected route and in all.
 4. THE BIRTH (`resourceGenerator.js :: importsBroughtAtBirth` and the gaps after it): the birth writes a material's word
    EXACTLY where the story says BOUGHT and the list lacks it: a used-up ground: that ground's own shortage word; never
@@ -147,15 +177,20 @@ ONE HUNK OF ANOTHER SEAT'S FILE IS YOURS IF YOUR PROMPT SAYS YOUR BASE HOLDS THE
    nothing; BIRTH-1 as landed writes nothing under a siege: its hand-back counts the houses that leaves short with no
    cause). WHERE THE STORY SAYS IDLE OR ABANDONED THE BIRTH WRITES NOTHING: those are the owner's fourth and fifth stories, by the
    seed and no longer by accident. No word twice. The stored gap of each house is written as the reader answers it.
-5. THE GAP LINES (`validationOnPage.js :: resourceGapLines`): a house whose ground is used up (stored or implied) reads
-   BIRTH-1's worked-out line by the Depleted list's own label; BIRTH-1's line for a source house with no ground of its
-   own ("... from a ground of its own: none lies near.") HAS NO CASE LEFT (an implied ground stands, or the salt is
-   bought): remove it, and say how many towns printed it. No line says a material "reaches" a house from elsewhere where
-   the house is worked out; no gap line for a house the story has at work.
+5. THE GAP LINES (`validationOnPage.js :: resourceGapLines`). THE GAP LINE'S OWN WORDS ARE A CONTRACT TWO READERS NOT
+   YOURS PARSE (BIRTH-1's hand-back, item 4: the page's mark reads the good off "No <good> reaches <the house>."; the
+   record's detector `tests/helpers/houseInputSplit.js` reads the house off it; a reworded line took the marks off the
+   cards): YOU NEVER REWORD THAT LINE. A cause is THE LINE AFTER IT, as BIRTH-1's worked-out line is ("The stone quarry
+   is worked out: its own ground is depleted (Stone quarry)."). A house whose ground is used up, stored or implied,
+   prints that worked-out line by the Depleted list's label of the ground. A house the story has at work prints no gap
+   line. BIRTH-1 LEFT BY NAME the pair "No timber reaches the charcoal burner." beside the "Timber" the birth brought
+   in for a buyer (48 towns of the 720: 49 burners): your rule ends it (the burner stands on its implied woodland, or
+   runs on the timber the town buys): count it to 0.
    THE FAILED VENTURE'S NEW FORMS (the only new words of your seat; the owner's own words; each vetoable; name them in
-   your hand-back for the owner's veto list): (i) ITS GAP LINE, once for the house, on the Resources tab: ABANDONED: "The
-   <house> stands abandoned, a venture of an earlier time: no <material> lies near and none is brought in."; FAILING:
-   "The <house> is failing: no <material> lies near and none is brought in."; (ii) ITS MARK, on the house's card and
+   your hand-back for the owner's veto list): (i) ITS LINE AFTER THE GAP LINE (the gap line itself keeps its words), once
+   for the house, on the Resources tab: ABANDONED: "The <house> stands abandoned, a venture of an earlier time: no
+   <material> lies near and none is brought in."; FAILING: "The <house> is failing: no <material> lies near and none
+   is brought in."; (ii) ITS MARK, on the house's card and
    rows wherever the short mark would print: "Abandoned: a failed venture." or "Failing: a failed venture." (the
    owner: "Say abandoned or failing: a failed venture."; four words each: the mark law counts a sentence at five, and
    a mark repeats on a house's rows). The mark is printed by the one leaf
@@ -231,7 +266,16 @@ an hour at four workers: start them in the background at once.
 
 ## Your net, your hand-back
 
-Your net is R11's, with ONE `npm run build` and the two build tests (you add a facts leaf). Stored figures are the
+Your net is R11's, with ONE `npm run build` and the two build tests (you add a facts leaf), AND ONE THING R11 DOES NOT
+HOLD, learnt at this round's join: THE WALKERS. Run `npx vitest run tests/lint` WHOLE at your base and at your tip (about
+ten minutes each at four cores; each to a file through gate-tail) and compare the failing tests BY NAME: 26 files are red
+at the line today, nearly all stored figures of four rounds (the close's: `docs/chair/2026-11-17/close/WALKERS-CLASSIFIED.md`
+on the chair's lane names each); EVERY TEST RED AT YOUR TIP AND NOT AT YOUR BASE IS YOURS to cure or to explain. Above
+all: `ruinFilterRoster.walker` (a new reader of the raw `.institutions` roster is routed through `liveInstitutions()` or
+exempted with a reason: two new leaves of this round met it at the join); `domainAnyCastBaseline` (a file born now has a
+baseline of NO `any`: your new leaf); `factLayers.walker` (a leaf declares every field it reads); `negativeAssertionAnchor.walker`
+and `seedLoopTotality.walker` (your guard's negatives are anchored; its seed loops collect every failure:
+`tests/helpers/seedFailures.js`); the two doors' walkers (no fresh line). Stored figures are the
 close's (R10). Hand-back `docs/chair/2026-11-17/birth/BIRTH-2-HANDBACK.md`: each item (done with the count before and
 after and its guard, or left with the reason and what you measured); item 11's table FIRST; `fieldDiff`'s table; the
 round trip's table; what a reader can newly see (each with three towns); the readers of the land list you routed and

@@ -300,3 +300,33 @@ YOUR ITEMS (counts over the 720, the 150, the thirty):
    towns of the 720 take the new words; the negatives C0350, C0351, C7307, C7309, C33342, C45848 then read true to a
    reader who has only the page.
 DO NOT: cure the 731 "within-word" doubles; touch "the rest of the realm"; make kin or respect impossible between rivals.
+
+### BAR7-ORDER · the siege's order clause reads the law band at print (LAW 9: 9a.order; the old families) · ADDED 2026-11-17 after BAR7-LINES's hand-back
+
+WHY A SIXTH SEAT: BAR7-LINES found item 1's premise false in code (the siege branch of `safetyProfile.js` is drawn
+before the powers, the defence ledger and the law band exist) and left it BY NAME for the one file that reads the band
+at print, which was no seat's. It is yours.
+READ: `BAR7-AUDIT-I-HANDBACK.md` (at your checkout): the part "9a.order" of its section 2 and the row low.hook-party of
+its section 1; and BAR7-LINES's hand-back, section 8, points 1 and 2 ONLY (`git fetch origin lane/bar7-lines-2026-11-17`;
+`git show FETCH_HEAD:docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md`).
+YOUR FILES: `src/domain/display/guardLineUnderTheLaw.js`; your guard (a NEW test file); the tests your cure makes
+untrue, re-keyed by identity (`tests/domain/bar5SafetyLawBand.test.js` holds each key of `GUARD_LAW_SIBLINGS` to its
+source: a set you add joins that law in its own form). NOT `safetyProfile.js`, not `defenseDisplay.js`, not the annex.
+YOUR ITEMS (counts over the 720, the 150, the thirty):
+1. 9a.order 0, 7, 1. Control: C5430 (bar0-city-under_siege+famine-rand-43). The siege's clause, "The garrison keeps
+   order, and more harshly as the food runs down" (and its two other subjects: "Those holding the place keep order",
+   "The military command has taken charge of the streets"), prints beside a law band the page reads COLLAPSED. AT
+   PRINT, in `safetyLineAsPrinted` (the one reader of the band for the safety line; `LAW_ANSWERS_ATOM`): a declared set
+   keyed by the clause, as `GUARD_LAW_SIBLINGS` is keyed by the guard line: where the band is collapsed the clause's
+   TWIN prints. BAR7-LINES's wording, vetoable, in the page's plain voice (R7): "The garrison holds the walls, but order
+   in the streets has gone, and it frays further as the food runs down" (the same for the two other subjects; a small
+   place has no streets: keep the profile's own rule for it). The rest of the sentence prints as drawn. To 0 by `runI`.
+2. LAST AND LOW: "the old families" (low.hook-party: 12 towns of the 720, 5 of the 150): seven are the law-collapse twin
+   this file writes ("The old families once kept the peace; ..."), five the drawn line whose text is that table's key.
+   The line names a party where no power of the record is one. A reading at print: where the auditor's rule finds no
+   such power, the line's twin names no party (the neighbours, not the families); the key stays the drawn text. If it
+   cannot be done without rewording a key, leave it by name with what you measured.
+AND THE WALKERS (not in R11; learnt at this round's join): run `npx vitest run tests/lint` WHOLE at your base and at
+your tip and compare the failing tests BY NAME; every test red at your tip and not at your base is yours (a guard's
+negatives are anchored and its seed loops collect every failure: `tests/helpers/seedFailures.js`; no fresh line on
+either door; no `any` in a file born now). Budget: hand back at 250,000 of your count.
