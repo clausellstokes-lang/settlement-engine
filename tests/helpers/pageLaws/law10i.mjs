@@ -25,16 +25,19 @@ export function law10i(T, town) {
     const covert = ts.some((t) => t.covert === true || t.handler === true);
     // respect beside a rivalry ("Genuine Respect" and "Professional Rivalry") can both be true of two rivals: apart (the 150: 3 of 7)
     const respectOnly = warm.every((t) => String(t.type) !== 'ally' && String(t.type) !== 'family' && String(t.type) !== 'lover' && String(t.type) !== 'friend');
+    // kin who are rivals or enemies can be both (the 720: 9 of 37): apart; counted only an ally's, a friend's or a lover's
+    // tie beside a rival's or an enemy's
+    const familyOnly = !respectOnly && warm.every((t) => String(t.type) === 'family');
     const a = String(ts[0].npc1Name || ''), b = String(ts[0].npc2Name || '');
     // the printed rows: "<A> · <Kind> · <B>" with both names
     const rows = rel.map((line, i) => ({ line, i })).filter((x) => x.line.includes(' · ') && a && b && x.line.includes(a) && x.line.includes(b));
     const printed = rows.length >= 2;
     // the ties' own descriptions as printed (the line that names the pair's kind: "are allies with ...")
     const texts = ts.map((t) => t.description).filter((s) => typeof s === 'string' && s && rel.some((l) => l.includes(s.slice(0, 40))));
-    out.push({ law: 'L10', rule: respectOnly ? '10i.pair-respect' : '10i.pair', town, tab: 'World/Relationships', line: rows[0]?.line || `relationships: ${a} / ${b}`,
+    out.push({ law: 'L10', rule: respectOnly ? '10i.pair-respect' : familyOnly ? '10i.pair-family' : '10i.pair', town, tab: 'World/Relationships', line: rows[0]?.line || `relationships: ${a} / ${b}`,
       sentence: rows.map((r) => r.line).join(' | ') || `${a} / ${b}`, cause: 'other',
       against: { tab: 'record', line: ts.map((t) => `${t.id}: ${t.from} -> ${t.to} ${t.type} (${t.strength})`).join(' ; ') },
-      status: covert || !printed || respectOnly ? 'apart' : 'count', pair: k, texts, kinds: ts.map((t) => `${t.type}/${t.strength}`).join(' + '),
+      status: covert || !printed || respectOnly || familyOnly ? 'apart' : 'count', pair: k, texts, kinds: ts.map((t) => `${t.type}/${t.strength}`).join(' + '),
       why: `one pair, ${ts.length} ties: ${ts.map((t) => t.type).join(' and ')}${printed ? '; the page prints both' : '; the page does not print both rows (apart)'}${covert ? ' (a covert or handler tie: apart)' : ''}` });
   }
   return out;

@@ -47,7 +47,7 @@ export function lowFamiliesI(T, town) {
       const w = f.split(' ').filter((t) => !STOP.has(t));
       if (!w.length) return;
       const within = items.find((o, k) => k !== j && fold(o) !== f && w.every((t) => fold(o).split(' ').includes(t)));
-      if (within) push('low.doubled', x, eco[L.i], { tab: 'Systems/Economics', line: `${L.name}: "${it}" inside "${within}"` }, `the ${L.name} list prints "${it}" and again inside "${within}"`, { kind: 'within' });
+      if (within) push('low.doubled', x, eco[L.i], { tab: 'Systems/Economics', line: `${L.name}: "${it}" inside "${within}"` }, `the ${L.name} list prints "${it}" and again inside "${within}"`, { kind: w.length >= 2 ? 'within-phrase' : 'within-word' });
     });
   }
   // low.hook-party

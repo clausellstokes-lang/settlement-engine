@@ -77,7 +77,8 @@ function rules9g(T, W) {
   if (lab) for (const h of findAll(T, PAST_SUBSIST)) out.push({ rule: '9g.subsistence', at: h, against: lab, why: `the Economics tab prints "${lab.text}"; this line says the place is past subsistence` });
   // (b)
   const st = storesMonths(T);
-  if (st && st.months < 3) for (const h of findAll(T, STORES_DEEP)) out.push({ rule: '9g.stores', at: h, against: st, why: `the page prints "${st.sentence}" (${st.months} months: less than a season); this line says the stores are more than the season needs` });
+  // PRECISION (720): two and a half months beside "more than the season needs" (1 of 9) is a matter of degree: apart
+  if (st && st.months < 3) for (const h of findAll(T, STORES_DEEP)) out.push({ rule: st.months <= 2 ? '9g.stores' : '9g.stores-near', ...(st.months <= 2 ? {} : { status: 'apart' }), at: h, against: st, why: `the page prints "${st.sentence}" (${st.months} months: less than a season); this line says the stores are more than the season needs` });
   // (c)
   const fw = foodWordOf(T);
   const short = find(T, FOOD_SHORT);
@@ -161,6 +162,9 @@ function rules9i(T, W) {
   if (!hits.length) return [];
   const safe = find(T, SAFE_LINE);
   const word = W.safetyWord && /^(Very Safe|Safe)$/.test(W.safetyWord) ? W.safety : null;
+  // PRECISION (720): the bare Safety word "Safe" beside the line (5 of 11) is a matter of degree (a safe city may hold a
+  // turf war out of sight): apart. Counted: "Very Safe", or a page line that says crime is little or thieves scarce.
+  const loose = !safe && W.safetyWord === 'Safe';
   const ag = safe || word;
   if (!ag) return [];
   // rival rings as the crime leaf reads them (`corruption.js :: rivalRingsOf`: two criminal seats that do not govern, or the
@@ -171,7 +175,7 @@ function rules9i(T, W) {
     || (rec.institutions || []).some((i) => /multiple criminal factions/i.test(String(i?.name || '')));
   const seen = new Set();
   return hits.filter((h) => { const k = `${h.tab}|${h.i}`; if (seen.has(k)) return false; seen.add(k); return true; })
-    .map((h) => ({ rule: '9i.crews', cause: T.crises.has('occupied') ? 'crisis' : 'other', rings, at: h, against: ag, why: `the page prints "${ag.sentence || ag.text}"${word && safe ? ` and Safety ${W.safetyWord}` : ''}; this line says rival crews brawl for the streets${rings ? '' : ' (and the record holds no rival rings: the key is a lone house\'s)'}` }));
+    .map((h) => ({ rule: loose ? '9i.crews-safe' : '9i.crews', ...(loose ? { status: 'apart' } : {}), cause: T.crises.has('occupied') ? 'crisis' : 'other', rings, at: h, against: ag, why: `the page prints "${ag.sentence || ag.text}"${word && safe ? ` and Safety ${W.safetyWord}` : ''}; this line says rival crews brawl for the streets${rings ? '' : ' (and the record holds no rival rings: the key is a lone house\'s)'}` }));
 }
 
 // ---------------------------------------------------------------- 9a again · order kept, against the band
