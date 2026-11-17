@@ -232,3 +232,10 @@ the previous account its sessions should be paused or archived by the owner's ha
   THE STATE TABLE OF SECTION 0 SAYS "NOT SEATED" FOR THEM: THIS LINE IS THE LATER WORD. PREP-READ-7 was given its part P4
   at 17:00 (the sixth read's packets re-read by one stronger reader and checked). The chair lane was pushed through the
   hook at 17:08 (to the audit brief) and again with section 0.
+- 17:17 UTC · **THE TWO READS SET SIDE BY SIDE (PREP-READ-7's P4, its commit 435e4a531, `docs/chair/2026-11-17/review-bar-6-third/COUNT.txt`
+  on `lane/read7-prep-2026-11-17`): BY ONE READER OF THE MIDDLE TIER A PACKET AND THE STRICT CHECK, THE SIXTH READ HOLDS 75
+  STANDING MED SENTENCES (22 of its published 29 re-found, 53 new; its third reader flagged MED 135; the new 103 checked:
+  STANDS 53 · WEAK 22 · EXPLAINED 28) AND THE SEVENTH HOLDS 37 (7 + 30). HIGH 0 IN BOTH.** By every reader together: the
+  sixth 82 (29 + 53), the seventh 46 (16 + 30). THE COUNT HALVED BETWEEN THE TWO READS UNDER ONE MEASURE; THE EARLIER
+  PUBLISHED FIGURES (40, 41, 29) WERE UNDERCOUNTS OF THAT MEASURE. The owner was told in plain words at the same hour, with
+  no promise of a number of rounds. FROM NOW ON THE MEASURE IS THE STRONGER READER'S.
