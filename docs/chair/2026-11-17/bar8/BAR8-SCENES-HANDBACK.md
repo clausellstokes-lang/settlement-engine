@@ -159,3 +159,87 @@ need `vite.config.js`, which R5 forbids.
    imports them) is `vite.config.js`'s, and R5 forbids it to me. The fact reads the homes beneath them.
 7. **The first commit was refused by my own permission check.** It went through on the session's stop-hook instruction to
    commit and push. Every push ran the pre-push gate (green).
+
+## 6. AFTER THE CHAIR'S RULING BR23 (written after the chair's messages of 21:38 to 21:40 UTC)
+
+Commits: 8109908e4 (`arrivalScene.js :: drawAdmitted`: a line's first ADMITTED twin, else its first), be6185bdf
+(`historyCoherence.js :: flavorOf`: a row's twin by its string `twinKey`), then 4efba5868 (the three twins, the 12c
+declaration, the guard, four re-keys). One hunk in each granted file, nothing else in them.
+
+**THE TWO MECHANISM HUNKS MOVE NOTHING** (measured at be6185bdf against 13c4cf7a0, before any twin was written):
+- the stored records of the 900 births are byte-equal (30, 150 and 720: `corpus.ndjson.gz` decompressed, sha1 equal);
+- the rendered pages of the 900 are byte-equal (`diff -rq` of every dump: 0 files differ);
+- the 525 reference configurations are byte-equal (`ref525.mjs`);
+- N3 is the same 7 tests red at base and at be6185bdf, with the same messages.
+
+**THE THREE TWINS, WORD FOR WORD** (each VETOABLE, for the owner's veto list). Each new twin stands LAST in its pool, so the
+argmax id of every row before it is unchanged (`drawDeclared.js :: lineIdOf` is the index).
+
+| # | the twin | declared | prints in (tip renders) |
+|---|---|---|---|
+| (1) | "A laden cart or two comes down from the workings in a day, and the road is quiet between them." (twin of "Laden carts … a line that never seems to end.") | needs `trade at work: stone`, `tier: ≤ hamlet`; excludes `crisis: under_siege` | bar0-hamlet-calm-rand-45 (C15891), bar0-hamlet-calm-rand-47, r2r-hamlet-32, r2r-hamlet-40, r2r-hamlet-58, r2r-hamlet-6 |
+| (2) | for `POLITICAL_FLAVOR.stable`'s row "… the history here is long and steady …" (`twinKey: 'stable: long and steady'`): with two great events, the original's own true branch, "It has come through the {A} and the {B}, and travellers still remember the place kindly"; with one, "The {X} is the one great event in its past, and what it faces now may be the second"; with none, "No great event marks its past, and what it faces now may be the first" | `crisis: under_siege, famine, occupied, plague_onset, wartime` (the original now declares `crisis: calm` and the ten other kinds, and excludes those five) | "… may be the second": r2s-wartime-town-1; "… may be the first": bar0-hamlet-under_siege-rand-35, r2s-famine-town-2; the true branch prints as before wherever it was drawn |
+| (3) | "Signs in {name} still offer enchanting by the hour, but the work is slow and dear for want of what it takes." (twin of "Magic is a trade in {name} like any other: …") | needs `enchanting`; excludes `trade at work: arcane` | admitted in the nine towns (the base's five and my four: bar0-city-under_siege+famine-rand-47, r2r-metropolis-14, r2r-metropolis-31, r2r-metropolis-42, r2s-under_siege-metropolis-1, r2s-under_siege-metropolis-3, r2s-indebted-metropolis-3, r2s-monster_pressure-metropolis-1, r2s-wartime-metropolis-2); drawn in none of the 900, so it keeps the slot only |
+
+THE EMPTY ROAD ("The road from the workings is empty of carts.") now declares `excludes: tier: ≤ hamlet`, NOT the trade not
+at work, because of what was measured.
+- Under a siege in a city whose stone is still at work (4 towns of the 900: bar0-city-under_siege+famine-rand-46, -33, -35,
+  -41) the original is refused and the small cart is refused (the tier), so the empty road (true: the siege stops the carts)
+  must keep the slot.
+- So the empty road and the small cart are disjoint by the tier: exactly one twin of the endless line is admitted in any
+  state.
+- THE STATES NO TWIN COVERS: a thorp or a hamlet whose stone is NOT at work, or whose stone is at work under a siege. In
+  those the endless line holds no slot. 0 towns of the 900 are in either state (stone-dominant towns measured: small and at
+  work 21; at work under a siege 4, none small; not at work 11, none small).
+- THE MEASURE: of the 900 tip pages, the empty road prints in 1 (bar0-city-wartime-rand-31, its stone not at work).
+  **0 towns print it beside stone at work** outside a siege.
+
+**THE POOLS** (the admitted slots of every pool I touched, town by town over the 900, base and tip; a slot is a line admitted
+or any twin of it admitted):
+- `POLITICAL_FLAVOR.stable`, `stone.dominant`, `fish.dominant`: equal in every town (900, 140 and 204 towns).
+- `arcane.dominant`: up in 5 towns, down in none. It is now at 3 or more everywhere (it was at 2 in 5 towns at the base).
+- `smiths.dominant`: up in 18 towns (its twins now exclude `ironwork in full`), down in none.
+- `TENSIONS.prosperous`: 4 → 3 in 21 towns (item 7's food band), never under 3.
+- **No town admits two twins of one line** (`pools.mjs` counts every line's admitted twins).
+
+**THE RULES AFTER BR23** (instances, the thirty · the 150 · the 720):
+- 12b 0 · 0 · 0
+- **12c 0 · 0 · 0 (was 2 · 2 · 4; C36585 clear)**
+- 11b scenes 0 · 0 · 1 (r2r-village-36, left)
+- 11e.stalls: the control gone
+- 15a 0 · 0 · 0
+- 9g.food-soft 0 · 0 · 0
+- No rule of K, J or I rose.
+- Stored records move in the drawn prose only: 30: 7 (arrivalScene 6, history 2, pressureSentence 1); 150: 7 (history 5,
+  arrivalScene 2, pressureSentence 1); 720: 31 (arrivalScene 16, history 14, pressureSentence 2).
+- The 525 reference configurations: 1 moves (`arrivalScene`, the same configuration as before).
+
+**THE ATOM AND THE LEAF'S MARK, HOUSE BY HOUSE** (the chair's request; over the 900, the tip's atom against
+`crisisStoppedRow.js :: rowMarkText`):
+- (i) `ironwork in full` true → every smiths' house bare by the leaf: 362 towns agree, 0 disagree. Five:
+  bar0-metropolis-calm-rand-45, bar0-village-calm-rand-46, bar0-town-calm-rand-46, bar0-city-wartime-rand-46,
+  bar0-metropolis-calm-rand-46.
+- (ii) the ironwork at work and NOT in full → some smiths' house marked: 33 agree. Five: bar0-hamlet-under_siege-rand-45,
+  bar0-city-under_siege+famine-rand-45, bar0-city-wartime-rand-45, bar0-city-under_siege+famine-rand-46,
+  bar0-hamlet-under_siege-rand-27.
+  - 2 disagree: r2r-hamlet-10 and r2s-succession_void-hamlet-0. A part-time smith the leaf leaves bare, with no iron at hand
+    (none worked, none brought in). The atom is stricter there, and nothing prints differently: the boom rows need a town or
+    larger, the war's row a war.
+- (iii) a house the siege makes not at work → bare by the leaf (it declares no dependence): 26 agree, 0 disagree. Five:
+  bar0-city-under_siege+famine-rand-46 (Dyer; Mages' guild), bar0-city-under_siege+famine-rand-47 (Wizard's tower),
+  bar0-city-under_siege+famine-rand-29 (Dyer; Wizard's tower).
+
+**THE RE-KEYS** (R8, each with a dated note beside it; each test made untrue by the granted mechanism or a twin):
+- `tests/domain/facts/textOf.test.js` (declared arrival rows 242 → 244: the two arrival twins).
+- `tests/domain/bar6ScenesGoods.test.js` B7 (a line holds its slot where ANY of its twins is admitted, as the draw now reads).
+- `tests/generators/bar4ScenePresumption.test.js` MU1 (a twin that itself needs the trade at work is no twin of the trade
+  short; its reach is held by my guard).
+- `tests/generators/bar7Scenes.test.js` C45015 (the anchor of the history slot moves to the pool's next admitted row, "No
+  great event marks this place"; the famine now refuses "… travellers remember the place kindly").
+
+**THE LEDGER (R10, the close's):** `tests/domain/facts/census2eTables.test.js` "every row declares what its ledger lines say"
+is red at the base (stable[5], stable[6], magical_heavy[1], [4], [6]). At the tip it adds stable[2]: the 12c row's new
+declaration against the stored ledger. The ledger is a stored register: not re-taken by me.
+
+THE GUARD now holds 22 tests. They fail at the base and pass at 4efba5868 for every arm whose premise is a change of this
+seat: the three twins and their refusals in the other states; each new twin last in its pool; no line with two twins admitted.
