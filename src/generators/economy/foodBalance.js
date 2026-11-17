@@ -6,6 +6,7 @@ import { SEVERITY, tierAtLeast } from '../../data/constants.js';
 import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js';
 import { FOOD_SECURITY_BANDS, FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
+import { minorRoutesReach } from '../../domain/facts/tradeReach.js'; // SEAM-ECON item 5: the minor-route rule, once
 import {
   getInstFlags,
   getTradeRouteFeatures,
@@ -291,13 +292,14 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // controlled imports — minor routes, sanctioned caravans, pilgrimage
   // traffic, protected convoys. Nothing major, and a siege severs them.
   const _tierForTrade = config?.tier || config?.settType || 'village';
-  const _minorRouteRate = _siegeIsolation
+  // SEAM-ECON item 5 (2026-11-17): whether the minor routes reach is the one rule's (`facts/tradeReach.js ::
+  // minorRoutesReach`, frozen, written from this file's own copy: a village or larger off the roads, no siege); the rate
+  // by tier stays here. Read only where the route is disconnected, so the leaf's own route test changes no figure.
+  const _minorRouteRate = !minorRoutesReach({ route: effectiveRoute, tier: _tierForTrade, siege: _siegeIsolation })
     ? 0
-    : ['town', 'city', 'metropolis'].includes(_tierForTrade)
-      ? FOOD_IMPORT_RATES.minorRoutes
-      : _tierForTrade === 'village'
-        ? FOOD_IMPORT_RATES.minorRoutesVillage
-        : 0;
+    : _tierForTrade === 'village'
+      ? FOOD_IMPORT_RATES.minorRoutesVillage
+      : FOOD_IMPORT_RATES.minorRoutes;
   const importCoverageRate = !disconnectedRoute
     ? (effectiveRoute === 'port'
       ? 0.7

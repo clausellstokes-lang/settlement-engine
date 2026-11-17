@@ -280,6 +280,7 @@ export function localProductionAsPrinted(settlement) {
     const item = raw.toLowerCase().replace(/_/g, ' ').trim();
     if (LOCAL_IDENTIFIERS.has(item)) return false;
     if (failedFood.some((re) => re.test(item))) return false;
+    if (halfWayDeniedHere(settlement, item)) return false; // SEAM-ECON item 4: the card's half-way reading
     if (!pillBorneOut(raw, 'local', settlement)) return false; // W2-C-LEAVES-4 item 2: the one pill reader (below)
     if (outputs.has(raw.toLowerCase())) return made.has(raw.toLowerCase());
     const keys = RESOURCES_YIELDING.get(item);
@@ -659,13 +660,65 @@ const TRADE_GOOD_GROUNDS = (() => {
 export function exportsAsPrinted(settlement) {
   const eco = settlement?.economicState || {};
   const seen = new Set();
+  const scarce = harvestScarceHere(settlement); // SEAM-ECON item 1 (8c.export)
   return displayTradeList(eco.primaryExports, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'exports' })
+    .filter((raw) => !(scarce && HARVEST_CROP_GOOD.test(fold(tradeMarkOf(raw).label))))
+    .filter((raw) => !halfWayDeniedHere(settlement, fold(tradeMarkOf(raw).label).replace(/_/g, ' '))) // SEAM-ECON item 4
     .map((raw) => pillAsPrinted(raw, 'exports', settlement))
     .filter((x) => x !== null && !seen.has(fold(tradeMarkOf(x).label)) && !!seen.add(fold(tradeMarkOf(x).label)))
     .map(String);
 }
 import { chainCrisisStateShown, failedGroundsOf } from './chainStateShown.js';
 import { failedFoodGoodsOf } from './commoditiesShown.js'; // BAR5-FOOD (L3.failedFood)
+
+/**
+ * THE CROP A SCARCE HARVEST DENIES IS NOT SENT OUT (SEAM-ECON item 1, LAW 8's 8c.export; the chair's BRIEF-BAR6-SEAM, 2026-11-17;
+ * vetoable by the owner). The Economics tab printed "Harvest Scarce in the famine." on the income row and, beside it, an
+ * Exports list carrying "Date harvest · Desert grain · Palm sugar" (bar0-village-famine-rand-27) or "Milled flour · Flour and
+ * meal" (bar0-village-famine-rand-38, where the herds failed and the mark reads the harvest's grain scarce with them). THE
+ * ONE FACT is the page's own mark (`crisisStoppedRow.js :: rowStoppedBy` on an income share): the famine in force marks a
+ * share that lives on the grain (`INCOME_DEPENDENCE`) where the food it failed (`FAMINE_FAILED_FOOD`) is the grain, or where
+ * a share lives on that food and the grain both (BAR6-MARKS's `harvestFoodsScarce`: the herds failed, the harvest's grain is
+ * read scarce with them). It is read here from the dependence table, because the mark's leaf imports this file through
+ * `validationOnPage.js` (the cycle guard, `tests/architecture/layerBoundaries.test.js`, is shrink-only); the guard
+ * `tests/domain/bar6SeamEcon.test.js` holds it equal to `rowStoppedBy` over a fixed sample. Where it holds, a crop of the
+ * field, the grove or the mill (`HARVEST_CROP_GOOD`) leaves the Exports. Display only: the record's list is untouched.
+ * @param {unknown} settlement @returns {boolean}
+ */
+export function harvestScarceHere(settlement) {
+  if (!settlement || typeof settlement !== 'object' || !crisisOf(/** @type {object} */ (settlement)).has('famine')) return false;
+  const eco = /** @type {{ economicState?: { incomeSources?: unknown, foodSecurity?: { foodRecord?: { failedSource?: unknown } | null } | null } | null }} */ (settlement).economicState;
+  const failed = eco?.foodSecurity?.foodRecord?.failedSource;
+  const food = typeof failed === 'string' ? (Object.hasOwn(FAMINE_FAILED_FOOD, failed) ? FAMINE_FAILED_FOOD[failed] : null) : GRAIN;
+  if (!food) return false;
+  const shares = /** @type {Array<Record<string, unknown>>} */ ((Array.isArray(eco?.incomeSources) ? eco.incomeSources : []).filter((sh) => !!sh && typeof sh === 'object'))
+    .filter((sh) => sh.custom !== true && sh.source !== 'custom' && sh.isCustom !== true);
+  const deps = shares.map((sh) => { const t = typeof sh.source === 'string' ? sh.source.trim() : ''; return Object.hasOwn(INCOME_DEPENDENCE, t) ? INCOME_DEPENDENCE[t] : NONE; });
+  return deps.some((d) => d.includes(GRAIN)) && (food === GRAIN || deps.some((d) => d.includes(food) && d.includes(GRAIN)));
+}
+
+/** The crops of the field, the grove and the mill, by a word of the good's name (folded). */
+const HARVEST_CROP_GOOD = /\b(?:grain|wheat|barley|rye|oats|millet|rice|maize|dates?|flour|meal|harvest|palm sugar|produce)\b/;
+import { FAMINE_FAILED_FOOD, GRAIN, INCOME_DEPENDENCE, NONE } from '../../data/crisisDependence.js';
+import { housesShortOf } from '../facts/houseInputAtHand.js';
+
+/**
+ * A GOOD THE RECORD'S HALF-WAY GAP DENIES IS NEITHER SENT OUT NOR MADE HERE (SEAM-ECON item 4, the chair's BRIEF-BAR6-SEAM
+ * 2026-11-17, BAR6-RECORD's 6c-arms left by name; vetoable by the owner). Blacksmiths (3-10) beside iron ore the record works
+ * only half-way for want of a smelter (r2r-town-57, r2s-under_siege-town-3): the chain card already denies the ore's tools
+ * and blades (`facts/halfWayGoods.js :: halfWayGoodsDenied`, "ore not smelted here is no tool or blade made of it"), while
+ * the Exports and "Produced locally" still carried them. Both read the card's own fact: a good that every chain card making
+ * it is denied by the half-way gap is not listed. A good no card makes is not read here. Display only.
+ * @param {unknown} settlement @param {string} good the good, folded (lower case, spaced)
+ * @returns {boolean}
+ */
+function halfWayDeniedHere(settlement, good) {
+  const eco = /** @type {{ economicState?: { activeChains?: unknown } | null } | null | undefined} */ (settlement)?.economicState;
+  const chains = /** @type {Array<{ outputs?: unknown }>} */ ((Array.isArray(eco?.activeChains) ? eco.activeChains : []).filter((c) => c && typeof c === 'object'))
+    .filter((c) => (Array.isArray(c.outputs) ? c.outputs : []).some((o) => fold(o) === good));
+  return chains.length > 0 && chains.every((c) => [...halfWayGoodsDenied(settlement, c)].some((d) => fold(d) === good));
+}
+import { halfWayGoodsDenied } from '../facts/halfWayGoods.js';
 import { chainCarrierOf } from '../facts/chainCarrier.js';
 
 /**
@@ -737,12 +790,37 @@ export function chainOutputsShown(chain, settlement) {
   const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
     .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
   const spare = foodToSpareHere(settlement);
+  const short = new Set([...housesShortOf(settlement).keys()].map(fold)); // SEAM-ECON item 8 (L3.outputs)
   return outputs.filter((o) => {
     const good = fold(tradeMarkOf(o).label).replace(/_/g, ' ');
     if (!spare && (FOOD_EXPORT_OUTPUTS.has(good) || isFoodSurplusGood(good))) return false; // BAR3-LABELS-3 item 0
-    return !NOT_A_GOOD_HERE.has(good) && (chainMakesHere(chain, good, settlement, roster) || chainCarriesHere(chain, good, roster));
+    return !NOT_A_GOOD_HERE.has(good) && ((chainMakesHere(chain, good, settlement, roster) && !everyMakerShort(good, roster, short, settlement))
+      || chainCarriesHere(chain, good, roster));
   });
 }
+
+/**
+ * A RUNNING CHAIN LISTS NO OUTPUT THE PAGE MARKS SHORT (SEAM-ECON item 8, runB's L3.outputs; the chair's BRIEF-BAR6-SEAM,
+ * 2026-11-17; vetoable by the owner). "River Mill Industry · ✓ Running" listed "Fulled cloth" beside "Fuller ... Short of
+ * wool." and "Services · Fulled cloth (short)" (bar0-metropolis-calm-rand-27, -39). An output made by a house (its row in
+ * `MADE_GOOD_HOUSES`) leaves the card where EVERY house of the live roster that makes it is marked short of its input: THE
+ * ONE FACT `facts/houseInputAtHand.js :: housesShortOf`, the reading the Services row's mark gives. A good made of the
+ * cloth's wool is made by the weaving and fulling houses (`MADE_OF_INPUT_BY`): its row also names the dyer, the tailor and
+ * the draper, who finish or sell cloth and make none of it (the scene seat's rule for the cloth lines: a dyer answers only
+ * the dyeing). A good with no maker row, or one no house here makes, is not read. The chain's state is not changed.
+ * @param {string} good the good, folded @param {ReadonlyArray<string>} roster the live roster's names, lower case
+ * @param {ReadonlySet<string>} short the houses marked short, lower case @param {Parameters<typeof localProductionAsPrinted>[0]} settlement
+ * @returns {boolean}
+ */
+function everyMakerShort(good, roster, short, settlement) {
+  const re = MADE_OF_INPUT_BY.get(good) || MADE_GOOD_HOUSES.get(good);
+  if (!re || short.size === 0) return false;
+  const makers = roster.filter((n) => !n.startsWith('access to') && houseMakesGood(good, re, n, settlement));
+  return makers.length > 0 && makers.every((n) => short.has(n));
+}
+
+/** The houses that make a good of the cloth's wool (the weavers, the textile works, the fuller). */
+const MADE_OF_INPUT_BY = new Map(['fulled cloth', 'fine wool cloth', 'cloth'].map((g) => /** @type {[string, RegExp]} */ ([g, /\bweav|\btextile|\bfuller/])));
 
 /**
  * A CHAIN CARD'S FOOD-EXPORT OUTPUTS READ THE FOOD RECORD (BAR3-LABELS-3 item 0, the chair's row of 2026-11-15 21:00 UTC;

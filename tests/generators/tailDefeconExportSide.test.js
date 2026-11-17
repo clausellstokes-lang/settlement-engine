@@ -41,7 +41,10 @@ const housesOf = (seed) => (town(seed).institutions || []).map((/** @type {any} 
 const GONE = [
   ['r2r-thorp-2', 'Toll revenue', 'Medicinal herbs'],                 // a crossroads, no toll bridge, customs house or gate
   ['r2r-thorp-3', 'Pilgrim hospitality', 'Reeds and thatch'],         // hot springs, no inn, tavern, bathhouse or waystation
-  ['r2r-thorp-10', 'Glass blanks', 'Raw sand'],                       // glass sand, no glassblower
+  // RE-KEYED BY IDENTITY (SEAM-ECON item 6, 2026-11-17; BRIEF-BAR6-SEAM rule S5): BAR6-RECORD's declared cure (b) sends raw
+  // sand out only beside a glasshouse, so this thorp no longer exports its sibling 'Raw sand'; the same town and the same
+  // gone good are kept, beside a good it still exports (its wool).
+  ['r2r-thorp-10', 'Glass blanks', 'Raw wool'],                       // glass sand, no glassblower
   ['r2r-thorp-53', 'Sea salt', 'Salted fish'],                        // salt flats, no salt works
   ['r2r-hamlet-6', 'Quality tools and weapons', 'Iron ore'],          // a Mine runs the iron chain; no smith
   ['r2r-hamlet-40', 'Advanced weapons and armor', 'Grain surplus'],

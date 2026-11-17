@@ -53,7 +53,10 @@ const GONE_A = [
   ['r2r-hamlet-27', 'Barrels and containers', 'Potions and elixirs'],   // no cooper
   ['r2r-village-16', 'Barrels and containers', 'Ale (barrel)'],         // a Brewer, no cooper
   ['r2r-town-1', 'Bows and crossbows', 'Furs and pelts'],               // a Hunter's lodge, no bowyer
-  ['r2r-town-21', 'Arrows (sheaf)', 'Leather goods'],                   // no bowyer
+  // RE-KEYED BY IDENTITY (SEAM-ECON item 6, 2026-11-17; BRIEF-BAR6-SEAM rule S5): BAR6-RECORD's declared cure (b) lists the
+  // leatherworkers' goods only beside a cobbler, so this town (a tanner, no cobbler) no longer makes its sibling 'Leather
+  // goods'; the same town and the same unmade good are kept, beside a good it still makes (its cooper's).
+  ['r2r-town-21', 'Arrows (sheaf)', 'Barrels and containers'],          // no bowyer
   ['r2r-village-6', 'Dyed cloth', 'Preserved foods'],                   // a Tailor, no dyer
   ['r2r-town-19', 'Dyed cloth', 'Finished clothing'],                   // Weavers and a Tailor's guild, no dyer
   ['r2r-village-14', 'Hospitality for travellers', 'Salted fish'],      // no inn, tavern, alehouse, bath, waystation

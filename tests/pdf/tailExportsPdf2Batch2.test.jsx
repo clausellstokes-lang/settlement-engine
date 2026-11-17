@@ -82,8 +82,15 @@ const NOT = [
   ['17065', 'r2s-mass_migration-hamlet-1', 'economics', /^Milled lumber\n {2}EXPORT$/m, /^Milled lumber$/m],
   ['10234', 'r2r-hamlet-16', 'economics', /^Fish oil\n {2}EXPORT$/m, /^Fish oil$/m],
   ['21452', 'r2s-religious_conversion-hamlet-2', 'economics', /^Peat fuel\n {2}EXPORT$/m, /^Coal\n {2}EXPORT$/m],
-  ['16334', 'r2s-infiltrated-village-1', 'economics', /^Master-crafted weapons\n {2}EXPORT$/m, /^Master-crafted weapons$/m],
-  ['05888', 'r2r-village-52', 'economics', /^Boots and shoes\n {2}EXPORT$/m, /^Leather goods\n {2}EXPORT$/m],
+  // RE-KEYED BY IDENTITY (SEAM-ECON item 6, 2026-11-17; BRIEF-BAR6-SEAM rule S5): BAR6-RECORD's declared cures made both
+  // anchors untrue. (a) fine arms are made only beside Blacksmiths (3-10) or Specialized metalworkers, so the infiltrated
+  // village (a lone Blacksmith) no longer prints 'Master-crafted weapons': the claim (the fine arms printed, unbadged,
+  // beside an Exports list of the same family, "Weapons and armour") moves to r2r-town-5. (b) the leatherworkers' goods
+  // need a cobbler, so r2r-village-52 (a Tannery) exports no 'Leather goods' and no town of the 720 prints the boots on a
+  // card beside exported leather goods: the row keeps its town and its false line, and what prints instead is the
+  // boots unbadged (the form of 17065 and 10234 above).
+  ['16334', 'r2r-town-5', 'economics', /^Master-crafted weapons\n {2}EXPORT$/m, /^Master-crafted weapons$/m],
+  ['05888', 'r2r-village-52', 'economics', /^Boots and shoes\n {2}EXPORT$/m, /^Boots and shoes$/m],
   ['10202', 'r2s-slave_revolt-village-3', 'economics', /^Fired brick\n {2}EXPORT$/m, /^Pottery and ceramics\n {2}EXPORT$/m],
   // E15 (1): the cover names the tab's first export; under a siege that stops trade the tab's Exports print none
   ['29296', 'r2r-village-21', 'cover', /Top export: Salted fish/, null],

@@ -517,6 +517,8 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
           nativeSemanticName(i).toLowerCase().includes('war council')
           || nativeSemanticName(i).toLowerCase().includes('rationing')
       );
+    const siegeWide = isSieged || (cfg.intendedStressTypes || []).includes('under_siege')
+      || (insts || []).some((i) => nativeSemanticName(i).toLowerCase().includes('siege'));
     const critical = tradeDeps.filter((d) => d.severity === 'critical');
     const vulnerable = tradeDeps.filter((d) => d.severity === 'vulnerable');
     const hasMagicTradeInst = hasTeleportationInfra(insts || [], cfg);
@@ -531,7 +533,10 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
             ? `${critical.length} institution${critical.length > 1 ? 's' : ''} critically impaired by siege: `
             // BAR6-RECORD (c) (9d.isolated; vetoable by the owner): where a poor road still reaches the isolated place
             // (`facts/tradeReach.js`, the food balance's minor routes) its houses are supplied irregularly, not from stores alone
-            : minorRoutesReach({ route: economicState?.tradeAccess ?? cfg.tradeRouteAccess, tier })
+            // SEAM-ECON item 2 (2026-11-17; vetoable by the owner): the leaf is asked with THE WIDER READING of a siege, the
+            // one the trade dependencies themselves read (`economicState.js :: isUnderStress`: an intended siege, a house named
+            // for one), so no poor road is printed beside the dependency card's "Supply route severed"
+            : minorRoutesReach({ route: economicState?.tradeAccess ?? cfg.tradeRouteAccess, tier, siege: siegeWide })
               ? `${critical.length} institution${critical.length > 1 ? 's' : ''} supplied only irregularly over a poor road (isolated trade): `
               : `${critical.length} institution${critical.length > 1 ? 's' : ''} operating on stockpiles only (isolated trade): `) +
           critical.map((d) => institutionDisplayName(d.institution)).join(', ') +
