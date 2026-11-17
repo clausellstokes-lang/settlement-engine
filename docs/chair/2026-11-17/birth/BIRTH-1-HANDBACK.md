@@ -318,6 +318,88 @@ candidates, read off the tip's births):
 | `tests/generators/houseInputReaches.test.js` KEEP "a smelter no input reaches is short of each" | r2r-city-5, -17, -36, r2r-metropolis-33: every smelter is now fed | **NONE**: no town of 1,945 census-shaped births (the 720, the 150, the 525 and 700 more `r2r-` seeds) bears an unfed smelter. The claim is retired by the cure: a ruling for the chair (it cannot be re-keyed and may not be loosened) |
 
 
+## FOR THE SEAT AFTER ME (the chair's lines of 04:33 and 05:36 UTC)
+
+THE SIEGE LINE OF 04:33 WAS NOT ACTED ON (it reached this session after the build; the 05:36 line supersedes it): the tree
+is as built, and `importsBroughtAtBirth` returns nothing under a siege. The four counts the chair asked for, over the
+census's 720 at the tip (`birth1/four.mjs`, base corpus against the tip's):
+
+**(1) BUYERS UNDER A SIEGE ON A CONNECTED ROUTE LEFT "Short of …" WITH NO CAUSE (no import is written there): houses 59 in 11 towns.**
+
+| the mark | houses | three towns |
+|---|---|---|
+| Potter · Short of clay. | 8 | r2r-metropolis-14, r2s-under_siege-town-0, r2s-under_siege-town-3 |
+| Vintner · Short of grapes. | 6 | r2r-metropolis-14, r2s-under_siege-city-0, r2s-under_siege-city-2 |
+| Glassmakers · Short of glass sand. | 6 | r2r-metropolis-14, r2s-under_siege-city-2, r2s-under_siege-metropolis-0 |
+| Weavers/Textile workers · Short of wool. | 6 | r2s-under_siege-city-0, r2s-under_siege-city-2, r2s-under_siege-metropolis-0 |
+| Cobbler's guild · Short of hides. | 5 | r2s-under_siege-town-1, r2s-under_siege-city-0, r2s-under_siege-city-2 |
+| Fuller · Short of wool. | 5 | r2s-under_siege-city-0, r2s-under_siege-metropolis-0, r2s-under_siege-metropolis-1 |
+| Brickmaker · Short of clay. | 4 | r2r-metropolis-14, r2s-under_siege-metropolis-0, r2s-under_siege-metropolis-1 |
+| Tanner (established) · Short of hides. | 4 | r2s-under_siege-town-1, r2s-under_siege-city-0, r2s-under_siege-metropolis-1 |
+| Cooper · Short of timber. | 3 | r2r-metropolis-14, r2s-under_siege-town-0, r2s-under_siege-town-1 |
+| Woodcarver · Short of timber. | 3 | r2r-metropolis-14, r2s-under_siege-town-1, r2s-under_siege-city-1 |
+| Sawmill (commercial) · Short of timber. | 2 | r2r-metropolis-14, r2s-under_siege-city-1 |
+| Carpenters (5-15) · Short of timber. | 2 | r2r-metropolis-14, r2s-under_siege-city-1 |
+| Tailor's guild · Short of livestock. | 1 | r2r-metropolis-14 |
+| Dyer · Short of livestock. | 1 | r2r-metropolis-14 |
+| Tailor · Short of livestock. | 1 | r2r-metropolis-14 |
+| Tanners · Short of hides. | 1 | r2s-under_siege-city-2 |
+| Fish market · Short of fish. | 1 | r2s-under_siege-metropolis-1 |
+
+**(2) A WORD THE BIRTH BROUGHT IN BESIDE A SOURCE HOUSE SHORT OF THAT SAME MATERIAL: houses 53 in 51 towns.**
+
+| the house and the word | houses | three towns |
+|---|---|---|
+| Charcoal burner short of timber beside "Timber" | 49 | r2r-hamlet-36, r2r-hamlet-52, r2r-town-40 |
+| Mine short of iron ore beside "Iron ore (local iron mines exhausted)" | 2 | r2r-metropolis-24, r2s-monster_pressure-metropolis-2 |
+| Fisher's landing short of fish beside "Salted fish (local river fishery exhausted)" | 1 | r2s-indebted-village-2 |
+| Stone quarry short of stone beside "Dressed stone (local quarry depleted)" | 1 | r2s-wartime-metropolis-2 |
+
+(The mine, the landing and the quarry stand on their own spent ground beside its shortage word, written for a buyer of the
+same ground: an import feeds a buyer, never the work on the ground; the mark is the spent ground's, true.)
+
+**(3) SOURCE HOUSES WITH NO GROUND OF THEIR OWN STILL MARKED IN CALM TOWNS ON A CONNECTED ROAD: houses 39 in 35 towns.**
+The gap line each prints is the old one: the line "… from a ground of its own: none lies near." was measured and TAKEN
+BACK (item 6), so none prints it.
+
+| the house, its mark and its gap line | houses | three towns |
+|---|---|---|
+| Charcoal burner · Short of timber. · line: "No timber reaches the charcoal burner." | 16 | r2r-hamlet-26, r2r-hamlet-48, r2r-hamlet-52 |
+| Dairy farmer · Short of livestock. · line: "No livestock reaches the dairy farmer." | 14 | r2r-hamlet-12, r2r-hamlet-14, r2r-hamlet-19 |
+| Salt works · Short of salt. · line: "No salt reaches the salt works." | 8 | r2r-hamlet-18, r2r-town-15, r2r-town-29 |
+| Peat cutter · Short of coal. · line: "(no gap line)" | 1 | r2r-village-14 |
+
+("No ground of its own" here: none of the leaf's grounds of the house on the record, live or spent. The guard's exceptions
+count 14 burners, not 16: two burners stand on a spent coal ground the spent-ground reading names, which the leaf does
+not list among a burner's grounds; the peat cutter's mark is that same spent coal ground.)
+
+**(4) EVERY WORD THE BIRTH WROTE, AND IN HOW MANY TOWNS OF THE 720** (the `IMPORT_WORD` words and the spent grounds'
+shortage words of item 2):
+
+| word | towns | three towns |
+|---|---|---|
+| Clay and raw materials | 174 | r2r-village-4, r2r-village-6, r2r-village-16 |
+| Timber | 156 | r2r-hamlet-3, r2r-hamlet-17, r2r-hamlet-32 |
+| Raw hides and animal products | 147 | r2r-village-9, r2r-village-14, r2r-village-27 |
+| Wool | 146 | r2r-village-14, r2r-village-26, r2r-village-28 |
+| Grapes and must | 137 | r2r-town-18, r2r-town-22, r2r-town-33 |
+| Iron ore | 40 | r2r-hamlet-10, r2r-hamlet-19, r2r-hamlet-26 |
+| Game and hides (local hunting grounds exhausted) | 22 | r2r-metropolis-7, r2r-metropolis-8, r2r-metropolis-12 |
+| Livestock and dairy (local grazing land depleted) | 17 | r2r-village-20, r2r-city-3, r2r-metropolis-1 |
+| Luxury goods | 13 | r2r-city-21, r2r-city-23, r2r-metropolis-6 |
+| Glass sand | 12 | r2r-town-8, r2r-town-35, r2r-town-40 |
+| Reeds, peat, and marsh herbs (local wetlands exhausted) | 8 | r2r-village-24, r2r-metropolis-0, r2r-metropolis-8 |
+| Herbs and forage (local gathering areas exhausted) | 5 | r2r-village-13, r2r-metropolis-6, r2s-occupied-metropolis-2 |
+| Medicinal herbs | 4 | r2r-village-13, r2r-town-51, r2s-insurgency-town-2 |
+| Salted fish | 4 | r2r-village-49, r2r-village-57, r2s-succession_void-village-0 |
+| Iron ore (local iron mines exhausted) | 3 | r2r-metropolis-24, r2r-metropolis-33, r2s-monster_pressure-metropolis-2 |
+| Clay and ceramics materials (local clay pits exhausted) | 2 | r2s-slave_revolt-metropolis-2, r2s-mass_migration-metropolis-0 |
+| Timber (local managed woodland cleared) | 1 | r2r-village-22 |
+| Salted fish (local river fishery exhausted) | 1 | r2s-indebted-village-2 |
+| Dressed stone (local quarry depleted) | 1 | r2s-wartime-metropolis-2 |
+
+`IMPORT_WORD` words never written in the 720: "Copper ore", "Precious metals and bullion", "Grain", "Livestock".
+
 ## APPENDIX · THE OWNER'S TABLE (the leaf `src/domain/facts/houseKinds.js`, row for row: strike a row and the house leaves the rule)
 
 ### (i) A house that buys and works its material: brought in where nothing here answers it and a connected road no siege shuts reaches the town
