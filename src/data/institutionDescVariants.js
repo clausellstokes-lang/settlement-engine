@@ -2402,7 +2402,8 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
   // drawn at random is settled after the description draw. The brewery's grain mark is the mark leaf's (BAR6-MARKS).
   // SEAM-DESKS (2026-11-17, SEAM-LIST's HOUSES item; vetoable by the owner): each line that names the taverns declares a
   // tavern (`institution: tavern`, the maltster's form above). No third twin: the late re-read tries a refused original's
-  // first twin only, so a brewery with no tavern (none in the 150 or the 720) keeps its original, noted for the birth check.
+  // first twin only, so a brewery of these lines with no tavern (none: 15 of the 150 and 90 of the 720 print them, every one
+  // beside a tavern) keeps its original, noted for the birth check.
   "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.": Object.freeze([
     Object.freeze({ text: "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.", needs: Object.freeze(['institution: tavern']), excludes: Object.freeze(['crisis: under_siege']) }),
     Object.freeze({ text: "Commercial-scale ale and beer production for the taverns; while the siege holds the roads none of it goes further. Major grain consumer and employer.", twinOf: "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.", needs: Object.freeze(['institution: tavern']), crisis: Object.freeze(['under_siege']) }),
