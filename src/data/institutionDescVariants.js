@@ -2384,4 +2384,28 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.", excludes: Object.freeze(["crisis: famine"]) }),
     Object.freeze({ text: "Cuts and repairs footwear of every kind. Shoes still wear out in the famine, though few can pay to have them mended.", twinOf: "Cuts and repairs footwear of every kind. Since no one goes unshod, the work never dries up.", crisis: Object.freeze(["famine"]) }),
   ]),
+  // BAR6-HOUSES (THE CHAIR'S RULING SV1, 2026-11-16; vetoable by the owner): A SOVEREIGN NAMED, READ LATE. A house's line that names
+  // a crown or a lord its own house does not give presumes the town has one (`facts/sovereign.js`: the government, a power, a
+  // house, a person or the founding names one, or a war or an occupation supplies it). The powers, the cast and the history are
+  // born after the description draw, so the set is resolved here, by the late re-read; the twin names no sovereign.
+  'A weekly sale of local goods. A charter from crown or lord is required.': Object.freeze([
+    Object.freeze({ text: 'A weekly sale of local goods. A charter from crown or lord is required.', needs: Object.freeze(['sovereign']) }),
+    Object.freeze({ text: 'A weekly sale of local goods, held under a charter.', twinOf: 'A weekly sale of local goods. A charter from crown or lord is required.', excludes: Object.freeze(['sovereign']) }),
+  ]),
+  "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.": Object.freeze([
+    Object.freeze({ text: "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.", needs: Object.freeze(['sovereign']) }),
+    Object.freeze({ text: "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the richest powers.", twinOf: "Speaking Stones, paired and linked into a network, each station priced like a merchant's house and held only by the crown or the great guilds.", excludes: Object.freeze(['sovereign']) }),
+  ]),
+  // BAR6-HOUSES (LAW 5 WIDENED, 2026-11-16; the wide read's C16139, bar0-city-under_siege+famine-rand-33; vetoable by the owner): the
+  // brewery's catalogue lines send its ale out to "regional distribution", which nothing reaches while a siege holds the roads (an
+  // occupation and a monster frontier close no road, so the siege alone is declared). Read late, as the crisis twins above: a siege
+  // drawn at random is settled after the description draw. The brewery's grain mark is the mark leaf's (BAR6-MARKS).
+  "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.": Object.freeze([
+    Object.freeze({ text: "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Commercial-scale ale and beer production for the taverns; while the siege holds the roads none of it goes further. Major grain consumer and employer.", twinOf: "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.": Object.freeze([
+    Object.freeze({ text: "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Commercial-scale ale and beer production. Supplies the town's taverns; while the siege holds the roads none of it goes further. Major grain consumer and employer.", twinOf: "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.", crisis: Object.freeze(['under_siege']) }),
+  ]),
 });
