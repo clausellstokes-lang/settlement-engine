@@ -217,6 +217,22 @@ should be paused or archived by the owner's hand.
   brought in: a per-good atom value) and a twin for the fishmonger's "the boats, the catch". Each is named in its
   seat's hand-back for the owner's veto list.
 
+- **BR10 (3), AMENDED (19:10 UTC, 2026-11-17; LEFT-CHAIN measured the ruling as worded).** As worded ("a source house that
+  is at work on another ground") the reading drops from spent-ground cards 17 mines AND 36 charcoal burners, 14 salt
+  works and 8 quarries, and leaves 43 cards of the 720 with nothing under "Via". THE CHAIR'S WORDS WERE WIDER THAN THE
+  FAULT. The fault is a card that says a house works a ground it cannot be working (the mine on its own spent iron); a
+  charcoal burner on the fuel card or a salt works on the fishery's card makes that chain's goods on a ground of its
+  own, and the card is true with it. RULED: the card leaves out a source house whose story is `local` ONLY WHERE THAT
+  HOUSE'S OWN GROUNDS HOLD THE CARD'S SPENT GROUND (17 mines and one charcoal burner in the 720, 2 mines in the 150; no
+  card emptied). LEFT-CHAIN builds it and re-words its guard's arm (a) with a negative beside it.
+- **BR18 (19:10 UTC; L6: the card "Impaired" beside a trade at work on bought iron).** NOT A FAULT: the town's own chain is
+  impaired (its ground is spent) and the trade goes on with bought ore: the supply rule's second story told twice.
+  Nothing is built; the detector `8f.chain` takes this reading (LEFT-KEYS, with K6). Whether the card should SAY that
+  it runs on bought iron is a new word: a question on the owner's list.
+- **BR19 (19:10 UTC; DEBT-2's grant).** Five pinned literals of `tests/lint/generationForkRegistry.contract.test.js` that
+  follow the fork register's rows are DEBT-2's to move with its two rows (the precedent bbe4a02ab): they are figures
+  of a code register, not stored figures of generated output.
+
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -435,3 +451,34 @@ should be paused or archived by the owner's hand.
   their text; eight twins, none printing in any town of the three populations; L31 and L4 found cured at the base and
   dropped; two of L9's four lines left for a seat that holds the pool table): NOTHING AGAINST LANDING; the second reader
   and the whole check decide. SECTION 0 IS REWRITTEN AS OF THIS HOUR.
+- **19:10 UTC. THE EDIT CHAIN HAS SPOKEN (CHECKS-1, 19:07): ARM A5 IS GREEN AT THE CANDIDATE** (a scratch copy with a one-hour
+  limit, alone: 569 s; at the line inside its whole run: 594 s, SIX SECONDS UNDER ITS OWN 600 s LIMIT). The supply rule
+  does not make it slower; the arm was red on the chair's machine because that machine is slower. A7 is red at both
+  trees with one message (a stored figure, the close's). FOR THE CLOSE: `ARM_TIMEOUT = 600_000` in
+  `tests/property/editCorpusRatchet.test.js` is a limit the arm already brushes on a quiet machine: it will go red by
+  the clock alone on any slower one.
+- **19:10 UTC. A GAP IN THE CHAIR'S OWN TOOL, FOUND THROUGH DEBT-2's HAND-BACK:** `whole.sh`'s last step ran `tests/build`
+  WITHOUT `VERIFY_DIST=1` and without the flagged build, so the arms that read the built files (the size ceilings among
+  them) were SKIPPED in every whole check made before 19:10 (the line's, the candidate's): `npm run check` ends with
+  `verify:dist`, which runs them. DEBT-2, with `VERIFY_DIST=1` at its tip, reads FOUR SIZE CEILINGS RED (the engine
+  chunk 901,940 B against 881,331; the first-paint closure raw, gzip and Brotli). THE TOOL IS CORRECTED (its build part
+  now does what `scripts/check-test-ratchet.mjs --verify-dist` does). THE DIST PHASE IS RUNNING ON THE CHAIR'S MACHINE AT
+  THE LINE AND AT THE CANDIDATE (`/home/user/wk/dist-both.sh` -> `/home/user/checks/dist-base`, `dist-cand`): POINT 33
+  LANDS WHEN THAT COMPARISON IS READ (a ceiling red at both is the close's; a ceiling the supply rule alone breaks is
+  told to the owner at the landing as a thing for the close).
+- **19:10 UTC. HAND-BACKS:** DEBT-2 (19:06, `lane/debt-2-2026-11-17` d047ab59a: D1 two rows of the fork register, both pure;
+  D2 the roster row, EARNED BY MEASURE: under a held roster the assembly's write fires on 0 of 526 configurations and
+  the roster is byte-identical on all 526, at the line and at the candidate; D3 the goods roster's row; it asked for
+  and has BR19; a new tip follows). LEFT-CHAIN (19:06, 7031e5fbe: L18 built as ruled and measured: BR10 (3) amended
+  above, one more commit follows; L5: 72 outputs restored on cards; L27 and L7's six found cured at the base; L7's
+  fault found in two other towns and cured with ONE NEW TWIN, "The digging goes on here, but the metalworking stands
+  idle, short of what it needs." (r2r-metropolis-24, r2s-monster_pressure-metropolis-2: the 720's two 8f.short towns);
+  L6 left: BR18; every cure a reading at print, the 900 births byte-equal). LEFT-PDF (19:07, ce35c9479: L1's mark,
+  L2, L3, L19 to zero in the PDF and the journal; one test re-keyed by identity, read; LEFT BY NAME: the PDF's
+  `ResourcesProduction.jsx` does not print the proven grounds (134 towns); THE PDF STILL PRINTS THE STORED SHORT TWIN
+  "Little metal is worked here ..." WHERE THE TAB PRINTS THE ORDINARY LINE in 94 towns (the ordinary lines live in
+  `src/generators`, which `src/pdf` may not import)). SECOND READERS: READ-LEFT-PDF session_01FbPLbbgbkdyJxi9b18CzV2
+  (seated 19:09); LEFT-CHAIN's when its new tip is in. A SEAT "PDF-2" IS OWED AFTER LEFT-PDF AND LEFT-CHAIN LAND
+  (`src/pdf/sections/*`, a shared leaf under `src/domain/display/` for the ordinary income lines): the two chain
+  call sites that must pass the card (`SupplyChainFlow.jsx:82`, `Services.jsx:229`: BR10 (3) in the PDF), the income
+  share's ordinary line and L7's twin in the PDF (94 towns), the proven grounds in `ResourcesProduction.jsx`.
