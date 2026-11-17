@@ -61,8 +61,8 @@ on the chair's lane (rows L1 to L37; read THE CHAIR'S NOTES at its head). This r
 | seat | rows | its files |
 |---|---|---|
 | LEFT-PDF | L1, L2, L3, L19 (the PDF's land list only) | `src/pdf/sections/EconomicsTrade.jsx`, `src/pdf/sections/Services.jsx`, `src/pdf/sections/SupplyChainFlow.jsx`, `src/pdf/sections/Overview.jsx`, `src/pdf/sections/NotableNPCs.jsx`, `src/pdf/lib/crisisMarksOnPage.js`, `src/pdf/lib/viewModel.js`, `src/pdf/lib/viewModelBodySlices.js`, `src/foundry/journalPages.js`, a new leaf under `src/domain/display/` if a reading must be shared |
-| LEFT-CHAIN | L18, L5, L27, L6 | `src/domain/display/chainHouses.js`, `src/components/new/SupplyChainsPanel.jsx`, `src/components/new/tabs/EconomicsTab.jsx`, `src/domain/display/economicsCrisisMarks.js`, `src/domain/display/chainStateShown.js`, `src/domain/display/tradeListDisplay.js`, `src/components/new/tabs/ResourcesTab.jsx` (L18's reading only) |
-| LEFT-MARKS | L17, L15, L25, L16, L7 | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/supplyStory.js`, `src/domain/facts/houseKinds.js`, `src/generators/economy/incomeLineSiblings.js` (L7's twin only); the detectors `tests/helpers/pageLaws/law8.mjs`, `law8Marks.mjs`, `law8H.mjs`, `pageB.mjs`; `tests/domain/bar6MarksLaw8.test.js`, `tests/domain/bar6PeopleLaw10.test.js` |
+| LEFT-CHAIN | L18, L5, L27, L7, L6 | `src/domain/display/chainHouses.js`, `src/components/new/SupplyChainsPanel.jsx`, `src/components/new/tabs/EconomicsTab.jsx`, `src/domain/display/economicsCrisisMarks.js`, `src/domain/display/chainStateShown.js`, `src/domain/display/tradeListDisplay.js`, `src/components/new/tabs/ResourcesTab.jsx` (L18's reading only), `src/generators/economy/incomeLineSiblings.js` (L7's twin only) |
+| LEFT-MARKS | L17, L15, L25, L16 | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/supplyStory.js`, `src/domain/facts/houseKinds.js`; the detectors `tests/helpers/pageLaws/law8.mjs`, `law8Marks.mjs`, `law8H.mjs`, `pageB.mjs`; `tests/domain/bar6MarksLaw8.test.js`, `tests/domain/bar6PeopleLaw10.test.js` |
 | LEFT-LINES | L31, L4, L33 (the brewers' line), L32, L8, L9 | `src/data/historyData.js`, `src/generators/historyGenerator.js`, `src/data/narrativeData.js`, `src/data/people/titleSecretsPresentations.js`, `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and the generated desk files `src/data/dossierStateProse/general.generated.js`, `defense.generated.js`, `economy.generated.js`, `power.generated.js` (ruling AX1) |
 | LEFT-KEYS (seated after the chair's whole check) | L11, L12, L13, L14 and the anchors the whole check names | tests only: its section is written when it is seated |
 
@@ -128,7 +128,16 @@ nothing. N4 applies to every mark you add.
 3. **L27.** The Exports and "Produced locally" pills that name a good whose every maker is marked short: 93 pills in 58
    towns at the seam's tip, partly cured since. RE-COUNT at your base; cure the residue by the same reading; say the
    count before and after.
-4. **L6, LAST, AND ONLY IF A READING AT PRINT CURES IT.** Four towns of the 720 (the row names them) print a plain
+4. **L7 · the iron share beside an idle forge.** In five hamlets of the 720 and one of the 150 (the row names them) an
+   open-cast mine works and the only smith is "Short of iron."; the income share prints bare: "Iron & Metalwork · Metal
+   is smelted or worked here." RULED: THAT LINE SPEAKS OF SMELTING AND WORKING: where no smelting or working house of
+   the trade is at work and a mine is, the share takes a TWIN in the page's plain voice that says what is true there
+   (the ore is dug; the forge stands idle), declared by the atom it needs, read at print where the share's line is read
+   (`economicsCrisisMarks.js :: incomeDescShown`; the twin's home is `incomeLineSiblings.js`); no mark is invented and
+   the mine is not marked; the dependence table (`src/data/crisisDependence.js`, LEFT-MARKS's file) is not edited:
+   tell a mine from a working house by the houses' kinds (`src/domain/facts/houseKinds.js`, read only). The twin's
+   words are yours to propose (R7; on the owner's veto list, with three towns it prints in).
+5. **L6, LAST, AND ONLY IF A READING AT PRINT CURES IT.** Four towns of the 720 (the row names them) print a plain
    metal-share line beside an iron chain card stored Impaired. THE HOUSES ARE THE TRUTH (a twin that answers a chain's
    stored status and not its houses is false where the houses are fed). Measure the four pages; if one reading in your
    files makes card and share agree, build it; else leave it by name with the pages.
@@ -136,8 +145,8 @@ nothing. N4 applies to every mark you add.
 YOUR GUARD (a new file, `tests/components/leftChainCards.test.jsx`): (a) over the 720: no chain card whose From is a
 spent ground lists a source house whose story is `local`; FAILS at your base with the 17; a positive anchor (a mine on
 its only, spent ground IS listed and marked: name the town); (b) L5 and L27: no output and no pill names a good whose
-every maker is marked short, over the 720 and the 150; (c) the owner's page and the shared page print each card alike
-(N4). MEASURE (R4): runH and runD above all (`8b.extract`, `8f.*`, `8k.*`): before and after, rule by rule.
+every maker is marked short, over the 720 and the 150; (c) L7: in the six towns the share prints its twin, and in a town whose smith works it prints the line as before;
+(d) the owner's page and the shared page print each card alike (N4). MEASURE (R4): runH and runD above all (`8b.extract`, `8f.*`, `8k.*`): before and after, rule by rule.
 NOTE: LEFT-MARKS re-keys LAW 8's `8b.extract` to the same reading in the detectors (its files); your guard is your own.
 
 ---
@@ -166,18 +175,12 @@ RULINGS TO READ: BR10 (the sixth handoff `docs/chair/2026-11-17/sixth/CHAIR-HAND
    a house that works only a SURPLUS is short where the page's food line is short ("Short of grain."), in a crisis or
    not. Build it in the mark's leaf through the supply rule's own gate (`crisisStoppedRow.js :: rowShortOf`), reading
    public fields only (N4).
-5. **L7 · the iron share beside an idle forge.** In five hamlets of the 720 and one of the 150 an open-cast mine works
-   and the only smith is "Short of iron."; the income share prints bare: "Iron & Metalwork · Metal is smelted or worked
-   here." RULED: THAT LINE SPEAKS OF SMELTING AND WORKING: where no smelting or working house of the trade is at work
-   and a mine is, the share takes a TWIN in the page's plain voice that says what is true there (the ore is dug; the
-   forge stands idle), declared by the atom it needs; no mark is invented and the mine is not marked. The twin's words
-   are yours to propose (R7; on the owner's veto list, with three towns it prints in).
-6. **WHAT A SECOND READER FINDS IN BIRTH-3's AMENDMENTS** (the chair has one reading 882cae319..8b0506eae now: your
+5. **WHAT A SECOND READER FINDS IN BIRTH-3's AMENDMENTS** (the chair has one reading 882cae319..8b0506eae now: your
    files are the supply rule's) comes to you as an AMENDMENT at the foot of this section, by message: one more commit.
 
-YOUR GUARD (a new file, `tests/domain/leftMarks.test.js`) holds items 3, 4 and 5 over fixed seeds (each FAILS at your
+YOUR GUARD (a new file, `tests/domain/leftMarks.test.js`) holds items 3 and 4 over fixed seeds (each FAILS at your
 base); items 1 and 2 are held by the two existing guards as re-keyed. MEASURE (R4): runD, runH, runI: before and
-after, rule by rule; `8b.extract`, `8b.person`, `8a.input`, `8i.surplus`, `8f.short` above all. If you touch
+after, rule by rule; `8b.extract`, `8b.person`, `8a.input`, `8i.surplus` above all. If you touch
 `src/generators/`: N3. N4 for every mark.
 
 ### LEFT-MARKS · AMENDMENTS (none yet)
