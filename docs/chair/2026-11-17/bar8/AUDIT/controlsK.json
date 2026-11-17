@@ -1,0 +1,443 @@
+[
+ {
+  "id": "C0476",
+  "law": 12,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "tab": "Systems/Institutions",
+  "text": "Services · Repair and refit · Ship construction"
+ },
+ {
+  "id": "C7246",
+  "law": 12,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-wartime-rand-45",
+  "tab": "Summary/Overview",
+  "text": "Being on the right side of it keeps the forges of Eisenmark running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it."
+ },
+ {
+  "id": "C7477",
+  "law": 12,
+  "verdict": "STANDS",
+  "expect": "agrees",
+  "town": "bar0-city-wartime-rand-45",
+  "tab": "Summary/Plot Hooks",
+  "text": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with."
+ },
+ {
+  "id": "C7242",
+  "law": 12,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-wartime-rand-45",
+  "tab": "Summary/Overview",
+  "text": "Racks of new ironwork stand outside the workshops, waiting for the carts."
+ },
+ {
+  "id": "C36585",
+  "law": 12,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-occupied-rand-45",
+  "tab": "Summary/Overview",
+  "text": "\"The Succession Crisis aside, the history here is long and steady, and travellers remember the place kindly\""
+ },
+ {
+  "id": "C39124",
+  "law": 12,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-occupied-rand-46",
+  "tab": "World/Daily Life",
+  "text": "Ulaanabad covers what it must and nothing beyond."
+ },
+ {
+  "id": "C16668",
+  "law": 12,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-hamlet-calm-rand-46",
+  "tab": "Systems/Power",
+  "text": "People at Khutulunnuur may grumble, but nobody in the hamlet stands ready to lead them against the Headman's Authority."
+ },
+ {
+  "id": "C19407",
+  "law": 12,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-hamlet-under_siege-rand-47",
+  "tab": "Systems/Magic",
+  "text": "Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to a house of worship"
+ },
+ {
+  "id": "C17589",
+  "law": 12,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-hamlet-under_siege-rand-45",
+  "tab": "Systems/Institutions",
+  "text": "Services · Grain milling (a day away)"
+ },
+ {
+  "id": "C18383",
+  "law": 12,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "tab": "Systems/Institutions",
+  "text": "Services · Grain milling (a day away)"
+ },
+ {
+  "id": "C6738",
+  "law": 12,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "tab": "World/NPCs",
+  "text": "How they deal Will sell from the stores at the agreed price; wants it written down and paid in full."
+ },
+ {
+  "id": "C5934",
+  "law": 12,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "tab": "Systems/Economics",
+  "text": "What it puts on the table itself is the mill's flour."
+ },
+ {
+  "id": "C39616",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-occupied-rand-47",
+  "tab": "Systems/Services",
+  "text": "The court sits and the gaol holds, but both are slow, and coin buys a quicker answer."
+ },
+ {
+  "id": "C40154",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-occupied-rand-47",
+  "tab": "Systems/Defense",
+  "text": "Offenders at Nandanand are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating."
+ },
+ {
+  "id": "C34395",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-calm-rand-46",
+  "tab": "Systems/Defense",
+  "text": "Offenders at Drumbeck are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating."
+ },
+ {
+  "id": "C16222",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-hamlet-calm-rand-45",
+  "tab": "Systems/Defense",
+  "text": "Ravenland keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is armed and standing there, and when they leave, nothing keeps it."
+ },
+ {
+  "id": "C37891",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-occupied-rand-45",
+  "tab": "World/Relationships",
+  "text": "An old friend of Xenophon Gregoraios's is held by the watch, and Ariadne Chrysoberges is the one who keeps that friend fed and safe inside."
+ },
+ {
+  "id": "C42053",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-village-calm-rand-46",
+  "tab": "Systems/Defense",
+  "text": "You will see the local watch on the rounds most hours of the day; it catches the careless and misses the careful."
+ },
+ {
+  "id": "C3863",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "tab": "Systems/Defense",
+  "text": "Whatever crime is organised at Svetoko has no rival, and no crew is contesting the streets with it."
+ },
+ {
+  "id": "C8647",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-wartime-rand-45",
+  "tab": "Systems/Defense",
+  "text": "Whatever crime is organised at Eisenmark has no rival, and no crew is contesting the streets with it."
+ },
+ {
+  "id": "C21547",
+  "law": 13,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-metropolis-calm-rand-45",
+  "tab": "Systems/Power",
+  "text": "A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken."
+ },
+ {
+  "id": "C6290",
+  "law": 13,
+  "verdict": "WEAK",
+  "expect": "apart",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "tab": "Systems/Defense",
+  "text": "Offenders at Vedatala are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating."
+ },
+ {
+  "id": "C5328",
+  "law": 13,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "tab": "Summary/Plot Hooks",
+  "text": "A business rival has offered them a partnership with terms so good it must be a trap."
+ },
+ {
+  "id": "C5358",
+  "law": 13,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "tab": "Summary/Plot Hooks",
+  "text": "A buyer has paid them in advance for a whole season of goods, far above the price, and will not say what the goods are for."
+ },
+ {
+  "id": "C14226",
+  "law": 14,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-wartime-rand-47",
+  "tab": "Systems/Power",
+  "text": "Crown-appointed emergency body with powers over requisition, conscription, and price controls."
+ },
+ {
+  "id": "C6183",
+  "law": 14,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "tab": "Systems/Power",
+  "text": "handled by Durga Khanna, the gang boss (Rival gangs)"
+ },
+ {
+  "id": "C16666",
+  "law": 14,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-hamlet-calm-rand-46",
+  "tab": "Systems/Power",
+  "text": "At Khutulunnuur the hamlet's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes."
+ },
+ {
+  "id": "C44634",
+  "law": 14,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-village-famine-rand-46",
+  "tab": "Systems/Power",
+  "text": "A reeve elected from the peasantry manages labour and mediates disputes under noble oversight."
+ },
+ {
+  "id": "C5296",
+  "law": 14,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "tab": "Summary/Plot Hooks",
+  "text": "They have evidence of price-fixing across the whole market."
+ },
+ {
+  "id": "C6865",
+  "law": 14,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "tab": "World/NPCs",
+  "text": "Secret: Authorised an illegal sortie that failed."
+ },
+ {
+  "id": "C36170",
+  "law": 14,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-calm-rand-47",
+  "tab": "World/NPCs",
+  "text": "Emir"
+ },
+ {
+  "id": "C14564",
+  "law": 14,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-city-wartime-rand-47",
+  "tab": "World/NPCs",
+  "text": "Wants Win two more people in The Martial Alliance over to their side before Itzam Cohuoh notices."
+ },
+ {
+  "id": "C15891",
+  "law": 15,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-hamlet-calm-rand-45",
+  "tab": "Summary/Overview",
+  "text": "Laden carts from the workings grind along the road in a line that never seems to end."
+ },
+ {
+  "id": "C16854",
+  "law": 15,
+  "verdict": "WEAK",
+  "expect": "apart",
+  "town": "bar0-hamlet-calm-rand-47",
+  "tab": "Summary/Overview",
+  "text": "Laden carts from the workings grind along the road in a line that never seems to end."
+ },
+ {
+  "id": "C31732",
+  "law": 15,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-thorp-calm-rand-47",
+  "tab": "Summary/Overview",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another."
+ },
+ {
+  "id": "C36003",
+  "law": 15,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-calm-rand-47",
+  "tab": "Systems/Defense",
+  "text": "The town knows it needs specialists against the creatures, and has none of its own to send."
+ },
+ {
+  "id": "C18613",
+  "law": 15,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "tab": "Systems/Defense",
+  "text": "Llanham has no line and no force, and danger is close at hand."
+ },
+ {
+  "id": "C40806",
+  "law": 15,
+  "verdict": "STANDS",
+  "expect": "found",
+  "town": "bar0-town-occupied-rand-47",
+  "tab": "World/Daily Life",
+  "text": "In Nandanand the old buildings are patched and kept standing, and nothing new goes up."
+ },
+ {
+  "id": "C16138",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-hamlet-calm-rand-45",
+  "tab": "Systems/Power",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another."
+ },
+ {
+  "id": "C16460",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-hamlet-calm-rand-46",
+  "tab": "Summary/Overview",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another."
+ },
+ {
+  "id": "C16877",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-hamlet-calm-rand-47",
+  "tab": "Summary/Overview",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another."
+ },
+ {
+  "id": "C30951",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-thorp-calm-rand-45",
+  "tab": "Summary/Overview",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another."
+ },
+ {
+  "id": "C31349",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-thorp-calm-rand-46",
+  "tab": "Summary/Overview",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another."
+ },
+ {
+  "id": "C18612",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "tab": "Systems/Defense",
+  "text": "Adequate▼"
+ },
+ {
+  "id": "C31464",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-thorp-calm-rand-46",
+  "tab": "Systems/Economics",
+  "text": "Xochikin's food comes from more than one source, the fishing most of all, so a poor year in one does not empty the thorp's tables."
+ },
+ {
+  "id": "C31480",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-thorp-calm-rand-46",
+  "tab": "Systems/Resources",
+  "text": "✓ Fully exploited · Fish · medium value"
+ },
+ {
+  "id": "C17347",
+  "law": 15,
+  "verdict": "EXPLAINED",
+  "expect": "clear",
+  "town": "bar0-hamlet-calm-rand-47",
+  "tab": "World/History",
+  "text": "The trade the settlement was founded to serve failed within its first few years, and the wealth it was meant to carry never came"
+ },
+ {
+  "id": "C18264",
+  "law": 15,
+  "verdict": "WEAK",
+  "expect": "apart",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "tab": "Summary/Overview",
+  "text": "The road was here first."
+ },
+ {
+  "id": "C18575",
+  "law": 15,
+  "verdict": "WEAK",
+  "expect": "apart",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "tab": "Systems/Power",
+  "text": "Áine MacDonald is third in Feudal Stewardship and holds a half share in War Council, and carries War Council's requests to the two above."
+ }
+]
