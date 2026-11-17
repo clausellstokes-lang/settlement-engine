@@ -16,6 +16,11 @@ unchanged; mine beside this file (`birth3/`): `three.mjs` (THE THREE EQUAL), `ag
 
 ## THE OWNER'S TABLE (first, as the brief asks): how often each story comes up
 
+**AFTER AMENDMENT 1 (the final tip 34ea12bbe), the 720:** never there, bought in 1,873 (423); used up, bought in 1,097 (264);
+the land has it 2,517 (573); idle 147 (115); short with no ground used up 67 (26); THE FAILED VENTURE 11 towns (8 "Failing", 3
+"Abandoned"); the 150: used up, bought in 137 (43), never there 277 (72), short with no ground used up 23 (10), the venture 3.
+The table below is the tip before the amendment (aba18f843..edcfc2998); the amendment's moves are said in its section.
+
 Every live house that works a material (the leaf's `MATERIAL_OF`), each once, in its story. "Base" is the base (BIRTH-2's
 rule on the joined tree, read as the owner's view reads it, with the seed); "tip" is mine (read off the stored record, in
 every view alike). THE OWNER'S DESIGN DID NOT CHANGE: the stories, the odds, the failed venture and its words are BIRTH-2's;
@@ -139,7 +144,7 @@ off `houseInputAtHand.js :: warIronHookOutsideWar`, the same hook): its war line
 | file · test | what it was | now |
 |---|---|---|
 | `publicProseEquality` · services, soak1k-1 and soak1k-10 | H1 (a real fault) | **green by P1** (no re-key) |
-| `publicProseEquality` · services, soak1k-5 | — | **RED ON THE LINE TOO** (measured at 7cf3cb9f0 here: 1 failed, the same six lines): the war's iron mark read off the DM's plot hooks the shared page withholds (above). Not the seed, not mine: LEFT, named |
+| `publicProseEquality` · services, soak1k-5 | red on the line too (measured at 7cf3cb9f0 here) | **GREEN BY AMENDMENT 1 (3)**: `warReach.js` reads the war's hold on the iron off what every view keeps |
 | `bar4MarkPromise` · (a) THE ZERO | H2 (the venture: `gap-missing`, `tab-split`) **and** 30 instances "spent-fishery" (the fish market on its spent fisheries, BIRTH-2's buyer) | the venture's instances **green by P2**; the fish markets: the detector (`tests/helpers/markPromise.js`, by R8 its only reader is this file) names a new exclusion **EX-BOUGHT**, counted, not hidden: a BUYER (`BUYS_AND_WORKS`: the fish market, the fishmonger) whose town's imports bring its fish by name and which the one reader answers at work, the owner's first story ("used up, bought in": its row bare is true); the houses that fish the water themselves stay in FS1's rule. **FOR THE CHAIR'S VETO**: this is the one place I judged a detector's rule out of date with the owner's table rather than the page wrong |
 | `bar4MarkPromise` · (d) | its anchor r2r-hamlet-9's burner stands in the woodland it proves | **re-keyed by identity** to r2s-religious_conversion-hamlet-2 (its burner idle: woodland used up, nothing bought); the constructed arm unchanged |
 | `bar7EconTab` · (8f) each control | bar0-city-under_siege+famine-rand-44's wool is bought in and cut off by the siege (BR3 (c)): "Curtailed by the siege." | **re-keyed** to bar0-city-under_siege+famine-rand-39 (the same shape, on no road: "Short of wool.") |
@@ -209,7 +214,7 @@ the final tip edcfc2998 (this hand-back's commit changes no code).
 | `npx eslint` on my changed sources and tests (17 files) | — | exit 0 |
 | `npx vitest run tests/architecture` | — | exit 0 · 21 files · 347 tests |
 | my guard `tests/domain/supplyStoryLaw.test.js` | cannot load (`birthPicksOn` is born here); its measures fail there (the three equal: 65 · 19 towns; the venture's gate null) | **exit 0 · 8 tests** |
-| the brief's list (11 files above) | 10 files red (the join's) | 1 red: `publicProseEquality` services soak1k-5, RED ON THE LINE (the war, named) · 502 passed |
+| the brief's list (11 files above) | 10 files red (the join's) | after AMENDMENT 1: **0 red · 503 passed**; `isolatedTrade` green, `pipelineContract` 1 red (named) |
 | the round's guards (`bar7*`: 66 tests), the bar5 and bar6 guards and the scene guard (22 files, 179 tests) | — | exit 0 · exit 0 |
 | the PDF anchors (`tailExportsPdf2Batch2`, `tailExportsPdf3Batch3`, `seamPdfReadsTheTabs`) | — | exit 0 · 23 tests |
 | `npx vitest run tests/lint` WHOLE, compared BY NAME | 28 files · 66 tests red | **28 files · 65 tests red: NONE NEW.** One red at the base only: `siteCoherenceRatchet` C5 (determinism, two scans agree; a run under load). The rest the same 65 by name (the brief's list on the line: `ruinFilterRoster`, `tailCorpusDefGuards` batch 6, `factLayers` three, `mutationCoverageManifest` TOTALITY (my guard is NAMED here: the manifest is a shared tool), `tuningRegister`, and the others as on the line) |
@@ -226,9 +231,9 @@ ground named as present, as it reads BIRTH-1's quarry lines at the base; the gro
 
 ## What is left, by name
 
-- `publicProseEquality` · services, soak1k-5, and the 8 (720) and 9 (150) towns of the three-equal measure: the war's iron
-  mark read off the DM's plot hooks, which the shared page withholds. RED ON THE LINE. Not the seed; `warReach.js` is not
-  mine. For the chair.
+- The three equal in **2 occupied towns of the 720 and 3 of the 150**: "Short of iron." off `warIronHookOutsideWar` (the DM's
+  hook); its war line needs `facts/warState.js`, pinned lazy for this eager fact (EG1). For the chair.
+- `pipelineContract` · metropolis/plains/crossroads: `assembleSettlement` writes undeclared `[npcs]` (no seat's file).
 - `generationWorkerLazy` · the ceiling: THE OWNER'S (P5 (iii)).
 - The failed venture's DOOR WORD on the Institutions tab stays "short" (`SHORT_WORD`, after a service's name where no
   description prints), and the tab's head line "A row marked short is what its house makes when supplied." prints on the
@@ -265,3 +270,8 @@ ground named as present, as it reads BIRTH-1's quarry lines at the base; the gro
    buy their wool in), `resourceAnalysis.priorityNotes` 1 and 1, the need list 1 of the 720. **No person, tie, name or
    roster moves** (`fieldDiff`, 0 in all three). NO NEW FIELD: the rows are the gap rows the record already stores, of its
    own two kinds; the seed stays confidential (`publicSafe.js` untouched).
+
+NOTE ON THE NET'S ORDER: the walkers, the one build, the runners and the doors' base lines were run at edcfc2998, before
+AMENDMENT 1; after it I re-ran the guard (8 of 8), the brief's list, the round's guards, the bar5 and bar6 guards, the scene
+guard, the PDF anchors, the architecture guards, both type gates (the push hook), eslint on the changed files and both doors
+(the same lines), all green but the named reds. The walkers and the build were not run again (my count).
