@@ -515,8 +515,9 @@ export function resourceGapLines(s) {
   const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (s));
   /**
    * BAR8-J-ROWS (G1): the house's own story lines (worked out; the failed venture's) and the materials they tell: a
-   * worked-out source house's every own ground is spent (`sourceGround`), so it tells each ground's good (by the row's own
-   * name: a peat cutter's peat); the venture tells its material.
+   * worked-out source house's every own ground is spent (`sourceGround`), so it tells each ground's yield as the Depleted
+   * list names it (the good the page's mark then reads off that ground, `housesOnSpentGround`: a peat cutter's marsh yields
+   * reeds, so its "No peat reaches …" stays, and its mark "Short of peat." with it); the venture tells its material.
    * @param {{ name?: unknown, catalogId?: unknown }} inst @param {string} name @param {string} severity
    * @returns {{ lines: GapLine[], nouns: Set<string> }}
    */
@@ -528,7 +529,7 @@ export function resourceGapLines(s) {
     const ground = sourceGround(s, inst);
     if (ground) {
       lines.push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${ground}).`, severity });
-      for (const k of arr(SOURCE_GROUNDS[id])) { if (GROUND_YIELD[k]) nouns.add(GROUND_YIELD[k]); const own = rowGoodOf(id, k); if (own) nouns.add(own); }
+      for (const k of arr(SOURCE_GROUNDS[id])) if (GROUND_YIELD[k]) nouns.add(GROUND_YIELD[k]);
     }
     if (venture && venture.name === name) {
       const why = ventureLine(venture, inst);

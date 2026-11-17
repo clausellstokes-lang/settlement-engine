@@ -12,6 +12,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 import { housesShortOfInput } from '../../src/domain/display/crisisStoppedRow.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
+import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 
 /** The towns, with the house whose story line the base doubled and the general line that must stay (a row with no story). */
 const TOWNS = Object.freeze({
@@ -21,13 +23,18 @@ const TOWNS = Object.freeze({
   'bar0-town-calm-rand-32': { house: 'potter', story: 'stands abandoned' },
   'bar0-village-calm-rand-40': { house: 'sawmill', story: 'stands abandoned' },
   'bar0-town-calm-rand-29': { house: null, keeps: 'No clay reaches the potter.' },
+  // a worked-out peat cutter: its marsh yields reeds, and the page's mark reads "peat" off the general line, so the line stays
+  // (left by name: the mark's own reading is `crisisStoppedRow.js :: housesShortOfInput`, not this seat's)
+  'r2r-hamlet-49': { house: null, keeps: 'No peat reaches the peat cutter.' },
 });
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
-/** CENSUS-3 seedcfg.mjs's bar arm, verbatim in shape (as `bar7Lines.test.js` reads it). @param {string} seed */
+/** CENSUS-3 seedcfg.mjs's census and bar arms, verbatim in shape (as `bar7Lines.test.js` reads them). @param {string} seed */
 function configOf(seed) {
+  const c = seed.match(new RegExp(`^r2r-${SIZE}-(\\d+)$`));
+  if (c) return { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded', settType: c[1] };
   const m = seed.match(new RegExp(`^bar0-${SIZE}-([a-z_+]+)-([a-z_]+)-(\\d+)$`));
-  if (!m) throw new Error(`a guard seed is a read seed: ${seed}`);
+  if (!m) throw new Error(`a guard seed is a census or a read seed: ${seed}`);
   const st = m[2] === 'calm' ? [] : m[2].split('+'); const route = m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] };
   return { ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: st, _randomizePriorities: true };
 }
@@ -68,7 +75,8 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
     /** @type {string[]} */ const found = [];
     for (const [seed, town] of BORN) {
       const lines = resourceGapLines(town).map((l) => l.impact);
-      for (const d of doubledGapLines(lines)) found.push(`${seed}: ${d}`);
+      // the worked-out peat cutter's pair is LEFT BY NAME (its mark reads its noun off the general line): held by the next test
+      for (const d of doubledGapLines(lines)) if (!d.startsWith('No peat reaches the peat cutter. | The peat cutter is worked out:')) found.push(`${seed}: ${d}`);
       const want = TOWNS[/** @type {keyof typeof TOWNS} */ (seed)];
       if (want.house) {
         const story = `The ${want.house} ${want.story}`;
@@ -89,6 +97,7 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
     }
     const lines = resourceGapLines(BORN.get('bar0-metropolis-calm-rand-29')).map((l) => l.impact);
     expectAbsentWithAnchor(lines, 'No coal reaches the mine.', 'No clay reaches the potter.');
+    expect(housesShortOfInput(BORN.get('r2r-hamlet-49')).get('Peat cutter'), 'the worked-out peat cutter\'s mark keeps its peat').toBe('peat');
   });
 
   it('the page\'s mark still reads every house the story line tells of', () => {
@@ -97,6 +106,15 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
       const short = housesShortOfInput(BORN.get(seed));
       const name = [...short.keys()].find((k) => k.toLowerCase().startsWith(want.house));
       expect(name, `${seed}: the ${want.house} is still marked short`).toBeTruthy();
+    }
+  });
+
+  it('N4: the owner\'s page, the public projection and the share veil print the same gap lines', () => {
+    for (const [seed, town] of BORN) {
+      const own = resourceGapLines(structuredClone(town)).map((l) => l.impact);
+      expect(own.length, `${seed}: a gap line prints`).toBeGreaterThan(0);
+      expect(resourceGapLines(toPublicSafe(structuredClone(town))).map((l) => l.impact), `${seed}: public`).toEqual(own);
+      expect(resourceGapLines(projectShareVeil(toPublicSafe(structuredClone(town)), null)).map((l) => l.impact), `${seed}: veil`).toEqual(own);
     }
   });
 });
