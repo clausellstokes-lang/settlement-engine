@@ -45,7 +45,7 @@ describe('R-AP amended: the fish key\'s lines declare the catch and the water th
 // BAR4-SCENES-2 (2026-11-16, re-keyed by identity): the mill wheel's twin joins bread.lines after the mill wheel, so the warm oven moves [3] → [4]
 // BAR5-THINGS (2026-11-16, LAW 5, re-keyed by identity): bread.lines[0], the fresh bread on the road in, leaves the colour mark and
 // declares `no crisis: hunger, no crisis: under_siege`; its twin joins after it, so the warm oven moves [4] → [5]: [0, 4] → [5]
-const ARRIVAL_COLOUR = { 'bread.lines': [5], 'faith.lines': [2], 'herbs.dominant': [1, 2] };
+const ARRIVAL_COLOUR = { 'bread.lines': [5], 'faith.lines': [2], 'herbs.dominant': [4] }; // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): the spice sacks declare `trade at work: spice` and leave the colour mark (a fact can make them false); two twins join before the remedy line
 const FLAVOR_COLOUR = { disaster_heavy: [0, 1, 2, 3, 5], religious_heavy: [1, 3, 4, 5, 6], magical_heavy: [0, 3, 5] };
 
 describe('R-AO: the read bare lines of the mixed pools are marked colour, and declare nothing', () => {

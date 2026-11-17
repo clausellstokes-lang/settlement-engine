@@ -150,7 +150,9 @@ export const LEAVES = Object.freeze({
   // BAR4-SCENES (kind A1): enchanting among the services (`sceneSupply.js`)
   enchanting: home('enchanting', 2, ['availableServices']),
   // BAR4-SCENES-2 (HW1): a trade the scene shows is at work (`tradeAtWork.js`, on `houseInputAtHand.js :: housesShortOf`)
-  tradeAtWork: home('tradeAtWork', 4, ['institutions', 'resourceAnalysis', 'config', 'economicState'], { call: 'factsCall' }), // layer 4: it reads the resource analysis's gaps (layer 3)
+  tradeAtWork: home('tradeAtWork', 4, ['institutions', 'resourceAnalysis', 'config', 'economicState', 'stress', 'stressors', 'activeConditions'], { call: 'factsCall' }), // layer 4: it reads the resource analysis's gaps (layer 3)
+  // BAR6-SCENES (6b): the goods of a scene of goods leaving are on the export list (`goodExported.js`)
+  goodExported: home('goodExported', 2, ['economicState'], { call: 'factsCall' }),
   // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label
   keep: home('keep', 2, ['economicState']),
   magicDependents: leaf({ layer: 2, module: 'domain/magicReliance.js', exported: 'magicDependents', call: 'record', reads: ['economicState'] }),
@@ -162,6 +164,8 @@ export const LEAVES = Object.freeze({
     note: 'the stored readiness: the defence profile is layer 2 by value; born at assembly (NEW-1\'s step order)' }),
   // ── layer 3: over the powers ──
   rulerKind: home('rulerKind', 3, ['powerStructure']),
+  // BAR6-SCENES (9f): the public legitimacy in its crisis band (`legitimacyCrisis.js`)
+  legitimacyCrisis: home('legitimacyCrisis', 3, ['powerStructure']),
   // TAIL-TIES (the chair's ruling (T5)): ruled by a body of more than one, read off the government's label
   rulingBody: home('rulingBody', 3, ['powerStructure']),
   guild: home('guild', 3, ['powerStructure', 'institutions']),

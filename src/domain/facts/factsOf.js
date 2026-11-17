@@ -27,6 +27,7 @@ import { magicOf } from './magic.js';
 import { magicSupplyOf } from './magicSupply.js'; // BAR4-CORPUS-DEF (D2)
 import { relianceShownOf } from '../display/magicProvisionShown.js'; // BAR5-MAGIC (rule 1a): the reliance word the page prints
 import { rulerKindOf } from './rulerKind.js';
+import { legitimacyCrisisOf } from './legitimacyCrisis.js'; // BAR6-SCENES (9f)
 import { rulingBodyOf } from './rulingBody.js';
 import { sovereignOf } from './sovereign.js'; // BAR6-HOUSES (SV1)
 import { migrationOf } from './migration.js';
@@ -39,6 +40,7 @@ import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
 import { timberAtHandOf, timberReachesSawmillOf } from './timberAtHand.js'; // BAR4-HOUSES (H1 (ii)); BAR4-SCENES-2: one home
 import { failedFoodSourceOf, enchantingOfferedOf } from './sceneSupply.js'; // BAR4-SCENES (kind A1)
 import { tradeAtWorkOf } from './tradeAtWork.js'; // BAR4-SCENES-2 (HW1)
+import { goodExportedOf } from './goodExported.js'; // BAR6-SCENES (6b)
 import { legalHouseOf } from './legalHouse.js'; // BAR5-THINGS (LAW 4, the notary)
 import { appointedPostOf } from './appointedPost.js'; // BAR5-THINGS (LAW 4, the patron)
 import { leadingSourceSpentOf } from './leadingSourceSpent.js'; // BAR4-CORPUS-ECO (amendment 5b)
@@ -119,6 +121,8 @@ export function factsOf(record, options = {}) {
     get rulerKind() { return rulerKindOf(record); },
     /** BAR6-HOUSES (the chair's ruling SV1): the record gives a sovereign, or a war or an occupation supplies one (`sovereign.js`) */
     get sovereign() { return sovereignOf(record); },
+    /** BAR6-SCENES (9f): the public legitimacy in its crisis band (`legitimacyCrisis.js`) */
+    get legitimacyCrisis() { return legitimacyCrisisOf(record); },
     /** TAIL-TIES (the chair's ruling (T5)): ruled by a body of more than one (`rulingBody.js`), or undefined with no government */
     get rulingBody() { return rulingBodyOf(record); },
     /** fact 9: the mass migration's direction */
@@ -145,6 +149,8 @@ export function factsOf(record, options = {}) {
     get enchanting() { return enchantingOfferedOf(record); },
     /** BAR4-SCENES-2 (HW1): a trade the scene shows is at work, some house of it not short (`tradeAtWork.js`) */
     get tradeAtWork() { return (/** @type {string} */ key) => tradeAtWorkOf(record, key); },
+    /** BAR6-SCENES (6b): a good a scene sends out is on the export list (`goodExported.js`) */
+    get goodExported() { return (/** @type {string} */ key) => goodExportedOf(record, key); },
     /** fact 12: small / middling / large */
     get populationBand() { return populationBandOf(record); },
     /** fact 13: the terrain class */

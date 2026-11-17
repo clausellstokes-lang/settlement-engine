@@ -68,7 +68,7 @@ describe('BAR2-PLACES: the rows read the town', () => {
     ['C0434 class: the canonical', 'r2r-city-0', /A power in the city's trade/, /They handle much of the city's trade\./],
     ['C34394 the village is a village', 'r2r-village-4', /The hamlet benefits from fees/, /The village benefits from fees paid in kind\./],
     ['C27929 no gate presumed', 'r2r-town-9', /buries beyond the gate/, /Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead\./],
-    ['C5767 no hollowed-out workforce', 'r2s-wartime-thorp-0', /Conscription has hollowed out/, /Conscription has taken some of its skilled hands\./],
+    ['C5767 no hollowed-out workforce', 'r2s-wartime-thorp-0', /Conscription has hollowed out/, /The war reaches .+ as a series of demands rather than battles/], // BAR6-SCENES (2026-11-16, LAW 9 rule 9f; re-keyed by identity): a town under a legitimacy crisis: the row that calls it loyal is refused and resolves to the next
     // batch 2 (the chair's grant VW2: the atoms `patrol` and `iron at hand`), on the towns the bar's readers met
     ['C3297 no blades without iron', 'bar0-city-under_siege+famine-rand-5', /sound of blades being made/, /The forges of \S+ stand cold: there is no iron left to make blades from\./],
     ['C34238 no enforced order without a patrol', 'bar0-village-famine-rand-5', /orderly in the way that a settlement is orderly/, /is quiet in the way a hungry settlement is quiet\. The rationing markers are painted on the doors, and people keep to their own thresholds\./],
