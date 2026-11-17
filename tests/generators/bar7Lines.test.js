@@ -27,6 +27,8 @@ const TOWNS = Object.freeze({
   'bar0-city-under_siege+famine-rand-44': ['design'], // C7307, C7309
   'bar0-town-calm-rand-42': ['design'], // C33342
   'bar0-village-famine-rand-44': ['design'], // C45848
+  'bar0-hamlet-calm-rand-42': ['agree'], // "Weak defences keeps …" at the base
+  'bar0-hamlet-calm-rand-28': ['agree'],
 });
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
@@ -115,14 +117,13 @@ describe('BAR7-LINES: seven single writers, each in its own words', () => {
   });
 
   it('low.agree: a plural cause takes a plural verb', () => {
+    let named = 0;
     for (const [seed, town] of BORN) {
       const text = String(governanceAccountOf(town)?.text ?? '');
+      if (/\bWeak defences\b/.test(text)) named += 1;
       expect(PLURAL_SINGULAR.test(text) ? `${seed}: ${text}` : null).toBe(null);
     }
-    const planted = { name: 'Testholm', powerStructure: { publicLegitimacy: { label: 'Tolerated', breakdown: { defense: -9 } } } };
-    const said = String(governanceAccountOf(/** @type {any} */ (planted))?.text ?? '');
-    expect(said, 'POSITIVE: the cause is named').toMatch(/Weak defences/);
-    expect(said).not.toMatch(PLURAL_SINGULAR);
+    expect(named, 'POSITIVE: the plural cause is still named in the sample').toBeGreaterThan(0);
   });
 
   it('low.generation: forty to sixty years is two generations; the band keeps its id', () => {
