@@ -82,9 +82,12 @@ const NOT = [
   ['25075', 'r2s-plague_onset-city-0', 'services', /^Strategic Crossroads » Coaching inn » Transit trade profit$/m, /^Curtailed by the outbreak\. Strategic Crossroads » Coaching inn/m],
   // E17: a house, a service row with its description, a pill with none, an income share; and each chapter's head line
   // BAR3-SERVICES-2 SV7 (2026-11-15): re-keyed, a row of its own goes on (its "Meals and drink"): the inn reads "Curtailed by the siege."
-  ['E17/house', 'r2s-under_siege-town-2', 'institutions', /^Beds for merchants on the road\.$/m, [/^Curtailed by the siege\. Beds for merchants on the road\.$/m, HEAD_SIEGE_SUPPLIED]], // re-keyed BAR7-CARDS 2026-11-17 (above),
+  // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the chair's AMENDMENT 1 (2), the trade catalog's one good): this town's Tanners and
+  // Cobbler's guild now read their hides bought in with its "Wool, dairy, and livestock" (the livestock good's import), so no row
+  // is short here and the siege's head line ends where it did before BAR7-CARDS (HEAD_SIEGE, as E17/income reads it)
+  ['E17/house', 'r2s-under_siege-town-2', 'institutions', /^Beds for merchants on the road\.$/m, [/^Curtailed by the siege\. Beds for merchants on the road\.$/m, HEAD_SIEGE]], // re-keyed BAR7-CARDS 2026-11-17 (above),
   ['E17/service', 'r2s-famine-city-3', 'institutions', /^: Daily bread\./m, /^: Scarce in the famine\. Daily bread\./m],
-  ['E17/pill', 'r2s-under_siege-town-2', 'services', /^Accommodation$/m, [/^Accommodation \(stopped\)$/m, HEAD_SIEGE_SUPPLIED]], // re-keyed BAR7-CARDS 2026-11-17 (above),
+  ['E17/pill', 'r2s-under_siege-town-2', 'services', /^Accommodation$/m, [/^Accommodation \(stopped\)$/m, HEAD_SIEGE]], // re-keyed BIRTH-3 2026-11-17 (above, E17/house) // re-keyed BAR7-CARDS 2026-11-17 (above),
   ['E17/income', 'r2s-under_siege-town-2', 'economics', /^Magical trade conduits generate/m, [/^Stopped by the siege\. Magical trade conduits generate/m, HEAD_SIEGE]],
   // E1: an output is badged EXPORT where the tab's Exports print it, by its own name (a good id is a family)
   ['17065', 'r2s-mass_migration-hamlet-1', 'economics', /^Milled lumber\n {2}EXPORT$/m, /^Milled lumber$/m],

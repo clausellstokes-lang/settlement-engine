@@ -20,15 +20,19 @@
  * that base, read here BLIND (the words the birth brings in for the buyers struck from the record's imports): the house
  * is marked again, so the reader still sees what the base saw and the cure is the birth's word.
  *
- * @enforced-by this file (the guard of `src/domain/facts/houseKinds.js` and `resourceGenerator.js :: importsBroughtAtBirth`)
+ * @enforced-by this file (the guard of `src/domain/facts/houseKinds.js` and `src/generators/resourceGenerator.js :: importsBroughtAtBirth`)
  */
+import { subsumeTradeGoods } from '../../src/domain/region/goodsCatalog.js';
 import { describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { housesOnSpentGround, housesShortOf } from '../../src/domain/facts/houseInputAtHand.js';
 import { housesShortOfInput } from '../../src/domain/display/crisisStoppedRow.js';
-import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, SOURCE_GROUNDS, isSourceHouse } from '../../src/domain/facts/houseKinds.js';
+import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, MATERIAL_OF, SOURCE_GROUNDS, isSourceHouse } from '../../src/domain/facts/houseKinds.js';
+import { sourceStoryOf, usedGroundOf } from '../../src/domain/facts/supplyStory.js';
+import { resourceShortageImport } from '../../src/domain/resourceSemantics.js';
+import { ventureHouseOf } from '../../src/domain/facts/houseInputAtHand.js';
 import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
 import { hasTradeRouteConnection } from '../../src/domain/tradeRouteSemantics.js';
 import { generateResourceAnalysis, importsBroughtAtBirth, resolveNearbyCommodities } from '../../src/generators/resourceGenerator.js';
@@ -81,9 +85,17 @@ function lawInstances(seed, s) {
   const spent = housesOnSpentGround(s); const depleted = new Set(Array.isArray(s.config?.nearbyResourcesDepleted) ? s.config.nearbyResourcesDepleted : []);
   /** @type {string[]} */
   const out = [];
+  // RE-KEYED BY IDENTITY (BIRTH-2, 2026-11-17; the owner's rule, BR5: THE SEED PICKS THE STORY): a house THE SEED LEFT IDLE
+  // (its material's ground used up, stored or implied, and the town not buying it in: the owner's fourth story) and THE
+  // FAILED VENTURE (the owner's fifth) are true marks now, as a source house on its own spent ground was; the law's claim
+  // on every other house stands as written
+  const venture = ventureHouseOf(s);
   for (const [house] of housesShortOf(s)) {
     const id = idOf(s, house);
-    if (BUYS_AND_WORKS.has(id)) { out.push(`${seed} · ${house}`); continue; }
+    if (venture?.name === house) continue;
+    const inst = (s.institutions || []).find((/** @type {any} */ i) => i?.name === house) || { name: house };
+    if (BUYS_AND_WORKS.has(id)) { if (!spent.has(house) && !usedGroundOf(s, MATERIAL_OF[id] || '')) out.push(`${seed} · ${house}`); continue; }
+    if (isSourceHouse(id) && sourceStoryOf(s, inst, resourceShortageImport)?.story === 'idle') continue;
     if (isSourceHouse(id) && !spent.has(house) && !SOURCE_GROUNDS[id].some((k) => depleted.has(k))) out.push(`${seed} · ${house}`);
   }
   return out;
@@ -99,12 +111,12 @@ function lawInstances(seed, s) {
  *     `crisisDependence.js :: SPENT_GROUND_WORKERS` holds it a house that works the ground itself, whose mark no
  *     import lifts (not this seat's file).
  */
-const EXCEPTIONS = Object.freeze({
-  'Dairy farmer': ['r2r-hamlet-12', 'r2r-hamlet-14', 'r2r-hamlet-19', 'r2r-hamlet-26', 'r2r-hamlet-47', 'r2r-hamlet-52', 'r2r-hamlet-56', 'r2r-village-14', 'r2r-village-16', 'r2r-village-32', 'r2r-village-36', 'r2r-village-46', 'r2r-village-51', 'r2r-village-54', 'bar0-hamlet-calm-rand-27', 'bar0-hamlet-calm-rand-28', 'bar0-hamlet-calm-rand-29', 'bar0-hamlet-calm-rand-39', 'bar0-village-calm-rand-29'],
-  'Salt works': ['r2r-hamlet-18', 'r2r-town-15', 'r2r-town-29', 'r2r-city-22', 'r2r-city-41', 'r2r-metropolis-16', 'r2r-metropolis-20', 'r2r-metropolis-47', 'bar0-metropolis-calm-rand-27'],
-  'Charcoal burner': ['r2r-hamlet-26', 'r2r-hamlet-48', 'r2r-hamlet-52', 'r2r-hamlet-59', 'r2r-town-17', 'r2r-town-40', 'r2r-city-0', 'r2r-city-59', 'r2r-metropolis-19', 'r2r-metropolis-24', 'r2r-metropolis-32', 'r2r-metropolis-41', 'r2r-metropolis-47', 'r2r-metropolis-57', 'bar0-hamlet-calm-rand-27', 'bar0-hamlet-calm-rand-29', 'bar0-village-calm-rand-31', 'bar0-metropolis-calm-rand-34'],
-  'Fish market': ['r2r-village-11', 'r2r-village-45', 'r2r-town-6', 'r2r-town-29', 'r2r-town-38', 'r2r-town-50', 'r2r-town-52', 'r2r-city-14', 'r2r-city-34', 'r2r-city-35', 'r2r-metropolis-11', 'r2r-metropolis-21', 'r2r-metropolis-23', 'r2r-metropolis-28', 'r2r-metropolis-42', 'r2r-metropolis-45', 'r2r-metropolis-49', 'r2r-metropolis-55', 'bar0-town-calm-rand-28'],
-});
+// STRUCK BY ITS OWN RULE (BIRTH-2, 2026-11-17): every counted exception is cured. The dairy farmer, the salt works and the
+// charcoal burner on no ground of their own stand on the ground they prove, or buy their material in, or idle by the seed's
+// pick (a true mark this law no longer counts, above); the fish market is read as a buyer (the owner's table) and is fed by
+// its fisheries' shortage import where the seed has the town buy it. The ratchet stands at zero.
+/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+const EXCEPTIONS = Object.freeze({});
 const LEFT = Object.entries(EXCEPTIONS).flatMap(([house, seeds]) => seeds.map((seed) => `${seed} · ${house}`));
 
 /** The record read BLIND: the words the birth brings in for the buyers struck from its imports. @param {any} s */
@@ -114,7 +126,9 @@ const blind = (s) => ({ ...s, economicState: { ...s.economicState, primaryImport
 const CONTROLS = [
   ['r2r-village-4', 'Potter'],
   ['r2r-town-18', 'Vintner'],
-  ['r2r-village-14', 'Fuller'],
+  // RE-KEYED BY IDENTITY (BIRTH-2, 2026-11-17): r2r-village-14's fuller now has its wool of the pasture a house there proves
+  // (`supplyStory.js`); the same claim, a fuller marked only when the birth's words are struck, stands in r2r-town-28
+  ['r2r-town-28', 'Fuller'],
   ['r2r-town-14', 'Weavers/Textile workers'],
   ['r2r-village-6', 'Brickmaker'],
   ['r2r-town-6', "Cobbler's guild"],
@@ -159,7 +173,7 @@ describe('BIRTH-1: a house that buys its material has it brought in; a source ho
     const site = (s, config) => {
       const es = structuredClone(blind(s).economicState);
       const terrain = getTerrainType(config.tradeRouteAccess, config.terrainOverride || null);
-      generateResourceAnalysis(terrain, resolveNearbyCommodities(config, terrain), config.specialResources || [], s.institutions || [], config, es);
+      generateResourceAnalysis(terrain, resolveNearbyCommodities(config, terrain), config.specialResources || [], s.institutions || [], config, es, s._seed); // BIRTH-2 (BR7): the birth's seed
       return es.primaryImports || [];
     };
     // (a) the control towns: the site brings their words in on their own road, and none under a siege or on no road
@@ -168,8 +182,11 @@ describe('BIRTH-1: a house that buys its material has it brought in; a source ho
       const before = blind(s).economicState.primaryImports;
       const after = site(s, s.config);
       expect(after.length, `${seed}: the site brings words in on its connected road`).toBeGreaterThan(before.length);
-      expect(importsBroughtAtBirth({ ...s, economicState: { ...s.economicState, primaryImports: after } }), `${seed}: a second reading brings nothing more`).toEqual([]);
-      expect(site(s, { ...s.config, stressTypes: [...(s.config.stressTypes || []), 'under_siege'] }), `${seed} under a siege`).toEqual(before);
+      expect(importsBroughtAtBirth({ ...s, economicState: { ...s.economicState, primaryImports: after } }, s._seed), `${seed}: a second reading brings nothing more`).toEqual([]);
+      // RE-KEYED BY IDENTITY (BIRTH-2, 2026-11-17; the owner, BR3 (c): "a siege ... doesn't exclude"): under a siege the site
+      // brings the town's ordinary-times words in as on its open road (the bought-in house then carries the siege's mark:
+      // `supplyStoryLaw.test.js` L1); on an isolated route still none
+      expect(site(s, { ...s.config, stressTypes: [...(s.config.stressTypes || []), 'under_siege'] }).length, `${seed} under a siege`).toBeGreaterThan(before.length);
       expect(site(s, { ...s.config, tradeRouteAccess: 'isolated' }), `${seed} on an isolated route`).toEqual(before);
     }), 'the write site, controls');
     // (b) every town under a siege, and every isolated town of the seeds: the site writes nothing over its own record
@@ -179,8 +196,16 @@ describe('BIRTH-1: a house that buys its material has it brought in; a source ho
       const besieged = (s.config?.stressTypes || []).includes('under_siege');
       if (!besieged && hasTradeRouteConnection(String(s.config?.tradeRouteAccess ?? ''))) return;
       gated++;
-      expect(importsBroughtAtBirth(s), `${seed}: no word under a siege or on no road`).toEqual([]);
-      expect(site(s, s.config), `${seed}: the site writes nothing`).toEqual(blind(s).economicState.primaryImports);
+      // RE-KEYED BY IDENTITY (BIRTH-2, 2026-11-17; BR3 (c)): under a siege the birth writes its ordinary-times words, so the
+      // claim on a besieged town is that the site, over its own record, writes no word its record lacks; on no road, none
+      expect(importsBroughtAtBirth(s, s._seed), `${seed}: the birth over its own product brings nothing more`).toEqual([]);
+      const stored = new Set((s.economicState?.primaryImports || []).map(wordOf));
+      // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the chair's AMENDMENT 1 (2): the birth writes no second word of one
+      // canonical good): "a word the record lacks" is a good no word of the record names, by the trade catalog's own reading
+      // (the blind record, its buyer words struck, may bring the hides' word where the record holds the beasts', one good)
+      const listed = s.economicState?.primaryImports || [];
+      if (besieged) expect(site(s, s.config).filter((/** @type {string} */ w) => !stored.has(wordOf(w)) && subsumeTradeGoods([...listed, w]).length > subsumeTradeGoods(listed).length), `${seed}: the site writes no word the record lacks`).toEqual([]);
+      else expect(site(s, s.config), `${seed}: the site writes nothing`).toEqual(blind(s).economicState.primaryImports);
     }), 'the write site, siege and isolated towns');
     expect(gated, 'towns under a siege or on no connected road read').toBeGreaterThan(54);
     // (c) none twice: no town holds one import word twice (its bracketed reason struck)

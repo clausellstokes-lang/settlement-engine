@@ -118,8 +118,11 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
   // BAR4-RECORD's one reading (`houseInputAtHand.js`) cured it: the record as born says no timber reaches the charcoal burner, and
   // the page says so too. So the arm asserts the REAL page (the gap line prints and the row takes its shortage mark), and keeps one
   // constructed proof (nothing answers the input: no goods made, sold or bought, the route isolated, no food source).
+  // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the owner's supply rule, BR5 and BR8): r2r-hamlet-9's charcoal burner stands in the
+  // woodland it proves (BR4 (b)), so the real page holds no split there; the same claim on r2s-religious_conversion-hamlet-2,
+  // whose burner the story leaves idle (its woodland used up, nothing bought): the gap line prints and the row is short
   test('(d) the mark follows the page\'s gap line: the row whose input nothing answers reads short, on the real page and on a constructed record', () => {
-    const s = town('r2r-hamlet-9');
+    const s = town('r2s-religious_conversion-hamlet-2');
     expect(resourceGapLines(s).map((l) => String(l?.impact ?? ''))).toContain('No timber reaches the charcoal burner.');
     expect(rowMarkText(s, 'service', row(s, 'Charcoal supply'))).toMatch(/^Short of /);
     const e = s.economicState;

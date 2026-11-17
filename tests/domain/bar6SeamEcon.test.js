@@ -79,8 +79,15 @@ describe('SEAM-ECON item 8 (L3.outputs): a running card lists no output every ma
   // the tip's 1,724 births searched (the 720, the 150, 854 more census-shaped seeds) one town bears the claim, a River Mill
   // card listing "Fulled cloth" beside a Fuller short of wool, its flour shown: r2r-metropolis-69 (under a siege, its road shut).
   test('r2r-metropolis-69 (re-keyed from bar0-metropolis-calm-rand-27 and -39): the River Mill card drops "Fulled cloth" beside a Fuller short; its flour stays (every row)', () => {
+    // RE-KEYED BY IDENTITY (BIRTH-2, 2026-11-17; the owner, BR3 (c): a siege excludes nothing): the birth now brings the
+    // Fuller's wool in under the siege too, so no town of 1,470 census-shaped births at BIRTH-2's tip (the 720, the 150, 600
+    // more r2r- towns, cities and metropolises) bears the claim. It stands on the same town composed in THE OWNER'S FOURTH
+    // STORY, as BIRTH-2's refusing towns are (the wool not bought in: its word struck, the Fuller's stored gap saying so)
+    const fourthStory = (/** @type {any} */ t) => ({ ...t,
+      economicState: { ...t.economicState, primaryImports: (t.economicState?.primaryImports || []).filter((/** @type {unknown} */ x) => String(x) !== 'Wool') },
+      resourceAnalysis: { ...t.resourceAnalysis, gaps: (t.resourceAnalysis?.gaps || []).map((/** @type {any} */ g) => (g?.institution === 'Fuller' ? { ...g, kind: 'missing' } : g)) } });
     expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-69'], (seed) => {
-      const s = town(seed);
+      const s = fourthStory(town(seed));
       const mill = chainOf(s, 'river_milling');
       expect(mill?.outputs, `${seed}: anchored, the record's outputs`).toContain('Fulled cloth');
       expect(housesShortOf(s).get('Fuller'), `${seed}: anchored, the Fuller is short`).toBe('wool');

@@ -87,7 +87,11 @@ describe('LAW 2\'s rows of a house or a service (BAR5-MARKS): what the crisis st
       ...calm,
       stress: { type: 'wartime' }, stressors: { type: 'wartime' }, stresses: undefined,
       arrivalScene: `${calm.arrivalScene || ''} ${paddocks}`,
-      economicViability: { ...calm.economicViability, plotHooks: [...(calm.economicViability?.plotHooks || []), { category: 'Strategic Resource', severity: 'medium', hook: 'War has taken the iron.' }] },
+      // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the chair's ruling BR9: a mark the players see is never read off the DM's
+      // hooks): the war's iron is planted as the hook's own predicate reads it (domain/facts/warIronHook.js), the town's
+      // dependency on a metal and an iron import, kept on every view, in place of the hook's text
+      economicViability: { ...calm.economicViability, dependencies: [...(calm.economicViability?.dependencies || []), { title: 'Imports metals' }] },
+      economicState: { ...calm.economicState, primaryImports: [...(calm.economicState?.primaryImports || []), 'Iron'] },
     };
     expect([...warTakesOf(war)].sort()).toEqual([WAR_TAKES_ANIMALS, WAR_TAKES_IRON].sort());
     expect(warTakesOf(calm)).toEqual([]); // KEEP: the calm record, the war's lines absent, takes nothing

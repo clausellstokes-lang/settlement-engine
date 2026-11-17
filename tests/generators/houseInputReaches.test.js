@@ -66,8 +66,14 @@ const SMELTER_IMPORTS = [['r2s-under_siege-town-1', 'Smelter | iron ore | import
 // towns hold such a glassblower (no glassblower row is left).
 const ROUTE_FED = [['r2r-town-16', 'Vintner'], ['r2r-town-32', 'Vintner'], ['r2r-city-1', 'Vintner'], ['r2r-city-3', 'Vintner']];
 /** M-V KEEP: an isolated vintner (6,341; 55,265), an isolated glassblower, a besieged vintner (11,745; 271,164). */
+// RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the owner's supply rule, BR3 (c): a cause is of ordinary times, and a siege
+// reworks nothing): the two besieged towns' vintners (r2s-under_siege-city-2, r2r-metropolis-14) now have their must bought in
+// as in ordinary times, cut off by the siege ("Curtailed by the siege."); the claim, the input does not reach a town whose
+// route is shut, stands on two more towns on no road even in ordinary times, whose vintners' rows stay `missing`. SO THIS ARM
+// NOW ASSERTS THE ISOLATED FORM ONLY (the chair's AMENDMENT 2 (D)): under a siege a buyer is not `missing`; the besieged form
+// (its word on the imports, the house curtailed by the siege, never `missing`) is held by tests/domain/supplyStoryLaw.test.js
 const ROUTE_SHUT = [['r2r-city-49', 'Vintner', 'grapes'], ['r2r-metropolis-54', 'Vintner', 'grapes'], ['r2r-town-9', 'Glassblower', 'glass sand'],
-  ['r2s-under_siege-city-2', 'Vintner', 'grapes'], ['r2r-metropolis-14', 'Vintner', 'grapes']];
+  ['r2r-metropolis-9', 'Vintner', 'grapes'], ['r2r-metropolis-44', 'Vintner', 'grapes']];
 
 /** @type {Array<{ seed: string, s: any }>} */ let fed = [];
 /** @type {Array<{ seed: string, s: any }>} */ let routeFed = [];

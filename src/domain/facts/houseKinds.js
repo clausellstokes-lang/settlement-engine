@@ -86,7 +86,7 @@ export const SOURCE_GROUNDS = Object.freeze({
   mine: Object.freeze(['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits']), // it cuts the seam it stands on
   mine_open_cast: Object.freeze(['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits']), // the same, open-cast
   peat_cutter: Object.freeze(['marshlands']), // it cuts the bog it stands on
-  salt_works: Object.freeze(['salt_flats', 'desert_salt', 'fishing_grounds']), // its line: "evaporates saline brine … where brine lies near": the brine is its ground (on a coast, the sea)
+  salt_works: Object.freeze(['salt_flats', 'desert_salt']), // its line: "evaporates saline brine … where brine lies near": the brine is its ground (on a coast, the sea). BIRTH-2 (2026-11-17): the fishing grounds struck from this row (a fishery is no salt works' ground: "worked out … (Fishing grounds)." in r2s-wartime-city-1); on a coast the coast rule answers it
   fisher_s_landing: Object.freeze(['fishing_grounds', 'river_fish']), // the boats fish the water off the landing
   fishing_community: Object.freeze(['fishing_grounds', 'river_fish']), // the same
   hunter_s_lodge: Object.freeze(['hunting_grounds']), // it hunts the grounds it stands in
@@ -124,3 +124,108 @@ export const IMPORT_WORD = Object.freeze({
 
 /** The words the birth writes for the buyers (`IMPORT_WORD`'s values): bought for a buyer, they feed no source house. @type {ReadonlySet<string>} */
 export const BUYER_IMPORT_WORDS = new Set(Object.values(IMPORT_WORD));
+
+// ─── BIRTH-2 (the chair's rulings BR4 and BR5 of 2026-11-17, the owner's rule: THE SEED PICKS THE STORY; vetoable by the
+// owner) ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+// Read by the one reading of a town's grounds and of each material's story (`supplyStory.js`).
+
+/**
+ * A TAKER: a source house that takes its material from the ground itself and CANNOT BUY IN WHAT IT TAKES. On its own used-up
+ * ground (stored or implied) it is worked out, whatever the town buys. Catalogue ids, each with its one line of reason.
+ * @type {ReadonlySet<string>}
+ */
+export const TAKERS = new Set([
+  'stone_quarry', // it cuts the stone of the hill it stands on: bought stone is no quarry's work
+  'mine', // it cuts the seam: bought ore digs no gallery
+  'mine_open_cast', // the same, open-cast
+  'peat_cutter', // it cuts the bog it stands on
+  'woodcutter_s_camp', // it fells the wood it stands in
+  'shepherd', // it keeps a flock on its own pasture
+  'fisher_s_landing', // its boats fish the water off the landing
+  'fishing_community', // the same
+  'hunter_s_lodge', // it hunts the grounds it stands in
+  'wildfowler', // it hunts the marsh and the grounds
+]);
+
+/**
+ * A SOURCE HOUSE THAT CAN RUN ON BOUGHT-IN MATERIAL: catalogue id -> the word the imports list already holds for that
+ * material. Where its ground does not answer it, it follows its material's story like any buyer.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const RUNS_ON_BOUGHT = Object.freeze({
+  salt_works: 'Salt', // it boils and refines salt brought to its pans ("Salt": the economy's necessity word, `economy/primaryTradeLists.js`, `economy/tradeGoods.js`)
+  charcoal_burner: 'Timber', // its kilns burn cordwood carted in ("Timber": `IMPORT_WORD.timber`, above)
+  dairy_farmer: 'Livestock', // it keeps beasts bought at market ("Livestock": `IMPORT_WORD.livestock`, above)
+});
+
+/**
+ * THE GROUND A SOURCE HOUSE PROVES where none of its own grounds (`SOURCE_GROUNDS`) is on the record, live or spent (the
+ * owner: "Doesn't the stone quary here in and of itself stipulate that there is stone in the ground?"). A reading of the
+ * page, stored nowhere. The salt works proves none: off the coast its salt is bought in. The six of the second ring (the
+ * landings, the woodcutter, the hunters, the shepherd, the wildfowler) are left as they are (BIRTH-2's hand-back).
+ * @type {Readonly<Record<string, string>>}
+ */
+export const IMPLIED_GROUND = Object.freeze({
+  stone_quarry: 'stone_quarry', // a quarry proves its stone
+  mine: 'iron_deposits', // a mine proves its ore (the iron, the commonest seam of the catalogue)
+  mine_open_cast: 'iron_deposits', // the same, open-cast
+  peat_cutter: 'marshlands', // a peat cutter proves its bog
+  dairy_farmer: 'grazing_land', // a dairy proves its pasture
+  charcoal_burner: 'managed_forest', // a burner's kilns stand in the wood that feeds them
+});
+
+/**
+ * THE MATERIAL OF A HOUSE, by family (the town buys it or it does not: every house of one family shares the answer). The
+ * family's word is `IMPORT_WORD`'s (or `RUNS_ON_BOUGHT`'s). Catalogue ids; a house of no family is outside the story.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const MATERIAL_OF = Object.freeze({
+  blacksmith: 'ironOre', blacksmiths_3_10: 'ironOre', resident_smith_part_time: 'ironOre', specialized_metalworkers: 'ironOre', smelter: 'ironOre', mine: 'ironOre', mine_open_cast: 'ironOre',
+  brewer: 'grain', brewery: 'grain', maltster: 'grain', mill: 'grain', mills_2_5: 'grain', bakers_5_15: 'grain',
+  carpenter: 'timber', carpenter_part_time: 'timber', carpenters_5_15: 'timber', cooper: 'timber', woodcarver: 'timber', shipyard: 'timber', sawmill: 'timber', sawmill_commercial: 'timber', charcoal_burner: 'timber', woodcutter_s_camp: 'timber',
+  cobbler: 'hides', cobbler_s_guild: 'hides', tanner_established: 'hides', tanners: 'hides', tannery: 'hides',
+  fuller: 'wool', weavers_textile_workers: 'wool', shepherd: 'wool',
+  glassmakers: 'sand', glassblower: 'sand',
+  potter: 'clay', brickmaker: 'clay',
+  vintner: 'grapes',
+  apothecary: 'herbs', alchemist_shop: 'herbs',
+  luxury_goods_quarter: 'luxury',
+  fish_market: 'fish', fishmonger: 'fish', fisher_s_landing: 'fish', fishing_community: 'fish',
+  dairy_farmer: 'livestock',
+  stone_quarry: 'stone', peat_cutter: 'peat', salt_works: 'desertSalt',
+});
+
+/**
+ * BIRTH-3 (BR6, "never a whole trade"; the second reader's M2): THE OTHER HOUSES THAT BUY AND WORK A MATERIAL OF `MATERIAL_OF`,
+ * outside it (their reader answers them by their own trade): read only when the birth counts the houses of a town that use a
+ * material, so that a lone dairy, burner or tanner is no failed venture beside the butcher, the bowyer or the furrier who
+ * works the same material. Catalogue ids, each with its one line of reason.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const ALSO_USES = Object.freeze({
+  butchers_3_8: 'livestock', // buys beasts at market
+  chandler: 'livestock', // its tallow is the beasts' fat
+  bowyer_fletcher: 'timber', // bow staves and shafts are wood
+  river_boatyard: 'timber', // river boats are built of timber
+  thatcher: 'peat', // its reed is the marsh's (the peat cutter's ground)
+  furrier_s_district: 'hides', // pelts are the hides' trade
+  tailor: 'wool', // sews the cloth woven of wool
+  tailor_s_guild: 'wool', // the same, a guild
+  dyer: 'wool', // dyes the cloth woven of wool
+  alehouse: 'grain', // brews of grain
+});
+
+/**
+ * THE STARTING ODDS, THE OWNER'S TO CHANGE (each "N in 60"; the seed's own hash picks, and takes no draw):
+ *   groundThere  a source house where the land list holds no ground of its kind: the ground is there (else used up)
+ *   boughtIn     the ground used up and the town can trade: the material is bought in (else the house stands idle)
+ *   abandoned    a house that could be a failed venture (the only house of its material, which the land never had):
+ *                it is one (about one town in fifty shows one; never two in a town)
+ * A house that uses a material the land never had is bought in wherever the town can trade (no odds).
+ */
+export const SUPPLY_ODDS = Object.freeze({
+  groundThere: 45, // 3 times in 4
+  boughtIn: 45, // 3 times in 4
+  abandoned: 3, // 1 time in 20 of the houses that could be one (calibrated over the census's 720: BIRTH-2's hand-back)
+  outOf: 60,
+});

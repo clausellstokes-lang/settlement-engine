@@ -25,13 +25,12 @@
  * @enforced-by tests/domain/bar5MarksLaw2.test.js
  */
 import { crisisOf } from './crisisKind.js';
+import { warHoldsIron } from './warIronHook.js'; // BIRTH-3 (BR9): the iron hook's own predicate
 
 /** What the war can take, as the dependence words of `data/crisisDependence.js` spell them. */
 export const WAR_TAKES_IRON = 'iron';
 export const WAR_TAKES_ANIMALS = 'working animals';
 
-/** The supply hook's category the economy writes for the iron hooks only (`foodBalance.js`). */
-const IRON_HOOK_CATEGORY = 'Strategic Resource';
 
 /** The fixed clause of the war's paddocks line (`narrativeData.js :: STRESS_DESCS.wartime`). */
 export const RECEIPTS = /\bEvery sound animal of working age has a receipt\b/;
@@ -52,9 +51,11 @@ export function warTakesOf(record) {
   /** @type {string[]} */
   const out = [];
   if (crisisOf(record).has('wartime')) {
-    const r = /** @type {{ economicViability?: { plotHooks?: unknown } | null, arrivalScene?: unknown }} */ (record);
-    const hooks = Array.isArray(r.economicViability?.plotHooks) ? /** @type {Array<{ category?: unknown, hook?: unknown }>} */ (r.economicViability.plotHooks) : [];
-    if (hooks.some((h) => !!h && h.category === IRON_HOOK_CATEGORY && typeof h.hook === 'string' && h.hook.length > 0)) out.push(WAR_TAKES_IRON);
+    const r = /** @type {{ arrivalScene?: unknown }} */ (record);
+    // BIRTH-3 (the chair's ruling BR9: a mark the players see is never read off the DM's hooks): the war's hold on the iron
+    // is the iron hook's own predicate (`warIronHook.js`), over the fields every view keeps
+    const v = /** @type {{ economicViability?: { dependencies?: unknown } | null, economicState?: { primaryImports?: unknown } | null }} */ (record);
+    if (warHoldsIron(Array.isArray(v.economicViability?.dependencies) ? v.economicViability.dependencies : [], Array.isArray(v.economicState?.primaryImports) ? v.economicState.primaryImports : [], 'at war')) out.push(WAR_TAKES_IRON);
     if (typeof r.arrivalScene === 'string' && RECEIPTS.test(r.arrivalScene)) out.push(WAR_TAKES_ANIMALS);
   }
   const frozen = Object.freeze(out);

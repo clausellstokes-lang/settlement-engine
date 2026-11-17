@@ -30,7 +30,7 @@
 
 import { RESOURCE_CHAINS } from '../../data/goods/chains.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
-import { availableNativeResourceKeys } from '../resourceSemantics.js';
+import { availableNativeResourceKeys, resourceShortageImport } from '../resourceSemantics.js';
 import { isTradeRouteDisconnected } from '../tradeRouteSemantics.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
@@ -41,12 +41,13 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { catalogIdForName, familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
-import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, tradeFinisherIn } from '../facts/houseInputAtHand.js';
+import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, tradeFinisherIn, ventureHouseOf } from '../facts/houseInputAtHand.js';
+import { sourceStoryOf, ventureLineText } from '../facts/supplyStory.js';
 import { SOURCE_GROUNDS, isSourceHouse } from '../facts/houseKinds.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
-/** @typedef {{ institution?: unknown, chain?: unknown, impact?: unknown, severity?: unknown, missing?: unknown }} GapRow */
+/** @typedef {{ institution?: unknown, chain?: unknown, impact?: unknown, severity?: unknown, missing?: unknown, kind?: unknown }} GapRow */
 
 /**
  * One viability issue or warning as the record carries it (`economicViability.issues` /
@@ -125,12 +126,38 @@ function houseWords(inst) {
 function sourceGround(s, inst) {
   const id = str((typeof inst?.catalogId === 'string' && inst.catalogId) || catalogIdForName(str(inst?.name)) || '');
   if (!isSourceHouse(id)) return '';
+  // BIRTH-3: the house's own story speaks first: idle on a used-up ground (a mine whose every chain works its spent seam,
+  // though iron lies near) reads that ground worked out, by the Depleted list's label
+  const told = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (s), /** @type {{ name?: unknown }} */ (inst), resourceShortageImport);
+  if (told?.story === 'idle' && told.ground) return str(resourceDisplayName(told.ground));
+  if (told?.story === 'abandoned') return '';
   const grounds = SOURCE_GROUNDS[id];
   const config = /** @type {{ nearbyResourcesDepleted?: unknown }} */ (s?.config || {});
   const live = /** @type {string[]} */ (availableNativeResourceKeys(/** @type {Record<string, unknown>} */ (config)));
   if (grounds.some((k) => live.includes(k))) return '';
   const spent = arr(config.nearbyResourcesDepleted).map(str).find((k) => grounds.includes(k));
-  return spent ? str(resourceDisplayName(spent)) : '';
+  if (spent) return str(resourceDisplayName(spent));
+  // BIRTH-2 (BR4 (b), BR5): THE GROUND THE HOUSE PROVES, USED UP BY THE SEED, is the house's own ground too: the Depleted
+  // list prints it (`ResourcesTab.jsx`), and an idle house reads it worked out by the same label
+  const story = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (s), /** @type {{ name?: unknown }} */ (inst), resourceShortageImport);
+  return story?.story === 'idle' && story.ground ? str(resourceDisplayName(story.ground)) : '';
+}
+
+/**
+ * BIRTH-3 (BR8 (2)): the failed venture's one line, as its stored row carries it (the record's own words), or as the leaf
+ * words it. @param {import('../facts/supplyStory.js').Venture} v @param {{ name?: unknown }} inst @returns {string | null}
+ */
+const ventureLine = (v, inst) => v.line || ventureLineText(v, houseWords(inst));
+
+/** The chain key of a stored row's raw good. @type {ReadonlyMap<string, string>} */
+const KEY_OF_RAW = new Map(Object.entries(CHAIN_RAW_INPUT).map(([key, raw]) => [raw, key]));
+/**
+ * BIRTH-3: the good a stored row names, as a gap line names it ("animal hides" -> hides; "peat" as it is).
+ * @param {string} raw @returns {{ noun: string, plural: boolean }}
+ */
+function rowNoun(raw) {
+  const spec = KEY_OF_RAW.has(raw) ? CHAIN_INPUTS[/** @type {string} */ (KEY_OF_RAW.get(raw))] : null;
+  return spec ? { noun: spec.noun, plural: spec.plural === true } : { noun: raw.replace(/_/g, ' ').trim(), plural: false };
 }
 
 /** @param {string} x @returns {string} */
@@ -448,7 +475,7 @@ export function exploitationGroupsShown(s) {
 export function resourceGapLines(s) {
   const ra = s?.resourceAnalysis;
   const gaps = arr(ra?.gaps);
-  if (!gaps.length) return [];
+  if (!gaps.length && !ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (s))) return [];
   const institutions = arr(s?.institutions);
   /** @type {GapLine[]} */
   const out = [];
@@ -485,6 +512,7 @@ export function resourceGapLines(s) {
   }
 
   // The houses the generator calls short of an input, grouped by house: one line per idle house.
+  const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (s));
   /** @type {Map<string, GapRow>} */
   const flagged = new Map();
   for (const g of gaps) if (g && typeof g === 'object' && g.institution) flagged.set(str(g.institution), g);
@@ -494,7 +522,20 @@ export function resourceGapLines(s) {
     if (chains.some(([key]) => inputAnswered(s, key, inst))) continue;
     const specs = chains.map(([key]) => CHAIN_INPUTS[key]).filter(Boolean);
     const nouns = [...new Set(specs.map((x) => x.noun))];
-    if (!nouns.length) continue;
+    if (!nouns.length) {
+      // BIRTH-3 (BR8 (2), (4)): A HOUSE NO CHAIN ASKS whose stored row says its material does not reach it (the birth writes
+      // one for a source house its story leaves idle and for the failed venture: a mine, a peat cutter, a cobbler's guild)
+      // has the same gap line, of the row's own good, and its cause after it
+      const own = gaps.filter((x) => x && typeof x === 'object' && x.institution === name && x.kind === 'missing');
+      const goods = [...new Set(own.map((x) => rowNoun(str(x?.chain))).filter((x) => !!x.noun).map((x) => JSON.stringify(x)))].map((x) => /** @type {{ noun: string, plural: boolean }} */ (JSON.parse(x)));
+      if (!goods.length) continue;
+      push({ chain: null, impact: `No ${orList(goods.map((x) => x.noun))} ${goods.length === 1 && goods[0].plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
+      const spentGround = sourceGround(s, inst);
+      if (spentGround) push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${spentGround}).`, severity: str(g.severity) || 'high' });
+      if (venture && venture.name === name) { const why = ventureLine(venture, inst); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); }
+      continue;
+    }
+
     const plural = specs[specs.length - 1]?.plural === true && nouns.length === 1;
     // BIRTH-1 (the chair's ruling BR2 of 2026-11-17, the audit's R4; vetoable by the owner): A SOURCE HOUSE ON ITS OWN SPENT
     // GROUND IS WORKED OUT. "No stone reaches the stone quarry." said the stone was elsewhere beside "Dressed stone (local
@@ -507,6 +548,14 @@ export function resourceGapLines(s) {
     push({ chain: null, impact: `No ${orList(nouns)} ${plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
     const ground = sourceGround(s, inst);
     if (ground) push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${ground}).`, severity: str(g.severity) || 'high' });
+    if (venture && venture.name === name) { const why = ventureLine(venture, inst); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); }
+  }
+  // BIRTH-2 (BR6, the owner's fifth story): the failed venture's ONE line, after its gap line, or alone where no chain asks its
+  // house of an input (a mine, a peat cutter)
+  if (venture && !flagged.has(venture.name)) {
+    const inst = institutions.find((i) => i?.name === venture.name) || { name: venture.name };
+    const why = ventureLine(venture, inst);
+    if (why) push({ chain: null, impact: why, severity: 'high' });
   }
   return out;
 }

@@ -25,6 +25,7 @@ registerStep('generateNarratives', {
   reads: ['economicState', 'effectiveConfig', 'generationContext', 'institutions', 'population', 'powerStructure', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   readsVersion: { economicState: 'reconciled' },
   provides: ['settlementReason', 'resourceAnalysis', 'economicViability', 'history'],
+  mutates: ['economicState'], // BIRTH-1/BIRTH-3 (BR3, BR8): the resource analysis's birth writes the words a house's story buys in onto economicState.primaryImports in place (resourceGenerator.js :: importsBroughtAtBirth)
   phase: 'narrative',
 }, (ctx) => {
   const {
@@ -41,7 +42,7 @@ registerStep('generateNarratives', {
   const nearbyResources = resolveNearbyCommodities(effectiveConfig, terrainT);
   const specialResources = effectiveConfig.specialResources || [];
   // The reconciled economy rides along so a gap line says which kind it is (REVIEW-INTAKE-3 R9).
-  const resourceAnalysis = generateResourceAnalysis(terrainT, nearbyResources, specialResources, institutions, effectiveConfig, economicState);
+  const resourceAnalysis = generateResourceAnalysis(terrainT, nearbyResources, specialResources, institutions, effectiveConfig, economicState, ctx._seed);
   // Viability first: settlementReason is deficit-aware — an isolated settlement
   // with a food shortfall must not claim self-sufficiency. Feed it the same
   // condition-filtered roster as resource analysis and the economy: terrain
