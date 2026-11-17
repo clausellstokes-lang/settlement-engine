@@ -239,3 +239,12 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   newcomer who speaks to them"; "They will not hide it well, and it will not pass"; any world; an adult). A HUNDRED ROWS
   IN ALL, twenty-six magic only, twenty-nine from the owner's own examples. The chair holds the seat's start a few minutes for more of
   the owner's rows, then publishes and seats.
+- **RS1: THE OWNER ON ITS WIDTH (2026-11-17, about 09:17 UTC, verbatim): "Is horribly depressed. Yeah you see how wide and
+  diverse I'm going for, so refine them and expand it all."** THE CHAIR'S FORM, told to the owner in the same answer: one
+  more nature ("Is in a black despair that nothing lifts, and gets through each day on habit alone"); THE POOL ROUGHLY
+  DOUBLED AND SPREAD ON PURPOSE ACROSS TONES (the saddest ordinary thing, the sweet, the funny, the eerie, the cosmic):
+  NINETY-SEVEN MORE ROWS, written by the chair to the owner's benchmark, as AMENDMENT 1 at the foot of the seat's brief:
+  ONE HUNDRED AND NINETY-SEVEN ROWS IN ALL (deeds 47, now dark or bright; natures 55; ties and blood 42; hidden masters
+  27; outsiders 26; 47 magic only; 30 the owner's own). THE ODDS DO NOT CHANGE. The brief was published whole BEFORE the
+  seat was seated (a seat reads a late message late: BIRTH-2 read one only after it had handed back). Every row is on
+  the owner's veto list; the owner sees each beside a real card at the seat's hand-back.
