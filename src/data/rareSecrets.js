@@ -34,6 +34,9 @@ export const RARE_SECRET_ODDS = Object.freeze({
   outsiders: Object.freeze({ perPlace: 1 / 60 }),
 });
 
+/** A generation, in years by the card's age words (`parentOf`'s "a generation younger"). */
+export const RARE_SECRET_GENERATION_YEARS = 18;
+
 /**
  * THE HOLDER'S KEYS (closed; the guard refuses a row with any other):
  *   age        'ofYears' (never the youngest band, `NPC_AGE_DATA.young`), 'old' (the eldest band), 'notOld' (never it)

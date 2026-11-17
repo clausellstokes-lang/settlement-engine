@@ -40,7 +40,7 @@
  * who was excluded and why) rides beside it (`rareSecretReceiptOf`), never on the record.
  */
 
-import { HOLDER_KEYS, RARE_SECRET_FAMILIES, RARE_SECRET_ODDS, RARE_SECRET_ROWS } from '../../data/rareSecrets.js';
+import { HOLDER_KEYS, RARE_SECRET_FAMILIES, RARE_SECRET_GENERATION_YEARS, RARE_SECRET_ODDS, RARE_SECRET_ROWS } from '../../data/rareSecrets.js';
 import { NPC_AGE_DATA, NPC_PRESENTATION_MODES } from '../../data/npcData.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
 import { filterDeclared } from '../../domain/facts/drawDeclared.js';
@@ -88,8 +88,6 @@ const AGE_YEARS = Object.freeze(/** @type {Record<string, number>} */ ({
   'late forties': 48, 'early fifties': 52, 'mid-fifties': 55, 'late fifties': 58,
   'early sixties': 62, 'mid-sixties': 65, 'late sixties': 68, seventies: 74,
 }));
-/** A generation, in years, by the age words. */
-const GENERATION = 18;
 /** @param {Rec} card @returns {string} */
 const ageWordsOf = (card) => str(rec(card.physical).age).trim().toLowerCase();
 /** @param {Rec} card @returns {'young' | 'middle' | 'mature' | 'elder' | null} */
@@ -261,7 +259,7 @@ function namedFor(row, card, cards, place, seed, family) {
     if (refused.some((t) => place.tieTypes(id, String(c.id)).has(t))) return false;
     if (row.names === 'younger') {
       const y = AGE_YEARS[ageWordsOf(c)];
-      if (holderYears === undefined || y === undefined || holderYears - y < GENERATION) return false;
+      if (holderYears === undefined || y === undefined || holderYears - y < RARE_SECRET_GENERATION_YEARS) return false;
     }
     return true;
   });
