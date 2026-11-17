@@ -22,7 +22,7 @@ import {
   localProducerSupplies, terrainSynonymsFor, tradeFinisherIn, ventureHouseOf, worksTheGround, inputMissingBeforeStory,
 } from '../domain/facts/houseInputAtHand.js';
 import { ALSO_USES, BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, isSourceHouse } from '../domain/facts/houseKinds.js';
-import { BIRTH_PICKS, GROUND_YIELD, boughtAtBirth, groundPicksAtBirth, impliedGroundsShown, sourceStoryOf, storySeed, usedGroundOf, ventureAtBirth } from '../domain/facts/supplyStory.js';
+import { BIRTH_PICKS, rowGoodOf, rowNamesGround, boughtAtBirth, groundPicksAtBirth, impliedGroundsShown, sourceStoryOf, storySeed, usedGroundOf, ventureAtBirth } from '../domain/facts/supplyStory.js';
 import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
 import { HOUSE_TRADE_INPUT, SPENT_GROUND_YIELD } from '../data/crisisDependence.js';
 import { catalogIdForName } from '../data/institutionalCatalog.js';
@@ -698,7 +698,7 @@ function writeStoryRows(record, gaps) {
       if (rows.length) for (const g of rows) g.impact = picks.venture.line;
       else {
         const family = picks.venture.family;
-        const chain = picks.venture.ground ? GROUND_YIELD[picks.venture.ground] : (CHAIN_RAW_INPUT[family] || family);
+        const chain = picks.venture.ground ? rowGoodOf(picks.venture.id, picks.venture.ground) : (CHAIN_RAW_INPUT[family] || family);
         gaps.push({ chain, institution: name, kind: 'missing', impact: picks.venture.line, severity: 'high' });
       }
       continue;
@@ -706,12 +706,12 @@ function writeStoryRows(record, gaps) {
     if (!isSourceHouse(id)) continue;
     const story = sourceStoryOf(read, inst, resourceShortageImport);
     if (!story || !story.ground) continue;
-    const chain = Object.prototype.hasOwnProperty.call(GROUND_YIELD, story.ground) ? GROUND_YIELD[story.ground] : '';
+    const chain = rowGoodOf(id, story.ground);
     if (!chain) continue;
     const implied = Object.prototype.hasOwnProperty.call(IMPLIED_GROUND, id) && IMPLIED_GROUND[id] === story.ground && !SOURCE_GROUNDS[id].some((g) => all.has(g));
-    if (story.story === 'idle' && !own(name).some((g) => g.kind === 'missing' && g.chain === chain)) {
+    if (story.story === 'idle' && !own(name).some((g) => g.kind === 'missing' && rowNamesGround(g.chain, id, story.ground))) {
       gaps.push({ chain, institution: name, kind: 'missing', impact: `${display} exists but lacks access to ${chain}`, severity: 'high' });
-    } else if (story.story === 'bought' && implied && !own(name).some((g) => (g.kind === 'imported' || g.kind === 'missing') && g.chain === chain)) {
+    } else if (story.story === 'bought' && implied && !own(name).some((g) => (g.kind === 'imported' || g.kind === 'missing') && rowNamesGround(g.chain, id, story.ground))) {
       gaps.push({ chain, institution: name, kind: 'imported', impact: `${display} runs on imported ${chain}`, severity: 'low' });
     }
   }

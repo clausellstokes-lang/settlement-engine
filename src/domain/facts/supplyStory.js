@@ -135,6 +135,18 @@ function storedGrounds(record) {
 const rowsOf = (record, name) => /** @type {Array<{ institution?: unknown, chain?: unknown, kind?: unknown, impact?: unknown }>} */ (arr(record?.resourceAnalysis?.gaps))
   .filter((g) => !!g && typeof g === 'object' && g.institution === name);
 
+/**
+ * THE GOOD A SOURCE HOUSE'S STORED ROW NAMES for a ground (its `chain`): the ground's yield as the Depleted list reads it
+ * (`GROUND_YIELD`), a peat cutter's peat (BIRTH-3, P5 (i): its material is peat, not the marsh's reeds).
+ * @param {string} id the catalogue id @param {string} ground @returns {string}
+ */
+export const rowGoodOf = (id, ground) => (id === 'peat_cutter' ? 'peat' : Object.prototype.hasOwnProperty.call(GROUND_YIELD, ground) ? GROUND_YIELD[ground] : '');
+
+/** A stored row's raw good as the ground's yield names it (the mountain timber chain's raw good is timber). */
+const ROW_GOOD_ALIAS = Object.freeze(/** @type {Record<string, string>} */ ({ mountain_timber: 'timber' }));
+/** Whether a stored row's good is the good a house's row names for a ground. @param {unknown} chain @param {string} id @param {string} ground */
+export const rowNamesGround = (chain, id, ground) => { const c = str(chain); const good = rowGoodOf(id, ground); return !!good && (c === good || ROW_GOOD_ALIAS[c] === good); };
+
 /** THE FAILED VENTURE'S LINE, as the birth stores it on the house's gap row and the Resources tab prints it. */
 const VENTURE_LINE = /^The .+? (?:stands abandoned, a venture of an earlier time|is failing): no .+? lies? near and none is brought in\.$/;
 /** @param {unknown} line @returns {boolean} the line is a failed venture's */
@@ -196,7 +208,7 @@ function onRecord(record) {
     const proving = insts.filter((i) => !venture || i.name !== venture.name); // the failed venture proves nothing
     if (!proving.length) continue;
     houses.set(ground, proving.map((i) => str(i.name)));
-    const used = proving.some((i) => rowsOf(record, str(i.name)).some((g) => (g.kind === 'missing' || g.kind === 'imported') && str(g.chain) === GROUND_YIELD[ground]));
+    const used = proving.some((i) => rowsOf(record, str(i.name)).some((g) => (g.kind === 'missing' || g.kind === 'imported') && rowNamesGround(g.chain, idOfHouse(i), ground)));
     states.set(ground, used ? 'used' : 'there');
   }
   const out = { venture, states, houses };

@@ -39,6 +39,11 @@
  *                  makes, or a connected route brings it). THE RECORD IS SPLIT (amendment K6: `resourceGenerator.js`'s gap
  *                  against the economy's production and exports): named for the chair, not marked here, so that a mark
  *                  never contradicts the page's own export list
+ *   EX-BOUGHT      (BIRTH-3, 2026-11-17; the owner's rule as BR4 and BR5 rule it, built by BIRTH-2) spent-fishery where the
+ *                  fishing house is A BUYER (`houseKinds.js :: BUYS_AND_WORKS`: the fish market, the fishmonger: "it sells
+ *                  the catch brought to it"), the town's imports bring its fish by name (its fisheries' shortage word, the
+ *                  owner's first story, "used up, bought in"), and the one reader answers the house at work (`houseInputAtHand`
+ *                  not 'missing'): its row bare is true; the houses that fish the water themselves stay in the rule
  *
  * THE POSITIVE CONTROL'S DOOR: `blind`, the tabs whose printed marks the detector reads as bare (the record's needs are
  * read as ever), so that a guard can show the detector fires on the record's own instances where the marks are not there.
@@ -56,6 +61,8 @@ import { deriveMagicPosture } from '../../src/domain/display/dossierViewModel.js
 import { RESOURCE_ROW_TRADES } from '../../src/generators/economy/incomeLineSiblings.js';
 import { INPUT, GROUNDS_WORKED_OFF_CHAIN } from '../../src/data/crisisDependence.js';
 import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
+import { BUYS_AND_WORKS } from '../../src/domain/facts/houseKinds.js';
+import { CHAIN_RAW_INPUT, houseInputAtHand } from '../../src/domain/facts/houseInputAtHand.js';
 
 /** Travel past the gates, in a row's own words. */
 export const TRAVEL_WORDS = /\b(escort(?:s|ed)?|convoys?|caravans?|expeditions?|through dangerous territory|overland|journeys?|voyages?|ferry|ferries|crossings?)\b/i;
@@ -156,7 +163,11 @@ export function markPromiseInstances(s, opts = {}) {
       const id = String(catalogIdForName(String(svc.institution || '')) || '');
       if (!Object.prototype.hasOwnProperty.call(GROUNDS_WORKED_OFF_CHAIN, id) || !serviceRowDependence(s, svc).includes(INPUT)) continue;
       if (!blind.has('Services') && rowShortOf(s, 'service', svc) !== null) continue;
-      push({ kind: 'spent-fishery', tab: 'Services', row: svc.name, house: svc.institution, need: `every fishery depleted (${fisheries.join(', ')})` });
+      const house = liveInstitutions(s).find((i) => i?.name === svc.institution);
+      // EX-BOUGHT (BIRTH-3): a buyer the one reader answers at work, in a town whose imports bring its fish by name
+      const fishBought = (Array.isArray(s.economicState?.primaryImports) ? s.economicState.primaryImports : []).some((x) => /\bfish\b/i.test(String(x).replace(/\([^)]*\)/g, ' ')));
+      const bought = BUYS_AND_WORKS.has(id) && !!house && fishBought && houseInputAtHand(s, 'fish', house, { rawResource: CHAIN_RAW_INPUT.fish }) !== 'missing';
+      push({ kind: 'spent-fishery', tab: 'Services', row: svc.name, house: svc.institution, need: `every fishery depleted (${fisheries.join(', ')})`, ...(bought ? { excluded: 'EX-BOUGHT' } : {}) });
     }
   }
   // income-house

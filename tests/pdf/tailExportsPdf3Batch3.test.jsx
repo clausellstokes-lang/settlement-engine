@@ -71,10 +71,15 @@ const SURFACE_HEAD = { economics: '\nEconomics & Trade\n', institutions: '\nInst
 // [id, seed, surface, must NOT print, what prints instead (one or more; null: the slot is silent by design)]
 const NOT = [
   // E22: the leaf's second cause: a house short of its input (the Resources tab's "No timber reaches the charcoal burner.")
-  ['E22/house 14345', 'r2r-metropolis-24', 'institutions', /^A collier's kilns under their turf/m, [/^Short of timber\. A collier's kilns under their turf/m, SUPPLIED]],
-  ['E22/service', 'r2r-metropolis-24', 'institutions', /^: Produce and sell charcoal/m, /^: Short of timber\. Produce and sell charcoal/m],
-  ['E22/pill', 'r2r-metropolis-24', 'services', /^Charcoal supply$/m, [/^Charcoal supply \(short\)$/m, SUPPLIED]],
-  ['E22/house 23255', 'r2s-occupied-city-2', 'institutions', /^Broad evaporation pans/m, /^Short of salt\. Broad evaporation pans/m],
+  // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the owner's supply rule, BR4 and BR5): r2r-metropolis-24's charcoal burner now
+  // burns the timber the town buys, and r2s-occupied-city-2's salt works refines the salt it buys (a house that runs on
+  // bought-in material): the same rows, short, stand in r2s-religious_conversion-hamlet-2 (its burner idle: its woodland used
+  // up, nothing bought) and r2r-metropolis-58 (its salt works idle on its spent pans); each house card opens with that town's
+  // own description of the house (a hamlet's burner: "Turf-covered kilns ..."; a metropolis's salt works: "Evaporation pans ...")
+  ['E22/house 14345', 'r2s-religious_conversion-hamlet-2', 'institutions', /^Turf-covered kilns for burning wood/m, [/^Short of timber\. Turf-covered kilns for burning wood/m, SUPPLIED]],
+  ['E22/service', 'r2s-religious_conversion-hamlet-2', 'institutions', /^: Produce and sell charcoal/m, /^: Short of timber\. Produce and sell charcoal/m],
+  ['E22/pill', 'r2s-religious_conversion-hamlet-2', 'services', /^Charcoal supply$/m, [/^Charcoal supply \(short\)$/m, SUPPLIED]],
+  ['E22/house 23255', 'r2r-metropolis-58', 'institutions', /^Evaporation pans and brine-works/m, /^Short of salt\. Evaporation pans and brine-works/m],
   // E21: ENTREPÔT where a chain on the page is an entrepôt; a thorp whose record flags isEntrepot with no such chain
   ['08499', 'r2s-under_siege-thorp-0', 'economics', /^ENTREPÔT$/m, null],
   ['08499/thorp', 'r2r-thorp-2', 'economics', /^ENTREPÔT$/m, null],

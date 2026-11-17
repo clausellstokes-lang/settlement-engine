@@ -448,6 +448,9 @@ export function housesShortOf(record) {
     out.set(name, [...new Set(keys.map((key) => CHAIN_INPUTS[/** @type {string} */ (key)].noun))].join(' or '));
   }
   for (const [house, ground] of housesOnSpentGround(r)) if (!out.has(house)) out.set(house, ground);
+  // BIRTH-3 (BR8 (2)): the failed venture, by its stored row, where its good is no chain's (a peat cutter's peat): short of it
+  const venture = ventureHouseOf(r);
+  if (venture && !out.has(venture.name)) { const row = gaps.find((g) => g.institution === venture.name); if (row) out.set(venture.name, str(row.chain).replace(/_/g, ' ')); }
   // BAR6-MARKS (iii): a house whose trade is a good no gap of its own speaks of, where that good is not had
   for (const [house, want] of housesWantingTradeInput(r)) if (want.reach === 'missing' && !out.has(house)) out.set(house, want.noun);
   SHORT_OF.set(record, out);

@@ -41,7 +41,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { catalogIdForName, familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
-import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, tradeFinisherIn, ventureHouseOf } from '../facts/houseInputAtHand.js';
+import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, tradeFinisherIn, ventureHouseOf } from '../facts/houseInputAtHand.js';
 import { sourceStoryOf, ventureLineText } from '../facts/supplyStory.js';
 import { SOURCE_GROUNDS, isSourceHouse } from '../facts/houseKinds.js';
 
@@ -143,6 +143,17 @@ function sourceGround(s, inst) {
  * words it. @param {import('../facts/supplyStory.js').Venture} v @param {{ name?: unknown }} inst @returns {string | null}
  */
 const ventureLine = (v, inst) => v.line || ventureLineText(v, houseWords(inst));
+
+/** The chain key of a stored row's raw good. @type {ReadonlyMap<string, string>} */
+const KEY_OF_RAW = new Map(Object.entries(CHAIN_RAW_INPUT).map(([key, raw]) => [raw, key]));
+/**
+ * BIRTH-3: the good a stored row names, as a gap line names it ("animal hides" -> hides; "peat" as it is).
+ * @param {string} raw @returns {{ noun: string, plural: boolean }}
+ */
+function rowNoun(raw) {
+  const spec = KEY_OF_RAW.has(raw) ? CHAIN_INPUTS[/** @type {string} */ (KEY_OF_RAW.get(raw))] : null;
+  return spec ? { noun: spec.noun, plural: spec.plural === true } : { noun: raw.replace(/_/g, ' ').trim(), plural: false };
+}
 
 /** @param {string} x @returns {string} */
 const capFirst = (x) => x.charAt(0).toUpperCase() + x.slice(1);
@@ -506,7 +517,19 @@ export function resourceGapLines(s) {
     if (chains.some(([key]) => inputAnswered(s, key, inst))) continue;
     const specs = chains.map(([key]) => CHAIN_INPUTS[key]).filter(Boolean);
     const nouns = [...new Set(specs.map((x) => x.noun))];
-    if (!nouns.length) { if (venture && venture.name === name) { const why = ventureLine(venture, inst); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); } continue; } // BIRTH-3: a venture no chain asks (a mine, a dairy) has its one line
+    if (!nouns.length) {
+      // BIRTH-3 (BR8 (2), (4)): A HOUSE NO CHAIN ASKS whose stored row says its material does not reach it (the birth writes
+      // one for a source house its story leaves idle and for the failed venture: a mine, a peat cutter, a cobbler's guild)
+      // has the same gap line, of the row's own good, and its cause after it
+      const own = gaps.filter((x) => x && typeof x === 'object' && x.institution === name && x.kind === 'missing');
+      const goods = [...new Set(own.map((x) => rowNoun(str(x.chain))).filter((x) => !!x.noun).map((x) => JSON.stringify(x)))].map((x) => /** @type {{ noun: string, plural: boolean }} */ (JSON.parse(x)));
+      if (!goods.length) continue;
+      push({ chain: null, impact: `No ${orList(goods.map((x) => x.noun))} ${goods.length === 1 && goods[0].plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
+      const spentGround = sourceGround(s, inst);
+      if (spentGround) push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${spentGround}).`, severity: str(g.severity) || 'high' });
+      if (venture && venture.name === name) { const why = ventureLine(venture, inst); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); }
+      continue;
+    }
 
     const plural = specs[specs.length - 1]?.plural === true && nouns.length === 1;
     // BIRTH-1 (the chair's ruling BR2 of 2026-11-17, the audit's R4; vetoable by the owner): A SOURCE HOUSE ON ITS OWN SPENT

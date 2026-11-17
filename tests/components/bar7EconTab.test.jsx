@@ -75,7 +75,9 @@ beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
 describe('BAR7-ECON item 1 (8f): an income share whose every house the leaf marks takes the mark', () => {
   // [seed (control), share, the mark it opens with]
   const MARKED = [
-    ['bar0-city-under_siege+famine-rand-44', 'Wool & Textile Trade', /^Short of wool\. /], // C8021: the weavers and the fuller short
+    // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the owner's supply rule, BR5 and BR8): under a siege the wool is the town's ordinary trade, bought in and cut
+    // off (BR3 (c)): rand-44's weavers and fuller read "Curtailed by the siege."; the same claim on the same shape on no road
+    ['bar0-city-under_siege+famine-rand-39', 'Wool & Textile Trade', /^Short of wool\. /], // C8021 (was rand-44): the wool houses short
     ['bar0-town-occupied-rand-44', 'Wool & Textile Trade', /^Short of wool\. /], // C40674: the weavers short
     // C41826 (C41825, its cell) and C33921, re-keyed (the note above the sibling arm): the only smiths short of iron, on no road;
     // the apothecary short of its materials, on no road

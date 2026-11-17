@@ -29,8 +29,12 @@ const FIRST = Object.values(FIRED).flatMap((list) => list.split(' '));
 // shuts (`resourceGenerator.js :: importsBroughtAtBirth`), so r2r-village-4's sawmill and r2r-town-2's commercial sawmill
 // are fed; the same claims stand on census towns on no road: r2r-village-69 (a Sawmill, both its gaps `missing`, its line
 // printed) and r2r-city-115 (a Sawmill (commercial), the same).
-const REKEYED = Object.freeze({ sawmill: 'r2r-village-69', commercialSawmill: 'r2r-city-115' });
-const SEEDS = [...FIRST, ...RUNG_FIRED.split(' ').filter((seed) => !FIRST.includes(seed)), ...Object.values(REKEYED)];
+// RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the owner's supply rule, BR5 and BR8): r2r-city-115's commercial sawmill now has its timber (bought in, or of a woodland a house there proves); the same
+// claim stands on r2r-town-85, a town on no road whose commercial sawmill no timber reaches (its two rows `missing`)
+const REKEYED = Object.freeze({ sawmill: 'r2r-village-69', commercialSawmill: 'r2r-town-85' });
+/** RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the owner's supply rule, BR5 and BR8): r2r-hamlet-9's charcoal burner stands in the woodland it proves; the same gap line stands in r2s-religious_conversion-hamlet-2, whose burner the story leaves idle. */
+const BURNER_SHORT = 'r2s-religious_conversion-hamlet-2';
+const SEEDS = [...FIRST, ...RUNG_FIRED.split(' ').filter((seed) => !FIRST.includes(seed)), ...Object.values(REKEYED), BURNER_SHORT];
 
 /** CENSUS-3 seedcfg.mjs's r2r-/r2s- arms, verbatim in shape. @param {string} seed */
 function configOf(seed) {
@@ -83,7 +87,7 @@ describe('R1: a house the record calls short of its input is short on the page t
   });
 
   it('KEEP: the gap line the record now asks for prints, and the mark has its line', () => {
-    expect(resourceGapLines(BORN.get('r2r-hamlet-9')).map((l) => l.impact)).toContain(gapLineOf('mountainTimber', 'charcoal burner'));
+    expect(resourceGapLines(BORN.get(BURNER_SHORT)).map((l) => l.impact)).toContain(gapLineOf('mountainTimber', 'charcoal burner'));
     expect(resourceGapLines(BORN.get(REKEYED.sawmill)).map((l) => l.impact)).toContain(gapLineOf('timber', 'sawmill'));
     // a siege shuts the road: the besieged caravanserai is short, and says so
     expect(resourceGapLines(BORN.get('r2s-under_siege-town-1')).map((l) => l.impact)).toContain(gapLineOf('camelCaravan', 'caravanserai'));

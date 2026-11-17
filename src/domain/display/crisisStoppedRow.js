@@ -68,7 +68,7 @@
  * Pure: no randomness, no clock, no write.
  */
 import { resourceGapLines } from './validationOnPage.js';
-import { housesOnSpentGround, housesWantingTradeInput, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
+import { housesOnSpentGround, housesShortOf, housesWantingTradeInput, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
 import { STORY_OF_RECORD, ventureMarkText } from '../facts/supplyStory.js'; // BIRTH-2: the failed venture's mark; BIRTH-3: the whole record's story
 import { crisisOf } from '../facts/crisisKind.js';
 import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach.js'; // BAR5-MARKS (WM1): what the war takes, one home
@@ -625,6 +625,10 @@ export function housesShortOfInput(settlement) {
   // BAR6-MARKS (8a.input, fact (a) and (e)): a house whose trade is a good no gap of its own speaks of, where that good is
   // not had (`houseInputAtHand.js :: housesWantingTradeInput`, the one fact `housesShortOf` (iii) reads too)
   for (const [house, want] of housesWantingTradeInput(settlement)) if (want.reach === 'missing' && !out.has(house)) out.set(house, want.noun);
+  // BIRTH-3 (BR8 (2)): the failed venture's stored row is read by the one fact (`housesShortOf` (i)) where no chain asks its
+  // house and so no gap line names it (a cobbler's guild, a mine): the page reads it as the fact does
+  const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement));
+  if (venture && !out.has(venture.name)) { const fact = housesShortOf(settlement).get(venture.name); if (fact) out.set(venture.name, fact); }
   SHORT_HOUSES.set(settlement, out);
   return out;
 }
