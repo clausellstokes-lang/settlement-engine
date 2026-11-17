@@ -147,10 +147,26 @@ const ROW_GOOD_ALIAS = Object.freeze(/** @type {Record<string, string>} */ ({ mo
 /** Whether a stored row's good is the good a house's row names for a ground. @param {unknown} chain @param {string} id @param {string} ground */
 export const rowNamesGround = (chain, id, ground) => { const c = str(chain); const good = rowGoodOf(id, ground); return !!good && (c === good || ROW_GOOD_ALIAS[c] === good); };
 
-/** THE FAILED VENTURE'S LINE, as the birth stores it on the house's gap row and the Resources tab prints it. */
-const VENTURE_LINE = /^The .+? (?:stands? abandoned, a venture of an earlier time|(?:is|are) failing): no .+? lies? near and none is brought in\.$/;
+/**
+ * THE FAILED VENTURE'S WORDS, ONE TABLE for its writer (`ventureLineText`) and its reader (`ventureOfLine`, which knows the
+ * venture by its stored row's line: BR8 (3)). VETOABLE wording. A LATER REWORDING MUST KEEP THE OLD WORDS READABLE: a town
+ * saved with them knows its venture only by them, so add the new words beside the old (an array of each), never in place.
+ */
+export const VENTURE_WORDS = Object.freeze({
+  abandoned: Object.freeze({ one: Object.freeze(['stands abandoned, a venture of an earlier time']), many: Object.freeze(['stand abandoned, a venture of an earlier time']) }),
+  failing: Object.freeze({ one: Object.freeze(['is failing']), many: Object.freeze(['are failing']) }),
+  lies: Object.freeze({ one: 'lies', many: 'lie' }),
+  tail: 'near and none is brought in.',
+});
+/** @param {string} x @returns {string} */
+const escapeRe = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** @param {'abandoned' | 'failing'} version @returns {RegExp} its line, in every form the table holds */
+const lineOf = (version) => new RegExp(`^The .+? (?:${[...VENTURE_WORDS[version].one, ...VENTURE_WORDS[version].many].map(escapeRe).join('|')}): no .+? (?:${VENTURE_WORDS.lies.one}|${VENTURE_WORDS.lies.many}) ${escapeRe(VENTURE_WORDS.tail)}$`);
+const VENTURE_LINES = Object.freeze({ abandoned: lineOf('abandoned'), failing: lineOf('failing') });
+/** The version a stored line tells, or null where it is no venture's line. @param {unknown} line @returns {'abandoned' | 'failing' | null} */
+export const ventureOfLine = (line) => (typeof line !== 'string' ? null : VENTURE_LINES.abandoned.test(line) ? 'abandoned' : VENTURE_LINES.failing.test(line) ? 'failing' : null);
 /** @param {unknown} line @returns {boolean} the line is a failed venture's */
-export const isVentureLine = (line) => typeof line === 'string' && VENTURE_LINE.test(line);
+export const isVentureLine = (line) => ventureOfLine(line) !== null;
 
 /** The houses of a record proving each implied ground: ground -> the houses (live, native, on no ground of their own on the record). @param {StoryRecord | null | undefined} record @returns {Map<string, Array<Record<string, unknown>>>} */
 function provingHouses(record) {
@@ -197,7 +213,7 @@ function onRecord(record) {
     if (!row) continue;
     const id = idOfHouse(inst);
     const ground = Object.prototype.hasOwnProperty.call(IMPLIED_GROUND, id) && !SOURCE_GROUNDS[id].some((g) => all.has(g)) ? IMPLIED_GROUND[id] : '';
-    venture = { name: str(inst.name), id, family: MATERIAL_OF[id] || '', ground, venture: / stands? abandoned, /.test(str(row.impact)) ? 'abandoned' : 'failing', line: str(row.impact) };
+    venture = { name: str(inst.name), id, family: MATERIAL_OF[id] || '', ground, venture: ventureOfLine(row.impact) || 'failing', line: str(row.impact) };
     break;
   }
   /** @type {Map<string, 'there' | 'used'>} */
@@ -428,10 +444,9 @@ export function ventureLineText(v, house) {
   if (!v) return null;
   // BIRTH-3 (P5 (i)): the line agrees in number ("no hides lie near"), and a peat cutter's material is peat
   const material = v.family === 'peat' ? 'peat' : FAMILY_NOUN[v.family] || 'material';
-  const lie = PLURAL_FAMILIES.includes(v.family) ? 'lie' : 'lies';
+  const lie = PLURAL_FAMILIES.includes(v.family) ? VENTURE_WORDS.lies.many : VENTURE_WORDS.lies.one;
   const head = house.charAt(0).toUpperCase() + house.slice(1);
   const many = /[^s']s$/.test(house); // a house named in the plural ("the tanners", "the weavers/textile workers")
-  return v.venture === 'failing'
-    ? `${head} ${many ? 'are' : 'is'} failing: no ${material} ${lie} near and none is brought in.`
-    : `${head} ${many ? 'stand' : 'stands'} abandoned, a venture of an earlier time: no ${material} ${lie} near and none is brought in.`;
+  const words = VENTURE_WORDS[v.venture === 'failing' ? 'failing' : 'abandoned'][many ? 'many' : 'one'][0];
+  return `${head} ${words}: no ${material} ${lie} ${VENTURE_WORDS.tail}`;
 }

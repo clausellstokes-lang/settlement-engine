@@ -50,7 +50,7 @@ import path from 'node:path';
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf, warIronHookOutsideWar } from '../../src/domain/facts/houseInputAtHand.js';
-import { GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, sourceStoryOf } from '../../src/domain/facts/supplyStory.js';
+import { FAMILY_NOUN, GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, isVentureLine, sourceStoryOf, ventureLineText, ventureMarkText, ventureOfLine } from '../../src/domain/facts/supplyStory.js';
 import { ALSO_USES } from '../../src/domain/facts/houseKinds.js';
 import { HOUSE_TRADE_INPUT, houseDependenceOf, INPUT } from '../../src/data/crisisDependence.js';
 import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
@@ -157,7 +157,7 @@ function lawInstances(seed, s) {
     // BIRTH-3 (AMENDMENT 2 (B), 2026-11-17): whatever the crisis table's class of its row (a peat cutter is NONE there)
     if (!/^(?:Abandoned|Failing): a failed venture\.$/.test(mark ?? '')) bad('L1 venture, not its mark', venture.name);
     if (/Short of/.test(mark ?? '')) bad('L1 venture, marked short', venture.name);
-    if (!lines.some((l) => /stands? abandoned, a venture of an earlier time|(?:is|are) failing: no /.test(l))) bad('L1 venture, no line', venture.name);
+    if (!lines.some((l) => isVentureLine(l))) bad('L1 venture, no line', venture.name);
     if (lines.some((l) => /is worked out: /.test(l) && l.toLowerCase().includes(venture.name.toLowerCase().replace(/\s*\([^)]*\)/g, '')))) bad('L1 venture, a worked-out line beside its line (M1)', venture.name);
     if (listHolds(s, familyWord(venture.family))) bad('L1 venture, its word on the imports', venture.name);
     if (venture.ground && (shown.there.includes(venture.ground) || shown.used.includes(venture.ground))) bad('L1 venture, its ground on the land list', venture.name);
@@ -219,6 +219,25 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
   test('EG1 · the leaf\'s copy equals its source, key for key (the dependence table\'s yields)', () => {
     expect(Object.keys(GROUND_YIELD).length, 'the yields copied').toBeGreaterThan(15);
     expect(Object.entries(GROUND_YIELD), 'the yields of a spent ground').toEqual(Object.entries(SPENT_GROUND_YIELD));
+  });
+
+  test('E · THE VENTURE\'S WORDS, ONE TABLE: every line its writer can build is read back as its version (both versions, a house singular and plural, every material); its marks are four words', () => {
+    /** @type {string[]} */
+    const found = [];
+    for (const venture of /** @type {Array<'abandoned' | 'failing'>} */ (['abandoned', 'failing'])) {
+      for (const house of ['the potter', 'the cobbler\'s guild', 'the tanners', 'the weavers/textile workers']) {
+        for (const family of [...Object.keys(FAMILY_NOUN), 'peat']) {
+          const line = ventureLineText({ name: '', id: '', family, ground: '', venture, line: '' }, house);
+          if (ventureOfLine(line) !== venture) found.push(`${venture} · ${house} · ${family}: ${line}`);
+        }
+      }
+      const mark = String(ventureMarkText({ name: '', id: '', family: 'clay', ground: '', venture, line: '' }));
+      if (mark.split(/\s+/).length !== 4) found.push(`${venture}: its mark is not four words: ${mark}`);
+    }
+    // the words of a town saved before (BIRTH-2's tip wrote "lies" of a plural material and "is" of a plural house): still read
+    for (const old of ['The tanners is failing: no hides lies near and none is brought in.', 'The cobbler\'s guild stands abandoned, a venture of an earlier time: no hides lies near and none is brought in.']) if (!isVentureLine(old)) found.push(`the old words unread: ${old}`);
+    expect(found, 'a venture line its own reader does not read').toEqual([]);
+    expect(isVentureLine('No clay reaches the potter.'), 'a gap line is no venture line (the anchor)').toBe(false);
   });
 
   test('L1-L3 · every story told on every surface, over the census\'s 720 and the 150', () => {
