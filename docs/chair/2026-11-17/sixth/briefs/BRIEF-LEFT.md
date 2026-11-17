@@ -62,7 +62,7 @@ on the chair's lane (rows L1 to L37; read THE CHAIR'S NOTES at its head). This r
 |---|---|---|
 | LEFT-PDF | L1, L2, L3, L19 (the PDF's land list only) | `src/pdf/sections/EconomicsTrade.jsx`, `src/pdf/sections/Services.jsx`, `src/pdf/sections/SupplyChainFlow.jsx`, `src/pdf/sections/Overview.jsx`, `src/pdf/sections/NotableNPCs.jsx`, `src/pdf/lib/crisisMarksOnPage.js`, `src/pdf/lib/viewModel.js`, `src/pdf/lib/viewModelBodySlices.js`, `src/foundry/journalPages.js`, a new leaf under `src/domain/display/` if a reading must be shared |
 | LEFT-CHAIN | L18, L5, L27, L7, L6 | `src/domain/display/chainHouses.js`, `src/components/new/SupplyChainsPanel.jsx`, `src/components/new/tabs/EconomicsTab.jsx`, `src/domain/display/economicsCrisisMarks.js`, `src/domain/display/chainStateShown.js`, `src/domain/display/tradeListDisplay.js`, `src/components/new/tabs/ResourcesTab.jsx` (L18's reading only), `src/generators/economy/incomeLineSiblings.js` (L7's twin only) |
-| LEFT-MARKS | L17, L15, L25, L16 | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/supplyStory.js`, `src/domain/facts/houseKinds.js`; the detectors `tests/helpers/pageLaws/law8.mjs`, `law8Marks.mjs`, `law8H.mjs`, `pageB.mjs`; `tests/domain/bar6MarksLaw8.test.js`, `tests/domain/bar6PeopleLaw10.test.js` |
+| LEFT-MARKS | L17, L15, L25, L16, and AMENDMENT 1's M1 to M5 | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/supplyStory.js`, `src/domain/facts/houseKinds.js`; the detectors `tests/helpers/pageLaws/law8.mjs`, `law8Marks.mjs`, `law8H.mjs`, `pageB.mjs`; `tests/domain/bar6MarksLaw8.test.js`, `tests/domain/bar6PeopleLaw10.test.js`, `tests/domain/supplyStoryLaw.test.js`, `tests/domain/birthKindsLaw.test.js`; one hunk each of `src/components/new/tabs/InstitutionsTab.jsx` and `ServicesTab.jsx` only if M3 needs it |
 | LEFT-LINES | L31, L4, L33 (the brewers' line), L32, L8, L9 | `src/data/historyData.js`, `src/generators/historyGenerator.js`, `src/data/narrativeData.js`, `src/data/people/titleSecretsPresentations.js`, `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and the generated desk files `src/data/dossierStateProse/general.generated.js`, `defense.generated.js`, `economy.generated.js`, `power.generated.js` (ruling AX1) |
 | LEFT-KEYS (seated after the chair's whole check) | L11, L12, L13, L14 and the anchors the whole check names | tests only: its section is written when it is seated |
 
@@ -175,15 +175,47 @@ RULINGS TO READ: BR10 (the sixth handoff `docs/chair/2026-11-17/sixth/CHAIR-HAND
    a house that works only a SURPLUS is short where the page's food line is short ("Short of grain."), in a crisis or
    not. Build it in the mark's leaf through the supply rule's own gate (`crisisStoppedRow.js :: rowShortOf`), reading
    public fields only (N4).
-5. **WHAT A SECOND READER FINDS IN BIRTH-3's AMENDMENTS** (the chair has one reading 882cae319..8b0506eae now: your
-   files are the supply rule's) comes to you as an AMENDMENT at the foot of this section, by message: one more commit.
+5. **WHAT THE SECOND READER FOUND IN BIRTH-3's AMENDMENTS**: AMENDMENT 1 at the foot of this section (M1 to M5).
 
 YOUR GUARD (a new file, `tests/domain/leftMarks.test.js`) holds items 3 and 4 over fixed seeds (each FAILS at your
 base); items 1 and 2 are held by the two existing guards as re-keyed. MEASURE (R4): runD, runH, runI: before and
 after, rule by rule; `8b.extract`, `8b.person`, `8a.input`, `8i.surplus` above all. If you touch
 `src/generators/`: N3. N4 for every mark.
 
-### LEFT-MARKS · AMENDMENTS (none yet)
+### LEFT-MARKS · AMENDMENT 1 (written 16:22 UTC on 2026-11-17, BEFORE the seat was seated: it is part of your section)
+
+THE SECOND READER ON BIRTH-3's LAST TEN COMMITS (882cae319..8b0506eae; session_01FbPLbfk2W1eNFUKH8Wg5g3; every row RUN by
+it at the merged tree): HIGH 0 · MED 1 · LOW 4; every amendment built as asked; no test narrowed; the hook's predicate
+equals the stored hook in every town (102 and 29 hooks); `rowShortOf`'s new path costs under two milliseconds a
+metropolis. ITS FIVE ROWS ARE YOURS, AFTER YOUR ITEM 1, AS ONE COMMIT EACH. The supply rule's guard
+`tests/domain/supplyStoryLaw.test.js` and `tests/domain/birthKindsLaw.test.js` are yours for them.
+
+- **M1 (MED) · RULING A HAS NO GUARD.** `supplyStory.js :: sourceStoryOf`'s `|| own.some((g) => live.has(g))` reverted:
+  the 17 mines read "Short of iron ore." again and NO test goes red (the supply guard 9 of 9). Add an arm to the supply
+  rule's guard: over the census's 720, a source house whose only chain works a spent ground of its kind, beside a LIVE
+  ground of its own kind on the record, reads `local` and prints no mark (anchored: more than ten such houses; the 17
+  mines by name in a note); and its negative: a mine whose every own ground is spent reads worked out and is marked.
+  PROVE IT BY THE MUTATION (the hunk reverted in scratch: your arm red; restored: green).
+- **M2 (LOW) · `resourceGenerator.js :: importsBroughtAtBirth`'s `bring`** (a word is brought only if it adds a
+  canonical good, `subsumeTradeGoods`): its removal turns nothing red (the reader's own table answers the corpus). A
+  CONSTRUCTED record in the guard: "Livestock" on the imports, a tanner whose story is bought in: the birth brings NO
+  hides word; proven by the mutation. (`src/generators/resourceGenerator.js` is yours for NO edit: the test only.)
+- **M3 (LOW) · THE HEAD LINE OVER A VENTURE.** "A row marked short is what its house makes when supplied." prints where
+  the only mark on the tab is a failed venture's, so no row is marked short (10 towns of the 720, 3 of the 150:
+  r2r-hamlet-48, r2r-town-13 rendered). Cure it IN THE LEAF if the leaf decides it (`crisisStoppedRow.js ::
+  ordinaryTimesLine`: a venture's mark is not a short mark for that line); if the count is taken at the call sites,
+  `src/components/new/tabs/InstitutionsTab.jsx` and `src/components/new/tabs/ServicesTab.jsx` are yours FOR THAT ONE
+  HUNK EACH; the PDF's site (`src/pdf/lib/crisisMarksOnPage.js :: ordinaryTimesOnPage`) is LEFT-PDF's file: name it
+  to the chair in one line if it needs the same hunk. Your guard: the line absent in the ten, present in a town with a
+  short mark.
+- **M4 (LOW) · `houseInputAtHand.js :: warIronHookOutsideWar`'s copy of the war's state** does not read the world
+  pulse's words: `occupation` and `siege` read as peace there and as "at war" and "front" in
+  `facts/warState.js :: warStateOf` (0 towns at a birth; a town moved on by the pulse would differ). Map the two
+  words, and ADD THE TEST THE COMMENT PROMISES (the copy equals `warStateOf` over the 720, the 150 and constructed
+  records carrying each pulse word). Ruling EG1 stands: the eager fact imports nothing pinned lazy.
+- **M5 (LOW) · THE COMMENT SAYS RULING A BACKWARDS** (`supplyStory.js`, above `sourceStoryOf`'s chains: "a spent coal
+  seam, beside a live iron ground"): it is a spent IRON chain beside a live seam of the mine's own kind (coal,
+  gemstones, precious metals). Reword it to what the 720 show.
 
 ---
 

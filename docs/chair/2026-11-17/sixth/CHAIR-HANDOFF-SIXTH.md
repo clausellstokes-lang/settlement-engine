@@ -101,3 +101,12 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
   read-only helper from every hand-back; the chair checked every file and symbol the brief names at the candidate
   tree: ONE ROW WAS ALREADY CURED (L29, by BAR7-CARDS) and was struck; one item (L7) moved to the seat that holds its
   file). Four seats by file (PDF, CHAIN, MARKS, LINES), a fifth (KEYS, tests only) after the whole check.
+- 16:22 UTC · THE SECOND READER ON BIRTH-3's AMENDMENTS REPORTED (READ-BIRTH-3B, session_01FbPLbfk2W1eNFUKH8Wg5g3; its
+  long form stayed on its machine, /home/user/READ-BIRTH-3B.md): HIGH 0 · MED 1 · LOW 4. Every amendment built as asked,
+  each of the eight named files green alone at the merged tree (pipelineContract 22 of 22, isolatedTrade 15 of 15,
+  publicProseEquality 428 of 428, supplyStoryLaw 9 of 9); no test narrowed; the war's iron predicate equals the stored
+  hook in every town (0 either way over 102 and 29 hooks); the 17 mines confirmed as the chair read them (spent iron,
+  a live seam of their own kind exported; "Short of iron ore." on the line, unmarked at the merged tree; the chain card
+  prints "Via Mine" beside "(depleted)"). THE MED: ruling A has no guard (its hunk reverted, nothing red). THE FIVE
+  ROWS WENT TO LEFT-MARKS AS AMENDMENT 1 OF ITS SECTION, written before it was seated. BIRTH-3 LANDS AS BUILT if the
+  whole check's comparison shows nothing else.
