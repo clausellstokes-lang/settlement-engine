@@ -230,7 +230,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
           if (merchantRivalForNoble) {
             var nobleMerchantNote =
               merchantRivalForNoble.power > power + 12
-                ? merchantAheadSaid(merchantRivalForNoble) + ' more say now: the noble families keep their titles, their land and their precedence, but the money has moved.' // BAR6-POWERS (10f-weight, C110252): it names the power it weighed
+                ? (merchantRivalForNoble.faction === 'Merchant Guilds' ? 'The merchant guilds now have more say' : merchantAheadSaid(merchantRivalForNoble) + ' more say now') + ': the noble families keep their titles, their land and their precedence, but the money has moved.' // BAR6-POWERS (10f-weight, C110252): it names the power it weighed (the old words, byte for byte, where that is the Merchant Guilds)
                 : merchantRivalForNoble.power > power
                   ? 'The merchants are closing the gap, and the noble families are using every law and every social tie they have to slow them down.'
                   : 'Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.';

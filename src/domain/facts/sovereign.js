@@ -21,8 +21,11 @@
  *
  * @enforced-by tests/domain/bar6HousesSovereign.test.js
  */
-import { canonStressors } from '../canonicalAccessors.js'; // EG1: crisisKind.js is pinned lazy; the stress container is read here
-import { liveInstitutionNames } from './liveInstitutionNames.js';
+// IMPORT-FREE ON PURPOSE (the chair's EG1): factsOf reaches this leaf, and the build places it in eager engine-core, so
+// it imports nothing: crisisKind.js is pinned lazy and liveInstitutionNames.js is excised to a lazy chunk (a fresh build
+// read its import as an engine-core -> lazy edge, tests/build/vendorPdfLazy.test.js). The two readings are spelled here as
+// their homes spell them: the stress container (`canonicalAccessors.js :: canonStressors`) and the live roster's native
+// names (`liveInstitutionNames.js`, `institutionRoster.js :: isLiveInstitution`, `customContentSemanticAuthority.js`).
 
 /** The words that give a sovereign, whole words (the page law's `SOV_FACT`, spelled once here for the source). */
 export const SOVEREIGN_WORDS = /\b(lords?|lord's|lordship|noble|nobles|nobility|feudal|baron\w*|duke|duchess|duchy|ducal|crown|royal|king|kings|kingdom|queen|prince|princess|manor|appointee|gentry|liege|seigneur\w*|vassal\w*|steward|castellan|earl|jarl|margrav\w*|governor|reeve|imperial|empire|realm)\b/i;
@@ -31,6 +34,21 @@ export const SOVEREIGN_WORDS = /\b(lords?|lord's|lordship|noble|nobles|nobility|
 export const SOVEREIGN_CRISES = Object.freeze(['wartime', 'occupied']);
 /** Those kinds as the stress container may type them: the kind, or its pulse type (`stressorPicker.js :: GEN_TO_PULSE_TYPE`). */
 const SOVEREIGN_TYPES = Object.freeze([...SOVEREIGN_CRISES, 'occupation']);
+
+/** The stress container as stored (`canonStressors`'s order). @param {any} r @returns {unknown[]} */
+const stressorsOf = (r) => {
+  for (const c of [r.stressors, r.stress, r.stresses]) if (Array.isArray(c)) return c;
+  if (r.stressors && typeof r.stressors === 'object') return [r.stressors];
+  if (r.stress && typeof r.stress === 'object') return [r.stress];
+  return [];
+};
+/** A ruined, removed, destroyed or remnant house gives nothing (`isLiveInstitution`). */
+const INACTIVE_STATUS = new Set(['ruined', 'removed', 'destroyed', 'remnant']);
+/** The live roster's native names: a custom house names nothing native (`nativeSemanticName`). @param {any} r @returns {string[]} */
+const liveNamesOf = (r) => (Array.isArray(r.institutions) ? r.institutions : [])
+  .filter((/** @type {any} */ i) => !!i && typeof i === 'object' && i._worldPulseInactive !== true && !INACTIVE_STATUS.has(String(i.status || 'active').toLowerCase()))
+  .filter((/** @type {any} */ i) => !(i.isCustom === true || i.custom === true || i.source === 'custom' || typeof i.customDefinitionId === 'string' || typeof i.customDefinitionCategory === 'string'))
+  .map((/** @type {any} */ i) => String(i.name || '')).filter(Boolean);
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v : v && typeof v === 'object' ? JSON.stringify(v) : '');
@@ -42,12 +60,12 @@ const text = (v) => (typeof v === 'string' ? v : v && typeof v === 'object' ? JS
  */
 export function sovereignOf(record) {
   if (!record || typeof record !== 'object') return undefined;
-  if (canonStressors(record).some((/** @type {any} */ e) => !!e && typeof e === 'object' && SOVEREIGN_TYPES.includes(String(e.type)))) return true;
+  if (stressorsOf(record).some((/** @type {any} */ e) => !!e && typeof e === 'object' && SOVEREIGN_TYPES.includes(String(e.type)))) return true;
   const ps = record.powerStructure && typeof record.powerStructure === 'object' ? record.powerStructure : {};
   const sources = [
     text(ps.government), text(ps.governingName),
     ...(Array.isArray(ps.factions) ? ps.factions.map((/** @type {any} */ f) => text(f?.faction)) : []),
-    ...liveInstitutionNames(record),
+    ...liveNamesOf(record),
     ...(Array.isArray(record.npcs) ? record.npcs.flatMap((/** @type {any} */ n) => [text(n?.role), text(n?.title)]) : []),
     text(record.history?.founding),
   ];
