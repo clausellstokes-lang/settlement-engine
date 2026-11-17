@@ -126,6 +126,10 @@ export const TARGET_REFUSALS = Object.freeze({
   parentOf: Object.freeze([]),
   hired: Object.freeze([]),
   blackmailer: Object.freeze([]),
+  owesLife: Object.freeze([]),
+  guardian: Object.freeze([]),
+  oathAgainst: Object.freeze(['enemy', 'rival']),
+  hiddenSpouse: Object.freeze(['family']),
 });
 
 /**

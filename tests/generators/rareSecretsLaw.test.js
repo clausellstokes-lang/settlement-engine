@@ -74,7 +74,8 @@ function plantFor(family, row) {
   const small = family === 'masters' || (row.needs || []).some((/** @type {string} */ a) => /^tier: ≤/.test(a));
   const roster = plantRoster(c);
   if (h.office && h.office.includes('head')) roster[0] = plantCard('head0', { name: 'Aldo Head', role: 'the cooper', age: 'late sixties' });
-  return { place: plantPlace({ tier: small ? 'village' : 'city', government: 'Feudal Stewardship' }), cards: roster };
+  const town = (row.needs || []).includes('tier: town');
+  return { place: plantPlace({ tier: town ? 'town' : small ? 'village' : 'city', government: 'Feudal Stewardship' }), cards: roster };
 }
 
 // ── THE TABLES ─────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -162,6 +163,7 @@ describe('SECRETS-1: every row stands for some planted roster, and only where it
         else if (a === 'tier: ≥ village') denied = { ...place, tier: 'hamlet' };
         else if (a === 'tier: ≥ hamlet') denied = { ...place, tier: 'thorp' };
         else if (a === 'tier: ≤ village') denied = { ...place, tier: 'town' };
+        else if (a === 'tier: town') { expectPresentThenAbsent(before, standingKeys({ ...place, tier: 'village' }, cards), row.key, `${row.key} never in a village`); denied = { ...place, tier: 'city' }; }
         else if (a === 'route: isolated') denied = { ...place, config: { ...place.config, tradeRouteAccess: 'isolated' } };
         else if (a === 'ruler: lord') denied = { ...place, powerStructure: { ...place.powerStructure, government: 'Town Mayor' } };
         else if (a === 'coast') denied = { ...place, config: { ...place.config, terrainType: 'plains', tradeRouteAccess: 'road' } };
