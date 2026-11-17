@@ -83,7 +83,7 @@ export function markOnPage(settlement, kind, row) {
 
 /**
  * LEFT-PDF L1: an income share's mark as the Economics tab prints it (`incomeMarkShown`), or null.
- * @param {object | null | undefined} settlement @param {Record<string, unknown> | null | undefined} src `economicState.incomeSources[]`
+ * @param {object | null | undefined} settlement @param {Record<string, unknown> | null | undefined} src the record's income share, as handed in
  * @returns {string | null}
  */
 export function incomeMarkOnPage(settlement, src) {
