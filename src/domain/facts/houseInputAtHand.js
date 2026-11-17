@@ -663,9 +663,24 @@ export function warIronHookOutsideWar(record) {
   // BIRTH-3 (the chair's ruling BR9: a mark the players see is never read off the DM's hooks): the hook's own predicate
   // (`warIronHook.js`) over the kept fields; the war's state as `facts/warState.js :: warStateOf` reads it off the record,
   // here off the stress container (EG1: warState.js reaches a module the build pins lazy; the guard holds the two equal)
+  return warHoldsIron(arr(r.economicViability?.dependencies), arr(r.economicState?.primaryImports), warStateOnRecord(record));
+}
+
+/** LEFT-MARKS M4: the stress types that put the town at the front, or at war, in the generator's words and the world pulse's
+ * (`stressorPicker.js :: GEN_TO_PULSE_TYPE`: under_siege is the pulse's `siege`, occupied its `occupation`; wartime is one word) */
+const FRONT_TYPES = Object.freeze(['under_siege', 'siege']);
+const AT_WAR_TYPES = Object.freeze(['wartime', 'occupied', 'occupation']);
+
+/**
+ * THE WAR'S STATE OFF THE STRESS CONTAINER (EG1: `facts/warState.js :: warStateOf` reads it through `crisisKind.js`, which the
+ * build pins lazy). LEFT-MARKS M4 (the second reader on BIRTH-3, 2026-11-17): the copy reads the world pulse's words too (a
+ * town the pulse moved on carries `siege` or `occupation`, which read as peace here and as "front" and "at war" there);
+ * tests/domain/supplyStoryLaw.test.js holds it equal to `warStateOf` over the 720, the 150 and records carrying each word.
+ * @param {unknown} record @returns {'front' | 'at war' | 'peace'}
+ */
+export function warStateOnRecord(record) {
   const types = canonStressors(/** @type {Parameters<typeof canonStressors>[0]} */ (record)).map((e) => String(/** @type {{ type?: unknown } | null} */ (e)?.type ?? ''));
-  const state = types.includes('under_siege') ? 'front' : types.includes('wartime') || types.includes('occupied') ? 'at war' : 'peace';
-  return warHoldsIron(arr(r.economicViability?.dependencies), arr(r.economicState?.primaryImports), state);
+  return types.some((t) => FRONT_TYPES.includes(t)) ? 'front' : types.some((t) => AT_WAR_TYPES.includes(t)) ? 'at war' : 'peace';
 }
 
 /** The luxury trade's own goods, which no chain carries (`HOUSE_TRADE_INPUT`'s `luxury`). */

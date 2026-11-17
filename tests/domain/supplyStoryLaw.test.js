@@ -430,3 +430,29 @@ describe('LEFT-MARKS M1: ruling A, a source house beside a live ground of its ow
     expect(bad, 'a source house whose story is not ruling A\'s').toEqual([]);
   }, 1_800_000);
 });
+
+// LEFT-MARKS M4 (the second reader on BIRTH-3, 2026-11-17): `houseInputAtHand.js :: warIronHookOutsideWar` reads the war's
+// state off the stress container (EG1), a copy of `facts/warState.js :: warStateOf`; the copy did not read the world pulse's
+// words (`occupation`, `siege`: peace there, "at war" and "front" in `warStateOf`). THE TEST ITS COMMENT PROMISES: the copy
+// (`warStateOnRecord`) equals `warStateOf` over the census's 720, the 150 and constructed records carrying each word of
+// `stressorPicker.js :: GEN_TO_PULSE_TYPE` (the generator's and the pulse's), alone and beside another.
+describe('LEFT-MARKS M4: the war\'s state read import-free answers as warStateOf does', () => {
+  test('warStateOnRecord equals warStateOf over the 720, the 150 and records carrying each crisis word, the pulse\'s too', async () => {
+    const { warStateOnRecord } = await import('../../src/domain/facts/houseInputAtHand.js');
+    const { warStateOf } = await import('../../src/domain/facts/warState.js');
+    const { GEN_TO_PULSE_TYPE } = await import('../../src/domain/stressorPicker.js');
+    const words = [...Object.keys(GEN_TO_PULSE_TYPE), ...Object.values(GEN_TO_PULSE_TYPE)];
+    expect(words, 'the pulse\'s two words are among them').toEqual(expect.arrayContaining(['siege', 'occupation']));
+    const built = [...words.map((w) => ({ stress: [{ type: w }] })), ...words.map((w) => ({ stress: [{ type: 'famine' }, { type: w }] })), { stress: [] }];
+    expectNoSeedFailures(collectSeedFailures(built, (r) => {
+      expect(warStateOnRecord(r), `${JSON.stringify(r.stress)}: the two readings of the war`).toBe(warStateOf(r));
+    }), 'every constructed record reads one war');
+    const states = new Set();
+    expectNoSeedFailures(collectSeedFailures([...CENSUS, ...WIDE], (seed) => {
+      const s = town(seed);
+      states.add(warStateOf(s));
+      expect(warStateOnRecord(s), `${seed}: the two readings of the war`).toBe(warStateOf(s));
+    }), 'every town reads one war');
+    expect([...states].sort(), 'the three states are read (the anchor)').toEqual(['at war', 'front', 'peace']);
+  }, 1_800_000);
+});
