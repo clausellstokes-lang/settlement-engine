@@ -254,3 +254,16 @@ unchanged (section 6).
   brought in."): r2r-town-13 (the 720). It needs `(?:is|are) failing:` (and the same for "worked out"). The detectors' upkeep
   is another seat's: not touched.
 
+
+## 8. THE GUARD'S SEED LOOPS COLLECT (the chair's message of 22:20 UTC; rule N7)
+
+The whole check found `tests/lint/seedLoopTotality.walker.test.js` red for my guard in both its arms ("no NEW bare seed loop
+anywhere in the test corpus", "the generation-facing quarantine is EXACT": five bare loops at lines 89, 105, 125, 134, 147).
+My by-name comparison missed it: the first arm was already red at the base by name for another file
+(`tests/pdf/seamPdfReadsTheTabs.test.jsx`). The five loops now take the repository's collecting form
+(`collectSeedFailures` / `expectNoSeedFailures`). Every claim and every anchor is as it was; the G1 arm's doubled lines are
+asserted town by town in place of one gathered list (the same claim). AT THE BASE 0cdedd206 (scratch clone): the guard fails
+4 of 7, arm by arm, with true counts ("no general line beside the story line of the same house: 6 of 7 case(s) failed", "the
+fish market's catch row reads its fishery: 1 of 4"). AT THE TIP: 7 of 7. THE WALKER AT THE TIP: the quarantine arm green; the
+first arm red only for `tests/pdf/seamPdfReadsTheTabs.test.jsx: 2 bare seed loop(s) at line(s) 93, 120`, its message at the
+base word for word (not mine; left).

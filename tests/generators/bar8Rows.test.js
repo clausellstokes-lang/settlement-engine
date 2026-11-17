@@ -10,6 +10,7 @@
 // docs/chair/2026-11-17/bar8/BAR8-J-ROWS-HANDBACK.md. Items 1 and 2 of the seat's section are left by name there.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 import { housesShortOfInput } from '../../src/domain/display/crisisStoppedRow.js';
 import { STORY_OF_RECORD } from '../../src/domain/facts/supplyStory.js';
@@ -85,10 +86,9 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
   });
 
   it('no town prints the general line beside the story line of the same house; the story line still prints', () => {
-    /** @type {string[]} */ const found = [];
-    for (const [seed, town] of [...BORN].filter(([k]) => k in TOWNS)) {
+    expectNoSeedFailures(collectSeedFailures([...BORN].filter(([k]) => k in TOWNS), ([seed, town]) => {
       const lines = resourceGapLines(town).map((l) => l.impact);
-      for (const d of doubledGapLines(lines)) found.push(`${seed}: ${d}`);
+      expect(doubledGapLines(lines), `${seed}: one house, one material, one line`).toEqual([]);
       const want = TOWNS[/** @type {keyof typeof TOWNS} */ (seed)];
       if (want.house) {
         const story = `The ${want.house} ${want.story}`;
@@ -97,16 +97,14 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
         expect(general, `${seed}: no general line for the ${want.house}`).toBeUndefined();
       }
       expect(lines.length, `${seed}: the town keeps a gap line`).toBeGreaterThan(0);
-    }
-    expect(found).toEqual([]);
+    }), 'no general line beside the story line of the same house');
   });
 
   it('a gap row with no story line keeps the general line', () => {
-    for (const [seed, want] of Object.entries(TOWNS)) {
-      if (!want.keeps) continue;
+    expectNoSeedFailures(collectSeedFailures(Object.entries(TOWNS).filter(([, want]) => !!want.keeps), ([seed, want]) => {
       const lines = resourceGapLines(BORN.get(seed)).map((l) => l.impact);
       expect(lines, `${seed}`).toContain(want.keeps);
-    }
+    }), 'a row with no story line keeps its general line');
     const lines = resourceGapLines(BORN.get('bar0-metropolis-calm-rand-29')).map((l) => l.impact);
     expectAbsentWithAnchor(lines, 'No coal reaches the mine.', 'No clay reaches the potter.');
     expect(housesShortOfInput(BORN.get('r2r-hamlet-49')).get('Peat cutter'), 'the worked-out peat cutter\'s mark keeps its peat').toBe('peat');
@@ -122,21 +120,20 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
   });
 
   it('the page\'s mark still reads every house the story line tells of', () => {
-    for (const [seed, want] of Object.entries(TOWNS)) {
-      if (!want.house) continue;
+    expectNoSeedFailures(collectSeedFailures(Object.entries(TOWNS).filter(([, want]) => !!want.house), ([seed, want]) => {
       const short = housesShortOfInput(BORN.get(seed));
-      const name = [...short.keys()].find((k) => k.toLowerCase().startsWith(want.house));
+      const name = [...short.keys()].find((k) => k.toLowerCase().startsWith(String(want.house)));
       expect(name, `${seed}: the ${want.house} is still marked short`).toBeTruthy();
-    }
+    }), 'the mark still reads every house the story line tells of');
   });
 
   it('N4: the owner\'s page, the public projection and the share veil print the same gap lines', () => {
-    for (const [seed, town] of [...BORN].filter(([k]) => k in TOWNS)) {
+    expectNoSeedFailures(collectSeedFailures([...BORN].filter(([k]) => k in TOWNS), ([seed, town]) => {
       const own = resourceGapLines(structuredClone(town)).map((l) => l.impact);
       expect(own.length, `${seed}: a gap line prints`).toBeGreaterThan(0);
       expect(resourceGapLines(toPublicSafe(structuredClone(town))).map((l) => l.impact), `${seed}: public`).toEqual(own);
       expect(resourceGapLines(projectShareVeil(toPublicSafe(structuredClone(town)), null)).map((l) => l.impact), `${seed}: veil`).toEqual(own);
-    }
+    }), 'N4: the owner\'s page, the public projection and the share veil alike');
   });
 });
 
@@ -144,7 +141,7 @@ describe('BAR8-J-ROWS item 1: no morning catch where the fishery is used up', ()
   /** @param {any} town @returns {Array<{ name: string, desc: string }>} the fish market's service rows */
   const marketRows = (town) => Object.values(town.availableServices || {}).flat().filter((/** @type {any} */ r) => r?.institution === 'Fish market');
   it('the fish market sells preserved fish where its fishery is spent, and the fresh catch where the fishers land it', () => {
-    for (const [seed, want] of Object.entries(FISH)) {
+    expectNoSeedFailures(collectSeedFailures(Object.entries(FISH), ([seed, want]) => {
       const town = BORN.get(seed);
       const c = town.config || {};
       const live = (c.nearbyResources || []).filter((/** @type {string} */ k) => /^(fishing_grounds|river_fish)$/.test(k) && !(c.nearbyResourcesDepleted || []).includes(k));
@@ -160,6 +157,6 @@ describe('BAR8-J-ROWS item 1: no morning catch where the fishery is used up', ()
         expect(spent.length && !live.length, `${seed}: the fishery is not spent`).toBeFalsy();
         expect(names, `${seed}`).toContain('Fresh fish retail');
       }
-    }
+    }), 'the fish market\'s catch row reads its fishery');
   });
 });
