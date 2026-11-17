@@ -462,3 +462,62 @@ runner reads the PDF: your measure is that probe over the thirty, the 150 and th
 THE LAYER LAW HOLDS (`npx vitest run tests/architecture`: `src/pdf` imports nothing under `src/generators`). N4: the
 shared page prints what the owner's prints. YOUR GUARD: `tests/pdf/pdf2ReadsTheTabs.test.jsx`. EVERY NEW OR CHANGED
 LINE A READER SEES IN THE PDF OR THE JOURNAL is listed with three towns.
+
+## MARKS-2 · the mark's tables and its readers take the siege's bought goods, the war's iron under an occupation, and the magic supplier (written 20:14 UTC on 2026-11-17; seated when LEFT-MARKS has landed; base: the line's tip your prompt names)
+
+LEFT-MARKS LANDED JUST BEFORE YOU IN FOUR OF YOUR FILES: read its hand-back (`docs/chair/2026-11-17/left/LEFT-MARKS-HANDBACK.md`:
+sections 1, 3 and 6, and whatever it says of its AMENDMENT 2: M6, the old detectors and the failed venture's mark; M7,
+ruling BR11, the proven ground under a siege) BEFORE YOU MEASURE: some instances below are cured at your base already
+(its new tables `HOUSE_NEED_INPUT`, `SURPLUS_HOUSES`, `KEY_IMPORT_WORDS`, `TRADE_STOCK_WORDS`). Your auditors: seat J (11a.atWork,
+11d, 11e.siegeBought, the roots) and seat K (12a, 12f). Rulings in force for you: BR16 (the war's iron), BR11.
+THE DETECTORS `tests/helpers/pageLaws/law8.mjs`, `law8Marks.mjs`, `law8H.mjs` are yours where an item says so, and every
+change to one is shown NOT TO BLIND IT (plant the fault it must still find).
+
+1. **11e.siegeBought (J) · under a siege, a house printed bare whose material is bought in** (10 that stand: the mint, the
+   dyer 7, the furriers 3, the river boatyard 1). `crisisStoppedRow.js :: housesOnImportedInput` reads
+   `crisisDependence.js :: INPUT_IMPORTED_AS` and `HOUSE_TRADE_INPUT`; the tables hold no row for the dyer, the
+   furrier's district, the boatyard or the mint, so their bought-in wool, hides, timber and bullion is not "Curtailed
+   by the siege." while the smelter beside them is. The tables gain the rows. DO NOT MARK THE TAILORS (8, WEAK: they
+   sew cloth; wool is not their input). To zero: 10.
+2. **12a (K) · a house's own one-house chain printed stopped, the house's card bare** (the shipyard, the control C0476;
+   the furrier's district, 7 in besieged cities). `HOUSE_DEPENDENCE` has `furrier_s_district: NONE` and `shipyard:
+   [INPUT]` only. One table row may serve item 1 and this: measure both after each hunk. NARROWED by the auditor: a
+   merchant guild, a cooper, beast trainers named among others in a stopped chain go on; a house of worship keeps its
+   rites (ruling CY1). To zero: 8 across the three populations.
+3. **11a.atWork (J) · the need list names X while a house whose trade is X prints bare** (13: the butchers 3 and the
+   herbs 1 stand; the timber 9 are PLAUSIBLE, 4 of them WEAK where the need is a grade). `HOUSE_TRADE_INPUT` knows no
+   butchers (livestock), bowyer or boatyard (timber), so `houseInputAtHand.js :: housesWantingTradeInput` never marks
+   them. LEFT-MARKS's L25 gave the butchers and the apothecary a reading of their own (`HOUSE_NEED_INPUT`): MEASURE AT
+   YOUR BASE FIRST and build only what still stands; r2r-metropolis-19's butchers work imported game and stay bare.
+   To zero: what stands at your base (say the count).
+4. **11d (J) · RULING BR16: the war's iron is taken only where a war is in force on the page.** In an occupied town with
+   no war the page prints "Short of iron." on every iron house, the income row's mark, the hook "War has taken the
+   iron ..." and the scene of quiet forges, beside the import "Iron ore (local iron mines exhausted)" (2 towns of the
+   720, 19 lines; the controls C38200 and C38039). All four read `warIronHook.js :: warHoldsIron` with `occupied` read
+   as "at war" (`houseInputAtHand.js :: warIronHookOutsideWar`; LEFT-MARKS's M4 touched the same copy of the war's
+   state: read its hunk). An occupation alone is peace for this predicate; a siege keeps its own reading (the roots'
+   `warIronOutsideWar` counts 3 besieged towns: left as they are). The mark, the hook and the scene fall TOGETHER (the
+   hook's writer `generators/economy/foodBalance.js` and the scene's row in `arrivalProse.js` are other seats' files:
+   they read the predicate, so they follow; if one does not, NAME it, do not touch it). To zero: 19.
+5. **The roots' gapImportedNoImport (J) · a gap row "runs on imported X" whose X no import names** (8 towns of the 720:
+   fish 3, livestock 3, hides 2). `resourceGenerator.js :: importsBroughtAtBirth` writes the buyer's import word for
+   some families and leaves fish to the food record. The birth writes the word where a gap row says the good is
+   imported (BR3 (b): no import feeds a house the page calls short, and none is claimed that the imports do not name).
+   A DECLARED MOVE (R5: `economicState.primaryImports`: say the towns of the 720 and of the 525). IF THE SAME HUNK WOULD
+   ALSO WRITE A FISH IMPORT FOR EVERY INLAND FISH MARKET (J's `11c.noImport`, 56 towns, counted WEAK): say the count and
+   DO THE EIGHT ROOTS ONLY unless the wider move is the same one fact with no town made false: then say why.
+6. **12f (K) · the Magic tab's supplier is a house the siege has stopped** (3: "Access to a house of worship" marked
+   "Stopped by the siege." while the food ledger has magic feeding the place). `dossierViewModel.js ::
+   deriveMagicSupplyView` (over `magicSourceOf`; printed by `MagicTab.jsx`, not yours) reads the supplier's mark
+   (`crisisStoppedRow.js :: rowMarkText`). To zero: 3.
+7. **Three worked-out peat cutters keep the general gap line** (seat J-ROWS dropped it at print everywhere else: rule
+   11g, 129 -> 3 in the 720) because `crisisStoppedRow.js :: housesShortOfInput` reads the mark's noun "peat" off that
+   line: J-ROWS's hand-back (`docs/chair/2026-11-17/bar8/BAR8-J-ROWS-HANDBACK.md`, when it is on the line) names the
+   hunk: the mark's noun for a source house is read off the story's own line or the house's ground, and the general
+   line goes. To zero: 3.
+8. **What LEFT-MARKS left of its AMENDMENT 2** (your prompt says what, if anything).
+
+`resourceGenerator.js` is a generator: N3 and R5 bind you. THE PDF AND THE JOURNAL READ THE SAME MARK LEAVES: say for
+three towns an item that the PDF's card prints the new mark too (N4, and "the other views"). YOUR GUARD:
+`tests/domain/bar8Marks2.test.js`. MEASURE (R4) with `runJ.mjs`, `runK.mjs`, runD (`8a.input`, `8b.extract`,
+`8b.person`) and runH over the thirty, the 150 and the 720.
