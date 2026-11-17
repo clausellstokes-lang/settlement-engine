@@ -1,0 +1,6 @@
+{"id":"C25601","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"slash-joined house label 'Weavers/Textile workers' used as a name inside a sentence ('Jómsmo's Weavers/Textile workers can offer less')","other":""}
+{"id":"C26640","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"PAIR","why":"weaver 'will take an order of any size' while the Weavers row is Impaired, short of wool, cloth production (short)","other":"C25171"}
+{"id":"C26990","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"'Short of wool.' mark set in front of 'How they deal' sentence it does not belong to; line reads wrong","other":""}
+{"id":"C27441","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"'Short of hides.' mark set in front of 'How they deal' sentence; reads wrong, and the sentence then sells leather freely","other":""}
+{"id":"C27960","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"PAIR","why":"'closes every year ahead' on the Food tile, yet FOOD shows gap 3%, surplus 0%, and the page says it falls a little short","other":"C26045"}
+{"id":"DONE","lines":3434,"blocks":1,"flags":5}
