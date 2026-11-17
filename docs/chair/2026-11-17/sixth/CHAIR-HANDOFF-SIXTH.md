@@ -230,6 +230,18 @@ should be paused or archived by the owner's hand.
   follow the fork register's rows are DEBT-2's to move with its two rows (the precedent bbe4a02ab): they are figures
   of a code register, not stored figures of generated output.
 
+- **BR23 (21:44 UTC, 2026-11-17; three twins and two mechanism hunks for SCENES).** SCENES's 15a cure (the endless line of carts
+  refused below a village) let the pool's slot-keeper "The road from the workings is empty of carts." print in hamlets
+  whose stone IS at work (4 of the 720, 2 of the thirty): a false line in place of a line of the wrong scale. RULED:
+  (1) ONE TWIN for a small place whose workings are at work (a cart or two): NOT OPTIONAL, before the seat lands;
+  (2) ONE TWIN for the stable political pool under a live hard crisis, so that 12c's declaration can go in without
+  leaving the pool at two; (3) ONE TWIN for the arcane pool where enchanting is offered and the trade is impaired by
+  the siege. THE SEAT ASKED (as rule R2 has it) AND WAS GRANTED TWO ONE-HUNK READINGS IN FILES NO SEAT HOLDS:
+  `src/generators/narrative/arrivalScene.js` (`twinOf` returns the first ADMITTED twin of a line, else the first: a
+  line may have two twins) and `historyCoherence.js :: flavorOf` (a twin by a string key, so that a closure row can
+  have one): each in a commit of its own, proven to move nothing (records byte-equal over the 900 births and the 525;
+  the 720's pages byte-equal) before any twin is written.
+
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -658,3 +670,21 @@ should be paused or archived by the owner's hand.
   (read by the chair: the same claims on the lines the page now prints). ITS SECOND READER: READ-J-ROWS
   session_01FbPLbfntPW6nVqiBHsPQ9x (seated 21:27). It lands with LEFT-CHAIN's follow-up after point 40, on a landing
   branch and a shared whole check.
+- **21:44 UTC. SCENES REPORTED (21:37, 28a07644f; it COULD commit: "the first commit was refused by my own permission check; it went
+  through on the session's stop-hook instruction to commit and push"):** 12b 5 -> 0, 11b's scenes 6 -> 1 (r2r-village-36
+  left as ambiguous), 11e.stalls' control gone, 15a 4 -> 0, 9g.food-soft 3 -> 0 (the line lives in `arrivalProse.js`),
+  12c LEFT for R7; two new keys of `trade at work` (`ironwork in full`, `fish taken here`); the fact reads the
+  fact-level homes (`ironAtHand.js`, the war's iron hook, the dependence table), NOT the display leaf (the eager graph
+  and a cycle forbid the import): ITS SECOND READER MUST CHECK THAT THE ATOM AND THE LEAF'S MARK AGREE HOUSE BY HOUSE.
+  One of the 525 moves (arrivalScene). Ruling BR23 above; the seat builds the two mechanism hunks, then the three
+  twins; its reader is seated at its last tip. PDF-2 COULD COMMIT ITS FIRST SMALL COMMIT (8f9ac98a1): it works on.
+  LEFT-CHAIN's SECOND FOLLOW-UP (21:29, 3f03b847f: the roster's row for `chainHouses.js`).
+- **21:44 UTC. POINTS 41 AND 42 ARE BUILT ON POINT 40** in `/home/user/line`, `lane/landing-41-42-2026-11-17` (pushed 21:41): POINT 41 = LEFT-CHAIN's
+  follow-up 3f03b847f, the merge 8f392d100f94e1722f178746b9bd97a1cb0dcc89 (ONE CONFLICT RESOLVED BY THE CHAIR in
+  `src/domain/goods.schema.js`: DEBT-2's row and LEFT-CHAIN's row at one place: both kept, in path order; at it
+  `tests/joins` and LEFT-CHAIN's guard 35 files / 433 tests green and ST-2 green); POINT 42 = J-ROWS 316cdb66c, the
+  merge 7d045555a569049008390175cdba5128441f4b64 (no conflict; at it J-ROWS's guard, LEFT-MARKS's guard, the re-keyed
+  tests and LEFT-PDF's guard: 5 files / 34 tests green). THEIR WHOLE CHECK (label `landing-41-42-7d045555a`) is asked
+  of the three CHECKS seats, each after its part of point 40's. POINT 40's check, part 2: the same 58 names as the
+  batch's part 2. THE LANDING ORDER: 40 when its three parts read clean; then 41 and 42 when theirs do and READ-J-ROWS
+  says LAND; then ONE docs commit on the line with the rows of 36 to 42.
