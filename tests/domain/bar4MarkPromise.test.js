@@ -103,7 +103,9 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     ['r2r-village-6', 'Drink service', null], // KEEP: ale in a calm village
     ['r2s-famine-town-1', 'Grain storage', 'Scarce in the famine.'], // the granary's reserves in a grain famine
     ['r2r-town-0', 'Grain storage', null], // KEEP: the same in a calm town
-    ['r2s-plague_onset-thorp-2', 'Fresh fish retail', 'Short of fish.'], // C22221 (FS1): every fishery depleted, whatever the ledger counts
+    // RE-KEYED BY IDENTITY (BAR8-J-ROWS item 1, 2026-11-17): every fishery depleted, the catch row is its pool's "Preserved fish";
+    // no town of the 720 or the 150 keeps "Fresh fish retail" on a spent fishery, so the claim stays on this town, by the row's name
+    ['r2s-plague_onset-thorp-2', 'Preserved fish', 'Short of fish.'], // C22221 (FS1): every fishery depleted, whatever the ledger counts
   ];
   test('(c) in each town the row leads with its mark, or prints bare (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(PAIRS, ([seed, name, mark]) => {
@@ -123,7 +125,9 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
   // whose burner the story leaves idle (its woodland used up, nothing bought): the gap line prints and the row is short
   test('(d) the mark follows the page\'s gap line: the row whose input nothing answers reads short, on the real page and on a constructed record', () => {
     const s = town('r2s-religious_conversion-hamlet-2');
-    expect(resourceGapLines(s).map((l) => String(l?.impact ?? ''))).toContain('No timber reaches the charcoal burner.');
+    // RE-KEYED BY IDENTITY (BAR8-J-ROWS G1, 2026-11-17): the worked-out burner's gap line is its story's own line (the general
+    // line beside it struck); no town of the 720 or the 150 prints the burner's general line alone, so the claim stays here
+    expect(resourceGapLines(s).map((l) => String(l?.impact ?? ''))).toContain('The charcoal burner is worked out: its own ground is depleted (Managed woodland).');
     expect(rowMarkText(s, 'service', row(s, 'Charcoal supply'))).toMatch(/^Short of /);
     const e = s.economicState;
     const built = { ...s, config: { ...s.config, tradeRouteAccess: 'isolated' }, economicState: { ...e, tradeAccess: 'isolated', localProduction: [], primaryExports: [], primaryImports: [], foodSecurity: { ...e.foodSecurity, foodRecord: { ...(e.foodSecurity?.foodRecord || {}), foodSources: [], normalImportPct: 0 } } } };

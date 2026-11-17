@@ -191,8 +191,10 @@ export const getServicesForInstitution = (
       const rollThreshold = def.p * tierChance;
       // A-11 (soak 1000 row 7): a row that speaks of a catch names its pool's inland
       // alternative; where the world law's water fact is 'none' that row is offered in its
-      // place, under the same toggle and the same roll (no draw moves).
-      const inland = overrides._waterAccess === 'none'
+      // place, under the same toggle and the same roll (no draw moves). BAR8-J-ROWS (11b.fish):
+      // the same where the town's fish grounds are used up, the fish bought in or the house
+      // idle (`supplyStory.js :: usedGroundOf`, handed in at the roll): no morning catch is landed.
+      const inland = (overrides._waterAccess === 'none' || overrides._fishUsedUp === true)
         && typeof def.inlandAlternative === 'string'
         && serviceDefs[def.inlandAlternative]
         ? def.inlandAlternative
