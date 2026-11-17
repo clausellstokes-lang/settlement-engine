@@ -158,3 +158,9 @@ two PDF files that BAR7-CARDS holds. The one new red is the stored figure in §5
 ## 9 · NEW VOCABULARY FOR THE OWNER'S VETO LIST
 
 None. No atom was added. `TIE_TEMPER` gained two rows (`rival: cold`, `ally: warm`) as the brief directs: data, not vocabulary.
+
+## 10 · THE WALKERS (the chair's ask of 2026-11-17, about 07:00 UTC)
+
+- `bar7Lines.test.js`'s three seed loops now collect every failure (`collectSeedFailures` / `expectNoSeedFailures`), and its four negatives (plus my one in `w2FixDataHistoryItems.test.js`) stand beside a positive anchor (`expectAbsentWithAnchor`). Both files are green at the tip (7 and 33 tests).
+- `seedLoopTotality.walker` and `negativeAssertionAnchor.walker` at the tip each fail on others' files only: `tests/pdf/seamPdfReadsTheTabs.test.jsx`, `tests/domain/bar6SeamDesks.test.js`, `tests/domain/bar6SeamEcon.test.js` (the close's). Neither names a file of mine.
+- `domainAnyCastBaseline` at the tip fails 4 cases, naming `dossierViewModel.js`, `economicsCrisisMarks.js`, `institutionProfile.js`, `mobilizationStatus.js`, `factionArchetypes.js`, `facts/factsOf.js`, `facts/seatMembers.js`, `facts/sovereign.js` and `foodLedger.js`: none of them mine (the close's).

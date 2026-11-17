@@ -12,6 +12,8 @@
 // patterns of the printed words; none reads the table the cure changed (so a table gone wrong cannot certify itself).
 // The counts before and after over the thirty, the 150 and the 720 are in docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md.
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { WARM, COLD } from '../helpers/pageLaws/law10i.mjs';
 import { STRESS_GOAL_OVERRIDES } from '../../src/generators/npcGenerator.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
@@ -105,11 +107,11 @@ describe('BAR7-LINES: seven single writers, each in its own words', () => {
 
   it('6e: the war\'s requisition and the crier\'s proclamation name no crown', () => {
     const gov = STRESS_GOAL_OVERRIDES.wartime.gov;
-    expect(`${gov.short} | ${gov.note}`).not.toMatch(CROWN);
-    expect(gov.short, 'POSITIVE: the goal still names the requisition').toMatch(/the army's requisition order/);
+    expect(`${gov.short} | ${gov.note}`.match(new RegExp(CROWN.source, 'gi')) ?? []).toEqual([]);
+    expectAbsentWithAnchor(`${gov.short} | ${gov.note}`, 'crown', "the army's requisition order", 'the war goal names the army, no crown');
     const crier = /** @type {Record<string, { desc: string }>} */ (/** @type {any} */ (INSTITUTION_SERVICES)['Town crier']);
-    expect(crier['Official announcements'].desc).not.toMatch(CROWN);
-    expect(crier['Official announcements'].desc, 'POSITIVE').toMatch(/laws, decrees and official notices/);
+    expect(crier['Official announcements'].desc.match(new RegExp(CROWN.source, 'gi')) ?? []).toEqual([]);
+    expectAbsentWithAnchor(crier['Official announcements'].desc, 'royal', 'laws, decrees and official notices', 'the crier proclaims no royal decree');
     const war = BORN.get('bar0-city-wartime-rand-44');
     const goals = (war.npcs || []).map((/** @type {any} */ n) => `${n?.goal?.short ?? ''} ${n?.goal?.note ?? ''} ${n?.goal?.stressNote ?? ''}`);
     expect(goals.filter((g) => /crown requisition|crown's requisition/.test(g))).toEqual([]);
@@ -117,13 +119,12 @@ describe('BAR7-LINES: seven single writers, each in its own words', () => {
   });
 
   it('low.agree: a plural cause takes a plural verb', () => {
-    let named = 0;
-    for (const [seed, town] of BORN) {
-      const text = String(governanceAccountOf(town)?.text ?? '');
-      if (/\bWeak defences\b/.test(text)) named += 1;
+    const accounts = [...BORN].map(([seed, town]) => ({ seed, text: String(governanceAccountOf(town)?.text ?? '') }));
+    const failures = collectSeedFailures(accounts, ({ seed, text }) => {
       expect(PLURAL_SINGULAR.test(text) ? `${seed}: ${text}` : null).toBe(null);
-    }
-    expect(named, 'POSITIVE: the plural cause is still named in the sample').toBeGreaterThan(0);
+    });
+    expectNoSeedFailures(failures, 'a plural cause takes a plural verb in every town of the sample');
+    expect(accounts.filter(({ text }) => /\bWeak defences\b/.test(text)).length, 'POSITIVE: the plural cause is still named in the sample').toBeGreaterThan(0);
   });
 
   it('low.generation: forty to sixty years is two generations; the band keeps its id', () => {
@@ -144,13 +145,13 @@ describe('BAR7-LINES: seven single writers, each in its own words', () => {
   });
 
   it('design: a siege\'s food hook names its channel; the importer holds what comes in', () => {
-    for (const seed of ['bar0-city-under_siege+famine-rand-42', 'bar0-city-under_siege+famine-rand-44']) {
-      const json = JSON.stringify(BORN.get(seed));
-      expect(json, `${seed}: no siege hook says "bought from outside"`).not.toMatch(/what food can still be bought from outside costs more every week/);
-      expect(json, `${seed}: the hook names the channel`).toMatch(/what food the teleportation circle still brings in costs more every week/);
-    }
-    for (const [seed, town] of BORN) expect(JSON.stringify(town), seed).not.toMatch(/One importer now brings in all the grain/);
-    const importers = [...BORN.values()].filter((t) => /One importer now holds all the grain that comes in from outside/.test(JSON.stringify(t)));
-    expect(importers.length, 'POSITIVE: the importer\'s hook still prints in the sample').toBeGreaterThan(0);
+    const sieges = collectSeedFailures(['bar0-city-under_siege+famine-rand-42', 'bar0-city-under_siege+famine-rand-44'], (seed) => {
+      expectAbsentWithAnchor(JSON.stringify(BORN.get(seed)), 'what food can still be bought from outside costs more every week',
+        'what food the teleportation circle still brings in costs more every week', `${seed}: the siege's hook names its channel`);
+    });
+    expectNoSeedFailures(sieges, 'every siege town of the sample names the channel its food still comes by');
+    // the importer's hook in every town of the sample, as one collection: the new words must print, the old ones nowhere
+    const importerLines = [...BORN.values()].flatMap((t) => JSON.stringify(t).match(/One importer now [^"]*/g) ?? []).join('\n');
+    expectAbsentWithAnchor(importerLines, 'One importer now brings in all the grain', 'One importer now holds all the grain that comes in from outside', 'the importer holds what comes in');
   });
 });
