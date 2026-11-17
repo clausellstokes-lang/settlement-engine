@@ -1,0 +1,5 @@
+{"id":"C20110","town":"bar0-hamlet-under_siege-rand-43","sev":"LOW","kind":"STATE","why":"Maltster sells malted barley unmarked ('Requires grain surplus') under siege with food deficit, surplus 0%, grown 38%; other grain houses carry curtailed marks","other":"C20107"}
+{"id":"C20383","town":"bar0-hamlet-under_siege-rand-43","sev":"LOW","kind":"STATE","why":"Famine bar reads Adequate though food word is Deficit (62% gap, 1.9 months stores, hunger already here, famine-risk crisis)","other":"C20015"}
+{"id":"C20823","town":"bar0-hamlet-under_siege-rand-44","sev":"LOW","kind":"PAIR","why":"Harvest income marked Stopped, yet Subsistence farming is only Curtailed and 14 lbs/day is still grown ('what the hamlet can still grow')","other":"C20758"}
+{"id":"C20830","town":"bar0-hamlet-under_siege-rand-44","sev":"LOW","kind":"STATE","why":"'No significant exports' though TRADE lists exports (salted fish, smoked seafood, fish oil); page itself says several trades sold outward","other":"C20832"}
+{"id":"DONE","lines":1228,"blocks":2,"flags":4}
