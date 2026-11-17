@@ -1622,6 +1622,21 @@ export const INCOME_REMEDY_HOUSES = Object.freeze({
 });
 
 /**
+ * THE CLOTH TRADE'S SHARE AND ITS HOUSES (BAR7-ECON item 1, LAW 8's 8f.short; the chair's BRIEF-BAR7, 2026-11-17; vetoable by
+ * the owner). "Wool & Textile Trade" printed "Cloth is woven or finished here." bare beside its weavers and its fuller, each
+ * marked "Short of wool." (C8021, C40674): the share was no row of the houses' tables, so it read no house's mark. It reads
+ * them as the remedies' shares do (`crisisStoppedRow.js :: incomeTradeHousesOf`), the houses that make the cloth by the seam's
+ * own rule (`tradeListDisplay.js :: MADE_OF_INPUT_BY`: the weaving and fulling houses; a dyer, a tailor or a draper finishes or
+ * sells cloth and makes none). Apart from `INCOME_TRADE_HOUSES`, which is the resource trades' own declaration, pinned equal
+ * to `RESOURCE_ROW_TRADES` by tests/domain/bar4MarkPromise.test.js (e): the brief's "joins INCOME_TRADE_HOUSES" would make that
+ * pin untrue, so the share sits beside the remedies', read by the same function.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const INCOME_CLOTH_HOUSES = Object.freeze({
+  "Wool & Textile Trade": Object.freeze(['weavers_textile_workers', 'fuller']),
+});
+
+/**
  * AN INCOME SHARE OF A HOUSE'S TRADE AND ITS HOUSES (BAR4-SERVICES S1 (ii), the chair's direction of 2026-11-16; vetoable by
  * the owner): the shares titled by a resource trade (`economy/incomeLineSiblings.js :: RESOURCE_ROW_TRADES`, the maritime fish
  * share the fish trade's) and the catalogue ids of the houses of that trade (the trade's own house words over the catalogue's

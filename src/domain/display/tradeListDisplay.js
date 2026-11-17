@@ -281,6 +281,7 @@ export function localProductionAsPrinted(settlement) {
     if (LOCAL_IDENTIFIERS.has(item)) return false;
     if (failedFood.some((re) => re.test(item))) return false;
     if (halfWayDeniedHere(settlement, item)) return false; // SEAM-ECON item 4: the card's half-way reading
+    if (everyMakerShortHere(settlement, item)) return false; // BAR7-ECON item 5 (8j.local): every maker marked short
     if (!pillBorneOut(raw, 'local', settlement)) return false; // W2-C-LEAVES-4 item 2: the one pill reader (below)
     if (outputs.has(raw.toLowerCase())) return made.has(raw.toLowerCase());
     const keys = RESOURCES_YIELDING.get(item);
@@ -664,6 +665,7 @@ export function exportsAsPrinted(settlement) {
   return displayTradeList(eco.primaryExports, /** @type {Parameters<typeof factsOf>[0]} */ (settlement), { side: 'exports' })
     .filter((raw) => !(scarce && HARVEST_CROP_GOOD.test(fold(tradeMarkOf(raw).label))))
     .filter((raw) => !halfWayDeniedHere(settlement, fold(tradeMarkOf(raw).label).replace(/_/g, ' '))) // SEAM-ECON item 4
+    .filter((raw) => !everyMakerShortHere(settlement, fold(tradeMarkOf(raw).label).replace(/_/g, ' '))) // BAR7-ECON item 5 (8j.exports)
     .map((raw) => pillAsPrinted(raw, 'exports', settlement))
     .filter((x) => x !== null && !seen.has(fold(tradeMarkOf(x).label)) && !!seen.add(fold(tradeMarkOf(x).label)))
     .map(String);
@@ -817,6 +819,23 @@ function everyMakerShort(good, roster, short, settlement) {
   if (!re || short.size === 0) return false;
   const makers = roster.filter((n) => !n.startsWith('access to') && houseMakesGood(good, re, n, settlement));
   return makers.length > 0 && makers.every((n) => short.has(n));
+}
+
+/**
+ * A GOOD WHOSE EVERY MAKER THE PAGE MARKS SHORT LEAVES THE EXPORTS AND "PRODUCED LOCALLY" (BAR7-ECON item 5, LAW 8's 8j.exports
+ * and 8j.local; the chair's BRIEF-BAR7, 2026-11-17; vetoable by the owner). "Fulled cloth" stood on the Exports beside a fuller
+ * marked "Short of wool." and no other maker; "Leather goods" under Produced locally beside its only tanner marked short. The
+ * seam's reading for a chain card's outputs (`everyMakerShort` over the one fact `facts/houseInputAtHand.js :: housesShortOf`),
+ * on the two lists: a good with no maker row, or one no house here makes, or one an unmarked house makes, stays. Display only.
+ * @param {unknown} settlement @param {string} good the good, folded (lower case, spaced)
+ * @returns {boolean}
+ */
+function everyMakerShortHere(settlement, good) {
+  const short = new Set([...housesShortOf(settlement).keys()].map(fold));
+  if (short.size === 0) return false;
+  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
+  return everyMakerShort(good, roster, short, /** @type {Parameters<typeof localProductionAsPrinted>[0]} */ (settlement));
 }
 
 /** The houses that make a good of the cloth's wool (the weavers, the textile works, the fuller). */

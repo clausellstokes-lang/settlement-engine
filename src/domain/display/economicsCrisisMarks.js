@@ -15,7 +15,7 @@
  * The Economics tab calls this leaf, and the Resources tab its `fullCardWordUnderSiege` (BAR3-LABELS-3 L3b). Pure: no
  * randomness, no clock, no write.
  */
-import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, crisisOfMarkKind, markedDescription, ordinaryTimesLine, STOPPED_WORD } from './crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, crisisOfMarkKind, markedDescription, ordinaryTimesLine, STOPPED_WORD, incomeShortOf, shortMarkText, rowMarkText, crisisNounOf } from './crisisStoppedRow.js';
 import { liveHouseOf } from '../facts/presence.js'; // BAR3-LABELS-2 L3: the roster house a chain's catalogue house answers to
 import { serviceRowsOf } from '../dossier/entityLinks.js'; // BAR5-CHAINS CC1: the service rows as the Services and Institutions tabs read them
 
@@ -185,9 +185,32 @@ export function incomeKindShown(town, src, crises = stoppingCrisesOf(town)) {
   const title = folded(src.source);
   if (!title) return null;
   const chains = /** @type {{ economicState?: { activeChains?: unknown } } | null | undefined} */ (town)?.economicState?.activeChains;
-  const titled = (Array.isArray(chains) ? /** @type {Record<string, unknown>[]} */ (chains) : [])
-    .filter((c) => c && folded(chainPrintName(/** @type {any} */ (c), town)?.label) === title); // the chain's printed name, the leaf's (chainPrintSites F1)
+  const all = (Array.isArray(chains) ? /** @type {Record<string, unknown>[]} */ (chains) : []).filter((c) => c && typeof c === 'object');
+  const incomes = /** @type {{ economicState?: { incomeSources?: unknown } } | null | undefined} */ (town)?.economicState?.incomeSources;
+  const titled = all
+    .filter((c) => folded(chainPrintName(/** @type {any} */ (c), town)?.label) === title // the chain's printed name, the leaf's (chainPrintSites F1)
+      // BAR7-ECON item 1 (8f.chain, C4828): or the chain whose card says it feeds this share ("Contributes to Timber Trade"),
+      // the card's own reading (`incomeShareOfChain`): "Timber & Lumber · Impaired" feeds "Timber Trade", whose row printed
+      // "managed felling and sawmilling keep production consistent" bare under the siege
+      || String(incomeShareOfChain(c, Array.isArray(incomes) ? /** @type {Array<{ source?: unknown }>} */ (incomes) : [])?.source ?? '\u0000') === String(src.source));
   return titled.some((c) => impairedBySiege(town, c)) ? SIEGE_CURTAILED : null;
+}
+
+/**
+ * THE INCOME SHARE A CHAIN CARD SAYS IT FEEDS ("Contributes to <share> - N% of income"; the Economics tab's own reading, moved
+ * here by BAR7-ECON so the card's line and the share's mark read one rule): the first share whose title holds the first word
+ * of the chain's label (lower case), or, for the entrepôt chain, the first share titled an entrepôt; else null.
+ * @template {{ source?: unknown }} S
+ * @param {{ label?: unknown, needKey?: unknown } | null | undefined} chain @param {ReadonlyArray<S>} incomes `economicState.incomeSources`
+ * @returns {S | null}
+ */
+export function incomeShareOfChain(chain, incomes) {
+  const safe = incomes.filter((inc) => typeof inc?.source === 'string');
+  const keyword = String(chain?.label || '').split(' ')[0].toLowerCase();
+  const entrepot = chain?.needKey === 'trade_entrepot';
+  if (!keyword && !entrepot) return null;
+  const src = (/** @type {S} */ inc) => String(inc.source).toLowerCase();
+  return safe.find((inc) => src(inc).includes(keyword) || (entrepot && src(inc).includes('entrepôt'))) || null;
 }
 
 /**
@@ -212,7 +235,20 @@ const SIEGE_CURTAILED = 'under_siege:curtailed';
  * @returns {string}
  */
 export function incomeDescShown(town, src) {
-  return markedDescription(crisisMarkText(town, incomeKindShown(town, /** @type {Record<string, unknown>} */ (src))), src?.desc);
+  return markedDescription(incomeMarkShown(town, /** @type {Record<string, unknown>} */ (src)), src?.desc);
+}
+
+/**
+ * Every mark an income share prints, in the leaf's order (`rowMarkText`'s): its crisis's (`incomeKindShown`), then its houses'
+ * short mark (BAR7-ECON item 1, `crisisStoppedRow.js :: incomeShortOf`); null where it takes none. One mark a row: the share
+ * cell beside it is covered by it.
+ * @param {object | null | undefined} town @param {Record<string, unknown> | null | undefined} src `economicState.incomeSources[]`
+ * @param {string[]} [crises]
+ * @returns {string | null}
+ */
+export function incomeMarkShown(town, src, crises = stoppingCrisesOf(town)) {
+  const marks = [crisisMarkText(town, incomeKindShown(town, src, crises)), shortMarkText(incomeShortOf(town, src, crises))].filter(Boolean);
+  return marks.length ? marks.join(' ') : null;
 }
 
 /**
@@ -223,10 +259,12 @@ export function incomeDescShown(town, src) {
  */
 export function econOrdinaryTimesLine(town, eco) {
   const crises = stoppingCrisesOf(town);
-  if (crises.length === 0) return null;
+  // BAR7-ECON item 1: a share marked short says, as the Services tab's head does, what a row marked short is (SUPPLIED_LINE)
+  const shortMarked = (eco?.incomeSources || []).some((src) => incomeShortOf(town, src, crises) !== null);
+  if (crises.length === 0) return ordinaryTimesLine([], shortMarked);
   const income = (eco?.incomeSources || []).map((src) => incomeKindShown(town, src, crises));
   const chains = (eco?.activeChains || []).map((c) => rowStoppedBy(town, 'chain', c, crises));
-  return ordinaryTimesLine(/** @type {string[]} */ ([...income, ...chains].filter(Boolean)));
+  return ordinaryTimesLine(/** @type {string[]} */ ([...income, ...chains].filter(Boolean)), shortMarked);
 }
 
 /**
@@ -246,11 +284,26 @@ export function econOrdinaryTimesLine(town, eco) {
 export function fullCardWordUnderSiege(town, card) {
   if (!town || !card || !tradeStoppedHere(town)) return null;
   const reading = resourceWorkReading(/** @type {import('./validationOnPage.js').PageRecord} */ (town), card.rawResource);
-  const words = chainsWorking(town, reading.keys, reading.good)
+  const cards = chainsWorking(town, reading.keys, reading.good)
     .map((c) => /** @type {Record<string, unknown>} */ (c))
-    .map((c) => String(chainCardUnderSiege(town, c, chainAsShown(c, town))?.status ?? ''));
-  if (words.length === 0 || words.some((w) => CARD_STILL_WORKING.has(w) || w === '')) return null;
-  return words[0];
+    // BAR7-ECON item 3 (LAW 8's 8i.resource, C20287; vetoable by the owner): a card whose every live Via house the leaf
+    // marks is no working card here, whatever its word ("Fishing & Seafood · Vulnerable" over a fisher's landing
+    // "Curtailed by the siege."): it reads as SW1's impaired card does
+    .map((c) => (everyHouseMarked(town, c) ? 'impaired' : String(chainCardUnderSiege(town, c, chainAsShown(c, town))?.status ?? '')));
+  if (cards.length === 0 || cards.some((w) => CARD_STILL_WORKING.has(w) || w === '')) return null;
+  return cards[0];
+}
+
+/**
+ * Does the leaf mark every live house on this chain's Via (`rowMarkText`, kind house: a crisis's mark or the short one)?
+ * A chain with no live house is not.
+ * @param {object | null | undefined} town @param {Record<string, unknown>} c `economicState.activeChains[]`
+ * @returns {boolean}
+ */
+function everyHouseMarked(town, c) {
+  const houses = (Array.isArray(c?.processingInstitutions) ? /** @type {unknown[]} */ (c.processingInstitutions) : [])
+    .map((h) => liveHouseOf(town, h)).filter(Boolean);
+  return houses.length > 0 && houses.every((h) => rowMarkText(town, 'house', /** @type {Record<string, unknown>} */ (h)) !== null);
 }
 
 /** The chain words that say the chain still works its ground (`facts/chainWorking.js :: WORKING_CHAIN_STATUSES`). */
@@ -259,3 +312,62 @@ import { tradeStoppedHere, chainAsShown } from './chainStateShown.js';
 import { chainPrintName } from './chainPrintName.js';
 import { resourceWorkReading } from './validationOnPage.js';
 import { chainsWorking, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';
+
+/**
+ * A STOPPED CHAIN'S "Normally yields" LINE NAMES NO SERVICE WHOSE OWN ROW THE PAGE KEEPS ON OFFER (BAR7-ECON item 4; THE CHAIR'S
+ * RULING CY1, 2026-11-17; LAW 8's 8i.chainStopped, C7539; vetoable by the owner). "Harbour and Maritime ... Normally yields Ship
+ * construction · Vessel maintenance / Stopped by the siege." beside a shipyard whose card and Services row offer "Ship
+ * construction" bare: the dependence table's ruling stands (the yard builds from its own timber, `SERVICE_DEPENDENCE`), and a
+ * temple's "Religious services" under a stopped pilgrimage chain is true; the chain card's line is the fault. Where the card
+ * refuses its yield (`chainYield.js :: chainYieldRefused`, the card's own header), an output that names, by the reading the
+ * cards share (`outputNamesService`), a service row of the town's that the leaf leaves unmarked (`rowMarkText`, kind
+ * service) leaves the line; the chips stay. Otherwise the card's outputs are `tradeListDisplay.js :: chainOutputsShown`'s.
+ * Read here and not in `chainOutputsShown`: that file sits below the mark's leaf (`crisisStoppedRow.js` imports it through
+ * `validationOnPage.js`, the shrink-only cycle guard), so the leaf is read one layer up. Display only.
+ * @param {Parameters<typeof chainOutputsShown>[0] & { status?: unknown }} chain the chain as its card prints it
+ * @param {object | null | undefined} town
+ * @returns {string[]}
+ */
+export function chainOutputsOnCard(chain, town) {
+  const outs = chainOutputsShown(chain, /** @type {Parameters<typeof chainOutputsShown>[1]} */ (town));
+  if (!town || !chainYieldRefused(chain)) return outs;
+  const onOffer = serviceRowsOf(/** @type {{ availableServices?: unknown } | null | undefined} */ (town)?.availableServices).map(({ svc }) => svc)
+    .filter((row) => rowMarkText(town, 'service', row) === null);
+  if (onOffer.length === 0) return outs;
+  return outs.filter((o) => !onOffer.some((row) => outputNamesService(o, row)));
+}
+
+/**
+ * Does this output name this service row (its name, six letters or more, as whole words inside the output's, folded)? The
+ * reading `outputNamesMarkedService` makes.
+ * @param {unknown} output @param {Record<string, unknown>} row
+ * @returns {boolean}
+ */
+function outputNamesService(output, row) {
+  const name = folded(row.name);
+  return name.length >= 6 && ` ${folded(output)} `.includes(` ${name} `);
+}
+import { chainOutputsShown } from './tradeListDisplay.js';
+import { chainYieldRefused } from '../chainYield.js';
+
+/** The empty export column's line of ordinary times. VETOABLE. */
+export const NO_EXPORTS_LINE = 'No significant exports.';
+
+/**
+ * THE EMPTY EXPORT COLUMN UNDER A CRISIS SAYS THE CRISIS (BAR7-ECON item 6, LAW 9's 9h.no-exports and 9h.no-exports-record;
+ * C20830, the wide read's C211337 C217617; vetoable by the owner). The Exports column printed a bare "No significant
+ * exports." where the printed list (`tradeListDisplay.js :: tradeListsAsPrinted`) is empty, on a tab whose head says its rows
+ * are of ordinary times, beside "… had several trades selling outward before the siege, and none of them can reach a buyer
+ * now." (a besieged hamlet whose record exports salted fish), and under a famine whose village's record exports raw wool and
+ * livestock. Where the record holds an export of its own (transit alone is none on this page) and a crisis that marks rows is
+ * in force (`stoppingCrisesOf`, the first in the leaf's order), the column says what is true now, in the crisis's own noun:
+ * "Nothing is sold outward while the siege lasts."; any other empty column keeps the line of ordinary times. Display only.
+ * @param {object | null | undefined} town
+ * @returns {string}
+ */
+export function exportsEmptyLineShown(town) {
+  const recorded = /** @type {{ economicState?: { primaryExports?: unknown } } | null | undefined} */ (town)?.economicState?.primaryExports;
+  const own = (Array.isArray(recorded) ? recorded : []).filter((x) => typeof x === 'string' && x.trim() && !/^transit trade$/i.test(x.trim()));
+  const noun = own.length > 0 ? stoppingCrisesOf(town).map(crisisNounOf).find(Boolean) : null;
+  return noun ? `Nothing is sold outward while ${noun} lasts.` : NO_EXPORTS_LINE;
+}

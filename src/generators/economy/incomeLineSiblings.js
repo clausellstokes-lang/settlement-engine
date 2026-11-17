@@ -59,6 +59,8 @@ export const REMEDIES_SHORT_LINE = 'Remedies and preparations are made here, but
 export const LOCAL_ORE_LINE = 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.';
 export const IRON_IMPORTED_LINE = 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.';
 export const METAL_WORKED_LINE = 'Metal is smelted or worked here.';
+/** BAR7-ECON item 1 (8f; vetoable by the owner): the metal line's twin where the metal chain is impaired, as the cloth line's is. */
+export const METAL_SHORT_LINE = 'Little metal is worked here while the metal trade is short of what it needs.';
 export const GRAIN_BOUGHT_LINE = 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.';
 export const WOOL_LOCAL_LINE = 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.';
 export const WOOL_LOCAL_WORKED_LINE = 'Local flocks provide raw wool, and cloth is woven or finished here.';
@@ -94,6 +96,8 @@ export const TIMBER_MANAGED_LINE = 'Local forest provides sustainable timber rev
 export const TIMBER_PLAIN_LINE = 'Local forest provides timber revenue.';
 /** BAR2-LABELS LB6: the timber line's twin where a sawmill stands and no managed woodland does (vetoable by the owner). */
 export const TIMBER_SAWN_LINE = 'Local forest provides timber revenue, and the timber is sawn here.';
+/** BAR7-ECON item 1 (8f.chain; vetoable by the owner): the timber line's twin where the timber chain is impaired. */
+export const TIMBER_SHORT_LINE = 'Little timber is felled or sawn here while the timber trade is short of what it needs.';
 export const TIMBER_BOUGHT_LINE = 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.';
 /** The market-day line, declared on its own text (it names the market; economicState.js prints its literal, registered there). */
 const MARKET_DAY_SET = Object.freeze([Object.freeze({ text: 'Market day stall fees and toll collection on goods entering the market.', needs: Object.freeze(['market']), excludes: Object.freeze(['crisis: under_siege']) })]);
@@ -119,10 +123,14 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: REMEDIES_SHORT_LINE, twinOf: ALCHEMY_TRADE_LINE }),
   ]),
   [ALCHEMIST_SUPPLEMENTS_LINE]: Object.freeze([Object.freeze({ text: ALCHEMIST_SUPPLEMENTS_LINE })]),
-  [LOCAL_ORE_LINE]: Object.freeze([Object.freeze({ text: LOCAL_ORE_LINE, needs: Object.freeze(['institution: smith']) })]),
+  [LOCAL_ORE_LINE]: Object.freeze([
+    Object.freeze({ text: LOCAL_ORE_LINE, needs: Object.freeze(['institution: smith']) }),
+    Object.freeze({ text: METAL_SHORT_LINE, twinOf: LOCAL_ORE_LINE }), // BAR7-ECON: the metal chain impaired
+  ]),
   [IRON_IMPORTED_LINE]: Object.freeze([
     Object.freeze({ text: IRON_IMPORTED_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) }),
     Object.freeze({ text: METAL_WORKED_LINE, twinOf: IRON_IMPORTED_LINE }),
+    Object.freeze({ text: METAL_SHORT_LINE, twinOf: IRON_IMPORTED_LINE }), // BAR7-ECON: the metal chain impaired
   ]),
   [GRAIN_BOUGHT_LINE]: Object.freeze([Object.freeze({ text: GRAIN_BOUGHT_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) })]),
   [WOOL_LOCAL_LINE]: Object.freeze([
@@ -156,6 +164,7 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: TIMBER_MANAGED_LINE, twinOf: TIMBER_LINE }),
     Object.freeze({ text: TIMBER_PLAIN_LINE, twinOf: TIMBER_LINE }),
     Object.freeze({ text: TIMBER_SAWN_LINE, twinOf: TIMBER_LINE }),
+    Object.freeze({ text: TIMBER_SHORT_LINE, twinOf: TIMBER_LINE }), // BAR7-ECON: the timber chain impaired
   ]),
   [TIMBER_BOUGHT_LINE]: Object.freeze([Object.freeze({ text: TIMBER_BOUGHT_LINE, excludes: Object.freeze([SIEGE]) })]),
   [MARKET_DAY_LINE]: MARKET_DAY_SET,
@@ -173,6 +182,9 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
  *   the place is depleted
  * @returns {string}
  */
+/** The chains of the metal trade and of the timber trade, by id (BAR7-ECON item 1). */
+const METAL_CHAINS = Object.freeze(['iron', 'smelting']);
+const TIMBER_CHAINS = Object.freeze(['timber', 'mountain_timber_harvest']);
 export function trueIncomeDesc(desc, f) {
   const has = (/** @type {RegExp} */ re) => f.roster.some((n) => re.test(n));
   const forge = FORGE_HOUSE_WORDS.some((w) => f.roster.some((n) => n.includes(w)));
@@ -186,9 +198,11 @@ export function trueIncomeDesc(desc, f) {
       if (impaired(['alchemy', 'herbalism'])) return REMEDIES_SHORT_LINE;
       if (!has(/alchemist/)) return REMEDIES_LINE; // an apothecary, a herbalist or a hedge wizard is not an alchemist
       return desc === ALCHEMY_TRADE_LINE && f.besieged ? ALCHEMY_UNDER_SIEGE_LINE : desc;
-    case LOCAL_ORE_LINE: return has(/smith/) ? desc : forge ? METAL_WORKED_LINE : '';
+    // BAR7-ECON item 1 (8f): an impaired metal chain is not described as working (the cloth line's arm, for metal)
+    case LOCAL_ORE_LINE: return !(has(/smith/) || forge) ? '' : impaired(METAL_CHAINS) ? METAL_SHORT_LINE : has(/smith/) ? desc : METAL_WORKED_LINE;
     case IRON_IMPORTED_LINE: case LOCAL_COAL_LINE:
       if (!forge) return '';
+      if (impaired(METAL_CHAINS)) return METAL_SHORT_LINE;
       return f.besieged || !bought(/\biron\b/i) ? METAL_WORKED_LINE : desc;
     case LOCAL_COAL_SOLD_LINE: return f.besieged || !sold(/^coal\b/i) ? '' : desc;
     case GRAIN_BOUGHT_LINE: return f.besieged || !bought(/\bgrain\b/i) ? '' : desc;
@@ -219,7 +233,8 @@ export function trueIncomeDesc(desc, f) {
     case TITHES_RENTS_LINE: return f.top ? desc : TITHES_RENTS_PLAIN_LINE;
     // BAR2-LABELS LB6 (C16557): "managed felling" only where the managed woodland stands (the sibling's form); a sawmill
     // without it saws the timber and claims no sustained yield.
-    case TIMBER_LINE: return has(/sawmill|lumber/) ? (f.managedForest ? desc : TIMBER_SAWN_LINE) : f.managedForest ? TIMBER_MANAGED_LINE : TIMBER_PLAIN_LINE;
+    // BAR7-ECON item 1 (8f.chain): an impaired timber chain is not described as working
+    case TIMBER_LINE: return impaired(TIMBER_CHAINS) ? TIMBER_SHORT_LINE : has(/sawmill|lumber/) ? (f.managedForest ? desc : TIMBER_SAWN_LINE) : f.managedForest ? TIMBER_MANAGED_LINE : TIMBER_PLAIN_LINE;
     case TIMBER_BOUGHT_LINE: case MARKET_DAY_LINE: return f.besieged ? '' : desc;
     default: return desc;
   }
