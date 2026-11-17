@@ -799,3 +799,14 @@ should be paused or archived by the owner's hand.
   DEBT-2 did; the early small commit first: IF IT IS REFUSED IT STOPS, and the largest family of the round joins what waits
   for the owner). THE LANDING BRANCH OF POINTS 43 AND 44 IS PUSHED (23:20, 917c915bc) and its whole check (label
   `landing-43-44-917c915bc`) is asked of the three CHECKS seats.
+- **23:38 UTC. READ-PDF-2 SAYS "LAND" (23:35; tip 2dac64372, base 3b06c724b; its own probe and parser over 15 towns: every count 0 at the tip).** HIGH none.
+  MED 1: two of the three re-keyed arms cannot see item 5's fault (the L2 arm of `tests/pdf/leftPdfReadsTheTabs.test.jsx`
+  reads only the text after "Normally yields: ", lines 159-164; `chainStateThreeSurfaces :: outputDisagreements`' five
+  seeds hold no item-5 card: with r2r-village-8, -17, -25 and r2r-thorp-38 added it is green at the tip and red under
+  both of the reader's mutations); THE FAULT IS HELD by the new guard `pdf2ReadsTheTabs` item 5 (red under three
+  mutations), so it lands, WITH A FOLLOW-UP ASKED OF PDF-2 ON ITS SECOND BRANCH (with item 3's hunk): (a) the L2 arm reads
+  the bare outputs too; (b) one item-5 town joins `outputDisagreements`' seeds. LOW 1: `src/foundry/journalPages.js:392`
+  pairs the view model's `e.chains[i]` with `activeChains[i]` by index (it predates the seat; 0 differences in 15 towns
+  by name): the same follow-up, if it is one line. Every hunk is caught by a named test (eight mutations); the laws the
+  same three reds with the same messages at base and tip; no player path to the PDF or the journal; no stored field;
+  both type gates 0; the lint net 69 names at both. POINT 44 STANDS AS BUILT (917c915bc); its whole check is running.
