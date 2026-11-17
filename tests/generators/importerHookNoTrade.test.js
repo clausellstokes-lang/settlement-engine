@@ -14,7 +14,9 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
-const IMPORTER = /One importer now brings in all the grain/;
+// RE-KEYED BY IDENTITY (BAR7-LINES, 2026-11-17; BAR7-AUDIT-I's design point, C33342 C45848): the importer's hook says
+// "holds all the grain that comes in from outside" (was "brings in all the grain"); the same hook, the same towns, the same claim.
+const IMPORTER = /One importer now holds all the grain that comes in from outside/;
 
 describe('the importer hook reads the import coverage', () => {
   it('a siege that a magic channel still feeds keeps the importer', () => {
@@ -41,7 +43,7 @@ describe('the cold list\'s besieged towns, born as the app births them', () => {
       const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} }));
       expect(s.economicState.foodSecurity.importCoverage || 0, `${seed}: no food comes in by trade`).toBe(0);
       const hooks = JSON.stringify((s.economicViability?.plotHooks || []).map((/** @type {any} */ h) => h.hook));
-      expectAbsentWithAnchor(hooks, 'One importer now brings in all the grain', 'No food comes in by trade now', `${seed}: no importer`);
+      expectAbsentWithAnchor(hooks, 'One importer now holds all the grain that comes in from outside', 'No food comes in by trade now', `${seed}: no importer`);
       expect(hooks, `${seed}: the no-trade hook prints`).toMatch(/No food comes in by trade now/);
     }), 'no importer while no food comes in by trade');
   });

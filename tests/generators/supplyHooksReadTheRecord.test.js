@@ -14,7 +14,9 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
-const IMPORTER = /One importer now brings in all the grain/;
+// RE-KEYED BY IDENTITY (BAR7-LINES, 2026-11-17; BAR7-AUDIT-I's design point, C33342 C45848): the importer's hook says
+// "holds all the grain that comes in from outside" (was "brings in all the grain"); the same hook, the same towns, the same claim.
+const IMPORTER = /One importer now holds all the grain that comes in from outside/;
 const BALANCE = { deficit: 50, dailyProduction: 100, dailyNeed: 150, importCoverage: 25, importChannel: 'river trade' };
 const importerFor = (/** @type {string[]} */ imports) => deriveSupplyRiskAnalysis(1000, 'plains', [], { tradeRouteAccess: 'river' }, BALANCE, () => ({ imports }))
   .plotHooks.some((h) => IMPORTER.test(h.hook));
