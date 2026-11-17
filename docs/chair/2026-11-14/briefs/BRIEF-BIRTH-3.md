@@ -176,3 +176,27 @@ by item; the net; what is left by name; for the owner's veto list in plain words
 Budget: hand back at 700,000 of your count, then push nothing more. PUSH EARLY AND OFTEN: after P1, after P2, after
 P3. One line to the chair at the end, 150 words at most. ASK the chair only if a cure needs a file this brief does not
 give you, or a new field: one line, with your default.
+
+## AMENDMENT 1 (sent to the seat by message at 11:19 UTC on 2026-11-17): THREE MORE REDS THAT ARE THE BIRTH'S
+
+Found by a whole check of the line's own tip 7cf3cb9f0f (3,604 test files; they are red at your base too: BIRTH-1's
+landing made them and they were in no net, the chair's or a seat's). They join P4. Budget: 800,000 in all.
+
+1. `tests/generators/pipelineContract.test.js`, ELEVEN tests ("every step declares its writes ..."): the pipeline's
+   strict mode throws `step "generateNarratives" wrote undeclared ctx key(s) [economicState]`. The import written at
+   the birth writes the economy's imports inside the narratives step and the step does not say so. DECLARE THE WRITE in
+   the step's registration, the smallest declaration the pipeline's own contract accepts (in
+   `src/generators/steps/generateNarratives.js`: that declaration is yours, with BR7's one argument; nothing else in the
+   file); read every step that consumes `economicState` after it and run the pipeline's tests
+   (`tests/generators/pipeline*.test.js`, `tests/generators/generationForkCensus.test.js`); say what each reads.
+2. `tests/generators/isolatedTrade.test.js` ("generated imports/exports carry no duplicate canonical goods": one of
+   three cases, seed 5: twelve entries, eleven canonical goods): the birth writes a word of a good the list already
+   names by another word. The birth writes no second word of one canonical good.
+3. `tests/components/publicProseEquality.test.jsx`, "services, soak1k-5": RED ON THE LINE WITHOUT BIRTH-2 (six lines of
+   the owner's player view are missing from the shared page). Its cause is OLDER than the seed's reading: some reader of
+   the supply rule reads a field the public projection drops. Find it and cure it under BR8's own rule (every view reads
+   what the public record keeps); your three-equal guard holds it.
+
+Everything else red in that whole check is classified by the chair (reference files, stored figures, committed
+bundles: the close's). Your rule stands: red at your tip and not at your base is yours; and these three, red at your
+base and of the birth's making, are yours too.
