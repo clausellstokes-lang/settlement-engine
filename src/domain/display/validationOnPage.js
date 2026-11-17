@@ -121,17 +121,18 @@ function houseWords(inst) {
 const capFirst = (x) => x.charAt(0).toUpperCase() + x.slice(1);
 
 /**
- * BIRTH-1 (R4): the label of a source house's own spent ground, as the Depleted list prints it, where the house is the
- * source of its material and none of its own grounds is live; else ''.
- * @param {PageRecord} s @param {{ name?: unknown, catalogId?: unknown } | null | undefined} inst @returns {string}
+ * BIRTH-1 (R4): the ground of a house that is the source of its material and none of whose own grounds is live: the label
+ * of its spent ground as the Depleted list prints it, or '' where it has no ground of its own at all; null for any other
+ * house, or where a live ground of its own stands.
+ * @param {PageRecord} s @param {{ name?: unknown, catalogId?: unknown } | null | undefined} inst @returns {string | null}
  */
-function workedOutGround(s, inst) {
+function sourceGround(s, inst) {
   const id = str((typeof inst?.catalogId === 'string' && inst.catalogId) || catalogIdForName(str(inst?.name)) || '');
-  if (!isSourceHouse(id)) return '';
+  if (!isSourceHouse(id)) return null;
   const grounds = SOURCE_GROUNDS[id];
   const config = /** @type {{ nearbyResourcesDepleted?: unknown }} */ (s?.config || {});
   const live = /** @type {string[]} */ (availableNativeResourceKeys(/** @type {Record<string, unknown>} */ (config)));
-  if (grounds.some((k) => live.includes(k))) return '';
+  if (grounds.some((k) => live.includes(k))) return null;
   const spent = arr(config.nearbyResourcesDepleted).map(str).find((k) => grounds.includes(k));
   return spent ? str(resourceDisplayName(spent)) : '';
 }
@@ -501,10 +502,15 @@ export function resourceGapLines(s) {
     // quarry depleted)" (45 quarries of the census's 720): the house that is the source of its material
     // (`houseKinds.js :: SOURCE_GROUNDS`), none of whose own grounds is live and one of which the record holds spent, reads
     // that ground, in the words the mark ("Short of stone.", `housesShortOf`) and the Depleted list (the ground's label) use.
-    const worked = workedOutGround(s, inst);
-    if (worked) {
+    // AND (item 6, the page read after the birth's import): a source house with no ground of its own says so, not that its
+    // material does not "reach" it: the birth brings timber in for the cooper beside "No timber reaches the charcoal
+    // burner." (48 towns of the census's 720), and an import feeds a buyer, never the work on the ground.
+    const ground = sourceGround(s, inst);
+    if (ground !== null) {
       const short = housesShortOf(s).get(name) || orList(nouns);
-      push({ chain: null, impact: `${capFirst(houseWords(inst))} is short of ${short}: its own ground is depleted (${worked}).`, severity: str(g.severity) || 'high' });
+      push({ chain: null, impact: ground
+        ? `${capFirst(houseWords(inst))} is short of ${short}: its own ground is depleted (${ground}).`
+        : `${capFirst(houseWords(inst))} is short of ${short}: no ground of its own lies near.`, severity: str(g.severity) || 'high' });
       continue;
     }
     push({ chain: null, impact: `No ${orList(nouns)} ${plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
