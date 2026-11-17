@@ -170,8 +170,18 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
   // ruling HW1 added or widened is proved reachable at once: a census town whose sense slot draws the twin's original on a stream of
   // the scene's own, put in the state that refuses the original (every house of the trade short, or the siege, or the famine),
   // prints the twin in that slot.
+  // SEAM-SCENES (2026-11-17, BRIEF-BAR6-SEAM item 1, the seam's MUST; the filter BAR6-SCENES put on this arm is gone): a good's twins
+  // (the forge, the cloth, the butter, the wood, the spice, the leather) are proved here as the four trades' are: their trade is the good
+  // the original declares (`trade at work: <good>`), and `refusing` and `atWork` read its houses from `tradeAtWork.js :: GOOD_TRADES`
+  // as they read `TRADE_HOUSES`; a good a page's list names (the Exports, an import) is struck from that list where the gaps alone
+  // leave it at work. A twin this arm convicts is a fault of the line, never of the arm.
   it('REACHABLE (MU1): every twin of the trades at work prints where its original is drawn and the town\'s state refuses it', async () => {
-    const { TRADE_HOUSES } = await import('../../src/domain/facts/tradeAtWork.js');
+    const { TRADE_HOUSES, GOOD_TRADES } = await import('../../src/domain/facts/tradeAtWork.js');
+    const own = (/** @type {object} */ o, /** @type {string} */ k) => Object.prototype.hasOwnProperty.call(o, k);
+    /** a trade's house words: the four trades' (`TRADE_HOUSES`) or a good's (`GOOD_TRADES[].houses`) */
+    const wordsOf = (/** @type {string} */ key) => /** @type {any} */ (own(TRADE_HOUSES, key) ? TRADE_HOUSES : {})[key] || /** @type {any} */ (GOOD_TRADES)[key]?.houses || [];
+    /** @param {unknown} x @returns {string} a list item's own words */
+    const itemText = (x) => (typeof x === 'string' ? x : String(/** @type {any} */ (x)?.name ?? /** @type {any} */ (x)?.good ?? /** @type {any} */ (x)?.source ?? ''));
     const { canonStressors } = await import('../../src/domain/canonicalAccessors.js');
     const { CHAIN_RAW_INPUT, houseInputAtHand } = await import('../../src/domain/facts/houseInputAtHand.js');
     const scene = (/** @type {any} */ town, /** @type {string} */ stream) => {
@@ -184,7 +194,7 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
       const withCrisis = (/** @type {string} */ type) => { const list = [...canonStressors(town), { type }]; return { ...town, stress: list, stressors: list }; };
       if (state === 'siege') return withCrisis('under_siege');
       if (state === 'hunger') return withCrisis('famine');
-      const words = /** @type {any} */ (TRADE_HOUSES)[key];
+      const words = wordsOf(key);
       const houses = (town.institutions || []).filter((/** @type {any} */ i) => words.some((/** @type {string} */ w) => atStart(w, String(i?.name).toLowerCase())));
       /** each house gapped on an input this town's own reading calls missing (`houseInputAtHand`): the record's own short */
       const gapped = (/** @type {any} */ base) => {
@@ -194,23 +204,35 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
         }).filter(Boolean);
         return { ...base, resourceAnalysis: { ...base.resourceAnalysis, gaps: [...(base.resourceAnalysis?.gaps || []), ...gaps] } };
       };
-      const own = gapped(town);
+      const gappedTown = gapped(town);
+      if (factsOf(gappedTown).tradeAtWork(key) === false) return gappedTown;
+      const good = /** @type {any} */ (GOOD_TRADES)[key];
       // a market house's trade IS the route: where the gaps alone leave the trade at work, the road is cut too (isolated)
-      return factsOf(own).tradeAtWork(key) === false ? own : gapped({ ...town, config: { ...town.config, tradeRouteAccess: 'isolated' } });
+      if (!good) return gapped({ ...town, config: { ...town.config, tradeRouteAccess: 'isolated' } });
+      // SEAM-SCENES (2026-11-17): a good no house makes is at work by the page's lists: struck from the imports, then from the Exports
+      const unlisted = (/** @type {unknown} */ v) => (Array.isArray(v) ? v : []).filter((x) => !(good.listed && good.listed.test(itemText(x))));
+      const noImports = { ...gappedTown, economicState: { ...gappedTown.economicState, primaryImports: unlisted(gappedTown.economicState?.primaryImports) } };
+      if (factsOf(noImports).tradeAtWork(key) === false) return noImports;
+      return { ...noImports, economicState: { ...noImports.economicState, primaryExports: unlisted(noImports.economicState?.primaryExports) } };
     };
     const twins = ARRIVAL_SENSES.flatMap((/** @type {any} */ sense) => ['lines', 'dominant'].flatMap((field) => sense[field].filter((/** @type {any} */ t) => t?.twinOf).map((/** @type {any} */ t) => {
       const original = sense[field].find((/** @type {any} */ o) => o && typeof o === 'object' && !o.twinOf && String(o.text('{name}')) === t.twinOf);
       const atoms = [...(original?.needs || []), ...(original?.excludes || [])];
+      // the trade the slot's original declares: the four trades by their sense's key (as before); a good by its own key (SEAM-SCENES)
+      const trade = own(TRADE_HOUSES, sense.key) ? sense.key
+        : atoms.map((/** @type {string} */ a) => a.replace(/^trade at work: /, '')).find((/** @type {string} */ k) => own(GOOD_TRADES, k));
       const state = (t.needs || []).includes('crisis: under_siege') ? 'siege' : (t.needs || []).includes('crisis: hunger') && sense.key === 'bread' ? 'hunger'
-        : atoms.some((/** @type {string} */ a) => a.startsWith('trade at work')) && !(t.excludes || []).includes('enchanting')
-          && Object.prototype.hasOwnProperty.call(TRADE_HOUSES, sense.key) ? 'short' : null; // BAR6-SCENES (2026-11-16): the four trades' twins; the goods' twins (forge, cloth, dairy, spice) are proved by tests/domain/bar6ScenesGoods.test.js
-      return state && (state !== 'siege' || sense.key === 'horses') ? { key: sense.key, sense, field, pool: sense[field], original, twin: t, state } : null;
+        : atoms.some((/** @type {string} */ a) => a.startsWith('trade at work')) && !(t.excludes || []).includes('enchanting') && trade ? 'short' : null;
+      return state && (state !== 'siege' || sense.key === 'horses') ? { key: sense.key, trade: trade || sense.key, sense, field, pool: sense[field], original, twin: t, state } : null;
     }))).filter(Boolean);
     expect(twins.length, 'the twins of the trades at work').toBeGreaterThan(20);
+    // SEAM-SCENES (2026-11-17): every good's twin is in the arm's proof: the seventeen the filter had put outside it, and the seam's own
+    const GOODS_TWINS = twins.filter((/** @type {any} */ x) => x.state === 'short' && own(GOOD_TRADES, x.trade)).length;
+    expect(GOODS_TWINS, 'the goods\' twins the arm proves').toBeGreaterThanOrEqual(17);
     const streams = Array.from({ length: 60 }, (_, i) => `bar4-scenes-2-mu1-${i}`);
     /** the town with its trade at work again: its trade houses' gaps and its spent grounds struck (the slot then draws the original) */
     const atWork = (/** @type {any} */ town, /** @type {string} */ key) => {
-      const words = /** @type {any} */ (TRADE_HOUSES)[key] || [];
+      const words = wordsOf(key);
       const of = (/** @type {any} */ g) => words.some((/** @type {string} */ w) => atStart(w, String(g?.institution).toLowerCase()));
       return { ...town, config: { ...town.config, nearbyResourcesDepleted: [] }, resourceAnalysis: { ...town.resourceAnalysis, gaps: (town.resourceAnalysis?.gaps || []).filter((/** @type {any} */ g) => !of(g)) } };
     };
@@ -229,9 +251,9 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
         if (x.field !== 'lines' || !speaks(x.sense.dominant, born, String(lines[0]))) return false;
         town = ordinary(born, x.sense);
       }
-      const base = x.state === 'short' ? atWork(town, x.key) : town;
-      const rec = refusing(base, x.key, x.state);
-      if (x.state === 'short' && factsOf(rec).tradeAtWork(x.key) !== false) return false;
+      const base = x.state === 'short' ? atWork(town, x.trade) : town;
+      const rec = refusing(base, x.trade, x.state);
+      if (x.state === 'short' && factsOf(rec).tradeAtWork(x.trade) !== false) return false;
       return streams.some((st) => scene(base, st).includes(String(x.original.text(town.name))) && scene(rec, st).includes(String(x.twin.text(town.name))));
     })).map((/** @type {any} */ x) => `${x.key} (${x.state}): ${x.twin.text('{name}')}`);
     expect(unproved).toEqual([]);

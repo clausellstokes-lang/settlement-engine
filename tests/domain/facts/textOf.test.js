@@ -62,6 +62,10 @@ describe('textOf', () => {
     // cloth 5, the goods sent out 4, the butter, the spice 2, the porters, the work party) and 8 bare lines become declared objects
     // (the ironwork's 4 and the cloth's 4): 18 + 8 = 26; and the Norse drying racks' twin (ARRIVAL_PEOPLE.norse): 216.
     // 216 -> 224 (the chair's ruling TW1, the same batch): the wood trades' four lines declared, each with its twin.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(224);
+    // 224 -> 233 (SEAM-SCENES, 2026-11-17, BRIEF-BAR6-SEAM item 7; re-keyed by identity, a count two seats moved): BAR6-CULTURE's
+    // hamlet arrival twin added three at the join (224 -> 227, the count the joined line read); the seam's own six twins join (the
+    // smiths' four dominant lines, each now declaring the ironwork; the tanners' reek and drying frames, each declaring the leather):
+    // 227 + 6 = 233. The tanners' hides twin is reworded, not added; the reek and the frames were objects already.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(233);
   });
 });

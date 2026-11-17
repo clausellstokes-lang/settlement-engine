@@ -26,6 +26,8 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { GOOD_TRADES, tradeAtWorkOf } from '../../src/domain/facts/tradeAtWork.js';
 import { EXPORTED_GOODS, goodExportedOf } from '../../src/domain/facts/goodExported.js';
 import { legitimacyCrisisOf } from '../../src/domain/facts/legitimacyCrisis.js';
+import { nativeSemanticNames } from '../../src/domain/content/customContentSemanticAuthority.js'; // SEAM-SCENES (2026-11-17): the picker's own names
+import { resolveGenerationWorldLaw } from '../../src/generators/generationContext.js'; // SEAM-SCENES (2026-11-17): the picker's own magic
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const CRISES = ['famine', 'indebted', 'infiltrated', 'insurgency', 'mass_migration', 'monster_pressure', 'occupied', 'plague_onset',
@@ -167,7 +169,11 @@ describe('the facts the cure made', () => {
     expect(tradeAtWorkOf({ institutions: [], economicState: { primaryExports: ['Cheese'] } }, 'dairy')).toBe(true);
     expect(tradeAtWorkOf({ institutions: [], economicState: { localProduction: ['dairy'] } }, 'dairy')).toBe(false); // the raw list is not the page's
     expect(tradeAtWorkOf({ institutions: [{ name: 'Tailor' }] }, 'cloth')).toBe(false);
-    expect(tradeAtWorkOf({ institutions: [{ name: 'Weavers/Textile workers' }] }, 'cloth')).toBe(true);
+    // SEAM-SCENES (2026-11-17, BRIEF-BAR6-SEAM item 4): BAR6-MARKS's wider reading of "short" (a house wanting its input by trade,
+    // `houseInputAtHand.js :: housesWantingTradeInput`) marks a weaver with no wool "Short of wool."; the record gives it its wool
+    // (an import, in a quiet town), so the claim (a maker not short) is the one this case always made
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Weavers/Textile workers' }], economicState: { primaryImports: ['Wool'] } }, 'cloth')).toBe(true);
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Weavers/Textile workers' }] }, 'cloth')).toBe(false); // and no wool at all: short, as the page marks it
     expect(tradeAtWorkOf({ institutions: [{ name: 'Mine (open cast)' }] }, 'cut stone')).toBe(false);
     expect(tradeAtWorkOf({ institutions: [{ name: 'Stone quarry' }] }, 'cut stone')).toBe(true);
     expect(tradeAtWorkOf({ institutions: [], economicState: { primaryImports: ['Spices'] } }, 'spice')).toBe(true);
@@ -183,7 +189,7 @@ describe('the facts the cure made', () => {
     const town = BORN.get('r2r-village-0');
     const bare = { ...town, institutions: [{ name: 'Common grazing land' }, { name: 'Tailor' }], economicState: { ...town.economicState, primaryExports: [], localProduction: [], primaryImports: [], activeChains: [] } };
     const facts = factsOf(bare);
-    const goods = /^(trade at work: (dairy|cloth|ironwork|spice|woodwork)|exported: )/;
+    const goods = /^(trade at work: (dairy|cloth|dyed cloth|ironwork|spice|woodwork|leather)|exported: )/; // SEAM-SCENES (2026-11-17): the leather and the dyer's kind join
     // the kilns' twin of the crates is BAR5-THINGS's: unanswered (and so refused with its original) where no kiln house stands, by design
     const pairs = ARRIVAL_SENSES.filter((/** @type {any} */ sense) => sense.key !== 'kilns').flatMap((/** @type {any} */ sense) => ['lines', 'dominant'].flatMap((field) => sense[field]
       .filter((/** @type {any} */ t) => t && typeof t === 'object' && t.twinOf)
@@ -197,6 +203,145 @@ describe('the facts the cure made', () => {
       return refused && !twinOk && !twinNeedsMore;
     }).map((/** @type {any} */ x) => x.twin.twinOf);
     expect(unadmitted).toEqual([]);
+  });
+
+  // SEAM-SCENES (2026-11-17, BRIEF-BAR6-SEAM items 2 and 9): the leather is the tanners' own, and the cloth is split by what its
+  // houses do to it: a dyer answers only the dyeing (bar0-city-wartime-rand-33's bolts "drying" beside weavers and a fuller "Short of
+  // wool." and a dyer at work), the cloth made wants a weaver, a textile house or a fuller not short.
+  it('SEAM: a dyer answers the dyeing and not the cloth made; the tanners\' leather reads their short mark; the kinds are the houses\' own', async () => {
+    const { CLOTH_KINDS } = await import('../../src/domain/facts/tradeAtWork.js');
+    const dyerAlone = { institutions: [{ name: 'Weavers/Textile workers' }, { name: 'Fuller' }, { name: 'Dyer' }] }; // no wool: both makers short
+    expect(tradeAtWorkOf(dyerAlone, 'cloth')).toBe(false);
+    expect(tradeAtWorkOf(dyerAlone, 'dyed cloth')).toBe(true);
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Weavers/Textile workers' }], economicState: { primaryImports: ['Wool'] } }, 'dyed cloth')).toBe(false);
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Tanners' }] }, 'leather')).toBe(false); // "Short of hides."
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Tanners' }], economicState: { primaryImports: ['Hides'] } }, 'leather')).toBe(true);
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Saddler' }] }, 'leather')).toBe(false); // a saddler sews leather; it tans none
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Saddler' }], economicState: { primaryExports: ['Tanned leather'] } }, 'leather')).toBe(true);
+    // a smelter makes the iron and works none: it answers no forge line (r2r-metropolis-20's "The hammering of the forges" beside
+    // Blacksmiths and Specialized metalworkers "Short of iron." and a Smelter alone not short)
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Smelter' }], economicState: { primaryImports: ['Iron ore'] } }, 'ironwork')).toBe(false);
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Smelter' }, { name: 'Blacksmith' }], economicState: { primaryImports: ['Iron'] } }, 'ironwork')).toBe(true);
+    expect(GOOD_TRADES.ironwork.houses).not.toContain('smelter');
+    const cloth = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'cloth')).institutions;
+    expect([...CLOTH_KINDS.cloth, ...CLOTH_KINDS['dyed cloth']].sort()).toEqual(cloth.filter((/** @type {string} */ w) => !['tailor', 'clothier', 'draper'].includes(w)).sort());
+    const tanners = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'tanners')).institutions;
+    for (const w of GOOD_TRADES.leather.houses) expect(tanners).toContain(w);
+    // every cloth line that shows dyeing declares the dyer's kind, and every line that shows cloth made the makers'
+    const lines = ['lines', 'dominant'].flatMap((f) => /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'cloth'))[f])
+      .filter((/** @type {any} */ l) => l && typeof l === 'object' && !l.twinOf);
+    for (const l of lines) {
+      const t = String(l.text('{name}'));
+      if (/\bdye/i.test(t)) expect(l.needs, t).toContain('trade at work: dyed cloth');
+      else if (/\b(loom|fulling|hang drying)\b/i.test(t)) expect(l.needs, t).toContain('trade at work: cloth');
+    }
+  });
+
+  // SEAM-SCENES (2026-11-17, BRIEF-BAR6-SEAM item 6: B7 HELD BY A TEST). A twin never leaves a pool under three lines: over a fixed
+  // sample of sixty of the 720 (five of each size, two of each crisis), every arrival sense pool a town can reach admits three
+  // lines (an original, or its twin where the original is refused), or no fewer than it admitted at afa46d644 where that was
+  // already under three (FLOOR_AT_AFA: measured over the same seeds born at afa46d644, the base of the round BAR6; the fish
+  // lines want a fish food source by CENSUS-2f's design, the kilns' dominant pool BAR5-THINGS's unanswered kinds).
+  const FLOOR_SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+  const FLOOR_SAMPLE = [...FLOOR_SIZES.flatMap((z) => [0, 1, 2, 3, 4].map((i) => `r2r-${z}-${i}`)),
+    ...CRISES.flatMap((c, i) => [`r2s-${c}-${FLOOR_SIZES[i % 6]}-0`, `r2s-${c}-${FLOOR_SIZES[(i + 3) % 6]}-1`])];
+  const FLOOR_AT_AFA = Object.freeze(/** @type {Record<string, number>} */ ({
+  'r2r-thorp-0 fish.lines': 2,
+  'r2r-thorp-3 fish.lines': 2,
+  'r2r-hamlet-0 livestock.lines': 2,
+  'r2r-hamlet-2 smiths.dominant': 0,
+  'r2r-hamlet-2 arms.dominant': 1,
+  'r2r-village-0 fish.lines': 0,
+  'r2r-village-1 fish.lines': 0,
+  'r2r-village-4 smiths.dominant': 0,
+  'r2r-town-0 fish.lines': 0,
+  'r2r-city-0 fish.lines': 0,
+  'r2r-city-1 fish.lines': 0,
+  'r2r-city-1 kilns.dominant': 1,
+  'r2r-city-3 fish.lines': 0,
+  'r2r-city-4 kilns.dominant': 1,
+  'r2r-metropolis-0 kilns.dominant': 1,
+  'r2r-metropolis-1 fish.lines': 0,
+  'r2r-metropolis-2 fish.lines': 0,
+  'r2r-metropolis-3 fish.lines': 0,
+  'r2r-metropolis-4 fish.lines': 0,
+  'r2r-metropolis-4 faith.dominant': 2,
+  'r2s-famine-thorp-0 fish.lines': 2,
+  'r2s-famine-town-1 bread.dominant': 0,
+  'r2s-famine-town-1 fish.lines': 0,
+  'r2s-indebted-hamlet-0 smiths.dominant': 0,
+  'r2s-indebted-hamlet-0 kilns.dominant': 1,
+  'r2s-infiltrated-metropolis-1 fish.lines': 0,
+  'r2s-insurgency-town-0 faith.dominant': 2,
+  'r2s-mass_migration-city-0 kilns.dominant': 1,
+  'r2s-monster_pressure-metropolis-0 fish.lines': 0,
+  'r2s-monster_pressure-metropolis-0 faith.dominant': 1,
+  'r2s-monster_pressure-metropolis-0 market.lines': 2,
+  'r2s-monster_pressure-village-1 smiths.dominant': 0,
+  'r2s-occupied-town-1 faith.dominant': 1,
+  'r2s-occupied-town-1 market.lines': 2,
+  'r2s-politically_fractured-metropolis-1 fish.lines': 0,
+  'r2s-recently_betrayed-town-0 fish.lines': 0,
+  'r2s-religious_conversion-city-0 fish.lines': 0,
+  'r2s-slave_revolt-metropolis-0 fish.lines': 0,
+  'r2s-slave_revolt-metropolis-0 faith.dominant': 2,
+  'r2s-under_siege-hamlet-0 livestock.lines': 2,
+  'r2s-under_siege-city-1 market.lines': 2,
+  'r2s-wartime-village-0 smiths.dominant': 0,
+  'r2s-wartime-metropolis-1 faith.dominant': 2,
+  }));
+  /** the lines each reachable sense pool admits (the picker's own reach, `arrivalScene.js :: chooseSense`) @param {any} town */
+  const admittedByPool = (town) => {
+    const lower = (/** @type {unknown} */ v) => String(v ?? '').toLowerCase();
+    const atStart = (/** @type {string[]} */ fr, /** @type {string[]} */ names) => fr.some((f) => { const re = new RegExp(`(^|[^a-z])${f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`); return names.some((n) => re.test(n)); });
+    const names = nativeSemanticNames(town.institutions || []).map(lower).filter((/** @type {string} */ n) => !['access to ', 'traveling ', 'travelling '].some((p) => n.startsWith(p)));
+    const e = town.economicState || {};
+    const words = [...(e.primaryExports || []), ...(e.incomeSources || []).map((/** @type {any} */ x) => (typeof x === 'string' ? x : x?.source))].map(lower);
+    const facts = /** @type {any} */ (factsOf(town));
+    /** @type {Record<string, number>} */ const out = {};
+    for (const sense of /** @type {any[]} */ (ARRIVAL_SENSES)) {
+      if (sense.arcane && resolveGenerationWorldLaw(null, town?.config || {})?.magicEnabled !== true) continue;
+      if (!atStart(sense.institutions, names)) continue;
+      const dominant = sense.trade.length > 0 && sense.dominant.length > 0 && atStart(sense.trade, words);
+      if (!dominant && sense.lines.length === 0) continue;
+      const pool = sense[dominant ? 'dominant' : 'lines'];
+      const ok = (/** @type {any} */ l) => declarationAdmits(declarationOf(l), facts).admitted;
+      const twin = (/** @type {any} */ l) => (typeof l === 'object' ? pool.find((/** @type {any} */ t) => t && t.twinOf === String(l.text('{name}'))) : null);
+      out[`${sense.key}.${dominant ? 'dominant' : 'lines'}`] = pool.filter((/** @type {any} */ l) => !(l && typeof l === 'object' && l.twinOf))
+        .filter((/** @type {any} */ l) => ok(l) || (twin(l) && ok(twin(l)))).length;
+    }
+    return out;
+  };
+
+  it('B7: no arrival pool a town of the sample can reach admits fewer than three lines, or fewer than at afa46d644 (SEAM-SCENES item 6)', () => {
+    expect(FLOOR_SAMPLE.length).toBe(60);
+    for (const z of FLOOR_SIZES) expect(FLOOR_SAMPLE.some((s) => s.includes(`-${z}-`))).toBe(true);
+    for (const c of CRISES) expect(FLOOR_SAMPLE.some((s) => s.startsWith(`r2s-${c}-`))).toBe(true);
+    const reached = new Set();
+    const failures = collectSeedFailures(FLOOR_SAMPLE, (seed) => {
+      const town = BORN.get(seed);
+      if (!town) throw new Error(`${seed}: not born`);
+      const thin = Object.entries(admittedByPool(town)).filter(([pool, n]) => {
+        reached.add(pool);
+        const was = FLOOR_AT_AFA[`${seed} ${pool}`];
+        return n < 3 && (was === undefined || n < was);
+      });
+      if (thin.length) throw new Error(thin.map(([pool, n]) => `${pool} admits ${n} (afa46d644: ${FLOOR_AT_AFA[`${seed} ${pool}`] ?? '3 or more'})`).join(' | '));
+    });
+    expectNoSeedFailures(failures, 'B7 over the sample of sixty');
+    for (const pool of ['smiths.lines', 'smiths.dominant', 'tanners.dominant', 'cloth.lines', 'cloth.dominant']) expect(reached.has(pool), pool).toBe(true);
+  });
+
+  // the smiths' `lines` pool in a town whose only iron house is a Smelter short of iron (no smith house; bar0-town-occupied-rand-31 of
+  // the wide read kept ONE line of four at the joined line): three of its twins name no smith, so it keeps three
+  it('B7: the smiths\' lines keep three where the only iron house is a Smelter short of iron (no smith stands)', () => {
+    const base = BORN.get('r2r-village-0');
+    const town = { ...base, institutions: [{ name: 'Smelter' }], config: { ...base.config, nearbyResources: [], nearbyResourcesDepleted: [] },
+      economicState: { ...base.economicState, primaryImports: [], primaryExports: [], localProduction: [] }, resourceAnalysis: { ...base.resourceAnalysis, gaps: [] } };
+    const facts = /** @type {any} */ (factsOf(town));
+    expect(facts.hasInstitution('smith')).toBe(false);
+    expect(tradeAtWorkOf(town, 'ironwork')).toBe(false);
+    expect(admittedByPool(town)['smiths.lines']).toBeGreaterThanOrEqual(3);
   });
 
   it('TW1 (the chair, 2026-11-16): where EVERY smith is marked short, the forge line is refused and its twin keeps the slot', async () => {
