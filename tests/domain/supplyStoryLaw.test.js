@@ -54,6 +54,7 @@ import { GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, sourceStoryOf } 
 import { ALSO_USES } from '../../src/domain/facts/houseKinds.js';
 import { HOUSE_TRADE_INPUT, houseDependenceOf, INPUT } from '../../src/data/crisisDependence.js';
 import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
+import { subsumeTradeGoods } from '../../src/domain/region/goodsCatalog.js';
 import { rowShortOf } from '../../src/domain/display/crisisStoppedRow.js';
 import { markOnPage } from '../../src/pdf/lib/crisisMarksOnPage.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
@@ -249,6 +250,9 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
       const s = town(seed);
       const again = importsBroughtAtBirth(s, s._seed);
       if (again.length) found.push(`${seed} · the birth over its own product brings ${again.join(', ')}`);
+      // BIRTH-3 (the chair's AMENDMENT 1 (2)): no second word of one canonical good on the imports (57 towns of the 720 at the base)
+      const imports = s.economicState?.primaryImports || [];
+      if (subsumeTradeGoods(imports).length !== imports.length) found.push(`${seed} · two words of one good on the imports`);
       const a = j(supplyReading(s));
       // the birth's pick for every house is the story read back from the record it wrote
       if (j(supplyReading(birthPicksOn(s, s._seed))) !== a) found.push(`${seed} · the birth's pick and the record's story`);
