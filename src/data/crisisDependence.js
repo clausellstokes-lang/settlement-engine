@@ -1620,6 +1620,15 @@ export const HOUSE_TRADE_INPUT = Object.freeze({
 export const HOUSE_NEED_INPUT = Object.freeze({ butchers_3_8: 'livestock', apothecary_established: 'herbs' });
 
 /**
+ * LEFT-MARKS item 4 (L16, rule 8i.surplus; the sixth chair's BRIEF-LEFT, 2026-11-17, the auditor's cure; vetoable by the
+ * owner): A HOUSE THAT WORKS ONLY A SURPLUS ("Converts barley into malt for brewing. … Requires grain surplus.", "… one that
+ * only runs when grain is in surplus") is short where the page's food line is short, in a crisis or not
+ * (`crisisStoppedRow.js :: housesShortOfInput`): catalogue id -> the good as its mark names it.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const SURPLUS_HOUSES = Object.freeze({ maltster: 'grain' });
+
+/**
  * THE REMEDIES' SHARES AND THEIR HOUSES (BAR5-MARKS, the same rule): an income share of the remedies trade (the economy's
  * titles) reads its herb houses as `INCOME_TRADE_HOUSES` reads a resource trade's (`crisisStoppedRow.js ::
  * incomeHouseKind`): where every live house of the trade carries a mark, the share takes the mildest of them. Apart from

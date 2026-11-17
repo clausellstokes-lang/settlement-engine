@@ -76,7 +76,9 @@ import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
-import { houseDependenceOf } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table
+import { houseDependenceOf, SURPLUS_HOUSES } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table; LEFT-MARKS item 4: the houses of a surplus
+import { foodRowShown } from './foodRowShown.js'; // LEFT-MARKS item 4: the page's food line, as the Economics tab prints it
+import { carriersOf } from './foodCarrier.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import { serviceRowsOf } from '../dossier/entityLinks.js';
@@ -630,8 +632,28 @@ export function housesShortOfInput(settlement) {
   // house and so no gap line names it (a cobbler's guild, a mine): the page reads it as the fact does
   const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement));
   if (venture && !out.has(venture.name)) { const fact = housesShortOf(settlement).get(venture.name); if (fact) out.set(venture.name, fact); }
+  // LEFT-MARKS item 4 (L16, rule 8i.surplus; the auditor's cure): A HOUSE THAT WORKS ONLY A SURPLUS (`SURPLUS_HOUSES`: the
+  // maltster, "Requires grain surplus.") is short where the page's food line is short ("Short: N lbs/day", the Economics
+  // tab's row: `foodRowShown` with the carriers the tab reads), in a crisis or not: "Short of grain.". Read off the public
+  // fields the shared page keeps (the food record, the route, the roster: N4); the gate is `rowShortOf`'s (its INPUT)
+  if (foodLineShort(settlement)) for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
+    const name = inst && typeof inst.name === 'string' ? inst.name : '';
+    if (!name || isCustom(inst) || out.has(name)) continue;
+    const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(name) || '');
+    if (Object.prototype.hasOwnProperty.call(SURPLUS_HOUSES, id)) out.set(name, SURPLUS_HOUSES[id]);
+  }
   SHORT_HOUSES.set(settlement, out);
   return out;
+}
+
+/**
+ * LEFT-MARKS item 4: whether the page's food line is short (the Economics tab's "Short: N lbs/day": `foodRowShown` handed
+ * the carriers the tab reads, `foodCarrier.js :: carriersOf`). @param {object} settlement @returns {boolean}
+ */
+function foodLineShort(settlement) {
+  const s = /** @type {Parameters<typeof foodRowShown>[0] & Parameters<typeof carriersOf>[0]} */ (settlement);
+  const row = foodRowShown(s, !!carriersOf(s, /** @type {Parameters<typeof carriersOf>[1]} */ (s?.economicState)));
+  return !!row && row.fb.deficit > 0;
 }
 
 /* THE THIRD READING (SV6), `housesOnSpentGround`, moved VERBATIM to the fact `facts/houseInputAtHand.js` (BAR4-SCENES-2, the

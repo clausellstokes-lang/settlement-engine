@@ -10,8 +10,12 @@
  *         r2r-village-13, "Short of its materials." at the base, is fed), and game is the butchers' stock (the butchers of
  *         r2r-metropolis-19, beside "Game and hides" on the imports, are at work). Each mark prints alike on the owner's
  *         record, its public projection and the share veil (N4).
- * POSITIVE CONTROL: at the base (e0242a12a) the two houses print bare and the apothecary of r2r-village-13 is marked: the
- * file is red there.
+ *   (L16) THE HOUSE THAT WORKS ONLY A SURPLUS (rule 8i.surplus; the auditor's cure): the maltster ("Requires grain surplus.")
+ *         is "Short of grain." where the page's food line is short ("Short: N lbs/day"), in a crisis or not: the four
+ *         maltsters of the 720 on a short food line (r2r-hamlet-27, calm; r2s-under_siege-hamlet-1, -3; r2s-wartime-village-3)
+ *         are marked, the ten on a food line that is not short are not; alike on the three views (N4).
+ * POSITIVE CONTROL: at the base (e0242a12a) the two houses print bare, the apothecary of r2r-village-13 is marked and the
+ * four maltsters print bare: the file is red there.
  */
 import { describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -79,4 +83,17 @@ describe('L25 · SEAM-ECON\'s houses: short where the page says their good is no
     }), 'every census town is born and read');
     expect(marked.sort(), 'the houses of the table marked short of their good').toEqual(['r2r-town-54 · Butchers (3-8)', 'r2s-religious_conversion-town-2 · Apothecary (established)']);
   }, 1_800_000);
+});
+
+describe('L16 · the house that works only a surplus is short where the page\'s food line is short', () => {
+  const SHORT = ['r2r-hamlet-27', 'r2s-under_siege-hamlet-1', 'r2s-under_siege-hamlet-3', 'r2s-wartime-village-3'];
+  const FED = ['r2r-hamlet-31', 'r2r-hamlet-44', 'r2r-hamlet-56', 'r2r-village-22', 'r2r-village-42', 'r2s-monster_pressure-hamlet-2',
+    'r2s-politically_fractured-village-0', 'r2s-politically_fractured-village-1', 'r2s-slave_revolt-hamlet-2', 'r2s-succession_void-hamlet-1'];
+  test('the four maltsters on a short food line read "Short of grain."; the ten on a food line that is not short do not (every row, the three views)', () => {
+    expectNoSeedFailures(collectSeedFailures([...SHORT, ...FED], (seed) => {
+      const mark = String(markOf(town(seed), 'Maltster'));
+      expect(mark.includes('NO SUCH HOUSE') || mark.includes('the views differ'), `${seed}: ${mark}`).toBe(false);
+      expect(mark.includes('Short of grain.'), `${seed}: the maltster's mark ${mark}`).toBe(SHORT.includes(seed));
+    }), 'L16 rows');
+  }, 600_000);
 });
