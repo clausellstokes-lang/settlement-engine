@@ -52,7 +52,7 @@ import { render, cleanup } from '@testing-library/react';
 import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf, warIronHookOutsideWar } from '../../src/domain/facts/houseInputAtHand.js';
 import { GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, sourceStoryOf } from '../../src/domain/facts/supplyStory.js';
 import { ALSO_USES } from '../../src/domain/facts/houseKinds.js';
-import { HOUSE_TRADE_INPUT, houseDependenceOf, INPUT } from '../../src/data/crisisDependence.js';
+import { HOUSE_TRADE_INPUT } from '../../src/data/crisisDependence.js';
 import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
 import { subsumeTradeGoods } from '../../src/domain/region/goodsCatalog.js';
 import { rowShortOf } from '../../src/domain/display/crisisStoppedRow.js';
@@ -139,6 +139,7 @@ function lawInstances(seed, s) {
     }
     if (story.story === 'idle') {
       if (!short.has(inst.name)) bad('L1 idle, unmarked', inst.name);
+      if (!/Short of /.test(mark)) bad('L1 idle, no short mark on its card (AMENDMENT 2 (B))', inst.name);
       if (!TAKERS.has(id) && RUNS_ON_BOUGHT[id] && listHolds(s, RUNS_ON_BOUGHT[id])) bad('L1 idle, its word on the imports', inst.name);
       if (story.ground && !depleted.has(story.ground)) bad('L1 idle, its ground not under Depleted', inst.name);
       if (!story.ground) bad('L2 never had it and buys nothing', inst.name);
@@ -151,7 +152,8 @@ function lawInstances(seed, s) {
     const mark = rowMarkText(s, 'house', inst);
     // BIRTH-3 (2026-11-17, the second reader's M5 (iii), H2): the mark is never empty where the house's row takes an input
     // mark (a null mark was accepted before), and never "Short of …"
-    if (houseDependenceOf(inst).includes(INPUT) && !/^(?:Abandoned|Failing): a failed venture\.$/.test(mark ?? '')) bad('L1 venture, not its mark', venture.name);
+    // BIRTH-3 (AMENDMENT 2 (B), 2026-11-17): whatever the crisis table's class of its row (a peat cutter is NONE there)
+    if (!/^(?:Abandoned|Failing): a failed venture\.$/.test(mark ?? '')) bad('L1 venture, not its mark', venture.name);
     if (/Short of/.test(mark ?? '')) bad('L1 venture, marked short', venture.name);
     if (!lines.some((l) => /stands? abandoned, a venture of an earlier time|(?:is|are) failing: no /.test(l))) bad('L1 venture, no line', venture.name);
     if (lines.some((l) => /is worked out: /.test(l) && l.toLowerCase().includes(venture.name.toLowerCase().replace(/\s*\([^)]*\)/g, '')))) bad('L1 venture, a worked-out line beside its line (M1)', venture.name);
@@ -296,10 +298,9 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
       const inst = liveInstitutions(s).find((i) => i?.name === venture.name);
       const services = Object.values(s.availableServices || {}).flat().filter((/** @type {any} */ x) => x && typeof x === 'object' && x.institution === venture.name);
       const gated = [rowShortOf(s, 'house', inst), ...services.map((/** @type {any} */ x) => rowShortOf(s, 'service', x))].filter(Boolean);
-      if (!gated.length) return; // no row of the house takes an input mark (a peat cutter's): nothing would print the short mark either
       const MARK = /(?:Abandoned|Failing): a failed venture\./;
       if (!gated.every((m) => MARK.test(String(m)))) found.push(`${seed} · the gate: ${gated.join(' | ')}`);
-      if (houseDependenceOf(inst).includes(INPUT) && !MARK.test(String(markOnPage(s, 'house', inst)))) found.push(`${seed} · the PDF's reading: ${markOnPage(s, 'house', inst)}`);
+      if (!MARK.test(String(markOnPage(s, 'house', inst)))) found.push(`${seed} · the PDF's reading: ${markOnPage(s, 'house', inst)}`);
       const page = render(React.createElement(InstitutionsTab, { settlement: s })).container.textContent || '';
       cleanup();
       const svcPage = render(React.createElement(ServicesTab, { services: s.availableServices, settlement: s, narrativeNote: null })).container.textContent || '';
@@ -307,7 +308,7 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
       rendered++;
       if (!MARK.test(page) && !MARK.test(svcPage)) found.push(`${seed} · ${venture.name}: no tab prints its mark`);
     }), 'the ventures of the census');
-    expect(rendered, 'ventures whose rows take an input mark, rendered (the anchor)').toBeGreaterThan(4);
+    expect(rendered, 'every venture of the census, rendered (the anchor)').toBeGreaterThan(9);
     expect(found, 'a failed venture whose mark is empty on a tab or in the PDF').toEqual([]);
   }, 900_000);
 

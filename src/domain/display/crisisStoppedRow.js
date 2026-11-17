@@ -69,7 +69,8 @@
  */
 import { resourceGapLines } from './validationOnPage.js';
 import { housesOnSpentGround, housesShortOf, housesWantingTradeInput, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
-import { STORY_OF_RECORD, ventureMarkText } from '../facts/supplyStory.js'; // BIRTH-2: the failed venture's mark; BIRTH-3: the whole record's story
+import { STORY_OF_RECORD, sourceStoryOf, ventureMarkText } from '../facts/supplyStory.js'; // BIRTH-2: the failed venture's mark; BIRTH-3: the whole record's story
+import { resourceShortageImport } from '../resourceSemantics.js'; // BIRTH-3: the spent ground's word, handed to the source story
 import { crisisOf } from '../facts/crisisKind.js';
 import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach.js'; // BAR5-MARKS (WM1): what the war takes, one home
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
@@ -648,15 +649,29 @@ export function housesShortOfInput(settlement) {
 export function rowShortOf(settlement, kind, row) {
   if (!row || typeof row !== 'object' || isCustom(row)) return null;
   const deps = kind === 'house' ? houseDependenceOf(row) : kind === 'service' ? serviceRowDependence(settlement, row) : NONE;
-  if (!deps.includes(INPUT)) return null;
   const house = kind === 'house' ? row.name : row.institution;
   if (typeof house !== 'string' || !house) return null;
+  // BIRTH-3 (the chair's AMENDMENT 2 (B)): the supply rule's own reading passes the gate whatever the crisis table's class of
+  // the row (a peat cutter is `NONE` there): a source house its story leaves idle on a spent ground, and the failed venture
+  if (!deps.includes(INPUT) && !supplyToldShort(/** @type {object} */ (settlement), house)) return null;
   // BIRTH-3 (BR6; the second reader's H2): THE FAILED VENTURE PASSES THE SAME GATE AS THE SHORT MARK, its own mark in place of
   // "Short of ..." ("Abandoned: a failed venture." / "Failing: a failed venture."), so every caller that asks this reading
   // before the mark (the tabs, the person's card, the PDF) prints it where the short mark would
   const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement));
   if (venture && venture.name === house) return ventureMarkText(venture);
   return housesShortOfInput(settlement).get(house) ?? null;
+}
+
+/**
+ * BIRTH-3 (AMENDMENT 2 (B)): whether the supply rule itself tells this house short: the failed venture, or a source house its
+ * story leaves idle on a used-up ground (`supplyStory.js :: sourceStoryOf`, read off the stored record).
+ * @param {object} settlement @param {string} house
+ */
+function supplyToldShort(settlement, house) {
+  if (ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement))?.name === house) return true;
+  const inst = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)).find((i) => i?.name === house);
+  const story = inst && !isCustom(inst) ? sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (settlement), inst, resourceShortageImport) : null;
+  return story?.story === 'idle' && !!story.ground;
 }
 
 /** The failed venture's two marks (`supplyStory.js :: ventureMarkText`), which `shortMarkText` prints as they are. */

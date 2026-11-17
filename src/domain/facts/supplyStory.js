@@ -325,15 +325,16 @@ export function sourceStoryOf(record, inst, shortageWord) {
     // the plain word on the list answers too ("Timber" bought for the cooper is the burner's cordwood)
     return isBought(record, word, true) || importsHold(record, RUNS_ON_BOUGHT[id]) ? { story: 'bought', ground, word } : { story: 'idle', ground, word: '' };
   };
-  // the record's own chains on the house's own grounds speak first (a mine whose every chain works its spent coal seam is worked
-  // out, whatever other seam of its kind lies near); a chain of another ground does not hide its own (the audit's c1: a live coal
-  // chain hid six peat cutters' spent marsh)
+  // the record's own chains on the house's own grounds speak first; a chain of another ground does not hide its own (the audit's
+  // c1: a live coal chain hid six peat cutters' spent marsh). BIRTH-3 (the chair's AMENDMENT 2 (A)): A HOUSE THAT WORKS SEVERAL
+  // GROUNDS IS WORKED OUT ONLY WHEN EVERY GROUND OF ITS OWN IS SPENT: a mine whose one named chain is a spent coal seam, beside
+  // a live iron ground, is at work (17 such houses of the 720 read worked out before)
   const chains = arr(/** @type {{ activeChains?: unknown } | null | undefined} */ (record?.economicState)?.activeChains)
     .map((c) => /** @type {{ resourceKey?: unknown, status?: unknown, processingInstitutions?: unknown }} */ (c))
     .filter((c) => !!c && own.includes(str(c.resourceKey)) && all.has(str(c.resourceKey)) && arr(c.processingInstitutions).includes(inst?.name)); // a ground on the record (an entrepot's chain of goods passing through is none)
   if (chains.length) {
     const worked = chains.filter((c) => !spent.has(str(c.resourceKey))); // a spent ground is spent on the page, the one reader's reading (a chain kept by magic feeds no house of it: r2s-monster_pressure-village-2)
-    if (worked.length) return { story: 'local', ground: '', word: '' };
+    if (worked.length || own.some((g) => live.has(g))) return { story: 'local', ground: '', word: '' };
     return usedUp(str(chains.map((c) => str(c.resourceKey)).sort()[0]));
   }
   if (own.some((g) => live.has(g))) return { story: 'local', ground: '', word: '' };
