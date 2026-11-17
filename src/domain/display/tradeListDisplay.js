@@ -792,11 +792,13 @@ export function chainOutputsShown(chain, settlement) {
   const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
     .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
   const spare = foodToSpareHere(settlement);
-  const short = new Set([...housesShortOf(settlement).keys()].map(fold)); // SEAM-ECON item 8 (L3.outputs)
+  // SEAM-ECON item 8 (L3.outputs), read since LEFT-CHAIN L5 (2026-11-17) as the file's two other readers read it
+  // (`everyMakerShortHere`: the page's own mark): the fact's wider short set held houses the page prints bare (193 of the
+  // 720), and an output left the card beside a maker printed unmarked
   return outputs.filter((o) => {
     const good = fold(tradeMarkOf(o).label).replace(/_/g, ' ');
     if (!spare && (FOOD_EXPORT_OUTPUTS.has(good) || isFoodSurplusGood(good))) return false; // BAR3-LABELS-3 item 0
-    return !NOT_A_GOOD_HERE.has(good) && ((chainMakesHere(chain, good, settlement, roster) && !everyMakerShort(good, roster, short, settlement))
+    return !NOT_A_GOOD_HERE.has(good) && ((chainMakesHere(chain, good, settlement, roster) && !everyMakerShortHere(settlement, good))
       || chainCarriesHere(chain, good, roster));
   });
 }

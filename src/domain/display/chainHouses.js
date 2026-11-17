@@ -15,6 +15,10 @@
  */
 import { institutionHouseLabel } from './institutionDisplayName.js';
 import { resourceDisplayName } from './resourceDisplayName.js';
+import { idOfHouse, sourceStoryOf } from '../facts/supplyStory.js';
+import { SOURCE_GROUNDS } from '../facts/houseKinds.js';
+import { resourceShortageImport } from '../resourceSemantics.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /** A regular-expression literal of a plain string. @param {string} s */
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -34,11 +38,23 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
  * OVERLAP, NAMED FOR THE JOIN: the third leaves lane holds a reader of "which roster houses finish a good" (its
  * finisher rule, on its own branch, not on this tree); this leaf answers the chain card's narrower question from
  * the names alone and copies none of it: the seat that joins the lanes makes them one. Pure: no draw, no write; the record does not move.
+ * LEFT-CHAIN L18, THE CHAIR'S RULING BR10 (3) (2026-11-17; the seventeen mines of the census's 720): A CHAIN CARD DOES NOT
+ * LIST, AS WORKING A SPENT GROUND, A SOURCE HOUSE THAT THE SUPPLY RULE READS AT WORK ON ANOTHER GROUND. Handed the card's
+ * chain and its town (`onCard`), a card whose ground is spent (`resourceDepleted`, the "(depleted)" its From prints) leaves
+ * out a source house WHOSE OWN GROUNDS (`houseKinds.js :: SOURCE_GROUNDS`) HOLD THE CARD'S SPENT GROUND and whose story is
+ * `local` (`supplyStory.js :: sourceStoryOf`: at work, on another ground of its own: a mine on spent iron beside live coal).
+ * BR10 (3) AMENDED BY THE CHAIR (2026-11-17, 19:09 UTC: the narrower reading is the rule): a source house that makes the
+ * chain's goods on a ground of its own (a charcoal burner on a spent coal card, a salt works on a spent fishery's card, a
+ * quarry on a spent mining card) is true on the card and stays. A source house on its only, spent ground (worked out, or
+ * buying in) is listed as before, and so is every house that is no source house. Without `onCard` the reading is the one
+ * before. Pure: no draw, no write; the stored `processingInstitutions` do not move.
  * @param {ReadonlyArray<unknown>} patterns the chain's `processingInstitutions`
  * @param {ReadonlyArray<unknown>} instNames the settlement's institution names, raw
+ * @param {{ chain?: unknown, town?: unknown } | null} [onCard] the card's chain (as the record holds it) and its town
  * @returns {Array<{ name: string, present: boolean }>}
  */
-export function chainHousesOf(patterns, instNames) {
+export function chainHousesOf(patterns, instNames, onCard = null) {
+  const atWorkElsewhere = workersOfAnotherGround(onCard);
   const rawNames = (Array.isArray(instNames) ? instNames : []).map((n) => String(n || '')).filter(Boolean);
   /** @type {Array<{ name: string, present: boolean }>} */
   const out = [];
@@ -59,6 +75,7 @@ export function chainHousesOf(patterns, instNames) {
       houses = own.length ? own : ofTrade;
     }
     for (const house of houses) {
+      if (atWorkElsewhere(house)) continue;
       const name = institutionHouseLabel(house);
       if (seen.has(name)) continue;
       seen.add(name);
@@ -66,6 +83,28 @@ export function chainHousesOf(patterns, instNames) {
     }
   }
   return out;
+}
+
+/**
+ * BR10 (3)'s test of one roster house on one card (see `chainHousesOf`): true where the card's ground is spent, the house
+ * is a source house of that ground, and the supply rule reads it at work. Without a chain and its town: never.
+ * @param {{ chain?: unknown, town?: unknown } | null | undefined} onCard
+ * @returns {(house: string) => boolean}
+ */
+function workersOfAnotherGround(onCard) {
+  const chain = /** @type {{ resourceDepleted?: unknown, resourceKey?: unknown } | null} */ (onCard && typeof onCard.chain === 'object' ? onCard.chain : null);
+  const town = /** @type {Parameters<typeof liveInstitutions>[0] | null} */ (onCard && onCard.town && typeof onCard.town === 'object' ? onCard.town : null);
+  if (!chain || !town || chain.resourceDepleted !== true || typeof chain.resourceKey !== 'string' || !chain.resourceKey) return () => false;
+  const ground = chain.resourceKey;
+  // the live roster (a ruined or closed house is at work on no ground): the ruin filter's one reading
+  const roster = /** @type {Array<{ name?: unknown, catalogId?: unknown }>} */ (liveInstitutions(town));
+  return (house) => {
+    const inst = roster.find((i) => !!i && typeof i === 'object' && i.name === house);
+    if (!inst) return false;
+    const id = idOfHouse(inst);
+    if (!Object.prototype.hasOwnProperty.call(SOURCE_GROUNDS, id) || !SOURCE_GROUNDS[id].includes(ground)) return false; // a house of that ground (BR10 (3) amended)
+    return sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (town), inst, resourceShortageImport)?.story === 'local';
+  };
 }
 
 /**

@@ -15,7 +15,7 @@
  * The Economics tab calls this leaf, and the Resources tab its `fullCardWordUnderSiege` (BAR3-LABELS-3 L3b). Pure: no
  * randomness, no clock, no write.
  */
-import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, crisisOfMarkKind, markedDescription, ordinaryTimesLine, STOPPED_WORD, incomeShortOf, shortMarkText, rowMarkText, crisisNounOf } from './crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, crisisOfMarkKind, markedDescription, ordinaryTimesLine, STOPPED_WORD, incomeShortOf, shortMarkText, rowMarkText, crisisNounOf, rowShortOf } from './crisisStoppedRow.js';
 import { liveHouseOf } from '../facts/presence.js'; // BAR3-LABELS-2 L3: the roster house a chain's catalogue house answers to
 import { serviceRowsOf } from '../dossier/entityLinks.js'; // BAR5-CHAINS CC1: the service rows as the Services and Institutions tabs read them
 
@@ -232,7 +232,7 @@ const SIEGE_CURTAILED = 'under_siege:curtailed';
 /**
  * An income share's description as the tab prints it: the leaf's mark, then the description of ordinary times.
  * @param {object | null | undefined} town @param {{ source?: unknown, desc?: unknown }} src `economicState.incomeSources[]`
- * @param {((desc: unknown, town: any) => string | null) | null} [ordinaryOf] the trade's ordinary line in place of a stored short twin, or null
+ * @param {((desc: unknown, town: any, reading?: { forgeIdle: boolean }) => string | null) | null} [ordinaryOf] the trade's ordinary line in place of a stored short twin, or null
  * @returns {string}
  */
 export function incomeDescShown(town, src, ordinaryOf = null) {
@@ -240,9 +240,42 @@ export function incomeDescShown(town, src, ordinaryOf = null) {
   // BAR7-ECON after the second reader (the chair's point (1)): a stored short twin prints only under a mark; an unmarked share
   // prints its trade's ordinary line, given by the caller (`economy/incomeLineSiblings.js :: ordinaryIncomeLineOf`: the texts
   // live in the generator, which this layer does not import, `tests/build/domainGeneratorsBoundary.test.js`)
-  const ordinary = mark === null && ordinaryOf ? ordinaryOf(src?.desc, town) : null;
+  // LEFT-CHAIN L7: the caller is told whether the share's working houses stand idle beside a mine at work (`forgeIdleHere`)
+  const ordinary = mark === null && ordinaryOf ? ordinaryOf(src?.desc, town, { forgeIdle: forgeIdleHere(town, src) }) : null;
   return markedDescription(mark, ordinary ?? src?.desc);
 }
+
+/** The metal share's title (`crisisDependence.js :: INCOME_TRADE_HOUSES`). */
+const METAL_SHARE = 'Iron & Metalwork';
+
+/**
+ * THE METAL SHARE'S FORGE STANDS IDLE BESIDE A MINE AT WORK (LEFT-CHAIN L7; the chair's BRIEF-LEFT, 2026-11-17; vetoable by
+ * the owner). "Iron & Metalwork · Metal is smelted or worked here." printed bare where every smelting or working house of the
+ * trade is marked short and the share kept no mark only because a mine of the trade, at work, is unmarked (r2r-metropolis-24,
+ * r2s-monster_pressure-metropolis-2: the blacksmiths, the metalworkers and the smelter short of iron, the mine digging coal).
+ * The share's houses are its trade's live catalogue houses (`INCOME_TRADE_HOUSES`, read only); a mine is told from a working
+ * house by the houses' kinds (`houseKinds.js :: isSourceHouse`, read only): true where at least one working house stands,
+ * EVERY working house carries the page's short mark (`crisisStoppedRow.js :: rowShortOf`, the mark its card prints) and a
+ * source house of the trade carries no mark. No mark is invented and the mine is not marked. Display only.
+ * @param {object | null | undefined} town @param {{ source?: unknown } | null | undefined} src `economicState.incomeSources[]`
+ * @returns {boolean}
+ */
+export function forgeIdleHere(town, src) {
+  if (!town || typeof town !== 'object' || String(src?.source ?? '').trim() !== METAL_SHARE) return false;
+  const ids = INCOME_TRADE_HOUSES[METAL_SHARE] || [];
+  const idOf = (/** @type {Record<string, unknown>} */ i) => String((typeof i.catalogId === 'string' && i.catalogId) || catalogIdForName(String(i.name)) || '');
+  const houses = /** @type {Array<Record<string, unknown>>} */ (liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (town)))
+    .filter((i) => !!i && typeof i.name === 'string' && !!i.name && !i.custom && ids.includes(idOf(i)));
+  const workers = houses.filter((i) => !isSourceHouse(idOf(i)));
+  const sources = houses.filter((i) => isSourceHouse(idOf(i)));
+  if (!workers.length || !sources.length) return false;
+  if (!workers.every((i) => rowShortOf(town, 'house', i) !== null)) return false;
+  return sources.some((i) => rowShortOf(town, 'house', i) === null && rowStoppedBy(town, 'house', i) === null);
+}
+import { INCOME_TRADE_HOUSES } from '../../data/crisisDependence.js';
+import { isSourceHouse } from '../facts/houseKinds.js';
+import { catalogIdForName } from '../../data/institutionalCatalog.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /**
  * Every mark an income share prints, in the leaf's order (`rowMarkText`'s): its crisis's (`incomeKindShown`), then its houses'

@@ -129,7 +129,7 @@ const OutputNode = ({ label, isExport }) => {
  *   institutions: Array<{name: string, present: boolean}>, importedUpstream: string[],
  *   upstreamNote: null}}
  */
-export function chainFlowFacts(chain, instNames = [], printed = null) {
+export function chainFlowFacts(chain, instNames = [], printed = null, town = null) {
   return {
     // R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (domain/display/chainHouses.js);
     // with the town, a toll renamed by its access names that access (R2-CODE-B-7, composed with F1).
@@ -137,7 +137,9 @@ export function chainFlowFacts(chain, instNames = [], printed = null) {
     resourceDepleted: !!chain?.resourceDepleted,
     // Which processing institutions are actually present? R2-CODE-B item 1: each named once, by the
     // seam's house label (domain/display/chainHouses.js), never a rank's count range the roster lacks.
-    institutions: chainHousesOf(chain?.processingInstitutions, instNames),
+    // LEFT-CHAIN L18 (BR10 (3)): handed the town, a card on a spent ground lists no source house the supply rule reads at
+    // work on another ground of its own (chainHouses.js :: chainHousesOf); without it, the reading before.
+    institutions: chainHousesOf(chain?.processingInstitutions, instNames, town ? { chain, town } : null),
     // R2-CODE-B-SIDE item 2 (#366, #799 "Import: Food Processing" beside mills and a brewery; #699 "Precious
     // metal veins · Import: Mining & Coinage"): `upstreamMissing` holds the CHAIN IDS the generator found not
     // running here, and a chain's label is a category of work, not a good. The From line names a good or a
