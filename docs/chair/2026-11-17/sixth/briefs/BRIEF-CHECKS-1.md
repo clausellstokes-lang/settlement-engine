@@ -28,7 +28,8 @@ You run the whole check, step by step, at a tree, and publish what it found by n
 
 Your one branch is `lane/checks-2026-11-17`. The first time:
 `git worktree add -b lane/checks-2026-11-17 /home/user/pub origin/lane/chair-2026-11-08`, and `node_modules` there by
-`cp -al` as above (the push hook needs it). For each run copy into `docs/chair/2026-11-17/checks/<label>/`:
+`cp -al` as above, THEN `npx husky` THERE (it writes the hook directory `.husky/_`: without it the push hook does not
+run at all; `ls .husky/_` must list `pre-push` before you push). For each run copy into `docs/chair/2026-11-17/checks/<label>/`:
 `summary.tsv`, `names.txt`, `counts.txt`, `head.txt`, `tree.src.txt`, `tree.tests.txt`, and, for every step with a
 non-zero exit OTHER THAN the `vitest-*` steps, the last 150 lines of its log as `<step>.tail.txt`. Commit with the
 message `checks(<label>): the whole check by name`, then a plain `git push -u origin lane/checks-2026-11-17` from

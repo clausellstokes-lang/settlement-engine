@@ -54,7 +54,8 @@ a fault: print the lines; the chair rules.
 
 Publish: branch `lane/measure-2026-11-17`, created by
 `git worktree add -b lane/measure-2026-11-17 /home/user/pub origin/lane/chair-2026-11-08` (`node_modules` there by
-`cp -al`; the push hook needs it); files under `docs/chair/2026-11-17/measure/<L|M>/`: the runners' JSON outputs
+`cp -al`, THEN `npx husky` THERE: it writes the hook directory `.husky/_`, without which the push hook does not run;
+`ls .husky/_` must list `pre-push` before you push); files under `docs/chair/2026-11-17/measure/<L|M>/`: the runners' JSON outputs
 gzipped, their logs, and `TABLE.md` (the table and the instances). Commit, then a plain
 `git push -u origin lane/measure-2026-11-17` (the hook runs three gates, about four minutes).
 
