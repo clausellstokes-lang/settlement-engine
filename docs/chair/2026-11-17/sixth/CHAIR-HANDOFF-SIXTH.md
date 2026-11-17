@@ -12,76 +12,86 @@ judgement to you and give you any and all permissions you may need or want." The
 section 1 and THE ONE LONG PARAGRAPH "THE STATE AT 2026-11-17 13:54 UTC" (everything in it stands except what section 2
 below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force); this file.
 
-## 0. THE STATE AT 17:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; where a later line of section 7 differs, the later line governs)
+## 0. THE STATE AT 19:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; it REPLACES the 17:04 state; the lines of section 7 written after 19:04 govern where they differ)
 
 **THE LINE.** `lane/join-2026-11-14` stands at ed1d43529bdfcf6e513bb2eb234c5a4c0305746d (point 32). THE CANDIDATE FOR POINT 33 is
-`lane/point33-candidate-2026-11-17` at e0242a12a82285a736f9997360ec1e8a5fbd3568 (the chair's signed merge of BIRTH-3's 8b0506eae
-onto ed1d43529; tree 4a9735d2f9ed4ef8e21aa19ec145de2e719e11f0). IT IS NOT LANDED. TO LAND IT (the chair is the line's only
-writer now): when the whole check's comparison is read (below) and shows nothing new but the named reds, from
-`/home/user/line` (a checkout of the candidate branch with hooks): `git push origin e0242a12a82285a736f9997360ec1e8a5fbd3568:refs/heads/lane/join-2026-11-14`
-(a fast-forward: its first parent is the line's tip), read the line back (`git ls-remote`), then one docs commit on the
-line recording point 33 (the form of `docs/chair/2026-11-14/JOIN-17-HANDBACK.md`'s rows), and tell the owner one plain line.
+`lane/point33-candidate-2026-11-17` at e0242a12a82285a736f9997360ec1e8a5fbd3568 (the owner's supply rule, BIRTH-3's 8b0506eae, merged
+on ed1d43529; tree 4a9735d2f9ed4ef8e21aa19ec145de2e719e11f0). IT IS NOT LANDED. The two whole checks are compared BY NAME
+(section 7, 18:5x: `checks/candidate-e0242a12a/` on this lane against `lane/checks-2026-11-17 :: checks/line-ed1d43529/`):
+15 reds leave, 10 are the candidate's own; nine are assigned (LEFT-MARKS, LEFT-KEYS, DEBT-2). ONE HOLDS THE LANDING:
+`tests/property/editCorpusRatchet.test.js` arm A5 (an edit chain is deterministic; undo then re-edit reproduces the
+town) died at its own 600 s limit on the chair's machine and gave NO VERDICT. CHECKS-1 runs a scratch copy with a
+one-hour limit at the candidate and messages every arm's status and time at both trees. IF A5 IS GREEN THERE: LAND, from
+`/home/user/line` (a checkout of the candidate with hooks): `git push origin e0242a12a82285a736f9997360ec1e8a5fbd3568:refs/heads/lane/join-2026-11-14`
+(a fast-forward), read the line back (`git ls-remote`); then in a checkout of the line `git merge --no-ff
+origin/lane/bar8-base-2026-11-17` (2f8f64f7b: both audits' detectors and runners, nothing under `src/`: POINTS 34 AND 35),
+one docs commit recording the three points (the form of `docs/chair/2026-11-14/JOIN-17-HANDBACK.md`'s rows), push, read
+back, one plain line to the owner; if its time at the candidate is much above the line's, say so to the owner as a
+thing for the close (the arm's limit is a stored ceiling). IF A5 IS RED: read its message; an edit chain that drifts is
+the supply rule's own fault and is cured BEFORE the landing (a seat on `supplyStory.js`/`resourceGenerator.js`; the
+LEFT seats' bases then move: tell them).
 
-**THE WHOLE CHECK AT THE CANDIDATE'S TREE** runs on the chair's machine: `/home/user/checks/merged-d98b11ad8/` (the tree
-`/home/user/landed`, a local unsigned rehearsal merge with the same tree; six shards; shards 1 to 3 done by 17:03, each
-about twenty minutes; then the build and its tests). WHEN ITS `summary.tsv` ENDS `DONE`:
-`sh docs/chair/2026-11-17/tools/retry-slow.sh /home/user/landed /home/user/checks/merged-d98b11ad8` (the chair's own pushes
-ran their gates beside it: every red that ran 19 s or more is run again alone; it writes `names.final.txt`). THE BASELINE
-at the line's tip is CHECKS-1's (its branch `lane/checks-2026-11-17`, `docs/chair/2026-11-17/checks/line-ed1d43529/`: not
-pushed yet at this hour). COMPARE BY NAME (`tools/cmp.sh`, with `names.final.txt` on the candidate's side; a red of the
-baseline that ran 19 s or more is suspect too: run it alone at `/home/user/base`, a checkout of ed1d43529). KNOWN NEW REDS
-AT THE CANDIDATE, EACH ASSIGNED: `tests/domain/bar6MarksLaw8.test.js` (a) (the 17 mines: ruling BR10: LEFT-MARKS item 1);
-`tests/domain/display/needMetUnderAnotherName.test.js` (r2r-town-17's timber need is met now: an anchor: LEFT-KEYS).
-ANYTHING ELSE NEW IS READ BEFORE THE LANDING: an anchor the supply rule fed goes to LEFT-KEYS by name; a real fault to
-the seat that holds its file (the table in `briefs/BRIEF-LEFT.md`).
-
-**THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`).**
-| seat | session | branch | state at 17:04 |
+**THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`; builders and readers of code
+are the middle tier at high effort, the mechanical seats the cheaper tier at low effort).**
+| seat | session | branch | state at 19:04 |
 |---|---|---|---|
-| READ-BIRTH-3B | session_01FbPLbfk2W1eNFUKH8Wg5g3 | none | DONE: HIGH 0 · MED 1 · LOW 4 (its five rows are LEFT-MARKS's AMENDMENT 1) |
-| CHECKS-1 | session_01FbPLbbbn3AfHPBuK7SXxRu | `lane/checks-2026-11-17` | running the whole check at ed1d43529; it messages the chair when published; it then waits for the next tree |
-| MEASURE-1 | session_01FbPLbfsyUsu4FiR9AaJT4E | `lane/measure-2026-11-17` | the 30 and the 150 published (8aae3f3ba: read, section 7); the 720 rendering at both trees: a second message follows |
-| PREP-READ-7 | session_01FbPLbfNgMStXkJ7yMbE9fd | `lane/read7-prep-2026-11-17` | P1 to P3 and the render published (3eccb8583); P4 IN FLIGHT: the SIXTH read's 21 packets re-read by one stronger reader and checked, so that the two reads compare (it publishes `docs/chair/2026-11-17/review-bar-6-third/COUNT.txt` and messages one line) |
-| LEFT-PDF | session_01FbPLbbP54f2YhYirEK7TdF | `lane/left-pdf-2026-11-17` | building (rows L1, L2, L3, L19) |
-| LEFT-CHAIN | session_01FbPLbeQ6AMmwW3YqZr3GGs | `lane/left-chain-2026-11-17` | building (L18 = BR10 (3), L5, L27, L7, L6) |
-| LEFT-LINES | session_01FbPLbeoWaAerUfLm8M6h9a | `lane/left-lines-2026-11-17` | building (L31, L4, L33's one line, L32, L8, L9) |
-| LEFT-MARKS | session_01FbPLbfTzb6VGikPHHvTZWC | `lane/left-marks-2026-11-17` | building (L17 = BR10 (2), L15, L25, L16; AMENDMENT 1: M1 to M5; AMENDMENT 2: M6, M7 = BR11; told of amendment 2 by message at 16:46) |
-| LEFT-KEYS | NOT SEATED | `lane/left-keys-2026-11-17` | tests only; seated after the whole check's comparison: L11 (four anchors re-keyed to towns that cannot buy in), L12, L14 (RULED: a KEEP row whose claim no town bears is held on a CONSTRUCTED besieged record whose iron trade runs wholly on its own live ground; if the page marks it there, that is a fault to name), `needMetUnderAnotherName`, and every anchor the comparison names; its section of BRIEF-LEFT.md is written at seating |
-| BAR8-AUDIT-J, BAR8-AUDIT-K | NOT SEATED | `lane/bar8-audit-j-2026-11-17`, `lane/bar8-audit-k-2026-11-17` | `briefs/BRIEF-BAR8-AUDIT.md` is written and pushed with this file; SEAT BOTH (the middle tier, high effort; source revision the candidate branch; the prompt names the seat, its branch, the brief and its base) |
+| CHECKS-1 | session_01FbPLbbbn3AfHPBuK7SXxRu | `lane/checks-2026-11-17` | the line's whole check published (093f007ed); NOW the A5 job, THEN its part (`pre s:1 s:2`) of the whole check at LEFT-LINES's tip |
+| CHECKS-2 | session_01FbPLbdC2rUKgnutX3fGFT9 | `lane/checks-2-2026-11-17` | seated 18:59: its part (`s:3 s:4 build`) at LEFT-LINES's tip, label `left-lines-773c463d7` |
+| CHECKS-3 | session_01FbPLbfhoJKBeFUqejGpQCB | `lane/checks-3-2026-11-17` | seated 18:59: its part (`s:5 s:6`) of the same |
+| MEASURE-1 | session_01FbPLbfsyUsu4FiR9AaJT4E | `lane/measure-2026-11-17` (a455ea239) | DONE (the 30, the 150, the 720 at the line and the candidate); idle: it can run every detector at a tree the chair names |
+| PREP-READ-7 | session_01FbPLbfNgMStXkJ7yMbE9fd | `lane/read7-prep-2026-11-17` (435e4a531) | DONE; idle: it can build the EIGHTH read's packets at the landed tree (fresh seeds rand-48 to rand-50) |
+| READ-BIRTH-3B | session_01FbPLbfk2W1eNFUKH8Wg5g3 | none | DONE |
+| BAR8-AUDIT-K | session_01FbPLbdtfMGbb3yG5Vzt8tb | `lane/bar8-audit-k-2026-11-17` (1ceae1ede) | DONE (LAWS 12 to 15) |
+| BAR8-AUDIT-J | session_01FbPLbc3BG2umkym8SFTJ8Q | `lane/bar8-audit-j-2026-11-17` (0cdedd206) | DONE (LAW 11 and 11g) |
+| LEFT-LINES | session_01FbPLbeoWaAerUfLm8M6h9a | `lane/left-lines-2026-11-17` | HANDED BACK at 773c463d7 (18:33); the chair read it (section 7); its second reader and its whole check are running |
+| READ-LEFT-LINES | session_01FbPLbdtEK8WyvarUCoP45p | none | reading LEFT-LINES cold (`BRIEF-READ-LEFT.md`); one message ending LAND or DO NOT LAND YET |
+| LEFT-PDF | session_01FbPLbbP54f2YhYirEK7TdF | `lane/left-pdf-2026-11-17` | building (L1, L2, L3, L19) |
+| LEFT-CHAIN | session_01FbPLbeQ6AMmwW3YqZr3GGs | `lane/left-chain-2026-11-17` | building (L18, L5, L27, L7, L6; it has the 720's two 8f.short towns as controls) |
+| LEFT-MARKS | session_01FbPLbfTzb6VGikPHHvTZWC | `lane/left-marks-2026-11-17` | building (L17, L15, L25, L16, M1 to M7; it has the 720's 8a.input and 8b.extract towns as controls) |
+| DEBT-2 | session_01FbPLbe3wDSZkAm3dnEEu9D | `lane/debt-2-2026-11-17` | building (three registers: `BRIEF-DEBT-2.md`); base the candidate |
+| K-POWERS | session_01FbPLbbRWQMcGkyXLSyGjtx | `lane/bar8-k-powers-2026-11-17` | building (13g, 14a, 14d, 15b); base K's tip |
+| K-PEOPLE | session_01FbPLbfRiRDUmTtP6eNrYKi | `lane/bar8-k-people-2026-11-17` | building (13b, 14b, 14e, 14f, 14g, 14h; J's 11e.wantBuy by amendment); base K's tip |
+| K-WATCH | session_01FbPLbcX353deWjvENmEXDT | `lane/bar8-k-watch-2026-11-17` | building (13a's service line, 13e, 15d); base K's tip |
+| J-ROWS | session_01FbPLbfsXSemygZz5mcCBcT | `lane/bar8-j-rows-2026-11-17` | building (11b.fish, 11e.offer, G1 = 11g.gapLine under its amendment 1); base J's tip |
+| SCENES | session_01FbPLbbe3xi9MXfwfTYXeHo | `lane/bar8-scenes-2026-11-17` | seated 19:03 (12b, 12c, 15a, 11b's scenes, 11e.stalls, and item 7: 9g.food-soft in `narrativeData.js`); base `lane/bar8-base-2026-11-17` 2f8f64f7b |
+| J-INCOME | NOT SEATED | `lane/bar8-j-income-2026-11-17` | after LEFT-CHAIN lands (base the line's tip then); section to write from `BRIEF-BAR8.md`'s table and J's hand-back |
+| MARKS-2 | NOT SEATED | `lane/bar8-marks-2-2026-11-17` | after LEFT-MARKS lands; ruling BR16 |
+| DESKS-2 | NOT SEATED | `lane/bar8-desks-2-2026-11-17` | after LEFT-LINES lands; with LEFT-LINES's leftovers (its hand-back section 5: L9's two lines and the pool table `tests/lint/factLayers.poolTable.json` given by name, the granary's v2 and v3, the brewer's secret) and BR17 (3) |
+| LEFT-KEYS | NOT SEATED | `lane/left-keys-2026-11-17` | after the four LEFT builders land (tests and two detectors only; `BRIEF-LEFT.md`'s last section, K1 to K6; K5's names: `corpusEcoTailGuards`, `bar2ServicesRows`, `bar3ServicesRows`) |
 
-THE BRANCH A CHILD SESSION IS GIVEN IS CREATED BY THE HARNESS AT ITS SOURCE REVISION BEFORE THE SEAT WORKS (a branch that
-exists on origin says nothing about progress: read its log). A seat's message reaches the chair as a notification; the
-chair replies with `send_message` to its session id.
+A seat's outcome branch appears on origin when the seat first pushes. A seat's message reaches the chair as a
+notification; the chair replies with `send_message` to its session id. `get_session` on a seat shows whether it runs.
 
-**WHEN A BUILDER SEAT HANDS BACK** (the fifth chair's form, kept): the chair reads its hand-back and its whole diff
-against the base (every commit signed, one parent, the files inside its list, every modified test read for
-weakening); a second reader on the middle tier reads the diff cold with the brief (a child session, or a helper where
-it needs no machine); the gates (both type gates, eslint on the changed files, `tests/architecture`, its guard, the
-rounds' guards); a rehearsal merge on the line's then-tip in a scratch worktree; the whole check there against the
-last whole check by name (CHECKS-1 runs it on the chair's word: message it the commit and a label); then the merge on
-the line (`git merge --no-ff <tip>` in a checkout of the line with hooks, signed, the message naming the point, the
-seat and the tip), the push, the line read back, one plain line to the owner. Two seats' branches that touch one test
-helper are landed one after the other, the second rehearsed on the first.
+**WHEN A BUILDER HANDS BACK:** (1) the chair reads its hand-back and its whole diff against its base (one parent a
+commit, the files inside its list, every modified test read for weakening; the new lines read for the owner's veto
+list); (2) AT ONCE a second reader is seated (the middle tier, high effort; `briefs/BRIEF-READ-LEFT.md`; the prompt
+names the seat, its branch, its tip, its base and what the seat claimed; for a BAR8 seat the brief's "section of
+BRIEF-LEFT" reads "section of BRIEF-BAR8"); (3) THE WHOLE CHECK, SHARED BY THE THREE CHECKS SEATS (`briefs/BRIEF-CHECKS-PARTS.md`:
+message each the commit and a label; each publishes `checks/<label>/part-<n>/names.final.txt` on its own branch; the
+union is the check's; compare with `tools/cmp.sh`-style `comm` against the last whole check at its base): at the seat's
+own tip where it alone lands on its base, or at a REHEARSAL MERGE of several seats' tips where they land together
+(disjoint files: a batch is one check; a new red is attributed by file); (4) the merge on the line (`git merge --no-ff
+<tip>` in a checkout of the line with hooks, the message naming the point, the seat and the tip), the push, the line
+read back, one plain line to the owner.
 
-**THE SEVENTH READ** (all of it under `docs/chair/2026-11-17/review-bar-7/`; COUNT-AFTER-THE-SECOND-CHECK.txt first): HIGH 0 ·
-MED THAT STANDS 46 IN THIRTY TOWNS BY THREE READERS (16 by two readers of the cheaper tier; 30 more by a third reader of
-the middle tier; EXPLAINED 28; WEAK 7); the stronger reader alone: 37 stand. THE OWNER HAS THE FULL FIGURE AND THE
-CORRECTION OF THE 16 (17:00). NOT COMPARABLE WITH THE SIXTH'S 29 UNTIL PREP-READ-7's P4 IS IN: when its one line comes,
-tell the owner the two figures side by side in plain words. FROM NOW ON A READ IS: one reader of the middle tier a
-packet (two if the owner wants the wider net), the strict check on the same tier at high effort, AND A READ-MASTER
-SEAT RUNS THE READERS AND THE CHECKERS (this chair launched 66 readers and 7 checkers from its own session and paid
-about a hundred thousand of its own context for their notices: never again). THE NEXT ROUND (BAR8) is cut from the
-auditors' worklists; the files the LEFT seats hold are free only after they land.
+**THE NEXT ROUND (BAR8)** is cut and half seated: `briefs/BRIEF-BAR8.md` (the rules; the table of eight seats merged by
+file from the two auditors' worklists; rulings BR13 to BR17 in section 6). THE EIGHTH READ follows when the LEFT round
+and BAR8 have landed: thirty fresh towns at the landed tree, ONE reader of the middle tier a packet and the strict
+check on the same tier at high effort, RUN BY A READ-MASTER SEAT (never from the chair's own session).
 
 **THE CHAIR'S MACHINE** (lost if this session's container is reclaimed; everything that matters is on origin):
-`/home/user/chair` (this lane, hooks generated) · `/home/user/line` (the candidate branch) · `/home/user/landed` (the
-rehearsal tree the whole check reads: do not move it while it runs) · `/home/user/base` (ed1d43529) · `/home/user/birth3`
-· `/home/user/read7` (packets `pk/`, the render, the readers' folders `r/`, the checkers' `verify/`) · `/home/user/wk`
-(small probes: `mines.mjs`, `town.mjs`, `need.mjs`, `msgs.mjs`) · `/home/user/checks`.
+`/home/user/chair` (this lane, hooks) · `/home/user/line` (the candidate branch, hooks: the landing is pushed from
+here) · `/home/user/landed` (the rehearsal tree the candidate's whole check read) · `/home/user/base` (ed1d43529) ·
+`/home/user/k` (`lane/bar8-base-2026-11-17`, hooks) · `/home/user/j` (J's tip) · `/home/user/birth3` · `/home/user/read7`
+(the seventh read's packets, render, readers' folders) · `/home/user/wk` (probes: `town.mjs <seed> <house regex>` with
+`TREE=<tree>`; `msgs2.mjs <regex> <max> <vitest json>...` prints failure messages) · `/home/user/checks` (the
+candidate's run `merged-d98b11ad8`, the line's lists `base-ed1d43529`).
 
-**OWED TO THE OWNER:** the sixth-against-seventh comparison (P4); one plain line at each landing; at the close, the
-question for the owner's plain yes on the stored reference files (not due yet); and said once already at 16:10: on
-the previous account its sessions should be paused or archived by the owner's hand.
+**OWED TO THE OWNER:** one plain line at each landing; the veto list of new and changed lines (each seat's hand-back
+lists its own: gather them at the close); the question of ruling BR13 (may a house's network be run by another
+house's boss?) and of the titles' female forms (BR14 (b)); at the close, the owner's plain yes on the stored
+reference files (not due yet) and the worker-bundle ceiling; said twice already: the previous account's sessions
+should be paused or archived by the owner's hand.
 
 ## 1. The owner's words, and what stays the owner's
 
@@ -414,3 +424,14 @@ the previous account its sessions should be paused or archived by the owner's ha
   arm's claim (an edit chain is deterministic and undo reproduces the town) is exactly what a seeded write at the birth
   could break. POINT 33 DOES NOT LAND UNTIL THE ARM HAS SPOKEN: CHECKS-1 runs a scratch copy of the test with a one-hour
   limit at the candidate on its own machine (asked 18:55) and reports every arm's status and time at both trees.
+- **19:04 UTC. SEATED:** CHECKS-2 and CHECKS-3 (18:59; the cheaper tier at low effort; `briefs/BRIEF-CHECKS-PARTS.md`: `whole.sh`
+  now takes PARTS, so three seats share one whole check in about three quarters of an hour); SCENES (19:03, from
+  `lane/bar8-base-2026-11-17` 2f8f64f7b, the chair's merge of both audits on the candidate, pushed 19:02; its prompt adds
+  item 7, LEFT-LINES's leftover arrival line "nobody looks hungry", `narrativeData.js`, rule `9g.food-soft`). THE WHOLE
+  CHECK AT LEFT-LINES's TIP (label `left-lines-773c463d7`) is asked of the three CHECKS seats. THE CHAIR RAN BOTH AUDITORS'
+  RUNNERS ON THE THIRTY ITSELF: K "controls: 49 of 49 as expected"; J "controls off: 0". THE CHAIR'S READ OF LEFT-LINES
+  (773c463d7; three commits, one parent each; ten files, all inside its list but three re-keyed tests, each read: a
+  constructed record given a tier, an atom read by the vocabulary's own rule, two annex line anchors re-addressed by
+  their text; eight twins, none printing in any town of the three populations; L31 and L4 found cured at the base and
+  dropped; two of L9's four lines left for a seat that holds the pool table): NOTHING AGAINST LANDING; the second reader
+  and the whole check decide. SECTION 0 IS REWRITTEN AS OF THIS HOUR.
