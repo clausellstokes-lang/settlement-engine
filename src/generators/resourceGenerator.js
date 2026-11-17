@@ -19,11 +19,12 @@ import { waterAccessKind, hasTradeRouteConnection } from '../domain/tradeRouteSe
 import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
 import {
   CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseHead, houseInputAtHand, houseRunsChain, housesOnSpentGround, housesWantingTradeInput,
-  localProducerSupplies, terrainSynonymsFor, tradeFinisherIn,
+  localProducerSupplies, terrainSynonymsFor, tradeFinisherIn, ventureHouseOf, worksTheGround,
 } from '../domain/facts/houseInputAtHand.js';
-import { BUYS_AND_WORKS, IMPORT_WORD, isSourceHouse } from '../domain/facts/houseKinds.js';
+import { BUYS_AND_WORKS, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGHT, isSourceHouse } from '../domain/facts/houseKinds.js';
+import { boughtIn, sourceStoryOf, usedGroundOf } from '../domain/facts/supplyStory.js';
 import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
-import { HOUSE_TRADE_INPUT, SPENT_GROUND_WORKERS, SPENT_GROUND_YIELD } from '../data/crisisDependence.js';
+import { HOUSE_TRADE_INPUT, SPENT_GROUND_YIELD } from '../data/crisisDependence.js';
 import { catalogIdForName } from '../data/institutionalCatalog.js';
 
 // ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
@@ -476,7 +477,7 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
 const supplyOfInput = (chainKey, institution, institutions, evidence = {}) => {
   const before = evidence.importsBeforeBirth;
   const id = String((typeof institution?.catalogId === 'string' && institution.catalogId) || catalogIdForName(String(institution?.name ?? '')) || '');
-  const record = Array.isArray(before) && isSourceHouse(id) && evidence.economicState
+  const record = Array.isArray(before) && isSourceHouse(id) && !Object.prototype.hasOwnProperty.call(RUNS_ON_BOUGHT, id) && evidence.economicState
     ? { ...evidence, economicState: { ...evidence.economicState, primaryImports: before }, institutions }
     : { ...evidence, institutions };
   return houseInputAtHand(record, chainKey, institution, RESOURCE_CHAINS[chainKey]);
@@ -605,7 +606,13 @@ const evaluateResourceChain = (specialResourceKeys) => {
 // gaps are written after, over the list: the house then "runs on imported clay", and under a siege the page reads it as
 // it reads every house on an imported input ("Curtailed by the siege."). No draw is taken: no person, tie, name or house
 // moves (measured by birth over the census's 720, the 150 and the 525).
+// BIRTH-2 (the chair's rulings BR4 and BR5 of 2026-11-17, the owner's rule: THE SEED PICKS THE STORY; vetoable by the owner):
+// the word is written EXACTLY where the material's story says bought (`domain/facts/supplyStory.js`): a used-up ground, its
+// own shortage word, where the seed has the town buy it (3 times in 4); a material never there, the plain word; under a
+// siege too (a cause is of ordinary times). Where the story says idle or abandoned, nothing: the owner's fourth and fifth
+// stories, by the seed. The seed is the generator's, handed in (`generateResourceAnalysis`'s last argument).
 // @enforced-by tests/domain/birthKindsLaw.test.js
+// @enforced-by tests/domain/supplyStoryLaw.test.js
 
 /** @param {unknown} x @returns {string} an import as a word: its bracketed reason struck, one spacing, lower case */
 const importWordOf = (x) => String(x ?? '').replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
@@ -621,11 +628,14 @@ const namesGood = (imp, good) => wordsOf(importWordOf(imp)).includes(wordsOf(goo
  *   the making (the generator's) or the saved record: the same fields
  * @returns {string[]}
  */
-export function importsBroughtAtBirth(record) {
+export function importsBroughtAtBirth(record, seed) {
   const config = record?.config || {};
-  const stresses = Array.isArray(config.stressTypes) ? config.stressTypes : [];
-  if (!record?.economicState || stresses.includes('under_siege') || !hasTradeRouteConnection(String(config.tradeRouteAccess ?? ''))) return [];
+  // BIRTH-2 (BR3 (c), BR5): A CAUSE IS OF ORDINARY TIMES: a siege excludes nothing (the import stays the town's ordinary
+  // trade and reads cut off while the siege lasts); only a town with no route even in ordinary times cannot buy in
+  if (!record?.economicState || !hasTradeRouteConnection(String(config.tradeRouteAccess ?? ''))) return [];
   const have = Array.isArray(record.economicState.primaryImports) ? record.economicState.primaryImports.map(String) : [];
+  // the record in the making, with the generator's seed (BIRTH-2: the seed picks the story; it is handed in, never a global)
+  const base = { ...record, _seed: seed };
   /** @type {string[]} */
   const add = [];
   const held = new Set(have.map(importWordOf));
@@ -634,33 +644,49 @@ export function importsBroughtAtBirth(record) {
   /** @param {unknown} inst */
   const idOf = (inst) => { const i = /** @type {{ name?: unknown, catalogId?: unknown } | null} */ (inst);
     return String((typeof i?.catalogId === 'string' && i.catalogId) || catalogIdForName(String(i?.name ?? '')) || ''); };
-  const houses = liveInstitutions(record).filter((i) => !!i && typeof i.name === 'string' && i.name && !isMaterializedCustomContent(i) && BUYS_AND_WORKS.has(idOf(i)));
-  // (1) a buyer on its own spent ground: that ground's shortage import
+  const live = liveInstitutions(base).filter((i) => !!i && typeof i.name === 'string' && i.name && !isMaterializedCustomContent(i));
+  const houses = live.filter((i) => BUYS_AND_WORKS.has(idOf(i)));
+  const venture = ventureHouseOf(base); // BIRTH-2 (d): the failed venture buys nothing
+  // (1) a buyer on its own spent ground: that ground's shortage import, WHERE THE SEED HAS THE TOWN BUY IT (BIRTH-2 (b))
   const spent = new Set(Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted.map(String) : []);
-  const onSpent = housesOnSpentGround(record);
+  const onSpent = housesOnSpentGround(base);
   const chains = /** @type {Array<{ resourceKey?: unknown, processingInstitutions?: unknown }>} */ (Array.isArray(/** @type {{ activeChains?: unknown }} */ (record.economicState).activeChains) ? /** @type {{ activeChains: any[] }} */ (record.economicState).activeChains : []);
   for (const inst of houses) {
-    if (!onSpent.has(inst.name) || SPENT_GROUND_WORKERS.includes(idOf(inst))) continue;
+    if (!onSpent.has(inst.name) || worksTheGround(idOf(inst))) continue;
     for (const c of chains) {
       if (!Array.isArray(c?.processingInstitutions) || !c.processingInstitutions.includes(inst.name) || !spent.has(String(c.resourceKey))) continue;
       // the good once: a ground whose yield the list already brings by name ("Grain (a little, beside its own harvest)") is
       // not bought in twice ("Bulk grain (local grain fields depleted)" beside it: the coherence receipt's doubled grain)
       const good = Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, String(c.resourceKey)) ? SPENT_GROUND_YIELD[String(c.resourceKey)] : '';
       if (good && [...have, ...add].some((imp) => namesGood(imp, good))) continue;
-      bring(resourceShortageImport(String(c.resourceKey)));
+      const word = resourceShortageImport(String(c.resourceKey));
+      if (word && boughtIn(base, word, true, seed)) bring(word);
     }
   }
+  // (1b) BIRTH-2: a source house that runs on bought-in material (`RUNS_ON_BOUGHT`) and whose story is bought: its word
+  for (const inst of live) {
+    if (!Object.prototype.hasOwnProperty.call(RUNS_ON_BOUGHT, idOf(inst)) || venture?.name === inst.name) continue;
+    const story = sourceStoryOf(base, inst, seed);
+    if (story?.story === 'bought' && story.word && !held.has(importWordOf(RUNS_ON_BOUGHT[idOf(inst)]))) bring(story.word);
+  }
   // (2) a buyer none of whose inputs the one reader answers: its input's word. The record read with the words of (1).
-  const rec = { ...record, economicState: { ...record.economicState, primaryImports: [...have, ...add] } };
+  // BIRTH-2 (b): where a ground of its material is used up (stored or implied), the seed's pick, in that ground's own
+  // shortage word; where its material never lay near, the plain word; the failed venture, nothing.
+  const rec = { ...base, economicState: { ...record.economicState, primaryImports: [...have, ...add] } };
   const wanting = housesWantingTradeInput(rec);
   for (const inst of houses) {
+    if (venture?.name === inst.name) continue;
     const id = idOf(inst);
     const trade = Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, id) ? HOUSE_TRADE_INPUT[id] : '';
     if (trade === 'luxury') { if (wanting.get(inst.name)?.reach === 'missing') bring(IMPORT_WORD.luxury); continue; }
     const keys = (trade ? [trade] : chainsOfHouse(inst.name, RESOURCE_CHAINS).map(([k]) => k)).filter((k) => !!CHAIN_INPUTS[k]);
     if (!keys.length) continue;
     if (keys.some((k) => houseInputAtHand(rec, k, inst, RESOURCE_CHAINS[k] || { rawResource: CHAIN_RAW_INPUT[k] }) !== 'missing')) continue;
-    bring(IMPORT_WORD[keys[0]]);
+    const family = MATERIAL_OF[id] || keys[0];
+    const used = usedGroundOf(rec, family, seed);
+    if (!used) { bring(IMPORT_WORD[keys[0]]); continue; }
+    const word = String(resourceShortageImport(used) || IMPORT_WORD[keys[0]] || '');
+    if (word && boughtIn(rec, word, true, seed)) bring(word);
   }
   return add;
 }
@@ -677,6 +703,7 @@ export function importsBroughtAtBirth(record) {
  * @param {Object} config           - Settlement config with priorities
  * @param {Object|null} [economicState] - The reconciled economy: its `primaryImports`,
  *   `localProduction` and food record's import share tell a gap's kind (supplyOfInput)
+ * @param {unknown} [seed] - the generator's seed (BIRTH-2: the seed picks each material's story; no draw is taken)
  * @returns {Object} Full resource analysis
  */
 export const generateResourceAnalysis = (
@@ -686,6 +713,7 @@ export const generateResourceAnalysis = (
   institutions,
   config = {},
   economicState = null,
+  seed = undefined,
 ) => {
   const terrain = TERRAIN_DATA[terrainType];
   if (!terrain) {
@@ -717,13 +745,13 @@ export const generateResourceAnalysis = (
   // BIRTH-1 (R2): a house that buys and works its material has it brought in, before the gaps are written (above)
   const importsBeforeBirth = economicState && Array.isArray(economicState.primaryImports) ? [...economicState.primaryImports] : [];
   if (economicState) {
-    const brought = importsBroughtAtBirth({ config, economicState, institutions: nativeInstitutions, resourceAnalysis: { imports } });
+    const brought = importsBroughtAtBirth({ config, economicState, institutions: nativeInstitutions, resourceAnalysis: { imports } }, seed);
     if (brought.length) economicState.primaryImports = [...importsBeforeBirth, ...brought];
   }
   const gaps           = evaluateInstitutionChain(
     exploitation,
     nativeInstitutions,
-    { config, economicState, resourceAnalysis: { imports }, importsBeforeBirth }, // the record in the making: houseInputAtHand reads it as the page reads the record (BAR5-CHAINS (b): the need list too)
+    { config, economicState, resourceAnalysis: { imports }, importsBeforeBirth, _seed: seed }, // the record in the making: houseInputAtHand reads it as the page reads the record (BAR5-CHAINS (b): the need list too)
   );
   const resourceConditions = nativeResourceConditionRecords(config);
   // after the gaps and the town's settings: a complete row reads both (#457, #1163)

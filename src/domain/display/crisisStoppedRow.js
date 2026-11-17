@@ -68,7 +68,8 @@
  * Pure: no randomness, no clock, no write.
  */
 import { resourceGapLines } from './validationOnPage.js';
-import { housesOnSpentGround, housesWantingTradeInput } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home
+import { housesOnSpentGround, housesWantingTradeInput, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
+import { ventureMarkText } from '../facts/supplyStory.js'; // BIRTH-2: the failed venture's mark
 import { crisisOf } from '../facts/crisisKind.js';
 import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach.js'; // BAR5-MARKS (WM1): what the war takes, one home
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
@@ -645,7 +646,24 @@ export function rowShortOf(settlement, kind, row) {
   if (!deps.includes(INPUT)) return null;
   const house = kind === 'house' ? row.name : row.institution;
   if (typeof house !== 'string' || !house) return null;
+  if (ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement))?.name === house) return null; // BIRTH-2: a failed venture is not short (its own mark, below)
   return housesShortOfInput(settlement).get(house) ?? null;
+}
+
+/**
+ * BIRTH-2 (the owner's fifth story, BR6: "Say abandoned or failing: a failed venture."): the failed venture's mark, on its
+ * house and its rows wherever the short mark would print, in place of it (`supplyStory.js :: ventureMarkText`; four words:
+ * the mark law counts a sentence at five). The tab's head line for short marks is not printed on its account
+ * (`rowShortOf` answers null for it). VETOABLE wording.
+ * @param {object | null | undefined} settlement @param {'service' | 'house'} kind @param {Record<string, unknown> | null | undefined} row
+ * @returns {string | null}
+ */
+export function rowVentureMark(settlement, kind, row) {
+  if (!row || typeof row !== 'object' || isCustom(row)) return null;
+  const deps = kind === 'house' ? houseDependenceOf(row) : kind === 'service' ? serviceRowDependence(settlement, row) : NONE;
+  if (!deps.includes(INPUT)) return null;
+  const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement));
+  return venture && venture.name === (kind === 'house' ? row.name : row.institution) ? ventureMarkText(venture) : null;
 }
 
 /**
@@ -671,7 +689,7 @@ export const SHORT_WORD = 'short';
  * @returns {string | null}
  */
 export function rowMarkText(settlement, kind, row, crises) {
-  const marks = [stoppedRowMark(settlement, kind, row, crises), shortMarkText(rowShortOf(settlement, kind, row))].filter(Boolean);
+  const marks = [stoppedRowMark(settlement, kind, row, crises), rowVentureMark(settlement, kind, row) ?? shortMarkText(rowShortOf(settlement, kind, row))].filter(Boolean);
   return marks.length ? marks.join(' ') : null;
 }
 

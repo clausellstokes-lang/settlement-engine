@@ -19,6 +19,7 @@ import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
 import { fullCardWordUnderSiege } from '../../../domain/display/economicsCrisisMarks.js'; // BAR3-LABELS-3 L3b
 import { plainGoodName } from '../../../domain/display/tradeListDisplay.js'; // W2-C-LEAVES-13 (15): no slash label
 import { commoditiesShown, FAILED_MARK } from '../../../domain/display/commoditiesShown.js'; // BAR5-FOOD (L3.failedFood)
+import { impliedGroundsOnPage } from '../../../domain/facts/houseInputAtHand.js'; // BIRTH-2: the grounds the houses prove (stored nowhere)
 
 /**
  * WHAT A RESOURCE DRAWS ON (`exploitation.*[].dependsOn`). Its only reader was Economics'
@@ -221,10 +222,13 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       <DeskLines mount={GROUND_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.strategicValue, deskProse.exploitation, deskProse.resourceCondition]} />
 
       {/* ── AVAILABLE RAW RESOURCES ───────────────────────────────────────── */}
-      {(r?.config?.nearbyResources?.length>0||res.availableResources?.length>0)&&<Section title="Nearby Resources" collapsible defaultOpen={true}>
+      {(r?.config?.nearbyResources?.length>0||res.availableResources?.length>0||impliedGroundsOnPage(r).there.length>0||impliedGroundsOnPage(r).used.length>0)&&<Section title="Nearby Resources" collapsible defaultOpen={true}>
         {(() => {
           const allRes = [...(r?.config?.nearbyResources || [])].sort();
-          const depleted = [...(r?.config?.nearbyResourcesDepleted || [])].sort();
+          // BIRTH-2 (BR4 (b), BR5; the audit's W1 and W2): THE GROUND A HOUSE PROVES is printed here and stored nowhere: there,
+          // under the section's own title without "Abundant" (one quarry does not prove plenty); used up, under "Depleted"
+          const implied = impliedGroundsOnPage(r);
+          const depleted = [...new Set([...(r?.config?.nearbyResourcesDepleted || []), ...implied.used])].sort();
           const abundant = allRes.filter(rk => !depleted.includes(rk));
           const customSet = new Set(r?.config?.nearbyResourcesCustom || []);
           const fmtKey = rk => (!customSet.has(rk) && Object.hasOwn(RESOURCE_DISPLAY_LABELS, rk)) ? RESOURCE_DISPLAY_LABELS[rk] : rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase()); // TAIL-DISPLAY-ECON-4 (X26): A RESOURCE'S NAME HAS ONE HOME, the catalogue's own label (RESOURCE_DATA[k].label, through the seam's verbatim table); a custom ground keeps its key's words
@@ -235,9 +239,13 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           const abundantChips = abundant.map((rk,i)=>customSet.has(rk)
             ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
             : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>);
+          const provenChips = implied.there.filter(rk => !allRes.includes(rk)).sort().map((rk,i)=><span key={`p${i}`} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>);
           return <>
             {besieged&&abundant.length>0&&<div data-testid="resources-grounds-besieged" style={{marginBottom:8}}>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>{abundantChips}</div>
+            </div>}
+            {provenChips.length>0&&<div data-testid="resources-grounds-proven" style={{marginBottom:8}}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>{provenChips}</div>
             </div>}
             {depleted.length>0&&<div style={{marginBottom:8}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted</div>

@@ -42,7 +42,8 @@ import { institutionMatchesKeyword } from '../institutions/institutionCategory.j
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT } from '../../data/crisisDependence.js';
-import { BUYER_IMPORT_WORDS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
+import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, RUNS_ON_BOUGHT, TAKERS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
+import { impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOf, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1)
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -167,6 +168,15 @@ export function localProducerSupplies(requirement, institutions) {
  * @returns {'local' | 'route' | 'imported' | 'missing'}
  */
 export function houseInputAtHand(record, chainKey, house, chain) {
+  // BIRTH-2 (BR5's fifth story, the owner's "a failed business venture, but very rare"): the failed venture's house has no
+  // input: its material never lay near and none is brought in (`supplyStory.js :: ventureOf`)
+  const venture = ventureHouseOf(record);
+  if (venture && house && venture.name === str(house.name)) return 'missing';
+  return inputAtHandCore(record, chainKey, house, chain);
+}
+
+/** @param {InputRecord | null | undefined} record @param {string} chainKey @param {{ name?: unknown, [key: string]: unknown } | null | undefined} house @param {{ rawResource?: unknown } | null | undefined} chain @returns {'local' | 'route' | 'imported' | 'missing'} */
+function inputAtHandCore(record, chainKey, house, chain) {
   const spec = CHAIN_INPUTS[chainKey];
   const raw = str(chain?.rawResource);
   const config = record?.config || {};
@@ -174,7 +184,10 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   const words = spec ? spec.words : [raw];
 
   // A live native resource: its key or its commodities name the input.
-  const keys = /** @type {string[]} */ (availableNativeResourceKeys(config));
+  // BIRTH-2 (BR4 (b)): THE HOUSE PROVES ITS GROUND. A ground a source house implies and the seed leaves there answers as a
+  // live ground does (`supplyStory.js :: impliedGroundsOf`; stored nowhere)
+  const implied = [...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states].filter(([, st]) => st === 'there').map(([g]) => g);
+  const keys = [.../** @type {string[]} */ (availableNativeResourceKeys(config)), ...implied];
   const native = [...keys, ...keys.flatMap((k) => arr(/** @type {Record<string, { commodities?: unknown } | undefined>} */ (RESOURCE_DATA)[k]?.commodities))].map(str).map(norm).join('|');
   const rawNames = [raw, ...terrainSynonymsFor(raw)];
   if (words.some((w) => holds(native, w)) || rawNames.some((n) => holds(native, n))) return 'local';
@@ -183,7 +196,7 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   // HW1 (BAR4-SCENES-2): a house on a ground wholly spent is not its own producer, and a house that works the ground itself
   // (SPENT_GROUND_WORKERS: the mine, the quarry, the boats) is fed by no import there either: the page's SV6 reading, one fact
   const spentGround = onWhollySpentGround(record, house);
-  if (spentGround && SPENT_GROUND_WORKERS.includes(String(catalogIdForName(str(house?.name)) ?? ''))) return 'missing';
+  if (spentGround && worksTheGround(String((typeof house?.catalogId === 'string' && house.catalogId) || catalogIdForName(str(house?.name)) || ''))) return 'missing';
   // BIRTH-1 (the chair's ruling BR2 of 2026-11-17, the audit's R5; vetoable by the owner): ON A COAST THE SEA IS THE BRINE.
   // The salt works' input is the chain of desert salt, which only a live salt ground answered: 9 salt works of the census's
   // 720 stood on a coast "Short of salt.". On a port route or coastal terrain the sea answers it (a ground wholly spent is
@@ -214,7 +227,10 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   // house over the list as the economy wrote it (`resourceGenerator.js :: supplyOfInput`), so where the record's own gap
   // says this house lacks this input, a buyer's word on the list (`houseKinds.js :: BUYER_IMPORT_WORDS`) is the buyers'
   // and not its own: 11 charcoal burners of the census's 720 read the cooper's bought "Timber" as their wood.
-  const fed = sourceHouse && gapSaysMissing(record, house) ? imports.filter((imp) => !BUYER_IMPORT_WORDS.has(imp)) : imports;
+  // BIRTH-2 (BR4): LIFTED for the three that can run on bought-in material (`houseKinds.js :: RUNS_ON_BOUGHT`): the burner
+  // burns the cordwood the town buys
+  const runsOnBought = Object.prototype.hasOwnProperty.call(RUNS_ON_BOUGHT, idOfHouse(/** @type {{ name?: unknown }} */ (house)));
+  const fed = sourceHouse && !runsOnBought && gapSaysMissing(record, house) ? imports.filter((imp) => !BUYER_IMPORT_WORDS.has(imp)) : imports;
   if (fed.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))))) return 'imported';
   const food = es.foodSecurity?.foodRecord;
   if (spec?.food && arr(food?.foodSources).some((x) => spec.food?.includes(str(x)))) return 'imported';
@@ -244,11 +260,33 @@ const isCustom = (row) => row?.custom === true || row?.source === 'custom' || ro
  * @returns {ReadonlyMap<string, string>} house name -> what it is short of
  */
 export function housesOnSpentGround(settlement) {
+  const core = spentGroundCore(settlement);
+  const venture = ventureHouseOf(/** @type {InputRecord} */ (settlement));
+  if (!venture || !core.has(venture.name)) return core;
+  return new Map([...core].filter(([house]) => house !== venture.name)); // the failed venture is no worked-out ground
+}
+
+/**
+ * Whether a house works the ground itself, so that no import feeds it there (BIRTH-2, BR4's distinction): a TAKER
+ * (`houseKinds.js :: TAKERS`), read beside the dependence table's `SPENT_GROUND_WORKERS` (its fish market is a buyer, the
+ * owner's table; its salt works runs on bought-in salt). @param {string} id a catalogue id
+ */
+export const worksTheGround = (id) => TAKERS.has(id) || (SPENT_GROUND_WORKERS.includes(id) && !BUYS_AND_WORKS.has(id) && !Object.prototype.hasOwnProperty.call(RUNS_ON_BOUGHT, id));
+
+/** The spent-ground reading before the failed venture is set apart. @param {object} settlement @returns {ReadonlyMap<string, string>} */
+function spentGroundCore(settlement) {
+  if (settlement && typeof settlement === 'object') { const hit = SPENT_OF.get(settlement); if (hit) return hit; }
+  const out = spentGroundReading(settlement);
+  if (settlement && typeof settlement === 'object') SPENT_OF.set(settlement, out);
+  return out;
+}
+
+/** @param {object} settlement @returns {Map<string, string>} */
+function spentGroundReading(settlement) {
   const s = /** @type {{ config?: { nearbyResourcesDepleted?: unknown }, economicState?: { activeChains?: unknown, primaryImports?: unknown } }} */ (settlement);
   const spent = new Set(Array.isArray(s.config?.nearbyResourcesDepleted) ? s.config.nearbyResourcesDepleted : []);
   /** @type {Map<string, string>} */
   const out = new Map();
-  if (spent.size === 0) return out;
   const imports = new Set((Array.isArray(s.economicState?.primaryImports) ? s.economicState.primaryImports : []).map(String));
   const chains = /** @type {Array<{ resourceKey?: unknown, status?: unknown, processingInstitutions?: unknown }>} */ (Array.isArray(s.economicState?.activeChains) ? s.economicState.activeChains : []);
   /** @type {Map<string, Array<{ resourceKey?: unknown, status?: unknown }>>} */
@@ -281,7 +319,7 @@ export function housesOnSpentGround(settlement) {
     // the houses this reading held before it (`SPENT_READ_HELD`) keep it
     const tradeId = String(catalogIdForName(house) ?? '');
     if (Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, tradeId) && !SPENT_READ_HELD.includes(tradeId)) continue;
-    const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
+    const works = worksTheGround(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground (BIRTH-2: a taker)
     // BIRTH-1 (BR2 (i), the audit's "what is left" 2): a buyer is fed by the shortage import of its spent ground, or by an
     // import that brings the ground's yield by its own name ("Medicinal herbs" feeds the apothecary on spent foraging
     // grounds: the birth writes no second herb import beside it, `resourceGenerator.js :: importsBroughtAtBirth`)
@@ -291,6 +329,18 @@ export function housesOnSpentGround(settlement) {
     if (!allSpent) continue;
     const key = /** @type {string} */ (own[0].resourceKey);
     out.set(house, Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, key) ? SPENT_GROUND_YIELD[key] : 'its materials');
+  }
+  // BIRTH-2 (BR4, the audit's c1): A SOURCE HOUSE IS READ BY ITS KIND'S GROUNDS AND THE GROUNDS OF THE TOWN, NOT BY THE CHAINS
+  // IT IS LISTED ON (a live coal chain hid six peat cutters' spent marsh): its story (`supplyStory.js :: sourceStoryOf`):
+  // idle on a used-up ground, stored or implied, is short of that ground's yield; at work (its ground there, or its material
+  // bought in) is not
+  for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
+    const house = inst && typeof inst.name === 'string' ? inst.name : '';
+    if (!house || isCustom(inst)) continue;
+    const story = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (settlement), inst);
+    if (!story) continue;
+    if (story.story === 'idle' && story.ground) out.set(house, Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, story.ground) ? SPENT_GROUND_YIELD[story.ground] : 'its materials');
+    else if (story.story === 'local' || story.story === 'bought') out.delete(house);
   }
   return out;
 }
@@ -327,9 +377,7 @@ function nearbyGrounds(settlement) {
 function onWhollySpentGround(record, house) {
   const name = house && typeof house.name === 'string' ? house.name : '';
   if (!name || !record || typeof record !== 'object') return false;
-  let spent = SPENT_OF.get(record);
-  if (!spent) { spent = housesOnSpentGround(record); SPENT_OF.set(record, spent); }
-  return spent.has(name);
+  return spentGroundCore(record).has(name);
 }
 /** One spent-ground reading a record object. @type {WeakMap<object, ReadonlyMap<string, string>>} */
 const SPENT_OF = new WeakMap();
@@ -648,3 +696,28 @@ export function housesWantingTradeInput(record) {
   WANTING_OF.set(record, out);
   return out;
 }
+
+/** One failed venture a record object. @type {WeakMap<object, import('./supplyStory.js').Venture | null>} */
+const VENTURE_HOUSE = new WeakMap();
+
+/**
+ * BIRTH-2: THE TOWN'S FAILED VENTURE, if the seed picked one (`supplyStory.js :: ventureOf`), its buyers read by the one
+ * reader before that story (`inputAtHandCore`). @param {InputRecord | null | undefined} record
+ * @returns {import('./supplyStory.js').Venture | null}
+ */
+export function ventureHouseOf(record) {
+  if (!record || typeof record !== 'object') return null;
+  if (VENTURE_HOUSE.has(record)) return /** @type {import('./supplyStory.js').Venture | null} */ (VENTURE_HOUSE.get(record));
+  VENTURE_HOUSE.set(record, null); // a reader asked inside the reading reads no venture (no loop)
+  const out = ventureOf(/** @type {Parameters<typeof ventureOf>[0]} */ (record), (inst, family) => CHAIN_INPUTS[family]
+    ? inputAtHandCore(record, family, /** @type {{ name?: unknown }} */ (inst), { rawResource: CHAIN_RAW_INPUT[family] }) === 'missing' : false);
+  VENTURE_HOUSE.set(record, out);
+  return out;
+}
+
+/**
+ * BIRTH-2: THE TOWN'S GROUNDS AS THE PAGE READS THEM, beyond the stored lists (the Resources tab's Nearby Resources): the
+ * grounds the houses imply, there or used up (the failed venture proves none). @param {InputRecord | null | undefined} record
+ * @returns {{ there: string[], used: string[] }}
+ */
+export const impliedGroundsOnPage = (record) => impliedGroundsShown(/** @type {Parameters<typeof impliedGroundsShown>[0]} */ (record), ventureHouseOf(record));

@@ -41,7 +41,8 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { catalogIdForName, familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
-import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, tradeFinisherIn } from '../facts/houseInputAtHand.js';
+import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, tradeFinisherIn, ventureHouseOf } from '../facts/houseInputAtHand.js';
+import { sourceStoryOf, ventureLineText } from '../facts/supplyStory.js';
 import { SOURCE_GROUNDS, isSourceHouse } from '../facts/houseKinds.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
@@ -130,7 +131,11 @@ function sourceGround(s, inst) {
   const live = /** @type {string[]} */ (availableNativeResourceKeys(/** @type {Record<string, unknown>} */ (config)));
   if (grounds.some((k) => live.includes(k))) return '';
   const spent = arr(config.nearbyResourcesDepleted).map(str).find((k) => grounds.includes(k));
-  return spent ? str(resourceDisplayName(spent)) : '';
+  if (spent) return str(resourceDisplayName(spent));
+  // BIRTH-2 (BR4 (b), BR5): THE GROUND THE HOUSE PROVES, USED UP BY THE SEED, is the house's own ground too: the Depleted
+  // list prints it (`ResourcesTab.jsx`), and an idle house reads it worked out by the same label
+  const story = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (s), /** @type {{ name?: unknown }} */ (inst));
+  return story?.story === 'idle' && story.ground ? str(resourceDisplayName(story.ground)) : '';
 }
 
 /** @param {string} x @returns {string} */
@@ -448,7 +453,7 @@ export function exploitationGroupsShown(s) {
 export function resourceGapLines(s) {
   const ra = s?.resourceAnalysis;
   const gaps = arr(ra?.gaps);
-  if (!gaps.length) return [];
+  if (!gaps.length && !ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (s))) return [];
   const institutions = arr(s?.institutions);
   /** @type {GapLine[]} */
   const out = [];
@@ -485,6 +490,7 @@ export function resourceGapLines(s) {
   }
 
   // The houses the generator calls short of an input, grouped by house: one line per idle house.
+  const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (s));
   /** @type {Map<string, GapRow>} */
   const flagged = new Map();
   for (const g of gaps) if (g && typeof g === 'object' && g.institution) flagged.set(str(g.institution), g);
@@ -507,6 +513,14 @@ export function resourceGapLines(s) {
     push({ chain: null, impact: `No ${orList(nouns)} ${plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
     const ground = sourceGround(s, inst);
     if (ground) push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${ground}).`, severity: str(g.severity) || 'high' });
+    if (venture && venture.name === name) { const why = ventureLineText(venture, houseWords(inst)); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); }
+  }
+  // BIRTH-2 (BR6, the owner's fifth story): the failed venture's ONE line, after its gap line, or alone where no chain asks its
+  // house of an input (a mine, a peat cutter)
+  if (venture && !flagged.has(venture.name)) {
+    const inst = institutions.find((i) => i?.name === venture.name) || { name: venture.name };
+    const why = ventureLineText(venture, houseWords(inst));
+    if (why) push({ chain: null, impact: why, severity: 'high' });
   }
   return out;
 }
