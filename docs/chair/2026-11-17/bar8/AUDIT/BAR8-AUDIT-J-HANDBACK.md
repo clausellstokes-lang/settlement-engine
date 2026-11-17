@@ -212,4 +212,16 @@ THE RUNS, all at the base tree:
 - the tables: `TABLES-J.30.md`, `TABLES-J.720.md`, `TABLES-J.150.md`;
 - the instances: `out-J/`.
 
-NET: see the last section, added before the last push.
+NET (each gate run alone through `sh scripts/gate-tail.sh`, at the tip 27b5fad43 before the last push):
+- `npm run typecheck:domain:strict`: exit 0 (1113 errors, ceiling 1113).
+- `npm run typecheck:ratchet`: exit 0 (167, ceiling 167).
+- `npx eslint` on `law11Supply.mjs`, `runJ.mjs` and `tablesJ.mjs`: exit 0.
+- `npx vitest run tests/architecture`: exit 0.
+- ALL of `tests/lint`, at the base (a worktree at e0242a12a) and at the tip, compared by test name: both exit 1, with 3142
+  passed and 68 failed at each, and 0 tests differ by name. The 68 are red at the base itself (the any-cast baseline, the
+  fact-layer walker, the pool-dominance walker and others; one needs the ledger ref `review-fixes-2026-07-08`, absent in a
+  fresh worktree). So no walker owes my new helper file a registration.
+
+LEFT FOR NEXT, BY NAME: nothing of the brief is undone.
+- 11e.stalls is narrow: it finds only the control's reagents. A wider scene-goods reading belongs with J-SCENES' atom.
+- My precision is my own reading by the second check's rules, not a second check.
