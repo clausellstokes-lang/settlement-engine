@@ -100,6 +100,7 @@
  * R | l | identity+chains | surface | src/components/settlement/EventComposer.jsx
  * R | l | chains          | direct  | src/components/TradeDynamicsPanel.jsx
  * R | l | chains          | direct  | src/domain/compendium/institutionFacts.js
+ * R | l | none            | member  | src/domain/display/chainHouses.js
  * R | l | none            | member  | src/domain/display/crisisStoppedRow.js
  * R | l | chains          | surface | src/domain/display/institutionProfile.js
  * R | l | identity        | surface | src/domain/display/tradeListDisplay.js
