@@ -1,0 +1,12 @@
+{"id":"C40674","town":"bar0-town-occupied-rand-44","sev":"MED","kind":"PAIR","why":"Wool & Textile Trade earns 14% as 'woven or finished here', but Weavers is marked Short of wool (nothing to work), no wool imported","other":"C40422"}
+{"id":"C40850","town":"bar0-town-occupied-rand-44","sev":"MED","kind":"PAIR","why":"one audience gets a quick decision, but under occupation nothing the Feudal Appointee decides stands without occupiers' approval, its orders no longer hold","other":"C40917"}
+{"id":"C41011","town":"bar0-town-occupied-rand-44","sev":"MED","kind":"STATE","why":"'more than enough to get through a hard year' contradicts FOOD deficit 7%, Pressured, Struggling prosperity, 'households go short'","other":"C40691"}
+{"id":"C41106","town":"bar0-town-occupied-rand-44","sev":"LOW","kind":"BROKEN","why":"house mark 'Short of grapes.' set in front of the person's how-they-deal sentence, so the line reads wrong","other":""}
+{"id":"C41649","town":"bar0-village-calm-rand-42","sev":"LOW","kind":"PAIR","why":"says the keeper keeps herbalism supplies in stock, beside the Apothecary's 'Short of its materials' mark; LAND says it lacks medicinal herbs","other":"C41647"}
+{"id":"C41737","town":"bar0-village-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"service row 'Fencing stolen goods' prints with no house under it, unlike every other row; Smuggling waypoint offers only Route handoff","other":""}
+{"id":"C41826","town":"bar0-village-calm-rand-42","sev":"MED","kind":"PAIR","why":"Iron & Metalwork earns 8% ('metal worked here') but the Blacksmith is marked Short of iron and no iron is imported","other":"C41654"}
+{"id":"C41828","town":"bar0-village-calm-rand-42","sev":"LOW","kind":"PAIR","why":"Herbalist & Apothecary earns 4% as 'made and sold here', but the Apothecary is marked Short of its materials; LAND says no herbs reach it","other":"C41647"}
+{"id":"C41850","town":"bar0-village-calm-rand-42","sev":"MED","kind":"PAIR","why":"says food comes first of all from fishing; FOOD has 97% grown, Harvest earns 67% against fish 8%, and the line before says fields give grain","other":"C41847"}
+{"id":"C41900","town":"bar0-village-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"plural subject 'Weak defences' with singular verb 'keeps'","other":""}
+{"id":"C42171","town":"bar0-village-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"house mark 'Short of wool.' set in front of the person's how-they-deal sentence, so the line reads wrong","other":""}
+{"id":"DONE","lines":2272,"blocks":2,"flags":11}
