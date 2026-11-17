@@ -20,6 +20,9 @@
  *         Institutions tab nor the Services tab where the only mark there is a failed venture's (the ten towns of the 720 at
  *         the base; r2r-hamlet-27 of them now carries a short mark of its own, the maltster's (L16), and prints it); it
  *         prints in a town with a short mark (r2r-city-20).
+ *   (M6)  THE OLD DETECTOR KNOWS THE FAILED VENTURE'S MARK (AMENDMENT 2): `law8.mjs :: houseMarks` reads "Abandoned: a failed
+ *         venture." / "Failing: a failed venture." as a mark, so a venture printed as designed beside "Needed, and not
+ *         brought in: clay." is no 8a.input instance; the same card bare is one (a constructed page).
  * POSITIVE CONTROL: at the base (e0242a12a) the two houses print bare, the apothecary of r2r-village-13 is marked, the
  * four maltsters print bare and the head line prints over the ten towns' ventures: the file is red there.
  */
@@ -35,6 +38,8 @@ import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
+import { readTown } from '../helpers/pageLaws/pageB.mjs';
+import { law8 } from '../helpers/pageLaws/law8.mjs';
 import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 
@@ -127,4 +132,14 @@ describe('M3 · the head line over a failed venture: no "marked short" sentence 
       else expect(shown.inst, `${seed}: the sentence on the Institutions tab, over its short mark`).toBe(true);
     }), 'M3 rows');
   }, 900_000);
+});
+
+describe('M6 · the page form of 8a.input reads a failed venture\'s mark as a mark', () => {
+  test('a potter beside "Needed, and not brought in: clay.": bare, an instance; under either venture mark or the short mark, none', () => {
+    const page = (/** @type {string} */ lead) => ['== Systems/Economics ==', 'Imports', 'Grain · Salt', 'Needed, and not brought in: clay.',
+      '== Systems/Institutions ==', 'Potter · Crafts', `${lead}A wheel and a small kiln for domestic pottery.`, ''].join('\n');
+    const found = (/** @type {string} */ lead) => law8(readTown(page(lead), { institutions: [{ name: 'Potter' }], config: {} }), 'constructed').filter((/** @type {any} */ i) => i.rule === '8a.input').length;
+    expect(found(''), 'the potter bare').toBe(1);
+    for (const lead of ['Abandoned: a failed venture. ', 'Failing: a failed venture. ', 'Short of clay. ']) expect(found(lead), `the potter under "${lead.trim()}"`).toBe(0);
+  });
 });

@@ -87,16 +87,20 @@ export const everyOwnGroundSpent = (record, house) => { const g = ownGroundsOnRe
 // ---------------------------------------------------------------- the parts of the page this law reads
 const isBlank = (l) => !l || !l.trim();
 
-/** Every mark a house carries anywhere: its card (head, a description line's lead, a chip) or a Services row of it. */
+/** The failed venture's mark (BIRTH-3, `supplyStory.js :: ventureMarkText`), set where the short mark would be. */
+export const VENTURE_LEAD = /^(?:Abandoned|Failing): a failed venture\./;
+/** Every mark a house carries anywhere: its card (head, a description line's lead, a chip) or a Services row of it.
+ * LEFT-MARKS M6 (the sixth chair's AMENDMENT 2, 2026-11-17): THE FAILED VENTURE'S MARK IS A MARK ("Abandoned: a failed
+ * venture." / "Failing: a failed venture." leading a card's line or a Services row's description, as the short mark does). */
 export function houseMarks(T, name) {
   const marks = [];
   const c = T.cards.find((x) => x.name === name);
   if (c) {
     if (/· (Impaired|Stopped)\b/.test(c.head)) marks.push({ tab: 'Systems/Institutions', i: c.headIdx, line: c.head });
-    for (const l of c.lines) if (MARK_LEAD.test(l.text)) marks.push({ tab: 'Systems/Institutions', i: l.i, line: l.text });
+    for (const l of c.lines) if (MARK_LEAD.test(l.text) || VENTURE_LEAD.test(l.text)) marks.push({ tab: 'Systems/Institutions', i: l.i, line: l.text });
     for (const ch of c.chips) if (ch.marked) marks.push({ tab: 'Systems/Institutions', i: c.chipIdx, line: c.chipLine });
   }
-  for (const e of T.services) if (e.house === name && e.marked) marks.push({ tab: 'Systems/Services', i: e.titleIdx, line: `${e.titleRaw} / ${e.desc}` });
+  for (const e of T.services) if (e.house === name && (e.marked || VENTURE_LEAD.test(String(e.desc ?? '')))) marks.push({ tab: 'Systems/Services', i: e.titleIdx, line: `${e.titleRaw} / ${e.desc}` });
   return marks;
 }
 
