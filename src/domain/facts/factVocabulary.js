@@ -234,6 +234,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [growsMoreThanEats] BAR6-DEFDESK: `growsMoreThanEats.js`
  * @property {boolean} [monsterFrontier] BAR6-DEFDESK: `monsterFrontier.js`
  * @property {boolean} [crimeWave] BAR6-CRIME: `lawBand.js :: crimeWaveStands`
+ * @property {boolean} [rivalRings] BAR7-DESKS: `rivalRings.js :: rivalRingsStand`
  * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
  */
@@ -441,6 +442,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // `semi-organized` or above (routes and territory, or a hierarchy); a diffuse presence is not one.
   'organised crime': dim({ shape: 'presence', home: 'crime',
     reader: (/** @type {FactsLike} */ f) => (typeof f.crime === 'string' ? CRIME_WORDS.indexOf(f.crime) >= CRIME_WORDS.indexOf('semi-organized') : undefined) }),
+  // BAR7-DESKS (LAW 9's `9i.crews`, BRIEF-BAR7 item 6; vetoable by the owner, on the veto list as new vocabulary): `rival
+  // rings` = two criminal powers that do not govern, or the roster's "Multiple criminal factions" (`rivalRings.js`, over
+  // `corruption.js :: rivalRingsOf`). "Rival crews are fighting over who runs the streets" presumes them.
+  'rival rings': dim({ shape: 'presence', home: 'rivalRings', reader: (/** @type {FactsLike} */ f) => bool(f.rivalRings) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): the income list
   // carries a criminal revenue (`criminalIncome.js`), which the structure's key does not read. "The books record no gang, guild
   // or racket" presumes its absence (BAR3-CORPUS-3's C24893: 4 of 64).

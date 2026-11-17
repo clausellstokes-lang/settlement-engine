@@ -188,6 +188,8 @@ export const LEAVES = Object.freeze({
   // force that keeps order (`orderForce.js`: the live roster, the funded gate, the cast under arms); read where a line prints.
   crimeWave: home('crimeWave', 4, ['history']),
   orderForce: home('orderForce', 4, ['defenseProfile', 'institutions', 'npcs']),
+  // BAR7-DESKS (9i.crews): rival rings stand (`rivalRings.js`, over `corruption.js :: rivalRingsOf`: the powers and the roster)
+  rivalRings: home('rivalRings', 3, ['powerStructure', 'institutions']),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
     note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '

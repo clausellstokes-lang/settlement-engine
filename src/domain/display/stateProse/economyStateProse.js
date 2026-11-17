@@ -345,6 +345,7 @@ function singularBareCommonFill(value) {
  */
 function properFill(value) {
   if (!value) return undefined;
+  value = houseSentenceName(value); // BAR7-DESKS (5x.slash): a slash label takes its prose form (`data/houseSentenceName.js`)
   if (/[—–]/.test(value)) return undefined;
   if (/[.!?]\s|[.!?]$/.test(value)) return undefined;
   if (/[0-9]/.test(value)) return undefined;
@@ -1208,7 +1209,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const tradeKey = tradeProfilePoolKey(eco);
   const shadowKey = shadowEconomyPoolKey(eco.safetyProfile);
   const flowKey = tradeFlowPoolKey(readings.flowDrift);
-  const exportKey = exportPosturePoolKey(readings.exportPosture);
+  const exportKey = entrepotUnderNoImport(exportPosturePoolKey(readings.exportPosture), settlement, readings.exportPosture); // BAR7-DESKS (9h.entrepot)
 
   // ── DS-ECO-11, the ground and its workings ─────────────────────────────────────────
   // The TOKEN routes and the DISPLAY NAME gates. `config.terrainType` is the canonical
@@ -1257,6 +1258,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const recordSources = Array.isArray(foodRecord?.foodSources) ? foodRecord.foodSources : null;
   const chainsCount = Number(eco.foodSecurity?.activeChainsCount);
   const sourcesKey = recordSources && (!Number.isFinite(chainsCount) || chainsCount === recordSources.length)
+    && foodwaysFirstAgrees(settlement, recordSources[0]) // BAR7-DESKS (9g.source): one reading of the first source
     ? foodSourcesPoolKey(eco.foodSecurity?.foodRecord?.foodSources)
     : null;
   const foodProsperityKey = foodProsperityPoolKey(eco.foodSecurity?.prosperityMod);
@@ -1403,3 +1405,50 @@ export function houseStoppedWhole(key, settlement, name) {
 export const HOUSE_STOPPED_KEY = 'A CATEGORY PRESENT BUT ITS HOUSE STOPPED';
 import { serviceRowsOf } from '../../dossier/entityLinks.js';
 import { rowStoppedBy } from '../crisisStoppedRow.js';
+
+/**
+ * THE FOOD-SOURCES LENS READS THE FOODWAYS LINE THE PAGE PRINTS (BAR7-DESKS, LAW 9's rule 9g.source of BRIEF-BAR7 item 4; the
+ * sixth read's C41850; vetoable by the owner). DS-ECO-9's "FOOD SOURCES" pools name the food record's first source ("its own
+ * food comes first of all from its fishing") while the Economics tab's foodways line (`foodways.js :: foodwaysLineOf`, the
+ * one reader every surface hands) can name another first: "Its own fields give it grain, and beyond that its food is fish"
+ * (the roster's farmland read at print, `farmedOneFrame`). ONE READING: the lens is drawn only where the first source the
+ * printed line names (by the line's own source words, `foodways.js :: SOURCE_WORDS`, the earliest in the sentence) is the
+ * record's; a town with no foodways line, or one whose line names no source, is read as before.
+ * @param {unknown} settlement @param {unknown} recordFirst the food record's first source token
+ * @returns {boolean}
+ */
+export function foodwaysFirstAgrees(settlement, recordFirst) {
+  const printed = foodwaysLineOf(settlement);
+  if (!printed) return true;
+  let first = null;
+  let at = Infinity;
+  for (const [source, re] of Object.entries(SOURCE_WORDS)) {
+    const m = re.exec(printed);
+    if (m && m.index < at) { at = m.index; first = source; }
+  }
+  return first === null || first === text(recordFirst);
+}
+import { foodwaysLineOf, SOURCE_WORDS } from '../../foodways.js';
+
+/**
+ * "SELLS ON GOODS IT NEVER MADE" READS THE IMPORT LIST THE PAGE PRINTS (BAR7-DESKS, LAW 9's rule 9h.entrepot of BRIEF-BAR7
+ * item 5; the sixth read's C32912; vetoable by the owner), as `partialUnderNoExport` above made "the raw material moves" read
+ * the printed export list. The posture's `entrepot` status comes from the record's `isEntrepot`, while the Economics tab's
+ * Imports row (`tradeListDisplay.js :: tradeListsAsPrinted`) can print "No recorded imports.": the pool then says goods leave
+ * "that entered it as imports the same season" two lines below a page that names none. Where the printed list holds no
+ * import and trade is not stopped (a siege has its own lines in the pool, of the ordinary trade it stopped), the posture is
+ * read as the posture ladder reads a town that is no entrepôt (`exportPosture.js :: deriveExportPosture`'s other arms, over the
+ * export list the page prints: none, an isolated approach, one export, or more), so the line names only the trade printed.
+ * @param {string | null} key the posture pool key (`exportPosturePoolKey`)
+ * @param {unknown} settlement @param {unknown} posture the derived posture (`deriveExportPosture`)
+ * @returns {string | null}
+ */
+export function entrepotUnderNoImport(key, settlement, posture) {
+  if (key !== 'POSTURE: entrepot' || !settlement || typeof settlement !== 'object' || tradeStoppedHere(settlement)) return key;
+  const printed = tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (settlement));
+  if (printed.imports.length > 0) return key;
+  const sold = printed.exports.length;
+  const p = /** @type {{ access?: unknown }} */ (posture || {});
+  return sold === 0 ? 'POSTURE: none' : p.access === 'isolated' ? 'POSTURE: vulnerable' : sold === 1 ? 'POSTURE: limited' : 'POSTURE: established';
+}
+import { houseSentenceName } from '../../../data/houseSentenceName.js';

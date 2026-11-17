@@ -199,6 +199,8 @@ export function factsOf(record, options = {}) {
     get lawBand() { return lawBandOf(record); },
     /** BAR6-CRIME (9a.wave): the live tensions hold a crime wave (`lawBand.js :: crimeWaveStands`, the one reading) */
     get crimeWave() { return crimeWaveStands(record); },
+    /** BAR7-DESKS (9i.crews): rival rings stand (`rivalRings.js :: rivalRingsStand`, over `corruption.js :: rivalRingsOf`) */
+    get rivalRings() { return rivalRingsStand(record); },
     /** BAR6-CRIME (9a.watch, 6d-paid): the force that keeps order (`orderForce.js :: orderForceOf`) */
     get orderForce() { return orderForceOf(record); },
     /** BAR4-CORPUS-DEF (C24893): the income list carries a criminal revenue (`criminalIncome.js`) */
@@ -264,4 +266,5 @@ export function birthFactsOf(partial = {}, worldLaw = null) {
   return factsOf({ institutions: partial.institutions, config, tier: partial.tier ?? config.tier, stress, powerStructure: partial.powerStructure }, worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {});
 }
 import { orderForceOf } from './orderForce.js'; // BAR6-CRIME: the force that keeps order
+import { rivalRingsStand } from './rivalRings.js'; // BAR7-DESKS (9i.crews): at the END, no line above moves
 import { crimeWaveStands, lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.law.collapsed): at the END, no line above moves; BAR6-CRIME: the crime wave
