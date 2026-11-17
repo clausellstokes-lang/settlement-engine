@@ -1,0 +1,6 @@
+{"id":"C44148","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"STATE","why":"Volker Müller is the priest; a hook of 'their master craftsman talking to a rival' fits no craft of a priest","other":""}
+{"id":"C44195","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"STATE","why":"'Trade Monopoly' with one importer quadrupling grain price is a tension/event named in none of CRISIS, QUARRELS, TENSIONS, PAST","other":""}
+{"id":"C45015","town":"bar0-village-famine-rand-43","sev":"MED","kind":"STATE","why":"'Outsiders see a busy market' under an active famine with 0.1 months of food; HOUSES has only a Fish market, its fish scarce","other":""}
+{"id":"C45129","town":"bar0-village-famine-rand-43","sev":"LOW","kind":"STATE","why":"'Trade Monopoly' with one importer quadrupling grain price is in none of CRISIS, QUARRELS, TENSIONS, PAST","other":""}
+{"id":"C45041","town":"bar0-village-famine-rand-43","sev":"LOW","kind":"PAIR","why":"'market lives off through-traffic' contradicts 'Little that comes past Kulubtitlan stops there'; only a Fish market exists, famine-scarce","other":"C45248"}
+{"id":"DONE","lines":1755,"blocks":2,"flags":5}
