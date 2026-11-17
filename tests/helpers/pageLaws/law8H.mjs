@@ -113,7 +113,7 @@ const POOL = (() => {
 // a line hedged on its own input, or about stock already made, or about the crisis itself
 const HEDGED = /\b(when there is|when .{1,30} to be had|what is left|what little|while it lasts|while stocks last|before the (?:siege|war|famine)|since the (?:siege|war|famine)|used to|no longer|nothing to|for want of|until the|whatever is left|on the shelves|in store)\b/i;
 // a deal line about the person's manner or about others' work shows no work of the house (precision draw of the thirty)
-const MANNER_ONLY = /^(Polite\b|Tells you to see\b|Talks about who is (?:building|weaving)\b)/;
+const MANNER_ONLY = /^(Polite\b|Says nothing about\b|Tells you to see\b|Talks about who is (?:building|weaving)\b)/;
 const OWN_MARK = /^(How they deal\s+)?(Stopped by|Curtailed by|Scarce in|Short of)\b/;
 
 // ---------------------------------------------------------------- the rules
@@ -263,11 +263,13 @@ census.push({ kind: 'hook', front: false, trade: true, cause: m.short && !m.cris
     ['clothMade', /\b(looms?|weaving|shuttles?|tenters?|fulling stocks|bolts of (?:new )?cloth)\b/i],
     ['iron', /\b(forges?|anvils?|smithy|bellows|hammering of)\b/i],
     ['clay', /\b(kilns?|potter's wheel|wheel-thrown)\b/i],
-    ['timber', /\b(saws?|sawpits?|sawdust|the saw|sawmill)\b/i],
+    // not "saw" alone: the verb (precision draw of the 150, "… saw … men carrying crates")
+    ['timber', /\b(sawpits?|sawdust|sawn timber|sawmill|the saws? (?:whine|scream|rasp|bite)s?)\b/i],
     ['hides', /\b(tanning pits?|tanneries|tannery|tan ?pits?|tanning)\b/i],
     ['grapes', /\b(wine ?press(?:es)?|grape harvest|vintage|treading)\b/i],
   ];
-  const QUIET = /\b(quiet|idle|silent|cold|still|for want of|nothing to|no longer|little|few|brought in|from elsewhere|used to|once|stopped|short)\b/i;
+  // a scene of stock (bales stacked, "none of it is going anywhere") shows no work (precision draw of the 150)
+  const QUIET = /\b(quiet|idle|silent|cold|still|for want of|nothing to|no longer|little|few|brought in|from elsewhere|used to|once|stopped|short|stacked|stock|bales)\b/i;
   for (const tab of SCENE_TABS) (T.tabs[tab] || []).forEach((para, i) => sentences(para).forEach((l) => {
     if (MARK_LEAD.test(l)) return;
     if (markets.length && markets.every((c) => marked.get(c.name).crisis) && /\b(busy|bustl\w*|crowd\w*|fills|throng\w*|lively|teem\w*|packed)\b[^.]*\bmarket|\bmarket\b[^.]*\b(busy|bustl\w*|crowd\w*|fills|throng\w*|lively|teem\w*|packed)\b/i.test(l))
@@ -279,7 +281,8 @@ census.push({ kind: 'hook', front: false, trade: true, cause: m.short && !m.cris
       if (!hs.length) continue;
       const ms = hs.map((c) => marked.get(c.name));
       if (!ms.every((m) => m.lead)) continue;
-      const mild = ms.every((m) => !m.short && /^(Curtailed|Scarce)/.test(m.crisis));
+      // a house of the trade that goes on, thinly (curtailed or scarce, not short): the scene is counted apart
+      const mild = ms.some((m) => !m.short && /^(Curtailed|Scarce)/.test(m.crisis));
       push(`8k.trade${mild ? '.mild' : ''}`, { tab, i, line: l, rowLines: [l, para] }, { tab: INST, i: ms[0].idx, line: ms.map((m) => m.line).join(' | ') }, `a scene shows the ${key} trade at work; every house of it on the page carries a mark`, { thing: key, cause: causeOf(ms) });
     }
   }));
