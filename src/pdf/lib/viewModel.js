@@ -27,6 +27,9 @@ import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { crisisNoteFor } from '../../domain/dossier/powerStrata.js';
 import { deriveFoodBalance, deriveProsperityPosture, deriveViability } from '../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
+// SEAM-PDF item 3 (2026-11-17; BAR6-ECON's C88465): the complexity label as the Economics tab prints it (no "Subsistence" beside a
+// purse past survival), the one reading (`labelBands.js :: complexityLabelShown`), at every print of it below.
+import { complexityLabelShown } from '../../domain/display/labelBands.js';
 import { criticalIssuesOf, stressEffectsOf, viabilityIssueText } from '../../domain/display/validationOnPage.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { humanize } from './format.js';
@@ -242,7 +245,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
         governingName: governing?.faction || governing?.name || null,
       },
       economy: {
-        complexity: ec?.economicComplexity || null,
+        complexity: complexityLabelShown(ec) || null,
         topExport: labelOfThing(ec?.primaryExports?.[0]),
       },
       defense: {
@@ -302,7 +305,7 @@ function identitySlice(s, canonical = s) {
     anchor: {
       governingName:  governing?.faction || governing?.name || null,
       prosperity:     ec?.prosperity || null,
-      complexity:     ec?.economicComplexity || null,
+      complexity:     complexityLabelShown(ec) || null,
       safety:         sp?.safetyLabel || null,
       // ⚠ AN UNCOMPUTED ECONOMY IS NOT A BALANCED ONE. deriveFoodBalance returns
       // `available:false` with 0/0 for a settlement whose economy was never
@@ -399,7 +402,7 @@ function overviewSlice(active, ai, useAi) {
       summary:    s?.economicViability?.foodSecurity?.summary || s?.economicViability?.metrics?.foodBalance?.summary || null,
     },
     economyOutput:      ec?.compound?.economyOutput ?? null,
-    economicComplexity: ec?.economicComplexity || null,
+    economicComplexity: complexityLabelShown(ec) || null,
     defenseScores:      dp?.scores || {},
     defenseScoreAvg:    avgScore(dp?.scores),
     defenseReadiness:   dp?.readiness || null,
