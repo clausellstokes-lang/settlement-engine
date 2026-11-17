@@ -18,6 +18,7 @@ import { resourceDisplayName } from './resourceDisplayName.js';
 import { idOfHouse, sourceStoryOf } from '../facts/supplyStory.js';
 import { SOURCE_GROUNDS } from '../facts/houseKinds.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /** A regular-expression literal of a plain string. @param {string} s */
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -90,9 +91,10 @@ export function chainHousesOf(patterns, instNames, onCard = null) {
  */
 function workersOfAnotherGround(onCard) {
   const chain = /** @type {{ resourceDepleted?: unknown } | null} */ (onCard && typeof onCard.chain === 'object' ? onCard.chain : null);
-  const town = /** @type {{ institutions?: unknown } | null} */ (onCard && onCard.town && typeof onCard.town === 'object' ? onCard.town : null);
+  const town = /** @type {Parameters<typeof liveInstitutions>[0] | null} */ (onCard && onCard.town && typeof onCard.town === 'object' ? onCard.town : null);
   if (!chain || !town || chain.resourceDepleted !== true) return () => false;
-  const roster = /** @type {Array<{ name?: unknown, catalogId?: unknown }>} */ (Array.isArray(town.institutions) ? town.institutions : []);
+  // the live roster (a ruined or closed house is at work on no ground): the ruin filter's one reading
+  const roster = /** @type {Array<{ name?: unknown, catalogId?: unknown }>} */ (liveInstitutions(town));
   return (house) => {
     const inst = roster.find((i) => !!i && typeof i === 'object' && i.name === house);
     if (!inst) return false;
