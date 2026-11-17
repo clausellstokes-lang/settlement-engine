@@ -810,3 +810,25 @@ should be paused or archived by the owner's hand.
   by name): the same follow-up, if it is one line. Every hunk is caught by a named test (eight mutations); the laws the
   same three reds with the same messages at base and tip; no player path to the PDF or the journal; no stored field;
   both type gates 0; the lint net 69 names at both. POINT 44 STANDS AS BUILT (917c915bc); its whole check is running.
+- **23:44 UTC. SCENES HANDED BACK ITS LAST WORD (23:32, cabed01ff, base 2f8f64f7b; seven commits, one parent each; it could commit) AND IS BUILT AS POINT 45**
+  in `/home/user/line`, `lane/landing-45-2026-11-17`: the merge 2f0e8897104e0f83af17b4f2fcf3e9b984da5b2b on point 44
+  (917c915bc; no conflict; the tree e4e8a9e0e; being pushed). After BR23: the two mechanism hunks measured to move
+  nothing alone (the 900 records and pages byte-equal, the 525 equal); three twins, each last in its pool (the small
+  working quarry's "A laden cart or two …" in six hamlets; the past under a live hard crisis by `twinKey`: "… may be
+  the second/first"; enchanting offered with the arcane trade not at work: admitted in nine towns, drawn in none); 12c
+  2 · 2 · 4 -> 0; 12b, 15a, 9g.food-soft 0; 11b's scenes 0 · 0 · 1 (r2r-village-36 left); the stored records move in
+  the drawn prose only (30: 7, 150: 7, 720: 31); 1 of the 525 moves. THE EMPTY ROAD now excludes the small tiers so
+  that the two twins of the endless line are disjoint: two states hold no twin (a thorp or hamlet whose stone is not
+  at work, or at work under a siege: 0 towns of the 900): asked of the reader. THE CHAIR'S READ: the sources as ruled
+  (the fact reads fact-level homes, not the display leaf; `factVocabulary.js` takes the two keys; the two granted
+  files one hunk each); five tests re-keyed (MU1's new exclusion drops the one new twin only: no older twin needs a
+  trade at work). AT THE MERGE (the chair's targeted net: the guard, the re-keyed tests, `tests/architecture`, the
+  walker, `tests/joins`, J-ROWS's and PDF-2's guards: 306 files, 876 of 881 green): the five reds are red by name at
+  the line already; BY MESSAGE the walker names the one old file only; the ledger test
+  `tests/domain/facts/census2eTables.test.js` names ONE ROW MORE (`stable[2]`: 12c's declaration) and one word of an
+  old row changes (`PRESSURE_SENTENCES.wartime(winning)[1]`: "ironwork in full"): the stored ledger of declared lines
+  is re-taken at the close, with the owner's yes (R10). THE LINE MOVED UNDER THE SEAT (the mark leaf
+  `crisisStoppedRow.js`, `houseInputAtHand.js`, `crisisDependence.js`, `supplyStory.js` changed since its base),
+  SO ITS SECOND READER MEASURES THE ATOM AGAINST THE LEAF HOUSE BY HOUSE AT THE MERGE: READ-SCENES is seated when the
+  branch is on origin (its prompt: `/home/user/wk/prompts/READ-SCENES.txt`). FISH-ROWS COULD COMMIT (23:23 c9e48bdbf,
+  23:32 dd6f8c75a: its hunk in `generateNarratives.js`); it works on.
