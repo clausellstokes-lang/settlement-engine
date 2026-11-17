@@ -872,7 +872,7 @@ wants a sentence.
 2. `[street · grain · no hunger]` The talk about food here is about price, not about enough. The fields have been good to the town and the stores show it.
 3. `[visitor · no hunger]` Loaded carts leave {settlement} for other markets. The town grows more food than it can eat.
 4. `[ledger · hunger]` {settlement}'s fields still raise more than the town eats, but the hunger is real and the town is living off its stores.
-5. `[ledger · hunger]` On the count, {settlement} raises more than it eats; with the hunger on, the excess is being kept back rather than sold.
+5. `[ledger · hunger]` On the count, {settlement} raises more than it eats; with the crisis on, the excess is being kept back rather than sold.
 6. `[visitor · hunger]` What {settlement} raises still comes out ahead of what it eats, and this year every bit of the excess is wanted at home.
 
 **FOOD: balanced**
@@ -2503,7 +2503,7 @@ and never an assertion that the feared thing is happening.
 **FLAG: secularBrutalism** *(WIRING W3 C6: `safetyProfile.flags.secularBrutalism`)*
 1. `[street · garrison · no sacredHouse · no crisis: occupied]` {settlement} is ruled by force. Soldiers carry out the {seat}'s orders, and no temple or priest stands between the town and the punishment.
 2. `[counterforce · garrison]` Punishment at {settlement} is quick and public, handed out by soldiers, and there is nobody to appeal to but the {seat}.
-3. `[street · garrison · no sacredHouse · crisis: occupied]` {settlement} is ruled by force. Soldiers carry out the occupiers' orders through the {seat}, and no temple or priest stands between the town and the punishment.
+3. `[street · garrison · no sacredHouse · crisis: occupied]` {settlement} is ruled by force. Soldiers carry out the occupiers' orders through the {seat}, and nobody of the faith stands between the town and the punishment.
 
 ---
 
@@ -4047,7 +4047,7 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 4. `[ledger · food: ≤ importDependent]` In an ordinary year {settlement} would not miss the road, river or port it lacks, but this is not an ordinary year: the town is not raising the food it needs.
 5. `[visitor · food: pressured]` No dependable road, river or port reaches {settlement}, and the town makes do without one: what it raises falls a little short of what it eats, and its stores make up the rest.
 6. `[street · food: pressured]` Traders seldom reach {settlement}, and people there seldom miss them, though the town raises a little less than it eats and draws on its stores for the rest.
-7. `[street · food: ≥ secure · crisis: hunger]` {settlement} put by more than a bad year would take, and it is living on those stores now.
+7. `[street · food: ≥ secure · crisis: hunger]` {settlement} had put by more than it needed, and it is living on those stores now.
 8. `[visitor · food: ≥ secure · crisis: hunger]` No dependable road, river or port reaches {settlement}, and this year the town lives on what it had put by.
 
 **CAPACITY: enough** {colour}

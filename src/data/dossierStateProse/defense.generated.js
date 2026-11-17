@@ -9746,7 +9746,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "food: ≥ secure",
             "crisis: hunger"
           ],
-          "text": "{settlement} put by more than a bad year would take, and it is living on those stores now.",
+          "text": "{settlement} had put by more than it needed, and it is living on those stores now.",
           "slots": [
             "settlement"
           ],

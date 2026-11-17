@@ -432,7 +432,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hunger"
           ],
-          "text": "On the count, {settlement} raises more than it eats; with the hunger on, the excess is being kept back rather than sold.",
+          "text": "On the count, {settlement} raises more than it eats; with the crisis on, the excess is being kept back rather than sold.",
           "slots": [
             "settlement"
           ],

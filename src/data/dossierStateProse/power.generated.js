@@ -2750,7 +2750,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "no sacredHouse",
             "crisis: occupied"
           ],
-          "text": "{settlement} is ruled by force. Soldiers carry out the occupiers' orders through the {seat}, and no temple or priest stands between the town and the punishment.",
+          "text": "{settlement} is ruled by force. Soldiers carry out the occupiers' orders through the {seat}, and nobody of the faith stands between the town and the punishment.",
           "slots": [
             "settlement",
             "seat"
