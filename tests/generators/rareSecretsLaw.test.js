@@ -229,7 +229,9 @@ describe('SECRETS-1: every row stands for some planted roster, and only where it
         else if (o === 'knownFromBirth') patch = { role: 'the eldest' };
         else if (o === 'criminalHead') patch = { memberships: [{ power: "Thieves' Guild", rank: 1, share: 1, veiled: true }] };
         else throw new Error(`no planted office for ${o}`);
-        const after = standingKeys(place, withCand(patch).map((c) => (o === 'head' && c.id === 'head' ? { ...c, memberships: [] } : c)));
+        const under = o === 'criminalHead' ? { ...place, powerStructure: { ...place.powerStructure, factions: [...place.powerStructure.factions, { faction: "Thieves' Guild", category: 'criminal' }] } } : place;
+        if (o === 'criminalHead') expect(standingKeys(under, cards), 'the underworld on the page refuses nothing by itself').toContain(row.key);
+        const after = standingKeys(under, withCand(patch).map((c) => (o === 'head' && c.id === 'head' ? { ...c, memberships: [] } : c)));
         expectPresentThenAbsent(before, after, row.key, `${row.key} never on the ${o}`);
         if (o === 'knownFromBirth') expectPresentThenAbsent(before, standingKeys(place, cards, [...RELS, { from: 'cand', to: 'other', type: 'family' }]), row.key, `${row.key} never on one with kin on the page`);
       }

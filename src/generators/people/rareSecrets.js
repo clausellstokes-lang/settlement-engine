@@ -46,7 +46,8 @@ import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.
 import { filterDeclared } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { rulerKindOfLabel } from '../../domain/facts/rulerKindLabel.js'; // the leaf (rulerKind.js is pinned lazy)
-import { governingNameOf } from '../../domain/people/cardPowers.js';
+import { governingNameOf, powerNameOf } from '../../domain/people/cardPowers.js';
+import { criminalPowersOf } from '../../domain/people/allegiance.js';
 import { membersByRank, membershipIn, powerOrderOf, powersByRankOf } from '../../domain/people/membership.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
@@ -141,8 +142,8 @@ function placeOf(settlement, cards, relationships, worldLaw) {
   const order = powerOrderOf(record);
   const governing = governingNameOf(record);
   const lordly = rulerKindOfLabel(rec(settlement.powerStructure).government) === 'lord';
-  /** @type {Map<string, string>} the powers' categories, by name */
-  const powerCategory = new Map(arr(rec(settlement.powerStructure).factions).map((x) => [str(rec(x).faction) || str(rec(x).name), str(rec(x).category).toLowerCase()]));
+  /** the underworld's powers, by name (`domain/people/allegiance.js :: criminalPowersOf`, the goals' own reading) */
+  const underworld = new Set(criminalPowersOf(record).map((x) => powerNameOf(x)));
   /** @type {Map<string, Set<string>>} */
   const tiesOf = new Map();
   for (const t of relationships) {
@@ -158,7 +159,7 @@ function placeOf(settlement, cards, relationships, worldLaw) {
     order,
     governing,
     lordly,
-    powerCategory,
+    underworld,
     relationships,
     /** @param {string} a @param {string} b @returns {Set<string>} */
     tieTypes: (a, b) => tiesOf.get(`${a}\t${b}`) || new Set(),
@@ -174,13 +175,8 @@ function isHereditary(card, place) {
   if (place.lordly && isHead(card, place)) return true;
   return powersByRankOf(card, place.order).some((m) => NOBLE_POWER.test(str(m.power)));
 }
-/** A power of the underworld, by its category or its name. */
-const CRIMINAL_POWER = /\bthie|\bcrim|\bunderworld\b|\bsyndicate\b|\bgangs?\b|\bsmuggl|\bcartel\b|\bshadow\b|\brookery\b/i;
-/** AMENDMENT 2: first of a criminal power (veiled or not). @param {Rec} card @param {Place} place */
-const isCriminalHead = (card, place) => arr(card.memberships).some((m) => {
-  const power = str(rec(m).power);
-  return rec(m).rank === 1 && (place.powerCategory.get(power) === 'criminal' || CRIMINAL_POWER.test(power));
-});
+/** AMENDMENT 2: first of a power the engine reads as the underworld's (`allegiance.js`'s one reading). @param {Rec} card @param {Place} place */
+const isUnderworldHead = (card, place) => arr(card.memberships).some((m) => rec(m).rank === 1 && place.underworld.has(str(rec(m).power)));
 /** @param {Rec} card */
 const isElder = (card) => ELDER_OFFICE.test(str(card.role)) || ELDER_OFFICE.test(str(card.title));
 /** Kin on the page, an elder's office, or a title of blood. @param {Rec} card @param {Place} place */
@@ -234,7 +230,7 @@ function holderAdmits(h, card, place) {
     if (o === 'elder' && isElder(card)) return false;
     if (o === 'hereditary' && isHereditary(card, place)) return false;
     if (o === 'knownFromBirth' && knownFromBirth(card, place)) return false;
-    if (o === 'criminalHead' && isCriminalHead(card, place)) return false;
+    if (o === 'criminalHead' && isUnderworldHead(card, place)) return false;
   }
   for (const o of h.office || []) if (o === 'head' && !isHead(card, place)) return false;
   if (h.keepsHouse && rec(card.institution).kind !== 'house') return false;
