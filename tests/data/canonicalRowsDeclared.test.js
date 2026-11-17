@@ -24,7 +24,7 @@ describe('the seven canonical v0 rows declare through the tag slot (CENSUS-3f un
   it('the four declaring canonical rows: v0, with their marks', () => {
     for (const [block, pool, marks] of [
       ['DS-ECO-3', 'SHORTAGE × trade-dependent', ['market']],
-      ['DS-ECO-3', 'SURPLUS × trade-dependent', ['market']],
+      ['DS-ECO-3', 'SURPLUS × trade-dependent', ['market', 'no crisis: under_siege']], // 2026-11-16 BAR6-ECON (LAW 5, BAR5-FOOD's left): the busy roads are refused under a siege
       ['DS-ECO-6', 'TIER: significant off-book activity (≥15)', ['guild', 'no crisis: under_siege']], // TAIL-CORPUS-ECO-3 batch 5 (2026-11-15): + `no crisis: under_siege` (C13: duties and guild fees undersold where nothing comes in)
       ['DS-ECO-6', 'TIER: minor shadow activity (≥3)', ['no organised crime', 'no crisis: famine', 'no crisis: under_siege']], // TAIL-CORPUS-ECO-4 (U2, 2026-11-15): the row b760d37d3 declared (W2-WRITE-SIDE-ECO-2 D #1378: petty theft and unlicensed trade claimed under organised crime, a famine, a siege), read from the colour table into this one
     ]) {

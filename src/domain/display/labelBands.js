@@ -218,3 +218,28 @@ export function complexityBandOf(label) {
   if (!text) return null;
   return Object.hasOwn(COMPLEXITY_BAND_BY_LABEL, text) ? COMPLEXITY_BAND_BY_LABEL[text] : null;
 }
+
+/**
+ * THE SURVIVAL LABEL'S TWIN WHERE THE PURSE SAYS MORE (BAR6-ECON, LAW 9's rule 9b.subsistence of BRIEF-BAR6; the wide
+ * read's C88465; vetoable by the owner). "Subsistence — survival economy" is a COMPLEXITY label (the economy's breadth:
+ * a narrow base of its own work), printed under the Prosperity word as if it were a second word on the purse; under
+ * "Comfortable" (a town that pays its way and puts things by) its gloss "survival" denies the word above it. At
+ * Comfortable or better the label prints its twin, the same head word and the label's own noun ("Subsistence
+ * economy"): the breadth stays said, the purse is not denied. Read at print; `economicComplexity` is untouched.
+ * @type {string}
+ */
+export const SUBSISTENCE_TWIN = 'Subsistence economy';
+
+/** The prosperity words at which a purse is past survival (`prosperityRank.js`'s rungs from Comfortable up), lower case. */
+const PAST_SURVIVAL = Object.freeze(['comfortable', 'prosperous', 'wealthy']);
+
+/**
+ * The complexity label as the Economics tab prints it under the Prosperity word.
+ * @param {{ economicComplexity?: unknown, prosperity?: unknown } | null | undefined} eco `economicState`
+ * @returns {unknown} the record's label, or its twin
+ */
+export function complexityLabelShown(eco) {
+  const label = eco?.economicComplexity;
+  const purse = typeof eco?.prosperity === 'string' ? eco.prosperity.trim().toLowerCase() : '';
+  return label === COMPLEXITY_LABEL.SUBSISTENCE && PAST_SURVIVAL.includes(purse) ? SUBSISTENCE_TWIN : label;
+}

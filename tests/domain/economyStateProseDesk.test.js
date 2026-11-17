@@ -29,6 +29,7 @@ import {
   foodTilePoolKey,
   granaryPoolKey,
   impairedServicePoolKey,
+  houseStoppedWhole,
   incomeMixPoolKey,
   leadingExploitation,
   leadingGoodNoun,
@@ -1316,6 +1317,9 @@ describe('DESK-ECON2 — DS-SUP-3, the catalog and its absences', () => {
       if (expected.includes('healing')) reached.add(serviceCatalogPoolKey([gap('healing')], tier));
     }
     reached.add(impairedServicePoolKey('Tannery'));
+    // BAR6-ECON (8e.open, 2026-11-16): the stopped house's twin, reached where the siege stops every service the house keeps
+    const besieged = { stress: { type: 'under_siege' }, stressors: { type: 'under_siege' }, availableServices: { Commerce: [{ name: 'Caravan organization', desc: 'Assemble merchants with compatible routes into shared caravans.', institution: 'Caravan masters\' exchange' }] } };
+    reached.add(houseStoppedWhole(impairedServicePoolKey('Caravan masters\' exchange'), besieged, 'Caravan masters\' exchange'));
     const authored = Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-SUP-3'].pools).sort();
     expect([...reached].filter(Boolean).sort(), 'a DS-SUP-3 pool is unreachable')
       .toEqual(authored);

@@ -75,7 +75,7 @@ const NOT = /** @type {const} */ ([
   ['r2s-under_siege-hamlet-2', 'economics', 'Many households go short, and a bad season would bring real hunger.', 'Many households go short, and hunger is already here.', 'Many households go short, and hunger is already here.'],
   ['r2s-famine-town-2', 'economics', 'Law enforcement, patrol and gate control here depend on iron', 'Law enforcement and patrol here depend on iron (no gate, no wall)', 'Law enforcement and patrol here depend on iron'],
   ['r2s-under_siege-town-1', 'economics', 'Law enforcement, patrol and gate control here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside', 'Law enforcement and patrol here depend on iron from outside'],
-  ['r2s-under_siege-town-0', 'economics', 'Contributes to Entrepôt Trade - 11% of income', 'silent: the siege stopped the card', 'Contributes to Iron & Metalwork'],
+  ['r2s-under_siege-town-0', 'economics', 'Contributes to Entrepôt Trade - 11% of income', 'silent: the siege stopped the card', 'Curtailed by the siege.'], // anchor re-keyed by identity 2026-11-16 (BAR6-ECON, 8d.income): the sibling card's share (Iron & Metalwork) is the siege's now, so its card's line is silent and the share's own mark is the sibling
   // settled at the merge of the joined line at 17e38c547 (TAIL-CLOSE-DISPLAY-1): the record's shares moved 4 -> 5 and 13 -> 14
   // at 837cad90 (TAIL-DEFECON-2 5f67f382d, TAIL-DEFECON-3 2ac50c55d) and back to 4 and 13 on JOIN-9's points (measured by the
   // record at the merged tree; the point not traced here); the same card, the famine still silences it
@@ -99,7 +99,11 @@ const KEEP = /** @type {const} */ ([
   // RE-KEYED BY IDENTITY (TAIL-DISPLAY-ECON-4, the chair's ruling X25.1): batch 2's silence gave way to the crisis leaf
   // (`crisisStoppedRow.js`), whose table holds the forge and the mine at work under a siege ("Iron & Metalwork": NONE);
   // the Income Sources row prints the same share unmarked. The same town, the same line: it prints again.
-  ['r2s-under_siege-town-1', 'economics', 'Contributes to Iron & Metalwork - 8% of income'],
+  // RE-KEYED BY IDENTITY 2026-11-16 (BAR6-ECON, LAW 8's 8d.income, BRIEF-BAR6 fact (b)): a share titled by a chain reads
+  // that chain's state; r2s-under_siege-town-1's Iron & Metalwork card prints Impaired by the siege, so its share takes the
+  // siege's partial mark and the card's line is silent. The same claim in the one besieged town of the twelve whose Iron &
+  // Metalwork card the siege leaves at work:
+  ['r2s-under_siege-metropolis-3', 'economics', 'Contributes to Iron & Metalwork - 2% of income'],
 ]);
 
 afterEach(cleanup);

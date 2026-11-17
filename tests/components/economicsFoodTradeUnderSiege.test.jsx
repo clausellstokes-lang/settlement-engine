@@ -63,6 +63,6 @@ describe('the food card says what trade brings by the food record (item 4(a), th
     const town = birthApp('rw3-city-famine-1');
     expect(Number(town.economicState.foodSecurity.foodRecord.normalImportPct)).toBeGreaterThan(0);
     const text = foodCard(town);
-    expect(/\b(?:carts|ships|boats|trade) brings? in /.test(text) && /\+ [\d,]+ imported/.test(text)).toBe(true); // re-keyed by identity at W2-C-LEAVES-5 (item 3 re-cut the share words)
+    expect(/\b(?:carts|ships|boats|trade|airships|the teleportation circle) brings? in /.test(text) && /\+ [\d,]+ imported/.test(text)).toBe(true); // re-keyed by identity at W2-C-LEAVES-5 (item 3 re-cut the share words); 2026-11-16 BAR6-ECON (9c.carts): the carrier is the record's channel where no cart carries it
   }, 60000);
 });
