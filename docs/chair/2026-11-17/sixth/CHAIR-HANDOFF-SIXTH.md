@@ -766,3 +766,13 @@ should be paused or archived by the owner's hand.
   as it comes. WHEN THOSE THREE ARE ON THE LINE, NOTHING ELSE MOVES WITHOUT THE OWNER, and THE EIGHTH READ WAITS TOO (a read
   now would measure a tree that lacks half the round: K-POWERS, K-PEOPLE, K-WATCH, DESKS-DEF and DESKS-ECO hold their
   finished work uncommitted). The owner has the whole account and the two ways out in plain words (22:56).
+- **23:02 UTC. PDF-2 HANDED BACK (23:01, 2dac64372, base 3b06c724b; it could commit):** its probe over the 720 / the 150 / the thirty, base to tip: item 1
+  (BR10 (3) in the PDF's chain sections) 18/2/0 -> 0; item 2 (the proven grounds in the PDF's chapter) 134/27/5 -> 0; item
+  5 (LEFT-PDF's half-cured L2) 42/22/2 -> 0 and "Normally yields" 59/30/7 -> 0; item 6 (the chain's state word, PDF and
+  journal) 37/18/3 -> 0; items 7 and 8 done; ONE new reading `crisisMarksOnPage.js :: chainCardOnPage`; three tests
+  re-keyed by identity (now on the chain the tab's card renders); no new words; no declared move. LEFT BY NAME, AS ALLOWED:
+  item 3 (its base's `ordinaryTimesLine` takes a boolean: THE EXACT HUNK IS IN ITS HAND-BACK, measured at a scratch merge
+  with point 40: the nine towns 9 -> 0) and item 4 (the income share's ordinary line: 95/16/3 stand; it needs J-INCOME's
+  leaf, and J-INCOME is held). SECOND READER: READ-PDF-2 session_01FbPLbfTpRsMBhV8rBJqf83 (seated 23:02). AFTER PDF-2 IS ON
+  THE LINE, ITEM 3 IS ASKED OF THE SEAT ITSELF ON A SECOND BRANCH CUT FROM THE LINE'S TIP (its hunk and a guard arm): the
+  chair writes no source.
