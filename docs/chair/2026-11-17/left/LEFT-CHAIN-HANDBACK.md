@@ -151,3 +151,36 @@ that it lists are named, not chased.
 
 R10: no stored figure re-taken (no register, census, baseline or reference file written).
 
+
+## 7. AFTER THE CHAIR'S RULINGS (the chair's message of 19:09 UTC, 2026-11-17)
+
+BR10 (3) AMENDED, BUILT: `chainHouses.js :: workersOfAnotherGround` leaves out a source house only where its own grounds
+(`SOURCE_GROUNDS`) hold the card's spent ground (`resourceKey`) and its story is `local`. This supersedes sections 1 and 2
+where they differ. THE NEW COUNTS, at the new tip, the thirty · the 150 · the 720:
+
+- cards changed: 0 · 2 · 18 (towns 0 · 2 · 18): the 17 mines of the chair's list and one charcoal burner on its own
+  spent mountain timber (r2r-metropolis-43, "Mountain Timber": "Sawmill · Charcoal burner" → "Sawmill", the burner at work
+  in its other woods) in the 720; the 2 mines of the 150 (bar0-metropolis-calm-rand-34, bar0-city-under_siege+famine-rand-36).
+- cards emptied: 0 · 0 · 0. Empty "Via" cards on the rendered pages are back to the base's count: 36 in 8 · 155 in 53 · 894
+  in 267, base and new tip alike.
+- The 58 makers the wide wording dropped (36 charcoal burners, 14 salt works, 8 quarries) keep their places.
+- Pages that differ from base: 1 · 6 · 36 (L5's towns, L18's 18, L7's two). I re-rendered the 98 pages that had changed at
+  the earlier tip; every other page was already byte-equal to base. The 98 records reborn at the new tip are byte-equal to
+  base. runH and runD over the 720 read as at the earlier tip: `8f.short` 2 → 0, `8b.extract` 3 → 0, `8b.person` 14 → 12,
+  and no rule gains.
+
+THE GUARD'S READING: arm (a) is re-worded to the amended rule ("a source house WHOSE OWN GROUNDS HOLD THE CARD'S SPENT
+GROUND"), with a dated note in the test that the brief's wording is superseded by the chair's message. A NEGATIVE stands
+beside it: r2s-famine-city-2's charcoal burner (at work on live managed forest) keeps its place on the spent "Fuel &
+Heating" coal card, and r2s-famine-town-2's salt works (live salt flats) keeps its place on the spent "Fishing & Seafood"
+card, on the record and on the rendered tab. The guard has 8 tests, all passing at the new tip. At base it still reds on
+(a) (the 17 mines and the 150's 2), the seventeen, L5's anchors and (c).
+
+THE NET for the touched files, at the new tip: strict typecheck 0, ratchet 0, `tests/architecture` 0, eslint 0, the
+chain-card readers' tests 0. `ruinFilterRoster` "the scan reads CODE" is red with the base's own message (115 vs its stored
+113). The doors read as at base (classes fresh 0 · stale 151; things fresh 39 · stale 72).
+
+BR18 (L6): not a fault; nothing built. Whether the card should say it runs on bought iron goes to the owner's list as a
+question (the chair's).
+
+THE PDF'S TWO CALL SITES AND ITS INCOME SHARE: named by the chair for a seat after LEFT-PDF lands.

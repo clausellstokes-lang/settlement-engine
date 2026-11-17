@@ -2,12 +2,19 @@
 /**
  * leftChainCards.test.jsx — LEFT-CHAIN (the sixth chair's BRIEF-LEFT, 2026-11-17; rows L18, L5, L27, L7; vetoable by the
  * owner): THE CHAIN CARD SAYS WHO WORKS THE CHAIN NOW, AND ITS LISTS FOLLOW THE MARKS. THIS FILE REDS WHEN
- *   (a) L18, THE CHAIR'S RULING BR10 (3): over the census's 720, the 150 and the thirty, a chain card whose From is a spent
- *       ground (`resourceDepleted`, the "(depleted)" its From prints) lists under "Via" a source house
- *       (`houseKinds.js :: SOURCE_GROUNDS`) that the supply rule reads at work (`supplyStory.js :: sourceStoryOf`, story
- *       `local`): the seventeen mines of the chair's list (each on spent iron beside a live seam of its own kind) by name,
- *       on the rendered tab too; or the POSITIVE ANCHOR goes: a mine on its only, spent ground (r2r-town-12, r2r-village-51)
- *       IS listed on its spent card, and IS marked short;
+ *   (a) L18, THE CHAIR'S RULING BR10 (3) AS AMENDED: over the census's 720, the 150 and the thirty, a chain card whose From
+ *       is a spent ground (`resourceDepleted`, the "(depleted)" its From prints) lists under "Via" a source house WHOSE OWN
+ *       GROUNDS HOLD THAT GROUND (`houseKinds.js :: SOURCE_GROUNDS`) that the supply rule reads at work
+ *       (`supplyStory.js :: sourceStoryOf`, story `local`): the seventeen mines of the chair's list (each on spent iron
+ *       beside a live seam of its own kind) by name, on the rendered tab too; or the POSITIVE ANCHOR goes: a mine on its
+ *       only, spent ground (r2r-town-12, r2r-village-51) IS listed on its spent card, and IS marked short; or THE NEGATIVE
+ *       goes: a source house at work on a ground of its own that is not the card's (a charcoal burner on live wood on a spent
+ *       coal card, r2s-famine-city-2; a salt works on live salt flats on a spent fishery's card, r2s-famine-town-2) KEEPS
+ *       its place on the card.
+ *       DATED NOTE (2026-11-17, LEFT-CHAIN): the brief's wording of this arm ("a source house whose story is `local`",
+ *       any source house) is SUPERSEDED by the chair's message of 19:09 UTC amending BR10 (3) to the narrower reading: a
+ *       maker of the chain's goods on a ground of its own is true on the card (the wide wording dropped 58 such houses
+ *       and emptied 43 cards of the 720). The arm is re-worded to the amended rule, and the negative stands beside it;
  *   (b) L5 and L27: over the 720 and the 150, an output of a working chain card, an Exports pill or a "Produced locally"
  *       pill names a good whose every maker on the live roster (`tradeListDisplay.js :: houseMakesGoodNamed`) carries the
  *       page's short mark (`crisisStoppedRow.js :: rowShortOf`), a good the town's own live ground yields apart (the
@@ -101,23 +108,29 @@ const L5_ANCHORS = [
 const instNamesOf = (s) => (s?.institutions || []).map((/** @type {any} */ i) => i?.name || '');
 /** The names a chain card prints under "Via", as the tab reads them. @param {any} s @param {any} chain */
 const viaOf = (s, chain) => chainFlowFacts(chain, instNamesOf(s), chainPrintName(chain, s), s).institutions.map((/** @type {{ name: string }} */ h) => h.name);
-/** The live source houses the supply rule reads at work, by the card's label. @param {any} s */
-const atWorkSourceLabels = (s) => new Map((s?.institutions || [])
-  .filter((/** @type {any} */ i) => i && typeof i.name === 'string' && Object.prototype.hasOwnProperty.call(SOURCE_GROUNDS, idOfHouse(i))
+/** The live source houses of a ground the supply rule reads at work, by the card's label. @param {any} s @param {string} ground */
+const atWorkSourceLabels = (s, ground) => new Map((s?.institutions || [])
+  .filter((/** @type {any} */ i) => i && typeof i.name === 'string' && (SOURCE_GROUNDS[idOfHouse(i)] || []).includes(ground)
     && sourceStoryOf(s, i, resourceShortageImport)?.story === 'local')
   .map((/** @type {any} */ i) => [institutionHouseLabel(i.name), i.name]));
 
-/** (a)'s instances in one town. @param {any} s @returns {string[]} */
+/** (a)'s instances in one town (BR10 (3) amended: a source house of the card's own spent ground). @param {any} s @returns {string[]} */
 function spentCardsListingWorkers(s) {
-  const working = atWorkSourceLabels(s);
   /** @type {string[]} */
   const out = [];
   for (const chain of s?.economicState?.activeChains || []) {
     if (chain?.resourceDepleted !== true) continue;
+    const working = atWorkSourceLabels(s, String(chain.resourceKey || ''));
     for (const name of viaOf(s, chain)) if (working.has(name)) out.push(`${chain.label} · ${working.get(name)}`);
   }
   return out;
 }
+
+/** THE NEGATIVE (BR10 (3) amended): a source house at work on a ground of its own keeps its place on a spent card of another ground. */
+const MAKERS_ON_THEIR_OWN_GROUND = [
+  ['r2s-famine-city-2', 'Fuel & Heating', 'charcoal_burner'],
+  ['r2s-famine-town-2', 'Fishing & Seafood', 'salt_works'],
+];
 
 const WORKING_STATES = new Set(['running', 'operational', 'productive', 'thriving']);
 /** @param {string} x */
@@ -199,6 +212,20 @@ describe('LEFT-CHAIN: the chain card says who works the chain now, and its lists
       expect(viaOnTab(s, chainPrintName(iron, s).label), `${seed}: the rendered card names it`).toMatch(/\bMine\b/);
     });
     expectNoSeedFailures(failures, 'both anchors');
+  }, 600_000);
+
+  test('(a) THE NEGATIVE (BR10 (3) amended): a maker at work on a ground of its own keeps its place on a spent card of another ground', () => {
+    const failures = collectSeedFailures(MAKERS_ON_THEIR_OWN_GROUND, ([seed, label, id]) => {
+      const s = town(seed);
+      const chain = (s.economicState?.activeChains || []).find((/** @type {any} */ c) => c?.label === label);
+      expect(chain?.resourceDepleted, `${seed}: ${label} is on a spent ground`).toBe(true);
+      const house = (s.institutions || []).find((/** @type {any} */ i) => idOfHouse(i) === id);
+      expect(sourceStoryOf(s, house, resourceShortageImport)?.story, `${seed}: the ${id} is at work`).toBe('local');
+      expect(SOURCE_GROUNDS[id], `${seed}: the card's ground is not the ${id}'s own`).not.toContain(chain.resourceKey);
+      expect(viaOf(s, chain), `${seed}: the ${id} keeps its place`).toContain(institutionHouseLabel(house.name));
+      expect(viaOnTab(s, chainPrintName(chain, s).label), `${seed}: the rendered card names it`).toContain(institutionHouseLabel(house.name).split(' ')[0]);
+    });
+    expectNoSeedFailures(failures, 'both negatives');
   }, 600_000);
 
   test('(b) L5 and L27: no output and no pill names a good whose every maker is marked short, over the 720 and the 150', () => {
