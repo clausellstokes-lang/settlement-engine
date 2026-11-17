@@ -1,0 +1,6 @@
+{"id":"C36551","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"STATE","why":"'The ferryman's family' for a ferry keeper PEOPLE gives as Shu Sasaki (f); 'ferryman' has an ordinary pair","other":""}
+{"id":"C36935","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"PAIR","why":"honest traders 'at a disadvantage' to the shadow economy contradicts 'it does little harm' on the same card","other":"C36932"}
+{"id":"C37250","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"mark 'Short of salt.' set in front of 'How they deal' text that does not belong to it","other":""}
+{"id":"C37251","town":"bar0-town-calm-rand-44","sev":"MED","kind":"PAIR","why":"salt works shown selling salt by the sack and cart, secret has sacks leaving the works, yet the house is marked short of salt","other":"C36556"}
+{"id":"C37304","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"mark 'Short of grapes.' set in front of 'How they deal' text that does not belong to it","other":""}
+{"id":"DONE","lines":1416,"blocks":1,"flags":4}
