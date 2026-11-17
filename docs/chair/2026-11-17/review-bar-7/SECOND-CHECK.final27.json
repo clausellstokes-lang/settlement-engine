@@ -1,0 +1,320 @@
+[
+ {
+  "id": "C18613",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "C18611 Invasion & War / C18612 Adequate▼ / C18613 Llanham has no line and no force, and danger is close at hand. — bar7-08.txt, Systems/Defense",
+   "DEFENCE: walls: none · garrison: none · militia: none · watch: none · mercenary company ... none · charter: Adventurers' charter hall — bar7-08.txt header",
+   "C18598 Llanham could not hold off a raid — bar7-08.txt, Systems/Defense",
+   "\"military\": 44 — defenseProfile.scores.military (source of the Adequate word)"
+  ],
+  "note": "The flagged sentence is itself true by DEFENCE, but the same row prints the invasion bar as Adequate over it, and the page also says the hamlet could not hold off a raid: X and not-X on one row (rule 1). The false half is the bar's word C18612; the only reconciling fact (record 'Strategic value: High - defensible position') prints only in the PDF, not on the tabs the reader saw, and the charter hall is listed as monster response, not an invasion force."
+ },
+ {
+  "id": "C32296",
+  "town": "bar0-town-calm-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "C32294 Annual fair · Economy / C32295 Regional merchants. / C32296 Luxury goods available. — bar7-14.txt, Systems/Institutions",
+   "C32576 Needed, and not brought in: stone (for major construction), luxury goods. — bar7-14.txt, Systems/Economics",
+   "C32569 The country around Uaymha does not give the town enough luxury goods for what the town needs of it. — bar7-14.txt, Systems/Economics",
+   "\"imports\": {\"critical\": [\"stone (for major construction)\", \"luxury goods\"] ... \"Riverside terrain cannot produce this locally\" — resourceAnalysis (critical imports); luxury goods absent from TRADE imports"
+  ],
+  "note": "The fair's card says luxury goods are available while the Economics tab says flatly they are needed and not brought in; the only bridge (regional merchants at a once-a-year fair) is not said anywhere and rule 1 counts X and not-X even where both could be explained."
+ },
+ {
+  "id": "C39616",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "C39615 Weak law, bring coin / C39616 The court sits and the gaol holds — bar7-19.txt, Systems/Services",
+   "C39245 The town keeps a gaol of its own, though no court sits here to try anyone. — bar7-19.txt, Summary/Overview",
+   "C40197 Legal Infrastructure · Prison only / C40198 Detention without process. — bar7-19.txt, Systems/Defense",
+   "HOUSES (40, the whole list): ... Small prison/stocks ... (no Courthouse) — bar7-19.txt header; record service institution \"(lawless)\" — availableServices.criminal"
+  ],
+  "note": "HOUSES has no court and the page twice says no court sits here (C39245, C40197-8); nothing in the town (the Occupation Authority, town hall) is shown sitting as a court. Same no-court fault as C40154."
+ },
+ {
+  "id": "C39998",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C39997 Nearby Resources▲ / C39998 Managed Woodland / C39999 Depleted / C40000 Coal or Peat Deposits · Open Grazing Land — bar7-19.txt, Systems/Resources (same in dump Systems/Resources)",
+   "C39512 Charcoal burner · Economy / C39513 A collier's kilns under their turf, turning wood into charcoal — bar7-19.txt, Systems/Institutions",
+   "config.nearbyResourcesDepleted: [\"coal_deposits\", \"grazing_land\"] — record"
+  ],
+  "note": "Read label-first, Managed Woodland stands with no label straight under Nearby Resources: a ground a house proves (the Charcoal burner), which the brief calls by design ('A SOURCE HOUSE PROVES ITS GROUND'); the reader took it as Depleted only because 'Depleted' is the next line."
+ },
+ {
+  "id": "C40000",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C39999 Depleted / C40000 Coal or Peat Deposits · Open Grazing Land / C40001 Abundant / C40002 Strategic Crossroads · Wild Foraging Areas · Hunting Grounds — bar7-19.txt, Systems/Resources",
+   "config.nearbyResourcesDepleted: [\"coal_deposits\", \"grazing_land\"]; config.nearbyResources: [\"foraging_areas\", \"crossroads_position\", \"coal_deposits\", \"grazing_land\", \"hunting_grounds\"] — record"
+  ],
+  "note": "Label-first, these two grounds stand under 'Depleted', exactly the record's depleted list and LAND; the reader read them as Abundant because 'Abundant' is the line after them. Misreading of the block."
+ },
+ {
+  "id": "C40154",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "C40154 Offenders at Nandanand are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating. — bar7-19.txt, Systems/Defense",
+   "C40197 Legal Infrastructure · Prison only / C40198 Detention without process. / C40199 Arbitrary enforcement. — bar7-19.txt, Systems/Defense",
+   "C39245 ... though no court sits here to try anyone. — bar7-19.txt, Summary/Overview"
+  ],
+  "note": "The same tab says detention without process and arbitrary enforcement, and the town has no court; 'heard' and 'expect a hearing' are denied by the page itself. Same no-court fault as C39616."
+ },
+ {
+  "id": "C40806",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "C40806 In Nandanand the old buildings are patched and kept standing, and nothing new goes up. — bar7-19.txt, World/Daily Life",
+   "C40294 How they deal Talks about who is building what and where; knows every new wall going up. — bar7-19.txt, World/NPCs (Vijayalakshmi Kulkarni, Brickmaker; no mark line on her card)",
+   "C39420 Brickmaker · Crafts (no mark) — bar7-19.txt, Systems/Institutions"
+  ],
+  "note": "One line says nothing new goes up, the brickmaker's unmarked card says she knows every new wall going up: X and not-X (rule 1). Nothing reconciles them; the line to mend may be the card's ordinary-times phrase, but the pair is real."
+ },
+ {
+  "id": "C42801",
+  "town": "bar0-village-calm-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "C42801 Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here. — bar7-21.txt, Systems/Economics",
+   "C42652 Short of fish. A crude landing ... / C42656 Services · Fresh fish (short) — bar7-21.txt, Systems/Institutions",
+   "C42873 No fish reaches the fisher's landing. / C42874 The fisher's landing is worked out: its own ground is depleted (Fishing grounds). — bar7-21.txt, Systems/Resources",
+   "C43028 Reliance on magic: None / C43034 ... nothing it lives by would stop without it. — bar7-21.txt, Systems/Magic",
+   "gaps: Fisher's landing: Fisher's landing exists but lacks access to fish; config.nearbyResourcesDepleted [\"fishing_grounds\"] — record"
+  ],
+  "note": "The income line, carrying no mark, says the catch keeps coming and is landed here, while the only fish-taking house (Fisher's landing) is marked Short of fish and the Resources tab says no fish reaches it; the Fish market only sells, and the Magic tab denies any reliance on rites or magic. Same family as the in-flight plain income share, but about fish, not metal."
+ },
+ {
+  "id": "C42868",
+  "town": "bar0-village-calm-rand-47",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C42864 Nearby Resources▲ / C42865 Marshlands / C42866 Depleted / C42867 Fishing Grounds / C42868 Abundant / C42869 Deep Natural Harbour · Magical Ley Line Node · Salt Flats · Coastal Timber — bar7-21.txt, Systems/Resources (same in dump)",
+   "config.nearbyResourcesDepleted: [\"fishing_grounds\"]; config.nearbyResources: [\"fishing_grounds\", \"salt_flats\", \"magical_node\", \"shipbuilding_timber\", \"deep_harbour\"] — record"
+  ],
+  "note": "Label-first, Fishing Grounds stands under 'Depleted' and 'Abundant' heads the four live grounds, exactly the record's two lists; the reader read the label after the item. Misreading of the block."
+ },
+ {
+  "id": "C0476",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Shipyard · Economy / Here large merchant and war vessels are built ... / Services · Repair and refit · Ship construction — bar7-01 C0471-C0476 (no mark on the card or either chip)",
+   "Repair and refit / Hull repairs, caulking, mast replacement. ... / Shipyard; Ship construction ... / Shipyard — bar7-01 C0657-C0670, Systems/Services (no mark)",
+   "Harbour and Maritime ... Via / Harbour master's office · Docks/port facilities · Shipyard / Normally yields / Vessel maintenance / Stopped by the siege. — bar7-01 C0971-C0978, Systems/Economics",
+   "Services · Vessel mooring (stopped) · Cargo loading and unloading (stopped) — bar7-01 C0428",
+   "Trade by road, gate and water has stopped — bar7-01 C0074; TRADE imports 'Cordage, tar, timber fittings, and bulk vessel supplies' — header"
+  ],
+  "note": "The Economics tab marks the chain that runs through the Shipyard and yields vessel maintenance 'Stopped by the siege.', and the docks' mooring is stopped, yet the Shipyard's card and its Repair and refit / Ship construction chips are bare on both Institutions and Services, while other houses that buy their materials (Smelter, Brickmaker) carry 'Curtailed by the siege.'. Nothing in the town reconciles it."
+ },
+ {
+  "id": "C14564",
+  "town": "bar0-city-wartime-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "The Martial Alliance / Military · 8▼ / ↳ · 2 members · first Itzam Cohuoh · second Metztli Caan — bar7-06 C14092-C14094, Systems/Power",
+   "The Martial Alliance (2)▲ — bar7-06 C14544, World/NPCs (Itzam Cohuoh C14545, Metztli Caan C14558)",
+   "Wants Win two more people in The Martial Alliance over to their side before Itzam Cohuoh notices. — bar7-06 C14564, on Metztli Caan's card",
+   "PEOPLE: only Itzam Cohuoh (rank 1) and Metztli Caan (rank 2) sit on The Martial Alliance — header"
+  ],
+  "note": "The page itself prints the Alliance as '2 members' (its first, Itzam, and its second, Metztli, whose want this is), so 'two more people in The Martial Alliance' presumes members the page says are not there. 'The cast is a sample' does not save it: the page prints an explicit count, and under the second check's rule 1 a page that prints X and not-X is a fault."
+ },
+ {
+  "id": "C15891",
+  "town": "bar0-hamlet-calm-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Laden carts from the workings grind along the road in a line that never seems to end. — bar7-07 C15891",
+   "TOWN ... hamlet · population 52; STATE: prosperity Poor; INCOME: Harvest 92%, Stone Quarrying 8% — header",
+   "Mining & Quarrying · Raw materials & fuel · Vulnerable — bar7-07 C16101",
+   "Sells stone by the block and the cart, from what the quarry still gives — bar7-07 C16311",
+   "People mend what they have, and nobody seems to buy anything new. — bar7-07 C15893"
+  ],
+  "note": "The only workings is one stone quarry in a poor hamlet of 52 that earns 8% of its money from it, its chain printed Vulnerable and its master selling 'from what the quarry still gives': an endless line of laden carts is a scale of traffic the town cannot hold. No second working, magic or outside works makes it true."
+ },
+ {
+  "id": "C16138",
+  "town": "bar0-hamlet-calm-rand-45",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "HOUSES: ... Common grazing land; ... Water source — header bar7-07",
+   "powerStructure.recentConflict = 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.' — corpus record",
+   "NOT A FLAG: 'A PLOT HOOK, A RUMOUR OR A RECENT-CONFLICT LINE that states a new fact of its own which nothing in the header denies (it is not false merely for being in none of CRISIS, QUARRELS, TENSIONS and PAST)' — BRIEF-REVIEW-BAR-7.md"
+  ],
+  "note": "This is the record's recent-conflict line, and the reader's only premise (in none of QUARRELS, TENSIONS, PAST) is exactly what the rules' NOT A FLAG list excludes; the hamlet has a Common grazing land and a Water source, so nothing denies a grazing and water quarrel between families. Same stock line as C30951 and C31349 of this batch."
+ },
+ {
+  "id": "C16222",
+  "town": "bar0-hamlet-calm-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Ravenland keeps no court and no gaol, and no wrong done there is written down — bar7-07 C16222, Systems/Defense",
+   "The hamlet's record of crimes at Ravenland is not short — bar7-07 C16231",
+   "Ravenland's books record no gang, guild or racket — bar7-07 C16232",
+   "\"Records here are kept carefully and disputes settled by precedent ...\" — bar7-07 C15884"
+  ],
+  "note": "The same page says no wrong done there is written down and that order goes when the armed leave, yet also that its record of crimes is not short, that its books record what crime it has, and that records are kept carefully and disputes settled by precedent: a straight X and not-X (rule 1). The 'no court and no gaol' half is true (HOUSES has neither); the writing-down half is the contradiction."
+ },
+ {
+  "id": "C30951",
+  "town": "bar0-thorp-calm-rand-45",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "powerStructure.recentConflict = 'A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.' — corpus record",
+   "HOUSES (8, the whole list): Subsistence farming; Fishing community; ... Water source — header bar7-13",
+   "Early trial: · disputes over water rights — bar7-13 C31265, World/History",
+   "NOT A FLAG: a RECENT-CONFLICT LINE 'is not false merely for being in none of CRISIS, QUARRELS, TENSIONS and PAST' — BRIEF-REVIEW-BAR-7.md"
+  ],
+  "note": "The record's recent-conflict line; being in none of QUARRELS, TENSIONS or PAST is not a fault by the rules, and LAND lists no grazing as a resource in any town (even the hamlet with Common grazing land), so 'no grazing on LAND' denies nothing: households of a farming thorp with a Water source and a history of water-rights disputes can quarrel over grazing and water. Same stock line as C16138 and C31349."
+ },
+ {
+  "id": "C31349",
+  "town": "bar0-thorp-calm-rand-46",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "powerStructure.recentConflict = 'A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.' — corpus record",
+   "TENSIONS: resource scarcity (parties: Those hoarding what they can, ...); PAST: The Land Dispute (18 years ago, political, major) — header bar7-13",
+   "HOUSES: Subsistence farming; ... Water source — header bar7-13",
+   "NOT A FLAG: a RECENT-CONFLICT LINE 'is not false merely for being in none of CRISIS, QUARRELS, TENSIONS and PAST' — BRIEF-REVIEW-BAR-7.md"
+  ],
+  "note": "The record's recent-conflict line; the rules say it is not false for standing outside QUARRELS, TENSIONS and PAST, and the header does not deny it (a live resource-scarcity tension, a Water source, farming households; LAND never lists grazing as a resource). Same stock line as C16138 and C30951."
+ },
+ {
+  "id": "C31464",
+  "town": "bar0-thorp-calm-rand-46",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "LAND: resources: Fishing Grounds (available); Hunting Grounds (available) ... — header bar7-13 (terrain Coastal)",
+   "economicState.foodSecurity.foodRecord.foodSources = ['fish','game']; foodSecurity.activeChains = ['Fishing & water'] — corpus record",
+   "The day's catch and the hunters' game anchor the table. — bar7-13 C31460",
+   "✓ Fully exploited · Fish · medium value / Draws on: water access, fishing grounds — bar7-13 C31480-C31481"
+  ],
+  "note": "The reader's premise is wrong on the facts: LAND gives Fishing Grounds as available, and the record's own food ledger names fish first and game second as the thorp's food sources; a coastal thorp of ten households fishes without a named fishing house, as it hunts without a hunter's lodge."
+ },
+ {
+  "id": "C38200",
+  "town": "bar0-town-occupied-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "Short of iron. Multiple smiths with specializations. — bar7-18 C38200 (Blacksmiths card; chips 'Horseshoeing (short) · Repairs (short) · Tool manufacture (short)' C38203)",
+   "TRADE imports: Iron ore (local iron mines exhausted) — header bar7-18; economicState.primaryImports[0] = 'Iron ore (local iron mines exhausted)' — corpus record",
+   "CRISIS: Under Occupation · conditions: Vassal extraction — header (no siege)",
+   "resourceAnalysis.gaps lists only animal hides, 'Potter runs on imported clay', 'Bakers (5-15) runs on imported grain': no shortage for the Blacksmiths — corpus record"
+  ],
+  "note": "This is the supply rule's named fault: the smiths' material stands on TRADE's imports in a town no siege shuts (occupation only), and the record's gaps give the Blacksmiths no lack, yet the card is marked 'Short of iron.'. The page's outlook line 'War has taken the iron: the metal suppliers sell to the armies first' (C38183) does not reconcile it: the town is not at war and the import is still printed (C38485)."
+ },
+ {
+  "id": "C7246",
+  "town": "bar0-city-wartime-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Curtailed by the war. Farriers, toolsmiths, and general forges in every quarter. — bar7-04 C7517 (Systems/Institutions, Blacksmiths card)",
+   "Services · Horseshoeing (curtailed) · Repairs (curtailed) · Tool manufacture (curtailed) · Weapon smithing (curtailed) — bar7-04 C7520",
+   "Curtailed by the war. Converts raw ore to refined metal ... whenever ore can be had. — bar7-04 C7606 (Smelter); C7611 Specialized metalworkers also 'Curtailed by the war.'",
+   "Iron & Metalwork Curtailed by the war. — bar7-04 C8169 (Systems/Economics income row)",
+   "War has taken the iron: ... the smiths have nothing to mend tools with. Work slows, and people are starting to complain. — dump Summary/Plot Hooks (bar7-04 C7477)",
+   "imports: Iron ...; LAND: Mining & Quarrying [vulnerable; its resource Iron ore deposits absent] — bar7-04 header TRADE/LAND"
+  ],
+  "note": "The page marks every metal house and even its Weapon smithing row 'Curtailed by the war' and says the smiths have no iron, so 'forges running day and night on the army's contracts' is the unmarked ordinary-boom line against the crisis marks; the record's stress summary ('army contracts pay') supports the profit, not full-swing forges. Same fault as C7477 (one contradiction, two ends); kin to the in-flight forge-scene family but the mark here is 'Curtailed by the war', not 'Short of iron'."
+ },
+ {
+  "id": "C7477",
+  "town": "bar0-city-wartime-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "keeps the forges of Eisenmark running day and night on the army's contracts — bar7-04 C7246 (Summary/Overview)",
+   "Racks of new ironwork stand outside the workshops, waiting for the carts. — bar7-04 C7242 (Summary/Overview)",
+   "Curtailed by the war. Farriers, toolsmiths, and general forges in every quarter. — bar7-04 C7517 (agrees with C7477)"
+  ],
+  "note": "A real X/not-X on the page (rule 1): smiths with no iron and slowed work against forges running day and night and racks of new ironwork. Same fault as C7246; C7477 itself agrees with every 'Curtailed by the war' mark, so the cure belongs on C7246/C7242 and the pair should count once."
+ },
+ {
+  "id": "C16460",
+  "town": "bar0-hamlet-calm-rand-46",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "A dispute over grazing rights and water access has run for two seasons ... — record s.powerStructure.recentConflict (a recent-conflict line)",
+   "Common grazing land · Economy / Open pasture the hamlet grazes in common. — bar7-07 C16500-C16501",
+   "Water source · Infrastructure / Well or spring access. — bar7-07 C16533-C16534",
+   "Grazing on the common for a traveller's beasts, for a small fee. — bar7-07 C16566"
+  ],
+  "note": "The line is the record's recent-conflict line, and the readers' NOT A FLAG rule (second read) says a recent-conflict line stating its own fact is not false for being in none of CRISIS, QUARRELS, TENSIONS and PAST; nothing denies it here: the hamlet has common grazing land and a water source, and 'Stable' does not rule out a family feud."
+ },
+ {
+  "id": "C16854",
+  "town": "bar0-hamlet-calm-rand-47",
+  "verdict": "WEAK",
+  "evidence": [
+   "hamlet · population 70 — bar7-07 header TOWN",
+   "HOUSES: ... Charcoal burner; Mine (open cast); Salt works ... — bar7-07 header HOUSES",
+   "exports: Charcoal, Sacred wood, Ritual components, Iron ore — bar7-07 header TRADE",
+   "INCOME: Harvest 77%, Black Market Revenue 12%, Iron & Metalwork 11% — bar7-07 header INCOME",
+   "No market or fair stands in Muulhuacan: what trade the hamlet does is done house to house. — bar7-07 C16871"
+  ],
+  "note": "Laden carts from the workings are real (an open-cast mine and a charcoal burner whose ore and charcoal are exported); only the scale, 'a line that never seems to end', is wrong for a hamlet of 70 whose metal trade is 11% of its income: a phrase of degree (rule 6, LOW), not a false fact."
+ },
+ {
+  "id": "C16877",
+  "town": "bar0-hamlet-calm-rand-47",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "A dispute over grazing rights and water access has run for two seasons ... — record s.powerStructure.recentConflict",
+   "Common grazing land · Economy / Open pasture the hamlet grazes in common. — bar7-07 C16938-C16939 (Services · Pasturage, C16941)",
+   "HOUSES: ... Common grazing land; ... Water source — bar7-07 header HOUSES"
+  ],
+  "note": "Recent-conflict line, not false for being in none of QUARRELS/TENSIONS/PAST (readers' NOT A FLAG, second read); the hamlet has a common pasture and a water source to quarrel over and nothing in the header denies it. Same line as C16460 and C31732; differs from C31732 only in that this town has grazing."
+ },
+ {
+  "id": "C31732",
+  "town": "bar0-thorp-calm-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "HOUSES (8, the whole list): Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source — bar7-13 header HOUSES (no grazing land)",
+   "LAND: resources: Deep Natural Harbour (available); Coastal Timber (available); Ancient Ruins (available) — bar7-13 header LAND",
+   "\"Pastoral & livestock\": false ... \"foodSources\": [\"fish\"] — record s.economicState.foodSecurity.chains / foodRecord",
+   "config.nearbyResources: ['deep_harbour', 'shipbuilding_timber', 'ancient_ruins'] — record"
+  ],
+  "note": "The recent-conflict line presumes grazing to quarrel over, and this coastal fishing thorp of 29 has no grazing house, no grazing ground, and a record that sets its pastoral chain false and its only food source as fish; nothing in the town gives it pasture. Same line as C16460/C16877, which stand explained only because those hamlets have common grazing land."
+ },
+ {
+  "id": "C37224",
+  "town": "bar0-town-occupied-rand-45",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Nearby Resources▲ / Managed Woodland / Depleted / River Fisheries / Abundant / Hot Springs / Healing Waters · Hunting Grounds · Iron Ore Deposits — dump Systems/Resources (bar7-17 C37220-C37225)",
+   "config.nearbyResources: ['river_fish', 'hunting_grounds', 'hot_springs', 'iron_deposits'] — record",
+   "config.nearbyResourcesDepleted: ['river_fish'] — record"
+  ],
+  "note": "Label-first misreading: River Fisheries stands under the label 'Depleted' and the line after 'Abundant' holds Hot Springs, Hunting Grounds and Iron Ore, exactly the record's depleted and still-worked lists (Managed Woodland, unlabelled, is the ground the charcoal burner proves); the block agrees with C37219 and LAND."
+ },
+ {
+  "id": "C37891",
+  "town": "bar0-town-occupied-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Agiichorio has nowhere to hold an offender, so the penalties its hearings can hand down are money and exile — bar7-17 C37372 (Systems/Defense)",
+   "economicState.compound.inst.hasPrison: false — record",
+   "HOUSES (32, the whole list): ... no prison, gaol or lockup — bar7-17 header HOUSES",
+   "Town watch: Watchmen serving part-time. Night patrols and gate duty. — dump PDF/Institutions"
+  ],
+  "note": "The relationship line has a friend held by the watch and kept 'fed and safe inside', while the Defense tab says the town has nowhere to hold an offender and the record has no prison; the occupation's 'taken in' curfew line does not supply a place of holding, and the line says the watch holds him. Rule 1 PAIR with C37372."
+ },
+ {
+  "id": "C42053",
+  "town": "bar0-village-calm-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "Each household takes its turn walking the lanes after dark ... Nobody is paid, and the households hold the rota. — bar7-20 C42086-C42087 (same Systems/Defense tab)",
+   "Services · Night watch / Walk the lanes after dark and raise the alarm at trouble. — bar7-20 C41670, C41763-C41764",
+   "institutions['Village watch'].desc: 'Each household takes its turn walking the lanes after dark ...' — record"
+  ],
+  "note": "The village's only force is an unpaid household rota that walks the lanes after dark (its one service is 'Night watch'), so a watch seen on its rounds most hours of the day is contradicted on the same tab; no other watch, patrol or paid watchman in the town reconciles it."
+ }
+]

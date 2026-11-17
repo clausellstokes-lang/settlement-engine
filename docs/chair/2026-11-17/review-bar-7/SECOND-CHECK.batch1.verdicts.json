@@ -1,0 +1,104 @@
+[
+ {
+  "id": "C18613",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "C18611 Invasion & War / C18612 Adequate▼ / C18613 Llanham has no line and no force, and danger is close at hand. — bar7-08.txt, Systems/Defense",
+   "DEFENCE: walls: none · garrison: none · militia: none · watch: none · mercenary company ... none · charter: Adventurers' charter hall — bar7-08.txt header",
+   "C18598 Llanham could not hold off a raid — bar7-08.txt, Systems/Defense",
+   "\"military\": 44 — defenseProfile.scores.military (source of the Adequate word)"
+  ],
+  "note": "The flagged sentence is itself true by DEFENCE, but the same row prints the invasion bar as Adequate over it, and the page also says the hamlet could not hold off a raid: X and not-X on one row (rule 1). The false half is the bar's word C18612; the only reconciling fact (record 'Strategic value: High - defensible position') prints only in the PDF, not on the tabs the reader saw, and the charter hall is listed as monster response, not an invasion force."
+ },
+ {
+  "id": "C32296",
+  "town": "bar0-town-calm-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "C32294 Annual fair · Economy / C32295 Regional merchants. / C32296 Luxury goods available. — bar7-14.txt, Systems/Institutions",
+   "C32576 Needed, and not brought in: stone (for major construction), luxury goods. — bar7-14.txt, Systems/Economics",
+   "C32569 The country around Uaymha does not give the town enough luxury goods for what the town needs of it. — bar7-14.txt, Systems/Economics",
+   "\"imports\": {\"critical\": [\"stone (for major construction)\", \"luxury goods\"] ... \"Riverside terrain cannot produce this locally\" — resourceAnalysis (critical imports); luxury goods absent from TRADE imports"
+  ],
+  "note": "The fair's card says luxury goods are available while the Economics tab says flatly they are needed and not brought in; the only bridge (regional merchants at a once-a-year fair) is not said anywhere and rule 1 counts X and not-X even where both could be explained."
+ },
+ {
+  "id": "C39616",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "C39615 Weak law, bring coin / C39616 The court sits and the gaol holds — bar7-19.txt, Systems/Services",
+   "C39245 The town keeps a gaol of its own, though no court sits here to try anyone. — bar7-19.txt, Summary/Overview",
+   "C40197 Legal Infrastructure · Prison only / C40198 Detention without process. — bar7-19.txt, Systems/Defense",
+   "HOUSES (40, the whole list): ... Small prison/stocks ... (no Courthouse) — bar7-19.txt header; record service institution \"(lawless)\" — availableServices.criminal"
+  ],
+  "note": "HOUSES has no court and the page twice says no court sits here (C39245, C40197-8); nothing in the town (the Occupation Authority, town hall) is shown sitting as a court. Same no-court fault as C40154."
+ },
+ {
+  "id": "C39998",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C39997 Nearby Resources▲ / C39998 Managed Woodland / C39999 Depleted / C40000 Coal or Peat Deposits · Open Grazing Land — bar7-19.txt, Systems/Resources (same in dump Systems/Resources)",
+   "C39512 Charcoal burner · Economy / C39513 A collier's kilns under their turf, turning wood into charcoal — bar7-19.txt, Systems/Institutions",
+   "config.nearbyResourcesDepleted: [\"coal_deposits\", \"grazing_land\"] — record"
+  ],
+  "note": "Read label-first, Managed Woodland stands with no label straight under Nearby Resources: a ground a house proves (the Charcoal burner), which the brief calls by design ('A SOURCE HOUSE PROVES ITS GROUND'); the reader took it as Depleted only because 'Depleted' is the next line."
+ },
+ {
+  "id": "C40000",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C39999 Depleted / C40000 Coal or Peat Deposits · Open Grazing Land / C40001 Abundant / C40002 Strategic Crossroads · Wild Foraging Areas · Hunting Grounds — bar7-19.txt, Systems/Resources",
+   "config.nearbyResourcesDepleted: [\"coal_deposits\", \"grazing_land\"]; config.nearbyResources: [\"foraging_areas\", \"crossroads_position\", \"coal_deposits\", \"grazing_land\", \"hunting_grounds\"] — record"
+  ],
+  "note": "Label-first, these two grounds stand under 'Depleted', exactly the record's depleted list and LAND; the reader read them as Abundant because 'Abundant' is the line after them. Misreading of the block."
+ },
+ {
+  "id": "C40154",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "C40154 Offenders at Nandanand are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating. — bar7-19.txt, Systems/Defense",
+   "C40197 Legal Infrastructure · Prison only / C40198 Detention without process. / C40199 Arbitrary enforcement. — bar7-19.txt, Systems/Defense",
+   "C39245 ... though no court sits here to try anyone. — bar7-19.txt, Summary/Overview"
+  ],
+  "note": "The same tab says detention without process and arbitrary enforcement, and the town has no court; 'heard' and 'expect a hearing' are denied by the page itself. Same no-court fault as C39616."
+ },
+ {
+  "id": "C40806",
+  "town": "bar0-town-occupied-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "C40806 In Nandanand the old buildings are patched and kept standing, and nothing new goes up. — bar7-19.txt, World/Daily Life",
+   "C40294 How they deal Talks about who is building what and where; knows every new wall going up. — bar7-19.txt, World/NPCs (Vijayalakshmi Kulkarni, Brickmaker; no mark line on her card)",
+   "C39420 Brickmaker · Crafts (no mark) — bar7-19.txt, Systems/Institutions"
+  ],
+  "note": "One line says nothing new goes up, the brickmaker's unmarked card says she knows every new wall going up: X and not-X (rule 1). Nothing reconciles them; the line to mend may be the card's ordinary-times phrase, but the pair is real."
+ },
+ {
+  "id": "C42801",
+  "town": "bar0-village-calm-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "C42801 Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here. — bar7-21.txt, Systems/Economics",
+   "C42652 Short of fish. A crude landing ... / C42656 Services · Fresh fish (short) — bar7-21.txt, Systems/Institutions",
+   "C42873 No fish reaches the fisher's landing. / C42874 The fisher's landing is worked out: its own ground is depleted (Fishing grounds). — bar7-21.txt, Systems/Resources",
+   "C43028 Reliance on magic: None / C43034 ... nothing it lives by would stop without it. — bar7-21.txt, Systems/Magic",
+   "gaps: Fisher's landing: Fisher's landing exists but lacks access to fish; config.nearbyResourcesDepleted [\"fishing_grounds\"] — record"
+  ],
+  "note": "The income line, carrying no mark, says the catch keeps coming and is landed here, while the only fish-taking house (Fisher's landing) is marked Short of fish and the Resources tab says no fish reaches it; the Fish market only sells, and the Magic tab denies any reliance on rites or magic. Same family as the in-flight plain income share, but about fish, not metal."
+ },
+ {
+  "id": "C42868",
+  "town": "bar0-village-calm-rand-47",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C42864 Nearby Resources▲ / C42865 Marshlands / C42866 Depleted / C42867 Fishing Grounds / C42868 Abundant / C42869 Deep Natural Harbour · Magical Ley Line Node · Salt Flats · Coastal Timber — bar7-21.txt, Systems/Resources (same in dump)",
+   "config.nearbyResourcesDepleted: [\"fishing_grounds\"]; config.nearbyResources: [\"fishing_grounds\", \"salt_flats\", \"magical_node\", \"shipbuilding_timber\", \"deep_harbour\"] — record"
+  ],
+  "note": "Label-first, Fishing Grounds stands under 'Depleted' and 'Abundant' heads the four live grounds, exactly the record's two lists; the reader read the label after the item. Misreading of the block."
+ }
+]
