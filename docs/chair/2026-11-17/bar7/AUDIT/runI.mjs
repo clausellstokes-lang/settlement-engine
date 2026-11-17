@@ -76,7 +76,7 @@ if (controlFiles.length) {
       const inTown = all.filter((x) => x.town === r.town && holds(x, t));
       let result;
       if (verdict === 'STANDS') { const ok = inTown.filter((x) => x.rule === rule); result = ok.length ? (ok.some((x) => x.status !== 'apart') ? 'found' : 'found (apart)') : 'MISS'; }
-      else { const bad = inTown.filter((x) => x.status !== 'apart' && !/^(low|design)\./.test(x.rule)); result = bad.length ? `FOUND (wrongly) ${[...new Set(bad.map((x) => x.rule))].join(' ')}` : 'clean'; if (verdict === 'WEAK') result = bad.length ? `found ${[...new Set(bad.map((x) => x.rule))].join(' ')}` : 'not found'; }
+      else { const bad = inTown.filter((x) => x.status !== 'apart' && !/^(low|design)\./.test(x.rule)); result = bad.length ? `FOUND (wrongly) ${[...new Set(bad.map((x) => x.rule))].join(' ')}` : 'clean'; if (verdict === 'WEAK' || verdict === 'BOTH') result = bad.length ? `found ${[...new Set(bad.map((x) => x.rule))].join(' ')}` : 'not found'; }
       table.push({ id, rule, verdict, town: r.town, result, text: r.text.slice(0, 90) });
     }
   }

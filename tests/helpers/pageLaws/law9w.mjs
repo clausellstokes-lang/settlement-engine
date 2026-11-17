@@ -92,8 +92,14 @@ function rules9g(T, W) {
     const down = find(T, MONEY_DOWN);
     const war = find(T, MONEY_WAR);
     const reconciled = find(T, MONEY_RECONCILED);
+    // THE MILD MARGIN ("With a little left over each year", "takes in a little more than it pays out") beside a war: the wide
+    // read's C61967 was EXPLAINED by the page's own war-time prosperity word ("Comfortable before the war; Moderate while it
+    // lasts"): apart. The strong margin ("closes every year ahead", "reserves behind it") stands beside a seat that cannot
+    // afford its requisition (C15153).
+    const MILD = /\b(With a little left over each year|treasury takes in a little more than it pays out|pays its own way and has a little in hand)\b/;
     for (const h of ups) {
-      if (down) out.push({ rule: '9g.margin', at: h, against: down, why: `the page prints "${down.sentence}"; this line says the town's purse runs ahead with reserves` });
+      if (down && MILD.test(h.sentence)) out.push({ rule: '9g.margin-mild', status: 'apart', at: h, against: down, why: `the page prints "${down.sentence}"; this line says a little is left over (mild: the wide read's C61967 reading, apart)` });
+      else if (down) out.push({ rule: '9g.margin', at: h, against: down, why: `the page prints "${down.sentence}"; this line says the town's purse runs ahead with reserves` });
       else if (war) out.push({ rule: '9g.margin-war', status: 'apart', at: h, against: war, why: `the page prints "${war.sentence}"${reconciled ? ` and "${reconciled.sentence}" (money laid by: reconciled)` : ''}; this line says the purse runs ahead (apart: the war line alone does not deny a margin)` });
     }
   }
@@ -123,8 +129,21 @@ function rules9h(T) {
     const at = { tab: 'Systems/Economics', i, text, sentence: text };
     const sold = find(T, SOLD_OUTWARD);
     const siege = T.crises.has('under_siege');
-    if (sold) out.push({ rule: '9h.no-exports', cause: siege ? 'crisis' : 'other', at, against: sold, why: `the page itself prints "${sold.sentence}"; the export row says there are none, with no mark` });
-    else if (recEx.length) out.push({ rule: '9h.no-exports-record', status: 'apart', cause: siege ? 'crisis' : 'other', at, against: { tab: 'record', text: `economicState.primaryExports: ${recEx.slice(0, 4).join(' · ')}` }, why: `the record lists ${recEx.length} exports the page does not print${siege ? ' (the siege stops them; the row carries no mark)' : ''}; apart: the page itself does not deny the row` });
+    // THE LEGEND IS WHAT DIFFERS FROM THE WIDE READ (its negative C93420, the same two lines under a siege, EXPLAINED as "the
+    // present" against "before the siege"): since BAR6 the tab says its rows are of ordinary times and marks a row the siege
+    // touches, so an unmarked "No significant exports." now reads as the ordinary times the next line denies. Without the
+    // legend the pair is the wide read's reading: apart.
+    const legend = eco.some((l) => /^The descriptions here are of ordinary times\b/.test(l));
+    if (sold) out.push({ rule: legend ? '9h.no-exports' : '9h.no-exports-nolegend', status: legend ? 'count' : 'apart', cause: siege ? 'crisis' : 'other', at, against: sold, why: `the page itself prints "${sold.sentence}"; the export row says there are none, with no mark${legend ? ', on a tab whose legend says its rows are of ordinary times' : ' (no legend: the wide read\'s reading, apart)'}` });
+    // the record's own exports the column drops (`tradeListDisplay.js :: tradeListsAsPrinted`): the wide read's C211337 and
+    // C217617 STOOD on raw wool a famine village still exports by its record; transit alone is not an export on this page
+    // (the wide read's bar0-village-calm-rand-31): apart
+    else if (recEx.length) {
+      const made = recEx.filter((x) => !/^transit trade$/i.test(x.trim()));
+      out.push({ rule: made.length ? '9h.no-exports-record' : '9h.no-exports-transit', status: made.length ? 'count' : 'apart', cause: T.crises.size ? 'crisis' : 'other', at,
+        against: { tab: 'record', text: `economicState.primaryExports: ${recEx.slice(0, 4).join(' · ')}` },
+        why: made.length ? `the record exports ${made.slice(0, 3).join(', ')}; the column prints none and no mark${T.crises.size ? ` (under ${[...T.crises].join(', ')}: the crisis's mark is what the row lacks)` : ''}` : 'the record exports transit trade only; the page treats transit as no export (apart)' });
+    }
   });
   // (b) the entrepot line beside "No recorded imports." (C32912)
   const noImp = eco.findIndex((l) => l === 'No recorded imports.');
@@ -144,9 +163,15 @@ function rules9i(T, W) {
   const word = W.safetyWord && /^(Very Safe|Safe)$/.test(W.safetyWord) ? W.safety : null;
   const ag = safe || word;
   if (!ag) return [];
+  // rival rings as the crime leaf reads them (`corruption.js :: rivalRingsOf`: two criminal seats that do not govern, or the
+  // roster's "Multiple criminal factions"): where none stand, the line's key came from a lone semi-organised house
+  // (`criminalStructureKey.js`'s ladder: smuggling, black market, gambling) and the rival crews are the line's own invention
+  const rec = T.record || {};
+  const rings = (rec.powerStructure?.factions || []).filter((f) => f?.category === 'criminal' && f?.isGoverning !== true).length >= 2
+    || (rec.institutions || []).some((i) => /multiple criminal factions/i.test(String(i?.name || '')));
   const seen = new Set();
   return hits.filter((h) => { const k = `${h.tab}|${h.i}`; if (seen.has(k)) return false; seen.add(k); return true; })
-    .map((h) => ({ rule: '9i.crews', cause: T.crises.has('occupied') ? 'crisis' : 'other', at: h, against: ag, why: `the page prints "${ag.sentence || ag.text}"${word && safe ? ` and Safety ${W.safetyWord}` : ''}; this line says rival crews brawl for the streets` }));
+    .map((h) => ({ rule: '9i.crews', cause: T.crises.has('occupied') ? 'crisis' : 'other', rings, at: h, against: ag, why: `the page prints "${ag.sentence || ag.text}"${word && safe ? ` and Safety ${W.safetyWord}` : ''}; this line says rival crews brawl for the streets${rings ? '' : ' (and the record holds no rival rings: the key is a lone house\'s)'}` }));
 }
 
 // ---------------------------------------------------------------- 9a again · order kept, against the band
@@ -161,7 +186,7 @@ function rules9a(T, W) {
 export function law9w(T, town) {
   const W = stateWords(T);
   const xs = [...rules9g(T, W), ...rules9h(T), ...rules9i(T, W), ...rules9a(T, W)];
-  return xs.map((x) => ({ law: LAW, rule: x.rule, town, tab: x.at.tab, line: x.at.text, sentence: x.at.sentence || x.at.text,
+  return xs.map((x) => ({ law: LAW, rule: x.rule, town, tab: x.at.tab, line: x.at.text, sentence: x.at.sentence || x.at.text, ...(x.rings !== undefined ? { rings: x.rings } : {}),
     against: { tab: x.against.tab, line: x.against.sentence || x.against.text }, why: x.why, status: x.status || 'count',
     cause: x.cause || (T.crises.size ? 'crisis' : 'other') }));
 }
