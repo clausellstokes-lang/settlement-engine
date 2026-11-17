@@ -44,11 +44,10 @@ import { resourceDisplayName } from '../domain/display/resourceDisplayName.js'; 
 import { foodwaysLineOf } from '../domain/foodways.js';
 import { tradePillWord } from '../domain/display/tradePillWord.js'; // SURFACES-3 item 2 (r3): the tab's pill word
 import { foodWordShown } from '../domain/display/foodWordShown.js';
-import { chainStateOnPage } from '../pdf/lib/chainStateOnPage.js'; // SURFACES-1 item 1: the tab's state in the tab's words
 // TAIL-EXPORTS-JOURNAL-2 batch 3 (the chair's rulings E3, E12): a row that lives on what a siege, an outbreak or a famine
 // stops is marked by the tabs' one leaf, and the page says once that its rows are of ordinary times.
 import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, isVentureMark } from '../domain/display/crisisStoppedRow.js';
-import { stoppedOnPage, shortOnPage, stoppedWordOnPage } from '../pdf/lib/crisisMarksOnPage.js'; // LEFT-PDF L1: the tab's income mark, the PDF's reader
+import { stoppedOnPage, shortOnPage, stoppedWordOnPage, chainCardOnPage } from '../pdf/lib/crisisMarksOnPage.js'; /* SURFACES-1 item 1: the tab's state in the tab's words; PDF-2 item 6: the card's (chainCardOnPage) */ // LEFT-PDF L1: the tab's income mark, the PDF's reader
 import { cultureOnPage } from '../pdf/lib/cultureOnPage.js'; // EXPORTS-B24 · B2: the PDF's culture block's reader
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -390,7 +389,7 @@ function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settleme
     // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
     revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
     // W2-C-LEAVES-7 item 9: the state the tab's card prints (chainStateShown.js :: chainAsShown; none: no state written).
-    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = settlement?.economicState?.activeChains?.[i]; const st = rec ? chainStateOnPage(rec, settlement).word.toLowerCase() : c.status;
+    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = settlement?.economicState?.activeChains?.[i]; const st = rec ? chainCardOnPage(rec, settlement).word.toLowerCase() : c.status; /* PDF-2 item 6: the tab card's word (chainCardOnPage) */
       const desc = chainStopped[i] ? markedDescription(crisisMarkText(settlement, chainStopped[i]), c.description) : c.description;
       return `- **${esc(c.name)}**${st ? ` *(${esc(st.replace(/_/g, ' '))})*` : ''}${desc ? `: ${esc(desc)}` : ''}`; })) : null,
   );

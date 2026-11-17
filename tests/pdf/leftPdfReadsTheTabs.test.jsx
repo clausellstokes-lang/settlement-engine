@@ -35,7 +35,8 @@ import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
 import { Services } from '../../src/pdf/sections/Services.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages, esc } from '../../src/foundry/journalPages.js';
-import { incomeMarkShown, incomeKindShown, incomeDescShown, chainOutputsOnCard } from '../../src/domain/display/economicsCrisisMarks.js';
+import { incomeMarkShown, incomeKindShown, incomeDescShown, chainOutputsOnCard, chainCardUnderSiege } from '../../src/domain/display/economicsCrisisMarks.js';
+import { chainAsShown } from '../../src/domain/display/chainStateShown.js'; // PDF-2 (2026-11-17): the chain the tab's card renders
 import { crisisMarkText, incomeShortOf, markedDescription, isVentureMark } from '../../src/domain/display/crisisStoppedRow.js';
 import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
 import { houseMarkShown } from '../../src/components/new/npcComponents.jsx';
@@ -147,9 +148,12 @@ describe('LEFT-PDF L2: no PDF chain card names an output the tab\'s card withhol
     expectNoSeedFailures(collectSeedFailures(SAMPLE, (seed) => {
       const x = town(seed);
       const withheld = new Set();
+      // RE-KEYED BY IDENTITY (PDF-2 item 5, BRIEF-BAR8, 2026-11-17; rule R8): the tab's card hands `chainOutputsOnCard` the
+      // chain it renders (`chainCardUnderSiege` over `chainAsShown`, EconomicsTab.jsx:119/169), not the stored chain; what it
+      // withholds is read against the outputs of both; the claim and its form are kept.
       for (const c of x.t?.economicState?.activeChains || []) {
-        const on = new Set(chainOutputsOnCard(c, x.t));
-        for (const o of chainOutputsShown(c, x.t)) if (!on.has(o)) withheld.add(String(o).toLowerCase());
+        const on = new Set(chainOutputsOnCard(chainCardUnderSiege(x.t, c, chainAsShown(c, x.t)), x.t));
+        for (const o of [...chainOutputsShown(c, x.t), ...chainOutputsShown(chainAsShown(c, x.t), x.t)]) if (!on.has(o)) withheld.add(String(o).toLowerCase());
       }
       if (withheld.size) withheldTowns++;
       /** @type {string[]} */ const printed = [];

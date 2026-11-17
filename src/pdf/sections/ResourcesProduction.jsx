@@ -158,7 +158,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
       )}
 
       {/* ── Nearby resources ───────────────────────────────────── */}
-      {(r.nearbyAbundant?.length > 0 || r.nearbyDepleted?.length > 0 || r.availableCommodities?.length > 0) && (
+      {(r.nearbyAbundant?.length > 0 || r.nearbyProven?.length > 0 || r.nearbyDepleted?.length > 0 || r.availableCommodities?.length > 0) && (
         <View style={{ marginBottom: space.sm }} wrap={false}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
@@ -168,6 +168,14 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
               the tab's reader (chainStateShown.js :: tradeStoppedHere, ResourcesTab.jsx's Nearby Resources). */}
           {tradeStoppedHere(settlement) && r.nearbyAbundant?.length > 0 && (
             <ResourceRow kicker={null} tone="muted" items={r.nearbyAbundant} customNames={r.nearbyCustom} />
+          )}
+          {/* PDF-2 item 2 (BRIEF-BAR8, 2026-11-17; vetoable by the owner; LEFT-PDF's L19 left by name): THE GROUND A HOUSE
+              PROVES (the view row's `nearbyProven`: `houseInputAtHand.js :: impliedGroundsOnPage`, the grounds the stored
+              list does not hold) prints under the section's own title with no word of plenty, where the Resources tab
+              prints it (after the besieged grounds, before "Depleted") and as the journal's "Nearby resources" row names
+              it. 134 towns of the census's 720 held one the chapter did not print. */}
+          {r.nearbyProven?.length > 0 && (
+            <ResourceRow kicker={null} tone="good" items={r.nearbyProven} customNames={r.nearbyCustom} />
           )}
           {r.nearbyDepleted?.length > 0 && (
             <ResourceRow
