@@ -54,9 +54,14 @@ const fmt = (t) => `towns ${String(t.towns).padStart(4)} · instances ${String(t
 console.log(`LAW 8 WIDENED (seat H) over ${dumps.length} towns: ${fmt(tally(all))}`);
 for (const r of [...new Set(all.map((x) => x.rule))].sort()) {
   const xs = all.filter((x) => x.rule === r);
-  const by = ['short', 'crisis', 'mixed', 'calm'].map((c) => [c, xs.filter((x) => x.cause === c)]).filter(([, v]) => v.length);
+  // THE SPLIT BY CAUSE (the brief): BORN short in a calm town (the born-short audit holds the root; a rule by kind of house may
+  // dissolve the mark itself) · short in a crisis town (a birth gap all the same) · a CRISIS mark (stopped, curtailed, scarce:
+  // the mark stays and every surface must carry it: the next round's number)
+  const calmT = (x) => !x.crises.some((c) => ['under_siege', 'famine', 'plague_onset', 'wartime', 'occupied'].includes(c));
+  const by = [['born-calm', xs.filter((x) => x.cause === 'short' && calmT(x))], ['short-in-crisis', xs.filter((x) => x.cause === 'short' && !calmT(x))],
+    ['crisis', xs.filter((x) => x.cause === 'crisis' || x.cause === 'mixed')], ['calm-other', xs.filter((x) => x.cause === 'calm')]].filter(([, v]) => v.length);
   const held = xs.filter((x) => x.heldBy);
-  console.log(`  ${r.padEnd(16)} ${fmt(tally(xs))} · held by the seam ${held.length}${held.length ? ` (${[...new Set(held.map((x) => x.heldBy))].join(', ')})` : ''} · by cause ${by.map(([c, v]) => `${c} ${v.length}/${new Set(v.map((x) => x.town)).size}t`).join(' · ')} · in a calm town ${xs.filter((x) => !x.crises.length).length}`);
+  console.log(`  ${r.padEnd(16)} ${fmt(tally(xs))} · held by the seam ${held.length}${held.length ? ` (${[...new Set(held.map((x) => x.heldBy))].join(', ')})` : ''} · by cause ${by.map(([c, v]) => `${c} ${v.length}/${new Set(v.map((x) => x.town)).size}t`).join(' · ')}`);
 }
 console.log('PERSON LINES OF A MARKED HOUSE (8h census): kind · cause · mark in front / no mark (of them, a line of the person\'s own trade)');
 for (const kind of ['deal', 'wants', 'secret', 'hook']) for (const cause of ['short', 'crisis']) {

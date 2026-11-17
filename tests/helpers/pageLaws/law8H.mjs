@@ -87,14 +87,18 @@ export function readPersons(T) {
     const end = n + 1 < tops.length ? tops[n + 1] - 1 : L.length;
     const role = L[k + 1] || '';
     const lines = [];
+    // THE FORM PROPOSED (the chair's leaning): the house's mark as a line of its own on the card, said once; a card that
+    // carries it covers every line of the person (the second check's rule 1: a card's mark covers what its rows say)
+    let cardMark = null;
     for (let i = k + 2; i < end; i++) {
       const l = L[i];
       let m;
       if ((m = l.match(/^How they deal\s*(.*)$/))) lines.push({ kind: 'deal', i, text: l, body: m[1] || L[i + 1] || '' });
       else if ((m = l.match(/^Wants\s+(.*)$/))) lines.push({ kind: 'wants', i, text: l, body: m[1] });
       else if ((m = l.match(/^Secret:\s*(.*)$/))) lines.push({ kind: 'secret', i, text: l, body: m[1] });
+      else if (MARK_LEAD.test(l) || CRISIS_LEAD.test(l)) cardMark = { i, text: l };
     }
-    return { name: (L[k - 1] || '').replace(/●+$/, '').trim(), house: role.split(' · ')[0].trim(), title: (L[k + 2] || '').trim(), lines, k };
+    return { name: (L[k - 1] || '').replace(/●+$/, '').trim(), house: role.split(' · ')[0].trim(), title: (L[k + 2] || '').trim(), lines, k, cardMark };
   });
 }
 const POOL = (() => {
@@ -182,8 +186,8 @@ export function law8H(T, town) {
       const front = OWN_MARK.test(l.text);
       const b = norm(l.body.replace(/^(Stopped by the [a-z ]+\.|Curtailed by the [a-z ]+\.|Scarce in the [a-z ]+\.|Short of [a-z ]+\.)\s*/g, '').replace(/^(Stopped by the [a-z ]+\.|Curtailed by the [a-z ]+\.|Scarce in the [a-z ]+\.|Short of [a-z ]+\.)\s*/g, ''));
       const trade = l.kind === 'deal' ? POOL.deal.has(b) : l.kind === 'secret' ? POOL.secret.has(b) : POOL.wantRes.some((w) => w.re.test(l.body.trim()));
-      census.push({ kind: l.kind, front, trade, cause: m.short && !m.crisis ? 'short' : 'crisis', mk, peer: !!peer, house: c.name });
-      if (front || !trade || HEDGED.test(l.body) || peer || (l.kind === 'deal' && MANNER_ONLY.test(l.body))) continue;
+      census.push({ kind: l.kind, front, cardMarked: !!p.cardMark, trade, cause: m.short && !m.crisis ? 'short' : 'crisis', mk, peer: !!peer, house: c.name });
+      if (front || p.cardMark || !trade || HEDGED.test(l.body) || peer || (l.kind === 'deal' && MANNER_ONLY.test(l.body))) continue;
       const mild = mk === 'curtailed' || mk === 'scarce';
       push(`8h.${l.kind}${mild ? '.mild' : ''}`, { tab: 'World/NPCs', i: l.i, line: l.text }, { tab: 'Systems/Institutions', i: m.idx, line: m.line },
         `${p.name} keeps ${c.name}, which the page marks (${mk}); this ${l.kind} line of the person's own trade shows it at work with no mark`, { thing: `${p.name}|${c.name}`, cause: m.short && !m.crisis ? 'short' : 'crisis', mk, person: p.name, house: c.name });
