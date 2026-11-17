@@ -257,3 +257,13 @@ H. TWO NOTES, NO NEW WORK. (1) On F (ruling BR9): your AMENDMENT 1 has `warTakes
    892 lines after it, under its ceiling): your one hunk for F is in another region of that file; your scratch merge
    of the line's then-tip before you hand back will show it (the line stands at f0eb9cc5b0 with SECRETS-1's rare
    secrets in: two new files and one call beside the goals; none of your files).
+
+## AMENDMENT 4 (sent to the seat by message at 14:23 UTC on 2026-11-17: one word, in a file already the seat's)
+
+I. `tests/docs/enforcedByExists.test.js` is red on the line by the guard's header ("Dangling @enforced-by path
+   targets: tests/domain/birthKindsLaw.test.js:23 -> resourceGenerator.js"): the header's bare
+   `resourceGenerator.js :: importsBroughtAtBirth` takes its path, `src/generators/resourceGenerator.js`. Folded into
+   the next commit; that one test run. FOR THE SEAT'S KNOWLEDGE, NO WORK: `tests/joins/labelJoins.test.js` is red on
+   the line by a false positive of its line-scoped scan on one line of `resourceGenerator.js` that the rebuild no
+   longer holds (`onSpent.has(inst.name) || SPENT_GROUND_WORKERS.includes(idOf(inst))`): the file keeps no
+   `inst.name` and `.includes(` on one line.
