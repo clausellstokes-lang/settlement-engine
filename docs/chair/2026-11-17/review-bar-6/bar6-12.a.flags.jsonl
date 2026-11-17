@@ -1,0 +1,7 @@
+{"id":"C32023","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"PAIR","why":"Says farms abandoned after attacks and a split over leaving; STATE gives safety Safe and the page's Safety row reads Safe","other":"C32006"}
+{"id":"C32238","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"PAIR","why":"Says the walls keep most trouble outside; another line says the palisade has no gate and slows trouble more than it stops it","other":"C32250"}
+{"id":"C32239","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"PAIR","why":"Says somebody plainly keeps visitors safe; the page says there is no watch and neighbours deal with wrongdoing themselves","other":"C32213"}
+{"id":"C32686","town":"bar0-thorp-calm-rand-43","sev":"LOW","kind":"STATE","why":"Person answers about 'the hills' (and C32687 a path over the hills); TOWN terrain is Plains and the overview says built on the open plain","other":"C32379"}
+{"id":"C32912","town":"bar0-thorp-calm-rand-44","sev":"MED","kind":"PAIR","why":"Says goods it sells entered as imports the same season; TRADE imports none and the page prints 'No recorded imports'","other":"C32910"}
+{"id":"C32957","town":"bar0-thorp-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"Plural subject 'Weak defences' with singular verb 'is'","other":""}
+{"id":"DONE","lines":1270,"blocks":3,"flags":6}
