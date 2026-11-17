@@ -149,3 +149,17 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   none is brought in." and "The <house> is failing: no <material> lies near and none is brought in." Everything else
   of BR6 stands for both (one house a town; never a whole trade; no ground on the land list, nothing on the imports; the
   mark covers the house's rows).
+- **BR7 (2026-11-17, 07:27 UTC; the chair's, vetoable): THE BIRTH IS HANDED THE SEED.** BIRTH-2 found, before it built,
+  that its brief's premise "the birth passes the generator's seed as an argument" could not be met from its own files:
+  the resource analysis (where the import is written at the birth) has one caller in src, the narratives step, and that
+  step hands it the config and the economy, neither of which carries the seed. THE CHAIR VERIFIED IT at the line's
+  a55162cfa0 (one caller; the same step already stamps the pipeline's seed for the settlement reason and the history,
+  for this very reason; the saved record's seed is that same string, set by the pipeline; no seat in flight touches the
+  file). RULED: BIRTH-2's file list grows by ONE HUNK in `src/generators/steps/generateNarratives.js`: the one call of
+  the resource analysis gains the pipeline's seed as an explicit seventh argument. EXPLICIT, NOT STAMPED ON THE CONFIG
+  (a stamped seed could wake seed-keyed readers inside that call that are canonical today and move the corpus). Nothing
+  else in that file. TWO CONDITIONS: (1) one function reads the seed for the birth and for the print, and an absent seed
+  reads as the empty string in both (a planted record with no seed is still told one story; a direct call without the
+  argument neither crashes nor diverges); (2) the seat's guard holds the agreement: for the same record the story the
+  birth acted on equals the story the print reads. WHY IT IS THE CHAIR'S TO RULE: the file is none of the three no seat
+  may edit (the assembly step, the build's config, the package file); it stores nothing; it takes no draw.
