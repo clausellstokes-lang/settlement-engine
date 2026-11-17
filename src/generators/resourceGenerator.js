@@ -493,6 +493,22 @@ const reachedByAnotherInput = (chain, institution, institutions, exploitation, e
       || supplyOfInput(otherKey, institution, institutions, evidence) !== 'missing'))
 );
 
+// ─── gapRowOf ─────────────────────────────────────────────────────────────────
+// A HOUSE'S GAP ROW, worded once (the gap writer's, and BIRTH-3's story rows: `writeStoryRows`).
+/** @param {string} institution @param {{ rawResource?: unknown }} chain @param {string} kind 'imported' or 'missing' */
+const gapRowOf = (institution, chain, kind) => {
+  const name = institutionDisplayName(institution);
+  return {
+    chain:       chain.rawResource,
+    institution,
+    kind,
+    impact:      kind === 'imported'
+      ? `${name} runs on imported ${chain.rawResource}`
+      : `${name} exists but lacks access to ${chain.rawResource}`,
+    severity:    kind === 'imported' ? 'low' : 'high',
+  };
+};
+
 // ─── evaluateInstitutionChain ─────────────────────────────────────────────────
 // Identify gaps: missing processing links and institutions lacking their inputs.
 
@@ -549,16 +565,7 @@ const evaluateInstitutionChain = (exploitation, institutions, evidence = {}) => 
       // chain is worked here or the record holds it locally or by import (supplyOfInput). Only the `missing` row goes: a
       // house that runs on imported ore still says so ("Smelter runs on imported iron ore" is the record's import list).
       if (kind === 'missing' && reachedByAnotherInput(chain, institution, institutions, exploitation, evidence)) return;
-      const name = institutionDisplayName(institution.name);
-      gaps.push({
-        chain:       chain.rawResource,
-        institution: institution.name,
-        kind,
-        impact:      kind === 'imported'
-          ? `${name} runs on imported ${chain.rawResource}`
-          : `${name} exists but lacks access to ${chain.rawResource}`,
-        severity:    kind === 'imported' ? 'low' : 'high',
-      });
+      gaps.push(gapRowOf(institution.name, chain, kind));
     });
   });
 
@@ -692,7 +699,6 @@ function writeStoryRows(record, gaps) {
   for (const inst of live) {
     const id = idOfInst(inst);
     const name = String(inst.name);
-    const display = institutionDisplayName(inst.name);
     if (picks.venture && picks.venture.name === name) {
       const rows = own(name).filter((g) => g.kind === 'missing');
       if (rows.length) for (const g of rows) g.impact = picks.venture.line;
@@ -710,9 +716,9 @@ function writeStoryRows(record, gaps) {
     if (!chain) continue;
     const implied = Object.prototype.hasOwnProperty.call(IMPLIED_GROUND, id) && IMPLIED_GROUND[id] === story.ground && !SOURCE_GROUNDS[id].some((g) => all.has(g));
     if (story.story === 'idle' && !own(name).some((g) => g.kind === 'missing' && rowNamesGround(g.chain, id, story.ground))) {
-      gaps.push({ chain, institution: name, kind: 'missing', impact: `${display} exists but lacks access to ${chain}`, severity: 'high' });
+      gaps.push(gapRowOf(name, { rawResource: chain }, 'missing'));
     } else if (story.story === 'bought' && implied && !own(name).some((g) => (g.kind === 'imported' || g.kind === 'missing') && rowNamesGround(g.chain, id, story.ground))) {
-      gaps.push({ chain, institution: name, kind: 'imported', impact: `${display} runs on imported ${chain}`, severity: 'low' });
+      gaps.push(gapRowOf(name, { rawResource: chain }, 'imported'));
     }
   }
 }
