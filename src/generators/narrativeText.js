@@ -20,6 +20,7 @@
 import { random as _rng } from "../kernel/rngContext.js";
 import { pickRandom2 } from "./helpers.js"; /** A drawn history event of one type, by name ("this event" where none): the pool rows' own draw, in its own statement (TAIL-CLOSE-SRC-4, the chair's SR3 (a): the row keeps its declaration, the filter is read here). @param {any[]} r @param {string} type @returns {string} */ const drawnEventOfType = (r, type) => pickRandom2(r.filter((s) => s.type === type))?.name || "this event"; // one line, so no cited line moves
 import { speakTierNoun } from "../domain/display/stateProse/stateProseKernel.js";
+import { prosperityLabelOf } from "../domain/prosperityRank.js"; import { PROSPERITY_WORDS } from "../domain/facts/factVocabulary.js"; // BAR7-SCENES (item 3): the war row reads the purse by the prosperity atom's own ladder
 import { powerSentenceName } from "../domain/display/powerSentenceName.js"; // BAR6-SCENES (LAW 10 rule 10h): a power inside a sentence takes its prose form
 import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js"; import { foodStoreWord, FAILED_SOURCE_WORDS } from "./economy/foodBalance.js"; // R2-CODE-A item 1: one line, so no cited line moves
 
@@ -36,6 +37,14 @@ import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js"; import
 // fallback (mid-sentence) sites are left untouched. One-time golden shift (this
 // branch parks for the regen); prose-only, so the structural diff stays clean.
 const capFirst = (s) => (typeof s === "string" && s.length ? s[0].toUpperCase() + s.slice(1) : s);
+/**
+ * BAR7-SCENES (BRIEF-BAR7 item 3, 2026-11-17; the chair's PM1): the purse holds a margin, by the `prosperity: ≥ comfortable` band
+ * (`facts/factVocabulary.js :: PROSPERITY_WORDS`, the label read by `prosperityRank.js :: prosperityLabelOf`, as `factsOf.prosperity`
+ * reads it): the economy desk's ledger line "closes every year ahead" is the COMFORTABLE rung's. `r.prosperity` is the pressure
+ * detail's own copy of `economicState.prosperity`.
+ * @param {{ prosperity?: unknown } | null | undefined} r @returns {boolean}
+ */
+const purseHoldsMargin = (r) => PROSPERITY_WORDS.indexOf(prosperityLabelOf(r?.prosperity).toLowerCase()) >= PROSPERITY_WORDS.indexOf('comfortable');
 
 /**
  * SIZE ruling 2 (2026-11-03): speak each line in the settlement's own tier noun ("the thorp no
@@ -260,7 +269,14 @@ const PRESSURE_ROWS = {
       : [
           // BAR6-SCENES (LAW 9 rule 9f; REVIEW-WIDE-6 C76517): "loyal" is refused where the public legitimacy is in crisis; the
           // pool's own resolution (narrativeGenerator.js :: generatePressureSentence) gives the next row, draw-free, true there
-          { text: `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`, excludes: ['legitimacy crisis'] },
+          // BAR7-SCENES (BRIEF-BAR7 item 3, 2026-11-17; the chair's PM1: THE OVERVIEW YIELDS; REVIEW-BAR-6 C15153): "cannot afford … It
+          // is also running thin" presumed a purse the record may not hold: bar0-city-wartime-rand-43 printed it beside the economy
+          // desk's "closes every year ahead" (prosperity Comfortable). Where the purse holds a margin (`prosperity: ≥ comfortable`,
+          // read by the atom's own ladder, `purseHoldsMargin` below) the row names the requisition and denies no margin: a branch
+          // inside the drawn row (as `hasWorkshop` below), because a refused row here resolves to the pool's next row, never to a twin
+          { text: purseHoldsMargin(r)
+            ? `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it could not refuse, and has paid it. The settlement is loyal, and it is paying in men as well as money.`
+            : `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`, excludes: ['legitimacy crisis'] },
           `The war reaches ${r.name} as a series of demands rather than battles: levies of men, of ${r.commodity || foodStoreWord(r.foodRecord)}, of coin, each one framed as duty and none of them refusable. ${r.name} is losing people and resources it will not get back, and the front it is bleeding for is somewhere it will never see.`,
           `Every capable pair of hands ${r.name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (${r.hasWorkshop ? "a workshop closed for want of a master" : "a trade left without its master"}, a field unsown for want of a back) while ${r.govFaction || "the governing authority"} reports the settlement loyal and does not report the rest.`, // R2-CODE-A-6 (CENSUS-2 a/workshops): a workshop only where the roster holds a house of craft (genPressureDetail's hasWorkshop); a branch inside the drawn row, so no draw moves
         ];
@@ -476,9 +492,9 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       r.some((s) => s.type === "economic")
         ? `This place made its name in trade, not war, and the ${(r.find((s) => s.type === "economic") || r[0]).name} showed it that money lasts longer here than any military glory`
-        : "Records here are kept carefully and disputes settled by precedent; people here learned the hard way what happens otherwise", needs: ['exports'], crisis: ['any'] }, // TAIL-NARRATIVE (00138): "made its name in trade" needs a town that sells something
+        : "Records here are kept carefully and disputes settled by precedent; people here learned the hard way what happens otherwise", needs: ['exports', 'law: ≥ strained'], crisis: ['any'] }, // TAIL-NARRATIVE (00138): "made its name in trade" needs a town that sells something // BAR7-SCENES (item 4, LOW; REVIEW-BAR-6 C20639): disputes settled by precedent want a law the page does not print as Collapsed or Critical (a besieged hamlet with no court printed it); a refused row moves to the admitted argmax
     { text: (r) =>
-      "More complicated than it looks from the road. Outsiders see a busy market; the people who live here know the stories behind it.", needs: ['market'], crisis: ['any'] },
+      "More complicated than it looks from the road. Outsiders see a busy market; the people who live here know the stories behind it.", needs: ['market'], excludes: ['crisis: hunger', 'crisis: under_siege', 'crisis: plague_onset'], crisis: ['any'] }, // BAR7-SCENES (BRIEF-BAR7 item 2, 2026-11-17; REVIEW-BAR-6 C45015): no busy market under the crises that stop, starve or empty a market (`data/crisisDependence.js`: a market lives on goods, gatherings and its food; a siege stops the goods, a famine starves its food, an outbreak keeps people from gathering); a refused row moves to the admitted argmax
     (r) =>
       (r.some(isMajorEvent) // TAIL-NARRATIVE (B00101): with a major event on the record it is named, never denied; a branch inside the drawn closure
         ? `It came through the ${majorNamesOf(r).slice(0, 2).join(' and the ')} without losing its options, its neighbours or its temper, and the people here count all three as achievements`

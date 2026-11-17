@@ -24,7 +24,8 @@
  * brickmaker) and `trade at work: charcoal kilns` (a charcoal burner). A kind's atom is UNANSWERED (undefined: a draw door
  * refuses both its `needs` and its `excludes`) where no house of that kind stands, so neither a kind's line nor its twin
  * ("no fresh pots", "the clamps stand cold") prints in a town that has no such house; true where one stands and is not
- * short; false where every one is short. `trade at work: kilns` keeps its reading for the lines any kiln answers.
+ * short; false where every one is short. `trade at work: kilns` keeps its reading for the lines any kiln answers
+ * (BAR7-SCENES, 2026-11-17: a glass furnace answers it only where no house that fires a kiln stands; `KILN_FURNACE_ONLY`).
  *
  * THE GOOD A SCENE SHOWS (BAR6-SCENES, LAW 6 rule 6b, 2026-11-16; BRIEF-BAR6 seat BAR6-SCENES (a); amendment 5b: keys
  * beside the trades, vetoable by the owner, on the veto list as new vocabulary). The arrival sense pools are opened by a
@@ -44,6 +45,7 @@
  * Layer 2 (over the roster, the resources and the economy). Pure: no randomness, no clock, no write.
  * @enforced-by tests/generators/bar4ScenePresumption.test.js
  * @enforced-by tests/domain/bar6ScenesGoods.test.js
+ * @enforced-by tests/generators/bar7Scenes.test.js
  */
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
@@ -164,5 +166,27 @@ export function tradeAtWorkOf(record, key) {
   });
   if (houses.length === 0) return kind ? undefined : true; // BAR5-THINGS: a kiln kind no house of which stands is unanswered
   const short = housesShortOf(record);
-  return houses.some((h) => !short.has(String(/** @type {{ name?: unknown }} */ (h)?.name ?? '')));
+  // BAR7-SCENES (item 1, 2026-11-17): the generic `kilns` key answers by a house that FIRES A KILN; a glass furnace answers
+  // only where no other kiln house stands (`KILN_FURNACE_ONLY`, below)
+  const answering = key === 'kilns' ? kilnHousesAnswering(houses) : houses;
+  return answering.some((h) => !short.has(String(/** @type {{ name?: unknown }} */ (h)?.name ?? '')));
+}
+
+/**
+ * BAR7-SCENES (BRIEF-BAR7 seat BAR7-SCENES item 1, 2026-11-17; LAW 8 rule 8k.trade beyond the seam). "The kilns are lit all
+ * through the day, and the heat of them is in every lane." (`trade at work: kilns`) printed in bar0-metropolis-calm-rand-32,
+ * whose Potter, Brickmaker and Charcoal burner were all "Short of …": the generic key DID read the short mark (the brief's
+ * premise, measured, is false there), and the house that answered it was the Glassmakers, whose furnace is not the town's
+ * kilns. The generic key now reads the kiln houses as its kinds do: where a house that fires a kiln stands (a kind's, or a
+ * lime burner's), those houses answer it, read through `housesShortOf`; a glass house answers it only where it is the only
+ * kiln house of the town (then its furnace is the trade the sense was opened by, as before). The glass words are a part of
+ * `TRADE_HOUSES.kilns` (pinned by the guard, `tests/generators/bar7Scenes.test.js`).
+ */
+export const KILN_FURNACE_ONLY = Object.freeze(['glassblower', 'glassmaker', 'glassmakers']);
+
+/** @param {ReadonlyArray<unknown>} houses the kiln trade's houses on the live roster @returns {ReadonlyArray<unknown>} */
+function kilnHousesAnswering(houses) {
+  const nameOf = (/** @type {unknown} */ inst) => String(nativeSemanticName(/** @type {object} */ (inst)) || /** @type {{ name?: unknown }} */ (inst)?.name || '').toLowerCase();
+  const firing = houses.filter((h) => TRADE_HOUSES.kilns.some((w) => !KILN_FURNACE_ONLY.includes(w) && atWordStart(w, nameOf(h))));
+  return firing.length ? firing : houses;
 }

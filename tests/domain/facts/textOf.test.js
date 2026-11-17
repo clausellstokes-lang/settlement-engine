@@ -66,6 +66,9 @@ describe('textOf', () => {
     // hamlet arrival twin added three at the join (224 -> 227, the count the joined line read); the seam's own six twins join (the
     // smiths' four dominant lines, each now declaring the ironwork; the tanners' reek and drying frames, each declaring the leather):
     // 227 + 6 = 233. The tanners' hides twin is reworded, not added; the reek and the frames were objects already.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(233);
+    // 233 -> 242 (BAR7-SCENES, 2026-11-17, BRIEF-BAR7 item 5; re-keyed by identity, this seat's own count): the tanners' four bare
+    // `lines` become declared objects, each declaring the leather (4), with a twin each (4); the arms' racks line takes its twin (1):
+    // 4 + 4 + 1 = 9. The dyer's, the tanners' dominant, the smiths', the brought-in and the work party's twins are reworded, not added.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(242);
   });
 });
