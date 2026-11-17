@@ -91,7 +91,7 @@ describe('BAR7-ORDER: the siege\'s order clause reads the law band at print; the
     expect(lawBandOf(t)).toBe('collapsed');
     expect(stored, 'C5430: the draw is not moved').toContain(`${SUBJECTS[0]}${TAIL}`);
     const twin = SIEGE_ORDER_FRAME.twin(/** @type {RegExpExecArray} */ (SIEGE_ORDER_FRAME.frame.exec(stored))[1]);
-    expect(twin, 'the garrison\'s own twin').toMatch(/^The garrison mans the defences, but order among the people has gone/);
+    expect(twin, 'the garrison\'s own twin').toBe(`${SUBJECTS[0].split(' keeps ')[0]} holds out, but order among the people has gone, and things get worse as the food runs down`);
     expect(deriveSafetyLine(t), 'the twin prints instead').toContain(twin);
     expect(orderKept(String(deriveSafetyLine(t)))).toEqual([]);
     const edited = structuredClone(t);
@@ -122,5 +122,47 @@ describe('BAR7-ORDER: the siege\'s order clause reads the law band at print; the
     const held = { history: { currentTensions: [] }, powerStructure: { factions: [{ faction: 'Council of Elders' }] } };
     expect(guardLineUnderTheLaw(drawn, held), 'held: the drawn line prints as drawn').toBe(drawn);
     expectPresentThenAbsent(drawn, guardLineUnderTheLaw(drawn, { history: { currentTensions: [] } }), 'The old families', 'unheld: no party');
+  }, 600_000);
+
+  // THE CHAIR'S READ OF 4275a997d (2026-11-17), point 4: planted Collapsed records, each subject and each families' line.
+  test('(e) planted: beside Collapsed each subject prints its own twin ("holds out", "hold out"), presuming only the siege', () => {
+    const t = structuredClone(town('bar0-city-under_siege+famine-rand-43'));
+    expect(lawBandOf(t)).toBe('collapsed');
+    const heads = SUBJECTS.map((k) => k.replace(/ (?:keeps? order|has taken charge of the streets)$/, ''));
+    expect(heads.length).toBe(3);
+    for (const [i, k] of SUBJECTS.entries()) {
+      const drawn = `${k}${TAIL}. People quarrel over rations.`;
+      t.economicState.safetyProfile.safetyDesc = drawn;
+      const verb = heads[i] === 'Those holding the place' ? 'hold' : 'holds';
+      const printed = String(deriveSafetyLine(t));
+      expect(printed, k).toBe(`${heads[i]} ${verb} out, but order among the people has gone, and things get worse as the food runs down. People quarrel over rations.`);
+      expectPresentThenAbsent(drawn, printed, `${k}${TAIL}`, `${heads[i]}: the drawn clause, then its twin`);
+    }
+  }, 600_000);
+
+  test('(f) planted: the oldest families\' lines name no party where the record holds none, beside Collapsed and above it', () => {
+    // every line of the table that names "the oldest families": the no-watch line, the two quarrel lines, and their twins
+    const lines = [...new Set(Object.values(GUARD_LAW_SIBLINGS).flatMap((set) => set.map((l) => l.text)))].filter((l) => /\bthe oldest families\b/.test(l));
+    expect(lines.length, 'the no-watch line, the two quarrel lines and their Collapsed twins').toBe(5);
+    const collapsedUnheld = town('bar0-hamlet-under_siege-rand-29');
+    expect(lawBandOf(collapsedUnheld)).toBe('collapsed');
+    expect(familiesHeld(collapsedUnheld), 'the planted Collapsed record holds no party').toBe(false);
+    const quiet = { history: { currentTensions: [] } };
+    const held = { history: { currentTensions: [] }, powerStructure: { factions: [{ faction: 'Council of Elders' }] } };
+    for (const line of lines) {
+      for (const [label, rec] of /** @type {Array<[string, unknown]>} */ ([['collapsed', collapsedUnheld], ['above Collapsed', quiet]])) {
+        const printed = guardLineUnderTheLaw(line, rec);
+        expectPresentThenAbsent(line, printed, 'the oldest families', `${label}: ${line}`);
+        expect(printed, `${label}: every place's words`).toContain('the heads of households');
+      }
+      expect(guardLineUnderTheLaw(line, held), 'held: as drawn').toBe(line);
+    }
+    // the noble pool's own names hold the party (the reading takes them from the pool, `powerData.js`)
+    for (const faction of ['The Peerage', 'The Old Houses']) {
+      expect(guardLineUnderTheLaw(lines[0], { history: { currentTensions: [] }, powerStructure: { factions: [{ faction }] } }), faction).toBe(lines[0]);
+    }
+    // whole words only: a welder or a clandestine house names no family
+    const welder = { history: { currentTensions: ['A welder keeps a clandestine shop'] } };
+    expectPresentThenAbsent(lines[0], guardLineUnderTheLaw(lines[0], welder), 'the oldest families', 'whole words only');
   }, 600_000);
 });
