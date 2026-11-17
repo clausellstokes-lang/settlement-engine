@@ -225,7 +225,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [sovereign] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
  * @property {boolean} [dangerComing] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
@@ -339,6 +339,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // one stands ABOVE the seat by its own standing (`seatOutranked.js`, the label the Power tab prints; the settled record only,
   // K10). A line saying the seat holds because no rival outweighs it presumes none (DS-POW-4 › Holding v3, its one line).
   'seat outranked': dim({ shape: 'presence', home: 'seatOutranked', reader: (f) => bool(f.seatOutranked) }),
+  // BAR6-POWERS (the brief BAR6's fact (f), on the veto list as new vocabulary): the governing power is a body of MORE THAN ONE,
+  // as the page counts its members (`seatMembers.js`: two or more on the roster; with none cast, the government's label). A line
+  // saying "its members cannot agree" presumes it (DS-POW-5 › council, its counterforce line; the wide read's C91256).
+  'seat members': dim({ shape: 'presence', home: 'seatMembers', reader: (f) => bool(f.seatMembers) }),
   // ── BAR2-PLACES, THE CHAIR'S GRANT VW2 of 2026-11-15 (vetoable by the owner; on the veto list as new vocabulary): two atoms ──
   // `patrol`: a force that keeps patrol stands: a watch or a garrison (the defence home's own atoms). A militia is not one:
   // the record's own guard reading says the citizen militia "musters when needed but cannot maintain consistent patrol"

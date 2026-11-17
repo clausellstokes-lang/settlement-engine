@@ -2582,8 +2582,8 @@
    "src": "map:measured"
   },
   "DS-POW-5::council": {
-   "layer": 4,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: BAR6-POWERS 2026-11-16 (was map:measured, 4): its lines declare seat members (layer 4), one above it; the desk renders at print from the settled record"
   },
   "DS-POW-5::criminal": {
    "layer": 4,

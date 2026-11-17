@@ -27,7 +27,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js'; import { ha
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
-import { forceLineOf } from './militaryForceLine.js'; // BAR5-POWERS (1c-force): the military description reads the settled roster
+import { forceLineOf, COUNCIL_BODIES, marketDayLineOf } from './militaryForceLine.js'; // BAR5-POWERS (1c-force): the military description reads the settled roster; BAR6-POWERS (10f-kind, 10f-tier): the seat's card by its kind, the merchants' by the tier
 import { settleClaimsToLabel } from './claimStanding.js'; // COHERENCE-POWERS-8: the claim table in its own module (F31's ceiling: a split, never a raise)
 export { settleClaimsToLabel };
 export { normalizeAndAnnotateFactions }; // COHERENCE-POWERS-3 (F12): moved verbatim to power/normalizeAndAnnotateFactions.js, re-exported for its importers
@@ -408,7 +408,7 @@ export const generatePowerStructure = (
     },
     // R-AM (CENSUS-1g): resolved where it is CHOSEN, not inside the table (an eager `said` noted a
     // description no birth printed); `said` hands every non-key back untouched, so nothing moves.
-    govDesc = said((govBody === 'Town Council' && governingFaction !== govBody && (govDescByFaction[governingFaction] || govDescByLabel[governingFaction])) || govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table; TAIL-POWERS-4 (03509): a town's council line only where the council governs
+    govDesc = said((COUNCIL_BODIES.includes(govBody) && governingFaction !== govBody && (govDescByFaction[governingFaction] || govDescByLabel[governingFaction])) || govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table; TAIL-POWERS-4 (03509): a town's council line only where the council governs; BAR6-POWERS (10f-kind, C121364): a city's and a metropolis's too (a High Theocratic Council takes the clergy's card, not the grand council's)
     priorityBonus = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
     govPower = [
       'Theocratic Council',
@@ -464,7 +464,7 @@ export const generatePowerStructure = (
                   : 'Established merchant community; fund civic works and expect council access in return.'
               : merchantAdjPower >= 10
                 ? 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.'
-                : said('A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.'),
+                : marketDayLineOf(tier, () => said('A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.')), // BAR6-POWERS (10f-tier, C128237): a small place's line
       // SW-8: "(dominant)" left the name (it printed); the cap reads the dominance itself.
       merchantDominant =
         (economicState == null ? void 0 : economicState.prosperity) === 'Wealthy' ||

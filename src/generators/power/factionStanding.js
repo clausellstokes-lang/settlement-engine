@@ -44,6 +44,12 @@ const isWeakPower = (f) => ['Minor', 'Suppressed'].includes(powerLabelOf(f.power
 const arcaneAheadSaid = (rival) => // TAIL-CLOSE-SRC-4 (SR4): named as its card names it, by the one grammar reader, as every power is
   powerSentenceName(rival.faction) + (pluralPowerName(powerSentenceName(rival.faction)) ? ' have' : ' has');
 
+// BAR6-POWERS (LAW 10f-weight, the audit's C110252, the chair's 10/c): the nobles' card said "The merchant guilds now have more
+// say" of the FIRST power whose name holds "Merchant", which may be the ruling Grand Merchant Oligarchy while the Merchant Guilds
+// stand Suppressed beneath the nobles: the clause names the power it weighed, in arcaneAheadSaid's form.
+/** @param {{ faction: string }} rival @returns {string} */
+const merchantAheadSaid = (rival) => arcaneAheadSaid(rival);
+
 // annotateFactionStanding — enrich faction descriptions with their position in
 // the (already normalised and sorted) power ranking (mutates in place).
 /** The number of level powers, as the standing line says it (TAIL-POWERS-B-4, P31 (4)); past six, "Many". */
@@ -224,7 +230,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
           if (merchantRivalForNoble) {
             var nobleMerchantNote =
               merchantRivalForNoble.power > power + 12
-                ? 'The merchant guilds now have more say: the noble families keep their titles, their land and their precedence, but the money has moved.'
+                ? (merchantRivalForNoble.faction === 'Merchant Guilds' ? 'The merchant guilds now have more say' : merchantAheadSaid(merchantRivalForNoble) + ' more say now') + ': the noble families keep their titles, their land and their precedence, but the money has moved.' // BAR6-POWERS (10f-weight, C110252): it names the power it weighed (the old words, byte for byte, where that is the Merchant Guilds)
                 : merchantRivalForNoble.power > power
                   ? 'The merchants are closing the gap, and the noble families are using every law and every social tie they have to slow them down.'
                   : 'Still ahead of merchant interests in real influence, for now. They know the gap is narrowing and are arranging marriages accordingly.';

@@ -18,7 +18,7 @@
  * description, THE BACKS LINE (X-40, X-45): the powers the house stands behind — every house at
  * least one, where the settlement has a ruler, and more than one where more than one reason
  * holds — each a door to the Power tab, read off the one per-house truth the Power tab's web is
- * built from (`powerSupport.js :: houseBacksOf`). THE DM EDITS IT (X-45): a viewer who may
+ * built from (`powerSupport.js :: houseBacksShownOf`). THE DM EDITS IT (X-45): a viewer who may
  * author, in edit mode, toggles the roster's powers on the line; the authored list wears the ✎
  * mark and replaces every derived reason, and "As the engine has it" lets it go. The edit rides
  * the house's own edit record (`applyUserEditAction('institution', index, 'backs', …)`), so it
@@ -54,7 +54,7 @@ import { identityForInstitution } from '../../../domain/display/institutionVocab
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 import { isFabricInstitution } from '../../../data/institutionalCatalog.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
-import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
+import { formatBacksValue, houseBacksShownOf } from '../../../domain/dossier/powerSupport.js';
 import { powerSentenceName } from '../../../domain/display/powerSentenceName.js';
 import { walkUserEdits } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
@@ -133,7 +133,7 @@ function serviceRows(availableServices) {
  */
 export function institutionsWithServices(settlement) {
   const rows = serviceRows(settlement?.availableServices);
-  const backers = houseBacksOf(/** @type {any} */ (settlement) || {});
+  const backers = houseBacksShownOf(/** @type {any} */ (settlement) || {});
   // PEOPLE-6 LINKS: each house's face, the card whose `institution.key` is the row's name.
   const faces = facesByHouse(/** @type {any} */ (settlement)?.npcs);
   // X-45: the houses the DM spoke for, through the settlement-level walk of the edit records
@@ -249,7 +249,7 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * One institution: what it is, the powers it backs, then the doors to the services it renders
  * (X-35, X-40, X-45). Mounted by the tab and, through its own card, by the dossier search
  * (BUILD-W2-SEARCH U2). `sets` is the tab's chain-status reading (`computeChainSets`); `backs`
- * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
+ * is the house's list from `houseBacksShownOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
  * car 3) marks the place rather than a house: no Backs line and no editor.
  */
 export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null, crisisMark = null, serviceStoppedBy = null, serviceShortBy = null }) {

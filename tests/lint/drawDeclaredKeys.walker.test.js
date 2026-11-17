@@ -14,8 +14,9 @@ import { describe, expect, it } from 'vitest';
 /** Callers whose key is content-derived (no settlement identity), listed for the chair, not yet re-keyed. */
 const CONTENT_KEYED = Object.freeze({
   'src/generators/power/relationshipArchetypes.js': 'keys on the two NPC names and the archetype: names are drawn per settlement, so the key varies by birth; a render-stable tie key (CENSUS-1e)',
-  // re-keyed #232 → #266 by identity (the same createConflictHookDraw call; SW-10 HOOKS 2026-11-09: the party descriptor's helpers above it moved the line)
-  'src/domain/dossier/hookLines.js#266': 'a display draw keyed on the faction pair and issue (render-time; no seed in scope at this site)',
+  // re-keyed #232 → #266 by identity (the same createConflictHookDraw call; SW-10 HOOKS 2026-11-09: the party descriptor's helpers above it moved the line);
+  // re-keyed #266 → #271 by identity (BAR6-POWERS 2026-11-16: the party descriptor's prose-form note and import above it moved the line; the key unchanged)
+  'src/domain/dossier/hookLines.js#271': 'a display draw keyed on the faction pair and issue (render-time; no seed in scope at this site)',
   'src/domain/display/causeLifecycleVocabulary.js': 'a display draw keyed on state, cause class and role (render-time; no seed in scope at this site)',
 });
 

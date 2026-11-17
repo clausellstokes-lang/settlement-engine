@@ -268,7 +268,7 @@ registerStep('assembleSettlement', {
       settlement.powerStructure,
       settlement.economicState,
       ctx.powerIntent,
-      { defenseLabel: settlement.defenseProfile.readiness.label, militaryGate: settlement.defenseProfile.economicGates?.military, pins },
+      { defenseLabel: settlement.defenseProfile.readiness.label, militaryGate: settlement.defenseProfile.economicGates?.military, pins, forces: factsOf(settlement).defence }, // BAR6-POWERS (10/g): the settled roster's defence atoms (`defenceOf`, through the fact home this file imports), for `militaryForceLine.js`
     );
     refreshPowerGenerationTraces(
       ctx,

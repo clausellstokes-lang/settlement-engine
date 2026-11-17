@@ -1,0 +1,132 @@
+[
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "What the {seat} says at {settlement} gets done, and nobody asks why. Dues are paid and disputes go to the {seat} without anyone having to be told twice.",
+  "reason": "office: the office it names is the {seat} itself, the governing power the line is drawn for (DS-POW-1's key is the seat's own legitimacy band); dues and disputes go to the body the record holds"
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "{settlement} thinks well enough of the {seat}, not warmly, but well enough that what it decides carries in most quarters without an argument first.",
+  "reason": "size: \"in most quarters\" is the idiom for among most people, not districts; the line names no street, quarter of a town or size"
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "{faction} holds {settlement} with nothing to spare, and people are hedging their bets in case it slips.",
+  "reason": "plenty: \"with nothing to spare\" is the margin of the hold (the pool's key: unstable, matched), not goods or food"
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "The {seat} at {settlement} is run by the houses that keep the account books, and it decides things the way a business does: by what pays.",
+  "reason": "goods: drawn only for a merchant-league seat (DS-POW-5's key `rulingPower: merchant_league`), whose houses are the merchants that keep the books"
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "Officials at {settlement} are paid little and watched less, and a purse offered in the right doorway would not be turned away.",
+  "reason": "office: the officials are the governing seat's own office-holders; the pool is keyed on a capture pressure that needs a governing seat (DS-POW-6), and every seat has its holders"
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "{settlement} is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply.",
+  "reason": "plenty: the pool's own key is poor prosperity (DS-POW-6 ADVANCING: weak security, POOR PROSPERITY): the want it states is the key's"
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "Several houses at {settlement} keep perfect books, because perfect books are what they are paid to keep.",
+  "reason": "goods, office: drawn only for the criminal operation role money laundering (DS-POW-6's key), whose fronts are the houses it names"
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "The combination at {settlement} has come apart. It lost its members and dissolved, and the hall is back to assembling each decision separately.",
+  "reason": "office: \"the hall\" is the governing seat's own meeting (the {seat} the record holds); the pool is keyed on a combination that formed and fractured"
+ },
+ {
+  "file": "src/data/dossierStateProse/power.generated.js",
+  "text": "Two houses at {settlement} want the same things and will not sit together; what is between the people at the head of them is bitter enough that the interests do not get a hearing.",
+  "reason": "office: the two houses are the pair of powers the pool's key names (DS-POW-7: a hostile leader tie between two aligned powers)"
+ },
+ {
+  "file": "src/domain/dossier/hookLines.js",
+  "text": "… … offered … better terms on … than … expected, and … … looking for the catch before … ….",
+  "reason": "resource: \"the catch\" is the idiom for a hidden condition, not fish (a false alarm of the lexicon)"
+ },
+ {
+  "file": "src/generators/power/factionStanding.js",
+  "text": "The guild is stronger than they are. They can only make arrests where it is safe to, and everyone knows it.",
+  "reason": "threat: the line states the threat itself (a thieves' guild outweighs the guard: its own condition); \"where it is safe to\" is a condition, not a calm claim"
+ },
+ {
+  "file": "src/generators/power/factionStanding.js",
+  "text": "The steward rules in the lord's name, and the household is where that right comes from, but who signs what has become a tangle.",
+  "reason": "sovereign: drawn only where a Feudal Stewardship stands beside the noble household (its own condition `hasFeudalSteward && hasNobility`): the government gives the lord (ruling SV1)"
+ },
+ {
+  "file": "src/generators/power/militaryForceLine.js",
+  "text": "No watch or patrol stands here; those who would take up arms if trouble came speak for the settlement\\'s defence.",
+  "reason": "office: the twin printed only where the settled roster holds no watch and no militia (`forceLineOf` reads `defenceOf`); its office words are negated"
+ },
+ {
+  "file": "src/generators/power/militaryForceLine.js",
+  "text": "Armed patrol of able-bodied residents;",
+  "reason": "office: the table's key for the line declared `needs: militia | watch` (FORCE_LINES), read against the settled roster by `forceLineOf`"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.",
+  "reason": "sovereign: the card of the Feudal Stewardship, drawn only where that power governs: the government gives the lord (ruling SV1)"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "A lord-appointed official governs; all authority is delegated from above and revocable at will.",
+  "reason": "sovereign: the card of the Feudal Appointee, drawn only where that power governs: the government gives the lord (ruling SV1)"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its streets.",
+  "reason": "size, office: the City Council's card, drawn only where a City Council governs (`governanceLabelMap`: a city's tier gives it): the city and its council are the record's"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.",
+  "reason": "sovereign: the card of the Ducal Governorship, drawn only where that power governs: the government gives the duke and the appointment (ruling SV1)"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "The governing body is systematically compromised; offices are sold and justice is purchasable.",
+  "reason": "office: the card of the Corrupt Council, drawn only where that power governs; the offices it names are the council's own"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "The crown rules here directly. How far its word carries depends on the monarch\\'s strength and on whether the nobles stay loyal.",
+  "reason": "sovereign: the card of the Royal Authority, drawn only where the crown itself governs (ruling SV1)"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "The local lord's household; land rights and feudal obligation give them a formal claim to authority, though other powers hold more practical influence day to day.",
+  "reason": "sovereign: the card of the noble household power, drawn only where that power stands: the power gives the lord (ruling SV1)"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "reason": "office: read by `militaryForceLine.js :: forceLineOf` against the settled roster (needs a militia or a watch; its twin otherwise), with the late key handed (BAR6-POWERS 10/g)"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.",
+  "reason": "sovereign: the card of the Elected Reeve, drawn only where that power governs; SV1's atom (`sovereign.js`, by XA1 from a804fa1b5) reads the reeve as a sovereign's, and it is TRUE in every one of the 23 towns that print the card in the 150, the 720 and the fresh 300 at afa46d644, at the settled record and from the houses alone"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "The great noble houses are the crown's military and fiscal foundation, and they know it. Royal policy is negotiated with them as much as decreed over them.",
+  "reason": "sovereign: drawn only where Royal Authority governs (the card's own condition, `governingFaction.includes('Royal Authority')`): the crown is the government's own (SV1; the atom reads \"royal\"); printed in none of the 1,170 towns rendered"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "Hereditary landowners whose cooperation the crown depends on for levies, taxes, and regional order. Not powerful enough to dictate, but essential enough to court.",
+  "reason": "sovereign: drawn only where Royal Authority governs (the card's own condition): the crown is the government's own (SV1; the atom reads \"royal\"); printed in none of the 1,170 towns rendered"
+ },
+ {
+  "file": "src/generators/power/rulingStructure.js",
+  "text": "Noble families nominally loyal to the crown, but watching which way the political wind is blowing before committing resources.",
+  "reason": "sovereign: drawn only where Royal Authority governs (the card's own condition): the crown is the government's own (SV1; the atom reads \"royal\"); printed in none of the 1,170 towns rendered"
+ }
+]
