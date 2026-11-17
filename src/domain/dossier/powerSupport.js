@@ -306,7 +306,7 @@ export function houseBacksShownOf(settlement) {
   const conflicts = /** @type {{ powerStructure?: { conflicts?: unknown } }} */ (settlement).powerStructure?.conflicts;
   const rivals = new Set((Array.isArray(conflicts) ? conflicts : [])
     .filter((c) => !!c && String(c.intensity).toLowerCase() === 'high' && Array.isArray(c.parties) && c.parties.includes(ruler))
-    .flatMap((c) => c.parties.filter((p) => p !== ruler)));
+    .flatMap((c) => c.parties.filter((/** @type {unknown} */ p) => p !== ruler)));
   const refused = list.filter((b) => rivals.has(b.faction));
   if (!refused.length) return byHouse;
   const moved = refused.reduce((sum, b) => sum + b.share, 0);

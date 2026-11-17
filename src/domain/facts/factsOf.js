@@ -127,7 +127,7 @@ export function factsOf(record, options = {}) {
     /** BAR5-POWERS (the chair's ruling SO1): a power not the governing one stands above the seat (`seatOutranked.js`) */
     get seatOutranked() { return seatOutrankedOf(record); },
     /** BAR6-POWERS (6d-members): the governing power holds more than one member, as the page counts them (`seatMembers.js`) */
-    get seatMembers() { return seatMembersOf(record); },
+    get seatMembers() { return seatMembersOf(record, () => rulingBodyOf(record)); },
     /** BAR2-PLACES (the chair's grant VW2): the smiths have iron to work, worked here or brought in past no siege (`ironAtHand.js`) */
     get ironAtHand() { return ironAtHandOf(record); },
     /** BAR4-HOUSES (H1 (ii)): the town works timber of its own, the input's kind `local` (`timberAtHand.js`, on `houseInputAtHand.js`) */
