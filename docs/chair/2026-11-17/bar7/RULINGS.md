@@ -199,3 +199,43 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   most thorps and villages none, most cities one, a metropolis one to three; the killer very rare of itself). THEY
   PRINT ON THE CARD'S SECRET ROW (nothing new stored); OFFERED AND NOT BUILT: a visible personality line of their own,
   as a follow-up if the owner says so. The seat's brief was rewritten whole before it was seated.
+- **RS1, WIDENED THREE MORE TIMES BY THE OWNER (2026-11-17, each verbatim, the typing kept).** About 09:02 UTC: "Is a
+  master blacksmith in hiding. Or other counterparts to professions . When in a low village, hamlet, or Thorpe with
+  extreme rarity's" About 09:04 UTC: "Has Benjamin buttons disease." About 09:06 UTC: "Expand all of these as well I'm
+  only giving examples to set a tone or benchmark" THE CHAIR'S FORM, told to the owner in the same answers, each part
+  vetoable: (a) A FOURTH FAMILY, THE HIDDEN MASTERS: only in a thorp, a hamlet or a village; the row is the counterpart
+  of the person's OWN trade (the smith a master armourer in hiding; the healer once physician to a great house; the
+  ferryman once master of a great ship; the elder who once governed a city; and so on), so the card stays believable;
+  a grown adult, never a youth; EXTREME RARITY: about one small place in forty; (b) one more nature, described and not
+  labelled ("Was born old and grows younger each year, and no one here has known them long enough to notice"), MAGIC
+  ONLY BY THE CHAIR'S DEFAULT (the owner did not tag it; it cannot happen where the world's law holds no magic), never
+  an elder or a hereditary ruler; (c) THE OWNER'S LINES ARE THE BENCHMARK OF TONE AND THE CHAIR WROTE THE POOLS OUT TO
+  IT: EIGHTY-SIX ROWS IN ALL (twenty-one deeds, twenty-eight natures, nineteen ties and blood, eighteen hidden
+  masters; fifteen of them magic only; nineteen from the owner's own examples), every one in the seat's brief and on
+  the owner's veto list; THE ODDS DO NOT GROW WITH THE ROWS (a larger pool is more variety, not more of them); the
+  seat adds no row of its own; what the owner sends after the seating goes to the seat as rows, by message and by an
+  amendment at the foot of its brief.
+- **RS1, WIDENED AGAIN BY THE OWNER (2026-11-17, about 09:09 UTC; the owner stopped the chair's publishing of the brief
+  to add it; verbatim, the typing kept): "Is a fey that both ate and replaced the original person / Magic only / Breaks
+  the fourth wall Deadpool style and knows the concepts of a GM and players. / Traveled from the past to the future. /
+  Traveled from the future to the past. / Is a regressor. / Isekaid from a different genre of TTRPG. / Isekaid from the
+  real world into this game."** THE CHAIR'S FORM, told to the owner in the same answer, each part vetoable: the fey
+  goes among the ties and the blood (magic only, the owner's tag); A FIFTH FAMILY, THE OUTSIDERS, ten rows: the
+  owner's six (the one who knows they are a figure in someone's game; the one from an age three centuries gone; the
+  one from years not yet happened; the one who has lived these years once already; the one pulled from a world of
+  machines and starlight; the one who was someone else in a world where this one is a game) and four of the chair's
+  to the same benchmark (the same year lived over and over; all of it their own dream; dead four times and woken in
+  bed; numbers over people's heads); described, not labelled; RARER AGAIN: about one place in sixty, of any size;
+  MAGIC ONLY BY THE CHAIR'S DEFAULT for eight of the ten (the owner tagged only the fey: a world whose law holds no
+  magic promises that nothing impossible happens in it; the one who knows of the game and the dreamer may stand
+  anywhere, a strange belief being no magic); the owner may say "all worlds". AND AT ABOUT 09:12 UTC, verbatim: "Is omniscient but only speaks in riddles.": one more
+  outsider ("Knows the answer to any question, and can give it only as a riddle": the riddles are the answers, not
+  the person's everyday speech; magic only by the chair's default). AND A MINUTE LATER, verbatim: "Experiences Groundhog Day the first
+  time you meet them as in they know about the players as though they've met. Cured the second time.": one more
+  outsider ("Is living one day over and over, and will know a newcomer at first meeting as though they had met many
+  times"; "By their second meeting the days have started moving again, and it is over": "the players" written "a
+  newcomer" so that the line stays inside the world; magic only by the chair's default). AND AT ABOUT 09:16 UTC, verbatim: "Falls in love with the first
+  player that speaks to them.": one more row among the ties ("Will fall in love, at once and completely, with the first
+  newcomer who speaks to them"; "They will not hide it well, and it will not pass"; any world; an adult). A HUNDRED ROWS
+  IN ALL, twenty-six magic only, twenty-nine from the owner's own examples. The chair holds the seat's start a few minutes for more of
+  the owner's rows, then publishes and seats.

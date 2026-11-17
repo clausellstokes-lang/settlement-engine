@@ -1,9 +1,9 @@
-# BRIEF-SECRETS-1: very rare secrets (dark deeds, hidden natures, hidden ties and blood), dealt by the seed (the owner's three words of 2026-11-17)
+# BRIEF-SECRETS-1: very rare secrets (dark deeds, hidden natures, hidden ties and blood, hidden masters, outsiders), dealt by the seed (the owner's ten words of 2026-11-17)
 
 You are SECRETS-1, a builder seat. This file is your whole assignment and binds you as written. Read it whole, then
 rules R1 to R12 at the top of `docs/chair/2026-11-14/briefs/BRIEF-BAR7.md` (the round's standing rules: they bind you
-too), then ruling RS1 and its two widenings in `docs/chair/2026-11-17/bar7/RULINGS.md`. Read nothing more on the
-chair's lane (your context is your budget).
+too), then ruling RS1 and its widenings in `docs/chair/2026-11-17/bar7/RULINGS.md`. Read nothing more on the chair's
+lane (your context is your budget).
 
 ## THE OWNER'S WORDS (2026-11-17, each verbatim, the typing kept)
 
@@ -18,73 +18,202 @@ xenophobic. Survived a fire and is terrified of flames. Is really good at gambli
 another settlement. Is the bastard son of a previous lord. Is part of a harem that is looking to expand. Made a deal
 with a demon but at what cost (magic only)"
 
-It is an exception, by the owner's own hand, to the owner's rule "no new text until the fixes are done". THE
-TWENTY-FOUR ROWS BELOW (three families) ARE THE ONLY NEW WORDS YOU WRITE. The chair told the owner each part of the
-form below as a default the owner may overturn: you build the form, you do not improve it; what you think should
-differ you SAY in your hand-back.
+About 09:02 UTC: "Is a master blacksmith in hiding. Or other counterparts to professions . When in a low village,
+hamlet, or Thorpe with extreme rarity's"
+
+About 09:04 UTC: "Has Benjamin buttons disease."
+
+About 09:06 UTC: "Expand all of these as well I'm only giving examples to set a tone or benchmark"
+
+About 09:09 UTC (the owner stopped the chair's publishing of this file to add it): "Is a fey that both ate and replaced
+the original person / Magic only / Breaks the fourth wall Deadpool style and knows the concepts of a GM and players. /
+Traveled from the past to the future. / Traveled from the future to the past. / Is a regressor. / Isekaid from a
+different genre of TTRPG. / Isekaid from the real world into this game."
+
+About 09:12 UTC: "Is omniscient but only speaks in riddles."
+
+A minute later, still about 09:12 UTC: "Experiences Groundhog Day the first time you meet them as in they know about the players as though
+they've met. Cured the second time."
+
+About 09:16 UTC: "Falls in love with the first player that speaks to them."
+
+It is an exception, by the owner's own hand, to the owner's rule "no new text until the fixes are done". THE OWNER'S
+LINES SET THE TONE; THE CHAIR WROTE THE REST TO THAT BENCHMARK. THE HUNDRED ROWS BELOW (five families) ARE THE
+ONLY NEW WORDS YOU WRITE: you add none of your own, and you change a row's words only where this file says you may
+(a door's fresh line: measure 3). The chair told the owner each part of the form below as a default the owner may
+overturn: you build the form, you do not improve it; what you think should differ you SAY in your hand-back.
 
 ## THE FORM (ruling RS1 and its widenings; the chair's, each part vetoable by the owner)
 
-**1. THE ROWS, IN THREE FAMILIES.** Each is a secret in the shape the card already carries (`secret.what`,
+**1. THE ROWS, IN FIVE FAMILIES.** Each is a secret in the shape the card already carries (`secret.what`,
 `secret.stakes`), in the page's plain voice, with no closing full stop (as the existing rows of
 `src/data/npcData.js`). A label that sounds modern ("serial killer", "psychopath", "OCD", "xenophobic") is not
-printed: the thing is described. ALL THREE FAMILIES PRINT ON THE CARD'S SECRET ROW: a hidden thing about the person,
+printed: the thing is described (so too "fourth wall", "regressor", "isekai"). ALL FIVE FAMILIES PRINT ON THE CARD'S SECRET ROW: a hidden thing about the person,
 with its stakes. (A visible line of its own beside the temperament and the flaw would be a new row on the card, in the
 PDF and on the saved record: NOT BUILT; the owner was offered it as a follow-up.)
 
-THE DEEDS (dark things done or meant):
+In the tables: (o) marks a row from the owner's own example; [M] marks MAGIC ONLY (item 8); `{superior}` and `{target}`
+are people ON the page, by name (item 6). The last column is the chair's first reading of where a row may stand or
+what it never stands beside: YOU read the engine's own vocabularies (the sizes, the routes, the government kinds, the
+flaws, the temperaments, the dispositions, the roles, the titles, the ages) and give the exact words (item 7).
 
-| key | the owner's word | `what` | `stakes` | where it may stand |
-|---|---|---|---|---|
-| `killer` | "is a serial killer" | Has killed more than once, and no one has connected the deaths | The deaths are still counted as separate misfortunes; one person laying them side by side would end that | a town, a city or a metropolis |
-| `superior` | "wants to murder his boss" | Means to kill {superior}, and has worked out how | If {superior} learns of it first, only one of them walks away | only a person who HAS a superior on the page (item 6) |
-| `spouse` | the chair's | Has been giving their own spouse a little poison each week, and is patient about it | Any healer who looks closely will know the signs | a village or larger |
-| `floor` | the chair's | Has a body buried under their own floor | The missing one's kin have never stopped asking | a hamlet or larger |
-| `hired` | the chair's | Has taken coin to kill {target}, and has not yet decided to refuse | Whoever paid expects it done, and {target} suspects nothing | a town or larger; another named person stands on the page |
-| `felon` | "is a wanted felon from another settlement" | Is wanted for a crime in another town, and came here to be forgotten | A traveller from there would know the face | never the head of the town's ruling body, a hereditary title or an elder of the place (you name the exact words) |
-| `demon` | "made a deal with a demon but at what cost (magic only)" | Made a bargain with a demon, and the price has not yet been named | It will be named at the worst hour | MAGIC ONLY |
+THE DEEDS (dark things done or meant), twenty-one:
 
-THE NATURES (a hidden way a person is made: the owner's "related to personalities"; none names another person):
+| key | `what` | `stakes` | where it may stand |
+|---|---|---|---|
+| `killer` (o) | Has killed more than once, and no one has connected the deaths | The deaths are still counted as separate misfortunes; one person laying them side by side would end that | a town or larger |
+| `superior` (o) | Means to kill {superior}, and has worked out how | If {superior} learns of it first, only one of them walks away | only a person who HAS a superior on the page |
+| `spouse` | Has been giving their own spouse a little poison each week, and is patient about it | Any healer who looks closely will know the signs | a village or larger |
+| `floor` | Has a body buried under their own floor | The missing one's kin have never stopped asking | a hamlet or larger |
+| `hired` | Has taken coin to kill {target}, and has not yet decided to refuse | Whoever paid expects it done, and {target} suspects nothing | a town or larger |
+| `felon` (o) | Is wanted for a crime in another town, and came here to be forgotten | A traveller from there would know the face | never the head of the ruling body, a hereditary title or an elder of the place |
+| `demon` (o) [M] | Made a bargain with a demon, and the price has not yet been named | It will be named at the worst hour | any place |
+| `drowned` | Let a rival drown and has told it as a failed rescue ever since | One other person was on the bank that day | any place |
+| `sellsSecrets` | Sells what is said here in private to someone outside, a letter at a time | The letters are kept, and not by them | a village or larger on a road, a river or a port |
+| `arson` | Set the fire that everyone here calls an accident | One person saw them walk away from it | any place |
+| `deserter` | Deserted an army with its pay chest, and has spent almost none of it | The army hangs deserters, and thieves twice | any place |
+| `falseHeir` | Holds what they hold on a forged will, and the true heir is alive | The forger is still being paid, and has begun to ask for more | only a person who keeps a house of their own |
+| `robbedDead` | Robbed a dying traveller on the road and left them there | The traveller did not die | a place on a road |
+| `oathBreaker` | Swore to protect someone and stood aside when it mattered | The one they failed has kin who keep count | any place |
+| `blackmailer` | Is bleeding {target} for coin over a thing done long ago | {target} has begun to wonder whether another way would be cheaper | a town or larger |
+| `graveRobber` | Digs up the newly buried for what was buried with them | The last grave had more kin than they thought | a village or larger |
+| `counterfeit` | Clips and re-casts coin in a back room, a little at a time | A money-changer has started weighing every coin that comes from here | a town or larger |
+| `cursed` [M] | Called a curse down on a neighbour, and it worked | Curses of that kind are paid for twice | a hamlet or larger |
+| `falseWitness` | Sent an innocent to the gallows with a lie, and watched | The one who truly did it knows who lied | a town or larger |
+| `leftForDead` | Left a partner for dead in the wilds and came home with both shares | The partner has been seen alive | any place |
+| `raisedDead` [M] | Raised something from a grave, once, and could not put it back | It has been seen at the edge of the fields | a hamlet or larger |
 
-| key | the owner's word | `what` | `stakes` | never on a card that says |
-|---|---|---|---|---|
-| `cold` | "is psychopathic" | Feels nothing for other people and has learned to act as though they do | Everyone close to them has seen the act slip once, and no two of them have compared what they saw | (a village or larger; written as a mask: a kind manner is not denied) |
-| `counting` | "has ocd" | Cannot leave a thing uneven: counts, straightens and checks again, and hides how much of the day it takes | Those who have noticed think it harmless; it costs them more each year | careless, slovenly or lazy |
-| `givesUp` | "only feels good when he self sacrifices" | Is only at ease when giving something up for someone else, and goes looking for the chance | Anyone who sees it can have whatever they ask for | greedy, selfish, grasping or corrupt |
-| `noPain` | "can't feel anything physical at all" | Feels no pain, heat or cold, and has never told anyone | A wound they do not notice will one day be the one that matters | (you name any) |
-| `remembers` | the chair's | Forgets nothing: every face, every word, every slight, whether they want it or not | People who have forgotten what they said in front of them should not have | forgetful or absent-minded |
-| `noFaces` | the chair's | Cannot tell one face from another, and knows people by voice and walk | Anyone who learned it could stand in front of them as someone else | (you name any) |
-| `noSleep` | the chair's | Has not slept a whole night in years, and does not let it show | It is beginning to show | (you name any) |
-| `noTouch` | the chair's | Cannot bear to be touched, and has built a life that hides it | One crowded room, one friendly hand, and it would be plain to everyone | a trade of touch (you name the roles) |
-| `xenophobe` | "is xenophobic" | Distrusts anyone not born here, and hides it behind good manners | It decides more of their dealings than anyone has noticed | (the good manners are the mask; you name any word it cannot mask) |
-| `fireFear` | "survived a fire and is terrified of flames" | Survived a fire and cannot stand near an open flame | The day they must cross one, everyone will see | a person of a house or a role that works a fire (forge, kiln, oven, furnace: the engine's own lists) |
-| `gambler` | "is really good at gambling" | Is far better at dice and cards than anyone here knows | The people they have been quietly winning from are starting to count | (you name any) |
+THE NATURES (a hidden way a person is made: the owner's "related to personalities"; none names another person),
+twenty-eight:
 
-THE TIES AND THE BLOOD (who the person is to others, or what runs in them):
+| key | `what` | `stakes` | never on a card that says |
+|---|---|---|---|
+| `cold` (o) | Feels nothing for other people and has learned to act as though they do | Everyone close to them has seen the act slip once, and no two of them have compared what they saw | (a village or larger; written as a mask: a kind manner is not denied) |
+| `counting` (o) | Cannot leave a thing uneven: counts, straightens and checks again, and hides how much of the day it takes | Those who have noticed think it harmless; it costs them more each year | careless, slovenly or lazy |
+| `givesUp` (o) | Is only at ease when giving something up for someone else, and goes looking for the chance | Anyone who sees it can have whatever they ask for | greedy, selfish, grasping or corrupt |
+| `noPain` (o) | Feels no pain, heat or cold, and has never told anyone | A wound they do not notice will one day be the one that matters | (you name any) |
+| `remembers` | Forgets nothing: every face, every word, every slight, whether they want it or not | People who have forgotten what they said in front of them should not have | forgetful or absent-minded |
+| `noFaces` | Cannot tell one face from another, and knows people by voice and walk | Anyone who learned it could stand in front of them as someone else | (you name any) |
+| `noSleep` | Has not slept a whole night in years, and does not let it show | It is beginning to show | (you name any) |
+| `noTouch` | Cannot bear to be touched, and has built a life that hides it | One crowded room, one friendly hand, and it would be plain to everyone | a trade of touch |
+| `xenophobe` (o) | Distrusts anyone not born here, and hides it behind good manners | It decides more of their dealings than anyone has noticed | (the good manners are the mask; you name any word it cannot mask) |
+| `fireFear` (o) | Survived a fire and cannot stand near an open flame | The day they must cross one, everyone will see | a house or a role that works a fire (forge, kiln, oven, furnace: the engine's own lists) |
+| `gambler` (o) | Is far better at dice and cards than anyone here knows | The people they have been quietly winning from are starting to count | (you name any) |
+| `growsYounger` (o) [M] | Was born old and grows younger each year, and no one here has known them long enough to notice | In a few more years the questions will start | an elder, a hereditary title or one the place has known from birth (the owner did not tag it magic only: the chair's default) |
+| `cannotLie` | Cannot tell a lie, not even a kind one, and has built a life in which no one asks the wrong question | The wrong question is coming | dishonest, deceitful, corrupt or hypocritical; a trade of deceit |
+| `sleepwalks` | Walks in their sleep, and has woken in places they do not remember reaching | Something went missing on one of those nights | (you name any) |
+| `noFear` | Has never once felt fear, and has learned to imitate it so as not to alarm people | The day they do not flinch, someone will remember it | cowardly, timid, fearful or nervous |
+| `voices` | Hears a voice that no one else hears, and has learned not to answer it in company | The day they answer it aloud, people will decide what they are | (you name any) |
+| `hoards` | Cannot throw anything away, and the back rooms are full to the rafters | One spark, or one curious visitor | (you name any) |
+| `luck` [M] | Has never lost a wager, a coin toss or a drawn lot, and is frightened of what that means | Others have started to bet on them | (you name any) |
+| `noTaste` | Cannot taste or smell anything, and has hidden it for years | The day something spoils, they will be the last to know | a trade of taste (cook, baker, brewer, vintner, apothecary) |
+| `afraidDark` | Cannot bear the dark, and burns a light all night at a cost they can ill afford | The night the oil runs out, someone will hear | (you name any) |
+| `twoPeople` | Is two people by turns, and neither remembers the other's days | One of them has made promises the other will have to keep | (you name any) |
+| `cannotRead` | Cannot read a word, and hides it behind a good memory and a trusted helper | The helper has started to ask for more | a trade of letters (scribe, clerk, teacher) |
+| `bloodFaint` | Faints at the sight of blood, and has arranged never to be seen near it | The day someone is hurt in front of them, it will be known | a trade of blood (healer, barber, butcher, midwife, hunter, a person under arms) |
+| `foresees` [M] | Dreams of things before they happen, and has stopped telling anyone | The last dream was about this place | (you name any) |
+| `beastSpeech` [M] | Understands what animals say, and wishes they did not | The dogs here know something | (you name any) |
+| `ageless` [M] | Has not aged a day in forty years, and moves on before people count | They have stayed here too long already | an elder, a hereditary title or one the place has known from birth |
+| `takes` | Takes small things without meaning to, and returns most of them | One thing they took cannot be returned | honest (you name the words) |
+| `laughs` | Laughs when they are afraid, and has paid for it more than once | The next time will be the wrong time | (you name any) |
 
-| key | the owner's word | `what` | `stakes` | where it may stand |
-|---|---|---|---|---|
-| `brothersWife` | "is in love with his brothers wife" | Is in love with their brother's wife, and has never said so | A word of it would break the family | any place |
-| `bastard` | "is the bastard son of a previous lord" | Is the unacknowledged child of a former lord of this place, and can prove it | The ruling house would rather the proof did not exist | ONLY where the page's government is a lord's or a noble house's (read the government vocabulary; name the kinds); never the head of that government |
-| `harem` | "is part of a harem that is looking to expand" | Belongs to a harem kept out of sight, and has been told to find it one more | The one they have chosen has not been asked yet | a town or larger |
-| `ghost` | "his best friend is a ghost (magic only)" | Their closest friend is a ghost, and they talk every night | Those who overhear think they talk to themselves; one of them has started to listen | MAGIC ONLY |
-| `godBlood` | "has the bloodline of a god ... (magic only)" | Is descended from a god, and has started to dream of what it wants | Believers would either crown them or bury them | MAGIC ONLY (and only where the world's law admits gods, if it has such a law) |
-| `dragonBlood` | "... or dragon (magic only)" | Carries a dragon's blood, and it has begun to show | There are people who pay well for word of such blood | MAGIC ONLY |
+THE TIES AND THE BLOOD (who the person is to others, or what runs in them), twenty-one:
 
-The brother, his wife, the spouse, the missing one, the former lord, the harem's keeper and whoever paid are people
-OFF the page: the engine keeps no families, and nothing on the page is to contradict them. `{superior}` and `{target}`
-are people ON the page, by name. The last column of each table is the chair's first reading: YOU read the card's own
-vocabulary (the flaws, the temperaments, the dispositions, the roles, the titles, the government kinds) and give the
-exact words each row is refused beside (item 7).
+| key | `what` | `stakes` | where it may stand |
+|---|---|---|---|
+| `brothersWife` (o) | Is in love with their brother's wife, and has never said so | A word of it would break the family | any place |
+| `bastard` (o) | Is the unacknowledged child of a former lord of this place, and can prove it | The ruling house would rather the proof did not exist | ONLY where the page's government is a lord's or a noble house's; never its head |
+| `harem` (o) | Belongs to a harem kept out of sight, and has been told to find it one more | The one they have chosen has not been asked yet | a town or larger |
+| `ghost` (o) [M] | Their closest friend is a ghost, and they talk every night | Those who overhear think they talk to themselves; one of them has started to listen | any place |
+| `godBlood` (o) [M] | Is descended from a god, and has started to dream of what it wants | Believers would either crown them or bury them | only where the world's law admits gods, if it has such a law |
+| `dragonBlood` (o) [M] | Carries a dragon's blood, and it has begun to show | There are people who pay well for word of such blood | any place |
+| `lastHeir` | Is the last living heir of a house everyone believes ended, and has told no one | The ones who ended it would finish the work | never a hereditary title or a noble of the page |
+| `twoMarriages` | Is married in two places, and each household believes it is the only one | The two places trade with each other | a place on a road, a river or a port |
+| `foundling` | Is raising as their own a child left on the step, and the child's true kin have started to ask | The kin are not people who ask twice | any place |
+| `changeling` [M] | Is not the child their parents bore, and has known it since they could speak | The ones who made the exchange keep accounts | any place |
+| `twin` | Has a twin no one here knows of, who has already been mistaken for them once | The twin is not a careful person | any place |
+| `parentOf` | Is the true parent of {target}, and {target} does not know | One other person knows, and has been patient so far | {target} a named person a generation younger; if the ages cannot be compared cleanly, the row is left out BY NAME |
+| `lovesNamed` | Is in love with {target}, and would sooner die than have it known | {target} has started to notice | {target} another named adult |
+| `swornOrder` | Is sworn to an order that has no name here, and is still waiting for its word | The word, when it comes, will not be a small thing | any place |
+| `highBirth` | Is of far higher birth than they let on, and left it behind on purpose | The family has not stopped looking | never a hereditary title or a noble of the page |
+| `exile` | Was cast out by their own people for a thing they will not name | Anyone from there would be bound to act on sight | any place |
+| `widowOf` | Is the widow or widower of someone this place put to death, and has never said so | They have not forgiven it | a town or larger |
+| `fey` [M] | Owes a year of service to something in the woods, and the year has not yet been called in | It will be called in without warning | any place |
+| `moonChanged` [M] | Is not themselves when the moon is full, and locks the door from the inside | The lock is getting old | any place |
+| `feyReplaced` (o) [M] | Is not the person everyone remembers: a fey thing ate that one and has worn the face ever since | It has the memories, but not all of them, and someone has begun to test it | any place |
+| `firstWord` (o) | Will fall in love, at once and completely, with the first newcomer who speaks to them | They will not hide it well, and it will not pass | any place (the owner's "the first player" is written "the first newcomer": the line stays inside the world; it is for the one who runs the game to play at the table) |
 
-**2. HOW RARE.** EACH FAMILY: about ONE NAMED PERSON IN TWO HUNDRED, and NEVER MORE THAN ONE OF A FAMILY IN A TOWN (so a
-town holds at most three); A PERSON CARRIES AT MOST ONE (the card has one secret row; where the seed picks one person
-for two families, the first family in the order above stands and the other goes to the next person it picks, or to no
-one). One named table holds the odds of each family (so the owner can turn each). You MEASURE over the census's 720
-and the wide read's 150 what share of towns of each size then holds one, two, three, and of which family, and give
+THE HIDDEN MASTERS (the owner's "a master blacksmith in hiding ... or other counterparts to professions"), eighteen:
+ONLY IN A THORP, A HAMLET OR A VILLAGE. The row is the counterpart of the person's OWN trade, so the card stays
+believable; a person whose trade has no row is not eligible. You map the second column to the engine's own roles and
+name them; a row whose roles the engine does not have is left out BY NAME.
+
+| key | the person's own trade | `what` | `stakes` |
+|---|---|---|---|
+| `masterSmith` (o) | a smith or a farrier | Is a master armourer in hiding, and shoes horses here so that no one asks | Anyone who has seen their old work would know the hand at once |
+| `masterHealer` | a healer, a midwife or a barber | Was physician to a great house, and treats sprains and fevers here so that no one asks | They left after a death that was never explained, and someone is still looking |
+| `masterCook` | a cook, a baker, a brewer or an innkeeper | Once cooked for a great lord's table, and hides how good they are | One feast would give them away |
+| `masterBuilder` | a carpenter, a mason, a wheelwright or a builder | Built siege works for an army, and mends carts and roofs here so that no one asks | The army that lost to those works has not forgotten the builder |
+| `masterBlade` | a hunter, a guard, or one of the watch or the militia | Was captain of a great lord's guard, and came here so that no one would ask them to fight again | The day the place is threatened, everyone will see what they are |
+| `masterTutor` | a scribe, a clerk or a teacher | Was tutor to a noble heir, and keeps tallies here so that no one asks | The heir, grown, would know them at a glance |
+| `masterTailor` | a tailor, a weaver or a dyer | Once dressed a great court, and mends workaday cloth here so that no one asks | A single fine seam would start the questions |
+| `masterTrader` | a trader, a pedlar or a shopkeeper | Once ran a trading house in a great city, and walked away from it | The partners they left behind are still owed an answer |
+| `masterSoldier` | a farmer, a herder or a labourer | Once led soldiers in a war people still talk about, and works the land here so that no one asks | Some who followed them, and some who fought them, are still alive |
+| `masterWizard` [M] | any trade | Was a court wizard, and has not cast a spell since the day they left | The first spell would be felt by people who are listening for it |
+| `masterCaptain` | a fisher, a boatman or a ferryman | Was master of a great ship, and works a small boat here so that no one asks | Sailors remember a captain who lost a ship |
+| `masterRider` | a groom, an ostler, a drover or a stablehand | Trained a great lord's warhorses, and minds plough horses here so that no one asks | Any horse-dealer passing through would know the name |
+| `masterPriest` | a priest or a shrine keeper | Stood high in a great temple, and keeps a small shrine here so that no one asks | The temple does not forgive those who leave |
+| `masterSinger` | a minstrel or a storyteller | Once sang for courts, and sings for suppers here so that no one asks | There is a song about why they stopped, and someone here knows it |
+| `masterCraft` | any other craft (potter, carver, cooper, cobbler, tanner) | Is a master of their craft far beyond this place, and sells plain work here so that no one asks | One fine piece, sold by mistake, would bring buyers and questions |
+| `masterRuler` | the head of the small place's own body (elder, reeve, headman) | Once governed a city, and settles fence disputes here so that no one asks | The city did not let them go willingly |
+| `masterThief` | a person of the place's criminal roles | Was the best lock-breaker of a great city's guild, and lifts nothing here so that no one asks | The guild believes they are dead, and would correct the error |
+| `masterPoisoner` | a herbalist or an apothecary | Was a great house's poisoner, and sells simples here so that no one asks | Three deaths at that house were never explained |
+
+THE OUTSIDERS (people who do not belong to this time or this world, or who are not possible in it; the owner's last
+examples and the chair's to the same benchmark), twelve. They may stand in any place. [M] on ten of them IS THE
+CHAIR'S DEFAULT (the owner tagged only the fey): a world whose law holds no magic promises that nothing impossible happens in it; `fourthWall` and `dreamer`
+may stand in any world (a strange belief is not magic).
+
+| key | `what` | `stakes` |
+|---|---|---|
+| `fourthWall` (o) | Knows they are a figure in someone's game, speaks of the one who runs it and the ones who play, and is not troubled at all | Now and then they are right about what happens next |
+| `fromThePast` (o) [M] | Belongs to an age three centuries gone, and is still learning what has changed | They know where something was buried, and it is still there |
+| `fromTheFuture` (o) [M] | Comes from years that have not happened yet, and is careful what they say about them | They know how something here ends |
+| `regressor` (o) [M] | Has lived these years once already, died at the end of them, and woke at the beginning to try again | They know who betrays whom, and are no longer sure it will go the same way |
+| `otherWorld` (o) [M] | Was pulled here from a world of machines and starlight, and still reaches for tools that do not exist | They talk in their sleep, and someone has been writing it down |
+| `realWorld` (o) [M] | Was someone else in a world where this one is a game, and woke here in a body that was not theirs | They remember the rules, and have started to use them |
+| `loop` [M] | Has lived this same year many times over, and is tired | This time they mean to do something different |
+| `dreamer` | Believes all of this is their own dream, and is waiting to wake | They take risks no waking person would |
+| `returns` [M] | Has died four times, and each time woken in their own bed the next morning | They no longer take the care they should |
+| `statSight` [M] | Sees numbers over people's heads, and has learned what most of them mean | One number here is much higher than it should be |
+| `riddler` (o) [M] | Knows the answer to any question, and can give it only as a riddle | Every riddle so far has been true, and people have started bringing questions |
+| `sameDay` (o) [M] | Is living one day over and over, and will know a newcomer at first meeting as though they had met many times | By their second meeting the days have started moving again, and it is over |
+
+`sameDay`: the owner's "the players" is written "a newcomer": the line stays inside the world; it is for the one who
+runs the game to play at the table (the first meeting; the second), and nothing on the page tracks it.
+
+`riddler`: the riddles are the ANSWERS, not the person's everyday speech: the card's own "How they deal" and manner of
+speech are not denied by it; if a card's line says the person speaks plainly ABOUT WHAT THEY KNOW, the row does not
+stand there (item 7).
+
+The brother, his wife, the spouse, the missing one, the former lord, the harem's keeper, the twin, the great house,
+the army and whoever paid are people OFF the page: the engine keeps no families, and nothing on the page is to
+contradict them.
+
+**2. HOW RARE.** EACH OF THE FIRST THREE FAMILIES: about ONE NAMED PERSON IN TWO HUNDRED, and NEVER MORE THAN ONE OF A
+FAMILY IN A PLACE; A PERSON CARRIES AT MOST ONE (the card has one secret row; where the seed picks one person for two
+families, the first family in the order above stands and the other goes to the next person it picks, or to no one).
+THE HIDDEN MASTERS ARE RARER AND COUNTED BY THE PLACE (the owner: "with extreme rarity"): about ONE THORP, HAMLET OR
+VILLAGE IN FORTY holds one, never a town or larger; a grown adult of some years, never a youth (read the age
+vocabulary); the fourth family in the order. THE OUTSIDERS ARE RARER AGAIN AND COUNTED BY THE PLACE: about ONE PLACE
+IN SIXTY holds one, of any size; the fifth family in the order. WITHIN A FAMILY the seed picks among the rows that may stand for that
+person in that place, each alike. A LARGER POOL MEANS MORE VARIETY, NOT MORE OF THEM: the odds do not grow with the
+rows. One named table holds the odds of each family (so the owner can turn each). You MEASURE over the census's 720
+and the wide read's 150 what share of places of each size then holds one, two, three, and of which family, and give
 that table FIRST in your hand-back, in words a person who knows no code can read. The chair told the owner: most
 thorps and villages none; most cities one; a metropolis one to three; the killer very rare of itself (one row among
-the deeds). If your measure is far from that, say so and say what odds would meet it: do not tune silently.
+the deeds); a hidden master in about one small place in forty; an outsider in about one place in sixty. If your measure is far from that, say so and say what
+odds would meet it: do not tune silently.
 
 **3. THE SEED PICKS, AND NO DRAW IS TAKEN.** Whether a person carries one, and which, is read from a keyed hash of the
 town's seed and the person (the engine's own draw-free reading, the one the history's variant selection uses; find it,
@@ -105,27 +234,31 @@ lines. Where a reader depends on the present secret, that person is not eligible
 **6. THE SUPERIOR AND THE TARGET ARE REAL.** `{superior}` is the first (the head) of a body this person is a second or
 a member of, as the card prints it ("member of ..."), or the mentor of a tie in which this person is the successor.
 Read how ranks and ties are stored; if a superior cannot be read cleanly from the record, LEAVE THE ROW `superior` OUT
-BY NAME with what you found: do not invent one. `{target}` is another named person of the same roster, picked by the
-seed, never the person, never their superior. Both names ride the engine's ONE substitution point for names baked into
-secrets (the pipeline's roster prose refresh): a renamed or replaced person is followed, or the secret is dealt again;
-your guard holds it.
+BY NAME with what you found: do not invent one. `{target}` (four rows: `hired`, `blackmailer`, `parentOf`,
+`lovesNamed`) is another named person of the same roster, picked by the seed, never the person,
+and for `hired` never their superior; an adult; for `parentOf` a generation younger. Every name rides the engine's
+ONE substitution point for names baked into secrets (the pipeline's roster prose refresh): a renamed or replaced
+person is followed, or the secret is dealt again; your guard holds it. A row that names a person says a thing ABOUT
+that person: read that person's own card and refuse the pairing where the card denies it.
 
 **7. IT AGREES WITH THE CARD AND THE PAGE.** A row never stands beside a word of the card that says the opposite (the
 tables' last columns), and never where the page denies what it presumes (`bastard`: a lord's or a noble house's
-government; `fireFear`: no house or role of fire). Check the twenty-four rows against every other line a card can
-print (temperament, flaw, disposition, the goal, the hook, "How they deal") and NAME any pairing a cold reader would
-call a contradiction; where one exists, the row does not stand for that person (a declaration, in the vocabulary's own
+government; `fireFear`: no house or role of fire; a road, a river or a port where a row needs one; a master: only the
+trade it is the counterpart of). Check the hundred rows against every other line a card can print (temperament,
+flaw, disposition, the goal, the hook, "How they deal") and NAME any pairing a cold reader would call a
+contradiction; where one exists, the row does not stand for that person (a declaration, in the vocabulary's own
 atoms: NO NEW ATOM; if you need one, ASK).
 
-**8. THE WORLD'S LAW.** The four rows marked MAGIC ONLY stand only where the generation's world law holds that magic
-exists (the hard fact the law already reads: `src/generators/generationContext.js :: resolveGenerationWorldLaw`);
-`godBlood` also only where that law admits gods, if it has such a law. The other twenty presume no magic, no god and
-no institution. Every row passes the generation law's filter for secrets as it is (prove it for each world law the
-filter knows): in a world without magic no MAGIC ONLY row is ever dealt.
+**8. THE WORLD'S LAW.** The twenty-six rows marked [M] stand only where the generation's world law holds that magic exists
+(the hard fact the law already reads: `src/generators/generationContext.js :: resolveGenerationWorldLaw`); `godBlood`
+and `masterPriest` also only where that law admits gods, if it has such a law. The other seventy-four presume no magic
+and no god. Every row passes the generation law's filter for secrets as it is (prove it for each world law the filter
+knows): in a world without magic no [M] row is ever dealt.
 
 ## YOUR FILES (your whole list; a file not on it is not yours: R2)
 
-- NEW `src/data/rareSecrets.js`: the twenty-four rows in their three families and the one table of odds (data only).
+- NEW `src/data/rareSecrets.js`: the hundred rows in their five families, each with its conditions as data, and the
+  one table of odds (data only).
 - NEW `src/generators/people/rareSecrets.js`: the deal (who, which, the names), pure, typed, no `any`.
 - ONE HUNK in `src/generators/narrativeGenerator.js` and ONE HUNK in `src/generators/generateSettlementPipeline.js`:
   the call beside each call of `dealGoals`. Nothing else in either file.
@@ -141,29 +274,37 @@ file, `src/generators/steps/assembleSettlement.js`, `vite.config.js`, `package.j
 `ResourcesTab.jsx`, `crisisStoppedRow.js`, the narratives step; BAR7-ORDER: `guardLineUnderTheLaw.js`). NO NEW FIELD ON
 THE SAVED RECORD: a rare secret is known by its words (the rows' texts are its own), never by a marker.
 
+THE OWNER MAY SEND MORE ROWS WHILE YOU BUILD: they reach you as a message from the chair and an amendment at the foot
+of this file; a row is data, so build the table so that adding one is one entry and its conditions.
+
 ## THE MEASURES (each before and after, by a runner you name; base first)
 
-1. The table of item 2 (towns holding one, two, three, by size and by family, over the 720 and the 150), which rows,
-   how many towns of each population are worlds without magic and that none of them holds a MAGIC ONLY row, and three
-   example cards of each family.
+1. The table of item 2 (places holding one, two, three, by size and by family, over the 720 and the 150; the hidden
+   masters' share of the thorps, hamlets and villages; the outsiders' share of all places), which rows, how many places of each population are worlds
+   without magic and that none of them holds an [M] row, and three example cards of each family.
 2. `fieldDiff` over the 720 and the 150, base against tip: every field identical but the `secret` of the cards dealt.
 3. The two doors (`node scripts/presumption-classes-door.mjs --check`, `node scripts/presumed-things-door.mjs --check`):
-   NO FRESH ROW. A row the things door reads as fresh is cured by its declaration or its wording within the tables
-   above; if a table's own words cannot pass, STOP and ASK with the door's line.
+   NO FRESH ROW. A row the things door reads as fresh is cured by its declaration, or by the smallest change of its
+   wording that keeps its sense (say each such change, old words and new); if neither passes, the row is left out BY
+   NAME with the door's line.
 4. The people's guards green as at your base: `tests/domain/bar6PeopleLaw10.test.js`, `tests/domain/bar4PeopleKinds.test.js`,
    `tests/components/bar7CardsMarkOnce.test.jsx`, the hook variety's.
 5. The auditors' runners over the 150 at your tip (the line holds them under `docs/chair/2026-11-16/bar5/AUDIT`,
    `docs/chair/2026-11-16/bar6/AUDIT`, `docs/chair/2026-11-17/bar7/AUDIT`): no rule's count rises.
+6. EVERY ROW SEEN ONCE: for each of the hundred, one card on which it stands (a born town where the populations
+   hold one, else a planted roster), printed whole, so that a reader can judge the row beside a real card.
 
 ## YOUR GUARD (`tests/generators/rareSecretsLaw.test.js`)
 
-On planted rosters and a small born sample (keep it light: no loop over hundreds of births): at most one of a family
-in a town and never two on one person; each row only where its table lets it stand (the size, the government, the
-magic, the superior, the fire); a row never beside the card's word that denies it; a child never; the superior named
-is a real superior of that person and the target a real other person; a kept person keeps theirs; the same seed gives
-the same deal; with the deal switched off the roster is identical but for those cards' secrets (no draw taken); a
-renamed target is followed; a world without magic holds no MAGIC ONLY row. Seed loops collect every failure
-(`tests/helpers/seedFailures.js`); every negative stands beside its anchor (`tests/helpers/anchoredNegatives.js`).
+Table-driven, on planted rosters and a small born sample (keep it light: no loop over hundreds of births): at most
+one of a family in a place and never two on one person; each row only where its table lets it stand (the size, the
+route, the government, the magic, the superior, the fire, the trade; a master only in a thorp, a hamlet or a village
+and only on its own trade); a row never beside the card's word that denies it; a child never; every person a row
+names is a real other person of the roster, and the superior a real superior; a kept person keeps theirs; the same
+seed gives the same deal; with the deal switched off the roster is identical but for those cards' secrets (no draw
+taken); a renamed target is followed; a world without magic holds no [M] row; every row of the data file is reachable
+by some planted roster (no dead row). Seed loops collect every failure (`tests/helpers/seedFailures.js`); every
+negative stands beside its anchor (`tests/helpers/anchoredNegatives.js`).
 
 ## YOUR NET BEFORE YOUR LAST PUSH (each alone, through `sh scripts/gate-tail.sh`, never a pipe)
 
@@ -177,8 +318,10 @@ your guard and the people's guards there.
 
 ## HAND-BACK
 
-`docs/chair/2026-11-17/secrets/SECRETS-1-HANDBACK.md`: the table of item 2 FIRST; the twenty-four rows as built (or a
-row left out by name, with the reason); the exact words each row is refused beside; the readers of `secret` and what
-each does; the measures; the reference towns that move, by seed; the net; what is left by name; for the owner's veto
-list: the rows and the odds in plain words. Budget: hand back at 450,000 of your count, then push nothing more. PUSH
-EARLY AND OFTEN. One line to the chair at the end, 150 words at most. ASK the chair only where this file says ASK.
+`docs/chair/2026-11-17/secrets/SECRETS-1-HANDBACK.md`: the table of item 2 FIRST; the hundred rows as built (or a
+row left out by name, with the reason; a row whose words a door made you change, old and new); the exact words each
+row is refused beside; the readers of `secret` and what each does; the measures (measure 6 in full: it is what the
+owner and the second reader will read); the reference towns that move, by seed; the net; what is left by name; for
+the owner's veto list: the rows and the odds in plain words. Budget: hand back at 650,000 of your count, then push
+nothing more. PUSH EARLY AND OFTEN. One line to the chair at the end, 150 words at most. ASK the chair only where this
+file says ASK.
