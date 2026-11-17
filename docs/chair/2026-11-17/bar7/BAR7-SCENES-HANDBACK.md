@@ -174,3 +174,26 @@ Nothing was red at my base.
 3. Re-run at this commit: my guard, `bar6ScenesGoods`, `arrivalScene`, `bar4ScenePresumption` 61 of 61; eslint 0 on the changed
    files. THE READER'S OTHER NOTES, accepted as LOW by the chair and named for later: the spearheads twin under a siege beside
    smiths short of iron; "has paid it" for a Comfortable town that is also indebted; the rise of the apart rule 9g.margin-war.
+
+## 9. AFTER THE REHEARSAL (the chair's four points of 07:23 and 07:41 UTC)
+
+1. **The brought-in twin's shops:** done at de238dab (section 8).
+2. **The two anchors BIRTH-1 lifts, RE-KEYED BY IDENTITY** with dated notes, onto planted records on no route (no seat in flight
+   lifts them): item 1 (bar0-metropolis-calm-rand-32, whose Potter BIRTH-1 now feeds) is the same claim on a planted town of its
+   four houses and its gaps (the Potter, the Brickmaker and the Charcoal burner short of clay and timber; the Glassmakers with sand
+   brought in): `trade at work: kilns` false, "The kilns are lit all through the day" refused, its twin admitted. Item 5 (e)
+   (bar0-village-calm-rand-31, whose Tannery BIRTH-1 now feeds) is the same claim on a planted village of its Tannery and its two
+   gaps: the leather false, each of the four originals refused and its twin admitted. Each planted case fails at 17f760584 (the
+   kilns read true there) and holds at the tip; the assertions are the same, only the anchor moved.
+3. **`tests/domain/facts/textOf.test.js`:** the arrival tables' declared rows read **242 at my tip** (233 + 9: the tanners' four
+   `lines` declared, their four twins, the racks' twin), re-keyed with a dated note naming them.
+4. **The anchor walker:** my guard's negatives were anchored at de238dab (section 8); my file is in no walker's list.
+
+PROVED at my tip **f7715d3c7** and in a LOCAL scratch merge of the line's a55162cfa0 with it (c83208b8b, never pushed):
+- my guard, `textOf`, `bar6ScenesGoods`: green at the tip; **27 of 27 in the merge**.
+- `npx vitest run tests/lint` whole: base 17f760584 **59 failed**; my tip **59 failed, the same 59 by name**; the line a55162cfa0
+  alone **64 failed | 16 skipped**; the merge **64 failed | 16 skipped, the same 64 by name as the line**. The seven the line adds
+  beyond my base (`newsHeadlineContract`, `newsVoiceContract`: "Wizard News introductions drifted: expected 417, got 420";
+  `observedShapeReaders` and `writerReach` "the producers ran"; `proseFamilyContract` A1; `writerReach` MUTANT and live
+  judgment) are the line's, not mine. Inside the 64 the merge differs from the line in ONE message line: `mutationCoverageManifest`
+  names my guard (the REGISTRATION OWED of section 8). `ruinFilterRoster` is left to the close, as told.
