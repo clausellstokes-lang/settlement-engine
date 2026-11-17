@@ -1,0 +1,35 @@
+[gate-tail] start:  04:30:40 up 5 min,  0 user,  load average: 5.73, 1.43, 0.51 · cores: 4
+
+720: | id | houses on no ground (towns) | main draw · cascade | by tier | of them could bear "bought in" by the chair's table |
+| charcoal_burner | 75 (75) | 72 · 3 | hamlet 12, town 6, city 20, metropolis 35, village 2 | 74 |
+| stone_quarry | 57 (57) | 43 · 14 | hamlet 5, village 5, town 5, city 11, metropolis 31 | - |
+| salt_works | 40 (40) | 24 · 16 | hamlet 6, village 8, town 8, city 8, metropolis 10 | 39 |
+| dairy_farmer | 34 (34) | 22 · 12 | hamlet 22, village 12 | 0 |
+| fisher_s_landing | 32 (32) | 32 · 0 | hamlet 20, village 12 | - |
+| woodcutter_s_camp | 28 (28) | 28 · 0 | thorp 12, hamlet 8, village 8 | - |
+| hunter_s_lodge | 24 (24) | 22 · 2 | hamlet 11, village 5, town 8 | - |
+| shepherd | 22 (22) | 12 · 10 | hamlet 14, village 8 | - |
+| peat_cutter | 16 (16) | 14 · 2 | hamlet 9, village 7 | - |
+| fishing_community | 15 (15) | 15 · 0 | thorp 15 | - |
+| mine | 7 (7) | 7 · 0 | town 2, metropolis 4, city 1 | - |
+| mine_open_cast | 3 (3) | 3 · 0 | hamlet 3 | - |
+| wildfowler | 2 (2) | 2 · 0 | village 2 | - |
+
+150: | id | houses on no ground (towns) | main draw · cascade | by tier | of them could bear "bought in" by the chair's table |
+| charcoal_burner | 18 (18) | 17 · 1 | hamlet 3, village 1, city 9, metropolis 5 | 12 |
+| stone_quarry | 11 (11) | 6 · 5 | hamlet 3, town 1, city 2, metropolis 5 | - |
+| dairy_farmer | 8 (8) | 5 · 3 | hamlet 7, village 1 | 0 |
+| fisher_s_landing | 6 (6) | 6 · 0 | hamlet 6 | - |
+| salt_works | 6 (6) | 3 · 3 | hamlet 1, town 2, city 2, metropolis 1 | 4 |
+| hunter_s_lodge | 5 (5) | 5 · 0 | hamlet 4, town 1 | - |
+| mine_open_cast | 2 (2) | 1 · 1 | hamlet 2 | - |
+| shepherd | 2 (2) | 1 · 1 | village 2 | - |
+| fishing_community | 1 (1) | 1 · 0 | thorp 1 | - |
+
+525: | id | houses on no ground (towns) | main draw · cascade | by tier | of them could bear "bought in" by the chair's table |
+| fishing_community | 7 (7) | 7 · 0 | thorp 7 | - |
+| salt_works | 2 (2) | 2 · 0 | town 2 | 2 |
+| stone_quarry | 2 (2) | 2 · 0 | town 2 | - |
+[gate-tail] end:  04:30:45 up 5 min,  0 user,  load average: 7.12, 1.79, 0.63
+[gate-tail] full log: /tmp/gate-tail.1104.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

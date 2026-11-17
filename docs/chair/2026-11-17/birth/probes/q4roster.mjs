@@ -4,7 +4,7 @@
 import fs from 'node:fs'; import zlib from 'node:zlib';
 const load = (f) => new Map(zlib.gunzipSync(fs.readFileSync(f)).toString().trim().split('\n').map((l) => { const o = JSON.parse(l); return [o.seed, o.s]; }));
 const [fb, ft] = process.argv.slice(2); const B = load(fb), T = load(ft);
-const GATED = new Set(['Stone quarry', 'Charcoal burner', 'Dairy farmer', 'Salt works']);
+const GATED = new Set(['Stone quarry', 'Charcoal burner', 'Dairy farmer', 'Salt works', 'Mine', 'Mine (open cast)', 'Peat cutter']);
 const names = (s) => (s.institutions || []).map((i) => i.name);
 let lostGated = 0, townsLostGated = 0, townsOnlyGated = 0, townsOther = 0; const lost = {}, gained = {};
 for (const [seed, sb] of B) { const st = T.get(seed); if (!st) continue;

@@ -54,8 +54,8 @@ export const KINDS = Object.freeze({
   beast_trainers: ['iii', 'livestock', 'a service on bought beasts'],
   // the extractors
   stone_quarry: ['ii', 'stone', 'its line: "the only source of proper building stone the place has had"', ['stone_quarry']],
-  mine: ['ii', 'ore', 'it cuts the seam it stands on', ['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits']],
-  mine_open_cast: ['ii', 'ore', 'the same, open-cast', ['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits']],
+  mine: ['ii', 'ore', 'it cuts the seam it stands on', ['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits', 'stone_quarry']],
+  mine_open_cast: ['ii', 'ore', 'the same, open-cast', ['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits', 'stone_quarry']],
   peat_cutter: ['ii', 'peat', 'it cuts the bog it stands on', ['marshlands']],
   salt_works: ['ii', 'salt', 'its line: "evaporates saline brine … where brine lies near": the brine is its ground (on a coast, the sea)', ['salt_flats', 'desert_salt', 'fishing_grounds'], true],
   // the catch
