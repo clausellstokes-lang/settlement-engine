@@ -287,7 +287,11 @@ export function deriveViability(settlement) {
     };
   }
   if (dependencyCount > 0) {
-    const goods = dependencyGoods(v.dependencies, settlement?.economicState?.primaryImports), many = goods !== null && (/ and /.test(goods) || /s$/.test(goods)); // UPKEEP-8 (#253): a good the import list holds, and its number
+    // BIRTH-3 (BR3 (c), P5 (ii)): under a siege the printed import list prints nothing (`tradeListDisplay.js`: the trade is cut
+    // off), so no good of it is named as arriving: the birth's words of ordinary times stand on the stored list, cut off
+    const stresses = /** @type {{ stressTypes?: unknown } | undefined} */ (settlement?.config)?.stressTypes;
+    const printedImports = Array.isArray(stresses) && stresses.includes('under_siege') ? [] : settlement?.economicState?.primaryImports;
+    const goods = dependencyGoods(v.dependencies, printedImports), many = goods !== null && (/ and /.test(goods) || /s$/.test(goods)); // UPKEEP-8 (#253): a good the import list holds, and its number
     return {
       viable: true, verdict: 'dependent', label: VIABILITY_LABEL.dependent,
       summary: `VIABLE WITH CRITICAL DEPENDENCIES: ${pick(goods
