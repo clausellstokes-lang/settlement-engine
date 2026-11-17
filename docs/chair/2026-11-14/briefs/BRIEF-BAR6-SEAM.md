@@ -1,10 +1,12 @@
 # BRIEF-BAR6-SEAM · the seam after the join of BAR6: what the round left by name, cut by area into five seats
 
-The chair, 2026-11-17. Ten of the round BAR6's eleven branches are joined on `lane/join-2026-11-14` (the eleventh,
-BAR6-POWERS, lands beside you; you never merge it). At the join's rehearsal the hard gates read green (the two type
-gates, eslint, the architecture guards, a production build and its two first-paint tests). Measured over the wide
-read's 150 towns: of its 147 standing rows, 10 are still found by a detector (eight of them the powers seat's) and 7 by
-none; 135 of the 150 towns hold none. WHAT IS LEFT IS A LIST BY NAME, and it is yours.
+The chair, 2026-11-17 (amended 02:40 UTC, before any seam seat was seated). ALL ELEVEN branches of the round BAR6 are
+joined on `lane/join-2026-11-14`: your checkout holds them. At the join's rehearsal the hard gates read green (the two
+type gates, eslint, the architecture guards, a production build and its two first-paint tests). MEASURED AT THE TREE OF
+ELEVEN over the wide read's 150 towns: of its 147 standing rows, 2 are still found by a detector and 7 by none; the six
+runners together count 10 instances of a counted rule in 10 towns (761 in 137 towns before the round BAR5; the forms the
+audits report apart are left out). EACH OF THE TEN IS IN A SECTION BELOW AND IN SEAM-LIST's last section. WHAT IS LEFT
+IS A LIST BY NAME, and it is yours.
 
 ## What you read first, and no more (your context is your budget)
 
@@ -14,7 +16,8 @@ none; 135 of the 150 towns hold none. WHAT IS LEFT IS A LIST BY NAME, and it is 
 3. `docs/chair/2026-11-16/bar6/RULINGS-AFTER-SEATING.md` on the chair's lane: the rulings made while the round ran
    (AX1, XA1, XA2, CD1, EG1, NP1, CN1, PL1 and the rest). They bind you.
 4. `docs/chair/2026-11-16/bar6/SEAM-LIST.md` on the chair's lane: the whole list with its evidence. Your section below
-   says which items are yours; read those items there, word for word.
+   says which items are yours; read those items there, word for word, AND ITS LAST SECTION ("FOUND BY THE MEASURE AT THE
+   TREE OF ELEVEN"): the lines of it that name your seat.
 5. The hand-backs your section names, AT YOUR CHECKOUT (`docs/chair/2026-11-16/bar6/BAR6-<SEAT>-HANDBACK.md`): only
    their parts "WHAT IS LEFT" and the rows your items touch.
 
@@ -30,7 +33,7 @@ S3. YOUR FILES ARE THE ONES YOUR SECTION LISTS, and they are yours alone in this
     `factLayers.js`, `factsOf.js`) are touched only as your section gives, line by line.
 S4. NO NEW ATOM OF THE VOCABULARY, except where your section names one. Declare on what the joined line holds:
     `sovereign`, `monster frontier`, `food surplus`, `crime wave`, `force: kept|paid|volunteers`, `exported: <good>`,
-    `legitimacy crisis`, `legacy ruin`, `court sits`, `seat held`, `trade at work: <key>`, the `tier` band for size
+    `legitimacy crisis`, `legacy ruin`, `court sits`, `seat held`, `seat members`, `trade at work: <key>`, the `tier` band for size
     (streets and alleys `tier: ≥ village`; districts, quarters and neighbourhoods `tier: ≥ town`; a twin `tier: ≤ hamlet`).
 S5. A GUARD IS NEVER NARROWED. A new line joins the law that judges its kind; a test that your cure makes untrue is
     RE-KEYED BY IDENTITY (the same claim on another town that still bears it, the assertion's form kept, a dated note
@@ -62,7 +65,7 @@ S9. YOUR HAND-BACK: `docs/chair/2026-11-16/bar6/BAR6-SEAM-<NAME>-HANDBACK.md`: a
 
 YOUR FILES: `src/data/arrivalProse.js`, `src/domain/facts/tradeAtWork.js`, `src/generators/narrativeText.js`;
 `tests/generators/bar4ScenePresumption.test.js`, `tests/domain/bar6ScenesGoods.test.js`, `tests/domain/facts/textOf.test.js`;
-and ONE LINE of `src/domain/facts/factVocabulary.js`: the `keys` list of the `'trade at work'` entry (a new key of yours joins it).
+and ONE LINE of `src/domain/facts/factVocabulary.js`: the `keys` list of the `'trade at work'` entry (your new keys join it: items 2 and 9).
 READ: SEAM-LIST's section "SCENES" and the four lines under "FOUND AT THE JOIN'S REHEARSAL" that name the scene guard,
 `bar6ScenesGoods`, `textOf` and nothing else; `BAR6-SCENES-HANDBACK.md` (what is left; its B7 paragraph).
 YOUR ITEMS, IN THIS ORDER:
@@ -78,9 +81,15 @@ YOUR ITEMS, IN THIS ORDER:
    tanning lines beside it declare `trade at work: <your key>`; each takes a twin that is true where every tanner is
    short. This is the ONE new key S4 allows you (it is a key of an existing atom, not a new atom); add it to the keys
    list in `factVocabulary.js`.
-3. THE FORGES' DOMINANT LINE ("The hammering of the forges echoes through all of ...") declares the ironwork key beside
-   its smith and its tier, with a twin. After 2 and 3 the scene guard's census arm reads 0 of the 720 (it reads 2 at
-   your base: r2r-town-34 and r2r-city-17).
+3. THE SMITHS' FOUR DOMINANT LINES. In `arrivalProse.js` the smiths' `dominant` pool holds four lines that show the
+   forges at work and declare only `institution: smith` and `tier: ≥ town`: "The hammering of the forges echoes through
+   all of ...", "Forge smoke hangs over everything here, and the ring of the anvils never quite stops.", "Racks of new
+   ironwork stand outside the workshops, waiting for the carts.", "The clang of iron from the smithies carries down the
+   lanes of ...". EACH declares the ironwork key beside its smith and its tier, and the pool keeps its floor by twins
+   that are true where every smiths' house is short (item 6). Two are met already: r2r-city-17 of the 720 (the scene
+   guard's census arm) and bar0-town-occupied-rand-27 of the 150 (runC's 6b-denied: "Forge smoke hangs ..." beside a
+   Blacksmiths and a Smelter both marked "Short of iron."). After 2 and 3 the scene guard's census arm reads 0 of the 720
+   (it reads 2 at your base: r2r-town-34 and r2r-city-17).
 4. `tests/domain/bar6ScenesGoods.test.js`, the arm "each good reads the page's own lists ...", is red at your base: the
    marks seat's wider reading of "short" (a house wanting an input by trade) meets its constructed record. Find which
    maker the record leaves without its input and give the record that input; the arm's claim is kept.
@@ -94,6 +103,19 @@ YOUR ITEMS, IN THIS ORDER:
 8. `tradeAtWork.js` imports `crisisOf` from `./crisisKind.js` (a module the build pins lazy). The build tests read green
    at the join; if your changes leave them green, leave the import; if not, read the crisis through
    `src/domain/canonicalAccessors.js :: canonStressors` as `sovereign.js` does, with a case holding the two equal.
+9. CLOTH MADE AND CLOTH DYED (runC's 6b-denied reads 5 over the 150 at your base: item 3's one, three here, and one
+   twin). "Bolts of cloth hang drying in long bright strips across the yards." (`needs: trade at work: cloth`) prints in
+   three towns where the weavers and the fuller are BOTH marked "Short of wool." and the only cloth house not short is a
+   dyer: bar0-city-under_siege+famine-rand-35 (whose income row itself says "Little cloth is made here while the cloth
+   trade is short of what it needs."), bar0-city-wartime-rand-33, bar0-metropolis-calm-rand-35. THE RULE: a line that
+   shows cloth MADE (the loom, the fulling stocks, bolts of new cloth) holds only where a house that MAKES cloth (a
+   weaver, a textile house, a fuller) is not short; a dyer answers only a line that shows dyeing. Give the cloth key
+   that reading in the form BAR5-THINGS used for the kilns (kinds of the one key, each a part of its houses' words; A
+   KIND FOR THE DYERS IS THE SECOND NEW KEY S4 ALLOWS YOU), place each cloth line of the pool on the kind it shows, and
+   keep every twin true where its original is refused (no twin says the vats stand empty where the dyer works). The
+   fifth instance is the round's own twin, "Bolts of cloth brought in from elsewhere are stacked in the shops, waiting
+   to be cut." (bar0-city-wartime-rand-36: weavers and fuller short, no dyer): the runner convicts its words and the
+   line is the cure: LEFT; say so. After: 6b-denied reads 1 over the 150 (that twin); say the 720's figure before and after.
 RUNNER: runC (the 6b, 7c and 7d rows) over the 150 and the 720; the scene guard itself.
 
 ### SEAM-ECON · the economy's, the record's and the marks' leftovers
@@ -131,8 +153,19 @@ YOUR ITEMS:
    `tests/generators/tailDefeconMadeListWhole.test.js`, `tests/pdf/tailExportsPdf2Batch2.test.jsx`: RE-KEY BY IDENTITY (S5).
 7. One entry in `scripts/mutation-coverage-manifest.json` for `tests/generators/bar6RecordGuards.test.js` (the record
    seat's words for it are in its hand-back, "REGISTRATIONS OWED"). The manifest's other owed entries are the close's.
-RUNNERS: runD (8c) and runE (9d) over the 150 and the 720; runC (6c). A cure that moves the stored record is a DECLARED
-MOVE (B5): say the field family and how many of the 525 it moves.
+8. A RUNNING CHAIN LISTS NO OUTPUT THE PAGE MARKS SHORT (runB's rule L3.outputs reads 2 over the 150 at your base; 1
+   before the marks seat's wider reading of "short"). In bar0-metropolis-calm-rand-27 and bar0-metropolis-calm-rand-39
+   the Institutions tab prints "Fuller ... Short of wool." and "Services · Fulled cloth (short)" while the chain card
+   "River Mill Industry · ✓ Running" lists "Fulled cloth" among its Outputs. THE CURE, in your file
+   `tradeListDisplay.js :: chainOutputsShown`: an output whose EVERY maker on the live roster is marked short of its
+   input leaves the card's Outputs (THE ONE FACT is `houseInputAtHand.js :: housesShortOf`, which the Services row's mark
+   reads through `crisisStoppedRow.js :: rowShortOf`: read it, write no second reading). After: L3.outputs reads 0 over
+   the 150; say the 720's figure before and after. AND COUNT, WITHOUT CURING: over the 720, the Exports pills and the
+   Produced-locally pills that name a good whose every maker is marked short (both those towns export "Fulled cloth"),
+   by good and by crisis: the count goes in your hand-back for the wave that follows you (the houses a town is born with
+   and no supply for: 372 of the 720), which cures it at the birth, not at the print.
+RUNNERS: runD (8c) and runE (9d) over the 150 and the 720; runC (6c); runB (L3.outputs; `docs/chair/2026-11-16/bar5/AUDIT/runB.mjs`).
+A cure that moves the stored record is a DECLARED MOVE (B5): say the field family and how many of the 525 it moves.
 
 ### SEAM-PDF · the PDF and the journal read what the tabs read
 
@@ -180,7 +213,14 @@ YOUR ITEMS:
 5. ONE FRESH LINE for the build guard's door, in your file: `cultureProfiles.js`, "Maize and other grain from intensive
    plots, terraces, and raised fields, with tribute redistribution, support dense popu…" (class `resource`): it declares
    what it presumes or meets a rule of the walker; the door reads no fresh line of yours after.
-RUNNER: runC (6d, 7c) and runF (10g) over the 150 and the 720.
+6. THE LEGACY'S ANSWER (reported apart by the audit, WEAK; 2 towns of the 150: bar0-town-calm-rand-28 and
+   bar0-town-calm-rand-40, each after an economic divide; 4 of the 720 by the culture seat's count). DS-GEN-16
+   LEGACY-RECOVERED v1, "... It came through the {calamity}, and what the town built in answer still stands ...", prints
+   after an event that destroyed nothing. It declares `legacy ruin` as v2 does, and the `no legacy ruin` side keeps
+   three lines (B7's floor: one more twin of yours where two would be left). Mind its noun as in item 3 ("the town" under
+   no size band). After: runF's 10g-legacy-answer reads 0 over the 150.
+RUNNER: runC (6d, 7c: item 2's line is the one 7c-plenty instance left in the 150, bar0-village-famine-rand-37) and runF
+(10g) over the 150 and the 720.
 
 ### SEAM-DESKS · the people's, the defence's, the houses' and the crime's leftovers, and the class table
 
@@ -212,7 +252,7 @@ YOUR ITEMS:
    RULE of the walker you can state and pin with a planted case, never by a row.
 6. THE CLASS TABLE: each atom made after the guard seat's final joins the class it answers, planted: `legacy ruin`
    (a ruin a line builds on), `court sits` (office and law words), `seat held` (office words), `seat members`
-   (BAR6-POWERS's; it lands beside you: add it by name as the guard seat added named atoms), and whatever item 1 leaves.
+   (BAR6-POWERS's; it is on your line), and whatever item 1 leaves.
    Then `node scripts/presumption-classes-door.mjs --check` reads `fresh 0` at your tip (SEAM-CULTURE cures the one
    fresh line that is its own; say the count you read with and without it).
 7. THE POWER DESK (the powers seat's leftovers, found by its reading): its new DS-POW-5 `council` twin, "... and nobody in
@@ -226,4 +266,11 @@ YOUR ITEMS:
    find nobody about and soldiers wherever they look. Nobody will talk about the ..." (class `outside`, status `one-kind`:
    it is declared against one crisis where the family is meant): declare it against the THREAT family in the annex's
    own form and regenerate (AX1).
+8. THE TEMPERAMENT OF MANNER (reported apart by the audit, WEAK; runF's 10e-temper-manner reads 5 over the 150:
+   "Temperament: forthright" or "candid" on a card whose secret is a forgery, a fabrication, a falsified roll or a lie
+   about a battle). The people seat's table `npcData.js :: SECRETS_DENIED_BY_TEMPERAMENT` makes the temperament yield to
+   its secret for the words of truth ("honest", "plain-dealing", "incorruptible"); "candid" and "forthright" JOIN IT FOR
+   THE SECRETS OF DECEIT ONLY (a thing forged, fabricated, falsified or lied about: the secrets the runner names), in
+   that table's own form. A DECLARED MOVE (B5: `npcs[].personality.dominant`): say how many of the 525 it moves. After:
+   10e-temper-manner reads 0 over the 150.
 RUNNERS: runE (9a) and runF (10e) over the 150 and the 720; the two doors.
