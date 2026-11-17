@@ -42,6 +42,7 @@ import { institutionMatchesKeyword } from '../institutions/institutionCategory.j
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT } from '../../data/crisisDependence.js';
+import { BUYER_IMPORT_WORDS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -152,7 +153,7 @@ export function localProducerSupplies(requirement, institutions) {
  *   economicState?: { localProduction?: unknown, primaryImports?: unknown,
  *     foodSecurity?: { importPct?: unknown, foodRecord?: { foodSources?: unknown, normalImportPct?: unknown } | null } | null } | null,
  *   institutions?: ReadonlyArray<unknown> | null,
- *   resourceAnalysis?: { imports?: { critical?: unknown } | unknown[] | null } | null,
+ *   resourceAnalysis?: { imports?: { critical?: unknown } | unknown[] | null, gaps?: unknown } | null,
  * }} InputRecord the record, or the generator's record in the making (the same fields)
  */
 
@@ -183,6 +184,15 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   // (SPENT_GROUND_WORKERS: the mine, the quarry, the boats) is fed by no import there either: the page's SV6 reading, one fact
   const spentGround = onWhollySpentGround(record, house);
   if (spentGround && SPENT_GROUND_WORKERS.includes(String(catalogIdForName(str(house?.name)) ?? ''))) return 'missing';
+  // BIRTH-1 (the chair's ruling BR2 of 2026-11-17, the audit's R5; vetoable by the owner): ON A COAST THE SEA IS THE BRINE.
+  // The salt works' input is the chain of desert salt, which only a live salt ground answered: 9 salt works of the census's
+  // 720 stood on a coast "Short of salt.". On a port route or coastal terrain the sea answers it (a ground wholly spent is
+  // read above, as the page's mark reads it).
+  if (chainKey === 'desertSalt' && !spentGround && (str(config.tradeRouteAccess) === 'port' || str(config.terrainOverride) === 'coastal')) return 'local';
+  // BIRTH-1 (BR2 (ii)): A HOUSE THAT IS THE SOURCE OF ITS MATERIAL IS ANSWERED ONLY BY ITS GROUND (`houseKinds.js ::
+  // SOURCE_GROUNDS`: a stone quarry, a charcoal burner, a dairy farmer, a salt works). An import feeds a buyer, never the
+  // work on the ground: the cooper's bought "Timber" burns no charcoal in the burner's kilns.
+  const sourceHouse = isSourceHouse(String((typeof house?.catalogId === 'string' && house.catalogId) || catalogIdForName(str(house?.name)) || ''));
   if (!spentGround && localProducerSupplies(raw, liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)))) return 'local'; // the live roster: a ruined quarry quarries nothing
 
   // The route, where no siege shuts it. BAR5-CHAINS (b) (LAW 3's L3.needed, the chair's direction of BRIEF-BAR5 under HW1;
@@ -199,12 +209,29 @@ export function houseInputAtHand(record, chainKey, house, chain) {
   if (!besieged && hasTradeRouteConnection(str(config.tradeRouteAccess))
     && (routeHouse || (spec?.route && !needListNames(record, /** @type {string[]} */ (names))))) return 'route';
 
-  // The imports bring the raw good; the food record names the source or imports the staple.
-  if (imports.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))))) return 'imported';
+  // The imports bring the raw good; the food record names the source or imports the staple. BIRTH-1 (BR2 (ii), kept narrow
+  // by the count: the hand-back): A WORD THE BIRTH BROUGHT IN FOR A BUYER FEEDS NO SOURCE HOUSE. The birth reads a source
+  // house over the list as the economy wrote it (`resourceGenerator.js :: supplyOfInput`), so where the record's own gap
+  // says this house lacks this input, a buyer's word on the list (`houseKinds.js :: BUYER_IMPORT_WORDS`) is the buyers'
+  // and not its own: 11 charcoal burners of the census's 720 read the cooper's bought "Timber" as their wood.
+  const fed = sourceHouse && gapSaysMissing(record, house) ? imports.filter((imp) => !BUYER_IMPORT_WORDS.has(imp)) : imports;
+  if (fed.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))))) return 'imported';
   const food = es.foodSecurity?.foodRecord;
   if (spec?.food && arr(food?.foodSources).some((x) => spec.food?.includes(str(x)))) return 'imported';
   if (spec?.staple && (Number(food?.normalImportPct) > 0 || Number(es.foodSecurity?.importPct) > 0)) return 'imported';
   return 'missing';
+}
+
+/**
+ * Whether the record's own gaps say this house lacks its input (`resourceAnalysis.gaps[]`, kind `missing`): the birth
+ * writes that row only where none of the house's inputs reached it (`resourceGenerator.js :: evaluateInstitutionChain`).
+ * @param {InputRecord | null | undefined} record @param {{ name?: unknown } | null | undefined} house
+ */
+function gapSaysMissing(record, house) {
+  const name = str(house?.name);
+  const gaps = /** @type {{ gaps?: unknown } | null | undefined} */ (record?.resourceAnalysis)?.gaps;
+  return !!name && arr(gaps).some((x) => { const g = /** @type {{ institution?: unknown, kind?: unknown } | null} */ (x);
+    return !!g && g.institution === name && g.kind === 'missing'; });
 }
 
 /** A row a user authored (custom content), as the page's leaf reads it (`crisisStoppedRow.js`). @param {{ custom?: unknown, source?: unknown, isCustom?: unknown } | null | undefined} row */
@@ -255,13 +282,26 @@ export function housesOnSpentGround(settlement) {
     const tradeId = String(catalogIdForName(house) ?? '');
     if (Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, tradeId) && !SPENT_READ_HELD.includes(tradeId)) continue;
     const works = SPENT_GROUND_WORKERS.includes(String(catalogIdForName(house) ?? '')); // an import feeds a buyer, never the work on the ground
+    // BIRTH-1 (BR2 (i), the audit's "what is left" 2): a buyer is fed by the shortage import of its spent ground, or by an
+    // import that brings the ground's yield by its own name ("Medicinal herbs" feeds the apothecary on spent foraging
+    // grounds: the birth writes no second herb import beside it, `resourceGenerator.js :: importsBroughtAtBirth`)
     const allSpent = own.every((c) => spent.has(/** @type {string} */ (c.resourceKey)) && c.status !== 'magically_sustained'
-      && (works || !imports.has(String(resourceShortageImport(/** @type {string} */ (c.resourceKey)) ?? ''))));
+      && (works || (!imports.has(String(resourceShortageImport(/** @type {string} */ (c.resourceKey)) ?? ''))
+        && !yieldImported([...imports], /** @type {string} */ (c.resourceKey)))));
     if (!allSpent) continue;
     const key = /** @type {string} */ (own[0].resourceKey);
     out.set(house, Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, key) ? SPENT_GROUND_YIELD[key] : 'its materials');
   }
   return out;
+}
+
+/**
+ * Whether an import brings a spent ground's yield (`SPENT_GROUND_YIELD`) by its own name, a worked good meeting none.
+ * @param {ReadonlyArray<string>} imports @param {string} key the ground
+ */
+function yieldImported(imports, key) {
+  const good = Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, key) ? SPENT_GROUND_YIELD[key] : '';
+  return !!good && imports.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && wholeTokens(imp.replace(/\([^)]*\)/g, ' '), good));
 }
 
 /**

@@ -38,10 +38,11 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { exportsAsPrinted, houseMakesGoodNamed, tradeMarkOf } from './tradeListDisplay.js';
 import { chainModelsResource, chainWorksResource } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
-import { familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
+import { catalogIdForName, familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
-import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, tradeFinisherIn } from '../facts/houseInputAtHand.js';
+import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, housesShortOf, tradeFinisherIn } from '../facts/houseInputAtHand.js';
+import { SOURCE_GROUNDS, isSourceHouse } from '../facts/houseKinds.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
 
@@ -114,6 +115,25 @@ function houseWords(inst) {
   // the house's prose name, its rung struck ("Sawmill (commercial)" is the sawmill: BAR4-RECORD R2), as proseHouseName reads it
   const name = str(institutionDisplayName(inst) || inst?.name).replace(/^access to (?:an? )?/i, '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
   return `the ${name.charAt(0).toLowerCase()}${name.slice(1)}`;
+}
+
+/** @param {string} x @returns {string} */
+const capFirst = (x) => x.charAt(0).toUpperCase() + x.slice(1);
+
+/**
+ * BIRTH-1 (R4): the label of a source house's own spent ground, as the Depleted list prints it, where the house is the
+ * source of its material and none of its own grounds is live; else ''.
+ * @param {PageRecord} s @param {{ name?: unknown, catalogId?: unknown } | null | undefined} inst @returns {string}
+ */
+function workedOutGround(s, inst) {
+  const id = str((typeof inst?.catalogId === 'string' && inst.catalogId) || catalogIdForName(str(inst?.name)) || '');
+  if (!isSourceHouse(id)) return '';
+  const grounds = SOURCE_GROUNDS[id].grounds;
+  const config = /** @type {{ nearbyResourcesDepleted?: unknown }} */ (s?.config || {});
+  const live = /** @type {string[]} */ (availableNativeResourceKeys(/** @type {Record<string, unknown>} */ (config)));
+  if (grounds.some((k) => live.includes(k))) return '';
+  const spent = arr(config.nearbyResourcesDepleted).map(str).find((k) => grounds.includes(k));
+  return spent ? str(resourceDisplayName(spent)) : '';
 }
 
 /** @param {string[]} nouns */
@@ -476,6 +496,17 @@ export function resourceGapLines(s) {
     const nouns = [...new Set(specs.map((x) => x.noun))];
     if (!nouns.length) continue;
     const plural = specs[specs.length - 1]?.plural === true && nouns.length === 1;
+    // BIRTH-1 (the chair's ruling BR2 of 2026-11-17, the audit's R4; vetoable by the owner): A SOURCE HOUSE ON ITS OWN SPENT
+    // GROUND IS WORKED OUT. "No stone reaches the stone quarry." said the stone was elsewhere beside "Dressed stone (local
+    // quarry depleted)" (45 quarries of the census's 720): the house that is the source of its material
+    // (`houseKinds.js :: SOURCE_GROUNDS`), none of whose own grounds is live and one of which the record holds spent, reads
+    // that ground, in the words the mark ("Short of stone.", `housesShortOf`) and the Depleted list (the ground's label) use.
+    const worked = workedOutGround(s, inst);
+    if (worked) {
+      const short = housesShortOf(s).get(name) || orList(nouns);
+      push({ chain: null, impact: `${capFirst(houseWords(inst))} is short of ${short}: its own ground is depleted (${worked}).`, severity: str(g.severity) || 'high' });
+      continue;
+    }
     push({ chain: null, impact: `No ${orList(nouns)} ${plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
   }
   return out;

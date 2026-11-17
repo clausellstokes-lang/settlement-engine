@@ -14,10 +14,17 @@ import {
   isMaterializedCustomContent,
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
-import { availableNativeResourceKeys, nativeResourceConditionRecords } from '../domain/resourceSemantics.js';
-import { waterAccessKind } from '../domain/tradeRouteSemantics.js';
+import { availableNativeResourceKeys, nativeResourceConditionRecords, resourceShortageImport } from '../domain/resourceSemantics.js';
+import { waterAccessKind, hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
 import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
-import { houseHead, houseInputAtHand, houseRunsChain, localProducerSupplies, terrainSynonymsFor, tradeFinisherIn } from '../domain/facts/houseInputAtHand.js';
+import {
+  CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseHead, houseInputAtHand, houseRunsChain, housesOnSpentGround, housesWantingTradeInput,
+  localProducerSupplies, terrainSynonymsFor, tradeFinisherIn,
+} from '../domain/facts/houseInputAtHand.js';
+import { BUYS_AND_WORKS, IMPORT_WORD, isSourceHouse } from '../domain/facts/houseKinds.js';
+import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
+import { HOUSE_TRADE_INPUT, SPENT_GROUND_WORKERS, SPENT_GROUND_YIELD } from '../data/crisisDependence.js';
+import { catalogIdForName } from '../data/institutionalCatalog.js';
 
 // ─── THE TOWN'S OWN ANSWER OVER THE TERRAIN'S TABLE (COHERENCE-AGREE, 2026-11-11) ──────────────
 // The terrain table (`TERRAIN_DATA`) says what a kind of ground usually lacks and yields. The town's
@@ -477,8 +484,17 @@ const evaluateInstitutionDeps = (exploitation, institutions = [], gaps = [], res
 // camels by any route; a house whose trade IS the route), the imports and the food record. The two asked it two ways and
 // split in 67 rows of the census's 720 (a caravanserai on a connected road "lacked camels"; a sawmill the page called
 // answered by the grove's "Sacred wood").
-const supplyOfInput = (chainKey, institution, institutions, evidence = {}) =>
-  houseInputAtHand({ ...evidence, institutions }, chainKey, institution, RESOURCE_CHAINS[chainKey]);
+// BIRTH-1 (BR2 (ii)): A SOURCE HOUSE IS READ OVER THE LIST AS THE ECONOMY WROTE IT. The words the birth brings in for the
+// buyers (`importsBroughtAtBirth`, below) feed no source house: a charcoal burner is not answered by the cooper's bought
+// "Timber" (`evidence.importsBeforeBirth`, the list before those words; the record in the making only, never saved).
+const supplyOfInput = (chainKey, institution, institutions, evidence = {}) => {
+  const before = evidence.importsBeforeBirth;
+  const id = String((typeof institution?.catalogId === 'string' && institution.catalogId) || catalogIdForName(String(institution?.name ?? '')) || '');
+  const record = Array.isArray(before) && isSourceHouse(id) && evidence.economicState
+    ? { ...evidence, economicState: { ...evidence.economicState, primaryImports: before }, institutions }
+    : { ...evidence, institutions };
+  return houseInputAtHand(record, chainKey, institution, RESOURCE_CHAINS[chainKey]);
+};
 
 // Does another of this house's chains feed it? Worked here (fully or partly exploited), or its input held locally or
 // bought in. M-S, read by evaluateInstitutionChain's lacks-access row.
@@ -586,6 +602,83 @@ const evaluateResourceChain = (specialResourceKeys) => {
   return result;
 };
 
+// ─── importsBroughtAtBirth ─────────────────────────────────────────────────────
+// BIRTH-1 (the chair's ruling BR2 of 2026-11-17 on the audit BIRTH-AUDIT's R2; vetoable by the owner): A HOUSE THAT BUYS
+// AND WORKS ITS MATERIAL HAS IT BROUGHT IN. Of the 2,066 houses the page marked short in the census's 720 towns, 2,058
+// were BORN short: the town was drawn a potter and no clay, a fuller and no wool, and the imports list (the economy's,
+// written before the houses' gaps) named only what a RUNNING chain needs. Where a connected road no siege shuts reaches
+// the town, each live native house of kind (i) (`houseKinds.js :: BUYS_AND_WORKS`) gets its material brought in, on the
+// imports list that exists (`economicState.primaryImports`; no new field), in the list's own words (`IMPORT_WORD`):
+//   (1) a buyer on a ground of its own the record has spent, unmarked by the shortage import the economy writes only at a
+//       town or larger, has that ground's shortage import (`resourceSemantics.js :: resourceShortageImport`), as a town's
+//       has: "Clay and ceramics materials (local clay pits exhausted)". A ground with no shortage import is left (named in
+//       the hand-back), and so is a house that works the ground itself (`SPENT_GROUND_WORKERS`: an import feeds a buyer,
+//       never the work on the ground);
+//   (2) a buyer every input of which the one reader (`houseInputAtHand`) answers `missing` has its input's word.
+// Each word once: a word the list already holds (its bracketed reason struck, in any case) is not written again. The
+// gaps are written after, over the list: the house then "runs on imported clay", and under a siege the page reads it as
+// it reads every house on an imported input ("Curtailed by the siege."). No draw is taken: no person, tie, name or house
+// moves (measured by birth over the census's 720, the 150 and the 525).
+// @enforced-by tests/domain/birthKindsLaw.test.js
+
+/** @param {unknown} x @returns {string} an import as a word: its bracketed reason struck, one spacing, lower case */
+const importWordOf = (x) => String(x ?? '').replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+/** @param {string} x @returns {string} its words, singular, spaced ("Raw hides" -> " raw hide ") */
+const wordsOf = (x) => ` ${x.toLowerCase().replace(/[^a-z]+/g, ' ').replace(/\b([a-z]{3,}?)e?s\b/g, '$1').replace(/\s+/g, ' ').trim()} `;
+/** @param {unknown} imp an import @param {string} good a good's noun @returns {boolean} the import names the good whole */
+const namesGood = (imp, good) => wordsOf(importWordOf(imp)).includes(wordsOf(good));
+
+/**
+ * The words the birth brings in for the houses that buy and work their material (above), in order, none the list holds.
+ * @param {{ config?: Record<string, unknown> | null, economicState?: { primaryImports?: unknown } | null,
+ *   institutions?: ReadonlyArray<unknown> | null, resourceAnalysis?: { imports?: unknown } | null }} record the record in
+ *   the making (the generator's) or the saved record: the same fields
+ * @returns {string[]}
+ */
+export function importsBroughtAtBirth(record) {
+  const config = record?.config || {};
+  const stresses = Array.isArray(config.stressTypes) ? config.stressTypes : [];
+  if (!record?.economicState || stresses.includes('under_siege') || !hasTradeRouteConnection(String(config.tradeRouteAccess ?? ''))) return [];
+  const have = Array.isArray(record.economicState.primaryImports) ? record.economicState.primaryImports.map(String) : [];
+  /** @type {string[]} */
+  const add = [];
+  const held = new Set(have.map(importWordOf));
+  /** @param {unknown} word */
+  const bring = (word) => { if (typeof word === 'string' && word && !held.has(importWordOf(word))) { held.add(importWordOf(word)); add.push(word); } };
+  /** @param {unknown} inst */
+  const idOf = (inst) => { const i = /** @type {{ name?: unknown, catalogId?: unknown } | null} */ (inst);
+    return String((typeof i?.catalogId === 'string' && i.catalogId) || catalogIdForName(String(i?.name ?? '')) || ''); };
+  const houses = liveInstitutions(record).filter((i) => !!i && typeof i.name === 'string' && i.name && !isMaterializedCustomContent(i) && BUYS_AND_WORKS.has(idOf(i)));
+  // (1) a buyer on its own spent ground: that ground's shortage import
+  const spent = new Set(Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted.map(String) : []);
+  const onSpent = housesOnSpentGround(record);
+  const chains = /** @type {Array<{ resourceKey?: unknown, processingInstitutions?: unknown }>} */ (Array.isArray(/** @type {{ activeChains?: unknown }} */ (record.economicState).activeChains) ? /** @type {{ activeChains: any[] }} */ (record.economicState).activeChains : []);
+  for (const inst of houses) {
+    if (!onSpent.has(inst.name) || SPENT_GROUND_WORKERS.includes(idOf(inst))) continue;
+    for (const c of chains) {
+      if (!Array.isArray(c?.processingInstitutions) || !c.processingInstitutions.includes(inst.name) || !spent.has(String(c.resourceKey))) continue;
+      // the good once: a ground whose yield the list already brings by name ("Grain (a little, beside its own harvest)") is
+      // not bought in twice ("Bulk grain (local grain fields depleted)" beside it: the coherence receipt's doubled grain)
+      const good = Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, String(c.resourceKey)) ? SPENT_GROUND_YIELD[String(c.resourceKey)] : '';
+      if (good && [...have, ...add].some((imp) => namesGood(imp, good))) continue;
+      bring(resourceShortageImport(String(c.resourceKey)));
+    }
+  }
+  // (2) a buyer none of whose inputs the one reader answers: its input's word. The record read with the words of (1).
+  const rec = { ...record, economicState: { ...record.economicState, primaryImports: [...have, ...add] } };
+  const wanting = housesWantingTradeInput(rec);
+  for (const inst of houses) {
+    const id = idOf(inst);
+    const trade = Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, id) ? HOUSE_TRADE_INPUT[id] : '';
+    if (trade === 'luxury') { if (wanting.get(inst.name)?.reach === 'missing') bring(IMPORT_WORD.luxury); continue; }
+    const keys = (trade ? [trade] : chainsOfHouse(inst.name, RESOURCE_CHAINS).map(([k]) => k)).filter((k) => !!CHAIN_INPUTS[k]);
+    if (!keys.length) continue;
+    if (keys.some((k) => houseInputAtHand(rec, k, inst, RESOURCE_CHAINS[k] || { rawResource: CHAIN_RAW_INPUT[k] }) !== 'missing')) continue;
+    bring(IMPORT_WORD[keys[0]]);
+  }
+  return add;
+}
+
 // ─── generateResourceAnalysis ─────────────────────────────────────────────────
 
 /**
@@ -635,10 +728,16 @@ export const generateResourceAnalysis = (
     nativeInstitutions,
     nearbyResources,
   );
+  // BIRTH-1 (R2): a house that buys and works its material has it brought in, before the gaps are written (above)
+  const importsBeforeBirth = economicState && Array.isArray(economicState.primaryImports) ? [...economicState.primaryImports] : [];
+  if (economicState) {
+    const brought = importsBroughtAtBirth({ config, economicState, institutions: nativeInstitutions, resourceAnalysis: { imports } });
+    if (brought.length) economicState.primaryImports = [...importsBeforeBirth, ...brought];
+  }
   const gaps           = evaluateInstitutionChain(
     exploitation,
     nativeInstitutions,
-    { config, economicState, resourceAnalysis: { imports } }, // the record in the making: houseInputAtHand reads it as the page reads the record (BAR5-CHAINS (b): the need list too)
+    { config, economicState, resourceAnalysis: { imports }, importsBeforeBirth }, // the record in the making: houseInputAtHand reads it as the page reads the record (BAR5-CHAINS (b): the need list too)
   );
   const resourceConditions = nativeResourceConditionRecords(config);
   // after the gaps and the town's settings: a complete row reads both (#457, #1163)
