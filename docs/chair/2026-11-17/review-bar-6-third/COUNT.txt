@@ -1,0 +1,25 @@
+REVIEW-BAR-6, THE THIRD READER (PREP-READ-7, 2026-11-17, at the chair's word of 17:01 UTC): the sixth read's 21 packets
+(packets13/bar6-NN.txt.gz) read again by ONE stronger reader a packet (a helper on model opus, reader letter c), and its new
+HIGH and MED sentences put to the sixth's own strict second check (helpers on model opus, high effort).
+
+THE LINE THE CHAIR NEEDS:
+  the sixth read, by one stronger reader and the strict check: 75 sentences stand (22 of the published 29 re-found, 53 new)
+
+THE THIRD READER (flags/bar6-NN.c.flags.jsonl; tools/READER-6-THIRD.md = BRIEF-REVIEW-BAR-6.md lines 1-53 + the seventh's
+OUTPUT-AND-WORK.txt at 1414045f6; each reader saw only its own packet; all 21 wrote a DONE line; no unknown id, no unparsed line):
+  distinct sentences flagged (a sentence printed twice in a town counted once): HIGH 0 · MED 135 · LOW 140
+  of the 135 MED, on the published 51 (SECOND-CHECK.final51.json, matched by town and text): 32 (STANDS 22 · EXPLAINED 10 · WEAK 0)
+  of the 51, not re-flagged at MED: 19 (STANDS 7 · EXPLAINED 10 · WEAK 2)
+  new (not on the 51): 103 (new.sentences.json)
+THE STRICT SECOND CHECK OF THE 103 NEW (verdicts/verdicts-01..09.json; verdicts.all.json; tools/SECOND-CHECK.tmpl.md = the
+sixth's SECOND-CHECK.brief.md with its paths put on this machine's render of cfc2b680a, its rebuilt cal packets (byte-equal to the
+published) and the sixth's readers' brief; nine batches of whole towns, 5 to 16 flags; every batch checked by script: each id once):
+  STANDS 53 · WEAK 22 · EXPLAINED 28 · UNSURE 0
+THE STANDING SENTENCES: 22 (published STANDS re-found) + 53 (new STANDS) = 75; the 7 published STANDS the third reader did not
+flag are not counted in the 75 (the line is the one reader's, checked).
+
+Notes the checkers raised (reported, not judged): several checkers named lines outside their batches with the same fault (C19016,
+C36883, C9105, C11622, C20804-07, C42517); two EXPLAINED verdicts turn on the packet splitting a row's mark onto its own id
+(C6170, C30429, C31082). Third-reader DONE counts that differ from the flag lines counted: bar6-01 24/23, 05 (two DONE lines,
+10 then 9)/9, 07 33/29, 12 15/14, 13 10/9 (the merge reads the flag lines, not the DONE count).
+The run's printed output: compare.out.txt (tools/compare.py reads the flags from the run's scratch folder; see its first line).

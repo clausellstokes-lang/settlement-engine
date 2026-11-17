@@ -1,0 +1,8 @@
+{"id":"C28591","town":"bar0-metropolis-calm-rand-44","sev":"LOW","kind":"PAIR","why":"Vintner card marked Short of grapes, yet says what it makes is sold in bulk and by the bottle","other":"C28590"}
+{"id":"C28668","town":"bar0-metropolis-calm-rand-44","sev":"MED","kind":"STATE","why":"Charcoal burner marked Short of coal; it burns wood, and TRADE imports timber (gaps: runs on imported timber)","other":""}
+{"id":"C28803","town":"bar0-metropolis-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"'told by Deception' prints a capitalised skill key as prose","other":""}
+{"id":"C29574","town":"bar0-metropolis-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"imports list 'Precious metal veins', a resource name; TRADE imports Precious metals","other":""}
+{"id":"C30132","town":"bar0-metropolis-calm-rand-44","sev":"LOW","kind":"PAIR","why":"Religious Authorities 'at the margins of civic life' contradicts the page's 'Faith carries real weight... heard in the metropolis's dealings'","other":"C29568"}
+{"id":"C30429","town":"bar0-metropolis-calm-rand-44","sev":"MED","kind":"PAIR","why":"Saltmaster's card marked Short of salt, then says she sells by the sack and the cart; LAND gaps: salt works lacks salt","other":"C30428"}
+{"id":"C31082","town":"bar0-metropolis-calm-rand-44","sev":"MED","kind":"PAIR","why":"Vintner's card marked Short of grapes, then she pours a taste and talks of the year's grapes; gaps: vintner lacks grapes","other":"C31081"}
+{"id":"DONE","lines":3940,"blocks":1,"flags":7}

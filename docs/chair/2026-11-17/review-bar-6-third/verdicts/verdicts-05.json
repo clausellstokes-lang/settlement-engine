@@ -1,0 +1,136 @@
+[
+ {
+  "id": "C19451",
+  "town": "bar0-hamlet-under_siege-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "\"historicalCharacter\": \"An ordinary place that has outlasted grander neighbours by getting the small things right, year after year\" — record s.culturalIdentity/historicalCharacter (corpus)",
+   "PAST: The Migration (82 years ago, demographic, major) — cal-07 header; town is 107 years old",
+   "Farovicus is surrounded. / The settlement is starving — cal-07 C19461, C19549 (the page states the siege plainly beside it)"
+  ],
+  "note": "The line is the town's century-long historical epithet, not a claim about present calm; nothing in PAST or the record denies that a 107-year-old hamlet outlasted neighbours, and the page states the siege and hunger in full beside it. A tone mismatch at most, not a false statement."
+ },
+ {
+  "id": "C19487",
+  "town": "bar0-hamlet-under_siege-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "\"settlementReason\": [... \"A newcomer is noticed by the second day here, and asked what work they mean to do.\"] — record s.settlementReason",
+   "The players arrive as this decision is being forced. — cal-07 C19512 (Summary/Crisis hook)"
+  ],
+  "note": "A habitual trait of a small place printed under Settlement Origin; it does not say newcomers are arriving now. The page's own siege hook has newcomers (the players) arriving during the siege, so the trait still applies."
+ },
+ {
+  "id": "C19892",
+  "town": "bar0-hamlet-under_siege-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "\"impression\": \"Watchful of strangers near the flocks...\", \"behaviour\": \"Answers about the hills; asks why you are walking them.\" — record s.npcs[Decius Cicero].presentation",
+   "The players arrive as this decision is being forced. — cal-07 C19512",
+   "To reach Farovicus you would have to cross the besiegers' lines first, and they let nobody through. — cal-07 C19777 (reader's premise)"
+  ],
+  "note": "This is the shepherd's manner toward 'you' (the players, whom the siege hook brings in), not a scene of visitors walking the hills; a wary question about why someone is out on the hills is if anything apt under siege. Unlike Titus's trade line (C19879, marked), it names no trade on offer that needs a mark."
+ },
+ {
+  "id": "C19919",
+  "town": "bar0-hamlet-under_siege-rand-42",
+  "verdict": "WEAK",
+  "evidence": [
+   "Farovicus is short more often than not. — cal-07 C19918 (line before)",
+   "Most households go short, and hunger is already here. — cal-07 C19656",
+   "The settlement is starving, and its hungriest steal what food they can find. — cal-07 C19549",
+   "FOOD: ... grown 29% ... gap 71% ... stores 1.3 months — cal-07 header"
+  ],
+  "note": "Not a reassurance and not false (some needs are met: 29% of food is grown), but 'some needs met, some postponed, month to month' is the chronic-poverty register and understates a town the same page calls starving with 1.3 months in store. A matter of degree."
+ },
+ {
+  "id": "C19989",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "PAST: The Heresy Trials (57 years ago, religious, major) — cal-08 header (the only event; the line names it as the exception)",
+   "\"historicalCharacter\": \"The Heresy Trials aside, the history here is long and steady, and travellers remember the place kindly\" — record s.culturalIdentity/historicalCharacter",
+   "It stands where the roads meet, on ground travellers stopped at long before anyone built here. — cal-08 C20023"
+  ],
+  "note": "The line speaks of the town's history, which PAST bears out exactly (one grave event, which it names), and of travellers' memory of a crossroads hamlet; it claims nothing about the present siege, which the page states in full."
+ },
+ {
+  "id": "C19996",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "Secret: Knows the barricade across the main approach is structurally compromised and has told no one — dump World/NPCs (Marina Fedorov); cal-08 C20528",
+   "Everyone at Vysokoka who can hold a weapon has a place in the defence — cal-08 C20365; Defense relies on individual armed citizens. — C20401",
+   "Vysokoka has no wall to fall back behind, so the threat now at hand is being met in the open, house by house. — cal-08 C20399; DEFENCE: walls: none ... — header"
+  ],
+  "note": "The page itself gives a barricade across the main approach (a secret's own fact) and armed citizens in the defence, so a work party shoring up 'the defences' has something to shore up; the off part is the plural 'inside the defences', which implies a perimeter the page denies (C20399, C20404). One loose word."
+ },
+ {
+  "id": "C20110",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Maltster · Crafts / Converts barley into malt for brewing. ... Requires grain surplus. / Services · Malted barley — cal-08 C20104-C20110 (no mark on card or chip)",
+   "Malted barley / Sprouted and kiln-dried barley. / Maltster — cal-08 C20190-C20193, Systems/Services (no mark)",
+   "FOOD: ... grown 38% · brought in 0% ... gap 62% · surplus 0% — cal-08 header; TRADE imports: ... Grain — header",
+   "Curtailed by the siege. Strip farming in open fields. — cal-08 C20140; No food comes in by trade now, and what is left here is in a few hands — C20094"
+  ],
+  "note": "The maltster's own card says it requires a grain surplus; the record gives surplus 0%, a 62% gap, grain imports cut and farming curtailed, yet its row is offered unmarked on both Institutions and Services while every other producing house carries a siege mark. Nothing in the town (no stored barley, no other grain source) reconciles it."
+ },
+ {
+  "id": "C20383",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Disasters & Famine / Adequate▼ — cal-08 C20382-C20383 (the bar the page says is re-judged as the campaign goes on, C20368)",
+   "Most households go short, and hunger is already here. — cal-08 C20249",
+   "People quarrel over rations, food is sold under the counter, and the hungry have started to steal. — cal-08 C20388; Food Security · Deficit — C20015",
+   "FOOD: ... gap 62% ... stores 1.9 months (granary False) — header"
+  ],
+  "note": "The one bar the page says is re-judged to the current state rates famine readiness 'Adequate' while the same page says hunger is already here and the hungry steal; two months of household stores with no granary and no imports does not reconcile 'Adequate' (the sibling towns with 1.3 and 1.5 months print Critical and Weak)."
+ },
+ {
+  "id": "C20527",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "A small operation; the households brew their own ale from it. — cal-08 C20106 (the households are the brewers who buy the malt)",
+   "How they deal Talks about the harvest and the brewers who buy from the malthouse. — cal-08 C20527 (Marina Fedorov, maltster; no mark)",
+   "Requires grain surplus. — cal-08 C20107; FOOD surplus 0%, gap 62% — header"
+  ],
+  "note": "The reader's 'no brewer' premise is wrong: the page says the households brew their own ale from the malt, so they are the brewers who buy from it. What remains is a present-tense malthouse trade line in a siege that leaves no grain surplus; it is a manner-of-talk line, and the same root fault as C20110 (the maltster carries no siege mark anywhere)."
+ },
+ {
+  "id": "C20639",
+  "town": "bar0-hamlet-under_siege-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "When someone does wrong, nobody makes them answer for it, and the oldest families no longer have the last word. — cal-08 C20942 (Systems/Defense)",
+   "If you are wronged at Mahamala, there is no court to take it to, and no local is surprised. — cal-08 C20962",
+   "Law & order · Collapsed — cal-08 C20702; TENSIONS: leadership vacuum — header"
+  ],
+  "note": "The line says in the present tense that disputes are settled by precedent; the same page says wrongdoers answer to nobody and the oldest families no longer have the last word. The page prints X and not-X, and nothing in the town reconciles them."
+ },
+ {
+  "id": "C20756",
+  "town": "bar0-hamlet-under_siege-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Pack animal trader · Economy / Curtailed by the siege. Deals in mules, donkeys, and draft horses ... / Services · Pack animal sales — cal-08 C20752-C20756",
+   "Pack animal sales / Mules, donkeys, and oxen for sale. / Draft work and cargo carrying. / Pack animal trader — cal-08 C20804-C20807, Systems/Services (no mark on row or house)"
+  ],
+  "note": "On the Institutions tab this chip sits under a card that opens 'Curtailed by the siege.', so it is covered by its card's mark (brief rule 1), and Curtailed means a row is still on offer. The real mismatch is the same service on the Services tab, C20804-C20807, printed under a bare house with no mark: that id was not flagged."
+ },
+ {
+  "id": "C20823",
+  "town": "bar0-hamlet-under_siege-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "Harvest Stopped by the siege. / What the households grow and raise on their holdings — cal-08 C20823-C20824 (also dump PDF 'Harvest (stopped): 89%')",
+   "Curtailed by the siege. Open-field farming, parcelled into strips. — cal-08 C20758",
+   "... what is still harvested stretches them further. — cal-08 C20968; only part of the usual food is still produced here — C20948; Production: 14 lbs/day — C20834",
+   "FOOD: grown 33% — header"
+  ],
+  "note": "The row defines Harvest as what the households grow and marks it Stopped, while the same page marks the farming Curtailed, says part of the food is still produced, and speaks of 'what is still harvested'. The fish income beside it, under the same trade stoppage, is marked only Curtailed, so 'no sales' does not reconcile it."
+ }
+]

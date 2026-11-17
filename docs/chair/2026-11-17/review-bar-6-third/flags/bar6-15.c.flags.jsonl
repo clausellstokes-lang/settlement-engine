@@ -1,0 +1,10 @@
+{"id":"C36685","town":"bar0-town-calm-rand-44","sev":"MED","kind":"LACKS","why":"by-products sold to tanners; HOUSES has no tannery or tanner","other":""}
+{"id":"C36683","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"PAIR","why":"butchers offer hide on sale while the cobbler's guild is marked short of hides","other":"C36494"}
+{"id":"C36868","town":"bar0-town-calm-rand-44","sev":"MED","kind":"PAIR","why":"chain outputs finished pottery and ceramics; Resources says no potter finishes the clay (LAND gap: clay cannot produce final goods)","other":"C36962"}
+{"id":"C36932","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"PAIR","why":"shadow trade does little harm, yet next line says open traders are put at a disadvantage","other":"C36935"}
+{"id":"C37129","town":"bar0-town-calm-rand-44","sev":"MED","kind":"LACKS","why":"rival crews fighting over the streets; HOUSES has a single Street gang and no other criminal house","other":""}
+{"id":"C37147","town":"bar0-town-calm-rand-44","sev":"MED","kind":"PAIR","why":"Legal infrastructure None, yet Law & Governance runs from the Town hall with Legal services output","other":"C36919"}
+{"id":"C37250","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"short-of-salt mark set in the How they deal slot; reads 'How they deal Short of salt.'","other":""}
+{"id":"C37304","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"short-of-grapes mark set in the How they deal slot; reads 'How they deal Short of grapes.'","other":""}
+{"id":"C36803","town":"bar0-town-calm-rand-44","sev":"MED","kind":"PAIR","why":"faith carries real weight in town dealings; Power tab says clergy work at the margins of civic life, leverage limited (Religious Authorities Minor)","other":"C37085"}
+{"id":"DONE","lines":1416,"blocks":1,"flags":9}

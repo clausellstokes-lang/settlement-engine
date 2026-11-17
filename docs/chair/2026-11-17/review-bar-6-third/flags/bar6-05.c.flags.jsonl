@@ -1,0 +1,11 @@
+{"id":"C12508","town":"bar0-city-wartime-rand-43","sev":"MED","kind":"STATE","why":"looms clatter street to street; LAND gives Textiles & Cloth impaired, grazing land depleted","other":""}
+{"id":"C12658","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"STATE","why":"hook gives recipes to Rain Goddess Nauat, a stable master; a stable keeps no recipes","other":""}
+{"id":"C13269","town":"bar0-city-wartime-rand-43","sev":"MED","kind":"STATE","why":"major livestock sales of all species; LAND gives grazing land depleted, Livestock and Horse trade chains impaired; livestock imported","other":""}
+{"id":"C13975","town":"bar0-city-wartime-rand-43","sev":"MED","kind":"PAIR","why":"Shield Compact (one member, garrison commander) given War Council's own text as the crown-appointed emergency body over requisition","other":"C13965"}
+{"id":"C14021","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"LACKS","why":"smugglers use unofficial landing points; trade access is road only, no water route","other":""}
+{"id":"C14279","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"PAIR","why":"fuller finishes cloth to order; the Fuller's own card is marked Short of wool","other":"C12874"}
+{"id":"C14749","town":"bar0-city-wartime-rand-43","sev":"MED","kind":"PAIR","why":"war contracts 'made the settlement rich'; page says the city is losing people and resources, Prosperous only before the war","other":"C12512"}
+{"id":"C14847","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"STATE","why":"mint master and chief magistrate said to compete client for client; their houses serve no common clients","other":""}
+{"id":"C15153","town":"bar0-city-wartime-rand-43","sev":"MED","kind":"PAIR","why":"calm-times 'closes every year ahead, dependable margin' under Wartime; food in deficit 4%, page says the city is running thin","other":"C12516"}
+{"id":"DONE","lines":2813,"blocks":1,"flags":10}
+{"id":"DONE","lines":2813,"blocks":1,"flags":9}

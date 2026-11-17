@@ -1,0 +1,16 @@
+{"id":"C32064","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"Household levy (a defence muster) listed as offering communal decisions and dispute mediation; council services filed under the levy","other":""}
+{"id":"C32098","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"Healing heading (1) holds only Burial; no healing service on HOUSES","other":""}
+{"id":"C32238","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"PAIR","why":"walls keep most trouble outside; page says palisade is little real defence and slows trouble more than it stops it","other":"C32250"}
+{"id":"C32251","town":"bar0-thorp-calm-rand-42","sev":"MED","kind":"STATE","why":"says it could keep soldiers; thorp of 11, prosperity Poor, page says always short of money for defence","other":"C32229"}
+{"id":"C32299","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"LACKS","why":"presumes the foreman's own store; HOUSES has no store or shop","other":""}
+{"id":"C32325","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"How survived value is a dangling clause beginning 'though', no main statement","other":""}
+{"id":"C32485","town":"bar0-thorp-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"Healing heading (3) holds burial and two church rites; no healing service on HOUSES","other":""}
+{"id":"C32686","town":"bar0-thorp-calm-rand-43","sev":"LOW","kind":"STATE","why":"speaks of the hills she answers about and walks; terrain is Plains, no hills on LAND","other":""}
+{"id":"C32776","town":"bar0-thorp-calm-rand-44","sev":"LOW","kind":"LACKS","why":"covered lanes and shaded gateways in a thorp of seven with 1-8 dwellings","other":""}
+{"id":"C32854","town":"bar0-thorp-calm-rand-44","sev":"LOW","kind":"STATE","why":"timber houses in a Desert/Arid thorp; LAND gives no timber, and nothing is imported","other":""}
+{"id":"C32867","town":"bar0-thorp-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"Healing heading (4) holds only burial and church rites; no healing service on HOUSES","other":""}
+{"id":"C32892","town":"bar0-thorp-calm-rand-44","sev":"LOW","kind":"PAIR","why":"survival economy label beside prosperity Moderate and 'nobody here calls the thorp poor'","other":"C32897"}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-44","sev":"LOW","kind":"RECORD","why":"thorp of 7 exports seven goods incl. livestock, wool, rock salt; no herding house, and LAND says salt not processed","other":""}
+{"id":"C32912","town":"bar0-thorp-calm-rand-44","sev":"MED","kind":"PAIR","why":"says exports entered the thorp as imports the same season; page and TRADE say no recorded imports","other":"C32910"}
+{"id":"C32957","town":"bar0-thorp-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences is the reason'","other":""}
+{"id":"DONE","lines":1270,"blocks":3,"flags":15}

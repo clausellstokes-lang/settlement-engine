@@ -1,0 +1,16 @@
+{"id":"C24744","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"LACKS","why":"road merges into town at no identifiable point; DEFENCE gives massive walls and fortifications, so the road enters at a gate","other":""}
+{"id":"C24783","town":"bar0-metropolis-calm-rand-43","sev":"MED","kind":"STATE","why":"origin given as established along a road route; FOUNDING reason is to exploit rich mineral deposits","other":""}
+{"id":"C25171","town":"bar0-metropolis-calm-rand-43","sev":"MED","kind":"STATE","why":"weavers (and fuller C25103) marked short of wool; INCOME gives Wool & Textile Trade 5% as a source of the town's money","other":""}
+{"id":"C25165","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"STATE","why":"tanner and cobbler short of hides while Butchers (3-8) sell fresh meat and by-products and Beast trainers trade livestock","other":""}
+{"id":"C25267","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"LACKS","why":"customs run by royal officials; GOVERNMENT is a Grand Guild Consortium with no crown","other":""}
+{"id":"C25429","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"PAIR","why":"workhouse offers textile labour unmarked while the weavers and fuller of the same town are marked short of wool","other":"C25171"}
+{"id":"C25757","town":"bar0-metropolis-calm-rand-43","sev":"MED","kind":"PAIR","why":"butchers' unmarked row sells hide to tanners, yet the tanner and cobbler are marked short of hides","other":"C25165"}
+{"id":"C26015","town":"bar0-metropolis-calm-rand-43","sev":"MED","kind":"PAIR","why":"economics says cloth is woven or finished here, unmarked, while weavers and fuller are marked short of wool","other":"C25171"}
+{"id":"C26486","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"LACKS","why":"smuggling via unofficial landing points; a mountain town with road trade access only, no water route","other":""}
+{"id":"C26640","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"PAIR","why":"master weaver takes an order of any size while her house is marked short of wool","other":"C25171"}
+{"id":"C26990","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"short-of-wool mark set into the fuller's How they deal line, ahead of a sentence about weaving gossip","other":""}
+{"id":"C27441","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"short-of-hides mark set as the tanner's How they deal, followed by sells leather to anyone who pays","other":""}
+{"id":"C27960","town":"bar0-metropolis-calm-rand-43","sev":"MED","kind":"PAIR","why":"Daily Life food panel says the town closes every year ahead with dependable margin; FOOD gap 3%, surplus 0%; page says it falls short","other":"C26045"}
+{"id":"C25011","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"STATE","why":"Outlook heads a hook Survival Crisis; CRISIS none, viable True, 14.6 months of stores against a 3% gap","other":""}
+{"id":"C28036","town":"bar0-metropolis-calm-rand-43","sev":"LOW","kind":"STATE","why":"The Purge, 82 years ago, labelled Ancient; within reach of living memory, and the abbot's secret makes him its informant","other":""}
+{"id":"DONE","lines":3434,"blocks":1,"flags":15}

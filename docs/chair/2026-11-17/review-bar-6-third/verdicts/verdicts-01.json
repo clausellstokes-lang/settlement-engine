@@ -1,0 +1,63 @@
+[
+ {
+  "id": "C0036",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Banking houses · Economy · Impaired / Services · Commercial loans · Deposit accounts — cal-01.txt C0587, C0592 (Systems/Institutions; same in dump bar0-city-under_siege+famine-rand-42.txt Systems/Institutions)",
+   "Commercial loans Impaired — cal-01.txt C1194 (Systems/Services: impaired, not marked stopped by the siege)",
+   "Enemies are camped around Hongmen, and nothing comes in by road. — cal-01.txt C0065",
+   "With the siege closing the road, Hongmen's market has only the city's own people left to sell to. — cal-01.txt C0035 (the line just before)"
+  ],
+  "note": "The line states the bank's standing rule for lending, not road trade or an arrival; the siege stops what comes by road, and the page's own bank card and Services row still offer commercial loans inside the walls (impaired, not stopped). The reader's premise that the siege stops all lending is not on the page."
+ },
+ {
+  "id": "C0042",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Production: 1,560 lbs/day+ 6,556 by divine provision · Need: 24,974 lbs/day · Short: 16,858 lbs/day — cal-01.txt C1389 (Systems/Economics)",
+   "No food comes into Hongmen by trade. — cal-01.txt C1390",
+   "economicState.foodSecurity: dailyNeed 24974, dailyProduction 1560, magicOffset 6556, importCoverage 7024, foodRecord.normalImportPct 28, chains['Trade & imports'] False, hasSiege True — record",
+   "FOOD: ... brought in 28% · by magic 26% · gap 39% — cal-01.txt header"
+  ],
+  "note": "16,858 = need 24,974 − grown 1,560 − magic 6,556 (67.5%): the gap with no trade, which is what the sentence says ('has no dependable trade route'); the header's 39% counts the 28% that the record itself calls normal-times imports, which the siege has cut. Both figures are the record's own; the 68% is the true gap under the siege, not a contradiction."
+ },
+ {
+  "id": "C0638",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Daily markets · Economy · Impaired — cal-01.txt C0635 (the card carrying the chip line)",
+   "Fresh produce Impaired / Whatever the kitchen gardens still give, sold early and gone by mid-morning. — cal-01.txt C1081-C1082 (Systems/Services)",
+   "Oasis Water and Agriculture [running; its resource Oasis and Water Rights available] — cal-01.txt header LAND; FOOD grown 6%, failed source None",
+   "made here: ... dates, ... Dates and fruit — cal-01.txt header TRADE"
+  ],
+  "note": "The chip sits under a card marked Impaired (a mark under this read's rule 1), and the Services tab prints the same service as Impaired with a famine-aware line (kitchen gardens, gone by mid-morning), so the two tabs agree. Fresh produce is not the grain whose rows are marked scarce: the oasis agriculture is running and the town still grows 6% of its food."
+ },
+ {
+  "id": "C2365",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Fish market · Economy / Stopped by the siege. A covered fish market under the market wardens. — cal-01.txt C0639-C0640",
+   "Services · Preserved fish (stopped) — cal-01.txt C0644",
+   "Fish market · member of Grain Holders / How they deal Haggles with pleasure; the price drops for anyone who buys a lot and comes back. — cal-01.txt C2358, C2365 (World/NPCs; no mark on the card or line)",
+   "Il Wang has stores laid in before the shortage ... They will sell, but their price is not money. — cal-01.txt C0124-C0125",
+   "How they deal Stopped by the siege. — cal-01.txt C2449, C2685 (other stopped houses' keepers do carry the mark)"
+  ],
+  "note": "The fishmonger's house is Stopped by the siege on Institutions, yet his card prints ordinary bulk trade with falling prices and no mark, while the page marks the same line for other stopped houses' keepers; his own hook says his price is not money. Same fault as C2654 (an NPC deal line of a Stopped house left unmarked)."
+ },
+ {
+  "id": "C2654",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Caravanserai · Economy / Stopped by the siege. A large walled compound built for desert traders — dump bar0-city-under_siege+famine-rand-42.txt Systems/Institutions (packet section Systems/Institutions)",
+   "Services · Caravan organization (stopped) — dump bar0-city-under_siege+famine-rand-42.txt Systems/Institutions",
+   "Caravanserai · member of Grain Holders / How they deal Charges by the animal and the night; water and fodder extra. — cal-01.txt C2646, C2654 (World/NPCs; no mark)",
+   "How they deal Stopped by the siege. / How they deal Curtailed by the siege. — cal-01.txt C2449, C2438 (sibling keepers' lines carry the mark)"
+  ],
+  "note": "The caravanserai is Stopped by the siege and nothing comes in by road (C0065), yet its host's deal line prints ordinary nightly charging for caravan animals with no mark, though the page marks the same line for other stopped or curtailed houses; her 'Wants' line about short supply does not mark the deal line. Same fault as C2365."
+ }
+]

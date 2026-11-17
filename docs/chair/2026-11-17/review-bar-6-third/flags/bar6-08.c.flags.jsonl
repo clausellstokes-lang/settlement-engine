@@ -1,0 +1,10 @@
+{"id":"C19989","town":"bar0-hamlet-under_siege-rand-43","sev":"MED","kind":"STATE","why":"calm-times reassurance ('long and steady', travellers remember kindly) in a hamlet under siege with critical stability","other":""}
+{"id":"C19996","town":"bar0-hamlet-under_siege-rand-43","sev":"MED","kind":"LACKS","why":"work party 'inside the defences'; DEFENCE gives no walls and no force of any kind","other":"C20038"}
+{"id":"C20110","town":"bar0-hamlet-under_siege-rand-43","sev":"MED","kind":"STATE","why":"Maltster's malted barley offered unmarked; requires grain surplus but FOOD deficit 62%, imports cut by siege","other":"C20107"}
+{"id":"C20383","town":"bar0-hamlet-under_siege-rand-43","sev":"MED","kind":"PAIR","why":"Disasters & Famine 'Adequate', re-judged; FOOD deficit 62% and page says hunger is already here","other":"C20249"}
+{"id":"C20527","town":"bar0-hamlet-under_siege-rand-43","sev":"MED","kind":"PAIR","why":"brewers who buy from the malthouse; no brewer on HOUSES and page says households brew their own; ordinary trade under siege","other":"C20106"}
+{"id":"C20639","town":"bar0-hamlet-under_siege-rand-44","sev":"MED","kind":"PAIR","why":"disputes 'settled by precedent' calmly; page gives Law & order Collapsed, legitimacy crisis, leadership vacuum under siege","other":"C20702"}
+{"id":"C20756","town":"bar0-hamlet-under_siege-rand-44","sev":"MED","kind":"STATE","why":"pack animal sales offered unmarked for travellers and merchants while siege stops all road trade; its house is Curtailed","other":"C20753"}
+{"id":"C20823","town":"bar0-hamlet-under_siege-rand-44","sev":"MED","kind":"PAIR","why":"Harvest 'Stopped by the siege' but Subsistence farming card is Curtailed and page says part of the food is still grown","other":"C20758"}
+{"id":"C20830","town":"bar0-hamlet-under_siege-rand-44","sev":"MED","kind":"PAIR","why":"'No significant exports'; TRADE exports salted fish, smoked seafood, fish oil and page says several trades sold outward","other":"C20832"}
+{"id":"DONE","lines":1228,"blocks":2,"flags":9}

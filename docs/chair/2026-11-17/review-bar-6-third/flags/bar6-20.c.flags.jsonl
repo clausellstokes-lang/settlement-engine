@@ -1,0 +1,16 @@
+{"id":"C44148","town":"bar0-village-famine-rand-42","sev":"MED","kind":"STATE","why":"hook gives priest Volker Müller (Parish church) a master craftsman; a priest has no craft master","other":""}
+{"id":"C44058","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"STATE","why":"ordinary-times notice of the next fair under the famine, with no mark","other":""}
+{"id":"C44405","town":"bar0-village-famine-rand-42","sev":"MED","kind":"STATE","why":"says metals are not brought in; TRADE imports Mail and iron fittings and replacement arms","other":""}
+{"id":"C44356","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"BROKEN","why":"Emergency defense (militia) listed as the one Legal & financial service","other":""}
+{"id":"C44447","town":"bar0-village-famine-rand-42","sev":"MED","kind":"PAIR","why":"chain shown running with Sawmill producing Milled lumber; Sawmill is marked Short of timber and gaps say it lacks timber","other":"C44221"}
+{"id":"C44055","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"PAIR","why":"names Rundfeld's market gate; the page says the wall has no gate","other":"C44653"}
+{"id":"C44759","town":"bar0-village-famine-rand-42","sev":"MED","kind":"PAIR","why":"sawyer talks of which timber is good this year and who buys it; Sawmill short of timber, no timber reaches it","other":"C44486"}
+{"id":"C44805","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"BROKEN","why":"shortage mark set as the tanner's 'How they deal' line","other":""}
+{"id":"C44985","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"PAIR","why":"few keep the rites beyond weddings and burials; the church card says it is central to everything and tithing is not optional","other":"C44286"}
+{"id":"C45015","town":"bar0-village-famine-rand-43","sev":"MED","kind":"STATE","why":"outsiders see a busy market; famine with fish (the town's trade) failed, fish market scarce, only market is a fish stall","other":""}
+{"id":"C45041","town":"bar0-village-famine-rand-43","sev":"LOW","kind":"STATE","why":"ordinary-times claim the market lives off through-traffic under the famine; no inn, only a scarce fish market","other":""}
+{"id":"C45269","town":"bar0-village-famine-rand-43","sev":"MED","kind":"STATE","why":"exports river fish, freshwater catch, salted and smoked fish unmarked; FOOD: fish is the failed source, famine cut 65%","other":""}
+{"id":"C45282","town":"bar0-village-famine-rand-43","sev":"LOW","kind":"STATE","why":"calm-times line, meals follow what households put by; FOOD: famine, 0.1 months stores","other":""}
+{"id":"C45556","town":"bar0-village-famine-rand-43","sev":"LOW","kind":"PAIR","why":"seat-holder Xochiquetzal Ixim, standing commanding and high influence, described as unassuming and easy to overlook","other":"C45552"}
+{"id":"C45581","town":"bar0-village-famine-rand-43","sev":"LOW","kind":"PAIR","why":"tanner names the price for a hide; Tannery marked Short of its materials, no hides reach it","other":"C45144"}
+{"id":"DONE","lines":1755,"blocks":2,"flags":15}

@@ -1,0 +1,11 @@
+{"id":"C33166","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"PAIR","why":"'nobody looks hungry' while FOOD shows a 1% gap, Pressured; page says the shortfall is made up by tighter belts","other":"C33943"}
+{"id":"C33647","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"'3 impaired' but seven rows under it are marked short (barrels, casks, charcoal, brick too)","other":""}
+{"id":"C33939","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"STATE","why":"'less than a fifth' for divine provision that FOOD gives as 1%; misleading degree","other":""}
+{"id":"HEADER","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"RECORD","why":"TRADE 'made here' lists salt while LAND gaps give salt as available but not processed","other":""}
+{"id":"C33921","town":"bar0-town-calm-rand-42","sev":"MED","kind":"PAIR","why":"alchemical trade drawing outside customers (also C34039 export 'Operational'), while the only alchemist is marked short of its materials","other":"C33357"}
+{"id":"C34291","town":"bar0-town-calm-rand-42","sev":"MED","kind":"PAIR","why":"alchemical preparations made here for defenders, while the Alchemist shop is marked short and Potion brewing (short)","other":"C33357"}
+{"id":"C34617","town":"bar0-town-calm-rand-42","sev":"MED","kind":"PAIR","why":"collier 'answers questions about the woods' in a desert town where the page says no timber reaches the charcoal burner","other":"C34076"}
+{"id":"C34907","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"PAIR","why":"a debt larger than two years of the town's taxes printed under a tie rated 'minor'","other":"C34905"}
+{"id":"C34806","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"'Leverage (6)' but seven Mutual Leverage ties are listed below","other":""}
+{"id":"C35040","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"PAIR","why":"Berenger Wolf 'brings the votes' though PEOPLE and the page put him in no power, holding no seat","other":"C34773"}
+{"id":"DONE","lines":2056,"blocks":1,"flags":10}

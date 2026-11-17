@@ -1,0 +1,14 @@
+{"id":"C40674","town":"bar0-town-occupied-rand-44","sev":"MED","kind":"PAIR","why":"says cloth is woven here; Weavers marked Short of wool, grazing land absent and no wool import","other":"C40422"}
+{"id":"C40850","town":"bar0-town-occupied-rand-44","sev":"MED","kind":"PAIR","why":"one audience with the Feudal Appointee gets a quick decision; under occupation nothing it decides stands without the occupiers","other":"C40917"}
+{"id":"C41011","town":"bar0-town-occupied-rand-44","sev":"MED","kind":"STATE","why":"says the town has more than enough for a hard year; FOOD Pressured, 7% deficit, occupiers eating local stores","other":"C40694"}
+{"id":"C41106","town":"bar0-town-occupied-rand-44","sev":"LOW","kind":"BROKEN","why":"shortage mark set as Nonia Sabinus's 'How they deal' line","other":""}
+{"id":"C41243","town":"bar0-town-occupied-rand-44","sev":"LOW","kind":"PAIR","why":"master weaver shows her best bolts as at work; Weavers marked Short of wool","other":"C40422"}
+{"id":"C41649","town":"bar0-village-calm-rand-42","sev":"MED","kind":"PAIR","why":"apothecary 'keeps herbalism supplies in stock'; same card opens Short of its materials, gaps say it lacks herbs","other":"C41647"}
+{"id":"C41707","town":"bar0-village-calm-rand-42","sev":"MED","kind":"STATE","why":"boatyard builds barges unmarked; Coastal Timber depleted, sawmill lacks timber, no timber import","other":"C41671"}
+{"id":"C41826","town":"bar0-village-calm-rand-42","sev":"MED","kind":"PAIR","why":"says metal is smelted or worked here; the only Blacksmith is marked Short of iron, no iron import","other":"C41654"}
+{"id":"C41828","town":"bar0-village-calm-rand-42","sev":"MED","kind":"PAIR","why":"remedies made and sold here; Apothecary marked Short of its materials, gaps say no herbs","other":"C41647"}
+{"id":"C41850","town":"bar0-village-calm-rand-42","sev":"MED","kind":"PAIR","why":"food comes first of all from fishing; page says fields give grain first, fish beyond; Harvest 67%, fishmonger runs on imported fish","other":"C41847"}
+{"id":"C41900","town":"bar0-village-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"subject and verb disagree: 'Weak defences keeps'","other":""}
+{"id":"C42171","town":"bar0-village-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"shortage mark set as Sophronios Chrysoberges's 'How they deal' line, in front of an unrelated sentence","other":""}
+{"id":"C42208","town":"bar0-village-calm-rand-42","sev":"LOW","kind":"PAIR","why":"sawyer shouts over the noise and turns back to the logs; Sawmill marked Short of timber, timber depleted","other":"C41671"}
+{"id":"DONE","lines":2272,"blocks":2,"flags":13}

@@ -1,0 +1,154 @@
+[
+ {
+  "id": "C21727",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Hunting & Trapping [magically_sustained; its resource Hunting grounds depleted] — cal-09 header LAND",
+   "Hunting & Trapping · Food security✦ Magically Sustained ... Normally yields · Furs and pelts · Leather goods — cal-09 C22513/C22519",
+   "Furs travel from the hunting grounds through trading posts, and the settlements along the route profit from the trade. — cal-09 C22611 (Furs & Pelts is a Trade & entrepôt chain, C22604; town is a crossroads)",
+   "Furrier's district · Economy (no mark); Services · Fur garments · Quality furs (no mark) — cal-09 C21725/C21730"
+  ],
+  "note": "The reader's premise (no furs to be had) is wrong: the town's hunting is magically sustained and yields furs, and furs reach it as entrepôt trade at a crossroads; the furrier's row carries no mark, and 'runs high, quality pelts being luxuries' reads as high prices, which fits scarcity. The tanner's short mark is a different house."
+ },
+ {
+  "id": "C22297",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Proclaim laws, royal decrees, and official notices to the public. — cal-09 C22297 (Town crier service)",
+   "GOVERNMENT: Grand Merchant Oligarchy ... powers: Grand Merchant Oligarchy; Military/Guard; Noble Houses; Merchant Guilds; Arcane Orders; Craft Guilds; The Highborn Circle — cal-09 header",
+   "record s.powerStructure / s.npcs: no crown, king, monarch or royal office anywhere (only the Customs house's hedged 'royal or municipal officials' and a PDF-only culture note 'beneath a chieftain or royal representative')"
+  ],
+  "note": "The crier's line presumes a crown issuing decrees; this oligarchy has no monarch among its powers or people, and nothing in the town supplies one. A one-word fault (low weight), but a real one: 'royal' is not hedged here."
+ },
+ {
+  "id": "C22470",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Wool & Textile Trade Little cloth is made here while the cloth trade is short of what it needs. — cal-09 C22470 (record s.economicState.incomeSources 'Wool & Textile Trade')",
+   "TRADE: ... imports: Paper materials, Wool, ... — cal-09 header; Imports ... Salt · Wool — cal-09 C22484",
+   "Weavers/Textile workers · Crafts · Vulnerable; Services · Cloth production (no 'Short of wool.', no '(short)') — cal-09 C21608/C21612; Cloth production Vulnerable — C22058",
+   "Bolts of cloth hang drying in long bright strips across the yards. — cal-09 C21151"
+  ],
+  "note": "The economics line says the cloth trade is short of its input, but TRADE imports that very input (wool), no cloth house carries a short mark on any tab, and the overview shows cloth drying across the yards. LAND's 'Textiles & Cloth [impaired]' (local grazing depleted) backs 'little cloth' somewhat, but nothing makes the cloth trade short of wool when wool is brought in."
+ },
+ {
+  "id": "C23422",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Secret: Has been burning charcoal in woods that belong to someone else and selling it as their own — cal-09 C23422 (Auðr Ragnarsson, collier @ Charcoal burner)",
+   "Short of timber. Turf-covered kilns for burning wood slowly down to charcoal whenever wood can be had — cal-09 C21693; Services · Charcoal supply (short) — C21696",
+   "No timber reaches the charcoal burner. — cal-09 C22800; Needed, and not brought in: timber ... mountain timber. — C22486",
+   "gaps: Charcoal burner exists but lacks access to mountain_timber — cal-09 header LAND / record s.resourceAnalysis.gaps[0]"
+  ],
+  "note": "The secret has the collier burning and selling charcoal steadily, while the page says flatly that no timber reaches the charcoal burner and none is brought in; the town (Plains) has no woods among its resources and no other house makes charcoal. Same fault family as C23466, C23583, C23768 (timber-short houses shown at work)."
+ },
+ {
+  "id": "C23437",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Flaw: self-serving Temperament: incorruptible / Hidden allegiance answers to Multiple criminal factions / Silent Partnership · Leidolf Illugason — cal-09 C23437-C23439",
+   "Folki Froðason does what Leidolf Illugason asks, and Leidolf Illugason pays for it in coin that never passes through a counting-house. — cal-09 C24361 (World/Relationships)",
+   "Folki Froðason, the bowyer ... · brings information and small favours · a silent partnership — dump Systems/Power, under 'Multiple criminal factions handled by Leidolf Illugason'",
+   "record s.npcs[Folki Froðason].personality.dominant 'incorruptible'; .allegiance {house: 'Multiple criminal factions', vector: 'greed', via: 'retainer', covert: true}"
+  ],
+  "note": "The page calls him incorruptible and, on the same card and in Relationships, shows him paid in off-book coin by the smuggling network's head to do its bidding; the record's own allegiance vector is greed. That is corruption, so the trait word is contradicted by the page itself."
+ },
+ {
+  "id": "C23466",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Secret: Charges every job for more wood than it used and sells the difference on the side — cal-09 C23466 (Gorm Ragnarsson @ Carpenters)",
+   "Carpenters · Crafts · Impaired / Short of timber. Guild-organised carpenters ... — cal-09 C21496/C21497; Services · Building construction (short) · Furniture making (short) · Wagon and cart work (short) — C21500",
+   "Needed, and not brought in: timber — cal-09 C22486; TRADE imports list no timber — header",
+   "other wood houses all marked short: Cooper C21521, Sawmill C21575, Woodcarver C21614, Charcoal burner C21693"
+  ],
+  "note": "The secret shows the carpenters doing every job with wood to spare and selling the surplus, while the card says they are short of timber and the page says timber is not brought in; no unmarked house supplies wood. The hook C21429 ('builders are bidding ... for what is left in the yards') admits a remnant, but not a standing surplus to sell. Same fault as C23422/C23583/C23768."
+ },
+ {
+  "id": "C23541",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Secret: Has been tanning hides from stolen animals brought in with the brands cut out — cal-09 C23541 (the line itself says the animals are brought in)",
+   "Offal and by-products ... Tripe, tallow, bone, hide. ... By-products sold to chandlers and tanners. — cal-09 C22204-C22207 (Butchers, no short mark)",
+   "Secret: Buys stolen livestock at half price from a man who does not say where the animals came from — cal-09 C24012 (the butcher)",
+   "TRADE imports: ... Livestock and dairy (local grazing land depleted) — header; Livestock & Dairy · Food security✦ Magically Sustained — C22499"
+  ],
+  "note": "The secret's own line names the source of the hides (stolen animals brought in), and the town does have hides: livestock is imported and magically sustained, and the unmarked butchers sell hide to tanners and buy stolen stock. Under the brief's rule a line that says the input is brought in is EXPLAINED (the tanner's short mark itself is the weaker line, but it is not what was flagged)."
+ },
+ {
+  "id": "C23583",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Secret: Used poor oak for a large order of casks and the wine and ale in them has been spoiling — cal-09 C23583 (Nanna Hrolfsson @ Cooper)",
+   "Short of timber. Makes barrels for storage and transport. — cal-09 C21521; Services · Barrel making (short) — C21524; Short of timber. Watertight barrels ... — C22044",
+   "Needed, and not brought in: timber — cal-09 C22486"
+  ],
+  "note": "The secret has the cooper filling a large order of oak casks, while the cooper's card and service are marked short of timber and timber is not brought in; no unmarked house makes casks. 'Poor oak' could suggest scraping by, but not a large order. Same fault as C23466/C23422/C23768."
+ },
+ {
+  "id": "C23768",
+  "town": "bar0-metropolis-calm-rand-42",
+  "verdict": "WEAK",
+  "evidence": [
+   "How they deal Tells you which timber is good this year and who has been buying it. — cal-09 C23768 (Sigrid Eyjolfsson @ Sawmill)",
+   "No timber reaches the sawmill. — cal-09 C22801; Short of timber. A mill ... that saws planks — C21575; Services · Lumber milling (short) — C21578",
+   "Timber is short this season, and the builders are bidding against each other for what is left in the yards. — cal-09 C21429"
+  ],
+  "note": "The line does not show the sawmill sawing; it is talk of the timber market, and the page's own hook C21429 has builders bidding for timber left in the yards, so 'who has been buying it' fits a scarce market. Only 'which timber is good this year' sits ill with 'No timber reaches the sawmill': one loose phrase. Same family as C23422/C23466/C23583."
+ },
+ {
+  "id": "C24783",
+  "town": "bar0-metropolis-calm-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "Settlement Origin▲ / Established along a road route. / Trade flows in, goods flow out, people pass through. — cal-10 C24782-C24784 (record s.settlementReason)",
+   "Origin: · was founded to exploit rich mineral deposits — cal-10 C28002 (World/History); FOUNDING reason header",
+   "trade access road; Mountain Pass (available); Iron Ore Deposits (available) — cal-10 header TOWN/LAND",
+   "Ask in Jómsmo why it is here and people will tell you its first reason, though the place has long outgrown it. — cal-10 C28006"
+  ],
+  "note": "The two are not exclusive: a mining town can be established along a road route, and the header gives road access and a mountain pass. But the Overview heads it 'Settlement Origin' and gives the road as the origin, while History gives minerals; a difference of emphasis between two origin lines, not a false statement."
+ },
+ {
+  "id": "C25171",
+  "town": "bar0-metropolis-calm-rand-43",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Weavers/Textile workers · Crafts · Impaired / Short of wool. The making of cloth, usually under a guild. — cal-10 C25170/C25171",
+   "TRADE imports: Stone, Grain, Paper, Paper materials, Salt, Preserved provisions, Charcoal and fuel, Clay and raw materials, Luxury textiles and exotic goods, Timber — cal-10 header (no wool); record s.economicState.primaryImports",
+   "LAND resources: Mountain Timber; Mineral Hot Springs; Wild Foraging Areas; Mountain Pass; Iron Ore Deposits; Ancient Grove — no grazing land (record s.resourceAnalysis.resourceConditions)",
+   "Workhouse: Services · Textile labour — cal-10 C25429; Dyer (no mark) Applies colour to raw or woven cloth — C25096/C25097"
+  ],
+  "note": "A flag against the mark stands only where the header shows the input at hand; here TRADE imports no wool and LAND has no grazing, so the mark is right. The 5% Wool & Textile income can come from unmarked textile houses (Workhouse textile labour, Dyer, tailors on imported luxury textiles); the unmarked income line is judged at C26015."
+ },
+ {
+  "id": "C25757",
+  "town": "bar0-metropolis-calm-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Offal and by-products Vulnerable / Tripe, tallow, bone, hide. / Nothing wasted. / By-products sold to chandlers and tanners. / Butchers — cal-10 C25754-C25758 (no short mark)",
+   "Short of hides. Full-scale tannery ... — cal-10 C25165; Services · Leather goods (short) · Leather production (short) — C25169; Short of hides. Convert raw hides into finished leather — C25676",
+   "How they deal Talks about the farms and the herds; hears who is selling stock and why. — cal-10 C27397 (the butcher)"
+  ],
+  "note": "The unmarked butchers' row has hides going to the tanners, while the only tannery is marked short of hides on both the Institutions and Services tabs; the page prints X and not-X and nothing reconciles them (TRADE imports no livestock or hides either way). The cobbler's short mark (C25082) is the same mismatch."
+ },
+ {
+  "id": "C26015",
+  "town": "bar0-metropolis-calm-rand-43",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Wool & Textile Trade Cloth is woven or finished here. — cal-10 C26015",
+   "Dyer · Crafts (no mark) / Applies colour to raw or woven cloth. / Services · Dyed cloth — cal-10 C25096-C25101",
+   "Textile labour / Processed textiles from compulsory pauper labour. / Workhouse (no mark) — cal-10 C25553/C25554, C25429",
+   "Jómsmo's Weavers/Textile workers can offer less the longer its supplies stay short — cal-10 C25601; imports Luxury textiles and exotic goods — header"
+  ],
+  "note": "Weavers and fuller are marked short, but the line says woven OR finished, and unmarked houses still work cloth here: the Dyer colours woven cloth and the Workhouse turns out processed textiles, with luxury textiles imported; the page itself says the weavers 'can offer less', not nothing. Under the brief's rule another unmarked house makes the good. Borderline: town 42 prints a marked variant of this line where its town is short, and this one prints the bare variant."
+ }
+]

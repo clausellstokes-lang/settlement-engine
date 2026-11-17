@@ -1,0 +1,8 @@
+{"id":"C45774","town":"bar0-village-famine-rand-44","sev":"LOW","kind":"BROKEN","why":"garbled role text: 'next in line, the first choice already holding a role that contradicts this one' reads as an internal note","other":""}
+{"id":"C45848","town":"bar0-village-famine-rand-44","sev":"MED","kind":"STATE","why":"names a 'Trade Monopoly' with one grain importer now; no such event in CRISIS, QUARRELS, TENSIONS or PAST","other":""}
+{"id":"C45891","town":"bar0-village-famine-rand-44","sev":"MED","kind":"STATE","why":"'the ferryman's family' holds the crossing; the ferry keeper Vira Davydov is a woman","other":""}
+{"id":"C45966","town":"bar0-village-famine-rand-44","sev":"MED","kind":"STATE","why":"grain sold by the sack to households, unmarked, in an active famine with rationing and hoarding (CRISIS Famine)","other":""}
+{"id":"C46250","town":"bar0-village-famine-rand-44","sev":"LOW","kind":"PAIR","why":"credits the hedge wizard with detection, wards, counterspell; the page says minor spells and no greater","other":"C45903"}
+{"id":"C46418","town":"bar0-village-famine-rand-44","sev":"LOW","kind":"BROKEN","why":"filter count 'Leverage (1)' but three Mutual Leverage ties are listed (Golubev-Davydov, Andreyev-Davydov, Kiselev-Andreyev)","other":""}
+{"id":"C46532","town":"bar0-village-famine-rand-44","sev":"MED","kind":"PAIR","why":"church blesses the mages' work; Magic tab gives religious acceptance hostile outside the faith's own houses; one hedge wizard, not 'mages'","other":"C46264"}
+{"id":"DONE","lines":867,"blocks":1,"flags":7}

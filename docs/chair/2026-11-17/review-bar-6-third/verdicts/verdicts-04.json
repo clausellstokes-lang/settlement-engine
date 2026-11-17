@@ -1,0 +1,145 @@
+[
+ {
+  "id": "C16576",
+  "town": "bar0-city-wartime-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "Faith carries real weight at Tihomir: what the religious houses say is heard in the city's dealings — cal-06.txt C16202 (Systems/Economics)",
+   "A voice in the city’s affairs belongs to the Religious Authorities. — cal-06.txt C17801 (World/Faith)",
+   "Religious Authorities tell people that City-State Council's rule is right and ordained. ... Each props up the other. — cal-06.txt C16479-C16480",
+   "Close enough to the two above that their support is worth buying — cal-06.txt C16578 (same card)",
+   "Religious Authorities power 18, third of five; houses: Parish churches (10-30), Multiple monasteries, Major hospital — record s.powerStructure.factions; HOUSES"
+  ],
+  "note": "\"Political leverage is limited\" fits a Minor power, but \"at the margins of civic life\" is the opposite of the page's own economics and faith lines (real weight, heard in the city's dealings, a voice in its affairs) and of its own card (support worth buying). Nothing in the town reconciles them."
+ },
+ {
+  "id": "C16838",
+  "town": "bar0-city-wartime-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "Zhanna Tarasov (f), the midwife @ Midwife [sits on: Religious Authorities (rank 3)] — cal-06.txt PEOPLE",
+   "Emergency body with powers over requisition, conscription, and price controls. — cal-06.txt C16580 (War Council card)",
+   "influence: low, power: 1, memberships: Religious Authorities rank 3 only — record s.npcs[npc_midwife]",
+   "Standing marginal ... Unassuming. Easy to overlook. — cal-06.txt C16833-C16837"
+  ],
+  "note": "A secret may state a fact of its own, but this one needs an authority to order a seizure as a war measure. The midwife holds no seat on the War Council (which the page gives the requisition powers) or on the City-State Council, and has power 1, so nothing in the town gives her that authority."
+ },
+ {
+  "id": "C17728",
+  "town": "bar0-city-wartime-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "Early trial: · harassment by a nearby lord — cal-06.txt C17726 (two lines above)",
+   "The trade the settlement was founded to serve failed within its first few years — cal-06.txt C17790",
+   "The Occupation (96 years ago, exile_return, catastrophic); The Purge (139 years ago); The Siege (58 years ago, disaster, major) — cal-06.txt PAST",
+   "Tihomir is busy ... toward a war that is not fought here but is paid for here. — cal-06.txt C15265",
+   "stressNote: \"The settlement grew up in quieter years. Now it feeds and arms a war.\" — record s.history (stock wartime note)"
+  ],
+  "note": "This is the stock wartime note. The same tab's founding and events lines show the town grew up through harassment by a lord, a trade collapse in its first years, a purge, a catastrophic occupation and a siege fought at its walls, which is louder than the present war, a war the page says is not fought here."
+ },
+ {
+  "id": "C17900",
+  "town": "bar0-hamlet-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "HOUSES (12, the whole list): ... Stable yard ... (no warehouse or store) — cal-07.txt header",
+   "hasWarehouse: false — record s (institution flags, two places)",
+   "Communal stable where travelers can leave horses. Stableman provides basic farriery and fodder. — cal-07.txt C17930-C17931"
+  ],
+  "note": "The hook gives the stable keeper a warehouse. The record's own flag (hasWarehouse false) and the whole HOUSES list deny one. A crossroads and toll income do not supply one, and the stable yard's card describes stabling only."
+ },
+ {
+  "id": "C17924",
+  "town": "bar0-hamlet-calm-rand-42",
+  "verdict": "WEAK",
+  "evidence": [
+   "Salt & Preservation [entrepot; its resource Salt flats absent]; gaps: Salt works runs on imported desert_salt — cal-07.txt LAND",
+   "imports: Salt — cal-07.txt TRADE",
+   "Ask where Doirewick gets its salt and somebody will point you at the carts. — cal-07.txt C18086",
+   "It works best where workable brine lies close by. — cal-07.txt C17925 (same card)"
+  ],
+  "note": "The card is the catalogue description, and it hedges (\"whenever brine can be had\", \"works best where workable brine lies close by\"). The economics tab says plainly that the salt comes by cart. What is off: in a town with no brine and with imported desert salt, the card still implies the house yields raw salt from brine and never says that it handles bought salt."
+ },
+ {
+  "id": "C18308",
+  "town": "bar0-hamlet-calm-rand-42",
+  "verdict": "WEAK",
+  "evidence": [
+   "Malachy Murray made Tlachtga Doherty's career, and Tlachtga Doherty rarely says so. — cal-07.txt C18302",
+   "two mentor_student ties to npc_mine_open_cast (from npc_stone_quarry 'formal'; from npc_salt_works 'lifelong') — record s.relationships",
+   "Called by · Malachy Murray · Mentor and Successor / Called by · Scannlán Doherty · Mentor and Successor — cal-07.txt C18244-C18245"
+  ],
+  "note": "The record really does give Tlachtga two mentors. \"Made her career\" (the quarry master, in the mining trade) and \"owes her place\" (the salt master, her seat) can both be true, but a reader sees two people each credited with her rise. It is a doubled-patron oddity, not a flat falsehood."
+ },
+ {
+  "id": "C18497",
+  "town": "bar0-hamlet-calm-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Short of livestock. A dairy for milk, butter, and cheese from cattle or goats, whenever livestock can be had. — cal-07.txt C18501",
+   "Needed, and not brought in: timber (for large vessels), livestock, mountain timber. — cal-07.txt C18611",
+   "No livestock reaches the dairy farmer. — cal-07.txt C18642",
+   "chains: \"Pastoral & livestock\": false; imports reasons: \"livestock\": \"... not available in Coastal terrain\" — record s.economicState / s.resourceAnalysis",
+   "Pasturage: Grazing on the common for a traveller's beasts, for a small fee. — record s.availableServices.transport (cal-07.txt C18591)"
+  ],
+  "note": "The pasture row has no mark and says the hamlet has livestock of its own. The page and the record say the hamlet has none: no livestock reaches the dairy, it is needed and not brought in, and the pastoral chain is false. The only beasts the record puts on the common are travellers' beasts, which is not this line's claim."
+ },
+ {
+  "id": "C18685",
+  "town": "bar0-hamlet-calm-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "Elder Council ~ Military/Guard: subordinate, stable — cal-07.txt QUARRELS",
+   "The Guard carries out what Elder Council decides. — cal-07.txt C18691",
+   "Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. — cal-07.txt C18721 (same power's card)",
+   "Shancheng has people who would take the hall if they could. For now they cannot — cal-07.txt C18695-C18696"
+  ],
+  "note": "\"Contests the seat\" is the status label the panel gives every power that is not the ruler (\"The Seat and Its Contenders\"). Its own card softens it to petitions and procedure, and the page says the would-be challengers cannot act. Beside a subordinate, stable tie the label overstates by a word of degree. It is not a flat false statement."
+ },
+ {
+  "id": "C18706",
+  "town": "bar0-hamlet-calm-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Minghao Li (m), the militia captain [sits on: Elder Council (rank 3); Military/Guard (rank 1)] — cal-07.txt PEOPLE",
+   "↳ · 1 member · first Minghao Li — cal-07.txt C18686",
+   "memberships: Elder Council rank 3 share 0.7; Military/Guard rank 1 share 0.3 — record s.npcs[Minghao Li]"
+  ],
+  "note": "The record's 0.3 is the share of Minghao Li's own weight that he puts into the Guard, not a third of the Guard. The page prints it as \"holds a third share in The Guard\", which reads as a minor stake in a power whose first and only member he is (C18686). C18712 has the same fault."
+ },
+ {
+  "id": "C18984",
+  "town": "bar0-hamlet-calm-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "stability: Unstable (pervasive organized crime) · legitimacy: Legitimacy Crisis — cal-07.txt GOVERNMENT (Strathmere)",
+   "Law & order · Collapsed — cal-07.txt C19022",
+   "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands — cal-07.txt C19008 (same tab)",
+   "prosperity Struggling — cal-07.txt STATE"
+  ],
+  "note": "This is a calm-times reassurance (the stock arrival scene) in a hamlet that the header gives as unstable through pervasive organized crime, in a legitimacy crisis, with law and order collapsed. Under the second check's rule 3 that is a fault, and nothing in the town reconciles it."
+ },
+ {
+  "id": "C19015",
+  "town": "bar0-hamlet-calm-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Nessa Lynch · Pragmatic Alliance · Sorcha MacDonald — cal-07.txt C19348 (World/Relationships)",
+   "type ally, typeName Pragmatic Alliance, tension: \"Sorcha MacDonald has asked Nessa Lynch to back a candidate ... Refusing would cost the alliance its majority.\" — record s.relationships[tie_npc_veiled_fbab6a22aab3764e]",
+   "Nessa Lynch (f), the smuggler @ Smuggling waypoint (no seat) — cal-07.txt PEOPLE"
+  ],
+  "note": "The flagged sentence holds: backing a candidate needs no seat, and \"the alliance\" is the two women's own Pragmatic Alliance, printed on the page. The reader's real objection is to the next line, C19016 (\"cost the alliance its majority\"), which does presume a vote that Nessa Lynch, who holds no seat, cannot cast. That line is not in this batch and should be judged under its own id."
+ },
+ {
+  "id": "C19260",
+  "town": "bar0-hamlet-calm-rand-44",
+  "verdict": "WEAK",
+  "evidence": [
+   "safetyLabel: Moderate; safetyDesc: \"The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.\" — record s (safetyProfile); same text in calm Doirewick's record",
+   "safety Moderate — cal-07.txt STATE (Strathmere)",
+   "Nobody at Strathmere is paid to keep order; what order the place has, its own people keep. — cal-07.txt C19261",
+   "Criminal work at Strathmere is coordinated enough to hold routes and territories — cal-07.txt C19266"
+  ],
+  "note": "This is the stock description of safety \"Moderate\", which the header also gives, and in a hamlet of 28 neighbours watching and news travelling are true. Only \"what trouble there is\" carries a calm-times, minimising tone, beside pervasive organized crime and collapsed law and order. The next lines state the crime plainly."
+ }
+]

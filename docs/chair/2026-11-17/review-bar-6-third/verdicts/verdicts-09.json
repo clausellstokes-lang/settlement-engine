@@ -1,0 +1,50 @@
+[
+ {"id": "C44148", "town": "bar0-village-famine-rand-42", "verdict": "STANDS",
+  "evidence": [
+   "C44147 Volker Müller / C44148 Their master craftsman is talking to a rival. — cal-20.txt (hook is on Volker Müller's own line)",
+   "Volker Müller (m), the priest @ Parish church — cal-20.txt PEOPLE",
+   "\"role\": \"the priest\", \"category\": \"religious\", \"plotHooks\": [\"Their master craftsman is talking to a rival. ...\"] — corpus s.npcs[npc_parish_church]",
+   "Connection: Vicar Volker Müller — dump Systems/Institutions (House of worship card)"
+  ],
+  "note": "The hook belongs to the priest by its own line, and a vicar of a parish church has no master craftsman; no craft house, mason or workshop is tied to the church on HOUSES or in his record. A craft-house hook given to a religious figure."},
+ {"id": "C44405", "town": "bar0-village-famine-rand-42", "verdict": "STANDS",
+  "evidence": [
+   "Imports · ... Mail and iron fittings · Replacement arms and basic equipment · Salt — cal-20.txt C44403 (same panel, two lines above)",
+   "Needed, and not brought in: metals, luxury goods, animal hides. — cal-20.txt C44405",
+   "\"critical\": [\"metals\", ...], \"metals\": \"Riverside terrain cannot produce this locally\" — corpus s.resourceAnalysis.imports",
+   "\"resource\": \"Iron\", \"detail\": \"iron for weapons and basic armour\" (Citizen militia) — corpus s.economicState.tradeDependencies"
+  ],
+  "note": "The only metal need in the record is the militia's iron for weapons and armour, and the import list on the same panel brings in exactly that (mail, iron fittings, replacement arms); no smith or other house needs raw metal. Saying metals are not brought in contradicts the line two rows up."},
+ {"id": "C44759", "town": "bar0-village-famine-rand-42", "verdict": "STANDS",
+  "evidence": [
+   "How they deal Tells you which timber is good this year and who has been buying it. — cal-20.txt C44759 (Theodelinde Weber, Sawmill, Master Sawyer)",
+   "Sawmill · Crafts / Short of timber. Water- or ox-powered saw. — dump Systems/Institutions; Services · Lumber milling (short)",
+   "No timber reaches the sawmill. — dump Systems/Resources, Gaps & Opportunities",
+   "\"impact\": \"Sawmill exists but lacks access to timber\" — corpus s.resourceAnalysis.gaps; imports.critical includes mountain_timber"
+  ],
+  "note": "The sawyer's own line speaks of this year's timber and its buyers while her house is marked Short of timber and the page says no timber reaches it; no other house on HOUSES works timber and TRADE imports none (the 'Sacred wood' export is a ritual good from the Ancient Grove, not a timber trade). The line carries no mark. (Separately, the Economics chain 'River Mill Industry ... Via Mill · Sawmill ... Milled lumber · Running' is a further unmarked sawmill line, not flagged here.)"},
+ {"id": "C45269", "town": "bar0-village-famine-rand-43", "verdict": "STANDS",
+  "evidence": [
+   "River fish · Freshwater catch · Healing waters (bottled) · Coal · Salted fish · Smoked seafood — cal-20.txt C45269 (Exports, no mark)",
+   "failed source fish · famine cut 65% — cal-20.txt FOOD",
+   "Fish & Preserved Produce Scarce in the famine. — cal-20.txt C45262 (same tab, income row marked)",
+   "With the fishing gone, Kulubtitlan faces the season ahead on its stores — cal-20.txt C45283",
+   "Outputs Salted fish · Smoked seafood · Freshwater catch / Scarce in the famine. — dump Systems/Economics, Fishing & Seafood flow; River Fisheries (failed) · fish (failed) — dump Systems/Resources"
+  ],
+  "note": "The same tab marks the fish income and the fishing chain's outputs (salted fish, smoked seafood, freshwater catch) as scarce and says the fishing is gone, while the export row lists those very goods bare. Same good marked in one place and unmarked in another, with no other fish source in the town (the Fish market itself is marked Scarce)."},
+ {"id": "C45891", "town": "bar0-village-famine-rand-44", "verdict": "WEAK",
+  "evidence": [
+   "The ferryman's family holds the crossing rights, and every crossing pays the family its fare. — cal-21.txt C45891 (River ferry card)",
+   "Connection: Ferry Keeper Vira Davydov — cal-21.txt C45892",
+   "Vira Davydov (f), the ferry keeper @ River ferry — cal-21.txt PEOPLE; corpus s.npcs[npc_river_ferry].institution.title = \"the ferryman\" (page prints the neutral 'Ferry Keeper')"
+  ],
+  "note": "The reader's premise is right: the ferry's only named keeper is a woman, so 'the ferryman' is the wrong-sex word for her. But the sentence does not name her or give her the title; it says the family holds the rights, which is not false. One loose generic word in a house description, not a false statement."},
+ {"id": "C45966", "town": "bar0-village-famine-rand-44", "verdict": "STANDS",
+  "evidence": [
+   "Grain at harvest / Grain sold by the sack to a household, straight from the field at harvest. — cal-21.txt C45965-C45966 (no mark; fish rows beside it carry 'Scarce in the famine.')",
+   "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry. — dump Summary/Crisis",
+   "black market food / Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels. — dump Systems/Defense",
+   "Grain Holders split · it holds what is left of the food stores — dump Summary/Crisis; 'In Kamenvich whoever holds grain decides who eats' — dump Notes"
+  ],
+  "note": "Grain is not the failed source (fish is), but the page's own famine lines make grain the rationed, hoarded and controlled good, sold only at extortionate prices off the books; an unmarked row of grain sold freely by the sack to households is the ordinary-times scene the crisis plainly touches. Nothing in the town reconciles it."}
+]

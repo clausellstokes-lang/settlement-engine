@@ -1,0 +1,10 @@
+{"id":"C9756","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"pilgrims crowd the road in: ordinary-times scene in an isolated town under Wartime pressure, with no mark","other":""}
+{"id":"C10755","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"PAIR","why":"says cloth is woven here as a Wool & Textile income stream; the weavers' card is marked Short of wool","other":"C10142"}
+{"id":"C10793","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"STATE","why":"Mining & Quarrying drawn from coal deposits; LAND gives this chain's resource as iron ore deposits, absent","other":""}
+{"id":"C11219","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"LACKS","why":"unofficial landing points in an isolated hill city with no docks, river or harbour on HOUSES","other":""}
+{"id":"C11621","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"PAIR","why":"cobbler 'makes what is ordered' with no mark; the Cobbler's guild card and every row are marked Short of hides","other":"C10077"}
+{"id":"C11875","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"PAIR","why":"master weaver takes an order of any size, unmarked; the weavers' card and cloth row are marked Short of wool","other":"C10142"}
+{"id":"C12139","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"PAIR","why":"Olia Karpov's council owes Rumena Vorobev a debt to repudiate; elsewhere Rumena seeks a favour to count against what she owes Olia","other":"C11650"}
+{"id":"C12371","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"PAIR","why":"closes every year ahead, margin dependable: calm-times line under Wartime; elsewhere the war takes most of the money, paid from reserves","other":"C11204"}
+{"id":"C12449","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"'the mountain trade the settlement was built upon'; terrain is Hills and founding reason is a resource deposit","other":""}
+{"id":"DONE","lines":2804,"blocks":1,"flags":9}

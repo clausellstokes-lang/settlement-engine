@@ -1,0 +1,34 @@
+{"id":"C17868","town":"bar0-hamlet-calm-rand-42","sev":"LOW","kind":"STATE","why":"'little to spare' where STATE says Comfortable and FOOD a 21% surplus","other":""}
+{"id":"C17900","town":"bar0-hamlet-calm-rand-42","sev":"MED","kind":"LACKS","why":"stable keeper's 'warehouse'; HOUSES (whole list) has no warehouse or store","other":""}
+{"id":"C17924","town":"bar0-hamlet-calm-rand-42","sev":"MED","kind":"STATE","why":"salt works boils brine to make raw salt; LAND gives salt flats absent, salt works runs on imported salt, TRADE imports Salt","other":""}
+{"id":"C17987","town":"bar0-hamlet-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"'Healing (3)' heading over Burial, Last rites, Weekly rite: none is healing","other":""}
+{"id":"HEADER","town":"bar0-hamlet-calm-rand-42","sev":"LOW","kind":"RECORD","why":"LAND gap says iron ore not processed, yet Iron & Metalwork chain running and iron, metalwork made here","other":""}
+{"id":"C18248","town":"bar0-hamlet-calm-rand-42","sev":"LOW","kind":"STATE","why":"'With nothing pressing' where TENSIONS gives a live resource scarcity with hoarders","other":""}
+{"id":"C18308","town":"bar0-hamlet-calm-rand-42","sev":"MED","kind":"PAIR","why":"Tlachtga owes her place to Scannlán; the page also says Malachy made Tlachtga's career (two mentor-successor claims)","other":"C18302"}
+{"id":"C17892","town":"bar0-hamlet-calm-rand-42","sev":"LOW","kind":"STATE","why":"hook of a mine captain selling a 'batch' that sickened a customer: fits a food maker, not an ore mine","other":""}
+{"id":"C18497","town":"bar0-hamlet-calm-rand-43","sev":"MED","kind":"PAIR","why":"shared pasture for the hamlet's livestock; LAND gap and the dairy card say no livestock reaches the dairy","other":"C18501"}
+{"id":"C18536","town":"bar0-hamlet-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"'2 impaired' over three items all printed short of timber (charcoal supply too)","other":""}
+{"id":"C18562","town":"bar0-hamlet-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"'Healing (4)' heading over burial, marriage, wayside blessing, weekly rite: none is healing","other":""}
+{"id":"C18578","town":"bar0-hamlet-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"'Legal & financial (1)' heading over Emergency defense","other":""}
+{"id":"HEADER","town":"bar0-hamlet-calm-rand-43","sev":"LOW","kind":"RECORD","why":"TRADE says salt made here, but HOUSES has no salt works and LAND no salt chain","other":""}
+{"id":"C18685","town":"bar0-hamlet-calm-rand-43","sev":"MED","kind":"STATE","why":"Military/Guard 'Contests the seat'; QUARRELS gives it subordinate, stable, and the page says it carries out what the Council decides","other":"C18691"}
+{"id":"C18706","town":"bar0-hamlet-calm-rand-43","sev":"MED","kind":"PAIR","why":"Minghao Li 'holds a third share in The Guard'; PEOPLE and the page give him first (rank 1), its only member","other":"C18686"}
+{"id":"C18905","town":"bar0-hamlet-calm-rand-43","sev":"MED","kind":"STATE","why":"'plainly past subsistence', stores 'more than the season needs'; Economics prints 'Subsistence economy', FOOD surplus 2%, 1.5 months stores","other":"C18594"}
+{"id":"C18819","town":"bar0-hamlet-calm-rand-43","sev":"LOW","kind":"STATE","why":"'With nothing pressing' where TENSIONS gives a live occupation-legacy quarrel","other":""}
+{"id":"C18984","town":"bar0-hamlet-calm-rand-44","sev":"MED","kind":"STATE","why":"'ordinary in the best sense' where GOVERNMENT gives Unstable (pervasive organized crime), Legitimacy Crisis, law & order Collapsed","other":""}
+{"id":"C18987","town":"bar0-hamlet-calm-rand-44","sev":"LOW","kind":"LACKS","why":"'a small crowd by the well' in a hamlet of 28","other":""}
+{"id":"C19015","town":"bar0-hamlet-calm-rand-44","sev":"MED","kind":"STATE","why":"Nessa Lynch's backing would cost 'the alliance its majority'; PEOPLE gives her no seat on any power, and the council holds no alliance","other":""}
+{"id":"C19104","town":"bar0-hamlet-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"'Healing (3)' heading over burial, wayside blessing, weekly rite: none is healing","other":""}
+{"id":"HEADER","town":"bar0-hamlet-calm-rand-44","sev":"LOW","kind":"RECORD","why":"TRADE makes 'Education (basic)' in a hamlet of 28 with no school on HOUSES; iron ore available and unworked yet gaps none","other":""}
+{"id":"C19260","town":"bar0-hamlet-calm-rand-44","sev":"MED","kind":"PAIR","why":"calm 'neighbours keep an eye... everyone soon hears of' trouble, where stability is pervasive organized crime and law & order Collapsed","other":"C19266"}
+{"id":"C19266","town":"bar0-hamlet-calm-rand-44","sev":"LOW","kind":"LACKS","why":"criminal work holding 'routes and territories' (and 'several gangs') in a hamlet of 28 with one smuggling waypoint","other":""}
+{"id":"C19383","town":"bar0-hamlet-calm-rand-44","sev":"LOW","kind":"STATE","why":"people tell 'its first reason' and the place 'long outgrown it'; FOUNDING reason None and it is a hamlet of 28","other":""}
+{"id":"C19451","town":"bar0-hamlet-under_siege-rand-42","sev":"MED","kind":"STATE","why":"calm 'outlasted grander neighbours by getting the small things right' under a siege, Legitimacy Crisis, not viable, 71% food deficit","other":""}
+{"id":"C19487","town":"bar0-hamlet-under_siege-rand-42","sev":"MED","kind":"STATE","why":"ordinary-times newcomers arriving and asked their work; under the siege nothing comes in by road","other":"C19493"}
+{"id":"HEADER","town":"bar0-hamlet-under_siege-rand-42","sev":"LOW","kind":"RECORD","why":"TRADE makes foraged goods, honey, herbs though LAND gives foraging areas absent; Education (basic) made in a hamlet of 38 with no school","other":""}
+{"id":"C19589","town":"bar0-hamlet-under_siege-rand-42","sev":"MED","kind":"PAIR","why":"mill card marked 'Stopped by the siege', yet its row prints 'Grain milling (a day away)' on offer with no mark","other":"C19588"}
+{"id":"C19613","town":"bar0-hamlet-under_siege-rand-42","sev":"LOW","kind":"BROKEN","why":"'Healing (3)' heading over burial, wayside blessing, weekly rite: none is healing","other":""}
+{"id":"C19892","town":"bar0-hamlet-under_siege-rand-42","sev":"MED","kind":"STATE","why":"unmarked ordinary-times line of visitors walking the hills; under the siege the besiegers 'let nobody through'","other":"C19777"}
+{"id":"C19919","town":"bar0-hamlet-under_siege-rand-42","sev":"MED","kind":"PAIR","why":"'some needs are met and some postponed, month to month' under a siege with a 71% deficit; the page says the settlement is starving","other":"C19549"}
+{"id":"C19943","town":"bar0-hamlet-under_siege-rand-42","sev":"LOW","kind":"STATE","why":"'long outgrown' its first reason (a mining camp); a hamlet of 38 with no mine on HOUSES","other":""}
+{"id":"DONE","lines":2302,"blocks":5,"flags":33}

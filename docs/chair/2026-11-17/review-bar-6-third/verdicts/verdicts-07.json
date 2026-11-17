@@ -1,0 +1,127 @@
+[
+ {
+  "id": "C28668",
+  "town": "bar0-metropolis-calm-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "Short of coal. Charcoal kilns, tended day and night while a burn lasts, whenever wood can be had. — cal-11 C28668; dump Systems/Institutions line 491; chip 'Charcoal supply (short)' C28672",
+   "Charcoal burner: Charcoal burner runs on imported mountain_timber — cal-11 header LAND gaps; record resourceAnalysis.gaps[1] (kind: imported)",
+   "imports: Timber (local managed woodland cleared) — cal-11 header TRADE",
+   "Timber & Lumber [magically_sustained] / 'Druidic forest management speeds the regrowth of the cleared woodland' — header LAND; dump Systems/Economics",
+   "Fuel & Heating · Impaired · From Coal or peat deposits (depleted) · Via Charcoal burner — dump Systems/Economics; record economicState.activeChains[4] (the mark's source)"
+  ],
+  "note": "A charcoal burner works wood, not coal, and the record itself says this house runs on imported timber (TRADE imports Timber, woodland magically sustained), so the input is at hand; the 'Short of coal' mark comes from the depleted coal/peat Fuel chain hung on the kilns and wrongly tells the reader the house has nothing to work."
+ },
+ {
+  "id": "C30429",
+  "town": "bar0-metropolis-calm-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "How they deal Short of salt. Sells by the sack and the cart; the price goes up before winter. — dump World/NPCs line 2105 (one printed line; packet splits it as C30428 + C30429)",
+   "Salt works · Short of salt. ... Services · Salt production (short) — cal-11 C28766, C28770"
+  ],
+  "note": "The flagged sentence is the second half of the saltmaster's 'How they deal' line, which as printed opens with the mark 'Short of salt.'; under the brief's short-mark rule a line that carries the mark itself is covered. Same pattern as C31082."
+ },
+ {
+  "id": "C31082",
+  "town": "bar0-metropolis-calm-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "How they deal Short of grapes. Pours a taste, talks about the year's grapes and suggests a cask. — dump World/NPCs line 2754 (one printed line; packet splits it as C31081 + C31082)",
+   "Vintner · Crafts / Short of grapes. Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. — dump Systems/Institutions line 420"
+  ],
+  "note": "The vintner's dealing line as printed opens with its own mark 'Short of grapes.', so by the brief's rule the line carries the mark and is not a bare ordinary-day claim. Same pattern as C30429."
+ },
+ {
+  "id": "C32251",
+  "town": "bar0-thorp-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Ripasaltus is always short of money for its defence: no money is laid by to pay for a long one — cal-12 C32229",
+   "Constraint: Cannot pay for the repairs and relief people want without coin the place does not have. — cal-12 C32294",
+   "population 11 · STATE: prosperity Poor — cal-12 header",
+   "Ripasaltus sits on its river and stays poor all the same. — cal-12 C32120"
+  ],
+  "note": "'It could keep soldiers and does not' says the thorp can afford a standing force by choice, while the same page says it is always short of money for defence and cannot pay for what people want; a Poor thorp of eleven, with nothing in the record making soldiers affordable. PAIR with C32229."
+ },
+ {
+  "id": "C34291",
+  "town": "bar0-town-calm-rand-42",
+  "verdict": "WEAK",
+  "evidence": [
+   "Alchemist shop · Crafts · Impaired / Short of its materials. Sells potions and alchemical goods. / Services · Component identification · Potion brewing (short) — cal-13 C33356, C33357, C33361",
+   "Großdorf's Alchemist shop is open but short of supplies, and it can do less than it used to. — cal-13 C33859 (Systems/Services)",
+   "imports: ... Alchemical reagents and scribal supplies; exports: Alchemical trade (potions, reagents) — cal-13 header TRADE",
+   "Alchemical Trade · Service · Export ○ Operational · Via: alchemist shop — cal-13 C34039-C34040; INCOME Apothecary & Alchemy 3%"
+  ],
+  "note": "The alchemist shop is the only house making alchemical goods and carries the short mark, and the defence line names its preparations with no mark; but the page's own fuller word for the shop is 'Impaired' and 'open but short of supplies, and it can do less than it used to', TRADE imports alchemical reagents, and the Economics tab prints the alchemical trade as operational, so preparations are still made, only fewer: a matter of degree (the line lacks a 'reduced' note), not a flat falsehood."
+ },
+ {
+  "id": "C34617",
+  "town": "bar0-town-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "terrain Desert/Arid; LAND resources: Fine Glass Sand; Camel Herds; Salt Flats; Strategic Crossroads; Gemstone Deposits (no woodland) — cal-13 header; record config.nearbyResources",
+   "No timber reaches the charcoal burner. — cal-13 C34076",
+   "Needed, and not brought in: timber and building wood ... mountain timber — cal-13 C33932",
+   "Short of timber. Charcoal kilns ... whenever wood can be had. — cal-13 C33481"
+  ],
+  "note": "The collier is written as a woodland figure who 'answers questions about the woods', but this desert town has no woods in its record and the page says no timber reaches the kilns and none is brought in; nothing (grove, import, magic) in the town supplies woods for her to know."
+ },
+ {
+  "id": "C35708",
+  "town": "bar0-town-calm-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Church Council holds the seat and collects the taxes; Religious Authorities tell people that Church Council's rule is right and ordained. Each props up the other. — cal-14 C35725-C35726; record powerStructure.factionRelationships[1] (dependent, stable)",
+   "QUARRELS: none — cal-14 header; record powerStructure.conflicts = []",
+   "Contests the seat · Religious · 46 — cal-14 C35708 (and again C35776)"
+  ],
+  "note": "The page says the Religious Authorities contest the seat while its own web says they proclaim the Council's rule right and ordained and prop it up, with no conflict in the record; their Dominant weight (46 vs 44) makes them a rival in strength, not a contester. Same fault as C35715 (every non-ruling power gets 'Contests the seat')."
+ },
+ {
+  "id": "C35715",
+  "town": "bar0-town-calm-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "The Guard carries out what Church Council decides. The soldiers enforce the law; they do not make it. — cal-14 C35721-C35722; record factionRelationships[0] (subordinate, stable)",
+   "They are always at the table, but cannot set their own terms. — cal-14 C35780; record factions[2].desc",
+   "Contests the seat · Military · 10 — cal-14 C35715 (and again C35778)"
+  ],
+  "note": "A Minor, subordinate guard that 'enforce[s] the law; does not make it' and 'cannot set their own terms' is printed as contesting the seat; nothing in QUARRELS, TENSIONS or the record shows it doing so. Same fault as C35708."
+ },
+ {
+  "id": "C35954",
+  "town": "bar0-town-calm-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Temperament: incorruptible / Disposition incorruptible — cal-14 C35948, C35953 (Saturninus Rufus's card)",
+   "How they deal A visit or a blanket can be had, if the coin is right. — cal-14 C35954",
+   "Secret: Lost a prisoner to a fever months ago and has gone on drawing the prisoner's bread — cal-14 C35955"
+  ],
+  "note": "The same card calls the gaoler incorruptible twice and then has him sell prisoners' visits and blankets for the right coin (and, in his secret, defraud the bread ration); nothing reconciles 'incorruptible' with taking coin for favours. PAIR with C35948/C35953."
+ },
+ {
+  "id": "C36026",
+  "town": "bar0-town-calm-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "Hunting Grounds (depleted) — cal-14 header LAND",
+   "Little is left worth taking from the hunting grounds at Cerroripa this year, and it will be some seasons before there is more. — cal-14 C35665",
+   "imports: Game and hides (local hunting grounds exhausted) — cal-14 header TRADE",
+   "Ancient Grove (available) — cal-14 header LAND (the woods exist)"
+  ],
+  "note": "The bowyer's talk of the woods is fine (Ancient Grove available), and 'where the hunting has been best' is comparative chat, not a claim that game is taken or sold; the only mismatch is an ordinary-times hunting tone in a town whose grounds are depleted and whose game is imported, a matter of tone and degree."
+ },
+ {
+  "id": "C36207",
+  "town": "bar0-town-calm-rand-43",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "The standing of living / Cerroripa is short more often than not. Some needs are met and some are postponed, and which is which changes month to month. — dump PDF section lines 2376-2377 (the same sentence under its export heading)",
+   "STATE: prosperity Struggling — cal-14 header; record economicState.prosperity = Struggling, situationDesc 'Little coin changes hands here'",
+   "Holds the seat while money is short — cal-14 C35883"
+  ],
+  "note": "The sentence is the town's standard-of-living line (the printed export heads it 'The standing of living', and it goes on 'some needs are met and some are postponed'), true of a Struggling town; it is not a food claim, so Food Secure and 5.3 months' stores do not contradict it."
+ }
+]

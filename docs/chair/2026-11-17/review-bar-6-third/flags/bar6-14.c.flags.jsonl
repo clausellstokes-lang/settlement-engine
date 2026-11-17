@@ -1,0 +1,9 @@
+{"id":"C35664","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"PAIR","why":"says it lacks only one Smelter; the needs line names a Blacksmiths' guild too, also absent from HOUSES","other":"C35654"}
+{"id":"C35690","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"STATE","why":"calls Cerroripa 'the village'; the record's size word is town (1530)","other":""}
+{"id":"C35708","town":"bar0-town-calm-rand-43","sev":"MED","kind":"PAIR","why":"Religious Authorities 'contests the seat', yet the web has them dependent, stable, propping up the Council's rule as ordained","other":"C35725"}
+{"id":"C35715","town":"bar0-town-calm-rand-43","sev":"MED","kind":"PAIR","why":"Military/Guard 'contests the seat', yet QUARRELS has it subordinate, stable: soldiers enforce the law, do not make it","other":"C35722"}
+{"id":"C35954","town":"bar0-town-calm-rand-43","sev":"MED","kind":"PAIR","why":"Saturninus Rufus is printed 'incorruptible', yet his dealing sells visits and blankets for coin","other":"C35948"}
+{"id":"C35966","town":"bar0-town-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"'Short of clay.' printed as the whole How-they-deal line; the next line has him filling orders by the firing","other":"C35967"}
+{"id":"C36026","town":"bar0-town-calm-rand-43","sev":"MED","kind":"STATE","why":"talks of where the hunting has been best; LAND gives Hunting Grounds depleted, game imported as exhausted","other":""}
+{"id":"C36207","town":"bar0-town-calm-rand-43","sev":"MED","kind":"PAIR","why":"'short more often than not' printed under Food Secure; FOOD band secure, 5.3 months stored, the page says it has enough","other":"C35586"}
+{"id":"DONE","lines":1200,"blocks":1,"flags":8}

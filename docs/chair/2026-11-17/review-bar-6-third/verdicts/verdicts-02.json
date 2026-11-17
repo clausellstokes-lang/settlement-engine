@@ -1,0 +1,175 @@
+[
+ {
+  "id": "C3586",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. — cal-02.txt C3906 (Outlook)",
+   "Curtailed by the siege. Every quarter has its forges — cal-02.txt C3946 (Blacksmiths card); all four smith services (curtailed) C3949",
+   "Specialized metalworkers and Smelter also 'Curtailed by the siege.' — cal-02.txt C4048, C4043",
+   "TRADE imports 'Iron (weapons)'; C5405 'Trade by road, gate and water has stopped' — header TRADE / cal-02.txt C5405"
+  ],
+  "note": "An unmarked ordinary-times scene of forges hammering everywhere, while the page's own Outlook says the smiths have no iron and every metal house is marked curtailed; nothing in the town (no other iron source, no magic forge) reconciles it."
+ },
+ {
+  "id": "C4170",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Curtailed by the siege. Purpose-built for road travellers ... Horses changed here — cal-02.txt C4166 (Coaching inn card, the same card as the chip line)",
+   "Horse change: Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out. — dump PDF/Institutions and Systems/Services (Horse change row)"
+  ],
+  "note": "The chip line sits under a card that carries 'Curtailed by the siege.' (the brief's rule: a chip under a marked card is covered by the card's mark), and the Services tab's own Horse change row says none go out while the siege holds; no tab prints horse change under an unmarked house."
+ },
+ {
+  "id": "C4215",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "Merchant Guild Council vs Grain Holders: high — header QUARRELS",
+   "Fedor Andreyev (m), the senior guild master @ Merchant guilds (15-40) [sits on: Merchant Guild Council (rank 1)] — header PEOPLE; record npcs[3].memberships = [Merchant Guild Council rank 1]",
+   "Grain Holders: A commercial house of this power ... Merchant guilds — dump Systems/Power [opened] Contender · Grain Holders",
+   "Leading members of both powers are partners in the same business, one that skirts the law — cal-02.txt C3882"
+  ],
+  "note": "Odd but not a false statement: the page consistently files the Merchant guilds house under Grain Holders (every commercial house goes there) while its head chairs the rival council; no record field ties the house to the council, and C3882 says leading members of both powers do business together. A careful owner would call it a loose assignment, not a contradiction of fact."
+ },
+ {
+  "id": "C5098",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Intelligence & Communications ... Operational / Via Post relay station · Sage's quarter / Outputs ... Long-distance messages — cal-02.txt C5098-C5102",
+   "Stopped by the siege. Maintains a team of horses for rapid message relay — cal-02.txt C4228; 'Message relay (stopped) · Parcel forwarding (stopped)' C4232",
+   "To reach Beloko you would have to cross the besiegers' lines first, and they let nobody through. — cal-02.txt C5404",
+   "chains whose via houses are stopped are printed Impaired, e.g. 'Boatbuilding & River Transport ... Impaired' — cal-02.txt C4993"
+  ],
+  "note": "The chain is printed Operational with current 'Outputs' including long-distance messages through the post relay, which the Institutions tab marks Stopped by the siege; the Rookery's unmarked bird message is not named in this chain, so nothing on the row reconciles it."
+ },
+ {
+  "id": "C5129",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Port Revenue · Service · Export stopped○ Operational / Via: · docks/port facilities — cal-02.txt C5129-C5130",
+   "Docks/port facilities ... Stopped by the siege. ... Vessel mooring (stopped) · Cargo loading and unloading (stopped) — cal-02.txt C4181, C4184",
+   "record economicState.institutionalServices[Port Revenue].status = 'operational' (ordinary-times value printed as-is)"
+  ],
+  "note": "The row's 'Export stopped' covers the export, but it still prints the port service Operational through docks whose card and every service are stopped; other rows whose house is impaired print 'Impaired' (C5114, C5120, C5123), so the page has the means and did not apply it here."
+ },
+ {
+  "id": "C5145",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "CRIMINAL SUPPLY CHAINS / smuggling · entrepot / black market · operational — dump PDF/EconomicsTrade",
+   "With the siege closed round the place, what goods are left change hands in back rooms and after dark — cal-02.txt C5143",
+   "Smuggling & Contraband ... Impaired ... Stopped by the siege. — cal-02.txt C5021, C5026; Smuggling network card 'Stopped by the siege.' C4091"
+  ],
+  "note": "The reader's premise is wrong: the row is two chips, 'Smuggling · Transhipment hub' and 'Black market · Operational' (the PDF prints them apart), and the black market working is what C5143 says. What is left is the Smuggling chip carrying its kind label 'Transhipment hub' with no stopped mark, which another row of the same tab marks stopped. That is a missing mark on a label, not a false claim that smuggling runs."
+ },
+ {
+  "id": "C5401",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "defence Defensible — header STATE",
+   "The gates are shut against the siege, and the garrison and city watch hold them. — cal-02.txt C5399; 'Military status / Active siege' C5403",
+   "Every hand and coin Beloko spends on one trouble is missing from the other — cal-02.txt C3591"
+  ],
+  "note": "The line glosses the record's defence word Defensible and sits among siege-aware lines, but 'the usual trouble' and the hypothetical 'second trouble' read as a peacetime assessment in a town already facing two at once. The wording is off in degree, but nothing in it is false."
+ },
+ {
+  "id": "C5511",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "Legal Infrastructure · Court + Prison / Full enforcement chain. / Arrest, prosecute, detain. — cal-02.txt C5510-C5512",
+   "A court and a prison stand, but few offenders are ever brought to either. — cal-02.txt C5398",
+   "Law & order · Collapsed — cal-02.txt C3698"
+  ],
+  "note": "'Full enforcement chain' is a capability label for what stands (watch, courts and prison are all on HOUSES), like its neighbours 'Arcane Support · Present'. Printed bare beside 'few offenders are ever brought' and 'Law & order · Collapsed', it overstates how well the chain works. That is a matter of degree, not a false fact."
+ },
+ {
+  "id": "C5797",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Fish market ... Stopped by the siege. ... Fresh fish retail (stopped) — cal-02.txt C4186, C4190; dump Systems/Services 'Fresh fish retail / Stopped by the siege.'",
+   "failed source fish — header FOOD",
+   "How they deal Stopped by the siege. Will cut to order ... (butcher) and 'How they deal Curtailed by the siege. Stables by the night...' — dump World/NPCs lines 2183, 2374 (the page marks other deal lines; this one carries no mark)"
+  ],
+  "note": "The fishmonger's line is an unmarked ordinary day of boats, catch and arrivals, while his house is stopped by the siege and fish is the failed food source. The page marks the deal lines of other stopped or curtailed houses but not this one. This is the same fault as C5958, C6040, C6251, C6273 and C6322."
+ },
+ {
+  "id": "C5958",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Barge and river transport company ... Stopped by the siege. ... Cargo freight (stopped) · Passenger transport (stopped) — cal-02.txt C4139, C4143",
+   "How they deal Asks what you are sending and where; writes it down. — dump World/NPCs line 2171 (no mark)"
+  ],
+  "note": "The barge master takes bookings as on an ordinary day, and his line carries no mark, while his house and both its services are stopped by the siege. Nothing in the town reconciles it. This is the same fault as C5797."
+ },
+ {
+  "id": "C6040",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Harbour master's office ... Stopped by the siege. ... Berth assignment (stopped) · Pilotage (stopped) — cal-02.txt C4198, C4201",
+   "How they deal Assigns berths for the posted fee; urgent berths cost more. — dump World/NPCs line 2252 (no mark)"
+  ],
+  "note": "The dockmaster's line has her doing exactly the service the page marks stopped (berth assignment), and the line carries no mark. This is the same fault as C5797 and C6322."
+ },
+ {
+  "id": "C6170",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "How they deal Curtailed by the siege. Stables by the night and hires by the day; a fair price for good animals. — dump World/NPCs line 2374 (the mark is packet id C6169, the same printed line)",
+   "Stable district ... Curtailed by the siege. ... Horse hire (stopped) · Livery and boarding — cal-02.txt C4253, C4256"
+  ],
+  "note": "The line carries its own mark: the page prints it as 'Curtailed by the siege. Stables by the night...'. The packet split the mark onto C6169, so the reader missed it. A row judged with its mark is not false, and the house is honestly Curtailed because livery and boarding is still on offer."
+ },
+ {
+  "id": "C6229",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "Furrier's district card with no mark; 'Services · Fur garments · Quality furs' — cal-02.txt C4191-C4196; dump Systems/Services Fur garments / Quality furs, unmarked",
+   "Furs & Pelts ... Impaired ... Stopped by the siege. Furs travel from the hunting grounds through trading posts — cal-02.txt C5005, C5012-C5013",
+   "Furs & Pelts [running; its resource Hunting grounds available] — header LAND"
+  ],
+  "note": "The reader's premise holds only in part: the long-distance furs chain is marked stopped, but the furrier's own house and its fur sales are unmarked on every tab, so 'who has been buying furs this season' is plausible inside the walls. Only 'the hunters, the trade routes' reads as an ordinary-times line, and it is talk rather than a claim that they run now."
+ },
+ {
+  "id": "C6251",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Customs house ... Stopped by the siege. ... Cargo inspection (stopped) · Duties and tariffs (stopped) — cal-02.txt C4172, C4175",
+   "How they deal Names the duty, takes the coin and writes the receipt — dump World/NPCs line 2454 (no mark)"
+  ],
+  "note": "The collector is shown levying duty, the very service the page marks stopped, on a line with no mark. Nothing comes in or goes out to be taxed (C5405). This is the same fault as C5797."
+ },
+ {
+  "id": "C6273",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "River ferry ... Stopped by the siege. ... River crossing (stopped) — cal-02.txt C4247, C4251",
+   "To reach Beloko you would have to cross the besiegers' lines first, and they let nobody through. — cal-02.txt C5404",
+   "How they deal Talks about the river and the people who cross it; knows who comes and goes. — dump World/NPCs line 2476 (no mark)"
+  ],
+  "note": "The ferry keeper's line presumes people crossing and coming and going, while her house's only service is marked stopped and the siege lets nobody through. The line carries no mark. This is the same fault as C5797."
+ },
+ {
+  "id": "C6322",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Docks/port facilities ... Stopped by the siege. ... Vessel mooring (stopped) — cal-02.txt C4181, C4184; Services 'Vessel mooring / Stopped by the siege. Berth assignment and dock fees.'",
+   "How they deal Names the fee for a berth and the time it is free; pays attention to which ships pay on time. — dump World/NPCs line 2522 (no mark)"
+  ],
+  "note": "The wharfinger is shown letting berths to paying ships, the service the page marks stopped, on an unmarked line. This is the same fault as C6040."
+ }
+]

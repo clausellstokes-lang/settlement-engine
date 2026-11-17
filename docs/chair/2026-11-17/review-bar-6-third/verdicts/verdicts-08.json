@@ -1,0 +1,165 @@
+[
+ {
+  "id": "C36685",
+  "town": "bar0-town-calm-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "HOUSES (29, the whole list): ... Butchers (3-8); Woodcarver; Craft guilds (5-15) ... (no tannery, no tanner, no chandler) — cal-15 header",
+   "C36494 Short of hides. A guild of shoemakers turning out boots, shoes, and sandals — cal-15 (Cobbler's guild card)",
+   "TRADE exports: ... (no hides, tallow or offal exported) — cal-15 header"
+  ],
+  "note": "The Butchers' row sells by-products to tanners, but the town has no tannery or tanner on HOUSES, exports no hides, and its cobbler is marked short of hides. Nothing in the town supplies the tanners the line presumes."
+ },
+ {
+  "id": "C36803",
+  "town": "bar0-town-calm-rand-44",
+  "verdict": "WEAK",
+  "evidence": [
+   "C37085 Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. — cal-15 Systems/Power",
+   "GOVERNMENT: ... Religious Authorities (Minor) — cal-15 header",
+   "economicState.compound.religionInfluence 66.4 (raw religion priority 76) — corpus record",
+   "C37028 Religious Authorities tell people that Guild Council's rule is right and ordained. — cal-15 Systems/Power"
+  ],
+  "note": "The economics line reads the record's religion influence (66 of 100), while the Power tab reads the faction's political weight (Minor, 24). 'Heard in the town's dealings' fits 'moral authority is real' and the clergy's role legitimising the council, but 'carries real weight' against 'margins of civic life' is a mismatch of degree, not a flat falsehood."
+ },
+ {
+  "id": "C36868",
+  "town": "bar0-town-calm-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "C36962 Work on the clay here stops half-way: no potter finishes it. — cal-15 Systems/Resources",
+   "gaps: clay: Cannot produce final goods, limited to intermediate products — cal-15 header LAND",
+   "C36487 Services · Fired brick · Roof tiles — cal-15 (Brickmaker card; no pottery service)",
+   "HOUSES: ... Brickmaker; Craft guilds (5-15) ... (no potter) — cal-15 header"
+  ],
+  "note": "The chain lists finished pottery and ceramics among its outputs while the same page says no potter finishes the clay; the only clay house, the Brickmaker, offers brick and tiles only. Same fault as C36883 (Clay & Ceramics chain outputs 'Pottery and ceramics'), which is not in this batch."
+ },
+ {
+  "id": "C37129",
+  "town": "bar0-town-calm-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C37434 Secret: Owes more to a rival crew than the gang could ever pay, and has been paying it with the gang's territory — cal-15 World/NPCs (Masao Wei)",
+   "npcs[Masao Wei].institution.family = \"Multiple criminal factions\"; secret.stakes \"The gang thinks the streets were lost in fair fights\" — corpus record",
+   "C37130 Whatever Tiangang's gangs take in never appears on the tax lists — cal-15 Systems/Defense"
+  ],
+  "note": "The record files the Street gang under 'Multiple criminal factions', and the gang boss's own line on the page names a rival crew that has been taking the gang's streets in fights. A rival crew is not a house of its own, so a single Street gang on HOUSES does not deny it."
+ },
+ {
+  "id": "C37147",
+  "town": "bar0-town-calm-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "C36915 Law & Governance · Religion & civic○ Operational / C36917 Town hall / C36919 Legal services — cal-15 Systems/Economics",
+   "Town hall » Legal services — dump PDF/Services",
+   "resourceAnalysis chain law_governance outputs [\"Civil disputes\",\"Criminal trials\",\"Notary services\",\"Legal services\"], status operational — corpus record",
+   "C37148 No deterrence beyond force. — cal-15 Systems/Defense"
+  ],
+  "note": "Defence prints Legal Infrastructure None with no deterrence beyond force, while Economics prints an operational Law & Governance chain through the Town hall giving legal services (the record adds civil disputes and criminal trials). The page says both, and nothing in the town reconciles them."
+ },
+ {
+  "id": "C39139",
+  "town": "bar0-town-occupied-rand-43",
+  "verdict": "WEAK",
+  "evidence": [
+   "C39540 No medicinal herbs or water from the hot springs reaches the alchemist shop. — cal-17 Systems/Resources",
+   "C39407 A good part of the medicinal herbs Gangapalli's work uses must come from elsewhere; when none comes, that work stands idle. — cal-17 Systems/Economics",
+   "C39412 ... Ritual wood and herbs (ancient grove damaged) ... — cal-17 Systems/Economics imports",
+   "resourceAnalysis.imports.reasons.medicinal herbs = \"Required by Apothecary but not available in Riverside terrain\"; gaps list only the Alchemist shop — corpus record"
+  ],
+  "note": "The reader overstates the premise: the page says no herbs reach the alchemist shop, not the town, and it says herbs come from elsewhere (some herbs are imported). It is still odd that the unmarked apothecary next door has herbs in stock while the alchemist has none. That is a real but soft mismatch, not a flat contradiction."
+ },
+ {
+  "id": "C40138",
+  "town": "bar0-town-occupied-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "C40172 An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made — cal-17 World/History (The Occupation, 66 years ago, major)",
+   "history.historicalEvents[The Occupation].templateType = \"occupation_legacy\" — corpus record",
+   "PAST: ... The Occupation (66 years ago, political, major) — cal-17 header"
+  ],
+  "note": "The same History tab records an earlier occupation that had already ended 66 years ago, so the town has not always made its own decisions before the present one. 'Or believed it did' hedges whether its freedom was real. It cannot cover a past occupation, which the town knew of."
+ },
+ {
+  "id": "C41649",
+  "town": "bar0-village-calm-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C41647 Short of its materials. Sells poultices, common cures, and medicines drawn from herbs. — cal-18 Systems/Institutions (same Apothecary card)",
+   "C41652 Services · Compound medicines (short) · Herbal remedies (short) — cal-18 same card",
+   "C41639 A row marked short is what its house makes when supplied. — cal-18 tab legend"
+  ],
+  "note": "The line belongs to the Apothecary card, which opens 'Short of its materials.' and carries (short) on both chips. Under the read's rule that a card's mark covers its ordinary-times description, it is not false. The card's 'in stock' is still loose wording under that mark."
+ },
+ {
+  "id": "C41707",
+  "town": "bar0-village-calm-rand-42",
+  "verdict": "WEAK",
+  "evidence": [
+   "C41888 No timber reaches the sawmill. / C41671 Short of timber. — cal-18 Systems/Resources and Institutions",
+   "C41878 Little is left worth taking from the coastal timber at Lykopetra this year — cal-18 Systems/Resources",
+   "C41637 Timber is short this season, and the builders are bidding against each other for what is left in the yards. — cal-18 Summary/Plot Hooks",
+   "resourceAnalysis gaps: Sawmill only (no gap for River boatyard); imports.critical 'timber (for large vessels)' — corpus record"
+  ],
+  "note": "The boatyard's Barge construction chip is unmarked while the coastal timber is depleted, the sawmill is short and the record leaves its timber import needs unmet. But the page says some timber is left in the yards at a price, and the record gives the boatyard no gap. That makes this an unmarked row in a timber-short village (a matter of degree), not a plain falsehood."
+ },
+ {
+  "id": "C41828",
+  "town": "bar0-village-calm-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "C41647 Short of its materials. ... / C41652 Services · Compound medicines (short) · Herbal remedies (short) — cal-18 Apothecary card",
+   "C41887 No medicinal herbs or water from the hot springs reaches the apothecary. — cal-18 Systems/Resources",
+   "C41839 Needed, and not brought in: timber (for large vessels), medicinal herbs, ... — cal-18 Systems/Economics",
+   "C41779 / C41782 Short of its materials. (the only two remedy rows, both Apothecary) — cal-18 Systems/Services"
+  ],
+  "note": "The income row says remedies are made and sold here, carries no mark, and is about the Apothecary's own trade. The Apothecary is marked short and the page says no herbs reach it or are brought in. No other house makes remedies: the healing list's other rows are the Graveyard and the House of worship, giving burial and rites."
+ },
+ {
+  "id": "C42518",
+  "town": "bar0-village-calm-rand-43",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "C42516 Common grazing land · Economy / C42518 Backs · Elder Council — cal-19 Systems/Institutions",
+   "GOVERNMENT: Elder Council ... — cal-19 header",
+   "C42517 Common grazing held by the village as a whole, next to the open fields, for every household's beasts. — cal-19 (the line the reason is about)",
+   "C42521 Short of livestock. ... from cattle or goats, whenever livestock can be had. / C42690 No livestock reaches the dairy farmer. — cal-19"
+  ],
+  "note": "The flagged id is the true label 'Backs · Elder Council'. The reader's reason is about the line above it, C42517. Judged as meant, C42517 against C42521 and C42690 is a real but soft mismatch (WEAK): 'beasts' need not be milk cattle or goats, but the village visibly has none to milk."
+ },
+ {
+  "id": "C43274",
+  "town": "bar0-village-calm-rand-44",
+  "verdict": "WEAK",
+  "evidence": [
+   "C43521 No livestock or hides reaches the tannery. — cal-19 Systems/Resources",
+   "gaps: Tannery: Tannery exists but lacks access to livestock — cal-19 header LAND (no grazing resource in LAND)",
+   "C43334 Agricultural produce, household goods, livestock. (Weekly market) — cal-19 Systems/Services",
+   "C43338 Short of iron. Essential for carts, carriers, and working horses — cal-19 Systems/Services"
+  ],
+  "note": "The common pasture is a house on HOUSES, and the page shows beasts elsewhere (livestock at market, working horses). With no butcher on HOUSES, it is plausible that no hides reach the tannery. The residual mismatch is that the page says no livestock reaches the tannery and LAND has no grazing resource, while this line has village livestock on the common: a matter of degree, not a flat falsehood."
+ },
+ {
+  "id": "C43422",
+  "town": "bar0-village-calm-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "C43512 Until somebody pays to open new workings, the hands that worked there are idle or gone elsewhere. — cal-19 Systems/Resources",
+   "C43207 Short of iron. / C43220 Short of timber. / C43231 Short of hides. / C43249 Short of timber. / C43255 Short of its materials. — cal-19 Blacksmith, Carpenter, Cobbler, Sawmill and Tannery cards",
+   "C43438 ... when none comes, that work stands idle. — cal-19 Systems/Economics"
+  ],
+  "note": "The page says the iron workers are idle or gone, and it marks five houses (smith, carpenter, cobbler, sawmill, tannery) as having nothing to work. 'Nobody here is waiting for work' is an unmarked calm-times reassurance against the page's own lines."
+ },
+ {
+  "id": "C43435",
+  "town": "bar0-village-calm-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "C43207 Short of iron. Full-time metalworker. / C43211 Services · Horseshoeing (short) · Tool repair (short) · Weapon creation (short) — cal-19 Blacksmith card",
+   "C43511 Nothing more can be taken from the iron ore deposits at Strathgarth. — cal-19 Systems/Resources",
+   "C43445 Needed, and not brought in: timber, stone, metals, ... — cal-19 Systems/Economics",
+   "LAND: Iron Ore Deposits (depleted); Iron & Metalwork [impaired] ; TRADE imports: Salt, Route maps and intelligence, Bronze for votive offerings — cal-19 header"
+  ],
+  "note": "The income row says metal is smelted or worked here, with no mark. The only metal house, the Blacksmith, is marked short of iron on every chip; the ore is spent and no metal is brought in (bronze comes only for votive offerings). No other unmarked house works metal."
+ }
+]

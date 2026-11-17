@@ -1,0 +1,13 @@
+{"id":"C15273","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"STATE","why":"'The settlement is loyal' where legitimacy is only Tolerated and stability Tense (requisition and conscription)","other":""}
+{"id":"C15669","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"STATE","why":"the standing Garrison is offered for 'Mercenary hire'; the mercenary force is the separate Mercenary quarter","other":""}
+{"id":"C16576","town":"bar0-city-wartime-rand-44","sev":"MED","kind":"PAIR","why":"clergy 'at the margins of civic life' with limited leverage; the economics tab says faith carries real weight, heard in the city's dealings","other":"C16202"}
+{"id":"C16629","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"LACKS","why":"'unofficial landing points' for smuggling; trade access is road only, forest town with no water route","other":""}
+{"id":"C16768","town":"bar0-city-wartime-rand-44","sev":"MED","kind":"PAIR","why":"a 'crown requisition order' in an independent city-state the page says has 'No higher lord, no external charter'","other":"C15771"}
+{"id":"C16838","town":"bar0-city-wartime-rand-44","sev":"MED","kind":"LACKS","why":"the midwife 'authorised the seizure' as a war measure; she sits only on Religious Authorities, the War Council holds requisition powers","other":""}
+{"id":"C16933","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"PAIR","why":"'war contracts that made the settlement rich'; the page says it was Prosperous before the war and only Comfortable while it lasts","other":"C15278"}
+{"id":"C16688","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"PAIR","why":"'Courts without detention. Fines and exile only.'; the same page has a friend held by the garrison and a prisoner dying in the cells","other":"C17397"}
+{"id":"C17412","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"BROKEN","why":"asking a second favour before repaying the first leaves Biljana two favours in Varvara's debt, not 'two favours ahead'","other":""}
+{"id":"C17448","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"LACKS","why":"Pavel Zhukova to present at 'the next council session'; his brackets show only Military/Guard, no council seat","other":""}
+{"id":"C17671","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"LACKS","why":"fortune teller and smith to present at 'the next council session'; both sit on no council or power by PEOPLE","other":""}
+{"id":"C17728","town":"bar0-city-wartime-rand-44","sev":"MED","kind":"STATE","why":"'grew up in quieter years'; PAST records a trade collapse, a purge, a catastrophic occupation, a siege and a succession crisis","other":""}
+{"id":"DONE","lines":2624,"blocks":1,"flags":12}

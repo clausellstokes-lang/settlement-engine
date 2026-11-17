@@ -1,0 +1,16 @@
+{"id":"C42518","town":"bar0-village-calm-rand-43","sev":"MED","kind":"PAIR","why":"common grazing 'for every household's beasts', yet the dairy is short of livestock; LAND gap: no access to livestock","other":"C42521"}
+{"id":"C42536","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"PAIR","why":"wildfowler brings birds 'to market'; the page says no market or fair stands in Petenucan","other":"C42437"}
+{"id":"C42863","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"'How they deal Short of livestock.' mark set in front of a dealing line it does not belong to","other":""}
+{"id":"C42864","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"PAIR","why":"sells milk, butter and cheese 'when the cows are giving'; the dairy has no livestock (LAND gap, short mark)","other":"C42521"}
+{"id":"C42886","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"'How they deal Short of wool.' mark set in front of a dealing line it does not belong to","other":""}
+{"id":"C43274","town":"bar0-village-calm-rand-44","sev":"MED","kind":"STATE","why":"'shared pasture for village livestock'; LAND gaps say the tannery lacks access to livestock and hides","other":""}
+{"id":"C43232","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"'the work never dries up' for a cobbler the page marks Short of hides, its boot repair (short)","other":"C43231"}
+{"id":"C43422","town":"bar0-village-calm-rand-44","sev":"MED","kind":"PAIR","why":"'Nobody here is waiting for work', yet the page says the iron workers are idle; smith, tannery, sawmill, carpenter all short","other":"C43512"}
+{"id":"C43435","town":"bar0-village-calm-rand-44","sev":"MED","kind":"PAIR","why":"'Metal is smelted or worked here'; iron ore depleted, no metal imported, blacksmith marked Short of iron","other":"C43207"}
+{"id":"C43441","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"exports 'Potions and elixirs' while the only apothecary is said to make no magical compounds","other":"C43200"}
+{"id":"C43445","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"doubled item: 'timber' listed twice in the same needed-goods list","other":""}
+{"id":"C43521","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"'No livestock or hides reaches': verb does not agree with plural 'hides'","other":""}
+{"id":"C43680","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"says its trades run on goods brought in; TRADE imports only salt, maps and bronze, and the page says timber and metals are not brought in","other":"C43445"}
+{"id":"C43844","town":"bar0-village-calm-rand-44","sev":"MED","kind":"PAIR","why":"sawyer at work over the noise, back to the logs; the sawmill is marked Short of timber and LAND says no timber reaches it","other":"C43249"}
+{"id":"C43978","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"halls, houses and roads 'all better than a village this size requires'; Foundations print Infrastructure condition Strained","other":"C43123"}
+{"id":"DONE","lines":1713,"blocks":2,"flags":15}

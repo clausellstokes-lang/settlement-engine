@@ -1,0 +1,6 @@
+{"id":"C39139","town":"bar0-town-occupied-rand-43","sev":"MED","kind":"PAIR","why":"apothecary sells medicinal herbs while the alchemist shop is short because no medicinal herbs reach the town (LAND gaps)","other":"C39132"}
+{"id":"C39227","town":"bar0-town-occupied-rand-43","sev":"LOW","kind":"STATE","why":"council called 'steady' while stability is Suppressed under occupation, legitimacy Contested","other":""}
+{"id":"C39519","town":"bar0-town-occupied-rand-43","sev":"MED","kind":"PAIR","why":"alchemical trade printed operational as an export while the only alchemist shop is short of materials and impaired","other":"C39377"}
+{"id":"C39691","town":"bar0-town-occupied-rand-43","sev":"MED","kind":"PAIR","why":"rival crews brawling for the streets contradicts the page's own curfew line: thieves scarce, nobody out after curfew","other":"C39673"}
+{"id":"C40138","town":"bar0-town-occupied-rand-43","sev":"MED","kind":"STATE","why":"'always made its own decisions' but PAST records The Occupation 66 years ago (major) and the Siege","other":""}
+{"id":"DONE","lines":1288,"blocks":1,"flags":5}

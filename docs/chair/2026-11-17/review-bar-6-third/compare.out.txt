@@ -1,0 +1,26 @@
+READER c, by packet:
+  bar6-01  23 flags · {"id":"DONE","lines":3633,"blocks":1,"flags":24}
+  bar6-02  25 flags · {"id":"DONE","lines":3480,"blocks":1,"flags":25}
+  bar6-03  23 flags · {"id":"DONE","lines":2800,"blocks":1,"flags":23}
+  bar6-04  9 flags · {"id":"DONE","lines":2804,"blocks":1,"flags":9}
+  bar6-05  9 flags · {"id":"DONE","lines":2813,"blocks":1,"flags":10} | {"id":"DONE","lines":2813,"blocks":1,"flags":9}
+  bar6-06  12 flags · {"id":"DONE","lines":2624,"blocks":1,"flags":12}
+  bar6-07  29 flags · {"id":"DONE","lines":2302,"blocks":5,"flags":33}
+  bar6-08  9 flags · {"id":"DONE","lines":1228,"blocks":2,"flags":9}
+  bar6-09  21 flags · {"id":"DONE","lines":3658,"blocks":1,"flags":21}
+  bar6-10  15 flags · {"id":"DONE","lines":3434,"blocks":1,"flags":15}
+  bar6-11  7 flags · {"id":"DONE","lines":3940,"blocks":1,"flags":7}
+  bar6-12  14 flags · {"id":"DONE","lines":1270,"blocks":3,"flags":15}
+  bar6-13  9 flags · {"id":"DONE","lines":2056,"blocks":1,"flags":10}
+  bar6-14  8 flags · {"id":"DONE","lines":1200,"blocks":1,"flags":8}
+  bar6-15  9 flags · {"id":"DONE","lines":1416,"blocks":1,"flags":9}
+  bar6-16  7 flags · {"id":"DONE","lines":1313,"blocks":1,"flags":7}
+  bar6-17  5 flags · {"id":"DONE","lines":1288,"blocks":1,"flags":5}
+  bar6-18  13 flags · {"id":"DONE","lines":2272,"blocks":2,"flags":13}
+  bar6-19  15 flags · {"id":"DONE","lines":1713,"blocks":2,"flags":15}
+  bar6-20  15 flags · {"id":"DONE","lines":1755,"blocks":2,"flags":15}
+  bar6-21  7 flags · {"id":"DONE","lines":867,"blocks":1,"flags":7}
+distinct sentences flagged (twins counted once): HIGH 0 · MED 135 · LOW 140
+HIGH+MED: 135 · on the 51: 32 {'EXPLAINED': 10, 'STANDS': 22} · not on the 51 (new): 103
+of the 51, not re-flagged at MED+: 19 ({'EXPLAINED': 10, 'STANDS': 7, 'WEAK': 2})
+unknown ids / unparsed: []

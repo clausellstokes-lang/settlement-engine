@@ -1,0 +1,163 @@
+[
+ {
+  "id": "C7032",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "verdict": "WEAK",
+  "evidence": [
+   "Members of Markazkala's merchant guild do most of the buying and selling that matters. — cal-03 C7032 (Summary/Overview, unmarked)",
+   "Services · Trade brokerage (stopped) — cal-03 C7512 (Merchant guilds card, Systems/Institutions)",
+   "Current effective trade is likely zero or severely restricted. — cal-03 C7063",
+   "the teleportation circle brings in about a third of the rest — cal-03 C8040 (Systems/Economics)"
+  ],
+  "note": "The line says who dominates commerce, not that trade flows, and some buying and selling goes on (the teleportation circle brings food in; fresh produce is still sold). But it is an unmarked present-tense line in a town where the guild's own brokerage is (stopped), so it is a mild mismatch, not a plain falsehood."
+ },
+ {
+  "id": "C7481",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Daily markets · Economy · Impaired — cal-03 C7478 (the card carries the mark)",
+   "Fresh produce Impaired / Whatever the kitchen gardens still give, sold early and gone by mid-morning. — cal-03 C7802-C7803 (Systems/Services)",
+   "General trade Impaired — cal-03 C7735 (Systems/Services)"
+  ],
+  "note": "The chips sit under a card marked Impaired, which covers them under brief rule (1). The Services tab marks both services Impaired and gives famine-aware text, so no tab prints them bare under an unmarked house."
+ },
+ {
+  "id": "C8346",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "handled by Mustafa al-Libi, the black marketeer (Black market) — cal-03 C8346 (gives his own house correctly)",
+   "Fish market · Uqba al-Din · fronts for Front businesses · handled by Mustafa al-Libi — cal-03 C8358",
+   "Mustafa al-Libi has put money into Uqba al-Din's affairs for years and takes a share of everything Uqba al-Din earns. — cal-03 C9315; record relationships[11]",
+   "Zakariya al-Aziz ... Bahija al-Libi made up the difference — record relationships[16]; Zayd al-Zahir and Bahija al-Libi ... split what the month brought in — relationships[34]"
+  ],
+  "note": "'Handled by' names the go-between for each front, not the head of the house; the same panel also has Noor (Rival gangs) and Mustafa handling ties under Black market. Each handler's own house is printed correctly, and the record's relationships make Mustafa Uqba's silent partner and Bahija the partner of Zakariya and Zayd. The reader's premise that the page gives each person the other's house is wrong on the facts."
+ },
+ {
+  "id": "C9019",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Mills · Crafts · Impaired / Curtailed by the siege. — cal-03 C7375-C7376; Services · Grain grinding (curtailed) — C7379",
+   "the granary carries the city ... and what is still harvested stretches it further. — cal-03 C8452",
+   "FOOD: grown 7% — cal-03 header"
+  ],
+  "note": "Some harvest is still brought in (grown 7%, 'what is still harvested'), and the mill is Curtailed, not Stopped, so grain still reaches it. 'A good place to hear who is short this year' fits a famine and does not claim plenty."
+ },
+ {
+  "id": "C9104",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "verdict": "STANDS",
+  "evidence": [
+   "Stopped by the siege. Levies duties on goods entering and leaving via the port or main roads. — cal-03 C7473 (Customs house card)",
+   "Services · Cargo inspection (stopped) · Duties and tariffs (stopped) — cal-03 C7477",
+   "How they deal Asks what you carry, where from and where to; looks at your goods before your papers. — cal-03 C9104 (person card, no mark)"
+  ],
+  "note": "The collector's card shows ordinary cargo inspection with no mark, while his house and its Cargo inspection chip are marked stopped. The teleportation circle does bring goods in, but the customs house covers port and roads and is stopped, so nothing reconciles them. His secret (C9105, carts waved through) is the same ordinary-times fault."
+ },
+ {
+  "id": "C9212",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Secret: Has been carrying people across at night who do not want to be seen crossing, for double the fare — cal-03 C9213 (same person's card)",
+   "Stopped by the siege. A flat-bottomed ferry across the water. / Services · River crossing (stopped) — cal-03 C7524, C7528"
+  ],
+  "note": "The public ferry is marked stopped, but the ferry keeper's own card says she carries people across at night in secret, which is exactly a covert crossing under a siege. So her asking 'where you are going on the far side' is made true by her own particulars. This is a borderline call: the secret may be ordinary-times text too."
+ },
+ {
+  "id": "C10755",
+  "town": "bar0-city-wartime-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Wool & Textile Trade Cloth is woven or finished here. — cal-04 C10755",
+   "Dyer · Crafts / Applies colour to raw or woven cloth. ... Services · Dyed cloth — cal-04 C10092-C10097 (no mark)",
+   "Tailor's guild ... make up finished cloth into everything from labourers' wear to noble livery — cal-04 C10136-C10137 (no mark)",
+   "Short of wool. The making of cloth, usually under a guild. — cal-04 C10142 (Weavers card)",
+   "imports: ... Luxury textiles and exotic goods — cal-04 TRADE"
+  ],
+  "note": "The line says 'woven or finished'. Cloth is finished here by the Dyer and made up by the Tailor's guild, and neither is marked short. Under the short-mark rule another unmarked house makes the good, so the line is true despite the weavers' mark."
+ },
+ {
+  "id": "C10793",
+  "town": "bar0-city-wartime-rand-42",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Mining & Quarrying · Raw materials & fuel · Vulnerable / From Coal or peat deposits / Via Charcoal burner / Outputs Coal — cal-04 C10793-C10799",
+   "chainId petty_mining: resource 'Iron ore deposits' absent, resourceInputKey 'coal_deposits' available, substituteActive true, status 'vulnerable' — record economicState.activeChains",
+   "LAND: Coal or Peat Deposits (available); exports Coal — cal-04 header"
+  ],
+  "note": "The flagged row's state, Vulnerable, matches LAND. The record itself runs this chain on a substitute input (coal deposits, available, substituteActive), which is what the page prints. The reader's premise came from the header's summary of the chain's nominal resource."
+ },
+ {
+  "id": "C11621",
+  "town": "bar0-city-wartime-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Short of hides. Organised shoemakers producing boots, shoes, and sandals — cal-04 C10077",
+   "Services · Military boots (short) · Shoe repair (short) · Standard boots (short) — cal-04 C10081",
+   "How they deal Mends what is brought, makes what is ordered, and keeps every pair until it is paid for. — cal-04 C11621 (no mark)",
+   "HOUSES: no tanner or other leather or shoe house besides Cobbler's guild; TRADE imports no hides or leather — cal-04 header"
+  ],
+  "note": "The cobbler's own line shows her house at work with no mark, against a card whose every chip is (short). No other house of the town makes shoes, and hides are not imported. Her secret about the leather she uses (C11622) is the same fault."
+ },
+ {
+  "id": "C11875",
+  "town": "bar0-city-wartime-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Short of wool. The making of cloth, usually under a guild. / Services · Cloth production (short) — cal-04 C10142, C10145",
+   "How they deal Will take an order of any size, with half paid in advance and the colour agreed in writing. — cal-04 C11875 (no mark)",
+   "HOUSES: Weavers/Textile workers is the only weaving house (the Dyer only colours cloth); TRADE imports no wool — cal-04 header"
+  ],
+  "note": "The master weaver offers to take an order of any size for his own house's cloth, with no mark, while that house is Short of wool. No other house weaves, and wool is not imported. This is the same weavers' row as C10755, but unlike C10755 nothing else makes the good this line promises."
+ },
+ {
+  "id": "C12139",
+  "town": "bar0-city-wartime-rand-42",
+  "verdict": "STANDS",
+  "evidence": [
+   "Every civic project Olia Karpov announces has first been costed, quietly, in Rumena Vorobev's counting-room. — cal-04 C12137",
+   "One camp on the council wants the debt repudiated outright. — cal-04 C12139",
+   "Wants Do Olia Karpov a favour big enough to count against what is owed. — cal-04 C11650 (Rumena's card)",
+   "type 'debtor_creditor', from npc_auction_house (Rumena) to npc_mint_official (Olia) — record relationships tie_npc_auction_house"
+  ],
+  "note": "The tie's prose makes Olia's council the debtor, since it wants to repudiate a debt it owes Rumena. Rumena's own card and the record's direction make Rumena the debtor of Olia. Who owes whom contradicts itself."
+ },
+ {
+  "id": "C13269",
+  "town": "bar0-city-wartime-rand-43",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "imports: ... Livestock and dairy (local grazing land depleted) — cal-05 TRADE",
+   "Major annual fairs · Economy / Merchants from abroad. / Services · Large-scale trading · Livestock auctions — cal-05 C13021-C13025",
+   "Livestock & Dairy · Food security · Impaired — cal-05 C13590"
+  ],
+  "note": "Local raising is impaired, but the town imports livestock, and the line sits under the annual fair, which brings merchants from abroad. Wartime is not a siege, so a fair selling imported stock is true. At most, 'major ... all species' is a stock degree phrase."
+ },
+ {
+  "id": "C13975",
+  "town": "bar0-city-wartime-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "[opened] War Council ... Crown-appointed emergency body with powers over requisition, conscription, and price controls. — cal-05 C13964-C13965",
+   "[opened] The Shield Compact Military · 8 / Crown-appointed emergency body with powers over requisition, conscription, and price controls. — cal-05 C13974-C13975",
+   "The Shield Compact: desc identical to War Council's, contestsNiche 'War Council' — record powerStructure.factions",
+   "In the war, Luchtan Chuc of War Council leads the defence. — cal-05 (C12759)"
+  ],
+  "note": "Two distinct powers are each described as the town's crown-appointed emergency body, word for word. The Shield Compact is a one-member garrison faction that the record has only contesting the War Council's niche, so the copied description is false of it (PAIR with C13965)."
+ },
+ {
+  "id": "C14749",
+  "town": "bar0-city-wartime-rand-43",
+  "verdict": "STANDS",
+  "evidence": [
+   "Secret: Took a private share of the war contracts that made the settlement rich — cal-05 C14749",
+   "The war takes most of the money: trade suffers, a few grow rich on army contracts — cal-05 C12586",
+   "Prosperous before the war; Comfortable while it lasts. — cal-05 C12520; Quirigich is losing people and resources to a war — C12512",
+   "STATE: prosperity Comfortable — cal-05 header"
+  ],
+  "note": "The secret's background clause says the war contracts made the settlement rich. The page says the war takes the money, only a few grow rich on contracts, and prosperity fell from Prosperous to Comfortable. The header denies the clause, so it is not just the secret's own fact."
+ }
+]

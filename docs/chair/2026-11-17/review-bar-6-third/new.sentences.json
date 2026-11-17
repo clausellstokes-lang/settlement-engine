@@ -1,0 +1,1650 @@
+[
+{
+"id": "C0036",
+"town": "bar0-city-under_siege+famine-rand-42",
+"section": "Summary/Overview",
+"text": "A trader wanting credit at Hongmen must satisfy the bank about who they are before it lends.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: ordinary-times scene of a trader seeking bank credit under a siege that has stopped all road trade (CRISIS)"
+],
+"other": "",
+"packet": "bar6-01"
+},
+{
+"id": "C0042",
+"town": "bar0-city-under_siege+famine-rand-42",
+"section": "Summary/Overview",
+"text": "Settlement cannot cover ~16858 lbs of food per day (68% of needs) and has no dependable trade route.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: gives 68% of needs uncovered; FOOD gives gap 39% (grown 6, brought in 28, magic 26)"
+],
+"other": "",
+"packet": "bar6-01"
+},
+{
+"id": "C0638",
+"town": "bar0-city-under_siege+famine-rand-42",
+"section": "Systems/Institutions",
+"text": "Services · Fresh produce · General trade",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: daily markets offer 'Fresh produce' with no mark under siege and famine (FOOD deficit, active famine); bread and grain rows are marked scarce"
+],
+"other": "",
+"packet": "bar6-01"
+},
+{
+"id": "C2365",
+"town": "bar0-city-under_siege+famine-rand-42",
+"section": "World/NPCs",
+"text": "How they deal Haggles with pleasure; the price drops for anyone who buys a lot and comes back.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: fishmonger haggles and drops the price for bulk buyers, unmarked; the fish market is 'Stopped by the siege', preserved fish stopped"
+],
+"other": "C0640",
+"packet": "bar6-01"
+},
+{
+"id": "C2654",
+"town": "bar0-city-under_siege+famine-rand-42",
+"section": "World/NPCs",
+"text": "How they deal Charges by the animal and the night; water and fodder extra.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: caravanserai host charges by the animal and the night, unmarked; the caravanserai is 'Stopped by the siege', caravan organisation stopped"
+],
+"other": "C0605",
+"packet": "bar6-01"
+},
+{
+"id": "C3586",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "Summary/Overview",
+"text": "The hammering of the forges echoes through all of Beloko.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: forges hammering throughout town; outlook says war took the iron and smiths have nothing to work"
+],
+"other": "C3906",
+"packet": "bar6-02"
+},
+{
+"id": "C4170",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "Systems/Institutions",
+"text": "Services · Lodging · Horse change",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: coaching inn offers horse change unmarked under siege; road closed, stable horse hire and post relay are stopped"
+],
+"other": "C4256",
+"packet": "bar6-02"
+},
+{
+"id": "C4215",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "Systems/Institutions",
+"text": "Backs · Grain Holders",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: merchant guilds, headed by first of Merchant Guild Council, back Grain Holders, the council's high-intensity opponent in QUARRELS"
+],
+"other": "",
+"packet": "bar6-02"
+},
+{
+"id": "C5098",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "Systems/Economics",
+"text": "Intelligence & Communications · Knowledge & information○ Operational",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Intelligence & Communications operational with long-distance messages via the post relay, which the page marks stopped by the siege"
+],
+"other": "C4633",
+"packet": "bar6-02"
+},
+{
+"id": "C5129",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "Systems/Economics",
+"text": "Port Revenue · Service · Export stopped○ Operational",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Port Revenue printed Operational via docks; the docks card and all its services are stopped by the siege"
+],
+"other": "C4181",
+"packet": "bar6-02"
+},
+{
+"id": "C5145",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "Systems/Economics",
+"text": "Smuggling · Transhipment hub · Black market · Operational",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: smuggling transhipment hub printed Operational; smuggling network and its income are stopped by the siege"
+],
+"other": "C4091",
+"packet": "bar6-02"
+},
+{
+"id": "C5401",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "Systems/Defense",
+"text": "Beloko has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: 'enough for the usual trouble' calm-times line in a town under active siege and famine, safety Desperate"
+],
+"other": "",
+"packet": "bar6-02"
+},
+{
+"id": "C5511",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "Systems/Defense",
+"text": "Full enforcement chain.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: 'full enforcement chain: arrest, prosecute, detain' beside 'few offenders are ever brought to either'; law & order Collapsed"
+],
+"other": "C5398",
+"packet": "bar6-02"
+},
+{
+"id": "C5797",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: fishmonger talks about the boats, the catch and who came in today; fishing failed, fish market and river traffic stopped by siege"
+],
+"other": "C4186",
+"packet": "bar6-02"
+},
+{
+"id": "C5958",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Asks what you are sending and where; writes it down.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: barge master takes cargo bookings as usual; barge company cargo and passenger transport stopped by the siege"
+],
+"other": "C4143",
+"packet": "bar6-02"
+},
+{
+"id": "C6040",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Assigns berths for the posted fee; urgent berths cost more.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: dockmaster assigns berths for the posted fee; berth assignment is marked stopped by the siege"
+],
+"other": "C4759",
+"packet": "bar6-02"
+},
+{
+"id": "C6170",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "World/NPCs",
+"text": "Stables by the night and hires by the day; a fair price for good animals.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: stablemaster 'hires by the day'; horse hire is marked stopped by the siege"
+],
+"other": "C4773",
+"packet": "bar6-02"
+},
+{
+"id": "C6229",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Talks about the hunters, the trade routes and who has been buying furs this season.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: furrier talks of the hunters, trade routes and this season's fur buyers; siege has stopped all trade, furs chain stopped"
+],
+"other": "C5012",
+"packet": "bar6-02"
+},
+{
+"id": "C6251",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Names the duty, takes the coin and writes the receipt; small favours have small prices.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: customs collector names the duty and takes the coin; duties and tariffs are marked stopped by the siege"
+],
+"other": "C4686",
+"packet": "bar6-02"
+},
+{
+"id": "C6273",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Talks about the river and the people who cross it; knows who comes and goes.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: ferry keeper knows who crosses, who comes and goes; river crossing is marked stopped by the siege"
+],
+"other": "C4791",
+"packet": "bar6-02"
+},
+{
+"id": "C6322",
+"town": "bar0-city-under_siege+famine-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Names the fee for a berth and the time it is free; pays attention to which ships pay on time.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: wharfinger names berth fees and watches which ships pay; vessel mooring is marked stopped by the siege"
+],
+"other": "C4794",
+"packet": "bar6-02"
+},
+{
+"id": "C7032",
+"town": "bar0-city-under_siege+famine-rand-44",
+"section": "Summary/Overview",
+"text": "Members of Markazkala's merchant guild do most of the buying and selling that matters.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: ordinary-times market scene (merchants doing most buying and selling) unmarked under Siege and Famine; C7063 says trade likely zero"
+],
+"other": "C7063",
+"packet": "bar6-03"
+},
+{
+"id": "C7481",
+"town": "bar0-city-under_siege+famine-rand-44",
+"section": "Systems/Institutions",
+"text": "Services · Fresh produce · General trade",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: Daily markets 'trade that never closes', fresh produce and general trade printed unmarked under siege and famine (house itself Impaired)"
+],
+"other": "C7479",
+"packet": "bar6-03"
+},
+{
+"id": "C8346",
+"town": "bar0-city-under_siege+famine-rand-44",
+"section": "Systems/Power",
+"text": "handled by Mustafa al-Libi, the black marketeer (Black market)",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: Front businesses said handled by Mustafa al-Libi (Black market) and Black market by Bahija al-Libi (Front businesses); PEOPLE gives each the other house"
+],
+"other": "C8349",
+"packet": "bar6-03"
+},
+{
+"id": "C9019",
+"town": "bar0-city-under_siege+famine-rand-44",
+"section": "World/NPCs",
+"text": "How they deal Talks freely about the harvest and who brought what to the mill; it is a good place to hear who is short this year.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: miller talks of the harvest and who brought grain to the mill; under siege the outlying fields are taken and famine holds; unmarked"
+],
+"other": "C8452",
+"packet": "bar6-03"
+},
+{
+"id": "C9104",
+"town": "bar0-city-under_siege+famine-rand-44",
+"section": "World/NPCs",
+"text": "How they deal Asks what you carry, where from and where to; looks at your goods before your papers.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: customs collector inspects your goods on arrival; Customs house is Stopped by the siege and nothing comes through the gates"
+],
+"other": "C7473",
+"packet": "bar6-03"
+},
+{
+"id": "C9212",
+"town": "bar0-city-under_siege+famine-rand-44",
+"section": "World/NPCs",
+"text": "How they deal Asks where you are going on the far side; remembers the answer.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: ferry keeper asks where you go on the far side, unmarked; River ferry and River crossing are Stopped by the siege"
+],
+"other": "C7524",
+"packet": "bar6-03"
+},
+{
+"id": "C10755",
+"town": "bar0-city-wartime-rand-42",
+"section": "Systems/Economics",
+"text": "Wool & Textile Trade Cloth is woven or finished here.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: says cloth is woven here as a Wool & Textile income stream; the weavers' card is marked Short of wool"
+],
+"other": "C10142",
+"packet": "bar6-04"
+},
+{
+"id": "C10793",
+"town": "bar0-city-wartime-rand-42",
+"section": "Systems/Economics",
+"text": "Mining & Quarrying · Raw materials & fuel · Vulnerable",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: Mining & Quarrying drawn from coal deposits; LAND gives this chain's resource as iron ore deposits, absent"
+],
+"other": "",
+"packet": "bar6-04"
+},
+{
+"id": "C11621",
+"town": "bar0-city-wartime-rand-42",
+"section": "World/NPCs",
+"text": "How they deal Mends what is brought, makes what is ordered, and keeps every pair until it is paid for.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: cobbler 'makes what is ordered' with no mark; the Cobbler's guild card and every row are marked Short of hides"
+],
+"other": "C10077",
+"packet": "bar6-04"
+},
+{
+"id": "C11875",
+"town": "bar0-city-wartime-rand-42",
+"section": "World/NPCs",
+"text": "How they deal Will take an order of any size, with half paid in advance and the colour agreed in writing.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: master weaver takes an order of any size, unmarked; the weavers' card and cloth row are marked Short of wool"
+],
+"other": "C10142",
+"packet": "bar6-04"
+},
+{
+"id": "C12139",
+"town": "bar0-city-wartime-rand-42",
+"section": "World/Relationships",
+"text": "One camp on the council wants the debt repudiated outright.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Olia Karpov's council owes Rumena Vorobev a debt to repudiate; elsewhere Rumena seeks a favour to count against what she owes Olia"
+],
+"other": "C11650",
+"packet": "bar6-04"
+},
+{
+"id": "C13269",
+"town": "bar0-city-wartime-rand-43",
+"section": "Systems/Services",
+"text": "Major livestock sales across all species and quality grades.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: major livestock sales of all species; LAND gives grazing land depleted, Livestock and Horse trade chains impaired; livestock imported"
+],
+"other": "",
+"packet": "bar6-05"
+},
+{
+"id": "C13975",
+"town": "bar0-city-wartime-rand-43",
+"section": "Systems/Power",
+"text": "Crown-appointed emergency body with powers over requisition, conscription, and price controls.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Shield Compact (one member, garrison commander) given War Council's own text as the crown-appointed emergency body over requisition"
+],
+"other": "C13965",
+"packet": "bar6-05"
+},
+{
+"id": "C14749",
+"town": "bar0-city-wartime-rand-43",
+"section": "World/NPCs",
+"text": "Secret: Took a private share of the war contracts that made the settlement rich, routed through a merchant house that does not exist on paper",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: war contracts 'made the settlement rich'; page says the city is losing people and resources, Prosperous only before the war"
+],
+"other": "C12512",
+"packet": "bar6-05"
+},
+{
+"id": "C16576",
+"town": "bar0-city-wartime-rand-44",
+"section": "Systems/Power",
+"text": "Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: clergy 'at the margins of civic life' with limited leverage; the economics tab says faith carries real weight, heard in the city's dealings"
+],
+"other": "C16202",
+"packet": "bar6-06"
+},
+{
+"id": "C16838",
+"town": "bar0-city-wartime-rand-44",
+"section": "World/NPCs",
+"text": "Secret: Authorised the seizure of a rival's property as a 'war measure', on evidence they invented",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"c: the midwife 'authorised the seizure' as a war measure; she sits only on Religious Authorities, the War Council holds requisition powers"
+],
+"other": "",
+"packet": "bar6-06"
+},
+{
+"id": "C17728",
+"town": "bar0-city-wartime-rand-44",
+"section": "World/History",
+"text": "The settlement grew up in quieter years.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: 'grew up in quieter years'; PAST records a trade collapse, a purge, a catastrophic occupation, a siege and a succession crisis"
+],
+"other": "",
+"packet": "bar6-06"
+},
+{
+"id": "C17900",
+"town": "bar0-hamlet-calm-rand-42",
+"section": "Summary/Plot Hooks",
+"text": "A shipment they weren't expecting arrived and is now in their warehouse.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"c: stable keeper's 'warehouse'; HOUSES (whole list) has no warehouse or store"
+],
+"other": "",
+"packet": "bar6-07"
+},
+{
+"id": "C17924",
+"town": "bar0-hamlet-calm-rand-42",
+"section": "Systems/Institutions",
+"text": "Boils or dries saline brine whenever brine can be had, yielding the raw salt that preserves food.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: salt works boils brine to make raw salt; LAND gives salt flats absent, salt works runs on imported salt, TRADE imports Salt"
+],
+"other": "",
+"packet": "bar6-07"
+},
+{
+"id": "C18308",
+"town": "bar0-hamlet-calm-rand-42",
+"section": "World/Relationships",
+"text": "Tlachtga Doherty owes their place to Scannlán Doherty and has kept others from climbing the same way.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Tlachtga owes her place to Scannlán; the page also says Malachy made Tlachtga's career (two mentor-successor claims)"
+],
+"other": "C18302",
+"packet": "bar6-07"
+},
+{
+"id": "C18497",
+"town": "bar0-hamlet-calm-rand-43",
+"section": "Systems/Institutions",
+"text": "Shared pasture for the hamlet's livestock.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: shared pasture for the hamlet's livestock; LAND gap and the dairy card say no livestock reaches the dairy"
+],
+"other": "C18501",
+"packet": "bar6-07"
+},
+{
+"id": "C18685",
+"town": "bar0-hamlet-calm-rand-43",
+"section": "Systems/Power",
+"text": "Contests the seat · Military · 30▼",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: Military/Guard 'Contests the seat'; QUARRELS gives it subordinate, stable, and the page says it carries out what the Council decides"
+],
+"other": "C18691",
+"packet": "bar6-07"
+},
+{
+"id": "C18706",
+"town": "bar0-hamlet-calm-rand-43",
+"section": "Systems/Power",
+"text": "Minghao Li is third in Elder Council and holds a third share in The Guard, and carries The Guard's requests to the two above.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Minghao Li 'holds a third share in The Guard'; PEOPLE and the page give him first (rank 1), its only member"
+],
+"other": "C18686",
+"packet": "bar6-07"
+},
+{
+"id": "C18984",
+"town": "bar0-hamlet-calm-rand-44",
+"section": "Summary/Overview",
+"text": "Strathmere is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: 'ordinary in the best sense' where GOVERNMENT gives Unstable (pervasive organized crime), Legitimacy Crisis, law & order Collapsed"
+],
+"other": "",
+"packet": "bar6-07"
+},
+{
+"id": "C19015",
+"town": "bar0-hamlet-calm-rand-44",
+"section": "Summary/Overview",
+"text": "Sorcha MacDonald has asked Nessa Lynch to back a candidate Nessa Lynch distrusts.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: Nessa Lynch's backing would cost 'the alliance its majority'; PEOPLE gives her no seat on any power, and the council holds no alliance"
+],
+"other": "",
+"packet": "bar6-07"
+},
+{
+"id": "C19260",
+"town": "bar0-hamlet-calm-rand-44",
+"section": "Systems/Defense",
+"text": "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: calm 'neighbours keep an eye... everyone soon hears of' trouble, where stability is pervasive organized crime and law & order Collapsed"
+],
+"other": "C19266",
+"packet": "bar6-07"
+},
+{
+"id": "C19451",
+"town": "bar0-hamlet-under_siege-rand-42",
+"section": "Summary/Overview",
+"text": "\"An ordinary place that has outlasted grander neighbours by getting the small things right, year after year\"",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: calm 'outlasted grander neighbours by getting the small things right' under a siege, Legitimacy Crisis, not viable, 71% food deficit"
+],
+"other": "",
+"packet": "bar6-07"
+},
+{
+"id": "C19487",
+"town": "bar0-hamlet-under_siege-rand-42",
+"section": "Summary/Overview",
+"text": "A newcomer is noticed by the second day here, and asked what work they mean to do.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: ordinary-times newcomers arriving and asked their work; under the siege nothing comes in by road"
+],
+"other": "C19493",
+"packet": "bar6-07"
+},
+{
+"id": "C19892",
+"town": "bar0-hamlet-under_siege-rand-42",
+"section": "World/NPCs",
+"text": "How they deal Answers about the hills; asks why you are walking them.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: unmarked ordinary-times line of visitors walking the hills; under the siege the besiegers 'let nobody through'"
+],
+"other": "C19777",
+"packet": "bar6-07"
+},
+{
+"id": "C19919",
+"town": "bar0-hamlet-under_siege-rand-42",
+"section": "World/Daily Life",
+"text": "Some needs are met and some are postponed, and which is which changes month to month.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: 'some needs are met and some postponed, month to month' under a siege with a 71% deficit; the page says the settlement is starving"
+],
+"other": "C19549",
+"packet": "bar6-07"
+},
+{
+"id": "C19989",
+"town": "bar0-hamlet-under_siege-rand-43",
+"section": "Summary/Overview",
+"text": "\"The Heresy Trials aside, the history here is long and steady, and travellers remember the place kindly\"",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: calm-times reassurance ('long and steady', travellers remember kindly) in a hamlet under siege with critical stability"
+],
+"other": "",
+"packet": "bar6-08"
+},
+{
+"id": "C19996",
+"town": "bar0-hamlet-under_siege-rand-43",
+"section": "Summary/Overview",
+"text": "A work party gathers inside the defences with tools on their shoulders, to shore up whatever needs it.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"c: work party 'inside the defences'; DEFENCE gives no walls and no force of any kind"
+],
+"other": "C20038",
+"packet": "bar6-08"
+},
+{
+"id": "C20110",
+"town": "bar0-hamlet-under_siege-rand-43",
+"section": "Systems/Institutions",
+"text": "Services · Malted barley",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: Maltster's malted barley offered unmarked; requires grain surplus but FOOD deficit 62%, imports cut by siege"
+],
+"other": "C20107",
+"packet": "bar6-08"
+},
+{
+"id": "C20383",
+"town": "bar0-hamlet-under_siege-rand-43",
+"section": "Systems/Defense",
+"text": "Adequate▼",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Disasters & Famine 'Adequate', re-judged; FOOD deficit 62% and page says hunger is already here"
+],
+"other": "C20249",
+"packet": "bar6-08"
+},
+{
+"id": "C20527",
+"town": "bar0-hamlet-under_siege-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Talks about the harvest and the brewers who buy from the malthouse.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: brewers who buy from the malthouse; no brewer on HOUSES and page says households brew their own; ordinary trade under siege"
+],
+"other": "C20106",
+"packet": "bar6-08"
+},
+{
+"id": "C20639",
+"town": "bar0-hamlet-under_siege-rand-44",
+"section": "Summary/Overview",
+"text": "\"Records here are kept carefully and disputes settled by precedent; people here learned the hard way what happens otherwise\"",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: disputes 'settled by precedent' calmly; page gives Law & order Collapsed, legitimacy crisis, leadership vacuum under siege"
+],
+"other": "C20702",
+"packet": "bar6-08"
+},
+{
+"id": "C20756",
+"town": "bar0-hamlet-under_siege-rand-44",
+"section": "Systems/Institutions",
+"text": "Services · Pack animal sales",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: pack animal sales offered unmarked for travellers and merchants while siege stops all road trade; its house is Curtailed"
+],
+"other": "C20753",
+"packet": "bar6-08"
+},
+{
+"id": "C20823",
+"town": "bar0-hamlet-under_siege-rand-44",
+"section": "Systems/Economics",
+"text": "Harvest Stopped by the siege.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Harvest 'Stopped by the siege' but Subsistence farming card is Curtailed and page says part of the food is still grown"
+],
+"other": "C20758",
+"packet": "bar6-08"
+},
+{
+"id": "C21727",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "Systems/Institutions",
+"text": "The trade runs high, quality pelts being luxuries.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: 'The trade runs high' in furs; LAND gives Furs & Pelts impaired, hunting grounds depleted, no fur import; tanner is marked short of hides"
+],
+"other": "C21597",
+"packet": "bar6-09"
+},
+{
+"id": "C22297",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "Systems/Services",
+"text": "Proclaim laws, royal decrees, and official notices to the public.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"c: crier proclaims 'royal decrees'; GOVERNMENT is a Grand Merchant Oligarchy with no crown or monarch among its powers"
+],
+"other": "",
+"packet": "bar6-09"
+},
+{
+"id": "C22470",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "Systems/Economics",
+"text": "Wool & Textile Trade Little cloth is made here while the cloth trade is short of what it needs.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: 'Little cloth is made here' vs bolts of cloth drying across the yards; TRADE imports wool and exports fine textiles; weavers unmarked"
+],
+"other": "C21151",
+"packet": "bar6-09"
+},
+{
+"id": "C23422",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "World/NPCs",
+"text": "Secret: Has been burning charcoal in woods that belong to someone else and selling it as their own",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: secret has the collier burning and selling charcoal from others' woods; page and LAND gaps say no timber reaches the charcoal burner"
+],
+"other": "C22800",
+"packet": "bar6-09"
+},
+{
+"id": "C23437",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "World/NPCs",
+"text": "Flaw: self-serving Temperament: incorruptible",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Folki Froðason called 'incorruptible' while his card gives a hidden allegiance and silent partnership with the criminal factions"
+],
+"other": "C23438",
+"packet": "bar6-09"
+},
+{
+"id": "C23466",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "World/NPCs",
+"text": "Secret: Charges every job for more wood than it used and sells the difference on the side",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: carpenter sells surplus wood on the side; the page marks the carpenters short of timber, timber needed and not brought in"
+],
+"other": "C21497",
+"packet": "bar6-09"
+},
+{
+"id": "C23541",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "World/NPCs",
+"text": "Secret: Has been tanning hides from stolen animals brought in with the brands cut out",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: tanner's secret has him tanning hides steadily; the page marks the tannery 'Short of hides' and Leather & Hides impaired"
+],
+"other": "C21597",
+"packet": "bar6-09"
+},
+{
+"id": "C23583",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "World/NPCs",
+"text": "Secret: Used poor oak for a large order of casks and the wine and ale in them has been spoiling",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: cooper filled a large order of oak casks; the page marks the cooper 'Short of timber', barrel making short"
+],
+"other": "C21521",
+"packet": "bar6-09"
+},
+{
+"id": "C23768",
+"town": "bar0-metropolis-calm-rand-42",
+"section": "World/NPCs",
+"text": "How they deal Tells you which timber is good this year and who has been buying it.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: sawyer talks of which timber is good this year and who buys it; page says no timber reaches the sawmill, marked short"
+],
+"other": "C22801",
+"packet": "bar6-09"
+},
+{
+"id": "C24783",
+"town": "bar0-metropolis-calm-rand-43",
+"section": "Summary/Overview",
+"text": "Established along a road route.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: origin given as established along a road route; FOUNDING reason is to exploit rich mineral deposits"
+],
+"other": "",
+"packet": "bar6-10"
+},
+{
+"id": "C25171",
+"town": "bar0-metropolis-calm-rand-43",
+"section": "Systems/Institutions",
+"text": "Short of wool. The making of cloth, usually under a guild.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: weavers (and fuller C25103) marked short of wool; INCOME gives Wool & Textile Trade 5% as a source of the town's money"
+],
+"other": "",
+"packet": "bar6-10"
+},
+{
+"id": "C25757",
+"town": "bar0-metropolis-calm-rand-43",
+"section": "Systems/Services",
+"text": "By-products sold to chandlers and tanners.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: butchers' unmarked row sells hide to tanners, yet the tanner and cobbler are marked short of hides"
+],
+"other": "C25165",
+"packet": "bar6-10"
+},
+{
+"id": "C26015",
+"town": "bar0-metropolis-calm-rand-43",
+"section": "Systems/Economics",
+"text": "Wool & Textile Trade Cloth is woven or finished here.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: economics says cloth is woven or finished here, unmarked, while weavers and fuller are marked short of wool"
+],
+"other": "C25171",
+"packet": "bar6-10"
+},
+{
+"id": "C28668",
+"town": "bar0-metropolis-calm-rand-44",
+"section": "Systems/Institutions",
+"text": "Short of coal. Charcoal kilns, tended day and night while a burn lasts, whenever wood can be had.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: Charcoal burner marked Short of coal; it burns wood, and TRADE imports timber (gaps: runs on imported timber)"
+],
+"other": "",
+"packet": "bar6-11"
+},
+{
+"id": "C30429",
+"town": "bar0-metropolis-calm-rand-44",
+"section": "World/NPCs",
+"text": "Sells by the sack and the cart; the price goes up before winter.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Saltmaster's card marked Short of salt, then says she sells by the sack and the cart; LAND gaps: salt works lacks salt"
+],
+"other": "C30428",
+"packet": "bar6-11"
+},
+{
+"id": "C31082",
+"town": "bar0-metropolis-calm-rand-44",
+"section": "World/NPCs",
+"text": "Pours a taste, talks about the year's grapes and suggests a cask.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Vintner's card marked Short of grapes, then she pours a taste and talks of the year's grapes; gaps: vintner lacks grapes"
+],
+"other": "C31081",
+"packet": "bar6-11"
+},
+{
+"id": "C32251",
+"town": "bar0-thorp-calm-rand-42",
+"section": "Systems/Defense",
+"text": "It could keep soldiers and does not; the thorp has decided that arming itself when needed costs less than paying anybody to be armed all year.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: says it could keep soldiers; thorp of 11, prosperity Poor, page says always short of money for defence"
+],
+"other": "C32229",
+"packet": "bar6-12"
+},
+{
+"id": "C34291",
+"town": "bar0-town-calm-rand-42",
+"section": "Systems/Defense",
+"text": "Alchemical preparations made at Großdorf are among what its defenders can call on.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: alchemical preparations made here for defenders, while the Alchemist shop is marked short and Potion brewing (short)"
+],
+"other": "C33357",
+"packet": "bar6-13"
+},
+{
+"id": "C34617",
+"town": "bar0-town-calm-rand-42",
+"section": "World/NPCs",
+"text": "How they deal Answers questions about the woods; asks who sent you.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: collier 'answers questions about the woods' in a desert town where the page says no timber reaches the charcoal burner"
+],
+"other": "C34076",
+"packet": "bar6-13"
+},
+{
+"id": "C35708",
+"town": "bar0-town-calm-rand-43",
+"section": "Systems/Power",
+"text": "Contests the seat · Religious · 46▼",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Religious Authorities 'contests the seat', yet the web has them dependent, stable, propping up the Council's rule as ordained"
+],
+"other": "C35725",
+"packet": "bar6-14"
+},
+{
+"id": "C35715",
+"town": "bar0-town-calm-rand-43",
+"section": "Systems/Power",
+"text": "Contests the seat · Military · 10▼",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Military/Guard 'contests the seat', yet QUARRELS has it subordinate, stable: soldiers enforce the law, do not make it"
+],
+"other": "C35722",
+"packet": "bar6-14"
+},
+{
+"id": "C35954",
+"town": "bar0-town-calm-rand-43",
+"section": "World/NPCs",
+"text": "How they deal A visit or a blanket can be had, if the coin is right.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Saturninus Rufus is printed 'incorruptible', yet his dealing sells visits and blankets for coin"
+],
+"other": "C35948",
+"packet": "bar6-14"
+},
+{
+"id": "C36026",
+"town": "bar0-town-calm-rand-43",
+"section": "World/NPCs",
+"text": "How they deal Talks about the woods, the game and where the hunting has been best; easy to fall into talk with.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: talks of where the hunting has been best; LAND gives Hunting Grounds depleted, game imported as exhausted"
+],
+"other": "",
+"packet": "bar6-14"
+},
+{
+"id": "C36207",
+"town": "bar0-town-calm-rand-43",
+"section": "World/Daily Life",
+"text": "Cerroripa is short more often than not.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: 'short more often than not' printed under Food Secure; FOOD band secure, 5.3 months stored, the page says it has enough"
+],
+"other": "C35586",
+"packet": "bar6-14"
+},
+{
+"id": "C36685",
+"town": "bar0-town-calm-rand-44",
+"section": "Systems/Services",
+"text": "By-products sold to chandlers and tanners.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"c: by-products sold to tanners; HOUSES has no tannery or tanner"
+],
+"other": "",
+"packet": "bar6-15"
+},
+{
+"id": "C36803",
+"town": "bar0-town-calm-rand-44",
+"section": "Systems/Economics",
+"text": "Faith carries real weight at Tiangang: what the religious houses say is heard in the town's dealings, whatever their own share of its money.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: faith carries real weight in town dealings; Power tab says clergy work at the margins of civic life, leverage limited (Religious Authorities Minor)"
+],
+"other": "C37085",
+"packet": "bar6-15"
+},
+{
+"id": "C36868",
+"town": "bar0-town-calm-rand-44",
+"section": "Systems/Economics",
+"text": "Pottery and ceramics · Fired brick · Roof tiles",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: chain outputs finished pottery and ceramics; Resources says no potter finishes the clay (LAND gap: clay cannot produce final goods)"
+],
+"other": "C36962",
+"packet": "bar6-15"
+},
+{
+"id": "C37129",
+"town": "bar0-town-calm-rand-44",
+"section": "Systems/Defense",
+"text": "Rival crews at Tiangang are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"c: rival crews fighting over the streets; HOUSES has a single Street gang and no other criminal house"
+],
+"other": "",
+"packet": "bar6-15"
+},
+{
+"id": "C37147",
+"town": "bar0-town-calm-rand-44",
+"section": "Systems/Defense",
+"text": "Legal Infrastructure · None",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: Legal infrastructure None, yet Law & Governance runs from the Town hall with Legal services output"
+],
+"other": "C36919",
+"packet": "bar6-15"
+},
+{
+"id": "C39139",
+"town": "bar0-town-occupied-rand-43",
+"section": "Systems/Institutions",
+"text": "Sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: apothecary sells medicinal herbs while the alchemist shop is short because no medicinal herbs reach the town (LAND gaps)"
+],
+"other": "C39132",
+"packet": "bar6-17"
+},
+{
+"id": "C40138",
+"town": "bar0-town-occupied-rand-43",
+"section": "World/History",
+"text": "The settlement always made its own decisions, or believed it did.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: 'always made its own decisions' but PAST records The Occupation 66 years ago (major) and the Siege"
+],
+"other": "",
+"packet": "bar6-17"
+},
+{
+"id": "C41649",
+"town": "bar0-village-calm-rand-42",
+"section": "Systems/Institutions",
+"text": "Its keeper can name which root treats fever and which mushroom kills, and keeps herbalism supplies in stock.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: apothecary 'keeps herbalism supplies in stock'; same card opens Short of its materials, gaps say it lacks herbs"
+],
+"other": "C41647",
+"packet": "bar6-18"
+},
+{
+"id": "C41707",
+"town": "bar0-village-calm-rand-42",
+"section": "Systems/Institutions",
+"text": "Services · Barge construction",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: boatyard builds barges unmarked; Coastal Timber depleted, sawmill lacks timber, no timber import"
+],
+"other": "C41671",
+"packet": "bar6-18"
+},
+{
+"id": "C41828",
+"town": "bar0-village-calm-rand-42",
+"section": "Systems/Economics",
+"text": "Herbalist & Apothecary Remedies and simple preparations, made and sold here: a modest trade.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: remedies made and sold here; Apothecary marked Short of its materials, gaps say no herbs"
+],
+"other": "C41647",
+"packet": "bar6-18"
+},
+{
+"id": "C42518",
+"town": "bar0-village-calm-rand-43",
+"section": "Systems/Institutions",
+"text": "Backs · Elder Council",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: common grazing 'for every household's beasts', yet the dairy is short of livestock; LAND gap: no access to livestock"
+],
+"other": "C42521",
+"packet": "bar6-19"
+},
+{
+"id": "C43274",
+"town": "bar0-village-calm-rand-44",
+"section": "Systems/Institutions",
+"text": "Shared pasture for village livestock, held in common alongside the open fields.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: 'shared pasture for village livestock'; LAND gaps say the tannery lacks access to livestock and hides"
+],
+"other": "",
+"packet": "bar6-19"
+},
+{
+"id": "C43422",
+"town": "bar0-village-calm-rand-44",
+"section": "Systems/Economics",
+"text": "Nobody here is waiting for work.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: 'Nobody here is waiting for work', yet the page says the iron workers are idle; smith, tannery, sawmill, carpenter all short"
+],
+"other": "C43512",
+"packet": "bar6-19"
+},
+{
+"id": "C43435",
+"town": "bar0-village-calm-rand-44",
+"section": "Systems/Economics",
+"text": "Iron & Metalwork Metal is smelted or worked here.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: 'Metal is smelted or worked here'; iron ore depleted, no metal imported, blacksmith marked Short of iron"
+],
+"other": "C43207",
+"packet": "bar6-19"
+},
+{
+"id": "C44148",
+"town": "bar0-village-famine-rand-42",
+"section": "Summary/Plot Hooks",
+"text": "Their master craftsman is talking to a rival.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: hook gives priest Volker Müller (Parish church) a master craftsman; a priest has no craft master"
+],
+"other": "",
+"packet": "bar6-20"
+},
+{
+"id": "C44405",
+"town": "bar0-village-famine-rand-42",
+"section": "Systems/Economics",
+"text": "Needed, and not brought in: metals, luxury goods, animal hides.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: says metals are not brought in; TRADE imports Mail and iron fittings and replacement arms"
+],
+"other": "",
+"packet": "bar6-20"
+},
+{
+"id": "C44759",
+"town": "bar0-village-famine-rand-42",
+"section": "World/NPCs",
+"text": "How they deal Tells you which timber is good this year and who has been buying it.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"c: sawyer talks of which timber is good this year and who buys it; Sawmill short of timber, no timber reaches it"
+],
+"other": "C44486",
+"packet": "bar6-20"
+},
+{
+"id": "C45269",
+"town": "bar0-village-famine-rand-43",
+"section": "Systems/Economics",
+"text": "River fish · Freshwater catch · Healing waters (bottled) · Coal · Salted fish · Smoked seafood",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: exports river fish, freshwater catch, salted and smoked fish unmarked; FOOD: fish is the failed source, famine cut 65%"
+],
+"other": "",
+"packet": "bar6-20"
+},
+{
+"id": "C45891",
+"town": "bar0-village-famine-rand-44",
+"section": "Systems/Institutions",
+"text": "The ferryman's family holds the crossing rights, and every crossing pays the family its fare.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: 'the ferryman's family' holds the crossing; the ferry keeper Vira Davydov is a woman"
+],
+"other": "",
+"packet": "bar6-21"
+},
+{
+"id": "C45966",
+"town": "bar0-village-famine-rand-44",
+"section": "Systems/Services",
+"text": "Grain sold by the sack to a household, straight from the field at harvest.",
+"readers": "c",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"c: grain sold by the sack to households, unmarked, in an active famine with rationing and hoarding (CRISIS Famine)"
+],
+"other": "",
+"packet": "bar6-21"
+}
+]
