@@ -97,3 +97,29 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   Depleted list and not by the chains, and builds (b).
   The seat's own question (a charcoal burner "Short of timber." beside the timber the town imports) is thereby ruled:
   the burner is fed.
+- **BR5 · THE OWNER'S SIXTH WORD (2026-11-17, about 05:30 UTC, verbatim): THE SEED PICKS THE STORY.** "So what I want to
+  establish is that you have multiple way rng to treat these situations: 1. Exhausted resources, bought in 2. Not
+  exhausted Resources, no buy in 3. Bought in, no resources at all past or present 4. Exhausted resources, no buy in. And
+  any other configuration." WHAT WAS TRUE BEFORE IT: the seed already decides whether the land holds a ground and whether
+  that ground is used up; whether the material is then bought in followed a fixed rule, and BIRTH-1 as briefed makes it
+  "always, where the town can trade", which leaves the owner's fourth case to the towns with no route at all. SO BR4's
+  FIXED TABLE BECOMES A SEEDED CHOICE: FOR EACH HOUSE AND ITS MATERIAL THE SEED PICKS ONE STORY AND EVERY PART OF THE PAGE
+  TELLS IT: the land has it and nothing is bought (2); used up and bought in (1); never there and bought in (3); used up
+  and not bought in: the house idle and marked short (4); and beside them: has it and buys some in as well (as today);
+  any bought-in story under a siege reads cut off and is not reworked; with no route even in ordinary times only "has
+  it" or "used up, idle". NEVER PRINTED (the chair's default, told to the owner as vetoable): never had it and buys
+  nothing: nothing on the page could explain the house. THE STARTING ODDS, ONE TABLE, THE OWNER'S TO CHANGE: the ground
+  used up and the town can trade: bought in 3 times in 4; a source house where the land list holds no ground of its
+  kind: the ground is there 3 times in 4 (the house proves it) and used up 1 in 4; a house that uses a material the land
+  never had: bought in. HOW IT IS BUILT (BIRTH-2, `docs/chair/2026-11-14/briefs/BRIEF-BIRTH-2.md`): the pick is the
+  seed's own keyed hash and TAKES NO DRAW (no person, tie, name or house moves: the audit's measure of a cause written
+  late); a material's answer is one for the whole town (by its import word), so that no import stands beside a house
+  short of the same material; an implied ground, there or used up, is a READING of the page and is stored nowhere
+  (the audit's W1); the birth writes a material's word exactly where the story says bought, under a siege too. BR4's
+  distinction stands (a house that takes the resource from the ground cannot buy in what it takes; the three that can
+  run on bought-in material follow their material's story; the salt works off the coast proves no ground and buys its
+  salt). BIRTH-1 LANDS AS BUILT (told so while it measured: no second measure there); BIRTH-2 holds its four files.
+  RD1 IS NARROWED BY IT: THE SEVENTH READ RUNS AFTER BIRTH-2 HAS LANDED: BIRTH-1 alone leaves a pair the readers would
+  flag (a charcoal burner short of timber beside the timber the birth brought in for a cooper: 48 towns of the 720 by
+  that seat's own count), and the idle houses of the fourth story need the round BAR7's surfaces to agree with their
+  mark.

@@ -1,0 +1,201 @@
+# BRIEF-BIRTH-2 · the supply rule whole: the seed picks one story for a house and its material, and every part of the page tells it
+
+The chair, 2026-11-17. ONE BUILDER SEAT, seated when BIRTH-1 has landed. You build the owner's rule as rulings BR4 and BR5
+state it, on the counts of a read-only audit (sections V and W of `docs/chair/2026-11-17/birth/BIRTH-2-COUNT.md`). NO
+PERSON, TIE, NAME OR HOUSE MOVES IN ANY TOWN BY YOUR WORK: you edit no draw, the seed's choice takes no draw, and YOU
+STORE NO GROUND.
+
+## The owner's rule (the six sentences are verbatim in rulings BR3, BR4 and BR5)
+
+The owner, last: "So what I want to establish is that you have multiple way rng to treat these situations: 1. Exhausted
+resources, bought in 2. Not exhausted Resources, no buy in 3. Bought in, no resources at all past or present 4. Exhausted
+resources, no buy in. And any other configuration." Before it: "Doesn't the stone quary here in and of itself stipulate
+that there is stone in the ground?"; "they have the supplies because they buy it in despite the exhausted resource";
+of a siege: "those failings are simply true because in normal times it would be bought in ... Rather than reworked";
+"making sure they align with imports".
+
+SO: FOR EACH HOUSE AND ITS MATERIAL THE SEED PICKS ONE STORY, AND EVERY PART OF THE PAGE TELLS THAT STORY:
+
+| the story | the land | bought in | what the page shows, in its existing words |
+|---|---|---|---|
+| the owner's 2 | has it | no | the ground on the land list; the house at work |
+| the owner's 1 | used up | yes | the ground under "Depleted"; the material on the imports ("Iron ore (local iron mines exhausted)"); the house at work |
+| the owner's 3 | never had it | yes | no such ground; the material on the imports ("Iron ore"); the house at work |
+| the owner's 4 | used up | no | the ground under "Depleted"; nothing of it on the imports; the house marked "Short of ...", idle |
+| other | has it | as well | as today (a larger town that uses more than it has): nothing to build |
+| other | any bought-in story, under a siege | cut off | the same story; the house reads "Curtailed by the siege."; nothing is reworked |
+| other | no route even in ordinary times | impossible | only "has it" or "used up, idle" |
+| NEVER PRINTED | never had it | no | nothing on the page could explain the house: no town shows it (the chair's default, told to the owner as vetoable) |
+
+THE STARTING ODDS (told to the owner as one small table, easy to change): THE GROUND USED UP AND THE TOWN CAN TRADE: bought
+in 3 times in 4, not bought in 1 in 4. A SOURCE HOUSE WHERE THE LAND LIST HOLDS NO GROUND OF ITS KIND: the ground is there
+3 times in 4 (the house proves it), used up 1 in 4. A HOUSE THAT USES A MATERIAL THE LAND NEVER HAD: bought in.
+
+THE ONE DISTINCTION (the chair's, told to the owner as vetoable). Among the houses that are the source of their material
+(BIRTH-1's `SOURCE_GROUNDS`): A TAKER takes the resource from the ground itself and CANNOT BUY IN WHAT IT TAKES (the stone
+quarry, the mine, the open-cast mine, the peat cutter, the woodcutter's camp, the shepherd, the fisher's landing, the
+fishing community, the hunter's lodge, the wildfowler): where its ground is used up it reads WORKED OUT, whatever the town
+buys. A HOUSE THAT CAN RUN ON BOUGHT-IN MATERIAL (the salt works: "Salt"; the charcoal burner: "Timber"; the dairy farmer:
+"Livestock") follows its material's story like any buyer. THE SALT WORKS OFF THE COAST PROVES NO GROUND ("Salt Flats" in a
+mountain or riverside hamlet reads false: the audit's W2): its salt was never there and is bought in (all 39 such salt
+works of the census's 720 stand on a connected route).
+
+## What you read first, and no more
+
+1. THIS FILE.
+2. On the chair's lane (`git fetch origin lane/chair-2026-11-08`): `docs/chair/2026-11-17/bar7/RULINGS.md`: BR2 to BR5
+   ONLY; `docs/chair/2026-11-14/briefs/BRIEF-BAR7.md`: ONLY its rules R1 to R12 (they bind you as a seat of that round is
+   bound, except where this file says otherwise); `docs/chair/2026-11-16/bar6/RULINGS-AFTER-SEATING.md`: EG1 (a fact the
+   eager closure reads imports no module pinned lazy), AX1, PL1.
+3. `git fetch origin lane/birth-audit-2026-11-17`; from its tip 4720fb92c: `docs/chair/2026-11-17/birth/BIRTH-2-COUNT.md`:
+   sections 1, 3, 8, V and W ONLY (the kinds on no ground; how the record carries a cause and WHERE a write moves people;
+   the pairs under a siege; the stipulation counted early and late; the round trip; the denied grounds; the card);
+   `PROTOTYPE-BIRTH2.patch` (a starting point, NOT your product: it writes grounds into the saved list and carries
+   environment switches: you do neither; its `keepBarren` shows the seed's own hash that takes no draw); the probes under
+   `docs/chair/2026-11-17/birth/probes/` are yours to run and to extend in files of your own.
+4. AT YOUR CHECKOUT: BIRTH-1's hand-back `docs/chair/2026-11-17/birth/BIRTH-1-HANDBACK.md` WHOLE (what it built in four
+   of your files, its guard, its counted exceptions, and the four lists the chair asked of it for you: the buyers under a
+   siege left short with no cause; the towns where a bought word stands beside a source house short of that material; the
+   source houses on no ground still marked, with the gap line each prints; every word the birth wrote and where).
+
+## Your base, your branch, your files
+
+YOUR BASE is the joined line at the tip your prompt names (it holds BIRTH-1). Your one branch is
+`lane/birth-2-2026-11-17`. You merge nothing.
+YOUR FILES: `src/domain/facts/houseKinds.js` (BIRTH-1's leaf: the takers, the three that run on bought-in material, the
+ground each source house implies, THE ODDS; it stays import-free); `src/domain/facts/supplyStory.js` (NEW: the ONE reading
+of a town's grounds and of each material's story; EG1 binds it); `src/domain/facts/houseInputAtHand.js`;
+`src/generators/resourceGenerator.js`; `src/domain/display/validationOnPage.js` (the gap lines only);
+`src/components/new/tabs/ResourcesTab.jsx` (the Nearby Resources section; item 8's card); your guard
+`tests/domain/supplyStoryLaw.test.js` (NEW); BIRTH-1's guard `tests/domain/birthKindsLaw.test.js` where your rule changes
+its arms (re-keyed by identity with a dated note: its "no import word under a siege" arm becomes "under a siege the
+bought-in house carries the siege's mark"); `tests/domain/bar6MarksLaw8.test.js`: ONLY the rows of its `LEFT` list that
+item 9 cures. NOT YOURS, whatever the cure seems to need (five seats of the round BAR7 hold them):
+`src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/display/tradeListDisplay.js`,
+`src/components/new/tabs/EconomicsTab.jsx`, `src/pdf/**`, `src/domain/facts/tradeAtWork.js`, the annex and its generated
+files, `src/data/institutionServices.js`, any draw (`src/generators/steps/assembleInstitutions.js`,
+`src/generators/cascadeGenerator.js`, `steps/cascadePass.js`), `src/generators/steps/assembleSettlement.js`,
+`src/generators/steps/generateNarratives.js`, `vite.config.js`, `package.json`. NO NEW FIELD ON THE SAVED RECORD, NO WRITE
+TO `config.nearbyResources` OR ITS SIDECARS, NO NEW ATOM, NO NEW SENTENCE OF PROSE (the page's existing words carry every
+story: the land list's two groups, the imports' words, the mark, BIRTH-1's worked-out gap line).
+
+## Your items, in this order
+
+1. THE KINDS AND THE ODDS (`houseKinds.js`). Over `SOURCE_GROUNDS`: `TAKERS` (the ten above) and `RUNS_ON_BOUGHT` (the
+   three, each with its word; each word exists on the imports list today: say where), each id with its one line of
+   reason. `IMPLIED_GROUND`: the ground a source house proves where none of its own grounds is on the record, live or
+   spent (stone quarry: `stone_quarry`; mine and open-cast mine: `iron_deposits`; peat cutter: `marshlands`; dairy
+   farmer: `grazing_land`; charcoal burner: `managed_forest`; THE SALT WORKS: NONE). THE SECOND RING, COUNT BEFORE YOU
+   KEEP: the audit judged six more source houses "not barren" though the record names no ground of theirs (the fisher's
+   landing 32 and the fishing community 15 of the 720, the woodcutter's camp 28, the hunter's lodge 24, the shepherd 22,
+   the wildfowler 2): give a kind its implied ground only where one line states the choice (the landing: the sea's
+   grounds on a port route or coastal terrain, the river's on a river route or riverside terrain); a kind whose ground
+   you cannot choose by one line is left BY NAME. `SUPPLY_ODDS`: ONE frozen table, THE OWNER'S TO CHANGE, readable by a
+   person who knows no code: `groundThere` 45 of 60; `boughtIn` 45 of 60.
+2. THE ONE READING (`supplyStory.js`), a pure function of the record (its stored land lists, its live houses, its route,
+   its seed `_seed`) and of nothing else; the birth passes the generator's seed as an argument (never a global).
+   (a) THE GROUNDS OF THE TOWN: the stored live grounds; the stored spent grounds; and for each live source house on no
+   ground of its own (a ruined or closed house proves nothing; a custom row proves nothing) its IMPLIED GROUND, whose
+   state the seed picks BY THE GROUND (two houses of one ground share it): THERE (`groundThere` of 60) or USED UP. The
+   pick is the kernel's own hash of a keyed string (`<seed>::ground::<ground key>`, as `resolveResources` keys its
+   refills): IT TAKES NO DRAW. A record with no seed reads THERE. The roll table's denial does not unseat a ground (W2:
+   people 0, no stored objection: a quarry on a port route proves its stone).
+   (b) WHETHER A MATERIAL IS BOUGHT IN, by the material's import word (the town buys "Timber" or it does not: every
+   house that uses that material shares the answer, or an import would stand beside a house short of it): YES where the
+   record's imports already bring it (a fact of the record is never unsaid); else on a route connected in ordinary
+   times (a siege changes nothing here): where a ground of that material is used up (stored or implied): the seed's pick
+   (`<seed>::bought::<the word>`: `boughtIn` of 60); where the material was never there: YES; on an isolated route: NO.
+   (c) THE STORY OF A HOUSE AND ITS MATERIAL, one of: LOCAL (a ground of it there, stored or implied, or a live local
+   producer supplies it); BOUGHT (not local, and (b) says yes; a TAKER is never BOUGHT); IDLE (neither).
+   (d) "NEVER HAD IT AND BUYS NOTHING" IS NEVER A STORY. It can only arise for a buyer on an isolated route with no
+   ground of its material: COUNT those houses over the 720 by kind, and make the page say the owner's fourth story of
+   them (the ground implied USED UP, the house idle) if the count is small and the reading of five such towns is sound;
+   otherwise leave them BY NAME with the count. The salt works off the coast on an isolated route: 0 of the 720: name it.
+3. THE READER (`houseInputAtHand.js`) answers by the story: LOCAL: `local`; BOUGHT: `imported` (the list brings it; under
+   a siege the leaf's own rule prints "Curtailed by the siege."); IDLE: `missing`. A TAKER whose ground is used up is
+   `missing` and fed by no import: read by THE KIND'S GROUNDS AND THE GROUNDS OF THE TOWN, not by the chains the house is
+   listed on (the audit's c1: six peat cutters stand on a live coal chain that hides their spent marsh; the peat cutter
+   is fed today by its own bog's shortage import): you read `TAKERS` beside the dependence table's `SPENT_GROUND_WORKERS`
+   and do not edit that table. BIRTH-1's narrow rule (a word bought for a buyer feeds no source house) holds for the
+   takers and is LIFTED for the three that run on bought-in material. COUNT over the 720 and the 150, each apart: houses
+   newly unmarked; houses newly marked and what the mark says; in calm towns on a connected route and in all.
+4. THE BIRTH (`resourceGenerator.js :: importsBroughtAtBirth` and the gaps after it): the birth writes a material's word
+   EXACTLY where the story says BOUGHT and the list lacks it: a used-up ground: that ground's own shortage word; never
+   there: the plain word (`IMPORT_WORD`; the salt works': "Salt"). UNDER A SIEGE TOO (the owner: a siege excludes
+   nothing; BIRTH-1 as landed writes nothing under a siege: its hand-back counts the houses that leaves short with no
+   cause). WHERE THE STORY SAYS IDLE THE BIRTH WRITES NOTHING: that is the owner's fourth story, by the seed and no longer
+   by accident. No word twice. The stored gap of each house is written as the reader answers it.
+5. THE GAP LINES (`validationOnPage.js :: resourceGapLines`): a house whose ground is used up (stored or implied) reads
+   BIRTH-1's worked-out line by the Depleted list's own label; BIRTH-1's line for a source house with no ground of its
+   own ("... from a ground of its own: none lies near.") HAS NO CASE LEFT (an implied ground stands, or the salt is
+   bought): remove it, and say how many towns printed it. No line says a material "reaches" a house from elsewhere where
+   the house is worked out; no gap line for a house the story has at work.
+6. THE PAGE (`ResourcesTab.jsx`, the Nearby Resources section) prints the grounds of item 2 (a): a STORED live ground as
+   today ("Abundant", or unlabelled under a siege); AN IMPLIED GROUND THAT IS THERE without the word "Abundant" (one
+   quarry does not prove plenty: W2): in the unlabelled form the siege already uses, under the section's title; AN
+   IMPLIED GROUND THAT IS USED UP in the "Depleted" group. COUNT the towns whose section changes.
+7. THE OTHER READERS OF THE LAND LIST ON THE PAGE: list every page-side reader of `config.nearbyResources` and of
+   `nearbyResourcesDepleted` (the audit's W1 names `facts/registeredWords.js`, `facts/leadingSourceSpent.js`,
+   `facts/chainCarrier.js`, `display/tracePresentation.js`, `display/tradeListDisplay.js`, and 73 lines in 30 files that
+   name the six ground keys). FOR EACH: does a line of the page now say something FALSE in a town with an implied ground
+   (above all a line declared on the ABSENCE of a ground: "no stone to build with"; or on its PRESENCE where it is
+   implied used up)? Count over the 720 with three towns each. Route through your leaf the readers that are in YOUR
+   files; NAME the rest with their counts (the PDF's land list among them; the world pulse's readers of the stored list:
+   say in three lines what a simulated year would do to a source house on an implied ground).
+8. THE CARD (only if it is one reading): the Resource Exploitation section prints no card for an implied ground (W3). If
+   the tab's stage reader can print one from the house in one reading, print THE HOUSE'S OWN STAGE ONLY (never
+   `exportValue`, never `finalProducts`); otherwise leave it by name with W3's count.
+9. THE HELD INPUT ITEMS, last, if your count allows (two earlier seats left them for the holder of the reader): (a) THE
+   HOUSE THAT WORKS ONLY A GRAIN SURPLUS (the auditor H's 8i.surplus: the maltster's card says "Requires grain surplus.";
+   it reads bare in besieged hamlets about 60% short of food: 3 towns of the 720 by `runH`, and one calm town a few per
+   cent short, which you LEAVE): a house that works only a surplus is short where the page's food line is short under a
+   crisis that takes the food. (b) THE FOUR HOUSES of the seam's economy seat (the apothecaries of r2r-town-51 and
+   r2s-religious_conversion-town-2, the butchers of r2r-town-54 and r2r-metropolis-19: `runD`'s 8a.input read 4 · 11
+   over the 720 before BIRTH-1): RE-MEASURE at your base; cure what is left in the reader (its `importsBring` reads "Herbs
+   and forage" as the herbs and game as livestock) and strike the cured rows from `LEFT` in
+   `tests/domain/bar6MarksLaw8.test.js` in the same commit. If the cure needs the dependence table's ids, name it.
+10. THE GUARD, `tests/domain/supplyStoryLaw.test.js`, over fixed seeds of the census and of the 150 (say which and why
+    they are enough). (L1) EVERY LIVE HOUSE WITH A MATERIAL TELLS ONE STORY ON EVERY SURFACE: LOCAL: a ground there (stored
+    or implied) or a live local producer, and no short mark; BOUGHT: the word on the imports, and no short mark (the
+    siege's mark under a siege); IDLE: the short mark, the ground under Depleted, and NO word of that material on the
+    imports. (L2) "never had it and buys nothing" in NO town of the populations, or exactly the houses item 2 (d) names.
+    (L3) no import feeds a taker. (L4) THE SEED'S CHOICE: the same seed twice gives the same story; an implied ground is
+    on NO stored field (the record's `config` is byte-equal with and without your rule). (L5) THE ODDS HOLD: over the
+    census's 720 the bought-in share of the used-up materials on connected routes, and the there-share of the implied
+    grounds, each fall within a stated band of `SUPPLY_ODDS` (say the band and why). Its positive control: it FAILS at
+    your base. THE ROUND TRIP, AS A CASE: ten towns with an implied ground, generated again from the produced record by
+    the product's own regenerate (`store/settlementRegenAction.js`: the saved config and seed) AND from that config read
+    as a manual roster (`nearbyResourcesRandom: false`): each is the town it was before your rule (the audit's
+    `probes/w1roundtrip.mjs` is the form).
+11. THE TABLE FOR THE OWNER: HOW OFTEN EACH STORY COMES UP, over the census's 720 and the 150: houses and towns for each
+    row of the table at the head of this file, by tier, and by material for the owner's four; and the same before your
+    rule (BIRTH-1's tree). Plain words; a person who knows no code reads it.
+12. THE PAGE AFTER YOU, READ: render twenty-four towns across the tiers (six of the owner's fourth story in a town that
+    can trade; four of the first; four of the third; four with an implied ground the roll table denies; three off-coast
+    salt works; three besieged) and READ the Resources tab, the house's card, the Economics tab's Imports, Exports and
+    income rows, the Outlook, the arrival scene: does any line show an idle house at work, name an import beside a house
+    short of it, export a worked-out ground's good, or say "imports nothing"? Each such pair is named in your hand-back
+    with its count over the 720; you cure those in your files and leave the rest BY NAME for the round's other seats.
+
+## Your measures, before and after
+
+The audit's probes (`q1census.mjs`: marks by cause; `q4rules.mjs`: born-short in calm connected towns; `b2align.mjs`: the
+three reverse counts: after you c1 counts NO taker fed by an import and c2, c3 stay 0; `fieldDiff.mjs`: THE PROOF THAT NO
+PERSON, TIE, NAME OR HOUSE MOVES over the 720, the 150 and the 525 reference configurations: print its table) and the
+chair's runners over the 150 at your base and your tip (`docs/chair/2026-11-16/bar5/AUDIT/run-a.mjs` and `runB.mjs`,
+`docs/chair/2026-11-16/bar6/AUDIT/runC.mjs` to `runF.mjs`, `docs/chair/2026-11-17/bar7/AUDIT/runH.mjs` and `runI.mjs`).
+THE IDLE HOUSES ARE NOW A CHOSEN SHARE: `runH`'s rules that read a marked house against another surface (8f, 8j, 8k) will
+find more of them until the round BAR7's seats have landed (they make every surface read the mark): count them by rule at
+your base and your tip and say which of BAR7's seats holds each; a rule that rises for any other reason is yours. A
+DECLARED MOVE: the stored families you move (imports, gaps) and how many of the 525. Births over the 720 take about half
+an hour at four workers: start them in the background at once.
+
+## Your net, your hand-back
+
+Your net is R11's, with ONE `npm run build` and the two build tests (you add a facts leaf). Stored figures are the
+close's (R10). Hand-back `docs/chair/2026-11-17/birth/BIRTH-2-HANDBACK.md`: each item (done with the count before and
+after and its guard, or left with the reason and what you measured); item 11's table FIRST; `fieldDiff`'s table; the
+round trip's table; what a reader can newly see (each with three towns); the readers of the land list you routed and
+those you named; the pairs of item 12; the books your cure moves; for the owner's veto list: the tables of item 1 as a
+person who knows no code can read them. Budget: hand back at 550,000 of your count, then push nothing more. PUSH EARLY
+AND OFTEN. One line to the chair at the end, 150 words at most.
