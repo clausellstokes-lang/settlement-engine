@@ -189,7 +189,8 @@ function seamCultureChecks(seed, s) {
   const shown = ENTREPOT.filter((v) => admitsScoped(v, s));
   const plenty = shown.some((v) => /could ever use; the difference/.test(v.text));
   if (crisis.has('hunger')) expect(plenty ? 'the plenty line' : null, `${seed}: the entrepôt's plenty under the hunger family`).toBe(null);
-  if (!crisis.has('under_siege') && !crisis.has('plague_onset')) expect(shown.length, `${seed} (${crisis.kinds.join(', ')}): the entrepôt pool admits under three`).toBeGreaterThanOrEqual(3);
+  // the pool is `{market}` (DS-GEN-13 speaks of the town's market): the floor is read where a market stands
+  if (factsOf(s).market === true && !crisis.has('under_siege') && !crisis.has('plague_onset')) expect(shown.length, `${seed} (${crisis.kinds.join(', ')}): the entrepôt pool admits under three`).toBeGreaterThanOrEqual(3);
   // item 6: where nothing was destroyed, the recovered legacy keeps three lines
   if (legacyRuinOf(s) === false) expect(RECOVERED.filter((v) => admits(v, s)).length, `${seed}: the no-ruin side of LEGACY-RECOVERED`).toBeGreaterThanOrEqual(3);
 }
