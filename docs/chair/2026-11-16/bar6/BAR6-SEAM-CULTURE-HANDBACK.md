@@ -11,11 +11,11 @@ my tip, in scratch trees outside every tree. The doors: `node scripts/presumptio
 | item | what | BEFORE 150 · 720 | AFTER 150 · 720 | how | guard |
 |---|---|---|---|---|---|
 | 1 · the sovereign | the lines of my files that name a lord: the stock's sovereign rows are 96, 124, 137, 138, 145 | 5 rows reasoned | 124 declared; 96 and 145 hold by their own words; **137, 138 LEFT** | `historyData.js`: "Lord/Lady of the Manor" `needs: ['sovereign']` | `bar6CultureLines` item 1 (the leaf reads a person who holds it; over the 720, every town that seats it reads `sovereign`) |
-| 2 · the entrepôt line | DS-GEN-13 ENTREPOT v1 under a famine (7c-plenty) | 1 (bar0-village-famine-rand-37) · __720B__ | 0 · __720T__ | v1 `no crisis: hunger · tier: ≥ town`; v4 (twin, `tier: ≤ village`, no "the town"); v5 (twin, `crisis: hunger · no crisis: under_siege`: "was built to handle far more than its people could ever use; with food short, it cannot now feed them.") | item 2 (positive control: the base marks admit a famine village; the cured line is refused there; the pool keeps three there); the 720 sweep (never under the hunger family; three lines wherever the base had three) |
+| 2 · the entrepôt line | DS-GEN-13 ENTREPOT v1 under a famine (7c-plenty) | 1 (bar0-village-famine-rand-37) · 3 (r2s-famine-city-3, r2s-famine-town-0, r2s-famine-town-1) | 0 · 0 | v1 `no crisis: hunger · tier: ≥ town`; v4 (twin, `tier: ≤ village`, no "the town"); v5 (twin, `crisis: hunger · no crisis: under_siege`: "was built to handle far more than its people could ever use; with food short, it cannot now feed them.") | item 2 (positive control: the base marks admit a famine village; the cured line is refused there; the pool keeps three there); the 720 sweep (never under the hunger family; three lines wherever the base had three) |
 | 3 · v4's noun | DS-GEN-16 LEGACY-RECOVERED v4 "the town that came through it" | unbanded | "the place that came through it" | the annex | items 3 and 6 (no "the town" in the pool under no town band) |
 | 4 · the table | 167 reviewed reasons, every row read against the source | 167 | **161 held**; 6 did not (below) | 4 cured and out; 2 out and LEFT | item 4 (no row of the table is one that did not hold) |
 | 5 · the door's fresh line | `cultureProfiles.js` "Maize and other grain from intensive plots, terraces, and raised fields …" (class `resource`) | fresh 1 of mine (door: `hits 1805 · banked 1938 · fresh 4 · stale 137`) | fresh 0 of mine (door: `hits 1798 · banked 1938 · fresh 3 · stale 143`) | reworded: "Maize and other grain, grown intensively and redistributed through tribute, support dense populations." (no atom answers it where the line is chosen: below) | item 5 (the door's lexicon reads no class in it; positive control: the old line was a `resource` hit; it still names its grain) |
-| 6 · the legacy's answer | DS-GEN-16 LEGACY-RECOVERED v1 after a blow that destroyed nothing (10g-legacy-answer, apart) | 2 (bar0-town-calm-rand-28, bar0-town-calm-rand-40) · __720B6__ | 0 · __720T6__ | v1 `legacy ruin`, "what it built in answer" (no "the town"); v5 (twin, `no legacy ruin`): "{settlement} came through the {calamity} without losing what it had built, a legacy that is {timeband_age}." The no-ruin side keeps three (v3, v4, v5) | items 3 and 6 (positive control: v1 as it stood printed after the economic divide; refused now; three lines there); the 720 sweep (every rebuilding line refused where nothing was destroyed; three no-ruin lines there) |
+| 6 · the legacy's answer | DS-GEN-16 LEGACY-RECOVERED v1 after a blow that destroyed nothing (10g-legacy-answer, apart) | 2 (bar0-town-calm-rand-28, bar0-town-calm-rand-40) · 4 | 0 · 0 | v1 `legacy ruin`, "what it built in answer" (no "the town"); v5 (twin, `no legacy ruin`): "{settlement} came through the {calamity} without losing what it had built, a legacy that is {timeband_age}." The no-ruin side keeps three (v3, v4, v5) | items 3 and 6 (positive control: v1 as it stood printed after the economic divide; refused now; three lines there); the 720 sweep (every rebuilding line refused where nothing was destroyed; three no-ruin lines there) |
 
 Item 2, measured before: of my changes to DS-GEN-13, the hungry twin first admitted a siege and `tests/domain/corpusCureGuards.test.js`
 ("DS-GEN-13::ENTREPOT … 32ab37da: the siege Overview's road lines off a siege") read the pool speaking where it is mute by design:
@@ -55,7 +55,25 @@ does not hold: counted apart, ruling CD1; the build guard's door reads it declar
 
 ## THE LINES A READER CAN SEE (new or changed; towns of my tip's renders)
 
-__LINES__
+Each line with the towns it prints in at my tip (150 = the wide read; 720 = the census), and its count of towns over the 720.
+
+| line | where | towns (count over the 720) |
+|---|---|---|
+| DS-GEN-13 ENTREPOT v1 "… handles more than the town could ever use; the difference is the town's living." (now `no crisis: hunger · tier: ≥ town`) | Overview | r2r-town-13, r2r-town-14, r2r-town-23 (10); bar0-town-calm-rand-40, bar0-town-occupied-rand-27 of the 150 |
+| NEW v4 "{settlement}'s market handles more than its own people could ever use; the difference is their living." | Overview | r2r-hamlet-15, r2r-hamlet-51, r2r-village-31 (5) |
+| NEW v5 "{settlement}'s market was built to handle far more than its people could ever use; with food short, it cannot now feed them." | Overview | r2s-famine-city-3, r2s-famine-town-0, r2s-famine-town-1 (3: the base's three 7c-plenty towns); bar0-village-famine-rand-37 of the 150 |
+| DS-GEN-16 LEGACY-RECOVERED v1 "… and what it built in answer still stands …" (now `legacy ruin`) | History | r2r-city-14, r2r-city-26, r2r-city-37 (34) |
+| v4 "… the place that came through it is the one that stands …" | History | r2r-city-31, r2r-city-36, r2r-hamlet-59 (15); bar0-town-calm-rand-28 of the 150 |
+| NEW v5 "{settlement} came through the {calamity} without losing what it had built, a legacy that is {timeband_age}." | History | r2r-city-23, r2r-city-30, r2r-city-55 (19) |
+| the Maize foodways line, "Maize and other grain, grown intensively and redistributed through tribute, support dense populations." | Economics (foodways), PDF | r2s-indebted-city-0, r2s-infiltrated-metropolis-1, r2s-insurgency-town-1 (4; the old text printed in 4 at the base) |
+| the steppe detail "storehouses and caravan yards mark the boundary …" (now `no route: isolated`) | arrival sight, PDF Architecture | r2r-city-15, r2r-city-17, r2r-city-27 (27; 30 at the base: the three it leaves are isolated) |
+| "Lord/Lady of the Manor" (`needs: ['sovereign']`) | a person's role | prints in none of the 720 (nor at the base) |
+| DS-WAR-2 `economic · strained` v1 "The tribute out of {settlement} is handed over, and handed over grudgingly …" | War & Faith | none of the 720 (the old text: none at the base) |
+| ARRIVAL_SCENES.guild "… the whine of a lathe, the bite of fresh shavings …" | arrival | none: no route reaches the scene |
+
+THE RUNNERS AT MY TIP. runC over the 150: 7c-plenty 1 → 0 (6b-denied 5, 6a-w 16, 7w-tone 8: unchanged, not mine). runC over the
+720: 7c-plenty 3 → 0 (6b-denied 19, 6b-w 4, 6a-w 103, 7w-tone 8, 6c-arms 3: unchanged). runF over the 150: 10g-legacy-answer
+2 → 0; over the 720: 4 → 0 (10e-temper-manner 5 · 14 and 10f-backs-wide 37 · 195: unchanged, SEAM-DESKS's and the chair's).
 
 ## THE BOOKS MY CURES MOVE (named, not re-taken: the close's)
 
@@ -73,9 +91,26 @@ __LINES__
   dye-vats and tribute texts stale (stale 137 → 143 over the whole tree); no `--shrink`, no `--bank`.
 - `docs/census/declarations/CULTURE_PROFILES_DAILY.json` holds the old Maize text (a census ledger).
 
-## THE NET (at my tip `__TIP__`; each alone, to a file through `sh scripts/gate-tail.sh`)
+## THE NET (at my tip `ad5b4c119`; each alone, to a file through `sh scripts/gate-tail.sh`)
 
-__NET__
+| gate | at my tip | at the base |
+|---|---|---|
+| `npm run typecheck:domain:strict` | green (1113, ceiling 1113) | green |
+| `npm run typecheck:ratchet` | green (167, ceiling 167) | green |
+| `npx eslint` on my six changed sources and my guard | green | |
+| `npx vitest run tests/architecture` | green, 347 | |
+| `npm run build` + the two build tests | not run: I touched no file under `src/domain/facts/` and no import in one (S7) | |
+| my guard `tests/domain/bar6CultureLines.test.js` | green, 10 (the 720 sweep included) | |
+| the two rounds' guards (`tests/domain/bar5*`, `tests/generators/bar5*`, `tests/domain/bar6*`, `tests/generators/bar6*`: 19 files) | 18 green; `bar6ScenesGoods.test.js` "each good reads the page's own lists …" red | red, the same message (`expected false to be true`): SEAM-SCENES item 4, named |
+| `node scripts/presumption-classes-door.mjs --check` | `hits 1798 · banked 1938 · fresh 3 · stale 143 · ceiling 1938`: the three fresh are SEAM-DESKS's (the power desk's travellers line, `safetyProfile.js`'s two); **none of mine** | `hits 1805 · banked 1938 · fresh 4 · stale 137 · ceiling 1938` (the fourth was my Maize line) |
+| `node scripts/presumed-things-door.mjs --check` | `fresh 39 · stale 72 · first-register stale 6 · banked 4688 · strips fresh 0 stale 0 banked 107`: the same 39 fresh as at the base, line for line; **my cures add none** | the same |
+
+Also read, the files my lines touch (at my tip against the base, same message unless named): `tests/domain/corpusCureGuards.test.js`
+green (it was red at an earlier tip of mine: the siege, above); `generalStateProseDesk`, `entrepots`, `corpusEcoTailGuards`,
+`heraldCausalVoice`, `w2FixDataHistoryItems`, `historyTab` green; `dossierStateProseProjection.contract`, `proseWiringCensus.walker`,
+`wiringCensusDeclared.walker`, `factLayers.walker`, `crisisBlindDossierProse`, `textOf` (227 against 224: SEAM-SCENES item 7),
+`foodwaysCultureLineHolds` red at the base and at my tip with the same messages, except the three census counts named in the
+books above.
 
 ## WHAT IS LEFT, BY NAME
 
