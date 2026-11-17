@@ -52,7 +52,7 @@ import { render, cleanup } from '@testing-library/react';
 import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf, warIronHookOutsideWar } from '../../src/domain/facts/houseInputAtHand.js';
 import { GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, sourceStoryOf } from '../../src/domain/facts/supplyStory.js';
 import { ALSO_USES } from '../../src/domain/facts/houseKinds.js';
-import { HOUSE_TRADE_INPUT } from '../../src/data/crisisDependence.js';
+import { HOUSE_TRADE_INPUT, houseDependenceOf, INPUT } from '../../src/data/crisisDependence.js';
 import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
 import { subsumeTradeGoods } from '../../src/domain/region/goodsCatalog.js';
 import { rowShortOf } from '../../src/domain/display/crisisStoppedRow.js';
@@ -63,7 +63,7 @@ import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { SPENT_GROUND_YIELD } from '../../src/data/crisisDependence.js';
 import { resourceShortageImport } from '../../src/domain/resourceSemantics.js';
-import { MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, SUPPLY_ODDS, TAKERS } from '../../src/domain/facts/houseKinds.js';
+import { BUYS_AND_WORKS, MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, SUPPLY_ODDS, TAKERS } from '../../src/domain/facts/houseKinds.js';
 import { rowMarkText } from '../../src/domain/display/crisisStoppedRow.js';
 import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
@@ -117,6 +117,8 @@ const storiesOf = (s) => liveInstitutions(s).filter((i) => !!i && typeof i.name 
 /** The noun the gap line names for a word ("Timber" -> timber). @param {string} line */
 const gapGood = (line) => /^No (.+?) reach(?:es)? /.exec(line)?.[1] ?? '';
 
+/** The besieged buyers the law read (its anchor). */
+const besiegedBuyers = { n: 0 };
 /** THE LAW L1-L3 in one town: its instances, each `<seed> · <rule> · <house>`. @param {string} seed @param {any} s */
 function lawInstances(seed, s) {
   /** @type {string[]} */
@@ -168,6 +170,20 @@ function lawInstances(seed, s) {
     const stored = [...(s.config?.nearbyResources || []), ...(s.config?.nearbyResourcesDepleted || [])].map(String);
     if (stored.some((g) => GROUND_YIELD[g] && GROUND_YIELD[g] === ({ timber: 'timber', ironOre: 'iron ore', livestock: 'livestock', stone: 'stone', clay: 'clay', hides: 'hides', wool: 'wool', herbs: 'herbs', peat: 'reeds' })[venture.family])) bad('L2 venture, a stored ground of its material', venture.name);
   }
+  // BIRTH-3 (the chair's AMENDMENT 2 (D)): THE BESIEGED FORM OF A BUYER (BR3 (c)): where the town buys its material in, under a
+  // siege the word stands on the imports, the house is curtailed by the siege, and it never reads `missing`
+  if (besiegedIn(s)) for (const inst of liveInstitutions(s)) {
+    const id = idOfHouse(inst); const family = MATERIAL_OF[id];
+    if (!BUYS_AND_WORKS.has(id) || !family || !CHAIN_INPUTS[family] || !listHolds(s, familyWord(family))) continue;
+    const answer = houseInputAtHand(s, family, inst, { rawResource: CHAIN_RAW_INPUT[family] });
+    if (answer === 'local') continue; // the land gives it: its own goods, no siege mark
+    // a row the crisis table holds the food's ("food: grain": the mills, the bakers, the brewery) is read by the food's own
+    // reading under a siege, not the supply rule's: NAMED (8 houses of the 720 and the 150 carry no siege mark there)
+    if (houseDependenceOf(inst).some((d) => String(d).startsWith('food:'))) continue;
+    besiegedBuyers.n++;
+    if (answer === 'missing') bad('L1 besieged buyer, its word bought and its input missing', inst.name);
+    else if (houseDependenceOf(inst).includes(INPUT) && !/siege/.test(rowMarkText(s, 'house', inst) || '')) bad(`L1 besieged buyer, its word bought (${answer}) and no siege mark`, inst.name);
+  }
   // the pair: no gap line names a good beside the import of that same good's word
   // (a taker on its used-up ground is worked out whatever the town buys for its buyers, BR4: its gap line is followed by its
   // worked-out line, and that pair is true)
@@ -218,6 +234,7 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
     // the anchors: each story is told in the populations (the law is not read over an empty set)
     expect(Object.keys(told).sort(), 'every story is told').toEqual(['bought', 'idle', 'local', 'venture']);
     expect(Math.min(told.bought, told.idle, told.local), 'each story by more than ten houses').toBeGreaterThan(10);
+    expect(besiegedBuyers.n, 'besieged buyers whose word the town buys, read (the anchor)').toBeGreaterThan(20);
     expect(found, 'a house whose surfaces tell two stories').toEqual([]);
   }, 1_800_000);
 
