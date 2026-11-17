@@ -18,82 +18,79 @@
  */
 
 /**
- * (i) A HOUSE THAT BUYS AND WORKS ITS MATERIAL: catalogue id -> the one line of reason (the audit's, from the catalogue's
- * own description where it speaks).
- * @type {Readonly<Record<string, string>>}
+ * (i) A HOUSE THAT BUYS AND WORKS ITS MATERIAL: catalogue ids, each with the one line of reason (the audit's, from the
+ * catalogue's own description where it speaks) beside it.
+ * @type {ReadonlySet<string>}
  */
-export const BUYS_AND_WORKS_REASONS = Object.freeze({
-  blacksmith: 'a forge works bought iron; ore and bar iron travel by any road',
-  blacksmiths_3_10: 'the same forge, more of them',
-  resident_smith_part_time: 'the same forge, part-time',
-  specialized_metalworkers: 'fine metalwork from bought metal',
-  smelter: 'its line: "converts raw ore … whenever ore can be had"; ore is bought from the mines',
-  brewer: 'brews bought malt and grain',
-  brewery: 'the same, larger',
-  maltster: 'malts bought grain',
-  mill: 'grinds the grain brought to it',
-  mills_2_5: 'the same, more of them',
-  bakers_5_15: 'bakes bought flour',
-  alehouse: 'brews or buys ale',
-  butchers_3_8: 'buys beasts at market',
-  carpenter: 'works bought planks',
-  carpenter_part_time: 'the same, part-time',
-  carpenters_5_15: 'the same, more of them',
-  cooper: 'staves are bought',
-  woodcarver: 'carves bought wood',
-  shipyard: 'ship timber is the classic import',
-  river_boatyard: 'the same, for river boats',
-  bowyer_fletcher: 'bow staves and shafts are bought',
-  thatcher: 'buys reed and straw',
-  sawmill: 'its line: "converts raw logs … whenever logs can be had"; logs are floated and carted to the saw',
-  sawmill_commercial: 'it saws logs brought to it, as the plain sawmill does',
-  cobbler: 'works bought leather',
-  cobbler_s_guild: 'the same, a guild',
-  tanner_established: 'buys hides from the butchers and the herds',
-  tanners: 'the same',
-  tannery: 'its line: "converts hides … whenever hides can be had"',
-  furrier_s_district: 'buys pelts',
-  fuller: 'fulls cloth woven of bought wool',
-  weavers_textile_workers: 'weave bought yarn and wool',
-  tailor: 'sews bought cloth',
-  tailor_s_guild: 'the same, a guild',
-  dyer: 'dyes bought cloth',
-  ropemaker: 'buys hemp and reed',
-  chandler: 'buys tallow and wax',
-  potter: 'its line: "made whenever clay can be had"; clay is carted to the wheel',
-  brickmaker: 'its line: "whenever clay can be had … requires clay and fuel"; clay is carted to the kilns',
-  vintner: 'its line: "from local grapes or imported must": it presses what reaches the cellar',
-  glassblower: 'its line: "when sand can be had"; sand travels by any route',
-  glassmakers: 'the same',
-  apothecary: 'buys herbs and drugs',
-  alchemist_shop: 'buys reagents',
-  luxury_goods_quarter: 'a quarter that sells what is brought',
-  fish_market: 'it sells the catch brought to it',
-  fishmonger: 'the same',
-});
-
-/** (i) the ids. @type {ReadonlySet<string>} */
-export const BUYS_AND_WORKS = new Set(Object.keys(BUYS_AND_WORKS_REASONS));
+export const BUYS_AND_WORKS = new Set([
+  'blacksmith', // a forge works bought iron; ore and bar iron travel by any road
+  'blacksmiths_3_10', // the same forge, more of them
+  'resident_smith_part_time', // the same forge, part-time
+  'specialized_metalworkers', // fine metalwork from bought metal
+  'smelter', // its line: "converts raw ore … whenever ore can be had"; ore is bought from the mines
+  'brewer', // brews bought malt and grain
+  'brewery', // the same, larger
+  'maltster', // malts bought grain
+  'mill', // grinds the grain brought to it
+  'mills_2_5', // the same, more of them
+  'bakers_5_15', // bakes bought flour
+  'alehouse', // brews or buys ale
+  'butchers_3_8', // buys beasts at market
+  'carpenter', // works bought planks
+  'carpenter_part_time', // the same, part-time
+  'carpenters_5_15', // the same, more of them
+  'cooper', // staves are bought
+  'woodcarver', // carves bought wood
+  'shipyard', // ship timber is the classic import
+  'river_boatyard', // the same, for river boats
+  'bowyer_fletcher', // bow staves and shafts are bought
+  'thatcher', // buys reed and straw
+  'sawmill', // its line: "converts raw logs … whenever logs can be had"; logs are floated and carted to the saw
+  'sawmill_commercial', // it saws logs brought to it, as the plain sawmill does
+  'cobbler', // works bought leather
+  'cobbler_s_guild', // the same, a guild
+  'tanner_established', // buys hides from the butchers and the herds
+  'tanners', // the same
+  'tannery', // its line: "converts hides … whenever hides can be had"
+  'furrier_s_district', // buys pelts
+  'fuller', // fulls cloth woven of bought wool
+  'weavers_textile_workers', // weave bought yarn and wool
+  'tailor', // sews bought cloth
+  'tailor_s_guild', // the same, a guild
+  'dyer', // dyes bought cloth
+  'ropemaker', // buys hemp and reed
+  'chandler', // buys tallow and wax
+  'potter', // its line: "made whenever clay can be had"; clay is carted to the wheel
+  'brickmaker', // its line: "whenever clay can be had … requires clay and fuel"; clay is carted to the kilns
+  'vintner', // its line: "from local grapes or imported must": it presses what reaches the cellar
+  'glassblower', // its line: "when sand can be had"; sand travels by any route
+  'glassmakers', // the same
+  'apothecary', // buys herbs and drugs
+  'alchemist_shop', // buys reagents
+  'luxury_goods_quarter', // a quarter that sells what is brought
+  'fish_market', // it sells the catch brought to it
+  'fishmonger', // the same
+]);
 
 /**
- * (ii) A HOUSE THAT IS THE SOURCE OF ITS MATERIAL: catalogue id -> the grounds (resource keys) that give it, and the one
- * line of reason. The salt works also stands on a coast (a port route or coastal terrain): the sea is its brine.
- * @type {Readonly<Record<string, Readonly<{ grounds: ReadonlyArray<string>, reason: string }>>>}
+ * (ii) A HOUSE THAT IS THE SOURCE OF ITS MATERIAL: catalogue id -> the grounds (resource keys) that give it, with the one
+ * line of reason beside it. The salt works also stands on a coast (a port route or coastal terrain): the sea is its brine.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const SOURCE_GROUNDS = Object.freeze({
-  charcoal_burner: Object.freeze({ grounds: Object.freeze(['managed_forest', 'mountain_timber', 'shipbuilding_timber']), reason: 'its line: "operates kilns in nearby woodland": charcoal is not burnt from bought logs' }),
-  woodcutter_s_camp: Object.freeze({ grounds: Object.freeze(['managed_forest', 'mountain_timber', 'shipbuilding_timber']), reason: 'it fells the wood it stands in' }),
-  dairy_farmer: Object.freeze({ grounds: Object.freeze(['grazing_land', 'alpine_pasture', 'fertile_floodplain', 'camel_herds']), reason: 'it keeps the herd it milks; milk does not travel and a herd grazes daily' }),
-  shepherd: Object.freeze({ grounds: Object.freeze(['grazing_land', 'alpine_pasture']), reason: 'it keeps the flock on its pasture' }),
-  stone_quarry: Object.freeze({ grounds: Object.freeze(['stone_quarry']), reason: 'its line: "the only source of proper building stone the place has had"' }),
-  mine: Object.freeze({ grounds: Object.freeze(['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits']), reason: 'it cuts the seam it stands on' }),
-  mine_open_cast: Object.freeze({ grounds: Object.freeze(['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits']), reason: 'the same, open-cast' }),
-  peat_cutter: Object.freeze({ grounds: Object.freeze(['marshlands']), reason: 'it cuts the bog it stands on' }),
-  salt_works: Object.freeze({ grounds: Object.freeze(['salt_flats', 'desert_salt', 'fishing_grounds']), reason: 'its line: "evaporates saline brine … where brine lies near": the brine is its ground (on a coast, the sea)' }),
-  fisher_s_landing: Object.freeze({ grounds: Object.freeze(['fishing_grounds', 'river_fish']), reason: 'the boats fish the water off the landing' }),
-  fishing_community: Object.freeze({ grounds: Object.freeze(['fishing_grounds', 'river_fish']), reason: 'the same' }),
-  hunter_s_lodge: Object.freeze({ grounds: Object.freeze(['hunting_grounds']), reason: 'it hunts the grounds it stands in' }),
-  wildfowler: Object.freeze({ grounds: Object.freeze(['marshlands', 'hunting_grounds']), reason: 'it hunts the marsh and the grounds' }),
+  charcoal_burner: Object.freeze(['managed_forest', 'mountain_timber', 'shipbuilding_timber']), // its line: "operates kilns in nearby woodland": charcoal is not burnt from bought logs
+  woodcutter_s_camp: Object.freeze(['managed_forest', 'mountain_timber', 'shipbuilding_timber']), // it fells the wood it stands in
+  dairy_farmer: Object.freeze(['grazing_land', 'alpine_pasture', 'fertile_floodplain', 'camel_herds']), // it keeps the herd it milks; milk does not travel and a herd grazes daily
+  shepherd: Object.freeze(['grazing_land', 'alpine_pasture']), // it keeps the flock on its pasture
+  stone_quarry: Object.freeze(['stone_quarry']), // its line: "the only source of proper building stone the place has had"
+  mine: Object.freeze(['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits']), // it cuts the seam it stands on
+  mine_open_cast: Object.freeze(['iron_deposits', 'precious_metals', 'gemstone_deposits', 'coal_deposits']), // the same, open-cast
+  peat_cutter: Object.freeze(['marshlands']), // it cuts the bog it stands on
+  salt_works: Object.freeze(['salt_flats', 'desert_salt', 'fishing_grounds']), // its line: "evaporates saline brine … where brine lies near": the brine is its ground (on a coast, the sea)
+  fisher_s_landing: Object.freeze(['fishing_grounds', 'river_fish']), // the boats fish the water off the landing
+  fishing_community: Object.freeze(['fishing_grounds', 'river_fish']), // the same
+  hunter_s_lodge: Object.freeze(['hunting_grounds']), // it hunts the grounds it stands in
+  wildfowler: Object.freeze(['marshlands', 'hunting_grounds']), // it hunts the marsh and the grounds
 });
 
 /** Whether a catalogue id is a house that is the source of its material. @param {unknown} id @returns {boolean} */

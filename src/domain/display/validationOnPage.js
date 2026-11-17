@@ -128,7 +128,7 @@ const capFirst = (x) => x.charAt(0).toUpperCase() + x.slice(1);
 function workedOutGround(s, inst) {
   const id = str((typeof inst?.catalogId === 'string' && inst.catalogId) || catalogIdForName(str(inst?.name)) || '');
   if (!isSourceHouse(id)) return '';
-  const grounds = SOURCE_GROUNDS[id].grounds;
+  const grounds = SOURCE_GROUNDS[id];
   const config = /** @type {{ nearbyResourcesDepleted?: unknown }} */ (s?.config || {});
   const live = /** @type {string[]} */ (availableNativeResourceKeys(/** @type {Record<string, unknown>} */ (config)));
   if (grounds.some((k) => live.includes(k))) return '';
