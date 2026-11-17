@@ -1,0 +1,758 @@
+{
+ "R1-150": {
+  "towns": 150,
+  "changed": 58,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "resourceAnalysis.gaps": 57,
+   "arrivalScene": 4,
+   "resourceAnalysis.priorityNotes": 4
+  }
+ },
+ "R1-720": {
+  "towns": 720,
+  "changed": 331,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "resourceAnalysis.gaps": 329,
+   "resourceAnalysis.priorityNotes": 36,
+   "arrivalScene": 11
+  }
+ },
+ "R1-ref": {
+  "towns": 525,
+  "changed": 222,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "resourceAnalysis.gaps": 222,
+   "arrivalScene": 1
+  }
+ },
+ "R1p-150": {
+  "towns": 150,
+  "changed": 4,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "arrivalScene": 4
+  }
+ },
+ "R1p-720": {
+  "towns": 720,
+  "changed": 11,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "arrivalScene": 11
+  }
+ },
+ "R1p-ref": {
+  "towns": 525,
+  "changed": 1,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "arrivalScene": 1
+  }
+ },
+ "R2-150": {
+  "towns": 150,
+  "changed": 68,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "economicState.primaryImports": 68,
+   "resourceAnalysis.gaps": 54,
+   "economicViability.plotHooks": 7,
+   "arrivalScene": 4,
+   "economicViability.summary": 3
+  }
+ },
+ "R2-720": {
+  "towns": 720,
+  "changed": 375,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "economicState.primaryImports": 375,
+   "resourceAnalysis.gaps": 298,
+   "economicViability.plotHooks": 33,
+   "economicViability.summary": 13,
+   "arrivalScene": 11
+  }
+ },
+ "R2-ref": {
+  "towns": 525,
+  "changed": 141,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "economicState.primaryImports": 141,
+   "resourceAnalysis.gaps": 114,
+   "economicViability.plotHooks": 1,
+   "arrivalScene": 1
+  }
+ },
+ "R25-150": {
+  "towns": 150,
+  "changed": 68,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "economicState.primaryImports": 68,
+   "resourceAnalysis.gaps": 54,
+   "economicViability.plotHooks": 7,
+   "arrivalScene": 4,
+   "economicViability.summary": 3
+  }
+ },
+ "R25-720": {
+  "towns": 720,
+  "changed": 376,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "economicState.primaryImports": 375,
+   "resourceAnalysis.gaps": 301,
+   "economicViability.plotHooks": 33,
+   "economicViability.summary": 13,
+   "arrivalScene": 11
+  }
+ },
+ "R25-ref": {
+  "towns": 525,
+  "changed": 141,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "economicState.primaryImports": 141,
+   "resourceAnalysis.gaps": 116,
+   "economicViability.plotHooks": 1,
+   "arrivalScene": 1
+  }
+ },
+ "R3a-150": {
+  "towns": 150,
+  "changed": 128,
+  "spread": {
+   "npcs": 126,
+   "relationships": 123,
+   "name": 0,
+   "institutions": 126
+  },
+  "families": {
+   "simulationTrace": 128,
+   "institutions": 126,
+   "economicState.compound": 126,
+   "economicState.safetyProfile": 126,
+   "availableServices": 126,
+   "npcs": 126,
+   "generationCoherenceReceipt": 125,
+   "relationships": 123,
+   "economicState.activeChains": 114,
+   "powerStructure": 114,
+   "defenseProfile": 105,
+   "economicState.incomeSources": 95,
+   "resourceAnalysis.gaps": 94,
+   "economicState.primaryImports": 87,
+   "economicState.primaryExports": 84,
+   "economicState.localProduction": 80,
+   "prominentRelationship": 77,
+   "economicState.tradeDependencies": 75,
+   "conflicts": 74,
+   "spatialLayout": 71,
+   "resourceAnalysis.imports": 69,
+   "arrivalScene": 69,
+   "stress": 60,
+   "stressors": 60,
+   "history": 58,
+   "pressureSentence": 56,
+   "economicState.foodSecurity": 53,
+   "economicViability.metrics": 51,
+   "economicState.institutionalServices": 51,
+   "economicViability.warnings": 43,
+   "economicViability.plotHooks": 38,
+   "economicViability.suggestions": 32,
+   "resourceAnalysis.exports": 31,
+   "economicViability.summary": 28,
+   "resourceAnalysis.exploitation": 26,
+   "resourceAnalysis.priorityNotes": 24,
+   "economicViability.dependencies": 24,
+   "economicViability.issues": 18,
+   "economicState.prosperityStanding": 17,
+   "economicState.prosperity": 13,
+   "economicState.economicComplexity": 9,
+   "economicState.situationDesc": 9,
+   "activeConditions": 8,
+   "isolationSupport": 8,
+   "config._isolationSupport": 8,
+   "economicState.necessityImports": 8,
+   "structuralSuggestions": 5,
+   "settlementReason": 4,
+   "culturalIdentity": 2,
+   "config._magicTradeOnly": 2,
+   "coherenceNotes": 1
+  }
+ },
+ "R3a-720": {
+  "towns": 720,
+  "changed": 547,
+  "spread": {
+   "npcs": 543,
+   "relationships": 533,
+   "name": 0,
+   "institutions": 546
+  },
+  "families": {
+   "simulationTrace": 547,
+   "institutions": 546,
+   "economicState.compound": 546,
+   "economicState.safetyProfile": 546,
+   "availableServices": 546,
+   "npcs": 543,
+   "generationCoherenceReceipt": 539,
+   "relationships": 533,
+   "economicState.activeChains": 512,
+   "powerStructure": 498,
+   "defenseProfile": 440,
+   "economicState.incomeSources": 409,
+   "economicState.primaryExports": 398,
+   "resourceAnalysis.gaps": 391,
+   "economicState.primaryImports": 369,
+   "economicState.localProduction": 354,
+   "economicState.tradeDependencies": 327,
+   "conflicts": 325,
+   "spatialLayout": 310,
+   "prominentRelationship": 307,
+   "resourceAnalysis.imports": 304,
+   "stress": 293,
+   "stressors": 293,
+   "history": 289,
+   "arrivalScene": 275,
+   "economicState.institutionalServices": 258,
+   "pressureSentence": 251,
+   "economicViability.warnings": 232,
+   "economicState.foodSecurity": 223,
+   "economicViability.metrics": 190,
+   "economicViability.plotHooks": 130,
+   "economicViability.summary": 113,
+   "economicViability.suggestions": 112,
+   "resourceAnalysis.exports": 97,
+   "resourceAnalysis.priorityNotes": 83,
+   "resourceAnalysis.exploitation": 76,
+   "economicState.prosperityStanding": 75,
+   "economicState.prosperity": 73,
+   "economicViability.dependencies": 70,
+   "economicState.economicComplexity": 62,
+   "economicState.situationDesc": 51,
+   "activeConditions": 48,
+   "economicState.necessityImports": 31,
+   "structuralSuggestions": 20,
+   "isolationSupport": 20,
+   "config._isolationSupport": 20,
+   "economicViability.issues": 18,
+   "settlementReason": 15,
+   "culturalIdentity": 7,
+   "coherenceNotes": 7,
+   "economicViability.viable": 2,
+   "config.stressType": 1,
+   "config.stressTypes": 1,
+   "structuralViolations": 1,
+   "config._magicTradeOnly": 1
+  }
+ },
+ "R3a-ref": {
+  "towns": 525,
+  "changed": 204,
+  "spread": {
+   "npcs": 204,
+   "relationships": 204,
+   "name": 0,
+   "institutions": 204
+  },
+  "families": {
+   "institutions": 204,
+   "economicState.compound": 204,
+   "economicState.safetyProfile": 204,
+   "availableServices": 204,
+   "npcs": 204,
+   "relationships": 204,
+   "simulationTrace": 204,
+   "generationCoherenceReceipt": 202,
+   "powerStructure": 198,
+   "conflicts": 198,
+   "stress": 189,
+   "stressors": 189,
+   "prominentRelationship": 189,
+   "economicState.activeChains": 159,
+   "economicState.primaryExports": 153,
+   "defenseProfile": 152,
+   "economicState.incomeSources": 140,
+   "economicState.localProduction": 134,
+   "resourceAnalysis.gaps": 126,
+   "resourceAnalysis.imports": 108,
+   "economicState.primaryImports": 106,
+   "arrivalScene": 99,
+   "pressureSentence": 98,
+   "spatialLayout": 97,
+   "history": 82,
+   "economicState.tradeDependencies": 73,
+   "economicState.institutionalServices": 69,
+   "economicViability.warnings": 67,
+   "economicViability.metrics": 57,
+   "economicState.foodSecurity": 36,
+   "resourceAnalysis.exports": 31,
+   "economicViability.dependencies": 31,
+   "resourceAnalysis.exploitation": 30,
+   "economicViability.plotHooks": 29,
+   "economicViability.summary": 20,
+   "settlementReason": 13,
+   "isolationSupport": 12,
+   "config._isolationSupport": 12,
+   "activeConditions": 11,
+   "economicState.economicComplexity": 8,
+   "economicState.prosperity": 6,
+   "economicState.prosperityStanding": 6,
+   "economicViability.suggestions": 5
+  }
+ },
+ "R3b-150": {
+  "towns": 150,
+  "changed": 46,
+  "spread": {
+   "npcs": 36,
+   "relationships": 35,
+   "name": 0,
+   "institutions": 36
+  },
+  "families": {
+   "simulationTrace": 46,
+   "generationCoherenceReceipt": 37,
+   "institutions": 36,
+   "economicState.compound": 36,
+   "economicState.safetyProfile": 36,
+   "availableServices": 36,
+   "npcs": 36,
+   "relationships": 35,
+   "resourceAnalysis.gaps": 32,
+   "resourceAnalysis.imports": 27,
+   "economicState.activeChains": 22,
+   "prominentRelationship": 17,
+   "powerStructure": 15,
+   "conflicts": 13,
+   "economicViability.plotHooks": 12,
+   "defenseProfile": 7,
+   "pressureSentence": 6,
+   "economicState.incomeSources": 6,
+   "economicState.primaryExports": 6,
+   "resourceAnalysis.priorityNotes": 5,
+   "arrivalScene": 5,
+   "stress": 5,
+   "stressors": 5,
+   "economicViability.summary": 5,
+   "spatialLayout": 5,
+   "economicState.tradeDependencies": 4,
+   "economicState.foodSecurity": 4,
+   "economicState.prosperityStanding": 3,
+   "economicState.institutionalServices": 3,
+   "economicState.primaryImports": 3,
+   "economicViability.warnings": 3,
+   "economicState.prosperity": 2,
+   "history": 1,
+   "economicViability.metrics": 1,
+   "culturalIdentity": 1,
+   "economicViability.suggestions": 1
+  }
+ },
+ "R3b-720": {
+  "towns": 720,
+  "changed": 241,
+  "spread": {
+   "npcs": 191,
+   "relationships": 190,
+   "name": 0,
+   "institutions": 191
+  },
+  "families": {
+   "simulationTrace": 241,
+   "generationCoherenceReceipt": 194,
+   "institutions": 191,
+   "economicState.compound": 191,
+   "economicState.safetyProfile": 191,
+   "availableServices": 191,
+   "npcs": 191,
+   "relationships": 190,
+   "resourceAnalysis.gaps": 147,
+   "resourceAnalysis.imports": 133,
+   "economicState.activeChains": 120,
+   "powerStructure": 99,
+   "prominentRelationship": 93,
+   "conflicts": 81,
+   "economicViability.plotHooks": 51,
+   "defenseProfile": 50,
+   "economicState.primaryExports": 46,
+   "pressureSentence": 35,
+   "economicState.primaryImports": 33,
+   "economicViability.summary": 27,
+   "economicState.foodSecurity": 25,
+   "economicState.tradeDependencies": 25,
+   "history": 23,
+   "economicState.incomeSources": 22,
+   "arrivalScene": 21,
+   "economicState.localProduction": 21,
+   "economicState.prosperityStanding": 19,
+   "resourceAnalysis.priorityNotes": 19,
+   "stress": 17,
+   "stressors": 17,
+   "economicState.institutionalServices": 16,
+   "economicState.prosperity": 15,
+   "spatialLayout": 15,
+   "economicViability.warnings": 15,
+   "economicViability.metrics": 8,
+   "economicViability.suggestions": 4,
+   "economicViability.issues": 4,
+   "economicState.economicComplexity": 2,
+   "resourceAnalysis.exploitation": 2,
+   "resourceAnalysis.exports": 2,
+   "economicState.situationDesc": 1,
+   "activeConditions": 1,
+   "economicViability.dependencies": 1
+  }
+ },
+ "R3b-ref": {
+  "towns": 525,
+  "changed": 55,
+  "spread": {
+   "npcs": 7,
+   "relationships": 6,
+   "name": 0,
+   "institutions": 7
+  },
+  "families": {
+   "simulationTrace": 55,
+   "institutions": 7,
+   "economicState.compound": 7,
+   "economicState.safetyProfile": 7,
+   "availableServices": 7,
+   "npcs": 7,
+   "generationCoherenceReceipt": 6,
+   "relationships": 6,
+   "prominentRelationship": 5,
+   "economicState.activeChains": 4,
+   "powerStructure": 4,
+   "conflicts": 4,
+   "economicState.foodSecurity": 3,
+   "economicViability.metrics": 3,
+   "resourceAnalysis.gaps": 3,
+   "resourceAnalysis.imports": 3,
+   "defenseProfile": 2,
+   "economicState.primaryExports": 2,
+   "economicState.tradeDependencies": 2,
+   "spatialLayout": 2,
+   "economicState.primaryImports": 1,
+   "economicState.institutionalServices": 1,
+   "settlementReason": 1,
+   "economicViability.warnings": 1,
+   "economicViability.summary": 1,
+   "economicViability.plotHooks": 1,
+   "pressureSentence": 1,
+   "economicState.incomeSources": 1,
+   "arrivalScene": 1
+  }
+ },
+ "R5-150": {
+  "towns": 150,
+  "changed": 0,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {}
+ },
+ "R5-720": {
+  "towns": 720,
+  "changed": 9,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "resourceAnalysis.gaps": 9
+  }
+ },
+ "R5-ref": {
+  "towns": 525,
+  "changed": 36,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {
+   "resourceAnalysis.gaps": 36
+  }
+ },
+ "REC-150": {
+  "towns": 150,
+  "changed": 88,
+  "spread": {
+   "npcs": 36,
+   "relationships": 35,
+   "name": 0,
+   "institutions": 36
+  },
+  "families": {
+   "resourceAnalysis.gaps": 69,
+   "economicState.primaryImports": 68,
+   "simulationTrace": 46,
+   "generationCoherenceReceipt": 37,
+   "institutions": 36,
+   "economicState.compound": 36,
+   "economicState.safetyProfile": 36,
+   "availableServices": 36,
+   "npcs": 36,
+   "relationships": 35,
+   "resourceAnalysis.imports": 27,
+   "economicState.activeChains": 22,
+   "economicViability.plotHooks": 17,
+   "prominentRelationship": 17,
+   "powerStructure": 15,
+   "conflicts": 13,
+   "arrivalScene": 8,
+   "economicViability.summary": 8,
+   "defenseProfile": 7,
+   "pressureSentence": 6,
+   "economicState.incomeSources": 6,
+   "economicState.primaryExports": 6,
+   "resourceAnalysis.priorityNotes": 5,
+   "stress": 5,
+   "stressors": 5,
+   "spatialLayout": 5,
+   "economicState.tradeDependencies": 4,
+   "economicState.foodSecurity": 4,
+   "economicState.prosperityStanding": 3,
+   "economicState.institutionalServices": 3,
+   "economicViability.warnings": 3,
+   "economicState.prosperity": 2,
+   "history": 1,
+   "economicViability.metrics": 1,
+   "culturalIdentity": 1,
+   "economicViability.suggestions": 1
+  }
+ },
+ "REC-720": {
+  "towns": 720,
+  "changed": 435,
+  "spread": {
+   "npcs": 191,
+   "relationships": 190,
+   "name": 0,
+   "institutions": 191
+  },
+  "families": {
+   "economicState.primaryImports": 377,
+   "resourceAnalysis.gaps": 351,
+   "simulationTrace": 241,
+   "generationCoherenceReceipt": 194,
+   "institutions": 191,
+   "economicState.compound": 191,
+   "economicState.safetyProfile": 191,
+   "availableServices": 191,
+   "npcs": 191,
+   "relationships": 190,
+   "resourceAnalysis.imports": 133,
+   "economicState.activeChains": 119,
+   "powerStructure": 99,
+   "prominentRelationship": 93,
+   "conflicts": 81,
+   "economicViability.plotHooks": 74,
+   "defenseProfile": 50,
+   "economicState.primaryExports": 45,
+   "economicViability.summary": 39,
+   "pressureSentence": 35,
+   "arrivalScene": 30,
+   "economicState.foodSecurity": 25,
+   "economicState.tradeDependencies": 25,
+   "history": 22,
+   "economicState.incomeSources": 21,
+   "economicState.localProduction": 20,
+   "economicState.prosperityStanding": 19,
+   "resourceAnalysis.priorityNotes": 19,
+   "stress": 17,
+   "stressors": 17,
+   "economicState.institutionalServices": 16,
+   "economicState.prosperity": 15,
+   "spatialLayout": 15,
+   "economicViability.warnings": 15,
+   "economicViability.metrics": 8,
+   "economicViability.suggestions": 4,
+   "economicViability.issues": 4,
+   "economicState.economicComplexity": 2,
+   "resourceAnalysis.exploitation": 2,
+   "resourceAnalysis.exports": 2,
+   "economicState.situationDesc": 1,
+   "activeConditions": 1,
+   "economicViability.dependencies": 1
+  }
+ },
+ "REC-ref": {
+  "towns": 525,
+  "changed": 167,
+  "spread": {
+   "npcs": 6,
+   "relationships": 5,
+   "name": 0,
+   "institutions": 6
+  },
+  "families": {
+   "economicState.primaryImports": 141,
+   "resourceAnalysis.gaps": 118,
+   "simulationTrace": 54,
+   "institutions": 6,
+   "economicState.compound": 6,
+   "economicState.safetyProfile": 6,
+   "availableServices": 6,
+   "npcs": 6,
+   "generationCoherenceReceipt": 5,
+   "relationships": 5,
+   "prominentRelationship": 4,
+   "economicState.activeChains": 3,
+   "powerStructure": 3,
+   "conflicts": 3,
+   "resourceAnalysis.imports": 3,
+   "economicState.foodSecurity": 2,
+   "economicViability.metrics": 2,
+   "defenseProfile": 2,
+   "economicState.primaryExports": 2,
+   "economicViability.plotHooks": 2,
+   "arrivalScene": 2,
+   "economicState.tradeDependencies": 1,
+   "economicState.institutionalServices": 1,
+   "pressureSentence": 1,
+   "economicState.incomeSources": 1,
+   "spatialLayout": 1
+  }
+ },
+ "noop-150": {
+  "towns": 150,
+  "changed": 0,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {}
+ },
+ "noop-720": {
+  "towns": 720,
+  "changed": 0,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {}
+ },
+ "noop-ref": {
+  "towns": 525,
+  "changed": 0,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {}
+ },
+ "off-150": {
+  "towns": 150,
+  "changed": 0,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {}
+ },
+ "off-720": {
+  "towns": 720,
+  "changed": 0,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {}
+ },
+ "off-ref": {
+  "towns": 525,
+  "changed": 0,
+  "spread": {
+   "npcs": 0,
+   "relationships": 0,
+   "name": 0,
+   "institutions": 0
+  },
+  "families": {}
+ }
+}
