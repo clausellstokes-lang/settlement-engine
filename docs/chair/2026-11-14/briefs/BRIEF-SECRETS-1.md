@@ -468,3 +468,34 @@ MORE OUTSIDERS, fourteen ([M] is the chair's default on thirteen; `inAStory` may
 | `underTheHat` [M] | Is the last of a people the world believes gone, and passes by keeping their hat on | Someone has seen under the hat |
 | `narrator` [M] | Hears their own life told aloud a moment before it happens, and has started arguing with the voice | The voice has started arguing back |
 | `prophecy` [M] | Is named in a prophecy, misspelled, and has spent a lifetime hoping it means someone else | It does not |
+
+## AMENDMENT 2 (2026-11-17, sent to the seat by message after its hand-back at f1c903c47c: ten things, one more commit)
+
+From the chair's read and a second reader's (no HIGH, eight MED; the deal itself is sound). Budget: +150,000.
+
+1. THE FELON AND THE FAKED DEATH (the seat's proposal, ruled yes): "in another town" becomes "in another place" in
+   both; both stand in any size again.
+2. "A STRANGER" (a struck phrase in two of the chair's own rows): `paysDebts` what "Has been quietly paying off someone
+   else's debts for years, and will not say why", stakes "The one they are paying for has found out, and wants to know
+   what is owed in return"; `lostChild` stakes "Anyone with that face would be of an age to ask questions now".
+3. A RE-ROLL MUST NOT BREAK A CAP: a kept person's rare secret, known by its words, counts toward its family's cap and
+   the place's. A kept card's rare secret that names a person the re-roll replaced: cured if it is the seat's to cure,
+   else named.
+4. YEARS NEED AN AGE: `neverAngry` and `thumbOnScale` only on a person in their forties or older; `spared` in their
+   thirties or older. (`ageless` and `growsYounger` stand on the young: that is their point.)
+5. `cannotRead` and `oneBook`: refused for every trade of letters, learning, law, account, faith and magic.
+6. THE CARD'S OWN GOAL AND HOOK ARE READ: a row that names a `{target}` never names a person the card's own goal or
+   hook names; `nameless` never beside a hook that names the person's kin; `promised` never beside a hook that names
+   their spouse.
+7. FOUR PAIRINGS: `tooHonest` never on a trade of wealth; `graveRobber` never on the head of the ruling body or a
+   hereditary title; `stoleRelic` also refused beside pious and incorruptible, `raisedDead` beside pious,
+   `thumbOnScale` beside candid and forthright.
+8. FOUR ROWS REWORDED BY THE CHAIR: `masterBlade` what "Was captain of a great house's guard, and keeps a quiet watch
+   here so that no one asks"; `masterThief` what "Was the best lock-breaker of a great city's guild, and keeps to small
+   work here so that no one asks", never the head of a criminal body; `hearsLies` what "Always knows a lie when they
+   hear one, and has learned to keep a straight face"; `runaway` stakes "One of those people has come this way".
+9. THE GUARD: the two exclusions it names and does not assert; the re-roll hunk end to end; a master planted in a
+   thorp and in a hamlet; the forty-seven magic-only keys pinned; one seed that places two candidates of one family.
+10. The hand-back: the table of section 1 again (the odds are the owner's: not tuned); every changed row old and new;
+    measure 6 again only for the rows this commit changes. Proved at the tip and in a scratch merge of the line's tip
+    fd93fb998e (no commit needed).
