@@ -107,6 +107,15 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 // factionCorrelationPass|institutions stepDraws 6 -> 7, keyMoves 2 -> 3, and the institutions and economicState landing triples
 // (economicState onRecordClass same -> varies, coherenceRepairPass|institutions producedOnRecordClass same -> varies), by the round's
 // declared moves (a face for every seat of power and the casts after it; the economy read off the town's own record).
+// 2026-11-17, DEBT-2 · D1 (the supply rule's landing, point 33; BIRTH-3 8b0506eae), TWO ROWS JOIN, 74 -> 76 pairs, each
+// pasted word for word from the census arm's printed literal at e0242a12a (A4's fresh literal): the steps DECLARED two writes
+// that already happened at the line's ed1d43529. generateNarratives|economicState|mutates (the birth writes the words a house's
+// story buys in onto economicState.primaryImports in place, resourceGenerator.js :: importsBroughtAtBirth) measures pure
+// (keyMoves 0 of 63: the words are read, not drawn, off the step's stream), varies on both comparands (same 49 / transformed 14);
+// assembleSettlement|npcs|mutates (the seam's rankPowers yields a card's temperament to its secret in place, data/npcData.js ::
+// temperamentYieldsToSecret) measures pure (keyMoves 0 of 63), transformed on both comparands (63/63). No other row's
+// stepDraws, keyMoves or class moved; the one other row the fresh literal differs in (economyReconcilePass|economicState's
+// producedOnRecord, same 49 -> 35) is a stored landing count, the close's, and is not re-taken here.
 // R2-CODE-B-4 (ROUND THREE item 4, 2026-11-14), RE-MEASURED, cells from the arm's printed literal (the literal differs from
 // this one in these two rows only): resolveCrisisCast|crisisCast and |settlement stepDraws 0 -> 2, keyMoves 0 -> 2, class
 // pure -> drawn, on the 63-row corpus. An "Access to ..." row (the road to another place's house; record 375) is no longer a
@@ -189,12 +198,14 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'generateNarratives', key: 'resourceAnalysis', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.resourceAnalysis' },
   { step: 'generateNarratives', key: 'economicViability', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 60, transformed: 3 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 60, transformed: 3 }, producedOnRecordClass: 'varies', recordPath: 'record.economicViability' },
   { step: 'generateNarratives', key: 'history', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.history' },
+  { step: 'generateNarratives', key: 'economicState', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 49, transformed: 14 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 49, transformed: 14 }, producedOnRecordClass: 'varies', recordPath: 'record.economicState' },
   { step: 'assembleSettlement', key: 'settlement', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
   { step: 'assembleSettlement', key: 'powerStructure', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
   { step: 'assembleSettlement', key: 'stress', via: 'mutates', stepDraws: 63, keyMoves: 54, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 9, transformed: 54 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 9, transformed: 54 }, producedOnRecordClass: 'varies', recordPath: 'record.stress' },
   // MERGE-234 (one tie writer, the chair's ruling of 10:4x UTC): drawn/51/same -> pure/0/transformed, MEASURED by A3e/A4 at the
   // 1+2+3+4 tip — the `other` mints' `people-powers::mint::<slug>::tie` fork at the seam is retired (drawTies writes their tie).
   { step: 'assembleSettlement', key: 'relationships', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.relationships' },
+  { step: 'assembleSettlement', key: 'npcs', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
   { step: 'resolveCrisisCast', key: 'crisisCast', via: 'provides', stepDraws: 2, keyMoves: 2, rows: 63, class: 'drawn', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
   { step: 'resolveCrisisCast', key: 'settlement', via: 'mutates', stepDraws: 2, keyMoves: 2, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
 ]).map(freezeRow));
