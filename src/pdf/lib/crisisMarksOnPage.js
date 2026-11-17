@@ -12,14 +12,24 @@
  * or a house row that is what its house makes from an input the page says never reaches that house is marked short of
  * it ("Short of grapes."; the word "short" after a name with no description), calm town or not, and the chapter's head
  * line says once what such a row is: the leaf's `rowShortOf`, `rowMarkText`, `SHORT_WORD`, as the Services and
- * Institutions tabs print them. A chain or an income share takes no second cause (the leaf gives none).
+ * Institutions tabs print them. A chain takes no second cause (the leaf gives none).
+ *
+ * LEFT-PDF L1 (BRIEF-LEFT, the sixth chair, 2026-11-17; vetoable by the owner): AN INCOME SHARE IS MARKED AS THE ECONOMICS
+ * TAB MARKS IT. The tab marks a share by its crisis (`economicsCrisisMarks.js :: incomeKindShown`: the leaf's kind, or the
+ * siege's partial mark where the chain of the share's name prints "impaired" by the siege) AND by its houses short
+ * (`crisisStoppedRow.js :: incomeShortOf`), as `incomeMarkShown` joins them; the PDF and the journal printed the leaf's
+ * crisis half alone ("Iron & Metalwork" bare beside the tab's "Short of iron.": 29 towns of the census's 720 at
+ * e0242a12a). `stoppedOnPage` and `shortOnPage` read those two halves for kind 'income', so `markOnPage`,
+ * `stoppedWordOnPage` and `ordinaryTimesOnPage` print the tab's mark, its word and its head line; `incomeMarkOnPage` is
+ * the tab's own function, for a caller that wants it whole.
  *
  * Pure: reads the record, writes nothing.
  */
 import {
   stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, STOPPED_WORD,
-  rowShortOf, shortMarkText, SHORT_WORD, isVentureMark,
+  rowShortOf, shortMarkText, SHORT_WORD, isVentureMark, incomeShortOf,
 } from '../../domain/display/crisisStoppedRow.js';
+import { incomeKindShown, incomeMarkShown } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L1: the tab's income mark
 
 /** The active stopping crises of a record, read once a record. @type {WeakMap<object, string[]>} */
 const CRISES = new WeakMap();
@@ -44,6 +54,7 @@ function crisesOf(settlement) {
  */
 export function stoppedOnPage(settlement, kind, row) {
   const crises = crisesOf(settlement);
+  if (kind === 'income') return crises.length ? incomeKindShown(settlement, row, crises) : null; // LEFT-PDF L1: the tab's crisis half
   return crises.length ? rowStoppedBy(settlement, kind, row, crises) : null;
 }
 
@@ -55,6 +66,7 @@ export function stoppedOnPage(settlement, kind, row) {
  * @returns {string | null}
  */
 export function shortOnPage(settlement, kind, row) {
+  if (kind === 'income') return incomeShortOf(settlement, row, crisesOf(settlement)); // LEFT-PDF L1: the tab's short half
   return kind === 'service' || kind === 'house' ? rowShortOf(settlement, kind, row) : null;
 }
 
@@ -67,6 +79,15 @@ export function shortOnPage(settlement, kind, row) {
 export function markOnPage(settlement, kind, row) {
   const marks = [crisisMarkText(settlement, stoppedOnPage(settlement, kind, row)), shortMarkText(shortOnPage(settlement, kind, row))].filter(Boolean);
   return marks.length ? marks.join(' ') : null;
+}
+
+/**
+ * LEFT-PDF L1: an income share's mark as the Economics tab prints it (`incomeMarkShown`), or null.
+ * @param {object | null | undefined} settlement @param {Record<string, unknown> | null | undefined} src the record's income share, as handed in
+ * @returns {string | null}
+ */
+export function incomeMarkOnPage(settlement, src) {
+  return incomeMarkShown(settlement, src, crisesOf(settlement));
 }
 
 /**

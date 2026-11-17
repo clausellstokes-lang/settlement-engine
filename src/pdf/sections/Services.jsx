@@ -227,8 +227,10 @@ function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintNa
     // the screen's chain card's own read: no rank's count range the roster does not hold.
     // Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.
     chainHousesOf(chain.processingInstitutions, instNames).map((h) => humanize(h.name)).join(' + ') || null,
-    // SURFACES-1 item 2: the outputs the tab's card prints (tradeListDisplay.js :: chainOutputsShown), as many as it prints
-    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))(chainOutputsShown(chain, town).map(humanize).slice(0, 3).join(', ') || null),
+    // SURFACES-1 item 2: the outputs the tab's card prints, as many as it prints; LEFT-PDF L2 (BRIEF-LEFT, 2026-11-17;
+    // vetoable by the owner): by the tab card's own reading (`economicsCrisisMarks.js :: chainOutputsOnCard`, ruling CY1: a
+    // refused yield names no service the page keeps on offer), not the reading beneath it (`chainOutputsShown`)
+    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))(chainOutputsOnCard(chain, town).map(humanize).slice(0, 3).join(', ') || null),
   ].filter(Boolean).join(' \u00bb ');
 
   const meta = [
@@ -290,4 +292,4 @@ export default Services;
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { chainStateOnPage } from '../lib/chainStateOnPage.js';
-import { chainOutputsShown } from '../../domain/display/tradeListDisplay.js';
+import { chainOutputsOnCard } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L2: the tab card's outputs

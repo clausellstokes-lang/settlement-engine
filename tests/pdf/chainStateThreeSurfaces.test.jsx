@@ -32,6 +32,7 @@ import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
 import { chainPrintName } from '../../src/domain/display/chainPrintName.js';
 import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
+import { chainOutputsOnCard } from '../../src/domain/display/economicsCrisisMarks.js'; // LEFT-PDF L2 (2026-11-17): the tab card's reading
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -89,12 +90,14 @@ const disagreements = (town) => {
   lines.forEach((l, i) => { const st = l.match(/^- \*\*.*?\*\*(?: \*\((.*?)\)\*)?/)?.[1] ?? ''; if (st !== tabWord(tab[i].key).toLowerCase()) out.push(`journal #${i}: ${st} / ${tabWord(tab[i].key)}`); });
   return out;
 };
-/** SURFACES-1 item 2: every output a PDF chain row or card prints that the tab's card does not (tradeListDisplay.js ::
- * chainOutputsShown, its first three), as "<surface> <chain>: <output>". @param {any} town */
+/** SURFACES-1 item 2: every output a PDF chain row or card prints that the tab's card does not (its first three), as
+ * "<surface> <chain>: <output>". RE-KEYED BY IDENTITY (LEFT-PDF L2, 2026-11-17): the tab's card reads
+ * `economicsCrisisMarks.js :: chainOutputsOnCard` (BAR7-ECON item 4, ruling CY1: a refused yield names no service on
+ * offer), not `tradeListDisplay.js :: chainOutputsShown` beneath it; the claim and its form are kept. @param {any} town */
 const outputDisagreements = (town) => {
   const vm = buildViewModel({ settlement: town });
   const f = (/** @type {unknown} */ x) => String(x).toLowerCase().trim();
-  const tab = new Map(town.economicState.activeChains.map((/** @type {any} */ c) => [chainPrintName(c, town).label, chainOutputsShown(c, town).slice(0, 3).map(f)]));
+  const tab = new Map(town.economicState.activeChains.map((/** @type {any} */ c) => [chainPrintName(c, town).label, chainOutputsOnCard(c, town).slice(0, 3).map(f)]));
   /** @type {string[]} */ const out = [];
   for (const row of find(EconomicsTrade({ settlement: town, narrativeMode: false, vm, stateProse: null }), (n) => typeof n.type === 'function' && n.type.name === 'ChainRow')) {
     const label = chainPrintName(row.props.chain, town).label; const want = tab.get(label) || [];

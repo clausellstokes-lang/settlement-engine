@@ -47,7 +47,8 @@ import { foodWordShown } from '../domain/display/foodWordShown.js';
 import { chainStateOnPage } from '../pdf/lib/chainStateOnPage.js'; // SURFACES-1 item 1: the tab's state in the tab's words
 // TAIL-EXPORTS-JOURNAL-2 batch 3 (the chair's rulings E3, E12): a row that lives on what a siege, an outbreak or a famine
 // stops is marked by the tabs' one leaf, and the page says once that its rows are of ordinary times.
-import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, STOPPED_WORD } from '../domain/display/crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, isVentureMark } from '../domain/display/crisisStoppedRow.js';
+import { stoppedOnPage, shortOnPage, stoppedWordOnPage } from '../pdf/lib/crisisMarksOnPage.js'; // LEFT-PDF L1: the tab's income mark, the PDF's reader
 import { cultureOnPage } from '../pdf/lib/cultureOnPage.js'; // EXPORTS-B24 · B2: the PDF's culture block's reader
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -217,6 +218,10 @@ function notableNpcPage(n) {
     kv('Race', n.race),
     kv('Member of', n.factionLabel),
     kv('House', n.house ? institutionHouseLabel(n.house) : n.house),
+    // LEFT-PDF L3 (the chair's ruling CM1; BRIEF-LEFT, 2026-11-17; vetoable by the owner): the house's mark, one line of its
+    // own straight under the house line, as the NPC tab's card and the PDF's person card print it (the view row's
+    // `houseMark`, `pdf/lib/viewModel.js`); the person's own sentences print as written.
+    n.house && n.houseMark ? `  - *${esc(n.houseMark)}*` : null,
     kv('Standing', n.powerLine),
     kv('Power', n.power),
     kv('Influence', n.influenceLabel),
@@ -335,6 +340,20 @@ function institutionsPage(vm, settlement = vm.raw) {
   );
 }
 
+/**
+ * LEFT-PDF L1: the words after an income share's name, the tab's mark said as the Institutions tab's doors say a mark
+ * ("stopped", "curtailed, short"; `crisisMarksOnPage.js :: stoppedWordOnPage`); a share whose only mark is a failed
+ * venture's ("Failing: a failed venture.") takes that mark's own first word ("failing"). Null where the tab prints none.
+ * @param {object | null | undefined} settlement @param {Record<string, unknown>} src @returns {string | null}
+ */
+function incomeWordOnPage(settlement, src) {
+  const word = stoppedWordOnPage(settlement, 'income', src);
+  const short = shortOnPage(settlement, 'income', src);
+  const venture = short && isVentureMark(short) ? short.split(':')[0].toLowerCase() : null;
+  const words = [word, venture].filter(Boolean);
+  return words.length ? words.join(', ') : null;
+}
+
 function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settlement handed in (tonightPage's idiom), not read off vm.raw
   const e = vm.economics;
   const trade = tradeListsAsPrinted(settlement); // W2-C-LEAVES-7 item 8: the tab's lists (a siege that stops trade: no Imports row)
@@ -344,9 +363,14 @@ function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settleme
   // description); a chain, its mark before its description; the page's one head line where a row is marked.
   const crises = stoppingCrisesOf(settlement);
   const records = settlement?.economicState?.activeChains || [];
-  const incomeStopped = (e.incomeSources || []).map((s) => rowStoppedBy(settlement, 'income', s, crises));
+  // LEFT-PDF L1 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): a share is marked as the Economics tab marks it, by its
+  // crisis AND by its houses short (`economicsCrisisMarks.js :: incomeMarkShown`, through the PDF's reader
+  // `crisisMarksOnPage.js`): its words after its name ("curtailed, short"), the head line's crisis and its short sentence.
+  const incomeStopped = (e.incomeSources || []).map((s) => stoppedOnPage(settlement, 'income', s));
+  const incomeWord = (e.incomeSources || []).map((s) => incomeWordOnPage(settlement, s));
+  const incomeShort = (e.incomeSources || []).some((s) => shortOnPage(settlement, 'income', s) !== null);
   const chainStopped = (e.chains || []).map((_c, i) => rowStoppedBy(settlement, 'chain', records[i], crises));
-  const ordinaryLine = ordinaryTimesLine([...incomeStopped, ...chainStopped].filter(Boolean));
+  const ordinaryLine = ordinaryTimesLine([...incomeStopped, ...chainStopped].filter(Boolean), incomeShort);
   return md(
     lede(economicsHeadline(e)),
     '',
@@ -362,7 +386,7 @@ function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settleme
     kv('Imports', trade.imports.map(x => tradePillWord(x, 'imports')).filter(Boolean).join(', ')),
     kv('Food', foodWordShown(settlement)?.label), // SURFACES-3 item 1: the food word's one home, or no row (its own Surplus/Balanced/Deficit went)
     (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map((s, i) =>
-      `- ${esc(label(s.source) || s.source)}${incomeStopped[i] ? ` (${esc(STOPPED_WORD[incomeStopped[i]])})` : ''}: ${esc(Math.round(s.percentage))}%`)) : null,
+      `- ${esc(label(s.source) || s.source)}${incomeWord[i] ? ` (${esc(incomeWord[i])})` : ''}: ${esc(Math.round(s.percentage))}%`)) : null,
     // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
     revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
     // W2-C-LEAVES-7 item 9: the state the tab's card prints (chainStateShown.js :: chainAsShown; none: no state written).
@@ -379,7 +403,9 @@ function resourcesPage(vm) {
     '',
     kv('Terrain', r.terrain),
     kv('Strategic value', typeof r.strategicValue === 'object' ? (r.strategicValue?.label ?? r.strategicValue?.value) : r.strategicValue),
-    kv('Nearby resources', (r.nearbyAbundant || []).map(nearbyResourceName).join(', ')),
+    // LEFT-PDF L19: the grounds the houses prove print under the list's own title, as the Resources tab prints them (the
+    // view row's `nearbyProven`; a ground used up is in `nearbyDepleted`)
+    kv('Nearby resources', [...(r.nearbyAbundant || []), ...(r.nearbyProven || [])].map(nearbyResourceName).join(', ')),
     kv('Depleted', (r.nearbyDepleted || []).map(nearbyResourceName).join(', ')),
     (r.chainRows || []).length ? md('', '## Exploitation',
       '| Resource | Status | Processing | Output |',
