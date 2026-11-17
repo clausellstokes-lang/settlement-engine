@@ -594,3 +594,12 @@ should be paused or archived by the owner's hand.
   batch's. RULING BR21 (the worklist file): the import word "herbs" is scoped (ritual herbs are not an apothecary's
   stock): MARKS-2. The reader's two MED are LEFT-KEYS's K7 (the worklist file). THE FOUR SEATS THAT CANNOT COMMIT have
   each a neutral message (20:47): the refusal stands, hold the checkout, the owner has been asked.
+- **20:57 UTC. THE BATCH'S WHOLE CHECK FOUND ONE RED OF ITS OWN (CHECKS-1's part, 20:56: 35 names; the doors' last lines as before but
+  the things door's fresh 38): `tests/joins/labelJoins.test.js`: `src/domain/display/economicsCrisisMarks.js: 1 label-join
+  sites (frozen at 0) — instNameIncludes 1`.** IT IS LEFT-CHAIN's (its L7 hunk joins houses by a name test; `tests/joins`
+  was in neither its net nor its reader's). LEFT-CHAIN is told (20:58): one more commit, the join by the catalog's ids,
+  the reading unchanged, the frozen figure NOT raised. THE CHAIR'S PLAN: if CHECKS-3's part is clean, POINTS 38 AND 39
+  LAND AS CHECKED, with this one red named on the line for the hour it takes (the reading itself is proven true by the
+  second reader; the red is the inventory's law, not a false line), so that J-INCOME and PDF-2 start; LEFT-CHAIN's
+  one-function fix lands as a point of its own after point 40, on a targeted net (`tests/joins`, its guard, the leaf's
+  readers, both type gates, lint) and is read again by the next whole check.
