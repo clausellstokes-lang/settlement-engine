@@ -25,6 +25,17 @@ for (const l of zlib.gunzipSync(fs.readFileSync(path.join(dir, 'corpus.ndjson.gz
 const dumps = fs.readdirSync(path.join(dir, 'dumps')).filter((f) => f.endsWith('.txt')).sort();
 if (!dumps.length) { console.error('no dumps'); process.exit(1); }
 const norm = (s) => fold(String(s || '')).replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+// WHAT THE SEATS IN FLIGHT HOLD (BRIEF-BAR6-SEAM): SEAM-ECON item 8 (a running chain lists no output every maker of which is
+// short: `tradeListDisplay.js :: chainOutputsShown`); SEAM-SCENES item 9 (a line that shows cloth MADE), item 2 (the tanners'
+// lines), item 3 (the smiths' four dominant lines). Nothing else of these rules is held by a seat in flight.
+const SMITHS_FOUR = /^(The hammering of the forges echoes through all of |Forge smoke hangs over everything here|Racks of new ironwork stand outside|The clang of iron from the smithies carries)/;
+function heldBy(x) {
+  if (x.rule === '8j.outputs') return 'SEAM-ECON 8';
+  if (/^8k\.trade/.test(x.rule) && x.thing === 'clothMade') return 'SEAM-SCENES 9';
+  if (/^8k\.trade/.test(x.rule) && x.thing === 'hides') return 'SEAM-SCENES 2';
+  if (/^8k\.trade/.test(x.rule) && x.thing === 'iron' && SMITHS_FOUR.test(x.line)) return 'SEAM-SCENES 3';
+  return null;
+}
 const all = [];
 const census = [];
 for (const f of dumps) {
@@ -34,7 +45,7 @@ for (const f of dumps) {
   const T = readTown(fs.readFileSync(path.join(dir, 'dumps', f), 'utf8'), rec);
   const xs = law8H(T, seed);
   for (const c of xs.census || []) census.push({ ...c, town: seed, calm: T.crises.size === 0 });
-  for (const x of xs) all.push({ ...x, form: String(x.line).split(rec.name || '\u0000').join('<town>'), crises: [...T.crises] });
+  for (const x of xs) all.push({ ...x, form: String(x.line).split(rec.name || '\u0000').join('<town>'), crises: [...T.crises], heldBy: heldBy(x) });
 }
 fs.writeFileSync(outPath, JSON.stringify(all, null, 1));
 
@@ -44,7 +55,8 @@ console.log(`LAW 8 WIDENED (seat H) over ${dumps.length} towns: ${fmt(tally(all)
 for (const r of [...new Set(all.map((x) => x.rule))].sort()) {
   const xs = all.filter((x) => x.rule === r);
   const by = ['short', 'crisis', 'mixed', 'calm'].map((c) => [c, xs.filter((x) => x.cause === c)]).filter(([, v]) => v.length);
-  console.log(`  ${r.padEnd(16)} ${fmt(tally(xs))} · by cause ${by.map(([c, v]) => `${c} ${v.length}/${new Set(v.map((x) => x.town)).size}t`).join(' · ')} · in a calm town ${xs.filter((x) => !x.crises.length).length}`);
+  const held = xs.filter((x) => x.heldBy);
+  console.log(`  ${r.padEnd(16)} ${fmt(tally(xs))} · held by the seam ${held.length}${held.length ? ` (${[...new Set(held.map((x) => x.heldBy))].join(', ')})` : ''} · by cause ${by.map(([c, v]) => `${c} ${v.length}/${new Set(v.map((x) => x.town)).size}t`).join(' · ')} · in a calm town ${xs.filter((x) => !x.crises.length).length}`);
 }
 console.log('PERSON LINES OF A MARKED HOUSE (8h census): kind · cause · mark in front / no mark (of them, a line of the person\'s own trade)');
 for (const kind of ['deal', 'wants', 'secret', 'hook']) for (const cause of ['short', 'crisis']) {

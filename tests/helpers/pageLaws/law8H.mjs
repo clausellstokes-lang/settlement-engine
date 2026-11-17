@@ -175,7 +175,8 @@ export function law8H(T, town) {
     // counted apart as `.mild` (the second check's rule 1: a thin trade is not denied by an ordinary line)
     const mk = m.short ? 'short' : /^Stopped/.test(m.crisis) ? 'stopped' : /^Curtailed/.test(m.crisis) ? 'curtailed' : 'scarce';
     // the second check's rule 3: another house of the same trade that is NOT marked answers the line
-    const re = Object.values(TRADES).find((r) => r.test(c.name)) || Object.values(GOODS).map((g) => g.houses).find((r) => r.test(c.name));
+    // a weaver's or a fuller's line is answered by a house that MAKES cloth, not by a dyer (the seam's SCENES item 9, its rule)
+    const re = [TRADES.clothMade, ...Object.values(TRADES)].find((r) => r.test(c.name)) || Object.values(GOODS).map((g) => g.houses).find((r) => r.test(c.name));
     const peer = re ? T.cards.find((x) => x !== c && re.test(x.name) && !marked.get(x.name).lead) : null;
     for (const l of p.lines) {
       const front = OWN_MARK.test(l.text);
