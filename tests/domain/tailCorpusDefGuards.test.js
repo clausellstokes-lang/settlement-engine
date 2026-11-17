@@ -44,8 +44,11 @@ const DECLARED = [
   { batch: 5, seed: 'r2s-monster_pressure-city-0', pool: 'DS-DEF-2::Beasts & Monsters: plagued, perimeter AND organized force', vid: 2, instead: 4, why: 'a monster crisis: "not an emergency arrangement" (row B06130\'s class)' },
   { batch: 5, seed: 'r2r-town-42', pool: 'DS-DEF-2::Economic Survival: STRONG', vid: 8, instead: 1, why: 'a food deficit even now (pressured): "nobody lies awake over a lean year" (row 14935)' },
   { batch: 6, seed: 'r2s-wartime-thorp-0', pool: 'DS-DEF-11::UNWALLED-SMALL', vid: 4, instead: 1, why: 'a war: "nothing threatens it now that a wall would keep out" (C18, UNWALLED)' },
-  { batch: 6, seed: 'r2s-infiltrated-village-2', pool: 'DS-DEF-3::Safe', vid: 2, instead: 4, why: 'nobody under arms: "enforcement keeps it down" (C18, Safe v2)' },
-  { batch: 6, seed: 'r2r-thorp-28', pool: 'DS-DEF-3::Safe', vid: 3, instead: 4, why: 'nobody under arms: "plain that somebody keeps it that way" (Safe v2\'s sibling)' },
+  // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): BAR6-DEFDESK (be35850406) put a crime-wave twin at Safe v3, so the pool's
+  // later members moved up one: "plain that somebody keeps it that way" is v4 (was v3) and the neighbours' line is v5 (was
+  // v4). The same rows, the same towns, the same lines, by their new vids.
+  { batch: 6, seed: 'r2s-infiltrated-village-2', pool: 'DS-DEF-3::Safe', vid: 2, instead: 5, why: 'nobody under arms: "enforcement keeps it down" (C18, Safe v2)' },
+  { batch: 6, seed: 'r2r-thorp-28', pool: 'DS-DEF-3::Safe', vid: 4, instead: 5, why: 'nobody under arms: "plain that somebody keeps it that way" (Safe v2\'s sibling)' },
   { batch: 6, seed: 'r2r-village-49', pool: 'DS-DEF-3::Very Safe', vid: 3, instead: 5, why: 'nobody under arms: "enforcement far outweighs the criminals" (Safe v2\'s class)' },
 ];
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */

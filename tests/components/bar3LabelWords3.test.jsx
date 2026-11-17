@@ -74,7 +74,11 @@ const SURPLUS_KEEP = ['r2r-village-27', 'r2s-recently_betrayed-town-1'];
 // L3b: [seed, resource] a Full card under a field-stopping siege whose every chain card prints Impaired
 const SIEGE_FULL = [['r2r-hamlet-0', 'grain'], ['r2s-under_siege-city-3', 'livestock'], ['r2s-under_siege-metropolis-0', 'mountain_timber']];
 // KEEP: fish under an open sea (the sea chain runs), and a fish card with a vulnerable sea chain beside an impaired river one
-const SIEGE_FULL_KEEP = [['r2s-under_siege-city-0', 'fish'], ['r2s-under_siege-town-0', 'fish']];
+// RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): r2s-under_siege-city-0's fish card now takes "impaired": its every live Via
+// house carries the siege's mark (the Fish market "Stopped by the siege.", the Salt works and the Cooper curtailed), which
+// BAR7-ECON item 3 (C20287) reads as no working card. The page reads so (the Fishing & Seafood card prints Impaired). The same
+// claim in another besieged port whose sea grounds (fishing_grounds) keep a working card: r2s-under_siege-town-9.
+const SIEGE_FULL_KEEP = [['r2s-under_siege-town-9', 'fish'], ['r2s-under_siege-town-0', 'fish']];
 // CL2: [block::pool, vid] the lines that say the hall's people are not for sale, and those that speak of the criminals' pay
 const NOT_FOR_SALE = [['DS-DEF-4::capture equilibrium', 1], ['DS-DEF-4::capture none', 3]];
 const APPROACH_ONLY = [['DS-POW-6::capture pressure RECOVERING (strong security, prosperity)', 2], ['DS-DEF-4::capture none', 2]];
