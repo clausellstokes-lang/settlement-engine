@@ -39,6 +39,7 @@ import { withCaptureRelations } from './factionDynamics.js';
 import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
 import { dealGoals } from './people/goals.js';
+import { dealRareSecrets } from './people/rareSecrets.js'; // SECRETS-1: the very rare secrets, beside the goals
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
 import { resolvePrimaryStress } from './stressPriority.js'; import { wartimeGoesWell } from './stressNarrative.js'; // BAR2-PLACES (PL6)
@@ -1060,7 +1061,8 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
   // family (`people-goals::<card id>`, people/goals.js), from the families each card's record supports. A held `npcs`
   // key is the DM's cast: its goals are not redrawn.
   const npcsHeld = !!pins && Object.prototype.hasOwnProperty.call(pins, 'npcs');
-  const goaledNpcs = npcsHeld ? mergedNpcs : dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng());
+  // SECRETS-1 (2026-11-17, the owner's word; ruling RS1): the very rare secrets, dealt beside the goals by the seed's keyed hash, no draw taken
+  const goaledNpcs = npcsHeld ? mergedNpcs : dealRareSecrets(settlement, dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng()), relationships, { seed: seed ?? settlement._seed });
   const withTies = { ...settlement, npcs: goaledNpcs, relationships };
 
   const history = settlement.history || {};
