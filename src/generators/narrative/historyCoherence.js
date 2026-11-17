@@ -106,6 +106,12 @@ const flavorOf = (pattern, subset, facts) => {
     draw: (p) => (drawn = pickRandom2(p)), facts, poolId: `POLITICAL_FLAVOR.${pattern}`, surface: 'history', drawKind: 'R',
     crisisScoped: POLITICAL_FLAVOR_CRISIS_SCOPED.includes(pattern), key: `${getActiveRng()?.seed ?? ''}::POLITICAL_FLAVOR.${pattern}::${subset.length}::${subset[0]?.name ?? ''}`,
     keepRefused: true, // R-AM: a kept template is noted
+    // BAR8-SCENES (the chair's grant under BR23, 2026-11-17): a closure row has no string template to be a twin of, so a row
+    // names its twin by a string `twinKey` (the twin's `twinOf`); a row without one resolves as before (its own text)
+    twin: (/** @type {any} */ d) => {
+      const own = d && typeof d === 'object' && typeof d.twinKey === 'string' ? d.twinKey : (d && typeof d === 'object' ? d.text : d);
+      return pool.find((l) => l && typeof l === 'object' && typeof l.twinOf === 'string' && l.twinOf === own) ?? null;
+    },
   });
   return r.line ?? drawn;
 };
