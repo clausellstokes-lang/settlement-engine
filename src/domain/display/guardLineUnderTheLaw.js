@@ -70,6 +70,22 @@ export const GUARD_LAW_SIBLINGS = Object.freeze({
 });
 
 /**
+ * BAR7-ORDER (LAW 9's 9a.order, C5430; vetoable by the owner): THE SIEGE'S ORDER CLAUSE, the head of a sentence of the
+ * SAFETY line (`safetyProfile.js`, the siege branch's `milRef` and its tail), read by `safetyLineAsPrinted` beside the band
+ * as the court's lines are read by their frame: the subject is the writer's own (a garrison, those holding a small place, the
+ * military command), never this table's, so each subject keeps its own twin. The twin presumes only the siege: no streets (a
+ * small place has none: the profile's own rule; a garrison stands in small places too), no defences and no one under arms
+ * (the branch prints the clause for a charter hall alone); "holds out" says the siege without naming it (the presumed-things door reads "siege" as a thing, and a table read at print cannot declare it).
+ */
+export const SIEGE_ORDER_FRAME = Object.freeze({
+  frame: /\b(The garrison|Those holding the place|The military command) (?:keeps? order|has taken charge of the streets), and more harshly as the food runs down/,
+  needs: Object.freeze([LAW_ANSWERS_ATOM]),
+  /** @param {string} subject the writer's own subject @returns {string} */
+  // the chair's read of 4275a997d (2026-11-17): the clause prints for a charter hall alone, so the twin presumes only the siege
+  twin: (subject) => `${subject} ${subject === 'Those holding the place' ? 'hold' : 'holds'} out, but order among the people has gone, and things get worse as the food runs down`,
+});
+
+/**
  * THE COURT'S LINES THAT NAME THE FORCE (`safetyProfile.js :: COURT_AND_PRISON(lawRef)[2]`, `COURT_NO_PRISON(lawRef)[2]`):
  * the same claim, the branch's force noun in its slot, so each is read by its frame (the force noun is the writer's own,
  * never this table's); each twin names no force.
@@ -87,6 +103,11 @@ export const GUARD_LAW_FRAMES = Object.freeze([
  * @returns {string}
  */
 export function guardLineUnderTheLaw(text, record) {
+  return familiesUnheld(guardLineUnderTheBand(text, record), record); // BAR7-ORDER (low.hook-party): the party, after the band
+}
+
+/** @param {string} text @param {unknown} record @returns {string} */
+function guardLineUnderTheBand(text, record) {
   const held = Object.keys(GUARD_LAW_SIBLINGS).filter((k) => text.includes(k));
   const framed = GUARD_LAW_FRAMES.filter((f) => f.frame.test(text));
   if (!held.length && !framed.length) return text;
@@ -143,6 +164,59 @@ export function safetyLineAsPrinted(text, record) {
   // the force's one reading (`orderForce.js`), not a word of the line, decides; a line without the claim is left as it is
   const f = orderForceOf(record);
   if (f.count.militia > 0 && f.count.garrison === 0 && f.count.watch === 0) out = out.replace(MILITIA_PRESENT, MILITIA_TURNS_OUT);
+  // BAR7-ORDER (9a.order, C5430): the siege's order clause reads the band the page prints, as the guard line does
+  if (SIEGE_ORDER_FRAME.frame.test(out) && atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) === false) {
+    out = out.replace(SIEGE_ORDER_FRAME.frame, (_, /** @type {string} */ subject) => SIEGE_ORDER_FRAME.twin(subject));
+  }
+  return out;
+}
+
+// ─── BAR7-ORDER (BRIEF-BAR7's BAR7-ORDER item 2, the audit's low.hook-party, and the chair's read of 4275a997d; vetoable by
+// the owner): "the old families" and "the oldest families" name a party. Where no power, conflict, tension or crisis of the
+// finished record names the families (the powers are drawn after the safety profile, so the draw cannot know), the no-watch
+// and quarrel lines name no party: the party's words become words every place bears ("the neighbours", "the heads of
+// households"), nothing else changed. The stored line and the table's keys stay as drawn. ───
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
+
+/** The words that name the families as a party on the record (the audit's own reading, `lowFamiliesI.mjs`, by whole words). */
+const FAMILIES_NAMED = /\b(?:famil(?:y|ies)|nobles?|nobility|clans?|elders?)\b/i;
+/** The noble pool's own names (`powerData.js`, the engine's): a power drawn from it is the families' kind. */
+const NOBLE_NAMES = Object.freeze(new Set([...FACTION_DESCRIPTORS.noble, ...FACTION_DESCRIPTORS_EXTRA.noble]));
+/** The old families' lines (the drawn line, `GUARD_LAW_SIBLINGS`'s first key, and its twin under Collapsed) and their twins naming no party. */
+const FAMILIES_UNHELD = Object.freeze([
+  Object.freeze(['There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.',
+    'There is no watch. The neighbours keep the peace, and anyone who breaks it answers to all of them at once; when they fall out among themselves, nobody keeps it.']),
+  Object.freeze(['There is no watch. The old families once kept the peace; they have fallen out among themselves, and nobody keeps it now.',
+    'There is no watch. The neighbours once kept the peace together; they have fallen out among themselves, and nobody keeps it now.']),
+]);
+/** "The oldest families" in the no-watch and quarrel lines and their Collapsed twins: the party's words, then every place's. */
+const OLDEST_UNHELD = Object.freeze([
+  Object.freeze([/\bthe heads of the oldest families\b/g, 'the heads of households']),
+  Object.freeze([/\bthe oldest families\b/g, 'the heads of households']),
+]);
+
+/**
+ * Whether the finished record holds the families as a party: a power's name (a word of the families, or a name of the noble
+ * pool), a conflict, a tension or a crisis names them.
+ * @param {unknown} record @returns {boolean}
+ */
+function familiesHeldOf(record) {
+  const r = /** @type {{ powerStructure?: { factions?: unknown[], recentConflict?: unknown }, conflicts?: unknown, history?: { currentTensions?: unknown }, stress?: unknown } | null | undefined} */ (record);
+  const factions = Array.isArray(r?.powerStructure?.factions) ? r.powerStructure.factions : [];
+  const names = factions.map((f) => /** @type {{ faction?: unknown } | null} */ (f)?.faction);
+  if (names.some((n) => typeof n === 'string' && NOBLE_NAMES.has(n))) return true;
+  const held = JSON.stringify([names, r?.conflicts, r?.history?.currentTensions, r?.stress, r?.powerStructure?.recentConflict]);
+  return FAMILIES_NAMED.test(held ?? '');
+}
+
+/** @param {string} text @param {unknown} record @returns {string} */
+function familiesUnheld(text, record) {
+  const hits = FAMILIES_UNHELD.filter(([line]) => text.includes(line));
+  const oldest = /\bthe oldest families\b/.test(text);
+  if ((!hits.length && !oldest) || familiesHeldOf(record)) return text;
+  let out = text;
+  for (const [line, twin] of hits) out = out.split(line).join(twin);
+  for (const [re, words] of OLDEST_UNHELD) out = out.replace(/** @type {RegExp} */ (re), /** @type {string} */ (words));
   return out;
 }
 

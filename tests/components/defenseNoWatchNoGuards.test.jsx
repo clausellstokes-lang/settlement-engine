@@ -19,7 +19,7 @@ import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 import { quarrelUnderViolence } from '../../src/generators/safetyLineTruth.js';
-import { GUARD_LAW_SIBLINGS } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { GUARD_LAW_SIBLINGS, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
 
 const STRESSES = [
   'mass_migration', 'famine', 'under_siege', 'occupied', 'politically_fractured', 'indebted',
@@ -78,7 +78,11 @@ describe('one reader of the watch fact on the Defense tab', () => {
     // member prints its declared twin (`guardLineUnderTheLaw.js :: GUARD_LAW_SIBLINGS`), which opens on the same absence ("There
     // is no watch", "Nobody here is paid to keep order"); the twins are members.
     const twinsOf = (/** @type {string} */ m) => (GUARD_LAW_SIBLINGS[m] || []).filter((l) => typeof l.twinOf === 'string').map((l) => l.text);
-    const members = [...new Set(NO_WATCH_SMALL.flatMap((member) => [member, quarrelUnderViolence(member, 'Dangerous')]).flatMap((m) => [m, ...twinsOf(m)]))];
+    // RE-KEYED BY IDENTITY (BAR7-ORDER, 2026-11-17, the audit's low.hook-party and the chair's read of 4275a997d): where the
+    // record holds no families as a party, each member and twin prints its party-free form (`guardLineUnderTheLaw.js`:
+    // "the neighbours", "the heads of households"), which opens on the same absence; those forms are members.
+    const partyFree = (/** @type {string} */ m) => guardLineUnderTheLaw(m, { history: { currentTensions: [] } });
+    const members = [...new Set(NO_WATCH_SMALL.flatMap((member) => [member, quarrelUnderViolence(member, 'Dangerous')]).flatMap((m) => [m, ...twinsOf(m)]).flatMap((m) => [m, partyFree(m)]))];
     const saying = TABS.filter(({ text }) => members.some((member) => text.includes(member))).length;
     expect(saying, 'the guard assessment no longer reads the absence').toBeGreaterThan(TABS.length * 0.9);
   });

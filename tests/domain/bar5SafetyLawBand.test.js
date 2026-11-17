@@ -22,7 +22,8 @@ import { bandForVariable } from '../../src/domain/causalState.js';
 import { crimeWaveStands, foundationBandShown } from '../../src/domain/display/foundationBandShown.js';
 import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
 import { lawBandOf, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
-import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { readFileSync } from 'node:fs';
+import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, SIEGE_ORDER_FRAME, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
 import { COURT_AND_PRISON, COURT_NO_PRISON, NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 
@@ -129,12 +130,24 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
   }, 600_000);
 
   test('(d) KEEP: above Collapsed the drawn line prints as drawn; every original is a line the safety writer prints', () => {
-    const kept = Object.keys(GUARD_LAW_SIBLINGS).map((line) => guardLineUnderTheLaw(line, { history: { currentTensions: [] } }));
+    // RE-KEYED BY BAR7-ORDER, 2026-11-17 (BRIEF-BAR7 item 2, low.hook-party): the old families' line names a party, so a
+    // record that holds none now prints the no-party twin; the same claim (above Collapsed every original prints as drawn) is
+    // held on a record that bears the families, a power named for them, still the model's neutral Adequate.
+    const kept = Object.keys(GUARD_LAW_SIBLINGS).map((line) => guardLineUnderTheLaw(line, { history: { currentTensions: [] }, powerStructure: { factions: [{ faction: 'Council of Elders' }] } }));
     for (const [i, line] of Object.keys(GUARD_LAW_SIBLINGS).entries()) {
       // a record of no facts reads the model's neutral 50 (Adequate): every original stands
       expect(kept[i], line).toBe(line);
     }
     for (const line of NO_WATCH_SMALL) expect(Object.keys(GUARD_LAW_SIBLINGS), 'each no-watch line is declared').toContain(line);
+    // BAR7-ORDER, 2026-11-17 (9a.order): the siege's order clause joins the law by its frame (the court's form: the subject
+    // is the writer's own), each subject of the siege branch's `milRef` and the branch's own tail held to its source
+    const SIEGE_SRC = readFileSync(new URL('../../src/generators/safetyProfile.js', import.meta.url), 'utf8');
+    expect(SIEGE_SRC.includes('${milRef}, and more harshly as the food runs down`'), 'the siege branch\'s tail').toBe(true);
+    const milRef = /const milRef = inst\.hasGarrison \? '([^']+)' : small \? '([^']+)' : '([^']+)'/.exec(SIEGE_SRC);
+    expect(milRef, 'the siege branch\'s three subjects').not.toBeNull();
+    for (const subject of /** @type {RegExpExecArray} */ (milRef).slice(1)) {
+      expect(SIEGE_ORDER_FRAME.frame.test(`${subject}, and more harshly as the food runs down`), subject).toBe(true);
+    }
     // the court's lines that say a wrong is answered: each declared or read by its frame, for every force noun the writer passes
     for (const lawRef of ['local watch', 'garrison and city watch', 'citizen militia']) {
       for (const line of COURT_AND_PRISON(lawRef)) {
