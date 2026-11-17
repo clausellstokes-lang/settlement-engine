@@ -443,8 +443,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   'organised crime': dim({ shape: 'presence', home: 'crime',
     reader: (/** @type {FactsLike} */ f) => (typeof f.crime === 'string' ? CRIME_WORDS.indexOf(f.crime) >= CRIME_WORDS.indexOf('semi-organized') : undefined) }),
   // BAR7-DESKS (LAW 9's `9i.crews`, BRIEF-BAR7 item 6; vetoable by the owner, on the veto list as new vocabulary): `rival
-  // rings` = two criminal powers that do not govern, or the roster's "Multiple criminal factions" (`rivalRings.js`, over
-  // `corruption.js :: rivalRingsOf`). "Rival crews are fighting over who runs the streets" presumes them.
+  // rings` = the rings the criminal structure's key reads (`rivalRings.js`: two criminal powers that do not govern, or the
+  // roster's "Multiple criminal factions", and no one organisation rules). "Rival crews are fighting over who runs the
+  // streets" presumes them.
   'rival rings': dim({ shape: 'presence', home: 'rivalRings', reader: (/** @type {FactsLike} */ f) => bool(f.rivalRings) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary): the income list
   // carries a criminal revenue (`criminalIncome.js`), which the structure's key does not read. "The books record no gang, guild

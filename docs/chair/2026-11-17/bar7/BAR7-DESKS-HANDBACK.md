@@ -59,24 +59,24 @@ lines (DS-GEN-3 v3 and v4). That desk is not mine, and the brief names only the 
 |---|---|---|
 | DS-ECO-8 COMFORTABLE v1, "{settlement}'s purse closes every year ahead. The margin is not large but it is dependable, and there is money laid by behind it." | 61 | bar0-city-wartime-rand-33, bar0-city-wartime-rand-42, bar0-city-wartime-rand-43 |
 | DS-ECO-8 COMFORTABLE v3, "The town is plainly comfortable. The buildings are finished rather than patched, and the stores are more than the season needs." | 23 | bar0-metropolis-calm-rand-28, bar0-metropolis-calm-rand-31, bar0-metropolis-calm-rand-40 |
-| DS-ECO-8 COMFORTABLE v4 (twin), "… though nobody here keeps more in store than the coming season needs." | 10 | bar0-hamlet-calm-rand-43, bar0-thorp-calm-rand-30, r2r-hamlet-11 |
+| DS-ECO-8 COMFORTABLE v4 (twin), "The town is plainly comfortable. Its buildings are well kept, though nobody here keeps more in store than the coming season needs." (its "rather than patched" struck after the second reader: the style law) | 10 | bar0-hamlet-calm-rand-43, bar0-thorp-calm-rand-30, r2r-hamlet-11 |
 | DS-DEF-12 ample v5 (twin, Pressured), "… the town makes do without one: what it raises falls a little short of what it eats, and its stores make up the rest." | 1 | bar0-town-occupied-rand-44 |
 | DS-DEF-12 ample v6 (twin, Pressured), "Traders seldom reach {settlement}, and people there seldom miss them, though the town raises a little less than it eats and draws on its stores for the rest." | 1 | r2r-town-54 |
-| DS-DEF-12 ample v7 (twin, Secure under a hunger), "{settlement} had put by more than it needed, and it is living on those stores now." | 0 | — (the state is not in the three populations; held by the guard) |
-| DS-DEF-12 ample v8 (twin, Secure under a hunger), "… and this year the town lives on what it had put by." | 0 | — (the state is not in the three populations; held by the guard) |
-| DS-ECO-2 FOOD surplus v5 (twin, a hunger), "On the count, {settlement} raises more than it eats; with the crisis on, the excess is being kept back rather than sold." | 0 | — (the state is not in the three populations; held by the guard) |
-| DS-ECO-2 FOOD surplus v6 (twin, a hunger), "What {settlement} raises still comes out ahead of what it eats, and this year every bit of the excess is wanted at home." | 0 | — (the state is not in the three populations; held by the guard) |
-| DS-ECO-3 SURPLUS × not trade-dependent v2, "A great deal of trade passes here. Not much of it stops." (was "Plenty passes here.") | 0 | — (the state is not in the three populations; held by the guard) |
-| DS-DEF-4 semi-organized v4 (twin, no rings), "Most of the organised crime at {settlement} runs through one house, and nobody is fighting it for the streets." | 32 | bar0-city-under_siege+famine-rand-33, bar0-city-under_siege+famine-rand-40, bar0-city-wartime-rand-27 |
-| DS-DEF-4 semi-organized v5 (twin, rings under a curfew), "The crews at {settlement} that would fight over the streets keep out of sight under the occupation's curfew, and their quarrel waits." | 1 | r2s-occupied-metropolis-1 |
+| DS-DEF-12 ample v7 (twin, Secure under a hunger), "{settlement} had put by more than it needed, and it is living on those stores now." | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
+| DS-DEF-12 ample v8 (twin, Secure under a hunger), "… and this year the town lives on what it had put by." | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
+| DS-ECO-2 FOOD surplus v5 (twin, a hunger), "On the count, {settlement} raises more than it eats; with the crisis on, the excess is being kept back, not sold." | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
+| DS-ECO-2 FOOD surplus v6 (twin, a hunger), "What {settlement} raises still comes out ahead of what it eats, and this year every bit of the excess is wanted at home." | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
+| DS-ECO-3 SURPLUS × not trade-dependent v2, "A great deal of trade passes here. Not much of it stops." (was "Plenty passes here.") | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
+| DS-DEF-4 semi-organized v4 (twin, no rings), "Whatever crime is organised at {settlement} has no rival, and no crew is contesting the streets with it." (the second reader's rewording; the old "runs through one house" stood in 32 towns, false in 17: §9) | 32 | bar0-city-under_siege+famine-rand-33, bar0-city-under_siege+famine-rand-40, bar0-city-wartime-rand-27 |
+| DS-DEF-4 semi-organized v5 (twin, rings under an occupation), "The crews at {settlement} that would fight over the streets keep out of sight under the occupation, and their quarrel waits." (no curfew presumed: §9) | 1 | r2s-occupied-metropolis-1 |
 | DS-DEF-4 semi-organized v6 (twin, rings under a Surplus law), "More than one crew works {settlement}, but the town's law is heavier than any of them, …" | 5 | bar0-metropolis-calm-rand-42, r2r-metropolis-22, r2r-metropolis-3 |
 | DS-DEF-4 semi-organized v3, "Rival crews … are fighting over who runs the streets" (unchanged words; still prints where rings stand, no occupation, law ≤ Adequate) | 36 | bar0-city-under_siege+famine-rand-29, bar0-city-under_siege+famine-rand-30, bar0-city-under_siege+famine-rand-42 |
-| DS-POW-1 Approved v5 (twin), "… thinks well enough of the {seat}, not warmly, though under the occupation it carries out what the occupiers decide." | 0 | — (the state is not in the three populations; held by the guard) |
-| DS-POW-2 stable v5 (twin), "Everyone at {settlement} knows that {faction} holds the hall, and that under the occupation it carries out what the occupiers decide." | 0 | — (the state is not in the three populations; held by the guard) |
-| DS-POW-3 shallow v4 (twin), "Deal with {faction} at {settlement} and there is nobody else in it to be sent to, though under the occupation …" | 0 | — (the state is not in the three populations; held by the guard) |
+| DS-POW-1 Approved v5 (twin), "… thinks well enough of the {seat}, not warmly, though under the occupation it carries out what the occupiers decide." | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
+| DS-POW-2 stable v5 (twin), "Everyone at {settlement} knows that {faction} holds the hall, and that under the occupation it carries out what the occupiers decide." | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
+| DS-POW-3 shallow v4 (twin), "Deal with {faction} at {settlement} and there is nobody else in it to be sent to, though under the occupation …" | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
 | DS-POW-5 autocrat v6 (twin), "At {settlement} the {seat} still answers quickly, but under the occupation it carries out what the occupiers decide." | 3 | bar0-town-occupied-rand-38, bar0-town-occupied-rand-44, r2s-occupied-metropolis-1 |
-| DS-POW-5 secularBrutalism v3 (twin), "… Soldiers carry out the occupiers' orders through the {seat}, and nobody of the faith stands between the town and the punishment." | 0 | — (the state is not in the three populations; held by the guard) |
-| DS-POW-7 RULING bloc v4 (twin), "A working majority sits at {settlement} with the {seat} inside it, though under the occupation it carries out what the occupiers decide." | 0 | — (the state is not in the three populations; held by the guard) |
+| DS-POW-5 secularBrutalism v3 (twin), "… Soldiers carry out the occupiers' orders through the {seat}, and nobody of the faith stands between the town and the punishment." | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
+| DS-POW-7 RULING bloc v4 (twin), "A working majority sits at {settlement} with the {seat} inside it, though under the occupation it carries out what the occupiers decide." | 0 | — (the state is in none of the three populations; the guard plants it, §9) |
 | DS-SUP-3 impaired / DS-ECO-11: "{settlement}'s Weaving house …" (was "Weavers/Textile workers") | 42 | bar0-city-wartime-rand-29, bar0-metropolis-calm-rand-35, bar0-metropolis-calm-rand-43 |
 | DS-ECO-10 under no printed import: the posture of the printed exports ("Shattserai sells more than one thing beyond the thorp.") | 1 | bar0-thorp-calm-rand-44 |
 
@@ -89,13 +89,17 @@ the three populations. THE WORDS ARE THE OWNER'S TO VETO.
 
 ## 4 · NEW VOCABULARY, FOR THE OWNER'S VETO LIST
 
-- **`rival rings`** (item 6; the brief named it as mine). A presence atom: two criminal powers that do not govern, or the roster's
-  "Multiple criminal factions". It is read over `corruption.js :: rivalRingsOf` by the leaf `src/domain/facts/rivalRings.js ::
-  rivalRingsStand`, which is written beneath `organised crime`, its subject, in `factVocabulary.js`. It has one getter in
-  `factsOf.js` and one row in `factLayers.js`: layer 3, reading `powerStructure` and `institutions`.
-  THE LEAF IS NOT IMPORT-FREE: it imports `corruption.js`, the module that holds the one reading. That module is engine-core,
-  and the eager closure already reaches it through `criminalStructureKey.js`. I chose this over a second spelling of the
-  reading. EG1 is held: `tests/architecture` is green, and the one build and `bootSmoke` / `vendorPdfLazy` are green.
+- **`rival rings`** (item 6; the brief named it as mine). A presence atom: THE RINGS THE CRIMINAL STRUCTURE'S KEY READS
+  (`criminalStructureKey.js`, its first arm, the private `rivalRingsHere`). That means two criminal powers that do not govern,
+  or the roster's "Multiple criminal factions" (`corruption.js :: rivalRingsOf`), AND no one organisation rules (a governing or
+  Dominant criminal seat, or a thieves' guild house). The leaf is `src/domain/facts/rivalRings.js :: rivalRingsStand`. It reads
+  the key's reading THROUGH the key: `rivalRingsOf(...)` and the key is `semi-organized`. The key is HANDED IN by
+  `factsOf.js`, which already imports it for `crime`. `criminalStructureKey.js` is pinned lazy, and my first form, which
+  imported it into the leaf, put an eager-to-lazy edge in front of `engineCoreLazyEdge` (EG1). It went red before any push. It is written
+  beneath `organised crime`, its subject, in `factVocabulary.js`. It has one getter in `factsOf.js` and one row in
+  `factLayers.js`: layer 3, reading the crime leaf's own strata. This is the reading since the second reader's point (4); see §9.
+  THE LEAF IS NOT IMPORT-FREE: it imports `corruption.js`, which is engine-core, and the eager closure already reaches it. EG1 is held: `tests/architecture` is green, and the one build and
+  `bootSmoke` / `vendorPdfLazy` are green.
 - **The house prose forms** (`src/data/houseSentenceName.js`). A data table, not an atom, built in the shape of
   `powerSentenceName.js`.
 
@@ -173,3 +177,74 @@ the other lint reds that match at base and tip.
 - **DS-ECO-9's pools of several sources** are left ungated, on purpose. A famine's failed source leaves the printed foodways line
   by design, and "Having more than its fishing to rely on has not kept the famine out" is true beside "Its own food is flour from
   the mill." (bar0-village-famine-rand-42).
+
+## 9 · AFTER THE SECOND READER (the chair's four points, 2026-11-17 about 06:45 UTC; one commit)
+
+1. **DS-DEF-4 v4 counted a house it cannot bear.** I counted the towns of the 900 that printed "Most of the organised crime at
+   {settlement} runs through one house …": **32 towns. Of them, 11 hold no smuggling, gambling or black-market house** (the key is
+   reached by listed operations or running chains), 15 hold one, and **6 hold two or more**. So "one house" was false in 17 of the
+   32. THE CURE: the line now counts no house: "Whatever crime is organised at {settlement} has no rival, and no crew is
+   contesting the streets with it." It avoids the turf-war words, so neither 9i's detector nor the static half reads it as a turf
+   war. Its declaration is unchanged (`tier: ≥ village · no rival rings`), so no twin is needed (R7 unchanged).
+2. **DS-DEF-4 v5 presumed a curfew.** It now says "… keep out of sight under the occupation, and their quarrel waits."
+3. **DS-DEF-12's twins presumed stores, and v2 still admitted Pressured and a hunger.** v2 now declares `food: ≥ secure ·
+   no crisis: hunger`, like v1 and v3. The twins that speak of stores declare `stores: ≥ 1`: v5, v6 and a third Pressured line,
+   v9 ("By the town's own count of its stores, {settlement} can make up what its own food falls short by, so having no road costs
+   it little."), and v7 and v8 under a hunger. Where there are no stores, two lines print. Pressured: v10, "No dependable road, river
+   or port reaches {settlement}, and the town makes do without one, though what it raises falls a little short of what it eats."
+   Secure under a hunger: v11, "No dependable road, river or port reaches {settlement}, and with the crisis on, the town has little
+   put by to live on." R7 MEASURED: every Pressured ample town of the three populations holds stores (bar0-town-occupied-rand-44:
+   5.4 months; r2r-town-54), and each takes v5, v6 and v9, three lines as at the base. No town of the populations is Secure under
+   a hunger, or Pressured with no stores. THOSE STATES ARE NOW PLANTED in the guard. Each is a real town's facts with the state
+   replaced, and the guard checks the admitted set exactly: Pressured without stores [v10]; Pressured with stores [v5, v6, v9];
+   Secure under a siege with stores [v7, v8]; the same without stores [v11]; Secure and calm [v1, v2, v3]. DS-ECO-2 FOOD surplus
+   under a hunger is checked through the kernel's own `eligibleVariants`: [v4, v5, v6] under a siege, and v1 with no hunger line in
+   a calm town. The hand-back's earlier "held by the guard" was not true for these until this commit.
+4. **ONE FACT for `rival rings`.** The leaf now reads what the key reads (§4). MEASURED: the reading through the key equals a
+   copy of the key's private `rivalRingsHere` in **900 of the 900 towns**. The guard holds the two equal over the thirty and
+   plants the case where they part from `rivalRingsOf` alone: two criminal powers, one of them Dominant (and, separately, a
+   thieves' guild house). There `rivalRingsOf` holds and the atom does not.
+
+5. **A RUINED HOUSE IS NO RING (the chair's fifth point, 06:52 UTC).** The leaf now reads the roster's "Multiple criminal factions"
+   off the LIVE roster (`institutionRoster.js :: liveInstitutions`). That module is already eager: `lawBand.js` reads it. The
+   key itself reads the raw roster, so the two part only where such a house is ruined: there the atom says no rings and the
+   no-rival twin prints. MEASURED: no town of the 900 holds a non-active "Multiple criminal factions" house, so nothing printed
+   moves. The guard plants the ruined house (no rings) beside the live one (rings). The ruin walker's pinned count of readers
+   now reads 114 against its literal 113: my leaf is a new COMPLIANT reader. That count is a stored figure and the close's; I
+   leave it and name it here. THE ATOM'S LAYER IS 4, not 3: it reads the crime key, which reads the safety profile's back-write
+   at layer 3 (`factLayers.walker`). Under ruling PL1, its pool `DS-DEF-4::structure semi-organized` is re-placed at layer 5 in
+   `tests/lint/factLayers.poolTable.json`, because its lines declare `law` and `rival rings`, both layer 4. That is my seat's own
+   row, in the form BAR5-SAFETY used.
+   THE WHOLE `tests/lint`, BASE AGAINST TIP, BY NAME: at the base 5e81f0622, 59 failed of 3,226 (24 files). At my tip, before the
+   cures below, 62 failed (26 files). Three tests were red at the tip and not at the base, and all three were mine:
+   (a) `proseEntryContradiction.walker` "resolves every readStateProse call site": my comment's words "foodways line (`…" read as
+   a call of the desk's `line(` helper. The comment is reworded. (b) `styleLaw.walker` "no file's count of any struck phrase
+   rises": "rather than" went from 15 to 16 in `economy.generated.js` through my two twins. Both are reworded. (c)
+   `tuningRegister.walker` "the measured tree matches the committed inventory exactly": `corruption.js`'s six tuning tables
+   gained a dependent, my leaf `rivalRings.js`. The inventory is a stored figure, and its refreeze is the close's; I leave it and
+   name it. No test was red at the base and green at my tip. The tests the chair named: `domainAnyCastBaseline` lists the
+   base's own four files (`factsOf.js` 1, `seatMembers.js` 9, `sovereign.js` 9, `economicsCrisisMarks.js` 1, identical at the
+   base), and neither of my two new files is in it. `factLayers.walker` leaves only the base's `legalHouse` row and the
+   register's DS-ECO-6 row, both as at the base. `negativeAssertionAnchor` and `seedLoopTotality` name only other seats' files:
+   my guard's negatives each carry an anchor, and its seed loops collect every failure (`tests/helpers/seedFailures.js`).
+   `presumedThings` and `presumptionClasses`: no fresh line (the doors, below). The wiring census and its kin are stored and the
+   close's.
+   AFTER THESE CURES: the whole `tests/lint` at the final tree reads 60 failed of 3,226 (25 files). The ONLY test red at the tip and not at the base is `tuningRegister.walker` (the stored inventory, named above), and none is red at the base and not at the tip.
+
+6. **THE LINE MOVED UNDER ME (the chair, 07:24 UTC): a scratch merge of `lane/join-2026-11-14` at a55162cfa (BIRTH-1) with my
+   tip.** The merge was local and never pushed, in its own scratch worktree. It merged cleanly, with no package change. In the
+   merge, my three desk files re-project byte-for-byte from the merged annex (census re-taken in scratch only). TWO RUNS of my
+   guard and of every test I modified (`bar7DesksLines`, `tailCorpusDefGuards`, `factLayers.walker` with its pool table):
+   AT MY TIP, my guard 29 of 29 passed, `tailCorpusDefGuards` 71 of 73 (the base's two DS-DEF-3 rows), and `factLayers.walker`
+   red only on the base's rows. AT THE SCRATCH MERGE, the same: my guard 29 of 29 passed, `tailCorpusDefGuards` the same two
+   base rows, and `factLayers.walker` the same base rows (`legalHouse`; the register's DS-ECO-6 row), none of mine. NO ANCHOR OF
+   MINE WENT UNTRUE AT THE JOIN, so I re-keyed nothing. My anchors stand on stores, food words, rings, occupations, the
+   foodways line (a farmland house, not a short one) and planted records, and none of them stands on a short house. The one
+   that could move under a later supply seat is the entrepôt arm: it counts the thirty's entrepôt towns with no printed import,
+   and it must find at least one. If BIRTH-2 writes an import into all of them, that arm goes red loudly rather than vacuously.
+
+AFTER THE CURE (runI): the eight rules over the thirty **0 on all eight** (unchanged), over the 150 **0 on all eight** (unchanged), over the 720 **0 on all eight**. These renders began before the last edits: the two rewordings the style law asked for, and the move of the leaf to the live roster. I measured both as changing no draw in the 900 (no ruined criminal house; neither twin's state in the populations). Births byte-identical:
+30 of 30, 150 of 150 and 720 of 720 (no declared move). The lines' presence over the 720 (towns): "no crew is contesting the streets with it" 22; "keep out of sight under the
+occupation" 1; "Rival crews at" 27 (as before; "runs through one house" 0).
+
+THE NET AT THIS TIP (each alone, through `sh scripts/gate-tail.sh`): `typecheck:domain:strict` exit 0 · `typecheck:ratchet` exit 0 · eslint on the changed sources exit 0 · `tests/architecture` exit 0 (an eager-to-lazy edge my first form of the leaf drew was cured before any push) · `npm run build` exit 0, then `vendorPdfLazy` + `bootSmoke` exit 0 · my guard 29 of 29 · `tailCorpusDefGuards` 71 of 73 (the base's two rows) · `dossierMountRegistry.walker` green · `proseEntryContradiction.walker`, `styleLaw.walker`, `negativeAssertionAnchor.walker`, `seedLoopTotality.walker` green for my files · door A "hits 1793 · banked 1938 · fresh 0 · stale 145 · ceiling 1938" · door B "fresh 39 · stale 72 · first-register stale 6 · banked 4688 · strips fresh 0 stale 0 banked 107" (the base's own 39, row for row). **NO FRESH LINE.**

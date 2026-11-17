@@ -199,8 +199,8 @@ export function factsOf(record, options = {}) {
     get lawBand() { return lawBandOf(record); },
     /** BAR6-CRIME (9a.wave): the live tensions hold a crime wave (`lawBand.js :: crimeWaveStands`, the one reading) */
     get crimeWave() { return crimeWaveStands(record); },
-    /** BAR7-DESKS (9i.crews): rival rings stand (`rivalRings.js :: rivalRingsStand`, over `corruption.js :: rivalRingsOf`) */
-    get rivalRings() { return rivalRingsStand(record); },
+    /** BAR7-DESKS (9i.crews): rival rings stand (`rivalRings.js :: rivalRingsStand`, the rings the crime key reads) */
+    get rivalRings() { return rivalRingsStand(record, criminalStructureKeyOf(record)); },
     /** BAR6-CRIME (9a.watch, 6d-paid): the force that keeps order (`orderForce.js :: orderForceOf`) */
     get orderForce() { return orderForceOf(record); },
     /** BAR4-CORPUS-DEF (C24893): the income list carries a criminal revenue (`criminalIncome.js`) */

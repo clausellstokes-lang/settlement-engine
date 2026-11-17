@@ -1408,8 +1408,8 @@ import { rowStoppedBy } from '../crisisStoppedRow.js';
 /**
  * THE FOOD-SOURCES LENS READS THE FOODWAYS LINE THE PAGE PRINTS (BAR7-DESKS, LAW 9's rule 9g.source of BRIEF-BAR7 item 4; the
  * sixth read's C41850; vetoable by the owner). DS-ECO-9's "FOOD SOURCES" pools name the food record's first source ("its own
- * food comes first of all from its fishing") while the Economics tab's foodways line (`foodways.js :: foodwaysLineOf`, the
- * one reader every surface hands) can name another first: "Its own fields give it grain, and beyond that its food is fish"
+ * food comes first of all from its fishing") while the Economics tab's foodways sentence, read by `foodways.js :: foodwaysLineOf`
+ * (the one reader every surface hands), can name another first: "Its own fields give it grain, and beyond that its food is fish"
  * (the roster's farmland read at print, `farmedOneFrame`). ONE READING: the lens is drawn only where the first source the
  * printed line names (by the line's own source words, `foodways.js :: SOURCE_WORDS`, the earliest in the sentence) is the
  * record's; a town with no foodways line, or one whose line names no source, is read as before. ONLY THE ONE-SOURCE POOL: the

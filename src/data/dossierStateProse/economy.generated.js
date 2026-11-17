@@ -432,7 +432,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "hunger"
           ],
-          "text": "On the count, {settlement} raises more than it eats; with the crisis on, the excess is being kept back rather than sold.",
+          "text": "On the count, {settlement} raises more than it eats; with the crisis on, the excess is being kept back, not sold.",
           "slots": [
             "settlement"
           ],
@@ -2846,7 +2846,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "food: ≥ secure",
             "stores: < 3"
           ],
-          "text": "The town is plainly comfortable. The buildings are finished rather than patched, though nobody here keeps more in store than the coming season needs.",
+          "text": "The town is plainly comfortable. Its buildings are well kept, though nobody here keeps more in store than the coming season needs.",
           "slots": [],
           "vid": 4
         }

@@ -674,8 +674,8 @@
    "src": "map:measured"
   },
   "DS-DEF-4::structure semi-organized": {
-   "layer": 3,
-   "src": "map:measured"
+   "layer": 5,
+   "src": "placed: BAR7-DESKS 2026-11-17 (was 3 by map:measured): its lines declare `law` (the Foundations row's band, lawBand.js, layer 4) and `rival rings` (rivalRings.js over the crime key, layer 4)"
   },
   "DS-DEF-5::ARCANE: alchemists": {
    "layer": 4,
