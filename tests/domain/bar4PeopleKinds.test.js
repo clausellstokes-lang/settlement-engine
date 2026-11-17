@@ -68,7 +68,10 @@ const WARM_COLD_TOWNS = Object.freeze([
 /** The read's rows: [town, the text that must not print (ties, secrets, presentations), what prints in its place] */
 const ROWS = /** @type {Array<[string, string, string, string]>} */ ([
   // the pair's second tie in the temper of its first (TI1): beside a devoted mentorship the enemy's kind is a rival's
-  ['C18833', 'bar0-hamlet-calm-rand-23', 'Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since.', 'Alaa ibn Khalid and Latifa al-Amin trained together and have competed ever since.'],
+  // RE-KEYED BY IDENTITY (BAR7-LINES, 2026-11-17; LAW 10's 10i, C19351): a rival is cold now (`npcData.js :: TIE_TEMPER`), so
+  // beside the devoted mentorship the enemy's kind is a grudging respect's; the same town, the same refused words, and the
+  // line its place now prints (was: "Alaa ibn Khalid and Latifa al-Amin trained together and have competed ever since.")
+  ['C18833', 'bar0-hamlet-calm-rand-23', 'Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since.', 'There is no arrangement between Alaa ibn Khalid and Latifa al-Amin, only a long record of kept words; in this settlement that makes them remarkable.'],
   // a successor drawn only where the place can pass (TI1): the index resolves to another of the pool's own lines
   // BAR4-CLOSE-SWEEP (2026-11-16, the chair's PD1): the pair keeps its drawn index 7 (as before the round) and prints the successor line's TWIN
   // (`mentor_legacy.desc#7`, where the two share no place); at f19c3b28b the gate had re-drawn it to desc#4's twin ("…spent seven years…")

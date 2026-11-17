@@ -453,7 +453,10 @@ export function yearBand(years) {
   const band = timeBandOf(years, 52);
   // COHERENCE-PRESUME (the chair's ruling B): the herald's ladder calls up to twenty-five years "a decade",
   // and the page printed "a decade old" beside "23y ago". In years, past fifteen a span is a generation.
-  return band.id === 'a_decade' && years > 15 ? (TIME_BANDS.find((b) => b.id === 'a_generation') ?? band) : band;
+  // BAR7-LINES (the LOW "a generation old" of 40 to 60 years, 100 towns of the 720): from forty years the generation band
+  // says two generations; it keeps its id, so a reader that asks which band it is reads what it read before
+  const generation = band.id === 'a_decade' && years > 15 ? (TIME_BANDS.find((b) => b.id === 'a_generation') ?? band) : band;
+  return generation.id === 'a_generation' && years >= 40 ? /** @type {typeof band} */ (/** @type {unknown} */ (Object.freeze({ ...generation, attributive: "two generations'", span: 'two generations', since: 'two generations on', predicate: 'two generations old' }))) : generation;
 }
 
 /**

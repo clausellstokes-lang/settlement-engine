@@ -2393,6 +2393,12 @@ export const TIE_TEMPER = Object.freeze({
   mentor_student: Object.freeze({ devoted: 'warm', lifelong: 'warm' }),
   respect: Object.freeze({ deep: 'warm' }),
   enemy: Object.freeze({ '*': 'cold' }),
+  // BAR7-LINES (LAW 10's 10i, C19351; BRIEF-BAR7 item 2, vetoable by the owner): ONE PAIR, ONE SENSE. A rival is against
+  // the other and an ally on their side, so neither is "neither" beside the other: the pair's second tie takes the first's
+  // sense (`ties.js :: inTemperOf`). A rival's GRUDGING or GENUINE respect, a FORMAL teacher and a kin's tie keep no temper,
+  // so respect between rivals and kin who are rivals stay possible.
+  rival: Object.freeze({ '*': 'cold' }),
+  ally: Object.freeze({ '*': 'warm' }),
 });
 
 // TRAIT_AGGRESSION (belligerent↔pacific) and TRAIT_ALIGNMENT (good↔evil) — the two light
