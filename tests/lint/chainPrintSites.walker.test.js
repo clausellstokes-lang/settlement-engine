@@ -105,6 +105,10 @@ const EXEMPT = Object.freeze({
   'src/domain/worldPulse/supplyKernel.js': [2, 'a logic read (`resolveConsumingInstitution`, `countProducingChains`: the resource\'s good id)'],
   'src/domain/worldPulse/stressorGates.js': [1, 'a power\'s name in the conspiracy line: the walker\'s `c` in a file that touches chains, not a chain'],
   'src/domain/chainYield.js': [1, 'a logic read (`chainYieldRefused`: the resource\'s depletion)'],
+  // BAR7-ECON (2026-11-17), re-keyed BY IDENTITY: the Economics tab's one logic read of a chain's label (the income share a card
+  // says it feeds, "Contributes to <share>") moved VERBATIM from EconomicsTab.jsx (a print site) to this leaf, so that the share's
+  // own mark reads the same rule (8f.chain). The same read, one line; it prints no chain's name.
+  'src/domain/display/economicsCrisisMarks.js': [1, 'a logic read (`incomeShareOfChain`: the first word of the record\'s label matched against the income titles, moved from EconomicsTab.jsx)'],
   // ⭐ defenseDisplay.js's exempt row is DELETED (TAIL-TIES-10, the chair's ruling T29 (3)): the running criminal chains moved
   // verbatim to the crime fact's leaf (facts/criminalStructureKey.js, T28), so the display no longer touches chains and the walker
   // no longer reads it; the leaf's chain read is no chain's name or source (this walker does not enrol it).

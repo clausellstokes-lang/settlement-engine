@@ -25,7 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName, institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
-import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, chainOutputsShown, plainGoodName, foodCarriersShown, importsEmptyLineShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+import { tradeListsAsPrinted, tradeMarksOnPage, revenuesOffTheLists, plainGoodName, foodCarriersShown, importsEmptyLineShown } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -156,17 +156,17 @@ function EconomicFlowsSection({ chains: chainsAsRead, institutionalServices = []
           const st = FLOW_STATUS[chain.status] || FLOW_STATUS.operational;
           // A chain may lack a label; default to '' so .split(' ')[0] is always
           // a defined string before .toLowerCase() (matches a malformed entry).
-          const chainKeyword = String(chain.label || '').split(' ')[0].toLowerCase();
-          const matchesIncome = (inc) =>
-            inc.source.toLowerCase().includes(chainKeyword) ||
-            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'));
-          const incomeEntry = chainKeyword
-            ? (safeIncome.find(matchesIncome) || null)
-            : (chain.needKey === 'trade_entrepot' ? (safeIncome.find(matchesIncome) || null) : null);
+          // BAR7-ECON item 1 (8f.chain, 2026-11-17): the share this card says it feeds
+          // ("Contributes to <share>") is read by the one rule the share's own mark
+          // reads (economicsCrisisMarks.js :: incomeShareOfChain): the first share whose
+          // title holds the first word of the chain's label, or the entrepôt's share. A
+          // share fed by a chain the siege impairs takes the siege's mark, and this line
+          // then goes (`crisisMarks.incomeStopped`), as for a chain of the share's name.
+          const incomeEntry = incomeShareOfChain(chain, safeIncome);
           // T2-6: the facts the retired Supply Chains diagram alone carried (resource node,
           // missing houses, upstream imports, the upstream note) — one derivation, shared
           // with the Compendium's ChainRow.
-          const shown = chainPrintName(chain, town), facts = chainFlowFacts(chain, instNames, shown), outs = chainOutputsShown(chain, town); // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access (its source through chainSourceOf with it: R2-CODE-B-7); the income keyword above stays on the record's label (logic)
+          const shown = chainPrintName(chain, town), facts = chainFlowFacts(chain, instNames, shown), outs = chainOutputsOnCard(chain, town); /* BAR7-ECON item 4 (CY1): a refused yield names no service on offer */ // COHERENCE-AGREE-6 (F1): what a chain prints reads the town's access (its source through chainSourceOf with it: R2-CODE-B-7); the income keyword above stays on the record's label (logic)
           // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
           // sentence, so it prints on the first card that carries it; each card keeps its need.
           const needFirst = !filtered.slice(0, i).some(prev => chainNeedLine(prev, town)); // the shared clause on the first card only
@@ -410,7 +410,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:5}}>
           {eco.incomeSources.map((src,i)=>{
-            const isCrim = src.isCriminal; const shownDesc = incomeDescShown(s, src); // TAIL-DISPLAY-ECON-4 (X25.1): the share's mark, the Services tab's form (economicsCrisisMarks.js)
+            const isCrim = src.isCriminal; const shownDesc = incomeDescShown(s, src, ordinaryIncomeLineOf); // TAIL-DISPLAY-ECON-4 (X25.1): the share's mark, the Services tab's form (economicsCrisisMarks.js)
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             // ⛔ AUTHORED TEXT IS NEVER CLAMPED ON THE DOSSIER (owner, ODQ §934.23). The
             // 2026-09-18 car cured the PHONE, where a prose floor inside a clamp showed the
@@ -478,7 +478,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 })}
                 {exportMarks.has('transit')&&<div style={{width:'100%',fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
-              :<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
+              :<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>{exportsEmptyLineShown(s) /* BAR7-ECON item 6 (9h): the crisis's words where the crisis emptied the column */}</p>
             }
           </div>
           {/* Imports */}
@@ -824,7 +824,7 @@ import { foodRowShown } from '../../../domain/display/foodRowShown.js';
  * @param {{ needs: ReadonlyArray<string>, mobile: boolean }} props
  */
 function NeedsNotMet({ needs, mobile }) {
-  const names = needs.map((n) => plainGoodName(resourceDisplayName(n) || n)).map((n) => n.charAt(0).toLowerCase() + n.slice(1)); // W2-C-LEAVES-13 (15): no slash label
+  const names = neededNamesShown(needs.map((n) => plainGoodName(resourceDisplayName(n) || n)).map((n) => n.charAt(0).toLowerCase() + n.slice(1))); // W2-C-LEAVES-13 (15): no slash label; BAR7-ECON item 7: one good, once
   return <p data-testid="economics-needs-not-met" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.45}}>
     Needed, and not brought in: {names.join(', ')}.
   </p>;
@@ -841,9 +841,9 @@ function NeedsNotMet({ needs, mobile }) {
 import { chainAsShown, serviceStateShown } from '../../../domain/display/chainStateShown.js'; // W2-C-LEAVES-7 item 9: the card's reader lives in the leaf
 import { chainNeedLine } from '../../../domain/display/chainNeedShown.js'; // W2-C-LEAVES-6 item 6
 import { computeChainSets } from '../tabHelpers.js';
-/** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case */
+/** @param {unknown} town @returns {Set<string>} the houses the Institutions tab marks impaired, lower case: BAR7-ECON item 2 (8g, C39519), the card head's own reading, the leaf's worse state (`setsWithMarkedHousesWorse`), not the chains' raw set */
 function impairedHousesOf(town) {
-  return new Set([...computeChainSets(/** @type {any} */ (town) || {}).impaired].map((h) => String(h).toLowerCase()));
+  return new Set([...setsWithMarkedHousesWorse(/** @type {any} */ (town), computeChainSets(/** @type {any} */ (town) || {})).impaired].map((h) => String(h).toLowerCase()));
 }
 
 /**
@@ -879,5 +879,7 @@ function flowHeaderCount(chains, services, impairedHouses, town = null) {
   return { active, impaired, words };
 }
 
-import { factsOf } from '../../../domain/facts/factsOf.js'; import { complexityLabelShown } from '../../../domain/display/labelBands.js'; /* BAR6-ECON (9b.subsistence): the survival label's twin under a purse past survival */ import { chainCardUnderSiege, flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown, serviceCardShown, EXPORT_STOPPED_TAG } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
-
+import { factsOf } from '../../../domain/facts/factsOf.js'; import { complexityLabelShown } from '../../../domain/display/labelBands.js'; /* BAR6-ECON (9b.subsistence): the survival label's twin under a purse past survival */ import { chainCardUnderSiege, flowCrisisMarks, econOrdinaryTimesLine, incomeDescShown, serviceCardShown, EXPORT_STOPPED_TAG, incomeShareOfChain, chainOutputsOnCard, exportsEmptyLineShown } from '../../../domain/display/economicsCrisisMarks.js'; // TAIL-DISPLAY-ECON-3 (X21): the stores sentence takes the town's crisis, as the Tonight sheet's call does; TAIL-DISPLAY-ECON-4 (X25.1): the income rows and the flow cards read the crisis leaf
+import { setsWithMarkedHousesWorse } from '../../../domain/display/crisisStoppedRow.js'; // BAR7-ECON item 2 (8g): the service card reads the leaf's worse state of its house
+import { neededNamesShown } from '../../../domain/display/criticalImportsShown.js'; // BAR7-ECON item 7: one good, once, on the needs line
+import { ordinaryIncomeLineOf } from '../../../generators/economy/incomeLineSiblings.js'; // BAR7-ECON (the second reader's point 1): a short twin under no mark prints the trade's ordinary line

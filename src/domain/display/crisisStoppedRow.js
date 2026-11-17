@@ -74,14 +74,15 @@ import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
+import { houseDependenceOf } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import { serviceRowsOf } from '../dossier/entityLinks.js';
 import { chainCrisisStateShown } from './chainStateShown.js';
 import {
-  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE,
+  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE,
   SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, IMPORTED_INPUT, INCOME_TRADE_HOUSES, NONE,
-  IRON, WORKING_ANIMALS, INPUT_IMPORTED_AS, INCOME_REMEDY_HOUSES,
+  IRON, WORKING_ANIMALS, INPUT_IMPORTED_AS, INCOME_REMEDY_HOUSES, INCOME_CLOTH_HOUSES,
 } from '../../data/crisisDependence.js';
 import { canonImports } from '../canonicalAccessors.js';
 
@@ -90,6 +91,8 @@ export const STOPPING_CRISES = Object.freeze(['under_siege', 'plague_onset', 'fa
 
 /** The crisis as the page names it. VETOABLE wording. @type {Readonly<Record<string, string>>} */
 const CRISIS_NOUN = Object.freeze({ under_siege: 'the siege', plague_onset: 'the outbreak', famine: 'the famine', wartime: 'the war' });
+/** The crisis's noun as the page's lines name it ("the siege"), or null (BAR7-ECON item 6: the empty export line). @param {string} crisis @returns {string | null} */
+export const crisisNounOf = (crisis) => (Object.prototype.hasOwnProperty.call(CRISIS_NOUN, crisis) ? CRISIS_NOUN[/** @type {keyof typeof CRISIS_NOUN} */ (crisis)] : null);
 
 /**
  * The mark before a row's description, by crisis. Each names its crisis, so each is DECLARED and handed to the list door
@@ -328,15 +331,10 @@ function onImportedInputUnderSiege(settlement, house) {
   return typeof house?.name === 'string' && housesOnImportedInput(settlement).has(house.name) && stoppingCrisesOf(settlement).includes('under_siege');
 }
 
-/**
- * What a house lives on, by its catalogue id (the record's `catalogId`, else its name's).
- * @param {{ catalogId?: unknown, name?: unknown }} inst
- * @returns {ReadonlyArray<string>}
- */
-export function houseDependenceOf(inst) {
-  const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
-  return id && Object.prototype.hasOwnProperty.call(HOUSE_DEPENDENCE, id) ? HOUSE_DEPENDENCE[id] : NONE;
-}
+/* What a house lives on, by its catalogue id: `houseDependenceOf`, moved VERBATIM to the data table's own file
+ * (`data/crisisDependence.js`, BAR7-ECON item 5, 2026-11-17) so that the trade lists, which sit below this leaf, read the same
+ * fact of "a house marked short" (`rowShortOf`: a house of the short set whose dependence holds INPUT); re-exported here. */
+export { houseDependenceOf };
 
 /** The chain states a card prints as working (`chainStateShown.js`'s own set). */
 const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
@@ -468,17 +466,55 @@ export function rowStoppedBy(settlement, kind, row, crises = stoppingCrisesOf(se
  * @returns {string | null}
  */
 function incomeHouseKind(settlement, income, crises) {
-  const title = typeof income?.source === 'string' ? income.source.trim() : '';
-  const ids = Object.prototype.hasOwnProperty.call(INCOME_TRADE_HOUSES, title) ? INCOME_TRADE_HOUSES[title]
-    : Object.prototype.hasOwnProperty.call(INCOME_REMEDY_HOUSES, title) ? INCOME_REMEDY_HOUSES[title] : null; // BAR5-MARKS: the remedies' shares
-  if (!ids || !settlement || typeof settlement !== 'object') return null;
-  const houses = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
-    .filter((i) => i && typeof i.name === 'string' && !isCustom(i)) // a catalogue house (a custom one has no catalogue id)
-    .filter((i) => ids.includes(String((typeof i.catalogId === 'string' && i.catalogId) || catalogIdForName(i.name) || ''))); // of the trade, by id
+  const houses = incomeTradeHousesOf(settlement, income);
   if (houses.length === 0) return null;
   const kinds = houses.map((h) => rowStoppedBy(settlement, 'house', h, crises));
   if (kinds.some((k) => k === null)) return null;
   return kinds.find((k) => k !== crisisOfMarkKind(/** @type {string} */ (k))) ?? /** @type {string} */ (kinds[0]);
+}
+
+/**
+ * The live catalogue houses of an income share's trade (`INCOME_TRADE_HOUSES`, `INCOME_REMEDY_HOUSES`, `INCOME_CLOTH_HOUSES`,
+ * keyed by the share's title), by catalogue id; none for a share of no house's trade.
+ * @param {object | null | undefined} settlement @param {Record<string, unknown> | null | undefined} income
+ * @returns {Array<Record<string, unknown>>}
+ */
+function incomeTradeHousesOf(settlement, income) {
+  const title = typeof income?.source === 'string' ? income.source.trim() : '';
+  const ids = Object.prototype.hasOwnProperty.call(INCOME_TRADE_HOUSES, title) ? INCOME_TRADE_HOUSES[title]
+    : Object.prototype.hasOwnProperty.call(INCOME_REMEDY_HOUSES, title) ? INCOME_REMEDY_HOUSES[title] // BAR5-MARKS: the remedies' shares
+      : Object.prototype.hasOwnProperty.call(INCOME_CLOTH_HOUSES, title) ? INCOME_CLOTH_HOUSES[title] : null; // BAR7-ECON: the cloth trade's
+  if (!ids || !settlement || typeof settlement !== 'object') return [];
+  return /** @type {Array<Record<string, unknown>>} */ (liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .filter((i) => i && typeof i.name === 'string' && !isCustom(i)) // a catalogue house (a custom one has no catalogue id)
+    .filter((i) => ids.includes(String((typeof i.catalogId === 'string' && i.catalogId) || catalogIdForName(i.name) || '')))); // of the trade, by id
+}
+
+/**
+ * BAR7-ECON item 1 (LAW 8's 8f.short; the chair's BRIEF-BAR7, 2026-11-17; vetoable by the owner): THE SHORT HALF OF AN INCOME
+ * SHARE'S MARK. "Iron & Metalwork · Metal is smelted or worked here." printed bare beside its only smith, "Short of iron."
+ * (C41826): the share read its houses' crisis marks (`incomeHouseKind`) and never their short mark. It reads it as it reads
+ * the crisis half, house by house, through the leaf's own reading (`rowShortOf`, the mark the house's card prints): where
+ * every live house of the trade carries a mark (a crisis's or the short one) and at least one of them is short and not
+ * stopped by a crisis, the share is short of what those houses lack ("its materials" where they lack different things).
+ * Where every house carries a crisis mark the crisis half speaks alone, as before. Display only.
+ * @param {object | null | undefined} settlement @param {Record<string, unknown> | null | undefined} income
+ * @param {string[]} [crises]
+ * @returns {string | null} the input the share's houses are short of, or null
+ */
+export function incomeShortOf(settlement, income, crises = stoppingCrisesOf(settlement)) {
+  if (!income || typeof income !== 'object' || isCustom(income)) return null;
+  const houses = incomeTradeHousesOf(settlement, income);
+  if (houses.length === 0) return null;
+  /** @type {string[]} */
+  const inputs = [];
+  for (const h of houses) {
+    const short = rowShortOf(settlement, 'house', h);
+    if (short) { inputs.push(short); continue; }
+    if (crises.length === 0 || rowStoppedBy(settlement, 'house', h, crises) === null) return null; // a house at work
+  }
+  if (inputs.length === 0) return null;
+  return new Set(inputs).size === 1 ? inputs[0] : 'its materials';
 }
 
 /** Each record's service rows by their house's roster name, read once a record. @type {WeakMap<object, ReadonlyMap<string, ReadonlyArray<Record<string, unknown>>>>} */
