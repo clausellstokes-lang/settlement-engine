@@ -1,0 +1,3 @@
+{"id":"C16768","town":"bar0-city-wartime-rand-44","sev":"MED","kind":"LACKS","why":"Radoslav wants to satisfy \"the crown requisition order\"; GOVERNMENT lists no crown, and C15771 says no higher lord, no external charter","other":"C15771"}
+{"id":"C17793","town":"bar0-city-wartime-rand-44","sev":"LOW","kind":"STATE","why":"Siege is 58 years ago per PAST; a legacy \"a generation old\" understates it by a generation or more","other":"C17759"}
+{"id":"DONE","lines":2624,"blocks":1,"flags":2}
