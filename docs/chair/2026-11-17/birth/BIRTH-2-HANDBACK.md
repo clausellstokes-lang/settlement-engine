@@ -228,11 +228,49 @@ works is worked out: its own ground is depleted (Fishing grounds)." (r2s-wartime
   no word its record lacks; on no road still none.
 - `tests/generators/bar4ScenePresumption.test.js` REACHABLE (MU1): its refusing town is composed in the owner's fourth story
   (the birth's buyer words struck); the arm is green at my tip (8 of 8 tests), the cloth twin proved again.
+- `tests/domain/bar6SeamEcon.test.js` item 8: no town of 1,470 census-shaped births at my tip (the 720, the 150, 600 more
+  r2r- towns, cities, metropolises) bears "a River Mill card listing Fulled cloth beside a Fuller short of wool"; the claim
+  stands on the same town, r2r-metropolis-69, composed in the owner's fourth story (its "Wool" struck, the Fuller's stored gap
+  `missing`): NOT house for house, named.
 - `tests/domain/bar6MarksLaw8.test.js`: untouched (green; LEFT unchanged; the 8a.mild control left, above).
 
 ## The net (R11 and the brief's), each alone, to a file through `sh scripts/gate-tail.sh`
 
-NET_TABLE
+Run at the base FIRST (R11), then at the final tip (b5195bf02 and the hand-back commit after it, which changes no code).
+
+| gate | base a55162cfa | tip |
+|---|---|---|
+| `npm run typecheck:domain:strict` | exit 0 · 1113, ceiling 1113 | exit 0 · 1113, ceiling 1113 |
+| `npm run typecheck:ratchet` | exit 0 · 167, ceiling 167 | exit 0 · 167, ceiling 167 |
+| `npx eslint` on my changed sources and tests | — | exit 0 |
+| `npx vitest run tests/architecture` | exit 0 · 347 | exit 0 · 347 (it was RED at a cut of mine: `factHomesLazy` (a): my leaf, routed eager with its folder, read the lazy `crisisDependence.js` and `institutionServices.js`: cured by the copy `GROUND_YIELD`, EG1) |
+| ONE `npm run build`, then `vendorPdfLazy` + `bootSmoke` | — | built in 50 s · 49 passed, 17 skipped (it was RED at the same cut: the goods roster found the leaf reading the member `resourceSemantics.js`; cured, the leaf reads no goods member) |
+| my guard `tests/domain/supplyStoryLaw.test.js` | cannot load | exit 0 · 6 tests |
+| `birthKindsLaw`, `bar6MarksLaw8`, `bar4ScenePresumption` | (red at the base as the brief says: MU1's cloth twin) | exit 0 · 3, 4, 8 tests |
+| the classes door (R9) | `hits 1795 · banked 1938 · fresh 0 · stale 143` | the same line (no fresh row) |
+| the things door (R9) | `fresh 39 · stale 72 · first-register stale 6 · banked 4688` | the same line (a cut of mine read 43: four shortage words I had copied into the leaf as strings; cured, the callers hand the word in) |
+| `npx vitest run tests/lint` WHOLE (the walkers) | 27 files · 64 tests red | **27 files · 64 tests red, THE SAME 64 BY NAME: none new.** Under unchanged names, stored figures moved: the estate's file count 3668 → 3669 (my new test file), two counts fell (1440 → 1428, 1749 → 1748), the dark identities 30 → 18, and one stored hash (the close's, R10) |
+| the earlier rounds' guards (`bar5*`, `bar6*`, domain and generators) | 21 files · 170 passed | 1 red (`bar6SeamEcon` item 8: its anchor r2r-metropolis-69's fuller is fed under the siege now): RE-KEYED by identity (below), then 6 of 6 green |
+
+## RED AT MY TIP AND NOT AT MY BASE: LEFT BY NAME (my count reached its hand-back line before I could read them)
+
+The sweep BIRTH-1 ran (every test file that names a reader or a file I changed: 76 files, `sweep.list`) at the base and the
+tip: base 11 files · 15 tests red; tip 17 files · 26 tests red. **The ones red at the tip only, NOT CURED, NOT YET READ
+(the reason given is my reading of the test's name, unverified):**
+
+| file · test | likely cause |
+|---|---|
+| `tests/build/generationWorkerLazy.test.js` · the worker bundle under `WORKER_BUNDLE_CEILING_BYTES` | a stored figure (R10): the new leaf adds bytes to the worker; the close's |
+| `tests/generators/bar4RecordHouseInput.test.js` · KEEP: a commercial sawmill with no timber (two arms) and its rung control | an anchor's sawmill now has timber of a proven woodland (r2r-city-115?): a re-key by identity |
+| `tests/generators/gapSaysWhichKind.test.js` · missing: the TRUE gaps stay written | the same: a soak anchor (soak1k-9, -302) now fed by a proven ground or the siege's birth |
+| `tests/generators/houseInputReaches.test.js` · (M-V) KEEP: isolated or besieged, the input does not reach | under a siege the birth now brings the ordinary-times word (BR3 (c)): the claim is untrue for the besieged half; a re-key |
+| `tests/components/crisisStoppedRows.test.jsx` · S5, the births table | its anchors (r2r-town-54, r2r-city-49, BIRTH-1's re-keys) or a row the story now feeds |
+| `tests/domain/bar4MarkPromise.test.js` · (a) THE ZERO over the 720; (d) the mark follows the gap line | (a) a new instance the detector finds (an idle buyer whose rows take no input mark: item 3's furrier, merchant guilds, dyer, tailor?); (d) its anchor r2r-town-54 |
+| `tests/components/publicProseEquality.test.jsx` · services, soak1k-1 and soak1k-10 | a services line that differs between the owner's view and the shared page in two soak towns: NOT understood |
+| `tests/pdf/tailExportsPdf3Batch3.test.jsx` · each NOT row | NOT understood (the PDF is no file of mine) |
+
+THE ONE GONE (red at the base, green at the tip): `bar4ScenePresumption` REACHABLE (MU1), the brief's own red.
+`tests/lint` (the walkers) and the earlier rounds' guards hold no new red (above). The whole suite was not run.
 
 ## For the owner's veto list (in plain words)
 
@@ -259,6 +297,6 @@ The 525 reference configurations (gaps 32, imports 15 and fewer of the need list
 
 ## What is left, and for whom
 
-The second ring (item 1); "never had it" on no road (item 2 (e), 67 houses); the readers of item 7 (the PDF's land list
+THE ELEVEN RED FILES ABOVE (first: they are mine to cure or explain, by the brief). The second ring (item 1); "never had it" on no road (item 2 (e), 67 houses); the readers of item 7 (the PDF's land list
 first); the card (item 8); the held input items (item 9); the twenty-eight towns' reading (item 12); the 8a.mild control's
 idle house (none exists); the rows of idle buyers that take no input mark (furrier, merchant guilds, dyer, tailor: BAR7).
