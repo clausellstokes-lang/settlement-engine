@@ -1,0 +1,84 @@
+READERS:
+  bar6-01 a  16 flags · {"id":"DONE","lines":3633,"blocks":1,"flags":16}
+  bar6-01 b  5 flags · {"id":"DONE","lines":3633,"blocks":1,"flags":5}
+  bar6-02 a  13 flags · {"id":"DONE","lines":3480,"blocks":1,"flags":13}
+  bar6-02 b  10 flags · {"id":"DONE","lines":3480,"blocks":1,"flags":10}
+  bar6-03 a  15 flags · {"id":"DONE","lines":2800,"blocks":1,"flags":15}
+  bar6-03 b  9 flags · {"id":"DONE","lines":2800,"blocks":1,"flags":9}
+  bar6-04 a  8 flags · {"id":"DONE","lines":2804,"blocks":1,"flags":8}
+  bar6-04 b  8 flags · {"id":"DONE","lines":2804,"blocks":1,"flags":8}
+  bar6-05 a  5 flags · {"id":"DONE","lines":2813,"blocks":1,"flags":5}
+  bar6-05 b  5 flags · {"id":"DONE","lines":2813,"blocks":1,"flags":5}
+  bar6-06 a  4 flags · {"id":"DONE","lines":2624,"blocks":1,"flags":4}
+  bar6-06 b  2 flags · {"id":"DONE","lines":2624,"blocks":1,"flags":2}
+  bar6-07 a  9 flags · {"id":"DONE","lines":2302,"blocks":4,"flags":9}
+  bar6-07 b  5 flags · {"id":"DONE","lines":2302,"blocks":4,"flags":5}
+  bar6-08 a  4 flags · {"id":"DONE","lines":1228,"blocks":2,"flags":4}
+  bar6-08 b  9 flags · {"id":"DONE","lines":1228,"blocks":2,"flags":10}
+  bar6-09 a  3 flags · {"id":"DONE","lines":3658,"blocks":1,"flags":3}
+  bar6-09 b  8 flags · {"id":"DONE","lines":3658,"blocks":1,"flags":8}
+  bar6-10 a  5 flags · {"id":"DONE","lines":3434,"blocks":1,"flags":5}
+  bar6-10 b  6 flags · {"id":"DONE","lines":3434,"blocks":1,"flags":6}
+  bar6-11 a  4 flags · {"id":"DONE","lines":3940,"blocks":1,"flags":4}
+  bar6-11 b  4 flags · {"id":"DONE","lines":3940,"blocks":1,"flags":4}
+  bar6-12 a  6 flags · {"id":"DONE","lines":1270,"blocks":3,"flags":6}
+  bar6-12 b  5 flags · {"id":"DONE","lines":1270,"blocks":3,"flags":5}
+  bar6-13 a  6 flags · {"id":"DONE","lines":2056,"blocks":1,"flags":6}
+  bar6-13 b  5 flags · {"id":"DONE","lines":2056,"blocks":1,"flags":5}
+  bar6-14 a  7 flags · {"id":"DONE","lines":1200,"blocks":1,"flags":7}
+  bar6-14 b  7 flags · {"id":"DONE","lines":1200,"blocks":1,"flags":7}
+  bar6-15 a  7 flags · {"id":"DONE","lines":1416,"blocks":1,"flags":7}
+  bar6-15 b  5 flags · {"id":"DONE","lines":1416,"blocks":1,"flags":5}
+  bar6-16 a  1 flags · {"id":"DONE","lines":1313,"blocks":1,"flags":1}
+  bar6-16 b  2 flags · {"id":"DONE","lines":1313,"blocks":1,"flags":2}
+  bar6-17 a  3 flags · {"id":"DONE","lines":1288,"blocks":1,"flags":3}
+  bar6-17 b  4 flags · {"id":"DONE","lines":1288,"blocks":1,"flags":4}
+  bar6-18 a  11 flags · {"id":"DONE","lines":2272,"blocks":2,"flags":11}
+  bar6-18 b  13 flags · {"id":"DONE","lines":2272,"blocks":2,"flags":13}
+  bar6-19 a  11 flags · {"id":"DONE","lines":1713,"blocks":2,"flags":11}
+  bar6-19 b  5 flags · {"id":"DONE","lines":1713,"blocks":2,"flags":5}
+  bar6-20 a  4 flags · {"id":"DONE","lines":1755,"blocks":2,"flags":4}
+  bar6-20 b  5 flags · {"id":"DONE","lines":1755,"blocks":2,"flags":5}
+  bar6-21 a  2 flags · {"id":"DONE","lines":867,"blocks":1,"flags":2}
+  bar6-21 b  4 flags · {"id":"DONE","lines":867,"blocks":1,"flags":4}
+
+THE COUNT A TOWN (the union of two readers; a sentence printed twice counted once):
+  bar0-city-under_siege+famine-rand-42   city        sentences  3577 · HIGH  0 · MED   3 · LOW  12
+  bar0-city-under_siege+famine-rand-43   city        sentences  3422 · HIGH  0 · MED   3 · LOW  11
+  bar0-city-under_siege+famine-rand-44   city        sentences  2747 · HIGH  0 · MED   5 · LOW  10
+  bar0-city-wartime-rand-42              city        sentences  2751 · HIGH  0 · MED   3 · LOW   8
+  bar0-city-wartime-rand-43              city        sentences  2760 · HIGH  0 · MED   2 · LOW   6
+  bar0-city-wartime-rand-44              city        sentences  2573 · HIGH  0 · MED   1 · LOW   3
+  bar0-hamlet-calm-rand-42               hamlet      sentences   562 · HIGH  0 · MED   1 · LOW   1
+  bar0-hamlet-calm-rand-43               hamlet      sentences   584 · HIGH  0 · MED   2 · LOW   1
+  bar0-hamlet-calm-rand-44               hamlet      sentences   472 · HIGH  0 · MED   2 · LOW   0
+  bar0-hamlet-under_siege-rand-42        hamlet      sentences   538 · HIGH  0 · MED   1 · LOW   2
+  bar0-hamlet-under_siege-rand-43        hamlet      sentences   650 · HIGH  0 · MED   2 · LOW   5
+  bar0-hamlet-under_siege-rand-44        hamlet      sentences   505 · HIGH  0 · MED   1 · LOW   2
+  bar0-metropolis-calm-rand-42           metropolis  sentences  3596 · HIGH  0 · MED   1 · LOW   7
+  bar0-metropolis-calm-rand-43           metropolis  sentences  3377 · HIGH  0 · MED   3 · LOW   3
+  bar0-metropolis-calm-rand-44           metropolis  sentences  3876 · HIGH  0 · MED   1 · LOW   5
+  bar0-thorp-calm-rand-42                thorp       sentences   387 · HIGH  0 · MED   0 · LOW   4
+  bar0-thorp-calm-rand-43                thorp       sentences   390 · HIGH  0 · MED   0 · LOW   1
+  bar0-thorp-calm-rand-44                thorp       sentences   386 · HIGH  0 · MED   1 · LOW   1
+  bar0-town-calm-rand-42                 town        sentences  2009 · HIGH  0 · MED   2 · LOW   6
+  bar0-town-calm-rand-43                 town        sentences  1161 · HIGH  0 · MED   1 · LOW   9
+  bar0-town-calm-rand-44                 town        sentences  1375 · HIGH  0 · MED   2 · LOW   8
+  bar0-town-occupied-rand-42             town        sentences  1272 · HIGH  0 · MED   1 · LOW   1
+  bar0-town-occupied-rand-43             town        sentences  1247 · HIGH  0 · MED   2 · LOW   2
+  bar0-town-occupied-rand-44             town        sentences  1313 · HIGH  0 · MED   3 · LOW   1
+  bar0-village-calm-rand-42              village     sentences   880 · HIGH  0 · MED   3 · LOW   8
+  bar0-village-calm-rand-43              village     sentences   663 · HIGH  0 · MED   0 · LOW   6
+  bar0-village-calm-rand-44              village     sentences   975 · HIGH  0 · MED   1 · LOW   7
+  bar0-village-famine-rand-42            village     sentences   963 · HIGH  0 · MED   1 · LOW   3
+  bar0-village-famine-rand-43            village     sentences   716 · HIGH  0 · MED   1 · LOW   3
+  bar0-village-famine-rand-44            village     sentences   830 · HIGH  0 · MED   2 · LOW   3
+  IN ALL: HIGH 0 · MED 51 · LOW 139 · a town: HIGH 0.0 · MED 1.7
+
+TWO READERS (HIGH and MED): reader a 41 · reader b 41 · both 31 · union 51
+  if the two reads are independent, the towns hold about 54 such sentences (a x b / both); the union found 94% of them
+BY KIND (HIGH and MED): {'PAIR': 32, 'STATE': 16, 'BROKEN': 2, 'LACKS': 1}
+BY SECTION (HIGH and MED): {'Systems/Economics': 12, 'Summary/Overview': 7, 'Summary/Plot Hooks': 6, 'World/NPCs': 6, 'World/Daily Life': 4, 'Systems/Institutions': 4, 'Systems/Power': 3, 'Systems/Defense': 3, 'World/Relationships': 2, 'Systems/Resources': 1, 'Systems/Services': 1, 'Systems/Outlook': 1}
+HOW WIDE ON THE 720 (HIGH and MED rows by the towns that print the same sentence): >=100: 7 · 20-99: 19 · 5-19: 10 · 1-4: 1 · none (new or this town only): 14
+HEADER (the record itself) flags: 1
+   bar6-08 b bar0-hamlet-under_siege-rand-43 · INCOME 'Iron & Metalwork 8%' but no smith or metalworking house, iron only imported, exports none
