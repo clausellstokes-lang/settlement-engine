@@ -760,3 +760,9 @@ should be paused or archived by the owner's hand.
   guard's loops are fixed (22:44, 01a432128); its BR24 tip is awaited; then READ-J-ROWS's short second read, the merge on
   the line's tip, a whole check, the landing; THEN LEFT-KEYS. SCENES (4efba5868, building BR23) and PDF-2 (455a72534) work on.
   SECTION 0's "THE LINE" IS REWRITTEN AS OF THIS HOUR.
+- **22:58 UTC. MARKS-2 WAS REFUSED AT ITS FIRST SMALL COMMIT (22:55) AND STOPPED, with no work done.** Two new seats in a row (J-INCOME, MARKS-2) are
+  refused at the door; PDF-2 (seated with J-INCOME) was not. THE CHAIR SEATS NO FURTHER BUILDER (LEFT-KEYS, ROWS-2, PEOPLE-2
+  wait). WHAT STILL MOVES: J-ROWS (ruling BR24), SCENES (BR23), PDF-2: each is read, second-read, whole-checked and landed
+  as it comes. WHEN THOSE THREE ARE ON THE LINE, NOTHING ELSE MOVES WITHOUT THE OWNER, and THE EIGHTH READ WAITS TOO (a read
+  now would measure a tree that lacks half the round: K-POWERS, K-PEOPLE, K-WATCH, DESKS-DEF and DESKS-ECO hold their
+  finished work uncommitted). The owner has the whole account and the two ways out in plain words (22:56).
