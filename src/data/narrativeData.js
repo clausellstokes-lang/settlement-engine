@@ -74,7 +74,9 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `${r} is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things.`,
     { text: (r) =>
-      `A child runs past you on the road into ${r}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.`, crisis: ['any'] },
+      `A child runs past you on the road into ${r}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.`, crisis: ['any'], needs: ['tier: ≥ village'] }, // BAR6-CULTURE (6a-w, 16 small towns of the 720): a street is a village's; its twin below (the slot keeps its draw)
+    { text: (r) =>
+      `A child runs past you on the road into ${r}, chasing something or being chased by something (unclear which). Nobody else on the road pays attention.`, twinOf: 'A child runs past you on the road into {name}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.', crisis: ['any'], needs: ['tier: ≤ hamlet'] }, // BAR6-CULTURE: the small-place twin. VETOABLE wording (the owner's).
     { text: (r) =>
       `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`, crisis: ['any'], needs: ['market'] }, // R2-CODE-A-4 (CENSUS-2 a/merchants): a daily merchant only where the roster holds a market
     { text: (r) =>

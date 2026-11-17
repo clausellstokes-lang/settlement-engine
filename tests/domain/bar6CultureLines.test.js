@@ -141,6 +141,7 @@ describe('BAR6-CULTURE: the zero over the census\'s 720', () => {
       const food = s.economicState?.foodSecurity?.foodRecord;
       if (food && !(food.foodSources || []).includes('grain')) expect(FIELD_FOODWAYS.test(String(food.foodwaysLine ?? '')) ? food.foodwaysLine : null, `${seed}: fields credited with no grain`).toBe(null);
       if (SMALL.has(s.tier)) expect(/street kitchens/i.test(String(food?.foodwaysLine ?? '')) ? food.foodwaysLine : null, `${seed}: a hamlet's street kitchens`).toBe(null);
+      if (SMALL.has(s.tier)) expect(/Nobody in the street pays attention/.test(JSON.stringify(s.arrivalScene ?? '')) ? 'the street line' : null, `${seed}: a hamlet's street in its arrival`).toBe(null);
       const detail = String(s.culturalIdentity?.architecturalDetail ?? '');
       const key = String(s.culturalIdentity?.key ?? '');
       if (BELOW_TOWN.has(s.tier) && key !== 'mixed' && !architecturalDetailRefused(detail, key, () => f)) expect(SIZE_TOWN.test(detail) ? detail : null, `${seed}: a town's word in a ${s.tier}`).toBe(null);
