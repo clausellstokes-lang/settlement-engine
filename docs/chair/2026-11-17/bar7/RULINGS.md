@@ -26,3 +26,28 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
 - **RD1 · A READ RUNS AS SOON AS A ROUND HAS JOINED; IT DOES NOT WAIT FOR THE SEAM.** The sixth read was run at the tree of
   the eleven branches while the seam worked: its findings are the next round's list, and a read after the seam alone would
   have counted above zero all the same. The read that can meet the bar is the one after the next round.
+- **CM1 · THE HOUSE'S MARK IS ONE LINE OF ITS OWN ON A PERSON'S CARD.** The round before set the house's mark in front of
+  a person's "How they deal" sentence, only where the sentence matched twelve trade verbs ("How they deal Short of wool.
+  Talks about who is weaving what ..."): every reader of the sixth read read it as broken (25 LOW rows), and the auditor
+  counted 550 such lines in the census's 720 beside 1,589 lines of a marked house's keeper that carry no mark. THE MARK IS
+  PRINTED ONCE, AS ITS OWN LINE UNDER THE CARD'S HOUSE LINE, and the person's sentences are left as written; the PDF's
+  person card prints the same line. By the second check's rule that a card's mark covers what its rows say, this answers
+  every line of the card at once (2,922 instances of the 720 by the auditor's runner) with no line of prose touched.
+- **SV2 · THE SOVEREIGN ATOM'S LEAF STAYS AS IT IS THIS ROUND.** The auditor found that it reads wide (a noble house, a
+  castellan or a steward counts as a sovereign in a town whose government card prints "No higher lord, no external
+  charter"). The two writers that name a crown there are cured in their own words (the war's goal: "the army's
+  requisition order"; the town crier: "laws, decrees and official notices"). The atom's width is looked at again only if
+  a read flags a crown line the atom admitted in an independent polity.
+- **CY1 · A STOPPED CHAIN'S "Normally yields" LINE NAMES NO SERVICE WHOSE OWN ROW THE PAGE KEEPS ON OFFER.** A shipyard's
+  services were flagged bare beside its stopped harbour chain; the dependence table's ruling stands (the yard builds
+  from its own timber) and two of the census's four instances are a temple whose chip is true: the chain card's line is
+  the fault, not the house's rows.
+- **PM1 · WHERE THE WAR'S OVERVIEW ROW AND THE LEDGER LINE DISAGREE ABOUT THE PURSE, THE OVERVIEW YIELDS.** "Signed a
+  requisition order that it cannot afford ... running thin" presumes a purse the record may not hold; the ledger line
+  ("closes every year ahead") is true in 18 war towns of the 720: the overview's row takes a twin where the record's
+  purse holds a margin, and the ledger line's words are made to say money.
+- **BAR7's SEATS ARE CUT BY FILE, FIVE FROM TWO AUDITS** (`docs/chair/2026-11-14/briefs/BRIEF-BAR7.md`): CARDS (the
+  person's card and the PDF), ECON (the Economics tab's marks and lists), SCENES, DESKS (the only seat that edits the
+  annex: the economy, defence and power desks), LINES (seven single writers). The house that works only a grain surplus
+  (the auditor's 8i.surplus: 3 towns of the 720) waits for BIRTH-1, which holds its file.
+
