@@ -15,7 +15,13 @@ while read -r f; do
   echo "$f exit=$?" >> "$OUT/retry/exits.txt"
 done < "$OUT/slow.files.txt"
 if [ "$n" -gt 0 ]; then node "$HERE/failnames.mjs" "$OUT"/retry/*.json > "$OUT/retry.names.txt" 2> "$OUT/retry.counts.txt"; else : > "$OUT/retry.names.txt"; fi
-# names.txt minus every row of a retried file, plus the lone runs' rows
-awk 'NR==FNR { slow[$0]=1; next } { split($0, a, " :: "); if (!(a[1] in slow)) print }' "$OUT/slow.files.txt" "$OUT/names.txt" > "$OUT/names.final.tmp"
+# names.txt minus every row of a retried file, plus the lone runs' rows.
+# (2026-11-17 19:40 UTC, found by CHECKS-2: with an EMPTY slow.files.txt awk's NR==FNR took names.txt for the first file and
+# names.final.txt came out empty. The slow list is now handed to awk by -v file reading, and an empty list keeps every row.)
+if [ -s "$OUT/slow.files.txt" ]; then
+  awk -v SLOW="$OUT/slow.files.txt" 'BEGIN { while ((getline line < SLOW) > 0) slow[line]=1 } { split($0, a, " :: "); if (!(a[1] in slow)) print }' "$OUT/names.txt" > "$OUT/names.final.tmp"
+else
+  cp "$OUT/names.txt" "$OUT/names.final.tmp"
+fi
 cat "$OUT/retry.names.txt" >> "$OUT/names.final.tmp"; sort -u "$OUT/names.final.tmp" > "$OUT/names.final.txt"; rm -f "$OUT/names.final.tmp"
 echo "retried $n files · names $(wc -l < "$OUT/names.txt") -> $(wc -l < "$OUT/names.final.txt")"
