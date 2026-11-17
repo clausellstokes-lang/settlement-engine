@@ -53,6 +53,19 @@ export function doubledGapLines(lines) {
   return out;
 }
 
+/**
+ * ITEM 1 (11b.fish, 11b.fishTitle; the chair's grant): where the town's fish grounds are used up (the fish bought in, or the
+ * house idle), the fish market's catch row is its pool's own "Preserved fish", under the same roll. The towns: the fishery
+ * spent (positive); a live sea or river fishery, where the fishers land their own catch, and a town with no fishery on its
+ * land list at all (negatives: "Fresh fish retail" stays).
+ */
+const FISH = Object.freeze({
+  'bar0-town-calm-rand-28': 'preserved',
+  'bar0-village-calm-rand-32': 'fresh',
+  'bar0-city-under_siege+famine-rand-27': 'fresh',
+  'bar0-metropolis-calm-rand-27': 'fresh',
+});
+
 /** @type {Map<string, any>} */
 const BORN = new Map();
 beforeAll(async () => {
@@ -60,7 +73,7 @@ beforeAll(async () => {
   const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
   const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
   await boundary.loadGenerationLawPayloads();
-  for (const seed of Object.keys(TOWNS)) BORN.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }));
+  for (const seed of [...Object.keys(TOWNS), ...Object.keys(FISH)]) BORN.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }));
 }, 600000);
 
 describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
@@ -73,7 +86,7 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
 
   it('no town prints the general line beside the story line of the same house; the story line still prints', () => {
     /** @type {string[]} */ const found = [];
-    for (const [seed, town] of BORN) {
+    for (const [seed, town] of [...BORN].filter(([k]) => k in TOWNS)) {
       const lines = resourceGapLines(town).map((l) => l.impact);
       for (const d of doubledGapLines(lines)) found.push(`${seed}: ${d}`);
       const want = TOWNS[/** @type {keyof typeof TOWNS} */ (seed)];
@@ -118,11 +131,35 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
   });
 
   it('N4: the owner\'s page, the public projection and the share veil print the same gap lines', () => {
-    for (const [seed, town] of BORN) {
+    for (const [seed, town] of [...BORN].filter(([k]) => k in TOWNS)) {
       const own = resourceGapLines(structuredClone(town)).map((l) => l.impact);
       expect(own.length, `${seed}: a gap line prints`).toBeGreaterThan(0);
       expect(resourceGapLines(toPublicSafe(structuredClone(town))).map((l) => l.impact), `${seed}: public`).toEqual(own);
       expect(resourceGapLines(projectShareVeil(toPublicSafe(structuredClone(town)), null)).map((l) => l.impact), `${seed}: veil`).toEqual(own);
+    }
+  });
+});
+
+describe('BAR8-J-ROWS item 1: no morning catch where the fishery is used up', () => {
+  /** @param {any} town @returns {Array<{ name: string, desc: string }>} the fish market's service rows */
+  const marketRows = (town) => Object.values(town.availableServices || {}).flat().filter((/** @type {any} */ r) => r?.institution === 'Fish market');
+  it('the fish market sells preserved fish where its fishery is spent, and the fresh catch where the fishers land it', () => {
+    for (const [seed, want] of Object.entries(FISH)) {
+      const town = BORN.get(seed);
+      const c = town.config || {};
+      const live = (c.nearbyResources || []).filter((/** @type {string} */ k) => /^(fishing_grounds|river_fish)$/.test(k) && !(c.nearbyResourcesDepleted || []).includes(k));
+      const spent = (c.nearbyResourcesDepleted || []).filter((/** @type {string} */ k) => /^(fishing_grounds|river_fish)$/.test(k));
+      const names = marketRows(town).map((r) => r.name);
+      if (want === 'preserved') {
+        expect(spent.length && !live.length, `${seed}: the fishery is spent`).toBeTruthy();
+        expect(names, `${seed}`).toContain('Preserved fish');
+        expectAbsentWithAnchor(names, 'Fresh fish retail', 'Preserved fish');
+        expect(marketRows(town).find((r) => r.name === 'Preserved fish')?.desc).toBe('Smoked, dried, and salt-preserved fish for storage and inland trade.');
+        expect(marketRows(town).map((r) => r.desc)).not.toContain('Fish sold daily from the morning catch. Selection varies by season.'); // anchored: the positive two lines up
+      } else {
+        expect(spent.length && !live.length, `${seed}: the fishery is not spent`).toBeFalsy();
+        expect(names, `${seed}`).toContain('Fresh fish retail');
+      }
     }
   });
 });

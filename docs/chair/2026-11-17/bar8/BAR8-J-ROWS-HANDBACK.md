@@ -9,8 +9,9 @@ only; nothing under `src/`; `git diff 8bc3daee4 0cdedd206 -- src` is empty). I k
 Every "base" figure below is measured at 0cdedd206 (the same `src/` as 8bc3daee4). My base renders of the 150 and the 720
 reproduce the auditor's published `RUN-J.150.txt` and `RUN-J.720.txt` line for line.
 
-**WHAT I CURED: item 3 (G1) only, a reading at print. Items 1 and 2 are LEFT BY NAME (below): their one fact cannot reach
-my files without a file or an atom the section does not give me.**
+**WHAT I CURED: item 3 (G1), a reading at print; and, after the chair granted the one-line pass-through, item 1's services
+and titles (section 7, AFTER THE CHAIR'S DECISIONS, which supersedes section 5 (1) for them). The card and item 2 are LEFT,
+by the chair's word (section 7).**
 
 ## 1. The rules, before and after
 
@@ -158,3 +159,98 @@ No file under `src/domain/facts/` and no import of one changed: no build was run
 
 N5: `lane/join-2026-11-14` is at ed1d43529, already in my base: the scratch merge at my tip reads "Already up to date": clean.
 N6: `lane/checks-2026-11-17` publishes `line-ed1d43529` only; my base-vs-tip comparisons are my own, by name.
+
+## 7. AFTER THE CHAIR'S DECISIONS (the chair's message of 20:12 UTC)
+
+**(1) ITEM 1 BUILT: 11b.fish's services and 11b.fishTitle.** The grant: `src/generators/services/serviceRollMaterialization.js`
+for the one-line pass-through and nothing else (`_fishUsedUp: usedGroundOf({ config }, 'fish') !== ''` in `mergedOpts`, its
+import from `domain/facts/supplyStory.js`); in `institutionServices.js` the inland swap's condition reads
+`(overrides._waterAccess === 'none' || overrides._fishUsedUp === true)`. Where the town's fish grounds are used up (the fish
+bought in, or the house idle), the catch row is its pool's own "Preserved fish" with its own description ("Smoked, dried, and
+salt-preserved fish for storage and inland trade."), under the same toggle and the same roll. No row renamed in the catalogue;
+no new words. The code is the scratch trial's, line for line, and so are its births (525 of 525, 720 of 720 equal).
+
+| rule | thirty (`--controls`) | the 150 | the 720 |
+|---|---|---|---|
+| 11b.fish | 13 → 9 (the services 4 → 0) | 3 → 1 | 69 → 40 (the services 29 → 0) |
+| 11b.fishTitle | 7 → **0** | 3 → **0** | 51 → 4 |
+| LAW 11, all (with G1) | 54 → 35 | 88 → 66 | 416 → 211 |
+
+- **CONTROLS: C20700 and C36970 turn clear** (the runner exits 3 BY DESIGN, for those two). C32296 (11e.offer) stays FOUND
+  (item 2, left). Every other control as it was; no EXPLAINED control is found.
+- **What is left of 11b.fish is not this hunk's:** the rites income line (21), the scenes (6), the fishmonger (6), the
+  fisher's landing's rows, and the card (below). **11b.fishTitle's 4 in the 720** are the fisher's landing's own "Fresh fish"
+  (title and chip; r2r-village-36, r2s-religious_conversion-village-0; story bought-never): its pool has no alternative row
+  (the catalogue, `src/data/institutionServices.js`, is not mine).
+- **NO OTHER RULE RISES.** Auditor J's runner: only 11b and 11g move. The earlier rounds' runners over the 720, base vs tip:
+  runC 6b-denied 5 → 1, runD 8a.input 23 → 17, runE, runF, runH (LAW 8 widened), runI identical. The mark-promise detector
+  (`tests/helpers/markPromise.js`) in the 35 towns: 30 → 0.
+- **A NOTE FOR THE READER (not a fault I found, the owner's table):** in four towns of the 720 (r2r-village-45,
+  r2r-metropolis-45, r2s-politically_fractured-metropolis-3, r2s-recently_betrayed-metropolis-0: the idle story, the fishery
+  spent and no fish import) the old row read "Short of fish. Fish sold daily from the morning catch."; the new row "Preserved
+  fish" prints bare beside the card's "Short of fish.". The dependence table declares the market's "Preserved fish" an
+  `INPUT` row ("the market's stores and its buyers are fed by what is brought in; its morning catch is not", SV6,
+  `crisisDependence.js`), so the one reader marks it only where its input is missing. No detector of any seat counts it; I
+  name it for the second check. (A swap on the bought story only is not open at the roll: the birth's pick of "bought" is
+  made later, in `generateNarratives`.)
+
+**THE DECLARED MOVE (R5), as measured at the tip:** field family **`availableServices` only**; **35 of the 720 towns**
+(village 2, town 7, city 9, metropolis 16, thorp 1: the 29 counted, 5 whose row already carried "Short of fish.", and
+r2s-plague_onset-thorp-2's fishing community) and **48 of the 525 reference configurations** (town 12, city 12, metropolis
+24); in every one of the 83 records nothing but `availableServices` differs (each record re-born at base and tip, the services
+swapped back: byte-identical). The thirty: 4 towns; the 150: 2 towns; the same field only. No draw moves. I re-take no
+stored figure. **THE REFERENCE TESTS:** `tests/property/generatorGoldenMaster.test.js` "every config produces byte-identical
+output to the golden master" is red at the base already (485 rows drift against the stored manifest) and red at the tip
+(485: my 48 are among them); `tests/generators/pipelinePinnedMode.test.js` A1, A1 null change, A2, A3e, A4, A5, A6 are red at
+base and tip by the same names (they re-execute against the same stored golden). Nothing red at the tip that is green at the
+base.
+
+**N3 (the pipeline's contract), at base and tip:** `pipelineContract.test.js`, `isolatedTrade.test.js`,
+`generationForkCensus.test.js`, `publicProseEquality.test.jsx` green at both; `pipelinePinnedMode.test.js` (the 7 named above)
+and the golden master red at both, the same names.
+
+**THE GUARD GAINS THE ARM** (`tests/generators/bar8Rows.test.js`, 7 tests): bar0-town-calm-rand-28 (its sea fishery spent)
+sells "Preserved fish" with its own description, and no "Fresh fish retail" and no morning catch; the negatives
+bar0-village-calm-rand-32 (a live sea fishery: its fishers land their own catch), bar0-city-under_siege+famine-rand-27 (a live
+river fishery) and bar0-metropolis-calm-rand-27 (no fishery on the land list) keep "Fresh fish retail". **Base 4 of 7 red
+(the fish arm and G1's three), tip 7 of 7.**
+
+**R8 RE-KEY:** `tests/domain/bar4MarkPromise.test.js` (c), C22221's row on r2s-plague_onset-thorp-2: "Fresh fish retail" →
+"Preserved fish", the mark "Short of fish." kept (dated note). No town of the 720, the 150 or the thirty keeps "Fresh fish
+retail" on a spent fishery at the tip (0), so the claim stays on its town by the row's new name.
+
+**THE NET AGAIN, for the touched files, at the tip:** typecheck:domain:strict 0; typecheck:ratchet 0; eslint on the five
+changed files 0; tests/architecture 0; the rounds' guards red only on bar6MarksLaw8 (a), the same message as at the base;
+the 15 tests that read the fish rows or the services roll plus the 18 of section 6, with my guard: 314 of 314; `tests/lint`
+by name: the same 73 as at the base (the ledger test's message differs only by the checkout's path); the two doors' last lines
+unchanged (section 6).
+
+**(2) LEFT, BY THE CHAIR'S WORD: each line and the declaration it would take** (no atom and no twin written by me):
+- The fish market's card, `institutionDescVariants.js` lines 270 and 271 ("An open stall or small roofed market for selling
+  the day's catch. …", "Where the day's catch is sold, from an open stall or a small covered market. …"; today
+  `DESC_VARIANT_DECLARATIONS` gives each `needs: ['navigable']`, about line 2170): each takes `needs: ['navigable', 'trade at
+  work: taken here']` (seat SCENES' key of the fish story); its `twinOf` where it is refused is a line that names no catch
+  (a later seat's choice: the existing bought-fish twins, about lines 2037 and 2041, are of the town's tier); and the same for the town's "Covered stalls … selling the morning's catch or the week's salted barrels …" (about line 2040, today
+  `needs: ['navigable', 'market']`) only if the reading wants the hedged line refused too (it is hedged, "whenever fish can be
+  had": the auditor did not count it).
+- The fair's three, `DESC_VARIANT_SIBLINGS` about lines 2088 to 2098 ("Regional merchants. Luxury goods available.", "Merchants
+  from across the region, and luxuries to be had.", "A yearly draw for regional traders, with fine goods on offer."): each
+  keeps `excludes: ['crisis: under_siege']` and takes `needs: ['brought in: luxury']` (seat DESKS-ECO's per-good value), with
+  BR17's twin for the refusal. The fair's description is drawn in `assembleInstitutions` BEFORE the economy writes its
+  imports, so the declaration must be read by the late re-read (`DESC_LATE_SIBLINGS`, resolved in
+  `assembleSettlement.js :: readHouseDescsLate`) or by a draw after the economy, not by the draw's own `birthFactsOf`.
+- The quarter's "The trade in silk, spice, and precious things." (about line 996; `city|Crafts|Luxury goods quarter` and its
+  metropolis key, `PAIRS[240]`): `needs: ['brought in: spice']` (the need list names "spices" in all 7), in the late re-read
+  too; its twin is a later seat's.
+
+**(3) THE PEAT CUTTERS AND THE DETECTOR.**
+- The three worked-out peat cutters (r2r-hamlet-49, r2r-hamlet-52, r2r-village-14) were CURED at 4bb175521 by the chair's own
+  constraint of 18:30 (section 1: the mark's per-house call keeps the general line it reads "peat" off; the print strikes it).
+  **No hunk is needed in `crisisStoppedRow.js`.** Were the mark's reader ever to stop reading its noun off the line, the hunk
+  is at `housesShortOfInput` (about line 620): take the noun from the house's own stored gap row (`rowNoun(chain)`, the good
+  the row names) before the `SHORT_LINE` match, so the `markReadsAlone` arm of `resourceGapLines` could go.
+- **The detector:** `tests/helpers/pageLaws/law11Supply.mjs` line 342, the 11g arm, finds the story line by
+  `l.startsWith(\`${cap} is failing:\`)`, which misses a plural house ("The tanners are failing: no hides lie near and none is
+  brought in."): r2r-town-13 (the 720). It needs `(?:is|are) failing:` (and the same for "worked out"). The detectors' upkeep
+  is another seat's: not touched.
+
