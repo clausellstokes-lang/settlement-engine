@@ -32,7 +32,9 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CHAIN_RAW_INPUT, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf } from '../../src/domain/facts/houseInputAtHand.js';
-import { familyWord, idOfHouse, impliedGroundsOf, sourceStoryOf, storySeed } from '../../src/domain/facts/supplyStory.js';
+import { GROUND_YIELD, SHORTAGE_WORD, familyWord, idOfHouse, impliedGroundsOf, sourceStoryOf, storySeed } from '../../src/domain/facts/supplyStory.js';
+import { SPENT_GROUND_YIELD } from '../../src/data/crisisDependence.js';
+import { resourceShortageImport } from '../../src/domain/resourceSemantics.js';
 import { MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, SUPPLY_ODDS, TAKERS } from '../../src/domain/facts/houseKinds.js';
 import { rowMarkText } from '../../src/domain/display/crisisStoppedRow.js';
 import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
@@ -139,6 +141,12 @@ function lawInstances(seed, s) {
 }
 
 describe('BIRTH-2: the seed picks the supply story; every part of the page tells it', () => {
+  test('EG1 · the leaf\'s copies equal their sources, key for key (the dependence table\'s yields; the shortage words)', () => {
+    expect(Object.entries(GROUND_YIELD), 'the yields of a spent ground').toEqual(Object.entries(SPENT_GROUND_YIELD));
+    expect(Object.keys(SHORTAGE_WORD).length, 'the shortage words copied').toBeGreaterThan(8);
+    for (const [ground, word] of Object.entries(SHORTAGE_WORD)) expect(word, `${ground}: its shortage word`).toBe(resourceShortageImport(ground));
+  });
+
   test('L1-L3 · every story told on every surface, over the census\'s 720 and the 150', () => {
     /** @type {string[]} */
     const found = []; /** @type {Record<string, number>} */ const told = {};

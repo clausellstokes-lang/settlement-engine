@@ -18,11 +18,9 @@
  * @enforced-by tests/domain/supplyStoryLaw.test.js
  */
 import { fnv1a32 } from '../../kernel/proseHash.js';
-import { availableNativeResourceKeys, resourceShortageImport } from '../resourceSemantics.js';
 import { hasTradeRouteConnection } from '../tradeRouteSemantics.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
-import { SPENT_GROUND_YIELD } from '../../data/crisisDependence.js';
 import { BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, SUPPLY_ODDS, TAKERS } from './houseKinds.js';
 
 /**
@@ -37,6 +35,28 @@ import { BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGH
 
 /** @typedef {'local' | 'bought' | 'idle' | 'abandoned'} Story */
 /** @typedef {{ name: string, id: string, family: string, venture: 'abandoned' | 'failing', ground: string }} Venture */
+
+/**
+ * COPIES, so that this leaf (routed to the eager chunk with its folder) reads no module the build pins lazy (EG1: the
+ * dependence table `crisisDependence.js`) and no goods member (`resourceSemantics.js`, the goods roster's): each is held
+ * equal to its source, key for key, by `tests/domain/supplyStoryLaw.test.js`.
+ *   GROUND_YIELD   what a spent ground yields (`crisisDependence.js :: SPENT_GROUND_YIELD`)
+ *   SHORTAGE_WORD  the imports list's own word for a spent ground of the three houses that can run on bought-in material
+ *                  (`resourceSemantics.js :: resourceShortageImport`)
+ */
+export const GROUND_YIELD = Object.freeze(/** @type {Record<string, string>} */ ({
+  fishing_grounds: 'fish', river_fish: 'fish', iron_deposits: 'iron ore', salt_flats: 'salt', stone_quarry: 'stone',
+  hunting_grounds: 'game', grazing_land: 'livestock', alpine_pasture: 'livestock', river_clay: 'clay', coal_deposits: 'coal',
+  managed_forest: 'timber', mountain_timber: 'timber', coastal_timber: 'timber', foraging_areas: 'herbs', glass_sand: 'glass sand',
+  grain_fields: 'grain', fertile_floodplain: 'grain', marshlands: 'reeds', vineyards: 'grapes',
+}));
+export const SHORTAGE_WORD = Object.freeze(/** @type {Record<string, string>} */ ({
+  managed_forest: 'Timber (local managed woodland cleared)',
+  mountain_timber: 'Timber (local mountain timber cleared)', shipbuilding_timber: 'Shipbuilding timber (local shipbuilding stands cleared)',
+  grazing_land: 'Livestock and dairy (local grazing land depleted)', alpine_pasture: 'Wool, dairy, and livestock (local alpine pasture depleted)', fertile_floodplain: 'Grain and produce (local floodplain unproductive)',
+  camel_herds: 'Camels and pack animals (local camel herds depleted)',
+  salt_flats: 'Salt (local salt flats exhausted)', desert_salt: 'Salt (local desert pans exhausted)',
+}));
 
 /** The noun of a material family, as the Depleted list's grounds yield it (`SPENT_GROUND_YIELD`) and the lines name it. */
 export const FAMILY_NOUN = Object.freeze(/** @type {Record<string, string>} */ ({
@@ -92,10 +112,13 @@ function liveNative(record) {
 /** The stored grounds: every key on the record, the live ones, the spent ones. @param {StoryRecord | null | undefined} record */
 function storedGrounds(record) {
   const config = record?.config || {};
+  const custom = new Set(arr(config.nearbyResourcesCustom).map(str));
   const spent = arr(config.nearbyResourcesDepleted).map(str).filter(Boolean);
-  const live = /** @type {string[]} */ (availableNativeResourceKeys(/** @type {Record<string, unknown>} */ (config)));
-  const all = new Set([...arr(config.nearbyResources).map(str).filter(Boolean), ...live, ...spent]);
-  return { all, live: new Set(live), spent: new Set(spent) };
+  // the land list as the Nearby Resources section prints it (`ResourcesTab.jsx`: the record's grounds, the depleted ones
+  // apart), a ground the user authored set aside (it proves no house of the catalogue)
+  const all = new Set([...arr(config.nearbyResources), ...arr(config.nearbyResourcesNative)].map(str).filter((k) => !!k && !custom.has(k)));
+  for (const k of spent) all.add(k);
+  return { all, live: new Set([...all].filter((k) => !spent.includes(k))), spent: new Set(spent) };
 }
 
 /** One reading a record object and a seed. @type {WeakMap<object, Map<string, { states: Map<string, 'there' | 'used'>, houses: Map<string, string[]> }>>} */
@@ -139,7 +162,7 @@ export function impliedGroundsOf(record, seed = seedOfRecord(record)) {
 export const familyWord = (family) => (family === 'desertSalt' ? RUNS_ON_BOUGHT.salt_works : (Object.prototype.hasOwnProperty.call(IMPORT_WORD, family) ? IMPORT_WORD[family] : ''));
 
 /** Whether a ground gives a family's material (by the yield the Depleted list reads). @param {string} ground @param {string} family */
-const groundGives = (ground, family) => !!FAMILY_NOUN[family] && Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, ground) && SPENT_GROUND_YIELD[ground] === FAMILY_NOUN[family];
+const groundGives = (ground, family) => !!FAMILY_NOUN[family] && Object.prototype.hasOwnProperty.call(GROUND_YIELD, ground) && GROUND_YIELD[ground] === FAMILY_NOUN[family];
 
 /**
  * A ground of the family's material that is USED UP (stored spent with no live ground of that material, or implied and
@@ -194,7 +217,7 @@ export function sourceStoryOf(record, inst, seed = seedOfRecord(record)) {
   /** @param {string} ground the used-up ground @returns {{ story: Story, ground: string, word: string }} */
   const usedUp = (ground) => {
     if (TAKERS.has(id) || !runs) return { story: 'idle', ground, word: '' };
-    const word = str(resourceShortageImport(ground)) || RUNS_ON_BOUGHT[id];
+    const word = (Object.prototype.hasOwnProperty.call(SHORTAGE_WORD, ground) && SHORTAGE_WORD[ground]) || RUNS_ON_BOUGHT[id];
     // the plain word on the list answers too ("Timber" bought for the cooper is the burner's cordwood)
     return boughtIn(record, word, true, seed) || importsHold(record, RUNS_ON_BOUGHT[id]) ? { story: 'bought', ground, word } : { story: 'idle', ground, word: '' };
   };
