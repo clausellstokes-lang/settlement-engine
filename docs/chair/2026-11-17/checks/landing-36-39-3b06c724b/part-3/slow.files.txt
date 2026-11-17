@@ -1,0 +1,5 @@
+tests/domain/bar6MarksLaw8.test.js
+tests/domain/intentAtlasSoakDistiller.test.js
+tests/property/dmLayerGoldenIsolation.test.js
+tests/property/espionageDormancyFence.test.js
+tests/property/generatorGoldenMaster.test.js

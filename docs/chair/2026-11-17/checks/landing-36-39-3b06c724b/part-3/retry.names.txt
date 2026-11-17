@@ -1,0 +1,5 @@
+tests/domain/bar6MarksLaw8.test.js :: LAW 8's mark rules (BAR6-MARKS): the mark leaf reads every worst state (a) THE ZERO over the census's 720: every instance is cured, or one of the houses left by name
+tests/domain/intentAtlasSoakDistiller.test.js :: intent atlas soak prior — the committed artifact is reproducible the documented default run reproduces the committed distillate byte for byte
+tests/property/dmLayerGoldenIsolation.test.js :: EM-B2a4 — the DM layer, its pin bag and the golden isolation property A7 — THE ISOLATION PROPERTY: a dormant layer is the committed golden on EVERY corpus row, and a one-root layer moves that root
+tests/property/espionageDormancyFence.test.js :: FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus
+tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master
