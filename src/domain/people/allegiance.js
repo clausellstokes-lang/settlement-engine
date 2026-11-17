@@ -389,9 +389,19 @@ export function handlerPoolOf(cards, power, crimHouses, agentCount = 0) {
 export function assignHandlers(cards, settlement) {
   if (!Array.isArray(cards)) return [];
   const ids = new Set(cards.map((c) => (c && c.id != null ? String(c.id) : null)).filter(Boolean));
-  const agents = cards
+  const unhandled = cards
     .map((card, at) => ({ card, at, a: allegianceOf(card) }))
     .filter((x) => x.a && !(x.a.handler && ids.has(x.a.handler) && x.a.handler !== String(x.card.id)));
+  // BAR6-PEOPLE (LAW 10, 10a; BRIEF-BAR6 fact (c); vetoable by the owner): NOBODY ANSWERS TO A POWER WHOSE SEAT HE HOLDS. The
+  // deal (A2) runs before the ranks (A3), so a card dealt an allegiance to a criminal power could be seated its first: "The
+  // head of Corrupt Council answers to Corrupt Council" (C179090, C179117, C179288). Here, after the ranks, an allegiance
+  // still to be handled whose power the card heads (rank 1) is withdrawn: the head IS the power, no agent of it. Draw-free;
+  // a held card whose handler stands is not touched (it is not among these).
+  const agents = unhandled.filter((x) => {
+    if (!(x.a?.power && membershipsOf(x.card).some((m) => m.power === x.a?.power && m.rank === 1))) return true;
+    delete x.card.allegiance;
+    return false;
+  });
   if (!agents.length) return [];
   const crimHouses = byName(criminalHousesOf(settlement));
   /** @type {Map<string, typeof agents>} */
@@ -425,7 +435,7 @@ export function assignHandlers(cards, settlement) {
  * @returns {Rec[]}
  */
 export function leaveAllegianceReceipts(settlement, dealt) {
-  const traces = dealt.map(({ card, flaw, p }) => {
+  const traces = dealt.filter(({ card }) => allegianceOf(card)).map(({ card, flaw, p }) => { // BAR6-PEOPLE (10a): a withdrawn allegiance leaves no receipt
     const a = /** @type {Allegiance} */ (allegianceOf(card));
     const handlerId = a.handler;
     return {

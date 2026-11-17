@@ -29,6 +29,19 @@ export function watchIsUnpaidRota(institutions) {
 }
 
 /**
+ * BAR6-PEOPLE (LAW 10 rule 10e-house; BRIEF-BAR6 fact (f), amendment B6; vetoable by the owner; on the veto list as new
+ * vocabulary): THE ONE READER of the atom `paid watch`: someone is paid to keep order, so a line of drawn pay (a roster padded
+ * with names that never walk it) has pay to draw. False only where the village's unpaid rota is the whole watch (this
+ * file's 'unpaid'), the card that says "Nobody is paid" (the wide read's C200774). Read on the roster alone, so a birth in
+ * progress answers it as the final record does.
+ * @param {{ institutions?: unknown } | null | undefined} record
+ * @returns {boolean}
+ */
+export function paidWatchOf(record) {
+  return !watchIsUnpaidRota(liveInstitutions(record));
+}
+
+/**
  * @param {{ institutions?: unknown, defenseProfile?: { economicGates?: { military?: unknown } } } | null | undefined} record
  * @returns {'full' | 'short' | 'unpaid' | null}
  */

@@ -104,6 +104,7 @@ export const LEAVES = Object.freeze({
   sacredHouse: home('sacredHouse', 1, ['institutions']),
   market: home('market', 1, ['institutions']),
   legalHouse: home('legalHouse', 1, ['institutions']), // BAR5-THINGS (LAW 4): a house of written law (`legalHouse.js`)
+  paidWatch: home('paidWatch', 1, ['institutions']), // BAR6-PEOPLE (10e-house): someone is paid to keep order (`guardPay.js`)
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
   warState: home('warState', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {
@@ -210,6 +211,7 @@ export const LEAVES = Object.freeze({
   // houses and ranks (the cast, layer 3); the ties between them (layer 3)
   sharesPlace: home('sharesPlace', 4, ['npcs'], { call: 'factsCall' }),
   loneTie: home('loneTie', 4, ['npcs', 'relationships'], { call: 'factsCall' }),
+  seatHeld: home('seatHeld', 4, ['npcs', 'powerStructure'], { call: 'factsCall' }), // BAR6-PEOPLE (10d-seat): the pair's memberships against the governing power (`seatHeld.js`)
   magicPractitioners: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'magicPractitioners', call: 'record', reads: ['institutions', 'npcs'] }),
   magicReliance: leaf({ layer: 4, module: 'domain/magicReliance.js', exported: 'deriveMagicReliance', call: 'record', reads: ['config', 'economicState', 'institutions', 'npcs'] }),
   magicSource: leaf({ layer: 4, module: 'domain/facts/magicSource.js', exported: 'magicSourceOf', call: 'record', reads: ['config', 'economicState', 'economicViability', 'institutions', 'npcs'],

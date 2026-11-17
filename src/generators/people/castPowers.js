@@ -58,6 +58,7 @@ import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
 import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
+import { temperamentYieldsToSecret } from '../../data/npcData.js'; // BAR6-PEOPLE (10e-temper)
 import { allegianceOf, isCriminalPower, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { isSeatVacant } from '../../domain/people/seatKeeper.js';
 import { crimeFactionNameOf, crimeSignalOf, withTownsOwnUnderworld } from '../../domain/crimeSignal.js';
@@ -390,6 +391,10 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
  */
 export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
   const { all, plan } = landed;
+  // BAR6-PEOPLE (LAW 10 rule 10e-temper; vetoable by the owner): every secret of the cast is settled by now (the title's
+  // lines at birth, the overlay at this seam's head, the mints in `landMemberships`), so here, once, over the whole cast and
+  // before anything reads a rank: a temperament its own secret denies yields (npcData.js :: temperamentYieldsToSecret). No draw.
+  if (Array.isArray(all)) for (const card of all) temperamentYieldsToSecret(card);
   if (!plan) return all;
   const { powers, members, governing, seatKey, rankStream } = plan;
   // THE GUILD'S PUSH (car 2, A3): read once per town; a criminal power's own deal is never pushed

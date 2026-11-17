@@ -94,7 +94,9 @@ describe("the harbour master's pool is the one its coast admits (A-11)", () => {
   it('a settlement with NO coast (inland, or a river port) reads Dockmaster or Wharfinger, never a harbour form', () => {
     expect(FACE_HONORIFICS_INLAND['the harbour master']).toEqual(['Dockmaster', 'Wharfinger']);
     const inland = new Set(seeds.map((seed) => honorificOfTitle('the harbour master', null, seed, { coastal: false })));
-    expect([...inland].sort()).toEqual(['Dockmaster', 'Wharfinger']);
+    // BAR6-PEOPLE (2026-11-16, LAW 10 rule 10c, the owner's pin M-1b): the pool holds Wharfinger, but a form that names another
+    // office (the docks' wharfinger) is refused at the pick (faceHonorifics.js :: ownOfficeForms): the inland harbour master is a Dockmaster
+    expect([...inland].sort()).toEqual(['Dockmaster']);
     // the card resolver reads the coast from the record: a river port is not a coast
     for (const s of [place('plains', 'river'), place('mountains', 'road')]) {
       const h = cardHonorificOf(harbourCard, s);
@@ -102,7 +104,8 @@ describe("the harbour master's pool is the one its coast admits (A-11)", () => {
     }
     // anchored: the harbour forms exist in the registry, and the inland pick names neither
     expectAbsentWithAnchor([...inland], 'Master of the Harbour', 'Dockmaster', 'a harbour form an inland harbour master never reads');
-    expectAbsentWithAnchor([...inland], 'Harbourmaster', 'Wharfinger', 'a harbour form an inland harbour master never reads');
+    expectAbsentWithAnchor([...inland], 'Harbourmaster', 'Dockmaster', 'a harbour form an inland harbour master never reads'); // BAR6-PEOPLE (2026-11-16, 10c): anchored on the form the pick keeps
+    expectAbsentWithAnchor([...inland], 'Wharfinger', 'Dockmaster', "the docks' wharfinger's own office, never the harbour master's (M-1b)");
   });
   it('a COASTAL settlement, and a card read with no place, keep the registry\'s pool: Harbourmaster or Master of the Harbour', () => {
     const coastal = new Set(seeds.map((seed) => honorificOfTitle('the harbour master', null, seed, { coastal: true })));
@@ -140,7 +143,7 @@ describe("the settlement's culture picks its own word for the office (item 14)",
     expect(formsOf('the priest', 'male', { culture: 'east_asian' })).toEqual(['Father', 'Pastor', 'Reverend', 'Vicar']);
   });
   it('the coast guard and the culture read compose: an inland Norse harbour master is still a Dockmaster or Wharfinger', () => {
-    expect(formsOf('the harbour master', null, { coastal: false, culture: 'norse' })).toEqual(['Dockmaster', 'Wharfinger']);
+    expect(formsOf('the harbour master', null, { coastal: false, culture: 'norse' })).toEqual(['Dockmaster']); // BAR6-PEOPLE (2026-11-16, 10c): Wharfinger is the docks' office
   });
   it("the card door reads the settlement's culture through the one culture read, and falls back without one", () => {
     const lordCard = { id: 'npc_l', name: 'Sigrid Ulfsdottir', gender: 'female', institution: { kind: 'power', key: 'Noble Houses', name: 'Noble Houses', title: 'the lord' } };

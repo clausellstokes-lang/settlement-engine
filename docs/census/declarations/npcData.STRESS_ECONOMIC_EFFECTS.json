@@ -298,7 +298,9 @@
     {
       "id": "econ_crim_exploitation.tension#6",
       "text": "{A} has written to the magistrate about {B}'s collectors. The letter sits unsent in {A}'s desk.",
-      "needs": [],
+      "needs": [
+        "court"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -555,7 +557,9 @@
     {
       "id": "mil_crim_suppression.tension#3",
       "text": "{A} has a witness willing to name {B} before a magistrate. {B} knows where the witness lives.",
-      "needs": [],
+      "needs": [
+        "court"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -1199,7 +1203,7 @@
     },
     {
       "id": "gov_econ_dependence.desc#3",
-      "text": "{A}'s treasury borrowed from {B} to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.",
+      "text": "{A}'s treasury borrowed from {B} to cover a bad harvest and has never cleared the debt. The interest is paid before the wages.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1280,7 +1284,8 @@
       ],
       "excludes": [
         "ruler: lord",
-        "ruler: occupier"
+        "ruler: occupier",
+        "seat held"
       ],
       "crisis": [],
       "colour": false
@@ -2606,7 +2611,9 @@
     {
       "id": "bitter_history.tension#3",
       "text": "{B} has been appointed to judge a case in which {A} is a party.",
-      "needs": [],
+      "needs": [
+        "court"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false

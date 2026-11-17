@@ -46,6 +46,8 @@ import { ownPlotsOf } from './ownPlots.js'; // BAR4-CORPUS-ECO (amendment 5b; th
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
 import { pairSharesPower } from './sharedPower.js';
+import { pairSeatHeld } from './seatHeld.js'; // BAR6-PEOPLE (10d-seat)
+import { paidWatchOf } from './guardPay.js'; // BAR6-PEOPLE (10e-house)
 import { faithReadingOf } from '../dossier/faithReading.js';
 import { guildOf } from './guild.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
@@ -101,6 +103,8 @@ export function factsOf(record, options = {}) {
     get market() { return marketOf(record); },
     /** BAR5-THINGS (LAW 4): a house that writes, witnesses or tries the law stands, by catalogue identity (`legalHouse.js`) */
     get legalHouse() { return legalHouseOf(record); },
+    /** BAR6-PEOPLE (10e-house): someone is paid to keep order: the unpaid rota is not the whole watch (`guardPay.js`) */
+    get paidWatch() { return paidWatchOf(record); },
     /** BAR5-THINGS (LAW 4): the town keeps a post someone is named to: no household head nobody named is its voice (`appointedPost.js`) */
     get appointedPost() { return appointedPostOf(record); },
     /** fact 6: the one starving rule */
@@ -157,6 +161,8 @@ export function factsOf(record, options = {}) {
     sharesPlace: (/** @type {unknown} */ pair) => pairPlaceOf(record, pair),
     /** BAR4-PEOPLE (TI1, 11:07): the record holds no other tie between the two (the draw answers it from its drafts: people/ties.js) */
     loneTie: (/** @type {unknown} */ pair) => pairLoneOf(record, pair),
+    /** BAR6-PEOPLE (10d-seat): a card of the pair outside the government's category already sits on the governing power (`seatHeld.js`) */
+    seatHeld: (/** @type {unknown} */ pair) => pairSeatHeld(record, pair),
     // ── CENSUS-3b unit 1 (the chair's ruling R-E; the vocabulary rulings §2): DELEGATIONS to the
     // one canonical reader each — no field reader, no new logic. ──
     /** the food record's sources (`foodBalance.js :: deriveFoodRecord`), or undefined when it carries none */

@@ -466,6 +466,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
+      needs: ['sovereign'], // BAR6-PEOPLE (SV1, sovereign by XA1 from a804fa1b5): a regional lord stands over the town only where the record gives one
       short: 'Cover up a minor corruption scandal before the regional lord hears of it',
       long: 'Transform this settlement into a city-state with real independence',
       driven_by: 'power',
@@ -484,6 +485,7 @@ export const NPC_FACTION_GOALS = {
   ],
   Governor: [
     {
+      needs: ['sovereign'], // BAR6-PEOPLE (SV1): the crown the governor serves, where the record gives one
       short: 'Secure enough grain reserves before winter to prevent unrest',
       long: 'Become indispensable to the crown: irreplaceable, never exposed',
       driven_by: 'power',
@@ -607,6 +609,7 @@ export const NPC_FACTION_GOALS = {
       colour: true,
     },
     {
+      needs: ['sovereign'], // BAR6-PEOPLE (SV1): a local lord to negotiate with, where the record gives one
       short: 'Negotiate a tithe reduction with the local lord without compromising principle',
       long: 'Leave the monastery in better condition (spiritually and structurally) than they found it',
       driven_by: 'spiritual',
@@ -1780,8 +1783,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} wants a cut of ${r.name}'s new venture before it opens. The fee was never meant to grow with the business.`, colour: true },
       { line: (r, s) =>
         `${r.name} missed this month's payment by three days. ${s.name} has not sent anyone yet, and that is worse.`, colour: true },
-      (r, s) =>
-        `${r.name} has written to the magistrate about ${s.name}'s collectors. The letter sits unsent in ${r.name}'s desk.`,
+      { line: (r, s) =>
+        `${r.name} has written to the magistrate about ${s.name}'s collectors. The letter sits unsent in ${r.name}'s desk.`, needs: ["court"] }, // BAR6-PEOPLE (LAW 5 widened, office): a magistrate sits only where a court does
       { line: (r, s) =>
         `${s.name}'s collector was found drunk with ${r.name}'s purse still sealed. Someone will have to explain the delay to ${s.name}.`, colour: true },
     ], ['economy', 'criminal']),
@@ -1845,8 +1848,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`, colour: true },
       { line: (r, s) => `${r.name} could end it with one blow, and keeps holding back. Nobody knows why.`, colour: true },
       { line: (r, s) => `Someone among ${r.name}'s people reports to ${s.name}. ${r.name} knows it, and does not know who.`, colour: true },
-      (r, s) =>
-        `${r.name} has a witness willing to name ${s.name} before a magistrate. ${s.name} knows where the witness lives.`,
+      { line: (r, s) =>
+        `${r.name} has a witness willing to name ${s.name} before a magistrate. ${s.name} knows where the witness lives.`, needs: ["court"] }, // BAR6-PEOPLE (LAW 5 widened, office): a magistrate sits only where a court does
       { line: (r, s) =>
         `${s.name} has offered ${r.name} a truce and a purse. ${r.name} has not answered, which ${s.name} counts as progress.`, colour: true },
       { line: (r, s) =>
@@ -2012,7 +2015,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`, colour: true },
       { line: (r, s) =>
-        `${r.name}'s treasury borrowed from ${s.name} to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.`, colour: true },
+        `${r.name}'s treasury borrowed from ${s.name} to cover a bad harvest and has never cleared the debt. The interest is paid before the wages.`, colour: true }, // BAR6-PEOPLE (10d-purse, C66113): no YEARLY borrowing, which the economy desk's yearly surplus denies; the old debt stands
       { line: (r, s) =>
         `${s.name} holds the settlement's tax rolls as security for its loans. ${r.name} cannot raise a levy without ${s.name}'s clerks counting it first.`, colour: true },
       { line: (r, s) =>
@@ -2026,7 +2029,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`, colour: true },
       { line: (r, s) => `One camp on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
-        `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+        `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier","seat held"] }, // BAR6-PEOPLE (10d-seat, C66115): never a seat its asker holds
       { line: (r, s) =>
         `${r.name} has proposed a new tax to clear the debt. ${s.name}'s friends on the council will vote against it.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
@@ -2354,7 +2357,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `What first broke ${r.name} and ${s.name} apart is happening again, and both of them know it.`, colour: true },
       { line: (r, s) => `${r.name} and ${s.name} each think the other owes the apology.`, colour: true },
       { line: (r, s) => `A newcomer keeps trying to reconcile ${r.name} and ${s.name}, and is about to learn why nobody else does.`, colour: true },
-      (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
+      { line: (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`, needs: ["court"] }, // BAR6-PEOPLE (LAW 5 widened, office): a case is judged where a court sits
       { line: (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} have been handed the same dispute to settle together. The first meeting is next week.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },  // BAR2-PEOPLE (PP7): no council seat claimed for a card that holds none (70 of 95 ties); text only, the same admission
@@ -2517,6 +2520,30 @@ export const FLAWS_DENIED_BY_TEMPERAMENT = Object.freeze({
   prudent: Object.freeze(['reckless']),
   courteous: Object.freeze(['dismissive']),
 });
+/**
+ * BAR6-PEOPLE (LAW 10 rule 10e-temper; BRIEF-BAR6 fact (e); vetoable by the owner): A SECRET NEVER DENIES ITS HOLDER'S
+ * TEMPERAMENT, AND THE SECRET STANDS (it is drawn after the temperament, from three pools: the title's lines, the faction
+ * leader's, the stress overlay's): THE TEMPERAMENT YIELDS, as it yields to the flaw (P7a above). Each temperament names the
+ * secrets that are its plain contrary, by the secret's own words: "incorruptible" against money taken to betray a duty
+ * ("has been paid to lose it", "keeping the difference", embezzling); "honest" and "plain-dealing" against a lie or a
+ * forgery of the holder's own (a secret the holder only KNOWS of, "Knows the … document was forged", is no lie of theirs).
+ * "candid" and "forthright" are words of manner, not of truth, and are not listed (the audit's precision: 0 of 12 stood).
+ * The words are the audit's detector's (`tests/helpers/pageLaws/law10.mjs :: law10e`), judged at 15 of 15 and 11 of 11.
+ * @type {Readonly<Record<string, RegExp>>}
+ */
+export const SECRETS_DENIED_BY_TEMPERAMENT = Object.freeze({
+  incorruptible: /\bpaid to (?:lose|keep|look|report)\b|\bbeen paid\b|\bis paid by\b|\bfor a (?:share|fee|price)\b|\bin return for a share\b|\bfor a share of\b|\btakes a (?:monthly )?payment\b|\btakes a bribe\b|\bbribe\b|\bskim(?:s|ming)?\b|\bembezzl|\bpocketed\b|\bon the payroll of\b|\bkeeping the difference\b|\bkeeps the extra\b|\bkeeps back a share\b|\bfor whoever pays\b|\bbecause someone paid\b|\bsomeone paid them\b/i,
+  honest: /\blies\b|\blied\b|\bforged\b|\bforging\b|\bfalsif|\bfraudulent|\bmade up\b|\bmaking up\b|\bfabricat/i,
+  'plain-dealing': /\blies\b|\blied\b|\bforged\b|\bforging\b|\bfalsif|\bfraudulent|\bmade up\b|\bmaking up\b|\bfabricat/i,
+});
+/** A secret the holder only knows of, not one of their own doing. @param {string} what */
+const onlyKnownOf = (what) => /^Knows\b/i.test(what) && !/\bhelped\b|\band has\b/i.test(what);
+/** @param {string | null} temperament @param {string | null | undefined} secret @returns {boolean} */
+const deniesSecret = (temperament, secret) => {
+  const words = temperament ? SECRETS_DENIED_BY_TEMPERAMENT[temperament] : null;
+  if (!words || typeof secret !== 'string' || !secret) return false;
+  return temperament === 'incorruptible' ? words.test(secret) : !onlyKnownOf(secret) && words.test(secret);
+};
 /** @param {string | null} temperament @param {string | null} flaw @returns {boolean} */
 const deniesFlaw = (temperament, flaw) => !!(temperament && flaw && (FLAWS_DENIED_BY_TEMPERAMENT[temperament] || []).includes(flaw));
 /**
@@ -2530,4 +2557,25 @@ export function temperamentAdmitting(dominant, flaw) {
   const at = pool.indexOf(/** @type {string} */ (dominant));
   for (let k = 1; k < pool.length; k += 1) { const next = pool[(at + k) % pool.length]; if (!deniesFlaw(next, flaw)) return next; }
   return dominant;
+}
+
+/**
+ * BAR6-PEOPLE (10e-temper): the temperament a card holds beside its flaw AND its secret: the held one where it denies
+ * neither, else the next temperament of its own pool (in pool order from the held one's index, wrapping) that denies
+ * neither. No draw. Mutates the card's `personality.dominant`; returns the card.
+ * @template {{ personality?: { dominant?: string | null, flaw?: string | null } | null, secret?: { what?: string } | null }} C
+ * @param {C} card @returns {C}
+ */
+export function temperamentYieldsToSecret(card) {
+  const p = card?.personality; const what = card?.secret?.what;
+  const dominant = typeof p?.dominant === 'string' ? p.dominant : null;
+  if (!p || !dominant || !deniesSecret(dominant, what)) return card;
+  const pool = NPC_PERSONALITY_TRAITS.positive;
+  const at = pool.indexOf(dominant);
+  const flaw = typeof p.flaw === 'string' ? p.flaw : null;
+  for (let k = 1; k < pool.length; k += 1) {
+    const next = pool[(at + k) % pool.length];
+    if (!deniesSecret(next, what) && !deniesFlaw(next, flaw)) { p.dominant = next; return card; }
+  }
+  return card;
 }

@@ -2307,6 +2307,11 @@ const PERSONS_HELD = Object.freeze(['slavery', 'human_trafficking']);
 
 export const TITLE_LINE_DECLARATIONS = Object.freeze({
   secret: Object.freeze({
+    // BAR6-PEOPLE (LAW 10 rule 10e-house, C200774): pay drawn for padded names needs someone paid to keep order
+    // BAR6-PEOPLE (SV1, sovereign by XA1 from a804fa1b5): the reeve's lord's fields and meadow need a sovereign (a reeve's own house gives one)
+    "Calls families out to the lord's fields on their own harvest days, unless they pay to be let off": Object.freeze({ needs: Object.freeze(['sovereign']) }),
+    "Grazes their own animals on the lord's meadow and writes the hay down as poor": Object.freeze({ needs: Object.freeze(['sovereign']) }),
+    'Keeps the night roster short and draws pay for names that never walk it': Object.freeze({ needs: Object.freeze(['paid watch']) }),
     'Buys fish from boats that fished where they are forbidden to, and never asks where the catch came from': Object.freeze({ needs: Object.freeze(['navigable']) }),
     "Has been buying stolen ship's stores at night and selling them in the shop the next morning": Object.freeze({ needs: Object.freeze(['coast']) }),
     "Has been taking timber from the river's driftwood that belongs to the mill upstream": Object.freeze({ needs: Object.freeze(['river']) }),
@@ -2342,5 +2347,14 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Loud and showy, proud of the school and its champions.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege', 'crisis: plague_onset']) }),
     'Precise and busy, with a scale for letters and a ledger of every rider.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
     'Friendly and gossipy, with news of every road the riders take.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    // BAR6-PEOPLE (LAW 5 widened, the class `outside`; BRIEF-BAR6 B4): a face that meets travellers, caravans or a queue at its
+    // door NOW is no face of a besieged town, where nothing comes in by road; each title keeps another admitted line
+    'Bored and impatient. The line is long and every traveller has a story.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Watches every traveller coming and remembers them going.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Bored and glad of company, with gossip about everyone who has crossed this week.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Generous and talkative, with a courtyard full of camels, carts and travellers from far away.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Watches every caravan that comes in and remembers where it came from.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Friendly and well-informed, with news of every road and every caravan.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    'Watches every traveller and remembers where they came from.': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
   }),
 });

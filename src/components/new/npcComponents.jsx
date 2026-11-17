@@ -25,6 +25,7 @@ import { cardInstitutionDoorOf } from '../../domain/people/cardDoor.js';
 import { keeperFormOf, seatKeeperOf } from '../../domain/people/seatKeeper.js';
 import { shownHonorificOf } from '../../domain/people/seatKeeperDisplay.js';
 import { allegianceOf } from '../../domain/people/allegiance.js';
+import { rowMarkText } from '../../domain/display/crisisStoppedRow.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
@@ -200,6 +201,27 @@ export function ConflictCard({conflict:c}) {
 }
 
 
+/** A line that offers the house's trade: a sale, a cut, a grind, a mix, a brew, a hire, a rent. */
+const TRADE_LINE = /\b(?:sells?|cuts?|grinds?|mix(?:es)?|deals in|rents?|brews?|bakes?|hires?|weighs|pours?|trades?)\b/i;
+
+/**
+ * BAR6-PEOPLE (LAW 8, 8b.person; BRIEF-BAR6 fact (a); vetoable by the owner): A PERSON'S OWN TRADE LINE READS THE PERSON'S
+ * HOUSE'S MARK. "How they deal" (`presentation.behaviour`, drawn at birth by trade) offered the house's goods bare where the
+ * Institutions and Services tabs mark that house "Short of grapes." or "Stopped by the siege."; the card now takes the
+ * house's own mark (`crisisStoppedRow.js :: rowMarkText`, the one leaf those tabs read) before a line that offers the
+ * trade, in the mark's own form. Display only: no draw, no stored byte. A calm, supplied house prints its line as before.
+ * @param {Record<string, any>} npc @param {Record<string, any> | null} settlement @returns {string}
+ */
+export function dealingShown(npc, settlement) {
+  const line = typeof npc?.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
+  if (!line || !TRADE_LINE.test(line)) return line;
+  const houseName = cardHouseOf(npc);
+  const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const house = houseName ? roster.find((r) => r && r.name === houseName) : null;
+  const mark = house ? rowMarkText(settlement, 'house', house) : null;
+  return mark ? `${mark} ${line}` : line;
+}
+
 // Inline NPC card — replaces the removed NPCCard export. Exported for the dossier search
 // (BUILD-W2-SEARCH U2), which mounts a person through this same card.
 export function NPCInlineCard({
@@ -314,7 +336,7 @@ export function NPCInlineCard({
   const standingWord = interiority?.standing || '';
   // WIRING W3 C9 (R-W6, FOR THE OWNER'S VETO): how the face deals with strangers, the authored
   // `presentation.behaviour` line drawn at birth. X-48's look-and-voice class (`impression`) stays dark.
-  const dealing = typeof npc.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
+  const dealing = dealingShown(npc, placeSettlement || settlement);
   // NO CHIP REPEATS A WANT (2026-09-18). The `Goal:` chip went first, because the
   // card printed that one sentence three times over. The rule behind it is wider
   // than the goal, and keying it on a LABEL would have left the same defect a row
