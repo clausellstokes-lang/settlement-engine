@@ -9572,6 +9572,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market",
             "crisis: any",
+            "no crisis: under_siege",
             "no crisis: plague_onset",
             "no crisis: hunger",
             "tier: ≤ village"

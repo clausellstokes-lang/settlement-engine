@@ -210,6 +210,11 @@ describe('SEAM-CULTURE: the declarations the culture seat left', () => {
     expect(declarationAdmits(variantFactDeclaration({ vid: 1, marks: ['crisis: any', 'no crisis: under_siege', 'no crisis: plague_onset'] }), factsOf(famineVillage), { crisisScoped: true }).admitted, 'POSITIVE CONTROL: the base marks admit a famine village').toBe(true);
     expect(admitsScoped(plenty, famineVillage), 'the cured line is refused there').toBe(false);
     expect(ENTREPOT.filter((v) => admitsScoped(v, famineVillage)).length, 'and the pool still holds three there (B7)').toBeGreaterThanOrEqual(3);
+    // the chair (2026-11-17 03:58): the village twin carries the siege mark its siblings carry, and no new line speaks under a siege
+    expect(village.marks, 'v4 names the siege as v1, v2, v3 and v5 do').toContain('no crisis: under_siege');
+    const besiegedVillage = { tier: 'village', stressors: [{ type: 'under_siege' }], institutions: [{ name: 'Market square' }] };
+    expect(admitsScoped(village, besiegedVillage), 'v4 off a besieged village with a market').toBe(false);
+    expect(admitsScoped(hungry, besiegedVillage), 'v5 off it too').toBe(false);
   });
 
   test('items 3 and 6: LEGACY-RECOVERED says "the town" under no unbanded line, v1 declares the ruin, the no-ruin side keeps three', () => {
