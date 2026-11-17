@@ -1,0 +1,9 @@
+{"id":"C9756","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"STATE","why":"Pilgrims crowd the road in and stalls sell blessings as usual; isolated town under wartime conscription, and no great road feeds it","other":"C9777"}
+{"id":"C10050","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"'the caravans buy here' in an isolated town where no great road feeds the market, under wartime","other":"C9777"}
+{"id":"C10234","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"Fair says foreign traders attend and letter credit is taken as usual; isolated trade access and wartime trade disruption, carries no mark","other":"C9814"}
+{"id":"C10504","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"'Merchants from distant regions' at the fair as in ordinary times; isolated trade access and wartime disruption, no mark","other":"C9814"}
+{"id":"C11472","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"PAIR","why":"A prisoner 'died in the cells' but the page says the city has nowhere to hold an offender and its courts lack detention","other":"C11201"}
+{"id":"C11727","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"PAIR","why":"Brickmaker shown firing bricks and taking orders for 'how many bricks and when', though its card is marked Short of clay and gaps say no clay reaches it","other":"C10055"}
+{"id":"C11875","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"PAIR","why":"Weaver 'will take an order of any size' though the Weavers house is marked Short of wool and its service '(short)'","other":"C10142"}
+{"id":"C12371","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"STATE","why":"'closes every year ahead' with a dependable margin and reserves; FOOD shows a 2% deficit, surplus 0%, word Pressured, and the page itself says it falls short","other":"C10781"}
+{"id":"DONE","lines":2804,"blocks":1,"flags":8}
