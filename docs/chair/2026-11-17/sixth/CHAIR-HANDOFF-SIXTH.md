@@ -776,3 +776,19 @@ should be paused or archived by the owner's hand.
   leaf, and J-INCOME is held). SECOND READER: READ-PDF-2 session_01FbPLbfTpRsMBhV8rBJqf83 (seated 23:02). AFTER PDF-2 IS ON
   THE LINE, ITEM 3 IS ASKED OF THE SEAT ITSELF ON A SECOND BRANCH CUT FROM THE LINE'S TIP (its hunk and a guard arm): the
   chair writes no source.
+- **23:20 UTC. J-ROWS TOOK ITS FISH ROWS OUT (23:13, 4c43ed7d7): ruling BR24's "bought" story is decided at the birth, AFTER the services are rolled; the
+  closest reading the roll can make disagrees with the record in 14 of 45 fish towns.** Its tip is G1 alone (the general gap
+  line: 129 -> 0), the generators back at their base (read by the chair). THE FISH ROWS (11b.fish 69, 11b.fishTitle 51 in
+  the 720: THE LARGEST FAMILY OF THE ROUND) ARE NOT CURED YET: the seat's own hunk (its hand-back, section 9: in
+  `src/generators/steps/generateNarratives.js`, after the birth's imports) is GRANTED TO IT ON A SECOND BRANCH
+  `lane/bar8-j-rows-b-2026-11-17`, cut from the line's tip once its G1 is on it, WITH the step's declaration and the
+  registers that follow it (the fork register and its contract's figures; the held-key roster if a held value is never
+  rewritten; the goods roster), each row earned by a measure as DEBT-2 did. The seat waits for the chair's message naming
+  that tip (and says so first if its count is above 380,000).
+- **23:20 UTC. POINTS 43 AND 44 ARE BUILT ON THE LINE'S TIP dfe557dc9** in `/home/user/line`, `lane/landing-43-44-2026-11-17`: POINT 43 = J-ROWS's G1
+  4c43ed7d7, the merge 52a10f90a76090200e3aa39797b4389fcf67b96a; POINT 44 = PDF-2 2dac64372, the merge
+  917c915bc6eb75011dfabd211f730e543e08d32a (no conflict; at it both guards, LEFT-PDF's guard, `chainStateThreeSurfaces`,
+  `leftMarks`, `tests/joins`: 39 files green; the seed-loop walker red ONLY for the line's old offender
+  `seamPdfReadsTheTabs`, by message). Being pushed; their whole check (label `landing-43-44-917c915bc`) goes to the
+  three CHECKS seats; READ-PDF-2 is reading; READ-J-ROWS's findings on G1 stand as given (LAND-able: its two HIGH were the
+  loops, fixed, and the fish rows, taken out).
