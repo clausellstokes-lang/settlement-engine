@@ -31,6 +31,16 @@ import { cardMark, readPersons } from './law8H.mjs';
 import { ventureOnPage, impliedGroundsOf, idOfHouse } from '../../../src/domain/facts/supplyStory.js';
 import { MATERIAL_OF, ALSO_USES } from '../../../src/domain/facts/houseKinds.js';
 import { warIronHookOutsideWar } from '../../../src/domain/facts/houseInputAtHand.js';
+import { GOAL_FAMILY_LINES } from '../../../src/data/people/goalFamilies.js';
+
+/** THE WANTS LINES OF A HOUSE'S TRADE DEPENDENCY THAT PRESUME A SUPPLY (`goalFamilies.js :: GOAL_FAMILY_LINES.SUPPLY.dependency`):
+ * a supplier, a market, a store laid in; each with `{resource}` captured. */
+const DEP_WANTS = (() => {
+  const out = [];
+  const walk = (v) => { if (typeof v === 'string') { if (v.includes('{resource}') && /supplier|^Buy |^Lay in|steady supply|store of|share in the supply|who controls the supply/.test(v)) out.push(v); } else if (v && typeof v === 'object') { if (typeof v.line === 'string') walk(v.line); else for (const x of Object.values(v)) walk(x); } };
+  walk(GOAL_FAMILY_LINES?.SUPPLY?.dependency);
+  return out.map((t) => new RegExp(`^Wants ${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{resource\\\}/g, '(.+?)').replace(/\\\{[a-z_]+\\\}/g, '.+?')}$`));
+})();
 
 export const LAW = 'L11';
 const arr = (x) => (Array.isArray(x) ? x : []);
@@ -124,6 +134,11 @@ export const LOCAL_SOURCE = {
   livestock: /\b(herds? (?:graze|are driven in)|local (?:herds|cattle|livestock)|beasts? (?:raised|bred) here)\b/i,
 };
 const NOT_BOUGHT_STORIES = new Set(['bought-used', 'bought-never', 'idle', 'venture']);
+/** The materials the town's own fields and herds give with no land row (Farmland, Common grazing land): read only where a ground of them is spent. */
+const FIELD_FAMS = new Set(['grain', 'livestock']);
+/** The Resources tab's ticks ("What the land offers"), by the material each names. */
+const OFFERS = [[/^Fishing industry$/, 'fish'], [/^(Timber trade|Woodcraft|Logging)$/, 'timber'], [/^(Stoneworking|Quarrying)$/, 'stone'],
+  [/^Salt (production|trade)$/, 'desertSalt'], [/^(Wool production|Sheep herding)$/, 'wool'], [/^(Agriculture|Grain production)$/, 'grain'], [/^Pottery$/, 'clay']];
 
 // ---------------------------------------------------------------- the need list
 const NEED_LINE = /^Needed, and not brought in: (.+?)\.?$/;
@@ -169,6 +184,8 @@ export function law11(T, town) {
   const crises = crisesOf(rec);
   const cause = crises.has('under_siege') ? 'siege' : null;
   const stories = Object.fromEntries(MATERIALS.map((f) => [f, materialStory(rec, f)]));
+  const spentAll = new Set(arr(rec.config?.nearbyResourcesDepleted).map(String));
+  const liveOre = arr(rec.config?.nearbyResources).map(String).some((g) => !spentAll.has(g) && /ore|metal|iron|copper|tin|gold|silver|gem/.test(g));
   const push = (x) => out.push({ law: LAW, town, ...x, rowLines: x.rowLines || [x.line] });
   const bare = (n) => String(n || '').replace(/\s*\([^)]*\)\s*$/, '').trim();
   const cardOfHouse = (name) => T.cards.find((c) => c.name === name) || T.cards.find((c) => bare(c.name) === bare(name)) || null;
@@ -219,8 +236,10 @@ export function law11(T, town) {
       for (const fam of MATERIALS) {
         const st = stories[fam];
         if (!NOT_BOUGHT_STORIES.has(st.story)) continue;
+        if (FIELD_FAMS.has(fam) && st.story === 'bought-never') continue; // the town's own fields and herds stand on no land row
         const m = line.match(LOCAL_SOURCE[fam]);
         if (!m) continue;
+        if (fam === 'ironOre' && liveOre) continue; // "ore", "the mine": a live ground of another ore (gold, silver, copper) keeps the workings at work
         // the sentence that carries the words, hedged or not
         const sent = line.split(/(?<=[.!?])\s+(?=[A-Z"“])/).find((s) => LOCAL_SOURCE[fam].test(s)) || line;
         if (HEDGE.test(sent)) continue;
@@ -239,7 +258,7 @@ export function law11(T, town) {
           push({ rule: st.story === 'venture' ? '11c.venture' : '11c.idle', tab, line, fam, story: st.story, cause: st.story, kind: kindOf(tab, line, T, i),
             against: { field: st.story === 'venture' ? 'the failed venture' : 'story', value: st.venture || st.used.join(', ') },
             why: `"${noun}" said to come from elsewhere, where ${st.story === 'venture' ? `${st.venture} is a failed venture: none is brought in` : 'it is used up and nothing brings it'}` });
-        } else if (onNeed && !importNames(noun)) {
+        } else if (onNeed && !importNames(noun) && !(fam && arr(rec.resourceAnalysis?.gaps).some((g) => g?.kind === 'imported' && NAMES[fam]?.test(lc(g.chain))))) {
           push({ rule: '11c.needed', tab, line, fam: fam || noun, story: st?.story || 'needed', cause: cause || 'needed', kind: kindOf(tab, line, T, i),
             against: { tab: 'Systems/Economics', line: need.line }, why: `"${noun}" said to come from elsewhere, where the page says "${onNeed}" is needed and not brought in and no import names it` });
         }
@@ -257,6 +276,22 @@ export function law11(T, town) {
         }
       }
     });
+  }
+
+  // 11b.landOffers: a tick of "What the land offers" naming a material whose every ground is used up
+  {
+    const ls = T.tabs['Systems/Resources'] || [];
+    const i = ls.findIndex((l) => l === 'What the land offers');
+    if (i >= 0 && ls[i + 1]) {
+      for (const tick of ls[i + 1].split('✓').map((x) => x.trim()).filter(Boolean)) {
+        const hit = OFFERS.find(([re]) => re.test(tick));
+        if (!hit) continue;
+        const st = stories[hit[1]];
+        if (!(st.story === 'bought-used' || st.story === 'idle')) continue;
+        push({ rule: '11b.landOffers', tab: 'Systems/Resources', line: ls[i + 1], sentence: `✓${tick}`, fam: hit[1], story: st.story, cause: storyCause(st), kind: 'tick',
+          against: { field: 'config.nearbyResourcesDepleted', value: st.used.join(', ') }, why: `"✓ ${tick}" where every ground of ${hit[1]} is used up (${st.used.join(', ')})` });
+      }
+    }
   }
 
   // 11d: THE WAR'S IRON IN A TOWN THAT IS NOT AT WAR, and a house short of a material the imports print
@@ -304,6 +339,16 @@ export function law11(T, town) {
     const preciousBought = arr(rec.economicState?.primaryImports).some((x) => BULLION.test(struck(x)));
     const preciousSpent = arr(rec.config?.nearbyResourcesDepleted).some((g) => /precious|gold|silver/.test(String(g)));
     const MAKERS = [[/\bmint\b/i, 'precious', preciousBought && preciousSpent], [/\b(goldsmiths?|silversmiths?|jewel(?:l)?ers?)\b/i, 'precious', preciousBought && preciousSpent]];
+    for (const h of liveHouses) {
+      const id = idOfHouse(h);
+      const fam = MATERIAL_OF[id] || ALSO_USES[id];
+      if (!fam || SOURCE_IDS.has(id) || FIELD_FAMS.has(fam) || fam === 'fish' || !stories[fam] || !/^bought/.test(stories[fam].story)) continue;
+      const c = cardOfHouse(h.name);
+      if (!c || houseMarked(c) || c.chips.some((x) => x.marked)) continue;
+      push({ rule: '11e.siegeBought', tab: 'Systems/Institutions', line: c.chipLine || c.head, fam, story: stories[fam].story, cause: 'siege', kind: c.chipLine ? 'chip' : 'card',
+        rowLines: [c.chipLine || c.head, c.head], against: { field: 'economicState.primaryImports', value: stories[fam].imports.join(' · ') || stories[fam].gapsImported.join(' · ') },
+        why: `${h.name} bare under a siege; its ${fam} is bought in (${stories[fam].imports.join(', ') || stories[fam].gapsImported.join(', ')}) and the siege cuts the imports` });
+    }
     for (const c of T.cards) {
       for (const [re, fam, on] of MAKERS) {
         if (!on || !re.test(c.name) || houseMarked(c)) continue;
@@ -316,19 +361,25 @@ export function law11(T, town) {
     }
   }
   const needItems = need ? need.items.map((x) => x.replace(/\s*\([^)]*\)/g, '').trim()) : [];
-  const needWord = (good) => needItems.find((it) => { const a = lc(good), b = lc(it); return a === b || b.split(/\s+/)[0] === a.split(/\s+/)[0] && a.length > 3; });
-  // (e2) a person's Wants that buys a good at the market that the need list names
+  const needWord = (good) => needItems.find((it) => { const a = lc(good).trim(), b = lc(it).replace(/ for .*$/, '').trim(); return a === b || a.replace(/s$/, '') === b.replace(/s$/, ''); });
+  // (e2) a person's Wants that presumes a supply (a supplier, the market, a store laid in) of a good the page says is
+  // needed and not brought in, or whose material's story is idle or the failed venture
   for (const [tab, ls] of Object.entries(T.tabs)) {
     if (tab !== 'World/NPCs') continue;
-    ls.forEach((line) => {
+    ls.forEach((line, i) => {
+      if (personCovered.has(i)) return;
+      const goods = [];
       const m = line.match(/^Wants (?:Buy|Corner|Stock up on) ([a-z, ]+?)(?: and ([a-z]+))? at the market\b/i);
-      if (!m) return;
-      const goods = `${m[1]}${m[2] ? `, ${m[2]}` : ''}`.split(/,\s*|\s+and\s+/).map((s) => s.trim()).filter(Boolean);
+      if (m) goods.push(...`${m[1]}${m[2] ? `, ${m[2]}` : ''}`.split(/,\s*|\s+and\s+/).map((x) => x.trim()).filter(Boolean));
+      else for (const re of DEP_WANTS) { const d = line.match(re); if (d) { goods.push(...d[1].split(/,\s*|\s+and\s+/).map((x) => x.trim()).filter(Boolean)); break; } }
       for (const g of goods) {
         const hit = needWord(g);
-        if (!hit) continue;
-        push({ rule: '11e.wantBuy', tab, line, good: g, fam: needFam(g), story: stories[needFam(g)]?.story, cause: cause || 'calm', kind: 'person.wants',
-          against: { tab: 'Systems/Economics', line: need.line }, why: `wants to buy "${g}" at the market; the page says "${hit}" is needed and not brought in` });
+        const fam = needFam(g);
+        const st = fam && stories[fam];
+        if (!hit && !(st && (st.story === 'idle' || st.story === 'venture'))) continue;
+        push({ rule: '11e.wantBuy', tab, line, good: g, fam: fam || g, story: st?.story || 'needed', cause: cause || 'calm', kind: 'person.wants',
+          against: hit ? { tab: 'Systems/Economics', line: need.line } : { field: 'story', value: `${st.story}: ${st.venture || st.used.join(', ')}` },
+          why: hit ? `presumes a supply of "${g}"; the page says "${hit}" is needed and not brought in` : `presumes a supply of "${g}", whose story is ${st.story}` });
       }
     });
   }
@@ -350,8 +401,9 @@ export function law11(T, town) {
   }
   // (e4) a card's line, a chip or a Services row that offers a good the need list names (its head noun), its house bare
   if (need) {
-    const goods = need.items.map((it) => ({ it, noun: headNoun(it).replace(/ for .*$/, '') })).filter((g) => g.noun.length > 3);
-    const nounRe = (g) => new RegExp(`\\b${g.noun.split(' ')[0].replace(/s$/, '')}s?\\b`, 'i');
+    const ADJ = new Set(['quality', 'fine', 'high', 'raw', 'rare', 'good', 'goods', 'major', 'construction', 'materials', 'and', 'for', 'meat', 'draft', 'other', 'basic', 'bulk', 'mineral', 'textiles', 'cloth']);
+    const goods = need.items.map((it) => ({ it, nouns: headNoun(it).replace(/ for .*$/, '').split(/[\s,]+/).filter((w) => w.length > 3 && !ADJ.has(w)) })).filter((g) => g.nouns.length);
+    const nounRe = (g) => new RegExp(`\\b(?:${g.nouns.map((w) => w.replace(/s$/, '')).join('|')})s?\\b`, 'i');
     const OFFER = /\b(available|for sale|on sale|sold|sells?|selling|auctions?|offers?|stocks?|trades? in|dealers? in)\b/i;
     for (const c of T.cards) {
       if (houseMarked(c)) continue;
@@ -362,7 +414,7 @@ export function law11(T, town) {
           if (!re.test(l.text)) continue;
           const sent = l.chip ? c.chips.find((x) => re.test(x.name) && !x.marked)?.raw : l.text.split(/(?<=[.!?])\s+(?=[A-Z"“])/).find((x) => re.test(x) && OFFER.test(x));
           if (!sent) continue;
-          push({ rule: '11e.offer', tab: 'Systems/Institutions', line: l.text, sentence: sent, good: g.it, fam: needFam(g.it) || g.noun, story: 'needed', cause: cause || 'calm', kind: l.chip ? 'chip' : 'card',
+          push({ rule: '11e.offer', tab: 'Systems/Institutions', line: l.text, sentence: sent, good: g.it, fam: needFam(g.it) || g.nouns[0], story: 'needed', cause: cause || 'calm', kind: l.chip ? 'chip' : 'card',
             rowLines: [l.text, sent], against: { tab: 'Systems/Economics', line: need.line }, why: `${c.name} offers "${sent}" beside "${g.it}" needed and not brought in` });
         }
       }
