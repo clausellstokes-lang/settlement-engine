@@ -688,3 +688,12 @@ should be paused or archived by the owner's hand.
   of the three CHECKS seats, each after its part of point 40's. POINT 40's check, part 2: the same 58 names as the
   batch's part 2. THE LANDING ORDER: 40 when its three parts read clean; then 41 and 42 when theirs do and READ-J-ROWS
   says LAND; then ONE docs commit on the line with the rows of 36 to 42.
+- **21:50 UTC. DESKS-DEF IS DONE AND UNCOMMITTED (21:50; its check refused the commit; its hand-back in its worktree lists the eleven paths to stage):**
+  13f 22 -> 0, 13a's desk line -> 0, 14c 45 -> 0 (and its sibling "must agree" 33 -> 0), 12e -> 0 by a new atom
+  `uprising`; new twins print: "goes to the {seat}" in 49 towns of the 720, the semi-organized "No one boss" in 24;
+  LEFT: 13d (it needs a court-or-gaol atom), 15c (the desk line is true: the chain card's outputs are the false half:
+  J-INCOME's item 5), "13a's real fault is internalRowPoolKey"; R7 breaches with twins proposed (13a in 10 towns, 12e
+  in 7, the council under succession crises in 12); a third pool-table row placed (DS-POW-4 Stable at 5). FOUR SEATS
+  NOW HOLD FINISHED WORK THEY MAY NOT COMMIT (K-POWERS, K-PEOPLE, K-WATCH, DESKS-DEF); J-INCOME is stopped at its first
+  commit. POINT 40's CHECK, part 1 (CHECKS-1, 21:49): 34 names, none new against the batch's, A5 green this time (the
+  watchdog); the doors as before.
