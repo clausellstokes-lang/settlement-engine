@@ -12,7 +12,7 @@ import {
 } from '../domain/institutionClassify.js';
 import { institutionCategoryFlags } from './roleCategory.js';
 import { CRIMINAL_GOVERNANCE_TYPE, crimeSignalOf } from '../domain/crimeSignal.js';
-import { runningCriminalChains } from '../domain/display/defenseDisplay.js';
+import { runningCriminalChains } from '../domain/facts/criminalStructureKey.js'; // BAR6-CRIME: the crime fact's leaf (defenseDisplay re-exports it), so the engine core reaches no display
 import { defenceOf } from '../domain/facts/defence.js';
 import { factsOf } from '../domain/facts/factsOf.js';
 import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js';
@@ -276,7 +276,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const visibleAuthority = inst.hasGarrison
       ? 'The garrison is visible everywhere.'
       : 'Armed officials are visible everywhere.';
-    safetyDesc = `The streets are unusually quiet. ${visibleAuthority} Residents face little risk from ` +
+    safetyDesc = `${tiny ? 'The place is unusually quiet.' : 'The streets are unusually quiet.'} ${visibleAuthority} Residents face little risk from ` + // BAR6-CRIME (LAW 5 widened, size): no streets in a thorp or a hamlet
       `common thieves and considerably more from the authorities themselves. Unofficial disappearances are not discussed openly.`;
   } else if (stress.crimeIsGovt) {
     safetyLabel = 'Dangerous — Criminal Governance';
@@ -635,11 +635,11 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       'Enforcement authorities paying for information about non-compliant households. Neighbour reporting on neighbour. Some reports are sincere. Many are settled scores.');
   }
   if (hasStress('wartime')) {
-    // TAIL-DEFECON (#18752 #11777 #21987 #03039 #B27552): no crown contracts, inspectors, industry or wealthy families in a thorp or a hamlet
+    // BAR6-CRIME (the chair's SV1): the army's contracts, no crown named. TAIL-DEFECON (#18752 #11777 #21987 #03039 #B27552): no crown contracts, inspectors, industry or wealthy families in a thorp or a hamlet
     // TAIL-DISPLAY-CIVIC-3 V3: a place with no trade route sells nothing to an army's buyers (r2s-wartime-thorp-2: isolated, no
     // exports, no imports); the deserters' food is settled against the food record at assembly (settleCrimeLinesToSignal)
     if (config.tradeRouteAccess !== 'isolated') addCrimeIfMissing('war profiteering', tiny ? "Whatever the army's buyers will take is sold to them dear, and not all of it is as sound as it is said to be."
-      : "Suppliers adulterating grain and leather sold to crown contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.");
+      : "Suppliers adulterating grain and leather sold to the army's contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.");
     addCrimeIfMissing('deserter networks', tiny ? DESERTERS_FED_TINY : DESERTERS_FED);
     if (!tiny) addCrimeIfMissing('conscription fraud',
       'Wealthy families paying poorer ones to send sons in their place. The practice is illegal, widespread, and poorly enforced. It concentrates the actual dying in specific households.');
@@ -749,8 +749,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     });
     if (drawn.line != null) plotHooks.push(smugglingHookUnderSiege(String(lineText(drawn.line)), hasStress('under_siege'))); // TAIL-DISPLAY-CIVIC-4 (V10)
   }
-  if (stress.crusaderSynthesis) {
-    plotHooks.push(said("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological."));
+  if (stress.crusaderSynthesis) { // BAR6-CRIME (g), LAW 10's 10b (C130353 C130354): the hook names its holder without a sex; the roster's commander may be a woman
+    plotHooks.push(said("The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological."));
   }
   if (stress.merchantArmy) {
     plotHooks.push(said("The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way."));
@@ -910,9 +910,9 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.": declaredSet(
     "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.", ['watch'],
     "The merchant guild's private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying."),
-  "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.": declaredSet(
-    "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.", ['garrison'],
-    "The settlement's chaplain also leads its armed men. He's authorizing military action for reasons that sound theological."),
+  "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.": declaredSet(
+    "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.", ['garrison'],
+    "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theological."),
   // COHERENCE-UPKEEP (the chair's ruling 7 of 2026-11-12): what the place can pay for its hired
   // force, said in the guard assessment. Resolved AFTER prosperity by `keptGuardLine` (below), by the
   // `prosperity` atom (`prosperity: ≥ moderate` is `keepOf().bought` ≥ 0.6); each twin is today's

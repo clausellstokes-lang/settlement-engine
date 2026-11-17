@@ -171,6 +171,10 @@ export function factsOf(record, options = {}) {
     get crime() { return criminalStructureKeyOf(record) ?? 'none'; },
     /** BAR5-SAFETY (L2.law.collapsed): the law's band as the Foundations row prints it (`lawBand.js :: lawBandOf`), or undefined */
     get lawBand() { return lawBandOf(record); },
+    /** BAR6-CRIME (9a.wave): the live tensions hold a crime wave (`lawBand.js :: crimeWaveStands`, the one reading) */
+    get crimeWave() { return crimeWaveStands(record); },
+    /** BAR6-CRIME (9a.watch, 6d-paid): the force that keeps order (`orderForce.js :: orderForceOf`) */
+    get orderForce() { return orderForceOf(record); },
     /** BAR4-CORPUS-DEF (C24893): the income list carries a criminal revenue (`criminalIncome.js`) */
     get criminalIncome() { return criminalIncomeOf(record); },
     /** the prosperity band (`prosperityRank.js :: prosperityLabelOf`), lower-cased, or undefined */
@@ -233,4 +237,5 @@ export function birthFactsOf(partial = {}, worldLaw = null) {
   const stress = partial.stress ?? (Array.isArray(config.stressTypes) ? config.stressTypes.map((/** @type {unknown} */ type) => ({ type })) : []);
   return factsOf({ institutions: partial.institutions, config, tier: partial.tier ?? config.tier, stress, powerStructure: partial.powerStructure }, worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {});
 }
-import { lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.law.collapsed): at the END, no line above moves
+import { orderForceOf } from './orderForce.js'; // BAR6-CRIME: the force that keeps order
+import { crimeWaveStands, lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.law.collapsed): at the END, no line above moves; BAR6-CRIME: the crime wave

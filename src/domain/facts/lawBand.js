@@ -37,12 +37,37 @@ const QUIET_PLACE_FLOOR = 'strained';
 const QUIET_SAFETY_WORD = /^(?:Very Safe|Safe|Moderate)(?![A-Za-z])/;
 
 /**
- * The live tensions hold a crime wave (`history.currentTensions`, the field `foundationBandShown.js :: crimeWaveStands` reads).
+ * THE CRIME WAVE, ONCE (BAR6-CRIME, LAW 9's `9a.wave` of BRIEF-BAR6 (b); vetoable by the owner): the town's live tensions
+ * hold a crime wave (`history.currentTensions` type `crime_wave`; the History tab's and the crisis panel's own reading,
+ * "Crime is rising faster than those in charge can answer it"). THE ONE EXPORTED READING: `display/foundationBandShown.js`
+ * re-exports it under its old name, the row's cap above reads it, and every line that says crime is kept down reads it
+ * through the vocabulary's `crime wave` atom (`factsOf(record).crimeWave`).
  * @param {unknown} record @returns {boolean}
  */
-function crimeWave(record) {
+export function crimeWaveStands(record) {
+  return crimeWaveTensions(record).length > 0;
+}
+const crimeWave = crimeWaveStands;
+
+/** @param {unknown} record @returns {Array<{ type?: unknown, plotHooks?: unknown }>} */
+function crimeWaveTensions(record) {
   const t = /** @type {{ history?: { currentTensions?: unknown } | null } | null} */ (record)?.history?.currentTensions;
-  return (Array.isArray(t) ? t : t ? [t] : []).some((x) => x && typeof x === 'object' && /** @type {{ type?: unknown }} */ (x).type === 'crime_wave');
+  return /** @type {Array<{ type?: unknown, plotHooks?: unknown }>} */ ((Array.isArray(t) ? t : t ? [t] : [])
+    .filter((x) => x && typeof x === 'object' && /** @type {{ type?: unknown }} */ (x).type === 'crime_wave'));
+}
+
+/** The crime-wave tension's own hook that says someone directs it (`historyData.js`, the `crime_wave` row's first hook). */
+export const COORDINATED_WAVE_HOOK = /^The crime wave is coordinated\b/;
+
+/**
+ * THE HOOK KEEPS ITS TWIST (BAR6-CRIME, the chair's ruling HK1 of 2026-11-16; vetoable by the owner): the crime-wave tension
+ * carries the hook "The crime wave is coordinated. Someone is directing it …" (every `crime_wave` row of `historyData.js`
+ * draws it first). Where it stands, no line may say that nobody runs the crime: the diffuse lines speak of appearances.
+ * @param {unknown} record @returns {boolean}
+ */
+export function crimeWaveCoordinated(record) {
+  return crimeWaveTensions(record).some((t) => (Array.isArray(t.plotHooks) ? t.plotHooks : [])
+    .some((h) => typeof h === 'string' && COORDINATED_WAVE_HOOK.test(h))); // the record stores each hook as its text
 }
 
 /**
