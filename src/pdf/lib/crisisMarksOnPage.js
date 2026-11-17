@@ -20,8 +20,17 @@
  * (`crisisStoppedRow.js :: incomeShortOf`), as `incomeMarkShown` joins them; the PDF and the journal printed the leaf's
  * crisis half alone ("Iron & Metalwork" bare beside the tab's "Short of iron.": 29 towns of the census's 720 at
  * e0242a12a). `stoppedOnPage` and `shortOnPage` read those two halves for kind 'income', so `markOnPage`,
- * `stoppedWordOnPage` and `ordinaryTimesOnPage` print the tab's mark, its word and its head line; `incomeMarkOnPage` is
- * the tab's own function, for a caller that wants it whole.
+ * `stoppedWordOnPage` and `ordinaryTimesOnPage` print the tab's mark, its word and its head line.
+ * PDF-2 item 8 (BRIEF-BAR8, 2026-11-17): `incomeMarkOnPage` (the tab's `incomeMarkShown`, exported with no caller) is gone;
+ * the PDF's row reads `incomeDescShown` and the journal reads `stoppedOnPage` and `shortOnPage`, the same two halves.
+ *
+ * PDF-2 items 1, 5 and 6 (BRIEF-BAR8, the sixth chair, 2026-11-17; vetoable by the owner): A PDF CHAIN CARD AND THE
+ * JOURNAL'S CHAIN ROW READ THE CHAIN THE TAB'S CARD RENDERS. The Economics tab's card is
+ * `chainCardUnderSiege(town, record, chainAsShown(record, town))` (`EconomicsTab.jsx :: chains`); the PDF's Services card
+ * read the stored chain and its flow row and the journal `chainAsShown` alone, so a card under a crisis that marks every
+ * house of the chain said "Operational" or "Running" where the tab says "Impaired", listed outputs the tab's refused card
+ * withholds, and named a source house the tab's card leaves off a spent ground (`chainHouses.js :: chainHousesOf` handed
+ * the card: ruling BR10 (3), amended). `chainCardOnPage` is that one reading, with the tab's chip word.
  *
  * Pure: reads the record, writes nothing.
  */
@@ -29,7 +38,9 @@ import {
   stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, STOPPED_WORD,
   rowShortOf, shortMarkText, SHORT_WORD, isVentureMark, incomeShortOf,
 } from '../../domain/display/crisisStoppedRow.js';
-import { incomeKindShown, incomeMarkShown } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L1: the tab's income mark
+import { incomeKindShown, chainCardUnderSiege } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L1: the tab's income mark; PDF-2 items 5, 6: the tab's chain card
+import { chainAsShown } from '../../domain/display/chainStateShown.js';
+import { chainStateOnPage } from './chainStateOnPage.js';
 
 /** The active stopping crises of a record, read once a record. @type {WeakMap<object, string[]>} */
 const CRISES = new WeakMap();
@@ -82,12 +93,18 @@ export function markOnPage(settlement, kind, row) {
 }
 
 /**
- * LEFT-PDF L1: an income share's mark as the Economics tab prints it (`incomeMarkShown`), or null.
- * @param {object | null | undefined} settlement @param {Record<string, unknown> | null | undefined} src the record's income share, as handed in
- * @returns {string | null}
+ * PDF-2 items 5 and 6: the chain the Economics tab's card renders (`EconomicsTab.jsx :: chains`: the state a crisis left,
+ * then the card's word under a crisis that marks its houses), and the word its chip prints ('' where the tab prints no
+ * chip; `chainStateOnPage.js :: CHAIN_STATE_WORDS`). Without a town, the chain as given. Display only: the record's chain
+ * is not touched.
+ * @template {{ status?: unknown }} C
+ * @param {C} chain one of the record's chains, as the record holds it
+ * @param {object | null | undefined} town the settlement record
+ * @returns {{ chain: C, key: string, word: string }}
  */
-export function incomeMarkOnPage(settlement, src) {
-  return incomeMarkShown(settlement, src, crisesOf(settlement));
+export function chainCardOnPage(chain, town) {
+  const shown = town ? chainCardUnderSiege(town, /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (chain)), chainAsShown(chain, town)) : chain;
+  return chainStateOnPage(shown, null);
 }
 
 /**

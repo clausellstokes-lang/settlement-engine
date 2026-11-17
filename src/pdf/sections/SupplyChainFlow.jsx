@@ -79,7 +79,10 @@ function ChainRow({ chain, instNames, primaryExports, town }) { const shown = ch
   // R2-CODE-B item 1b, the chair's ruling R1 (REVIEW-R2-STAGES finding 3): the houses by the seam's house
   // label, each once (domain/display/chainHouses.js), the screen's chain card's own read — never a rank's
   // count range the roster does not hold. `present` is the same first-word read this row always made.
-  const insts = chainHousesOf(chain.processingInstitutions, instNames);
+  // PDF-2 item 1 (BRIEF-BAR8, 2026-11-17; ruling BR10 (3), amended): handed the card (the chain the tab's card renders:
+  // `SupplyChainFlow` below) and its town, as the tab's card is, so a spent ground's row lists no source house the supply
+  // rule reads at work on another ground of its own (the seventeen mines).
+  const insts = chainHousesOf(chain.processingInstitutions, instNames, town ? { chain, town } : null);
 
   // Canonical good id first, substring fallback — the same predicate as the
   // web SupplyChainsPanel, or the PDF badge disagrees with the screen when
@@ -245,7 +248,7 @@ function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports, 
 }
 
 export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], tier = 'village', town = null }) {
-  const list = (chains || []).filter((c) => c && c.status !== 'unexploited').map((c) => chainStateOnPage(c, town).chain); // SURFACES-1 item 1: the tab's shown state (colour, group count, order)
+  const list = (chains || []).filter((c) => c && c.status !== 'unexploited').map((c) => chainCardOnPage(c, town).chain); // SURFACES-1 item 1: the tab's shown state (colour, group count, order); PDF-2 items 5, 6 (BRIEF-BAR8, 2026-11-17; vetoable by the owner): the chain the tab's card renders (`chainCardUnderSiege` over `chainAsShown`), so its state, its outputs and its houses are the card's
   if (!list.length) return null;
 
   const isTownPlus = tier === 'town' || tier === 'city' || tier === 'metropolis';
@@ -292,10 +295,9 @@ export default SupplyChainFlow;
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
-import { chainStateOnPage } from '../lib/chainStateOnPage.js';
 import { tradeListsAsPrinted, tradeMarkOf } from '../../domain/display/tradeListDisplay.js';
 import { chainOutputsOnCard } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L2: the tab card's outputs
-import { markOnPage } from '../lib/crisisMarksOnPage.js';
+import { markOnPage, chainCardOnPage } from '../lib/crisisMarksOnPage.js';
 import { swatch } from '../../design/tokens.js'; // TAIL-CLOSE-SRC-1: NO_STATE's three colours, the same hex through the swatch
 
 /** The tab's printed Exports of a record, read once a record. @type {WeakMap<object, ReadonlyArray<string>>} */

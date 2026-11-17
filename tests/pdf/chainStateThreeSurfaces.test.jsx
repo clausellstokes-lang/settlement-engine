@@ -32,7 +32,7 @@ import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
 import { chainPrintName } from '../../src/domain/display/chainPrintName.js';
 import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
-import { chainOutputsOnCard } from '../../src/domain/display/economicsCrisisMarks.js'; // LEFT-PDF L2 (2026-11-17): the tab card's reading
+import { chainOutputsOnCard, chainCardUnderSiege } from '../../src/domain/display/economicsCrisisMarks.js'; // LEFT-PDF L2 (2026-11-17): the tab card's reading; PDF-2 (2026-11-17): the chain the tab's card renders
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -64,11 +64,16 @@ const leaves = (node, acc = []) => {
 /** The tab's chip word, its glyph struck. @param {string} key */
 const tabWord = (key) => (key === '' ? '' : /** @type {Record<string, {label: string}>} */ (FLOW_STATUS)[key]?.label ?? FLOW_STATUS.operational.label).replace(/^[✓✦○]\s*/, '');
 
-/** Every chain whose state a surface prints otherwise than the tab, as "<surface> <chain>: <printed> / <tab>". @param {any} town */
+/** The chain the tab's card renders (`EconomicsTab.jsx :: chains`: `chainCardUnderSiege` over `chainAsShown`). @param {any} c @param {any} town */
+const tabCard = (c, town) => chainCardUnderSiege(town, c, chainAsShown(c, town));
+/** Every chain whose state a surface prints otherwise than the tab, as "<surface> <chain>: <printed> / <tab>". RE-KEYED BY
+ * IDENTITY (PDF-2 item 6, BRIEF-BAR8, 2026-11-17; rule R8): "the tab" is the chain its card really renders (`tabCard`:
+ * the card's word under a crisis that marks every house of the chain, EconomicsTab.jsx:119), not `chainAsShown` beneath it;
+ * the claim and its form are kept. @param {any} town */
 const disagreements = (town) => {
   const vm = buildViewModel({ settlement: town });
   const chains = town.economicState.activeChains;
-  const tab = chains.map((/** @type {any} */ c) => ({ label: chainPrintName(c, town).label, key: String(chainAsShown(c, town).status ?? ''), need: c.needKey || 'other', raw: c.status }));
+  const tab = chains.map((/** @type {any} */ c) => ({ label: chainPrintName(c, town).label, key: String(tabCard(c, town).status ?? ''), need: c.needKey || 'other', raw: c.status }));
   const byLabel = new Map(tab.map((/** @type {any} */ t) => [t.label, t]));
   /** @type {string[]} */ const out = [];
   for (const card of find(Services({ settlement: town, narrativeMode: false, vm, stateProse: null }), (n) => n.type === StatusCard)) {
@@ -97,7 +102,9 @@ const disagreements = (town) => {
 const outputDisagreements = (town) => {
   const vm = buildViewModel({ settlement: town });
   const f = (/** @type {unknown} */ x) => String(x).toLowerCase().trim();
-  const tab = new Map(town.economicState.activeChains.map((/** @type {any} */ c) => [chainPrintName(c, town).label, chainOutputsOnCard(c, town).slice(0, 3).map(f)]));
+  // RE-KEYED BY IDENTITY (PDF-2 item 5, BRIEF-BAR8, 2026-11-17; rule R8): the tab's card hands `chainOutputsOnCard` the chain it
+  // renders (`tabCard`), not the stored chain; the claim and its form are kept.
+  const tab = new Map(town.economicState.activeChains.map((/** @type {any} */ c) => [chainPrintName(c, town).label, chainOutputsOnCard(tabCard(c, town), town).slice(0, 3).map(f)]));
   /** @type {string[]} */ const out = [];
   for (const row of find(EconomicsTrade({ settlement: town, narrativeMode: false, vm, stateProse: null }), (n) => typeof n.type === 'function' && n.type.name === 'ChainRow')) {
     const label = chainPrintName(row.props.chain, town).label; const want = tab.get(label) || [];

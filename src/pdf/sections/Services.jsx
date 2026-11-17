@@ -206,7 +206,12 @@ function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintNa
   // (pdf/lib/chainStateOnPage.js): a siege or a famine in force leaves Impaired, a chain run only through a
   // neighbour's house prints no state. The card printed the record's stored state ("Active" beside "Field work
   // and trade have stopped"). A depleted ground is said on the source, as the tab's card says it.
-  const { key: status, word: statusLabel } = chainStateOnPage(chain, town);
+  // PDF-2 items 5 and 6 (BRIEF-BAR8, 2026-11-17; vetoable by the owner): the card reads the chain the tab's card renders
+  // (`crisisMarksOnPage.js :: chainCardOnPage`: `chainCardUnderSiege` over `chainAsShown`), its word, its outputs and its
+  // houses, not the stored chain (34 towns of the census's 720 printed an output the tab's card withholds).
+  const card = chainCardOnPage(chain, town);
+  const { key: status, word: statusLabel } = card;
+  const onCard = card.chain;
   const tone = status === 'impaired' || chain.resourceDepleted
     ? 'bad'
     : status === 'vulnerable' || chain.substituteActive
@@ -226,11 +231,13 @@ function ChainCard({ chain, town, instNames = [] }) { const shown = chainPrintNa
     // R2-CODE-B item 1: the houses by the seam's house label, each once (domain/display/chainHouses.js),
     // the screen's chain card's own read: no rank's count range the roster does not hold.
     // Ruling (e): the roster is read, so a house held only as a road to elsewhere is named as the page names it.
-    chainHousesOf(chain.processingInstitutions, instNames).map((h) => humanize(h.name)).join(' + ') || null,
+    // PDF-2 item 1 (ruling BR10 (3), amended): handed the card and its town, as the tab's card is (chainHouses.js ::
+    // chainHousesOf): no source house the supply rule reads at work on another ground of its own, on a spent ground's card.
+    chainHousesOf(chain.processingInstitutions, instNames, town ? { chain: onCard, town } : null).map((h) => humanize(h.name)).join(' + ') || null,
     // SURFACES-1 item 2: the outputs the tab's card prints, as many as it prints; LEFT-PDF L2 (BRIEF-LEFT, 2026-11-17;
     // vetoable by the owner): by the tab card's own reading (`economicsCrisisMarks.js :: chainOutputsOnCard`, ruling CY1: a
     // refused yield names no service the page keeps on offer), not the reading beneath it (`chainOutputsShown`)
-    ((outputs) => (outputs && chainYieldRefused(chain) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))(chainOutputsOnCard(chain, town).map(humanize).slice(0, 3).join(', ') || null),
+    ((outputs) => (outputs && chainYieldRefused(onCard) ? `${NORMALLY_YIELDS}: ${outputs}` : outputs))(chainOutputsOnCard(onCard, town).map(humanize).slice(0, 3).join(', ') || null),
   ].filter(Boolean).join(' \u00bb ');
 
   const meta = [
@@ -291,5 +298,5 @@ export default Services;
 // COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
-import { chainStateOnPage } from '../lib/chainStateOnPage.js';
+import { chainCardOnPage } from '../lib/crisisMarksOnPage.js'; // PDF-2 items 5, 6: the chain the tab's card renders, and its word
 import { chainOutputsOnCard } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L2: the tab card's outputs

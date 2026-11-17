@@ -76,8 +76,12 @@ const HEAD_SIEGE_SUPPLIED = /^The descriptions here are of ordinary times\. Whil
 // chapter's head line is the leaf's (ordinaryTimesLine)]
 const NOT = [
   // E17: the chain rows of the worklist, marked by the leaf (crisisStoppedRow.js :: rowStoppedBy 'chain')
-  ['11357', 'r2s-famine-town-1', 'services', /^Grain fields » Mills » Baked goods$/m, /^Scarce in the famine\. Grain fields » Mills » Baked goods$/m],
-  ['11346', 'r2s-famine-town-1', 'services', /^Grain fields » Brewery » Ale/m, /^Scarce in the famine\. Grain fields » Brewery » Ale/m],
+  // RE-KEYED BY IDENTITY (PDF-2 items 5 and 6, BRIEF-BAR8, 2026-11-17; rule R8): the Services card now reads the chain the
+  // tab's card renders (`crisisMarksOnPage.js :: chainCardOnPage`), which the famine leaves impaired with its yield refused,
+  // so its outputs print as the tab's card prints them, under "Normally yields". The claim is kept: the false bare line is
+  // not printed, and what prints instead is the famine's mark before the card's line.
+  ['11357', 'r2s-famine-town-1', 'services', /^Grain fields » Mills » Baked goods$/m, /^Scarce in the famine\. Grain fields » Mills » Normally yields: Baked goods$/m],
+  ['11346', 'r2s-famine-town-1', 'services', /^Grain fields » Brewery » Ale/m, /^Scarce in the famine\. Grain fields » Brewery » Normally yields: Ale/m],
   ['25077', 'r2r-metropolis-14', 'services', /^Strategic Crossroads » Toll bridge/m, /^Stopped by the siege\. Strategic Crossroads » Toll bridge/m],
   ['25075', 'r2s-plague_onset-city-0', 'services', /^Strategic Crossroads » Coaching inn » Transit trade profit$/m, /^Curtailed by the outbreak\. Strategic Crossroads » Coaching inn/m],
   // E17: a house, a service row with its description, a pill with none, an income share; and each chapter's head line
