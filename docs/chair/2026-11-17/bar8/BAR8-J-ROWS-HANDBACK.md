@@ -9,9 +9,9 @@ only; nothing under `src/`; `git diff 8bc3daee4 0cdedd206 -- src` is empty). I k
 Every "base" figure below is measured at 0cdedd206 (the same `src/` as 8bc3daee4). My base renders of the 150 and the 720
 reproduce the auditor's published `RUN-J.150.txt` and `RUN-J.720.txt` line for line.
 
-**WHAT I CURED: item 3 (G1), a reading at print; and, after the chair granted the one-line pass-through, item 1's services
-and titles (section 7, AFTER THE CHAIR'S DECISIONS, which supersedes section 5 (1) for them). The card and item 2 are LEFT,
-by the chair's word (section 7).**
+**WHAT I CURED: item 3 (G1), a reading at print. ITEM 1 WAS BUILT (section 7) AND THEN RETURNED TO THE BASE (section 9,
+AFTER THE SECOND READER: the bought-only swap of ruling BR24 cannot be read at the services roll; the hunk it needs is named
+there). The card and item 2 are LEFT, by the chair's word (section 7 (2)). SECTION 9 SUPERSEDES SECTION 7 (1).**
 
 ## 1. The rules, before and after
 
@@ -267,3 +267,66 @@ asserted town by town in place of one gathered list (the same claim). AT THE BAS
 fish market's catch row reads its fishery: 1 of 4"). AT THE TIP: 7 of 7. THE WALKER AT THE TIP: the quarantine arm green; the
 first arm red only for `tests/pdf/seamPdfReadsTheTabs.test.jsx: 2 bare seed loop(s) at line(s) 93, 120`, its message at the
 base word for word (not mine; left).
+
+## 9. AFTER THE SECOND READER (the chair's message of 22:44 UTC; ruling BR24)
+
+**THE REGRESSION, CONFIRMED.** In the four idle towns (r2r-village-45, r2r-metropolis-45, r2s-politically_fractured-metropolis-3,
+r2s-recently_betrayed-metropolis-0) the swap of section 7 put an unmarked "Preserved fish" row under a card that says "Short
+of fish.", where the base printed the marked "Short of fish. Fish sold daily from the morning catch.". The page then offered
+preserved fish in a town that has none. I had named it as a note when it was a false line my cure added.
+
+**BR24 (the swap for the BOUGHT story only) CANNOT BE DONE CLEANLY IN MY FILES. ITEM 1 IS RETURNED TO THE BASE.** The story
+"bought" is decided at the birth (`resourceGenerator.js :: importsBroughtAtBirth`, in `generateNarratives`), after the
+services are rolled (`economyReconcilePass`). It reads the economy's imports, the house's own chains on the spent ground, the
+catalogue's subsumption and the seed's pick. The roll sees the config and the seed only (`upkeep.seed`). I wrote the closest
+reading the roll can make (`boughtAtBirth` over the config, the spent ground's shortage word and the seed) and measured it
+against the stored story of every record (the auditor's `materialStory`): **14 of the 45 fish towns of the 720 disagree.** 8
+are idle by the record but bought by the roll, among them r2s-recently_betrayed-metropolis-0, one of the four; 6 are bought by
+the record (the economy's own import at town size) but not by the roll. A swap on it would put the unmarked row back in eight
+idle towns and leave six bought towns uncured. So `institutionServices.js` and `serviceRollMaterialization.js` are back to the
+base, byte for byte (`git diff 0cdedd206 -- src/generators` is empty): **NO DECLARED MOVE REMAINS** (0 of the 720, 0 of the
+150, 0 of the 525). The bar4MarkPromise (c) re-key is undone: r2s-plague_onset-thorp-2 holds the IDLE story (the fishery spent,
+no fish brought in), so by BR24 its row stays "Fresh fish retail" with "Short of fish.", as at the base. 11b.fish and
+11b.fishTitle are at their base counts: thirty 13 / 7, the 150 3 / 3, the 720 69 / 51. **C20700 and C36970 are FOUND again**
+(they were clear at 316cdb66c). The four idle towns' dumps are byte-equal to the base, apart from their G1 lines.
+
+**THE HUNK THAT WOULD DO IT, where the story is known (not my files: named, not touched).** In `src/generators/steps/generateNarratives.js`,
+right after `generateResourceAnalysis(…)` has written the birth's imports (or at the end of `resourceGenerator.js ::
+importsBroughtAtBirth`'s caller): where `supplyStory.js :: usedGroundOf(record, 'fish')` names a spent fishery AND the stored
+imports hold its shortage word (`importsHold(record, resourceShortageImport(ground))`: the bought story, as the page reads
+it), replace in `ctx.availableServices` the Fish market's "Fresh fish retail" row with its pool's "Preserved fish" (and the
+Fishmonger's "Fresh fish" with its "Salted fish"), keeping the row's place, its toggle and its roll (no draw). Declared move:
+`availableServices` only; the towns would be about the 25 + 6 "bought-used" fish towns of the 720 (to be measured). The
+`inlandAlternative` field of `src/data/institutionServices.js` already names each pair.
+
+**THE READER'S SMALL POINTS.** The stale comment of `validationOnPage.js` (about line 581: "the worked-out ground is the line
+after it") now says the general line keeps its form for the mark's own reading, and that the printed page has the worked-out
+line in its place. The stale comment of `crisisStoppedRow.js:604` ("a house is short exactly where the Resources tab says
+'No … reaches the …' of it": the tab no longer says so for a worked-out or failed house; the mark's own reading still does)
+is not mine: named. The duplicate `if (id === 'peat_cutter') nouns.add('peat')` is gone: `rowGoodOf(venture.id || id, …)`
+returns "peat" for a peat cutter. Proved: the print strikes the same 130 lines in the same 119 towns of the 720 (all four peat
+cutters among them), and the printed gap lines are byte-equal to 316cdb66c's in all 720 and all 150. The mark's per-house call
+is byte-equal to the base for 1,732 of 1,732 houses; the marks show 0 differences.
+
+**THE COUNTS NOW (tip renders: the base's dumps, with the G1 towns rendered again at the tip).**
+
+| rule | thirty (`--controls`) | the 150 | the 720 |
+|---|---|---|---|
+| G1 / 11g.gapLine | 8 → 0 | 17 → 0 | 129 → 0 |
+| 11b.fish / 11b.fishTitle | 13 / 7, as at base | 3 / 3, as at base | 69 / 51, as at base |
+| LAW 11, all | 54 → 46 | 88 → 71 | 416 → 287 |
+
+No other rule moves; the thirty's CONTROLS block is byte-equal to the base's (the runner exits 0).
+
+**THE GUARD.** The item 1 arm is removed with the cure it held. The five seed loops of section 8 still collect (four now: the
+fish arm's loop went with it). **At the base 0cdedd206: 3 of 6 fail, arm by arm (G1's three); at the tip 6 of 6.**
+
+**THE NET at this tip** (`src/` differs from the base in `validationOnPage.js` only): typecheck:domain:strict 0; typecheck:ratchet
+0; eslint on the changed files 0; tests/architecture 0; the rounds' guards red only on bar6MarksLaw8 (a), as at the base; the 33
+tests that read the gap lines, the marks, the fish rows or the services roll, with my guard: 313 of 313. `tests/lint` BY NAME:
+72 failing at the base and at the tip, the same names (the ledger test's message differs only by the checkout's path). BY
+MESSAGE for `seedLoopTotality.walker.test.js`: one arm red at both, "no NEW bare seed loop anywhere in the test corpus", with
+the same message, base and tip, paths aside (only `tests/pdf/seamPdfReadsTheTabs.test.jsx`: 2 bare loops, lines 93 and 120,
+not mine); "the generation-facing quarantine is EXACT" green at both. The two doors' last lines unchanged. N3: no file under
+`src/generators/` differs from the base.
+

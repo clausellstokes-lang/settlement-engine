@@ -24,7 +24,7 @@ import {
   isMaterializedCustomContent,
   nativeSemanticName,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { birthFactsOf } from '../../domain/facts/factsOf.js'; import { usedGroundOf } from '../../domain/facts/supplyStory.js'; // BAR8-J-ROWS (11b.fish): the fish story at the roll
+import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { drawDeclared } from '../../domain/facts/drawDeclared.js'; import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 
 const CRIMINAL_INSTITUTION_KEYWORDS = Object.freeze([
@@ -234,8 +234,6 @@ export function materializeInstitutionServiceRolls(input) {
     _tradeRoute: config._tradeRoute || '',
     // A-11: the world law's water fact, for a row that names its inland alternative.
     _waterAccess: worldLaw.portKind || '',
-    // BAR8-J-ROWS (11b.fish, the chair's grant): the town's fish grounds used up (bought in or idle), for the same row.
-    _fishUsedUp: usedGroundOf({ config }, 'fish') !== '',
   });
   const filteredInstitutions =
     institutions.filter(worldLaw.allowsInstitution);

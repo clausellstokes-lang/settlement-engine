@@ -103,9 +103,7 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     ['r2r-village-6', 'Drink service', null], // KEEP: ale in a calm village
     ['r2s-famine-town-1', 'Grain storage', 'Scarce in the famine.'], // the granary's reserves in a grain famine
     ['r2r-town-0', 'Grain storage', null], // KEEP: the same in a calm town
-    // RE-KEYED BY IDENTITY (BAR8-J-ROWS item 1, 2026-11-17): every fishery depleted, the catch row is its pool's "Preserved fish";
-    // no town of the 720 or the 150 keeps "Fresh fish retail" on a spent fishery, so the claim stays on this town, by the row's name
-    ['r2s-plague_onset-thorp-2', 'Preserved fish', 'Short of fish.'], // C22221 (FS1): every fishery depleted, whatever the ledger counts
+    ['r2s-plague_onset-thorp-2', 'Fresh fish retail', 'Short of fish.'], // C22221 (FS1): every fishery depleted, whatever the ledger counts
   ];
   test('(c) in each town the row leads with its mark, or prints bare (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(PAIRS, ([seed, name, mark]) => {

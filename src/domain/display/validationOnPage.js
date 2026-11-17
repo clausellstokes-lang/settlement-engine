@@ -542,8 +542,7 @@ export function resourceGapLines(s) {
         lines.push({ chain: null, impact: why, severity });
         if (FAMILY_NOUN[venture.family]) nouns.add(FAMILY_NOUN[venture.family]);
         const own = rowGoodOf(venture.id || id, venture.ground);
-        if (own) nouns.add(own);
-        if (id === 'peat_cutter') nouns.add('peat');
+        if (own) nouns.add(own); // a peat cutter's peat (`rowGoodOf`)
       }
     }
     if (markReadsAlone) nouns.clear(); // the mark's reading: the general line kept, as before (above)
@@ -578,9 +577,9 @@ export function resourceGapLines(s) {
     // quarry depleted)" (45 quarries of the census's 720): the house that is the source of its material
     // (`houseKinds.js :: SOURCE_GROUNDS`), none of whose own grounds is live and one of which the record holds spent, reads
     // that ground, by the Depleted list's own label of it.
-    // The gap line keeps its form ("No stone reaches the stone quarry."): the page's mark reads its good off it
-    // (`crisisStoppedRow.js :: housesShortOfInput`) and the record's detectors its house; the worked-out ground is the
-    // line after it.
+    // The general line keeps its form ("No stone reaches the stone quarry.") for the page's mark, which reads its good off it
+    // (`crisisStoppedRow.js :: housesShortOfInput`, one house alone: `markReadsAlone`, above); on the printed page the
+    // worked-out line stands in its place (BAR8-J-ROWS G1, below).
     // BAR8-J-ROWS (G1, the chair's item; LAW 11's 11g): ONE HOUSE, ONE MATERIAL, ONE LINE. Where the house's own story line
     // follows (worked out on its own spent ground; the failed venture), the general line does not name that material too
     // ("No iron ore reaches the mine." beside "The mine is worked out: …": no ore reaches a mine, the mine digs it). A
