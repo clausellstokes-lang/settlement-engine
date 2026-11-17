@@ -14,20 +14,18 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
 
 ## 0. THE STATE AT 19:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; it REPLACES the 17:04 state; the lines of section 7 written after 19:04 govern where they differ)
 
-**THE LINE.** `lane/join-2026-11-14` stands at f86295196124d1c5f82ee08bb3f1ac0f02d45228 (pushed 21:55 UTC): POINT 33 (the owner's
-supply rule, e0242a12a), 34 AND 35 (BAR8's two audits, ef5fd621e), the record's commit 9378609ba
-(`docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE: rows 33 to 35), POINT 36 (DEBT-2, 2e54c06c2), 37 (LEFT-LINES,
-f1ca75555), 38 (LEFT-PDF, e60d42a20), 39 (LEFT-CHAIN, 3b06c724b), 40 (LEFT-MARKS, f86295196). ALL FOUR LEFT BUILDERS ARE
-ON THE LINE. BUILT ON IT AND IN THEIR WHOLE CHECK: `lane/landing-41-42-2026-11-17`: POINT 41 (LEFT-CHAIN's follow-up
-3f03b847f, the merge 8f392d100f94e1722f178746b9bd97a1cb0dcc89) and POINT 42 (J-ROWS 316cdb66c, the merge
-7d045555a569049008390175cdba5128441f4b64; READ-J-ROWS reading). THE ROWS OF 36 ONWARD ARE NOT WRITTEN YET: one docs commit
-on the line after the last landing commit that is already built (the landing commits must stay fast-forwards). REDS NAMED
-ON THE LINE WITH THEIR CURES IN FLIGHT: `tests/joins/labelJoins` and `tests/build/vendorPdfLazy` ST-2 (LEFT-CHAIN: cured
-at point 41); `tests/components/bar7EconTab` C39519 (LEFT-MARKS's import word "herbs": ruling BR21, its follow-up
-awaited: the next point after 42). THE CHAIR IS THE LINE'S ONLY WRITER: `/home/user/line` (hooks). THE BASELINE FOR
-COMPARISONS BY NAME: point 40's whole check (the three CHECKS seats' branches, `checks/landing-40-f86295196/part-<n>/names.final.txt`:
-162 names joined; `/home/user/wk/p40.all.txt` on the chair's machine). A RED THAT A LANDING WAS TO CURE IS READ BY ITS
-MESSAGE, NOT ONLY BY ITS NAME. `editCorpusRatchet` A5 comes and goes by its watchdog (BR22).
+**THE LINE.** `lane/join-2026-11-14` stands at dfe557dc951e38b0f36e84accc812a1310c802ce (pushed 22:54 UTC): POINTS 33 TO 42 AND THE RECORD
+`docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE (one row a point, 33 to 42: the commit, the trees, what cleared
+it, what it left red by name). In order: 33 the owner's supply rule (e0242a12a) · 34, 35 BAR8's two audits (ef5fd621e) ·
+36 DEBT-2 (2e54c06c2) · 37 LEFT-LINES (f1ca75555) · 38 LEFT-PDF (e60d42a20) · 39 LEFT-CHAIN (3b06c724b) · 40 LEFT-MARKS
+(f86295196) · 41 LEFT-CHAIN's follow-up (8f392d100) · 42 LEFT-MARKS's BR21 follow-up (440bac3da) · the rows' commit
+dfe557dc9. NO LANDING COMMIT IS BUILT ON IT AT THIS HOUR (the next is merged on the line's tip when it is ready; a docs
+commit may follow at once). VOID: 7d045555a and 67887afdc (J-ROWS's first tip and what was built on it). THE CHAIR IS THE
+LINE'S ONLY WRITER: `/home/user/line` (hooks). THE BASELINE FOR COMPARISONS BY NAME: the whole check at 7d045555a minus
+J-ROWS's own red (the three CHECKS seats' branches, `checks/landing-41-42-7d045555a/part-<n>/names.final.txt`: 161 names;
+`/home/user/wk/p42.all.txt`); `tests/components/bar7EconTab` C39519 is cured since (point 42). A RED THAT A LANDING WAS TO
+CURE, AND EVERY WALKER, REGISTER AND ROSTER TEST, IS READ BY ITS MESSAGE, NOT ONLY BY ITS NAME. `editCorpusRatchet` A5 comes
+and goes by its watchdog (BR22).
 
 **THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`; builders and readers of code
 are the middle tier at high effort, the mechanical seats the cheaper tier at low effort).**
@@ -755,3 +753,10 @@ should be paused or archived by the owner's hand.
   the branches `lane/landing-41-42-2026-11-17` and `lane/landing-43-2026-11-17`. NEXT: LEFT-MARKS's BR21 follow-up is
   merged again, directly on point 41, as the new POINT 42 (a targeted net), so that MARKS-2 can be seated; J-ROWS's
   corrected tip becomes a later point after its reader's short second read and a whole check.
+- **22:54 UTC. POINT 41 (22:47) AND POINT 42 WITH THE LINE'S ROWS OF 36 TO 42 (22:54) ARE LANDED: the line at dfe557dc951e38b0f36e84accc812a1310c802ce.**
+  Point 42 is LEFT-MARKS's BR21 follow-up merged directly on 41 (440bac3da: `bar7EconTab`, `leftMarks`, `bar6MarksLaw8`,
+  `birthKindsLaw`, `tests/joins`: 38 files / 453 tests green). SEATED FROM IT (22:54): MARKS-2 session_01FbPLbeazFfxhwTtgQFpxsq
+  (`lane/bar8-marks-2-2026-11-17`; items 1 to 6 of its section and one comment; the early small commit first). J-ROWS: its
+  guard's loops are fixed (22:44, 01a432128); its BR24 tip is awaited; then READ-J-ROWS's short second read, the merge on
+  the line's tip, a whole check, the landing; THEN LEFT-KEYS. SCENES (4efba5868, building BR23) and PDF-2 (455a72534) work on.
+  SECTION 0's "THE LINE" IS REWRITTEN AS OF THIS HOUR.
