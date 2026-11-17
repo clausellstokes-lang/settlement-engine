@@ -1,0 +1,6 @@
+{"id":"C42536","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"LACKS","why":"Wildfowler brings game 'to market'; the page says no market or fair stands in Petenucan (C42437), HOUSES has none","other":"C42437"}
+{"id":"C42794","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"PAIR","why":"Safety rests on 'its unimportance', but C42680 says its ground is worth enough that someone will come for it; PAST holds a siege and an occupation","other":"C42680"}
+{"id":"C43445","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"The needed-and-not-brought-in list names timber twice ('timber, ... timber, mountain timber'): a doubled item","other":""}
+{"id":"C43646","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"Safety rests on 'its unimportance', but the page calls Strathgarth a central trade hub on a strategic crossroads where trade comes in on every road","other":"C43506"}
+{"id":"C43844","town":"bar0-village-calm-rand-44","sev":"MED","kind":"PAIR","why":"Sawyer 'turns back to the logs' at work, but the Sawmill is marked short of timber and no timber reaches it (C43522)","other":"C43249"}
+{"id":"DONE","lines":1713,"blocks":2,"flags":5}
