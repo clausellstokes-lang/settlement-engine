@@ -1,6 +1,6 @@
 # MEASURE-1: eight detectors at L (ed1d43529) and M (L + 8b0506eae, tree 4a9735d2f)
 
-Columns: c1 = L render, L runners; c2 = M render, L runners (what the page changed); c3 = M render, M runners (adds the EX-BOUGHT detector change). Cells are towns/instances. Only rows with a changed count are in the moved lists; the full rows follow. c3 equals c2 on every row at both populations. Populations: 30 and 150 (720 pending).
+Columns: c1 = L render, L runners; c2 = M render, L runners (what the page changed); c3 = M render, M runners (adds the EX-BOUGHT detector change). Cells are towns/instances. Only rows with a changed count are in the moved lists; the full rows follow. c3 equals c2 on every row at all three populations. Populations: 30, 150 and 720 (the 720 is the last section).
 
 ### 30 towns
 
@@ -365,4 +365,337 @@ Columns: c1 = L render, L runners; c2 = M render, L runners (what the page chang
 - `bar0-city-under_siege+famine-rand-32` · World/NPCs · "How they deal Sells by the piece; a commission takes weeks and a deposit."
 - `bar0-city-under_siege+famine-rand-34` · World/NPCs · "How they deal Sells by the piece; a commission takes weeks and a deposit."
 - `bar0-city-under_siege+famine-rand-35` · World/NPCs · "How they deal Sells by the cask and the bottle; the better years cost much more."
+
+
+## The 720 (census seeds.txt; seeds named r2r-*/r2s-*)
+
+### 720 towns
+
+| runner | rule | c1 L/L (towns/inst) | c2 M-render/L-runners | c3 M/M | Δ c1→c2 | Δ c1→c3 |
+|---|---|---|---|---|---|---|
+| run-a | 4n-oldnew | 1/1 | 1/1 | 1/1 | 0 | 0 |
+| run-a | 4r-count:housesCount | 1/1 | 1/1 | 1/1 | 0 | 0 |
+| run-a | 4r-size:quarters | 7/14 | 7/14 | 7/14 | 0 | 0 |
+| run-a | 4r-state:famine | 676/1664 | 676/1664 | 676/1664 | 0 | 0 |
+| run-a | 4r-state:occupation | 317/778 | 317/778 | 317/778 | 0 | 0 |
+| run-a | 4r-state:openTrade | 8/13 | 8/13 | 8/13 | 0 | 0 |
+| run-a | 4r-state:plague | 89/242 | 89/242 | 89/242 | 0 | 0 |
+| run-a | 4r-state:refugees | 74/74 | 74/74 | 74/74 | 0 | 0 |
+| run-a | 4r-state:revolt | 65/138 | 65/138 | 65/138 | 0 | 0 |
+| run-a | 4r-state:siege | 689/1344 | 689/1344 | 689/1344 | 0 | 0 |
+| run-a | 4r-state:succession | 314/513 | 314/513 | 314/513 | 0 | 0 |
+| run-a | 4r-thing:armedForce | 44/47 | 44/47 | 44/47 | 0 | 0 |
+| run-a | 4r-thing:armoury | 1/1 | 1/1 | 1/1 | 0 | 0 |
+| run-a | 4r-thing:bank | 21/22 | 21/22 | 21/22 | 0 | 0 |
+| run-a | 4r-thing:clergy | 127/172 | 127/172 | 127/172 | 0 | 0 |
+| run-a | 4r-thing:garrison | 14/28 | 14/28 | 14/28 | 0 | 0 |
+| run-a | 4r-thing:house: adventurers' charter | 14/14 | 14/14 | 14/14 | 0 | 0 |
+| run-a | 4r-thing:house: alchemist | 10/10 | 10/10 | 10/10 | 0 | 0 |
+| run-a | 4r-thing:house: alehouse | 5/7 | 5/7 | 5/7 | 0 | 0 |
+| run-a | 4r-thing:house: almshouse | 7/7 | 7/7 | 7/7 | 0 | 0 |
+| run-a | 4r-thing:house: apothecary | 14/16 | 14/16 | 14/16 | 0 | 0 |
+| run-a | 4r-thing:house: assay | 4/8 | 4/8 | 4/8 | 0 | 0 |
+| run-a | 4r-thing:house: auction | 70/138 | 70/138 | 70/138 | 0 | 0 |
+| run-a | 4r-thing:house: brewer | 9/11 | 9/11 | 9/11 | 0 | 0 |
+| run-a | 4r-thing:house: butcher | 6/6 | 6/6 | 6/6 | 0 | 0 |
+| run-a | 4r-thing:house: chandler | 51/52 | 51/52 | 51/52 | 0 | 0 |
+| run-a | 4r-thing:house: citadel | 1/1 | 1/1 | 1/1 | 0 | 0 |
+| run-a | 4r-thing:house: cobbler | 41/41 | 41/41 | 41/41 | 0 | 0 |
+| run-a | 4r-thing:house: druid | 132/152 | 132/152 | 132/152 | 0 | 0 |
+| run-a | 4r-thing:house: fishing | 214/868 | 214/874 | 214/874 | 6 | 6 |
+| run-a | 4r-thing:house: fishmonger | 270/997 | 270/997 | 270/997 | 0 | 0 |
+| run-a | 4r-thing:house: gambling | 26/26 | 26/26 | 26/26 | 0 | 0 |
+| run-a | 4r-thing:house: glassmaker | 13/20 | 13/20 | 13/20 | 0 | 0 |
+| run-a | 4r-thing:house: headman | 44/208 | 44/208 | 44/208 | 0 | 0 |
+| run-a | 4r-thing:house: hedge wizard | 2/3 | 2/3 | 2/3 | 0 | 0 |
+| run-a | 4r-thing:house: hired blade | 45/83 | 45/83 | 45/83 | 0 | 0 |
+| run-a | 4r-thing:house: household elder | 55/305 | 55/305 | 55/305 | 0 | 0 |
+| run-a | 4r-thing:house: jeweller | 138/138 | 138/138 | 138/138 | 0 | 0 |
+| run-a | 4r-thing:house: library | 6/12 | 6/12 | 6/12 | 0 | 0 |
+| run-a | 4r-thing:house: lord's steward | 8/8 | 8/8 | 8/8 | 0 | 0 |
+| run-a | 4r-thing:house: mages' guild | 39/39 | 39/39 | 39/39 | 0 | 0 |
+| run-a | 4r-thing:house: metalworker | 9/9 | 9/9 | 9/9 | 0 | 0 |
+| run-a | 4r-thing:house: mine | 37/37 | 39/39 | 39/39 | 2 | 2 |
+| run-a | 4r-thing:house: opera | 34/34 | 34/34 | 34/34 | 0 | 0 |
+| run-a | 4r-thing:house: performer | 171/171 | 171/171 | 171/171 | 0 | 0 |
+| run-a | 4r-thing:house: reeve | 141/704 | 141/704 | 141/704 | 0 | 0 |
+| run-a | 4r-thing:house: river transport | 76/96 | 76/96 | 76/96 | 0 | 0 |
+| run-a | 4r-thing:house: scribe | 30/30 | 30/30 | 30/30 | 0 | 0 |
+| run-a | 4r-thing:house: smuggling | 19/25 | 19/25 | 19/25 | 0 | 0 |
+| run-a | 4r-thing:house: stable master | 174/276 | 174/276 | 174/276 | 0 | 0 |
+| run-a | 4r-thing:house: stone quarry | 125/297 | 125/297 | 125/297 | 0 | 0 |
+| run-a | 4r-thing:house: street gang | 15/15 | 15/15 | 15/15 | 0 | 0 |
+| run-a | 4r-thing:house: tanner | 10/10 | 10/10 | 10/10 | 0 | 0 |
+| run-a | 4r-thing:house: tavern | 69/80 | 69/80 | 69/80 | 0 | 0 |
+| run-a | 4r-thing:house: theater | 36/36 | 36/36 | 36/36 | 0 | 0 |
+| run-a | 4r-thing:house: warehouse | 26/26 | 26/26 | 26/26 | 0 | 0 |
+| run-a | 4r-thing:house: waystation | 17/17 | 17/17 | 17/17 | 0 | 0 |
+| run-a | 4r-thing:house: wizard's tower | 10/10 | 10/10 | 10/10 | 0 | 0 |
+| run-a | 4r-thing:market | 20/20 | 20/20 | 20/20 | 0 | 0 |
+| run-a | 4r-thing:mercenary | 65/96 | 65/96 | 65/96 | 0 | 0 |
+| run-a | 4r-thing:mill | 42/76 | 42/76 | 42/76 | 0 | 0 |
+| run-a | 4r-thing:notary | 11/22 | 11/22 | 11/22 | 0 | 0 |
+| run-a | 4r-thing:practitioner | 12/12 | 12/12 | 12/12 | 0 | 0 |
+| run-a | 4r-thing:prisoner | 36/39 | 36/39 | 36/39 | 0 | 0 |
+| run-a | 4r-thing:religiousHouses | 6/12 | 6/12 | 6/12 | 0 | 0 |
+| run-a | 4r-thing:resource: alpine_pasture | 11/29 | 11/30 | 11/30 | 1 | 1 |
+| run-a | 4r-thing:resource: ancient_grove | 79/151 | 79/151 | 79/151 | 0 | 0 |
+| run-a | 4r-thing:resource: ancient_ruins | 23/46 | 23/46 | 23/46 | 0 | 0 |
+| run-a | 4r-thing:resource: camel_herds | 3/8 | 3/8 | 3/8 | 0 | 0 |
+| run-a | 4r-thing:resource: coal_deposits | 82/151 | 82/154 | 82/154 | 3 | 3 |
+| run-a | 4r-thing:resource: date_palms | 3/12 | 3/12 | 3/12 | 0 | 0 |
+| run-a | 4r-thing:resource: defended_pass | 7/7 | 7/7 | 7/7 | 0 | 0 |
+| run-a | 4r-thing:resource: desert_salt | 3/7 | 3/7 | 3/7 | 0 | 0 |
+| run-a | 4r-thing:resource: fertile_floodplain | 5/11 | 5/11 | 5/11 | 0 | 0 |
+| run-a | 4r-thing:resource: fishing_grounds | 28/78 | 28/84 | 28/84 | 6 | 6 |
+| run-a | 4r-thing:resource: foraging_areas | 80/192 | 80/192 | 80/192 | 0 | 0 |
+| run-a | 4r-thing:resource: gemstone_deposits | 50/73 | 50/73 | 50/73 | 0 | 0 |
+| run-a | 4r-thing:resource: glass_sand | 17/23 | 17/23 | 17/23 | 0 | 0 |
+| run-a | 4r-thing:resource: grain_fields | 49/74 | 49/74 | 49/74 | 0 | 0 |
+| run-a | 4r-thing:resource: grazing_land | 76/110 | 108/147 | 108/147 | 37 | 37 |
+| run-a | 4r-thing:resource: hot_springs_mineral | 29/31 | 29/31 | 29/31 | 0 | 0 |
+| run-a | 4r-thing:resource: hunting_grounds | 149/352 | 149/347 | 149/347 | -5 | -5 |
+| run-a | 4r-thing:resource: iron_deposits | 91/209 | 109/256 | 109/256 | 47 | 47 |
+| run-a | 4r-thing:resource: magical_node | 21/36 | 21/36 | 21/36 | 0 | 0 |
+| run-a | 4r-thing:resource: managed_forest | 54/170 | 128/256 | 128/256 | 86 | 86 |
+| run-a | 4r-thing:resource: marshlands | 55/123 | 70/142 | 70/142 | 19 | 19 |
+| run-a | 4r-thing:resource: mountain_timber | 36/91 | 24/79 | 24/79 | -12 | -12 |
+| run-a | 4r-thing:resource: precious_metals | 118/144 | 118/144 | 118/144 | 0 | 0 |
+| run-a | 4r-thing:resource: river_clay | 4/8 | 4/8 | 4/8 | 0 | 0 |
+| run-a | 4r-thing:resource: river_fish | 28/78 | 28/84 | 28/84 | 6 | 6 |
+| run-a | 4r-thing:resource: salt_flats | 24/71 | 24/73 | 24/73 | 2 | 2 |
+| run-a | 4r-thing:resource: shipbuilding_timber | 25/59 | 25/59 | 25/59 | 0 | 0 |
+| run-a | 4r-thing:resource: stone_quarry | 131/745 | 131/814 | 131/814 | 69 | 69 |
+| run-a | 4r-thing:smith | 3/3 | 3/3 | 3/3 | 0 | 0 |
+| run-a | 4r-thing:temple | 1/1 | 1/1 | 1/1 | 0 | 0 |
+| run-a | 4r-thing:walls | 1/1 | 1/1 | 1/1 | 0 | 0 |
+| run-a | 4r-thing:war | 60/60 | 60/60 | 60/60 | 0 | 0 |
+| runC | L6 | 97/108 | 100/111 | 100/111 | 3 | 3 |
+| runC | L7 | 8/8 | 8/8 | 8/8 | 0 | 0 |
+| runC | 6a-w | 91/102 | 91/102 | 91/102 | 0 | 0 |
+| runC | 6b-denied | 1/1 | 5/5 | 5/5 | 4 | 4 |
+| runC | 6b-w | 5/5 | 4/4 | 4/4 | -1 | -1 |
+| runC | 7w-tone | 8/8 | 8/8 | 8/8 | 0 | 0 |
+| runD | LAW 2/3 rules of this shape (held by the round in flight), for the union | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runD | 8a.input | 2/6 | 7/23 | 7/23 | 17 | 17 |
+| runD | 8a.mild | 1/3 | 1/3 | 1/3 | 0 | 0 |
+| runD | 8b.person | 30/31 | 14/14 | 14/14 | -17 | -17 |
+| runD | 8d.transport | 1/3 | 1/3 | 1/3 | 0 | 0 |
+| runD | 8b.extract | 0/0 | 3/6 | 3/6 | 6 | 6 |
+| runE | 9b.shadow | 23/27 | 23/27 | 23/27 | 0 | 0 |
+| runE | 9f.loyal-contested | 2/2 | 2/2 | 2/2 | 0 | 0 |
+| runF | LAW 10 · | 720/193 | 720/193 | 720/193 | 0 | 0 |
+| runF | 10f-backs-wide | 114/193 | 114/193 | 114/193 | 0 | 0 |
+| runH | 8f.chain | 5/5 | 5/5 | 5/5 | 0 | 0 |
+| runH | 8i.surplus | 4/4 | 4/4 | 4/4 | 0 | 0 |
+| runH | 8k.trade.mild | 6/8 | 6/8 | 6/8 | 0 | 0 |
+| runH | 8f.short | 0/0 | 2/2 | 2/2 | 2 | 2 |
+| runI | 10i.pair-family | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 5x.slash-list | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 6e.founding | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 6e.realm-world | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 6e.war-apart | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 9g.food-soft | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 9g.margin-mild | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 9g.margin-war | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 9h.no-exports-record | 1/1 | 1/1 | 1/1 | 0 | 0 |
+| runI | 9h.no-exports-transit | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | 9i.crews-safe | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | design.outside | 0/0 | 0/0 | 0/0 | 0 | 0 |
+| runI | low.doubled | 0/0 | 0/0 | 0/0 | 0 | 0 |
+
+#### 720: instances of rules that rose (column 2; ≤5 each)
+
+**runC 6b-denied**: 1 -> 5; 4 lines new in the M render
+
+- `r2r-metropolis-45` · Summary/Overview · "The hammering of the forges echoes through all of Chandraganj."
+  - a scene shows forges; the page itself says it is not made or not had
+- `r2r-metropolis-53` · Summary/Overview · "Racks of new ironwork stand outside the workshops, waiting for the carts."
+  - a scene shows new ironwork; the page itself says it is not made or not had
+- `r2r-metropolis-59` · Summary/Overview · "The hammering of the forges echoes through all of Dongcheng."
+  - a scene shows forges; the page itself says it is not made or not had
+- `r2r-metropolis-6` · Summary/Overview · "The hammering of the forges echoes through all of Becanatl."
+  - a scene shows forges; the page itself says it is not made or not had
+
+**runD 8a.input**: 6 -> 23; 17 lines new in the M render
+
+- `r2r-hamlet-27` · Systems/Institutions · "Services · Fresh milk"
+  - the page says livestock is not had (needed); Dairy farmer, whose trade cannot go on without it, carries no mark
+- `r2r-hamlet-27` · Systems/Services · "Fresh milk"
+  - the page says livestock is not had (needed); Dairy farmer, whose trade cannot go on without it, carries no mark
+- `r2r-metropolis-14` · Systems/Institutions · "Services · Barrel making"
+  - the page says timber is not had (needs); Cooper, whose trade cannot go on without it, carries no mark
+- `r2r-metropolis-14` · Systems/Services · "Barrel making"
+  - the page says timber is not had (needs); Cooper, whose trade cannot go on without it, carries no mark
+- `r2r-metropolis-14` · Systems/Institutions · "Services · Lumber milling"
+  - the page says timber is not had (needs); Sawmill, whose trade cannot go on without it, carries no mark
+
+**runD 8b.extract**: 0 -> 6; 6 lines new in the M render
+
+- `r2r-metropolis-57` · Systems/Institutions · "Services · Raw extraction"
+  - every ground Mine works is printed depleted; its extraction is offered with no mark
+- `r2r-metropolis-57` · Systems/Services · "Raw extraction"
+  - every ground Mine works is printed depleted; its extraction is offered with no mark
+- `r2s-infiltrated-metropolis-1` · Systems/Institutions · "Services · Raw extraction"
+  - every ground Mine works is printed depleted; its extraction is offered with no mark
+- `r2s-infiltrated-metropolis-1` · Systems/Services · "Raw extraction"
+  - every ground Mine works is printed depleted; its extraction is offered with no mark
+- `r2s-insurgency-metropolis-3` · Systems/Institutions · "Services · Raw extraction"
+  - every ground Mine works is printed depleted; its extraction is offered with no mark
+
+**runH 8f.short**: 0 -> 2; 2 lines new in the M render
+
+- `r2r-metropolis-24` · Systems/Economics · "Iron & Metalwork Metal is smelted or worked here."
+  - the income row of the iron trade prints bare; every house of that trade on the page (Blacksmiths, Smelter, Specialized metalworkers) carries a mark
+- `r2s-monster_pressure-metropolis-2` · Systems/Economics · "Iron & Metalwork Metal is smelted or worked here."
+  - the income row of the iron trade prints bare; every house of that trade on the page (Blacksmiths, Smelter, Specialized metalworkers) carries a mark
+
+**run-a 4r-thing:resource: managed_forest**: 170 -> 256; 103 lines new in the M render
+
+- `r2r-city-0` · Systems/Resources · "Managed Woodland"
+  - names resource: managed_forest (the register's words); the register's reader says the town lacks it
+- `r2r-city-10` · Systems/Resources · "Managed Woodland"
+  - names resource: managed_forest (the register's words); the register's reader says the town lacks it
+- `r2r-city-17` · Systems/Resources · "Managed Woodland"
+  - names resource: managed_forest (the register's words); the register's reader says the town lacks it
+- `r2r-city-18` · Systems/Resources · "Wild Foraging Areas · Hunting Grounds · Managed Woodland · Stone quarry"
+  - names resource: managed_forest (the register's words); the register's reader says the town lacks it
+- `r2r-city-22` · Systems/Economics · "Clay and raw materials · Cordage, canvas, and vessel-maintenance supplies · Dressed stone (local quarry depleted) · Grapes and must · Incense and votive candles · Luxury materials · Luxury textiles and exotic goods · Paper materials · Raw hides and animal prod"
+  - names resource: managed_forest (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:resource: stone_quarry**: 745 -> 814; 81 lines new in the M render
+
+- `r2r-city-18` · Systems/Resources · "Wild Foraging Areas · Hunting Grounds · Managed Woodland · Stone quarry"
+  - names resource: stone_quarry (the register's words); the register's reader says the town lacks it
+- `r2r-city-21` · Systems/Institutions · "Short of stone. A stone quarry and its dressing yards, worked whenever good stone can be had."
+  - names resource: stone_quarry (the register's words); the register's reader says the town lacks it
+- `r2r-city-21` · Systems/Resources · "Ancient Grove · Wild Foraging Areas · Gemstone Deposits · Stone quarry"
+  - names resource: stone_quarry (the register's words); the register's reader says the town lacks it
+- `r2r-city-21` · Systems/Resources · "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  - names resource: stone_quarry (the register's words); the register's reader says the town lacks it
+- `r2r-city-28` · Systems/Resources · "Stone quarry"
+  - names resource: stone_quarry (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:resource: iron_deposits**: 209 -> 256; 53 lines new in the M render
+
+- `r2r-city-27` · Systems/Resources · "Iron Ore Deposits · Managed Woodland"
+  - names resource: iron_deposits (the register's words); the register's reader says the town lacks it
+- `r2r-city-39` · Systems/Resources · "Date Palms and Orchards · Iron Ore Deposits · Managed Woodland · Salt Flats"
+  - names resource: iron_deposits (the register's words); the register's reader says the town lacks it
+- `r2r-city-39` · Systems/Resources · "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  - names resource: iron_deposits (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-10` · Systems/Resources · "Iron Ore Deposits"
+  - names resource: iron_deposits (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-3` · Systems/Resources · "Iron Ore Deposits"
+  - names resource: iron_deposits (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:resource: grazing_land**: 110 -> 147; 42 lines new in the M render
+
+- `r2r-hamlet-12` · Systems/Resources · "Open Grazing Land"
+  - names resource: grazing_land (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-14` · Systems/Resources · "Open Grazing Land"
+  - names resource: grazing_land (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-19` · Systems/Resources · "Open Grazing Land"
+  - names resource: grazing_land (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-26` · Systems/Resources · "Open Grazing Land"
+  - names resource: grazing_land (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-38` · Systems/Resources · "Open Grazing Land"
+  - names resource: grazing_land (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:resource: marshlands**: 123 -> 142; 22 lines new in the M render
+
+- `r2r-hamlet-15` · Systems/Resources · "Marshlands"
+  - names resource: marshlands (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-39` · Systems/Resources · "Marshlands"
+  - names resource: marshlands (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-49` · Systems/Resources · "The peat cutter is worked out: its own ground is depleted (Marshlands)."
+  - names resource: marshlands (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-52` · Systems/Resources · "Open Grazing Land · Marshlands"
+  - names resource: marshlands (the register's words); the register's reader says the town lacks it
+- `r2r-hamlet-52` · Systems/Resources · "The peat cutter is worked out: its own ground is depleted (Marshlands)."
+  - names resource: marshlands (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:house: fishing**: 868 -> 874; 10 lines new in the M render
+
+- `r2r-hamlet-10` · Systems/Resources · "The fisher's landing is worked out: its own ground is depleted (Fishing grounds)."
+  - names house: fishing (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-45` · Systems/Resources · "Fishing Grounds · Iron Ore Deposits · Magical Ley Line Node · Salt Flats · Coastal Timber"
+  - names house: fishing (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-55` · Systems/Resources · "Fishing Grounds · Salt Flats · Stone quarry"
+  - names house: fishing (the register's words); the register's reader says the town lacks it
+- `r2r-town-52` · Systems/Resources · "Fishing Grounds · Iron Ore Deposits"
+  - names house: fishing (the register's words); the register's reader says the town lacks it
+- `r2r-village-11` · Systems/Resources · "The fisher's landing is worked out: its own ground is depleted (Fishing grounds)."
+  - names house: fishing (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:house: mine**: 37 -> 39; 16 lines new in the M render
+
+- `r2r-city-53` · Systems/Economics · "Amber and beeswax · Beeswax candles · Clay and raw materials · Flax and linen cloth · Grapes and must · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Livestock · Luxury textiles and exotic goods · Medicinal herbs · Preci"
+  - names house: mine (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-33` · Systems/Economics · "Clay and raw materials · Dressed stone (local quarry depleted) · Grain · Grapes and must · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land depleted) · Luxury goods · Medicinal herbs · Paper · Paper materials · Preserved provisio"
+  - names house: mine (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-34` · Systems/Economics · "Bulk raw materials and agricultural goods · Clay and raw materials · Coal and fuel (local seams exhausted) · Gemstones (local gem deposits exhausted) · Grain · Grapes and must · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land de"
+  - names house: mine (the register's words); the register's reader says the town lacks it
+- `r2r-town-15` · Systems/Economics · "Advanced weapons and armour (bulk contract) · Amphora and storage vessels · Bronze armour components · Grain (a little, beside its own harvest) · Incense, ritual oil, and vestment materials · Iron ore (local iron mines exhausted) · Raw hides and animal product"
+  - names house: mine (the register's words); the register's reader says the town lacks it
+- `r2s-famine-metropolis-3` · Systems/Economics · "Dressed stone (local quarry depleted) · Grain · Grapes and must · Iron ore (local iron mines exhausted) · Livestock · Luxury materials · Medicinal herbs · Paper materials · Ritual wood and herbs (ancient grove damaged) · Salt · Timber (local managed woodland c"
+  - names house: mine (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:resource: fishing_grounds**: 78 -> 84; 10 lines new in the M render
+
+- `r2r-hamlet-10` · Systems/Resources · "The fisher's landing is worked out: its own ground is depleted (Fishing grounds)."
+  - names resource: fishing_grounds (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-45` · Systems/Resources · "Fishing Grounds · Iron Ore Deposits · Magical Ley Line Node · Salt Flats · Coastal Timber"
+  - names resource: fishing_grounds (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-55` · Systems/Resources · "Fishing Grounds · Salt Flats · Stone quarry"
+  - names resource: fishing_grounds (the register's words); the register's reader says the town lacks it
+- `r2r-town-52` · Systems/Resources · "Fishing Grounds · Iron Ore Deposits"
+  - names resource: fishing_grounds (the register's words); the register's reader says the town lacks it
+- `r2r-village-11` · Systems/Resources · "The fisher's landing is worked out: its own ground is depleted (Fishing grounds)."
+  - names resource: fishing_grounds (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:resource: coal_deposits**: 151 -> 154; 10 lines new in the M render
+
+- `r2r-city-29` · Systems/Resources · "The mine is worked out: its own ground is depleted (Coal or peat deposits)."
+  - names resource: coal_deposits (the register's words); the register's reader says the town lacks it
+- `r2r-city-56` · Systems/Resources · "Coal or Peat Deposits · Gemstone Deposits · Managed Woodland"
+  - names resource: coal_deposits (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-2` · Systems/Resources · "Coal or Peat Deposits · Extensive Grain Fields · Hunting Grounds · Marshlands · Stone quarry"
+  - names resource: coal_deposits (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-28` · Systems/Resources · "Coal or Peat Deposits · Extensive Grain Fields · Managed Woodland · River Fisheries"
+  - names resource: coal_deposits (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-30` · Systems/Resources · "The mine is worked out: its own ground is depleted (Coal or peat deposits)."
+  - names resource: coal_deposits (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:resource: salt_flats**: 71 -> 73; 8 lines new in the M render
+
+- `r2r-city-39` · Systems/Resources · "Date Palms and Orchards · Iron Ore Deposits · Managed Woodland · Salt Flats"
+  - names resource: salt_flats (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-45` · Systems/Economics · "Arcane reagents and energy (local ley node exhausted) · Clay and raw materials · Grain · Grapes and must · Iron · Luxury materials · Medicinal herbs · Paper · Paper materials · Precious metal veins · Raw hides and animal products · Salt (local salt flats exhau"
+  - names resource: salt_flats (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-45` · Systems/Resources · "Fishing Grounds · Iron Ore Deposits · Magical Ley Line Node · Salt Flats · Coastal Timber"
+  - names resource: salt_flats (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-49` · Systems/Economics · "Arcane reagents and energy (local ley node exhausted) · Clay and raw materials · Grain · Grapes and must · Iron · Luxury materials · Medicinal herbs · Paper materials · Precious metal veins · Raw hides and animal products · Salt (local salt flats exhausted) · "
+  - names resource: salt_flats (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-55` · Systems/Resources · "Fishing Grounds · Salt Flats · Stone quarry"
+  - names resource: salt_flats (the register's words); the register's reader says the town lacks it
+
+**run-a 4r-thing:resource: alpine_pasture**: 29 -> 30; 2 lines new in the M render
+
+- `r2r-hamlet-42` · Systems/Resources · "The shepherd is worked out: its own ground is depleted (Alpine pastures)."
+  - names resource: alpine_pasture (the register's words); the register's reader says the town lacks it
+- `r2r-metropolis-56` · Systems/Resources · "Alpine Pastures · Hunting Grounds · Managed Woodland · Marshlands · Precious Metal Veins · Stone quarry"
+  - names resource: alpine_pasture (the register's words); the register's reader says the town lacks it
+
+**8b.person / 8b.extract** — c1 towns: r2r-city-22, r2r-city-49, r2r-hamlet-14, r2r-metropolis-14, r2r-metropolis-16, r2r-metropolis-44, r2r-metropolis-54, r2r-metropolis-56, r2r-metropolis-9, r2r-town-15, r2r-town-9, r2r-village-16, r2r-village-36, r2r-village-39, r2r-village-47, r2r-village-53, r2s-mass_migration-town-2, r2s-plague_onset-town-1, r2s-politically_fractured-hamlet-1, r2s-politically_fractured-town-2, r2s-recently_betrayed-city-1, r2s-religious_conversion-hamlet-1, r2s-religious_conversion-metropolis-1, r2s-religious_conversion-town-2, r2s-religious_conversion-village-0, r2s-slave_revolt-city-1, r2s-under_siege-city-0, r2s-under_siege-metropolis-1, r2s-under_siege-metropolis-2, r2s-under_siege-metropolis-3
+
+ c2 towns: r2r-city-49, r2r-metropolis-44, r2r-metropolis-54, r2r-metropolis-56, r2r-metropolis-57, r2r-metropolis-9, r2r-town-9, r2r-village-24, r2r-village-47, r2s-infiltrated-metropolis-1, r2s-mass_migration-town-2, r2s-occupied-metropolis-3, r2s-politically_fractured-town-2, r2s-religious_conversion-town-2
+
+ 8b.extract rows: c1 0, c2 6
+
+8b.person lines that left (examples): 
+- `r2r-city-22` · World/NPCs · "How they deal Sells by the sack and the cart; the price goes up before winter."
+- `r2r-hamlet-14` · World/NPCs · "How they deal Sells milk, butter and cheese at the posted price, when the cows are giving."
+- `r2r-metropolis-14` · World/NPCs · "How they deal Sells by the piece; a commission takes weeks and a deposit."
+- `r2r-metropolis-14` · World/NPCs · "How they deal Sells by the cask and the bottle; the better years cost much more."
 
