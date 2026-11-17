@@ -1,0 +1,7 @@
+{"id":"C33166","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"STATE","why":"'nobody looks hungry' in calm-times scene; FOOD word is Pressured (deficit 1%, imports cover 24%)","other":"C33181"}
+{"id":"C33342","town":"bar0-town-calm-rand-42","sev":"MED","kind":"STATE","why":"'One importer brings in all the grain, quadrupled price': FOOD has grain grown 74% locally, imports only 24%; no monopoly tension in header","other":"C33181"}
+{"id":"C33921","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"PAIR","why":"alchemy trade 'draws customers from surrounding settlements' while the only alchemist's shop is marked Short/Impaired, lacking herbs","other":"C33357"}
+{"id":"C33923","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"PAIR","why":"'Faith carries real weight; what religious houses say is heard' vs clergy 'operate at the margins of civic life', leverage limited","other":"C34117"}
+{"id":"C34341","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"'Promises help easily, and is hard to find': subject and verb do not agree; a slot reads wrong","other":""}
+{"id":"C35037","town":"bar0-town-calm-rand-42","sev":"LOW","kind":"STATE","why":"'Berenger Wolf brings the votes': PEOPLE gives him no seat on any power (in no power), so he has no votes to bring","other":""}
+{"id":"DONE","lines":2056,"blocks":1,"flags":6}
