@@ -58,7 +58,8 @@ auditor names, by seats with disjoint files.
 | K-WATCH | 13a (the service line), 13e, 15d | `src/generators/servicesGenerator.js`, `src/generators/safetyProfile.js`, `src/domain/display/defenseDisplay.js` | from K's tip |
 | J-ROWS | 11b.fish (services and cards), 11b.fishTitle, 11e.offer (the cards); G1 (the general gap line) | `src/generators/services/institutionServices.js`, `src/data/institutionDescVariants.js`, `src/domain/display/validationOnPage.js` (`resourceGapLines` only) | from J's tip |
 | SCENES | K's 12b, 12c, 15a; J's 11b (the scenes), 11e.stalls | `src/domain/facts/tradeAtWork.js`, `src/data/arrivalProse.js`, `src/generators/narrativeText.js` | from the working line's tip once it holds both audits (its prompt names it) |
-| J-INCOME | 11b (the rites income line), 11a.imported, 11e.offer (the livestock chips and the need list's half), K's 15c (the chain's outputs) | `src/generators/economy/incomeLineSiblings.js`, `src/domain/display/tradeListDisplay.js` | after LEFT-CHAIN lands |
+| J-INCOME | 11b (the rites income line), 11a.imported, 11e.offer (the livestock chips and the need list's half), K's 15c (the chain's outputs); AND THE LEAF OF THE ORDINARY INCOME LINES (its item 1) | `src/generators/economy/incomeLineSiblings.js`, `src/domain/display/tradeListDisplay.js`, the NEW leaf `src/domain/display/incomeOrdinaryLines.js` | after the first batch lands (LEFT-CHAIN in it), from the line's tip |
+| PDF-2 | the printed export's second pass: BR10 (3) at the PDF's two chain sections; the income share's ordinary line and L7's twin; the proven grounds; the head line (LEFT-MARKS's M3) | `src/pdf/sections/SupplyChainFlow.jsx`, `Services.jsx`, `EconomicsTrade.jsx`, `ResourcesProduction.jsx`, the PDF's Institutions section if the head line prints there, `src/pdf/lib/crisisMarksOnPage.js`, `src/pdf/lib/viewModelBodySlices.js`, `src/foundry/journalPages.js`; a COPY of J-INCOME's leaf (its item 4) | after the first batch lands (LEFT-PDF and LEFT-CHAIN in it), from the line's tip; item 4's last hunk after LEFT-MARKS lands |
 | MARKS-2 | K's 12a, 12f; J's 11e.siegeBought, 11a.atWork, 11d (ruling BR16), the roots' gapImportedNoImport | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/display/dossierViewModel.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/warIronHook.js`, `src/generators/resourceGenerator.js` | after LEFT-MARKS lands |
 | DESKS-ECO | K's 12d, 15e; J's 11c.needed, 11c.venture, 11c.idle, the fishmonger; LEFT-LINES's leftovers on these desks (the brewer's secret; DS-GEN-3 Import-Dependent) | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (THE ECONOMY AND THE GENERAL DESKS' SECTIONS ONLY) and the generated `economy.generated.js`, `general.generated.js` (ruling AX1), `src/data/people/titleSecretsPresentations.js`, `src/domain/facts/factVocabulary.js` (the atoms given by name, line by line) | after LEFT-LINES lands, from the line's tip |
 | DESKS-DEF | K's 12e, 13a (the desk line), 13d, 13f, 14c, 15c (the desk's half); LEFT-LINES's leftovers on these desks (L9's two lines, the granary's v2 and v3) | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (THE DEFENSE AND THE POWER DESKS' SECTIONS ONLY) and the generated `defense.generated.js`, `power.generated.js` (ruling AX1), `tests/lint/factLayers.poolTable.json` (two pools, by name), `src/domain/facts/factVocabulary.js` (the atoms given by name, line by line) | after LEFT-LINES lands, from the line's tip |
@@ -362,3 +363,81 @@ Rulings in force for you: BR14 (c) (the atom of 12e), BR15 (14c's twin).
 
 MEASURE (R4) with `runK.mjs` (12e, 13a, 13d, 13f, 14c, 15c), the static audit LEFT-LINES used for L9 (`staticI`:
 its hand-back names it), and the diff of every dump (above). YOUR GUARD: `tests/domain/bar8DesksDef.test.js`.
+
+## J-INCOME · the income lines and the need list read the supply story (written 20:04 UTC on 2026-11-17; seated when the first batch has landed; base: the line's tip your prompt names)
+
+Your auditor is seat J (its hand-back's rows and paragraphs for 11a, 11b and 11e; section 3's "WHAT SHOULD NOT BE DONE"),
+and seat K for 15c. Rulings in force for you: none new. LEFT-CHAIN landed just before you in two of your files: read its
+hand-back's sections 1 and 3 (`docs/chair/2026-11-17/left/LEFT-CHAIN-HANDBACK.md`: what `chainOutputsShown`,
+`incomeDescShown` and the new twin read now).
+
+1. **THE LEAF, FIRST, IN A COMMIT OF ITS OWN, PUSHED AT ONCE (another seat waits for it).** The trade's ORDINARY income
+   lines (`incomeLineSiblings.js :: ordinaryIncomeLineOf` and the tables it reads, LEFT-CHAIN's twin among them) live
+   under `src/generators/`, which `src/pdf` may not import (the layer law, `tests/architecture`): so the PDF prints the
+   stored short twin in 94 towns where the tab prints the ordinary line. MOVE `ordinaryIncomeLineOf` and exactly what it
+   needs into a NEW import-free leaf `src/domain/display/incomeOrdinaryLines.js`; `incomeLineSiblings.js` imports it from
+   there and re-exports it under the same name, so that no other importer changes. NO LINE'S TEXT MOVES, NO BEHAVIOUR
+   CHANGES: prove it (the stored records byte-equal over the thirty, the 150 and the 720; the Economics tab's income
+   rows equal over the 720; every pool registry and test that reads `INCOME_STATE_SIBLINGS` reads what it read). Push
+   that commit ALONE and message the chair its hash in one line; then go on.
+2. **11b · the rites income line under a bought-in fish story** (21 instances in the 720). `incomeLineSiblings.js ::
+   trueIncomeDesc` (its `case FISH_EXPORT_LINE`) returns `FISH_RITES_LINE` where the record's rites hold a chain,
+   BEFORE it asks whether the salted fish is bought in; the Magic tab prints no fishing. The fish story is asked first
+   (`supplyStory.js :: sourceStoryOf` with the stored import: READ); the twin `FISH_BOUGHT_LINE` exists. To zero: 21.
+3. **11a.imported · the need list names a good a gap row says is bought in** (5: four are the smelter's "iron ore" under
+   a siege, one the fishmonger's fish). `tradeListDisplay.js :: importsAsPrinted().needed` reads its own matcher
+   (`needMetBy` over `arriving`), never the one reader of an input that wrote the gap row "<house> runs on imported X".
+   THE CURE AT ONE FACT: the need list drops a need that a gap row of kind `imported` answers; it reads the gap rows
+   (the source `crisisStoppedRow.js :: housesOnImportedInput` reads: READ that leaf, do not change it), never a second
+   matcher. To zero: 5. (11a.atWork, the houses printed bare beside a need, is MARKS-2's.)
+4. **11e.offer, the need list's half** (the livestock auctions and management beside "livestock" needed: 6; the
+   luxuries a fair or a quarter carries in: the cards are J-ROWS's). The leaf already holds a carrier table for the
+   chain card (`CARRIED_GOOD_ROWS`); the need list does not read it. A good a house on the page carries in or deals in
+   is not "needed, and not brought in". EXCEPT r2r-hamlet-27 (the shepherd's "Livestock management" beside the failed
+   venture of livestock): a supply-story fault of its own: name what you find there, do not hide the need. To zero: the
+   need list's half (say the count).
+5. **15c (K) · the chain card's outputs beside a desk line that is true.** "Adventuring & Escort ... Via Veteran's lodge
+   / Outputs ... Monster hunting services" where the lodge's own card offers Armed escort only (2 towns).
+   `tradeListDisplay.js :: chainOutputsShown` prints an output no house on the card offers: the card's outputs are the
+   ones a listed house bears out (LEFT-CHAIN's L5 restored the outputs a bare maker bears out: the same reading, the
+   other way). To zero: 2.
+
+MEASURE (R4) with `runJ.mjs` (11a, 11b, 11e) and `runK.mjs` (15c) over the thirty (`--controls`), the 150 and the 720.
+`incomeLineSiblings.js` is under `src/generators/`: N3 and R5 bind you. YOUR GUARD: `tests/generators/bar8Income.test.js`.
+
+## PDF-2 · the printed export and the journal read what the tabs read, second pass (written 20:04 UTC; seated when the first batch has landed; base: the line's tip your prompt names)
+
+LEFT-PDF landed just before you: read its hand-back (`docs/chair/2026-11-17/left/LEFT-PDF-HANDBACK.md`: "THE ROWS",
+"LEFT BY NAME", and how its probe reads the PDF's text leaves and the journal's pages against the tab's own reading:
+YOU MEASURE THE SAME WAY, and its guard `tests/pdf/leftPdfReadsTheTabs.test.jsx` is the form of yours). No auditor's
+runner reads the PDF: your measure is that probe over the thirty, the 150 and the 720, before and after.
+
+1. **Ruling BR10 (3) (amended) in the PDF.** LEFT-CHAIN's `chainHouses.js :: chainHousesOf(patterns, instNames, onCard)`
+   leaves a source house off a spent-ground card where that house's own grounds hold the card's spent ground and it is
+   at work elsewhere (the seventeen mines). The PDF's two chain sections call it WITHOUT the card
+   (`SupplyChainFlow.jsx`, about line 82; `Services.jsx`, about line 229): each passes `{ chain, town }` (both are in
+   scope). To zero: the PDF cards that list such a house (count them: the tab's count at the base was 18 cards of the
+   720).
+2. **The proven grounds.** `ResourcesProduction.jsx` prints the view model's `nearbyProven` (LEFT-PDF built the field;
+   134 towns of the 720 hold a proven ground the PDF's chapter does not print), in the words the journal's row uses.
+3. **The head line over no short row** (LEFT-MARKS's M3; it lands after you are seated: THIS ITEM'S HUNK WAITS FOR THE
+   CHAIR'S MESSAGE that LEFT-MARKS is on the line, then you read `ordinaryTimesLine` at the line's tip by `git show`,
+   not by a merge). `src/pdf/lib/crisisMarksOnPage.js :: ordinaryTimesOnPage` hands a boolean, so the PDF prints "A row
+   marked short is what its house makes when supplied." in nine towns of the 720 where no row is marked short: it
+   hands the rows' short readings, as the tabs do. If LEFT-MARKS has not landed when the rest is done, LEAVE THIS ITEM
+   BY NAME with the hunk you would make.
+4. **The income share's ordinary line, and L7's twin** (94 towns of the 720, 19 of the 180: the PDF prints the stored
+   short twin "Little metal is worked here while the metal trade is short of what it needs." where the tab prints
+   the trade's ordinary line). The tab's reading is `economicsCrisisMarks.js :: incomeDescShown(settlement, share,
+   ordinaryIncomeLineOf)`. The seat J-INCOME moves `ordinaryIncomeLineOf` into the leaf
+   `src/domain/display/incomeOrdinaryLines.js` in its FIRST commit; the chair messages you that commit's hash. THEN:
+   `git fetch origin lane/bar8-j-income-2026-11-17` and `git checkout <that hash> -- src/domain/display/incomeOrdinaryLines.js`
+   (THE FILE, BYTE FOR BYTE, committed in your branch as "the leaf, copied from J-INCOME's <hash>": two seats adding
+   one identical file merge cleanly; you do NOT touch `incomeLineSiblings.js`), and `EconomicsTrade.jsx` reads
+   `incomeDescShown` with the leaf's `ordinaryIncomeLineOf` (LEFT-PDF's retracted hunk afb259a34 is the form). The
+   journal's share takes the same reading if it prints the line. DO THIS ITEM LAST; if the hash has not come when the
+   rest is done, message the chair and end your turn.
+
+THE LAYER LAW HOLDS (`npx vitest run tests/architecture`: `src/pdf` imports nothing under `src/generators`). N4: the
+shared page prints what the owner's prints. YOUR GUARD: `tests/pdf/pdf2ReadsTheTabs.test.jsx`. EVERY NEW OR CHANGED
+LINE A READER SEES IN THE PDF OR THE JOURNAL is listed with three towns.
