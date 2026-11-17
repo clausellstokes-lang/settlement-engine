@@ -3,7 +3,8 @@
  * MATERIAL HAS IT BROUGHT IN; A HOUSE THAT IS THE SOURCE OF ITS MATERIAL IS ANSWERED ONLY BY ITS GROUND.
  *
  * THE LAW (arm 1): in a town with no crisis and a connected road, no house of kind (i) (`houseKinds.js :: BUYS_AND_WORKS`)
- * is marked short (`houseInputAtHand.js :: housesShortOf`, the one fact every mark reads); none of kind (ii)
+ * is marked short (`houseInputAtHand.js :: housesShortOf`, the one fact, and the page's mark, which must agree with it
+ * house for house: `crisisStoppedRow.js :: housesShortOfInput` reads the gap line's head); none of kind (ii)
  * (`SOURCE_GROUNDS`) is, but on a spent ground of its own (a true mark: the record's Depleted list names it) or as a
  * COUNTED EXCEPTION below. AND (arm 2): no import word is written under a siege or on an isolated route, and none twice.
  *
@@ -26,6 +27,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { housesOnSpentGround, housesShortOf } from '../../src/domain/facts/houseInputAtHand.js';
+import { housesShortOfInput } from '../../src/domain/display/crisisStoppedRow.js';
 import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, SOURCE_GROUNDS, isSourceHouse } from '../../src/domain/facts/houseKinds.js';
 import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
 import { hasTradeRouteConnection } from '../../src/domain/tradeRouteSemantics.js';
@@ -133,6 +135,9 @@ describe('BIRTH-1: a house that buys its material has it brought in; a source ho
       if (!calmConnected(s)) return;
       read++;
       found.push(...lawInstances(seed, s));
+      // the page's mark reads the gap line's own words (`crisisStoppedRow.js :: housesShortOfInput`): it marks what the one
+      // fact marks, house for house (the worked-out line keeps the head the mark reads)
+      expect([...housesShortOfInput(s).keys()].sort(), `${seed}: the page's mark is the fact's`).toEqual([...housesShortOf(s).keys()].sort());
     });
     expectNoSeedFailures(failures, 'every calm town is born and read');
     expect(read, 'the calm towns on a connected road read (225 of the 720 and 64 of the 150 at 4c3a3c03b)').toBe(289);

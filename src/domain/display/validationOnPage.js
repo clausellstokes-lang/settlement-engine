@@ -41,7 +41,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { catalogIdForName, familyOfInstitution, institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
-import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, housesShortOf, tradeFinisherIn } from '../facts/houseInputAtHand.js';
+import { CHAIN_INPUTS, chainsOfHouse, houseInputAtHand, tradeFinisherIn } from '../facts/houseInputAtHand.js';
 import { SOURCE_GROUNDS, isSourceHouse } from '../facts/houseKinds.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
@@ -116,9 +116,6 @@ function houseWords(inst) {
   const name = str(institutionDisplayName(inst) || inst?.name).replace(/^access to (?:an? )?/i, '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
   return `the ${name.charAt(0).toLowerCase()}${name.slice(1)}`;
 }
-
-/** @param {string} x @returns {string} */
-const capFirst = (x) => x.charAt(0).toUpperCase() + x.slice(1);
 
 /**
  * BIRTH-1 (R4): the ground of a house that is the source of its material and none of whose own grounds is live: the label
@@ -501,19 +498,17 @@ export function resourceGapLines(s) {
     // GROUND IS WORKED OUT. "No stone reaches the stone quarry." said the stone was elsewhere beside "Dressed stone (local
     // quarry depleted)" (45 quarries of the census's 720): the house that is the source of its material
     // (`houseKinds.js :: SOURCE_GROUNDS`), none of whose own grounds is live and one of which the record holds spent, reads
-    // that ground, in the words the mark ("Short of stone.", `housesShortOf`) and the Depleted list (the ground's label) use.
+    // that ground, by the Depleted list's own label of it.
     // AND (item 6, the page read after the birth's import): a source house with no ground of its own says so, not that its
     // material does not "reach" it: the birth brings timber in for the cooper beside "No timber reaches the charcoal
     // burner." (48 towns of the census's 720), and an import feeds a buyer, never the work on the ground.
+    // The line keeps its head ("No stone reaches the stone quarry"): the page's mark reads the good off it
+    // (`crisisStoppedRow.js :: housesShortOfInput`), and the mark's good is the gap's.
     const ground = sourceGround(s, inst);
-    if (ground !== null) {
-      const short = housesShortOf(s).get(name) || orList(nouns);
-      push({ chain: null, impact: ground
-        ? `${capFirst(houseWords(inst))} is short of ${short}: its own ground is depleted (${ground}).`
-        : `${capFirst(houseWords(inst))} is short of ${short}: no ground of its own lies near.`, severity: str(g.severity) || 'high' });
-      continue;
-    }
-    push({ chain: null, impact: `No ${orList(nouns)} ${plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
+    const head = `No ${orList(nouns)} ${plural ? 'reach' : 'reaches'} ${houseWords(inst)}`;
+    push({ chain: null, impact: ground === null ? `${head}.`
+      : ground ? `${head} from its own ground: the ground is depleted (${ground}).`
+        : `${head} from a ground of its own: none lies near.`, severity: str(g.severity) || 'high' });
   }
   return out;
 }
