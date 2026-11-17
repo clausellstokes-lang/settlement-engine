@@ -196,7 +196,7 @@ is from the new births `*s-720/150/ref`, read by `probes/b2-all.sh` and `probes/
 - "EXHAUSTED" PAIRS WITH THE FINISHED GOOD NOW BROUGHT IN, ONLY WHERE A ROUTE IS OPEN; on an isolated route, no import.
 - EVERY SOURCE HOUSE WORKS ITS OWN GROUND: an import never lifts its mark (the prototype reads the seven barren kinds as
   `SPENT_GROUND_WORKERS` do). Without this the peat cutter, the charcoal burner and the dairy were fed by their own
-  ground's shortage import (c1 below: 44 towns of the 720 before the change).
+  ground's shortage import (c1 below: 44 towns of the 720 before the change; 38 at the base today).
 
 ### (b) THE PAIRS: kind · cause · route · the import line · the card's mark (the mixed rule of 7; share 1 for the two removed kinds)
 
@@ -223,7 +223,8 @@ charcoal burner's finished good is "Charcoal and fuel" (exists, `UPSTREAM_IMPORT
 
 | share | c1 an import feeds a house the page calls exhausted | c2 an export or Produced-locally pill names its good | c3 "Needed, and not brought in" names a material the imports list names | kept houses in besieged towns |
 |---|---|---|---|---|
-| BIRTH-1 alone, today's kinds (before "every source house works its ground") | 44 · — (peat 13, charcoal 27, salt 6: their own shortage import lifts the mark) | 0 | 0 | — |
+| the base today | 38 · 0 (charcoal 27, mine 10, salt 3, shepherd 1) | 0 | 0 | — |
+| the mixed rule before "every source house works its ground" (the first prototype) | 44 · — (charcoal 27, peat 13, salt 6) | 0 | 0 | — |
 | 0 | 1 · 0 | 0 · 0 | 0 · 0 | 0 |
 | 1/5 | 2 · 1 | 0 · 0 | 0 · 0 | 1 |
 | 1/3 | 4 · 2 | 0 · 0 | 0 · 0 | 3 |
