@@ -218,6 +218,11 @@ describe('the facts the cure made', () => {
     expect(tradeAtWorkOf({ institutions: [{ name: 'Tanners' }], economicState: { primaryImports: ['Hides'] } }, 'leather')).toBe(true);
     expect(tradeAtWorkOf({ institutions: [{ name: 'Saddler' }] }, 'leather')).toBe(false); // a saddler sews leather; it tans none
     expect(tradeAtWorkOf({ institutions: [{ name: 'Saddler' }], economicState: { primaryExports: ['Tanned leather'] } }, 'leather')).toBe(true);
+    // a smelter makes the iron and works none: it answers no forge line (r2r-metropolis-20's "The hammering of the forges" beside
+    // Blacksmiths and Specialized metalworkers "Short of iron." and a Smelter alone not short)
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Smelter' }], economicState: { primaryImports: ['Iron ore'] } }, 'ironwork')).toBe(false);
+    expect(tradeAtWorkOf({ institutions: [{ name: 'Smelter' }, { name: 'Blacksmith' }], economicState: { primaryImports: ['Iron'] } }, 'ironwork')).toBe(true);
+    expect(GOOD_TRADES.ironwork.houses).not.toContain('smelter');
     const cloth = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'cloth')).institutions;
     expect([...CLOTH_KINDS.cloth, ...CLOTH_KINDS['dyed cloth']].sort()).toEqual(cloth.filter((/** @type {string} */ w) => !['tailor', 'clothier', 'draper'].includes(w)).sort());
     const tanners = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'tanners')).institutions;

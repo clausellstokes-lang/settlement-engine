@@ -79,8 +79,11 @@ export const GOOD_TRADES = Object.freeze({
   cloth: Object.freeze({ houses: Object.freeze(['weaver', 'weavers', 'textile', 'fuller']), listed: /\b(cloth|textiles?|linen|silk)\b/i }),
   // SEAM-SCENES (item 9, 2026-11-17): the dye vats and cloth dyed: a dyer's house (the cloth trade's other kind, `CLOTH_KINDS`)
   'dyed cloth': Object.freeze({ houses: Object.freeze(['dyer']) }),
-  // the ironwork at the forge: a smith's house with its iron (the mark "Short of iron." is the page's own)
-  ironwork: Object.freeze({ houses: Object.freeze(['blacksmith', 'smith', 'smelter', 'foundry', 'armourer', 'armorer', 'weaponsmith', 'bladesmith', 'metalworker', 'specialized metalworker']) }),
+  // the ironwork at the forge: a smith's house with its iron (the mark "Short of iron." is the page's own). SEAM-SCENES (item 3,
+  // 2026-11-17): a smelter MAKES the iron, it does not work it: "The hammering of the forges echoes through all of Anba." printed
+  // where the Blacksmiths and the Specialized metalworkers were both "Short of iron." and only the Smelter was not (r2r-metropolis-20,
+  // r2s-famine-city-3, r2s-insurgency-city-1 of the 720); the smith's own atom (`institution: smith`) does not count a smelter either
+  ironwork: Object.freeze({ houses: Object.freeze(['blacksmith', 'smith', 'foundry', 'armourer', 'armorer', 'weaponsmith', 'bladesmith', 'metalworker', 'specialized metalworker']) }),
   // drying herbs: a house that dries or doses them, or herbs gathered, made or sold
   herbs: Object.freeze({ houses: Object.freeze(['apothecary', 'herbalist', 'physician', 'healer']), listed: /\b(herbs?|herbal|medicinal|remed\w*)\b/i }),
   // spice in sacks and on the stalls: a spice house, spice made or sold, or spice brought in while the road is open
