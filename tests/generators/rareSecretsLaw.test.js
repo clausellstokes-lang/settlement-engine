@@ -379,7 +379,7 @@ describe('SECRETS-1: the deal over seeds (planted)', () => {
 
 // ── THE BORN SAMPLE: NO DRAW TAKEN ─────────────────────────────────────────────────────────────────────────────────
 // Census seeds (CENSUS-3 seedcfg.mjs's r2r- arm) whose birth deals a rare secret at the tip (measured over the 720).
-const BORN_DEALT = ['r2r-metropolis-1'];
+const BORN_DEALT = ['r2r-metropolis-1', 'r2r-hamlet-36', 'r2r-thorp-35']; // a tie; a hidden master (masterSmith); an outsider (dragonHiding)
 describe('SECRETS-1: with the deal off, a birth is identical but for the dealt cards\' secrets (no draw taken)', () => {
   it('a handful of births', async () => {
     const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
