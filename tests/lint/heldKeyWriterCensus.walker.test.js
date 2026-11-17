@@ -295,8 +295,15 @@ function liveStepRows() {
 // already had. The writer-step count is unmoved at 12: both retiring steps still write `npcs`.
 // ALLEGIANCE-CAR1 (2026-11-08): 14 -> 13, `corruptionPass|npcs|mutates` RETIRED with the step (J-2): the allegiance
 // is dealt at the coherence seam, inside assembleSettlement (whose row names `npcs` through generateCoherence), measured.
+// DEBT-2 · D2 (2026-11-17): 13 -> 14, `assembleSettlement|npcs|mutates` (point 33: the step declares the write it already made; measured, the row's note).
 const STEP_ROSTER = Object.freeze([
   'assembleInstitutions|institutions|provides',
+  'assembleSettlement|npcs|mutates', // 2026-11-17 DEBT-2 · D2 (point 33, BIRTH-3 8b0506eae declared it): the seam's rankPowers yields a
+  // card's temperament to its secret in place (data/npcData.js :: temperamentYieldsToSecret), already at the line's ed1d43529 undeclared
+  // (strict probe, onStrictViolation: `assembleSettlement[npcs]` on 2 of 526 configs, the golden 525 + contract-metropolis-plains-crossroads).
+  // UNDER A HELD ROSTER (pins npcs + relationships, rosterFinalUnderHeldRoster's form) the write fires on 0 of 526 and the held roster is
+  // byte-identical in ctx and on the record on all 526, at ed1d43529 and at e0242a12a: no held roster is rewritten. Measured; counts unmoved
+  // (11 writer steps: assembleSettlement already wrote; 22 steps).
   'assembleSettlement|powerStructure|mutates',
   'assembleSettlement|relationships|mutates', // 2026-11-07 PEOPLE-1 CAST: the coherence seam appends the `other` mints' ties (people/castPowers.js)
   'cascadePass|institutions|mutates',
