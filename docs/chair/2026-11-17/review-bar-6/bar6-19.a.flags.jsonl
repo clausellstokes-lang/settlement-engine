@@ -1,0 +1,12 @@
+{"id":"C42863","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"mark 'Short of livestock.' set before a sentence it does not belong to under 'How they deal'; the line reads wrong","other":""}
+{"id":"C42864","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"PAIR","why":"Dairy farmer shown selling milk, butter and cheese at the posted price though the house is marked short of livestock (gap: lacks livestock)","other":"C42521"}
+{"id":"C42886","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"BROKEN","why":"mark 'Short of wool.' set before 'Talks about who is weaving what': the line reads wrong; same pattern the brief names","other":""}
+{"id":"C43232","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"Cobbler card says 'the work never dries up' straight after marking the house short of hides (nothing to work)","other":"C43231"}
+{"id":"C43445","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"list 'Needed, and not brought in' prints timber twice (and again as 'mountain timber'): doubled item","other":""}
+{"id":"C43512","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"says the iron workers' hands are idle, while the Economics tab says nobody here is waiting for work","other":"C43422"}
+{"id":"C42786","town":"bar0-village-calm-rand-43","sev":"LOW","kind":"PAIR","why":"'Locals watch over the main paths' beside the page's own 'There is no watch.' (DEFENCE watch: none)","other":"C42763"}
+{"id":"C43638","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"'Locals watch over the main paths' beside 'There is no watch here.' (DEFENCE watch: none)","other":"C43616"}
+{"id":"C43671","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"STATE","why":"Religious acceptance 'hostile' names no target, in a village ruled by Priestly Guidance whose seat holder is a druid","other":""}
+{"id":"C43721","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"Tanner shown naming the price for a hide, while the Tannery is marked short of its materials and lacks hides and livestock","other":"C43255"}
+{"id":"C43844","town":"bar0-village-calm-rand-44","sev":"LOW","kind":"PAIR","why":"Sawyer shown shouting over the noise and turning back to the logs, while the Sawmill is marked short of timber (no timber reaches it)","other":"C43249"}
+{"id":"DONE","lines":1713,"blocks":2,"flags":11}
