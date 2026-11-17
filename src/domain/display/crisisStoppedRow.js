@@ -79,6 +79,7 @@ import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { houseDependenceOf, SURPLUS_HOUSES } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table; LEFT-MARKS item 4: the houses of a surplus
 import { foodRowShown } from './foodRowShown.js'; // LEFT-MARKS item 4: the page's food line, as the Economics tab prints it
 import { carriersOf } from './foodCarrier.js';
+import { hasTradeRouteConnection } from '../tradeRouteSemantics.js'; // LEFT-MARKS item 4: BIRTH-1's calm road
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import { serviceRowsOf } from '../dossier/entityLinks.js';
@@ -642,8 +643,10 @@ export function housesShortOfInput(settlement) {
   // LEFT-MARKS item 4 (L16, rule 8i.surplus; the auditor's cure): A HOUSE THAT WORKS ONLY A SURPLUS (`SURPLUS_HOUSES`: the
   // maltster, "Requires grain surplus.") is short where the page's food line is short ("Short: N lbs/day", the Economics
   // tab's row: `foodRowShown` with the carriers the tab reads), in a crisis or not: "Short of grain.". Read off the public
-  // fields the shared page keeps (the food record, the route, the roster: N4); the gate is `rowShortOf`'s (its INPUT)
-  if (foodLineShort(settlement)) for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
+  // fields the shared page keeps (the food record, the route, the roster: N4); the gate is `rowShortOf`'s (its INPUT). NOT IN
+  // A CALM TOWN ON A CONNECTED ROAD: there BIRTH-1's law holds a buyer (the maltster is one, `houseKinds.js ::
+  // BUYS_AND_WORKS`) unmarked, its material brought in (tests/domain/birthKindsLaw.test.js arm 1); left by name to the chair
+  if (foodLineShort(settlement) && !calmOnRoad(settlement)) for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
     const name = inst && typeof inst.name === 'string' ? inst.name : '';
     if (!name || isCustom(inst) || out.has(name)) continue;
     const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(name) || '');
@@ -661,6 +664,12 @@ function foodLineShort(settlement) {
   const s = /** @type {Parameters<typeof foodRowShown>[0] & Parameters<typeof carriersOf>[0]} */ (settlement);
   const row = foodRowShown(s, !!carriersOf(s, /** @type {Parameters<typeof carriersOf>[1]} */ (s?.economicState)));
   return !!row && row.fb.deficit > 0;
+}
+
+/** LEFT-MARKS item 4: a town with no crisis on a connected road (BIRTH-1's law's own reading). @param {object} settlement */
+function calmOnRoad(settlement) {
+  const config = /** @type {{ config?: { stressTypes?: unknown, tradeRouteAccess?: unknown } }} */ (settlement).config;
+  return (Array.isArray(config?.stressTypes) ? config.stressTypes : []).length === 0 && hasTradeRouteConnection(String(config?.tradeRouteAccess ?? ''));
 }
 
 /* THE THIRD READING (SV6), `housesOnSpentGround`, moved VERBATIM to the fact `facts/houseInputAtHand.js` (BAR4-SCENES-2, the

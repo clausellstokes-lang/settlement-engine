@@ -14,7 +14,8 @@
  *   (L16) THE HOUSE THAT WORKS ONLY A SURPLUS (rule 8i.surplus; the auditor's cure): the maltster ("Requires grain surplus.")
  *         is "Short of grain." where the page's food line is short ("Short: N lbs/day"), in a crisis or not: the four
  *         maltsters of the 720 on a short food line (r2r-hamlet-27, calm; r2s-under_siege-hamlet-1, -3; r2s-wartime-village-3)
- *         are marked, the ten on a food line that is not short are not; alike on the three views (N4).
+ *         are marked, the ten on a food line that is not short are not; alike on the three views (N4). Not in a calm town
+ *         on a connected road, where BIRTH-1's law holds a buyer unmarked (bar0-hamlet-calm-rand-40: left by name).
  *   (M3)  THE HEAD LINE OVER A VENTURE: "A row marked short is what its house makes when supplied." prints on neither the
  *         Institutions tab nor the Services tab where the only mark there is a failed venture's (the ten towns of the 720 at
  *         the base; r2r-hamlet-27 of them now carries a short mark of its own, the maltster's (L16), and prints it); it
