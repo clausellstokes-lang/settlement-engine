@@ -296,6 +296,46 @@ function exclusionOf(card, cards, keep) {
 }
 
 /**
+ * The rows of a family that may stand for one card in this place, each with the name it fills (no odds read).
+ * @param {Rec} c @param {RareRow[]} rows @param {Rec[]} cards @param {Place} place @param {string} seed @param {Family} family
+ * @returns {{ row: RareRow, name: string | null }[]}
+ */
+function standingFor(c, rows, cards, place, seed, family) {
+  /** @type {{ row: RareRow, name: string | null }[]} */
+  const standing = [];
+  for (const row of rows) {
+    if (!holderAdmits(row.holder, c, place)) continue;
+    const named = namedFor(row, c, cards, place, seed, family);
+    if (named === null) continue;
+    standing.push({ row, name: named ? str(named.name) : null });
+  }
+  return standing;
+}
+
+/**
+ * THE ROWS THAT MAY STAND for one card of the cast, by family, with the name each fills: the deal's own reading with no
+ * odds read (for the guard's reachability and the measures). Empty for a card the deal would exclude (item 5).
+ * @param {Rec} settlement @param {Rec[]} cards @param {unknown[]} relationships @param {string} id
+ * @param {{ seed?: unknown, keep?: Set<string>, worldLaw?: unknown }} [options]
+ * @returns {Record<Family, { key: string, what: string, stakes: string, name: string | null }[]>}
+ */
+export function rareRowsStandingFor(settlement, cards, relationships, id, options = {}) {
+  const seed = options.seed == null ? '' : String(options.seed);
+  const place = placeOf(rec(settlement), cards, arr(relationships), options.worldLaw);
+  const card = cards.find((c) => String(rec(c).id) === String(id));
+  /** @type {Record<Family, { key: string, what: string, stakes: string, name: string | null }[]>} */
+  const out = { deeds: [], natures: [], ties: [], masters: [], outsiders: [] };
+  if (!card || exclusionOf(rec(card), cards, options.keep || new Set())) return out;
+  for (const family of /** @type {readonly Family[]} */ (RARE_SECRET_FAMILIES)) {
+    const odds = /** @type {{ tiers?: readonly string[] }} */ (RARE_SECRET_ODDS[family]);
+    if (odds.tiers && !odds.tiers.includes(place.tier)) continue;
+    out[family] = standingFor(card, placeRows(family, place), cards, place, seed, family)
+      .map(({ row, name }) => ({ key: row.key, what: fill(row.what, name || ''), stakes: fill(row.stakes, name || ''), name }));
+  }
+  return out;
+}
+
+/**
  * DEAL THE VERY RARE SECRETS over the final cast (after the ranks and the ties). Returns a NEW array; a dealt card is a
  * new object whose `secret` is the row's `{ what, stakes }` (a named person filled in); every other card is passed
  * through as the same object. With no seed, nothing is dealt.
@@ -333,14 +373,7 @@ export function dealRareSecrets(settlement, cards, relationships, options = {}) 
       .filter((x) => typeof odds.perPerson !== 'number' || x.u < odds.perPerson)
       .sort((a, b) => a.u - b.u || (String(a.c.id) < String(b.c.id) ? -1 : 1));
     for (const { c } of ranked) {
-      /** @type {{ row: RareRow, name: string | null }[]} */
-      const standing = [];
-      for (const row of rows) {
-        if (!holderAdmits(row.holder, c, place)) continue;
-        const named = namedFor(row, c, cards, place, seed, family);
-        if (named === null) continue;
-        standing.push({ row, name: named ? str(named.name) : null });
-      }
+      const standing = standingFor(c, rows, cards, place, seed, family);
       if (!standing.length) continue;
       const at = fnv1a32(`${seed}::${RARE_SECRETS_KEY}::${family}::${String(c.id)}::row`) % standing.length;
       dealt.set(c, { ...standing[at], family });
