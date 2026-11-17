@@ -380,3 +380,53 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
     }), 'the round trip');
   }, 900_000);
 });
+
+// LEFT-MARKS M1 (the second reader on BIRTH-3, 2026-11-17: "ruling A has no guard"; the sixth chair's ruling BR10 (1): A
+// STANDS). A source house whose only chains work a spent ground of its own kind, beside a LIVE ground of its own kind on
+// the record, is at work: it reads `local` and prints no mark. The houses are chosen from the tables and the record (the
+// house's kinds, `SOURCE_GROUNDS`; its chains on the record's grounds; the land lists), not by the leaf under test. At the
+// base (e0242a12a) they are 18 houses of the 720: the 17 mines of ruling BR10 (r2r-town-45; r2r-metropolis-9, -15, -17, -24,
+// -29, -37, -40, -57; r2s-indebted-metropolis-2; r2s-infiltrated-metropolis-1, -2; r2s-insurgency-metropolis-0, -3;
+// r2s-monster_pressure-metropolis-2; r2s-politically_fractured-metropolis-1; r2s-succession_void-city-0), each on one chain of
+// spent iron beside a live seam of coal, gemstones or precious metals, and a charcoal burner (r2r-metropolis-43). ITS
+// NEGATIVE: a taker (a mine, a quarry, a landing ...) whose every own ground on the record is spent reads worked out and is
+// marked. PROVEN BY THE MUTATION: with `sourceStoryOf`'s `|| own.some((g) => live.has(g))` reverted the first arm is red.
+describe('LEFT-MARKS M1: ruling A, a source house beside a live ground of its own kind, is at work', () => {
+  /** @param {any} s */
+  const grounds = (s) => {
+    const cfg = s.config || {};
+    const custom = new Set((cfg.nearbyResourcesCustom || []).map(String));
+    const spent = new Set((cfg.nearbyResourcesDepleted || []).map(String));
+    const land = new Set([...(cfg.nearbyResources || []), ...(cfg.nearbyResourcesNative || [])].map(String).filter((k) => !custom.has(k)));
+    for (const k of spent) land.add(k);
+    return { land, spent };
+  };
+  test('over the census\'s 720: beside a live ground of its kind, local and unmarked; every own ground spent, a taker worked out and marked', () => {
+    /** @type {string[]} */ const beside = []; /** @type {string[]} */ const spentAll = []; /** @type {string[]} */ const bad = [];
+    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+      const s = town(seed);
+      const { land, spent } = grounds(s);
+      for (const inst of liveInstitutions(s)) {
+        if (!inst || typeof inst.name !== 'string' || inst.isCustom) continue;
+        const id = idOfHouse(inst);
+        if (!Object.prototype.hasOwnProperty.call(SOURCE_GROUNDS, id)) continue;
+        const own = /** @type {readonly string[]} */ (SOURCE_GROUNDS[/** @type {keyof typeof SOURCE_GROUNDS} */ (id)]);
+        const held = own.filter((g) => land.has(g));
+        const chains = (s.economicState?.activeChains || []).filter((/** @type {any} */ c) => own.includes(c.resourceKey) && land.has(c.resourceKey) && (c.processingInstitutions || []).includes(inst.name));
+        const story = sourceStoryOf(s, inst, resourceShortageImport)?.story;
+        const mark = rowMarkText(s, 'house', inst);
+        if (chains.length && chains.every((/** @type {any} */ c) => spent.has(c.resourceKey)) && held.some((g) => !spent.has(g))) {
+          beside.push(`${seed} · ${inst.name}`);
+          if (story !== 'local' || mark !== null) bad.push(`${seed} · ${inst.name}: beside a live ground of its kind it reads ${story}, marked "${mark}"`);
+        }
+        if (TAKERS.has(id) && held.length && held.every((g) => spent.has(g))) {
+          spentAll.push(`${seed} · ${inst.name}`);
+          if (story !== 'idle' || mark === null) bad.push(`${seed} · ${inst.name}: every own ground spent, it reads ${story}, marked "${mark}"`);
+        }
+      }
+    }), 'every census town is born and read');
+    expect(beside.length, 'houses beside a live ground of their own kind (the anchor)').toBeGreaterThan(10);
+    expect(spentAll.filter((x) => / · Mine/.test(x)).length, 'mines whose every own ground is spent (the negative\'s anchor)').toBeGreaterThan(10);
+    expect(bad, 'a source house whose story is not ruling A\'s').toEqual([]);
+  }, 1_800_000);
+});
