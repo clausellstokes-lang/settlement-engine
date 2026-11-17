@@ -163,3 +163,19 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   argument neither crashes nor diverges); (2) the seat's guard holds the agreement: for the same record the story the
   birth acted on equals the story the print reads. WHY IT IS THE CHAIR'S TO RULE: the file is none of the three no seat
   may edit (the assembly step, the build's config, the package file); it stores nothing; it takes no draw.
+- **RS1 (2026-11-17; THE OWNER'S WORD, between 08:44 and 08:51 UTC, verbatim): "Add in some very rare secrets such as is a
+  serial killer and such. Is psychopathic. Wants to murder his boss. Is in love with his brothers wife. Etc. peppered in
+  at the appropriate amount"** AN EXCEPTION, BY THE OWNER'S OWN HAND, to the owner's rule "no new text until the fixes
+  are done" (as the failed venture was). THE CHAIR'S FORM, told to the owner in the same answer, each part vetoable:
+  (a) SEVEN ROWS, the only new words: the owner's four (one who has killed more than once; one who feels nothing and
+  acts as though they do; one who means to kill the person they answer to; one in love with their brother's wife) and
+  three of the chair's in the same spirit (a spouse slowly poisoned; a body under the floor; coin taken to kill a named
+  person); each a secret with its stakes, in the page's plain voice: THE THING IS DESCRIBED, the modern labels ("serial
+  killer", "psychopath") are not printed (the owner may ask for the labels); (b) HOW RARE: about one named person in
+  two hundred and never more than one in a town (most thorps and villages none, about one city in four one), the
+  killer and the hired hand only in a town or larger; one table of odds, measured by the builder and brought to the
+  owner; (c) TRUE ON THE PAGE: the superior and the target are real people of the page, by name; the cold one is
+  written as a mask; the brother, his wife and the spouse are people off the page (the engine keeps no families);
+  (d) THE SEED PICKS AND NO DRAW IS TAKEN: for the same seed a town is born as before but for that one card's secret;
+  a saved town is never touched; no new field on the saved record; (e) built now by a seat of its own (SECRETS-1,
+  `docs/chair/2026-11-14/briefs/BRIEF-SECRETS-1.md`) beside BIRTH-2, so that the seventh read reads it.
