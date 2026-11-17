@@ -61,6 +61,10 @@ export const IRON_IMPORTED_LINE = 'Iron imported from mining regions and worked 
 export const METAL_WORKED_LINE = 'Metal is smelted or worked here.';
 /** BAR7-ECON item 1 (8f; vetoable by the owner): the metal line's twin where the metal chain is impaired, as the cloth line's is. */
 export const METAL_SHORT_LINE = 'Little metal is worked here while the metal trade is short of what it needs.';
+/** LEFT-CHAIN L7 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): the metal lines' twin where every smelting or working house of
+ * the trade is marked short and a mine of the trade is at work (`economicsCrisisMarks.js :: forgeIdleHere`, read at print by
+ * `ordinaryIncomeLineOf`): the mine is worked; the metalworking is not. */
+export const METAL_FORGE_IDLE_LINE = 'The digging goes on here, but the metalworking stands idle, short of what it needs.';
 export const GRAIN_BOUGHT_LINE = 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.';
 export const WOOL_LOCAL_LINE = 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.';
 export const WOOL_LOCAL_WORKED_LINE = 'Local flocks provide raw wool, and cloth is woven or finished here.';
@@ -126,11 +130,13 @@ export const INCOME_STATE_SIBLINGS = Object.freeze({
   [LOCAL_ORE_LINE]: Object.freeze([
     Object.freeze({ text: LOCAL_ORE_LINE, needs: Object.freeze(['institution: smith']) }),
     Object.freeze({ text: METAL_SHORT_LINE, twinOf: LOCAL_ORE_LINE }), // BAR7-ECON: the metal chain impaired
+    Object.freeze({ text: METAL_FORGE_IDLE_LINE, twinOf: LOCAL_ORE_LINE, needs: Object.freeze(['institution: mine']), excludes: Object.freeze(['trade at work: ironwork']) }), // LEFT-CHAIN L7
   ]),
   [IRON_IMPORTED_LINE]: Object.freeze([
     Object.freeze({ text: IRON_IMPORTED_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) }),
     Object.freeze({ text: METAL_WORKED_LINE, twinOf: IRON_IMPORTED_LINE }),
     Object.freeze({ text: METAL_SHORT_LINE, twinOf: IRON_IMPORTED_LINE }), // BAR7-ECON: the metal chain impaired
+    Object.freeze({ text: METAL_FORGE_IDLE_LINE, twinOf: IRON_IMPORTED_LINE, needs: Object.freeze(['institution: mine']), excludes: Object.freeze(['trade at work: ironwork']) }), // LEFT-CHAIN L7
   ]),
   [GRAIN_BOUGHT_LINE]: Object.freeze([Object.freeze({ text: GRAIN_BOUGHT_LINE, needs: Object.freeze(['imports']), excludes: Object.freeze([SIEGE]) })]),
   [WOOL_LOCAL_LINE]: Object.freeze([
@@ -250,11 +256,16 @@ export function trueIncomeDesc(desc, f) {
  * "Metal is smelted or worked here." (the twin is drawn only beside a forge house), "Local forest provides timber revenue, and
  * the timber is sawn here." where a sawmill stands, else "Local forest provides timber revenue.". The record does not hold the
  * line the draw began from, so this is the family's plain line, not always the exact one (no "managed felling", no flocks, no
- * trade route: none of them is read here). Pure; no draw. Not a short twin: null.
+ * trade route: none of them is read here). Pure; no draw. Not a short twin: null. LEFT-CHAIN L7: handed `reading.forgeIdle`, a
+ * metal line that says metal is worked (`METAL_WORK_LINES`) gives `METAL_FORGE_IDLE_LINE`.
  * @param {unknown} desc the stored line @param {{ institutions?: unknown } | null | undefined} town
+ * @param {{ forgeIdle?: boolean } | null} [reading] the display layer's reading of the share's houses
  * @returns {string | null}
  */
-export function ordinaryIncomeLineOf(desc, town) {
+export function ordinaryIncomeLineOf(desc, town, reading = null) {
+  // LEFT-CHAIN L7: a metal line that says metal is smelted or worked here, on an unmarked share whose every working house is
+  // marked short beside a mine at work (`reading.forgeIdle`, the display layer's `economicsCrisisMarks.js :: forgeIdleHere`)
+  if (reading?.forgeIdle === true && METAL_WORK_LINES.has(/** @type {string} */ (desc))) return METAL_FORGE_IDLE_LINE;
   if (desc !== CLOTH_SHORT_LINE && desc !== METAL_SHORT_LINE && desc !== TIMBER_SHORT_LINE) return null;
   const roster = (Array.isArray(town?.institutions) ? town.institutions : []).map((i) => String(i?.name ?? '').toLowerCase());
   const has = (/** @type {RegExp} */ re) => roster.some((n) => re.test(n));
@@ -262,6 +273,9 @@ export function ordinaryIncomeLineOf(desc, town) {
   if (desc === METAL_SHORT_LINE) return METAL_WORKED_LINE;
   return has(/sawmill|lumber/) ? TIMBER_SAWN_LINE : TIMBER_PLAIN_LINE;
 }
+
+/** The metal lines that say metal is smelted or worked here, or that the forges burn (LEFT-CHAIN L7's twin answers each). */
+const METAL_WORK_LINES = new Set([METAL_WORKED_LINE, METAL_SHORT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, LOCAL_COAL_LINE]);
 
 // ── #93 (UPKEEP-8; the chair's ruling of 2026-11-13, 23:48, a DECLARED MOVE of the income family) ──────────────────
 // Where Agricultural Rents is a small place's ONLY income line and a house of work stands on the roster, one line is
