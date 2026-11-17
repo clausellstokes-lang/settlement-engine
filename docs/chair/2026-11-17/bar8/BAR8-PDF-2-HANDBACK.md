@@ -76,6 +76,32 @@ the tip): item 7 red in 3 towns (r2r-metropolis-9, r2r-hamlet-10, r2r-village-13
   line, "Scarce in the famine. Grain fields » Mills » Normally yields: Baked goods" (the famine leaves the card impaired
   and its yield refused); the false bare line is still not printed.
 
+## NET (each alone, through `sh scripts/gate-tail.sh` or a JSON report read by `failnames.mjs`; base 3b06c724b FIRST, in a scratch worktree; then the tip)
+
+| gate | base | tip |
+|---|---|---|
+| `npm run typecheck:domain:strict` | 0 (1113, ceiling 1113) | 0 (the same) |
+| `npm run typecheck:ratchet` | 0 (167, ceiling 167) | 0 (the same) |
+| `npx eslint` on my changed sources and tests | — | 0 |
+| `npx vitest run tests/architecture` (the layer law) | 21 files green | 21 files green |
+| the rounds' guards (`bar5*`, `bar6*`) | 1 red: `bar6MarksLaw8.test.js` (a) THE ZERO over the 720 | the same one, same name: NAMED, not chased |
+| `npx vitest run tests/joins` | 1 red: `labelJoins.test.js` (LEFT-CHAIN's, by name) | the same; I add no label join |
+| `vendorPdfLazy.test.js -t "WEAVE ST-2"` | red (the roster lacks `chainHouses.js`: LEFT-CHAIN's) | the same; I add no goods consumer (`chainHousesOf` was already imported by both PDF sections) |
+| `tests/lint` by name (N2) | 69 names | the same 69 (`comm`: none tip-only, none base-only; `ledgerCitationIntegrity` red in both for the ledger ref this clone lacks). On the way: `economyReadModelCoverage` went red at my tip because a JSDoc line of mine named `economicState.activeChains` (the walker is a text scan); the comment was reworded at 0564cebbd and the walker is green |
+| the doors (R9), last lines | classes `hits 1787 · banked 1938 · fresh 0 · stale 151`; things `fresh 38 · stale 72 · … banked 4688` | the same, line for line: no fresh line of mine |
+| `tests/pdf tests/foundry tests/components` by name | 7 names | the same 7 (none mine) |
+| my guard | red (items 1, 2, 5, 6) | 7 of 7 green |
+
+No file under `src/domain/facts/` and no import in one is touched: no build was required (R11). N6: the chair's names at
+3b06c724b (`lane/checks-2026-11-17`, `landing-36-39-3b06c724b`) hold the three reds above.
+
+## N5 · THE SCRATCH MERGE
+
+`lane/join-2026-11-14` at f86295196 (POINT 40) merged with `--no-commit` into a scratch worktree at my tip 0564cebbd:
+CLEAN (no conflict). My guard and the four tests I modified or added there (`pdf2ReadsTheTabs`, `chainStateThreeSurfaces`,
+`leftPdfReadsTheTabs`, `tailExportsPdf2Batch2`) and `economyReadModelCoverage`: 38 of 38 green. Aborted; the worktree
+removed.
+
 ## N4 · THE SHARED PAGE
 
 No shared page renders `src/pdf/sections` or the journal: the player's world book (`utils/generateWorldBook.js`, mode
@@ -125,8 +151,11 @@ institutions and the view model's grounds; no mark or line moves on any tab or o
    }
    ```
    with `src/pdf/sections/EconomicsTrade.jsx`'s call taking `{ readings: false }` (Services.jsx:62 and Institutions.jsx:60
-   unchanged). The probe's count at my tip: the PDF prints the short sentence in 150 towns of the 720 (322 chapters), 27 of
-   the 150, 8 of the thirty; how many of those stand over no short row is read only at the merge (the brief's nine).
+   unchanged). MEASURED AT THE MERGE (a scratch worktree at my tip 0564cebbd with f86295196 merged, not committed; the
+   records born at my base): the PDF prints the short sentence in 154 towns of the 720 (329 chapters) without the hunk and
+   145 (311) with it; the nine towns it leaves are the brief's nine, each in Services and Institutions: r2r-hamlet-26,
+   r2r-hamlet-48, r2r-hamlet-57, r2r-town-13, r2r-town-18, r2s-under_siege-city-1, r2s-politically_fractured-hamlet-0,
+   r2s-infiltrated-town-1, r2s-wartime-city-3. Items 1, 2, 5, 6, 7 read 0 there too.
 2. **Item 4 · the income share's ordinary line, and L7's twin.** The chair's message: J-INCOME is held; no leaf to copy.
    95 towns of the 720 (108 shares), 16 of the 150, 3 of the thirty print the stored short twin ("Little metal is worked
    here while the metal trade is short of what it needs.") where the tab prints the trade's ordinary line ("Metal is
