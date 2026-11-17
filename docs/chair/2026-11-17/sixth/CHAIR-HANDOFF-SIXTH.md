@@ -14,15 +14,16 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
 
 ## 0. THE STATE AT 19:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; it REPLACES the 17:04 state; the lines of section 7 written after 19:04 govern where they differ)
 
-**THE LINE.** `lane/join-2026-11-14` stands at 9378609ba4405a81a295e5ff5faede36e3bd4528 (pushed 19:26 UTC, a fast-forward
-from ed1d43529): POINT 33 (the owner's supply rule: the chair's merge e0242a12a), POINTS 34 AND 35 (BAR8's two audits:
-the merge ef5fd621e of `lane/bar8-base-2026-11-17` 2f8f64f7b) and the record `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md`
-ON THE LINE (one row a point: the commit, the trees, what cleared it, what it leaves red by name and who holds each).
-The line's src tree is ac11d22681fc0c0e272ef9e5f5cbef21c05a31ca (the candidate's: every seat cut from the candidate, from
-an audit's tip or from the BAR8 base sits on it). THE CHAIR IS THE LINE'S ONLY WRITER: `/home/user/line` (hooks) holds the
-local branch. THE BASELINE FOR THE NEXT COMPARISONS is the candidate's lists on this lane: `checks/candidate-e0242a12a/names.final.txt`
-(the source tests; A5 of `editCorpusRatchet` is in it only because the chair's machine is slow: green on a quiet
-machine) and `checks/dist-candidate-e0242a12a/names.txt` (the dist phase).
+**THE LINE.** `lane/join-2026-11-14` stands at f1ca75555ebfa2c6ca111b713ffb2d66fcfc9500 (pushed 20:09 UTC): POINT 33 (the owner's
+supply rule, e0242a12a), 34 AND 35 (BAR8's two audits, ef5fd621e), the record's commit 9378609ba
+(`docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE: rows 33 to 35), POINT 36 (DEBT-2, the merge 2e54c06c2) AND POINT
+37 (LEFT-LINES, the merge f1ca75555). THE ROWS OF 36 TO 39 ARE NOT WRITTEN YET: they go on the line in one docs commit
+AFTER point 39, because the landing branch `lane/landing-36-39-2026-11-17` (38 LEFT-PDF e60d42a20, 39 LEFT-CHAIN
+3b06c724bfe1f2cfffcec3031b2e8a4c6513f27b) sits directly on f1ca75555 and must stay a fast-forward. THE CHAIR IS THE LINE'S
+ONLY WRITER: `/home/user/line` (hooks). THE BASELINE FOR COMPARISONS BY NAME is the candidate's lists on this lane:
+`checks/candidate-e0242a12a/names.final.txt` (source; A5 of `editCorpusRatchet` is in it only by the chair's slow machine)
+and `checks/dist-candidate-e0242a12a/names.txt` (the dist phase); joined and sorted they are 165 names
+(`/home/user/wk/cand.baseline.txt` on the chair's machine).
 
 **THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`; builders and readers of code
 are the middle tier at high effort, the mechanical seats the cheaper tier at low effort).**
@@ -542,3 +543,11 @@ should be paused or archived by the owner's hand.
   worse at its tip (every remaining line was there at its base); the batch's whole check runs AT THE COMMIT THAT HOLDS
   IT (sending it back means a new tree and a new check); and the seat PDF-2 is cut from the line the moment the batch
   lands, on the same files, with the reader's four findings as its items 5 to 8 (`BRIEF-BAR8.md`, PDF-2; the worklist).
+- **20:10 UTC. POINTS 36 AND 37 ARE LANDED** (20:09:24: `9378609ba..f1ca75555 lane/join-2026-11-14`, read back). SEATED FROM IT (20:09):
+  DESKS-ECO session_01FbPLbg7T6ZT4DRN1TxSeLf (`lane/bar8-desks-eco-2026-11-17`) and DESKS-DEF session_01FbPLbcmfQ2MeAdzsoomegp
+  (`lane/bar8-desks-def-2026-11-17`), the middle tier at high effort. SEVEN BAR8 BUILDERS ARE IN FLIGHT (K-POWERS, K-PEOPLE,
+  K-WATCH, J-ROWS, SCENES, DESKS-ECO, DESKS-DEF) and LEFT-MARKS (its amendment 2). `BRIEF-BAR8.md` HAS THE SECTIONS OF
+  J-INCOME AND PDF-2 (seated when points 38 and 39 land; J-INCOME's first commit is a leaf PDF-2 copies; PDF-2's items 5
+  to 8 are READ-LEFT-PDF's findings). STILL TO WRITE: MARKS-2's section. OTHER SEATS: READ-LEFT-PDF (done), READ-LEFT-CHAIN
+  session_01FbPLbfaN5JrfWb5LgXVXgV and READ-LEFT-MARKS session_01FbPLbe3ALLkoD83nKAVfE7 (reading); CHECKS-1, -2, -3 (the
+  batch's whole check at 3b06c724b).
