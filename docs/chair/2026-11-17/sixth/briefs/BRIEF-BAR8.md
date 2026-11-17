@@ -218,6 +218,20 @@ Rulings in force for you: BR17 (the fair's twin).
 720 and of the 525 reference configurations change a service row). YOUR GUARD: `tests/generators/bar8Rows.test.js`.
 THE TWIN YOU MAY WRITE: the fair's (item 2). NO OTHER NEW LINE.
 
+### J-ROWS · AMENDMENT 1 (written 18:29 UTC on 2026-11-17, AFTER the seat was seated; sent to it by message at 18:30)
+
+- **THE COUNT OF G1 EXISTS:** seat J's addendum (`lane/bar8-audit-j-2026-11-17` at 0cdedd206, the child of the seat's
+  base) counts the family as rule `11g.gapLine`: the 720: 118 towns, 129 lines, 17 distinct (124 are SOURCE houses:
+  quarry 58, mine 32, fisher's landing 12, dairy 7, peat cutter 4, charcoal burner 3, shepherd 3, others 5; 5 are
+  buyers that are the failed venture); the 150: 17 towns; the thirty: 7 towns, 8 lines. The seat takes the addendum
+  into its base by a fast-forward (or measures in scratch with the audit's files on top) and brings the rule to zero.
+- **A CONSTRAINT ON THE CURE:** `crisisStoppedRow.js :: housesShortOfInput` (about line 620; LEFT-MARKS's file) reads the
+  mark's noun off the general line (it calls `resourceGapLines` once a house with `[STORY_OF_RECORD]` set). WHAT THAT
+  READER GETS MUST NOT CHANGE; the two print sites (`ResourcesTab.jsx:155`, LEFT-CHAIN's; `viewModelBodySlices.js:395`,
+  LEFT-PDF's) call the function plainly and are not the seat's either. The cure lives in `validationOnPage.js` alone
+  (the plain call drops the general line of a pair whose story line is printed; the mark's call keeps it), or G1 is
+  LEFT BY NAME with the three hunks it would take.
+
 ## SCENES · a scene of a trade at work reads every mark that stops or thins that trade, and who takes the fish
 
 Rulings in force for you: BR17 (the two keys of the atom `trade at work`).

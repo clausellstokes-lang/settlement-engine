@@ -394,3 +394,10 @@ the previous account its sessions should be paused or archived by the owner's ha
   SCENES (when the line holds both audits), J-INCOME (after LEFT-CHAIN), MARKS-2 (after LEFT-MARKS), DESKS-2 (after
   LEFT-LINES), LEFT-KEYS (after the four LEFT builders), and a second reader for each hand-back (`BRIEF-READ-LEFT.md`;
   the same form serves a BAR8 seat with its section of `BRIEF-BAR8.md`).
+- **18:29 UTC. SEAT J'S ADDENDUM (18:25; `lane/bar8-audit-j-2026-11-17` at 0cdedd206: the detector +20 lines and the audit's
+  outputs; nothing under `src/`):** the general gap line is counted as `11g.gapLine` (the 720: 118 towns, 129 lines; 124
+  on source houses). IT ALSO FOUND WHY THE LINE IS KEPT: `crisisStoppedRow.js :: housesShortOfInput` reads the mark's noun
+  off it. J-ROWS has both facts by message (18:30; `BRIEF-BAR8.md`, J-ROWS · AMENDMENT 1): the cure lives in
+  `validationOnPage.js` alone and the mark's reader gets what it got, or the item is left by name. J's proposal of a
+  seat "J-GAPS" holding `crisisStoppedRow.js` too is NOT taken (the file is LEFT-MARKS's). J also checked: no rule of
+  LAW 11 flags a forge scene off a mine's gap line.
