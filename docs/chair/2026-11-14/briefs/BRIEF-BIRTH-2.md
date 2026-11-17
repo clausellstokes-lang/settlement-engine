@@ -12,7 +12,8 @@ resources, bought in 2. Not exhausted Resources, no buy in 3. Bought in, no reso
 resources, no buy in. And any other configuration." Before it: "Doesn't the stone quary here in and of itself stipulate
 that there is stone in the ground?"; "they have the supplies because they buy it in despite the exhausted resource";
 of a siege: "those failings are simply true because in normal times it would be bought in ... Rather than reworked";
-"making sure they align with imports".
+"making sure they align with imports". AND, AFTER IT, of the story the chair had left out and offered as "an abandoned
+works": "I like this. Infrastructure from a by gone era. It's abandoned a failed business venture, but very rare".
 
 SO: FOR EACH HOUSE AND ITS MATERIAL THE SEED PICKS ONE STORY, AND EVERY PART OF THE PAGE TELLS THAT STORY:
 
@@ -25,11 +26,12 @@ SO: FOR EACH HOUSE AND ITS MATERIAL THE SEED PICKS ONE STORY, AND EVERY PART OF 
 | other | has it | as well | as today (a larger town that uses more than it has): nothing to build |
 | other | any bought-in story, under a siege | cut off | the same story; the house reads "Curtailed by the siege."; nothing is reworked |
 | other | no route even in ordinary times | impossible | only "has it" or "used up, idle" |
-| NEVER PRINTED | never had it | no | nothing on the page could explain the house: no town shows it (the chair's default, told to the owner as vetoable) |
+| THE OWNER'S FIFTH, VERY RARE | never had it | no | THE ABANDONED WORKS: the house stays, marked "Abandoned: a failed venture."; no such ground on the land list, nothing of it on the imports; its rows not on offer; ONE line says why |
 
 THE STARTING ODDS (told to the owner as one small table, easy to change): THE GROUND USED UP AND THE TOWN CAN TRADE: bought
 in 3 times in 4, not bought in 1 in 4. A SOURCE HOUSE WHERE THE LAND LIST HOLDS NO GROUND OF ITS KIND: the ground is there
-3 times in 4 (the house proves it), used up 1 in 4. A HOUSE THAT USES A MATERIAL THE LAND NEVER HAD: bought in.
+3 times in 4 (the house proves it), used up 1 in 4. A HOUSE THAT USES A MATERIAL THE LAND NEVER HAD: bought in. THE
+ABANDONED WORKS: ABOUT ONE TOWN IN FIFTY HAS ONE (told to the owner so), ONLY EVER ONE HOUSE IN A TOWN, never a whole trade.
 
 THE ONE DISTINCTION (the chair's, told to the owner as vetoable). Among the houses that are the source of their material
 (BIRTH-1's `SOURCE_GROUNDS`): A TAKER takes the resource from the ground itself and CANNOT BUY IN WHAT IT TAKES (the stone
@@ -60,7 +62,8 @@ works of the census's 720 stand on a connected route).
 
 ## Your base, your branch, your files
 
-YOUR BASE is the joined line at the tip your prompt names (it holds BIRTH-1). Your one branch is
+YOUR BASE is the joined line at the tip your prompt names (it holds BIRTH-1; your prompt says whether it also holds the
+round BAR7's economy seat). Your one branch is
 `lane/birth-2-2026-11-17`. You merge nothing.
 YOUR FILES: `src/domain/facts/houseKinds.js` (BIRTH-1's leaf: the takers, the three that run on bought-in material, the
 ground each source house implies, THE ODDS; it stays import-free); `src/domain/facts/supplyStory.js` (NEW: the ONE reading
@@ -76,8 +79,11 @@ item 9 cures. NOT YOURS, whatever the cure seems to need (five seats of the roun
 files, `src/data/institutionServices.js`, any draw (`src/generators/steps/assembleInstitutions.js`,
 `src/generators/cascadeGenerator.js`, `steps/cascadePass.js`), `src/generators/steps/assembleSettlement.js`,
 `src/generators/steps/generateNarratives.js`, `vite.config.js`, `package.json`. NO NEW FIELD ON THE SAVED RECORD, NO WRITE
-TO `config.nearbyResources` OR ITS SIDECARS, NO NEW ATOM, NO NEW SENTENCE OF PROSE (the page's existing words carry every
-story: the land list's two groups, the imports' words, the mark, BIRTH-1's worked-out gap line).
+TO `config.nearbyResources` OR ITS SIDECARS, NO NEW ATOM, AND NO NEW WORDS BUT THE TWO THE ABANDONED WORKS NEEDS (its
+mark of four words and its one gap line: item 6; each vetoable): the page's existing words carry every other story (the
+land list's two groups, the imports' words, the short mark, BIRTH-1's worked-out gap line).
+ONE HUNK OF ANOTHER SEAT'S FILE IS YOURS IF YOUR PROMPT SAYS YOUR BASE HOLDS THE ROUND BAR7's ECONOMY SEAT:
+`src/domain/display/crisisStoppedRow.js`: the mark's words for an abandoned works (item 6), and nothing else of that file.
 
 ## Your items, in this order
 
@@ -91,7 +97,9 @@ story: the land list's two groups, the imports' words, the mark, BIRTH-1's worke
    the wildfowler 2): give a kind its implied ground only where one line states the choice (the landing: the sea's
    grounds on a port route or coastal terrain, the river's on a river route or riverside terrain); a kind whose ground
    you cannot choose by one line is left BY NAME. `SUPPLY_ODDS`: ONE frozen table, THE OWNER'S TO CHANGE, readable by a
-   person who knows no code: `groundThere` 45 of 60; `boughtIn` 45 of 60.
+   person who knows no code: `groundThere` 45 of 60; `boughtIn` 45 of 60; `abandoned`: a figure YOU calibrate over the
+   census's 720 so that ABOUT ONE TOWN IN FIFTY shows an abandoned works (between 10 and 20 of the 720): say the figure
+   and the count it gives.
 2. THE ONE READING (`supplyStory.js`), a pure function of the record (its stored land lists, its live houses, its route,
    its seed `_seed`) and of nothing else; the birth passes the generator's seed as an argument (never a global).
    (a) THE GROUNDS OF THE TOWN: the stored live grounds; the stored spent grounds; and for each live source house on no
@@ -106,13 +114,24 @@ story: the land list's two groups, the imports' words, the mark, BIRTH-1's worke
    times (a siege changes nothing here): where a ground of that material is used up (stored or implied): the seed's pick
    (`<seed>::bought::<the word>`: `boughtIn` of 60); where the material was never there: YES; on an isolated route: NO.
    (c) THE STORY OF A HOUSE AND ITS MATERIAL, one of: LOCAL (a ground of it there, stored or implied, or a live local
-   producer supplies it); BOUGHT (not local, and (b) says yes; a TAKER is never BOUGHT); IDLE (neither).
-   (d) "NEVER HAD IT AND BUYS NOTHING" IS NEVER A STORY. It can only arise for a buyer on an isolated route with no
-   ground of its material: COUNT those houses over the 720 by kind, and make the page say the owner's fourth story of
-   them (the ground implied USED UP, the house idle) if the count is small and the reading of five such towns is sound;
-   otherwise leave them BY NAME with the count. The salt works off the coast on an isolated route: 0 of the 720: name it.
+   producer supplies it); BOUGHT (not local, and (b) says yes; a TAKER is never BOUGHT); IDLE (neither: the ground used
+   up); ABANDONED ((d)).
+   (d) THE ABANDONED WORKS, THE OWNER'S FIFTH STORY, VERY RARE: "never had it and buys nothing" as a CHOSEN story of ONE
+   house: a venture of an earlier time that failed. THE SEED MAY PICK IT (`<seed>::abandoned::<catalogue id>`, the odds
+   `abandoned`) only for (i) a house that is THE ONLY LIVE HOUSE OF ITS TOWN USING A MATERIAL THE TOWN NEVER HAD (no ground
+   of it stored or implied, none on the record's imports before the birth), in place of BOUGHT; or (ii) a source house on
+   no ground of its own that is the only live house of that ground, in place of its implied ground. NEVER TWO IN ONE TOWN
+   (where the seed picks two, the first by catalogue id keeps it and the other follows its usual story); never a house
+   whose material another live house of the town uses (a whole trade is not abandoned: several houses on one material
+   buy it in as usual). For that house: no ground is implied, the town does not buy the material, the reader answers
+   `missing`, and the page says ABANDONED and not short (item 6).
+   (e) OUTSIDE THAT PICK, "NEVER HAD IT AND BUYS NOTHING" IS NEVER A STORY. It can still arise for a buyer on an isolated
+   route with no ground of its material: COUNT those houses over the 720 by kind, and make the page say the owner's
+   fourth story of them (the ground implied USED UP, the house idle) if the count is small and the reading of five such
+   towns is sound; otherwise leave them BY NAME with the count. The salt works off the coast on an isolated route: 0 of
+   the 720: name it.
 3. THE READER (`houseInputAtHand.js`) answers by the story: LOCAL: `local`; BOUGHT: `imported` (the list brings it; under
-   a siege the leaf's own rule prints "Curtailed by the siege."); IDLE: `missing`. A TAKER whose ground is used up is
+   a siege the leaf's own rule prints "Curtailed by the siege."); IDLE and ABANDONED: `missing`. A TAKER whose ground is used up is
    `missing` and fed by no import: read by THE KIND'S GROUNDS AND THE GROUNDS OF THE TOWN, not by the chains the house is
    listed on (the audit's c1: six peat cutters stand on a live coal chain that hides their spent marsh; the peat cutter
    is fed today by its own bog's shortage import): you read `TAKERS` beside the dependence table's `SPENT_GROUND_WORKERS`
@@ -123,13 +142,24 @@ story: the land list's two groups, the imports' words, the mark, BIRTH-1's worke
    EXACTLY where the story says BOUGHT and the list lacks it: a used-up ground: that ground's own shortage word; never
    there: the plain word (`IMPORT_WORD`; the salt works': "Salt"). UNDER A SIEGE TOO (the owner: a siege excludes
    nothing; BIRTH-1 as landed writes nothing under a siege: its hand-back counts the houses that leaves short with no
-   cause). WHERE THE STORY SAYS IDLE THE BIRTH WRITES NOTHING: that is the owner's fourth story, by the seed and no longer
-   by accident. No word twice. The stored gap of each house is written as the reader answers it.
+   cause). WHERE THE STORY SAYS IDLE OR ABANDONED THE BIRTH WRITES NOTHING: those are the owner's fourth and fifth stories, by the
+   seed and no longer by accident. No word twice. The stored gap of each house is written as the reader answers it.
 5. THE GAP LINES (`validationOnPage.js :: resourceGapLines`): a house whose ground is used up (stored or implied) reads
    BIRTH-1's worked-out line by the Depleted list's own label; BIRTH-1's line for a source house with no ground of its
    own ("... from a ground of its own: none lies near.") HAS NO CASE LEFT (an implied ground stands, or the salt is
    bought): remove it, and say how many towns printed it. No line says a material "reaches" a house from elsewhere where
    the house is worked out; no gap line for a house the story has at work.
+   THE ABANDONED WORKS' TWO NEW FORMS (the only new words of your seat; the owner's own words; each vetoable; name them
+   in your hand-back for the owner's veto list): (i) ITS GAP LINE, once for the house, on the Resources tab: "The <house>
+   stands abandoned, a venture of an earlier time: no <material> lies near and none is brought in."; (ii) ITS MARK, on
+   the house's card and rows wherever the short mark would print: "Abandoned: a failed venture." (four words: the
+   mark law counts a sentence at five, and a mark repeats on a house's rows). The mark is printed by the one leaf
+   (`crisisStoppedRow.js :: rowMarkText` and `shortMarkText`): IF YOUR BASE HOLDS THE ROUND BAR7's ECONOMY SEAT, the one
+   hunk there is yours: an abandoned works' row takes that mark in place of "Short of ...", read from your leaf
+   (`supplyStory.js`), and the tab's head line for short marks ("A row marked short is what its house makes when
+   supplied.") is not printed on its account; a person's card and the PDF read the same leaf and follow. IF IT DOES
+   NOT, the mark stays "Short of ..." (true of it), the gap line alone says abandoned, and the mark's words are left
+   BY NAME.
 6. THE PAGE (`ResourcesTab.jsx`, the Nearby Resources section) prints the grounds of item 2 (a): a STORED live ground as
    today ("Abundant", or unlabelled under a siege); AN IMPLIED GROUND THAT IS THERE without the word "Abundant" (one
    quarry does not prove plenty: W2): in the unlabelled form the siege already uses, under the section's title; AN
@@ -158,11 +188,14 @@ story: the land list's two groups, the imports' words, the mark, BIRTH-1's worke
     they are enough). (L1) EVERY LIVE HOUSE WITH A MATERIAL TELLS ONE STORY ON EVERY SURFACE: LOCAL: a ground there (stored
     or implied) or a live local producer, and no short mark; BOUGHT: the word on the imports, and no short mark (the
     siege's mark under a siege); IDLE: the short mark, the ground under Depleted, and NO word of that material on the
-    imports. (L2) "never had it and buys nothing" in NO town of the populations, or exactly the houses item 2 (d) names.
+    imports; ABANDONED: its mark and its gap line, no ground of its material on either group of the land list, no word of
+    it on the imports. (L2) "never had it and buys nothing" ONLY as an abandoned works or as the houses item 2 (e) names;
+    no town holds two abandoned works; no abandoned house shares its material with another live house.
     (L3) no import feeds a taker. (L4) THE SEED'S CHOICE: the same seed twice gives the same story; an implied ground is
     on NO stored field (the record's `config` is byte-equal with and without your rule). (L5) THE ODDS HOLD: over the
     census's 720 the bought-in share of the used-up materials on connected routes, and the there-share of the implied
-    grounds, each fall within a stated band of `SUPPLY_ODDS` (say the band and why). Its positive control: it FAILS at
+    grounds, each fall within a stated band of `SUPPLY_ODDS` (say the band and why); the towns with an abandoned works number
+    between 10 and 20 of the 720. Its positive control: it FAILS at
     your base. THE ROUND TRIP, AS A CASE: ten towns with an implied ground, generated again from the produced record by
     the product's own regenerate (`store/settlementRegenAction.js`: the saved config and seed) AND from that config read
     as a manual roster (`nearbyResourcesRandom: false`): each is the town it was before your rule (the audit's
@@ -170,9 +203,9 @@ story: the land list's two groups, the imports' words, the mark, BIRTH-1's worke
 11. THE TABLE FOR THE OWNER: HOW OFTEN EACH STORY COMES UP, over the census's 720 and the 150: houses and towns for each
     row of the table at the head of this file, by tier, and by material for the owner's four; and the same before your
     rule (BIRTH-1's tree). Plain words; a person who knows no code reads it.
-12. THE PAGE AFTER YOU, READ: render twenty-four towns across the tiers (six of the owner's fourth story in a town that
-    can trade; four of the first; four of the third; four with an implied ground the roll table denies; three off-coast
-    salt works; three besieged) and READ the Resources tab, the house's card, the Economics tab's Imports, Exports and
+12. THE PAGE AFTER YOU, READ: render twenty-eight towns across the tiers (six of the owner's fourth story in a town that
+    can trade; four of the first; four of the third; four abandoned works, their keepers' cards among what you read;
+    four with an implied ground the roll table denies; three off-coast salt works; three besieged) and READ the Resources tab, the house's card, the Economics tab's Imports, Exports and
     income rows, the Outlook, the arrival scene: does any line show an idle house at work, name an import beside a house
     short of it, export a worked-out ground's good, or say "imports nothing"? Each such pair is named in your hand-back
     with its count over the 720; you cure those in your files and leave the rest BY NAME for the round's other seats.
@@ -197,5 +230,5 @@ close's (R10). Hand-back `docs/chair/2026-11-17/birth/BIRTH-2-HANDBACK.md`: each
 after and its guard, or left with the reason and what you measured); item 11's table FIRST; `fieldDiff`'s table; the
 round trip's table; what a reader can newly see (each with three towns); the readers of the land list you routed and
 those you named; the pairs of item 12; the books your cure moves; for the owner's veto list: the tables of item 1 as a
-person who knows no code can read them. Budget: hand back at 550,000 of your count, then push nothing more. PUSH EARLY
+person who knows no code can read them. Budget: hand back at 600,000 of your count, then push nothing more. PUSH EARLY
 AND OFTEN. One line to the chair at the end, 150 words at most.

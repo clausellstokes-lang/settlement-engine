@@ -123,3 +123,21 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   flag (a charcoal burner short of timber beside the timber the birth brought in for a cooper: 48 towns of the 720 by
   that seat's own count), and the idle houses of the fourth story need the round BAR7's surfaces to agree with their
   mark.
+- **BR6 · THE OWNER'S SEVENTH WORD (2026-11-17, about 05:43 UTC, verbatim): THE ABANDONED WORKS, VERY RARE.** Of the
+  story BR5 left out (never had the resource and buys nothing), which the chair had offered to show "as an abandoned
+  works": "I like this. Infrastructure from a by gone era. It's abandoned a failed business venture, but very rare". SO
+  IT IS THE FIFTH STORY THE SEED MAY PICK: the house stays in the town (no draw moves; its keeper lives there still),
+  marked abandoned and not short; no ground of its material stands on the land list, nothing of it on the imports; its
+  rows are not on offer; one line says why. THE CHAIR's FORM, EACH PART VETOABLE: (a) VERY RARE = about one town in
+  fifty holds one (told to the owner so; the builder calibrates the pick over the census's 720 to between 10 and 20
+  towns and says the figure); (b) ONLY EVER ONE HOUSE IN A TOWN, and only a house that is the town's one user of a
+  material the town never had, or a source house alone on no ground of its own: a whole trade is never abandoned
+  (several houses on one material buy it in as usual); (c) THE WORDS, the only new ones of the supply rule, the owner's
+  own: the mark "Abandoned: a failed venture." (four words: a mark repeats on a house's rows and the mark law counts a
+  sentence at five; the chair had said "... of an earlier time" on the card to the owner: those words go to the line)
+  and one gap line, "The <house> stands abandoned, a venture of an earlier time: no <material> lies near and none is
+  brought in."; scene lines for it wait for the widening of the texts (the owner's rule: no new text until the fixes are
+  done); (d) how it differs from the fourth story: there the ground ran out and the works could start again (the short
+  mark, the ground under Depleted); here there was never anything to work. BUILT BY BIRTH-2 (its brief is amended); the
+  mark's words sit in the mark's one leaf, which the round BAR7's economy seat holds: BIRTH-2 is therefore seated once
+  BIRTH-1 AND that seat have landed, and is given that one hunk by name.
