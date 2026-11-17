@@ -62,7 +62,7 @@ export const ARRIVAL_SCENES = {
       `The sound of a hammer on metal reaches you from ${r}'s smithing quarter: a craftsperson's rhythm, not a soldier's.`, needs: ['institution: smith'] },
     (r) => `${r} smells of work: sawdust, tallow, the particular sharp smell of a tanner at the edge of town.`,
     { text: (r) =>
-      `${r} announces its trade before its name: the whine of a lathe, the reek of the dye-vats, a workshop door standing open on a scene of unhurried, practised industry.`, excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
+      `${r} announces its trade before its name: the whine of a lathe, the bite of fresh shavings, a workshop door standing open on a scene of unhurried, practised industry.`, excludes: ['crisis: threat', 'crisis: hunger'] }, // BAR6-CULTURE (B4): declares what it presumes. SEAM-CULTURE (2026-11-17, BRIEF-BAR6-SEAM item 4: the table's row 141, whose reason named a guild-roster key no route reaches, `arrivalScene.js :: ROUTE_TO_SCENE`): the dye-vats named a dyer no declaration gave; the lathe's own shavings stand in, and its unhurried ease is refused under the whole of its family (threat and hunger), as the door asks of a new line. Was "the reek of the dye-vats", `excludes: ['crisis: threat']`.
     { text: (r) =>
       `The approach to ${r} is lined with the overflow of its crafts: timber stacked to season, half-finished goods under eaves, the settlement's work spilling out past its walls for want of room inside.`, needs: ['timber at hand', 'walls'] }, // BAR6-CULTURE (B4): declares what it presumes
   ],

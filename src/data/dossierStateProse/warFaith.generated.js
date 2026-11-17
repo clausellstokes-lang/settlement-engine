@@ -1151,7 +1151,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The tribute out of {settlement} is paid and paid grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.",
+          "text": "The tribute out of {settlement} is handed over, and handed over grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.",
           "slots": [
             "settlement"
           ],

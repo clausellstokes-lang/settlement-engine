@@ -201,11 +201,6 @@
  },
  {
   "file": "src/data/dossierStateProse/warFaith.generated.js",
-  "text": "The tribute out of {settlement} is paid and paid grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.",
-  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
- },
- {
-  "file": "src/data/dossierStateProse/warFaith.generated.js",
   "text": "{counterpart}'s troops hold {settlement}; there is no trouble about it, and plenty of resentment.",
   "reason": "plenty: 'plenty of resentment' is no plenty of goods or food · office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
  },
@@ -601,11 +596,6 @@
  },
  {
   "file": "src/data/cultureProfiles.js",
-  "text": "storehouses and caravan yards mark the boundary between settlement and seasonal encampment",
-  "reason": "outside: an architectural detail names built form (yards, lanes), not traffic or a herd at work"
- },
- {
-  "file": "src/data/cultureProfiles.js",
   "text": "broad lanes are sized for herds, carts, and mounted movement",
   "reason": "resource: an architectural detail names built form (yards, lanes), not traffic or a herd at work"
  },
@@ -618,11 +608,6 @@
   "file": "src/data/cultureProfiles.js",
   "text": "Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant follow as a place grows.",
   "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
- },
- {
-  "file": "src/data/historyData.js",
-  "text": "Lord/Lady of the Manor",
-  "reason": "sovereign: a power role's own title, drawn for the governing category that holds a manor (the title is its office's, the owner's pin M-1b)"
  },
  {
   "file": "src/data/historyData.js",
@@ -686,16 +671,6 @@
  },
  {
   "file": "src/data/historyData.js",
-  "text": "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.",
-  "reason": "sovereign, resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
- },
- {
-  "file": "src/data/historyData.js",
-  "text": "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who holds those rights to this day.",
-  "reason": "sovereign, resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
- },
- {
-  "file": "src/data/historyData.js",
   "text": "A rival family claims their ancestor was cheated out of the original mining contract",
   "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
  },
@@ -703,11 +678,6 @@
   "file": "src/data/historyData.js",
   "text": "A rival family claims their ancestor was cheated out of the original rights to the deposits",
   "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
- },
- {
-  "file": "src/data/narrativeData.js",
-  "text": "… announces its trade before its name: the whine of a lathe, the reek of the dye-vats, a workshop door standing open on a scene of unhurried, practised industry.",
-  "reason": "goods: the scene's key is the guild roster (ARRIVAL_SCENES.guild): the crafts it names are the guilds'"
  },
  {
   "file": "src/data/narrativeData.js",
