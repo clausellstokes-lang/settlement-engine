@@ -1,0 +1,9 @@
+{"id":"C21232","town":"bar0-metropolis-calm-rand-42","sev":"LOW","kind":"STATE","why":"hook gives Hallgerd Ljotsson a 'customer'; PEOPLE has her as 'the lady' of Noble Houses, not a trader","other":""}
+{"id":"C21238","town":"bar0-metropolis-calm-rand-42","sev":"LOW","kind":"STATE","why":"hook has Refr Styrkarsson, master of granaries, with an apprentice bringing 'the recipes'; a granary master holds no recipes","other":""}
+{"id":"C23038","town":"bar0-metropolis-calm-rand-42","sev":"MED","kind":"PAIR","why":"rival crews fighting over the streets, people paying for the brawling, contradicts 'little crime', 'walk anywhere at any hour', 'nothing much happens'","other":"C23006"}
+{"id":"C23422","town":"bar0-metropolis-calm-rand-42","sev":"LOW","kind":"PAIR","why":"collier shown burning and selling charcoal, but the Charcoal burner is marked 'Short of timber' and 'No timber reaches the charcoal burner'","other":"C21693"}
+{"id":"C23466","town":"bar0-metropolis-calm-rand-42","sev":"LOW","kind":"PAIR","why":"carpenter shown working every job in wood, but Carpenters are marked 'Short of timber' with every service short","other":"C21497"}
+{"id":"C23583","town":"bar0-metropolis-calm-rand-42","sev":"LOW","kind":"PAIR","why":"cooper shown filling a large order of casks, but Cooper is marked 'Short of timber' with barrel making (short)","other":"C21521"}
+{"id":"C23592","town":"bar0-metropolis-calm-rand-42","sev":"LOW","kind":"BROKEN","why":"house mark 'Short of grapes.' set in front of the 'How they deal' text, reading as the vintner's manner of dealing","other":"C21603"}
+{"id":"C23768","town":"bar0-metropolis-calm-rand-42","sev":"LOW","kind":"PAIR","why":"sawyer talks of this year's good timber and who is buying it, but Sawmill is marked 'Short of timber' and 'No timber reaches the sawmill'","other":"C21575"}
+{"id":"DONE","lines":3658,"blocks":1,"flags":8}
