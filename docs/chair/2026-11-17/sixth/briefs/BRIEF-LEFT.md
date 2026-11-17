@@ -62,7 +62,7 @@ on the chair's lane (rows L1 to L37; read THE CHAIR'S NOTES at its head). This r
 |---|---|---|
 | LEFT-PDF | L1, L2, L3, L19 (the PDF's land list only) | `src/pdf/sections/EconomicsTrade.jsx`, `src/pdf/sections/Services.jsx`, `src/pdf/sections/SupplyChainFlow.jsx`, `src/pdf/sections/Overview.jsx`, `src/pdf/sections/NotableNPCs.jsx`, `src/pdf/lib/crisisMarksOnPage.js`, `src/pdf/lib/viewModel.js`, `src/pdf/lib/viewModelBodySlices.js`, `src/foundry/journalPages.js`, a new leaf under `src/domain/display/` if a reading must be shared |
 | LEFT-CHAIN | L18, L5, L27, L7, L6 | `src/domain/display/chainHouses.js`, `src/components/new/SupplyChainsPanel.jsx`, `src/components/new/tabs/EconomicsTab.jsx`, `src/domain/display/economicsCrisisMarks.js`, `src/domain/display/chainStateShown.js`, `src/domain/display/tradeListDisplay.js`, `src/components/new/tabs/ResourcesTab.jsx` (L18's reading only), `src/generators/economy/incomeLineSiblings.js` (L7's twin only) |
-| LEFT-MARKS | L17, L15, L25, L16, and AMENDMENT 1's M1 to M5 | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/supplyStory.js`, `src/domain/facts/houseKinds.js`; the detectors `tests/helpers/pageLaws/law8.mjs`, `law8Marks.mjs`, `law8H.mjs`, `pageB.mjs`; `tests/domain/bar6MarksLaw8.test.js`, `tests/domain/bar6PeopleLaw10.test.js`, `tests/domain/supplyStoryLaw.test.js`, `tests/domain/birthKindsLaw.test.js`; one hunk each of `src/components/new/tabs/InstitutionsTab.jsx` and `ServicesTab.jsx` only if M3 needs it |
+| LEFT-MARKS | L17, L15, L25, L16, AMENDMENT 1's M1 to M5, AMENDMENT 2's M6 and M7 | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/supplyStory.js`, `src/domain/facts/houseKinds.js`; the detectors `tests/helpers/pageLaws/law8.mjs`, `law8Marks.mjs`, `law8H.mjs`, `pageB.mjs`; `tests/domain/bar6MarksLaw8.test.js`, `tests/domain/bar6PeopleLaw10.test.js`, `tests/domain/supplyStoryLaw.test.js`, `tests/domain/birthKindsLaw.test.js`; one hunk each of `src/components/new/tabs/InstitutionsTab.jsx` and `ServicesTab.jsx` only if M3 needs it |
 | LEFT-LINES | L31, L4, L33 (the brewers' line), L32, L8, L9 | `src/data/historyData.js`, `src/generators/historyGenerator.js`, `src/data/narrativeData.js`, `src/data/people/titleSecretsPresentations.js`, `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and the generated desk files `src/data/dossierStateProse/general.generated.js`, `defense.generated.js`, `economy.generated.js`, `power.generated.js` (ruling AX1) |
 | LEFT-KEYS (seated after the chair's whole check) | L11, L12, L13, L14 and the anchors the whole check names | tests only: its section is written when it is seated |
 
@@ -216,6 +216,35 @@ metropolis. ITS FIVE ROWS ARE YOURS, AFTER YOUR ITEM 1, AS ONE COMMIT EACH. The 
 - **M5 (LOW) · THE COMMENT SAYS RULING A BACKWARDS** (`supplyStory.js`, above `sourceStoryOf`'s chains: "a spent coal
   seam, beside a live iron ground"): it is a spent IRON chain beside a live seam of the mine's own kind (coal,
   gemstones, precious metals). Reword it to what the 720 show.
+
+### LEFT-MARKS · AMENDMENT 2 (written 16:41 UTC on 2026-11-17, AFTER the seat was seated; sent to it by message: two more items, after M5)
+
+FROM THE MEASURE OF THE EIGHT DETECTORS AT THE LINE AND AT YOUR BASE (MEASURE-1, `lane/measure-2026-11-17`,
+`docs/chair/2026-11-17/measure/TABLE.md`: the 30 and the 150). One rule rose that is not by design: `runD`'s `8a.input`,
+0 at the line, 1 town of the thirty and 4 of the 150 at your base. The chair read each town at the base:
+
+- **M6 · THE OLD DETECTOR DOES NOT KNOW THE FAILED VENTURE'S MARK.** Three of the five houses are the town's failed
+  venture and print as designed (the dairy farmer of bar0-village-calm-rand-43 "Failing: a failed venture."; the potter
+  of bar0-town-calm-rand-32 and the sawmill of bar0-village-calm-rand-40 "Abandoned: a failed venture.", each with its
+  gap line and its venture line): `tests/helpers/pageLaws/law8.mjs` reads the venture's mark as no mark. Teach it (and
+  `law8Marks.mjs` where it shares the reading): a venture's mark is a mark. After it those three are gone from `8a.input`.
+- **M7 · RULING BR11: A HOUSE ON A GROUND ITS TOWN WORKS ITSELF READS UNDER A SIEGE AS THE TOWN'S OWN LAND READS.** In
+  bar0-city-under_siege+famine-rand-28 and -35 (2 besieged cities of the 150) the Services tab's dependency card prints
+  "Building construction Impaired / Carpenters / Needs Timber. Supply route severed. Operating at minimal capacity or
+  shut down." while the Carpenters, the Cooper and the Sawmill print with NO mark: the sawmill PROVES a managed
+  woodland (`houseInputAtHand.js :: impliedGroundsOnPage(s).there`), the supply rule reads its timber as the town's
+  own, and nothing then marks the houses under the siege. At the line (before the supply rule) those houses were marked
+  short, which agreed with the card. The stored economy was born before the proven ground is read and still holds the
+  timber as an import the siege has cut. RULED: under a siege, a house whose material the supply rule reads as the
+  town's own BY A PROVEN GROUND carries the siege's partial mark, "Curtailed by the siege.", exactly as a house on a
+  LISTED ground of the town does (SV8 in `crisisStoppedRow.js`'s header: the land the town still works is curtailed,
+  not stopped), and so do the houses that work that material from it (the carpenters, the cooper). No stored row
+  moves; the dependency card is not edited (it then agrees: both say the siege limits the trade). MEASURE FIRST over
+  the 720, the 150 and the thirty: towns under a siege where a dependency card of severity critical names a good and a
+  house that uses that good prints bare; say the count before and after, and every OTHER crisis in which a proven
+  ground leaves a house bare beside a card that says its supply is cut (name them; cure only the siege unless the same
+  reading cures them). Your guard: over the besieged towns of the 720 and the 150, no house of a material prints bare
+  beside a critical dependency card of that material; a positive anchor (the two cities); N4 (the shared page alike).
 
 ---
 

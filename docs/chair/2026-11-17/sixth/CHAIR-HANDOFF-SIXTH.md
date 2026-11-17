@@ -83,6 +83,13 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
   it a source house that is at work on another ground (a reading at print). (2) and (3) are the leftovers seat's first
   item; until it lands, LAW 8 (a) is red on the line BY NAME with these 17.
 
+- **BR11 (16:41 UTC, 2026-11-17; the proven ground under a siege).** The detectors' measure at the candidate found, in 2
+  besieged cities of the 150, a dependency card "Needs Timber. Supply route severed." beside carpenters, a cooper and a
+  sawmill printed with no mark (the sawmill proves a woodland; the stored economy still holds the timber as a cut
+  import). RULED: under a siege a house whose material is the town's own by a PROVEN ground carries "Curtailed by the
+  siege.", as a house on a listed ground does, and so do the houses that work that material. LEFT-MARKS, AMENDMENT 2
+  (M7). It is the one place found so far where the supply rule reads worse than the line did.
+
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -119,3 +126,19 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
   (`lane/left-pdf-2026-11-17`) · LEFT-CHAIN session_01FbPLbeQ6AMmwW3YqZr3GGs (`lane/left-chain-2026-11-17`) ·
   LEFT-LINES session_01FbPLbeoWaAerUfLm8M6h9a (`lane/left-lines-2026-11-17`). LEFT-MARKS is seated when its
   AMENDMENT 1 is on origin; LEFT-KEYS when the whole check has named the anchors.
+- 16:41 UTC · LEFT-MARKS SEATED (session_01FbPLbfTzb6VGikPHHvTZWC, `lane/left-marks-2026-11-17`) at 16:31 with AMENDMENT 1.
+- 16:41 UTC · THE MEASURE AT THE LINE AND AT THE CANDIDATE (MEASURE-1, `lane/measure-2026-11-17` at 8aae3f3ba; the 30 and
+  the 150; three columns): NO RULE ROSE BUT BY DESIGN OR BY ONE SEAM. Rose by design (old detectors that do not know
+  the new page): `run-a`'s `4r-thing:resource:*` (the grounds a house proves and the worked-out lines), `4r-thing:house:
+  mine` (the import's own words "local iron mines exhausted"). Fell: `runD 8b.person` 6 to 2 and 15 to 6. `runD
+  8a.input` 0 to 1 town (the thirty) and 0 to 4 (the 150): three are failed ventures printed as designed (the detector
+  reads the venture's mark as none: M6) and TWO BESIEGED CITIES ARE REAL (BR11, M7). `runH 8k.trade.mild` 7 to 8 (one
+  cloth scene in a besieged city). The 720 is still rendering there.
+- 16:41 UTC · THE SEVENTH READ: 22 packets (PREP-READ-7's, 318,669 words, tree 4a9735d2f9), 44 readers (helpers on the
+  chair's machine, the cheaper tier; the first reader of a packet at the default effort, the second at high effort; each
+  in a folder of its own, no reader saw another's flags), all done between 16:30 and 16:37. BY SENTENCE, THE HIGHER OF
+  THE TWO READERS, BEFORE THE SECOND CHECK: HIGH 0 · MED 27 · LOW 48 (the sixth, raw: MED 51 · LOW 139); MED sentences
+  flagged by a 20 · by b 20 · by both 13. THREE FIRST READERS MISREAD THE RESOURCES BLOCK (a label stands before its
+  items; the grounds a house proves stand first with no label): a paragraph was added to the brief at 16:34 for the
+  readers not yet started (some running second readers re-read the brief and have it too). NO NUMBER GOES TO THE OWNER
+  BEFORE THE STRICT SECOND CHECK.
