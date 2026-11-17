@@ -22,7 +22,7 @@
 // (`against`); a line hedged on its own input, or carrying its own mark, is clear. `cause` splits every instance: `short`
 // (every mark it reads is the short mark: a house BORN short, the born-short audit's root), `crisis` (a crisis mark),
 // `mixed`. Pure: reads seat B's `readTown` (pageB.mjs) and auditor D's readers (law8.mjs), unchanged.
-import { MARK_LEAD, CHIP_MARK, economicsSections } from './pageB.mjs';
+import { MARK_LEAD, CHIP_MARK, economicsSections, sentences } from './pageB.mjs';
 import { GOODS, readIncome, readServiceEconomy } from './law8.mjs';
 import { TITLE_PRESENTATIONS, TITLE_SECRETS } from '../../../src/data/people/titleSecretsPresentations.js';
 import { GOAL_FAMILY_LINES } from '../../../src/data/people/goalFamilies.js';
@@ -104,12 +104,16 @@ const POOL = (() => {
   // Wants lines that name the card's house: every template of the goal families with "{house}"
   const wants = [];
   const walk = (v) => { if (typeof v === 'string') { if (v.includes('{house}')) wants.push(v); } else if (v && typeof v === 'object') { if (typeof v.line === 'string') walk(v.line); else for (const x of Object.values(v)) walk(x); } };
-  walk(GOAL_FAMILY_LINES);
+  // the family written for a house at work: "the card's house processes a running or operational chain" (goalFamilies.js,
+  // SUPPLY.expansion); the other "{house}" lines (its rights, its taxes, its debts) show no work (precision draw)
+  walk(GOAL_FAMILY_LINES.SUPPLY.expansion);
   const wantRes = wants.map((t) => ({ t, re: new RegExp(`^${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{house\\\}/g, '(.+?)').replace(/\\\{[a-z_]+\\\}/g, '.+?')}$`) }));
   return { deal, secret, wantRes };
 })();
 // a line hedged on its own input, or about stock already made, or about the crisis itself
 const HEDGED = /\b(when there is|when .{1,30} to be had|what is left|what little|while it lasts|while stocks last|before the (?:siege|war|famine)|since the (?:siege|war|famine)|used to|no longer|nothing to|for want of|until the|whatever is left|on the shelves|in store)\b/i;
+// a deal line about the person's manner or about others' work shows no work of the house (precision draw of the thirty)
+const MANNER_ONLY = /^(Polite\b|Tells you to see\b|Talks about who is (?:building|weaving)\b)/;
 const OWN_MARK = /^(How they deal\s+)?(Stopped by|Curtailed by|Scarce in|Short of)\b/;
 
 // ---------------------------------------------------------------- the rules
@@ -167,19 +171,28 @@ export function law8H(T, town) {
   for (const p of persons) {
     const c = cardOf(p.house); const m = c && marked.get(c.name);
     if (!m || !m.lead) continue;
+    // the mark's kind: short (nothing to work) and stopped are the rule; curtailed and scarce (the trade goes on, thinly) are
+    // counted apart as `.mild` (the second check's rule 1: a thin trade is not denied by an ordinary line)
+    const mk = m.short ? 'short' : /^Stopped/.test(m.crisis) ? 'stopped' : /^Curtailed/.test(m.crisis) ? 'curtailed' : 'scarce';
+    // the second check's rule 3: another house of the same trade that is NOT marked answers the line
+    const re = Object.values(TRADES).find((r) => r.test(c.name)) || Object.values(GOODS).map((g) => g.houses).find((r) => r.test(c.name));
+    const peer = re ? T.cards.find((x) => x !== c && re.test(x.name) && !marked.get(x.name).lead) : null;
     for (const l of p.lines) {
       const front = OWN_MARK.test(l.text);
       const b = norm(l.body.replace(/^(Stopped by the [a-z ]+\.|Curtailed by the [a-z ]+\.|Scarce in the [a-z ]+\.|Short of [a-z ]+\.)\s*/g, '').replace(/^(Stopped by the [a-z ]+\.|Curtailed by the [a-z ]+\.|Scarce in the [a-z ]+\.|Short of [a-z ]+\.)\s*/g, ''));
       const trade = l.kind === 'deal' ? POOL.deal.has(b) : l.kind === 'secret' ? POOL.secret.has(b) : POOL.wantRes.some((w) => w.re.test(l.body.trim()));
-      census.push({ kind: l.kind, front, trade, cause: m.short && !m.crisis ? 'short' : 'crisis', house: c.name });
-      if (front || !trade || HEDGED.test(l.body)) continue;
-      push(`8h.${l.kind}`, { tab: 'World/NPCs', i: l.i, line: l.text }, { tab: 'Systems/Institutions', i: m.idx, line: m.line },
-        `${p.name} keeps ${c.name}, which the page marks; this ${l.kind} line of the person's own trade shows it at work with no mark`, { thing: `${p.name}|${c.name}`, cause: m.short && !m.crisis ? 'short' : 'crisis', person: p.name, house: c.name });
+      census.push({ kind: l.kind, front, trade, cause: m.short && !m.crisis ? 'short' : 'crisis', mk, peer: !!peer, house: c.name });
+      if (front || !trade || HEDGED.test(l.body) || peer || (l.kind === 'deal' && MANNER_ONLY.test(l.body))) continue;
+      const mild = mk === 'curtailed' || mk === 'scarce';
+      push(`8h.${l.kind}${mild ? '.mild' : ''}`, { tab: 'World/NPCs', i: l.i, line: l.text }, { tab: 'Systems/Institutions', i: m.idx, line: m.line },
+        `${p.name} keeps ${c.name}, which the page marks (${mk}); this ${l.kind} line of the person's own trade shows it at work with no mark`, { thing: `${p.name}|${c.name}`, cause: m.short && !m.crisis ? 'short' : 'crisis', mk, person: p.name, house: c.name });
     }
     if (p.name.split(' ').length >= 2) hooks.forEach((h, i) => {
-      if (!h.includes(p.name) || MARK_LEAD.test(h) || HEDGED.test(h)) return;
+      if (peer || !h.includes(p.name) || MARK_LEAD.test(h) || HEDGED.test(h)) return;
+      // precision draw of the thirty: 0 of 7 hooks that name a marked house's keeper show it at work (each speaks of the
+      // crisis itself, "The crisis turns on the fish market, run by …"): hooks are counted in the census, not as instances
       if (!new RegExp(`\\b${c.name.split(/[\s/]/)[0].replace(/[^A-Za-z]/g, '')}`, 'i').test(h) && !TRADES_ANY(h, c.name)) return;
-      push('8h.hook', { tab: 'Summary/Plot Hooks', i, line: h }, { tab: 'Systems/Institutions', i: m.idx, line: m.line }, `a hook names ${p.name} at the trade of ${c.name}, which the page marks`, { thing: `${p.name}|${c.name}`, cause: m.short && !m.crisis ? 'short' : 'crisis' });
+census.push({ kind: 'hook', front: false, trade: true, cause: m.short && !m.crisis ? 'short' : 'crisis', mk, peer: false, house: c.name, line: h });
     });
   }
 
@@ -255,10 +268,10 @@ export function law8H(T, town) {
     ['grapes', /\b(wine ?press(?:es)?|grape harvest|vintage|treading)\b/i],
   ];
   const QUIET = /\b(quiet|idle|silent|cold|still|for want of|nothing to|no longer|little|few|brought in|from elsewhere|used to|once|stopped|short)\b/i;
-  for (const tab of SCENE_TABS) (T.tabs[tab] || []).forEach((l, i) => {
+  for (const tab of SCENE_TABS) (T.tabs[tab] || []).forEach((para, i) => sentences(para).forEach((l) => {
     if (MARK_LEAD.test(l)) return;
     if (markets.length && markets.every((c) => marked.get(c.name).crisis) && /\b(busy|bustl\w*|crowd\w*|fills|throng\w*|lively|teem\w*|packed)\b[^.]*\bmarket|\bmarket\b[^.]*\b(busy|bustl\w*|crowd\w*|fills|throng\w*|lively|teem\w*|packed)\b/i.test(l))
-      push('8k.market', { tab, i, line: l }, { tab: INST, i: markets[0].headIdx, line: markets.map((c) => marked.get(c.name).line).join(' | ') }, `a busy market, bare; every market house on the page carries the crisis's mark`, { thing: 'market', cause: 'crisis' });
+      push('8k.market', { tab, i, line: l, rowLines: [l, para] }, { tab: INST, i: markets[0].headIdx, line: markets.map((c) => marked.get(c.name).line).join(' | ') }, `a busy market, bare; every market house on the page carries the crisis's mark`, { thing: 'market', cause: 'crisis' });
     if (QUIET.test(l)) return;
     for (const [key, re] of SCENE) {
       if (!re.test(l)) continue;
@@ -266,9 +279,10 @@ export function law8H(T, town) {
       if (!hs.length) continue;
       const ms = hs.map((c) => marked.get(c.name));
       if (!ms.every((m) => m.lead)) continue;
-      push('8k.trade', { tab, i, line: l }, { tab: INST, i: ms[0].idx, line: ms.map((m) => m.line).join(' | ') }, `a scene shows the ${key} trade at work; every house of it on the page carries a mark`, { thing: key, cause: causeOf(ms) });
+      const mild = ms.every((m) => !m.short && /^(Curtailed|Scarce)/.test(m.crisis));
+      push(`8k.trade${mild ? '.mild' : ''}`, { tab, i, line: l, rowLines: [l, para] }, { tab: INST, i: ms[0].idx, line: ms.map((m) => m.line).join(' | ') }, `a scene shows the ${key} trade at work; every house of it on the page carries a mark`, { thing: key, cause: causeOf(ms) });
     }
-  });
+  }));
   out.census = census;
   return out;
 }

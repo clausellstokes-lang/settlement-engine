@@ -47,7 +47,7 @@ for (const r of [...new Set(all.map((x) => x.rule))].sort()) {
   console.log(`  ${r.padEnd(16)} ${fmt(tally(xs))} · by cause ${by.map(([c, v]) => `${c} ${v.length}/${new Set(v.map((x) => x.town)).size}t`).join(' · ')} · in a calm town ${xs.filter((x) => !x.crises.length).length}`);
 }
 console.log('PERSON LINES OF A MARKED HOUSE (8h census): kind · cause · mark in front / no mark (of them, a line of the person\'s own trade)');
-for (const kind of ['deal', 'wants', 'secret']) for (const cause of ['short', 'crisis']) {
+for (const kind of ['deal', 'wants', 'secret', 'hook']) for (const cause of ['short', 'crisis']) {
   const xs = census.filter((c) => c.kind === kind && c.cause === cause);
   if (!xs.length) continue;
   const fr = xs.filter((c) => c.front), no = xs.filter((c) => !c.front);
