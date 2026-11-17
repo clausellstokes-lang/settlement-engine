@@ -1,0 +1,72 @@
+LAWS 12 TO 15 (seat K) over 150 towns: towns   73 · instances   159 · distinct lines  103
+  12a.house            towns    4 · instances     4 · distinct lines    2 · by crisis under_siege+famine 4
+  12b.boom             towns    1 · instances     2 · distinct lines    2 · by crisis wartime 2
+  12b.boom.mild        towns    2 · instances     2 · distinct lines    1 · by crisis under_siege+famine 2
+  12c.calm             towns    1 · instances     2 · distinct lines    1 · by crisis famine 2
+  12d.enough           towns    5 · instances    10 · distinct lines    2 · by crisis wartime 2, calm 4, occupied 4
+  12d.enough.wide      towns    5 · instances    10 · distinct lines    2 · by crisis calm 6, occupied 4
+  12f.magic            towns    2 · instances     2 · distinct lines    1 · by crisis under_siege 2
+  13b.gaol             towns    2 · instances     3 · distinct lines    3 · by crisis under_siege+famine 1, occupied 2
+  13d.record           towns    4 · instances     4 · distinct lines    1 · by crisis calm 4
+  13e.hours            towns    2 · instances     2 · distinct lines    1 · by crisis calm 2
+  13f.rival            towns    7 · instances     7 · distinct lines    1 · by crisis under_siege+famine 2, wartime 2, calm 2, occupied 1
+  13g.tie              towns    3 · instances     6 · distinct lines    2 · by crisis under_siege+famine 2, wartime 2, calm 2
+  14a.descCopy         towns    9 · instances     9 · distinct lines    6 · by crisis under_siege+famine 5, wartime 4
+  14a.descCopy.generic towns    6 · instances     6 · distinct lines    5 · by crisis under_siege+famine 1, wartime 2, calm 3
+  14b.handler          towns    5 · instances     8 · distinct lines    8 · by crisis under_siege+famine 3, wartime 1, calm 4
+  14b.handler.cross    towns   24 · instances    49 · distinct lines   49 · by crisis under_siege+famine 16, wartime 11, calm 19, occupied 3
+  14c.whole            towns    6 · instances     6 · distinct lines    3 · by crisis calm 4, under_siege 2
+  14d.noble            towns    6 · instances     6 · distinct lines    1 · by crisis calm 1, famine 5
+  14e.hookTrade        towns    5 · instances     5 · distinct lines    4 · by crisis under_siege+famine 4, famine 1
+  14f.secret.sortie    towns    1 · instances     1 · distinct lines    1 · by crisis under_siege+famine 1
+  14f.secret.stores    towns    2 · instances     2 · distinct lines    1 · by crisis under_siege+famine 1, famine 1
+  14f.secret.supplies  towns    3 · instances     3 · distinct lines    1 · by crisis under_siege+famine 3
+  14f.secret.surrender towns    2 · instances     2 · distinct lines    1 · by crisis under_siege+famine 2
+  14h.winMore          towns    6 · instances     6 · distinct lines    6 · by crisis under_siege+famine 2, wartime 1, calm 2, famine 1
+  15b.grazing          towns    1 · instances     2 · distinct lines    1 · by crisis calm 2
+BY WRITER (rule · instances · writer)
+      4 · 12a.house · src/data/crisisDependence.js (the crisis tables that mark a house; read by src/domain/display/crisisStoppedRow.js :: rowMarkText)
+      1 · 12b.boom · src/data/arrivalProse.js (needs trade at work: <trade>)
+      1 · 12b.boom · src/generators/narrativeText.js (the war's "right side" pool, needs institution: smith)
+      2 · 12b.boom.mild · src/data/arrivalProse.js (needs trade at work: <trade>)
+      2 · 12c.calm · src/generators/narrativeText.js (history.historicalCharacter pool: crisis: any)
+     10 · 12d.enough · src/data/dossierStateProse/economy.generated.js (pools > POOR: crisis: any)
+     10 · 12d.enough.wide · src/data/dossierStateProse/economy.generated.js (pools > POOR: crisis: any)
+      2 · 12f.magic · src/domain/display/dossierViewModel.js :: deriveMagicSupplyView (over magicSourceOf: no house mark read; printed by src/components/new/tabs/MagicTab.jsx)
+      3 · 13b.gaol · src/data/people/handlerTieLines.js (handler_leverage_loved / the crewmate line: "held by the {body}")
+      4 · 13d.record · src/data/dossierStateProse/defense.generated.js (Internal Security: no legal infrastructure, beside Safe/Moderate "record of crimes": guardPresence)
+      2 · 13e.hours · src/generators/safetyProfile.js :: STANDARD_PATROL (#18: the patrol read off the standard, not the force's hours)
+      7 · 13f.rival · src/data/dossierStateProse/defense.generated.js (structure semi-organized: tier ≥ village, no rival rings)
+      6 · 13g.tie · src/generators/power/factionStanding.js (guard–thieves note by power alone; the relationship's type is not read)
+      9 · 14a.descCopy · src/generators/density/applyDensityLaw.js (the doubled niche's mint copies the host: `...host`, desc kept)
+      6 · 14a.descCopy.generic · src/generators/density/applyDensityLaw.js (the doubled niche's mint copies the host: `...host`, desc kept)
+      8 · 14b.handler · src/domain/people/allegiance.js :: assignHandlers (the deal goes round the criminal power's pool, not the house's own people; the record carries it; printed by src/domain/people/patronage.js :: dmPowerViewOf)
+     49 · 14b.handler.cross · src/domain/people/allegiance.js :: assignHandlers (the deal goes round the criminal power's pool, not the house's own people; the record carries it; printed by src/domain/people/patronage.js :: dmPowerViewOf)
+      6 · 14c.whole · src/data/dossierStateProse/power.generated.js (pools > council: no ruler: lord)
+      6 · 14d.noble · src/generators/power/rulingStructure.js (the Elected Reeve's desc)
+      5 · 14e.hookTrade · src/data/npcData.js (the plot-hook pool: needs market only; no holder test)
+      1 · 14f.secret.sortie · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      2 · 14f.secret.stores · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      3 · 14f.secret.supplies · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      2 · 14f.secret.surrender · src/data/stressInstitutionEffects.js (the crisis pool's secret: needs other npc only; no holder test) via src/generators/npcGenerator.js
+      6 · 14h.winMore · src/data/people/goalFamilies.js (the win-over goal: its count not read against the power's members)
+      2 · 15b.grazing · src/generators/power/governanceNarrative.js (powerStructure.recentConflict, the stock pool of src/data/powerSiblings.js)
+THE STOCK RECENT-CONFLICT LINE (15b census): tier · towns · grazing+water line (with a grazing house or chain / without) · rotation+grazing line
+  thorp        15 ·    8 (4 / 4) · calm 13, of them the line 8 · 0
+  hamlet       30 ·    8 (8 / 0) · calm 15, of them the line 8 · 1
+  village      30 ·    6 (6 / 0) · calm 15, of them the line 6 · 2
+  town         30 ·    0 (0 / 0) · calm 15, of them the line 0 · 0
+  city         30 ·    0 (0 / 0) · calm 0, of them the line 0 · 0
+  metropolis   15 ·    0 (0 / 0) · calm 15, of them the line 0 · 0
+SECRET POOLS (static): the crisis pools 98 rows, 10 presume a command or an office, none with a holder test; the rare rows 194, 0 presume one, 0 of them with a holder test
+  crisis · under_siege: Secretly negotiating surrender terms with the besieging force, without the counc [needs []; excludes ["ruler: lord","ruler: occupier"]; holder test: none]
+  crisis · under_siege: The supplies they declared destroyed in a fire are actually hidden in a location [needs ["starving"]; excludes []; holder test: none]
+  crisis · under_siege: Authorised an illegal sortie that failed. Five people died and no record was kep [needs ["other npc"]; excludes []; holder test: none]
+  crisis · famine: Sold off the settlement's emergency stores three months ago and reported them de [needs []; excludes []; holder test: none]
+  crisis · indebted: The debt was not authorised by the council. They signed alone under pressure and [needs []; excludes ["ruler: lord","ruler: occupier"]; holder test: none]
+  crisis · indebted: Knows the debt contains a clause that transfers significant civic assets to the  [needs ["other npc"]; excludes []; holder test: none]
+  crisis · monster_pressure: The work they authorised six months ago disturbed a nesting site. The attacks st [needs []; excludes []; holder test: none]
+  crisis · mass_migration: Signed the order closing the settlement to further arrivals, then made a paid ex [needs ["migration: influx","other npc"]; excludes []; holder test: none]
+  crisis · wartime: Authorised the seizure of a rival's property as a 'war measure', on evidence the [needs []; excludes []; holder test: none]
+  crisis · slave_revolt: Knows the revolt began because of a specific atrocity the authorities ordered an [needs []; excludes []; holder test: none]
+RARE ROWS DEALT over this render: 53 (masters 5, natures 15, outsiders 3, deeds 16, ties 14); 1 with a holder test of role or office; 0 against their holder

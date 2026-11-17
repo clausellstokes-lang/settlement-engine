@@ -1,0 +1,17 @@
+[
+ {
+  "root": "warIronOutsideWar",
+  "siege": false,
+  "crises": "occupied",
+  "ironImports": "Iron ore (local iron mines exhausted)",
+  "town": "bar0-town-occupied-rand-46"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "livestock",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported livestock",
+  "imports": "Quality weapons and armour · Incense and votive candles · Incense and frankincense · Salted fish (local sea fisheries exhausted) · Raw hides and animal products · Clay and raw materials",
+  "town": "bar0-village-calm-rand-47"
+ }
+]

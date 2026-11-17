@@ -1,0 +1,218 @@
+[
+ {
+  "id": "C0893",
+  "rule": "11a",
+  "group": "stands",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "found": true,
+  "rules": "11a.imported",
+  "text": "Needed, and not brought in: iron ore, copper ore, gold and silver ore."
+ },
+ {
+  "id": "C42813",
+  "rule": "11a",
+  "group": "stands",
+  "town": "bar0-village-calm-rand-47",
+  "found": true,
+  "rules": "11a.imported",
+  "text": "Needed, and not brought in: livestock."
+ },
+ {
+  "id": "C34109",
+  "rule": "11a",
+  "group": "stands",
+  "town": "bar0-town-calm-rand-46",
+  "found": true,
+  "rules": "11a.atWork",
+  "text": "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay"
+ },
+ {
+  "id": "C19722",
+  "rule": "11b",
+  "group": "stands",
+  "town": "bar0-metropolis-calm-rand-45",
+  "found": true,
+  "rules": "11b.fish",
+  "text": "Half of Gantulgaabad seems to be gutting, salting or selling fish."
+ },
+ {
+  "id": "C20700",
+  "rule": "11b",
+  "group": "stands",
+  "town": "bar0-metropolis-calm-rand-45",
+  "found": true,
+  "rules": "11b.fish",
+  "text": "Fish sold daily from the morning catch."
+ },
+ {
+  "id": "C20963",
+  "rule": "11b",
+  "group": "stands",
+  "town": "bar0-metropolis-calm-rand-45",
+  "found": true,
+  "rules": "11b.fish",
+  "text": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and"
+ },
+ {
+  "id": "C36591",
+  "rule": "11b",
+  "group": "stands",
+  "town": "bar0-town-occupied-rand-45",
+  "found": true,
+  "rules": "11b.fish",
+  "text": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere."
+ },
+ {
+  "id": "C36970",
+  "rule": "11b",
+  "group": "stands",
+  "town": "bar0-town-occupied-rand-45",
+  "found": true,
+  "rules": "11b.fish",
+  "text": "Fish sold daily from the morning catch."
+ },
+ {
+  "id": "C42801",
+  "rule": "11b",
+  "group": "stands",
+  "town": "bar0-village-calm-rand-47",
+  "found": true,
+  "rules": "11b.fish",
+  "text": "Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and "
+ },
+ {
+  "id": "C41716",
+  "rule": "11b",
+  "group": "explained",
+  "town": "bar0-village-calm-rand-46",
+  "found": false,
+  "rules": "",
+  "text": "Services · Salt production"
+ },
+ {
+  "id": "C42154",
+  "rule": "11b",
+  "group": "explained",
+  "town": "bar0-village-calm-rand-46",
+  "found": false,
+  "rules": "",
+  "text": "How they deal Sells by the sack and the cart; the price goes up before winter."
+ },
+ {
+  "id": "C43392",
+  "rule": "11b",
+  "group": "explained",
+  "town": "bar0-village-famine-rand-45",
+  "found": false,
+  "rules": "",
+  "text": "The fishing failed this year and took most of the food produced here with it."
+ },
+ {
+  "id": "C43737",
+  "rule": "11b",
+  "group": "explained",
+  "town": "bar0-village-famine-rand-45",
+  "found": false,
+  "rules": "",
+  "text": "Of the food Vedamala raises for itself, its fishing comes first, and after a poor season f"
+ },
+ {
+  "id": "C34102",
+  "rule": "11c",
+  "group": "stands",
+  "town": "bar0-town-calm-rand-46",
+  "found": true,
+  "rules": "11c.venture",
+  "text": "A good part of the clay Drumbeck's work uses must come from elsewhere; when none comes, th"
+ },
+ {
+  "id": "C38200",
+  "rule": "11d",
+  "group": "stands",
+  "town": "bar0-town-occupied-rand-46",
+  "found": true,
+  "rules": "11d.warIron",
+  "text": "Short of iron. Multiple smiths with specializations."
+ },
+ {
+  "id": "C38039",
+  "rule": "11d",
+  "group": "stands",
+  "town": "bar0-town-occupied-rand-46",
+  "found": true,
+  "rules": "11d.warIron",
+  "text": "The forges of Ulaanabad are quiet more often than not, for want of iron."
+ },
+ {
+  "id": "C2853",
+  "rule": "11e",
+  "group": "stands",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "found": true,
+  "rules": "11e.siegeBought",
+  "text": "Services · Coin production"
+ },
+ {
+  "id": "C8867",
+  "rule": "11e",
+  "group": "stands",
+  "town": "bar0-city-wartime-rand-45",
+  "found": true,
+  "rules": "11e.wantBuy",
+  "text": "Wants Buy stone and iron and grain at the market in bulk this season, while the price is s"
+ },
+ {
+  "id": "C5157",
+  "rule": "11e",
+  "group": "stands",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "found": true,
+  "rules": "11e.stalls",
+  "text": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want."
+ },
+ {
+  "id": "C32296",
+  "rule": "11e",
+  "group": "stands",
+  "town": "bar0-town-calm-rand-45",
+  "found": true,
+  "rules": "11e.offer",
+  "text": "Luxury goods available."
+ },
+ {
+  "id": "C0423",
+  "rule": "11e",
+  "group": "explained",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "found": false,
+  "rules": "",
+  "text": "Services · Fresh produce · Street food (stopped)"
+ },
+ {
+  "id": "C0453",
+  "rule": "11e",
+  "group": "explained",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "found": false,
+  "rules": "",
+  "text": "Services · District trading"
+ },
+ {
+  "id": "C2821",
+  "rule": "11e",
+  "group": "explained",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "found": false,
+  "rules": "",
+  "text": "Services · Fresh produce · General trade"
+ },
+ {
+  "id": "C5541",
+  "rule": "11e",
+  "group": "explained",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "found": false,
+  "rules": "",
+  "text": "Services · Fresh produce · General trade"
+ }
+]

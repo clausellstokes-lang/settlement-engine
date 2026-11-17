@@ -1,0 +1,97 @@
+LAW 11 (seat J) over 30 towns: towns   17 · instances    54 · distinct lines   36
+  11a.atWork       towns    1 · instances     1 · distinct lines    1
+    by story calm 1
+    by material livestock 1
+  11a.imported     towns    2 · instances     2 · distinct lines    2
+    by story siege 1 · bought 1
+    by material ironOre 1 · livestock 1
+  11b              towns    6 · instances    22 · distinct lines   11
+    by story bought 21 · siege 1
+    by material fish 20 · grain 1 · ironOre 1
+    by line kind service 8 · chip 3 · income 3 · person.how 3 · scene 2 · card 2 · tick 1
+      11b.fish         towns    4 · instances    13 · distinct lines    7
+      11b.fishTitle    towns    4 · instances     7 · distinct lines    2
+      11b.ironOre      towns    1 · instances     1 · distinct lines    1
+      11b.landOffers   towns    1 · instances     1 · distinct lines    1
+  11c.needed       towns    1 · instances     1 · distinct lines    1
+    by story needed 1
+    by material copper ore 1
+  11c.noImport     towns    3 · instances     3 · distinct lines    1
+    by story none 3
+    by material fish 3
+  11c.venture      towns    1 · instances     1 · distinct lines    1
+    by story venture 1
+    by material clay 1
+  11d.warIron      towns    1 · instances     7 · distinct lines    7
+    by story warHook 7
+    by material ironOre 7
+  11e.offer        towns    2 · instances     2 · distinct lines    2
+    by story calm 2
+    by material luxury 1 · livestock 1
+  11e.siegeBought  towns    3 · instances     4 · distinct lines    3
+    by story siege 4
+    by material wool 3 · precious 1
+  11e.stalls       towns    1 · instances     1 · distinct lines    1
+    by story siege 1
+    by material reagents 1
+  11e.wantBuy      towns    2 · instances     2 · distinct lines    2
+    by story calm 2
+    by material stone 1 · livestock 1
+  11g.gapLine      towns    7 · instances     8 · distinct lines    4
+    by story workedOut 6 · venture 2
+    by material stone 4 · iron ore 2 · clay 1 · fish 1
+THE ROOTS (the record alone)
+  gapImportedNoImport    towns    1 · rows    1 · by material livestock 1
+  warIronOutsideWar      towns    1 · rows    1 · under a siege 0 · by crises occupied 1 · with an iron import 1
+DISTINCT LINES (top 25 by towns; all in J30.forms.json)
+  11b       4t     4 Systems/Services     Fresh fish retail
+  11b       4t     4 Systems/Services     Fish sold daily from the morning catch.
+  11g.gapLine    4t     4 Systems/Resources    No stone reaches the stone quarry.
+  11b       3t     3 Systems/Institutions Services · Fresh fish retail
+  11b       3t     3 World/NPCs           How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.
+  11c.noImport    3t     3 Systems/Institutions Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.
+  11b       2t     2 Systems/Economics    Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.
+  11e.siegeBought    2t     2 Systems/Institutions Services · Livery and uniforms
+  11g.gapLine    2t     2 Systems/Resources    No iron ore reaches the mine.
+  11a.atWork    1t     1 Systems/Economics    Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs.
+  11a.imported    1t     1 Systems/Economics    Needed, and not brought in: iron ore, copper ore, gold and silver ore.
+  11a.imported    1t     1 Systems/Economics    Needed, and not brought in: livestock.
+  11b       1t     1 Systems/Resources    ✓Agriculture
+  11b       1t     1 Summary/Overview     Half of <name> seems to be gutting, salting or selling fish.
+  11b       1t     1 Systems/Institutions The industrial step from what the mine yields to what the smith uses.
+  11b       1t     1 Summary/Overview     Racks of drying fish line the way in, and the smell of salt and catch is everywhere.
+  11b       1t     1 Systems/Institutions Where the day's catch is sold, from an open stall or a small covered market.
+  11b       1t     1 Systems/Economics    Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.
+  11c.needed    1t     1 Systems/Economics    <name>'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Nobody at
+  11c.venture    1t     1 Systems/Economics    Ask what <name> lives on and you will hear more than one trade named. A good part of the clay <name>'s work uses must co
+  11d.warIron    1t     1 Summary/Overview     Strangers in foreign colours stand about in the middle of <name>, and the locals walk around them as if they were furnit
+  11d.warIron    1t     1 Summary/Plot Hooks   War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Wo
+  11d.warIron    1t     1 Systems/Services     Short of iron. Essential service for any settlement with working horses. Routine maintenance.
+  11d.warIron    1t     1 Systems/Services     Short of iron. Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new.
+  11d.warIron    1t     1 Systems/Services     Short of iron. Axes, ploughs, hinges, nails. The foundation of agricultural and construction work.
+CONTROLS (stands must be FOUND by their sub-rule; explained must be clear of every rule of the seat)
+  11a stands    C0893   FOUND 11a.imported           Needed, and not brought in: iron ore, copper ore, gold and silver ore.
+  11a stands    C42813  FOUND 11a.imported           Needed, and not brought in: livestock.
+  11a stands    C34109  FOUND 11a.atWork             Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay
+  11b stands    C19722  FOUND 11b.fish               Half of Gantulgaabad seems to be gutting, salting or selling fish.
+  11b stands    C20700  FOUND 11b.fish               Fish sold daily from the morning catch.
+  11b stands    C20963  FOUND 11b.fish               Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and
+  11b stands    C36591  FOUND 11b.fish               Racks of drying fish line the way in, and the smell of salt and catch is everywhere.
+  11b stands    C36970  FOUND 11b.fish               Fish sold daily from the morning catch.
+  11b stands    C42801  FOUND 11b.fish               Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and 
+  11b explained C41716  clear                        Services · Salt production
+  11b explained C42154  clear                        How they deal Sells by the sack and the cart; the price goes up before winter.
+  11b explained C43392  clear                        The fishing failed this year and took most of the food produced here with it.
+  11b explained C43737  clear                        Of the food Vedamala raises for itself, its fishing comes first, and after a poor season f
+  11c stands    C34102  FOUND 11c.venture            A good part of the clay Drumbeck's work uses must come from elsewhere; when none comes, th
+  11d stands    C38200  FOUND 11d.warIron            Short of iron. Multiple smiths with specializations.
+  11d stands    C38039  FOUND 11d.warIron            The forges of Ulaanabad are quiet more often than not, for want of iron.
+  11e stands    C2853   FOUND 11e.siegeBought        Services · Coin production
+  11e stands    C8867   FOUND 11e.wantBuy            Wants Buy stone and iron and grain at the market in bulk this season, while the price is s
+  11e stands    C5157   FOUND 11e.stalls             Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.
+  11e stands    C32296  FOUND 11e.offer              Luxury goods available.
+  11e explained C0423   clear                        Services · Fresh produce · Street food (stopped)
+  11e explained C0453   clear                        Services · District trading
+  11e explained C2821   clear                        Services · Fresh produce · General trade
+  11e explained C5541   clear                        Services · Fresh produce · General trade
+controls off: 0
