@@ -60,7 +60,8 @@ auditor names, by seats with disjoint files.
 | SCENES | K's 12b, 12c, 15a; J's 11b (the scenes), 11e.stalls | `src/domain/facts/tradeAtWork.js`, `src/data/arrivalProse.js`, `src/generators/narrativeText.js` | from the working line's tip once it holds both audits (its prompt names it) |
 | J-INCOME | 11b (the rites income line), 11a.imported, 11e.offer (the livestock chips and the need list's half), K's 15c (the chain's outputs) | `src/generators/economy/incomeLineSiblings.js`, `src/domain/display/tradeListDisplay.js` | after LEFT-CHAIN lands |
 | MARKS-2 | K's 12a, 12f; J's 11e.siegeBought, 11a.atWork, 11d (ruling BR16), the roots' gapImportedNoImport | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/display/dossierViewModel.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/warIronHook.js`, `src/generators/resourceGenerator.js` | after LEFT-MARKS lands |
-| DESKS-2 | K's 12d, 12e, 13a (the desk line), 13d, 13f, 14c, 15c (the desk's half), 15e; J's 11c.needed, 11c.venture, 11c.idle, the fishmonger | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and the generated `defense.generated.js`, `economy.generated.js`, `power.generated.js` (ruling AX1), `src/data/people/titleSecretsPresentations.js`, `src/domain/facts/factVocabulary.js` (the atoms given by name) | after LEFT-LINES lands |
+| DESKS-ECO | K's 12d, 15e; J's 11c.needed, 11c.venture, 11c.idle, the fishmonger; LEFT-LINES's leftovers on these desks (the brewer's secret; DS-GEN-3 Import-Dependent) | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (THE ECONOMY AND THE GENERAL DESKS' SECTIONS ONLY) and the generated `economy.generated.js`, `general.generated.js` (ruling AX1), `src/data/people/titleSecretsPresentations.js`, `src/domain/facts/factVocabulary.js` (the atoms given by name, line by line) | after LEFT-LINES lands, from the line's tip |
+| DESKS-DEF | K's 12e, 13a (the desk line), 13d, 13f, 14c, 15c (the desk's half); LEFT-LINES's leftovers on these desks (L9's two lines, the granary's v2 and v3) | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` (THE DEFENSE AND THE POWER DESKS' SECTIONS ONLY) and the generated `defense.generated.js`, `power.generated.js` (ruling AX1), `tests/lint/factLayers.poolTable.json` (two pools, by name), `src/domain/facts/factVocabulary.js` (the atoms given by name, line by line) | after LEFT-LINES lands, from the line's tip |
 
 A NEW TEST FILE OF YOUR OWN (your guard) and your hand-back are yours too. A seat that needs a shared reading adds ONE
 new leaf under `src/domain/display/` or `src/domain/facts/` (import-free where the eager closure reads it: ruling EG1)
@@ -267,3 +268,97 @@ THE SCENE OF 11d ("The forges of {name} are quiet more often than not, for want 
 WILL MOVE (ruling BR16): NOT YOURS. R7 binds every pool you touch (no pool under three lines in any town of your
 populations: measure it). `narrativeText.js` is a generator: N3 and R5. YOUR GUARD: `tests/generators/bar8Scenes.test.js`.
 YOU MEASURE WITH BOTH RUNNERS (`runJ.mjs` for 11b and 11e.stalls, `runK.mjs` for 12b, 12c, 15a): both are at your base.
+
+## THE TWO DESK SEATS (written 19:28 UTC on 2026-11-17; seated when LEFT-LINES has landed; base: the working line's tip your prompt names)
+
+THE ANNEX IS ONE FILE HELD BY TWO SEATS, EACH IN ITS OWN DESKS' SECTIONS (the precedent: the round BAR4's two corpus
+seats). You edit ONLY the pools of your desks; you regenerate ONLY your desks' generated files (R10, ruling AX1: the
+wiring census is re-taken in scratch to let the generator run and is NOT committed; nor is `proseNorms.generated.js`).
+THE LINE ANCHORS of `tests/lint/proseEntryContradiction.walker.test.js` (two annex rows addressed by line number) move
+with every line added above them: you re-address them BY THEIR TEXT with a dated note (R8), and THE SECOND OF THE TWO
+SEATS TO LAND RE-ADDRESSES THEM ONCE MORE on a scratch merge of the first's tip (the chair tells you which you are).
+THE SHARED FACTS' FILE `factVocabulary.js` is touched only for the atoms your section gives you, each beneath the
+entry of its own subject (R3, R6), its reader an import-free leaf of its own under `src/domain/facts/`.
+READ ALSO, for your desks, `docs/chair/2026-11-17/sixth/NEXT-SEATS-WORKLIST.md` on the chair's lane (the section
+"DESKS-2": what LEFT-LINES left and what its second reader found), and LEFT-LINES's hand-back at your checkout
+(`docs/chair/2026-11-17/left/LEFT-LINES-HANDBACK.md`, sections 3 to 5: how it declared, twinned, measured the pools and
+named the books its variants moved: you do the same). EVERY NEW OR REWORDED LINE is listed in your hand-back with three
+towns it prints in (or "none of the populations", measured by a diff of every dump at your base against your tip, NOT
+by a count of the line's text: a twin moves a pool's draw in towns where neither line was false, and those towns are
+listed too). R7: no pool under three lines in any town of your populations where it held three at your base.
+
+### DESKS-ECO · the economy's and the general desk's lines read the need list, the imports and the food band
+
+Rulings in force for you: BR14 (c) (the atom of 12d), BR17 (3) (the good that is brought in; the fishmonger's twin).
+
+1. **12d (K) · "covers what it must ... Every essential is accounted for" beside an unmet need.**
+   `economy.generated.js` (the pools above POOR; today `crisis: any` only). The one fact is the page's own unmet need:
+   the food line (`economy/foodBalance.js`) and the need list (`tradeListDisplay.js :: importsAsPrinted().needed`).
+   BR14 (c): ONE NEW ATOM (an unmet need of an essential on the page: food, salt, fuel, livestock; NOT the wider
+   family, K's `12d.enough.wide`, which a poor place may honestly do without), or the existing food band where it
+   answers the whole case: measure both and say which you took. To zero: 16 towns (32 instances) of the 720.
+2. **11c (J) · "A good part of the {good} {settlement}'s work uses must come from elsewhere; when none comes, that work
+   stands idle."** (`economy.generated.js`, about line 6672; it declares `no crisis: under_siege` and nothing about the
+   good.) It prints for copper ore, clay and herbs the same tab says are NOT brought in (11c.needed, 8), for the
+   failed venture's clay (11c.venture, the control C34102) and under an idle story (11c.idle, 1). BR17 (3): the line
+   takes a declaration on its `{good}` (the good IS brought in: a per-good atom value, read off the stored imports and
+   the supply story: `supplyStory.js`, READ); where the good is needed and not brought in, a TWIN says so in the page's
+   plain voice (R7). To zero: 10. `11c.noImport` (the fish market's inland card, 56) is NOT yours.
+3. **15e (K) · "nothing new goes up" beside the brickmaker's "knows every new wall going up".** One of the two lines
+   must read the other: the POOR pool's line (`economy.generated.js`) or the brickmaker's presentation
+   (`titleSecretsPresentations.js`). Cure the one whose premise the record can answer (a declaration), and say why.
+   To zero: 2.
+4. **The fishmonger's "Talks about the boats, the catch ..."** (`titleSecretsPresentations.js`, about line 140; J's 6,
+   LOW) under a bought-in or idle fish story: a declaration by the fish story (`taken here`, the key seat SCENES adds
+   to `trade at work`: if it is not at your base, declare by the existing atoms that answer "the town's own boats
+   fish" and say so) and BR17 (3)'s TWIN. To zero: 6.
+5. **The brewer's secret "Thins the ale ... charges the taverns"** (LEFT-LINES left it): `institution: tavern`, as its
+   two presentations took.
+6. **DS-GEN-3 `Import-Dependent`** (READ-LEFT-LINES's MED-2, in the worklist file): v4 is dead by construction under
+   `food: ≥ secure`; v6 and its older siblings v1 to v3 say the food is brought in, in a town where nothing is. The
+   pool's premise is declared by what the record brings in; v4 is re-declared by a band its key can hold or retired BY
+   NAME with a dated note; the guard's positive arm of `tests/domain/leftLines.test.js` for this row is re-anchored on
+   a state a birth produces (`tests/domain/leftLines.test.js` is yours for that arm, and for LOW-2: its shared-page arm
+   takes the constructed states of your desks).
+7. `tests/domain/generalStateProseDesk.test.js`: beside the re-keyed `tier: 'town'` record, a village record, so that
+   ENTREPOT's small-place twin is drawn there (LOW-3).
+
+MEASURE (R4) with `runK.mjs` (12d, 15e) and `runJ.mjs` (11c, the fishmonger) over the thirty, the 150 and the 720, and
+with the diff of every dump (above). YOUR GUARD: `tests/domain/bar8DesksEco.test.js`.
+
+### DESKS-DEF · the defense and the power desks' lines read the legal row, the crime structure, the seat and the stores
+
+Rulings in force for you: BR14 (c) (the atom of 12e), BR15 (14c's twin).
+
+1. **13f (K) · "has no rival, and no crew is contesting" two lines under "lacks a single controlling authority. Several
+   gangs may be competing."** (`defense.generated.js`, the semi-organized structure's line: `tier: ≥ village`, `no rival
+   rings`.) The line sits in the one key whose own note says the opposite (`criminalStructureKey.js`). It leaves that
+   key (a declaration that the structure's note can answer), with a TWIN there if the pool would fall under three. To
+   zero: 22 (one line in every such town).
+2. **13a (K), the desk's line · "arrested, heard and held ... expect a hearing"** under "Legal Infrastructure · Prison
+   only / Detention without process." (`defense.generated.js`, Internal Security: full legal chain; it declares
+   `court`, a NAME test.) It declares the atom the Legal row prints (`court sits`). The SERVICE line of this rule is
+   seat K-WATCH's. To zero: the desk line's instances (say the count).
+3. **13d (K) · "no wrong done there is written down" beside the same tab's "record of crimes ... is short".**
+   (`defense.generated.js`: Internal Security: no legal infrastructure, beside the safety pools' "record of crimes"
+   lines.) One of two lines of one desk reads the other. To zero: 4.
+4. **14c (K) · "goes to the whole {seat}" of a seat the page prints "1 member".** (`power.generated.js`, the pools above
+   council; `no ruler: lord`.) BR15: the twin "goes to the {seat}" for a seat of one member, declared by the seat's
+   member count (BR14 (c): the atom, if no existing one answers it). To zero: 45 (7 distinct lines).
+5. **12e (K) · "nobody ... stands ready to lead them" beside a live rising on the record** (`power.generated.js`,
+   riskLabel Stable: `succession settled`, `no unrest`; the record's `history.currentTensions[].type:
+   popular_uprising`). The atom `unrest` reads only three crisis kinds. BR14 (c): A NEW ATOM for the record's live
+   tension (do NOT widen `unrest`: it would move every line that declares it, unmeasured), declared on this line. To
+   zero: 1 (the thirty; none in the 720: your guard holds it on a constructed record).
+6. **15c (K), the desk's half · "has none of its own to send"** (`defense.generated.js`: charter hall ABSENT) beside the
+   chain card's "Adventuring & Escort ... Via Veteran's lodge". K reads the chain's outputs as the false half (another
+   seat's): MEASURE the desk line against the roster (a veteran's lodge that offers armed escort IS "its own to
+   send"?): cure the desk line if it is the false one, else leave it BY NAME with the towns. 2.
+7. **L9's two lines (LEFT-LINES left them, its words are in its hand-back, section 5):** DS-DEF-6 Legal Infrastructure:
+   None v1 and DS-POW-5 FLAG: merchantArmy v1 take `law: > collapsed` and their twins; `tests/lint/factLayers.poolTable.json`
+   IS YOURS for these two pools only (placed at the layer `law` needs, as BAR6-DEFDESK placed DS-DEF-3 Moderate).
+8. **DS-DEF-2 granary-and-parish v2 and v3** ("The town can eat through a bad year", "a full grain store") presume
+   the stores as v1 did: `stores: ≥ 3`, keeping the pool at three where stores are short (a twin if it falls).
+
+MEASURE (R4) with `runK.mjs` (12e, 13a, 13d, 13f, 14c, 15c), the static audit LEFT-LINES used for L9 (`staticI`:
+its hand-back names it), and the diff of every dump (above). YOUR GUARD: `tests/domain/bar8DesksDef.test.js`.

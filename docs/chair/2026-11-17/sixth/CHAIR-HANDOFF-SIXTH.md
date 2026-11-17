@@ -488,3 +488,19 @@ should be paused or archived by the owner's hand.
   THE FIRST BATCH: DEBT-2, LEFT-LINES, LEFT-PDF, LEFT-CHAIN (when its last commit is confirmed), as POINTS 36 TO 39 on a
   landing branch the chair builds on the line's tip; a second team of CHECKS seats runs the shared whole check AT THAT
   COMMIT; when it reads clean by name and the three second readers say LAND, the line is fast-forwarded to it.
+- **19:31 UTC. READ-LEFT-LINES SAYS LAND (19:26): HIGH none; MED-1** the hand-back's "the twins print in none" is wrong: ENTREPOT's
+  twin v6 prints in two towns and the Overview's clipped ENTREPOT clause changed its draw in four more of the 150 (no
+  sentence false on either side: for the veto list); **MED-2** DS-GEN-3 Import-Dependent v4 is dead by construction
+  under its new declaration and its twin keeps the pool's old premise (to DESKS-ECO); three LOW. By its own mutations no
+  hunk escapes the guard; AX1 holds (the four desk files regenerate byte-identical); the declared move is exactly 24 of
+  525. `NEXT-SEATS-WORKLIST.md` (new) GATHERS WHAT EACH SEAT NOT YET SEATED WILL HOLD.
+- **19:31 UTC. LEFT-MARKS HANDED BACK (19:27, b745bb33e): items 1 to 4 and M1 to M5; ITS AMENDMENT 2 (M6, M7 = BR11) WAS NOT
+  BUILT** (its hand-back does not name it; the chair's two messages were delivered): both go to MARKS-2. On the 720:
+  8b.extract 17 -> 0 in both forms, 8b.person 14 -> 0, 8i.surplus 4 -> 0, 8a.input 7/23 -> 5/17. Two stored records
+  move (1 of the thirty, 1 of the 720), 0 of the 525. RULING BR20 (in the worklist file): the maltster of
+  bar0-hamlet-calm-rand-40 stays as built (the birth's law for a buyer on a calm road is the owner's rule). SECOND
+  READER: READ-LEFT-MARKS session_01FbPLbe3ALLkoD83nKAVfE7 (seated 19:30; told to read every detector change as a
+  possible blinding). THE DESK SEAT IS SPLIT IN TWO BY DESK (`BRIEF-BAR8.md`: DESKS-ECO, DESKS-DEF; both sections
+  written; the annex is one file held in two seats' own sections, as in the round BAR4). ALL FOUR LEFT BUILDERS ARE IN:
+  THE FIRST BATCH IS DEBT-2, LEFT-LINES, LEFT-PDF, LEFT-CHAIN (its amended L18 commit is awaited) AND LEFT-MARKS, AS
+  POINTS 36 TO 40.
