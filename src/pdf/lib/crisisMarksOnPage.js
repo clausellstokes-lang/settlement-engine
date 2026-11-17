@@ -98,7 +98,7 @@ export function markOnPage(settlement, kind, row) {
  * chip; `chainStateOnPage.js :: CHAIN_STATE_WORDS`). Without a town, the chain as given. Display only: the record's chain
  * is not touched.
  * @template {{ status?: unknown }} C
- * @param {C} chain one of the record's chains (`economicState.activeChains[]`)
+ * @param {C} chain one of the record's chains, as the record holds it
  * @param {object | null | undefined} town the settlement record
  * @returns {{ chain: C, key: string, word: string }}
  */
