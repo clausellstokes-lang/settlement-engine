@@ -67,7 +67,27 @@ export const GUARD_LAW_SIBLINGS = Object.freeze({
     ' A wrong done here goes before the court, and the guilty can be locked up for it.', COURT_AND_PRISON_UNDER_COLLAPSE),
   ' Thieves here know that the court sits and the cells are real.': declaredSet(
     ' Thieves here know that the court sits and the cells are real.', COURT_AND_PRISON_UNDER_COLLAPSE),
+  // BAR7-ORDER (LAW 9's 9a.order, C5430; vetoable by the owner): the siege's order clause (`safetyProfile.js`, the siege
+  // branch's `milRef`, the head of a sentence of the SAFETY line, read by `safetyLineAsPrinted` through `SIEGE_ORDER_CLAUSES`).
+  // Each subject keeps its own twin; a small place has no command and no streets (the profile's own rule), and the garrison
+  // stands in small places too, so neither of their twins names the streets.
+  'The garrison keeps order, and more harshly as the food runs down': declaredSet(
+    'The garrison keeps order, and more harshly as the food runs down',
+    'The garrison holds the defences, but order among the people has gone, and things get worse as the food runs down'),
+  'Those holding the place keep order, and more harshly as the food runs down': declaredSet(
+    'Those holding the place keep order, and more harshly as the food runs down',
+    'Those holding the place see to its defence, but order among the people has gone, and things get worse as the food runs down'),
+  'The military command has taken charge of the streets, and more harshly as the food runs down': declaredSet(
+    'The military command has taken charge of the streets, and more harshly as the food runs down',
+    'The military command holds the defences, but order in the streets has gone, and things get worse as the food runs down'),
 });
+
+/** BAR7-ORDER: the keys of `GUARD_LAW_SIBLINGS` that are the siege's order clause (the safety line's, not the guard line's). */
+export const SIEGE_ORDER_CLAUSES = Object.freeze([
+  'The garrison keeps order, and more harshly as the food runs down',
+  'Those holding the place keep order, and more harshly as the food runs down',
+  'The military command has taken charge of the streets, and more harshly as the food runs down',
+]);
 
 /**
  * THE COURT'S LINES THAT NAME THE FORCE (`safetyProfile.js :: COURT_AND_PRISON(lawRef)[2]`, `COURT_NO_PRISON(lawRef)[2]`):
@@ -87,10 +107,24 @@ export const GUARD_LAW_FRAMES = Object.freeze([
  * @returns {string}
  */
 export function guardLineUnderTheLaw(text, record) {
+  return familiesUnheld(guardLineUnderTheBand(text, record), record); // BAR7-ORDER (low.hook-party): the party, after the band
+}
+
+/** @param {string} text @param {unknown} record @returns {string} */
+function guardLineUnderTheBand(text, record) {
   const held = Object.keys(GUARD_LAW_SIBLINGS).filter((k) => text.includes(k));
   const framed = GUARD_LAW_FRAMES.filter((f) => f.frame.test(text));
   if (!held.length && !framed.length) return text;
   if (atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) !== false) return text;
+  return twinsUnderCollapse(text, held, framed);
+}
+
+/**
+ * Each declared line the text holds gives way to its twin (the band is Collapsed: the caller has read it).
+ * @param {string} text @param {string[]} held keys of `GUARD_LAW_SIBLINGS` @param {typeof GUARD_LAW_FRAMES[number][]} framed
+ * @returns {string}
+ */
+function twinsUnderCollapse(text, held, framed) {
   let out = text;
   for (const k of held) {
     const twin = /** @type {Readonly<Record<string, ReadonlyArray<{ text: string, twinOf?: string }>>>} */ (GUARD_LAW_SIBLINGS)[k].find((l) => typeof l.twinOf === 'string');
@@ -143,6 +177,44 @@ export function safetyLineAsPrinted(text, record) {
   // the force's one reading (`orderForce.js`), not a word of the line, decides; a line without the claim is left as it is
   const f = orderForceOf(record);
   if (f.count.militia > 0 && f.count.garrison === 0 && f.count.watch === 0) out = out.replace(MILITIA_PRESENT, MILITIA_TURNS_OUT);
+  // BAR7-ORDER (9a.order, C5430): the siege's order clause reads the band the page prints, as the guard line does
+  const clauses = SIEGE_ORDER_CLAUSES.filter((k) => out.includes(k));
+  if (clauses.length && atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) === false) out = twinsUnderCollapse(out, clauses, []);
+  return out;
+}
+
+// ─── BAR7-ORDER (BRIEF-BAR7's BAR7-ORDER item 2, the audit's low.hook-party; vetoable by the owner): "the old families"
+// name a party. Where no power, conflict, tension or crisis of the finished record names the families (the powers are drawn
+// after the safety profile, so the draw cannot know), the no-watch line names no party: the neighbours keep the peace. The
+// stored line and the table's key stay as drawn. ───
+
+/** The words that name the families as a party on the record (the audit's own reading, `lowFamiliesI.mjs`). */
+const FAMILIES_NAMED = /famil|noble|clan|elder/i;
+/** The old families' lines (the drawn line, `GUARD_LAW_SIBLINGS`'s first key, and its twin under Collapsed) and their twins naming no party. */
+const FAMILIES_UNHELD = Object.freeze([
+  Object.freeze(['There is no watch. The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.',
+    'There is no watch. The neighbours keep the peace, and anyone who breaks it answers to all of them at once; when they fall out among themselves, nobody keeps it.']),
+  Object.freeze(['There is no watch. The old families once kept the peace; they have fallen out among themselves, and nobody keeps it now.',
+    'There is no watch. The neighbours once kept the peace together; they have fallen out among themselves, and nobody keeps it now.']),
+]);
+
+/**
+ * Whether the finished record holds the families as a party: a power's name, a conflict, a tension or a crisis names them.
+ * @param {unknown} record @returns {boolean}
+ */
+function familiesHeldOf(record) {
+  const r = /** @type {{ powerStructure?: { factions?: unknown[], recentConflict?: unknown }, conflicts?: unknown, history?: { currentTensions?: unknown }, stress?: unknown } | null | undefined} */ (record);
+  const factions = Array.isArray(r?.powerStructure?.factions) ? r.powerStructure.factions : [];
+  const held = JSON.stringify([factions.map((f) => /** @type {{ faction?: unknown } | null} */ (f)?.faction), r?.conflicts, r?.history?.currentTensions, r?.stress, r?.powerStructure?.recentConflict]);
+  return FAMILIES_NAMED.test(held ?? '');
+}
+
+/** @param {string} text @param {unknown} record @returns {string} */
+function familiesUnheld(text, record) {
+  const hits = FAMILIES_UNHELD.filter(([line]) => text.includes(line));
+  if (!hits.length || familiesHeldOf(record)) return text;
+  let out = text;
+  for (const [line, twin] of hits) out = out.split(line).join(twin);
   return out;
 }
 
