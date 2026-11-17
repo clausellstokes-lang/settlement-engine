@@ -13,7 +13,8 @@
 //   14h.winMore   "Win N more people in <power>" where the page prints that power with fewer others than N (C14564)
 const POW = 'Systems/Power', NPC = 'World/NPCs', HOOKS = 'Summary/Plot Hooks';
 
-const MILITARY = /\b(garrison|watch|barracks|citadel|militia|guard|fort|fortress|castle|keep|army|soldier|mercenar|hireling|warband|war council)\b/i;
+// not a hireling hall (read on the 720: it hires out fighters for coin, and a hook of customers is true of it)
+const MILITARY = /\b(garrison|watch|barracks|citadel|militia|guard|fort|fortress|castle|keep|army|soldier|warband|war council)\b/i;
 const COMMAND_ROLE = /\b(castellan|commander|captain|marshal|sergeant|general|warden|prefect|voivode|qaid|strategos|lord|lady|reeve|mayor|governor|councillor|elder|headman|chief|steward|magistrate|noyan)\b/i;
 const MERCHANT_SEAT = /\b(merchant|guild|trade|oligarch|market|bank|money|caravan|syndicate|company|exchange|consortium)\b/i;
 const TRADE_HOOK = /\b(competition|customers?|price-fixing|business rival|partnership|regular customer|two buyers|their stall|their shop|their goods|their prices|undercut)\b/i;
@@ -23,7 +24,9 @@ const TRADE_HOOK = /\b(competition|customers?|price-fixing|business rival|partne
 const COMMAND_SECRET = [
   ['sortie', /\bAuthori[sz]ed an illegal sortie\b/i],
   ['surrender', /\bnegotiating surrender terms\b/i],
-  ['stores', /\b(Sold off the settlement's emergency stores|supplies they declared destroyed|declared destroyed in a fire)\b/i],
+  ['stores', /\bSold off the settlement's emergency stores\b/i],
+  // "the supplies THEY declared destroyed" may be their own (read on the 720): counted apart
+  ['supplies', /\b(supplies they declared destroyed|declared destroyed in a fire)\b/i],
 ];
 
 // SEX-PAIRED TITLES (the product's own pairs in `data/faceHonorifics.js`, and the ordinary English pairs); an office's title
@@ -46,7 +49,10 @@ export function law14K(T, town) {
     const copy = fs.find((f) => f.contestsNiche) || fs[1];
     const host = fs.find((f) => f !== copy);
     const i = pow.findIndex((l, k) => l.startsWith(d.slice(0, 60)) && /\[opened\] /.test(pow[k - 1] || '') && pow[k - 1].includes(copy.faction));
-    push('14a.descCopy', { tab: i >= 0 ? POW : 'record', i, line: d, s: d }, { tab: 'record', line: `powerStructure.factions: "${host.faction}" and "${copy.faction}" (contestsNiche ${copy.contestsNiche || 'none'}) carry one desc` },
+    // a description general to the category ("Clergy are present but operate at the margins ...") is true of the rival as
+    // of the host (read on the thirty): counted apart as `.generic`; one that names a body, an office or a hold is the fault
+    const named = /\b(body|committee|council|appointed|chartered|elected|watch|whoever controls|reserves|authority over)\b/i.test(d);
+    push(named ? '14a.descCopy' : '14a.descCopy.generic', { tab: i >= 0 ? POW : 'record', i, line: d, s: d }, { tab: 'record', line: `powerStructure.factions: "${host.faction}" and "${copy.faction}" (contestsNiche ${copy.contestsNiche || 'none'}) carry one desc` },
       `the power ${copy.faction} is printed with the description of ${host.faction}`, copy.faction,
       copy.contestsNiche ? 'src/generators/density/applyDensityLaw.js (the doubled niche\'s mint copies the host: `...host`, desc kept)' : 'the faction roster (two powers, one desc)');
   }
@@ -66,12 +72,18 @@ export function law14K(T, town) {
     }
     const npcs = T.record?.npcs || [];
     const ownOf = (h) => { const n = npcs.find((y) => y?.name === h.name); return String(n?.institution?.key || n?.allegiance?.house || h.label); };
+    // THE SWAP (C6183): house A's network handled only by B's people and B's only by A's. Read on the 720: a network handled
+    // one way by another house's boss is the deal's own design (`allegiance.js :: assignHandlers`: "the deal goes round the
+    // pool", the boss last): counted apart as `.cross`, a question for the owner, not an instance a checker lets stand.
+    const foreign = new Map();
+    for (const g of groups) if (g.handlers.length && !g.handlers.some((h) => ownOf(h) === g.head || h.label === g.head)) foreign.set(g.head, new Set(g.handlers.map(ownOf)));
     for (const g of groups) {
-      if (!g.handlers.length || /^Front businesses$/.test(g.head)) continue;
+      // a house whose heading names its own head ("<house> · led by <person>") has a person of its own: not read
+      if (!g.handlers.length || /^Front businesses$/.test(g.head) || / · led by /.test(g.head)) continue;
       if (g.handlers.some((h) => ownOf(h) === g.head || h.label === g.head)) continue;
       for (const h of g.handlers)
-        push('14b.handler', { tab: POW, i: h.k, line: pow[h.k], s: pow[h.k] }, { tab: POW, i: g.k, line: `the network's house: ${g.head}; ${h.name}'s own house: ${ownOf(h)}` },
-          `no person of ${g.head} handles its network; it is credited to ${h.name} of ${ownOf(h)}`, g.head, 'src/domain/people/allegiance.js (the handler of a criminal house\'s network; the record carries the swap)');
+        push(foreign.get(ownOf(h))?.has(g.head) ? '14b.handler' : '14b.handler.cross', { tab: POW, i: h.k, line: pow[h.k], s: pow[h.k] }, { tab: POW, i: g.k, line: `the network's house: ${g.head}; ${h.name}'s own house: ${ownOf(h)}` },
+          `no person of ${g.head} handles its network; it is credited to ${h.name} of ${ownOf(h)}`, g.head, 'src/domain/people/allegiance.js :: assignHandlers (the deal goes round the criminal power\'s pool, not the house\'s own people; the record carries it; printed by src/domain/people/patronage.js :: dmPowerViewOf)');
     }
   }
 

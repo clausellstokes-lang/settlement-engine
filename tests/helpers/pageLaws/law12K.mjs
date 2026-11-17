@@ -29,7 +29,7 @@ const BOOM = /\b(day and night|never (?:quite )?stops|new ironwork|running|ring|
 
 export function law12K(T, town) {
   const out = [];
-  const push = (rule, at, against, why, thing, writer) => out.push({ law: 12, rule, town, tab: at.tab, i: at.i, line: at.line, against, why, thing, writer });
+  const push = (rule, at, against, why, thing, writer) => out.push({ law: 12, rule, town, tab: at.tab, i: at.i, line: at.line, s: at.s, against, why, thing, writer });
   const hard = [...T.crises].filter((c) => CRISIS_WORD[c]);
 
   // ---- 12a · a bare house in the Via of a chain the crisis stopped
@@ -39,6 +39,10 @@ export function law12K(T, town) {
     for (const v of ch.via) {
       const c = T.cards.find((x) => x.name === v);
       if (!c || T.cardMark(c) || c.chips.some((x) => x.marked)) continue;
+      // read on the 720: a house of worship's rites go on when its pilgrimage stops (ruling CY1: the temple's chip is true),
+      // and a house in the Via of a chain still running (merchant guilds) has work: only a house every chain of which the
+      // page prints stopped ("Stopped by the …", or "Normally yields": not yielding now) is read
+      if (/^Religious$/.test(c.cat) || T.chains.some((o) => o !== ch && o.via.includes(v) && !o.yieldsNormally && !o.lines.some((l) => /^Stopped by the /.test(l.text)))) continue;
       const against = { tab: ECO, i: ch.headIdx, line: `${ch.head} / Via ${ch.via.join(' · ')} / ${ch.yieldsNormally ? 'Normally yields ' : ''}${ch.outputs || ''} / ${stop.text}` };
       push('12a.house', { tab: INST, i: c.headIdx, line: [c.head, c.chipLine || ''].filter(Boolean).join(' / ') }, against,
         `the chain ${ch.name} through ${c.name} is printed "${stop.text}"; the house's card and its chips carry no mark`, c.name,
@@ -65,7 +69,9 @@ export function law12K(T, town) {
 
   // ---- 12c · a steady, quiet history under a live hard crisis it does not name
   if (hard.length) {
-    const CALM = /\b(long and steady|history here is (?:long|quiet|steady|uneventful)|outlasted grander neighbours|getting the small things right|little has ever happened|nothing much has ever happened|has always been (?:a )?(?:quiet|peaceful|steady))\b/i;
+    // not "An ordinary place that has outlasted grander neighbours ..." (read on the thirty: it says how the place lasted, not
+    // that its past was quiet, and a crisis now does not deny it)
+    const CALM = /\b(long and steady|history here is (?:long|quiet|steady|uneventful)|little has ever happened|nothing much has ever happened|has always been (?:a )?(?:quiet|peaceful|steady))\b/i;
     for (const x of T.findSent(CALM, /^(Summary\/Overview|World\/History)$/)) {
       if (hard.some((c) => CRISIS_WORD[c].test(x.s))) continue;
       push('12c.calm', x, { tab: 'record', line: `stress.type = ${hard.join(', ')}` },
@@ -76,7 +82,9 @@ export function law12K(T, town) {
 
   // ---- 12d · every essential covered, beside the page's own unmet need
   const ENOUGH = /\b(covers what it must and nothing beyond|Every essential is accounted for|wants for nothing|has all it needs)\b/i;
-  const need = T.needed ? T.pageHas(/^Needed, and not brought in: /) : null;
+  // an ESSENTIAL need (read on the 720: "luxury goods" or "mineral hot springs" alone is not a want of an essential)
+  const ESSENTIAL = /\b(timber|stone|grain|food|flour|salt|fuel|charcoal|peat|iron|ore|metals?|copper|clay|wool|hides|livestock|fish|tools|cloth|bricks?|lime)\b/i;
+  const need = T.needed && ESSENTIAL.test(T.needed) ? T.pageHas(/^Needed, and not brought in: /) : null;
   const foodShort = T.pageHas(/falls (?:a little |well |far )?short of the food it needs|^Production .*Short: \d/);
   if (need || foodShort) for (const x of T.findSent(ENOUGH)) {
     const ag = need || foodShort;
@@ -101,7 +109,7 @@ export function law12K(T, town) {
     if (!ms.every((m) => m && /^Stopped by/.test(m))) continue;
     push('12f.magic', x, { tab: INST, i: cards[0].headIdx, line: cards.map((c, k) => `${c.name}: ${ms[k]}`).join(' | ') },
       'the reliance names its supplier(s); every one is a house the page marks stopped', names.join(', '),
-      'src/components/new/tabs/MagicTab.jsx (the reliance row\'s "supplied by", read off the magic dependence)');
+      'src/domain/display/dossierViewModel.js :: deriveMagicSupplyView (over magicSourceOf: no house mark read; printed by src/components/new/tabs/MagicTab.jsx)');
   }
   return out;
 }

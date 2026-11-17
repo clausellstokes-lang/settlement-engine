@@ -83,6 +83,27 @@ try {
   const rarePresume = rare.filter((r) => PRESUME.test(`${r?.what || ''} ${r?.stakes || ''}`));
   console.log(`SECRET POOLS (static): the crisis pools ${crisisRows} rows, ${crisisPresume.length} presume a command or an office, none with a holder test; the rare rows ${rare.length}, ${rarePresume.length} presume one, ${rarePresume.filter((r) => r?.holder && (r.holder.office || r.holder.roles || r.holder.category || r.holder.keepsHouse)).length} of them with a holder test`);
   for (const l of crisisPresume) console.log(`  crisis · ${l}`);
+  // THE DEALT RARE ROWS OVER THIS RENDER, against their holders: a row known by its words (up to its first slot); a row
+  // with a holder test of role or office is checked against the card's own role and rank
+  const stem = (t) => String(t || '').split('{')[0].trim();
+  const roleOf = (n) => String(n?.role || '').replace(/^the /, '').trim();
+  let dealt = 0, tested = 0, miss = [];
+  const byFam = {};
+  for (const [seed, s] of records) for (const n of s?.npcs || []) {
+    const what = String(n?.secret?.what || '');
+    const r = rare.find((x) => stem(x.what).length > 12 && what.startsWith(stem(x.what)));
+    if (!r) continue;
+    dealt++; const fam = Object.entries({ deeds: 'RARE_DEEDS', natures: 'RARE_NATURES', ties: 'RARE_TIES', masters: 'RARE_MASTERS', outsiders: 'RARE_OUTSIDERS' }).find(([k]) => (RARE_SECRET_ROWS[k] || []).includes(r))?.[0] || '?';
+    byFam[fam] = (byFam[fam] || 0) + 1;
+    const h = r.holder || {};
+    if (!h.roles && !h.office) continue;
+    tested++;
+    const okRole = !h.roles || h.roles.includes(roleOf(n));
+    const okOffice = !h.office || h.office.includes(String(n?.structuralRank || ''));
+    if (!okRole || !okOffice) miss.push(`${seed} · ${n.name} (${roleOf(n)}, ${n.structuralRank}) · ${r.key}`);
+  }
+  console.log(`RARE ROWS DEALT over this render: ${dealt} (${Object.entries(byFam).map(([k, v]) => `${k} ${v}`).join(', ')}); ${tested} with a holder test of role or office; ${miss.length} against their holder`);
+  for (const m of miss.slice(0, 20)) console.log(`  rare against its holder · ${m}`);
   for (const r of rarePresume) console.log(`  rare   · ${r.key}: ${String(r.what).slice(0, 80)} [holder ${JSON.stringify(r.holder || {})}]`);
 } catch (e) { console.log(`SECRET POOLS (static): not read (${e.message})`); }
 

@@ -21,7 +21,7 @@ const COURT_SAYS = [
   [/\bheard and held\b|\bexpect a hearing\b/i, DESK + ' (Internal Security: full legal chain: court, prison)'],
   [/\bThe court sits and the gaol holds\b/i, 'src/generators/servicesGenerator.js :: SLOW_LAW_DESC (needs court, prison)'],
   [/\bthe court sits and the cells are real\b/i, DESK],
-  [/\bgoes before the court\b/i, DESK],
+  [/\bgo(?:es)? before the court\b/i, DESK + ' / src/generators/safetyProfile.js (the enforcement lines)'],
   [/\btried at the court\b/i, 'src/generators/safetyProfile.js (the enforcement line)'],
   [/\bArrest, trial and gaol all work here\b/i, DESK],
   [/\bkeeps its own court\b/i, 'src/data/dossierStateProse/general.generated.js'],
@@ -33,7 +33,7 @@ const GAOL_SAYS = [
   [/\bthe gaol holds\b/i, 'src/generators/servicesGenerator.js :: SLOW_LAW_DESC (needs court, prison)'],
   [/\bcells are real\b|\bcan be locked up\b|\bArrest, trial and gaol\b|\bheld in the prison\b/i, DESK],
   [/\bkeeps its own gaol\b|\ba gaol\b(?![^.]*\bthough no court\b)/i, 'src/data/dossierStateProse/general.generated.js'],
-  [/\bheld by the watch\b|\bsafe inside\b/i, 'src/generators/people/ties.js (the relationship line)'],
+  [/\bheld by the (?:watch|garrison|militia|guard|town watch|city watch)\b|\bsafe inside\b|\bget the prisoner out\b/i, 'src/data/people/handlerTieLines.js (handler_leverage_loved / the crewmate line: "held by the {body}")'],
 ];
 
 export function law13K(T, town) {
@@ -60,7 +60,9 @@ export function law13K(T, town) {
 
   // ---- 13d · nothing written down, beside a record of crimes
   const nothingWritten = T.findSent(/\bno wrong done there is written down\b/i);
-  const written = T.findSent(/\brecord of crimes\b|\bbooks record\b|\bRecords here are kept carefully\b/i);
+  // the record of crimes only (read on the 720: "books record no gang" names no record of wrongs, and the history's "records
+  // here are kept carefully" is the culture's line, not the law's)
+  const written = T.findSent(/\brecord of crimes\b/i);
   if (nothingWritten.length && written.length) for (const x of nothingWritten) {
     push('13d.record', x, { tab: written[0].tab, i: written[0].i, line: written.map((w) => w.s).join(' | ') },
       'the line says no wrong is written down; the same page keeps a record of crimes', 'record', DESK + ' (Internal Security: no legal infrastructure, beside Safe/Moderate "record of crimes": guardPresence)');
@@ -71,7 +73,7 @@ export function law13K(T, town) {
   const nightOnly = forces.length > 0 && forces.every((f) => /after dark|\bnight\b/i.test(String(f?.desc || '')) && !/\bday\b|gate|by day|daylight/i.test(String(f?.desc || '')));
   if (nightOnly) for (const x of T.findSent(/\bon the rounds most hours of the day\b|\bat (?:all|any) hours?\b[^.]*\b(watch|patrol)|\b(watch|patrol)\b[^.]*\bby day\b/i)) {
     push('13e.hours', x, { tab: 'record', line: forces.map((f) => `${f.name}: ${String(f.desc || '').slice(0, 90)}`).join(' | ') },
-      'the line has the watch on its rounds by day; every force the town keeps walks after dark', 'watch', 'src/generators/safetyProfile.js (the safety line "You will see the {watch} on the rounds"; src/generators/safetyLineTruth.js)');
+      'the line has the watch on its rounds by day; every force the town keeps walks after dark', 'watch', 'src/generators/safetyProfile.js :: STANDARD_PATROL (#18: the patrol read off the standard, not the force\'s hours)');
   }
 
   // ---- 13f · no rival, beside several gangs
