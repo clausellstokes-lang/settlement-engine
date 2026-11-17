@@ -282,3 +282,20 @@ round trip's table; what a reader can newly see (each with three towns); the rea
 those you named; the pairs of item 12; the books your cure moves; for the owner's veto list: the tables of item 1 as a
 person who knows no code can read them. Budget: hand back at 600,000 of your count, then push nothing more. PUSH EARLY
 AND OFTEN. One line to the chair at the end, 150 words at most.
+
+## AMENDED AFTER SEATING (each sent to the seat by message; the seat was seated 2026-11-17 07:14 UTC)
+
+- **THE SEED AT THE BIRTH (ruling BR7, sent 07:26 UTC).** The seat found before it built that the birth cannot make the
+  seed's picks from its own files (the resource analysis has one caller, the narratives step, which hands it no seed).
+  ITS FILE LIST GROWS BY ONE HUNK in `src/generators/steps/generateNarratives.js`: the one call of the resource analysis
+  gains the pipeline's seed as an explicit seventh argument; not stamped on the config; nothing else in that file. Two
+  conditions: one function reads the seed for the birth and the print (an absent seed reads as the empty string in
+  both); the seat's guard holds the agreement of the two.
+- **THE SCENE GUARD's ARM (sent 07:42 UTC).** A rehearsal of the round BAR7's scenes seat on the line's a55162cfa0 found
+  the whole scene guard GREEN with that seat in and no edit of the guard file (the seat re-words the brought-in twin).
+  SO THE ARM "REACHABLE (MU1)" IS NO LONGER THIS SEAT'S TO RE-COMPOSE FOR THE CLOTH TWIN: it leaves the arm as it is
+  for that twin (red at its own tip as at its base: named in the hand-back) and touches the arm only where its own cure
+  makes ANOTHER twin unproved. Before it hands back it runs, in a scratch merge of the line's tip as it then stands
+  (local, never pushed), the scene guard, the round's guards and its own, and NAMES whatever goes untrue there that is
+  green at the line's tip: a file in its own tree is its own by R8; a file not in its tree it names and does not edit
+  (an edit would collide at the merge): the chair sends those to their seats.

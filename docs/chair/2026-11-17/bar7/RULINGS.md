@@ -149,7 +149,7 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   none is brought in." and "The <house> is failing: no <material> lies near and none is brought in." Everything else
   of BR6 stands for both (one house a town; never a whole trade; no ground on the land list, nothing on the imports; the
   mark covers the house's rows).
-- **BR7 (2026-11-17, 07:27 UTC; the chair's, vetoable): THE BIRTH IS HANDED THE SEED.** BIRTH-2 found, before it built,
+- **BR7 (2026-11-17, 07:26 UTC; the chair's, vetoable): THE BIRTH IS HANDED THE SEED.** BIRTH-2 found, before it built,
   that its brief's premise "the birth passes the generator's seed as an argument" could not be met from its own files:
   the resource analysis (where the import is written at the birth) has one caller in src, the narratives step, and that
   step hands it the config and the economy, neither of which carries the seed. THE CHAIR VERIFIED IT at the line's
