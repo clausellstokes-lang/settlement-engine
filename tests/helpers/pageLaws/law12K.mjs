@@ -42,7 +42,10 @@ export function law12K(T, town) {
       // read on the 720: a house of worship's rites go on when its pilgrimage stops (ruling CY1: the temple's chip is true),
       // and a house in the Via of a chain still running (merchant guilds) has work: only a house every chain of which the
       // page prints stopped ("Stopped by the …", or "Normally yields": not yielding now) is read
-      if (/^Religious$/.test(c.cat) || T.chains.some((o) => o !== ch && o.via.includes(v) && !o.yieldsNormally && !o.lines.some((l) => /^Stopped by the /.test(l.text)))) continue;
+      // and the house must be a chain's ONE house (read on the 720: merchant guilds, a cooper, beast trainers named among
+      // others in a stopped chain go on at their own trade; the furrier's district and the shipyard ARE their chains)
+      const own = T.chains.some((o) => o.via.length === 1 && o.via[0] === v && (o.yieldsNormally || o.lines.some((l) => /^Stopped by the /.test(l.text))));
+      if (!own || /^Religious$/.test(c.cat) || T.chains.some((o) => o !== ch && o.via.includes(v) && !o.yieldsNormally && !o.lines.some((l) => /^Stopped by the /.test(l.text)))) continue;
       const against = { tab: ECO, i: ch.headIdx, line: `${ch.head} / Via ${ch.via.join(' · ')} / ${ch.yieldsNormally ? 'Normally yields ' : ''}${ch.outputs || ''} / ${stop.text}` };
       push('12a.house', { tab: INST, i: c.headIdx, line: [c.head, c.chipLine || ''].filter(Boolean).join(' / ') }, against,
         `the chain ${ch.name} through ${c.name} is printed "${stop.text}"; the house's card and its chips carry no mark`, c.name,
@@ -60,7 +63,11 @@ export function law12K(T, town) {
         if (!hs.length) continue;
         const ms = hs.map((c) => T.cardMark(c));
         if (!ms.every((m) => m && /^(Stopped|Curtailed|Scarce) /.test(m))) continue; // the short mark is LAW 8k's (seat H)
-        push('12b.boom', x, { tab: INST, i: hs[0].headIdx, line: hs.map((c, k) => `${c.name}: ${ms[k]}`).join(' | ') },
+        // FULL WORK ("day and night", "never quite stops", new ironwork waiting for the carts) under a crisis mark is the
+        // fault the second check let stand; an ordinary line of work ("the clang carries", "the hammering echoes") under
+        // "Curtailed" is a thin trade the second check's rule 1 does not deny: counted apart as `.mild` (LAW 8k's `.mild`)
+        const full = /\b(day and night|never (?:quite )?stops|hangs over everything|new ironwork|waiting for the carts|full swing)\b/i.test(x.s);
+        push(full ? '12b.boom' : '12b.boom.mild', x, { tab: INST, i: hs[0].headIdx, line: hs.map((c, k) => `${c.name}: ${ms[k]}`).join(' | ') },
           `a scene shows the ${key} trade at full work; every house of it on the page is marked by the crisis`, key,
           /running day and night/.test(x.s) ? 'src/generators/narrativeText.js (the war\'s "right side" pool, needs institution: smith)' : 'src/data/arrivalProse.js (needs trade at work: <trade>)');
       }
@@ -82,13 +89,19 @@ export function law12K(T, town) {
 
   // ---- 12d · every essential covered, beside the page's own unmet need
   const ENOUGH = /\b(covers what it must and nothing beyond|Every essential is accounted for|wants for nothing|has all it needs)\b/i;
-  // an ESSENTIAL need (read on the 720: "luxury goods" or "mineral hot springs" alone is not a want of an essential)
-  const ESSENTIAL = /\b(timber|stone|grain|food|flour|salt|fuel|charcoal|peat|iron|ore|metals?|copper|clay|wool|hides|livestock|fish|tools|cloth|bricks?|lime)\b/i;
-  const need = T.needed && ESSENTIAL.test(T.needed) ? T.pageHas(/^Needed, and not brought in: /) : null;
+  // WHAT DENIES "every essential is accounted for" (read on the 720, 47 towns): the page's own food short, or a need list
+  // that names food, salt, fuel or livestock (`12d.enough`); a need of plain stone, timber or metal is counted apart
+  // (`.wide`: a poor place may honestly go without them); a need the list itself sets beyond the essential ("stone (for
+  // major construction)", "timber (for large vessels)", luxury goods, hot springs) denies nothing and is not read
+  const needs = String(T.needed || '').split(/,\s*|\s+and\s+(?=[a-z])/).map((x) => x.trim()).filter((x) => x && !/\(for /.test(x) && !/luxury|hot springs|spices|fine textiles|gold|silver|quality/i.test(x));
+  const strongNeed = needs.find((x) => /\b(grain|food|flour|salt|fuel|charcoal|peat|livestock)\b/i.test(x));
+  const wideNeed = needs.find((x) => /\b(timber|building wood|stone|metals?|copper|iron|ore|clay|wool|hides|tools|cloth)\b/i.test(x));
+  const needLine = T.pageHas(/^Needed, and not brought in: /);
   const foodShort = T.pageHas(/falls (?:a little |well |far )?short of the food it needs|^Production .*Short: \d/);
-  if (need || foodShort) for (const x of T.findSent(ENOUGH)) {
-    const ag = need || foodShort;
-    push('12d.enough', x, { tab: ag.tab, i: ag.i, line: ag.text }, 'the line says every essential is covered; the page prints a need not met', 'need',
+  const ag = foodShort || (strongNeed && needLine) || (wideNeed && needLine);
+  const rule12d = foodShort || strongNeed ? '12d.enough' : '12d.enough.wide';
+  if (ag) for (const x of T.findSent(ENOUGH)) {
+    push(rule12d, x, { tab: ag.tab, i: ag.i, line: [foodShort && foodShort.text, needLine && needLine.text].filter(Boolean).join(' | ') }, 'the line says every essential is covered; the page prints a need not met', 'need',
       'src/data/dossierStateProse/economy.generated.js (pools > POOR: crisis: any)');
   }
 

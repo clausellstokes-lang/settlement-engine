@@ -86,7 +86,7 @@ try {
   // THE DEALT RARE ROWS OVER THIS RENDER, against their holders: a row known by its words (up to its first slot); a row
   // with a holder test of role or office is checked against the card's own role and rank
   const stem = (t) => String(t || '').split('{')[0].trim();
-  const roleOf = (n) => String(n?.role || '').replace(/^the /, '').trim();
+  const roleOf = (n) => String(n?.role || '').replace(/^the /i, '').trim().toLowerCase();
   let dealt = 0, tested = 0, miss = [];
   const byFam = {};
   for (const [seed, s] of records) for (const n of s?.npcs || []) {
