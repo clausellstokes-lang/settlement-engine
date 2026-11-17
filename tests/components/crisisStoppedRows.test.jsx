@@ -80,7 +80,9 @@ const MARKED = [
 const KEEP = [
   ['r2r-town-2', 'services', 'Beds, meals, and stabling for travelers on the road. Priced by quality.'], // a calm town: the inn's line, unmarked
   ['r2r-town-2', 'institutions', 'Built for the road: relay stabling, coaches on a schedule, meals at set hours, and a room for waiting passengers. Horses are changed here, not merely rested.'],
-  ['r2s-under_siege-city-1', 'services', 'Beef, pork, mutton. Slaughtered and dressed on premises or nearby.'], // lives on nothing a siege stops
+  // BAR6-HOUSES (2026-11-16): re-keyed by identity, the assertion unchanged: the same row (the butcher's Fresh meat under the
+  // siege) prints its hunger twin since the definition declares the hunger family (institutionServices.js); 1 town of this table.
+  ['r2s-under_siege-city-1', 'services', 'Whatever meat can be had, slaughtered and dressed on premises or nearby.'], // lives on nothing a siege stops
 ];
 const MARKS = [SIEGE, OUTBREAK, FAMINE];
 
