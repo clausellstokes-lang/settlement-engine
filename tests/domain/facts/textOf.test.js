@@ -69,6 +69,8 @@ describe('textOf', () => {
     // 233 -> 242 (BAR7-SCENES, 2026-11-17, BRIEF-BAR7 item 5; re-keyed by identity, this seat's own count): the tanners' four bare
     // `lines` become declared objects, each declaring the leather (4), with a twin each (4); the arms' racks line takes its twin (1):
     // 4 + 4 + 1 = 9. The dyer's, the tanners' dominant, the smiths', the brought-in and the work party's twins are reworded, not added.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(242);
+    // 242 -> 244 (BAR8-SCENES, 2026-11-17, the chair's BR23 (1) and (3); re-keyed by identity): two declared twins join, the small
+    // working quarry's ("A laden cart or two …") and enchanting offered with the arcane trade not at work ("Signs in … still offer …")
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(244);
   });
 });

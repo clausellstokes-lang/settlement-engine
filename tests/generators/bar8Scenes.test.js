@@ -23,7 +23,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { ARRIVAL_SENSES, ARRIVAL_TENSIONS } from '../../src/data/arrivalProse.js';
-import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
+import { POLITICAL_FLAVOR, PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
 import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { FISH_TAKEN_HERE, GOOD_TRADES, IN_FULL, tradeAtWorkOf } from '../../src/domain/facts/tradeAtWork.js';
@@ -166,5 +166,98 @@ describe('BAR8-SCENES item 7 (9g.food-soft): "nobody looks hungry" wants the foo
     const s = town('bar0-metropolis-calm-rand-45');
     expect(band(s)).toBe('secure');
     expect(admits(row(), s)).toBe(true);
+  });
+});
+
+// ---- AFTER THE CHAIR'S RULING BR23 (2026-11-17): three twins given by name; the arrival draw answers by a line's first ADMITTED
+// twin (`arrivalScene.js :: drawAdmitted`), the history's cascade by a row's `twinKey` (`historyCoherence.js :: flavorOf`). Each
+// twin prints where its premise holds and is refused where it does not; no state admits two twins of one line.
+/** @param {any[]} pool @param {any} original @returns {any[]} its twins, by template or by key */
+const twinsOf = (pool, original) => {
+  const own = typeof original?.twinKey === 'string' ? original.twinKey : textOfLine(original);
+  return pool.filter((l) => l && typeof l === 'object' && typeof l.twinOf === 'string' && l.twinOf === own);
+};
+
+describe('BR23 (1): the small working quarry', () => {
+  const pool = () => sense('stone').dominant;
+  const laden = () => rowOf(pool(), /^Laden carts from the workings/);
+  const small = () => rowOf(pool(), /^A laden cart or two comes down from the workings/);
+  const empty = () => rowOf(pool(), /^The road from the workings is empty of carts/);
+  test('the endless line has exactly the two twins (the new one last in the pool, so no row\'s argmax id moves)', () => {
+    expect(twinsOf(pool(), laden())).toEqual([empty(), small()]);
+    expect(pool()[pool().length - 1]).toBe(small());
+  });
+  test('C15891, bar0-hamlet-calm-rand-45: a hamlet whose stone is at work prints a cart or two, never the empty road', () => {
+    const s = town('bar0-hamlet-calm-rand-45');
+    expect(tradeAtWorkOf(s, 'stone')).toBe(true);
+    expect(crisisOf(s).has('under_siege')).toBe(false);
+    expect([admits(laden(), s, true), admits(small(), s, true), admits(empty(), s, true)]).toEqual([false, true, false]);
+  });
+  test('bar0-city-wartime-rand-31: the stone not at work: the empty road, not the small cart', () => {
+    const s = town('bar0-city-wartime-rand-31');
+    expect(tradeAtWorkOf(s, 'stone')).toBe(false);
+    expect([admits(laden(), s, true), admits(small(), s, true), admits(empty(), s, true)]).toEqual([false, false, true]);
+  });
+  test('bar0-city-under_siege+famine-rand-46: a siege over stone at work: the empty road keeps the slot', () => {
+    const s = town('bar0-city-under_siege+famine-rand-46');
+    expect(crisisOf(s).has('under_siege')).toBe(true);
+    expect(tradeAtWorkOf(s, 'stone')).toBe(true);
+    expect([admits(laden(), s, true), admits(small(), s, true), admits(empty(), s, true)]).toEqual([false, false, true]);
+  });
+  test('bar0-village-calm-rand-45: a village whose stone is at work keeps the endless line (a twin is reached only where it is refused)', () => {
+    const s = town('bar0-village-calm-rand-45');
+    expect([admits(laden(), s, true), admits(small(), s, true)]).toEqual([true, false]);
+  });
+});
+
+describe('BR23 (3): enchanting offered, the arcane trade not at work', () => {
+  const pool = () => sense('arcane').dominant;
+  const trade = () => rowOf(pool(), /^Magic is a trade in .* like any other/);
+  const noSign = () => rowOf(pool(), /^No sign in .* offers enchanting by the hour/);
+  const slow = () => rowOf(pool(), /^Signs in .* still offer enchanting by the hour, but the work is slow and dear/);
+  /** @param {any} s */
+  const states = (s) => [admits(trade(), s), admits(noSign(), s), admits(slow(), s)];
+  test('the trade line has exactly the two twins (the new one last in the pool)', () => {
+    expect(twinsOf(pool(), trade())).toEqual([noSign(), slow()]);
+    expect(pool()[pool().length - 1]).toBe(slow());
+  });
+  test('C5157\'s town, bar0-city-under_siege+famine-rand-47: enchanting offered, the tower impaired by the siege', () => {
+    const s = town('bar0-city-under_siege+famine-rand-47');
+    expect(/** @type {any} */ (factsOf(s)).enchanting).toBe(true);
+    expect(tradeAtWorkOf(s, 'arcane')).toBe(false);
+    expect(states(s)).toEqual([false, false, true]);
+  });
+  test('bar0-city-under_siege+famine-rand-46: enchanting offered and the arcane trade at work: the original', () => {
+    const s = town('bar0-city-under_siege+famine-rand-46');
+    expect(tradeAtWorkOf(s, 'arcane')).toBe(true);
+    expect(states(s)).toEqual([true, false, false]);
+  });
+  test('bar0-town-calm-rand-46: no enchanting offered: the "No sign" twin', () => {
+    const s = town('bar0-town-calm-rand-46');
+    expect(/** @type {any} */ (factsOf(s)).enchanting).toBe(false);
+    expect(states(s)).toEqual([false, true, false]);
+  });
+});
+
+describe('BR23 (2), K\'s 12c: the long and steady history under a live hard crisis', () => {
+  const pool = () => /** @type {any[]} */ (POLITICAL_FLAVOR.stable);
+  const row = () => { const r = pool().find((l) => l && typeof l === 'object' && l.twinKey === 'stable: long and steady'); expect(r).toBeTruthy(); return r; };
+  const twin = () => { const t = twinsOf(pool(), row()); expect(t.length).toBe(1); expect(pool()[pool().length - 1]).toBe(t[0]); return t[0]; }; // last in the pool: no row's argmax id moves
+  const CALM = /\b(long and steady|history here is (?:long|quiet|steady|uneventful)|little has ever happened|has always been (?:a )?(?:quiet|peaceful|steady))\b/i;
+  const events = (/** @type {any[]} */ majors) => majors.map((name) => ({ name, severity: 'major', type: 'political' }));
+  test('C36585, bar0-town-occupied-rand-45: occupied: the row refused, its twin admitted, and no branch of the twin calls the past steady', () => {
+    const s = town('bar0-town-occupied-rand-45');
+    expect(crisisOf(s).has('occupied')).toBe(true);
+    expect(admits(row(), s, true)).toBe(false);
+    expect(admits(twin(), s, true)).toBe(true);
+    for (const r of [events([]), events(['Succession Crisis']), events(['Succession Crisis', 'Great Fire'])]) expect(twin().text(r)).not.toMatch(CALM);
+    // the row's true branch (two great events) is the twin's own
+    expect(twin().text(events(['Succession Crisis', 'Great Fire']))).toBe(row().text(events(['Succession Crisis', 'Great Fire'])));
+  });
+  test('bar0-metropolis-calm-rand-45: no hard crisis: the row admitted, its twin refused', () => {
+    const s = town('bar0-metropolis-calm-rand-45');
+    expect(['under_siege', 'famine', 'occupied', 'plague_onset', 'wartime'].some((k) => crisisOf(s).has(k))).toBe(false);
+    expect(admits(row(), s, true)).toBe(true);
+    expect(admits(twin(), s, true)).toBe(false);
   });
 });
