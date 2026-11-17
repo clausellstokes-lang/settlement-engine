@@ -1,0 +1,13 @@
+tests/build/engineBundleReplay.test.js :: engine bundle replay — the bundle generates what the app generates every golden-corpus config: the committed bundle's settlement JSON equals the in-process pipeline's, byte for byte
+tests/build/engineBundleReplay.test.js :: engine bundle replay — the bundle generates what the app generates the engine-generate birth: for the three service cases, the bundle's stamped birth equals the in-process birth under the STORE's runtime
+tests/build/engineBundleReplay.test.js :: engine bundle replay — the bundle generates what the app generates the espionage fence's 360-settlement driven corpus: bundle equals in-process byte for byte, and its hash meets the fence constant (known-stale rule)
+tests/build/engineServiceCore.test.js :: the service runs the same core as the worker the bundle's runGenerationRequest equals the in-process core for the service's request
+tests/build/engineServiceStoreParity.test.js :: the engine service answers the store's own requests with the store's own records derive: the remote re-derivation of a store-born world equals the local one
+tests/build/engineServiceStoreParity.test.js :: the engine service answers the store's own requests with the store's own records generate: the bundle's birth for the wire body equals the local core on the store's request, stamp included
+tests/build/engineServiceStoreParity.test.js :: the engine service answers the store's own requests with the store's own records regenSection: the bundle's passes over the wire body equal the local passes over the store-born world
+tests/build/generationWorkerLazy.test.js :: generation worker — production boundary the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+tests/build/vendorPdfLazy.test.js :: Tier 9.7 — vendor-pdf lazy load contract entry static closure Brotli bytes stay under 304224
+tests/build/vendorPdfLazy.test.js :: Tier 9.7 — vendor-pdf lazy load contract entry static closure gzip bytes stay under 362621
+tests/build/vendorPdfLazy.test.js :: Tier 9.7 — vendor-pdf lazy load contract entry static closure raw bytes stay under the first-paint budget (1139072)
+tests/build/vendorPdfLazy.test.js :: Tier 9.7 — vendor-pdf lazy load contract the engine chunk still exists (lazy) and remains large
+tests/build/vendorPdfLazy.test.js :: WEAVE ST-2 — the goods migration roster matches the tree every consumer in the tree is declared, with the right eager flag, halves and door

@@ -14,22 +14,15 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
 
 ## 0. THE STATE AT 19:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; it REPLACES the 17:04 state; the lines of section 7 written after 19:04 govern where they differ)
 
-**THE LINE.** `lane/join-2026-11-14` stands at ed1d43529bdfcf6e513bb2eb234c5a4c0305746d (point 32). THE CANDIDATE FOR POINT 33 is
-`lane/point33-candidate-2026-11-17` at e0242a12a82285a736f9997360ec1e8a5fbd3568 (the owner's supply rule, BIRTH-3's 8b0506eae, merged
-on ed1d43529; tree 4a9735d2f9ed4ef8e21aa19ec145de2e719e11f0). IT IS NOT LANDED. The two whole checks are compared BY NAME
-(section 7, 18:5x: `checks/candidate-e0242a12a/` on this lane against `lane/checks-2026-11-17 :: checks/line-ed1d43529/`):
-15 reds leave, 10 are the candidate's own; nine are assigned (LEFT-MARKS, LEFT-KEYS, DEBT-2). ONE HOLDS THE LANDING:
-`tests/property/editCorpusRatchet.test.js` arm A5 (an edit chain is deterministic; undo then re-edit reproduces the
-town) died at its own 600 s limit on the chair's machine and gave NO VERDICT. CHECKS-1 runs a scratch copy with a
-one-hour limit at the candidate and messages every arm's status and time at both trees. IF A5 IS GREEN THERE: LAND, from
-`/home/user/line` (a checkout of the candidate with hooks): `git push origin e0242a12a82285a736f9997360ec1e8a5fbd3568:refs/heads/lane/join-2026-11-14`
-(a fast-forward), read the line back (`git ls-remote`); then in a checkout of the line `git merge --no-ff
-origin/lane/bar8-base-2026-11-17` (2f8f64f7b: both audits' detectors and runners, nothing under `src/`: POINTS 34 AND 35),
-one docs commit recording the three points (the form of `docs/chair/2026-11-14/JOIN-17-HANDBACK.md`'s rows), push, read
-back, one plain line to the owner; if its time at the candidate is much above the line's, say so to the owner as a
-thing for the close (the arm's limit is a stored ceiling). IF A5 IS RED: read its message; an edit chain that drifts is
-the supply rule's own fault and is cured BEFORE the landing (a seat on `supplyStory.js`/`resourceGenerator.js`; the
-LEFT seats' bases then move: tell them).
+**THE LINE.** `lane/join-2026-11-14` stands at 9378609ba4405a81a295e5ff5faede36e3bd4528 (pushed 19:26 UTC, a fast-forward
+from ed1d43529): POINT 33 (the owner's supply rule: the chair's merge e0242a12a), POINTS 34 AND 35 (BAR8's two audits:
+the merge ef5fd621e of `lane/bar8-base-2026-11-17` 2f8f64f7b) and the record `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md`
+ON THE LINE (one row a point: the commit, the trees, what cleared it, what it leaves red by name and who holds each).
+The line's src tree is ac11d22681fc0c0e272ef9e5f5cbef21c05a31ca (the candidate's: every seat cut from the candidate, from
+an audit's tip or from the BAR8 base sits on it). THE CHAIR IS THE LINE'S ONLY WRITER: `/home/user/line` (hooks) holds the
+local branch. THE BASELINE FOR THE NEXT COMPARISONS is the candidate's lists on this lane: `checks/candidate-e0242a12a/names.final.txt`
+(the source tests; A5 of `editCorpusRatchet` is in it only because the chair's machine is slow: green on a quiet
+machine) and `checks/dist-candidate-e0242a12a/names.txt` (the dist phase).
 
 **THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`; builders and readers of code
 are the middle tier at high effort, the mechanical seats the cheaper tier at low effort).**
@@ -482,3 +475,16 @@ should be paused or archived by the owner's hand.
   (`src/pdf/sections/*`, a shared leaf under `src/domain/display/` for the ordinary income lines): the two chain
   call sites that must pass the card (`SupplyChainFlow.jsx:82`, `Services.jsx:229`: BR10 (3) in the PDF), the income
   share's ordinary line and L7's twin in the PDF (94 towns), the proven grounds in `ResourcesProduction.jsx`.
+- **19:26 UTC. POINT 33 IS LANDED, WITH POINTS 34 AND 35** (19:26:09: `ed1d43529..9378609ba lane/join-2026-11-14`, read back
+  from origin). THE DIST PHASE'S COMPARISON CAME FIRST (19:20): at the line 12 reds, at the candidate 13: the one more is
+  `vendorPdfLazy` WEAVE ST-2 (DEBT-2's D3). The twelve are the close's and were red at the line already: the committed
+  engine bundle against the source (`engineBundleReplay` 3, `engineServiceCore`, `engineServiceStoreParity` 3), the
+  worker bundle's ceiling (2,512,350 B against 2,356,121), the engine chunk (901,940 against 881,331), the first-paint
+  closure raw, gzip and Brotli (`checks/dist-line-ed1d43529/`, `checks/dist-candidate-e0242a12a/` on this lane). The
+  owner has one plain line (19:27). DEBT-2's FINAL TIP IS f7d1c6bca (19:24: the grant applied, the contract 3 of 3,
+  `tests/lint` by name 71 at the base and 69 at the tip, none appeared; read by the chair: the granted file moved in
+  the five figures only). IT LANDS IN THE FIRST BATCH, WITH NO SECOND READER (registers and two tests' rosters only, each
+  row earned by a measure the hand-back gives; the whole check at the batch's tree reads it): the chair's call.
+  THE FIRST BATCH: DEBT-2, LEFT-LINES, LEFT-PDF, LEFT-CHAIN (when its last commit is confirmed), as POINTS 36 TO 39 on a
+  landing branch the chair builds on the line's tip; a second team of CHECKS seats runs the shared whole check AT THAT
+  COMMIT; when it reads clean by name and the three second readers say LAND, the line is fast-forwarded to it.
