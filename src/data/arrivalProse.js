@@ -328,7 +328,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'Spice and drying herbs scent every lane, and the stalls are piled with them.', needs: ['market', 'trade at work: spice'], excludes: ['crisis: hunger', 'crisis: under_siege'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) (REVIEW-WIDE-6 C15780): spice made here, sold, or brought in past no siege; no stalls piled under a famine or a siege
       { text: () => 'A few bundles of drying herbs hang by the stalls, and there is little else to scent the lanes.', twinOf: 'Spice and drying herbs scent every lane, and the stalls are piled with them.', needs: ['market'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
       { text: () => 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.', needs: ['trade at work: spice'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): the spice is made here, sold, or brought in past no siege (a line a fact can make false leaves the colour mark)
-      { text: () => 'Bundles of drying herbs hang in the doorways, and the smell of them clings to your clothes.', twinOf: 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.' }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin // R-AO (CENSUS-2f); TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no carts where no route reaches (2 of 12): reworded, the colour mark kept
+      { text: () => 'A doorway here and there sells remedies, and the bitter smell of them reaches the lane.', twinOf: 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.' }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin // R-AO (CENSUS-2f); TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no carts where no route reaches (2 of 12): reworded, the colour mark kept
       { text: () => 'Every other doorway seems to sell a remedy for something.', colour: true },
     ] },
   { key: 'arcane', arcane: true,
@@ -412,7 +412,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
   ],
   mesoamerican: [
     { text: () => 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege', 'route: isolated'] }, // BAR6-SCENES (LAW 7 rule 7d; REVIEW-WIDE-6 C150831): no laden file from the road where no route reaches
-    { text: () => 'Porters bent under loads from the fields file past, and someone counts them in.', twinOf: 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege'] }, // BAR6-SCENES (7d): its twin where no route reaches // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 15806): nothing is carried in under a siege
+    { text: () => 'A neighbour comes in from the fields with a basket on one hip, and someone asks how the day went.', twinOf: 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege'] }, // BAR6-SCENES (7d): its twin where no route reaches // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 15806): nothing is carried in under a siege
     () => 'The neighbours turn out together to sweep and mend their own street.',
     () => 'Festival banners hang above the doors, faded from one year and waiting for the next.',
     { text: () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.', needs: ['market'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #2): rows to each trade are a market's (a thorp of twelve printed it)

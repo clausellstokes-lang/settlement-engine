@@ -164,7 +164,8 @@ describe('the facts the cure made', () => {
   it('each good reads the page\'s own lists: a maker not short, a list that names it, an import past no siege; never a grazing name', () => {
     expect(tradeAtWorkOf({ institutions: [{ name: 'Common grazing land' }] }, 'dairy')).toBe(false);
     expect(tradeAtWorkOf({ institutions: [{ name: 'Dairy farmer' }] }, 'dairy')).toBe(true);
-    expect(tradeAtWorkOf({ institutions: [], economicState: { localProduction: ['dairy'] } }, 'dairy')).toBe(true);
+    expect(tradeAtWorkOf({ institutions: [], economicState: { primaryExports: ['Cheese'] } }, 'dairy')).toBe(true);
+    expect(tradeAtWorkOf({ institutions: [], economicState: { localProduction: ['dairy'] } }, 'dairy')).toBe(false); // the raw list is not the page's
     expect(tradeAtWorkOf({ institutions: [{ name: 'Tailor' }] }, 'cloth')).toBe(false);
     expect(tradeAtWorkOf({ institutions: [{ name: 'Weavers/Textile workers' }] }, 'cloth')).toBe(true);
     expect(tradeAtWorkOf({ institutions: [{ name: 'Mine (open cast)' }] }, 'cut stone')).toBe(false);

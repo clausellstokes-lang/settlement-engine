@@ -98,7 +98,6 @@ const itemText = (x) => (typeof x === 'string' ? x : String(/** @type {{ name?: 
  * @returns {boolean}
  */
 function goodAtWork(record, good) {
-  const r = /** @type {{ economicState?: { localProduction?: unknown } | null }} */ (record);
   if (good.houses.length) {
     const short = housesShortOf(record);
     const makers = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)).filter((inst) => {
@@ -111,7 +110,9 @@ function goodAtWork(record, good) {
     if (makers.length) return false;
   }
   const listed = good.listed;
-  if (listed && [...arr(r?.economicState?.localProduction), ...arr(canonExports(/** @type {Parameters<typeof canonExports>[0]} */ (record)))].some((x) => listed.test(itemText(x)))) return true;
+  // the Exports only: the record's raw Produced-locally list is not the page's (the page keeps an item only where a working
+  // chain or a house makes it: bar0-hamlet-under_siege-rand-38's raw "dairy" printed as "Produced locally: (none)")
+  if (listed && arr(canonExports(/** @type {Parameters<typeof canonExports>[0]} */ (record))).some((x) => listed.test(itemText(x)))) return true;
   if (listed && good.imported && !crisisOf(record).has('under_siege') && arr(canonImports(/** @type {Parameters<typeof canonImports>[0]} */ (record))).some((x) => listed.test(itemText(x)))) return true;
   return false;
 }
