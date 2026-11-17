@@ -18,14 +18,17 @@ const line = (/** @type {string} */ start) => {
   if (!hit) throw new Error(`no line ${start}`);
   return hit;
 };
-const town = (/** @type {{ tier?: string, houses?: string[], stress?: string[] }} */ t) => factsOf({ tier: t.tier || 'town', institutions: (t.houses || []).map((name) => ({ name })), config: { stressTypes: t.stress || [] }, stress: (t.stress || []).map((type) => ({ type })), economicState: { foodSecurity: { foodRecord: { foodSources: ['fish', 'grain'] } } } });
+const town = (/** @type {{ tier?: string, houses?: string[], stress?: string[], imports?: string[] }} */ t) => factsOf({ tier: t.tier || 'town', institutions: (t.houses || []).map((name) => ({ name })), config: { stressTypes: t.stress || [] }, stress: (t.stress || []).map((type) => ({ type })), economicState: { foodSecurity: { foodRecord: { foodSources: ['fish', 'grain'] } }, ...(t.imports ? { primaryImports: t.imports } : {}) } });
 const admits = (/** @type {any} */ l, /** @type {any} */ f) => declarationAdmits(declarationOf(l), f).admitted;
 
 describe('W2-FIX-DATA: an arrival beat prints only where it is true', () => {
   it('the ironwork waits for no carts under siege (c22)', () => {
     // W2-FIX-DATA-12 item 3: the line also needs a smith now; both sides stand one, so the siege alone decides.
-    expect(admits(line('Racks of new ironwork'), town({ houses: ['Blacksmiths (3-10)'], stress: ['under_siege'] }))).toBe(false);
-    expect(admits(line('Racks of new ironwork'), town({ houses: ['Blacksmiths (3-10)'] }))).toBe(true);
+    // DEBT-1 (2026-11-17): SEAM-SCENES (item 3) made the line declare `trade at work: ironwork`, a smith WITH its iron
+    // (`tradeAtWork.js :: GOOD_TRADES.ironwork`; the house "Short of iron." takes the twin); both sides now bring iron in,
+    // so the siege alone still decides
+    expect(admits(line('Racks of new ironwork'), town({ houses: ['Blacksmiths (3-10)'], stress: ['under_siege'], imports: ['Iron'] }))).toBe(false);
+    expect(admits(line('Racks of new ironwork'), town({ houses: ['Blacksmiths (3-10)'], imports: ['Iron'] }))).toBe(true);
   });
   it('no fishmonger shouts a price where no market stands (c05)', () => {
     expect(admits(line('A fishmonger shouts'), town({ tier: 'thorp' }))).toBe(false);

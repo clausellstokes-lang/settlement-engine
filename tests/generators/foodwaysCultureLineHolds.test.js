@@ -38,7 +38,10 @@ describe('step 2(a): a culture\'s foodways line is kept only where its declarati
   });
 
   test('TWIN GUARD: a town of the culture still prints it', () => {
-    const s = birth('rv2-calm-town-11');
+    // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): rv2-calm-town-11's food record now counts no source at all, and the Maize line
+    // needs the grain it names feeding the place (BAR6-CULTURE 6d-fields; SEAM-CULTURE item 5), so it rightly prints the plain
+    // line there. The same claim in a town of the culture whose grain feeds it: rv2-calm-town-23 (grain, livestock).
+    const s = birth('rv2-calm-town-23');
     expect(s.config.cultureProfileKey).toBe('mesoamerican');
     expect(foodwaysOf(s)).toContain(DENSE);
   });

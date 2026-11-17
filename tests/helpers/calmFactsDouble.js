@@ -8,6 +8,8 @@
  * sweep measures exactly what it measured before any pool declared. A sweep that means to test
  * the gate itself births a real record and hands `factsOf(record)` instead.
  */
+import { ORDER_FORCE_WORDS } from '../../src/domain/facts/factVocabulary.js';
+
 const CALM = Object.freeze({
   types: Object.freeze([]), kinds: Object.freeze([]), conditionKinds: Object.freeze([]),
   families: Object.freeze([]), active: false, has: () => false,
@@ -16,7 +18,7 @@ const CALM = Object.freeze({
 export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   crisis: CALM,
   storesMonths: 12,
-  defence: Object.freeze({ walls: true, wallKind: 'stone', palisade: true, gate: true, watch: true, militia: true, garrison: true, hospital: true, healer: true, mercenary: true, court: true }),
+  defence: Object.freeze({ walls: true, wallKind: 'stone', palisade: true, gate: true, watch: true, militia: true, garrison: true, hospital: true, healer: true, mercenary: true, court: true, prison: true }),
   guardPresence: true,
   water: Object.freeze({ navigable: true, coast: true, river: true }),
   market: true,
@@ -69,4 +71,31 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // and `court` (COHERENCE-AGREE-4's defence atom) was never answered here; "every presence atom holds" covers the three.
   legalHouse: true,
   appointedPost: true,
+  // DEBT-1 (2026-11-17): fourteen presence atoms landed in factVocabulary.js after the double's last extension (c74829e25),
+  // unanswered here, so fail-closed (the kernel sweep's law 5 drifted on 134 pools; the tie draws lost their permutation):
+  // `court sits`, `legacy ruin`, `sovereign`, `seat outranked`, `seat members`, `seat held` (a pair fact; see below), `paid watch`, `monster frontier`, `crime wave`, `rival rings`, `exported` (keyed), `food surplus`,
+  // `legitimacy crisis`, `force` (keyed: ORDER_FORCE_WORDS); and the goods since given to `trade at work` (keyed). "Every
+  // presence atom holds" covers them, so a `no X` line is refused here exactly as the pre-cure reference refuses it.
+  courtSits: true,
+  legacyRuin: true,
+  sovereign: true,
+  seatOutranked: true,
+  seatMembers: true,
+  // `seat held` is only ever EXCLUDED (BAR6-PEOPLE 10d-seat: the creditor asks for a seat it does not hold; no line needs it),
+  // so the place that admits every line is one where the pair holds none, as a calm place has no `danger coming`
+  seatHeld: () => false,
+  paidWatch: true,
+  monsterFrontier: true,
+  crimeWave: true,
+  rivalRings: true,
+  goodExported: () => true,
+  growsMoreThanEats: true,
+  legitimacyCrisis: true,
+  orderForce: Object.freeze(Object.fromEntries(ORDER_FORCE_WORDS.map((k) => [k, true]))),
+  tradeAtWork: () => true,
+  // …and, as BAR5-THINGS found `court`, three older atoms never answered here that pools in the sweep now declare (BAR6-DEFDESK
+  // be35850406: `prison`, above, on the legal chain and the Court + Prison row; BAR6-CULTURE batch 2 21a5f2de1: `imports`,
+  // `exports` on DS-GEN-5): a list with something on it holds the presence.
+  imports: Object.freeze(['goods']),
+  exports: Object.freeze(['goods']),
 });

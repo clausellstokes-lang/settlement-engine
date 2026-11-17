@@ -135,6 +135,13 @@ const PRESENCE_SETTER = {
   'timber at hand': (f, _a, want) => ({ ...f, timberAtHand: want }),
   // BAR6-POWERS (2026-11-16): `seat members` (`seatMembers.js`), declared by DS-POW-5 › council's counterforce line and its twin
   'seat members': (f, _a, want) => ({ ...f, seatMembers: want }),
+  // DEBT-1 (2026-11-17): the presence atoms state pools declare since the table's last extension (one-home facts each):
+  // BAR6-CRIME's `crime wave` (`lawBand.js :: crimeWaveStands`) and `rival rings` (`rivalRings.js`), BAR6-DEFDESK's `monster
+  // frontier` (`monsterFrontier.js`), and `food surplus` (the food record's `growsMoreThanEats`)
+  'crime wave': (f, _a, want) => ({ ...f, crimeWave: want }),
+  'rival rings': (f, _a, want) => ({ ...f, rivalRings: want }),
+  'monster frontier': (f, _a, want) => ({ ...f, monsterFrontier: want }),
+  'food surplus': (f, _a, want) => ({ ...f, growsMoreThanEats: want }),
   imports: (f, _a, want) => ({ ...f, imports: want ? ['X'] : [] }),
   exports: (f, _a, want) => ({ ...f, exports: want ? ['X'] : [] }),
   priest: (f, _a, want) => ({ ...f, faith: { ...f.faith, seniorCleric: want ? { name: 'X' } : null } }),

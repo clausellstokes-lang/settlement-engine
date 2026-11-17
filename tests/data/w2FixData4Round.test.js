@@ -123,7 +123,10 @@ describe('W2-FIX-DATA-4: round two\'s medium lines in this lane\'s files', () =>
     expect(String(town.arrivalScene), 'the indebted town\'s arrival prints its crisis hook').toContain('outside creditor');
     // anchored: the same arrival scene is shown directly above to print its indebted hook
     expect(String(town.arrivalScene)).not.toMatch(/Every forge you pass/);
-    const hamlet = bornRw3('rw3-hamlet-calm-1');
+    // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): Plaviets (rw3-hamlet-calm-1) keeps its smith, and its sense beat now draws
+    // another true smith line ("A few finished spearheads lie on a workshop bench"); the same claim in a hamlet whose draw
+    // is the smith's blade: rw3-hamlet-calm-57
+    const hamlet = bornRw3('rw3-hamlet-calm-57');
     expect(String(hamlet.arrivalScene)).toContain('A smith tests a new blade against a post');
     // anchored: the same arrival scene is shown directly above to print the smith's line
     expect(String(hamlet.arrivalScene)).not.toMatch(/most of it is the sound of blades being made/);

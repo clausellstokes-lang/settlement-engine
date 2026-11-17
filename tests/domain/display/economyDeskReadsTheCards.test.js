@@ -55,7 +55,11 @@ const FULL_SILENT = ['r2r-village-5', 'r2r-thorp-36', 'r2r-thorp-13', 'r2s-under
   'r2s-under_siege-city-3', 'r2r-village-2', 'r2r-town-9', 'r2r-metropolis-43', 'r2r-village-32', 'rr3-metropolis-infiltrated-rand-5'];
 /** …and towns where the roster holds the house, the house makes the good and an export holds it: the sentence stands, filled
  * from the record (a Potter and roof tiles in a famine metropolis; a Tannery and leather goods; a Potter in a town). */
-const FULL_KEPT = ['r2s-famine-metropolis-2', 'r2r-village-52', 'r2r-town-15'];
+// RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): r2r-village-52's full livestock card (Butcher, Tannery, Dairy farmer) stands, but
+// the town no longer exports leather goods, cheese or preserved meat (its exports: flour, wool, livestock, ...), so the desk is
+// rightly silent. The same claim (house on the roster, good exported, the line stands) in r2r-city-8 (a Potter and roof
+// tiles); no r2r town of 300 (hamlet to metropolis, 0..59) keeps the Tannery's leather line now.
+const FULL_KEPT = ['r2s-famine-metropolis-2', 'r2r-city-8', 'r2r-town-15'];
 
 const BUCKET = /** @type {const} */ ({ unexploited: 'unexploited', partiallyExploited: 'partial', fullyExploited: 'full' });
 

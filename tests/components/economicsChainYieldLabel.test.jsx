@@ -10,7 +10,8 @@ import { cleanup, fireEvent, render } from '@testing-library/react';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { NORMALLY_YIELDS, chainYieldRefused } from '../../src/domain/chainYield.js';
-import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
+import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
+import { chainCardUnderSiege, chainOutputsOnCard } from '../../src/domain/display/economicsCrisisMarks.js';
 
 const TIERS = ['village', 'town', 'city', 'metropolis'];
 const SEEDS = Array.from({ length: 24 }, (_, i) => ({ seed: `yield-label-${i}`, config: { settType: TIERS[i % TIERS.length] } }));
@@ -26,7 +27,13 @@ beforeAll(() => {
     if (toggle && toggle.getAttribute('aria-expanded') === 'false') fireEvent.click(toggle);
     // W2-C-LEAVES-13, re-keyed by identity: a card prints a header over the outputs it bears out (tradeListDisplay.js ::
     // chainOutputsShown, W2-C-LEAVES-6 item 7; no maker row, no output, W2-C-LEAVES-12); a card with none prints neither
-    const chains = (s.economicState?.activeChains || []).filter((c) => chainOutputsShown(c, s).length > 0);
+    // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): the card reads the chain AS SHOWN (EconomicsTab.jsx :: EconomicFlowsSection:
+    // `chainCardUnderSiege(town, c, chainAsShown(c, town))`, then `chainOutputsOnCard`), and BAR5-CHAINS's half-way gap
+    // (chainStateShown.js :: outputsShown) withholds the outputs a missing input leaves: four towns of the sample
+    // (yield-label-2, -9, -17, -20: the leather and cloth chains) print a card with no outputs and so no header. The count
+    // reads the outputs the card prints, as the card reads them; the claim (one word per card, by the card's refusal) holds.
+    const chains = (s.economicState?.activeChains || []).map((c) => chainCardUnderSiege(s, c, chainAsShown(c, s)))
+      .filter((c) => chainOutputsOnCard(c, s).length > 0);
     ROWS.push({ seed, text: container.textContent || '', refused: chains.filter((c) => chainYieldRefused(c)).length, whole: chains.filter((c) => !chainYieldRefused(c)).length });
     cleanup();
   }

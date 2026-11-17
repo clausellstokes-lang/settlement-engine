@@ -40,25 +40,8 @@ const ECONOMIC_CONSTANTS = {
 };
 
 
-// ── THE BASE NUMBERS (FOOD-2) — shared by the canonical writer and the legacy view ──
-/** The share of need a town and larger draw from their hinterland as NORMAL supply (FOOD-2):
- *  the tier import shares the food writer always carried, now counted as supply, not a gap. */
-const HINTERLAND_SHARE_PCT = Object.freeze({ thorp: 0, hamlet: 0, village: 5, town: 20, city: 38, metropolis: 52 });
-/** @param {string} tier @returns {number} 0..1 */
-export function hinterlandShareOf(tier) {
-  return (HINTERLAND_SHARE_PCT[/** @type {keyof typeof HINTERLAND_SHARE_PCT} */ (tier)] ?? 0) / 100;
-}
-/**
- * The share of its own need a household grows on land of this effective capacity
- * (geographyData's agricultureCapacity plus the resource bonus). A place is sized to what its
- * land feeds, so the land moves the share gently: ordinary land grows about 100–125%, poor
- * land runs short.
- * @param {number} effectiveAgri
- * @returns {number}
- */
-export function grownShareOf(effectiveAgri) {
-  return (11 / 10) * (1 + ((effectiveAgri - 1) * 5) / 20);
-}
+// ── THE BASE NUMBERS (FOOD-2): moved verbatim to economy/foodBaseNumbers.js (DEBT-1, the ceiling cured by a split); re-exported ──
+import { grownShareOf, hinterlandShareOf } from './foodBaseNumbers.js'; export { grownShareOf, hinterlandShareOf };
 
 /** The words a famine note uses for the source it failed (FOOD-3). */ export const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }); // TAIL-CLOSE-SRC-4: beside its own doc again, one line
 /** R2-CODE-A item 6: the shortage hook where no food comes in by trade: the siege this file reads (`config.stressTypes`, the one that sets the route to isolated below) has cut every road, and the balance names no channel (`importChannel`: a route's, or a magic channel's past the siege) carrying food in. @param {any} config @param {any} foodBalance @returns {boolean} */ const siegeCutsImports = (config, foodBalance) => (config?.stressTypes || []).includes('under_siege') && !foodBalance?.importChannel; const NO_FOOD_BY_TRADE_HOOK = 'No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the price, and the locals are arguing over whether to pay, wait it out, or take it.'; /** R2-CODE-A item 1: WHAT A PLACE EATS AND STORES, in one plain word, from its one food record (below): "grain" where the record keeps grain (a granary, whose stores line reads "months of grain", or a grain or mill source), else "food"; no record reads "food". Every crisis line that means the town's food reads this, never the export slot (`tradeCommodity.js`). Draw-free; one line, so no cited line moves. @param {{ hasGranary?: unknown, foodSources?: unknown } | null | undefined} foodRecord @returns {'grain' | 'food'} */ export const foodStoreWord = (foodRecord) => (foodRecord && (foodRecord.hasGranary === true || (Array.isArray(foodRecord.foodSources) && foodRecord.foodSources.some(isGrainFoodSource))) ? 'grain' : 'food'); /** R2-CODE-A-2 (cold #1068): the two crisis notes that add MOUTHS rather than take from the fields, so their heading never says the harvest thinned. */ const OCCUPIERS_EAT_NOTE = 'The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.'; const NEWCOMERS_EAT_NOTE = 'Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.'; const MOUTH_NOTES = new Set([OCCUPIERS_EAT_NOTE, NEWCOMERS_EAT_NOTE]); /** R2-CODE-A-3 (round three HIGH #1312, MED #203): "The plague has killed or sickened many who work the fields" printed under an outbreak the crisis card calls not yet a plague, in towns that live on fish and grow no field crop. The onset's food note says the sickness is spreading among those who bring in the food the record says this place lives on (its largest source, FOOD-3), and what that costs them; a record naming no source keeps the fields. R2-CODE-A-4 (the independent reader's A15, the chair's ruling): a line of the sea is said only of a place the record puts on it (the water home's maritime kind); a fishing town on a river or a lake has its own twin. @param {unknown} sources @param {boolean} [onSea] @returns {string} */ const plagueFoodNote = (sources, onSea = false) => { const first = Array.isArray(sources) ? sources[0] : null; return first === 'fish' ? (onSea ? 'The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.' : 'The sickness is spreading among those who fish, and the ones still working face a thin catch and a hard winter.') : first === 'livestock' ? 'The sickness is spreading among those who tend the herds, and the ones still at work face a lean year and a hard winter.' : first === 'game' ? 'The sickness is spreading among those who hunt, and the ones still out face a lean season and a hard winter.' : 'The sickness is spreading among those who work the fields, and the ones still at work face a short harvest and a hard winter.'; };

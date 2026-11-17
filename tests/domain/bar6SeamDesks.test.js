@@ -55,7 +55,9 @@ describe('item 1 · `paid watch` needs a watch that is not the unpaid rota', () 
 describe('item 3 and item 7 · the desks\' twins say a noun every tier bears', () => {
   const lines = [...textsOf(DOSSIER_STATE_PROSE_DEFENSE), ...textsOf(DOSSIER_STATE_PROSE_POWER)];
   test.each([
-    ['DS-DEF-2 food trades failing', /its stores would still carry it through a year cut off\.$/],
+    // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): the same line (DS-DEF-2 CHAIN: food trades failing v2) lost its second
+    // months figure about food ("through a year cut off"; foodEnduranceLine.test.js, one fact one home); the claim is unchanged.
+    ['DS-DEF-2 food trades failing', /its stores would still carry it if it were cut off\.$/],
     ['DS-DEF-12 capacity enough', /and what the place cannot grow or make it mostly goes without\.$/],
     ['DS-POW-5 council counterforce', /has left obvious decisions untaken, and nobody there can make it take them\.$/],
   ])('%s', (_name, re) => {

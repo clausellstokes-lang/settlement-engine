@@ -81,7 +81,9 @@ const KEEP = [
   ['05801', 'r2r-village-58', 'Controlled goods (grain, salt, preserved meat)'],
   ['18708', 'r2r-thorp-25', 'insurgent supporters and'],
   ['16495', 'r2s-religious_conversion-hamlet-1', 'Religious buildings, land, and endowments'],
-  ['18752', 'r2s-wartime-village-3', "Suppliers adulterating grain and leather sold to the army's contracts"], // BAR6-CRIME, 2026-11-16 (SV1): re-keyed by identity
+  // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): SEAM-DESKS (2026-11-17) took the leather out of the same line
+  // (safetyProfile.js, the war profiteering crime: "the grain and provisions"); the same row, the same town, the line's own words
+  ['18752', 'r2s-wartime-village-3', "Suppliers adulterating the grain and provisions sold to the army's contracts"], // BAR6-CRIME, 2026-11-16 (SV1): re-keyed by identity
   ['09343', 'r2s-mass_migration-village-3', 'Forged residence documents'],
   ['09714', 'r2s-plague_onset-village-3', 'the stalls that pay their fees'],
   ['18208', 'r2r-village-12', 'Some goods change hands here without a licence'],

@@ -34,7 +34,9 @@ const REST = {
   // re-keyed by its text (BAR3-PLACES, 2026-11-15: the cloth line claims the yards, not every yard)
   'rr3x-village-indebted-mountain_pass-2': 'Bolts of cloth hang drying in long bright strips across the yards. The neighbours turn out together to sweep and mend their own street.',
   // TAIL-HISTORY-3 (the chair's Y14; re-keyed by identity): r2r-village-47 is isolated, so its herb sacks no longer fill carts (the line's reword, same slot)
-  'r2r-village-47': 'Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes. People draw water in an order nobody needs to explain.',
+  // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): BAR6-SCENES (LAW 6 rule 6b) made the herb sacks declare `trade at work: spice`;
+  // r2r-village-47 holds none (no spice made, sold or brought in), so the same slot takes the line's declared twin (its Apothecary)
+  'r2r-village-47': 'A doorway here and there sells remedies, and the bitter smell of them reaches the lane. People draw water in an order nobody needs to explain.',
 };
 
 describe('the indebted merchant district needs a market; its slot takes a twin (s2)', () => {

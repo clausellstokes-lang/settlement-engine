@@ -16,7 +16,10 @@ const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
 
 describe('the arrival scenes read the roster', () => {
   it('the merchant needs a market; the jetty needs a landing', () => {
-    expect(/** @type {any} */ (ARRIVAL_SCENES.ordinary[4]).needs).toEqual(['market']);
+    // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): BAR6-CULTURE batch 3 (76487ede1) grew the ordinary table and a twin took
+    // index 4 (`tier: ≤ hamlet`); the merchant's line is found by its own words, and its declaration is the same
+    const merchant = /** @type {any} */ (ARRIVAL_SCENES.ordinary).find((/** @type {any} */ e) => /A merchant argues with a carter/.test(typeof e.text === 'function' ? e.text('X') : String(e.text)));
+    expect(merchant.needs).toEqual(['market']);
     expect(/** @type {any} */ (ARRIVAL_SCENES.river[2]).needs).toEqual(['institution: mill', 'institution: docks']);
   });
   beforeAll(async () => { await loadGenerationLawPayloads(); });

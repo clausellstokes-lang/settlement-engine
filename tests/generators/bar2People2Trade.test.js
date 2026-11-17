@@ -26,7 +26,9 @@ function born(seed) {
 const ROWS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-hamlet-18', "Daigh O'Connor and Rian Fitzgerald bid for the same contracts", "Daigh O'Connor and Rian Fitzgerald sit at the same tables and want the same things from them."],
   ['r2r-hamlet-23', 'Every client Cassius Severus wins is one Egeria Calvus lost', 'Every friend Cassius Severus wins is one Egeria Calvus lost, and the reverse.'],
-  ['r2r-hamlet-20', 'Kjara Eriksson and Skadi Ragnarsson are rivals in the same line of work.', 'Kjara Eriksson and Skadi Ragnarsson are rivals, and neither gives the other ground.'],
+  // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): r2r-hamlet-20's pair (Kjara Eriksson, Skadi Ragnarsson) is now drawn as allies,
+  // so no rivalry line prints there at all; the same claim in a hamlet whose rival pair shares no trade: r2r-hamlet-41
+  ['r2r-hamlet-41', 'Kadan Kereit and Mönkhzul Borjigin are rivals in the same line of work.', 'Kadan Kereit and Mönkhzul Borjigin are rivals, and neither gives the other ground.'],
 ]);
 /** KEEP: [town, a true line that must still print] */
 const KEEP = /** @type {Array<[string, string]>} */ ([
