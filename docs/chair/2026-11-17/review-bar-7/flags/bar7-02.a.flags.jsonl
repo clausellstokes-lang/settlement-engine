@@ -1,0 +1,3 @@
+{"id":"C2765","town":"bar0-city-under_siege+famine-rand-46","sev":"LOW","kind":"STATE","why":"unmarked: whole shipments pass below the city, yet siege has stopped trade by road, gate and water; other rows marked","other":"C2401"}
+{"id":"C3863","town":"bar0-city-under_siege+famine-rand-46","sev":"LOW","kind":"PAIR","why":"says organised crime has no rival and no crew contests the streets; C3850-C3851 give semi-organized networks, several gangs competing, no single authority","other":"C3851"}
+{"id":"DONE","lines":2876,"blocks":1,"flags":2}

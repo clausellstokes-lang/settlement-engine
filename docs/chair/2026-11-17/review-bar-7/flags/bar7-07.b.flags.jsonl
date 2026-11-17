@@ -1,0 +1,11 @@
+{"id":"C15891","town":"bar0-hamlet-calm-rand-45","sev":"MED","kind":"LACKS","why":"endless line of laden carts from workings in a hamlet of 52, one small quarry, poor; also clashes with C15893 nobody buys","other":"C15893"}
+{"id":"C15892","town":"bar0-hamlet-calm-rand-45","sev":"LOW","kind":"PAIR","why":"empty racks waiting to lay in against winter implies want; FOOD Secure, grown 130%, surplus 30%","other":"C15908"}
+{"id":"C16138","town":"bar0-hamlet-calm-rand-45","sev":"MED","kind":"STATE","why":"a two-season dispute over grazing and water with families not speaking; QUARRELS none, TENSIONS only corruption scandal, PAST has no such event","other":""}
+{"id":"C16222","town":"bar0-hamlet-calm-rand-45","sev":"MED","kind":"PAIR","why":"says no wrong done is written down; C16231 says the hamlet's record of crimes is not short, and C15884 says records are kept carefully","other":"C16231"}
+{"id":"C16460","town":"bar0-hamlet-calm-rand-46","sev":"MED","kind":"STATE","why":"a two-season dispute over grazing and water, families not speaking; QUARRELS none, TENSIONS only popular uprising, PAST has no such event","other":""}
+{"id":"C16764","town":"bar0-hamlet-calm-rand-46","sev":"LOW","kind":"PAIR","why":"'With nothing pressing' calm line while a popular uprising presses those in charge (TENSIONS, C16458)","other":"C16458"}
+{"id":"C16854","town":"bar0-hamlet-calm-rand-47","sev":"MED","kind":"LACKS","why":"endless line of laden carts in a hamlet of 70 with one open-cast mine; no crowds of traffic at this size","other":""}
+{"id":"C16877","town":"bar0-hamlet-calm-rand-47","sev":"MED","kind":"STATE","why":"two-season grazing and water dispute; QUARRELS none, TENSIONS only generational divide, PAST only Trade Collapse","other":""}
+{"id":"C17323","town":"bar0-hamlet-calm-rand-47","sev":"LOW","kind":"PAIR","why":"says money is laid by behind the margin; C16880 says none has much put by, and Economic Resilience is Weak","other":"C16880"}
+{"id":"C17347","town":"bar0-hamlet-calm-rand-47","sev":"LOW","kind":"PAIR","why":"says settlement was founded to serve a trade; FOUNDING says a religious community drifted into secular life, reason None","other":"C17337"}
+{"id":"DONE","lines":1604,"blocks":4,"flags":10}

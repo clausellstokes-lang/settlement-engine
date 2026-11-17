@@ -22,7 +22,8 @@ sub('# BRIEF · REVIEW-BAR-6 ·', '# BRIEF · REVIEW-BAR-7 ·')
 sub('since then TWO rounds of builder seats (twenty seats) have closed whole KINDS of fault, each by a detector over a thousand towns: the detectors that counted 761 instances in a hundred and fifty towns now count 10. THIS IS THE SIXTH READ (2026-11-17), IN THE BAR\'S OWN FORM:',
     'then two rounds of builder seats closed whole KINDS of fault, each by a detector over a thousand towns; the sixth read (2026-11-17, early; thirty towns) found no HIGH and, after the strict second check, 29 false sentences in thirty towns (about one a town); since then a round of six builder seats has cured its families by rule, the owner\'s SUPPLY RULE has been built (every house and its material tell one story: below) and the owner\'s VERY RARE SECRETS have been added (below). THIS IS THE SEVENTH READ (2026-11-17), IN THE BAR\'S OWN FORM:')
 
-i = line_starting('A HOUSE MARKED SHORT IS A FACT OF THE PAGE')
+sub('the gaps (a house that lacks its input; a resource nobody works).',
+    'the gaps, IN THE RECORD\'S OWN STORED WORDS (a house that lacks its input; a resource nobody works; and, new, a house that BUYS its material: "Sawmill: Sawmill runs on imported mountain_timber": the record\'s own key, not a line of the page, and not a fault: it tells you that house is fed from outside).')
 lines = s.split('\n'); i = line_starting('A HOUSE MARKED SHORT IS A FACT OF THE PAGE')
 NEW33 = io.open(root + '/docs/chair/2026-11-17/review-bar-7/BY-DESIGN.txt', encoding='utf-8').read().rstrip('\n')
 lines[i] = NEW33

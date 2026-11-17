@@ -1,0 +1,4 @@
+{"id":"C5157","town":"bar0-city-under_siege+famine-rand-47","sev":"LOW","kind":"STATE","why":"Ordinary market scene (stalls selling reagents, buyers choosing) unmarked under a siege that stops all trade and a reagent import cut off","other":"C5206"}
+{"id":"C6093","town":"bar0-city-under_siege+famine-rand-47","sev":"LOW","kind":"PAIR","why":"Land offers a ticked Agriculture, yet LAND gives Fertile Floodplain depleted and C6095 says it has worked out its floodplain; grown 11%","other":"C6095"}
+{"id":"C5504","town":"bar0-city-under_siege+famine-rand-47","sev":"LOW","kind":"PAIR","why":"Priya Reddy printed as Constable here and on her card, but PEOPLE and the power rows give her title as castellan","other":"C6180"}
+{"id":"DONE","lines":2133,"blocks":1,"flags":4}

@@ -1,0 +1,6 @@
+{"id":"C30951","town":"bar0-thorp-calm-rand-45","sev":"LOW","kind":"STATE","why":"Open grazing/water dispute with sides not speaking; QUARRELS none, TENSIONS lists only religious tension, PAST none, stability Stable.","other":"C31119"}
+{"id":"C31349","town":"bar0-thorp-calm-rand-46","sev":"LOW","kind":"STATE","why":"Open grazing/water dispute, sides not speaking; QUARRELS none, TENSIONS lists only resource scarcity, PAST has no such event, stability Stable.","other":""}
+{"id":"C31464","town":"bar0-thorp-calm-rand-46","sev":"MED","kind":"STATE","why":"Says fishing feeds the thorp most of all; HOUSES has only Subsistence farming, no fishing house, and LAND lists no fishing chain or worked fishery.","other":""}
+{"id":"C31732","town":"bar0-thorp-calm-rand-47","sev":"LOW","kind":"STATE","why":"Open grazing/water dispute, sides not speaking; QUARRELS none, TENSIONS lists only population friction, PAST has no such event, stability Stable.","other":""}
+{"id":"C32024","town":"bar0-thorp-calm-rand-47","sev":"LOW","kind":"PAIR","why":"Says money is laid by behind the margin; the overview says none has much put by, and stores are only 1.7 months.","other":"C31735"}
+{"id":"DONE","lines":1275,"blocks":4,"flags":5}

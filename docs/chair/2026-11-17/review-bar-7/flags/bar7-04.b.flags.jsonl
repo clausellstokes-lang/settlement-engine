@@ -1,0 +1,5 @@
+{"id":"C8204","town":"bar0-city-wartime-rand-45","sev":"LOW","kind":"BROKEN","why":"subject-verb disagreement: 'its herds comes first'","other":""}
+{"id":"C8647","town":"bar0-city-wartime-rand-45","sev":"LOW","kind":"PAIR","why":"says crime has no rival and no crew contests the streets; same tab says several gangs may be competing","other":"C8626"}
+{"id":"C7246","town":"bar0-city-wartime-rand-45","sev":"MED","kind":"PAIR","why":"forges run day and night on army contracts; blacksmiths, smelter, metalworkers are marked curtailed by the war and smiths have no iron","other":"C7477"}
+{"id":"C7235","town":"bar0-city-wartime-rand-45","sev":"LOW","kind":"PAIR","why":"says built in timber and stone; Trade tab says stone is needed and not brought in, and LAND lists no stone","other":"C8191"}
+{"id":"DONE","lines":2647,"blocks":1,"flags":4}

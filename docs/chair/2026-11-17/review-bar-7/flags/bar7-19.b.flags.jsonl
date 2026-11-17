@@ -1,0 +1,4 @@
+{"id":"C39616","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"LACKS","why":"says 'The court sits and the gaol holds'; HOUSES has no court, and C39245 says no court sits here","other":"C39245"}
+{"id":"C40154","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"PAIR","why":"offenders 'heard' and expect a hearing, but C40198 says 'Detention without process' and the town has no court","other":"C40198"}
+{"id":"C40806","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"PAIR","why":"says 'nothing new goes up', but the brickmaker's card says she 'knows every new wall going up'","other":"C40294"}
+{"id":"DONE","lines":1730,"blocks":1,"flags":3}
