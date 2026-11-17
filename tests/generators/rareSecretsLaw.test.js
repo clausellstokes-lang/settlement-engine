@@ -217,7 +217,8 @@ describe('SECRETS-1: every row stands for some planted roster, and only where it
       if (h.age === 'old') expectPresentThenAbsent(before, standingKeys(place, withCand({ physical: { age: 'mid-forties' } })), row.key, `${row.key} only on the old`);
       if (h.age === 'notOld') for (const a of NPC_AGE_DATA.elder) expectPresentThenAbsent(before, standingKeys(place, withCand({ physical: { age: a } })), row.key, `${row.key} never on one in their ${a}`);
       if (typeof h.minYears === 'number') for (const [a, y] of Object.entries(RARE_SECRET_AGE_YEARS)) if (y < h.minYears) expectPresentThenAbsent(before, standingKeys(place, withCand({ physical: { age: a } })), row.key, `${row.key} never on one in their ${a}`);
-      for (const w of h.notHookWords || []) expectPresentThenAbsent(before, standingKeys(place, withCand({ plotHooks: [`Their ${w} is owed money by half the street.`] })), row.key, `${row.key} never beside a hook naming "${w}"`);
+      for (const w of h.notHookWords || []) for (const form of [w, `${w}'s`, `${w}s`]) expectPresentThenAbsent(before, standingKeys(place, withCand({ plotHooks: [`The ${form} owe money to half the street.`] })), row.key, `${row.key} never beside a hook naming "${form}"`);
+      for (const w of (h.notHookWords || []).slice(0, 1)) expectPresentThenAbsent(before, standingKeys(place, withCand({ plotHooks: [{ text: `Their ${w} is owed money.`, needs: [] }] })), row.key, `${row.key} reads a hook of the declared shape`);
       if (h.keepsHouse) expectPresentThenAbsent(before, standingKeys(place, withCand({ institution: { kind: 'power', key: COUNCIL } })), row.key, `${row.key} only on a house's keeper`);
       if (h.roles && !h.category) expectPresentThenAbsent(before, standingKeys(place, withCand({ role: 'the cartwright-of-nothing' })), row.key, `${row.key} only on its own trade`);
       if (h.office && h.office.includes('head')) expectPresentThenAbsent(before, standingKeys(place, withCand({ memberships: [{ power: GUILD, rank: null, share: 1, veiled: false }] })), row.key, `${row.key} only on the head`);
@@ -409,7 +410,8 @@ describe('SECRETS-1 AMENDMENT 2: the exclusions, the re-roll, the small places, 
     const failures = collectSeedFailures(rareSecretRows().filter((r) => r.family === 'masters'), ({ family, row }) => {
       for (const tier of ['thorp', 'hamlet', 'village']) {
         const { place, cards } = plantFor(family, row);
-        expect(standingKeys({ ...place, tier }, cards), `${row.key} in a ${tier}`).toContain(row.key);
+        // the same card, in a town, holds none (AMENDMENT 3: the negative beside its anchor)
+        expectPresentThenAbsent(standingKeys({ ...place, tier }, cards), standingKeys({ ...place, tier: 'town' }, cards), row.key, `${row.key} in a ${tier}, never in a town`);
       }
     });
     expectNoSeedFailures(failures, 'every hidden master stands in each small place');
@@ -417,10 +419,34 @@ describe('SECRETS-1 AMENDMENT 2: the exclusions, the re-roll, the small places, 
   it('one seed places two candidates of a family, and the cap deals one', () => {
     const cards = bigRoster();
     const hit = SEEDS.map((seed) => ({ seed, r: rareSecretReceiptOf(dealRareSecrets(plantPlace({ tier: 'city' }), cards, RELS, { seed })) }))
-      .find(({ r }) => Object.values(r?.passed || {}).some((n) => n >= 2));
-    expect(hit, 'a seed of the 300 passes two of one family').toBeTruthy();
-    const fam = Object.entries(hit.r.passed).find(([, n]) => n >= 2)[0];
+      .find(({ r }) => Object.values(r?.standing || {}).some((n) => n >= 2));
+    expect(hit, 'a seed of the 300 finds two STANDING candidates of one family (a row stands for each)').toBeTruthy();
+    const fam = Object.entries(hit.r.standing).find(([, n]) => n >= 2)[0];
     expect(hit.r.dealt.filter((d) => d.family === fam).length).toBe(1);
+  });
+  it('AMENDMENT 3: a kept holder whose named person is gone takes a new name for the SAME row; a user\'s own words are never touched', () => {
+    const cards = bigRoster();
+    const place = plantPlace({ tier: 'city' });
+    const holder = { ...cards[5], secret: { what: 'Is in love with Gone Person, and would sooner die than have it known', stakes: 'Gone Person has started to notice' } };
+    const roster = cards.map((c, i) => (i === 5 ? holder : c));
+    const out = dealRareSecrets(place, roster, RELS, { seed: 'follow-0', keep: new Set([holder.id]) });
+    const r = rareSecretReceiptOf(out);
+    const now = out.find((c) => c.id === holder.id);
+    expect(rareRowOf(holder.secret)?.row.key).toBe('lovesNamed');
+    expect(rareRowOf(now.secret)?.row.key).toBe('lovesNamed');
+    expect(r.followed.map((x) => x.id)).toEqual([holder.id]);
+    expectPresentThenAbsent(holder.secret.what, now.secret.what, 'Gone Person', 'the gone name is followed');
+    expect(cards.some((c) => c.name === rareRowOf(now.secret)?.name && c.id !== holder.id)).toBe(true);
+    // a user's own words (no row's) are never touched
+    const authored = { ...holder, secret: { what: 'Is in love with Gone Person, and says so to the river', stakes: 'Gone Person has started to notice' } };
+    const out2 = dealRareSecrets(place, cards.map((c, i) => (i === 5 ? authored : c)), RELS, { seed: 'follow-0', keep: new Set([holder.id]) });
+    expect(out2.find((c) => c.id === holder.id)).toBe(authored);
+  });
+  it('AMENDMENT 3: the superior is never one the card\'s own goal or hook names', () => {
+    const row = rareSecretRows().find((r) => r.row.key === 'superior');
+    const { place, cards } = plantFor(row.family, row.row);
+    const named = cards.map((c) => (c.id === 'cand' ? { ...c, goal: { short: 'Stand by Bera Guild in the next quarrel.', long: '' } } : c));
+    expectPresentThenAbsent(standingKeys(place, cards), standingKeys(place, named), 'superior', 'never beside a goal naming the superior');
   });
   it('a kept person\'s rare secret fills its family\'s cap, in the deal and through a re-roll end to end', async () => {
     const cards = bigRoster();
@@ -447,6 +473,9 @@ describe('SECRETS-1 AMENDMENT 2: the exclusions, the re-roll, the small places, 
     const holder = town.npcs.find((n) => rareRowOf(n.secret));
     expect(holder, 'r2r-metropolis-1 is born with a rare secret').toBeTruthy();
     const fam = rareRowOf(holder.secret).family;
+    // the anchor: before the re-roll the holder HAS the row, and the town holds exactly one of its family
+    expect(rareRowOf(holder.secret).row.key).toBeTruthy();
+    expect(town.npcs.filter((n) => rareRowOf(n.secret)?.family === fam).length).toBe(1);
     applyUserEdit(holder, 'goal.short', 'Keep the customs ledgers in order this season.', { editedAt: '2026-01-01T00:00:00.000Z' });
     const rerolls = collectSeedFailures(['rare-reroll-0', 'rare-reroll-1', 'rare-reroll-2'], (seed) => {
       const parts = regenNPCsPipeline(town, town.config, { seed });
