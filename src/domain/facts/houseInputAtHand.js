@@ -41,7 +41,7 @@ import { canonStressors } from '../canonicalAccessors.js'; // EG1: the war read 
 import { institutionMatchesKeyword } from '../institutions/institutionCategory.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
-import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT } from '../../data/crisisDependence.js';
+import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT, HOUSE_NEED_INPUT } from '../../data/crisisDependence.js';
 import { warHoldsIron } from './warIronHook.js'; // BIRTH-3 (BR9): the iron hook's own predicate (EG1: import-free)
 import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, RUNS_ON_BOUGHT, TAKERS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
 import { impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
@@ -104,6 +104,26 @@ export const terrainSynonymsFor = (rawResource) =>
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 const ONE_GOOD_BOUGHT = Object.freeze({ hides: Object.freeze(['livestock']), livestock: Object.freeze(['animal products']) });
+
+/**
+ * LEFT-MARKS item 3 (L25, SEAM-ECON's houses; the sixth chair's BRIEF-LEFT, 2026-11-17; vetoable by the owner): THE IMPORTS
+ * LIST'S OWN WORDS FOR A GOOD THE CHAIN'S NAMES DO NOT SPELL. The herbs come in as "Herbs and forage (local gathering areas
+ * exhausted)" or "Ritual wood and herbs (ancient grove damaged)": the word "herbs", whole, brings the medicinal herbs (a chain
+ * key -> the words). @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const KEY_IMPORT_WORDS = Object.freeze({ herbs: Object.freeze(['herbs']) });
+/**
+ * LEFT-MARKS item 3: THE STOCK OF A HOUSE WHOSE OWN TRADE TAKES THE GOOD (`crisisDependence.js :: HOUSE_TRADE_INPUT`,
+ * `HOUSE_NEED_INPUT`): the
+ * butchers' stock is meat, and game ("Game and hides (local hunting grounds exhausted)") stocks their counters; a dairy or a
+ * tanner of a livestock chain is fed by no game. @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const TRADE_STOCK_WORDS = Object.freeze({ livestock: Object.freeze(['game']) });
+/** @param {{ name?: unknown, catalogId?: unknown } | null | undefined} house @returns {string} the good its own trade takes, or '' */
+const tradeKeyOf = (house) => { const id = String((typeof house?.catalogId === 'string' && house.catalogId) || catalogIdForName(str(house?.name)) || '');
+  return Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, id) ? HOUSE_TRADE_INPUT[id] : Object.prototype.hasOwnProperty.call(HOUSE_NEED_INPUT, id) ? HOUSE_NEED_INPUT[id] : ''; };
+/** The import words that bring a chain key's good to a house (the chain's names, the list's own words, the trade's stock). @param {string} key @param {string[]} names @param {{ name?: unknown, catalogId?: unknown } | null | undefined} [house] */
+const boughtNamesOf = (key, names, house) => [...names, ...(KEY_IMPORT_WORDS[key] ?? []), ...(house && tradeKeyOf(house) === key ? TRADE_STOCK_WORDS[key] ?? [] : [])];
 
 /** The catalogue tags of a house whose trade IS the route (a market, a caravanserai). */
 const ROUTE_HOUSE_TAGS = Object.freeze(['market', 'transport']);
@@ -239,7 +259,8 @@ function inputAtHandCore(record, chainKey, house, chain) {
   // burns the cordwood the town buys
   const runsOnBought = Object.prototype.hasOwnProperty.call(RUNS_ON_BOUGHT, idOfHouse(/** @type {{ name?: unknown }} */ (house)));
   const fed = sourceHouse && !runsOnBought && gapSaysMissing(record, house) ? imports.filter((imp) => !BUYER_IMPORT_WORDS.has(imp)) : imports;
-  if (fed.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))))) return 'imported';
+  const bought = boughtNamesOf(chainKey, /** @type {string[]} */ (names), house);
+  if (fed.some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && bought.some((n) => wholeTokens(imp, n)))) return 'imported';
   // BIRTH-3 (AMENDMENT 1 (2)): ONE GOOD, BOUGHT UNDER EITHER WORD: the trade's catalog holds the hides and the beasts one good
   // ("Raw hides and animal products" is an alias of livestock, `goodsCatalog.js`), and the birth writes no second word of it
   const oneGood = Object.prototype.hasOwnProperty.call(ONE_GOOD_BOUGHT, chainKey) ? ONE_GOOD_BOUGHT[chainKey] : [];
@@ -598,8 +619,8 @@ const SPENT_READ_HELD = Object.freeze(['sawmill', 'sawmill_commercial', 'smelter
  */
 function importsBring(record, key) {
   const spec = CHAIN_INPUTS[key], raw = CHAIN_RAW_INPUT[key] ?? '';
-  const names = [raw, spec?.raw, spec?.noun, ...terrainSynonymsFor(raw)].filter((x) => typeof x === 'string' && x !== '');
-  return arr(record?.economicState?.primaryImports).map(str).some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, /** @type {string} */ (n))));
+  const names = boughtNamesOf(key, /** @type {string[]} */ ([raw, spec?.raw, spec?.noun, ...terrainSynonymsFor(raw)].filter((x) => typeof x === 'string' && x !== '')));
+  return arr(record?.economicState?.primaryImports).map(str).some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, n)));
 }
 
 /**
@@ -642,9 +663,24 @@ export function warIronHookOutsideWar(record) {
   // BIRTH-3 (the chair's ruling BR9: a mark the players see is never read off the DM's hooks): the hook's own predicate
   // (`warIronHook.js`) over the kept fields; the war's state as `facts/warState.js :: warStateOf` reads it off the record,
   // here off the stress container (EG1: warState.js reaches a module the build pins lazy; the guard holds the two equal)
+  return warHoldsIron(arr(r.economicViability?.dependencies), arr(r.economicState?.primaryImports), warStateOnRecord(record));
+}
+
+/** LEFT-MARKS M4: the stress types that put the town at the front, or at war, in the generator's words and the world pulse's
+ * (`stressorPicker.js :: GEN_TO_PULSE_TYPE`: under_siege is the pulse's `siege`, occupied its `occupation`; wartime is one word) */
+const FRONT_TYPES = Object.freeze(['under_siege', 'siege']);
+const AT_WAR_TYPES = Object.freeze(['wartime', 'occupied', 'occupation']);
+
+/**
+ * THE WAR'S STATE OFF THE STRESS CONTAINER (EG1: `facts/warState.js :: warStateOf` reads it through `crisisKind.js`, which the
+ * build pins lazy). LEFT-MARKS M4 (the second reader on BIRTH-3, 2026-11-17): the copy reads the world pulse's words too (a
+ * town the pulse moved on carries `siege` or `occupation`, which read as peace here and as "front" and "at war" there);
+ * tests/domain/supplyStoryLaw.test.js holds it equal to `warStateOf` over the 720, the 150 and records carrying each word.
+ * @param {unknown} record @returns {'front' | 'at war' | 'peace'}
+ */
+export function warStateOnRecord(record) {
   const types = canonStressors(/** @type {Parameters<typeof canonStressors>[0]} */ (record)).map((e) => String(/** @type {{ type?: unknown } | null} */ (e)?.type ?? ''));
-  const state = types.includes('under_siege') ? 'front' : types.includes('wartime') || types.includes('occupied') ? 'at war' : 'peace';
-  return warHoldsIron(arr(r.economicViability?.dependencies), arr(r.economicState?.primaryImports), state);
+  return types.some((t) => FRONT_TYPES.includes(t)) ? 'front' : types.some((t) => AT_WAR_TYPES.includes(t)) ? 'at war' : 'peace';
 }
 
 /** The luxury trade's own goods, which no chain carries (`HOUSE_TRADE_INPUT`'s `luxury`). */
@@ -694,7 +730,15 @@ export function housesWantingTradeInput(record) {
     if (!name || isCustom(inst) || spent.has(name)) continue;
     const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(name) || '');
     const key = Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, id) ? HOUSE_TRADE_INPUT[id] : '';
-    if (!key) continue;
+    if (!key) {
+      // LEFT-MARKS item 3 (L25): a house of `HOUSE_NEED_INPUT` is short only where the record's own need list names its good
+      // and the one reader finds it nowhere (the page's "Needed, and not brought in: …" beside the house)
+      const need = Object.prototype.hasOwnProperty.call(HOUSE_NEED_INPUT, id) ? HOUSE_NEED_INPUT[id] : '';
+      if (!need || !CHAIN_INPUTS[need] || gapped.has(name)) continue;
+      if (needListNames(r, [CHAIN_RAW_INPUT[need], CHAIN_INPUTS[need].noun].filter(Boolean))
+        && houseInputAtHand(r, need, inst, { rawResource: CHAIN_RAW_INPUT[need] }) === 'missing') out.set(name, { noun: tradeNoun(need), reach: 'missing' });
+      continue;
+    }
     if (key === 'ironOre' && warIron) { out.set(name, { noun: 'iron', reach: 'missing' }); continue; }
     if (gapped.has(name)) continue; // the record's gap writer spoke of this house: its own reading stands
     if (key === 'luxury') {

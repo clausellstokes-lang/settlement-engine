@@ -343,8 +343,9 @@ export function sourceStoryOf(record, inst, shortageWord) {
   };
   // the record's own chains on the house's own grounds speak first; a chain of another ground does not hide its own (the audit's
   // c1: a live coal chain hid six peat cutters' spent marsh). BIRTH-3 (the chair's AMENDMENT 2 (A)): A HOUSE THAT WORKS SEVERAL
-  // GROUNDS IS WORKED OUT ONLY WHEN EVERY GROUND OF ITS OWN IS SPENT: a mine whose one named chain is a spent coal seam, beside
-  // a live iron ground, is at work (17 such houses of the 720 read worked out before)
+  // GROUNDS IS WORKED OUT ONLY WHEN EVERY GROUND OF ITS OWN IS SPENT: a mine whose one named chain, "Iron & Metalwork", works
+  // spent iron, beside a live seam of its own kind (coal, gemstones or precious metals, whose goods the town exports), is at
+  // work (17 such mines of the 720 read worked out before; LEFT-MARKS M5, 2026-11-17: reworded to what the 720 show)
   const chains = arr(/** @type {{ activeChains?: unknown } | null | undefined} */ (record?.economicState)?.activeChains)
     .map((c) => /** @type {{ resourceKey?: unknown, status?: unknown, processingInstitutions?: unknown }} */ (c))
     .filter((c) => !!c && own.includes(str(c.resourceKey)) && all.has(str(c.resourceKey)) && arr(c.processingInstitutions).includes(inst?.name)); // a ground on the record (an entrepot's chain of goods passing through is none)

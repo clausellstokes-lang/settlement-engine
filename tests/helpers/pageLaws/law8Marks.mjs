@@ -10,14 +10,18 @@
 //               craft house whose trade cannot go on without it (`law8.mjs :: GOODS`, the page form's own words) prints bare
 //   8a.mild     a house the leaf marks, whose card head still prints a milder state than Impaired
 //               (`tabHelpers.js :: computeChainSets` through `setsWithMarkedHousesWorse`, as both tabs print it)
-//   8b.extract  a mine or a quarry whose every chain works a ground the record holds spent; the house prints bare
+//   8b.extract  a mine or a quarry where EVERY GROUND OF ITS OWN KIND THE RECORD HOLDS IS SPENT; the house prints bare.
+//               RE-KEYED BY RULING BR10 (2) (the sixth chair, 2026-11-17; LEFT-MARKS item 1): before, every CHAIN listing the
+//               house on a spent ground; now the supply rule's own reading (BIRTH-3's AMENDMENT 2 (A)), read from the tables
+//               (`law8.mjs :: ownGroundsOnRecord`: `houseKinds.js :: SOURCE_GROUNDS`, the record's land lists, its proven
+//               grounds), never through the story leaf under test. A house outside the table keeps the chains' reading.
 //   8c.harvest  a famine, the record's income share printed scarce (`rowStoppedBy(…, 'income', …)`); the row that sells grain
 //               from the field prints bare
 //   8c.failed   a famine whose food record names the failed source; a market's row that sells it prints bare
 //   8c.surplus  a famine; a house whose own description says it runs only on a grain surplus prints bare
 // `{ blind: true }` reads every row as bare (the positive control: the detector must find its rows with the marks hidden).
 // NAMED EXCLUSIONS: each is a row of EXCLUDED below with its reason.
-import { GOODS } from './law8.mjs';
+import { EXTRACTS, GOODS, everyOwnGroundSpent, ownGroundsOnRecord } from './law8.mjs';
 import { rowMarkText, rowStoppedBy, setsWithMarkedHousesWorse } from '../../../src/domain/display/crisisStoppedRow.js';
 import { chainNeedLine } from '../../../src/domain/display/chainNeedShown.js';
 import { tradeListsAsPrinted } from '../../../src/domain/display/tradeListDisplay.js';
@@ -102,7 +106,11 @@ export function law8MarksInstances(s, { blind = false } = {}) {
   const spent = new Set(Array.isArray(s?.config?.nearbyResourcesDepleted) ? s.config.nearbyResourcesDepleted : []);
   const chains = Array.isArray(s?.economicState?.activeChains) ? s.economicState.activeChains : [];
   for (const h of houses) {
-    if (!/\b(mines?|quarr(?:y|ies)|pits?|diggings|workings|claims?|delvers?)\b/i.test(h.name)) continue;
+    if (!EXTRACTS.test(h.name)) continue;
+    if (ownGroundsOnRecord(s, h)) { // a source house of the table (ruling BR10 (2))
+      if (everyOwnGroundSpent(s, h) && bareHouse(h)) push('8b.extract', h.name, `every ground of ${h.name}'s own kind the record holds is spent (${ownGroundsOnRecord(s, h)?.spent.join(', ')}); it prints bare`);
+      continue;
+    }
     const own = chains.filter((c) => Array.isArray(c?.processingInstitutions) && c.processingInstitutions.includes(h.name) && typeof c.resourceKey === 'string');
     if (own.length && own.every((c) => spent.has(c.resourceKey) && c.status !== 'magically_sustained') && bareHouse(h)) push('8b.extract', h.name, `every ground ${h.name} works is spent; it prints bare`);
   }

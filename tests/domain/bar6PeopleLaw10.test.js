@@ -7,6 +7,10 @@
 //   10e-temper a secret never denies its holder's temperament: incorruptible against a bribe, honest and plain-dealing
 //              against a lie of one's own (C31450); 10e-house a secret of drawn pay needs a paid watch (C200774);
 //   8b.person  a person's own trade line reads the person's house's mark (C88140, C93688).
+//   LEFT-MARKS item 2 (L15; the sixth chair's BRIEF-LEFT, 2026-11-17; ruling CM1): THE PAGE FORM (`law8.mjs :: 8b.person`)
+//              learns the card's mark line: a card that prints its house's mark as a line of its own under the house line
+//              covers its person lines (it fired on such a card at the base, e0242a12a); `law8H.mjs :: readPersons`' title
+//              is the line after the mark line. The pair below on a constructed page.
 // THE DETECTORS are the auditors' own where they read the record (`tests/helpers/pageLaws/law10.mjs :: law10a, law10d, law10e`,
 // record-only: no tab handed, so every instance is the record's), and for the three the record cannot show alone, a reading
 // of the roster and the house by its own words here, never by the fact the cure made (so a fact gone wrong cannot certify
@@ -27,6 +31,9 @@ import { temperamentYieldsToSecret } from '../../src/data/npcData.js';
 import { honorificOfTitle, ownOfficeForms, FACE_HONORIFICS, FACE_HONORIFICS_INLAND, FACE_HONORIFICS_BY_CULTURE } from '../../src/data/faceHonorifics.js';
 import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { readTown } from '../helpers/pageLaws/pageB.mjs';
+import { law8 } from '../helpers/pageLaws/law8.mjs';
+import { readPersons } from '../helpers/pageLaws/law8H.mjs';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const CRISES = ['famine', 'indebted', 'infiltrated', 'insurgency', 'mass_migration', 'monster_pressure', 'occupied', 'plague_onset',
@@ -209,6 +216,16 @@ describe('BAR6-PEOPLE: a person\'s lines read the house and the roster', () => {
     expect(drawnPayFindings(town)).toHaveLength(1);
     expect(declarationAdmits(declarationOf({ needs: ['paid watch'], excludes: [] }), factsOf(town)).admitted).toBe(false);
     expect(declarationAdmits(declarationOf({ needs: ['paid watch'], excludes: [] }), factsOf({ ...town, institutions: [{ name: 'Town watch' }] })).admitted).toBe(true);
+  });
+
+  it('8b.person, THE PAGE FORM (LEFT-MARKS item 2, ruling CM1): a keeper\'s card with the house\'s mark line is covered; the same card without it fires', () => {
+    const dump = (/** @type {boolean} */ mark) => ['== Systems/Institutions ==', 'Tanners · Crafts', 'Short of hides.', 'Works hides into leather.',
+      '== World/NPCs ==', 'Ada Brennan●', '▲', 'Tanners · member of the Merchant Guild', ...(mark ? ['Short of hides.'] : []), 'Master Tanner',
+      'How they deal Sells good leather at a fair price; no credit.', ''].join('\n');
+    const person = (/** @type {boolean} */ mark) => { const T = readTown(dump(mark), { institutions: [{ name: 'Tanners' }], config: {} });
+      return { found: law8(T, 'constructed').filter((/** @type {any} */ i) => i.rule === '8b.person').length, title: readPersons(T)[0]?.title }; };
+    expect(person(false), 'the card without its house\'s mark line').toEqual({ found: 1, title: 'Master Tanner' });
+    expect(person(true), 'the card with its house\'s mark line under the house line').toEqual({ found: 0, title: 'Master Tanner' });
   });
 
   it('POSITIVE CONTROL 8b.person (C88140): a dairy short of livestock whose farmer sells milk bare fires; the card leads with the mark', () => {

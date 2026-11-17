@@ -68,15 +68,19 @@
  * Pure: no randomness, no clock, no write.
  */
 import { resourceGapLines } from './validationOnPage.js';
-import { housesOnSpentGround, housesShortOf, housesWantingTradeInput, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
-import { STORY_OF_RECORD, sourceStoryOf, ventureMarkText } from '../facts/supplyStory.js'; // BIRTH-2: the failed venture's mark; BIRTH-3: the whole record's story
+import { housesOnSpentGround, housesShortOf, housesWantingTradeInput, impliedGroundsOnPage, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
+import { FAMILY_NOUN, GROUND_YIELD, STORY_OF_RECORD, sourceStoryOf, ventureMarkText } from '../facts/supplyStory.js';
+import { MATERIAL_OF } from '../facts/houseKinds.js'; // LEFT-MARKS M7: a house's material, by family // BIRTH-2: the failed venture's mark; BIRTH-3: the whole record's story
 import { resourceShortageImport } from '../resourceSemantics.js'; // BIRTH-3: the spent ground's word, handed to the source story
 import { crisisOf } from '../facts/crisisKind.js';
 import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach.js'; // BAR5-MARKS (WM1): what the war takes, one home
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
-import { houseDependenceOf } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table
+import { houseDependenceOf, HOUSE_TRADE_INPUT, SURPLUS_HOUSES } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table; LEFT-MARKS item 4: the houses of a surplus
+import { foodRowShown } from './foodRowShown.js'; // LEFT-MARKS item 4: the page's food line, as the Economics tab prints it
+import { carriersOf } from './foodCarrier.js';
+import { hasTradeRouteConnection } from '../tradeRouteSemantics.js'; // LEFT-MARKS item 4: BIRTH-1's calm road
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import { serviceRowsOf } from '../dossier/entityLinks.js';
@@ -351,7 +355,28 @@ const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
 export function houseDependenceIn(settlement, inst) {
   const deps = gatesWorkIn(settlement, inst);
   // S1 (i): a house on its input, where that input comes in by trade, under a siege
-  return deps.includes(INPUT) && onImportedInputUnderSiege(settlement, inst) ? [...deps, IMPORTED_INPUT] : deps;
+  if (deps.includes(INPUT) && onImportedInputUnderSiege(settlement, inst)) return [...deps, IMPORTED_INPUT];
+  // LEFT-MARKS M7 (RULING BR11, the sixth chair, 2026-11-17; vetoable by the owner): A HOUSE WHOSE MATERIAL IS THE TOWN'S OWN
+  // BY A PROVEN GROUND reads under a siege as the town's own land reads (SV8: curtailed, not stopped): its input is the land
+  // the town still works, `field work`. The ground a house proves and the story leaves there (`impliedGroundsOnPage(s).there`)
+  // yields the material of the carpenters, the cooper, the sawmill (`MATERIAL_OF`, `HOUSE_TRADE_INPUT`): the dependency card
+  // "Needs Timber. Supply route severed." stood beside them bare (bar0-city-under_siege+famine-rand-28, -35; r2r-metropolis-14)
+  if (deps.includes(INPUT) && !deps.includes(FIELD_WORK) && onProvenGroundUnderSiege(settlement, inst)) return [...deps, FIELD_WORK];
+  return deps;
+}
+
+/**
+ * LEFT-MARKS M7: is a siege in force here, and the house's material the yield of a ground the town's houses prove and the
+ * story leaves there? @param {object | null | undefined} settlement @param {{ catalogId?: unknown, name?: unknown }} inst
+ */
+function onProvenGroundUnderSiege(settlement, inst) {
+  if (!settlement || typeof settlement !== 'object' || !stoppingCrisesOf(settlement).includes('under_siege')) return false;
+  const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
+  if (!id) return false;
+  const family = Object.prototype.hasOwnProperty.call(MATERIAL_OF, id) ? MATERIAL_OF[id] : Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, id) ? HOUSE_TRADE_INPUT[id] : '';
+  const noun = family && Object.prototype.hasOwnProperty.call(FAMILY_NOUN, family) ? FAMILY_NOUN[family] : '';
+  if (!noun) return false;
+  return impliedGroundsOnPage(/** @type {Parameters<typeof impliedGroundsOnPage>[0]} */ (settlement)).there.some((g) => Object.prototype.hasOwnProperty.call(GROUND_YIELD, g) && GROUND_YIELD[g] === noun);
 }
 
 /**
@@ -577,14 +602,21 @@ export const SUPPLIED_LINE = 'A row marked short is what its house makes when su
 
 /**
  * The tab's one head line where at least one of its rows is marked; else null. VETOABLE wording.
+ * LEFT-MARKS M3 (the second reader on BIRTH-3, 2026-11-17): A FAILED VENTURE'S MARK IS NO SHORT MARK FOR THIS LINE. Its
+ * second sentence ("A row marked short is what its house makes when supplied.") printed where the only mark on the tab was
+ * a failed venture's ("Abandoned: a failed venture."), so no row was marked short (10 towns of the 720, 3 of the 150). The
+ * leaf decides it: handed the rows' short readings (`rowShortOf`'s answers), it counts a row marked short only where the
+ * answer is the short mark, never the venture's (`isVentureMark`); a caller that hands a boolean keeps its reading.
  * @param {string[]} crises the crises that marked a row on this tab, in the leaf's order
- * @param {boolean} [shortMarked] whether a row of the tab is marked short of its input (S5)
+ * @param {boolean | ReadonlyArray<unknown>} [shortMarked] whether a row of the tab is marked short of its input (S5), or
+ *   the rows' short readings, from which the leaf reads it
  * @returns {string | null}
  */
 export function ordinaryTimesLine(crises, shortMarked = false) {
   const named = crises.map(crisisOfMarkKind);
   const nouns = STOPPING_CRISES.filter((k) => named.includes(k)).map((k) => CRISIS_NOUN[k]);
-  const supplied = shortMarked ? SUPPLIED_LINE : null;
+  const short = Array.isArray(shortMarked) ? shortMarked.some((m) => typeof m === 'string' && m !== '' && !isVentureMark(m)) : !!shortMarked;
+  const supplied = short ? SUPPLIED_LINE : null;
   if (nouns.length === 0) return supplied;
   const list = nouns.length === 1 ? nouns[0] : `${nouns.slice(0, -1).join(', ')} and ${nouns[nouns.length - 1]}`;
   const head = nouns.length === 1
@@ -630,8 +662,36 @@ export function housesShortOfInput(settlement) {
   // house and so no gap line names it (a cobbler's guild, a mine): the page reads it as the fact does
   const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement));
   if (venture && !out.has(venture.name)) { const fact = housesShortOf(settlement).get(venture.name); if (fact) out.set(venture.name, fact); }
+  // LEFT-MARKS item 4 (L16, rule 8i.surplus; the auditor's cure): A HOUSE THAT WORKS ONLY A SURPLUS (`SURPLUS_HOUSES`: the
+  // maltster, "Requires grain surplus.") is short where the page's food line is short ("Short: N lbs/day", the Economics
+  // tab's row: `foodRowShown` with the carriers the tab reads), in a crisis or not: "Short of grain.". Read off the public
+  // fields the shared page keeps (the food record, the route, the roster: N4); the gate is `rowShortOf`'s (its INPUT). NOT IN
+  // A CALM TOWN ON A CONNECTED ROAD: there BIRTH-1's law holds a buyer (the maltster is one, `houseKinds.js ::
+  // BUYS_AND_WORKS`) unmarked, its material brought in (tests/domain/birthKindsLaw.test.js arm 1); left by name to the chair
+  if (foodLineShort(settlement) && !calmOnRoad(settlement)) for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))) {
+    const name = inst && typeof inst.name === 'string' ? inst.name : '';
+    if (!name || isCustom(inst) || out.has(name)) continue;
+    const id = String((typeof inst.catalogId === 'string' && inst.catalogId) || catalogIdForName(name) || '');
+    if (Object.prototype.hasOwnProperty.call(SURPLUS_HOUSES, id)) out.set(name, SURPLUS_HOUSES[id]);
+  }
   SHORT_HOUSES.set(settlement, out);
   return out;
+}
+
+/**
+ * LEFT-MARKS item 4: whether the page's food line is short (the Economics tab's "Short: N lbs/day": `foodRowShown` handed
+ * the carriers the tab reads, `foodCarrier.js :: carriersOf`). @param {object} settlement @returns {boolean}
+ */
+function foodLineShort(settlement) {
+  const s = /** @type {Parameters<typeof foodRowShown>[0] & Parameters<typeof carriersOf>[0]} */ (settlement);
+  const row = foodRowShown(s, !!carriersOf(s, /** @type {Parameters<typeof carriersOf>[1]} */ (s?.economicState)));
+  return !!row && row.fb.deficit > 0;
+}
+
+/** LEFT-MARKS item 4: a town with no crisis on a connected road (BIRTH-1's law's own reading). @param {object} settlement */
+function calmOnRoad(settlement) {
+  const config = /** @type {{ config?: { stressTypes?: unknown, tradeRouteAccess?: unknown } }} */ (settlement).config;
+  return (Array.isArray(config?.stressTypes) ? config.stressTypes : []).length === 0 && hasTradeRouteConnection(String(config?.tradeRouteAccess ?? ''));
 }
 
 /* THE THIRD READING (SV6), `housesOnSpentGround`, moved VERBATIM to the fact `facts/houseInputAtHand.js` (BAR4-SCENES-2, the

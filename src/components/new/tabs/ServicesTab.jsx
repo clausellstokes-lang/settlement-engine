@@ -157,7 +157,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
     if (!stoppedBy.get(svc) && !shortBy.get(svc)) return svc;
     return { ...svc, desc: markedDescription(rowMarkText(settlement, 'service', svc, crises), svc.desc) };
   };
-  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values()].filter(Boolean), [...shortBy.values()].some(Boolean));
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values()].filter(Boolean), [...shortBy.values()]); // LEFT-MARKS M3: the leaf reads a venture's mark as no short mark
   const query = search.trim().toLowerCase();
   const searchResults = query ? allServices.filter(s => s.text.includes(query)) : null;
   const missing = (J0[tier] || []).filter(k => !services?.[k]?.length);

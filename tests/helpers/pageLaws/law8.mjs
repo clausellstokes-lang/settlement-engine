@@ -8,6 +8,10 @@
 // fires on carries no mark of any kind (a chip under a marked card is covered by the card: the second check's rule 1).
 // Pure: reads `readTown` of pageB.mjs (seat B's reader, unchanged) plus the parts below, read in this file.
 import { CHIP_MARK, MARK_LEAD, economicsSections } from './pageB.mjs';
+import { SOURCE_GROUNDS } from '../../../src/domain/facts/houseKinds.js';
+import { impliedGroundsOf } from '../../../src/domain/facts/supplyStory.js';
+import { catalogIdForName } from '../../../src/data/institutionalCatalog.js';
+import { liveInstitutions } from '../../../src/domain/institutions/institutionRoster.js';
 
 export const LAW = 'L8';
 const lc = (s) => String(s || '').toLowerCase();
@@ -43,19 +47,60 @@ const goodOf = (text) => {
 const NOT_A_WORKSHOP = /\b(market|merchants?'? (?:guild|quarter)|warehouse|exchange|granar(?:y|ies)|stores?|caravan|customs|guild hall|council|court|watch|garrison|temple|shrine|church|cathedral|monaster)\b/i;
 const CRAFT_CATS = /^(Crafts|Economy|Industry|Trade|Commerce|Production|Magic)$/;
 
+// ---------------------------------------------------------------- 8b's reading of a source house's grounds (RULING BR10)
+/** The house that extracts (both forms of 8b.extract read a house by this name). */
+export const EXTRACTS = /\b(mines?|quarr(?:y|ies)|pits?|diggings|workings|claims?|delvers?)\b/i;
+const list = (x) => (Array.isArray(x) ? x : []);
+/**
+ * RE-KEYED BY RULING BR10 (2) (the sixth chair, 2026-11-17; LEFT-MARKS item 1): 8b.extract takes the supply rule's reading
+ * of a source house (BIRTH-3's AMENDMENT 2 (A): worked out only when EVERY GROUND OF ITS OWN KIND IS SPENT). Read here from
+ * the tables and the record, never through the story leaf under test (`supplyStory.js :: sourceStoryOf`): the house's own
+ * kinds (`houseKinds.js :: SOURCE_GROUNDS`, by its catalogue id); the grounds of those kinds the record holds (its land lists
+ * as the Nearby Resources section prints them: `config.nearbyResources` and `nearbyResourcesNative`, a ground the user
+ * authored set aside, with every ground of `nearbyResourcesDepleted`), each spent where `nearbyResourcesDepleted` lists it;
+ * and, where the land holds none of its kinds, the ground the house itself proves (the record's proven grounds,
+ * `impliedGroundsOf`: there, or used up). A chain kept by magic feeds no house of a spent ground (the supply rule's reading).
+ * @param {any} record @param {{ name?: unknown, catalogId?: unknown } | null | undefined} house
+ * @returns {{ held: string[], spent: string[] } | null} null where the house is no source house of the table
+ */
+export function ownGroundsOnRecord(record, house) {
+  const name = String(house?.name ?? '');
+  const id = (typeof house?.catalogId === 'string' && house.catalogId) || catalogIdForName(name) || '';
+  if (!Object.prototype.hasOwnProperty.call(SOURCE_GROUNDS, id)) return null;
+  const cfg = record?.config || {};
+  const custom = new Set(list(cfg.nearbyResourcesCustom).map(String));
+  const depleted = new Set(list(cfg.nearbyResourcesDepleted).map(String).filter(Boolean));
+  const land = new Set([...list(cfg.nearbyResources), ...list(cfg.nearbyResourcesNative)].map(String).filter((k) => !!k && !custom.has(k)));
+  for (const k of depleted) land.add(k);
+  /** @type {Map<string, boolean>} ground -> spent */
+  const held = new Map();
+  for (const g of SOURCE_GROUNDS[id]) if (land.has(g)) held.set(g, depleted.has(g));
+  if (!held.size) {
+    const { states, houses } = impliedGroundsOf(record);
+    for (const g of SOURCE_GROUNDS[id]) if (states.has(g) && list(houses.get(g)).includes(name)) held.set(g, states.get(g) === 'used');
+  }
+  return { held: [...held.keys()], spent: [...held].filter(([, s]) => s).map(([g]) => g) };
+}
+/** BR10 (2): every ground of the house's own kind the record holds is spent (one at least). @param {any} record @param {any} house */
+export const everyOwnGroundSpent = (record, house) => { const g = ownGroundsOnRecord(record, house); return !!g && g.held.length > 0 && g.spent.length === g.held.length; };
+
 // ---------------------------------------------------------------- the parts of the page this law reads
 const isBlank = (l) => !l || !l.trim();
 
-/** Every mark a house carries anywhere: its card (head, a description line's lead, a chip) or a Services row of it. */
+/** The failed venture's mark (BIRTH-3, `supplyStory.js :: ventureMarkText`), set where the short mark would be. */
+export const VENTURE_LEAD = /^(?:Abandoned|Failing): a failed venture\./;
+/** Every mark a house carries anywhere: its card (head, a description line's lead, a chip) or a Services row of it.
+ * LEFT-MARKS M6 (the sixth chair's AMENDMENT 2, 2026-11-17): THE FAILED VENTURE'S MARK IS A MARK ("Abandoned: a failed
+ * venture." / "Failing: a failed venture." leading a card's line or a Services row's description, as the short mark does). */
 export function houseMarks(T, name) {
   const marks = [];
   const c = T.cards.find((x) => x.name === name);
   if (c) {
     if (/· (Impaired|Stopped)\b/.test(c.head)) marks.push({ tab: 'Systems/Institutions', i: c.headIdx, line: c.head });
-    for (const l of c.lines) if (MARK_LEAD.test(l.text)) marks.push({ tab: 'Systems/Institutions', i: l.i, line: l.text });
+    for (const l of c.lines) if (MARK_LEAD.test(l.text) || VENTURE_LEAD.test(l.text)) marks.push({ tab: 'Systems/Institutions', i: l.i, line: l.text });
     for (const ch of c.chips) if (ch.marked) marks.push({ tab: 'Systems/Institutions', i: c.chipIdx, line: c.chipLine });
   }
-  for (const e of T.services) if (e.house === name && e.marked) marks.push({ tab: 'Systems/Services', i: e.titleIdx, line: `${e.titleRaw} / ${e.desc}` });
+  for (const e of T.services) if (e.house === name && (e.marked || VENTURE_LEAD.test(String(e.desc ?? '')))) marks.push({ tab: 'Systems/Services', i: e.titleIdx, line: `${e.titleRaw} / ${e.desc}` });
   return marks;
 }
 
@@ -79,7 +124,10 @@ function houseSurfaces(T, name) {
   return out;
 }
 
-/** The people: { i, name, house, deal } for each "How they deal" line, with the house the person's card names. */
+/** The house's mark as a line of its own on a person's card (ruling CM1): a row's mark, or the failed venture's. */
+export const CARD_MARK = /^(Stopped by|Curtailed by|Scarce in|Short of|Failing: a failed venture\.|Abandoned: a failed venture\.)/;
+/** The people: { i, name, house, deal, cardMark } for each "How they deal" line, with the house the person's card names and
+ * (LEFT-MARKS item 2, 2026-11-17; ruling CM1) the house's mark line the card prints under its house line, or null. */
 export function readPeople(T) {
   const L = T.tabs['World/NPCs'] || [];
   const out = [];
@@ -89,7 +137,9 @@ export function readPeople(T) {
     let k = i; while (k > 0 && L[k] !== '▲') k--;
     const role = L[k + 1] || '';
     const house = role.split(' · ')[0].trim();
-    out.push({ i: l === 'How they deal' ? i + 1 : i, line: l === 'How they deal' ? `How they deal ${deal}` : l, deal, house, name: (L[k - 1] || '').replace(/●+$/, '').trim() });
+    let cardMark = null;
+    for (let j = k + 2; j < i; j++) if (CARD_MARK.test(L[j])) { cardMark = { i: j, text: L[j] }; break; }
+    out.push({ i: l === 'How they deal' ? i + 1 : i, line: l === 'How they deal' ? `How they deal ${deal}` : l, deal, house, name: (L[k - 1] || '').replace(/●+$/, '').trim(), cardMark });
   });
   return out;
 }
@@ -188,13 +238,19 @@ export function law8(T, town) {
   // ---- 8b · A DEPLETED GROUND, on the house that extracts it and the person who sells it
   const depletedGround = res.some((l) => /^Nothing more can be taken from the /.test(l)) || T.all.some((x) => /^Nothing more can be taken from the /.test(x.text) || /Nothing more can be taken from the /.test(x.text));
   const spentLine = T.all.find((x) => /Nothing more can be taken from the /.test(x.text));
+  const recordHouses = T.record ? liveInstitutions(T.record) : [];
   for (const c of T.cards) {
+    if (!EXTRACTS.test(c.name)) continue; // the house that extracts
     const chains = T.chains.filter((ch) => ch.via.includes(c.name) && ch.from.length);
-    if (!chains.length || !chains.every((ch) => ch.from.every((f) => /\(depleted\)|\(exhausted\)/.test(f)))) continue;
-    if (!/\b(mines?|quarr(?:y|ies)|pits?|diggings|workings|claims?|delvers?)\b/i.test(c.name)) continue; // the house that extracts
+    // RULING BR10 (2), 2026-11-17: a source house of the table is read by the supply rule's own reading (every ground of its
+    // own kind the record holds is spent: `ownGroundsOnRecord`), not by the chains the page lists it on; a house outside the
+    // table keeps the chains' reading (every chain it works printed depleted)
+    const h = recordHouses.find((x) => x && x.name === c.name);
+    const grounds = h ? ownGroundsOnRecord(T.record, h) : null;
+    if (grounds ? !everyOwnGroundSpent(T.record, h) : (!chains.length || !chains.every((ch) => ch.from.every((f) => /\(depleted\)|\(exhausted\)/.test(f))))) continue;
     if (!bare(c.name) || !depletedGround) continue;
     const ch = chains[0];
-    const against = spentLine ? { tab: spentLine.tab, i: spentLine.i, line: spentLine.text } : { tab: 'Systems/Economics', i: ch.headIdx, line: `${ch.head} / From ${ch.from.join(' · ')}` };
+    const against = spentLine ? { tab: spentLine.tab, i: spentLine.i, line: spentLine.text } : ch ? { tab: 'Systems/Economics', i: ch.headIdx, line: `${ch.head} / From ${ch.from.join(' · ')}` } : { tab: 'Systems/Resources', i: -1, line: `the record's grounds of ${c.name}'s kind: ${grounds?.spent.join(', ')} (spent)` };
     starved.set(c.name, { good: 'its ground', against });
     for (const at of houseSurfaces(T, c.name)) push('8b.extract', at, against, `every ground ${c.name} works is printed depleted; its extraction is offered with no mark`, { thing: c.name });
   }
@@ -209,7 +265,9 @@ export function law8(T, town) {
       const m = c && c.lines.find((l) => /^Short of [a-z]/.test(l.text) || /^Stopped by the /.test(l.text));
       if (m) { against = { tab: 'Systems/Institutions', i: m.i, line: `${c.head} / ${m.text}` }; how = /^Short/.test(m.text) ? 'short' : 'stopped'; }
     }
-    if (!against || MARK_LEAD.test(p.deal)) continue;
+    // RULING CM1 (LEFT-MARKS item 2, 2026-11-17): the house's mark is ONE LINE OF ITS OWN on the card, under its house line;
+    // a card that prints it covers its person lines (the second check's rule 1: a card's mark covers what its rows say)
+    if (!against || MARK_LEAD.test(p.deal) || p.cardMark) continue;
     if (how !== 'starved' && /still give/.test(p.deal)) continue; // "from what the workings still give" is true of a short ground, not of a spent one
     push('8b.person', { tab: 'World/NPCs', i: p.i, line: p.line }, against, `${p.name}'s house (${p.house}) is printed short, stopped or starved of its input; the person's own trade line offers its goods with no word of it`, { thing: p.house, hedged: /\b(when|whenever|while|if) (?:there (?:is|are)|the|it)\b|still give/.test(p.deal) });
   }

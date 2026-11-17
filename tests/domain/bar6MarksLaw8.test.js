@@ -7,10 +7,23 @@
  * census dump. A test corpus carries births, not dumps, so the guard reads the same rules off the born record and the one
  * mark leaf every tab prints through (`tests/helpers/pageLaws/law8Marks.mjs :: law8MarksInstances`). THIS FILE REDS WHEN
  *   (a) THE ZERO: an instance in a town of the census's 720 (born in the census's own configuration shape) that is not one of
- *       the four houses left by name (LEFT below: the reader's import match does not yet read "Herbs and forage" as
- *       herbs, nor game meat as the butchers' stock; a ratchet: the list only shrinks);
+ *       the houses left by name (LEFT below; a ratchet: the list only shrinks; LEFT-MARKS item 3 struck two of three);
  *   (b) THE POSITIVE CONTROL: the detector, the marks read blind, stops finding its rule in a census town whose record
- *       holds the worst state (one town a rule, measured at afa46d644 with this cure).
+ *       holds the worst state (one town a rule, measured at afa46d644 with this cure);
+ *   (c) 8b.extract's PLANTED PAIR (RULING BR10 (2)): a mine on its only ground, spent, printed bare by a planted record, is
+ *       an instance; the same mine beside a live seam of its own kind is none.
+ *
+ * RE-KEYED BY RULING BR10 (the sixth chair, 2026-11-17; LEFT-MARKS item 1). THIS IS A RULING'S RE-KEY OF A LAW, NOT A
+ * NARROWING. 8b.extract read a mine or a quarry as worked out where every CHAIN listing it works a spent ground; the supply
+ * rule (BIRTH-3's AMENDMENT 2 (A), `supplyStory.js :: sourceStoryOf`) reads a source house worked out only where EVERY
+ * GROUND OF ITS OWN KIND THE RECORD HOLDS IS SPENT, and the ruling gives LAW 8 that reading in both its forms
+ * (`tests/helpers/pageLaws/law8Marks.mjs`, `law8.mjs :: ownGroundsOnRecord`, read from `houseKinds.js :: SOURCE_GROUNDS`,
+ * the record's land lists and its proven grounds, not through the leaf under test). At the base (e0242a12a) (a) read 17
+ * mines of the 720 (r2r-town-45; r2r-metropolis-9, -15, -17, -24, -29, -37, -40, -57; r2s-indebted-metropolis-2;
+ * r2s-infiltrated-metropolis-1, -2; r2s-insurgency-metropolis-0, -3; r2s-monster_pressure-metropolis-2;
+ * r2s-politically_fractured-metropolis-1; r2s-succession_void-city-0), each on one chain of spent iron beside a live seam of
+ * its own kind (coal, gemstones, precious metals): at work by ruling A, so no instance. Read blind, the rule finds 95 houses
+ * of the 720 where it found 85 (the 17 out; 27 in: houses on no chain whose every own ground is spent, each marked).
  */
 import { describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -44,10 +57,15 @@ const town = (/** @type {string} */ seed) => { if (!towns.has(seed)) towns.set(s
 /** The houses left by name (BAR6-MARKS's hand-back, "what is left"): `<seed> · <rule> · <house>`. */
 // STRUCK BY ITS OWN RULE (BIRTH-1, 2026-11-17): 'r2r-town-51 · 8a.input · Apothecary (established)' is cured: the birth
 // brings its medicinal herbs in (`resourceGenerator.js :: importsBroughtAtBirth`, "Medicinal herbs").
+// STRUCK BY ITS OWN RULE (LEFT-MARKS item 3, L25, 2026-11-17): 'r2r-town-54 · 8a.input · Butchers (3-8)' and
+// 'r2s-religious_conversion-town-2 · 8a.input · Apothecary (established)' are cured: a house whose trade takes a good no
+// chain names it for is short where the record's own need list names the good and no import brings it
+// (`crisisDependence.js :: HOUSE_NEED_INPUT`; tests/domain/leftMarks.test.js). LEFT, BY NAME: the butchers of
+// r2r-metropolis-19 stand beside "Game and hides (local hunting grounds exhausted)" on the imports, the butchers' stock
+// (the reader's mend, `houseInputAtHand.js :: TRADE_STOCK_WORDS`): they are at work, and the rule reads the need line
+// "Livestock for meat and draft" alone.
 const LEFT = [
-  'r2r-town-54 · 8a.input · Butchers (3-8)',
   'r2r-metropolis-19 · 8a.input · Butchers (3-8)',
-  'r2s-religious_conversion-town-2 · 8a.input · Apothecary (established)',
 ];
 
 describe('LAW 8\'s mark rules (BAR6-MARKS): the mark leaf reads every worst state', () => {
@@ -81,6 +99,21 @@ describe('LAW 8\'s mark rules (BAR6-MARKS): the mark leaf reads every worst stat
       expect(blind.length, `${seed}: the detector finds ${rule} blind`).toBeGreaterThan(0);
     }), '(b) every positive control fires');
   }, 900_000);
+});
+
+// (c) RULING BR10 (2), 2026-11-17: 8b.extract's own reading, on a planted record (N7: a town on no road, r2r-town-9, its land
+// lists replaced and a mine planted; the marks read blind, so the planted mine prints bare)
+describe('8b.extract reads every ground of the house\'s own kind (ruling BR10)', () => {
+  const planted = (/** @type {string[]} */ land, /** @type {string[]} */ spent) => {
+    const s = town('r2r-town-9');
+    return { ...s, config: { ...s.config, nearbyResources: land, nearbyResourcesNative: land, nearbyResourcesDepleted: spent, nearbyResourcesCustom: [] },
+      institutions: [...s.institutions, { name: 'Mine', catalogId: 'mine', category: 'Economy', status: 'active' }] };
+  };
+  const extract = (/** @type {any} */ rec) => law8MarksInstances(rec, { blind: true }).filter((i) => i.rule === '8b.extract' && i.house === 'Mine');
+  test('a mine on its only ground, spent, printed bare, IS an instance; beside a live seam of its own kind it is none', () => {
+    expect(extract(planted(['iron_deposits'], ['iron_deposits'])).length, 'the mine on its one spent ground').toBe(1);
+    expect(extract(planted(['iron_deposits', 'coal_deposits'], ['iron_deposits'])).length, 'the mine beside a live coal seam').toBe(0);
+  }, 300_000);
 });
 
 // EG1 (the chair, 2026-11-16): the eager fact reads the war off the stress container (`houseInputAtHand.js :: atWar`, through
