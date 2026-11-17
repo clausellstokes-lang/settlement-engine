@@ -1,0 +1,6 @@
+{"id":"C12508","town":"bar0-city-wartime-rand-43","sev":"MED","kind":"PAIR","why":"Looms clatter shutter to shutter, yet Weavers/Textile workers is marked 'Short of wool' (cloth production short); Textiles chain impaired","other":"C12930"}
+{"id":"C14280","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"PAIR","why":"Fuller shown actively stretching and selling cloth, yet the Fuller is marked 'Short of wool' (Fulled cloth short)","other":"C12874"}
+{"id":"C14377","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"PAIR","why":"Potter shown selling glazed ware as a plain habit, yet the Potter is marked 'Short of clay' (no clay reaches the potter)","other":"C12897"}
+{"id":"C14569","town":"bar0-city-wartime-rand-43","sev":"LOW","kind":"BROKEN","why":"House mark 'Short of clay.' printed in front of the person's own 'How they deal' line, so the line reads wrong","other":""}
+{"id":"C15153","town":"bar0-city-wartime-rand-43","sev":"MED","kind":"PAIR","why":"Calm-times line 'closes every year ahead', 'dependable' margin, under wartime where the war takes most of the money and the town runs thin; food deficit 4%","other":"C13989"}
+{"id":"DONE","lines":2813,"blocks":1,"flags":5}
