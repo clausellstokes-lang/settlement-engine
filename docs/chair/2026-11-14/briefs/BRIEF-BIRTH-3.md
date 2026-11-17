@@ -231,3 +231,29 @@ F. RULING BR9 (the war's iron mark): the hook's whole predicate in one new leaf 
    its ceiling) and by the two readers (`warReach.js`, `houseInputAtHand.js`); the readers stop reading the hooks;
    `publicSafe.js` untouched. Those three files are the seat's for that one hunk each.
 LAST, IF CHEAP: no door word "short" on a venture's services on the Institutions tab.
+
+## AMENDMENT 3 (sent to the seat by message at 14:03 UTC on 2026-11-17, after its word on AMENDMENT 1 at e590037438)
+
+AMENDMENT 1 IS READ BY THE CHAIR AND TAKEN AS BUILT (the narratives step's declaration; no second word of one
+canonical good; the war's hold on the iron read off what every view keeps). Go on with AMENDMENT 2 in its order. Two
+things more, the first a grant. Budget: +40,000.
+
+G. THE ELEVENTH CONTRACT TEST IS YOURS TO TURN GREEN, BY ONE WORD: THE CHAIR'S GRANT, BY NAME, OF ONE LINE OF
+   `src/generators/steps/assembleSettlement.js` (a file otherwise no seat's). The chair found the write. In
+   `contract-metropolis-plains-crossroads` the assembly step changes ONE field of ONE card in place:
+   `personality.dominant` of the watch commander, "incorruptible" to "warm-hearted". It is BAR6-PEOPLE's rule
+   10e-temper: `src/generators/people/castPowers.js :: rankPowers` calls
+   `src/data/npcData.js :: temperamentYieldsToSecret` over the whole cast inside the coherence seam, which the
+   assembly step runs; it sets the card's `personality.dominant` in place, and the card's `personality` is the one
+   `ctx.npcs` holds. In collect mode (`runPipeline(ic, rng, { onStrictViolation })`) over all nineteen cases of the
+   contract test at your tip e590037438 it is the ONLY undeclared write left: nothing hides behind it. THE CURE: the
+   registration's `mutates` list gains `'npcs'`, with a comment that names the writer (as the list's own comment
+   names the seam for `relationships`). NOTHING ELSE IN THAT FILE. Then `tests/generators/pipelineContract.test.js`
+   reads green whole: say so with the run.
+H. TWO NOTES, NO NEW WORK. (1) On F (ruling BR9): your AMENDMENT 1 has `warTakesOf` read the kept dependency and the
+   imports BESIDE the DM's hook (an OR). When F is done the hook's predicate is one leaf, the hook's writer and both
+   readers call it, and NO READER READS THE HOOK: the OR goes. (2) DEBT-1 lands before you: it moves THE BASE NUMBERS
+   (FOOD-2) out of `src/generators/economy/foodBalance.js` into a new `economy/foodBaseNumbers.js` (the file reads
+   892 lines after it, under its ceiling): your one hunk for F is in another region of that file; your scratch merge
+   of the line's then-tip before you hand back will show it (the line stands at f0eb9cc5b0 with SECRETS-1's rare
+   secrets in: two new files and one call beside the goals; none of your files).
