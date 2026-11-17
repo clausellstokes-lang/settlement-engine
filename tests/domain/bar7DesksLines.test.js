@@ -93,10 +93,11 @@ describe('items 1 and 2 · the plenty lines declare the band that denies them, o
     const v1 = theLine(DEF, /it keeps itself supplied with room to spare, even in a bad year\.$/);
     const v2 = theLine(DEF, /has more put by than a bad year would take, so having no road costs it little\.$/);
     const v3 = theLine(DEF, /the town has more than enough to get through a hard year\.$/);
-    const withStores = DEF.filter((x) => x.pool === 'CAPACITY: ample' && (x.v.marks || []).includes('food: pressured') && (x.v.marks || []).includes('stores: ≥ 1'));
-    const noStores = DEF.filter((x) => x.pool === 'CAPACITY: ample' && (x.v.marks || []).includes('food: pressured') && (x.v.marks || []).includes('stores: < 1'));
-    expect(withStores.length).toBe(3);
-    expect(noStores.length).toBe(1);
+    // every Pressured line names its stores band; each is admitted exactly where the town's stores meet it
+    const pressuredLines = DEF.filter((x) => x.pool === 'CAPACITY: ample' && (x.v.marks || []).includes('food: pressured'));
+    const bandOf = (/** @type {any} */ x) => (x.v.marks || []).map((/** @type {string} */ m) => /^stores: (≥|<) (\d+)$/.exec(m)).find(Boolean);
+    expect(pressuredLines.map((x) => [x.v.vid, bandOf(x)?.slice(1).join(' ')])).toEqual([[5, '≥ 1'], [6, '≥ 1'], [9, '≥ 2'], [10, '< 1']]);
+    const meets = (/** @type {any} */ x, /** @type {number} */ months) => { const [, op, n] = bandOf(x); return op === '≥' ? months >= Number(n) : months < Number(n); };
     let pressured = 0;
     expectNoSeedFailures(collectSeedFailures(THIRTY, (seed) => {
       const s = town(seed);
@@ -107,9 +108,8 @@ describe('items 1 and 2 · the plenty lines declare the band that denies them, o
       if (band === 'pressured' || f.crisis?.has?.('under_siege') || f.crisis?.has?.('famine')) { want.push(false, false, false); got.push(...[v1, v2, v3].map((v) => admits(v, s))); }
       if (band === 'pressured') {
         pressured += 1;
-        const stored = Number(f.storesMonths) >= 1;
-        want.push(...withStores.map(() => stored), ...noStores.map(() => !stored));
-        got.push(...withStores.map((x) => admits(x, s)), ...noStores.map((x) => admits(x, s)));
+        want.push(...pressuredLines.map((x) => meets(x, Number(f.storesMonths))));
+        got.push(...pressuredLines.map((x) => admits(x, s)));
       }
       expect(got, seed).toEqual(want);
     }), 'DS-DEF-12 ample: v1-v3 refused under Pressured or a hunger; the Pressured lines by their stores');
@@ -123,11 +123,18 @@ describe('items 1 and 2 · the plenty lines declare the band that denies them, o
     const secure = { band: 'secure', shownBand: 'secure' };
     const ample = DEF.filter((x) => x.block === 'DS-DEF-12' && x.pool === 'CAPACITY: ample');
     const said = (/** @type {object} */ f) => ample.filter((x) => admitsFacts(x, f)).map((x) => x.v.vid).sort((a, b) => a - b);
+    // THE TOTALITY TABLE (the second reader's third pass): every food band × hunger × stores cell keeps a line, and each line
+    // claims no more than its floor bears (v2 cites the stores count: three months; v7 "more than it needed": three; v9
+    // "can make up what its own food falls short by": two, a Pressured gap being up to 1.8 months of a year)
     expect(said(plant(calm, { storesMonths: 0.5 }))).toEqual([10]);
+    expect(said(plant(calm, { storesMonths: 1.5 }))).toEqual([5, 6]);
     expect(said(plant(calm, { storesMonths: 4 }))).toEqual([5, 6, 9]);
-    expect(said(plant(calm, { famine: secure, crisis: siege, storesMonths: 4 }))).toEqual([7, 8]);
     expect(said(plant(calm, { famine: secure, crisis: siege, storesMonths: 0.5 }))).toEqual([11]);
+    expect(said(plant(calm, { famine: secure, crisis: siege, storesMonths: 1.5 }))).toEqual([8]);
+    expect(said(plant(calm, { famine: secure, crisis: siege, storesMonths: 4 }))).toEqual([7, 8]);
+    expect(said(plant(calm, { famine: secure, storesMonths: 1.5 }))).toEqual([1, 3]);
     expect(said(plant(calm, { famine: secure, storesMonths: 4 }))).toEqual([1, 2, 3]);
+    expect(said(plant(calm, { famine: { band: 'deficit', shownBand: 'deficit' }, storesMonths: 4 }))).toEqual([4]);
   });
   test('planted: DS-ECO-2 FOOD surplus under a hunger draws its hunger lines and never v1', () => {
     const pool = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-2'].pools['FOOD: surplus'];
@@ -182,10 +189,10 @@ describe('items 4 and 5 · the economy desk reads the lines the page prints, ove
       const s = town(seed);
       if (tradeListsAsPrinted(s).imports.length > 0) return;
       const said = JSON.stringify(economyStateProse(s, { exportPosture: deriveExportPosture(s) }, { seed: String(s._seed ?? s.id ?? '') }).exportPosture ?? '');
-      if (deriveExportPosture(s).status !== 'entrepot') return;
-      seen += 1;
-      expect(said.length, seed).toBeGreaterThan(10); // the posture still speaks
-      expect(said, seed).not.toMatch(/sells on goods it never made|entered it as imports/); // anchored: the line above holds it printed
+      // every no-import town of the thirty, entrepôt or not (the population of 748ec2db3); the entrepôt towns also hold
+      // their posture printed, and the count below proves some stand
+      if (deriveExportPosture(s).status === 'entrepot') { seen += 1; expect(said.length, seed).toBeGreaterThan(10); }
+      expect(said, seed).not.toMatch(/sells on goods it never made|entered it as imports/); // anchored: entrepôt towns print a posture (checked above, counted below)
     }), 'no entrepôt line beside "No recorded imports."');
     expect(seen).toBeGreaterThan(0);
   });

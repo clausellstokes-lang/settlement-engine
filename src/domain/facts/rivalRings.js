@@ -16,14 +16,14 @@
  * crime`'s own import) passes it. Its two imports are engine-core and already eager (`corruption.js`; the roster's ruin filter
  * `institutions/institutionRoster.js`, which `lawBand.js` reads too).
  *
- * A RUINED HOUSE IS NO RING (the chair's fifth point, 2026-11-17: `tests/lint/ruinFilterRoster.walker.test.js`): the roster's
+ * A HOUSE NOT LIVE IS NO RING (the chair's fifth point, 2026-11-17: `tests/lint/ruinFilterRoster.walker.test.js`): the roster's
  * "Multiple criminal factions" is read off the LIVE roster (`liveInstitutions`). The key itself reads the raw roster, so in a
- * town whose only such house is ruined the key may still say `semi-organized` while this atom says no rings: the turf-war
+ * town whose only such house is not live (ruined, removed, destroyed or a remnant) the key may still say `semi-organized` while this atom says no rings: the turf-war
  * line is then refused and its no-rival twin prints. Pure.
  * @enforced-by tests/domain/bar7DesksLines.test.js
  */
 import { rivalRingsOf } from '../corruption.js';
-import { liveInstitutions } from '../institutions/institutionRoster.js'; // the ruin filter: a ruined house keys no ring
+import { liveInstitutions } from '../institutions/institutionRoster.js'; // the ruin filter: a house not live keys no ring
 
 /**
  * @param {unknown} record the settlement (or a birth's partial: its powers and its roster)

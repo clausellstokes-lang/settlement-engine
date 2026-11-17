@@ -248,3 +248,39 @@ AFTER THE CURE (runI): the eight rules over the thirty **0 on all eight** (uncha
 occupation" 1; "Rival crews at" 27 (as before; "runs through one house" 0).
 
 THE NET AT THIS TIP (each alone, through `sh scripts/gate-tail.sh`): `typecheck:domain:strict` exit 0 · `typecheck:ratchet` exit 0 · eslint on the changed sources exit 0 · `tests/architecture` exit 0 (an eager-to-lazy edge my first form of the leaf drew was cured before any push) · `npm run build` exit 0, then `vendorPdfLazy` + `bootSmoke` exit 0 · my guard 29 of 29 · `tailCorpusDefGuards` 71 of 73 (the base's two rows) · `dossierMountRegistry.walker` green · `proseEntryContradiction.walker`, `styleLaw.walker`, `negativeAssertionAnchor.walker`, `seedLoopTotality.walker` green for my files · door A "hits 1793 · banked 1938 · fresh 0 · stale 145 · ceiling 1938" · door B "fresh 39 · stale 72 · first-register stale 6 · banked 4688 · strips fresh 0 stale 0 banked 107" (the base's own 39, row for row). **NO FRESH LINE.**
+
+## 10 · THE THIRD PASS (the chair and a second reader on c51e7e449, 2026-11-17 about 07:57 UTC; one commit)
+
+1. **DS-DEF-12 ample v2 cites the stores count.** It now declares `stores: ≥ 3` (DS-ECO-8's band for "more than the season
+   needs"). v1 and v3 do not cite the count and still take the Secure, calm towns with less in store. MEASURED at c51e7e449 over
+   the 900: ONE town took v2 (r2s-politically_fractured-town-2, 6.1 months). **0 of those towns hold fewer than 3 months, and 0
+   fewer than 1**, so no printed line moves.
+2. **Two twins now claim only what their floor bears.** v9 ("can make up what its own food falls short by") takes `stores: ≥ 2`:
+   a Pressured gap is up to 1.8 months of a year. v7 ("had put by more than it needed") takes `stores: ≥ 3`. v5, v6 and v8 keep
+   `≥ 1`. THE TOTALITY TABLE, every cell holding a line:
+   - Secure or better, calm: [v1, v3], plus v2 at three months or more.
+   - Secure or better, under a hunger: under 1 month [v11]; 1 to 3 months [v8]; 3 months or more [v7, v8].
+   - Pressured, any hunger: under 1 month [v10]; 1 to 2 months [v5, v6]; 2 months or more [v5, v6, v9].
+   - Import-dependent or lower: [v4].
+   The guard's planted states now check each cell's exact admitted set (ten cells). Its seeded arm reads every Pressured line's
+   own stores band against the town's stores.
+   R7 in the populations: the two Pressured ample towns hold 5.4 and 6.1 months and take [v5, v6, v9] as before. The one Secure
+   calm town takes [v1, v2, v3].
+3. **The entrepôt arm's population is restored.** The negative ("sells on goods it never made|entered it as imports") runs over
+   every no-import town of the thirty again, as at 748ec2db3. The entrepôt towns among them also hold their posture printed and
+   are counted (≥ 1), and the negative is anchored by the walker's convention. `negativeAssertionAnchor` and `seedLoopTotality`
+   name none of my files.
+- **PL1's premise for the defense desk's pool** (drawn at print from a settled record, never at a birth draw) is held by
+  `tests/lint/dossierMountRegistry.walker.test.js`. Its REACHABILITY arm resolves the pool's mount `defense.criminalStructure`
+  (`stateProse/dossierMounts.js`, DS-DEF-4) to its one site under `src/components`, so the desk is read where the page prints.
+  My measurement agrees: births are byte-identical in all 900 towns.
+- `rivalRings.js`'s comment now says "not live" (ruined, removed, destroyed or a remnant), not "ruined". Comment only.
+
+PROVED, each run alone through `sh scripts/gate-tail.sh`:
+- AT MY TIP: my guard 29 of 29 passed; `typecheck:domain:strict` exit 0; `typecheck:ratchet` exit 0; `tests/architecture` exit 0;
+  eslint exit 0; `dossierMountRegistry`, `styleLaw`, `negativeAssertionAnchor` and `seedLoopTotality` green for my files;
+  `tailCorpusDefGuards` red only on the base's two DS-DEF-3 rows; `factLayers.walker` red only on the base's rows. Door A "fresh 0";
+  door B "fresh 39", the base's own 39 row for row.
+- IN THE SCRATCH MERGE with a55162cfa (local, never pushed): it merged cleanly, and the three desk files re-project byte-for-byte
+  (census re-taken in scratch only). My guard 29 of 29 passed; `tailCorpusDefGuards` and `factLayers.walker` show the same base
+  rows only. NOTHING WENT UNTRUE AT THE JOIN, so I re-keyed nothing.

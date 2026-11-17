@@ -9688,7 +9688,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "food: ≥ secure",
-            "no crisis: hunger"
+            "no crisis: hunger",
+            "stores: ≥ 3"
           ],
           "text": "By the town's own count of its stores, {settlement} has more put by than a bad year would take, so having no road costs it little.",
           "slots": [
@@ -9748,7 +9749,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "food: ≥ secure",
             "crisis: hunger",
-            "stores: ≥ 1"
+            "stores: ≥ 3"
           ],
           "text": "{settlement} had put by more than it needed, and it is living on those stores now.",
           "slots": [
@@ -9773,7 +9774,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "food: pressured",
-            "stores: ≥ 1"
+            "stores: ≥ 2"
           ],
           "text": "By the town's own count of its stores, {settlement} can make up what its own food falls short by, so having no road costs it little.",
           "slots": [

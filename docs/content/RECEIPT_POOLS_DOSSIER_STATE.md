@@ -4042,14 +4042,14 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 
 **CAPACITY: ample** {colour}
 1. `[visitor · food: ≥ secure · no crisis: hunger]` No dependable road, river or port reaches {settlement}, and the town does not need one: it keeps itself supplied with room to spare, even in a bad year.
-2. `[ledger · food: ≥ secure · no crisis: hunger]` By the town's own count of its stores, {settlement} has more put by than a bad year would take, so having no road costs it little.
+2. `[ledger · food: ≥ secure · no crisis: hunger · stores: ≥ 3]` By the town's own count of its stores, {settlement} has more put by than a bad year would take, so having no road costs it little.
 3. `[street · food: ≥ secure · no crisis: hunger]` Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a hard year.
 4. `[ledger · food: ≤ importDependent]` In an ordinary year {settlement} would not miss the road, river or port it lacks, but this is not an ordinary year: the town is not raising the food it needs.
 5. `[visitor · food: pressured · stores: ≥ 1]` No dependable road, river or port reaches {settlement}, and the town makes do without one: what it raises falls a little short of what it eats, and its stores make up the rest.
 6. `[street · food: pressured · stores: ≥ 1]` Traders seldom reach {settlement}, and people there seldom miss them, though the town raises a little less than it eats and draws on its stores for the rest.
-7. `[street · food: ≥ secure · crisis: hunger · stores: ≥ 1]` {settlement} had put by more than it needed, and it is living on those stores now.
+7. `[street · food: ≥ secure · crisis: hunger · stores: ≥ 3]` {settlement} had put by more than it needed, and it is living on those stores now.
 8. `[visitor · food: ≥ secure · crisis: hunger · stores: ≥ 1]` No dependable road, river or port reaches {settlement}, and this year the town lives on what it had put by.
-9. `[ledger · food: pressured · stores: ≥ 1]` By the town's own count of its stores, {settlement} can make up what its own food falls short by, so having no road costs it little.
+9. `[ledger · food: pressured · stores: ≥ 2]` By the town's own count of its stores, {settlement} can make up what its own food falls short by, so having no road costs it little.
 10. `[visitor · food: pressured · stores: < 1]` No dependable road, river or port reaches {settlement}, and the town makes do without one, though what it raises falls a little short of what it eats.
 11. `[street · food: ≥ secure · crisis: hunger · stores: < 1]` No dependable road, river or port reaches {settlement}, and with the crisis on, the town has little put by to live on.
 
