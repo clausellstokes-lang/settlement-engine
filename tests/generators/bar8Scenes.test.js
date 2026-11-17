@@ -181,7 +181,7 @@ const twinsOf = (pool, original) => {
 describe('BR23 (1): the small working quarry', () => {
   const pool = () => sense('stone').dominant;
   const laden = () => rowOf(pool(), /^Laden carts from the workings/);
-  const small = () => rowOf(pool(), /^A laden cart or two comes down from the workings/);
+  const small = () => rowOf(pool(), /^A laden cart or two comes down from the workings in a day, and no more\.$/);
   const empty = () => rowOf(pool(), /^The road from the workings is empty of carts/);
   test('the endless line has exactly the two twins (the new one last in the pool, so no row\'s argmax id moves)', () => {
     expect(twinsOf(pool(), laden())).toEqual([empty(), small()]);
@@ -243,14 +243,15 @@ describe('BR23 (2), K\'s 12c: the long and steady history under a live hard cris
   const pool = () => /** @type {any[]} */ (POLITICAL_FLAVOR.stable);
   const row = () => { const r = pool().find((l) => l && typeof l === 'object' && l.twinKey === 'stable: long and steady'); expect(r).toBeTruthy(); return r; };
   const twin = () => { const t = twinsOf(pool(), row()); expect(t.length).toBe(1); expect(pool()[pool().length - 1]).toBe(t[0]); return t[0]; }; // last in the pool: no row's argmax id moves
-  const CALM = /\b(long and steady|history here is (?:long|quiet|steady|uneventful)|little has ever happened|has always been (?:a )?(?:quiet|peaceful|steady))\b/i;
   const events = (/** @type {any[]} */ majors) => majors.map((name) => ({ name, severity: 'major', type: 'political' }));
   test('C36585, bar0-town-occupied-rand-45: occupied: the row refused, its twin admitted, and no branch of the twin calls the past steady', () => {
     const s = town('bar0-town-occupied-rand-45');
     expect(crisisOf(s).has('occupied')).toBe(true);
     expect(admits(row(), s, true)).toBe(false);
     expect(admits(twin(), s, true)).toBe(true);
-    for (const r of [events([]), events(['Succession Crisis']), events(['Succession Crisis', 'Great Fire'])]) expect(twin().text(r)).not.toMatch(CALM);
+    // each branch word for word: none calls the past steady (K's 12c reads "long and steady", "history here is quiet", …)
+    expect(twin().text(events([]))).toBe('No great event marks its past, and what it faces now may be the first');
+    expect(twin().text(events(['Succession Crisis']))).toBe('The Succession Crisis is the one great event in its past, and what it faces now may be the second');
     // the row's true branch (two great events) is the twin's own
     expect(twin().text(events(['Succession Crisis', 'Great Fire']))).toBe(row().text(events(['Succession Crisis', 'Great Fire'])));
   });
