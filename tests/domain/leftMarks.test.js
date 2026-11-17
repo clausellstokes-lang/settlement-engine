@@ -1,0 +1,82 @@
+/**
+ * leftMarks.test.js — LEFT-MARKS (the sixth chair's BRIEF-LEFT, 2026-11-17; vetoable by the owner): THE MARK'S ONE LEAF READS
+ * WHAT EARLIER SEATS LEFT BY NAME. Over fixed seeds of the census's 720 (born in the census's own configuration shape, as
+ * `bar6MarksLaw8.test.js` births them):
+ *   (L25) SEAM-ECON's houses. A house whose trade takes a good no chain names it for (`crisisDependence.js ::
+ *         HOUSE_NEED_INPUT`: the butchers' stock, the established apothecary's herbs) is short where the record's own need
+ *         list names the good and the one reader finds it nowhere: the butchers of r2r-town-54 ("Short of livestock."), the
+ *         apothecary of r2s-religious_conversion-town-2 ("Short of medicinal herbs."), and no other house of that table in
+ *         the 720. The reader's two mends (`houseInputAtHand.js`): "Herbs and forage" brings the herbs (the apothecary of
+ *         r2r-village-13, "Short of its materials." at the base, is fed), and game is the butchers' stock (the butchers of
+ *         r2r-metropolis-19, beside "Game and hides" on the imports, are at work). Each mark prints alike on the owner's
+ *         record, its public projection and the share veil (N4).
+ * POSITIVE CONTROL: at the base (e0242a12a) the two houses print bare and the apothecary of r2r-village-13 is marked: the
+ * file is red there.
+ */
+import { describe, expect, test } from 'vitest';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { rowMarkText } from '../../src/domain/display/crisisStoppedRow.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
+import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
+import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
+import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+
+await loadGenerationLawPayloads();
+
+const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const CRISES = ['famine', 'indebted', 'infiltrated', 'insurgency', 'mass_migration', 'monster_pressure', 'occupied', 'plague_onset',
+  'politically_fractured', 'recently_betrayed', 'religious_conversion', 'slave_revolt', 'succession_void', 'under_siege', 'wartime'];
+/** The census's 720, in its own order of shapes. */
+const CENSUS = [
+  ...SIZES.flatMap((size) => Array.from({ length: 60 }, (_, i) => `r2r-${size}-${i}`)),
+  ...CRISES.flatMap((c) => SIZES.flatMap((size) => Array.from({ length: 4 }, (_, i) => `r2s-${c}-${size}-${i}`))),
+];
+const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+/** CENSUS-3 seedcfg.mjs's r2r-/r2s- arms, verbatim in shape (as bar6MarksLaw8.test.js). @param {string} seed */
+const born = (seed) => {
+  let m = /^r2r-(\w+)-\d+$/.exec(seed);
+  if (m) return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[1] }), null, { seed, customContent: {} });
+  m = /^r2s-(\w+)-(\w+)-\d+$/.exec(seed);
+  if (!m) throw new Error(`not a census seed: ${seed}`);
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} });
+};
+/** @type {Map<string, any>} */
+const towns = new Map();
+const town = (/** @type {string} */ seed) => { if (!towns.has(seed)) towns.set(seed, born(seed)); return towns.get(seed); };
+/** The house's mark on the record, its public projection and the share veil (N4): one answer, or the three. @param {any} s @param {string} name */
+const markOf = (s, name) => {
+  const read = (/** @type {any} */ r) => { const h = liveInstitutions(r).find((x) => x?.name === name); return h ? rowMarkText(r, 'house', h) : 'NO SUCH HOUSE'; };
+  const pub = toPublicSafe(structuredClone(s));
+  const marks = [read(s), read(pub), read(projectShareVeil(toPublicSafe(structuredClone(s)), null))];
+  return marks.every((x) => x === marks[0]) ? marks[0] : `the views differ: ${JSON.stringify(marks)}`;
+};
+
+describe('L25 · SEAM-ECON\'s houses: short where the page says their good is not had, and the reader\'s two mends', () => {
+  const ROWS = /** @type {Array<[string, string, string | null, string]>} */ ([
+    ['r2r-town-54', 'Butchers (3-8)', 'Short of livestock.', 'the need list names livestock; no import brings it (a town on no road)'],
+    ['r2s-religious_conversion-town-2', 'Apothecary (established)', 'Short of medicinal herbs.', 'the need list names medicinal herbs; no import brings them'],
+    ['r2r-village-13', 'Apothecary', null, '"Herbs and forage" on the imports brings the herbs (the mend)'],
+    ['r2r-metropolis-19', 'Butchers (3-8)', null, '"Game and hides" on the imports is the butchers\' stock (the mend)'],
+  ]);
+  test('each house reads its state, alike on the record, its public projection and the share veil (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(ROWS, ([seed, house, want, why]) => {
+      expect(markOf(town(seed), house), `${seed} · ${house}: ${why}`).toBe(want);
+    }), 'L25 rows');
+  }, 600_000);
+  test('no other house of the table is marked short of its good over the census\'s 720', () => {
+    const NEED = { butchers_3_8: 'Short of livestock.', apothecary_established: 'Short of medicinal herbs.' };
+    /** @type {string[]} */ const marked = [];
+    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+      const s = town(seed);
+      for (const h of liveInstitutions(s)) {
+        const id = String(h?.catalogId || catalogIdForName(String(h?.name ?? '')) || '');
+        const want = /** @type {Record<string, string>} */ (NEED)[id];
+        if (want && String(rowMarkText(s, 'house', h) ?? '').includes(want)) marked.push(`${seed} · ${h.name}`);
+      }
+    }), 'every census town is born and read');
+    expect(marked.sort(), 'the houses of the table marked short of their good').toEqual(['r2r-town-54 · Butchers (3-8)', 'r2s-religious_conversion-town-2 · Apothecary (established)']);
+  }, 1_800_000);
+});

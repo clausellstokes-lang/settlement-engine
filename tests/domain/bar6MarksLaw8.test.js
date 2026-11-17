@@ -7,8 +7,7 @@
  * census dump. A test corpus carries births, not dumps, so the guard reads the same rules off the born record and the one
  * mark leaf every tab prints through (`tests/helpers/pageLaws/law8Marks.mjs :: law8MarksInstances`). THIS FILE REDS WHEN
  *   (a) THE ZERO: an instance in a town of the census's 720 (born in the census's own configuration shape) that is not one of
- *       the four houses left by name (LEFT below: the reader's import match does not yet read "Herbs and forage" as
- *       herbs, nor game meat as the butchers' stock; a ratchet: the list only shrinks);
+ *       the houses left by name (LEFT below; a ratchet: the list only shrinks; LEFT-MARKS item 3 struck two of three);
  *   (b) THE POSITIVE CONTROL: the detector, the marks read blind, stops finding its rule in a census town whose record
  *       holds the worst state (one town a rule, measured at afa46d644 with this cure);
  *   (c) 8b.extract's PLANTED PAIR (RULING BR10 (2)): a mine on its only ground, spent, printed bare by a planted record, is
@@ -58,10 +57,15 @@ const town = (/** @type {string} */ seed) => { if (!towns.has(seed)) towns.set(s
 /** The houses left by name (BAR6-MARKS's hand-back, "what is left"): `<seed> · <rule> · <house>`. */
 // STRUCK BY ITS OWN RULE (BIRTH-1, 2026-11-17): 'r2r-town-51 · 8a.input · Apothecary (established)' is cured: the birth
 // brings its medicinal herbs in (`resourceGenerator.js :: importsBroughtAtBirth`, "Medicinal herbs").
+// STRUCK BY ITS OWN RULE (LEFT-MARKS item 3, L25, 2026-11-17): 'r2r-town-54 · 8a.input · Butchers (3-8)' and
+// 'r2s-religious_conversion-town-2 · 8a.input · Apothecary (established)' are cured: a house whose trade takes a good no
+// chain names it for is short where the record's own need list names the good and no import brings it
+// (`crisisDependence.js :: HOUSE_NEED_INPUT`; tests/domain/leftMarks.test.js). LEFT, BY NAME: the butchers of
+// r2r-metropolis-19 stand beside "Game and hides (local hunting grounds exhausted)" on the imports, the butchers' stock
+// (the reader's mend, `houseInputAtHand.js :: TRADE_STOCK_WORDS`): they are at work, and the rule reads the need line
+// "Livestock for meat and draft" alone.
 const LEFT = [
-  'r2r-town-54 · 8a.input · Butchers (3-8)',
   'r2r-metropolis-19 · 8a.input · Butchers (3-8)',
-  'r2s-religious_conversion-town-2 · 8a.input · Apothecary (established)',
 ];
 
 describe('LAW 8\'s mark rules (BAR6-MARKS): the mark leaf reads every worst state', () => {

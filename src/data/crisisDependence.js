@@ -1069,7 +1069,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "brothel_red_light_district": NONE,
   "burial_ground": NONE,
   "burial_grounds_and_charnel_house": NONE,
-  "butchers_3_8": Object.freeze([LIVESTOCK]),
+  "butchers_3_8": Object.freeze([LIVESTOCK, INPUT]), // LEFT-MARKS item 3 (L25, 2026-11-17): its stock is its input (`HOUSE_TRADE_INPUT`): short where the page says no livestock is had
   "caravan_masters_exchange": Object.freeze([TRAVELLERS, GOODS]),
   "caravaneer_s_post": Object.freeze([TRAVELLERS, GOODS]),
   "caravanserai": Object.freeze([TRAVELLERS, GOODS, INPUT]), // BAR2-SERVICES SV1: its camels; "No camels reach the caravanserai." marks it, and its caravans with it
@@ -1606,6 +1606,18 @@ export const HOUSE_TRADE_INPUT = Object.freeze({
   smelter: 'ironOre',
   luxury_goods_quarter: 'luxury',
 });
+
+/**
+ * LEFT-MARKS item 3 (L25, SEAM-ECON's four houses; the sixth chair's BRIEF-LEFT, 2026-11-17; vetoable by the owner): A HOUSE
+ * WHOSE TRADE TAKES A GOOD NO CHAIN NAMES IT FOR, READ ONLY WHERE THE PAGE ITSELF SAYS THE GOOD IS NOT HAD (the record's own
+ * need list names it, "Needed, and not brought in: Livestock for meat and draft", and the one reader finds it nowhere): the
+ * butchers' stock and the established apothecary's herbs, printed bare beside that line (r2r-town-54,
+ * r2s-religious_conversion-town-2). A reading at print: apart from `HOUSE_TRADE_INPUT`, which the birth also reads
+ * (`resourceGenerator.js :: importsBroughtAtBirth` brings a buyer's word), so no stored record moves; measured to mark
+ * those houses and no other over the census's 720. Catalogue id -> the chain key of its good.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const HOUSE_NEED_INPUT = Object.freeze({ butchers_3_8: 'livestock', apothecary_established: 'herbs' });
 
 /**
  * THE REMEDIES' SHARES AND THEIR HOUSES (BAR5-MARKS, the same rule): an income share of the remedies trade (the economy's
