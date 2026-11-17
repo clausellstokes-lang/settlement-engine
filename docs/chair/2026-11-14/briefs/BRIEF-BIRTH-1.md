@@ -4,6 +4,19 @@ The chair, 2026-11-17. ONE BUILDER SEAT. You make exact what a read-only audit m
 (`lane/birth-audit-2026-11-17` at 7adfa7055: `docs/chair/2026-11-17/birth/BIRTH-AUDIT-HANDBACK.md`, `PROTOTYPE.patch`, the
 probes and their outputs beside it). NO PERSON, TIE, NAME OR HOUSE MOVES IN ANY TOWN BY YOUR WORK: you edit no draw.
 
+## AMENDED 2026-11-17, about 04:30 UTC, ON THE OWNER'S WORD (it overrides the words below wherever they differ)
+
+The owner, in the chair's chat, of a house whose material is bought in: a siege must not exclude it: "those failings
+are simply true because in normal times it would be bought in ... rather than reworked." SO: THE IMPORT IS THE TOWN'S
+ORDINARY-TIMES ARRANGEMENT. It is written for a buying house whose every input is `missing` WHEREVER THE TOWN'S ROUTE IS
+CONNECTED, UNDER A SIEGE TOO; only an ISOLATED route (no route even in ordinary times) excludes it. Under a siege the
+page then says the true thing by the leaf's existing rule: the house reads "Curtailed by the siege." (never a short mark
+with no cause) and the import reads as every import does while the siege lasts. The words "a connected road no siege
+shuts" (the ruling and item 2) and "no import word is written under a siege" (item 5's second arm) ARE WITHDRAWN: the
+guard's second arm holds that no import word is written on an isolated route, none twice, and that a buying house with
+no local source in a besieged town on a connected route carries the siege's mark and not the short mark. Item 6 reads
+besieged towns among its twenty. The seat was sent these words at about 04:30 to join its running turn.
+
 ## The ruling you build (the chair's, BR2, vetoable by the owner)
 
 By the audit's count at the joined line's cfc2b680a: of the 2,066 houses the page marks short in the census's 720 towns,

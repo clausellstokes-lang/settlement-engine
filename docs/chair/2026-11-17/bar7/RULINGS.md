@@ -50,4 +50,19 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   person's card and the PDF), ECON (the Economics tab's marks and lists), SCENES, DESKS (the only seat that edits the
   annex: the economy, defence and power desks), LINES (seven single writers). The house that works only a grain surplus
   (the auditor's 8i.surplus: 3 towns of the 720) waits for BIRTH-1, which holds its file.
+- **BR3 · THE OWNER'S WORDS ON THE SUPPLY RULE (2026-11-17, about 04:22 to 04:30 UTC, each verbatim in the chair's
+  records), WHICH REPLACE BR2's PART TWO AND AMEND ITS PART ONE.** (1) Of the source houses: "What are your thoughts about
+  making this the most likely case but in others they come from trade or the resources are exhausted so the
+  infrastructure exists but the supply line is organically broken?" (2) "That also means making sure they align with
+  imports." (3) Of a siege: "just make sure that it doesn't exclude if a town is under siege that those failings are
+  simply true because in normal times it would be bought in ... Rather than reworked." SO: (a) PART TWO IS NO LONGER A
+  HARD GATE: a source house where the land does not give its material is USUALLY not drawn and SOMETIMES stands with a
+  stated cause, one of two (its ground is exhausted; its material is bought in), suited to its kind; it is COUNTED FIRST
+  (the born-short audit's seat, `docs/chair/2026-11-17/birth/BIRTH-2-COUNT.md`: kept shares of none, one in five, one in
+  three and all) and nothing is seated on it until the owner has seen the count. (b) EVERY CAUSE ALIGNS WITH THE IMPORTS:
+  "bought in" stands by name on the town's imports; "exhausted" shows the finished good now brought in where a route is
+  open; no import feeds a house the page calls exhausted; no export names its good. (c) A CAUSE IS OF ORDINARY TIMES: a
+  siege excludes nothing and reworks nothing: the import stays the town's ordinary trade and reads cut off while the
+  siege lasts, and the house carries the siege's mark; only a town with no route even in ordinary times cannot buy in.
+  Part one's seat (BIRTH-1) was corrected on (c) while it worked: the import is written under a siege too.
 
