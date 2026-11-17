@@ -1,6 +1,6 @@
 # SECRETS-1 · hand-back: the very rare secrets (BRIEF-SECRETS-1, ruling RS1 and its widenings)
 
-The joined line's tip as given: `7cf3cb9f0`; AMENDMENT 2 proved also in a scratch merge with the line's later tip `fd93fb998`. My tip: `8beed42b2` and this hand-back. My branch: `lane/secrets-rare-2026-11-17`. I merged
+The joined line's tip as given: `7cf3cb9f0`; AMENDMENT 2 proved also in a scratch merge with the line's later tip `fd93fb998`. My tip: `0089fbc4a` (AMENDMENT 3) and this hand-back. My branch: `lane/secrets-rare-2026-11-17`. I merged
 nothing. Every run named here was seen to its end; the runners and their outputs are in scratch and named in § The
 measures.
 
@@ -108,6 +108,66 @@ at the base and the line with other files).
 At the tip also: both type gates green (1113 of 1113; 167 of 167), eslint clean on my files, ONE `npm run build` green with
 `vendorPdfLazy` and `bootSmoke` (49 passed, 17 skipped by the files); the 720 born again at `8beed42b2` is byte for byte
 the 720 of `0e5ec8421` (the thief's re-reading moves no card).
+
+### 0.3 AMENDMENT 3 (the chair's seven, by message): DONE AT `2c49a67d9`, `60fe5581b`, `0089fbc4a`
+
+It supersedes 0's paragraph on the keeper's old name (the chair ruled); the rest of 0 stands.
+
+1. **The keeper's old name is followed.** A KEPT holder whose secret matches a rare row exactly (`rareRowOf` now captures
+   the name slot, the same name in both lines or it is not that row) and whose named person is no longer on the roster
+   keeps THE SAME ROW, its name re-filled by the row's own picker under the row's own rules (`namedFor`: never the
+   person, never their superior, never one their own lines name, the tie refusals, a generation younger for `parentOf`).
+   None fits: left as it is and counted (`receipt.unfollowed`). A user's own words match no row and are never touched
+   (the guard plants one). **Of my five measured holders, five re-fill**, each on its own row, each with a person on
+   the re-rolled roster: `lovesNamed` (r2r-city-29: Lakshmana Banerjee → Sharda Khanna), `guardian` (r2r-city-56:
+   Regina Maier → Ingrid Eisenberg; r2r-metropolis-15: Malati Narayanan → Gayatri Subramanian), `hiddenSpouse`
+   (r2r-metropolis-19: Selma al-Malik → Tamim al-Rumi), `oathAgainst` (r2r-metropolis-41: Timofei Đorđević → Luba Đurić).
+2. **`superior` reads the card's own lines**: never one the card's own goal or hook names (the row is then not dealt).
+3. **A hook of either shape**: a string, or a declared line, whose every string is read (the words, not a draw; read
+   without the `.text` unwrap the strip ban names, so the things door's strips stay the line's). **Measured, not cured**:
+   the 720 and the 150 store 24,872 hooks on cards, all strings, none object-shaped. Over the 870 births (a probe tree
+   recording each holder's hooks at the deal), **327 holders; the assembly's later pass changes the hook of NONE after
+   the deal read it, so none ends beside a row it should have refused.**
+4. **`masterThief` never a criminal house's head**: beside the rank-1 office, the roles of a criminal house's head read
+   from the catalogue's faces — house boss, gang boss, rookery boss, undercity boss, pit boss, the network's head, the
+   network's spider, the guildmaster of thieves, the guildmaster, ringleader, outlaw host. It still stands in a small
+   place: the 720's thorps, hamlets and villages cast 22 fences, 10 smugglers and 3 bandit contacts (and 7 outlaw hosts,
+   1 network's spider and 1 guildmaster, now refused); the no-dead-row test passes.
+5. **The guard's three proofs**: the re-roll's positive anchor (before the re-roll the holder has the row, and the town
+   holds exactly one of its family); two STANDING candidates of one family in one place, one dealt (`receipt.standing`
+   counts every passer a row stands for); each hidden master in a thorp and a hamlet beside the same card in a town that
+   holds none. And two tests more: the followed name, and the superior refused beside a goal that names them. 22 tests.
+6. **`tooHonest`** never the head of the ruling body or a title of blood; **the kin words by stem** (a word, its plural
+   and its possessive, -y to -ies: sister's, sisters, families; `family` and `kin` added to the list), and the
+   spouse words likewise.
+7. **The rows that left the 720's seen set** (128 at `f1c903c47`, 126 at `8beed42b2`, 124 now). Not two: 13 left and 11
+   joined between the first two, as AMENDMENT 2's conditions changed the rows that may stand for a person and the row
+   is picked by the hash modulo that list's length. Left: ghost, noTaste, cold, killer (2), wroteSong (2),
+   falseWitness (2), nameless, fearsWater, noFaces, thumbOnScale, neverAngry, demon, noSleep. Joined: felon (2), luck
+   (2), burnedRecord (4), cursed, sings, noTouch, wishedDeath, paidToForget (2), oathBreaker (2), xenophobe, bearLie.
+   Since `8beed42b2`: left savedEnemy, mimic, owesLife, noTouch; joined fearsWater, foresees. Every row still stands
+   somewhere (measure 6; the guard's no-dead-row test).
+
+**Changed rows, old → new** (the data's diff; `superior` and the eight `{target}` rows change in whom they may name):
+
+| row | old → new |
+|---|---|
+| `tooHonest` | holder.not: + head, hereditary |
+| `nameless` | holder.notHookWords: + family, kin (and every kin word read by stem) |
+| `promised` | its spouse words read by stem |
+| `masterThief` | holder.notRoles: + the eleven head roles above |
+
+**The table again** (odds unchanged): the 720 and the 150 as in § 1, to the place and the family: the same people carry
+one. fieldDiff, base `7cf3cb9f0` against `0089fbc4a`: the 720, 216 moved only in the dealt secrets, 0 in any other field;
+the 150, 42 and 0.
+
+**Proved at `0089fbc4a` and in a scratch merge of the line's tip `fd93fb998` with it** (`--no-commit`, never pushed):
+my guard and the people's guards 8 files, 100 green at both; `presumption-classes-door` fresh 0 and
+`presumed-things-door` fresh 39, strips fresh 0, at both (the line's own); tests/lint by name: red in the merge and not
+at the line, and red at my tip and not at my base, ONE, `poolDominance.walker` (the five `ledger:rareSecrets:*` rows,
+the close's); nothing green at the line or the base is red in the merge or at the tip but that. The type ratchet, the
+strict domain gate and eslint ran green on each push (the pre-push hook) and eslint alone on my files; the one build
+(`8beed42b2`) stands: no import has changed since.
 
 ## 1. HOW RARE, AS BORN (the table of item 2, first)
 
