@@ -85,8 +85,19 @@ ONE place. A seat is seated from the working line's tip once the seats it waits 
 - RULING BR20: bar0-hamlet-calm-rand-40 (a maltster printed bare on a short food line, in a calm town on a road):
   AS LEFT-MARKS BUILT IT. The birth's law (a buyer in a calm town on a connected road buys in and is never marked)
   is the owner's supply rule and stands; L16's reading stays out of such a town. Nothing to build.
-- If J-ROWS leaves G1 by name (the general gap line: `crisisStoppedRow.js :: housesShortOfInput` reads the mark's noun
-  off it), its hunk in `crisisStoppedRow.js` is MARKS-2's.
+- J-ROWS CURED G1 AT PRINT (11g: 129 -> 3 in the 720; the marks unmoved). THE THREE THAT STAY are worked-out PEAT
+  CUTTERS whose mark reads "peat" off the general line (`crisisStoppedRow.js :: housesShortOfInput`): the hunk J-ROWS's
+  hand-back names is MARKS-2's.
+
+## ROWS-2 (after SCENES and DESKS-ECO land: it declares by THEIR atoms) · `src/data/institutionDescVariants.js`
+
+- J-ROWS built G1 and (by the chair's grant of a one-line pass-through in `serviceRollMaterialization.js`) the fish
+  service rows and titles; IT LEFT, BY THE CHAIR'S WORD (20:12): the fish market's card "Where the day's catch is
+  sold" (3 in the 720): it takes the fish story's key `taken here` of `trade at work` (SCENES writes it); the fair's
+  "Luxury goods available." / "luxuries to be had" (5 that stand) and the quarter's "The trade in silk, spice, and
+  precious things." (7, PLAUSIBLE): each takes "the good is brought in" (the per-good value DESKS-ECO writes under
+  BR17 (3)) and the fair's TWIN (BR17 (2)) where luxuries are not brought in. J-ROWS's hand-back says which
+  declaration each line would take. A small seat, or an amendment to whichever of the two lands last.
 
 ## LEFT-KEYS (after the four LEFT builders land) · tests and two detectors only (`briefs/BRIEF-LEFT.md`, last section, K1 to K6)
 
@@ -98,3 +109,5 @@ ONE place. A seat is seated from the working line's tip once the seats it waits 
 - K6 (c), ruling BR18: the detector `8f.chain` (runH) does not flag a chain card "Impaired" on a spent ground beside a
   trade at work on bought material.
 - L13 is cured at point 33 (`labelJoins` green): struck.
+- Seat J's detector (`tests/helpers/pageLaws/law11Supply.mjs`, rule 11g) misses the story line's plural form "are
+  failing" (J-ROWS read 130 where it counts 129: its hand-back names the line and the town): a detector's debt.

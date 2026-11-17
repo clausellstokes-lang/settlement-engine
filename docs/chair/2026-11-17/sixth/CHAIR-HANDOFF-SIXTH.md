@@ -551,3 +551,11 @@ should be paused or archived by the owner's hand.
   to 8 are READ-LEFT-PDF's findings). STILL TO WRITE: MARKS-2's section. OTHER SEATS: READ-LEFT-PDF (done), READ-LEFT-CHAIN
   session_01FbPLbfaN5JrfWb5LgXVXgV and READ-LEFT-MARKS session_01FbPLbe3ALLkoD83nKAVfE7 (reading); CHECKS-1, -2, -3 (the
   batch's whole check at 3b06c724b).
+- **20:14 UTC. J-ROWS REPORTED (20:11, c25fa870d) AND GOES ON.** BUILT: G1 = 11g (the general gap line dropped at print where the
+  story's own line prints: thirty 8 -> 0, the 150 17 -> 0, the 720 129 -> 3; the marks unmoved; three tests re-keyed).
+  LEFT AT FIRST: the fish rows (its largest item): the fish story cannot reach `institutionServices.js` without a
+  one-line pass-through in `src/generators/services/serviceRollMaterialization.js`. THE CHAIR GRANTED THAT ONE LINE (20:12)
+  and the seat is building 11b.fish and 11b.fishTitle (a declared move of `availableServices`: 35 towns of the 720, 48
+  of the 525). LEFT BY THE CHAIR'S WORD for a seat ROWS-2 (the worklist file): the fish market's card and the fair's and
+  the quarter's offer (each needs an atom SCENES or DESKS-ECO is writing). The three peat cutters that keep the line
+  are MARKS-2's.
