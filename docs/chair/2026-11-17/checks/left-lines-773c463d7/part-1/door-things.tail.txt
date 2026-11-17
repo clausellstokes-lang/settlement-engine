@@ -1,0 +1,118 @@
+fresh	src/data/dossierStateProse/defense.generated.js	siege	7ec4bbb368deec23	"With {settlement} under siege, quarrels over rations and theft of food are the trouble on its streets now."
+fresh	src/data/dossierStateProse/defense.generated.js	quarters	5c20597434a2b64a	"Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there."
+fresh	src/data/dossierStateProse/defense.generated.js	quarters	5f8d6934d29fb438	"Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished."
+fresh	src/data/dossierStateProse/defense.generated.js	quarters	2fe7494f83abfe50	"Which power holds a district of {settlement} decides which rules apply there."
+fresh	src/data/dossierStateProse/defense.generated.js	quarters	cb2c18ff89ae6733	"Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the ne"
+fresh	src/data/institutionDescVariants.js	garrison	e7a63c6a99211dbd	"Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies "
+fresh	src/data/institutionDescVariants.js	watch	e7a63c6a99211dbd	"Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies "
+fresh	src/data/institutionDescVariants.js	armedForce	c57566e5bfaaf1a1	"Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. While the"
+fresh	src/data/institutionDescVariants.js	armedForce	d163baaf3dfdbc97	"Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. With "
+fresh	src/data/institutionDescVariants.js	armedForce	a2cdeb4bcbf27797	"A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, "
+fresh	src/data/institutionDescVariants.js	garrison	a2cdeb4bcbf27797	"A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, "
+fresh	src/data/institutionDescVariants.js	armedForce	38ba15e3c2a308e4	"A billet and contracting office for a band of professional soldiers available between campaigns. With the roads held the"
+fresh	src/data/institutionDescVariants.js	armedForce	743cc96b12b6c45b	"A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the"
+fresh	src/data/institutionDescVariants.js	garrison	743cc96b12b6c45b	"A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the"
+fresh	src/data/institutionDescVariants.js	armedForce	b50dee27dd04b260	"Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d"
+fresh	src/data/institutionDescVariants.js	garrison	b50dee27dd04b260	"Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d"
+fresh	src/data/institutionDescVariants.js	temple	c6fded0acf9197fb	"Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination."
+fresh	src/data/institutionDescVariants.js	quarters	c6fded0acf9197fb	"Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination."
+fresh	src/data/institutionDescVariants.js	temple	522f88620a90790f	"Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h"
+fresh	src/data/institutionDescVariants.js	quarters	522f88620a90790f	"Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h"
+fresh	src/data/institutionDescVariants.js	temple	5c421f2f763ebdb8	"The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads."
+fresh	src/data/institutionDescVariants.js	quarters	5c421f2f763ebdb8	"The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads."
+fresh	src/data/institutionDescVariants.js	temple	fc8262cb8594256b	"The great church of the metropolis. The region's chief religious authority sits here, and the faithful of the city fill "
+fresh	src/data/institutionDescVariants.js	house: tavern	c80ba6fcdab28bf6	"Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer."
+fresh	src/data/institutionDescVariants.js	house: tavern	cc264edcf9c2797c	"Commercial-scale ale and beer production for the taverns; while the siege holds the roads none of it goes further. Major"
+fresh	src/data/institutionDescVariants.js	house: tavern	ff2573e4e1329738	"Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer an"
+fresh	src/data/institutionDescVariants.js	house: tavern	e183aed036c8b4f1	"Commercial-scale ale and beer production. Supplies the town's taverns; while the siege holds the roads none of it goes f"
+fresh	src/generators/narrative/settlementOriginProse.js	openTrade	46a67ae06452f0b9	"It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what st"
+fresh	src/generators/power/claimStanding.js	watch	a7cf3311b12549dc	"Town watch; it enforces ordinances, manages disorder, and reports to the council."
+fresh	src/generators/power/claimStanding.js	temple	66fcf46efb43008a	"Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular "
+fresh	src/generators/power/claimStanding.js	clergy	66fcf46efb43008a	"Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular "
+fresh	src/generators/power/factionStanding.js	house: merchant guild	321bb8f01127b5f9	"The merchant guilds now have more say"
+fresh	src/generators/safetyProfile.js	streets	d0cb088496831e60	"The streets are unusually quiet."
+fresh	src/generators/safetyProfile.js	garrison	26ba104371f73baf	"The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t"
+fresh	src/generators/safetyProfile.js	clergy	26ba104371f73baf	"The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t"
+fresh	src/generators/safetyProfile.js	clergy	ad2781f9cea24c20	"The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theologica"
+fresh	src/domain/display/guardLineUnderTheLaw.js	prison	85fc61848472a7ad	" A court and a prison stand, but few offenders are ever brought to either."
+fresh	src/domain/display/guardLineUnderTheLaw.js	prison	269d54d08e6175bc	" A functioning court and prison mean crimes carry real consequences."
+stale	src/components/new/dailyLifeLogic.js	market	8c50dca21a85a099
+stale	src/components/new/dailyLifeLogic.js	docks	a65bb8cf55e30dc6
+stale	src/components/new/dailyLifeLogic.js	docks	f5a56e72692d7de6
+stale	src/components/new/dailyLifeLogic.js	openTrade	a65bb8cf55e30dc6
+stale	src/data/cultureProfiles.js	openTrade	f471123b61522360
+stale	src/data/cultureProfiles.js	streets	7f6ca57e51df3ee2
+stale	src/data/dossierStateProse/defense.generated.js	siege	498cfc75c90d5834
+stale	src/data/dossierStateProse/defense.generated.js	armedForce	4981288dbf0ebe5c
+stale	src/data/dossierStateProse/defense.generated.js	armedForce	864d9e085885d1df
+stale	src/data/dossierStateProse/defense.generated.js	streets	cd1033fd63141b40
+stale	src/data/dossierStateProse/defense.generated.js	streets	66aa53375c44260e
+stale	src/data/dossierStateProse/defense.generated.js	streets	51b6208bfc4e58da
+stale	src/data/dossierStateProse/defense.generated.js	streets	498cfc75c90d5834
+stale	src/data/dossierStateProse/defense.generated.js	streets	3b4a1d2e0cc16601
+stale	src/data/dossierStateProse/defense.generated.js	streets	a0a16cdf4aa63ed8
+stale	src/data/dossierStateProse/defense.generated.js	streets	53ddce44af6d9553
+stale	src/data/dossierStateProse/defense.generated.js	streets	6800b2c2a100b351
+stale	src/data/dossierStateProse/defense.generated.js	streets	e6929e3e7bdb88e5
+stale	src/data/dossierStateProse/defense.generated.js	streets	8bbdf1e04794ad61
+stale	src/data/dossierStateProse/defense.generated.js	streets	676f689e64a53527
+stale	src/data/dossierStateProse/defense.generated.js	streets	bcd94b58be34c16a
+stale	src/data/dossierStateProse/defense.generated.js	streets	2d8851c2dd202f79
+stale	src/data/dossierStateProse/defense.generated.js	armedForce	f4a2501bf65efba5
+stale	src/data/dossierStateProse/defense.generated.js	armedForce	bb8b7cb9a58d16b4
+stale	src/data/dossierStateProse/defense.generated.js	armedForce	2fe8b75f4c2640c5
+stale	src/data/dossierStateProse/defense.generated.js	streets	72003b95be4eaaba
+stale	src/data/dossierStateProse/defense.generated.js	armedForce	41cb674fedbe69d5
+stale	src/data/dossierStateProse/defense.generated.js	armedForce	0354993074b09fba
+stale	src/data/dossierStateProse/defense.generated.js	streets	27ba92837d0df93a
+stale	src/data/dossierStateProse/economy.generated.js	openTrade	c6bb92c07a034b19
+stale	src/data/dossierStateProse/economy.generated.js	streets	dee285c9f8970f57
+stale	src/data/dossierStateProse/general.generated.js	quarters	c6330bd707af43d7
+stale	src/data/dossierStateProse/general.generated.js	streets	e1b2ccdb4e051c1b
+stale	src/data/dossierStateProse/general.generated.js	streets	a4bbc7c77d21bb4f
+stale	src/data/dossierStateProse/general.generated.js	streets	c3a9e33793f605fa
+stale	src/data/dossierStateProse/general.generated.js	streets	a24a1d4fa25ac4ab
+stale	src/data/dossierStateProse/general.generated.js	streets	c73c71aed51ecf8e
+stale	src/data/dossierStateProse/general.generated.js	streets	4b48626f4a419587
+stale	src/data/dossierStateProse/general.generated.js	streets	2a6c68371bd1b5b2
+stale	src/data/dossierStateProse/general.generated.js	streets	47c4f0a9449224a1
+stale	src/data/dossierStateProse/general.generated.js	streets	c6c53056134c456b
+stale	src/data/dossierStateProse/general.generated.js	streets	8917dec05988222d
+stale	src/data/dossierStateProse/general.generated.js	streets	8c60a46edd074b63
+stale	src/data/dossierStateProse/general.generated.js	streets	adc7dc161f957b4f
+stale	src/data/dossierStateProse/general.generated.js	streets	476de03dbefcb573
+stale	src/data/dossierStateProse/stressors.generated.js	streets	de4c9cce5131a0c7
+stale	src/data/dossierStateProse/stressors.generated.js	streets	fb2a1cd6871659d0
+stale	src/data/dossierStateProse/stressors.generated.js	streets	335183ea73c81990
+stale	src/data/dossierStateProse/stressors.generated.js	streets	0b76faaf849dcdee
+stale	src/data/dossierStateProse/stressors.generated.js	streets	a9bc8aef78d62acd
+stale	src/data/dossierStateProse/warFaith.generated.js	streets	0297c3b5da615b11
+stale	src/data/dossierStateProse/warFaith.generated.js	streets	dfe8f63d6558cea9
+stale	src/data/dossierStateProse/warFaith.generated.js	streets	c87b9103d4727fad
+stale	src/data/narrativeData.js	streets	ceab82e2c220e558
+stale	src/data/narrativeData.js	streets	7311792ded54953b
+stale	src/data/narrativeData.js	streets	bbfcbe18bf210f7c
+stale	src/data/narrativeData.js	streets	c031692c7a8a0038
+stale	src/data/narrativeData.js	streets	31980da3e860d89c
+stale	src/data/narrativeData.js	streets	4467ece7b82b6f5c
+stale	src/data/narrativeData.js	streets	f79ada5e9837264a
+stale	src/data/narrativeData.js	streets	8c921ec44468a876
+stale	src/data/npcData.js	notary	63685fb401dc8e0c
+stale	src/data/npcData.js	notary	4daa862b1a4972de
+stale	src/data/stressInstitutionEffects.js	siege	60b8f48bfca95bf1
+stale	src/data/stressInstitutionEffects.js	notary	941437748d4719fb
+stale	src/domain/display/defenseDisplay.js	watch	5cda302fa8ef4287
+stale	src/generators/narrative/settlementOriginProse.js	openTrade	48564237c7b6ab26
+stale	src/generators/power/governanceNarrative.js	armedForce	bc58707ae8c16ddd
+stale	src/generators/safetyProfile.js	garrison	e7ad3faace2b368b
+stale	src/generators/safetyProfile.js	streets	7b406ce4ce4fa1de
+stale	src/generators/safetyProfile.js	clergy	e7ad3faace2b368b
+stale	src/generators/safetyProfile.js	clergy	fbc31f49ad100e4f
+stale (first register)	src/data/dossierStateProse/defense.generated.js	court	f8aa86f5bf0ee11e
+stale (first register)	src/data/dossierStateProse/defense.generated.js	militia	794fde202732eb70
+stale (first register)	src/data/dossierStateProse/defense.generated.js	prison	f8aa86f5bf0ee11e
+stale (first register)	src/data/dossierStateProse/general.generated.js	prison	0efcb879d014c5c9
+stale (first register)	src/data/dossierStateProse/general.generated.js	prison	ff40ea8e081673d3
+stale (first register)	src/data/dossierStateProse/stressors.generated.js	court	22592d50246e5ce9
+stale (first register)	src/generators/npcGenerator.js	war	79f413580e7c159a
+fresh 38 · stale 72 · first-register stale 7 · banked 4688 · strips fresh 0 stale 0 banked 107
