@@ -886,7 +886,8 @@ wants a sentence.
 2. `[street · institution: granary · no hunger]` Nobody is counting sacks in {settlement} this {season}. The granary is full and the argument is about the overflow.
 3. `[visitor · institution: granary · no hunger]` The granary at {settlement} is near full going into {season}, and nobody is worried about it.
 4. `[ledger · hunger]` {settlement}'s stores went into {season} full, and the town is eating them down now because of the hunger.
-5. `[ledger · no hunger · no institution: granary]` The stores go into {season} deep, and they reach past the turn of the year with room to spare.
+5. `[ledger · no hunger · no institution: granary · stores: ≥ 3]` The stores go into {season} deep, and they reach past the turn of the year with room to spare.
+6. `[ledger · no hunger · no institution: granary · stores: < 3]` The stores go into {season} as full as they will hold, and that is less than a season's food.
 
 **GRANARY: stocked**
 1. `[ledger · institution: granary]` The granary holds a working reserve into {season}: enough to carry the town through, not enough to lend.
@@ -2936,9 +2937,10 @@ supplies the ancestry.
 4. `[counterforce · threat · crisis: any · no watch · no crisis: occupied · no mercenary]` {settlement} has no line and no force, and danger is close at hand.
 5. `[street · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied · no mercenary]` With trouble at hand, {settlement} has no wall to close and nobody trained to send, and each household is deciding for itself whether to stay.
 6. `[visitor · threat · crisis: any · no watch · no crisis: under_siege · no crisis: occupied · no mercenary]` You find {settlement} with no wall and nobody under arms, and its people keeping close to home until the danger passes.
-7. `[ledger · watch · no threat · crisis: any · no mercenary · tier: ≥ village]` {settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.
+7. `[ledger · watch · no threat · crisis: any · no mercenary · tier: ≥ village · law: > collapsed]` {settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.
 8. `[counterforce · watch · threat · crisis: any · no crisis: occupied · no mercenary]` {settlement} has no wall and only its watch, and danger is close at hand.
 9. `[street · watch · threat · crisis: any · no crisis: occupied · no mercenary]` With trouble at hand, {settlement}'s watch is all the town has to send, and there is no wall to send it to.
+10. `[ledger · watch · no threat · crisis: any · no mercenary · tier: ≥ village · law: = collapsed]` {settlement} has no wall and no soldiers; its watch does not keep the peace in its own streets, and would be no answer to an army.
 
 **`Internal Security`: full legal chain (court AND prison)**
 1. `[ledger · court · prison · law: > collapsed]` Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.
@@ -3038,9 +3040,10 @@ in about two towns in five that keep a force.
 3. `[counterforce]` Neither a failed harvest nor an outbreak turns into a catastrophe at {settlement}, and the reason is in the two buildings rather than in the luck.
 
 **`Disasters & Famine`: granary AND parish care only** {colour}
-1. `[ledger]` There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against disease something better than nothing and well short of a hospital.
+1. `[ledger · stores: ≥ 3]` There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against disease something better than nothing and well short of a hospital.
 2. `[street]` The town can eat through a bad year. What it does about a plague is pray and nurse, in that order.
 3. `[visitor]` You find a full grain store at {settlement} and only a small infirmary run by the clergy, because the town has planned for hunger more than for sickness.
+4. `[ledger · stores: < 3]` There is a little food put by at {settlement} and someone to nurse the sick: less than a season against hunger, and against disease something better than nothing and well short of a hospital.
 
 **`Disasters & Famine`: granary, NO medical provision** {colour}
 1. `[ledger]` {settlement} can feed itself through a failed harvest and has nothing at all against disease; a sickness here spreads until it stops of its own accord.
@@ -3104,7 +3107,8 @@ reading rather than a settled one.
 4. `[threshold · watch · tier: ≥ village]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.
 5. `[street · no guardPresence · no watch]` Nobody at {settlement} is paid to keep order; what order the place has, its own people keep.
 6. `[ledger · no guardPresence]` {settlement} pays nobody to keep the peace, and trouble here is settled among its own people.
-7. `[visitor · guardPresence]` {settlement} has people who keep order, and order holds about as well as anyone here expects.
+7. `[visitor · guardPresence · law: > collapsed]` {settlement} has people who keep order, and order holds about as well as anyone here expects.
+8. `[visitor · guardPresence · law: = collapsed]` {settlement} has people meant to keep order, but order holds only where they are standing.
 
 **`Unsafe`**
 1. `[street · watch]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
@@ -6320,7 +6324,7 @@ shared letter would collide.*
 **`prosperity`** *(ten spellings, five tiers; the tier is the state-key)*
 - `Poverty` / `Impoverished` {colour} — 1. `[visitor]` {settlement} is a poor town and does not disguise it: what is here is here because it could not be sold. · 2. `[ledger]` {settlement} pays its way only by doing without: no new roofs, no hired hands, nothing bought that can be made at home. · 3. `[street]` Nobody in {settlement} is saving toward anything.
 - `Struggling` / `Poor` {colour} — 1. `[visitor]` {settlement} gets by, just: patched roofs, thin stores, every coin counted. · 2. `[ledger]` {settlement} ends most years barely even, and one bad month would put it in debt. · 3. `[street]` Households in {settlement} keep careful account with each other over money; nobody borrows lightly.
-- `Moderate` / `Modest` {crisis-scoped} — 1. `[visitor]` {settlement} is neither rich nor poor; it pays its way and keeps little over. · 2. `[ledger · crisis: any]` {settlement}'s books show a town that pays for itself and does not accumulate. · 3. `[street · no crisis: hunger · crisis: any]` {settlement} eats well enough and does not talk about it.
+- `Moderate` / `Modest` {crisis-scoped} — 1. `[visitor]` {settlement} is neither rich nor poor; it pays its way and keeps little over. · 2. `[ledger · crisis: any]` {settlement}'s books show a town that pays for itself and does not accumulate. · 3. `[street · no crisis: hunger · crisis: any · food: ≥ secure]` {settlement} eats well enough and does not talk about it. · 4. `[street · no crisis: hunger · crisis: any · food: ≤ pressured]` {settlement} does not eat as well as it would like, and it talks about it.
 - `Comfortable` / `Prosperous` {colour} — 1. `[visitor]` {settlement} has the look of a town where the ordinary year leaves something over. · 2. `[ledger]` The surplus at {settlement} is real and gets spent on the town rather than out of it. · 3. `[street]` People in {settlement} can afford to argue about things other than money.
 - `Wealthy` / `Thriving` {colour} — 1. `[visitor]` {settlement} is rich in the way that shows in the paving and the doorframes before it shows in anybody's clothes. · 2. `[ledger]` {settlement}'s books carry more than the town needs, and what to do with the excess is a question in its own right here. · 3. `[street]` Money moves in {settlement} fast enough that people talk about where it is going rather than whether there is any.
 
@@ -6345,7 +6349,7 @@ shared letter would collide.*
 - `Secure` {crisis-scoped · no starving} — 1. `[ledger · institution: granary · no crisis: hunger · crisis: any]` {settlement} feeds itself from its own fields; the granary is full and rarely needed. · 2. `[street · no crisis: hunger · crisis: any]` Nobody in {settlement} worries about food; there is always enough on the table. · 3. `[visitor · market · no crisis: hunger · crisis: any]` The market at {settlement} is full and unhurried, and most of what is on sale was grown nearby. · 4. `[threshold · crisis: any]` {settlement} lives on its own harvest, so a closed road will not starve it; a bad harvest could.
 - `Surplus` {crisis-scoped · no starving} — 1. `[ledger · no crisis: hunger · crisis: any]` {settlement} grows more than it eats and sells the rest to its neighbours, which gives it weight with them. · 2. `[street · no crisis: hunger · crisis: any]` A thin year in {settlement} is a poorer year and not a hungry one. · 3. `[visitor · no crisis: hunger · crisis: any]` What leaves {settlement} in carts is mostly food, and the carts leave full. · 4. `[threshold · crisis: any]` The surplus here is what {settlement} sells; a season that took it would cost the town its income before it cost the town its dinner.
 - `Pressured` {crisis-scoped · no starving} — 1. `[ledger · institution: granary · no crisis: hunger · crisis: any]` {settlement} covers its need and covers it exactly; nothing in the granary is spare. · 2. `[street · crisis: any]` The price of bread in {settlement} is watched, which it is not in a comfortable town. · 3. `[visitor · no crisis: hunger · crisis: any]` {settlement} eats, but only by careful buying and sharing; there is little to spare. · 4. `[threshold · institution: granary · crisis: any]` {settlement} has just enough food, and only what is left in the granary keeps it from going short.
-- `Import-Dependent` {crisis-scoped · no starving} — 1. `[ledger · crisis: any]` {settlement} does not grow enough to eat. It buys the rest, and that buying costs it more than anything else. · 2. `[street · crisis: any]` What {settlement} eats comes up the road, and everybody here knows which road. · 3. `[visitor · walls · market · no crisis: hunger · crisis: any]` {settlement}'s market is well supplied and almost none of it was grown within sight of the walls. · 4. `[threshold · no crisis: hunger · crisis: any]` {settlement} eats well, but on food grown elsewhere; if the carts stop, so do the meals. · 5. `[visitor · no walls · market · no crisis: hunger · crisis: any]` {settlement}'s market is well supplied and almost none of it was grown within sight of the town.
+- `Import-Dependent` {crisis-scoped · no starving} — 1. `[ledger · crisis: any]` {settlement} does not grow enough to eat. It buys the rest, and that buying costs it more than anything else. · 2. `[street · crisis: any]` What {settlement} eats comes up the road, and everybody here knows which road. · 3. `[visitor · walls · market · no crisis: hunger · crisis: any]` {settlement}'s market is well supplied and almost none of it was grown within sight of the walls. · 4. `[threshold · no crisis: hunger · crisis: any · food: ≥ secure]` {settlement} eats well, but on food grown elsewhere; if the carts stop, so do the meals. · 5. `[visitor · no walls · market · no crisis: hunger · crisis: any]` {settlement}'s market is well supplied and almost none of it was grown within sight of the town. · 6. `[threshold · no crisis: hunger · crisis: any · food: ≤ pressured]` {settlement} eats on food grown elsewhere; if the carts stop, so do the meals.
 - `Deficit` {crisis-scoped · starving} — 1. `[ledger · crisis: any]` {settlement} cannot grow or buy enough to eat, and the households go short. · 2. `[street · population: ≥ middling · crisis: any]` There is not enough food in {settlement} for everyone, and the poorest quarters go without first. · 3. `[visitor · institution: granary · crisis: any]` The granary at {settlement} is open and the queue at it is longer than the stock behind it. · 4. `[threshold · no crisis: famine · crisis: any]` {settlement} is short and not yet starving, and what stands between the two is the stores rather than the harvest.
 - `Deficit × Active Famine` {colour · starving · famine} — 1. `[ledger]` {settlement} is starving: the stores are gone, nothing can be bought, and people are dying. · 2. `[street]` The whole of {settlement} is going hungry, and the hall is struggling to keep order. · 3. `[visitor]` The first thing a stranger is asked in {settlement} is whether they have brought anything. · 4. `[threshold]` {settlement} cannot get hungrier than this; from here, what changes is how many die.
 
@@ -6962,10 +6966,11 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`ENTREPOT`** {crisis-scoped · market}
 1. `[ledger · crisis: any · no crisis: under_siege · no crisis: plague_onset · no crisis: hunger · tier: ≥ town]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
-2. `[visitor · no crisis: under_siege · crisis: any]` Half the goods traded in {settlement} are only passing through, and the town lives off their passing.
+2. `[visitor · no crisis: under_siege · crisis: any · tier: ≥ town]` Half the goods traded in {settlement} are only passing through, and the town lives off their passing.
 3. `[street · no crisis: under_siege · crisis: any]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 4. `[ledger · market · crisis: any · no crisis: under_siege · no crisis: plague_onset · no crisis: hunger · tier: ≤ village]` {settlement}'s market handles more than its own people could ever use; the difference is their living.
 5. `[ledger · market · crisis: hunger · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market was built to handle far more than its people could ever use, yet with food short it cannot now feed them.
+6. `[visitor · no crisis: under_siege · crisis: any · tier: ≤ village]` Half the goods traded in {settlement} are only passing through, and its people live off their passing.
 
 **`NO-MARKET`** {no market}
 1. `[counterforce · gate · institution: tavern · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
@@ -7337,7 +7342,8 @@ no compass word, no real-world place, no named analogy.*
 1. `[ledger · no crisis: occupied · court sits · prison]` {settlement} keeps its own court and its own gaol, and settles its own quarrels.
 2. `[visitor · court sits · prison]` {settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.
 3. `[street · court sits]` In {settlement} the law keeps a building of its own, and people take their quarrels there.
-4. `[visitor · no court sits]` {settlement} keeps a gaol of its own, though no court sits here to try anyone.
+4. `[visitor · no court sits · prison]` {settlement} keeps a gaol of its own, though no court sits here to try anyone.
+5. `[visitor · no court sits · no prison]` {settlement} has no court sitting and no gaol in use.
 
 **`GARRISONED`**
 1. `[visitor · no crisis: occupied]` {settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
