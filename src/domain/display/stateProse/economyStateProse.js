@@ -1257,10 +1257,9 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   // the record's sources); the NAME is the record's largest source. They agree by construction.
   const recordSources = Array.isArray(foodRecord?.foodSources) ? foodRecord.foodSources : null;
   const chainsCount = Number(eco.foodSecurity?.activeChainsCount);
-  const sourcesKey = recordSources && (!Number.isFinite(chainsCount) || chainsCount === recordSources.length)
-    && foodwaysFirstAgrees(settlement, recordSources[0]) // BAR7-DESKS (9g.source): one reading of the first source
+  const sourcesKey = oneSourceUnderFoodways(recordSources && (!Number.isFinite(chainsCount) || chainsCount === recordSources.length)
     ? foodSourcesPoolKey(eco.foodSecurity?.foodRecord?.foodSources)
-    : null;
+    : null, settlement, recordSources?.[0]); // BAR7-DESKS (9g.source): one reading of the first source
   const foodProsperityKey = foodProsperityPoolKey(eco.foodSecurity?.prosperityMod);
   const depletedRow = depletedResourceRow(analysis?.resourceConditions);
   const conditionKey = resourceConditionPoolKey(depletedRow);
@@ -1413,7 +1412,20 @@ import { rowStoppedBy } from '../crisisStoppedRow.js';
  * one reader every surface hands) can name another first: "Its own fields give it grain, and beyond that its food is fish"
  * (the roster's farmland read at print, `farmedOneFrame`). ONE READING: the lens is drawn only where the first source the
  * printed line names (by the line's own source words, `foodways.js :: SOURCE_WORDS`, the earliest in the sentence) is the
- * record's; a town with no foodways line, or one whose line names no source, is read as before.
+ * record's; a town with no foodways line, or one whose line names no source, is read as before. ONLY THE ONE-SOURCE POOL: the
+ * pools of several sources say "the {good} most of all" or speak of the famine, and a famine's failed source leaves the
+ * printed line by design (`foodways.js :: fedLineOf`): "Having more than its fishing to rely on has not kept the famine out"
+ * stays true beside "Its own food is flour from the mill." (bar0-village-famine-rand-42).
+ * @param {string | null} key the food-sources pool key (`foodSourcesPoolKey`)
+ * @param {unknown} settlement @param {unknown} recordFirst the food record's first source token
+ * @returns {string | null}
+ */
+export function oneSourceUnderFoodways(key, settlement, recordFirst) {
+  return key === 'FOOD SOURCES: one source' && !foodwaysFirstAgrees(settlement, recordFirst) ? null : key;
+}
+
+/**
+ * Does the printed foodways line name the record's first source first (or name none)? The reading `oneSourceUnderFoodways` takes.
  * @param {unknown} settlement @param {unknown} recordFirst the food record's first source token
  * @returns {boolean}
  */

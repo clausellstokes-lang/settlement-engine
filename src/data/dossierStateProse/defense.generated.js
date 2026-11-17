@@ -4045,6 +4045,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
+            "tier: ≥ village",
             "no rival rings"
           ],
           "text": "Most of the organised crime at {settlement} runs through one house, and nobody is fighting it for the streets.",
@@ -4071,6 +4072,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "tier: ≥ village",
             "rival rings",
+            "no crisis: occupied",
             "law: surplus"
           ],
           "text": "More than one crew works {settlement}, but the town's law is heavier than any of them, and none of them can fight for the streets in the open.",

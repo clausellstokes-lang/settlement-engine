@@ -1250,8 +1250,7 @@ contradict** it (R-DST-C).
 1. `[ledger · no crisis: indebted]` {settlement}'s purse closes every year ahead. The margin is not large but it is dependable, and there is money laid by behind it.
 2. `[street · colour]` People here put things by, and can. That is the difference between this town and a poorer one.
 3. `[visitor · food: ≥ secure · stores: ≥ 3]` The town is plainly comfortable. The buildings are finished rather than patched, and the stores are more than the season needs.
-4. `[visitor · stores: < 3]` The town is plainly comfortable. The buildings are finished rather than patched, though nobody here keeps more in store than the coming season needs.
-5. `[visitor · food: ≤ pressured · stores: ≥ 3]` The town is plainly comfortable. The buildings are finished rather than patched, and there are stores laid by against a lean season.
+4. `[visitor · food: ≥ secure · stores: < 3]` The town is plainly comfortable. The buildings are finished rather than patched, though nobody here keeps more in store than the coming season needs.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
 1. `[ledger · no crisis: indebted]` {settlement} has money to spend, and spends it on the town's buildings and their upkeep.
@@ -3261,9 +3260,9 @@ the leash is the state, not a fate.
 1. `[ledger]` Criminal work at {settlement} is coordinated enough to hold routes and territories, though not yet tight enough to run the whole town.
 2. `[street]` Everyone at {settlement} knows someone takes a cut, but who it is changes by street and by season.
 3. `[unfolding · tier: ≥ village · rival rings · no crisis: occupied · law: ≤ adequate]` Rival crews at {settlement} are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
-4. `[unfolding · no rival rings]` Most of the organised crime at {settlement} runs through one house, and nobody is fighting it for the streets.
+4. `[unfolding · tier: ≥ village · no rival rings]` Most of the organised crime at {settlement} runs through one house, and nobody is fighting it for the streets.
 5. `[unfolding · tier: ≥ village · rival rings · crisis: occupied]` The crews at {settlement} that would fight over the streets keep out of sight under the occupation's curfew, and their quarrel waits.
-6. `[unfolding · tier: ≥ village · rival rings · law: surplus]` More than one crew works {settlement}, but the town's law is heavier than any of them, and none of them can fight for the streets in the open.
+6. `[unfolding · tier: ≥ village · rival rings · no crisis: occupied · law: surplus]` More than one crew works {settlement}, but the town's law is heavier than any of them, and none of them can fight for the streets in the open.
 
 **structure `diffuse`** {colour}
 1. `[ledger · no crime wave]` Crime at {settlement} is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy.
