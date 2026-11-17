@@ -1,0 +1,5 @@
+{"id":"C30428","town":"bar0-metropolis-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"Mark \"Short of salt.\" set in front of how-they-deal sentence \"Sells by the sack and the cart\"; line reads wrong","other":""}
+{"id":"C31081","town":"bar0-metropolis-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"Mark \"Short of grapes.\" set in front of how-they-deal sentence \"Pours a taste, talks about the year's grapes\"; line reads wrong","other":""}
+{"id":"C31302","town":"bar0-metropolis-calm-rand-44","sev":"MED","kind":"BROKEN","why":"Heading \"NPC Relationships (87)\" over 78 relationship rows (78 rows under it, one per ▲); count does not match","other":""}
+{"id":"C29937","town":"bar0-metropolis-calm-rand-44","sev":"LOW","kind":"PAIR","why":"\"people who live there see little of that value\" in a Prosperous, well-off metropolis whose money \"goes into the metropolis\"","other":"C29532"}
+{"id":"DONE","lines":3940,"blocks":1,"flags":4}
