@@ -239,3 +239,12 @@ the previous account its sessions should be paused or archived by the owner's ha
   sixth 82 (29 + 53), the seventh 46 (16 + 30). THE COUNT HALVED BETWEEN THE TWO READS UNDER ONE MEASURE; THE EARLIER
   PUBLISHED FIGURES (40, 41, 29) WERE UNDERCOUNTS OF THAT MEASURE. The owner was told in plain words at the same hour, with
   no promise of a number of rounds. FROM NOW ON THE MEASURE IS THE STRONGER READER'S.
+- 17:19 UTC · TWO HAZARDS OF THE PUSH HOOK, FOUND BY THE CHAIR ON ITS OWN LANE. (1) A COMMIT MADE ON A LANE WHILE A PUSH OF THAT
+  LANE IS STILL IN ITS HOOK GOES OUT WITH THAT PUSH (the transfer sends the branch by name after the hook; the push's own
+  summary line still names the older commit): the chair's section-0 commit b44f0d85f went out with the push of 9cc7d4a91.
+  (2) A PUSH WITH NOTHING TO SEND GIVES THE HOOK NO REF, AND THE HOOK THEN RUNS THE WHOLE `npm run check`: the chair's next
+  push was empty for reason (1) and ran the whole suite in the lane's checkout for eleven minutes beside the real whole
+  check before the chair saw it and stopped it (nothing was being pushed; no gate was skipped). THE RULE: never commit on
+  a lane between a push's start and its end; read `git status -sb` (ahead N) before every push and do not push at "ahead 0".
+  THE WHOLE CHECK AT THE CANDIDATE RAN UNDER THAT EXTRA LOAD DURING ITS FOURTH AND FIFTH SHARDS: `retry-slow.sh` re-runs
+  every red that ran 19 s or more, alone, before the list is read.
