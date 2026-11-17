@@ -51,16 +51,27 @@ const admits = (row, record) => declarationAdmits(declarationOf(row), /** @type 
 beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
 
 describe('BAR7-SCENES item 1 (8k.trade): the generic kilns key is answered by a house that fires a kiln', () => {
-  test('bar0-metropolis-calm-rand-32: the Potter, the Brickmaker and the Charcoal burner all short beside working Glassmakers: no "kilns are lit"', () => {
-    const s = town('bar0-metropolis-calm-rand-32');
+  // RE-KEYED BY IDENTITY 2026-11-17 (the chair's rehearsal on the line's a55162cfa0, which holds BIRTH-1): the anchor was
+  // bar0-metropolis-calm-rand-32 (REVIEW-BAR-6's town: a Potter, a Brickmaker and a Charcoal burner all short beside working
+  // Glassmakers), and BIRTH-1 now feeds its Potter. The same claim on a planted record of that town's houses and gaps, on no route
+  // (it cannot buy in): no seat in flight lifts it
+  const gap = (/** @type {string} */ institution, /** @type {string} */ chain) => ({ chain, institution, kind: 'missing', impact: `${institution} exists but lacks access to ${chain}`, severity: 'high' });
+  const shortKilns = () => ({ tier: 'metropolis', config: { tradeRouteAccess: 'isolated', nearbyResources: [] },
+    institutions: ['Potter', 'Brickmaker', 'Charcoal burner', 'Glassmakers'].map((name) => ({ name })),
+    economicState: { primaryImports: ['Glass sand'], primaryExports: [] },
+    resourceAnalysis: { gaps: [gap('Potter', 'clay'), gap('Brickmaker', 'clay'), gap('Charcoal burner', 'mountain_timber')] } });
+  test('rand-32\'s houses, planted: the Potter, the Brickmaker and the Charcoal burner all short beside working Glassmakers: no "kilns are lit"', () => {
+    const s = shortKilns();
     const short = housesShortOf(s);
-    const names = (s.institutions || []).map((/** @type {any} */ i) => String(i?.name || ''));
-    // the premise, still held: every house that fires a kiln is short; a glass house stands and is not
-    for (const h of ['Potter', 'Brickmaker', 'Charcoal burner']) { expect(names).toContain(h); expect(short.has(h), h).toBe(true); }
-    expect(names.some((n) => /^Glassmakers?$/.test(n) && !short.has(n))).toBe(true);
+    // the premise, held by the planted record: every house that fires a kiln is short; the glass house stands and is not
+    for (const h of ['Potter', 'Brickmaker', 'Charcoal burner']) expect(short.has(h), h).toBe(true);
+    expect(short.has('Glassmakers')).toBe(false);
     expect(tradeAtWorkOf(s, 'kilns')).toBe(false);
-    // the kiln slot prints the pool's own twin of the crates (the clay kilns short), drawn in the same sense beat
-    expectAbsentWithAnchor(String(s.arrivalScene), 'The kilns are lit all through the day', 'The yard where crates of pots once waited for the carts stands nearly empty.', 'the kilns sense beat');
+    const pool = sense('kilns').dominant;
+    const lit = rowOf(pool, /^The kilns are lit all through the day/);
+    const cold = rowOf(pool, /are lit only now and then, and most days the lanes are cold/);
+    expect(admits(lit, s)).toBe(false);
+    expect(admits(cold, s)).toBe(true); // its twin keeps the slot
   });
 
   test('planted: a glass furnace answers the kilns only where no house that fires a kiln stands', () => {
@@ -172,18 +183,24 @@ describe('BAR7-SCENES item 5: the arrival pools the seam left', () => {
       expect(admits(o, saddler)).toBe(false);
       expect(admits(twin, saddler)).toBe(true);
     }
-    // bar0-village-calm-rand-31 of the 150: its one Tannery "Short of its materials." printed "Downwind of the tanning pits …"
-    const s = town('bar0-village-calm-rand-31');
-    expect((s.institutions || []).some((/** @type {any} */ i) => /^Tannery$/.test(String(i?.name)))).toBe(true);
-    expect(tradeAtWorkOf(s, 'leather')).toBe(false);
-    // the slot prints the first line's twin
-    for (const line of ['tanning pits the air turns sharp', 'The tannery makes itself known', 'Hides hang drying on frames', 'sour reek drifts over the rooftops']) expectAbsentWithAnchor(String(s.arrivalScene), line, 'Few hides are tanned here these days', 'the tanners sense beat');
+    // RE-KEYED BY IDENTITY 2026-11-17 (the chair's rehearsal on a55162cfa0): the anchor was bar0-village-calm-rand-31 of the 150, its
+    // one Tannery "Short of its materials." under "Downwind of the tanning pits …"; BIRTH-1 now brings its hides in. The same claim on
+    // a planted village of that Tannery and its gaps, on no route
+    const tannery = { tier: 'village', config: { tradeRouteAccess: 'isolated', nearbyResources: [] }, institutions: [{ name: 'Tannery' }],
+      economicState: { primaryImports: [], primaryExports: [] },
+      resourceAnalysis: { gaps: ['livestock', 'animal hides'].map((chain) => ({ chain, institution: 'Tannery', kind: 'missing', impact: `Tannery exists but lacks access to ${chain}`, severity: 'high' })) } };
+    expect(housesShortOf(tannery).has('Tannery')).toBe(true);
+    expect(tradeAtWorkOf(tannery, 'leather')).toBe(false);
+    for (const o of originals) {
+      expect(admits(o, tannery), textOfLine(o)).toBe(false);
+      expect(admits(pool.find((/** @type {any} */ t) => t?.twinOf === textOfLine(o)), tannery), textOfLine(o)).toBe(true);
+    }
   });
 });
 
 // a planted state kept apart from the seeds: every named town of this file is born once
 test('the named towns are born in the bar0- shape', () => {
-  expectNoSeedFailures(collectSeedFailures(['bar0-metropolis-calm-rand-32', 'bar0-village-famine-rand-43', 'bar0-city-wartime-rand-43', 'bar0-village-calm-rand-31'], (seed) => {
+  expectNoSeedFailures(collectSeedFailures(['bar0-village-famine-rand-43', 'bar0-city-wartime-rand-43'], (seed) => {
     if (!town(seed)?.name) throw new Error(`${seed}: not born`);
   }), 'born');
 });
