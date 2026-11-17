@@ -222,7 +222,10 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
       const trade = own(TRADE_HOUSES, sense.key) ? sense.key
         : atoms.map((/** @type {string} */ a) => a.replace(/^trade at work: /, '')).find((/** @type {string} */ k) => own(GOOD_TRADES, k));
       const state = (t.needs || []).includes('crisis: under_siege') ? 'siege' : (t.needs || []).includes('crisis: hunger') && sense.key === 'bread' ? 'hunger'
-        : atoms.some((/** @type {string} */ a) => a.startsWith('trade at work')) && !(t.excludes || []).includes('enchanting') && trade ? 'short' : null;
+        // BAR8-SCENES (2026-11-17, BR23 (1); re-keyed by identity): a twin that itself NEEDS the trade at work is the twin of another
+        // state (the small working quarry: a thorp's or a hamlet's tier), never of the trade short; its reach is held by
+        // `tests/generators/bar8Scenes.test.js`
+        : atoms.some((/** @type {string} */ a) => a.startsWith('trade at work')) && !(t.excludes || []).includes('enchanting') && !(t.needs || []).some((/** @type {string} */ a) => a.startsWith('trade at work')) && trade ? 'short' : null;
       return state && (state !== 'siege' || sense.key === 'horses') ? { key: sense.key, trade: trade || sense.key, sense, field, pool: sense[field], original, twin: t, state } : null;
     }))).filter(Boolean);
     expect(twins.length, 'the twins of the trades at work').toBeGreaterThan(20);
@@ -272,7 +275,10 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
     const { KILN_KINDS } = await import('../../src/domain/facts/tradeAtWork.js');
     // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): the goods a scene shows join the keys (`tradeAtWork.js :: GOOD_TRADES`)
     const { GOOD_TRADES } = await import('../../src/domain/facts/tradeAtWork.js');
-    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS), ...Object.keys(GOOD_TRADES)].sort());
+    // BAR8-SCENES (2026-11-17, BR17; re-keyed by identity): the two keys of the mark's worst state join them (`tradeAtWork.js ::
+    // IN_FULL` on the ironwork, `FISH_TAKEN_HERE`)
+    const { IN_FULL, FISH_TAKEN_HERE } = await import('../../src/domain/facts/tradeAtWork.js');
+    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS), ...Object.keys(GOOD_TRADES), `ironwork${IN_FULL}`, FISH_TAKEN_HERE].sort());
   });
 
 });

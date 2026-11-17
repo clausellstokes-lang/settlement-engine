@@ -256,7 +256,7 @@ const PRESSURE_ROWS = {
       (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45)
       ? [
           { text: `${r.name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest is paying. The men who left to fight have not come back.`, needs: ['garrison'] },
-          { text: `Being on the right side of it keeps the forges of ${r.name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith', 'trade at work: ironwork'] }, // SEAM-SCENES (2026-11-17, runC 6b-denied): forges running day and night want a smith with its iron (r2s-wartime-village-0: its one Blacksmith "Short of iron."); the twin below keeps the slot
+          { text: `Being on the right side of it keeps the forges of ${r.name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.`, needs: ['institution: smith', 'trade at work: ironwork in full'] }, // BAR8-SCENES (item 2, K's 12b, 2026-11-17): forges running day and night want no smiths' house marked (`trade at work: ironwork in full`): it printed over smiths every one "Curtailed by the war." (bar0-city-wartime-rand-45, C7246); its twin below keeps the slot // SEAM-SCENES (2026-11-17, runC 6b-denied): forges running day and night want a smith with its iron (r2s-wartime-village-0: its one Blacksmith "Short of iron."); the twin below keeps the slot
           // BAR3-PLACES-2 (C34042, 2026-11-15): no trade is said to have "never paid better": the named commodity is the
           // town's, and where it is the trade the History calls under strain (bar0-city-wartime-rand-13: the fish trade) the
           // line was false; the war's contracts are what pays (true wherever the war goes the town's way).
@@ -473,7 +473,14 @@ export const POLITICAL_FLAVOR = {
     { text: (r) =>
       "An ordinary place that has outlasted grander neighbours by getting the small things right, year after year", crisis: ['any'] },
     { text: (r) =>
-      (majorNamesOf(r).length > 1 ? `It has come through the ${majorNamesOf(r)[0]} and the ${majorNamesOf(r)[1]}, and travellers still remember the place kindly` : r.some(isMajorEvent) ? `The ${r.find(isMajorEvent).name} aside, the history here is long and steady, and travellers remember the place kindly` : "No dramatic history here, only a long steady one, and travellers remember the place kindly"), crisis: ['any'] },
+      (majorNamesOf(r).length > 1 ? `It has come through the ${majorNamesOf(r)[0]} and the ${majorNamesOf(r)[1]}, and travellers still remember the place kindly` : r.some(isMajorEvent) ? `The ${r.find(isMajorEvent).name} aside, the history here is long and steady, and travellers remember the place kindly` : "No dramatic history here, only a long steady one, and travellers remember the place kindly"),
+      // BAR8-SCENES (item 5, K's 12c, 2026-11-17): a past called "long and steady" is not said under a live siege, famine, occupation,
+      // plague or war the line does not name ("The Succession Crisis aside, the history here is long and steady" in an occupied town,
+      // bar0-town-occupied-rand-45, C36585): the crisis atoms of the live crisis, never `crisis: any` (R6); a calm town and the other
+      // crises keep it; under the five its twin (BR23 (2), below, by `twinKey`: `historyCoherence.js :: flavorOf`) keeps the slot
+      twinKey: 'stable: long and steady',
+      crisis: ['calm', 'politically_fractured', 'indebted', 'recently_betrayed', 'infiltrated', 'succession_void', 'monster_pressure', 'insurgency', 'religious_conversion', 'slave_revolt', 'mass_migration'],
+      excludes: ['crisis: under_siege', 'crisis: famine', 'crisis: occupied', 'crisis: plague_onset', 'crisis: wartime'] },
     (r) =>
       // BAR3-PLACES (H6, 2026-11-15): no stability and no one kind of tension claimed (a contested seat and a live quarrel
       // of another kind printed beside it): the oldest quarrels only, beside whatever else divides the place.
@@ -505,6 +512,11 @@ export const POLITICAL_FLAVOR = {
         : r.some(isMajorEvent) // TAIL-NARRATIVE (HIGH B00096): a major event on the record is named, never denied
           ? `Apart from the ${r.find(isMajorEvent).name}, little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it`
           : "Little has happened here worth writing down, and the people here are proud of it: keeping a place quiet takes work, and nobody thanks them for it",
+    // BAR8-SCENES (BR23 (2), 2026-11-17; a TWIN given by name, VETOABLE wording): under a live hard crisis, the past told without
+    // calling the present steady; the branch of two great events is the original's own, true under any crisis
+    { text: (r) =>
+      (majorNamesOf(r).length > 1 ? `It has come through the ${majorNamesOf(r)[0]} and the ${majorNamesOf(r)[1]}, and travellers still remember the place kindly` : r.some(isMajorEvent) ? `The ${r.find(isMajorEvent).name} is the one great event in its past, and what it faces now may be the second` : "No great event marks its past, and what it faces now may be the first"),
+      twinOf: 'stable: long and steady', crisis: ['under_siege', 'famine', 'occupied', 'plague_onset', 'wartime'] },
   ],
   religious_heavy: [
     // CENSUS-2f unit 5: [0]'s persisting institution and [2]'s local clergy presume a house of worship of any kind (R-AE's

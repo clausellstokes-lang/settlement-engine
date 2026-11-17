@@ -306,9 +306,11 @@ describe('the facts the cure made', () => {
       if (!dominant && sense.lines.length === 0) continue;
       const pool = sense[dominant ? 'dominant' : 'lines'];
       const ok = (/** @type {any} */ l) => declarationAdmits(declarationOf(l), facts).admitted;
-      const twin = (/** @type {any} */ l) => (typeof l === 'object' ? pool.find((/** @type {any} */ t) => t && t.twinOf === String(l.text('{name}'))) : null);
+      // BAR8-SCENES (2026-11-17, the chair's grant under BR23; re-keyed by identity): a line may have two twins, and the draw answers by
+      // the first ADMITTED one (`arrivalScene.js :: drawAdmitted`), so a line holds its slot where ANY of its twins is admitted
+      const twins = (/** @type {any} */ l) => (typeof l === 'object' ? pool.filter((/** @type {any} */ t) => t && t.twinOf === String(l.text('{name}'))) : []);
       out[`${sense.key}.${dominant ? 'dominant' : 'lines'}`] = pool.filter((/** @type {any} */ l) => !(l && typeof l === 'object' && l.twinOf))
-        .filter((/** @type {any} */ l) => ok(l) || (twin(l) && ok(twin(l)))).length;
+        .filter((/** @type {any} */ l) => ok(l) || twins(l).some(ok)).length;
     }
     return out;
   };

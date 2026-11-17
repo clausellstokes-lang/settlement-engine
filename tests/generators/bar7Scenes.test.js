@@ -94,7 +94,9 @@ describe('BAR7-SCENES item 2 (8k.market): no busy market under the crises that s
     expect((Array.isArray(s.stress) ? s.stress : [s.stress]).map((/** @type {any} */ x) => x?.type)).toContain('famine');
     expect(factsOf(s).market).toBe(true);
     // the slot prints the stable pool's admitted argmax
-    expectAbsentWithAnchor(String(s.history?.historicalCharacter || ''), 'busy market', 'travellers remember the place kindly', 'the history character slot');
+    // BAR8-SCENES (2026-11-17, K's 12c; re-keyed by identity): the anchor was the stable pool's "… travellers remember the place kindly"
+    // row, which the famine now refuses ("long and steady" under a live hard crisis); the slot prints the pool's next admitted argmax
+    expectAbsentWithAnchor(String(s.history?.historicalCharacter || ''), 'busy market', 'No great event marks this place', 'the history character slot');
     expect(admits(row(), s)).toBe(false);
   });
   test('planted: refused under a famine, a siege and an outbreak; admitted in a calm town with a market', () => {

@@ -226,7 +226,10 @@ function drawAdmitted(pool, { poolId, scoped, facts, speaks = () => true, cleanO
   const twinOf = (/** @type {any} */ line) => {
     const t = textOf(line);
     const own = typeof t === 'function' ? t('{name}') : t;
-    return pool.find((l) => l && typeof l === 'object' && typeof l.twinOf === 'string' && l.twinOf === own) ?? null;
+    // BAR8-SCENES (the chair's grant under BR23, 2026-11-17): a line may have more than one twin, each for another state; the
+    // first ADMITTED twin answers, else the first (as before: with one twin a line resolves exactly as it did)
+    const twins = pool.filter((l) => l && typeof l === 'object' && typeof l.twinOf === 'string' && l.twinOf === own);
+    return twins.find((l) => ok(l)) ?? twins[0] ?? null;
   };
   const twinAdmitted = (/** @type {any} */ line) => { const twin = twinOf(line); return twin != null && ok(twin); };
   return drawDeclared(pool, {
