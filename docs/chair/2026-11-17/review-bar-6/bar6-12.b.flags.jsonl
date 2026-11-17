@@ -1,0 +1,6 @@
+{"id":"C32239","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"PAIR","why":"says somebody keeps visitors safe; DEFENCE watch none, garrison none, 'There is no watch', neighbours deal with wrongdoing themselves","other":"C32213"}
+{"id":"C32001","town":"bar0-thorp-calm-rand-42","sev":"LOW","kind":"PAIR","why":"'goods on offer' implies a trade in goods; no market or fair stands, trade is house to house","other":"C32017"}
+{"id":"C32686","town":"bar0-thorp-calm-rand-43","sev":"LOW","kind":"STATE","why":"head shepherd answers about 'the hills' people are walking (and C32687 a path over the hills); terrain is Plains, open plain","other":""}
+{"id":"C32912","town":"bar0-thorp-calm-rand-44","sev":"MED","kind":"PAIR","why":"says goods leave 'entered it as imports the same season'; TRADE imports none, page says no recorded imports","other":"C32910"}
+{"id":"C32957","town":"bar0-thorp-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"'Weak defences is the reason': plural subject with singular verb (siblings read 'are the reason')","other":""}
+{"id":"DONE","lines":1270,"blocks":3,"flags":5}
