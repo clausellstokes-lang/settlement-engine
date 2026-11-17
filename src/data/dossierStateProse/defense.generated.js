@@ -9676,7 +9676,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "food: ≥ secure",
-            "no hunger"
+            "no crisis: hunger"
           ],
           "text": "No dependable road, river or port reaches {settlement}, and the town does not need one: it keeps itself supplied with room to spare, even in a bad year.",
           "slots": [
@@ -9699,7 +9699,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "street",
           "marks": [
             "food: ≥ secure",
-            "no hunger"
+            "no crisis: hunger"
           ],
           "text": "Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a hard year.",
           "slots": [
@@ -9744,7 +9744,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "street",
           "marks": [
             "food: ≥ secure",
-            "hunger"
+            "crisis: hunger"
           ],
           "text": "{settlement} put by more than a bad year would take, and it is living on those stores now.",
           "slots": [
@@ -9756,7 +9756,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "visitor",
           "marks": [
             "food: ≥ secure",
-            "hunger"
+            "crisis: hunger"
           ],
           "text": "No dependable road, river or port reaches {settlement}, and this year the town lives on what it had put by.",
           "slots": [

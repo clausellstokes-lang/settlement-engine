@@ -4041,14 +4041,14 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 3. `[street]` People at {settlement} rely on goods that arrive by magic, and nobody there could say how the town would manage without them.
 
 **CAPACITY: ample** {colour}
-1. `[visitor · food: ≥ secure · no hunger]` No dependable road, river or port reaches {settlement}, and the town does not need one: it keeps itself supplied with room to spare, even in a bad year.
+1. `[visitor · food: ≥ secure · no crisis: hunger]` No dependable road, river or port reaches {settlement}, and the town does not need one: it keeps itself supplied with room to spare, even in a bad year.
 2. `[ledger · food: ≥ pressured]` By the town's own count of its stores, {settlement} has more put by than a bad year would take, so having no road costs it little.
-3. `[street · food: ≥ secure · no hunger]` Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a hard year.
+3. `[street · food: ≥ secure · no crisis: hunger]` Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a hard year.
 4. `[ledger · food: ≤ importDependent]` In an ordinary year {settlement} would not miss the road, river or port it lacks, but this is not an ordinary year: the town is not raising the food it needs.
 5. `[visitor · food: pressured]` No dependable road, river or port reaches {settlement}, and the town makes do without one: what it raises falls a little short of what it eats, and its stores make up the rest.
 6. `[street · food: pressured]` Traders seldom reach {settlement}, and people there seldom miss them, though the town raises a little less than it eats and draws on its stores for the rest.
-7. `[street · food: ≥ secure · hunger]` {settlement} put by more than a bad year would take, and it is living on those stores now.
-8. `[visitor · food: ≥ secure · hunger]` No dependable road, river or port reaches {settlement}, and this year the town lives on what it had put by.
+7. `[street · food: ≥ secure · crisis: hunger]` {settlement} put by more than a bad year would take, and it is living on those stores now.
+8. `[visitor · food: ≥ secure · crisis: hunger]` No dependable road, river or port reaches {settlement}, and this year the town lives on what it had put by.
 
 **CAPACITY: enough** {colour}
 1. `[visitor · food: ≥ pressured · no food surplus]` No dependable road, river or port reaches {settlement}, so what the town raises is what it has, and an ordinary year leaves nothing over.
