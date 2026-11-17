@@ -666,7 +666,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           // BAR6-RECORD (c) (9d.isolated, the chair's direction of BRIEF-BAR6; vetoable by the owner): an isolated village
           // or larger is a poor road, not no trade: the food balance's minor routes reach it (`facts/tradeReach.js`), so
           // its need comes in irregularly and stores carry the gaps; a thorp or a hamlet off every road runs on stores.
-          ? (minorRoutesReach({ route: tradeRoute, tier }) ? POOR_ROAD_SUPPLY_LINE : 'No trade access: running on existing stockpiles only.')
+          // SEAM-ECON item 2 (2026-11-17): the leaf is asked with this file's own wider reading of a siege (`isUnderStress`)
+          ? (minorRoutesReach({ route: tradeRoute, tier, siege: isUnderStress }) ? POOR_ROAD_SUPPLY_LINE : 'No trade access: running on existing stockpiles only.')
           : _hasMagicTradeForDeps && isIsolatedRoute
             ? 'Supplied via magical trade infrastructure: teleportation imports replace road access.'
             : 'Dependent on trade routes. Siege, road closure, or blockade would impair operations.';

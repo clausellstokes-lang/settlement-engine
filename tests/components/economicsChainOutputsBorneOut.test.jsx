@@ -63,11 +63,17 @@ const birthAny = (seed) => {
 };
 /** W2-C-LEAVES-12 ruling (3), at f9db28270: a card's output no house of its row stands for (a Mine and master-crafted weapons;
  * a Thatcher and milled lumber; Docks and ship construction with no shipyard), the reader's [11] and its MEDIUM pills. */
-const OUTPUT_SILENT = [['r2r-hamlet-6', 'iron', 'Master-crafted weapons'], ['r2r-hamlet-40', 'iron', 'Master-crafted weapons'],
-  ['r2s-famine-town-0', 'iron', 'Master-crafted weapons'], ['r2s-slave_revolt-village-0', 'timber', 'Milled lumber'],
+// RE-KEYED BY IDENTITY (SEAM-ECON item 6, 2026-11-17; BRIEF-BAR6-SEAM rule S5): BAR6-RECORD's declared cure (a) makes fine
+// arms only beside Blacksmiths (3-10) or Specialized metalworkers (`computeActiveChains.js :: FINE_ARMS_MAKERS`), so the
+// record of these three towns no longer lists 'Master-crafted weapons' at all. The claim is kept on the same towns and the
+// same iron card, on the output their record still holds and no house of its row stands for ('Quality tools and weapons',
+// a Mine and no smith); the kept guard r2r-village-28 (a lone smith: no fine arms in its record now) moves to r2r-town-58,
+// Blacksmiths (3-10), the town BAR6-RECORD's hand-back names.
+const OUTPUT_SILENT = [['r2r-hamlet-6', 'iron', 'Quality tools and weapons'], ['r2r-hamlet-40', 'iron', 'Quality tools and weapons'],
+  ['r2s-famine-town-0', 'iron', 'Quality tools and weapons'], ['r2s-slave_revolt-village-0', 'timber', 'Milled lumber'],
   ['r2r-town-4', 'harbour_trade', 'Ship construction']];
 /** …and guards, where a house of the good's row stands: the output keeps printing. */
-const OUTPUT_KEPT = [['r2r-village-28', 'iron', 'Master-crafted weapons'], ['r2r-town-8', 'iron', 'Master-crafted weapons']];
+const OUTPUT_KEPT = [['r2r-town-58', 'iron', 'Master-crafted weapons'], ['r2r-town-8', 'iron', 'Master-crafted weapons']];
 
 afterEach(cleanup);
 
@@ -91,7 +97,10 @@ describe('a chain card prints only the outputs its houses bear out (item 7)', ()
     const iron = { chainId: 'iron', processingInstitutions: ['Mine (open cast)', 'Mine', 'Blacksmith'], resourceInputKey: 'iron_deposits',
       outputs: ['Quality tools and weapons', 'Master-crafted weapons', 'Widgets of no row'] };
     /** @param {string[]} houses */
-    const held = (houses) => ({ name: 'Testford', institutions: houses.map((name) => ({ name })), economicState: { activeChains: [iron] } });
+    // SEAM-ECON item 8 (2026-11-17): a chain card lists no output every maker of which the page marks short of its input
+    // (`housesShortOf`); the record is given the smith's iron (its ground) so the claim below is the one it made, a smith
+    // makes the iron goods and a good of no row is made by no house, and not a smith with nothing to work.
+    const held = (houses) => ({ name: 'Testford', institutions: houses.map((name) => ({ name })), config: { nearbyResources: ['iron_deposits'] }, economicState: { activeChains: [iron] } });
     expect(chainOutputsShown(iron, held(['Mine (open cast)'])), 'a mine forges no blade').toEqual([]);
     expect(chainOutputsShown(iron, held(['Blacksmith'])), 'a smith does; a good of no row is made by no house')
       .toEqual(['Quality tools and weapons', 'Master-crafted weapons']);
