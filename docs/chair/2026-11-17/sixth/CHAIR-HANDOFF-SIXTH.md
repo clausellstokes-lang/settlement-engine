@@ -401,3 +401,16 @@ the previous account its sessions should be paused or archived by the owner's ha
   `validationOnPage.js` alone and the mark's reader gets what it got, or the item is left by name. J's proposal of a
   seat "J-GAPS" holding `crisisStoppedRow.js` too is NOT taken (the file is LEFT-MARKS's). J also checked: no rule of
   LAW 11 flags a forge scene off a mine's gap line.
+- **18:54 UTC. THE LONE RE-RUNS ARE IN (18:53; twelve slow files, each alone): THE FINAL COMPARISON BY NAME** (`checks/candidate-e0242a12a/names.final.txt`
+  on this lane against `lane/checks-2026-11-17 :: checks/line-ed1d43529/names.final.txt`): names 161 at the candidate, 166
+  at the line. RED AT THE LINE ONLY: 15 (unchanged). RED AT THE CANDIDATE ONLY: 10. Six slow ones PASS ALONE and leave the
+  list (`simulationSpine`, `foodDiversity` (2), `incomeLinesSayTheRecord`, `timelineVariety`, `urbanBandInstitutions`
+  G3). The ten: `bar6MarksLaw8` (a) (LEFT-MARKS); `needMetUnderAnotherName`, `corpusEcoTailGuards`, `bar2ServicesRows`,
+  `bar3ServicesRows` (LEFT-KEYS, K4 and K5); `generationForkRegistry.contract` A2, `generationForkCensus` A3e,
+  `heldKeyWriterCensus.walker` A2, `vendorPdfLazy` ST-2 (DEBT-2); AND ONE NOT CLEARED: **`tests/property/editCorpusRatchet.test.js`
+  A5 ("a chain is deterministic, undo then re-edit reproduces the town")**: ALONE on the chair's machine it ran 657 s
+  and died at the arm's own limit (`ARM_TIMEOUT = 600_000`), so IT GAVE NO VERDICT AT THE CANDIDATE (at the line, on
+  CHECKS-1's machine, it is green). Either this machine is slower or the supply rule makes a birth slower; and the
+  arm's claim (an edit chain is deterministic and undo reproduces the town) is exactly what a seeded write at the birth
+  could break. POINT 33 DOES NOT LAND UNTIL THE ARM HAS SPOKEN: CHECKS-1 runs a scratch copy of the test with a one-hour
+  limit at the candidate on its own machine (asked 18:55) and reports every arm's status and time at both trees.
