@@ -832,3 +832,14 @@ should be paused or archived by the owner's hand.
   SO ITS SECOND READER MEASURES THE ATOM AGAINST THE LEAF HOUSE BY HOUSE AT THE MERGE: READ-SCENES is seated when the
   branch is on origin (its prompt: `/home/user/wk/prompts/READ-SCENES.txt`). FISH-ROWS COULD COMMIT (23:23 c9e48bdbf,
   23:32 dd6f8c75a: its hunk in `generateNarratives.js`); it works on.
+- **23:46 UTC. THE FIVE SEATS THAT HOLD FINISHED UNCOMMITTED WORK ARE ASKED TO PRINT IT INTO THEIR OWN CONVERSATIONS (K-POWERS, K-PEOPLE, K-WATCH, DESKS-DEF,
+  DESKS-ECO).** WHY: the product's own page says a cloud session's machine "is reclaimed" after a period of inactivity and
+  that a reopened session gets a fresh machine with "your conversation history" restored, the working tree not
+  (https://code.claude.com/docs/en/claude-code-on-the-web, "Environment expired"); the seats have been idle since 21:05
+  to 21:53 and the owner has not answered. WHAT WAS ASKED, AND NO MORE: read-only commands (`git status --porcelain`,
+  `git diff HEAD` in full, every untracked file in full), each output under 25,000 characters; no file changed; NOTHING
+  staged, committed, stashed or pushed (each seat's refusal stands, and the message says so); the patch is NOT sent to
+  the chair (one line back: "kept: N files, M lines printed"). THIS IS NOT A ROUTE ROUND THE REFUSALS: nothing is
+  committed by anyone, the chair reads none of it and applies none of it; it only keeps the work from being lost
+  before the owner decides. A turn in each session also restarts its idle clock. IF A SEAT ANSWERS THAT ITS TREE IS
+  ALREADY CLEAN, ITS MACHINE WAS REPLACED: its edits are then only in its own history, and the owner is told.
