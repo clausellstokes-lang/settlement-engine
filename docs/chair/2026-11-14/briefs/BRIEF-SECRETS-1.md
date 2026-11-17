@@ -499,3 +499,36 @@ From the chair's read and a second reader's (no HIGH, eight MED; the deal itself
 10. The hand-back: the table of section 1 again (the odds are the owner's: not tuned); every changed row old and new;
     measure 6 again only for the rows this commit changes. Proved at the tip and in a scratch merge of the line's tip
     fd93fb998e (no commit needed).
+
+## AMENDMENT 3 (2026-11-17, sent to the seat by message at 13:21 UTC, after a second reader's delta read of its tip dbfec5fc0d: no HIGH, five MED)
+
+The ten of AMENDMENT 2 are built as asked (nothing draws, nothing marks, births unchanged). THE TIP dbfec5fc0d LANDS AS
+IT IS if its landing checks are sound; this commit sits on top of it and lands as a later point (the feature is not
+held for seven small things, none of them worse than what the line prints today). Budget: +80,000.
+
+1. THE KEEPER'S OLD NAME, RULED (the seat asked and did not guess): a kept person's rare secret that names someone a
+   re-roll replaced names nobody of the town. THE ROW IS NOT RE-DEALT AND THE SENTENCE IS NOT REWRITTEN: THE NAME IS
+   FOLLOWED. For a kept holder whose secret matches a rare row exactly (the anchored patterns, the name slot captured)
+   and whose named person is no longer on the roster, the same row is re-filled with a name by the deal's own picker
+   under the row's own rules. A user's own words never match and are never touched (the pipeline's reason for leaving
+   a keeper's prose alone is kept). Where no one fits, it is left and counted.
+2. THE ROW `superior` ALSO READS THE CARD'S OWN LINES: never beside a goal or a hook that names that person
+   (AMENDMENT 2's sixth point said only `{target}`: the chair's omission).
+3. THE HOOK'S TEXT WHATEVER ITS SHAPE (the reader of hooks took strings only). AND A MEASURE, NOT A CURE: the deal reads
+   a card's hook before the assembly's later pass may replace a refused one (the order is in a file no seat edits): how
+   many holders of the 720 and the 150 carry a hook that pass changes, and whether any ends beside a row it should
+   have refused: named.
+4. `masterThief` STILL REACHES A HEAD (a criminal house's own head with no rank in a power): refused by the role words
+   of a criminal house's head as well, read from the catalogue.
+5. THE GUARD'S THREE WEAK PROOFS: the re-roll test's positive anchor; two STANDING candidates of one family in one
+   place and one dealt (the test counted hash-passers before the conditions); the thorp and hamlet master test's
+   negative.
+6. `tooHonest` never on the head of the ruling body or a title of blood; the kin words by stem.
+7. The two rows that left the 720's seen set (128 to 126), named.
+
+NOT ASKED, AND WHY (so that it is not re-opened): the second reader found the letters' list "still short" (the
+steward, the castellan, the mayor, the harbour master, the toll-keeper, the healer). The chair leaves it: for those
+reading is beside the work, not the work, and one of them who cannot read and hides it behind a good memory and a
+trusted helper is the row's own point; the wizard, the scribe, the lawyer and the banker, for whom reading is the
+work, are refused already. Nor is a town "saved with the old words" a fault: the branch has never landed, so no town
+was ever saved with them.
