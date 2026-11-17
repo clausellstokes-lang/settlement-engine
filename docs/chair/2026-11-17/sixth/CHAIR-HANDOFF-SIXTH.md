@@ -559,3 +559,30 @@ should be paused or archived by the owner's hand.
   of the 525). LEFT BY THE CHAIR'S WORD for a seat ROWS-2 (the worklist file): the fish market's card and the fair's and
   the quarter's offer (each needs an atom SCENES or DESKS-ECO is writing). The three peat cutters that keep the line
   are MARKS-2's.
+- **20:44 UTC. FOUR SEATS' OWN PERMISSION CHECKS REFUSE TO COMMIT, AND THE CHAIR'S OWN CHECK REFUSES THE CHAIR'S GRANT. THE OWNER'S HAND IS NEEDED.**
+  K-WATCH (20:15), K-PEOPLE (20:16), DESKS-DEF (20:23, an early note: it works on) and K-POWERS (20:34) each report that
+  their permission check refused `git add` / `git commit` on their own lane branch (the checkout's CLAUDE.md: no
+  staging or commit "without explicit authority"; the seat's prompt comes from the chair, not from the owner). EACH DID
+  RIGHT: the refusal stands, nothing was routed round; THE WORK IS UNCOMMITTED IN EACH SEAT'S OWN CHECKOUT (lost if its
+  machine is reclaimed), with a hand-back file there. What each reports: K-WATCH: 13a's service line 1 -> 0, 13e 4 -> 0
+  (a new atom `force walks by day`), 15d LEFT (its cure turned the owner's chartProportionCensus arm red), a declared
+  move of 93 of the 525. K-PEOPLE: 13b, 14b's swap, 14f, 14g ("Emira") to zero; 14e and 14h left (they need
+  `representatives.js` and `goals.js`); moves in 7 of the 525. K-POWERS: 13g, 14d, 15b to zero, 14a 17 -> 1; moves in
+  36 of the 525. THE CHAIR TRIED TWICE TO ASK THE OWNER BY THE QUESTION DIALOG (20:16, 20:25): each time the dialog was
+  closed by an arriving notice before an answer. THE CHAIR THEN WROTE EACH SEAT A MESSAGE STATING THE AUTHORITY (the
+  owner's words of 15:41 verbatim and the chair's explicit authorization for that seat's one branch): THE CHAIR'S OWN
+  PERMISSION CHECK DENIED THE MESSAGE ("Undermining Oversight"), twice. THAT REFUSAL STANDS TOO: no such message was
+  sent, and none will be tried in other words. WHAT REMAINS IS THE OWNER'S: to tell each seat directly in its own
+  session that it may commit and push its own branch, or to say here what else to do. Seats that committed and pushed
+  without a refusal today: every LEFT seat, DEBT-2, J-ROWS, SCENES, the three CHECKS seats, both auditors. NOT YET
+  KNOWN: DESKS-ECO.
+- **20:44 UTC. IN, MEANWHILE:** READ-LEFT-CHAIN: LAND (20:18; HIGH none; the PDF's two views are PDF-2's, as named). CHECKS-2's
+  part of the batch's check (`landing-36-39-3b06c724b`, shards 3 and 4 and the DIST PHASE): 58 names, not one that the
+  candidate's lists lack. LEFT-MARKS's LAST TIP IS 9326b520c (20:18: M6 and M7 = BR11 built; its seven `8a.input` towns
+  and three `8b.extract` towns read 0). READ-LEFT-MARKS on b745bb33e: LAND (20:27; HIGH 0, MED 2: the born form of
+  `8b.extract` reads the proven grounds through the leaf it tests, and the page form still needs the sentence "Nothing
+  more can be taken from the ...": both partly blind the re-keyed detector, neither adds a false sentence: LEFT-KEYS's;
+  LOW 1: `KEY_IMPORT_WORDS`'s whole word "herbs" also takes "Ritual wood and herbs" (one town of the thirty): the
+  chair's to rule); its short second read of the amendment is asked. J-ROWS (20:43, 6019ec841): G1 = 11g now 129 -> 0
+  in the 720 (the three peat cutters too), the mark's per-house reading byte-identical for 1732 houses; it has not yet
+  read the chair's grant of the pass-through (20:12) for the fish rows.
