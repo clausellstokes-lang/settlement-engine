@@ -98,7 +98,10 @@ export function readPersons(T) {
       else if ((m = l.match(/^Secret:\s*(.*)$/))) lines.push({ kind: 'secret', i, text: l, body: m[1] });
       else if (MARK_LEAD.test(l) || CRISIS_LEAD.test(l)) cardMark = { i, text: l };
     }
-    return { name: (L[k - 1] || '').replace(/●+$/, '').trim(), house: role.split(' · ')[0].trim(), title: (L[k + 2] || '').trim(), lines, k, cardMark };
+    // LEFT-MARKS item 2 (2026-11-17): the card's title is the line after the house line AND after the house's mark line
+    // when the card prints one (before, a marked card's `title` read its mark line)
+    const titleAt = cardMark && cardMark.i === k + 2 ? k + 3 : k + 2;
+    return { name: (L[k - 1] || '').replace(/●+$/, '').trim(), house: role.split(' · ')[0].trim(), title: (L[titleAt] || '').trim(), lines, k, cardMark };
   });
 }
 const POOL = (() => {

@@ -120,7 +120,10 @@ function houseSurfaces(T, name) {
   return out;
 }
 
-/** The people: { i, name, house, deal } for each "How they deal" line, with the house the person's card names. */
+/** The house's mark as a line of its own on a person's card (ruling CM1): a row's mark, or the failed venture's. */
+export const CARD_MARK = /^(Stopped by|Curtailed by|Scarce in|Short of|Failing: a failed venture\.|Abandoned: a failed venture\.)/;
+/** The people: { i, name, house, deal, cardMark } for each "How they deal" line, with the house the person's card names and
+ * (LEFT-MARKS item 2, 2026-11-17; ruling CM1) the house's mark line the card prints under its house line, or null. */
 export function readPeople(T) {
   const L = T.tabs['World/NPCs'] || [];
   const out = [];
@@ -130,7 +133,9 @@ export function readPeople(T) {
     let k = i; while (k > 0 && L[k] !== '▲') k--;
     const role = L[k + 1] || '';
     const house = role.split(' · ')[0].trim();
-    out.push({ i: l === 'How they deal' ? i + 1 : i, line: l === 'How they deal' ? `How they deal ${deal}` : l, deal, house, name: (L[k - 1] || '').replace(/●+$/, '').trim() });
+    let cardMark = null;
+    for (let j = k + 2; j < i; j++) if (CARD_MARK.test(L[j])) { cardMark = { i: j, text: L[j] }; break; }
+    out.push({ i: l === 'How they deal' ? i + 1 : i, line: l === 'How they deal' ? `How they deal ${deal}` : l, deal, house, name: (L[k - 1] || '').replace(/●+$/, '').trim(), cardMark });
   });
   return out;
 }
@@ -256,7 +261,9 @@ export function law8(T, town) {
       const m = c && c.lines.find((l) => /^Short of [a-z]/.test(l.text) || /^Stopped by the /.test(l.text));
       if (m) { against = { tab: 'Systems/Institutions', i: m.i, line: `${c.head} / ${m.text}` }; how = /^Short/.test(m.text) ? 'short' : 'stopped'; }
     }
-    if (!against || MARK_LEAD.test(p.deal)) continue;
+    // RULING CM1 (LEFT-MARKS item 2, 2026-11-17): the house's mark is ONE LINE OF ITS OWN on the card, under its house line;
+    // a card that prints it covers its person lines (the second check's rule 1: a card's mark covers what its rows say)
+    if (!against || MARK_LEAD.test(p.deal) || p.cardMark) continue;
     if (how !== 'starved' && /still give/.test(p.deal)) continue; // "from what the workings still give" is true of a short ground, not of a spent one
     push('8b.person', { tab: 'World/NPCs', i: p.i, line: p.line }, against, `${p.name}'s house (${p.house}) is printed short, stopped or starved of its input; the person's own trade line offers its goods with no word of it`, { thing: p.house, hedged: /\b(when|whenever|while|if) (?:there (?:is|are)|the|it)\b|still give/.test(p.deal) });
   }
