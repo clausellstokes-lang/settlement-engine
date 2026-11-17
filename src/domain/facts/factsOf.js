@@ -14,6 +14,8 @@
  * Pure: no randomness, no clock, no write.
  */
 import { dangerComingOf } from './dangerComing.js'; // BAR4-CORPUS-DEF (D1)
+import { monsterFrontierOf } from './monsterFrontier.js'; // BAR6-DEFDESK (7a)
+import { growsMoreThanEatsOf } from './growsMoreThanEats.js'; // BAR6-DEFDESK (9c.nothing-over)
 import { crisisOf } from './crisisKind.js';
 import { siegeMotionOf } from './siegeMotion.js'; // BAR4-SAFETY (F2)
 import { storesMonthsOf } from './storesMonths.js';
@@ -77,8 +79,12 @@ export function factsOf(record, options = {}) {
     get siegeMotion() { return siegeMotionOf(record); },
     /** BAR4-CORPUS-DEF (D1): a danger from outside is on its way, a live external-threat tension (`dangerComing.js`) */
     get dangerComing() { return dangerComingOf(record); },
+    /** BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`) */
+    get monsterFrontier() { return monsterFrontierOf(record); },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
+    /** BAR6-DEFDESK (9c.nothing-over): the town grows more than it eats (`growsMoreThanEats.js`) */
+    get growsMoreThanEats() { return growsMoreThanEatsOf(record); },
     /** fact 3: walls / gate / watch / militia / garrison / hospital / healer */
     get defence() { return defenceOf(record); },
     /** the ONE composite (the vocabulary rulings §3): watch ∨ garrison ∨ militia ∨ hired company */

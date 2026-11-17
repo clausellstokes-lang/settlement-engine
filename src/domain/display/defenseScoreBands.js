@@ -46,9 +46,11 @@
  * either: that suffix is the register's P1 trigger, and these are not tuning values the owner
  * signs — they are the band ladder's own definition, the thing the four frozen words MEAN.
  *
+ * The object itself is written in the zero-import leaf `domain/facts/scoreBandCuts.js` (the chair's ruling EG1), which the eager fact homes can read; this module re-exports that same frozen object.
  * @type {Readonly<{ strong: number, adequate: number, weak: number }>}
  */
-export const SCORE_BAND_CUTS = Object.freeze({ strong: 65, adequate: 40, weak: 20 });
+import { SCORE_BAND_CUTS } from '../facts/scoreBandCuts.js';
+export { SCORE_BAND_CUTS };
 
 /**
  * Band colour for a 0-100 defence-system score.

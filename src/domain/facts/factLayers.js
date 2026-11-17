@@ -129,6 +129,7 @@ export const LEAVES = Object.freeze({
   // BAR4-CORPUS-ECO (the chair's FW1): a subsistence house tills for the table beside a food record with no grain
   ownPlots: home('ownPlots', 2, ['economicState', 'institutions']),
   storesMonths: home('storesMonths', 2, ['economicState']),
+  growsMoreThanEats: home('growsMoreThanEats', 2, ['economicState']), // BAR6-DEFDESK (9c.nothing-over): the food record's flag
   imports: home('imports', 2, ['economicState']),
   exports: home('exports', 2, ['economicState']),
   prosperity: home('prosperity', 2, ['economicState']),
@@ -196,6 +197,8 @@ export const LEAVES = Object.freeze({
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
   // BAR4-CORPUS-DEF (D1): a danger from outside on its way, a live external-threat tension of the history (`dangerComing.js`)
   dangerComing: home('dangerComing', 4, ['history']),
+  // BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`: the config and the monster score)
+  monsterFrontier: home('monsterFrontier', 3, ['config', 'defenseProfile']),
   // W2-A-LEAVES-2 (REVIEW-W2A F3): an official in a criminal's pay, the cast's own fact; the crime desk's lines
   // about bought officials are struck by it (`display/stateProse/crimeLineDisqualifiers.js`)
   officialsInPay: leaf({ layer: 4, module: 'domain/facts/officialsInPay.js', exported: 'officialsInCriminalPayOf', call: 'record', reads: ['npcs', 'powerStructure'] }),
