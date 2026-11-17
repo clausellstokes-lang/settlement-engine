@@ -1851,7 +1851,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "stores: ≥ 12"
           ],
-          "text": "{settlement}'s food trades are failing, though its stores would still carry the town through a year cut off.",
+          "text": "{settlement}'s food trades are failing, though its stores would still carry it through a year cut off.",
           "slots": [
             "settlement"
           ],
@@ -9700,7 +9700,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "food: ≥ pressured",
             "food surplus"
           ],
-          "text": "{settlement} grows more than it eats, but no dependable road, river or port takes the rest anywhere, and what the town cannot grow or make it mostly goes without.",
+          "text": "{settlement} grows more than it eats, but no dependable road, river or port takes the rest anywhere, and what the place cannot grow or make it mostly goes without.",
           "slots": [
             "settlement"
           ],

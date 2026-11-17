@@ -34,11 +34,17 @@ export function watchIsUnpaidRota(institutions) {
  * with names that never walk it) has pay to draw. False only where the village's unpaid rota is the whole watch (this
  * file's 'unpaid'), the card that says "Nobody is paid" (the wide read's C200774). Read on the roster alone, so a birth in
  * progress answers it as the final record does.
+ * SEAM-DESKS (2026-11-17, SEAM-LIST's PEOPLE item; vetoable by the owner): A WATCH MUST STAND. Read as "not the unpaid rota"
+ * the atom was true where the roster holds no watch at all, so the watch sergeant's padded roster could print in a town with
+ * no watch to pad. It now reads a watch on the live roster that is not the village's unpaid rota alone. The atom is kept,
+ * not folded into BAR6-CRIME's `force: paid`, because its one declaration stands in a file outside this seat
+ * (`data/people/titleSecretsPresentations.js`): that move and the atom's removal are left by name for the close.
  * @param {{ institutions?: unknown } | null | undefined} record
  * @returns {boolean}
  */
 export function paidWatchOf(record) {
-  return !watchIsUnpaidRota(liveInstitutions(record));
+  const live = liveInstitutions(record);
+  return (partitionDefenseInstitutions(live || []).watch || []).length > 0 && !watchIsUnpaidRota(live);
 }
 
 /**
