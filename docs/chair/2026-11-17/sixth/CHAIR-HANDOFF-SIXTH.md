@@ -110,3 +110,12 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
   prints "Via Mine" beside "(depleted)"). THE MED: ruling A has no guard (its hunk reverted, nothing red). THE FIVE
   ROWS WENT TO LEFT-MARKS AS AMENDMENT 1 OF ITS SECTION, written before it was seated. BIRTH-3 LANDS AS BUILT if the
   whole check's comparison shows nothing else.
+- 16:24 UTC · PREP-READ-7's PROOF (its commit 430289f2b on `lane/read7-prep-2026-11-17`, PROOF-P1.txt): its merge tool,
+  rebuilt from what was committed, reproduces the sixth read's COUNT-RAW.txt line for line from the 42 published flag
+  files (HIGH 0 · MED 51 · LOW 139; a 41 · b 41 · both 31 · union 51), and its packer rebuilds the sixth's 21 packets
+  and index byte for byte. THE SEVENTH READ'S PIPELINE IS PROVEN BEFORE IT IS USED. It renders the thirty now.
+- 16:24 UTC · THREE BUILDER SEATS OF THE ROUND SEATED on the candidate (the middle tier, high effort), each on its own
+  machine, its section of `briefs/BRIEF-LEFT.md` its whole assignment: LEFT-PDF session_01FbPLbbP54f2YhYirEK7TdF
+  (`lane/left-pdf-2026-11-17`) · LEFT-CHAIN session_01FbPLbeQ6AMmwW3YqZr3GGs (`lane/left-chain-2026-11-17`) ·
+  LEFT-LINES session_01FbPLbeoWaAerUfLm8M6h9a (`lane/left-lines-2026-11-17`). LEFT-MARKS is seated when its
+  AMENDMENT 1 is on origin; LEFT-KEYS when the whole check has named the anchors.
