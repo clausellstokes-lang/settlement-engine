@@ -603,3 +603,18 @@ should be paused or archived by the owner's hand.
   second reader; the red is the inventory's law, not a false line), so that J-INCOME and PDF-2 start; LEFT-CHAIN's
   one-function fix lands as a point of its own after point 40, on a targeted net (`tests/joins`, its guard, the leaf's
   readers, both type gates, lint) and is read again by the next whole check.
+- **21:01 UTC. THE BATCH'S WHOLE CHECK IS IN, THREE PARTS (CHECKS-2 20:18, CHECKS-1 20:56, CHECKS-3 21:00): 163 names at 3b06c724b. BY NAME: ONE NEW
+  (`labelJoins`: LEFT-CHAIN's), THREE GONE (DEBT-2's arms: the contract A2, the census A3e, the held-key A2). BUT TWO NAMES THAT
+  SHOULD HAVE GONE STAND, AND THE CHAIR READ WHY BEFORE LANDING:**
+  - `vendorPdfLazy` WEAVE ST-2 is red for ANOTHER FILE now: DEBT-2 cured `crisisStoppedRow.js`'s row; at the batch's commit
+    the roster lacks `src/domain/display/chainHouses.js` (LEFT-CHAIN's L18 made it a goods consumer). A COMPARISON BY NAME
+    HIDES A RED THAT CHANGED ITS CAUSE: where a landing was to cure a named red, the chair reads the red's MESSAGE at the
+    new tree, not only its name. LEFT-CHAIN has both (20:58, 21:03): the join by id, and the roster's one row
+    (`goods.schema.js` granted for that row).
+  - `editCorpusRatchet` A5 (the edit chain's determinism and undo) IS RED IN CHECKS-1's PART AND STAYED RED WHEN RUN ALONE
+    there (green at LEFT-LINES's tip on the same machine an hour before; 594 s of 600 at the line). Either the clock
+    (the arm sits at its limit) or a real drift brought by DEBT-2, LEFT-PDF or LEFT-CHAIN. THE CHAIR IS RUNNING THE ARM
+    WITH A ONE-HOUR LIMIT AT 3b06c724b on its own machine (`/home/user/b1`, a scratch copy of the test; the result in
+    `/home/user/wk/a5-b1.json`). NOTHING MORE LANDS UNTIL IT HAS SPOKEN. If it is green: the clock; points 38 and 39
+    land as planned. If it is red: its message names the drift; bisect at 2e54c06c2 (point 36, DEBT-2, ALREADY ON THE
+    LINE), e60d42a20 (38), 3b06c724b (39).
