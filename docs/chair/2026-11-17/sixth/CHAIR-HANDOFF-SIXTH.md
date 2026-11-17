@@ -522,3 +522,23 @@ should be paused or archived by the owner's hand.
   `landing-36-39-3b06c724b`). IT LANDS (a fast-forward of the line to 3b06c724b, then the record's rows) WHEN that check
   reads clean by name against the candidate's lists AND READ-LEFT-PDF and READ-LEFT-CHAIN say LAND (READ-LEFT-LINES has).
   If a reader holds one seat back, the branch is rebuilt without it (`/home/user/wk/batch1.sh` is the recipe).
+- **20:08 UTC. THE WHOLE CHECK AT LEFT-LINES's TIP IS IN, THREE PARTS JOINED (CHECKS-2 19:38, CHECKS-1 20:01, CHECKS-3 20:04; their branches,
+  `checks/left-lines-773c463d7/part-<n>/`): 160 names; NOT ONE THAT THE CANDIDATE'S LISTS LACK; one of the candidate's is gone
+  (A5 of `editCorpusRatchet`: green on a quiet machine). (Its build part still ran the old `vitest-build`: the dist arms are read
+  at the batch's commit.) CHECKS-2 FOUND A BUG IN `retry-slow.sh` (an empty slow list emptied `names.final.txt`): fixed
+  (pushed 19:44). AT f1ca75555 (points 36 and 37 on the line's tip) the chair ran the fork register's contract, the
+  held-key census and LEFT-LINES's guard: 3 files, 14 tests green. SO POINTS 36 (DEBT-2) AND 37 (LEFT-LINES) ARE BEING
+  LANDED AHEAD OF THE REST OF THE BATCH: a fast-forward of the line to f1ca75555 (the landing branch's own commit: the
+  later fast-forward to points 38 and 39 stays possible; NO DOCS COMMIT GOES ON THE LINE BETWEEN: the record's rows for
+  36 to 39 are written after 39). THE TWO DESK SEATS ARE SEATED FROM f1ca75555 as soon as the line is read back.
+- **20:08 UTC. READ-LEFT-PDF SAYS "DO NOT LAND YET" (20:05), AND THE CHAIR LANDS LEFT-PDF AS IT STANDS (the chair's call; vetoable).**
+  ITS REASON (MED 1): L2 is half cured: the PDF's cards and flow rows hand `chainOutputsOnCard` the stored or
+  half-shown chain, not the chain the tab's card renders: 34 towns of the 720 and 18 of the 150 still print an output
+  the tab withholds (by the reader's probe 151 -> 34 and 40 -> 18; the seat's "125 -> 0" was read off the stored chain,
+  and so were its guard's L2 arm and the re-keyed `chainStateThreeSurfaces`). MED 2: the journal head line's
+  `incomeShort` is caught by no test. MED 3: the two views the seat itself named. LOW: a dead helper. EVERYTHING ELSE
+  HOLDS (L1's mark, L3, L19 to zero; N4; the layer law: `tests/architecture/layerBoundaries.test.js` is the test that
+  holds `src/pdf` from `src/generators`; no stored field; `tests/lint` 71 = 71). WHY IT LANDS: nothing is new or
+  worse at its tip (every remaining line was there at its base); the batch's whole check runs AT THE COMMIT THAT HOLDS
+  IT (sending it back means a new tree and a new check); and the seat PDF-2 is cut from the line the moment the batch
+  lands, on the same files, with the reader's four findings as its items 5 to 8 (`BRIEF-BAR8.md`, PDF-2; the worklist).

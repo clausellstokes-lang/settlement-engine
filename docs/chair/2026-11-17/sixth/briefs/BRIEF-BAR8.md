@@ -438,6 +438,27 @@ runner reads the PDF: your measure is that probe over the thirty, the 150 and th
    journal's share takes the same reading if it prints the line. DO THIS ITEM LAST; if the hash has not come when the
    rest is done, message the chair and end your turn.
 
+5. **LEFT-PDF's L2 IS HALF CURED (its second reader's MED 1; the chair landed LEFT-PDF with this named for you).** The
+   tab's card reads `chainOutputsOnCard(chainCardUnderSiege(town, c, chainAsShown(c, town)), town)`
+   (`EconomicsTab.jsx`, about lines 119 and 169). The PDF hands the same function ANOTHER chain: the Services card
+   (`Services.jsx`, about lines 118 and 233) the STORED chain `s.activeChains[i]`; the flow row (`SupplyChainFlow.jsx`,
+   about lines 248 and 88) `chainStateOnPage(c, town).chain`, which is `chainAsShown` without `chainCardUnderSiege`. So
+   a PDF card or flow row still prints an output the tab's card withholds in 34 towns of the 720 and 18 of the 150
+   (r2r-village-8: the PDF's Services card "... » Carpenter » Barrels and containers, Milled lumber" where the tab
+   prints "Outputs: Barrels and containers"; r2s-under_siege-town-0: "Faith & Worship ... » Religious services,
+   Education (basic), Poor relief" where the tab's refused card prints "Normally yields: ..."; r2s-famine-metropolis-2:
+   "Dyed cloth"). Each hands the chain the tab's card renders. THE TWO TESTS THAT SHOULD HAVE SEEN IT KEY "the tab's
+   card" ON THE STORED CHAIN: `tests/pdf/leftPdfReadsTheTabs.test.jsx` (its L2 arm) and
+   `tests/pdf/chainStateThreeSurfaces.test.jsx :: outputDisagreements` are RE-KEYED to the shown chain (R8: the same
+   claim, the reading the tab really makes, a dated note): both are yours for that. To zero: 34 and 18.
+6. **The chain's STATE word.** The PDF card and the journal say "Operational" where the tab says "Impaired"
+   (r2s-under_siege-town-0, Faith & Worship): `chainStateOnPage` lacks `chainCardUnderSiege`. Count the towns of the
+   720 where the PDF's or the journal's state word differs from the tab's card, and cure it at the one reading.
+7. **A hunk no test catches (MED 2).** Removing `incomeShort` from the journal's head line (`journalPages.js`, about
+   line 373: `ordinaryTimesLine(..., incomeShort)`) leaves every test green: your guard gains the arm that fails on it.
+8. **A dead helper (LOW).** `crisisMarksOnPage.js :: incomeMarkOnPage` is exported with no caller: remove it, or give it
+   the caller its header promises.
+
 THE LAYER LAW HOLDS (`npx vitest run tests/architecture`: `src/pdf` imports nothing under `src/generators`). N4: the
 shared page prints what the owner's prints. YOUR GUARD: `tests/pdf/pdf2ReadsTheTabs.test.jsx`. EVERY NEW OR CHANGED
 LINE A READER SEES IN THE PDF OR THE JOURNAL is listed with three towns.

@@ -51,6 +51,13 @@ ONE place. A seat is seated from the working line's tip once the seats it waits 
   prints the head line "A row marked short is what its house makes when supplied." twice (Services, Institutions) in
   nine towns where no row is marked short: it hands `ordinaryTimesLine` the rows' short readings, as the tabs do.
 
+- READ-LEFT-PDF's findings (20:05; it said DO NOT LAND YET; THE CHAIR LANDED LEFT-PDF AS IT STANDS AND NAMED THESE FOR PDF-2:
+  the cure is partial, nothing is new or worse, and PDF-2 holds the same files): MED 1 the PDF's cards and flow rows
+  hand `chainOutputsOnCard` the stored or half-shown chain (34 towns of the 720, 18 of the 150 still print an output
+  the tab withholds; the seat's "125 to 0" was read off the stored chain); the state word "Operational" against the
+  tab's "Impaired" under a siege; MED 2 the journal head line's `incomeShort` is caught by no test; LOW the dead
+  `incomeMarkOnPage`. They are items 5 to 8 of PDF-2's section in `briefs/BRIEF-BAR8.md`.
+
 ## J-INCOME (after LEFT-CHAIN lands) · `incomeLineSiblings.js` (the fish arm), `tradeListDisplay.js`
 
 - The table's rules: 11b (the rites income line, 21), 11a.imported (5), 11e.offer (the livestock chips and the need
