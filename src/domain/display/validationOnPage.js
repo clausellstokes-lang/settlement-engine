@@ -126,6 +126,11 @@ function houseWords(inst) {
 function sourceGround(s, inst) {
   const id = str((typeof inst?.catalogId === 'string' && inst.catalogId) || catalogIdForName(str(inst?.name)) || '');
   if (!isSourceHouse(id)) return '';
+  // BIRTH-3: the house's own story speaks first: idle on a used-up ground (a mine whose every chain works its spent seam,
+  // though iron lies near) reads that ground worked out, by the Depleted list's label
+  const told = sourceStoryOf(/** @type {Parameters<typeof sourceStoryOf>[0]} */ (s), /** @type {{ name?: unknown }} */ (inst), resourceShortageImport);
+  if (told?.story === 'idle' && told.ground) return str(resourceDisplayName(told.ground));
+  if (told?.story === 'abandoned') return '';
   const grounds = SOURCE_GROUNDS[id];
   const config = /** @type {{ nearbyResourcesDepleted?: unknown }} */ (s?.config || {});
   const live = /** @type {string[]} */ (availableNativeResourceKeys(/** @type {Record<string, unknown>} */ (config)));

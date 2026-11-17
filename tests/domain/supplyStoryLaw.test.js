@@ -152,7 +152,7 @@ function lawInstances(seed, s) {
     // mark (a null mark was accepted before), and never "Short of …"
     if (houseDependenceOf(inst).includes(INPUT) && !/^(?:Abandoned|Failing): a failed venture\.$/.test(mark ?? '')) bad('L1 venture, not its mark', venture.name);
     if (/Short of/.test(mark ?? '')) bad('L1 venture, marked short', venture.name);
-    if (!lines.some((l) => /stands abandoned, a venture of an earlier time|is failing: no /.test(l))) bad('L1 venture, no line', venture.name);
+    if (!lines.some((l) => /stands? abandoned, a venture of an earlier time|(?:is|are) failing: no /.test(l))) bad('L1 venture, no line', venture.name);
     if (lines.some((l) => /is worked out: /.test(l) && l.toLowerCase().includes(venture.name.toLowerCase().replace(/\s*\([^)]*\)/g, '')))) bad('L1 venture, a worked-out line beside its line (M1)', venture.name);
     if (listHolds(s, familyWord(venture.family))) bad('L1 venture, its word on the imports', venture.name);
     if (venture.ground && (shown.there.includes(venture.ground) || shown.used.includes(venture.ground))) bad('L1 venture, its ground on the land list', venture.name);

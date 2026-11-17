@@ -148,7 +148,7 @@ const ROW_GOOD_ALIAS = Object.freeze(/** @type {Record<string, string>} */ ({ mo
 export const rowNamesGround = (chain, id, ground) => { const c = str(chain); const good = rowGoodOf(id, ground); return !!good && (c === good || ROW_GOOD_ALIAS[c] === good); };
 
 /** THE FAILED VENTURE'S LINE, as the birth stores it on the house's gap row and the Resources tab prints it. */
-const VENTURE_LINE = /^The .+? (?:stands abandoned, a venture of an earlier time|is failing): no .+? lies? near and none is brought in\.$/;
+const VENTURE_LINE = /^The .+? (?:stands? abandoned, a venture of an earlier time|(?:is|are) failing): no .+? lies? near and none is brought in\.$/;
 /** @param {unknown} line @returns {boolean} the line is a failed venture's */
 export const isVentureLine = (line) => typeof line === 'string' && VENTURE_LINE.test(line);
 
@@ -197,7 +197,7 @@ function onRecord(record) {
     if (!row) continue;
     const id = idOfHouse(inst);
     const ground = Object.prototype.hasOwnProperty.call(IMPLIED_GROUND, id) && !SOURCE_GROUNDS[id].some((g) => all.has(g)) ? IMPLIED_GROUND[id] : '';
-    venture = { name: str(inst.name), id, family: MATERIAL_OF[id] || '', ground, venture: / stands abandoned, /.test(str(row.impact)) ? 'abandoned' : 'failing', line: str(row.impact) };
+    venture = { name: str(inst.name), id, family: MATERIAL_OF[id] || '', ground, venture: / stands? abandoned, /.test(str(row.impact)) ? 'abandoned' : 'failing', line: str(row.impact) };
     break;
   }
   /** @type {Map<string, 'there' | 'used'>} */
@@ -429,7 +429,8 @@ export function ventureLineText(v, house) {
   const material = v.family === 'peat' ? 'peat' : FAMILY_NOUN[v.family] || 'material';
   const lie = PLURAL_FAMILIES.includes(v.family) ? 'lie' : 'lies';
   const head = house.charAt(0).toUpperCase() + house.slice(1);
+  const many = /[^s']s$/.test(house); // a house named in the plural ("the tanners", "the weavers/textile workers")
   return v.venture === 'failing'
-    ? `${head} is failing: no ${material} ${lie} near and none is brought in.`
-    : `${head} stands abandoned, a venture of an earlier time: no ${material} ${lie} near and none is brought in.`;
+    ? `${head} ${many ? 'are' : 'is'} failing: no ${material} ${lie} near and none is brought in.`
+    : `${head} ${many ? 'stand' : 'stands'} abandoned, a venture of an earlier time: no ${material} ${lie} near and none is brought in.`;
 }
