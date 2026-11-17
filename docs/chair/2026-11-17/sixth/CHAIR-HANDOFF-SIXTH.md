@@ -192,6 +192,21 @@ the previous account its sessions should be paused or archived by the owner's ha
   Each is the fixing itself under the owner's rule (a twin says what is true where a line was false) and is listed
   with three towns for the veto list.
 
+- **BR16 (18:27 UTC, 2026-11-17; the war's iron under an occupation; seat J's rule 11d asked for it).** In an occupied town
+  with no war in force the page prints the mark "Short of iron." on every iron house, the income row's mark, the hook
+  "War has taken the iron ..." and the scene of quiet forges, BESIDE the import "Iron ore (local iron mines exhausted)"
+  the birth wrote as BOUGHT (2 towns of the 720, 19 lines; the seventh read's C38200, C38039). The four read one
+  predicate (`warIronHook.js :: warHoldsIron`, with `occupied` mapped to "at war"). RULED: THE WAR'S IRON IS TAKEN ONLY
+  WHERE A WAR IS IN FORCE ON THE PAGE; an occupation alone is peace for this predicate (the siege keeps its own
+  reading). The mark, the hook and the scene fall together and the import stands. No new word. MARKS-2 (after
+  LEFT-MARKS: the hunk sits beside its M4).
+- **BR17 (18:27 UTC; new vocabulary and twins given by name from seat J's worklist).** (1) TWO NEW KEYS of the existing atom
+  `trade at work`: `in full` (no house of the trade carries any mark: the boom scenes) and the fish story's `taken
+  here` (a taker of fish at work on a live ground): SCENES. (2) ONE TWIN for a fair whose luxuries are not brought in:
+  J-ROWS. (3) FOR DESKS-2 WHEN IT IS CUT: a declaration on the `{good}` of the "comes from elsewhere" line (the good is
+  brought in: a per-good atom value) and a twin for the fishmonger's "the boats, the catch". Each is named in its
+  seat's hand-back for the owner's veto list.
+
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -327,3 +342,55 @@ the previous account its sessions should be paused or archived by the owner's ha
   none stands against its holder. `briefs/BRIEF-BAR8.md` IS WRITTEN (the rules; K-POWERS and K-PEOPLE in full; the
   other three K seats in the table). K-POWERS AND K-PEOPLE ARE SEATED NOW from K's tip (their files are no one
   else's); K-SCENES waits for seat J's worklist (J's rule 11b reads scenes: the files may be shared).
+- **18:22 UTC. THE TWO WHOLE CHECKS ARE IN AND COMPARED BY NAME (before the lone re-runs of the slow reds, which are running).**
+  THE LINE (CHECKS-1, `lane/checks-2026-11-17` 093f007ed, `docs/chair/2026-11-17/checks/line-ed1d43529/`): files 3673 ·
+  tests 42006 · failed files 79 · failed tests 164 · names 166 (after its retry: 166). THE CANDIDATE (the chair's
+  machine, `/home/user/checks/merged-d98b11ad8`; to be published on THIS lane under
+  `docs/chair/2026-11-17/checks/candidate-e0242a12a/`): files 3674 · tests 42015 · failed files 87 · failed tests 165 ·
+  names 167. No step's exit differs; both doors print the same last line at both trees. RED AT THE LINE ONLY (15, cured
+  by the supply rule): `pipelineContract` (11), `isolatedTrade`, `enforcedByExists`, `publicProseEquality` (services,
+  soak1k-5), `labelJoins` (SO L13 IS CURED: struck from the next round). RED AT THE CANDIDATE ONLY (16), EACH READ:
+  - KNOWN AND ASSIGNED: `bar6MarksLaw8` (a) (LEFT-MARKS, BR10); `needMetUnderAnotherName` (LEFT-KEYS, K4).
+  - SLOW UNDER LOAD, RE-RUN ALONE (the verdict follows in the next line of this log): `simulationSpine`,
+    `foodDiversity` (2), `incomeLinesSayTheRecord`, `timelineVariety`, `urbanBandInstitutions` G3 (21 s),
+    `editCorpusRatchet` A5 (796 s).
+  - STALE ANCHORS (LEFT-KEYS, K5): `corpusEcoTailGuards` (DS-ECO-12 at r2r-hamlet-12: "re-key the row to a town of the
+    case"); `bar2ServicesRows` SV1 MARKED (r2r-town-45's mine row without "Short of iron ore."; r2r-village-11's "Fish
+    sold daily from the morning catch." without "Short of fish."); `bar3ServicesRows` MARKED (the same fish row at
+    r2r-town-29 and bar0-metropolis-calm-rand-8; bar0-city-under_siege+famine-rand-9's "House wine by the jug or
+    bottle." without "Short of grapes.": the chair probed it: the inns read "Stopped by the siege." and the vintner
+    "Curtailed by the siege.": the mark is the siege's now). A REAL FAULT SITS UNDER THE FISH ROWS, FOR SEAT J'S RULE 11b:
+    in r2r-village-11 the fisher's landing is "Short of fish.", salted fish is bought in, and the Fish market's row
+    still says "from the morning catch" with no mark (a local-source line under a bought-in story).
+  - THREE REGISTERS THAT FOLLOW THE CODE (SEAT DEBT-2, seated 18:22, session_01FbPLbe3wDSZkAm3dnEEu9D,
+    `lane/debt-2-2026-11-17`, the middle tier at high effort, `briefs/BRIEF-DEBT-2.md`, its text sent in its prompt):
+    D1 `generationForkRegistry.contract` A2 and `generationForkCensus` A3e (the two pairs BIRTH-3 declared: the
+    narratives step's `economicState`, the assembly's `npcs`: 74 against 76); D2 `heldKeyWriterCensus.walker` A2 (the
+    assembly's write of `npcs`, a HELD key: the row is added ONLY IF the write does not change a held roster; if it
+    does, that is a fault named to the chair); D3 `vendorPdfLazy` WEAVE ST-2 (`crisisStoppedRow.js` is a goods
+    consumer with no row in `goods.schema.js`).
+  NONE OF THESE IS A NEW FALSE SENTENCE ON THE PAGE AND NONE HOLDS THE LANDING: point 33 lands when the lone re-runs clear
+  the slow ones (a slow one that stays red alone is read first).
+- **18:22 UTC. SEATED:** K-POWERS session_01FbPLbbRWQMcGkyXLSyGjtx (`lane/bar8-k-powers-2026-11-17`) and K-PEOPLE
+  session_01FbPLbfRiRDUmTtP6eNrYKi (`lane/bar8-k-people-2026-11-17`), both from K's tip 1ceae1ede, the middle tier at
+  high effort, `briefs/BRIEF-BAR8.md`. THE CHAIR'S LANE IS PUSHED TO 2c9a74901 (18:21).
+- **18:27 UTC. BAR8-AUDIT-J HANDED BACK (18:20)**: `lane/bar8-audit-j-2026-11-17` at 8bc3daee4 (four commits, 24 NEW files:
+  the detector `tests/helpers/pageLaws/law11Supply.mjs`, the runner `docs/chair/2026-11-17/bar8/AUDIT/runJ.mjs`,
+  `tablesJ.mjs`, `controlsJ.json`, the runs and tables, `out-J/`; nothing under `src/`, no test file). LAW 11 over the
+  720: 141 towns · 287 instances, 142 standing by its own reading (the WEAK families apart: the fish row's title 51,
+  the inland fish card 56, the land's ticks 9, the smelter card 6, the tailors 8). THE LARGEST ONE FACT IS THE FISH STORY
+  (the rites income line 21, "from the morning catch" 29, the fish scenes 6: none reads the salted-fish import). Its
+  controls: 16 of 16 STANDS found, 8 of 8 EXPLAINED clear (THE CHAIR HAS NOT YET RUN ITS RUNNER ITSELF: owed once the
+  machine is quiet). It did not count the general gap line the chair sent it at 17:53: that is J-ROWS's item G1, counted
+  first by the seat. THE TWO WORKLISTS ARE MERGED BY FILE in `briefs/BRIEF-BAR8.md`'s table (eight seats): K-POWERS and
+  K-PEOPLE seated 18:21; K-WATCH (from K's tip) and J-ROWS (from J's tip) seated next; SCENES from the working line's
+  tip once it holds both audits (points 34 and 35, landed with point 33's docs); J-INCOME after LEFT-CHAIN, MARKS-2
+  after LEFT-MARKS, DESKS-2 after LEFT-LINES. K-PEOPLE takes J's 11e.wantBuy by amendment (the file `goals.js`).
+- **18:28 UTC. SEATED (18:28):** K-WATCH session_01FbPLbcX353deWjvENmEXDT (`lane/bar8-k-watch-2026-11-17`, from K's tip
+  1ceae1ede) and J-ROWS session_01FbPLbfsXSemygZz5mcCBcT (`lane/bar8-j-rows-2026-11-17`, from J's tip 8bc3daee4), the
+  middle tier at high effort; each prompt carries its section whole (the brief's new table was not pushed yet: the
+  lone re-runs hold the chair's machine quiet). K-PEOPLE has its AMENDMENT 1 by message (18:27). NINE BUILDERS ARE IN
+  FLIGHT: LEFT-PDF, LEFT-CHAIN, LEFT-LINES, LEFT-MARKS, DEBT-2, K-POWERS, K-PEOPLE, K-WATCH, J-ROWS. STILL TO SEAT:
+  SCENES (when the line holds both audits), J-INCOME (after LEFT-CHAIN), MARKS-2 (after LEFT-MARKS), DESKS-2 (after
+  LEFT-LINES), LEFT-KEYS (after the four LEFT builders), and a second reader for each hand-back (`BRIEF-READ-LEFT.md`;
+  the same form serves a BAR8 seat with its section of `BRIEF-BAR8.md`).

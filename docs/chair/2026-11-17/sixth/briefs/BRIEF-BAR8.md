@@ -49,19 +49,28 @@ auditor names, by seats with disjoint files.
 - **THE SEATS IN FLIGHT BESIDE YOU** hold other files (the leftovers round: `BRIEF-LEFT.md`'s table). If your cure seems
   to need one of their files, or any file not on your list: NAME IT in your hand-back and leave it.
 
-## THE SEATS AND THEIR FILES (two seats never hold one file)
+## THE SEATS AND THEIR FILES (two seats never hold one file; MERGED BY FILE from the two auditors' worklists at 18:27 UTC: where J and K named one file, one seat holds it)
 
 | seat | rules | its files | seated |
 |---|---|---|---|
-| K-POWERS | 13g, 14a, 14d, 15b | `src/generators/power/factionStanding.js`, `src/generators/density/applyDensityLaw.js`, `src/generators/power/rulingStructure.js`, `src/generators/power/governanceNarrative.js`, `src/data/powerSiblings.js` | with this file |
-| K-PEOPLE | 13b, 14b (the swap), 14e, 14f, 14g, 14h | `src/data/people/handlerTieLines.js`, `src/domain/people/allegiance.js`, `src/data/npcData.js`, `src/data/stressInstitutionEffects.js`, `src/generators/npcGenerator.js`, `src/data/faceHonorifics.js`, `src/data/people/goalFamilies.js` | with this file |
-| K-SCENES | 12b, 12c, 13a (the service line), 13e, 15a, 15d | `src/domain/facts/tradeAtWork.js`, `src/data/arrivalProse.js`, `src/generators/narrativeText.js`, `src/generators/servicesGenerator.js`, `src/generators/safetyProfile.js`, `src/domain/display/defenseDisplay.js` | when seat J's worklist is in (its scenes may share these files) |
-| K-MARKS | 12a, 12f | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/display/dossierViewModel.js` | after LEFT-MARKS lands |
-| K-DESKS | 12d, 12e, 13a (the desk line), 13d, 13f, 14c, 15c, 15e | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and the generated `defense.generated.js`, `economy.generated.js`, `power.generated.js` (ruling AX1), `src/data/people/titleSecretsPresentations.js`, `src/domain/facts/factVocabulary.js` (one atom, if given) | after LEFT-LINES lands |
+| K-POWERS | 13g, 14a, 14d, 15b | `src/generators/power/factionStanding.js`, `src/generators/density/applyDensityLaw.js`, `src/generators/power/rulingStructure.js`, `src/generators/power/governanceNarrative.js`, `src/data/powerSiblings.js` | 18:21, from K's tip |
+| K-PEOPLE | 13b, 14b (the swap), 14e, 14f, 14g, 14h; AMENDMENT 1: J's 11e.wantBuy | `src/data/people/handlerTieLines.js`, `src/domain/people/allegiance.js`, `src/data/npcData.js`, `src/data/stressInstitutionEffects.js`, `src/generators/npcGenerator.js`, `src/data/faceHonorifics.js`, `src/data/people/goalFamilies.js`; AMENDMENT 1: `src/generators/people/goals.js` | 18:21, from K's tip |
+| K-WATCH | 13a (the service line), 13e, 15d | `src/generators/servicesGenerator.js`, `src/generators/safetyProfile.js`, `src/domain/display/defenseDisplay.js` | from K's tip |
+| J-ROWS | 11b.fish (services and cards), 11b.fishTitle, 11e.offer (the cards); G1 (the general gap line) | `src/generators/services/institutionServices.js`, `src/data/institutionDescVariants.js`, `src/domain/display/validationOnPage.js` (`resourceGapLines` only) | from J's tip |
+| SCENES | K's 12b, 12c, 15a; J's 11b (the scenes), 11e.stalls | `src/domain/facts/tradeAtWork.js`, `src/data/arrivalProse.js`, `src/generators/narrativeText.js` | from the working line's tip once it holds both audits (its prompt names it) |
+| J-INCOME | 11b (the rites income line), 11a.imported, 11e.offer (the livestock chips and the need list's half), K's 15c (the chain's outputs) | `src/generators/economy/incomeLineSiblings.js`, `src/domain/display/tradeListDisplay.js` | after LEFT-CHAIN lands |
+| MARKS-2 | K's 12a, 12f; J's 11e.siegeBought, 11a.atWork, 11d (ruling BR16), the roots' gapImportedNoImport | `src/data/crisisDependence.js`, `src/domain/display/crisisStoppedRow.js`, `src/domain/display/dossierViewModel.js`, `src/domain/facts/houseInputAtHand.js`, `src/domain/facts/warIronHook.js`, `src/generators/resourceGenerator.js` | after LEFT-MARKS lands |
+| DESKS-2 | K's 12d, 12e, 13a (the desk line), 13d, 13f, 14c, 15c (the desk's half), 15e; J's 11c.needed, 11c.venture, 11c.idle, the fishmonger | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and the generated `defense.generated.js`, `economy.generated.js`, `power.generated.js` (ruling AX1), `src/data/people/titleSecretsPresentations.js`, `src/domain/facts/factVocabulary.js` (the atoms given by name) | after LEFT-LINES lands |
 
 A NEW TEST FILE OF YOUR OWN (your guard) and your hand-back are yours too. A seat that needs a shared reading adds ONE
 new leaf under `src/domain/display/` or `src/domain/facts/` (import-free where the eager closure reads it: ruling EG1)
-and names it.
+and names it. A J SEAT'S AUDITOR'S HAND-BACK is `docs/chair/2026-11-17/bar8/AUDIT/BAR8-AUDIT-J-HANDBACK.md` (its
+sections 1 and 2: the rows and paragraphs of your rules; section 3's "WHAT SHOULD NOT BE DONE" and "NEW DRAWN LINES OR
+ATOMS"); its runner `node docs/chair/2026-11-17/bar8/AUDIT/runJ.mjs <render-dir> <out.json> [--controls]`, its controls
+`controlsJ.json`, its tables `TABLES-J.<pop>.md` (every distinct line with its writer). A SEAT WHOSE TREE LACKS THE OTHER
+AUDITOR'S DETECTORS and needs them for a rule measures in a SCRATCH worktree of its tip with the other audit's files
+checked out on top (`git checkout origin/lane/bar8-audit-<j|k>-2026-11-17 -- tests/helpers/pageLaws docs/chair/2026-11-17/bar8/AUDIT`),
+never committed.
 
 ## K-POWERS · a power's own words must be true of that power and of the place
 
@@ -136,3 +145,111 @@ EVERYTHING HERE THAT CHANGES A DRAW (items 1, 2, 3, 4, 6) IS A DECLARED MOVE (R5
 THE SAVED RECORD: a holder test reads what the record already keeps of the person (the house, the seats, the role).
 YOUR GUARD: `tests/generators/bar8People.test.js`. NEW VOCABULARY TO NAME IN YOUR HAND-BACK: the holder keys on the
 crisis rows and the hooks; the word "Emira".
+
+### K-PEOPLE · AMENDMENT 1 (written 18:27 UTC on 2026-11-17, AFTER the seat was seated; sent to it by message: one more item, after item 6)
+
+7. **11e.wantBuy (seat J's rule; 6 in the 720, 2 in the thirty: the control C8867).** `src/generators/people/goals.js`
+   (about line 449) fills `SUPPLY.dependency` (`goalFamilies.js`, about line 431) with EVERY `tradeDependencies`
+   resource, the ones the page's need list says are "needed, and not brought in" included: the person then WANTS a
+   steady supply of a good the town does not get. THE ONE FACT is the need list's (`src/domain/display/tradeListDisplay.js
+   :: importsAsPrinted().needed`: READ it, it is LEFT-CHAIN's file): the goal presumes a supply only of a good that is
+   brought in or had; else the family's other goals carry the draw (R7). `src/generators/people/goals.js` IS YOURS NOW
+   (it also deals the goal your item 6 declares). MEASURE with seat J's runner in a scratch worktree of your tip with
+   J's audit files checked out on top (the table's last paragraph): `runJ.mjs <render> <out.json>`, rule `11e.wantBuy`,
+   over the thirty (`--controls`: C8867 turns clear), the 150 and the 720. To zero: 6.
+
+## K-WATCH · the watch, the court and the war bar say what the town's own force and row say
+
+Rulings in force for you: BR14 (c) (the atom of 13e).
+
+1. **13a · the service line of a slow law.** `servicesGenerator.js :: SLOW_LAW_DESC` (`needs: ['court','prison']`) prints
+   "The court sits and the gaol holds" under "Legal Infrastructure · Prison only / Detention without process.": its
+   `court` is a NAME test. It reads the atom the Legal row prints (`court sits`: `src/domain/facts/factsOf.js ::
+   courtSits`, the court on the live roster). The DESK'S line of the same rule is DESKS-2's, not yours. To zero: the
+   service line's instances (say the count: the auditor's 13a is 2 towns of the 720 and 3 instances of the thirty,
+   desk and service together).
+2. **13e · "on the rounds most hours of the day" where every force walks the night.** `safetyProfile.js ::
+   STANDARD_PATROL` (#18). The one fact is the hours the town's force walks, in the force's own text ("walk the
+   night", "after dark"). BR14 (c): ONE NEW ATOM (the force walks by day), written under rule R6 (beneath the entry of
+   its subject in the vocabulary, its reader an import-free leaf of its own under `src/domain/facts/`; these two
+   touches of the shared facts' files are given to you line by line), named in your hand-back. The line is declared by
+   it; where it fails the pool's other lines carry the draw (R7: measure the pool). To zero: 4.
+3. **15d · the war bar says "Adequate" where there is no line and no force.** `defenseDisplay.js` (the threat bar's
+   word): the desk beside it is TRUE ("has no line and no force ... cannot be resisted here"); the bar's band
+   (`defenseProfile.scores.military`) is read against the roster: a place with neither walls nor a force does not read
+   "Adequate". A READING AT PRINT; no new text (the bar's own words). To zero: 2.
+
+`servicesGenerator.js` and `safetyProfile.js` are generators: N3 and R5 bind you (a cure at a draw is a DECLARED MOVE).
+YOUR GUARD: `tests/generators/bar8Watch.test.js`.
+
+## J-ROWS · the fish rows, the fair's offer, and the general gap line read the supply story
+
+Rulings in force for you: BR17 (the fair's twin).
+
+1. **11b.fish and 11b.fishTitle · "Fish sold daily from the morning catch." where the fishery is exhausted and salted
+   fish is bought in.** `src/generators/services/institutionServices.js`: the inland alternative swaps "Fresh fish
+   retail" for "Preserved fish" only where `_waterAccess === 'none'`. THE ONE FACT is the fish story
+   (`src/domain/facts/supplyStory.js :: sourceStoryOf` with the stored import "Salted fish (local ... exhausted)": READ
+   the leaf, it is another seat's file): where the story is BOUGHT (or idle), the row is "Preserved fish" with its own
+   description (the row exists). ONE HUNK cures the description (29 in the 720) and the title and chip (51, counted
+   WEAK): DO NOT rename the row in the catalogue (`src/data/institutionServices.js` is not yours). The card
+   `institutionDescVariants.js` ("Where the day's catch is sold", about line 271) picks its variant by the same story
+   (3). To zero: the services, the titles and the cards. The rites INCOME line (21) is J-INCOME's; the scenes (6) are
+   SCENES's; the fishmonger (6) is DESKS-2's: not yours.
+2. **11e.offer · a card offering a good the need list says is not brought in.** `institutionDescVariants.js`: the
+   fair's "Luxury goods available." / "luxuries to be had" (about line 2088) beside "Needed, and not brought in:
+   luxury goods". It has only a siege twin: BR17 gives you ONE TWIN for a fair whose luxuries are not brought in (the
+   page's plain voice; what the fair DOES sell, read off the record). The quarter's "The trade in silk, spice, and
+   precious things." (7, PLAUSIBLE; about line 996) takes the same reading if one hunk serves both; else LEAVE IT BY
+   NAME. The livestock chips (6) are J-INCOME's. To zero: the fair's cards (5 that stand).
+3. **G1 · the general gap line beside the supply story's own (the chair's item; COUNT IT FIRST: no auditor did).**
+   `src/domain/display/validationOnPage.js :: resourceGapLines` (about lines 532 and 548) prints "No <good> reaches
+   <the house>." for a gap row, AND the supply story prints its own line for the same house and material: "No iron ore
+   reaches the mine." beside "The mine is worked out: its own ground is depleted (Iron ore deposits)."; "No stone
+   reaches the stone quarry." beside "The stone quarry is worked out: ..."; "No livestock reaches the dairy farmer."
+   beside "The dairy farmer is failing: no livestock lies near and none is brought in." (r2r-metropolis-45, -53, -59,
+   -6, -14; r2r-hamlet-27, at your base). For a SOURCE house the general line also misstates how the house works (ore
+   does not reach a mine: the mine digs it). COUNT over the 720 and the 150 (towns, lines, by house kind: source houses
+   apart). THE CURE IS A READING AT PRINT: where the story's own line is printed for a house and a material, the
+   general line for that pair is not. No town may lose its ONLY gap line; a gap row with no story line keeps the
+   general line. This file is yours for `resourceGapLines` only.
+
+`institutionServices.js` is a generator: N3 and R5 bind you (the swap is a DECLARED MOVE: say how many towns of the
+720 and of the 525 reference configurations change a service row). YOUR GUARD: `tests/generators/bar8Rows.test.js`.
+THE TWIN YOU MAY WRITE: the fair's (item 2). NO OTHER NEW LINE.
+
+## SCENES · a scene of a trade at work reads every mark that stops or thins that trade, and who takes the fish
+
+Rulings in force for you: BR17 (the two keys of the atom `trade at work`).
+
+THE ONE FACT of four of your five rules is `src/domain/facts/tradeAtWork.js :: tradeAtWorkOf`: it reads ONLY the short
+mark. (a) A house the crisis STOPS or IMPAIRS answers it as at work (11e.stalls: the reagent stalls under a siege with
+every reagent chain Impaired; the control C5157). (b) A trade whose every house is CURTAILED answers the boom rows as
+it answers the mild ones (12b: "running day and night", "racks of new ironwork ... waiting for the carts", "never
+quite stops", "hangs over everything" over metal houses "Curtailed by the war/siege"). (c) ANY fish house not short
+answers `trade at work: fish`, the fish MARKET included, a buyer of bought fish (11b: the drying racks and the gutting
+in a town whose fishery is exhausted).
+
+1. **The atom reads the mark's worst state** (`src/domain/display/crisisStoppedRow.js :: rowMarkText`: READ the leaf, it
+   is another seat's file, and seats in flight are adding marks to it: read it through its exported reading, never a
+   copy of its tables): a house stopped or impaired is not at work; a trade is IN FULL only where no house of it
+   carries any mark. BR17 gives you TWO NEW KEYS of the existing atom: `in full` (for the boom rows) and the fish
+   story's `taken here` (a TAKER of fish at work on a live ground: `supplyStory.js :: sourceStoryOf`, read). The mild
+   rows keep the plain atom (K's `.mild` family is true and stays).
+2. **12b**: the boom rows of `arrivalProse.js` (the smiths' rows) and the war's "right side" row of `narrativeText.js`
+   (`needs: institution: smith`, "forges ... running day and night") declare `in full`. To zero: 5.
+3. **11b (the scenes)**: `arrivalProse.js` (about lines 179 and 181: the drying racks, the gutting) declare `taken
+   here`; their twins exist (about lines 180, 182). To zero: 6.
+4. **11e.stalls**: `arrivalProse.js` (about line 374, `trade at work: arcane`): cured by item 1. To zero: the control.
+5. **12c**: `narrativeText.js`, the historical-character row "<event> aside, the history here is long and steady"
+   (`crisis: ['any']`): it prints under a live occupation, war or plague it does not name. A DECLARATION by the atoms
+   of the live crisis (R6: never `crisis: any`). To zero: 4.
+6. **15a**: `arrivalProse.js` (the workings pool: "Laden carts ... in a line that never seems to end", `needs: trade at
+   work: stone`) in hamlets of 27 to 93 people. A DECLARATION by the place's size (`tier`); the auditor's boundary is
+   thin (the second check called the line WEAK in a hamlet of 70 with an open-cast mine): take the tier where a line
+   of carts with no end is plainly true, and say it. To zero: 4.
+
+THE SCENE OF 11d ("The forges of {name} are quiet more often than not, for want of iron.") FOLLOWS A PREDICATE MARKS-2
+WILL MOVE (ruling BR16): NOT YOURS. R7 binds every pool you touch (no pool under three lines in any town of your
+populations: measure it). `narrativeText.js` is a generator: N3 and R5. YOUR GUARD: `tests/generators/bar8Scenes.test.js`.
+YOU MEASURE WITH BOTH RUNNERS (`runJ.mjs` for 11b and 11e.stalls, `runK.mjs` for 12b, 12c, 15a): both are at your base.
