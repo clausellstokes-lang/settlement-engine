@@ -22,6 +22,11 @@ guard. `chainStateShown.js` and `ResourcesTab.jsx` were not edited (section 2, s
 THE GUARD, `tests/components/leftChainCards.test.jsx` (new): at base 4 of its 7 tests red ((a) 89 instances, the seventeen,
 L5's anchors, (c)); at the tip 7 of 7 pass (section 6).
 
+THE CHAIR'S NOTE OF 18:05 UTC (MEASURE-1's runH `8f.short` 0 → 2 at the candidate): BOTH ROWS TAKE THE TWIN at my tip.
+r2r-metropolis-24 and r2s-monster_pressure-metropolis-2 each print "Iron & Metalwork The digging goes on here, but the
+metalworking stands idle, short of what it needs." on the rendered tab (the tip's dump, and guard (c)), and runH's
+`8f.short` over the tip's 720 reads 0 (section 5). Neither is left uncured.
+
 ## 2. L18: what else the reading drops, and the cards it empties (THE CHAIR'S QUESTION)
 
 The ruling's words, read as written ("a source house that the supply rule reads at work on another ground"), drop more
