@@ -155,6 +155,9 @@ export function usedGroundOf(record, family, seed = seedOfRecord(record)) {
   return [...implied.states].filter(([g, st]) => st === 'used' && groundGives(g, family)).map(([g]) => g).sort()[0] || '';
 }
 
+/** Whether any import names a family's material by its noun, whole ("Dressed stone (…)" names stone). @param {StoryRecord | null | undefined} record @param {string} family */
+const importsName = (record, family) => !!FAMILY_NOUN[family] && arr(record?.economicState?.primaryImports).some((x) => ` ${struck(x).replace(/[^a-z]+/g, ' ')} `.includes(` ${FAMILY_NOUN[family]} `));
+
 /** Whether the record's imports already bring a word's good (the word, its bracketed reason struck). @param {StoryRecord | null | undefined} record @param {string} word */
 export const importsHold = (record, word) => !!word && arr(record?.economicState?.primaryImports).some((x) => struck(x) === struck(word));
 
@@ -200,9 +203,9 @@ export function sourceStoryOf(record, inst, seed = seedOfRecord(record)) {
   // chain hid six peat cutters' spent marsh)
   const chains = arr(/** @type {{ activeChains?: unknown } | null | undefined} */ (record?.economicState)?.activeChains)
     .map((c) => /** @type {{ resourceKey?: unknown, status?: unknown, processingInstitutions?: unknown }} */ (c))
-    .filter((c) => !!c && own.includes(str(c.resourceKey)) && arr(c.processingInstitutions).includes(inst?.name));
+    .filter((c) => !!c && own.includes(str(c.resourceKey)) && all.has(str(c.resourceKey)) && arr(c.processingInstitutions).includes(inst?.name)); // a ground on the record (an entrepot's chain of goods passing through is none)
   if (chains.length) {
-    const worked = chains.filter((c) => !(spent.has(str(c.resourceKey)) && c.status !== 'magically_sustained'));
+    const worked = chains.filter((c) => !spent.has(str(c.resourceKey))); // a spent ground is spent on the page, the one reader's reading (a chain kept by magic feeds no house of it: r2s-monster_pressure-village-2)
     if (worked.length) return { story: 'local', ground: '', word: '' };
     return usedUp(str(chains.map((c) => str(c.resourceKey)).sort()[0]));
   }
@@ -260,12 +263,12 @@ export function ventureOf(record, inputMissing, seed = seedOfRecord(record)) {
     if (!family || users.get(family) !== 1) continue;
     const never = ![...all].some((g) => groundGives(g, family)) && ![...implied.states.keys()].some((g) => groundGives(g, family));
     if (BUYS_AND_WORKS.has(id) && VENTURE_BUYER_FAMILIES.includes(family)) {
-      if (connected && never && !importsHold(record, familyWord(family)) && inputMissing(inst, family)) candidates.push({ inst, id, family, ground: '' });
+      if (connected && never && !importsHold(record, familyWord(family)) && !importsName(record, family) && inputMissing(inst, family)) candidates.push({ inst, id, family, ground: '' });
     } else if (id === 'salt_works') {
-      if (connected && !onCoast(record) && !SOURCE_GROUNDS.salt_works.some((g) => all.has(g)) && !importsHold(record, familyWord(family))) candidates.push({ inst, id, family, ground: '' });
+      if (connected && !onCoast(record) && !SOURCE_GROUNDS.salt_works.some((g) => all.has(g)) && !importsHold(record, familyWord(family)) && !importsName(record, family)) candidates.push({ inst, id, family, ground: '' });
     } else if (Object.prototype.hasOwnProperty.call(IMPLIED_GROUND, id)) {
       const ground = IMPLIED_GROUND[id];
-      if (arr(implied.houses.get(ground)).length === 1 && arr(implied.houses.get(ground))[0] === inst.name) candidates.push({ inst, id, family, ground });
+      if (arr(implied.houses.get(ground)).length === 1 && arr(implied.houses.get(ground))[0] === inst.name && !importsName(record, family)) candidates.push({ inst, id, family, ground });
     }
   }
   candidates.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));

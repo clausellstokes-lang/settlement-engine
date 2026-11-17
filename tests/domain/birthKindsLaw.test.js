@@ -109,12 +109,12 @@ function lawInstances(seed, s) {
  *     `crisisDependence.js :: SPENT_GROUND_WORKERS` holds it a house that works the ground itself, whose mark no
  *     import lifts (not this seat's file).
  */
-const EXCEPTIONS = Object.freeze({
-  'Dairy farmer': ['r2r-hamlet-12', 'r2r-hamlet-14', 'r2r-hamlet-19', 'r2r-hamlet-26', 'r2r-hamlet-47', 'r2r-hamlet-52', 'r2r-hamlet-56', 'r2r-village-14', 'r2r-village-16', 'r2r-village-32', 'r2r-village-36', 'r2r-village-46', 'r2r-village-51', 'r2r-village-54', 'bar0-hamlet-calm-rand-27', 'bar0-hamlet-calm-rand-28', 'bar0-hamlet-calm-rand-29', 'bar0-hamlet-calm-rand-39', 'bar0-village-calm-rand-29'],
-  'Salt works': ['r2r-hamlet-18', 'r2r-town-15', 'r2r-town-29', 'r2r-city-22', 'r2r-city-41', 'r2r-metropolis-16', 'r2r-metropolis-20', 'r2r-metropolis-47', 'bar0-metropolis-calm-rand-27'],
-  'Charcoal burner': ['r2r-hamlet-26', 'r2r-hamlet-48', 'r2r-hamlet-52', 'r2r-hamlet-59', 'r2r-town-17', 'r2r-town-40', 'r2r-city-0', 'r2r-city-59', 'r2r-metropolis-19', 'r2r-metropolis-24', 'r2r-metropolis-32', 'r2r-metropolis-41', 'r2r-metropolis-47', 'r2r-metropolis-57', 'bar0-hamlet-calm-rand-27', 'bar0-hamlet-calm-rand-29', 'bar0-village-calm-rand-31', 'bar0-metropolis-calm-rand-34'],
-  'Fish market': ['r2r-village-11', 'r2r-village-45', 'r2r-town-6', 'r2r-town-29', 'r2r-town-38', 'r2r-town-50', 'r2r-town-52', 'r2r-city-14', 'r2r-city-34', 'r2r-city-35', 'r2r-metropolis-11', 'r2r-metropolis-21', 'r2r-metropolis-23', 'r2r-metropolis-28', 'r2r-metropolis-42', 'r2r-metropolis-45', 'r2r-metropolis-49', 'r2r-metropolis-55', 'bar0-town-calm-rand-28'],
-});
+// STRUCK BY ITS OWN RULE (BIRTH-2, 2026-11-17): every counted exception is cured. The dairy farmer, the salt works and the
+// charcoal burner on no ground of their own stand on the ground they prove, or buy their material in, or idle by the seed's
+// pick (a true mark this law no longer counts, above); the fish market is read as a buyer (the owner's table) and is fed by
+// its fisheries' shortage import where the seed has the town buy it. The ratchet stands at zero.
+/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+const EXCEPTIONS = Object.freeze({});
 const LEFT = Object.entries(EXCEPTIONS).flatMap(([house, seeds]) => seeds.map((seed) => `${seed} · ${house}`));
 
 /** The record read BLIND: the words the birth brings in for the buyers struck from its imports. @param {any} s */
@@ -124,7 +124,9 @@ const blind = (s) => ({ ...s, economicState: { ...s.economicState, primaryImport
 const CONTROLS = [
   ['r2r-village-4', 'Potter'],
   ['r2r-town-18', 'Vintner'],
-  ['r2r-village-14', 'Fuller'],
+  // RE-KEYED BY IDENTITY (BIRTH-2, 2026-11-17): r2r-village-14's fuller now has its wool of the pasture a house there proves
+  // (`supplyStory.js`); the same claim, a fuller marked only when the birth's words are struck, stands in r2r-town-28
+  ['r2r-town-28', 'Fuller'],
   ['r2r-town-14', 'Weavers/Textile workers'],
   ['r2r-village-6', 'Brickmaker'],
   ['r2r-town-6', "Cobbler's guild"],
