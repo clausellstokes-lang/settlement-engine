@@ -226,3 +226,9 @@ the previous account its sessions should be paused or archived by the owner's ha
   ran differently from the sixth's (two readers agreed on 13 of 27 MED sentences: by the two-reader estimate the union found
   88 in 100) and that a THIRD READER on the middle tier is reading all 22 packets to see what two readers left: its MED flags
   get the same second check and are reported APART from the two-reader measure.
+- 17:08 UTC · BOTH AUDITORS OF THE NEXT ROUND SEATED at 17:08 (the middle tier, high effort; base the candidate e0242a12a;
+  `briefs/BRIEF-BAR8-AUDIT.md`): BAR8-AUDIT-J session_01FbPLbc3BG2umkym8SFTJ8Q (`lane/bar8-audit-j-2026-11-17`: LAW 11, the
+  supply story on every line) · BAR8-AUDIT-K session_01FbPLbdtfMGbb3yG5Vzt8tb (`lane/bar8-audit-k-2026-11-17`: LAWS 12 to 15).
+  THE STATE TABLE OF SECTION 0 SAYS "NOT SEATED" FOR THEM: THIS LINE IS THE LATER WORD. PREP-READ-7 was given its part P4
+  at 17:00 (the sixth read's packets re-read by one stronger reader and checked). The chair lane was pushed through the
+  hook at 17:08 (to the audit brief) and again with section 0.
