@@ -68,15 +68,16 @@
  * Pure: no randomness, no clock, no write.
  */
 import { resourceGapLines } from './validationOnPage.js';
-import { housesOnSpentGround, housesShortOf, housesWantingTradeInput, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
-import { STORY_OF_RECORD, sourceStoryOf, ventureMarkText } from '../facts/supplyStory.js'; // BIRTH-2: the failed venture's mark; BIRTH-3: the whole record's story
+import { housesOnSpentGround, housesShortOf, housesWantingTradeInput, impliedGroundsOnPage, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
+import { FAMILY_NOUN, GROUND_YIELD, STORY_OF_RECORD, sourceStoryOf, ventureMarkText } from '../facts/supplyStory.js';
+import { MATERIAL_OF } from '../facts/houseKinds.js'; // LEFT-MARKS M7: a house's material, by family // BIRTH-2: the failed venture's mark; BIRTH-3: the whole record's story
 import { resourceShortageImport } from '../resourceSemantics.js'; // BIRTH-3: the spent ground's word, handed to the source story
 import { crisisOf } from '../facts/crisisKind.js';
 import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach.js'; // BAR5-MARKS (WM1): what the war takes, one home
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
-import { houseDependenceOf, SURPLUS_HOUSES } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table; LEFT-MARKS item 4: the houses of a surplus
+import { houseDependenceOf, HOUSE_TRADE_INPUT, SURPLUS_HOUSES } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table; LEFT-MARKS item 4: the houses of a surplus
 import { foodRowShown } from './foodRowShown.js'; // LEFT-MARKS item 4: the page's food line, as the Economics tab prints it
 import { carriersOf } from './foodCarrier.js';
 import { hasTradeRouteConnection } from '../tradeRouteSemantics.js'; // LEFT-MARKS item 4: BIRTH-1's calm road
@@ -354,7 +355,28 @@ const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
 export function houseDependenceIn(settlement, inst) {
   const deps = gatesWorkIn(settlement, inst);
   // S1 (i): a house on its input, where that input comes in by trade, under a siege
-  return deps.includes(INPUT) && onImportedInputUnderSiege(settlement, inst) ? [...deps, IMPORTED_INPUT] : deps;
+  if (deps.includes(INPUT) && onImportedInputUnderSiege(settlement, inst)) return [...deps, IMPORTED_INPUT];
+  // LEFT-MARKS M7 (RULING BR11, the sixth chair, 2026-11-17; vetoable by the owner): A HOUSE WHOSE MATERIAL IS THE TOWN'S OWN
+  // BY A PROVEN GROUND reads under a siege as the town's own land reads (SV8: curtailed, not stopped): its input is the land
+  // the town still works, `field work`. The ground a house proves and the story leaves there (`impliedGroundsOnPage(s).there`)
+  // yields the material of the carpenters, the cooper, the sawmill (`MATERIAL_OF`, `HOUSE_TRADE_INPUT`): the dependency card
+  // "Needs Timber. Supply route severed." stood beside them bare (bar0-city-under_siege+famine-rand-28, -35; r2r-metropolis-14)
+  if (deps.includes(INPUT) && !deps.includes(FIELD_WORK) && onProvenGroundUnderSiege(settlement, inst)) return [...deps, FIELD_WORK];
+  return deps;
+}
+
+/**
+ * LEFT-MARKS M7: is a siege in force here, and the house's material the yield of a ground the town's houses prove and the
+ * story leaves there? @param {object | null | undefined} settlement @param {{ catalogId?: unknown, name?: unknown }} inst
+ */
+function onProvenGroundUnderSiege(settlement, inst) {
+  if (!settlement || typeof settlement !== 'object' || !stoppingCrisesOf(settlement).includes('under_siege')) return false;
+  const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
+  if (!id) return false;
+  const family = Object.prototype.hasOwnProperty.call(MATERIAL_OF, id) ? MATERIAL_OF[id] : Object.prototype.hasOwnProperty.call(HOUSE_TRADE_INPUT, id) ? HOUSE_TRADE_INPUT[id] : '';
+  const noun = family && Object.prototype.hasOwnProperty.call(FAMILY_NOUN, family) ? FAMILY_NOUN[family] : '';
+  if (!noun) return false;
+  return impliedGroundsOnPage(/** @type {Parameters<typeof impliedGroundsOnPage>[0]} */ (settlement)).there.some((g) => Object.prototype.hasOwnProperty.call(GROUND_YIELD, g) && GROUND_YIELD[g] === noun);
 }
 
 /**

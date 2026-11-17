@@ -23,6 +23,11 @@
  *   (M6)  THE OLD DETECTOR KNOWS THE FAILED VENTURE'S MARK (AMENDMENT 2): `law8.mjs :: houseMarks` reads "Abandoned: a failed
  *         venture." / "Failing: a failed venture." as a mark, so a venture printed as designed beside "Needed, and not
  *         brought in: clay." is no 8a.input instance; the same card bare is one (a constructed page).
+ *   (M7)  RULING BR11 (AMENDMENT 2): under a siege a house whose material is the town's own BY A PROVEN GROUND reads as the
+ *         town's own land reads, "Curtailed by the siege.", and so do the houses that work that material: over the
+ *         besieged towns of the 720 and the 150, no house of a material prints bare beside a critical dependency card of
+ *         that material ("Needs Timber. Supply route severed."); the positive anchor, bar0-city-under_siege+famine-rand-28
+ *         and -35 (the carpenters, the cooper, the sawmill bare at the base), alike on the three views (N4).
  * POSITIVE CONTROL: at the base (e0242a12a) the two houses print bare, the apothecary of r2r-village-13 is marked, the
  * four maltsters print bare and the head line prints over the ten towns' ventures: the file is red there.
  */
@@ -35,6 +40,9 @@ import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
+import { MATERIAL_OF } from '../../src/domain/facts/houseKinds.js';
+import { HOUSE_TRADE_INPUT } from '../../src/data/crisisDependence.js';
+import { FAMILY_NOUN } from '../../src/domain/facts/supplyStory.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
@@ -59,8 +67,12 @@ const born = (seed) => {
   let m = /^r2r-(\w+)-\d+$/.exec(seed);
   if (m) return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: m[1] }), null, { seed, customContent: {} });
   m = /^r2s-(\w+)-(\w+)-\d+$/.exec(seed);
+  if (m) return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} });
+  // the wide read's arm (CENSUS-3 seedcfg.mjs's bar0- arm, as birthKindsLaw.test.js reads it)
+  m = /^bar0-(\w+)-([a-z_+]+)-([a-z_]+)-\d+$/.exec(seed);
   if (!m) throw new Error(`not a census seed: ${seed}`);
-  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} });
+  const st = m[2] === 'calm' ? [] : m[2].split('+'); const route = m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] };
+  return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType: m[1], selectedStressesRandom: false, selectedStresses: st, _randomizePriorities: true }), null, { seed, customContent: {} });
 };
 /** @type {Map<string, any>} */
 const towns = new Map();
@@ -142,4 +154,34 @@ describe('M6 · the page form of 8a.input reads a failed venture\'s mark as a ma
     expect(found(''), 'the potter bare').toBe(1);
     for (const lead of ['Abandoned: a failed venture. ', 'Failing: a failed venture. ', 'Short of clay. ']) expect(found(lead), `the potter under "${lead.trim()}"`).toBe(0);
   });
+});
+
+describe('M7 · ruling BR11: under a siege, a house beside a critical dependency card of its material is marked', () => {
+  const WIDE = ['hamlet-under_siege', 'city-under_siege+famine'].flatMap((shape) => Array.from({ length: 15 }, (_, i) => `bar0-${shape}-rand-${i + 27}`));
+  /** The houses of a material printed bare beside a critical "Supply route severed." card of that material. @param {any} s */
+  const bareBeside = (s) => {
+    const cards = (s.economicState?.tradeDependencies || []).filter((/** @type {any} */ d) => d?.severity === 'critical' && /^Supply route severed/.test(String(d.impact ?? '')));
+    /** @type {string[]} */ const out = [];
+    for (const d of cards) for (const h of liveInstitutions(s)) {
+      const id = String(h?.catalogId || catalogIdForName(String(h?.name ?? '')) || '');
+      const family = /** @type {Record<string, string>} */ (MATERIAL_OF)[id] || /** @type {Record<string, string>} */ (HOUSE_TRADE_INPUT)[id] || '';
+      const noun = /** @type {Record<string, string>} */ (FAMILY_NOUN)[family] || '';
+      if (noun && String(d.resource ?? '').toLowerCase().includes(noun) && rowMarkText(s, 'house', h) === null) out.push(`${h.name} beside "Needs ${d.resource}"`);
+    }
+    return out;
+  };
+  test('over the besieged towns of the 720 and the 150 no such house prints bare; the two cities\' houses read "Curtailed by the siege." on the three views', () => {
+    /** @type {string[]} */ const found = []; let besieged = 0;
+    expectNoSeedFailures(collectSeedFailures([...CENSUS, ...WIDE], (seed) => {
+      const s = town(seed);
+      if (!(s.config?.stressTypes || []).includes('under_siege')) return;
+      besieged++;
+      for (const x of bareBeside(s)) found.push(`${seed} · ${x}`);
+    }), 'every town is born and read');
+    expect(besieged, 'the besieged towns read (the anchor)').toBeGreaterThan(40);
+    expect(found, 'a house of a material bare beside a critical dependency card of it').toEqual([]);
+    expectNoSeedFailures(collectSeedFailures(['bar0-city-under_siege+famine-rand-28', 'bar0-city-under_siege+famine-rand-35'], (seed) => {
+      for (const house of ['Carpenters (5-15)', 'Cooper', 'Sawmill (commercial)']) expect(markOf(town(seed), house), `${seed} · ${house}`).toBe('Curtailed by the siege.');
+    }), 'the positive anchor');
+  }, 1_800_000);
 });
