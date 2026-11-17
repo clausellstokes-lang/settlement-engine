@@ -1,8 +1,113 @@
 # SECRETS-1 · hand-back: the very rare secrets (BRIEF-SECRETS-1, ruling RS1 and its widenings)
 
-The joined line's tip as given: `7cf3cb9f0` (no later tip read). My branch: `lane/secrets-rare-2026-11-17`. I merged
+The joined line's tip as given: `7cf3cb9f0`; AMENDMENT 2 proved also in a scratch merge with the line's later tip `fd93fb998`. My tip: `8beed42b2` and this hand-back. My branch: `lane/secrets-rare-2026-11-17`. I merged
 nothing. Every run named here was seen to its end; the runners and their outputs are in scratch and named in § The
 measures.
+
+## 0. AMENDMENT 2 (the chair's ten, 2026-11-17, by message; not yet on the brief's foot when I read it): DONE AT `0e5ec8421` and `8beed42b2`
+
+This section supersedes what the sections below say of the felon, the faked death, the two "stranger" rows and the
+five rows the chair reworded; the rest stands.
+
+**The table of item 2 again, at the tip after these** (the odds unchanged): over the 720, **identical to § 1** —
+thorps 115 none · 5 one; hamlets 108 · 12; villages 102 · 18; towns 88 · 30 · 2 two; cities 58 · 42 · 19 two · 1 three;
+metropolises 33 · 55 · 29 · 3. Families: deeds 83, natures 85, ties 88, hidden masters 7 (of 360 small places), outsiders
+11 (of 720). Over the 150: identical to § 1 (deeds 16, natures 15, ties 14, masters 5, outsiders 3). The same people
+carry one (the odds and the eligibility are unchanged); which row each carries moved where a row's conditions did: 126
+rows are now seen in the 720 (128 before), and the felon is dealt twice (0 before). fieldDiff, base `7cf3cb9f0` against
+this tip: the 720, 216 moved only in the dealt secrets, 0 in any other field; the 150, 42 and 0.
+
+**1. The felon and the faked death**: "in another town" → "in another place"; both stand at any size again (the felon
+keeps its route and its offices). **2. "A stranger"**: `paysDebts` and `lostChild` as the chair wrote them. **4. Years
+need an age** (a new holder key `minYears`, read through the card's age words, `RARE_SECRET_AGE_YEARS`, now data):
+`neverAngry`, `thumbOnScale` forty or older; `spared` thirty or older. **5. `cannotRead`, `oneBook`**: never on a trade of
+letters, learning, law, account, faith or magic — the roles: scribe, clerk, teacher, chronicler, librarian, sage,
+cartographer, printer, college master, dean, chancellor, postmaster, post's master, message-master, scroll scribe,
+charter master, magistrate, notary, lawyer, customs collector, mint master, exchange master, exchange's steward,
+auctioneer, banker, assayer, warehouse factor, chief administrator, (the master of) granaries, granary reeve, priest,
+abbot, abbess, bishop, almoner, hospitaller, archdruid, circle-keeper, grove elder, wizard, alchemist, enchanter,
+archmage, golem-master, necromancer-overseer, dream-keeper, planar factor, fortune teller; and no card of the religious
+or the magic category. **6. The card's own lines**: a row that names a `{target}` never names a person the card's own
+goal (short or long) or hook names; `nameless` never beside a hook that names kin (sister, brother, son, daughter,
+mother, father, parent(s), child(ren), spouse, wife, husband, cousin, uncle, aunt, niece, nephew, grandmother,
+grandfather); `promised` never beside a hook that names a spouse (spouse, wife, husband, widow, widower, married,
+marriage) (a new holder key `notHookWords`). **7. Four pairings**: `tooHonest` never on a trade of wealth (luxury
+merchant, banker, mint master, exchange master, exchange's steward, First Magnate, jeweller, auctioneer); `graveRobber`
+never the head of the ruling body or a title of blood; `stoleRelic` also refused beside *pious* and *incorruptible*;
+`raisedDead` beside *pious*; `thumbOnScale` beside *candid* and *forthright*. **8. The chair's rewordings**:
+`masterBlade`, `masterThief` (and never first of a criminal power: a new office `criminalHead`, a rank-1 standing in a
+power whose category is criminal or whose name is the underworld's), `hearsLies`, `runaway`.
+
+**3. A re-roll breaks no cap.** In the deal, a KEPT person's rare secret (known by its words: `rareRowOf` reads every
+row's two lines with the name slots open) fills its family's cap in the place, so the re-roll deals no second of that
+family; the receipt names it (`kept`). Proved end to end in the guard: `r2r-metropolis-1`'s holder kept by a user's
+edit through `regenNPCsPipeline` on three re-roll seeds keeps their secret, and the re-rolled cast holds exactly one of
+that family. **A kept card's rare secret that names a person the re-roll replaced KEEPS THE OLD NAME**: measured on 5
+born holders of a naming row (`lovesNamed`, `guardian` ×2, `hiddenSpouse`, `oathAgainst`), kept and re-rolled: 5 of 5
+name a person no longer on the roster. The cause is not in my files: a re-roll draws a new cast, and the pipeline's one
+substitution point (`refreshRosterProse`) skips keepers by design ("their prose may be user-authored"), as it does for
+a keeper's crime secret at the base. To cure it would be to rewrite a keeper's secret, which item 4 of the brief
+forbids ("a person a re-roll KEEPS keeps the secret they have"). **Named, not cured**: the choice is the chair's (a
+keeper's naming row could be re-dealt, or its name followed, in `generateSettlementPipeline.js`, not mine).
+
+**9. The guard, widened** (20 tests): the two exclusions it named (a face drawn from its secret; a crisis pool's own
+secret) each asserted; the re-roll end to end, and a kept holder filling its cap over 300 seeds; every hidden master
+planted in a thorp and a hamlet as in a village; the 47 magic-only keys pinned by name; one seed shown to pass two of
+a family and deal one (the cap's anchor); and each new condition (`minYears`, `notHookWords`, `criminalHead`) planted
+and refused beside its anchor.
+
+**Every changed row, old and new** (the data's own diff; the eight rows that name a `{target}` — `hired`,
+`blackmailer`, `lovesNamed`, `parentOf`, `owesLife`, `guardian`, `oathAgainst`, `hiddenSpouse` — change in whom they may
+name, not in their words):
+
+| row | old → new |
+|---|---|
+| `felon` | what: "Is wanted for a crime in another town, and came here to be forgotten" → "Is wanted for a crime in another place, and came here to be forgotten"; needs: ["tier: town"] → null |
+| `graveRobber` | holder.not: null → ["head","hereditary"] |
+| `raisedDead` | holder.deniedBy: null → ["pious"] |
+| `paysDebts` | what: "Has been quietly paying off a stranger's debts for years, and will not say why" → "Has been quietly paying off someone else's debts for years, and will not say why"; stakes: "The stranger has found out, and wants to know what is owed in return" → "The one they are paying for has found out, and wants to know what is owed in return" |
+| `stoleRelic` | holder.deniedBy: + pious, incorruptible |
+| `fakedDeath` | what: "Is supposed to be dead, with a grave and mourners in another town" → "Is supposed to be dead, with a grave and mourners in another place"; needs: ["tier: town"] → null |
+| `thumbOnScale` | holder.deniedBy: + candid, forthright; holder.minYears: null → 40 |
+| `spared` | holder.minYears: null → 30 |
+| `cannotRead` | holder.notRoles: + scroll scribe, charter master, magistrate, notary, lawyer, customs collector, mint master, exchange master, exchange's steward, auctioneer, banker, assayer, warehouse factor, chief administrator, granaries, granary reeve, priest, abbot, abbess, bishop, almoner, hospitaller, archdruid, circle-keeper, grove elder, wizard, alchemist, enchanter, archmage, golem-master, necromancer-overseer, dream-keeper, planar factor, fortune teller; holder.notCategory: null → ["religious","magic"] |
+| `neverAngry` | holder.minYears: null → 40 |
+| `hearsLies` | what: "Always knows when they are being lied to, and has learned to keep a straight face" → "Always knows a lie when they hear one, and has learned to keep a straight face" |
+| `oneBook` | holder.notRoles: + scroll scribe, charter master, magistrate, notary, lawyer, customs collector, mint master, exchange master, exchange's steward, auctioneer, banker, assayer, warehouse factor, chief administrator, granaries, granary reeve, priest, abbot, abbess, bishop, almoner, hospitaller, archdruid, circle-keeper, grove elder, wizard, alchemist, enchanter, archmage, golem-master, necromancer-overseer, dream-keeper, planar factor, fortune teller; holder.notCategory: null → ["religious","magic"] |
+| `tooHonest` | holder.notRoles: null → ["luxury merchant","banker","mint master","exchange master","exchange's steward","first magnate","jeweller","auctioneer"] |
+| `lostChild` | stakes: "A stranger with that face would be of an age to ask questions now" → "Anyone with that face would be of an age to ask questions now" |
+| `promised` | holder.notHookWords: null → ["spouse","wife","husband","widow","widower","married","marriage"] |
+| `runaway` | stakes: "One of those people has reached this road" → "One of those people has come this way" |
+| `nameless` | holder.notHookWords: null → ["sister","brother","son","daughter","mother","father","parent","parents","child","children","spouse","wife","husband","cousin","uncle","aunt","niece","nephew","grandmother","grandfather"] |
+| `masterBlade` | what: "Was captain of a great house's guard, and came here so that no one would ask them to fight again" → "Was captain of a great house's guard, and keeps a quiet watch here so that no one asks" |
+| `masterThief` | what: "Was the best lock-breaker of a great city's guild, and lifts nothing here so that no one asks" → "Was the best lock-breaker of a great city's guild, and keeps to small work here so that no one asks"; holder.not: null → ["criminalHead"] |
+
+**At the doors** (the new words): one fresh row came of my own list (the role words "master of granaries", a three-word
+literal the things door reads as a granary: written "granaries") and one strip-shaped read in my deal (a hook's
+`.text`: the hooks are read as the strings they are). After them: `presumption-classes-door` fresh 0 and
+`presumed-things-door` fresh 39 (the line's own), at my tip and in the merge alike. One fact-layers reader of the crime
+words in my deal (the thief's office): cured by reading the underworld through the engine's own reading
+(`domain/people/allegiance.js :: criminalPowersOf`, which the goals use).
+
+**Proved at my tip (`8beed42b2`) and in a scratch merge of the line's tip `fd93fb998` with it** (`git merge --no-commit`,
+local, never pushed; the merge clean):
+
+| | the line `fd93fb998` | the merge | my tip | my base `7cf3cb9f0` |
+|---|---|---|---|---|
+| my guard + the people's guards (8 files) | — | 98 green | 98 green | (the guard red) |
+| `presumption-classes-door --check` | fresh 0 | fresh 0 | fresh 0 | fresh 0 |
+| `presumed-things-door --check` | fresh 39 | fresh 39 | fresh 39 | fresh 39 |
+| `tests/lint` (red tests) | 65 | 66 | 66 | 65 |
+
+**tests/lint by name:** red in the merge and not at the line, and red at my tip and not at my base: ONE, the same:
+`poolDominance.walker` "every drawn pool has a row" (the five `ledger:rareSecrets:*` register rows, owed to the close).
+The style law's "a stranger" and the tuning register's named constant are cured; nothing is red at the line or the
+base that is green in the merge or at the tip. The mutation-coverage entry my guard owes is still owed (that test is red
+at the base and the line with other files).
+
+At the tip also: both type gates green (1113 of 1113; 167 of 167), eslint clean on my files, ONE `npm run build` green with
+`vendorPdfLazy` and `bootSmoke` (49 passed, 17 skipped by the files); the 720 born again at `8beed42b2` is byte for byte
+the 720 of `0e5ec8421` (the thief's re-reading moves no card).
 
 ## 1. HOW RARE, AS BORN (the table of item 2, first)
 
@@ -2852,3 +2957,331 @@ Hook: Someone is paying their soldiers more than their salary. The soldiers aren
 - metropolis|mediterranean|desert|road|civilized|golden-master-v3 · seed golden-master-v3 · metropolis · Gratidia Nero, the crier · ties/ward: "Is the secret ward of someone powerful far away, who pays for everything and has never once visited"
 - town|germanic|plains|mountain_pass|civilized|golden-master-v3 · seed golden-master-v3 · town · Notker Krüger, the beast master · ties/owesLife: "Owes their life to Kunhild Meyer, and has never found a way to say it"
 - town|germanic|plains|road|civilized|gm-seed-c · seed gm-seed-c · town · Peregrina Keller, the master baker · ties/hiddenSpouse: "Is secretly married to Moritz Ritter, and neither has found the right day to say so"
+
+## 13. MEASURE 6 AGAIN, FOR THE 27 ROWS AMENDMENT 2 CHANGES (the tip `8beed42b2`)
+
+Rows: 27 (every row whose words or conditions AMENDMENT 2 changes, and the eight that name a {target}, whose choice of person it changes). Born at the tip: 20. Planted (a real card of the 720 on which the deal's own reading lets the row stand, its secret set to the row): 7.
+
+#### deeds · `hired`
+BORN · seed `r2s-infiltrated-metropolis-2`
+
+**Maize Acalan**, the warehouse factor (early twenties) · metropolis, Oxtetun  
+Temperament: charismatic · Flaw: hypocritical · Manner: idealistic · Disposition: cautious  
+Impression: Speaks quietly and walks the bays as they talk, checking seals and locks without seeming to.  
+How they deal: Asks what you are moving and where it came from before saying whether there is room.  
+Wants (now): Take on the work in The Guild Alliance that no one else wants, and do it without complaint.  
+Wants (life): Be the person everyone here defers to.  
+Hook: They have promised the same order to two buyers, and both are due to collect on the same morning.  
+**Secret: Has taken coin to kill Bakab Dzunum, and has not yet decided to refuse** · Stakes: Whoever paid expects it done, and Bakab Dzunum suspects nothing
+
+#### deeds · `felon` (the owner's)
+BORN · seed `r2r-city-11`
+
+**Ramesh Trivedi**, the midwife (early twenties) · city, Puripat  
+Temperament: equitable · Flaw: ruthless · Manner: methodical · Disposition: cautious  
+Impression: Watchful and private. People lower their voices as the midwife passes.  
+How they deal: Will help anyone in need; says nothing about anyone else's household.  
+Wants (now): Ask Vasudhara Prasad for advice on one hard decision this season.  
+Wants (life): Hand on the midwife's house with full stores, honest accounts and nothing owed.  
+Hook: They lent their savings to a friend who has since left, and the friend's family says there was no loan.  
+**Secret: Is wanted for a crime in another place, and came here to be forgotten** · Stakes: A traveller from there would know the face
+
+#### deeds · `blackmailer`
+BORN · seed `r2r-city-7`
+
+**Quartica Denter**, the scroll scribe (early sixties) · city, Faromare  
+Temperament: dependable · Flaw: manipulative · Manner: cynical · Disposition: transactional  
+Impression: Exact about everything. Prices by the spell and the length.  
+How they deal: Sells copies at a posted rate; rare spells take longer and cost more.  
+Wants (now): Win the scroll scribe's desk first call on any help those who govern can give this season.  
+Wants (life): Make Egnatius Sabinus the first of many who owe them.  
+Hook: Someone has been making inquiries about their past research. Not the published work, the unpublished work.  
+**Secret: Is bleeding Secunda Cordus for coin over a thing done long ago** · Stakes: Secunda Cordus has begun to wonder whether another way would be cheaper
+
+#### deeds · `graveRobber`
+BORN · seed `r2r-village-37`
+
+**Gavril Frolov**, the cobbler (late twenties) · village, Dobroets  
+Temperament: warm-hearted · Flaw: — · Manner: proud · Disposition: cautious  
+Impression: Quiet and careful. The good work is kept in the back and shown only on request.  
+How they deal: Polite, but asks where you are from before taking an order for new shoes.  
+Wants (now): Do Dubravka Petrov one useful favour this season, unasked.  
+Wants (life): See every child they know grow up fed and safe.  
+Hook: Their landlord has doubled the rent and will lower it only if they report on the family next door.  
+**Secret: Digs up the newly buried for what was buried with them** · Stakes: The last grave had more kin than they thought
+
+#### deeds · `raisedDead` [magic only]
+BORN · seed `r2r-town-39`
+
+**Angelina Hyaleas**, the tanner (early forties) · town, Lykotion  
+Temperament: — · Flaw: greedy · Manner: mercurial · Disposition: cautious  
+Impression: Watches who comes to the yard and why. Asks your business before you can ask theirs.  
+How they deal: Says nothing about where the hides come from.  
+Wants (now): Find the weak spot in what Agamemnon Attaleiates is doing, and press on it.  
+Wants (life): Be counted one day among those who lead Town Mayor.  
+Hook: Their apprentice has been talking to a rival, and came back with an offer to buy them out.  
+**Secret: Raised something from a grave, once, and could not put it back** · Stakes: It has been seen at the edge of the fields
+
+#### deeds · `paysDebts`
+BORN · seed `r2r-metropolis-25`
+
+**Jochi Yorqin**, the banker (early forties) · metropolis, Mönkhköl  
+Temperament: honest · Flaw: arrogant · Manner: idealistic · Disposition: welcoming  
+Impression: Quick to smile, quick to calculate. Both things are happening simultaneously.  
+How they deal: Gracious in the way of someone doing you a kindness, and expects to be thanked for it.  
+Wants (now): Either profit from the demographic change or find a way to be insulated from it. Either answer requires moving faster than the uncertainty  
+Wants (life): Free the banking district from depending on a single source of precious metals.  
+Hook: They have been slowly acquiring a controlling interest in a competitor through intermediaries. The competitor hasn't noticed yet.  
+**Secret: Has been quietly paying off someone else's debts for years, and will not say why** · Stakes: The one they are paying for has found out, and wants to know what is owed in return
+
+#### deeds · `stoleRelic`
+BORN · seed `r2r-metropolis-57`
+
+**Padmini Chatterjee**, the chief magistrate (mid-thirties) · metropolis, Vedapeta  
+Temperament: generous · Flaw: — · Manner: iconoclast · Disposition: cautious  
+Impression: Formally polite. Every sentence is measured before it leaves their mouth.  
+How they deal: Kind but careful; helps once they know who you are and why you came.  
+Wants (now): Take over one of Raj Varma's duties in Democratic assembly this season, and be seen to do it well.  
+Wants (life): Make the court buildings too sound for any creditor to threaten.  
+Hook: They promised the same post to two people, and both have already told their families.  
+**Secret: Stole a holy thing from a roadside altar and cannot bring themselves to sell it** · Stakes: The ones it was taken from are still asking along the road
+
+#### deeds · `fakedDeath`
+PLANTED · seed `r2r-city-0`
+
+**Anna Loginov**, the watch commander (seventies) · city, Goraka  
+Temperament: — · Flaw: petty · Manner: obsessive · Disposition: cautious  
+Impression: Upright and watchful, with a habit of standing where they can see the whole room.  
+How they deal: Polite and brief; asks your business, your lodgings and how long you plan to stay.  
+Wants (now): Get one person close to Zina Nikitin to talk, quietly.  
+Wants (life): Be counted one day among those who lead Merchant City Council.  
+Hook: Someone is paying their soldiers more than their salary. The soldiers aren't saying who.  
+**Secret: Is supposed to be dead, with a grave and mourners in another place** · Stakes: One of the mourners travels
+
+#### deeds · `thumbOnScale`
+PLANTED · seed `r2r-city-0`
+
+**Zina Nikitin**, the master fishmonger (early fifties) · city, Goraka  
+Temperament: generous · Flaw: paranoid · Manner: nostalgic · Disposition: transactional  
+Impression: Wet to the elbows, loud, and quick with a knife. Calls the prices over every head in the market.  
+How they deal: Haggles with pleasure; the price drops for anyone who buys a lot and comes back.  
+Wants (now): Find someone in authority who would shield them if they talked.  
+Wants (life): Rise past Radoslav Solovyov in The Guild Alliance on their own merit, owing no one for the climb.  
+Hook: Their scales were tested and found heavy in their favour, and they swear someone changed them overnight.  
+**Secret: Has kept a thumb on the scale for twenty years, a grain at a time** · Stakes: Someone has brought their own weights
+
+#### deeds · `spared`
+BORN · seed `r2r-city-50`
+
+**Laberia Falco**, the nominal owner (late thirties) · city, Capocolonia  
+Temperament: generous · Flaw: — · Manner: calculating · Disposition: cautious  
+Impression: Nervous under the smile. Their eyes keep going to the back door.  
+How they deal: Says little and wants you gone; if you mention certain names, the shop closes early.  
+Wants (now): Show the rest of Thieves' Guild that Marcus Volso can be wrong, without ever saying so aloud.  
+Wants (life): See every child they know grow up fed and safe.  
+Hook: A rival crew has offered peace, and the offer arrived on the same day one of their people went missing.  
+**Secret: Was sent here to kill someone, and has stayed eleven years without doing it** · Stakes: Whoever sent them has started to ask
+
+#### natures · `cannotRead`
+BORN · seed `r2s-monster_pressure-city-3`
+
+**Bassus Caepio**, the whisper broker (early fifties) · city, Villaplenum  
+Temperament: gracious · Flaw: — · Manner: fatalistic · Disposition: cautious  
+Impression: Soft voice, forgettable clothes and a habit of sitting with their back to the wall.  
+How they deal: Listens far more than they speak; asks what you know before saying what they know.  
+Wants (now): Find the weak spot in what Torquatus Silanus is doing, and press on it.  
+Wants (life): Build up enough savings at the whisper market to ride out two bad years.  
+Hook: Someone has been using their name to frighten shopkeepers, and the shopkeepers have begun paying the wrong people.  
+**Secret: Cannot read a word, and conceals it behind a good memory and a trusted helper** · Stakes: The helper has started to ask for more
+
+#### natures · `neverAngry`
+PLANTED · seed `r2r-city-0`
+
+**Anna Loginov**, the watch commander (seventies) · city, Goraka  
+Temperament: — · Flaw: petty · Manner: obsessive · Disposition: cautious  
+Impression: Upright and watchful, with a habit of standing where they can see the whole room.  
+How they deal: Polite and brief; asks your business, your lodgings and how long you plan to stay.  
+Wants (now): Get one person close to Zina Nikitin to talk, quietly.  
+Wants (life): Be counted one day among those who lead Merchant City Council.  
+Hook: Someone is paying their soldiers more than their salary. The soldiers aren't saying who.  
+**Secret: Has not been angry in twenty years, and is saving all of it for one person** · Stakes: That person lives nearer than they think
+
+#### natures · `hearsLies` [magic only]
+BORN · seed `r2r-metropolis-46`
+
+**Hanako Ma**, the collier (mid-forties) · metropolis, Beiguan  
+Temperament: good-humoured · Flaw: — · Manner: superstitious · Disposition: cautious  
+Impression: Black with soot to the elbows, eyes red from the smoke. Says little to people from outside the woods.  
+How they deal: Answers questions about the woods; asks who sent you.  
+Wants (now): Find the charcoal kilns one more source of money.  
+Wants (life): Earn a place among the leaders of Merchant Guilds without buying it or marrying into it.  
+Hook: They have been invited to the wedding of someone who once ruined their family, and refusing would be noticed.  
+**Secret: Always knows a lie when they hear one, and has learned to keep a straight face** · Stakes: They know of three lies in this place that matter
+
+#### natures · `oneBook`
+BORN · seed `r2r-metropolis-53`
+
+**Naya Jirgin**, the castellan (late fifties) · metropolis, Gantulgashari  
+Temperament: diligent · Flaw: bitter · Manner: proud · Disposition: dismissive  
+Impression: Proud and impatient with outsiders. The citadel's business is not yours.  
+How they deal: Gives permission to pass or refuses it, and does not explain either.  
+Wants (now): Learn who Borte Kipchak really meets, and how often.  
+Wants (life): Be remembered as the one who kept the citadel out of debt.  
+Hook: They've noticed the same group of faces at multiple locations where incidents occurred. No one else has.  
+**Secret: Taught themselves to read from a single book, knows it by heart, and has read nothing else** · Stakes: The book is not what they think it is
+
+#### natures · `tooHonest`
+BORN · seed `r2r-town-48`
+
+**Yafang He**, the coaching-inn keeper (mid-twenties) · town, Hongpu  
+Temperament: forthright · Flaw: callous · Manner: zealous · Disposition: cautious  
+Impression: Notes every traveller's name, face and baggage, and remembers all three.  
+How they deal: Pleasant, but asks where you are going and when, and writes it down.  
+Wants (now): Keep the quarrel between Merchant Guilds and Craft Guilds from turning into open trouble this season.  
+Wants (life): Turn the bargain with Daisuke Matsumoto into real trust over the years.  
+Hook: They overheard two people they know settle a bribe, and do not know whom to tell.  
+**Secret: Has never taken a coin that was not theirs, and is quietly ashamed of how poor it has kept them** · Stakes: Someone has offered them a great deal to change
+
+#### ties · `parentOf`
+BORN · seed `r2s-under_siege-metropolis-3`
+
+**Tyche Tarchaneiotes**, the pit boss (late fifties) · metropolis, Andronrion  
+Temperament: — · Flaw: reckless · Manner: nostalgic · Disposition: transactional  
+Impression: Loud and friendly with a purse in every hand. Talks in odds.  
+How they deal: Takes bets, sells places by the pit and will match a fighter for a fee.  
+Wants (now): Pay every hand at the fighting pits in full and on time this season.  
+Wants (life): Earn a place among the leaders of Thieves' Guild without buying it or marrying into it.  
+Hook: A valuable item came through their network recently. Three different parties have asked about it quietly.  
+**Secret: Is the true parent of Hypatia Laskaris, and Hypatia Laskaris does not know** · Stakes: One other person knows, and has been patient so far
+
+#### ties · `lovesNamed`
+BORN · seed `r2r-city-29`
+
+**Sita Goswami**, the mine captain (late forties) · city, Kamalapalli  
+Temperament: clever · Flaw: dismissive · Manner: calculating · Disposition: dismissive  
+Impression: Busy and short. The shift change is coming and there is no time for visitors.  
+How they deal: Gives a word or two and turns back to the shaft.  
+Wants (now): Find the mine one more source of money.  
+Wants (life): Be counted one day among those who lead Merchant Guilds.  
+Hook: A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.  
+**Secret: Is in love with Lakshmana Banerjee, and would sooner die than have it known** · Stakes: Lakshmana Banerjee has started to notice
+
+#### ties · `lostChild`
+BORN · seed `r2r-metropolis-2`
+
+**Hong Moon**, the mint master (late fifties) · metropolis, Xidao  
+Temperament: — · Flaw: imperious · Manner: zealous · Disposition: transactional  
+Impression: Precise and formal, with a scale on the desk and a weight for every coin.  
+How they deal: Will change coin and test metal at the posted rate; asks who you are first.  
+Wants (now): Stand by Jiangli Han in their next quarrel, whoever it is with.  
+Wants (life): Rise in High Theocratic Council far enough that their word carries weight outside it.  
+Hook: A clerk in their office has been copying letters at night, and the copies have turned up in a rival's hands.  
+**Secret: Gave up a child at birth, and has watched for its face in every stranger since** · Stakes: Anyone with that face would be of an age to ask questions now
+
+#### ties · `owesLife`
+BORN · seed `r2s-occupied-metropolis-1`
+
+**Theofanis Voulgaropoulos**, the master smith (early fifties) · metropolis, Dionpetra  
+Temperament: — · Flaw: — · Manner: secretive · Disposition: dismissive  
+Impression: Treats anyone who is not buying as noise. The hammer keeps time while you speak.  
+How they deal: Answers in a word or two unless the talk turns to metal, and then cannot be stopped.  
+Wants (now): Ration what is left at the blacksmiths so the work lasts until new supply arrives.  
+Wants (life): Live a quiet life, out of other people's quarrels.  
+Hook: An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.  
+**Secret: Owes their life to Panteleimon Laskaris, and has never found a way to say it** · Stakes: Panteleimon Laskaris has asked them for something they ought to refuse
+
+#### ties · `guardian`
+BORN · seed `r2r-village-14`
+
+**Pall Haraldsson**, the dairy farmer (seventies) · village, Skaldaker  
+Temperament: gracious · Flaw: vengeful · Manner: opportunistic · Disposition: welcoming  
+Impression: Red-cheeked and cheerful, smelling of the byre, with a jug of milk ready.  
+How they deal: Offers a cup and talk of the weather and the price of milk.  
+Wants (now): Keep the accounts of the dairy balanced, and show them to anyone who asks.  
+Wants (life): Settle things with Helga Svensson for good, one way or another.  
+Hook: Their son has been seen at night with people who do not work, and comes home with coin.  
+**Secret: Was asked by a dying friend to watch over Unnr Magnusson, and has done it for years without a word** · Stakes: Unnr Magnusson thinks they are being followed
+
+#### ties · `promised`
+PLANTED · seed `r2r-city-0`
+
+**Varvara Vorobev**, Lord Burgomaster (late twenties) · city, Goraka  
+Temperament: loyal · Flaw: wrathful · Manner: obsessive · Disposition: cautious  
+Impression: Cautious with newcomers, because the work requires it; it is nothing personal.  
+How they deal: Treats every question as a possible threat, and remembers who asked it.  
+Wants (now): Make sure Konstantin Alexeyev keeps paying, even if late.  
+Wants (life): Lead Merchant City Council so long and so well that no one, Liliya Gusev included, thinks of replacing them.  
+Hook: A family they put out of business has opened again under a new name, two doors down.  
+**Secret: Was promised in marriage as a child to someone they have never met, and the day is coming** · Stakes: The other family keeps its promises
+
+#### ties · `oathAgainst`
+BORN · seed `r2r-metropolis-41`
+
+**Anton Grbić**, the sage (late forties) · metropolis, Hvaliko  
+Temperament: charismatic · Flaw: manipulative · Manner: secretive · Disposition: cautious  
+Impression: Reserved. Not hostile, just private.  
+How they deal: Gives careful answers that are true as far as they go, and they never go far.  
+Wants (now): Stand by Lukas Loginov in their next quarrel, whoever it is with.  
+Wants (life): Rise in Arcane Orders far enough that their word carries weight outside it.  
+Hook: They have seen the same unmarked cart pass their door three nights running, and have not wondered why.  
+**Secret: Belongs to a family sworn, generations back, to end the line of Timofei Đorđević, and is the last who remembers the oath** · Stakes: They like Timofei Đorđević
+
+#### ties · `runaway`
+BORN · seed `r2r-city-43`
+
+**Rong Suzuki**, the brewer (late thirties) · city, Lincheng  
+Temperament: — · Flaw: corrupt · Manner: proud · Disposition: transactional  
+Impression: Practical, with the red hands of someone who works hot vats all day.  
+How they deal: Sells by the barrel to taverns and by the jug to anyone; talks prices plainly.  
+Wants (now): Put away more coin this season than last.  
+Wants (life): Settle things with Xin Sasaki for good, one way or another.  
+Hook: Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.  
+**Secret: Ran from a marriage on the morning of it, three towns away, and the other family still pays people to look** · Stakes: One of those people has come this way
+
+#### ties · `hiddenSpouse`
+BORN · seed `r2r-metropolis-19`
+
+**Razan al-Waqqas**, the auctioneer (late sixties) · metropolis, Mintaroasis  
+Temperament: warm-hearted · Flaw: overbearing · Manner: eccentric · Disposition: transactional  
+Impression: Sharp and fast. Remembers what every buyer paid and what they can afford.  
+How they deal: Takes goods for sale at a fee and a share; payment is in coin, on the day.  
+Wants (now): Bring Grand Merchant Oligarchy a piece of news before anyone else does.  
+Wants (life): Be obeyed without ever having to raise their voice.  
+Hook: They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.  
+**Secret: Is secretly married to Selma al-Malik, and neither has found the right day to say so** · Stakes: A third person has started courting one of them
+
+#### ties · `nameless`
+PLANTED · seed `r2r-city-0`
+
+**Anna Loginov**, the watch commander (seventies) · city, Goraka  
+Temperament: — · Flaw: petty · Manner: obsessive · Disposition: cautious  
+Impression: Upright and watchful, with a habit of standing where they can see the whole room.  
+How they deal: Polite and brief; asks your business, your lodgings and how long you plan to stay.  
+Wants (now): Get one person close to Zina Nikitin to talk, quietly.  
+Wants (life): Be counted one day among those who lead Merchant City Council.  
+Hook: Someone is paying their soldiers more than their salary. The soldiers aren't saying who.  
+**Secret: Does not know their true name or where they were born: they were found on the road with a purse and a knife** · Stakes: The knife has a maker's mark that someone here knows
+
+#### masters · `masterBlade`
+PLANTED · seed `r2s-indebted-hamlet-0`
+
+**Sorghaghtani Taichiud**, the militia captain (mid-sixties) · hamlet, Gantulgabulag  
+Temperament: warm-hearted · Flaw: reckless · Manner: contrarian · Disposition: cautious  
+Impression: Alert. Not hostile, but attentive in a way that doesn't quite switch off.  
+How they deal: Keeps out of trouble by keeping away from you, and sends you to someone else when they can.  
+Wants (now): Keep the accounts of the citizen militia balanced, and show them to anyone who asks.  
+Wants (life): Outlast Gereltsetseg Kiyad in Free Elder Council, and be ready when the place falls empty.  
+Hook: Tracks they were told to ignore lead from the edge of the fields to a camp nobody has reported.  
+**Secret: Was captain of a great house's guard, and keeps a quiet watch here so that no one asks** · Stakes: The day the place is threatened, everyone will see what they are
+
+#### masters · `masterThief`
+PLANTED · seed `r2r-village-0`
+
+**Mord Bjarnarson**, the network's spider (early thirties) · village, Lundborg  
+Temperament: charismatic · Flaw: wrathful · Manner: pragmatic · Disposition: welcoming  
+Impression: Friendly and ordinary, the kind of person you would forget an hour later.  
+How they deal: Chats easily and learns far more than you meant to tell.  
+Wants (now): Learn what Kráka Finsson has been saying about them, and to whom.  
+Wants (life): Outlast every person who ever crossed them.  
+Hook: Someone has been using their name to frighten shopkeepers, and the shopkeepers have begun paying the wrong people.  
+**Secret: Was the best lock-breaker of a great city's guild, and keeps to small work here so that no one asks** · Stakes: The guild believes they are dead, and would correct the error
