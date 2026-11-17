@@ -257,21 +257,29 @@ function temperOfTie(archetype, strength, variant) {
 }
 
 /**
- * A pair's SECOND tie in the temper of its first (the chair's TI1; no draw): beside a warm first tie an enemy's kind is a
- * rival's, at the same rung of its strengths (mild, serious, mortal → professional, personal, bitter); beside a cold first
- * tie a warm strength is its kind's first (a devoted teacher → a formal one; a deep respect → a grudging one). A line that
+ * A pair's SECOND tie in the temper of its first (the chair's TI1; no draw): beside a warm first tie an enemy's or a
+ * rival's kind is a respect's (BAR7-LINES: a rival is cold, so it no longer stands for "neither"); beside a cold first tie a
+ * warm strength is its kind's first (a devoted teacher → a formal one; a deep respect → a grudging one), and a kind warm at
+ * every strength (an ally's) is a rival's at its rung (BAR7-LINES, 10i: one pair, one sense). A line that
  * declares a trust the first denies is held by the prose draw itself (`relationshipArchetypes.js`, BAR2-PEOPLE PP4).
  * @param {'warm' | 'cold' | null} first @param {any} archetype @param {string} strength
  */
 function inTemperOf(first, archetype, strength) {
   const own = temperOfKind(archetype?.type, strength);
+  const rung = Math.max(0, (RELATIONSHIP_STRENGTHS[/** @type {keyof typeof RELATIONSHIP_STRENGTHS} */ (archetype?.type)] || []).indexOf(strength));
   if (first === 'warm' && own === 'cold') {
-    const rung = Math.max(0, (RELATIONSHIP_STRENGTHS[/** @type {keyof typeof RELATIONSHIP_STRENGTHS} */ (archetype.type)] || []).indexOf(strength));
-    return { archetype: STRESS_ECONOMIC_EFFECTS.peer_rivalry, strength: RELATIONSHIP_STRENGTHS.rival[rung] ?? RELATIONSHIP_STRENGTHS.rival[0] };
+    // BAR7-LINES (10i, C19351): a rival is cold now (`TIE_TEMPER`), so beside a warm first tie an enemy's or a rival's kind
+    // is a respect's, at its rung's strength short of deep (mild, serious, mortal → grudging, genuine, genuine): the second
+    // tie says no more than the first allows, and names no rivalry beside an ally (was: a rival's, under TI1)
+    return { archetype: STRESS_ECONOMIC_EFFECTS.genuine_respect, strength: RELATIONSHIP_STRENGTHS.respect[Math.min(rung, 1)] };
   }
   if (first === 'cold' && own === 'warm') {
     const pool = RELATIONSHIP_STRENGTHS[/** @type {keyof typeof RELATIONSHIP_STRENGTHS} */ (archetype.type)] || [];
-    return { archetype, strength: pool.find((s) => temperOfKind(archetype.type, s) !== 'warm') ?? strength };
+    const cooler = pool.find((s) => temperOfKind(archetype.type, s) !== 'warm');
+    // BAR7-LINES (10i): a kind warm at every strength (an ally's) has no cooler rung: beside a cold first tie it is a rival's,
+    // at the same rung (weak, moderate, strong → professional, personal, bitter), as an enemy's kind turns the other way
+    if (cooler === undefined) return { archetype: STRESS_ECONOMIC_EFFECTS.peer_rivalry, strength: RELATIONSHIP_STRENGTHS.rival[rung] ?? RELATIONSHIP_STRENGTHS.rival[0] };
+    return { archetype, strength: cooler };
   }
   return { archetype, strength };
 }

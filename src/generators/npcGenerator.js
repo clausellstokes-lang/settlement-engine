@@ -398,8 +398,8 @@ export const stressBucketOf = (role) => {
 export const STRESS_GOAL_OVERRIDES = {
   wartime: {
     gov: {
-      short: 'Satisfy the crown requisition order without stripping the settlement to the bone',
-      note: "Since the war began, every decision here comes back to the army, and the crown's requisition order asks for what the settlement itself needs to live.",
+      short: "Satisfy the army's requisition order without stripping the settlement to the bone", // BAR7-LINES (6e, C16768; the chair's SV2): the war's requisition is the army's; it names no crown
+      note: "Since the war began, every decision here comes back to the army's requisition order, which asks for what the settlement itself needs to live.",
     },
     mil: {
       short:

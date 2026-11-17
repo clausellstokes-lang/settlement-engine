@@ -77,6 +77,8 @@ const CAUSE_WORDS = Object.freeze({
   food: Object.freeze({ adverse: 'hunger', favourable: 'full stores' }),
 });
 const CAUSE_ORDER = Object.freeze(['prosperity', 'safety', 'defense', 'food']);
+/** BAR7-LINES (the LOW "Weak defences is the reason", 42 towns of the census's 720): the cause words that are plural nouns. */
+const PLURAL_CAUSE_WORDS = new Set(['weak defences', 'strong defences', 'full stores']);
 
 /** The bands that read their ADVERSE causes; the other two read their favourable ones. */
 const ADVERSE_BANDS = new Set(['Legitimacy Crisis', 'Contested', 'Tolerated']);
@@ -147,7 +149,8 @@ export function arrangementOf(seed, slot, n) {
  * @returns {string}
  */
 function standingSentence(label, causes, place, ruler, pick) {
-  const one = causes.length === 1;
+  // the verb agrees with what it names: one cause whose word is singular ("Hunger has …"), never "Weak defences is …"
+  const one = causes.length === 1 && !PLURAL_CAUSE_WORDS.has(causes[0]);
   const by = capFirst(listOf(causes));
   const a = pick(`standing:${label}:${causes.length ? 'causes' : 'bare'}`, causes.length ? 2 : 1);
   switch (label) {
