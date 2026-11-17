@@ -2414,7 +2414,7 @@ and never an assertion that the feared thing is happening.
 2. `[street · no ruler: lord]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
 3. `[unfolding · no crisis: succession]` The {seat} at {settlement} watches the town's temper closely: what it fears is the town turning on it.
 4. `[counterforce · no ruler: lord · seat members]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
-5. `[counterforce · no ruler: lord · no seat members]` The {seat} at {settlement} has left obvious decisions untaken, and nobody in the town can make it take them.
+5. `[counterforce · no ruler: lord · no seat members]` The {seat} at {settlement} has left obvious decisions untaken, and nobody there can make it take them.
 
 **`theocracy`** {colour}
 1. `[ledger]` The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.
@@ -2475,8 +2475,9 @@ and never an assertion that the feared thing is happening.
 
 **FLAG: stateCrime, heavy** *(WIRING W3 C2: `safetyProfile.flags.stateCrime` with `stateCrimeIntensity` in the heavy band)*
 1. `[street · garrison]` The garrison at {settlement} no longer keeps the peace for anyone but itself. Soldiers set the dues, take what they want, and people who argue with them are not seen again.
-2. `[visitor · garrison · no crisis: under_siege]` Travellers reach {settlement} and find nobody about and soldiers wherever they look. Nobody will talk about the {seat}, and nobody will say where the missing went.
+2. `[visitor · garrison · no crisis: threat]` Travellers reach {settlement} and find nobody about and soldiers wherever they look. Nobody will talk about the {seat}, and nobody will say where the missing went.
 3. `[counterforce · no garrison]` The {seat}'s armed officials at {settlement} take what they want and answer to nobody; people who argue with them are not seen again.
+4. `[street · garrison · crisis: threat]` Soldiers are posted all over {settlement} and nobody else is about. Nobody will talk about the {seat}, and nobody will say where the missing went.
 
 **FLAG: crimeIsGovt** *(WIRING W3 C3: `safetyProfile.flags.crimeIsGovt`)*
 1. `[street · no guardPresence]` There is no law at {settlement} but what the gang bosses enforce. They keep a kind of order and charge for it, and whoever cannot pay goes unprotected.
@@ -3016,7 +3017,7 @@ in about two towns in five that keep a force.
 
 **CHAIN: food trades failing** {colour}
 1. `[ledger · no crisis: under_siege · stores: < 12]` {settlement}'s food trades are failing, so less food is being put by than should be; if the town were cut off, it would have less to fall back on than it ought.
-2. `[ledger · no crisis: under_siege · stores: ≥ 12]` {settlement}'s food trades are failing, though its stores would still carry the town through a year cut off.
+2. `[ledger · no crisis: under_siege · stores: ≥ 12]` {settlement}'s food trades are failing, though its stores would still carry it through a year cut off.
 3. `[street · no crisis: under_siege · stores: < 12]` The food trades at {settlement} are struggling to keep up, and less is being put by against the town being cut off than ought to be.
 4. `[unfolding · no crisis: under_siege · stores: < 12]` {settlement}'s food trades are failing, and what they fail to put by is food the town would miss if it were cut off.
 5. `[ledger · crisis: under_siege · stores: < 12]` {settlement} is cut off now, and its food trades were failing before the siege began, so less was put by than there should have been.
@@ -4036,7 +4037,7 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 **CAPACITY: enough** {colour}
 1. `[visitor · food: ≥ pressured · no food surplus]` No dependable road, river or port reaches {settlement}, so what the town raises is what it has, and an ordinary year leaves nothing over.
 2. `[ledger · food: ≥ pressured · no food surplus]` What {settlement} raises leaves nothing over in an ordinary year, and a bad harvest is felt before spring.
-3. `[ledger · food: ≥ pressured · food surplus]` {settlement} grows more than it eats, but no dependable road, river or port takes the rest anywhere, and what the town cannot grow or make it mostly goes without.
+3. `[ledger · food: ≥ pressured · food surplus]` {settlement} grows more than it eats, but no dependable road, river or port takes the rest anywhere, and what the place cannot grow or make it mostly goes without.
 4. `[street · food: ≥ pressured]` People at {settlement} make do with what they have; a good year is enough and a bad one is lean.
 
 **CAPACITY: short** {colour}

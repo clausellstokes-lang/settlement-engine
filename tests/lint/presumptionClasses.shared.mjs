@@ -86,15 +86,23 @@ export const CLASS_DIMS = Object.freeze({
   work: [...C, 'prosperity'],
   animals: [...C, 'institution', 'livestock'],
   iron: [...C, 'iron at hand', 'trade at work', 'institution'],
-  law: [...C, 'crime', 'organised crime', 'criminal income', 'watch', 'court', 'prison', 'patrol', 'garrison', 'militia', 'crime wave', 'force'],
+  law: [...C, 'crime', 'organised crime', 'criminal income', 'watch', 'court', 'prison', 'patrol', 'garrison', 'militia', 'crime wave', 'force', 'court sits', 'paid watch'],
   ease: [...C, 'prosperity', 'legitimacy crisis'],
   threat: [...C, 'walls', 'palisade', 'gate', 'organised crime', 'crime', 'ruler', 'rival power', 'watch', 'garrison', 'patrol', 'militia', 'soldiers', 'monster frontier', 'crime wave'],
   size: ['tier', 'population'],
   goods: [...GOODS, 'exported'],
   resource: [...GOODS, 'terrain', 'coast', 'river'],
-  office: ['court', 'prison', 'watch', 'militia', 'garrison', 'patrol', 'soldiers', 'commander', 'mercenary', 'institution', 'ruling body', 'guild', 'ruler', 'rival power', 'walls', 'palisade', 'gate', 'tier', 'population', 'temple', 'church', 'priest', 'clergy', 'crime', 'organised crime', 'force'],
+  office: ['court', 'prison', 'watch', 'militia', 'garrison', 'patrol', 'soldiers', 'commander', 'mercenary', 'institution', 'ruling body', 'guild', 'ruler', 'rival power', 'walls', 'palisade', 'gate', 'tier', 'population', 'temple', 'church', 'priest', 'clergy', 'crime', 'organised crime', 'force', 'court sits', 'seat held', 'seat members', 'paid watch'],
   sovereign: ['ruler', 'war', 'crisis', 'sovereign', 'legitimacy crisis'],
 });
+// SEAM-DESKS (2026-11-17, BRIEF-BAR6-SEAM item 6; CD1 passes this table to the seam once GUARD's seat was final): the atoms
+// made after GUARD's final join the classes they answer, each held by its vocabulary entry (`knownDimension`), so none is
+// named below: `court sits` (BAR6-CULTURE, `factsOf.js :: courtSits`, a court on the live roster) → office and law;
+// `seat held` (BAR6-PEOPLE, `seatHeld.js`) → office; `seat members` (BAR6-POWERS, `seatMembers.js`, "members cannot") →
+// office; `paid watch` (BAR6-PEOPLE, `guardPay.js :: paidWatchOf`, a watch that is not the unpaid rota) → office and law.
+// `legacy ruin` (BAR6-CULTURE, `legacyRuin.js`) JOINS NO CLASS: no class of the lexicon names a ruin built upon ("Much of
+// what stands now was built after the fire" reads as no class), and a class it does not answer would credit that class's
+// lines with a fact they do not presume. Its class is the lexicon's to make (the walker's own form), left for the close.
 /**
  * THE CHAIR'S RULING CD1 (2026-11-16): this table is BAR6-GUARD's alone to extend; the seats' NEW atoms are added to
  * the classes they answer as the chair names them. Each is named here with its seat and commit until the joined

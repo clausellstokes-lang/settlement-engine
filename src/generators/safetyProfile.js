@@ -276,8 +276,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const visibleAuthority = inst.hasGarrison
       ? 'The garrison is visible everywhere.'
       : 'Armed officials are visible everywhere.';
-    safetyDesc = `${tiny ? 'The place is unusually quiet.' : 'The streets are unusually quiet.'} ${visibleAuthority} Residents face little risk from ` + // BAR6-CRIME (LAW 5 widened, size): no streets in a thorp or a hamlet
-      `common thieves and considerably more from the authorities themselves. Unofficial disappearances are not discussed openly.`;
+    // BAR6-CRIME (LAW 5 widened, size): no streets in a thorp or a hamlet; SEAM-DESKS (2026-11-17): the gate in the guard's sight (`tierKey`)
+    const quietOpening = TINY_PLACES.includes(tier) ? 'The place is unusually quiet.' : 'The streets are unusually quiet.';
+    safetyDesc = `${quietOpening} ${visibleAuthority} Residents face little risk from common thieves and considerably more from the authorities themselves. Unofficial disappearances are not discussed openly.`;
   } else if (stress.crimeIsGovt) {
     safetyLabel = 'Dangerous — Criminal Governance';
     const crimeRef = inst.hasThievesGuild ? "The thieves' guild" : 'Organized crime';
@@ -639,7 +640,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     // TAIL-DISPLAY-CIVIC-3 V3: a place with no trade route sells nothing to an army's buyers (r2s-wartime-thorp-2: isolated, no
     // exports, no imports); the deserters' food is settled against the food record at assembly (settleCrimeLinesToSignal)
     if (config.tradeRouteAccess !== 'isolated') addCrimeIfMissing('war profiteering', tiny ? "Whatever the army's buyers will take is sold to them dear, and not all of it is as sound as it is said to be."
-      : "Suppliers adulterating grain and leather sold to the army's contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.");
+      : "Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit."); // SEAM-DESKS (2026-11-17): no leather named (the draw reads the roster alone, and no atom on the line names the leather trade)
     addCrimeIfMissing('deserter networks', tiny ? DESERTERS_FED_TINY : DESERTERS_FED);
     if (!tiny) addCrimeIfMissing('conscription fraud',
       'Wealthy families paying poorer ones to send sons in their place. The practice is illegal, widespread, and poorly enforced. It concentrates the actual dying in specific households.');

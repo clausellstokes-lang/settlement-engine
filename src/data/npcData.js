@@ -2529,12 +2529,18 @@ export const FLAWS_DENIED_BY_TEMPERAMENT = Object.freeze({
  * forgery of the holder's own (a secret the holder only KNOWS of, "Knows the … document was forged", is no lie of theirs).
  * "candid" and "forthright" are words of manner, not of truth, and are not listed (the audit's precision: 0 of 12 stood).
  * The words are the audit's detector's (`tests/helpers/pageLaws/law10.mjs :: law10e`), judged at 15 of 15 and 11 of 11.
+ * SEAM-DESKS (2026-11-17, BRIEF-BAR6-SEAM item 8; vetoable by the owner): "candid" and "forthright" JOIN FOR THE SECRETS OF
+ * DECEIT ONLY (a thing the holder forged, fabricated, falsified or lied about: the words "honest" yields to), never for the
+ * secrets of money: a card that prints "Temperament: forthright" over a forged appointment or a lie about a battle read as a
+ * contradiction on the page (runF's 10e-temper-manner, 5 of the 150), though the words are of manner.
  * @type {Readonly<Record<string, RegExp>>}
  */
 export const SECRETS_DENIED_BY_TEMPERAMENT = Object.freeze({
   incorruptible: /\bpaid to (?:lose|keep|look|report)\b|\bbeen paid\b|\bis paid by\b|\bfor a (?:share|fee|price)\b|\bin return for a share\b|\bfor a share of\b|\btakes a (?:monthly )?payment\b|\btakes a bribe\b|\bbribe\b|\bskim(?:s|ming)?\b|\bembezzl|\bpocketed\b|\bon the payroll of\b|\bkeeping the difference\b|\bkeeps the extra\b|\bkeeps back a share\b|\bfor whoever pays\b|\bbecause someone paid\b|\bsomeone paid them\b/i,
   honest: /\blies\b|\blied\b|\bforged\b|\bforging\b|\bfalsif|\bfraudulent|\bmade up\b|\bmaking up\b|\bfabricat/i,
   'plain-dealing': /\blies\b|\blied\b|\bforged\b|\bforging\b|\bfalsif|\bfraudulent|\bmade up\b|\bmaking up\b|\bfabricat/i,
+  candid: /\blies\b|\blied\b|\bforged\b|\bforging\b|\bfalsif|\bfraudulent|\bmade up\b|\bmaking up\b|\bfabricat/i,
+  forthright: /\blies\b|\blied\b|\bforged\b|\bforging\b|\bfalsif|\bfraudulent|\bmade up\b|\bmaking up\b|\bfabricat/i,
 });
 /** A secret the holder only knows of, not one of their own doing. @param {string} what */
 const onlyKnownOf = (what) => /^Knows\b/i.test(what) && !/\bhelped\b|\band has\b/i.test(what);
