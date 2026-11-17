@@ -512,3 +512,13 @@ should be paused or archived by the owner's hand.
   the last tip is in (told 19:36). THE FIRST BATCH IS DEBT-2, LEFT-LINES, LEFT-PDF AND LEFT-CHAIN: POINTS 36 TO 39
   (`/home/user/wk/batch1.sh <LEFT-CHAIN's tip>` builds `lane/landing-36-39-2026-11-17` in `/home/user/line`). The owner
   asked at 19:32 where everything stands and has a full account in plain words (19:35).
+- **19:36 UTC. LEFT-CHAIN's LAST TIP IS c009dee18** (19:35: BR10 (3) as amended, one condition in `chainHouses.js`: read by the chair;
+  17 mines and one charcoal burner in the 720, 2 mines in the 150, no card emptied; its guard 8 of 8 with a negative).
+  Its second reader: READ-LEFT-CHAIN session_01FbPLbfaN5JrfWb5LgXVXgV (seated 19:36). THE FIRST BATCH'S LANDING BRANCH IS
+  BUILT in `/home/user/line`: `lane/landing-36-39-2026-11-17` at 3b06c724bfe1f2cfffcec3031b2e8a4c6513f27b on the line's
+  9378609ba, one `--no-ff` merge a point, no conflict: 36 DEBT-2 f7d1c6bca (2e54c06c2), 37 LEFT-LINES 773c463d7
+  (f1ca75555), 38 LEFT-PDF ce35c9479 (e60d42a20), 39 LEFT-CHAIN c009dee18 (3b06c724b). It is being pushed (its three
+  gates are the batch's first check). THEN the three CHECKS seats run the shared whole check AT THAT COMMIT (label
+  `landing-36-39-3b06c724b`). IT LANDS (a fast-forward of the line to 3b06c724b, then the record's rows) WHEN that check
+  reads clean by name against the candidate's lists AND READ-LEFT-PDF and READ-LEFT-CHAIN say LAND (READ-LEFT-LINES has).
+  If a reader holds one seat back, the branch is rebuilt without it (`/home/user/wk/batch1.sh` is the recipe).
