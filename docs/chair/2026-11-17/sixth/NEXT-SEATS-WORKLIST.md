@@ -104,6 +104,15 @@ ONE place. A seat is seated from the working line's tip once the seats it waits 
   BR17 (3)) and the fair's TWIN (BR17 (2)) where luxuries are not brought in. J-ROWS's hand-back says which
   declaration each line would take. A small seat, or an amendment to whichever of the two lands last.
 
+## PEOPLE-2 (when K-PEOPLE's work is on the line) · what K-PEOPLE left by name
+
+- K-PEOPLE (its work UNCOMMITTED at 21:05: its permission check refuses the commit; see the handoff) cured 13b, 14b's
+  swap, 14f, 14g, 14h. LEFT: 11e.wantBuy (6): the need list's reader `tradeListDisplay.js` is coherence-lazy, and
+  importing it from `goals.js` (the eager core) turns `engineCoreLazyEdge` and `factHomesLazy` red: the cure needs the
+  need read by a leaf the eager core may import, or at `dealGoals`' callers (never a `vite.config.js` pin). 14e (5 in
+  the 150): the hook is drawn before the seats land and without the card: it needs
+  `src/generators/people/representatives.js`.
+
 ## LEFT-KEYS (after the four LEFT builders land) · tests and two detectors only (`briefs/BRIEF-LEFT.md`, last section, K1 to K6)
 
 - K5's names from the whole check's comparison: `tests/domain/corpusEcoTailGuards.test.js` (DS-ECO-12 at r2r-hamlet-12),
@@ -124,6 +133,11 @@ ONE place. A seat is seated from the working line's tip once the seats it waits 
   mine/stone quarry is worked out: its own ground is depleted (...)" (r2r-town-52, r2r-hamlet-3, r2r-metropolis-56,
   r2r-hamlet-23): a planted bare mine there reads 0. Both are LEFT-KEYS's (K7), each proven by the planted fault it
   must then find. ALSO LOW 4: `leftMarks` M3's positive checks the Institutions tab only: add the Services tab.
+- RULING BR22 (K8): `tests/property/editCorpusRatchet.test.js`'s `ARM_TIMEOUT = 600_000` is a WATCHDOG the arm A5 has
+  grown into (its own note measured the pair census at 157 s on 2026-10-01; on 2026-11-17 the arm runs 569 to 594 s
+  on a quiet machine and 657 s on a slower one, and reads red by the clock alone in about one whole check of two).
+  LEFT-KEYS raises it to 1_800_000 with a dated note of those measures; NO ASSERTION OF THE ARM CHANGES. The owner
+  hears at the close that the arm is 3.6 times slower than in October (the births have grown heavier).
 - L13 is cured at point 33 (`labelJoins` green): struck.
 - Seat J's detector (`tests/helpers/pageLaws/law11Supply.mjs`, rule 11g) misses the story line's plural form "are
   failing" (J-ROWS read 130 where it counts 129: its hand-back names the line and the town): a detector's debt.

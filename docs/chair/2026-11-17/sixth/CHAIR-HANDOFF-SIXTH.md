@@ -618,3 +618,15 @@ should be paused or archived by the owner's hand.
     `/home/user/wk/a5-b1.json`). NOTHING MORE LANDS UNTIL IT HAS SPOKEN. If it is green: the clock; points 38 and 39
     land as planned. If it is red: its message names the drift; bisect at 2e54c06c2 (point 36, DEBT-2, ALREADY ON THE
     LINE), e60d42a20 (38), 3b06c724b (39).
+- **21:12 UTC. A5 HAS SPOKEN AT THE BATCH'S COMMIT: GREEN IN 602 s UNDER A ONE-HOUR LIMIT (the chair's machine, `/home/user/wk/a5-b1.json`): THE CLOCK,
+  NOT A DRIFT.** (No runtime source reads the fork register DEBT-2 changed: `git grep GENERATION_TIER1 src` finds its own
+  file and one comment.) RULING BR22 (the worklist file, LEFT-KEYS's K8): the arm's watchdog `ARM_TIMEOUT` is raised with
+  a dated note; no assertion changes; the owner hears at the close that the arm takes 3.6 times what it took on
+  2026-10-01. POINTS 38 (LEFT-PDF) AND 39 (LEFT-CHAIN) ARE BEING LANDED AS CHECKED (a fast-forward to 3b06c724b), WITH TWO
+  REDS OF LEFT-CHAIN's NAMED ON THE LINE until its follow-up lands (`labelJoins`: a name join in
+  `economicsCrisisMarks.js`; `vendorPdfLazy` ST-2: the roster's row for `chainHouses.js`): both are told to it, both
+  are bookkeeping of the code's own laws, neither is a line on the page. K-PEOPLE (21:05): 14h cured too with
+  `goals.js`; STILL UNCOMMITTED (its check refused a second time); it leaves 11e.wantBuy (the need list's reader is
+  lazy and the goals' dealer is in the eager core) and 14e (`representatives.js`): the worklist's PEOPLE-2.
+  NEW SEATS FROM NOW MAKE A FIRST SMALL COMMIT AND PUSH IN THEIR FIRST MINUTES (the hand-back's skeleton), so that a
+  permission refusal shows before any work is done; a seat that is refused stops and says so.
