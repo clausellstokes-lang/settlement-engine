@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '../../../../..');
 const { readTown, fold } = await import(path.join(root, 'tests/helpers/pageLaws/pageB.mjs'));
-const { law11 } = await import(path.join(root, 'tests/helpers/pageLaws/law11Supply.mjs'));
+const { law11, rootsOf } = await import(path.join(root, 'tests/helpers/pageLaws/law11Supply.mjs'));
 
 const args = process.argv.slice(2);
 const withControls = args.includes('--controls');
@@ -29,6 +29,7 @@ const dumps = fs.readdirSync(path.join(dir, 'dumps')).filter((f) => f.endsWith('
 if (!dumps.length) { console.error('no dumps'); process.exit(1); }
 const norm = (s) => fold(String(s || '')).replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 const all = [];
+const roots = [];
 for (const f of dumps) {
   const seed = f.replace(/\.txt$/, '');
   const rec = records.get(seed);
@@ -36,6 +37,7 @@ for (const f of dumps) {
   const T = readTown(fs.readFileSync(path.join(dir, 'dumps', f), 'utf8'), rec);
   const names = [rec.name, ...(rec.npcs || []).map((n) => n.name)].filter((n) => n && String(n).length > 2).map(String).sort((a, b) => b.length - a.length);
   const formOf = (s) => names.reduce((t, n) => t.split(n).join('<name>'), String(s || ''));
+  for (const r of rootsOf(rec)) roots.push({ ...r, town: seed });
   for (const x of law11(T, seed)) all.push({ ...x, form: formOf(x.sentence || x.line), crises: [...T.crises] });
 }
 fs.writeFileSync(outPath, JSON.stringify(all, null, 1));
@@ -52,6 +54,13 @@ for (const r of [...new Set(all.map((x) => fams(x.rule)))].sort()) {
   console.log(`    by material ${split(xs, 'fam')}`);
   if (r === '11b') console.log(`    by line kind ${split(xs, 'kind')}`);
   if (r === '11b') for (const f of [...new Set(xs.map((x) => x.rule))].sort()) console.log(`      ${f.padEnd(16)} ${fmt(tally(xs.filter((x) => x.rule === f)))}`);
+}
+// THE ROOTS: the record's own disagreements under the lines (rootsOf), by kind
+fs.writeFileSync(outPath.replace(/\.json$/, '.roots.json'), JSON.stringify(roots, null, 1));
+console.log('THE ROOTS (the record alone)');
+for (const k of [...new Set(roots.map((r) => r.root))].sort()) {
+  const rs = roots.filter((r) => r.root === k);
+  console.log(`  ${k.padEnd(22)} towns ${String(new Set(rs.map((r) => r.town)).size).padStart(4)} · rows ${String(rs.length).padStart(4)} · ${k === 'warIronOutsideWar' ? `under a siege ${rs.filter((r) => r.siege).length} · by crises ${split(rs, 'crises')} · with an iron import ${rs.filter((r) => r.ironImports).length}` : `by material ${split(rs, 'fam')}`}`);
 }
 // the distinct lines, most towns first (the worklist's raw table)
 const forms = new Map();

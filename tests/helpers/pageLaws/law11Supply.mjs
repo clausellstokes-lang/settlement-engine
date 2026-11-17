@@ -8,6 +8,8 @@
 //   11a.imported   "Needed, and not brought in: X" where the record's own story has X bought in (a gap row "runs on
 //                  imported X", or the imports list naming X)
 //   11a.atWork     "Needed, and not brought in: X" where a house that works X prints at work with no mark
+//   11b.fishTitle  the fish market's service NAME alone ("Fresh fish retail") under the same stories, counted apart
+//   11b.landOffers a tick of the Resources tab's "What the land offers" naming a material whose every ground is used up
 //   11b.<fam>      a line that has material X caught, dug, felled, grown or landed HERE where X's story is used up and
 //                  bought in, never there and bought in, or idle (by line kind: scene, service, income, person, other)
 //   11c.venture    a line that has the failed venture's material brought in ("must come from elsewhere") where none is
@@ -123,7 +125,7 @@ export const LOCAL_SOURCE = {
   fish: /\b(the boats, the catch|fresh fish(?: retail)?$|morning'?s? catch|the day'?s catch|catch of the day|the catch (?:comes?|coming|keeps?)|keep the catch coming|landed (?:here|and sold)|gutting|racks of drying fish|drying fish|fresh(?:ly)? caught|boats? (?:come|bring) in (?:the|their) catch|smell of (?:salt and )?catch)\b/i,
   timber: /\b(felled (?:here|nearby|locally|in the)|felling|logs? (?:come|coming|are dragged|are floated) (?:down|in)|local (?:forest|woodland|wood)s? provides?|cut from the (?:local )?(?:woods?|forests?)|woodcutters? (?:are )?at work|the axes? (?:ring|carry))\b/i,
   ironOre: /\b(ore the workings (?:still )?give|ore (?:is )?(?:dug|mined|hauled up|comes? up)|(?:dug|mined) (?:here|from the (?:local )?(?:hills?|mines?))|from the (?:local )?mines?|the mines? (?:here )?(?:yield|give|produce)s?|miners? (?:come up|go down)|ore carts?)\b/i,
-  stone: /\b(quarried (?:here|locally|nearby)|cut from the (?:local )?(?:hill|quarry|quarries)|from the (?:local )?quarr(?:y|ies)|quarry carts?|stone is cut here|laden carts from the workings)\b/i,
+  stone: /\b(quarried (?:here|locally|nearby)|cut from the (?:local )?(?:hill|quarry|quarries)|from the (?:local )?quarr(?:y|ies)|quarry carts?|stone is cut here)\b/i,
   clay: /\b(clay (?:is )?dug|dug from the (?:river ?)?banks?|(?:local|riverbank|river) clay pits?|clay from the (?:river|banks?|pits?))\b/i,
   desertSalt: /\b(salt (?:is )?(?:won|raked|panned|cut) (?:here|from the (?:flats|pans))|the salt (?:flats|pans) (?:here )?(?:yield|give|work)|raking salt|salt from the flats)\b/i,
   wool: /\b(shearing|fleeces? (?:off|from) (?:the|local)|flocks? (?:graze|on the (?:hills?|pasture))|local wool)\b/i,
@@ -172,6 +174,30 @@ const BROUGHT = /\b(?:comes?|are brought|is brought|arrives?|is carted|are carte
 const LOCAL_NOUN = { fish: /\bfish\b/i, timber: /\b(timber|lumber|logs?)\b/i, ironOre: /\b(iron|ore)\b/i, stone: /\bstone\b/i, clay: /\bclay\b/i, desertSalt: /\bsalt\b(?! ?(?:fish|cod|pork|beef|meat))/i,
   wool: /\bwool\b/i, hides: /\b(hides?|pelts?)\b/i, grain: /\bgrain\b/i, peat: /\bpeat\b/i, herbs: /\bherbs?\b/i, livestock: /\b(livestock|cattle)\b/i };
 
+// ---------------------------------------------------------------- THE ROOTS, read off the record alone (the runner counts them)
+/**
+ * The record's own disagreements under the page's lines: (i) a gap row "<house> runs on imported X" (`resourceGenerator.js ::
+ * gapRowOf`, kind 'imported', written where `houseInputAtHand` reads X as brought) whose X no import of the list names by its
+ * material word; (ii) the war's iron hook outside a war (`houseInputAtHand.js :: warIronHookOutsideWar`) beside an iron
+ * import; (iii) the failed venture's material on the imports.
+ */
+export function rootsOf(rec) {
+  const out = [];
+  const imports = arr(rec?.economicState?.primaryImports).map(String);
+  for (const g of arr(rec?.resourceAnalysis?.gaps)) {
+    if (g?.kind !== 'imported') continue;
+    const fam = needFam(String(g.chain || '')) || (/hides?/.test(lc(g.chain)) ? 'hides' : null);
+    if (!fam || !NAMES[fam]) continue;
+    if (!imports.some((x) => NAMES[fam].test(struck(x)))) out.push({ root: 'gapImportedNoImport', fam, house: g.institution, gap: g.impact, imports: imports.join(' · ') });
+  }
+  let warIron = false;
+  try { warIron = warIronHookOutsideWar(rec); } catch { warIron = false; }
+  if (warIron) out.push({ root: 'warIronOutsideWar', siege: siegeOf(rec), crises: [...crisesOf(rec)].join('+'), ironImports: imports.filter((x) => /\biron\b/i.test(struck(x))).join(' · ') });
+  const v = ventureOnPage(rec);
+  if (v && NAMES[v.family] && imports.some((x) => NAMES[v.family].test(struck(x)))) out.push({ root: 'ventureImported', fam: v.family, house: v.name });
+  return out;
+}
+
 // ---------------------------------------------------------------- the rule
 /**
  * @param {ReturnType<import('./pageB.mjs').readTown>} T one town read (pageB.mjs :: readTown)
@@ -214,7 +240,11 @@ export function law11(T, town) {
           why: `"${item}" needed and not brought in; the record's own gap row says ${gaps.map((g) => `"${g.impact}"`).join(', ')}` });
       }
       // a house that works the material, printed at work with no mark
-      const users = liveHouses.filter((h) => USERS[fam]?.has(idOfHouse(h)) && !SOURCE_IDS.has(idOfHouse(h)));
+      // (a need qualified by a use or a grade, "timber (for large vessels)", "mountain timber", is not the house's own
+      // material where the land gives the plain one; a chandler's tallow is no beast; the house's material must have no
+      // local story)
+      if (st?.story === 'local' || /\(for /.test(item)) continue;
+      const users = liveHouses.filter((h) => USERS[fam]?.has(idOfHouse(h)) && !SOURCE_IDS.has(idOfHouse(h)) && idOfHouse(h) !== 'chandler');
       for (const h of users) {
         const c = cardOfHouse(h.name);
         if (!c || houseMarked(c)) continue;
@@ -244,7 +274,10 @@ export function law11(T, town) {
         const sent = line.split(/(?<=[.!?])\s+(?=[A-Z"“])/).find((s) => LOCAL_SOURCE[fam].test(s)) || line;
         if (HEDGE.test(sent)) continue;
         if (tab === 'Systems/Institutions') { const c = cardAt(T, i); if (c && houseMarked(c)) continue; }
-        push({ rule: `11b.${fam}`, tab, line, sentence: sent, fam, story: st.story, cause: storyCause(st), kind: kindOf(tab, line, T, i),
+        // a service's NAME alone ("Fresh fish retail", "Fresh fish": the catalogue's row title and its chip) is counted apart
+        // from a line that says the catch is taken here: the row's own description is the line that tells it
+        const sub = fam === 'fish' && /^fresh fish/i.test(m[0]) ? 'fishTitle' : fam;
+        push({ rule: `11b.${sub}`, tab, line, sentence: sent, fam, story: st.story, cause: storyCause(st), kind: kindOf(tab, line, T, i),
           against: { field: 'story', value: `${st.story}: ${[...st.used.map((g) => `${g} (spent)`), ...st.imports, ...st.gapsImported, st.venture || ''].filter(Boolean).join(' · ')}` },
           why: `"${m[0]}": ${fam} taken here, where the record's story is ${st.story}` });
       }
@@ -401,10 +434,11 @@ export function law11(T, town) {
   }
   // (e4) a card's line, a chip or a Services row that offers a good the need list names (its head noun), its house bare
   if (need) {
-    const ADJ = new Set(['quality', 'fine', 'high', 'raw', 'rare', 'good', 'goods', 'major', 'construction', 'materials', 'and', 'for', 'meat', 'draft', 'other', 'basic', 'bulk', 'mineral', 'textiles', 'cloth']);
+    const ADJ = new Set(['quality', 'fine', 'high', 'raw', 'rare', 'good', 'goods', 'major', 'construction', 'materials', 'and', 'for', 'meat', 'draft', 'other', 'basic', 'bulk', 'mineral', 'textiles', 'cloth', 'preserved', 'winter']);
     const goods = need.items.map((it) => ({ it, nouns: headNoun(it).replace(/ for .*$/, '').split(/[\s,]+/).filter((w) => w.length > 3 && !ADJ.has(w)) })).filter((g) => g.nouns.length);
-    const nounRe = (g) => new RegExp(`\\b(?:${g.nouns.map((w) => w.replace(/s$/, '')).join('|')})s?\\b`, 'i');
-    const OFFER = /\b(available|for sale|on sale|sold|sells?|selling|auctions?|offers?|stocks?|trades? in|dealers? in)\b/i;
+    const stem = (w) => (w.endsWith('y') ? `${w.slice(0, -1)}(?:y|ies)` : `${w.replace(/s$/, '')}s?`);
+    const nounRe = (g) => new RegExp(`\\b(?:${g.nouns.map(stem).join('|')})\\b`, 'i');
+    const OFFER = /\b(available|for sale|on sale|sold|sells?|selling|auctions?|offers?|stocks?|trades? in|dealers? in|to be had|the trade in)\b/i;
     for (const c of T.cards) {
       if (houseMarked(c)) continue;
       const lines = [...c.lines.map((l) => ({ text: l.text, chip: false })), ...(c.chipLine ? [{ text: c.chipLine, chip: true }] : [])];

@@ -18,10 +18,15 @@ const grep = (t) => {
 };
 const LABEL = /^(?:How they deal|Secret:|Wants|Services ·)\s*/;
 function runsOf(form) {
-  return form.replace(LABEL, '').split(/<name>|[·“”"]|\d+%?/).map((s) => s.trim()).filter((s) => s.length >= 14).sort((a, b) => b.length - a.length);
+  // the mark set in front ("Short of iron. "), a row's label ("Fish & Maritime Produce "), a sentence apart: each piece tried
+  const body = form.replace(LABEL, '').replace(/^(?:Short of [a-z ]+|Stopped by the [a-z]+|Curtailed by the [a-z]+)\.\s*/, '');
+  const pieces = body.split(/<name>|[·“”"]|\d+%?|(?<=[.;:])\s+/).map((s) => s.trim()).filter(Boolean);
+  const out = [];
+  for (const p of pieces) { out.push(p); const w = p.split(' '); for (let k = 1; k <= 4 && k < w.length - 2; k++) out.push(w.slice(k).join(' ')); }
+  return [...new Set(out)].filter((s) => s.length >= 14).sort((a, b) => b.length - a.length);
 }
 function writerOf(form) {
-  for (const run of runsOf(form).slice(0, 4)) {
+  for (const run of runsOf(form).slice(0, 12)) {
     const hits = grep(run);
     if (!hits.length) continue;
     const rank = (h) => (/^src\/data\//.test(h) ? 0 : /^src\/generators\//.test(h) ? 1 : 2);
