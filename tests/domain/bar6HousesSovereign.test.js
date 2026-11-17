@@ -20,6 +20,8 @@ import * as V from '../../src/domain/facts/factVocabulary.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { LEAVES } from '../../src/domain/facts/factLayers.js';
 import { resolveSibling } from '../../src/domain/facts/drawDeclared.js';
+import { liveInstitutionNames } from '../../src/domain/facts/liveInstitutionNames.js';
+import { canonStressors } from '../../src/domain/canonicalAccessors.js';
 import { DESC_LATE_SIBLINGS } from '../../src/data/institutionDescVariants.js';
 import { INSTITUTION_SERVICES, SERVICE_DESC_SIBLINGS } from '../../src/data/institutionServices.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
@@ -103,6 +105,39 @@ describe('(a) the atom: a sovereign the record gives, or a war or an occupation 
     expect(LEAVES.sovereign).toMatchObject({ layer: 4 });
     expect(V.atomHolds('sovereign', factsOf(FREE))).toBe(false);
     expect(V.atomHolds('sovereign', factsOf({ ...FREE, institutions: [{ name: 'Royal seat' }] }))).toBe(true);
+  });
+});
+
+/** THE HOMES' READING (the chair's ruling on EG1): the atom as its two homes would read it, `canonStressors` and
+ * `liveInstitutionNames`; the leaf spells both inline (it imports nothing), and this holds the two equal. @param {any} r */
+function byTheHomes(r) {
+  if (!r || typeof r !== 'object') return undefined;
+  if (canonStressors(r).some((/** @type {any} */ e) => !!e && typeof e === 'object' && ['wartime', 'occupied', 'occupation'].includes(String(e.type)))) return true;
+  const ps = r.powerStructure && typeof r.powerStructure === 'object' ? r.powerStructure : {};
+  const t = (/** @type {unknown} */ v) => (typeof v === 'string' ? v : v && typeof v === 'object' ? JSON.stringify(v) : '');
+  return [t(ps.government), t(ps.governingName), ...(Array.isArray(ps.factions) ? ps.factions.map((/** @type {any} */ f) => t(f?.faction)) : []),
+    ...liveInstitutionNames(r), ...(Array.isArray(r.npcs) ? r.npcs.flatMap((/** @type {any} */ n) => [t(n?.role), t(n?.title)]) : []), t(r.history?.founding)]
+    .some((x) => x !== '' && SOVEREIGN_WORDS.test(x));
+}
+
+describe('(a2) the inline readers equal their homes (the leaf imports nothing: EG1)', () => {
+  const steward = { name: "Lord's steward" };
+  const CASES = [
+    FREE, { ...FREE, institutions: [steward] }, { ...FREE, institutions: [{ ...steward, status: 'ruined' }] },
+    { ...FREE, institutions: [{ ...steward, status: 'Destroyed' }] }, { ...FREE, institutions: [{ ...steward, status: 'remnant' }] },
+    { ...FREE, institutions: [{ ...steward, status: 'removed' }] }, { ...FREE, institutions: [{ ...steward, _worldPulseInactive: true }] },
+    { ...FREE, institutions: [{ ...steward, isCustom: true }] }, { ...FREE, institutions: [{ ...steward, source: 'custom' }] },
+    { ...FREE, institutions: [{ ...steward, customDefinitionId: 'x' }] }, { ...FREE, institutions: [{ ...steward, custom: true }] },
+    { ...FREE, institutions: [{ ...steward, customDefinitionCategory: 'x' }] }, { ...FREE, institutions: [null, 'Royal seat', steward] },
+    { ...FREE, stressors: [{ type: 'occupation' }] }, { ...FREE, stress: { type: 'wartime' } }, { ...FREE, stressors: { type: 'occupied' } },
+    { ...FREE, stresses: [{ type: 'wartime' }] }, { ...FREE, stressors: [], stress: [{ type: 'wartime' }] }, { ...FREE, stress: [null, { type: 'famine' }] },
+  ];
+  it('on every branch of the two readers, built here', () => {
+    for (const [i, r] of CASES.entries()) expect({ i, atom: sovereignOf(r) }).toEqual({ i, atom: byTheHomes(r) });
+  });
+  it('on every census town this guard bears (the 720 and the fresh 300 were measured whole at the commit: equal in every town)', () => {
+    const failures = collectSeedFailures(Object.keys(towns), (seed) => { expect(sovereignOf(towns[seed])).toBe(byTheHomes(towns[seed])); });
+    expectNoSeedFailures(failures, 'the leaf reads as its homes do');
   });
 });
 
