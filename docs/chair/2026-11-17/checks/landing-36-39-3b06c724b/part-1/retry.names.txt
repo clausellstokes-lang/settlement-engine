@@ -1,0 +1,2 @@
+tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted
+tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A7 the honesty figures are re-measured and the ride-along has its first population in the chain
