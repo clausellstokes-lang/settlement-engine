@@ -9,7 +9,7 @@
  *           months of stores; its twin takes the towns it is refused in (C18905);
  *   item 2  DS-DEF-12 "CAPACITY: ample" v1 and v3 ("more than enough to get through a hard year") need the food word
  *           Secure or better and no hunger; their twins take Pressured (C41011); the static half's other strong food
- *           lines declare their band (DS-ECO-2 v1, DS-ECO-8 full stores v1 and v4) or name the trade they mean (DS-ECO-3);
+ *           lines declare their band (DS-ECO-2 v1, DS-ECO-8 full stores v1 and v4) or name the trade they mean (DS-ECO-3, in no word of the plenty class);
  *   item 3  the ledger line says money ("purse", "money laid by") and keeps "closes every year ahead" (C12371, C27960);
  *   item 4  DS-ECO-9's one-source line is drawn only where the printed foodways line names its source first (C41850);
  *   item 5  DS-ECO-10's entrepôt line reads the printed import list (C32912);
@@ -106,7 +106,7 @@ describe('items 1 and 2 · the plenty lines declare the band that denies them, o
     expect(theLine(ECO, /^Full stores help \{settlement\}'s fortunes\./).v.marks).toContain('food surplus');
     expect(theLine(ECO, /grows more food than it eats, and what it sells of the surplus/).v.marks).toContain('food surplus');
     expect(ECO.some((x) => /^Plenty passes here\./.test(x.v.text))).toBe(false);
-    theLine(ECO, /^Plenty of trade passes here\. Not much of it stops\.$/);
+    theLine(ECO, /^A great deal of trade passes here\. Not much of it stops\.$/);
   });
 });
 

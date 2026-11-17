@@ -954,7 +954,7 @@ already in register and stand as index 0 of their pools, quoted below.
 
 **SURPLUS × not trade-dependent**
 1. `[ledger · colour]` Heavy traffic runs through {settlement}, but most of it is bound elsewhere and leaves little behind.
-2. `[street · no crisis: under_siege]` Plenty of trade passes here. Not much of it stops.
+2. `[street · no crisis: under_siege]` A great deal of trade passes here. Not much of it stops.
 3. `[visitor · market]` The traffic on these roads outruns the market. What arrives is mostly going somewhere else.
 
 ---

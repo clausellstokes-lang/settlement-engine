@@ -1025,7 +1025,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "Plenty of trade passes here. Not much of it stops.",
+          "text": "A great deal of trade passes here. Not much of it stops.",
           "slots": [],
           "vid": 2
         },
