@@ -1,0 +1,8 @@
+{"id":"C36932","town":"bar0-town-calm-rand-44","sev":"MED","kind":"PAIR","why":"says the 15% unrecorded trade 'does little harm'; the same block says openly-trading merchants are at a disadvantage and the treasury sees none of it","other":"C36935"}
+{"id":"C36900","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"PAIR","why":"Salt works shown yielding exported Preserved foods; its row is marked short of salt and 'No salt reaches the salt works'","other":"C36556"}
+{"id":"C36868","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"PAIR","why":"chain outputs 'Pottery and ceramics' and Roof tiles as a running chain; the Gaps line says clay work stops half-way, no potter finishes it","other":"C36962"}
+{"id":"C37160","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"STATE","why":"'Religious acceptance · hostile' names nothing it is hostile to; Religious Authorities hold a seat, clergy give medical care, and the dean is hospitable","other":""}
+{"id":"C37250","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"mark 'Short of salt.' set in front of the 'How they deal' sentence it does not belong to; the sentence then says he sells by the sack and cart","other":"C36556"}
+{"id":"C37304","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"BROKEN","why":"mark 'Short of grapes.' set in front of the 'How they deal' sentence it does not belong to; the sentence then offers a cask","other":"C36510"}
+{"id":"C37147","town":"bar0-town-calm-rand-44","sev":"LOW","kind":"PAIR","why":"'Legal Infrastructure · None' beside a Law & Governance chain operational via the Town hall with 'Legal services' output, and hearings that hand down penalties","other":"C36919"}
+{"id":"DONE","lines":1416,"blocks":1,"flags":7}
