@@ -1,0 +1,282 @@
+[
+ {
+  "id": "C18905",
+  "rule": "9g.subsistence",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C41011",
+  "rule": "9g.food",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C15153",
+  "rule": "9g.margin",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C41850",
+  "rule": "9g.source",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C20830",
+  "rule": "9h.no-exports",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C32912",
+  "rule": "9h.entrepot",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C23038",
+  "rule": "9i.crews",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C39691",
+  "rule": "9i.crews",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C5430",
+  "rule": "9a.order",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C40850",
+  "rule": "7x.occupied-seat",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C19351",
+  "rule": "10i.pair",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C16768",
+  "rule": "6e.no-higher",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C25601",
+  "rule": "5x.slash",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C0350",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C0351",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C7307",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C7309",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C33342",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C45848",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C18116",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C18655",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C19016",
+  "rule": "10i.pair",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C35191",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C46532",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C24744",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C31302",
+  "rule": "10i.pair",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C9756",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C12371",
+  "rule": "9g.margin",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C27960",
+  "rule": "9g.margin",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C36932",
+  "rule": "-",
+  "verdict": "WEAK",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C11472",
+  "rule": "-",
+  "verdict": "WEAK",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C211337",
+  "rule": "9h.no-exports-record",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C217617",
+  "rule": "9h.no-exports-record",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C93420",
+  "rule": "9h.no-exports",
+  "verdict": "BOTH",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C61967",
+  "rule": "9g.margin",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C58141",
+  "rule": "9g.margin",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C48148",
+  "rule": "6e.crown",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C48270",
+  "rule": "6e.crown",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C48442",
+  "rule": "6e.crown",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C24588",
+  "rule": "low.generation",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ }
+]

@@ -1,0 +1,63 @@
+BAR7-AUDIT-I over 150 towns: 26 counted instances in 25 towns, 12 distinct lines · apart 260
+rule                 towns  inst  distinct  crisis/other   (apart: towns inst distinct)
+10i.pair                 4     4         4           0/4   
+10i.pair-respect         0     0         0           0/0   (3 3 3)
+5x.slash                 3     3         2           0/3   
+5x.slash-list            0     0         0           0/0   (4 4 4)
+6e.crown                 1     1         1           0/1   
+6e.no-higher             2     2         1           1/1   
+6e.realm-world           0     0         0           0/0   (58 58 1)
+7x.occupied-seat         2     2         2           2/0   
+9a.order                 7     7         1           7/0   
+9g.margin-mild           0     0         0           0/0   (1 2 2)
+9g.margin-war            0     0         0           0/0   (7 11 5)
+9g.stores                3     3         1           0/3   
+9h.no-exports            1     1         1           1/0   
+9h.no-exports-record     3     3         1           3/0   
+9h.no-exports-transit     0     0         0           0/0   (1 1 1)
+design.outside           0     0         0           0/0   (22 36 7)
+low.agree                0     0         0           0/0   (13 13 4)
+low.doubled              0     0         0           0/0   (81 106 80)
+low.generation           0     0         0           0/0   (19 19 14)
+low.hook-party           0     0         0           0/0   (7 7 3)
+controls: STANDS found 2/2 · EXPLAINED clean 6/6 · n/a 31
+C18905   9g.subsistence    STANDS    n/a            town not in this render
+C41011   9g.food           STANDS    n/a            town not in this render
+C15153   9g.margin         STANDS    n/a            town not in this render
+C41850   9g.source         STANDS    n/a            town not in this render
+C20830   9h.no-exports     STANDS    n/a            town not in this render
+C32912   9h.entrepot       STANDS    n/a            town not in this render
+C23038   9i.crews          STANDS    n/a            town not in this render
+C39691   9i.crews          STANDS    n/a            town not in this render
+C5430    9a.order          STANDS    n/a            town not in this render
+C40850   7x.occupied-seat  STANDS    n/a            town not in this render
+C19351   10i.pair          STANDS    n/a            town not in this render
+C16768   6e.no-higher      STANDS    n/a            town not in this render
+C25601   5x.slash          STANDS    n/a            town not in this render
+C0350    design.outside    EXPLAINED n/a            town not in this render
+C0351    design.outside    EXPLAINED n/a            town not in this render
+C7307    design.outside    EXPLAINED n/a            town not in this render
+C7309    design.outside    EXPLAINED n/a            town not in this render
+C33342   design.outside    EXPLAINED n/a            town not in this render
+C45848   design.outside    EXPLAINED n/a            town not in this render
+C18116   -                 EXPLAINED n/a            town not in this render
+C18655   -                 EXPLAINED n/a            town not in this render
+C19016   10i.pair          EXPLAINED n/a            town not in this render
+C35191   -                 EXPLAINED n/a            town not in this render
+C46532   -                 EXPLAINED n/a            town not in this render
+C24744   -                 EXPLAINED n/a            town not in this render
+C31302   10i.pair          EXPLAINED n/a            town not in this render
+C9756    -                 EXPLAINED n/a            town not in this render
+C12371   9g.margin         EXPLAINED n/a            town not in this render
+C27960   9g.margin         EXPLAINED n/a            town not in this render
+C36932   -                 WEAK      n/a            town not in this render
+C11472   -                 WEAK      n/a            town not in this render
+C211337  9h.no-exports-record STANDS    found          No significant exports.
+C217617  9h.no-exports-record STANDS    found          No significant exports.
+C93420   9h.no-exports     BOTH      found 9h.no-exports No significant exports.
+C61967   9g.margin         EXPLAINED clean          With a little left over each year, Tyrhammer gets by on a broad base of trades, and every 
+C58141   9g.margin         EXPLAINED clean          Wukou closes every year ahead.
+C48148   6e.crown          EXPLAINED clean          Crown supply carts take what they need first, and local needs come second.
+C48270   6e.crown          EXPLAINED clean          Crown authority over the war flows through military channels now.
+C48442   6e.crown          EXPLAINED clean          Wants Satisfy the crown requisition order without stripping the settlement to the bone
+C24588   low.generation    EXPLAINED clean          The siege left a legacy of trouble in Haian that has never been fully put right, and that 

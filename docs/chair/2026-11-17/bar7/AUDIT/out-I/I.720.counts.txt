@@ -1,0 +1,72 @@
+BAR7-AUDIT-I over 720 towns: 115 counted instances in 102 towns, 45 distinct lines · apart 1372
+rule                 towns  inst  distinct  crisis/other   (apart: towns inst distinct)
+10i.pair                27    29        29          0/29   
+10i.pair-family          0     0         0           0/0   (8 8 8)
+10i.pair-respect         0     0         0           0/0   (7 7 7)
+5x.slash                38    38         2          0/38   
+5x.slash-list            0     0         0           0/0   (6 8 7)
+6e.crown                 7     7         1           0/7   
+6e.founding              0     0         0           0/0   (2 2 1)
+6e.no-higher             8     8         1           0/8   
+6e.realm-world           0     0         0           0/0   (258 258 1)
+6e.war-apart             0     0         0           0/0   (11 24 3)
+7x.occupied-seat         3     3         3           3/0   
+9g.food-soft             0     0         0           0/0   (3 3 1)
+9g.margin                1     2         2           2/0   
+9g.margin-mild           0     0         0           0/0   (4 6 4)
+9g.margin-war            0     0         0           0/0   (10 18 9)
+9g.source                8     8         4           3/5   
+9g.stores                8     8         1           3/5   
+9g.stores-near           0     0         0           0/0   (1 1 1)
+9g.subsistence           3     3         1           1/2   
+9h.no-exports            1     1         1           1/0   
+9h.no-exports-record     3     3         1           3/0   
+9h.no-exports-transit     0     0         0           0/0   (3 3 1)
+9i.crews                 5     5         1           3/2   
+9i.crews-safe            0     0         0           0/0   (6 6 1)
+design.outside           0     0         0           0/0   (86 116 7)
+low.agree                0     0         0           0/0   (42 42 10)
+low.doubled              0     0         0           0/0   (463 751 439)
+low.generation           0     0         0           0/0   (100 100 54)
+low.hook-party           0     0         0           0/0   (19 19 5)
+controls: STANDS found 0/0 · EXPLAINED clean 0/0 · n/a 40
+C18905   9g.subsistence    STANDS    n/a            town not in this render
+C41011   9g.food           STANDS    n/a            town not in this render
+C15153   9g.margin         STANDS    n/a            town not in this render
+C41850   9g.source         STANDS    n/a            town not in this render
+C20830   9h.no-exports     STANDS    n/a            town not in this render
+C32912   9h.entrepot       STANDS    n/a            town not in this render
+C23038   9i.crews          STANDS    n/a            town not in this render
+C39691   9i.crews          STANDS    n/a            town not in this render
+C5430    9a.order          STANDS    n/a            town not in this render
+C40850   7x.occupied-seat  STANDS    n/a            town not in this render
+C19351   10i.pair          STANDS    n/a            town not in this render
+C16768   6e.no-higher      STANDS    n/a            town not in this render
+C25601   5x.slash          STANDS    n/a            town not in this render
+C0350    design.outside    EXPLAINED n/a            town not in this render
+C0351    design.outside    EXPLAINED n/a            town not in this render
+C7307    design.outside    EXPLAINED n/a            town not in this render
+C7309    design.outside    EXPLAINED n/a            town not in this render
+C33342   design.outside    EXPLAINED n/a            town not in this render
+C45848   design.outside    EXPLAINED n/a            town not in this render
+C18116   -                 EXPLAINED n/a            town not in this render
+C18655   -                 EXPLAINED n/a            town not in this render
+C19016   10i.pair          EXPLAINED n/a            town not in this render
+C35191   -                 EXPLAINED n/a            town not in this render
+C46532   -                 EXPLAINED n/a            town not in this render
+C24744   -                 EXPLAINED n/a            town not in this render
+C31302   10i.pair          EXPLAINED n/a            town not in this render
+C9756    -                 EXPLAINED n/a            town not in this render
+C12371   9g.margin         EXPLAINED n/a            town not in this render
+C27960   9g.margin         EXPLAINED n/a            town not in this render
+C36932   -                 WEAK      n/a            town not in this render
+C11472   -                 WEAK      n/a            town not in this render
+C211337  9h.no-exports-record STANDS    n/a            town not in this render
+C217617  9h.no-exports-record STANDS    n/a            town not in this render
+C93420   9h.no-exports     BOTH      n/a            town not in this render
+C61967   9g.margin         EXPLAINED n/a            town not in this render
+C58141   9g.margin         EXPLAINED n/a            town not in this render
+C48148   6e.crown          EXPLAINED n/a            town not in this render
+C48270   6e.crown          EXPLAINED n/a            town not in this render
+C48442   6e.crown          EXPLAINED n/a            town not in this render
+C24588   low.generation    EXPLAINED n/a            town not in this render

@@ -1,0 +1,1745 @@
+[
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "tab": "Summary/Plot Hooks",
+  "line": "The crops failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "sentence": "The crops failed here this year, and what food can still be bought from outside costs more every week.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=teleportation circle importCoverage=7024"
+  },
+  "why": "siege · imports by teleportation circle",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "siege · imports by teleportation circle",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "The crops failed here this year, and what food can still be bought from outside costs more every week."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "tab": "Summary/Plot Hooks",
+  "line": "The crops failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "sentence": "The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=teleportation circle importCoverage=7024"
+  },
+  "why": "siege · imports by teleportation circle",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "siege · imports by teleportation circle",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "The settlement must decide what it can still afford to import, and the merchants are watching it decide."
+ },
+ {
+  "law": "L9",
+  "rule": "9a.order",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "tab": "Systems/Defense",
+  "line": "The garrison keeps order, and more harshly as the food runs down. People quarrel over rations, food is sold under the counter, and the hungry have started to steal. People are hungry and stealing to eat. The garrison spends its days guarding the food. Anyone known to have food hidden away is robbed, or worse.",
+  "sentence": "The garrison keeps order, and more harshly as the food runs down.",
+  "against": {
+   "tab": "Summary/Foundations",
+   "line": "Law & order · Collapsed"
+  },
+  "why": "the page prints Law & order · Collapsed; this unmarked line says the force keeps order",
+  "status": "count",
+  "cause": "crisis",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "The garrison keeps order, and more harshly as the food runs down."
+ },
+ {
+  "law": "L5",
+  "rule": "5x.slash-list",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "tab": "Systems/Outlook",
+  "line": "5 institutions critically impaired by siege: Inns and taverns (district), Caravan masters' exchange, Mills, Weavers/Textile workers, Bakers.",
+  "sentence": "5 institutions critically impaired by siege: Inns and taverns (district), Caravan masters' exchange, Mills, Weavers/Textile workers, Bakers.",
+  "label": "Weavers/Textile workers",
+  "cause": "other",
+  "status": "apart",
+  "against": {
+   "tab": "record",
+   "line": "roster label \"Weavers/Textile workers\""
+  },
+  "why": "the roster label \"Weavers/Textile workers\" is printed as a name inside a sentence",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "5 institutions critically impaired by siege: Inns and taverns (district), Caravan masters' exchange, Mills, Weavers/Textile workers, Bakers."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "tab": "Summary/Plot Hooks",
+  "line": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=teleportation circle importCoverage=2872"
+  },
+  "why": "siege · imports by teleportation circle",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "siege · imports by teleportation circle",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "tab": "Summary/Plot Hooks",
+  "line": "The fishing failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "sentence": "The fishing failed here this year, and what food can still be bought from outside costs more every week.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=teleportation circle importCoverage=2872"
+  },
+  "why": "siege · imports by teleportation circle",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "siege · imports by teleportation circle",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "The fishing failed here this year, and what food can still be bought from outside costs more every week."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "tab": "Summary/Plot Hooks",
+  "line": "The fishing failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "sentence": "The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=teleportation circle importCoverage=2872"
+  },
+  "why": "siege · imports by teleportation circle",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "siege · imports by teleportation circle",
+  "crises": [
+   "under_siege",
+   "famine"
+  ],
+  "form": "The settlement must decide what it can still afford to import, and the merchants are watching it decide."
+ },
+ {
+  "law": "L9",
+  "rule": "9g.margin-war",
+  "town": "bar0-city-wartime-rand-42",
+  "tab": "Systems/Economics",
+  "line": "With a little left over each year, Plavigorod gets by on a broad base of trades, and every year people argue over how to spend it.",
+  "sentence": "With a little left over each year, Plavigorod gets by on a broad base of trades, and every year people argue over how to spend it.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "line": "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up."
+  },
+  "why": "the page prints \"The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.\" and \"Plavigorod had money laid by before this trouble began, and the trouble is still being paid for from it.\" (money laid by: reconciled); this line says the purse runs ahead (apart: the war line alone does not deny a margin)",
+  "status": "apart",
+  "cause": "crisis",
+  "crises": [
+   "wartime"
+  ],
+  "form": "With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it."
+ },
+ {
+  "law": "L9",
+  "rule": "9g.margin-war",
+  "town": "bar0-city-wartime-rand-42",
+  "tab": "World/Daily Life",
+  "line": "Plavigorod closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.",
+  "sentence": "Plavigorod closes every year ahead.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "line": "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up."
+  },
+  "why": "the page prints \"The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.\" and \"Plavigorod had money laid by before this trouble began, and the trouble is still being paid for from it.\" (money laid by: reconciled); this line says the purse runs ahead (apart: the war line alone does not deny a margin)",
+  "status": "apart",
+  "cause": "crisis",
+  "crises": [
+   "wartime"
+  ],
+  "form": "X closes every year ahead."
+ },
+ {
+  "law": "L9",
+  "rule": "9g.margin-war",
+  "town": "bar0-city-wartime-rand-42",
+  "tab": "World/Daily Life",
+  "line": "Plavigorod closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.",
+  "sentence": "The margin is not large and it is dependable, and there are reserves behind it.",
+  "against": {
+   "tab": "Summary/Crisis",
+   "line": "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up."
+  },
+  "why": "the page prints \"The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.\" and \"Plavigorod had money laid by before this trouble began, and the trouble is still being paid for from it.\" (money laid by: reconciled); this line says the purse runs ahead (apart: the war line alone does not deny a margin)",
+  "status": "apart",
+  "cause": "crisis",
+  "crises": [
+   "wartime"
+  ],
+  "form": "The margin is not large and it is dependable, and there are reserves behind it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-city-wartime-rand-42",
+  "tab": "Systems/Economics",
+  "line": "Amber and beeswax · Beeswax candles · Gemstones (local gem deposits exhausted) · Grain · Incense, ritual oil, sacred texts, and vestment cloth (bulk) · Iron · Luxury textiles and exotic goods · Preserved provisions · Quality iron tools · Reeds, peat, and marsh herbs (local wetlands exhausted)",
+  "sentence": "Amber and beeswax · Beeswax candles · Gemstones (local gem deposits exhausted) · Grain · Incense, ritual oil, sacred texts, and vestment cloth (bulk) · Iron · Luxury textiles and exotic goods · Preserved provisions · Quality iron tools · Reeds, peat, and marsh herbs (local wetlands exhausted)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Iron\" inside \"Quality iron tools\""
+  },
+  "why": "the Imports list prints \"Iron\" and again inside \"Quality iron tools\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "wartime"
+  ],
+  "form": "Amber and beeswax · Beeswax candles · Gemstones (local gem deposits exhausted) · Grain · Incense, ritual oil, sacred texts, and vestment cloth (bulk) · Iron · Luxury textiles and exotic goods · Preserved provisions · Quality iron tools · Reeds, peat, and marsh herbs (local wetlands exhausted)"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-city-wartime-rand-42",
+  "tab": "Systems/Economics",
+  "line": "coal · honey · medicinal herbs · timber · Honey and beeswax · Foraged goods · Herbal remedies · Potions and elixirs · Medical care (basic) · Spellcasting (minor) · Luxury manufactured goods · Fine metalwork and jewelry · Bows and crossbows · Arrows (sheaf) · Barrels and containers · Precious metals · Religious services · Hospitality for travellers",
+  "sentence": "coal · honey · medicinal herbs · timber · Honey and beeswax · Foraged goods · Herbal remedies · Potions and elixirs · Medical care (basic) · Spellcasting (minor) · Luxury manufactured goods · Fine metalwork and jewelry · Bows and crossbows · Arrows (sheaf) · Barrels and containers · Precious metals · Religious services · Hospitality for travellers",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "wartime"
+  ],
+  "form": "coal · honey · medicinal herbs · timber · Honey and beeswax · Foraged goods · Herbal remedies · Potions and elixirs · Medical care (basic) · Spellcasting (minor) · Luxury manufactured goods · Fine metalwork and jewelry · Bows and crossbows · Arrows (sheaf) · Barrels and containers · Precious metals · Religious services · Hospitality for travellers"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.hook-party",
+  "town": "bar0-city-wartime-rand-42",
+  "tab": "Summary/Plot Hooks",
+  "line": "A letter found this year tells it this way: the corruption goes higher than anyone yet suspects; the reformers are being used",
+  "sentence": "A letter found this year tells it this way: the corruption goes higher than anyone yet suspects; the reformers are being used",
+  "against": {
+   "tab": "record",
+   "line": "no power, conflict, tension or crisis names reformers"
+  },
+  "why": "names \"the reformers\"; the record holds no such party",
+  "status": "apart",
+  "cause": "crisis",
+  "crises": [
+   "wartime"
+  ],
+  "form": "A letter found this year tells it this way: the corruption goes higher than anyone yet suspects; the reformers are being used"
+ },
+ {
+  "law": "L9",
+  "rule": "9g.margin-mild",
+  "town": "bar0-city-wartime-rand-43",
+  "tab": "Systems/Economics",
+  "line": "With a little left over each year, Quirigich gets by on a broad base of trades, and every year people argue over how to spend it.",
+  "sentence": "With a little left over each year, Quirigich gets by on a broad base of trades, and every year people argue over how to spend it.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Merchant Guild Council signed a requisition order last week that it cannot afford and could not refuse."
+  },
+  "why": "the page prints \"Merchant Guild Council signed a requisition order last week that it cannot afford and could not refuse.\"; this line says a little is left over (mild: the wide read's C61967 reading, apart)",
+  "status": "apart",
+  "cause": "crisis",
+  "crises": [
+   "wartime"
+  ],
+  "form": "With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it."
+ },
+ {
+  "law": "L9",
+  "rule": "9g.margin",
+  "town": "bar0-city-wartime-rand-43",
+  "tab": "World/Daily Life",
+  "line": "Quirigich closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.",
+  "sentence": "Quirigich closes every year ahead.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Merchant Guild Council signed a requisition order last week that it cannot afford and could not refuse."
+  },
+  "why": "the page prints \"Merchant Guild Council signed a requisition order last week that it cannot afford and could not refuse.\"; this line says the town's purse runs ahead with reserves",
+  "status": "count",
+  "cause": "crisis",
+  "crises": [
+   "wartime"
+  ],
+  "form": "X closes every year ahead."
+ },
+ {
+  "law": "L9",
+  "rule": "9g.margin",
+  "town": "bar0-city-wartime-rand-43",
+  "tab": "World/Daily Life",
+  "line": "Quirigich closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.",
+  "sentence": "The margin is not large and it is dependable, and there are reserves behind it.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Merchant Guild Council signed a requisition order last week that it cannot afford and could not refuse."
+  },
+  "why": "the page prints \"Merchant Guild Council signed a requisition order last week that it cannot afford and could not refuse.\"; this line says the town's purse runs ahead with reserves",
+  "status": "count",
+  "cause": "crisis",
+  "crises": [
+   "wartime"
+  ],
+  "form": "The margin is not large and it is dependable, and there are reserves behind it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-city-wartime-rand-43",
+  "tab": "Systems/Economics",
+  "line": "medicinal herbs · honey · grain · flour · game meat · animal hides · Furs and pelts · Honey and beeswax · Foraged goods · Leather goods · Baked goods · Ale (barrel) · Beer (barrel) · Guild-manufactured goods · Preserved foods · Religious services · Education (basic)",
+  "sentence": "medicinal herbs · honey · grain · flour · game meat · animal hides · Furs and pelts · Honey and beeswax · Foraged goods · Leather goods · Baked goods · Ale (barrel) · Beer (barrel) · Guild-manufactured goods · Preserved foods · Religious services · Education (basic)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "wartime"
+  ],
+  "form": "medicinal herbs · honey · grain · flour · game meat · animal hides · Furs and pelts · Honey and beeswax · Foraged goods · Leather goods · Baked goods · Ale (barrel) · Beer (barrel) · Guild-manufactured goods · Preserved foods · Religious services · Education (basic)"
+ },
+ {
+  "law": "L9",
+  "rule": "9g.margin-mild",
+  "town": "bar0-city-wartime-rand-44",
+  "tab": "Systems/Economics",
+  "line": "With a little left over each year, Tihomir gets by on a broad base of trades, and every year people argue over how to spend it.",
+  "sentence": "With a little left over each year, Tihomir gets by on a broad base of trades, and every year people argue over how to spend it.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "City-State Council signed a requisition order last week that it cannot afford and could not refuse."
+  },
+  "why": "the page prints \"City-State Council signed a requisition order last week that it cannot afford and could not refuse.\"; this line says a little is left over (mild: the wide read's C61967 reading, apart)",
+  "status": "apart",
+  "cause": "crisis",
+  "crises": [
+   "wartime"
+  ],
+  "form": "With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.no-higher",
+  "town": "bar0-city-wartime-rand-44",
+  "tab": "World/NPCs",
+  "line": "Wants Satisfy the crown requisition order without stripping the settlement to the bone",
+  "sentence": "Wants Satisfy the crown requisition order without stripping the settlement to the bone",
+  "cause": "crisis",
+  "word": "the crown",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "The settlement governs itself and its surrounding territory as an independent polity."
+  },
+  "status": "count",
+  "own": "Noble Families",
+  "why": "\"the crown\"; the page's government card says \"The settlement governs itself and its surrounding territory as an independent polity.\" (the atom reads a sovereign from \"Noble Families\") (a war does not make the town a crown's)",
+  "crises": [
+   "wartime"
+  ],
+  "form": "Wants Satisfy the crown requisition order without stripping the settlement to the bone"
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-city-wartime-rand-44",
+  "tab": "World/Rumors & News",
+  "line": "What Tihomir has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Tihomir has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "crisis",
+  "word": "the realm",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "The settlement governs itself and its surrounding territory as an independent polity."
+  },
+  "status": "apart",
+  "own": "Noble Families",
+  "why": "\"the realm\"; the page's government card says \"The settlement governs itself and its surrounding territory as an independent polity.\" (the atom reads a sovereign from \"Noble Families\") (a war does not make the town a crown's)",
+  "crises": [
+   "wartime"
+  ],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-city-wartime-rand-44",
+  "tab": "World/History",
+  "line": "Tihomir came through the siege, and what the city built in answer still stands, a legacy that is a generation old.",
+  "sentence": "Tihomir came through the siege, and what the city built in answer still stands, a legacy that is a generation old.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Siege\" yearsAgo 58"
+  },
+  "why": "\"a generation old\" of The Siege, 58 years back",
+  "status": "apart",
+  "cause": "crisis",
+  "age": 58,
+  "crises": [
+   "wartime"
+  ],
+  "form": "X came through the siege, and what the <tier> built in answer still stands, a legacy that is a generation old."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-city-wartime-rand-44",
+  "tab": "Systems/Economics",
+  "line": "Alchemical reagents, rare minerals, and imported inks · Charcoal and fuel · Grain · Grain and salted fish · Incense, ritual oil, and vestment materials · Luxury textiles and exotic goods · Preserved provisions · Salt · Timber",
+  "sentence": "Alchemical reagents, rare minerals, and imported inks · Charcoal and fuel · Grain · Grain and salted fish · Incense, ritual oil, and vestment materials · Luxury textiles and exotic goods · Preserved provisions · Salt · Timber",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Grain\" inside \"Grain and salted fish\""
+  },
+  "why": "the Imports list prints \"Grain\" and again inside \"Grain and salted fish\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "wartime"
+  ],
+  "form": "Alchemical reagents, rare minerals, and imported inks · Charcoal and fuel · Grain · Grain and salted fish · Incense, ritual oil, and vestment materials · Luxury textiles and exotic goods · Preserved provisions · Salt · Timber"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-city-wartime-rand-44",
+  "tab": "Systems/Economics",
+  "line": "game meat · animal hides · Furs and pelts · medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Candles and wax · Preserved foods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron · Religious services · Education (basic)",
+  "sentence": "game meat · animal hides · Furs and pelts · medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Candles and wax · Preserved foods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron · Religious services · Education (basic)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "wartime"
+  ],
+  "form": "game meat · animal hides · Furs and pelts · medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Candles and wax · Preserved foods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron · Religious services · Education (basic)"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-city-wartime-rand-44",
+  "tab": "Systems/Economics",
+  "line": "game meat · animal hides · Furs and pelts · medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Candles and wax · Preserved foods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron · Religious services · Education (basic)",
+  "sentence": "game meat · animal hides · Furs and pelts · medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Candles and wax · Preserved foods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron · Religious services · Education (basic)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"iron\" inside \"Refined iron ingots\""
+  },
+  "why": "the Produced locally list prints \"iron\" and again inside \"Refined iron ingots\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "wartime"
+  ],
+  "form": "game meat · animal hides · Furs and pelts · medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Candles and wax · Preserved foods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron · Religious services · Education (basic)"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.agree",
+  "town": "bar0-hamlet-calm-rand-42",
+  "tab": "Systems/Power",
+  "line": "The Free Elder Council governs Doirewick. Its seat is held by Tlachtga Doherty, the mine captain and Elder. Doirewick tolerates the Free Elder Council and no more. Weak defences is the reason. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "sentence": "Weak defences is the reason.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Weak defences is the reason."
+  },
+  "why": "a plural subject with a singular verb",
+  "status": "apart",
+  "cause": "other",
+  "crises": [],
+  "form": "Weak defences is the reason."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-hamlet-calm-rand-42",
+  "tab": "Systems/Economics",
+  "line": "honey · medicinal herbs · iron · grain · Honey and beeswax · Foraged goods",
+  "sentence": "honey · medicinal herbs · iron · grain · Honey and beeswax · Foraged goods",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "honey · medicinal herbs · iron · grain · Honey and beeswax · Foraged goods"
+ },
+ {
+  "law": "L9",
+  "rule": "9g.subsistence",
+  "town": "bar0-hamlet-calm-rand-43",
+  "tab": "World/Daily Life",
+  "line": "The hamlet is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.",
+  "sentence": "The hamlet is plainly past subsistence.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Subsistence economy"
+  },
+  "why": "the Economics tab prints \"Subsistence economy\"; this line says the place is past subsistence",
+  "status": "count",
+  "cause": "other",
+  "crises": [],
+  "form": "The <tier> is plainly past subsistence."
+ },
+ {
+  "law": "L9",
+  "rule": "9g.stores",
+  "town": "bar0-hamlet-calm-rand-43",
+  "tab": "World/Daily Life",
+  "line": "The hamlet is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.",
+  "sentence": "The buildings are finished rather than patched, and the stores are more than the season needs.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "No granary; about a month and a half in household stores."
+  },
+  "why": "the page prints \"No granary; about a month and a half in household stores.\" (1.5 months: less than a season); this line says the stores are more than the season needs",
+  "status": "count",
+  "cause": "other",
+  "crises": [],
+  "form": "The buildings are finished rather than patched, and the stores are more than the season needs."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-hamlet-calm-rand-43",
+  "tab": "World/Rumors & News",
+  "line": "What Shancheng has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Shancheng has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-hamlet-calm-rand-43",
+  "tab": "Systems/Economics",
+  "line": "Needed, and not brought in: timber (for large vessels), livestock, mountain timber.",
+  "sentence": "Needed, and not brought in: timber (for large vessels), livestock, mountain timber.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed: \"timber (for large vessels)\" inside \"mountain timber\""
+  },
+  "why": "the Needed list prints \"timber (for large vessels)\" and again inside \"mountain timber\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Needed, and not brought in: timber (for large vessels), livestock, mountain timber."
+ },
+ {
+  "law": "L10",
+  "rule": "10i.pair",
+  "town": "bar0-hamlet-calm-rand-44",
+  "tab": "World/Relationships",
+  "line": "Sorcha MacDonald · Professional Rivalry · Nessa Lynch",
+  "sentence": "Sorcha MacDonald · Professional Rivalry · Nessa Lynch | Nessa Lynch · Pragmatic Alliance · Sorcha MacDonald",
+  "cause": "other",
+  "against": {
+   "tab": "record",
+   "line": "tie_npc_seat: npc_seat -> npc_veiled_fbab6a22aab3764e rival (personal) ; tie_npc_veiled_fbab6a22aab3764e: npc_veiled_fbab6a22aab3764e -> npc_seat ally (weak)"
+  },
+  "status": "count",
+  "pair": "npc_seat|npc_veiled_fbab6a22aab3764e",
+  "texts": [
+   "Every gain Sorcha MacDonald makes, Nessa Lynch answers within the season, and people here have learned to expect it.",
+   "Nessa Lynch and Sorcha MacDonald are allies with separate interests. They meet to coordinate and leave by different doors."
+  ],
+  "kinds": "rival/personal + ally/weak",
+  "why": "one pair, 2 ties: rival and ally; the page prints both",
+  "crises": [],
+  "form": "Sorcha MacDonald · Professional Rivalry · Nessa Lynch | Nessa Lynch · Pragmatic Alliance · Sorcha MacDonald"
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-hamlet-calm-rand-44",
+  "tab": "World/Rumors & News",
+  "line": "What Strathmere has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Strathmere has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-hamlet-calm-rand-44",
+  "tab": "Systems/Economics",
+  "line": "honey · medicinal herbs · Honey and beeswax · Foraged goods",
+  "sentence": "honey · medicinal herbs · Honey and beeswax · Foraged goods",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "honey · medicinal herbs · Honey and beeswax · Foraged goods"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-hamlet-under_siege-rand-42",
+  "tab": "Systems/Economics",
+  "line": "medicinal herbs · honey · Honey and beeswax · Foraged goods",
+  "sentence": "medicinal herbs · honey · Honey and beeswax · Foraged goods",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "medicinal herbs · honey · Honey and beeswax · Foraged goods"
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "tab": "World/Rumors & News",
+  "line": "What Vysokoka has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Vysokoka has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "tab": "World/History",
+  "line": "Nobody in Vysokoka has finished putting right the legacy the heresy trials left, and that legacy is a generation old.",
+  "sentence": "Nobody in Vysokoka has finished putting right the legacy the heresy trials left, and that legacy is a generation old.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Heresy Trials\" yearsAgo 57"
+  },
+  "why": "\"a generation old\" of The Heresy Trials, 57 years back",
+  "status": "apart",
+  "cause": "crisis",
+  "age": 57,
+  "crises": [
+   "under_siege"
+  ],
+  "form": "Nobody in X has finished putting right the legacy the heresy trials left, and that legacy is a generation old."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-hamlet-under_siege-rand-43",
+  "tab": "Systems/Economics",
+  "line": "fish · Salted fish · Smoked seafood · Freshwater catch",
+  "sentence": "fish · Salted fish · Smoked seafood · Freshwater catch",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"fish\" inside \"Salted fish\""
+  },
+  "why": "the Produced locally list prints \"fish\" and again inside \"Salted fish\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "fish · Salted fish · Smoked seafood · Freshwater catch"
+ },
+ {
+  "law": "L9",
+  "rule": "9h.no-exports",
+  "town": "bar0-hamlet-under_siege-rand-44",
+  "tab": "Systems/Economics",
+  "line": "No significant exports.",
+  "sentence": "No significant exports.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Mahamala had several trades selling outward before the siege, and none of them can reach a buyer now."
+  },
+  "why": "the page itself prints \"Mahamala had several trades selling outward before the siege, and none of them can reach a buyer now.\"; the export row says there are none, with no mark, on a tab whose legend says its rows are of ordinary times",
+  "status": "count",
+  "cause": "crisis",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "No significant exports."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-hamlet-under_siege-rand-44",
+  "tab": "World/Rumors & News",
+  "line": "What Mahamala has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Mahamala has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [
+   "under_siege"
+  ],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-hamlet-under_siege-rand-44",
+  "tab": "World/History",
+  "line": "The succession crisis left a legacy of trouble in Mahamala that has never been fully put right, and that legacy is a generation old.",
+  "sentence": "The succession crisis left a legacy of trouble in Mahamala that has never been fully put right, and that legacy is a generation old.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Succession Crisis\" yearsAgo 57"
+  },
+  "why": "\"a generation old\" of The Succession Crisis, 57 years back",
+  "status": "apart",
+  "cause": "crisis",
+  "age": 57,
+  "crises": [
+   "under_siege"
+  ],
+  "form": "The succession crisis left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old."
+ },
+ {
+  "law": "L9",
+  "rule": "9i.crews",
+  "town": "bar0-metropolis-calm-rand-42",
+  "tab": "Systems/Defense",
+  "line": "Rival crews at Bjornli are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling. Nothing sold at Bjornli's black market reaches the toll book, so the metropolis loses the dues on every load of contraband and stolen goods.",
+  "sentence": "Rival crews at Bjornli are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "rings": true,
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Visitors can walk anywhere at any hour, and there is little crime; the garrison and city watch sees to that."
+  },
+  "why": "the page prints \"Visitors can walk anywhere at any hour, and there is little crime; the garrison and city watch sees to that.\"; this line says rival crews brawl for the streets",
+  "status": "count",
+  "cause": "other",
+  "crises": [],
+  "form": "Rival crews at X are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-42",
+  "tab": "Systems/Economics",
+  "line": "Clay and raw materials · Grain · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land depleted) · Luxury materials · Medicinal herbs · Paper · Paper materials · Salt · Wool",
+  "sentence": "Clay and raw materials · Grain · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land depleted) · Luxury materials · Medicinal herbs · Paper · Paper materials · Salt · Wool",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Paper\" inside \"Paper materials\""
+  },
+  "why": "the Imports list prints \"Paper\" and again inside \"Paper materials\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Clay and raw materials · Grain · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land depleted) · Luxury materials · Medicinal herbs · Paper · Paper materials · Salt · Wool"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-42",
+  "tab": "Systems/Economics",
+  "line": "Clay and raw materials · Grain · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land depleted) · Luxury materials · Medicinal herbs · Paper · Paper materials · Salt · Wool",
+  "sentence": "Clay and raw materials · Grain · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land depleted) · Luxury materials · Medicinal herbs · Paper · Paper materials · Salt · Wool",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Paper materials\" inside \"Paper\""
+  },
+  "why": "the Imports list prints \"Paper materials\" and again inside \"Paper\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Clay and raw materials · Grain · Iron ore (local iron mines exhausted) · Livestock and dairy (local grazing land depleted) · Luxury materials · Medicinal herbs · Paper · Paper materials · Salt · Wool"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-42",
+  "tab": "Systems/Economics",
+  "line": "Needed, and not brought in: timber, stone, grapes, copper ore, mountain timber.",
+  "sentence": "Needed, and not brought in: timber, stone, grapes, copper ore, mountain timber.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed: \"timber\" inside \"mountain timber\""
+  },
+  "why": "the Needed list prints \"timber\" and again inside \"mountain timber\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Needed, and not brought in: timber, stone, grapes, copper ore, mountain timber."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-metropolis-calm-rand-43",
+  "tab": "World/Rumors & News",
+  "line": "What Jómsmo has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Jómsmo has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "L5",
+  "rule": "5x.slash",
+  "town": "bar0-metropolis-calm-rand-43",
+  "tab": "Systems/Services",
+  "line": "Jómsmo's Weavers/Textile workers can offer less the longer its supplies stay short, and nobody is putting it right.",
+  "sentence": "Jómsmo's Weavers/Textile workers can offer less the longer its supplies stay short, and nobody is putting it right.",
+  "label": "Weavers/Textile workers",
+  "cause": "other",
+  "status": "count",
+  "against": {
+   "tab": "record",
+   "line": "roster label \"Weavers/Textile workers\""
+  },
+  "why": "the roster label \"Weavers/Textile workers\" is printed as a name inside a sentence",
+  "crises": [],
+  "form": "X's Weavers/Textile workers can offer less the longer its supplies stay short, and nobody is putting it right."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-43",
+  "tab": "Systems/Economics",
+  "line": "Charcoal and fuel · Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Preserved provisions · Salt · Stone · Timber (local mountain timber cleared)",
+  "sentence": "Charcoal and fuel · Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Preserved provisions · Salt · Stone · Timber (local mountain timber cleared)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Paper\" inside \"Paper materials\""
+  },
+  "why": "the Imports list prints \"Paper\" and again inside \"Paper materials\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Charcoal and fuel · Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Preserved provisions · Salt · Stone · Timber (local mountain timber cleared)"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-43",
+  "tab": "Systems/Economics",
+  "line": "Charcoal and fuel · Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Preserved provisions · Salt · Stone · Timber (local mountain timber cleared)",
+  "sentence": "Charcoal and fuel · Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Preserved provisions · Salt · Stone · Timber (local mountain timber cleared)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Paper materials\" inside \"Paper\""
+  },
+  "why": "the Imports list prints \"Paper materials\" and again inside \"Paper\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Charcoal and fuel · Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Preserved provisions · Salt · Stone · Timber (local mountain timber cleared)"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-43",
+  "tab": "Systems/Economics",
+  "line": "iron · metalwork · medicinal herbs · honey · Candles and wax · Religious services · Education (basic) · Defence services · Weapons training · Medical treatment · Surgery · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron",
+  "sentence": "iron · metalwork · medicinal herbs · honey · Candles and wax · Religious services · Education (basic) · Defence services · Weapons training · Medical treatment · Surgery · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"iron\" inside \"Refined iron ingots\""
+  },
+  "why": "the Produced locally list prints \"iron\" and again inside \"Refined iron ingots\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "iron · metalwork · medicinal herbs · honey · Candles and wax · Religious services · Education (basic) · Defence services · Weapons training · Medical treatment · Surgery · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-44",
+  "tab": "Systems/Economics",
+  "line": "Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Precious metal veins · Preserved provisions · Reeds, peat, and marsh herbs (local wetlands exhausted) · Stone · Timber (local managed woodland cleared)",
+  "sentence": "Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Precious metal veins · Preserved provisions · Reeds, peat, and marsh herbs (local wetlands exhausted) · Stone · Timber (local managed woodland cleared)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Paper\" inside \"Paper materials\""
+  },
+  "why": "the Imports list prints \"Paper\" and again inside \"Paper materials\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Precious metal veins · Preserved provisions · Reeds, peat, and marsh herbs (local wetlands exhausted) · Stone · Timber (local managed woodland cleared)"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-44",
+  "tab": "Systems/Economics",
+  "line": "Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Precious metal veins · Preserved provisions · Reeds, peat, and marsh herbs (local wetlands exhausted) · Stone · Timber (local managed woodland cleared)",
+  "sentence": "Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Precious metal veins · Preserved provisions · Reeds, peat, and marsh herbs (local wetlands exhausted) · Stone · Timber (local managed woodland cleared)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Paper materials\" inside \"Paper\""
+  },
+  "why": "the Imports list prints \"Paper materials\" and again inside \"Paper\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Clay and raw materials · Grain · Luxury textiles and exotic goods · Paper · Paper materials · Precious metal veins · Preserved provisions · Reeds, peat, and marsh herbs (local wetlands exhausted) · Stone · Timber (local managed woodland cleared)"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-44",
+  "tab": "Systems/Economics",
+  "line": "medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Medical care (basic) · Spellcasting (minor) · Candles and wax · Religious services · Education (basic) · Hospitality for travellers · Preserved foods · Leather goods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Finished clothing · Dyed cloth · Refined iron ingots · Pig iron",
+  "sentence": "medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Medical care (basic) · Spellcasting (minor) · Candles and wax · Religious services · Education (basic) · Hospitality for travellers · Preserved foods · Leather goods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Finished clothing · Dyed cloth · Refined iron ingots · Pig iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Medical care (basic) · Spellcasting (minor) · Candles and wax · Religious services · Education (basic) · Hospitality for travellers · Preserved foods · Leather goods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Finished clothing · Dyed cloth · Refined iron ingots · Pig iron"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-metropolis-calm-rand-44",
+  "tab": "Systems/Economics",
+  "line": "medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Medical care (basic) · Spellcasting (minor) · Candles and wax · Religious services · Education (basic) · Hospitality for travellers · Preserved foods · Leather goods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Finished clothing · Dyed cloth · Refined iron ingots · Pig iron",
+  "sentence": "medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Medical care (basic) · Spellcasting (minor) · Candles and wax · Religious services · Education (basic) · Hospitality for travellers · Preserved foods · Leather goods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Finished clothing · Dyed cloth · Refined iron ingots · Pig iron",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"iron\" inside \"Refined iron ingots\""
+  },
+  "why": "the Produced locally list prints \"iron\" and again inside \"Refined iron ingots\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "medicinal herbs · honey · iron · metalwork · livestock · wool · dairy · Honey and beeswax · Foraged goods · Medical care (basic) · Spellcasting (minor) · Candles and wax · Religious services · Education (basic) · Hospitality for travellers · Preserved foods · Leather goods · Cavalry mounts · Draft horses · Processed textiles · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Finished clothing · Dyed cloth · Refined iron ingots · Pig iron"
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-thorp-calm-rand-42",
+  "tab": "World/Rumors & News",
+  "line": "What Ripasaltus has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Ripasaltus has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-thorp-calm-rand-43",
+  "tab": "Systems/Economics",
+  "line": "medicinal herbs · honey · Honey and beeswax · Foraged goods",
+  "sentence": "medicinal herbs · honey · Honey and beeswax · Foraged goods",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "medicinal herbs · honey · Honey and beeswax · Foraged goods"
+ },
+ {
+  "law": "L9",
+  "rule": "9h.entrepot",
+  "town": "bar0-thorp-calm-rand-44",
+  "tab": "Systems/Economics",
+  "line": "Shattserai sells on goods it never made: some of what leaves the thorp entered it as imports the same season.",
+  "sentence": "Shattserai sells on goods it never made: some of what leaves the thorp entered it as imports the same season.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "No recorded imports."
+  },
+  "why": "the Imports row prints \"No recorded imports.\"; this line says goods leave that entered as imports (the record holds isEntrepot; the page prints no transit good)",
+  "status": "count",
+  "cause": "other",
+  "crises": [],
+  "form": "X sells on goods it never made: some of what leaves the <tier> entered it as imports the same season."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-thorp-calm-rand-44",
+  "tab": "World/Rumors & News",
+  "line": "What Shattserai has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Shattserai has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-thorp-calm-rand-44",
+  "tab": "World/History",
+  "line": "In the wake of the debt crisis, Shattserai settled into a shape that still holds, a legacy that is a generation old, though much has changed since.",
+  "sentence": "In the wake of the debt crisis, Shattserai settled into a shape that still holds, a legacy that is a generation old, though much has changed since.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Debt Crisis\" yearsAgo 57"
+  },
+  "why": "\"a generation old\" of The Debt Crisis, 57 years back",
+  "status": "apart",
+  "cause": "other",
+  "age": 57,
+  "crises": [],
+  "form": "In the wake of the debt crisis, X settled into a shape that still holds, a legacy that is a generation old, though much has changed since."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.agree",
+  "town": "bar0-thorp-calm-rand-44",
+  "tab": "Systems/Power",
+  "line": "The Household Council governs Shattserai. Its seat is held by Mansur al-Rahman, the eldest householder. Shattserai tolerates the Household Council and no more. Weak defences is the reason. A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.",
+  "sentence": "Weak defences is the reason.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Weak defences is the reason."
+  },
+  "why": "a plural subject with a singular verb",
+  "status": "apart",
+  "cause": "other",
+  "crises": [],
+  "form": "Weak defences is the reason."
+ },
+ {
+  "law": "L9",
+  "rule": "9g.food-soft",
+  "town": "bar0-town-calm-rand-42",
+  "tab": "Summary/Overview",
+  "line": "You reach Großdorf against a tide of people leaving it. The market has ended for the day, and the settlement is exhaling its visitors back onto the roads with their purchases and their news. A wall circuit, unremarkable but intact. Großdorf is loud with horses: shod, sold, hired and fed at every hour. A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud. Even the outbuildings have new roofs, and nobody looks hungry.",
+  "sentence": "Even the outbuildings have new roofs, and nobody looks hungry.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 2,420 lbs/day+ 774 imported+ 29 by divine provision · Need: 3,266 lbs/day · Short: 43 lbs/day"
+  },
+  "why": "the page prints \"Production: 2,420 lbs/day+ 774 imported+ 29 by divine provision · Need: 3,266 lbs/day · Short: 43 lbs/day\"; this softer line says nobody goes hungry (a matter of degree: apart)",
+  "status": "apart",
+  "cause": "other",
+  "crises": [],
+  "form": "Even the outbuildings have new roofs, and nobody looks hungry."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-town-calm-rand-42",
+  "tab": "Systems/Economics",
+  "line": "Advanced weapons and armour (bulk contract) · Alchemical reagents and scribal supplies · Grain · Incense, ritual oil, and vestment materials · Iron · Mail and iron fittings · Quality iron tools and fittings",
+  "sentence": "Advanced weapons and armour (bulk contract) · Alchemical reagents and scribal supplies · Grain · Incense, ritual oil, and vestment materials · Iron · Mail and iron fittings · Quality iron tools and fittings",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Iron\" inside \"Mail and iron fittings\""
+  },
+  "why": "the Imports list prints \"Iron\" and again inside \"Mail and iron fittings\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Advanced weapons and armour (bulk contract) · Alchemical reagents and scribal supplies · Grain · Incense, ritual oil, and vestment materials · Iron · Mail and iron fittings · Quality iron tools and fittings"
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-town-calm-rand-42",
+  "tab": "Summary/Plot Hooks",
+  "line": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=crossroads trade importCoverage=774"
+  },
+  "why": "no siege · grain imported",
+  "status": "apart",
+  "cause": "other",
+  "case": "no siege · grain imported",
+  "crises": [],
+  "form": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-town-calm-rand-43",
+  "tab": "Systems/Economics",
+  "line": "Advanced weapons and armour (bulk contract) · Fine linen for vestments · Game and hides (local hunting grounds exhausted) · Incense and ritual oil · Incense, ritual oil, and vestment materials · Salt",
+  "sentence": "Advanced weapons and armour (bulk contract) · Fine linen for vestments · Game and hides (local hunting grounds exhausted) · Incense and ritual oil · Incense, ritual oil, and vestment materials · Salt",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Incense and ritual oil\" inside \"Incense, ritual oil, and vestment materials\""
+  },
+  "why": "the Imports list prints \"Incense and ritual oil\" and again inside \"Incense, ritual oil, and vestment materials\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-phrase",
+  "crises": [],
+  "form": "Advanced weapons and armour (bulk contract) · Fine linen for vestments · Game and hides (local hunting grounds exhausted) · Incense and ritual oil · Incense, ritual oil, and vestment materials · Salt"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-town-calm-rand-43",
+  "tab": "Systems/Economics",
+  "line": "medicinal herbs · honey · grain · flour · Honey and beeswax · Foraged goods · Baked goods · Religious services · Education (basic)",
+  "sentence": "medicinal herbs · honey · grain · flour · Honey and beeswax · Foraged goods · Baked goods · Religious services · Education (basic)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"honey\" inside \"Honey and beeswax\""
+  },
+  "why": "the Produced locally list prints \"honey\" and again inside \"Honey and beeswax\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "medicinal herbs · honey · grain · flour · Honey and beeswax · Foraged goods · Baked goods · Religious services · Education (basic)"
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-town-occupied-rand-42",
+  "tab": "World/History",
+  "line": "Nobody in Mahakund has finished putting right the legacy the tyranny left, and that legacy is a generation old.",
+  "sentence": "Nobody in Mahakund has finished putting right the legacy the tyranny left, and that legacy is a generation old.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Tyranny\" yearsAgo 60"
+  },
+  "why": "\"a generation old\" of The Tyranny, 60 years back",
+  "status": "apart",
+  "cause": "crisis",
+  "age": 60,
+  "crises": [
+   "occupied"
+  ],
+  "form": "Nobody in X has finished putting right the legacy the tyranny left, and that legacy is a generation old."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-town-occupied-rand-42",
+  "tab": "Systems/Economics",
+  "line": "wool · livestock · dairy · animal hides · Processed textiles · Guild-manufactured goods · Fine wool cloth · Religious services · Education (basic)",
+  "sentence": "wool · livestock · dairy · animal hides · Processed textiles · Guild-manufactured goods · Fine wool cloth · Religious services · Education (basic)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"wool\" inside \"Fine wool cloth\""
+  },
+  "why": "the Produced locally list prints \"wool\" and again inside \"Fine wool cloth\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "occupied"
+  ],
+  "form": "wool · livestock · dairy · animal hides · Processed textiles · Guild-manufactured goods · Fine wool cloth · Religious services · Education (basic)"
+ },
+ {
+  "law": "L9",
+  "rule": "9i.crews",
+  "town": "bar0-town-occupied-rand-43",
+  "tab": "Systems/Defense",
+  "line": "Rival crews at Gangapalli are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "sentence": "Rival crews at Gangapalli are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "rings": false,
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight."
+  },
+  "why": "the page prints \"Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.\"; this line says rival crews brawl for the streets (and the record holds no rival rings: the key is a lone house's)",
+  "status": "count",
+  "cause": "crisis",
+  "crises": [
+   "occupied"
+  ],
+  "form": "Rival crews at X are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-town-occupied-rand-43",
+  "tab": "World/History",
+  "line": "Nobody in Gangapalli has finished putting right the legacy the iron dispute left, and that legacy is a generation old.",
+  "sentence": "Nobody in Gangapalli has finished putting right the legacy the iron dispute left, and that legacy is a generation old.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Iron Dispute\" yearsAgo 59"
+  },
+  "why": "\"a generation old\" of The Iron Dispute, 59 years back",
+  "status": "apart",
+  "cause": "crisis",
+  "age": 59,
+  "crises": [
+   "occupied"
+  ],
+  "form": "Nobody in X has finished putting right the legacy the iron dispute left, and that legacy is a generation old."
+ },
+ {
+  "law": "L9",
+  "rule": "9g.food",
+  "town": "bar0-town-occupied-rand-44",
+  "tab": "Systems/Outlook",
+  "line": "Traders seldom reach Castelsinum, and people there seldom miss them: the town has more than enough to get through a hard year.",
+  "sentence": "Traders seldom reach Castelsinum, and people there seldom miss them: the town has more than enough to get through a hard year.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Production: 2,580 lbs/day+ 645 imported · Need: 3,475 lbs/day · Short: 250 lbs/day"
+  },
+  "why": "the page prints \"Production: 2,580 lbs/day+ 645 imported · Need: 3,475 lbs/day · Short: 250 lbs/day\"; this line says the place has food to spare",
+  "status": "count",
+  "cause": "crisis",
+  "crises": [
+   "occupied"
+  ],
+  "form": "Traders seldom reach X, and people there seldom miss them: the <tier> has more than enough to get through a hard year."
+ },
+ {
+  "law": "L7",
+  "rule": "7x.occupied-seat",
+  "town": "bar0-town-occupied-rand-44",
+  "tab": "Systems/Power",
+  "line": "At Castelsinum one audience with the Feudal Appointee gets a decision, good or bad, and it comes quickly.",
+  "sentence": "At Castelsinum one audience with the Feudal Appointee gets a decision, good or bad, and it comes quickly.",
+  "cause": "crisis",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Feudal Appointee carries out what Occupation Authority decides."
+  },
+  "status": "count",
+  "why": "the page prints \"Feudal Appointee carries out what Occupation Authority decides.\"; this unmarked line has the town's own seat deciding freely under the occupation",
+  "crises": [
+   "occupied"
+  ],
+  "form": "At X one audience with the Feudal Appointee gets a decision, good or bad, and it comes quickly."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-town-occupied-rand-44",
+  "tab": "Systems/Economics",
+  "line": "Dressed stone (local quarry depleted) · Grain · Incense and ritual oil · Incense, ritual oil, and vestment materials · Iron · Lorica segmentata fittings · Raw hides and animal products · Replacement arms and basic equipment",
+  "sentence": "Dressed stone (local quarry depleted) · Grain · Incense and ritual oil · Incense, ritual oil, and vestment materials · Iron · Lorica segmentata fittings · Raw hides and animal products · Replacement arms and basic equipment",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Imports: \"Incense and ritual oil\" inside \"Incense, ritual oil, and vestment materials\""
+  },
+  "why": "the Imports list prints \"Incense and ritual oil\" and again inside \"Incense, ritual oil, and vestment materials\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-phrase",
+  "crises": [
+   "occupied"
+  ],
+  "form": "Dressed stone (local quarry depleted) · Grain · Incense and ritual oil · Incense, ritual oil, and vestment materials · Iron · Lorica segmentata fittings · Raw hides and animal products · Replacement arms and basic equipment"
+ },
+ {
+  "law": "L9",
+  "rule": "9g.source",
+  "town": "bar0-village-calm-rand-42",
+  "tab": "Systems/Economics",
+  "line": "Lykopetra's own food comes first of all from its fishing, so one bad year for the fishing is felt across the whole village.",
+  "sentence": "Lykopetra's own food comes first of all from its fishing, so one bad year for the fishing is felt across the whole village.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Its own fields give it grain, and beyond that its food is fish from the local waters."
+  },
+  "why": "the page prints \"Its own fields give it grain, and beyond that its food is fish from the local waters.\" (its fields first); this line says its food comes first of all from its fishing",
+  "status": "count",
+  "cause": "other",
+  "crises": [],
+  "form": "X's own food comes first of all from its fishing, so one bad year for the fishing is felt across the whole <tier>."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-village-calm-rand-42",
+  "tab": "World/History",
+  "line": "Lykopetra still keeps the shape the village took after the shortage, and that shape is a generation old, though the times have moved on.",
+  "sentence": "Lykopetra still keeps the shape the village took after the shortage, and that shape is a generation old, though the times have moved on.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Shortage\" yearsAgo 53"
+  },
+  "why": "\"a generation old\" of The Shortage, 53 years back",
+  "status": "apart",
+  "cause": "other",
+  "age": 53,
+  "crises": [],
+  "form": "X still keeps the shape the <tier> took after the shortage, and that shape is a generation old, though the times have moved on."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.agree",
+  "town": "bar0-village-calm-rand-42",
+  "tab": "Systems/Power",
+  "line": "Matrona Dalassenos, the boat-master and Elder, holds the seat of the Elder Council. The Elder Council governs Lykopetra. Weak defences keeps Lykopetra from more than tolerating the Elder Council. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "sentence": "Weak defences keeps Lykopetra from more than tolerating the Elder Council.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Weak defences keeps Lykopetra from more than tolerating the Elder Council."
+  },
+  "why": "a plural subject with a singular verb",
+  "status": "apart",
+  "cause": "other",
+  "crises": [],
+  "form": "Weak defences keeps X from more than tolerating the Elder Council."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-village-calm-rand-42",
+  "tab": "Systems/Economics",
+  "line": "Needed, and not brought in: timber (for large vessels), medicinal herbs, mountain timber, mineral hot springs.",
+  "sentence": "Needed, and not brought in: timber (for large vessels), medicinal herbs, mountain timber, mineral hot springs.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed: \"timber (for large vessels)\" inside \"mountain timber\""
+  },
+  "why": "the Needed list prints \"timber (for large vessels)\" and again inside \"mountain timber\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Needed, and not brought in: timber (for large vessels), medicinal herbs, mountain timber, mineral hot springs."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-village-calm-rand-43",
+  "tab": "World/Rumors & News",
+  "line": "What Petenucan has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Petenucan has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-village-calm-rand-43",
+  "tab": "World/History",
+  "line": "Nobody in Petenucan has finished putting right the legacy the shortage left, and that legacy is a generation old.",
+  "sentence": "Nobody in Petenucan has finished putting right the legacy the shortage left, and that legacy is a generation old.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Shortage\" yearsAgo 44"
+  },
+  "why": "\"a generation old\" of The Shortage, 44 years back",
+  "status": "apart",
+  "cause": "other",
+  "age": 44,
+  "crises": [],
+  "form": "Nobody in X has finished putting right the legacy the shortage left, and that legacy is a generation old."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-village-calm-rand-44",
+  "tab": "Systems/Economics",
+  "line": "Needed, and not brought in: timber, stone, metals, luxury goods, timber, mountain timber, mineral hot springs.",
+  "sentence": "Needed, and not brought in: timber, stone, metals, luxury goods, timber, mountain timber, mineral hot springs.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed: \"timber\" inside \"mountain timber\""
+  },
+  "why": "the Needed list prints \"timber\" and again inside \"mountain timber\"",
+  "status": "apart",
+  "cause": "other",
+  "kind": "within-word",
+  "crises": [],
+  "form": "Needed, and not brought in: timber, stone, metals, luxury goods, timber, mountain timber, mineral hot springs."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-village-calm-rand-44",
+  "tab": "Systems/Economics",
+  "line": "Needed, and not brought in: timber, stone, metals, luxury goods, timber, mountain timber, mineral hot springs.",
+  "sentence": "Needed, and not brought in: timber, stone, metals, luxury goods, timber, mountain timber, mineral hot springs.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed: \"timber\" twice"
+  },
+  "why": "the Needed list prints \"timber\" twice",
+  "status": "apart",
+  "cause": "other",
+  "kind": "exact",
+  "crises": [],
+  "form": "Needed, and not brought in: timber, stone, metals, luxury goods, timber, mountain timber, mineral hot springs."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-village-famine-rand-42",
+  "tab": "World/Rumors & News",
+  "line": "What Rundfeld has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Rundfeld has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [
+   "famine"
+  ],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.generation",
+  "town": "bar0-village-famine-rand-42",
+  "tab": "World/History",
+  "line": "The great fire left a legacy of trouble in Rundfeld that has never been fully put right, and that legacy is a generation old.",
+  "sentence": "The great fire left a legacy of trouble in Rundfeld that has never been fully put right, and that legacy is a generation old.",
+  "against": {
+   "tab": "record",
+   "line": "history.historicalEvents \"The Great Fire\" yearsAgo 49"
+  },
+  "why": "\"a generation old\" of The Great Fire, 49 years back",
+  "status": "apart",
+  "cause": "crisis",
+  "age": 49,
+  "crises": [
+   "famine"
+  ],
+  "form": "The great fire left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old."
+ },
+ {
+  "law": "LOW",
+  "rule": "low.doubled",
+  "town": "bar0-village-famine-rand-42",
+  "tab": "Systems/Economics",
+  "line": "flour · clay · pottery · Flour and meal · Religious services · Education (basic)",
+  "sentence": "flour · clay · pottery · Flour and meal · Religious services · Education (basic)",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Produced locally: \"flour\" inside \"Flour and meal\""
+  },
+  "why": "the Produced locally list prints \"flour\" and again inside \"Flour and meal\"",
+  "status": "apart",
+  "cause": "crisis",
+  "kind": "within-word",
+  "crises": [
+   "famine"
+  ],
+  "form": "flour · clay · pottery · Flour and meal · Religious services · Education (basic)"
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-village-famine-rand-42",
+  "tab": "Summary/Plot Hooks",
+  "line": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=river trade importCoverage=171"
+  },
+  "why": "no siege · grain imported",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "no siege · grain imported",
+  "crises": [
+   "famine"
+  ],
+  "form": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-village-famine-rand-42",
+  "tab": "Summary/Plot Hooks",
+  "line": "The fishing failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "sentence": "The fishing failed here this year, and what food can still be bought from outside costs more every week.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=river trade importCoverage=171"
+  },
+  "why": "no siege · grain imported",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "no siege · grain imported",
+  "crises": [
+   "famine"
+  ],
+  "form": "The fishing failed here this year, and what food can still be bought from outside costs more every week."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-village-famine-rand-42",
+  "tab": "Summary/Plot Hooks",
+  "line": "The fishing failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "sentence": "The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=river trade importCoverage=171"
+  },
+  "why": "no siege · grain imported",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "no siege · grain imported",
+  "crises": [
+   "famine"
+  ],
+  "form": "The settlement must decide what it can still afford to import, and the merchants are watching it decide."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-village-famine-rand-43",
+  "tab": "World/Rumors & News",
+  "line": "What Kulubtitlan has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Kulubtitlan has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [
+   "famine"
+  ],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-village-famine-rand-43",
+  "tab": "Summary/Plot Hooks",
+  "line": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=river trade importCoverage=191"
+  },
+  "why": "no siege · grain imported",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "no siege · grain imported",
+  "crises": [
+   "famine"
+  ],
+  "form": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-village-famine-rand-43",
+  "tab": "Summary/Plot Hooks",
+  "line": "The fishing failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "sentence": "The fishing failed here this year, and what food can still be bought from outside costs more every week.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=river trade importCoverage=191"
+  },
+  "why": "no siege · grain imported",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "no siege · grain imported",
+  "crises": [
+   "famine"
+  ],
+  "form": "The fishing failed here this year, and what food can still be bought from outside costs more every week."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-village-famine-rand-43",
+  "tab": "Summary/Plot Hooks",
+  "line": "The fishing failed here this year, and what food can still be bought from outside costs more every week. The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "sentence": "The settlement must decide what it can still afford to import, and the merchants are watching it decide.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=river trade importCoverage=191"
+  },
+  "why": "no siege · grain imported",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "no siege · grain imported",
+  "crises": [
+   "famine"
+  ],
+  "form": "The settlement must decide what it can still afford to import, and the merchants are watching it decide."
+ },
+ {
+  "law": "L6",
+  "rule": "6e.realm-world",
+  "town": "bar0-village-famine-rand-44",
+  "tab": "World/Rumors & News",
+  "line": "What Kamenvich has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.",
+  "sentence": "What Kamenvich has heard from the rest of the realm, true or not, as the news reaches it.",
+  "cause": "other",
+  "word": "the realm",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people and founding name no lord, crown or noble"
+  },
+  "status": "apart",
+  "own": null,
+  "why": "\"the realm\"; the town's own facts give no sovereign",
+  "crises": [
+   "famine"
+  ],
+  "form": "What X has heard from the rest of the realm, true or not, as the news reaches it."
+ },
+ {
+  "law": "LOW",
+  "rule": "design.outside",
+  "town": "bar0-village-famine-rand-44",
+  "tab": "Summary/Plot Hooks",
+  "line": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "sentence": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+  "against": {
+   "tab": "record",
+   "line": "foodBalance.importChannel=river trade importCoverage=190"
+  },
+  "why": "no siege · grain imported",
+  "status": "apart",
+  "cause": "crisis",
+  "case": "no siege · grain imported",
+  "crises": [
+   "famine"
+  ],
+  "form": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain."
+ }
+]
