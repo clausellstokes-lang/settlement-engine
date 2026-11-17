@@ -28,8 +28,14 @@ function plantPlace(o = {}) {
     tier: o.tier || 'city',
     config: { tradeRouteAccess: o.route || 'road', terrainType: o.terrain || 'coastal', magicExists: o.magic !== false, priorityMagic: o.magic === false ? 0 : 50, contentProfile: 'grounded' },
     powerStructure: { government: o.government || 'Feudal Stewardship', factions: [{ faction: COUNCIL, isGoverning: true }, { faction: GUILD }] },
+    institutions: PLANTED_HOUSES.map((name) => ({ name })),
+    economicState: { foodSecurity: { foodRecord: { foodSources: ['grain', 'livestock'] } } },
   };
 }
+/** The houses a planted place holds (each a declared atom a row may need: a tavern, a watch, a healer, a church and a shrine, a mill). */
+const PLANTED_HOUSES = ['Tavern', 'Village watch', 'Healer', 'Parish church', 'Village shrine', 'Mill'];
+/** @param {Record<string, any>} place @param {...string} names */
+const withoutHouse = (place, ...names) => ({ ...place, institutions: place.institutions.filter((/** @type {any} */ i) => !names.includes(i.name)) });
 const NEUTRAL = { dominant: 'diligent', flaw: 'envious', modifier: 'pragmatic', disposition: 'transactional' };
 /** @param {string} id @param {Record<string, any>} [o] */
 function plantCard(id, o = {}) {
@@ -167,6 +173,15 @@ describe('SECRETS-1: every row stands for some planted roster, and only where it
         else if (a === 'route: isolated') denied = { ...place, config: { ...place.config, tradeRouteAccess: 'isolated' } };
         else if (a === 'ruler: lord') denied = { ...place, powerStructure: { ...place.powerStructure, government: 'Town Mayor' } };
         else if (a === 'coast') denied = { ...place, config: { ...place.config, terrainType: 'plains', tradeRouteAccess: 'road' } };
+        else if (a === 'navigable') denied = { ...place, config: { ...place.config, terrainType: 'plains', tradeRouteAccess: 'road' } };
+        else if (a === 'institution: tavern') denied = withoutHouse(place, 'Tavern');
+        else if (a === 'watch') denied = withoutHouse(place, 'Village watch');
+        else if (a === 'healer') denied = withoutHouse(place, 'Healer');
+        else if (a === 'church' || a === 'sacredHouse') denied = withoutHouse(place, 'Parish church', 'Village shrine');
+        else if (a === 'institution: mill') denied = withoutHouse(place, 'Mill');
+        else if (a === 'livestock') denied = { ...place, economicState: { foodSecurity: { foodRecord: { foodSources: ['grain', 'fish'] } } } };
+        else if (a === 'crisis: threat') denied = { ...place, stress: [{ type: 'under_siege' }], config: { ...place.config, selectedStresses: ['under_siege'] } };
+        else if (a === 'crisis: hunger') denied = { ...place, stress: [{ type: 'famine' }], config: { ...place.config, selectedStresses: ['famine'] } };
         else throw new Error(`no planted denial for ${a}`);
         expectPresentThenAbsent(before, standingKeys(denied, cards), row.key, `${row.key} refused where the place denies ${a}`);
       }
