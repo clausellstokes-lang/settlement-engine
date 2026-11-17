@@ -36,6 +36,11 @@
  * digs, it does not dress stone: bar0-hamlet-calm-rand-32 printed "The chink of chisels on stone" beside "No one here
  * works the stone").
  *
+ * THE SEAM (SEAM-SCENES, 2026-11-17; BRIEF-BAR6-SEAM items 2 and 9; the chair's TW1): `trade at work: leather` (the tanners:
+ * "The reek of the tanning pits hangs over …" printed in r2r-town-34 where every tanner was "Short of hides.") and the cloth
+ * split by its kinds (`CLOTH_KINDS`: `cloth` is cloth made, `dyed cloth` the dyer's): two keys of the existing atom, vetoable
+ * by the owner, on the veto list as new vocabulary.
+ *
  * Layer 2 (over the roster, the resources and the economy). Pure: no randomness, no clock, no write.
  * @enforced-by tests/generators/bar4ScenePresumption.test.js
  * @enforced-by tests/domain/bar6ScenesGoods.test.js
@@ -69,8 +74,11 @@ export const KILN_KINDS = Object.freeze({
 export const GOOD_TRADES = Object.freeze({
   // the butter churn: a house that keeps milk animals, or a dairy good made or sold (not "Common grazing land")
   dairy: Object.freeze({ houses: Object.freeze(['dairy', 'cheese', 'cattle', 'cow', 'goat', 'herd', 'shepherd', 'livestock']), listed: /\b(dairy|butter|cheese|milk)\b/i }),
-  // the loom, the dye vats and the fulling stocks: a house that makes cloth (a tailor or a draper sews or sells it)
-  cloth: Object.freeze({ houses: Object.freeze(['weaver', 'weavers', 'textile', 'fuller', 'dyer']), listed: /\b(cloth|textiles?|linen|silk)\b/i }),
+  // the loom, the fulling stocks and bolts of new cloth: a house that MAKES cloth (a tailor or a draper sews or sells it;
+  // a dyer colours it: SEAM-SCENES item 9, 2026-11-17, below)
+  cloth: Object.freeze({ houses: Object.freeze(['weaver', 'weavers', 'textile', 'fuller']), listed: /\b(cloth|textiles?|linen|silk)\b/i }),
+  // SEAM-SCENES (item 9, 2026-11-17): the dye vats and cloth dyed: a dyer's house (the cloth trade's other kind, `CLOTH_KINDS`)
+  'dyed cloth': Object.freeze({ houses: Object.freeze(['dyer']) }),
   // the ironwork at the forge: a smith's house with its iron (the mark "Short of iron." is the page's own)
   ironwork: Object.freeze({ houses: Object.freeze(['blacksmith', 'smith', 'smelter', 'foundry', 'armourer', 'armorer', 'weaponsmith', 'bladesmith', 'metalworker', 'specialized metalworker']) }),
   // drying herbs: a house that dries or doses them, or herbs gathered, made or sold
@@ -81,6 +89,23 @@ export const GOOD_TRADES = Object.freeze({
   woodwork: Object.freeze({ houses: Object.freeze(['carpenter', 'carpenters', 'sawmill', 'woodcutter', 'lumber', 'joiner', 'cooper', 'shipwright', 'wheelwright', 'woodcarver']) }),
   // chisels on stone: the stone's cutters (a mine digs; it does not dress stone)
   'cut stone': Object.freeze({ houses: Object.freeze(['quarry', 'stone quarry', 'mason', 'stonecutter']) }),
+  // SEAM-SCENES (item 2, 2026-11-17; the chair's TW1): the tanning pits at work: a tanner's or a leatherworker's house with its
+  // hides (the page's own "Short of hides."), or leather on the Exports (a saddler or a furrier sews or sells it)
+  leather: Object.freeze({ houses: Object.freeze(['tanner', 'tannery', 'tanners', 'leatherwork']), listed: /\bleather\b/i }),
+});
+
+/**
+ * SEAM-SCENES (item 9, 2026-11-17; in the form of BAR5-THINGS's `KILN_KINDS`): the cloth trade's houses by what they do to
+ * the cloth, each a part of the cloth sense's house words (`ARRIVAL_SENSES` cloth `institutions`, less the tailor, the
+ * clothier and the draper, who sew and sell it): `trade at work: cloth` is cloth MADE (a weaver, a textile house, a fuller
+ * not short: the loom, the fulling stocks, bolts of new cloth) and `trade at work: dyed cloth` is cloth DYED (a dyer: the
+ * dye vats, the stained hands). A dyer answers only a line that shows dyeing: "Bolts of cloth hang drying in long bright
+ * strips across the yards." printed where the weavers and the fuller were both "Short of wool." and a dyer alone worked
+ * (bar0-city-wartime-rand-33, bar0-city-under_siege+famine-rand-35, bar0-metropolis-calm-rand-35). Pinned to `GOOD_TRADES`.
+ */
+export const CLOTH_KINDS = Object.freeze({
+  cloth: GOOD_TRADES.cloth.houses,
+  'dyed cloth': GOOD_TRADES['dyed cloth'].houses,
 });
 
 /** A word at a word start of a name (the picker's rule). @param {string} word @param {string} name */
