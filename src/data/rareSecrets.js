@@ -84,7 +84,7 @@ const WEALTH_ROLES = f(['luxury merchant', 'banker', 'mint master', 'exchange ma
 /** AMENDMENT 2: a hook that names the person's kin, or their spouse (AMENDMENT 3: read by stem: sisters, sister's, families). */
 const KIN_WORDS = f(['family', 'kin', 'sister', 'brother', 'son', 'daughter', 'mother', 'father', 'parent', 'parents', 'child', 'children', 'spouse', 'wife', 'husband', 'cousin', 'uncle', 'aunt', 'niece', 'nephew', 'grandmother', 'grandfather']);
 /** AMENDMENT 3: the roles that name a criminal house's own head (the catalogue's faces): the thief who hides is never one. */
-const CRIME_HEAD_ROLES = f(['house boss', 'gang boss', 'rookery boss', 'undercity boss', 'pit boss', "network's head", "network's spider", 'guildmaster of thieves', 'ringleader', 'outlaw host']);
+const CRIME_HEAD_ROLES = f(['house boss', 'gang boss', 'rookery boss', 'undercity boss', 'pit boss', "network's head", "network's spider", 'guildmaster of thieves', 'guildmaster', 'ringleader', 'outlaw host']);
 const SPOUSE_WORDS = f(['spouse', 'wife', 'husband', 'widow', 'widower', 'married', 'marriage']);
 const BLOOD_ROLES = f(['healer', 'barber', 'butcher', 'midwife', 'hunt', 'hunter', 'militia', 'watch', 'garrison', 'castellan', 'captain', 'marshal', 'lanista', 'arena', 'killer', "hospital's master"]);
 const DECEIT_ROLES = f(['fortune teller', 'front man', 'nominal owner', 'whisper broker', 'fixer', 'fence', 'smuggler']);
