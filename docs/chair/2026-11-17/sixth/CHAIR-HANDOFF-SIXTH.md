@@ -843,3 +843,8 @@ should be paused or archived by the owner's hand.
   committed by anyone, the chair reads none of it and applies none of it; it only keeps the work from being lost
   before the owner decides. A turn in each session also restarts its idle clock. IF A SEAT ANSWERS THAT ITS TREE IS
   ALREADY CLEAN, ITS MACHINE WAS REPLACED: its edits are then only in its own history, and the owner is told.
+- **23:48 UTC. `lane/landing-45-2026-11-17` IS ON ORIGIN (2f0e88971, its three gates green) AND READ-SCENES IS SEATED: session_01FbPLbesk53RrHfBHaBrMoN** (23:47; the
+  middle tier, high effort; `BRIEF-READ-LEFT.md` with BAR8's section SCENES; tip cabed01ff, base 2f8f64f7b; six
+  questions, three of them answered AT THE MERGE: the atom against the mark leaf house by house, rule R7 over the
+  pools, the laws by name and by message). POINT 45's WHOLE CHECK is asked of the three CHECKS seats when their parts
+  of points 43 and 44 are in.
