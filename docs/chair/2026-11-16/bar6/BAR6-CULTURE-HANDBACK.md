@@ -16,7 +16,7 @@ of my files). The renders and the runners' outputs live outside every tree; how 
 | 6a culture (a size word below its band) | the culture template's arch detail and foodways against the tier | the existing `tier` band: neighbourhoods `tier: ≥ town` (was `≥ village`), with its twin to a village; the bazaar's neighbourhood shrines `≥ town` with a new twin; street kitchens `≥ village` | 1/1 · 6/6 · 2/2 (6a-size, my writers) | 0 · 0 · 0 | line by line (three rows) | none | the guard (no town word in a smaller place's printed detail; no hamlet street kitchens); control C209939 |
 | 6a-w (WEAK, counted apart) | as above, one loose word | as above, and the arrival's "Nobody in the street pays attention" takes a hamlet twin (`tier: ≤ hamlet`, draw-free) | 8/8 · 60/55 · 17/14 | 4/4 · 38/36 · 4/4 before the arrival twin (the rest are DS-DEF lines, BAR6-DEFDESK's, and the arrival line, cured after these renders: the guard holds it) | | | the guard (no hamlet arrival names a street) |
 | 9e.heresy, ruling HR2 | the Faith tab's DS-FTH-4 heresy pools (`safetyProfile.flags.heresySuppression`) against the Magic tab's "Religious acceptance" (the envelope, `magicProfile.js :: deriveReligiousAcceptance`) | `src/domain/facts/heresyStance.js`: the row reads the flag at print (hunted or preached → hostile); the stored envelope is left as it is | 1/1 · 1/1 · 0 | 0 · 0 · 0 | the one change (display only) | none | the guard; control C84616 built as a page (law9 fires on "indifferent", not on "hostile") |
-| B4 (LAW 5 widened, my files) | auditor G's inventory | declarations on the atoms that answer each class; one twin; reviewed reasons in my table | 225 lines (cultureProfiles 62, general desk 45, war-and-faith desk 49, stressors desk 19, narrativeData 33, historyData 17) | 164 in the inventory, every one in `docs/chair/2026-11-16/bar6/AUDIT/tables/G.exclusions.BAR6-CULTURE.json` with its reason: **0 left** | 61 by a declaration | 164 reviewed reasons (by class: the lexicon's false hits, "books" as ledgers, feast days; a pool keyed by the state it names, an occupation's troops, a pilgrim season; a raw culture row printed only at a town or larger) | runG over the tip |
+| B4 (LAW 5 widened, my files) | auditor G's inventory | declarations on the atoms that answer each class; one twin; reviewed reasons in my table | 225 lines (cultureProfiles 62, general desk 45, war-and-faith desk 49, stressors desk 19, narrativeData 33, historyData 17) | 167 in the inventory, every one in `docs/chair/2026-11-16/bar6/AUDIT/tables/G.exclusions.BAR6-CULTURE.json` with its reason: **0 left** | 58 by a declaration, a twin or a rewording | 167 reviewed reasons (by class: the lexicon's false hits, "books" as ledgers, feast days; a pool keyed by the state it names, an occupation's troops, a pilgrim season; a raw culture row printed only at a town or larger) | runG over the tip |
 
 Apart (never law): 10g-legacy-answer (v1 "what the town built in answer still stands", WEAK) 1 · 4 · 1 → 2 · 4 · 0.
 
@@ -43,7 +43,8 @@ New vocabulary: `legacy ruin` (beneath `danger coming`, the history's own presen
 7. The plague tension's length: "A sickness moved through the settlement for 2 seasons …" (the event's own number) · bar0-metropolis-calm-rand-36.
 8. The Magic tab's row under the heresy flag: "Religious acceptance · hostile" · bar0-hamlet-calm-rand-32.
 9. narrativeData ARRIVAL_SCENES.ordinary twin (new, after the renders): "A child runs past you on the road into {name}, … Nobody else on the road pays attention." · thorps and hamlets only (16 of the 720 drew the original).
-10. The declarations of batch 2 change no text; their list is the commit `21a5f2de1` and my table.
+10. Rewordings that drop a size word (batch 4; a declaration there thinned a partition of the projection's authoring bill): DS-GEN-1 crime_wave "… warned twice before nightfall where not to go …", "Whatever holds {settlement} after dark …"; DS-GEN-9 "… the oldest houses still show it.", "… still shows in its houses and habits.", "… the place where it happened has never been rebuilt.", "{settlement} has parts that do not match each other …"; DS-POP-1 "… Whole rows of houses stand empty." Display only.
+11. The declarations of batch 2 change no text; their list is the commit `21a5f2de1` and my table.
 
 ## THE BOOKS MY CURES MOVE (named, not re-taken)
 
@@ -54,7 +55,26 @@ New vocabulary: `legacy ruin` (beneath `danger coming`, the history's own presen
 - The build guard's register (BAR6-GUARD, ruling BG1): my declarations make its rows for my lines stale.
 - Red at the base and at my tip with the same message (named, not chased): `tests/lint/factLayers.walker.test.js` (the `legalHouse` leaf touches `availableServices`), `tests/components/publicProseEquality.test.jsx` (soak1k-5 services), `tests/domain/worldFactRederive.test.js` (A7), `tests/domain/facts/census2eTables.test.js` (POLITICAL_FLAVOR), `tests/lint/proseComposed.walker.test.js` (A0b, GUARD THE GUARD), `tests/data/dossierStateProseProjection.contract.test.js` (the stale census).
 
-NET_RESULTS_PLACEHOLDER
+## THE NET (at the tip, then every red file again at the base)
+
+Run: the seventeen law suites, BRIEF-BAR3's three, BRIEF-BAR4's nine, BRIEF-BAR5's four, the BAR5 guards, my guard, and
+every test file that pins a symbol I changed (63 files). `npm run typecheck:domain:strict`, `npm run typecheck:ratchet`
+and eslint on my changed files ran in every lane push's hook (exit 0) and eslint by hand on each batch (exit 0).
+
+- MY REGRESSIONS, CURED BEFORE HAND-BACK: `tests/ui/generalDeskTabFlow.test.js` (the anchors' spec now hands
+  `factsOf(fixture)`, as drawnProse.js asks); `tests/lint/tuningRegister.walker.test.js` (my named number, then a bare
+  decimal: the half is written `* 2 >= 1`); `tests/data/dossierStateProseProjection.contract.test.js` "names the
+  authoring bill" and "reads NOTHING from a partitioned pool" (my declarations on a partition's last lines: those lines
+  are reworded instead, or carry a reason).
+- RED AT MY TIP ONLY, STORED FIGURES MY DECLARED CURES MOVE: census2d/census2e's two ledger arms, textOf's count (above).
+- RED AT BOTH, SAME ARM (the base's, not chased): `dossierStateProseProjection.contract` (nine arms, the stale census),
+  `tailHouses1Gaps`, `census2eTables` POLITICAL_FLAVOR, `generationForkCensus`, `pipelinePinnedMode`, `tieProseDeclared`,
+  `factLayers.walker`, `observedShapeReaders`, `presumedThings`, `proseComposed`, `proseCorpusBytes`,
+  `proseEntryContradiction`, `proseTasteCorruption`, `proseWiringCensus`, `tuningRegister` ("matches the committed
+  inventory exactly"), `writerReach`, `publicProseEquality`, `worldFactRederive`. A count inside one of these that my
+  cure moved (presumedThings, writerReach, observedShapeReaders, proseCorpusBytes) is the close's to re-take with the rest.
+- GREEN: my guard `tests/domain/bar6CultureLines.test.js` (positive controls and the zero over the 720), the BAR5
+  guards, and the rest of the net.
 
 ## REGISTRATIONS OWED
 

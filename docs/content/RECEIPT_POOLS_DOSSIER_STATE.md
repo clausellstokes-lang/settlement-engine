@@ -5828,7 +5828,7 @@ spatial ledger supplies the counts, never the direction.
 3. `[visitor · tier: >= town]` Many hundreds have left, and the emptying is legible from the road: whole terraces dark, whole workshops shut.
 
 **QUANTITY: `thousands`**
-1. `[visitor · tier: >= town]` Thousands have gone from {settlement}, and more leave every season. Whole districts stand empty.
+1. `[visitor · colour]` Thousands have gone from {settlement}, and more leave every season. Whole rows of houses stand empty.
 2. `[ledger · walls]` The walls still stand, but thousands have left and most of the houses inside them are empty.
 3. `[elder · colour]` Thousands of people have left. What remains occupies a settlement built for something considerably larger.
 
@@ -6133,8 +6133,8 @@ shared letter would collide.*
 **`crime_wave`** {crisis-scoped}
 1. `[street · minor · watch · crisis: any]` Theft in {settlement} is common enough that people barely mention it; the watch writes the complaint down and nobody expects more.
 2. `[ledger · major · watch · crisis: any]` The watch's book at {settlement} is thick with the same few crimes written many times over, and the names in it are almost never the same twice.
-3. `[visitor · major · crisis: any · tier: >= village]` Visitors to {settlement} are warned twice before nightfall which streets to avoid, and the warning is given quietly.
-4. `[unfolding · catastrophic · watch · crisis: any · tier: >= village]` Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.
+3. `[visitor · major · crisis: any]` Visitors to {settlement} are warned twice before nightfall where not to go, and the warning is given quietly.
+4. `[unfolding · catastrophic · watch · crisis: any]` Whatever holds {settlement} after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.
 5. `[counterforce · minor · population: ≥ middling · no crisis: unrest · crisis: any]` Thieving in {settlement} hits the same quarters every season, and the town has learned to live with it.
 
 **`economic_disparity`** {crisis-scoped}
@@ -6362,11 +6362,11 @@ unchanged.
 **PROVENANCE:** **STRUCTURAL CAUSE LICENSED, HISTORICAL CAUSE FORBIDDEN (R-DST-W4-a).** This shape is the corpus's clearest instance of the distinction. *"The settlement cannot fully feed itself; what the land does not give arrives expensively"* is entailed by the field pair `need` vs `production` and is lawful. *"…because the war took the fields"* is not, and there is no field on this record that could ever make it so. `[elder]` is available here **only** for the standing-origin frame (why a town is where it is, which the route field genuinely asserts) and never for an event.
 **R-DST-W4-f:** the existing line's em dash is apposition inside a woven sentence and stands.
 
-**`crossroads`** — 1. `[ledger · no deficit]` {settlement} is here because the roads are here; the town is what grew in the place where stopping made sense. · 2. `[street · no deficit]` Nobody chose {settlement}'s site; the roads met here, and the town grew where travellers stopped. · 3. `[ledger · deficit · no crisis: threat]` {settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town. · 4. `[elder · deficit]` {settlement} has always eaten from the crossroads' trade more than from its own fields.
+**`crossroads`** — 1. `[ledger · no deficit]` {settlement} is here because the roads are here; the town is what grew in the place where stopping made sense. · 2. `[street · no deficit]` Nobody chose {settlement}'s site; the roads met here, and the town grew where travellers stopped. · 3. `[ledger · deficit]` {settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town. · 4. `[elder · deficit]` {settlement} has always eaten from the crossroads' trade more than from its own fields.
 
 **`port`** — 1. `[visitor · no deficit]` {settlement} exists because of the water, and nothing about the town makes sense without it. · 2. `[ledger · no deficit]` {settlement}'s living comes off the quay; the fields behind it are a convenience the town could manage without. · 3. `[ledger · deficit]` {settlement}'s food and its goods both come in by water; without the harbour the town would have no reason to be here. · 4. `[street · deficit · coast]` {settlement} looks seaward for everything, including dinner.
 
-**`river`** {river} *(W2-WRITE 2026-11-13: six lines for a river that meets the sea, declared `coast`)* — 1. `[ledger · no deficit]` {settlement} is built on its water because the water is the cheapest thing here to move goods on. · 2. `[street · no deficit]` Every decision {settlement} has ever made about where to put a building started with the river. · 3. `[ledger · deficit]` {settlement}'s ground gives less than the town needs and the river makes up the rest, which is why the town is on the river and not on better ground. · 4. `[elder · deficit · no crisis: threat]` {settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring. · 5. `[ledger · no deficit · coast]` {settlement} stands at a river's mouth because goods could go up the river and out to sea from the same landing. · 6. `[street · no deficit · coast]` {settlement} was put where the river meets the sea, and it has lived off both waters since. · 7. `[elder · no deficit · coast]` {settlement} began as a landing at the river's mouth, and the landing is still the reason for the place. · 8. `[ledger · deficit · coast]` {settlement}'s ground gives less than it needs, and what the river brings down and the sea brings in makes up the rest. · 9. `[visitor · deficit · coast]` {settlement} has few fields between the river and the sea, and it eats from the boats. · 10. `[street · deficit · coast]` Bread in {settlement} comes down the river or in from the sea, because the ground at the mouth was never good for grain.
+**`river`** {river} *(W2-WRITE 2026-11-13: six lines for a river that meets the sea, declared `coast`)* — 1. `[ledger · no deficit]` {settlement} is built on its water because the water is the cheapest thing here to move goods on. · 2. `[street · no deficit]` Every decision {settlement} has ever made about where to put a building started with the river. · 3. `[ledger · deficit]` {settlement}'s ground gives less than the town needs and the river makes up the rest, which is why the town is on the river and not on better ground. · 4. `[elder · deficit]` {settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring. · 5. `[ledger · no deficit · coast]` {settlement} stands at a river's mouth because goods could go up the river and out to sea from the same landing. · 6. `[street · no deficit · coast]` {settlement} was put where the river meets the sea, and it has lived off both waters since. · 7. `[elder · no deficit · coast]` {settlement} began as a landing at the river's mouth, and the landing is still the reason for the place. · 8. `[ledger · deficit · coast]` {settlement}'s ground gives less than it needs, and what the river brings down and the sea brings in makes up the rest. · 9. `[visitor · deficit · coast]` {settlement} has few fields between the river and the sea, and it eats from the boats. · 10. `[street · deficit · coast]` Bread in {settlement} comes down the river or in from the sea, because the ground at the mouth was never good for grain.
 
 **`isolated`** — 1. `[ledger · no deficit]` {settlement} is far from the trade roads, so it makes what it needs; nothing else will reach it. · 2. `[street · no deficit]` {settlement} produces what {settlement} uses, because the alternative is a long journey for it. · 3. `[ledger · deficit]` {settlement} is far from the trade roads and cannot feed itself; what the land does not give comes in dear, or not at all. · 4. `[visitor · deficit · market]` {settlement} buys the food it cannot grow, and the market shows it: bread here costs what meat costs elsewhere.
 
@@ -6374,7 +6374,7 @@ unchanged.
 
 **`tier` overlay** *(composed after the route line, never instead of it)*
 - `metropolis` {colour} — 1. `[ledger]` Merchants, officials and petitioners from across the region all end up in {settlement} sooner or later. · 2. `[visitor]` {settlement} is so large that the roads, farms and villages around it all point toward it. · 3. `[street]` Nobody in {settlement} thinks of the region as somewhere else.
-- `city` — 1. `[ledger · no deficit · no crisis: threat]` {settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs. · 2. `[ledger · deficit]` {settlement} is large enough that its appetites outrun its fields: what the city eats, the city cannot fully grow. · 3. `[visitor]` {settlement} is big enough to have quarters that do not know each other.
+- `city` — 1. `[ledger · no deficit]` {settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs. · 2. `[ledger · deficit]` {settlement} is large enough that its appetites outrun its fields: what the city eats, the city cannot fully grow. · 3. `[visitor]` {settlement} is big enough to have quarters that do not know each other.
 - `thorp` / `hamlet` {colour} — 1. `[street]` {settlement} is small enough that every household knows its purpose, and surplus, where there is any, is modest. · 2. `[visitor]` {settlement} is a handful of roofs with a reason, and the reason is usually the ground. · 3. `[ledger]` {settlement}'s whole economy is a few fields and a few trades, and everyone knows them.
 - other tiers {colour} — 1. `[ledger]` {settlement} has grown as large as its fields and trade allow, and no larger. · 2. `[street]` {settlement} is big enough for a hall and small enough that most people know each other. · 3. `[visitor]` {settlement} is an ordinary town: a few trades, a hall, and nothing that stands out.
 
@@ -6574,19 +6574,19 @@ unchanged.
 **ANCHORED IS THE CAUSAL GATE.** `anchored: true` (badged *STILL RELEVANT TODAY*) is the record's own assertion that the event still bears on the present, and it is the licence for a *"and it still…"* clause. An unanchored event gets described and **not** connected forward. This is the sharpest line in the shape and the easiest to blur.
 
 **`founding`** *(the town's origin as the record holds it)* {colour}
-1. `[elder · tier: >= village]` {settlement} was founded {timeband_since} for {reason}, and the oldest streets still show it.
+1. `[elder]` {settlement} was founded {timeband_since} for {reason}, and the oldest houses still show it.
 2. `[ledger]` {founder} put {settlement} here, and the first hard test was {challenge}; the town survived it.
 3. `[street]` {settlement} tells its founding as a hard start overcome, and the story is mostly true.
 4. `[visitor]` The oldest part of {settlement} still shows what the town was for when it started, which is not always what it is for now.
 5. `[counterforce]` {settlement} was founded for {reason} and has never been anything else; whatever else has been tried here did not take.
 
 **`historicalCharacter`** *(the pull-quote's framing, never a replacement for it)* {colour}
-1. `[elder · tier: >= village]` {settlement} is {timeband_age}, and what it has been through still shows in its streets and habits.
+1. `[elder]` {settlement} is {timeband_age}, and what it has been through still shows in its houses and habits.
 2. `[street]` {settlement} has a character of its own, earned, not chosen.
 3. `[visitor]` {settlement}'s character is not obvious at first; it shows itself over weeks, not hours.
 
 **event type: `disaster`** {colour}
-1. `[elder · anchored · tier: >= town]` {settlement} lost {band} to {event} {timeband_since}, and the town has never rebuilt the quarter it happened in.
+1. `[elder · anchored]` {settlement} lost {band} to {event} {timeband_since}, and the place where it happened has never been rebuilt.
 2. `[ledger · anchored]` {event} is {timeband_age}, and what it destroyed in {settlement} was never replaced.
 3. `[street]` {settlement} remembers {event} as a hard time, and the people who tell it do not make it smaller than it was.
 4. `[visitor]` Anyone in {settlement} will tell a visitor about {event} if asked, even {timeband_since}.
@@ -6634,7 +6634,7 @@ unchanged.
 1. `[ledger · anchored]` {event}, {timeband_since}, changed {settlement}'s numbers by {band}, and the town has been that size since.
 2. `[elder · anchored]` The people who came to {settlement} at {event} are the people {settlement} is now made of, and the older families still know which is which.
 3. `[street]` {settlement} was a different size before {event}, and even {timeband_since} the people old enough to remember can say how different.
-4. `[visitor · anchored · tier: >= town]` {settlement} has quarters that do not match each other, and the mismatch dates from {event}.
+4. `[visitor · anchored]` {settlement} has parts that do not match each other, and the mismatch dates from {event}.
 5. `[ledger]` The count of households at {settlement} changed with {event}, and the rolls say so in plain figures.
 6. `[street]` Families in {settlement} know which of them were here before {event} and which came or stayed after it.
 7. `[elder]` {event} is told at {settlement} as a year when people came and went in numbers.

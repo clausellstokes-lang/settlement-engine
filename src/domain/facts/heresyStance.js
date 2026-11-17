@@ -12,11 +12,9 @@
  * Pure: no randomness, no clock.
  */
 
-/** At or above this intensity the church hunts heresy; below it, it preaches against it (DS-FTH-4's two pools). */
-export const HERESY_HUNTED_AT = 0.5;
-
 /**
- * The faith's stance on magic as the heresy flag gives it: `hunted`, `preached`, or null where the flag is off.
+ * The faith's stance on magic as the heresy flag gives it: `hunted` at an intensity of one half or more, else `preached`
+ * (DS-FTH-4's two pools, `warFaithStateProse.js :: heresyPoolKey`'s own band), or null where the flag is off.
  * @param {unknown} record the settlement record
  * @returns {'hunted'|'preached'|null}
  */
@@ -24,7 +22,7 @@ export function heresyStanceOf(record) {
   const flags = /** @type {{ economicState?: { safetyProfile?: { flags?: { heresySuppression?: unknown, heresyIntensity?: unknown } | null } | null } | null } | null | undefined} */ (record)
     ?.economicState?.safetyProfile?.flags;
   if (!flags || flags.heresySuppression !== true) return null;
-  return typeof flags.heresyIntensity === 'number' && flags.heresyIntensity >= HERESY_HUNTED_AT ? 'hunted' : 'preached';
+  return typeof flags.heresyIntensity === 'number' && flags.heresyIntensity * 2 >= 1 ? 'hunted' : 'preached';
 }
 
 /**

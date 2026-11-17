@@ -818,5 +818,20 @@
   "file": "src/data/narrativeData.js",
   "text": "The country around the settlement looks the same as ever, but the food has come in short, and the winter ahead will be hard.",
   "reason": "ease: the line is drawn only under its own stress (STRESS_DESCS / STRESS_NOTES keyed by the stress), which is the state it describes"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town.",
+  "reason": "outside: DS-GEN-6 is the settlement's ORIGIN (why it exists, read off the route and the tier): it says what the roads are for, not today's traffic; a declaration here mutes a partition of the deficit dimension read without facts (dossierStateProseProjection.contract.test.js, the authoring bill), so the reason stands in its place"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs.",
+  "reason": "outside: DS-GEN-6 is the settlement's ORIGIN (why it exists, read off the route and the tier): it says what the roads are for, not today's traffic; a declaration here mutes a partition of the deficit dimension read without facts (dossierStateProseProjection.contract.test.js, the authoring bill), so the reason stands in its place"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring.",
+  "reason": "plenty, outside: DS-GEN-6 is the settlement's ORIGIN (why it exists: a river town buys its food with what the boats bring); it says what the river is for, not today's traffic; a declaration here thins a partition of the deficit dimension (dossierStateProseProjection.contract.test.js, the authoring bill), so the reason stands in its place"
  }
 ]
