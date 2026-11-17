@@ -332,6 +332,16 @@ describe('the facts the cure made', () => {
     for (const pool of ['smiths.lines', 'smiths.dominant', 'tanners.dominant', 'cloth.lines', 'cloth.dominant']) expect(reached.has(pool), pool).toBe(true);
   });
 
+  // BAR7-SCENES (BRIEF-BAR7 item 5f, 2026-11-17): the three pools SEAM-SCENES left outside its sample. The kilns' dominant pool of
+  // r2s-religious_conversion-metropolis-0 admitted ONE at the joined line (17f760584): the generic kilns key answered by a glass
+  // furnace beside short clay kilns refused every twin; it holds three. The arms' dominant pool of r2r-village-18 and
+  // r2s-insurgency-village-2 admitted ONE: the racks' new twin makes it two, the most a twin can give a village there (the
+  // tier bands of W2-FIX-DATA-4 keep the blades and the war's carts to a town; a third line would be drawn and move the draw)
+  it('B7 (BAR7-SCENES): the kilns hold three in r2s-religious_conversion-metropolis-0; the arms\' villages keep two, not one', () => {
+    expect(admittedByPool(BORN.get('r2s-religious_conversion-metropolis-0'))['kilns.dominant']).toBeGreaterThanOrEqual(3);
+    for (const seed of ['r2r-village-18', 'r2s-insurgency-village-2']) expect(admittedByPool(BORN.get(seed))['arms.dominant'], seed).toBeGreaterThanOrEqual(2);
+  });
+
   // the smiths' `lines` pool in a town whose only iron house is a Smelter short of iron (no smith house; bar0-town-occupied-rand-31 of
   // the wide read kept ONE line of four at the joined line): three of its twins name no smith, so it keeps three
   it('B7: the smiths\' lines keep three where the only iron house is a Smelter short of iron (no smith stands)', () => {
