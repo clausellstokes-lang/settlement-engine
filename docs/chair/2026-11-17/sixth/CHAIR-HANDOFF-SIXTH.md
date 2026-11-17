@@ -792,3 +792,10 @@ should be paused or archived by the owner's hand.
   `seamPdfReadsTheTabs`, by message). Being pushed; their whole check (label `landing-43-44-917c915bc`) goes to the
   three CHECKS seats; READ-PDF-2 is reading; READ-J-ROWS's findings on G1 stand as given (LAND-able: its two HIGH were the
   loops, fixed, and the fish rows, taken out).
+- **23:21 UTC. J-ROWS IS SPENT (23:14: its count is above 380,000): THE FISH ROWS GO TO A NEW SEAT, FISH-ROWS session_01FbPLbcLjhmVyBNxkm4RUUV**
+  (`lane/bar8-fish-rows-2026-11-17`, seated 23:21 from point 43's merge 52a10f90a on `lane/landing-43-44-2026-11-17`; the
+  middle tier at high effort; its whole assignment is its prompt: J-ROWS's section 9 hunk in
+  `src/generators/steps/generateNarratives.js`, ruling BR24, the step's declaration and the registers that follow it as
+  DEBT-2 did; the early small commit first: IF IT IS REFUSED IT STOPS, and the largest family of the round joins what waits
+  for the owner). THE LANDING BRANCH OF POINTS 43 AND 44 IS PUSHED (23:20, 917c915bc) and its whole check (label
+  `landing-43-44-917c915bc`) is asked of the three CHECKS seats.
