@@ -184,3 +184,8 @@ BR18 (L6): not a fault; nothing built. Whether the card should say it runs on bo
 question (the chair's).
 
 THE PDF'S TWO CALL SITES AND ITS INCOME SHARE: named by the chair for a seat after LEFT-PDF lands.
+
+## 8. THE LABEL JOIN (the chair's message of 20:57 UTC): `tests/joins/labelJoins.test.js` red at c009dee18 (economicsCrisisMarks.js 1 `instNameIncludes`), green at the new tip and at base e0242a12a (425 of 425 at both); the frozen figure untouched.
+- The site was `forgeIdleHere`'s house filter: a name check and the catalogue-id test on one line. The trade's houses are now taken BY CATALOGUE ID alone (`supplyStory.js :: idOfHouse`: the stored id, else the catalogue's id for the name, the same id as before), a presence filter apart.
+- What the reading returns is unchanged: the Economics tab's income rows (source, share, `incomeDescShown` with the tab's caller) are byte-equal over all 900 towns at c009dee18 and at the new tip; the twin prints in exactly r2r-metropolis-24 and r2s-monster_pressure-metropolis-2; the guard passes 8 of 8.
+- Net: `tests/joins` green; strict typecheck 0 (1113, ceiling 1113) and ratchet 0 (167, ceiling 167); eslint on the file 0; `tests/lint` by name 71 names, the base's names (the only difference is the worktree path inside the ledger-citation walker's own name).

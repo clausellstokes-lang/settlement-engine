@@ -262,19 +262,24 @@ const METAL_SHARE = 'Iron & Metalwork';
  */
 export function forgeIdleHere(town, src) {
   if (!town || typeof town !== 'object' || String(src?.source ?? '').trim() !== METAL_SHARE) return false;
-  const ids = INCOME_TRADE_HOUSES[METAL_SHARE] || [];
-  const idOf = (/** @type {Record<string, unknown>} */ i) => String((typeof i.catalogId === 'string' && i.catalogId) || catalogIdForName(String(i.name)) || '');
+  const ids = new Set(INCOME_TRADE_HOUSES[METAL_SHARE] || []);
+  // the houses of the trade BY CATALOGUE ID (`supplyStory.js :: idOfHouse`: the stored id, else the catalogue's own id for the
+  // name), never by a name test (`tests/joins/labelJoins.test.js`)
   const houses = /** @type {Array<Record<string, unknown>>} */ (liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (town)))
-    .filter((i) => !!i && typeof i.name === 'string' && !!i.name && !i.custom && ids.includes(idOf(i)));
-  const workers = houses.filter((i) => !isSourceHouse(idOf(i)));
-  const sources = houses.filter((i) => isSourceHouse(idOf(i)));
+    .filter(isCatalogueHouse)
+    .filter((h) => ids.has(idOfHouse(h)));
+  const workers = houses.filter((h) => !isSourceHouse(idOfHouse(h)));
+  const sources = houses.filter((h) => isSourceHouse(idOfHouse(h)));
   if (!workers.length || !sources.length) return false;
   if (!workers.every((i) => rowShortOf(town, 'house', i) !== null)) return false;
   return sources.some((i) => rowShortOf(town, 'house', i) === null && rowStoppedBy(town, 'house', i) === null);
 }
+/** A live roster row of the catalogue (named, not a custom house). @param {unknown} h @returns {h is Record<string, unknown>} */
+const isCatalogueHouse = (h) => !!h && typeof h === 'object' && typeof (/** @type {{ name?: unknown }} */ (h)).name === 'string'
+  && !!(/** @type {{ name?: unknown }} */ (h)).name && !(/** @type {{ custom?: unknown }} */ (h)).custom;
 import { INCOME_TRADE_HOUSES } from '../../data/crisisDependence.js';
 import { isSourceHouse } from '../facts/houseKinds.js';
-import { catalogIdForName } from '../../data/institutionalCatalog.js';
+import { idOfHouse } from '../facts/supplyStory.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /**
