@@ -43,7 +43,7 @@ import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT } from '../../data/crisisDependence.js';
 import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, RUNS_ON_BOUGHT, TAKERS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
-import { impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOf, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1)
+import { impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -169,7 +169,7 @@ export function localProducerSupplies(requirement, institutions) {
  */
 export function houseInputAtHand(record, chainKey, house, chain) {
   // BIRTH-2 (BR5's fifth story, the owner's "a failed business venture, but very rare"): the failed venture's house has no
-  // input: its material never lay near and none is brought in (`supplyStory.js :: ventureOf`)
+  // input: its material never lay near and none is brought in (BIRTH-3, BR8: the house its stored row names)
   const venture = ventureHouseOf(record);
   if (venture && house && venture.name === str(house.name)) return 'missing';
   return inputAtHandCore(record, chainKey, house, chain);
@@ -184,8 +184,8 @@ function inputAtHandCore(record, chainKey, house, chain) {
   const words = spec ? spec.words : [raw];
 
   // A live native resource: its key or its commodities name the input.
-  // BIRTH-2 (BR4 (b)): THE HOUSE PROVES ITS GROUND. A ground a source house implies and the seed leaves there answers as a
-  // live ground does (`supplyStory.js :: impliedGroundsOf`; stored nowhere)
+  // BIRTH-2 (BR4 (b)): THE HOUSE PROVES ITS GROUND. A ground a source house implies and the story leaves there answers as a
+  // live ground does (`supplyStory.js :: impliedGroundsOf`: BIRTH-3, BR8, read off the stored rows; no land list stores it)
   const implied = record && /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY] ? [] : [...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states].filter(([, st]) => st === 'there').map(([g]) => g);
   const keys = [.../** @type {string[]} */ (availableNativeResourceKeys(config)), ...implied];
   const native = [...keys, ...keys.flatMap((k) => arr(/** @type {Record<string, { commodities?: unknown } | undefined>} */ (RESOURCE_DATA)[k]?.commodities))].map(str).map(norm).join('|');
@@ -703,27 +703,27 @@ export function housesWantingTradeInput(record) {
  */
 const AT_THE_ECONOMY = Symbol('at the economy');
 
-/** One failed venture a record object. @type {WeakMap<object, import('./supplyStory.js').Venture | null>} */
-const VENTURE_HOUSE = new WeakMap();
-
 /**
- * BIRTH-2: THE TOWN'S FAILED VENTURE, if the seed picked one (`supplyStory.js :: ventureOf`), its buyers read by the one
- * reader before that story (`inputAtHandCore`). @param {InputRecord | null | undefined} record
+ * BIRTH-2: THE TOWN'S FAILED VENTURE (BIRTH-3, BR8: the house whose stored gap row's line is the venture's own line; on the
+ * record in the making, the birth's pick: `supplyStory.js :: ventureOnPage`). @param {InputRecord | null | undefined} record
  * @returns {import('./supplyStory.js').Venture | null}
  */
 export function ventureHouseOf(record) {
   if (!record || typeof record !== 'object' || /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY]) return null;
-  if (VENTURE_HOUSE.has(record)) return /** @type {import('./supplyStory.js').Venture | null} */ (VENTURE_HOUSE.get(record));
-  VENTURE_HOUSE.set(record, null); // a reader asked inside the reading reads no venture (no loop)
-  const out = ventureOf(/** @type {Parameters<typeof ventureOf>[0]} */ (record), (inst, family) => CHAIN_INPUTS[family]
-    ? inputAtHandCore(record, family, /** @type {{ name?: unknown }} */ (inst), { rawResource: CHAIN_RAW_INPUT[family] }) === 'missing' : false);
-  VENTURE_HOUSE.set(record, out);
-  return out;
+  return ventureOnPage(/** @type {Parameters<typeof ventureOnPage>[0]} */ (record));
 }
 
 /**
+ * BIRTH-3: the one reader's answer for a buyer before the failed venture's story is read (`inputAtHandCore`): whether its
+ * input of a family is missing. Read by the birth's pick of the venture (`resourceGenerator.js`).
+ * @param {InputRecord | null | undefined} record @param {Record<string, unknown>} inst @param {string} family a chain key
+ */
+export const inputMissingBeforeStory = (record, inst, family) => !!CHAIN_INPUTS[family]
+  && inputAtHandCore(record, family, /** @type {{ name?: unknown }} */ (inst), { rawResource: CHAIN_RAW_INPUT[family] }) === 'missing';
+
+/**
  * BIRTH-2: THE TOWN'S GROUNDS AS THE PAGE READS THEM, beyond the stored lists (the Resources tab's Nearby Resources): the
- * grounds the houses imply, there or used up (the failed venture proves none). @param {InputRecord | null | undefined} record
+ * grounds the houses imply, there or used up (the failed venture proves none; BIRTH-3, BR8: read off the stored rows). @param {InputRecord | null | undefined} record
  * @returns {{ there: string[], used: string[] }}
  */
-export const impliedGroundsOnPage = (record) => impliedGroundsShown(/** @type {Parameters<typeof impliedGroundsShown>[0]} */ (record), ventureHouseOf(record));
+export const impliedGroundsOnPage = (record) => (record && typeof record === 'object' && /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY] ? { there: [], used: [] } : impliedGroundsShown(/** @type {Parameters<typeof impliedGroundsShown>[0]} */ (record)));

@@ -138,6 +138,12 @@ function sourceGround(s, inst) {
   return story?.story === 'idle' && story.ground ? str(resourceDisplayName(story.ground)) : '';
 }
 
+/**
+ * BIRTH-3 (BR8 (2)): the failed venture's one line, as its stored row carries it (the record's own words), or as the leaf
+ * words it. @param {import('../facts/supplyStory.js').Venture} v @param {{ name?: unknown }} inst @returns {string | null}
+ */
+const ventureLine = (v, inst) => v.line || ventureLineText(v, houseWords(inst));
+
 /** @param {string} x @returns {string} */
 const capFirst = (x) => x.charAt(0).toUpperCase() + x.slice(1);
 
@@ -500,7 +506,8 @@ export function resourceGapLines(s) {
     if (chains.some(([key]) => inputAnswered(s, key, inst))) continue;
     const specs = chains.map(([key]) => CHAIN_INPUTS[key]).filter(Boolean);
     const nouns = [...new Set(specs.map((x) => x.noun))];
-    if (!nouns.length) continue;
+    if (!nouns.length) { if (venture && venture.name === name) { const why = ventureLine(venture, inst); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); } continue; } // BIRTH-3: a venture no chain asks (a mine, a dairy) has its one line
+
     const plural = specs[specs.length - 1]?.plural === true && nouns.length === 1;
     // BIRTH-1 (the chair's ruling BR2 of 2026-11-17, the audit's R4; vetoable by the owner): A SOURCE HOUSE ON ITS OWN SPENT
     // GROUND IS WORKED OUT. "No stone reaches the stone quarry." said the stone was elsewhere beside "Dressed stone (local
@@ -513,13 +520,13 @@ export function resourceGapLines(s) {
     push({ chain: null, impact: `No ${orList(nouns)} ${plural ? 'reach' : 'reaches'} ${houseWords(inst)}.`, severity: str(g.severity) || 'high' });
     const ground = sourceGround(s, inst);
     if (ground) push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${ground}).`, severity: str(g.severity) || 'high' });
-    if (venture && venture.name === name) { const why = ventureLineText(venture, houseWords(inst)); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); }
+    if (venture && venture.name === name) { const why = ventureLine(venture, inst); if (why) push({ chain: null, impact: why, severity: str(g.severity) || 'high' }); }
   }
   // BIRTH-2 (BR6, the owner's fifth story): the failed venture's ONE line, after its gap line, or alone where no chain asks its
   // house of an input (a mine, a peat cutter)
   if (venture && !flagged.has(venture.name)) {
     const inst = institutions.find((i) => i?.name === venture.name) || { name: venture.name };
-    const why = ventureLineText(venture, houseWords(inst));
+    const why = ventureLine(venture, inst);
     if (why) push({ chain: null, impact: why, severity: 'high' });
   }
   return out;

@@ -196,6 +196,26 @@ export const MATERIAL_OF = Object.freeze({
 });
 
 /**
+ * BIRTH-3 (BR6, "never a whole trade"; the second reader's M2): THE OTHER HOUSES THAT BUY AND WORK A MATERIAL OF `MATERIAL_OF`,
+ * outside it (their reader answers them by their own trade): read only when the birth counts the houses of a town that use a
+ * material, so that a lone dairy, burner or tanner is no failed venture beside the butcher, the bowyer or the furrier who
+ * works the same material. Catalogue ids, each with its one line of reason.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const ALSO_USES = Object.freeze({
+  butchers_3_8: 'livestock', // buys beasts at market
+  chandler: 'livestock', // its tallow is the beasts' fat
+  bowyer_fletcher: 'timber', // bow staves and shafts are wood
+  river_boatyard: 'timber', // river boats are built of timber
+  thatcher: 'peat', // its reed is the marsh's (the peat cutter's ground)
+  furrier_s_district: 'hides', // pelts are the hides' trade
+  tailor: 'wool', // sews the cloth woven of wool
+  tailor_s_guild: 'wool', // the same, a guild
+  dyer: 'wool', // dyes the cloth woven of wool
+  alehouse: 'grain', // brews of grain
+});
+
+/**
  * THE STARTING ODDS, THE OWNER'S TO CHANGE (each "N in 60"; the seed's own hash picks, and takes no draw):
  *   groundThere  a source house where the land list holds no ground of its kind: the ground is there (else used up)
  *   boughtIn     the ground used up and the town can trade: the material is bought in (else the house stands idle)

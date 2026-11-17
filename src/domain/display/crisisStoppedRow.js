@@ -69,7 +69,7 @@
  */
 import { resourceGapLines } from './validationOnPage.js';
 import { housesOnSpentGround, housesWantingTradeInput, ventureHouseOf } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home; BIRTH-2: the failed venture
-import { ventureMarkText } from '../facts/supplyStory.js'; // BIRTH-2: the failed venture's mark
+import { STORY_OF_RECORD, ventureMarkText } from '../facts/supplyStory.js'; // BIRTH-2: the failed venture's mark; BIRTH-3: the whole record's story
 import { crisisOf } from '../facts/crisisKind.js';
 import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach.js'; // BAR5-MARKS (WM1): what the war takes, one home
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
@@ -616,7 +616,7 @@ export function housesShortOfInput(settlement) {
   for (const house of houses) {
     if (Object.prototype.hasOwnProperty.call(INPUT_GAP_HELD_EVERYWHERE, house)) continue; // S7: the record's fault, not the town's state
     const own = gaps.filter((g) => g?.institution === house);
-    const lines = resourceGapLines(/** @type {Parameters<typeof resourceGapLines>[0]} */ ({ ...settlement, resourceAnalysis: { ...s.resourceAnalysis, gaps: own } }));
+    const lines = resourceGapLines(/** @type {Parameters<typeof resourceGapLines>[0]} */ ({ ...settlement, resourceAnalysis: { ...s.resourceAnalysis, gaps: own }, [STORY_OF_RECORD]: settlement })); // BIRTH-3 (BR8): the story is the whole record's
     const said = lines.map((l) => SHORT_LINE.exec(String(l?.impact ?? ''))).find(Boolean);
     if (said) out.set(house, said[1]);
   }
@@ -634,7 +634,8 @@ export function housesShortOfInput(settlement) {
  * by the arrival scene; the layer law, facts import no display, holds by the move). This leaf calls it. */
 
 /**
- * The input this row's house is short of, or null: a row declared `input` whose house the page says no input reaches.
+ * The input this row's house is short of, or null: a row declared `input` whose house the page says no input reaches;
+ * for the failed venture, its own mark (BIRTH-3).
  * @param {object | null | undefined} settlement
  * @param {'service' | 'house'} kind
  * @param {Record<string, unknown> | null | undefined} row a service row ({ name, desc, institution }) or a house
@@ -646,25 +647,16 @@ export function rowShortOf(settlement, kind, row) {
   if (!deps.includes(INPUT)) return null;
   const house = kind === 'house' ? row.name : row.institution;
   if (typeof house !== 'string' || !house) return null;
-  if (ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement))?.name === house) return null; // BIRTH-2: a failed venture is not short (its own mark, below)
+  // BIRTH-3 (BR6; the second reader's H2): THE FAILED VENTURE PASSES THE SAME GATE AS THE SHORT MARK, its own mark in place of
+  // "Short of ..." ("Abandoned: a failed venture." / "Failing: a failed venture."), so every caller that asks this reading
+  // before the mark (the tabs, the person's card, the PDF) prints it where the short mark would
+  const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement));
+  if (venture && venture.name === house) return ventureMarkText(venture);
   return housesShortOfInput(settlement).get(house) ?? null;
 }
 
-/**
- * BIRTH-2 (the owner's fifth story, BR6: "Say abandoned or failing: a failed venture."): the failed venture's mark, on its
- * house and its rows wherever the short mark would print, in place of it (`supplyStory.js :: ventureMarkText`; four words:
- * the mark law counts a sentence at five). The tab's head line for short marks is not printed on its account
- * (`rowShortOf` answers null for it). VETOABLE wording.
- * @param {object | null | undefined} settlement @param {'service' | 'house'} kind @param {Record<string, unknown> | null | undefined} row
- * @returns {string | null}
- */
-export function rowVentureMark(settlement, kind, row) {
-  if (!row || typeof row !== 'object' || isCustom(row)) return null;
-  const deps = kind === 'house' ? houseDependenceOf(row) : kind === 'service' ? serviceRowDependence(settlement, row) : NONE;
-  if (!deps.includes(INPUT)) return null;
-  const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (settlement));
-  return venture && venture.name === (kind === 'house' ? row.name : row.institution) ? ventureMarkText(venture) : null;
-}
+/** The failed venture's two marks (`supplyStory.js :: ventureMarkText`), which `shortMarkText` prints as they are. */
+const VENTURE_MARK = /^(?:Abandoned|Failing): a failed venture\.$/;
 
 /**
  * The mark for a row short of its input. Four words at most (a mark repeats on a house's rows: X-50 counts a sentence
@@ -674,6 +666,7 @@ export function rowVentureMark(settlement, kind, row) {
  */
 export function shortMarkText(input) {
   if (!input) return null;
+  if (VENTURE_MARK.test(input)) return input; // BIRTH-3: the failed venture's own mark, through the same gate (`rowShortOf`)
   return input.split(/\s+/).length <= 2 ? `Short of ${input}.` : 'Short of its materials.';
 }
 
@@ -689,7 +682,7 @@ export const SHORT_WORD = 'short';
  * @returns {string | null}
  */
 export function rowMarkText(settlement, kind, row, crises) {
-  const marks = [stoppedRowMark(settlement, kind, row, crises), rowVentureMark(settlement, kind, row) ?? shortMarkText(rowShortOf(settlement, kind, row))].filter(Boolean);
+  const marks = [stoppedRowMark(settlement, kind, row, crises), shortMarkText(rowShortOf(settlement, kind, row))].filter(Boolean);
   return marks.length ? marks.join(' ') : null;
 }
 
