@@ -108,6 +108,13 @@ YOUR ITEMS:
    `ViabilityTab.jsx`, and the PDF's `viewModel.js :: viabilitySlice` reads the record's raw list (`stressEffectsOf`):
    they disagree in 16 of the 150 and 11 of the 720. Move the helper to your new display leaf, the tab imports it, the
    PDF reads it: one reading. A guard on a fixed sample holds the two equal.
+4. TWO PDF TEST FILES ARE RED AT YOUR BASE, AND THEY ARE YOURS TO SETTLE: `tests/pdf/tailExportsPdf2Batch2.test.jsx` (2 of
+   16 cases: its rows E17/house and E17/pill, r2s-under_siege-town-2: the siege's head line "The descriptions here are
+   of ordinary times. While the siege lasts, a row it touches is marked." is not printed on the PDF's institutions and
+   services) and `tests/pdf/tailExportsPdf3Batch3.test.jsx` (the seam's PDF seat named it red at its base). FOR EACH RED
+   CASE: either the PDF is wrong (it dropped a line the tab prints: cure it in `src/pdf/`, reading the one leaf that
+   writes that line, `crisisStoppedRow.js`), or a declared cure of the rounds made the anchor untrue (re-key it by
+   identity with a dated note, R8). Say which, case by case.
 DO NOT: widen the twelve verbs; rewrite a person's line or secret; change the Wants draw (`goals.js`: it moves stored
 people); mark a line twice.
 
@@ -146,8 +153,10 @@ YOUR ITEMS:
    Controls: C20830 (and the wide read's C211337, C217617 on the 150).
 7. LOW, IF YOUR COUNT ALLOWS: the "Needed, and not brought in" line prints one good twice in 17 towns of the 720
    ("timber" beside "mountain timber" from two tables): one good, once.
-DO NOT: mark a share cell or a chip on its own; stop the shipyard; touch `houseInputAtHand.js` (BIRTH-1's: the maltster
-that works only a surplus, 8i.surplus, waits for it and is named for the seat after you).
+DO NOT: mark a share cell or a chip on its own; stop the shipyard; touch `houseInputAtHand.js` (BIRTH-1's). HELD FOR THE
+SEAT AFTER BIRTH-1 HAS LANDED, and not yours: the maltster that works only a surplus (8i.surplus), and the four houses the
+seam's economy seat left by name (two apothecaries, two butchers: the input reader's matches, with the marks seat's
+ratchet of what is left).
 
 ### BAR7-SCENES · a scene shows no trade its houses cannot work and no market the crisis has emptied (LAW 8: 8k; LAW 9: 9g.margin's pair)
 
