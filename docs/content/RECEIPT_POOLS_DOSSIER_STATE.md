@@ -6945,7 +6945,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 2. `[visitor · no crisis: under_siege · crisis: any]` Half the goods traded in {settlement} are only passing through, and the town lives off their passing.
 3. `[street · no crisis: under_siege · crisis: any]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 4. `[ledger · market · crisis: any · no crisis: plague_onset · no crisis: hunger · tier: ≤ village]` {settlement}'s market handles more than its own people could ever use; the difference is their living.
-5. `[ledger · market · crisis: hunger · no crisis: plague_onset]` {settlement}'s market was built to handle far more than its people could ever use; with food short, it cannot now feed them.
+5. `[ledger · market · crisis: hunger · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market was built to handle far more than its people could ever use; with food short, it cannot now feed them.
 
 **`NO-MARKET`** {no market}
 1. `[counterforce · gate · institution: tavern · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.

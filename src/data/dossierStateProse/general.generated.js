@@ -9587,6 +9587,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "market",
             "crisis: hunger",
+            "no crisis: under_siege",
             "no crisis: plague_onset"
           ],
           "text": "{settlement}'s market was built to handle far more than its people could ever use; with food short, it cannot now feed them.",

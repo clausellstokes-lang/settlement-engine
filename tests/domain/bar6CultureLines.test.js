@@ -163,7 +163,7 @@ describe('BAR6-CULTURE: the zero over the census\'s 720', () => {
 // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 // SEAM-CULTURE (2026-11-17; BRIEF-BAR6-SEAM §SEAM-CULTURE, items 1 to 6): what the culture seat left, each held here.
 //   item 1  the manor's role declares `sovereign`; wherever a person holds it, the leaf reads a sovereign
-//   item 2  DS-GEN-14 ENTREPOT's "more than the town could ever use" declares the HUNGER FAMILY and a town's band; a twin for
+//   item 2  DS-GEN-13 ENTREPOT's "more than the town could ever use" declares the HUNGER FAMILY and a town's band; a twin for
 //           the hungry town and one for a village; the pool keeps three lines (B7) wherever its base kept three
 //   items 3 and 6  DS-GEN-16 LEGACY-RECOVERED: v1 declares `legacy ruin`; no line says "the town" under no size band; the
 //           `no legacy ruin` side keeps three lines
