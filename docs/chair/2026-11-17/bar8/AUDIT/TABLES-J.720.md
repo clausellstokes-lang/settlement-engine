@@ -1,6 +1,6 @@
 # TABLES-J · the distinct lines of LAW 11 over `out-J/J720.json`, each with its writer at the base
 
-287 instances in 141 towns; 82 distinct lines. A writer is the first file `git grep -F` finds for the line's longest fixed run (data first); "(untraced)" where none is found.
+416 instances in 217 towns; 99 distinct lines. A writer is the first file `git grep -F` finds for the line's longest fixed run (data first); "(untraced)" where none is found.
 
 ## 11a.atWork
 
@@ -133,4 +133,26 @@
 | 1 | 1 | World/NPCs | person.wants | Wants Learn who controls the supply of livestock and game, and get on good terms with them. | (untraced) |
 | 1 | 1 | World/NPCs | person.wants | Wants Learn who controls the supply of medicinal herbs, and get on good terms with them. | (untraced) |
 | 1 | 1 | World/NPCs | person.wants | Wants Lay in a season of timber at the docks while it can still be had. | (untraced) |
+
+## 11g.gapLine
+
+| towns | instances | tabs | kinds | the line (names folded) | writer |
+|---:|---:|---|---|---|---|
+| 58 | 58 | Systems/Resources | stone quarry | No stone reaches the stone quarry. | `src/domain/display/validationOnPage.js:541` (+1) |
+| 29 | 29 | Systems/Resources | mine | No iron ore reaches the mine. | (untraced) |
+| 12 | 12 | Systems/Resources | fisher's landing | No fish reaches the fisher's landing. | (untraced) |
+| 7 | 7 | Systems/Resources | dairy farmer | No livestock reaches the dairy farmer. | (untraced) |
+| 4 | 4 | Systems/Resources | peat cutter | No peat reaches the peat cutter. | (untraced) |
+| 3 | 3 | Systems/Resources | mine | No coal reaches the mine. | (untraced) |
+| 3 | 3 | Systems/Resources | charcoal burner | No timber reaches the charcoal burner. | (untraced) |
+| 3 | 3 | Systems/Resources | shepherd | No livestock reaches the shepherd. | (untraced) |
+| 2 | 2 | Systems/Resources | hunter's lodge | No game reaches the hunter's lodge. | `src/domain/worldPulse/magicForms.js:159` |
+| 1 | 1 | Systems/Resources | carpenter | No timber reaches the carpenter. | (untraced) |
+| 1 | 1 | Systems/Resources | salt works | No salt reaches the salt works. | (untraced) |
+| 1 | 1 | Systems/Resources | cobbler's guild | No hides reach the cobbler's guild. | (untraced) |
+| 1 | 1 | Systems/Resources | wildfowler | No reeds reaches the wildfowler. | (untraced) |
+| 1 | 1 | Systems/Resources | fuller | No wool reaches the fuller. | (untraced) |
+| 1 | 1 | Systems/Resources | fishing community | No fish reaches the fishing community. | (untraced) |
+| 1 | 1 | Systems/Resources | potter | No clay reaches the potter. | `src/domain/display/tradeListDisplay.js:148` (+2) |
+| 1 | 1 | Systems/Resources | tanner | No hides reach the tanner. | (untraced) |
 

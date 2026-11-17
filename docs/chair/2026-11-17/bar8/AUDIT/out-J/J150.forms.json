@@ -8,6 +8,14 @@
   "form": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot."
  },
  {
+  "rule": "11g.gapLine",
+  "towns": 7,
+  "n": 7,
+  "tabs": "Systems/Resources",
+  "kinds": "stone quarry",
+  "form": "No stone reaches the stone quarry."
+ },
+ {
   "rule": "11e.siegeBought",
   "towns": 6,
   "n": 6,
@@ -22,6 +30,14 @@
   "tabs": "Systems/Institutions",
   "kinds": "chip",
   "form": "Services · Livery and uniforms"
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 5,
+  "n": 5,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No iron ore reaches the mine."
  },
  {
   "rule": "11d.warIron",
@@ -294,5 +310,45 @@
   "tabs": "Systems/Institutions",
   "kinds": "chip",
   "form": "Services · Livery and uniforms · Working clothes (bulk)"
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "hunter's lodge",
+  "form": "No game reaches the hunter's lodge."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No coal reaches the mine."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "potter",
+  "form": "No clay reaches the potter."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "dairy farmer",
+  "form": "No livestock reaches the dairy farmer."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "sawmill",
+  "form": "No timber reaches the sawmill."
  }
 ]

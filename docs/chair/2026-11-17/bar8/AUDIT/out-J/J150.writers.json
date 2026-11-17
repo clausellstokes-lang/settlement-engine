@@ -13,6 +13,19 @@
   }
  },
  {
+  "rule": "11g.gapLine",
+  "towns": 7,
+  "n": 7,
+  "tabs": "Systems/Resources",
+  "kinds": "stone quarry",
+  "form": "No stone reaches the stone quarry.",
+  "writer": {
+   "file": "src/domain/display/validationOnPage.js",
+   "line": 541,
+   "alsoIn": 1
+  }
+ },
+ {
   "rule": "11e.siegeBought",
   "towns": 6,
   "n": 6,
@@ -33,6 +46,15 @@
    "line": 579,
    "alsoIn": 6
   }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 5,
+  "n": 5,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No iron ore reaches the mine.",
+  "writer": null
  },
  {
   "rule": "11d.warIron",
@@ -454,6 +476,63 @@
    "file": "src/data/crisisDependence.js",
    "line": 987,
    "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "hunter's lodge",
+  "form": "No game reaches the hunter's lodge.",
+  "writer": {
+   "file": "src/domain/worldPulse/magicForms.js",
+   "line": 159,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No coal reaches the mine.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "potter",
+  "form": "No clay reaches the potter.",
+  "writer": {
+   "file": "src/domain/display/tradeListDisplay.js",
+   "line": 148,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "dairy farmer",
+  "form": "No livestock reaches the dairy farmer.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "sawmill",
+  "form": "No timber reaches the sawmill.",
+  "writer": {
+   "file": "src/domain/facts/houseInputAtHand.js",
+   "line": 478,
+   "alsoIn": 0
   }
  }
 ]

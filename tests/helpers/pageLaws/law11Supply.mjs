@@ -19,6 +19,10 @@
 //                  the page prints for iron
 //   11d.importShort  a house marked short of a material the town's imports print, in a town no siege shuts (the brief's
 //                  fault case; outside the war's hook)
+//   11g.gapLine    (the chair's note of 18:05 UTC) the Resources tab's GENERAL gap line "No X reaches the <house>." printed
+//                  beside the supply story's own line for the same house ("The <house> is worked out: …", "… is failing: …",
+//                  "… stands abandoned …"): two lines for one house and one material; for a source house the general line
+//                  also misstates how it works (no ore "reaches" a mine). Writer: `validationOnPage.js :: resourceGapLines`
 //   11e.siegeBought  under a siege, a bare house (no mark on card or chip) that makes its good of a material the record has
 //                  bought in (its ground used up), while the page says the siege cuts that material off
 //   11e.wantBuy    a person's Wants that buys a good at the market that the page says is needed and not brought in
@@ -325,6 +329,22 @@ export function law11(T, town) {
           against: { field: 'config.nearbyResourcesDepleted', value: st.used.join(', ') }, why: `"✓ ${tick}" where every ground of ${hit[1]} is used up (${st.used.join(', ')})` });
       }
     }
+  }
+
+  // 11g: THE GENERAL GAP LINE BESIDE THE STORY'S OWN LINE, one house, one material (Resources tab)
+  {
+    const ls = T.tabs['Systems/Resources'] || [];
+    ls.forEach((line, i) => {
+      const m = line.match(/^No (.+?) reach(?:es)? (the .+?)\.$/);
+      if (!m) return;
+      const house = m[2];
+      const cap = house.charAt(0).toUpperCase() + house.slice(1);
+      const own = ls.slice(i + 1, i + 3).find((l) => l.startsWith(`${cap} is worked out:`) || l.startsWith(`${cap} is failing:`) || l.startsWith(`${cap} stands abandoned`));
+      if (!own) return;
+      const story = /is worked out/.test(own) ? 'workedOut' : 'venture';
+      push({ rule: '11g.gapLine', tab: 'Systems/Resources', line, fam: m[1], house: house.replace(/^the /, ''), story, cause: story, kind: house.replace(/^the /, ''),
+        rowLines: [line, own], against: { tab: 'Systems/Resources', line: own }, why: `"${line}" beside "${own}": one house, one material, two lines` });
+    });
   }
 
   // 11d: THE WAR'S IRON IN A TOWN THAT IS NOT AT WAR, and a house short of a material the imports print

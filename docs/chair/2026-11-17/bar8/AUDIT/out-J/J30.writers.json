@@ -26,6 +26,19 @@
   }
  },
  {
+  "rule": "11g.gapLine",
+  "towns": 4,
+  "n": 4,
+  "tabs": "Systems/Resources",
+  "kinds": "stone quarry",
+  "form": "No stone reaches the stone quarry.",
+  "writer": {
+   "file": "src/domain/display/validationOnPage.js",
+   "line": 541,
+   "alsoIn": 1
+  }
+ },
+ {
   "rule": "11b",
   "towns": 3,
   "n": 3,
@@ -89,6 +102,15 @@
    "line": 579,
    "alsoIn": 6
   }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No iron ore reaches the mine.",
+  "writer": null
  },
  {
   "rule": "11a.atWork",
@@ -393,6 +415,28 @@
   "tabs": "World/NPCs",
   "kinds": "person.wants",
   "form": "Wants Lay in a season of livestock and game at the butchers while it can still be had.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "potter",
+  "form": "No clay reaches the potter.",
+  "writer": {
+   "file": "src/domain/display/tradeListDisplay.js",
+   "line": 148,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "fisher's landing",
+  "form": "No fish reaches the fisher's landing.",
   "writer": null
  }
 ]

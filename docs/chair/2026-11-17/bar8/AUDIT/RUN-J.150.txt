@@ -1,4 +1,4 @@
-LAW 11 (seat J) over 150 towns: towns   34 · instances    71 · distinct lines   37
+LAW 11 (seat J) over 150 towns: towns   47 · instances    88 · distinct lines   44
   11a.imported     towns    5 · instances     5 · distinct lines    4
     by story siege 3 · bought 2
     by material ironOre 3 · livestock 2
@@ -29,13 +29,18 @@ LAW 11 (seat J) over 150 towns: towns   34 · instances    71 · distinct lines 
   11e.siegeBought  towns    7 · instances    14 · distinct lines    5
     by story siege 14
     by material wool 13 · hides 1
+  11g.gapLine      towns   17 · instances    17 · distinct lines    7
+    by story workedOut 14 · venture 3
+    by material stone 7 · iron ore 5 · game 1 · coal 1 · clay 1 · livestock 1 · timber 1
 THE ROOTS (the record alone)
   gapImportedNoImport    towns    5 · rows    5 · by material livestock 4 · hides 1
   warIronOutsideWar      towns    9 · rows    9 · under a siege 6 · by crises under_siege+famine 5 · occupied 3 · under_siege 1 · with an iron import 9
 DISTINCT LINES (top 25 by towns; all in J150.forms.json)
   11c.noImport   10t    10 Systems/Institutions Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.
+  11g.gapLine    7t     7 Systems/Resources    No stone reaches the stone quarry.
   11e.siegeBought    6t     6 Systems/Institutions Services · Dyed cloth
   11e.siegeBought    5t     5 Systems/Institutions Services · Livery and uniforms
+  11g.gapLine    5t     5 Systems/Resources    No iron ore reaches the mine.
   11d.warIron    3t     3 Systems/Institutions Short of iron. Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had, cast in bars for whoever
   11d.warIron    3t     3 Systems/Institutions Services · Iron refining (short)
   11d.warIron    3t     3 Systems/Services     Short of iron. Smelt raw ore into pig iron and refined ingots ready for smithing.
@@ -56,5 +61,3 @@ DISTINCT LINES (top 25 by towns; all in J150.forms.json)
   11b       1t     1 Systems/Services     Wool shearing
   11c.idle    1t     1 Systems/Economics    Almost everyone's living at <name> depends on one source of income, whether or not they earn from it directly. Faith car
   11c.needed    1t     1 Systems/Economics    Ask what <name> lives on and you will hear more than one trade named. Magic carries real weight at <name>: what it can d
-  11c.needed    1t     1 Systems/Economics    <name>'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone. A good pa
-  11c.needed    1t     1 Systems/Economics    Almost everyone's living at <name> depends on one source of income, whether or not they earn from it directly. Some of <

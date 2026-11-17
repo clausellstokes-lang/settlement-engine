@@ -1,4 +1,4 @@
-LAW 11 (seat J) over 30 towns: towns   14 · instances    46 · distinct lines   32
+LAW 11 (seat J) over 30 towns: towns   17 · instances    54 · distinct lines   36
   11a.atWork       towns    1 · instances     1 · distinct lines    1
     by story calm 1
     by material livestock 1
@@ -37,17 +37,22 @@ LAW 11 (seat J) over 30 towns: towns   14 · instances    46 · distinct lines  
   11e.wantBuy      towns    2 · instances     2 · distinct lines    2
     by story calm 2
     by material stone 1 · livestock 1
+  11g.gapLine      towns    7 · instances     8 · distinct lines    4
+    by story workedOut 6 · venture 2
+    by material stone 4 · iron ore 2 · clay 1 · fish 1
 THE ROOTS (the record alone)
   gapImportedNoImport    towns    1 · rows    1 · by material livestock 1
   warIronOutsideWar      towns    1 · rows    1 · under a siege 0 · by crises occupied 1 · with an iron import 1
 DISTINCT LINES (top 25 by towns; all in J30.forms.json)
   11b       4t     4 Systems/Services     Fresh fish retail
   11b       4t     4 Systems/Services     Fish sold daily from the morning catch.
+  11g.gapLine    4t     4 Systems/Resources    No stone reaches the stone quarry.
   11b       3t     3 Systems/Institutions Services · Fresh fish retail
   11b       3t     3 World/NPCs           How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.
   11c.noImport    3t     3 Systems/Institutions Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.
   11b       2t     2 Systems/Economics    Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.
   11e.siegeBought    2t     2 Systems/Institutions Services · Livery and uniforms
+  11g.gapLine    2t     2 Systems/Resources    No iron ore reaches the mine.
   11a.atWork    1t     1 Systems/Economics    Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs.
   11a.imported    1t     1 Systems/Economics    Needed, and not brought in: iron ore, copper ore, gold and silver ore.
   11a.imported    1t     1 Systems/Economics    Needed, and not brought in: livestock.
@@ -64,8 +69,6 @@ DISTINCT LINES (top 25 by towns; all in J30.forms.json)
   11d.warIron    1t     1 Systems/Services     Short of iron. Essential service for any settlement with working horses. Routine maintenance.
   11d.warIron    1t     1 Systems/Services     Short of iron. Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new.
   11d.warIron    1t     1 Systems/Services     Short of iron. Axes, ploughs, hinges, nails. The foundation of agricultural and construction work.
-  11d.warIron    1t     1 Systems/Economics    Iron & Metalwork Short of iron. Little metal is worked here while the metal trade is short of what it needs.
-  11d.warIron    1t     1 World/NPCs           Short of iron.
 CONTROLS (stands must be FOUND by their sub-rule; explained must be clear of every rule of the seat)
   11a stands    C0893   FOUND 11a.imported           Needed, and not brought in: iron ore, copper ore, gold and silver ore.
   11a stands    C42813  FOUND 11a.imported           Needed, and not brought in: livestock.

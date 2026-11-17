@@ -500,6 +500,31 @@
  },
  {
   "law": "L11",
+  "town": "bar0-city-wartime-rand-31",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
+  "crises": [
+   "wartime"
+  ]
+ },
+ {
+  "law": "L11",
   "town": "bar0-city-wartime-rand-33",
   "rule": "11e.offer",
   "tab": "Systems/Institutions",
@@ -520,6 +545,31 @@
   },
   "why": "Major annual fairs offers \"Livestock auctions\" beside \"livestock for meat and draft\" needed and not brought in",
   "form": "Livestock auctions",
+  "crises": [
+   "wartime"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-city-wartime-rand-36",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
   "crises": [
    "wartime"
   ]
@@ -598,6 +648,79 @@
  },
  {
   "law": "L11",
+  "town": "bar0-hamlet-calm-rand-39",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "venture",
+  "cause": "venture",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry stands abandoned, a venture of an earlier time: no stone lies near and none is brought in."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry stands abandoned, a venture of an earlier time: no stone lies near and none is brought in."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry stands abandoned, a venture of an earlier time: no stone lies near and none is brought in.\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-hamlet-under_siege-rand-34",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No iron ore reaches the mine.",
+  "fam": "iron ore",
+  "house": "mine",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "mine",
+  "rowLines": [
+   "No iron ore reaches the mine.",
+   "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  },
+  "why": "\"No iron ore reaches the mine.\" beside \"The mine is worked out: its own ground is depleted (Iron ore deposits).\": one house, one material, two lines",
+  "form": "No iron ore reaches the mine.",
+  "crises": [
+   "under_siege"
+  ]
+ },
+ {
+  "law": "L11",
+  "town": "bar0-hamlet-under_siege-rand-37",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No game reaches the hunter's lodge.",
+  "fam": "game",
+  "house": "hunter's lodge",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "hunter's lodge",
+  "rowLines": [
+   "No game reaches the hunter's lodge.",
+   "The hunter's lodge is worked out: its own ground is depleted (Hunting grounds)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The hunter's lodge is worked out: its own ground is depleted (Hunting grounds)."
+  },
+  "why": "\"No game reaches the hunter's lodge.\" beside \"The hunter's lodge is worked out: its own ground is depleted (Hunting grounds).\": one house, one material, two lines",
+  "form": "No game reaches the hunter's lodge.",
+  "crises": [
+   "under_siege"
+  ]
+ },
+ {
+  "law": "L11",
   "town": "bar0-metropolis-calm-rand-27",
   "rule": "11b.landOffers",
   "tab": "Systems/Resources",
@@ -616,6 +739,29 @@
    "✓ Agriculture✓ Milling✓ River trade"
   ],
   "form": "✓Agriculture",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-28",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
   "crises": []
  },
  {
@@ -642,6 +788,52 @@
  },
  {
   "law": "L11",
+  "town": "bar0-metropolis-calm-rand-29",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No coal reaches the mine.",
+  "fam": "coal",
+  "house": "mine",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "mine",
+  "rowLines": [
+   "No coal reaches the mine.",
+   "The mine is worked out: its own ground is depleted (Coal or peat deposits)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The mine is worked out: its own ground is depleted (Coal or peat deposits)."
+  },
+  "why": "\"No coal reaches the mine.\" beside \"The mine is worked out: its own ground is depleted (Coal or peat deposits).\": one house, one material, two lines",
+  "form": "No coal reaches the mine.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-30",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
+  "crises": []
+ },
+ {
+  "law": "L11",
   "town": "bar0-metropolis-calm-rand-31",
   "rule": "11c.noImport",
   "tab": "Systems/Institutions",
@@ -660,6 +852,29 @@
    "A covered fish market under the market wardens. Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot."
   ],
   "form": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-32",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No iron ore reaches the mine.",
+  "fam": "iron ore",
+  "house": "mine",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "mine",
+  "rowLines": [
+   "No iron ore reaches the mine.",
+   "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  },
+  "why": "\"No iron ore reaches the mine.\" beside \"The mine is worked out: its own ground is depleted (Iron ore deposits).\": one house, one material, two lines",
+  "form": "No iron ore reaches the mine.",
   "crises": []
  },
  {
@@ -706,6 +921,75 @@
   },
   "why": "Luxury goods quarter offers \"The trade in silk, spice, and precious things.\" beside \"spices\" needed and not brought in",
   "form": "The trade in silk, spice, and precious things.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-37",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No iron ore reaches the mine.",
+  "fam": "iron ore",
+  "house": "mine",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "mine",
+  "rowLines": [
+   "No iron ore reaches the mine.",
+   "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  },
+  "why": "\"No iron ore reaches the mine.\" beside \"The mine is worked out: its own ground is depleted (Iron ore deposits).\": one house, one material, two lines",
+  "form": "No iron ore reaches the mine.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-39",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-metropolis-calm-rand-41",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No stone reaches the stone quarry.",
+  "fam": "stone",
+  "house": "stone quarry",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "stone quarry",
+  "rowLines": [
+   "No stone reaches the stone quarry.",
+   "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The stone quarry is worked out: its own ground is depleted (Stone quarry)."
+  },
+  "why": "\"No stone reaches the stone quarry.\" beside \"The stone quarry is worked out: its own ground is depleted (Stone quarry).\": one house, one material, two lines",
+  "form": "No stone reaches the stone quarry.",
   "crises": []
  },
  {
@@ -863,6 +1147,29 @@
  },
  {
   "law": "L11",
+  "town": "bar0-town-calm-rand-32",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No clay reaches the potter.",
+  "fam": "clay",
+  "house": "potter",
+  "story": "venture",
+  "cause": "venture",
+  "kind": "potter",
+  "rowLines": [
+   "No clay reaches the potter.",
+   "The potter stands abandoned, a venture of an earlier time: no clay lies near and none is brought in."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The potter stands abandoned, a venture of an earlier time: no clay lies near and none is brought in."
+  },
+  "why": "\"No clay reaches the potter.\" beside \"The potter stands abandoned, a venture of an earlier time: no clay lies near and none is brought in.\": one house, one material, two lines",
+  "form": "No clay reaches the potter.",
+  "crises": []
+ },
+ {
+  "law": "L11",
   "town": "bar0-town-calm-rand-33",
   "rule": "11c.noImport",
   "tab": "Systems/Institutions",
@@ -929,6 +1236,29 @@
  },
  {
   "law": "L11",
+  "town": "bar0-town-calm-rand-37",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No iron ore reaches the mine.",
+  "fam": "iron ore",
+  "house": "mine",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "mine",
+  "rowLines": [
+   "No iron ore reaches the mine.",
+   "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  },
+  "why": "\"No iron ore reaches the mine.\" beside \"The mine is worked out: its own ground is depleted (Iron ore deposits).\": one house, one material, two lines",
+  "form": "No iron ore reaches the mine.",
+  "crises": []
+ },
+ {
+  "law": "L11",
   "town": "bar0-town-calm-rand-41",
   "rule": "11b.ironOre",
   "tab": "Systems/Institutions",
@@ -947,6 +1277,29 @@
    "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses."
   ],
   "form": "The industrial step from what the mine yields to what the smith uses.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-town-calm-rand-41",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No iron ore reaches the mine.",
+  "fam": "iron ore",
+  "house": "mine",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "mine",
+  "rowLines": [
+   "No iron ore reaches the mine.",
+   "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The mine is worked out: its own ground is depleted (Iron ore deposits)."
+  },
+  "why": "\"No iron ore reaches the mine.\" beside \"The mine is worked out: its own ground is depleted (Iron ore deposits).\": one house, one material, two lines",
+  "form": "No iron ore reaches the mine.",
   "crises": []
  },
  {
@@ -1592,6 +1945,29 @@
  {
   "law": "L11",
   "town": "bar0-village-calm-rand-29",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No livestock reaches the dairy farmer.",
+  "fam": "livestock",
+  "house": "dairy farmer",
+  "story": "workedOut",
+  "cause": "workedOut",
+  "kind": "dairy farmer",
+  "rowLines": [
+   "No livestock reaches the dairy farmer.",
+   "The dairy farmer is worked out: its own ground is depleted (Open grazing land)."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The dairy farmer is worked out: its own ground is depleted (Open grazing land)."
+  },
+  "why": "\"No livestock reaches the dairy farmer.\" beside \"The dairy farmer is worked out: its own ground is depleted (Open grazing land).\": one house, one material, two lines",
+  "form": "No livestock reaches the dairy farmer.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-29",
   "rule": "11e.offer",
   "tab": "Systems/Institutions",
   "line": "Services · Wool shearing · Livestock management",
@@ -1632,6 +2008,29 @@
    "Needed, and not brought in: livestock."
   ],
   "form": "Needed, and not brought in: livestock.",
+  "crises": []
+ },
+ {
+  "law": "L11",
+  "town": "bar0-village-calm-rand-40",
+  "rule": "11g.gapLine",
+  "tab": "Systems/Resources",
+  "line": "No timber reaches the sawmill.",
+  "fam": "timber",
+  "house": "sawmill",
+  "story": "venture",
+  "cause": "venture",
+  "kind": "sawmill",
+  "rowLines": [
+   "No timber reaches the sawmill.",
+   "The sawmill stands abandoned, a venture of an earlier time: no timber lies near and none is brought in."
+  ],
+  "against": {
+   "tab": "Systems/Resources",
+   "line": "The sawmill stands abandoned, a venture of an earlier time: no timber lies near and none is brought in."
+  },
+  "why": "\"No timber reaches the sawmill.\" beside \"The sawmill stands abandoned, a venture of an earlier time: no timber lies near and none is brought in.\": one house, one material, two lines",
+  "form": "No timber reaches the sawmill.",
   "crises": []
  },
  {

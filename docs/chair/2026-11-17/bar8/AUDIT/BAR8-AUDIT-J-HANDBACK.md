@@ -58,7 +58,8 @@ COUNTS. Each cell is towns / instances. The distinct lines are in TABLES-J.
 | 11e.wantBuy: a Wants line that presumes a supply of a good needed and not brought in | 2 / 2 | 0 | 6 / 6 | 6 of 6 (C8867 class) |
 | 11e.stalls: stalls sell reagents under a siege with every reagent chain Impaired | 1 / 1 | 0 | 0 / 0 | 1 of 1 (narrow: the control's line alone) |
 | 11e.offer: a card or chip offering a good the need list names | 2 / 2 | 5 / 5 | 22 / 23 | 19 of 23: luxury 5 and livestock auctions or management 6 stand (C32296 and C34109 class); the quarter's "trade in silk, spice" 7 is PLAUSIBLE (C24702 LOW); the smelter's charcoal 1 is WEAK (and on the 150 the assay office's "Metal purity testing" beside "metals" is WEAK) |
-| **LAW 11, all** | **14 / 46** | **34 / 71** | **141 / 287** | on the 720, 142 of 287 stand by my reading (the fishmonger's 6 are LOW); the WEAK families (fishTitle 51, noImport 56, landOffers 9, the smelter card 6, tailors 8) are named apart |
+| 11g.gapLine (the chair's note of 18:05): the general "No X reaches the <house>." beside the story's own line for one house | 7 / 8 | 17 / 17 | 118 / 129 | 129 of 129 are two lines for one house and one material. For the 124 source houses the general line also misstates the work: the quarry 58, the mine 32, the landing 12, the dairy 7, the peat cutter 4, the charcoal burner 3, the shepherd 3, the hunter's lodge 2, the salt works 1, the wildfowler 1, the fishing community 1. For the 5 buyers that are the failed venture (the carpenter, the cobbler's guild, the fuller, the potter, the tanner) it is only doubled |
+| **LAW 11, all** | **17 / 54** | **47 / 88** | **217 / 416** | on the 720, 142 of the 287 instances of 11a to 11e stand by my reading, and the 129 of 11g are a doubled line (the fishmonger's 6 are LOW); the WEAK families (fishTitle 51, noImport 56, landOffers 9, the smelter card 6, tailors 8) are named apart |
 
 THE ROOTS (the record alone, `rootsOf`, 720):
 - gapImportedNoImport: 8 towns. A gap row "runs on imported X" whose X no import names: fish 3, livestock 3, hides 2.
@@ -168,6 +169,18 @@ for the pulse words: it is the same hunk, and it belongs to a seat after LEFT-MA
 - HELD: `crisisStoppedRow.js` and `crisisDependence.js` are LEFT-MARKS's. `tradeListDisplay.js` is LEFT-CHAIN's.
   `goals.js`, `goalFamilies.js`, `arrivalProse.js`, `tradeAtWork.js` and `institutionDescVariants.js` are held by no seat.
 
+**11g · THE GENERAL GAP LINE BESIDE THE STORY'S OWN LINE** (the chair's note of 18:05 UTC).
+- THE ONE FACT: the house's story, `supplyStory.js :: sourceStoryOf` (worked out; the failed venture).
+- `validationOnPage.js :: resourceGapLines` (the pushes at about lines 532 and 548) prints "No <noun> reaches <the house>."
+  FIRST, then the story's own line ("… is worked out: its own ground is depleted (…)", the venture's line). The comment there
+  (BIRTH-1, R4) keeps the general line ON PURPOSE: `crisisStoppedRow.js :: housesShortOfInput` (about line 620) reads the
+  mark's noun ("Short of stone.") off it.
+- THE CURE AT ONE FACT: where the story's own line follows, the general line is not printed; the mark reads its noun from the
+  story or the gap row, not from a printed line.
+- THE CHAIR'S NOTE 2, CHECKED: no rule of LAW 11 flags a forge scene by a mine's gap line. 11d reads the forge houses' own
+  marks, and only under the war's hook.
+- HELD: neither file is on a LEFT seat's list.
+
 ## 3. A WORKLIST FOR BUILDERS (disjoint files; the runner is the guard)
 
 Each seat runs, at its tip, `node docs/chair/2026-11-17/bar8/AUDIT/runJ.mjs <render of the 720 and of the 150> out.json`, and
@@ -181,6 +194,7 @@ done.
 | J-PEOPLE (now) | `src/generators/people/goals.js`, `src/data/people/goalFamilies.js` | 11e.wantBuy (6) | 0 |
 | J-INCOME (after LEFT-CHAIN) | `src/generators/economy/incomeLineSiblings.js` (the fish arm of `trueIncomeDesc`), `src/domain/display/tradeListDisplay.js` (`importsAsPrinted().needed`: the gap rows of kind imported; the carriers) | 11b rites (21), 11a.imported (5), 11e.offer's livestock and the need list's half (11) | 0 |
 | J-MARKS (after LEFT-MARKS) | `src/data/crisisDependence.js` (INPUT_IMPORTED_AS and HOUSE_TRADE_INPUT: dyer, furrier, boatyard, mint, butchers, bowyer), `src/domain/facts/houseInputAtHand.js` and `src/domain/facts/warIronHook.js` (11d, the chair's ruling first), `src/generators/resourceGenerator.js` (the fish buyer's import word; touched by M2) | 11e.siegeBought (10 that stand), 11a.atWork (13), 11d (19), the roots' gapImportedNoImport (8) | 0, with the tailors' 8 left (WEAK) |
+| J-GAPS (now, or after LEFT-MARKS if it touches the mark's reader) | `src/domain/display/validationOnPage.js` (`resourceGapLines`), `src/domain/display/crisisStoppedRow.js` (the one hunk of `housesShortOfInput`) | 11g (129) | 0, the marks unmoved (`runJ`'s 11d and LAW 8's counts unchanged) |
 | J-DESKS (after LEFT-LINES) | `src/data/dossierStateProse/economy.generated.js`, `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`, `src/data/people/titleSecretsPresentations.js` | 11c.needed (8), 11c.venture (1), 11c.idle (1), the fishmonger (6) | 0 |
 
 WHAT SHOULD NOT BE DONE:

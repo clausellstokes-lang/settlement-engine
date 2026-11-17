@@ -1,6 +1,6 @@
 # TABLES-J · the distinct lines of LAW 11 over `out-J/J150.json`, each with its writer at the base
 
-71 instances in 34 towns; 37 distinct lines. A writer is the first file `git grep -F` finds for the line's longest fixed run (data first); "(untraced)" where none is found.
+88 instances in 47 towns; 44 distinct lines. A writer is the first file `git grep -F` finds for the line's longest fixed run (data first); "(untraced)" where none is found.
 
 ## 11a.imported
 
@@ -78,4 +78,16 @@
 | 1 | 1 | Systems/Institutions | chip | Services · Fine garments · Livery and uniforms | `src/data/crisisDependence.js:579` (+6) |
 | 1 | 1 | Systems/Institutions | chip | Services · Quality furs | (untraced) |
 | 1 | 1 | Systems/Institutions | chip | Services · Livery and uniforms · Working clothes (bulk) | `src/data/crisisDependence.js:987` (+2) |
+
+## 11g.gapLine
+
+| towns | instances | tabs | kinds | the line (names folded) | writer |
+|---:|---:|---|---|---|---|
+| 7 | 7 | Systems/Resources | stone quarry | No stone reaches the stone quarry. | `src/domain/display/validationOnPage.js:541` (+1) |
+| 5 | 5 | Systems/Resources | mine | No iron ore reaches the mine. | (untraced) |
+| 1 | 1 | Systems/Resources | hunter's lodge | No game reaches the hunter's lodge. | `src/domain/worldPulse/magicForms.js:159` |
+| 1 | 1 | Systems/Resources | mine | No coal reaches the mine. | (untraced) |
+| 1 | 1 | Systems/Resources | potter | No clay reaches the potter. | `src/domain/display/tradeListDisplay.js:148` (+2) |
+| 1 | 1 | Systems/Resources | dairy farmer | No livestock reaches the dairy farmer. | (untraced) |
+| 1 | 1 | Systems/Resources | sawmill | No timber reaches the sawmill. | `src/domain/facts/houseInputAtHand.js:478` |
 

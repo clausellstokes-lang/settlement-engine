@@ -1,5 +1,18 @@
 [
  {
+  "rule": "11g.gapLine",
+  "towns": 58,
+  "n": 58,
+  "tabs": "Systems/Resources",
+  "kinds": "stone quarry",
+  "form": "No stone reaches the stone quarry.",
+  "writer": {
+   "file": "src/domain/display/validationOnPage.js",
+   "line": 541,
+   "alsoIn": 1
+  }
+ },
+ {
   "rule": "11c.noImport",
   "towns": 56,
   "n": 56,
@@ -39,6 +52,15 @@
   }
  },
  {
+  "rule": "11g.gapLine",
+  "towns": 29,
+  "n": 29,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No iron ore reaches the mine.",
+  "writer": null
+ },
+ {
   "rule": "11b",
   "towns": 18,
   "n": 18,
@@ -50,6 +72,15 @@
    "line": 429,
    "alsoIn": 2
   }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 12,
+  "n": 12,
+  "tabs": "Systems/Resources",
+  "kinds": "fisher's landing",
+  "form": "No fish reaches the fisher's landing.",
+  "writer": null
  },
  {
   "rule": "11b",
@@ -93,6 +124,15 @@
   "tabs": "Systems/Institutions",
   "kinds": "chip",
   "form": "Services · Dyed cloth",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 7,
+  "n": 7,
+  "tabs": "Systems/Resources",
+  "kinds": "dairy farmer",
+  "form": "No livestock reaches the dairy farmer.",
   "writer": null
  },
  {
@@ -174,6 +214,15 @@
   }
  },
  {
+  "rule": "11g.gapLine",
+  "towns": 4,
+  "n": 4,
+  "tabs": "Systems/Resources",
+  "kinds": "peat cutter",
+  "form": "No peat reaches the peat cutter.",
+  "writer": null
+ },
+ {
   "rule": "11b",
   "towns": 3,
   "n": 3,
@@ -211,6 +260,33 @@
    "line": 530,
    "alsoIn": 3
   }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 3,
+  "n": 3,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No coal reaches the mine.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 3,
+  "n": 3,
+  "tabs": "Systems/Resources",
+  "kinds": "charcoal burner",
+  "form": "No timber reaches the charcoal burner.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 3,
+  "n": 3,
+  "tabs": "Systems/Resources",
+  "kinds": "shepherd",
+  "form": "No livestock reaches the shepherd.",
+  "writer": null
  },
  {
   "rule": "11a.imported",
@@ -363,6 +439,19 @@
    "file": "src/data/crisisDependence.js",
    "line": 987,
    "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Resources",
+  "kinds": "hunter's lodge",
+  "form": "No game reaches the hunter's lodge.",
+  "writer": {
+   "file": "src/domain/worldPulse/magicForms.js",
+   "line": 159,
+   "alsoIn": 0
   }
  },
  {
@@ -991,6 +1080,82 @@
   "tabs": "World/NPCs",
   "kinds": "person.wants",
   "form": "Wants Lay in a season of timber at the docks while it can still be had.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "carpenter",
+  "form": "No timber reaches the carpenter.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "salt works",
+  "form": "No salt reaches the salt works.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "cobbler's guild",
+  "form": "No hides reach the cobbler's guild.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "wildfowler",
+  "form": "No reeds reaches the wildfowler.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "fuller",
+  "form": "No wool reaches the fuller.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "fishing community",
+  "form": "No fish reaches the fishing community.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "potter",
+  "form": "No clay reaches the potter.",
+  "writer": {
+   "file": "src/domain/display/tradeListDisplay.js",
+   "line": 148,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "tanner",
+  "form": "No hides reach the tanner.",
   "writer": null
  }
 ]

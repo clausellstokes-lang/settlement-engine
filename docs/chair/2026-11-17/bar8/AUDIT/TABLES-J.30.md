@@ -1,6 +1,6 @@
 # TABLES-J · the distinct lines of LAW 11 over `out-J/J30.json`, each with its writer at the base
 
-46 instances in 14 towns; 32 distinct lines. A writer is the first file `git grep -F` finds for the line's longest fixed run (data first); "(untraced)" where none is found.
+54 instances in 17 towns; 36 distinct lines. A writer is the first file `git grep -F` finds for the line's longest fixed run (data first); "(untraced)" where none is found.
 
 ## 11a.atWork
 
@@ -88,4 +88,13 @@
 |---:|---:|---|---|---|---|
 | 1 | 1 | World/NPCs | person.wants | Wants Buy stone and iron and grain at the market in bulk this season, while the price is still fair. | (untraced) |
 | 1 | 1 | World/NPCs | person.wants | Wants Lay in a season of livestock and game at the butchers while it can still be had. | (untraced) |
+
+## 11g.gapLine
+
+| towns | instances | tabs | kinds | the line (names folded) | writer |
+|---:|---:|---|---|---|---|
+| 4 | 4 | Systems/Resources | stone quarry | No stone reaches the stone quarry. | `src/domain/display/validationOnPage.js:541` (+1) |
+| 2 | 2 | Systems/Resources | mine | No iron ore reaches the mine. | (untraced) |
+| 1 | 1 | Systems/Resources | potter | No clay reaches the potter. | `src/domain/display/tradeListDisplay.js:148` (+2) |
+| 1 | 1 | Systems/Resources | fisher's landing | No fish reaches the fisher's landing. | (untraced) |
 

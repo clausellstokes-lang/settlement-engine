@@ -16,6 +16,14 @@
   "form": "Fish sold daily from the morning catch."
  },
  {
+  "rule": "11g.gapLine",
+  "towns": 4,
+  "n": 4,
+  "tabs": "Systems/Resources",
+  "kinds": "stone quarry",
+  "form": "No stone reaches the stone quarry."
+ },
+ {
   "rule": "11b",
   "towns": 3,
   "n": 3,
@@ -54,6 +62,14 @@
   "tabs": "Systems/Institutions",
   "kinds": "chip",
   "form": "Services · Livery and uniforms"
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No iron ore reaches the mine."
  },
  {
   "rule": "11a.atWork",
@@ -254,5 +270,21 @@
   "tabs": "World/NPCs",
   "kinds": "person.wants",
   "form": "Wants Lay in a season of livestock and game at the butchers while it can still be had."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "potter",
+  "form": "No clay reaches the potter."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "fisher's landing",
+  "form": "No fish reaches the fisher's landing."
  }
 ]
