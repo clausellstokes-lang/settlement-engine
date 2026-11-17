@@ -30,7 +30,7 @@ import { BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGH
  *   _seed?: unknown,
  *   config?: { nearbyResources?: unknown, nearbyResourcesDepleted?: unknown, tradeRouteAccess?: unknown,
  *     terrainOverride?: unknown, [key: string]: unknown } | null,
- *   economicState?: { primaryImports?: unknown } | null,
+ *   economicState?: { primaryImports?: unknown, activeChains?: unknown } | null,
  *   institutions?: ReadonlyArray<unknown> | null,
  * }} StoryRecord the saved record, or the generator's record in the making (the same fields)
  */
@@ -195,6 +195,17 @@ export function sourceStoryOf(record, inst, seed = seedOfRecord(record)) {
     // the plain word on the list answers too ("Timber" bought for the cooper is the burner's cordwood)
     return boughtIn(record, word, true, seed) || importsHold(record, RUNS_ON_BOUGHT[id]) ? { story: 'bought', ground, word } : { story: 'idle', ground, word: '' };
   };
+  // the record's own chains on the house's own grounds speak first (a mine whose every chain works its spent coal seam is worked
+  // out, whatever other seam of its kind lies near); a chain of another ground does not hide its own (the audit's c1: a live coal
+  // chain hid six peat cutters' spent marsh)
+  const chains = arr(/** @type {{ activeChains?: unknown } | null | undefined} */ (record?.economicState)?.activeChains)
+    .map((c) => /** @type {{ resourceKey?: unknown, status?: unknown, processingInstitutions?: unknown }} */ (c))
+    .filter((c) => !!c && own.includes(str(c.resourceKey)) && arr(c.processingInstitutions).includes(inst?.name));
+  if (chains.length) {
+    const worked = chains.filter((c) => !(spent.has(str(c.resourceKey)) && c.status !== 'magically_sustained'));
+    if (worked.length) return { story: 'local', ground: '', word: '' };
+    return usedUp(str(chains.map((c) => str(c.resourceKey)).sort()[0]));
+  }
   if (own.some((g) => live.has(g))) return { story: 'local', ground: '', word: '' };
   const spentOwn = own.filter((g) => spent.has(g)).sort();
   if (id === 'salt_works' && onCoast(record) && !spentOwn.length) return { story: 'local', ground: '', word: '' };

@@ -22,7 +22,7 @@ import {
   localProducerSupplies, terrainSynonymsFor, tradeFinisherIn, ventureHouseOf, worksTheGround,
 } from '../domain/facts/houseInputAtHand.js';
 import { BUYS_AND_WORKS, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGHT, isSourceHouse } from '../domain/facts/houseKinds.js';
-import { boughtIn, sourceStoryOf, storySeed, usedGroundOf } from '../domain/facts/supplyStory.js';
+import { boughtIn, impliedGroundsShown, sourceStoryOf, storySeed, usedGroundOf } from '../domain/facts/supplyStory.js';
 import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
 import { HOUSE_TRADE_INPUT, SPENT_GROUND_YIELD } from '../data/crisisDependence.js';
 import { catalogIdForName } from '../data/institutionalCatalog.js';
@@ -742,10 +742,16 @@ export const generateResourceAnalysis = (
   );
   const activeChains   = evaluateEconomicActivity(terrainType, nearbyResources, waterAccessKind(terrainType, config.tradeRouteAccess));
   const exploitation   = evaluateInstitutions(nativeInstitutions, activeChains);
+  // BIRTH-2 (BR4 (b)): THE GROUND A HOUSE PROVES, THERE BY THE SEED, is no critical import: the need list ("Needed, and not
+  // brought in: timber") does not stand beside the woodland the charcoal burner stands in. Read over the record in the making
+  // with the generator's seed; it builds no chain and no export (the economy's hour is past: the audit's V2)
+  const storyRecord = { config, economicState, institutions: nativeInstitutions, _seed: storySeed(seed) };
+  const proven = impliedGroundsShown(storyRecord, ventureHouseOf(storyRecord)).there
+    .flatMap((g) => [g, ...(/** @type {Record<string, { commodities?: string[] }>} */ (RESOURCE_DATA)[g]?.commodities || [])]);
   const imports        = buildViabilityReport(
     terrainType,
     nativeInstitutions,
-    nearbyResources,
+    [...(nearbyResources || []), ...proven],
   );
   // BIRTH-1 (R2): a house that buys and works its material has it brought in, before the gaps are written (above)
   const importsBeforeBirth = economicState && Array.isArray(economicState.primaryImports) ? [...economicState.primaryImports] : [];

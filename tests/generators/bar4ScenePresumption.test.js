@@ -10,6 +10,7 @@
 // The printed lines read are the record's arrival scene and the general desk's lines (the owner's read, every section),
 // the two writers of the kind. Measured at the base 8aef8e7d46 (the census's dump of the Overview): the counts are in
 // docs/chair/2026-11-16/bar4/BAR4-SCENES-HANDBACK.md.
+import { BUYER_IMPORT_WORDS } from '../../src/domain/facts/houseKinds.js'; // BIRTH-2: the fourth story's refusing town
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { scenePresumptionFindings, PRESUMES } from '../helpers/scenePresumption.js';
@@ -204,7 +205,12 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
         }).filter(Boolean);
         return { ...base, resourceAnalysis: { ...base.resourceAnalysis, gaps: [...(base.resourceAnalysis?.gaps || []), ...gaps] } };
       };
-      const gappedTown = gapped(town);
+      // RE-KEYED BY IDENTITY (BIRTH-2, 2026-11-17; the brief's item on this arm: since BIRTH-1 the makers' stored gap says
+      // `imported`, so the struck lists no longer left them short): the refusing town is composed IN THE OWNER'S FOURTH STORY,
+      // through the one reading: the material the birth buys in for its trade houses (`houseKinds.js :: BUYER_IMPORT_WORDS`) is
+      // not bought, struck from the imports as the story leaves it, so the one reader calls their input missing and they idle
+      const idle = (/** @type {any} */ base) => ({ ...base, economicState: { ...base.economicState, primaryImports: (base.economicState?.primaryImports || []).filter((/** @type {unknown} */ x) => !BUYER_IMPORT_WORDS.has(String(x))) } });
+      const gappedTown = gapped(idle(town));
       if (factsOf(gappedTown).tradeAtWork(key) === false) return gappedTown;
       const good = /** @type {any} */ (GOOD_TRADES)[key];
       // a market house's trade IS the route: where the gaps alone leave the trade at work, the road is cut too (isolated)
