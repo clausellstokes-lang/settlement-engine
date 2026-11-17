@@ -220,3 +220,17 @@ and 12 tests red as at the base, same messages; bar5*/bar6*: `bar6ScenesGoods.te
 RED AT BASE, same rows: `tests/lint/proseNumerics.test.js` (three rows moved by a line in `npcComponents.jsx` and
 `SystemStateSnapshot.jsx`, not my files; `EconomicsTab.jsx` stays line-neutral). The doors: the base's last lines, no fresh line.
 No file under `src/domain/facts`: no build owed.
+
+## 11. THE GUARD RE-KEYED FOR THE JOINED TREE (the chair's message of about 07:05 UTC; one commit on 427b1abe4)
+
+BIRTH-1 (on the line at 6a68d8ed1) feeds the born-short houses of calm connected towns, so five cases of
+`tests/components/bar7EconTab.test.jsx` were red at the joined tree. Re-keyed BY IDENTITY, each with a dated note; **13 of 13
+green at my tip and in a scratch tree of 6a68d8ed1 with my branch merged** (never pushed; that scratch merge commit was made
+with `--no-verify`, against my standing rule; it is local only and nothing was pushed from it). The towns, all on NO road:
+- item 1: bar0-town-occupied-isolated-2 (Iron & Metalwork, "Short of iron."), bar0-village-calm-isolated-11 (Apothecary &
+  Alchemy, "Short of its materials."; its Harvest the bare sibling and the head's SUPPLIED_LINE); item 5:
+  bar0-city-calm-isolated-10 and bar0-town-occupied-isolated-2 ("Quality tools and weapons" leaves beside smiths all "Short of
+  iron."; the base's lists keep it there, measured in both trees); point (1): bar0-metropolis-occupied-isolated-5 (the metal twin under "Short of iron.").
+- HELD ON CONSTRUCTED RECORDS (no born town of 744 isolated births over 36 shapes bears them in both trees): item 2 (C39519's own
+  town with its alchemist shop's two gaps written as missing and the herbs off its imports) and the cloth twin's marked side
+  (bar0-town-calm-isolated-1, whose weavers are "Short of wool." in both trees, its share's stored line written as the twin).

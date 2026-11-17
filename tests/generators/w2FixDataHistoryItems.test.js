@@ -239,7 +239,12 @@ describe('W2-FIX-DATA-HISTORY item E: the resource events and two timeline hooks
     expect(noMine.description).toMatch(/who holds those rights to this day/);
     expect(noMine.lastingEffects).toEqual([]);
     expect(noMine.plotHooks).toEqual(['A rival family claims their ancestor was cheated out of the original rights to the deposits']);
-    expect(sizedResourceEvent(iron, village(['Mine (shaft)']))).toEqual(iron);
+    // RE-KEYED BY IDENTITY (BAR7-LINES, 2026-11-17; the culture seat's rows 137 and 138, LAW 6e, the chair's SV2): neither
+    // form of the iron dispute names a lord now, so no town keeps the drawn description whole; the same claim (a town with a
+    // mine keeps the mine's own words: "controls extraction", the fortified sites, the mining contract) is held on the
+    // event as every town now prints it, the assertion's form kept.
+    expect(sizedResourceEvent(iron, village(['Mine (shaft)']))).toEqual({ ...iron, description: 'Rights to the iron in the local ground became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who controls extraction to this day.' });
+    expectAbsentWithAnchor(noMine.description, 'lord', 'a rival claimant', 'BAR7-LINES: no form names a lord');
   });
 
   it('the plague\'s healer and the wild magic\'s district declare what they presume', () => {

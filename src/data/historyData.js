@@ -1298,7 +1298,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The investigator who uncovered the corruption has received a death threat',
       "A key witness can be found, but won't speak without protection",
-      'The corruption goes higher than anyone yet suspects; the reformers are being used',
+      'The corruption goes higher than anyone yet suspects; those pressing to expose it are being used', // BAR7-LINES (LOW hook-party, 7 of the 720): names no party the town may not hold
     ],
     severity: ['major'],
   },
@@ -1922,8 +1922,10 @@ export const HISTORY_DESC_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Arcane regulatory body established with unusual local authority", needs: Object.freeze(['tier: ≥ town']) }),
   ]),
   "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.": Object.freeze([
-    Object.freeze({ text: "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.", needs: Object.freeze(['institution: mine']) }),
-    Object.freeze({ text: "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who holds those rights to this day.", twinOf: "Rights to the local iron deposits became the subject of a prolonged dispute between the settlement and a rival lord. The outcome shaped who controls extraction to this day.", excludes: Object.freeze(['institution: mine']) }),
+    // BAR7-LINES (the culture seat's rows 137 and 138, left by name; LAW 6e, the chair's SV2): the event is resolved at the birth,
+    // where no sovereign is known, so neither form names a lord; "a rival claimant" says the dispute and presumes no realm
+    Object.freeze({ text: "Rights to the iron in the local ground became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who controls extraction to this day.", needs: Object.freeze(['institution: mine']) }),
+    Object.freeze({ text: "Rights to the iron in the local ground became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who holds those rights to this day.", twinOf: "Rights to the iron in the local ground became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who controls extraction to this day.", excludes: Object.freeze(['institution: mine']) }),
   ]),
   "A rival family claims their ancestor was cheated out of the original mining contract": Object.freeze([
     Object.freeze({ text: "A rival family claims their ancestor was cheated out of the original mining contract", needs: Object.freeze(['institution: mine']) }),

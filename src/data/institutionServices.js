@@ -1352,7 +1352,7 @@ export const INSTITUTION_SERVICES = {
     "Cargo inspection": { on: false, p: 0.3, desc: "Check loads for contraband or unpaid duties." }
   },
   "Town crier": {
-    "Official announcements": { on: true,  p: 1.0, desc: "Proclaim laws, royal decrees, and official notices to the public." },
+    "Official announcements": { on: true,  p: 1.0, desc: "Proclaim laws, decrees and official notices to the public." }, // BAR7-LINES (6e, the chair's SV2): a crier proclaims for whoever rules; no crown
     "Commercial announcements": { on: false, p: 0.6, desc: "Paid announcements for merchants, events, and wanted notices." }
   },
   "Town watch": {
