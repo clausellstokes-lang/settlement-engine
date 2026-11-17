@@ -247,11 +247,25 @@ const evaluateInstitutions = (institutions, activeChains) => {
 
     if (supporters === 0)     result.unexploited.push(chain);
     else if (supporters >= 2) result.fullyExploited.push(chain);
+    // SEAM-ECON item 5 (2026-11-17, BAR6-RECORD's leaving 5; vetoable by the owner): a lone processor beside a FINISHER BY
+    // TRADE of a house the chain names and the roster lacks (`houseInputAtHand.js :: tradeFinisherIn`, the one table the
+    // half-way gap below already reads) works the raw end to end: the chain is not filed Partial ("worked only to
+    // semi-finished goods") where the gap itself says the work does not stop half-way.
+    else if (finishedByTrade(institutions, chain)) result.fullyExploited.push(chain);
     else                      result.partiallyExploited.push(chain);
   });
 
   return result;
 };
+
+/**
+ * Does a finisher by trade stand for a house the chain names and the roster lacks (the half-way gap's own reading)?
+ * @param {ReadonlyArray<any>} institutions @param {{ processingInstitutions?: ReadonlyArray<string> }} chain
+ * @returns {boolean}
+ */
+const finishedByTrade = (institutions, chain) => (chain.processingInstitutions || [])
+  .filter((name) => !institutions.some((i) => i.name === name || houseHead(i?.name) === houseHead(name)))
+  .some((name) => !!tradeFinisherIn(institutions, name));
 
 // ─── buildViabilityReport ─────────────────────────────────────────────────────
 // Identify critical imports (things terrain cannot produce) and institution-resource mismatches.
