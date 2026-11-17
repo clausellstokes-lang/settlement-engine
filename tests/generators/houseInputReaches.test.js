@@ -21,6 +21,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { generateResourceAnalysis } from '../../src/generators/resourceGenerator.js';
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 const SIZES = '(thorp|hamlet|village|town|city|metropolis)';
@@ -40,8 +41,18 @@ const rowsOf = (t) => (t.s.resourceAnalysis?.gaps || []).filter((/** @type {any}
 
 /** M-S NOT: a smelter fed by another input (the smallest, a town of 319; a siege; a famine; the largest, 344,689). */
 const SMELTER_FED = ['r2s-infiltrated-town-1', 'r2s-under_siege-town-1', 'r2s-famine-city-0', 'r2s-under_siege-city-3', 'r2r-metropolis-8'];
-/** M-S KEEP: the four census smelters no input reaches (iron, copper and gold/silver all missing), and the imported rows. */
-const SMELTER_UNFED = ['r2r-city-5', 'r2r-city-17', 'r2r-city-36', 'r2r-metropolis-33'];
+/** M-S KEEP: the smelter no input reaches (iron, copper and gold/silver all missing), and the imported rows.
+ * HELD ON A CONSTRUCTED RECORD (BIRTH-1, 2026-11-17; the chair's ruling of 06:05 UTC: the claim is not retired and not
+ * loosened): the four census smelters this arm stood on (r2r-city-5, r2r-city-17, r2r-city-36, r2r-metropolis-33) are now
+ * fed, the birth bringing their ore in on a connected road (`resourceGenerator.js :: importsBroughtAtBirth`), and NO TOWN
+ * OF 1,945 BIRTHS (the census's 720, the wide read's 150, the 525 reference configurations, 700 more `r2r-` seeds) bears
+ * an unfed smelter after the birth's import. The claim stands on a record built here: a smelter, no ore ground, no ore on
+ * the imports, an isolated route, through the same gap writer. The seat after BIRTH-1 may re-key it to a born town (its
+ * rule lets a used-up ground go unbought in one town in four). */
+const SMELTER_UNFED = ['constructed-isolated-smelter'];
+/** The constructed record: a smelter alone, on no ground, on an isolated route, nothing on its imports. @returns {{ seed: string, s: any }} */
+const constructedSmelter = () => ({ seed: SMELTER_UNFED[0], s: { resourceAnalysis: generateResourceAnalysis('hills', [], [], [{ name: 'Smelter' }],
+  { tradeRouteAccess: 'isolated' }, { primaryImports: [], localProduction: [] }) } });
 /** [seed, the imported row that still prints]: a smelter that runs on bought ore says so. */
 const SMELTER_IMPORTS = [['r2s-under_siege-town-1', 'Smelter | iron ore | imported'], ['r2r-metropolis-8', 'Smelter | gold/silver ore | imported']];
 
@@ -66,7 +77,7 @@ const ROUTE_SHUT = [['r2r-city-49', 'Vintner', 'grapes'], ['r2r-metropolis-54', 
 beforeAll(async () => {
   await loadGenerationLawPayloads();
   fed = SMELTER_FED.map(bear);
-  unfed = SMELTER_UNFED.map(bear);
+  unfed = [constructedSmelter()];
   routeFed = ROUTE_FED.map(([seed]) => bear(seed));
   routeShut = ROUTE_SHUT.map(([seed]) => bear(seed));
 }, 180000);

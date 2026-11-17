@@ -144,7 +144,10 @@ describe('LAW 3, one state on every tab (BAR5-CHAINS): the chains, their gaps an
     ['r2r-town-49', 'gapInstances'], // the wool's gap named "Fulling mill" beside a Fuller (fact (a))
     ['r2r-town-39', 'gapInstances'], // the hides' gap named "Leatherworkers' guild" beside a Cobbler's guild
     ['r2r-city-32', 'cardGoodsInstances'], // C37887's form: "Finished clothing · Dyed cloth · Tailored garments" beside "Partial · Wool"
-    ['r2r-city-21', 'idleCraftInstances'], // C31652's form: the vintner, grapes needed and not brought in (fact (b))
+    // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): the birth now brings grapes in for r2r-city-21's vintner (a connected road
+    // no siege shuts: `resourceGenerator.js :: importsBroughtAtBirth`), so its need is met; the same vintner, grapes needed
+    // and not brought in, stands in r2r-metropolis-54, a calm town of the 720 on no road.
+    ['r2r-metropolis-54', 'idleCraftInstances'], // C31652's form: the vintner, grapes needed and not brought in (fact (b))
     ['r2s-plague_onset-city-1', 'stoppedCardInstances'], // C3874's form: an escort on a working card under the outbreak (CC1 (i))
     ['r2s-under_siege-hamlet-0', 'stoppedCardInstances'], // C17893: "Faith & Worship ✓ Running" over a shrine whose every service is stopped (CC1 (ii))
   ];
