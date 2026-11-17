@@ -1,0 +1,5 @@
+{"id":"C9894","town":"bar0-city-wartime-rand-46","sev":"LOW","kind":"BROKEN","why":"plural subject 'Religious Authorities' with singular verb 'gains'","other":""}
+{"id":"C10970","town":"bar0-city-wartime-rand-46","sev":"MED","kind":"LACKS","why":"gemstones 'fully exploited' but HOUSES has no mine or gemcutter and TRADE exports and makes no gems","other":""}
+{"id":"C11211","town":"bar0-city-wartime-rand-46","sev":"LOW","kind":"LACKS","why":"'unofficial landing points' in a mountain city whose trade access is road only; no water route","other":""}
+{"id":"C10063","town":"bar0-city-wartime-rand-46","sev":"LOW","kind":"BROKEN","why":"plural 'the blacksmiths' taken up by singular 'if it gives way'","other":""}
+{"id":"DONE","lines":2623,"blocks":1,"flags":4}

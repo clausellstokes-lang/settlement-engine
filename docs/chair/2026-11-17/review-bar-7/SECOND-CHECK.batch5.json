@@ -1,0 +1,187 @@
+[
+ {
+  "id": "C0423",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "section": "Systems/Institutions",
+  "text": "Services · Fresh produce · Street food (stopped)",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: Fresh produce offered with no mark under siege and famine (grown 7%, deficit 93%) while street food on the same row is stopped"
+  ]
+ },
+ {
+  "id": "C0453",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "section": "Systems/Institutions",
+  "text": "Services · District trading",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: District trading at market squares printed unmarked under the siege, which stops trade by road, gate and water"
+  ]
+ },
+ {
+  "id": "C0893",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "section": "Systems/Economics",
+  "text": "Needed, and not brought in: iron ore, copper ore, gold and silver ore.",
+  "readers": "c+b",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: says iron ore is not brought in; LAND gaps record Smelter runs on imported iron ore, and its card is only curtailed by siege",
+   "(LOW by the first pair) b: Says iron ore is needed and not brought in, but LAND gap says Smelter runs on imported iron ore and TRADE imports iron"
+  ]
+ },
+ {
+  "id": "C0902",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "section": "Systems/Economics",
+  "text": "Meals follow the season and what the household has put by.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: calm-times line (meals follow the season, what households put by) in a famine with 93% deficit and 0.1 months' stores"
+  ]
+ },
+ {
+  "id": "C2821",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "section": "Systems/Institutions",
+  "text": "Services · Fresh produce · General trade",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: Daily markets offer fresh produce and general trade unmarked under siege and famine; bread and grain are marked scarce"
+  ]
+ },
+ {
+  "id": "C2853",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "section": "Systems/Institutions",
+  "text": "Services · Coin production",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: Mint's coin production unmarked; precious metals are imported (veins depleted) and the siege cuts imports; smelter's gold ore curtailed (other: C2734)"
+  ]
+ },
+ {
+  "id": "C3863",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "section": "Systems/Defense",
+  "text": "Whatever crime is organised at Svetoko has no rival, and no crew is contesting the streets with it.",
+  "readers": "c+ab",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: Says organised crime has no rival and no crew contests it; the same tab says networks lack a single controlling authority, gangs competing (other: C3850)",
+   "(LOW by the first pair) a: says organised crime has no rival and no crew contests the streets; C3850-C3851 give semi-organized networks, several gangs competing, no single authority",
+   "(LOW by the first pair) b: says organised crime has no rival and no crew contests it; C3850-51 say semi-organized networks, no single authority, several gangs may compete"
+  ]
+ },
+ {
+  "id": "C19407",
+  "town": "bar0-hamlet-under_siege-rand-47",
+  "section": "Systems/Magic",
+  "text": "Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to a house of worship",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: magical food 'supplied by Access to a house of worship', which the page marks Stopped by the siege, yet magic still feeds 27% (other: C19076)"
+  ]
+ },
+ {
+  "id": "C36585",
+  "town": "bar0-town-occupied-rand-45",
+  "section": "Summary/Overview",
+  "text": "\"The Succession Crisis aside, the history here is long and steady, and travellers remember the place kindly\"",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: history 'long and steady', travellers remember kindly: calm-times line in a town CRISIS shows Under Occupation now"
+  ]
+ },
+ {
+  "id": "C36591",
+  "town": "bar0-town-occupied-rand-45",
+  "section": "Summary/Overview",
+  "text": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: racks of drying local catch; LAND River Fisheries depleted, TRADE imports salted fish (local river fishery exhausted) (other: C37093)"
+  ]
+ },
+ {
+  "id": "C36970",
+  "town": "bar0-town-occupied-rand-45",
+  "section": "Systems/Services",
+  "text": "Fish sold daily from the morning catch.",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: fresh fish 'sold daily from the morning catch', unmarked; fishery depleted, page says fish now salted and bought in (other: C37093)"
+  ]
+ },
+ {
+  "id": "C43392",
+  "town": "bar0-village-famine-rand-45",
+  "section": "Summary/Overview",
+  "text": "The fishing failed this year and took most of the food produced here with it.",
+  "readers": "c",
+  "kinds": [
+   "LACKS"
+  ],
+  "whys": [
+   "c: fishing 'took most of the food produced here'; no fisher's house, no fishing ground on LAND; Farmland/Harvest 52% is the main living"
+  ]
+ },
+ {
+  "id": "C43737",
+  "town": "bar0-village-famine-rand-45",
+  "section": "Systems/Economics",
+  "text": "Of the food Vedamala raises for itself, its fishing comes first, and after a poor season for the fishing there is less to go round.",
+  "readers": "c",
+  "kinds": [
+   "LACKS"
+  ],
+  "whys": [
+   "c: 'its fishing comes first' of food raised; HOUSES has no fishery and LAND no fishing ground; Farmland is the chief source"
+  ]
+ },
+ {
+  "id": "C44634",
+  "town": "bar0-village-famine-rand-46",
+  "section": "Systems/Power",
+  "text": "A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.",
+  "readers": "c",
+  "kinds": [
+   "LACKS"
+  ],
+  "whys": [
+   "c: reeve 'under noble oversight'; GOVERNMENT lists only Elected Reeve and Grain Holders, no noble power"
+  ]
+ }
+]

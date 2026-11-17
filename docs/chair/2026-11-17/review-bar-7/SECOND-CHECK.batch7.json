@@ -1,0 +1,179 @@
+[
+ {
+  "id": "C17347",
+  "town": "bar0-hamlet-calm-rand-47",
+  "section": "World/History",
+  "text": "The trade the settlement was founded to serve failed within its first few years, and the wealth it was meant to carry never came",
+  "readers": "c+b",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: says the settlement was founded to serve a trade; FOUNDING gives a religious community, reason None",
+   "(LOW by the first pair) b: says settlement was founded to serve a trade; FOUNDING says a religious community drifted into secular life, reason None"
+  ]
+ },
+ {
+  "id": "C19722",
+  "town": "bar0-metropolis-calm-rand-45",
+  "section": "Summary/Overview",
+  "text": "Half of Gantulgaabad seems to be gutting, salting or selling fish.",
+  "readers": "c+ab",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: half the town gutting and salting fish; LAND River Fisheries depleted, TRADE imports salted fish (local river fishery exhausted) (other: C21337)",
+   "(LOW by the first pair) a: Half the town gutting and selling fish, but LAND gives River Fisheries depleted and salted fish is imported (river fishery exhausted)",
+   "(LOW by the first pair) b: Half the town gutting, salting fish; LAND has River Fisheries depleted and TRADE imports salted fish (local river fishery exhausted)"
+  ]
+ },
+ {
+  "id": "C20700",
+  "town": "bar0-metropolis-calm-rand-45",
+  "section": "Systems/Services",
+  "text": "Fish sold daily from the morning catch.",
+  "readers": "c+b",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: fish sold daily from the morning catch, unmarked; LAND River Fisheries depleted, Resources tab says river fisheries worked out (other: C21337)",
+   "(LOW by the first pair) b: Fish sold from the morning catch, but LAND gives River Fisheries depleted and TRADE imports salted fish (river fishery exhausted); no landing house"
+  ]
+ },
+ {
+  "id": "C20963",
+  "town": "bar0-metropolis-calm-rand-45",
+  "section": "Systems/Economics",
+  "text": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: rites keep the catch coming and it is landed here; FOOD by magic 0%, TRADE says local river fishery exhausted"
+  ]
+ },
+ {
+  "id": "C21547",
+  "town": "bar0-metropolis-calm-rand-45",
+  "section": "Systems/Power",
+  "text": "A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: Military/Guard in a slow war with the guild, arrests made; QUARRELS: Thieves' Guild ~ Military/Guard corrupted, stable (working arrangement) (other: C21411)"
+  ]
+ },
+ {
+  "id": "C34102",
+  "town": "bar0-town-calm-rand-46",
+  "section": "Systems/Economics",
+  "text": "A good part of the clay Drumbeck's work uses must come from elsewhere; when none comes, that work stands idle.",
+  "readers": "c+b",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: says clay must come from elsewhere and sometimes comes; Potter is a failed venture: no clay near and none brought in (other: C33701)",
+   "(LOW by the first pair) b: Says a good part of the clay the work uses comes from elsewhere; the potter is a failed venture where no clay lies near and none is brought in."
+  ]
+ },
+ {
+  "id": "C34109",
+  "town": "bar0-town-calm-rand-46",
+  "section": "Systems/Economics",
+  "text": "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs.",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: livestock for meat 'not brought in' and terrain cannot produce it, yet Butchers sell beef, pork, mutton with no short mark (other: C33960)"
+  ]
+ },
+ {
+  "id": "C34395",
+  "town": "bar0-town-calm-rand-46",
+  "section": "Systems/Defense",
+  "text": "Offenders at Drumbeck are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "readers": "c+ab",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: offenders 'heard' and expect a hearing; page says no court sits here to try anyone, and justice is purchasable (other: C33476)",
+   "(LOW by the first pair) a: says offenders are 'heard' and expect a hearing; the Services/Overview line says no court sits here to try anyone",
+   "(LOW by the first pair) b: Offenders are 'arrested, heard and held' and people expect a hearing, but C33476 says no court sits here to try anyone; HOUSES has no court."
+  ]
+ },
+ {
+  "id": "C36003",
+  "town": "bar0-town-calm-rand-47",
+  "section": "Systems/Defense",
+  "text": "The town knows it needs specialists against the creatures, and has none of its own to send.",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: says the town has no specialists of its own against creatures, but the Veteran's lodge chain outputs monster hunting services and dungeon clearance (other: C35792)"
+  ]
+ },
+ {
+  "id": "C36170",
+  "town": "bar0-town-calm-rand-47",
+  "section": "World/NPCs",
+  "text": "Emir",
+  "readers": "c+a",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: Abir al-Qadir is female (PEOPLE: the lady) but titled Emir, the male form (Emira)",
+   "(LOW by the first pair) a: card title 'Emir' (male rank) for Abir al-Qadir, PEOPLE gives f, 'the lady'; Emira/lady would fit"
+  ]
+ },
+ {
+  "id": "C39513",
+  "town": "bar0-town-occupied-rand-47",
+  "section": "Systems/Institutions",
+  "text": "A collier's kilns under their turf, turning wood into charcoal whenever wood can be had: the fuel that burns hottest.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: Charcoal burner at work, Charcoal supply offered unmarked; LAND has no woodland and TRADE imports no timber or wood"
+  ]
+ },
+ {
+  "id": "C41716",
+  "town": "bar0-village-calm-rand-46",
+  "section": "Systems/Institutions",
+  "text": "Services · Salt production",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: Salt works printed producing salt with no mark; LAND Salt Flats depleted, TRADE imports salt '(local salt flats exhausted)'; ground-taker should be worked out"
+  ]
+ },
+ {
+  "id": "C42154",
+  "town": "bar0-village-calm-rand-46",
+  "section": "World/NPCs",
+  "text": "How they deal Sells by the sack and the cart; the price goes up before winter.",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: saltmaster's card, no mark, sells salt by the sack; Resources says nothing more can be taken from the salt flats, hands idle (other: C41935)"
+  ]
+ }
+]

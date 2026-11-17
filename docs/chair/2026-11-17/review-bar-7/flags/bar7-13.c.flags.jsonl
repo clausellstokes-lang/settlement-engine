@@ -1,0 +1,9 @@
+{"id":"C31029","town":"bar0-thorp-calm-rand-45","sev":"LOW","kind":"BROKEN","why":"'Healing (2)' heading lists Burial and Weekly rite, neither a healing service; label wrong for its items","other":""}
+{"id":"C31326","town":"bar0-thorp-calm-rand-46","sev":"LOW","kind":"LACKS","why":"'their own street' in a thorp of 10 whose houses face one yard (C31325)","other":""}
+{"id":"C31419","town":"bar0-thorp-calm-rand-46","sev":"LOW","kind":"BROKEN","why":"'Healing (2)' heading over Burial and Weekly rite, neither a healing service","other":""}
+{"id":"C31480","town":"bar0-thorp-calm-rand-46","sev":"MED","kind":"STATE","why":"Fish 'Fully exploited' but HOUSES has no fishing house and LAND has no fishing chain; only subsistence farming works the land","other":""}
+{"id":"C31464","town":"bar0-thorp-calm-rand-46","sev":"LOW","kind":"LACKS","why":"food 'the fishing most of all' though HOUSES has no fishing community; only Subsistence farming (C31389: households work land)","other":"C31389"}
+{"id":"HEADER","town":"bar0-thorp-calm-rand-47","sev":"LOW","kind":"RECORD","why":"founded by a discharged soldier who 'had nowhere better to be', yet reason is 'began as a naval base protecting the coast'","other":""}
+{"id":"C31735","town":"bar0-thorp-calm-rand-47","sev":"LOW","kind":"STATE","why":"'none has much put by' but STATE prosperity is Comfortable (C31713)","other":"C31713"}
+{"id":"C31812","town":"bar0-thorp-calm-rand-47","sev":"LOW","kind":"BROKEN","why":"'Healing (2)' heading over Burial and Weekly rite, neither a healing service","other":""}
+{"id":"DONE","lines":1275,"blocks":3,"flags":8}

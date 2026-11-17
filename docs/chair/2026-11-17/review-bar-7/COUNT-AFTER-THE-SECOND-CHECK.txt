@@ -42,3 +42,69 @@ WEAK (1): C16854: the laden carts are real in a hamlet of 70 with an open-cast m
 WHAT IS ALREADY HELD: none of the 16 is one of the leftovers' rows in flight (LEFT-PDF, LEFT-CHAIN, LEFT-MARKS, LEFT-LINES); C42801 (the fish share's line beside a landing short of fish) is the same family as the iron share's twin that LEFT-CHAIN holds (L7); C39616/C40154 touch the four static desk lines that admit a collapsed or absent law (L9, LEFT-LINES) only by family. The 16 are the next round's (BAR8), after an audit that widens the detectors to their families and counts them over the thirty, the 150 and the 720.
 
 HOW THIS READ DIFFERS FROM THE SIXTH, SAID PLAINLY: the readers were helpers on the chair's own machine (the cheaper tier; the first reader of a packet at the default effort, the second at high effort), each with a private copy of its packet and no sight of another's flags, in place of one session a reader; the brief is the sixth's by exact replacements (mk_brief7.py) with what the page now prints by design; the second check ran three checkers on the middle tier at high effort. The raw LOW count is 47 against the sixth's 139: part of that fall is the page (the house's mark is one line on a person's card now) and part may be the readers: LOW flags are not second-checked and are not the bar.
+
+================ THE THIRD READER (2026-11-17 17:02 UTC): THE TWO-READER COUNT ABOVE IS AN UNDERCOUNT ================
+
+WHY A THIRD READER: this read's readers were helpers on the cheaper tier; the two agreed on 13 of 27 MED sentences. A THIRD READER ON THE MIDDLE TIER read all 22 packets, each in a private folder, the same brief (with the Resources paragraph from the start). ITS FLAGS: 168 (MED 62 · LOW 106; no HIGH). Of its 62 MED: 7 fall on sentences the second check had already ruled, ALL SEVEN ON SENTENCES THAT STAND; 54 fall on NEW sentences (12 of them flagged LOW by the first pair) and one on a header (not counted). THE SAME STRICT SECOND CHECK of the 54 (four checkers, the middle tier at high effort; SECOND-CHECK.third54.json):
+  STANDS 30 · WEAK 6 · EXPLAINED 18
+
+THE MEASURE BY THREE READERS: HIGH 0 · MED THAT STANDS 46 IN 30 TOWNS (1.53 a town) · WEAK 7 · EXPLAINED 28
+towns with no MED that stands: 10 of 30
+by shape of town (three towns each): thorp-calm 1 · hamlet-calm 4 · hamlet-under_siege 2 · village-famine 1 · village-calm 3 · town-calm 6 · town-occupied 10 · city-under_siege+famine 8 · city-wartime 7 · metropolis-calm 4
+THE STRONGER READER ALONE: 37 of its MED flags stand (7 + 30). THIS IS THE FIGURE TO COMPARE ACROSS READS FROM NOW ON: one reader of the middle tier a packet and the strict check. THE SIXTH READ'S 29 WAS MADE BY TWO READERS OF ANOTHER KIND AND IS NOT COMPARABLE WITH EITHER FIGURE: PREP-READ-7 re-reads the sixth's 21 packets with the same stronger reader and the same check (its part P4) so that the two reads can be set side by side.
+THE CHAIR SAID 16 TO THE OWNER AT 16:48 WITH A CAVEAT THAT WAS TOO SMALL, AND CORRECTED IT IN THE CHAT AS SOON AS THE THIRD READER'S RAW COUNT WAS IN (16:53), THEN GAVE THE FULL FIGURE.
+
+THE 46 BY FAMILY (the chair's reading; every row with its evidence in SECOND-CHECK.final27.json and SECOND-CHECK.third54.json):
+  F1 · THE SUPPLY STORY IS NOT TOLD ON EVERY LINE (a material used up and bought in, or needed and not brought in, and a line that presumes the other story): 16
+    C19722 · metropolis-calm-rand-45 · Summary/Overview · "Half of Gantulgaabad seems to be gutting, salting or selling fish."
+    C20700 · metropolis-calm-rand-45 · Systems/Services · "Fish sold daily from the morning catch."
+    C20963 · metropolis-calm-rand-45 · Systems/Economics · "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and so"
+    C36591 · town-occupied-rand-45 · Summary/Overview · "Racks of drying fish line the way in, and the smell of salt and catch is everywhere."
+    C36970 · town-occupied-rand-45 · Systems/Services · "Fish sold daily from the morning catch."
+    C42801 · village-calm-rand-47 · Systems/Economics · "Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sol"
+    C0893 · city-under_siege+famine-rand-45 · Systems/Economics · "Needed, and not brought in: iron ore, copper ore, gold and silver ore."
+    C42813 · village-calm-rand-47 · Systems/Economics · "Needed, and not brought in: livestock."
+    C34109 · town-calm-rand-46 · Systems/Economics · "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot spring"
+    C34102 · town-calm-rand-46 · Systems/Economics · "A good part of the clay Drumbeck's work uses must come from elsewhere; when none comes, that work stands idle."
+    C38200 · town-occupied-rand-46 · Systems/Institutions · "Short of iron. Multiple smiths with specializations."
+    C38039 · town-occupied-rand-46 · Summary/Overview · "The forges of Ulaanabad are quiet more often than not, for want of iron."
+    C2853 · city-under_siege+famine-rand-46 · Systems/Institutions · "Services · Coin production"
+    C8867 · city-wartime-rand-45 · World/NPCs · "Wants Buy stone and iron and grain at the market in bulk this season, while the price is still fair."
+    C5157 · city-under_siege+famine-rand-47 · Summary/Overview · "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want."
+    C32296 · town-calm-rand-45 · Systems/Institutions · "Luxury goods available."
+  F2 · AN ORDINARY-TIMES LINE UNDER THE CRISIS OR THE STATE THAT DENIES IT: 8
+    C0476 · city-under_siege+famine-rand-45 · Systems/Institutions · "Services · Repair and refit · Ship construction"
+    C7246 · city-wartime-rand-45 · Summary/Overview · "Being on the right side of it keeps the forges of Eisenmark running day and night on the army's contracts, and"
+    C7477 · city-wartime-rand-45 · Summary/Plot Hooks · "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tool"
+    C7242 · city-wartime-rand-45 · Summary/Overview · "Racks of new ironwork stand outside the workshops, waiting for the carts."
+    C36585 · town-occupied-rand-45 · Summary/Overview · ""The Succession Crisis aside, the history here is long and steady, and travellers remember the place kindly""
+    C39124 · town-occupied-rand-46 · World/Daily Life · "Ulaanabad covers what it must and nothing beyond."
+    C16668 · hamlet-calm-rand-46 · Systems/Power · "People at Khutulunnuur may grumble, but nobody in the hamlet stands ready to lead them against the Headman's A"
+    C19407 · hamlet-under_siege-rand-47 · Systems/Magic · "Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to a house of worship"
+  F3 · A LINE ABOUT LAW, ORDER OR CRIME THAT THE TOWN'S OWN LEGAL STATE DENIES: 9
+    C39616 · town-occupied-rand-47 · Systems/Services · "The court sits and the gaol holds, but both are slow, and coin buys a quicker answer."
+    C40154 · town-occupied-rand-47 · Systems/Defense · "Offenders at Nandanand are arrested, heard and held, and each case is written down, so people expect a hearing"
+    C34395 · town-calm-rand-46 · Systems/Defense · "Offenders at Drumbeck are arrested, heard and held, and each case is written down, so people expect a hearing,"
+    C16222 · hamlet-calm-rand-45 · Systems/Defense · "Ravenland keeps no court and no gaol, and no wrong done there is written down; order is kept by whoever is arm"
+    C37891 · town-occupied-rand-45 · World/Relationships · "An old friend of Xenophon Gregoraios's is held by the watch, and Ariadne Chrysoberges is the one who keeps tha"
+    C42053 · village-calm-rand-46 · Systems/Defense · "You will see the local watch on the rounds most hours of the day; it catches the careless and misses the caref"
+    C3863 · city-under_siege+famine-rand-46 · Systems/Defense · "Whatever crime is organised at Svetoko has no rival, and no crew is contesting the streets with it."
+    C8647 · city-wartime-rand-45 · Systems/Defense · "Whatever crime is organised at Eisenmark has no rival, and no crew is contesting the streets with it."
+    C21547 · metropolis-calm-rand-45 · Systems/Power · "A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken."
+  F4 · A TEXT SET ON THE WRONG PERSON OR POWER: 8
+    C14226 · city-wartime-rand-47 · Systems/Power · "Crown-appointed emergency body with powers over requisition, conscription, and price controls."
+    C6183 · city-under_siege+famine-rand-47 · Systems/Power · "handled by Durga Khanna, the gang boss (Rival gangs)"
+    C16666 · hamlet-calm-rand-46 · Systems/Power · "At Khutulunnuur the hamlet's business goes to the whole Headman's Authority, and everybody has learned how lon"
+    C44634 · village-famine-rand-46 · Systems/Power · "A reeve elected from the peasantry manages labour and mediates disputes under noble oversight."
+    C5296 · city-under_siege+famine-rand-47 · Summary/Plot Hooks · "They have evidence of price-fixing across the whole market."
+    C6865 · city-under_siege+famine-rand-47 · World/NPCs · "Secret: Authorised an illegal sortie that failed."
+    C36170 · town-calm-rand-47 · World/NPCs · "Emir"
+    C14564 · city-wartime-rand-47 · World/NPCs · "Wants Win two more people in The Martial Alliance over to their side before Itzam Cohuoh notices."
+  F5 · A LINE THAT PRESUMES WHAT THE PLACE DOES NOT HOLD, OR A WORD ITS OWN ROW DENIES: 5
+    C15891 · hamlet-calm-rand-45 · Summary/Overview · "Laden carts from the workings grind along the road in a line that never seems to end."
+    C31732 · thorp-calm-rand-47 · Summary/Overview · "A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer"
+    C36003 · town-calm-rand-47 · Systems/Defense · "The town knows it needs specialists against the creatures, and has none of its own to send."
+    C18613 · hamlet-under_siege-rand-46 · Systems/Defense · "Llanham has no line and no force, and danger is close at hand."
+    C40806 · town-occupied-rand-47 · World/Daily Life · "In Nandanand the old buildings are patched and kept standing, and nothing new goes up."
+
+NOTES FOR THE NEXT ROUND: C19722, C20700 and C20963 are one fault (a local catch where the fishery is worked out and fish is bought in); C36591 and C36970 the same fault in another town; C7246, C7477 and C7242 one (the war's forges); C39616, C40154 and C34395 one template ("arrested, heard and held") in two towns; C3863 and C8647 one template ("has no rival") in two cities; C38200 and C38039 one town's iron. C6865 IS ONE OF THE OWNER'S VERY RARE SECRETS IN ITS FOURTH FAULT CASE (an office the person cannot hold). C18613 stands for the pair it makes with the bar's word; the bar itself (C18612) was explained by the standing rule on threat bars: ONE fault.

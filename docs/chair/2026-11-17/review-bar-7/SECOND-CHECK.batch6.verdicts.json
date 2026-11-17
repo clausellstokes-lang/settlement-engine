@@ -1,0 +1,158 @@
+[
+ {
+  "id": "C7242",
+  "town": "bar0-city-wartime-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Racks of new ironwork stand outside the workshops, waiting for the carts. — bar7-04 C7242 (Summary/Overview scene, no mark)",
+   "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. — bar7-04 C7477",
+   "Blacksmiths · Crafts / Curtailed by the war. Farriers, toolsmiths, and general forges in every quarter. — dump Systems/Institutions",
+   "Specialized metalworkers · Crafts / Curtailed by the war. ...; Smelter · Crafts / Curtailed by the war. — dump Systems/Institutions"
+  ],
+  "note": "Every house that could make ironwork (Blacksmiths, Specialized metalworkers, Smelter) is marked Curtailed by the war and the page says the smiths have nothing to work, yet the unmarked overview scene shows racks of new ironwork. Close kin of the in-flight forge-scene family, but the mark here is 'Curtailed by the war', not 'Short of iron'; the page also contradicts itself at C7246 (forges 'running day and night')."
+ },
+ {
+  "id": "C8647",
+  "town": "bar0-city-wartime-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Criminal structure: Semi-organized networks — bar7-04 C8624",
+   "Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. — bar7-04 C8625",
+   "Several gangs may be competing. — bar7-04 C8626",
+   "Whatever crime is organised at Eisenmark has no rival, and no crew is contesting the streets with it. — bar7-04 C8647"
+  ],
+  "note": "The same Defense tab says crime here is several networks holding territories with no single authority (unhedged at C8625), then that organised crime has no rival and no crew contests it; X and not-X on one panel. Only C8626 is hedged; C8625 is not."
+ },
+ {
+  "id": "C8867",
+  "town": "bar0-city-wartime-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Wants Buy stone and iron and grain at the market in bulk this season, while the price is still fair. — bar7-04 C8867 (Klara Weber's card)",
+   "Needed, and not brought in: stone, copper ore, gold and silver ore. — bar7-04 C8191",
+   "primaryImports: Iron, Grain, Salt, ... (no stone) — record economicState.primaryImports; LAND lists no stone ground, HOUSES no quarry",
+   "army contracts pay, prices are high — bar7-04 C7279"
+  ],
+  "note": "Iron and grain are on TRADE's imports, but the want presumes stone on sale at the market at a fair price where the page itself says stone is needed and not brought in and nothing in the town quarries it; the header denies it, so even read as a goal line it is false on stone."
+ },
+ {
+  "id": "C14226",
+  "town": "bar0-city-wartime-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "[opened] The Martial Alliance Military · 8 / Crown-appointed emergency body with powers over requisition, conscription, and price controls. — bar7-06 C14225-C14226",
+   "War Council ... / Crown-appointed emergency body with powers over requisition, conscription, and price controls. — bar7-06 C14085-C14088",
+   "The Martial Alliance desc identical to War Council desc; contestsNiche: 'War Council' — record powerStructure.factions",
+   "Itzam Cohuoh (m), the castellan @ Citadel [The Martial Alliance (rank 1)]; Metztli Caan (f), the lanista @ Gladiatorial school [rank 2] — bar7-06 PEOPLE"
+  ],
+  "note": "The record copies the War Council's text onto The Martial Alliance, a separate power led by a castellan and a lanista that rivals the War Council and quarrels with the assembly; the page prints one crown-appointed-body description for two different powers."
+ },
+ {
+  "id": "C16666",
+  "town": "bar0-hamlet-calm-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "At Khutulunnuur the hamlet's business goes to the whole Headman's Authority, and everybody has learned how long the answer takes. — bar7-07 C16666",
+   "A single respected figure acts as de facto authority. / Decisions are practical, made without ceremony. — bar7-07 C16513, C16515",
+   "Headman's Authority ... ↳ · 1 member · first Berke Jalayir — bar7-07 C16663",
+   "PEOPLE (1, the whole roster): Berke Jalayir (m) ... [Headman's Authority (rank 1)] — bar7-07 header"
+  ],
+  "note": "The line describes a slow collective body ('the whole' authority) where the page and record give one acknowledged headman, one member, deciding practically without ceremony."
+ },
+ {
+  "id": "C16668",
+  "town": "bar0-hamlet-calm-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "People at Khutulunnuur may grumble, but nobody in the hamlet stands ready to lead them against the Headman's Authority. — bar7-07 C16668",
+   "The common people are pressing those in charge over better working conditions, and each dispute grows louder than the last — bar7-07 C16458",
+   "Those pressing their demands · Those in charge, who will not give way · Those waiting to see which side wins — bar7-07 C16459",
+   "currentTensions[0].type: popular_uprising, severity: [major, catastrophic] — record history.currentTensions"
+  ],
+  "note": "A calm-times reassurance (only grumbling, no one to lead) beside the town's own live popular-uprising tension with a party already pressing those in charge, rated major; second-check rule 3."
+ },
+ {
+  "id": "C18264",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "verdict": "WEAK",
+  "evidence": [
+   "The road was here first. / The settlement grew along its verge, and its news has always come on somebody else's cart. — bar7-08 C18264-C18265 (Settlement Origin)",
+   "Origin: · began as a mining camp that became permanent when families arrived — dump World/History",
+   "FOUNDING: ... reason: began as a mining camp that became permanent when families arrived — bar7-08 header",
+   "Mountain Pass (available) — bar7-08 header LAND"
+  ],
+  "note": "'The road was here first' is not itself denied: a mining camp beside a road through the mountain pass on LAND fits it. The mismatch is that the Overview's Settlement Origin tells a road-verge growth story while History gives a mining camp, so two origin stories differ in emphasis; not a flat falsehood."
+ },
+ {
+  "id": "C18383",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Access to external mill · Crafts / Stopped by the siege. Nothing is ground here; the grain goes out of the hamlet for grinding. — bar7-08 C18381-C18382",
+   "Services · Grain milling (a day away) — bar7-08 C18383",
+   "Grain milling (a day away) / With the roads cut, grain is ground by hand at home until the carts can get through again. — dump Systems/Services"
+  ],
+  "note": "Brief rule (1): a service chip printed under a house whose own card carries the mark is covered by the card's mark; and the Services tab's own row for this service says the roads are cut and grain is ground by hand, so no tab offers it unmarked."
+ },
+ {
+  "id": "C18575",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "verdict": "WEAK",
+  "evidence": [
+   "Áine MacDonald is third in Feudal Stewardship and holds a half share in War Council — bar7-08 C18575",
+   "Third · Áine MacDonald, the charter master · also first in War Council — bar7-08 C18574",
+   "↳ · 1 member · first Áine MacDonald — bar7-08 C18556",
+   "memberships: [{power: War Council, rank: 1, share: 0.5}, {power: Feudal Stewardship, rank: 3, share: 0.5}] — record npcs[Áine MacDonald].memberships"
+  ],
+  "note": "The 'half share' is the record's split of her own weight between her two seats (share 0.5 each), not a claim that someone else holds the other half; the line beside it names her first in War Council. Still a misleading word for the sole member and head of War Council, so a wording fault, not a false seat."
+ },
+ {
+  "id": "C18612",
+  "town": "bar0-hamlet-under_siege-rand-46",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Invasion & War / Adequate▼ — bar7-08 C18611-C18612",
+   "DEFENCE: walls: none · garrison: none · militia: none · watch: none · ... charter: Adventurers' charter hall — bar7-08 header",
+   "charter: [Adventurers' charter hall: '... coordinates local defense where no garrison stands'], scores.military: 44 — record defenseProfile",
+   "Each bar shows how ready the settlement is for that threat, as judged at the first survey — bar7-08 C18607"
+  ],
+  "note": "The reader's premise ('no force of any kind') is wrong: DEFENCE gives an Adventurers' charter hall, which the record says coordinates local defence; the readers' NOT A FLAG rule on a threat bar against the defence word applies, and the bar is labelled as judged at the first survey."
+ },
+ {
+  "id": "C31480",
+  "town": "bar0-thorp-calm-rand-46",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "✓ Fishing industry — bar7-13 C31474 (same tab)",
+   "Xochikin's food comes from more than one source, the fishing most of all — bar7-13 C31464",
+   "The day's catch and the hunters' game anchor the table. — bar7-13 C31460",
+   "exploitation.fullyExploited: [fish]; foodSecurity.activeChains: ['Fishing & water', 'Hunting & foraging']; foodSources: ['fish','game'] — record resourceAnalysis / economicState.foodSecurity",
+   "LAND: Fishing Grounds (available) — bar7-13 header"
+  ],
+  "note": "The premise that only subsistence farming works the land is wrong on the facts: the page and record give fishing as the thorp's main food source on available fishing grounds, and the record itself marks fish fully exploited. At most 'fully' is generous for ten people, but the row is true by the town's own record."
+ },
+ {
+  "id": "C38039",
+  "town": "bar0-town-occupied-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "The forges of Ulaanabad are quiet more often than not, for want of iron. — bar7-18 C38039",
+   "Blacksmiths · Crafts / Short of iron. Multiple smiths with specializations. — dump Systems/Institutions",
+   "Iron ore (local iron mines exhausted) — bar7-18 C38485 (Imports); record economicState.primaryImports",
+   "CRISIS: Under Occupation · conditions: Vassal extraction — bar7-18 header (no siege; no record line says the occupiers take the iron)"
+  ],
+  "note": "The readers' brief's own fault case: the material is on TRADE's imports (its story-2 example wording, 'Iron ore (local iron mines exhausted)') in a town no siege shuts, yet the smiths are marked short of it and the scene says the forges idle for want of iron. The only possible reconciler, that the town has no smelter for ore, is ruled out by the brief's story (2)."
+ },
+ {
+  "id": "C39124",
+  "town": "bar0-town-occupied-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "Ulaanabad covers what it must and nothing beyond. / Every essential is accounted for and there is no line for anything else. — bar7-18 C39124-C39125",
+   "Needed, and not brought in: stone, luxury goods, mineral hot springs. — bar7-18 C38487",
+   "The country around Ulaanabad does not give the town enough stone for what the town needs of it. — bar7-18 C38480",
+   "Ulaanabad falls a little short of the food it needs, and every season the difference is made up by tighter belts. — bar7-18 C38498; Production ... Short: 13 lbs/day — C38493"
+  ],
+  "note": "The page says the town covers every essential, while its own economics say stone is needed and not brought in, the food falls short, and the smiths are short of iron; a calm reassurance in a town in want (rule 3). The food gap alone is small (1%), but the stone line is a stated unmet need."
+ }
+]

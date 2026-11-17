@@ -1,0 +1,11 @@
+{"id":"C17589","town":"bar0-hamlet-under_siege-rand-45","sev":"MED","kind":"PAIR","why":"house marked Stopped by the siege, yet its own row Grain milling printed on offer with no mark","other":"C17588"}
+{"id":"C18038","town":"bar0-hamlet-under_siege-rand-45","sev":"LOW","kind":"PAIR","why":"Mimir's card carries no mark, yet his carpenter's house is printed impaired, short of timber, supply route severed","other":"C17609"}
+{"id":"C17440","town":"bar0-hamlet-under_siege-rand-45","sev":"LOW","kind":"PAIR","why":"trade by 'gate' has stopped, but the page says the palisade has no gate; trade access is road only, no water","other":"C17900"}
+{"id":"C18203","town":"bar0-hamlet-under_siege-rand-45","sev":"LOW","kind":"PAIR","why":"folk attend only on great feast days, but the Services row gives a weekly rite with attendance expected of all","other":"C17651"}
+{"id":"C18264","town":"bar0-hamlet-under_siege-rand-46","sev":"MED","kind":"STATE","why":"origin says the road came first and the hamlet grew on its verge; FOUNDING says it began as a mining camp","other":""}
+{"id":"C18283","town":"bar0-hamlet-under_siege-rand-46","sev":"LOW","kind":"LACKS","why":"trade by gate and water has stopped; DEFENCE gives no walls (so no gate), trade access is road only","other":""}
+{"id":"C18383","town":"bar0-hamlet-under_siege-rand-46","sev":"MED","kind":"PAIR","why":"mill access marked Stopped by the siege, yet its own row Grain milling is printed on offer with no mark","other":"C18382"}
+{"id":"C18575","town":"bar0-hamlet-under_siege-rand-46","sev":"MED","kind":"PAIR","why":"Aine said to hold a half share in War Council, but War Council has one member, Aine herself (PEOPLE: rank 1)","other":"C18556"}
+{"id":"C18612","town":"bar0-hamlet-under_siege-rand-46","sev":"MED","kind":"PAIR","why":"Invasion & War rated Adequate; DEFENCE gives no wall and no force of any kind, and the next line says no line and no force","other":"C18613"}
+{"id":"C18837","town":"bar0-hamlet-under_siege-rand-46","sev":"LOW","kind":"PAIR","why":"few keep the rites beyond weddings and burials, but the Services row gives a weekly rite with attendance expected of all","other":"C18413"}
+{"id":"DONE","lines":1557,"blocks":2,"flags":10}
