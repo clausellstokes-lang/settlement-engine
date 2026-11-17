@@ -42,7 +42,7 @@ import { catalogIdForName, familyOfInstitution, institutionalCatalog } from '../
 import { institutionLadderEvicts } from '../../data/institutionLadders.js';
 import { crisisOf } from '../facts/crisisKind.js';
 import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, tradeFinisherIn, ventureHouseOf } from '../facts/houseInputAtHand.js';
-import { FAMILY_NOUN, GROUND_YIELD, rowGoodOf, sourceStoryOf, ventureLineText } from '../facts/supplyStory.js';
+import { FAMILY_NOUN, GROUND_YIELD, STORY_OF_RECORD, rowGoodOf, sourceStoryOf, ventureLineText } from '../facts/supplyStory.js';
 import { SOURCE_GROUNDS, isSourceHouse } from '../facts/houseKinds.js';
 
 /** @typedef {{ chain: string|null, impact: string, severity: string }} GapLine */
@@ -512,12 +512,17 @@ export function resourceGapLines(s) {
   }
 
   // The houses the generator calls short of an input, grouped by house: one line per idle house.
+  /** BAR8-J-ROWS (G1): the call is the page's mark reading one house alone (`crisisStoppedRow.js :: housesShortOfInput`). */
+  const markReadsAlone = !!s && typeof s === 'object' && Object.prototype.hasOwnProperty.call(s, STORY_OF_RECORD);
   const venture = ventureHouseOf(/** @type {Parameters<typeof ventureHouseOf>[0]} */ (s));
   /**
    * BAR8-J-ROWS (G1): the house's own story lines (worked out; the failed venture's) and the materials they tell: a
-   * worked-out source house's every own ground is spent (`sourceGround`), so it tells each ground's yield as the Depleted
-   * list names it (the good the page's mark then reads off that ground, `housesOnSpentGround`: a peat cutter's marsh yields
-   * reeds, so its "No peat reaches …" stays, and its mark "Short of peat." with it); the venture tells its material.
+   * worked-out source house's every own ground is spent (`sourceGround`), so it tells each ground's good (its yield, and the
+   * row's own name of it: a peat cutter's peat); the venture tells its material. THE MARK'S OWN READING KEEPS THE GENERAL LINE:
+   * the page's mark (`crisisStoppedRow.js :: housesShortOfInput`) reads one house's rows alone, its record carried under
+   * `STORY_OF_RECORD` (the only caller that sets that key), and takes the noun of "Short of <noun>." off "No <noun> reaches
+   * …" (a worked-out peat cutter's marsh yields reeds; its mark says peat). That reading gets exactly the lines it got before
+   * (`markReadsAlone`); the print (the Resources tab, the PDF: the record itself) strikes the told goods.
    * @param {{ name?: unknown, catalogId?: unknown }} inst @param {string} name @param {string} severity
    * @returns {{ lines: GapLine[], nouns: Set<string> }}
    */
@@ -529,7 +534,7 @@ export function resourceGapLines(s) {
     const ground = sourceGround(s, inst);
     if (ground) {
       lines.push({ chain: null, impact: `${capFirst(houseWords(inst))} is worked out: its own ground is depleted (${ground}).`, severity });
-      for (const k of arr(SOURCE_GROUNDS[id])) if (GROUND_YIELD[k]) nouns.add(GROUND_YIELD[k]);
+      for (const k of arr(SOURCE_GROUNDS[id])) { if (GROUND_YIELD[k]) nouns.add(GROUND_YIELD[k]); const own = rowGoodOf(id, k); if (own) nouns.add(own); }
     }
     if (venture && venture.name === name) {
       const why = ventureLine(venture, inst);
@@ -541,6 +546,7 @@ export function resourceGapLines(s) {
         if (id === 'peat_cutter') nouns.add('peat');
       }
     }
+    if (markReadsAlone) nouns.clear(); // the mark's reading: the general line kept, as before (above)
     return { lines, nouns };
   };
   /** @type {Map<string, GapRow>} */

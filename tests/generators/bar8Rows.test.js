@@ -4,7 +4,7 @@
 // source house the general line misstates the work (the mine digs its ore). THE CURE IS A READING AT PRINT
 // (`validationOnPage.js :: resourceGapLines`): where the house's own story line is printed, the general line does not name
 // that material; a gap row with no story line keeps the general line, and no town loses its only gap line. The page's
-// marks ("Short of stone.", the venture's mark) read the same fact and do not move.
+// marks ("Short of stone.", the venture's mark) do not move: the mark's own reading of one house keeps the general line.
 // The towns are the 150's (`docs/chair/2026-11-17/birth/birth3/seeds.w150.txt`) where the base printed the pair (auditor J's
 // rule 11g), each beside a negative of the same town or kind. The counts over the thirty, the 150 and the 720 are in
 // docs/chair/2026-11-17/bar8/BAR8-J-ROWS-HANDBACK.md. Items 1 and 2 of the seat's section are left by name there.
@@ -12,6 +12,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 import { housesShortOfInput } from '../../src/domain/display/crisisStoppedRow.js';
+import { STORY_OF_RECORD } from '../../src/domain/facts/supplyStory.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 
@@ -23,9 +24,8 @@ const TOWNS = Object.freeze({
   'bar0-town-calm-rand-32': { house: 'potter', story: 'stands abandoned' },
   'bar0-village-calm-rand-40': { house: 'sawmill', story: 'stands abandoned' },
   'bar0-town-calm-rand-29': { house: null, keeps: 'No clay reaches the potter.' },
-  // a worked-out peat cutter: its marsh yields reeds, and the page's mark reads "peat" off the general line, so the line stays
-  // (left by name: the mark's own reading is `crisisStoppedRow.js :: housesShortOfInput`, not this seat's)
-  'r2r-hamlet-49': { house: null, keeps: 'No peat reaches the peat cutter.' },
+  // a worked-out peat cutter: its marsh yields reeds, and the page's mark reads "peat" off the general line in its own reading
+  'r2r-hamlet-49': { house: 'peat cutter', story: 'is worked out' },
 });
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
@@ -75,8 +75,7 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
     /** @type {string[]} */ const found = [];
     for (const [seed, town] of BORN) {
       const lines = resourceGapLines(town).map((l) => l.impact);
-      // the worked-out peat cutter's pair is LEFT BY NAME (its mark reads its noun off the general line): held by the next test
-      for (const d of doubledGapLines(lines)) if (!d.startsWith('No peat reaches the peat cutter. | The peat cutter is worked out:')) found.push(`${seed}: ${d}`);
+      for (const d of doubledGapLines(lines)) found.push(`${seed}: ${d}`);
       const want = TOWNS[/** @type {keyof typeof TOWNS} */ (seed)];
       if (want.house) {
         const story = `The ${want.house} ${want.story}`;
@@ -98,6 +97,15 @@ describe('BAR8-J-ROWS G1: one house, one material, one gap line', () => {
     const lines = resourceGapLines(BORN.get('bar0-metropolis-calm-rand-29')).map((l) => l.impact);
     expectAbsentWithAnchor(lines, 'No coal reaches the mine.', 'No clay reaches the potter.');
     expect(housesShortOfInput(BORN.get('r2r-hamlet-49')).get('Peat cutter'), 'the worked-out peat cutter\'s mark keeps its peat').toBe('peat');
+  });
+
+  it('the mark\'s own reading of one house (its record under STORY_OF_RECORD) keeps the general line it reads its noun off', () => {
+    const town = BORN.get('r2r-hamlet-49');
+    const own = town.resourceAnalysis.gaps.filter((/** @type {{ institution?: unknown }} */ g) => g?.institution === 'Peat cutter');
+    const alone = resourceGapLines({ ...town, resourceAnalysis: { ...town.resourceAnalysis, gaps: own }, [STORY_OF_RECORD]: town }).map((l) => l.impact);
+    expect(alone[0]).toBe('No peat reaches the peat cutter.');
+    expect(alone.some((l) => l.startsWith('The peat cutter is worked out:'))).toBe(true);
+    expectAbsentWithAnchor(resourceGapLines(town).map((l) => l.impact), 'No peat reaches the peat cutter.', alone[1]);
   });
 
   it('the page\'s mark still reads every house the story line tells of', () => {

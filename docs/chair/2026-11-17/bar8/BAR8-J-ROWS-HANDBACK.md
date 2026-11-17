@@ -16,16 +16,16 @@ my files without a file or an atom the section does not give me.**
 
 | rule | thirty (seventh read) | the 150 | the 720 | guard |
 |---|---|---|---|---|
-| **G1 / 11g.gapLine** · the general "No X reaches the <house>." beside the house's own story line | 8 in 7 towns → **0** | 17 in 17 → **0** | 129 in 118 (the detector) → **3 in 3**; by my reading 130 in 119 → 3 | `tests/generators/bar8Rows.test.js` |
+| **G1 / 11g.gapLine** · the general "No X reaches the <house>." beside the house's own story line | 8 in 7 towns → **0** | 17 in 17 → **0** | 129 in 118 (the detector) → **0**; by my reading 130 in 119 → 0 | `tests/generators/bar8Rows.test.js` |
 | 11b.fish (services "Fish sold daily from the morning catch.") | 13 → 13 (services 4) | 3 → 3 | 69 → 69 (services 29) | — LEFT (item 1) |
 | 11b.fishTitle (title and chip) | 7 → 7 | 3 → 3 | 51 → 51 | — LEFT (item 1) |
 | 11e.offer (the fair's cards; the quarter's) | 2 → 2 | 5 → 5 | 23 → 23 (fair 5, quarter 7) | — LEFT (item 2) |
-| LAW 11, all | 54 → 46 | 88 → 71 | 416 → 290 | |
+| LAW 11, all | 54 → 46 | 88 → 71 | 416 → 287 | |
 
 NO OTHER RULE MOVES: base and tip runs differ by the 11g rows alone in all three populations (the extra rows in a diff of
 the "DISTINCT LINES (top 25)" list are other rules moving up a rank, not new instances). The tip renders are the base
-renders with the towns whose gap lines change rendered again at the tip (7, 17, 116 towns): the records are byte-identical
-at the tip (140 of 140 re-born records equal the base's), and the re-rendered dumps differ from the base's ONLY by the
+renders with the towns whose gap lines change rendered again at the tip (7, 17, 119 towns): the records are byte-identical
+at the tip (143 of 143 re-born records equal the base's), and the re-rendered dumps differ from the base's ONLY by the
 removed general lines (on the Resources tab and in the PDF). Runs, instances and tables: scratch, not committed (R10).
 
 ### G1, COUNTED FIRST (by house kind, source houses apart; my reading at the base, the same as the detector's plus one)
@@ -44,13 +44,27 @@ removed general lines (on the Resources tab and in the PDF). Runs, instances and
 
 Where the house's own story line is printed (worked out on its own spent ground; the failed venture's line), the general
 line does not name the material that line tells; a material no story line tells keeps the general line, and a gap row with
-no story line keeps it whole. A worked-out source house's every own ground is spent, so it tells each ground's yield as the
-Depleted list names it (`supplyStory.js :: GROUND_YIELD`); the venture tells its family's noun (`FAMILY_NOUN`, the row's
-good). Order and severity unchanged. No new words.
+no story line keeps it whole. A worked-out source house's every own ground is spent, so it tells each ground's good (its
+yield, `supplyStory.js :: GROUND_YIELD`, and the row's own name of it, `rowGoodOf`: a peat cutter's peat); the venture
+tells its family's noun (`FAMILY_NOUN`, the row's good). Order and severity unchanged. No new words.
+
+**THE MARK'S OWN READING IS UNTOUCHED (the chair's constraint of 18:30 UTC, which reached me after my
+first hand-back at c25fa870d; met at the tip after it).** `crisisStoppedRow.js :: housesShortOfInput` calls `resourceGapLines` once a house with that house's rows and
+the key `[STORY_OF_RECORD]`, and reads "Short of <noun>." off "No <noun> reaches …". `resourceGapLines` names that call
+(`markReadsAlone`: the record carries `STORY_OF_RECORD` as its own key; the mark's call is the only one in `src/` that sets
+it) and gives it the general line exactly as before: the told goods are struck only for the plain call (the Resources tab,
+`ResourcesTab.jsx:155`, and the PDF, `viewModelBodySlices.js:395`, which pass the record itself). WHY THIS FORM: the two
+print sites and the mark's file are other seats' (none touched), so the two readings can only be told apart inside this
+function, and the key is already the mark's own declaration that it reads one house alone (BIRTH-3, BR8); the switch is
+named at its one line with the caller it answers. MEASURED: the mark's per-house call returns byte-identical lines at base
+and tip for **1,732 of 1,732 houses** (the 720, the 150, the thirty); `housesShortOfInput` and `rowShortOf` (every house,
+every service row): 0 differences over the 720 and the 150. My first form (no switch) had left the three worked-out peat
+cutters doubled to keep their mark "Short of peat."; this form cures them too.
 
 - **No town loses its only gap line** (0 of 720, 0 of 150, 0 of 30): the story line stands where the general line went.
-- **The marks do not move:** `crisisStoppedRow.js :: housesShortOfInput` and `rowShortOf` (every house and every service row)
-  compared base vs tip over the 720 and the 150: 0 differences. THE THREE LEFT (below) are what keeps that true.
+- **The tab and the PDF print alike** (one function, the same plain call), in the dumps: r2r-hamlet-49 "No one here works the
+  gold/silver ore near Vishnugram." / "The peat cutter is worked out: …"; r2r-metropolis-45 "The mine is worked out: …";
+  r2r-town-13 "No one here works the stone near Vatankher." / "The tanners are failing: …": tab = PDF in each.
 - **N4:** the owner's record, `toPublicSafe` and the share veil (`projectShareVeil`) print the same gap lines in 150 of 150
   towns at the tip (and at the base); the guard holds it on its seven towns.
 - **Multi-material lines:** none of the 130 names two goods; the code drops only the told goods if one ever does.
@@ -115,20 +129,15 @@ re-read in my file (`DESC_LATE_SIBLINGS`) could carry the fair's and the quarter
 twin is not written:** without a declaration it never prints. The quarter is left by name with the fair (one atom would
 serve both). The livestock chips (6) are another seat's, as the section says.
 
-**(3) G1's three that remain: the worked-out peat cutters of r2r-hamlet-49, r2r-hamlet-52 and r2r-village-14** still print
-"No peat reaches the peat cutter." beside "The peat cutter is worked out: …". The page's mark reads its noun off that general
-line ("Short of peat."); without it the mark's fallback (`houseInputAtHand.js :: housesOnSpentGround`, through
-`crisisStoppedRow.js :: housesShortOfInput`) names the marsh's yield, "reeds" (measured: 3 towns, 6 rows would read
-"Short of reeds."). I kept the line so no mark moves. The cure is the auditor's: the mark reads its noun from the story or
-the gap row (`crisisStoppedRow.js`, seat J-GAPS's second file in the auditor's worklist; not mine). The guard holds the
-three as a named negative (r2r-hamlet-49: the line and the mark "peat" stay).
+**(3) G1: nothing left.** (My first form left the three worked-out peat cutters; the chair's constraint gave the form that cures them.)
 
 ## 6. The guard and the net
 
-`tests/generators/bar8Rows.test.js` (5 tests; seven towns: six of the 150 and r2r-hamlet-49): the detector on literals
+`tests/generators/bar8Rows.test.js` (6 tests; seven towns: six of the 150 and r2r-hamlet-49): the detector on literals
 (positive and negative); no general line beside the same house's story line, the story line printed, every town keeping a
-gap line; a row with no story keeps its general line (bar0-town-calm-rand-29, bar0-metropolis-calm-rand-29) and the peat
-negative; the marks still read every house; N4 (owner, public, veil). **FAILS at the base (2 of 5), passes at the tip (5 of 5).**
+gap line; a row with no story keeps its general line (bar0-town-calm-rand-29, bar0-metropolis-calm-rand-29); the mark's own
+reading of the peat cutter keeps "No peat reaches the peat cutter." while the print strikes it, and the mark reads "peat";
+the marks still read every house; N4 (owner, public, veil). **FAILS at the base (3 of 6), passes at the tip (6 of 6).**
 
 THE NET (R11, N2), each alone through `scripts/gate-tail.sh`. The base is a shared clone at 0cdedd206 (a `git archive` copy
 of the base without `.git` failed git-reading tests spuriously and is not used for the names); the tip is d99333f54.
