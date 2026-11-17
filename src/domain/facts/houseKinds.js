@@ -206,6 +206,6 @@ export const MATERIAL_OF = Object.freeze({
 export const SUPPLY_ODDS = Object.freeze({
   groundThere: 45, // 3 times in 4
   boughtIn: 45, // 3 times in 4
-  abandoned: 6, // 1 time in 10 of the houses that could be one (calibrated over the census's 720: BIRTH-2's hand-back)
+  abandoned: 3, // 1 time in 20 of the houses that could be one (calibrated over the census's 720: BIRTH-2's hand-back)
   outOf: 60,
 });

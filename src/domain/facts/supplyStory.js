@@ -63,16 +63,25 @@ const isCustom = (row) => row?.custom === true || row?.source === 'custom' || ro
 export const idOfHouse = (inst) => String((typeof inst?.catalogId === 'string' && inst.catalogId) || catalogIdForName(str(inst?.name)) || '');
 
 /**
- * THE SEED'S OWN PICK: `<seed>::<key>`, hashed, falls within `n` of the odds' `outOf`. No seed: null (the caller's default).
+ * THE ONE READING OF THE SEED, for the birth and for the print (the chair's ruling BR7 of 2026-11-17, condition 1): the
+ * pipeline's seed as a string; an absent seed reads as the empty string in both, so a planted record with no seed is still
+ * told one story (every implied ground there, every material bought where the town can trade, no failed venture).
+ * @param {unknown} seed @returns {string}
+ */
+export const storySeed = (seed) => (seed == null ? '' : String(seed));
+
+/**
+ * THE SEED'S OWN PICK: `<seed>::<key>`, hashed, falls within `n` of the odds' `outOf`. The empty seed: null (the default).
  * @param {unknown} seed @param {string} key @param {number} n @returns {boolean | null}
  */
 export function seedPicks(seed, key, n) {
-  if (seed == null || seed === '') return null;
-  return (fnv1a32(`${str(seed)}::${key}`) % SUPPLY_ODDS.outOf) < n;
+  const s = storySeed(seed);
+  if (s === '') return null;
+  return (fnv1a32(`${s}::${key}`) % SUPPLY_ODDS.outOf) < n;
 }
 
-/** The seed of a record (its own `_seed`). @param {StoryRecord | null | undefined} record */
-export const seedOfRecord = (record) => record?._seed;
+/** The seed of a record (its own `_seed`, which the pipeline sets to the seed it handed the birth). @param {StoryRecord | null | undefined} record */
+export const seedOfRecord = (record) => storySeed(record?._seed);
 
 /** The live native houses of the record (a ruined or closed house proves nothing; a custom row proves nothing). @param {StoryRecord | null | undefined} record */
 function liveNative(record) {
@@ -103,7 +112,7 @@ export function impliedGroundsOf(record, seed = seedOfRecord(record)) {
   const empty = { states: new Map(), houses: new Map() };
   if (!record || typeof record !== 'object') return empty;
   let bySeed = IMPLIED_OF.get(record);
-  const k = str(seed);
+  const k = storySeed(seed);
   const cached = bySeed?.get(k);
   if (cached) return cached;
   const { all } = storedGrounds(record);
@@ -221,9 +230,9 @@ const VENTURE_OF = new WeakMap();
  * @returns {Venture | null}
  */
 export function ventureOf(record, inputMissing, seed = seedOfRecord(record)) {
-  if (!record || typeof record !== 'object' || seed == null || seed === '') return null;
+  const k = storySeed(seed);
+  if (!record || typeof record !== 'object' || k === '') return null;
   let bySeed = VENTURE_OF.get(record);
-  const k = str(seed);
   if (bySeed?.has(k)) return /** @type {Venture | null} */ (bySeed.get(k));
   const houses = liveNative(record);
   /** @type {Map<string, number>} */
@@ -252,7 +261,7 @@ export function ventureOf(record, inputMissing, seed = seedOfRecord(record)) {
   const hit = candidates.find((c) => seedPicks(seed, `abandoned::${c.id}`, SUPPLY_ODDS.abandoned) === true);
   /** @type {Venture | null} */
   const out = hit ? { name: str(hit.inst.name), id: hit.id, family: hit.family, ground: hit.ground,
-    venture: fnv1a32(`${str(seed)}::venture::${hit.id}`) % 2 === 0 ? 'abandoned' : 'failing' } : null;
+    venture: fnv1a32(`${k}::venture::${hit.id}`) % 2 === 0 ? 'abandoned' : 'failing' } : null;
   if (!bySeed) { bySeed = new Map(); VENTURE_OF.set(record, bySeed); }
   bySeed.set(k, out);
   return out;

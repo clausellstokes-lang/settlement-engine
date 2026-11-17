@@ -22,7 +22,7 @@ import {
   localProducerSupplies, terrainSynonymsFor, tradeFinisherIn, ventureHouseOf, worksTheGround,
 } from '../domain/facts/houseInputAtHand.js';
 import { BUYS_AND_WORKS, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGHT, isSourceHouse } from '../domain/facts/houseKinds.js';
-import { boughtIn, sourceStoryOf, usedGroundOf } from '../domain/facts/supplyStory.js';
+import { boughtIn, sourceStoryOf, storySeed, usedGroundOf } from '../domain/facts/supplyStory.js';
 import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
 import { HOUSE_TRADE_INPUT, SPENT_GROUND_YIELD } from '../data/crisisDependence.js';
 import { catalogIdForName } from '../data/institutionalCatalog.js';
@@ -635,7 +635,7 @@ export function importsBroughtAtBirth(record, seed) {
   if (!record?.economicState || !hasTradeRouteConnection(String(config.tradeRouteAccess ?? ''))) return [];
   const have = Array.isArray(record.economicState.primaryImports) ? record.economicState.primaryImports.map(String) : [];
   // the record in the making, with the generator's seed (BIRTH-2: the seed picks the story; it is handed in, never a global)
-  const base = { ...record, _seed: seed };
+  const base = { ...record, _seed: storySeed(seed) };
   /** @type {string[]} */
   const add = [];
   const held = new Set(have.map(importWordOf));
@@ -650,6 +650,8 @@ export function importsBroughtAtBirth(record, seed) {
   // (1) a buyer on its own spent ground: that ground's shortage import, WHERE THE SEED HAS THE TOWN BUY IT (BIRTH-2 (b))
   const spent = new Set(Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted.map(String) : []);
   const onSpent = housesOnSpentGround(base);
+  /** @type {Set<string>} the families the seed has the town not buy */
+  const refused = new Set();
   const chains = /** @type {Array<{ resourceKey?: unknown, processingInstitutions?: unknown }>} */ (Array.isArray(/** @type {{ activeChains?: unknown }} */ (record.economicState).activeChains) ? /** @type {{ activeChains: any[] }} */ (record.economicState).activeChains : []);
   for (const inst of houses) {
     if (!onSpent.has(inst.name) || worksTheGround(idOf(inst))) continue;
@@ -660,7 +662,9 @@ export function importsBroughtAtBirth(record, seed) {
       const good = Object.prototype.hasOwnProperty.call(SPENT_GROUND_YIELD, String(c.resourceKey)) ? SPENT_GROUND_YIELD[String(c.resourceKey)] : '';
       if (good && [...have, ...add].some((imp) => namesGood(imp, good))) continue;
       const word = resourceShortageImport(String(c.resourceKey));
-      if (word && boughtIn(base, word, true, seed)) bring(word);
+      if (!word) continue;
+      if (boughtIn(base, word, true, seed)) bring(word);
+      else refused.add(MATERIAL_OF[idOf(inst)] || String(c.resourceKey)); // not bought: no house of this material is bought for (one answer a material)
     }
   }
   // (1b) BIRTH-2: a source house that runs on bought-in material (`RUNS_ON_BOUGHT`) and whose story is bought: its word
@@ -683,6 +687,7 @@ export function importsBroughtAtBirth(record, seed) {
     if (!keys.length) continue;
     if (keys.some((k) => houseInputAtHand(rec, k, inst, RESOURCE_CHAINS[k] || { rawResource: CHAIN_RAW_INPUT[k] }) !== 'missing')) continue;
     const family = MATERIAL_OF[id] || keys[0];
+    if (refused.has(family)) continue;
     const used = usedGroundOf(rec, family, seed);
     if (!used) { bring(IMPORT_WORD[keys[0]]); continue; }
     const word = String(resourceShortageImport(used) || IMPORT_WORD[keys[0]] || '');
@@ -751,7 +756,7 @@ export const generateResourceAnalysis = (
   const gaps           = evaluateInstitutionChain(
     exploitation,
     nativeInstitutions,
-    { config, economicState, resourceAnalysis: { imports }, importsBeforeBirth, _seed: seed }, // the record in the making: houseInputAtHand reads it as the page reads the record (BAR5-CHAINS (b): the need list too)
+    { config, economicState, resourceAnalysis: { imports }, importsBeforeBirth, _seed: storySeed(seed) }, // the record in the making: houseInputAtHand reads it as the page reads the record (BAR5-CHAINS (b): the need list too)
   );
   const resourceConditions = nativeResourceConditionRecords(config);
   // after the gaps and the town's settings: a complete row reads both (#457, #1163)

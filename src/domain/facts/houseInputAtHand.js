@@ -186,7 +186,7 @@ function inputAtHandCore(record, chainKey, house, chain) {
   // A live native resource: its key or its commodities name the input.
   // BIRTH-2 (BR4 (b)): THE HOUSE PROVES ITS GROUND. A ground a source house implies and the seed leaves there answers as a
   // live ground does (`supplyStory.js :: impliedGroundsOf`; stored nowhere)
-  const implied = [...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states].filter(([, st]) => st === 'there').map(([g]) => g);
+  const implied = record && /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY] ? [] : [...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states].filter(([, st]) => st === 'there').map(([g]) => g);
   const keys = [.../** @type {string[]} */ (availableNativeResourceKeys(config)), ...implied];
   const native = [...keys, ...keys.flatMap((k) => arr(/** @type {Record<string, { commodities?: unknown } | undefined>} */ (RESOURCE_DATA)[k]?.commodities))].map(str).map(norm).join('|');
   const rawNames = [raw, ...terrainSynonymsFor(raw)];
@@ -474,7 +474,7 @@ const SAWN_GOODS = Object.freeze(['Milled timber', 'Milled lumber']);
 export function sawnGoodFed(good, nearbyResources, depletedResources, institutions, isSawmill, chains) {
   if (!SAWN_GOODS.includes(good) || !Array.isArray(institutions)) return true;
   const depleted = new Set(arr(depletedResources).map((r) => resourceKeyForLabel(str(r)) || str(r)));
-  const record = { config: { nearbyResources: arr(nearbyResources).map(str).filter((k) => !depleted.has(k)) }, economicState: {}, institutions };
+  const record = { config: { nearbyResources: arr(nearbyResources).map(str).filter((k) => !depleted.has(k)) }, economicState: {}, institutions, [AT_THE_ECONOMY]: true };
   return institutions.filter((i) => !!i && isSawmill(i))
     .some((house) => houseInputAtHand(record, 'timber', /** @type {Parameters<typeof houseInputAtHand>[2]} */ (house), chains.timber) !== 'missing' || houseInputAtHand(record, 'mountainTimber', /** @type {Parameters<typeof houseInputAtHand>[2]} */ (house), chains.mountainTimber) !== 'missing');
 }
@@ -697,6 +697,12 @@ export function housesWantingTradeInput(record) {
   return out;
 }
 
+/**
+ * BIRTH-2 (BR4 (b): "IT IS NEVER WRITTEN EARLY"): a record asked at the economy's own hour (`sawnGoodFed`) reads no ground a
+ * house implies and no failed venture: the economy builds no chain, no made good and no export on one house (the audit's V2).
+ */
+const AT_THE_ECONOMY = Symbol('at the economy');
+
 /** One failed venture a record object. @type {WeakMap<object, import('./supplyStory.js').Venture | null>} */
 const VENTURE_HOUSE = new WeakMap();
 
@@ -706,7 +712,7 @@ const VENTURE_HOUSE = new WeakMap();
  * @returns {import('./supplyStory.js').Venture | null}
  */
 export function ventureHouseOf(record) {
-  if (!record || typeof record !== 'object') return null;
+  if (!record || typeof record !== 'object' || /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY]) return null;
   if (VENTURE_HOUSE.has(record)) return /** @type {import('./supplyStory.js').Venture | null} */ (VENTURE_HOUSE.get(record));
   VENTURE_HOUSE.set(record, null); // a reader asked inside the reading reads no venture (no loop)
   const out = ventureOf(/** @type {Parameters<typeof ventureOf>[0]} */ (record), (inst, family) => CHAIN_INPUTS[family]
