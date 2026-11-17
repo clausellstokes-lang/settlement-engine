@@ -25,7 +25,6 @@ import { BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGH
 
 /**
  * @typedef {{
- *   _seed?: unknown,
  *   config?: { nearbyResources?: unknown, nearbyResourcesDepleted?: unknown, tradeRouteAccess?: unknown,
  *     terrainOverride?: unknown, [key: string]: unknown } | null,
  *   economicState?: { primaryImports?: unknown, activeChains?: unknown } | null,

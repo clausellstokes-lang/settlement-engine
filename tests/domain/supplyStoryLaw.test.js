@@ -1,3 +1,4 @@
+/** @vitest-environment jsdom */
 /**
  * supplyStoryLaw.test.js — BIRTH-2 (the chair's rulings BR4, BR5, BR6 and BR7 of 2026-11-17; the owner's rule, vetoable by
  * the owner): THE SEED PICKS ONE SUPPLY STORY FOR EACH HOUSE AND ITS MATERIAL, AND EVERY PART OF THE PAGE TELLS IT.
@@ -19,6 +20,19 @@
  *        and the birth, read again over its own product, brings no word in.
  *   (W1) THE ROUND TRIP: ten towns with an implied ground, generated again by the product's regenerate (the saved config
  *        and seed) and from that config read as a manual roster: the same people, ties, roster and story.
+ *   BIRTH-3 (the chair's ruling BR8 of 2026-11-17: THE SEED WRITES ONCE, AT THE BIRTH; EVERY VIEW READS THE RECORD). The arm
+ *   BR7 is re-keyed by identity (2026-11-17, BIRTH-3: the same claim, that the birth and the print tell one story, now held
+ *   house for house over every house and every view):
+ *   (BR8) THE THREE EQUAL: every house's mark on the tab and in the PDF, the short reading, its input answers, the gap
+ *        lines and the Resources tab's grounds read from the record, from the record with its seed deleted, from its public
+ *        projection (`toPublicSafe`) and from the share veil over it are one (a difference the war's iron reading makes of
+ *        the DM's plot hooks, which the projection withholds, is no supply story: it is shown to vanish with those hooks
+ *        laid back, and named); and the birth's pick for every house (`birthPicksOn`) is the story read back from the
+ *        record it wrote. THE SEED AT ONE PLACE: no file of `src/` but the birth's writer asks a pick of the seed.
+ *   (P2) THE FAILED VENTURE'S MARK ON A RENDERED TAB AND IN THE PDF'S READING, wherever the short mark would print: never
+ *        empty, never "Short of …".
+ * POSITIVE CONTROL (BIRTH-3): at its base (b513feae2) the three differ in 65 towns of the 720 and 19 of the 150, and the
+ * venture's mark prints on no tab (its gate answered null).
  *
  * THE SEEDS, AND WHY THEY ARE ENOUGH: the census's 720 (360 `r2r-` towns of six sizes, 360 `r2s-` towns of fifteen crises)
  * and the wide read's 150 (`bar0-<shape>-rand-27..41`, ten shapes): every population the brief's counts are made over,
@@ -31,8 +45,21 @@ import { describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { CHAIN_RAW_INPUT, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf } from '../../src/domain/facts/houseInputAtHand.js';
-import { GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, sourceStoryOf, storySeed } from '../../src/domain/facts/supplyStory.js';
+import fs from 'node:fs';
+import path from 'node:path';
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf, warIronHookOutsideWar } from '../../src/domain/facts/houseInputAtHand.js';
+import { GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, sourceStoryOf } from '../../src/domain/facts/supplyStory.js';
+import { ALSO_USES } from '../../src/domain/facts/houseKinds.js';
+import { HOUSE_TRADE_INPUT, houseDependenceOf, INPUT } from '../../src/data/crisisDependence.js';
+import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
+import { rowShortOf } from '../../src/domain/display/crisisStoppedRow.js';
+import { markOnPage } from '../../src/pdf/lib/crisisMarksOnPage.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
+import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
+import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
+import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { SPENT_GROUND_YIELD } from '../../src/data/crisisDependence.js';
 import { resourceShortageImport } from '../../src/domain/resourceSemantics.js';
 import { MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, SUPPLY_ODDS, TAKERS } from '../../src/domain/facts/houseKinds.js';
@@ -40,7 +67,7 @@ import { rowMarkText } from '../../src/domain/display/crisisStoppedRow.js';
 import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { hasTradeRouteConnection } from '../../src/domain/tradeRouteSemantics.js';
-import { generateResourceAnalysis, importsBroughtAtBirth, resolveNearbyCommodities } from '../../src/generators/resourceGenerator.js';
+import { birthPicksOn, generateResourceAnalysis, importsBroughtAtBirth, resolveNearbyCommodities } from '../../src/generators/resourceGenerator.js';
 import { getTerrainType } from '../../src/generators/terrainHelpers.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
@@ -121,12 +148,22 @@ function lawInstances(seed, s) {
   if (venture) {
     const inst = liveInstitutions(s).find((i) => i?.name === venture.name) || { name: venture.name };
     const mark = rowMarkText(s, 'house', inst);
-    if (mark !== null && !/(?:Abandoned|Failing): a failed venture\.$/.test(mark)) bad('L1 venture, not its mark', venture.name);
+    // BIRTH-3 (2026-11-17, the second reader's M5 (iii), H2): the mark is never empty where the house's row takes an input
+    // mark (a null mark was accepted before), and never "Short of …"
+    if (houseDependenceOf(inst).includes(INPUT) && !/^(?:Abandoned|Failing): a failed venture\.$/.test(mark ?? '')) bad('L1 venture, not its mark', venture.name);
+    if (/Short of/.test(mark ?? '')) bad('L1 venture, marked short', venture.name);
     if (!lines.some((l) => /stands abandoned, a venture of an earlier time|is failing: no /.test(l))) bad('L1 venture, no line', venture.name);
+    if (lines.some((l) => /is worked out: /.test(l) && l.toLowerCase().includes(venture.name.toLowerCase().replace(/\s*\([^)]*\)/g, '')))) bad('L1 venture, a worked-out line beside its line (M1)', venture.name);
     if (listHolds(s, familyWord(venture.family))) bad('L1 venture, its word on the imports', venture.name);
     if (venture.ground && (shown.there.includes(venture.ground) || shown.used.includes(venture.ground))) bad('L1 venture, its ground on the land list', venture.name);
-    const others = liveInstitutions(s).filter((i) => i?.name !== venture.name && MATERIAL_OF[idOfHouse(i)] === venture.family);
+    // BIRTH-3 (BR6, the second reader's M2): every live house that uses the material counts, in whatever table it sits
+    const uses = (/** @type {any} */ i) => { const id = idOfHouse(i); return MATERIAL_OF[id] === venture.family || ALSO_USES[id] === venture.family
+      || (HOUSE_TRADE_INPUT[id] || '') === venture.family || chainsOfHouse(i.name, RESOURCE_CHAINS).some(([k]) => k === venture.family); };
+    const others = liveInstitutions(s).filter((i) => i?.name !== venture.name && uses(i));
     if (others.length) bad('L2 venture, another house works its material', venture.name);
+    // BIRTH-3 (BR6, H3): no stored ground of the land list yields its material
+    const stored = [...(s.config?.nearbyResources || []), ...(s.config?.nearbyResourcesDepleted || [])].map(String);
+    if (stored.some((g) => GROUND_YIELD[g] && GROUND_YIELD[g] === ({ timber: 'timber', ironOre: 'iron ore', livestock: 'livestock', stone: 'stone', clay: 'clay', hides: 'hides', wool: 'wool', herbs: 'herbs', peat: 'reeds' })[venture.family])) bad('L2 venture, a stored ground of its material', venture.name);
   }
   // the pair: no gap line names a good beside the import of that same good's word
   // (a taker on its used-up ground is worked out whatever the town buys for its buyers, BR4: its gap line is followed by its
@@ -138,6 +175,25 @@ function lawInstances(seed, s) {
     if (good && !workedOut && (s.economicState?.primaryImports || []).some((/** @type {unknown} */ x) => struck(x) === good)) bad(`L1 "${line}" beside its import`, good);
   }
   return out;
+}
+
+/** @param {unknown} x */
+const j = (x) => JSON.stringify(x);
+/** The record with its seed deleted (BR8 (7)(b)). @param {any} s */
+const unseeded = (s) => { const c = structuredClone(s); delete c._seed; delete c._regenSeed; if (c.config) delete c.config._seed; return c; };
+/**
+ * THE PAGE'S SUPPLY READING (BR8 (7)): every live house's input answers, its mark on the tab and in the PDF, the short
+ * reading, its source story; the gap lines; the Resources tab's grounds; the failed venture. @param {any} r
+ */
+function supplyReading(r) {
+  const short = housesShortOf(r);
+  const houses = liveInstitutions(r).filter((i) => !!i && typeof i.name === 'string').map((i) => {
+    const id = idOfHouse(i);
+    const keys = [...new Set([HOUSE_TRADE_INPUT[id], ...chainsOfHouse(i.name, RESOURCE_CHAINS).map(([k]) => k)].filter((k) => k && CHAIN_INPUTS[k]))];
+    return [i.name, keys.map((k) => [k, houseInputAtHand(r, k, i, /** @type {any} */ (RESOURCE_CHAINS)[k] || { rawResource: CHAIN_RAW_INPUT[k] })]),
+      rowMarkText(r, 'house', i), markOnPage(r, 'house', i), short.get(i.name) ?? null, sourceStoryOf(r, i, resourceShortageImport)?.story ?? null];
+  }).sort((a, b) => (String(a[0]) < String(b[0]) ? -1 : 1));
+  return { houses, lines: resourceGapLines(r).map((l) => l.impact), grounds: impliedGroundsOnPage(r), venture: ventureHouseOf(r) };
 }
 
 describe('BIRTH-2: the seed picks the supply story; every part of the page tells it', () => {
@@ -152,7 +208,7 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
     const failures = collectSeedFailures([...CENSUS, ...WIDE], (seed) => {
       const s = town(seed);
       found.push(...lawInstances(seed, s));
-      for (const { story } of storiesOf(s)) if (story) told[story.story] = (told[story.story] || 0) + 1;
+      for (const { story } of storiesOf(s)) if (story && story.story !== 'abandoned') told[story.story] = (told[story.story] || 0) + 1;
       if (ventureHouseOf(s)) told.venture = (told.venture || 0) + 1;
     });
     expectNoSeedFailures(failures, 'every town is born and read');
@@ -186,26 +242,70 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
     expect(ventures, 'the towns of the 720 with a failed venture').toBeLessThanOrEqual(20);
   }, 1_800_000);
 
-  test('BR7 · the birth and the print read one story: the gap the birth wrote is the story printed, and the birth brings nothing more', () => {
+  test('BR8 · no view reads the seed: the record, the record without its seed, its public projection and the share veil tell one story, and it is the birth\'s pick', () => {
     /** @type {string[]} */
-    const found = []; let read = 0;
+    const found = []; /** @type {string[]} */ const byTheWar = []; let read = 0, used = 0, imported = 0;
     expectNoSeedFailures(collectSeedFailures([...CENSUS, ...WIDE], (seed) => {
       const s = town(seed);
-      expect(storySeed(s._seed), `${seed}: the record keeps the seed the birth read`).toBe(seed);
       const again = importsBroughtAtBirth(s, s._seed);
       if (again.length) found.push(`${seed} · the birth over its own product brings ${again.join(', ')}`);
-      const venture = ventureHouseOf(s);
-      for (const { inst, story } of storiesOf(s)) {
-        const gaps = (s.resourceAnalysis?.gaps || []).filter((/** @type {any} */ g) => g?.institution === inst.name);
-        if (!story || !gaps.length) continue;
-        read++;
-        const kind = venture?.name === inst.name ? 'missing' : story.story === 'bought' ? 'imported' : story.story === 'idle' ? 'missing' : 'none';
-        if (!gaps.some((/** @type {any} */ g) => g.kind === kind)) found.push(`${seed} · ${inst.name} · printed ${story.story}, born ${gaps.map((/** @type {any} */ g) => g.kind).join('/')}`);
+      const a = j(supplyReading(s));
+      // the birth's pick for every house is the story read back from the record it wrote
+      if (j(supplyReading(birthPicksOn(s, s._seed))) !== a) found.push(`${seed} · the birth's pick and the record's story`);
+      for (const [form, r] of /** @type {Array<[string, any]>} */ ([['without its seed', unseeded(s)], ['public', toPublicSafe(structuredClone(s))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(s)), null)]])) {
+        if (j(supplyReading(r)) === a) continue;
+        // the war's iron reading reads the DM's plot hooks, which the projection withholds: no supply story (named, BIRTH-3)
+        const hooked = { ...r, economicViability: { ...(r.economicViability || {}), plotHooks: s.economicViability?.plotHooks } };
+        if (form !== 'without its seed' && (warIronHookOutsideWar(s) || /war/.test(String(s.config?.stressTypes))) && j(supplyReading(hooked)) === a) { byTheWar.push(`${seed} (${form})`); continue; }
+        found.push(`${seed} · ${form}`);
       }
+      read++;
+      if (impliedGroundsOf(s).states.size) used += [...impliedGroundsOf(s).states.values()].filter((st) => st === 'used').length;
+      imported += (s.resourceAnalysis?.gaps || []).filter((/** @type {any} */ g) => g?.kind === 'imported').length;
     }), 'every town is born and read');
-    expect(read, 'source houses with a gap the birth wrote').toBeGreaterThan(50);
-    expect(found, 'a story the birth and the print tell two ways').toEqual([]);
+    expect(read, 'towns read').toBe(CENSUS.length + WIDE.length);
+    expect(used, 'proven grounds the record tells used up (the anchor)').toBeGreaterThan(20);
+    expect(found, 'a town two views or the birth and the record tell two ways').toEqual([]);
+    expect(new Set(byTheWar.map((x) => x.split(' ')[0])).size, `towns whose only difference is the war's reading of the DM's plot hooks: ${byTheWar.join(', ')}`).toBeLessThan(30);
   }, 1_800_000);
+
+  test('BR8 · the seed enters the supply rule at one place: no file of src but the birth\'s writer asks a pick of the seed', () => {
+    const root = path.resolve(__dirname, '../../src');
+    /** @param {string} d @returns {string[]} */
+    const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : /\.(js|jsx)$/.test(e.name) ? [path.join(d, e.name)] : []));
+    const PICKS = /\b(?:groundPicksAtBirth|boughtAtBirth|ventureAtBirth|seedPicks|BIRTH_PICKS|birthPicksOn)\b/;
+    const askers = walk(root).filter((f) => PICKS.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(root, f)).sort();
+    expect(askers, 'the files that name the birth\'s picks').toEqual(['domain/facts/supplyStory.js', 'generators/resourceGenerator.js']);
+    // the readers at print name no seed
+    const READERS = ['domain/facts/supplyStory.js', 'domain/facts/houseInputAtHand.js', 'domain/display/validationOnPage.js', 'domain/display/crisisStoppedRow.js', 'components/new/tabs/ResourcesTab.jsx'];
+    const seeded = READERS.filter((f) => /\b_seed\b|seedOfRecord/.test(fs.readFileSync(path.join(root, f), 'utf8')));
+    expect(seeded, 'a reader at print that names the record\'s seed').toEqual([]);
+  });
+
+  test('P2 · the failed venture\'s mark prints on a rendered tab and in the PDF\'s reading wherever the short mark would', () => {
+    /** @type {string[]} */
+    const found = []; let rendered = 0;
+    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+      const s = town(seed);
+      const venture = ventureHouseOf(s);
+      if (!venture) return;
+      const inst = liveInstitutions(s).find((i) => i?.name === venture.name);
+      const services = Object.values(s.availableServices || {}).flat().filter((/** @type {any} */ x) => x && typeof x === 'object' && x.institution === venture.name);
+      const gated = [rowShortOf(s, 'house', inst), ...services.map((/** @type {any} */ x) => rowShortOf(s, 'service', x))].filter(Boolean);
+      if (!gated.length) return; // no row of the house takes an input mark (a peat cutter's): nothing would print the short mark either
+      const MARK = /(?:Abandoned|Failing): a failed venture\./;
+      if (!gated.every((m) => MARK.test(String(m)))) found.push(`${seed} · the gate: ${gated.join(' | ')}`);
+      if (houseDependenceOf(inst).includes(INPUT) && !MARK.test(String(markOnPage(s, 'house', inst)))) found.push(`${seed} · the PDF's reading: ${markOnPage(s, 'house', inst)}`);
+      const page = render(React.createElement(InstitutionsTab, { settlement: s })).container.textContent || '';
+      cleanup();
+      const svcPage = render(React.createElement(ServicesTab, { services: s.availableServices, settlement: s, narrativeNote: null })).container.textContent || '';
+      cleanup();
+      rendered++;
+      if (!MARK.test(page) && !MARK.test(svcPage)) found.push(`${seed} · ${venture.name}: no tab prints its mark`);
+    }), 'the ventures of the census');
+    expect(rendered, 'ventures whose rows take an input mark, rendered (the anchor)').toBeGreaterThan(4);
+    expect(found, 'a failed venture whose mark is empty on a tab or in the PDF').toEqual([]);
+  }, 900_000);
 
   test('L4 · the same seed twice tells the same story, and the birth writes no land list', () => {
     const SAMPLE = CENSUS.filter((seed) => impliedGroundsOf(town(seed)).states.size > 0).slice(0, 12);
