@@ -378,7 +378,13 @@ export const CULTURE_PROFILES = Object.freeze({
       // foodways composer keeps a culture sentence only where the sources it names feed the place (domain/foodways.js ::
       // SOURCE_WORDS), so the sentence names its grain. Was "Intensive plots, terraces, raised fields, and tribute redistribution
       // support dense populations." (a metropolis fed by its herds alone). VETOABLE wording (the owner's).
-      { text: 'Maize and other grain from intensive plots, terraces, and raised fields, with tribute redistribution, support dense populations.', needs: ['population: ≥ middling'] },
+      // SEAM-CULTURE (2026-11-17, BRIEF-BAR6-SEAM item 5): the build guard's door read "intensive plots, terraces, and raised
+      // fields" as a resource worked here (class `resource`) with nothing declared for it. No atom can answer it where the
+      // line is chosen (`foodGenerator.js :: cultureFoodwaysOf` hands the facts only the tier, the roster and the config, so
+      // `grain` reads unanswered and would refuse the line in every town); the grain the composer already keys it on says
+      // the same thing, so the land-works words leave. Was "Maize and other grain from intensive plots, terraces, and raised
+      // fields, with tribute redistribution, support dense populations." A DECLARED MOVE of the stored foodways line (B5).
+      { text: 'Maize and other grain, grown intensively and redistributed through tribute, support dense populations.', needs: ['population: ≥ middling'] },
     ],
     sacredLife: [
       { text: 'Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.', needs: ['institution: temple'], excludes: ['crisis: threat'] }, // BAR6-CULTURE (B4): declares what it presumes
@@ -480,7 +486,10 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     architecturalDetails: [
       'corrals and open assembly ground occupy as much space as the permanent halls',
-      'storehouses and caravan yards mark the boundary between settlement and seasonal encampment',
+      // SEAM-CULTURE (2026-11-17, BRIEF-BAR6-SEAM item 4: the table's row 120, whose reason no gate bore out): the caravan
+      // yards are kept for traffic that reaches the place, so the row declares a route the caravans can use (read at print:
+      // the arrival's sight beat and the PDF's Architecture row, `architecturalDetailRefused`; the draw reads only the tier).
+      { text: 'storehouses and caravan yards mark the boundary between settlement and seasonal encampment', excludes: ['route: isolated'] },
       'broad lanes are sized for herds, carts, and mounted movement',
     ],
     institutionBias: {

@@ -4227,7 +4227,7 @@ each cell below is authored from the page-owner's side.
 3. `[elder]` {settlement} has paid this tribute for {timeband_span} and never once missed it, and takes no pride in that.
 
 **`economic` · `strained`**
-1. `[ledger · colour]` The tribute out of {settlement} is paid and paid grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.
+1. `[ledger · colour]` The tribute out of {settlement} is handed over, and handed over grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.
 2. `[street · institution: granary]` The granary stands lighter than it should at {settlement}, and the lightness is the bill of the war, still being settled.
 3. `[unfolding · colour]` What {settlement} sends {counterpart} is still going and is going more slowly each season, and the slowing is being noticed at the other end.
 
@@ -6941,9 +6941,11 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[counterforce]` No great road feeds {settlement}'s market; it serves the town itself, no more.
 
 **`ENTREPOT`** {crisis-scoped · market}
-1. `[ledger · crisis: any · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
+1. `[ledger · crisis: any · no crisis: under_siege · no crisis: plague_onset · no crisis: hunger · tier: ≥ town]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
 2. `[visitor · no crisis: under_siege · crisis: any]` Half the goods traded in {settlement} are only passing through, and the town lives off their passing.
 3. `[street · no crisis: under_siege · crisis: any]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
+4. `[ledger · market · crisis: any · no crisis: under_siege · no crisis: plague_onset · no crisis: hunger · tier: ≤ village]` {settlement}'s market handles more than its own people could ever use; the difference is their living.
+5. `[ledger · market · crisis: hunger · no crisis: under_siege · no crisis: plague_onset]` {settlement}'s market was built to handle far more than its people could ever use; with food short, it cannot now feed them.
 
 **`NO-MARKET`** {no market}
 1. `[counterforce · gate · institution: tavern · no crisis: under_siege]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
@@ -7212,10 +7214,11 @@ compass word, no real-world place, no named analogy.*
 2. `[street]` Nobody in {settlement} has finished putting right the legacy the {calamity} left, and that legacy is {timeband_age}.
 
 **`LEGACY-RECOVERED`** {colour}
-1. `[ledger]` {settlement} came through the {calamity}, and what the town built in answer still stands, a legacy that is {timeband_age}.
+1. `[ledger · legacy ruin]` {settlement} came through the {calamity}, and what it built in answer still stands, a legacy that is {timeband_age}.
 2. `[street · legacy ruin]` Much of what stands in {settlement} now was built after the {calamity}, and that legacy is {timeband_age}.
 3. `[street · no legacy ruin]` {settlement} came through the {calamity} and set itself to rights afterwards; that legacy is {timeband_age}.
-4. `[elder · no legacy ruin]` The {calamity} is behind {settlement} now, and the town that came through it is the one that stands; that legacy is {timeband_age}.
+4. `[elder · no legacy ruin]` The {calamity} is behind {settlement} now, and the place that came through it is the one that stands; that legacy is {timeband_age}.
+5. `[ledger · no legacy ruin]` {settlement} came through the {calamity} without losing what it had built, a legacy that is {timeband_age}.
 
 **`LEGACY-RECOVERED-MARKED`** {colour}
 1. `[ledger]` {settlement} came through the {calamity}, and the mark left on the town is {timeband_age}.

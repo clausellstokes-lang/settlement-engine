@@ -181,12 +181,18 @@ export const POWER_ROLES_BY_CATEGORY = {
     // bucket, where they now surface for any settlement with a government
     // institution at the right tier. goalCategories and the requiresInstKeyword
     // coherence gates are preserved exactly as they stood in the noble bucket.
+    // SEAM-CULTURE (2026-11-17, BRIEF-BAR6-SEAM item 1; the chair's SV1): the title names a lord, so it declares the
+    // `sovereign` atom (`domain/facts/sovereign.js`, frozen). The role draw does not read the declaration (the cast is born
+    // after the houses, and at that draw the leaf knows only the houses and the crisis); it holds wherever the title
+    // prints because it prints only as a person's role, and the leaf reads the cast's roles ("a person", SV1). Guarded:
+    // tests/domain/bar6CultureLines.test.js (every town of the 720 that seats it reads `sovereign`).
     {
       role: 'Lord/Lady of the Manor',
       title: 'noble',
       priority: 8,
       minTier: 'village',
       goalCategories: ['power', 'wealth'],
+      needs: ['sovereign'],
     },
     {
       role: 'Baron/Baroness',
