@@ -1,0 +1,5 @@
+{"id":"C44148","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"STATE","why":"Hook gives the priest Volker Müller a 'master craftsman'; PEOPLE has him as priest of the Parish church, with no craft house.","other":""}
+{"id":"C44447","town":"bar0-village-famine-rand-42","sev":"MED","kind":"PAIR","why":"Prints Milled lumber as a running output of the Sawmill, which another line says is short of timber and LAND says lacks timber.","other":"C44221"}
+{"id":"C44464","town":"bar0-village-famine-rand-42","sev":"LOW","kind":"PAIR","why":"Says the unrecorded trade 'does little harm', while the economy tab says openly trading honest traders carry the tax alone and are at a disadvantage.","other":"C44463"}
+{"id":"C45248","town":"bar0-village-famine-rand-43","sev":"LOW","kind":"PAIR","why":"Says little that comes past the village stops there, but the overview says its market lives off through-traffic.","other":"C45041"}
+{"id":"DONE","lines":1755,"blocks":2,"flags":4}
