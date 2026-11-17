@@ -77,8 +77,10 @@ describe('BAR7-ECON item 1 (8f): an income share whose every house the leaf mark
   const MARKED = [
     ['bar0-city-under_siege+famine-rand-44', 'Wool & Textile Trade', /^Short of wool\. /], // C8021: the weavers and the fuller short
     ['bar0-town-occupied-rand-44', 'Wool & Textile Trade', /^Short of wool\. /], // C40674: the weavers short
-    ['bar0-village-calm-rand-42', 'Iron & Metalwork', /^Short of iron\. /], // C41826 (C41825, its cell): the only smith short
-    ['bar0-town-calm-rand-42', 'Apothecary & Alchemy', /^Short of /], // C33921: the alchemist shop short of its materials
+    // C41826 (C41825, its cell) and C33921, re-keyed (the note above the sibling arm): the only smiths short of iron, on no road;
+    // the apothecary short of its materials, on no road
+    ['bar0-town-occupied-isolated-2', 'Iron & Metalwork', /^Short of iron\. /],
+    ['bar0-village-calm-isolated-11', 'Apothecary & Alchemy', /^Short of /],
     ['bar0-city-under_siege+famine-rand-43', 'Timber Trade', /^Curtailed by the siege\. /], // C4828: fed by "Timber & Lumber · Impaired"
   ];
   test('each control: the share opens with the mark; its line of ordinary times follows it', () => {
@@ -91,18 +93,38 @@ describe('BAR7-ECON item 1 (8f): an income share whose every house the leaf mark
       expect(shown.endsWith(String(src.desc || '').trim()), `${seed}: the description of ordinary times follows the mark`).toBe(true);
     }), 'item 1: every control');
   }, 600000);
+  // RE-KEYED BY IDENTITY (BAR7-ECON, 2026-11-17, the chair's message of about 07:05 UTC): BIRTH-1, landed on the line before this
+  // branch, brings a buying house's material in at the birth on a connected road, so the born-short houses of the calm connected
+  // towns this arm first stood on are fed there. Each claim now stands on a town that bears it both at this branch's tip and at
+  // the joined tree: a town on NO road (an isolated route: the birth writes nothing there).
   test('a sibling still prints bare; the calm town\'s head says what a row marked short is', () => {
-    const s = town('bar0-village-calm-rand-42');
-    expect(marks.incomeDescShown(s, share(s, 'Fish & Maritime Produce'))).toBe('Catch landed here and sold fresh or preserved.'); // KEEP: its houses work
+    const s = town('bar0-village-calm-isolated-11');
+    const harvest = share(s, 'Harvest');
+    expect(marks.incomeDescShown(s, harvest)).toBe(harvest.desc); // KEEP: the households' own harvest, unmarked
+    const remedies = share(s, 'Apothecary & Alchemy');
     const { head, text } = economics(s);
     expect(head).toBe(SUPPLIED_LINE);
-    expect(text).toContain('Short of iron. Metal is smelted or worked here.');
+    expect(text).toContain(`Short of its materials. ${remedies.desc}`);
   }, 300000);
 });
 
 describe('BAR7-ECON item 2 (8g): the service economy\'s card reads the leaf\'s worse state of its house', () => {
+  // HELD ON A CONSTRUCTED RECORD (BAR7-ECON, 2026-11-17, the chair's message of about 07:05 UTC; the claim is not retired and not
+  // loosened): C39519's town is on a connected road and BIRTH-1 now brings its alchemist shop's herbs in ("runs on imported
+  // medicinal herbs"); no town of 744 isolated births (36 shapes of size and crisis, both trees) bears a service card through a house the leaf
+  // lifts to impaired. The record is C39519's own born town with the shop's two gaps written as the base's birth wrote them
+  // ("lacks access to medicinal herbs", "… hot_springs_mineral") and the herbs off its imports: the town as on no road.
+  /** @param {any} born @returns {any} */
+  const unfed = (born) => {
+    const s = JSON.parse(JSON.stringify(born));
+    const gaps = (s.resourceAnalysis?.gaps || []).filter((/** @type {any} */ g) => g?.institution !== 'Alchemist shop');
+    for (const chain of ['medicinal herbs', 'hot_springs_mineral']) gaps.push({ chain, institution: 'Alchemist shop', kind: 'missing', impact: `Alchemist shop exists but lacks access to ${chain}`, severity: 'high' });
+    s.resourceAnalysis = { ...s.resourceAnalysis, gaps };
+    s.economicState.primaryImports = (s.economicState.primaryImports || []).filter((/** @type {any} */ x) => !/^medicinal herbs$/i.test(String(x)));
+    return s;
+  };
   test('C39519: "Alchemical Trade" through an alchemist shop the page marks short prints no "Operational"', () => {
-    const s = town('bar0-town-occupied-rand-43');
+    const s = unfed(town('bar0-town-occupied-rand-43'));
     const shop = (s.institutions || []).find((/** @type {any} */ i) => i?.name === 'Alchemist shop');
     expect(shop && rowMarkText(s, 'house', shop), 'anchored: the alchemist shop carries a mark').toMatch(/^Short of /);
     const { cards } = economics(s);
@@ -141,9 +163,12 @@ describe('BAR7-ECON item 4 (8i.chainStopped, ruling CY1): a stopped chain names 
 
 describe('BAR7-ECON item 5 (8j): a good whose every maker is marked short leaves the lists', () => {
   // [seed, list, the good that leaves, a sibling that still prints]
+  // RE-KEYED BY IDENTITY (BAR7-ECON, 2026-11-17, the chair's message of about 07:05 UTC): the 150's fullers are fed at the joined
+  // tree (BIRTH-1); the claim stands on towns on no road whose every smith is "Short of iron." (both trees; the base's lists
+  // keep the good there, measured)
   const GONE = [
-    ['bar0-metropolis-calm-rand-27', 'exports', 'Fulled cloth', 'Milled flour'],
-    ['bar0-metropolis-calm-rand-39', 'exports', 'Fulled cloth', 'Milled flour'],
+    ['bar0-city-calm-isolated-10', 'exports', 'Quality tools and weapons', 'Hardwood beams'],
+    ['bar0-town-occupied-isolated-2', 'exports', 'Quality tools and weapons', 'Legal services (contracts, notarial)'],
   ];
   test('each town: the record lists the good, the page does not; its sibling prints', () => {
     expectNoSeedFailures(collectSeedFailures(GONE, ([seed, list, good, still]) => {
@@ -152,7 +177,7 @@ describe('BAR7-ECON item 5 (8j): a good whose every maker is marked short leaves
       expect(recorded, `${seed}: anchored, the record lists ${good}`).toContain(good);
       const shown = list === 'exports' ? exportsAsPrinted(s) : localProductionAsPrinted(s);
       expect(shown, `${seed}: the sibling still prints`).toContain(still);
-      expect(shown, `${seed}: ${good} leaves the ${list}`).not.toContain(good);
+      expect(shown.filter((x) => x === good || x.startsWith(`${good} (`)), `${seed}: ${good} leaves the ${list}`).toEqual([]);
     }), 'item 5: every good');
   }, 600000);
   test('KEEP: a good an unmarked house makes stays (the 150\'s "Leather goods": its tanner short, its cobblers\' guild at work)', () => {
@@ -186,9 +211,10 @@ describe('point (1): a stored short twin prints only under a mark; an unmarked s
   // [seed, share, the stored twin, the line printed]: one town on each side, for metal and for cloth
   const ROWS = [
     ['bar0-metropolis-calm-rand-42', 'Iron & Metalwork', METAL_SHORT_LINE, METAL_WORKED_LINE], // unmarked: the smiths at work
-    ['bar0-village-calm-rand-44', 'Iron & Metalwork', METAL_SHORT_LINE, `Short of iron. ${METAL_SHORT_LINE}`], // marked: the twin stays
+    // RE-KEYED BY IDENTITY (BAR7-ECON, 2026-11-17, the chair's message of about 07:05 UTC): the marked sides' calm connected towns
+    // are fed at the joined tree (BIRTH-1); the metal side stands on a town on no road, both trees
+    ['bar0-metropolis-occupied-isolated-5', 'Iron & Metalwork', METAL_SHORT_LINE, `Short of iron. ${METAL_SHORT_LINE}`], // marked: the twin stays
     ['bar0-metropolis-calm-rand-42', 'Wool & Textile Trade', CLOTH_SHORT_LINE, CLOTH_WORKED_LINE], // unmarked
-    ['bar0-city-wartime-rand-43', 'Wool & Textile Trade', CLOTH_SHORT_LINE, /^(?:Short of|Curtailed by|Stopped by|Scarce in)[^.]*\. .*Little cloth is made here/], // marked
   ];
   test('each town: the record stores the twin; the tab prints the line of its side (the tab\'s own call)', () => {
     expectNoSeedFailures(collectSeedFailures(ROWS, ([seed, title, twin, printed]) => {
@@ -199,6 +225,16 @@ describe('point (1): a stored short twin prints only under a mark; an unmarked s
       if (printed instanceof RegExp) expect(shown).toMatch(printed); else expect(shown).toBe(printed);
     }), 'point (1): every row');
   }, 600000);
+  // THE CLOTH TWIN'S MARKED SIDE, HELD ON A CONSTRUCTED RECORD (the same date and message): no born town of 744 isolated births
+  // stores the cloth twin under a mark in both trees. The record is a town on no road whose weavers are "Short of wool." (both
+  // trees), its cloth share's stored line written as the cloth twin
+  test('the cloth twin under a mark stays (a constructed record: bar0-town-calm-isolated-1, its share\'s line the twin)', () => {
+    const s = JSON.parse(JSON.stringify(town('bar0-town-calm-isolated-1')));
+    const src = share(s, 'Wool & Textile Trade');
+    expect(marks.incomeMarkShown(s, src), 'anchored: the cloth share is marked').toBe('Short of wool.');
+    src.desc = CLOTH_SHORT_LINE;
+    expect(marks.incomeDescShown(s, src, ordinaryIncomeLineOf)).toBe(`Short of wool. ${CLOTH_SHORT_LINE}`);
+  }, 300000);
   test('the tab prints it so: the unmarked metropolis shows no short twin', () => {
     const { text } = economics(town('bar0-metropolis-calm-rand-42'));
     expect(text).toContain(METAL_WORKED_LINE);
