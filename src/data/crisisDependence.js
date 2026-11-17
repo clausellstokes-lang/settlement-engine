@@ -1707,3 +1707,15 @@ export const INCOME_DEPENDENCE = Object.freeze({
   "Toll Revenue": Object.freeze([TRAVELLERS, GOODS]),
   "Wool & Textile Trade": NONE,
 });
+
+/**
+ * What a house lives on, by its catalogue id (the record's `catalogId`, else its name's). Moved VERBATIM from
+ * `domain/display/crisisStoppedRow.js` (BAR7-ECON item 5, 2026-11-17), which re-exports it.
+ * @param {{ catalogId?: unknown, name?: unknown }} inst
+ * @returns {ReadonlyArray<string>}
+ */
+export function houseDependenceOf(inst) {
+  const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
+  return id && Object.prototype.hasOwnProperty.call(HOUSE_DEPENDENCE, id) ? HOUSE_DEPENDENCE[id] : NONE;
+}
+import { catalogIdForName } from './institutionalCatalog.js';

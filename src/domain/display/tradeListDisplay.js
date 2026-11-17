@@ -701,7 +701,7 @@ export function harvestScarceHere(settlement) {
 
 /** The crops of the field, the grove and the mill, by a word of the good's name (folded). */
 const HARVEST_CROP_GOOD = /\b(?:grain|wheat|barley|rye|oats|millet|rice|maize|dates?|flour|meal|harvest|palm sugar|produce)\b/;
-import { FAMINE_FAILED_FOOD, GRAIN, INCOME_DEPENDENCE, NONE } from '../../data/crisisDependence.js';
+import { FAMINE_FAILED_FOOD, GRAIN, INCOME_DEPENDENCE, NONE, INPUT, houseDependenceOf } from '../../data/crisisDependence.js';
 import { housesShortOf } from '../facts/houseInputAtHand.js';
 
 /**
@@ -831,10 +831,13 @@ function everyMakerShort(good, roster, short, settlement) {
  * @returns {boolean}
  */
 function everyMakerShortHere(settlement, good) {
-  const short = new Set([...housesShortOf(settlement).keys()].map(fold));
+  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement));
+  // the page's own mark: a house of the short set whose dependence holds INPUT (`crisisStoppedRow.js :: rowShortOf`); the
+  // set alone holds houses the page prints bare (a shepherd, a chandler, a stable district: no input dependence)
+  const marked = new Set(live.filter((i) => houseDependenceOf(/** @type {{ name?: unknown }} */ (i)).includes(INPUT)).map((i) => fold(/** @type {{ name?: unknown }} */ (i)?.name)));
+  const short = new Set([...housesShortOf(settlement).keys()].map(fold).filter((n) => marked.has(n)));
   if (short.size === 0) return false;
-  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
-    .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
+  const roster = live.map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
   return everyMakerShort(good, roster, short, /** @type {Parameters<typeof localProductionAsPrinted>[0]} */ (settlement));
 }
 

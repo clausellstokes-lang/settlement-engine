@@ -74,12 +74,13 @@ import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
+import { houseDependenceOf } from '../../data/crisisDependence.js'; // BAR7-ECON item 5: its one home, beside its table
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 import { serviceRowsOf } from '../dossier/entityLinks.js';
 import { chainCrisisStateShown } from './chainStateShown.js';
 import {
-  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, HOUSE_DEPENDENCE, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE,
+  SERVICE_DEPENDENCE, SERVICE_DEPENDENCE_BY_DESC, CHAIN_DEPENDENCE, INCOME_DEPENDENCE, INPUT_GAP_HELD_EVERYWHERE, SERVICE_FREE_OF_HOUSE,
   SIEGE_TWINS_ON_OFFER, GATES_WORK_HELD_BY_RECORD, TRAVELLERS, GOODS, GATHERINGS, GRAIN, LIVESTOCK, FISH, GAME, INPUT, GATES, FIELD_WORK, IMPORTED_INPUT, INCOME_TRADE_HOUSES, NONE,
   IRON, WORKING_ANIMALS, INPUT_IMPORTED_AS, INCOME_REMEDY_HOUSES, INCOME_CLOTH_HOUSES,
 } from '../../data/crisisDependence.js';
@@ -330,15 +331,10 @@ function onImportedInputUnderSiege(settlement, house) {
   return typeof house?.name === 'string' && housesOnImportedInput(settlement).has(house.name) && stoppingCrisesOf(settlement).includes('under_siege');
 }
 
-/**
- * What a house lives on, by its catalogue id (the record's `catalogId`, else its name's).
- * @param {{ catalogId?: unknown, name?: unknown }} inst
- * @returns {ReadonlyArray<string>}
- */
-export function houseDependenceOf(inst) {
-  const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
-  return id && Object.prototype.hasOwnProperty.call(HOUSE_DEPENDENCE, id) ? HOUSE_DEPENDENCE[id] : NONE;
-}
+/* What a house lives on, by its catalogue id: `houseDependenceOf`, moved VERBATIM to the data table's own file
+ * (`data/crisisDependence.js`, BAR7-ECON item 5, 2026-11-17) so that the trade lists, which sit below this leaf, read the same
+ * fact of "a house marked short" (`rowShortOf`: a house of the short set whose dependence holds INPUT); re-exported here. */
+export { houseDependenceOf };
 
 /** The chain states a card prints as working (`chainStateShown.js`'s own set). */
 const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
