@@ -200,3 +200,34 @@ landing made them and they were in no net, the chair's or a seat's). They join P
 Everything else red in that whole check is classified by the chair (reference files, stored figures, committed
 bundles: the close's). Your rule stands: red at your tip and not at your base is yours; and these three, red at your
 base and of the birth's making, are yours too.
+
+## AMENDMENT 2 (sent to the seat by message at 13:12 UTC on 2026-11-17, after its hand-back at 882cae3194 and a second reader's findings: no HIGH, five MED)
+
+The second reader found BR8 MET IN CODE (no seed at print; only gap rows and import words written; no new field or
+kind; the gap line's contract kept; the scene guard byte-equal to the line's). In this order, a push after each, and a
+hand-back with what is done if the count runs short. Budget: +200,000 in all.
+
+FIRST, AMENDMENT 1's two that the tip does not hold (the narratives step's declared write; the duplicate canonical
+import: a lead: only the first path of the birth's import writer asks whether the list already names the good; the
+other two compare the exact word).
+
+A. A MINE ON LIVE IRON SAYS IT IS WORKED OUT where its only named chain is a spent coal seam ("The mine is worked out:
+   its own ground is depleted (Coal deposits)." beside a live iron ground; a `missing` row of coal written). A house
+   that works several grounds is worked out only when every ground it works is spent. Counted over the 720.
+B. THE PEAT CUTTER PRINTS NO MARK (the crisis table classes it as dependent on nothing, so the short reading's gate
+   gives a failed or an idle peat cutter no mark; the guard skips it). Verified, then marked through the supply rule's
+   own reading in the leaf, whatever the crisis table's class (that table is not the seat's). The guard without the skip.
+C. THE DETECTOR'S NEW EXCLUSION IS LOOSE (any import with the word "fish", any answer but `missing`): tightened to the
+   owner's first story exactly (the engine's own word for the good; the one reader's answer that says bought in). A
+   besieged market with its fish cut and a bare row is not excused.
+D. TWO GUARDS SAY LESS THAN THEIR NOTES: the input-reaches test's shut-route arm asserts nothing under a siege any more
+   (its note mended; the besieged form asserted for a buyer in the seat's guard: the word on the imports, the house
+   curtailed by the siege, never `missing`); the guard's carve-out for the war ("fewer than 30 towns") pinned exactly.
+E. THE VENTURE IS KNOWN BY ITS LINE'S WORDS: kept, with one table of the words for the writer and the reader, a guard
+   that every line the writer can build is recognised, and a comment that a later rewording keeps the old pattern
+   readable for towns saved with it.
+F. RULING BR9 (the war's iron mark): the hook's whole predicate in one new leaf called by the hook's writer
+   (`src/generators/economy/foodBalance.js`: a call in place of the condition, no net line added: the file stands at
+   its ceiling) and by the two readers (`warReach.js`, `houseInputAtHand.js`); the readers stop reading the hooks;
+   `publicSafe.js` untouched. Those three files are the seat's for that one hunk each.
+LAST, IF CHEAP: no door word "short" on a venture's services on the Institutions tab.

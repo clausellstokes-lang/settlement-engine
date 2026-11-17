@@ -268,3 +268,18 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   chair had asked JOIN-17 for a staging branch; JOIN-17 rightly refused to push any branch but the line; no one
   pushes outside their own branch). THE OWNER'S DESIGN IS UNCHANGED (the stories, the odds, the failed venture): only
   where the dice's result is kept changes: on the page's own rows, not in a re-reading of the seed.
+- **BR9 (2026-11-17, 13:12 UTC; the chair's, vetoable): A MARK THE PLAYERS SEE IS NEVER READ OFF THE DM'S HOOKS.** BIRTH-3
+  found, and a second reader confirmed in the code, why one town of the public prose equality test is red on the line
+  itself: the war's iron mark ("Curtailed by the war." on the smiths, the smelter and the metalworkers of a town at
+  war; "Short of iron." in an occupied town of a land at war) is read by two readers off the DM's plot hooks
+  (`economicViability.plotHooks`), which the public projection withholds: the owner's page shows the mark and the
+  shared page does not, in 8 towns of the census's 720 and 9 of the wide read's 150. THE HOOK'S OWN CONDITION, where the
+  hook is written, rests only on fields the public record keeps (what the town must import, its live material, an
+  import's processor, a route, the iron's word on the imports, the war's state). RULED: that whole predicate moves into
+  ONE small leaf, called by the hook's writer and by both readers; the readers stop reading the hooks; THE HOOKS STAY
+  WITHHELD (`publicSafe.js` is not touched: the cure widens nothing a shared page may know that it could not already
+  work out from what it shows). The imports and the war's state alone would over-mark: it is the whole predicate or
+  nothing. Proof asked: the equality test's last town green; the three views equal in every town; the guard's carve-out
+  for the war gone; the owner's page unmoved. BUILT BY BIRTH-3 as the last part of its second amendment (it measured
+  the fault and holds the readers' file); one hunk in each of three files, the writer's file at its line ceiling taking
+  a call in place of the condition.
