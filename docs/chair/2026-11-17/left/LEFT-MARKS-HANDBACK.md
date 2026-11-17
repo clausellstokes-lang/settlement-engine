@@ -151,3 +151,10 @@ reads "Already up to date". Clean.
   as in section 5), tests/lint the same 71 names as the base; one message differs by a stored figure:
   `sovereigntyLightingContract.walker` "the estate's file count moved … expected 3674 to be 3641" at the base reads 3675 at
   the tip (red at both; the one file more is my guard `tests/domain/leftMarks.test.js`; the figure is the close's). The general gap line beside the supply story's (`validationOnPage.js`) is not my file: untouched.
+
+## 8 · RULING BR21 (one commit after 9326b520c)
+
+- `houseInputAtHand.js :: KEY_IMPORT_WORDS` is scoped to the brief's word, "herbs and forage" ("Medicinal herbs" and "Herbs" read as before, by the chain's noun): "Ritual wood and herbs (ancient grove damaged)" feeds no house of medicine.
+- Stored fields against 9326b520c over the 900 births: `economicState.primaryImports` of bar0-town-occupied-rand-43 only ("Medicinal herbs" is back); against the base: `resourceAnalysis.gaps` of r2r-village-13 only (its apothecary stays fed by "Herbs and forage", the L25 anchor). The 525: 0 move, against the tip and against the base.
+- `tests/components/bar7*` 16/16 green (bar7EconTab's C39519 again); leftMarks, bar6MarksLaw8, birthKindsLaw, supplyStoryLaw 26/26; both type gates and eslint 0; `tests/lint` the base's 71 names.
+- The declared move of the thirty in section 4 is withdrawn: the record moves in one town of the 900 (r2r-village-13), none of the 525.
