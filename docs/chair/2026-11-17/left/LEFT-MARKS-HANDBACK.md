@@ -1,7 +1,8 @@
 # LEFT-MARKS · HAND-BACK (the sixth chair's BRIEF-LEFT, section LEFT-MARKS with AMENDMENT 1; 2026-11-17)
 
 Base `lane/point33-candidate-2026-11-17` at e0242a12a (tree 4a9735d2f9). Branch `lane/left-marks-2026-11-17`, tip
-bdeefcd14 (this file on top). Eleven commits, one an item, pushed after each. Nothing merged, no pull request, no force.
+da70a5049 (this file on top). One commit an item, pushed after each, AMENDMENT 2's M6 and M7 last (section 7: the chair's
+message reached this seat after its first hand-back). Nothing merged, no pull request, no force.
 
 ## 1 · The rules, before and after (towns / instances; the thirty · the 150 · the 720)
 
@@ -59,7 +60,7 @@ tip a380a4d6c; the last commit, bdeefcd14, changes one town of the 150 the runne
   `GEN_TO_PULSE_TYPE`, alone and beside a famine. No import added (EG1). 0 births move.
 - **M5.** The comment above `sourceStoryOf`'s chains now says it as the 720 show it (spent iron beside a live seam).
 
-YOUR GUARD `tests/domain/leftMarks.test.js`: 4 tests, all four red at the base, green at the tip.
+YOUR GUARD `tests/domain/leftMarks.test.js`: 6 tests (L25 two, L16, M3, M6, M7), each red at the base, green at the tip.
 
 ## 2 · The controls (runH with `review-bar-6/SECOND-CHECK.final51.json`)
 
@@ -122,3 +123,31 @@ reads "Already up to date". Clean.
   reading, not the story leaf): named in case the chair reads "not by calling the leaf under test" more widely.
 - No new vocabulary atom. New tables, each vetoable: `HOUSE_NEED_INPUT`, `SURPLUS_HOUSES` (crisisDependence.js);
   `KEY_IMPORT_WORDS`, `TRADE_STOCK_WORDS` (houseInputAtHand.js).
+
+## 7 · AMENDMENT 2 (M6, M7; read after the first hand-back, built after M5, one commit each)
+
+- **M6 (3ce392df7).** `law8.mjs :: houseMarks` reads "Abandoned: a failed venture." / "Failing: a failed venture." leading a
+  card's line or a Services row as a mark (`law8Marks.mjs` reads the leaf's `rowMarkText`, which already returns it: no
+  change). runD 8a.input over the tip's render: the 30 1/3 → 0, the 150 4/12 → 2/8, the 720 5/17 → 1/7. Guard: leftMarks
+  (M6), a constructed page, red at the base.
+- **M7 (da70a5049), ruling BR11.** `crisisStoppedRow.js :: houseDependenceIn`: under a siege a house whose input is the
+  yield of a proven ground the story leaves there (`impliedGroundsOnPage(s).there`) lives on `field work`, "Curtailed by
+  the siege.", and its Services rows inherit it. MEASURED FIRST (a house of a material bare beside a critical "Supply route
+  severed." card of it): the 30 0; the 150 2 towns / 6 houses (bar0-city-under_siege+famine-rand-28, -35: carpenters,
+  cooper, sawmill); the 720 1 town / 4 houses (r2r-metropolis-14, and its woodcarver); after 0 · 0 · 0. No other crisis
+  writes that card (`economicState.js` writes "Supply route severed" under a siege only), so no other crisis is named.
+  The marks move in those three towns only (25 house and service rows over the 900). No stored row moves; the card is
+  untouched. Guard: leftMarks (M7), red at the base (10 houses), the two cities its positive anchor, the three views alike.
+- **THE CHAIR'S SEVEN TOWNS (MEASURE-1's 720 row of 8a.input) and the three of 8b.extract**, rendered again at da70a5049
+  with the other 8a.input towns of the 30 and the 150 (15 towns), runD over them: 0 instances of any rule (44 at the
+  base). 8a.input: r2r-town-54, r2s-religious_conversion-town-2 (L25); r2r-hamlet-27, r2s-infiltrated-town-1,
+  r2s-politically_fractured-hamlet-0, r2s-under_siege-city-1 (M6, the ventures); r2r-metropolis-14 (M7). NONE IS LEFT
+  UNCURED. 8b.extract: r2r-metropolis-57, r2s-infiltrated-metropolis-1, r2s-insurgency-metropolis-3 are three of the 17
+  mines, each beside a live seam of its own kind: at work by ruling A, so no fault. The two sawmills of 8b.person (section
+  1) are gone with M7. runH and runI read those 15 towns as before, rule by rule (8k.trade.mild's two besieged cloth scenes
+  stand, as at the base).
+- The net again at da70a5049: strict 0, ratchet 0, eslint 0, architecture 347/347, build 0, vendorPdfLazy the base's red
+  with the base's message, bar5*/bar6* 173/173, my files' guards 21/21, N3's three 465/465 (the four pinned/fork files
+  as in section 5), tests/lint the same 71 names as the base; one message differs by a stored figure:
+  `sovereigntyLightingContract.walker` "the estate's file count moved … expected 3674 to be 3641" at the base reads 3675 at
+  the tip (red at both; the one file more is my guard `tests/domain/leftMarks.test.js`; the figure is the close's). The general gap line beside the supply story's (`validationOnPage.js`) is not my file: untouched.
