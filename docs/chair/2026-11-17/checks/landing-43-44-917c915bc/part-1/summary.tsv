@@ -1,0 +1,19 @@
+validate-hazard-registry	0	0
+validate-premortem	0	0
+validate-packets	0	1
+validate-data	0	0
+validate-custom-content-manifest	0	1
+validate-migration-head	0	0
+validate-edge	0	1
+validate-map	0	1
+validate-tuning-bands	0	0
+validate-foundry-module	0	0
+validate-mcp-server	0	0
+typecheck-ratchet	0	34
+typecheck-strict	0	29
+lint	0	135
+door-classes	1	3
+door-things	1	38
+vitest-1-of-6	1	830
+vitest-2-of-6	1	943
+DONE 2026-11-17T23:55:12Z parts=pre s:1 s:2
