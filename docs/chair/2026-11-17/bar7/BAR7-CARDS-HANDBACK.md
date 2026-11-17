@@ -138,3 +138,9 @@ green). For the close: a mutation-manifest entry for the new guard, if the close
 2. **The runner's `title` field** (`law8H.mjs :: readPersons`) reads `L[k + 2]`, which is now the card's mark line; it only
    labels instances and moves no count. A shared tool, not mine.
 3. Nothing else of my section is left.
+
+## 8. AFTER THE LANDING (the chair's word, 2026-11-17 about 06:20 UTC; the line at a44495b59)
+
+- `tests/lint/ruinFilterRoster.walker.test.js` (not in either net) named my leaf `impairedListShown.js`: its roster read is a name lookup for the mark leaf. Its row is added to `RUIN_AGNOSTIC_EXEMPT` with that reason, as the chair ruled; nothing else of the walker changes.
+- The walker alone at my tip: 11 of 12 green, the compliance test among them. RED: "the scan reads CODE …", `expected 115 to be 113`: the pinned count of readers (an earlier round's reader, already 114 at my base, and mine). It is a stored figure and the close's: not re-pinned.
+- At my base the same walker read 11 of 12 (the count red at 114); my leaf added one reader and, before this row, one compliance failure.

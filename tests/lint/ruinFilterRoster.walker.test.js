@@ -251,6 +251,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // ⚠ Do NOT re-add the row "just in case" — an exempt entry for a non-reader is
   // exactly the stale state that arm exists to forbid.
   'src/domain/display/visibilityAudit.js': 'display/audit — covert-dossier impairment read',
+  'src/domain/display/impairedListShown.js': 'name-lookup/display — BAR7-CARDS item 3 (2026-11-17; RULED EXEMPT BY THE CHAIR after the landing at a44495b59): impairedListMarked finds the roster row of each house the record\'s Outlook list NAMES, only to ask the mark leaf (crisisStoppedRow.js :: rowMarkText) for its mark; a ruined house takes no mark and falls out of the list. It sums nothing and credits no institution with capacity. Routing it through liveInstitutions() would KEEP a ruined house\'s name (a name the roster does not hold is kept), the opposite of a filter. The helper stood unscanned in ViabilityTab.jsx (a component file) before it moved to this leaf.',
 });
 
 /**
