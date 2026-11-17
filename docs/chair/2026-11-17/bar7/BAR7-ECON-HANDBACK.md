@@ -136,7 +136,7 @@ configurations moves** (hashed field by field at base and tip, `goldenCorpus()`;
 |---|---|---|
 | `typecheck:domain:strict` | 1113, ceiling 1113 | 1113, ceiling 1113 |
 | `typecheck:ratchet` | 167, ceiling 167 | 167, ceiling 167 |
-| `npx eslint` on my changed files | — | 0 problems |
+| `npx eslint` on my changed files | — | 0 errors, 0 warnings |
 | `npx vitest run tests/architecture` | 347/347 | 347/347 |
 | build + vendorPdfLazy + bootSmoke | not owed (no file under `src/domain/facts`) | not owed |
 | my guard | 7 of 8 red | 8/8 |
@@ -213,7 +213,7 @@ points, each measured at the tip over the tip's renders (records unchanged by th
    Over the 720 at the tip the same equality held for every house (0 of 193 fact-short houses differ once the INPUT filter is
    read: measured before item 5's second commit).
 
-NET (this commit): `typecheck:domain:strict` 1113 of ceiling 1113; `typecheck:ratchet` 167 of 167; eslint on my changed files 0 problems;
+NET (this commit): `typecheck:domain:strict` 1113 of ceiling 1113; `typecheck:ratchet` 167 of 167; eslint on my changed files 0 errors, 0 warnings;
 `tests/architecture` 347/347; my guard 12/12; the modified tests green (`incomeLinesSayTheRecord` 9/9 with the new anchor,
 `chainPrintSites.walker`, `resourceLabelSeam.census`, `domainGeneratorsBoundary`); the 106 files near mine: the same 10 files
 and 12 tests red as at the base, same messages; bar5*/bar6*: `bar6ScenesGoods.test.js:170` red at base and tip alike. ALSO
