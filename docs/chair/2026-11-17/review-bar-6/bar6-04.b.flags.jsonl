@@ -1,0 +1,9 @@
+{"id":"C9756","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"STATE","why":"pilgrims crowd the road in and stalls thrive; header isolated trade access, Wartime crisis, and C9777 says no great road feeds the market","other":"C9777"}
+{"id":"C10014","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"names 'the reformers'; no reformers party in TENSIONS, QUARRELS, CRISIS or PAST of this town","other":""}
+{"id":"C10050","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"caravans buy here; trade access isolated, no great road feeds the market (C9777), and the city is at war","other":"C9777"}
+{"id":"C10234","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"foreign traders attend the fair, unmarked; isolated trade access and Wartime crisis","other":""}
+{"id":"C10378","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"BROKEN","why":"service row 'Arcane services (illicit)' prints no providing house line, unlike every other row","other":""}
+{"id":"C10504","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"PAIR","why":"merchants from distant regions at the fair; isolated trade access, no great road (C9777), Wartime crisis","other":"C9777"}
+{"id":"C10973","town":"bar0-city-wartime-rand-42","sev":"LOW","kind":"STATE","why":"labels the Merchant Guild Council 'mage counsel'; GOVERNMENT lists it as a merchant power and no mage council","other":""}
+{"id":"C12371","town":"bar0-city-wartime-rand-42","sev":"MED","kind":"PAIR","why":"says the city closes every year ahead with a dependable margin; STATE shows a 2% food deficit and C10781 says it falls short","other":"C10781"}
+{"id":"DONE","lines":2804,"blocks":1,"flags":8}
