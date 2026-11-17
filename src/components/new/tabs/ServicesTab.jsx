@@ -21,7 +21,7 @@ import { edged } from '../../../design/edgedBox.js';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_RULED, FLUSH_STACK } from '../../../design/flush.js';
-import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, markedDescription, ordinaryTimesLine } from '../../../domain/display/crisisStoppedRow.js';
+import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, markedDescription, ordinaryTimesLine, setsWithMarkedHousesWorse } from '../../../domain/display/crisisStoppedRow.js';
 
 /**
  * ⛔ DS-SUP-3'S POSITION, BOUND ONCE AND SPELLED ONCE.
@@ -130,7 +130,8 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   );
 
   // Chain impairment
-  const {tradeDeps, impaired, degraded, vulnerable, depReasons} = computeChainSets(settlement);
+  // BAR6-MARKS (8a.mild): the row's state word prints the leaf's worse state (`setsWithMarkedHousesWorse`)
+  const {tradeDeps, impaired, degraded, vulnerable, depReasons} = setsWithMarkedHousesWorse(settlement, computeChainSets(settlement));
   const serviceChainDepth = serviceChainDepthMap(settlement);
 
   // Build flat list for search

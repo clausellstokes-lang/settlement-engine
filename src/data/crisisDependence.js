@@ -984,7 +984,8 @@ export const SERVICE_DEPENDENCE = Object.freeze({
 /** Service name -> { the row's description -> what that row lives on }. @type {Readonly<Record<string, Readonly<Record<string, ReadonlyArray<string>>>>>} */
 export const SERVICE_DEPENDENCE_BY_DESC = Object.freeze({
   "General trade": Object.freeze({
-    "Agricultural produce, household goods, livestock. The economic heartbeat of the week.": Object.freeze([GATHERINGS, GOODS]),
+    // BAR6-MARKS (8c.failed): the week's produce and livestock are the food a famine fails
+    "Agricultural produce, household goods, livestock. The economic heartbeat of the week.": Object.freeze([GATHERINGS, GOODS, GRAIN, LIVESTOCK]),
   }),
   // TAIL-SERVICES-3 (READ-ALL 11805, X9 06145): burial in a ground beyond the gates; a siege stops it, an outbreak does not (S8's word)
   "Burial": Object.freeze({
@@ -1048,12 +1049,12 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "beekeeper": Object.freeze([FIELD_WORK]), // SV8: its hives on the land the siege curtails
   "black_market": NONE,
   "black_market_bazaar": NONE,
-  "blacksmith": Object.freeze([IRON]), // BAR5-MARKS (WM1): the forge works iron
-  "blacksmiths_3_10": Object.freeze([IRON]), // BAR5-MARKS (WM1): the forge works iron
+  "blacksmith": Object.freeze([IRON, INPUT]), // BAR5-MARKS (WM1): the forge works iron; BAR6-MARKS (8a.input): its iron (`HOUSE_TRADE_INPUT`)
+  "blacksmiths_3_10": Object.freeze([IRON, INPUT]), // BAR5-MARKS (WM1): the forge works iron; BAR6-MARKS (8a.input): its iron (`HOUSE_TRADE_INPUT`)
   "bowyer_fletcher": NONE,
   "bowyers_fletchers_guild": NONE,
-  "brewer": Object.freeze([GRAIN]),
-  "brewery": Object.freeze([GRAIN]),
+  "brewer": Object.freeze([GRAIN, INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
+  "brewery": Object.freeze([GRAIN, INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "brickmaker": Object.freeze([INPUT]),
   "brothel": NONE,
   "brothel_red_light_district": NONE,
@@ -1063,9 +1064,9 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "caravan_masters_exchange": Object.freeze([TRAVELLERS, GOODS]),
   "caravaneer_s_post": Object.freeze([TRAVELLERS, GOODS]),
   "caravanserai": Object.freeze([TRAVELLERS, GOODS, INPUT]), // BAR2-SERVICES SV1: its camels; "No camels reach the caravanserai." marks it, and its caravans with it
-  "carpenter": NONE,
-  "carpenter_part_time": NONE,
-  "carpenters_5_15": NONE,
+  "carpenter": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
+  "carpenter_part_time": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
+  "carpenters_5_15": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "carriers_guild": Object.freeze([TRAVELLERS, GOODS]), // S8
   "carriers_hiring_hall": NONE,
   "cartographer_s_guild": NONE,
@@ -1084,13 +1085,13 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "city_state_government": NONE,
   "city_walls_and_gates": NONE,
   "coaching_inn": Object.freeze([TRAVELLERS]),
-  "cobbler": NONE,
-  "cobbler_s_guild": NONE,
+  "cobbler": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
+  "cobbler_s_guild": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "colosseum_arena": Object.freeze([GATHERINGS]),
   "common_grazing_land": NONE,
   "communal_root_cellar": NONE,
   "contract_killer": NONE,
-  "cooper": NONE,
+  "cooper": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "courthouse": NONE,
   "craft_guilds_100_150": NONE,
   "craft_guilds_30_80": NONE,
@@ -1121,7 +1122,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "foundling_home": NONE,
   "free_company_hall": NONE,
   "front_businesses": NONE,
-  "fuller": NONE,
+  "fuller": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "furrier_s_district": NONE,
   "gambling_den": NONE,
   "gambling_district": NONE,
@@ -1130,7 +1131,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "gates_if_walled": NONE,
   "gladiatorial_school": NONE,
   "glassblower": Object.freeze([INPUT]),
-  "glassmakers": NONE,
+  "glassmakers": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "golem_workforce": NONE,
   "graveyard": NONE,
   "great_cathedral": NONE,
@@ -1163,13 +1164,13 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "lord_s_appointee": NONE,
   "lord_s_reeve": NONE,
   "lord_s_steward": NONE,
-  "luxury_goods_quarter": Object.freeze([GOODS]),
+  "luxury_goods_quarter": Object.freeze([GOODS, INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "mages_district": NONE,
   "mages_guild": NONE,
   "major_annual_fairs": Object.freeze([TRAVELLERS, GOODS, GATHERINGS]),
   "major_hospital": NONE,
   "major_monasteries_5_10": NONE,
-  "maltster": Object.freeze([GRAIN]),
+  "maltster": Object.freeze([GRAIN, INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "market_square": Object.freeze([GATHERINGS]),
   "massive_prison": NONE,
   "massive_walls_and_fortifications": NONE,
@@ -1182,10 +1183,10 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "merchant_warehouses": NONE,
   "message_network_high_magic": NONE,
   "midwife": NONE,
-  "mill": Object.freeze([GRAIN]),
-  "mills_2_5": Object.freeze([GRAIN]),
+  "mill": Object.freeze([GRAIN, INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
+  "mills_2_5": Object.freeze([GRAIN, INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "mine": Object.freeze([INPUT, FIELD_WORK]), // SV6: its ore; SV8: its pits, the chain impaired under a siege
-  "mine_open_cast": NONE,
+  "mine_open_cast": Object.freeze([INPUT, FIELD_WORK]), // BAR6-MARKS (8b.extract): the open pit works its ground as the mine does
   "mint": NONE,
   "mint_official": NONE,
   "monastery_or_friary": NONE,
@@ -1223,7 +1224,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "professional_city_watch": NONE,
   "public_bathhouse": NONE,
   "red_light_district": NONE,
-  "resident_smith_part_time": Object.freeze([IRON]), // BAR5-MARKS (WM1): the forge works iron
+  "resident_smith_part_time": Object.freeze([IRON, INPUT]), // BAR5-MARKS (WM1): the forge works iron; BAR6-MARKS (8a.input): its iron (`HOUSE_TRADE_INPUT`)
   "river_boatyard": NONE,
   "river_ferry": Object.freeze([TRAVELLERS]),
   "rookery": NONE,
@@ -1237,16 +1238,16 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "sewage_system": NONE,
   "shepherd": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: its flocks on the grazing the siege curtails
   "shepherd_collective": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: the same flocks, held in common
-  "shipyard": NONE,
+  "shipyard": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "slave_market": NONE,
   "slave_market_district": NONE,
   "small_hospital": NONE,
   "small_prison_stocks": NONE,
-  "smelter": Object.freeze([INPUT]),
+  "smelter": Object.freeze([INPUT, IRON]), // BAR6-MARKS (8a.input, WM1 widened): the smelter works the metal the war takes
   "smuggling_network": Object.freeze([GOODS]),
   "smuggling_operation": Object.freeze([GOODS]),
   "smuggling_waypoint": Object.freeze([GOODS]),
-  "specialized_metalworkers": NONE,
+  "specialized_metalworkers": Object.freeze([IRON, INPUT]), // BAR6-MARKS (8a.input, WM1 widened): the metalworkers work iron as the forge does
   "stable_district": Object.freeze([TRAVELLERS, WORKING_ANIMALS]), // BAR5-MARKS: its trade is the working animals (WM1), for merchants and travellers by its own description
   "stable_master": NONE,
   "stable_yard": Object.freeze([TRAVELLERS]),
@@ -1256,7 +1257,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "subsistence_farming": Object.freeze([GRAIN, FIELD_WORK]), // SV8: its plots, a third of their yield kept under a siege
   "tailor": NONE,
   "tailor_s_guild": NONE,
-  "tanner_established": NONE,
+  "tanner_established": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "tanners": Object.freeze([INPUT]), // HR1: measured, every service short wherever its input is missing (11 towns of the 720, 1 of a fresh 300)
   "tannery": Object.freeze([INPUT]),
   "taverns_5_20": NONE,
@@ -1292,12 +1293,12 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "wayside_inn": Object.freeze([TRAVELLERS]),
   "wayside_shrine": NONE,
   "waystation": Object.freeze([TRAVELLERS, GOODS]),
-  "weavers_textile_workers": NONE,
+  "weavers_textile_workers": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "weekly_market": Object.freeze([GATHERINGS, GOODS]),
   "whisper_market": NONE,
   "wildfowler": NONE,
   "wizard_s_tower": NONE,
-  "woodcarver": NONE,
+  "woodcarver": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
   "woodcutter_s_camp": Object.freeze([FIELD_WORK]), // SV8: its cutting in the woods the siege curtails
   "workhouse": NONE,
 });
@@ -1322,10 +1323,12 @@ export const SPENT_GROUND_YIELD = Object.freeze({
  * THE HOUSES THAT WORK THE GROUND ITSELF (SV6, measured): an import feeds the houses that buy what the ground yields (the
  * smith's iron, the baker's grain), never the work on the ground: the mine's crews cut no ore from an exhausted seam,
  * the quarry no stone, the boats no morning catch, however much is bought in. For these the trade record's shortage
- * import does not lift the mark. Catalogue ids. VETOABLE (the owner's).
+ * import does not lift the mark. Catalogue ids. VETOABLE (the owner's). BAR6-MARKS (LAW 8's 8b.extract, 2026-11-16): the
+ * open-cast mine is a mine (bar0-hamlet-under_siege-rand-34: its every chain "From Iron ore deposits (depleted)", its
+ * id `mine_open_cast` missed here, so the town's iron import lifted its mark).
  * @type {ReadonlyArray<string>}
  */
-export const SPENT_GROUND_WORKERS = Object.freeze(['mine', 'stone_quarry', 'salt_works', 'fisher_s_landing', 'fishing_community', 'fish_market', 'hunter_s_lodge']);
+export const SPENT_GROUND_WORKERS = Object.freeze(['mine', 'mine_open_cast', 'stone_quarry', 'salt_works', 'fisher_s_landing', 'fishing_community', 'fish_market', 'hunter_s_lodge']);
 
 /**
  * THE GROUNDS A FISHING HOUSE WORKS WHERE NO CHAIN NAMES IT (BAR3-SERVICES, the chair's direction S3 of 2026-11-15;
@@ -1397,8 +1400,8 @@ export const SIEGE_TWINS_ON_OFFER = Object.freeze([
  */
 export const SERVICE_FREE_OF_HOUSE = Object.freeze({
   // the mill's other wheels: cloth and timber, not grain
-  "mill": Object.freeze({ "Fulling cloth": Object.freeze([GRAIN]), "Sawing timber": Object.freeze([GRAIN]) }),
-  "mills_2_5": Object.freeze({ "Fulling cloth": Object.freeze([GRAIN]), "Sawing timber": Object.freeze([GRAIN]) }),
+  "mill": Object.freeze({ "Fulling cloth": Object.freeze([GRAIN, INPUT]), "Sawing timber": Object.freeze([GRAIN, INPUT]) }), // BAR6-MARKS: nor its grain (INPUT)
+  "mills_2_5": Object.freeze({ "Fulling cloth": Object.freeze([GRAIN, INPUT]), "Sawing timber": Object.freeze([GRAIN, INPUT]) }), // BAR6-MARKS: nor its grain (INPUT)
   // honey wine
   "brewer": Object.freeze({ "Mead": Object.freeze([GRAIN]) }),
   // judged of what is brought to the house, not made from its own input
@@ -1568,6 +1571,31 @@ export const INPUT_IMPORTED_AS = Object.freeze({
   "apothecary": 'medicinal herbs',
   "apothecary_district": 'medicinal herbs',
   "apothecary_established": 'medicinal herbs',
+});
+
+/**
+ * THE GOOD A HOUSE'S TRADE CANNOT GO ON WITHOUT (BAR6-MARKS, LAW 8's 8a.input, BRIEF-BAR6 fact (a), 2026-11-16; vetoable by
+ * the owner). The mark's short cause read a house's input only where the record's gap writer spoke of that house
+ * (`resourceAnalysis.gaps[]`, written for the houses a chain names) or its ground was spent: the cooper, the woodcarver and
+ * the carpenters work timber, the smiths iron, the fuller wool, the cobbler hides, the brewery grain, and no chain names
+ * them, so where the page said "Needed, and not brought in: timber", or that the siege cut the wool off, their rows printed
+ * bare (105 houses in the census's 720 at afa46d644). These houses' input is read by the one reader of an input
+ * (`facts/houseInputAtHand.js :: houseInputAtHand`, by the chain key named here) wherever no gap of their own speaks:
+ * `missing` marks them short, `imported` under a siege curtails them (S1 (i)). `luxury` is the luxury trade's own goods,
+ * which no chain carries: had only as the town's production or its imports name them. Catalogue ids -> a chain key of
+ * `CHAIN_INPUTS` (or `luxury`). VETOABLE (the owner's).
+ * @type {Readonly<Record<string, string>>}
+ */
+export const HOUSE_TRADE_INPUT = Object.freeze({
+  blacksmith: 'ironOre', blacksmiths_3_10: 'ironOre', resident_smith_part_time: 'ironOre', specialized_metalworkers: 'ironOre',
+  brewer: 'grain', brewery: 'grain', maltster: 'grain', mill: 'grain', mills_2_5: 'grain', bakers_5_15: 'grain',
+  carpenter: 'timber', carpenter_part_time: 'timber', carpenters_5_15: 'timber', cooper: 'timber', woodcarver: 'timber', shipyard: 'timber',
+  sawmill: 'timber', sawmill_commercial: 'timber',
+  cobbler: 'hides', cobbler_s_guild: 'hides', tanner_established: 'hides', tanners: 'hides', tannery: 'hides',
+  fuller: 'wool', weavers_textile_workers: 'wool',
+  glassmakers: 'sand',
+  smelter: 'ironOre',
+  luxury_goods_quarter: 'luxury',
 });
 
 /**

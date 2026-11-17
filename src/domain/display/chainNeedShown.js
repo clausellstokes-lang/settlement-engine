@@ -30,6 +30,7 @@
 import { ACCESS_ONLY, liveInstitutionNames } from '../facts/institutions.js';
 import { houseDoesChainsWork, importsAsPrinted, needMetBy } from './tradeListDisplay.js';
 import { tradeStoppedHere } from './chainStateShown.js';
+import { minorRoutesReach } from '../facts/tradeReach.js'; // BAR6-MARKS (CN1): the poor road an isolated place still has
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { defenceKeepsService } from '../facts/defence.js';
@@ -88,6 +89,16 @@ export function chainNeedLine(chain, record, first = true) {
     return siege ? lineText(siege) : '';
   }
   if (r.economicState?.tradeAccess === 'isolated') {
+    // BAR6-MARKS under RULING CN1 (the chair, 2026-11-16; vetoable by the owner; RECORD's 9d.isolated): an isolated village or
+    // larger still has a poor road where no siege cuts it (`facts/tradeReach.js :: minorRoutesReach`, the food balance's own
+    // minor-route rates): there the goods come in dear and late by the minor roads; "no trade road reaches" is kept for the
+    // thorp, the hamlet and the siege
+    const cfg = /** @type {{ config?: { tradeRouteAccess?: unknown } | null, tier?: unknown }} */ (record);
+    if (minorRoutesReach({ route: cfg.config?.tradeRouteAccess, tier: cfg.tier, siege: tradeStoppedHere(record) })) {
+      return dep.severity === 'critical'
+        ? `${Svcs} here depend on ${listed(goods, 'and')} that come in dear and late by the minor roads.`
+        : `${Svcs} here depend on ${listed(goods, 'and')} brought in by magic, or dear and late by the minor roads.`;
+    }
     return dep.severity === 'critical'
       ? `${Svcs} here run on stored ${listed(goods, 'and')}${first ? `: no trade road reaches ${name}` : ''}.`
       : `${Svcs} here depend on ${listed(goods, 'and')} brought in by magic${first ? `: no trade road reaches ${name}` : ''}.`;

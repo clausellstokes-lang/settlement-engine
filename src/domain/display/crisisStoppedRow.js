@@ -68,7 +68,7 @@
  * Pure: no randomness, no clock, no write.
  */
 import { resourceGapLines } from './validationOnPage.js';
-import { housesOnSpentGround } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home
+import { housesOnSpentGround, housesWantingTradeInput } from '../facts/houseInputAtHand.js'; // BAR4-SCENES-2 (HW1): the spent-ground reading's one home
 import { crisisOf } from '../facts/crisisKind.js';
 import { warTakesOf, WAR_TAKES_IRON, WAR_TAKES_ANIMALS } from '../facts/warReach.js'; // BAR5-MARKS (WM1): what the war takes, one home
 import { filterDeclared, lineText } from '../facts/drawDeclared.js';
@@ -172,7 +172,7 @@ function stoppedBy(kind, settlement) {
       ?.economicState?.foodSecurity?.foodRecord?.failedSource;
     // A famine whose record names no source failed "the crops" (foodBalance.js's own hook, FAILED_SOURCE_WORDS' fallback): the grain.
     const food = typeof failed === 'string' ? FOOD_OF_FAILED_SOURCE[failed] : GRAIN;
-    return food ? [food] : [];
+    return food ? [food, ...harvestFoodsScarce(settlement, food)] : [];
   }
   if (kind === 'wartime') {
     // WM1: what the page says the war took, and nothing more
@@ -180,6 +180,29 @@ function stoppedBy(kind, settlement) {
     return [...(takes.includes(WAR_TAKES_IRON) ? [IRON] : []), ...(takes.includes(WAR_TAKES_ANIMALS) ? [WORKING_ANIMALS] : [])];
   }
   return [];
+}
+
+/**
+ * BAR6-MARKS (LAW 8's 8c, BRIEF-BAR6 fact (c), 2026-11-16; vetoable by the owner): THE FAMINE'S SCARCE GOODS AS THE PAGE
+ * MARKS THEM ON THE INCOME ROW. An income share that lives on the crops and on another food (the small places' "Harvest":
+ * "What the households grow and raise on their holdings", the crops and the herds) is printed "Scarce in the famine."
+ * wherever one of its foods failed; where the herds failed, the harvest's crop is read scarce with it by the rows that sell
+ * or work the grain (the farmland's "Grain at harvest" beside a "Harvest Scarce in the famine" in a town whose grain comes
+ * in at four times the price; the maltster that only runs on a grain surplus). The herds are not read scarce where the
+ * crop failed (a famine of the fields leaves the flocks). The record's own shares are read (`incomeSources[]`, by their
+ * title's line in `INCOME_DEPENDENCE`); a town with no such share adds nothing.
+ * @param {object | null | undefined} settlement @param {string} food the failed food's dependence word
+ * @returns {string[]} the grain, where the page marks it scarce with the failed food
+ */
+function harvestFoodsScarce(settlement, food) {
+  const shares = /** @type {{ economicState?: { incomeSources?: unknown } | null } | null | undefined} */ (settlement)?.economicState?.incomeSources;
+  /** @type {Set<string>} */
+  const out = new Set();
+  for (const share of Array.isArray(shares) ? shares : []) {
+    const deps = incomeDependenceOf(/** @type {{ source?: unknown }} */ (share));
+    if (deps.includes(food) && food !== GRAIN && deps.includes(GRAIN)) out.add(GRAIN);
+  }
+  return [...out];
 }
 
 /**
@@ -290,6 +313,8 @@ export function housesOnImportedInput(settlement) {
     const good = id && Object.prototype.hasOwnProperty.call(INPUT_IMPORTED_AS, id) ? INPUT_IMPORTED_AS[id] : null;
     if (good && imports.some((x) => new RegExp(`\\b${good}\\b`).test(x))) out.add(house.name);
   }
+  // BAR6-MARKS (8a.input, fact (a)): a house whose trade is a good no gap speaks of, which the imports bring
+  for (const [house, want] of housesWantingTradeInput(settlement)) if (want.reach === 'imported') out.add(house);
   IMPORTED_HOUSES.set(settlement, out);
   return out;
 }
@@ -560,6 +585,9 @@ export function housesShortOfInput(settlement) {
   }
   // SV6: a house on a spent ground, by the page's own Depleted list (`SPENT_GROUND_YIELD`'s header)
   for (const [house, ground] of housesOnSpentGround(settlement)) if (!out.has(house)) out.set(house, ground);
+  // BAR6-MARKS (8a.input, fact (a) and (e)): a house whose trade is a good no gap of its own speaks of, where that good is
+  // not had (`houseInputAtHand.js :: housesWantingTradeInput`, the one fact `housesShortOf` (iii) reads too)
+  for (const [house, want] of housesWantingTradeInput(settlement)) if (want.reach === 'missing' && !out.has(house)) out.set(house, want.noun);
   SHORT_HOUSES.set(settlement, out);
   return out;
 }
@@ -611,3 +639,25 @@ export function rowMarkText(settlement, kind, row, crises) {
   return marks.length ? marks.join(' ') : null;
 }
 
+
+/**
+ * BAR6-MARKS (LAW 8's 8a.mild, BRIEF-BAR6 fact (f), 2026-11-16; vetoable by the owner): THE CARD'S STATE WORD PRINTS THE
+ * LEAF'S WORSE STATE. The Institutions card's head and the Services row's title print a house's chain state
+ * (`tabHelpers.js :: computeChainSets`: Impaired, Reduced, Vulnerable) beside the mark this leaf gives it; a house the
+ * leaf marks stopped, curtailed, scarce or short printed " · Vulnerable" over "Short of timber.": two readings of one house.
+ * Where the leaf marks a house the sets hold as reduced or vulnerable, the house is read as impaired; a house the sets
+ * hold in no state keeps none (its mark speaks), and a service's own name keeps its state. Display only.
+ * @template {{ impaired: Set<string>, degraded: Set<string>, vulnerable: Set<string> }} T
+ * @param {object | null | undefined} settlement @param {T} sets the tab's chain-status reading
+ * @returns {T}
+ */
+export function setsWithMarkedHousesWorse(settlement, sets) {
+  if (!settlement || typeof settlement !== 'object' || !sets) return sets;
+  const lifted = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .filter((h) => h && typeof h.name === 'string' && (sets.degraded?.has(h.name) || sets.vulnerable?.has(h.name)) && !sets.impaired?.has(h.name))
+    .filter((h) => rowMarkText(settlement, 'house', /** @type {Record<string, unknown>} */ (h)) !== null)
+    .map((h) => /** @type {string} */ (h.name));
+  if (lifted.length === 0) return sets;
+  const out = new Set(lifted);
+  return { ...sets, impaired: new Set([...sets.impaired, ...out]), degraded: new Set([...sets.degraded].filter((n) => !out.has(n))), vulnerable: new Set([...sets.vulnerable].filter((n) => !out.has(n))) };
+}
