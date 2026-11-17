@@ -66,3 +66,34 @@ EVERY RULING HERE IS THE CHAIR'S AND VETOABLE BY THE OWNER. The rulings of the r
   siege lasts, and the house carries the siege's mark; only a town with no route even in ordinary times cannot buy in.
   Part one's seat (BIRTH-1) was corrected on (c) while it worked: the import is written under a siege too.
 
+- **BR4 · THE OWNER'S TWO FURTHER WORDS ON THE SUPPLY RULE (2026-11-17, about 04:55 and 05:18 UTC, each verbatim), AND THE
+  WHOLE RULE AS IT NOW STANDS.** (4) "Doesn't the stone quary here in and of itself stipulate that there is stone in the
+  ground? Example: a stone quarry in a town with no stone in the ground?" (5) "There is one last thing for you to
+  consider. An area that has exhausted a resource, has infrastructure, but they have the supplies because they buy it in
+  despite the exhausted infrastructure." and at once: "Despite the exhausted resource I meant". SO, FIVE CASES, IN THE
+  PAGE'S EXISTING WORDS: (a) THE LAND GIVES IT: the house works. (b) A SOURCE HOUSE STANDS AND THE LAND LIST HOLDS NO SUCH
+  GROUND: THE HOUSE PROVES THE GROUND: the town's land gains the ground the house implies; nothing is removed, no cause
+  is invented, no sentence is written. It was counted (`docs/chair/2026-11-17/birth/BIRTH-2-COUNT.md`, section V): written
+  after the history it moves no person, tie, name or roster in the census's 720, the 150 or the 525; written before the
+  economy it rebuilds chains and exports on one house and re-draws people: IT IS NEVER WRITTEN EARLY. Its stored form
+  (a late write, or a reading at print) and the houses the roll table denies are being counted (section W) before it is
+  built; the chair's defaults, told to the owner as vetoable: the house wins there too if nothing else on the page then
+  objects; a saved town must reopen the same. (c) THE GROUND IS USED UP AND THE TOWN CAN TRADE: THE MATERIAL IS BOUGHT IN:
+  it stands on the imports in the list's own words ("Iron ore (local iron mines exhausted)", "Timber (local managed
+  woodland cleared)") and every house that USES the material is at work; BIRTH-1 writes that import where the economy
+  left it out (169 houses in 91 towns of the 720 by the audit). (d) UNDER A SIEGE the arrangement stands and reads cut
+  off by the siege (BR3 (c)). (e) USED UP AND NO ROUTE EVEN IN ORDINARY TIMES: short, the infrastructure idle. ONE
+  DISTINCTION, THE CHAIR'S, VETOABLE, TOLD TO THE OWNER AS SUCH: A HOUSE THAT TAKES THE RESOURCE FROM THE GROUND ITSELF
+  (a stone quarry, a mine, a peat cutter; the landings, the hunters, the woodcutter's camp, the shepherd) CANNOT BUY IN
+  WHAT IT TAKES: on its own used-up ground it reads worked out, in the mark's and the Depleted list's existing words,
+  while the houses that use the material carry on with bought-in supply. A HOUSE THAT CAN RUN ON BOUGHT-IN MATERIAL (a
+  salt works refining bought-in salt, a charcoal burner on bought-in wood, a dairy on bought-in beasts) IS A BUYER
+  WHERE ITS GROUND DOES NOT ANSWER: BR2's sentence "an import feeds a buyer, never the work on the ground" holds for
+  the takers only. WHAT THIS CHANGES IN WHAT IS BUILT: BIRTH-1 lands as built (its buyers on a used-up ground are fed by
+  the shortage import; its diggers read worked out); THE SEAT AFTER IT lifts BIRTH-1's narrow rule that a buyer's word
+  feeds no source house for the three that can run on bought-in material (eleven charcoal burners of the 720 stand
+  "Short of timber." beside a bought "Timber"), reads the peat cutter as a taker (the audit: it is not among the houses
+  the spent-ground reading holds, so its own bog's shortage import would feed it), reads worked out by the kinds and the
+  Depleted list and not by the chains, and builds (b).
+  The seat's own question (a charcoal burner "Short of timber." beside the timber the town imports) is thereby ruled:
+  the burner is fed.
