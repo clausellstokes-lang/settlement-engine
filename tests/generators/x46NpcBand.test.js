@@ -232,6 +232,13 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // summaries, viability notes and cast reasons (one of them the second repair seat's letter d, efdb3841d), the viability issues, the prominent tie,
   // a secret and the coherence receipt's quoted tie text. Re-captured on the doors' branch after the merge b46b26d92 by this file's own loop (an
   // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-16 (the close of the round BAR4, BAR4-CLOSE-DOORS-2; the owner's words, 2026-11-16 08:55:14 UTC and 18:51:17 UTC,
+  // "Yes to plain yes for the example-town refresh.", in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json):
+  // 38 of 60 moved by the round's declared cures; the stored sixty reproduce at c4ac1ef84a (60 of 60). FIELD-DIFFED by leaf path: tie descriptions,
+  // a tension and its variant index (BAR4-PEOPLE, the repair seat's PD1 twin), the supply gaps with their entries in and out (BAR4-RECORD), the income
+  // lines and an outlook hook (BAR4-CORPUS-ECO), the foodways lines and three houses (BAR4-HOUSES), three powers' descriptions (BAR4-HISTORY), the
+  // arrival (BAR4-SCENES), the prominent tie, two secrets (BAR4-PEOPLE) and one conflict's hook twin (BAR4-SAFETY 2ee6f3a0). Re-captured on the doors'
+  // branch over Part 1's final tip 6483322cc (no byte under src/ moved since the capture) by this file's own loop (an untracked probe), twice and equal.
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

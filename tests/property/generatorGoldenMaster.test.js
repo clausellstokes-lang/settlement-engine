@@ -18,6 +18,17 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-16 — THE CLOSE OF THE ROUND BAR4, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own words in the chair's chat: 2026-11-16 08:55:14 UTC, "Yes to the following:" /
+ *   "Later: a new yes for the example-town refresh when this round closes.", answering the chair's report of 08:30:14 UTC; and, the chair's own permission check having held the
+ *   first go-ahead at 17:40 UTC, 18:51:17 UTC, "Yes to plain yes for the example-town refresh.", answering the chair's ask of 17:42, 18:06 and 18:35 UTC;
+ *   record docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json; seat BAR4-CLOSE-DOORS-2, vetoable).
+ *   390 of 525 rows (thorp 56, hamlet 61, village 41, town 77, city 76, metropolis 79) against the stored corpus's tree c4ac1ef84a (which reproduces
+ *   all 525). THE CAUSE: the round's builder branches' declared cures (people, corpus-eco, record, houses, scenes; history, safety, services and
+ *   corpus-def move no row of the 525) and the repair seat's PD1 twin (relationships); the first-paint seam and the last re-key move none.
+ *   FIELD-DIFFED by leaf path: relationships[] description 214 / tension 3 / proseVariant 3 (people, PD1), economicViability.plotHooks[].hook 100 and
+ *   economicState.incomeSources[].desc 64 (corpus-eco), resourceAnalysis.gaps 88 with its entries in and out (record; the scenes seat's salt works),
+ *   culturalIdentity.foodways 70 and institutions[].desc 4 (houses), npcs[].secret what / stakes 47 (people), arrivalScene 1 (scenes); no key in or out.
+ *   Written at the doors' branch e942f648 (it holds Part 1's final tip 6483322cc). 6adede0d.. -> 03f9688f..
  * 2026-11-16 — THE CLOSE OF THE ROUND BAR3, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-15 20:30:10 UTC: "Yes that one too", answering the chair's question of 20:28:06 UTC;
  *   record docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json; seat BAR3-CLOSE-DOORS-2, vetoable).
  *   521 of 525 rows (thorp 81, hamlet 84, village 83, town 105, city 84, metropolis 84) against the stored corpus's tree 83fc14ad6 (which reproduces

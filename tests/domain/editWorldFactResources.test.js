@@ -112,12 +112,12 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '412b06a0e726e66ed9d3584e4fce3c950431c128cb15c524f834eda73235fdf5',
-    replay: '89993afd0dd3805c18ff254cd564f89190fe65fff7cda8017e39623e3a74923a',
+    derived: '5559e3157478abe38f899f9d5f7e7c187ae364f28fec015221cbc949b8386879',
+    replay: 'd4c0f4e9e347f19c070811c0232b8f49a5523fdbe3e4ade050511c31b2d99ed8',
   }),
   21: Object.freeze({
-    derived: 'c42b5f2026dab8e1b72daf9bc6d4d2c75006e6dd4f2fcc7f47c68b768e356efe',
-    replay: '884778fc29eb94c311e7dd9dc02975fea28575a1ae8a95c799a280e694543b7a',
+    derived: '5437998b250179459c3ca5efdff170a4f1b2d1933e79357aab9a68e21cfb6939',
+    replay: '75b446dcd13e19eb17cf2152f158029bc05c49bb80b8a847e010a2fdf8545e6a',
   }),
   42: Object.freeze({
     derived: '8ff7bc4882f09a98c985e04c4d19918d0ba132da738fe61f13f7df4a17f7b547',
@@ -294,6 +294,14 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // the step unchanged since point 47) planted over a COPY of the tree and the live step produced the SAME six digests (cmp-equal, the live run
 // twice and equal, at fb59da43e and again at the merged tree); the same probe reproduces the stored six at 83fc14ad6; on every row the fresh
 // generation equals the dormant re-derivation. Row 21's `derived` is the re-recorded golden's control row (c42b5f20, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-16, THE CLOSE OF THE ROUND BAR4 (BAR4-CLOSE-DOORS-2), BY THE SAME PLANT ── Rows 0 and 21 moved (four digests); row 42
+// did not. By the round's declared cures (docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json; the owner's words 2026-11-16 08:55:14 and
+// 18:51:17 UTC: "Yes to plain yes for the example-town refresh."), re-captured at the doors' branch e942f648 (it holds Part 1's final tip 6483322cc)
+// after the golden master (1581ed12). Re-captured: THE LANE-ERA pre-EM-B2b2 step (the live resolveResources.js less EM-B2b2's own 31 lines, sha256
+// adfd3ba4..., the step unchanged since c4ac1ef84a) planted over a COPY of the tree (a detached worktree) and the live step produced the SAME six
+// digests (cmp-equal, the live run twice and equal); the same probe reproduces the stored six at c4ac1ef84a; on every row the fresh generation
+// equals the dormant re-derivation. Row 21's `derived` is the re-recorded golden's control row (5437998b, town|germanic|plains|road|civilized).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 
