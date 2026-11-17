@@ -302,7 +302,7 @@ RE-KEYED BY IDENTITY (dated notes in the file): `tests/generators/bar4RecordHous
 (r2r-village-4's Sawmill, r2r-town-2's Sawmill (commercial), now fed by the birth's timber) to census towns on no road
 that bear the same claim, r2r-village-69 and r2r-city-115. Green.
 
-**MADE UNTRUE BY MY CURE AND LEFT RED, BY NAME (the re-keys owed; my budget ended first)**. Each anchors a born-short house
+**MADE UNTRUE BY MY CURE AND LEFT RED AT 7ba689f3b, BY NAME (since re-keyed: "THE RE-KEYS, DONE" below)**. Each anchors a born-short house
 on a connected road that the birth now feeds; the same claim stands where no road reaches or a siege shuts it (the
 candidates, read off the tip's births):
 | test | the anchor my cure moved | a town that still bears the claim |
@@ -317,6 +317,29 @@ candidates, read off the tip's births):
 | `tests/domain/bar6SeamEcon.test.js` item 8 | bar0-metropolis-calm-rand-27 and -39: the Fuller is fed (Wool brought in), so the card's "Fulled cloth" stands | a fuller on no road: r2r-village-23, r2r-town-54, r2r-city-48 (whether its card lists Fulled cloth: not read) |
 | `tests/generators/houseInputReaches.test.js` KEEP "a smelter no input reaches is short of each" | r2r-city-5, -17, -36, r2r-metropolis-33: every smelter is now fed | **NONE**: no town of 1,945 census-shaped births (the 720, the 150, the 525 and 700 more `r2r-` seeds) bears an unfed smelter. The claim is retired by the cure: a ruling for the chair (it cannot be re-keyed and may not be loosened) |
 
+
+## THE RE-KEYS, DONE (the chair's extension of 06:05 UTC; tests only, no source change)
+
+Each claim moved BY IDENTITY to a town that still bears it (searched over the tip's births: the 720, the 150, the 525,
+700 more `r2r-` seeds of the five tiers and 154 more `r2s-` seeds of two crisis shapes), the assertion's form kept, a
+dated note in the file. Run at the tip with my guard: all green but `bar5ChainsLaw3`, red exactly as at the base.
+
+| file | the anchor | the town it now stands on | at the tip |
+|---|---|---|---|
+| `tests/components/crisisStoppedRows.test.jsx` S5 | r2s-famine-town-1's brickmaker (tiles, bricks); r2s-occupied-city-3's potter (brick) | r2r-town-54 (a town on no road); r2r-city-49 (a city on no road) | green |
+| `tests/components/economicsImportsAreArrivals.test.jsx` | r2r-city-2: clay a need, not an import | r2r-city-20 (a calm city on no road) | green |
+| `tests/domain/display/gapReadsPrintedImports.test.js` | r2r-city-2's "No clay reaches the potter."; r2r-city-28, r2s-plague_onset-town-5, r2s-politically_fractured-city-4 | r2r-city-20; r2r-city-48, r2s-plague_onset-town-19, r2s-politically_fractured-city-27 (each of its own shape, on no road) | green |
+| `tests/generators/gapSaysWhichKind.test.js` | soak1k-4's potter and brickmaker; soak1k-8's sawmill (it too is fed now) | soak1k-9 (the first soak birth reading both missing); soak1k-302 (the first reading the sawmill missing) | green |
+| `tests/generators/houseInputReaches.test.js` KEEP | r2r-city-5, -17, -36, r2r-metropolis-33's smelters | THE CHAIR'S RULING: a CONSTRUCTED record (a smelter, no ore ground, nothing on the imports, an isolated route, through `generateResourceAnalysis`); the note says no town of 1,945 births bears it and that the seat after me may re-key it to a born town | green |
+| `tests/domain/bar4MarkPromise.test.js` (b) | r2r-village-4's brickmaker (gap-missing) | r2r-town-54 (a town of the 720 on no road) | green |
+| `tests/domain/bar5ChainsLaw3.test.js` (b) | r2r-city-21's vintner (idle craft, grapes needed and not brought in) | r2r-metropolis-54 (a calm town of the 720 on no road) | red as at the base: its other two controls (r2r-town-49, -39) fail at 4c3a3c03b with the same message |
+| `tests/domain/bar6MarksLaw8.test.js` | (a) LEFT: 'r2r-town-51 · 8a.input · Apothecary (established)' cured (its herbs brought in): STRUCK by the test's own rule, the other three kept; (b) r2r-city-0's commercial sawmill (8a.input) and carpenters (8a.mild) | 8a.input: r2r-city-115 (the same house, a calm city on no road); 8a.mild: no timber house is marked short on a road any more, so the rule's own case, r2r-city-19 (a city of the 720, its daily markets marked under the outbreak, their card head milder) | green |
+| `tests/domain/bar6SeamEcon.test.js` item 8 | bar0-metropolis-calm-rand-27 and -39 (their fullers fed) | r2r-metropolis-69 (under a siege, its road shut): the ONE town of 1,724 searched that bears a River Mill card listing "Fulled cloth" beside a fuller short of wool | green |
+| (and, before) `tests/generators/bar4RecordHouseInput.test.js` | r2r-village-4's sawmill; r2r-town-2's commercial sawmill | r2r-village-69; r2r-city-115 | green |
+
+Two re-keys are not house for house, named here: `bar6MarksLaw8`'s 8a.mild control now stands on a market under an
+outbreak (no carpenters short on a road remain), and `bar6SeamEcon` item 8 holds one town where it held two (only one
+bears it). eslint on the nine files and the type ratchet: exit 0.
 
 ## FOR THE SEAT AFTER ME (the chair's lines of 04:33 and 05:36 UTC)
 

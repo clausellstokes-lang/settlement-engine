@@ -90,9 +90,13 @@ const SUPPLIED = 'A row marked short is what its house makes when supplied.';
 /** S5: (seed, tab, the description, the mark that must lead it). The worklist row each answers is named. */
 const SHORT_MARKED = [
   ['r2s-famine-hamlet-2', 'services', 'Daily milk from cattle, goats, or sheep depending on region.', 'Short of livestock.'], // 06271
-  ['r2s-famine-town-1', 'services', 'Curved and flat clay tiles.', 'Short of clay.'], // B05939
-  ['r2s-famine-town-1', 'services', 'Standard-size fired clay bricks by the cartload.', 'Short of clay.'], // B17588
-  ['r2s-occupied-city-3', 'services', 'Kiln-fired clay bricks for construction.', 'Short of clay.'], // 12416 (the potter's brick)
+  // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): the birth now brings clay in for a brickmaker and a potter on a connected road
+  // no siege shuts (`resourceGenerator.js :: importsBroughtAtBirth`), so r2s-famine-town-1's brickmaker and
+  // r2s-occupied-city-3's potter are fed; the same rows, marked short of clay, stand in r2r-town-54 (a town on no road: the
+  // brickmaker's tiles and bricks) and r2r-city-49 (a city on no road: the potter's brick).
+  ['r2r-town-54', 'services', 'Curved and flat clay tiles.', 'Short of clay.'], // B05939 (was r2s-famine-town-1)
+  ['r2r-town-54', 'services', 'Standard-size fired clay bricks by the cartload.', 'Short of clay.'], // B17588 (was r2s-famine-town-1)
+  ['r2r-city-49', 'services', 'Kiln-fired clay bricks for construction.', 'Short of clay.'], // 12416 (the potter's brick; was r2s-occupied-city-3)
 ];
 /** S5 keep pairs: (seed, tab, a description that prints with no "Short of" before it): the input reaches the house. */
 const SHORT_KEEP = [

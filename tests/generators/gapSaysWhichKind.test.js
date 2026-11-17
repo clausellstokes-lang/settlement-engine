@@ -72,7 +72,7 @@ describe('a gap says which kind — READER R1\'s named births', () => {
   const seats = new Map();
   beforeAll(async () => {
     await ensureLaws();
-    for (const i of [0, 4, 5, 8, 9, 12, 22, 24, 289]) {
+    for (const i of [0, 4, 5, 8, 9, 12, 22, 24, 289, 302]) {
       const { settlement } = birth(i);
       lines.set(i, (settlement.resourceAnalysis?.gaps || []).filter((g) => g.institution));
       seats.set(i, new Set((settlement.institutions || []).map((inst) => inst.name)));
@@ -100,8 +100,13 @@ describe('a gap says which kind — READER R1\'s named births', () => {
   });
 
   it('missing: the TRUE gaps stay written — the potter\'s and brickmaker\'s clay, the vintner\'s grapes, the sawmill\'s timber', () => {
-    for (const [i, house, good] of [[4, 'Potter', 'clay'], [4, 'Brickmaker', 'clay'],
-      [9, 'Vintner', 'grapes'], [8, 'Sawmill', 'timber']]) {
+    // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): the birth now brings clay and timber in for a potter, a brickmaker and a
+    // sawmill on a connected road no siege shuts (`resourceGenerator.js :: importsBroughtAtBirth`), so soak1k-4's potter
+    // and brickmaker and soak1k-8's sawmill run on imported input; each pair is re-seated on the FIRST birth in the soak's
+    // order that seats the house and reads it missing: soak1k-9 (the potter and the brickmaker, as its vintner) and
+    // soak1k-302 (the sawmill). The assertion is unchanged.
+    for (const [i, house, good] of [[9, 'Potter', 'clay'], [9, 'Brickmaker', 'clay'],
+      [9, 'Vintner', 'grapes'], [302, 'Sawmill', 'timber']]) {
       const hit = at(i, house, good);
       expect(hit.map((g) => g.kind), `soak1k-${i} ${house} -> ${good}`).toEqual(['missing']);
       expect(hit[0].impact).toMatch(LACKS);

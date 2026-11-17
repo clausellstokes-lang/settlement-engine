@@ -74,8 +74,12 @@ describe('SEAM-ECON item 1 (8c.export): a crop the scarce harvest denies is not 
 });
 
 describe('SEAM-ECON item 8 (L3.outputs): a running card lists no output every maker of which is marked short', () => {
-  test('bar0-metropolis-calm-rand-27 and -39: the River Mill card drops "Fulled cloth" beside a Fuller and Weavers both short; its flour stays (every row)', () => {
-    expectNoSeedFailures(collectSeedFailures(['bar0-metropolis-calm-rand-27', 'bar0-metropolis-calm-rand-39'], (seed) => {
+  // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): the birth now brings wool in for the fullers of bar0-metropolis-calm-rand-27
+  // and -39 (a connected road no siege shuts: `resourceGenerator.js :: importsBroughtAtBirth`), so their cloth stands. Over
+  // the tip's 1,724 births searched (the 720, the 150, 854 more census-shaped seeds) one town bears the claim, a River Mill
+  // card listing "Fulled cloth" beside a Fuller short of wool, its flour shown: r2r-metropolis-69 (under a siege, its road shut).
+  test('r2r-metropolis-69 (re-keyed from bar0-metropolis-calm-rand-27 and -39): the River Mill card drops "Fulled cloth" beside a Fuller short; its flour stays (every row)', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-69'], (seed) => {
       const s = town(seed);
       const mill = chainOf(s, 'river_milling');
       expect(mill?.outputs, `${seed}: anchored, the record's outputs`).toContain('Fulled cloth');

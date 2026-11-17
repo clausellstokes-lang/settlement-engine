@@ -76,7 +76,10 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     ['r2s-famine-village-2', 'famine-food', ['Services']], // the ale house's ale in a grain famine
     ['r2s-under_siege-thorp-0', 'income-house', ['Economics']], // the fish share beside its stopped fishing community
     ['r2r-village-1', 'magic-medical', ['Magic']], // the priest's divine healing magic
-    ['r2r-village-4', 'gap-missing', ['Services']], // the brickmaker the page says no clay reaches
+    // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): the birth now brings clay in for r2r-village-4's brickmaker (a connected
+    // road no siege shuts: `resourceGenerator.js :: importsBroughtAtBirth`); the same brickmaker the page says no clay
+    // reaches stands in r2r-town-54, a town of the 720 on no road.
+    ['r2r-town-54', 'gap-missing', ['Services']], // the brickmaker the page says no clay reaches
     ['r2r-metropolis-14', 'tab-split', ['Institutions']], // a marked row, its door read bare
     ['r2s-plague_onset-thorp-2', 'spent-fishery', ['Services']], // FS1: the fishing community on its one depleted fishery
   ];

@@ -60,8 +60,11 @@ afterEach(cleanup);
 describe('the Imports line prints what trade brings; a need prints as a need (item 4(b))', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test('r2r-city-2 (the review\'s town): clay is a need, not an import', () => {
-    const town = birthCensus('r2r-city-2');
+  // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): the birth now brings clay in for a potter on a connected road no siege
+  // shuts (`resourceGenerator.js :: importsBroughtAtBirth`), so r2r-city-2's clay is an import; the same claim stands on a
+  // census city on no road whose potter has no clay and whose need list names it: r2r-city-20.
+  test('r2r-city-20 (re-keyed from the review\'s town, r2r-city-2): clay is a need, not an import', () => {
+    const town = birthCensus('r2r-city-20');
     expect(importsAsPrinted(town).needed, 'anchored: clay is a need no trade meets').toContain('clay');
     const { found, pills, needs } = tradeColumn(town);
     expect(found, 'anchored: the Imports column is printed').toBe(true);

@@ -37,8 +37,11 @@ const birth = (seed) => {
 describe('the gap reader reads what trade brings; a need is not an import (pattern 6, F1)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test('r2r-city-2: "No clay reaches the potter." prints, and clay is a need no trade meets', () => {
-    const town = birth('r2r-city-2');
+  // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): the birth now brings clay in for a potter on a connected road no siege
+  // shuts (`resourceGenerator.js :: importsBroughtAtBirth`); r2r-city-2's potter is fed. The same claim stands on a census
+  // city on no road: r2r-city-20 (its potter's gap `missing`, its line printed, clay a need no trade meets).
+  test('r2r-city-20 (re-keyed from r2r-city-2): "No clay reaches the potter." prints, and clay is a need no trade meets', () => {
+    const town = birth('r2r-city-20');
     const gaps = resourceGapLines(town).map((g) => g.impact);
     expect(gaps).toContain('No clay reaches the potter.');
     // the record's own reading of the same house
@@ -53,7 +56,11 @@ describe('the gap reader reads what trade brings; a need is not an import (patte
   // arm read (r2r-city-30 and r2s-politically_fractured-city-2 grapes, r2s-plague_onset-town-0 glass sand); their gaps
   // still name nothing that arrives. Each is replaced by the nearest town of its own shape (size, crisis) whose page
   // still prints a gap the lists name: r2r-city-28, r2s-politically_fractured-city-4, r2s-plague_onset-town-5.
-  for (const seed of ['r2r-city-28', 'r2s-plague_onset-town-5', 'r2s-politically_fractured-city-4']) {
+  // RE-KEYED BY IDENTITY AGAIN (BIRTH-1, 2026-11-17): the birth's import (`importsBroughtAtBirth`) answers every gap these
+  // three towns printed (the check below read 0 there); each is replaced by the nearest town of its own shape (size, crisis)
+  // whose page still prints a gap the lists name and none that arrives: r2r-city-48, r2s-plague_onset-town-19,
+  // r2s-politically_fractured-city-27 (each on no road).
+  for (const seed of ['r2r-city-48', 'r2s-plague_onset-town-19', 'r2s-politically_fractured-city-27']) {
     test(`${seed}: no gap names a good that arrives by trade; every gap good the lists name is a need`, () => {
       const town = birth(seed);
       const { arriving, needed } = importsAsPrinted(town);

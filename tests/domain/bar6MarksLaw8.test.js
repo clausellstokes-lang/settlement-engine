@@ -42,8 +42,9 @@ const towns = new Map();
 const town = (/** @type {string} */ seed) => { if (!towns.has(seed)) towns.set(seed, born(seed)); return towns.get(seed); };
 
 /** The houses left by name (BAR6-MARKS's hand-back, "what is left"): `<seed> · <rule> · <house>`. */
+// STRUCK BY ITS OWN RULE (BIRTH-1, 2026-11-17): 'r2r-town-51 · 8a.input · Apothecary (established)' is cured: the birth
+// brings its medicinal herbs in (`resourceGenerator.js :: importsBroughtAtBirth`, "Medicinal herbs").
 const LEFT = [
-  'r2r-town-51 · 8a.input · Apothecary (established)',
   'r2r-town-54 · 8a.input · Butchers (3-8)',
   'r2r-metropolis-19 · 8a.input · Butchers (3-8)',
   'r2s-religious_conversion-town-2 · 8a.input · Apothecary (established)',
@@ -63,8 +64,13 @@ describe('LAW 8\'s mark rules (BAR6-MARKS): the mark leaf reads every worst stat
 
   // (b) one census town a rule whose record holds the worst state, read blind (measured at afa46d644 with this cure)
   const CONTROLS = [
-    ['r2r-city-0', '8a.input'],
-    ['r2r-city-0', '8a.mild'],
+    // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): r2r-city-0's commercial sawmill (8a.input) and carpenters (8a.mild) are fed
+    // now, the birth bringing their timber in on a connected road (`importsBroughtAtBirth`). 8a.input: the same house, a
+    // Sawmill (commercial) short of timber, in r2r-city-115, a calm census-shaped city on no road. 8a.mild: no timber house
+    // is marked short on a road any more; the rule's own case, a marked house whose card head prints a milder state, in
+    // r2r-city-19, a city of the 720 (its daily markets under the outbreak).
+    ['r2r-city-115', '8a.input'],
+    ['r2r-city-19', '8a.mild'],
     ['r2r-city-18', '8b.extract'],
     ['r2r-village-24', '8c.harvest'],
     ['r2r-city-44', '8c.failed'],
