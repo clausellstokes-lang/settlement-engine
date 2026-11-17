@@ -697,3 +697,13 @@ should be paused or archived by the owner's hand.
   NOW HOLD FINISHED WORK THEY MAY NOT COMMIT (K-POWERS, K-PEOPLE, K-WATCH, DESKS-DEF); J-INCOME is stopped at its first
   commit. POINT 40's CHECK, part 1 (CHECKS-1, 21:49): 34 names, none new against the batch's, A5 green this time (the
   watchdog); the doors as before.
+- **21:52 UTC. POINT 40's WHOLE CHECK IS IN (CHECKS-2 21:25, CHECKS-1 21:49, CHECKS-3 21:51): 162 names at f86295196. Against the batch's (163): TWO GONE
+  (`bar6MarksLaw8` (a): the seventeen mines, cured; A5 of `editCorpusRatchet`: green this time, the watchdog), ONE NEW:
+  `tests/components/bar7EconTab.test.jsx` C39519** ("Alchemical Trade through an alchemist shop the page marks short
+  prints no Operational"): its constructed record of bar0-town-occupied-rand-43 expects the unfed shop marked short; at
+  point 40 the shop is unmarked because LEFT-MARKS's `KEY_IMPORT_WORDS` reads the whole word "herbs" and the town's
+  "Ritual wood and herbs" feeds it: the second reader's LOW 1, the chair's ruling BR21, and now a red. LEFT-MARKS is
+  told (21:53): one more commit, the word scoped. POINT 40 IS BEING LANDED AS CHECKED (a fast-forward to f86295196) with
+  that one red named for its follow-up (one town of the 900 is touched). THE ORDER NOW: 40 (landing) · 41 and 42
+  (`lane/landing-41-42-2026-11-17`, their whole check running; READ-J-ROWS reading) · then LEFT-MARKS's follow-up as
+  the next point · then the docs commit with the rows of 36 onward.
