@@ -119,7 +119,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: -2, marginLeft: 6 }}>
                   {desc}
                 </Text>
-              ) : null))(markedOnPage(settlement, 'income', s, s.desc))}
+              ) : null))(incomeDescShown(settlement, s, ordinaryIncomeLineOf))/* LEFT-PDF L1 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): the Economics tab's row, whole (economicsCrisisMarks.js :: incomeDescShown): its mark, crisis and short; a stored short twin under no mark prints the trade's ordinary line, as the tab prints it */}
             </View>
           ))}
         </View>
@@ -612,4 +612,6 @@ import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
 import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 import { shadowCaptureShown } from '../../domain/display/shadowEconomyShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's floor
 import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints
-import { markedOnPage, ordinaryTimesOnPage } from '../lib/crisisMarksOnPage.js';
+import { ordinaryTimesOnPage } from '../lib/crisisMarksOnPage.js';
+import { incomeDescShown } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L1: the tab's income row
+import { ordinaryIncomeLineOf } from '../../generators/economy/incomeLineSiblings.js'; // LEFT-PDF L1: the trade's ordinary line, as the tab reads it

@@ -4,8 +4,9 @@
  * JOURNAL READ WHAT THE TABS READ. A reader who prints a town meets no row the tab marks printed bare, and no list the tab
  * withholds. Over fixed towns of the census's 720 and the wide read's 150, each arm collects every failure:
  *   (L1)  every income share the PDF prints carries the Economics tab's mark, mark for mark
- *         (`economicsCrisisMarks.js :: incomeMarkShown`: its crisis half and its houses' short half), and the journal's
- *         share names one word for each half; a share the tab leaves bare prints bare;
+ *         (`economicsCrisisMarks.js :: incomeMarkShown`: its crisis half and its houses' short half), and the row is the
+ *         tab's whole (`incomeDescShown`: a stored short twin under no mark prints the trade's ordinary line); the
+ *         journal's share names one word for each half; a share the tab leaves bare prints bare;
  *   (L2)  no PDF chain card that refuses its yield ("Normally yields") names an output the tab's card withholds
  *         (`economicsCrisisMarks.js :: chainOutputsOnCard`, ruling CY1): the Services chapter's flow line and the
  *         Economics chapter's flow rows;
@@ -34,7 +35,8 @@ import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
 import { Services } from '../../src/pdf/sections/Services.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages, esc } from '../../src/foundry/journalPages.js';
-import { incomeMarkShown, incomeKindShown, chainOutputsOnCard } from '../../src/domain/display/economicsCrisisMarks.js';
+import { incomeMarkShown, incomeKindShown, incomeDescShown, chainOutputsOnCard } from '../../src/domain/display/economicsCrisisMarks.js';
+import { ordinaryIncomeLineOf } from '../../src/generators/economy/incomeLineSiblings.js';
 import { crisisMarkText, incomeShortOf, markedDescription, isVentureMark } from '../../src/domain/display/crisisStoppedRow.js';
 import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
 import { houseMarkShown } from '../../src/components/new/npcComponents.jsx';
@@ -106,7 +108,7 @@ const sorted = (xs) => JSON.stringify([...new Set(xs)].sort());
 
 describe('LEFT-PDF L1: an income share is marked in the PDF and the journal as the Economics tab marks it', () => {
   test('mark for mark, over the sample', () => {
-    let marked = 0, short = 0;
+    let marked = 0, short = 0, twins = 0;
     expectNoSeedFailures(collectSeedFailures(SAMPLE, (seed) => {
       const x = town(seed);
       const lines = (page(x, 'Economics & Trade').split('## Income')[1] || '').split('\n').filter((l) => l.startsWith('- '));
@@ -118,6 +120,10 @@ describe('LEFT-PDF L1: an income share is marked in the PDF and the journal as t
           marked++;
           if (!x.pdf.includes(markedDescription(mark, desc))) bad.push(`PDF ${s.source}: the tab's "${mark}" not printed`);
         } else if (x.pdf.some((l) => markedLeaf(l, desc))) bad.push(`PDF ${s.source}: a mark the tab does not print`);
+        // the row whole, as the tab prints it: a stored short twin under no mark prints the trade's ordinary line
+        const row = incomeDescShown(x.t, s, ordinaryIncomeLineOf);
+        if (row !== desc) twins++;
+        if (row && !x.pdf.includes(row)) bad.push(`PDF ${s.source}: the tab's row "${row}" not printed`);
         // the journal: one word for each half of the tab's mark, after the share's name
         const halves = [crisisMarkText(x.t, incomeKindShown(x.t, s)), incomeShortOf(x.t, s)].filter(Boolean).length;
         if (incomeShortOf(x.t, s) !== null) short++;
@@ -131,6 +137,7 @@ describe('LEFT-PDF L1: an income share is marked in the PDF and the journal as t
     }), 'every share of every town');
     expect(marked, 'the shares the tab marks in the sample').toBeGreaterThanOrEqual(5);
     expect(short, 'the shares marked short of their materials in the sample').toBeGreaterThanOrEqual(3);
+    expect(twins, 'the rows the tab prints otherwise than the record (a mark, or the ordinary line for a short twin)').toBeGreaterThanOrEqual(6);
   });
 });
 
