@@ -638,3 +638,12 @@ should be paused or archived by the owner's hand.
   (`lane/bar8-pdf-2-2026-11-17`), the middle tier at high effort; each makes a first small commit and push before any
   work, and stops with one line if its permission check refuses. PDF-2's items 3 and 4 wait for the chair's messages
   (LEFT-MARKS on the line; J-INCOME's leaf commit's hash). SECTION 0's "THE LINE" IS REWRITTEN AS OF THIS HOUR.
+- **21:19 UTC. J-INCOME WAS REFUSED AT ITS FIRST SMALL COMMIT (21:16) AND STOPPED, with no work done: the early-commit rule did what it was for.**
+  FIVE SEATS ARE NOW HELD BY THEIR OWN PERMISSION CHECKS (K-POWERS, K-PEOPLE, K-WATCH: work done, uncommitted; DESKS-DEF: working,
+  uncommitted; J-INCOME: stopped). PDF-2 and DESKS-ECO: not yet known. SEATS THAT STILL COMMIT AND PUSH: J-ROWS (6019ec841,
+  20:43), SCENES (13c4cf7a0), LEFT-CHAIN, the three CHECKS seats. THE CHAIR SEATS NO NEW BUILDER (MARKS-2, LEFT-KEYS, ROWS-2,
+  PEOPLE-2) UNTIL THE OWNER HAS ANSWERED: each would likely be refused at its first commit. THE OWNER HAS BEEN ASKED THREE
+  TIMES IN PLAIN WORDS (20:45, 21:15, 21:18): to tell each refusing seat directly that it may commit and push its own lane
+  branch, or to tell the chair to add one sentence to the repository's CLAUDE.md. THE CHAIR DOES NEITHER ON ITS OWN, AND
+  TRIES NO OTHER WAY ROUND (its own check denied its grant messages; a different directory, a patch hand-over or a fresh
+  seat to dodge the refusal would each be a route round it).
