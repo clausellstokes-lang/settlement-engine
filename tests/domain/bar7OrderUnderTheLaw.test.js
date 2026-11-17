@@ -50,7 +50,14 @@ const ORDER_SPARED = /\b(nobody|no one|once kept|cannot keep|can no longer|could
 const orderKept = (line) => line.split(/(?<=\.)\s+/).filter((s) => ORDER_KEPT.test(s) && !ORDER_SPARED.test(s));
 
 /** The towns whose guard line named the old families with no party on the record, at the base (the 720 and the 150). */
-const FAMILIES_UNHELD_TOWNS = /** FILLED BELOW */ [];
+const FAMILIES_UNHELD_TOWNS = [
+  // the census's 720 (7 the law-collapse twin, 5 the drawn line)
+  'r2r-hamlet-0', 'r2r-hamlet-24', 'r2r-thorp-52', 'r2r-village-17', 'r2s-famine-hamlet-3', 'r2s-indebted-thorp-0', 'r2s-insurgency-hamlet-0',
+  'r2s-insurgency-thorp-3', 'r2s-politically_fractured-thorp-3', 'r2s-politically_fractured-village-2', 'r2s-religious_conversion-village-0',
+  'r2s-under_siege-thorp-3',
+  // the 150 (rand-27..41)
+  'bar0-hamlet-calm-rand-28', 'bar0-thorp-calm-rand-38', 'bar0-thorp-calm-rand-39', 'bar0-village-famine-rand-38', 'bar0-village-famine-rand-39',
+];
 /** THE AUDIT'S READING, verbatim (`lowFamiliesI.mjs`: the party's key against the record's powers, conflicts, tensions, crisis). @param {any} rec */
 const familiesHeld = (rec) => /famil|noble|clan|elder/i.test(JSON.stringify([rec.powerStructure?.factions?.map((/** @type {any} */ f) => f?.faction), rec.conflicts, rec.history?.currentTensions, rec.stress, rec.powerStructure?.recentConflict]));
 
