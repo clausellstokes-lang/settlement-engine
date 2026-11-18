@@ -872,7 +872,6 @@ import { bandForVariable } from '../causalState.js'; import { foundationBandShow
 import { magicSourceOf } from '../facts/magicSource.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
 import { rowMarkText } from './crisisStoppedRow.js'; // BAR8 MARKS-2 item 6: the supplier's mark (at the foot: no cited line moves)
-import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /**
  * BAR8 MARKS-2 item 6: does the page mark this roster house stopped ("Stopped by the siege.")?
@@ -880,8 +879,9 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
  * @returns {boolean}
  */
 function stoppedOnPage(settlement, name) {
-  const house = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)).find((h) => h && h.name === name);
-  const mark = house ? rowMarkText(settlement, 'house', /** @type {Record<string, unknown>} */ (house)) : null;
+  // the house by its roster name, as a bare row is read (the leaf finds its catalogue id by the name; `magicSourceOf` names
+  // only live roster houses)
+  const mark = rowMarkText(settlement, 'house', { name });
   return typeof mark === 'string' && /^Stopped by /.test(mark);
 }
 

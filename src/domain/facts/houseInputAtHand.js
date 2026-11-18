@@ -687,26 +687,6 @@ export function warStateOnRecord(record) {
   return types.some((t) => FRONT_TYPES.includes(t)) ? 'front' : types.some((t) => AT_WAR_TYPES.includes(t)) ? 'at war' : 'peace';
 }
 
-/**
- * BAR8 MARKS-2 item 3 (J's 11a.atWork; vetoable by the owner): IS A HOUSE OF `HOUSE_NEED_INPUT` FED ONLY BY THE OTHER WORD OF
- * ONE GOOD? The trade's catalogue holds the beasts and the hides one good (`ONE_GOOD_BOUGHT`: "Raw hides and animal products"
- * is livestock bought), so the one reader reads the butchers' beasts brought in where the imports bring only hides, while the
- * page's own need list says "Needed, and not brought in: livestock for meat and draft" beside the butchers (r2r-city-43). A
- * butcher's stock is the beasts, not their hides: where no import names the good by its own names or the house's stock
- * (`boughtNamesOf`: "Game and hides" stocks the butchers' counters, r2r-metropolis-19) and the food record holds no such
- * source, the house is fed by nothing it works. A reading at print, for the houses this table reads only: the birth reads
- * the one reader as it is. @param {InputRecord} record @param {string} key @param {{ name?: unknown, catalogId?: unknown }} house
- * @returns {boolean}
- */
-function fedOnlyByOtherGood(record, key, house) {
-  if (!Object.prototype.hasOwnProperty.call(ONE_GOOD_BOUGHT, key)) return false;
-  const raw = CHAIN_RAW_INPUT[key] ?? '', spec = CHAIN_INPUTS[key];
-  const names = boughtNamesOf(key, /** @type {string[]} */ ([raw, spec?.raw, spec?.noun, ...terrainSynonymsFor(raw)].filter((x) => typeof x === 'string' && x !== '')), house);
-  const own = arr(record?.economicState?.primaryImports).map(str).some((imp) => !WORKED_GOOD.test(imp.replace(/\([^)]*\)/g, ' ')) && names.some((n) => wholeTokens(imp, n)));
-  const food = arr(/** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null }} */ (record?.economicState ?? {}).foodSecurity?.foodRecord?.foodSources).map(str);
-  return !own && !(spec?.food ?? []).some((f) => food.includes(f));
-}
-
 /** The luxury trade's own goods, which no chain carries (`HOUSE_TRADE_INPUT`'s `luxury`). */
 const LUXURY_NAMES = Object.freeze(['luxury goods', 'luxury materials']);
 /** An import or a product that meets the luxury trade's need. */
@@ -759,9 +739,8 @@ export function housesWantingTradeInput(record) {
       // and the one reader finds it nowhere (the page's "Needed, and not brought in: …" beside the house)
       const need = Object.prototype.hasOwnProperty.call(HOUSE_NEED_INPUT, id) ? HOUSE_NEED_INPUT[id] : '';
       if (!need || !CHAIN_INPUTS[need] || gapped.has(name)) continue;
-      if (!needListNames(r, [CHAIN_RAW_INPUT[need], CHAIN_INPUTS[need].noun].filter(Boolean))) continue;
-      const reach = houseInputAtHand(r, need, inst, { rawResource: CHAIN_RAW_INPUT[need] });
-      if (reach === 'missing' || (reach === 'imported' && fedOnlyByOtherGood(r, need, inst))) out.set(name, { noun: tradeNoun(need), reach: 'missing' });
+      if (needListNames(r, [CHAIN_RAW_INPUT[need], CHAIN_INPUTS[need].noun].filter(Boolean))
+        && houseInputAtHand(r, need, inst, { rawResource: CHAIN_RAW_INPUT[need] }) === 'missing') out.set(name, { noun: tradeNoun(need), reach: 'missing' });
       continue;
     }
     if (key === 'ironOre' && warIron) { out.set(name, { noun: 'iron', reach: 'missing' }); continue; }

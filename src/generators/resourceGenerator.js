@@ -903,7 +903,8 @@ export const generateResourceAnalysis = (
   // BIRTH-3 (BR8 (2)): every story the birth picked, written into the rows the page already stores
   writeStoryRows({ ...storyRecord, resourceAnalysis: { imports } }, gaps);
   // BAR8 MARKS-2 item 5 (BR3 (b)): a gap row "runs on imported X" stands beside an imports list that names X
-  if (economicState && Array.isArray(economicState.primaryImports)) {
+  // (on a connected route only: a town on no road buys nothing in, BIRTH-1's arm 2)
+  if (economicState && Array.isArray(economicState.primaryImports) && hasTradeRouteConnection(String(config.tradeRouteAccess ?? ''))) {
     const named = importWordsOfImportedGaps(gaps, economicState.primaryImports);
     if (named.length) economicState.primaryImports = [...economicState.primaryImports, ...named];
   }
