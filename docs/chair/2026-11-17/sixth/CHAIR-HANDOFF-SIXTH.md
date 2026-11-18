@@ -2609,3 +2609,21 @@ should be paused or archived by the owner's hand.
   the net at C and M. FAULTS-ROWS (FR12's three, about an hour more) is read by the chair or a small reader when it
   comes. A WRONG HOUR IN THE CHAT, CORRECTED OUT LOUD: a progress note headed "09:45 UTC" was written at about 09:27
   (typed from the head, not from the clock: the rule stands: read the clock first, in the chat too).
+- 09:37 UTC, 2026-11-18 · **READ-NEED SAID "DO NOT LAND YET"** (09:36; FAULTS-NEED at d3cdb5207). HIGH 1: `presumedThings.walker`
+  ARM 3 (the strip ban) is red at the tip and green at the base, and the hand-back did not name it: the leaf unwraps
+  the declared pool `LUXURY_CLASS` and applies its band itself (the chair's own FR13 sent the seat to the import: the
+  import must pass through the pool's door). MED 1: the mutation manifest lists one more guard (stored). MED 2: where a
+  card's SUPPLY family holds only the refused dependency line, the kernel's fallback deals the next family's first
+  admitted line with no draw (141 draws in 780 towns; the whole pool never under 13): RULED: the fallback is the
+  kernel's own, no line is false: named for the variety round. LOW 1: its "vendorPdfLazy green" was on skipped arms:
+  with VERIFY_DIST=1 four budget arms move (the engine chunk +102; the first-paint raw +4,574; gzip +1,325; Brotli
+  +1,176): the last close's. LOW 2: two copies in the leaf not held to their homes. WHAT IT PROVED: the leaf equal to
+  the page on 600 fresh births (0 of 600 differ), at the goal step on 780 of 780, on the 720; six mutations each red;
+  item 0 right in every town; wantBuy 1 to 0 and the control clear; 13 of the 525, `npcs[].goal` only; item 3's
+  measure confirmed (41 drops, all spices); v6 true in the ten towns read, v1 only beside an empty need list (6 towns
+  of the 720); `12d.enough.wide` 5·10 to 0 in the 150; the numbering: added 1, renumbered 0; the labels imported, no
+  copy. THE RISE STANDS AS NAMED ("not one story": the shepherd's flocks beside a town short of livestock): FAULTS-BIRTH
+  had not finished: the merge with it was skipped: THE CHAIR CHECKS IT AT THE MERGE OF THE TWO. **FR15 SENT TO
+  FAULTS-NEED** (09:40): the leaf passes `LUXURY_CLASS` through `filterDeclared` with the record's tier and only then
+  reads the admitted rows' texts (no banked row; stop if EG1 or a self-read of `factsOf` forbids it); the two copies
+  held by the guard; the figures named.
