@@ -29,6 +29,7 @@
  * musters. Imports nothing. Pure: no randomness, no clock, no write.
  *
  * @enforced-by tests/generators/bar8Watch.test.js
+ * @enforced-by tests/generators/faultsWatch.test.js
  */
 
 /** A text that walks the night. */

@@ -71,9 +71,9 @@
  *
  * THE PAGE'S STOP AND THE CARD'S STATE (FAULTS-WATCH item 4, 2026-11-18; BR25 (5), left by name by SCENES: nothing printed
  * falsely in the 900, a fact's reading made true). Two readings of `houseAtWork` disagreed with the page; (a) is cured:
- *   (a) A HOUSE THE SIEGE STOPS IS NOT AT WORK (`stoppedBySiege`): the atom answered "at work" for a house whose rows read
- *       "Stopped by the siege." (55 house-trade pairs in the 900 at the base: fish markets, fisher's landings, fishing
- *       communities, stone quarries). The page's mark (`display/crisisStoppedRow.js :: rowStoppedBy`, kind 'house') cannot
+ *   (a) A HOUSE THE SIEGE STOPS IS NOT AT WORK (`houseStoppedBySiege`, exported for its guard): the atom answered "at work"
+ *       for a house whose rows read "Stopped by the siege." (55 house-trade pairs in the 900 at the base: fish markets,
+ *       fisher's landings, fishing communities, stone quarries). The page's mark (`display/crisisStoppedRow.js :: rowStoppedBy`, kind 'house') cannot
  *       be imported here (the header's (a) says why), so its verdict for a house is STATED HERE in the table's own words, in
  *       the form of `catchStopped.js`: the house's dependence (`houseDependenceOf`; GATES held where the record keeps its work
  *       beyond the gates, `GATES_WORK_HELD_BY_RECORD`, as the leaf's SV8b reads it) meets what the siege stops (travellers,
@@ -295,12 +295,12 @@ const rosterName = (inst) => String(/** @type {{ name?: unknown }} */ (inst)?.na
 
 /**
  * BAR8-SCENES (item 1a): IS THIS HOUSE AT WORK? Not marked short (the one fact, `housesShortOf`), not a house the siege
- * impairs (`impairedUnderSiege`), and (FAULTS-WATCH item 4 (a)) not a house the siege stops (`stoppedBySiege`).
+ * impairs (`impairedUnderSiege`), and (FAULTS-WATCH item 4 (a)) not a house the siege stops (`houseStoppedBySiege`).
  * @param {object} record @param {unknown} house a row of the live roster @param {{ has: (name: string) => boolean }} short the houses marked short (`housesShortOf`)
  * @returns {boolean}
  */
 function houseAtWork(record, house, short) {
-  return !short.has(rosterName(house)) && !impairedUnderSiege(record, house) && !stoppedBySiege(record, house);
+  return !short.has(rosterName(house)) && !impairedUnderSiege(record, house) && !houseStoppedBySiege(record, house);
 }
 
 /** @param {unknown} row @returns {boolean} */
@@ -326,9 +326,9 @@ function noHerdsHere(record) {
 
 /**
  * FAULTS-WATCH item 4 (a): THE PAGE'S "Stopped by the siege." OF A HOUSE, stated in the table's own words (see the header).
- * @param {object} record @param {unknown} house a row of the live roster @returns {boolean}
+ * @param {object} record the settlement record @param {unknown} house a row of the live roster @returns {boolean}
  */
-function stoppedBySiege(record, house) {
+export function houseStoppedBySiege(record, house) {
   if (!crisisOf(record).has('under_siege') || isCustomRow(house)) return false;
   const h = /** @type {{ catalogId?: unknown, name?: unknown }} */ (house);
   const name = rosterName(house);
