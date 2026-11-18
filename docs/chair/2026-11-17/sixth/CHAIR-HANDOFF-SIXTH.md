@@ -551,6 +551,31 @@ should be paused or archived by the owner's hand.
   merge, at a cost of time not measured). AFTER THE DEPLOY: a builder ARMS THE GUARD (the generator refuses a text
   that stands before and after with another vid, unless a signed shift record names it). DESKS-2 WAS TOLD THE LAW AND
   TO CHECK ITS OWN BRANCHES pool by pool before its part A.
+- **CL20, CL21, CL22 (04:19 UTC, 2026-11-18; CLOSE-DOORS-1B's seven rows of law reds and stops, its tip e31c34f02
+  unpushed).** Rows 1 and 2 (the any-casts; the fact layers) are CLOSE-SWEEP's cures, merged; row 4 is CL15; row 6
+  (the fork census's A6) is CLOSE-DOORS-2's (CL16), with the seat's `-S` lead passed on (JOIN-17 points 30,
+  SECRETS-1, and 33, BIRTH-3: "declared by no landing"); the each-family ceiling goes 108 to 106 at the last pass.
+  **CL20 (THE OBSERVED SHAPES; CL2 carried):** `--write` refuses the new keys no writer of the birth produces
+  (`crisisStoppedRow` `institution` three times; `magicFlagTruth` and `seatMembers` `name` on the powers;
+  `tradeListDisplay` `custom` and `isCustom` on the income shares; `sovereign` five keys of the roster filter on
+  the houses; `supplyStory` `name` on a house; `userEdits` `_userEdits` 4 against 2, CAUSE NOT FOUND): banked ONCE on
+  the final tree through `--rebank --charter=§934.105`, AFTER a table that classes every identity: W (written by
+  another layer than the birth: the world pulse, custom content, the editor, a migration): banked; C (a copy of a
+  banked reader: the home it spells, the original's row quoted): banked under the original's class; N (no writer
+  anywhere, no banked original): A DEAD READ, NOT banked, sent to the chair one line each. `_userEdits` is not
+  banked until its cause is found by bisect. **CL21 (THE 25 FRESH PRESUMED-THINGS HITS; CL1 made exact):** BAR5-MARKS's
+  18 twins and keys of `institutionDescVariants`; BAR5-WORLD's road origin line; BAR5-SAFETY's two prison lines of
+  `guardLineUnderTheLaw`; BAR6-CRIME's three crusader lines and "The streets are unusually quiet.": a hit is banked
+  ONLY under one of three proofs written per line: (i) IDENTITY (the literal stood at 6483322cc elsewhere in the file,
+  or is a line re-stated as a table's key); (ii) THE SAME DEBT IN NEW WORDS (a reworded or split line naming exactly
+  the things of a banked predecessor whose stale row leaves in the same act: net zero, the pair quoted); (iii) TRUE BY
+  CONSTRUCTION (every flagged thing guaranteed where the line prints, by its pool's key or by a declaration, quoted).
+  A HIT THAT PASSES NONE IS NOT BANKED: it comes to the chair, who chooses its cure before the signing. **CL22 (POOL
+  DOMINANCE; CL8 carried):** the three loose ceilings are tightened (those rows only); the two rises
+  (`DESC_LATE_SIBLINGS` top1 0.8107 over 0.6364; `gov_econ_dependence` top5 0.7429 over 0.6662) are re-recorded ONCE
+  at the measured figure under this ruling ONLY with the cause shown first (the top lines and shares at 6483322cc
+  and now; the landed seat whose rows changed the mix; no line lost, no pool emptied), each named for the owner as
+  variety owed; a COLLAPSE (a line no longer drawable, or one line above 0.95) is a stop.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
