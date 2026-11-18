@@ -1,7 +1,7 @@
 {
  "about": "THE PRESUMPTION-CLASSES WALKER'S REGISTER (tests/lint/presumptionClasses.walker.test.js; BAR6-GUARD, the chair's ruling BG1 of 2026-11-16). TODAY'S DEBT, SHRINK-ONLY: one row a (file, class, line) that held a presumption-class word and declared nothing that answers it at the base. A row is [class, status at the base, the line's first 120 characters, literalHash(the whole line)]. Written ONLY by scripts/presumption-classes-door.mjs: --shrink removes the rows a cure leaves stale and lowers the ceiling; --bank debt-at-base banks only a line whose whole literal stood in its file at the base. A NEW line is never banked: it declares. No other seat edits this file or the walker (BG1); the round's close re-banks it through its door.",
  "base": "afa46d644",
- "ceiling": 1786,
+ "ceiling": 1789,
  "rows": {
   "src/components/dossier/EngineSections.jsx": [
    ["office","none","Besieged by a coalition (${warStatus.besiegedBy.map(nameFor).join(', ')}). The garrison is thinning under sustained assa","548678a29a9134ec"],
@@ -346,6 +346,7 @@
   "src/data/institutionDescVariants.js": [
    ["ease","colour","Common matters are settled by all the family heads together, each voice equal. It is unhurried, and the more egalitarian","0c0380017dd0bd74"],
    ["ease","colour","A ring of sharpened stakes around the settlement. Little real defence, but enough to turn away an idle raider.","5fc9027c7ad0419d"],
+   ["ease","one-kind","A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-te","72c19d0c0985228d"],
    ["law","other","Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy p","3ecf6fcd00372260"],
    ["outside","colour","Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool","04532e5715ec8f8f"],
    ["outside","colour","The village's one inn for the traders, pilgrims, and wayfarers who pass. Beds, a stable, and a shared table.","04d956ecdd39e1ec"],
@@ -363,6 +364,7 @@
    ["outside","colour","A stout walled enclosure for the desert merchant, with stabling for camels, locked stores, a well, and sleeping room for","456c4a95e5a5aa2c"],
    ["outside","colour","Where regional caravans are mustered, scheduled, and briefed on their routes. Traders enrol their goods, hire escorts, a","5cdd2ad9379b6699"],
    ["outside","colour","A large walled compound built for desert traders: camel stabling, storage under lock, a well, and beds for fifty. Where ","6f0ab4425e843651"],
+   ["outside","one-kind","A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-te","72c19d0c0985228d"],
    ["outside","colour","Foreign traders attend, and credit by letter is taken.","753ba41d550294ba"],
    ["outside","colour","More than one quarter of inns, serving the merchant, the traveller, and the lingering guest.","82241d92e4122e76"],
    ["outside","one-kind","Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to or","82cea431988c84ff"],
@@ -386,6 +388,7 @@
    ["outside","none","Wine pressed and matured from local fruit or imported must, when either comes to the cellar, and sold in bulk or direct ","e187d4279c4fb539"],
    ["outside","none","Here a craftsman renders and sells maps: regional roads, land surveys, and crude wilderness charts drawn from what trave","e441f43bf31478a3"],
    ["outside","one-kind","Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies ","e7a63c6a99211dbd"],
+   ["outside","one-kind","The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.","ec915038daabf5cc"],
    ["outside","colour","Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a ","ed07037df57b391f"],
    ["outside","colour","Permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route inte","f35ac7fc46f5bcfd"],
    ["outside","colour","A board where torchbearers and porters sign on by the session at a day labourer's wage.","fa9574615e714824"],
