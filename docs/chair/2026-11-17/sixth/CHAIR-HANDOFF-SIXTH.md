@@ -1063,3 +1063,23 @@ should be paused or archived by the owner's hand.
   three CHECKS seats, and the 720 at the line's tip and at point 52 of MEASURE-1 (every runner; every rule that moves).
   BOTH FRESH SEATS COULD COMMIT AND PUSH (01:08: `lane/bar8-j-income-2-2026-11-17` 0d3363177,
   `lane/bar8-scenes-3-2026-11-17` 09c89699a): the paragraph in `CLAUDE.md` does what it was added for.
+- **01:19 UTC. FISH-ROWS HANDED BACK (01:15; 0cd4b7734, base 917c915bc; it could commit) AND IS MERGED ON TOP OF THE FIVE AS POINT 53:** 7e8fd4cc1ec25e766e7420a34fccc67d3294545e on
+  `lane/landing-k-desks-2026-11-18` (no conflict; the tree equals the plain merge). Its message: 11b.fish / 11b.fishTitle
+  the thirty 13 -> 9 / 7 -> 0, the 150 3 -> 1 / 3 -> 0, the 720 69 -> 40 / 51 -> 4 (the bought towns' service rows 0;
+  what stays is other seats' lines and two "bought-never" landings); C20700 and C36970 clear; idle towns byte-equal;
+  the declared move `availableServices` alone (720: 30, 150: 2, 525: 48); one register row
+  (`generateNarratives|availableServices|mutates`, pure) and five figures of its contract, as DEBT-2 did; three fish
+  anchors re-keyed to idle towns (r2r-village-45, r2s-recently_betrayed-metropolis-0, r2r-metropolis-45); LEFT BY NAME:
+  three cells of the census arm A4 (`economyReconcilePass|availableServices`: a stored landing count, the close's),
+  the mutation manifest's entry for its guard (K10) and the estate's file count. THE CHAIR'S READ: the register row and
+  the figures in DEBT-2's form; the anchors' notes say the same claim on idle towns.
+- **01:19 UTC. SIX SECOND READERS ARE SEATED (the middle tier, high effort; `BRIEF-READ-LEFT.md` with BAR8's sections; each reads its seat's commit against its
+  base and THE MERGE at its own point against its first parent):** READ-K-WATCH session_01FbPLbf3wyhza7C1zeAkEM1 (01:15,
+  point 48) · READ-K-POWERS session_01FbPLbbYUc1BAxFPjfAQs2L (01:16, point 49) · READ-K-PEOPLE
+  session_01FbPLbdm2xhugQY3e5tDB1f (01:16, point 50) · READ-FISH-ROWS session_01FbPLbfcKeadqqjGJhYHQoN (01:18, point 53)
+  · READ-DESKS-ECO session_01FbPLbg6Nc8kTjy53BJCSWR (01:19, point 51) · READ-DESKS-DEF session_01FbPLbdwy2vWPK4ugSavyHo
+  (01:19, point 52). ALL FIVE SEATS' BRANCHES ARE ON ORIGIN (K-WATCH 01:04; K-POWERS, K-PEOPLE 01:16; DESKS-ECO,
+  DESKS-DEF 01:19). Each reader's prompt carries what the chair wants looked at (`/home/user/wk/prompts/readers/`)
+  and the round's lessons: the laws by name AND by message, and THE OLDER TESTS A CURE MAKES UNTRUE (a seat's own net
+  was run at its old base). THE LANDING BRANCH IS BEING PUSHED (its gates); then the whole check at point 53 (label
+  `landing-48-53-7e8fd4cc1`) and MEASURE-1 (the 720 at the line's tip and at point 53).
