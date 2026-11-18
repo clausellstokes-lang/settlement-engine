@@ -96,11 +96,6 @@ const town = (safetyLabel, safetyDesc = DM_LINE) => ({
   name: 'Thornwall', _seed: 'seed-def',
   economicState: { safetyProfile: { safetyLabel, safetyDesc } },
 });
-// RE-KEYED BY IDENTITY (FAULTS-DESKS, 2026-11-18; the chair's FR6, R8): DS-DEF-3's "record of crimes" lines declare `court or
-// gaol`, and the bare record above keeps neither, so Unsafe (two `watch` lines and the record line) fell silent over it. The
-// fixture that reads the public-order pools keeps a gaol: the one DS-DEF-3 atom that reads it is `court or gaol`, so every
-// pool admits over it exactly what it admitted over the bare record before the atom.
-const keptTown = (/** @type {string} */ safetyLabel, safetyDesc = DM_LINE) => ({ ...town(safetyLabel, safetyDesc), institutions: [{ name: 'Gaol' }] });
 
 describe('the defense desk — the label vocabulary is the producer\'s', () => {
   it('the five clean labels are an EXACT 1:1 with the five label pools', () => {
@@ -209,7 +204,7 @@ describe('the defense desk — the FIRST-SURVEY framing rests on a measurement',
       ['Tense — Some Future Crisis', undefined, { tier: 'village' }],
     ];
     for (const [label, stress, extra] of swept) {
-      const drawn = defenseStateProse({ ...keptTown(label), ...(stress ? { stress } : {}), ...(extra || {}) }, { seed: `d-${label}`, audience: 'dm' });
+      const drawn = defenseStateProse({ ...town(label), ...(stress ? { stress } : {}), ...(extra || {}) }, { seed: `d-${label}`, audience: 'dm' });
       for (const key of ['publicOrder', 'firstSurvey']) {
         const rung = drawn[key]?.rung;
         if (rung?.sentence) {
@@ -238,7 +233,7 @@ describe('the defense desk — ⭐ THE DM\'S PEN, first production use', () => {
   });
 
   it('⛔ THE PIN — the DM\'s field comes back BY IDENTITY, and wired bytes === dark bytes', () => {
-    const wired = defenseStateProse(keptTown('Unsafe'), { seed: 'pin' });
+    const wired = defenseStateProse(town('Unsafe'), { seed: 'pin' });
     // BY IDENTITY, not merely equal: the projection may not trim, re-case or compose it.
     expect(wired.publicOrder.field).toBe(DM_LINE);
     expect(wired.publicOrder.hasField).toBe(true);
