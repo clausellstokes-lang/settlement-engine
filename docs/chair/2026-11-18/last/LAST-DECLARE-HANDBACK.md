@@ -2,12 +2,13 @@
 
 Base: `b014a7bf3` (`lane/landing-pieces-2026-11-18`: the five pieces and the faults round landed, points 54 to 65).
 Branch: `lane/last-declare-2026-11-18`. Commits: e8d7c850f and a3e7c0776 (item 1), d96b9565c (the guard; item 3's patch),
-5df57eb26 (item 2), the LR4 older tests, the guard's reshape and this hand-back. Model Opus 5.5, one builder, no sub-agents.
+5df57eb26 (item 2), the LR4 older tests, the guard's reshape, dd4a88a32 (item 3) and this hand-back. Model Opus 5.5, one builder, no sub-agents.
 
 **In one line:** 18 of the 20 rows leave the register by declaration, byte-equal everywhere. The other 2 stay recorded
 by the chair's ruling LR1 (the walker reads "garrison work" as a garrison). Item 2 landed under LR3: it cures all 12
 false towns of the 900 and all 3 of the 525, and the replacement is true in the 6 towns where a true line was passed
-over. Item 3 has a route that needs no `vite.config.js` change (measured, kept as a patch, not applied).
+over. Item 3 landed under LR5: the house at work reads the chain state its card prints, through the rule moved whole into
+a module already lazy (`vite.config.js` untouched); 4 towns' atom moves, no stored record of the 900 or the 525.
 
 ## The populations (each born at the base and at every commit; the tools are in scratch)
 
@@ -120,26 +121,61 @@ takes the same replacement.
 a line the final record makes true can be passed over. A late reading of the title lines, as `readHouseDescsLate` does
 for the house descriptions, would be new machinery and is not ordered now.
 
-## Item 3: `impairedUnderSiege`, measured (the brief: measure and stop)
+## Item 3: `impairedUnderSiege`: measured, then LANDED under the chair's ruling LR5 (dd4a88a32)
 
-- **The reading's moves:** with the shown status (`chainCrisisStateShown(c) === 'impaired'` in place of the stored
-  `c.status`), `trade at work: dyed cloth` turns from true to false in **4 towns of the 900**
-  (bar0-city-under_siege+famine-rand-28, -31, -38, r2r-village-55), **0 of the 525**, and 70 cases in the 700. No other
-  key moves. Stored records: 0 move in the 900 and the 525, and 2 of the 700 move (`arrivalScene`:
-  r2s-under_siege-city-1103, -1185). The display reader of the key (`tradeListDisplay.js`) was not rendered.
-- **(a1) the direct import** (`tradeAtWork.js` → `display/chainStateShown.js`): `engineCoreLazyEdge` is red with 2
-  edges: `chainStateShown.js -> facts/crisisKind.js [coherence-lazy]` and `-> facts/institutions.js [coherence-lazy]`.
-  The derivation pulls `chainStateShown.js`, `chainCarrier.js`, `chainWorking.js` and `halfWayGoods.js` from unpinned
-  into eager engine-core.
-- **(a2) a way without that import, which needs no `vite.config.js` change:** move the crisis-state rule
-  (`NO_STATE_SHOWN`, `FOOD_SOURCE_GROUND`, `SHOWN_WORKING`, `chainCrisisStateShown`, `seaOpenTo`, `SEA_GROUNDS`,
-  `runsOnlyThroughAccess`, `tradeStoppedHere`) whole into `facts/tradeAtWork.js`, which is already pinned
-  coherence-lazy beside `crisisKind.js` and `institutions.js`. `chainStateShown.js` imports the rule from there and
-  re-exports its public names, so there is still one home and one rule. **All of `tests/architecture` is green (21 files,
-  347 tests).** Route changes: only `chainCarrier.js` (2,294 B raw, import-free) goes from unpinned into engine-core.
-  It gives the same 4 / 0 / 70 flips. The patch is `LAST-DECLARE-ITEM3-A2.patch` beside this file (a prototype, not
-  applied; it would want its own guard).
-- **(b) the chunk sizes** are not taken: (a2) exists, so the pin need not move, and I built nothing.
+**Measured first** (the brief: measure and stop). (a1) The direct import (`tradeAtWork.js` → `display/chainStateShown.js`)
+reds `engineCoreLazyEdge` with 2 edges: `chainStateShown.js -> facts/crisisKind.js [coherence-lazy]` and
+`-> facts/institutions.js [coherence-lazy]`. The derivation pulls `chainStateShown.js`, `chainCarrier.js`,
+`chainWorking.js` and `halfWayGoods.js` from unpinned into eager engine-core. (a2) Moving the rule needs no
+`vite.config.js` change, so (b), the chunk sizes of moving the pin, was not needed.
+
+**What landed (LR5: "COMMIT (a2)").** The crisis-state rule moves WHOLE and unchanged into `facts/tradeAtWork.js`:
+`NO_STATE_SHOWN`, `FOOD_SOURCE_GROUND`, `SHOWN_WORKING`, `chainCrisisStateShown`, `seaOpenTo`, `SEA_GROUNDS`,
+`runsOnlyThroughAccess` and `tradeStoppedHere`. That module is already pinned lazy (`FIRSTPAINT2_LAZY_DOMAIN`), beside
+the two lazily pinned modules the rule reads. `display/chainStateShown.js` imports the rule back and re-exports its names,
+so there is one rule, read by the chain card and by `impairedUnderSiege`. `impairedUnderSiege` now asks
+`chainCrisisStateShown(c, record) === 'impaired'` where it read `c.status`. `vite.config.js` and the core are untouched.
+
+**The 4 towns of the 900** (before = the previous tip 91661eceb, after = dd4a88a32; the atom against the card):
+
+| town | crisis | the Dyer's chains: stored → the card shows | `trade at work: dyed cloth` before → after |
+|---|---|---|---|
+| bar0-city-under_siege+famine-rand-28 | siege + famine | textiles running → impaired; textile_finishing running → impaired | true → **false** |
+| bar0-city-under_siege+famine-rand-31 | siege + famine | the same | true → **false** |
+| bar0-city-under_siege+famine-rand-38 | siege + famine | the same | true → **false** |
+| r2r-village-55 | a siege drawn at random | the same | true → **false** |
+
+Before, the atom said "at work" beside two cards that print Impaired. After, the atom equals the card in all 4.
+
+**Every page line that reads the atom in those towns:** the atom's only readers are the arrival scene's two declared
+lines and their twins (`data/arrivalProse.js`: "Lengths of dyed cloth hang drying…" / "A length of plain cloth hangs…",
+"A dyer walks past…" / "Someone walks past with a measuring cord…"). The scene is drawn at birth and stored. In the 4
+towns none of the four prints, before or after: the scene is byte-equal and drew no cloth line. (`tradeListDisplay.js`'s
+"dyed cloth" is a goods word, not the atom.)
+
+**Nothing else moves:** the stored records of the 30, 150 and 720 are byte-equal, the previous tip against this one
+(0 moved). **The 525 by hash:** 0 of 525 move. In the 700 besieged births 2 move, each in `arrivalScene` only, with no
+town of the 900 among them. There `trade at work: arcane` turns false: every arcane house's card prints Impaired (the Mages'
+guild's spellcasting, stored impaired; the Enchanter's shop's magical goods, stored entrepot). The scene's arcane lines take
+their twins:
+r2s-under_siege-city-1103: "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want." →
+"The reagent stalls are half bare, and the few jars left are dear."; r2s-under_siege-city-1185: "The air prickles faintly,
+the way it does where a great deal of spellwork is done." → "Little spellwork is done in {settlement} these days, for want
+of the stuff it takes." Each twin is true there.
+
+**Red under mutation.** The guard (`tests/domain/lastDeclare.test.js`, item 3) uses a planted Dyer on its own grazing land
+under a siege: both cards show impaired, and the atom is false. Its negative is the same Dyer in calm: running, and at
+work. Restoring the stored status (`c.status === 'impaired'`) reds it ("expected true to be false"). It is red at the base
+for the same reason, and the calm negative is green at both.
+
+**`tests/architecture`: green**, 21 files and 347 tests, `engineCoreLazyEdge` and `factHomesLazy` among them. **The
+build's lazy edges:** `npm run build` passes, and `tests/build` over `dist/` gives the same 5 reds at the previous tip and
+this one, by message (the engine bundle's replay ×3, the service core, the worker's ceiling). Every lazy-chunk test is
+green at both. Bytes, previous tip → this one: engine-core 307,440 → 307,956 (+516: `chainCarrier.js`); coherence-lazy
+278,066 → 277,561; the generation worker 2,550,602 → 2,552,575 (+1,973). The worker was over its ceiling (2,525,028)
+already: a stored figure for the close.
+
+**The net of item 3** (the previous tip against this one): running; it follows in the next commit.
 
 ## The net (each gate alone through `scripts/gate-tail.sh`; base b014a7bf3 and tip; every red compared by message)
 
@@ -189,7 +225,8 @@ other secret). Two NEW reds came from item 1, and both are cured under the chair
   ledger notes are on the births). The guard line's door runs at display, outside the births' ledger, and adds no row.
 - The estate's file count (`sovereigntyLightingContract`): 3,696 → 3,697.
 - `institutionBudgetPromise`'s moved seeds: 35 → 36 (item 2).
-- The golden: 0 of 525 move under item 1; **3 of 525 move under item 2** (the sawyer's secret, named above). The golden
+- The generation worker bundle: 2,552,575 B at the tip (+1,973 under item 3; over its ceiling since the base).
+- The golden: 0 of 525 move under items 1 and 3; **3 of 525 move under item 2** (the sawyer's secret, named above). The golden
   test's failing list goes 191 → 192.
 
 ## Left, by name
@@ -197,6 +234,5 @@ other secret). Two NEW reds came from item 1, and both are cured under the chair
 - Left by name, with the ruling: the 2 `garrison` rows (743cc96b, b50dee27): recorded by the owner's word, kept by LR1;
   the walker's reading of "garrison work" goes to the last close's list of detector debts.
 - The LOW of LR3 (the title lines' birth-time reading), named above.
-- Item 3: the patch, not applied.
 - The `declaredSet` builder blindness (R6 above): named, not repaired.
 - The base's own reds: named in the net, not chased.
