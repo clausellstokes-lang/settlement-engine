@@ -1,0 +1,169 @@
+### tests/components/phoneChromeFloor.census.test.js :: THE PHONE CHROME FLOOR — a census of the source, on every route the router declares each surface matches its registry row, and an owned surface may only shrink
+AssertionError: 
+ROUTE_BASELINE mismatch. Each row is what this census measured on that surface.
+A `floored` number that FELL means a surface stopped being floored or stopped existing — which "zero violations" cannot see. One that ROSE means new floored lines; say so.
+A `bare` number that rose on an OWNED surface means new sub-floor sizes shipped behind the name of the lane that is curing the old ones; cure them instead of raising the row.
+Deliberate? Re-measure, re-record the row in the same car, and name the cause in the commit message.
+  /create  floored 618 -> 621
+  /settlements  floored 861 -> 864
+  /gallery  floored 663 -> 666
+: expected [ …(3) ] to deeply equal []
+    at /home/user/t/close-1-1b0614950/tests/components/phoneChromeFloor.census.test.js:632:7
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+
+### tests/domain/worldFactRederive.test.js :: EM-B2b — world facts by consequence: the route, the refusals and the stated radius A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden
+AssertionError: the stride is non-empty, or the absence above is vacuous: expected 5 to be +0 // Object.is equality
+    at /home/user/t/close-1-1b0614950/tests/domain/worldFactRederive.test.js:591:87
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/generators/nameHeldThroughAssembly.test.js :: EM-R4 — the settlement name is held through assembly A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where it was
+AssertionError: a golden row moved with no pin bag anywhere: expected [ …(37) ] to deeply equal []
+    at /home/user/t/close-1-1b0614950/tests/generators/nameHeldThroughAssembly.test.js:128:66
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/factLayers.walker.test.js :: nothing reads at or above its own layer (shrink-only) POOLS: the tree reads exactly the register, with no pool unplaced and no atom unlayered
+AssertionError: expected { …(11) } to deeply equal { …(12) }
+    at /home/user/t/close-1-1b0614950/tests/lint/factLayers.walker.test.js:165:26
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+### tests/lint/newsHeadlineContract.walker.test.js :: [FILE] 
+
+
+### tests/lint/noLegacyFactionReaders.walker.test.js :: no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) every read outside the FPZ list is red; zero at the landing
+AssertionError: expected [ …(3) ] to deeply equal []
+    at /home/user/t/close-1-1b0614950/tests/lint/noLegacyFactionReaders.walker.test.js:49:68
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the EXECUTED corpus the producers ran and the corpus is not empty
+AssertionError: expected { canonEventLogEntries: 1, …(7) } to deeply equal { canonEventLogEntries: 1, …(7) }
+    at /home/user/t/close-1-1b0614950/tests/lint/observedShapeReaders.walker.test.js:700:37
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+AssertionError: expected { reads: 2215, identities: 1553, …(3) } to deeply equal { reads: 2200, identities: 1542, …(3) }
+    at /home/user/t/close-1-1b0614950/tests/lint/observedShapeReaders.walker.test.js:1652:8
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not a shrink. NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent" out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).: expected { violations: 7, stale: +0 } to deeply equal { violations: +0, stale: +0 }
+    at /home/user/t/close-1-1b0614950/tests/lint/observedShapeReaders.walker.test.js:841:7
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan the provenance drift classifier separates a detector change from an input change THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all
+AssertionError: an execution INPUT drifted since the mint — lawful, and the shrink-only re-freeze absorbs it: expected [ …(7) ] to deeply equal []
+    at /home/user/t/close-1-1b0614950/tests/lint/observedShapeReaders.walker.test.js:1344:10
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/siteCoherenceRatchet.test.js :: site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) C1 — the live row set equals the frozen baseline in both directions
+AssertionError: THE CONTRADICTION INVENTORY MOVED. `added` = new (terrain, siteKind, decisiveToken) identities, a regression until proven otherwise. `grown` = a frozen row rose. `shrunk` / `vanished` = a row FELL or DISAPPEARED: that is a WIN, and it reds until you bank it by lowering or removing the row in tests/lint/.site-coherence-baseline.json in the SAME change that earned it. Never regenerate the baseline to make this pass — UPDATE_SITE_COHERENCE_BASELINE=1 prints for review and always fails on purpose.: expected { added: [], …(3) } to deeply equal { added: [], grown: [], …(2) }
+    at /home/user/t/close-1-1b0614950/tests/lint/siteCoherenceRatchet.test.js:424:8
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the estate's file count moved — re-measure, do not re-word: expected 3682 to be 3641 // Object.is equality
+    at /home/user/t/close-1-1b0614950/tests/lint/sovereigntyLightingContract.walker.test.js:7549:10
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/tuningRegister.walker.test.js :: tuning register — the inventory is frozen and honest the measured tree matches the committed inventory exactly
+AssertionError: the inventory is EXACT, both ways, including digests, leaves and dependents. A tuning value that moved without a refreeze is exactly the event this register exists to make visible. If the movement is legitimate, refreeze it and say why; do not edit this file by hand.: expected [ …(7) ] to deeply equal []
+    at /home/user/t/close-1-1b0614950/tests/lint/tuningRegister.walker.test.js:496:49
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A7 the honesty figures are re-measured and the ride-along has its first population in the chain
+AssertionError: the edits that DO reach a reading: expected [ 695, 275, 2176 ] to deeply equal [ 695, 275, 2173 ]
+    at /home/user/t/close-1-1b0614950/tests/property/editCorpusRatchet.test.js:591:81
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-1-1b0614950/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
