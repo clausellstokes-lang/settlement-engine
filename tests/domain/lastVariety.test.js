@@ -31,7 +31,8 @@ import { defenseStateProse } from '../../src/domain/display/stateProse/defenseSt
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { censusPlan, configOf } from '../components/pageCensusWalk.shared.mjs';
 import { GOAL_FAMILY_LINES, GOAL_SUBKIND_SLOTS } from '../../src/data/people/goalFamilies.js';
-import { familyCandidates, goalContextOf } from '../../src/generators/people/goals.js';
+import { familyCandidates, goalContextOf, resourceFill } from '../../src/generators/people/goals.js';
+import { needListOf } from '../../src/domain/facts/needNotBroughtIn.js';
 
 const BLOCK = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-3'];
 
@@ -196,6 +197,23 @@ describe('LAST-VARIETY item 2: the SUPPLY family keeps two admitted lines where 
       expect(sup.filter((c) => !c.refused).every((c) => c.kind === 'want'), `${seed} · ${id} · ${vantage}: what is admitted is want`).toBe(true);
     });
     expectNoSeedFailures(failures, 'two admitted SUPPLY lines on every such card');
+  });
+
+  it('LR6 (5): every want line names only goods the page\'s need list prints, never the dependency\'s whole compound', () => {
+    const failures = collectSeedFailures(WANT_CARDS, ({ seed, id }) => {
+      const s = towns.get(seed);
+      const needs = needListOf(s).map((n) => resourceFill(n));
+      for (const vantage of /** @type {const} */ (['short', 'long'])) {
+        for (const c of supplyOf(seed, id, vantage).filter((x) => x.kind === 'want')) {
+          const goods = String(c.slots.resource).split(' and ');
+          expect(goods.every((g) => needs.some((n) => n === g || n.split(' and ').includes(g))), `${seed} · ${id} · "${c.slots.resource}" against [${needs.join('; ')}]`).toBe(true);
+        }
+      }
+    });
+    expectNoSeedFailures(failures, 'the want slot holds the need list\'s goods');
+    // the citadel's dependency is the compound "stone and iron and grain"; its want line names only the stone the list prints
+    const citadel = supplyOf('bar0-city-wartime-rand-45', 'npc_citadel', 'short').filter((x) => x.kind === 'want');
+    expect(citadel.map((c) => c.slots.resource)).toEqual(['stone', 'stone']);
   });
 
   it('a want line is dealt on a card of the 900, filled with its house and its good', () => {

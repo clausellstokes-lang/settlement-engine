@@ -42,7 +42,7 @@ import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/dra
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
 import { magicOf } from '../../domain/facts/magic.js';
-import { goodNeededNotBroughtIn } from '../../domain/facts/needNotBroughtIn.js'; // FAULTS-NEED item 2 (11e.wantBuy): the page's need list
+import { goodNeededNotBroughtIn, goodsNeededNotBroughtIn } from '../../domain/facts/needNotBroughtIn.js'; // FAULTS-NEED item 2 (11e.wantBuy): the page's need list
 import { allegianceOf, criminalHousesOf, criminalPowersOf, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { NPC_GOAL_SIBLINGS, SIEGE_GOALS, STRESS_GOAL_OVERRIDES, stressBucketOf } from '../npcGenerator.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
@@ -272,6 +272,8 @@ export function goalContextOf(settlement, cards, relationships) {
     facts: () => (facts ??= factsOf(view)),
     /** FAULTS-NEED item 2: whether a dependency's good is one the page's need list says is needed and not brought in */
     needUnmet: (/** @type {unknown} */ resource) => goodNeededNotBroughtIn(settlement, resource),
+    // LAST-VARIETY (LR6 (5)): the unmet goods themselves, as the need list prints them (the `want` cell's {resource})
+    needUnmetGoods: (/** @type {unknown} */ resource) => goodsNeededNotBroughtIn(settlement, resource),
     /** the held texts refused so far (the receipt's `refused`, per card) */
     refusals: { n: 0 },
     // the handler's agents: handler id → [{ agent, archetype }] (the agent's covert handler tie names the kind)
@@ -460,8 +462,10 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
         if (!rf) continue;
         const unmet = ctx.needUnmet(d.resource);
         push(cellCandidates('SUPPLY', 'dependency', vantage, { resource: rf, house: hf }, ctx, held, { target }).map((c) => (unmet ? { ...c, refused: true } : c)));
-        // LAST-VARIETY (item 2): where the good is needed and not brought in, the lines of a house that LACKS it (`want`)
-        if (unmet) push(cellCandidates('SUPPLY', 'want', vantage, { resource: rf, house: hf }, ctx, held, { target }));
+        // LAST-VARIETY (item 2; LR2): where the good is needed and not brought in, the lines of a house that LACKS it (`want`);
+        // LR6 (5): its {resource} names only the goods the need list prints, never the dependency's whole compound
+        const wf = unmet ? resourceFill(ctx.needUnmetGoods(d.resource).join(' + ')) : '';
+        if (wf) push(cellCandidates('SUPPLY', 'want', vantage, { resource: wf, house: hf }, ctx, held, { target }));
       }
       if (TRADING_SHELVES.includes(shelf)) for (const ch of own.filter((x) => RUNNING_STATUSES.includes(str(x.status)))) push(cellCandidates('SUPPLY', 'expansion', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
     }
