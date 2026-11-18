@@ -2036,3 +2036,25 @@ should be paused or archived by the owner's hand.
   A0b by exactly the eight (CL25 sent), `presumptionClasses.walker` two arms (the three new hits and the stale rows:
   CLOSE-DOORS-1B's door). THE SECOND "MERGE" GOES TO CLOSE-DOORS-1B WHEN THE PUSH LANDS; CL25's one commit follows
   as a seventh merge (one constant of one test file: it moves no figure of 1B's).
+- 05:05 UTC, 2026-11-18 · THE SIXTH MERGE IS ON ORIGIN (`lane/landing-close-2026-11-18` at
+  8d7c2af33cb9ed61738f4fe3b4e4516d476657a8, pushed 05:04, gates green) AND THE SECOND "MERGE" IS SENT TO
+  CLOSE-DOORS-1B: ITS FINAL PASS BEGINS (the doors that read `docs/content` and `src/data`; CL20's one rebank with
+  its table; the writers' reach; the news pins; the presumption classes by their door; pool dominance; then the
+  bundles, the four size ceilings, the estate's file count and titles; its net: red only on the four rows, on the
+  eight until CL25's commit, and on CLOSE-DOORS-2's surfaces; "READY FOR THE MERGE <sha>"). CLOSE-DOORS-1B's STATE AT
+  8db27c2f1 (05:00; standing on the first MERGE): the fact-layer shrink done; the each-family ceiling 108 to 106;
+  CL15 done (5f68e0c79: both rows; flank-on-flat and any-contradiction +2); CL21's 21 rows (f0e60758a); CL22: three
+  ceilings tightened, `DESC_LATE_SIBLINGS` re-recorded with its cause (661 draws at the last close, line 0 0.59;
+  now 2,002 draws over 29 keys, line 0 0.8107: line 0 is each key's original and line 1 its siege twin, printed
+  only under a siege: no line lost); `gov_econ_dependence` NOT re-recorded (the seat found no gate on the `desc`
+  rows): THE CHAIR'S LEAD: the TENSION pool's row 3 took `excludes: seat held` at BAR6-PEOPLE 26f510d87 (point 8),
+  which fits line 3's fall from 68 draws to 31: the seat checks which pool the row measures; the edge bundles
+  rebuilt once already (f1fd1a0b1) and again on the final tree; the tuning register refrozen; the news and
+  prose-family contracts re-recorded; the phone chrome floor's three rows. CL20: THE TWO CLASS-N READS
+  (`tradeListDisplay.js:697`, `sh.custom` and `sh.isCustom` on the income shares, point 14): the chair read the
+  line (the houses' custom idiom on income shares in `harvestScarceHere`'s filter) and gave its word: banked as
+  "defensive, no writer", a builder's item after the deploy; `_userEdits` 4 against 2: CAUSE SHOWN (BAR5-SAFETY
+  e02f01157: `defenseDisplay.js:950` calls `isEdited(settlement, …)`; the scanner unions call sites): class W.
+  LEFT-KEYS HANDED BACK FINAL (05:04; 012cf8eea; documents only since merge 3): merged as merge 7 (local). K6 over
+  one render of the 720: 4r resource 3,348 to 1,715 flags (the rest listed in `K6a-STAYS.txt`); 8f.chain 5 to 0 (all
+  five true); K7 and K9 proved by planted faults.
