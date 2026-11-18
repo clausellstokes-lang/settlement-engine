@@ -1117,3 +1117,22 @@ should be paused or archived by the owner's hand.
 - **01:25 UTC. THE OWNER ANSWERED THE REGISTER QUESTION: "Move the entries".** Ruling BR26 (section 6) is issued BY THE OWNER'S WORD and sent to J-INCOME-2 (01:27; the
   chair's own check let it through this time); PDF-2 is told it still touches no register. THE CHAIR'S NOTES WERE ON
   ORIGIN AT e87772af4 (01:24).
+- **02:00 UTC. THE WHOLE CHECK AT POINT 53, part 1 (CHECKS-1, 01:57): 38 names against the line's 33: FIVE NEW, NONE GONE; the doors: door-classes fresh 0 · stale 152,
+  door-things unchanged.** EACH ATTRIBUTED BY THE CHAIR (the four files run at the line's tip and at each point 48 to
+  52 in `/home/user/landed`; logs `/home/user/wk/p53.attr.<n>.log`): POINT 48 (K-WATCH):
+  `tests/generators/servicesStructure.test.js` "entry stays a thin orchestrator (<= 400 lines)": 406 lines. POINT 50
+  (K-PEOPLE): `tests/components/tonightSeatSecret.test.jsx` "a kept secret never prints after Wants to": soak1k-28, a
+  seat-holder who keeps the crisis secret is voiced with it as a WANT ("expected 'want' to be 'secret'"): A HIGH IF IT
+  STANDS. POINT 51 (DESKS-ECO): `tests/domain/stateProseKernel.test.js` law 5 (14 drifts of the pool DS-ECO-12
+  CRITICAL IMPORT against the pre-cure reader) and law 6 (DS-GEN-3 Import-Dependent's ids are no longer its annex
+  rows: the retired v4), and `tests/domain/wallsWordDossierProse.test.js` F10 (that pool is MUTE in the no-walls
+  read). Points 49, 52, 53: none of these. EACH IS SENT TO ITS SEAT'S READER (02:01) to weigh in its verdict (the law
+  right and the change wrong, or the test's record stale; what the page prints). THE FOLLOW-UPS GO TO FRESH SEATS, ONE
+  A SEAT, WHEN THE READER'S WHOLE VERDICT AND THE CHECK'S OTHER TWO PARTS ARE IN (K-PEOPLE's with PEOPLE-2's two
+  items; DESKS-ECO's with its desks' leftovers).
+- **02:00 UTC. THE OWNER ASKED (01:45 and 01:50) for the progress to the end and why the reads lie further and further apart; answered in full.** THE GAPS,
+  from the record: read 2 on 2026-11-15 13:46 · 3 at 18:21 (4.5 h) · 4 on 11-16 00:17 (6 h) · 5 at 15:22 (15 h) · 6 on
+  11-17 02:58 (11.5 h) · 7 at 16:50 (14 h) · 8 planned about 22 h after it. THE CHAIR'S CHANGE, TOLD TO THE OWNER: THE
+  EIGHTH READ IS RUN AS SOON AS THE PIECES THAT CHANGE THE PAGES HAVE LANDED (SCENES with SCENES-3; points 48 to 53
+  with their follow-ups; PDF-2b; MARKS-2; J-INCOME-2), NOT AFTER THE UPKEEP (LEFT-KEYS) AND THE SMALL LEFTOVERS
+  (ROWS-2, PEOPLE-2, DESKS-2), which run beside it; the read reports apart what is new and what is already in work.
