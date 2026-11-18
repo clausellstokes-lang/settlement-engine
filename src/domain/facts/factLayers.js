@@ -213,6 +213,8 @@ export const LEAVES = Object.freeze({
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
   // BAR4-CORPUS-DEF (D1): a danger from outside on its way, a live external-threat tension of the history (`dangerComing.js`)
   dangerComing: home('dangerComing', 4, ['history']),
+  // BAR8-DESKS-DEF (12e): the common people press, or have risen, against those in charge, a live popular-uprising tension (`uprising.js`)
+  uprising: home('uprising', 4, ['history']),
   // BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`: the config and the monster score)
   monsterFrontier: home('monsterFrontier', 3, ['config', 'defenseProfile']),
   // BAR6-CULTURE (10g-legacy): the blow the record's top legacy names destroyed something (`legacyRuin.js`)
