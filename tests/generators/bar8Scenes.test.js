@@ -221,9 +221,15 @@ describe('BR23 (1): the small working quarry', () => {
   // BAR8-SCENES-3 (BR25 (3), 2026-11-18): THE TWO STATES NO TWIN COVERED (rule R7). The same hamlet planted (a) with every ground
   // it has spent (its stone idle) and (b) under a siege over its stone at work: the empty road keeps the slot, the small cart is
   // refused, and the pool holds three slots. Both FAIL at 55b954f98 (the road refused by the tier: no twin admitted, two slots)
+  // RE-KEYED BY IDENTITY 2026-11-18 (FAULTS-WATCH item 4 (a), BR25 (5)): rand-45's only stone house is a Stone quarry, which the
+  // page marks "Stopped by the siege." under the planted siege, so its stone is no longer at work there; the siege arm's state
+  // (a hamlet under a siege, its stone at work) is planted with the quarry's row read as a Mine (open cast), a stone house the
+  // siege curtails ("Curtailed by the siege.": it works what it holds), the rest of the record as born
+  /** @param {any} s */
+  const quarryAsMine = (s) => ({ ...s, institutions: (s.institutions || []).map((/** @type {any} */ i) => (i?.catalogId === 'stone_quarry' ? { ...i, name: 'Mine (open cast)', catalogId: 'mine_open_cast' } : i)) });
   for (const [label, plant] of /** @type {Array<[string, (s: any) => any]>} */ ([
     ['its stone idle (every ground spent)', (s) => ({ ...s, config: { ...s.config, nearbyResourcesDepleted: [...(s.config.nearbyResources || [])] } })],
-    ['its stone at work under a siege', (s) => { const list = [...canonStressors(s), { type: 'under_siege' }]; return { ...s, stress: list, stressors: list }; }],
+    ['its stone at work under a siege', (s) => { const list = [...canonStressors(s), { type: 'under_siege' }]; return quarryAsMine({ ...s, stress: list, stressors: list }); }],
   ])) {
     test(`bar0-hamlet-calm-rand-45 planted, ${label}: the empty road prints, never the small cart, and the pool holds three slots`, () => {
       const born0 = town('bar0-hamlet-calm-rand-45');
@@ -242,8 +248,10 @@ describe('BR23 (1): the small working quarry', () => {
     expect(tradeAtWorkOf(s, 'stone')).toBe(false);
     expect([admits(laden(), s, true), admits(small(), s, true), admits(empty(), s, true)]).toEqual([false, false, true]);
   });
-  test('bar0-city-under_siege+famine-rand-46: a siege over stone at work: the empty road keeps the slot', () => {
-    const s = town('bar0-city-under_siege+famine-rand-46');
+  // RE-KEYED BY IDENTITY 2026-11-18 (FAULTS-WATCH item 4 (a), BR25 (5)): rand-46's Stone quarry is "Stopped by the siege." on the
+  // page, so its stone is not at work; the same claim stands on rand-36, whose Mine the siege curtails (its stone at work)
+  test('bar0-city-under_siege+famine-rand-36: a siege over stone at work: the empty road keeps the slot', () => {
+    const s = town('bar0-city-under_siege+famine-rand-36');
     expect(crisisOf(s).has('under_siege')).toBe(true);
     expect(tradeAtWorkOf(s, 'stone')).toBe(true);
     expect([admits(laden(), s, true), admits(small(), s, true), admits(empty(), s, true)]).toEqual([false, false, true]);
