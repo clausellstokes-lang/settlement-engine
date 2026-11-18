@@ -107,6 +107,9 @@ export const LEAVES = Object.freeze({
   paidWatch: home('paidWatch', 1, ['institutions']), // BAR6-PEOPLE (10e-house): someone is paid to keep order (`guardPay.js`)
   forceWalksByDay: home('forceWalksByDay', 1, ['institutions']), // BAR8-K-WATCH (13e): the force walks by day, by its own text (`forceHours.js`)
   courtSits: home('courtSits', 2, ['availableServices', 'institutions']), // BAR6-CULTURE (6d-court): a court on the live roster (`defence.js :: courtHoldersOf`)
+  courtOrGaol: home('courtOrGaol', 2, ['availableServices', 'institutions', 'economicState'], { // FAULTS-DESKS (13d, FR6): `court sits` or the defence home's `prison`
+    note: 'it reads the live roster\'s drawn services (layer 2) and a defence-home atom, which bundles the economy as every defence atom does',
+  }),
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
   warState: home('warState', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {

@@ -77,6 +77,8 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // `legitimacy crisis`, `force` (keyed: ORDER_FORCE_WORDS); and the goods since given to `trade at work` (keyed). "Every
   // presence atom holds" covers them, so a `no X` line is refused here exactly as the pre-cure reference refuses it.
   courtSits: true,
+  // FAULTS-DESKS (2026-11-18, FR6): `court or gaol` (`factsOf.js :: courtOrGaol`): a calm place keeps a court (above)
+  courtOrGaol: true,
   legacyRuin: true,
   sovereign: true,
   seatOutranked: true,

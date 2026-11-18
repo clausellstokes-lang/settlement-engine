@@ -94,6 +94,8 @@ export function factsOf(record, options = {}) {
     get legacyRuin() { return legacyRuinOf(record); },
     /** BAR6-CULTURE (6d-court): a court sits on the live roster, the Defense tab's Legal Infrastructure row (`defence.js :: courtHoldersOf`) */
     get courtSits() { return courtHoldersOf(/** @type {import('./defence.js').CourtRecord} */ (record)).length > 0; },
+    /** FAULTS-DESKS (13d, FR6): a court sits on the live roster or a prison stands on it (the defence home's own two readers, `courtHoldersOf` and `defenceOf().prison`): the Legal row prints anything but "None" */
+    get courtOrGaol() { return courtHoldersOf(/** @type {import('./defence.js').CourtRecord} */ (record)).length > 0 || defenceOf(record).prison; },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
     /** BAR6-DEFDESK (9c.nothing-over): the town grows more than it eats (`growsMoreThanEats.js`) */

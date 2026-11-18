@@ -147,6 +147,8 @@ const PRESENCE_SETTER = {
   // `uprising` (`uprising.js`, DS-POW-4 Stable v3)
   'critical import brought in': (f, _a, want) => ({ ...f, criticalImportBroughtIn: want }),
   uprising: (f, _a, want) => ({ ...f, uprising: want }),
+  // FAULTS-DESKS (2026-11-18, FR6): `court or gaol` (`factsOf.js :: courtOrGaol`), declared by the seven record-of-crimes lines of DS-DEF-3
+  'court or gaol': (f, _a, want) => ({ ...f, courtOrGaol: want }),
   // FAULTS-NEED (FR2): `need not brought in` (keyed; `needNotBroughtIn.js`), declared by DS-ECO-8 POOR v1; the key's answer set,
   // every other key as it was
   'need not brought in': (f, a, want) => ({ ...f, needNotBroughtIn: { ...(f.needNotBroughtIn || {}), [a.key]: want } }),

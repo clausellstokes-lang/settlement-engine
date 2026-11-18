@@ -47,9 +47,13 @@ const DECLARED = [
   // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): BAR6-DEFDESK (be35850406) put a crime-wave twin at Safe v3, so the pool's
   // later members moved up one: "plain that somebody keeps it that way" is v4 (was v3) and the neighbours' line is v5 (was
   // v4). The same rows, the same towns, the same lines, by their new vids.
-  { batch: 6, seed: 'r2s-infiltrated-village-2', pool: 'DS-DEF-3::Safe', vid: 2, instead: 5, why: 'nobody under arms: "enforcement keeps it down" (C18, Safe v2)' },
-  { batch: 6, seed: 'r2r-thorp-28', pool: 'DS-DEF-3::Safe', vid: 4, instead: 5, why: 'nobody under arms: "plain that somebody keeps it that way" (Safe v2\'s sibling)' },
-  { batch: 6, seed: 'r2r-village-49', pool: 'DS-DEF-3::Very Safe', vid: 3, instead: 5, why: 'nobody under arms: "enforcement far outweighs the criminals" (Safe v2\'s class)' },
+  // RE-KEYED BY IDENTITY (FAULTS-DESKS, 2026-11-18; the chair's FR6, R8): the neighbours' line (v5 of both pools) is a
+  // "record of crimes" line and now declares `court or gaol`, which none of these three towns keeps (no court sits, no gaol
+  // stands), so it is refused there too. The same rows, the same towns, the same cured lines; "instead" is the sibling each
+  // town now prints: Safe v1 ("Crime … stays small"), Very Safe v2 ("You can walk {settlement} at any hour").
+  { batch: 6, seed: 'r2s-infiltrated-village-2', pool: 'DS-DEF-3::Safe', vid: 2, instead: 1, why: 'nobody under arms: "enforcement keeps it down" (C18, Safe v2)' },
+  { batch: 6, seed: 'r2r-thorp-28', pool: 'DS-DEF-3::Safe', vid: 4, instead: 1, why: 'nobody under arms: "plain that somebody keeps it that way" (Safe v2\'s sibling)' },
+  { batch: 6, seed: 'r2r-village-49', pool: 'DS-DEF-3::Very Safe', vid: 3, instead: 2, why: 'nobody under arms: "enforcement far outweighs the criminals" (Safe v2\'s class)' },
 ];
 /** @type {ReadonlyArray<{batch: number, seed: string, pool: string, vid: number, why: string}>} */
 const KEEP = [
