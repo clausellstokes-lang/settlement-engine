@@ -1190,7 +1190,7 @@
       "lines": 2
     },
     "ledger:foodBalance:OUTLOOK_HOOK_SIBLINGS": {
-      "top1": 0.5625,
+      "top1": 0.4564,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 4
@@ -1934,10 +1934,10 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionDescVariants:DESC_LATE_SIBLINGS": {
-      "top1": 0.6364,
+      "top1": 0.8107,
       "top5": 1,
       "lines": 2,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+      "reason": "re-recorded once by CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18) under the chair's ruling CL22 (vetoable; named for the owner as variety owed): top1 0.6364 -> 0.8107, measured on both corpora (2002 draws in 1154 towns; 1986 in 1144); top5 1, lines 2 held. Cause: the table went from 11 keys to 29 (BAR5-MARKS, JOIN-16 point 1, +15; BAR6-HOUSES, JOIN-17 point 2, +3), each key's line 1 a siege twin printed only under siege, so line 0 (the original) takes 0.8107 of the draws (0.5900 of 661 at 6483322cc); both lines still drawn, no pool emptied. Before: banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     },
     "ledger:institutionDescVariants:city|Crafts|Alchemist quarter": {
       "top1": 0.3596,
@@ -3023,10 +3023,10 @@
       "lines": 1
     },
     "ledger:institutionServices:Butchers (3-8).Fresh meat": {
-      "top1": 1,
+      "top1": 0.8825,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 1
+      "lines": 2
     },
     "ledger:institutionServices:Butchers (3-8).Offal and by-products": {
       "top1": 1,
@@ -3965,10 +3965,10 @@
       "lines": 1
     },
     "ledger:institutionServices:Hired blades.Bodyguard service": {
-      "top1": 1,
+      "top1": 0.8982,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 1
+      "lines": 2
     },
     "ledger:institutionServices:Hired blades.Escort": {
       "top1": 1,
