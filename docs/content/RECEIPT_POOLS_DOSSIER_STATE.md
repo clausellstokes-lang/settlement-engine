@@ -3109,7 +3109,8 @@ reading rather than a settled one.
 4. `[visitor · guardPresence · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
 5. `[ledger · no guardPresence · court or gaol · crisis: any]` The town's record of crimes at {settlement} stays short: there is some crime, and neighbours settle most of it between themselves.
 6. `[ledger · no prison · crisis: any · no crisis: threat, unrest]` {settlement} has no gaol, and has so far had little use for one.
-7. `[visitor · no guardPresence · crisis: any · no crisis: threat, unrest]` Visitors to {settlement} see nobody keeping watch, and come to no harm all the same.
+7. `[visitor · no guardPresence · no crime wave · crisis: any · no crisis: threat, unrest]` Visitors to {settlement} see nobody keeping watch, and come to no harm all the same.
+8. `[street · tier: ≤ village · crime wave · crisis: any · no crisis: threat, unrest]` At {settlement}, people who never used to bar their doors at night have started to.
 
 **`Moderate`**
 1. `[street · patrol · force: kept · law: > collapsed]` {settlement} keeps a working balance: the law is present, so is crime, and neither has the town to itself.

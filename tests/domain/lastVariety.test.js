@@ -40,13 +40,16 @@ const NEW_LINES = [
   { pool: 'Very Safe', vid: 6, marks: ['tier: ≤ village', 'no crime wave', 'crisis: any', 'no crisis: threat, unrest'] },
   { pool: 'Very Safe', vid: 7, marks: ['no watch', 'crisis: any', 'no crisis: threat, unrest'] },
   { pool: 'Safe', vid: 6, marks: ['no prison', 'crisis: any', 'no crisis: threat, unrest'] },
-  { pool: 'Safe', vid: 7, marks: ['no guardPresence', 'crisis: any', 'no crisis: threat, unrest'] },
+  { pool: 'Safe', vid: 7, marks: ['no guardPresence', 'no crime wave', 'crisis: any', 'no crisis: threat, unrest'] }, // LR6 (3): `no crime wave`
+  { pool: 'Safe', vid: 8, marks: ['tier: ≤ village', 'crime wave', 'crisis: any', 'no crisis: threat, unrest'] }, // LR6 (3)
   { pool: 'Moderate', vid: 9, marks: ['tier: ≤ village'] },
   { pool: 'Moderate', vid: 10, marks: ['no court or gaol'] },
   { pool: 'Unsafe', vid: 5, marks: ['no guardPresence', 'crime wave'] },
   { pool: 'Unsafe', vid: 6, marks: ['tier: ≤ village'] }, // LR6 (2): its words corrected in place
 ];
 const BASE_COUNTS = { 'Very Safe': 5, Safe: 5, Moderate: 8, Unsafe: 4 };
+/** the lines this seat appended to each pool (LR6 added Safe v8 and Unsafe v7) */
+const ADDED = { 'Very Safe': 2, Safe: 3, Moderate: 2, Unsafe: 2 };
 const variantOf = (/** @type {string} */ pool, /** @type {number} */ vid) => (BLOCK.pools[pool] || []).find((/** @type {any} */ v) => v.vid === vid);
 
 /** the bar0- arm of the census probe's seed map (as `faultsDesks.test.js`), and the census's own plan for the 720 */
@@ -73,7 +76,8 @@ const PRINTS = [
   { pool: 'Very Safe', vid: 6, seed: 'bar0-village-calm-rand-36' },
   { pool: 'Very Safe', vid: 7, seed: 'r2r-village-8' },
   { pool: 'Safe', vid: 6, seed: 'r2r-town-4' },
-  { pool: 'Safe', vid: 7, seed: 'bar0-thorp-calm-rand-28' },
+  { pool: 'Safe', vid: 7, seed: 'r2r-thorp-28' },
+  { pool: 'Safe', vid: 8, seed: 'bar0-thorp-calm-rand-28' },
   { pool: 'Moderate', vid: 9, seed: 'bar0-village-calm-rand-46' },
   { pool: 'Moderate', vid: 10, seed: 'bar0-thorp-calm-rand-45' },
   { pool: 'Unsafe', vid: 5, seed: 'bar0-hamlet-calm-rand-29' },
@@ -109,7 +113,7 @@ describe('LAST-VARIETY item 1: two lines at the end of each DS-DEF-3 safety pool
   it('each pool keeps its old lines at their numbers and takes the two new ones at the NEXT numbers, declared', () => {
     const failures = collectSeedFailures(Object.keys(BASE_COUNTS), (pool) => {
       const vids = BLOCK.pools[pool].map((/** @type {any} */ v) => v.vid);
-      expect(vids, pool).toEqual(Array.from({ length: BASE_COUNTS[/** @type {keyof typeof BASE_COUNTS} */ (pool)] + 2 }, (_, i) => i + 1));
+      expect(vids, pool).toEqual(Array.from({ length: BASE_COUNTS[/** @type {keyof typeof BASE_COUNTS} */ (pool)] + ADDED[/** @type {keyof typeof ADDED} */ (pool)] }, (_, i) => i + 1));
     });
     expectNoSeedFailures(failures, 'the vids law: appended, nothing renumbered');
     for (const { pool, vid, marks } of NEW_LINES) expect(variantOf(pool, vid)?.marks, `${pool} v${vid}`).toEqual(marks);
