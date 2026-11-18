@@ -803,6 +803,35 @@ export function importsBroughtAtBirth(record, seed) {
   return add;
 }
 
+// ─── importWordsOfImportedGaps ─────────────────────────────────────────────────
+// BAR8 MARKS-2 item 5 (J's root gapImportedNoImport; the sixth chair's BRIEF-BAR8, 2026-11-17, the supply rule's BR3 (b): no
+// import is claimed that the imports do not name; vetoable by the owner). The gap writer reads a house's input brought in
+// where the food record imports it as well as where the imports list names it (`houseInputAtHand`: the fish a fishmonger
+// sells is the food record's import share), so "Fishmonger runs on imported fish" stood beside an imports list that named
+// no fish (r2r-village-36, r2s-indebted-village-2, r2s-religious_conversion-village-0). Each `imported` row's good whose
+// words (`CHAIN_INPUTS`) no import names gets its buyer's word (`IMPORT_WORD`), once, on the list that exists, under the
+// birth's own rule: no second word of one canonical good (`subsumeTradeGoods`; a tannery's "livestock" beside "Raw hides
+// and animal products" is that good already, and nothing is written). No draw is taken.
+/**
+ * @param {ReadonlyArray<Record<string, unknown>>} gaps the gaps as written @param {ReadonlyArray<unknown>} have the imports
+ * @returns {string[]} the words to add, in order
+ */
+function importWordsOfImportedGaps(gaps, have) {
+  /** @type {string[]} */
+  const add = [];
+  const list = () => [...have.map(String), ...add];
+  for (const g of gaps) {
+    if (!g || g.kind !== 'imported' || typeof g.institution !== 'string') continue;
+    const key = Object.keys(CHAIN_RAW_INPUT).find((k) => CHAIN_RAW_INPUT[k] === g.chain && Object.prototype.hasOwnProperty.call(IMPORT_WORD, k));
+    if (!key || !CHAIN_INPUTS[key]) continue;
+    if (list().some((imp) => CHAIN_INPUTS[key].words.some((w) => namesGood(imp, w)))) continue;
+    const word = IMPORT_WORD[key];
+    if (list().some((imp) => importWordOf(imp) === importWordOf(word))) continue;
+    if (subsumeTradeGoods([...list(), word]).length > subsumeTradeGoods(list()).length) add.push(word);
+  }
+  return add;
+}
+
 // ─── generateResourceAnalysis ─────────────────────────────────────────────────
 
 /**
@@ -873,6 +902,11 @@ export const generateResourceAnalysis = (
   );
   // BIRTH-3 (BR8 (2)): every story the birth picked, written into the rows the page already stores
   writeStoryRows({ ...storyRecord, resourceAnalysis: { imports } }, gaps);
+  // BAR8 MARKS-2 item 5 (BR3 (b)): a gap row "runs on imported X" stands beside an imports list that names X
+  if (economicState && Array.isArray(economicState.primaryImports)) {
+    const named = importWordsOfImportedGaps(gaps, economicState.primaryImports);
+    if (named.length) economicState.primaryImports = [...economicState.primaryImports, ...named];
+  }
   const resourceConditions = nativeResourceConditionRecords(config);
   // after the gaps and the town's settings: a complete row reads both (#457, #1163)
   const exports        = evaluateInstitutionDeps(exploitation, nativeInstitutions, gaps, resourceConditions,
