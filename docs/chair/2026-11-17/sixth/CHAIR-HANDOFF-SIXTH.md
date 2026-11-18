@@ -738,6 +738,31 @@ should be paused or archived by the owner's hand.
   refused where the force's text gives the night for its walking and only a gate for the day. **FR10** (the owner's
   questions 2 to 4): NOTHING BUILT: the one-way deal stays (BR13); the offices' one-string titles take no female form;
   a chain card does not say it runs on bought iron (BR18: a new word, not a fix).
+- **BR35 (06:55 UTC, 2026-11-18; DESKS-2 after its second reader: DO NOT LAND YET).** (1) THE READER'S HIGH: merged with the
+  close, `tests/domain/corpusEcoTailGuards.test.js`'s DS-ECO-12 row at r2r-village-4 is red ("expected [ 4 ] to deeply
+  equal [ 2 ]"): LEFT-KEYS K5 holds it on a constructed record (livestock a critical import beside a Dairy farmer and
+  LIVE grazing land, nothing of it imported), where DESKS-ECO's twin v4 is drawn and says "… needs {good} that the
+  country around it does not give, and none of it is brought in.": the claim the row guards against. No born town has
+  the state; the twin can say it. RULED: v4's WORDS ARE CORRECTED BY NAME BEFORE THE PIECE LANDS (the line has never held
+  them; its number and its declaration stand): "Some of {settlement}'s work needs more {good} than the country around
+  it gives, and none of it is brought in." (v1's own reading of the land; vetoable); the guard's row is re-keyed by
+  identity ON THE CLOSE'S FORM OF THE FILE (K5's claim on a record that brings the livestock in: prints 2; a second row on
+  the same record with nothing brought in: prints 4, the false words gone). (2) THE READER'S LOW 2: the internal row's
+  key reads the Legal row's own PRISON on the live roster too (today `compound.hasPrison`, stamped from the raw roster:
+  a ruined prison still sets it); one constructed arm. Both to DESKS-2, on its branch. (3) THE READER'S M1 (POOR v1
+  "Every essential is accounted for" beside an unmet need, where A6 refuses v3: `12d.enough.wide` 4·8 to 5·10 in the
+  150): THE CHAIR'S READING: a good the page lists under "Needed, and not brought in" is not accounted for: v1 is refused
+  wherever the need list is not empty (the need atom's key `any`) and takes ONE TWIN at the pool's next number:
+  FAULTS-NEED, an amendment of its item 4. (4) FAULTS-DESKS is told: a line's words may be corrected in place by a
+  ruling, so its numbering guard takes the COMMITTED generated output as its baseline (no second stored list) and
+  admits a correction only through one named allowance; its atom's prison half reads the live roster. (5) LEFT BY
+  NAME: L1 (the sawyer's secret "… the buildings made from them warp within a year" beside "nothing new goes up":
+  bar0-village-calm-rand-36; LOW, plausible); L3 (DEF-4 v7 "No one boss runs the crime…" beside a hidden hook: the
+  appearance against the DM's truth). (6) THE READER'S M2 IS THE LAST CLOSE'S LIST FOR THE DESKS' PIECE: the variant
+  pins 3033 to 3042 (four walkers); the shift register's five pins (the `vids` digest among them); the loaders 3501 to
+  3510 and 2794 to 2802; the cartesian unit set 658 to 662; the byte ratchet (four leaves over their committed size);
+  proseMoveGrammar CONTROL 4; the wiring census, the holder census and `wiringCensusDeclared` (10 rows); the manifest's
+  provenance and drift arms (704 to 842 rows); the estate's count 3682 to 3684.
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -2372,3 +2397,15 @@ should be paused or archived by the owner's hand.
   event; the three tie lines that hold someone inside declare the prison and no other line does. No assertion weakened;
   nothing under `src/`. THE FIVE PIECES' STATE: K-WATCH-2 LAND · MARKS-2 LAND (one guard arm coming) · PEOPLE-2 LAND ·
   the income and the PDF: after J-INCOME-2's three commits · the desks: READ-DESKS-2 still reads.
+- 06:55 UTC, 2026-11-18 · **READ-DESKS-2 SAID "DO NOT LAND YET"** (06:51; M on C = 8d7c2af33): its four resolutions at the merge
+  are the chair's rehearsal's own (the close's walker file; both sides kept in the three lists). HIGH 1, M1, L2:
+  RULING BR35 (section 6), sent at 06:58 to DESKS-2 (two commits on its branch), to FAULTS-NEED (its item 4 amended:
+  the key `any`, v1 refused wherever the need list is not empty, one twin at number 6) and to FAULTS-DESKS (the
+  guard's baseline and its one allowance for a ruled correction; the prison half live). WHAT THE READER PROVED: the
+  nine new lines: four print, each true in three towns (DEF-4 v7, POOR v5, ECO-12 v4, POW-5 council v6 in 49 towns of
+  the 720); five print in none of 910 (the granary's v5 and v6, DEF-6 None v4, merchantArmy v3, GEN-3 v7); every twin
+  pair admits BOTH in 0 towns; CL19 HOLDS (`vids-by-text.mjs`, 70e557d5b against M: pools 861 and 861, renumbered 0,
+  the same number with another text 0, added 9, removed 0); the internal row agrees with the Legal row in all 910;
+  13d at M: 6 towns of the 720, 5 of the 180; five hunks reverted one at a time, each red under a named test.
+  ALL FOUR READERS ARE IN: K-WATCH-2 LAND · MARKS-2 LAND · the income and the PDF: after three commits · the desks:
+  after two commits; PEOPLE-2 LAND by the chair's read. The chair lane is on origin at 62ab862c9.
