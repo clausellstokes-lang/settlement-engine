@@ -2058,3 +2058,16 @@ should be paused or archived by the owner's hand.
   LEFT-KEYS HANDED BACK FINAL (05:04; 012cf8eea; documents only since merge 3): merged as merge 7 (local). K6 over
   one render of the 720: 4r resource 3,348 to 1,715 flags (the rest listed in `K6a-STAYS.txt`); 8f.chain 5 to 0 (all
   five true); K7 and K9 proved by planted faults.
+- 05:06 UTC, 2026-11-18 · CLOSE-DOORS-1A IS DONE: 20 OF ITS 20 FILES GREEN (its final tip 11b581198; CL25 taken at f320aa07d:
+  `OVER_CLAIM_OWED` 1 to 9 with the eight named in the file, the base 45 untouched, the buy-back named): merged as
+  merge 8, e21f09e40 (local, over merge 7); `proseComposed.walker` 87 of 87 on the merged tree. THE FORM OF THE
+  FOUR ROWS IS READ (CLOSE-DOORS-1B's f0e60758a): a row is `[thing, reason, the text's first 120 characters, the
+  literal's 16-hex hash]` under `arm1[file]` of the widened register; a hand-written row takes an `after-base: …`
+  reason THAT THE REGISTER ITSELF NAMES in its `reasons` table (the precedents stand there in full: "banked BY HAND
+  … under the chair's ruling …, against the letter of the door's base rule": point 49's seven, R3-CODE-C's, the tail
+  close's PT1 rows). THE CHAIR'S FOUR TAKE A REASON OF THEIR OWN, written into that table with the owner's words
+  and their hour (not `close-true`, which names another close's measure): hashes c57566e5bfaaf1a1 (`armedForce`),
+  743cc96b12b6c45b and b50dee27dd04b260 (`garrison`), 85fc61848472a7ad (`prison`, a new file key
+  `src/domain/display/guardLineUnderTheLaw.js`); written with the door's own functions (`scanTree`, `bankRow`)
+  from a script outside the tree, after CLOSE-DOORS-1B's branch is merged; any count the walker pins moves in the
+  same commit.
