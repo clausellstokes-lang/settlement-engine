@@ -30,11 +30,11 @@ The step's declaration: `mutates: ['economicState', 'availableServices']` (with 
 
 | rule | the thirty (`--controls`) | the 150 | the 720 |
 |---|---|---|---|
-| 11b.fish | 13 → 9 (the service rows 4 → 0) | 3 → 1 (the services 2 → 0) | 720_FISH |
-| 11b.fishTitle | 7 → **0** | 3 → **0** | 720_TITLE |
-| LAW 11, all | 46 → 35 | 72 → 67 | 720_ALL |
+| 11b.fish | 13 → 9 (the service rows 4 → 0) | 3 → 1 (the services 2 → 0) | 69 → 40 (the service rows 29 → 0) |
+| 11b.fishTitle | 7 → **0** | 3 → **0** | 51 → 4 (the fisher's landing's own "Fresh fish", title and chip, in r2r-village-36 and r2s-religious_conversion-village-0: story bought-never, its pool names no alternative) |
+| LAW 11, all | 46 → 35 | 72 → 67 | 285 → 209 |
 
-- **Every BOUGHT town's 11b.fish service rows and titles: 0** in the thirty, the 150 and the 720.
+- **Every BOUGHT town's 11b.fish service rows and titles (the story `bought-used`: grounds spent, fish bought in): 0** in the thirty, the 150 and the 720. The 720's 4 titles left are two `bought-never` towns (no fish ground ever on the record), not BR24's story.
 - **What is left of 11b.fish is not this hunk's** (each is a line other seats hold): the rites income line ("The waters here are
   worked thin; rites keep the catch coming", `incomeLineSiblings.js`), the scenes ("Racks of drying fish", `arrivalProse.js`),
   the fishmonger's "Talks about the boats, the catch" (`titleSecretsPresentations.js`), the market's card "Where the day's
@@ -42,9 +42,9 @@ The step's declaration: `mutates: ['economicState', 'availableServices']` (with 
 - **CONTROLS: C20700 and C36970 turn clear** (the runner exits 3 BY DESIGN for those two: `controls off: 2`). Every other
   control as at the base; the thirty's CONTROLS block differs in those two lines only.
 - **NO OTHER RULE OF ANY RUNNER RISES.** Every runner of the checkout (runB, runC, runD, runE, runF, runG, runH, runI, runK)
-  prints byte-equal at base and tip over the thirty and the 150, OTHER_720. In runJ only the 11b block and the totals move (the
+  prints byte-equal at base and tip over the thirty and the 150, and the 720. In runJ only the 11b block and the totals move (the
   top-25 listing gains lines of 11d and 11e because the fish lines left it; their counts are unchanged).
-- **IDLE towns byte-equal:** IDLE_LINE
+- **IDLE towns byte-equal:** over the 720 the dumps differ in the 30 bought towns only; every other town, all 18 idle fish towns among them (r2r-village-45, r2r-metropolis-45, r2s-politically_fractured-metropolis-3, r2s-recently_betrayed-metropolis-0, r2s-plague_onset-thorp-2 named), is byte-equal to its base, rows and "Short of fish." marks alike. In the 150 and the thirty likewise (2 and 4 towns differ, all bought).
 - **No "Preserved fish" row in a town whose fishers land their own catch** (the auditor's `local` story): 0 at the tip over the
   720 (the Fish market's "Preserved fish" stands in the 30 bought towns and in the 162 inland towns of the A-11 swap, story
   `none`, as at the base).
@@ -74,7 +74,7 @@ only ("Lodging", "Food", …), no row, at base and tip alike: no journal line na
 
 **THE SHARED PAGE (N4):** the guard's N4 arm holds that `toPublicSafe` and the share veil (`projectShareVeil`) keep the owner's
 fish market rows, row for row, in the four bought and the four idle anchors; over the 720, 150 and thirty the stored row is
-the one both pages print (the public record carries `availableServices` whole: SHARED_LINE).
+the one both pages print (the public record carries `availableServices` whole: measured over all 900 tip records of the 720, the 150 and the thirty, `toPublicSafe` and `projectShareVeil(toPublicSafe(…), null)` keep the fish houses' rows byte-equal to the owner's in 900 of 900 (244 of them print "Preserved fish")).
 
 ## 4. The registers, each row word for word with its measure
 
@@ -131,11 +131,32 @@ tip 5 of 5.**
 
 ## 7. N3, the pipeline's contract (base and tip)
 
-NET_N3
+Each at base and tip (`n3.<tree>.json`, the same five files): **the same six names red at both, nothing red at the tip that is green at the base.**
+- `pipelineContract.test.js`, `isolatedTrade.test.js`, `publicProseEquality.test.jsx`: green at both.
+- `pipelinePinnedMode.test.js`: A1 (the null change), A2 (the lift moves nothing), A5 (EM-R1b) red at both, byte-equal messages (the stored golden corpus).
+- `generationForkCensus.test.js`: A1 (the control row's hash) and A6 (fnv1a32 external callers 54 against 23) red at both, byte-equal messages: stored figures. **A4 red at both, its message changed: base 2 cells (`economyReconcilePass|economicState`), tip 5 (those two and the three `economyReconcilePass|availableServices` cells of section 4, left by name).** A3e green at both (red only between the hunk and its register row).
 
 ## 8. The net (base 917c915bc and tip, each gate alone)
 
-NET_TABLE
+| gate | base | tip |
+|---|---|---|
+| `npm run typecheck:domain:strict` | 0 (1,113, ceiling 1,113) | 0 (1,113, ceiling 1,113) |
+| `npm run typecheck:ratchet` | 0 (167, ceiling 167) | 0 (167, ceiling 167) |
+| `npx eslint` on the changed files (the step, the register, the contract, bar2/bar3, the guard) | 0 | 0 |
+| `npx vitest run tests/architecture` | 0: 21 files, 347 tests | 0: the same |
+| `tests/lint` BY NAME | 78 failing names | **the same 78 names** (`ledgerCitationIntegrity` differs only by the checkout's path: no local `review-fixes-2026-07-08` in a scratch tree) |
+| `tests/joins` | 0: 34 files, 425 tests | 0: the same |
+| `vendorPdfLazy -t "WEAVE ST-2"` | 0: 12 passed | 0: 12 passed |
+| `tests/components/bar7*` | 0: 16 tests | 0: 16 tests |
+| the rounds' guards (`tests/domain/bar5*`, `bar6*`, `tests/generators/bar5*`, `bar6*`, `bar8Rows`, `tests/domain/leftMarks.test.js`) | 1 red: `bar6PowersCards` "the power desk is drawn at print only: no generator imports it" | the same 1, the same message |
+| my guard `tests/generators/bar8FishRows.test.js` | 2 of 5 red | 5 of 5 |
+| `presumption-classes-door.mjs --check`, last line | hits 1787 · banked 1938 · fresh 0 · stale 151 · ceiling 1938 | the same |
+| `presumed-things-door.mjs --check`, last line | fresh 38 · stale 72 · first-register stale 7 · banked 4688 · strips fresh 0 stale 0 banked 107 | the same |
+
+`tests/lint` BY MESSAGE (every failing test's message, the checkout's path masked): 76 of the 78 byte-equal. **Two change their cause under the same name, both because my guard is a new file; each is a stored figure in a file not on my list, and each is red at the base: NAMED, not touched.**
+- `mutationCoverageManifest.test.js` TOTALITY: its gap list (red at the base with `bar5WorldLines`, `bar7Lines`, `bar7Scenes`, `bar8Rows`, `rareSecretsLaw`, …) gains `tests/generators/bar8FishRows.test.js`. The cure is an entry in `scripts/mutation-coverage-manifest.json` (or a planted regression in `scripts/mutation-sweep.sh`): the close's, as J-ROWS's `bar8Rows` is.
+- `sovereigntyLightingContract.walker.test.js` THE CENSUS: "the estate's file count moved": base 3680 against 3641, tip 3681 (my one new test file). A stored figure, the close's.
+- The register walkers I touched: `generationForkRegistry.contract` (A2, A3s) green at base and tip; `heldKeyWriterCensus.walker` green at both with the same message. No walker, register or roster test changes its cause otherwise.
 
 ## 9. What I left, by name
 
@@ -145,7 +166,8 @@ NET_TABLE
    (`src/data/arrivalProse.js`, `src/domain/facts/tradeAtWork.js`), the fishmonger (`src/data/people/titleSecretsPresentations.js`),
    the market's card (`src/data/institutionDescVariants.js`): not my files.
 3. The fisher's landing's "Fresh fish" (its own pool, "Fisher's Landing", names no `inlandAlternative`): 1 bought town of the
-   720 (r2r-village-11, beside its market's now "Preserved fish"). A catalogue change; not my file.
+   720 (r2r-village-11, beside its market's now "Preserved fish"; it prints under its house's "Short of fish.", so no rule counts
+   it) and the two bought-never towns above. A catalogue change; not my file.
 4. A bought FISHING COMMUNITY (a taker, its pool resolves to the Fish market's) would swap too, by its pool's alternative:
    none occurs in the 720, the 150, the thirty or the 525 (the one thorp with a spent fishery, r2s-plague_onset-thorp-2, is
    idle). Named for the reader.
