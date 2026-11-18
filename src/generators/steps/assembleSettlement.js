@@ -538,11 +538,21 @@ function readHouseDescsLate(settlement) {
   const noun = tierNounFor(settlement.tier);
   const spoken = new Map(keys.map((k) => [speakTierNoun(k, noun), k]));
   const facts = factsOf(settlement);
+  // FAULTS-ROWS (the chair's ruling FR20 (3)): the draw-time sibling sets FIRST, on the final facts. The draw reads only the
+  // FORCED crises (`assembleInstitutions.js :: settledStressTypes`: the confirm pass may drop an emergent one), so an emergent
+  // crisis that survived is read here, by the twins that exist (no new text); the first admitted member, as the draw resolves
+  // it (none admitted: kept and noted). Then the late table reads the result, as before.
+  const drawSpoken = new Map(Object.keys(DESC_VARIANT_SIBLINGS).map((k) => [speakTierNoun(k, noun), k]));
   for (const inst of settlement.institutions) {
+    const drawKey = inst && typeof inst.desc === 'string' ? drawSpoken.get(inst.desc) : undefined;
+    if (drawKey !== undefined) {
+      const drawn = resolveSibling(drawKey, DESC_VARIANT_SIBLINGS, { facts, poolId: 'institutionDescVariants:DESC_VARIANT_SIBLINGS', surface: 'institutions', drawKind: 'H' });
+      if (typeof drawn === 'string' && drawn !== drawKey) inst.desc = speakTierNoun(drawn, noun);
+    }
     const key = inst && typeof inst.desc === 'string' ? spoken.get(inst.desc) : undefined;
     if (key === undefined) continue;
     const text = resolveSibling(key, DESC_LATE_SIBLINGS, { facts, poolId: 'institutionDescVariants:DESC_LATE_SIBLINGS', surface: 'institutions', drawKind: 'H' });
     if (typeof text === 'string' && text !== key) inst.desc = speakTierNoun(text, noun);
   }
 }
-import { DESC_LATE_SIBLINGS } from '../../data/institutionDescVariants.js'; import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // TAIL-HOUSES-5 (H20): at the END, as above (this file's writes are cited by LINE)
+import { DESC_LATE_SIBLINGS, DESC_VARIANT_SIBLINGS } from '../../data/institutionDescVariants.js'; import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // TAIL-HOUSES-5 (H20): at the END, as above (this file's writes are cited by LINE)

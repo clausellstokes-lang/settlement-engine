@@ -283,3 +283,69 @@ describe('FAULTS-ROWS item 6: the fish market\'s card says the fish is bought in
     }
   });
 });
+
+// FR20 (3), 2026-11-18: A CRISIS THE DICE ROLLED IS READ BY THE DRAW-TIME TWINS. The draw reads only the FORCED crises
+// (`assembleInstitutions.js :: settledStressTypes`), so a siege that emerged and survived the confirm pass left the toll bridge's
+// steady fees, the burial grounds' carts at dusk and the fair's merchants printed under it. THE CURE
+// (`assembleSettlement.js :: readHouseDescsLate`): the draw-time sibling sets (`DESC_VARIANT_SIBLINGS`) are resolved again
+// FIRST, on the final facts. No new text; no draw moves.
+describe('FAULTS-ROWS FR20 (3): an emergent siege is read by the draw-time siege twins', () => {
+  /** @type {Map<string, any>} */
+  const BORN20 = new Map();
+  /** [seed, the houses that read their siege twin]: a siege rolled by the dice (random stress), not forced. */
+  const EMERGENT = Object.freeze([['r2r-town-2069', ['Toll bridge', 'Annual fair']], ['r2r-city-2045', ['Toll bridge', 'Burial grounds and charnel house']], ['r2r-city-2122', ['Toll bridge', 'Burial grounds and charnel house']]]);
+  /** A forced siege: the draw read it, the siege twin as before. */
+  const FORCED = Object.freeze([['r2s-under_siege-town-2', ['Annual fair']]]);
+  /** THE SWEEP: fresh random-stress towns and cities; the law holds on each. */
+  const SWEEP = Object.freeze([...Array.from({ length: 30 }, (_, k) => `r2r-town-${2050 + k}`), ...Array.from({ length: 30 }, (_, k) => `r2r-city-${2040 + k}`)]);
+  /** @type {(t: any) => any} */ let factsOfFn = () => ({});
+  /** @type {any} */ let SIB = {};
+  /** @type {(s: string, n: string) => string} */ let speak = (s) => s;
+  /** @type {(t: string) => string} */ let nounOf = (t) => t;
+  beforeAll(async () => {
+    const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    factsOfFn = (await import('../../src/domain/facts/factsOf.js')).factsOf;
+    SIB = (await import('../../src/data/institutionDescVariants.js')).DESC_VARIANT_SIBLINGS;
+    speak = speakTierNoun; nounOf = tierNounFor;
+    await boundary.loadGenerationLawPayloads();
+    for (const [seed] of [...EMERGENT, ...FORCED]) BORN20.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }));
+    for (const seed of SWEEP) if (!BORN20.has(seed)) BORN20.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }));
+  }, 600_000);
+
+  /** The draw-time sets that hold a siege twin: [original, siege twin]. */
+  const siegeSets = () => Object.entries(SIB).map(([k, set]) => [k, /** @type {any[]} */ (set).find((l) => l.twinOf === k && (l.crisis || []).includes('under_siege'))?.text]).filter(([, t]) => t);
+  /** @param {any} town */
+  const besieged = (town) => [...(factsOfFn(town).crisis?.kinds || [])].includes('under_siege');
+  /** @param {any} town @param {string} house */
+  const descOf = (town, house) => (town.institutions || []).find((/** @type {any} */ i) => i.name === house)?.desc;
+
+  it('EMERGENT and FORCED: each named house prints its set\'s siege twin under the siege', () => {
+    const failures = collectSeedFailures([...EMERGENT, ...FORCED], ([seed, houses]) => {
+      const town = BORN20.get(seed);
+      expect(besieged(town), `${seed}: under siege`).toBe(true);
+      const noun = nounOf(town.tier);
+      for (const house of houses) {
+        const pair = siegeSets().find(([orig, twin]) => [speak(orig, noun), speak(twin, noun)].includes(descOf(town, house)));
+        expect(pair, `${seed} ${house}: a siege set's line`).toBeDefined();
+        expectAbsentWithAnchor([descOf(town, house)], speak(pair[0], noun), speak(pair[1], noun), `${seed} ${house}`);
+      }
+    });
+    expectNoSeedFailures(failures, 'every besieged house of a siege set reads its siege twin');
+  });
+
+  it('THE SWEEP: no besieged town keeps a non-siege original of a set that holds a siege twin; no siege twin stands without a siege', () => {
+    const failures = collectSeedFailures(SWEEP, (seed) => {
+      const town = BORN20.get(seed);
+      const noun = nounOf(town.tier);
+      const descs = (town.institutions || []).map((/** @type {any} */ i) => String(i.desc));
+      for (const [orig, twin] of siegeSets()) {
+        const wrong = besieged(town) ? speak(orig, noun) : speak(twin, noun);
+        expect(descs.includes(wrong), `${seed}: ${besieged(town) ? 'the original under a siege' : 'the siege twin with no siege'}: ${wrong.slice(0, 60)}`).toBe(false);
+      }
+    });
+    expectNoSeedFailures(failures, 'the siege is read by every siege set, and only under a siege');
+    expect(SWEEP.filter((seed) => besieged(BORN20.get(seed))).length, 'the sweep holds a besieged town').toBeGreaterThan(0);
+  });
+});
