@@ -249,3 +249,30 @@ describe('BAR8-DESKS-2 · 15e: `trade at work: building`, read the same on every
     }), 'the building towns and the towns with none');
   }, 240_000);
 });
+
+// ---------------------------------------------------------------------------------------------------------- 11c, the family
+// BAR8-DESKS-2 (2026-11-18; DESKS-ECO's second reader, M1; the chair's ruling BR28 (6)): THE FIVE TOWNS OF THE THIRTY AND THE
+// 150 WHOSE ATOM HOLDS ONLY BY THE FAMILY MATCH (no arriving import names the good: "iron ore" beside "Iron", "gold/silver ore"
+// beside "Precious metals"), measured at the base 4446aecb5 over the 180 births (41 more of the 720). The leaf's family table is
+// a COPY of the need list's (`tradeListDisplay.js :: NEED_FAMILY_WORDS`), so it is held equal here IMPORT BY IMPORT to the page's
+// own `needMetBy`, and the counterfactual (the family imports struck) turns the atom false.
+const FAMILY_ONLY = Object.freeze(['bar0-town-occupied-rand-27', 'bar0-city-wartime-rand-32', 'bar0-city-wartime-rand-34', 'bar0-town-occupied-rand-35', 'bar0-city-wartime-rand-37']);
+describe('BAR8-DESKS-2 · 11c: the import leaf\'s family match, held to the need list\'s', () => {
+  it('the five towns hold the atom by the family alone, the leaf agrees with `needMetBy` on every import, and striking the family imports turns it false', () => {
+    expectNoSeedFailures(collectSeedFailures(FAMILY_ONLY, (seed) => {
+      const s = /** @type {any} */ (bornBar(seed));
+      const good = criticalImportGoodOf(s);
+      const imports = /** @type {string[]} */ ([...(s.economicState?.primaryImports || [])]).map(String);
+      expect(good, `${seed}: the lens names a good`).toBeTruthy();
+      expect(imports.some((i) => i.toLowerCase().includes(good.toLowerCase())), `${seed}: no import names "${good}"`).toBe(false);
+      expect(criticalImportBroughtInOf(s), `${seed}: brought in, by the family`).toBe(true);
+      const withImports = (/** @type {string[]} */ list) => ({ ...s, economicState: { ...s.economicState, primaryImports: list } });
+      for (const imp of imports) {
+        expect(criticalImportBroughtInOf(withImports([imp])), `${seed}: "${good}" met by "${imp}"`).toBe(needMetBy(good, imp));
+      }
+      const family = imports.filter((imp) => needMetBy(good, imp));
+      expect(family.length, `${seed}: an import of the family`).toBeGreaterThan(0);
+      expect(criticalImportBroughtInOf(withImports(imports.filter((imp) => !family.includes(imp)))), `${seed}: the family struck`).toBe(false);
+    }), 'the family match');
+  }, 240_000);
+});
