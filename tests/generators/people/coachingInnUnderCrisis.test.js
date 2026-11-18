@@ -67,7 +67,16 @@ describe('POWERS-14 · the towns read on the page: no coaching inn under a siege
     /** seed → the keeper's impression the town must print */
     const expected = /** @type {Record<string, string>} */ ({
       // false before (read on the page), the line its crisis admits after
-      'r2s-under_siege-town-1': CAUTIOUS, 'r2s-famine-city-1': TRANSACTIONAL, 'r2s-famine-metropolis-3': TRANSACTIONAL,
+      // BAR8-PEOPLE-2 PART A (2026-11-18, re-keyed BY IDENTITY; rule R8; ruling BR27 (1)): r2s-famine-city-1 left the set. Under
+      // K-PEOPLE's 14f holder deal (0c135c83a: `src/data/stressInstitutionEffects.js`'s holder rows, read in
+      // `src/generators/npcGenerator.js`) its coaching-inn keeper now keeps a famine crisis secret ("Has documentation proving the
+      // famine was made worse…"), and a compromised card presents by the generic line ("Efficient and correct in every
+      // interaction…"), true under the famine: the page is right, the anchor moved. The same claim on another famine town that
+      // still bears it: r2s-famine-city-10, measured at 20b44f97c: its keeper keeps a title secret and deals the transactional
+      // line, and with the welcoming line's `crisis: famine` exclusion reverted in a scratch tree it deals the welcoming line
+      // (false before the cure). Of the reader's candidates, town-5, city-5, city-6 and city-9 deal the transactional line with
+      // the exclusion reverted too (never false: not this claim); city-10, metropolis-4, -5 and -10 bear it.
+      'r2s-under_siege-town-1': CAUTIOUS, 'r2s-famine-city-10': TRANSACTIONAL, 'r2s-famine-metropolis-3': TRANSACTIONAL,
       'r2s-under_siege-metropolis-0': CAUTIOUS, 'r2s-under_siege-metropolis-3': CAUTIOUS, 'r2r-metropolis-14': CAUTIOUS,
       // the guard towns: read true, kept
       'r2r-city-0': WELCOMING, 'r2s-occupied-city-1': WELCOMING, 'r2s-plague_onset-city-2': WELCOMING, 'r2s-famine-metropolis-0': TRANSACTIONAL,
