@@ -179,9 +179,10 @@ describe('every culture-keyed honorific is pinned (item 14)', () => {
       'the headman': ['Chieftain', 'Chieftain'], 'the priest': ['Druid', 'Druid'], 'the elder priest': ['Druid', 'Druid'],
       'the high priest': ['Druid', 'Druid'],
     },
+    // re-keyed 2026-11-17 (BAR8 K-PEOPLE 14g, ruling BR14, C36170): the arabic lord is the pair Emir / Emira
     arabic: {
       'the eldest': ['Sheikh', 'Sheikh'], 'the village elder': ['Sheikh', 'Sheikh'], 'the headman': ['Sheikh', 'Sheikh'],
-      'the lord': ['Emir', 'Emir'], 'the governor': ['Wali', 'Wali'], 'the royal governor': ['Wali', 'Wali'],
+      'the lord': ['Emir', 'Emira'], 'the governor': ['Wali', 'Wali'], 'the royal governor': ['Wali', 'Wali'],
       'the priest': ['Imam', 'Imam'], 'the elder priest': ['Imam', 'Imam'], 'the garrison commander': ['Qaid', 'Qaid'],
     },
     norse: {
