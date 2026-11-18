@@ -1981,3 +1981,17 @@ should be paused or archived by the owner's hand.
   of the sand export; the cure re-sites every dry town that exports coal, ore or stone: the map work, behind the
   content rounds). WHAT HAPPENS TO THEM: (1) lands right after the deploy; (2) and (3) the next content round; (4)
   the map work, sooner on the owner's word.
+- 04:53 UTC, 2026-11-18 · THE SIGNING RECORD'S DRAFT IS READ BY THE CHAIR (CLOSE-DOORS-2's 61620a401;
+  `docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json`, 17.5 KB): `ownerWords` the owner's
+  sentence of 03:03:46 UTC verbatim; `odqRow` §934.105 with the chair's question of 02:47:31 set out as asked; the
+  cause by seat over `600b7683a..70e557d5b`; four surfaces (the golden 525, the fence 1, the dossier manifest 2, the
+  herald 475), each one's predicted rows measured through its own door with a scratch record (nothing written); THE
+  FAMILY CHECK, 23 rows, each with its declarers' file, line and count: the ties' tension words 276, the powers'
+  descriptions 241, the secrets 168, the gaps 129, the imports 117, the services 102, the cultural identity 86, the
+  hooks 85, the exports 75, the arrival scene 74, the ties' descriptions 63, the ties' kind 57, the goals 54, the
+  history 54, the reason 38, the issues and traces 37, the food security 35, the conflicts 29, the presentations
+  24, the income 10, the prominent tie 10, one structural position, one temper: "no family undeclared; no family
+  moved in more rows than its declarers count". ACCEPTED AS THE FORM OF THE SIGNING, one wording to make true (the
+  branch is cut at 70e557d5b and Part 1's tip is merged into it; the draft said "cut from Part 1's final tip"). TWO
+  PLACEHOLDERS ARE FILLED AT THE WRITE: Part 1's tip and the hour of "SIGN". CLOSE-SWEEP (04:51): its item for the
+  four was withdrawn with no commit ever made; it finishes its hand-back.
