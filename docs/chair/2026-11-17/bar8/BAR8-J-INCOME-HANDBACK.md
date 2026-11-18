@@ -173,3 +173,40 @@ line's tip: presumption "hits 1786 · banked 1938 · fresh 0 · stale 152"; pres
 AT THE MERGE my guard, the tests I touched or my cures reach (`bar6MarksLaw8`, `bar4CorpusEcoKinds`, `incomeLinesSayTheRecord`,
 `bar7EconTab`, `leftChainCards`), `tests/architecture` and `tests/joins`: 825 of 826 green. The one red is FS1 (a) of
 `bar4CorpusEcoKinds`, made untrue by the cure itself (section 4).
+
+## 7. AFTER THE CHAIR'S MESSAGES OF 02:56, 03:02 AND 03:11 UTC (commit `660f488d6`; one push, the push discipline)
+
+1. **THE FIVE ROWS (BR26)** are in `cc7ebb708` (section 6: the five rows word for word, both doors at base's figures, the
+   presumption walker's "no NEW undeclared line" green).
+2. **THE ROSTER (the chair's ruling): THE LEAF READS THE LIVE ROSTER THROUGH THE ONE FILTER.** `incomeOrdinaryLines.js` imports
+   `institutions/institutionRoster.js` (import-free itself, eager: EG1 holds), and `ordinaryIncomeLineOf` reads
+   `liveInstitutions(town)`. The exempt row of `df4e0e85a` is removed. PROOF: `tests/architecture` green (the layer law lets
+   `src/pdf` reach the leaf as before); the stored records of the thirty, the 150 and the 720 are BYTE-EQUAL to the tip's before
+   the change (fresh births at `660f488d6` against the render corpora of `771a1a945`); `ruinFilterRoster` is back to its figure
+   at 99ca9ad51 ("expected 115 to be 113", that one red; the leaf names `.institutions` nowhere in code, so it is no reader);
+   the guard's new constructed arm: a town whose only weavers' house is ruined prints no "Cloth is woven or finished here."
+   (red before the import), and a ruined sawmill gives the plain timber line. THE SMELTER'S ARM THE CHAIR NAMED CANNOT BE RED:
+   the metal case reads no roster at all (`METAL_SHORT_LINE` gives `METAL_WORKED_LINE` without asking, the short twin being
+   drawn only beside a forge house), so the arm is the weavers' and the sawmill's, the two cases that read it. PDF-2b's copy
+   of the leaf is the one at `9d344fc9c`: the chair takes mine at the merge.
+3. **FS1 (a) (BR33)** is re-written in `tests/domain/bar4CorpusEcoKinds.test.js` to the claim that now holds: its four towns
+   (r2r-town-6, r2r-city-35, r2r-metropolis-11, r2s-wartime-city-1) print the bought line and not the rites line
+   (`expectAbsentWithAnchor`), with a dated note naming FS1 (a) retired by BR33. Green. CAN THE RITES LINE STILL PRINT? NO, BY
+   CONSTRUCTION: no writer returns `FISH_RITES_LINE` (the one arm that did is retired; `trueIncomeDesc`'s fished-out branch
+   returns the bought line or ''). Its text stays declared in `INCOME_STATE_SIBLINGS` (the fish family keeps four live lines).
+   A DEAD LINE, NAMED FOR THE CLOSE'S LIST, NOT DELETED.
+
+**THE BUTCHERS' CASE (BR31): LEFT BY NAME.** My count is at the chair's 380,000 line, so I did not start it. It is r2r-city-43
+of the 720 and bar0-town-calm-rand-46 of the thirty (C34109): the butchers bare beside "livestock for meat and draft" needed,
+while the imports hold "Raw hides and animal products". MY ITEM 4 ALREADY CLEARS C34109 and r2r-city-43's need for another
+reason: both towns' fairs print a livestock auction (section 1; C34109 clear at the tip). So the one-good rule's own measure
+(every need it would drop, the STOP test for a hide-only import, the roots' `gapImportedNoImport` for livestock and hides) is
+untaken and goes to the next seat with `tradeListDisplay.js`.
+
+**THE NET FOR THESE COMMITS, AT A SCRATCH MERGE WITH THE FROZEN LINE TIP 70e557d5b** (clean automatic merge, then aborted):
+the older tests that name `ordinaryIncomeLineOf`, `incomeOrdinaryLines`, `liveInstitutions` or FS1 (16 files, with my guard,
+`bar6MarksLaw8`, `bar4MarkPromise` and `tests/architecture`): 587 of 587 green. All of `tests/lint`, BY MESSAGE, against the
+line tip alone: the same 69 reds. Two messages differ, each by one: the estate's file count (the leaf) and the mutation
+manifest's list (my guard, beside the other seats' guards it already lists), both the close's, named. `ruinFilterRoster` now
+reads exactly the line tip's message. The doors at the merge read the line tip's figures: presumption "fresh 0 · stale 152";
+presumed things "fresh 38 · stale 72".
