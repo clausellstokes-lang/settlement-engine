@@ -5,7 +5,6 @@ import {
   hasCriminalInstitution,
   lawlessRow,
   materializeInstitutionServiceRolls,
-  THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
 } from './services/serviceRollMaterialization.js';
 import {
   resolveGenerationWorldLaw,
@@ -344,7 +343,7 @@ export const generateAvailableServices = (
   if (crimeTypes.has('Lawlessness')) {
     addCrimeService(
       NO_LAW_BRING_COIN,
-      THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
+      lawlessRow(institutions, buckets).desc, // FAULTS-WATCH item 1 (r2r-city-41): the overlay's own reading, as its two push sites read it
       '(lawless)'
     );
     addCrimeService(
