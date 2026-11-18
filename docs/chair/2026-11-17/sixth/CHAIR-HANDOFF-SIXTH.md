@@ -273,6 +273,16 @@ should be paused or archived by the owner's hand.
   ACCEPTED: `factVocabulary.js` outside the seat's table (BR17's two keys live there: one line); L1 (a DM's custom
   crisis alone refuses both stable rows: the safe side); L2 (three besieged towns print "Forge smoke hangs over
   everything" with unmarked smiths beside an Impaired chain card: BR17's "no mark" reading, BR18's card).
+- **BR26 (01:27 UTC, 2026-11-18; BY THE OWNER'S WORD, after the chair's own permission check had refused the chair's ruling).** J-INCOME-2's
+  leaf moves three ordinary income lines, text unchanged, from `src/generators/economy/incomeLineSiblings.js` to
+  `src/domain/display/incomeOrdinaryLines.js`; two shrink-only debt registers bank those lines under the old path (3 rows
+  of `tests/lint/presumptionClasses.register.json`, 2 of `tests/lint/presumedThings.widened.register.json`) and their
+  doors have no way to move a row. The chair put three ways to the owner (move the entries by hand; leave the alarm to
+  the close; declare the lines) and recommended the first. THE OWNER: "Move the entries". SO: the seat moves the five
+  rows to the leaf's path BY HAND, the same row (class, status, hash, text), nothing else in either file, the ceilings
+  equal, the doors' last lines equal to its base (fresh 0, the same stale count); the five rows before and after go in
+  its hand-back and on the owner's list. IT IS NOT A PRECEDENT FOR BANKING A NEW LINE: only a banked line that moved with
+  its text unchanged.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -1104,3 +1114,6 @@ should be paused or archived by the owner's hand.
   ASKED IN PLAIN WORDS how the rows are to follow the moved lines (by the seat's hand; at the close with the stored
   figures; or the lines declared so that they leave the register by their cure). UNTIL THEN: J-INCOME-2's branch and
   PDF-2's second branch each read 3 fresh rows by the door, NAMED; a landing of either is compared BY MESSAGE.
+- **01:25 UTC. THE OWNER ANSWERED THE REGISTER QUESTION: "Move the entries".** Ruling BR26 (section 6) is issued BY THE OWNER'S WORD and sent to J-INCOME-2 (01:27; the
+  chair's own check let it through this time); PDF-2 is told it still touches no register. THE CHAIR'S NOTES WERE ON
+  ORIGIN AT e87772af4 (01:24).
