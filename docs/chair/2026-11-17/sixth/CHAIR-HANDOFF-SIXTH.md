@@ -1754,3 +1754,20 @@ should be paused or archived by the owner's hand.
   352/515/709; the site-coherence inventory under CL15); its 25 fresh presumed-things hits have not come yet. A
   NOTE FOR THE CHAIR'S OWN COUNT: `list_events` with kind assistant returns every thinking signature: read a
   seat's state by `get_session` and its messages, not by its events.
+- 04:20 UTC, 2026-11-18 · THE CLOSE'S THIRD MERGE, LOCAL: LEFT-KEYS at 9bbc4c19d (pushed 04:14; twelve commits; no `src/`;
+  tests, three page-law helpers, two audit probes under `docs/chair/`; hand-back
+  `docs/chair/2026-11-17/left/LEFT-KEYS-HANDBACK.md`, K1 to K5, K8, K9 so far; K6 and K7 are committed and not yet in
+  it): merged as b7435c2ff on `lane/landing-close-2026-11-18`. EVERY RE-KEY IS BY IDENTITY WITH A PROOF IT CAN FAIL
+  (the src hunk it guards reversed in scratch): K1 four NOT anchors the supply rule bought in (one on a constructed
+  record: no Fishmonger stands without fish in the 720, the 150 or 3,000 soak towns); K2 `tailHouses1Gaps` 19 pairs
+  kept (8 as they were, 11 re-keyed), 12 retired (no Fishmonger and no Smelter lacks its input in either
+  population); K3 the two besieged KEEP rows retired under BR11 and BR12 and the true claim pinned (THE SEAT'S
+  COUNT: the 720 holds 31 besieged towns, not the brief's 96: 15 print the iron share "Curtailed by the siege.", 16
+  print none, 0 bare; the 150: 30, 16, 14, 0: no fault to name); K4 `needMetUnderAnotherName` to r2r-village-3; K5
+  DS-ECO-12's row on a constructed record and two Services MARKED rows; K8 the ratchet's watchdog 600 s to 1,800 s
+  (BR22; no assertion changed); K9 rule 11g reads the plural story line. LEFT BY THE SEAT FOR THE CLOSE:
+  `editCorpusRatchet` A7 is a stored figure ("the edits that DO reach a reading": pinned [695, 275, 2173], fresh
+  [695, 275, 2176]): CLOSE-DOORS-1B's, with its cause. The changed tests and every test that uses the changed
+  page-law helpers are running on the merged tree. THE PLAN FOR PUSHES: the merge branch
+  `lane/landing-close-2026-11-18` is pushed for the seats to fetch (no CI runs on a lane branch); THE LINE ITSELF
+  IS PUSHED ONCE, at the end, as a fast-forward to the close's final tip: one CI run on pull request #75.
