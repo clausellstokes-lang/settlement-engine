@@ -120,6 +120,11 @@ should be paused or archived by the owner's hand.
 - **2026-11-18, 04:41:48 UTC:** "record the four" (the four fresh presumed-things rows that two permission checks had
   refused to write on the chair's reading: the bowyers' siege twin, the hired company's two siege twins, the
   court-and-prison twin; see CL23 in section 6).
+- **2026-11-18, 05:10:53 UTC (after the chair's list of the after-deploy work):** "so everything except the new read is
+  the real after deploy work. everything other than that should be before deploy." TWO READINGS: (R2, the words as
+  written) the new thirty-town read is run BEFORE the deploy and the rest stays after; (R1) only the read is after
+  the deploy and every built fix lands before it. THE CHAIR ASKED WHICH, in one line ("read" or "fixes"), and changed
+  nothing until the answer: the close goes on under both.
 
 ## 2. What changed since the fifth chair's last state (13:54 UTC), read from origin
 
@@ -2105,3 +2110,7 @@ should be paused or archived by the owner's hand.
   rows to be given declarations; variety owed in two pools); (7) what is tabled for the owner's word (the map work,
   the worker file's size, the slow ratchet arm); (8) the owner's own steps after the deploy (the edge functions, the
   release proof, one save a shared town, the old account's sessions). THIS LIST IS THE CHAIR'S AFTER-DEPLOY QUEUE.
+- 05:11 UTC, 2026-11-18 · THE OWNER'S WORD OF 05:10:53 UTC ON THE ORDER OF WORK IS AMBIGUOUS AND WAS PUT BACK IN ONE QUESTION
+  (section 1 holds both readings). Under R2 a PREP seat builds the eighth read's packets from the close's final tree
+  (the seventh's tools: `lane/read7-prep-2026-11-17`) before the owner deploys; under R1 the five built pieces are
+  read and landed before the deploy and the golden is signed once, after them. NEITHER IS STARTED.
