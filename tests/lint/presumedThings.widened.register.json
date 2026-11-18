@@ -5199,78 +5199,6 @@
     "ff2573e4e1329738"
    ],
    [
-    "armedForce",
-    "family",
-    "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, ",
-    "a2cdeb4bcbf27797"
-   ],
-   [
-    "quarters",
-    "word",
-    "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.",
-    "c6fded0acf9197fb"
-   ],
-   [
-    "armedForce",
-    "after-base: close-true",
-    "A billet and contracting office for a band of professional soldiers available between campaigns. With the roads held the",
-    "38ba15e3c2a308e4"
-   ],
-   [
-    "armedForce",
-    "after-base: close-true",
-    "A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the",
-    "743cc96b12b6c45b"
-   ],
-   [
-    "armedForce",
-    "after-base: close-true",
-    "Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d",
-    "b50dee27dd04b260"
-   ],
-   [
-    "armedForce",
-    "after-base: close-true",
-    "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. With ",
-    "d163baaf3dfdbc97"
-   ],
-   [
-    "temple",
-    "after-base: close-true",
-    "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h",
-    "522f88620a90790f"
-   ],
-   [
-    "quarters",
-    "after-base: close-true",
-    "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h",
-    "522f88620a90790f"
-   ],
-   [
-    "temple",
-    "after-base: close-true",
-    "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.",
-    "5c421f2f763ebdb8"
-   ],
-   [
-    "quarters",
-    "after-base: close-true",
-    "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.",
-    "5c421f2f763ebdb8"
-   ],
-   [
-    "temple",
-    "after-base: close-true",
-    "The great church of the metropolis. The region's chief religious authority sits here, and the faithful of the city fill ",
-    "fc8262cb8594256b"
-   ],
-   [
-    "armedForce",
-    "after-base: owner-2026-11-18",
-    "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. While the",
-    "c57566e5bfaaf1a1"
-   ],
-   [
     "garrison",
     "after-base: owner-2026-11-18",
     "A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the",
@@ -6349,12 +6277,6 @@
    [
     "quarters",
     "word",
-    "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.",
-    "c6fded0acf9197fb"
-   ],
-   [
-    "quarters",
-    "word",
     "Multiple hospitals and infirmaries across districts. Organized medical care at population scale.",
     "7a5e4cb45956e3b1"
    ],
@@ -6981,12 +6903,6 @@
     "family",
     "the watch captain",
     "7c4fd90270cb9b1f"
-   ],
-   [
-    "armedForce",
-    "family",
-    "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, ",
-    "a2cdeb4bcbf27797"
    ],
    [
     "armedForce",
