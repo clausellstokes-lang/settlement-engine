@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "e79405052f4b872d53d1051a5b8781e6dce44657",
-  "measuredBy": "BAR4-CLOSE-DOORS-1",
-  "date": "2026-11-16",
-  "note": "BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4), at the joined tree: the dependents of src/domain/corruption.js moved: BAR4-CORPUS-DEF added src/domain/facts/criminalIncome.js, which imports isCriminalInstitution (BAR4-CORPUS-DEF-HANDBACK, the books my cures move)",
+  "measuredAtSha": "ed8601e54ace7e7f9b695cb05d8b61f8c943012b",
+  "measuredBy": "CLOSE-DOORS-1B",
+  "date": "2026-11-18",
+  "note": "CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18), at the frozen tree 70e557d5b: the dependents moved, no tuning value: the six tables of src/domain/corruption.js each gain src/domain/facts/rivalRings.js (BAR7-DESKS, JOIN-17 point 27); src/domain/people/allegiance.js#ALLEGIANCE_TUNING gains src/generators/people/rareSecrets.js (SECRETS-1, JOIN-17 point 30); the tables' line addresses follow their files' landed edits",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -583,6 +583,7 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/facts/criminalIncome.js",
         "src/domain/facts/criminalStructureKey.js",
+        "src/domain/facts/rivalRings.js",
         "src/domain/people/allegiance.js",
         "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
@@ -631,6 +632,7 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/facts/criminalIncome.js",
         "src/domain/facts/criminalStructureKey.js",
+        "src/domain/facts/rivalRings.js",
         "src/domain/people/allegiance.js",
         "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
@@ -680,6 +682,7 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/facts/criminalIncome.js",
         "src/domain/facts/criminalStructureKey.js",
+        "src/domain/facts/rivalRings.js",
         "src/domain/people/allegiance.js",
         "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
@@ -736,6 +739,7 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/facts/criminalIncome.js",
         "src/domain/facts/criminalStructureKey.js",
+        "src/domain/facts/rivalRings.js",
         "src/domain/people/allegiance.js",
         "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
@@ -784,6 +788,7 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/facts/criminalIncome.js",
         "src/domain/facts/criminalStructureKey.js",
+        "src/domain/facts/rivalRings.js",
         "src/domain/people/allegiance.js",
         "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
@@ -831,6 +836,7 @@
         "src/domain/events/mutateEntities.js",
         "src/domain/facts/criminalIncome.js",
         "src/domain/facts/criminalStructureKey.js",
+        "src/domain/facts/rivalRings.js",
         "src/domain/people/allegiance.js",
         "src/domain/settlementMigrations.js",
         "src/domain/undercity/colonization.js",
@@ -1242,7 +1248,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 451,
+      "line": 452,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -1256,7 +1262,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 452,
+      "line": 453,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -1270,7 +1276,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 991,
+      "line": 994,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -1520,6 +1526,7 @@
         "src/generators/narrativeGenerator.js",
         "src/generators/people/castPowers.js",
         "src/generators/people/goals.js",
+        "src/generators/people/rareSecrets.js",
         "src/generators/people/ties.js",
         "src/generators/steps/assembleSettlement.js",
         "src/lib/structuralFingerprint.js"
@@ -8461,7 +8468,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 90,
+      "line": 84,
       "spanDigest": "5d423d06ea6e3cf77788e82c97fa0946ae7c7fbf8d6e6830cb848773ffb8cd0c",
       "leaves": {
         "value": 6
@@ -8529,7 +8536,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 76,
+      "line": 77,
       "spanDigest": "27e8cae7f714b6255ed46d5145a6bb53f4257fda9c347798c877bf6108baa529",
       "leaves": {
         "RANKS": 3,
@@ -8544,7 +8551,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 109,
+      "line": 110,
       "spanDigest": "a163ac8776fc0929e33ec0597e5327711e48c4ce474f669233879f93a30401d7",
       "leaves": {
         "strength": 0.6,
