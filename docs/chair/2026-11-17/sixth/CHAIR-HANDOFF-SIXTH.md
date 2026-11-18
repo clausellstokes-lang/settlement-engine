@@ -1624,3 +1624,26 @@ should be paused or archived by the owner's hand.
   (`docs/chair/2026-11-18/close/PR-75-DESCRIPTION.md`, 19 KB; the seven migrations each in one plain line: 208
   restates one column of the saved towns at apply; 209 changes who holds the Surveyor from the moment it is applied).
   A merge worktree for the close stands at `/home/user/line` (branch `lane/landing-close-2026-11-18` = 70e557d5b).
+- 04:04 UTC, 2026-11-18 · THE CLOSE'S FIRST MERGE, LOCAL (not pushed): `/home/user/line`, branch
+  `lane/landing-close-2026-11-18`, 4c9517718 = 70e557d5b + CLOSE-SWEEP's S1 (6e15a77ea) and S2 (c266e0dc4). THE
+  CHAIR'S OWN CHECKS: the four S1 files minify (esbuild) to byte-equal code at base and tip: comment-only, as the
+  seat says; no file under `src/` imports `factLayers.js` (one comment names it); on the merged tree
+  `domainAnyCastBaseline` is green and `factLayers.walker` is red on exactly two arms, both expected: POOLS (the one
+  shrink row `DS-ECO-6::TIER: minor shadow activity (≥3)`, CLOSE-DOORS-1B's door) and arm (a) on `goodExported` and
+  `seatHeld` (the instrument `leafTouches` has no branch for them: given to CLOSE-SWEEP as S4 item 2, with the
+  `tradeAtWork` probe to be derived over every key the vocabulary declares; an ordering fault shown by the fuller
+  instrument is a stop). S2 MOVED THREE LEAVES' LAYERS (`legalHouse` 1 to 2; `timberAtHand` and
+  `timberReachesSawmill` 2 to 4) and declared `economicViability` on `tradeAtWork` and `importsAsPrinted`; the seat's
+  proof: the 525 hashed whole equal at both commits; the thirty rendered equal at S1; AT S2 ONE SEED'S DUMP DIFFERED
+  ONCE UNDER LOAD and equalled the base three times on re-render: the chair asked for the seed, the tab and the
+  differing lines word for word, and six more renders at base and tip with nothing else running (a page that
+  renders two ways from one record is a fault of its own). **CL16**: `generationForkCensus` A4 (the register
+  disagrees with a fresh execution on five rows of `economyReconcilePass`) and A6 (external `fnv1a32` callers: 23
+  stored, 54 fresh) are CLOSE-DOORS-2's (it is measured and waiting; the file holds its A1): each by the door its own
+  history names: A6 attributed CALLER BY CALLER, every new caller a keyed deterministic pick or a stop; A4 each row
+  laid to a landed point; first whether anything under `src/` reads the register at run time. THE COVERAGE FLOORS:
+  the chair's own run could not answer (with failing tests vitest prints no coverage table: `reportOnFailure` is
+  off) and was stopped; CI never ran on a lane branch (`ci.yml` runs on `master`, `claude/**` and pull requests), so
+  the floors were last measured at master; `src/lib/saves.js` grew by 141 lines since (two commits, both before the
+  BAR4 close): CHECKS-1 runs the job's command with `--coverage.reportOnFailure=true` at 70e557d5b and reports the
+  table.
