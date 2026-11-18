@@ -211,7 +211,11 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // plain yes for the example-town refresh.", in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json: the people
 // branch's declared tie lines re-word the control row's relationships[].description, one text leaf only; the golden re-recorded 390 of 525 at
 // 1581ed12, this row its control).
-const GOLDEN_CONTROL_HASH = '5437998b250179459c3ca5efdff170a4f1b2d1933e79357aab9a68e21cfb6939';
+// -> 8bb20e96 the close of the rounds BAR5 to BAR8, 2026-11-18 (CLOSE-DOORS-2; the owner's word, 2026-11-18 03:03:46 UTC, "yes: refresh the stored
+// reference files and open the pull request.", in the chair's chat; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json:
+// the rounds' declared cures move the control row's relationships[].tension (BAR5-THINGS, the notary tension's words), history.historicalEvents
+// (BAR7-LINES, the iron dispute) and economicState.localProduction (BAR6-RECORD); the golden re-recorded 485 of 525 at b3cfdbcc3, this row its control).
+const GOLDEN_CONTROL_HASH = '8bb20e966e6779efabd8b49efac2f3749a63015230df66380677f580200129e4';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
