@@ -116,6 +116,13 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 // temperamentYieldsToSecret) measures pure (keyMoves 0 of 63), transformed on both comparands (63/63). No other row's
 // stepDraws, keyMoves or class moved; the one other row the fresh literal differs in (economyReconcilePass|economicState's
 // producedOnRecord, same 49 -> 35) is a stored landing count, the close's, and is not re-taken here.
+// 2026-11-17, BAR8-FISH-ROWS (ruling BR24), ONE ROW JOINS, 76 -> 77 pairs, pasted word for word from the census arm's printed
+// literal at the seat's tip (A4's fresh literal): generateNarratives|availableServices|mutates (where the birth's imports buy in
+// the fish of a spent fishery, the catch rows are their pools' inland alternatives, in place: generateNarratives.js ::
+// boughtFishRowsInPlace) measures pure (keyMoves 0 of 63: no draw), same on both comparands (63/63: what the step leaves is
+// what the record stores; it rewrites 4 of the 63). The fresh literal differs in one other row, economyReconcilePass|availableServices's
+// producedOnRecord (same 63 -> 59, transformed 0 -> 4, class same -> varies: the narratives step now rewrites four of its
+// rows after it): a stored landing count, as DEBT-2 left economyReconcilePass|economicState's, the close's, not re-taken here.
 // R2-CODE-B-4 (ROUND THREE item 4, 2026-11-14), RE-MEASURED, cells from the arm's printed literal (the literal differs from
 // this one in these two rows only): resolveCrisisCast|crisisCast and |settlement stepDraws 0 -> 2, keyMoves 0 -> 2, class
 // pure -> drawn, on the 63-row corpus. An "Access to ..." row (the road to another place's house; record 375) is no longer a
@@ -199,6 +206,7 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'generateNarratives', key: 'economicViability', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 60, transformed: 3 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 60, transformed: 3 }, producedOnRecordClass: 'varies', recordPath: 'record.economicViability' },
   { step: 'generateNarratives', key: 'history', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.history' },
   { step: 'generateNarratives', key: 'economicState', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 49, transformed: 14 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 49, transformed: 14 }, producedOnRecordClass: 'varies', recordPath: 'record.economicState' },
+  { step: 'generateNarratives', key: 'availableServices', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.availableServices' },
   { step: 'assembleSettlement', key: 'settlement', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
   { step: 'assembleSettlement', key: 'powerStructure', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
   { step: 'assembleSettlement', key: 'stress', via: 'mutates', stepDraws: 63, keyMoves: 54, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 9, transformed: 54 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 9, transformed: 54 }, producedOnRecordClass: 'varies', recordPath: 'record.stress' },

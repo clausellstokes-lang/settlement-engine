@@ -74,8 +74,8 @@ const CATCH = 'Fish sold daily from the morning catch. Selection varies by seaso
 
 /** (seed, the row's description of ordinary times, the mark that must lead it). The worklist row named. */
 const MARKED = [
-  ['r2r-town-29', CATCH, 'Short of fish.'], // C22221: the fish market no chain names, its one fishery depleted
-  ['bar0-metropolis-calm-rand-8', CATCH, 'Short of fish.'], // C22221 in the town it was read in (River Fisheries depleted)
+  ['r2s-recently_betrayed-metropolis-0', CATCH, 'Short of fish.'], // C22221: the fish market no chain names, its one fishery depleted // RE-KEYED 2026-11-17 (BAR8-FISH-ROWS, ruling BR24, R8): r2r-town-29 buys its fish in ("Salted fish (local river fishery exhausted)"), so its market sells "Preserved fish"; the same claim on a town whose one river fishery is spent and which brings in no fish (IDLE: the row and its mark kept)
+  ['r2r-metropolis-45', CATCH, 'Short of fish.'], // C22221 in the town it was read in (River Fisheries depleted) // RE-KEYED 2026-11-17 (BAR8-FISH-ROWS, ruling BR24, R8): bar0-metropolis-calm-rand-8 buys its fish in ("Salted fish (local river fishery exhausted)"), so its market sells "Preserved fish"; the same claim on a metropolis whose fishing grounds are spent and which brings in no fish (IDLE: the row and its mark kept)
   ['r2s-under_siege-thorp-0', CATCH, SIEGE], // the fishing community's boats under a siege
   ['r2r-metropolis-14', "Search the archive that cross-checks one road's report against another's.", SIEGE], // C5102
   ['r2r-metropolis-14', 'Have a claim graded against every road the exchange keeps.', SIEGE], // C5102's sibling
