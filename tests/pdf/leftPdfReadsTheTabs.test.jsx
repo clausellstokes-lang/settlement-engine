@@ -232,10 +232,12 @@ describe('LEFT-PDF L29 (holds BAR7-CARDS item 3): the Outlook\'s impaired list i
 });
 
 describe('LEFT-PDF: the negatives print none of these marks, and agree', () => {
-  test.each(NEGATIVES)('%s', (seed) => {
-    const x = town(seed);
-    expect((x.vm.economics.incomeSources || []).filter((/** @type {any} */ s) => incomeMarkShown(x.t, s) !== null), 'a share the tab marks').toEqual([]);
-    expect(impliedGroundsOnPage(x.t), 'a ground the houses prove or tell used up').toEqual({ there: [], used: [] });
-    expect(x.journal.filter((p) => p.name.startsWith('NPC — ') && /\n {2}- \*/.test(p.markdown)).map((p) => p.name), 'a person page with a house mark').toEqual([]);
+  test('every negative town prints none of these marks', () => {
+    expectNoSeedFailures(collectSeedFailures(NEGATIVES, (seed) => {
+      const x = town(seed);
+      expect((x.vm.economics.incomeSources || []).filter((/** @type {any} */ s) => incomeMarkShown(x.t, s) !== null), 'a share the tab marks').toEqual([]);
+      expect(impliedGroundsOnPage(x.t), 'a ground the houses prove or tell used up').toEqual({ there: [], used: [] });
+      expect(x.journal.filter((p) => p.name.startsWith('NPC — ') && /\n {2}- \*/.test(p.markdown)).map((p) => p.name), 'a person page with a house mark').toEqual([]);
+    }), 'every negative town prints none of these marks, and agrees');
   });
 });

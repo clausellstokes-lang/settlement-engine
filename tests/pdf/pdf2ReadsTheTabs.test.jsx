@@ -259,14 +259,16 @@ describe('PDF-2 item 7: the journal\'s Economics head line is the Economics tab\
 });
 
 describe('PDF-2: the negatives print none of these faults, and agree', () => {
-  test.each(NEGATIVES)('%s', (seed) => {
-    const x = town(seed);
-    expect(x.cards.length, 'anchored: the PDF prints its chain cards').toBeGreaterThan(0);
-    const instNames = (x.t?.institutions || []).map((/** @type {any} */ i) => i?.name);
-    for (const c of x.t?.economicState?.activeChains || []) {
-      expect(chainHousesOf(c.processingInstitutions, instNames, { chain: tabCard(x.t, c), town: x.t }).length, `${c.chainId}: a house the tab's card leaves off`).toBe(chainHousesOf(c.processingInstitutions, instNames).length);
-      expect(String(tabCard(x.t, c)?.status), `${c.chainId}: the tab's card`).toBe(String(chainAsShown(c, x.t)?.status));
-    }
-    expect(x.vm.resources?.nearbyProven || [], 'a proven ground').toEqual([]);
+  test('every negative town (r2r-village-0, bar0-village-calm-rand-28)', () => {
+    expectNoSeedFailures(collectSeedFailures(NEGATIVES, (seed) => {
+      const x = town(seed);
+      expect(x.cards.length, 'anchored: the PDF prints its chain cards').toBeGreaterThan(0);
+      const instNames = (x.t?.institutions || []).map((/** @type {any} */ i) => i?.name);
+      for (const c of x.t?.economicState?.activeChains || []) {
+        expect(chainHousesOf(c.processingInstitutions, instNames, { chain: tabCard(x.t, c), town: x.t }).length, `${c.chainId}: a house the tab's card leaves off`).toBe(chainHousesOf(c.processingInstitutions, instNames).length);
+        expect(String(tabCard(x.t, c)?.status), `${c.chainId}: the tab's card`).toBe(String(chainAsShown(c, x.t)?.status));
+      }
+      expect(x.vm.resources?.nearbyProven || [], 'a proven ground').toEqual([]);
+    }), 'every negative town prints none of these faults, and agrees');
   });
 });
