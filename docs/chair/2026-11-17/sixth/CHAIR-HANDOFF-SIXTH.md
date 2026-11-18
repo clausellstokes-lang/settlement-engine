@@ -1817,3 +1817,15 @@ should be paused or archived by the owner's hand.
   lint reds, two counts +1 by its files; THE BUTCHERS (BR31) LEFT BY NAME (its count stood at 380,000); item 4
   already clears C34109 and r2r-city-43. NEXT FOR IT, AFTER THE DEPLOY: PDF-2b's reader reads the five rows and the
   leaf, then both land.
+- 04:26 UTC, 2026-11-18 · THE MERGE BRANCH IS ON ORIGIN: `lane/landing-close-2026-11-18` at 9c170f3b2 (pushed 04:26 with
+  its three gates green: the type ratchet 167 of 167, the strict domain 1113 of 1113, lint; read back from origin):
+  70e557d5b plus four merges (CLOSE-SWEEP twice, CLOSE-WALKERS, LEFT-KEYS). CLOSE-DOORS-1B WAS SENT "MERGE 9c170f3b2
+  (INTERMEDIATE)": it takes now what waited on the repair seat (the fact-layers shrink, the each-family ceiling 108
+  to 106, `editCorpusRatchet` A7, CL15, CL20 to CL23) and takes its whole-tree figures only after the second
+  "MERGE", which carries the words' books. CLOSE-DOORS-2 (04:25) stopped its A4 bisect with ONE DISAGREEMENT with
+  1B's note, passed on to 1B for correction: `economyReconcilePass|economicState` same/transformed 49/14 to 35/28
+  moves at JOIN-17 point 21, BIRTH-1 (edb5cae92: it writes the import over what the reconcile pass produced), not at
+  DEBT-2 (green at a44495b59; unchanged at points 22, 25, 31 and the tip); `availableServices` 63/0 to 59/4 moves
+  after point 31 (FISH-ROWS fits; not measured). NOT YET READ: whether the host skipped this push's deployment (the
+  first with the key): no tool here reads a bare commit's statuses; it is read on the pull request's head at the
+  final push.
