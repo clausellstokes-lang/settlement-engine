@@ -958,3 +958,23 @@ should be paused or archived by the owner's hand.
   CHAIR'S SWEEP OF THE 42 TEST FILES THAT NAME A CHANGED LINE OR KEY, AT POINT 46: 833 of 839 green; the six reds are
   those three and three old ones by name. POINTS 45 AND 46 WAIT FOR THE SEAT'S NEXT TIP (it becomes point 47 on the
   same landing branch), the reader's short read of the delta, and a targeted net (the delta moves nothing in the 900).
+- **00:39 UTC. OF THE SEVEN, THE RELAY RELEASED ONE: MARKS-2 COMMITTED AND PUSHED ITS FIRST SMALL COMMIT (00:32:14, e5194c384 on `lane/bar8-marks-2-2026-11-17`, base dfe557dc9) AND WORKS.**
+  SIX STILL REFUSE AND WAIT FOR THE OWNER'S LINE TYPED IN THEIR OWN SESSIONS (all answered 00:32): K-POWERS, K-PEOPLE,
+  K-WATCH, DESKS-DEF (its check then refused even a read-only `git status`), DESKS-ECO (finished work, printed in
+  their conversations), J-INCOME (not started). THE OWNER IS TOLD THE CORRECTED COUNT (six links, not seven) and asked
+  at 00:37 "Exactly what are you working on right now": answered in full.
+- **00:39 UTC. SCENES IS SPENT (00:35: its count is above 400,000; its tip stays 867476c33) AND SCENES-2 IS SEATED: session_01FbPLbefjzWmNU5KxTwWpcA** (00:39;
+  `lane/bar8-scenes-2-2026-11-17`, cut from point 46, 58cb58569 on the landing branch; the middle tier, high effort;
+  its whole assignment is its prompt, `/home/user/wk/prompts/SCENES-2.txt`: ruling BR25's three items (the enchanting
+  twin reworded; the empty road back to its base and the LAST admitted twin; the three stale anchors and a sweep); the
+  early small commit first, its prompt carrying the owner's word verbatim). READ-SCENES's ADDENDUM (00:34, on
+  867476c33): H1 cured at 58cb58569 (the door fresh 0 · stale 152; both walkers' new arms green); the cart's new
+  wording true in the six hamlets that print it; the guard's changed assertions can fail (two mutations); STILL "DO NOT
+  LAND YET" for H2 alone. It keeps its worktrees for ONE short read of SCENES-2's delta. THE CHAIR'S OWN CHECK AT
+  58cb58569 AGREES (`/home/user/wk/p46.h1.log`, `anch.cmp.txt`: of the 42 test files naming a changed line or key,
+  the only reds new against 917c915bc are the three anchors). WHEN SCENES-2 HANDS BACK: the chair's read, the reader's
+  short read, its tip merged on the landing branch as POINT 47, a targeted net (its delta is to move nothing in the
+  900), then points 45 to 47 land together on the whole check of 2f0e88971 (part 2 in; parts 1 and 3 running).
+- **00:39 UTC. ALSO MOVING:** PDF-2 on its second branch (`lane/bar8-pdf-2b-2026-11-17`: cde95b1f4 00:26, 390474464 00:31: its section's item 3 and the guard's
+  `test.each` made one plain test); FISH-ROWS (`lane/bar8-fish-rows-2026-11-17`: the hunk dd6f8c75a, the register
+  ac2baad1b, three fish anchors re-keyed 2676ad7ea, its guard f6419a36b at 23:57; its hand-back awaited).
