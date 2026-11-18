@@ -169,3 +169,5 @@ institutions and the view model's grounds; no mark or line moves on any tab or o
 
 NO NEW WORDS: every line above is a word or a row the tab already prints. DECLARED MOVES: none (no generator, no saved
 field, no stored figure).
+
+## SECOND BRANCH · lane/bar8-pdf-2b-2026-11-17 (the chair's message of 00:25 UTC on 2026-11-18; base 917c915bc, point 44)
