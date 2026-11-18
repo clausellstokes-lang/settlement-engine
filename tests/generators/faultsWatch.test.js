@@ -15,6 +15,8 @@
 //      prison ruined (a constructed record) says no prison stands and draws the pool the row names, in all three views.
 //   6. FR19 item 6: the threat assessment's internal-security line and DS-GEN-17's key read the same court and prison: in the
 //      ruined town every reader agrees (no gaol where none works); the town unruined keeps the full chain everywhere.
+//   7. FR22 (3): the Small prison/stocks' "Holding cells" holds "pending trial" only where the Legal row's court sits;
+//      elsewhere its twin "Short-term detention until a fine is paid." (the label kept).
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -50,6 +52,7 @@ const SEEDS = Object.freeze([
   'bar0-city-under_siege+famine-rand-31', 'bar0-city-under_siege+famine-rand-46', 'bar0-city-under_siege+famine-rand-36',
   'bar0-hamlet-under_siege-rand-29', 'bar0-hamlet-under_siege-rand-34',
   'r2r-town-5', 'r2r-town-4', // FR19 item 6: a town hall the stamped flag calls a court; the Legal row names none
+  'bar0-town-calm-rand-35', 'r2r-town-1', // FR22 (3) item 7: the Holding cells beside a sitting court, and beside a council's bench
 ]);
 
 /** @type {Map<string, any>} */
@@ -264,5 +267,44 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
       expect(internalKey(r), `${form}: the desk's internal pool`).toBe('Internal Security: full legal chain (court AND prison)');
     });
     expectNoSeedFailures(failures, 'item 5 negative');
+  });
+});
+
+describe('7 · the Holding cells say "pending trial" only where a court sits (FR22 (3))', () => {
+  const PENDING = 'Short-term detention pending trial or payment of fines.';
+  const TWIN = 'Short-term detention until a fine is paid.';
+  /** @param {any} t */
+  const cells = (t) => Object.values(t?.availableServices || {}).flat().filter((/** @type {any} */ r) => r?.name === 'Holding cells');
+  /** @param {any} t */
+  const legalRow = (t) => String(deriveSupportingCapabilities(t).find((c) => c.label === 'Legal Infrastructure')?.status);
+  /** the three views. @param {any} s */
+  const views = (s) => /** @type {Array<[string, any]>} */ ([['record', s], ['public', toPublicSafe(structuredClone(s))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(s)), null)]]);
+  it('every town of the guard that holds the row: the twin exactly where no court sits, the original exactly where one does', () => {
+    let rows = 0;
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const t = BORN.get(seed);
+      const court = courtHoldersOf(t).length > 0;
+      for (const r of cells(t)) { rows++; expect(r.desc, `${seed} (court ${court}, the Legal row "${legalRow(t)}")`).toBe(court ? PENDING : TWIN); }
+    });
+    expectNoSeedFailures(failures, 'item 7');
+    expect(rows, 'the guard reads Holding cells rows').toBeGreaterThan(2);
+  });
+  it('POSITIVE: r2r-town-5 ("Prison only"): the twin, its label kept, in the record, the shared page and the share veil', () => {
+    const t = BORN.get('r2r-town-5');
+    expect(legalRow(t)).toBe('Prison only');
+    const failures = collectSeedFailures(views(t), ([form, r]) => {
+      const descs = cells(r).map((/** @type {any} */ x) => String(x.desc));
+      expect(descs, `${form}: the Holding cells`).toEqual([TWIN]);
+      expectAbsentWithAnchor(descs, PENDING, TWIN, `${form}: the Holding cells`);
+    });
+    expectNoSeedFailures(failures, 'item 7 positive');
+  });
+  it('NEGATIVE: beside a sitting court (bar0-town-calm-rand-35) and a council\'s bench (r2r-town-1) the row stays as it is', () => {
+    const failures = collectSeedFailures([['bar0-town-calm-rand-35', 'Court + Prison'], ['r2r-town-1', 'Council bench + Prison']], ([seed, row]) => {
+      const t = BORN.get(seed);
+      expect(legalRow(t), seed).toBe(row);
+      expect(cells(t).map((/** @type {any} */ x) => String(x.desc)), seed).toEqual([PENDING]);
+    });
+    expectNoSeedFailures(failures, 'item 7 negatives');
   });
 });
