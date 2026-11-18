@@ -168,7 +168,7 @@ describe('each lit family: what the owner\'s player view prints from it, the sha
         expect(hits.length, `${tab} :: ${site}`).toBeGreaterThan(0);
       }
     }
-  });
+  }, 120_000); // its own budget: a corpus walk at the edge of the 20 s default on a CI runner under coverage (measured 2026-11-18: ~20 s there)
 });
 
 /**
