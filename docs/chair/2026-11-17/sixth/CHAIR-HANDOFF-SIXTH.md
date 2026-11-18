@@ -2656,3 +2656,16 @@ should be paused or archived by the owner's hand.
   session_01FbPLbfSAxCir4NxiU15dpd; `faults/readers/READ-BIRTH.txt`: eight questions; a scratch merge on the landings'
   tip of its tip and FAULTS-NEED's e5fb6347c, with the two towns of the `11e.offer` rise rendered there).
   FAULTS-NEED's FR15 is in (e5fb6347c, read by the chair) and FR16 sent: CLEARED TO LAND.
+- 09:58 UTC, 2026-11-18 · THE WHOLE CHECK ON THE CLOSE, PART 1 (CHECKS-1, 09:55; `close-2-0dee69e17`; its b7147d3cc): files 1,206,
+  tests 13,546, failed files 1, failed tests 3: THE THREE ARMS OF `observedShapeReaders.walker` AND NOTHING ELSE; both
+  doors exit 0 (classes "hits 1789 · banked 1789 · fresh 0 · stale 0"; things "fresh 0 · stale 0 … banked 4649");
+  validate, typecheck and lint 0. Parts 2 and 3 still run. FAULTS-WATCH's FINAL TIP: 3c19fd1d8 (09:58; item 5 is
+  bf776cf28): the Legal row's status, colour and note, and `internalRowPoolKey`'s prison argument, read the defence
+  home's LIVE prison; its guard: r2r-city-41 with its prison ruined reads "Court only" and draws "court without
+  detention" on the record, the public projection and the share veil; 900 records and 900 whole dumps byte-equal; 0 of
+  the 525; `legalRowReadsTheRoster` re-keyed (its fixtures held the prison only in the flag). NAMED BY IT, FOR THE LAST
+  SMALL ROUND: two other readers of the stamped flag (`threatAssessment.js` about line 346; `generalStateProse.js`
+  about line 1305). Figures: the alias draft 46 to 48; THE GENERATION WORKER +25,825 BYTES by item 4's tables (the
+  siege's stop read by the trade-at-work fact): under the stop of 60,000 for one ceiling; the last close tallies every
+  ceiling's rise since the first close on the joined tree, with its causes, and the owner is told the totals.
+  READ-THREE takes that tip (its prompt: "or later").
