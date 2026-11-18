@@ -657,10 +657,18 @@ function numberingRefusals(label, before, after) {
     }
     const from = sha256(old);
     const to = sha256(text);
-    const allowed = WORD_CORRECTIONS.some((r) => r.pool === label && r.vid === vid && r.from === from && r.to === to && r.ruling);
-    if (!allowed) {
+    const rows = WORD_CORRECTIONS.filter((r) => r.pool === label && r.vid === vid);
+    if (!rows.some((r) => r.from === from && r.to === to && r.ruling)) {
+      // Say what is true (FR18 (3)): no row at all, or a row whose hashes or ruling do not answer these words.
+      const why = rows.length === 0
+        ? 'with no row of WORD_CORRECTIONS'
+        : `and its row of WORD_CORRECTIONS does not answer them (${rows.map((r) => [
+          r.from !== from ? 'the row\'s old-text hash is not the baseline\'s words' : '',
+          r.to !== to ? 'the row\'s new-text hash does not match the new words' : '',
+          r.ruling ? '' : 'the row names no ruling',
+        ].filter(Boolean).join(', ')).join('; ')})`;
       out.push(`${label}: REWORDED: v${vid} would change its words in place, from ${quote(old)} to ${quote(text)},`
-        + ` with no row of WORD_CORRECTIONS ({ pool: '${label}', vid: ${vid}, from: '${from}', to: '${to}', ruling: <the ruling> })`);
+        + ` ${why}; the row these words need: { pool: '${label}', vid: ${vid}, from: '${from}', to: '${to}', ruling: <the ruling> }`);
     }
   }
   return out;

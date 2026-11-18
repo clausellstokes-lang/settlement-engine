@@ -183,8 +183,14 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
     // anchored: the same output is asserted on the next line to reach the --check's staleness test, past the guard
     expect(ok.out).not.toContain(GUARD);
     expect(ok.out).toContain('is stale; run `npm run gen:dossier-prose`');
-    for (const wrong of [{ ...row, vid: 4 }, { ...row, to: sha('another text') }, { ...row, ruling: '' }]) {
-      expect(project(annex, [wrong]).out).toMatch(/REWORDED: v3/);
+    // each wrong row is refused, and the refusal says what is true of it (FR18 (3))
+    for (const [wrong, why] of /** @type {Array<[object, RegExp]>} */ ([
+      [{ ...row, vid: 4 }, /REWORDED: v3 would change its words in place, .* with no row of WORD_CORRECTIONS;/],
+      [{ ...row, to: sha('another text') }, /REWORDED: v3 .* its row of WORD_CORRECTIONS does not answer them \(the row's new-text hash does not match the new words\);/],
+      [{ ...row, from: sha('another text') }, /REWORDED: v3 .* does not answer them \(the row's old-text hash is not the baseline's words\);/],
+      [{ ...row, ruling: '' }, /REWORDED: v3 .* does not answer them \(the row names no ruling\);/],
+    ])) {
+      expect(project(annex, [wrong]).out).toMatch(why);
     }
   });
 
