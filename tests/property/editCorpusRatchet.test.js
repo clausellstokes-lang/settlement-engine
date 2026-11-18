@@ -65,8 +65,13 @@ import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 /** The corpus IS the battery: MEASURED under the runner, the census arm 22.8 s, the value arm
  *  20.5 s and the ordered-pair census 305.6 s, the file 350.7 s end to end. RE-MEASURED 2026-10-01 after the
  *  pair census was cached by prefix: the census arm 20.5 s, the value arm 19.2 s, the ordered-pair census
- *  156.9 s (was 324.5 s at the same tip, and a 600 s TIMEOUT under full-suite load), the file 198.3 s. */
-const ARM_TIMEOUT = 600_000;
+ *  156.9 s (was 324.5 s at the same tip, and a 600 s TIMEOUT under full-suite load), the file 198.3 s.
+ *  RE-MEASURED 2026-11-17 (the chair's ruling BR22, LEFT-KEYS K8): THE ARM A5 HAS GROWN INTO ITS WATCHDOG. On a quiet
+ *  machine it runs 569 to 602 s, 657 s on a slower one; green in 602 s under a one-hour limit at 3b06c724b (the chair's
+ *  machine), and red BY THE CLOCK ALONE in about one whole check of two at 600 s. The limit is a watchdog, not a claim:
+ *  raised 600_000 -> 1_800_000. NO ASSERTION OF ANY ARM CHANGES. (A5 takes about 3.6 times its 156.9 s of 2026-10-01: the
+ *  owner hears it at the close.) */
+const ARM_TIMEOUT = 1_800_000;
 const ROOT = process.cwd();
 /** The injected handles, built the way `src/store/settlementRederiveAction.js` builds them. */
 const ENGINE = Object.freeze({ run: generateSettlementPipeline, getStepMeta });
