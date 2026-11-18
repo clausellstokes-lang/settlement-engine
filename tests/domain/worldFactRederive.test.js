@@ -155,6 +155,12 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/computeActiveChains.js',
   'src/generators/demandProfile.js',
   'src/generators/economy/foodBalance.js',
+  // 2026-11-18 (CLOSE-SWEEP S4 item 1; DEBT-1 part C 4f57f0c46, JOIN-17 point 31): economy/foodBaseNumbers.js JOINED the set
+  // through the word "agriculture" (`agricultureCapacity`, in grownShareOf's doc), its hunk moved verbatim out of
+  // foodBalance.js under the line ceiling; it reads no culture (the foodLand.js precedent: reported, not filtered).
+  // foodBalance.js stays a reader ("agriculture" in its own code). The re-derive runs the whole pipeline, which calls both
+  // moved readers through foodBalance.js's re-export (foodGenerator.js, foodBalance.js).
+  'src/generators/economy/foodBaseNumbers.js',
   // 2026-11-09 (STYLE-2 SW-7, 6f340466f): economy/prosperity.js LEFT the set. It was a "reader" only through the word
   // "agriculture" in one situation line ("efficient agriculture"), which the A2 rewrite replaced; it reads no culture.
   'src/generators/foodGenerator.js',

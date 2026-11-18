@@ -71,9 +71,10 @@ describe('the layer table covers every leaf and every pool', () => {
     for (const owed of Object.keys(LEAVES_OWED)) expect(LEAVES[owed], `'${owed}' is written: move it from LEAVES_OWED`).toBeUndefined();
   });
   test('every leaf declares exactly the strata it touches, and every stored field it reads is placed', () => {
-    for (const [id, v] of Object.entries(leaves)) {
-      expect({ id, undeclared: v.undeclared, unread: v.unread, unplaced: v.unplaced }).toEqual({ id, undeclared: [], unread: [], unplaced: [] });
-    }
+    // CLOSE-SWEEP S4 item 2: EVERY failing leaf, collected (a loop that stopped at the first hid four leaves behind legalHouse)
+    const failing = Object.entries(leaves).filter(([, v]) => v.undeclared.length || v.unread.length || v.unplaced.length)
+      .map(([id, v]) => ({ id, undeclared: v.undeclared, unread: v.unread, unplaced: v.unplaced }));
+    expect(failing).toEqual([]);
     for (const [id, row] of Object.entries(LEAVES)) {
       for (const r of row.reads) expect(STRATA[r], `${id} reads '${r}'`).toBeTypeOf('number');
       expect(Number.isInteger(row.layer) && row.layer >= 1, id).toBe(true);
