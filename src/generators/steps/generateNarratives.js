@@ -16,16 +16,54 @@ import { deriveLegacyAnnotations } from '../legacyGenerator.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { getInstFlags } from '../priorityHelpers.js'; import { hasInstitution } from '../../domain/facts/institutions.js';
 import { recordTrace } from '../../domain/trace.js';
-import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
+import { availableNativeResourceKeys, resourceShortageImport } from '../../domain/resourceSemantics.js';
+import { importsHold, usedGroundOf } from '../../domain/facts/supplyStory.js';
+import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
+import { resolveServiceCatalogKey } from '../services/institutionServices.js';
+
+/**
+ * BAR8-FISH-ROWS (ruling BR24, 2026-11-17; auditor J's 11b.fish and 11b.fishTitle): WHERE THE FISH IS BOUGHT IN, a row that
+ * speaks of a catch is its pool's own inland alternative (the catalogue's `inlandAlternative`, `data/institutionServices.js`:
+ * the Fish market's "Fresh fish retail" is its "Preserved fish", the Fishmonger's "Fresh fish" its "Salted fish"). The story
+ * is known only here, after the birth has written its imports (`resourceGenerator.js :: importsBroughtAtBirth`): the town's
+ * fish grounds are used up (`supplyStory.js :: usedGroundOf`) and the stored imports hold the spent ground's own word
+ * ("Salted fish (local … exhausted)": the bought story, as every view reads it). An IDLE town (grounds spent, no fish brought
+ * in) and a town whose fishers land their own catch keep their rows. The row is replaced IN PLACE (its bucket, its index, its
+ * house; the toggle and the roll that kept it are the catch row's): NO DRAW. As the roll's own inland swap does, a later row of
+ * the same house already bearing the alternative's name is not printed twice.
+ * @param {{ config: object, economicState: object, institutions: unknown[], resourceAnalysis: object }} record the record in the making
+ * @param {Record<string, Array<Record<string, unknown>>> | null | undefined} availableServices the rolled services (economyReconcilePass), mutated in place
+ */
+function boughtFishRowsInPlace(record, availableServices) {
+  if (!availableServices || typeof availableServices !== 'object') return;
+  const ground = usedGroundOf(/** @type {any} */ (record), 'fish');
+  if (!ground || !importsHold(/** @type {any} */ (record), String(resourceShortageImport(ground) || ''))) return;
+  /** @type {Record<string, Record<string, { inlandAlternative?: string, desc?: string }>>} */
+  const pools = /** @type {any} */ (INSTITUTION_SERVICES);
+  for (const rows of Object.values(availableServices)) {
+    if (!Array.isArray(rows)) continue;
+    for (let i = 0; i < rows.length; i += 1) {
+      const row = rows[i];
+      if (!row || typeof row !== 'object' || row.custom === true || row.source === 'custom') continue;
+      const house = String(row.institution || '');
+      const key = house ? resolveServiceCatalogKey(house) : null;
+      const pool = key ? pools[key] : null;
+      const alt = pool && Object.prototype.hasOwnProperty.call(pool, String(row.name)) ? pool[String(row.name)].inlandAlternative : undefined;
+      if (typeof alt !== 'string' || !pool || !Object.prototype.hasOwnProperty.call(pool, alt)) continue;
+      rows[i] = { ...row, name: alt, desc: pool[alt].desc };
+      for (let j = rows.length - 1; j > i; j -= 1) if (rows[j] && rows[j].name === alt && rows[j].institution === house && rows[j].custom !== true && rows[j].source !== 'custom') rows.splice(j, 1);
+    }
+  }
+}
 
 registerStep('generateNarratives', {
   // economyReconcilePass (not generateEconomy): narratives must read the
   // FINAL economicState, after the faction-pull reconciliation.
   deps: ['generatePopulation', 'economyReconcilePass'],
-  reads: ['economicState', 'effectiveConfig', 'generationContext', 'institutions', 'population', 'powerStructure', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['availableServices', 'economicState', 'effectiveConfig', 'generationContext', 'institutions', 'population', 'powerStructure', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   readsVersion: { economicState: 'reconciled' },
   provides: ['settlementReason', 'resourceAnalysis', 'economicViability', 'history'],
-  mutates: ['economicState'], // BIRTH-1/BIRTH-3 (BR3, BR8): the resource analysis's birth writes the words a house's story buys in onto economicState.primaryImports in place (resourceGenerator.js :: importsBroughtAtBirth)
+  mutates: ['economicState', 'availableServices'], // BIRTH-1/BIRTH-3 (BR3, BR8): the resource analysis's birth writes the words a house's story buys in onto economicState.primaryImports in place (resourceGenerator.js :: importsBroughtAtBirth); BAR8-FISH-ROWS (BR24): where that story buys the fish in, the catch rows of availableServices are their pools' inland alternatives, in place (boughtFishRowsInPlace)
   phase: 'narrative',
 }, (ctx) => {
   const {
@@ -43,6 +81,8 @@ registerStep('generateNarratives', {
   const specialResources = effectiveConfig.specialResources || [];
   // The reconciled economy rides along so a gap line says which kind it is (REVIEW-INTAKE-3 R9).
   const resourceAnalysis = generateResourceAnalysis(terrainT, nearbyResources, specialResources, institutions, effectiveConfig, economicState, ctx._seed);
+  // BAR8-FISH-ROWS (BR24): the imports are written; where they buy in the fish of a spent fishery, the catch rows say so.
+  boughtFishRowsInPlace({ config: effectiveConfig, economicState, institutions, resourceAnalysis }, ctx.availableServices);
   // Viability first: settlementReason is deficit-aware — an isolated settlement
   // with a food shortfall must not claim self-sufficiency. Feed it the same
   // condition-filtered roster as resource analysis and the economy: terrain

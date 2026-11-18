@@ -57,7 +57,7 @@ const MARKED = [
   ['r2r-town-54', 'Assemble merchants with compatible routes into shared caravans for safety and economy.', 'Short of camels.'], // C31592 ("No camels reach the caravanserai.")
   // SV6 (batch 2, the chair's ruling of 2026-11-15): a house on a ground the page prints as depleted is short of it
   ['r2r-town-45', 'Ore cut underground by the crews and brought out by cart for sorting.', 'Short of iron ore.'], // C10682 (iron ore deposits depleted; the import feeds the smiths, not the crews)
-  ['r2r-village-11', 'Fish sold daily from the morning catch. Selection varies by season.', 'Short of fish.'], // C23813, C8434 (fishing grounds depleted)
+  ['r2r-village-45', 'Fish sold daily from the morning catch. Selection varies by season.', 'Short of fish.'], // C23813, C8434 (fishing grounds depleted) // RE-KEYED 2026-11-17 (BAR8-FISH-ROWS, ruling BR24, R8): r2r-village-11's fish is bought in ("Salted fish (local sea fisheries exhausted)"), so its market sells "Preserved fish" and the catch row prints no more; the same claim on r2r-village-45, a village whose fishing grounds are spent and which brings in no fish (IDLE: the row and its mark kept)
   ['r2r-city-18', 'Dressed stone blocks for construction. Consistency and size matter for fortifications.', 'Short of stone.'], // the quarry's face exhausted
   ['r2r-hamlet-10', 'Catch of the day. Buy and cook same-day.', 'Short of fish.'], // the landing's grounds depleted
 ];
